@@ -1,8 +1,8 @@
 # Kusheet - Kubernetes 生产运维速查表
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **表格数量**: 100
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **表格数量**: 110
 
-面向生产环境 Kubernetes 运维的全面参考手册，涵盖架构、配置、监控、安全、AI/LLM、故障排查等核心领域。
+面向生产环境 Kubernetes 运维的全面参考手册，涵盖架构、配置、监控、安全、AI/LLM、故障排查、工具链生态等核心领域。
 
 ## 内容特点
 
@@ -11,6 +11,7 @@
 - **版本追踪**: 明确标注各功能的版本支持和演进
 - **ACK集成**: 包含阿里云 Kubernetes (ACK) 特定配置
 - **AI/LLM支持**: 完整的大模型训练、推理、运维参考
+- **工具链生态**: 覆盖包管理、镜像构建、安全扫描、性能分析等全流程工具
 
 ---
 
@@ -158,6 +159,23 @@ Pod安全、证书、网络策略、CNI、流量管理等。
 | 99 | [security-hardening](tables/99-security-hardening.md) | 安全加固 | 系统加固、CVE参考 |
 | 100 | [compliance-audit](tables/100-compliance-audit.md) | 合规审计 | 审计报告、合规检查 |
 
+### 七、工具链生态 (101-110)
+
+包管理、镜像构建、安全扫描、策略校验、可观测性、性能分析、CLI增强等工具。
+
+| 编号 | 表格 | 描述 | 关键内容 |
+|:---:|------|------|----------|
+| 101 | [package-management-tools](tables/101-package-management-tools.md) | 包管理工具 | Helm、Kustomize、Carvel |
+| 102 | [secret-management-tools](tables/102-secret-management-tools.md) | 配置与密钥管理 | ESO、Sealed Secrets、Vault |
+| 103 | [image-build-tools](tables/103-image-build-tools.md) | 镜像构建工具 | BuildKit、Kaniko、ko |
+| 104 | [security-scanning-tools](tables/104-security-scanning-tools.md) | 安全扫描工具 | Trivy、Grype、Snyk |
+| 105 | [policy-validation-tools](tables/105-policy-validation-tools.md) | 策略校验工具 | Conftest、Datree、Kubeconform |
+| 106 | [observability-tools](tables/106-observability-tools.md) | 可观测性工具 | Prometheus、Grafana、Loki、Tempo |
+| 107 | [log-aggregation-tools](tables/107-log-aggregation-tools.md) | 日志聚合工具 | Loki、Fluentd、Vector |
+| 108 | [troubleshooting-tools](tables/108-troubleshooting-tools.md) | 问题诊断工具 | kubectl-debug、Inspektor Gadget |
+| 109 | [performance-profiling-tools](tables/109-performance-profiling-tools.md) | 性能分析工具 | Pixie、Pyroscope、Parca |
+| 110 | [cli-enhancement-tools](tables/110-cli-enhancement-tools.md) | CLI增强工具 | k9s、kubectx、stern、Lens |
+
 ---
 
 ## 快速导航
@@ -167,16 +185,17 @@ Pod安全、证书、网络策略、CNI、流量管理等。
 | 场景 | 推荐表格 |
 |------|---------|
 | **集群部署** | 01, 02, 06, 11, 15 |
-| **日常运维** | 05, 08, 27, 36, 86-89 |
-| **性能优化** | 10, 28, 84, 91-95 |
-| **安全加固** | 09, 42, 50, 66, 99 |
-| **故障排查** | 08, 81, 86-89 |
-| **监控告警** | 07, 40, 65 |
+| **日常运维** | 05, 08, 27, 36, 86-89, 110 |
+| **性能优化** | 10, 28, 84, 91-95, 109 |
+| **安全加固** | 09, 42, 50, 66, 99, 104 |
+| **故障排查** | 08, 81, 86-89, 108 |
+| **监控告警** | 07, 40, 65, 106 |
 | **备份恢复** | 18, 30, 96, 97 |
 | **多租户** | 19, 42, 55 |
-| **CI/CD** | 21, 48, 51 |
+| **CI/CD** | 21, 48, 51, 103, 105 |
 | **AI/LLM** | 25, 26, 56-65 |
 | **网络** | 12, 76-85 |
+| **工具链** | 101-110 |
 
 ### 按组件查找
 
@@ -192,6 +211,10 @@ Pod安全、证书、网络策略、CNI、流量管理等。
 | **CNI** | 12, 76, 78, 84 |
 | **CSI** | 13, 89, 95 |
 | **GPU** | 25, 26, 56-60 |
+| **Helm** | 47, 101 |
+| **Prometheus** | 07, 106 |
+| **Grafana** | 106 |
+| **Loki** | 106, 107 |
 
 ---
 
