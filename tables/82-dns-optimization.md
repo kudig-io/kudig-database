@@ -1,6 +1,4 @@
-# 表格82: DNS优化与调优
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)
+# 82 - DNS优化与调优
 
 ## CoreDNS性能参数
 
@@ -243,3 +241,7 @@ kubectl get pods -n kube-system -l k8s-app=node-local-dns
 | DNS自动扩缩 | 按需扩展 |
 | PrivateZone | 私有域名解析 |
 | DNS缓存 | 本地缓存加速 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

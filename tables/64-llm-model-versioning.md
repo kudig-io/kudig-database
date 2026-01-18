@@ -1,261 +1,262 @@
-# 表格64: LLM模型版本管理
+# 64 - LLM模型版本管理
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [MLflow](https://mlflow.org/)
 
-## 模型版本管理工具
+## 一、版本管理系统
 
-| 工具 | 类型 | 功能 | K8s集成 |
-|-----|-----|------|--------|
-| MLflow | 开源 | 全生命周期管理 | ✅ |
-| DVC | 开源 | 数据/模型版本 | ✅ |
-| Weights & Biases | SaaS | 实验追踪 | ✅ |
-| Neptune.ai | SaaS | 实验管理 | ✅ |
-| ClearML | 开源/SaaS | MLOps平台 | ✅ |
-| ModelScope | 开源 | 模型仓库 | ✅ |
+| 系统 | 特性 | 集成 | 适用场景 |
+|-----|------|------|---------|
+| **MLflow** | 实验追踪、模型注册 | Python SDK | 通用ML |
+| **DVC** | Git-like版本控制 | CLI/Python | 数据+模型 |
+| **Weights & Biases** | 可视化、协作 | Python SDK | 研究团队 |
+| **HuggingFace Hub** | 模型托管 | transformers | HF模型 |
 
-## MLflow Model Registry
+## 二、MLflow部署
 
 ```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mlflow-postgres
+spec:
+  serviceName: mlflow-postgres
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        env:
+        - name: POSTGRES_DB
+          value: mlflow
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mlflow-server
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mlflow
+  replicas: 3
   template:
-    metadata:
-      labels:
-        app: mlflow
     spec:
       containers:
       - name: mlflow
-        image: mlflow/mlflow:latest
+        image: ghcr.io/mlflow/mlflow:v2.9.2
         command:
         - mlflow
         - server
-        - --backend-store-uri=postgresql://mlflow:password@postgres:5432/mlflow
-        - --default-artifact-root=s3://mlflow-artifacts/
         - --host=0.0.0.0
-        - --port=5000
-        env:
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: s3-credentials
-              key: access-key
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: s3-credentials
-              key: secret-key
+        - --backend-store-uri=postgresql://mlflow@postgres/mlflow
+        - --default-artifact-root=s3://mlflow-artifacts/
         ports:
         - containerPort: 5000
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
 ```
 
-## 模型注册流程
+## 三、模型注册
 
 ```python
-# 模型注册示例
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: model-registry-script
-data:
-  register_model.py: |
-    import mlflow
-    from mlflow import MlflowClient
+import mlflow
+from transformers import AutoModelForCausalLM
+
+# 设置MLflow URI
+mlflow.set_tracking_uri("http://mlflow-server:5000")
+mlflow.set_experiment("llama2-finetuning")
+
+with mlflow.start_run(run_name="llama2-7b-alpaca"):
+    # 记录参数
+    mlflow.log_params({
+        "model": "llama-2-7b",
+        "learning_rate": 3e-4,
+        "lora_r": 8
+    })
     
-    client = MlflowClient()
+    # 训练
+    model = train_model()
+    
+    # 记录指标
+    mlflow.log_metrics({
+        "val_loss": 0.45,
+        "val_accuracy": 0.92
+    })
     
     # 注册模型
-    model_uri = "runs:/<run_id>/model"
-    model_name = "llama-2-7b-finetuned"
-    
-    result = mlflow.register_model(
-        model_uri=model_uri,
-        name=model_name,
-        tags={
-            "task": "text-generation",
-            "base_model": "llama-2-7b",
-            "quantization": "none",
-            "framework": "transformers"
-        }
-    )
-    
-    # 设置版本阶段
-    client.transition_model_version_stage(
-        name=model_name,
-        version=result.version,
-        stage="Staging"  # None/Staging/Production/Archived
-    )
-    
-    # 添加模型描述
-    client.update_model_version(
-        name=model_name,
-        version=result.version,
-        description="Fine-tuned on custom dataset, improved accuracy by 5%"
+    mlflow.pytorch.log_model(
+        model,
+        "model",
+        registered_model_name="llama2-7b-alpaca"
     )
 ```
 
-## 模型部署CRD
+## 四、版本管理
 
-```yaml
-apiVersion: serving.kubeflow.org/v1beta1
-kind: InferenceService
-metadata:
-  name: llm-model
-  annotations:
-    serving.kubeflow.org/model-version: "v1.2.0"
-    serving.kubeflow.org/model-registry: "mlflow"
-spec:
-  predictor:
-    model:
-      modelFormat:
-        name: pytorch
-      storageUri: "models://llama-2-7b-finetuned/Production"
-    resources:
-      limits:
-        nvidia.com/gpu: 1
+```python
+from mlflow.tracking import MlflowClient
+
+client = MlflowClient("http://mlflow-server:5000")
+
+# 获取模型版本
+versions = client.search_model_versions("name='llama2-7b-alpaca'")
+
+# 版本晋级
+client.transition_model_version_stage(
+    name="llama2-7b-alpaca",
+    version=3,
+    stage="Production"
+)
+
+# 版本对比
+version_1 = client.get_model_version("llama2-7b-alpaca", 1)
+version_3 = client.get_model_version("llama2-7b-alpaca", 3)
+
+print(f"v1 accuracy: {version_1.run_data.metrics['accuracy']}")
+print(f"v3 accuracy: {version_3.run_data.metrics['accuracy']}")
 ```
 
-## A/B测试配置
+## 五、模型元数据
 
 ```yaml
-apiVersion: serving.kubeflow.org/v1beta1
+model_card:
+  name: "llama2-7b-alpaca-v3"
+  version: "3.0.0"
+  date: "2024-01-15"
+  
+  description: "Llama2-7B微调模型，使用Alpaca指令数据集"
+  
+  training:
+    dataset: "tatsu-lab/alpaca"
+    samples: 52000
+    epochs: 3
+    learning_rate: 3e-4
+    
+  performance:
+    accuracy: 0.92
+    val_loss: 0.45
+    
+  resources:
+    gpu: "1×A10G"
+    training_time: "6 hours"
+    cost: "$36"
+    
+  limitations:
+    - "仅支持英文"
+    - "上下文长度2048"
+```
+
+## 六、A/B测试
+
+```yaml
+apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
-  name: llm-ab-test
+  name: llama2-ab-test
 spec:
   predictor:
-    canaryTrafficPercent: 10
-    model:
-      modelFormat:
-        name: pytorch
-      storageUri: "models://llama-2-7b-v2/Production"
-    resources:
-      limits:
-        nvidia.com/gpu: 1
-  transformer:
+    canaryTrafficPercent: 20  # 20%流量到v3
     containers:
-    - name: ab-router
-      image: ab-router:v1
-      env:
-      - name: CONTROL_MODEL
-        value: "v1"
-      - name: TREATMENT_MODEL
-        value: "v2"
-      - name: TRAFFIC_SPLIT
-        value: "90:10"
-```
-
-## 模型回滚配置
-
-```yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: model-rollback
-spec:
-  template:
-    spec:
-      restartPolicy: Never
+    - name: model-v2
+      image: model-registry/llama2-7b-alpaca:v2
+    canary:
       containers:
-      - name: rollback
-        image: mlflow-client:v1
-        command:
-        - python
-        - rollback.py
-        env:
-        - name: MODEL_NAME
-          value: "llama-2-7b-finetuned"
-        - name: TARGET_VERSION
-          value: "3"
-        - name: MLFLOW_TRACKING_URI
-          value: "http://mlflow:5000"
-```
-
-## 模型元数据Schema
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
+      - name: model-v3
+        image: model-registry/llama2-7b-alpaca:v3
+---
+# 监控A/B测试
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
-  name: model-metadata-schema
-data:
-  schema.yaml: |
-    model_metadata:
-      required:
-        - name
-        - version
-        - base_model
-        - task_type
-        - created_at
-      optional:
-        - description
-        - training_dataset
-        - evaluation_metrics
-        - hardware_requirements
-        - quantization
-        - license
-      
-    evaluation_metrics:
-      llm:
-        - perplexity
-        - mmlu_score
-        - hellaswag_score
-        - truthfulqa_score
-        - human_eval
-      
-    hardware_requirements:
-      - min_gpu_memory_gb
-      - recommended_gpu_type
-      - estimated_latency_ms
+  name: ab-test-metrics
+spec:
+  groups:
+  - name: ab_test
+    rules:
+    - record: model_accuracy_by_version
+      expr: |
+        sum(rate(model_correct_predictions[5m])) by (version)
+        / sum(rate(model_total_predictions[5m])) by (version)
 ```
 
-## 模型版本状态
+## 七、回滚策略
 
-| 状态 | 说明 | 操作 |
-|-----|------|------|
-| None | 未分类 | 初始状态 |
-| Staging | 测试中 | 验证评估 |
-| Production | 生产使用 | 正式部署 |
-| Archived | 已归档 | 保留历史 |
+```python
+class ModelRollback:
+    def __init__(self, mlflow_client):
+        self.client = mlflow_client
+    
+    def rollback_to_version(self, model_name, target_version):
+        """回滚到指定版本"""
+        # 获取当前生产版本
+        current = self.client.get_latest_versions(
+            model_name, 
+            stages=["Production"]
+        )[0]
+        
+        # 降级当前版本
+        self.client.transition_model_version_stage(
+            name=model_name,
+            version=current.version,
+            stage="Archived"
+        )
+        
+        # 晋升目标版本
+        self.client.transition_model_version_stage(
+            name=model_name,
+            version=target_version,
+            stage="Production"
+        )
+        
+        print(f"Rolled back from v{current.version} to v{target_version}")
+    
+    def auto_rollback_if_degraded(self, model_name, threshold=0.05):
+        """指标下降时自动回滚"""
+        current = self.client.get_latest_versions(model_name, ["Production"])[0]
+        previous = self.client.get_model_version(model_name, current.version - 1)
+        
+        current_acc = current.run_data.metrics.get("accuracy", 0)
+        previous_acc = previous.run_data.metrics.get("accuracy", 0)
+        
+        if current_acc < previous_acc - threshold:
+            self.rollback_to_version(model_name, previous.version)
+            return True
+        
+        return False
 
-## 模型审计日志
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: model-audit-config
-data:
-  audit.yaml: |
-    audit:
-      enabled: true
-      events:
-        - model_registered
-        - model_deployed
-        - stage_transition
-        - model_deleted
-        - inference_started
-      storage:
-        type: elasticsearch
-        index: model-audit-logs
-      retention_days: 365
+# 使用
+rollback = ModelRollback(client)
+if rollback.auto_rollback_if_degraded("llama2-7b-alpaca", threshold=0.05):
+    print("Auto rollback triggered!")
 ```
 
-## ACK模型管理
+## 八、版本生命周期
 
-| 功能 | 说明 |
-|-----|------|
-| PAI-EAS | 模型服务部署 |
-| ModelScope | 模型仓库 |
-| OSS | 模型存储 |
-| RAM | 访问控制 |
+```
+Staging → Production → Archived
+   ↑          ↓
+   └──────回滚────────┘
+
+生命周期规则:
+- Staging: 新版本测试，保留30天
+- Production: 当前服务版本，保留90天
+- Archived: 历史版本，保留365天后删除
+```
+
+## 九、最佳实践
+
+1. **版本命名**: 使用语义化版本 (major.minor.patch)
+2. **实验命名**: 包含日期和关键参数
+3. **指标记录**: 记录训练/验证/测试指标
+4. **Artifact保存**: 模型、配置、checkpoint全部保存
+5. **元数据**: 记录Git commit、数据集版本、训练环境
+
+## 十、成本优化
+
+**存储策略:**
+- 活跃版本: S3 Standard
+- 归档版本: S3 Glacier (节省80%)
+- 删除策略: 1年后删除Archived版本
+
+**示例成本 (100个模型版本, 每个7GB):**
+- Standard: 700GB × $0.023 = $16/月
+- Glacier: 700GB × $0.004 = $2.8/月
+- 节省: 82%
+
+---
+**相关**: [113-AI模型注册中心](../113-ai-model-registry.md) | **版本**: MLflow 2.9+

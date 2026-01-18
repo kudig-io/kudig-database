@@ -1,4 +1,4 @@
-# 表格41：灾备策略表
+# 41 - 灾备策略表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster](https://kubernetes.io/docs/tasks/administer-cluster/)
 
@@ -222,3 +222,7 @@ spec:
 ---
 
 **灾备原则**: 定期演练，自动化恢复，多层防护
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

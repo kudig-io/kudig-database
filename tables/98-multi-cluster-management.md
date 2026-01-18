@@ -1,6 +1,6 @@
 # 多集群管理
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration](https://kubernetes.io/docs/concepts/cluster-administration/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 多集群架构模式
 
@@ -372,3 +372,7 @@ spec:
 | 网络互联 | 规划网络 CIDR 避免冲突 |
 | 证书管理 | 统一证书管理和轮换 |
 | RBAC | 跨集群统一权限管理 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

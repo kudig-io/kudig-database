@@ -1,6 +1,6 @@
 # Kubernetes 合规与审计
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug/debug-cluster/audit](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 合规框架对照
 
@@ -327,3 +327,7 @@ groups:
 | 报告 | 定期生成合规报告 |
 | 改进 | 建立合规改进流程 |
 | 培训 | 团队安全合规培训 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,6 +1,4 @@
-# 表格69: Lease与Leader选举
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/architecture/leases](https://kubernetes.io/docs/concepts/architecture/leases/)
+# 69 - Lease与Leader选举
 
 ## Lease对象
 
@@ -179,3 +177,7 @@ kubectl get lease -n kube-system kube-scheduler -o yaml
 | v1.17 | Lease作为默认Leader选举资源 |
 | v1.20 | Endpoints不再用于选举 |
 | v1.27 | Lease优化 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

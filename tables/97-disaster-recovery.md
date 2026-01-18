@@ -1,6 +1,6 @@
 # Kubernetes 灾难恢复
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster](https://kubernetes.io/docs/tasks/administer-cluster/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 灾难恢复等级
 
@@ -375,3 +375,7 @@ groups:
 | 监控 | 实时监控备集群和复制状态 |
 | 通知 | 建立故障通知链 |
 | 回滚 | 准备回滚计划 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

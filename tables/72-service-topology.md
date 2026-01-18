@@ -1,6 +1,4 @@
-# 表格72: 服务拓扑与端点切片
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/endpoint-slices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
+# 72 - 服务拓扑与端点切片
 
 ## EndpointSlice vs Endpoints
 
@@ -206,3 +204,7 @@ kubectl get service myservice -o yaml | grep topology
 | v1.23 | 拓扑感知路由Beta |
 | v1.27 | TopologyAwareHints改进 |
 | v1.30 | TrafficDistribution字段 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

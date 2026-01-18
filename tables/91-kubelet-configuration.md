@@ -1,4 +1,4 @@
-# 表格91: kubelet配置优化
+# 91 - kubelet配置优化
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1](https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/)
 
@@ -216,3 +216,7 @@ resource "alicloud_cs_kubernetes_node_pool" "default" {
 ---
 
 **kubelet优化原则**: 合理设置maxPods + 配置资源预留 + 调整驱逐阈值 + 优化镜像管理 + 启用安全特性
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

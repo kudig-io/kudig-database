@@ -1,6 +1,4 @@
-# 表格80: 多集群网络互联
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+# 80 - 多集群网络互联
 
 ## 多集群网络方案
 
@@ -224,3 +222,7 @@ spec:
 | Cilium Cluster Mesh | v1.21+ |
 | Istio Multi-cluster | v1.22+ |
 | ACK One | v1.24+ |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

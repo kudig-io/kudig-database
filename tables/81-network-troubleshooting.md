@@ -1,6 +1,4 @@
-# 表格81: 网络故障诊断
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug/debug-application/debug-service](https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/)
+# 81 - 网络故障诊断
 
 ## 网络问题分类
 
@@ -192,3 +190,7 @@ kubectl exec -it network-debug -- ab -n 1000 -c 100 http://<service>/
 | Terway诊断 | `terway-cli` |
 | 网络拓扑 | 可视化网络拓扑 |
 | 日志服务 | 网络日志分析 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

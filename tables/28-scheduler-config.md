@@ -1,4 +1,4 @@
-# 表格28: 调度器配置与优化
+# 28 - 调度器配置与优化
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
@@ -450,3 +450,7 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 ---
 
 **调度优化原则**: 合理配置percentageOfNodesToScore + 使用TopologySpread均衡分布 + 配置优先级防止资源争抢 + 监控调度延迟
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

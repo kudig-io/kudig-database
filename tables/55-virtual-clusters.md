@@ -1,6 +1,4 @@
-# 表格55: 虚拟集群与多租户
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
+# 55 - 虚拟集群与多租户
 
 ## 多租户隔离模式
 
@@ -273,3 +271,7 @@ spec:
 | v1.27 | 资源配额改进 |
 | v1.28 | CEL准入策略增强 |
 | v1.30 | ValidatingAdmissionPolicy GA |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

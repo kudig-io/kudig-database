@@ -1,4 +1,4 @@
-# 表格44：联邦集群管理表
+# 44 - 联邦集群管理表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [karmada.io](https://karmada.io/) | [clusternet.io](https://clusternet.io/)
 
@@ -266,3 +266,7 @@ external_labels:
 ---
 
 **多集群原则**: 统一管理，自动故障转移，就近访问
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,4 +1,4 @@
-# 表格23：合规与认证表
+# 23 - 合规与认证表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
@@ -172,3 +172,7 @@ rules:
 ---
 
 **合规原则**: 持续审计，自动化检查，证据留存
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

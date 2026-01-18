@@ -1,4 +1,4 @@
-# 表格40：自定义指标和监控扩展表
+# 40 - 自定义指标和监控扩展表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
@@ -348,3 +348,7 @@ kubectl get hpa -w
 ---
 
 **监控扩展原则**: 暴露业务指标，配置合理阈值，实现自动扩缩容
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,4 +1,4 @@
-# 表格38：Ingress和API Gateway对比表
+# 38 - Ingress和API Gateway对比表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
@@ -256,3 +256,7 @@ kubectl exec -n ingress-nginx <pod> -- cat /etc/nginx/nginx.conf  # 检查配置
 ---
 
 **Ingress原则**: 选择适合场景，配置HA，启用监控
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,4 +1,4 @@
-# 表格90: 集群容量规划
+# 90 - 集群容量规划
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/setup/best-practices/cluster-large](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
 
@@ -222,3 +222,7 @@ spec:
 ---
 
 **容量规划原则**: 预留20%缓冲 + 监控使用趋势 + 定期评估 + 自动弹性伸缩
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

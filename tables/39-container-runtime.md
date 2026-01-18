@@ -1,4 +1,4 @@
-# 表格39：容器运行时对比表
+# 39 - 容器运行时对比表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/setup/production-environment/container-runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
 
@@ -225,3 +225,7 @@ journalctl -u containerd -f
 ---
 
 **运行时原则**: v1.24+使用containerd，安全场景用沙箱运行时
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

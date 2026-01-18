@@ -1,4 +1,4 @@
-# 表格86: Pod Pending状态诊断
+# 86 - Pod Pending状态诊断
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
@@ -171,3 +171,7 @@ spec:
 ---
 
 **Pending诊断原则**: 先看Events确定原因 → 资源/节点/存储/配额逐一排查 → 针对性解决
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,4 +1,4 @@
-# 表格42：RBAC权限矩阵表
+# 42 - RBAC权限矩阵表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
@@ -743,3 +743,7 @@ roleRef:
 ---
 
 **RBAC原则**: 最小权限 + 定期审计 + 组管理 + 短期Token + 命名空间隔离
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

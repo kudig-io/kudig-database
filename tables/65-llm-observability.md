@@ -1,280 +1,295 @@
-# 表格65: LLM可观测性与调试
+# 65 - LLM可观测性与监控
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [Prometheus](https://prometheus.io/)
 
-## LLM可观测性维度
+## 一、监控指标体系
 
-| 维度 | 监控内容 | 工具 |
-|-----|---------|------|
-| 性能 | 延迟/吞吐量/GPU利用率 | Prometheus/Grafana |
-| 质量 | 输出质量/准确率/幻觉率 | LangSmith/Phoenix |
-| 成本 | Token消耗/GPU成本 | 自定义仪表板 |
-| 安全 | 有害内容/数据泄露 | 安全网关 |
-| 用户 | 满意度/反馈 | 应用层追踪 |
+| 类型 | 指标 | 阈值 | 告警 |
+|-----|------|------|------|
+| **性能** | P99延迟 | <2s | 高 |
+| **吞吐** | QPS | >100 | 中 |
+| **质量** | 错误率 | <1% | 高 |
+| **资源** | GPU利用率 | >70% | 低 |
+| **成本** | $/1M tokens | 监控 | 信息 |
 
-## LLM追踪框架
-
-| 框架 | 功能 | 开源 | 集成难度 |
-|-----|------|------|---------|
-| LangSmith | 全链路追踪 | ❌ | 低 |
-| Phoenix (Arize) | 可观测性 | ✅ | 低 |
-| Langfuse | 追踪分析 | ✅ | 低 |
-| OpenLLMetry | OpenTelemetry | ✅ | 中 |
-| Helicone | 代理追踪 | ✅ | 低 |
-| Weights & Biases | 实验追踪 | ❌ | 低 |
-
-## Phoenix部署
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: phoenix-server
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: phoenix
-  template:
-    metadata:
-      labels:
-        app: phoenix
-    spec:
-      containers:
-      - name: phoenix
-        image: arizephoenix/phoenix:latest
-        ports:
-        - containerPort: 6006
-          name: http
-        - containerPort: 4317
-          name: otlp-grpc
-        env:
-        - name: PHOENIX_WORKING_DIR
-          value: "/data"
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
-        volumeMounts:
-        - name: data
-          mountPath: /data
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: phoenix-data
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: phoenix
-spec:
-  selector:
-    app: phoenix
-  ports:
-  - name: http
-    port: 6006
-  - name: otlp-grpc
-    port: 4317
-```
-
-## Langfuse部署
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: langfuse
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: langfuse
-  template:
-    spec:
-      containers:
-      - name: langfuse
-        image: langfuse/langfuse:latest
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: langfuse-secrets
-              key: database-url
-        - name: NEXTAUTH_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: langfuse-secrets
-              key: nextauth-secret
-        - name: NEXTAUTH_URL
-          value: "https://langfuse.example.com"
-        - name: SALT
-          valueFrom:
-            secretKeyRef:
-              name: langfuse-secrets
-              key: salt
-        ports:
-        - containerPort: 3000
-        resources:
-          limits:
-            cpu: "2"
-            memory: 2Gi
-```
-
-## OpenTelemetry LLM配置
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: otel-llm-config
-data:
-  collector.yaml: |
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-            endpoint: 0.0.0.0:4317
-          http:
-            endpoint: 0.0.0.0:4318
-    
-    processors:
-      batch:
-        timeout: 1s
-        send_batch_size: 1024
-      
-      attributes:
-        actions:
-          - key: llm.model
-            action: insert
-          - key: llm.tokens.input
-            action: insert
-          - key: llm.tokens.output
-            action: insert
-    
-    exporters:
-      otlp/jaeger:
-        endpoint: jaeger:4317
-        tls:
-          insecure: true
-      prometheus:
-        endpoint: 0.0.0.0:8889
-    
-    service:
-      pipelines:
-        traces:
-          receivers: [otlp]
-          processors: [batch, attributes]
-          exporters: [otlp/jaeger]
-        metrics:
-          receivers: [otlp]
-          processors: [batch]
-          exporters: [prometheus]
-```
-
-## LLM应用追踪代码
+## 二、Prometheus指标
 
 ```python
-# LangChain + Langfuse集成示例
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: llm-tracing-code
-data:
-  tracing.py: |
-    from langfuse.callback import CallbackHandler
-    from langchain.llms import VLLM
-    from langchain.chains import LLMChain
+from prometheus_client import Counter, Histogram, Gauge
+import time
+
+# 请求计数
+request_count = Counter(
+    'llm_requests_total',
+    'Total LLM requests',
+    ['model', 'status']
+)
+
+# 延迟分布
+request_latency = Histogram(
+    'llm_request_duration_seconds',
+    'LLM request latency',
+    ['model'],
+    buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0]
+)
+
+# Token计数
+token_count = Counter(
+    'llm_tokens_total',
+    'Total tokens processed',
+    ['model', 'type']  # type: input/output
+)
+
+# GPU利用率
+gpu_utilization = Gauge(
+    'llm_gpu_utilization_percent',
+    'GPU utilization',
+    ['gpu_id']
+)
+
+# 使用示例
+@app.post("/v1/chat/completions")
+async def chat(request: dict):
+    start = time.time()
     
-    # 初始化Langfuse回调
-    langfuse_handler = CallbackHandler(
-        public_key="pk-xxx",
-        secret_key="sk-xxx",
-        host="http://langfuse:3000"
-    )
-    
-    # 创建LLM链
-    llm = VLLM(
-        model="/models/llama-2-7b",
-        callbacks=[langfuse_handler]
-    )
-    
-    chain = LLMChain(
-        llm=llm,
-        prompt=prompt_template,
-        callbacks=[langfuse_handler]
-    )
-    
-    # 追踪会话
-    with langfuse_handler.trace(
-        name="user_query",
-        user_id="user123",
-        metadata={"source": "api"}
-    ) as trace:
-        result = chain.run(query)
+    try:
+        response = llm.generate(request["messages"])
+        
+        # 记录指标
+        request_count.labels(model=model_name, status="success").inc()
+        token_count.labels(model=model_name, type="input").inc(input_tokens)
+        token_count.labels(model=model_name, type="output").inc(output_tokens)
+        
+        return response
+    except Exception as e:
+        request_count.labels(model=model_name, status="error").inc()
+        raise
+    finally:
+        duration = time.time() - start
+        request_latency.labels(model=model_name).observe(duration)
 ```
 
-## LLM监控指标
+## 三、告警规则
 
-| 指标 | 类型 | 说明 |
-|-----|-----|------|
-| `llm_request_duration_seconds` | Histogram | 请求延迟分布 |
-| `llm_tokens_input_total` | Counter | 输入Token总数 |
-| `llm_tokens_output_total` | Counter | 输出Token总数 |
-| `llm_first_token_latency_seconds` | Histogram | 首Token延迟 |
-| `llm_model_load_time_seconds` | Gauge | 模型加载时间 |
-| `llm_cache_hit_ratio` | Gauge | 缓存命中率 |
-| `llm_error_rate` | Gauge | 错误率 |
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: llm-alerts
+spec:
+  groups:
+  - name: llm_performance
+    rules:
+    - alert: HighInferenceLatency
+      expr: histogram_quantile(0.99, rate(llm_request_duration_seconds_bucket[5m])) > 2
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "LLM P99延迟>2秒"
+    
+    - alert: HighErrorRate
+      expr: |
+        sum(rate(llm_requests_total{status="error"}[5m]))
+        / sum(rate(llm_requests_total[5m]))
+        > 0.01
+      for: 10m
+      labels:
+        severity: critical
+      annotations:
+        summary: "错误率>1%"
+    
+    - alert: LowGPUUtilization
+      expr: avg(llm_gpu_utilization_percent) < 30
+      for: 30m
+      labels:
+        severity: info
+      annotations:
+        summary: "GPU利用率<30%，资源浪费"
+```
 
-## Grafana仪表板
+## 四、Grafana Dashboard
+
+```json
+{
+  "dashboard": {
+    "title": "LLM Monitoring",
+    "panels": [
+      {
+        "title": "Requests Per Second",
+        "targets": [{
+          "expr": "rate(llm_requests_total[1m])"
+        }]
+      },
+      {
+        "title": "P50/P95/P99 Latency",
+        "targets": [
+          {"expr": "histogram_quantile(0.50, rate(llm_request_duration_seconds_bucket[5m]))"},
+          {"expr": "histogram_quantile(0.95, rate(llm_request_duration_seconds_bucket[5m]))"},
+          {"expr": "histogram_quantile(0.99, rate(llm_request_duration_seconds_bucket[5m]))"}
+        ]
+      },
+      {
+        "title": "Tokens Throughput",
+        "targets": [{
+          "expr": "rate(llm_tokens_total[1m])"
+        }]
+      }
+    ]
+  }
+}
+```
+
+## 五、分布式追踪
+
+```python
+from opentelemetry import trace
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+
+# 初始化追踪
+tracer = trace.get_tracer(__name__)
+
+@app.post("/v1/chat/completions")
+async def chat(request: dict):
+    with tracer.start_as_current_span("llm_inference") as span:
+        # 记录输入
+        span.set_attribute("input_tokens", len(request["messages"]))
+        span.set_attribute("model", model_name)
+        
+        # Embedding
+        with tracer.start_as_current_span("tokenization"):
+            tokens = tokenizer.encode(request["messages"])
+        
+        # 推理
+        with tracer.start_as_current_span("generation"):
+            output = model.generate(tokens)
+        
+        # 解码
+        with tracer.start_as_current_span("decoding"):
+            response = tokenizer.decode(output)
+        
+        span.set_attribute("output_tokens", len(output))
+        
+        return response
+```
+
+## 六、日志聚合
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: llm-dashboard
+  name: fluentd-config
 data:
-  dashboard.json: |
-    {
-      "panels": [
-        {
-          "title": "请求延迟分布",
-          "type": "histogram",
-          "targets": [{
-            "expr": "histogram_quantile(0.95, llm_request_duration_seconds_bucket)"
-          }]
-        },
-        {
-          "title": "Token吞吐量",
-          "type": "graph",
-          "targets": [{
-            "expr": "rate(llm_tokens_output_total[5m])"
-          }]
-        },
-        {
-          "title": "GPU利用率",
-          "type": "gauge",
-          "targets": [{
-            "expr": "avg(DCGM_FI_DEV_GPU_UTIL)"
-          }]
-        }
-      ]
-    }
+  fluent.conf: |
+    <source>
+      @type tail
+      path /var/log/llm/*.log
+      pos_file /var/log/llm.pos
+      tag llm
+      <parse>
+        @type json
+        time_key timestamp
+      </parse>
+    </source>
+    
+    <filter llm>
+      @type record_transformer
+      <record>
+        cluster_id "#{ENV['CLUSTER_ID']}"
+        namespace "#{ENV['NAMESPACE']}"
+      </record>
+    </filter>
+    
+    <match llm>
+      @type elasticsearch
+      host elasticsearch
+      port 9200
+      index_name llm-logs
+    </match>
 ```
 
-## 调试工具
+## 七、用户体验监控
 
-| 工具 | 用途 | 命令/方法 |
-|-----|------|---------|
-| 日志分析 | 查看推理日志 | `kubectl logs` |
-| 性能分析 | GPU profiling | nsys/nvprof |
-| 内存分析 | 显存使用 | nvidia-smi |
-| 追踪可视化 | 调用链 | Jaeger UI |
+```python
+class UserExperienceMetrics:
+    def __init__(self):
+        self.time_to_first_token = Histogram(
+            'llm_time_to_first_token_seconds',
+            'Time to first token'
+        )
+        self.token_generation_rate = Histogram(
+            'llm_tokens_per_second',
+            'Token generation rate'
+        )
+    
+    def track_streaming_response(self, request_id):
+        start_time = time.time()
+        first_token_time = None
+        token_count = 0
+        
+        for token in llm.stream_generate():
+            if first_token_time is None:
+                first_token_time = time.time()
+                ttft = first_token_time - start_time
+                self.time_to_first_token.observe(ttft)
+            
+            token_count += 1
+            yield token
+        
+        total_time = time.time() - first_token_time
+        tokens_per_second = token_count / total_time
+        self.token_generation_rate.observe(tokens_per_second)
+```
 
-## ACK可观测性
+## 八、成本监控
 
-| 功能 | 说明 |
-|-----|------|
-| ARMS | 应用监控 |
-| SLS | 日志服务 |
-| Prometheus托管 | 指标采集 |
-| 链路追踪 | 分布式追踪 |
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cost-tracking
+spec:
+  groups:
+  - name: llm_cost
+    rules:
+    - record: llm_cost_per_million_tokens
+      expr: |
+        (
+          sum(rate(container_cpu_usage_seconds_total{pod=~"llm.*"}[1h])) * 0.05
+          + sum(gpu_duty_cycle{pod=~"llm.*"}) / 100 * 2.5
+        ) / (rate(llm_tokens_total[1h]) / 1000000)
+```
+
+## 九、SLO定义
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: slo-definitions
+spec:
+  groups:
+  - name: slo
+    rules:
+    - record: slo:availability:ratio
+      expr: |
+        sum(rate(llm_requests_total{status="success"}[30d]))
+        / sum(rate(llm_requests_total[30d]))
+      # 目标: 99.9% (允许43分钟/月故障)
+    
+    - record: slo:latency:p99
+      expr: histogram_quantile(0.99, rate(llm_request_duration_seconds_bucket[30d]))
+      # 目标: P99 < 2秒
+```
+
+## 十、最佳实践
+
+1. **关键指标**: 延迟、吞吐、错误率、资源利用率
+2. **告警分级**: Critical/Warning/Info三级
+3. **追踪采样**: 1-10%采样率平衡性能与可见性
+4. **日志保留**: 30天热存储 + 90天冷存储
+5. **Dashboard**: 为不同角色定制Dashboard
+
+---
+**相关**: [114-GPU监控](../114-gpu-monitoring.md) | **版本**: Prometheus 2.45+

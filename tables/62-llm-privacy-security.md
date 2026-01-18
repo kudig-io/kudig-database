@@ -1,248 +1,237 @@
-# 表格62: LLM隐私与安全
+# 62 - LLM隐私与安全
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 
-## LLM安全风险类型
+## 一、LLM安全威胁
 
-| 风险类型 | 描述 | 防护措施 |
-|---------|------|---------|
-| 提示注入 | 恶意指令注入 | 输入过滤/沙箱 |
-| 数据泄露 | 训练数据提取 | 差分隐私 |
-| 越狱攻击 | 绕过安全限制 | 对齐训练/检测 |
-| 对抗样本 | 欺骗模型输出 | 对抗训练 |
-| 隐私推断 | 推断用户信息 | 联邦学习 |
-| 模型窃取 | API反向工程 | 速率限制/水印 |
+| 威胁类型 | 严重性 | 攻击示例 | 防御措施 |
+|---------|--------|---------|---------|
+| **提示注入** | 高 | "Ignore instructions" | 输入验证 |
+| **数据泄露** | 极高 | 训练数据记忆化 | 差分隐私 |
+| **模型窃取** | 高 | API探测 | 速率限制 |
+| **拒绝服务** | 中 | 超长输入 | 长度限制 |
+| **有害内容** | 高 | 生成恶意代码 | 内容过滤 |
 
-## 输入过滤配置
+## 二、提示注入防御
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: llm-safety-config
-data:
-  input_filter.yaml: |
-    filters:
-      # 敏感词过滤
-      sensitive_words:
-        enabled: true
-        action: block  # block/mask/warn
-        word_list: /config/sensitive_words.txt
-      
-      # 提示注入检测
-      prompt_injection:
-        enabled: true
-        action: block
-        patterns:
-          - "ignore previous instructions"
-          - "disregard all prior"
-          - "system prompt"
-        ml_detection: true
-        threshold: 0.85
-      
-      # PII检测
-      pii_detection:
-        enabled: true
-        action: mask
-        types:
-          - phone
-          - email
-          - id_card
-          - bank_card
-          - address
-      
-      # 长度限制
-      length_limit:
-        max_tokens: 4096
-        max_characters: 16384
+```python
+import re
+from typing import Tuple
+
+class PromptInjectionDefense:
+    DANGEROUS_PATTERNS = [
+        r"ignore\s+(all\s+)?previous\s+instructions?",
+        r"disregard\s+",
+        r"forget\s+",
+        r"system\s*:",
+        r"<\|im_start\|>",
+    ]
+    
+    def detect_injection(self, user_input: str) -> Tuple[bool, str]:
+        for pattern in self.DANGEROUS_PATTERNS:
+            if re.search(pattern, user_input, re.IGNORECASE):
+                return True, f"Detected: {pattern}"
+        return False, ""
+    
+    def sanitize_input(self, user_input: str) -> str:
+        # 移除特殊标记
+        sanitized = re.sub(r'<\|.*?\|>', '', user_input)
+        # 长度限制
+        sanitized = sanitized[:4096]
+        return sanitized
+
+# 使用
+defense = PromptInjectionDefense()
+is_injection, reason = defense.detect_injection(user_input)
+if is_injection:
+    return {"error": "Input rejected for security"}
 ```
 
-## 输出审计配置
+## 三、访问控制
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: output-audit-config
+  name: api-rate-limits
+data:
+  limits.yaml: |
+    tiers:
+      free:
+        requests_per_hour: 100
+        max_tokens: 1000
+      pro:
+        requests_per_hour: 10000
+        max_tokens: 4000
+      enterprise:
+        requests_per_hour: 100000
+        max_tokens: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: llm-inference-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: llm-inference
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: api-gateway
+```
+
+## 四、差分隐私训练
+
+```python
+from opacus import PrivacyEngine
+import torch
+
+# 启用差分隐私
+model = MyModel()
+optimizer = torch.optim.Adam(model.parameters())
+
+privacy_engine = PrivacyEngine()
+model, optimizer, train_loader = privacy_engine.make_private(
+    module=model,
+    optimizer=optimizer,
+    data_loader=train_loader,
+    noise_multiplier=1.1,
+    max_grad_norm=1.0
+)
+
+# 训练
+for epoch in range(epochs):
+    for batch in train_loader:
+        optimizer.zero_grad()
+        loss = model(batch)
+        loss.backward()
+        optimizer.step()
+    
+    # 隐私预算
+    epsilon = privacy_engine.get_epsilon(delta=1e-5)
+    print(f"ε = {epsilon:.2f}")
+```
+
+## 五、内容过滤
+
+```python
+class OutputFilter:
+    HARMFUL_PATTERNS = [
+        r"(password|api[_\s]?key)\s*[:=]",
+        r"\b\d{16}\b",  # 信用卡
+        r"\b\d{3}-\d{2}-\d{4}\b",  # SSN
+    ]
+    
+    def filter_output(self, output: str) -> str:
+        for pattern in self.HARMFUL_PATTERNS:
+            output = re.sub(pattern, "[REDACTED]", output)
+        return output
+
+# 集成到推理
+@app.post("/v1/chat/completions")
+def chat(request: dict):
+    # 输入检查
+    defense = PromptInjectionDefense()
+    if defense.detect_injection(request["messages"][-1]["content"])[0]:
+        raise HTTPException(403, "Rejected")
+    
+    # 生成
+    response = llm.generate(request["messages"])
+    
+    # 输出过滤
+    filter = OutputFilter()
+    response = filter.filter_output(response)
+    
+    return response
+```
+
+## 六、审计日志
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audit-config
 data:
   audit.yaml: |
-    output_filters:
-      # 有害内容检测
-      harmful_content:
-        enabled: true
-        categories:
-          - hate_speech
-          - violence
-          - adult_content
-          - self_harm
-        threshold: 0.7
-        action: block
-      
-      # 代码安全检查
-      code_security:
-        enabled: true
-        check_types:
-          - sql_injection
-          - xss
-          - command_injection
-        action: warn
-      
-      # 事实核查
-      fact_check:
-        enabled: false
-        external_api: "https://factcheck.example.com"
-    
-    logging:
-      enabled: true
-      log_inputs: true
-      log_outputs: true
-      retention_days: 90
-      storage: elasticsearch
-```
-
-## 安全网关部署
-
-```yaml
+    log_requests: true
+    log_responses: false  # 隐私考虑
+    retention_days: 90
+    fields:
+      - timestamp
+      - user_id
+      - model_name
+      - input_tokens
+      - output_tokens
+      - latency
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llm-security-gateway
+  name: audit-logger
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: llm-gateway
   template:
-    metadata:
-      labels:
-        app: llm-gateway
     spec:
       containers:
-      - name: gateway
-        image: llm-security-gateway:v1
-        env:
-        - name: UPSTREAM_LLM
-          value: "http://vllm-service:8000"
-        - name: FILTER_CONFIG
-          value: "/config/input_filter.yaml"
-        - name: AUDIT_CONFIG
-          value: "/config/audit.yaml"
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
+      - name: logger
+        image: fluent/fluentd:v1.16
         volumeMounts:
-        - name: config
-          mountPath: /config
-      volumes:
-      - name: config
-        configMap:
-          name: llm-safety-config
+        - name: logs
+          mountPath: /var/log
 ```
 
-## 差分隐私训练
+## 七、监控告警
 
 ```yaml
-apiVersion: batch/v1
-kind: Job
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
-  name: dp-training
+  name: security-alerts
 spec:
-  template:
-    spec:
-      containers:
-      - name: trainer
-        image: dp-llm-trainer:v1
-        args:
-        - --model_name=meta-llama/Llama-2-7b-hf
-        - --dp_epsilon=8.0
-        - --dp_delta=1e-5
-        - --max_grad_norm=1.0
-        - --noise_multiplier=1.1
-        - --batch_size=16
-        env:
-        - name: OPACUS_ENABLED
-          value: "true"
-        resources:
-          limits:
-            nvidia.com/gpu: 4
+  groups:
+  - name: llm_security
+    rules:
+    - alert: HighInjectionRate
+      expr: rate(prompt_injection_detected_total[5m]) > 0.1
+      annotations:
+        summary: "提示注入检测率>10%"
+    
+    - alert: UnauthorizedAccess
+      expr: rate(unauthorized_requests_total[5m]) > 1
+      annotations:
+        summary: "未授权访问尝试"
+    
+    - alert: AnomalousOutput
+      expr: avg(output_token_count) > 2000
+      annotations:
+        summary: "异常长输出，疑似数据泄露"
 ```
 
-## RBAC访问控制
+## 八、合规Checklist
 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: llm-user
-  namespace: llm-system
-rules:
-- apiGroups: [""]
-  resources: ["services"]
-  resourceNames: ["llm-inference"]
-  verbs: ["get"]
+- [ ] **GDPR合规**
+  - [ ] 用户数据删除机制
+  - [ ] 数据导出功能
+  - [ ] 隐私政策明示
+
+- [ ] **访问控制**
+  - [ ] API密钥认证
+  - [ ] 速率限制
+  - [ ] IP白名单
+
+- [ ] **审计**
+  - [ ] 请求日志记录
+  - [ ] 90天日志保留
+  - [ ] 安全事件告警
+
+- [ ] **模型保护**
+  - [ ] 模型水印
+  - [ ] 输入/输出验证
+  - [ ] 异常检测
+
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: llm-access-policy
-data:
-  policy.yaml: |
-    access_control:
-      default_policy: deny
-      roles:
-        admin:
-          allowed_models: ["*"]
-          max_tokens_per_request: 8192
-          rate_limit: 1000/min
-        developer:
-          allowed_models: ["llama-2-7b", "mistral-7b"]
-          max_tokens_per_request: 4096
-          rate_limit: 100/min
-        user:
-          allowed_models: ["llama-2-7b"]
-          max_tokens_per_request: 2048
-          rate_limit: 20/min
-```
-
-## 模型水印
-
-```python
-# 水印配置示例
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: watermark-config
-data:
-  watermark.py: |
-    # 输出水印配置
-    WATERMARK_CONFIG = {
-        "enabled": True,
-        "algorithm": "kirchenbauer",  # 或 "aar"
-        "gamma": 0.25,
-        "delta": 2.0,
-        "seeding_scheme": "selfhash",
-        "detection_threshold": 4.0
-    }
-```
-
-## 安全监控指标
-
-| 指标 | 类型 | 说明 |
-|-----|-----|------|
-| `blocked_requests_total` | Counter | 被阻止请求数 |
-| `prompt_injection_detected` | Counter | 提示注入检测数 |
-| `pii_masked_total` | Counter | PII脱敏数 |
-| `harmful_content_blocked` | Counter | 有害内容阻止数 |
-| `safety_score` | Histogram | 安全评分分布 |
-
-## ACK LLM安全
-
-| 功能 | 说明 |
-|-----|------|
-| 内容安全 | 阿里云内容安全API |
-| 数据脱敏 | 敏感数据识别脱敏 |
-| 审计日志 | 操作审计日志 |
-| RAM集成 | 细粒度访问控制 |
+**相关**: [119-AI安全](../119-ai-security-model-protection.md) | **版本**: K8s v1.27+

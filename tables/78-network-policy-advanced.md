@@ -1,4 +1,4 @@
-# 表格78: NetworkPolicy高级配置
+# 78 - NetworkPolicy高级配置
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
@@ -337,3 +337,7 @@ kubectl run netshoot --rm -it --image=nicolaka/netshoot -- bash
 ---
 
 **NetworkPolicy原则**: 默认拒绝 + 最小权限开放 + 确保DNS访问 + 分层策略设计 + 持续审计验证
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

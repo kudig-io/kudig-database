@@ -1,6 +1,4 @@
-# 表格85: Egress流量管理
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+# 85 - Egress流量管理
 
 ## Egress流量控制方案
 
@@ -271,3 +269,7 @@ istioctl proxy-config routes <egress-gateway-pod>
 | 固定IP | 便于外部防火墙配置 |
 | L7控制 | URL级别访问控制 |
 | 监控告警 | 异常流量检测 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

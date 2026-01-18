@@ -1,6 +1,4 @@
-# 表格51: 容器镜像管理
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/containers/images](https://kubernetes.io/docs/concepts/containers/images/)
+# 51 - 容器镜像管理 (Container Images)
 
 ## 镜像命名规范
 
@@ -196,3 +194,7 @@ data:
 | v1.27 | 镜像Volume支持改进 |
 | v1.29 | 镜像拉取进度报告 |
 | v1.31 | OCI镜像布局支持 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

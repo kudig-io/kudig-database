@@ -1,6 +1,6 @@
 # Kubernetes 备份与恢复
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster](https://kubernetes.io/docs/tasks/administer-cluster/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 备份范围与策略
 
@@ -354,3 +354,7 @@ groups:
 | 验证 | 每周执行恢复验证 |
 | 文档 | 维护恢复手册 |
 | RTO/RPO | 明确定义并测试 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

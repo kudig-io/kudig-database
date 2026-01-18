@@ -1,6 +1,6 @@
 # 网络性能调优
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 网络性能关键参数
 
@@ -323,3 +323,7 @@ groups:
 | Service 延迟高 | 跨节点流量大 | 使用 internalTrafficPolicy: Local |
 | Pod 间带宽低 | 性能不达预期 | 检查 CNI 配置和 MTU |
 | 连接超时 | 间歇性失败 | 检查 keepalive 和超时设置 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

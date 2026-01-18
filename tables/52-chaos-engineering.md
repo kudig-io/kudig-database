@@ -1,4 +1,4 @@
-# 表格52: 混沌工程实践
+# 52 - 混沌工程实践
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [chaos-mesh.org](https://chaos-mesh.org/)
 
@@ -390,3 +390,7 @@ kubectl apply -f https://mirrors.chaos-mesh.org/v2.6.0/crd.yaml
 ---
 
 **混沌工程原则**: 从小范围开始 + 定义稳态假设 + 自动化持续 + 及时回滚 + 记录学习改进
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

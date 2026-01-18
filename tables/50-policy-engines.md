@@ -1,4 +1,4 @@
-# 表格50: 策略引擎与合规
+# 50 - 策略引擎与合规
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/policy](https://kubernetes.io/docs/concepts/policy/)
 
@@ -458,3 +458,7 @@ kubectl describe k8srequiredlabels require-team-label
 ---
 
 **策略管理原则**: 最小权限 + 纵深防御 + 持续审计 + 自动化合规检测
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

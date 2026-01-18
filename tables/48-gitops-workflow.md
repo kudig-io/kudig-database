@@ -1,4 +1,4 @@
-# 表格48: GitOps工作流
+# 48 - GitOps工作流
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [opengitops.dev](https://opengitops.dev/)
 
@@ -449,3 +449,7 @@ argocd repo add https://github.com/org/repo.git \
 ---
 
 **GitOps原则**: Git是唯一事实来源 + 声明式配置 + 自动同步 + 渐进式交付 + 安全密钥管理
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,225 +1,188 @@
-# 表格63: LLM成本监控与优化
+# 63 - LLM成本监控与FinOps
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration](https://kubernetes.io/docs/concepts/cluster-administration/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [Kubecost](https://www.kubecost.com/)
 
-## LLM成本构成
+## 一、成本构成
 
-| 成本类型 | 占比 | 优化方向 |
-|---------|-----|---------|
-| GPU计算 | 60-80% | 量化/批处理/弹性伸缩 |
-| 存储 | 10-20% | 模型压缩/缓存 |
-| 网络 | 5-10% | CDN/本地缓存 |
-| 人力运维 | 5-10% | 自动化 |
+| 类型 | 占比 | 主要因素 | 优化方向 |
+|-----|------|---------|---------|
+| **GPU计算** | 65% | 实例类型、利用率 | Spot实例、批处理 |
+| **存储** | 20% | 模型、数据集大小 | 分层存储、压缩 |
+| **网络** | 10% | 跨区域传输 | CDN、区域优化 |
+| **其他** | 5% | 日志、监控 | 保留策略 |
 
-## 成本监控指标
+## 二、GPU成本对比
 
-| 指标 | 计算方式 | 说明 |
-|-----|---------|------|
-| 单请求成本 | GPU时间 × 单价 / 请求数 | 请求平均成本 |
-| Token成本 | 总成本 / 总Token | 每Token成本 |
-| GPU利用率 | 实际使用 / 分配资源 | 资源效率 |
-| 空闲成本 | 空闲时间 × GPU单价 | 浪费成本 |
+| GPU | 价格/小时 | Spot价格 | 节省 | 场景 |
+|-----|----------|---------|------|------|
+| A100 80GB | $32.77 | ~$10 | 70% | 训练 |
+| A10G 24GB | $1.006 | ~$0.30 | 70% | 推理 |
+| T4 16GB | $0.526 | ~$0.16 | 70% | 轻量推理 |
 
-## 成本监控ConfigMap
+## 三、Kubecost部署
+
+```bash
+helm install kubecost kubecost/cost-analyzer \
+  --namespace kubecost \
+  --create-namespace \
+  --set kubecostToken="your-token"
+
+kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090:9090
+```
+
+## 四、成本标签
 
 ```yaml
 apiVersion: v1
-kind: ConfigMap
+kind: Pod
 metadata:
-  name: llm-cost-config
-data:
-  pricing.yaml: |
-    gpu_pricing:
-      nvidia-a100-80gb:
-        on_demand: 3.5  # $/hour
-        spot: 1.2
-        reserved_1y: 2.1
-      nvidia-a10:
-        on_demand: 1.5
-        spot: 0.5
-        reserved_1y: 0.9
-      nvidia-t4:
-        on_demand: 0.5
-        spot: 0.15
-        reserved_1y: 0.3
-    
-    model_costs:
-      llama-2-70b:
-        input_tokens: 0.0008  # $/1K tokens
-        output_tokens: 0.0016
-      llama-2-7b:
-        input_tokens: 0.0001
-        output_tokens: 0.0002
-      gpt-4:
-        input_tokens: 0.03
-        output_tokens: 0.06
-```
-
-## 成本追踪Deployment
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: llm-cost-tracker
+  name: llm-training-pod
+  labels:
+    team: ml-research
+    project: llama2-finetuning
+    cost-center: "R&D"
+  annotations:
+    cost.kubernetes.io/team: "ml-research"
+    cost.kubernetes.io/project: "llama2"
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: cost-tracker
-  template:
-    spec:
-      containers:
-      - name: tracker
-        image: llm-cost-tracker:v1
-        env:
-        - name: PROMETHEUS_URL
-          value: "http://prometheus:9090"
-        - name: PRICING_CONFIG
-          value: "/config/pricing.yaml"
-        ports:
-        - containerPort: 8080
-          name: metrics
-        volumeMounts:
-        - name: config
-          mountPath: /config
-      volumes:
-      - name: config
-        configMap:
-          name: llm-cost-config
+  containers:
+  - name: trainer
+    resources:
+      limits:
+        nvidia.com/gpu: 4
 ```
 
-## Prometheus成本查询
+## 五、成本监控API
+
+```python
+import requests
+
+class KubecostAPI:
+    def __init__(self, url="http://kubecost:9090"):
+        self.base_url = url
+    
+    def get_allocation(self, window="7d"):
+        url = f"{self.base_url}/model/allocation"
+        params = {"window": window, "aggregate": "namespace"}
+        response = requests.get(url, params=params)
+        return response.json()
+    
+    def get_cost_by_label(self, label="team"):
+        url = f"{self.base_url}/model/allocation"
+        params = {"aggregate": f"label:{label}"}
+        response = requests.get(url, params=params)
+        return response.json()
+
+# 使用
+kubecost = KubecostAPI()
+costs = kubecost.get_allocation(window="30d")
+print(f"Monthly cost: ${costs['total_cost']:.2f}")
+```
+
+## 六、成本告警
 
 ```yaml
-# 成本告警规则
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: llm-cost-alerts
+  name: cost-alerts
 spec:
   groups:
-  - name: llm-costs
+  - name: cost_management
     rules:
-    - alert: HighLLMCostPerRequest
-      expr: |
-        sum(rate(llm_request_cost_dollars[1h])) / 
-        sum(rate(llm_requests_total[1h])) > 0.1
-      for: 30m
-      labels:
-        severity: warning
+    - alert: HighDailyCost
+      expr: sum(increase(kubecost_cluster_cost_total[24h])) > 1000
       annotations:
-        summary: "LLM单请求成本过高"
-        
-    - alert: LowGPUUtilization
-      expr: |
-        avg(DCGM_FI_DEV_GPU_UTIL{job="llm-inference"}) < 30
+        summary: "日成本超过$1000"
+    
+    - alert: GPUIdleWaste
+      expr: avg(DCGM_FI_DEV_GPU_UTIL) < 30 and kubecost_pod_gpu_cost > 0
       for: 1h
-      labels:
-        severity: warning
       annotations:
-        summary: "GPU利用率过低,考虑缩容"
-        
-    - alert: HighIdleCost
+        summary: "GPU利用率<30%持续1小时"
+    
+    - alert: CostSpike
       expr: |
-        sum(llm_gpu_idle_cost_dollars[1h]) > 100
-      for: 1h
-      labels:
-        severity: warning
+        (sum(increase(kubecost_namespace_cost_total[1h]))
+        / avg_over_time(sum(increase(kubecost_namespace_cost_total[1h]))[24h:1h]))
+        > 2
       annotations:
-        summary: "GPU空闲成本过高"
+        summary: "成本激增200%"
 ```
 
-## 成本优化策略
+## 七、优化策略
 
-| 策略 | 节省比例 | 实现方式 |
-|-----|---------|---------|
-| 模型量化 | 50-75% | INT4/INT8量化 |
-| 批处理优化 | 20-40% | 动态批处理 |
-| 抢占式实例 | 60-80% | Spot实例 |
-| 弹性伸缩 | 30-50% | 按需扩缩 |
-| 缓存复用 | 10-30% | KV Cache/语义缓存 |
-| 模型蒸馏 | 40-60% | 小模型替代 |
-
-## 语义缓存配置
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: semantic-cache
-spec:
-  template:
-    spec:
-      containers:
-      - name: cache
-        image: gptcache:latest
-        env:
-        - name: CACHE_BACKEND
-          value: "redis"
-        - name: REDIS_URL
-          value: "redis://redis:6379"
-        - name: SIMILARITY_THRESHOLD
-          value: "0.95"
-        - name: EMBEDDING_MODEL
-          value: "sentence-transformers/all-MiniLM-L6-v2"
-        - name: MAX_CACHE_SIZE
-          value: "100000"
-        ports:
-        - containerPort: 8080
-```
-
-## 弹性伸缩配置
-
-```yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: llm-cost-aware-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: vllm-inference
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-  - type: External
-    external:
-      metric:
-        name: request_queue_length
-      target:
-        type: AverageValue
-        averageValue: "5"
-  behavior:
-    scaleUp:
-      stabilizationWindowSeconds: 60
-      policies:
-      - type: Pods
-        value: 2
-        periodSeconds: 60
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-      - type: Pods
-        value: 1
-        periodSeconds: 120
-```
-
-## 成本报表Dashboard
-
-| 维度 | 指标 | 周期 |
+### 训练成本优化
+| 策略 | 效果 | 实现 |
 |-----|------|------|
-| 模型 | 各模型成本占比 | 日/周/月 |
-| 团队 | 团队成本分摊 | 月 |
-| 应用 | 应用成本追踪 | 日/周 |
-| 时段 | 高峰/低谷成本 | 日 |
+| Spot实例 | 节省70% | Karpenter配置 |
+| 混合精度 | 节省40% | FP16训练 |
+| Early Stopping | 节省25% | 验证集监控 |
+| 梯度累积 | 节省30% | 使用小GPU |
 
-## ACK成本优化
+### 推理成本优化
+| 策略 | 效果 | 实现 |
+|-----|------|------|
+| 批处理 | 节省80% | vLLM配置 |
+| 量化 | 节省75% | INT8/INT4 |
+| 缓存 | 节省30% | Redis |
+| 自动扩缩容 | 节省50% | HPA |
 
-| 功能 | 说明 |
-|-----|------|
-| 抢占式实例 | 低成本GPU |
-| 弹性配额 | 资源共享 |
-| 成本分析 | 细粒度成本 |
-| 闲置检测 | 资源浪费告警 |
+## 八、预算管理
+
+```python
+class BudgetManager:
+    def __init__(self, monthly_budget):
+        self.monthly_budget = monthly_budget
+        self.daily_budget = monthly_budget / 30
+    
+    def check_status(self, current_spend, days_elapsed):
+        projected = (current_spend / days_elapsed) * 30
+        
+        if projected > self.monthly_budget * 1.1:
+            return "CRITICAL", "预计超支10%"
+        elif projected > self.monthly_budget:
+            return "WARNING", "预计超支"
+        else:
+            return "OK", "预算健康"
+
+# 使用
+budget = BudgetManager(monthly_budget=50000)
+status, msg = budget.check_status(current_spend=25000, days_elapsed=15)
+print(f"Status: {status}, {msg}")
+```
+
+## 九、成本报告
+
+```python
+def generate_monthly_report(kubecost_api):
+    # 按团队聚合
+    team_costs = kubecost_api.get_cost_by_label("team")
+    
+    report = []
+    for team, cost in team_costs.items():
+        report.append({
+            "Team": team,
+            "Cost": f"${cost:.2f}",
+            "Percentage": f"{cost/total_cost*100:.1f}%"
+        })
+    
+    return pd.DataFrame(report)
+
+report = generate_monthly_report(kubecost)
+print(report.to_markdown())
+```
+
+## 十、ROI计算
+
+**优化前后对比:**
+| 项目 | 优化前 | 优化后 | 节省 |
+|-----|--------|--------|------|
+| Spot实例 | $180K | $54K | 70% |
+| GPU利用率 | $120K | $72K | 40% |
+| 存储分层 | $48K | $19K | 60% |
+| 推理优化 | $78K | $27K | 65% |
+| **总计** | **$426K** | **$172K** | **60%** |
+
+---
+**相关**: [120-AI成本FinOps](../120-ai-cost-analysis-finops.md) | **版本**: Kubecost 1.106+

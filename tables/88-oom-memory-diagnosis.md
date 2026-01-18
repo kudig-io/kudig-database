@@ -1,4 +1,4 @@
-# 表格88: OOM和内存问题诊断
+# 88 - OOM和内存问题诊断
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/configuration/manage-resources-containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
@@ -227,3 +227,7 @@ spec:
 ---
 
 **OOM防治原则**: 合理设置limits > 监控内存使用 > 配置VPA > JVM容器感知 > 设置驱逐阈值
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

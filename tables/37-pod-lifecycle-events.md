@@ -1,4 +1,4 @@
-# 表格37：Pod生命周期事件表
+# 37 - Pod生命周期事件表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
@@ -202,3 +202,7 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 ---
 
 **生命周期原则**: 正确配置探针，设置PDB，处理优雅终止
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

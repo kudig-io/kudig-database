@@ -1,6 +1,4 @@
-# 表格54: Windows容器支持
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/windows](https://kubernetes.io/docs/concepts/windows/)
+# 54 - Windows容器支持
 
 ## Windows节点要求
 
@@ -208,3 +206,7 @@ Get-EventLog -LogName Application -Newest 50
 | v1.26 | Windows特权容器改进 |
 | v1.27 | Windows CSI代理改进 |
 | v1.28 | Windows网络策略增强 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

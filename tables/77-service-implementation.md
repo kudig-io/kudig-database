@@ -1,6 +1,4 @@
-# 表格77: Service实现机制
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/service](https://kubernetes.io/docs/concepts/services-networking/service/)
+# 77 - Service实现机制
 
 ## Service类型对比
 
@@ -172,3 +170,7 @@ kubectl run test --image=busybox --rm -it -- wget -qO- <service-ip>
 | v1.27 | Service拓扑感知改进 |
 | v1.29 | nftables模式Alpha |
 | v1.30 | TrafficDistribution字段 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

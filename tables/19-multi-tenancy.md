@@ -1,4 +1,4 @@
-# 表格19：多租户管理表
+# 19 - 多租户管理表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 
@@ -289,6 +289,105 @@ roleRef:
 | **监控隔离** | 租户独立Dashboard | P2 |
 | **日志隔离** | 租户独立日志存储 | P2 |
 
+# 19 - 多租户管理表
+
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
+
+(保持原有内容基础上补充)
+
+## 多租户成本分摊
+
+### Kubecost集成
+
+```yaml
+# 安装Kubecost
+helm repo add kubecost https://kubecost.github.io/cost-analyzer/
+helm install kubecost kubecost/cost-analyzer \
+  --namespace kubecost \
+  --create-namespace \
+  --set kubecostToken="<your-token>"
+```
+
+### 成本标签策略
+
+```yaml
+# 统一标签规范
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a
+  labels:
+    tenant: a
+    cost-center: "CC-1001"
+    department: "engineering"
+    environment: "production"
+    
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: tenant-a
+  labels:
+    app: myapp
+    tenant: a
+    cost-center: "CC-1001"
+spec:
+  template:
+    metadata:
+      labels:
+        app: myapp
+        tenant: a
+```
+
+### 成本告警
+
+```yaml
+# 租户成本超预算告警
+- alert: TenantCostOverBudget
+  expr: |
+    sum(kubecost_pod_cost_hourly{namespace=~"tenant-.*"}) by (namespace) * 24 * 30 > 10000
+  labels:
+    severity: warning
+  annotations:
+    summary: "Tenant {{ $labels.namespace }} monthly cost exceeds $10000"
+```
+
+## 多租户自服务平台
+
+### Kubernetes Dashboard + RBAC
+
+```yaml
+# 租户只能看到自己的命名空间
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tenant-namespace-viewer
+rules:
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list"]
+  resourceNames: ["tenant-a"]  # 仅允许访问自己的命名空间
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tenant-a-namespace-viewer
+subjects:
+- kind: User
+  name: "tenant-a-admin"
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: tenant-namespace-viewer
+  apiGroup: rbac.authorization.k8s.io
+```
+
 ---
 
-**多租户原则**: 默认隔离，最小权限，资源配额，审计追踪
+**多租户原则**: 默认隔离，最小权限，资源配额，审计追踪，成本透明
+
+---
+
+**表格维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com)

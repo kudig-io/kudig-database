@@ -1,4 +1,4 @@
-# 表格87: 节点NotReady状态诊断
+# 87 - 节点NotReady状态诊断
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
 
@@ -250,3 +250,7 @@ aliyun cs POST /clusters/{ClusterId}/nodes/{NodeId}/repair
 ---
 
 **NotReady诊断原则**: 检查kubelet → 检查容器运行时 → 检查资源 → 检查网络 → 检查证书 → 必要时重启
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

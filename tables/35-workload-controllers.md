@@ -1,159 +1,109 @@
-# 表格35: 工作负载控制器详解
+# 35 - 工作负载控制器详解 (Workload Controllers)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads/controllers](https://kubernetes.io/docs/concepts/workloads/controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [Kubernetes Workloads](https://kubernetes.io/docs/concepts/workloads/)
 
-## 控制器类型对比
+## 控制器核心特征矩阵 (Controller Matrix)
 
-| 控制器 | 用途 | Pod标识 | 扩缩容 | 更新策略 | 有序性 | 网络标识 |
-|-------|-----|---------|-------|---------|-------|---------|
-| **Deployment** | 无状态应用 | 随机 | ✅ | RollingUpdate/Recreate | ❌ | 无固定 |
-| **StatefulSet** | 有状态应用 | 有序固定 | ✅ | RollingUpdate/OnDelete | ✅ | 固定DNS |
-| **DaemonSet** | 节点守护进程 | 每节点一个 | 自动 | RollingUpdate/OnDelete | ❌ | 节点绑定 |
-| **ReplicaSet** | 副本管理 | 随机 | ✅ | - | ❌ | 无固定 |
-| **Job** | 一次性任务 | 随机 | ❌ | - | ❌ | 无固定 |
-| **CronJob** | 定时任务 | 随机 | ❌ | - | ❌ | 无固定 |
-| **ReplicationController** | 副本管理(废弃) | 随机 | ✅ | - | ❌ | 无固定 |
+| 控制器 (Controller) | 核心用途 (Primary Use) | 标识 (Identity) | 扩缩容 (Scaling) | 更新策略 (Update) | 有序性 (Ordered) |
+|-------------------|-------------------|---------------|----------------|-----------------|----------------|
+| **Deployment** | 无状态微服务 | 随机 (Random) | ✅ HPA/VPA | RollingUpdate | ❌ |
+| **StatefulSet** | 有状态数据库/中间件 | 固定 (Index) | ✅ HPA | RollingUpdate | ✅ |
+| **DaemonSet** | 节点级插件/采集器 | 节点绑定 | ❌ 自动跟随 | RollingUpdate | ❌ |
+| **Job** | 批处理/离线计算 | 随机 | ❌ 并发控制 | - | ❌ |
+| **CronJob** | 定时任务/自动运维 | 随机 | ❌ 并发控制 | - | ❌ |
 
-## Deployment配置
+## 1. Deployment: 生产级最佳实践 (Production Patterns)
 
-| 字段 | 类型 | 默认值 | 说明 |
-|-----|-----|-------|------|
-| `spec.replicas` | int | 1 | 副本数 |
-| `spec.selector` | LabelSelector | 必需 | Pod选择器 |
-| `spec.template` | PodTemplateSpec | 必需 | Pod模板 |
-| `spec.strategy.type` | string | RollingUpdate | 更新策略 |
-| `spec.strategy.rollingUpdate.maxSurge` | int/% | 25% | 最大超出副本数 |
-| `spec.strategy.rollingUpdate.maxUnavailable` | int/% | 25% | 最大不可用副本数 |
-| `spec.minReadySeconds` | int | 0 | 最小就绪秒数 |
-| `spec.revisionHistoryLimit` | int | 10 | 保留历史版本数 |
-| `spec.progressDeadlineSeconds` | int | 600 | 进度超时时间 |
-| `spec.paused` | bool | false | 暂停部署 |
-
-## Deployment示例
+### 1.1 标准生产模板
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  labels:
-    app: nginx
+  name: web-api
+  namespace: production
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
+  replicas: 6
+  revisionHistoryLimit: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0  # 零停机更新
-  minReadySeconds: 10
-  revisionHistoryLimit: 5
-  progressDeadlineSeconds: 300
+      maxSurge: 1          # 保证 100% 可用
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: web-api
   template:
     metadata:
       labels:
-        app: nginx
-      annotations:
-        prometheus.io/scrape: "true"
+        app: web-api
     spec:
-      containers:
-      - name: nginx
-        image: nginx:1.25
-        ports:
-        - containerPort: 80
-          name: http
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 500m
-            memory: 512Mi
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        lifecycle:
-          preStop:
-            exec:
-              command: ["/bin/sh", "-c", "nginx -s quit; sleep 10"]
-      terminationGracePeriodSeconds: 30
       topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: topology.kubernetes.io/zone
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
           matchLabels:
-            app: nginx
+            app: web-api
+      containers:
+      - name: web-api
+        image: registry.example.com/web-api:1.0.0
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
 ```
 
-## Deployment滚动更新策略
+### 1.2 关键优化点
 
-| 策略组合 | maxSurge | maxUnavailable | 效果 | 适用场景 |
-|---------|----------|----------------|------|---------|
-| 零停机 | 1 | 0 | 先创建再删除 | 生产环境 |
-| 快速更新 | 25% | 25% | 同时创建删除 | 开发测试 |
-| 资源受限 | 0 | 1 | 先删除再创建 | 资源紧张 |
-| 金丝雀 | 1 | 0 + pause | 分批发布 | 风险控制 |
+- **更新安全**:
+  - 使用 `maxSurge: 1` 和 `maxUnavailable: 0` 实现 100% 可用性更新。
+  - 配合 **PodDisruptionBudget (PDB)** 防止节点维护时副本数过低。
+- **调度增强**:
+  - 使用 `topologySpreadConstraints` 保证跨 AZ/节点均匀分布。
+  - 使用 `podAntiAffinity` 避免同一 Deployment 的副本堆叠在少数节点。
+- **回滚与灰度**:
+  - `kubectl rollout pause/resume deployment/web-api` 控制灰度节奏。
+  - `kubectl rollout undo deployment/web-api --to-revision=2` 快速回滚。
 
-```bash
-# 滚动更新操作
-kubectl set image deployment/nginx nginx=nginx:1.26
-kubectl rollout status deployment/nginx
-kubectl rollout history deployment/nginx
-kubectl rollout undo deployment/nginx
-kubectl rollout undo deployment/nginx --to-revision=2
-kubectl rollout pause deployment/nginx   # 暂停发布
-kubectl rollout resume deployment/nginx  # 恢复发布
+---
 
-# 金丝雀发布(手动控制)
-kubectl set image deployment/nginx nginx=nginx:1.26
-kubectl rollout pause deployment/nginx
-# 验证后继续
-kubectl rollout resume deployment/nginx
-```
+## 2. StatefulSet: 有状态运维 (Stateful Ops)
 
-## StatefulSet配置
-
-| 字段 | 类型 | 说明 |
-|-----|-----|------|
-| `spec.serviceName` | string | Headless Service名称(必需) |
-| `spec.podManagementPolicy` | string | OrderedReady/Parallel |
-| `spec.updateStrategy.type` | string | RollingUpdate/OnDelete |
-| `spec.updateStrategy.rollingUpdate.partition` | int | 分区更新阈值 |
-| `spec.volumeClaimTemplates` | []PVC | PVC模板 |
-| `spec.persistentVolumeClaimRetentionPolicy` | Policy | PVC保留策略(v1.27+) |
-| `spec.minReadySeconds` | int | 最小就绪秒数 |
-| `spec.ordinals.start` | int | 起始序号(v1.27+) |
-
-## StatefulSet示例
+### 2.1 有状态集群模板
 
 ```yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  namespace: database
 spec:
   serviceName: mysql-headless
   replicas: 3
-  podManagementPolicy: OrderedReady  # 或Parallel
+  podManagementPolicy: Parallel  # 加快扩容速度
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
-      partition: 0       # 分区更新:只更新序号>=partition的Pod
-      maxUnavailable: 1  # v1.24+
+      partition: 1              # 仅更新序号 >=1 的 Pod, 实现金丝雀
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain        # 删除 StatefulSet 时保留 PVC
+    whenScaled: Retain
   selector:
     matchLabels:
       app: mysql
@@ -162,295 +112,127 @@ spec:
       labels:
         app: mysql
     spec:
-      initContainers:
-      - name: init-mysql
-        image: mysql:8.0
-        command:
-        - bash
-        - "-c"
-        - |
-          # 根据序号设置server-id
-          [[ $HOSTNAME =~ -([0-9]+)$ ]] || exit 1
-          ordinal=${BASH_REMATCH[1]}
-          echo [mysqld] > /mnt/conf.d/server-id.cnf
-          echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
-        volumeMounts:
-        - name: conf
-          mountPath: /mnt/conf.d
       containers:
       - name: mysql
         image: mysql:8.0
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
         ports:
         - containerPort: 3306
-          name: mysql
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
-        - name: conf
-          mountPath: /etc/mysql/conf.d
-        resources:
-          requests:
-            cpu: 500m
-            memory: 1Gi
-          limits:
-            cpu: 2
-            memory: 4Gi
-        livenessProbe:
-          exec:
-            command: ["mysqladmin", "ping"]
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          exec:
-            command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
-          initialDelaySeconds: 5
-          periodSeconds: 2
-      volumes:
-      - name: conf
-        emptyDir: {}
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: alicloud-disk-ssd
       resources:
         requests:
-          storage: 100Gi
-  persistentVolumeClaimRetentionPolicy:
-    whenDeleted: Delete   # 删除StatefulSet时删除PVC
-    whenScaled: Retain    # 缩容时保留PVC
----
-# Headless Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-headless
-spec:
-  clusterIP: None
-  selector:
-    app: mysql
-  ports:
-  - port: 3306
-    name: mysql
+          storage: 200Gi
+      storageClassName: fast-ssd-pl2
 ```
 
-## StatefulSet Pod标识
+### 2.2 设计要点
 
-| Pod名称 | DNS名称 | 说明 |
-|--------|--------|------|
-| mysql-0 | mysql-0.mysql-headless.ns.svc.cluster.local | 第一个Pod |
-| mysql-1 | mysql-1.mysql-headless.ns.svc.cluster.local | 第二个Pod |
-| mysql-2 | mysql-2.mysql-headless.ns.svc.cluster.local | 第三个Pod |
+- **网络标识**: 必须配合 **Headless Service** 维持 DNS 持久化 (`pod-n.svc.ns.svc.cluster.local`)。
+- **存储保留**: 使用 `persistentVolumeClaimRetentionPolicy` 控制删除/缩容时 PVC 是否保留。
+- **有序性**: 默认按照序号一个一个滚动, 关键业务可以利用 `partition` 做分批金丝雀更新。
 
-## DaemonSet配置
+---
 
-| 字段 | 说明 | 默认值 |
-|-----|------|-------|
-| `spec.updateStrategy.type` | RollingUpdate/OnDelete | RollingUpdate |
-| `spec.updateStrategy.rollingUpdate.maxSurge` | 最大超出(v1.22+) | 0 |
-| `spec.updateStrategy.rollingUpdate.maxUnavailable` | 最大不可用 | 1 |
-| `spec.minReadySeconds` | 最小就绪秒数 | 0 |
-| `spec.revisionHistoryLimit` | 历史版本保留数 | 10 |
+## 3. DaemonSet: 节点全覆盖 (Node-wide Coverage)
+
+### 3.1 系统 DaemonSet 模板
 
 ```yaml
-# DaemonSet示例 - 日志采集
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: fluentd
-  namespace: kube-system
+  name: node-exporter
+  namespace: monitoring
 spec:
   selector:
     matchLabels:
-      name: fluentd
+      app: node-exporter
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 0
+      maxUnavailable: 10%   # 控制同时升级的节点比例
   template:
     metadata:
       labels:
-        name: fluentd
+        app: node-exporter
     spec:
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+      - operator: "Exists"  # 覆盖所有污点节点, 包含 master/control-plane
       containers:
-      - name: fluentd
-        image: fluent/fluentd:v1.16
+      - name: node-exporter
+        image: prom/node-exporter:v1.7.0
         resources:
-          limits:
-            memory: 500Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
-        volumeMounts:
-        - name: varlog
-          mountPath: /var/log
-          readOnly: true
-        - name: containers
-          mountPath: /var/lib/docker/containers
-          readOnly: true
-      volumes:
-      - name: varlog
-        hostPath:
-          path: /var/log
-      - name: containers
-        hostPath:
-          path: /var/lib/docker/containers
-      # 选择运行节点
-      nodeSelector:
-        kubernetes.io/os: linux
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
 ```
 
-## Job配置
+### 3.2 调优要点
 
-| 字段 | 类型 | 默认值 | 说明 |
-|-----|-----|-------|------|
-| `spec.completions` | int | 1 | 完成次数 |
-| `spec.parallelism` | int | 1 | 并行度 |
-| `spec.backoffLimit` | int | 6 | 重试次数 |
-| `spec.activeDeadlineSeconds` | int | - | 超时时间 |
-| `spec.ttlSecondsAfterFinished` | int | - | 完成后TTL |
-| `spec.completionMode` | string | NonIndexed | NonIndexed/Indexed |
-| `spec.suspend` | bool | false | 挂起Job |
-| `spec.podFailurePolicy` | Policy | - | 失败策略(v1.26+) |
-| `spec.backoffLimitPerIndex` | int | - | 按索引重试(v1.29+) |
+- `maxUnavailable` 与集群规模成比例, 推荐 5%~20%。
+- 必须包含 Master/Control-Plane 容忍度, 确保监控/日志插件覆盖全集群。
+- 对 IO/CPU 敏感业务, 应通过 `nodeSelector`/`affinity` 限制 DaemonSet 仅运行在指定节点池。
 
-## Job示例
+---
+
+## 4. CronJob: 精准调度 (Precise Scheduling)
+
+### 4.1 生产级 CronJob 模板
 
 ```yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: data-processing
-spec:
-  completions: 10
-  parallelism: 3
-  completionMode: Indexed
-  backoffLimit: 3
-  ttlSecondsAfterFinished: 3600
-  podFailurePolicy:
-    rules:
-    - action: FailJob
-      onExitCodes:
-        containerName: processor
-        operator: In
-        values: [1, 2]
-    - action: Ignore
-      onPodConditions:
-      - type: DisruptionTarget
-  template:
-    spec:
-      restartPolicy: Never
-      containers:
-      - name: processor
-        image: processor:v1
-        env:
-        - name: JOB_COMPLETION_INDEX
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
-```
-
-## CronJob配置
-
-| 字段 | 说明 | 默认值 |
-|-----|------|-------|
-| `spec.schedule` | Cron表达式 | 必需 |
-| `spec.timeZone` | 时区(v1.27+ GA) | UTC |
-| `spec.concurrencyPolicy` | Allow/Forbid/Replace | Allow |
-| `spec.startingDeadlineSeconds` | 启动截止时间 | 无限制 |
-| `spec.successfulJobsHistoryLimit` | 成功历史保留数 | 3 |
-| `spec.failedJobsHistoryLimit` | 失败历史保留数 | 1 |
-| `spec.suspend` | 挂起CronJob | false |
-
-```yaml
-# CronJob示例 - 数据库备份
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: db-backup
+  namespace: ops
 spec:
-  schedule: "0 2 * * *"  # 每天凌晨2点
-  timeZone: "Asia/Shanghai"
-  concurrencyPolicy: Forbid  # 禁止并发执行
-  startingDeadlineSeconds: 300
+  schedule: "0 2 * * *"        # 每天凌晨 2 点
+  timeZone: "Asia/Shanghai"    # v1.27+ GA
+  concurrencyPolicy: Forbid      # 防止任务堆积
   successfulJobsHistoryLimit: 3
-  failedJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
   jobTemplate:
     spec:
       backoffLimit: 2
       activeDeadlineSeconds: 3600
-      ttlSecondsAfterFinished: 86400
       template:
         spec:
-          restartPolicy: OnFailure
+          restartPolicy: Never
           containers:
           - name: backup
-            image: mysql:8.0
-            command:
-            - /bin/sh
-            - -c
-            - |
-              mysqldump -h $DB_HOST -u $DB_USER -p$DB_PASSWORD \
-                --all-databases | gzip > /backup/backup-$(date +%Y%m%d).sql.gz
+            image: registry.example.com/backup:1.0.0
             env:
             - name: DB_HOST
-              value: mysql-0.mysql-headless
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials
-                  key: password
-            volumeMounts:
-            - name: backup
-              mountPath: /backup
-          volumes:
-          - name: backup
-            persistentVolumeClaim:
-              claimName: backup-pvc
+              value: mysql-0.mysql.database.svc.cluster.local
 ```
 
-## Cron表达式参考
+### 4.2 常见坑位
 
-| 表达式 | 说明 |
-|-------|------|
-| `*/5 * * * *` | 每5分钟 |
-| `0 * * * *` | 每小时整点 |
-| `0 2 * * *` | 每天凌晨2点 |
-| `0 2 * * 0` | 每周日凌晨2点 |
-| `0 2 1 * *` | 每月1日凌晨2点 |
-| `0 2 1 1 *` | 每年1月1日凌晨2点 |
-
-## 版本变更记录
-
-| 版本 | 变更内容 | 影响 |
-|------|---------|------|
-| v1.24 | StatefulSet maxUnavailable | 并行更新支持 |
-| v1.25 | StatefulSet minReadySeconds GA | 就绪检查更精确 |
-| v1.26 | Job podFailurePolicy Beta | 更精细的失败处理 |
-| v1.27 | StatefulSet startOrdinal, CronJob timeZone GA | 序号/时区控制 |
-| v1.28 | Job podReplacementPolicy Alpha | Pod替换策略 |
-| v1.29 | Job backoffLimitPerIndex GA | 按索引重试 |
-| v1.30 | Job managedBy字段 | 外部Job控制器 |
-| v1.31 | Job successPolicy GA | 成功策略控制 |
+- 未设置 `timeZone` 导致跨时区集群执行时间与预期不符。
+- 未设置 `concurrencyPolicy: Forbid` 导致长时间任务堆积, 撑爆数据库连接池。
+- 未配置 `activeDeadlineSeconds`, 导致 Job 永远不退出, 形成“僵尸任务”。
 
 ---
 
-**工作负载选择原则**: 无状态用Deployment + 有状态用StatefulSet + 节点级用DaemonSet + 一次性用Job + 定时用CronJob
+## 5. 故障排查路线 (Troubleshooting)
+
+| 场景 | 典型症状 | 排查命令 | 处理建议 |
+|------|----------|----------|----------|
+| **Deployment 不滚动** | `kubectl rollout status` 卡住 | `kubectl describe deploy` / `kubectl get events` | 检查探针/资源是否导致新 Pod 不 Ready |
+| **StatefulSet 卡在某个序号** | 某 Pod 一直 Pending/CrashLoop | `kubectl describe pod` | 多为存储/PV 绑定问题, 结合 PV/PVC 表排查 |
+| **DaemonSet 部分节点无 Pod** | 某些节点未运行 Daemon | `kubectl describe daemonset` / `kubectl describe node` | 检查污点/选择器是否排除了这些节点 |
+| **CronJob 不触发** | 预期时间没生成 Job | `kubectl get cronjob -A` / `kubectl describe cronjob` | 检查 `schedule/timeZone` 与控制器日志 |
+
+---
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

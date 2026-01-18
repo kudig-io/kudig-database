@@ -1,6 +1,4 @@
-# 表格75: Sidecar容器模式
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads/pods/sidecar-containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+# 75 - Sidecar容器模式
 
 ## Sidecar容器类型(v1.28+)
 
@@ -235,3 +233,7 @@ kubectl get pod <pod-name> -o jsonpath='{.status.initContainerStatuses[*].ready}
 | v1.29 | 原生Sidecar容器Beta |
 | v1.30 | Sidecar启动顺序改进 |
 | v1.31 | 原生Sidecar GA准备 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

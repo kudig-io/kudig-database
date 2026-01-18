@@ -1,4 +1,4 @@
-# 表格43：镜像安全扫描表
+# 43 - 镜像安全扫描表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/containers/images](https://kubernetes.io/docs/concepts/containers/images/)
 
@@ -269,3 +269,7 @@ aliyun cr GetRepoTagScanSummary --RepoNamespace <ns> --RepoName <name> --Tag <ta
 ---
 
 **扫描原则**: 左移安全，自动化扫描，阻止高危
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
