@@ -1,6 +1,4 @@
-# 表格74: 容器生命周期钩子
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/containers/container-lifecycle-hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)
+# 74 - 容器生命周期钩子
 
 ## 生命周期钩子类型
 
@@ -265,3 +263,7 @@ kubectl get pod <pod-name> -o jsonpath='{.status.containerStatuses[*].lastState}
 | v1.25 | tcpSocket钩子支持 |
 | v1.29 | sleep钩子GA |
 | v1.30 | 钩子超时配置改进 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

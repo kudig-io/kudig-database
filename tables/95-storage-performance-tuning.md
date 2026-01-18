@@ -1,6 +1,6 @@
 # 存储性能调优
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/storage](https://kubernetes.io/docs/concepts/storage/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## 存储类型性能对比
 
@@ -342,3 +342,7 @@ kubectl get events --field-selector reason=ProvisioningFailed
 | inode 耗尽 | 无法创建文件 | 清理小文件或重建 PV |
 | 挂载失败 | Pod Pending | 检查 CSI 驱动和节点亲和性 |
 | 扩容失败 | resize 报错 | 检查 StorageClass 是否允许扩容 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

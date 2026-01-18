@@ -1,6 +1,4 @@
-# 表格49: 服务网格进阶配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [istio.io/docs](https://istio.io/latest/docs/)
+# 49 - 服务网格进阶配置
 
 ## Istio流量管理CRD
 
@@ -270,3 +268,7 @@ spec:
 | 智能路由 | 基于AI的流量管理 |
 | 可观测性 | ARMS集成 |
 | 证书管理 | 自动证书轮换 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

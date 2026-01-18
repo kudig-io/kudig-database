@@ -1,4 +1,4 @@
-# 表格71: Gateway API配置
+# 71 - Gateway API配置
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)
 
@@ -296,3 +296,7 @@ spec:
 ---
 
 **Gateway API原则**: 角色分离(平台/开发者) + 标准化配置 + 多协议支持 + 安全的跨NS引用
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

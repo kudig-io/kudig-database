@@ -1,6 +1,4 @@
-# 表格79: Ingress控制器配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+# 79 - Ingress控制器配置
 
 ## Ingress控制器对比
 
@@ -223,3 +221,7 @@ spec:
 | v1.25 | IngressClass默认行为改进 |
 | v1.28 | Ingress路径匹配增强 |
 | v1.30 | Gateway API集成改进 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

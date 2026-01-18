@@ -1,6 +1,4 @@
-# 表格67: 证书管理与TLS配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/)
+# 67 - 证书管理与TLS配置
 
 ## Kubernetes证书类型
 
@@ -230,3 +228,7 @@ spec:
 | v1.27 | ClusterTrustBundle Alpha |
 | v1.29 | ClusterTrustBundle Beta |
 | v1.30 | 证书签名改进 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

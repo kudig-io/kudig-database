@@ -1,6 +1,4 @@
-# 表格68: API优先级与公平性(APF)
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/flow-control](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/)
+# 68 - API优先级与公平性(APF)
 
 ## APF概述
 
@@ -184,3 +182,7 @@ kubectl get --raw /debug/api_priority_and_fairness/dump_queues
 | v1.29 | APF GA,借用机制GA |
 | v1.30 | 监控指标增强 |
 | v1.31 | Seat计算优化 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,6 +1,4 @@
-# 表格32: API聚合层配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+# 32 - API聚合层配置
 
 ## API聚合架构
 
@@ -141,3 +139,7 @@ kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
 | v1.27 | 聚合发现API改进 |
 | v1.28 | API优先级和公平性增强 |
 | v1.29 | 聚合层性能优化 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

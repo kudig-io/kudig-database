@@ -1,264 +1,186 @@
-# 表格61: 多模态模型部署
+# 61 - 多模态模型部署
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [CLIP](https://github.com/openai/CLIP)
 
-## 多模态模型类型
+## 一、多模态模型对比
 
-| 类型 | 代表模型 | 功能 | 资源需求 |
-|-----|---------|------|---------|
-| 视觉-语言 | LLaVA, Qwen-VL | 图像理解/问答 | GPU 16GB+ |
-| 语音-语言 | Whisper, Qwen-Audio | 语音识别/理解 | GPU 8GB+ |
-| 文生图 | Stable Diffusion, DALL-E | 图像生成 | GPU 12GB+ |
-| 文生视频 | Sora, Gen-2 | 视频生成 | GPU 24GB+ |
-| 全模态 | GPT-4o, Gemini | 多模态融合 | 大规模 |
+| 模型 | 模态 | 参数量 | 显存 | 适用场景 |
+|-----|------|-------|------|---------|
+| **CLIP** | 图像+文本 | 400M | 4GB | 图像检索/分类 |
+| **LLaVA** | 图像+文本 | 7B-13B | 18-26GB | 视觉问答 |
+| **Whisper** | 音频+文本 | 1.5B | 6GB | 语音识别 |
+| **ImageBind** | 6模态 | 1.2B | 8GB | 跨模态检索 |
+| **GPT-4V** | 图像+文本 | 未知 | API | 通用视觉理解 |
 
-## LLaVA部署
+## 二、CLIP部署
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llava-service
+  name: clip-service
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: llava
+  replicas: 3
   template:
-    metadata:
-      labels:
-        app: llava
+    spec:
+      containers:
+      - name: clip
+        image: pytorch/pytorch:2.1.0-cuda12.1
+        command:
+        - python
+        - serve_clip.py
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: "8Gi"
+---
+# serve_clip.py
+from transformers import CLIPProcessor, CLIPModel
+from fastapi import FastAPI
+import torch
+
+app = FastAPI()
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+
+@app.post("/embed/image")
+def embed_image(image_url: str):
+    image = load_image(image_url)
+    inputs = processor(images=image, return_tensors="pt")
+    embeddings = model.get_image_features(**inputs)
+    return embeddings.tolist()
+
+@app.post("/embed/text")
+def embed_text(text: str):
+    inputs = processor(text=[text], return_tensors="pt")
+    embeddings = model.get_text_features(**inputs)
+    return embeddings.tolist()
+```
+
+## 三、LLaVA视觉问答
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llava-vqa
+spec:
+  template:
     spec:
       containers:
       - name: llava
-        image: llava-server:v1.6
-        env:
-        - name: MODEL_PATH
-          value: "/models/llava-v1.6-34b"
-        - name: LOAD_8BIT
-          value: "true"
-        ports:
-        - containerPort: 8000
-          name: http
-        resources:
-          limits:
-            nvidia.com/gpu: 2
-            memory: 48Gi
-          requests:
-            nvidia.com/gpu: 2
-            memory: 32Gi
-        volumeMounts:
-        - name: models
-          mountPath: /models
-        - name: shm
-          mountPath: /dev/shm
-      volumes:
-      - name: models
-        persistentVolumeClaim:
-          claimName: multimodal-models
-      - name: shm
-        emptyDir:
-          medium: Memory
-          sizeLimit: 16Gi
-      nodeSelector:
-        accelerator: nvidia-a100
-```
-
-## Qwen-VL部署
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: qwen-vl
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: qwen-vl
-  template:
-    spec:
-      containers:
-      - name: qwen-vl
-        image: qwen-vl-server:latest
-        command:
-        - python
-        - -m
-        - vllm.entrypoints.openai.api_server
-        args:
-        - --model=/models/Qwen-VL-Chat
-        - --trust-remote-code
-        - --dtype=float16
-        - --max-model-len=8192
-        ports:
-        - containerPort: 8000
+        image: liuhaotian/llava:v1.5-13b
         resources:
           limits:
             nvidia.com/gpu: 1
-            memory: 24Gi
-        volumeMounts:
-        - name: models
-          mountPath: /models
+            memory: "32Gi"
+---
+# 调用示例
+curl -X POST http://llava-service/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llava-v1.5-13b",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {"type": "text", "text": "What is in this image?"},
+          {"type": "image_url", "image_url": "https://example.com/image.jpg"}
+        ]
+      }
+    ]
+  }'
 ```
 
-## Stable Diffusion部署
+## 四、Whisper语音识别
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stable-diffusion
+  name: whisper-asr
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: sd
-  template:
-    metadata:
-      labels:
-        app: sd
-    spec:
-      containers:
-      - name: sd
-        image: stable-diffusion-webui:latest
-        env:
-        - name: MODEL_PATH
-          value: "/models/sd-xl-base-1.0"
-        - name: ENABLE_ATTENTION_SLICING
-          value: "true"
-        - name: ENABLE_VAE_TILING
-          value: "true"
-        ports:
-        - containerPort: 7860
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-            memory: 16Gi
-        volumeMounts:
-        - name: models
-          mountPath: /models
-        - name: outputs
-          mountPath: /outputs
-      volumes:
-      - name: models
-        persistentVolumeClaim:
-          claimName: sd-models
-      - name: outputs
-        emptyDir: {}
-```
-
-## Whisper语音识别
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: whisper-service
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: whisper
+  replicas: 5
   template:
     spec:
       containers:
       - name: whisper
-        image: whisper-server:latest
-        env:
-        - name: MODEL_SIZE
-          value: "large-v3"
-        - name: DEVICE
-          value: "cuda"
-        - name: COMPUTE_TYPE
-          value: "float16"
-        ports:
-        - containerPort: 8080
+        image: pytorch/pytorch:2.1.0-cuda12.1
+        command:
+        - python
+        - whisper_server.py
         resources:
           limits:
             nvidia.com/gpu: 1
-            memory: 12Gi
-        volumeMounts:
-        - name: models
-          mountPath: /root/.cache/whisper
+---
+# whisper_server.py
+import whisper
+from fastapi import FastAPI, File, UploadFile
+
+app = FastAPI()
+model = whisper.load_model("large-v3")
+
+@app.post("/transcribe")
+async def transcribe(audio: UploadFile = File(...)):
+    result = model.transcribe(audio.file)
+    return {
+        "text": result["text"],
+        "language": result["language"]
+    }
 ```
 
-## 多模态API网关
+## 五、性能优化
+
+| 优化项 | 方法 | 效果 |
+|--------|------|------|
+| **批处理** | 批量处理图像/音频 | 吞吐↑5x |
+| **TensorRT** | 模型编译优化 | 速度↑3x |
+| **量化** | INT8量化 | 显存↓50% |
+| **缓存** | 缓存embeddings | 命中率20% |
+
+## 六、成本分析
+
+**CLIP图像检索 (1M图像库, 1000 QPS):**
+- GPU: 10×T4 = $1,200/月
+- 存储: 1M×512维×4字节 = 2GB = $0.05/月
+- 总成本: ~$1,200/月
+
+**Whisper语音转录 (100并发):**
+- GPU: 5×T4 = $600/月
+- Spot优化: $180/月 (节省70%)
+
+## 七、监控指标
 
 ```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
-  name: multimodal-gateway
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+  name: multimodal-alerts
 spec:
-  rules:
-  - host: api.example.com
-    http:
-      paths:
-      - path: /v1/chat/vision
-        pathType: Prefix
-        backend:
-          service:
-            name: llava-service
-            port:
-              number: 8000
-      - path: /v1/images/generate
-        pathType: Prefix
-        backend:
-          service:
-            name: stable-diffusion
-            port:
-              number: 7860
-      - path: /v1/audio/transcriptions
-        pathType: Prefix
-        backend:
-          service:
-            name: whisper-service
-            port:
-              number: 8080
+  groups:
+  - name: clip
+    rules:
+    - alert: HighEmbeddingLatency
+      expr: histogram_quantile(0.99, rate(clip_embedding_duration_seconds_bucket[5m])) > 1
+      annotations:
+        summary: "CLIP embedding延迟>1秒"
 ```
 
-## 图像预处理配置
+## 八、最佳实践
 
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: image-processor-config
-data:
-  config.yaml: |
-    preprocessing:
-      max_image_size: 1024
-      supported_formats:
-        - jpeg
-        - png
-        - webp
-        - gif
-      resize_mode: "fit"  # fit/crop/pad
-      normalize: true
-    storage:
-      temp_dir: /tmp/images
-      max_cache_size: 10Gi
-      cleanup_interval: 3600
-```
+1. **模型选择**:
+   - 图像检索: CLIP ViT-B/32
+   - 视觉问答: LLaVA-1.5-13B
+   - 语音识别: Whisper Large-v3
 
-## 多模态监控指标
+2. **批处理配置**:
+   - CLIP: 批次64
+   - Whisper: 批次16
+   - LLaVA: 批次4
 
-| 指标 | 类型 | 说明 |
-|-----|-----|------|
-| `image_processing_seconds` | Histogram | 图像处理时间 |
-| `image_size_bytes` | Histogram | 输入图像大小 |
-| `model_inference_seconds` | Histogram | 模型推理时间 |
-| `tokens_generated_total` | Counter | 生成token总数 |
-| `images_generated_total` | Counter | 生成图像数 |
+3. **缓存策略**:
+   - 图像embeddings: Redis缓存1小时
+   - 热门查询: 缓存24小时
 
-## ACK多模态支持
-
-| 功能 | 说明 |
-|-----|------|
-| PAI-EAS | 多模态模型服务 |
-| OSS集成 | 图像/视频存储 |
-| CDN加速 | 媒体内容分发 |
-| 弹性GPU | 按需GPU实例 |
+---
+**相关**: [116-LLM Serving](../116-llm-serving-architecture.md) | **版本**: transformers 4.36+

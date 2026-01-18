@@ -1,4 +1,4 @@
-# 表格31: CRD与Operator开发
+# 31 - CRD与Operator开发
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 
@@ -537,3 +537,7 @@ var _ = Describe("Application Controller", func() {
 ---
 
 **Operator开发原则**: 幂等Reconcile + OwnerReference级联删除 + Finalizer清理外部资源 + Status子资源更新状态 + 完善的测试覆盖
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

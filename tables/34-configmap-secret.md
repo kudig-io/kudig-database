@@ -1,4 +1,4 @@
-# 表格34: ConfigMap与Secret管理
+# 34 - ConfigMap与Secret管理
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/configuration](https://kubernetes.io/docs/concepts/configuration/)
 
@@ -381,3 +381,7 @@ spec:
 ---
 
 **配置管理原则**: 敏感数据用Secret + 启用etcd加密 + 外部密钥管理 + 配置版本追踪 + 最小权限访问
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

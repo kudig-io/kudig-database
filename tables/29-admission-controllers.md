@@ -1,4 +1,4 @@
-# 表格29: 准入控制器配置
+# 29 - 准入控制器配置
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/access-authn-authz/admission-controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 
@@ -639,3 +639,7 @@ spec:
 ---
 
 **准入控制原则**: 使用ValidatingAdmissionPolicy优先 + Webhook作为补充 + 合理设置failurePolicy + 监控Webhook延迟
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,4 +1,4 @@
-# 表格24：边缘计算集成表
+# 24 - 边缘计算集成表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [openyurt.io](https://openyurt.io/)
 
@@ -246,3 +246,7 @@ spec:
 ---
 
 **边缘原则**: 边缘自治，本地优先，弱网适应
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

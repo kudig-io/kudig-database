@@ -1,170 +1,69 @@
-# 表格27: 节点管理与维护
+# 27 - 节点与节点池管理 (Node & NodePool Management)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [ACK NodePool](https://help.aliyun.com/document_detail/160490.html)
 
-## 节点管理决策流程
+## 节点池 (NodePool) 核心架构
 
+| 功能 (Feature) | 描述 (Description) | 生产建议 (Best Practice) |
+|---------------|-------------------|--------------------------|
+| **弹性伸缩 (ASG)** | 自动增加/减少 ECS 实例 | 开启 `cluster-autoscaler` 配合 HPA/VPA, 为不同业务建独立 NodePool |
+| **多规格混合** | 选定多种 ECS 规格 | 将 Spot 与按量/包年实例混用, 设置合适 `expander` 策略(如 `least-waste`) |
+| **自定义 OS** | 支持 Alibaba Cloud Linux / ContainerOS | 生产环境推荐 ContainerOS, 统一 OS 版本, 禁止手工登录改配置 |
+| **自动修复** | 节点 NotReady 时自动重启或替换 | 关键生产环境必须开启, 同时结合 `PodDisruptionBudget` 控制重启节奏 |
+| **分级隔离** | 不同安全等级/环境的节点池 | 通过 Node 标签/污点严格区分 `prod/staging/dev` 与 `internet/intranet` |
+
+## 节点生命周期与运维流程 (Node Lifecycle)
+
+| 阶段 | 关键操作 | 建议命令 | 注意事项 |
+|------|----------|----------|----------|
+| **准备 (Provision)** | 通过 NodePool 创建/扩容节点 | ACK 控制台或 `cluster-autoscaler` | 统一镜像与 kubelet 配置, 预置监控/日志 DaemonSet |
+| **接入 (Join)** | 节点加入集群并打标签 | `kubectl label nodes` / `kubectl taint nodes` | 加入后立刻补齐 `env=prod`、`zone=xxx` 等业务标签 |
+| **维护 (Maintain)** | 打补丁/升级内核/重启宿主机 | `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` | 搭配 PDB, 控制同时维护的节点数量 |
+| **下线 (Decommission)** | 永久移除节点 | `kubectl drain` → `kubectl delete node` | 先确认无绑定本地盘/本地日志, 相关 Pod 已在其他节点稳定运行 |
+
+```bash
+# 查看节点 & 池
+kubectl get nodes -o wide
+kubectl get nodepool -A 2>/dev/null || echo "在 ACK 控制台查看 NodePool 配置"
+
+# 按标签筛选节点
+kubectl get nodes -l env=prod
 ```
-节点管理决策流程:
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                                                                             │
-│  节点问题检测 → 评估影响范围 → 选择处理策略 → 执行操作 → 验证恢复            │
-│       │              │              │              │           │            │
-│       ├─ 监控告警    ├─ Pod数量     ├─ cordon      ├─ 手动     ├─ 节点状态  │
-│       ├─ NPD        ├─ 关键服务    ├─ drain       ├─ 自动     ├─ Pod状态   │
-│       └─ 用户报告   └─ 可用容量    └─ 替换节点    └─ 定时     └─ 监控指标  │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
 
-## 节点生命周期状态
+## 调度与隔离: 标签与污点 (Label & Taint)
 
-| 状态 | Condition | 描述 | 处理策略 |
-|-----|-----------|------|---------|
-| Ready | Ready=True | 节点健康可调度 | 正常运行 |
-| NotReady | Ready=False | 节点不健康 | 检查kubelet/网络 |
-| Unknown | Ready=Unknown | 状态未知 | 检查节点连接 |
-| MemoryPressure | MemoryPressure=True | 内存压力 | 驱逐低优先级Pod |
-| DiskPressure | DiskPressure=True | 磁盘压力 | 清理镜像/日志 |
-| PIDPressure | PIDPressure=True | PID耗尽 | 清理进程 |
-| NetworkUnavailable | NetworkUnavailable=True | 网络未就绪 | 检查CNI |
-
-## 节点污点(Taint)管理
-
-| 污点键 | Effect | 场景 | 命令 |
-|-------|--------|------|------|
-| `node.kubernetes.io/not-ready` | NoExecute | 节点未就绪 | 系统自动添加 |
-| `node.kubernetes.io/unreachable` | NoExecute | 节点不可达 | 系统自动添加 |
-| `node.kubernetes.io/memory-pressure` | NoSchedule | 内存压力 | 系统自动添加 |
-| `node.kubernetes.io/disk-pressure` | NoSchedule | 磁盘压力 | 系统自动添加 |
-| `node.kubernetes.io/pid-pressure` | NoSchedule | PID压力 | 系统自动添加 |
-| `node.kubernetes.io/unschedulable` | NoSchedule | 禁止调度 | `kubectl cordon` |
-| `node-role.kubernetes.io/control-plane` | NoSchedule | 控制平面节点 | kubeadm自动添加 |
-
-## 节点维护操作
-
-| 操作 | 命令 | 说明 | 注意事项 |
-|-----|------|------|---------|
-| 禁止调度 | `kubectl cordon <node>` | 标记不可调度 | 已有Pod不受影响 |
-| 恢复调度 | `kubectl uncordon <node>` | 恢复可调度 | - |
-| 驱逐Pod | `kubectl drain <node>` | 安全迁移Pod | 需配合PDB使用 |
-| 强制驱逐 | `kubectl drain --force --ignore-daemonsets` | 强制迁移 | 可能导致数据丢失 |
-| 删除节点 | `kubectl delete node <node>` | 从集群移除 | 先drain |
-| 查看详情 | `kubectl describe node <node>` | 查看节点信息 | 包含事件和条件 |
-
-## drain命令参数
-
-| 参数 | 默认值 | 说明 |
-|-----|-------|------|
-| `--ignore-daemonsets` | false | 忽略DaemonSet管理的Pod |
-| `--delete-emptydir-data` | false | 删除emptyDir数据 |
-| `--force` | false | 强制删除无控制器的Pod |
-| `--grace-period` | -1 | 优雅终止等待时间 |
-| `--timeout` | 0 | 操作超时时间 |
-| `--pod-selector` | "" | 仅驱逐匹配的Pod |
-| `--disable-eviction` | false | 使用删除而非驱逐API |
-
-## 节点资源配置
-
-| 资源类型 | kubelet参数 | 默认值 | 推荐值 | 说明 |
-|---------|------------|-------|-------|------|
-| 系统预留 | `--system-reserved` | - | cpu=500m,memory=1Gi | 系统进程预留 |
-| K8s预留 | `--kube-reserved` | - | cpu=500m,memory=1Gi | K8s组件预留 |
-| 驱逐阈值 | `--eviction-hard` | memory<100Mi | memory<500Mi | 硬驱逐阈值 |
-| 软驱逐 | `--eviction-soft` | - | memory<1Gi | 软驱逐阈值 |
-| 软驱逐宽限期 | `--eviction-soft-grace-period` | - | memory=2m | 宽限期 |
-| 最小回收 | `--eviction-minimum-reclaim` | - | memory=500Mi | 最小回收量 |
-
-## 节点标签规范
-
-| 标签键 | 示例值 | 用途 |
-|-------|-------|------|
-| `kubernetes.io/hostname` | node-1 | 主机名(系统) |
-| `kubernetes.io/os` | linux | 操作系统(系统) |
-| `kubernetes.io/arch` | amd64 | CPU架构(系统) |
-| `topology.kubernetes.io/zone` | cn-hangzhou-h | 可用区(ACK自动) |
-| `topology.kubernetes.io/region` | cn-hangzhou | 地域(ACK自动) |
-| `node.kubernetes.io/instance-type` | ecs.g6.xlarge | 实例规格(ACK自动) |
-| `workload-type` | compute/memory/gpu | 工作负载类型(自定义) |
-| `environment` | production/staging | 环境标识(自定义) |
-
-## 节点问题检测器(NPD)
-
-| 检测类型 | 条件名称 | 检测内容 | ACK默认 |
-|---------|---------|---------|--------|
-| 内核死锁 | KernelDeadlock | 内核死锁检测 | ✅ |
-| OOM | OOMKilling | OOM事件 | ✅ |
-| 磁盘IO | IOError | 磁盘IO错误 | ✅ |
-| 文件系统 | FilesystemCorruption | 文件系统损坏 | ✅ |
-| 容器运行时 | ContainerRuntimeUnhealthy | CRI健康 | ✅ |
-| 时钟同步 | ClockSkew | NTP同步 | ✅ |
-| 网络 | NetworkUnavailable | 网络连通性 | ✅ |
-
-## ACK节点池管理
-
-| 功能 | 说明 | 配置方式 |
-|-----|------|---------|
-| 节点池 | 同配置节点组 | 控制台/CLI |
-| 弹性伸缩 | 基于负载自动扩缩 | cluster-autoscaler |
-| 抢占式实例 | 低成本实例 | 节点池配置 |
-| 定期维护 | 自动排空更新 | 维护窗口配置 |
-| 节点镜像 | 自定义OS镜像 | 节点池配置 |
-| 安全组 | 节点网络隔离 | 节点池配置 |
-
-## 版本变更记录
-
-| 版本 | 变更内容 |
-|------|---------|
-| v1.25 | Taint-based eviction默认启用 |
-| v1.26 | PodDisruptionConditions默认启用 |
-| v1.27 | 节点swap支持Beta |
-| v1.28 | Sidecar容器原生支持 |
-| v1.29 | 节点优雅关机改进 |
-| v1.30 | 用户命名空间支持改进 |
-
-## 节点维护PDB配置
+| 能力 | 示例 | 作用 |
+|------|------|------|
+| **节点标签 (Label)** | `node.kubernetes.io/instance-type=ecs.g7.xlarge` | 匹配大规格计算节点, 用于 CPU 密集型服务 |
+| | `zone=cn-hangzhou-h` | 控制跨 AZ 分布, 与 PV 拓扑、SLB 匹配 |
+| **节点污点 (Taint)** | `kubectl taint nodes node1 role=system:NoSchedule` | 仅允许带对应容忍 (Toleration) 的系统 Pod 调度上去 |
+| **Pod 亲和/反亲和** | `topologyKey: kubernetes.io/hostname` | 同一业务副本分散到不同节点/机架, 提升高可用 |
 
 ```yaml
-# 节点维护时保护关键应用的PDB
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: critical-app-pdb
-  namespace: production
-spec:
-  minAvailable: 2
-  selector:
-    matchLabels:
-      app: critical-app
----
-# 节点亲和性配置示例
+# 专用 GPU 节点池示例
 apiVersion: v1
 kind: Pod
 metadata:
-  name: workload-example
+  name: gpu-job
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: workload-type
-            operator: In
-            values:
-            - compute
-      preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        preference:
-          matchExpressions:
-          - key: topology.kubernetes.io/zone
-            operator: In
-            values:
-            - cn-hangzhou-h
+  nodeSelector:
+    aliyun.accelerator/nvidia_name: "V100"
   tolerations:
-  - key: "node.kubernetes.io/memory-pressure"
-    operator: "Exists"
+  - key: "gpu-only"
+    operator: "Equal"
+    value: "true"
     effect: "NoSchedule"
-  containers:
-  - name: app
-    image: nginx:1.25
 ```
+
+## 资源预留 (Resource Reservation)
+
+通过 `kubelet` 参数控制系统稳定性：
+- `--system-reserved`: CPU/Memory 为 OS 进程预留。
+- `--kube-reserved`: 为 K8s 组件 (Kubelet, Proxy) 预留。
+- `--eviction-hard`: 设置硬驱逐阈值 (如 `memory<500Mi`) 防范宿主机崩溃。
+
+> **生产建议**: 将系统/组件预留总和控制在节点容量的 10%~20%, 对大节点适当上浮。
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

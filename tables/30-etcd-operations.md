@@ -1,4 +1,4 @@
-# 表格30: etcd运维操作
+# 30 - etcd运维操作
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [etcd.io/docs](https://etcd.io/docs/)
 
@@ -385,3 +385,7 @@ groups:
 | 版本更新 | 跟随K8s版本推荐 | 推荐 |
 | 网络隔离 | etcd专用网络 | 推荐 |
 | TLS加密 | 节点间和客户端通信 | 必须 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

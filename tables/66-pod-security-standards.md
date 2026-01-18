@@ -1,4 +1,4 @@
-# 表格66: Pod安全标准详解
+# 66 - Pod安全标准详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 
@@ -246,3 +246,7 @@ done
 ---
 
 **Pod安全原则**: 最小权限 + 非root运行 + 禁止特权提升 + 启用Seccomp + 持续审计监控
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

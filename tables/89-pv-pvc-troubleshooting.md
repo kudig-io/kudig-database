@@ -1,4 +1,4 @@
-# 表格89: PV/PVC存储故障排查
+# 89 - PV/PVC存储故障排查
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/storage/persistent-volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
@@ -211,3 +211,7 @@ spec:
 ---
 
 **存储故障排查原则**: PVC Pending先查SC → 挂载失败查CSI和节点 → 性能问题查存储类型 → 定期监控容量
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

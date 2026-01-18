@@ -1,6 +1,4 @@
-# 表格73: 事件与审计日志
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug/debug-cluster/audit](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+# 73 - 事件与审计日志
 
 ## Kubernetes事件(Events)
 
@@ -221,3 +219,7 @@ users:
 | v1.25 | 审计日志增强 |
 | v1.27 | 审计性能优化 |
 | v1.29 | Events API改进 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

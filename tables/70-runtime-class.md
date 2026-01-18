@@ -1,6 +1,4 @@
-# 表格70: RuntimeClass配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/containers/runtime-class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
+# 70 - RuntimeClass配置
 
 ## RuntimeClass概述
 
@@ -208,3 +206,7 @@ kubectl run test --image=nginx --runtime-class=gvisor --rm -it -- cat /proc/vers
 | v1.24 | RuntimeClass overhead改进 |
 | v1.27 | 用户命名空间支持 |
 | v1.29 | Wasm运行时支持改进 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

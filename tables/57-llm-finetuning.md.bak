@@ -1,0 +1,26 @@
+# 57 - LLM 微调运维表 (LLM Fine-tuning Ops)
+
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [PEFT](https://huggingface.co/docs/peft/)
+
+## 微调技术规格 (Technical Specs)
+
+| 技术 (Technology) | 全称 (Full Name) | 显存需求 (VRAM) | 建议场景 (Best Case) |
+|-------------------|-----------------|----------------|--------------------|
+| **Full FT** | Full Fine-tuning | 极高 (模型参数x7) | 领域垂直化深度改造 |
+| **LoRA** | Low-Rank Adaptation | 低 (0.1% 更新) | 通用指令微调 |
+| **QLoRA** | Quantized LoRA | 极低 (4-bit) | 消费级显卡微调 13B+ |
+
+## 显存估算参考 (Llama 3 8B)
+- **Full**: ~112GB (2x A100 80G)
+- **LoRA**: ~24GB (1x A10/A30)
+- **QLoRA**: ~12GB (1x RTX 4060)
+
+## 性能优化建议 (Optimization)
+1. **ZeRO 优化**: 使用 DeepSpeed Stage 2/3 极大减少冗余梯度存储。
+2. **Flash Attention**: 必须开启以减少长文本训练时的显存指数增长。
+3. **断点续训**: 建议每 1000 steps 保存一次 Checkpoint 到持久化存储。
+
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,6 +1,4 @@
-# 表格47: Helm Chart开发与管理
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [helm.sh/docs](https://helm.sh/docs/)
+# 47 - Helm Chart开发与管理
 
 ## Helm版本对比
 
@@ -175,3 +173,7 @@ helm install myrelease oci://registry.example.com/charts/mychart
 | 私有仓库 | 支持ACR Helm仓库 |
 | GitOps集成 | ArgoCD/FluxCD |
 | 应用管理 | 控制台可视化管理 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

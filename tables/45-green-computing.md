@@ -1,4 +1,4 @@
-# 表格45：可持续性与绿色运维表
+# 45 - 可持续性与绿色运维表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/blog/2023/06/29/kepler](https://www.cncf.io/projects/kepler/)
 
@@ -236,3 +236,7 @@ spec:
 ---
 
 **绿色原则**: 监控能耗，优化利用率，持续改进
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

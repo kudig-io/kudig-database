@@ -1,4 +1,4 @@
-# 表格22：成本优化表
+# 22 - 成本优化表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubecost.com](https://www.kubecost.com/)
 
@@ -208,3 +208,7 @@ metadata:
 ---
 
 **成本原则**: 监控先行，右置大小，弹性优先，持续优化
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

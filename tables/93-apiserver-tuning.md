@@ -1,6 +1,6 @@
 # API Server 性能调优
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
+> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 ## API Server 关键参数
 
@@ -304,3 +304,7 @@ kubectl get cs
 # - 审计日志保留时间
 # - API Server 访问控制 (公网/私网)
 ```
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

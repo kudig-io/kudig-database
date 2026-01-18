@@ -1,4 +1,4 @@
-# 表格18：备份与恢复表
+# 18 - 备份与恢复表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 
@@ -242,6 +242,80 @@ spec:
 | **全集群恢复** | 半年 | DR演练 | Team |
 | **跨地域恢复** | 年度 | DR演练 | Team |
 
+# 18 - 备份与恢复表
+
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
+
+(保持原有内容基础上补充)
+
+## 灾难恢复演练计划
+
+### 演练场景清单
+
+| 场景 | 频率 | 目标RTO | 验证项 | 负责人 |
+|-----|------|--------|-------|-------|
+| **单Pod故障** | 每周 | 30秒 | 自动重启 | 自动化 |
+| **单节点故障** | 每月 | 5分钟 | Pod重调度 | SRE |
+| **etcd恢复** | 季度 | 30分钟 | 集群状态完整 | SRE Lead |
+| **整个命名空间恢复** | 季度 | 1小时 | 应用恢复 | 应用团队 |
+| **跨地域切换** | 半年 | 4小时 | 全量切换 | 全员 |
+| **全集群重建** | 年度 | 8小时 | 完整恢复 | 全员 |
+
+### 备份验证自动化
+
+```yaml
+# 定期验证备份CronJob
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-validation
+  namespace: backup
+spec:
+  schedule: "0 3 * * 1"  # 每周一凌晨3点
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: validator
+            image: backup-validator:latest
+            env:
+            - name: BACKUP_LOCATION
+              value: "oss://backup-bucket/velero/"
+            command:
+            - /bin/bash
+            - -c
+            - |
+              # 1. 检查最近备份时间
+              LATEST=$(velero backup get -o json | jq -r '.items[0].metadata.creationTimestamp')
+              AGE=$(($(date +%s) - $(date -d $LATEST +%s)))
+              if [ $AGE -gt 86400 ]; then
+                echo "ERROR: Latest backup is older than 24h"
+                exit 1
+              fi
+              
+              # 2. 验证备份完整性
+              velero backup describe <latest-backup> --details | grep -q "Phase: Completed"
+              
+              # 3. 尝试恢复到测试命名空间
+              velero restore create test-restore-$(date +%s) \
+                --from-backup <latest-backup> \
+                --namespace-mappings production:backup-test
+              
+              # 4. 验证恢复成功
+              kubectl wait --for=condition=Ready pod -n backup-test --all --timeout=300s
+              
+              # 5. 清理测试命名空间
+              kubectl delete namespace backup-test
+              
+              echo "Backup validation successful"
+          restartPolicy: OnFailure
+```
+
 ---
 
-**备份原则**: 3-2-1规则(3份备份，2种介质，1份异地)
+**备份原则**: 3-2-1规则(3份备份，2种介质，1份异地)，定期验证，自动化备份，文档化恢复流程
+
+---
+
+**表格维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com)

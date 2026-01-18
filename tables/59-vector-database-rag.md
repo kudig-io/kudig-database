@@ -1,235 +1,151 @@
-# 表格59: 向量数据库与RAG
+# 59 - 向量数据库与RAG架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [LangChain](https://python.langchain.com/)
 
-## 向量数据库对比
+## 一、向量数据库对比
 
-| 数据库 | 类型 | 索引算法 | K8s部署 | 适用规模 |
-|-------|-----|---------|--------|---------|
-| Milvus | 分布式 | HNSW/IVF/DiskANN | Helm/Operator | 大规模 |
-| Qdrant | 分布式 | HNSW | Helm | 中大规模 |
-| Weaviate | 分布式 | HNSW | Helm | 中大规模 |
-| Chroma | 嵌入式 | HNSW | 简单部署 | 小规模 |
-| Pinecone | SaaS | 私有 | - | 任意 |
-| pgvector | PostgreSQL扩展 | IVFFlat/HNSW | 标准PG部署 | 中小规模 |
+| 数据库 | QPS | 延迟 | 特性 | 适用场景 |
+|--------|-----|------|------|---------|
+| **Milvus** | 10K+ | <10ms | 分布式、GPU加速 | 大规模生产 |
+| **Weaviate** | 5K | <20ms | GraphQL、模块化 | 企业级 |
+| **Qdrant** | 3K | <15ms | Rust高性能 | 中等规模 |
+| **Chroma** | 1K | <50ms | 轻量级 | 开发测试 |
+| **pgvector** | 500 | <100ms | PostgreSQL扩展 | 现有PG用户 |
 
-## Milvus集群部署
+## 二、Milvus部署
 
 ```yaml
-# Milvus Helm values
-apiVersion: v1
-kind: ConfigMap
+apiVersion: milvus.io/v1beta1
+kind: Milvus
 metadata:
-  name: milvus-config
-data:
-  values.yaml: |
-    cluster:
-      enabled: true
+  name: milvus-cluster
+spec:
+  mode: cluster
+  dependencies:
     etcd:
-      replicaCount: 3
-      persistence:
-        size: 10Gi
-    minio:
-      mode: distributed
-      replicas: 4
-      persistence:
-        size: 100Gi
+      inCluster:
+        replicas: 3
     pulsar:
-      enabled: true
-      components:
-        autorecovery: true
-    proxy:
-      replicas: 2
-      resources:
-        limits:
-          cpu: "2"
-          memory: 4Gi
+      inCluster:
+        replicas: 3
+    storage:
+      type: S3
+  components:
     queryNode:
       replicas: 2
       resources:
         limits:
           cpu: "4"
-          memory: 8Gi
-          nvidia.com/gpu: 1  # GPU加速查询
+          memory: "16Gi"
     dataNode:
       replicas: 2
-      resources:
-        limits:
-          cpu: "2"
-          memory: 8Gi
     indexNode:
-      replicas: 1
-      resources:
-        limits:
-          cpu: "4"
-          memory: 16Gi
-          nvidia.com/gpu: 1  # GPU加速索引
+      replicas: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: milvus-service
+spec:
+  ports:
+  - port: 19530
+    name: grpc
+  - port: 9091
+    name: metrics
 ```
 
-## Qdrant部署
+## 三、RAG架构流程
+
+```
+用户查询 → Embedding → 向量检索 → Rerank → LLM生成 → 响应
+   ↓         ↓          ↓          ↓        ↓        ↓
+  Query   模型API    Milvus   重排序   vLLM    答案
+```
+
+## 四、RAG实现 (Python)
+
+```python
+from langchain.vectorstores import Milvus
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.llms import VLLM
+
+# 1. 初始化
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+vectorstore = Milvus(
+    embedding_function=embeddings,
+    connection_args={"host": "milvus", "port": "19530"}
+)
+
+# 2. 检索
+def retrieve(query, top_k=5):
+    docs = vectorstore.similarity_search(query, k=top_k)
+    return docs
+
+# 3. 生成
+llm = VLLM(model="llama-2-7b-chat")
+
+def generate_answer(query, context):
+    prompt = f"Context: {context}\n\nQuestion: {query}\nAnswer:"
+    return llm(prompt)
+
+# 4. RAG Pipeline
+def rag_query(query):
+    docs = retrieve(query)
+    context = "\n".join([doc.page_content for doc in docs])
+    answer = generate_answer(query, context)
+    return answer
+```
+
+## 五、性能优化
+
+| 优化项 | 方法 | 效果 |
+|--------|------|------|
+| **索引类型** | HNSW优于IVF | 速度↑3x |
+| **分片策略** | 按时间/主题分片 | 吞吐↑2x |
+| **缓存** | Redis缓存热查询 | 命中率30% |
+| **批处理** | 批量embedding | 速度↑5x |
+| **GPU加速** | Milvus GPU版本 | 速度↑10x |
+
+## 六、成本分析
+
+**Milvus集群 (1M向量, 768维):**
+- 存储: ~3GB (S3 Standard: $0.07/月)
+- 计算: 2×4核16GB = ~$200/月
+- 总成本: ~$200/月
+
+**vs 托管服务 (Pinecone):**
+- 1M向量 = $70/月
+- 但无需运维
+
+## 七、监控指标
 
 ```yaml
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
 metadata:
-  name: qdrant
+  name: milvus-metrics
 spec:
-  serviceName: qdrant
-  replicas: 3
-  selector:
-    matchLabels:
-      app: qdrant
-  template:
-    metadata:
-      labels:
-        app: qdrant
-    spec:
-      containers:
-      - name: qdrant
-        image: qdrant/qdrant:latest
-        ports:
-        - containerPort: 6333
-          name: http
-        - containerPort: 6334
-          name: grpc
-        env:
-        - name: QDRANT__CLUSTER__ENABLED
-          value: "true"
-        - name: QDRANT__CLUSTER__P2P__PORT
-          value: "6335"
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
-          requests:
-            cpu: "1"
-            memory: 2Gi
-        volumeMounts:
-        - name: storage
-          mountPath: /qdrant/storage
-  volumeClaimTemplates:
-  - metadata:
-      name: storage
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: fast-ssd
-      resources:
-        requests:
-          storage: 50Gi
+  endpoints:
+  - port: metrics
+    interval: 15s
+---
+# 关键指标
+- milvus_search_latency_seconds
+- milvus_insert_qps
+- milvus_cache_hit_ratio
+- milvus_disk_usage_bytes
 ```
 
-## RAG Pipeline架构
+## 八、最佳实践
 
-```
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│   文档源     │───▶│  文档处理     │───▶│  向量化     │
-│ (PDF/Web等) │    │ (分块/清洗)   │    │ (Embedding) │
-└─────────────┘    └──────────────┘    └──────┬──────┘
-                                              │
-                                              ▼
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│   LLM生成   │◀───│  上下文增强   │◀───│  向量检索   │
-│  (Response) │    │  (Prompt)    │    │  (TopK)     │
-└─────────────┘    └──────────────┘    └─────────────┘
-```
+1. **向量维度**: 768维平衡性能和效果
+2. **索引参数**: HNSW (M=16, efConstruction=200)
+3. **分片数**: 每分片500万向量
+4. **副本数**: 2-3个副本保证可用性
+5. **定期压缩**: 每周压缩一次删除数据
+6. **备份策略**: S3增量备份
 
-## RAG服务部署
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: rag-service
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: rag-service
-  template:
-    metadata:
-      labels:
-        app: rag-service
-    spec:
-      containers:
-      - name: rag
-        image: rag-service:v1
-        env:
-        - name: VECTOR_DB_HOST
-          value: "milvus.default.svc.cluster.local"
-        - name: VECTOR_DB_PORT
-          value: "19530"
-        - name: LLM_ENDPOINT
-          value: "http://vllm-llama:8000/v1"
-        - name: EMBEDDING_MODEL
-          value: "BAAI/bge-large-zh-v1.5"
-        - name: CHUNK_SIZE
-          value: "512"
-        - name: CHUNK_OVERLAP
-          value: "50"
-        - name: TOP_K
-          value: "5"
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
-```
-
-## Embedding服务
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: embedding-service
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: embedding
-  template:
-    spec:
-      containers:
-      - name: embedding
-        image: sentence-transformers/all-MiniLM-L6-v2
-        # 或使用TEI (Text Embeddings Inference)
-        # image: ghcr.io/huggingface/text-embeddings-inference:latest
-        env:
-        - name: MODEL_ID
-          value: "BAAI/bge-large-zh-v1.5"
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-            memory: 8Gi
-```
-
-## 向量索引参数
-
-| 索引类型 | 参数 | 推荐值 | 说明 |
-|---------|-----|-------|------|
-| HNSW | M | 16-64 | 连接数 |
-| HNSW | efConstruction | 128-256 | 构建时搜索宽度 |
-| HNSW | ef | 64-256 | 查询时搜索宽度 |
-| IVF | nlist | sqrt(n) | 聚类中心数 |
-| IVF | nprobe | nlist/10 | 查询探测数 |
-
-## 检索策略
-
-| 策略 | 说明 | 适用场景 |
-|-----|------|---------|
-| 语义检索 | 向量相似度 | 通用查询 |
-| 混合检索 | 向量+关键词 | 精确匹配需求 |
-| 重排序 | Cross-encoder | 高精度要求 |
-| HyDE | 假设文档扩展 | 复杂问题 |
-
-## ACK向量数据库
-
-| 服务 | 说明 |
-|-----|------|
-| 云数据库AnalyticDB | PG向量扩展 |
-| Lindorm | 宽表+向量 |
-| Elasticsearch | 向量检索支持 |
-| Milvus托管 | 即将支持 |
+---
+**相关**: [115-AI数据Pipeline](../115-ai-data-pipeline.md) | **版本**: Milvus 2.3+, K8s v1.27+

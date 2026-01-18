@@ -1,308 +1,115 @@
-# 表格58: LLM推理服务部署
+# 58 - LLM推理服务部署
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [vllm.ai](https://vllm.ai/)
+> **适用版本**: v1.25 - v1.32 | **参考**: [vLLM](https://docs.vllm.ai/)
 
-## 推理框架对比
+## 一、推理引擎对比
 
-| 框架 | 特点 | 量化支持 | 并发能力 | 适用场景 | 显存效率 |
-|-----|------|---------|---------|---------|---------|
-| **vLLM** | PagedAttention,高吞吐 | AWQ/GPTQ/FP8 | 高 | 生产推理 | ⭐⭐⭐⭐⭐ |
-| **TGI** | HuggingFace官方 | GPTQ/bitsandbytes | 高 | 通用部署 | ⭐⭐⭐⭐ |
-| **TensorRT-LLM** | NVIDIA优化 | INT8/FP8 | 最高 | NVIDIA GPU | ⭐⭐⭐⭐⭐ |
-| **Triton** | 多模型服务 | 多种 | 高 | 多模型场景 | ⭐⭐⭐⭐ |
-| **llama.cpp** | CPU/低资源 | GGUF量化 | 中 | 边缘部署 | ⭐⭐⭐⭐ |
-| **Ollama** | 简单易用 | GGUF | 中 | 开发测试 | ⭐⭐⭐ |
-| **SGLang** | 结构化生成优化 | AWQ/GPTQ | 高 | 复杂推理 | ⭐⭐⭐⭐ |
+| 引擎 | 吞吐量 | 延迟 | 特性 | 适用场景 |
+|-----|--------|------|------|---------|
+| **vLLM** | ★★★★★ | 中 | PagedAttention | 高吞吐生产 |
+| **TGI** | ★★★★☆ | 低 | HF原生 | HF模型 |
+| **TensorRT-LLM** | ★★★★★ | 极低 | NVIDIA优化 | A100/H100 |
+| **llama.cpp** | ★★☆☆☆ | 低 | CPU推理 | 边缘设备 |
 
-## 模型显存需求估算
-
-| 模型规模 | FP16 | INT8 | INT4 | 推荐GPU |
-|---------|------|------|------|--------|
-| 7B | ~14GB | ~7GB | ~4GB | A10/L4 |
-| 13B | ~26GB | ~13GB | ~7GB | A100-40G |
-| 34B | ~68GB | ~34GB | ~17GB | A100-80G |
-| 70B | ~140GB | ~70GB | ~35GB | 2xA100-80G |
-| 120B+ | ~240GB | ~120GB | ~60GB | 4xA100-80G |
-
-## vLLM Deployment
+## 二、vLLM部署
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vllm-llama
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: vllm-llama
-  template:
-    metadata:
-      labels:
-        app: vllm-llama
-    spec:
-      containers:
-      - name: vllm
-        image: vllm/vllm-openai:latest
-        args:
-        - --model=/models/Llama-2-7b-chat-hf
-        - --tensor-parallel-size=1
-        - --gpu-memory-utilization=0.9
-        - --max-model-len=4096
-        - --dtype=float16
-        ports:
-        - containerPort: 8000
-          name: http
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-            memory: 32Gi
-          requests:
-            nvidia.com/gpu: 1
-            memory: 24Gi
-        volumeMounts:
-        - name: models
-          mountPath: /models
-        - name: shm
-          mountPath: /dev/shm
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 120
-          periodSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 60
-          periodSeconds: 10
-      volumes:
-      - name: models
-        persistentVolumeClaim:
-          claimName: model-storage
-      - name: shm
-        emptyDir:
-          medium: Memory
-          sizeLimit: 16Gi
-      nodeSelector:
-        accelerator: nvidia-a100
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: vllm-llama
-spec:
-  selector:
-    app: vllm-llama
-  ports:
-  - port: 8000
-    targetPort: 8000
-  type: ClusterIP
-```
-
-## TGI Deployment
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: tgi-mistral
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: tgi-mistral
-  template:
-    metadata:
-      labels:
-        app: tgi-mistral
-    spec:
-      containers:
-      - name: tgi
-        image: ghcr.io/huggingface/text-generation-inference:latest
-        env:
-        - name: MODEL_ID
-          value: "mistralai/Mistral-7B-Instruct-v0.2"
-        - name: QUANTIZE
-          value: "gptq"
-        - name: NUM_SHARD
-          value: "1"
-        - name: MAX_INPUT_LENGTH
-          value: "4096"
-        - name: MAX_TOTAL_TOKENS
-          value: "8192"
-        - name: HUGGING_FACE_HUB_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: hf-secret
-              key: token
-        ports:
-        - containerPort: 80
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-```
-
-## 推理服务HPA配置
-
-```yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: vllm-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: vllm-llama
-  minReplicas: 1
-  maxReplicas: 4
-  metrics:
-  - type: Pods
-    pods:
-      metric:
-        name: gpu_utilization
-      target:
-        type: AverageValue
-        averageValue: "80"
-  - type: Pods
-    pods:
-      metric:
-        name: request_queue_length
-      target:
-        type: AverageValue
-        averageValue: "10"
-  behavior:
-    scaleUp:
-      stabilizationWindowSeconds: 60
-      policies:
-      - type: Pods
-        value: 1
-        periodSeconds: 120
-    scaleDown:
-      stabilizationWindowSeconds: 300
-```
-
-## 多模型推理(Triton)
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: triton-llm
-spec:
-  template:
-    spec:
-      containers:
-      - name: triton
-        image: nvcr.io/nvidia/tritonserver:24.01-trtllm-python-py3
-        args:
-        - tritonserver
-        - --model-repository=/models
-        - --http-port=8000
-        - --grpc-port=8001
-        - --metrics-port=8002
-        ports:
-        - containerPort: 8000
-          name: http
-        - containerPort: 8001
-          name: grpc
-        - containerPort: 8002
-          name: metrics
-```
-
-## 推理监控指标
-
-| 指标 | 类型 | 说明 |
-|-----|-----|------|
-| `vllm:num_requests_running` | Gauge | 运行中请求数 |
-| `vllm:num_requests_waiting` | Gauge | 等待队列长度 |
-| `vllm:gpu_cache_usage_perc` | Gauge | KV Cache使用率 |
-| `vllm:avg_generation_throughput` | Gauge | 生成吞吐量 |
-| `tgi_request_duration_seconds` | Histogram | 请求延迟分布 |
-| `tgi_request_generated_tokens` | Histogram | 生成token数分布 |
-
-## 推理优化参数
-
-| 参数 | 说明 | 推荐值 |
-|-----|------|-------|
-| `gpu-memory-utilization` | GPU显存利用率 | 0.85-0.95 |
-| `max-num-seqs` | 最大并发序列 | 256 |
-| `max-num-batched-tokens` | 批处理token数 | 8192 |
-| `block-size` | PagedAttention块大小 | 16 |
-| `swap-space` | CPU交换空间(GB) | 4 |
-
-## ACK推理服务
-
-| 功能 | 说明 | 配置方式 |
-|-----|------|---------|
-| **EAS** | 弹性推理服务 | PAI-EAS部署 |
-| **模型优化** | Blade推理加速 | SDK集成 |
-| **弹性伸缩** | 按请求自动扩缩 | HPA配置 |
-| **流量管理** | A/B测试,金丝雀 | Istio/APISIX |
-| **GPU共享** | cGPU显存隔离 | 资源配置 |
-
-```yaml
-# ACK GPU共享推理部署
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: vllm-shared-gpu
+  name: vllm-llama2-7b
 spec:
   replicas: 2
   template:
     spec:
       containers:
       - name: vllm
-        image: vllm/vllm-openai:latest
+        image: vllm/vllm-openai:v0.3.0
+        args:
+        - --model=/models/llama-2-7b
+        - --tensor-parallel-size=1
+        - --dtype=float16
         resources:
           limits:
-            # ACK cGPU配置 - 每个实例4GB显存
-            aliyun.com/gpu-mem: 4
-          requests:
-            aliyun.com/gpu-mem: 4
+            nvidia.com/gpu: 1
 ---
-# KServe推理服务
-apiVersion: serving.kserve.io/v1beta1
-kind: InferenceService
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
 metadata:
-  name: llama-inference
+  name: vllm-hpa
 spec:
-  predictor:
-    model:
-      modelFormat:
-        name: vLLM
-      storageUri: "pvc://model-pvc/llama-7b"
-      resources:
-        limits:
-          nvidia.com/gpu: 1
-        requests:
-          nvidia.com/gpu: 1
-    minReplicas: 1
-    maxReplicas: 5
+  scaleTargetRef:
+    name: vllm-llama2-7b
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: vllm_queue_size
+      target:
+        averageValue: "10"
 ```
 
-## 推理服务最佳实践
+## 三、性能优化
 
-| 实践 | 说明 | 实施方法 |
-|-----|------|---------|
-| **模型预热** | 启动时加载模型到显存 | initContainer预热 |
-| **健康检查** | 确保模型已加载 | /health端点 |
-| **请求队列** | 控制并发请求数 | max_num_seqs |
-| **显存管理** | 合理设置KV Cache | gpu-memory-utilization |
-| **批处理优化** | 动态批处理 | continuous batching |
-| **量化部署** | 降低显存占用 | AWQ/GPTQ |
+| 技术 | 效果 | 配置 |
+|-----|------|------|
+| **Continuous Batching** | 吞吐↑10x | vLLM默认 |
+| **PagedAttention** | 显存利用率95% | `--gpu-memory-utilization=0.95` |
+| **FlashAttention 2** | 速度↑2x | 自动启用 |
+| **量化** | 显存↓75% | `--quantization=awq` |
 
-## 版本变更记录
+## 四、性能基准 (Llama2-7B, A100)
 
-| 版本 | 变更内容 |
-|------|---------|
-| vLLM 0.3 | 支持AWQ量化 |
-| vLLM 0.4 | FP8量化支持 |
-| vLLM 0.5 | 多模态支持改进 |
-| TGI 2.0 | 性能大幅提升 |
+| 配置 | 吞吐量 | P99延迟 | 成本/1M tokens |
+|-----|--------|---------|---------------|
+| vLLM FP16 | 4800 tok/s | 850ms | $0.12 |
+| TensorRT FP16 | 7200 tok/s | 620ms | $0.08 |
+| vLLM INT8 | 6400 tok/s | 720ms | $0.10 |
+
+## 五、监控指标
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: vllm-alerts
+spec:
+  groups:
+  - name: vllm
+    rules:
+    - alert: HighInferenceLatency
+      expr: histogram_quantile(0.99, rate(vllm_request_duration_seconds_bucket[5m])) > 5
+      annotations:
+        summary: "P99延迟>5秒"
+    
+    - alert: HighQueueSize
+      expr: vllm_num_requests_waiting > 50
+      annotations:
+        summary: "请求队列积压"
+```
+
+## 六、成本优化
+
+**策略:**
+1. **Spot实例**: 节省70%成本
+2. **批处理**: 吞吐提升10倍
+3. **量化**: INT8节省50%成本
+4. **缓存**: 30%请求命中缓存
+
+**示例 (100 QPS):**
+- 无优化: 10个A100实例 = $400/小时
+- 优化后: 2个A100实例 = $80/小时
+- 节省: 80%
+
+## 七、最佳实践
+
+1. **副本数**: 最少2个副本保证高可用
+2. **健康检查**: 配置liveness/readiness探针
+3. **请求超时**: 设置30-60秒超时
+4. **日志**: 记录所有请求用于审计
+5. **限流**: 按用户/API key限流
 
 ---
-
-**推理部署原则**: 选择合适框架 + 量化降低资源 + 合理配置批处理 + 监控关键指标 + 自动弹性伸缩
+**相关**: [116-LLM Serving架构](../116-llm-serving-architecture.md) | **版本**: vLLM 0.3.0+

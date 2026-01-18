@@ -1,6 +1,4 @@
-# 表格83: 网络加密与mTLS
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+# 83 - 网络加密与mTLS
 
 ## 网络加密方案
 
@@ -224,3 +222,7 @@ spec:
 | ASM mTLS | 托管mTLS |
 | 专有网络 | VPC隔离 |
 | SSL证书 | 证书托管 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

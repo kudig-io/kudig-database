@@ -1,6 +1,4 @@
-# 表格84: 网络性能调优
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+# 84 - 网络性能调优
 
 ## 网络性能瓶颈
 
@@ -202,3 +200,7 @@ groups:
 | eRDMA | 高性能RDMA |
 | 智能网卡 | 硬件卸载 |
 | 网络优化镜像 | 预优化内核参数 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

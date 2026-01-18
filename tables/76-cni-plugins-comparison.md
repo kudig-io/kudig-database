@@ -1,4 +1,4 @@
-# 表格76: CNI插件深度对比
+# 76 - CNI插件深度对比
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
@@ -210,3 +210,7 @@ iptables -t filter -L -n -v
 ---
 
 **CNI选型原则**: 根据场景选择(通用Calico/高性能Cilium/云原生Terway) + 评估功能需求 + 考虑运维复杂度
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

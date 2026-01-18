@@ -1,6 +1,4 @@
-# 表格33: 服务发现与DNS配置
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/dns-pod-service](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+# 33 - 服务发现与DNS配置
 
 ## CoreDNS配置
 
@@ -200,3 +198,7 @@ kubectl exec <pod-name> -- cat /etc/resolv.conf
 | v1.27 | DNS插件改进 |
 | v1.28 | CoreDNS 1.10+ |
 | v1.30 | CoreDNS 1.11+ |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

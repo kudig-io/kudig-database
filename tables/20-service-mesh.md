@@ -1,4 +1,4 @@
-# 表格20：服务网格集成表
+# 20 - 服务网格集成表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [istio.io/latest/docs](https://istio.io/latest/docs/) | [linkerd.io/docs](https://linkerd.io/docs/)
 
@@ -325,6 +325,122 @@ linkerd diagnostics proxy-metrics -n <ns> <pod>
 | **超时重试** | 合理配置 | P1 |
 | **熔断配置** | 防止级联故障 | P1 |
 
+# 20 - 服务网格集成表
+
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [istio.io/latest/docs](https://istio.io/latest/docs/) | [linkerd.io/docs](https://linkerd.io/docs/)
+
+(保持原有内容基础上补充)
+
+## 服务网格渐进式采用路线图
+
+### 阶段1: 可观测性 (Week 1-2)
+
+```yaml
+# 仅安装控制平面，不注入Sidecar
+istioctl install --set profile=minimal -y
+
+# 部署Prometheus/Grafana/Kiali
+kubectl apply -f samples/addons/
+
+# 观察现有流量
+```
+
+### 阶段2: 试点服务 (Week 3-4)
+
+```yaml
+# 选择1-2个非关键服务注入Sidecar
+kubectl label namespace dev istio-injection=enabled
+kubectl rollout restart deployment -n dev
+
+# 验证功能:
+# - mTLS自动加密
+# - 流量可视化
+# - 分布式追踪
+```
+
+### 阶段3: 流量管理 (Week 5-6)
+
+```yaml
+# 实施金丝雀发布
+# 配置超时重试
+# 熔断保护
+```
+
+### 阶段4: 安全加固 (Week 7-8)
+
+```yaml
+# 强制mTLS STRICT模式
+# 配置授权策略
+# 限流保护
+```
+
+### 阶段5: 全面推广 (Week 9+)
+
+```yaml
+# 生产环境逐步推广
+# 监控性能影响
+# 优化资源配置
+```
+
+## 服务网格性能优化
+
+### Sidecar资源优化
+
+```yaml
+# 默认Sidecar资源(过高)
+requests:
+  cpu: 100m
+  memory: 128Mi
+limits:
+  cpu: 2000m
+  memory: 1024Mi
+
+# 优化后配置
+requests:
+  cpu: 10m      # 降低90%
+  memory: 40Mi  # 降低70%
+limits:
+  cpu: 200m
+  memory: 256Mi
+```
+
+### ProxyConfig优化
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: ProxyConfig
+metadata:
+  name: optimize
+  namespace: istio-system
+spec:
+  concurrency: 2  # 限制工作线程数
+  image:
+    imageType: distroless  # 使用精简镜像
+```
+
+## 服务网格成本分析
+
+### 资源开销估算
+
+| 集群规模 | Pod数量 | Sidecar总资源 | 增加成本(月) |
+|---------|--------|--------------|------------|
+| **小型** | 100 | 1核/4GB | 500元 |
+| **中型** | 500 | 5核/20GB | 2,500元 |
+| **大型** | 2000 | 20核/80GB | 10,000元 |
+
+### ROI分析
+
+| 收益项 | 量化价值 |
+|-------|---------|
+| **减少故障时间** | 节省人力成本2-5万/年 |
+| **加速问题定位** | 减少50%排查时间 |
+| **零停机发布** | 提升用户体验，减少客诉 |
+| **安全合规** | 满足mTLS/零信任要求 |
+
 ---
 
-**服务网格原则**: 渐进采用，监控先行，安全默认
+**服务网格原则**: 渐进采用，监控先行，安全默认，持续优化
+
+---
+
+**表格维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com)

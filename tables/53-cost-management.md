@@ -1,6 +1,4 @@
-# 表格53: 成本管理与FinOps
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/manage-deployment](https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/)
+# 53 - 成本管理与FinOps
 
 ## Kubernetes成本构成
 
@@ -188,3 +186,7 @@ spec:
 | Crawl | 成本可见性 | 知道花了多少钱 |
 | Walk | 成本分配 | 知道谁花了钱 |
 | Run | 成本优化 | 持续优化成本 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
