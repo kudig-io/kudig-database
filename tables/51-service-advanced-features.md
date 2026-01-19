@@ -1,158 +1,845 @@
-# 124 - Service 高级特性与应用案例
+# Service 高级特性与应用案例 (Service Advanced Features)
 
-本文档聚焦于 Kubernetes Service 的高级特性，这些特性对于优化生产环境中的流量路由、保证应用高可用性以及降低网络延迟至关重要。
+> **适用版本**: Kubernetes v1.25 - v1.32  
+> **文档版本**: v2.0 | 生产级 Service 高级特性参考  
+> **最后更新**: 2026-01
 
----
+## Service 高级特性架构
 
-## 1. `externalTrafficPolicy`: 保持客户端源 IP
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                        Service Advanced Features Architecture                           │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                              Traffic Policies                                      │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────────────┐      ┌─────────────────────────┐                    │ │
+│  │  │  externalTrafficPolicy  │      │  internalTrafficPolicy  │                    │ │
+│  │  │                         │      │                         │                    │ │
+│  │  │  ┌───────────────────┐ │      │  ┌───────────────────┐ │                    │ │
+│  │  │  │ Cluster (default) │ │      │  │ Cluster (default) │ │                    │ │
+│  │  │  │ • 负载均衡优先    │ │      │  │ • 跨节点转发      │ │                    │ │
+│  │  │  │ • 源 IP 丢失      │ │      │  │ • 均匀分布        │ │                    │ │
+│  │  │  └───────────────────┘ │      │  └───────────────────┘ │                    │ │
+│  │  │  ┌───────────────────┐ │      │  ┌───────────────────┐ │                    │ │
+│  │  │  │ Local             │ │      │  │ Local             │ │                    │ │
+│  │  │  │ • 保留源 IP       │ │      │  │ • 仅本地节点      │ │                    │ │
+│  │  │  │ • 可能负载不均    │ │      │  │ • 低延迟          │ │                    │ │
+│  │  │  └───────────────────┘ │      │  └───────────────────┘ │                    │ │
+│  │  └─────────────────────────┘      └─────────────────────────┘                    │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                            Session Affinity                                        │ │
+│  │                                                                                    │ │
+│  │  Client IP → Hash → Same Pod (within timeout)                                     │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────┐ │ │
+│  │  │  Request 1 (IP: 10.0.0.1)  ───────────────────────────────► Pod A          │ │ │
+│  │  │  Request 2 (IP: 10.0.0.1)  ───────────────────────────────► Pod A (same)   │ │ │
+│  │  │  Request 3 (IP: 10.0.0.2)  ───────────────────────────────► Pod B          │ │ │
+│  │  │  Request 4 (IP: 10.0.0.1)  ───────────────────────────────► Pod A (same)   │ │ │
+│  │  └─────────────────────────────────────────────────────────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                        Topology Aware Routing                                      │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐                   │ │
+│  │  │   Zone A        │  │   Zone B        │  │   Zone C        │                   │ │
+│  │  │                 │  │                 │  │                 │                   │ │
+│  │  │  Client ──────► │  │                 │  │                 │                   │ │
+│  │  │       │         │  │                 │  │                 │                   │ │
+│  │  │       ▼         │  │                 │  │                 │                   │ │
+│  │  │  ┌─────────┐   │  │  ┌─────────┐   │  │  ┌─────────┐   │                   │ │
+│  │  │  │ Pod A-1 │◄──│──│──│ Pod B-1 │   │  │  │ Pod C-1 │   │                   │ │
+│  │  │  │ (local) │   │  │  │         │   │  │  │         │   │                   │ │
+│  │  │  └─────────┘   │  │  └─────────┘   │  │  └─────────┘   │                   │ │
+│  │  │  ┌─────────┐   │  │  ┌─────────┐   │  │  ┌─────────┐   │                   │ │
+│  │  │  │ Pod A-2 │◄──│  │  │ Pod B-2 │   │  │  │ Pod C-2 │   │                   │ │
+│  │  │  │ (local) │   │  │  │         │   │  │  │         │   │                   │ │
+│  │  │  └─────────┘   │  │  └─────────┘   │  │  └─────────┘   │                   │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘                   │ │
+│  │                                                                                    │ │
+│  │  优先路由到同 Zone 的 Pod，减少跨 AZ 流量和延迟                                   │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
-在使用 `NodePort` 或 `LoadBalancer` 类型的 Service 时，默认情况下，流量在被转发到后端 Pod 之前会经过一次源地址转换 (SNAT)，这会导致后端应用无法获取到真实的客户端 IP 地址。`externalTrafficPolicy` 字段就是为了解决这个问题。
+## 流量策略详解
 
-| 策略 | `externalTrafficPolicy: Cluster` (默认) | `externalTrafficPolicy: Local` |
-|:---|:---|:---|
-| **流量路径** | 流量可以从任一节点转发到集群中任一节点上的 Pod。 | 流量只会被转发到**当前节点**上的 Pod。 |
-| **优点** | - **负载均衡更均匀**：流量可以在所有后端 Pod 之间平均分配。 | - **保留客户端源 IP**：后端应用可以直接获取到真实的客户端 IP。 |
-| **缺点** | - **丢失源 IP**：后端应用看到的源 IP 是数据包离开节点的 IP。 | - **可能导致负载不均**：如果 Pod 分布不均，某些节点可能会接收到更多流量。 <br> - **需要额外的健康检查**：云厂商的 LoadBalancer 需要知道哪些节点上有健康的 Pod，这通常由 `kube-proxy` 实现。 |
-| **适用场景** | - 对源 IP 没有要求的应用。 <br> - 优先保证负载均衡的场景。 | - 需要根据客户端 IP 做访问控制、审计或地理位置分析的应用。 <br> - Web 服务器、API 网关等。 |
+### externalTrafficPolicy 对比
 
-**实操案例**:
-为一个需要记录真实访客 IP 的 Nginx 服务开启源 IP 保留。
+| 特性 | Cluster (默认) | Local |
+|------|---------------|-------|
+| **流量路径** | 可跨节点转发 | 仅本地节点 Pod |
+| **源 IP** | 被 SNAT 替换 | 保留原始 IP |
+| **负载均衡** | 均匀分布 | 可能不均匀 |
+| **网络跳数** | 可能多一跳 | 最少跳数 |
+| **延迟** | 较高 | 较低 |
+| **健康检查** | 标准 | 需要 NodePort 健康检查 |
+| **Pod 不在节点** | 正常转发 | 流量丢弃 |
+| **适用场景** | 通用场景 | 需要源 IP 的应用 |
+
+### externalTrafficPolicy 流量路径
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    externalTrafficPolicy Flow Comparison                            │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Cluster Mode (默认):                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  External        LoadBalancer      Node 1           Node 2                  │   │
+│  │  Client          (Cloud)           (no pods)        (has pods)              │   │
+│  │                                                                              │   │
+│  │    │                │                │                │                      │   │
+│  │    │ src: 1.2.3.4   │                │                │                      │   │
+│  │    └───────────────►│                │                │                      │   │
+│  │                     │ src: 1.2.3.4   │                │                      │   │
+│  │                     └───────────────►│                │                      │   │
+│  │                                      │ src: Node1 IP  │   ◄── SNAT!         │   │
+│  │                                      └───────────────►│                      │   │
+│  │                                                       │                      │   │
+│  │                                                       ▼                      │   │
+│  │                                                    ┌──────┐                  │   │
+│  │                                                    │ Pod  │                  │   │
+│  │                                                    │ sees │                  │   │
+│  │                                                    │Node1 │ ◄── 源 IP 丢失   │   │
+│  │                                                    │ IP   │                  │   │
+│  │                                                    └──────┘                  │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Local Mode:                                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  External        LoadBalancer      Node 1           Node 2                  │   │
+│  │  Client          (Cloud)           (no pods)        (has pods)              │   │
+│  │                                                                              │   │
+│  │    │                │                │                │                      │   │
+│  │    │ src: 1.2.3.4   │                │                │                      │   │
+│  │    └───────────────►│                │                │                      │   │
+│  │                     │                │                │                      │   │
+│  │                     │ Health check   │                │                      │   │
+│  │                     │ Node1: FAIL ──►│ (no local pod) │                      │   │
+│  │                     │ Node2: PASS ──────────────────►│                      │   │
+│  │                     │                                │                      │   │
+│  │                     │ src: 1.2.3.4                   │                      │   │
+│  │                     └───────────────────────────────►│                      │   │
+│  │                                                       │                      │   │
+│  │                                                       ▼                      │   │
+│  │                                                    ┌──────┐                  │   │
+│  │                                                    │ Pod  │                  │   │
+│  │                                                    │ sees │                  │   │
+│  │                                                    │1.2.3.│ ◄── 源 IP 保留   │   │
+│  │                                                    │  4   │                  │   │
+│  │                                                    └──────┘                  │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### externalTrafficPolicy 配置示例
 
 ```yaml
+# external-traffic-policy-examples.yaml
+---
+# 保留源 IP 的 LoadBalancer Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-preserve-ip
+  name: web-preserve-source-ip
+  namespace: production
+  annotations:
+    # AWS NLB 推荐配置
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 spec:
   type: LoadBalancer
-  externalTrafficPolicy: Local # 关键配置
+  externalTrafficPolicy: Local  # 保留源 IP
+  
   selector:
-    app: nginx
+    app: web
+  
   ports:
-    - protocol: TCP
+    - name: http
       port: 80
-      targetPort: 80
-```
-**专家提示**: 当使用 `Local` 策略时，如果某个节点上没有健康的后端 Pod，发送到该节点 `NodePort` 的流量将会被丢弃。因此，确保 Pod 在节点间均匀分布（例如使用 `podAntiAffinity`）非常重要。
-
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8443
+  
+  # 健康检查端口 (Local 模式自动使用)
+  healthCheckNodePort: 32000
 ---
+# 确保 Pod 均匀分布以配合 Local 策略
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: production
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      # 确保每个节点至少有一个 Pod
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: web
+      
+      # 或使用 Pod Anti-Affinity
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: web
+                topologyKey: kubernetes.io/hostname
+      
+      containers:
+        - name: web
+          image: nginx:latest
+          ports:
+            - containerPort: 8080
+            - containerPort: 8443
+```
 
-## 2. `sessionAffinity`: 会话亲和性
+### internalTrafficPolicy 配置
 
-会话亲和性 (Session Affinity)，也称为“粘性会话”(Sticky Session)，可以确保来自同一个客户端的请求始终被转发到同一个后端 Pod。
-
-| `sessionAffinity` | 描述 |
-|:---:|:---|
-| **`None` (默认)** | 不启用会话亲和性，请求被随机或轮询分发。 |
-| **`ClientIP`** | 基于客户端的 IP 地址来保持会话。在一段时间内（由 `sessionAffinityConfig` 定义），来自同一 IP 的请求会发往同一个 Pod。 |
-
-**应用场景**:
-- 需要在内存中缓存用户状态的应用，例如一些传统的 Web 应用或有状态的应用。
-- 减少后端 Pod 之间状态同步的开销。
-
-**YAML 示例**:
 ```yaml
+# internal-traffic-policy.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: sticky-service
+  name: cache-local
+  namespace: production
 spec:
   type: ClusterIP
-  sessionAffinity: ClientIP # 启用基于客户端 IP 的会話亲和性
+  
+  # 内部流量策略 (v1.26+ GA)
+  internalTrafficPolicy: Local  # 优先本地 Pod
+  
+  selector:
+    app: cache
+  
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+# DaemonSet 部署的本地缓存
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cache
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: cache
+  template:
+    metadata:
+      labels:
+        app: cache
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+```
+
+---
+
+## 会话亲和性 (Session Affinity)
+
+### 会话亲和性工作原理
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                        Session Affinity Mechanism                                   │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  sessionAffinity: ClientIP                                                         │
+│                                                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           kube-proxy                                         │   │
+│  │                                                                              │   │
+│  │  Affinity Table (per Service):                                              │   │
+│  │  ┌─────────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  Client IP    │  Backend Pod      │  Last Access    │  Expires      │   │   │
+│  │  │───────────────┼───────────────────┼─────────────────┼───────────────│   │   │
+│  │  │  10.0.0.1     │  10.244.1.10:8080 │  12:00:00       │  15:00:00     │   │   │
+│  │  │  10.0.0.2     │  10.244.2.11:8080 │  12:05:00       │  15:05:00     │   │   │
+│  │  │  10.0.0.3     │  10.244.1.10:8080 │  12:10:00       │  15:10:00     │   │   │
+│  │  └─────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                              │   │
+│  │  Flow:                                                                       │   │
+│  │  1. Client 10.0.0.1 → Service VIP                                           │   │
+│  │  2. Check affinity table for 10.0.0.1                                       │   │
+│  │  3. If found and not expired → route to cached backend                      │   │
+│  │  4. If not found → select backend, update table                             │   │
+│  │  5. If expired → remove entry, select new backend                           │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  iptables 实现 (Cluster mode):                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │  -A KUBE-SVC-XXX -m recent --name affinity-XXX --rcheck --seconds 10800     │   │
+│  │      --reap -j KUBE-SEP-TARGET                                               │   │
+│  │  -A KUBE-SVC-XXX -m statistic --mode random --probability 0.33333           │   │
+│  │      -j KUBE-SEP-AAA                                                         │   │
+│  │  ...                                                                         │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  IPVS 实现:                                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │  ipvsadm -A -t 10.96.0.100:80 -s rr -p 10800                                │   │
+│  │                                   └── persistence timeout (seconds)          │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 会话亲和性配置示例
+
+```yaml
+# session-affinity-examples.yaml
+---
+# 基于 ClientIP 的会话亲和性
+apiVersion: v1
+kind: Service
+metadata:
+  name: stateful-app
+  namespace: production
+spec:
+  type: ClusterIP
+  
+  # 启用会话亲和性
+  sessionAffinity: ClientIP
   sessionAffinityConfig:
     clientIP:
-      timeoutSeconds: 10800 # 会话保持超时时间，默认为 10800 秒 (3 小时)
+      # 会话保持时间 (秒)
+      # 默认: 10800 (3小时)
+      # 最大: 86400 (24小时)
+      timeoutSeconds: 3600  # 1小时
+  
   selector:
-    app: my-stateful-app
+    app: stateful-app
+  
   ports:
     - port: 80
       targetPort: 8080
-```
-
-**注意事项**:
-- `ClientIP` 亲和性对客户端 IP 的识别能力依赖于网络拓扑。如果客户端经过了 NAT 网关或 HTTP 代理，多个客户端可能表现为同一个 IP，导致负载集中到单个 Pod。
-- 它不能保证绝对的会话保持，因为当后端 Pod 重启或被重新调度时，会话会中断。对于需要强一致性会话的场景，应考虑使用应用层的解决方案（如 Redis 缓存 Session）。
-
 ---
-
-## 3. 拓扑感知路由 (Topology Aware Routing)
-
-拓扑感知路由是一个高级特性，旨在将服务流量优先路由到与客户端位于同一拓扑区域（如同一可用区、同一机架）的端点。这可以显著**降低网络延迟**和**跨区流量成本**。
-
-**工作原理** (以可用区为例):
-1.  **启用特性门控**: 需要在 `kube-apiserver` 和 `kube-proxy` 上启用 `TopologyAwareRouting` 特性门控。
-2.  **Service 注解**: 在 Service 上添加 `service.kubernetes.io/topology-mode: Auto` 注解。
-3.  **EndpointSlice 计算**: Kubernetes 控制平面会分析每个区域 (Zone) 的端点分布和容量。
-4.  **下发拓扑子集**: 如果条件满足（例如，每个区域都有足够数量的健康端点），控制平面会为每个区域的 `kube-proxy` 生成一个只包含该区域内端点的 `EndpointSlice` 子集。
-5.  **区域内路由**: 节点上的 `kube-proxy` 只会将流量路由到本区域内的 Pod，从而避免了昂贵的跨区调用。如果本区域端点全部失败，它会自动故障转移 (failover) 到其他区域。
-
-**YAML 示例**:
-```yaml
+# WebSocket 应用 (需要长连接会话保持)
 apiVersion: v1
 kind: Service
 metadata:
-  name: topology-aware-svc
+  name: websocket-app
+  namespace: production
   annotations:
-    service.kubernetes.io/topology-mode: Auto # 关键注解
+    # Nginx Ingress WebSocket 支持
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 7200  # 2小时
+  selector:
+    app: websocket-app
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+# 游戏服务器 (长会话)
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-server
+  namespace: production
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local  # 保留源 IP + 会话亲和
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 86400  # 24小时 (最大值)
+  selector:
+    app: game-server
+  ports:
+    - name: game
+      port: 7777
+      targetPort: 7777
+      protocol: UDP
+```
+
+### 会话亲和性注意事项
+
+| 场景 | 问题 | 解决方案 |
+|------|------|---------|
+| **NAT 后多客户端** | 多个客户端共享同一出口 IP | 使用应用层会话管理 (Redis) |
+| **Pod 重启** | 会话中断 | 使用外部状态存储 |
+| **滚动更新** | 部分会话中断 | 使用 PDB + 优雅终止 |
+| **负载不均** | 热门客户端集中到单个 Pod | 监控 + 动态扩容 |
+| **超时配置** | 会话过期 | 根据业务调整 timeout |
+
+---
+
+## 拓扑感知路由 (Topology Aware Routing)
+
+### 拓扑感知工作原理
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                     Topology Aware Routing (TAR) Mechanism                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Prerequisites:                                                                     │
+│  • Nodes labeled with topology.kubernetes.io/zone                                  │
+│  • Service annotated with service.kubernetes.io/topology-mode: Auto                │
+│  • Sufficient endpoints in each zone                                               │
+│                                                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                        Control Plane Processing                              │   │
+│  │                                                                              │   │
+│  │  1. EndpointSlice Controller calculates zone distribution                   │   │
+│  │  2. For each zone, generate hints for endpoints                             │   │
+│  │  3. kube-proxy receives EndpointSlice with hints                            │   │
+│  │  4. kube-proxy programs rules using only local zone endpoints               │   │
+│  │                                                                              │   │
+│  │  EndpointSlice with Topology Hints:                                         │   │
+│  │  ┌───────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │  endpoints:                                                            │ │   │
+│  │  │    - addresses: ["10.244.1.10"]                                       │ │   │
+│  │  │      zone: "us-west-2a"                                               │ │   │
+│  │  │      hints:                                                            │ │   │
+│  │  │        forZones:                                                       │ │   │
+│  │  │          - name: "us-west-2a"  ◄── 此端点服务于 us-west-2a 区域       │ │   │
+│  │  │    - addresses: ["10.244.2.11"]                                       │ │   │
+│  │  │      zone: "us-west-2b"                                               │ │   │
+│  │  │      hints:                                                            │ │   │
+│  │  │        forZones:                                                       │ │   │
+│  │  │          - name: "us-west-2b"                                         │ │   │
+│  │  └───────────────────────────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Zone Traffic Distribution:                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  us-west-2a                    us-west-2b                    us-west-2c     │   │
+│  │  ┌─────────────────┐          ┌─────────────────┐          ┌─────────────┐ │   │
+│  │  │                 │          │                 │          │             │ │   │
+│  │  │  Client A ─────►│          │  Client B ─────►│          │  Client C   │ │   │
+│  │  │       │         │          │       │         │          │       │     │ │   │
+│  │  │       ▼         │          │       ▼         │          │       ▼     │ │   │
+│  │  │  ┌─────────┐   │          │  ┌─────────┐   │          │  No local   │ │   │
+│  │  │  │ Pod A-1 │◄──│          │  │ Pod B-1 │◄──│          │  endpoints  │ │   │
+│  │  │  └─────────┘   │          │  └─────────┘   │          │       │     │ │   │
+│  │  │  ┌─────────┐   │          │  ┌─────────┐   │          │       │     │ │   │
+│  │  │  │ Pod A-2 │◄──│          │  │ Pod B-2 │◄──│          │       ▼     │ │   │
+│  │  │  └─────────┘   │          │  └─────────┘   │          │  Failover   │ │   │
+│  │  │                 │          │                 │          │  to other   │ │   │
+│  │  │  100% local     │          │  100% local     │          │  zones      │ │   │
+│  │  │  traffic        │          │  traffic        │          │             │ │   │
+│  │  └─────────────────┘          └─────────────────┘          └─────────────┘ │   │
+│  │                                                                              │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Benefits:                                                                         │
+│  • Reduced cross-zone network traffic (cost savings)                              │
+│  • Lower latency (same-zone routing)                                              │
+│  • Automatic failover when zone has no healthy endpoints                          │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 拓扑感知路由配置
+
+```yaml
+# topology-aware-routing.yaml
+---
+# 启用拓扑感知路由的 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api
+  namespace: production
+  annotations:
+    # 启用拓扑感知路由 (v1.27+ 推荐)
+    service.kubernetes.io/topology-mode: Auto
+    
+    # 旧版注解 (v1.21-v1.26)
+    # service.kubernetes.io/topology-aware-hints: Auto
 spec:
   type: ClusterIP
   selector:
-    app: my-app
+    app: backend-api
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
+---
+# 多区域部署的 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: production
+spec:
+  replicas: 9  # 每个 AZ 至少 3 个
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      # 确保跨区域均匀分布
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: backend-api
+      
+      containers:
+        - name: api
+          image: backend-api:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+# 验证拓扑感知生效
+# kubectl get endpointslices -l kubernetes.io/service-name=backend-api -o yaml
+# 查看 endpoints[].hints.forZones 字段
 ```
 
-**适用场景**:
-- 部署在多个可用区（AZ）的大型、延迟敏感型应用。
-- 希望优化云厂商跨区流量成本的场景。
+### 拓扑感知条件和限制
+
+| 条件 | 说明 |
+|------|------|
+| **节点标签** | 必须有 `topology.kubernetes.io/zone` 标签 |
+| **最小端点数** | 每个区域至少 3 个端点 (可配置) |
+| **端点分布** | 端点在各区域分布相对均匀 |
+| **Service 类型** | ClusterIP, NodePort, LoadBalancer |
+| **协议** | TCP 和 UDP |
 
 ---
 
-## 4. 无选择器的 Service (Services without selectors)
+## 无选择器 Service (Services without Selectors)
 
-通常，Service 通过 `selector` 来自动发现和关联后端 Pod。但有时，我们希望手动管理 Service 的端点，这时就可以创建一个不带 `selector` 的 Service。
+### 无选择器 Service 架构
 
-**工作原理**:
-- 如果 Service 没有 `selector`，Kubernetes 不会自动创建 `EndpointSlice` 对象。
-- 你必须手动创建一个与 Service 同名的 `EndpointSlice` (或旧版的 `Endpoints`) 对象，并在其中指定后端的 IP 地址和端口。
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    Services without Selectors Architecture                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Use Cases:                                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  1. External Database        2. Cross-Cluster Service  3. Migration Bridge  │   │
+│  │                                                                              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │   K8s Pod     │           │   Cluster A   │        │   Legacy App  │    │   │
+│  │  │               │           │               │        │   (VM)        │    │   │
+│  │  │ db-svc:3306 ──┼──────────►│ ┌───────────┐ │        │               │    │   │
+│  │  │               │           │ │ Service B │ │        │ 192.168.1.100 │    │   │
+│  │  └───────────────┘           │ └───────────┘ │        └───────────────┘    │   │
+│  │         │                    └───────────────┘               ▲              │   │
+│  │         │                           │                        │              │   │
+│  │         ▼                           ▼                        │              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │ EndpointSlice │           │ EndpointSlice │        │ EndpointSlice │    │   │
+│  │  │               │           │               │        │               │    │   │
+│  │  │ RDS endpoint  │           │ Cluster B IPs │        │ VM IP address │    │   │
+│  │  │ 10.0.1.50     │           │ 10.1.0.x      │        │ 192.168.1.100 │    │   │
+│  │  └───────────────┘           └───────────────┘        └───────────────┘    │   │
+│  │         │                           │                        │              │   │
+│  │         ▼                           ▼                        ▼              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │  External DB  │           │  Remote       │        │  Legacy App   │    │   │
+│  │  │  (RDS/Cloud)  │           │  Cluster B    │        │  (Gradual     │    │   │
+│  │  │               │           │  Pods         │        │   Migration)  │    │   │
+│  │  └───────────────┘           └───────────────┘        └───────────────┘    │   │
+│  │                                                                              │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
 
-**实操案例**: 将集群内的服务平滑迁移到 Kubernetes
-假设你有一个外部的数据库集群，你想让集群内的应用通过一个稳定的 Service 名称 (`external-db`) 来访问它，而不是硬编码 IP 地址。
+### 无选择器 Service 配置示例
 
-**Step 1: 创建无选择器的 Service**
 ```yaml
+# service-without-selector.yaml
+---
+# 1. 外部数据库代理
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-db # Service 名称
+  name: external-mysql
+  namespace: production
 spec:
+  type: ClusterIP
   ports:
-    - protocol: TCP
-      port: 3306
+    - port: 3306
       targetPort: 3306
-# 注意：这里没有 selector
-```
-
-**Step 2: 手动创建 EndpointSlice**
-```yaml
+  # 无 selector
+---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: external-db-slice # 名称不重要，但标签必须匹配
+  name: external-mysql-1
+  namespace: production
   labels:
-    kubernetes.io/service-name: external-db # 关键标签，将此 Slice 与 Service 关联
-addressType: ipv4
+    kubernetes.io/service-name: external-mysql
+addressType: IPv4
 ports:
-  - name: ''
-    appProtocol: tcp
+  - name: ""
+    appProtocol: mysql
     protocol: TCP
     port: 3306
 endpoints:
   - addresses:
-      - "192.168.10.1" # 外部数据库主库 IP
+      - "10.0.1.50"  # RDS Primary
+    conditions:
+      ready: true
   - addresses:
-      - "192.168.10.2" # 外部数据库从库 IP
+      - "10.0.1.51"  # RDS Replica
+    conditions:
+      ready: true
+---
+# 2. 外部 API 服务代理
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-api
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+    - name: https
+      port: 443
+      targetPort: 443
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: external-api-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: external-api
+addressType: IPv4
+ports:
+  - name: https
+    appProtocol: https
+    protocol: TCP
+    port: 443
+endpoints:
+  - addresses:
+      - "203.0.113.10"
+    conditions:
+      ready: true
+  - addresses:
+      - "203.0.113.11"
+    conditions:
+      ready: true
+---
+# 3. 跨集群服务发现
+apiVersion: v1
+kind: Service
+metadata:
+  name: remote-service
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: remote-service-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: remote-service
+addressType: IPv4
+ports:
+  - port: 8080
+    protocol: TCP
+endpoints:
+  - addresses:
+      - "10.1.0.10"  # Remote cluster Pod IP
+    conditions:
+      ready: true
+    zone: "us-east-1a"
+  - addresses:
+      - "10.1.0.11"
+    conditions:
+      ready: true
+    zone: "us-east-1b"
 ```
 
-现在，集群内的应用只需要访问 `external-db:3306`，Kubernetes 就会将流量负载均衡到 `192.168.10.1` 和 `192.168.10.2`。当数据库完全迁移到集群内后，只需修改 `external-db` Service，为其添加 `selector`，并删除手动的 `EndpointSlice` 即可，应用代码无需任何改动。
+### 动态更新 EndpointSlice
+
+```bash
+#!/bin/bash
+# update-external-endpoints.sh
+# 动态更新外部服务端点
+
+SERVICE_NAME="external-mysql"
+NAMESPACE="production"
+
+# 获取新的端点 IP (例如从云 API)
+get_rds_endpoints() {
+    # 示例: 从 AWS RDS 获取端点
+    aws rds describe-db-instances \
+        --db-instance-identifier my-rds \
+        --query 'DBInstances[0].Endpoint.Address' \
+        --output text
+}
+
+# 更新 EndpointSlice
+update_endpoints() {
+    local primary_ip="$1"
+    local replica_ip="$2"
+    
+    cat <<EOF | kubectl apply -f -
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: ${SERVICE_NAME}-1
+  namespace: ${NAMESPACE}
+  labels:
+    kubernetes.io/service-name: ${SERVICE_NAME}
+addressType: IPv4
+ports:
+  - name: mysql
+    protocol: TCP
+    port: 3306
+endpoints:
+  - addresses:
+      - "${primary_ip}"
+    conditions:
+      ready: true
+  - addresses:
+      - "${replica_ip}"
+    conditions:
+      ready: true
+EOF
+}
+
+# 主函数
+main() {
+    local primary=$(get_rds_endpoints)
+    local replica="${primary/primary/replica}"
+    
+    update_endpoints "$primary" "$replica"
+    echo "Endpoints updated: $primary, $replica"
+}
+
+main
+```
+
+---
+
+## 生产环境最佳实践
+
+### Service 配置检查清单
+
+| 检查项 | 说明 | 建议配置 |
+|-------|------|---------|
+| **流量策略** | 是否需要保留源 IP | Web 应用使用 Local |
+| **会话亲和** | 是否需要粘性会话 | 有状态应用启用 ClientIP |
+| **拓扑感知** | 是否需要区域路由 | 多 AZ 部署启用 |
+| **健康检查** | Local 策略需要 | 配置 healthCheckNodePort |
+| **Pod 分布** | 配合 Local 策略 | 使用 topologySpreadConstraints |
+| **超时配置** | 会话超时时间 | 根据业务需求调整 |
+| **监控告警** | Service 健康监控 | 配置 Prometheus 规则 |
+
+### 监控指标
+
+```yaml
+# service-monitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: service-advanced-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: service.advanced
+      rules:
+        - alert: ServiceTopologyHintsNotPopulated
+          expr: |
+            kube_endpointslice_info{topology_aware_hints_configured="true"} 
+            unless 
+            kube_endpointslice_hints_populated == 1
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Topology hints not populated"
+        
+        - alert: LocalTrafficPolicyNoLocalEndpoints
+          expr: |
+            kube_service_spec_external_traffic_policy{external_traffic_policy="Local"} 
+            * on(service, namespace) 
+            (count by (service, namespace) (kube_endpoint_address_available) == 0)
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Service with Local policy has no local endpoints on some nodes"
+```
+
+---
+
+## 版本变更记录
+
+| K8s版本 | 变更内容 | 影响 |
+|--------|---------|------|
+| v1.32 | 拓扑感知路由增强 | 更智能的区域路由 |
+| v1.31 | Service 内部流量策略改进 | 更灵活配置 |
+| v1.30 | EndpointSlice 性能优化 | 大规模更高效 |
+| v1.27 | topology-mode 注解 | 替代旧的 hints 注解 |
+| v1.26 | internalTrafficPolicy GA | 内部流量策略稳定 |
+| v1.25 | 拓扑感知路由 Beta | 跨 AZ 优化 |
+
+---
+
+> **参考文档**:  
+> - [Service Traffic Policy](https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies)
+> - [Topology Aware Routing](https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/)
+> - [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
+
+---
+
+*Kusheet - Kubernetes 知识速查表项目*
