@@ -25,7 +25,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 01 | K8s架构 | [kubernetes-architecture-overview](./tables/01-kubernetes-architecture-overview.md) |
 | 02 | 核心组件 | [core-components-deep-dive](./tables/02-core-components-deep-dive.md) |
 | 03 | API版本 | [api-versions-features](./tables/03-api-versions-features.md) |
-| 04 | 源码结构 | [source-code-structure](./tables/04-source-code-structure.md) |
+| 04 | 源码结构 | [source-code-structure](./tables/04-source-code-structure.md) - **完整更新** ✅ |
 | 05 | kubectl | [kubectl-commands-reference](./tables/05-kubectl-commands-reference.md) |
 | 06 | 集群配置 | [cluster-configuration-parameters](./tables/06-cluster-configuration-parameters.md) |
 | 07 | 升级策略 | [upgrade-paths-strategy](./tables/07-upgrade-paths-strategy.md) |
@@ -167,8 +167,8 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 99 | 排障概览 | [troubleshooting-overview](./tables/99-troubleshooting-overview.md) |
 | 100 | 排障工具 | [troubleshooting-tools](./tables/100-troubleshooting-tools.md) |
 | 101 | 性能分析 | [performance-profiling-tools](./tables/101-performance-profiling-tools.md) |
-| 102 | Pod Pending | [pod-pending-diagnosis](./tables/102-pod-pending-diagnosis.md) |
-| 103 | Node NotReady | [node-notready-diagnosis](./tables/103-node-notready-diagnosis.md) |
+| 102 | Pod Pending深度诊断 | [pod-pending-diagnosis](./tables/102-pod-pending-diagnosis.md) |
+| 103 | Node NotReady深度诊断 | [node-notready-diagnosis](./tables/103-node-notready-diagnosis.md) |
 | 104 | OOM诊断 | [oom-memory-diagnosis](./tables/104-oom-memory-diagnosis.md) |
 | 105 | 健康检查 | [cluster-health-check](./tables/105-cluster-health-check.md) |
 | 106 | 混沌工程 | [chaos-engineering](./tables/106-chaos-engineering.md) |
