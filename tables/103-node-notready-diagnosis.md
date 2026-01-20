@@ -1,577 +1,733 @@
-# 87 - 节点NotReady状态诊断
+# 103 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
 
-## NotReady状态架构图
+---
+
+## 目录
+
+1. [概述与状态机制](#1-概述与状态机制)
+2. [诊断决策树](#2-诊断决策树)
+3. [kubelet 问题诊断](#3-kubelet-问题诊断)
+4. [容器运行时诊断](#4-容器运行时诊断)
+5. [资源耗尽诊断](#5-资源耗尽诊断)
+6. [网络问题诊断](#6-网络问题诊断)
+7. [证书问题诊断](#7-证书问题诊断)
+8. [内核与系统问题](#8-内核与系统问题)
+9. [ACK/云环境特定问题](#9-ack云环境特定问题)
+10. [自动化诊断工具](#10-自动化诊断工具)
+11. [监控告警配置](#11-监控告警配置)
+12. [节点恢复操作](#12-节点恢复操作)
+13. [版本特定变更](#13-版本特定变更)
+14. [多角色视角](#14-多角色视角)
+15. [最佳实践](#15-最佳实践)
+
+---
+
+## 1. 概述与状态机制
+
+### 1.1 节点状态检测架构
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    Node NotReady 状态检测与处理架构                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│    ┌─────────────────────────────────────────────────────────────────┐     │
-│    │                      API Server                                  │     │
-│    │  ┌─────────────────────────────────────────────────────────┐   │     │
-│    │  │ Node Controller                                          │   │     │
-│    │  │ • 监控节点心跳(Lease/NodeStatus)                         │   │     │
-│    │  │ • 标记NotReady状态                                       │   │     │
-│    │  │ • 触发Pod驱逐(--pod-eviction-timeout)                   │   │     │
-│    │  │ • 更新节点Taint                                          │   │     │
-│    │  └─────────────────────────────────────────────────────────┘   │     │
-│    └────────────────────────────┬────────────────────────────────────┘     │
-│                                 │                                           │
-│              监控Lease对象 ←────┴────→ 检查NodeStatus                       │
-│                   │                          │                              │
-│                   ▼                          ▼                              │
-│    ┌─────────────────────┐    ┌─────────────────────────────────────────┐  │
-│    │   Lease (kube-node- │    │           NodeStatus                    │  │
-│    │   lease namespace)  │    │  ┌─────────────────────────────────┐   │  │
-│    │  ┌───────────────┐  │    │  │ Conditions:                     │   │  │
-│    │  │ • holderID    │  │    │  │   Ready            (True/False) │   │  │
-│    │  │ • renewTime   │  │    │  │   MemoryPressure   (True/False) │   │  │
-│    │  │ • leaseDur:40s│  │    │  │   DiskPressure     (True/False) │   │  │
-│    │  └───────────────┘  │    │  │   PIDPressure      (True/False) │   │  │
-│    └─────────────────────┘    │  │   NetworkUnavailable(True/False)│   │  │
-│                               │  └─────────────────────────────────┘   │  │
-│                               └─────────────────────────────────────────┘  │
-│                                                                             │
-│    ┌─────────────────────────── Worker Node ────────────────────────────┐  │
-│    │                                                                     │  │
-│    │   ┌─────────────────────────────────────────────────────────┐      │  │
-│    │   │                        kubelet                           │      │  │
-│    │   │  ┌─────────────────────────────────────────────────┐    │      │  │
-│    │   │  │ 心跳上报:                                        │    │      │  │
-│    │   │  │ • 更新Lease: 每10秒(默认)                        │    │      │  │
-│    │   │  │ • 更新NodeStatus: 每5分钟或状态变化时            │    │      │  │
-│    │   │  │ • nodeMonitorPeriod: 5s                          │    │      │  │
-│    │   │  │ • nodeMonitorGracePeriod: 40s                    │    │      │  │
-│    │   │  └─────────────────────────────────────────────────┘    │      │  │
-│    │   │                                                          │      │  │
-│    │   │  依赖组件:                                               │      │  │
-│    │   │  ┌─────────────┐ ┌────────────────┐ ┌────────────────┐  │      │  │
-│    │   │  │ Container   │ │    CNI         │ │   System       │  │      │  │
-│    │   │  │ Runtime     │ │    Plugin      │ │   Resources    │  │      │  │
-│    │   │  │ containerd  │ │  calico/cni    │ │  CPU/Mem/Disk  │  │      │  │
-│    │   │  └──────┬──────┘ └───────┬────────┘ └───────┬────────┘  │      │  │
-│    │   │         │                │                   │           │      │  │
-│    │   │         ▼                ▼                   ▼           │      │  │
-│    │   │  ┌─────────────────────────────────────────────────┐    │      │  │
-│    │   │  │              故障检测点                           │    │      │  │
-│    │   │  │ • 运行时状态    • CNI健康检查    • 资源压力      │    │      │  │
-│    │   │  └─────────────────────────────────────────────────┘    │      │  │
-│    │   └─────────────────────────────────────────────────────────┘      │  │
-│    └─────────────────────────────────────────────────────────────────────┘  │
-│                                                                             │
-│    ┌─────────────────────── NotReady 触发时间线 ─────────────────────────┐  │
-│    │                                                                      │  │
-│    │   kubelet停止心跳                                                    │  │
-│    │         │                                                            │  │
-│    │         ├──── 10s ────→ Lease过期(kubelet未更新)                    │  │
-│    │         │                                                            │  │
-│    │         ├──── 40s ────→ Node Controller标记Unknown                  │  │
-│    │         │                (nodeMonitorGracePeriod)                    │  │
-│    │         │                                                            │  │
-│    │         ├──── 5m  ────→ 添加NoSchedule Taint                        │  │
-│    │         │                (node.kubernetes.io/unreachable)            │  │
-│    │         │                                                            │  │
-│    │         └──── 5m+ ───→ 开始驱逐Pod                                  │  │
-│    │                         (pod-eviction-timeout)                       │  │
-│    │                                                                      │  │
-│    └──────────────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                    Node NotReady 状态检测与处理架构 (v1.25-v1.32)                        │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                              Control Plane                                       │   │
+│  │                                                                                  │   │
+│  │   ┌──────────────────────────────────────────────────────────────────────────┐ │   │
+│  │   │                   kube-controller-manager                                 │ │   │
+│  │   │                                                                           │ │   │
+│  │   │   ┌─────────────────────────────────────────────────────────────────┐   │ │   │
+│  │   │   │              NodeLifecycleController                             │   │ │   │
+│  │   │   │                                                                  │   │ │   │
+│  │   │   │   监控间隔: --node-monitor-period=5s                            │   │ │   │
+│  │   │   │   宽限期: --node-monitor-grace-period=40s                       │   │ │   │
+│  │   │   │   驱逐超时: --pod-eviction-timeout=5m (默认)                    │   │ │   │
+│  │   │   │   驱逐速率: --node-eviction-rate=0.1 (10%节点/秒)               │   │ │   │
+│  │   │   │                                                                  │   │ │   │
+│  │   │   │   功能:                                                          │   │ │   │
+│  │   │   │   • 监控 Lease 对象更新时间                                     │   │ │   │
+│  │   │   │   • 监控 NodeStatus.conditions 变化                             │   │ │   │
+│  │   │   │   • 添加 node.kubernetes.io/unreachable Taint                   │   │ │   │
+│  │   │   │   • 触发 TaintBasedEviction (v1.18+ 默认)                       │   │ │   │
+│  │   │   └─────────────────────────────────────────────────────────────────┘   │ │   │
+│  │   └──────────────────────────────────────────────────────────────────────────┘ │   │
+│  │                                                                                  │   │
+│  │   ┌──────────────────────────────────────────────────────────────────────────┐ │   │
+│  │   │                        etcd (Lease 存储)                                  │ │   │
+│  │   │                                                                           │ │   │
+│  │   │   kube-node-lease namespace:                                              │ │   │
+│  │   │   ├── node-001  (holderIdentity: node-001, renewTime: T1)                │ │   │
+│  │   │   ├── node-002  (holderIdentity: node-002, renewTime: T2)                │ │   │
+│  │   │   └── node-003  (holderIdentity: node-003, renewTime: T3)                │ │   │
+│  │   │                                                                           │ │   │
+│  │   │   Lease 更新频率: 每 10s (kubelet --node-lease-duration-seconds=40)      │ │   │
+│  │   └──────────────────────────────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                             │
+│                          ┌───────────────┴───────────────┐                            │
+│                          │ 心跳检测 (两种机制)            │                            │
+│                          ├───────────────────────────────┤                            │
+│                          │ 1. Lease 更新 (轻量级, 主要)  │                            │
+│                          │ 2. NodeStatus 更新 (重量级)   │                            │
+│                          └───────────────────────────────┘                            │
+│                                          │                                             │
+│  ┌───────────────────────────────────────┴───────────────────────────────────────┐   │
+│  │                            Worker Node                                         │   │
+│  │                                                                                │   │
+│  │   ┌────────────────────────────────────────────────────────────────────────┐  │   │
+│  │   │                           kubelet                                       │  │   │
+│  │   │                                                                         │  │   │
+│  │   │   心跳上报:                                                             │  │   │
+│  │   │   ├── Lease 更新: 每 10s (--node-status-update-frequency 已弃用)       │  │   │
+│  │   │   └── NodeStatus 更新: 每 5m 或状态变化时                               │  │   │
+│  │   │                                                                         │  │   │
+│  │   │   依赖检查:                                                             │  │   │
+│  │   │   ├── 容器运行时 (containerd/CRI-O)                                     │  │   │
+│  │   │   ├── CNI 插件健康状态                                                  │  │   │
+│  │   │   ├── 系统资源 (CPU/Memory/Disk/PID)                                    │  │   │
+│  │   │   └── 证书有效性                                                         │  │   │
+│  │   │                                                                         │  │   │
+│  │   │   健康检查端点:                                                         │  │   │
+│  │   │   ├── :10248/healthz (本地健康检查)                                     │  │   │
+│  │   │   ├── :10250/healthz (API健康检查)                                      │  │   │
+│  │   │   └── :10255/healthz (只读, 已废弃)                                     │  │   │
+│  │   └────────────────────────────────────────────────────────────────────────┘  │   │
+│  │                                                                                │   │
+│  │   ┌────────────────────────────────────────────────────────────────────────┐  │   │
+│  │   │                  Container Runtime (containerd)                         │  │   │
+│  │   │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │  │   │
+│  │   │  │ containerd  │  │containerd-  │  │    runc     │  │   Images    │   │  │   │
+│  │   │  │  daemon     │  │   shim      │  │ (OCI 运行时) │  │   Store     │   │  │   │
+│  │   │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │  │   │
+│  │   └────────────────────────────────────────────────────────────────────────┘  │   │
+│  └────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Node Condition状态详解
+### 1.2 Node Condition 状态详解
 
-| Condition | 正常值 | 异常含义 | 检测机制 | 影响 | 恢复时间 |
-|-----------|-------|---------|---------|------|---------|
-| **Ready** | True | kubelet不健康或无法与API Server通信 | Lease更新/NodeStatus | Pod无法调度,触发驱逐 | 心跳恢复后40s |
-| **MemoryPressure** | False | 节点内存低于eviction阈值 | kubelet内存监控 | 可能驱逐BestEffort Pod | 内存释放后立即 |
-| **DiskPressure** | False | 节点磁盘空间不足 | kubelet磁盘监控 | 可能驱逐Pod,阻止调度 | 磁盘释放后立即 |
-| **PIDPressure** | False | 节点进程数接近限制 | kubelet PID监控 | 可能驱逐Pod | PID释放后立即 |
-| **NetworkUnavailable** | False | 节点网络未正确配置 | CNI插件报告 | Pod网络故障 | CNI修复后 |
+| Condition | 正常值 | 异常含义 | 检测机制 | 触发影响 | 恢复条件 |
+|-----------|--------|---------|---------|---------|---------|
+| **Ready** | True | kubelet 不健康或无法与 API Server 通信 | Lease/NodeStatus | Pod 无法调度; 超时后驱逐 | 心跳恢复后 40s |
+| **MemoryPressure** | False | 可用内存低于 eviction 阈值 | kubelet cAdvisor | BestEffort Pod 驱逐 | 内存释放后立即 |
+| **DiskPressure** | False | 磁盘空间/inode 不足 | kubelet 磁盘监控 | 禁止调度; Pod 驱逐 | 磁盘释放后立即 |
+| **PIDPressure** | False | 进程数接近系统限制 | kubelet PID 监控 | 禁止调度; 可能驱逐 | PID 释放后立即 |
+| **NetworkUnavailable** | False | 节点网络未正确配置 | CNI 插件报告 | Pod 网络故障 | CNI 修复后 |
 
-### Condition状态转换
+### 1.3 NotReady 状态时间线
 
-```yaml
-# 节点Condition结构示例
-status:
-  conditions:
-  - type: Ready
-    status: "True"                              # True/False/Unknown
-    lastHeartbeatTime: "2026-01-19T10:00:00Z"  # 最后心跳时间
-    lastTransitionTime: "2026-01-18T08:00:00Z" # 状态变更时间
-    reason: KubeletReady                        # 状态原因
-    message: "kubelet is posting ready status"  # 详细信息
-  - type: MemoryPressure
-    status: "False"
-    lastHeartbeatTime: "2026-01-19T10:00:00Z"
-    lastTransitionTime: "2026-01-18T08:00:00Z"
-    reason: KubeletHasSufficientMemory
-    message: "kubelet has sufficient memory available"
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                         NotReady 状态演变时间线                                          │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                          │
+│   T=0s        kubelet 停止心跳 (故障发生)                                               │
+│    │                                                                                     │
+│    ├── T+10s   Lease 超过更新周期 (kubelet 未更新)                                      │
+│    │           ⚠️ 此时节点仍然显示 Ready=True                                           │
+│    │                                                                                     │
+│    ├── T+40s   Node Controller 标记 Ready=Unknown                                       │
+│    │           ⚠️ 触发告警: NodeUnknown                                                 │
+│    │           • nodeMonitorGracePeriod 超时                                            │
+│    │                                                                                     │
+│    ├── T+45s   添加 Taint: node.kubernetes.io/unreachable:NoSchedule                    │
+│    │           ⚠️ 新 Pod 不再调度到此节点                                               │
+│    │                                                                                     │
+│    ├── T+50s   添加 Taint: node.kubernetes.io/unreachable:NoExecute                     │
+│    │           ⚠️ 触发 TaintBasedEviction                                               │
+│    │           • 没有 tolerationSeconds 的 Pod 立即驱逐                                 │
+│    │           • 有 tolerationSeconds 的 Pod 等待超时后驱逐                             │
+│    │                                                                                     │
+│    ├── T+5m    默认 tolerationSeconds=300s 到期                                         │
+│    │           ⚠️ 大部分工作负载 Pod 开始被驱逐                                         │
+│    │           • DaemonSet Pod 保留 (默认容忍 unreachable)                              │
+│    │           • 带 node.kubernetes.io/unreachable 容忍的 Pod 保留                      │
+│    │                                                                                     │
+│    └── T+10m+  节点持续 NotReady                                                        │
+│                ⚠️ 所有不容忍 unreachable 的 Pod 已驱逐                                  │
+│                • 可能触发节点自愈/替换流程                                               │
+│                                                                                          │
+│   恢复时间线:                                                                            │
+│    │                                                                                     │
+│    ├── 故障修复  kubelet 恢复心跳                                                       │
+│    │                                                                                     │
+│    ├── +10s     Lease 更新成功                                                          │
+│    │                                                                                     │
+│    ├── +40s     Node Controller 检测到心跳恢复                                          │
+│    │            Ready=Unknown → Ready=True                                               │
+│    │                                                                                     │
+│    └── +45s     移除 unreachable Taint                                                  │
+│                 节点恢复正常调度                                                         │
+│                                                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## NotReady常见原因分类
+### 1.4 紧急程度分类
 
-### 原因分类矩阵
+| 紧急级别 | NotReady 持续时间 | 影响范围 | 响应时间 | 处理优先级 |
+|---------|-----------------|---------|---------|-----------|
+| **P0 - 紧急** | > 10min | 多节点/关键业务 | < 15min | 立即处理 |
+| **P1 - 高** | > 5min | 生产单节点 | < 30min | 优先处理 |
+| **P2 - 中** | > 2min | 非核心节点 | < 2h | 计划处理 |
+| **P3 - 低** | < 2min | 开发/测试环境 | < 24h | 常规处理 |
 
-| 原因类别 | 具体原因 | 发生频率 | 影响范围 | 紧急程度 | 恢复难度 |
+---
+
+## 2. 诊断决策树
+
+### 2.1 快速诊断流程图
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                          Node NotReady 快速诊断决策树                                    │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                          │
+│   Node NotReady 告警触发                                                                │
+│           │                                                                              │
+│           ▼                                                                              │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 1: 确认问题范围                   │                                             │
+│   │ kubectl get nodes                      │                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│           ├─────────────────────────────────────────────────────┐                       │
+│           │                                                     │                       │
+│     单节点 NotReady                                      多节点 NotReady                │
+│           │                                                     │                       │
+│           ▼                                                     ▼                       │
+│   ┌───────────────────┐                              ┌───────────────────────┐          │
+│   │ Step 2: 检查连通性│                              │ 检查控制平面/网络    │          │
+│   │ SSH 能否连接?     │                              │ • API Server 状态    │          │
+│   └───────────────────┘                              │ • 网络基础设施       │          │
+│           │                                          │ • 云平台故障        │          │
+│      ┌────┴────┐                                     └───────────────────────┘          │
+│      │         │                                                                        │
+│   能 SSH    不能 SSH                                                                    │
+│      │         │                                                                        │
+│      ▼         ▼                                                                        │
+│  继续诊断   检查云平台/                                                                 │
+│             物理机状态                                                                   │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 3: 检查 kubelet                  │                                             │
+│   │ systemctl status kubelet              │                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│      ┌────┴────┐                                                                        │
+│      │         │                                                                        │
+│   运行中    未运行                                                                       │
+│      │         │                                                                        │
+│      │         └──▶ 检查 kubelet 日志 ──▶ 跳转第3章                                    │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 4: 检查容器运行时                 │                                             │
+│   │ systemctl status containerd           │                                             │
+│   │ crictl info                           │                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│      ┌────┴────┐                                                                        │
+│      │         │                                                                        │
+│   正常      异常 ──▶ 跳转第4章                                                          │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 5: 检查系统资源                   │                                             │
+│   │ free -h / df -h / ps aux              │                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│      ┌────┴────┐                                                                        │
+│      │         │                                                                        │
+│   充足      不足 ──▶ 跳转第5章                                                          │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 6: 检查网络连通性                 │                                             │
+│   │ curl -k https://apiserver:6443/healthz│                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│      ┌────┴────┐                                                                        │
+│      │         │                                                                        │
+│   可达      不可达 ──▶ 跳转第6章                                                        │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 7: 检查证书                       │                                             │
+│   │ openssl x509 -in <cert> -noout -dates │                                             │
+│   └───────────────────────────────────────┘                                             │
+│           │                                                                              │
+│      ┌────┴────┐                                                                        │
+│      │         │                                                                        │
+│   有效      过期 ──▶ 跳转第7章                                                          │
+│      │                                                                                   │
+│      ▼                                                                                   │
+│   ┌───────────────────────────────────────┐                                             │
+│   │ Step 8: 深度诊断                       │                                             │
+│   │ 检查 dmesg / journalctl               │                                             │
+│   │ 跳转第8章: 内核与系统问题             │                                             │
+│   └───────────────────────────────────────┘                                             │
+│                                                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 2.2 故障原因分类矩阵
+
+| 原因类别 | 具体原因 | 发生频率 | 影响范围 | 诊断难度 | 恢复难度 |
 |---------|---------|---------|---------|---------|---------|
-| **kubelet问题** | kubelet进程崩溃 | 高 | 单节点 | P0 | 低 |
-| **kubelet问题** | kubelet配置错误 | 中 | 单节点 | P1 | 中 |
-| **kubelet问题** | kubelet版本不兼容 | 低 | 多节点 | P1 | 中 |
-| **容器运行时** | containerd故障 | 中 | 单节点 | P0 | 低 |
-| **容器运行时** | 运行时OOM | 高 | 单节点 | P1 | 中 |
-| **容器运行时** | shim进程泄漏 | 中 | 单节点 | P2 | 中 |
-| **网络问题** | CNI插件故障 | 高 | 多节点 | P0 | 中 |
-| **网络问题** | 节点与API Server不通 | 中 | 单节点 | P0 | 高 |
-| **网络问题** | DNS解析失败 | 中 | 单节点 | P1 | 低 |
-| **证书问题** | kubelet证书过期 | 低 | 多节点 | P1 | 中 |
-| **证书问题** | CA证书不匹配 | 低 | 多节点 | P0 | 高 |
-| **资源耗尽** | 内存耗尽 | 高 | 单节点 | P0 | 中 |
-| **资源耗尽** | 磁盘满 | 高 | 单节点 | P1 | 低 |
-| **资源耗尽** | inode耗尽 | 中 | 单节点 | P1 | 低 |
-| **内核问题** | 内核panic | 低 | 单节点 | P0 | 高 |
-| **内核问题** | 内核死锁 | 低 | 单节点 | P0 | 高 |
+| **kubelet** | kubelet 进程崩溃 | 高 | 单节点 | 低 | 低 |
+| **kubelet** | kubelet 配置错误 | 中 | 单节点 | 中 | 中 |
+| **kubelet** | kubelet 证书过期 | 低 | 可能多节点 | 低 | 中 |
+| **kubelet** | PLEG 超时 | 中 | 单节点 | 中 | 中 |
+| **运行时** | containerd 故障 | 中 | 单节点 | 低 | 低 |
+| **运行时** | containerd OOM | 中 | 单节点 | 中 | 中 |
+| **运行时** | shim 进程泄漏 | 中 | 单节点 | 中 | 低 |
+| **运行时** | 镜像存储损坏 | 低 | 单节点 | 高 | 高 |
+| **资源** | 内存耗尽 | 高 | 单节点 | 低 | 中 |
+| **资源** | 磁盘满 | 高 | 单节点 | 低 | 低 |
+| **资源** | inode 耗尽 | 中 | 单节点 | 低 | 低 |
+| **资源** | PID 耗尽 | 低 | 单节点 | 低 | 低 |
+| **网络** | API Server 不可达 | 中 | 单/多节点 | 中 | 中 |
+| **网络** | CNI 插件故障 | 高 | 多节点 | 中 | 中 |
+| **网络** | DNS 解析失败 | 中 | 多节点 | 低 | 低 |
+| **网络** | 网卡故障 | 低 | 单节点 | 中 | 高 |
+| **证书** | kubelet 客户端证书过期 | 低 | 多节点 | 低 | 中 |
+| **证书** | CA 证书不匹配 | 低 | 多节点 | 中 | 高 |
+| **内核** | 内核 panic | 低 | 单节点 | 高 | 高 |
+| **内核** | 内核死锁 | 低 | 单节点 | 高 | 高 |
+| **内核** | cgroup 异常 | 低 | 单节点 | 高 | 中 |
+| **硬件** | 物理服务器宕机 | 低 | 单节点 | - | 高 |
+| **云平台** | 实例被回收 | 中(竞价) | 单节点 | 低 | 中 |
+| **云平台** | 云平台故障 | 低 | 多节点 | - | - |
 
-### 根因分析决策树
+---
 
-```
-                          Node NotReady
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-         能SSH到节点?      节点物理存活?    多节点同时NotReady?
-              │                │                │
-         ┌────┴────┐      ┌────┴────┐      ┌────┴────┐
-         │Yes      │No    │Yes      │No    │Yes      │No
-         │         │      │         │      │         │
-    检查kubelet   检查    检查      检查    检查      继续
-    和运行时     网络/    IPMI/     硬件    控制平面   单节点
-                云平台   console          /网络     排查
-```
+## 3. kubelet 问题诊断
 
-## 完整诊断流程
-
-### 第一阶段: 快速状态检查
+### 3.1 kubelet 状态检查
 
 ```bash
 #!/bin/bash
-# node-notready-quick-check.sh - 快速诊断脚本
+# kubelet-diagnosis.sh - kubelet 完整诊断脚本
 
-NODE_NAME=${1:-""}
+echo "=============================================="
+echo "  kubelet 诊断报告 - $(hostname)"
+echo "  时间: $(date)"
+echo "=============================================="
 
-echo "====== Node NotReady 快速诊断 ======"
-echo "时间: $(date)"
-echo "目标节点: ${NODE_NAME:-所有NotReady节点}"
+# 1. 服务状态
 echo ""
-
-# 1. 列出所有NotReady节点
-echo "=== 1. NotReady节点列表 ==="
-kubectl get nodes -o wide | grep -v " Ready"
-
-# 2. 获取节点详细Condition
-if [ -n "$NODE_NAME" ]; then
-    echo -e "\n=== 2. 节点 $NODE_NAME Conditions ==="
-    kubectl get node "$NODE_NAME" -o jsonpath='{range .status.conditions[*]}{.type}{"\t"}{.status}{"\t"}{.reason}{"\t"}{.message}{"\n"}{end}' | column -t
-    
-    # 3. 检查Lease
-    echo -e "\n=== 3. 节点Lease状态 ==="
-    kubectl get lease -n kube-node-lease "$NODE_NAME" -o yaml 2>/dev/null | grep -E "renewTime|holderIdentity|leaseDurationSeconds"
-    
-    # 4. 最近事件
-    echo -e "\n=== 4. 节点相关事件 ==="
-    kubectl get events -A --field-selector involvedObject.name="$NODE_NAME" --sort-by='.lastTimestamp' | tail -20
-    
-    # 5. 节点上的Pod状态
-    echo -e "\n=== 5. 节点上的Pod状态 ==="
-    kubectl get pods -A -o wide --field-selector spec.nodeName="$NODE_NAME" | grep -v Running | head -20
-fi
-
-# 6. 控制平面组件状态(对比)
-echo -e "\n=== 6. kube-system组件状态 ==="
-kubectl get pods -n kube-system -o wide | grep -E "coredns|calico|cilium|kube-proxy" | head -10
-```
-
-### 第二阶段: 节点内部诊断
-
-```bash
-#!/bin/bash
-# node-internal-diagnosis.sh - 节点内部诊断(需SSH到节点执行)
-
-echo "====== 节点内部诊断 ======"
-echo "主机名: $(hostname)"
-echo "时间: $(date)"
-echo ""
-
-# 1. kubelet状态检查
-echo "=== 1. kubelet进程状态 ==="
+echo "=== 1. kubelet 服务状态 ==="
 systemctl status kubelet --no-pager | head -20
 echo ""
+echo "服务是否启用: $(systemctl is-enabled kubelet 2>/dev/null)"
+echo "服务是否运行: $(systemctl is-active kubelet 2>/dev/null)"
+echo "服务是否失败: $(systemctl is-failed kubelet 2>/dev/null)"
 
-echo "kubelet进程信息:"
-ps aux | grep kubelet | grep -v grep
+# 2. 进程信息
 echo ""
-
-# 检查kubelet是否能正常启动
-echo "kubelet启动失败原因(如有):"
-systemctl is-failed kubelet && journalctl -u kubelet -n 50 --no-pager | grep -E "error|Error|ERROR|failed|Failed"
-
-# 2. 容器运行时状态
-echo -e "\n=== 2. 容器运行时状态 ==="
-if systemctl is-active containerd &>/dev/null; then
-    echo "containerd状态: $(systemctl is-active containerd)"
+echo "=== 2. kubelet 进程信息 ==="
+KUBELET_PID=$(pgrep -x kubelet)
+if [ -n "$KUBELET_PID" ]; then
+    echo "PID: $KUBELET_PID"
+    ps -p $KUBELET_PID -o pid,ppid,%cpu,%mem,vsz,rss,etime,args --no-headers
     echo ""
-    echo "containerd详情:"
-    crictl info 2>/dev/null | head -30
-    echo ""
-    echo "运行中容器数量: $(crictl ps -q 2>/dev/null | wc -l)"
-    echo "所有容器数量: $(crictl ps -aq 2>/dev/null | wc -l)"
+    echo "打开文件数: $(ls /proc/$KUBELET_PID/fd 2>/dev/null | wc -l)"
+    echo "线程数: $(ls /proc/$KUBELET_PID/task 2>/dev/null | wc -l)"
 else
-    echo "containerd未运行!"
-    systemctl status containerd --no-pager | head -10
+    echo "kubelet 进程未运行!"
 fi
 
-# 3. 系统资源状态
-echo -e "\n=== 3. 系统资源状态 ==="
-echo "--- 内存 ---"
-free -h
+# 3. 配置文件检查
 echo ""
-echo "内存详情:"
-cat /proc/meminfo | grep -E "MemTotal|MemFree|MemAvailable|Buffers|Cached|SwapTotal|SwapFree"
+echo "=== 3. kubelet 配置 ==="
+KUBELET_CONFIG="/var/lib/kubelet/config.yaml"
+if [ -f "$KUBELET_CONFIG" ]; then
+    echo "配置文件: $KUBELET_CONFIG"
+    echo "--- 关键配置 ---"
+    grep -E "^(clusterDNS|clusterDomain|containerRuntimeEndpoint|cgroupDriver|evictionHard|systemReserved|kubeReserved)" "$KUBELET_CONFIG" 2>/dev/null
+else
+    echo "配置文件不存在: $KUBELET_CONFIG"
+fi
 
-echo -e "\n--- 磁盘 ---"
-df -h | grep -E "Filesystem|/$|/var"
+# 4. 健康检查端点
 echo ""
-echo "inode使用:"
-df -i | grep -E "Filesystem|/$|/var"
-
-echo -e "\n--- CPU负载 ---"
-uptime
+echo "=== 4. 健康检查端点 ==="
+echo "本地健康检查 (:10248/healthz):"
+curl -s --connect-timeout 5 http://localhost:10248/healthz && echo " [OK]" || echo " [FAIL]"
 echo ""
-echo "CPU使用Top5进程:"
-ps aux --sort=-%cpu | head -6
+echo "API 健康检查 (:10250/healthz):"
+curl -sk --connect-timeout 5 https://localhost:10250/healthz && echo " [OK]" || echo " [FAIL]"
 
-echo -e "\n--- 进程数 ---"
-echo "当前进程数: $(ps aux | wc -l)"
-echo "系统PID最大值: $(cat /proc/sys/kernel/pid_max)"
-
-# 4. 网络状态
-echo -e "\n=== 4. 网络状态 ==="
-echo "--- 网络接口 ---"
-ip addr show | grep -E "^[0-9]+:|inet "
-
-echo -e "\n--- 默认路由 ---"
-ip route show default
-
-echo -e "\n--- API Server连通性 ---"
-API_SERVER=$(cat /etc/kubernetes/kubelet.conf 2>/dev/null | grep server | awk '{print $2}')
-if [ -n "$API_SERVER" ]; then
+# 5. API Server 连接
+echo ""
+echo "=== 5. API Server 连接 ==="
+KUBECONFIG="/etc/kubernetes/kubelet.conf"
+if [ -f "$KUBECONFIG" ]; then
+    API_SERVER=$(grep "server:" "$KUBECONFIG" | awk '{print $2}')
     echo "API Server: $API_SERVER"
-    curl -sk --connect-timeout 5 "${API_SERVER}/healthz" && echo " (健康)" || echo " (无法连接)"
+    echo "连接测试:"
+    curl -sk --connect-timeout 5 "${API_SERVER}/healthz" && echo " [OK]" || echo " [FAIL]"
 fi
 
-# 5. 证书状态
-echo -e "\n=== 5. 证书状态 ==="
-echo "--- kubelet客户端证书 ---"
-KUBELET_CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
-if [ -f "$KUBELET_CERT" ]; then
-    echo "证书路径: $KUBELET_CERT"
-    openssl x509 -in "$KUBELET_CERT" -noout -dates 2>/dev/null
-    
-    # 计算证书剩余天数
-    EXPIRY=$(openssl x509 -in "$KUBELET_CERT" -noout -enddate 2>/dev/null | cut -d= -f2)
-    if [ -n "$EXPIRY" ]; then
-        EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s 2>/dev/null || date -j -f "%b %d %H:%M:%S %Y %Z" "$EXPIRY" +%s 2>/dev/null)
-        NOW_EPOCH=$(date +%s)
-        DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
-        echo "证书剩余天数: $DAYS_LEFT 天"
-        if [ $DAYS_LEFT -lt 30 ]; then
-            echo "⚠️ 警告: 证书即将过期!"
-        fi
-    fi
-else
-    echo "未找到kubelet证书文件"
+# 6. 错误日志分析
+echo ""
+echo "=== 6. 最近错误日志 ==="
+echo "--- 最近 30 分钟内的错误 ---"
+journalctl -u kubelet --since "30 minutes ago" --no-pager 2>/dev/null | grep -iE "error|fail|fatal|panic" | tail -20
+
+# 7. PLEG 状态
+echo ""
+echo "=== 7. PLEG 状态 ==="
+PLEG_ERRORS=$(journalctl -u kubelet --since "10 minutes ago" --no-pager 2>/dev/null | grep -c "PLEG is not healthy")
+echo "最近 10 分钟 PLEG 不健康次数: $PLEG_ERRORS"
+if [ $PLEG_ERRORS -gt 0 ]; then
+    echo "最近 PLEG 错误:"
+    journalctl -u kubelet --since "10 minutes ago" --no-pager 2>/dev/null | grep "PLEG" | tail -5
 fi
 
-# 6. CNI状态
-echo -e "\n=== 6. CNI插件状态 ==="
-echo "--- CNI配置 ---"
-ls -la /etc/cni/net.d/ 2>/dev/null || echo "CNI配置目录不存在"
-
-echo -e "\n--- CNI二进制 ---"
-ls -la /opt/cni/bin/ 2>/dev/null | head -10 || echo "CNI二进制目录不存在"
-
-# 7. 系统日志检查
-echo -e "\n=== 7. 关键系统日志 ==="
-echo "--- 最近的内核错误 ---"
-dmesg | tail -50 | grep -iE "error|fail|oom|kill|panic" | tail -10
-
-echo -e "\n--- kubelet最近错误 ---"
-journalctl -u kubelet --since "30 minutes ago" --no-pager 2>/dev/null | grep -iE "error|fail" | tail -20
-
-echo -e "\n====== 诊断完成 ======"
+# 8. Node 状态同步
+echo ""
+echo "=== 8. Node 状态同步 ==="
+journalctl -u kubelet --since "5 minutes ago" --no-pager 2>/dev/null | grep -E "node status|heartbeat" | tail -5
 ```
 
-### 第三阶段: 深度问题分析
+### 3.2 kubelet 常见错误及解决
 
-```bash
-#!/bin/bash
-# deep-analysis.sh - 深度问题分析
+| 错误日志模式 | 原因 | 解决方案 |
+|-------------|------|---------|
+| `failed to run Kubelet: running with swap on is not supported` | 未禁用 swap | `swapoff -a && sed -i '/swap/d' /etc/fstab` |
+| `error: failed to run Kubelet: unable to load bootstrap kubeconfig` | bootstrap 配置丢失 | 重新执行 kubeadm join |
+| `Unable to update cni config: no networks found` | CNI 未配置 | 安装 CNI 插件 |
+| `PLEG is not healthy: pleg was last seen active` | 容器运行时慢/故障 | 重启 containerd/清理容器 |
+| `failed to get node info` | API Server 不可达 | 检查网络/证书 |
+| `certificate has expired` | 证书过期 | 更新证书 |
+| `error killing pod: context deadline exceeded` | 运行时响应慢 | 重启 containerd |
+| `failed to update node status` | etcd/apiserver 问题 | 检查控制平面 |
 
-echo "====== 深度问题分析 ======"
-
-# 1. kubelet详细日志分析
-echo "=== 1. kubelet日志模式分析 ==="
-
-echo "--- PLEG相关错误 ---"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep -c "PLEG"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep "PLEG" | tail -5
-
-echo -e "\n--- 节点状态更新失败 ---"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep -c "failed to update node"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep "failed to update node" | tail -5
-
-echo -e "\n--- 证书相关错误 ---"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep -iE "certificate|x509|tls" | tail -5
-
-echo -e "\n--- 容器运行时错误 ---"
-journalctl -u kubelet --since "1 hour ago" --no-pager 2>/dev/null | grep -iE "rpc error|context deadline|runtime" | tail -5
-
-# 2. containerd详细分析
-echo -e "\n=== 2. containerd状态分析 ==="
-
-echo "--- containerd内存使用 ---"
-CONTAINERD_PID=$(pgrep -x containerd)
-if [ -n "$CONTAINERD_PID" ]; then
-    ps -p $CONTAINERD_PID -o pid,rss,vsz,%mem,%cpu,etime
-    echo ""
-    echo "containerd打开文件数: $(ls /proc/$CONTAINERD_PID/fd 2>/dev/null | wc -l)"
-fi
-
-echo -e "\n--- shim进程统计 ---"
-ps aux | grep containerd-shim | grep -v grep | wc -l
-echo "shim进程数量: $(ps aux | grep containerd-shim | grep -v grep | wc -l)"
-
-echo -e "\n--- 僵尸容器检查 ---"
-crictl ps -a 2>/dev/null | grep -v "Running\|Created" | head -10
-
-# 3. 系统资源深度分析
-echo -e "\n=== 3. 系统资源深度分析 ==="
-
-echo "--- 内存分页统计 ---"
-cat /proc/vmstat | grep -E "pgfault|pgmajfault|pswpin|pswpout"
-
-echo -e "\n--- OOM历史 ---"
-dmesg | grep -i "oom\|killed process" | tail -10
-
-echo -e "\n--- 磁盘IO统计 ---"
-iostat -x 1 3 2>/dev/null | tail -20 || echo "iostat不可用"
-
-# 4. 网络深度分析
-echo -e "\n=== 4. 网络深度分析 ==="
-
-echo "--- 连接状态统计 ---"
-ss -s
-
-echo -e "\n--- TIME_WAIT连接数 ---"
-ss -tan | grep TIME-WAIT | wc -l
-
-echo -e "\n--- ESTABLISHED连接数 ---"
-ss -tan | grep ESTABLISHED | wc -l
-
-echo -e "\n--- 网络错误统计 ---"
-cat /proc/net/dev | head -5
-
-# 5. 文件描述符分析
-echo -e "\n=== 5. 文件描述符分析 ==="
-echo "系统级别:"
-echo "  当前打开文件数: $(cat /proc/sys/fs/file-nr | awk '{print $1}')"
-echo "  最大文件数: $(cat /proc/sys/fs/file-max)"
-
-echo -e "\n进程级别(Top5):"
-for pid in $(ps aux --sort=-%mem | head -6 | tail -5 | awk '{print $2}'); do
-    fd_count=$(ls /proc/$pid/fd 2>/dev/null | wc -l)
-    process=$(ps -p $pid -o comm= 2>/dev/null)
-    echo "  $process (PID:$pid): $fd_count"
-done
-```
-
-## kubelet问题诊断与修复
-
-### kubelet进程崩溃
-
-```bash
-# 1. 检查kubelet状态
-systemctl status kubelet
-systemctl is-failed kubelet
-
-# 2. 查看崩溃前日志
-journalctl -u kubelet -n 200 --no-pager | less
-
-# 3. 常见崩溃原因
-# - 配置文件语法错误
-# - 证书问题
-# - 容器运行时不可用
-# - 内存不足
-
-# 4. 验证kubelet配置
-kubelet --config=/var/lib/kubelet/config.yaml --dry-run 2>&1 | head -20
-
-# 5. 重启kubelet
-systemctl restart kubelet
-systemctl status kubelet
-
-# 6. 如果持续崩溃,检查系统日志
-dmesg | grep kubelet
-```
-
-### kubelet配置问题
+### 3.3 kubelet 配置优化
 
 ```yaml
-# /var/lib/kubelet/config.yaml - 关键配置项
+# /var/lib/kubelet/config.yaml - 生产环境推荐配置
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 
-# 心跳相关(影响NotReady检测)
-nodeStatusUpdateFrequency: 10s        # NodeStatus更新频率
-nodeStatusReportFrequency: 5m         # NodeStatus上报频率(无变化时)
+# === 基础配置 ===
+clusterDNS:
+- 10.96.0.10
+clusterDomain: cluster.local
+staticPodPath: /etc/kubernetes/manifests
 
-# 资源驱逐阈值
+# === 容器运行时 ===
+containerRuntimeEndpoint: unix:///run/containerd/containerd.sock
+cgroupDriver: systemd
+
+# === 资源管理 ===
+maxPods: 110
+podsPerCore: 0  # 0 表示不限制
+
+# 系统预留资源 (为系统进程预留)
+systemReserved:
+  cpu: 500m
+  memory: 1Gi
+  ephemeral-storage: 5Gi
+
+# Kubernetes 预留资源 (为 kubelet/containerd 预留)
+kubeReserved:
+  cpu: 500m
+  memory: 1Gi
+  ephemeral-storage: 5Gi
+
+# 强制资源预留
+enforceNodeAllocatable:
+- pods
+- system-reserved
+- kube-reserved
+
+# === 驱逐配置 ===
+# 硬驱逐阈值 (立即驱逐)
 evictionHard:
-  memory.available: "100Mi"           # 低于此值开始驱逐
+  memory.available: "100Mi"
   nodefs.available: "10%"
   nodefs.inodesFree: "5%"
   imagefs.available: "15%"
+
+# 软驱逐阈值 (等待宽限期后驱逐)
 evictionSoft:
   memory.available: "200Mi"
   nodefs.available: "15%"
+  imagefs.available: "20%"
+
 evictionSoftGracePeriod:
   memory.available: "1m30s"
   nodefs.available: "1m30s"
+  imagefs.available: "1m30s"
 
-# 容器运行时
-containerRuntimeEndpoint: "unix:///run/containerd/containerd.sock"
+# 最小回收量
+evictionMinimumReclaim:
+  memory.available: "100Mi"
+  nodefs.available: "1Gi"
+  imagefs.available: "2Gi"
 
-# 证书轮转
+evictionMaxPodGracePeriod: 90
+evictionPressureTransitionPeriod: 30s
+
+# === 镜像管理 ===
+imageGCHighThresholdPercent: 80
+imageGCLowThresholdPercent: 70
+imageMinimumGCAge: 2m
+
+# === 日志 ===
+containerLogMaxSize: 50Mi
+containerLogMaxFiles: 5
+
+# === 证书 ===
 rotateCertificates: true
 serverTLSBootstrap: true
 
-# 日志配置
-logging:
-  format: text
-  verbosity: 2                        # 调试时可增加到4-5
+# === 特性门控 (v1.25+) ===
+featureGates:
+  RotateKubeletServerCertificate: true
+  GracefulNodeShutdown: true
+  GracefulNodeShutdownBasedOnPodPriority: true
 
-# 系统预留资源
-systemReserved:
-  cpu: "500m"
-  memory: "1Gi"
-kubeReserved:
-  cpu: "500m"
-  memory: "1Gi"
+# 优雅关机配置
+shutdownGracePeriod: 60s
+shutdownGracePeriodCriticalPods: 20s
+
+# === 调试配置 (问题排查时启用) ===
+# logging:
+#   format: text
+#   verbosity: 4
 ```
 
-### kubelet证书问题
-
-```bash
-# 1. 检查证书有效期
-echo "=== kubelet证书状态 ==="
-for cert in /var/lib/kubelet/pki/*.pem; do
-    echo "文件: $cert"
-    openssl x509 -in "$cert" -noout -dates 2>/dev/null || echo "  不是有效证书"
-    echo ""
-done
-
-# 2. 检查证书与CA匹配
-CA_CERT="/etc/kubernetes/pki/ca.crt"
-KUBELET_CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
-openssl verify -CAfile "$CA_CERT" "$KUBELET_CERT" 2>&1
-
-# 3. kubeadm环境-更新证书
-kubeadm certs check-expiration
-kubeadm certs renew all
-
-# 4. 手动触发证书轮转
-# 删除旧证书后kubelet会自动申请新证书(需配置rotateCertificates: true)
-rm /var/lib/kubelet/pki/kubelet-client-current.pem
-systemctl restart kubelet
-
-# 5. 验证新证书
-sleep 30
-ls -la /var/lib/kubelet/pki/
-openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
-```
-
-## 容器运行时诊断
-
-### containerd完整诊断
+### 3.4 kubelet 重启与恢复
 
 ```bash
 #!/bin/bash
-# containerd-diagnosis.sh
+# kubelet-recovery.sh - kubelet 恢复脚本
 
-echo "====== containerd诊断 ======"
+echo "=== kubelet 恢复流程 ==="
 
-# 1. 服务状态
-echo "=== 1. containerd服务状态 ==="
-systemctl status containerd --no-pager | head -15
+# 1. 检查当前状态
+echo "当前状态:"
+systemctl status kubelet --no-pager | head -5
 
-# 2. 进程状态
-echo -e "\n=== 2. containerd进程 ==="
-ps aux | grep containerd | grep -v grep
-
-# 3. Socket可用性
-echo -e "\n=== 3. containerd socket ==="
-ls -la /run/containerd/containerd.sock
-crictl info 2>&1 | head -20
-
-# 4. 命名空间和容器
-echo -e "\n=== 4. 容器统计 ==="
-echo "k8s.io命名空间:"
-ctr -n k8s.io containers list 2>/dev/null | wc -l
+# 2. 清理可能的问题文件
 echo ""
-echo "运行中容器:"
-crictl ps 2>/dev/null | wc -l
+echo "清理临时文件..."
+rm -f /var/lib/kubelet/cpu_manager_state
+rm -f /var/lib/kubelet/memory_manager_state
 
-# 5. 镜像状态
-echo -e "\n=== 5. 镜像统计 ==="
-crictl images 2>/dev/null | wc -l
-echo "总镜像数: $(crictl images 2>/dev/null | tail -n +2 | wc -l)"
+# 3. 重启 kubelet
+echo ""
+echo "重启 kubelet..."
+systemctl daemon-reload
+systemctl restart kubelet
 
-# 6. 磁盘使用
-echo -e "\n=== 6. containerd磁盘使用 ==="
-du -sh /var/lib/containerd/* 2>/dev/null | sort -hr | head -5
+# 4. 等待并验证
+echo ""
+echo "等待 kubelet 启动..."
+sleep 10
 
-# 7. shim进程
-echo -e "\n=== 7. shim进程状态 ==="
-shim_count=$(ps aux | grep containerd-shim | grep -v grep | wc -l)
-echo "shim进程数: $shim_count"
-if [ $shim_count -gt 100 ]; then
-    echo "⚠️ 警告: shim进程过多,可能存在泄漏"
-fi
+# 5. 检查状态
+echo ""
+echo "验证状态:"
+systemctl status kubelet --no-pager | head -10
 
-# 8. 错误日志
-echo -e "\n=== 8. containerd错误日志 ==="
-journalctl -u containerd --since "30 minutes ago" --no-pager 2>/dev/null | grep -iE "error|fail|panic" | tail -10
+# 6. 检查健康端点
+echo ""
+echo "健康检查:"
+for i in {1..6}; do
+    result=$(curl -s --connect-timeout 5 http://localhost:10248/healthz 2>/dev/null)
+    if [ "$result" = "ok" ]; then
+        echo "kubelet 健康检查通过"
+        break
+    fi
+    echo "等待 kubelet 就绪... ($i/6)"
+    sleep 5
+done
+
+# 7. 检查节点状态
+echo ""
+echo "检查节点状态 (从外部 kubectl):"
+echo "请在可访问 API Server 的机器上执行:"
+echo "  kubectl get node $(hostname) -o wide"
 ```
 
-### containerd配置检查
+---
+
+## 4. 容器运行时诊断
+
+### 4.1 containerd 完整诊断
+
+```bash
+#!/bin/bash
+# containerd-full-diagnosis.sh
+
+echo "=============================================="
+echo "  containerd 诊断报告 - $(hostname)"
+echo "  时间: $(date)"
+echo "=============================================="
+
+# 1. 服务状态
+echo ""
+echo "=== 1. containerd 服务状态 ==="
+systemctl status containerd --no-pager | head -15
+echo ""
+echo "服务状态: $(systemctl is-active containerd)"
+
+# 2. 进程信息
+echo ""
+echo "=== 2. containerd 进程 ==="
+CONTAINERD_PID=$(pgrep -x containerd)
+if [ -n "$CONTAINERD_PID" ]; then
+    echo "PID: $CONTAINERD_PID"
+    ps -p $CONTAINERD_PID -o pid,%cpu,%mem,vsz,rss,etime --no-headers
+    echo ""
+    echo "打开文件数: $(ls /proc/$CONTAINERD_PID/fd 2>/dev/null | wc -l)"
+    echo "内存映射数: $(wc -l < /proc/$CONTAINERD_PID/maps 2>/dev/null)"
+else
+    echo "containerd 进程未运行!"
+fi
+
+# 3. Socket 状态
+echo ""
+echo "=== 3. containerd Socket ==="
+ls -la /run/containerd/containerd.sock 2>/dev/null
+echo ""
+echo "CRI 信息:"
+crictl info 2>&1 | head -30
+
+# 4. 容器统计
+echo ""
+echo "=== 4. 容器统计 ==="
+echo "运行中容器: $(crictl ps -q 2>/dev/null | wc -l)"
+echo "所有容器: $(crictl ps -aq 2>/dev/null | wc -l)"
+echo "已退出容器: $(crictl ps -aq --state exited 2>/dev/null | wc -l)"
+
+# 5. Pod Sandbox 统计
+echo ""
+echo "=== 5. Pod Sandbox 统计 ==="
+echo "运行中 Sandbox: $(crictl pods -q --state ready 2>/dev/null | wc -l)"
+echo "所有 Sandbox: $(crictl pods -q 2>/dev/null | wc -l)"
+echo "NotReady Sandbox: $(crictl pods -q --state notready 2>/dev/null | wc -l)"
+
+# 6. shim 进程
+echo ""
+echo "=== 6. containerd-shim 进程 ==="
+SHIM_COUNT=$(ps aux | grep containerd-shim | grep -v grep | wc -l)
+echo "shim 进程数: $SHIM_COUNT"
+if [ $SHIM_COUNT -gt 100 ]; then
+    echo "⚠️ 警告: shim 进程过多，可能存在泄漏!"
+fi
+
+# 7. 镜像统计
+echo ""
+echo "=== 7. 镜像统计 ==="
+echo "镜像数量: $(crictl images -q 2>/dev/null | wc -l)"
+echo ""
+echo "磁盘占用:"
+du -sh /var/lib/containerd 2>/dev/null
+
+# 8. 存储状态
+echo ""
+echo "=== 8. 存储状态 ==="
+echo "--- /var/lib/containerd 子目录 ---"
+du -sh /var/lib/containerd/* 2>/dev/null | sort -hr | head -5
+
+# 9. 错误日志
+echo ""
+echo "=== 9. 最近错误日志 ==="
+journalctl -u containerd --since "30 minutes ago" --no-pager 2>/dev/null | grep -iE "error|fail|panic" | tail -15
+
+# 10. CRI 响应时间测试
+echo ""
+echo "=== 10. CRI 响应时间测试 ==="
+echo "执行 crictl info..."
+time (crictl info > /dev/null 2>&1)
+```
+
+### 4.2 containerd 问题解决
+
+| 问题 | 症状 | 诊断命令 | 解决方案 |
+|------|------|---------|---------|
+| **进程崩溃** | kubelet 日志显示 CRI 不可用 | `systemctl status containerd` | 重启 containerd |
+| **OOM** | containerd 进程被 kill | `dmesg \| grep containerd` | 增加系统内存/限制容器 |
+| **shim 泄漏** | shim 进程过多 | `ps aux \| grep shim \| wc -l` | 清理并重启 |
+| **存储满** | 镜像拉取失败 | `df -h /var/lib/containerd` | 清理镜像/扩容 |
+| **Socket 异常** | CRI 调用超时 | `crictl info` | 重启 containerd |
+| **快照损坏** | 容器启动失败 | `ctr snapshots list` | 清理损坏的快照 |
+
+```bash
+# containerd 常见修复操作
+
+# 1. 重启 containerd
+systemctl restart containerd
+sleep 5
+crictl info
+
+# 2. 清理已退出容器
+crictl rm $(crictl ps -aq --state exited) 2>/dev/null
+
+# 3. 清理未使用镜像
+crictl rmi --prune
+
+# 4. 清理 containerd 内部垃圾
+ctr -n k8s.io content prune references
+ctr -n k8s.io snapshots cleanup
+
+# 5. 强制清理 (危险操作 - 会丢失所有容器)
+# systemctl stop kubelet
+# systemctl stop containerd
+# rm -rf /var/lib/containerd/io.containerd.metadata.v1.bolt/*
+# systemctl start containerd
+# systemctl start kubelet
+
+# 6. 重置 containerd (最后手段)
+# systemctl stop kubelet
+# systemctl stop containerd
+# rm -rf /var/lib/containerd/*
+# systemctl start containerd
+# systemctl start kubelet
+# # 需要重新拉取所有镜像
+```
+
+### 4.3 containerd 配置检查
 
 ```toml
-# /etc/containerd/config.toml - 关键配置
+# /etc/containerd/config.toml - 生产环境配置
 version = 2
 
+# 根目录
+root = "/var/lib/containerd"
+state = "/run/containerd"
+
+# gRPC 配置
 [grpc]
   address = "/run/containerd/containerd.sock"
   max_recv_message_size = 16777216
   max_send_message_size = 16777216
 
+# 插件配置
 [plugins]
+  # CRI 插件
   [plugins."io.containerd.grpc.v1.cri"]
+    # Sandbox 镜像
     sandbox_image = "registry.k8s.io/pause:3.9"
+    
+    # 并发下载数
     max_concurrent_downloads = 3
     
+    # 禁用 TCP 服务 (安全)
+    disable_tcp_service = true
+    
     [plugins."io.containerd.grpc.v1.cri".containerd]
+      # 快照驱动
       snapshotter = "overlayfs"
       default_runtime_name = "runc"
       
@@ -581,322 +737,1074 @@ version = 2
           
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
             SystemdCgroup = true
-
+            
+    # 镜像加速配置
     [plugins."io.containerd.grpc.v1.cri".registry]
       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
         [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-          endpoint = ["https://mirror.gcr.io"]
+          endpoint = ["https://mirror.ccs.tencentyun.com", "https://registry-1.docker.io"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."registry.k8s.io"]
+          endpoint = ["https://registry.aliyuncs.com/google_containers"]
 
+# 调试配置
 [debug]
-  level = "info"  # 调试时改为debug
+  level = "info"  # 问题排查时改为 "debug"
+
+# 指标配置
+[metrics]
+  address = "127.0.0.1:1338"
 ```
 
-### 运行时修复操作
+---
 
-```bash
-# 1. 重启containerd
-systemctl restart containerd
-sleep 5
-crictl info
+## 5. 资源耗尽诊断
 
-# 2. 清理无用资源
-# 清理停止的容器
-crictl rm $(crictl ps -aq --state exited) 2>/dev/null
-
-# 清理未使用镜像
-crictl rmi --prune
-
-# 清理containerd垃圾
-ctr -n k8s.io content prune references
-ctr -n k8s.io snapshots cleanup
-
-# 3. 重建containerd状态
-# 危险操作,仅在严重问题时使用
-systemctl stop kubelet
-systemctl stop containerd
-rm -rf /var/lib/containerd/io.containerd.*/
-systemctl start containerd
-systemctl start kubelet
-```
-
-## 资源耗尽诊断
-
-### 内存问题诊断与修复
+### 5.1 内存问题诊断
 
 ```bash
 #!/bin/bash
-# memory-diagnosis.sh
+# memory-diagnosis.sh - 内存问题诊断
 
-echo "====== 内存问题诊断 ======"
+echo "=============================================="
+echo "  内存问题诊断报告"
+echo "=============================================="
 
-# 1. 当前内存状态
+# 1. 内存概览
+echo ""
 echo "=== 1. 内存概览 ==="
 free -h
 
 # 2. 详细内存信息
-echo -e "\n=== 2. 内存详情 ==="
-cat /proc/meminfo | grep -E "MemTotal|MemFree|MemAvailable|Buffers|Cached|SwapTotal|SwapFree|Slab|SReclaimable"
+echo ""
+echo "=== 2. 内存详情 ==="
+cat /proc/meminfo | grep -E "MemTotal|MemFree|MemAvailable|Buffers|Cached|SwapTotal|SwapFree|Slab|SReclaimable|SUnreclaim"
 
-# 3. 内存使用Top进程
-echo -e "\n=== 3. 内存使用Top10进程 ==="
-ps aux --sort=-%mem | head -11 | awk '{printf "%-8s %-8s %-6s %-6s %s\n", $1, $2, $4"%", $6/1024"MB", $11}'
-
-# 4. cgroup内存统计
-echo -e "\n=== 4. kubelet管理的cgroup内存 ==="
-if [ -d "/sys/fs/cgroup/memory/kubepods" ]; then
-    echo "kubepods总内存限制: $(cat /sys/fs/cgroup/memory/kubepods/memory.limit_in_bytes 2>/dev/null | numfmt --to=iec)"
-    echo "kubepods当前使用: $(cat /sys/fs/cgroup/memory/kubepods/memory.usage_in_bytes 2>/dev/null | numfmt --to=iec)"
+# 3. 内存压力
+echo ""
+echo "=== 3. 内存压力状态 ==="
+if [ -f /proc/pressure/memory ]; then
+    cat /proc/pressure/memory
+else
+    echo "内存压力统计不可用"
 fi
 
-# 5. OOM事件
-echo -e "\n=== 5. 最近OOM事件 ==="
+# 4. 内存使用 Top 进程
+echo ""
+echo "=== 4. 内存使用 Top 15 进程 ==="
+ps aux --sort=-%mem | head -16 | awk '{printf "%-10s %-8s %6s %6s %s\n", $1, $2, $4"%", $6/1024"MB", $11}'
+
+# 5. cgroup 内存统计
+echo ""
+echo "=== 5. cgroup 内存统计 ==="
+if [ -d "/sys/fs/cgroup/memory/kubepods" ]; then
+    echo "cgroup v1 检测到"
+    echo "kubepods 内存限制: $(numfmt --to=iec < /sys/fs/cgroup/memory/kubepods/memory.limit_in_bytes 2>/dev/null)"
+    echo "kubepods 当前使用: $(numfmt --to=iec < /sys/fs/cgroup/memory/kubepods/memory.usage_in_bytes 2>/dev/null)"
+elif [ -f "/sys/fs/cgroup/kubepods/memory.max" ]; then
+    echo "cgroup v2 检测到"
+    cat /sys/fs/cgroup/kubepods/memory.max
+    cat /sys/fs/cgroup/kubepods/memory.current
+fi
+
+# 6. OOM 历史
+echo ""
+echo "=== 6. 最近 OOM 事件 ==="
 dmesg | grep -i "oom\|killed process" | tail -10
 
-# 6. 缓存可回收性
-echo -e "\n=== 6. 可回收内存 ==="
-echo "PageCache: $(cat /proc/meminfo | grep "^Cached:" | awk '{print $2/1024"MB"}')"
-echo "SReclaimable: $(cat /proc/meminfo | grep "SReclaimable:" | awk '{print $2/1024"MB"}')"
-echo "Buffers: $(cat /proc/meminfo | grep "^Buffers:" | awk '{print $2/1024"MB"}')"
+# 7. 内存分配失败
+echo ""
+echo "=== 7. 内存分配统计 ==="
+cat /proc/vmstat | grep -E "pgfault|pgmajfault|oom_kill"
+
+# 8. SWAP 使用
+echo ""
+echo "=== 8. SWAP 使用 ==="
+swapon -s 2>/dev/null || echo "SWAP 未启用"
+
+# 9. 大内存进程分析
+echo ""
+echo "=== 9. containerd/kubelet 内存使用 ==="
+for proc in containerd kubelet; do
+    PID=$(pgrep -x $proc)
+    if [ -n "$PID" ]; then
+        RSS=$(cat /proc/$PID/status | grep VmRSS | awk '{print $2}')
+        echo "$proc (PID $PID): $((RSS/1024)) MB"
+    fi
+done
 ```
 
-### 内存清理操作
-
-```bash
-# 1. 安全的缓存清理
-sync
-echo 1 > /proc/sys/vm/drop_caches  # 仅PageCache
-# echo 2 > /proc/sys/vm/drop_caches  # dentries和inodes
-# echo 3 > /proc/sys/vm/drop_caches  # 全部(生产环境谨慎)
-
-# 2. 找出并清理泄漏进程
-# 检查是否有内存持续增长的进程
-watch -n 5 'ps aux --sort=-%mem | head -10'
-
-# 3. 驱逐低优先级Pod释放内存
-# 找出BestEffort Pod
-kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[].resources.limits == null) | "\(.metadata.namespace)/\(.metadata.name)"'
-
-# 手动驱逐特定Pod
-kubectl delete pod <pod-name> -n <namespace>
-```
-
-### 磁盘问题诊断与修复
+### 5.2 磁盘问题诊断
 
 ```bash
 #!/bin/bash
-# disk-diagnosis.sh
+# disk-diagnosis.sh - 磁盘问题诊断
 
-echo "====== 磁盘问题诊断 ======"
+echo "=============================================="
+echo "  磁盘问题诊断报告"
+echo "=============================================="
 
 # 1. 磁盘空间
+echo ""
 echo "=== 1. 磁盘空间使用 ==="
 df -h | grep -E "Filesystem|^/dev"
 
-# 2. inode使用
-echo -e "\n=== 2. inode使用 ==="
+# 2. inode 使用
+echo ""
+echo "=== 2. inode 使用 ==="
 df -i | grep -E "Filesystem|^/dev"
 
-# 3. 大目录分析
-echo -e "\n=== 3. /var/lib下大目录 ==="
+# 3. 大目录
+echo ""
+echo "=== 3. /var/lib 大目录 Top 10 ==="
 du -sh /var/lib/* 2>/dev/null | sort -hr | head -10
 
-# 4. 容器相关目录
-echo -e "\n=== 4. 容器存储使用 ==="
-echo "containerd: $(du -sh /var/lib/containerd 2>/dev/null | awk '{print $1}')"
-echo "kubelet: $(du -sh /var/lib/kubelet 2>/dev/null | awk '{print $1}')"
+# 4. containerd 存储
+echo ""
+echo "=== 4. containerd 存储详情 ==="
+du -sh /var/lib/containerd/* 2>/dev/null | sort -hr
 
-# 5. 日志目录
-echo -e "\n=== 5. 日志使用 ==="
+# 5. kubelet 存储
+echo ""
+echo "=== 5. kubelet 存储详情 ==="
+du -sh /var/lib/kubelet/* 2>/dev/null | sort -hr | head -10
+
+# 6. 日志目录
+echo ""
+echo "=== 6. 日志目录 ==="
 du -sh /var/log/* 2>/dev/null | sort -hr | head -10
 
-# 6. 大文件搜索
-echo -e "\n=== 6. 大文件(>100MB) ==="
-find /var -type f -size +100M 2>/dev/null | head -10
-
 # 7. 容器日志
-echo -e "\n=== 7. 容器日志文件 ==="
-du -sh /var/log/pods/* 2>/dev/null | sort -hr | head -5
-du -sh /var/log/containers/* 2>/dev/null | sort -hr | head -5
-```
+echo ""
+echo "=== 7. 容器日志 Top 10 ==="
+find /var/log/pods -name "*.log" -type f -exec du -h {} \; 2>/dev/null | sort -hr | head -10
 
-### 磁盘清理操作
+# 8. 大文件
+echo ""
+echo "=== 8. 大文件 (>500MB) ==="
+find /var -type f -size +500M 2>/dev/null | head -10
 
-```bash
-# 1. 清理容器日志
-# 方法1: 直接截断
-find /var/log/containers -name "*.log" -size +100M -exec truncate -s 0 {} \;
+# 9. 磁盘 IO
+echo ""
+echo "=== 9. 磁盘 IO 统计 ==="
+iostat -x 1 2 2>/dev/null | tail -20 || echo "iostat 不可用"
 
-# 方法2: 使用crictl
-for container_id in $(crictl ps -q); do
-    log_path=$(crictl inspect $container_id 2>/dev/null | jq -r '.status.logPath')
-    if [ -n "$log_path" ] && [ -f "$log_path" ]; then
-        size=$(stat -f%z "$log_path" 2>/dev/null || stat -c%s "$log_path" 2>/dev/null)
-        if [ "$size" -gt 104857600 ]; then  # 100MB
-            truncate -s 0 "$log_path"
-            echo "已清理: $log_path"
-        fi
-    fi
+# 10. 磁盘健康
+echo ""
+echo "=== 10. 磁盘健康检查 ==="
+for disk in $(lsblk -dn -o NAME | grep -E "^sd|^nvme"); do
+    echo "--- $disk ---"
+    smartctl -H /dev/$disk 2>/dev/null | grep -E "PASSED|FAILED" || echo "smartctl 不可用"
 done
-
-# 2. 清理未使用镜像
-crictl rmi --prune
-
-# 3. 清理旧日志
-journalctl --vacuum-size=1G
-journalctl --vacuum-time=7d
-
-# 4. 清理kubelet临时文件
-rm -rf /var/lib/kubelet/pods/*/volumes/kubernetes.io~empty-dir/*/
-
-# 5. 清理已退出容器
-crictl rm $(crictl ps -a -q --state exited)
 ```
 
-## 网络问题诊断
-
-### CNI问题诊断
+### 5.3 资源清理操作
 
 ```bash
 #!/bin/bash
-# cni-diagnosis.sh
+# resource-cleanup.sh - 资源清理脚本
 
-echo "====== CNI网络诊断 ======"
+echo "=== 资源清理脚本 ==="
+read -p "确认执行清理? (yes/no): " CONFIRM
+if [ "$CONFIRM" != "yes" ]; then
+    echo "已取消"
+    exit 0
+fi
 
-# 1. CNI配置检查
-echo "=== 1. CNI配置文件 ==="
-ls -la /etc/cni/net.d/
+# 1. 清理已退出容器
 echo ""
-for conf in /etc/cni/net.d/*; do
-    echo "--- $conf ---"
-    cat "$conf" 2>/dev/null | head -20
-    echo ""
-done
+echo "=== 1. 清理已退出容器 ==="
+EXITED=$(crictl ps -aq --state exited 2>/dev/null | wc -l)
+echo "已退出容器数: $EXITED"
+if [ $EXITED -gt 0 ]; then
+    crictl rm $(crictl ps -aq --state exited) 2>/dev/null
+    echo "已清理"
+fi
 
-# 2. CNI二进制检查
-echo -e "\n=== 2. CNI插件 ==="
-ls -la /opt/cni/bin/ | head -15
+# 2. 清理未使用镜像
+echo ""
+echo "=== 2. 清理未使用镜像 ==="
+crictl rmi --prune 2>/dev/null
 
-# 3. 网络接口
-echo -e "\n=== 3. 网络接口 ==="
+# 3. 清理 containerd 垃圾
+echo ""
+echo "=== 3. 清理 containerd 垃圾 ==="
+ctr -n k8s.io content prune references 2>/dev/null
+
+# 4. 清理日志
+echo ""
+echo "=== 4. 清理日志 ==="
+# 清理 journald 日志
+journalctl --vacuum-size=1G
+journalctl --vacuum-time=7d
+
+# 截断大容器日志
+echo "截断大容器日志..."
+find /var/log/containers -name "*.log" -size +100M -exec truncate -s 0 {} \; 2>/dev/null
+find /var/log/pods -name "*.log" -size +100M -exec truncate -s 0 {} \; 2>/dev/null
+
+# 5. 清理临时文件
+echo ""
+echo "=== 5. 清理临时文件 ==="
+rm -rf /tmp/* 2>/dev/null
+rm -rf /var/tmp/* 2>/dev/null
+
+# 6. 清理 coredump
+echo ""
+echo "=== 6. 清理 coredump ==="
+find /var/lib/systemd/coredump -type f -mtime +7 -delete 2>/dev/null
+
+# 7. 清理旧内核
+echo ""
+echo "=== 7. 旧内核清理提示 ==="
+echo "如需清理旧内核，请手动执行:"
+echo "  RHEL/CentOS: package-cleanup --oldkernels --count=2"
+echo "  Ubuntu/Debian: apt autoremove"
+
+# 8. 最终状态
+echo ""
+echo "=== 清理完成 ==="
+echo "磁盘使用:"
+df -h | grep -E "/$|/var"
+echo ""
+echo "内存使用:"
+free -h
+```
+
+---
+
+## 6. 网络问题诊断
+
+### 6.1 网络连通性诊断
+
+```bash
+#!/bin/bash
+# network-diagnosis.sh - 网络问题诊断
+
+echo "=============================================="
+echo "  网络问题诊断报告"
+echo "=============================================="
+
+# 1. 网络接口
+echo ""
+echo "=== 1. 网络接口 ==="
 ip addr show | grep -E "^[0-9]+:|inet "
 
-# 4. 路由表
-echo -e "\n=== 4. 路由表 ==="
+# 2. 默认路由
+echo ""
+echo "=== 2. 路由表 ==="
 ip route show
+echo ""
+echo "默认网关:"
+ip route show default
 
-# 5. iptables规则概览
-echo -e "\n=== 5. iptables NAT规则数 ==="
-echo "NAT规则数: $(iptables -t nat -L -n 2>/dev/null | wc -l)"
-echo "Filter规则数: $(iptables -t filter -L -n 2>/dev/null | wc -l)"
+# 3. DNS 配置
+echo ""
+echo "=== 3. DNS 配置 ==="
+cat /etc/resolv.conf
 
-# 6. IPVS(如使用)
-echo -e "\n=== 6. IPVS状态(如启用) ==="
-ipvsadm -L -n 2>/dev/null | head -20 || echo "IPVS未启用或未安装ipvsadm"
-
-# 7. 测试Pod网络连通性
-echo -e "\n=== 7. 基础网络测试 ==="
-# 测试到API Server
-API_SERVER=$(cat /etc/kubernetes/kubelet.conf 2>/dev/null | grep server | awk '{print $2}')
+# 4. API Server 连通性
+echo ""
+echo "=== 4. API Server 连通性 ==="
+API_SERVER=$(grep "server:" /etc/kubernetes/kubelet.conf 2>/dev/null | awk '{print $2}')
 if [ -n "$API_SERVER" ]; then
-    echo "API Server连通性:"
-    curl -sk --connect-timeout 5 "${API_SERVER}/healthz"
+    echo "API Server: $API_SERVER"
+    echo "TCP 连接测试:"
+    timeout 5 bash -c "echo > /dev/tcp/${API_SERVER#https://}/6443" 2>/dev/null && echo "  [OK]" || echo "  [FAIL]"
     echo ""
+    echo "HTTPS 健康检查:"
+    curl -sk --connect-timeout 5 "${API_SERVER}/healthz" && echo " [OK]" || echo " [FAIL]"
+fi
+
+# 5. DNS 解析测试
+echo ""
+echo "=== 5. DNS 解析测试 ==="
+echo "kubernetes.default.svc.cluster.local:"
+nslookup kubernetes.default.svc.cluster.local 2>/dev/null | tail -5 || echo "  解析失败"
+echo ""
+echo "外部域名 (google.com):"
+nslookup google.com 2>/dev/null | tail -3 || echo "  解析失败"
+
+# 6. 网络连接统计
+echo ""
+echo "=== 6. 网络连接统计 ==="
+ss -s
+
+# 7. 网络错误
+echo ""
+echo "=== 7. 网络接口错误 ==="
+ip -s link show | grep -A 5 "^[0-9]" | grep -E "^[0-9]|errors"
+
+# 8. iptables 规则
+echo ""
+echo "=== 8. iptables 规则统计 ==="
+echo "NAT 规则数: $(iptables -t nat -L -n 2>/dev/null | wc -l)"
+echo "Filter 规则数: $(iptables -t filter -L -n 2>/dev/null | wc -l)"
+
+# 9. conntrack
+echo ""
+echo "=== 9. conntrack 状态 ==="
+echo "当前连接数: $(cat /proc/sys/net/netfilter/nf_conntrack_count 2>/dev/null)"
+echo "最大连接数: $(cat /proc/sys/net/netfilter/nf_conntrack_max 2>/dev/null)"
+
+# 10. 网络延迟
+echo ""
+echo "=== 10. 网络延迟测试 ==="
+if [ -n "$API_SERVER" ]; then
+    HOST=$(echo $API_SERVER | sed 's|https://||' | cut -d: -f1)
+    echo "Ping API Server ($HOST):"
+    ping -c 3 $HOST 2>/dev/null | tail -3 || echo "  Ping 失败"
 fi
 ```
 
-### Calico网络诊断
+### 6.2 CNI 插件诊断
+
+```bash
+#!/bin/bash
+# cni-diagnosis.sh - CNI 插件诊断
+
+echo "=============================================="
+echo "  CNI 插件诊断报告"
+echo "=============================================="
+
+# 1. CNI 配置
+echo ""
+echo "=== 1. CNI 配置文件 ==="
+ls -la /etc/cni/net.d/
+
+echo ""
+echo "--- 配置文件内容 ---"
+for conf in /etc/cni/net.d/*.conf /etc/cni/net.d/*.conflist; do
+    if [ -f "$conf" ]; then
+        echo ""
+        echo "文件: $conf"
+        cat "$conf" | head -30
+    fi
+done
+
+# 2. CNI 二进制
+echo ""
+echo "=== 2. CNI 二进制 ==="
+ls -la /opt/cni/bin/ | head -15
+
+# 3. 检测 CNI 类型
+echo ""
+echo "=== 3. CNI 类型检测 ==="
+if ls /etc/cni/net.d/ | grep -q calico; then
+    echo "检测到: Calico"
+    echo ""
+    echo "Calico 节点状态:"
+    calicoctl node status 2>/dev/null || kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
+elif ls /etc/cni/net.d/ | grep -q cilium; then
+    echo "检测到: Cilium"
+    echo ""
+    echo "Cilium 状态:"
+    cilium status 2>/dev/null || kubectl get pods -n kube-system -l k8s-app=cilium -o wide
+elif ls /etc/cni/net.d/ | grep -q flannel; then
+    echo "检测到: Flannel"
+    echo ""
+    kubectl get pods -n kube-system -l app=flannel -o wide
+elif ls /etc/cni/net.d/ | grep -q terway; then
+    echo "检测到: Terway (ACK)"
+    echo ""
+    kubectl get pods -n kube-system -l app=terway -o wide
+else
+    echo "未知 CNI 类型"
+fi
+
+# 4. CNI 日志
+echo ""
+echo "=== 4. CNI 相关日志 ==="
+journalctl -u kubelet --since "10 minutes ago" --no-pager 2>/dev/null | grep -i cni | tail -10
+```
+
+### 6.3 Calico 网络诊断
 
 ```bash
 #!/bin/bash
 # calico-diagnosis.sh
 
-echo "====== Calico网络诊断 ======"
+echo "=== Calico 网络诊断 ==="
 
-# 1. calicoctl状态
-echo "=== 1. Calico节点状态 ==="
-calicoctl node status 2>/dev/null || kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
+# 1. 节点状态
+echo ""
+echo "=== 1. Calico 节点状态 ==="
+calicoctl node status 2>/dev/null || echo "calicoctl 不可用"
 
-# 2. BGP对等状态
-echo -e "\n=== 2. BGP Peers ==="
+# 2. BGP Peers
+echo ""
+echo "=== 2. BGP Peers ==="
 calicoctl get bgppeer -o wide 2>/dev/null
 
-# 3. IPPool
-echo -e "\n=== 3. IP Pool ==="
+# 3. IP Pool
+echo ""
+echo "=== 3. IP Pool ==="
 calicoctl get ippool -o yaml 2>/dev/null | head -30
 
-# 4. 本节点工作负载端点
-echo -e "\n=== 4. 本节点Workload Endpoints ==="
-calicoctl get workloadEndpoint --node=$(hostname) 2>/dev/null | head -20
+# 4. Felix 状态
+echo ""
+echo "=== 4. Felix 状态 ==="
+curl -s http://localhost:9099/readiness 2>/dev/null || echo "Felix 健康检查不可用"
 
-# 5. Felix状态
-echo -e "\n=== 5. Felix状态 ==="
-curl -s http://localhost:9099/readiness 2>/dev/null || echo "Felix健康检查端点不可用"
+# 5. BIRD 状态
+echo ""
+echo "=== 5. BIRD BGP 状态 ==="
+birdcl show protocols 2>/dev/null | head -20 || echo "BIRD 不可用"
 
-# 6. BIRD状态
-echo -e "\n=== 6. BIRD BGP状态 ==="
-birdcl show protocols 2>/dev/null || echo "BIRD不可用"
+# 6. Calico Pod 状态
+echo ""
+echo "=== 6. Calico Pod 状态 ==="
+kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
 ```
 
-### 网络连通性测试
+---
+
+## 7. 证书问题诊断
+
+### 7.1 证书检查脚本
 
 ```bash
 #!/bin/bash
-# network-connectivity-test.sh
+# certificate-diagnosis.sh - 证书诊断
 
-echo "====== 网络连通性测试 ======"
+echo "=============================================="
+echo "  证书诊断报告"
+echo "=============================================="
 
-# 从集群外部测试(在Master节点执行)
-# 1. DNS测试
-echo "=== 1. DNS测试 ==="
-kubectl run test-dns --image=busybox:1.36 --rm -it --restart=Never -- nslookup kubernetes 2>/dev/null
+# 1. kubelet 客户端证书
+echo ""
+echo "=== 1. kubelet 客户端证书 ==="
+KUBELET_CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
+if [ -f "$KUBELET_CERT" ]; then
+    echo "文件: $KUBELET_CERT"
+    echo ""
+    echo "证书信息:"
+    openssl x509 -in "$KUBELET_CERT" -noout -dates -subject -issuer 2>/dev/null
+    echo ""
+    # 计算剩余天数
+    EXPIRY=$(openssl x509 -in "$KUBELET_CERT" -noout -enddate 2>/dev/null | cut -d= -f2)
+    if [ -n "$EXPIRY" ]; then
+        EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s 2>/dev/null)
+        NOW_EPOCH=$(date +%s)
+        DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
+        echo "剩余天数: $DAYS_LEFT 天"
+        if [ $DAYS_LEFT -lt 30 ]; then
+            echo "⚠️ 警告: 证书将在 30 天内过期!"
+        fi
+        if [ $DAYS_LEFT -lt 0 ]; then
+            echo "❌ 错误: 证书已过期!"
+        fi
+    fi
+else
+    echo "证书文件不存在: $KUBELET_CERT"
+fi
 
-# 2. Service访问测试
-echo -e "\n=== 2. Service访问测试 ==="
-kubectl run test-svc --image=curlimages/curl:8.4.0 --rm -it --restart=Never -- curl -s -o /dev/null -w "%{http_code}" https://kubernetes.default.svc:443/healthz -k 2>/dev/null
+# 2. kubelet 服务证书
+echo ""
+echo "=== 2. kubelet 服务证书 ==="
+KUBELET_SERVER_CERT="/var/lib/kubelet/pki/kubelet.crt"
+if [ -f "$KUBELET_SERVER_CERT" ]; then
+    echo "文件: $KUBELET_SERVER_CERT"
+    openssl x509 -in "$KUBELET_SERVER_CERT" -noout -dates 2>/dev/null
+fi
 
-# 3. Pod间通信测试
-echo -e "\n=== 3. Pod间通信测试 ==="
-# 创建测试Pod
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  name: network-test-1
-spec:
-  containers:
-  - name: test
-    image: busybox:1.36
-    command: ["sleep", "3600"]
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: network-test-2
-spec:
-  containers:
-  - name: test
-    image: busybox:1.36
-    command: ["sleep", "3600"]
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchLabels:
-            run: network-test-1
-        topologyKey: kubernetes.io/hostname
-EOF
+# 3. CA 证书
+echo ""
+echo "=== 3. CA 证书 ==="
+CA_CERT="/etc/kubernetes/pki/ca.crt"
+if [ -f "$CA_CERT" ]; then
+    echo "文件: $CA_CERT"
+    openssl x509 -in "$CA_CERT" -noout -dates -subject 2>/dev/null
+fi
 
-sleep 30
-POD2_IP=$(kubectl get pod network-test-2 -o jsonpath='{.status.podIP}')
-kubectl exec network-test-1 -- ping -c 3 $POD2_IP
+# 4. 证书链验证
+echo ""
+echo "=== 4. 证书链验证 ==="
+if [ -f "$CA_CERT" ] && [ -f "$KUBELET_CERT" ]; then
+    echo "验证 kubelet 客户端证书:"
+    openssl verify -CAfile "$CA_CERT" "$KUBELET_CERT" 2>&1
+fi
 
-# 清理
-kubectl delete pod network-test-1 network-test-2 --force --grace-period=0
+# 5. kubeadm 证书检查
+echo ""
+echo "=== 5. kubeadm 证书状态 ==="
+if command -v kubeadm &>/dev/null; then
+    kubeadm certs check-expiration 2>/dev/null | head -20
+else
+    echo "kubeadm 不可用"
+fi
+
+# 6. 证书轮转配置
+echo ""
+echo "=== 6. 证书轮转配置 ==="
+if [ -f "/var/lib/kubelet/config.yaml" ]; then
+    grep -E "rotateCertificates|serverTLSBootstrap" /var/lib/kubelet/config.yaml
+fi
 ```
 
-## 节点恢复操作
+### 7.2 证书更新操作
 
-### 标准恢复流程
+```bash
+#!/bin/bash
+# certificate-renewal.sh - 证书更新
+
+echo "=== 证书更新流程 ==="
+
+# 1. 检查当前证书状态
+echo ""
+echo "=== 1. 当前证书状态 ==="
+kubeadm certs check-expiration 2>/dev/null
+
+# 2. 更新所有证书 (Master 节点)
+echo ""
+echo "=== 2. 更新证书 ==="
+echo "在 Master 节点执行: kubeadm certs renew all"
+
+# 3. 重启控制平面组件
+echo ""
+echo "=== 3. 重启控制平面组件 ==="
+echo "执行以下命令重启:"
+echo "  kubectl delete pod -n kube-system -l component=kube-apiserver"
+echo "  kubectl delete pod -n kube-system -l component=kube-controller-manager"
+echo "  kubectl delete pod -n kube-system -l component=kube-scheduler"
+
+# 4. Worker 节点证书更新
+echo ""
+echo "=== 4. Worker 节点证书更新 ==="
+echo "方法 1: 自动轮转 (推荐)"
+echo "  确保 kubelet 配置: rotateCertificates: true"
+echo ""
+echo "方法 2: 手动更新"
+echo "  # 删除旧证书"
+echo "  rm /var/lib/kubelet/pki/kubelet-client-current.pem"
+echo "  # 重启 kubelet"
+echo "  systemctl restart kubelet"
+
+# 5. 验证
+echo ""
+echo "=== 5. 验证 ==="
+echo "验证节点状态: kubectl get nodes"
+echo "验证证书有效期: kubeadm certs check-expiration"
+```
+
+---
+
+## 8. 内核与系统问题
+
+### 8.1 内核问题诊断
+
+```bash
+#!/bin/bash
+# kernel-diagnosis.sh - 内核问题诊断
+
+echo "=============================================="
+echo "  内核与系统诊断报告"
+echo "=============================================="
+
+# 1. 内核版本
+echo ""
+echo "=== 1. 内核信息 ==="
+uname -a
+echo ""
+echo "发行版:"
+cat /etc/os-release | grep -E "^NAME=|^VERSION="
+
+# 2. 内核错误
+echo ""
+echo "=== 2. 内核错误日志 ==="
+dmesg | grep -iE "error|fail|panic|bug|oops" | tail -20
+
+# 3. 系统运行时间
+echo ""
+echo "=== 3. 系统运行时间 ==="
+uptime
+echo ""
+echo "最近重启:"
+last reboot | head -5
+
+# 4. 系统负载
+echo ""
+echo "=== 4. 系统负载 ==="
+cat /proc/loadavg
+echo ""
+echo "CPU 信息:"
+lscpu | grep -E "^CPU\(s\)|^Model name"
+
+# 5. cgroup 状态
+echo ""
+echo "=== 5. cgroup 状态 ==="
+if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+    echo "cgroup v2 (unified)"
+    echo "控制器: $(cat /sys/fs/cgroup/cgroup.controllers)"
+else
+    echo "cgroup v1 (legacy)"
+    ls /sys/fs/cgroup/
+fi
+
+# 6. 系统调用错误
+echo ""
+echo "=== 6. 系统调用统计 ==="
+if [ -f /proc/pressure/cpu ]; then
+    echo "CPU 压力:"
+    cat /proc/pressure/cpu
+fi
+if [ -f /proc/pressure/io ]; then
+    echo ""
+    echo "IO 压力:"
+    cat /proc/pressure/io
+fi
+
+# 7. 文件描述符
+echo ""
+echo "=== 7. 文件描述符 ==="
+echo "当前打开: $(cat /proc/sys/fs/file-nr | awk '{print $1}')"
+echo "最大限制: $(cat /proc/sys/fs/file-max)"
+
+# 8. 进程限制
+echo ""
+echo "=== 8. 进程限制 ==="
+echo "当前进程数: $(ps aux | wc -l)"
+echo "PID 最大值: $(cat /proc/sys/kernel/pid_max)"
+
+# 9. 内核参数
+echo ""
+echo "=== 9. 关键内核参数 ==="
+sysctl net.ipv4.ip_forward
+sysctl net.bridge.bridge-nf-call-iptables 2>/dev/null
+sysctl net.netfilter.nf_conntrack_max 2>/dev/null
+sysctl fs.inotify.max_user_watches 2>/dev/null
+sysctl fs.inotify.max_user_instances 2>/dev/null
+```
+
+### 8.2 cgroup 问题诊断
+
+```bash
+#!/bin/bash
+# cgroup-diagnosis.sh
+
+echo "=== cgroup 诊断 ==="
+
+# 检测 cgroup 版本
+if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+    echo "cgroup 版本: v2"
+    
+    # kubepods 状态
+    echo ""
+    echo "kubepods cgroup:"
+    if [ -d /sys/fs/cgroup/kubepods ]; then
+        echo "  memory.max: $(cat /sys/fs/cgroup/kubepods/memory.max 2>/dev/null)"
+        echo "  memory.current: $(cat /sys/fs/cgroup/kubepods/memory.current 2>/dev/null)"
+        echo "  cpu.max: $(cat /sys/fs/cgroup/kubepods/cpu.max 2>/dev/null)"
+    fi
+else
+    echo "cgroup 版本: v1"
+    
+    # kubepods 状态
+    echo ""
+    echo "kubepods cgroup:"
+    if [ -d /sys/fs/cgroup/memory/kubepods ]; then
+        echo "  memory.limit: $(numfmt --to=iec < /sys/fs/cgroup/memory/kubepods/memory.limit_in_bytes 2>/dev/null)"
+        echo "  memory.usage: $(numfmt --to=iec < /sys/fs/cgroup/memory/kubepods/memory.usage_in_bytes 2>/dev/null)"
+    fi
+    if [ -d /sys/fs/cgroup/cpu/kubepods ]; then
+        echo "  cpu.shares: $(cat /sys/fs/cgroup/cpu/kubepods/cpu.shares 2>/dev/null)"
+    fi
+fi
+
+# 检查 kubelet cgroup driver 配置
+echo ""
+echo "kubelet cgroupDriver 配置:"
+grep cgroupDriver /var/lib/kubelet/config.yaml 2>/dev/null
+
+echo ""
+echo "containerd cgroup driver 配置:"
+grep -A 5 "SystemdCgroup" /etc/containerd/config.toml 2>/dev/null
+```
+
+---
+
+## 9. ACK/云环境特定问题
+
+### 9.1 ACK 节点诊断
+
+```bash
+#!/bin/bash
+# ack-node-diagnosis.sh - ACK 节点诊断
+
+echo "=============================================="
+echo "  ACK 节点诊断报告"
+echo "=============================================="
+
+# 1. 节点基础信息
+echo ""
+echo "=== 1. 节点信息 ==="
+echo "节点 ID:"
+curl -s http://100.100.100.200/latest/meta-data/instance-id 2>/dev/null || echo "无法获取"
+echo ""
+echo "实例类型:"
+curl -s http://100.100.100.200/latest/meta-data/instance-type 2>/dev/null || echo "无法获取"
+echo ""
+echo "可用区:"
+curl -s http://100.100.100.200/latest/meta-data/zone-id 2>/dev/null || echo "无法获取"
+
+# 2. 节点池信息
+echo ""
+echo "=== 2. 节点池信息 ==="
+kubectl get node $(hostname) -o jsonpath='{.metadata.labels.alibabacloud\.com/nodepool-id}' 2>/dev/null || echo "无法获取"
+
+# 3. 竞价实例检查
+echo ""
+echo "=== 3. 竞价实例检查 ==="
+SPOT=$(kubectl get node $(hostname) -o jsonpath='{.metadata.labels.alibabacloud\.com/spot-instance}' 2>/dev/null)
+if [ "$SPOT" = "true" ]; then
+    echo "⚠️ 这是竞价实例，可能被回收"
+else
+    echo "这是按量/包年包月实例"
+fi
+
+# 4. 云监控 Agent
+echo ""
+echo "=== 4. 云监控 Agent ==="
+systemctl status cloudmonitor --no-pager 2>/dev/null | head -5 || echo "cloudmonitor 未安装"
+
+# 5. Terway 网络 (如使用)
+echo ""
+echo "=== 5. Terway 网络检查 ==="
+if [ -f /etc/cni/net.d/10-terway.conf ]; then
+    echo "Terway CNI 已配置"
+    echo ""
+    echo "ENI 网卡:"
+    ip addr show | grep -E "^[0-9]+: eth" | head -5
+fi
+
+# 6. GPU 检查 (如有)
+echo ""
+echo "=== 6. GPU 检查 ==="
+if command -v nvidia-smi &>/dev/null; then
+    nvidia-smi --query-gpu=name,memory.total,memory.used --format=csv 2>/dev/null
+else
+    echo "未检测到 GPU"
+fi
+
+# 7. 节点自愈状态
+echo ""
+echo "=== 7. 节点状态 ==="
+kubectl get node $(hostname) -o wide 2>/dev/null
+```
+
+### 9.2 ACK 特定问题解决
+
+| 问题 | 症状 | 原因 | 解决方案 |
+|------|------|------|---------|
+| **节点自动回收** | 节点突然消失 | 竞价实例被回收 | 使用混合实例策略 |
+| **节点池扩容失败** | 节点数不增加 | 库存不足/配额限制 | 检查配额/更换规格 |
+| **Terway 网络故障** | Pod 网络不通 | ENI 分配失败 | 检查 VSwitch/安全组 |
+| **云盘挂载失败** | PVC Pending | 云盘不在同可用区 | 使用 WaitForFirstConsumer |
+| **节点标签丢失** | 节点池标签不生效 | 节点池配置问题 | 重新同步节点池配置 |
+
+```bash
+# ACK 常用运维命令
+
+# 查看节点池
+kubectl get nodes -o custom-columns='NAME:.metadata.name,POOL:.metadata.labels.alibabacloud\.com/nodepool-id'
+
+# 触发节点修复 (通过 API)
+# aliyun cs POST /clusters/{ClusterId}/nodes/{NodeName}/repair
+
+# 节点排水
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+
+# 移除节点
+kubectl delete node <node-name>
+
+# ACK 诊断工具
+# curl -O https://alibabacloud-china.github.io/diagnose-tools/scripts/installer.sh
+# bash installer.sh
+# ack-diagnose node --cluster-id <cluster-id> --node-name <node-name>
+```
+
+---
+
+## 10. 自动化诊断工具
+
+### 10.1 完整诊断脚本
+
+```bash
+#!/bin/bash
+# node-notready-full-diagnosis.sh - Node NotReady 完整诊断
+# 版本: 1.0 | 适用: Kubernetes v1.25-v1.32
+
+set -e
+
+# 颜色定义
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+NODE_NAME=${1:-$(hostname)}
+OUTPUT_FILE="node-diagnosis-$(date +%Y%m%d-%H%M%S).txt"
+
+log() { echo -e "${GREEN}[INFO]${NC} $1"; }
+warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
+error() { echo -e "${RED}[ERROR]${NC} $1"; }
+
+# 主诊断函数
+diagnose() {
+    echo "=============================================="
+    echo "  Node NotReady 诊断报告"
+    echo "  节点: $NODE_NAME"
+    echo "  时间: $(date)"
+    echo "=============================================="
+    
+    # 1. kubelet 状态
+    echo ""
+    echo "=== 1. kubelet 状态 ==="
+    systemctl status kubelet --no-pager 2>/dev/null | head -10
+    KUBELET_STATUS=$(systemctl is-active kubelet 2>/dev/null)
+    if [ "$KUBELET_STATUS" != "active" ]; then
+        error "kubelet 未运行!"
+        echo "最近日志:"
+        journalctl -u kubelet -n 20 --no-pager 2>/dev/null
+    fi
+    
+    # 2. containerd 状态
+    echo ""
+    echo "=== 2. containerd 状态 ==="
+    systemctl status containerd --no-pager 2>/dev/null | head -10
+    CONTAINERD_STATUS=$(systemctl is-active containerd 2>/dev/null)
+    if [ "$CONTAINERD_STATUS" != "active" ]; then
+        error "containerd 未运行!"
+    else
+        echo ""
+        echo "CRI 状态:"
+        timeout 10 crictl info 2>&1 | head -10 || warn "CRI 响应超时"
+    fi
+    
+    # 3. 系统资源
+    echo ""
+    echo "=== 3. 系统资源 ==="
+    echo "--- 内存 ---"
+    free -h
+    MEM_AVAIL=$(free -m | awk '/^Mem:/{print $7}')
+    if [ $MEM_AVAIL -lt 500 ]; then
+        warn "可用内存低于 500MB!"
+    fi
+    
+    echo ""
+    echo "--- 磁盘 ---"
+    df -h | grep -E "^/dev|Filesystem"
+    DISK_USE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')
+    if [ $DISK_USE -gt 85 ]; then
+        warn "根分区使用率超过 85%!"
+    fi
+    
+    # 4. 网络连通性
+    echo ""
+    echo "=== 4. 网络连通性 ==="
+    API_SERVER=$(grep "server:" /etc/kubernetes/kubelet.conf 2>/dev/null | awk '{print $2}')
+    if [ -n "$API_SERVER" ]; then
+        echo "API Server: $API_SERVER"
+        if curl -sk --connect-timeout 5 "${API_SERVER}/healthz" &>/dev/null; then
+            log "API Server 可达"
+        else
+            error "API Server 不可达!"
+        fi
+    fi
+    
+    # 5. 证书状态
+    echo ""
+    echo "=== 5. 证书状态 ==="
+    CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
+    if [ -f "$CERT" ]; then
+        EXPIRY=$(openssl x509 -in "$CERT" -noout -enddate 2>/dev/null | cut -d= -f2)
+        echo "证书过期时间: $EXPIRY"
+        EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s 2>/dev/null)
+        NOW_EPOCH=$(date +%s)
+        DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
+        if [ $DAYS_LEFT -lt 0 ]; then
+            error "证书已过期!"
+        elif [ $DAYS_LEFT -lt 30 ]; then
+            warn "证书将在 $DAYS_LEFT 天后过期"
+        else
+            log "证书有效期: $DAYS_LEFT 天"
+        fi
+    fi
+    
+    # 6. 错误日志汇总
+    echo ""
+    echo "=== 6. 错误日志汇总 ==="
+    echo "--- kubelet 错误 ---"
+    journalctl -u kubelet --since "30 minutes ago" --no-pager 2>/dev/null | grep -iE "error|fail" | tail -10
+    
+    echo ""
+    echo "--- 内核错误 ---"
+    dmesg | grep -iE "error|fail|panic|oom" | tail -10
+    
+    # 7. 诊断建议
+    echo ""
+    echo "=== 7. 诊断建议 ==="
+    if [ "$KUBELET_STATUS" != "active" ]; then
+        echo "1. 重启 kubelet: systemctl restart kubelet"
+    fi
+    if [ "$CONTAINERD_STATUS" != "active" ]; then
+        echo "2. 重启 containerd: systemctl restart containerd"
+    fi
+    if [ $MEM_AVAIL -lt 500 ]; then
+        echo "3. 清理内存: echo 1 > /proc/sys/vm/drop_caches"
+    fi
+    if [ $DISK_USE -gt 85 ]; then
+        echo "4. 清理磁盘: crictl rmi --prune"
+    fi
+    
+    echo ""
+    echo "=============================================="
+    echo "  诊断完成"
+    echo "=============================================="
+}
+
+# 执行诊断
+diagnose 2>&1 | tee "$OUTPUT_FILE"
+log "诊断报告已保存: $OUTPUT_FILE"
+```
+
+---
+
+## 11. 监控告警配置
+
+### 11.1 Prometheus 告警规则
+
+```yaml
+# node-notready-alerts.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-notready-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: node.status
+    interval: 30s
+    rules:
+    # 节点 NotReady
+    - alert: NodeNotReady
+      expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+      for: 2m
+      labels:
+        severity: critical
+        category: infrastructure
+      annotations:
+        summary: "节点 {{ $labels.node }} NotReady"
+        description: "节点已 NotReady 超过 2 分钟"
+        runbook_url: "https://wiki.example.com/runbooks/node-notready"
+    
+    # 节点 Unknown
+    - alert: NodeUnknown
+      expr: kube_node_status_condition{condition="Ready",status="unknown"} == 1
+      for: 3m
+      labels:
+        severity: critical
+      annotations:
+        summary: "节点 {{ $labels.node }} 状态 Unknown"
+        description: "可能存在网络分区或 kubelet 故障"
+    
+    # 内存压力
+    - alert: NodeMemoryPressure
+      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.node }} 内存压力"
+    
+    # 磁盘压力
+    - alert: NodeDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.node }} 磁盘压力"
+    
+    # PID 压力
+    - alert: NodePIDPressure
+      expr: kube_node_status_condition{condition="PIDPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.node }} PID 压力"
+
+  - name: kubelet.health
+    rules:
+    # kubelet 不可用
+    - alert: KubeletDown
+      expr: up{job="kubelet"} == 0
+      for: 3m
+      labels:
+        severity: critical
+      annotations:
+        summary: "kubelet {{ $labels.instance }} 不可用"
+    
+    # PLEG 延迟高
+    - alert: KubeletPLEGDurationHigh
+      expr: |
+        histogram_quantile(0.99, sum(rate(kubelet_pleg_relist_duration_seconds_bucket[5m])) by (instance, le)) > 3
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "kubelet {{ $labels.instance }} PLEG 延迟高"
+        description: "PLEG P99 延迟: {{ $value | printf \"%.2f\" }}s"
+
+  - name: node.resources
+    rules:
+    # CPU 使用率高
+    - alert: NodeCPUHigh
+      expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.instance }} CPU 高"
+        description: "CPU 使用率: {{ $value | printf \"%.1f\" }}%"
+    
+    # 内存使用率高
+    - alert: NodeMemoryHigh
+      expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 85
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.instance }} 内存高"
+        description: "内存使用率: {{ $value | printf \"%.1f\" }}%"
+    
+    # 磁盘使用率高
+    - alert: NodeDiskHigh
+      expr: (1 - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 > 85
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 {{ $labels.instance }} 磁盘高"
+        description: "根分区使用率: {{ $value | printf \"%.1f\" }}%"
+```
+
+### 11.2 关键监控指标
+
+| 指标 | 含义 | 健康基准 | 告警阈值 |
+|------|------|---------|---------|
+| `kube_node_status_condition{condition="Ready"}` | 节点 Ready 状态 | status=true | status!=true for 2m |
+| `kubelet_node_status_update_interval_seconds` | 节点状态更新间隔 | < 15s | > 30s |
+| `kubelet_pleg_relist_duration_seconds` | PLEG 重列延迟 | P99 < 1s | P99 > 3s |
+| `node_memory_MemAvailable_bytes` | 可用内存 | > 20% | < 10% |
+| `node_filesystem_avail_bytes` | 可用磁盘 | > 15% | < 10% |
+| `up{job="kubelet"}` | kubelet 存活 | 1 | 0 |
+
+---
+
+## 12. 节点恢复操作
+
+### 12.1 标准恢复流程
 
 ```bash
 #!/bin/bash
@@ -908,475 +1816,211 @@ if [ -z "$NODE_NAME" ]; then
     exit 1
 fi
 
-echo "====== 节点 $NODE_NAME 恢复流程 ======"
+echo "=== 节点 $NODE_NAME 恢复流程 ==="
 
-# 1. 隔离节点防止新Pod调度
+# 1. 隔离节点
+echo ""
 echo "=== 1. 隔离节点 ==="
 kubectl cordon $NODE_NAME
-kubectl get node $NODE_NAME
 
-# 2. SSH到节点进行修复
-echo -e "\n请SSH到节点执行以下检查和修复:"
-cat << 'REMOTE_COMMANDS'
+# 2. 检查并修复
+echo ""
+echo "=== 2. 请 SSH 到节点执行修复 ==="
+cat << 'EOF'
 # 在节点上执行:
 
-# 检查并重启kubelet
+# 检查并重启 kubelet
 systemctl status kubelet
 systemctl restart kubelet
 
-# 如果kubelet启动失败,检查日志
-journalctl -u kubelet -n 50 --no-pager
-
-# 检查并重启containerd
+# 检查并重启 containerd
 systemctl status containerd
 systemctl restart containerd
 
-# 清理资源(如需要)
+# 清理资源
 crictl rmi --prune
 crictl rm $(crictl ps -aq --state exited)
 
-# 检查磁盘和内存
-df -h
+# 检查资源
 free -h
+df -h
+EOF
 
-REMOTE_COMMANDS
-
-# 3. 等待节点恢复
-echo -e "\n=== 3. 等待节点恢复 ==="
-echo "等待中..."
-for i in {1..12}; do
-    STATUS=$(kubectl get node $NODE_NAME -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}')
-    if [ "$STATUS" == "True" ]; then
-        echo "节点已恢复Ready状态!"
+# 3. 等待恢复
+echo ""
+echo "=== 3. 等待节点恢复 ==="
+for i in {1..30}; do
+    STATUS=$(kubectl get node $NODE_NAME -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null)
+    if [ "$STATUS" = "True" ]; then
+        echo "节点已恢复 Ready!"
         break
     fi
-    echo "  等待 $((i*10))秒... (当前状态: $STATUS)"
+    echo "等待中... ($i/30)"
     sleep 10
 done
 
 # 4. 取消隔离
-echo -e "\n=== 4. 取消隔离 ==="
+echo ""
+echo "=== 4. 取消隔离 ==="
 kubectl uncordon $NODE_NAME
-kubectl get node $NODE_NAME
 
-# 5. 验证节点上的Pod
-echo -e "\n=== 5. 节点上的Pod状态 ==="
+# 5. 验证
+echo ""
+echo "=== 5. 最终状态 ==="
+kubectl get node $NODE_NAME
 kubectl get pods -A -o wide --field-selector spec.nodeName=$NODE_NAME | head -20
 ```
 
-### 紧急重启流程
+### 12.2 紧急重启流程
 
 ```bash
 #!/bin/bash
-# emergency-node-reboot.sh
+# emergency-reboot.sh
 
 NODE_NAME=$1
-if [ -z "$NODE_NAME" ]; then
-    echo "用法: $0 <node-name>"
-    exit 1
-fi
+echo "⚠️ 紧急重启节点: $NODE_NAME"
+read -p "确认? (yes/no): " CONFIRM
+[ "$CONFIRM" != "yes" ] && exit 0
 
-echo "====== 节点 $NODE_NAME 紧急重启流程 ======"
-echo "⚠️ 警告: 此操作将驱逐节点上所有Pod并重启节点"
-read -p "确认继续? (yes/no): " CONFIRM
-if [ "$CONFIRM" != "yes" ]; then
-    echo "已取消"
-    exit 0
-fi
+# 1. 驱逐 Pod
+kubectl drain $NODE_NAME --ignore-daemonsets --delete-emptydir-data --force --grace-period=30 --timeout=5m
 
-# 1. 驱逐Pod
-echo "=== 1. 驱逐节点上的Pod ==="
-kubectl drain $NODE_NAME \
-    --ignore-daemonsets \
-    --delete-emptydir-data \
-    --force \
-    --grace-period=30 \
-    --timeout=5m
-
-# 2. 确认Pod已驱逐
-echo -e "\n=== 2. 检查节点上剩余Pod ==="
-kubectl get pods -A -o wide --field-selector spec.nodeName=$NODE_NAME | grep -v DaemonSet
-
-# 3. 重启节点
-echo -e "\n=== 3. 重启节点 ==="
-echo "请SSH到节点执行: sudo reboot"
+# 2. 重启节点
+echo "请 SSH 到节点执行: sudo reboot"
 echo "或通过云平台控制台重启"
 
-# 4. 等待节点恢复
-echo -e "\n=== 4. 等待节点恢复(最长10分钟) ==="
+# 3. 等待恢复
+echo "等待节点恢复..."
 for i in {1..60}; do
     STATUS=$(kubectl get node $NODE_NAME -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null)
-    if [ "$STATUS" == "True" ]; then
-        echo "节点已恢复!"
-        break
-    fi
-    echo "  等待 $((i*10))秒..."
+    [ "$STATUS" = "True" ] && break
     sleep 10
 done
 
-# 5. 取消隔离
-echo -e "\n=== 5. 取消节点隔离 ==="
+# 4. 取消隔离
 kubectl uncordon $NODE_NAME
-
-# 6. 最终状态
-echo -e "\n=== 6. 最终状态 ==="
 kubectl get node $NODE_NAME
-kubectl get pods -A -o wide --field-selector spec.nodeName=$NODE_NAME | head -20
 ```
 
-### 节点替换流程
+---
 
-```bash
-#!/bin/bash
-# node-replacement.sh - 彻底无法恢复时的节点替换
+## 13. 版本特定变更
 
-OLD_NODE=$1
-if [ -z "$OLD_NODE" ]; then
-    echo "用法: $0 <old-node-name>"
-    exit 1
-fi
+### 13.1 节点管理功能演进
 
-echo "====== 节点 $OLD_NODE 替换流程 ======"
+| 版本 | 特性 | 状态 | 影响 |
+|------|------|------|------|
+| **v1.24** | 移除 Dockershim | GA | 必须使用 containerd/CRI-O |
+| **v1.25** | Lease API 稳定版 | GA | 心跳机制更可靠 |
+| **v1.26** | 节点日志 API | Beta | 可远程获取 kubelet 日志 |
+| **v1.27** | GracefulNodeShutdown | GA | 优雅关机支持 |
+| **v1.27** | 改进节点状态上报 | - | 更精确的状态检测 |
+| **v1.28** | SidecarContainers | Beta | 影响 Pod 生命周期 |
+| **v1.29** | 节点内存交换支持 | Beta | 新的内存管理选项 |
+| **v1.30** | 用户命名空间支持 | Beta | 增强安全隔离 |
+| **v1.31** | RecoverVolumeExpansionFailure | Alpha | 卷扩展故障恢复 |
+| **v1.32** | DRA GA 阶段推进 | Beta | 动态资源分配增强 |
 
-# 1. 标记节点不可调度
-echo "=== 1. 隔离节点 ==="
-kubectl cordon $OLD_NODE
-
-# 2. 驱逐所有Pod
-echo -e "\n=== 2. 驱逐Pod ==="
-kubectl drain $OLD_NODE \
-    --ignore-daemonsets \
-    --delete-emptydir-data \
-    --force \
-    --grace-period=60 \
-    --timeout=10m || echo "驱逐超时,继续..."
-
-# 3. 删除节点对象
-echo -e "\n=== 3. 删除节点对象 ==="
-kubectl delete node $OLD_NODE
-
-# 4. 清理etcd中的数据(如需要)
-echo -e "\n=== 4. 检查并清理残留资源 ==="
-# 检查是否有PV绑定到此节点
-kubectl get pv -o json | jq -r '.items[] | select(.spec.nodeAffinity.required.nodeSelectorTerms[].matchExpressions[].values[] == "'$OLD_NODE'") | .metadata.name'
-
-# 5. 提示添加新节点
-echo -e "\n=== 5. 添加新节点 ==="
-cat << 'NEW_NODE_GUIDE'
-添加新节点步骤:
-1. 准备新服务器,安装容器运行时和kubelet
-2. 获取join命令: kubeadm token create --print-join-command
-3. 在新节点执行join命令
-4. 验证新节点: kubectl get nodes
-NEW_NODE_GUIDE
-```
-
-## 监控告警配置
-
-### Prometheus告警规则
+### 13.2 版本特定配置
 
 ```yaml
-# node-alerts.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
-metadata:
-  name: node-notready-alerts
-  namespace: monitoring
-  labels:
-    prometheus: k8s
-    role: alert-rules
-spec:
-  groups:
-  - name: node.status
-    interval: 30s
-    rules:
-    # 节点NotReady告警
-    - alert: NodeNotReady
-      expr: kube_node_status_condition{condition="Ready",status="true"} == 0
-      for: 2m
-      labels:
-        severity: critical
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} NotReady"
-        description: "节点 {{ $labels.node }} 已处于NotReady状态超过2分钟"
-        runbook: "https://wiki.example.com/runbook/node-notready"
-        
-    # 节点Unknown状态(可能网络分区)
-    - alert: NodeUnknown
-      expr: kube_node_status_condition{condition="Ready",status="unknown"} == 1
-      for: 3m
-      labels:
-        severity: critical
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} 状态Unknown"
-        description: "无法获取节点 {{ $labels.node }} 状态,可能存在网络问题"
-        
-    # 节点内存压力
-    - alert: NodeMemoryPressure
-      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
-      for: 2m
-      labels:
-        severity: warning
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} 内存压力"
-        description: "节点内存不足,可能触发Pod驱逐"
-        
-    # 节点磁盘压力
-    - alert: NodeDiskPressure
-      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
-      for: 2m
-      labels:
-        severity: warning
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} 磁盘压力"
-        description: "节点磁盘空间不足,可能触发Pod驱逐"
-        
-    # 节点PID压力
-    - alert: NodePIDPressure
-      expr: kube_node_status_condition{condition="PIDPressure",status="true"} == 1
-      for: 2m
-      labels:
-        severity: warning
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} PID压力"
-        description: "节点进程数接近限制"
-        
-    # 节点网络不可用
-    - alert: NodeNetworkUnavailable
-      expr: kube_node_status_condition{condition="NetworkUnavailable",status="true"} == 1
-      for: 2m
-      labels:
-        severity: critical
-        category: infrastructure
-      annotations:
-        summary: "节点 {{ $labels.node }} 网络不可用"
-        description: "节点网络配置异常,CNI可能故障"
+# v1.27+ 优雅关机配置
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+shutdownGracePeriod: 60s
+shutdownGracePeriodCriticalPods: 20s
+shutdownGracePeriodByPodPriority:
+- priority: 2000000000  # system-cluster-critical
+  shutdownGracePeriodSeconds: 20
+- priority: 1000000000  # system-node-critical
+  shutdownGracePeriodSeconds: 15
+- priority: 0
+  shutdownGracePeriodSeconds: 10
 
-  - name: node.resource
-    rules:
-    # 节点CPU使用率高
-    - alert: NodeCPUHigh
-      expr: |
-        100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
-      for: 10m
-      labels:
-        severity: warning
-      annotations:
-        summary: "节点 {{ $labels.instance }} CPU使用率高"
-        description: "节点CPU使用率超过85%,当前: {{ $value | printf \"%.1f\" }}%"
-        
-    # 节点内存使用率高
-    - alert: NodeMemoryHigh
-      expr: |
-        (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 85
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "节点 {{ $labels.instance }} 内存使用率高"
-        description: "节点内存使用率超过85%,当前: {{ $value | printf \"%.1f\" }}%"
-        
-    # 节点磁盘使用率高
-    - alert: NodeDiskHigh
-      expr: |
-        (1 - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 > 85
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "节点 {{ $labels.instance }} 磁盘使用率高"
-        description: "节点根分区使用率超过85%,当前: {{ $value | printf \"%.1f\" }}%"
-
-  - name: kubelet.health
-    rules:
-    # kubelet不可用
-    - alert: KubeletDown
-      expr: up{job="kubelet"} == 0
-      for: 3m
-      labels:
-        severity: critical
-      annotations:
-        summary: "kubelet {{ $labels.instance }} 不可用"
-        description: "kubelet无法访问,节点可能NotReady"
-        
-    # kubelet PLEG延迟高
-    - alert: KubeletPLEGDurationHigh
-      expr: |
-        histogram_quantile(0.99, sum(rate(kubelet_pleg_relist_duration_seconds_bucket[5m])) by (instance, le)) > 3
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "kubelet {{ $labels.instance }} PLEG延迟高"
-        description: "PLEG relist P99延迟超过3秒,可能影响Pod状态更新"
-        
-    # kubelet Pod启动延迟
-    - alert: KubeletPodStartSLOBreach
-      expr: |
-        histogram_quantile(0.99, sum(rate(kubelet_pod_start_duration_seconds_bucket[5m])) by (instance, le)) > 60
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "kubelet {{ $labels.instance }} Pod启动慢"
-        description: "Pod启动P99延迟超过60秒"
+# v1.29+ 内存交换支持 (实验性)
+# memorySwap:
+#   swapBehavior: LimitedSwap
 ```
 
-### Grafana Dashboard配置
+---
 
-```json
-{
-  "dashboard": {
-    "title": "Node Health Dashboard",
-    "panels": [
-      {
-        "title": "节点状态概览",
-        "type": "stat",
-        "targets": [
-          {
-            "expr": "sum(kube_node_status_condition{condition=\"Ready\",status=\"true\"})",
-            "legendFormat": "Ready节点"
-          },
-          {
-            "expr": "sum(kube_node_status_condition{condition=\"Ready\",status=\"false\"})",
-            "legendFormat": "NotReady节点"
-          }
-        ]
-      },
-      {
-        "title": "节点Condition状态",
-        "type": "table",
-        "targets": [
-          {
-            "expr": "kube_node_status_condition{status=\"true\"} == 1",
-            "format": "table"
-          }
-        ]
-      },
-      {
-        "title": "kubelet心跳延迟",
-        "type": "graph",
-        "targets": [
-          {
-            "expr": "time() - kube_node_status_condition{condition=\"Ready\",status=\"true\"} * on(node) group_left() kube_node_created",
-            "legendFormat": "{{ node }}"
-          }
-        ]
-      },
-      {
-        "title": "节点资源使用率",
-        "type": "graph",
-        "targets": [
-          {
-            "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
-            "legendFormat": "CPU {{ instance }}"
-          },
-          {
-            "expr": "(1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100",
-            "legendFormat": "Memory {{ instance }}"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
+## 14. 多角色视角
 
-## ACK节点诊断
+### 14.1 架构师视角
 
-### 阿里云ACK节点诊断
+| 关注点 | 设计要点 | 推荐配置 |
+|-------|---------|---------|
+| **高可用** | 多节点冗余 | 至少 3 Worker 节点 |
+| **资源预留** | 系统资源保护 | systemReserved + kubeReserved |
+| **故障隔离** | 节点组/节点池 | 不同业务使用不同节点池 |
+| **自动恢复** | 节点自愈 | ACK 节点自愈 / Cluster Autoscaler |
+| **监控覆盖** | 全面监控 | Node Exporter + kubelet metrics |
 
-```bash
-# ACK节点诊断入口
-# 控制台: 集群 -> 节点管理 -> 节点列表 -> 诊断
+### 14.2 测试工程师视角
 
-# 使用aliyun CLI诊断
-# 1. 获取集群节点列表
-aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
+| 测试类型 | 测试目标 | 测试方法 |
+|---------|---------|---------|
+| **节点故障测试** | 验证故障检测时间 | 强制停止 kubelet |
+| **恢复测试** | 验证自动恢复 | 模拟后恢复节点 |
+| **驱逐测试** | 验证 Pod 迁移 | 触发节点 NotReady |
+| **资源压力测试** | 验证驱逐策略 | 消耗内存/磁盘 |
+| **混沌测试** | 验证整体稳定性 | ChaosBlade 节点故障 |
 
-# 2. 节点健康检查
-aliyun cs GET /clusters/{ClusterId}/nodes/{NodeName}/repair
+### 14.3 产品经理视角
 
-# 3. 节点重置(危险操作)
-aliyun cs POST /clusters/{ClusterId}/nodes --body '{
-  "nodes": ["<node-name>"],
-  "action": "repair"
-}'
+| SLA 指标 | 目标值 | 监控方式 |
+|---------|-------|---------|
+| **节点可用率** | > 99.9% | 节点 Ready 时间比例 |
+| **故障检测时间** | < 1min | NotReady 告警触发时间 |
+| **故障恢复时间** | < 5min | NotReady 到 Ready 时间 |
+| **Pod 迁移完成时间** | < 10min | Pod 重新调度完成时间 |
 
-# 4. ACK诊断工具ack-diagnose
-# 下载并安装
-curl -O https://alibabacloud-china.github.io/diagnose-tools/scripts/installer.sh
-bash installer.sh
+---
 
-# 运行诊断
-ack-diagnose cluster --cluster-id <cluster-id>
-ack-diagnose node --cluster-id <cluster-id> --node-name <node-name>
-```
+## 15. 最佳实践
 
-### ACK特有问题排查
+### 15.1 预防措施清单
 
-```bash
-# 1. 检查云监控Agent
-systemctl status cloudmonitor
-systemctl status aliyun-service
+- [ ] **监控配置**
+  - [ ] 部署 Node Exporter
+  - [ ] 配置节点状态告警 (NotReady/Unknown)
+  - [ ] 配置资源使用告警 (CPU/Memory/Disk)
+  - [ ] 配置 kubelet 健康告警
 
-# 2. 检查安全组规则
-# 确保节点间10250, 10255, 10256端口互通
-# 确保节点到API Server 6443端口连通
+- [ ] **资源管理**
+  - [ ] 配置 systemReserved 和 kubeReserved
+  - [ ] 配置合理的驱逐阈值
+  - [ ] 磁盘使用率 80% 告警
+  - [ ] 定期清理无用镜像和容器
 
-# 3. 检查ENI网卡状态(Terway网络)
-ip addr show | grep eth
-cat /etc/cni/net.d/10-terway.conf
+- [ ] **证书管理**
+  - [ ] 启用证书自动轮转
+  - [ ] 配置证书过期监控 (30 天前告警)
+  - [ ] 定期检查证书状态
 
-# 4. 检查节点标签和污点
-kubectl get node <node-name> -o yaml | grep -A 20 labels
-kubectl get node <node-name> -o yaml | grep -A 10 taints
+- [ ] **运维准备**
+  - [ ] 文档化故障处理流程 (Runbook)
+  - [ ] 定期演练恢复流程
+  - [ ] 配置节点自愈 (如 ACK 节点自愈)
+  - [ ] 准备诊断脚本
 
-# 5. ACK节点自愈
-# 在控制台开启节点自愈功能
-# 设置 -> 功能管理 -> 节点自愈
-```
-
-## 最佳实践
-
-### 预防措施清单
-
-| 类别 | 措施 | 优先级 | 说明 |
-|-----|------|-------|------|
-| **监控** | 部署Node Exporter | P0 | 收集节点指标 |
-| **监控** | 配置节点告警 | P0 | 及时发现问题 |
-| **监控** | 配置心跳监控 | P1 | 监控kubelet心跳 |
-| **资源** | 设置资源预留 | P0 | systemReserved/kubeReserved |
-| **资源** | 配置驱逐阈值 | P1 | 合理的evictionHard/Soft |
-| **资源** | 磁盘监控告警 | P1 | 80%使用率告警 |
-| **证书** | 证书过期监控 | P0 | 30天前告警 |
-| **证书** | 自动证书轮转 | P1 | rotateCertificates=true |
-| **运维** | 定期健康检查 | P1 | 每日自动化检查 |
-| **运维** | 文档化故障处理 | P1 | Runbook |
-| **运维** | 演练恢复流程 | P2 | 定期演练 |
-
-### 快速诊断检查表
+### 15.2 快速诊断检查表
 
 ```
-□ 节点能SSH登录?
-  ├── Yes → 继续检查
-  └── No  → 检查网络/云平台/物理机状态
+□ 能 SSH 登录节点?
+  ├── Yes → 继续
+  └── No  → 检查网络/云平台
 
-□ kubelet进程运行?
+□ kubelet 进程运行?
   ├── systemctl status kubelet
-  └── 不运行 → 检查日志并重启
+  └── 不运行 → 查日志并重启
 
-□ containerd运行?
+□ containerd 运行?
   ├── systemctl status containerd
-  └── 不运行 → 检查日志并重启
+  └── 不运行 → 查日志并重启
 
-□ 能连接API Server?
-  ├── curl -k https://<apiserver>:6443/healthz
+□ 能连接 API Server?
+  ├── curl -k https://apiserver:6443/healthz
   └── 不能 → 检查网络/证书
 
 □ 证书有效?
@@ -1387,27 +2031,21 @@ kubectl get node <node-name> -o yaml | grep -A 10 taints
   ├── free -h / df -h
   └── 不足 → 清理资源
 
-□ CNI正常?
-  ├── 检查CNI Pod状态
-  └── 异常 → 重启CNI
+□ CNI 正常?
+  ├── 检查 CNI Pod 状态
+  └── 异常 → 重启 CNI
 ```
 
-## 版本变更记录
+### 15.3 相关文档
 
-| 版本 | 变更内容 | 影响 |
-|-----|---------|------|
-| v1.24 | 移除dockershim | 必须使用containerd或CRI-O |
-| v1.25 | Lease API稳定版 | 心跳机制更可靠 |
-| v1.26 | 节点日志API | 可远程获取kubelet日志 |
-| v1.27 | 改进节点状态上报 | 更精确的状态检测 |
-| v1.28 | 增强/readyz端点 | 更详细的健康检查 |
-| v1.29 | SidecarContainers GA | 影响Pod生命周期 |
-| v1.30 | 节点内存交换支持Beta | 新的内存管理选项 |
+| 主题 | 文档编号 | 说明 |
+|------|---------|------|
+| Pod Pending 诊断 | 102-pod-pending-diagnosis | Pod 调度问题 |
+| OOM 诊断 | 104-oom-memory-diagnosis | 内存问题 |
+| kubelet 深度解析 | 39-kubelet-deep-dive | kubelet 架构 |
+| containerd 配置 | 15-container-runtime | 容器运行时 |
+| 证书管理 | 77-certificate-management | 证书操作 |
 
 ---
 
-**NotReady诊断原则**: 分层诊断(kubelet→运行时→资源→网络→证书) → 隔离节点 → 定位根因 → 修复并验证 → 取消隔离
-
----
-
-**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-01 | 版本: v1.25-v1.32
