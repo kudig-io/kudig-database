@@ -89,16 +89,16 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 01 | K8s架构 | [kubernetes-architecture-overview](./tables/01-kubernetes-architecture-overview.md) | 整体架构、组件关系、数据流 |
-| 02 | 核心组件 | [core-components-deep-dive](./tables/02-core-components-deep-dive.md) | 各组件职责与协作 |
-| 03 | API版本 | [api-versions-features](./tables/03-api-versions-features.md) | API版本演进、特性门控 |
-| 04 | 源码结构 | [source-code-structure](./tables/04-source-code-structure.md) | 源码目录、模块划分 |
-| 05 | kubectl | [kubectl-commands-reference](./tables/05-kubectl-commands-reference.md) | 命令大全、常用场景 |
-| 06 | 集群配置 | [cluster-configuration-parameters](./tables/06-cluster-configuration-parameters.md) | 集群级配置参数 |
-| 07 | 升级策略 | [upgrade-paths-strategy](./tables/07-upgrade-paths-strategy.md) | 版本升级路径、回滚策略 |
-| 08 | 多租户 | [multi-tenancy-architecture](./tables/08-multi-tenancy-architecture.md) | 多租户隔离模型 |
-| 09 | 边缘计算 | [edge-computing-kubeedge](./tables/09-edge-computing-kubeedge.md) | KubeEdge、边缘场景 |
-| 10 | Win容器 | [windows-containers-support](./tables/10-windows-containers-support.md) | Windows节点支持 |
+| 01 | K8s架构 | [kubernetes-architecture-overview](./tables/domain-a-architecture-fundamentals/01-kubernetes-architecture-overview.md) | 整体架构、组件关系、数据流 |
+| 02 | 核心组件 | [core-components-deep-dive](./tables/domain-a-architecture-fundamentals/02-core-components-deep-dive.md) | 各组件职责与协作 |
+| 03 | API版本 | [api-versions-features](./tables/domain-a-architecture-fundamentals/03-api-versions-features.md) | API版本演进、特性门控 |
+| 04 | 源码结构 | [source-code-structure](./tables/domain-a-architecture-fundamentals/04-source-code-structure.md) | 源码目录、模块划分 |
+| 05 | kubectl | [kubectl-commands-reference](./tables/domain-a-architecture-fundamentals/05-kubectl-commands-reference.md) | 命令大全、常用场景 |
+| 06 | 集群配置 | [cluster-configuration-parameters](./tables/domain-a-architecture-fundamentals/06-cluster-configuration-parameters.md) | 集群级配置参数 |
+| 07 | 升级策略 | [upgrade-paths-strategy](./tables/domain-a-architecture-fundamentals/07-upgrade-paths-strategy.md) | 版本升级路径、回滚策略 |
+| 08 | 多租户 | [multi-tenancy-architecture](./tables/domain-a-architecture-fundamentals/08-multi-tenancy-architecture.md) | 多租户隔离模型 |
+| 09 | 边缘计算 | [edge-computing-kubeedge](./tables/domain-a-architecture-fundamentals/09-edge-computing-kubeedge.md) | KubeEdge、边缘场景 |
+| 10 | Win容器 | [windows-containers-support](./tables/domain-a-architecture-fundamentals/10-windows-containers-support.md) | Windows节点支持 |
 
 ---
 
@@ -108,16 +108,16 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 11 | 设计原则 | [kubernetes-design-principles](./tables/11-kubernetes-design-principles.md) | 核心设计哲学、最佳实践 |
-| 12 | 声明式API | [declarative-api-pattern](./tables/12-declarative-api-pattern.md) | 声明式 vs 命令式 |
-| 13 | 控制器模式 | [controller-pattern-reconciliation](./tables/13-controller-pattern-reconciliation.md) | Reconcile循环、最终一致性 |
-| 14 | Watch/List | [watch-list-mechanism](./tables/14-watch-list-mechanism.md) | 事件监听机制 |
-| 15 | Informer | [informer-workqueue](./tables/15-informer-workqueue.md) | SharedInformer、WorkQueue |
-| 16 | 乐观并发 | [resource-version-optimistic-concurrency](./tables/16-resource-version-optimistic-concurrency.md) | ResourceVersion、冲突处理 |
-| 17 | etcd共识 | [distributed-consensus-etcd](./tables/17-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
-| 18 | 高可用模式 | [high-availability-patterns](./tables/18-high-availability-patterns.md) | HA架构、故障转移 |
-| 19 | 源码解读 | [kubernetes-source-code-walkthrough](./tables/19-kubernetes-source-code-walkthrough.md) | 核心代码路径 |
-| 20 | CAP定理 | [cap-theorem-distributed-systems](./tables/20-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 |
+| 11 | 设计原则 | [kubernetes-design-principles](./tables/domain-b-design-principles/11-kubernetes-design-principles.md) | 核心设计哲学、最佳实践 |
+| 12 | 声明式API | [declarative-api-pattern](./tables/domain-b-design-principles/12-declarative-api-pattern.md) | 声明式 vs 命令式 |
+| 13 | 控制器模式 | [controller-pattern-reconciliation](./tables/domain-b-design-principles/13-controller-pattern-reconciliation.md) | Reconcile循环、最终一致性 |
+| 14 | Watch/List | [watch-list-mechanism](./tables/domain-b-design-principles/14-watch-list-mechanism.md) | 事件监听机制 |
+| 15 | Informer | [informer-workqueue](./tables/domain-b-design-principles/15-informer-workqueue.md) | SharedInformer、WorkQueue |
+| 16 | 乐观并发 | [resource-version-optimistic-concurrency](./tables/domain-b-design-principles/16-resource-version-optimistic-concurrency.md) | ResourceVersion、冲突处理 |
+| 17 | etcd共识 | [distributed-consensus-etcd](./tables/domain-b-design-principles/17-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
+| 18 | 高可用模式 | [high-availability-patterns](./tables/domain-b-design-principles/18-high-availability-patterns.md) | HA架构、故障转移 |
+| 19 | 源码解读 | [kubernetes-source-code-walkthrough](./tables/domain-b-design-principles/19-kubernetes-source-code-walkthrough.md) | 核心代码路径 |
+| 20 | CAP定理 | [cap-theorem-distributed-systems](./tables/domain-b-design-principles/20-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 |
 
 ---
 
@@ -214,6 +214,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 49 | 拓扑感知 | [service-topology-aware](./tables/49-service-topology-aware.md) | 拓扑感知路由 |
 | 50 | kube-proxy | [kube-proxy-modes-performance](./tables/50-kube-proxy-modes-performance.md) | 代理模式性能对比 |
 | 51 | Service高级 | [service-advanced-features](./tables/51-service-advanced-features.md) | 会话亲和、外部流量 |
+| 260 | Service ACK实战 | [service-ack-practical-guide](./tables/service-ack-practical-guide.md) | 阿里云环境完整配置指南 |
 
 #### E3: DNS与服务发现
 
