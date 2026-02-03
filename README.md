@@ -1,6 +1,6 @@
 # Kusheet - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **表格数量**: 203
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **表格数量**: 219
 
 ---
 
@@ -90,16 +90,16 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 01 | K8s架构 | [kubernetes-architecture-overview](./tables/domain-a-architecture-fundamentals/01-kubernetes-architecture-overview.md) | 整体架构、组件关系、数据流 |
-| 02 | 核心组件 | [core-components-deep-dive](./tables/domain-a-architecture-fundamentals/02-core-components-deep-dive.md) | 各组件职责与协作 |
-| 03 | API版本 | [api-versions-features](./tables/domain-a-architecture-fundamentals/03-api-versions-features.md) | API版本演进、特性门控 |
-| 04 | 源码结构 | [source-code-structure](./tables/domain-a-architecture-fundamentals/04-source-code-structure.md) | 源码目录、模块划分 |
-| 05 | kubectl | [kubectl-commands-reference](./tables/domain-a-architecture-fundamentals/05-kubectl-commands-reference.md) | 命令大全、常用场景 |
-| 06 | 集群配置 | [cluster-configuration-parameters](./tables/domain-a-architecture-fundamentals/06-cluster-configuration-parameters.md) | 集群级配置参数 |
-| 07 | 升级策略 | [upgrade-paths-strategy](./tables/domain-a-architecture-fundamentals/07-upgrade-paths-strategy.md) | 版本升级路径、回滚策略 |
-| 08 | 多租户 | [multi-tenancy-architecture](./tables/domain-a-architecture-fundamentals/08-multi-tenancy-architecture.md) | 多租户隔离模型 |
-| 09 | 边缘计算 | [edge-computing-kubeedge](./tables/domain-a-architecture-fundamentals/09-edge-computing-kubeedge.md) | KubeEdge、边缘场景 |
-| 10 | Win容器 | [windows-containers-support](./tables/domain-a-architecture-fundamentals/10-windows-containers-support.md) | Windows节点支持 |
+| 01 | K8s架构 | [kubernetes-architecture-overview](./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md) | 整体架构、组件关系、数据流 |
+| 02 | 核心组件 | [core-components-deep-dive](./domain-1-architecture-fundamentals/02-core-components-deep-dive.md) | 各组件职责与协作 |
+| 03 | API版本 | [api-versions-features](./domain-1-architecture-fundamentals/03-api-versions-features.md) | API版本演进、特性门控 |
+| 04 | 源码结构 | [source-code-structure](./domain-1-architecture-fundamentals/04-source-code-structure.md) | 源码目录、模块划分 |
+| 05 | kubectl | [kubectl-commands-reference](./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md) | 命令大全、常用场景 |
+| 06 | 集群配置 | [cluster-configuration-parameters](./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md) | 集群级配置参数 |
+| 07 | 升级策略 | [upgrade-paths-strategy](./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md) | 版本升级路径、回滚策略 |
+| 08 | 多租户 | [multi-tenancy-architecture](./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md) | 多租户隔离模型 |
+| 09 | 边缘计算 | [edge-computing-kubeedge](./domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md) | KubeEdge、边缘场景 |
+| 10 | Win容器 | [windows-containers-support](./domain-1-architecture-fundamentals/10-windows-containers-support.md) | Windows节点支持 |
 
 ---
 
@@ -109,50 +109,60 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 11 | 设计原则 | [kubernetes-design-principles](./tables/domain-b-design-principles/11-kubernetes-design-principles.md) | 核心设计哲学、最佳实践 |
-| 12 | 声明式API | [declarative-api-pattern](./tables/domain-b-design-principles/12-declarative-api-pattern.md) | 声明式 vs 命令式 |
-| 13 | 控制器模式 | [controller-pattern-reconciliation](./tables/domain-b-design-principles/13-controller-pattern-reconciliation.md) | Reconcile循环、最终一致性 |
-| 14 | Watch/List | [watch-list-mechanism](./tables/domain-b-design-principles/14-watch-list-mechanism.md) | 事件监听机制 |
-| 15 | Informer | [informer-workqueue](./tables/domain-b-design-principles/15-informer-workqueue.md) | SharedInformer、WorkQueue |
-| 16 | 乐观并发 | [resource-version-optimistic-concurrency](./tables/domain-b-design-principles/16-resource-version-optimistic-concurrency.md) | ResourceVersion、冲突处理 |
-| 17 | etcd共识 | [distributed-consensus-etcd](./tables/domain-b-design-principles/17-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
-| 18 | 高可用模式 | [high-availability-patterns](./tables/domain-b-design-principles/18-high-availability-patterns.md) | HA架构、故障转移 |
-| 19 | 源码解读 | [kubernetes-source-code-walkthrough](./tables/domain-b-design-principles/19-kubernetes-source-code-walkthrough.md) | 核心代码路径 |
-| 20 | CAP定理 | [cap-theorem-distributed-systems](./tables/domain-b-design-principles/20-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 |
+| 11 | 设计原则 | [kubernetes-design-principles](./domain-2-design-principles/11-kubernetes-design-principles.md) | 核心设计哲学、最佳实践 |
+| 12 | 声明式API | [declarative-api-pattern](./domain-2-design-principles/12-declarative-api-pattern.md) | 声明式 vs 命令式 |
+| 13 | 控制器模式 | [controller-pattern-reconciliation](./domain-2-design-principles/13-controller-pattern-reconciliation.md) | Reconcile循环、最终一致性 |
+| 14 | Watch/List | [watch-list-mechanism](./domain-2-design-principles/14-watch-list-mechanism.md) | 事件监听机制 |
+| 15 | Informer | [informer-workqueue](./domain-2-design-principles/15-informer-workqueue.md) | SharedInformer、WorkQueue |
+| 16 | 乐观并发 | [resource-version-optimistic-concurrency](./domain-2-design-principles/16-resource-version-optimistic-concurrency.md) | ResourceVersion、冲突处理 |
+| 17 | etcd共识 | [distributed-consensus-etcd](./domain-2-design-principles/17-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
+| 18 | 高可用模式 | [high-availability-patterns](./domain-2-design-principles/18-high-availability-patterns.md) | HA架构、故障转移 |
+| 19 | 源码解读 | [kubernetes-source-code-walkthrough](./domain-2-design-principles/19-kubernetes-source-code-walkthrough.md) | 核心代码路径 |
+| 20 | CAP定理 | [cap-theorem-distributed-systems](./domain-2-design-principles/20-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 |
 
 ---
 
 ### 域C: 控制平面 (Control Plane)
 
-> 13 篇 | etcd、API Server、控制器、调度器、CRI/CSI/CNI接口深度解析
+> 23 篇 | 控制平面架构、组件详解、接口深度解析、调优扩展、故障排查
 
-#### C1: 核心组件深度解析
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 35 | etcd详解 | [etcd-deep-dive](./tables/35-etcd-deep-dive.md) | Raft、MVCC、备份恢复 |
-| 36 | API Server | [kube-apiserver-deep-dive](./tables/36-kube-apiserver-deep-dive.md) | 认证授权、APF限流、审计 |
-| 37 | KCM详解 | [kube-controller-manager-deep-dive](./tables/37-kube-controller-manager-deep-dive.md) | 40+控制器、Leader选举 |
-| 38 | CCM详解 | [cloud-controller-manager-deep-dive](./tables/38-cloud-controller-manager-deep-dive.md) | 云厂商控制器集成 |
-| 39 | Kubelet详解 | [kubelet-deep-dive](./tables/39-kubelet-deep-dive.md) | Pod生命周期、PLEG、CRI |
-| 40 | kube-proxy | [kube-proxy-deep-dive](./tables/40-kube-proxy-deep-dive.md) | iptables/IPVS/nftables |
-| 164 | Scheduler详解 | [kube-scheduler-deep-dive](./tables/164-kube-scheduler-deep-dive.md) | 调度框架、插件、抢占 |
-
-#### C2: 接口深度解析 (CRI/CSI/CNI)
+#### C1: 核心主题文档 (01-10)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 165 | CRI详解 | [cri-container-runtime-deep-dive](./tables/165-cri-container-runtime-deep-dive.md) | containerd/CRI-O、安全容器 |
-| 166 | CSI详解 | [csi-container-storage-deep-dive](./tables/166-csi-container-storage-deep-dive.md) | CSI规范、驱动开发、快照 |
-| 167 | CNI详解 | [cni-container-network-deep-dive](./tables/167-cni-container-network-deep-dive.md) | CNI规范、Calico/Cilium |
+| 01 | 架构总览 | [plane-architecture-overview](./domain-3-control-plane/01-plane-architecture-overview.md) | 控制平面整体架构、组件关系 |
+| 02 | 组件交互 | [plane-components-interaction](./domain-3-control-plane/02-plane-components-interaction.md) | 组件间通信、数据流分析 |
+| 03 | 高可用部署 | [plane-high-availability](./domain-3-control-plane/03-plane-high-availability.md) | HA架构设计、部署模式 |
+| 04 | 安全加固 | [plane-security-hardening](./domain-3-control-plane/04-plane-security-hardening.md) | 安全配置、加固指南 |
+| 05 | 监控可观测 | [plane-monitoring-observability](./domain-3-control-plane/05-plane-monitoring-observability.md) | 监控指标、可观测性 |
+| 06 | 故障排查 | [plane-troubleshooting](./domain-3-control-plane/06-plane-troubleshooting.md) | 故障诊断、排查手册 |
+| 07 | 升级迁移 | [plane-upgrade-migration](./domain-3-control-plane/07-plane-upgrade-migration.md) | 版本升级、迁移策略 |
+| 08 | 性能基准 | [plane-performance-benchmarking](./domain-3-control-plane/08-plane-performance-benchmarking.md) | 性能测试、基准数据 |
+| 09 | 扩缩容指南 | [plane-scalability-guide](./domain-3-control-plane/09-plane-scalability-guide.md) | 水平垂直扩展、自动扩缩 |
+| 10 | 备份灾备 | [plane-backup-disaster-recovery](./domain-3-control-plane/10-plane-backup-disaster-recovery.md) | 备份策略、灾备方案 |
 
-#### C3: 控制平面调优与扩展
+#### C2: 组件深度解析 (11-20)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 108 | APIServer调优 | [apiserver-tuning](./tables/108-apiserver-tuning.md) | 性能参数、限流配置 |
-| 109 | APF限流 | [api-priority-fairness](./tables/109-api-priority-fairness.md) | 优先级、公平分配 |
-| 110 | etcd运维 | [etcd-operations](./tables/110-etcd-operations.md) | 集群运维、故障恢复 |
+| 11 | etcd详解 | [etcd-deep-dive](./domain-3-control-plane/11-etcd-deep-dive.md) | Raft共识、MVCC存储、备份恢复 |
+| 12 | API Server | [apiserver-deep-dive](./domain-3-control-plane/12-apiserver-deep-dive.md) | 认证授权、APF限流、审计日志 |
+| 13 | KCM详解 | [kube-controller-manager-deep-dive](./domain-3-control-plane/13-kube-controller-manager-deep-dive.md) | 40+控制器、Leader选举 |
+| 14 | CCM详解 | [cloud-controller-manager-deep-dive](./domain-3-control-plane/14-cloud-controller-manager-deep-dive.md) | 云厂商控制器集成 |
+| 15 | Kubelet详解 | [kubelet-deep-dive](./domain-3-control-plane/15-kubelet-deep-dive.md) | Pod生命周期、PLEG、CRI接口 |
+| 16 | kube-proxy | [kube-proxy-deep-dive](./domain-3-control-plane/16-kube-proxy-deep-dive.md) | iptables/IPVS/nftables模式 |
+| 17 | APIServer调优 | [apiserver-tuning](./domain-3-control-plane/17-apiserver-tuning.md) | 性能参数、限流配置 |
+| 18 | APF限流 | [api-priority-fairness](./domain-3-control-plane/18-api-priority-fairness.md) | 优先级、公平分配机制 |
+| 19 | etcd运维 | [etcd-operations](./domain-3-control-plane/19-etcd-operations.md) | 集群运维、故障恢复 |
+| 20 | Scheduler详解 | [kube-scheduler-deep-dive](./domain-3-control-plane/20-kube-scheduler-deep-dive.md) | 调度框架、插件、抢占机制 |
+
+#### C3: 接口深度解析 (21-23)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 21 | CRI详解 | [container-runtime-deep-dive](./domain-3-control-plane/21-container-runtime-deep-dive.md) | containerd/CRI-O、安全容器 |
+| 22 | CSI详解 | [container-storage-deep-dive](./domain-3-control-plane/22-container-storage-deep-dive.md) | CSI规范、驱动开发、快照功能 |
+| 23 | CNI详解 | [container-network-deep-dive](./domain-3-control-plane/23-container-network-deep-dive.md) | CNI规范、Calico/Cilium网络 |
 
 ---
 
@@ -164,99 +174,108 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 21 | 工作负载 | [workload-controllers-overview](./tables/21-workload-controllers-overview.md) | Deployment/StatefulSet/DaemonSet |
-| 22 | Pod生命周期 | [pod-lifecycle-events](./tables/22-pod-lifecycle-events.md) | Phase、Condition、事件 |
-| 23 | Pod模式 | [advanced-pod-patterns](./tables/23-advanced-pod-patterns.md) | Init/Sidecar/Ambassador |
-| 24 | 容器Hook | [container-lifecycle-hooks](./tables/24-container-lifecycle-hooks.md) | PostStart/PreStop |
-| 25 | Sidecar | [sidecar-containers-patterns](./tables/25-sidecar-containers-patterns.md) | Native Sidecar(v1.28+) |
+| 21 | 工作负载 | [workload-controllers-overview](./domain-4-workloads/21-workload-controllers-overview.md) | Deployment/StatefulSet/DaemonSet |
+| 22 | Pod生命周期 | [pod-lifecycle-events](./domain-4-workloads/22-pod-lifecycle-events.md) | Phase、Condition、事件 |
+| 23 | Pod模式 | [advanced-pod-patterns](./domain-4-workloads/23-advanced-pod-patterns.md) | Init/Sidecar/Ambassador |
+| 24 | 容器Hook | [container-lifecycle-hooks](./domain-4-workloads/24-container-lifecycle-hooks.md) | PostStart/PreStop |
+| 25 | Sidecar | [sidecar-containers-patterns](./domain-4-workloads/25-sidecar-containers-patterns.md) | Native Sidecar(v1.28+) |
 
 #### D2: 容器运行时
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 26 | CRI接口 | [container-runtime-interfaces](./tables/26-container-runtime-interfaces.md) | CRI规范、运行时选型 |
-| 27 | RuntimeClass | [runtime-class-configuration](./tables/27-runtime-class-configuration.md) | 多运行时配置 |
-| 28 | 镜像仓库 | [container-images-registry](./tables/28-container-images-registry.md) | 镜像拉取、仓库配置 |
+| 26 | CRI接口 | [container-runtime-interfaces](./domain-4-workloads/26-container-runtime-interfaces.md) | CRI规范、运行时选型 |
+| 27 | RuntimeClass | [runtime-class-configuration](./domain-4-workloads/27-runtime-class-configuration.md) | 多运行时配置 |
+| 28 | 镜像仓库 | [container-images-registry](./domain-4-workloads/28-container-images-registry.md) | 镜像拉取、仓库配置 |
 
 #### D3: 调度与资源
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 29 | 节点管理 | [node-management-operations](./tables/29-node-management-operations.md) | 节点维护、cordon/drain |
-| 30 | 调度器 | [scheduler-configuration](./tables/30-scheduler-configuration.md) | 调度策略、亲和性 |
-| 31 | Kubelet | [kubelet-configuration](./tables/31-kubelet-configuration.md) | Kubelet参数配置 |
-| 32 | HPA/VPA | [hpa-vpa-autoscaling](./tables/32-hpa-vpa-autoscaling.md) | 水平/垂直自动扩缩 |
-| 33 | 容量规划 | [cluster-capacity-planning](./tables/33-cluster-capacity-planning.md) | 资源预估、容量模型 |
-| 34 | 资源管理 | [resource-management](./tables/34-resource-management.md) | Request/Limit、QoS |
+| 29 | 节点管理 | [node-management-operations](./domain-4-workloads/29-node-management-operations.md) | 节点维护、cordon/drain |
+| 30 | 调度器 | [scheduler-configuration](./domain-4-workloads/30-scheduler-configuration.md) | 调度策略、亲和性 |
+| 31 | Kubelet | [kubelet-configuration](./domain-4-workloads/31-kubelet-configuration.md) | Kubelet参数配置 |
+| 32 | HPA/VPA | [hpa-vpa-autoscaling](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | 水平/垂直自动扩缩 |
+| 33 | 容量规划 | [cluster-capacity-planning](./domain-4-workloads/33-cluster-capacity-planning.md) | 资源预估、容量模型 |
+| 34 | 资源管理 | [resource-management](./domain-4-workloads/34-resource-management.md) | Request/Limit、QoS |
 
 ---
 
 ### 域E: 网络 (Networking)
 
-> 32 篇 | CNI、Service、DNS、Ingress、Gateway API、网络策略
+> 36 篇 | CNI、Service、DNS、Ingress、Gateway API、网络策略、服务网格、多集群网络
 
-#### E1: 网络架构与CNI
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 41 | 网络架构 | [network-architecture-overview](./tables/41-network-architecture-overview.md) | K8s网络模型、三层网络 |
-| 42 | CNI架构 | [cni-architecture-fundamentals](./tables/42-cni-architecture-fundamentals.md) | CNI规范、插件机制 |
-| 43 | CNI对比 | [cni-plugins-comparison](./tables/43-cni-plugins-comparison.md) | Flannel/Calico/Cilium对比 |
-| 44 | Flannel | [flannel-complete-guide](./tables/44-flannel-complete-guide.md) | VXLAN/host-gw模式 |
-| 45 | Terway | [terway-advanced-guide](./tables/45-terway-advanced-guide.md) | 阿里云ENI网络 |
-| 46 | CNI排障 | [cni-troubleshooting-optimization](./tables/46-cni-troubleshooting-optimization.md) | 网络故障诊断 |
-
-#### E2: Service与服务发现
+#### E1: 网络安全与策略
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 47 | Service概念 | [service-concepts-types](./tables/47-service-concepts-types.md) | ClusterIP/NodePort/LB |
-| 48 | Service实现 | [service-implementation-details](./tables/48-service-implementation-details.md) | Endpoint、流量转发 |
-| 49 | 拓扑感知 | [service-topology-aware](./tables/49-service-topology-aware.md) | 拓扑感知路由 |
-| 50 | kube-proxy | [kube-proxy-modes-performance](./tables/50-kube-proxy-modes-performance.md) | 代理模式性能对比 |
-| 51 | Service高级 | [service-advanced-features](./tables/51-service-advanced-features.md) | 会话亲和、外部流量 |
+| 01 | NetworkPolicy实践 | [networkpolicy-deep-practice](./domain-5-networking/01-networkpolicy-deep-practice.md) | 生产级网络策略配置、零信任安全模型、策略设计模式 |
+| 02 | 服务网格 | [service-mesh-deep-dive](./domain-5-networking/02-service-mesh-deep-dive.md) | Istio/Linkerd生产部署、Sidecar模式、流量治理 |
+| 03 | 多集群网络 | [multi-cluster-federation](./domain-5-networking/03-multi-cluster-federation.md) | Cluster Federation、跨集群通信、VPC对等连接 |
+| 04 | DNS优化 | [dns-service-discovery-coredns](./domain-5-networking/04-dns-service-discovery-coredns.md) | CoreDNS调优、NodeLocal DNSCache、性能监控 |
+
+#### E2: 网络架构与CNI
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 05 | 网络架构 | [network-architecture-overview](./domain-5-networking/05-network-architecture-overview.md) | K8s网络模型、三层网络 |
+| 06 | CNI架构 | [cni-architecture-fundamentals](./domain-5-networking/06-cni-architecture-fundamentals.md) | CNI规范、插件机制 |
+| 07 | CNI对比 | [cni-plugins-comparison](./domain-5-networking/07-cni-plugins-comparison.md) | Flannel/Calico/Cilium对比 |
+| 08 | Flannel | [flannel-complete-guide](./domain-5-networking/08-flannel-complete-guide.md) | VXLAN/host-gw模式 |
+| 09 | Terway | [terway-advanced-guide](./domain-5-networking/09-terway-advanced-guide.md) | 阿里云ENI网络 |
+| 10 | CNI排障 | [cni-troubleshooting-optimization](./domain-5-networking/10-cni-troubleshooting-optimization.md) | 网络故障诊断 |
+
+#### E3: Service与服务发现
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | Service概念 | [service-concepts-types](./domain-5-networking/11-service-concepts-types.md) | ClusterIP/NodePort/LB |
+| 12 | Service实现 | [service-implementation-details](./domain-5-networking/12-service-implementation-details.md) | Endpoint、流量转发 |
+| 13 | 拓扑感知 | [service-topology-aware](./domain-5-networking/13-service-topology-aware.md) | 拓扑感知路由 |
+| 14 | kube-proxy | [kube-proxy-modes-performance](./domain-5-networking/14-kube-proxy-modes-performance.md) | 代理模式性能对比 |
+| 15 | Service高级 | [service-advanced-features](./domain-5-networking/15-service-advanced-features.md) | 会话亲和、外部流量 |
 | 260 | Service ACK实战 | [service-ack-practical-guide](./tables/service-ack-practical-guide.md) | 阿里云环境完整配置指南 |
 
-#### E3: DNS与服务发现
+#### E4: DNS与服务发现
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 52 | DNS发现 | [dns-service-discovery](./tables/52-dns-service-discovery.md) | DNS服务发现机制 |
-| 53 | CoreDNS架构 | [coredns-architecture-principles](./tables/53-coredns-architecture-principles.md) | CoreDNS架构原理 |
-| 54 | Corefile | [coredns-configuration-corefile](./tables/54-coredns-configuration-corefile.md) | Corefile配置 |
-| 55 | DNS插件 | [coredns-plugins-reference](./tables/55-coredns-plugins-reference.md) | 插件详解 |
-| 56 | DNS排障 | [coredns-troubleshooting-optimization](./tables/56-coredns-troubleshooting-optimization.md) | DNS故障诊断 |
+| 16 | DNS发现 | [dns-service-discovery](./domain-5-networking/16-dns-service-discovery.md) | DNS服务发现机制 |
+| 17 | CoreDNS架构 | [coredns-architecture-principles](./domain-5-networking/17-coredns-architecture-principles.md) | CoreDNS架构原理 |
+| 18 | Corefile | [coredns-configuration-corefile](./domain-5-networking/18-coredns-configuration-corefile.md) | Corefile配置 |
+| 19 | DNS插件 | [coredns-plugins-reference](./domain-5-networking/19-coredns-plugins-reference.md) | 插件详解 |
+| 20 | DNS排障 | [coredns-troubleshooting-optimization](./domain-5-networking/20-coredns-troubleshooting-optimization.md) | DNS故障诊断 |
 
-#### E4: 网络策略与安全
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 57 | 网络策略 | [network-policy-advanced](./tables/57-network-policy-advanced.md) | NetworkPolicy高级配置 |
-| 58 | mTLS加密 | [network-encryption-mtls](./tables/58-network-encryption-mtls.md) | 服务间mTLS |
-| 59 | Egress管理 | [egress-traffic-management](./tables/59-egress-traffic-management.md) | 出站流量控制 |
-| 60 | 多集群网络 | [multi-cluster-networking](./tables/60-multi-cluster-networking.md) | 跨集群网络 |
-| 61 | 网络排障 | [network-troubleshooting](./tables/61-network-troubleshooting.md) | 网络故障排查 |
-| 62 | 网络调优 | [network-performance-tuning](./tables/62-network-performance-tuning.md) | 网络性能优化 |
-
-#### E5: Ingress与流量入口
+#### E5: 网络策略与安全
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 63 | Ingress基础 | [ingress-fundamentals](./tables/63-ingress-fundamentals.md) | Ingress核心架构、路由配置、TLS、生产实践 |
-| 64 | Ingress控制器 | [ingress-controller-deep-dive](./tables/64-ingress-controller-deep-dive.md) | 控制器选型对比 |
-| 65 | Nginx Ingress | [nginx-ingress-complete-guide](./tables/65-nginx-ingress-complete-guide.md) | Nginx配置详解 |
-| 66 | Ingress TLS | [ingress-tls-certificate](./tables/66-ingress-tls-certificate.md) | TLS证书配置 |
-| 67 | 高级路由 | [ingress-advanced-routing](./tables/67-ingress-advanced-routing.md) | 路由规则、重写 |
-| 68 | Ingress安全 | [ingress-security-hardening](./tables/68-ingress-security-hardening.md) | 安全加固 |
-| 69 | Ingress监控 | [ingress-monitoring-troubleshooting](./tables/69-ingress-monitoring-troubleshooting.md) | 监控与排障 |
-| 70 | Ingress实践 | [ingress-production-best-practices](./tables/70-ingress-production-best-practices.md) | 生产最佳实践 |
+| 21 | 网络策略 | [network-policy-advanced](./domain-5-networking/21-network-policy-advanced.md) | NetworkPolicy高级配置 |
+| 22 | mTLS加密 | [network-encryption-mtls](./domain-5-networking/22-network-encryption-mtls.md) | 服务间mTLS |
+| 23 | Egress管理 | [egress-traffic-management](./domain-5-networking/23-egress-traffic-management.md) | 出站流量控制 |
+| 24 | 多集群网络 | [multi-cluster-networking](./domain-5-networking/24-multi-cluster-networking.md) | 跨集群网络 |
+| 25 | 网络排障 | [network-troubleshooting](./domain-5-networking/25-network-troubleshooting.md) | 网络故障排查 |
+| 26 | 网络调优 | [network-performance-tuning](./domain-5-networking/26-network-performance-tuning.md) | 网络性能优化 |
 
-#### E6: Gateway API与服务网格
+#### E6: Ingress与流量入口
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 71 | Gateway API | [gateway-api-overview](./tables/71-gateway-api-overview.md) | 新一代流量管理 |
-| 72 | API网关 | [api-gateway-patterns](./tables/72-api-gateway-patterns.md) | 网关模式 |
+| 27 | Ingress基础 | [ingress-fundamentals](./domain-5-networking/27-ingress-fundamentals.md) | Ingress核心架构、路由配置、TLS、生产实践 |
+| 28 | Ingress控制器 | [ingress-controller-deep-dive](./domain-5-networking/28-ingress-controller-deep-dive.md) | 控制器选型对比 |
+| 29 | Nginx Ingress | [nginx-ingress-complete-guide](./domain-5-networking/29-nginx-ingress-complete-guide.md) | Nginx配置详解 |
+| 30 | Ingress TLS | [ingress-tls-certificate](./domain-5-networking/30-ingress-tls-certificate.md) | TLS证书配置 |
+| 31 | 高级路由 | [ingress-advanced-routing](./domain-5-networking/31-ingress-advanced-routing.md) | 路由规则、重写 |
+| 32 | Ingress安全 | [ingress-security-hardening](./domain-5-networking/32-ingress-security-hardening.md) | 安全加固 |
+| 33 | Ingress监控 | [ingress-monitoring-troubleshooting](./domain-5-networking/33-ingress-monitoring-troubleshooting.md) | 监控与排障 |
+| 34 | Ingress实践 | [ingress-production-best-practices](./domain-5-networking/34-ingress-production-best-practices.md) | 生产最佳实践 |
+
+#### E7: Gateway API与服务网格
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 35 | Gateway API | [gateway-api-overview](./domain-5-networking/35-gateway-api-overview.md) | 新一代流量管理 |
+| 36 | API网关 | [api-gateway-patterns](./domain-5-networking/36-api-gateway-patterns.md) | 网关模式 |
 
 ---
 
@@ -266,14 +285,14 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 73 | 存储架构 | [storage-architecture-overview](./tables/73-storage-architecture-overview.md) | K8s存储架构 |
-| 74 | PV架构 | [pv-architecture-fundamentals](./tables/74-pv-architecture-fundamentals.md) | PersistentVolume详解 |
-| 75 | PVC模式 | [pvc-patterns-practices](./tables/75-pvc-patterns-practices.md) | PVC使用模式 |
-| 76 | StorageClass | [storageclass-dynamic-provisioning](./tables/76-storageclass-dynamic-provisioning.md) | 动态供给 |
-| 77 | CSI驱动 | [csi-drivers-integration](./tables/77-csi-drivers-integration.md) | CSI驱动集成 |
-| 78 | 存储调优 | [storage-performance-tuning](./tables/78-storage-performance-tuning.md) | IO性能优化 |
-| 79 | 存储排障 | [pv-pvc-troubleshooting](./tables/79-pv-pvc-troubleshooting.md) | PV/PVC故障排查 |
-| 80 | 存储备份 | [storage-backup-disaster-recovery](./tables/80-storage-backup-disaster-recovery.md) | 数据备份恢复 |
+| 73 | 存储架构 | [storage-architecture-overview](./domain-6-storage/73-storage-architecture-overview.md) | K8s存储架构 |
+| 74 | PV架构 | [pv-architecture-fundamentals](./domain-6-storage/74-pv-architecture-fundamentals.md) | PersistentVolume详解 |
+| 75 | PVC模式 | [pvc-patterns-practices](./domain-6-storage/75-pvc-patterns-practices.md) | PVC使用模式 |
+| 76 | StorageClass | [storageclass-dynamic-provisioning](./domain-6-storage/76-storageclass-dynamic-provisioning.md) | 动态供给 |
+| 77 | CSI驱动 | [csi-drivers-integration](./domain-6-storage/77-csi-drivers-integration.md) | CSI驱动集成 |
+| 78 | 存储调优 | [storage-performance-tuning](./domain-6-storage/78-storage-performance-tuning.md) | IO性能优化 |
+| 79 | 存储排障 | [pv-pvc-troubleshooting](./domain-6-storage/79-pv-pvc-troubleshooting.md) | PV/PVC故障排查 |
+| 80 | 存储备份 | [storage-backup-disaster-recovery](./domain-6-storage/80-storage-backup-disaster-recovery.md) | 数据备份恢复 |
 
 ---
 
@@ -283,90 +302,90 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 81 | 安全实践 | [security-best-practices](./tables/81-security-best-practices.md) | 安全最佳实践 |
-| 82 | 安全加固 | [security-hardening-production](./tables/82-security-hardening-production.md) | 生产加固清单 |
-| 83 | PSS标准 | [pod-security-standards](./tables/83-pod-security-standards.md) | Pod安全标准 |
-| 84 | RBAC | [rbac-matrix-configuration](./tables/84-rbac-matrix-configuration.md) | 权限矩阵配置 |
-| 85 | 证书管理 | [certificate-management](./tables/85-certificate-management.md) | PKI、cert-manager |
-| 86 | 镜像扫描 | [image-security-scanning](./tables/86-image-security-scanning.md) | 漏洞扫描 |
-| 87 | OPA/Kyverno | [policy-engines-opa-kyverno](./tables/87-policy-engines-opa-kyverno.md) | 策略引擎对比 |
-| 88 | 合规认证 | [compliance-certification](./tables/88-compliance-certification.md) | SOC2/ISO/PCI |
-| 89 | 审计实践 | [compliance-audit-practices](./tables/89-compliance-audit-practices.md) | 审计日志配置 |
-| 90 | 密钥管理 | [secret-management-tools](./tables/90-secret-management-tools.md) | Vault/ESO集成 |
-| 91 | 安全扫描 | [security-scanning-tools](./tables/91-security-scanning-tools.md) | Trivy/Falco |
-| 92 | 策略验证 | [policy-validation-tools](./tables/92-policy-validation-tools.md) | 策略校验工具 |
+| 81 | 安全实践 | [security-best-practices](./domain-7-security/81-security-best-practices.md) | 安全最佳实践 |
+| 82 | 安全加固 | [security-hardening-production](./domain-7-security/82-security-hardening-production.md) | 生产加固清单 |
+| 83 | PSS标准 | [pod-security-standards](./domain-7-security/83-pod-security-standards.md) | Pod安全标准 |
+| 84 | RBAC | [rbac-matrix-configuration](./domain-7-security/84-rbac-matrix-configuration.md) | 权限矩阵配置 |
+| 85 | 证书管理 | [certificate-management](./domain-7-security/85-certificate-management.md) | PKI、cert-manager |
+| 86 | 镜像扫描 | [image-security-scanning](./domain-7-security/86-image-security-scanning.md) | 漏洞扫描 |
+| 87 | OPA/Kyverno | [policy-engines-opa-kyverno](./domain-7-security/87-policy-engines-opa-kyverno.md) | 策略引擎对比 |
+| 88 | 合规认证 | [compliance-certification](./domain-7-security/88-compliance-certification.md) | SOC2/ISO/PCI |
+| 89 | 审计实践 | [compliance-audit-practices](./domain-7-security/89-compliance-audit-practices.md) | 审计日志配置 |
+| 90 | 密钥管理 | [secret-management-tools](./domain-7-security/90-secret-management-tools.md) | Vault/ESO集成 |
+| 91 | 安全扫描 | [security-scanning-tools](./domain-7-security/91-security-scanning-tools.md) | Trivy/Falco |
+| 92 | 策略验证 | [policy-validation-tools](./domain-7-security/92-policy-validation-tools.md) | 策略校验工具 |
 
 ---
 
 ### 域H: 可观测性 (Observability)
 
-> 15 篇 | 监控、日志、链路追踪、性能分析、健康检查、混沌工程
+> 12 篇 | 监控、日志、链路追踪、性能分析、健康检查、混沌工程
 
 #### H1: 监控与指标
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 93 | Prometheus | [monitoring-metrics-prometheus](./tables/93-monitoring-metrics-prometheus.md) | Prometheus监控体系 |
-| 94 | 自定义指标 | [custom-metrics-adapter](./tables/94-custom-metrics-adapter.md) | Metrics API扩展 |
-| 97 | 可观测工具 | [observability-tools](./tables/97-observability-tools.md) | 可观测性工具栈 |
+| 93 | Prometheus | [monitoring-metrics-prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md) | Prometheus监控体系 |
+| 94 | 自定义指标 | [custom-metrics-adapter](./domain-8-observability/94-custom-metrics-adapter.md) | Metrics API扩展 |
+| 97 | 可观测工具 | [observability-tools](./domain-8-observability/97-observability-tools.md) | 可观测性工具栈 |
 
 #### H2: 日志与审计
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 95 | 日志审计 | [logging-auditing](./tables/95-logging-auditing.md) | 日志收集架构 |
-| 96 | 事件审计 | [events-audit-logs](./tables/96-events-audit-logs.md) | K8s事件与审计 |
-| 98 | 日志聚合 | [log-aggregation-tools](./tables/98-log-aggregation-tools.md) | EFK/Loki方案 |
+| 95 | 日志审计 | [logging-auditing](./domain-8-observability/95-logging-auditing.md) | 日志收集架构 |
+| 96 | 事件审计 | [events-audit-logs](./domain-8-observability/96-events-audit-logs.md) | K8s事件与审计 |
+| 98 | 日志聚合 | [log-aggregation-tools](./domain-8-observability/98-log-aggregation-tools.md) | EFK/Loki方案 |
 
 #### H3: 诊断与分析
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 99 | 排障概览 | [troubleshooting-overview](./tables/99-troubleshooting-overview.md) | 生产级故障排查全攻略、版本特定问题、SOP流程 |
-| 100 | 排障工具 | [troubleshooting-tools](./tables/100-troubleshooting-tools.md) | kubectl debug/netshoot |
-| 101 | 性能分析 | [performance-profiling-tools](./tables/101-performance-profiling-tools.md) | pprof/perf |
-| 105 | 健康检查 | [cluster-health-check](./tables/105-cluster-health-check.md) | 集群健康检查 |
+| 99 | 排障概览 | [troubleshooting-overview](./domain-8-observability/99-troubleshooting-overview.md) | 生产级故障排查全攻略、版本特定问题、SOP流程 |
+| 100 | 排障工具 | [troubleshooting-tools](./domain-8-observability/100-troubleshooting-tools.md) | kubectl debug/netshoot |
+| 101 | 性能分析 | [performance-profiling-tools](./domain-8-observability/101-performance-profiling-tools.md) | pprof/perf |
+| 105 | 健康检查 | [cluster-health-check](./domain-8-observability/105-cluster-health-check.md) | 集群健康检查 |
 
 #### H4: 质量保障
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 106 | 混沌工程 | [chaos-engineering](./tables/106-chaos-engineering.md) | Chaos Mesh/Litmus |
-| 107 | 扩展性能 | [scaling-performance](./tables/107-scaling-performance.md) | 扩展性测试 |
+| 106 | 混沌工程 | [chaos-engineering](./domain-8-observability/106-chaos-engineering.md) | Chaos Mesh/Litmus |
+| 107 | 扩展性能 | [scaling-performance](./domain-8-observability/107-scaling-performance.md) | 扩展性测试 |
 
 ---
 
 ### 域I: 平台运维 (Platform Operations)
 
-> 16 篇 | 准入控制、CRD/Operator、备份恢复、多集群、容灾
+> 13 篇 | 准入控制、CRD/Operator、备份恢复、多集群、容灾
 
 #### I1: 控制平面扩展
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 111 | 准入控制 | [admission-controllers](./tables/111-admission-controllers.md) | Webhook配置 |
-| 112 | CRD/Operator | [crd-operator-development](./tables/112-crd-operator-development.md) | Operator开发 |
-| 113 | API聚合 | [api-aggregation](./tables/113-api-aggregation.md) | API聚合层 |
-| 114 | Lease选举 | [lease-leader-election](./tables/114-lease-leader-election.md) | Leader选举机制 |
-| 115 | 客户端库 | [client-libraries](./tables/115-client-libraries.md) | client-go/SDK |
-| 116 | CLI工具 | [cli-enhancement-tools](./tables/116-cli-enhancement-tools.md) | k9s/kubectx |
-| 117 | 插件扩展 | [addons-extensions](./tables/117-addons-extensions.md) | 常用插件 |
+| 111 | 准入控制 | [admission-controllers](./domain-9-platform-ops/111-admission-controllers.md) | Webhook配置 |
+| 112 | CRD/Operator | [crd-operator-development](./domain-9-platform-ops/112-crd-operator-development.md) | Operator开发 |
+| 113 | API聚合 | [api-aggregation](./domain-9-platform-ops/113-api-aggregation.md) | API聚合层 |
+| 114 | Lease选举 | [lease-leader-election](./domain-9-platform-ops/114-lease-leader-election.md) | Leader选举机制 |
+| 115 | 客户端库 | [client-libraries](./domain-9-platform-ops/115-client-libraries.md) | client-go/SDK |
+| 116 | CLI工具 | [cli-enhancement-tools](./domain-9-platform-ops/116-cli-enhancement-tools.md) | k9s/kubectx |
+| 117 | 插件扩展 | [addons-extensions](./domain-9-platform-ops/117-addons-extensions.md) | 常用插件 |
 
 #### I2: 备份与容灾
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 118 | 备份概览 | [backup-recovery-overview](./tables/118-backup-recovery-overview.md) | 备份策略规划 |
-| 119 | Velero | [backup-restore-velero](./tables/119-backup-restore-velero.md) | Velero完整配置 |
-| 120 | 容灾策略 | [disaster-recovery-strategy](./tables/120-disaster-recovery-strategy.md) | DR架构设计 |
+| 118 | 备份概览 | [backup-recovery-overview](./domain-9-platform-ops/118-backup-recovery-overview.md) | 备份策略规划 |
+| 119 | Velero | [backup-restore-velero](./domain-9-platform-ops/119-backup-restore-velero.md) | Velero完整配置 |
+| 120 | 容灾策略 | [disaster-recovery-strategy](./domain-9-platform-ops/120-disaster-recovery-strategy.md) | DR架构设计 |
 
 #### I3: 多集群管理
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 121 | 多集群 | [multi-cluster-management](./tables/121-multi-cluster-management.md) | 多集群架构 |
-| 122 | 联邦集群 | [federated-cluster](./tables/122-federated-cluster.md) | KubeFed |
-| 123 | 虚拟集群 | [virtual-clusters](./tables/123-virtual-clusters.md) | vCluster |
+| 121 | 多集群 | [multi-cluster-management](./domain-9-platform-ops/121-multi-cluster-management.md) | 多集群架构 |
+| 122 | 联邦集群 | [federated-cluster](./domain-9-platform-ops/122-federated-cluster.md) | KubeFed |
+| 123 | 虚拟集群 | [virtual-clusters](./domain-9-platform-ops/123-virtual-clusters.md) | vCluster |
 
 ---
 
@@ -378,99 +397,99 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 124 | CI/CD流水线 | [cicd-pipelines](./tables/124-cicd-pipelines.md) | Jenkins/Tekton |
-| 125 | ArgoCD | [gitops-workflow-argocd](./tables/125-gitops-workflow-argocd.md) | GitOps工作流 |
+| 124 | CI/CD流水线 | [cicd-pipelines](./domain-10-extensions/124-cicd-pipelines.md) | Jenkins/Tekton |
+| 125 | ArgoCD | [gitops-workflow-argocd](./domain-10-extensions/125-gitops-workflow-argocd.md) | GitOps工作流 |
 
 #### J2: 包管理与构建
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 126 | Helm管理 | [helm-charts-management](./tables/126-helm-charts-management.md) | Chart开发 |
-| 127 | 包管理 | [package-management-tools](./tables/127-package-management-tools.md) | Helm/Kustomize/Carvel |
-| 128 | 镜像构建 | [image-build-tools](./tables/128-image-build-tools.md) | Buildah/Kaniko |
+| 126 | Helm管理 | [helm-charts-management](./domain-10-extensions/126-helm-charts-management.md) | Chart开发 |
+| 127 | 包管理 | [package-management-tools](./domain-10-extensions/127-package-management-tools.md) | Helm/Kustomize/Carvel |
+| 128 | 镜像构建 | [image-build-tools](./domain-10-extensions/128-image-build-tools.md) | Buildah/Kaniko |
 
 #### J3: 服务网格
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 129 | 服务网格 | [service-mesh-overview](./tables/129-service-mesh-overview.md) | Istio/Linkerd概览 |
-| 130 | 网格进阶 | [service-mesh-advanced](./tables/130-service-mesh-advanced.md) | 流量管理、可观测 |
+| 129 | 服务网格 | [service-mesh-overview](./domain-10-extensions/129-service-mesh-overview.md) | Istio/Linkerd概览 |
+| 130 | 网格进阶 | [service-mesh-advanced](./domain-10-extensions/130-service-mesh-advanced.md) | 流量管理、可观测 |
 
 ---
 
 ### 域K: AI基础设施 (AI Infrastructure)
 
-> 35 篇 | GPU调度、分布式训练、LLM服务、模型管理、成本优化、云集成、专有云专题
+> 26 篇 | GPU调度、分布式训练、LLM服务、模型管理、成本优化、云集成、专有云专题
 
 #### K1: AI平台基础
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 131 | AI Infra概览 | [ai-infrastructure-overview](./tables/131-ai-infrastructure-overview.md) | AI平台架构 |
-| 132 | ML工作负载 | [ai-ml-workloads](./tables/132-ai-ml-workloads.md) | 训练/推理工作负载 |
-| 133 | GPU调度 | [gpu-scheduling-management](./tables/133-gpu-scheduling-management.md) | GPU资源管理 |
-| 134 | GPU监控 | [gpu-monitoring-dcgm](./tables/134-gpu-monitoring-dcgm.md) | DCGM/nvidia-smi |
-| 155 | 绿色计算 | [green-computing-sustainability](./tables/155-green-computing-sustainability.md) | 碳排放、能效 |
-| 156 | 阿里云集成 | [alibaba-cloud-integration](./tables/156-alibaba-cloud-integration.md) | ACK AI能力 |
+| 131 | AI Infra概览 | [ai-infrastructure-overview](./domain-11-ai-infra/131-ai-infrastructure-overview.md) | AI平台架构 |
+| 132 | ML工作负载 | [ai-ml-workloads](./domain-11-ai-infra/132-ai-ml-workloads.md) | 训练/推理工作负载 |
+| 133 | GPU调度 | [gpu-scheduling-management](./domain-11-ai-infra/133-gpu-scheduling-management.md) | GPU资源管理 |
+| 134 | GPU监控 | [gpu-monitoring-dcgm](./domain-11-ai-infra/134-gpu-monitoring-dcgm.md) | DCGM/nvidia-smi |
+| 155 | 绿色计算 | [green-computing-sustainability](./domain-11-ai-infra/155-green-computing-sustainability.md) | 碳排放、能效 |
+| 156 | 阿里云集成 | [alibaba-cloud-integration](./domain-11-ai-infra/156-alibaba-cloud-integration.md) | ACK AI能力 |
 
 #### K2: 模型训练
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 135 | 分布式训练 | [distributed-training-frameworks](./tables/135-distributed-training-frameworks.md) | PyTorch DDP/FSDP |
-| 136 | AI数据管道 | [ai-data-pipeline](./tables/136-ai-data-pipeline.md) | 数据预处理 |
-| 137 | 实验管理 | [ai-experiment-management](./tables/137-ai-experiment-management.md) | MLflow/W&B |
-| 138 | AutoML | [automl-hyperparameter-tuning](./tables/138-automl-hyperparameter-tuning.md) | Katib超参调优 |
-| 139 | 模型仓库 | [model-registry](./tables/139-model-registry.md) | 模型版本管理 |
-| 140 | AI安全 | [ai-security-model-protection](./tables/140-ai-security-model-protection.md) | 模型安全防护 |
-| 141 | AI成本 | [ai-cost-analysis-finops](./tables/141-ai-cost-analysis-finops.md) | GPU成本分析 |
+| 135 | 分布式训练 | [distributed-training-frameworks](./domain-11-ai-infra/135-distributed-training-frameworks.md) | PyTorch DDP/FSDP |
+| 136 | AI数据管道 | [ai-data-pipeline](./domain-11-ai-infra/136-ai-data-pipeline.md) | 数据预处理 |
+| 137 | 实验管理 | [ai-experiment-management](./domain-11-ai-infra/137-ai-experiment-management.md) | MLflow/W&B |
+| 138 | AutoML | [automl-hyperparameter-tuning](./domain-11-ai-infra/138-automl-hyperparameter-tuning.md) | Katib超参调优 |
+| 139 | 模型仓库 | [model-registry](./domain-11-ai-infra/139-model-registry.md) | 模型版本管理 |
+| 140 | AI安全 | [ai-security-model-protection](./domain-11-ai-infra/140-ai-security-model-protection.md) | 模型安全防护 |
+| 141 | AI成本 | [ai-cost-analysis-finops](./domain-11-ai-infra/141-ai-cost-analysis-finops.md) | GPU成本分析 |
 
 #### K3: LLM专题
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 142 | LLM数据管道 | [llm-data-pipeline](./tables/142-llm-data-pipeline.md) | 数据处理、Tokenizer |
-| 143 | LLM微调 | [llm-finetuning](./tables/143-llm-finetuning.md) | LoRA/QLoRA |
-| 144 | LLM推理 | [llm-inference-serving](./tables/144-llm-inference-serving.md) | vLLM/TGI部署 |
-| 145 | LLM架构 | [llm-serving-architecture](./tables/145-llm-serving-architecture.md) | 推理服务架构 |
-| 146 | LLM量化 | [llm-quantization](./tables/146-llm-quantization.md) | GPTQ/AWQ/GGUF |
-| 147 | 向量库/RAG | [vector-database-rag](./tables/147-vector-database-rag.md) | Milvus/Qdrant |
-| 148 | 多模态 | [multimodal-models](./tables/148-multimodal-models.md) | 多模态模型服务 |
+| 142 | LLM数据管道 | [llm-data-pipeline](./domain-11-ai-infra/142-llm-data-pipeline.md) | 数据处理、Tokenizer |
+| 143 | LLM微调 | [llm-finetuning](./domain-11-ai-infra/143-llm-finetuning.md) | LoRA/QLoRA |
+| 144 | LLM推理 | [llm-inference-serving](./domain-11-ai-infra/144-llm-inference-serving.md) | vLLM/TGI部署 |
+| 145 | LLM架构 | [llm-serving-architecture](./domain-11-ai-infra/145-llm-serving-architecture.md) | 推理服务架构 |
+| 146 | LLM量化 | [llm-quantization](./domain-11-ai-infra/146-llm-quantization.md) | GPTQ/AWQ/GGUF |
+| 147 | 向量库/RAG | [vector-database-rag](./domain-11-ai-infra/147-vector-database-rag.md) | Milvus/Qdrant |
+| 148 | 多模态 | [multimodal-models](./domain-11-ai-infra/148-multimodal-models.md) | 多模态模型服务 |
 
 #### K4: LLM运维
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 149 | LLM安全 | [llm-privacy-security](./tables/149-llm-privacy-security.md) | OWASP LLM Top 10 |
-| 150 | LLM成本 | [llm-cost-monitoring](./tables/150-llm-cost-monitoring.md) | Token成本分析 |
-| 151 | 模型版本 | [llm-model-versioning](./tables/151-llm-model-versioning.md) | 模型版本管理 |
-| 152 | LLM可观测 | [llm-observability](./tables/152-llm-observability.md) | 推理监控 |
+| 149 | LLM安全 | [llm-privacy-security](./domain-11-ai-infra/149-llm-privacy-security.md) | OWASP LLM Top 10 |
+| 150 | LLM成本 | [llm-cost-monitoring](./domain-11-ai-infra/150-llm-cost-monitoring.md) | Token成本分析 |
+| 151 | 模型版本 | [llm-model-versioning](./domain-11-ai-infra/151-llm-model-versioning.md) | 模型版本管理 |
+| 152 | LLM可观测 | [llm-observability](./domain-11-ai-infra/152-llm-observability.md) | 推理监控 |
 
 #### K5: 成本优化
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 153 | 成本优化 | [cost-optimization-overview](./tables/153-cost-optimization-overview.md) | 成本优化策略 |
-| 154 | Kubecost | [cost-management-kubecost](./tables/154-cost-management-kubecost.md) | FinOps实践 |
+| 153 | 成本优化 | [cost-optimization-overview](./domain-11-ai-infra/153-cost-optimization-overview.md) | 成本优化策略 |
+| 154 | Kubecost | [cost-management-kubecost](./domain-11-ai-infra/154-cost-management-kubecost.md) | FinOps实践 |
 
 #### K6: ACK 关联云服务
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 240 | ECS计算 | [ack-ecs-compute](./tables/240-ack-ecs-compute.md) | 实例规格、节点池、Spot策略 |
-| 241 | 负载均衡 | [ack-slb-nlb-alb](./tables/241-ack-slb-nlb-alb.md) | CLB/NLB/ALB完整配置 |
-| 242 | VPC网络 | [ack-vpc-network](./tables/242-ack-vpc-network.md) | 网络规划、NAT、专线 |
-| 243 | RAM权限 | [ack-ram-authorization](./tables/243-ack-ram-authorization.md) | RRSA、权限矩阵、跨账号 |
-| 244 | ROS编排 | [ack-ros-iac](./tables/244-ack-ros-iac.md) | 资源模板、与Terraform对比 |
-| 245 | EBS存储 | [ack-ebs-storage](./tables/245-ack-ebs-storage.md) | ESSD性能、快照、加密 |
+| 240 | ECS计算 | [ack-ecs-compute](./domain-17-cloud-provider/240-ack-ecs-compute.md) | 实例规格、节点池、Spot策略 |
+| 241 | 负载均衡 | [ack-slb-nlb-alb](./domain-17-cloud-provider/241-ack-slb-nlb-alb.md) | CLB/NLB/ALB完整配置 |
+| 242 | VPC网络 | [ack-vpc-network](./domain-17-cloud-provider/242-ack-vpc-network.md) | 网络规划、NAT、专线 |
+| 243 | RAM权限 | [ack-ram-authorization](./domain-17-cloud-provider/243-ack-ram-authorization.md) | RRSA、权限矩阵、跨账号 |
+| 244 | ROS编排 | [ack-ros-iac](./domain-17-cloud-provider/244-ack-ros-iac.md) | 资源模板、与Terraform对比 |
+| 245 | EBS存储 | [ack-ebs-storage](./domain-17-cloud-provider/245-ack-ebs-storage.md) | ESSD性能、快照、加密 |
 
 #### K7: 专有云专题 (Apsara Stack)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 250 | 专有云ESS | [apsara-stack-ess-scaling](./tables/250-apsara-stack-ess-scaling.md) | 弹性架构、伸缩策略、ACK集成 |
-| 251 | 专有云SLS | [apsara-stack-sls-logging](./tables/251-apsara-stack-sls-logging.md) | 日志架构、审计集成、性能调优 |
-| 252 | 专有云POP | [apsara-stack-pop-operations](./tables/252-apsara-stack-pop-operations.md) | 平台运维、API接入、资源管理 |
+| 250 | 专有云ESS | [apsara-stack-ess-scaling](./domain-17-cloud-provider/250-apsara-stack-ess-scaling.md) | 弹性架构、伸缩策略、ACK集成 |
+| 251 | 专有云SLS | [apsara-stack-sls-logging](./domain-17-cloud-provider/251-apsara-stack-sls-logging.md) | 日志架构、审计集成、性能调优 |
+| 252 | 专有云POP | [apsara-stack-pop-operations](./domain-17-cloud-provider/252-apsara-stack-pop-operations.md) | 平台运维、API接入、资源管理 |
 
 ---
 
@@ -482,21 +501,21 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 102 | Pod Pending | [pod-pending-diagnosis](./tables/102-pod-pending-diagnosis.md) | Pod调度失败诊断 |
-| 103 | Node NotReady | [node-notready-diagnosis](./tables/103-node-notready-diagnosis.md) | 节点异常诊断 |
-| 104 | OOM诊断 | [oom-memory-diagnosis](./tables/104-oom-memory-diagnosis.md) | 内存问题排查 |
+| 102 | Pod Pending | [pod-pending-diagnosis](./domain-12-troubleshooting/102-pod-pending-diagnosis.md) | Pod调度失败诊断 |
+| 103 | Node NotReady | [node-notready-diagnosis](./domain-12-troubleshooting/103-node-notready-diagnosis.md) | 节点异常诊断 |
+| 104 | OOM诊断 | [oom-memory-diagnosis](./domain-12-troubleshooting/104-oom-memory-diagnosis.md) | 内存问题排查 |
 
 #### L2: 综合故障排查
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 157 | Pod排障 | [pod-comprehensive-troubleshooting](./tables/157-pod-comprehensive-troubleshooting.md) | Pod全面排障 |
-| 158 | Node排障 | [node-comprehensive-troubleshooting](./tables/158-node-comprehensive-troubleshooting.md) | Node全面排障 |
-| 159 | Service排障 | [service-comprehensive-troubleshooting](./tables/159-service-comprehensive-troubleshooting.md) | Service故障排查 |
-| 160 | Deployment排障 | [deployment-comprehensive-troubleshooting](./tables/160-deployment-comprehensive-troubleshooting.md) | Deployment排障 |
-| 161 | RBAC/Quota排障 | [rbac-quota-troubleshooting](./tables/161-rbac-quota-troubleshooting.md) | 权限配额问题 |
-| 162 | 证书排障 | [certificate-troubleshooting](./tables/162-certificate-troubleshooting.md) | 证书问题诊断 |
-| 163 | PVC排障 | [pvc-storage-troubleshooting](./tables/163-pvc-storage-troubleshooting.md) | 存储问题排查 |
+| 157 | Pod排障 | [pod-comprehensive-troubleshooting](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md) | Pod全面排障 |
+| 158 | Node排障 | [node-comprehensive-troubleshooting](./domain-12-troubleshooting/158-node-comprehensive-troubleshooting.md) | Node全面排障 |
+| 159 | Service排障 | [service-comprehensive-troubleshooting](./domain-12-troubleshooting/159-service-comprehensive-troubleshooting.md) | Service故障排查 |
+| 160 | Deployment排障 | [deployment-comprehensive-troubleshooting](./domain-12-troubleshooting/160-deployment-comprehensive-troubleshooting.md) | Deployment排障 |
+| 161 | RBAC/Quota排障 | [rbac-quota-troubleshooting](./domain-12-troubleshooting/161-rbac-quota-troubleshooting.md) | 权限配额问题 |
+| 162 | 证书排障 | [certificate-troubleshooting](./domain-12-troubleshooting/162-certificate-troubleshooting.md) | 证书问题诊断 |
+| 163 | PVC排障 | [pvc-storage-troubleshooting](./domain-12-troubleshooting/163-pvc-storage-troubleshooting.md) | 存储问题排查 |
 
 ---
 
@@ -506,31 +525,31 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 200 | Docker架构 | [docker-architecture-overview](./tables/200-docker-architecture-overview.md) | Docker Engine、containerd、OCI标准 |
-| 201 | 镜像管理 | [docker-images-management](./tables/201-docker-images-management.md) | 镜像层、Dockerfile、多阶段构建、安全扫描 |
-| 202 | 容器生命周期 | [docker-container-lifecycle](./tables/202-docker-container-lifecycle.md) | 容器状态、资源限制、健康检查、日志 |
-| 203 | Docker网络 | [docker-networking-deep-dive](./tables/203-docker-networking-deep-dive.md) | 网络驱动、DNS、端口映射、网络排障 |
-| 204 | Docker存储 | [docker-storage-volumes](./tables/204-docker-storage-volumes.md) | 存储驱动、Volume、Bind Mount、备份 |
-| 205 | Compose | [docker-compose-orchestration](./tables/205-docker-compose-orchestration.md) | Compose配置、多环境、生产配置 |
-| 206 | Docker安全 | [docker-security-best-practices](./tables/206-docker-security-best-practices.md) | 镜像安全、运行时安全、Seccomp、能力 |
-| 207 | Docker排障 | [docker-troubleshooting-guide](./tables/207-docker-troubleshooting-guide.md) | 常见问题诊断、网络/存储排障 |
+| 200 | Docker架构 | [docker-architecture-overview](./domain-13-docker/200-docker-architecture-overview.md) | Docker Engine、containerd、OCI标准 |
+| 201 | 镜像管理 | [docker-images-management](./domain-13-docker/201-docker-images-management.md) | 镜像层、Dockerfile、多阶段构建、安全扫描 |
+| 202 | 容器生命周期 | [docker-container-lifecycle](./domain-13-docker/202-docker-container-lifecycle.md) | 容器状态、资源限制、健康检查、日志 |
+| 203 | Docker网络 | [docker-networking-deep-dive](./domain-13-docker/203-docker-networking-deep-dive.md) | 网络驱动、DNS、端口映射、网络排障 |
+| 204 | Docker存储 | [docker-storage-volumes](./domain-13-docker/204-docker-storage-volumes.md) | 存储驱动、Volume、Bind Mount、备份 |
+| 205 | Compose | [docker-compose-orchestration](./domain-13-docker/205-docker-compose-orchestration.md) | Compose配置、多环境、生产配置 |
+| 206 | Docker安全 | [docker-security-best-practices](./domain-13-docker/206-docker-security-best-practices.md) | 镜像安全、运行时安全、Seccomp、能力 |
+| 207 | Docker排障 | [docker-troubleshooting-guide](./domain-13-docker/207-docker-troubleshooting-guide.md) | 常见问题诊断、网络/存储排障 |
 
 ---
 
 ### 域N: Linux基础 (Linux Fundamentals)
 
-> 8 篇 | 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术
+> 9 篇 | 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 210 | Linux架构 | [linux-system-architecture](./tables/210-linux-system-architecture.md) | 内核架构、启动过程、systemd、内核调优 |
-| 211 | 进程管理 | [linux-process-management](./tables/211-linux-process-management.md) | 进程状态、信号、优先级、监控分析 |
-| 212 | 文件系统 | [linux-filesystem-deep-dive](./tables/212-linux-filesystem-deep-dive.md) | VFS、文件系统类型、权限、inode |
-| 213 | 网络配置 | [linux-networking-configuration](./tables/213-linux-networking-configuration.md) | ip/ss命令、路由、iptables、网络调优 |
-| 214 | 存储管理 | [linux-storage-management](./tables/214-linux-storage-management.md) | LVM、软件RAID、I/O调度、配额 |
-| 215 | 性能调优 | [linux-performance-tuning](./tables/215-linux-performance-tuning.md) | CPU/内存/I/O/网络分析、内核参数 |
-| 216 | 安全加固 | [linux-security-hardening](./tables/216-linux-security-hardening.md) | 用户管理、SSH、PAM、SELinux、审计 |
-| 217 | 容器技术 | [linux-container-fundamentals](./tables/217-linux-container-fundamentals.md) | Namespaces、Cgroups、OverlayFS、安全 |
+| 210 | Linux架构 | [linux-system-architecture](./domain-14-linux/210-linux-system-architecture.md) | 内核架构、启动过程、systemd、内核调优 |
+| 211 | 进程管理 | [linux-process-management](./domain-14-linux/211-linux-process-management.md) | 进程状态、信号、优先级、监控分析 |
+| 212 | 文件系统 | [linux-filesystem-deep-dive](./domain-14-linux/212-linux-filesystem-deep-dive.md) | VFS、文件系统类型、权限、inode |
+| 213 | 网络配置 | [linux-networking-configuration](./domain-14-linux/213-linux-networking-configuration.md) | ip/ss命令、路由、iptables、网络调优 |
+| 214 | 存储管理 | [linux-storage-management](./domain-14-linux/214-linux-storage-management.md) | LVM、软件RAID、I/O调度、配额 |
+| 215 | 性能调优 | [linux-performance-tuning](./domain-14-linux/215-linux-performance-tuning.md) | CPU/内存/I/O/网络分析、内核参数 |
+| 216 | 安全加固 | [linux-security-hardening](./domain-14-linux/216-linux-security-hardening.md) | 用户管理、SSH、PAM、SELinux、审计 |
+| 217 | 容器技术 | [linux-container-fundamentals](./domain-14-linux/217-linux-container-fundamentals.md) | Namespaces、Cgroups、OverlayFS、安全 |
 
 ---
 
@@ -540,12 +559,12 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 220 | 协议栈 | [network-protocols-stack](./tables/220-network-protocols-stack.md) | OSI/TCP-IP模型、数据封装、协议概览 |
-| 221 | TCP/UDP | [tcp-udp-deep-dive](./tables/221-tcp-udp-deep-dive.md) | 连接管理、流量控制、拥塞控制、对比 |
-| 222 | DNS | [dns-principles-configuration](./tables/222-dns-principles-configuration.md) | DNS解析、记录类型、配置、排障 |
-| 223 | 负载均衡 | [load-balancing-technologies](./tables/223-load-balancing-technologies.md) | 算法、L4/L7负载均衡、健康检查 |
-| 224 | 网络安全 | [network-security-fundamentals](./tables/224-network-security-fundamentals.md) | 攻击类型、防火墙、TLS、VPN |
-| 225 | SDN | [sdn-network-virtualization](./tables/225-sdn-network-virtualization.md) | SDN架构、Overlay、容器网络、服务网格 |
+| 220 | 协议栈 | [network-protocols-stack](./domain-15-network-fundamentals/220-network-protocols-stack.md) | OSI/TCP-IP模型、数据封装、协议概览 |
+| 221 | TCP/UDP | [tcp-udp-deep-dive](./domain-15-network-fundamentals/221-tcp-udp-deep-dive.md) | 连接管理、流量控制、拥塞控制、对比 |
+| 222 | DNS | [dns-principles-configuration](./domain-15-network-fundamentals/222-dns-principles-configuration.md) | DNS解析、记录类型、配置、排障 |
+| 223 | 负载均衡 | [load-balancing-technologies](./domain-15-network-fundamentals/223-load-balancing-technologies.md) | 算法、L4/L7负载均衡、健康检查 |
+| 224 | 网络安全 | [network-security-fundamentals](./domain-15-network-fundamentals/224-network-security-fundamentals.md) | 攻击类型、防火墙、TLS、VPN |
+| 225 | SDN | [sdn-network-virtualization](./domain-15-network-fundamentals/225-sdn-network-virtualization.md) | SDN架构、Overlay、容器网络、服务网格 |
 
 ---
 
@@ -571,11 +590,11 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 230 | 存储概述 | [storage-technologies-overview](./tables/230-storage-technologies-overview.md) | 存储类型、架构、协议、云存储 |
-| 231 | 存储类型 | [block-file-object-storage](./tables/231-block-file-object-storage.md) | 块存储、文件存储、对象存储对比 |
-| 232 | RAID | [raid-storage-redundancy](./tables/232-raid-storage-redundancy.md) | RAID级别、配置、监控、硬件/软件对比 |
-| 233 | 分布式存储 | [distributed-storage-systems](./tables/233-distributed-storage-systems.md) | Ceph、MinIO、GlusterFS |
-| 234 | 存储性能 | [storage-performance-iops](./tables/234-storage-performance-iops.md) | IOPS、吞吐量、延迟、测试优化 |
+| 230 | 存储概述 | [storage-technologies-overview](./domain-16-storage-fundamentals/230-storage-technologies-overview.md) | 存储类型、架构、协议、云存储 |
+| 231 | 存储类型 | [block-file-object-storage](./domain-16-storage-fundamentals/231-block-file-object-storage.md) | 块存储、文件存储、对象存储对比 |
+| 232 | RAID | [raid-storage-redundancy](./domain-16-storage-fundamentals/232-raid-storage-redundancy.md) | RAID级别、配置、监控、硬件/软件对比 |
+| 233 | 分布式存储 | [distributed-storage-systems](./domain-16-storage-fundamentals/233-distributed-storage-systems.md) | Ceph、MinIO、GlusterFS |
+| 234 | 存储性能 | [storage-performance-iops](./domain-16-storage-fundamentals/234-storage-performance-iops.md) | IOPS、吞吐量、延迟、测试优化 |
 
 ---
 
@@ -587,14 +606,14 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
-| **快速上手** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [21-工作负载](./tables/21-workload-controllers-overview.md) | P0 |
-| **部署应用** | [21-工作负载](./tables/21-workload-controllers-overview.md), [22-Pod生命周期](./tables/22-pod-lifecycle-events.md), [126-Helm](./tables/126-helm-charts-management.md) | P0 |
-| **服务暴露** | [47-Service](./tables/47-service-concepts-types.md), [63-Ingress](./tables/63-ingress-fundamentals.md), [71-Gateway API](./tables/71-gateway-api-overview.md) | P0 |
-| **配置管理** | [90-Secret管理](./tables/90-secret-management-tools.md), [84-RBAC](./tables/84-rbac-matrix-configuration.md) | P1 |
-| **日志调试** | [95-日志](./tables/95-logging-auditing.md), [100-排障工具](./tables/100-troubleshooting-tools.md), [157-Pod排障](./tables/157-pod-comprehensive-troubleshooting.md) | P1 |
-| **CI/CD集成** | [124-CI/CD](./tables/124-cicd-pipelines.md), [125-ArgoCD](./tables/125-gitops-workflow-argocd.md), [128-镜像构建](./tables/128-image-build-tools.md) | P1 |
-| **Operator开发** | [112-CRD/Operator](./tables/112-crd-operator-development.md), [115-client-go](./tables/115-client-libraries.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md) | P2 |
-| **性能优化** | [32-HPA/VPA](./tables/32-hpa-vpa-autoscaling.md), [34-资源管理](./tables/34-resource-management.md) | P2 |
+| **快速上手** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [21-工作负载](./domain-4-workloads/21-workload-controllers-overview.md) | P0 |
+| **部署应用** | [21-工作负载](./domain-4-workloads/21-workload-controllers-overview.md), [22-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [126-Helm](./domain-10-extensions/126-helm-charts-management.md) | P0 |
+| **服务暴露** | [47-Service](./domain-5-networking/47-service-concepts-types.md), [63-Ingress](./domain-5-networking/63-ingress-fundamentals.md), [71-Gateway API](./domain-5-networking/71-gateway-api-overview.md) | P0 |
+| **配置管理** | [90-Secret管理](./domain-7-security/90-secret-management-tools.md), [84-RBAC](./domain-7-security/84-rbac-matrix-configuration.md) | P1 |
+| **日志调试** | [95-日志](./domain-8-observability/95-logging-auditing.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [157-Pod排障](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md) | P1 |
+| **CI/CD集成** | [124-CI/CD](./domain-10-extensions/124-cicd-pipelines.md), [125-ArgoCD](./domain-10-extensions/125-gitops-workflow-argocd.md), [128-镜像构建](./domain-10-extensions/128-image-build-tools.md) | P1 |
+| **Operator开发** | [112-CRD/Operator](./domain-9-platform-ops/112-crd-operator-development.md), [115-client-go](./domain-9-platform-ops/115-client-libraries.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md) | P2 |
+| **性能优化** | [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md), [34-资源管理](./domain-4-workloads/34-resource-management.md) | P2 |
 
 ---
 
@@ -604,15 +623,15 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
-| **集群部署** | [06-集群配置](./tables/06-cluster-configuration-parameters.md), [31-Kubelet](./tables/31-kubelet-configuration.md), [35-etcd](./tables/35-etcd-deep-dive.md) | P0 |
-| **日常运维** | [29-节点管理](./tables/29-node-management-operations.md), [07-升级策略](./tables/07-upgrade-paths-strategy.md), [110-etcd运维](./tables/110-etcd-operations.md) | P0 |
-| **监控告警** | [93-Prometheus](./tables/93-monitoring-metrics-prometheus.md), [97-可观测工具](./tables/97-observability-tools.md), [105-健康检查](./tables/105-cluster-health-check.md) | P0 |
-| **故障排查** | [99-排障概览](./tables/99-troubleshooting-overview.md), [100-排障工具](./tables/100-troubleshooting-tools.md), [102-Pod Pending](./tables/102-pod-pending-diagnosis.md), [103-Node NotReady](./tables/103-node-notready-diagnosis.md) | P0 |
-| **网络运维** | [46-CNI排障](./tables/46-cni-troubleshooting-optimization.md), [56-DNS排障](./tables/56-coredns-troubleshooting-optimization.md), [61-网络排障](./tables/61-network-troubleshooting.md) | P1 |
-| **存储运维** | [79-存储排障](./tables/79-pv-pvc-troubleshooting.md), [163-PVC排障](./tables/163-pvc-storage-troubleshooting.md), [80-存储备份](./tables/80-storage-backup-disaster-recovery.md) | P1 |
-| **备份恢复** | [118-备份概览](./tables/118-backup-recovery-overview.md), [119-Velero](./tables/119-backup-restore-velero.md), [120-容灾策略](./tables/120-disaster-recovery-strategy.md) | P1 |
-| **容量规划** | [33-容量规划](./tables/33-cluster-capacity-planning.md), [107-扩展性能](./tables/107-scaling-performance.md) | P2 |
-| **安全运维** | [82-安全加固](./tables/82-security-hardening-production.md), [85-证书管理](./tables/85-certificate-management.md), [162-证书排障](./tables/162-certificate-troubleshooting.md) | P2 |
+| **集群部署** | [06-集群配置](./tables/06-cluster-configuration-parameters.md), [31-Kubelet](./domain-4-workloads/31-kubelet-configuration.md), [35-etcd](./domain-3-control-plane/35-etcd-deep-dive.md) | P0 |
+| **日常运维** | [29-节点管理](./domain-4-workloads/29-node-management-operations.md), [07-升级策略](./tables/07-upgrade-paths-strategy.md), [110-etcd运维](./tables/110-etcd-operations.md) | P0 |
+| **监控告警** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P0 |
+| **故障排查** | [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [102-Pod Pending](./domain-12-troubleshooting/102-pod-pending-diagnosis.md), [103-Node NotReady](./domain-12-troubleshooting/103-node-notready-diagnosis.md) | P0 |
+| **网络运维** | [46-CNI排障](./domain-5-networking/46-cni-troubleshooting-optimization.md), [56-DNS排障](./domain-5-networking/56-coredns-troubleshooting-optimization.md), [61-网络排障](./domain-5-networking/61-network-troubleshooting.md) | P1 |
+| **存储运维** | [79-存储排障](./domain-6-storage/79-pv-pvc-troubleshooting.md), [163-PVC排障](./domain-12-troubleshooting/163-pvc-storage-troubleshooting.md), [80-存储备份](./domain-6-storage/80-storage-backup-disaster-recovery.md) | P1 |
+| **备份恢复** | [118-备份概览](./domain-9-platform-ops/118-backup-recovery-overview.md), [119-Velero](./domain-9-platform-ops/119-backup-restore-velero.md), [120-容灾策略](./domain-9-platform-ops/120-disaster-recovery-strategy.md) | P1 |
+| **容量规划** | [33-容量规划](./domain-4-workloads/33-cluster-capacity-planning.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md) | P2 |
+| **安全运维** | [82-安全加固](./domain-7-security/82-security-hardening-production.md), [85-证书管理](./domain-7-security/85-certificate-management.md), [162-证书排障](./domain-12-troubleshooting/162-certificate-troubleshooting.md) | P2 |
 
 ---
 
@@ -624,14 +643,14 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 |:---|:---|:---:|
 | **架构设计** | [01-K8s架构](./tables/01-kubernetes-architecture-overview.md), [02-核心组件](./tables/02-core-components-deep-dive.md), [11-设计原则](./tables/11-kubernetes-design-principles.md) | P0 |
 | **设计原理** | [12-声明式API](./tables/12-declarative-api-pattern.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md), [20-CAP定理](./tables/20-cap-theorem-distributed-systems.md) | P0 |
-| **高可用设计** | [18-高可用模式](./tables/18-high-availability-patterns.md), [17-etcd共识](./tables/17-distributed-consensus-etcd.md), [120-容灾策略](./tables/120-disaster-recovery-strategy.md) | P0 |
-| **控制平面** | [35-etcd](./tables/35-etcd-deep-dive.md), [36-API Server](./tables/36-kube-apiserver-deep-dive.md), [37-KCM](./tables/37-kube-controller-manager-deep-dive.md), [164-Scheduler](./tables/164-kube-scheduler-deep-dive.md) | P0 |
-| **多集群架构** | [121-多集群](./tables/121-multi-cluster-management.md), [122-联邦集群](./tables/122-federated-cluster.md), [60-多集群网络](./tables/60-multi-cluster-networking.md) | P1 |
-| **网络架构** | [41-网络架构](./tables/41-network-architecture-overview.md), [43-CNI对比](./tables/43-cni-plugins-comparison.md), [167-CNI详解](./tables/167-cni-container-network-deep-dive.md) | P1 |
-| **存储架构** | [73-存储架构](./tables/73-storage-architecture-overview.md), [166-CSI详解](./tables/166-csi-container-storage-deep-dive.md) | P1 |
-| **运行时选型** | [165-CRI详解](./tables/165-cri-container-runtime-deep-dive.md), [27-RuntimeClass](./tables/27-runtime-class-configuration.md) | P2 |
-| **服务网格** | [129-服务网格](./tables/129-service-mesh-overview.md), [130-网格进阶](./tables/130-service-mesh-advanced.md) | P2 |
-| **AI基础设施** | [131-AI Infra](./tables/131-ai-infrastructure-overview.md), [145-LLM架构](./tables/145-llm-serving-architecture.md) | P2 |
+| **高可用设计** | [18-高可用模式](./tables/18-high-availability-patterns.md), [17-etcd共识](./tables/17-distributed-consensus-etcd.md), [120-容灾策略](./domain-9-platform-ops/120-disaster-recovery-strategy.md) | P0 |
+| **控制平面** | [35-etcd](./domain-3-control-plane/35-etcd-deep-dive.md), [36-API Server](./domain-3-control-plane/36-kube-apiserver-deep-dive.md), [37-KCM](./domain-3-control-plane/37-kube-controller-manager-deep-dive.md), [164-Scheduler](./domain-3-control-plane/164-kube-scheduler-deep-dive.md) | P0 |
+| **多集群架构** | [121-多集群](./domain-9-platform-ops/121-multi-cluster-management.md), [122-联邦集群](./domain-9-platform-ops/122-federated-cluster.md), [60-多集群网络](./domain-5-networking/60-multi-cluster-networking.md) | P1 |
+| **网络架构** | [41-网络架构](./domain-5-networking/41-network-architecture-overview.md), [43-CNI对比](./domain-5-networking/43-cni-plugins-comparison.md), [167-CNI详解](./domain-3-control-plane/167-cni-container-network-deep-dive.md) | P1 |
+| **存储架构** | [73-存储架构](./domain-6-storage/73-storage-architecture-overview.md), [166-CSI详解](./domain-3-control-plane/166-csi-container-storage-deep-dive.md) | P1 |
+| **运行时选型** | [165-CRI详解](./domain-3-control-plane/165-cri-container-runtime-deep-dive.md), [27-RuntimeClass](./domain-4-workloads/27-runtime-class-configuration.md) | P2 |
+| **服务网格** | [129-服务网格](./domain-10-extensions/129-service-mesh-overview.md), [130-网格进阶](./domain-10-extensions/130-service-mesh-advanced.md) | P2 |
+| **AI基础设施** | [131-AI Infra](./domain-11-ai-infra/131-ai-infrastructure-overview.md), [145-LLM架构](./domain-11-ai-infra/145-llm-serving-architecture.md) | P2 |
 
 ---
 
@@ -641,13 +660,13 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
-| **环境搭建** | [123-虚拟集群](./tables/123-virtual-clusters.md), [06-集群配置](./tables/06-cluster-configuration-parameters.md) | P0 |
-| **混沌工程** | [106-混沌工程](./tables/106-chaos-engineering.md) | P0 |
-| **性能测试** | [101-性能分析](./tables/101-performance-profiling-tools.md), [107-扩展性能](./tables/107-scaling-performance.md), [62-网络调优](./tables/62-network-performance-tuning.md) | P0 |
-| **CI/CD集成** | [124-CI/CD](./tables/124-cicd-pipelines.md), [128-镜像构建](./tables/128-image-build-tools.md) | P1 |
-| **安全测试** | [86-镜像扫描](./tables/86-image-security-scanning.md), [91-安全扫描](./tables/91-security-scanning-tools.md) | P1 |
-| **可观测性** | [93-Prometheus](./tables/93-monitoring-metrics-prometheus.md), [95-日志](./tables/95-logging-auditing.md), [97-可观测工具](./tables/97-observability-tools.md) | P2 |
-| **故障注入** | [106-混沌工程](./tables/106-chaos-engineering.md), [99-排障概览](./tables/99-troubleshooting-overview.md) | P2 |
+| **环境搭建** | [123-虚拟集群](./domain-9-platform-ops/123-virtual-clusters.md), [06-集群配置](./tables/06-cluster-configuration-parameters.md) | P0 |
+| **混沌工程** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md) | P0 |
+| **性能测试** | [101-性能分析](./domain-8-observability/101-performance-profiling-tools.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md), [62-网络调优](./domain-5-networking/62-network-performance-tuning.md) | P0 |
+| **CI/CD集成** | [124-CI/CD](./domain-10-extensions/124-cicd-pipelines.md), [128-镜像构建](./domain-10-extensions/128-image-build-tools.md) | P1 |
+| **安全测试** | [86-镜像扫描](./domain-7-security/86-image-security-scanning.md), [91-安全扫描](./domain-7-security/91-security-scanning-tools.md) | P1 |
+| **可观测性** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [95-日志](./domain-8-observability/95-logging-auditing.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md) | P2 |
+| **故障注入** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md), [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md) | P2 |
 
 ---
 
@@ -658,13 +677,13 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
 | **架构理解** | [01-K8s架构](./tables/01-kubernetes-architecture-overview.md), [11-设计原则](./tables/11-kubernetes-design-principles.md) | P0 |
-| **成本分析** | [153-成本优化](./tables/153-cost-optimization-overview.md), [154-Kubecost](./tables/154-cost-management-kubecost.md), [141-AI成本](./tables/141-ai-cost-analysis-finops.md) | P0 |
-| **AI能力** | [131-AI Infra](./tables/131-ai-infrastructure-overview.md), [144-LLM推理](./tables/144-llm-inference-serving.md), [150-LLM成本](./tables/150-llm-cost-monitoring.md) | P1 |
-| **多租户** | [08-多租户](./tables/08-multi-tenancy-architecture.md), [84-RBAC](./tables/84-rbac-matrix-configuration.md) | P1 |
-| **合规认证** | [88-合规认证](./tables/88-compliance-certification.md), [89-审计实践](./tables/89-compliance-audit-practices.md) | P1 |
-| **高可用** | [18-高可用模式](./tables/18-high-availability-patterns.md), [120-容灾策略](./tables/120-disaster-recovery-strategy.md) | P2 |
+| **成本分析** | [153-成本优化](./domain-11-ai-infra/153-cost-optimization-overview.md), [154-Kubecost](./domain-11-ai-infra/154-cost-management-kubecost.md), [141-AI成本](./domain-11-ai-infra/141-ai-cost-analysis-finops.md) | P0 |
+| **AI能力** | [131-AI Infra](./domain-11-ai-infra/131-ai-infrastructure-overview.md), [144-LLM推理](./domain-11-ai-infra/144-llm-inference-serving.md), [150-LLM成本](./domain-11-ai-infra/150-llm-cost-monitoring.md) | P1 |
+| **多租户** | [08-多租户](./tables/08-multi-tenancy-architecture.md), [84-RBAC](./domain-7-security/84-rbac-matrix-configuration.md) | P1 |
+| **合规认证** | [88-合规认证](./domain-7-security/88-compliance-certification.md), [89-审计实践](./domain-7-security/89-compliance-audit-practices.md) | P1 |
+| **高可用** | [18-高可用模式](./tables/18-high-availability-patterns.md), [120-容灾策略](./domain-9-platform-ops/120-disaster-recovery-strategy.md) | P2 |
 | **边缘计算** | [09-边缘计算](./tables/09-edge-computing-kubeedge.md) | P2 |
-| **绿色计算** | [155-绿色计算](./tables/155-green-computing-sustainability.md) | P2 |
+| **绿色计算** | [155-绿色计算](./domain-11-ai-infra/155-green-computing-sustainability.md) | P2 |
 
 ---
 
@@ -674,12 +693,12 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
-| **基础操作** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [116-CLI工具](./tables/116-cli-enhancement-tools.md) | P0 |
-| **应用部署** | [126-Helm](./tables/126-helm-charts-management.md), [125-ArgoCD](./tables/125-gitops-workflow-argocd.md) | P0 |
-| **状态查看** | [22-Pod生命周期](./tables/22-pod-lifecycle-events.md), [105-健康检查](./tables/105-cluster-health-check.md) | P1 |
-| **日志获取** | [95-日志](./tables/95-logging-auditing.md), [98-日志聚合](./tables/98-log-aggregation-tools.md) | P1 |
-| **问题定位** | [157-Pod排障](./tables/157-pod-comprehensive-troubleshooting.md), [159-Service排障](./tables/159-service-comprehensive-troubleshooting.md) | P1 |
-| **资源配置** | [34-资源管理](./tables/34-resource-management.md), [32-HPA/VPA](./tables/32-hpa-vpa-autoscaling.md) | P2 |
+| **基础操作** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [116-CLI工具](./domain-9-platform-ops/116-cli-enhancement-tools.md) | P0 |
+| **应用部署** | [126-Helm](./domain-10-extensions/126-helm-charts-management.md), [125-ArgoCD](./domain-10-extensions/125-gitops-workflow-argocd.md) | P0 |
+| **状态查看** | [22-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P1 |
+| **日志获取** | [95-日志](./domain-8-observability/95-logging-auditing.md), [98-日志聚合](./domain-8-observability/98-log-aggregation-tools.md) | P1 |
+| **问题定位** | [157-Pod排障](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md), [159-Service排障](./domain-12-troubleshooting/159-service-comprehensive-troubleshooting.md) | P1 |
+| **资源配置** | [34-资源管理](./domain-4-workloads/34-resource-management.md), [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | P2 |
 
 ---
 
@@ -688,12 +707,20 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ### 2026-02 目录结构优化
 
 **项目结构重组完成**:
-- ✅ 创建 `domain-q-cloud-provider` 统一管理所有云厂商文档
-- ✅ 将所有 `cloud-*` 目录移动到 `domain-q-cloud-provider/` 下
+- ✅ 创建 `domain-17-cloud-provider` 统一管理所有云厂商文档
+- ✅ 将所有 `cloud-*` 目录移动到 `domain-17-cloud-provider/` 下
 - ✅ 重命名 `presentations` → `topic-presentations`
 - ✅ 重命名 `trouble-shooting` → `topic-trouble-shooting`
 - ✅ 更新 README 中所有相关链接
 - ✅ 验证所有链接有效性
+
+### 2026-02 域名数字化改造
+
+**域名命名标准化完成**:
+- ✅ 将所有域名从字母格式(`domain-a-`, `domain-b-`)转换为数字格式(`domain-1-`, `domain-2-`)
+- ✅ 更新 README 中所有 219 个文件链接指向正确的数字域名目录
+- ✅ 验证所有链接有效性，确保文档可正常访问
+- ✅ 更新域统计信息和表格数量统计
 
 ### 2026-02 根目录结构优化
 
@@ -785,24 +812,24 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 云厂商 | 产品名称 | 目录 | 核心特性 | 特色内容 |
 |:---|:---|:---|:---|:---|
-| **Amazon** | EKS (Elastic Kubernetes Service) | [cloud-aws-eks/aws-eks-overview.md](./domain-q-cloud-provider/cloud-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、Fargate无服务器 | EKS Anywhere混合云、Bottlerocket OS、Karpenter智能调度 |
-| **Microsoft** | AKS (Azure Kubernetes Service) | [cloud-azure-aks/azure-aks-overview.md](./domain-q-cloud-provider/cloud-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、虚拟节点 | Azure Arc多云管理、Confidential Containers机密计算、Dapr集成 |
-| **Google** | GKE (Google Kubernetes Engine) | [cloud-google-cloud-gke/google-cloud-gke-overview.md](./domain-q-cloud-provider/cloud-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、智能优化、Anthos多云 | Borg技术传承、Autopilot无服务器、Anthos Service Mesh |
-| **Oracle** | OKE (Oracle Container Engine) | [cloud-oracle-oke/oracle-oke-overview.md](./domain-q-cloud-provider/cloud-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群 | OCI原生集成、多云支持、企业级安全 |
-| **IBM** | IKS (IBM Cloud Kubernetes Service) | [cloud-ibm-iks/ibm-iks-overview.md](./domain-q-cloud-provider/cloud-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点 | 企业级合规、多云混合部署、IBM Cloud集成 |
+| **Amazon** | EKS (Elastic Kubernetes Service) | [cloud-aws-eks/aws-eks-overview.md](./domain-17-cloud-provider/cloud-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、Fargate无服务器 | EKS Anywhere混合云、Bottlerocket OS、Karpenter智能调度 |
+| **Microsoft** | AKS (Azure Kubernetes Service) | [cloud-azure-aks/azure-aks-overview.md](./domain-17-cloud-provider/cloud-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、虚拟节点 | Azure Arc多云管理、Confidential Containers机密计算、Dapr集成 |
+| **Google** | GKE (Google Kubernetes Engine) | [cloud-google-cloud-gke/google-cloud-gke-overview.md](./domain-17-cloud-provider/cloud-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、智能优化、Anthos多云 | Borg技术传承、Autopilot无服务器、Anthos Service Mesh |
+| **Oracle** | OKE (Oracle Container Engine) | [cloud-oracle-oke/oracle-oke-overview.md](./domain-17-cloud-provider/cloud-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群 | OCI原生集成、多云支持、企业级安全 |
+| **IBM** | IKS (IBM Cloud Kubernetes Service) | [cloud-ibm-iks/ibm-iks-overview.md](./domain-17-cloud-provider/cloud-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点 | 企业级合规、多云混合部署、IBM Cloud集成 |
 
 ### 国内云厂商
 
 | 云厂商 | 产品名称 | 目录 | 核心特性 | 特色内容 |
 |:---|:---|:---|:---|:---|
-| **阿里云** | ACK (Container Service for Kubernetes) | [cloud-alicloud-ack/alicloud-ack-overview.md](./domain-q-cloud-provider/cloud-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版、Terway网络、RRSA认证 | Terway网络插件、RRSA身份联合、Serverless节点、双模式架构 |
-| **阿里云** | 专有云K8s | [cloud-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md](./domain-q-cloud-provider/cloud-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境、ESS伸缩、SLS日志 | 专有云定制、弹性伸缩、日志分析 |
-| **字节跳动** | VEK (Volcengine Kubernetes) | [cloud-volcengine-vek/volcengine-vek-overview.md](./domain-q-cloud-provider/cloud-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维 | 字节跳动技术沉淀、高性能CNI、智能调度算法 |
-| **腾讯云** | TKE (Tencent Kubernetes Engine) | [cloud-tencent-tke/tencent-tke-overview.md](./domain-q-cloud-provider/cloud-tencent-tke/tencent-tke-overview.md) | 万级节点、VPC-CNI、超级节点 | 腾讯内部实践、VPC网络优化、超级节点服务 |
-| **华为云** | CCE (Cloud Container Engine) | [cloud-huawei-cce/huawei-cce-overview.md](./domain-q-cloud-provider/cloud-huawei-cce/huawei-cce-overview.md) | GPU节点、ASM服务网格、裸金属 | 华为技术优势、GPU加速、服务网格集成 |
-| **天翼云** | TKE (Tianyi Cloud Kubernetes) | [cloud-ctyun-tke/ctyun-tke-overview.md](./domain-q-cloud-provider/cloud-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持 | 电信网络优势、5G融合、国产化适配 |
-| **移动云** | CKE (China Mobile Cloud K8s) | [cloud-ecloud-cke/ecloud-cke-overview.md](./domain-q-cloud-provider/cloud-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机 | 移动网络集成、CDN优化、专属计算资源 |
-| **联通云** | UK8S (Unicom Cloud K8s) | [cloud-ucloud-uk8s/ucloud-uk8s-overview.md](./domain-q-cloud-provider/cloud-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片、政企定制 | 联通网络基础、5G切片技术、政企解决方案 |
+| **阿里云** | ACK (Container Service for Kubernetes) | [cloud-alicloud-ack/alicloud-ack-overview.md](./domain-17-cloud-provider/cloud-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版、Terway网络、RRSA认证 | Terway网络插件、RRSA身份联合、Serverless节点、双模式架构 |
+| **阿里云** | 专有云K8s | [cloud-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md](./domain-17-cloud-provider/cloud-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境、ESS伸缩、SLS日志 | 专有云定制、弹性伸缩、日志分析 |
+| **字节跳动** | VEK (Volcengine Kubernetes) | [cloud-volcengine-vek/volcengine-vek-overview.md](./domain-17-cloud-provider/cloud-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维 | 字节跳动技术沉淀、高性能CNI、智能调度算法 |
+| **腾讯云** | TKE (Tencent Kubernetes Engine) | [cloud-tencent-tke/tencent-tke-overview.md](./domain-17-cloud-provider/cloud-tencent-tke/tencent-tke-overview.md) | 万级节点、VPC-CNI、超级节点 | 腾讯内部实践、VPC网络优化、超级节点服务 |
+| **华为云** | CCE (Cloud Container Engine) | [cloud-huawei-cce/huawei-cce-overview.md](./domain-17-cloud-provider/cloud-huawei-cce/huawei-cce-overview.md) | GPU节点、ASM服务网格、裸金属 | 华为技术优势、GPU加速、服务网格集成 |
+| **天翼云** | TKE (Tianyi Cloud Kubernetes) | [cloud-ctyun-tke/ctyun-tke-overview.md](./domain-17-cloud-provider/cloud-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持 | 电信网络优势、5G融合、国产化适配 |
+| **移动云** | CKE (China Mobile Cloud K8s) | [cloud-ecloud-cke/ecloud-cke-overview.md](./domain-17-cloud-provider/cloud-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机 | 移动网络集成、CDN优化、专属计算资源 |
+| **联通云** | UK8S (Unicom Cloud K8s) | [cloud-ucloud-uk8s/ucloud-uk8s-overview.md](./domain-17-cloud-provider/cloud-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片、政企定制 | 联通网络基础、5G切片技术、政企解决方案 |
 
 **特点**:
 - ✅ 系统化整理各厂商K8s产品信息
