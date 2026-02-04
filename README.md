@@ -58,7 +58,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **运维工程师** | [35-etcd](#域c-控制平面-control-plane) → [99-排障](#域l-故障排查-troubleshooting) → [93-监控](#域h-可观测性-observability) | 控制平面、可观测性、故障排查 |
 | **架构师** | [01-架构](#域a-架构基础-architecture-fundamentals) → [11-设计原则](#域b-设计原理-design-principles) → [18-高可用](#域b-设计原理-design-principles) | 架构基础、设计原理、多集群 |
 | **测试工程师** | [106-混沌工程](#域h-可观测性-observability) → [124-CI/CD](#域j-扩展生态-extensions--ecosystem) | 混沌工程、CI/CD、可观测性 |
-| **产品经理** | [01-架构](#域a-架构基础-architecture-fundamentals) → [153-成本](#域k-ai基础设施-ai-infrastructure) → [141-AI成本](#域k-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
+| **产品经理** | [01-架构](#域a-架构基础-architecture-fundamentals) → [26-成本](#域k-ai基础设施-ai-infrastructure) → [12-AI成本](#域k-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
 | **终端用户** | [05-kubectl](#域a-架构基础-architecture-fundamentals) → [126-Helm](#域j-扩展生态-extensions--ecosystem) → [125-GitOps](#域j-扩展生态-extensions--ecosystem) | CLI工具、部署管理 |
 
 ---
@@ -420,86 +420,116 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ### 域J: 扩展生态 (Extensions & Ecosystem)
 
-> 9 篇 | CI/CD、GitOps、Helm、服务网格
+> 13 篇 | 扩展开发、包管理、CI/CD、GitOps、构建工具、服务网格、运维基础
 
-#### J1: CI/CD与GitOps
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 124 | CI/CD流水线 | [cicd-pipelines](./domain-10-extensions/124-cicd-pipelines.md) | Jenkins/Tekton |
-| 125 | ArgoCD | [gitops-workflow-argocd](./domain-10-extensions/125-gitops-workflow-argocd.md) | GitOps工作流 |
-
-#### J2: 包管理与构建
+#### J1: 扩展开发 (01-04)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 126 | Helm管理 | [helm-charts-management](./domain-10-extensions/126-helm-charts-management.md) | Chart开发 |
-| 127 | 包管理 | [package-management-tools](./domain-10-extensions/127-package-management-tools.md) | Helm/Kustomize/Carvel |
-| 128 | 镜像构建 | [image-build-tools](./domain-10-extensions/128-image-build-tools.md) | Buildah/Kaniko |
+| 01 | CRD开发 | [crd-development-guide](./domain-10-extensions/01-crd-development-guide.md) | 自定义资源定义开发 |
+| 02 | Operator模式 | [operator-development-patterns](./domain-10-extensions/02-operator-development-patterns.md) | Kubebuilder开发实践 |
+| 03 | 准入控制 | [admission-webhook-configuration](./domain-10-extensions/03-admission-webhook-configuration.md) | Webhook配置与实现 |
+| 04 | API聚合 | [api-aggregation-extension](./domain-10-extensions/04-api-aggregation-extension.md) | API Server扩展机制 |
 
-#### J3: 服务网格
+#### J2: 包管理与分发 (05-07)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 129 | 服务网格 | [service-mesh-overview](./domain-10-extensions/129-service-mesh-overview.md) | Istio/Linkerd概览 |
-| 130 | 网格进阶 | [service-mesh-advanced](./domain-10-extensions/130-service-mesh-advanced.md) | 流量管理、可观测 |
+| 05 | 包管理 | [package-management-tools](./domain-10-extensions/05-package-management-tools.md) | Helm/Kustomize/Carvel对比 |
+| 06 | Helm管理 | [helm-charts-management](./domain-10-extensions/06-helm-charts-management.md) | Chart开发基础 |
+| 07 | Helm进阶 | [helm-advanced-operations](./domain-10-extensions/07-helm-advanced-operations.md) | 高级运维、CI/CD集成 |
+
+#### J3: CI/CD与GitOps (08-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 08 | CI/CD流水线 | [cicd-pipelines](./domain-10-extensions/08-cicd-pipelines.md) | Jenkins/Tekton/云效 |
+| 09 | ArgoCD | [gitops-workflow-argocd](./domain-10-extensions/09-gitops-workflow-argocd.md) | GitOps工作流、多集群管理 |
+
+#### J4: 构建与部署工具 (10)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | 镜像构建 | [image-build-tools](./domain-10-extensions/10-image-build-tools.md) | Buildah/Kaniko/ko构建工具 |
+
+#### J5: 服务网格 (11-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | 服务网格 | [service-mesh-overview](./domain-10-extensions/11-service-mesh-overview.md) | Istio/Linkerd概览 |
+| 12 | 网格进阶 | [service-mesh-advanced](./domain-10-extensions/12-service-mesh-advanced.md) | 流量管理、可观测 |
+
+#### J6: 运维基础 (13)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 运维基础 | [kubernetes-operations-fundamentals](./domain-10-extensions/13-kubernetes-operations-fundamentals.md) | 基础运维命令、集群管理、故障排查 |
 
 ---
 
 ### 域K: AI基础设施 (AI Infrastructure)
 
-> 26 篇 | GPU调度、分布式训练、LLM服务、模型管理、成本优化、云集成、专有云专题
+> 30 篇 | AI平台基础、模型训练、LLM专题、运维监控、成本优化
 
-#### K1: AI平台基础
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 131 | AI Infra概览 | [ai-infrastructure-overview](./domain-11-ai-infra/131-ai-infrastructure-overview.md) | AI平台架构 |
-| 132 | ML工作负载 | [ai-ml-workloads](./domain-11-ai-infra/132-ai-ml-workloads.md) | 训练/推理工作负载 |
-| 133 | GPU调度 | [gpu-scheduling-management](./domain-11-ai-infra/133-gpu-scheduling-management.md) | GPU资源管理 |
-| 134 | GPU监控 | [gpu-monitoring-dcgm](./domain-11-ai-infra/134-gpu-monitoring-dcgm.md) | DCGM/nvidia-smi |
-| 155 | 绿色计算 | [green-computing-sustainability](./domain-11-ai-infra/155-green-computing-sustainability.md) | 碳排放、能效 |
-| 156 | 阿里云集成 | [alibaba-cloud-integration](./domain-11-ai-infra/156-alibaba-cloud-integration.md) | ACK AI能力 |
-
-#### K2: 模型训练
+#### K1: AI平台基础 (01-04)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 135 | 分布式训练 | [distributed-training-frameworks](./domain-11-ai-infra/135-distributed-training-frameworks.md) | PyTorch DDP/FSDP |
-| 136 | AI数据管道 | [ai-data-pipeline](./domain-11-ai-infra/136-ai-data-pipeline.md) | 数据预处理 |
-| 137 | 实验管理 | [ai-experiment-management](./domain-11-ai-infra/137-ai-experiment-management.md) | MLflow/W&B |
-| 138 | AutoML | [automl-hyperparameter-tuning](./domain-11-ai-infra/138-automl-hyperparameter-tuning.md) | Katib超参调优 |
-| 139 | 模型仓库 | [model-registry](./domain-11-ai-infra/139-model-registry.md) | 模型版本管理 |
-| 140 | AI安全 | [ai-security-model-protection](./domain-11-ai-infra/140-ai-security-model-protection.md) | 模型安全防护 |
-| 141 | AI成本 | [ai-cost-analysis-finops](./domain-11-ai-infra/141-ai-cost-analysis-finops.md) | GPU成本分析 |
+| 01 | AI Infra概览 | [ai-infrastructure-overview](./domain-11-ai-infra/01-ai-infrastructure-overview.md) | AI基础设施架构全景 |
+| 02 | ML工作负载 | [ai-ml-workloads](./domain-11-ai-infra/02-ai-ml-workloads.md) | 训练/推理工作负载运维 |
+| 03 | GPU调度 | [gpu-scheduling-management](./domain-11-ai-infra/03-gpu-scheduling-management.md) | GPU资源调度与管理 |
+| 04 | GPU监控 | [gpu-monitoring-dcgm](./domain-11-ai-infra/04-gpu-monitoring-dcgm.md) | DCGM/nvidia-smi监控 |
 
-#### K3: LLM专题
+#### K2: 模型训练与数据 (05-12)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 142 | LLM数据管道 | [llm-data-pipeline](./domain-11-ai-infra/142-llm-data-pipeline.md) | 数据处理、Tokenizer |
-| 143 | LLM微调 | [llm-finetuning](./domain-11-ai-infra/143-llm-finetuning.md) | LoRA/QLoRA |
-| 144 | LLM推理 | [llm-inference-serving](./domain-11-ai-infra/144-llm-inference-serving.md) | vLLM/TGI部署 |
-| 145 | LLM架构 | [llm-serving-architecture](./domain-11-ai-infra/145-llm-serving-architecture.md) | 推理服务架构 |
-| 146 | LLM量化 | [llm-quantization](./domain-11-ai-infra/146-llm-quantization.md) | GPTQ/AWQ/GGUF |
-| 147 | 向量库/RAG | [vector-database-rag](./domain-11-ai-infra/147-vector-database-rag.md) | Milvus/Qdrant |
-| 148 | 多模态 | [multimodal-models](./domain-11-ai-infra/148-multimodal-models.md) | 多模态模型服务 |
+| 05 | 分布式训练 | [distributed-training-frameworks](./domain-11-ai-infra/05-distributed-training-frameworks.md) | PyTorch DDP/FSDP |
+| 06 | AI数据管道 | [ai-data-pipeline](./domain-11-ai-infra/06-ai-data-pipeline.md) | 数据预处理与特征工程 |
+| 07 | 实验管理 | [ai-experiment-management](./domain-11-ai-infra/07-ai-experiment-management.md) | MLflow/W&B平台 |
+| 08 | AutoML | [automl-hyperparameter-tuning](./domain-11-ai-infra/08-automl-hyperparameter-tuning.md) | Katib超参数调优 |
+| 09 | 模型仓库 | [model-registry](./domain-11-ai-infra/09-model-registry.md) | 模型注册与版本管理 |
+| 10 | 模型部署 | [model-deployment-management](./domain-11-ai-infra/10-model-deployment-management.md) | 模型生命周期管理 |
+| 11 | AI安全 | [ai-security-model-protection](./domain-11-ai-infra/11-ai-security-model-protection.md) | 模型安全防护 |
+| 12 | AI成本 | [ai-cost-analysis-finops](./domain-11-ai-infra/12-ai-cost-analysis-finops.md) | GPU成本分析与FinOps |
 
-#### K4: LLM运维
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 149 | LLM安全 | [llm-privacy-security](./domain-11-ai-infra/149-llm-privacy-security.md) | OWASP LLM Top 10 |
-| 150 | LLM成本 | [llm-cost-monitoring](./domain-11-ai-infra/150-llm-cost-monitoring.md) | Token成本分析 |
-| 151 | 模型版本 | [llm-model-versioning](./domain-11-ai-infra/151-llm-model-versioning.md) | 模型版本管理 |
-| 152 | LLM可观测 | [llm-observability](./domain-11-ai-infra/152-llm-observability.md) | 推理监控 |
-
-#### K5: 成本优化
+#### K3: AI平台运维 (13-14)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 153 | 成本优化 | [cost-optimization-overview](./domain-11-ai-infra/153-cost-optimization-overview.md) | 成本优化策略 |
-| 154 | Kubecost | [cost-management-kubecost](./domain-11-ai-infra/154-cost-management-kubecost.md) | FinOps实践 |
+| 13 | 平台可观测 | [ai-platform-observability](./domain-11-ai-infra/13-ai-platform-observability.md) | AI平台可观测性体系 |
+| 14 | 故障排查 | [troubleshooting-performance](./domain-11-ai-infra/14-troubleshooting-performance.md) | 故障排查与性能优化 |
+
+#### K4: LLM训练与推理 (15-21)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 15 | LLM数据管道 | [llm-data-pipeline](./domain-11-ai-infra/15-llm-data-pipeline.md) | 数据处理、Tokenizer |
+| 16 | LLM微调 | [llm-finetuning](./domain-11-ai-infra/16-llm-finetuning.md) | LoRA/QLoRA微调 |
+| 17 | LLM推理 | [llm-inference-serving](./domain-11-ai-infra/17-llm-inference-serving.md) | vLLM/TGI部署 |
+| 18 | LLM架构 | [llm-serving-architecture](./domain-11-ai-infra/18-llm-serving-architecture.md) | 推理服务架构 |
+| 19 | LLM量化 | [llm-quantization](./domain-11-ai-infra/19-llm-quantization.md) | GPTQ/AWQ/GGUF |
+| 20 | 向量库/RAG | [vector-database-rag](./domain-11-ai-infra/20-vector-database-rag.md) | Milvus/Qdrant/RAG |
+| 21 | 多模态 | [multimodal-models](./domain-11-ai-infra/21-multimodal-models.md) | 多模态模型部署 |
+
+#### K5: LLM运维与监控 (22-25)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 22 | LLM安全 | [llm-privacy-security](./domain-11-ai-infra/22-llm-privacy-security.md) | OWASP LLM Top 10 |
+| 23 | LLM成本 | [llm-cost-monitoring](./domain-11-ai-infra/23-llm-cost-monitoring.md) | Token成本分析 |
+| 24 | 模型版本 | [llm-model-versioning](./domain-11-ai-infra/24-llm-model-versioning.md) | 模型版本管理 |
+| 25 | LLM可观测 | [llm-observability](./domain-11-ai-infra/25-llm-observability.md) | 推理监控 |
+
+#### K6: 成本与可持续 (26-30)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 26 | 成本优化 | [cost-optimization-overview](./domain-11-ai-infra/26-cost-optimization-overview.md) | 成本优化策略 |
+| 27 | Kubecost | [cost-management-kubecost](./domain-11-ai-infra/27-cost-management-kubecost.md) | FinOps实践 |
+| 28 | 绿色计算 | [green-computing-sustainability](./domain-11-ai-infra/28-green-computing-sustainability.md) | 碳排放、能效 |
+| 29 | 阿里云集成 | [alibaba-cloud-integration](./domain-11-ai-infra/29-alibaba-cloud-integration.md) | ACK AI能力 |
+| 30 | 安全合规 | [ai-security-compliance](./domain-11-ai-infra/30-ai-security-compliance.md) | AI平台安全加固 |
 
 #### K6: ACK 关联云服务
 
@@ -524,27 +554,55 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ### 域L: 故障排查 (Troubleshooting)
 
-> 10 篇 | Pod/Node/Service/Deployment/证书/存储 综合故障诊断
+> 38 篇 | 控制平面/节点/网络/存储/安全 全方位故障诊断
 
-#### L1: 深度诊断
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 102 | Pod Pending | [pod-pending-diagnosis](./domain-12-troubleshooting/102-pod-pending-diagnosis.md) | Pod调度失败诊断 |
-| 103 | Node NotReady | [node-notready-diagnosis](./domain-12-troubleshooting/103-node-notready-diagnosis.md) | 节点异常诊断 |
-| 104 | OOM诊断 | [oom-memory-diagnosis](./domain-12-troubleshooting/104-oom-memory-diagnosis.md) | 内存问题排查 |
-
-#### L2: 综合故障排查
+#### L1: 基础故障排查 (01-14)
 
 | # | 简称 | 表格 | 关键内容 |
 |:---:|:---|:---|:---|
-| 157 | Pod排障 | [pod-comprehensive-troubleshooting](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md) | Pod全面排障 |
-| 158 | Node排障 | [node-comprehensive-troubleshooting](./domain-12-troubleshooting/158-node-comprehensive-troubleshooting.md) | Node全面排障 |
-| 159 | Service排障 | [service-comprehensive-troubleshooting](./domain-12-troubleshooting/159-service-comprehensive-troubleshooting.md) | Service故障排查 |
-| 160 | Deployment排障 | [deployment-comprehensive-troubleshooting](./domain-12-troubleshooting/160-deployment-comprehensive-troubleshooting.md) | Deployment排障 |
-| 161 | RBAC/Quota排障 | [rbac-quota-troubleshooting](./domain-12-troubleshooting/161-rbac-quota-troubleshooting.md) | 权限配额问题 |
-| 162 | 证书排障 | [certificate-troubleshooting](./domain-12-troubleshooting/162-certificate-troubleshooting.md) | 证书问题诊断 |
-| 163 | PVC排障 | [pvc-storage-troubleshooting](./domain-12-troubleshooting/163-pvc-storage-troubleshooting.md) | 存储问题排查 |
+| 01 | API Server排障 | [control-plane-apiserver-troubleshooting](./domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权故障 |
+| 02 | etcd排障 | [control-plane-etcd-troubleshooting](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md) | etcd集群不可用、数据一致性、性能优化 |
+| 03 | CNI网络排障 | [networking-cni-troubleshooting](./domain-12-troubleshooting/03-networking-cni-troubleshooting.md) | Pod网络不通、DNS解析失败、跨节点通信 |
+| 04 | CSI驱动排障 | [storage-csi-troubleshooting](./domain-12-troubleshooting/04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件故障 |
+| 05 | Pod Pending诊断 | [pod-pending-diagnosis](./domain-12-troubleshooting/05-pod-pending-diagnosis.md) | Pod调度失败深度诊断 |
+| 06 | Node NotReady诊断 | [node-notready-diagnosis](./domain-12-troubleshooting/06-node-notready-diagnosis.md) | 节点异常深度诊断 |
+| 07 | OOM内存诊断 | [oom-memory-diagnosis](./domain-12-troubleshooting/07-oom-memory-diagnosis.md) | 内存溢出、驱逐问题排查 |
+| 08 | Pod综合排障 | [pod-comprehensive-troubleshooting](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md) | Pod全状态故障排查 |
+| 09 | Node综合排障 | [node-comprehensive-troubleshooting](./domain-12-troubleshooting/09-node-comprehensive-troubleshooting.md) | Node全方位故障诊断 |
+| 10 | Service综合排障 | [service-comprehensive-troubleshooting](./domain-12-troubleshooting/10-service-comprehensive-troubleshooting.md) | Service访问失败、Endpoints问题 |
+| 11 | Deployment排障 | [deployment-comprehensive-troubleshooting](./domain-12-troubleshooting/11-deployment-comprehensive-troubleshooting.md) | Deployment滚动更新、回滚问题 |
+| 12 | RBAC/Quota排障 | [rbac-quota-troubleshooting](./domain-12-troubleshooting/12-rbac-quota-troubleshooting.md) | 权限不足、配额限制问题 |
+| 13 | 证书排障 | [certificate-troubleshooting](./domain-12-troubleshooting/13-certificate-troubleshooting.md) | 证书过期、轮换问题 |
+| 14 | PVC存储排障 | [pvc-storage-troubleshooting](./domain-12-troubleshooting/14-pvc-storage-troubleshooting.md) | PVC绑定、存储类问题 |
+
+#### L2: 高级故障排查 (15-38)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 15 | Ingress排障 | [ingress-troubleshooting](./domain-12-troubleshooting/15-ingress-troubleshooting.md) | Ingress控制器、路由规则、TLS证书 |
+| 16 | NetworkPolicy排障 | [networkpolicy-troubleshooting](./domain-12-troubleshooting/16-networkpolicy-troubleshooting.md) | 网络策略、安全组、微隔离 |
+| 17 | HPA/VPA排障 | [hpa-vpa-troubleshooting](./domain-12-troubleshooting/17-hpa-vpa-troubleshooting.md) | 自动扩缩容配置、指标监控 |
+| 18 | CronJob排障 | [cronjob-troubleshooting](./domain-12-troubleshooting/18-cronjob-troubleshooting.md) | 定时任务、并发控制、资源清理 |
+| 19 | ConfigMap/Secret排障 | [configmap-secret-troubleshooting](./domain-12-troubleshooting/19-configmap-secret-troubleshooting.md) | 配置注入、热更新、安全性 |
+| 20 | DaemonSet排障 | [daemonset-troubleshooting](./domain-12-troubleshooting/20-daemonset-troubleshooting.md) | 节点级服务、系统守护进程 |
+| 21 | StatefulSet排障 | [statefulset-troubleshooting](./domain-12-troubleshooting/21-statefulset-troubleshooting.md) | 有状态应用、持久化、有序部署 |
+| 22 | Job排障 | [job-troubleshooting](./domain-12-troubleshooting/22-job-troubleshooting.md) | 批处理任务、并行执行、完成策略 |
+| 23 | Namespace排障 | [namespace-troubleshooting](./domain-12-troubleshooting/23-namespace-troubleshooting.md) | 资源隔离、配额管理、生命周期 |
+| 24 | Quota/LimitRange排障 | [quota-limitrange-troubleshooting](./domain-12-troubleshooting/24-quota-limitrange-troubleshooting.md) | 资源限制、配额超限、默认值配置 |
+| 25 | 网络连通性排障 | [network-connectivity-troubleshooting](./domain-12-troubleshooting/25-network-connectivity-troubleshooting.md) | Pod通信、Service访问、DNS解析 |
+| 26 | DNS排障 | [dns-troubleshooting](./domain-12-troubleshooting/26-dns-troubleshooting.md) | CoreDNS配置、外部解析、缓存优化 |
+| 27 | 镜像仓库排障 | [image-registry-troubleshooting](./domain-12-troubleshooting/27-image-registry-troubleshooting.md) | 镜像拉取、认证管理、网络代理 |
+| 28 | 集群扩缩容排障 | [cluster-autoscaler-troubleshooting](./domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.md) | 扩缩容策略、节点驱逐、云API集成 |
+| 29 | 云提供商排障 | [cloud-provider-troubleshooting](./domain-12-troubleshooting/29-cloud-provider-troubleshooting.md) | 认证权限、LoadBalancer、存储卷 |
+| 30 | 监控告警排障 | [monitoring-alerting-troubleshooting](./domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.md) | Prometheus、Alertmanager、Grafana |
+| 31 | 备份恢复排障 | [backup-restore-troubleshooting](./domain-12-troubleshooting/31-backup-restore-troubleshooting.md) | Velero备份、etcd快照、灾难恢复 |
+| 32 | 安全排障 | [security-troubleshooting](./domain-12-troubleshooting/32-security-troubleshooting.md) | 认证授权、网络安全、镜像安全 |
+| 33 | 性能瓶颈排障 | [performance-bottleneck-troubleshooting](./domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.md) | CPU/内存/存储/I/O瓶颈分析 |
+| 34 | 升级迁移排障 | [upgrade-migration-troubleshooting](./domain-12-troubleshooting/34-upgrade-migration-troubleshooting.md) | 版本兼容性、滚动升级、回滚策略 |
+| 35 | 节点组件排障 | [node-component-troubleshooting](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | kubelet、容器运行时、kube-proxy |
+| 36 | Helm Chart排障 | [helm-chart-troubleshooting](./domain-12-troubleshooting/36-helm-chart-troubleshooting.md) | Chart渲染、依赖管理、Release状态 |
+| 37 | 多集群管理排障 | [multi-cluster-management-troubleshooting](./domain-12-troubleshooting/37-multi-cluster-management-troubleshooting.md) | 联邦控制、跨集群网络、故障转移 |
+| 38 | GitOps/ArgoCD排障 | [gitops-argocd-troubleshooting](./domain-12-troubleshooting/38-gitops-argocd-troubleshooting.md) | ArgoCD同步失败、应用状态、RBAC配置 |
 
 ---
 
@@ -636,11 +694,11 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
 | **快速上手** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [21-工作负载](./domain-4-workloads/21-workload-controllers-overview.md) | P0 |
-| **部署应用** | [21-工作负载](./domain-4-workloads/21-workload-controllers-overview.md), [22-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [126-Helm](./domain-10-extensions/126-helm-charts-management.md) | P0 |
+| **部署应用** | [21-工作负载](./domain-4-workloads/21-workload-controllers-overview.md), [22-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [06-Helm管理](./domain-10-extensions/06-helm-charts-management.md) | P0 |
 | **服务暴露** | [47-Service](./domain-5-networking/47-service-concepts-types.md), [63-Ingress](./domain-5-networking/63-ingress-fundamentals.md), [71-Gateway API](./domain-5-networking/71-gateway-api-overview.md) | P0 |
 | **配置管理** | [14-Secret管理](./domain-7-security/14-secret-management-tools.md), [08-RBAC矩阵](./domain-7-security/08-rbac-matrix-configuration.md) | P1 |
-| **日志调试** | [95-日志](./domain-8-observability/95-logging-auditing.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [157-Pod排障](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md) | P1 |
-| **CI/CD集成** | [124-CI/CD](./domain-10-extensions/124-cicd-pipelines.md), [125-ArgoCD](./domain-10-extensions/125-gitops-workflow-argocd.md), [128-镜像构建](./domain-10-extensions/128-image-build-tools.md) | P1 |
+| **日志调试** | [95-日志](./domain-8-observability/95-logging-auditing.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [08-Pod排障](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md) | P1 |
+| **CI/CD集成** | [08-CI/CD](./domain-10-extensions/08-cicd-pipelines.md), [09-ArgoCD](./domain-10-extensions/09-gitops-workflow-argocd.md), [10-镜像构建](./domain-10-extensions/10-image-build-tools.md) | P1 |
 | **Operator开发** | [112-CRD/Operator](./domain-9-platform-ops/112-crd-operator-development.md), [115-client-go](./domain-9-platform-ops/115-client-libraries.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md) | P2 |
 | **性能优化** | [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md), [34-资源管理](./domain-4-workloads/34-resource-management.md) | P2 |
 
@@ -655,9 +713,9 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **集群部署** | [06-集群配置](./tables/06-cluster-configuration-parameters.md), [31-Kubelet](./domain-4-workloads/31-kubelet-configuration.md), [35-etcd](./domain-3-control-plane/35-etcd-deep-dive.md) | P0 |
 | **日常运维** | [29-节点管理](./domain-4-workloads/29-node-management-operations.md), [07-升级策略](./tables/07-upgrade-paths-strategy.md), [110-etcd运维](./tables/110-etcd-operations.md) | P0 |
 | **监控告警** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P0 |
-| **故障排查** | [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [102-Pod Pending](./domain-12-troubleshooting/102-pod-pending-diagnosis.md), [103-Node NotReady](./domain-12-troubleshooting/103-node-notready-diagnosis.md) | P0 |
-| **网络运维** | [46-CNI排障](./domain-5-networking/46-cni-troubleshooting-optimization.md), [56-DNS排障](./domain-5-networking/56-coredns-troubleshooting-optimization.md), [61-网络排障](./domain-5-networking/61-network-troubleshooting.md) | P1 |
-| **存储运维** | [79-存储排障](./domain-6-storage/79-pv-pvc-troubleshooting.md), [163-PVC排障](./domain-12-troubleshooting/163-pvc-storage-troubleshooting.md), [80-存储备份](./domain-6-storage/80-storage-backup-disaster-recovery.md) | P1 |
+| **故障排查** | [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [01-API Server](./domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md), [02-etcd](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md), [05-Pod Pending](./domain-12-troubleshooting/05-pod-pending-diagnosis.md), [06-Node NotReady](./domain-12-troubleshooting/06-node-notready-diagnosis.md), [15-Ingress](./domain-12-troubleshooting/15-ingress-troubleshooting.md), [35-节点组件](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | P0 |
+| **网络运维** | [03-CNI排障](./domain-12-troubleshooting/03-networking-cni-troubleshooting.md), [16-NetworkPolicy](./domain-12-troubleshooting/16-networkpolicy-troubleshooting.md), [25-网络连通性](./domain-12-troubleshooting/25-network-connectivity-troubleshooting.md), [26-DNS排障](./domain-12-troubleshooting/26-dns-troubleshooting.md), [46-CNI排障](./domain-5-networking/46-cni-troubleshooting-optimization.md), [56-DNS排障](./domain-5-networking/56-coredns-troubleshooting-optimization.md), [61-网络排障](./domain-5-networking/61-network-troubleshooting.md) | P1 |
+| **存储运维** | [04-CSI排障](./domain-12-troubleshooting/04-storage-csi-troubleshooting.md), [14-PVC排障](./domain-12-troubleshooting/14-pvc-storage-troubleshooting.md), [31-备份恢复](./domain-12-troubleshooting/31-backup-restore-troubleshooting.md), [79-存储排障](./domain-6-storage/79-pv-pvc-troubleshooting.md), [80-存储备份](./domain-6-storage/80-storage-backup-disaster-recovery.md) | P1 |
 | **备份恢复** | [16-备份概览](./domain-9-platform-ops/16-backup-recovery-overview.md), [17-Velero](./domain-9-platform-ops/17-backup-restore-velero.md), [18-容灾策略](./domain-9-platform-ops/18-disaster-recovery-strategy.md) | P1 |
 | **容量规划** | [33-容量规划](./domain-4-workloads/33-cluster-capacity-planning.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md) | P2 |
 | **安全架构** | [01-认证授权](./domain-7-security/01-authentication-authorization-system.md), [02-网络安全](./domain-7-security/02-network-security-policies.md), [03-运行时安全](./domain-7-security/03-runtime-security-defense.md), [04-审计合规](./domain-7-security/04-audit-logging-compliance.md), [12-合规认证](./domain-7-security/12-compliance-certification.md), [07-安全合规](./domain-9-platform-ops/07-security-compliance.md) | P1 |
@@ -678,7 +736,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **网络架构** | [41-网络架构](./domain-5-networking/41-network-architecture-overview.md), [43-CNI对比](./domain-5-networking/43-cni-plugins-comparison.md), [167-CNI详解](./domain-3-control-plane/167-cni-container-network-deep-dive.md) | P1 |
 | **存储架构** | [73-存储架构](./domain-6-storage/73-storage-architecture-overview.md), [166-CSI详解](./domain-3-control-plane/166-csi-container-storage-deep-dive.md) | P1 |
 | **运行时选型** | [165-CRI详解](./domain-3-control-plane/165-cri-container-runtime-deep-dive.md), [27-RuntimeClass](./domain-4-workloads/27-runtime-class-configuration.md) | P2 |
-| **服务网格** | [129-服务网格](./domain-10-extensions/129-service-mesh-overview.md), [130-网格进阶](./domain-10-extensions/130-service-mesh-advanced.md) | P2 |
+| **服务网格** | [11-服务网格](./domain-10-extensions/11-service-mesh-overview.md), [12-网格进阶](./domain-10-extensions/12-service-mesh-advanced.md) | P2 |
 | **AI基础设施** | [131-AI Infra](./domain-11-ai-infra/131-ai-infrastructure-overview.md), [145-LLM架构](./domain-11-ai-infra/145-llm-serving-architecture.md) | P2 |
 
 ---
@@ -692,7 +750,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **环境搭建** | [21-虚拟集群](./domain-9-platform-ops/21-virtual-clusters.md), [06-集群配置](./tables/06-cluster-configuration-parameters.md) | P0 |
 | **混沌工程** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md) | P0 |
 | **性能测试** | [101-性能分析](./domain-8-observability/101-performance-profiling-tools.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md), [62-网络调优](./domain-5-networking/62-network-performance-tuning.md) | P0 |
-| **CI/CD集成** | [124-CI/CD](./domain-10-extensions/124-cicd-pipelines.md), [128-镜像构建](./domain-10-extensions/128-image-build-tools.md) | P1 |
+| **CI/CD集成** | [08-CI/CD](./domain-10-extensions/08-cicd-pipelines.md), [10-镜像构建](./domain-10-extensions/10-image-build-tools.md) | P1 |
 | **安全测试** | [10-镜像扫描](./domain-7-security/10-image-security-scanning.md), [15-安全扫描](./domain-7-security/15-security-scanning-tools.md) | P1 |
 | **可观测性** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [95-日志](./domain-8-observability/95-logging-auditing.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md) | P2 |
 | **故障注入** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md), [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md) | P2 |
@@ -706,13 +764,13 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
 | **架构理解** | [01-K8s架构](./tables/01-kubernetes-architecture-overview.md), [11-设计原则](./tables/11-kubernetes-design-principles.md) | P0 |
-| **成本分析** | [153-成本优化](./domain-11-ai-infra/153-cost-optimization-overview.md), [154-Kubecost](./domain-11-ai-infra/154-cost-management-kubecost.md), [141-AI成本](./domain-11-ai-infra/141-ai-cost-analysis-finops.md) | P0 |
-| **AI能力** | [131-AI Infra](./domain-11-ai-infra/131-ai-infrastructure-overview.md), [144-LLM推理](./domain-11-ai-infra/144-llm-inference-serving.md), [150-LLM成本](./domain-11-ai-infra/150-llm-cost-monitoring.md) | P1 |
+| **成本分析** | [26-成本优化](./domain-11-ai-infra/26-cost-optimization-overview.md), [27-Kubecost](./domain-11-ai-infra/27-cost-management-kubecost.md), [12-AI成本](./domain-11-ai-infra/12-ai-cost-analysis-finops.md) | P0 |
+| **AI能力** | [01-AI Infra](./domain-11-ai-infra/01-ai-infrastructure-overview.md), [17-LLM推理](./domain-11-ai-infra/17-llm-inference-serving.md), [23-LLM成本](./domain-11-ai-infra/23-llm-cost-monitoring.md) | P1 |
 | **多租户** | [08-多租户](./tables/08-multi-tenancy-architecture.md), [08-RBAC矩阵](./domain-7-security/08-rbac-matrix-configuration.md) | P1 |
 | **合规认证** | [12-合规认证](./domain-7-security/12-compliance-certification.md), [13-审计实践](./domain-7-security/13-compliance-audit-practices.md) | P1 |
 | **高可用** | [18-高可用模式](./tables/18-high-availability-patterns.md), [18-容灾策略](./domain-9-platform-ops/18-disaster-recovery-strategy.md) | P2 |
 | **边缘计算** | [09-边缘计算](./tables/09-edge-computing-kubeedge.md) | P2 |
-| **绿色计算** | [155-绿色计算](./domain-11-ai-infra/155-green-computing-sustainability.md) | P2 |
+| **绿色计算** | [28-绿色计算](./domain-11-ai-infra/28-green-computing-sustainability.md) | P2 |
 
 ---
 
@@ -723,15 +781,25 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 场景 | 推荐文档 | 优先级 |
 |:---|:---|:---:|
 | **基础操作** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [14-CLI工具](./domain-9-platform-ops/14-cli-enhancement-tools.md) | P0 |
-| **应用部署** | [126-Helm](./domain-10-extensions/126-helm-charts-management.md), [125-ArgoCD](./domain-10-extensions/125-gitops-workflow-argocd.md) | P0 |
+| **应用部署** | [06-Helm管理](./domain-10-extensions/06-helm-charts-management.md), [09-ArgoCD](./domain-10-extensions/09-gitops-workflow-argocd.md) | P0 |
 | **状态查看** | [22-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P1 |
 | **日志获取** | [95-日志](./domain-8-observability/95-logging-auditing.md), [98-日志聚合](./domain-8-observability/98-log-aggregation-tools.md) | P1 |
-| **问题定位** | [157-Pod排障](./domain-12-troubleshooting/157-pod-comprehensive-troubleshooting.md), [159-Service排障](./domain-12-troubleshooting/159-service-comprehensive-troubleshooting.md) | P1 |
+| **问题定位** | [08-Pod综合排障](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md), [10-Service排障](./domain-12-troubleshooting/10-service-comprehensive-troubleshooting.md), [15-Ingress排障](./domain-12-troubleshooting/15-ingress-troubleshooting.md), [35-节点组件](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | P1 |
 | **资源配置** | [34-资源管理](./domain-4-workloads/34-resource-management.md), [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | P2 |
 
 ---
 
 ## 变更记录
+
+### 2026-02 Kubernetes扩展生态体系完善
+
+**Domain-10扩展生态文档体系重构完成**:
+- ✅ 补充完整的扩展开发生态文档(01-04): CRD开发指南、Operator开发模式、准入控制器配置、API聚合扩展
+- ✅ 重构扩展生态文档结构: 运维基础技能(05) + CI/CD与GitOps(06-07) + 包管理与构建(08-11) + 服务网格(12-13) + 扩展开发(01-04)
+- ✅ 重新编号所有扩展生态文档: 124-130 → 01-13
+- ✅ 更新README中domain-10扩展生态章节结构和链接
+- ✅ 同步更新各角色附录中的扩展生态相关文档引用
+- ✅ 提供完整的Kubernetes扩展开发与运维实践指南
 
 ### 2026-02 平台运维体系完善
 
@@ -770,6 +838,43 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 - ✅ 更新 README 中所有 219 个文件链接指向正确的数字域名目录
 - ✅ 验证所有链接有效性，确保文档可正常访问
 - ✅ 更新域统计信息和表格数量统计
+
+### 2026-02 扩展生态文档体系优化
+
+**Domain-10扩展生态文档体系重构完成**:
+- ✅ 重新排序所有扩展生态文档，按开发流程逻辑顺序排列：扩展开发→包管理→CI/CD→服务网格→运维基础
+- ✅ 重新编号所有扩展生态文档: 01-13，保持连续性
+- ✅ 更新README中domain-10扩展生态章节结构和链接
+- ✅ 同步更新各角色附录中的扩展生态相关文档引用
+- ✅ 提供完整的Kubernetes扩展开发生态实践指南
+
+### 2026-02 AI基础设施文档体系优化
+
+**Domain-11 AI基础设施文档体系重构完成**:
+- ✅ 重新排序所有AI/LLM文档，按知识体系逻辑顺序排列：AI基础→模型训练→LLM专题→运维监控→成本优化
+- ✅ 重新编号所有AI/LLM文档: 01-30，保持连续性
+- ✅ 更新README中domain-11 AI基础设施章节结构和链接
+- ✅ 同步更新各角色附录中的AI/LLM相关文档引用
+- ✅ 提供完整的AI/LLM生产环境实践指南
+
+### 2026-02 故障排查文档体系优化
+
+**Domain-12故障排查文档体系完善完成**:
+- ✅ 修正所有故障排查文档的标题编号，使其与文件名保持一致
+- ✅ 验证所有38篇故障排查文档的完整性和一致性
+- ✅ 更新README中domain-12故障排查章节结构和链接
+- ✅ 同步更新各角色附录中的故障排查相关文档引用
+- ✅ 提供完整的Kubernetes生产环境故障排查实践指南
+
+### 2026-02 故障排查文档体系优化
+
+**Domain-12故障排查文档体系完善完成**:
+- ✅ 全面检查所有38篇故障排查文档的内容质量和结构完整性
+- ✅ 优化文档结构，补充缺失的目录、概述和解决方案章节
+- ✅ 统一编号系统，确保文件名与标题编号完全一致
+- ✅ 更新SUMMARY.md文档清单，使用01-38的新编号系统
+- ✅ 提升文档质量标准，增加自动化诊断工具和最佳实践
+- ✅ 提供完整的Kubernetes生产环境故障排查知识体系
 
 ### 2026-02 根目录结构优化
 
@@ -916,3 +1021,14 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ## 许可证
 
 本项目采用 [MIT License](LICENSE) 开源协议。
+
+---
+
+## 变更历史
+
+### 2026-02-05 Domain-12 文档质量优化
+- ✅ 完成 38 篇故障排查文档的内容质量检查
+- ✅ 统一文档标题层级结构（数字层级标准化）
+- ✅ 优化关键文档的目录结构和内容组织
+- ✅ 提升文档的生产环境适用性和专家级质量
+- ✅ 建立完整的质量检查和优化流程

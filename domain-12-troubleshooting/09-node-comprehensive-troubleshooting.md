@@ -1,10 +1,10 @@
-# 158 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
+# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、Node 状态诊断总览 (Node Status Overview)
+## 1. Node 状态诊断总览 (Node Status Overview)
 
 ### 1.1 Node 状态速查表
 
@@ -37,7 +37,7 @@ kubectl describe node <node-name> | grep -A20 "Conditions:"
 
 ---
 
-## 二、NotReady 状态排查 (NotReady Troubleshooting)
+## 2. NotReady 状态排查 (NotReady Troubleshooting)
 
 ### 2.1 排查流程图
 
@@ -124,7 +124,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ---
 
-## 三、资源压力排查 (Resource Pressure Troubleshooting)
+## 3. 资源压力排查 (Resource Pressure Troubleshooting)
 
 ### 3.1 内存压力 (MemoryPressure)
 
@@ -205,7 +205,7 @@ sysctl -w kernel.pid_max=131072
 
 ---
 
-## 四、网络问题排查 (Network Troubleshooting)
+## 4. 网络问题排查 (Network Troubleshooting)
 
 ### 4.1 NetworkUnavailable 排查
 
@@ -258,7 +258,7 @@ ss -tlnp | grep -E "6443|10250|10251|10252"
 
 ---
 
-## 五、容器运行时排查 (Container Runtime Troubleshooting)
+## 5. 容器运行时排查 (Container Runtime Troubleshooting)
 
 ### 5.1 containerd 排查
 
@@ -327,7 +327,7 @@ journalctl -u containerd | grep -i error
 
 ---
 
-## 六、证书问题排查 (Certificate Troubleshooting)
+## 6. 证书问题排查 (Certificate Troubleshooting)
 
 ### 6.1 检查证书状态
 
@@ -368,7 +368,7 @@ kubectl certificate approve <csr-name>
 
 ---
 
-## 七、节点维护操作 (Node Maintenance)
+## 7. 节点维护操作 (Node Maintenance)
 
 ### 7.1 安全下线节点
 
@@ -411,7 +411,7 @@ kubeadm join <master>:6443 --token <token> --discovery-token-ca-cert-hash <hash>
 
 ---
 
-## 八、监控与告警 (Monitoring & Alerting)
+## 8. 监控与告警 (Monitoring & Alerting)
 
 ### 8.1 关键监控指标
 
@@ -457,7 +457,7 @@ groups:
 
 ---
 
-## 九、一键诊断脚本 (Diagnostic Script)
+## 9. 一键诊断脚本 (Diagnostic Script)
 
 ```bash
 #!/bin/bash

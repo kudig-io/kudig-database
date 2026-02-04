@@ -1,10 +1,10 @@
-# 157 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
+# 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、Pod 状态诊断总览 (Pod Status Overview)
+## 1. Pod 状态诊断总览 (Pod Status Overview)
 
 ### 1.1 Pod 生命周期状态
 
@@ -51,7 +51,7 @@
 
 ---
 
-## 二、Pending 状态排查 (Pending Troubleshooting)
+## 2. Pending 状态排查 (Pending Troubleshooting)
 
 ### 2.1 排查流程图
 
@@ -132,7 +132,7 @@ kubectl run test-pod --image=nginx --dry-run=server -o yaml
 
 ---
 
-## 三、ContainerCreating 排查 (ContainerCreating Troubleshooting)
+## 3. ContainerCreating 排查 (ContainerCreating Troubleshooting)
 
 ### 3.1 常见原因
 
@@ -185,7 +185,7 @@ df -h
 
 ---
 
-## 四、CrashLoopBackOff 排查 (CrashLoopBackOff Troubleshooting)
+## 4. CrashLoopBackOff 排查 (CrashLoopBackOff Troubleshooting)
 
 ### 4.1 排查流程
 
@@ -264,7 +264,7 @@ kubectl debug <pod-name> -n <namespace> -it --image=busybox --target=<container-
 
 ---
 
-## 五、ImagePullBackOff 排查 (ImagePullBackOff Troubleshooting)
+## 5. ImagePullBackOff 排查 (ImagePullBackOff Troubleshooting)
 
 ### 5.1 常见原因及解决
 
@@ -315,7 +315,7 @@ spec:
 
 ---
 
-## 六、Terminating 状态排查 (Terminating Troubleshooting)
+## 6. Terminating 状态排查 (Terminating Troubleshooting)
 
 ### 6.1 删除卡住的原因
 
@@ -349,7 +349,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.finalizers}'
 
 ---
 
-## 七、Init Container 故障排查 (Init Container Troubleshooting)
+## 7. Init Container 故障排查 (Init Container Troubleshooting)
 
 ### 7.1 Init 状态含义
 
@@ -378,7 +378,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.initContainerSta
 
 ---
 
-## 八、资源相关问题 (Resource Issues)
+## 8. 资源相关问题 (Resource Issues)
 
 ### 8.1 OOMKilled 排查
 
@@ -422,7 +422,7 @@ cat /sys/fs/cgroup/cpu/kubepods/pod<pod-uid>/<container-id>/cpu.stat
 
 ---
 
-## 九、网络相关问题 (Network Issues)
+## 9. 网络相关问题 (Network Issues)
 
 ### 9.1 Pod网络排查
 
@@ -455,7 +455,7 @@ kubectl get networkpolicy -n <namespace>
 
 ---
 
-## 十、调试技巧 (Debugging Tips)
+## 10. 调试技巧 (Debugging Tips)
 
 ### 10.1 临时调试容器
 

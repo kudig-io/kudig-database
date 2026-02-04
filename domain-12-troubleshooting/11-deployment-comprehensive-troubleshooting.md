@@ -1,10 +1,10 @@
-# 160 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
+# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、Deployment 状态诊断 (Status Diagnosis)
+## 1. Deployment 状态诊断 (Status Diagnosis)
 
 ### 1.1 Deployment 状态速查
 
@@ -49,7 +49,7 @@
 
 ---
 
-## 二、副本数异常排查 (Replica Issues)
+## 2. 副本数异常排查 (Replica Issues)
 
 ### 2.1 副本为0的原因
 
@@ -100,7 +100,7 @@ kubectl get rs -n <namespace> -l app=<label>
 
 ---
 
-## 三、滚动更新问题 (Rolling Update Issues)
+## 3. 滚动更新问题 (Rolling Update Issues)
 
 ### 3.1 更新卡住排查
 
@@ -152,7 +152,7 @@ spec:
 
 ---
 
-## 四、回滚操作 (Rollback)
+## 4. 回滚操作 (Rollback)
 
 ### 4.1 回滚命令
 
@@ -193,7 +193,7 @@ kubectl scale deployment <name> -n <namespace> --replicas=3
 
 ---
 
-## 五、探针问题排查 (Probe Issues)
+## 5. 探针问题排查 (Probe Issues)
 
 ### 5.1 探针失败诊断
 
@@ -253,7 +253,7 @@ spec:
 
 ---
 
-## 六、资源配额问题 (Resource Quota Issues)
+## 6. 资源配额问题 (Resource Quota Issues)
 
 ### 6.1 配额检查
 
@@ -284,7 +284,7 @@ kubectl describe quota -n <namespace>
 
 ---
 
-## 七、亲和性与调度问题 (Affinity & Scheduling Issues)
+## 7. 亲和性与调度问题 (Affinity & Scheduling Issues)
 
 ### 7.1 调度失败排查
 
@@ -314,7 +314,7 @@ kubectl describe nodes | grep -E "Taints|Labels"
 
 ---
 
-## 八、镜像问题排查 (Image Issues)
+## 8. 镜像问题排查 (Image Issues)
 
 ### 8.1 镜像拉取失败
 
@@ -343,7 +343,7 @@ crictl pull <image>
 
 ---
 
-## 九、实用诊断命令 (Diagnostic Commands)
+## 9. 实用诊断命令 (Diagnostic Commands)
 
 ```bash
 # === Deployment状态 ===
@@ -378,7 +378,7 @@ kubectl scale deployment <name> -n <namespace> --replicas=5
 
 ---
 
-## 十、一键诊断脚本 (Diagnostic Script)
+## 10. 一键诊断脚本 (Diagnostic Script)
 
 ```bash
 #!/bin/bash
@@ -402,6 +402,180 @@ kubectl describe deployment $DEPLOY -n $NS | grep -A15 "Events:"
 
 echo -e "\n=== Rollout Status ==="
 kubectl rollout status deployment/$DEPLOY -n $NS --timeout=5s 2>&1 || true
+```
+
+---
+
+## 4. 常见问题解决方案 (Common Solutions)
+
+### 4.1 Deployment 创建失败解决方案
+
+当遇到 Deployment 创建失败时，按以下步骤排查：
+
+1. **检查 YAML 语法**
+   ```bash
+   kubectl apply -f deployment.yaml --dry-run=client
+   ```
+
+2. **验证资源配置**
+   ```bash
+   # 检查 ResourceQuota
+   kubectl describe quota -n <namespace>
+   
+   # 检查 LimitRange
+   kubectl get limitrange -n <namespace>
+   ```
+
+3. **确认镜像可访问**
+   ```bash
+   # 测试镜像拉取
+   docker pull <image-name>:<tag>
+   
+   # 检查镜像仓库凭证
+   kubectl get secret -n <namespace> | grep image-pull
+   ```
+
+### 4.2 ReplicaSet 不创建解决方案
+
+如果 Deployment 已创建但没有 ReplicaSet：
+
+1. **检查 Deployment 状态**
+   ```bash
+   kubectl describe deployment <name> -n <namespace>
+   ```
+
+2. **查看控制器管理器日志**
+   ```bash
+   kubectl logs -n kube-system -l component=kube-controller-manager
+   ```
+
+3. **验证 RBAC 权限**
+   ```bash
+   kubectl auth can-i create replicaset --as=system:serviceaccount:kube-system:deployment-controller
+   ```
+
+### 4.3 滚动更新失败解决方案
+
+更新卡住时的处理方法：
+
+1. **暂停更新**
+   ```bash
+   kubectl rollout pause deployment/<name> -n <namespace>
+   ```
+
+2. **检查具体问题**
+   ```bash
+   # 查看新 Pod 事件
+   kubectl describe pod <new-pod> -n <namespace>
+   
+   # 检查容器日志
+   kubectl logs <new-pod> -n <namespace> --previous
+   ```
+
+3. **强制回滚**
+   ```bash
+   kubectl rollout undo deployment/<name> -n <namespace>
+   ```
+
+4. **调整更新策略**
+   ```yaml
+   spec:
+     strategy:
+       type: RollingUpdate
+       rollingUpdate:
+         maxSurge: 1
+         maxUnavailable: 0
+   ```
+
+### 4.4 预防措施和最佳实践
+
+1. **设置合适的资源请求**
+   ```yaml
+   resources:
+     requests:
+       cpu: "100m"
+       memory: "128Mi"
+     limits:
+       cpu: "500m"
+       memory: "512Mi"
+   ```
+
+2. **配置健康检查探针**
+   ```yaml
+   livenessProbe:
+     httpGet:
+       path: /health
+       port: 8080
+     initialDelaySeconds: 30
+     periodSeconds: 10
+   
+   readinessProbe:
+     httpGet:
+       path: /ready
+       port: 8080
+     initialDelaySeconds: 5
+     periodSeconds: 5
+   ```
+
+3. **启用滚动更新监控**
+   ```bash
+   # 监控更新进度
+   watch kubectl get deployment <name> -n <namespace>
+   
+   # 设置更新超时
+   kubectl patch deployment <name> -n <namespace> -p '{"spec":{"progressDeadlineSeconds":600}}'
+   ```
+
+---
+
+## 5. 自动化诊断脚本
+
+### 5.1 Deployment 健康检查脚本
+
+```bash
+#!/bin/bash
+# deployment_health_check.sh
+
+DEPLOYMENT_NAME=$1
+NAMESPACE=${2:-default}
+
+echo "=== Deployment Health Check for $DEPLOYMENT_NAME ==="
+
+# 基本状态检查
+kubectl get deployment $DEPLOYMENT_NAME -n $NAMESPACE -o wide
+
+# 详细描述
+echo -e "\n--- Detailed Status ---"
+kubectl describe deployment $DEPLOYMENT_NAME -n $NAMESPACE
+
+# ReplicaSet 状态
+echo -e "\n--- ReplicaSets ---"
+kubectl get rs -n $NAMESPACE -l app=$DEPLOYMENT_NAME
+
+# Pod 状态
+echo -e "\n--- Pods ---"
+kubectl get pods -n $NAMESPACE -l app=$DEPLOYMENT_NAME --show-labels
+
+# 事件检查
+echo -e "\n--- Recent Events ---"
+kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOYMENT_NAME
+
+# 资源使用情况
+echo -e "\n--- Resource Usage ---"
+kubectl top pods -n $NAMESPACE -l app=$DEPLOYMENT_NAME 2>/dev/null || echo "Metrics server not available"
+```
+
+### 5.2 快速故障诊断命令集合
+
+```bash
+# Deployment 故障诊断一键命令
+alias deploy_debug='
+  echo "=== Deployment Debug Commands ===";
+  kubectl get deployment -o wide;
+  kubectl get rs -o wide;
+  kubectl get pods -o wide;
+  kubectl get events --sort-by=".lastTimestamp"
+'
 ```
 
 ---
