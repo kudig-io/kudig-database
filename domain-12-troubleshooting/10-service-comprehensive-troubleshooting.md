@@ -1,10 +1,10 @@
-# 159 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
+# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、Service 故障诊断流程 (Troubleshooting Flow)
+## 1. Service 故障诊断流程 (Troubleshooting Flow)
 
 ### 1.1 排查流程图
 
@@ -71,7 +71,7 @@
 
 ---
 
-## 二、Endpoints 问题排查 (Endpoints Troubleshooting)
+## 2. Endpoints 问题排查 (Endpoints Troubleshooting)
 
 ### 2.1 Endpoints 为空的原因
 
@@ -130,7 +130,7 @@ kubectl logs <pod-name> -n <namespace>
 
 ---
 
-## 三、ClusterIP Service 排查 (ClusterIP Troubleshooting)
+## 3. ClusterIP Service 排查 (ClusterIP Troubleshooting)
 
 ### 3.1 连通性测试
 
@@ -189,7 +189,7 @@ iptables -t nat -L KUBE-SVC-XXXX -n
 
 ---
 
-## 四、NodePort Service 排查 (NodePort Troubleshooting)
+## 4. NodePort Service 排查 (NodePort Troubleshooting)
 
 ### 4.1 基本检查
 
@@ -235,7 +235,7 @@ firewall-cmd --reload
 
 ---
 
-## 五、LoadBalancer Service 排查 (LoadBalancer Troubleshooting)
+## 5. LoadBalancer Service 排查 (LoadBalancer Troubleshooting)
 
 ### 5.1 Pending 状态排查
 
@@ -280,7 +280,7 @@ kubectl get svc <svc-name> -n <namespace> -o yaml | grep annotations -A20
 
 ---
 
-## 六、Headless Service 排查 (Headless Troubleshooting)
+## 6. Headless Service 排查 (Headless Troubleshooting)
 
 ### 6.1 Headless Service 特点
 
@@ -304,7 +304,7 @@ kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>
 
 ---
 
-## 七、ExternalName Service 排查 (ExternalName Troubleshooting)
+## 7. ExternalName Service 排查 (ExternalName Troubleshooting)
 
 ### 7.1 DNS解析测试
 
@@ -327,7 +327,7 @@ kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>
 
 ---
 
-## 八、Session Affinity 问题 (Session Affinity Issues)
+## 8. Session Affinity 问题 (Session Affinity Issues)
 
 ### 8.1 检查Session Affinity配置
 
@@ -361,7 +361,7 @@ spec:
 
 ---
 
-## 九、NetworkPolicy 对Service的影响 (NetworkPolicy Impact)
+## 9. NetworkPolicy 对Service的影响 (NetworkPolicy Impact)
 
 ### 9.1 检查NetworkPolicy
 
@@ -400,7 +400,7 @@ spec:
 
 ---
 
-## 十、诊断命令速查 (Quick Reference)
+## 10. 诊断命令速查 (Quick Reference)
 
 ```bash
 # === Service基本信息 ===

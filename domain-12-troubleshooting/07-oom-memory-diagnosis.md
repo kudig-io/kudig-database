@@ -1,4 +1,4 @@
-# 88 - OOM和内存问题诊断
+# 07 - OOM和内存问题诊断
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/configuration/manage-resources-containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
@@ -1110,4 +1110,280 @@ spec:
 
 ---
 
-**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
+## 深度解决方案与预防体系
+
+### 4.1 容器OOM问题根本解决策略
+
+#### 4.1.1 内存请求和限制优化
+
+**精准资源配置方法：**
+
+```yaml
+# 生产环境推荐配置模板
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-intensive-app
+spec:
+  containers:
+  - name: app
+    image: myapp:v1.0
+    resources:
+      requests:
+        memory: "512Mi"    # 基于实际压测数据
+        cpu: "250m"
+      limits:
+        memory: "1Gi"      # requests的1.5-2倍
+        cpu: "1000m"
+    # 内存优化配置
+    env:
+    - name: GOMEMLIMIT
+      value: "800MiB"      # Go应用内存软限制
+    - name: JAVA_OPTS
+      value: "-Xmx768m -XX:MaxRAMPercentage=75.0"
+```
+
+**资源配置调优步骤：**
+
+1. **基线测量**
+   ```bash
+   # 使用metrics-server观察历史峰值
+   kubectl top pods -n <namespace> --containers
+   
+   # 使用Prometheus查询历史数据
+   rate(container_memory_working_set_bytes[5m]) > 0
+   ```
+
+2. **压力测试**
+   ```bash
+   # 内存压力测试工具
+   kubectl run mem-stress --image=polinux/stress \
+     --restart=Never \
+     -- -m 1 --vm-bytes 800M --timeout 300s
+   ```
+
+3. **动态调整**
+   ```bash
+   # VPA自动调整建议
+   kubectl get vpa <vpa-name> -o jsonpath='{.status.recommendation.containerRecommendations}'
+   ```
+
+#### 4.1.2 应用层内存优化
+
+**JVM应用优化：**
+
+```bash
+# 容器感知的JVM参数
+-XX:+UseContainerSupport \
+-XX:MaxRAMPercentage=75.0 \
+-XX:InitialRAMPercentage=50.0 \
+-XX:MinRAMPercentage=25.0 \
+-Xlog:gc*:stdout:time,tags \
+-XX:+PrintCommandLineFlags
+```
+
+**Go应用优化：**
+```go
+// 内存限制感知
+func init() {
+    if limit, err := memlimit.FromCgroup(); err == nil {
+        debug.SetMemoryLimit(int64(float64(limit) * 0.9))
+    }
+}
+```
+
+#### 4.1.3 系统级内存管理优化
+
+**节点内存预留配置：**
+
+```yaml
+# kubelet配置优化
+apiVersion: v1
+kind: Node
+metadata:
+  name: worker-node
+spec:
+  kubeletConfig:
+    systemReserved:
+      memory: "2Gi"        # 系统进程预留
+    kubeReserved:
+      memory: "1Gi"        # K8s组件预留
+    evictionHard:
+      memory.available: "500Mi"    # 硬驱逐阈值
+      nodefs.available: "10%"      # 磁盘阈值
+    evictionSoft:
+      memory.available: "1Gi"       # 软驱逐阈值
+      nodefs.available: "15%"
+    evictionSoftGracePeriod:
+      memory.available: "1m30s"     # 软驱逐宽限期
+```
+
+### 4.2 Pod驱逐问题综合治理
+
+#### 4.2.1 驱逐策略优化
+
+**分层驱逐配置：**
+
+```yaml
+# 分QoS驱逐策略
+apiVersion: v1
+kind: Pod
+metadata:
+  name: critical-app
+  annotations:
+    # 关键应用保护
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+spec:
+  priorityClassName: high-priority
+  containers:
+  - name: app
+    resources:
+      requests:
+        memory: "1Gi"
+      limits:
+        memory: "2Gi"
+```
+
+**驱逐顺序控制：**
+```bash
+# 驱逐顺序验证
+kubectl describe node <node-name> | grep -A 10 "Eviction"
+```
+
+#### 4.2.2 集群容量规划
+
+**容量评估脚本：**
+```bash
+#!/bin/bash
+# cluster_capacity_check.sh
+
+echo "=== 集群内存容量分析 ==="
+
+# 节点资源统计
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.allocatable.memory}{"\t"}{.status.capacity.memory}{"\n"}{end}'
+
+# Pod内存请求汇总
+echo -e "\n=== Pod内存请求分布 ==="
+kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.spec.containers[*].resources.requests.memory}{"\n"}{end}' | \
+  grep -v '^$' | sort | uniq -c | sort -nr
+
+# 驱逐风险评估
+echo -e "\n=== 驱逐风险评估 ==="
+kubectl top nodes | awk '$4 > 85 {print "高风险节点:", $1, "内存使用率:", $4"%"}'
+```
+
+### 4.3 系统OOM防护机制
+
+#### 4.3.1 内核参数调优
+
+**系统级防护配置：**
+```bash
+# /etc/sysctl.conf 内存相关参数
+vm.overcommit_memory=1          # 允许内存超分配
+vm.overcommit_ratio=80          # 超分配比例
+vm.swappiness=1                 # 降低swap倾向
+vm.min_free_kbytes=65536        # 保留最小空闲内存
+vm.admin_reserve_kbytes=131072  # 管理员保留内存
+
+# 应用配置
+sysctl -p
+```
+
+#### 4.3.2 进程保护策略
+
+**关键进程保护：**
+```bash
+# 保护kubelet进程
+echo -999 > /proc/$(pidof kubelet)/oom_score_adj
+
+# 保护系统关键服务
+systemctl daemon-reload
+systemctl restart kubelet
+```
+
+### 4.4 监控告警与自动化响应
+
+#### 4.4.1 完整监控体系
+
+**Prometheus告警规则：**
+```yaml
+# memory_alerts.yaml
+groups:
+- name: memory.rules
+  rules:
+  - alert: ContainerMemoryUsageHigh
+    expr: (container_memory_working_set_bytes / container_spec_memory_limit_bytes * 100) > 85
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "容器内存使用率过高 {{ $labels.pod }}"
+      
+  - alert: NodeMemoryPressure
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 15
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "节点内存压力过大 {{ $labels.instance }}"
+```
+
+#### 4.4.2 自动化响应机制
+
+**自动扩容脚本：**
+```bash
+#!/bin/bash
+# auto_scale_memory.sh
+
+NAMESPACE="production"
+DEPLOYMENT="memory-intensive-app"
+
+# 检查内存使用率
+CURRENT_USAGE=$(kubectl top deployment $DEPLOYMENT -n $NAMESPACE --no-headers | awk '{print $3}' | sed 's/%//')
+
+if [ $CURRENT_USAGE -gt 80 ]; then
+    # 扩容副本数
+    kubectl scale deployment $DEPLOYMENT -n $NAMESPACE --replicas=3
+    echo "已触发自动扩容: $DEPLOYMENT"
+elif [ $CURRENT_USAGE -lt 30 ]; then
+    # 缩容副本数
+    kubectl scale deployment $DEPLOYMENT -n $NAMESPACE --replicas=1
+    echo "已触发自动缩容: $DEPLOYMENT"
+fi
+```
+
+### 4.5 故障演练与预案
+
+#### 4.5.1 模拟故障演练
+
+**OOM故障模拟：**
+```bash
+# 模拟容器内存泄漏
+kubectl run oom-test --image=busybox --restart=Never \
+  --limits=memory=100Mi \
+  -- sh -c "dd if=/dev/zero of=/tmp/test bs=1M count=200"
+
+# 监控驱逐过程
+watch -n 1 'kubectl get pods -o wide | grep oom-test'
+```
+
+#### 4.5.2 应急响应预案
+
+**分级响应流程：**
+
+1. **Level 1 - 容器OOM (5分钟内响应)**
+   - 自动重启容器
+   - 记录事件日志
+   - 通知应用负责人
+
+2. **Level 2 - Pod驱逐 (10分钟内响应)**
+   - 检查节点资源状况
+   - 调整资源配置
+   - 考虑节点扩容
+
+3. **Level 3 - 节点OOM (30分钟内响应)**
+   - 隔离故障节点
+   - 迁移关键应用
+   - 紧急扩容新节点
+
+---

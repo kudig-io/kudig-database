@@ -1,6 +1,22 @@
-# 102 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
+# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级 | **参考**: [Kubernetes Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+
+---
+
+## 相关文档交叉引用
+
+### 🔗 关联故障排查文档
+- **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点状态异常是Pod Pending的常见原因
+- **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存不足导致的Pod调度失败
+- **[14-PVC存储故障排查](./14-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
+- **[24-Quota/LimitRange故障排查](./24-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
+- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
+
+### 📚 扩展学习资料
+- **[Kubernetes调度器原理](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)** - 深入理解调度机制
+- **[Taints和Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)** - 节点污点和容忍度配置
+- **[亲和性和反亲和性](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)** - 高级调度策略
 
 ---
 

@@ -1,10 +1,10 @@
-# 162 - 证书故障排查 (Certificate Troubleshooting)
+# 13 - 证书故障排查 (Certificate Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、Kubernetes 证书体系 (Certificate Architecture)
+## 1. Kubernetes 证书体系 (Certificate Architecture)
 
 ### 1.1 证书组件总览
 
@@ -56,7 +56,7 @@
 
 ---
 
-## 二、证书过期排查 (Certificate Expiration)
+## 2. 证书过期排查 (Certificate Expiration)
 
 ### 2.1 检查证书过期时间
 
@@ -129,7 +129,7 @@ systemctl restart kubelet
 
 ---
 
-## 三、kubelet证书问题 (Kubelet Certificate Issues)
+## 3. kubelet证书问题 (Kubelet Certificate Issues)
 
 ### 3.1 kubelet证书排查
 
@@ -193,7 +193,7 @@ kubectl get csr | grep Pending | awk '{print $1}' | xargs kubectl certificate ap
 
 ---
 
-## 四、API Server 证书问题 (API Server Certificate Issues)
+## 4. API Server 证书问题 (API Server Certificate Issues)
 
 ### 4.1 常见错误
 
@@ -261,7 +261,7 @@ systemctl restart kubelet
 
 ---
 
-## 五、etcd 证书问题 (etcd Certificate Issues)
+## 5. etcd 证书问题 (etcd Certificate Issues)
 
 ### 5.1 etcd证书检查
 
@@ -306,7 +306,7 @@ systemctl restart etcd
 
 ---
 
-## 六、kubeconfig 证书问题 (kubeconfig Issues)
+## 6. kubeconfig 证书问题 (kubeconfig Issues)
 
 ### 6.1 检查kubeconfig证书
 
@@ -344,7 +344,7 @@ kubeadm certs renew controller-manager.conf
 
 ---
 
-## 七、证书问题诊断流程 (Diagnostic Flow)
+## 7. 证书问题诊断流程 (Diagnostic Flow)
 
 ### 7.1 快速诊断清单
 
@@ -382,7 +382,7 @@ journalctl -u kubelet --since "1 hour ago" | grep -i "certificate\|x509\|tls" | 
 
 ---
 
-## 八、证书监控告警 (Certificate Monitoring)
+## 8. 证书监控告警 (Certificate Monitoring)
 
 ### 8.1 Prometheus监控
 
@@ -449,7 +449,7 @@ check_cert "/var/lib/kubelet/pki/kubelet-client-current.pem" "Kubelet Client"
 
 ---
 
-## 九、命令速查 (Quick Reference)
+## 9. 命令速查 (Quick Reference)
 
 ```bash
 # === 证书检查 ===
@@ -478,6 +478,239 @@ journalctl -u kubelet | grep -i cert
 # === kubeconfig ===
 kubectl config view --raw
 kubeadm certs renew admin.conf
+```
+
+---
+
+## 4. 证书问题解决方案 (Certificate Solutions)
+
+### 4.1 证书过期解决方案
+
+#### 立即处理步骤：
+
+1. **备份当前证书**
+   ```bash
+   mkdir -p /etc/kubernetes/pki.backup.$(date +%Y%m%d)
+   cp -r /etc/kubernetes/pki/* /etc/kubernetes/pki.backup.$(date +%Y%m%d)/
+   ```
+
+2. **使用 kubeadm 重新签发证书**
+   ```bash
+   # 检查即将过期的证书
+   kubeadm certs check-expiration
+   
+   # 重新签发所有证书
+   kubeadm certs renew all
+   
+   # 或者只签发特定证书
+   kubeadm certs renew apiserver
+   kubeadm certs renew apiserver-kubelet-client
+   ```
+
+3. **重启相关组件**
+   ```bash
+   # 重启控制平面组件
+   crictl ps | grep kube-apiserver | awk '{print $1}' | xargs crictl stop
+   systemctl restart kubelet
+   
+   # 重启 kubelet
+   systemctl restart kubelet
+   ```
+
+4. **验证证书更新**
+   ```bash
+   kubeadm certs check-expiration
+   openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
+   ```
+
+#### 预防措施：
+
+1. **设置证书监控告警**
+   ```bash
+   # 创建证书检查脚本
+   cat > /usr/local/bin/check-certificates.sh << 'EOF'
+   #!/bin/bash
+   THRESHOLD_DAYS=30
+   
+   check_cert() {
+     local cert=$1
+     local days=$(openssl x509 -in $cert -noout -days-left 2>/dev/null)
+     if [ $? -eq 0 ] && [ $days -lt $THRESHOLD_DAYS ]; then
+       echo "WARNING: Certificate $cert expires in $days days"
+     fi
+   }
+   
+   find /etc/kubernetes/pki -name "*.crt" -exec check_cert {} \;
+   EOF
+   
+   chmod +x /usr/local/bin/check-certificates.sh
+   ```
+
+2. **配置自动续期**
+   ```bash
+   # 添加到 crontab
+   echo "0 2 * * * /usr/local/bin/check-certificates.sh" | crontab -
+   ```
+
+### 4.2 证书验证失败解决方案
+
+#### 常见问题处理：
+
+1. **证书链不完整**
+   ```bash
+   # 检查证书链
+   openssl verify -CAfile /etc/kubernetes/pki/ca.crt /etc/kubernetes/pki/apiserver.crt
+   
+   # 修复证书链
+   cat /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/ca.crt > /tmp/fullchain.crt
+   mv /tmp/fullchain.crt /etc/kubernetes/pki/apiserver.crt
+   ```
+
+2. **证书主题不匹配**
+   ```bash
+   # 检查证书主题
+   openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -subject
+   
+   # 重新生成带有正确SAN的证书
+   kubeadm init phase certs apiserver --cert-dir=/etc/kubernetes/pki
+   ```
+
+3. **私钥不匹配**
+   ```bash
+   # 验证私钥匹配
+   openssl x509 -noout -modulus -in /etc/kubernetes/pki/apiserver.crt | openssl md5
+   openssl rsa -noout -modulus -in /etc/kubernetes/pki/apiserver.key | openssl md5
+   
+   # 如果不匹配，需要重新生成证书对
+   rm /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.key
+   kubeadm certs renew apiserver
+   ```
+
+### 4.3 自动化证书管理脚本
+
+#### 证书健康检查脚本：
+
+```bash
+#!/bin/bash
+# certificate_health_check.sh
+
+echo "=== Kubernetes Certificate Health Check ==="
+
+# 检查控制平面证书
+echo -e "\n--- Control Plane Certificates ---"
+kubeadm certs check-expiration
+
+# 检查 kubelet 证书
+echo -e "\n--- Kubelet Certificate ---"
+if [ -f /var/lib/kubelet/pki/kubelet-client-current.pem ]; then
+  openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
+else
+  echo "Kubelet client certificate not found"
+fi
+
+# 检查 API Server 连接
+echo -e "\n--- API Server Connectivity ---"
+kubectl get --raw='/healthz?verbose' >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  echo "✓ API Server is responding"
+else
+  echo "✗ API Server connectivity issue"
+fi
+
+# 检查 etcd 证书
+echo -e "\n--- etcd Certificates ---"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  endpoint health
+```
+
+#### 证书自动续期脚本：
+
+```bash
+#!/bin/bash
+# auto_renew_certificates.sh
+
+LOG_FILE="/var/log/cert-renewal.log"
+BACKUP_DIR="/etc/kubernetes/pki.backup.$(date +%Y%m%d_%H%M%S)"
+
+# 日志函数
+log() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
+}
+
+# 备份证书
+backup_certs() {
+  log "Backing up certificates to $BACKUP_DIR"
+  mkdir -p $BACKUP_DIR
+  cp -r /etc/kubernetes/pki/* $BACKUP_DIR/
+}
+
+# 检查过期证书
+check_expiring_certs() {
+  log "Checking for expiring certificates"
+  local expiring_certs=$(kubeadm certs check-expiration | grep -E "(expires in [0-9]+ days|EXPIRED)")
+  if [ -n "$expiring_certs" ]; then
+    log "Found expiring certificates:"
+    echo "$expiring_certs" | tee -a $LOG_FILE
+    return 0
+  else
+    log "No certificates expiring soon"
+    return 1
+  fi
+}
+
+# 续期证书
+renew_certificates() {
+  log "Renewing certificates"
+  backup_certs
+  
+  # 续期所有证书
+  kubeadm certs renew all
+  
+  if [ $? -eq 0 ]; then
+    log "Certificate renewal completed successfully"
+    return 0
+  else
+    log "Certificate renewal failed"
+    return 1
+  fi
+}
+
+# 重启服务
+restart_services() {
+  log "Restarting services"
+  
+  # 重启 kubelet
+  systemctl restart kubelet
+  
+  # 重启 API Server 容器
+  crictl ps | grep kube-apiserver | awk '{print $1}' | xargs crictl stop
+  
+  log "Services restarted"
+}
+
+# 主函数
+main() {
+  log "Starting certificate renewal process"
+  
+  if check_expiring_certs; then
+    if renew_certificates; then
+      restart_services
+      log "Certificate renewal process completed"
+    else
+      log "Certificate renewal failed, restoring backup"
+      cp -r $BACKUP_DIR/* /etc/kubernetes/pki/
+      systemctl restart kubelet
+    fi
+  else
+    log "No certificate renewal needed"
+  fi
+}
+
+# 执行主函数
+main
 ```
 
 ---

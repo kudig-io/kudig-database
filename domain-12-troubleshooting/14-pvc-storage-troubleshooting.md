@@ -1,10 +1,10 @@
-# 163 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
+# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
-## 一、存储故障诊断总览 (Storage Troubleshooting Overview)
+## 1. 存储故障诊断总览 (Storage Troubleshooting Overview)
 
 ### 1.1 PVC 状态速查表
 
@@ -58,7 +58,7 @@
 
 ---
 
-## 二、PVC Pending 问题排查 (PVC Pending Diagnosis)
+## 2. PVC Pending 问题排查 (PVC Pending Diagnosis)
 
 ### 2.1 常见原因与诊断
 
@@ -157,7 +157,7 @@ kubectl patch storageclass <old-default-sc> -p '{"metadata": {"annotations":{"st
 
 ---
 
-## 三、CSI驱动故障排查 (CSI Driver Troubleshooting)
+## 3. CSI驱动故障排查 (CSI Driver Troubleshooting)
 
 ### 3.1 CSI架构检查
 
@@ -252,7 +252,7 @@ kubectl get volumeattachments -o json | jq '.items[] | select(.status.attached==
 
 ---
 
-## 四、挂载故障排查 (Mount Troubleshooting)
+## 4. 挂载故障排查 (Mount Troubleshooting)
 
 ### 4.1 Pod挂载失败诊断
 
@@ -344,7 +344,7 @@ mount <device> <mount-point>
 
 ---
 
-## 五、存储容量与扩容问题 (Storage Capacity & Expansion)
+## 5. 存储容量与扩容问题 (Storage Capacity & Expansion)
 
 ### 5.1 PVC扩容排查
 
@@ -389,7 +389,7 @@ kubectl scale deployment <deploy> --replicas=<original-count> -n <namespace>
 
 ---
 
-## 六、存储性能问题 (Storage Performance Issues)
+## 6. 存储性能问题 (Storage Performance Issues)
 
 ### 6.1 IO性能诊断
 
@@ -434,7 +434,7 @@ kubectl exec -it <pod> -- df -h /mnt/data
 
 ---
 
-## 七、快照与备份故障 (Snapshot & Backup Issues)
+## 7. 快照与备份故障 (Snapshot & Backup Issues)
 
 ### 7.1 VolumeSnapshot诊断
 
@@ -484,7 +484,7 @@ spec:
 
 ---
 
-## 八、云厂商存储问题 (Cloud Provider Storage Issues)
+## 8. 云厂商存储问题 (Cloud Provider Storage Issues)
 
 ### 8.1 阿里云ACK存储
 
@@ -559,7 +559,7 @@ gcloud compute instances describe <instance-name> --zone <zone> --format='get(di
 
 ---
 
-## 九、PV回收与数据保护 (PV Reclaim & Data Protection)
+## 9. PV回收与数据保护 (PV Reclaim & Data Protection)
 
 ### 9.1 回收策略检查
 
@@ -606,7 +606,7 @@ kubectl patch pv <pv-name> -p '{"metadata":{"finalizers":null}}'
 
 ---
 
-## 十、存储监控与告警 (Storage Monitoring & Alerting)
+## 10. 存储监控与告警 (Storage Monitoring & Alerting)
 
 ### 10.1 核心监控指标
 

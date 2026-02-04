@@ -1,4 +1,4 @@
-# 103 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
+# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
 
