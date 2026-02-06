@@ -1,6 +1,6 @@
 # 01 - API Server 故障排查 (API Server Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/)
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
 
 ---
 
@@ -11,6 +11,9 @@
 - **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 网络问题可能导致API Server无法正常通信
 - **[35-节点组件故障排查](./35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
 - **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
+- **[12-RBAC配额故障排查](./12-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
+- **[13-证书故障排查](./13-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
+- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
 
 ### 📚 扩展学习资料
 - **[Kubernetes官方文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)** - API Server详细配置参考

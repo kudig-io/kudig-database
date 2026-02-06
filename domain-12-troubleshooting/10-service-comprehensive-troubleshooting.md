@@ -1,6 +1,28 @@
 # 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Kubernetes Service官方文档](https://kubernetes.io/docs/concepts/services-networking/service/)
+
+## 🎯 本文档价值
+
+本文档专注于生产环境Service故障的系统性诊断和处理，提供：
+- **完整的故障分类体系**：从网络连通性到负载均衡的全流程覆盖
+- **实战诊断方法**：基于真实生产案例的故障分析技巧
+- **自动化工具集**：可直接使用的诊断脚本和检查清单
+- **预防性最佳实践**：避免常见Service问题的配置建议
+
+---
+
+## 相关文档交叉引用
+
+### 🔗 关联故障排查文档
+- **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 底层网络连通性问题
+- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 网络层面诊断
+- **[26-DNS故障排查](./26-dns-troubleshooting.md)** - 服务发现相关问题
+- **[15-Ingress故障排查](./15-ingress-troubleshooting.md)** - 外部访问相关问题
+
+### 📚 扩展学习资料
+- **[Kubernetes网络模型](../domain-5-networking/01-networking-architecture-overview.md)** - 理解Service网络原理
+- **[负载均衡器集成](../domain-5-networking/08-loadbalancer-cloud-provider-integration.md)** - 云提供商负载均衡配置
 
 ---
 
@@ -68,6 +90,71 @@
 | NodePort不通 | 防火墙/端口冲突 | `ss -tlnp` | 检查防火墙 |
 | LoadBalancer Pending | 云provider未配置 | `kubectl describe svc` | 配置LB provider |
 | 跨命名空间不通 | NetworkPolicy | `kubectl get netpol` | 调整策略 |
+
+### 1.3 生产环境典型场景
+
+#### 场景1：微服务架构中Service间调用失败
+```yaml
+# ❌ 问题现象
+# 微服务A无法通过Service名称访问微服务B
+
+# 🔍 诊断步骤
+# 1. 检查DNS解析
+kubectl exec -it <pod-name> -n <namespace> -- nslookup <service-name>.<namespace>.svc.cluster.local
+
+# 2. 检查网络连通性
+kubectl exec -it <pod-name> -n <namespace> -- ping <service-cluster-ip>
+
+# 3. 检查Endpoints状态
+kubectl get endpoints <service-name> -n <namespace>
+
+# ✅ 解决方案
+# 确保Service selector与Pod标签匹配
+# 检查NetworkPolicy是否阻止了流量
+# 验证Pod处于Running和Ready状态
+```
+
+#### 场景2：LoadBalancer服务长时间处于Pending状态
+```bash
+# ❌ 问题现象
+# Service类型为LoadBalancer但EXTERNAL-IP一直显示<pending>
+
+# 🔍 诊断步骤
+# 1. 检查云提供商集成状态
+kubectl describe service <service-name> -n <namespace> | grep -A10 "Events"
+
+# 2. 检查云控制器管理器日志
+kubectl logs -n kube-system -l k8s-app=kube-controller-manager
+
+# 3. 验证云凭据配置
+kubectl get secrets -n kube-system | grep cloud
+
+# ✅ 解决方案
+# 确保云提供商凭据正确配置
+# 检查云配额和权限
+# 验证网络ACL和安全组配置
+```
+
+#### 场景3：NodePort服务外部访问异常
+```bash
+# ❌ 问题现象
+# NodePort服务从外部无法访问
+
+# 🔍 诊断步骤
+# 1. 检查节点防火墙规则
+sudo iptables -L -n | grep <nodeport>
+
+# 2. 检查节点网络配置
+ip route show | grep <node-ip>
+
+# 3. 验证服务端口监听
+ss -tlnp | grep <nodeport>
+
+# ✅ 解决方案
+# 配置防火墙规则允许NodePort流量
+# 检查网络路由配置
+# 确保节点安全组开放相应端口
+```
 
 ---
 

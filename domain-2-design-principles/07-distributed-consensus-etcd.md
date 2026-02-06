@@ -1,53 +1,490 @@
 # 17 - 分布式共识与etcd原理 (Distributed Consensus & etcd)
 
-## 分布式系统基础
+## 生产环境etcd运维最佳实践
 
-| 概念 | 英文 | 说明 |
-|-----|-----|------|
-| 分布式系统 | Distributed System | 多节点协同工作的系统 |
-| 共识 | Consensus | 多节点就某个值达成一致 |
-| 一致性 | Consistency | 数据在各节点间保持一致 |
-| 可用性 | Availability | 系统持续提供服务的能力 |
-| 分区容错 | Partition Tolerance | 网络分区时仍能工作 |
+### 企业级etcd架构设计
 
-## CAP定理
-
-| 属性 | 英文 | 说明 | K8s选择 |
-|-----|-----|------|--------|
-| C | Consistency | 所有节点看到相同数据 | ✓ 优先 |
-| A | Availability | 每个请求都能得到响应 | 部分牺牲 |
-| P | Partition Tolerance | 网络分区时继续运行 | ✓ 必须 |
-
-> K8s/etcd选择CP模式: 牺牲部分可用性换取强一致性
-
-## Raft共识算法
-
-| 概念 | 说明 |
-|-----|------|
-| Leader | 领导者,处理所有写请求 |
-| Follower | 跟随者,复制Leader日志 |
-| Candidate | 候选者,选举期间的状态 |
-| Term | 任期,逻辑时钟 |
-| Log | 日志,操作记录 |
-
-### Raft状态转换
-
+#### 高可用etcd集群架构
 ```
-                    超时,开始选举
-Follower ──────────────────────────► Candidate
-    ▲                                    │
-    │                                    │
-    │ 发现更高term                       │ 获得多数票
-    │ 或收到Leader心跳                   ▼
-    └────────────────────────────── Leader
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    企业级etcd高可用架构                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  客户端层 (Client Layer)                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • API Server (多个实例)                                              │   │
+│  │ • Controller Manager                                                 │   │
+│  │ • Scheduler                                                          │   │
+│  │ • 自定义控制器                                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│           │                                                                  │
+│           ▼                                                                  │
+│  负载均衡层 (Load Balancer)                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • DNS SRV记录                                                        │   │
+│  │ • Keepalived VIP                                                     │   │
+│  │ • 外部负载均衡器                                                     │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│           │                                                                  │
+│           ▼                                                                  │
+│  etcd集群层 (etcd Cluster)                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  etcd-1 (Leader)        etcd-2 (Follower)      etcd-3 (Follower)    │   │
+│  │  ┌─────────────┐       ┌─────────────┐        ┌─────────────┐      │   │
+│  │  │   Member    │       │   Member    │        │   Member    │      │   │
+│  │  │  • WAL日志   │       │  • WAL日志   │        │  • WAL日志   │      │   │
+│  │  │  • 数据快照  │       │  • 数据快照  │        │  • 数据快照  │      │   │
+│  │  │  • 网络通信  │       │  • 网络通信  │        │  • 网络通信  │      │   │
+│  │  └─────────────┘       └─────────────┘        └─────────────┘      │   │
+│  │         │                       │                      │             │   │
+│  │         └───────────────────────┼──────────────────────┘             │   │
+│  │                                 │                                    │   │
+│  │                    ┌─────────────────────┐                           │   │
+│  │                    │   Raft共识协议       │                           │   │
+│  │                    │  • Leader选举        │                           │   │
+│  │                    │  • 日志复制          │                           │   │
+│  │                    │  • 安全性保证        │                           │   │
+│  │                    └─────────────────────┘                           │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+│  存储层 (Storage Layer)                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • 本地SSD存储                                                        │   │
+│  │ • RAID 10配置                                                        │   │
+│  │ • 定期备份策略                                                       │   │
+│  │ • 灾难恢复方案                                                       │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Raft选举过程
+### etcd性能优化配置
 
-| 阶段 | 操作 |
-|-----|------|
-| 1. 超时 | Follower选举超时,转为Candidate |
-| 2. 增加term | term+1,投票给自己 |
+#### 生产环境配置模板
+```yaml
+# etcd生产环境配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: etcd-member
+  namespace: kube-system
+spec:
+  containers:
+    - name: etcd
+      image: k8s.gcr.io/etcd:3.5.6-0
+      command:
+        - etcd
+        - --name=$(ETCD_NAME)
+        - --data-dir=/var/lib/etcd
+        - --listen-client-urls=https://0.0.0.0:2379
+        - --advertise-client-urls=https://$(ETCD_NAME):2379
+        - --listen-peer-urls=https://0.0.0.0:2380
+        - --initial-advertise-peer-urls=https://$(ETCD_NAME):2380
+        - --initial-cluster-token=etcd-cluster-1
+        - --initial-cluster=$(ETCD_INITIAL_CLUSTER)
+        - --initial-cluster-state=new
+        - --client-cert-auth=true
+        - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+        - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+        - --key-file=/etc/kubernetes/pki/etcd/server.key
+        - --peer-client-cert-auth=true
+        - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+        - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+        - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+        - --auto-compaction-mode=revision
+        - --auto-compaction-retention=1000
+        - --quota-backend-bytes=8589934592  # 8GB
+        - --heartbeat-interval=100          # 100ms
+        - --election-timeout=1000           # 1000ms
+        - --snapshot-count=10000            # 10000条日志后快照
+        - --max-request-bytes=1572864       # 1.5MB
+        - --grpc-keepalive-min-time=5s
+        - --grpc-keepalive-interval=2h
+        - --grpc-keepalive-timeout=20s
+
+      env:
+        - name: ETCD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: ETCD_INITIAL_CLUSTER
+          value: "etcd-0=https://etcd-0:2380,etcd-1=https://etcd-1:2380,etcd-2=https://etcd-2:2380"
+
+      volumeMounts:
+        - name: etcd-data
+          mountPath: /var/lib/etcd
+        - name: etcd-certs
+          mountPath: /etc/kubernetes/pki/etcd
+          readOnly: true
+
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "500m"
+        limits:
+          memory: "2Gi"
+          cpu: "1000m"
+
+      livenessProbe:
+        exec:
+          command:
+            - /bin/sh
+            - -ec
+            - ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key get foo
+        initialDelaySeconds: 15
+        timeoutSeconds: 15
+
+      readinessProbe:
+        exec:
+          command:
+            - /bin/sh
+            - -ec
+            - ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key member list
+        initialDelaySeconds: 15
+        timeoutSeconds: 15
+
+  volumes:
+    - name: etcd-data
+      hostPath:
+        path: /var/lib/etcd
+        type: DirectoryOrCreate
+    - name: etcd-certs
+      hostPath:
+        path: /etc/kubernetes/pki/etcd
+        type: DirectoryOrCreate
+```
+
+### etcd监控与告警
+
+#### 关键监控指标
+```yaml
+# etcd监控规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: etcd-monitoring-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: etcd.rules
+      rules:
+        # 集群健康状态
+        - alert: EtcdClusterUnhealthy
+          expr: up{job="etcd"} < 3
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "etcd集群不健康"
+            description: "只有 {{ $value }} 个etcd成员在线，少于所需的3个"
+
+        # 领导者变更
+        - alert: EtcdLeaderChange
+          expr: increase(etcd_server_leader_changes_seen_total[1h]) > 2
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "etcd领导者频繁变更"
+            description: "过去1小时领导者变更了 {{ $value }} 次"
+
+        # 磁盘空间
+        - alert: EtcdDiskSpaceLow
+          expr: etcd_disk_backend_commit_duration_seconds > 1
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "etcd磁盘IO延迟高"
+            description: "etcd提交延迟为 {{ $value }} 秒"
+
+        # 数据库大小
+        - alert: EtcdDatabaseSizeExceeded
+          expr: etcd_debugging_mvcc_db_total_size_in_bytes > 2147483648  # 2GB
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "etcd数据库过大"
+            description: "etcd数据库大小为 {{ $value }} 字节"
+
+        # GRPC请求延迟
+        - alert: EtcdGrpcSlow
+          expr: histogram_quantile(0.99, rate(etcd_grpc_unary_requests_duration_seconds_bucket[5m])) > 0.15
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "etcd GRPC请求缓慢"
+            description: "99%的GRPC请求延迟超过 {{ $value }} 秒"
+```
+
+#### etcd诊断脚本
+```bash
+#!/bin/bash
+# etcd生产环境诊断脚本
+
+echo "=== etcd集群诊断报告 ==="
+
+# 1. 集群成员状态
+echo "1. 集群成员状态:"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  member list -w table
+echo
+
+# 2. 集群健康检查
+echo "2. 集群健康检查:"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  endpoint health -w table
+echo
+
+# 3. 性能基准测试
+echo "3. 性能基准测试:"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  check perf
+echo
+
+# 4. 数据库大小和状态
+echo "4. 数据库状态:"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  endpoint status -w table
+echo
+
+# 5. 压缩状态检查
+echo "5. 压缩状态:"
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  get / --prefix --keys-only --limit=10
+echo
+
+# 6. 生成维护建议
+echo "6. 维护建议:"
+cat << EOF
+etcd维护建议:
+1. 定期备份: 使用etcdctl snapshot save
+2. 监控磁盘空间: 确保至少20%空闲空间
+3. 定期压缩: 清理历史版本数据
+4. 监控网络延迟: 成员间延迟应<10ms
+5. 定期更新: 跟进安全补丁和版本升级
+EOF
+```
+
+### etcd备份与恢复策略
+
+#### 自动备份配置
+```yaml
+# etcd备份CronJob
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: etcd-backup
+  namespace: kube-system
+spec:
+  schedule: "0 2 * * *"  # 每天凌晨2点
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: etcd-backup
+              image: k8s.gcr.io/etcd:3.5.6-0
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  ETCDCTL_API=3 etcdctl \
+                    --endpoints=https://etcd-client:2379 \
+                    --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+                    --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+                    --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+                    snapshot save /backup/etcd-snapshot-$(date +%Y%m%d-%H%M%S).db
+                  
+                  # 清理7天前的备份
+                  find /backup -name "etcd-snapshot-*" -mtime +7 -delete
+              
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backup
+                - name: etcd-certs
+                  mountPath: /etc/kubernetes/pki/etcd
+                  readOnly: true
+          
+          restartPolicy: OnFailure
+          
+          volumes:
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: etcd-backup-pvc
+            - name: etcd-certs
+              hostPath:
+                path: /etc/kubernetes/pki/etcd
+                type: Directory
+```
+
+#### 灾难恢复流程
+```bash
+#!/bin/bash
+# etcd灾难恢复脚本
+
+set -e
+
+BACKUP_FILE="$1"
+NEW_CLUSTER="${2:-false}"
+
+if [ -z "$BACKUP_FILE" ]; then
+    echo "用法: $0 <备份文件> [new-cluster]"
+    echo "示例: $0 /backup/etcd-snapshot-20240115-020000.db true"
+    exit 1
+fi
+
+echo "开始etcd恢复流程..."
+echo "备份文件: $BACKUP_FILE"
+echo "新建集群: $NEW_CLUSTER"
+
+# 1. 停止所有etcd实例
+echo "1. 停止etcd服务..."
+systemctl stop etcd || true
+
+# 2. 清理现有数据
+echo "2. 清理现有数据..."
+rm -rf /var/lib/etcd/member
+
+# 3. 恢复备份
+echo "3. 恢复备份数据..."
+ETCDCTL_API=3 etcdctl snapshot restore "$BACKUP_FILE" \
+  --data-dir=/var/lib/etcd \
+  --name=$(hostname) \
+  --initial-cluster=$(hostname)=https://$(hostname):2380 \
+  --initial-cluster-token=etcd-cluster-1 \
+  --initial-advertise-peer-urls=https://$(hostname):2380
+
+# 4. 如果是新建集群，更新配置
+if [ "$NEW_CLUSTER" = "true" ]; then
+    echo "4. 配置新集群..."
+    # 更新initial-cluster-state为new
+    sed -i 's/--initial-cluster-state=existing/--initial-cluster-state=new/' /etc/kubernetes/manifests/etcd.yaml
+fi
+
+# 5. 启动etcd
+echo "5. 启动etcd服务..."
+systemctl start etcd
+
+# 6. 验证恢复
+echo "6. 验证恢复状态..."
+sleep 10
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  endpoint health
+
+echo "etcd恢复完成!"
+```
+
+### etcd安全加固
+
+#### 网络安全配置
+```yaml
+# etcd网络策略
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: etcd-network-policy
+  namespace: kube-system
+spec:
+  podSelector:
+    matchLabels:
+      component: etcd
+  policyTypes:
+    - Ingress
+    - Egress
+  
+  ingress:
+    # 允许API Server访问
+    - from:
+        - podSelector:
+            matchLabels:
+              component: kube-apiserver
+      ports:
+        - protocol: TCP
+          port: 2379
+    
+    # 允许etcd成员间通信
+    - from:
+        - podSelector:
+            matchLabels:
+              component: etcd
+      ports:
+        - protocol: TCP
+          port: 2379
+        - protocol: TCP
+          port: 2380
+  
+  egress:
+    # 允许etcd成员间通信
+    - to:
+        - podSelector:
+            matchLabels:
+              component: etcd
+      ports:
+        - protocol: TCP
+          port: 2379
+        - protocol: TCP
+          port: 2380
+```
+
+#### 证书管理最佳实践
+```bash
+#!/bin/bash
+# etcd证书轮换脚本
+
+# 备份当前证书
+cp -r /etc/kubernetes/pki/etcd /etc/kubernetes/pki/etcd.backup.$(date +%Y%m%d)
+
+# 生成新证书
+openssl genrsa -out /etc/kubernetes/pki/etcd/server.key 2048
+openssl req -new -key /etc/kubernetes/pki/etcd/server.key -out /etc/kubernetes/pki/etcd/server.csr -subj "/CN=etcd-server"
+openssl x509 -req -in /etc/kubernetes/pki/etcd/server.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out /etc/kubernetes/pki/etcd/server.crt -days 365
+
+# 重启etcd
+systemctl restart etcd
+
+# 验证证书
+openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout
+```
+
+### 最佳实践总结
+
+#### 生产环境部署要点
+1. **硬件要求**：专用SSD存储，至少4核CPU，8GB内存
+2. **网络要求**：低延迟网络(<10ms)，带宽充足
+3. **集群规模**：奇数个节点(3,5,7)，避免偶数
+4. **备份策略**：每日全量备份，保留30天
+5. **监控告警**：关键指标全覆盖，设置合理阈值
+6. **安全配置**：启用TLS，网络策略限制，定期证书轮换
+
+#### 性能调优建议
+1. **磁盘优化**：使用SSD，RAID 10配置
+2. **参数调优**：根据负载调整心跳和选举超时
+3. **压缩策略**：定期自动压缩，控制数据库大小
+4. **资源限制**：合理设置CPU和内存限制
+5. **网络优化**：就近部署，减少网络延迟
 | 3. 请求投票 | 向其他节点发送RequestVote |
 | 4. 收集选票 | 等待多数派响应 |
 | 5a. 当选 | 获得多数票,成为Leader |

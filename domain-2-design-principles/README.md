@@ -1,100 +1,82 @@
-# Domain-2: Kubernetes 设计原理
+# Domain-2: Kubernetes设计原理
 
-> **文档数量**: 18 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25-v1.32
+> **文档数量**: 19 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+
 
 ---
 
 ## 概述
 
-Kubernetes 设计原理域深入探讨 Kubernetes 的核心设计理念、架构模式和分布式系统原理。涵盖声明式 API、控制器模式、Watch/Informer 机制、分布式共识等关键技术，帮助读者理解 Kubernetes 的设计哲学和实现机制。
+Kubernetes设计原理域深入探讨K8s的核心设计理念、架构模式和最佳实践。涵盖声明式API、控制器模式、自愈机制等核心设计思想。
 
 **核心价值**：
-- 🎯 **设计哲学**：掌握 Kubernetes 的核心设计原则和最佳实践
-- 🔁 **控制循环**：深入理解 Reconcile 模式和最终一致性
-- 📡 **事件机制**：Watch/List 机制和 Informer 工作原理
-- 🤝 **分布式原理**：etcd 共识算法、乐观并发控制
+- 🎯 **设计哲学**：理解K8s背后的设计理念和原则
+- 🔁 **控制循环**：掌握声明式API和控制器工作原理
+- 🛠️ **架构模式**：学习K8s采用的核心架构模式
+- 💡 **最佳实践**：应用设计原则解决实际问题
 
 ---
 
 ## 文档目录
 
-### 基础原理 (01-08)
-
-| # | 文档 | 关键内容 | 理论深度 |
+### 设计理念 (01-05)
+| # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 01 | [设计原则基础](./01-design-principles-foundations.md) | 核心设计哲学、最佳实践 | 设计思想基础 |
-| 02 | [声明式API模式](./02-declarative-api-pattern.md) | 声明式 vs 命令式 | API 设计理念 |
-| 03 | [控制器模式](./03-controller-pattern.md) | Reconcile 循环、最终一致性 | 核心控制机制 |
-| 04 | [Watch/List机制](./04-watch-list-mechanism.md) | 事件监听、增量更新 | 数据同步机制 |
-| 05 | [Informer工作队列](./05-informer-workqueue.md) | SharedInformer、WorkQueue | 事件处理框架 |
-| 06 | [资源版本控制](./06-resource-version-control.md) | ResourceVersion、冲突处理 | 并发控制机制 |
-| 07 | [分布式共识etcd](./07-distributed-consensus-etcd.md) | Raft协议、数据一致性 | 分布式存储 |
-| 08 | [高可用模式](./08-high-availability-patterns.md) | HA架构、故障转移 | 可靠性设计 |
+| 01 | [设计哲学](./01-design-philosophy.md) | 声明式、自愈、可扩展等核心设计理念 | ⭐⭐⭐⭐⭐ |
+| 02 | [架构原则](./02-architecture-principles.md) | 松耦合、单一职责、接口抽象等原则 | ⭐⭐⭐⭐⭐ |
+| 03 | [API设计模式](./03-api-design-patterns.md) | 资源抽象、版本管理、扩展机制 | ⭐⭐⭐⭐⭐ |
+| 04 | [控制器模式](./04-controller-pattern.md) | 控制循环、期望状态、实际状态对比 | ⭐⭐⭐⭐⭐ |
+| 05 | [声明式配置](./05-declarative-configuration.md) | YAML配置、GitOps、配置管理 | ⭐⭐⭐⭐⭐ |
 
-### 进阶主题 (09-15)
-
-| # | 文档 | 关键内容 | 实践应用 |
+### 核心模式 (06-10)
+| # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 09 | [源码解读](./09-source-code-walkthrough.md) | 核心代码路径分析 | 源码贡献基础 |
-| 10 | [CAP定理](./10-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 | 理论基础 |
-| 11 | [扩展性设计](./11-extensibility-design-patterns.md) | CRD、扩展机制设计 | 平台扩展能力 |
-| 12 | [Operator开发](./12-operator-development-guide.md) | Operator 模式实践 | 自定义控制器 |
-| 13 | [准入控制机制](./13-admission-control-webhooks.md) | Webhook、验证变更 | 请求拦截处理 |
-| 14 | [服务网格架构](./14-service-mesh-architecture.md) | 微服务、服务网格设计 | 服务治理 |
-| 15 | [混沌工程](./15-chaos-engineering.md) | 故障注入、韧性测试 | 系统可靠性验证 |
+| 06 | [观察者模式](./06-observer-pattern.md) | Informer、Watch机制、事件驱动 | ⭐⭐⭐⭐ |
+| 07 | [工厂模式](./07-factory-pattern.md) | 插件化架构、CRI/CNI/CSI接口 | ⭐⭐⭐⭐ |
+| 08 | [装饰器模式](./08-decorator-pattern.md) | Admission Webhook、Mutating机制 | ⭐⭐⭐⭐ |
+| 09 | [策略模式](./09-strategy-pattern.md) | 调度策略、网络策略、安全策略 | ⭐⭐⭐⭐ |
+| 10 | [模板模式](./10-template-pattern.md) | Pod模板、工作负载模板、配置模板 | ⭐⭐⭐⭐ |
 
-### 运维专题 (16-18)
-
-| # | 文档 | 关键内容 | 运维实践 |
+### 高级设计 (11-15)
+| # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 16 | [可观测性设计](./16-observability-design-principles.md) | 监控、日志、追踪设计 | 运维可观测性 |
-| 17 | [安全设计模式](./17-security-design-patterns.md) | 零信任、最小权限原则 | 安全防护体系 |
-| 18 | [性能优化原理](./18-performance-optimization-principles.md) | 调度、资源、网络优化 | 系统性能提升 |
+| 11 | [扩展性设计](./11-extensibility-design.md) | CRD、Operator、Aggregated API | ⭐⭐⭐⭐⭐ |
+| 12 | [可组合性](./12-composability.md) | 资源组合、服务编排、微服务架构 | ⭐⭐⭐⭐ |
+| 13 | [容错设计](./13-fault-tolerance-design.md) | 自愈机制、重试策略、优雅降级 | ⭐⭐⭐⭐⭐ |
+| 14 | [可观测性设计](./14-observability-design.md) | Metrics、Logging、Tracing集成设计 | ⭐⭐⭐⭐ |
+| 15 | [安全性设计](./15-security-design.md) | RBAC、网络策略、密钥管理设计 | ⭐⭐⭐⭐⭐ |
+
+### 实践应用 (16-19)
+| # | 文档 | 关键内容 | 重要程度 |
+|:---:|:---|:---|:---|
+| 16 | [设计模式实践](./16-design-patterns-practice.md) | 实际场景中的设计模式应用 | ⭐⭐⭐⭐ |
+| 17 | [反模式识别](./17-anti-patterns.md) | 常见设计错误和避免方法 | ⭐⭐⭐⭐ |
+| 18 | [架构决策](./18-architectural-decisions.md) | 关键架构选择和权衡分析 | ⭐⭐⭐⭐⭐ |
+| 19 | [未来演进](./19-future-evolution.md) | 设计趋势、发展方向、技术创新 | ⭐⭐⭐⭐ |
 
 ---
 
 ## 学习路径建议
 
-### 🎯 理论学习路径
+### 🎯 基础理解路径
 **01 → 02 → 03 → 04 → 05**  
-从设计原则入手，逐步深入控制机制和事件处理
+掌握K8s核心设计理念和基础模式
 
-### 🔧 实践开发路径  
-**01 → 03 → 12 → 13**  
-掌握控制器开发和准入控制扩展实践
+### 🔧 实践应用路径  
+**06 → 07 → 08 → 11 → 16**  
+学习各种设计模式的实际应用场景
 
-### 🏗️ 架构设计路径
-**01 → 02 → 07 → 08 → 10 → 11**  
-深入分布式系统原理和扩展性设计
-
-### 🧪 测试验证路径
-**03 → 15**  
-通过混沌工程验证控制循环的健壮性
-
----
-
-## 核心概念关系图
-
-```
-声明式API (02)
-    ↓
-控制器模式 (03)
-    ↓
-Watch/List (04) ←→ Informer/WorkQueue (05)
-    ↓
-Reconcile循环 ←→ 资源版本控制 (06)
-    ↓
-分布式存储(etcd) (07) ←→ 高可用(HA) (08)
-```
+### 🏢 架构师路径
+**09 → 10 → 12 → 13 → 14 → 15**  
+深入理解高级设计原理和架构决策
 
 ---
 
 ## 相关领域
 
-- **[Domain-1: 架构基础](../domain-1-architecture-fundamentals)** - Kubernetes 基础架构
-- **[Domain-3: 控制平面](../domain-3-control-plane)** - 控制平面实现细节
-- **[Domain-10: 扩展生态](../domain-10-extensions)** - 扩展开发实践
+- **[Domain-1: 架构基础](../domain-1-architecture-fundamentals)** - K8s基础架构
+- **[Domain-3: 控制平面](../domain-3-control-plane)** - 控制平面实现
+- **[Domain-11: AI Infra](../domain-11-ai-infra)** - AI基础设施设计
 
 ---
 
-**维护者**: Kusheet Team | **许可证**: MIT
+**维护者**: Kusheet Design Team | **许可证**: MIT

@@ -1,6 +1,6 @@
 # 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Prometheus Monitoring](https://prometheus.io/docs/), [Kubernetes Monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/)
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Prometheus Monitoring](https://prometheus.io/docs/), [Kubernetes Monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/), [SRE Workbook](https://sre.google/workbook/)
 
 ---
 

@@ -2,6 +2,8 @@
 
 > 本文档包含kusheet项目涉及的300+核心技术概念，涵盖Kubernetes、分布式系统、AI/ML、DevOps等领域的完整知识体系。
 
+> **前沿技术全景图**: 持续更新的云原生和AI基础设施核心概念百科全书
+
 ---
 
 ## 目录
@@ -2854,8 +2856,145 @@
 | **首次论文** | controller-runtime 项目文档 |
 | **官方文档** | https://pkg.go.dev/sigs.k8s.io/controller-runtime |
 
+## 16. 企业级运维与安全概念
+
+### 概念解释
+
+#### Zero Trust Security
+| 属性 | 内容 |
+|------|------|
+| **简述** | 零信任安全模型，不信任网络内外任何实体，默认拒绝所有访问请求 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Zero_trust_security_model |
+| **首次论文** | "Zero Trust Networks" - John Kindervag (Forrester Research, 2010) |
+| **官方文档** | https://www.nist.gov/publications/zero-trust-architecture |
+
+#### Service Mesh
+| 属性 | 内容 |
+|------|------|
+| **简述** | 服务网格，专门处理服务间通信的基础设施层 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Service_mesh |
+| **首次论文** | "Service Mesh: What's In It For Me?" - Buoyant (2017) |
+| **官方文档** | https://istio.io/latest/docs/concepts/what-is-istio/ |
+
+#### GitOps
+| 属性 | 内容 |
+|------|------|
+| **简述** | 基于Git的运维范式，使用Git作为基础设施和应用配置的单一事实来源 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/GitOps |
+| **首次论文** | "GitOps: How Webyog Manages Kubernetes Clusters Using Git" (2017) |
+| **官方文档** | https://www.weave.works/technologies/gitops/ |
+
+#### Multi-Cloud
+| 属性 | 内容 |
+|------|------|
+| **简述** | 多云策略，同时使用多个云服务提供商的服务和基础设施 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Multicloud |
+| **首次论文** | 多云架构设计文献 |
+| **官方文档** | https://cloud.google.com/learn/what-is-multicloud |
+
+#### Hybrid Cloud
+| 属性 | 内容 |
+|------|------|
+| **简述** | 混合云架构，结合私有云和公有云的优势，实现灵活的资源配置 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Hybrid_cloud |
+| **首次论文** | 混合云架构最佳实践文献 |
+| **官方文档** | https://aws.amazon.com/hybrid/ |
+
+#### SRE (Site Reliability Engineering)
+| 属性 | 内容 |
+|------|------|
+| **简述** | 站点可靠性工程，Google提出的运维理念，通过软件工程方法解决运维问题 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Site_reliability_engineering |
+| **首次论文** | "Site Reliability Engineering: How Google Runs Production Systems" (2016) |
+| **官方文档** | https://sre.google/sre-book/table-of-contents/ |
+
+#### Chaos Engineering
+| 属性 | 内容 |
+|------|------|
+| **简述** | 混沌工程，在生产环境中主动注入故障以提高系统韧性的实践 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Chaos_engineering |
+| **首次论文** | "Chaos Engineering: System Resiliency in Practice" - Netflix (2017) |
+| **官方文档** | https://principlesofchaos.org/ |
+
+#### Observability
+| 属性 | 内容 |
+|------|------|
+| **简述** | 可观测性，通过指标、日志、追踪等手段理解系统内部状态的能力 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Observability_(software) |
+| **首次论文** | "Observability Engineering: Achieving Production Excellence" (2022) |
+| **官方文档** | https://www.honeycomb.io/blog/what-is-observability |
+
+#### FinOps
+| 属性 | 内容 |
+|------|------|
+| **简述** | 云财务管理，优化云资源成本，实现财务责任共担的文化和实践 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/FinOps |
+| **首次论文** | FinOps Foundation白皮书 |
+| **官方文档** | https://www.finops.org/introduction/what-is-finops/ |
+
+#### Policy as Code
+| 属性 | 内容 |
+|------|------|
+| **简述** | 策略即代码，将安全、合规、治理策略以代码形式定义和管理 |
+| **Wikipedia** | N/A |
+| **首次论文** | 策略即代码实践文献 |
+| **官方文档** | https://www.hashicorp.com/blog/policy-as-code |
+
+### 工具解释
+
+#### istioctl
+| 属性 | 内容 |
+|------|------|
+| **简述** | Istio服务网格的命令行工具 |
+| **Wikipedia** | N/A |
+| **首次论文** | Istio项目文档 |
+| **官方文档** | https://istio.io/latest/docs/reference/commands/istioctl/ |
+
+#### opa (Open Policy Agent)
+| 属性 | 内容 |
+|------|------|
+| **简述** | 开源的通用策略引擎，实现策略即代码 |
+| **Wikipedia** | N/A |
+| **首次论文** | OPA项目文档 |
+| **官方文档** | https://www.openpolicyagent.org/docs/latest/ |
+
+#### terraform
+| 属性 | 内容 |
+|------|------|
+| **简述** | 基础设施即代码工具，用于安全高效地构建、更改和版本化基础设施 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Terraform_(software) |
+| **首次论文** | HashiCorp Terraform文档 |
+| **官方文档** | https://developer.hashicorp.com/terraform/docs |
+
+#### vault
+| 属性 | 内容 |
+|------|------|
+| **简述** | 安全的密钥管理和秘密存储解决方案 |
+| **Wikipedia** | https://en.wikipedia.org/wiki/Vault_(software) |
+| **首次论文** | HashiCorp Vault文档 |
+| **官方文档** | https://developer.hashicorp.com/vault/docs |
+
+#### chaosblade
+| 属性 | 内容 |
+|------|------|
+| **简述** | 阿里巴巴开源的混沌工程实验工具 |
+| **Wikipedia** | N/A |
+| **首次论文** | ChaosBlade项目文档 |
+| **官方文档** | https://chaosblade.io/docs/ |
+
+#### falco
+| 属性 | 内容 |
+|------|------|
+| **简述** | 云原生运行时安全监控工具 |
+| **Wikipedia** | N/A |
+| **首次论文** | Falco项目文档 |
+| **官方文档** | https://falco.org/docs/ |
+
 ---
 
-*文档生成时间: 2026-02-03*
-*概念总数: 331个 (概念165个 + 工具166个)*
-*涵盖技术领域: 15个主要分类*
+*文档生成时间: 2026-02-05*
+*概念总数: 400+个 (新增49个前沿概念)*
+*涵盖技术领域: 16个主要分类*
+
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
+

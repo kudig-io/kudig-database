@@ -1165,8 +1165,719 @@ kind delete cluster --name mysql-operator-test
 echo "✅ 集成测试完成!"
 ```
 
----
-**Operator开发原则**: 控制器模式、声明式API、最终一致性、可观测性
+## Operator企业级生产实践
+
+### 1. 高可用部署架构
+
+```yaml
+# 高可用Operator部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-operator-controller-manager
+  namespace: mysql-operator-system
+spec:
+  replicas: 3  # 多副本实现高可用
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      serviceAccountName: mysql-operator-controller-manager
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: manager
+        image: mysql-operator:v1.0.0
+        imagePullPolicy: IfNotPresent
+        command:
+        - /manager
+        args:
+        - --leader-elect  # 启用领导者选举
+        - --leader-election-id=mysql-operator
+        - --health-probe-bind-address=:8081
+        - --metrics-bind-address=:8080
+        - --zap-devel=true
+        - --zap-encoder=console
+        - --zap-stacktrace-level=error
+        ports:
+        - containerPort: 8080
+          name: metrics
+          protocol: TCP
+        - containerPort: 8081
+          name: health
+          protocol: TCP
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
 
 ---
-**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
+# 领导者选举配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-operator-config
+  namespace: mysql-operator-system
+data:
+  controller_manager_config.yaml: |
+    apiVersion: controller-runtime.sigs.k8s.io/v1alpha1
+    kind: ControllerManagerConfig
+    health:
+      healthProbeBindAddress: :8081
+    metrics:
+      bindAddress: :8080
+    leaderElection:
+      leaderElect: true
+      resourceName: mysql-operator-lock
+      resourceNamespace: mysql-operator-system
+    webhook:
+      port: 9443
+```
+
+### 2. 生产级监控与告警
+
+```go
+// metrics.go - 生产级指标定义
+package metrics
+
+import (
+    "github.com/prometheus/client_golang/prometheus"
+    "sigs.k8s.io/controller-runtime/pkg/metrics"
+)
+
+var (
+    // Operator核心指标
+    OperatorReconcileTotal = prometheus.NewCounterVec(
+        prometheus.CounterOpts{
+            Name: "mysql_operator_reconcile_total",
+            Help: "Total number of reconciliations per controller",
+        },
+        []string{"controller", "result"},
+    )
+    
+    OperatorReconcileErrors = prometheus.NewCounterVec(
+        prometheus.CounterOpts{
+            Name: "mysql_operator_reconcile_errors_total",
+            Help: "Total number of reconciliation errors per controller",
+        },
+        []string{"controller"},
+    )
+    
+    OperatorReconcileDuration = prometheus.NewHistogramVec(
+        prometheus.HistogramOpts{
+            Name:    "mysql_operator_reconcile_duration_seconds",
+            Help:    "Reconciliation duration in seconds",
+            Buckets: prometheus.ExponentialBuckets(0.001, 2, 15),
+        },
+        []string{"controller"},
+    )
+    
+    // 业务指标
+    MySQLClustersManaged = prometheus.NewGauge(
+        prometheus.GaugeOpts{
+            Name: "mysql_clusters_managed_total",
+            Help: "Total number of MySQL clusters managed by the operator",
+        },
+    )
+    
+    MySQLClusterStatus = prometheus.NewGaugeVec(
+        prometheus.GaugeOpts{
+            Name: "mysql_cluster_status",
+            Help: "Current status of MySQL clusters",
+        },
+        []string{"cluster", "namespace", "status"},
+    )
+    
+    MySQLBackupSuccessRate = prometheus.NewGaugeVec(
+        prometheus.GaugeOpts{
+            Name: "mysql_backup_success_rate",
+            Help: "Backup success rate for MySQL clusters",
+        },
+        []string{"cluster", "namespace"},
+    )
+)
+
+func init() {
+    // 注册指标
+    metrics.Registry.MustRegister(
+        OperatorReconcileTotal,
+        OperatorReconcileErrors,
+        OperatorReconcileDuration,
+        MySQLClustersManaged,
+        MySQLClusterStatus,
+        MySQLBackupSuccessRate,
+    )
+}
+
+// RecordReconcileMetrics 记录协调指标
+func RecordReconcileMetrics(controller string, err error, duration float64) {
+    result := "success"
+    if err != nil {
+        result = "error"
+        OperatorReconcileErrors.WithLabelValues(controller).Inc()
+    }
+    
+    OperatorReconcileTotal.WithLabelValues(controller, result).Inc()
+    OperatorReconcileDuration.WithLabelValues(controller).Observe(duration)
+}
+```
+
+### 3. 安全加固配置
+
+```yaml
+# 安全强化的RBAC配置
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mysql-operator-controller-manager
+  namespace: mysql-operator-system
+automountServiceAccountToken: false  # 禁用自动挂载
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mysql-operator-leader-election-role
+  namespace: mysql-operator-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+
+---
+# 最小权限的ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mysql-operator-manager-role
+rules:
+# CRD资源权限
+- apiGroups:
+  - database.example.com
+  resources:
+  - mysqlclusters
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - database.example.com
+  resources:
+  - mysqlclusters/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - database.example.com
+  resources:
+  - mysqlclusters/status
+  verbs:
+  - get
+  - patch
+  - update
+
+# 核心Kubernetes资源权限（最小化）
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - configmaps
+  - secrets
+  - persistentvolumeclaims
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+```
+
+### 4. 故障自愈与弹性设计
+
+```go
+// resilience.go - 弹性设计和故障自愈
+package resilience
+
+import (
+    "context"
+    "fmt"
+    "time"
+    
+    "k8s.io/apimachinery/pkg/api/errors"
+    "k8s.io/apimachinery/pkg/runtime"
+    "k8s.io/client-go/util/retry"
+    ctrl "sigs.k8s.io/controller-runtime"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+    "sigs.k8s.io/controller-runtime/pkg/log"
+)
+
+// CircuitBreaker 熔断器模式
+type CircuitBreaker struct {
+    failureThreshold int
+    timeout          time.Duration
+    lastFailure      time.Time
+    failureCount     int
+    isOpen           bool
+}
+
+func NewCircuitBreaker(threshold int, timeout time.Duration) *CircuitBreaker {
+    return &CircuitBreaker{
+        failureThreshold: threshold,
+        timeout:          timeout,
+        isOpen:           false,
+    }
+}
+
+func (cb *CircuitBreaker) Execute(fn func() error) error {
+    if cb.isOpen && time.Since(cb.lastFailure) < cb.timeout {
+        return fmt.Errorf("circuit breaker is open")
+    }
+    
+    err := fn()
+    if err != nil {
+        cb.failureCount++
+        cb.lastFailure = time.Now()
+        if cb.failureCount >= cb.failureThreshold {
+            cb.isOpen = true
+        }
+        return err
+    }
+    
+    // 成功执行，重置熔断器
+    cb.failureCount = 0
+    cb.isOpen = false
+    return nil
+}
+
+// RetryableReconciler 支持重试的协调器
+type RetryableReconciler struct {
+    client.Client
+    Scheme *runtime.Scheme
+    circuitBreaker *CircuitBreaker
+}
+
+func (r *RetryableReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    log := log.FromContext(ctx)
+    
+    // 使用熔断器保护关键操作
+    err := r.circuitBreaker.Execute(func() error {
+        return r.performReconciliation(ctx, req)
+    })
+    
+    if err != nil {
+        // 记录错误并安排重试
+        log.Error(err, "Reconciliation failed")
+        
+        // 对于瞬时错误，安排快速重试
+        if r.isTransientError(err) {
+            return ctrl.Result{RequeueAfter: 30 * time.Second}, nil
+        }
+        
+        // 对于永久错误，记录但不重试
+        if r.isPermanentError(err) {
+            log.Error(err, "Permanent error, will not retry")
+            return ctrl.Result{}, nil
+        }
+        
+        // 其他错误，使用指数退避重试
+        return ctrl.Result{RequeueAfter: time.Minute}, nil
+    }
+    
+    return ctrl.Result{}, nil
+}
+
+func (r *RetryableReconciler) performReconciliation(ctx context.Context, req ctrl.Request) error {
+    // 使用retry包处理乐观锁冲突
+    return retry.RetryOnConflict(retry.DefaultRetry, func() error {
+        // 获取最新资源状态
+        instance := &databasev1beta1.MySQLCluster{}
+        if err := r.Get(ctx, req.NamespacedName, instance); err != nil {
+            if errors.IsNotFound(err) {
+                return nil // 资源已删除
+            }
+            return err
+        }
+        
+        // 执行业务逻辑
+        return r.reconcileInstance(ctx, instance)
+    })
+}
+
+func (r *RetryableReconciler) isTransientError(err error) bool {
+    // 定义瞬时错误类型
+    transientErrors := []string{
+        "connection refused",
+        "timeout",
+        "temporary failure",
+    }
+    
+    for _, msg := range transientErrors {
+        if strings.Contains(err.Error(), msg) {
+            return true
+        }
+    }
+    return false
+}
+
+func (r *RetryableReconciler) isPermanentError(err error) bool {
+    // 定义永久错误类型
+    return errors.IsInvalid(err) || errors.IsBadRequest(err)
+}
+```
+
+### 5. 生产环境部署脚本
+
+```bash
+#!/bin/bash
+# production-operator-deploy.sh
+
+set -euo pipefail
+
+OPERATOR_NAME="mysql-operator"
+NAMESPACE="mysql-operator-system"
+VERSION="v1.0.0"
+REGISTRY="myregistry.com/operators"
+
+# 颜色输出
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+log() {
+    echo -e "${GREEN}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
+}
+
+warn() {
+    echo -e "${YELLOW}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
+}
+
+error() {
+    echo -e "${RED}[$(date +'%Y-%m-%d %H:%M:%S')] $1${NC}"
+}
+
+# 1. 环境预检
+preflight_check() {
+    log "🔍 执行环境预检..."
+    
+    # 检查kubectl
+    if ! command -v kubectl &> /dev/null; then
+        error "kubectl 未安装"
+        exit 1
+    fi
+    
+    # 检查集群连接
+    if ! kubectl cluster-info &> /dev/null; then
+        error "无法连接到Kubernetes集群"
+        exit 1
+    fi
+    
+    # 检查权限
+    if ! kubectl auth can-i create namespace &> /dev/null; then
+        error "缺少创建命名空间权限"
+        exit 1
+    fi
+    
+    log "✅ 环境预检通过"
+}
+
+# 2. 准备部署环境
+prepare_environment() {
+    log "🔧 准备部署环境..."
+    
+    # 创建命名空间
+    kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+    
+    # 创建必要的Secrets
+    if [ ! -f "secrets.yaml" ]; then
+        warn "未找到secrets.yaml文件，跳过密钥创建"
+    else
+        kubectl apply -f secrets.yaml -n ${NAMESPACE}
+    fi
+    
+    # 创建ConfigMaps
+    if [ ! -f "config.yaml" ]; then
+        warn "未找到config.yaml文件，使用默认配置"
+    else
+        kubectl create configmap ${OPERATOR_NAME}-config \
+            --from-file=config.yaml \
+            -n ${NAMESPACE} \
+            --dry-run=client -o yaml | kubectl apply -f -
+    fi
+    
+    log "✅ 环境准备完成"
+}
+
+# 3. 部署CRD
+deploy_crds() {
+    log "📦 部署CRD..."
+    
+    # 备份现有CRD
+    if kubectl get crd mysqlclusters.database.example.com &> /dev/null; then
+        log "💾 备份现有CRD..."
+        kubectl get crd mysqlclusters.database.example.com -o yaml > backup-crd-$(date +%Y%m%d-%H%M%S).yaml
+    fi
+    
+    # 部署新CRD
+    kubectl apply -f config/crd/bases/
+    
+    # 等待CRD就绪
+    log "⏳ 等待CRD注册完成..."
+    until kubectl get crd mysqlclusters.database.example.com &> /dev/null; do
+        sleep 2
+    done
+    
+    log "✅ CRD部署完成"
+}
+
+# 4. 部署Operator
+deploy_operator() {
+    log "🚀 部署Operator..."
+    
+    # 构建和推送镜像
+    if [ "${SKIP_BUILD:-false}" = "false" ]; then
+        log "🏗️  构建Operator镜像..."
+        make docker-build IMG=${REGISTRY}/${OPERATOR_NAME}:${VERSION}
+        make docker-push IMG=${REGISTRY}/${OPERATOR_NAME}:${VERSION}
+    fi
+    
+    # 生成部署清单
+    log "📋 生成部署清单..."
+    kustomize build config/default > deploy.yaml
+    
+    # 替换镜像地址
+    sed -i.bak "s|controller:latest|${REGISTRY}/${OPERATOR_NAME}:${VERSION}|g" deploy.yaml
+    
+    # 部署Operator
+    kubectl apply -f deploy.yaml
+    
+    # 等待部署就绪
+    log "⏳ 等待Operator就绪..."
+    kubectl wait --for=condition=available \
+        deployment/${OPERATOR_NAME}-controller-manager \
+        -n ${NAMESPACE} \
+        --timeout=300s
+    
+    log "✅ Operator部署完成"
+}
+
+# 5. 健康检查
+health_check() {
+    log "🏥 执行健康检查..."
+    
+    # 检查Pod状态
+    kubectl get pods -n ${NAMESPACE}
+    
+    # 检查Leader选举
+    kubectl get leases -n ${NAMESPACE}
+    
+    # 检查Metrics端点
+    kubectl port-forward service/${OPERATOR_NAME}-controller-manager-metrics-service 8080:8080 -n ${NAMESPACE} &
+    PORT_FORWARD_PID=$!
+    sleep 5
+    
+    if curl -s http://localhost:8080/metrics | grep -q "mysql_operator"; then
+        log "✅ Metrics端点正常"
+    else
+        warn "❌ Metrics端点异常"
+    fi
+    
+    # 清理端口转发
+    kill ${PORT_FORWARD_PID} 2>/dev/null || true
+    
+    # 测试CRD功能
+    log "🧪 测试CRD功能..."
+    cat <<EOF | kubectl apply -f -
+apiVersion: database.example.com/v1beta1
+kind: MySQLCluster
+metadata:
+  name: test-cluster
+  namespace: ${NAMESPACE}
+spec:
+  replicas: 1
+  storage:
+    size: "5Gi"
+EOF
+    
+    sleep 30
+    if kubectl get mysqlcluster test-cluster -n ${NAMESPACE} &> /dev/null; then
+        log "✅ CRD功能测试通过"
+        kubectl delete mysqlcluster test-cluster -n ${NAMESPACE}
+    else
+        warn "❌ CRD功能测试失败"
+    fi
+    
+    log "✅ 健康检查完成"
+}
+
+# 6. 设置监控告警
+setup_monitoring() {
+    log "📊 设置监控告警..."
+    
+    # 创建ServiceMonitor
+    cat <<EOF | kubectl apply -f -
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ${OPERATOR_NAME}
+  namespace: ${NAMESPACE}
+spec:
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  endpoints:
+  - port: metrics
+    interval: 30s
+EOF
+    
+    # 创建告警规则
+    cat <<EOF | kubectl apply -f -
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ${OPERATOR_NAME}-alerts
+  namespace: ${NAMESPACE}
+spec:
+  groups:
+  - name: ${OPERATOR_NAME}.rules
+    rules:
+    - alert: OperatorDown
+      expr: absent(up{job="${OPERATOR_NAME}-controller-manager"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Operator不可用"
+        
+    - alert: HighReconciliationErrors
+      expr: rate(mysql_operator_reconcile_errors_total[5m]) > 0.1
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Operator协调错误率过高"
+EOF
+    
+    log "✅ 监控告警设置完成"
+}
+
+# 主函数
+main() {
+    log "🚀 开始${OPERATOR_NAME}生产环境部署"
+    log "版本: ${VERSION}"
+    log "命名空间: ${NAMESPACE}"
+    log "镜像仓库: ${REGISTRY}"
+    echo "========================================"
+    
+    preflight_check
+    prepare_environment
+    deploy_crds
+    deploy_operator
+    health_check
+    setup_monitoring
+    
+    log "🎉 ${OPERATOR_NAME}生产环境部署完成!"
+    log "部署时间: $(date)"
+}
+
+# 错误处理
+trap 'error "部署过程中发生错误，请检查日志"' ERR
+
+# 执行主函数
+main "$@"
+```

@@ -1,6 +1,6 @@
 # Domain-11: AI基础设施
 
-> **文档数量**: 30 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25-v1.32 + AI/ML Stack
+> **文档数量**: 36 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25-v1.32 + AI/ML Stack | **质量等级**: 专家级
 
 ---
 
@@ -58,15 +58,20 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 | 24 | [LLM版本管理](./24-llm-model-versioning.md) | 模型版本控制、AB测试、灰度发布 | 版本管理 |
 | 25 | [LLM可观测性](./25-llm-observability.md) | 大模型监控、Prompt追踪、生成质量评估 | 大模型监控 |
 
-### 成本与可持续 (26-30)
+### 平台治理与运营 (26-35)
 
-| # | 文档 | 关键内容 | 成本优化 |
+| # | 文档 | 关键内容 | 治理运营 |
 |:---:|:---|:---|:---|
 | 26 | [成本优化概览](./26-cost-optimization-overview.md) | AI成本优化策略、资源配置、预算管理 | 成本策略 |
 | 27 | [Kubecost管理](./27-cost-management-kubecost.md) | Kubecost配置、成本分析、优化建议 | 成本工具 |
 | 28 | [绿色计算](./28-green-computing-sustainability.md) | 绿色AI、能耗优化、可持续发展 | 可持续性 |
 | 29 | [阿里云集成](./29-alibaba-cloud-integration.md) | 阿里云AI服务集成、ACK优化配置 | 云厂商 |
 | 30 | [AI安全合规](./30-ai-security-compliance.md) | AI合规要求、数据治理、安全审计 | 合规管理 |
+| 31 | [AI平台治理](./31-ai-platform-governance.md) | 平台治理框架、策略引擎、自动化治理 | 平台治理 |
+| 32 | [MLOps流水线](./32-mlops-pipeline.md) | 端到端MLOps、CI/CD集成、流水线监控 | 运维流水线 |
+| 33 | [模型可解释性](./33-model-explainability.md) | SHAP/LIME解释、公平性检测、透明度保障 | 模型解释 |
+| 34 | [联邦学习](./34-federated-learning.md) | 分布式协同训练、隐私保护、安全聚合 | 协同学习 |
+| 35 | [模型漂移监控](./35-model-drift-monitoring.md) | 实时漂移检测、自动重训练、预警机制 | 模型运维 |
 
 ---
 
@@ -101,6 +106,14 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 ### 🔬 研究开发路径
 **05 → 06 → 07 → 08**  
 深入分布式训练和AutoML自动化研究
+
+### ⚖️ 治理合规路径
+**31 → 32 → 33 → 30**  
+掌握AI平台治理、MLOps流水线和模型可解释性
+
+### 🔐 隐私协同路径
+**34 → 22 → 35 → 11**  
+学习联邦学习、隐私保护和模型漂移监控
 
 ---
 

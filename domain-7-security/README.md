@@ -1,94 +1,114 @@
-# Domain-7: Kubernetes 安全与合规
+# Security Domain
 
-> **文档数量**: 16 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25-v1.32
+> **文档数量**:       21 篇 | **最后更新**: 2026-02 | **维护者**: Production Security Team
 
----
+## 📚 学习路径与文档结构
 
-## 概述
+### 🔰 基础安全概念 (01-04)
+理解Kubernetes安全的基础架构和核心概念
 
-Kubernetes 安全与合规域全面覆盖 Kubernetes 安全体系、认证授权、网络安全、运行时安全、审计合规等核心安全主题。从基础安全配置到企业级合规要求，为企业构建安全可靠的 Kubernetes 平台提供完整指导。
+| 序号 | 文档名称 | 内容概要 | 学习时长 | 难度 |
+|-----|---------|---------|---------|------|
+| 01 | [认证授权体系详解](./01-authentication-authorization-system.md) | Kubernetes认证机制、RBAC授权、Webhook集成 | 2小时 | ⭐⭐ |
+| 02 | [网络安全策略](./02-network-security-policies.md) | NetworkPolicy、CNI插件、服务网格安全 | 2小时 | ⭐⭐⭐ |
+| 03 | [运行时安全防护](./03-runtime-security-defense.md) | 容器安全上下文、运行时防护、威胁检测 | 2小时 | ⭐⭐⭐ |
+| 04 | [审计日志与合规](./04-audit-logging-compliance.md) | 审计策略配置、日志收集、合规检查 | 1.5小时 | ⭐⭐ |
 
-**核心价值**：
-- 🔒 **认证授权**：RBAC、OIDC、ServiceAccount 完整体系
-- 🛡️ **网络安全**：NetworkPolicy、服务网格、零信任安全
-- ⚡ **运行时安全**：Seccomp/AppArmor、威胁检测、运行时防护
-- 📋 **合规审计**：审计策略、日志收集、合规性检查
+### 🛡️ 安全标准与规范 (05-09)
+掌握企业级安全标准和最佳实践
 
----
+| 序号 | 文档名称 | 内容概要 | 学习时长 | 难度 |
+|-----|---------|---------|---------|------|
+| 05 | [策略验证工具](./05-policy-validation-tools.md) | OPA/Gatekeeper、Kyverno等策略引擎使用 | 2小时 | ⭐⭐⭐ |
+| 06 | [Pod安全标准](./06-pod-security-standards.md) | PSP替代方案、Pod安全准入控制 | 1小时 | ⭐⭐ |
+| 07 | [RBAC权限矩阵](./07-rbac-matrix-configuration.md) | 权限设计、角色规划、最小权限原则 | 2小时 | ⭐⭐⭐ |
+| 08 | [安全最佳实践](./08-security-best-practices.md) | CIS基准、安全配置清单、防护建议 | 1.5小时 | ⭐⭐ |
+| 09 | [生产环境加固](./09-security-hardening-production.md) | 内核参数调优、组件安全配置、加固脚本 | 2小时 | ⭐⭐⭐⭐ |
 
-## 文档目录
+### 🔐 身份与密钥管理 (10-11)
+深入学习证书和密钥管理
 
-### 核心安全体系 (01-04)
+| 序号 | 文档名称 | 内容概要 | 学习时长 | 难度 |
+|-----|---------|---------|---------|------|
+| 10 | [证书管理与TLS](./10-certificate-management.md) | PKI体系、cert-manager、证书轮换 | 3小时 | ⭐⭐⭐⭐ |
+| 11 | [密钥管理工具](./11-secret-management-tools.md) | External Secrets、Vault集成、加密存储 | 2.5小时 | ⭐⭐⭐⭐ |
 
-| # | 文档 | 关键内容 | 安全层级 |
-|:---:|:---|:---|:---|
-| 01 | [认证授权体系](./01-authentication-authorization-system.md) | RBAC、OIDC、ServiceAccount、认证授权体系 | 身份安全 |
-| 02 | [网络安全策略](./02-network-security-policies.md) | NetworkPolicy、服务网格、零信任安全模型 | 网络安全 |
-| 03 | [运行时安全防护](./03-runtime-security-defense.md) | Seccomp/AppArmor、Falco威胁检测、运行时防护 | 运行时安全 |
-| 04 | [审计合规管理](./04-audit-logging-compliance.md) | 审计策略、日志收集、合规性检查、SOC2/ISO认证 | 合规安全 |
+### 📋 合规与扫描 (12-17)
+合规性检查和安全扫描
 
-### 安全实践工具 (05-16)
+| 序号 | 文档名称 | 内容概要 | 学习时长 | 难度 |
+|-----|---------|---------|---------|------|
+| 12 | [合规认证指南](./12-compliance-certification.md) | SOC2、ISO27001、PCI-DSS等认证要求 | 2小时 | ⭐⭐⭐ |
+| 13 | [镜像安全扫描](./13-image-security-scanning.md) | Trivy、Clair、Anchore等工具使用 | 1.5小时 | ⭐⭐ |
+| 14 | [策略引擎详解](./14-policy-engines-opa-kyverno.md) | OPA Rego语言、Kyverno策略编写 | 2.5小时 | ⭐⭐⭐⭐ |
+| 15 | [运行时安全检测](./15-runtime-security-detection.md) | Falco/KubeArmor配置、威胁情报集成 | 2.5小时 | ⭐⭐⭐ |
+| 16 | [合规审计实践](./16-compliance-audit-practices.md) | CIS基准测试、安全审计、漏洞评估 | 2小时 | ⭐⭐⭐ |
+| 17 | [综合安全扫描](./17-comprehensive-security-scanning.md) | Trivy、Grype、Kubescape等全栈扫描 | 3小时 | ⭐⭐⭐⭐ |
 
-| # | 文档 | 关键内容 | 实践价值 |
-|:---:|:---|:---|:---|
-| 05 | [安全最佳实践](./05-security-best-practices.md) | 安全配置基线、最佳实践指南 | 实施参考 |
-| 06 | [生产安全加固](./06-security-hardening-production.md) | 生产环境加固清单、安全配置 | 部署指南 |
-| 07 | [Pod安全标准](./07-pod-security-standards.md) | Pod安全标准(PSS)、安全策略 | 应用安全 |
-| 08 | [RBAC权限矩阵](./08-rbac-matrix-configuration.md) | 权限矩阵配置、最小权限原则 | 权限管理 |
-| 09 | [证书管理体系](./09-certificate-management.md) | PKI、cert-manager、证书轮换 | 身份认证 |
-| 10 | [镜像安全扫描](./10-image-security-scanning.md) | 镜像漏洞扫描、安全检查 | 镜像安全 |
-| 11 | [策略引擎对比](./11-policy-engines-opa-kyverno.md) | OPA/Kyverno策略引擎对比 | 策略管理 |
-| 12 | [合规认证指南](./12-compliance-certification.md) | SOC2/ISO/PCI合规认证 | 合规要求 |
-| 13 | [合规审计实践](./13-compliance-audit-practices.md) | 审计日志配置实践、合规检查 | 审计实施 |
-| 14 | [密钥管理工具](./14-secret-management-tools.md) | Vault/ESO集成、密钥轮换 | 密钥管理 |
-| 15 | [安全扫描工具](./15-security-scanning-tools.md) | Trivy/Falco安全扫描工具 | 安全检测 |
-| 16 | [策略验证工具](./16-policy-validation-tools.md) | 策略校验、合规检查工具 | 策略验证 |
+### 🏗️ 高级安全架构 (18-21)
+企业级安全架构设计与实施
 
----
+| 序号 | 文档名称 | 内容概要 | 学习时长 | 难度 |
+|-----|---------|---------|---------|------|
+| 18 | [网络安全纵深防御](./18-network-defense-depth.md) | 多层防护体系、CNI安全配置、微分段 | 3小时 | ⭐⭐⭐⭐⭐ |
+| 19 | [零信任架构实施](./19-zero-trust-architecture.md) | SPIFFE/SPIRE、身份联合、动态访问控制 | 4小时 | ⭐⭐⭐⭐⭐ |
+| 20 | [事件响应流程](./20-incident-response-process.md) | SOC建设、事件处理、取证分析 | 3小时 | ⭐⭐⭐⭐ |
+| 21 | [多集群安全管理](./21-multicluster-security.md) | 联邦认证、统一策略、集中监控 | 4小时 | ⭐⭐⭐⭐⭐ |
 
-## 安全架构全景图
+## 🎯 学习建议
 
+### 📖 初学者路径 (1-2周)
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Kubernetes 安全体系                         │
-├─────────────────────────────────────────────────────────────┤
-│  身份认证层      │  访问控制层      │  运行时层      │  合规层  │
-│  (Authentication) │ (Authorization) │ (Runtime)   │ (Compliance)│
-│                 │                 │             │          │
-│  OIDC/SERVICE   │  RBAC/PSP/PSS   │ SECCOMP/    │ AUDIT/   │
-│  ACCOUNT        │  NETWORKPOLICY  │ APPARMOR    │ LOGGING  │
-│  CERT-MANAGER   │  SERVICE MESH   │ FALCO       │ SOC2/ISO │
-└─────────────────────────────────────────────────────────────┘
+01 → 02 → 08 → 06 → 07 → 10
 ```
 
+### 👨‍💻 进阶工程师路径 (2-3周)
+```
+01 → 02 → 03 → 04 → 09 → 11 → 14 → 16
+```
+
+### 🏢 企业安全专家路径 (4-6周)
+```
+全部文档 + 实践项目
+重点关注: 18, 19, 20, 21
+```
+
+## 🛠️ 实践项目推荐
+
+### 项目1: 基础安全加固 (初级)
+- 实施RBAC权限体系
+- 配置NetworkPolicy
+- 部署基础审计日志
+
+### 项目2: 企业级安全平台 (中级)
+- 部署OPA/Gatekeeper策略引擎
+- 集成Vault密钥管理
+- 实施CI/CD安全扫描
+
+### 项目3: 零信任架构 (高级)
+- 部署SPIFFE/SPIRE身份体系
+- 实施微分段网络策略
+- 建立SOC监控体系
+
+## 📊 技能评估矩阵
+
+| 技能领域 | 初级 | 中级 | 高级 | 专家级 |
+|---------|------|------|------|--------|
+| 认证授权 | ☑️ | ☑️ | ☑️ | ☑️ |
+| 网络安全 | ☑️ | ☑️ | ☑️ | ☑️ |
+| 运行时安全 | ☐ | ☑️ | ☑️ | ☑️ |
+| 合规审计 | ☐ | ☑️ | ☑️ | ☑️ |
+| 策略管理 | ☐ | ☐ | ☑️ | ☑️ |
+| 零信任架构 | ☐ | ☐ | ☐ | ☑️ |
+| 多集群管理 | ☐ | ☐ | ☐ | ☑️ |
+
+## 🔄 更新记录
+
+| 版本 | 日期 | 更新内容 | 贡献者 |
+|------|------|---------|--------|
+| v2.1 | 2026-02 | 新增网络安全纵深防御、零信任架构等4篇高级文档 | Security Team |
+| v2.0 | 2026-01 | 重构文档结构，完善基础安全内容 | Platform Team |
+| v1.0 | 2025-12 | 初始版本发布 | Initial Release |
+
 ---
-
-## 学习路径建议
-
-### 🔐 安全基础路径
-**01 → 05 → 06 → 08**  
-从认证授权开始，掌握基础安全配置和 RBAC 权限管理
-
-### 🛡️ 网络安全路径  
-**02 → 04 → 12 → 13**  
-深入网络安全策略和合规审计要求
-
-### ⚡ 运行时安全路径
-**03 → 10 → 15**  
-掌握运行时安全防护和镜像安全扫描
-
-### 🏢 企业合规路径
-**04 → 12 → 13 → 16**  
-构建完整的合规体系和审计机制
-
----
-
-## 相关领域
-
-- **[Domain-3: 控制平面](../domain-3-control-plane)** - 控制平面安全配置
-- **[Domain-8: 可观测性](../domain-8-observability)** - 安全监控和告警
-- **[Domain-12: 故障排查](../domain-12-troubleshooting)** - 安全事件排查
-
----
-
-**维护者**: Kusheet Security Team | **许可证**: MIT
+> **注意**: 本文档持续更新中，建议定期查看最新版本

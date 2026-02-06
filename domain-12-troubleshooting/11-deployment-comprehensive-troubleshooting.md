@@ -1,6 +1,28 @@
 # 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Kubernetes Deployment官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+## 🎯 本文档价值
+
+本文档专注于生产环境Deployment故障的系统性诊断和处理，提供：
+- **完整的问题分类体系**：从滚动更新失败到回滚异常的全流程覆盖
+- **实战诊断方法**：基于真实生产案例的故障分析技巧
+- **自动化工具集**：可直接使用的诊断脚本和检查清单
+- **预防性最佳实践**：避免常见Deployment问题的配置建议
+
+---
+
+## 相关文档交叉引用
+
+### 🔗 关联故障排查文档
+- **[05-Pod Pending诊断](./05-pod-pending-diagnosis.md)** - Pod调度相关问题
+- **[08-Pod综合故障排查](./08-pod-comprehensive-troubleshooting.md)** - Pod生命周期问题
+- **[17-HPA/VPA故障排查](./17-hpa-vpa-troubleshooting.md)** - 自动扩缩容相关问题
+- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - 版本升级兼容性问题
+
+### 📚 扩展学习资料
+- **[Kubernetes控制器模式](../domain-2-design-principles/03-controller-pattern.md)** - 理解Deployment控制器原理
+- **[资源版本控制](../domain-2-design-principles/06-resource-version-control.md)** - 资源状态管理机制
 
 ---
 
@@ -84,7 +106,51 @@ kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.paused}'
 | **ResourceQuota** | `kubectl describe quota` | 调整配额 |
 | **LimitRange** | `kubectl get limitrange` | 调整限制 |
 
-### 2.3 副本数超出预期
+### 2.3 生产环境典型场景
+
+#### 场景1：大促期间Deployment扩容失败
+```yaml
+# ❌ 问题现象
+# Deployment在流量高峰时无法扩容到期望副本数
+
+# 🔍 诊断步骤
+# 1. 检查HPA配置和指标
+kubectl get hpa -n production
+kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/production/pods" | jq
+
+# 2. 检查节点资源
+kubectl top nodes | sort -k4 -n  # 按内存使用率排序
+
+# 3. 检查集群自动扩缩容状态
+kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
+
+# ✅ 解决方案
+# 预先配置足够的节点池容量
+# 优化HPA配置，避免过度敏感的扩缩策略
+```
+
+#### 场景2：金丝雀发布过程中回滚失败
+```bash
+# ❌ 问题现象
+# Deployment更新卡在50%进度，无法完成也无法回滚
+
+# 🔍 诊断步骤
+# 1. 检查Deployment状态详情
+kubectl rollout status deployment/my-app -n production --timeout=30s
+
+# 2. 查看历史版本
+kubectl rollout history deployment/my-app -n production
+
+# 3. 检查Pod事件和日志
+kubectl get events --sort-by=.lastTimestamp -n production | grep my-app
+kubectl logs -l app=my-app -n production --tail=100
+
+# ✅ 解决方案
+# 强制重启：kubectl rollout restart deployment/my-app -n production
+# 手动回滚：kubectl rollout undo deployment/my-app -n production --to-revision=3
+```
+
+### 2.4 副本数超出预期
 
 ```bash
 # === 检查HPA ===

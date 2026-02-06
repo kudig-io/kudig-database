@@ -1,5 +1,9 @@
 ﻿# Kubernetes & AI/ML 命令行清单 (Complete CLI Commands Reference)
 
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+
+> **运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调优等全方位操作
+
 ## 目录
 - [1. kubectl 基础命令](#1-kubectl-基础命令)
 - [2. 集群管理命令](#2-集群管理命令)
@@ -11,6 +15,9 @@
 - [8. 故障排查工具命令](#8-故障排查工具命令)
 - [9. 安全与认证命令](#9-安全与认证命令)
 - [10. 监控与告警命令](#10-监控与告警命令)
+- [11. 企业级运维命令](#11-企业级运维命令)
+- [12. 多云管理命令](#12-多云管理命令)
+- [13. 安全合规命令](#13-安全合规命令)
 
 ---
 
@@ -1253,7 +1260,175 @@ kubectl version
 
 ---
 
-## 附录：常用配置模板
+## 11. 企业级运维命令
+
+### 11.1 大规模集群管理
+
+```bash
+# 查看集群整体健康状态
+kubectl cluster-info dump --output-directory=/tmp/cluster-dump
+
+# 批量检查节点状态
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[-1:].type}{"\t"}{.status.conditions[-1:].status}{"\n"}{end}'
+
+# 查看集群资源配额使用情况
+kubectl get resourcequotas --all-namespaces -o wide
+
+# 批量清理已完成的 Job
+kubectl delete jobs --field-selector=status.successful=1 --all-namespaces
+
+# 查看命名空间资源消耗排名
+kubectl top pods --all-namespaces | sort -k3 -nr | head -20
+
+# 集群容量规划分析
+kubectl describe nodes | grep -E "Allocated|Capacity" -A 5
+```
+
+### 11.2 GitOps 运维命令
+
+```bash
+# Argo CD 应用状态检查
+argocd app list
+argocd app sync <app-name>
+argocd app history <app-name>
+
+# Flux CD 状态检查
+flux get kustomizations
+flux get helmreleases
+flux reconcile kustomization <name>
+
+# GitOps 部署差异比较
+argocd app diff <app-name>
+kubectl diff -f <manifest-file>
+```
+
+### 11.3 SRE 运维命令
+
+```bash
+# SLI/SLO 状态检查
+prometheus-query 'up{job="kubernetes-pods"}'
+prometheus-query 'histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))'
+
+# 故障影响范围分析
+kubectl get pods -n <namespace> -l app=<app-name> --field-selector=status.phase=Running
+
+# 变更风险评估
+kubectl get pods -n <namespace> -o jsonpath='{.items[*].metadata.labels.version}' | tr ' ' '\n' | sort | uniq -c
+```
+
+## 12. 多云管理命令
+
+### 12.1 多云集群管理
+
+```bash
+# Cluster API 多集群管理
+clusterctl config cluster multi-cloud-cluster --kubernetes-version v1.28.0
+clusterctl move --to-kubeconfig=./target-cluster.kubeconfig
+
+# 跨云提供商集群状态检查
+kubectl config get-contexts
+kubectl config use-context <cluster-context>
+kubectl get nodes --context=<cluster-context>
+
+# 多云成本分析
+kubectl cost namespace --show-all-resources
+kubectl cost deployment --show-all-resources
+```
+
+### 12.2 混合云运维命令
+
+```bash
+# 跨云网络连通性测试
+kubectl exec -it <pod-name> -- ping <external-ip>
+kubectl exec -it <pod-name> -- traceroute <destination>
+
+# 混合云存储管理
+kubectl get pv -o jsonpath='{.items[*].spec.storageClassName}' | tr ' ' '\n' | sort | uniq -c
+
+# 多地域服务部署检查
+kubectl get services --all-namespaces -o jsonpath='{.items[*].metadata.annotations.cross-region}'
+```
+
+### 12.3 云资源管理
+
+```bash
+# Terraform 状态管理
+terraform state list
+terraform state show <resource-name>
+terraform import <resource-type>.<resource-name> <resource-id>
+
+# 云提供商CLI工具
+aws eks list-clusters
+gcloud container clusters list
+az aks list
+
+# 多云资源配置同步
+kubectl apply -f multi-cloud-config.yaml --context=<primary-cluster>
+kubectl apply -f multi-cloud-config.yaml --context=<secondary-cluster>
+```
+
+## 13. 安全合规命令
+
+### 13.1 容器安全扫描
+
+```bash
+# Trivy 镜像安全扫描
+trivy image <image-name>:<tag>
+trivy fs --security-checks vuln,config .
+
+# Clair 镜像扫描
+clair-scanner --ip=<host-ip> <image-name>:<tag>
+
+# Anchore 镜像分析
+anchore-cli image add <image-name>:<tag>
+anchore-cli image vuln <image-name>:<tag> all
+```
+
+### 13.2 运行时安全监控
+
+```bash
+# Falco 安全事件检查
+kubectl logs -n falco -l app=falco -f
+
+# Sysdig 安全监控
+sysdig -c spy_users
+sysdig -c netstat
+sysdig evt.type=open and fd.name contains /etc
+
+# 运行时安全策略检查
+kubectl get constrainttemplates
+kubectl get constraints -A
+```
+
+### 13.3 合规性检查
+
+```bash
+# CIS 基准检查
+kube-bench run --targets node,policies,managedservices
+
+# OPA 策略评估
+opa eval -i input.json -d policy.rego 'data.main.allow'
+
+# 安全合规扫描
+kubectl apply -f compliance-scan.yaml
+kubectl get compliancescans -n compliance
+```
+
+### 13.4 密钥管理
+
+```bash
+# HashiCorp Vault 操作
+vault kv put secret/myapp/config username=admin password=secret
+vault kv get secret/myapp/config
+vault token create -policy=my-policy
+
+# Kubernetes Secrets 管理
+kubectl create secret generic my-secret --from-literal=username=admin --from-literal=password=secret
+kubectl get secrets -n <namespace> -o jsonpath='{.items[*].metadata.name}'
+
+# 密钥轮换
+kubectl patch secret <secret-name> -p='{"data":{"password":"'$(echo -n "new-password" | base64)'"}}'
+```
 
 ### A.1 Pod 配置模板
 
@@ -3090,3 +3265,6 @@ kubectl get nodes
  ` 
  
  
+
+---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

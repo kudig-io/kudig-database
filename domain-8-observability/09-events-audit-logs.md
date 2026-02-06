@@ -1,225 +1,534 @@
-# 73 - 事件与审计日志
+# 05 - 事件与审计日志管理 (Events & Audit Logs)
 
-## Kubernetes事件(Events)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
-| 字段 | 说明 |
-|-----|------|
-| `type` | Normal/Warning |
-| `reason` | 事件原因(如Scheduled, Pulled, Created) |
-| `message` | 事件详情 |
-| `involvedObject` | 相关对象 |
-| `source` | 事件来源组件 |
-| `firstTimestamp` | 首次发生时间 |
-| `lastTimestamp` | 最后发生时间 |
-| `count` | 发生次数 |
+## 概述
 
-## 常见事件类型
+本文档深入探讨 Kubernetes 事件管理和审计日志体系，涵盖事件生命周期、审计策略配置、合规性要求、安全监控等核心内容，为企业构建完整的事件追溯和安全审计能力提供专业指导。
 
-| 原因 | 类型 | 组件 | 说明 |
-|-----|------|------|------|
-| Scheduled | Normal | scheduler | Pod已调度 |
-| Pulling | Normal | kubelet | 正在拉取镜像 |
-| Pulled | Normal | kubelet | 镜像已拉取 |
-| Created | Normal | kubelet | 容器已创建 |
-| Started | Normal | kubelet | 容器已启动 |
-| Killing | Normal | kubelet | 正在终止容器 |
-| BackOff | Warning | kubelet | 容器重启退避 |
-| Failed | Warning | kubelet | 容器启动失败 |
-| FailedScheduling | Warning | scheduler | 调度失败 |
-| Unhealthy | Warning | kubelet | 健康检查失败 |
-| FailedMount | Warning | kubelet | 挂载失败 |
-| OOMKilling | Warning | kubelet | 内存不足被杀 |
-| NodeNotReady | Warning | controller | 节点未就绪 |
-| Evicted | Warning | kubelet | Pod被驱逐 |
+---
 
-## 事件查看命令
+## 一、Kubernetes 事件体系
 
-```bash
-# 查看所有事件
-kubectl get events --sort-by='.lastTimestamp'
+### 1.1 事件基础概念
 
-# 查看特定命名空间事件
-kubectl get events -n production
-
-# 查看特定Pod事件
-kubectl describe pod <pod-name>
-
-# 仅显示Warning事件
-kubectl get events --field-selector type=Warning
-
-# 实时监控事件
-kubectl get events -w
-
-# JSON格式输出
-kubectl get events -o json
-
-# 按对象过滤
-kubectl get events --field-selector involvedObject.name=myapp
+#### 事件数据模型
+```yaml
+event_specification:
+  api_version: v1
+  kind: Event
+  metadata:
+    name: string
+    namespace: string
+    uid: string
+    creationTimestamp: timestamp
+    
+  involvedObject:
+    kind: Pod/Service/Deployment
+    namespace: string
+    name: string
+    uid: string
+    apiVersion: string
+    
+  reason: string           # 事件原因 (如: BackOff, FailedScheduling)
+  message: string          # 详细消息
+  source:
+    component: string      # 组件名称 (如: kubelet, controller-manager)
+    host: string           # 主机名
+  
+  firstTimestamp: timestamp
+  lastTimestamp: timestamp
+  count: integer           # 事件发生次数
+  type: string             # Normal/Warning
+  eventTime: timestamp     # 精确事件时间
+  series:
+    count: integer
+    lastObservedTime: timestamp
+  action: string           # 执行的操作
+  related:
+    kind: string
+    namespace: string
+    name: string
 ```
 
-## 审计日志配置
+### 1.2 事件类型分类
 
-| 日志级别 | 记录内容 |
-|---------|---------|
-| None | 不记录 |
-| Metadata | 请求元数据(用户、时间、资源等) |
-| Request | 元数据+请求体 |
-| RequestResponse | 元数据+请求体+响应体 |
+#### 核心事件类别
+```yaml
+event_categories:
+  scheduling_events:
+    - FailedScheduling: "调度失败"
+    - Scheduled: "成功调度"
+    - Preempted: "抢占发生"
+    
+  lifecycle_events:
+    - Pulling: "镜像拉取中"
+    - Pulled: "镜像拉取完成"
+    - Created: "容器已创建"
+    - Started: "容器已启动"
+    - Killing: "终止容器"
+    
+  health_events:
+    - Unhealthy: "健康检查失败"
+    - ProbeWarning: "探针警告"
+    - BackOff: "重启退避"
+    
+  resource_events:
+    - FailedMount: "挂载卷失败"
+    - FailedAttachVolume: "附加卷失败"
+    - VolumeResizeFailed: "卷扩容失败"
+    
+  network_events:
+    - DNSConfigForming: "DNS配置形成"
+    - HostPortConflict: "主机端口冲突"
+```
 
-## 审计策略配置
+## 二、审计日志体系
 
+### 2.1 审计策略配置
+
+#### 多级审计策略示例
 ```yaml
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-# 不审计只读操作
-- level: None
-  verbs: ["get", "list", "watch"]
-
-# 不审计系统请求
-- level: None
-  users: ["system:kube-proxy"]
-
-# Secret内容不记录
-- level: Metadata
-  resources:
-  - group: ""
-    resources: ["secrets", "configmaps"]
-
-# 认证相关请求详细记录
-- level: RequestResponse
-  resources:
-  - group: "authentication.k8s.io"
-    resources: ["tokenreviews"]
-
-# 高危操作详细记录
-- level: RequestResponse
-  verbs: ["create", "update", "patch", "delete"]
-  resources:
-  - group: ""
-    resources: ["pods", "services"]
-  - group: "apps"
-    resources: ["deployments", "statefulsets"]
-
-# 默认记录元数据
-- level: Metadata
+  # 0级 - 元数据级别 (Metadata)
+  - level: Metadata
+    resources:
+      - group: ""
+        resources: ["secrets", "configmaps"]
+    verbs: ["get", "list", "watch"]
+    
+  # 1级 - 请求级别 (Request)
+  - level: Request
+    resources:
+      - group: "rbac.authorization.k8s.io"
+        resources: ["roles", "rolebindings", "clusterroles", "clusterrolebindings"]
+    verbs: ["create", "update", "patch", "delete"]
+    
+  # 2级 - 请求响应级别 (RequestResponse)
+  - level: RequestResponse
+    resources:
+      - group: ""
+        resources: ["pods", "services", "deployments"]
+    verbs: ["create", "update", "delete"]
+    userGroups: ["system:masters"]
+    
+  # 3级 - 完整审计 (None - 忽略)
+  - level: None
+    users: ["system:kube-proxy"]
+    verbs: ["watch"]
+    
+  # 默认策略 - 基础元数据
+  - level: Metadata
 ```
 
-## API Server审计参数
+### 2.2 审计日志格式
 
-| 参数 | 说明 |
-|-----|------|
-| `--audit-policy-file` | 审计策略文件路径 |
-| `--audit-log-path` | 日志文件路径 |
-| `--audit-log-maxage` | 日志保留天数 |
-| `--audit-log-maxbackup` | 保留文件数 |
-| `--audit-log-maxsize` | 单文件最大MB |
-| `--audit-webhook-config-file` | Webhook配置 |
-| `--audit-webhook-batch-buffer-size` | Webhook批量缓冲 |
-
-## 审计日志示例
-
+#### 标准审计事件结构
 ```json
 {
   "kind": "Event",
   "apiVersion": "audit.k8s.io/v1",
   "level": "RequestResponse",
-  "auditID": "12345678-1234-1234-1234-123456789012",
+  "auditID": "b0b9c1d2-e3f4-5678-9012-34567890abcd",
   "stage": "ResponseComplete",
   "requestURI": "/api/v1/namespaces/default/pods",
   "verb": "create",
   "user": {
-    "username": "admin@example.com",
-    "groups": ["system:authenticated"]
+    "username": "alice@example.com",
+    "groups": ["system:authenticated", "developers"],
+    "extra": {
+      "authentication.kubernetes.io/pod-name": ["kubectl"]
+    }
   },
   "sourceIPs": ["192.168.1.100"],
+  "userAgent": "kubectl/v1.28.0",
   "objectRef": {
     "resource": "pods",
     "namespace": "default",
-    "name": "nginx",
+    "name": "my-app-7d5bcbd4b4-xyz123",
+    "uid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "apiVersion": "v1"
   },
   "responseStatus": {
     "metadata": {},
     "code": 201
   },
-  "requestReceivedTimestamp": "2024-01-15T10:30:00.000000Z",
-  "stageTimestamp": "2024-01-15T10:30:00.100000Z"
+  "requestReceivedTimestamp": "2026-02-05T10:30:45.123456Z",
+  "stageTimestamp": "2026-02-05T10:30:45.654321Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by RoleBinding"
+  }
 }
 ```
 
-## 审计Webhook配置
+## 三、事件处理与监控
 
+### 3.1 事件聚合与告警
+
+#### 智能事件处理策略
 ```yaml
-apiVersion: v1
-kind: Config
-clusters:
-- name: audit-webhook
-  cluster:
-    server: https://audit.example.com/audit
-    certificate-authority: /etc/kubernetes/pki/audit-ca.crt
-contexts:
-- name: default
-  context:
-    cluster: audit-webhook
-current-context: default
-users:
-- name: default
-  user:
-    token: <audit-token>
+event_processing_pipeline:
+  event_aggregation:
+    time_window: "10m"
+    grouping_criteria:
+      - involved_object_kind
+      - involved_object_namespace
+      - reason
+      - source_component
+      
+    suppression_rules:
+      - max_events_per_window: 100
+      - suppress_duplicate_events: true
+      - aggregate_similar_messages: true
+      
+  alerting_rules:
+    critical_events:
+      - reason: "FailedScheduling"
+        threshold: "> 5 in 5m"
+        severity: "critical"
+        
+      - reason: "BackOff"
+        threshold: "> 10 in 10m"
+        severity: "warning"
+        
+      - reason: "Unhealthy"
+        threshold: "> 3 in 2m"
+        severity: "critical"
+        
+    security_events:
+      - reason: "Forbidden"
+        threshold: "> 0"
+        severity: "critical"
+        
+      - reason: "Unauthorized"
+        threshold: "> 0"
+        severity: "critical"
 ```
 
-## Falco安全监控
+### 3.2 事件存储与查询
 
+#### 事件持久化方案
 ```yaml
-# Falco规则示例
-- rule: Terminal shell in container
-  desc: Detect shell opened in container
-  condition: >
-    spawned_process and container
-    and shell_procs and proc.tty != 0
-  output: >
-    Shell opened (user=%user.name container=%container.id 
-    shell=%proc.name)
-  priority: WARNING
+event_storage_architecture:
+  etcd_storage:
+    ttl: "1h"  # 默认ETCD中保存1小时
+    limitations: "存储容量有限，不适合长期保存"
+    
+  external_storage:
+    elasticsearch:
+      index_pattern: "k8s-events-*"
+      retention: "30d"
+      mapping:
+        timestamp: "@timestamp"
+        message: "message"
+        reason: "reason.keyword"
+        type: "type.keyword"
+        
+    loki:
+      labels:
+        - namespace
+        - reason
+        - type
+      retention: "7d"
+      
+  event_forwarding:
+    webhook_endpoint: "https://events-collector.example.com/webhook"
+    batch_size: 100
+    flush_interval: "30s"
+    retry_policy:
+      max_retries: 5
+      backoff_factor: 2
 ```
 
-## 事件归档方案
+## 四、安全审计与合规
 
-| 方案 | 说明 |
-|-----|------|
-| Elasticsearch | EFK日志栈 |
-| Loki | 轻量级日志 |
-| 对象存储 | S3/OSS长期存储 |
-| SIEM | 安全信息事件管理 |
+### 4.1 合规性要求映射
 
-## ACK审计日志
+#### 主要合规框架对照
+```yaml
+compliance_requirements:
+  gdpr:
+    data_subject_access: true
+    data_portability: true
+    right_to_erasure: true
+    audit_trail: "所有个人数据处理必须记录"
+    
+  hipaa:
+    access_control: true
+    audit_controls: true
+    integrity: true
+    transmission_security: true
+    audit_log_requirements:
+      - user_identification
+      - timestamp
+      - action_description
+      - affected_resources
+      
+  soc2:
+    security: true
+    availability: true
+    processing_integrity: true
+    confidentiality: true
+    privacy: true
+    relevant_controls:
+      - cc5.2 - System Audit Logging
+      - cc6.1 - Logical Access
+      - cc7.2 - System Operations
+      
+  pci_dss:
+    requirement_10: "跟踪和监控所有访问系统组件"
+    audit_log_content:
+      - user_identification
+      - type_of_event
+      - date_and_time
+      - success_or_failure_indication
+      - origination_of_event
+      - identity_of_affected_data
+```
 
-| 功能 | 说明 |
-|-----|------|
-| 控制平面审计 | 托管日志采集 |
-| SLS集成 | 日志服务存储分析 |
-| ActionTrail | 云账号操作审计 |
-| 合规报告 | 自动生成审计报告 |
+### 4.2 敏感操作监控
 
-## 监控告警规则
+#### 关键操作审计清单
+```yaml
+sensitive_operations:
+  authentication_events:
+    - user_authentication_success
+    - user_authentication_failure
+    - token_creation
+    - certificate_signing
+    
+  authorization_events:
+    - rbac_role_binding_created
+    - rbac_role_updated
+    - privilege_escalation_attempt
+    - forbidden_api_access
+    
+  data_protection:
+    - secret_access
+    - configmap_modification
+    - persistent_volume_attachment
+    - encryption_key_operations
+    
+  infrastructure_changes:
+    - node_addition
+    - node_removal
+    - control_plane_modification
+    - network_policy_changes
+```
 
-| 事件类型 | 告警条件 | 优先级 |
-|---------|---------|--------|
-| OOMKilling | 发生 | 高 |
-| FailedScheduling | 持续>5min | 中 |
-| BackOff | count>10 | 中 |
-| NodeNotReady | 发生 | 高 |
-| FailedMount | 发生 | 高 |
+## 五、事件分析与故障诊断
 
-## 版本变更记录
+### 5.1 常见事件模式分析
 
-| 版本 | 变更内容 |
-|------|---------|
-| v1.25 | 审计日志增强 |
-| v1.27 | 审计性能优化 |
-| v1.29 | Events API改进 |
+#### 典型故障事件序列
+```yaml
+failure_patterns:
+  pod_scheduling_failure:
+    event_sequence:
+      - FailedScheduling: "0/5 nodes are available"
+      - FailedScheduling: "Insufficient cpu"
+      - Scheduled: "Successfully assigned"
+    diagnostic_approach:
+      - check_resource_quotas
+      - verify_node_affinity
+      - examine_toleration_settings
+      
+  container_crash_loop:
+    event_sequence:
+      - BackOff: "Back-off restarting failed container"
+      - Created: "Created container"
+      - Started: "Started container"
+      - Killing: "Stopping container"
+    troubleshooting_steps:
+      - examine_pod_logs
+      - check_liveness_probe
+      - review_resource_limits
+      - verify_image_pull_secrets
+      
+  volume_mount_issues:
+    event_sequence:
+      - FailedMount: "Unable to mount volumes"
+      - FailedAttachVolume: "Multi-Attach error"
+      - VolumeResizeFailed: "resize volume error"
+    resolution_guide:
+      - validate_pv_pvc_binding
+      - check_storage_class
+      - verify_node_storage_capacity
+```
+
+### 5.2 事件关联分析
+
+#### 多维度事件关联
+```yaml
+event_correlation:
+  temporal_correlation:
+    within_pod:
+      - container_restart_followed_by_backoff
+      - failed_mount_then_scheduling_failure
+      - probe_failure_leading_to_restart
+      
+    cross_namespace:
+      - configmap_update_affecting_multiple_deployments
+      - network_policy_change_impacting_services
+      - rbac_modification_affecting_user_access
+      
+  causal_analysis:
+    root_cause_identification:
+      - resource_exhaustion_events
+      - configuration_change_events
+      - external_dependency_failures
+      - security_incident_indicators
+      
+  predictive_analytics:
+    anomaly_detection:
+      - unusual_event_frequency_patterns
+      - abnormal_timing_sequences
+      - unexpected correlation_clusters
+      - seasonal_behavior_deviation
+```
+
+## 六、运维最佳实践
+
+### 6.1 事件管理策略
+
+#### 生产环境事件处理流程
+```yaml
+event_management_workflow:
+  real_time_monitoring:
+    critical_events:
+      - immediate_notification: "5分钟内"
+      - escalation_path: "SRE值班 -> 技术主管 -> CTO"
+      - response_sla: "< 15分钟响应"
+      
+    warning_events:
+      - batch_notification: "每小时汇总"
+      - routing: "相关团队负责人"
+      - investigation_deadline: "4小时内"
+      
+  event_retention_policy:
+    etcd_events: "1小时"
+    external_storage_metadata: "90天"
+    security_audit_logs: "365天"
+    compliance_archive: "7年"
+    
+  cleanup_mechanisms:
+    automatic_eviction:
+      - ttl_based_cleanup: "基于时间的自动清理"
+      - size_based_eviction: "基于存储大小的清理"
+      - priority_based_retention: "优先级事件长期保存"
+```
+
+### 6.2 审计日志优化
+
+#### 性能与存储平衡
+```yaml
+audit_optimization:
+  log_rotation:
+    max_file_size: "100MB"
+    max_backup_files: 10
+    compress_rotated: true
+    
+  batching_and_buffering:
+    batch_size: 1000
+    batch_max_size: "1MB"
+    process_idle_timeout: "10s"
+    max_batch_wait: "1s"
+    
+  filtering_strategies:
+    exclude_noisy_events:
+      - watch_events: "排除大量watch事件"
+      - get_list_operations: "过滤高频读操作"
+      - health_check_endpoints: "忽略健康检查"
+      
+    include_critical_events:
+      - write_operations: "所有修改操作"
+      - authentication_events: "登录认证事件"
+      - authorization_decisions: "权限决策事件"
+```
+
+## 七、工具集成与自动化
+
+### 7.1 第三方工具集成
+
+#### 事件处理工具链
+```yaml
+integration_ecosystem:
+  siem_tools:
+    splunk:
+      forwarder_config: "/opt/splunkforwarder/etc/system/local/inputs.conf"
+      index_name: "kubernetes_events"
+      sourcetype: "kube:events"
+      
+    elasticsearch:
+      ilm_policy:
+        name: "k8s-events-policy"
+        phases:
+          hot:
+            min_age: "0ms"
+            actions:
+              rollover:
+                max_age: "7d"
+                max_size: "50gb"
+          delete:
+            min_age: "90d"
+            actions:
+              delete: {}
+              
+  monitoring_tools:
+    datadog:
+      event_collection:
+        enabled: true
+        tags:
+          - "env:{{.Env}}"
+          - "cluster:{{.ClusterName}}"
+          
+    new_relic:
+      kubernetes_integration:
+        event_forwarding: true
+        attribute_mapping:
+          reason: "event.reason"
+          type: "event.type"
+          source: "event.source"
+```
+
+### 7.2 自动化响应机制
+
+#### 基于事件的自动化处理
+```yaml
+automated_response:
+  self_healing_triggers:
+    deployment_rollbacks:
+      trigger_conditions:
+        - consecutive_failed_deployments: 3
+        - rollout_stuck_longer_than: "10m"
+      automated_actions:
+        - rollback_to_previous_revision
+        - notify_deployment_owner
+        - create_incident_ticket
+        
+    horizontal_scaling:
+      trigger_conditions:
+        - cpu_utilization_above: "80%"
+        - sustained_for: "5m"
+      automated_actions:
+        - scale_up_replicas
+        - adjust_resource_limits
+        - update_hpa_configuration
+        
+  security_response:
+    unauthorized_access:
+      detection_pattern:
+        - failed_authentication_attempts: "> 5 in 1m"
+        - different_source_ips: "> 3"
+      response_actions:
+        - temporary_account_lockout
+        - security_alert_notification
+        - forensic_log_collection
+        - incident_response_workflow_activation
+```
 
 ---
-
-**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
+**维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com)
