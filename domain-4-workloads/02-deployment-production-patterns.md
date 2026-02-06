@@ -803,7 +803,406 @@ spec:
         emptyDir: {}
 ```
 
-### 8. 成本优化实践
+### 8. 生产实践案例
+
+#### 8.1 电商平台大促场景
+
+```yaml
+# 双十一促销活动部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: promotion-service
+  namespace: ecommerce
+  annotations:
+    # 大促专用配置
+    kubernetes.io/change-cause: "双十一促销活动部署 v2.1.0"
+spec:
+  replicas: 50  # 平时10个副本，大促期间50个
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 10      # 快速扩容
+      maxUnavailable: 0 # 零停机
+  
+  template:
+    metadata:
+      labels:
+        app: promotion-service
+        traffic-type: high-priority  # 高优先级流量
+        campaign: double11
+    
+    spec:
+      # 大促专用节点池
+      nodeSelector:
+        node-pool: promotion-high-performance
+        instance-type: c6i.4xlarge  # 高性能实例
+      
+      # 资源超卖策略
+      containers:
+      - name: app
+        image: registry.prod.local/promotion:v2.1.0
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+        
+        # 大促健康检查优化
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10   # 快速启动检查
+          periodSeconds: 5          # 频繁检查
+          timeoutSeconds: 2
+          failureThreshold: 2
+        
+        # JVM 大促优化参数
+        env:
+        - name: JAVA_OPTS
+          value: >
+            -Xmx3g -Xms3g 
+            -XX:+UseG1GC 
+            -XX:MaxGCPauseMillis=100
+            -XX:+HeapDumpOnOutOfMemoryError
+            -XX:HeapDumpPath=/logs/heapdump.hprof
+        - name: PROMOTION_MODE
+          value: "ACTIVE"  # 大促模式开关
+        
+        # 大促专用配置
+        volumeMounts:
+        - name: promotion-config
+          mountPath: /config/promotion.properties
+          subPath: promotion.properties
+
+---
+# HPA 大促自动扩缩容配置
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: promotion-hpa
+  namespace: ecommerce
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: promotion-service
+  minReplicas: 10    # 平时最小副本
+  maxReplicas: 200   # 大促最大副本
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60  # 60%触发扩容
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70  # 70%触发扩容
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60    # 快速扩容
+      policies:
+      - type: Percent
+        value: 100  # 每分钟最多扩容100%
+        periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 300   # 缓慢缩容
+      policies:
+      - type: Percent
+        value: 10   # 每5分钟最多缩容10%
+        periodSeconds: 300
+```
+
+#### 8.2 金融行业合规部署
+
+```yaml
+# 金融行业合规部署模板
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-service
+  namespace: finance
+  labels:
+    app: banking-service
+    compliance: pci-dss    # PCI-DSS合规标记
+    data-classification: confidential
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0  # 金融业务零停机
+  
+  template:
+    metadata:
+      labels:
+        app: banking-service
+        compliance: pci-dss
+        backup-required: "true"  # 必须备份
+    
+    spec:
+      # 专用安全节点
+      nodeSelector:
+        security-level: high
+        compliance-zone: finance
+      
+      # 安全上下文强化
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 30001
+        fsGroup: 20001
+        seccompProfile:
+          type: RuntimeDefault
+      
+      containers:
+      - name: banking-app
+        image: registry.secure.local/banking:v1.5.2
+        imagePullPolicy: Always
+        
+        # 金融级安全配置
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: ["ALL"]
+            add: ["NET_BIND_SERVICE"]
+        
+        # 合规监控配置
+        env:
+        - name: AUDIT_LOGGING
+          value: "ENABLED"
+        - name: DATA_ENCRYPTION
+          value: "AES256"
+        - name: SESSION_TIMEOUT
+          value: "900"  # 15分钟会话超时
+        
+        # 健康检查满足合规要求
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        # 合规存储配置
+        volumeMounts:
+        - name: audit-logs
+          mountPath: /var/log/audit
+        - name: encryption-keys
+          mountPath: /etc/ssl/private
+          readOnly: true
+        - name: tmp-storage
+          mountPath: /tmp
+        
+      volumes:
+      - name: audit-logs
+        persistentVolumeClaim:
+          claimName: audit-logs-pvc
+      - name: encryption-keys
+        secret:
+          secretName: banking-encryption-keys
+      - name: tmp-storage
+        emptyDir: {}
+
+---
+# 网络策略 - 金融合规隔离
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: banking-isolation-policy
+  namespace: finance
+spec:
+  podSelector:
+    matchLabels:
+      app: banking-service
+  policyTypes:
+  - Ingress
+  - Egress
+  
+  # 严格入站控制
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: frontend
+    - namespaceSelector:
+        matchLabels:
+          name: api-gateway
+    ports:
+    - protocol: TCP
+      port: 8443
+  
+  # 严格的出站控制
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: database
+    ports:
+    - protocol: TCP
+      port: 5432  # PostgreSQL
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8  # 内网访问
+    ports:
+    - protocol: TCP
+      port: 53    # DNS
+    - protocol: UDP
+      port: 53    # DNS
+```
+
+#### 8.3 微服务治理最佳实践
+
+```yaml
+# 微服务治理配置示例
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: microservices
+  labels:
+    app: user-service
+    version: v2.3.1
+    team: backend
+    service-mesh: istio  # 服务网格标记
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: user-service
+  
+  template:
+    metadata:
+      labels:
+        app: user-service
+        version: v2.3.1
+        team: backend
+      annotations:
+        # Istio 服务网格配置
+        sidecar.istio.io/inject: "true"
+        proxy.istio.io/config: |
+          proxyMetadata:
+            ISTIO_META_REQUEST_ID_HEADER: "x-request-id"
+        
+        # 监控配置
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    
+    spec:
+      # 服务质量配置
+      priorityClassName: high-priority
+      
+      containers:
+      - name: user-service
+        image: registry.microservices.local/user-service:v2.3.1
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 9090
+          name: metrics
+        
+        # 微服务资源配置
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+        
+        # 微服务健康检查
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          failureThreshold: 3
+          periodSeconds: 10
+        
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          failureThreshold: 3
+          periodSeconds: 5
+        
+        # 环境变量配置
+        env:
+        - name: SERVER_PORT
+          value: "8080"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "kubernetes"
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          value: "health,info,metrics,prometheus"
+        - name: LOGGING_LEVEL_ROOT
+          value: "INFO"
+        
+        # 配置文件挂载
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config/application.yml
+          subPath: application.yml
+        - name: secrets-volume
+          mountPath: /secrets/database-password
+          subPath: password
+          readOnly: true
+      
+      volumes:
+      - name: config-volume
+        configMap:
+          name: user-service-config
+      - name: secrets-volume
+        secret:
+          secretName: user-service-secrets
+
+---
+# Service 配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: microservices
+  labels:
+    app: user-service
+  annotations:
+    # 服务网格配置
+    metallb.universe.tf/address-pool: production
+spec:
+  selector:
+    app: user-service
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: metrics
+    port: 9090
+    targetPort: 9090
+  type: ClusterIP
+```
+
+### 9. 成本优化实践
 
 #### 8.1 资源优化配置
 

@@ -2,6 +2,8 @@
 
 > **最后更新**: 2026-01-21 | **项目数**: 315+
 
+> **工具生态全景图**: 涵盖云原生、AI基础设施、DevOps等领域的精选工具和项目集合
+
 ---
 
 ## 目录
@@ -43,6 +45,9 @@
 - [开发框架与库](#开发框架与库)
 - [消息队列与数据库 Operator](#消息队列与数据库-operator)
 - [云厂商服务](#云厂商服务)
+- [企业级运维工具](#企业级运维工具)
+- [多云管理平台](#多云管理平台)
+- [安全合规工具](#安全合规工具)
 
 ---
 
@@ -621,6 +626,71 @@
 
 ---
 
+## 企业级运维工具
+
+| 类别 | 工具 | 首页 URL | 文档 URL |
+|------|------|----------|----------|
+| **GitOps** | Argo CD | https://argo-cd.readthedocs.io/ | https://argo-cd.readthedocs.io/en/stable/ |
+| **GitOps** | Flux CD | https://fluxcd.io/ | https://fluxcd.io/docs/ |
+| **GitOps** | Tekton | https://tekton.dev/ | https://tekton.dev/docs/ |
+| **可观测性** | Prometheus | https://prometheus.io/ | https://prometheus.io/docs/ |
+| **可观测性** | Grafana | https://grafana.com/ | https://grafana.com/docs/ |
+| **可观测性** | Loki | https://grafana.com/oss/loki/ | https://grafana.com/docs/loki/latest/ |
+| **可观测性** | Thanos | https://thanos.io/ | https://thanos.io/tip/thanos/getting-started.md/ |
+| **监控告警** | Alertmanager | https://prometheus.io/docs/alerting/latest/alertmanager/ | https://prometheus.io/docs/alerting/latest/configuration/ |
+| **监控告警** | Prometheus Operator | https://github.com/prometheus-operator/prometheus-operator | https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/getting-started.md |
+| **监控告警** | kube-state-metrics | https://github.com/kubernetes/kube-state-metrics | https://github.com/kubernetes/kube-state-metrics/tree/main/docs |
+| **日志分析** | Elasticsearch | https://www.elastic.co/elasticsearch/ | https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html |
+| **日志分析** | Fluentd | https://www.fluentd.org/ | https://docs.fluentd.org/ |
+| **日志分析** | Fluent Bit | https://fluentbit.io/ | https://docs.fluentbit.io/manual/ |
+| **追踪分析** | Jaeger | https://www.jaegertracing.io/ | https://www.jaegertracing.io/docs/ |
+| **追踪分析** | OpenTelemetry | https://opentelemetry.io/ | https://opentelemetry.io/docs/ |
+| **性能分析** | pprof | https://pkg.go.dev/net/http/pprof | https://github.com/google/pprof |
+| **性能分析** | py-spy | https://github.com/benfred/py-spy | https://github.com/benfred/py-spy |
+| **容量规划** | Goldilocks | https://github.com/FairwindsOps/goldilocks | https://github.com/FairwindsOps/goldilocks#readme |
+| **容量规划** | Vertical Pod Autoscaler | https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler | https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme |
+
+## 多云管理平台
+
+| 平台 | 工具 | 首页 URL | 文档 URL |
+|------|------|----------|----------|
+| **集群管理** | Cluster API | https://cluster-api.sigs.k8s.io/ | https://cluster-api.sigs.k8s.io/user/quick-start.html |
+| **集群管理** | Rancher | https://www.rancher.com/ | https://ranchermanager.docs.rancher.com/ |
+| **集群管理** | Kubesphere | https://kubesphere.io/ | https://kubesphere.io/docs/ |
+| **成本管理** | Kubecost | https://www.kubecost.com/ | https://docs.kubecost.com/ |
+| **成本管理** | OpenCost | https://www.opencost.io/ | https://www.opencost.io/docs/ |
+| **成本管理** | FinOps Toolkit | https://github.com/microsoft/finops-toolkit | https://github.com/microsoft/finops-toolkit#readme |
+| **治理框架** | Kyverno | https://kyverno.io/ | https://kyverno.io/docs/ |
+| **治理框架** | OPA/Gatekeeper | https://open-policy-agent.github.io/gatekeeper/website/docs/ | https://open-policy-agent.github.io/gatekeeper/website/docs/install/ |
+| **治理框架** | Config Sync | https://cloud.google.com/anthos-config-management/docs/config-sync-overview | https://cloud.google.com/anthos-config-management/docs/how-to/config-sync-overview |
+| **多云网络** | Submariner | https://submariner.io/ | https://submariner.io/getting-started/ |
+| **多云网络** | Skupper | https://skupper.io/ | https://skupper.io/docs/index.html |
+| **多云存储** | Rook | https://rook.io/ | https://rook.io/docs/rook/latest/ |
+| **多云存储** | Longhorn | https://longhorn.io/ | https://longhorn.io/docs/ |
+
+## 安全合规工具
+
+| 类别 | 工具 | 首页 URL | 文档 URL |
+|------|------|----------|----------|
+| **容器安全** | Trivy | https://aquasecurity.github.io/trivy/ | https://aquasecurity.github.io/trivy/latest/ |
+| **容器安全** | Clair | https://quay.github.io/clair/ | https://quay.github.io/clair/ |
+| **容器安全** | Anchore | https://anchore.com/ | https://docs.anchore.com/ |
+| **运行时安全** | Falco | https://falco.org/ | https://falco.org/docs/ |
+| **运行时安全** | Sysdig | https://sysdig.com/ | https://docs.sysdig.com/ |
+| **运行时安全** | Tetragon | https://cilium.io/tetragon/ | https://tetragon.io/docs/ |
+| **网络安全** | Cilium | https://cilium.io/ | https://docs.cilium.io/en/stable/ |
+| **网络安全** | Calico | https://projectcalico.docs.tigera.io/about/about-calico | https://projectcalico.docs.tigera.io/getting-started/kubernetes/ |
+| **网络安全** | Istio | https://istio.io/ | https://istio.io/latest/docs/ |
+| **密钥管理** | HashiCorp Vault | https://www.vaultproject.io/ | https://developer.hashicorp.com/vault/docs |
+| **密钥管理** | AWS Secrets Manager | https://aws.amazon.com/secrets-manager/ | https://docs.aws.amazon.com/secretsmanager/ |
+| **密钥管理** | Azure Key Vault | https://azure.microsoft.com/en-us/services/key-vault/ | https://docs.microsoft.com/en-us/azure/key-vault/ |
+| **合规检查** | kube-bench | https://github.com/aquasecurity/kube-bench | https://github.com/aquasecurity/kube-bench#readme |
+| **合规检查** | kube-hunter | https://github.com/aquasecurity/kube-hunter | https://github.com/aquasecurity/kube-hunter#readme |
+| **合规检查** | polaris | https://polaris.docs.fairwinds.com/ | https://polaris.docs.fairwinds.com/ |
+| **策略引擎** | OPA (Open Policy Agent) | https://www.openpolicyagent.org/ | https://www.openpolicyagent.org/docs/latest/ |
+| **策略引擎** | Kyverno | https://kyverno.io/ | https://kyverno.io/docs/ |
+| **策略引擎** | Datadog Security Monitoring | https://www.datadoghq.com/security-monitoring/ | https://docs.datadoghq.com/security_platform/security_monitoring/ |
+
 ## 参考资源
 
 | 资源 | URL |
@@ -634,3 +704,85 @@
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)
+
+## 49. 前沿技术创新工具
+
+### 49.1 WebAssembly生态工具
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **运行时** | WasmEdge | https://wasmedge.org/ | https://wasmedge.org/book/en/ |
+| **运行时** | Krustlet | https://krustlet.dev/ | https://krustlet.dev/docs/ |
+| **开发框架** | Fermyon Spin | https://www.fermyon.com/spin | https://developer.fermyon.com/spin/ |
+| **工具链** | wkg | https://github.com/wasmerio/wasmer | https://docs.wasmer.io/ |
+
+### 49.2 eBPF工具生态
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **网络监控** | Cilium | https://cilium.io/ | https://docs.cilium.io/en/stable/ |
+| **安全监控** | Tetragon | https://cilium.io/tetragon/ | https://tetragon.io/docs/ |
+| **性能分析** | bpftrace | https://github.com/iovisor/bpftrace | https://github.com/iovisor/bpftrace/blob/master/docs/tutorial_one_liners.md |
+| **服务网格** | Pixie | https://pixielabs.ai/ | https://docs.px.dev/ |
+
+### 49.3 GitOps新兴工具
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **部署工具** | Flux CD v2 | https://fluxcd.io/ | https://fluxcd.io/flux/ |
+| **策略管理** | Datree | https://datree.io/ | https://hub.datree.io/ |
+| **可视化** | Weave GitOps | https://www.weave.works/oss/gitops/ | https://docs.gitops.weave.works/ |
+| **多集群** | Rancher Fleet | https://fleet.rancher.io/ | https://fleet.rancher.io/ |
+
+### 49.4 AI Infrastructure工具
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **模型管理** | MLflow | https://mlflow.org/ | https://mlflow.org/docs/latest/index.html |
+| **特征存储** | Feast | https://feast.dev/ | https://docs.feast.dev/ |
+| **模型注册** | ModelDB | https://mitdbg.github.io/modeldb/ | https://github.com/mitdbg/modeldb |
+| **推理服务** | KServe | https://kserve.github.io/website/ | https://kserve.github.io/website/0.11/modelserving/v1beta1/serving_runtime/ |
+
+### 49.5 云原生安全新工具
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **供应链安全** | Syft | https://github.com/anchore/syft | https://github.com/anchore/syft#readme |
+| **镜像签名** | Cosign | https://github.com/sigstore/cosign | https://docs.sigstore.dev/cosign/overview/ |
+| **漏洞扫描** | Grype | https://github.com/anchore/grype | https://github.com/anchore/grype#readme |
+| **运行时安全** | Tracee | https://aquasecurity.github.io/tracee/ | https://aquasecurity.github.io/tracee/latest/ |
+
+## 50. 边缘计算与5G工具
+
+### 50.1 边缘计算平台
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **轻量级K8s** | K3s | https://k3s.io/ | https://docs.k3s.io/ |
+| **边缘编排** | KubeEdge | https://kubeedge.io/ | https://kubeedge.io/en/docs/ |
+| **边缘管理** | OpenYurt | https://openyurt.io/ | https://openyurt.io/docs/ |
+| **边缘AI** | Edge Impulse | https://edgeimpulse.com/ | https://docs.edgeimpulse.com/docs |
+
+### 50.2 5G集成工具
+
+| 类别 | 工具名称 | 项目主页 | 文档链接 |
+|------|---------|---------|---------|
+| **网络切片** | Free5GC | https://free5gc.org/ | https://free5gc.org/guide/ |
+| **MEC平台** | OpenAirInterface | https://openairinterface.org/ | https://gitlab.eurecom.fr/oai/openairinterface5g/-/wikis/home |
+| **TSN支持** | FD.io | https://fd.io/ | https://fd.io/docs/ |
+| **SR-IOV** | SR-IOV Network Device Plugin | https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin | https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin#readme |
+
+## 参考资源
+
+| 资源 | URL |
+|------|-----|
+| Kubernetes 官方文档 | https://kubernetes.io/docs/ |
+| CNCF Landscape | https://landscape.cncf.io/ |
+| Awesome Kubernetes | https://github.com/ramitsurana/awesome-kubernetes |
+| Kubernetes GitHub | https://github.com/kubernetes/kubernetes |
+| CNCF 项目列表 | https://www.cncf.io/projects/ |
+| Cloud Native Trail Map | https://trailmap.cncf.io/ |
+| KubeCon Conference | https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/ |
+
+---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

@@ -1,6 +1,22 @@
 # 02 - etcd 故障排查 (etcd Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [etcd.io/docs](https://etcd.io/docs/)
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)
+
+---
+
+## 相关文档交叉引用
+
+### 🔗 关联故障排查文档
+- **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - etcd是API Server的核心存储依赖
+- **[31-备份恢复故障排查](./31-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
+- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
+- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
+- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
+
+### 📚 扩展学习资料
+- **[etcd官方文档](https://etcd.io/docs/)** - etcd完整技术文档
+- **[etcd性能调优指南](https://etcd.io/docs/v3.5/op-guide/performance/)** - 生产环境性能优化
+- **[etcd故障恢复手册](https://etcd.io/docs/v3.5/op-guide/recovery/)** - 灾难恢复操作指南
 
 ---
 

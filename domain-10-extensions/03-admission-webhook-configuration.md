@@ -43,7 +43,559 @@
 | **Validating** | 创建/更新前 | ❌ 只读 | ✅ 可验证 | 策略验证、安全检查 |
 | **内置控制器** | 固定顺序 | 依控制器而定 | 依控制器而定 | 基础验证 |
 
-## Webhook开发实践
+## 企业级Webhook最佳实践
+
+### 1. 高可用部署架构
+
+```yaml
+# webhook-ha-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admission-webhook
+  namespace: kube-system
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: admission-webhook
+  template:
+    metadata:
+      labels:
+        app: admission-webhook
+    spec:
+      serviceAccountName: admission-webhook
+      containers:
+      - name: webhook-server
+        image: mysql-webhook:v1.0.0
+        args:
+        - --tls-cert-file=/etc/webhook/certs/tls.crt
+        - --tls-private-key-file=/etc/webhook/certs/tls.key
+        - --port=8443
+        ports:
+        - containerPort: 8443
+          name: webhook
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        volumeMounts:
+        - name: certs
+          mountPath: /etc/webhook/certs
+          readOnly: true
+      volumes:
+      - name: certs
+        secret:
+          secretName: admission-webhook-certs
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - admission-webhook
+            topologyKey: kubernetes.io/hostname
+```
+
+### 2. 安全加固配置
+
+```yaml
+# security-hardening.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admission-webhook
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admission-webhook-role
+rules:
+# 最小权限原则
+- apiGroups: ["admissionregistration.k8s.io"]
+  resources: ["mutatingwebhookconfigurations", "validatingwebhookconfigurations"]
+  verbs: ["get", "list", "watch", "update", "patch"]
+- apiGroups: [""]
+  resources: ["namespaces", "pods", "services"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["database.example.com"]
+  resources: ["mysqlclusters"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admission-webhook-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: admission-webhook
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: admission-webhook-role
+  apiGroup: rbac.authorization.k8s.io
+```
+
+```go
+// security-context.go - 容器安全上下文
+func getSecureContainerSpec() corev1.Container {
+    return corev1.Container{
+        SecurityContext: &corev1.SecurityContext{
+            AllowPrivilegeEscalation: pointer.BoolPtr(false),
+            ReadOnlyRootFilesystem:   pointer.BoolPtr(true),
+            RunAsNonRoot:             pointer.BoolPtr(true),
+            RunAsUser:                pointer.Int64Ptr(1000),
+            Capabilities: &corev1.Capabilities{
+                Drop: []corev1.Capability{"ALL"},
+            },
+        },
+        // 只读挂载证书
+        VolumeMounts: []corev1.VolumeMount{
+            {
+                Name:      "certs",
+                MountPath: "/etc/webhook/certs",
+                ReadOnly:  true,
+            },
+            {
+                Name:      "tmp",
+                MountPath: "/tmp",
+            },
+        },
+    }
+}
+```
+
+### 3. 证书管理与自动轮换
+
+```bash
+#!/bin/bash
+# cert-manager.sh - Webhook证书管理脚本
+
+WEBHOOK_NAME="mysql-admission-webhook"
+NAMESPACE="kube-system"
+SECRET_NAME="admission-webhook-certs"
+SERVICE_NAME="admission-webhook-service"
+
+# 生成证书
+generate_certificates() {
+    echo "🔐 生成Webhook证书..."
+    
+    # 创建临时目录
+    TEMP_DIR=$(mktemp -d)
+    cd ${TEMP_DIR}
+    
+    # 生成CA证书
+    openssl genrsa -out ca.key 2048
+    openssl req -x509 -new -nodes -key ca.key -days 365 -out ca.crt -subj "/CN=admission-webhook-ca"
+    
+    # 生成服务端证书
+    openssl genrsa -out tls.key 2048
+    openssl req -new -key tls.key -out tls.csr -subj "/CN=${SERVICE_NAME}.${NAMESPACE}.svc"
+    
+    # 创建证书配置
+    cat > csr.conf <<EOF
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+req_extensions = req_ext
+distinguished_name = dn
+
+[dn]
+CN = ${SERVICE_NAME}.${NAMESPACE}.svc
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ${SERVICE_NAME}
+DNS.2 = ${SERVICE_NAME}.${NAMESPACE}
+DNS.3 = ${SERVICE_NAME}.${NAMESPACE}.svc
+DNS.4 = ${SERVICE_NAME}.${NAMESPACE}.svc.cluster.local
+EOF
+
+    # 签发证书
+    openssl x509 -req -in tls.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out tls.crt -days 365 -extensions req_ext -extfile csr.conf
+    
+    # 创建Kubernetes Secret
+    kubectl create secret generic ${SECRET_NAME} \
+        --from-file=tls.crt=./tls.crt \
+        --from-file=tls.key=./tls.key \
+        --from-file=ca.crt=./ca.crt \
+        -n ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+    
+    # 清理临时文件
+    cd - && rm -rf ${TEMP_DIR}
+    
+    echo "✅ 证书生成完成"
+}
+
+# 配置Webhook
+configure_webhook() {
+    echo "⚙️  配置Webhook..."
+    
+    # 获取CA Bundle
+    CA_BUNDLE=$(kubectl get secret ${SECRET_NAME} -n ${NAMESPACE} -o jsonpath='{.data.ca\.crt}' | base64 -d | tr -d '\n')
+    
+    # 更新MutatingWebhookConfiguration
+    cat <<EOF | kubectl apply -f -
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: ${WEBHOOK_NAME}-mutating
+webhooks:
+- name: mysql-mutating.example.com
+  clientConfig:
+    service:
+      name: ${SERVICE_NAME}
+      namespace: ${NAMESPACE}
+      path: "/mutate-database-example-com-v1beta1-mysqlcluster"
+      port: 443
+    caBundle: ${CA_BUNDLE}
+  rules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: ["database.example.com"]
+    apiVersions: ["v1beta1"]
+    resources: ["mysqlclusters"]
+  failurePolicy: Fail
+  sideEffects: None
+  admissionReviewVersions: ["v1", "v1beta1"]
+EOF
+
+    # 更新ValidatingWebhookConfiguration
+    cat <<EOF | kubectl apply -f -
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: ${WEBHOOK_NAME}-validating
+webhooks:
+- name: mysql-validating.example.com
+  clientConfig:
+    service:
+      name: ${SERVICE_NAME}
+      namespace: ${NAMESPACE}
+      path: "/validate-database-example-com-v1beta1-mysqlcluster"
+      port: 443
+    caBundle: ${CA_BUNDLE}
+  rules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: ["database.example.com"]
+    apiVersions: ["v1beta1"]
+    resources: ["mysqlclusters"]
+  failurePolicy: Fail
+  sideEffects: None
+  admissionReviewVersions: ["v1", "v1beta1"]
+EOF
+
+    echo "✅ Webhook配置完成"
+}
+
+# 证书轮换
+rotate_certificates() {
+    echo "🔄 执行证书轮换..."
+    
+    # 备份当前证书
+    kubectl get secret ${SECRET_NAME} -n ${NAMESPACE} -o yaml > backup-${SECRET_NAME}-$(date +%Y%m%d-%H%M%S).yaml
+    
+    # 生成新证书
+    generate_certificates
+    
+    # 重启Webhook Pod以加载新证书
+    kubectl rollout restart deployment/admission-webhook -n ${NAMESPACE}
+    
+    # 等待Pod就绪
+    kubectl rollout status deployment/admission-webhook -n ${NAMESPACE} --timeout=300s
+    
+    echo "✅ 证书轮换完成"
+}
+
+# 验证证书有效性
+validate_certificates() {
+    echo "🔍 验证证书有效性..."
+    
+    # 检查证书是否存在
+    if ! kubectl get secret ${SECRET_NAME} -n ${NAMESPACE} >/dev/null 2>&1; then
+        echo "❌ 证书Secret不存在"
+        return 1
+    fi
+    
+    # 检查Webhook配置
+    if ! kubectl get mutatingwebhookconfiguration ${WEBHOOK_NAME}-mutating >/dev/null 2>&1; then
+        echo "❌ MutatingWebhookConfiguration不存在"
+        return 1
+    fi
+    
+    if ! kubectl get validatingwebhookconfiguration ${WEBHOOK_NAME}-validating >/dev/null 2>&1; then
+        echo "❌ ValidatingWebhookConfiguration不存在"
+        return 1
+    fi
+    
+    # 检查Pod状态
+    unhealthy_pods=$(kubectl get pods -n ${NAMESPACE} -l app=admission-webhook --no-headers | grep -v Running | wc -l)
+    if [ ${unhealthy_pods} -gt 0 ]; then
+        echo "❌ 发现${unhealthy_pods}个非Running状态的Pod"
+        return 1
+    fi
+    
+    echo "✅ 证书验证通过"
+    return 0
+}
+
+# 主函数
+main() {
+    case "${1:-install}" in
+        "install")
+            generate_certificates
+            configure_webhook
+            validate_certificates
+            ;;
+        "rotate")
+            rotate_certificates
+            validate_certificates
+            ;;
+        "validate")
+            validate_certificates
+            ;;
+        *)
+            echo "使用方法: $0 {install|rotate|validate}"
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"
+```
+
+### 4. 性能优化与监控
+
+```go
+// metrics.go - Webhook性能监控
+package metrics
+
+import (
+    "github.com/prometheus/client_golang/prometheus"
+    "sigs.k8s.io/controller-runtime/pkg/metrics"
+)
+
+var (
+    // Webhook请求计数
+    WebhookRequestTotal = prometheus.NewCounterVec(
+        prometheus.CounterOpts{
+            Name: "admission_webhook_requests_total",
+            Help: "Total number of admission webhook requests",
+        },
+        []string{"webhook", "operation", "result"},
+    )
+    
+    // Webhook请求延迟
+    WebhookRequestDuration = prometheus.NewHistogramVec(
+        prometheus.HistogramOpts{
+            Name:    "admission_webhook_request_duration_seconds",
+            Help:    "Duration of admission webhook requests",
+            Buckets: prometheus.ExponentialBuckets(0.001, 2, 15),
+        },
+        []string{"webhook", "operation"},
+    )
+    
+    // Webhook拒绝率
+    WebhookRejectionRate = prometheus.NewGaugeVec(
+        prometheus.GaugeOpts{
+            Name: "admission_webhook_rejection_rate",
+            Help: "Rate of rejected admission requests",
+        },
+        []string{"webhook"},
+    )
+)
+
+func init() {
+    metrics.Registry.MustRegister(
+        WebhookRequestTotal,
+        WebhookRequestDuration,
+        WebhookRejectionRate,
+    )
+}
+
+// 在Webhook处理器中使用
+func recordMetrics(webhookName, operation string, duration float64, allowed bool) {
+    result := "allowed"
+    if !allowed {
+        result = "rejected"
+    }
+    
+    WebhookRequestTotal.WithLabelValues(webhookName, operation, result).Inc()
+    WebhookRequestDuration.WithLabelValues(webhookName, operation).Observe(duration)
+    
+    // 计算拒绝率
+    totalRequests := prometheus.MustNewConstMetric(
+        WebhookRequestTotal.Desc(), prometheus.CounterValue, 1,
+        webhookName, operation, "",
+    )
+    
+    rejectedRequests := prometheus.MustNewConstMetric(
+        WebhookRequestTotal.Desc(), prometheus.CounterValue, 0,
+        webhookName, operation, "rejected",
+    )
+    
+    if totalRequests > 0 {
+        rejectionRate := float64(rejectedRequests) / float64(totalRequests)
+        WebhookRejectionRate.WithLabelValues(webhookName).Set(rejectionRate)
+    }
+}
+```
+
+### 5. 故障排除与调试
+
+```yaml
+# debugging-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: admission-webhook-debug-config
+  namespace: kube-system
+data:
+  log-level: "debug"
+  enable-profiling: "true"
+  request-logging: "true"
+  audit-logging: "true"
+```
+
+```bash
+#!/bin/bash
+# webhook-debug.sh - Webhook故障诊断脚本
+
+WEBHOOK_NAME="mysql-admission-webhook"
+NAMESPACE="kube-system"
+
+diagnose_webhook_issues() {
+    echo "=== Webhook诊断报告 ==="
+    
+    # 1. 检查Webhook配置
+    echo "1. 检查Webhook配置:"
+    kubectl get mutatingwebhookconfiguration ${WEBHOOK_NAME}-mutating -o wide
+    kubectl get validatingwebhookconfiguration ${WEBHOOK_NAME}-validating -o wide
+    
+    # 2. 检查证书状态
+    echo "2. 检查证书状态:"
+    kubectl get secret admission-webhook-certs -n ${NAMESPACE} -o yaml
+    
+    # 3. 检查Pod状态
+    echo "3. 检查Pod状态:"
+    kubectl get pods -n ${NAMESPACE} -l app=admission-webhook -o wide
+    
+    # 4. 检查服务状态
+    echo "4. 检查服务状态:"
+    kubectl get service admission-webhook-service -n ${NAMESPACE}
+    
+    # 5. 查看日志
+    echo "5. 查看最近日志:"
+    kubectl logs -n ${NAMESPACE} -l app=admission-webhook --tail=100
+    
+    # 6. 检查事件
+    echo "6. 检查相关事件:"
+    kubectl get events -n ${NAMESPACE} --field-selector involvedObject.name=admission-webhook-service
+    
+    echo "=== 诊断完成 ==="
+}
+
+test_webhook_functionality() {
+    echo "=== Webhook功能测试 ==="
+    
+    # 创建测试资源
+    cat <<EOF | kubectl apply -f -
+apiVersion: database.example.com/v1beta1
+kind: MySQLCluster
+metadata:
+  name: test-cluster
+  namespace: default
+spec:
+  replicas: 1
+  version: "8.0"
+  storage:
+    size: "10Gi"
+EOF
+
+    # 检查资源是否被正确处理
+    kubectl get mysqlcluster test-cluster -o yaml
+    
+    # 清理测试资源
+    kubectl delete mysqlcluster test-cluster
+    
+    echo "=== 功能测试完成 ==="
+}
+
+# 执行完整诊断
+perform_complete_diagnostics() {
+    diagnose_webhook_issues
+    test_webhook_functionality
+    
+    echo "建议检查点:"
+    echo "1. 证书是否有效且未过期"
+    echo "2. Webhook服务是否可达"
+    echo "3. RBAC权限是否正确配置"
+    echo "4. 网络策略是否允许通信"
+    echo "5. 资源配额是否充足"
+}
+
+perform_complete_diagnostics
+```
+
+### 6. 生产环境部署清单
+
+```markdown
+# Webhook生产环境部署清单
+
+## 🔧 部署前检查
+- [ ] Kubernetes版本兼容性验证 (v1.25+)
+- [ ] 网络连通性测试
+- [ ] RBAC权限配置验证
+- [ ] 证书有效期检查 (>90天)
+- [ ] 资源配额评估
+
+## 🚀 部署步骤
+1. [ ] 生成并部署证书
+2. [ ] 部署Webhook服务
+3. [ ] 配置MutatingWebhook
+4. [ ] 配置ValidatingWebhook
+5. [ ] 验证部署结果
+
+## 📊 监控配置
+- [ ] Prometheus指标集成
+- [ ] Grafana仪表板配置
+- [ ] 告警规则设置
+- [ ] 日志收集配置
+
+## 🔒 安全配置
+- [ ] 网络策略实施
+- [ ] 最小权限RBAC
+- [ ] 证书自动轮换
+- [ ] 审计日志启用
+
+## 🔄 运维流程
+- [ ] 定期证书轮换
+- [ ] 性能监控告警
+- [ ] 故障诊断预案
+- [ ] 版本升级流程
+```
 
 ### 1. 项目结构初始化
 

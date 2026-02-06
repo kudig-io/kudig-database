@@ -1,6 +1,6 @@
 # 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级 | **参考**: [Kubernetes Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **难度**: 中级-高级 | **参考**: [Kubernetes Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 ---
 

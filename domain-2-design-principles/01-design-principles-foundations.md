@@ -1,42 +1,228 @@
 # 11 - Kubernetes设计原则与哲学 (Design Principles & Philosophy)
 
-## 核心设计理念
+## 生产环境设计原则深度解析
+
+### 企业级可扩展性设计
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    Kubernetes设计原则金字塔                                  │
+│                    企业级可扩展性设计架构                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│                           ┌─────────────┐                                   │
-│                           │  可扩展性   │                                   │
-│                           │ Extensibility│                                   │
-│                           └──────┬──────┘                                   │
-│                                  │                                          │
-│                    ┌─────────────┴─────────────┐                            │
-│                    │        自愈能力           │                            │
-│                    │    Self-Healing           │                            │
-│                    └─────────────┬─────────────┘                            │
-│                                  │                                          │
-│              ┌───────────────────┴───────────────────┐                      │
-│              │          声明式配置                    │                      │
-│              │    Declarative Configuration          │                      │
-│              └───────────────────┬───────────────────┘                      │
-│                                  │                                          │
-│        ┌─────────────────────────┴─────────────────────────┐                │
-│        │              控制器模式 (Controller Pattern)       │                │
-│        │         期望状态 → 观察 → 比较 → 行动 → 循环        │                │
-│        └─────────────────────────┬─────────────────────────┘                │
-│                                  │                                          │
-│   ┌──────────────────────────────┴──────────────────────────────┐           │
-│   │                  API驱动 (API-Driven)                        │           │
-│   │    一切皆资源 (Everything is a Resource)                     │           │
-│   └──────────────────────────────┬──────────────────────────────┘           │
-│                                  │                                          │
-│   ┌──────────────────────────────┴──────────────────────────────┐           │
-│   │              不可变基础设施 (Immutable Infrastructure)       │           │
-│   └─────────────────────────────────────────────────────────────┘           │
+│  水平扩展 (Horizontal)         垂直扩展 (Vertical)          功能扩展        │
+│  ┌─────────────────┐          ┌─────────────────┐          ┌─────────┐     │
+│  │ HPA/VPA 自动扩缩 │          │ 资源请求限制调整  │          │ CRD扩展  │     │
+│  │ 节点自动伸缩     │          │ 节点规格升级     │          │ Operator │     │
+│  │ 多集群联邦       │          │ 硬件资源增加     │          │ Webhook  │     │
+│  └─────────────────┘          └─────────────────┘          └─────────┘     │
+│         │                            │                            │          │
+│         └────────────────────────────┼────────────────────────────┘          │
+│                                      │                                       │
+│                         ┌─────────────────────────┐                           │
+│                         │   统一扩展管理层          │                           │
+│                         │ - 扩展策略定义           │                           │
+│                         │ - 资源配额控制           │                           │
+│                         │ - 成本效益分析           │                           │
+│                         └─────────────────────────┘                           │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 自愈能力生产实践
+
+#### 健康检查最佳实践矩阵
+| 检查类型 | 适用场景 | 配置建议 | 运维要点 |
+|---------|---------|----------|----------|
+| livenessProbe | 容器死锁检测 | 初始延迟30s，超时5s | 避免过于频繁导致误杀 |
+| readinessProbe | 服务就绪检测 | 初始延迟10s，间隔5s | 影响服务发现和流量 |
+| startupProbe | 启动过程检测 | 长时间启动应用 | 替代其他探针在启动期间 |
+
+```yaml
+# 生产环境健康检查配置模板
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-app
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: app
+          image: app:v1.0
+          # 启动探针 - 处理长时间启动
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 30  # 最长150秒启动时间
+          
+          # 存活探针 - 检测应用是否存活
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 60  # 等待启动完成
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          
+          # 就绪探针 - 控制流量接入
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+```
+
+### 声明式配置的企业级实践
+
+#### 配置管理成熟度模型
+| 成熟度等级 | 特征 | 工具链 | 运维复杂度 |
+|-----------|------|--------|------------|
+| Level 1 基础 | 手工YAML编写 | vim+kubectl | 高 |
+| Level 2 模板化 | Helm/Kustomize | Helm charts | 中 |
+| Level 3 GitOps | 声明式Git管理 | ArgoCD/Flux | 低 |
+| Level 4 平台化 | 自助服务平台 | 内部PaaS | 最低 |
+
+#### 生产环境配置最佳实践
+```yaml
+# 多环境配置管理示例
+# base/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: app
+          image: registry.example.com/app:latest
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+---
+# overlays/production/deployment-patch.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 3  # 生产环境3副本
+  template:
+    spec:
+      containers:
+        - name: app
+          resources:
+            requests:
+              memory: "1Gi"    # 更高资源配置
+              cpu: "1000m"
+            limits:
+              memory: "2Gi"
+              cpu: "2000m"
+          env:
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: DB_POOL_SIZE
+              value: "50"      # 生产环境连接池大小
+```
+
+### 分布式系统可靠性设计
+
+#### 故障域隔离策略
+```yaml
+# 多区域部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: global-app
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: global-app
+  template:
+    metadata:
+      labels:
+        app: global-app
+    spec:
+      # 反亲和性确保Pod分散到不同节点
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - global-app
+                topologyKey: kubernetes.io/hostname
+        
+        # 跨区域部署
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: topology.kubernetes.io/region
+                    operator: In
+                    values:
+                      - us-east-1
+                      - us-west-2
+                      - eu-central-1
+```
+
+### API驱动架构的企业实践
+
+#### 版本兼容性管理
+| 版本类型 | 稳定性 | 兼容性承诺 | 使用场景 |
+|---------|--------|------------|----------|
+| v1 | GA稳定 | 完全向后兼容 | 生产环境 |
+| v1beta1 | Beta测试 | 保持尽力兼容 | 预生产验证 |
+| v1alpha1 | Alpha实验 | 不保证兼容 | 功能预览 |
+
+```yaml
+# API版本迁移策略
+# 1. 同时支持多个版本
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: applications.example.com
+spec:
+  group: example.com
+  versions:
+    - name: v1beta1
+      served: true
+      storage: false  # 不作为存储版本
+      schema:
+        openAPIV3Schema: {...}
+    
+    - name: v1
+      served: true
+      storage: true   # 主要存储版本
+      schema:
+        openAPIV3Schema: {...}
+  
+  conversion:
+    strategy: Webhook
+    webhook:
+      clientConfig:
+        service:
+          name: conversion-webhook
+          namespace: kube-system
 ```
 
 ## 设计原则对比矩阵
