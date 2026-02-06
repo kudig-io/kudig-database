@@ -1,6 +1,6 @@
 # Domain-1: Kubernetes架构基础
 
-> **文档数量**: 17 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+
+> **文档数量**: 18 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+
 
 ---
 
@@ -42,14 +42,15 @@ Kubernetes架构基础域深入解析K8s核心架构设计原理，涵盖控制�
 | 11 | [安全架构](./11-security-architecture.md) | RBAC、网络策略、Pod安全、密钥管理 | ⭐⭐⭐⭐⭐ |
 | 12 | [可观测性体系](./12-observability-system.md) | Metrics、Logging、Tracing、监控告警 | ⭐⭐⭐⭐ |
 
-### 高级主题 (13-17)
+### 高级主题 (13-18)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
 | 13 | [扩展机制](./13-extension-mechanisms.md) | CRD、Admission Webhook、Aggregated API | ⭐⭐⭐⭐ |
 | 14 | [多租户架构](./14-multi-tenancy-architecture.md) | 命名空间隔离、资源配额、网络隔离 | ⭐⭐⭐⭐ |
 | 15 | [性能优化](./15-performance-optimization.md) | 架构层面性能调优、资源规划、瓶颈分析 | ⭐⭐⭐⭐ |
 | 16 | [故障排查](./16-troubleshooting-guide.md) | 架构相关故障诊断、日志分析、性能分析 | ⭐⭐⭐⭐⭐ |
-| 17 | [版本演进](./17-version-evolution.md) | K8s版本发展史、重大架构变化、升级策略 | ⭐⭐⭐⭐ |
+| 17 | [生产运维最佳实践](./17-production-operations-best-practices.md) | 高可用部署、安全加固、监控告警、备份恢复 | ⭐⭐⭐⭐⭐ |
+| 18 | [升级迁移策略](./18-upgrade-migration-strategy.md) | K8s版本发展史、重大架构变化、升级策略 | ⭐⭐⭐⭐ |
 
 ---
 
@@ -64,8 +65,8 @@ Kubernetes架构基础域深入解析K8s核心架构设计原理，涵盖控制�
 深入学习存储、调度、控制器等核心机制
 
 ### 🏢 专家精通路径
-**11 → 12 → 13 → 14 → 15**  
-掌握安全、可观测性、扩展等高级架构主题
+**11 → 12 → 13 → 14 → 15 → 17**  
+掌握安全、可观测性、扩展等高级架构主题，深入生产运维最佳实践
 
 ---
 

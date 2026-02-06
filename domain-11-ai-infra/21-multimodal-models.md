@@ -621,4 +621,4 @@ spec:
    - 热门查询: 缓存24小时
 
 ---
-**相关**: [116-LLM Serving](../116-llm-serving-architecture.md) | **版本**: transformers 4.36+
+**相关**: [116-LLM Serving](../18-llm-serving-architecture.md) | **版本**: transformers 4.36+

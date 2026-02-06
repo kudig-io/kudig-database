@@ -1197,9 +1197,9 @@ while True:
 ---
 
 **相关表格：**
-- [111-AI基础设施架构](./111-ai-infrastructure.md)
-- [112-分布式训练框架](./112-distributed-training-frameworks.md)
-- [117-AI实验管理](./117-ai-experiment-management.md)
+- [111-AI基础设施架构](./01-ai-infrastructure.md)
+- [112-分布式训练框架](./05-distributed-training-frameworks.md)
+- [117-AI实验管理](./07-ai-experiment-management.md)
 
 **版本信息：**
 - Optuna: v3.5.0+
