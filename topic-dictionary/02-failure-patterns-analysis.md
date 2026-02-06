@@ -841,4 +841,204 @@ NetworkPolicy更新时标签选择器配置错误，意外阻断了合法的服�
 
 ---
 
+## 8. 高级故障诊断技术
+
+### 8.1 分布式系统故障定位方法论
+
+#### 分层诊断框架
+```mermaid
+graph TB
+    A[用户报告问题] --> B{问题分类}
+    B --> C[性能问题]
+    B --> D[可用性问题]
+    B --> E[数据问题]
+    
+    C --> F[应用层诊断]
+    C --> G[中间件层诊断]
+    C --> H[基础设施层诊断]
+    
+    D --> I[服务状态检查]
+    D --> J[网络连通性]
+    D --> K[依赖服务健康]
+    
+    E --> L[数据一致性]
+    E --> M[存储系统]
+    E --> N[缓存层]
+    
+    F --> O[应用日志分析]
+    G --> P[中间件监控]
+    H --> Q[系统资源]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style F fill:#e8f5e8
+```
+
+#### 故障传播路径分析
+| 传播类型 | 特征表现 | 诊断要点 | 阻断策略 |
+|----------|----------|----------|----------|
+| **垂直传播** | 从底层向上层逐级影响 | 从基础设施开始排查 | 隔离故障节点 |
+| **水平传播** | 同层组件间相互影响 | 分析依赖关系图 | 断开环形依赖 |
+| **跨层传播** | 跨越多个抽象层影响 | 建立端到端追踪 | 实施熔断机制 |
+| **连锁反应** | 一个小故障引发雪崩效应 | 监控关键指标阈值 | 设置降级预案 |
+
+### 8.2 智能化故障预测与自愈
+
+#### 异常检测算法矩阵
+| 算法类型 | 适用场景 | 检测精度 | 计算复杂度 | 实施建议 |
+|----------|----------|----------|------------|----------|
+| **统计学方法** | 稳定系统的异常波动 | 高 | 低 | 适合基础监控 |
+| **机器学习** | 复杂模式识别 | 很高 | 中等 | 需要历史数据训练 |
+| **深度学习** | 多维时序异常 | 最高 | 高 | 大规模系统推荐 |
+| **规则引擎** | 已知故障模式 | 中等 | 低 | 快速实施首选 |
+
+#### 自愈系统架构设计
+```yaml
+# ========== 智能自愈系统配置 ==========
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: intelligent-healing-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: critical-service
+  minReplicas: 3
+  maxReplicas: 30
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 4
+        periodSeconds: 60
+      - type: Percent
+        value: 100
+        periodSeconds: 60
+
+---
+# ========== 故障预测告警规则 ==========
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: predictive-alerting
+spec:
+  groups:
+  - name: predictive.rules
+    rules:
+    - alert: PredictedHighErrorRate
+      expr: predict_linear(application_error_rate[1h], 4 * 3600) > 0.05
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "预测未来4小时错误率将超过5%"
+        description: "基于过去1小时趋势预测，建议提前扩容"
+        
+    - alert: AnomalyDetectionCPU
+      expr: histogram_quantile(0.95, rate(container_cpu_usage_seconds_total[5m])) > 
+            (avg_over_time(histogram_quantile(0.95, rate(container_cpu_usage_seconds_total[5m]))[1h:]) * 1.5)
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "CPU使用出现异常峰值"
+        description: "当前CPU使用超出历史平均水平50%，可能存在性能问题"
+```
+
+### 8.3 故障演练与混沌工程
+
+#### 生产环境故障演练框架
+| 演练类型 | 目标 | 风险等级 | 实施频率 | 评估指标 |
+|----------|------|----------|----------|----------|
+| **网络分区** | 验证服务容错能力 | 高 | 季度 | MTTR、数据一致性 |
+| **节点故障** | 测试自动恢复机制 | 中 | 月度 | 恢复时间、数据丢失 |
+| **存储故障** | 验证数据保护策略 | 高 | 半年 | RTO、RPO达成率 |
+| **API限流** | 检查降级处理能力 | 低 | 月度 | 用户体验影响度 |
+| **安全攻击** | 验证安全防护体系 | 中 | 季度 | 威胁检测准确率 |
+
+#### Chaos Engineering最佳实践
+```bash
+#!/bin/bash
+# ========== 混沌工程实验脚本 ==========
+set -euo pipefail
+
+# 实验配置
+EXPERIMENT_NAME="pod-kill-test"
+NAMESPACE="production"
+TARGET_DEPLOYMENT="user-service"
+DURATION="5m"
+INTERVAL="10s"
+
+echo "🚀 开始混沌工程实验: ${EXPERIMENT_NAME}"
+
+# 1. 预检准备
+echo "📋 执行预检检查..."
+kubectl get deployment ${TARGET_DEPLOYMENT} -n ${NAMESPACE} || {
+    echo "❌ 目标部署不存在"
+    exit 1
+}
+
+# 2. 建立基线监控
+echo "📊 建立基线监控..."
+BASELINE_METRICS=$(kubectl get --raw="/apis/metrics.k8s.io/v1beta1/namespaces/${NAMESPACE}/pods" | \
+    jq '.items[] | select(.metadata.name | startswith("'${TARGET_DEPLOYMENT}'")) | .containers[].usage.cpu')
+
+# 3. 执行故障注入
+echo "💥 注入故障..."
+litmusctl create experiment \
+    --name=${EXPERIMENT_NAME} \
+    --namespace=${NAMESPACE} \
+    --target-deployment=${TARGET_DEPLOYMENT} \
+    --duration=${DURATION} \
+    --interval=${INTERVAL} \
+    --chaos-type=pod-delete
+
+# 4. 实时监控影响
+echo "🔍 监控实验影响..."
+watch -n 5 "kubectl get pods -n ${NAMESPACE} -l app=${TARGET_DEPLOYMENT} -o wide"
+
+# 5. 收集实验数据
+echo "📝 收集实验数据..."
+END_METRICS=$(kubectl get --raw="/apis/metrics.k8s.io/v1beta1/namespaces/${NAMESPACE}/pods" | \
+    jq '.items[] | select(.metadata.name | startswith("'${TARGET_DEPLOYMENT}'")) | .containers[].usage.cpu')
+
+# 6. 生成实验报告
+cat > chaos-report-${EXPERIMENT_NAME}.md << EOF
+# 混沌工程实验报告: ${EXPERIMENT_NAME}
+
+## 实验概要
+- **时间**: $(date)
+- **目标**: ${TARGET_DEPLOYMENT}
+- **持续时间**: ${DURATION}
+- **故障类型**: Pod删除
+
+## 关键指标变化
+- 基线CPU使用: ${BASELINE_METRICS}
+- 故障期间CPU使用: ${END_METRICS}
+- 恢复时间: TODO
+
+## 结论与建议
+TODO: 根据实验结果填写
+EOF
+
+echo "✅ 混沌工程实验完成"
+```
+
+---
+
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

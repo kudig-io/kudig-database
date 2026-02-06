@@ -1242,9 +1242,9 @@ recommendations:
 ---
 
 **相关表格：**
-- [113-AI模型注册中心](./113-model-registry.md)
-- [116-LLM模型Serving架构](./116-llm-serving-architecture.md)
-- [117-AI实验管理](./117-ai-experiment-management.md)
+- [113-AI模型注册中心](./09-model-registry.md)
+- [116-LLM模型Serving架构](./18-llm-serving-architecture.md)
+- [117-AI实验管理](./07-ai-experiment-management.md)
 
 **版本信息：**
 - PyTorch: v2.0+

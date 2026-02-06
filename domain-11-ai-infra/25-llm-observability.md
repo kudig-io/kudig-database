@@ -1160,4 +1160,4 @@ spec:
 5. **Dashboard**: 为不同角色定制Dashboard
 
 ---
-**相关**: [114-GPU监控](../114-gpu-monitoring.md) | **版本**: Prometheus 2.45+
+**相关**: [114-GPU监控](../04-gpu-monitoring.md) | **版本**: Prometheus 2.45+

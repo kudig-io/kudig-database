@@ -1363,7 +1363,7 @@ groups:
 - Kubernetes: v1.27+
 
 **相关表格：**
-- [111-AI基础设施架构](./111-ai-infrastructure.md)
-- [112-分布式训练框架](./112-distributed-training-frameworks.md)
-- [113-AI模型注册中心](./113-model-registry.md)
+- [111-AI基础设施架构](./01-ai-infrastructure.md)
+- [112-分布式训练框架](./05-distributed-training-frameworks.md)
+- [113-AI模型注册中心](./09-model-registry.md)
 - [08-存储卷管理](./08-storage-volumes.md)

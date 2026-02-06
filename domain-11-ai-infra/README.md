@@ -72,6 +72,7 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 | 33 | [模型可解释性](./33-model-explainability.md) | SHAP/LIME解释、公平性检测、透明度保障 | 模型解释 |
 | 34 | [联邦学习](./34-federated-learning.md) | 分布式协同训练、隐私保护、安全聚合 | 协同学习 |
 | 35 | [模型漂移监控](./35-model-drift-monitoring.md) | 实时漂移检测、自动重训练、预警机制 | 模型运维 |
+| 36 | [AI平台增强可观测性](./36-ai-platform-observability-enhanced.md) | 五维可观测性、智能告警、分布式追踪 | 平台监控 |
 
 ---
 

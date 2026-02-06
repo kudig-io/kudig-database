@@ -1161,4 +1161,464 @@ spec:
 
 ---
 
+## 10. 生产环境安全最佳实践
+
+### 10.1 零信任安全实施框架
+
+```yaml
+# ========== 生产环境零信任安全配置 ==========
+apiVersion: security.k8s.io/v1
+kind: PodSecurityPolicy
+metadata:
+  name: production-restricted
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+  - ALL
+  volumes:
+  - configMap
+  - emptyDir
+  - projected
+  - secret
+  - downwardAPI
+  - persistentVolumeClaim
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: MustRunAs
+    ranges:
+    - min: 1
+      max: 65535
+  fsGroup:
+    rule: MustRunAs
+    ranges:
+    - min: 1
+      max: 65535
+  readOnlyRootFilesystem: true
+
+---
+# ========== 网络策略实施 ==========
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+      podSelector:
+        matchLabels:
+          app: prometheus
+    ports:
+    - protocol: TCP
+      port: 9090
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+
+---
+# ========== RBAC最小权限配置 ==========
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: production
+  name: app-developer-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "services", "configmaps"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "statefulsets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources: ["jobs", "cronjobs"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-developer-binding
+  namespace: production
+subjects:
+- kind: User
+  name: developer@example.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: app-developer-role
+  apiGroup: rbac.authorization.k8s.io
+```
+
+### 10.2 安全监控与告警策略
+
+| 安全维度 | 监控指标 | 告警阈值 | 响应动作 | 处理时效 |
+|---------|---------|---------|---------|---------|
+| **身份认证** | 异常登录尝试、令牌泄露 | >5次失败登录/小时 | 立即锁定账户 | 5分钟 |
+| **权限变更** | RBAC规则修改、ServiceAccount变更 | 任何未授权变更 | 安全审计、回滚变更 | 30分钟 |
+| **网络访问** | 异常端口访问、外部连接 | 连接到黑名单IP | 阻断流量、安全调查 | 15分钟 |
+| **镜像安全** | 漏洞扫描结果、基线不符合 | Critical/High漏洞 | 阻断部署、紧急修复 | 1小时 |
+| **运行时安全** | 异常系统调用、文件修改 | 违反安全策略 | 隔离容器、告警通知 | 10分钟 |
+
+### 10.3 合规性自动化检查
+
+```bash
+#!/bin/bash
+# ========== Kubernetes安全合规检查脚本 ==========
+set -euo pipefail
+
+COMPLIANCE_REPORT="/var/reports/compliance-$(date +%Y%m%d).txt"
+echo "Kubernetes安全合规检查报告 - $(date)" > ${COMPLIANCE_REPORT}
+
+# CIS基准检查
+check_cis_benchmark() {
+    echo "=== CIS Kubernetes Benchmark 检查 ===" >> ${COMPLIANCE_REPORT}
+    
+    # 检查API Server配置
+    if kubectl get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}' | \
+       grep -q "anonymous-auth=false"; then
+        echo "✅ API Server匿名认证已禁用" >> ${COMPLIANCE_REPORT}
+    else
+        echo "❌ API Server匿名认证未禁用" >> ${COMPLIANCE_REPORT}
+    fi
+    
+    # 检查etcd加密
+    if kubectl get pod -n kube-system -l component=etcd -o jsonpath='{.items[*].spec.containers[*].command}' | \
+       grep -q "auto-tls=true"; then
+        echo "✅ etcd自动TLS已启用" >> ${COMPLIANCE_REPORT}
+    else
+        echo "❌ etcd自动TLS未启用" >> ${COMPLIANCE_REPORT}
+    fi
+    
+    # 检查Pod安全策略
+    psp_count=$(kubectl get psp --no-headers | wc -l)
+    if [ ${psp_count} -gt 0 ]; then
+        echo "✅ 已配置${psp_count}个Pod安全策略" >> ${COMPLIANCE_REPORT}
+    else
+        echo "❌ 未配置Pod安全策略" >> ${COMPLIANCE_REPORT}
+    fi
+}
+
+# GDPR合规检查
+check_gdpr_compliance() {
+    echo -e "\n=== GDPR合规检查 ===" >> ${COMPLIANCE_REPORT}
+    
+    # 检查数据加密
+    secrets_encrypted=$(kubectl get secrets -A --no-headers | wc -l)
+    echo "🔒 加密Secret数量: ${secrets_encrypted}" >> ${COMPLIANCE_REPORT}
+    
+    # 检查日志保留策略
+    log_retention_days=$(kubectl get cm -n kube-system kube-proxy -o jsonpath='{.data.config\.yaml}' | \
+                        grep -o "log-flush-frequency=[0-9]*" | cut -d'=' -f2 || echo "未配置")
+    echo "📝 日志刷新频率: ${log_retention_days}s" >> ${COMPLIANCE_REPORT}
+}
+
+check_cis_benchmark
+check_gdpr_compliance
+
+echo -e "\n合规检查完成，详情请查看: ${COMPLIANCE_REPORT}"
+```
+
+## 11. 成本优化与资源管理
+
+### 11.1 资源配额与限制管理
+
+```yaml
+# ========== 生产环境资源配额配置 ==========
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: production-quota
+  namespace: production
+spec:
+  hard:
+    # 计算资源配额
+    requests.cpu: "100"
+    requests.memory: "200Gi"
+    limits.cpu: "200"
+    limits.memory: "400Gi"
+    
+    # 存储资源配额
+    requests.storage: "10Ti"
+    persistentvolumeclaims: "1000"
+    
+    # 对象数量配额
+    pods: "10000"
+    services: "500"
+    secrets: "1000"
+    configmaps: "1000"
+
+---
+# ========== LimitRange配置 ==========
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: production-limits
+  namespace: production
+spec:
+  limits:
+  - type: Container
+    default:
+      cpu: "1"
+      memory: "1Gi"
+    defaultRequest:
+      cpu: "100m"
+      memory: "128Mi"
+    max:
+      cpu: "8"
+      memory: "16Gi"
+    min:
+      cpu: "10m"
+      memory: "16Mi"
+  - type: Pod
+    max:
+      cpu: "16"
+      memory: "32Gi"
+```
+
+### 11.2 成本监控与优化策略
+
+| 优化维度 | 监控指标 | 优化策略 | 预期收益 | 实施复杂度 |
+|---------|---------|---------|---------|-----------|
+| **节点资源** | CPU/内存利用率、节点空闲率 | 水平扩缩容、节点池优化 | 20-40%成本节约 | ⭐⭐ |
+| **存储成本** | PVC使用率、快照保留 | 生命周期管理、冷热数据分离 | 30-50%存储节约 | ⭐⭐⭐ |
+| **网络费用** | 流量使用、跨区域传输 | CDN优化、就近部署 | 25-35%网络节约 | ⭐⭐ |
+| **Spot实例** | 按需/竞价实例比例 | 智能调度策略 | 50-80%计算节约 | ⭐⭐⭐⭐ |
+| **镜像缓存** | 镜像拉取次数、缓存命中率 | 镜像预热、本地缓存 | 15-25%拉取节约 | ⭐⭐ |
+
+### 11.3 成本优化自动化脚本
+
+```bash
+#!/bin/bash
+# ========== Kubernetes成本优化分析脚本 ==========
+set -euo pipefail
+
+COST_ANALYSIS_DIR="/var/cost-analysis/$(date +%Y%m%d)"
+mkdir -p ${COST_ANALYSIS_DIR}
+
+analyze_cluster_costs() {
+    echo "=== 集群成本分析报告 ===" > ${COST_ANALYSIS_DIR}/cost-report.txt
+    
+    # 节点成本分析
+    echo "节点成本分布:" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.cpu}{"\t"}{.status.capacity.memory}{"\n"}{end}' | \
+    while read node cpu mem; do
+        # 基于实例类型的估算成本（示例价格）
+        case ${node} in
+            *m5.large*) hourly_cost=0.096 ;;
+            *m5.xlarge*) hourly_cost=0.192 ;;
+            *m5.2xlarge*) hourly_cost=0.384 ;;
+            *) hourly_cost=0.200 ;;  # 默认价格
+        esac
+        monthly_cost=$(echo "${hourly_cost} * 730" | bc -l)
+        echo "${node}: $${monthly_cost}/月 (${cpu}vCPU, ${mem})" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    done
+    
+    # Pod资源使用分析
+    echo -e "\nPod资源使用效率:" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    kubectl top pods -A --no-headers | \
+    awk '{
+        cpu_req=$3+0; mem_req=$4+0;
+        cpu_util=$5+0; mem_util=$6+0;
+        cpu_efficiency = (cpu_util/cpu_req)*100;
+        mem_efficiency = (mem_util/mem_req)*100;
+        if(cpu_efficiency < 30 || mem_efficiency < 30) {
+            print $1"/"$2": CPU效率="cpu_efficiency"% Memory效率="mem_efficiency"%"
+        }
+    }' >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    
+    # 存储成本分析
+    echo -e "\n存储成本分析:" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    kubectl get pvc -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.resources.requests.storage}{"\n"}{end}' | \
+    while read ns pvc size; do
+        # 基于存储类型的估算成本
+        storage_cost=$(echo "${size%Gi} * 0.10" | bc -l)  # $0.10/GiB/月
+        echo "${ns}/${pvc}: ${size} ($${storage_cost}/月)" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    done
+}
+
+generate_optimization_recommendations() {
+    echo -e "\n=== 优化建议 ===" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    
+    # 低效Pod推荐
+    echo "建议优化的Pod:" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    kubectl top pods -A --no-headers | \
+    awk '$5 < 30 || $6 < 30 {print $1"/"$2" - 资源使用率低"}' >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    
+    # 节点优化建议
+    echo -e "\n节点优化建议:" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+    kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.allocatable.cpu}{"\n"}{end}' | \
+    while read node allocatable; do
+        pod_count=$(kubectl get pods --field-selector spec.nodeName=${node} --no-headers | wc -l)
+        pods_per_core=$(echo "${pod_count}/${allocatable}" | bc -l)
+        if (( $(echo "${pods_per_core} < 2" | bc -l) )); then
+            echo "${node}: CPU利用率低，考虑缩小实例规格" >> ${COST_ANALYSIS_DIR}/cost-report.txt
+        fi
+    done
+}
+
+analyze_cluster_costs
+generate_optimization_recommendations
+
+echo "成本分析报告已生成: ${COST_ANALYSIS_DIR}/cost-report.txt"
+```
+
+## 12. 变更管理与发布策略
+
+### 12.1 GitOps流水线最佳实践
+
+```yaml
+# ========== ArgoCD应用配置模板 ==========
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-app-template
+  namespace: argocd
+spec:
+  project: production
+  source:
+    repoURL: https://github.com/company/production-app.git
+    targetRevision: HEAD
+    path: k8s/overlays/production
+    helm:
+      valueFiles:
+      - values-production.yaml
+      parameters:
+      - name: image.tag
+        value: ${ARGOCD_APP_REVISION}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+    syncOptions:
+    - CreateNamespace=true
+    - PruneLast=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+
+---
+# ========== 多环境配置管理 ==========
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-environment-config
+  namespace: production
+data:
+  # 生产环境特定配置
+  DATABASE_URL: "postgresql://prod-db.cluster.local:5432/app"
+  REDIS_URL: "redis://prod-redis.cluster.local:6379"
+  LOG_LEVEL: "WARN"
+  CACHE_TTL: "300"
+  ENABLE_DEBUG: "false"
+  MAX_CONNECTIONS: "100"
+  
+  # 安全配置
+  TLS_MIN_VERSION: "TLS1.3"
+  HSTS_MAX_AGE: "31536000"
+  CORS_ALLOWED_ORIGINS: "https://app.example.com"
+  SECURITY_HEADERS: |
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    X-Content-Type-Options: nosniff
+    X-Frame-Options: DENY
+    Content-Security-Policy: default-src 'self'
+```
+
+### 12.2 渐进式发布策略
+
+| 发布策略 | 实施方式 | 风险控制 | 监控指标 | 回滚机制 |
+|---------|---------|---------|---------|---------|
+| **蓝绿部署** | 维护两套完整环境 | 零停机时间 | 健康检查、性能指标 | 一键切换回旧环境 |
+| **金丝雀发布** | 逐步增加新版本流量 | 限制影响范围 | 错误率、延迟指标 | 自动回滚到稳定版本 |
+| **滚动更新** | 逐个替换Pod实例 | 原地升级 | 就绪探针、存活探针 | 失败时暂停并回滚 |
+| **功能开关** | 代码层面控制功能 | 精确控制范围 | 业务指标、用户反馈 | 动态开启/关闭功能 |
+
+### 12.3 变更审批与审计流程
+
+```yaml
+# ========== 变更管理流程配置 ==========
+apiVersion: changemanagement.example.com/v1
+kind: ChangeRequest
+metadata:
+  name: cr-20260205-001
+spec:
+  changeType: "Production Deployment"
+  priority: "High"
+  affectedSystems:
+  - name: "user-service"
+    environment: "production"
+    criticality: "Business Critical"
+  
+  approvalWorkflow:
+    reviewers:
+    - role: "SRE Team Lead"
+      required: true
+    - role: "Security Officer"
+      required: true
+    - role: "Product Owner"
+      required: false
+    
+    approvalConditions:
+    - type: "Automated Tests"
+      status: "Passed"
+      required: true
+    - type: "Security Scan"
+      status: "Clean"
+      required: true
+    - type: "Performance Test"
+      status: "Within Threshold"
+      required: true
+  
+  rollbackPlan:
+    triggerConditions:
+    - metric: "error_rate"
+      threshold: "5%"
+      duration: "5m"
+    - metric: "response_time"
+      threshold: "2s"
+      duration: "10m"
+    - metric: "business_impact"
+      threshold: "significant_degradation"
+      duration: "immediate"
+    
+    rollbackActions:
+    - action: "argo_rollout_undo"
+      target: "user-service"
+      timeout: "300s"
+    - action: "notification_slack"
+      target: "#production-alerts"
+      message: "Automatic rollback triggered for user-service"
+```
+
+---
+
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级
