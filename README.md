@@ -1,6 +1,6 @@
 # Kusheet - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **表格数量**: 219
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 573 | **表格数量**: 320
 
 ---
 
@@ -10,22 +10,23 @@
 - [快速导航(按角色)](#快速导航按角色)
 - [知识体系架构](#知识体系架构)
 - [演示文档(topic-presentations)](#演示文档topic-presentations)
-  - [域A: 架构基础](#域a-架构基础-architecture-fundamentals)
-  - [域B: 设计原理](#域b-设计原理-design-principles)
-  - [域C: 控制平面](#域c-控制平面-control-plane)
-  - [域D: 工作负载与调度](#域d-工作负载与调度-workloads--scheduling)
-  - [域E: 网络](#域e-网络-networking)
-  - [域F: 存储](#域f-存储-storage)
-  - [域G: 安全合规](#域g-安全合规-security--compliance)
-  - [域H: 可观测性](#域h-可观测性-observability)
-  - [域I: 平台运维](#域i-平台运维-platform-operations)
-  - [域J: 扩展生态](#域j-扩展生态-extensions--ecosystem)
-  - [域K: AI基础设施](#域k-ai基础设施-ai-infrastructure)
-  - [域L: 故障排查](#域l-故障排查-troubleshooting)
-  - [域M: Docker基础](#域m-docker基础-docker-fundamentals)
-  - [域N: Linux基础](#域n-linux基础-linux-fundamentals)
-  - [域O: 网络基础](#域o-网络基础-network-fundamentals)
-  - [域P: 存储基础](#域p-存储基础-storage-fundamentals)
+  - [域1: 架构基础](#域1-架构基础-architecture-fundamentals)
+  - [域2: 设计原理](#域2-设计原理-design-principles)
+  - [域3: 控制平面](#域3-控制平面-control-plane)
+  - [域4: 工作负载与调度](#域4-工作负载与调度-workloads--scheduling)
+  - [域5: 网络](#域5-网络-networking)
+  - [域6: 存储](#域6-存储-storage)
+  - [域7: 安全合规](#域7-安全合规-security--compliance)
+  - [域8: 可观测性](#域8-可观测性-observability)
+  - [域9: 平台运维](#域9-平台运维-platform-operations)
+  - [域10: 扩展生态](#域10-扩展生态-extensions--ecosystem)
+  - [域11: AI基础设施](#域11-ai基础设施-ai-infrastructure)
+  - [域12: 故障排查](#域12-故障排查-troubleshooting)
+  - [域13: Docker基础](#域13-docker基础-docker-fundamentals)
+  - [域14: Linux基础](#域14-linux基础-linux-fundamentals)
+  - [域15: 网络基础](#域15-网络基础-network-fundamentals)
+  - [域16: 存储基础](#域16-存储基础-storage-fundamentals)
+  - [域17: 云厂商Kubernetes服务](#域17-云厂商kubernetes服务-cloud-provider-kubernetes-services)
 - [多维度查询附录](#多维度查询附录)
   - [附录A: 开发者视角](#附录a-开发者视角)
   - [附录B: 运维工程师视角](#附录b-运维工程师视角)
@@ -45,6 +46,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 |:---|:---|
 | **生产级配置** | 所有 YAML/Shell 示例可直接用于生产环境 |
 | **AI Infra专题** | 覆盖GPU调度、分布式训练、模型服务、成本优化 |
+| **企业级运维** | 包含监控告警、日志分析、镜像管理、CI/CD等企业级平台 |
 | **多维度索引** | 按技术域、场景、角色、组件快速定位 |
 | **深度解析** | 控制平面组件源码级剖析、CRI/CSI/CNI接口详解 |
 
@@ -54,12 +56,12 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 | 角色 | 推荐起点 | 核心关注域 |
 |:---|:---|:---|
-| **开发者** | [05-kubectl](#域a-架构基础-architecture-fundamentals) → [10-工作负载](#域d-工作负载与调度-workloads--scheduling) → [47-Service](#域e-网络-networking) | 工作负载、网络、CI/CD |
-| **运维工程师** | [35-etcd](#域c-控制平面-control-plane) → [99-排障](#域l-故障排查-troubleshooting) → [93-监控](#域h-可观测性-observability) | 控制平面、可观测性、故障排查 |
-| **架构师** | [01-架构](#域a-架构基础-architecture-fundamentals) → [11-设计原则](#域b-设计原理-design-principles) → [18-高可用](#域b-设计原理-design-principles) | 架构基础、设计原理、多集群 |
-| **测试工程师** | [106-混沌工程](#域h-可观测性-observability) → [124-CI/CD](#域j-扩展生态-extensions--ecosystem) | 混沌工程、CI/CD、可观测性 |
-| **产品经理** | [01-架构](#域a-架构基础-architecture-fundamentals) → [26-成本](#域k-ai基础设施-ai-infrastructure) → [12-AI成本](#域k-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
-| **终端用户** | [05-kubectl](#域a-架构基础-architecture-fundamentals) → [126-Helm](#域j-扩展生态-extensions--ecosystem) → [125-GitOps](#域j-扩展生态-extensions--ecosystem) | CLI工具、部署管理 |
+| **开发者** | [05-kubectl](#域1-架构基础-architecture-fundamentals) → [10-工作负载](#域4-工作负载与调度-workloads--scheduling) → [47-Service](#域5-网络-networking) | 工作负载、网络、CI/CD |
+| **运维工程师** | [35-etcd](#域3-控制平面-control-plane) → [99-排障](#域12-故障排查-troubleshooting) → [93-监控](#域8-可观测性-observability) | 控制平面、可观测性、故障排查 |
+| **架构师** | [01-架构](#域1-架构基础-architecture-fundamentals) → [11-设计原则](#域2-设计原理-design-principles) → [18-高可用](#域2-设计原理-design-principles) | 架构基础、设计原理、多集群 |
+| **测试工程师** | [106-混沌工程](#域8-可观测性-observability) → [124-CI/CD](#域10-扩展生态-extensions--ecosystem) | 混沌工程、CI/CD、可观测性 |
+| **产品经理** | [01-架构](#域1-架构基础-architecture-fundamentals) → [26-成本](#域11-ai基础设施-ai-infrastructure) → [12-AI成本](#域11-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
+| **终端用户** | [05-kubectl](#域1-架构基础-architecture-fundamentals) → [126-Helm](#域10-扩展生态-extensions--ecosystem) → [125-GitOps](#域10-扩展生态-extensions--ecosystem) | CLI工具、部署管理 |
 
 ---
 
@@ -69,22 +71,23 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         Kubernetes 知识体系架构                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  [域A] 架构基础    [域B] 设计原理    [域C] 控制平面                          │
+│  [域1] 架构基础    [域2] 设计原理    [域3] 控制平面                          │
 │     ↓                  ↓                 ↓                                  │
-│  [域D] 工作负载 ←→ [域E] 网络 ←→ [域F] 存储                                  │
+│  [域4] 工作负载 ←→ [域5] 网络 ←→ [域6] 存储                                  │
 │     ↓                  ↓                 ↓                                  │
-│  [域G] 安全合规    [域H] 可观测性   [域I] 平台运维                           │
+│  [域7] 安全合规    [域8] 可观测性   [域9] 平台运维                           │
 │     ↓                  ↓                 ↓                                  │
-│  [域J] 扩展生态    [域K] AI基础设施  [域L] 故障排查                          │
+│  [域10] 扩展生态    [域11] AI基础设施  [域12] 故障排查                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                          底层基础知识域                                      │
-│  [域M] Docker基础  [域N] Linux基础  [域O] 网络基础  [域P] 存储基础           │
+│  [域13] Docker基础  [域14] Linux基础  [域15] 网络基础  [域16] 存储基础         │
+│  [域17] 云厂商Kubernetes服务                                                 │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### 域A: 架构基础 (Architecture Fundamentals)
+### 域1: 架构基础 (Architecture Fundamentals)
 
 > 17 篇 | **从生产环境运维专家角度深度优化**，新增企业级高可用架构设计、零信任安全实施、基于机器学习的性能优化、高级威胁检测等专家级内容
 
@@ -109,7 +112,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域B: 设计原理 (Design Principles)
+### 域2: 设计原理 (Design Principles)
 
 > 18 篇 | K8s设计哲学、声明式API、控制器模式、分布式原理、可观测性、安全设计、性能优化
 
@@ -136,7 +139,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域C: 控制平面 (Control Plane)
+### 域3: 控制平面 (Control Plane)
 
 > 23 篇 | 控制平面架构、组件详解、接口深度解析、调优扩展、故障排查
 
@@ -180,7 +183,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域D: 工作负载与调度 (Workloads & Scheduling)
+### 域4: 工作负载与调度 (Workloads & Scheduling)
 
 > 14 篇 | Pod、Deployment、调度策略、自动扩缩容、资源管理
 
@@ -215,7 +218,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域E: 网络 (Networking)
+### 域5: 网络 (Networking)
 
 > 36 篇 | CNI、Service、DNS、Ingress、Gateway API、网络策略、服务网格、多集群网络
 
@@ -293,7 +296,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域F: 存储 (Storage)
+### 域6: 存储 (Storage)
 
 > 15 篇 | 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、PV/PVC核心概念、StorageClass动态供给、CSI驱动集成、性能调优、故障排查、安全合规、备份灾备等企业级实践
 
@@ -317,7 +320,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域G: 安全合规 (Security & Compliance)
+### 域7: 安全合规 (Security & Compliance)
 
 > 16 篇 | 认证授权、网络安全、运行时安全、审计合规、安全实践、策略引擎
 
@@ -349,7 +352,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域H: 可观测性 (Observability)
+### 域8: 可观测性 (Observability)
 
 > 17 篇 | 架构体系、监控指标、日志审计、链路追踪、告警管理、故障排查、性能分析、混沌工程
 
@@ -392,7 +395,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域I: 平台运维 (Platform Operations)
+### 域9: 平台运维 (Platform Operations)
 
 > 25 篇 | v2.0 | 运维体系、集群管理、监控告警、GitOps、自动化、成本优化、安全合规、灾备恢复
 
@@ -451,7 +454,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域J: 扩展生态 (Extensions & Ecosystem)
+### 域10: 扩展生态 (Extensions & Ecosystem)
 
 > 16 篇 | 扩展开发、包管理、CI/CD、GitOps、构建工具、服务网格、运维基础、多集群管理、监控告警、安全合规
 
@@ -503,7 +506,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域K: AI基础设施 (AI Infrastructure)
+### 域11: AI基础设施 (AI Infrastructure)
 
 > 30 篇 | AI平台基础、模型训练、LLM专题、运维监控、成本优化
 
@@ -567,47 +570,9 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 29 | 阿里云集成 | [alibaba-cloud-integration](./domain-11-ai-infra/29-alibaba-cloud-integration.md) | ACK AI能力 |
 | 30 | 安全合规 | [ai-security-compliance](./domain-11-ai-infra/30-ai-security-compliance.md) | AI平台安全加固 |
 
-### 域Q: 云厂商Kubernetes服务 (Cloud Provider Kubernetes Services)
-
-> 13 篇 | 主流公有云和国内云厂商的Kubernetes托管服务详解
-
-#### Q1: 国际云厂商 (01-05)
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 01 | 阿里云ACK | [alicloud-ack-overview](./domain-17-cloud-provider/01-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版双模式、Terway网络插件、RRSA身份联合、ASI Serverless节点 |
-| 02 | 专有云ACK | [alicloud-apsara-ack](./domain-17-cloud-provider/02-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境ESS伸缩、SLS日志服务、POP平台运维 |
-| 03 | AWS EKS | [aws-eks-overview](./domain-17-cloud-provider/03-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、EKS Anywhere混合云、Bottlerocket OS |
-| 04 | Azure AKS | [azure-aks-overview](./domain-17-cloud-provider/04-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、Confidential Containers、Dapr集成 |
-| 05 | GCP GKE | [google-cloud-gke-overview](./domain-17-cloud-provider/05-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、Anthos Service Mesh、Config Connector、Borg技术传承 |
-
-#### Q2: 国内云厂商 (06-13)
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 06 | 腾讯云TKE | [tencent-tke-overview](./domain-17-cloud-provider/06-tencent-tke/tencent-tke-overview.md) | 万级节点支持、VPC-CNI网络、超级节点、CODING DevOps集成 |
-| 07 | 华为云CCE | [huawei-cce-overview](./domain-17-cloud-provider/07-huawei-cce/huawei-cce-overview.md) | GPU节点优化、ASM服务网格、裸金属节点、软件开发生产线 |
-| 08 | 天翼云TKE | [ctyun-tke-overview](./domain-17-cloud-provider/08-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持、边缘计算优化 |
-| 09 | 移动云CKE | [ecloud-cke-overview](./domain-17-cloud-provider/09-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机、政企定制方案 |
-| 10 | IBM IKS | [ibm-iks-overview](./domain-17-cloud-provider/10-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点、Red Hat OpenShift集成 |
-| 11 | Oracle OKE | [oracle-oke-overview](./domain-17-cloud-provider/11-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群、企业级安全 |
-| 12 | UCloud UK8S | [ucloud-uk8s-overview](./domain-17-cloud-provider/12-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片技术、政企解决方案、混合云部署 |
-| 13 | 字节云VEK | [volcengine-vek-overview](./domain-17-cloud-provider/13-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维、火山引擎生态 |
-
-#### Q3: ACK关联产品 (240-245)
-
-| # | 简称 | 表格 | 关键内容 |
-|:---:|:---|:---|:---|
-| 240 | ECS计算 | [ack-ecs-compute](./domain-17-cloud-provider/01-alicloud-ack/240-ack-ecs-compute.md) | 实例规格选型、节点池配置、Spot策略、弹性伸缩组集成 |
-| 241 | 负载均衡 | [ack-slb-nlb-alb](./domain-17-cloud-provider/01-alicloud-ack/241-ack-slb-nlb-alb.md) | CLB/NLB/ALB完整配置、生产级注解参考、多协议支持 |
-| 242 | VPC网络 | [ack-vpc-network](./domain-17-cloud-provider/01-alicloud-ack/242-ack-vpc-network.md) | 网络规划、NAT网关、专线连接、安全组配置 |
-| 243 | RAM权限 | [ack-ram-authorization](./domain-17-cloud-provider/01-alicloud-ack/243-ack-ram-authorization.md) | RRSA认证、权限矩阵、跨账号授权、安全最佳实践 |
-| 244 | ROS编排 | [ack-ros-iac](./domain-17-cloud-provider/01-alicloud-ack/244-ack-ros-iac.md) | 资源模板、与Terraform对比、基础设施即代码 |
-| 245 | EBS存储 | [ack-ebs-storage](./domain-17-cloud-provider/01-alicloud-ack/245-ack-ebs-storage.md) | ESSD性能优化、快照管理、加密配置、存储类动态供应 |
-
 ---
 
-### 域L: 故障排查 (Troubleshooting)
+### 域12: 故障排查 (Troubleshooting)
 
 > 100+ 篇 | **全新结构化故障排查知识体系，从生产环境运维专家角度深度优化**
 
@@ -742,7 +707,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域M: Docker基础 (Docker Fundamentals)
+### 域13: Docker基础 (Docker Fundamentals)
 
 > 11 篇 | Docker架构、镜像管理、容器生命周期、网络、存储、Compose、安全、故障排查、性能监控、日志管理、自动化运维，**从生产环境运维专家角度深度优化，新增企业级CI/CD集成方案和容器平台最佳实践**
 
@@ -762,7 +727,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域N: Linux基础 (Linux Fundamentals)
+### 域14: Linux基础 (Linux Fundamentals)
 
 > 9 篇 | 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术、运维基础，**从生产环境运维专家角度深度优化，新增大量企业级最佳实践和自动化运维方案**
 
@@ -780,7 +745,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域O: 网络基础 (Network Fundamentals)
+### 域15: 网络基础 (Network Fundamentals)
 
 > 6 篇 | 协议栈、TCP/UDP、DNS、负载均衡、网络安全、SDN，从生产环境运维专家角度深度优化
 
@@ -795,7 +760,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
-### 域P: 存储基础 (Storage Fundamentals)
+### 域16: 存储基础 (Storage Fundamentals)
 
 > 6 篇 | 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、类型详解、RAID配置、分布式系统、性能调优和企业级运维实践
 
@@ -1216,10 +1181,10 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ### 2026-01 增强更新
 **底层基础知识域新增** (200-234):
-- 域M: Docker基础 (8篇): 架构概述、镜像管理、容器生命周期、网络详解、存储卷、Compose编排、安全最佳实践、故障排查
-- 域N: Linux基础 (8篇): 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术(Namespaces/Cgroups)
-- 域O: 网络基础 (6篇): 协议栈(OSI/TCP-IP)、TCP/UDP详解、DNS原理配置、负载均衡技术、网络安全、SDN与网络虚拟化
-- 域P: 存储基础 (6篇): 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、类型详解、RAID配置、分布式系统、性能调优和企业级运维实践
+- 域13: Docker基础 (8篇): 架构概述、镜像管理、容器生命周期、网络详解、存储卷、Compose编排、安全最佳实践、故障排查
+- 域14: Linux基础 (8篇): 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术(Namespaces/Cgroups)
+- 域15: 网络基础 (6篇): 协议栈(OSI/TCP-IP)、TCP/UDP详解、DNS原理配置、负载均衡技术、网络安全、SDN与网络虚拟化
+- 域16: 存储基础 (6篇): 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、类型详解、RAID配置、分布式系统、性能调优和企业级运维实践
 - **阿里云 ACK 关联产品增强** (240-245): ECS 计算资源、SLB/NLB/ALB 负载均衡、VPC 网络规划、RAM 权限与 RRSA、ROS 资源编排、EBS 云盘存储
 - **专有云 (Apsara Stack) 专题** (250-252): ESS 弹性伸缩、SLS 日志服务、POP 平台运维 (ASOP)
 
@@ -1282,6 +1247,175 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
   - 生产配置示例: kubeconfig多集群配置、kubeadm完整ClusterConfiguration、集群规模配置参考表
   - 云厂商特定配置: 阿里云ACK(托管版/专有版对比、节点池kubelet配置)、AWS EKS(aws-auth ConfigMap)、Azure AKS(CLI配置)、GCP GKE(Autopilot/Standard对比)
   - 配置检查与验证: 命令集、验证清单
+
+---
+
+### 域17: 云厂商Kubernetes服务 (Cloud Provider Kubernetes Services)
+
+> 13 篇 | 主流公有云和国内云厂商的Kubernetes托管服务详解
+
+#### Q1: 国际云厂商 (01-05)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 阿里云ACK | [alicloud-ack-overview](./domain-17-cloud-provider/01-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版双模式、Terway网络插件、RRSA身份联合、ASI Serverless节点 |
+| 02 | 专有云ACK | [alicloud-apsara-ack](./domain-17-cloud-provider/02-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境ESS伸缩、SLS日志服务、POP平台运维 |
+| 03 | AWS EKS | [aws-eks-overview](./domain-17-cloud-provider/03-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、EKS Anywhere混合云、Bottlerocket OS |
+| 04 | Azure AKS | [azure-aks-overview](./domain-17-cloud-provider/04-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、Confidential Containers、Dapr集成 |
+| 05 | GCP GKE | [google-cloud-gke-overview](./domain-17-cloud-provider/05-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、Anthos Service Mesh、Config Connector、Borg技术传承 |
+
+#### Q2: 国内云厂商 (06-13)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 06 | 腾讯云TKE | [tencent-tke-overview](./domain-17-cloud-provider/06-tencent-tke/tencent-tke-overview.md) | 万级节点支持、VPC-CNI网络、超级节点、CODING DevOps集成 |
+| 07 | 华为云CCE | [huawei-cce-overview](./domain-17-cloud-provider/07-huawei-cce/huawei-cce-overview.md) | GPU节点优化、ASM服务网格、裸金属节点、软件开发生产线 |
+| 08 | 天翼云TKE | [ctyun-tke-overview](./domain-17-cloud-provider/08-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持、边缘计算优化 |
+| 09 | 移动云CKE | [ecloud-cke-overview](./domain-17-cloud-provider/09-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机、政企定制方案 |
+| 10 | IBM IKS | [ibm-iks-overview](./domain-17-cloud-provider/10-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点、Red Hat OpenShift集成 |
+| 11 | Oracle OKE | [oracle-oke-overview](./domain-17-cloud-provider/11-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群、企业级安全 |
+| 12 | UCloud UK8S | [ucloud-uk8s-overview](./domain-17-cloud-provider/12-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片技术、政企解决方案、混合云部署 |
+| 13 | 字节云VEK | [volcengine-vek-overview](./domain-17-cloud-provider/13-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维、火山引擎生态 |
+
+#### Q3: ACK关联产品 (240-245)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 240 | ECS计算 | [ack-ecs-compute](./domain-17-cloud-provider/01-alicloud-ack/240-ack-ecs-compute.md) | 实例规格选型、节点池配置、Spot策略、弹性伸缩组集成 |
+| 241 | 负载均衡 | [ack-slb-nlb-alb](./domain-17-cloud-provider/01-alicloud-ack/241-ack-slb-nlb-alb.md) | CLB/NLB/ALB完整配置、生产级注解参考、多协议支持 |
+| 242 | VPC网络 | [ack-vpc-network](./domain-17-cloud-provider/01-alicloud-ack/242-ack-vpc-network.md) | 网络规划、NAT网关、专线连接、安全组配置 |
+| 243 | RAM权限 | [ack-ram-authorization](./domain-17-cloud-provider/01-alicloud-ack/243-ack-ram-authorization.md) | RRSA认证、权限矩阵、跨账号授权、安全最佳实践 |
+| 244 | ROS编排 | [ack-ros-iac](./domain-17-cloud-provider/01-alicloud-ack/244-ack-ros-iac.md) | 资源模板、与Terraform对比、基础设施即代码 |
+| 245 | EBS存储 | [ack-ebs-storage](./domain-17-cloud-provider/01-alicloud-ack/245-ack-ebs-storage.md) | ESSD性能优化、快照管理、加密配置、存储类动态供应 |
+| 246 | 生产就绪评估 | [production-readiness](./domain-19-papers/01-kubernetes-production-readiness-assessment.md) | 系统性评估框架、12维度检查清单、成熟度模型 |
+| 247 | 大规模性能优化 | [large-scale-optimization](./domain-19-papers/02-kubernetes-large-scale-performance-optimization.md) | 5000+节点优化、控制平面调优、网络存储性能 |
+| 248 | 零信任安全架构 | [zero-trust-security](./domain-19-papers/03-kubernetes-zero-trust-security-architecture.md) | 身份认证、网络微隔离、运行时防护、合规检查 |
+| 249 | 多云混合部署 | [multi-cloud-deployment](./domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.md) | 跨云架构、数据同步、成本优化、故障切换 |
+| 250 | GitOps实践指南 | [gitops-practice](./domain-19-papers/05-kubernetes-gitops-complete-practice-guide.md) | ArgoCD/FluxCD、CI/CD流水线、自动化部署 |
+| 251 | 成本治理FinOps | [cost-governance](./domain-19-papers/06-kubernetes-cost-governance-finops-practice.md) | 成本监控、预算管理、资源优化、价值分析 |
+| 252 | CSI存储深度实践 | [csi-storage](./domain-19-papers/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
+| 253 | 网络策略微隔离 | [network-microsegmentation](./domain-19-papers/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
+| 254 | 服务网格Istio | [service-mesh-istio](./domain-19-papers/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
+| 255 | 自动化SRE实践 | [automation-sre](./domain-19-papers/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 256 | API Server深度优化 | [api-server-optimization](./domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
+| 257 | 调度器深度优化 | [scheduler-optimization](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
+| 258 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
+| 259 | 事件驱动架构 | [event-driven-architecture](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md) | 事件驱动架构、异步处理、CQRS、事件溯源 |
+| 260 | 混沌工程测试 | [chaos-engineering](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md) | 混沌工程、故障注入、系统韧性、可靠性测试 |
+| 261 | 边缘计算实践 | [edge-computing](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md) | 边缘计算、KubeEdge、物联网、边缘自治 |
+
+### 域20: 企业级监控与告警 (Enterprise Monitoring & Alerting)
+
+> 3 篇 | 企业级监控平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 262 | Prometheus监控 | [prometheus-monitoring](./domain-20-enterprise-monitoring-alerting/01-prometheus-enterprise-monitoring.md) | Prometheus高可用部署、告警规则设计、性能优化、Thanos全局视图 |
+| 263 | Zabbix监控 | [zabbix-monitoring](./domain-20-enterprise-monitoring-alerting/07-zabbix-enterprise-monitoring.md) | Zabbix高可用架构、自定义监控、告警策略、性能调优 |
+| 264 | New Relic APM | [new-relic-apm](./domain-20-enterprise-monitoring-alerting/08-new-relic-enterprise-apm.md) | New Relic应用性能监控、分布式追踪、智能告警、AIOps分析 |
+
+### 域21: 日志管理与分析 (Logging Management & Analytics)
+
+> 3 篇 | 企业级日志平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 265 | ELK日志系统 | [elk-logging](./domain-21-logging-management-analytics/01-elk-stack-enterprise-logging.md) | ELK Stack高可用部署、日志处理管道、安全配置、性能调优 |
+| 266 | Splunk日志分析 | [splunk-analytics](./domain-21-logging-management-analytics/05-splunk-enterprise-log-analytics.md) | Splunk SIEM平台、高级搜索、安全分析、企业级部署 |
+| 267 | Loggly云日志 | [loggly-cloud](./domain-21-logging-management-analytics/06-loggly-cloud-log-management.md) | Loggly云原生日志管理、快速部署、实时分析、智能告警 |
+
+### 域22: 容器镜像管理 (Container Image Management)
+
+> 3 篇 | 企业级容器镜像仓库架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 268 | Harbor镜像仓库 | [harbor-registry](./domain-22-container-image-management/01-harbor-enterprise-image-registry.md) | Harbor高可用部署、安全扫描、镜像复制、权限管理 |
+| 269 | GitLab Registry | [gitlab-registry](./domain-22-container-image-management/05-gitlab-container-registry-enterprise.md) | GitLab集成容器注册表、CI/CD集成、安全扫描、权限管理 |
+| 270 | Amazon ECR | [amazon-ecr](./domain-22-container-image-management/06-amazon-ecr-enterprise.md) | AWS弹性容器注册表、跨账户共享、安全扫描、成本优化 |
+
+### 域23: GitOps与CI/CD (GitOps & CI/CD)
+
+> 2 篇 | 企业级持续交付平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 271 | Argo CD GitOps | [argo-cd-gitops](./domain-23-gitops-ci-cd/01-argo-cd-enterprise-gitops.md) | Argo CD高可用部署、多环境管理、安全集成、自动化策略 |
+| 272 | GitHub Actions | [github-actions](./domain-23-gitops-ci-cd/04-github-actions-enterprise.md) | GitHub Actions工作流自动化、安全策略、企业治理、性能优化 |
+
+### 域24: 基础设施即代码 (Infrastructure as Code)
+
+> 1 篇 | 企业级基础设施自动化架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 266 | Terraform IaC | [terraform-iac](./domain-24-infrastructure-as-code/01-terraform-enterprise-iac.md) | Terraform模块化设计、策略管理、CI/CD集成、状态治理 |
+
+### 域25: 云原生安全 (Cloud Native Security)
+
+> 1 篇 | 企业级云原生安全防护架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 267 | Falco安全监控 | [falco-security](./domain-25-cloud-native-security/01-falco-cloud-native-security.md) | Falco规则引擎、威胁检测、自动响应、合规管理 |
+| 268 | Sysdig容器安全 | [sysdig-container-security](./domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md) | Sysdig深度监控、容器取证、安全合规、威胁狩猎 |
+| 269 | Aqua容器安全 | [aqua-container-security](./domain-25-cloud-native-security/03-aqua-enterprise-container-security.md) | Aqua安全平台、镜像扫描、运行时防护、合规管理 |
+| 270 | Thanos指标联邦 | [thanos-metrics-federation](./domain-20-enterprise-monitoring-alerting/04-thanos-enterprise-metrics-federation.md) | Thanos高可用架构、联邦策略、长期存储、查询优化 |
+| 271 | Loki日志聚合 | [loki-log-aggregation](./domain-21-logging-management-analytics/03-loki-enterprise-log-aggregation.md) | Loki轻量级架构、日志处理管道、查询分析、性能优化 |
+| 272 | JFrog制品管理 | [jfrog-artifactory](./domain-22-container-image-management/03-jfrog-artifactory-enterprise.md) | JFrog平台架构、多格式支持、安全扫描、DevOps集成 |
+| 273 | GitLab CI/CD | [gitlab-cicd](./domain-23-gitops-ci-cd/03-gitlab-enterprise-cicd.md) | GitLab流水线、Runner配置、安全扫描、部署策略 |
+| 274 | Pulumi基础设施 | [pulumi-iac](./domain-24-infrastructure-as-code/03-pulumi-enterprise-iac.md) | Pulumi编程模型、多云管理、团队协作、安全最佳实践 |
+### 域26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)
+
+> 3 篇 | 企业级服务网格架构与微服务治理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 275 | Istio服务网格 | [istio-service-mesh](./domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md) | Istio高可用部署、流量管理、安全控制、性能优化 |
+| 276 | Linkerd服务网格 | [linkerd-service-mesh](./domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md) | Linkerd轻量级架构、自动mTLS、简化运维、Rust性能优势 |
+| 277 | Consul Connect | [consul-connect](./domain-26-service-mesh-microservices/03-consul-connect-enterprise.md) | Consul一体化解决方案、服务发现、配置管理、网络控制 |
+
+### 域27: 多云与混合云架构管理 (Multi-cloud & Hybrid Cloud Architecture Management)
+
+> 1 篇 | 企业级多云平台架构与混合云管理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 278 | AWS EKS多云 | [aws-eks-multicloud](./domain-27-multi-cloud-hybrid/01-aws-eks-enterprise-multicloud.md) | AWS EKS多云架构、集群管理、安全配置、监控运维 |
+
+### 域28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)
+
+> 1 篇 | 企业级数据库与中间件架构运维实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 279 | MySQL数据库 | [mysql-database](./domain-28-enterprise-database-middleware/01-mysql-enterprise-database.md) | MySQL高可用架构、性能优化、安全配置、监控告警 |
+
+### 域29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)
+
+> 1 篇 | 企业级自动化测试平台与质量保障体系
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 280 | Selenium自动化 | [selenium-automation](./domain-29-automated-testing-quality/01-selenium-enterprise-automation.md) | Selenium测试平台、框架设计、持续集成、监控报告 |
+
+### 域30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)
+
+> 1 篇 | 企业级灾备架构与业务连续性管理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 281 | VMware vSphere灾备 | [vmware-vsphere-dr](./domain-30-disaster-recovery-business-continuity/01-vmware-vsphere-enterprise-dr.md) | VMware vSphere灾备架构、高可用设计、存储复制、故障切换 |
+| 282 | Veeam备份恢复 | [veeam-backup](./domain-30-disaster-recovery-business-continuity/02-veeam-enterprise-backup.md) | Veeam备份恢复解决方案、备份策略、恢复演练、监控告警 |
+| 283 | Envoy服务网格 | [envoy-proxy](./domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md) | Envoy Proxy高性能代理、配置优化、性能调优、生产运维 |
+| 284 | Azure AKS多云 | [azure-aks-multicloud](./domain-27-multi-cloud-hybrid/02-azure-aks-enterprise-multicloud.md) | Azure AKS多云管理、集群配置、Azure AD集成、监控告警 |
+| 285 | PostgreSQL数据库 | [postgresql-database](./domain-28-enterprise-database-middleware/02-postgresql-enterprise-database.md) | PostgreSQL高可用架构、主从复制、Patroni集群、Barman备份 |
+| 286 | JUnit5单元测试 | [junit5-testing](./domain-29-automated-testing-quality/02-junit5-enterprise-testing.md) | JUnit5测试框架、参数化测试、动态测试、扩展机制 |
+| 287 | Datadog监控平台 | [datadog-monitoring](./domain-20-enterprise-monitoring-alerting/05-datadog-enterprise-monitoring.md) | Datadog统一监控平台、APM、基础设施监控、日志管理、合成监控 |
+| 288 | Graylog日志管理 | [graylog-logging](./domain-21-logging-management-analytics/04-graylog-enterprise-logging.md) | Graylog开源日志管理、处理管道、安全配置、高可用部署 |
+| 289 | Quay镜像仓库 | [quay-registry](./domain-22-container-image-management/04-quay-enterprise-registry.md) | Quay企业级镜像管理、安全扫描、签名验证、CI/CD集成 |
+
+---
 
 ## 许可证
 

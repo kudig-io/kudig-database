@@ -39,6 +39,12 @@
 | 10 | [Docker 日志管理与分析](./10-docker-logging-management.md) | 集中式日志架构、ELK/Loki 集成、日志分析、安全管理 |
 | 11 | [Docker 自动化运维与CI/CD集成](./11-docker-automation-devops.md) | IaC实践、CI/CD流水线、自动化部署、灾备回滚 |
 
+### 命令参考篇
+
+| 序号 | 文档名称 | 内容概要 |
+|------|----------|----------|
+| 99 | [Docker 命令大全参考](./99-docker-commands-reference.md) | 完整 Docker 命令参考，包含命令名称、用途、功能清单、注意事项及安全风险 |
+
 ## 🎯 学习路径建议
 
 ### 🔰 入门阶段 (1-3)
@@ -173,7 +179,7 @@ CMD ["./main"]
 ```
 
 ### 安全配置基线
-```yaml
+```json
 # Docker 守护进程安全配置
 {
   "userns-remap": "default",
