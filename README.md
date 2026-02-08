@@ -1,4 +1,4 @@
-# Kusheet - Kubernetes 生产运维全域知识库
+# KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 606 | **领域数量**: 31
 
@@ -46,6 +46,7 @@
 - [专题资源](#专题资源)
   - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
   - [topic-presentations: 培训演示](#topic-presentations-培训演示)
+  - [topic-structural-trouble-shooting: 结构化故障排查](#topic-structural-trouble-shooting-结构化故障排查)
 - [多维度查询附录](#多维度查询附录)
 - [变更记录](#变更记录)
 
@@ -81,21 +82,50 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ## 知识体系架构
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         Kubernetes 知识体系架构                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  [域1] 架构基础    [域2] 设计原理    [域3] 控制平面                          │
-│     ↓                  ↓                 ↓                                  │
-│  [域4] 工作负载 ←→ [域5] 网络 ←→ [域6] 存储                                  │
-│     ↓                  ↓                 ↓                                  │
-│  [域7] 安全合规    [域8] 可观测性   [域9] 平台运维                           │
-│     ↓                  ↓                 ↓                                  │
-│  [域10] 扩展生态    [域11] AI基础设施  [域12] 故障排查                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                          底层基础知识域                                      │
-│  [域13] Docker基础  [域14] Linux基础  [域15] 网络基础  [域16] 存储基础         │
-│  [域17] 云厂商Kubernetes服务  [域31] 硬件基础设施                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│                         Kubernetes 生产运维全域知识体系                            │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                            核心知识域 (Domain 1-12)                               │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域1 架构基础 │→│ 域2 设计原理 │→│ 域3 控制平面 │→│ 域4 工作负载 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│         ↓               ↓               ↓               ↓                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │  域5 网络   │←→│  域6 存储   │←→│ 域7 安全合规 │←→│ 域8 可观测性 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│         ↓               ↓               ↓               ↓                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域9 平台运维 │→│ 域10扩展生态 │→│ 域11 AI基础 │→│ 域12故障排查 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                         底层基础知识域 (Domain 13-17)                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域13 Docker │  │ 域14 Linux  │  │ 域15网络基础 │  │ 域16存储基础 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│                        ┌─────────────────────────┐                               │
+│                        │  域17 云厂商K8s服务     │                               │
+│                        └─────────────────────────┘                               │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                        企业级运维专题 (Domain 18-31)                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域18生产运维 │  │域19技术白皮书│  │域20企业监控 │  │域21日志管理 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域22镜像仓库 │  │域23 GitOps  │  │ 域24 IaC   │  │域25云原生安全│              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域26服务网格 │  │域27多云混合 │  │域28数据库   │  │域29自动化测试│              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐                                                │
+│  │域30灾备恢复 │  │域31硬件基础 │                                                │
+│  └─────────────┘  └─────────────┘                                                │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                              专题资源                                             │
+│  ┌────────────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐│
+│  │  topic-dictionary      │  │  topic-presentations   │  │topic-structural-trouble││
+│  │  (运维词典/16篇)       │  │  (培训演示/7篇)        │  │ -shooting(故障排查/40篇)││
+│  └────────────────────────┘  └────────────────────────┘  └────────────────────────┘│
+└──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -989,6 +1019,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **存储** | [kubernetes-storage-presentation.md](./topic-presentations/kubernetes-storage-presentation.md) | PV/PVC架构、StorageClass、CSI驱动、阿里云存储、备份恢复 | 82.4KB |
 | **工作负载** | [kubernetes-workload-presentation.md](./topic-presentations/kubernetes-workload-presentation.md) | Pod生命周期、控制器模式、调度策略、资源管理、自动扩缩容 | 100.3KB |
 | **Terway网络** | [kubernetes-terway-presentation.md](./topic-presentations/kubernetes-terway-presentation.md) | Terway架构、网络模式、阿里云ACK集成、固定IP、安全组集成 | 162.5KB |
+| **演示模板** | [presentation-template.md](./topic-presentations/presentation-template.md) | 标准演示模板、章节结构、格式规范、复用指南 | 2.8KB |
 
 **特点**:
 - ✅ 系统化内容组织，无遗漏知识点
@@ -999,7 +1030,43 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
+### 结构化故障排查知识库 (topic-structural-trouble-shooting)
+
+> **生产环境故障排查专家级知识库** | 40篇文档 | 12个分类 | 覆盖K8s全组件故障排查场景
+
+本专题基于生产环境真实案例编写，提供系统性排查方法、实战经验总结、风险控制指导。
+
+| 分类 | 文档数 | 核心内容 | 覆盖组件 |
+|:---|:---:|:---|:---|
+| **控制平面** | 6 | [01-control-plane](./topic-structural-trouble-shooting/01-control-plane/) | API Server、etcd、Scheduler、Controller Manager、Webhook、APF |
+| **节点组件** | 6 | [02-node-components](./topic-structural-trouble-shooting/02-node-components/) | kubelet、kube-proxy、容器运行时、节点故障、镜像仓库、GPU/设备插件 |
+| **网络** | 6 | [03-networking](./topic-structural-trouble-shooting/03-networking/) | CNI、DNS、Service/Ingress、NetworkPolicy、Istio、Gateway API |
+| **存储** | 2 | [04-storage](./topic-structural-trouble-shooting/04-storage/) | PV/PVC、CSI驱动 |
+| **工作负载** | 6 | [05-workloads](./topic-structural-trouble-shooting/05-workloads/) | Pod、Deployment、StatefulSet、DaemonSet、Job/CronJob、ConfigMap/Secret |
+| **安全认证** | 4 | [06-security-auth](./topic-structural-trouble-shooting/06-security-auth/) | RBAC、证书、Pod安全、审计日志 |
+| **资源调度** | 4 | [07-resources-scheduling](./topic-structural-trouble-shooting/07-resources-scheduling/) | 资源配额、HPA/VPA、Cluster Autoscaler、PDB |
+| **集群运维** | 6 | [08-cluster-operations](./topic-structural-trouble-shooting/08-cluster-operations/) | 维护升级、日志监控、Helm、高可用灾备、CRD/Operator、Kustomize |
+| **云厂商** | 1 | [09-cloud-provider](./topic-structural-trouble-shooting/09-cloud-provider/) | 云厂商特定故障排查 |
+| **AI/ML工作负载** | 1 | [10-ai-ml-workloads](./topic-structural-trouble-shooting/10-ai-ml-workloads/) | GPU调度、分布式训练、模型服务故障 |
+| **GitOps/DevOps** | 1 | [11-gitops-devops](./topic-structural-trouble-shooting/11-gitops-devops/) | ArgoCD、FluxCD故障排查 |
+| **监控可观测性** | 1 | [12-monitoring-observability](./topic-structural-trouble-shooting/12-monitoring-observability/) | Prometheus、Grafana故障排查 |
+
+**快速定位**: 详细的[故障排查索引](./topic-structural-trouble-shooting/README.md)支持按错误现象和组件快速查找。
+
+---
+
 ## 变更历史
+
+### 2026-02-07 README文档全面更新
+**根目录README与文件结构同步**:
+- ✅ 更新文档总数统计: 606篇
+- ✅ 更新知识体系架构图: 添加topic-structural-trouble-shooting(40篇)
+- ✅ 添加域18生产运维实践章节: 24篇完整文档索引(8个子章节)
+- ✅ 添加域19技术白皮书章节: 16篇深度技术专题
+- ✅ 添加topic-structural-trouble-shooting章节: 40篇结构化故障排查文档
+- ✅ 修复目录缩进问题，确保层级结构正确
+- ✅ 补充topic-presentations演示模板文档
+- ✅ 优化专题资源章节的完整性
 
 ### 2026-02-05 重大更新 v2.1.0 - domain-4 工作负载管理全面增强与质量提升
 - ✅ **domain-4 工作负载管理全面增强**
@@ -1316,6 +1383,97 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 259 | 事件驱动架构 | [event-driven-architecture](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md) | 事件驱动架构、异步处理、CQRS、事件溯源 |
 | 260 | 混沌工程测试 | [chaos-engineering](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md) | 混沌工程、故障注入、系统韧性、可靠性测试 |
 | 261 | 边缘计算实践 | [edge-computing](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md) | 边缘计算、KubeEdge、物联网、边缘自治 |
+
+### 域18: 生产运维实践 (Production Operations)
+
+> 24 篇 | 企业级生产环境运维全方位实践指南
+
+#### P1: 架构与部署 (01-03)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 生产架构设计 | [production-architecture](./domain-18-production-operations/01-production-architecture-design-principles.md) | 高可用架构设计原则、生产环境部署模式 |
+| 02 | 多云混合部署 | [multi-cloud-deployment](./domain-18-production-operations/02-multi-cloud-hybrid-deployment-strategy.md) | 跨云部署策略、混合云架构设计 |
+| 03 | 边缘计算部署 | [edge-computing](./domain-18-production-operations/03-edge-computing-production-deployment.md) | 边缘节点管理、IoT场景部署 |
+
+#### P2: 监控可观测性 (04-06)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 04 | 企业监控体系 | [enterprise-monitoring](./domain-18-production-operations/04-enterprise-monitoring-system.md) | Prometheus架构、告警体系设计 |
+| 05 | 日志分析平台 | [logging-platform](./domain-18-production-operations/05-logging-collection-analysis-platform.md) | ELK/Loki部署、日志分析实践 |
+| 06 | APM性能监控 | [apm-monitoring](./domain-18-production-operations/06-apm-application-performance-monitoring.md) | 应用性能监控、链路追踪 |
+
+#### P3: 安全合规 (07-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 07 | 零信任架构 | [zero-trust](./domain-18-production-operations/07-zero-trust-security-architecture.md) | 零信任安全模型、身份认证 |
+| 08 | CIS基准合规 | [cis-compliance](./domain-18-production-operations/08-cis-benchmark-compliance-audit.md) | CIS基准检查、合规审计 |
+| 09 | SBOM物料清单 | [sbom](./domain-18-production-operations/09-software-bill-of-materials.md) | 软件物料清单、供应链安全 |
+
+#### P4: DevOps与IaC (10-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | GitOps实践 | [gitops-pipeline](./domain-18-production-operations/10-gitops-pipeline-practices.md) | ArgoCD/FluxCD实践、CI/CD流水线 |
+| 11 | 基础设施即代码 | [iac](./domain-18-production-operations/11-infrastructure-as-code.md) | Terraform/Pulumi、资源编排 |
+| 12 | 自动化工具链 | [automation-tools](./domain-18-production-operations/12-automated-operations-toolchain.md) | Ansible、运维自动化 |
+
+#### P5: 成本优化 (13-15)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 成本治理 | [cost-governance](./domain-18-production-operations/13-kubernetes-cost-governance.md) | Kubecost、FinOps实践 |
+| 14 | 资源配额管理 | [quota-management](./domain-18-production-operations/14-resource-quota-management.md) | 配额策略、资源隔离 |
+| 15 | 绿色计算 | [green-computing](./domain-18-production-operations/15-green-computing-sustainability.md) | 节能优化、可持续发展 |
+
+#### P6: 灾备恢复 (16-18)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 16 | 企业备份策略 | [backup-strategy](./domain-18-production-operations/16-enterprise-backup-strategy.md) | Velero备份、数据保护 |
+| 17 | 灾难恢复演练 | [dr-drills](./domain-18-production-operations/17-disaster-recovery-drills.md) | 演练流程、RTO/RPO验证 |
+| 18 | 跨区域容灾 | [cross-region-dr](./domain-18-production-operations/18-cross-region-disaster-recovery.md) | 多活架构、数据同步 |
+
+#### P7: 性能优化 (19-21)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | 集群性能调优 | [cluster-tuning](./domain-18-production-operations/19-cluster-performance-tuning.md) | 控制平面优化、节点调优 |
+| 20 | 网络性能优化 | [network-optimization](./domain-18-production-operations/20-network-performance-optimization.md) | CNI调优、带宽优化 |
+| 21 | 存储性能优化 | [storage-optimization](./domain-18-production-operations/21-storage-performance-optimization.md) | IOPS优化、CSI调优 |
+
+#### P8: 运维管理 (22-24)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 22 | 变更管理流程 | [change-management](./domain-18-production-operations/22-change-management-process.md) | 变更审批、回滚策略 |
+| 23 | 事件响应处理 | [incident-response](./domain-18-production-operations/23-incident-response-handling.md) | 应急响应、故障处理 |
+| 24 | 容量规划预测 | [capacity-planning](./domain-18-production-operations/24-capacity-planning-forecasting.md) | 资源预测、扩容策略 |
+
+### 域19: 技术白皮书 (Technical Papers)
+
+> 16 篇 | Kubernetes生产环境深度技术专题白皮书
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 生产就绪评估 | [production-readiness](./domain-19-papers/01-kubernetes-production-readiness-assessment.md) | 系统性评估框架、12维度检查清单、成熟度模型 |
+| 02 | 大规模性能优化 | [large-scale-optimization](./domain-19-papers/02-kubernetes-large-scale-performance-optimization.md) | 5000+节点优化、控制平面调优、网络存储性能 |
+| 03 | 零信任安全架构 | [zero-trust-security](./domain-19-papers/03-kubernetes-zero-trust-security-architecture.md) | 身份认证、网络微隔离、运行时防护、合规检查 |
+| 04 | 多云混合部署 | [multi-cloud-deployment](./domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.md) | 跨云架构、数据同步、成本优化、故障切换 |
+| 05 | GitOps实践指南 | [gitops-practice](./domain-19-papers/05-kubernetes-gitops-complete-practice-guide.md) | ArgoCD/FluxCD、CI/CD流水线、自动化部署 |
+| 06 | 成本治理FinOps | [cost-governance](./domain-19-papers/06-kubernetes-cost-governance-finops-practice.md) | 成本监控、预算管理、资源优化、价值分析 |
+| 07 | CSI存储深度实践 | [csi-storage](./domain-19-papers/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
+| 08 | 网络策略微隔离 | [network-microsegmentation](./domain-19-papers/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
+| 09 | 服务网格Istio | [service-mesh-istio](./domain-19-papers/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
+| 10 | 自动化SRE实践 | [automation-sre](./domain-19-papers/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 11 | API Server深度优化 | [api-server-optimization](./domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
+| 12 | 调度器深度优化 | [scheduler-optimization](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
+| 13 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
+| 14 | 事件驱动架构 | [event-driven-architecture](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md) | 事件驱动架构、异步处理、CQRS、事件溯源 |
+| 15 | 混沌工程测试 | [chaos-engineering](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md) | 混沌工程、故障注入、系统韧性、可靠性测试 |
+| 16 | 边缘计算实践 | [edge-computing](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md) | 边缘计算、KubeEdge、物联网、边缘自治 |
 
 ### 域20: 企业级监控与告警 (Enterprise Monitoring & Alerting)
 
