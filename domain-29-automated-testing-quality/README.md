@@ -1,6 +1,6 @@
 # Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)
 
-> **领域定位**: 企业级自动化测试平台与质量保障体系 | **文档数量**: 2篇 | **更新时间**: 2024-02-07
+> **领域定位**: 企业级自动化测试平台与质量保障体系 | **文档数量**: 6篇 | **更新时间**: 2026-02-07
 
 ## 📚 领域概述
 
@@ -10,9 +10,12 @@ This domain focuses on the architecture design of enterprise automated testing p
 
 ## 📖 文档目录
 
-### 🧪 核心测试框架 (01-02)
+### 🧪 核心测试框架 (01-06)
 - **[01-Selenium企业级自动化测试](./01-selenium-enterprise-automation.md)** - Selenium测试平台深度实践，涵盖测试架构、框架设计、持续集成、监控报告等完整技术方案
 - **[02-JUnit5企业级单元测试](./02-junit5-enterprise-testing.md)** - JUnit5测试框架深度实践，包括参数化测试、动态测试、扩展机制、并行执行等
+- **[03-AI测试与质量保障](./03-ai-testing-quality-assurance.md)** - AI驱动的智能测试平台深度实践，涵盖机器学习测试、自动化缺陷检测、智能测试生成等
+- **[05-Cypress企业级自动化测试](./05-cypress-enterprise-automation.md)** - Cypress端到端测试框架深度实践，包括组件测试、可视化回归、性能监控等
+- **[06-Playwright企业级自动化测试](./06-playwright-enterprise-automation.md)** - Playwright跨浏览器测试平台深度实践，涵盖多浏览器支持、移动设备仿真、API测试等
 
 ## 🎯 学习路径建议
 
