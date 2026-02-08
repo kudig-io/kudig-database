@@ -47,6 +47,12 @@ Linux 基础知识体系为 Kubernetes 和容器化环境提供坚实的底层�
 | 08 | [容器技术](./08-linux-container-fundamentals.md) | Namespaces、Cgroups、OverlayFS、安全特性 | 容器基础、K8s支撑 |
 | 09 | [运维基础](./09-linux-operations-basics.md) | 系统监控、故障排查、备份恢复、自动化 | 日常运维、应急响应 |
 
+### 命令参考 (99)
+
+| # | 文档 | 关键内容 | 适用场景 |
+|:---:|:---|:---|:---|
+| 99 | [Linux 命令大全参考](./99-linux-commands-reference.md) | 完整 Linux 命令参考，包含命令名称、用途、功能清单、注意事项及安全风险 | 命令速查、运维参考 |
+
 ---
 
 ## 学习目标
