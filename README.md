@@ -1,6 +1,6 @@
 # Kusheet - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 573 | **表格数量**: 320
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 606 | **领域数量**: 31
 
 ---
 
@@ -9,7 +9,7 @@
 - [项目定位](#项目定位)
 - [快速导航(按角色)](#快速导航按角色)
 - [知识体系架构](#知识体系架构)
-- [演示文档(topic-presentations)](#演示文档topic-presentations)
+- [核心知识域](#核心知识域)
   - [域1: 架构基础](#域1-架构基础-architecture-fundamentals)
   - [域2: 设计原理](#域2-设计原理-design-principles)
   - [域3: 控制平面](#域3-控制平面-control-plane)
@@ -22,18 +22,31 @@
   - [域10: 扩展生态](#域10-扩展生态-extensions--ecosystem)
   - [域11: AI基础设施](#域11-ai基础设施-ai-infrastructure)
   - [域12: 故障排查](#域12-故障排查-troubleshooting)
+- [底层基础知识域](#底层基础知识域)
   - [域13: Docker基础](#域13-docker基础-docker-fundamentals)
   - [域14: Linux基础](#域14-linux基础-linux-fundamentals)
   - [域15: 网络基础](#域15-网络基础-network-fundamentals)
   - [域16: 存储基础](#域16-存储基础-storage-fundamentals)
   - [域17: 云厂商Kubernetes服务](#域17-云厂商kubernetes服务-cloud-provider-kubernetes-services)
+- [企业级运维专题](#企业级运维专题)
+  - [域18: 生产运维实践](#域18-生产运维实践-production-operations)
+  - [域19: 技术白皮书](#域19-技术白皮书-technical-papers)
+  - [域20: 企业监控告警](#域20-企业监控告警-enterprise-monitoring)
+  - [域21: 日志管理分析](#域21-日志管理分析-logging-management)
+  - [域22: 镜像仓库管理](#域22-镜像仓库管理-container-registry)
+  - [域23: GitOps与CI/CD](#域23-gitops与cicd)
+  - [域24: 基础设施即代码](#域24-基础设施即代码-infrastructure-as-code)
+  - [域25: 云原生安全](#域25-云原生安全-cloud-native-security)
+  - [域26: 服务网格](#域26-服务网格-service-mesh)
+  - [域27: 多云混合云](#域27-多云混合云-multi-cloud)
+  - [域28: 数据库中间件](#域28-数据库中间件-database-middleware)
+  - [域29: 自动化测试](#域29-自动化测试-automated-testing)
+  - [域30: 灾备业务连续性](#域30-灾备业务连续性-disaster-recovery)
+  - [域31: 硬件基础设施](#域31-硬件基础设施-hardware-infrastructure)
+- [专题资源](#专题资源)
+  - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
+  - [topic-presentations: 培训演示](#topic-presentations-培训演示)
 - [多维度查询附录](#多维度查询附录)
-  - [附录A: 开发者视角](#附录a-开发者视角)
-  - [附录B: 运维工程师视角](#附录b-运维工程师视角)
-  - [附录C: 架构师视角](#附录c-架构师视角)
-  - [附录D: 测试工程师视角](#附录d-测试工程师视角)
-  - [附录E: 产品经理视角](#附录e-产品经理视角)
-  - [附录F: 终端用户视角](#附录f-终端用户视角)
 - [变更记录](#变更记录)
 
 ---
@@ -81,7 +94,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                          底层基础知识域                                      │
 │  [域13] Docker基础  [域14] Linux基础  [域15] 网络基础  [域16] 存储基础         │
-│  [域17] 云厂商Kubernetes服务                                                 │
+│  [域17] 云厂商Kubernetes服务  [域31] 硬件基础设施                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1414,6 +1427,43 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 287 | Datadog监控平台 | [datadog-monitoring](./domain-20-enterprise-monitoring-alerting/05-datadog-enterprise-monitoring.md) | Datadog统一监控平台、APM、基础设施监控、日志管理、合成监控 |
 | 288 | Graylog日志管理 | [graylog-logging](./domain-21-logging-management-analytics/04-graylog-enterprise-logging.md) | Graylog开源日志管理、处理管道、安全配置、高可用部署 |
 | 289 | Quay镜像仓库 | [quay-registry](./domain-22-container-image-management/04-quay-enterprise-registry.md) | Quay企业级镜像管理、安全扫描、签名验证、CI/CD集成 |
+
+### 域31: 硬件基础设施 (Hardware Infrastructure)
+
+> 18 篇 | 云平台硬件架构、服务器原理、CPU/内存/存储/网络技术深度解析、硬件故障排查方法论、K8s硬件故障、错误码速查
+
+#### 基础架构 (01-04)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 290 | 云平台硬件架构 | [cloud-hardware-architecture](./domain-31-hardware/01-cloud-hardware-architecture.md) | 数据中心设计、Tier等级、PUE能效、机架布局、电力冷却 |
+| 291 | 服务器架构原理 | [server-architecture](./domain-31-hardware/02-server-architecture-principles.md) | NUMA拓扑、PCIe总线、BMC/IPMI/Redfish管理、远程管理 |
+| 292 | CPU技术深度 | [cpu-technology](./domain-31-hardware/03-cpu-technology-deep-dive.md) | Intel Xeon/AMD EPYC/ARM架构、微架构、SIMD/AVX、MCE |
+| 293 | 主板芯片组 | [motherboard-chipset](./domain-31-hardware/04-motherboard-chipset-technology.md) | 服务器主板架构、芯片组、PCIe拓扑、BIOS/UEFI |
+
+#### 核心组件 (05-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 294 | 内存技术深度 | [memory-technology](./domain-31-hardware/05-memory-technology-deep-dive.md) | DDR5架构、ECC/RAS特性、EDAC监控、内存RAS层次 |
+| 295 | HDD硬盘技术 | [hdd-technology](./domain-31-hardware/06-storage-hdd-technology.md) | 机械硬盘原理、S.M.A.R.T.监控、企业级HDD、RAID配置 |
+| 296 | SSD固态技术 | [ssd-technology](./domain-31-hardware/07-storage-ssd-technology.md) | NAND闪存、NVMe协议、SSD控制器、寿命管理、磨损均衡 |
+| 297 | 网络硬件技术 | [network-hardware](./domain-31-hardware/08-network-hardware-technology.md) | RDMA、SmartNIC/DPU、高速以太网(25G/100G/400G) |
+| 298 | 硬件厂商生态 | [hardware-vendors](./domain-31-hardware/09-hardware-vendors-ecosystem.md) | Dell/HPE/Lenovo/浪潮/华为服务器、Intel/AMD/NVIDIA |
+
+#### 硬件故障排查 (10-18) - 重点
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 299 | 排查方法论 | [troubleshooting-methodology](./domain-31-hardware/10-hardware-troubleshooting-methodology.md) | 六步诊断法、故障分类、决策树、预测性维护Python框架 |
+| 300 | CPU内存排查 | [cpu-memory-troubleshooting](./domain-31-hardware/11-cpu-memory-troubleshooting.md) | MCE错误分析、ECC故障定位、EDAC监控、turbostat诊断 |
+| 301 | 存储设备排查 | [storage-troubleshooting](./domain-31-hardware/12-storage-troubleshooting.md) | HDD S.M.A.R.T.分析、NVMe健康、RAID故障处理流程 |
+| 302 | 网络硬件排查 | [network-troubleshooting](./domain-31-hardware/13-network-hardware-troubleshooting.md) | 网卡故障诊断、ethtool分析、链路故障、光模块检测 |
+| 303 | 电源散热排查 | [power-thermal-troubleshooting](./domain-31-hardware/14-power-thermal-troubleshooting.md) | PSU故障、功耗监控、温度传感器、风扇故障、热设计 |
+| 304 | BIOS固件排查 | [bios-firmware-troubleshooting](./domain-31-hardware/15-bios-firmware-troubleshooting.md) | BIOS/UEFI故障、固件更新、启动问题、BMC故障诊断 |
+| 305 | K8s硬件故障 | [kubernetes-hardware-troubleshooting](./domain-31-hardware/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件故障、Node NotReady、PLEG、etcd磁盘问题 |
+| 306 | 错误码速查 | [hardware-error-codes-reference](./domain-31-hardware/17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码、厂商诊断码 |
+| 307 | 故障案例库 | [hardware-failure-case-studies](./domain-31-hardware/18-hardware-failure-case-studies.md) | 生产环境真实故障案例、诊断过程、解决方案、复盘总结 |
 
 ---
 
