@@ -1,82 +1,81 @@
-# Domain-2: Kubernetes设计原理
+# Domain-2: Kubernetes 设计原则与核心机制
 
-> **文档数量**: 19 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+
+> **文档数量**: 18 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20 - 1.30+
 
 ---
 
 ## 概述
 
-Kubernetes设计原理域深入探讨K8s的核心设计理念、架构模式和最佳实践。涵盖声明式API、控制器模式、自愈机制等核心设计思想。
+**Kubernetes 设计原则域** 深入探讨了 K8s 系统的灵魂——其背后的设计哲学、分布式机制以及企业级生产实践。本领域不仅涵盖了声明式 API、控制循环等经典理论，还融入了 2024-2025 年最新的技术趋势（如 CEL 准入控制、Ambient Mesh、原地垂直伸缩等），旨在帮助架构师构建深度的技术洞察。
 
 **核心价值**：
-- 🎯 **设计哲学**：理解K8s背后的设计理念和原则
-- 🔁 **控制循环**：掌握声明式API和控制器工作原理
-- 🛠️ **架构模式**：学习K8s采用的核心架构模式
-- 💡 **最佳实践**：应用设计原则解决实际问题
+- 🎯 **设计哲学**：理解“声明式”与“面向终态”如何支撑起超大规模集群的自愈能力。
+- 🔁 **控制机制**：深度解析 List-Watch、Informer 及 Workqueue 的协同工作原理。
+- 🛠️ **源码洞察**：提供系统性的源码阅读指南，打破“黑盒”认知。
+- 💡 **生产演进**：引入现代 K8s 特性与资深架构师的避坑指南，对标一线生产环境。
 
 ---
 
 ## 文档目录
 
-### 设计理念 (01-05)
+### 设计基础与哲学 (01-05)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 01 | [设计哲学](./01-design-philosophy.md) | 声明式、自愈、可扩展等核心设计理念 | ⭐⭐⭐⭐⭐ |
-| 02 | [架构原则](./02-architecture-principles.md) | 松耦合、单一职责、接口抽象等原则 | ⭐⭐⭐⭐⭐ |
-| 03 | [API设计模式](./03-api-design-patterns.md) | 资源抽象、版本管理、扩展机制 | ⭐⭐⭐⭐⭐ |
-| 04 | [控制器模式](./04-controller-pattern.md) | 控制循环、期望状态、实际状态对比 | ⭐⭐⭐⭐⭐ |
-| 05 | [声明式配置](./05-declarative-configuration.md) | YAML配置、GitOps、配置管理 | ⭐⭐⭐⭐⭐ |
+| 01 | [设计原则与哲学](./01-design-principles-foundations.md) | 声明式、面向终态、解耦设计原则 | ⭐⭐⭐⭐⭐ |
+| 02 | [声明式 API 与面向终态设计](./02-declarative-api-pattern.md) | Spec/Status 分离、幂等操作、CRD 设计 | ⭐⭐⭐⭐⭐ |
+| 03 | [控制器模式与调谐循环](./03-controller-pattern.md) | Control Loop、Reconcile 机制、自愈实现 | ⭐⭐⭐⭐⭐ |
+| 04 | [List-Watch 机制深度解析](./04-watch-list-mechanism.md) | HTTP Chunked、事件驱动机制、增量更新 | ⭐⭐⭐⭐⭐ |
+| 05 | [Informer 架构与工作队列](./05-informer-workqueue.md) | Local Cache、Indexer、DeltaFIFO 架构 | ⭐⭐⭐⭐⭐ |
 
-### 核心模式 (06-10)
+### 并发控制与共识 (06-10)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 06 | [观察者模式](./06-observer-pattern.md) | Informer、Watch机制、事件驱动 | ⭐⭐⭐⭐ |
-| 07 | [工厂模式](./07-factory-pattern.md) | 插件化架构、CRI/CNI/CSI接口 | ⭐⭐⭐⭐ |
-| 08 | [装饰器模式](./08-decorator-pattern.md) | Admission Webhook、Mutating机制 | ⭐⭐⭐⭐ |
-| 09 | [策略模式](./09-strategy-pattern.md) | 调度策略、网络策略、安全策略 | ⭐⭐⭐⭐ |
-| 10 | [模板模式](./10-template-pattern.md) | Pod模板、工作负载模板、配置模板 | ⭐⭐⭐⭐ |
+| 06 | [资源版本与并发控制](./06-resource-version-control.md) | ResourceVersion、乐观锁、Conflict 处理 | ⭐⭐⭐⭐ |
+| 07 | [分布式共识与 etcd 原理](./07-distributed-consensus-etcd.md) | Raft 协议、MVCC、etcd 在 K8s 中的应用 | ⭐⭐⭐⭐⭐ |
+| 08 | [高可用架构模式](./08-high-availability-patterns.md) | 多主选举、脑裂预防、灾备切换模式 | ⭐⭐⭐⭐⭐ |
+| 09 | [Kubernetes 源码结构与阅读指南](./09-source-code-walkthrough.md) | 目录结构、核心组件入口、调试技巧 | ⭐⭐⭐⭐ |
+| 10 | [CAP 定理与分布式系统基础](./10-cap-theorem-distributed-systems.md) | 权衡分析、最终一致性、分布式系统权衡 | ⭐⭐⭐⭐ |
 
-### 高级设计 (11-15)
+### 扩展性与现代演进 (11-15)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 11 | [扩展性设计](./11-extensibility-design.md) | CRD、Operator、Aggregated API | ⭐⭐⭐⭐⭐ |
-| 12 | [可组合性](./12-composability.md) | 资源组合、服务编排、微服务架构 | ⭐⭐⭐⭐ |
-| 13 | [容错设计](./13-fault-tolerance-design.md) | 自愈机制、重试策略、优雅降级 | ⭐⭐⭐⭐⭐ |
-| 14 | [可观测性设计](./14-observability-design.md) | Metrics、Logging、Tracing集成设计 | ⭐⭐⭐⭐ |
-| 15 | [安全性设计](./15-security-design.md) | RBAC、网络策略、密钥管理设计 | ⭐⭐⭐⭐⭐ |
+| 11 | [扩展性设计模式](./11-extensibility-design-patterns.md) | Cloud Provider、CNI/CSI 接口、解耦扩展 | ⭐⭐⭐⭐⭐ |
+| 12 | [Operator 模式与控制器开发](./12-operator-development-guide.md) | Controller-Runtime、Cache 优化、开发实践 | ⭐⭐⭐⭐⭐ |
+| 13 | [准入控制与 Webhook 机制](./13-admission-control-webhooks.md) | Mutating/Validating、CEL 现代准入校验 | ⭐⭐⭐⭐⭐ |
+| 14 | [服务网格与微服务架构](./14-service-mesh-architecture.md) | Sidecar 模式、Ambient Mesh (ZTunnel) | ⭐⭐⭐⭐ |
+| 15 | [混沌工程与故障注入](./15-chaos-engineering.md) | 爆炸半径控制、eBPF 故障注入、稳态验证 | ⭐⭐⭐⭐ |
 
-### 实践应用 (16-19)
+### 生产优化与安全 (16-18)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 16 | [设计模式实践](./16-design-patterns-practice.md) | 实际场景中的设计模式应用 | ⭐⭐⭐⭐ |
-| 17 | [反模式识别](./17-anti-patterns.md) | 常见设计错误和避免方法 | ⭐⭐⭐⭐ |
-| 18 | [架构决策](./18-architectural-decisions.md) | 关键架构选择和权衡分析 | ⭐⭐⭐⭐⭐ |
-| 19 | [未来演进](./19-future-evolution.md) | 设计趋势、发展方向、技术创新 | ⭐⭐⭐⭐ |
+| 16 | [可观测性设计原则](./16-observability-design-principles.md) | OpenTelemetry、Metrics/Logs/Tracing 融合 | ⭐⭐⭐⭐⭐ |
+| 17 | [安全设计模式](./17-security-design-patterns.md) | 零信任、SBOM 供应链安全、运行时防护 | ⭐⭐⭐⭐⭐ |
+| 18 | [性能优化原理](./18-performance-optimization-principles.md) | 原地垂直伸缩、镜像流加速、调度优化 | ⭐⭐⭐⭐⭐ |
 
 ---
 
 ## 学习路径建议
 
-### 🎯 基础理解路径
-**01 → 02 → 03 → 04 → 05**  
-掌握K8s核心设计理念和基础模式
+### 🎯 核心机制理解路径 (从原理到源码)
+**01 → 02 → 04 → 05 → 09**  
+掌握 K8s 运作的底层脉络，从 API 哲学到具体的代码实现。
 
-### 🔧 实践应用路径  
-**06 → 07 → 08 → 11 → 16**  
-学习各种设计模式的实际应用场景
+### 🔧 扩展开发进阶路径 (从模式到实战)
+**03 → 11 → 12 → 13**  
+学习如何通过编写控制器、Operator 和 Webhook 来扩展 K8s 功能。
 
-### 🏢 架构师路径
-**09 → 10 → 12 → 13 → 14 → 15**  
-深入理解高级设计原理和架构决策
+### 🏢 架构师进阶路径 (从设计到优化)
+**07 → 08 → 14 → 16 → 17 → 18**  
+聚焦于高可用、可观测性、安全及性能优化等企业级深度课题。
 
 ---
 
 ## 相关领域
 
-- **[Domain-1: 架构基础](../domain-1-architecture-fundamentals)** - K8s基础架构
-- **[Domain-3: 控制平面](../domain-3-control-plane)** - 控制平面实现
-- **[Domain-11: AI Infra](../domain-11-ai-infra)** - AI基础设施设计
+- **[Domain-1: 架构基础](../domain-1-architecture-fundamentals)** - 理解 K8s 的物理与逻辑组件。
+- **[Domain-3: 控制平面](../domain-3-control-plane)** - 深入 APIServer、Scheduler、Controller-Manager 细节。
+- **[Domain-8: 可观测性](../domain-8-observability)** - 具体的监控、日志与链路追踪实施。
 
 ---
 
-**维护者**: Kusheet Design Team | **许可证**: MIT
+**维护者**: Kudig Architecture Team | **许可证**: MIT

@@ -1,6 +1,14 @@
-# 15 - Informer与WorkQueue深度解析 (Informer & WorkQueue Deep Dive)
+# 05 - Informer 架构与工作队列 (Informer & Workqueue)
 
-## 生产环境Informer与WorkQueue最佳实践
+## 架构师洞察：SharedInformerFactory 的并发陷阱
+
+虽然 `SharedInformerFactory` 极大节省了资源，但在生产环境下使用时需注意以下几点：
+
+### 关键陷阱与对策
+* **Handler 阻塞**: `AddEventHandler` 中的逻辑必须轻量。如果在 Handler 中执行耗时操作，会阻塞整个 Factory 的事件分发管道，导致其他控制器观察到“陈旧”数据。
+* **Indexer 竞态**: 避免直接修改从 Indexer 中获取的对象。始终使用 `DeepCopy()`，否则可能意外污染本地缓存，导致难以排查的状态不一致。
+
+## 生产环境 Informer 与 WorkQueue 最佳实践
 
 ### 企业级Informer架构优化
 

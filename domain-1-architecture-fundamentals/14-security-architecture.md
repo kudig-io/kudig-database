@@ -1,4 +1,4 @@
-# Kubernetes 安全架构深度分析
+# 14 - Kubernetes 安全架构深度分析
 
 ## 概述
 
@@ -68,9 +68,48 @@ security_responsibility_model:
     audit_compliance: ❌ 完全负责
 ```
 
+### 2.2 企业级 OIDC 集成
+在生产环境中，不建议直接管理静态用户，而应集成企业级身份提供商 (IdP)。
+
+- **OIDC 流程**：用户通过 IdP 登录 -> 获取 ID Token -> `kubectl` 使用 Token 调用 API Server -> API Server 验证 Token 并映射到组。
+- **配置示例**：
+  ```bash
+  --oidc-issuer-url=https://accounts.google.com
+  --oidc-client-id=kubernetes
+  --oidc-username-claim=email
+  --oidc-groups-claim=groups
+  ```
+
 ---
 
-## 二、身份认证与访问控制
+## 三、数据保护与密钥管理
+
+### 3.1 KMS v2 架构深度解析
+KMS v2 是 K8s 在 v1.29 GA 的重要特性，解决了 v1 在加密性能和密钥轮换上的痛点。
+
+#### v2 的核心改进
+1. **状态检查**：增加了 `/healthz` 检查，防止 KMS 插件失效导致 API Server 挂掉。
+2. **完全解耦**：API Server 不再缓存明文数据，而是通过更高效的 envelope encryption 机制。
+3. **密钥轮换**：支持平滑的 DEK (Data Encryption Key) 和 KEK (Key Encryption Key) 轮换。
+
+#### 生产配置建议
+```yaml
+# KMS v2 配置文件示例 (v1.29+)
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+      - configmaps
+    providers:
+      - kms:
+          name: my-kms-provider
+          endpoint: unix:///var/run/kms-provider.sock
+          cachesize: 1000
+          timeout: 3s
+```
+
+---
 
 ### 2.1 多层次认证体系
 

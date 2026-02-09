@@ -1,4 +1,17 @@
-# 16 - 资源版本与乐观并发 (Resource Version & Optimistic Concurrency)
+# 06 - 资源版本与并发控制 (Concurrency Control)
+
+## 专家解析：410 Gone 的终极治理
+
+在生产环境中，频繁出现 `410 Gone (Too old resource version)` 错误通常意味着你的 Watch 客户端跟不上 etcd 的压缩 (Compaction) 速度。
+
+### 根本原因分析
+1. **etcd 压缩**: etcd 定期清理旧版本的 MVCC 数据。
+2. **处理延迟**: 客户端处理事件太慢，导致其持有的 `ResourceVersion` 已经超出了 etcd 的保留窗口。
+
+### 治理方案
+* **优化 Handler 吞吐**: 使用工作队列并发处理。
+* **合理设置 Resync**: 避免过短的 Resync 导致无意义的全量重新计算。
+* **利用 Bookmarks**: 确保即使在无事件发生时，客户端的 RV 也能保持最新。
 
 ## 核心概念
 

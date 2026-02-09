@@ -143,7 +143,7 @@ spec:
     - --anonymous-auth=false                    # 禁用匿名访问
     - --authorization-mode=Node,RBAC           # 启用RBAC授权
     - --enable-admission-plugins=              # 启用安全准入插件
-      NodeRestriction,PodSecurityPolicy,
+      NodeRestriction,PodSecurity,ValidatingAdmissionPolicy,
       ResourceQuota,LimitRanger,
       ServiceAccount,DefaultStorageClass,
       DefaultTolerationSeconds,MutatingAdmissionWebhook,
@@ -425,47 +425,64 @@ webhooks:
   timeoutSeconds: 3
 ```
 
-### 3.3 Pod安全策略(PSP)
+### 3.3 Pod 安全准入 (PSA)
+
+PodSecurityPolicy (PSP) 在 v1.25 中已移除。替代方案是 **Pod Security Admission (PSA)**，它通过 Namespace 标签实现安全标准强制执行。
+
+#### 3.3.1 PSA 标准级别
+- **Privileged**: 无限制，适用于受信任的用户或系统组件。
+- **Baseline**: 最小限制，防止已知的特权提升。
+- **Restricted**: 严格限制，遵循 Pod 安全最佳实践。
+
+#### 3.3.2 PSA 配置示例
+```yaml
+# 在命名空间启用 Restricted 强制执行
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: v1.30
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: v1.30
+```
+
+### 3.4 声明式准入策略 (ValidatingAdmissionPolicy - CEL)
+
+v1.30+ 推荐使用基于 **Common Expression Language (CEL)** 的 `ValidatingAdmissionPolicy` 来替代复杂的 Webhook 验证。
 
 ```yaml
-# PodSecurityPolicy配置示例
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
+# 策略定义：禁止使用特权容器
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
 metadata:
-  name: restricted-psp
-  annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
-    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'runtime/default'
+  name: deny-privileged-containers
 spec:
-  privileged: false                # 禁止特权容器
-  allowPrivilegeEscalation: false  # 禁止权限提升
-  requiredDropCapabilities:        # 必须放弃的权限
-  - ALL
-  volumes:                         # 允许的卷类型
-  - 'configMap'
-  - 'emptyDir'
-  - 'projected'
-  - 'secret'
-  - 'downwardAPI'
-  - 'persistentVolumeClaim'
-  hostNetwork: false               # 禁止主机网络
-  hostIPC: false                   # 禁止主机IPC
-  hostPID: false                   # 禁止主机PID
-  runAsUser:
-    rule: 'MustRunAsNonRoot'       # 必须以非root用户运行
-  seLinux:
-    rule: 'RunAsAny'
-  supplementalGroups:
-    rule: 'MustRunAs'
-    ranges:
-    - min: 1
-      max: 65535
-  fsGroup:
-    rule: 'MustRunAs'
-    ranges:
-    - min: 1
-      max: 65535
-  readOnlyRootFilesystem: true     # 只读根文件系统
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   [""]
+      apiVersions: ["v1"]
+      operations:  ["CREATE", "UPDATE"]
+      resources:   ["pods"]
+  validations:
+    - expression: "object.spec.containers.all(c, !has(c.securityContext) || !has(c.securityContext.privileged) || c.securityContext.privileged == false)"
+      message: "Privileged containers are not allowed in this cluster."
+
+---
+# 策略绑定
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: deny-privileged-containers-binding
+spec:
+  policyName: deny-privileged-containers
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        environment: production
 ```
 
 ---

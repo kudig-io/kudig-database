@@ -1,4 +1,13 @@
-# 22 - Operator 模式与自定义控制器开发指南
+# 12 - Operator 模式与控制器开发 (Operator Guide)
+
+## 专家实践：Controller-Runtime 的 Cache 陷阱
+
+在编写生产级 Operator 时，过度依赖默认 Cache 会导致控制器内存爆炸。
+
+### 核心优化技巧
+* **Cache 过滤**: 通过 `Selectors` 限制 Informer 缓存的范围。例如，只缓存带有特定 Label 的资源，而不是集群内数万个同类对象。
+* **多类型触发**: 合理利用 `EnqueueRequestForOwner` 和 `EnqueueRequestForObject`，确保调谐逻辑精准触发，避免无意义的“惊群效应”。
+* **并发控制**: 根据逻辑复杂度，通过 `MaxConcurrentReconciles` 调整并发协程数，平衡吞吐量与内存占用。
 
 ## 概述
 

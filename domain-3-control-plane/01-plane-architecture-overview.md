@@ -572,7 +572,7 @@ spec:
     - --anonymous-auth=false                    # 禁用匿名访问
     - --authorization-mode=Node,RBAC           # 启用RBAC
     - --enable-admission-plugins=             # 启用安全准入插件
-      NodeRestriction,PodSecurityPolicy,
+      NodeRestriction,PodSecurity,ValidatingAdmissionPolicy,
       ResourceQuota,LimitRanger
     - --tls-cipher-suites=                    # 强制TLS加密套件
       TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,

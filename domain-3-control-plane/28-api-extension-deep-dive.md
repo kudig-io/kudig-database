@@ -94,12 +94,12 @@ spec:
               replicas:
                 type: integer
                 minimum: 1
-              image:
-                type: string
-              ports:
-                type: array
-                items:
-                  type: integer
+            # 使用 CEL 进行直接验证 (v1.25+)
+            x-kubernetes-validations:
+              - rule: "self.replicas <= 100"
+                message: "Replicas cannot exceed 100"
+              - rule: "self.image.startsWith('registry.example.com/')"
+                message: "Only images from registry.example.com are allowed"
           status:
             type: object
             properties:
@@ -878,7 +878,14 @@ func (dst *MyApp) ConvertFrom(srcRaw conversion.Hub) error {
 
 ## 8. 扩展开发最佳实践
 
-### 8.1 安全最佳实践
+### 8.1 开发与运维最佳实践
+
+- **CEL 优先原则**: 对于简单的字段验证，优先使用 CRD 内置的 `x-kubernetes-validations` 或 `ValidatingAdmissionPolicy`。
+- **Finalizer 安全**: 务必在控制器中正确处理 Finalizer，防止资源由于外部依赖未清理而处于 Terminating 状态无法删除。
+- **Status 子资源**: 始终启用 `/status` 子资源，并在控制器中通过 `r.Status().Update()` 更新，以避免不必要的 Spec 变更触发 Reconcile。
+- **存储迁移**: 在变更 CRD 版本时，务必考虑存量数据的转换（Conversion Webhook）。
+
+### 8.2 安全最佳实践
 
 ```yaml
 # 安全的RBAC配置

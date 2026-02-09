@@ -1,4 +1,12 @@
-# 16 - 可观测性设计原则 (Observability Design Principles)
+# 16 - 可观测性设计原则
+
+## 资深视点：从“数据孤岛”到“全栈上下文”
+
+> **架构师洞察**：
+> 现代可观测性已不再是简单的 Metrics/Logs/Traces 堆砌，其核心挑战在于如何建立数据间的关联（Contextualization）。
+> 1. **OpenTelemetry 的统治地位**：停止在应用中集成特定厂商的 SDK（如 Jaeger 或 Prometheus SDK）。统一使用 OpenTelemetry 是目前唯一的架构级建议。OTel 提供了标准化的数据协议（OTLP），使得数据可以在不同后端（Tempo, Mimir, Datadog）间无缝切换。
+> 2. **持续剖析 (Continuous Profiling) —— 第四支柱**：除了传统三支柱，持续剖析正在成为定位“静默性能损耗”（如 GC 频繁、死循环、锁竞争）的杀手锏。通过 eBPF 技术，可以在生产环境以极低的开销获得应用函数级的 CPU/内存消耗图谱。
+> 3. **告警即策略 (SLI/SLO)**：告警不应基于 CPU 使用率等中间指标，而应基于对用户有意义的 SLI（服务水平指标）。如果错误预算（Error Budget）没耗尽，即使 CPU 100% 也不应触发紧急电话告警，这才是 SRE 的真谛。
 
 ## 概述
 

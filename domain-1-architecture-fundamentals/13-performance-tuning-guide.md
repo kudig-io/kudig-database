@@ -1,4 +1,4 @@
-# Kubernetes 性能调优专项指南
+# 13 - Kubernetes 性能调优专项指南
 
 ## 概述
 
@@ -92,12 +92,62 @@ kubectl exec -it netperf-pod -- netperf -H target-pod-ip \
 
 ### 2.1 API Server 优化
 
-#### 配置参数调优
+#### API 优先级与公平性 (APF) 调优
+APF 是防止 API Server 流量过载的关键机制。在生产环境中，应根据业务优先级调整 `FlowSchema` 和 `PriorityLevelConfiguration`。
+
 ```yaml
-# API Server 性能优化配置
-apiVersion: kubeadm.k8s.io/v1beta3
-kind: ClusterConfiguration
-apiServer:
+# 示例：为核心管理组件增加优先级带宽
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: PriorityLevelConfiguration
+metadata:
+  name: critical-ops
+spec:
+  type: Limited
+  limited:
+    nominalConcurrencyShares: 100
+    limitResponse:
+      type: Queue
+      queue:
+        queues: 128
+        handshakingRequests: 50
+        queueLengthLimit: 100
+---
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: FlowSchema
+metadata:
+  name: core-ops-schema
+spec:
+  priorityLevelConfiguration:
+    name: critical-ops
+  distinguisherMethod:
+    type: ByUser
+  rules:
+  - subjects:
+    - kind: Group
+      group:
+        name: system:masters
+    resourceRules:
+    - verbs: ["*"]
+      apiGroups: ["*"]
+      resources: ["*"]
+```
+
+### 2.2 etcd 高级性能调优
+
+#### Raft 协议与磁盘 IO 优化
+etcd 的性能核心在于 WAL 日志的写入速度。推荐使用 NVMe SSD 并将 etcd 数据目录独立挂载。
+
+- **磁盘优先级**：使用 `ionice` 确保 etcd 进程获得最高 IO 优先级。
+  ```bash
+  # 设置 etcd 进程 IO 优先级 (假设 PID 为 1234)
+  ionice -c2 -n0 -p 1234
+  ```
+- **参数调优**：
+  - `--heartbeat-interval`: 在跨机房部署时，建议从 100ms 调整为 200ms-500ms。
+  - `--election-timeout`: 相应地从 1000ms 调整为 2000ms-5000ms。
+- **Learner 节点应用**：在大规模集群中，使用 Learner 节点进行只读扩展，减少 Leader 的心跳压力。
+
+---
   extraArgs:
     # 性能相关参数
     profiling: "true"

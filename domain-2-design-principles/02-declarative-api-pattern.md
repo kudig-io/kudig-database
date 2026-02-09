@@ -1,6 +1,17 @@
-# 12 - 声明式API模式 (Declarative API Pattern)
+# 02 - 声明式 API 与面向终态设计 (Declarative API)
 
-## 声明式API核心概念
+## 专家视点：为什么 SSA (Server-Side Apply) 是未来？
+
+在传统的 Client-Side Apply (`kubectl apply`) 中，客户端负责计算三方合并 (3-way merge)。这种方式在多管理器场景（如 HPA 修改副本数的同时，用户修改镜像）下经常导致冲突或字段丢失。
+
+### Server-Side Apply (SSA) 的核心优势
+1. **Managed Fields**: 显式记录每个字段的所有权 (Field Ownership)。
+2. **解决冲突**: API Server 自动处理并发修改冲突，确保不同控制器能安全地修改同一资源。
+3. **性能**: 减少了客户端的计算压力，降低了请求负载。
+
+> **生产避坑**: 在编写现代 Operator 时，强烈建议优先使用 SSA 接口进行资源更新。
+
+## 声明式 API 核心概念
 
 | 概念 | 英文 | 说明 | 示例 |
 |-----|-----|------|-----|

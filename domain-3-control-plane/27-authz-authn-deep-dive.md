@@ -345,11 +345,69 @@ NodeRestriction
 # ServiceAccount - 自动挂载service account token
 # DefaultStorageClass - 设置默认存储类
 # ResourceQuota - 实施资源配额
-# PodSecurityPolicy - Pod安全策略(已弃用)
+# PodSecurityPolicy - Pod安全策略(已弃用，请使用 Pod Security Admission)
 # NodeRestriction - 限制节点自我修改权限
 ```
 
-### 3.3 Validating Webhook
+### 3.3 Pod Security Admission (PSA)
+
+作为 PSP 的替代方案，PSA 通过 Label 在命名空间级别强制执行安全标准。
+
+#### 3.3.1 安全标准级别
+- **Privileged**: 无限制，适用于系统级组件。
+- **Baseline**: 最小限制，防止已知的特权提升。
+- **Restricted**: 严格限制，遵循 Pod 安全最佳实践。
+
+#### 3.3.2 配置示例
+```yaml
+# 在 Namespace 上启用 PSA
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: restricted-ns
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: v1.30
+    pod-security.kubernetes.io/warn: baseline
+```
+
+### 3.4 ValidatingAdmissionPolicy (CEL)
+
+Kubernetes v1.30+ 推荐使用的声明式准入控制，无需开发 Webhook。
+
+```yaml
+# CEL 策略示例：限制副本数
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: check-replicas
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups: ["apps"]
+      apiVersions: ["v1"]
+      operations: ["CREATE", "UPDATE"]
+      resources: ["deployments"]
+  validations:
+    - expression: "object.spec.replicas <= 10"
+      message: "Replicas must be less than or equal to 10"
+---
+# 绑定策略到 Namespace
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: check-replicas-binding
+spec:
+  policyName: check-replicas
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        environment: production
+```
+
+### 3.5 Validating Webhook
 
 ```yaml
 # validating-webhook-config.yaml
@@ -465,19 +523,13 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-### 4.3 审计和监控
+### 4.4 权限风险警示
 
-```yaml
-# 启用RBAC审计
-apiVersion: audit.k8s.io/v1
-kind: Policy
-rules:
-- level: RequestResponse
-  verbs: ["create", "update", "delete"]
-  resources:
-  - group: "rbac.authorization.k8s.io"
-    resources: ["roles", "clusterroles", "rolebindings", "clusterrolebindings"]
-```
+在配置 RBAC 时，需特别警惕以下具有提权风险的权限：
+- **escalate**: 允许用户创建/更新具有比自己更高权限的角色。
+- **bind**: 允许用户将角色绑定到主体，可能导致越权。
+- **impersonate**: 允许模拟其他用户。
+- **nodes/proxy**: 允许访问节点 API，可能导致逃逸。
 
 ## 5. 安全配置模板
 

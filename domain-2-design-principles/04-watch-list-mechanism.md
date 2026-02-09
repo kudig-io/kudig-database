@@ -1,6 +1,15 @@
-# 14 - Watch/List机制与事件驱动 (Watch/List Mechanism & Event-Driven)
+# 04 - List-Watch 机制深度解析 (List-Watch)
 
-## 生产环境Watch/List机制优化
+## 资深视点：Streaming List-Watch (K8s 1.27+)
+
+在大规模集群中，传统的 `List` 操作会瞬间消耗 API Server 大量内存。为了解决这个问题，Kubernetes 引入了 **Streaming List-Watch**。
+
+### 核心演进
+1. **持久连接**: 通过单个持久 HTTP 连接传输数据，避免了全量 List 的内存峰值。
+2. **渐进式同步**: 数据流式传输，减少了 API Server 和 etcd 的瞬时负载。
+3. **书签 (Bookmarks)**: 配合 `AllowWatchBookmarks`，显著降低了在网络波动后重新 List 的概率。
+
+## 生产环境 Watch/List 机制优化
 
 ### 大规模集群性能调优
 
