@@ -1,4 +1,15 @@
-# 21 - 扩展性设计模式 (Extensibility Design Patterns)
+# 11 - 扩展性设计模式 (Extensibility)
+
+## 资深视点：CEL (Common Expression Language) 的革命
+
+在 K8s 1.25+ 中，**CEL** 正在改变扩展开发的范式。
+
+### 为什么 CEL 至关重要？
+1. **去 Webhook 化**: 以前复杂的验证必须写 Mutating/Validating Webhooks，现在直接在 CRD YAML 中通过 CEL 表达式即可完成。
+2. **性能与安全**: CEL 运行在 API Server 进程内，消除了跨网络调用 Webhook 的延迟和潜在的安全风险。
+3. **低运维成本**: 无需维护额外的 Webhook Server 镜像和证书。
+
+> **专家建议**: 新开发的 CRD 验证逻辑应首选 CEL，仅在需要访问外部数据源时才使用 Webhook。
 
 ## 概述
 

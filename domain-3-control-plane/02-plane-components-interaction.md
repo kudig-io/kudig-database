@@ -207,10 +207,12 @@ var productionConfig = ConnectionPoolConfig{
 │     │   └─ LimitRanger准入控制器                                              │
 │     │      验证资源限制合规性                                                 │
 │     ├── Validating阶段:                                                         │
-│     │   ├─ PodSecurityPolicy控制器                                            │
-│     │   │  验证Pod安全策略                                                │
-│     │   └─ 自定义Validating Webhook                                           │
-│     │      调用外部验证服务                                                   │
+│     │   ├─ PodSecurity (PSA) 控制器                                         │
+│     │   │  验证 Pod 安全标准 (Baseline/Restricted)                         │
+│     │   ├─ ValidatingAdmissionPolicy (CEL)                                  │
+│     │   │  基于声明式策略的准入控制                                         │
+│     │   └─ 自定义Validating Webhook                                         │
+│     │      调用外部验证服务                                                 │
 │     └── 最终决策: Accept/Reject                                                │
 │        │                                                                        │
 │        ▼                                                                        │

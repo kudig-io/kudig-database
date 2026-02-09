@@ -1,4 +1,16 @@
-# 19 - Kubernetes源码结构与阅读指南 (Source Code Walkthrough)
+# 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+
+## 阅读建议：先看抽象，再看实现
+
+阅读 K8s 源码最忌讳“深陷细节”。建议遵循以下路径：
+
+### 核心抽象库 (client-go)
+理解控制逻辑的第一步是掌握 `staging/src/k8s.io/client-go`。
+* **Reflector**: 负责 List-Watch。
+* **DeltaFIFO**: 负责事件排队与合并。
+* **Indexer**: 负责本地对象缓存与检索。
+
+如果你能理清这三者的交互，你就理解了 80% 的 K8s 控制器实现逻辑。
 
 ## 源码仓库结构
 

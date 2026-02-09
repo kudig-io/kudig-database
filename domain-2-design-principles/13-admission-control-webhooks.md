@@ -1,4 +1,14 @@
-# 23 - 准入控制与 Webhook 机制深度解析
+# 13 - 准入控制与 Webhook 机制深度解析
+
+## 资深视点：从 Webhook 到 CEL 的范式演进
+
+> **架构师洞察**：
+> 长期以来，Webhook 是 K8s 扩展准入逻辑的唯一手段，但它引入了显著的运维复杂性（证书管理、网络连通性、延迟）。
+> 1. **Webhook 的“性能税”**：在高负载集群中，Webhook 服务器的延迟会直接拉高 API Server 的 P99 响应时间，甚至因 Webhook 超时导致集群操作大面积失败。
+> 2. **CEL (ValidatingAdmissionPolicy) 的革命性**：K8s 1.30 正式 GA 的 CEL 准入策略，将验证逻辑直接注入 API Server 进程内执行。这不仅消除了 RPC 开销，更重要的是它将“策略即代码”下放到了资源定义层面，极大降低了对第三方准入控制器（如 OPA/Gatekeeper）的依赖。
+> 3. **生产避坑建议**：
+>    - **失败策略 (failurePolicy)**：除非是核心安全拦截，否则建议优先使用 `Ignore`。如果是 `Fail`，必须确保护持 Webhook 自身的高可用。
+>    - **监控死角**：务必监控 `apiserver_admission_webhook_admission_duration_seconds`，这是定位 API Server 变慢的第一现场。
 
 ## 概述
 

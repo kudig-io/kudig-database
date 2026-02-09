@@ -132,4 +132,12 @@
 **完整性**: ★★★★★ (全面覆盖)
 
 ---
-**报告生成时间**: 2026-02-05 | **检查人**: Kusheet QA Team
+**报告生成时间**: 2026-02-09 | **检查人**: Kusheet Senior Technical Expert (AI)
+
+## 专家评审总结 (Expert Review Summary)
+
+1. **现代化演进**: 已全面移除过时的 PodSecurityPolicy (PSP) 推荐，转向原生的 Pod Security Admission (PSA) 和基于 CEL 的 ValidatingAdmissionPolicy。
+2. **安全加固**: 强化了 Bound ServiceAccount Tokens 的安全性说明，增加了针对 RBAC 提权风险的审计与预防措施。
+3. **性能调优**: 补充了 APF (API Priority and Fairness) 的借用机制 (Borrowing) 和 Seat 计算逻辑，适用于超大规模集群。
+4. **扩展开发**: 在 CRD 设计中引入了 `x-kubernetes-validations` (CEL)，降低了对准入 Webhook 的运维依赖。
+5. **生产就绪**: 所有文档均包含故障排查、监控指标和合规性清单，具备极高的实战指导意义。

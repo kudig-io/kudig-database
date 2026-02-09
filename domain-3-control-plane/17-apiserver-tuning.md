@@ -132,8 +132,8 @@ spec:
     # ==================== 基础配置 ====================
     - --advertise-address=$(POD_IP)
     - --allow-privileged=true
-    - --enable-admission-plugins=NodeRestriction,ResourceQuota,LimitRanger,PodSecurityPolicy
-    - --disable-admission-plugins=
+    - --enable-admission-plugins=NodeRestriction,ResourceQuota,LimitRanger,PodSecurity,ValidatingAdmissionPolicy
+    - --disable-admission-plugins=PodSecurityPolicy
     
     # ==================== 认证授权 ====================
     - --authorization-mode=Node,RBAC

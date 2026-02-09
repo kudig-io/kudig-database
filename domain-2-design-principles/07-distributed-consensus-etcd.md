@@ -1,6 +1,15 @@
-# 17 - 分布式共识与etcd原理 (Distributed Consensus & etcd)
+# 07 - 分布式共识与 etcd 原理 (etcd & Raft)
 
-## 生产环境etcd运维最佳实践
+## 生产环境 etcd 核心痛点：Compaction 与 Defrag
+
+作为 K8s 的唯一数据存储，etcd 的性能直接决定了集群的上限。在生产运维中，仅仅知道 Raft 协议是不够的，必须掌握 **MVCC 存储的维护逻辑**。
+
+### 关键操作深度解析
+* **Compaction (压缩)**: 清理历史版本。如果压缩不及时，etcd 内存会持续增长，最终触发 `database space exceeded`。
+* **Defragmentation (碎片整理)**: 压缩后留下的空洞需要通过 Defrag 释放。
+    * **风险警告**: Defrag 是一个 **Stop-the-world** 操作。在大型集群上，对 Leader 执行 Defrag 可能会导致其长时间无法响应心跳，从而触发集群重新选举。建议逐个对 Follower 执行，最后切换 Leader 再处理原 Leader。
+
+## 生产环境 etcd 运维最佳实践
 
 ### 企业级etcd架构设计
 

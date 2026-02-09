@@ -1,4 +1,15 @@
-# 11 - Kubernetes设计原则与哲学 (Design Principles & Philosophy)
+# 01 - Kubernetes 设计原则与哲学 (Foundations)
+
+## 现代化演进：从管理 Pod 到管理“意图”
+
+作为资深架构师，理解 Kubernetes 的核心不仅仅是容器编排，而是其**声明式面向终态的闭环控制系统**。
+
+### 核心设计哲学深度解析
+1. **API 为中心 (API-Centric)**: 所有的操作都是对 API 对象的 CRUD，这使得 K8s 天然具备极强的扩展性（CRD 机制）。
+2. **声明式 (Declarative)**: 用户只需提交 `Spec`（期望状态），系统负责维护 `Status`（实际状态），这与传统的命令式运维有着本质区别。
+3. **松耦合 (Loosely Coupled)**: 组件间通过 API Server 异步通信，每个组件只关注自己负责的资源，实现了高度的解耦。
+
+---
 
 ## 生产环境设计原则深度解析
 

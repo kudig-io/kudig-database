@@ -1,4 +1,13 @@
-# 18 - 高可用架构模式 (High Availability Patterns)
+# 08 - 高可用架构模式 (HA Patterns)
+
+## 资深视点：Lease API 为什么取代了 Endpoints 锁？
+
+在早期的 K8s 版本中，控制面组件（如 Scheduler）使用 `Endpoints` 或 `ConfigMap` 实现分布式锁。
+
+### Lease API 的优势
+1. **性能**: `Lease` 对象非常小，更新时对 API Server 和 etcd 的负载极低。
+2. **解耦**: 避免了频繁更新 Endpoints 导致的大规模 Watch 通知（Endpoints 的变更会通知到所有节点的 kube-proxy）。
+3. **节点心跳**: 现代 K8s 使用 Lease 承载节点心跳，极大地减轻了集群规模扩大时 API Server 的压力。
 
 ## 高可用核心指标
 

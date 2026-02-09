@@ -1,4 +1,4 @@
-# 11 - 升级路径表
+# 07 - 升级路径与策略指南
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
 
