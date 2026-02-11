@@ -1,14 +1,12 @@
 #!/bin/bash
-# refresh.sh - 快速刷新 gitbook
+# refresh.sh - 内容更新后快速刷新 gitbook
 # 用法:
-#   ./refresh.sh          # 重新生成 SUMMARY.md + 构建 + 重启服务
-#   ./refresh.sh build    # 仅重新构建（不重新生成 SUMMARY.md）
-#   ./refresh.sh serve    # 重新生成 + 构建 + 启动服务（端口默认 3000）
+#   ./refresh.sh          # 完整刷新：更新符号链接 + 重新生成目录 + 重新构建
+#   ./refresh.sh build    # 仅重新构建（不更新符号链接和目录，速度更快）
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PORT="${PORT:-3000}"
 MODE="${1:-full}"
 
 RED='\033[0;31m'
@@ -25,17 +23,6 @@ if ! command -v mdbook &>/dev/null; then
     log_error "mdbook 未安装，请先安装: cargo install mdbook"
     exit 1
 fi
-
-# 停止已有的 mdbook serve 进程
-stop_serve() {
-    local pids
-    pids=$(pgrep -f "mdbook serve" 2>/dev/null || true)
-    if [[ -n "$pids" ]]; then
-        log_info "停止已有的 mdbook serve 进程..."
-        kill $pids 2>/dev/null || true
-        sleep 1
-    fi
-}
 
 # 更新符号链接
 update_symlinks() {
@@ -75,19 +62,6 @@ build_book() {
     log_info "构建完成，共 $count 个 HTML 页面"
 }
 
-# 启动服务
-start_serve() {
-    log_info "启动 mdBook 服务 (端口: $PORT)..."
-    cd "$SCRIPT_DIR"
-    mdbook serve --port "$PORT" &
-    sleep 2
-    if curl -s -o /dev/null -w "" "http://localhost:$PORT" 2>/dev/null; then
-        log_info "服务已启动: http://localhost:$PORT"
-    else
-        log_warn "服务启动中，请稍等后访问: http://localhost:$PORT"
-    fi
-}
-
 # 计时
 START_TIME=$(date +%s)
 
@@ -95,22 +69,21 @@ case "$MODE" in
     build)
         build_book
         ;;
-    serve)
-        stop_serve
-        update_symlinks
-        generate_summary
-        build_book
-        start_serve
-        ;;
     full|*)
-        stop_serve
         update_symlinks
         generate_summary
         build_book
-        start_serve
         ;;
 esac
 
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 log_info "总耗时: ${ELAPSED}s"
+
+# 提示
+echo ""
+if pgrep -f "mdbook serve" &>/dev/null; then
+    log_info "检测到 mdbook serve 正在运行，页面将自动热更新"
+else
+    log_warn "mdbook serve 未运行，如需预览请执行: bash start.sh"
+fi

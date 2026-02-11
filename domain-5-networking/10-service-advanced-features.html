@@ -1,0 +1,1077 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Service 高级特性与应用案例 (Service Advanced Features) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="service-高级特性与应用案例-service-advanced-features"><a class="header" href="#service-高级特性与应用案例-service-advanced-features">Service 高级特性与应用案例 (Service Advanced Features)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32<br><strong>文档版本</strong>: v2.0 | 生产级 Service 高级特性参考<br><strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<h2 id="service-高级特性架构"><a class="header" href="#service-高级特性架构">Service 高级特性架构</a></h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                        Service Advanced Features Architecture                           │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                              Traffic Policies                                      │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────────────┐      ┌─────────────────────────┐                    │ │
+│  │  │  externalTrafficPolicy  │      │  internalTrafficPolicy  │                    │ │
+│  │  │                         │      │                         │                    │ │
+│  │  │  ┌───────────────────┐ │      │  ┌───────────────────┐ │                    │ │
+│  │  │  │ Cluster (default) │ │      │  │ Cluster (default) │ │                    │ │
+│  │  │  │ • 负载均衡优先    │ │      │  │ • 跨节点转发      │ │                    │ │
+│  │  │  │ • 源 IP 丢失      │ │      │  │ • 均匀分布        │ │                    │ │
+│  │  │  └───────────────────┘ │      │  └───────────────────┘ │                    │ │
+│  │  │  ┌───────────────────┐ │      │  ┌───────────────────┐ │                    │ │
+│  │  │  │ Local             │ │      │  │ Local             │ │                    │ │
+│  │  │  │ • 保留源 IP       │ │      │  │ • 仅本地节点      │ │                    │ │
+│  │  │  │ • 可能负载不均    │ │      │  │ • 低延迟          │ │                    │ │
+│  │  │  └───────────────────┘ │      │  └───────────────────┘ │                    │ │
+│  │  └─────────────────────────┘      └─────────────────────────┘                    │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                            Session Affinity                                        │ │
+│  │                                                                                    │ │
+│  │  Client IP → Hash → Same Pod (within timeout)                                     │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────┐ │ │
+│  │  │  Request 1 (IP: 10.0.0.1)  ───────────────────────────────► Pod A          │ │ │
+│  │  │  Request 2 (IP: 10.0.0.1)  ───────────────────────────────► Pod A (same)   │ │ │
+│  │  │  Request 3 (IP: 10.0.0.2)  ───────────────────────────────► Pod B          │ │ │
+│  │  │  Request 4 (IP: 10.0.0.1)  ───────────────────────────────► Pod A (same)   │ │ │
+│  │  └─────────────────────────────────────────────────────────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                        Topology Aware Routing                                      │ │
+│  │                                                                                    │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐                   │ │
+│  │  │   Zone A        │  │   Zone B        │  │   Zone C        │                   │ │
+│  │  │                 │  │                 │  │                 │                   │ │
+│  │  │  Client ──────► │  │                 │  │                 │                   │ │
+│  │  │       │         │  │                 │  │                 │                   │ │
+│  │  │       ▼         │  │                 │  │                 │                   │ │
+│  │  │  ┌─────────┐   │  │  ┌─────────┐   │  │  ┌─────────┐   │                   │ │
+│  │  │  │ Pod A-1 │◄──│──│──│ Pod B-1 │   │  │  │ Pod C-1 │   │                   │ │
+│  │  │  │ (local) │   │  │  │         │   │  │  │         │   │                   │ │
+│  │  │  └─────────┘   │  │  └─────────┘   │  │  └─────────┘   │                   │ │
+│  │  │  ┌─────────┐   │  │  ┌─────────┐   │  │  ┌─────────┐   │                   │ │
+│  │  │  │ Pod A-2 │◄──│  │  │ Pod B-2 │   │  │  │ Pod C-2 │   │                   │ │
+│  │  │  │ (local) │   │  │  │         │   │  │  │         │   │                   │ │
+│  │  │  └─────────┘   │  │  └─────────┘   │  │  └─────────┘   │                   │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘                   │ │
+│  │                                                                                    │ │
+│  │  优先路由到同 Zone 的 Pod，减少跨 AZ 流量和延迟                                   │ │
+│  └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="流量策略详解"><a class="header" href="#流量策略详解">流量策略详解</a></h2>
+<h3 id="externaltrafficpolicy-对比"><a class="header" href="#externaltrafficpolicy-对比">externalTrafficPolicy 对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>特性</th><th>Cluster (默认)</th><th>Local</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>流量路径</strong></td><td>可跨节点转发</td><td>仅本地节点 Pod</td></tr>
+<tr><td><strong>源 IP</strong></td><td>被 SNAT 替换</td><td>保留原始 IP</td></tr>
+<tr><td><strong>负载均衡</strong></td><td>均匀分布</td><td>可能不均匀</td></tr>
+<tr><td><strong>网络跳数</strong></td><td>可能多一跳</td><td>最少跳数</td></tr>
+<tr><td><strong>延迟</strong></td><td>较高</td><td>较低</td></tr>
+<tr><td><strong>健康检查</strong></td><td>标准</td><td>需要 NodePort 健康检查</td></tr>
+<tr><td><strong>Pod 不在节点</strong></td><td>正常转发</td><td>流量丢弃</td></tr>
+<tr><td><strong>适用场景</strong></td><td>通用场景</td><td>需要源 IP 的应用</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="externaltrafficpolicy-流量路径"><a class="header" href="#externaltrafficpolicy-流量路径">externalTrafficPolicy 流量路径</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    externalTrafficPolicy Flow Comparison                            │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Cluster Mode (默认):                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  External        LoadBalancer      Node 1           Node 2                  │   │
+│  │  Client          (Cloud)           (no pods)        (has pods)              │   │
+│  │                                                                              │   │
+│  │    │                │                │                │                      │   │
+│  │    │ src: 1.2.3.4   │                │                │                      │   │
+│  │    └───────────────►│                │                │                      │   │
+│  │                     │ src: 1.2.3.4   │                │                      │   │
+│  │                     └───────────────►│                │                      │   │
+│  │                                      │ src: Node1 IP  │   ◄── SNAT!         │   │
+│  │                                      └───────────────►│                      │   │
+│  │                                                       │                      │   │
+│  │                                                       ▼                      │   │
+│  │                                                    ┌──────┐                  │   │
+│  │                                                    │ Pod  │                  │   │
+│  │                                                    │ sees │                  │   │
+│  │                                                    │Node1 │ ◄── 源 IP 丢失   │   │
+│  │                                                    │ IP   │                  │   │
+│  │                                                    └──────┘                  │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Local Mode:                                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  External        LoadBalancer      Node 1           Node 2                  │   │
+│  │  Client          (Cloud)           (no pods)        (has pods)              │   │
+│  │                                                                              │   │
+│  │    │                │                │                │                      │   │
+│  │    │ src: 1.2.3.4   │                │                │                      │   │
+│  │    └───────────────►│                │                │                      │   │
+│  │                     │                │                │                      │   │
+│  │                     │ Health check   │                │                      │   │
+│  │                     │ Node1: FAIL ──►│ (no local pod) │                      │   │
+│  │                     │ Node2: PASS ──────────────────►│                      │   │
+│  │                     │                                │                      │   │
+│  │                     │ src: 1.2.3.4                   │                      │   │
+│  │                     └───────────────────────────────►│                      │   │
+│  │                                                       │                      │   │
+│  │                                                       ▼                      │   │
+│  │                                                    ┌──────┐                  │   │
+│  │                                                    │ Pod  │                  │   │
+│  │                                                    │ sees │                  │   │
+│  │                                                    │1.2.3.│ ◄── 源 IP 保留   │   │
+│  │                                                    │  4   │                  │   │
+│  │                                                    └──────┘                  │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="externaltrafficpolicy-配置示例"><a class="header" href="#externaltrafficpolicy-配置示例">externalTrafficPolicy 配置示例</a></h3>
+<pre><code class="language-yaml"># external-traffic-policy-examples.yaml
+---
+# 保留源 IP 的 LoadBalancer Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-preserve-source-ip
+  namespace: production
+  annotations:
+    # AWS NLB 推荐配置
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local  # 保留源 IP
+  
+  selector:
+    app: web
+  
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8443
+  
+  # 健康检查端口 (Local 模式自动使用)
+  healthCheckNodePort: 32000
+---
+# 确保 Pod 均匀分布以配合 Local 策略
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: production
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      # 确保每个节点至少有一个 Pod
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: web
+      
+      # 或使用 Pod Anti-Affinity
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: web
+                topologyKey: kubernetes.io/hostname
+      
+      containers:
+        - name: web
+          image: nginx:latest
+          ports:
+            - containerPort: 8080
+            - containerPort: 8443
+</code></pre>
+<h3 id="internaltrafficpolicy-配置"><a class="header" href="#internaltrafficpolicy-配置">internalTrafficPolicy 配置</a></h3>
+<pre><code class="language-yaml"># internal-traffic-policy.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cache-local
+  namespace: production
+spec:
+  type: ClusterIP
+  
+  # 内部流量策略 (v1.26+ GA)
+  internalTrafficPolicy: Local  # 优先本地 Pod
+  
+  selector:
+    app: cache
+  
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+# DaemonSet 部署的本地缓存
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cache
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: cache
+  template:
+    metadata:
+      labels:
+        app: cache
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+</code></pre>
+<hr>
+<h2 id="会话亲和性-session-affinity"><a class="header" href="#会话亲和性-session-affinity">会话亲和性 (Session Affinity)</a></h2>
+<h3 id="会话亲和性工作原理"><a class="header" href="#会话亲和性工作原理">会话亲和性工作原理</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                        Session Affinity Mechanism                                   │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  sessionAffinity: ClientIP                                                         │
+│                                                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           kube-proxy                                         │   │
+│  │                                                                              │   │
+│  │  Affinity Table (per Service):                                              │   │
+│  │  ┌─────────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  Client IP    │  Backend Pod      │  Last Access    │  Expires      │   │   │
+│  │  │───────────────┼───────────────────┼─────────────────┼───────────────│   │   │
+│  │  │  10.0.0.1     │  10.244.1.10:8080 │  12:00:00       │  15:00:00     │   │   │
+│  │  │  10.0.0.2     │  10.244.2.11:8080 │  12:05:00       │  15:05:00     │   │   │
+│  │  │  10.0.0.3     │  10.244.1.10:8080 │  12:10:00       │  15:10:00     │   │   │
+│  │  └─────────────────────────────────────────────────────────────────────┘   │   │
+│  │                                                                              │   │
+│  │  Flow:                                                                       │   │
+│  │  1. Client 10.0.0.1 → Service VIP                                           │   │
+│  │  2. Check affinity table for 10.0.0.1                                       │   │
+│  │  3. If found and not expired → route to cached backend                      │   │
+│  │  4. If not found → select backend, update table                             │   │
+│  │  5. If expired → remove entry, select new backend                           │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  iptables 实现 (Cluster mode):                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │  -A KUBE-SVC-XXX -m recent --name affinity-XXX --rcheck --seconds 10800     │   │
+│  │      --reap -j KUBE-SEP-TARGET                                               │   │
+│  │  -A KUBE-SVC-XXX -m statistic --mode random --probability 0.33333           │   │
+│  │      -j KUBE-SEP-AAA                                                         │   │
+│  │  ...                                                                         │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  IPVS 实现:                                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │  ipvsadm -A -t 10.96.0.100:80 -s rr -p 10800                                │   │
+│  │                                   └── persistence timeout (seconds)          │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="会话亲和性配置示例"><a class="header" href="#会话亲和性配置示例">会话亲和性配置示例</a></h3>
+<pre><code class="language-yaml"># session-affinity-examples.yaml
+---
+# 基于 ClientIP 的会话亲和性
+apiVersion: v1
+kind: Service
+metadata:
+  name: stateful-app
+  namespace: production
+spec:
+  type: ClusterIP
+  
+  # 启用会话亲和性
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      # 会话保持时间 (秒)
+      # 默认: 10800 (3小时)
+      # 最大: 86400 (24小时)
+      timeoutSeconds: 3600  # 1小时
+  
+  selector:
+    app: stateful-app
+  
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+# WebSocket 应用 (需要长连接会话保持)
+apiVersion: v1
+kind: Service
+metadata:
+  name: websocket-app
+  namespace: production
+  annotations:
+    # Nginx Ingress WebSocket 支持
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 7200  # 2小时
+  selector:
+    app: websocket-app
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+# 游戏服务器 (长会话)
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-server
+  namespace: production
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local  # 保留源 IP + 会话亲和
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 86400  # 24小时 (最大值)
+  selector:
+    app: game-server
+  ports:
+    - name: game
+      port: 7777
+      targetPort: 7777
+      protocol: UDP
+</code></pre>
+<h3 id="会话亲和性注意事项"><a class="header" href="#会话亲和性注意事项">会话亲和性注意事项</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>场景</th><th>问题</th><th>解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>NAT 后多客户端</strong></td><td>多个客户端共享同一出口 IP</td><td>使用应用层会话管理 (Redis)</td></tr>
+<tr><td><strong>Pod 重启</strong></td><td>会话中断</td><td>使用外部状态存储</td></tr>
+<tr><td><strong>滚动更新</strong></td><td>部分会话中断</td><td>使用 PDB + 优雅终止</td></tr>
+<tr><td><strong>负载不均</strong></td><td>热门客户端集中到单个 Pod</td><td>监控 + 动态扩容</td></tr>
+<tr><td><strong>超时配置</strong></td><td>会话过期</td><td>根据业务调整 timeout</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="拓扑感知路由-topology-aware-routing"><a class="header" href="#拓扑感知路由-topology-aware-routing">拓扑感知路由 (Topology Aware Routing)</a></h2>
+<h3 id="拓扑感知工作原理"><a class="header" href="#拓扑感知工作原理">拓扑感知工作原理</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                     Topology Aware Routing (TAR) Mechanism                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Prerequisites:                                                                     │
+│  • Nodes labeled with topology.kubernetes.io/zone                                  │
+│  • Service annotated with service.kubernetes.io/topology-mode: Auto                │
+│  • Sufficient endpoints in each zone                                               │
+│                                                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                        Control Plane Processing                              │   │
+│  │                                                                              │   │
+│  │  1. EndpointSlice Controller calculates zone distribution                   │   │
+│  │  2. For each zone, generate hints for endpoints                             │   │
+│  │  3. kube-proxy receives EndpointSlice with hints                            │   │
+│  │  4. kube-proxy programs rules using only local zone endpoints               │   │
+│  │                                                                              │   │
+│  │  EndpointSlice with Topology Hints:                                         │   │
+│  │  ┌───────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │  endpoints:                                                            │ │   │
+│  │  │    - addresses: ["10.244.1.10"]                                       │ │   │
+│  │  │      zone: "us-west-2a"                                               │ │   │
+│  │  │      hints:                                                            │ │   │
+│  │  │        forZones:                                                       │ │   │
+│  │  │          - name: "us-west-2a"  ◄── 此端点服务于 us-west-2a 区域       │ │   │
+│  │  │    - addresses: ["10.244.2.11"]                                       │ │   │
+│  │  │      zone: "us-west-2b"                                               │ │   │
+│  │  │      hints:                                                            │ │   │
+│  │  │        forZones:                                                       │ │   │
+│  │  │          - name: "us-west-2b"                                         │ │   │
+│  │  └───────────────────────────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Zone Traffic Distribution:                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  us-west-2a                    us-west-2b                    us-west-2c     │   │
+│  │  ┌─────────────────┐          ┌─────────────────┐          ┌─────────────┐ │   │
+│  │  │                 │          │                 │          │             │ │   │
+│  │  │  Client A ─────►│          │  Client B ─────►│          │  Client C   │ │   │
+│  │  │       │         │          │       │         │          │       │     │ │   │
+│  │  │       ▼         │          │       ▼         │          │       ▼     │ │   │
+│  │  │  ┌─────────┐   │          │  ┌─────────┐   │          │  No local   │ │   │
+│  │  │  │ Pod A-1 │◄──│          │  │ Pod B-1 │◄──│          │  endpoints  │ │   │
+│  │  │  └─────────┘   │          │  └─────────┘   │          │       │     │ │   │
+│  │  │  ┌─────────┐   │          │  ┌─────────┐   │          │       │     │ │   │
+│  │  │  │ Pod A-2 │◄──│          │  │ Pod B-2 │◄──│          │       ▼     │ │   │
+│  │  │  └─────────┘   │          │  └─────────┘   │          │  Failover   │ │   │
+│  │  │                 │          │                 │          │  to other   │ │   │
+│  │  │  100% local     │          │  100% local     │          │  zones      │ │   │
+│  │  │  traffic        │          │  traffic        │          │             │ │   │
+│  │  └─────────────────┘          └─────────────────┘          └─────────────┘ │   │
+│  │                                                                              │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+│  Benefits:                                                                         │
+│  • Reduced cross-zone network traffic (cost savings)                              │
+│  • Lower latency (same-zone routing)                                              │
+│  • Automatic failover when zone has no healthy endpoints                          │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="拓扑感知路由配置"><a class="header" href="#拓扑感知路由配置">拓扑感知路由配置</a></h3>
+<pre><code class="language-yaml"># topology-aware-routing.yaml
+---
+# 启用拓扑感知路由的 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api
+  namespace: production
+  annotations:
+    # 启用拓扑感知路由 (v1.27+ 推荐)
+    service.kubernetes.io/topology-mode: Auto
+    
+    # 旧版注解 (v1.21-v1.26)
+    # service.kubernetes.io/topology-aware-hints: Auto
+spec:
+  type: ClusterIP
+  selector:
+    app: backend-api
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+# 多区域部署的 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: production
+spec:
+  replicas: 9  # 每个 AZ 至少 3 个
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      # 确保跨区域均匀分布
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: backend-api
+      
+      containers:
+        - name: api
+          image: backend-api:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+# 验证拓扑感知生效
+# kubectl get endpointslices -l kubernetes.io/service-name=backend-api -o yaml
+# 查看 endpoints[].hints.forZones 字段
+</code></pre>
+<h3 id="拓扑感知条件和限制"><a class="header" href="#拓扑感知条件和限制">拓扑感知条件和限制</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>条件</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>节点标签</strong></td><td>必须有 <code>topology.kubernetes.io/zone</code> 标签</td></tr>
+<tr><td><strong>最小端点数</strong></td><td>每个区域至少 3 个端点 (可配置)</td></tr>
+<tr><td><strong>端点分布</strong></td><td>端点在各区域分布相对均匀</td></tr>
+<tr><td><strong>Service 类型</strong></td><td>ClusterIP, NodePort, LoadBalancer</td></tr>
+<tr><td><strong>协议</strong></td><td>TCP 和 UDP</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="无选择器-service-services-without-selectors"><a class="header" href="#无选择器-service-services-without-selectors">无选择器 Service (Services without Selectors)</a></h2>
+<h3 id="无选择器-service-架构"><a class="header" href="#无选择器-service-架构">无选择器 Service 架构</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                    Services without Selectors Architecture                          │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  Use Cases:                                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                              │   │
+│  │  1. External Database        2. Cross-Cluster Service  3. Migration Bridge  │   │
+│  │                                                                              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │   K8s Pod     │           │   Cluster A   │        │   Legacy App  │    │   │
+│  │  │               │           │               │        │   (VM)        │    │   │
+│  │  │ db-svc:3306 ──┼──────────►│ ┌───────────┐ │        │               │    │   │
+│  │  │               │           │ │ Service B │ │        │ 192.168.1.100 │    │   │
+│  │  └───────────────┘           │ └───────────┘ │        └───────────────┘    │   │
+│  │         │                    └───────────────┘               ▲              │   │
+│  │         │                           │                        │              │   │
+│  │         ▼                           ▼                        │              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │ EndpointSlice │           │ EndpointSlice │        │ EndpointSlice │    │   │
+│  │  │               │           │               │        │               │    │   │
+│  │  │ RDS endpoint  │           │ Cluster B IPs │        │ VM IP address │    │   │
+│  │  │ 10.0.1.50     │           │ 10.1.0.x      │        │ 192.168.1.100 │    │   │
+│  │  └───────────────┘           └───────────────┘        └───────────────┘    │   │
+│  │         │                           │                        │              │   │
+│  │         ▼                           ▼                        ▼              │   │
+│  │  ┌───────────────┐           ┌───────────────┐        ┌───────────────┐    │   │
+│  │  │  External DB  │           │  Remote       │        │  Legacy App   │    │   │
+│  │  │  (RDS/Cloud)  │           │  Cluster B    │        │  (Gradual     │    │   │
+│  │  │               │           │  Pods         │        │   Migration)  │    │   │
+│  │  └───────────────┘           └───────────────┘        └───────────────┘    │   │
+│  │                                                                              │   │
+│  └─────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="无选择器-service-配置示例"><a class="header" href="#无选择器-service-配置示例">无选择器 Service 配置示例</a></h3>
+<pre><code class="language-yaml"># service-without-selector.yaml
+---
+# 1. 外部数据库代理
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-mysql
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+      targetPort: 3306
+  # 无 selector
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: external-mysql-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: external-mysql
+addressType: IPv4
+ports:
+  - name: ""
+    appProtocol: mysql
+    protocol: TCP
+    port: 3306
+endpoints:
+  - addresses:
+      - "10.0.1.50"  # RDS Primary
+    conditions:
+      ready: true
+  - addresses:
+      - "10.0.1.51"  # RDS Replica
+    conditions:
+      ready: true
+---
+# 2. 外部 API 服务代理
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-api
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+    - name: https
+      port: 443
+      targetPort: 443
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: external-api-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: external-api
+addressType: IPv4
+ports:
+  - name: https
+    appProtocol: https
+    protocol: TCP
+    port: 443
+endpoints:
+  - addresses:
+      - "203.0.113.10"
+    conditions:
+      ready: true
+  - addresses:
+      - "203.0.113.11"
+    conditions:
+      ready: true
+---
+# 3. 跨集群服务发现
+apiVersion: v1
+kind: Service
+metadata:
+  name: remote-service
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: remote-service-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: remote-service
+addressType: IPv4
+ports:
+  - port: 8080
+    protocol: TCP
+endpoints:
+  - addresses:
+      - "10.1.0.10"  # Remote cluster Pod IP
+    conditions:
+      ready: true
+    zone: "us-east-1a"
+  - addresses:
+      - "10.1.0.11"
+    conditions:
+      ready: true
+    zone: "us-east-1b"
+</code></pre>
+<h3 id="动态更新-endpointslice"><a class="header" href="#动态更新-endpointslice">动态更新 EndpointSlice</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# update-external-endpoints.sh
+# 动态更新外部服务端点
+
+SERVICE_NAME="external-mysql"
+NAMESPACE="production"
+
+# 获取新的端点 IP (例如从云 API)
+get_rds_endpoints() {
+    # 示例: 从 AWS RDS 获取端点
+    aws rds describe-db-instances \
+        --db-instance-identifier my-rds \
+        --query 'DBInstances[0].Endpoint.Address' \
+        --output text
+}
+
+# 更新 EndpointSlice
+update_endpoints() {
+    local primary_ip="$1"
+    local replica_ip="$2"
+    
+    cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: ${SERVICE_NAME}-1
+  namespace: ${NAMESPACE}
+  labels:
+    kubernetes.io/service-name: ${SERVICE_NAME}
+addressType: IPv4
+ports:
+  - name: mysql
+    protocol: TCP
+    port: 3306
+endpoints:
+  - addresses:
+      - "${primary_ip}"
+    conditions:
+      ready: true
+  - addresses:
+      - "${replica_ip}"
+    conditions:
+      ready: true
+EOF
+}
+
+# 主函数
+main() {
+    local primary=$(get_rds_endpoints)
+    local replica="${primary/primary/replica}"
+    
+    update_endpoints "$primary" "$replica"
+    echo "Endpoints updated: $primary, $replica"
+}
+
+main
+</code></pre>
+<hr>
+<h2 id="生产环境最佳实践"><a class="header" href="#生产环境最佳实践">生产环境最佳实践</a></h2>
+<h3 id="service-配置检查清单"><a class="header" href="#service-配置检查清单">Service 配置检查清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>检查项</th><th>说明</th><th>建议配置</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>流量策略</strong></td><td>是否需要保留源 IP</td><td>Web 应用使用 Local</td></tr>
+<tr><td><strong>会话亲和</strong></td><td>是否需要粘性会话</td><td>有状态应用启用 ClientIP</td></tr>
+<tr><td><strong>拓扑感知</strong></td><td>是否需要区域路由</td><td>多 AZ 部署启用</td></tr>
+<tr><td><strong>健康检查</strong></td><td>Local 策略需要</td><td>配置 healthCheckNodePort</td></tr>
+<tr><td><strong>Pod 分布</strong></td><td>配合 Local 策略</td><td>使用 topologySpreadConstraints</td></tr>
+<tr><td><strong>超时配置</strong></td><td>会话超时时间</td><td>根据业务需求调整</td></tr>
+<tr><td><strong>监控告警</strong></td><td>Service 健康监控</td><td>配置 Prometheus 规则</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="监控指标"><a class="header" href="#监控指标">监控指标</a></h3>
+<pre><code class="language-yaml"># service-monitoring.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: service-advanced-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: service.advanced
+      rules:
+        - alert: ServiceTopologyHintsNotPopulated
+          expr: |
+            kube_endpointslice_info{topology_aware_hints_configured="true"} 
+            unless 
+            kube_endpointslice_hints_populated == 1
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Topology hints not populated"
+        
+        - alert: LocalTrafficPolicyNoLocalEndpoints
+          expr: |
+            kube_service_spec_external_traffic_policy{external_traffic_policy="Local"} 
+            * on(service, namespace) 
+            (count by (service, namespace) (kube_endpoint_address_available) == 0)
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Service with Local policy has no local endpoints on some nodes"
+</code></pre>
+<hr>
+<h2 id="版本变更记录"><a class="header" href="#版本变更记录">版本变更记录</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>K8s版本</th><th>变更内容</th><th>影响</th></tr>
+</thead>
+<tbody>
+<tr><td>v1.32</td><td>拓扑感知路由增强</td><td>更智能的区域路由</td></tr>
+<tr><td>v1.31</td><td>Service 内部流量策略改进</td><td>更灵活配置</td></tr>
+<tr><td>v1.30</td><td>EndpointSlice 性能优化</td><td>大规模更高效</td></tr>
+<tr><td>v1.27</td><td>topology-mode 注解</td><td>替代旧的 hints 注解</td></tr>
+<tr><td>v1.26</td><td>internalTrafficPolicy GA</td><td>内部流量策略稳定</td></tr>
+<tr><td>v1.25</td><td>拓扑感知路由 Beta</td><td>跨 AZ 优化</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<blockquote>
+<p><strong>参考文档</strong>:</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/service/#traffic-policies">Service Traffic Policy</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/">Topology Aware Routing</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/">EndpointSlices</a></li>
+</ul>
+</blockquote>
+<hr>
+<p><em>Kusheet - Kubernetes 知识速查表项目</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/09-kube-proxy-modes-performance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/11-dns-service-discovery-coredns.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/09-kube-proxy-modes-performance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/11-dns-service-discovery-coredns.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

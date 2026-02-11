@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FAQ 文档 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="faq-文档"><a class="header" href="#faq-文档">FAQ 文档</a></h1>
+<p>本文档适用于：产品手册、官网页面、课程测验、现场 Q&amp;A。</p>
+<h2 id="问题1kubernetes-网络从外部到-pod-的完整链路是什么"><a class="header" href="#问题1kubernetes-网络从外部到-pod-的完整链路是什么">问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？</a></h2>
+<ul>
+<li><strong>答案</strong>：典型南北向链路为：Internet → DNS → CDN/WAF → 云负载均衡（SLB/ALB/NLB）→ Kubernetes Ingress（Nginx Ingress / Gateway API / ALB Ingress Controller）→ Kubernetes Service（ClusterIP / NodePort / LoadBalancer / Headless）→ CNI 网络（Flannel/Calico/Cilium/Terway，veth/bridge/ENI）→ Pod 网络（如 10.244.0.0/16）→ 物理网络/VPC（Node Network）。<br>该分层的核心价值是：入口治理（Ingress/Gateway）与服务发现/负载均衡（Service）解耦，底层由 CNI 负责跨节点转发与策略能力。</li>
+</ul>
+<h2 id="问题2clusterip-适合什么场景为什么说它是微服务唯一标准入口"><a class="header" href="#问题2clusterip-适合什么场景为什么说它是微服务唯一标准入口">问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？</a></h2>
+<ul>
+<li><strong>答案</strong>：ClusterIP 用于<strong>集群内部服务发现与负载均衡</strong>，对调用方暴露稳定的虚拟 IP（ClusterIP），屏蔽后端 Pod 的弹性伸缩、重建、滚动升级带来的 IP 变化。<br>生产建议要点：
+<ul>
+<li>通过 <code>selector</code> 精确选择后端（必要时可按版本控制）。</li>
+<li><code>publishNotReadyAddresses: false</code> 确保仅路由到 Ready Pod。</li>
+<li>需要会话保持时可用 <code>sessionAffinity: ClientIP</code>（如 WebSocket、本地缓存）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题3什么时候需要为-clusterip-固定-clusterip"><a class="header" href="#问题3什么时候需要为-clusterip-固定-clusterip">问题3：什么时候需要为 ClusterIP 固定 <code>clusterIP</code>？</a></h2>
+<ul>
+<li><strong>答案</strong>：在少数灾备/依赖固定地址的场景（例如外部系统以白名单方式放行某个固定 IP，或迁移过程需要保持地址不变）可固定 <code>clusterIP</code>。<br>注意：固定 ClusterIP 会降低灵活性，需确保 Service CIDR 规划充足、且变更有严格流程，否则可能造成 IP 冲突或不可用。</li>
+</ul>
+<h2 id="问题4什么是拓扑感知路由topology-aware-hints能带来什么收益"><a class="header" href="#问题4什么是拓扑感知路由topology-aware-hints能带来什么收益">问题4：什么是“拓扑感知路由（Topology Aware Hints）”，能带来什么收益？</a></h2>
+<ul>
+<li><strong>答案</strong>：拓扑感知路由用于让 kube-proxy <strong>优先选择同节点/同可用区（AZ）的 Endpoint</strong>，减少跨 AZ 延迟与费用。<br>启用方式示例：为 Service 添加注解 <code>service.kubernetes.io/topology-aware-hints: "auto"</code>。<br>文档给出的生产效果参考：延迟降低 40–60%，跨 AZ 流量成本降低约 70%，适用于缓存、数据库等延迟敏感服务的多 AZ 部署。</li>
+</ul>
+<h2 id="问题5nodeport-适合生产吗有哪些典型用途与风险"><a class="header" href="#问题5nodeport-适合生产吗有哪些典型用途与风险">问题5：NodePort 适合生产吗？有哪些典型用途与风险？</a></h2>
+<ul>
+<li><strong>答案</strong>：NodePort 通过在每个节点开放端口（默认范围 30000–32767）把服务“直通”到节点网络，<strong>测试环境快速验证</strong>很方便，但生产通常不推荐作为主要暴露方式。<br>典型用途：配合物理四层 LB、临时联调、非云环境快速暴露。<br>主要风险：
+<ul>
+<li>需要管理节点暴露面与端口冲突。</li>
+<li>如果策略不当可能丢失源 IP 或导致负载不均。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题6externaltrafficpolicy-cluster-与-local-有什么区别如何选择"><a class="header" href="#问题6externaltrafficpolicy-cluster-与-local-有什么区别如何选择">问题6：<code>externalTrafficPolicy: Cluster</code> 与 <code>Local</code> 有什么区别？如何选择？</a></h2>
+<ul>
+<li><strong>答案</strong>：
+<ul>
+<li><strong>Cluster（默认）</strong>：可能发生 SNAT，客户端源 IP 可能丢失；可跨节点转发，负载更均衡。</li>
+<li><strong>Local</strong>：保留真实源 IP；仅转发到<strong>本节点</strong>的 Pod（避免跨节点跳转），但可能出现负载不均，且通常需要 <code>healthCheckNodePort</code> 配合健康检查。<br>选择建议：需要审计、IP 白名单、真实源 IP 的场景选 <code>Local</code>；无源 IP 强需求、追求均衡选 <code>Cluster</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题7loadbalancer-为什么是生产环境唯一推荐的外部暴露方式之一如何做成本优化"><a class="header" href="#问题7loadbalancer-为什么是生产环境唯一推荐的外部暴露方式之一如何做成本优化">问题7：LoadBalancer 为什么是生产环境“唯一推荐”的外部暴露方式之一？如何做成本优化？</a></h2>
+<ul>
+<li><strong>答案</strong>：LoadBalancer 由云厂商自动提供高可用 LB、健康检查与流量切换，运维成本低、可靠性高，适合生产对外服务。<br>成本优化策略（文档建议）：
+<ul>
+<li><strong>复用已有 SLB/ALB</strong>：通过注解指定现有 LB ID，避免重复创建。</li>
+<li><strong>按流量计费</strong>：低流量业务更划算。</li>
+<li><strong>共享带宽包</strong>：多个 LB 共享带宽降低费用。</li>
+<li><strong>Ingress 替代多 SLB</strong>：使用“单 SLB + Ingress”让多服务共享入口，节省显著。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题8headless-service-是什么它与-statefulset-的关系是什么"><a class="header" href="#问题8headless-service-是什么它与-statefulset-的关系是什么">问题8：Headless Service 是什么？它与 StatefulSet 的关系是什么？</a></h2>
+<ul>
+<li><strong>答案</strong>：Headless Service 通过 <code>clusterIP: None</code> 关闭虚拟 IP，DNS 直接解析到 Pod IP 列表，客户端可直连 Pod，不经 kube-proxy 的服务转发路径，性能更优。<br>与 StatefulSet 配合时：
+<ul>
+<li>StatefulSet 使用 <code>serviceName</code> 绑定 Headless Service。</li>
+<li>可获得稳定的 Pod DNS：如 <code>mysql-0.mysql.namespace.svc.cluster.local</code> 对应固定实例。<br>适用：MySQL/PostgreSQL 主从、Redis Cluster、ES、Kafka、MongoDB 等有状态集群。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题9ingressgateway-apialb-ingress-controller-如何选型"><a class="header" href="#问题9ingressgateway-apialb-ingress-controller-如何选型">问题9：Ingress、Gateway API、ALB Ingress Controller 如何选型？</a></h2>
+<ul>
+<li><strong>答案</strong>：可按复杂度与环境决策：
+<ul>
+<li><strong>自建/多云且简单 HTTP 路由</strong>：Nginx Ingress Controller。</li>
+<li><strong>复杂治理、多协议、角色分离</strong>：Gateway API（如 Envoy Gateway）。</li>
+<li><strong>云厂商托管且深度集成（ACK）</strong>：ALB Ingress Controller（利用云原生能力、可基于 Header/Cookie 灰度、成本可通过单 ALB 承载多服务优化）。<br>文档给出决策树：需要南北向流量管理 → 云厂商环境优先使用对应的云控制器；否则自建按需求选择 Nginx/Gateway API/Traefik 等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题10如何用-nginx-ingress-实现金丝雀发布"><a class="header" href="#问题10如何用-nginx-ingress-实现金丝雀发布">问题10：如何用 Nginx Ingress 实现金丝雀发布？</a></h2>
+<ul>
+<li><strong>答案</strong>：常见做法是创建两份 Ingress：
+<ol>
+<li>生产 Ingress（100% 指向 v1）。</li>
+<li>Canary Ingress（通过注解开启金丝雀并设置权重，如 <code>nginx.ingress.kubernetes.io/canary: "true"</code>、<code>nginx.ingress.kubernetes.io/canary-weight: "10"</code>，让 10% 流量进入 v2）。<br>观察监控与指标后逐步提升权重（10% → 30% → 50% → 100%），完成后删除 Canary Ingress 并更新生产 Ingress 指向新版本。</li>
+</ol>
+</li>
+</ul>
+<h2 id="问题11cni-插件应该怎么选terway--calico--cilium-的关键差异是什么"><a class="header" href="#问题11cni-插件应该怎么选terway--calico--cilium-的关键差异是什么">问题11：CNI 插件应该怎么选？Terway / Calico / Cilium 的关键差异是什么？</a></h2>
+<ul>
+<li><strong>答案</strong>：CNI 决定 Pod 跨节点通信模型、性能上限与策略能力。文档给出选型矩阵要点：
+<ul>
+<li><strong>Terway（ACK 生产标准）</strong>：VPC/ENI 原生路由，性能高；支持 ENI 独占与 ENI-IP 共享等模式，适合大规模生产。</li>
+<li><strong>Calico</strong>：BGP/IPIP，NetworkPolicy 能力强，适用于中大规模与策略需求强的场景。</li>
+<li><strong>Cilium（eBPF）</strong>：高性能、可观测性（Hubble）、支持 L3-L7 策略，适合新集群与未来演进。<br>选择建议：ACK 优先 Terway；追求 L7 策略与可观测性可考虑 Cilium；需要成熟策略体系可考虑 Calico。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题12terway-的-eni-独占eni-ip-共享vpc-路由模式分别适合什么业务"><a class="header" href="#问题12terway-的-eni-独占eni-ip-共享vpc-路由模式分别适合什么业务">问题12：Terway 的 ENI 独占、ENI-IP 共享、VPC 路由模式分别适合什么业务？</a></h2>
+<ul>
+<li><strong>答案</strong>：
+<ul>
+<li><strong>ENI 独占</strong>：Pod 独立弹性网卡，性能接近宿主机但 Pod 密度受 ENI 配额限制；适合数据库、缓存等高性能/强隔离业务（可做 Pod 级安全组）。</li>
+<li><strong>ENI-IP 共享</strong>：Pod 使用 ENI 辅助 IP，共享网卡；性能损耗小、Pod 密度高；适合 Web/微服务。</li>
+<li><strong>VPC 路由</strong>：通过 VPC 路由表/节点转发，性能与隔离折中；适合混合场景。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题13为什么要做-coredns-优化推荐哪些关键配置"><a class="header" href="#问题13为什么要做-coredns-优化推荐哪些关键配置">问题13：为什么要做 CoreDNS 优化？推荐哪些关键配置？</a></h2>
+<ul>
+<li><strong>答案</strong>：DNS 是服务发现基础，抖动会放大为全链路故障。文档建议的关键优化：
+<ul>
+<li>开启缓存：<code>cache 30</code>（减少大量重复查询）。</li>
+<li>限制上游并发：<code>forward</code> 中设置 <code>max_concurrent</code>，防止 DNS 洪水。</li>
+<li>启用监控：<code>prometheus :9153</code> 并配合告警（如 SERVFAIL）。</li>
+<li>需要更低延迟可部署 <strong>NodeLocal DNS Cache</strong>（本地缓存 IP 如 169.254.20.10），降低 CoreDNS 压力并减少 conntrack 风险。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题14如何用-networkpolicy-落地零信任网络模型"><a class="header" href="#问题14如何用-networkpolicy-落地零信任网络模型">问题14：如何用 NetworkPolicy 落地“零信任网络模型”？</a></h2>
+<ul>
+<li><strong>答案</strong>：典型步骤是“默认拒绝 + 最小放行”：
+<ol>
+<li>在命名空间创建 <code>default-deny-ingress</code>，拒绝所有入口。</li>
+<li>为关键链路放行（如仅允许 frontend → backend 的业务端口）。</li>
+<li>放行 backend → 数据库的入口端口（如 3306）。</li>
+<li>别忘了放行 DNS（通常需要允许 Pod 访问 kube-system 的 53/UDP 做解析）。<br>注意：是否生效取决于 CNI 是否支持 NetworkPolicy（如 Flannel 默认不支持，需配合 Calico/Cilium 等）。</li>
+</ol>
+</li>
+</ul>
+<h2 id="问题15排障时如何快速定位是-servicedns-还是-cni-的问题"><a class="header" href="#问题15排障时如何快速定位是-servicedns-还是-cni-的问题">问题15：排障时如何快速定位是 Service、DNS 还是 CNI 的问题？</a></h2>
+<ul>
+<li><strong>答案</strong>：可按“从上到下”排查：
+<ul>
+<li><strong>Service/Endpoints</strong>：<code>kubectl get endpoints -A</code>，确认是否有可用地址；无 Endpoints 多半是 selector/Pod 就绪/标签问题。</li>
+<li><strong>DNS</strong>：在调试 Pod 内 <code>nslookup &lt;svc&gt;.&lt;ns&gt;.svc.cluster.local</code>，看是否解析成功/是否 SERVFAIL。</li>
+<li><strong>连通性</strong>：<code>curl -v http://&lt;service&gt;</code> 或直连 Pod IP 排除服务端问题。</li>
+<li><strong>节点侧实现</strong>：必要时在节点上查看 kube-proxy 规则（iptables/ipvs）或抓包（如 DNS 53 端口）。<br>文档也给出常用 netshoot/busybox 的排障命令模板，可直接复用。</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/01-network-architecture-overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/01-network-architecture-overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
