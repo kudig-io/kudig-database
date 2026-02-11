@@ -4,23 +4,328 @@
 
 ## 🎯 本文档价值
 
-本文档聚焦于生产环境节点故障的快速诊断和恢复，包含：
-- **节点批量故障处理**：大规模节点问题的应急响应
-- **资源耗尽预警**：防止节点雪崩的监控策略
-- **容器运行时优化**：提升节点稳定性的最佳实践
-- **自动化运维脚本**：减少人工干预的工具集合
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 建立对 Node 节点核心组件 kubelet 的全局认识，掌握节点 Ready/NotReady 的底层逻辑，学会使用标准的 `journalctl` 和 `kubectl` 命令定位基础故障。 |
+| **资深专家** | 深入理解 kubelet 内部架构（如 PLEG、Manager 机制）、CRI 交互细节、驱逐策略的数学边界，以及大规模集群下的性能调优 and 自动化自愈方案。 |
 
 ---
 
-## 目录
+## 0. 10 分钟快速诊断与止血
 
-1. [问题现象与影响分析](#1-问题现象与影响分析)
-2. [排查方法与步骤](#2-排查方法与步骤)
-3. [解决方案与风险控制](#3-解决方案与风险控制)
+1. **节点面状态**：`kubectl get nodes -o wide`，抽样 `kubectl describe node <name>` 查看 Conditions/Taints，区分单点 vs 批量故障。
+2. **kubelet 存活**：节点上执行 `curl -s localhost:10248/healthz`、`systemctl status kubelet`，若健康探针失败优先查证书/配置/资源。
+3. **资源与压力**：`free -m`、`df -h`、`df -i`、`pidstat -p $(pgrep kubelet)`，确认 Memory/Disk/PID Pressure；若磁盘吃满先清理 `/var/lib/containerd` 旧镜像与日志。
+4. **CRI 交互**：`crictl info`、`crictl ps -a | head`，若 CRI 超时则检查 containerd/Docker 服务、cgroup 驱动一致性（`cat /var/lib/kubelet/config.yaml | grep cgroupDriver`）。
+5. **PLEG/驱逐信号**：`journalctl -u kubelet | grep -E "PLEG is not healthy|eviction" | tail`，辨别是运行时阻塞还是驱逐触发。
+6. **快速缓解**：
+   - 将故障节点 `cordon`，必要时 `drain --ignore-daemonsets --delete-emptydir-data`。
+   - 重启运行时与 kubelet（确认已备份配置/证书），并检查 cgroup 驱动一致后再放行。
+   - 若磁盘/内存压力，立即清理镜像/容器/日志或扩容磁盘，调整 `evictionHard`。
+7. **证据留存**：保存 kubelet/CRI 关键日志、节点 Conditions、磁盘/PID/内存快照，便于复盘。
 
 ---
 
 ## 1. 问题现象与影响分析
+
+### 1.1 核心原理解析：kubelet 的角色
+
+kubelet 是运行在每个节点上的“蜂群指令官”，它不直接运行容器，而是通过 **CRI (Container Runtime Interface)** 控制容器运行时（如 containerd）。它的核心职责是：
+1. **状态对齐（Reconciliation）**：确保 API Server 定义的 Pod 期望状态与节点实际运行状态一致。
+2. **节点心跳**：定期向 API Server 上报节点状态，若中断则导致 `NotReady`。
+3. **资源守门员**：通过 `eviction` 机制保护节点不因 OOM 或磁盘爆满而彻底崩溃。
+
+### 1.2 常见问题现象
+
+#### 1.2.1 kubelet 服务与连接异常
+
+| 现象 | 报错信息关键字 | 根本原因方向 |
+| :--- | :--- | :--- |
+| **进程频繁崩溃** | `panic: ...` / `OOMKill` | 内存配置不足、内核 Bug、不兼容的 Flag |
+| **启动超时** | `context deadline exceeded` | CRI 响应过慢、挂载卷超多、插件初始化失败 |
+| **API 连接断开** | `x509: certificate has expired` | 证书轮转失效（未开启 `rotateCertificates`） |
+| **PLEG 异常** | `PLEG is not healthy` | 容器运行时挂死、大量容器高频启停导致事件堆积 |
+
+#### 1.2.2 节点状态与压力限制
+
+| 状态 | 触发阈值（默认示例） | 影响 |
+| :--- | :--- | :--- |
+| **MemoryPressure** | `memory.available < 100Mi` | 触发 Pod 驱逐（从低优先级开始） |
+| **DiskPressure** | `nodefs.available < 10%` | 停止拉取镜像，开始删除已退出的容器和未使用镜像 |
+| **PIDPressure** | 达到 `pid_max` | 无法创建新进程，容器启动报错 `fork: retry: Resource temporarily unavailable` |
+
+#### 1.2.3 生产环境典型“连环坑”场景
+
+1. **PLEG Is Not Healthy 导致节点雪崩**：
+   - **现象**：节点状态在 Ready/NotReady 之间剧烈闪烁。
+   - **深层原因**：kubelet 的 PLEG (Pod Lifecycle Event Generator) 每秒检查容器状态，若容器运行时（containerd）因 IO 负载过高响应超过 3 分钟，kubelet 认为 PLEG 不健康，停止更新节点心跳。
+2. **cgroup Driver 不一致导致的“隐形”失败**：
+   - **现象**：kubelet 启动正常，但 Pod 启动报错 `FailedCreatePodSandBox`。
+   - **深层原因**：kubelet 使用 `systemd` 而 containerd 使用 `cgroupfs`，导致内核资源包管理冲突。
+3. **Inode 耗尽导致的“伪磁盘充足”**：
+   - **现象**：`df -h` 显示磁盘还有 50%，但 Pod 报错 `No space left on device`。
+   - **深层原因**：大量小文件（通常是日志或临时文件）占满了 Inode，导致元数据无法写入。
+
+### 1.3 观测工具链（Expert's Toolbox）
+
+```bash
+# 深度诊断：查看 kubelet 内部状态（需在节点执行）
+curl -s localhost:10248/healthz   # 基础健康检查
+curl -s localhost:10255/metrics   # 暴露大量内部监控指标（默认端口 10255 或 10250）
+
+# 专家级：追踪 CRI 交互过程
+# 使用 crictl 模拟 kubelet 行为
+crictl inspect <container-id>     # 查看容器底层的详细运行时状态
+crictl stats                      # 查看实时资源占用
+
+# 专家级：内核级追踪（定位死锁或系统调用失败）
+strace -fp $(pgrep kubelet) -e trace=network,file
+```
+
+---
+
+## 2. 排查方法与步骤
+
+### 2.1 排查原理：分层模型与核心机制
+
+kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是高效排查的关键：
+
+#### 2.1.1 宿主机环境层
+- **内核版本要求**：推荐 4.19+ 内核，过旧内核缺少关键特性（如 cgroup v2 支持）
+- **cgroup 子系统**：kubelet 通过 cgroup 限制容器资源，检查 `/sys/fs/cgroup` 挂载状态
+- **磁盘 IO**：kubelet 日志、容器层、etcd 数据共用磁盘，高 IO 负载会拖慢所有组件
+- **网络栈**：节点网络不通会导致 kubelet 无法上报心跳，触发 NotReady
+- **文件描述符**：每个容器消耗多个 fd（日志、挂载、socket），`ulimit -n` 需设置足够大（推荐 65535+）
+
+#### 2.1.2 容器运行时接口层（CRI）
+- **CRI 架构**：kubelet → CRI API (gRPC) → containerd/CRI-O/Docker shim
+- **关键操作超时**：
+  - `runtimeRequestTimeout`（默认 2m）：CRI 操作超时时间
+  - 超时会导致 kubelet 标记 PLEG 不健康
+- **cgroup 驱动一致性**：kubelet 和 CRI 必须使用相同驱动（systemd 或 cgroupfs）
+  ```bash
+  # 检查 kubelet cgroup 驱动
+  grep cgroupDriver /var/lib/kubelet/config.yaml
+  # 检查 containerd cgroup 驱动
+  grep SystemdCgroup /etc/containerd/config.toml
+  # 两者必须一致！
+  ```
+- **镜像管理**：kubelet 委托 CRI 拉取镜像，CRI 超时会阻塞 Pod 创建
+
+#### 2.1.3 网络插件接口层（CNI）
+- **CNI 调用时机**：Pod 创建时调用 CNI 插件配置网络（veth pair、路由、iptables）
+- **配置路径**：`/etc/cni/net.d/` 和 `/opt/cni/bin/`
+- **常见故障**：CNI 二进制缺失、配置错误、IP 池耗尽、网络插件 Pod 未就绪
+
+#### 2.1.4 存储插件接口层（CSI）
+- **卷挂载流程**：kubelet → CSI Plugin → 云厂商 API → 挂载到宿主机 → bind mount 到容器
+- **挂载点泄露**：CSI 插件故障会导致挂载点僵死，kubelet 卡在清理阶段
+- **检查命令**：`mount | grep kubernetes.io`
+
+#### 2.1.5 配置与证书层
+- **主配置文件**：`/var/lib/kubelet/config.yaml`（推荐）或启动参数
+- **证书文件**：
+  - `/var/lib/kubelet/pki/kubelet-client-current.pem`：kubelet 客户端证书
+  - `/var/lib/kubelet/pki/kubelet.crt`：kubelet 服务端证书
+- **证书轮转机制**：
+  - `rotateCertificates: true`：启用自动轮转
+  - kubelet 在证书到期前自动生成 CSR（CertificateSigningRequest）
+  - Controller Manager 审批 CSR 并签发新证书
+  - 失败原因：RBAC 权限不足、Controller Manager 未配置签发参数
+
+#### 2.1.6 内部核心机制
+
+##### 1. SyncLoop（同步循环）
+- **主控循环**：kubelet 的核心，持续运行 `watch → compare → reconcile`
+- **数据源**：
+  - API Server：监听分配到本节点的 Pod
+  - 静态 Pod：监听 `/etc/kubernetes/manifests/` 目录
+  - HTTP Endpoint：接收 HTTP 请求创建的 Pod
+- **调和逻辑**：
+  1. 计算期望状态与实际状态的差异
+  2. 调用 CRI 创建/更新/删除容器
+  3. 调用 CNI 配置网络
+  4. 调用 CSI 挂载卷
+  5. 更新 Pod 状态到 API Server
+
+##### 2. PLEG (Pod Lifecycle Event Generator)
+- **职责**：通过定期 relist 检测容器状态变化（运行、退出、重启）
+- **工作流程**：
+  1. 每秒调用 CRI `ListPodSandbox` 和 `ListContainers`
+  2. 比对前后两次结果，生成事件（ContainerStarted/ContainerDied/...）
+  3. 事件进入 SyncLoop 处理队列
+- **健康检查**：
+  - 若 relist 耗时 > 3 分钟，PLEG 标记为不健康
+  - 导致 kubelet 停止上报心跳，节点 NotReady
+- **常见故障**：
+  - CRI 响应慢（IO 负载高、containerd 死锁）
+  - 容器数量过多（建议单节点 < 110 Pod）
+  - 容器频繁启停（每秒 > 10 个事件）
+
+##### 3. StatusManager（状态管理器）
+- **职责**：将 Pod 状态同步到 API Server
+- **批量优化**：收集多个 Pod 状态变化，批量更新（减少 API 调用）
+- **冲突处理**：使用乐观锁（ResourceVersion）处理并发更新
+
+##### 4. ProbeManager（探针管理器）
+- **职责**：执行 Liveness/Readiness/Startup 探针
+- **探针类型**：
+  - HTTP GET：向容器发送 HTTP 请求
+  - TCP Socket：尝试 TCP 连接
+  - Exec：在容器内执行命令
+- **并发限制**：默认每节点最多并发执行 10 个探针，避免过载
+
+##### 5. VolumeManager（卷管理器）
+- **职责**：管理 Pod 卷的挂载和卸载
+- **挂载流程**：
+  1. 等待卷 Attach（云盘挂载到节点）
+  2. 执行 Mount（挂载到节点目录）
+  3. Bind Mount 到容器
+- **卸载流程**：反向操作，卸载失败会导致 Pod 删除卡住
+
+##### 6. EvictionManager（驱逐管理器）
+- **职责**：监控节点资源压力，驱逐低优先级 Pod 保护节点
+- **压力类型**：
+  - **MemoryPressure**：内存不足
+  - **DiskPressure**：磁盘空间不足
+  - **PIDPressure**：进程数达到上限
+- **驱逐策略**：
+  ```yaml
+  # 硬驱逐（立即驱逐，无宽限期）
+  evictionHard:
+    memory.available: "100Mi"
+    nodefs.available: "10%"
+    nodefs.inodesFree: "5%"
+    imagefs.available: "15%"
+  
+  # 软驱逐（宽限期后驱逐）
+  evictionSoft:
+    memory.available: "200Mi"
+    nodefs.available: "15%"
+  evictionSoftGracePeriod:
+    memory.available: "1m30s"
+    nodefs.available: "2m"
+  ```
+- **驱逐顺序**：
+  1. BestEffort Pod（无资源请求）
+  2. Burstable Pod 且使用量超过请求量
+  3. Burstable Pod 且使用量未超请求量
+  4. Guaranteed Pod（最后驱逐）
+
+##### 7. ImageGCManager（镜像垃圾回收器）
+- **职责**：回收未使用的镜像，释放磁盘空间
+- **回收策略**：
+  - `imageGCHighThresholdPercent`（默认 85%）：磁盘使用率超过此值触发 GC
+  - `imageGCLowThresholdPercent`（默认 80%）：GC 直到降至此值
+- **回收顺序**：按镜像使用时间排序，优先删除最久未用的
+
+##### 8. ContainerGCManager（容器垃圾回收器）
+- **职责**：删除已退出的容器
+- **回收参数**：
+  - `--maximum-dead-containers-per-container`（默认 1）：每个 Pod 保留的死容器数
+  - `--minimum-container-ttl-duration`（默认 0）：容器死亡后最少保留时间
+
+#### 2.1.7 性能与资源层
+- **内存消耗**：
+  - 基线：约 100-200MB
+  - 每 Pod 增加：约 10-20MB（取决于卷、探针数量）
+  - 大规模节点（110 Pod）：约 2-3GB
+- **CPU 消耗**：
+  - 空闲：< 50m
+  - 高负载（频繁 Pod 启停）：500-1000m
+- **并发参数**：
+  - `--max-pods`（默认 110）：单节点最大 Pod 数
+  - `--pods-per-core`：根据 CPU 核数限制 Pod 数
+  - `--serialize-image-pulls`（默认 true）：串行拉取镜像，避免并发拉取压垮磁盘
+
+### 2.2 专家级排查工作流
+
+#### 阶段一：快速止损
+1. **检查节点状态**：`kubectl get nodes`。
+2. **确认是否为全局故障**：如果是多节点 NotReady，优先查网络、API Server 或证书过期。
+3. **设置节点不可调度**：`kubectl cordon <node-name>`，防止故障期间负载继续涌入。
+
+#### 阶段二：现场诊断
+1. **查看服务状态**：`systemctl status kubelet`。
+2. **抓取关键日志**：
+   ```bash
+   # 查找最近 5 分钟的严重错误
+   journalctl -u kubelet --since "5m" -p err
+   ```
+3. **检查 PLEG 状态**：
+   ```bash
+   journalctl -u kubelet | grep "PLEG is not healthy"
+   ```
+
+#### 阶段三：联动排查
+1. **CRI 状态确认**：
+   ```bash
+   crictl info | jq .status.conditions
+   ```
+2. **存储挂载确认**：
+   ```bash
+   # 检查是否有僵死挂载点
+   mount | grep "kubernetes.io" | awk '{print $3}' | xargs ls > /dev/null
+   ```
+
+---
+
+## 3. 专家级解决方案与性能调优
+
+### 3.1 解决 PLEG Not Healthy
+- **短期方案**：重启容器运行时（containerd）和 kubelet。
+- **长期方案**：
+  - 优化镜像拉取速度，减少高频 Pod 启停。
+  - 调整内核参数 `fs.inotify.max_user_watches`（PLEG 依赖监听）。
+  - 增加节点磁盘 IOPS。
+
+### 3.2 优化资源预留（防止节点夯死）
+生产环境必须配置资源预留，否则当 Pod 负载过高时，kubelet 自身会因申请不到 CPU/内存而假死。
+```yaml
+# /var/lib/kubelet/config.yaml
+systemReserved:
+  cpu: "500m"
+  memory: "1Gi"
+kubeReserved:
+  cpu: "500m"
+  memory: "1Gi"
+enforceNodeAllocatable: ["pods", "system-reserved", "kube-reserved"]
+```
+
+### 3.3 证书自动轮转实战
+配置 `rotateCertificates: true` 仅是第一步，还需确保 Controller Manager 允许 CSR 自动审批：
+1. 检查 kubelet 配置：`rotateCertificates: true`。
+2. 检查 RBAC：确保 kubelet 有权创建 CSR。
+3. 如果证书已过期无法启动：手动续签并重启。
+
+### 3.4 磁盘压力（DiskPressure）的深度治理
+- **自动清理策略**：
+  ```yaml
+  imageGCHighThresholdPercent: 80
+  imageGCLowThresholdPercent: 70
+  ```
+- **日志轮转优化**：
+  修改 `/etc/logrotate.d/` 确保宿主机日志不挤占空间。
+  配置 `containerLogMaxSize` 和 `containerLogMaxFiles`。
+
+---
+
+## 4. 自动化运维与预防
+
+### 4.1 节点健康自愈（NPD + Draino）
+1. **Node Problem Detector (NPD)**：部署 NPD 监测内核死锁、文件系统只读、内存坏道等异常。
+2. **Draino/Descheduler**：根据 NPD 暴露的 Condition 自动驱离 Pod 并重启节点。
+
+### 4.2 监控核心指标（Prometheus）
+| 指标 | 含义 | 风险点 |
+| :--- | :--- | :--- |
+| `kubelet_pleg_relist_duration_seconds` | PLEG 周期耗时 | 持续 > 1s 表示运行时压力大 |
+| `kubelet_node_config_error` | 配置错误计数 | > 0 表示配置未生效 |
+| `kubelet_runtime_operations_errors_total` | CRI 操作错误数 | 增长表示运行时异常 |
+
+---
+
+## 5. 排查方法与步骤 (基础版)
 
 ### 1.1 常见问题现象
 
@@ -159,9 +464,9 @@ curl -k https://localhost:10250/pods
 
 ---
 
-## 2. 排查方法与步骤
+## 5. 排查方法与步骤 (基础版)
 
-### 2.1 排查原理
+### 5.1 排查原理
 
 kubelet 是节点上的核心代理，负责 Pod 生命周期管理。排查需要从以下层面：
 
@@ -390,9 +695,9 @@ journalctl -u kubelet | grep -i "probe" | tail -30
 
 ---
 
-## 3. 解决方案与风险控制
+## 6. 解决方案与风险控制 (基础版)
 
-### 3.1 kubelet 进程未运行
+### 6.1 kubelet 进程未运行
 
 #### 3.1.1 解决步骤
 
@@ -842,6 +1147,491 @@ evictionSoft:
 evictionSoftGracePeriod:
   imagefs.available: 1m
   memory.available: 1m
+  nodefs.available: 2m
+kubeReserved:
+  cpu: 100m
+  memory: 1Gi
+maxPods: 110
+rotateCertificates: true
+serverTLSBootstrap: true
+systemReserved:
+  cpu: 100m
+  memory: 500Mi
+```
+
+---
+
+## 📚 D. 生产环境实战案例精选
+
+### 案例 1：PLEG Not Healthy 导致节点雪崩式 NotReady
+
+#### 🎯 故障场景
+某电商公司双十一大促，集群 300 节点突然在 10 分钟内有 50+ 节点状态在 Ready/NotReady 之间剧烈闪烁，导致大量 Pod 被驱逐和重新调度，业务出现大面积 5xx 错误。
+
+#### 🔍 排查过程
+1. **现象确认**：
+   ```bash
+   # 大量节点 NotReady
+   kubectl get nodes | grep NotReady | wc -l
+   # 53  # ❌ 集群 1/6 节点异常
+   
+   # 节点状态频繁变化
+   kubectl get nodes --watch
+   # node-worker-10   Ready      5s ago
+   # node-worker-10   NotReady   10s ago
+   # node-worker-10   Ready      15s ago  # ❌ 剧烈闪烁
+   ```
+
+2. **kubelet 日志检查**：
+   ```bash
+   # 登录故障节点查看日志
+   ssh node-worker-10
+   journalctl -u kubelet | grep -i "PLEG"
+   # Jan 10 08:15:23 kubelet[1234]: E0110 PLEG is not healthy: pleg was last seen active 3m15s ago
+   # Jan 10 08:15:28 kubelet[1234]: E0110 PLEG is not healthy: pleg was last seen active 3m20s ago
+   # ❌ PLEG 超过 3 分钟未响应！
+   
+   # 查看 relist 耗时
+   journalctl -u kubelet | grep "GenericPLEG.*took"
+   # I0110 08:15:10 generic.go:123] GenericPLEG: Relisting took 185.234s
+   # I0110 08:15:15 generic.go:123] GenericPLEG: Relisting took 192.456s
+   # ❌ 单次 relist 耗时 3 分钟+！
+   ```
+
+3. **CRI 性能分析**：
+   ```bash
+   # 检查 containerd 状态
+   systemctl status containerd
+   # Active: active (running)  # 进程存活
+   
+   # 测试 CRI 响应速度
+   time crictl pods | wc -l
+   # real    3m15.234s  # ❌ 耗时 3+ 分钟！
+   # 正常应 < 1 秒
+   
+   # 检查容器数量
+   crictl ps | wc -l
+   # 350  # 单节点 350 个容器（含已退出）
+   
+   # 检查磁盘 IO
+   iostat -x 1 10
+   # Device  r/s   w/s   util
+   # sda     5000  3000  100%  # ❌ 磁盘 IO 打满！
+   ```
+
+4. **根因分析**：
+   - **直接原因**：磁盘 IO 打满（100% util），containerd 响应极慢
+   - **触发链条**：
+     1. 大促流量激增 → 大量 Pod 创建/销毁
+     2. 容器日志疯狂写入磁盘（每 Pod 10MB/s × 350 = 3.5GB/s）
+     3. 磁盘 IO 饱和 → containerd 操作缓慢（ListPods 耗时 3+ 分钟）
+     4. PLEG relist 超时 → kubelet 停止心跳 → 节点 NotReady
+     5. 节点 NotReady → Pod 驱逐 → 更多 Pod 创建 → 恶性循环
+   - **为什么是部分节点**：这些节点使用机械硬盘（300 IOPS），其他节点使用 SSD（10000 IOPS）
+
+#### ⚡ 应急措施
+1. **立即隔离故障节点**：
+   ```bash
+   # 批量 cordon 机械硬盘节点
+   kubectl get nodes -l disk-type=hdd -o name | xargs kubectl cordon
+   
+   # 驱逐 Pod 到 SSD 节点
+   for node in $(kubectl get nodes -l disk-type=hdd -o name); do
+     kubectl drain $node --ignore-daemonsets --delete-emptydir-data --grace-period=30 &
+   done
+   ```
+
+2. **临时限制日志写入**：
+   ```bash
+   # 在故障节点临时限制容器日志大小
+   ssh node-worker-10 "crictl ps -q | xargs -I {} crictl inspect {} | \
+     jq -r '.info.config.logPath' | xargs truncate -s 0"
+   
+   # 效果：秒级清空所有容器日志，释放 IO
+   iostat -x 1 3
+   # Device  util
+   # sda     30%  # ✅ IO 恢复正常
+   ```
+
+3. **重启 kubelet 恢复心跳**：
+   ```bash
+   # 批量重启故障节点 kubelet
+   for node in $(kubectl get nodes -l disk-type=hdd -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
+     ssh $node "systemctl restart kubelet" &
+   done
+   
+   # 5 分钟后验证
+   kubectl get nodes | grep NotReady | wc -l
+   # 0  # ✅ 全部恢复
+   ```
+
+#### 🛡️ 长期优化
+1. **迁移至 SSD 存储**：
+   ```bash
+   # 评估成本
+   # 机械硬盘：300 IOPS，$0.05/GB/月
+   # SSD：10000+ IOPS，$0.10/GB/月
+   # ROI：减少 90% 故障率，值得投入
+   
+   # 逐步迁移
+   # 1. 新节点全部使用 SSD
+   # 2. 逐步下线机械硬盘节点
+   # 3. 3 个月内完成迁移
+   ```
+
+2. **优化日志管理**：
+   ```yaml
+   # kubelet 配置限制容器日志
+   apiVersion: kubelet.config.k8s.io/v1beta1
+   kind: KubeletConfiguration
+   containerLogMaxSize: 10Mi      # ✅ 单文件最大 10MB（默认无限）
+   containerLogMaxFiles: 3        # ✅ 保留 3 个轮转文件
+   
+   # 效果：每容器最多 30MB 日志，350 容器 = 10GB 总量（可控）
+   ```
+
+3. **配置日志收集外部化**：
+   ```yaml
+   # 使用 Fluent Bit DaemonSet 收集日志到外部存储
+   apiVersion: apps/v1
+   kind: DaemonSet
+   metadata:
+     name: fluent-bit
+     namespace: logging
+   spec:
+     template:
+       spec:
+         containers:
+         - name: fluent-bit
+           image: fluent/fluent-bit:2.0
+           volumeMounts:
+           - name: varlog
+             mountPath: /var/log
+             readOnly: true
+           - name: containers
+             mountPath: /var/lib/docker/containers
+             readOnly: true
+         volumes:
+         - name: varlog
+           hostPath:
+             path: /var/log
+         - name: containers
+           hostPath:
+             path: /var/lib/docker/containers
+   
+   # 应用配置禁用 stdout 日志
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: myapp
+   spec:
+     containers:
+     - name: app
+       image: myapp:latest
+       args:
+       - --log-to-file=/logs/app.log  # ✅ 日志写入文件，由 Fluent Bit 收集
+       volumeMounts:
+       - name: logs
+         mountPath: /logs
+   ```
+
+4. **提高 PLEG 容忍度**：
+   ```yaml
+   # kubelet 配置（谨慎调整）
+   apiVersion: kubelet.config.k8s.io/v1beta1
+   kind: KubeletConfiguration
+   runtimeRequestTimeout: 5m      # ✅ 从默认 2m 提高至 5m
+   # 注意：仅缓解症状，根本解决需优化磁盘 IO
+   ```
+
+5. **监控告警**：
+   ```yaml
+   # Prometheus 告警规则
+   groups:
+   - name: kubelet-pleg
+     rules:
+     - alert: PLEGDurationHigh
+       expr: histogram_quantile(0.99, rate(kubelet_pleg_relist_duration_seconds_bucket[5m])) > 10
+       for: 5m
+       labels:
+         severity: warning
+       annotations:
+         summary: "PLEG relist 耗时过高"
+         description: "节点 {{ $labels.node }} PLEG P99 耗时 {{ $value }}s，可能导致 NotReady"
+     
+     - alert: ContainerdSlowResponse
+       expr: histogram_quantile(0.99, rate(kubelet_runtime_operations_duration_seconds_bucket{operation_type="list_pods"}[5m])) > 30
+       for: 5m
+       labels:
+         severity: warning
+       annotations:
+         summary: "containerd 响应慢"
+         description: "节点 {{ $labels.node }} containerd ListPods P99 耗时 {{ $value }}s"
+     
+     - alert: DiskIOUtilHigh
+       expr: node_disk_io_time_seconds_total > 0.9
+       for: 5m
+       labels:
+         severity: warning
+       annotations:
+         summary: "磁盘 IO 利用率高"
+         description: "节点 {{ $labels.node }} 磁盘 IO 利用率 {{ $value | humanizePercentage }}"
+   ```
+
+#### 💡 经验总结
+- **存储选型错误**：对 IO 敏感的 kubelet/containerd 运行在机械硬盘上
+- **日志失控**：未限制容器日志大小，导致 IO 打满
+- **监控盲区**：未监控 PLEG 耗时和磁盘 IO 利用率
+- **改进方向**：SSD 迁移、日志外部化、容器日志限制、监控告警、定期压测
+
+---
+
+### 案例 2：cgroup 驱动不一致导致 Pod 创建失败
+
+#### 🎯 故障场景
+某科技公司升级 Kubernetes 从 v1.24 到 v1.28，升级后新节点加入集群，所有 Pod 都无法创建，报错 `FailedCreatePodSandBox`，但老节点正常运行。
+
+#### 🔍 排查过程
+1. **现象确认**：
+   ```bash
+   # 新节点加入成功
+   kubectl get nodes
+   # NAME           STATUS   ROLES    AGE   VERSION
+   # node-new-01    Ready    worker   5m    v1.28.0  # ✅ Ready
+   
+   # 但 Pod 创建失败
+   kubectl get pods -o wide | grep node-new-01
+   # myapp-abc123   0/1   ContainerCreating   0   10m   node-new-01
+   
+   kubectl describe pod myapp-abc123
+   # Events:
+   # Warning  FailedCreatePodSandBox  1m  Failed to create pod sandbox: rpc error: code = Unknown desc = failed to create containerd task
+   ```
+
+2. **kubelet 日志检查**：
+   ```bash
+   ssh node-new-01
+   journalctl -u kubelet | grep -i "failed to create pod sandbox"
+   # E0110 failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup OOM score for container: write /sys/fs/cgroup/system.slice/containerd.service/kubepods-besteffort-pod123.slice/cgroup.procs: no such file or directory
+   # ❌ cgroup 路径错误！
+   ```
+
+3. **cgroup 驱动检查**：
+   ```bash
+   # 检查 kubelet cgroup 驱动
+   grep cgroupDriver /var/lib/kubelet/config.yaml
+   # cgroupDriver: systemd  # kubelet 使用 systemd
+   
+   # 检查 containerd cgroup 驱动
+   grep SystemdCgroup /etc/containerd/config.toml
+   # SystemdCgroup = false  # ❌ containerd 使用 cgroupfs！
+   
+   # 不一致！
+   ```
+
+4. **老节点对比**：
+   ```bash
+   ssh node-old-01
+   grep cgroupDriver /var/lib/kubelet/config.yaml
+   # cgroupDriver: cgroupfs  # 老节点都用 cgroupfs
+   
+   grep SystemdCgroup /etc/containerd/config.toml
+   # SystemdCgroup = false  # 一致 ✅
+   ```
+
+5. **根因分析**：
+   - **变更历史**：v1.28 推荐使用 systemd cgroup 驱动
+   - **配置不一致**：新节点 kubelet 配置为 systemd，但 containerd 仍为 cgroupfs
+   - **错误原因**：
+     - kubelet 按 systemd 路径创建 cgroup：`/sys/fs/cgroup/system.slice/kubepods.slice/...`
+     - containerd 按 cgroupfs 路径查找：`/sys/fs/cgroup/cpu/kubepods/...`
+     - 路径不匹配导致容器创建失败
+
+#### ⚡ 应急措施
+1. **统一 cgroup 驱动为 systemd**：
+   ```bash
+   # 修改 containerd 配置
+   ssh node-new-01
+   vim /etc/containerd/config.toml
+   
+   # 修改以下部分
+   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+     SystemdCgroup = true  # ✅ 改为 true
+   
+   # 重启 containerd
+   systemctl restart containerd
+   
+   # 验证配置
+   crictl info | grep -i cgroup
+   # "systemdCgroup": true  ✅
+   ```
+
+2. **重启 kubelet**：
+   ```bash
+   systemctl restart kubelet
+   
+   # 等待 kubelet Ready
+   kubectl wait --for=condition=Ready node/node-new-01 --timeout=60s
+   ```
+
+3. **验证 Pod 创建**：
+   ```bash
+   # 删除旧 Pod 触发重建
+   kubectl delete pod myapp-abc123
+   
+   # 验证新 Pod 创建成功
+   kubectl get pod myapp-abc123 -o wide --watch
+   # myapp-abc123   1/1   Running   0   30s   10.244.10.50   node-new-01  ✅
+   ```
+
+#### 🛡️ 长期优化
+1. **全集群统一 cgroup 驱动**：
+   ```bash
+   # 制定迁移计划
+   # 目标：全部节点统一使用 systemd cgroup 驱动
+   
+   # 步骤 1：验证 kubelet 版本支持（v1.22+）
+   kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}{end}'
+   
+   # 步骤 2：逐节点迁移（先测试环境，再生产环境）
+   for node in $(kubectl get nodes -o name); do
+     echo "Migrating $node"
+     
+     # Drain 节点
+     kubectl drain $node --ignore-daemonsets --delete-emptydir-data
+     
+     # SSH 到节点修改配置
+     node_ip=$(kubectl get $node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
+     
+     ssh $node_ip << 'EOF'
+       # 修改 kubelet 配置
+       sed -i 's/cgroupDriver: cgroupfs/cgroupDriver: systemd/' /var/lib/kubelet/config.yaml
+       
+       # 修改 containerd 配置
+       sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+       
+       # 重启服务
+       systemctl restart containerd
+       systemctl restart kubelet
+   EOF
+     
+     # Uncordon 节点
+     kubectl uncordon $node
+     
+     # 等待节点 Ready
+     kubectl wait --for=condition=Ready $node --timeout=120s
+     
+     # 等待 5 分钟观察稳定性
+     sleep 300
+   done
+   ```
+
+2. **自动化配置验证**：
+   ```yaml
+   # 使用 DaemonSet 部署配置检查器
+   apiVersion: apps/v1
+   kind: DaemonSet
+   metadata:
+     name: cgroup-checker
+     namespace: kube-system
+   spec:
+     selector:
+       matchLabels:
+         app: cgroup-checker
+     template:
+       metadata:
+         labels:
+           app: cgroup-checker
+       spec:
+         hostPID: true
+         hostNetwork: true
+         containers:
+         - name: checker
+           image: busybox
+           command:
+           - /bin/sh
+           - -c
+           - |
+             while true; do
+               kubelet_driver=$(grep cgroupDriver /host/var/lib/kubelet/config.yaml | awk '{print $2}')
+               containerd_driver=$(grep SystemdCgroup /host/etc/containerd/config.toml | awk '{print $3}')
+               
+               if [ "$kubelet_driver" = "systemd" ] && [ "$containerd_driver" = "true" ]; then
+                 echo "✅ cgroup 驱动一致: systemd"
+               elif [ "$kubelet_driver" = "cgroupfs" ] && [ "$containerd_driver" = "false" ]; then
+                 echo "✅ cgroup 驱动一致: cgroupfs"
+               else
+                 echo "❌ cgroup 驱动不一致！kubelet: $kubelet_driver, containerd: $containerd_driver"
+                 # 触发告警（发送到监控系统）
+               fi
+               
+               sleep 60
+             done
+           volumeMounts:
+           - name: host-var
+             mountPath: /host/var
+           - name: host-etc
+             mountPath: /host/etc
+         volumes:
+         - name: host-var
+           hostPath:
+             path: /var
+         - name: host-etc
+           hostPath:
+             path: /etc
+   ```
+
+3. **文档化配置标准**：
+   ```markdown
+   # Kubernetes 节点配置标准 v1.0
+   
+   ## cgroup 驱动配置
+   
+   ### kubelet 配置（/var/lib/kubelet/config.yaml）
+   ```yaml
+   apiVersion: kubelet.config.k8s.io/v1beta1
+   kind: KubeletConfiguration
+   cgroupDriver: systemd  # ✅ 必须配置为 systemd
+   ```
+   
+   ### containerd 配置（/etc/containerd/config.toml）
+   ```toml
+   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+     SystemdCgroup = true  # ✅ 必须配置为 true
+   ```
+   
+   ### 验证命令
+   ```bash
+   # kubelet
+   grep cgroupDriver /var/lib/kubelet/config.yaml
+   # 预期输出: cgroupDriver: systemd
+   
+   # containerd
+   grep SystemdCgroup /etc/containerd/config.toml
+   # 预期输出: SystemdCgroup = true
+   ```
+   ```
+
+4. **监控告警**：
+   ```yaml
+   # Prometheus 告警规则
+   - alert: CgroupDriverMismatch
+     expr: kubelet_cgroup_manager_duration_seconds_count{cgroup_driver="cgroupfs"} > 0
+       and
+       container_runtime_cgroup_manager_duration_seconds_count{cgroup_driver="systemd"} > 0
+     for: 5m
+     labels:
+       severity: critical
+     annotations:
+       summary: "cgroup 驱动不一致"
+       description: "节点 {{ $labels.node }} kubelet 和 containerd cgroup 驱动不一致，可能导致 Pod 创建失败"
+   ```
+
+#### 💡 经验总结
+- **配置管理混乱**：升级时未统一配置标准，新老节点配置不一致
+- **测试不足**：未在测试环境验证新配置的兼容性
+- **文档缺失**：缺少节点配置标准文档，运维人员配置错误
+- **改进方向**：配置标准化、自动化验证、全集群统一迁移、监控告警
   nodefs.available: 1m
 rotateCertificates: true
 ```

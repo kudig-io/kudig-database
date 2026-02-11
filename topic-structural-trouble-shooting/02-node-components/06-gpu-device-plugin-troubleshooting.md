@@ -8,6 +8,73 @@
 > - NVIDIA MIG 需要 Driver 450+ 和 Device Plugin v0.12+
 > - 时间片共享需要 Device Plugin v0.13+
 
+## 🎯 本文档价值
+
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 搞清楚 GPU 资源在 Kubernetes 中是如何被发现和分配的，学会使用 `nvidia-smi` 验证基础驱动环境，掌握 GPU Pod 的标准配置模板。 |
+| **资深专家** | 深入理解 Device Plugin 的 gRPC 注册与 ListAndWatch 机制、MIG（多实例 GPU）的分区逻辑、时间片共享（Time-Slicing）的调度权衡，以及 DRA（动态资源分配）架构对 AI 推理集群的演进方向。 |
+
+---
+
+## 0. 10 分钟快速诊断
+
+1. **组件与资源可见性**：`kubectl -n kube-system get ds -l name=nvidia-device-plugin-daemonset -o wide`（或对应厂商插件）；`kubectl get node <name> -o jsonpath='{.status.allocatable.nvidia\.com/gpu}'`。
+2. **驱动健康**：节点执行 `nvidia-smi`，若报错检查驱动/XID；`dmesg | grep -i nvidia | tail`。
+3. **Pod 事件**：对 Pending/失败的 GPU Pod `kubectl describe pod`，查看调度原因（资源不足/拓扑/亲和性）或启动错误（挂载/环境变量缺失）。
+4. **插件日志与注册**：`kubectl logs -n kube-system ds/nvidia-device-plugin-daemonset -c nvidia-device-plugin-ctr --tail=50`，确认 `ListAndWatch`/`Allocate` 是否报错；查看 `/var/lib/kubelet/device-plugins/kubelet_internal_checkpoint`。
+5. **MIG/时间片/NUMA**：检查是否开启 MIG，规格是否匹配；时间片共享需插件版本 ≥0.13；跨 NUMA 部署可需 `TopologyManager` 设置。
+6. **快速缓解**：
+   - 单节点异常：`cordon` 节点，重载驱动或重启插件 DaemonSet；若 XID 持续，重启机器或下架 GPU。
+   - 资源碎片：执行排空重调度，或调整请求规格/关闭 MIG 分片以释放连续资源。
+   - 配置错误：回滚自定义插件镜像/参数，恢复官方默认 DaemonSet。
+7. **证据留存**：保存插件日志、`nvidia-smi` 输出、Pod 事件、Node allocatable/已分配快照、XID 代码及 dmesg 片段。
+
+---
+
+## 1. 核心原理解析：异构资源接入
+
+### 1.1 设备插件 (Device Plugin) 注册机制
+
+Kubernetes 不原生感知 GPU。接入过程如下：
+1. **探测与注册**：设备插件（如 NVIDIA Device Plugin）扫描宿主机 `/dev` 下的特殊文件，并通过 Unix Domain Socket 向 kubelet 注册自己管理的资源名称（如 `nvidia.com/gpu`）。
+2. **容量上报**：kubelet 将这些资源作为“可分配容量”更新到 Node 对象的 `Status`。
+3. **分配决策**：调度器根据 Pod 的 `limits` 请求进行过滤。在 Pod 真正启动前，kubelet 调用插件的 `Allocate` 方法，获取该 Pod 专属的设备环境变量（如 `NVIDIA_VISIBLE_DEVICES`）和挂载路径。
+
+### 1.2 生产环境典型“AI 算力坑”
+
+1. **GPU 碎片化与抢占失败**：
+   - **现象**：Node 上显示有 1 个空闲 GPU，但 Pod 依然 Pending。
+   - **深层原因**：该 GPU 可能被分配给了某个正在创建或 Terminating 中的 Pod，或者因为 MIG 模式下，物理 GPU 的剩余空间不足以切分出请求的实例规格。
+2. **XID Errors（驱动/硬件故障）**：
+   - **现象**：`nvidia-smi` 报错 `Unable to determine the device handle`。
+   - **对策**：查看内核 `dmesg`。XID 错误代码（如 XID 31 为内存错误）直接决定了是需要重启驱动还是更换物理硬件。
+
+# 专家级观测工具链（Expert's Toolbox）
+
+```bash
+# 专家级：验证 kubelet 与插件的 Socket 通信
+# 查看 kubelet 内部设备管理器状态
+cat /var/lib/kubelet/device-plugins/kubelet_internal_checkpoint
+
+# 专家级：监控 GPU 核心指标（需部署 DCGM Exporter）
+curl localhost:9400/metrics | grep DCGM_FI_DEV_GPU_UTIL
+
+# 专家级：深度检查 NVIDIA 运行时的配置文件
+# 确认路径映射和库文件加载逻辑
+cat /etc/nvidia-container-runtime/config.toml
+```
+
+---
+
+## 目录
+
+1. [异构资源接入逻辑](#1-核心原理解析异构资源接入)
+2. [专家观测工具链](#专家级观测工具链experts-toolbox)
+3. [故障现象与分配逻辑解析](#12-常见问题现象)
+4. [基础排查步骤（初学者）](#22-排查命令集)
+5. [深度治理方案](#第三部分解决方案与风险控制)
+
 ---
 
 ## 第一部分：问题现象与影响分析
@@ -98,7 +165,7 @@
 | 驱动不兼容 | CUDA 程序运行失败 | 应用崩溃 | 特定 CUDA 版本应用 |
 | 设备分配失败 | Pod 启动失败 | 工作负载不可用 | 请求该设备的 Pod |
 
-## 第二部分：排查原理与方法
+## 第二部分：排查方法（基础与进阶）
 
 ### 2.1 排查决策树
 

@@ -31,7 +31,7 @@
 | | services.loadbalancers | LoadBalancer数量 | 5 | 控制SLB成本 |
 | | services.nodeports | NodePort数量 | 10 | 限制NodePort |
 | **存储** | requests.storage | 存储请求总量 | 500Gi | 限制总存储 |
-| | <sc>.storageclass.storage.k8s.io/requests.storage | 特定SC存储配额 | 100Gi | 按存储类型限制 |
+| | `<sc>`.storageclass.storage.k8s.io/requests.storage | 特定SC存储配额 | 100Gi | 按存储类型限制 |
 | **扩展资源** | requests.nvidia.com/gpu | GPU请求总量 | 8 | 限制GPU使用 |
 
 ### 生产级ResourceQuota配置

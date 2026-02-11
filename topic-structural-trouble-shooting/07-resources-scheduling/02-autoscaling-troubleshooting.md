@@ -8,6 +8,18 @@
 > - v1.27+ HPAContainerMetrics GA
 > - VPA v1.0+ 支持推荐模式和自动更新模式
 
+## 0. 10 分钟快速诊断
+
+1. **指标可用性**：`kubectl top nodes/pods` 与 `kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes`。
+2. **HPA 状态**：`kubectl describe hpa <name>`，查看 `ScalingActive` 与事件。
+3. **VPA 推荐**：`kubectl describe vpa <name>`，确认 recommendation 是否生成。
+4. **资源请求**：HPA 需 requests，检查目标工作负载 resources 配置。
+5. **扩缩策略**：检查 `behavior.scaleUp/scaleDown` 与稳定窗口。
+6. **快速缓解**：
+   - metrics-server 故障：重启并调整证书/资源。
+   - 扩缩振荡：收敛策略或提高稳定窗口。
+7. **证据留存**：保存 HPA/VPA 描述、metrics-server 日志与 metrics API 输出。
+
 ## 概述
 
 Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes 的自动扩缩容机制。HPA 通过调整 Pod 副本数实现水平扩展，VPA 通过调整 Pod 资源请求/限制实现垂直扩展。本文档覆盖自动扩缩容相关故障的诊断与解决方案。
@@ -55,7 +67,7 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
 |---------|---------|-------------|---------|
-| 指标获取失败 | HPA 显示 unknown 或 <unknown> | `unable to get metrics for resource` | `kubectl get hpa` |
+| 指标获取失败 | HPA 显示 unknown 或 `<unknown>` | `unable to get metrics for resource` | `kubectl get hpa` |
 | 不扩容 | 负载高但副本数不变 | `ScalingActive False` | `kubectl describe hpa` |
 | 不缩容 | 负载低但副本数不减少 | 副本数持续高于 minReplicas | `kubectl get hpa` |
 | 扩容振荡 | 副本数频繁增减 | 事件显示反复 SuccessfulRescale | `kubectl describe hpa` |
@@ -128,7 +140,7 @@ HPA 扩缩容决策流程
 ```
 HPA/VPA 故障
      │
-     ├─── HPA 显示 <unknown>？
+     ├─── HPA 显示 `<unknown>`？
      │         │
      │         ├─ metrics-server 运行？ ──→ 检查 metrics-server Pod
      │         ├─ API 可用？ ──→ kubectl top nodes/pods
@@ -256,13 +268,13 @@ kubectl logs -n kube-system -l app=vpa-updater
 
 ### 3.1 HPA 指标获取问题
 
-#### 场景 1：HPA 显示 <unknown>
+#### 场景 1：HPA 显示 `<unknown>`
 
 **问题现象：**
 ```bash
 $ kubectl get hpa
 NAME      REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-myapp     Deployment/myapp     <unknown>/50%   1         10        1          5m
+myapp     Deployment/myapp     `<unknown>`/50%   1         10        1          5m
 ```
 
 **解决步骤：**

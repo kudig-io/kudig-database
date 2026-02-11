@@ -8,6 +8,18 @@
 > - Velero v1.12+ 支持 CSI snapshot 备份
 > - K8s v1.28+ 支持 Unknown Version Interoperability Proxy (UVIP)
 
+## 0. 10 分钟快速诊断
+
+1. **API 可达性**：`kubectl get --raw /readyz?verbose` 与 LB 健康检查。
+2. **etcd 健康**：`etcdctl endpoint status/health --cluster` 检查 Leader/延迟。
+3. **控制面副本**：确认多个 API Server/Controller/Scheduler 均存活。
+4. **备份可用性**：检查最近一次 etcd 快照是否成功、存储可读。
+5. **证书有效性**：检查控制面/etcd 证书过期。
+6. **快速缓解**：
+   - 先恢复 LB 与 etcd 可用，再处理控制面。
+   - 若多数 etcd 节点不可用，准备冷备恢复。
+7. **证据留存**：保存 etcd 状态、LB 健康、快照列表与关键日志。
+
 ## 概述
 
 Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境至关重要。本文档覆盖控制平面高可用、etcd 集群故障、备份恢复、跨区域容灾等场景的诊断与解决方案。

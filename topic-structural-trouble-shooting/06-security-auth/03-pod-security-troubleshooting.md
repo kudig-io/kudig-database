@@ -8,6 +8,18 @@
 > - v1.28+ 支持 AppArmor 作为 GA 特性
 > - v1.30+ 支持 user namespace (Alpha→Beta)
 
+## 0. 10 分钟快速诊断
+
+1. **PSA 标签核对**：`kubectl get ns -L pod-security.kubernetes.io/enforce`，确认命名空间级别策略。
+2. **拒绝原因**：`kubectl apply` 输出或 `kubectl get events --field-selector reason=FailedCreate` 查 PSA/准入拒绝。
+3. **SecurityContext**：检查 Pod/容器的 `runAsNonRoot`、`allowPrivilegeEscalation`、`capabilities`。
+4. **特权需求确认**：核对是否真的需要 `privileged`、`hostNetwork`、`hostPath`。
+5. **文件权限**：容器内 `id`、`stat` 验证 UID/GID 与挂载卷权限。
+6. **快速缓解**：
+   - 临时切换 PSA 为 `baseline` 或设置 `warn/audit` 观察。
+   - 为必要特权场景使用最小能力与命名空间豁免。
+7. **证据留存**：保存 PSA 标签、拒绝事件、Pod YAML 与容器日志。
+
 ## 概述
 
 Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Security Admission (PSA) 控制 Pod 的安全配置。安全配置不当会导致 Pod 无法启动、权限不足或安全风险。本文档覆盖 Pod 安全相关故障的诊断与解决方案。

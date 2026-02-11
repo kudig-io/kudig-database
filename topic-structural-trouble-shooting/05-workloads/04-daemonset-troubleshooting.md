@@ -12,6 +12,20 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **期望/实际**：`kubectl get ds <name> -o wide`，对比 DESIRED/CURRENT/READY。
+2. **节点选择**：核对 `nodeSelector/nodeAffinity/tolerations` 是否覆盖目标节点。
+3. **Pod 事件**：`kubectl describe pod <ds-pod>`，区分调度失败与容器启动失败。
+4. **镜像/权限**：检查 `ImagePullBackOff` 与 `permission denied` 类报错。
+5. **更新策略**：`kubectl get ds <name> -o jsonpath='{.spec.updateStrategy}'`，确认 RollingUpdate 参数。
+6. **快速缓解**：
+   - 规则错配：修正 selector/affinity 后滚动重建。
+   - 关键系统 DS：必要时临时 `maxUnavailable=0` 保持可用性。
+7. **证据留存**：保存 ds/pod 描述与 events。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 常见问题现象

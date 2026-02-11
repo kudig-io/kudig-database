@@ -1,12 +1,13 @@
 # 38 - Ingress和API Gateway对比表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
 ## Ingress控制器对比
 
 | 控制器 | 代理类型 | 关键特性 | K8S版本 | 性能(QPS) | 学习曲线 | ACK支持 |
 |-------|---------|---------|--------|-----------|---------|---------|
 | **Nginx Ingress** | Nginx | 成熟稳定，功能全面 | v1.25+ | 高 | 中 | 支持 |
+| **Envoy Gateway** | Envoy | **官方 Gateway API 实现** | v1.25+ | 很高 | 中 | - |
 | **Traefik** | Traefik | 动态配置，中间件 | v1.25+ | 中-高 | 低 | - |
 | **Kong** | Nginx/Kong | API网关功能 | v1.25+ | 高 | 中-高 | - |
 | **HAProxy** | HAProxy | 高性能，企业级 | v1.25+ | 很高 | 中 | - |

@@ -4,6 +4,18 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **配额状态**：`kubectl get resourcequota -n <ns>`、`kubectl describe resourcequota <name>`。
+2. **LimitRange 约束**：`kubectl describe limitrange -n <ns>`，确认默认/最大/最小限制。
+3. **OOM 证据**：`kubectl describe pod <pod> | grep -i oom`，节点上 `dmesg | grep -i killed`。
+4. **调度失败原因**：`kubectl describe pod <pod> | grep -A20 Events`，关注资源不足/污点/亲和性。
+5. **资源可用性**：`kubectl top nodes/pods` 与 `kubectl describe nodes`。
+6. **快速缓解**：
+   - 临时提升配额或削减请求值。
+   - 清理失败/完成 Job 与 Evicted Pod 释放配额。
+7. **证据留存**：保存配额/LimitRange YAML、Pod 事件与节点资源快照。
+
 ## 目录
 
 1. [问题现象与影响分析](#1-问题现象与影响分析)

@@ -8,6 +8,18 @@
 > - Fluent Bit v2.x 推荐替代 Fluentd
 > - Loki v2.9+ 支持 TSDB 存储
 
+## 0. 10 分钟快速诊断
+
+1. **采集链路**：确认采集器 DaemonSet/Agent Running（Fluent Bit/Promtail/Vector）。
+2. **后端健康**：ES/Loki/Prometheus 的就绪与存储空间是否正常。
+3. **目标抓取**：Prometheus Targets 中是否大量 `down`，检查 ServiceMonitor/Endpoint。
+4. **告警链路**：AlertManager 是否正常接收与路由，Grafana 数据源可用。
+5. **资源压力**：采集器/Prometheus OOM 或磁盘告警时优先扩容或限速。
+6. **快速缓解**：
+   - 降低日志采集粒度或采样。
+   - 临时扩副本并提升资源请求。
+7. **证据留存**：保存采集器日志、Targets 状态、后端健康与磁盘使用。
+
 ## 概述
 
 Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系统。本文档覆盖常见的日志收集 (Fluentd/Fluent Bit/Loki) 和监控系统 (Prometheus/Grafana) 故障的诊断与解决方案。

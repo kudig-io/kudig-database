@@ -2,6 +2,18 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: GitOps 运维保障
 
+## 0. 10 分钟快速诊断
+
+1. **控制器存活**：检查 ArgoCD/Flux 控制器 Pod 状态与日志。
+2. **同步状态**：`kubectl get applications/helmreleases/kustomizations -A`，定位 OutOfSync/Failed。
+3. **仓库连接**：验证 repo secret/SSH key/Token，确认仓库可访问。
+4. **渲染检查**：确认 Helm/Kustomize 渲染是否失败或资源冲突。
+5. **漂移检测**：对关键应用执行 diff，判断实际与期望偏差。
+6. **快速缓解**：
+   - 临时暂停自动同步，手动回滚稳定版本。
+   - 修复仓库凭证或降低同步频率。
+7. **证据留存**：保存控制器日志、同步状态与失败事件。
+
 ## 🔧 GitOps/DevOps 常见问题与影响分析
 
 ### GitOps 核心组件故障现象

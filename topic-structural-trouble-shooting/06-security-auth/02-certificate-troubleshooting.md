@@ -8,6 +8,18 @@
 > - kubeadm 证书默认有效期 1 年，CA 10 年
 > - cert-manager v1.14+ 支持 Gateway API 集成
 
+## 0. 10 分钟快速诊断
+
+1. **快速到期检查**：`kubeadm certs check-expiration`（kubeadm 集群）或 `openssl x509 -enddate` 批量扫描。
+2. **API Server 可用性**：`curl -k https://<api-server>:6443/readyz?verbose`，确认是否卡在证书链/TLS。
+3. **证书匹配性**：对 `apiserver.crt`/`apiserver.key` 运行 modulus 校验，排除密钥不匹配。
+4. **SAN 核对**：`openssl x509 -ext subjectAltName`，检查访问域名/IP 是否在 SAN 列表。
+5. **前置依赖**：确认 etcd 证书、front-proxy 证书、SA 密钥对未过期。
+6. **快速缓解**：
+   - 优先更新过期证书（kubeadm/cert-manager）。
+   - 对访问异常先更新 kubeconfig 中的 CA/客户端证书。
+7. **证据留存**：保存过期清单、关键证书解析输出、失败日志片段。
+
 ## 概述
 
 Kubernetes 使用 TLS 证书保护组件间通信和 API 访问安全。证书问题是集群故障的常见原因，包括证书过期、签名错误、CA 不信任等。本文档覆盖 Kubernetes 证书相关故障的诊断与解决方案。

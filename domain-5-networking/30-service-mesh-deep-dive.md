@@ -7,7 +7,7 @@
 ## 目录
 
 1. [Service Mesh 核心架构](#1-service-mesh-核心架构)
-2. [Istio 深度实践](#2-istio-深度实践)
+2. [Istio 深度实践 (Sidecar & Ambient)](#2-istio-深度实践-sidecar--ambient)
 3. [Linkerd 生产部署](#3-linkerd-生产部署)
 4. [Cilium Service Mesh](#4-cilium-service-mesh)
 5. [多集群服务网格](#5-多集群服务网格)
@@ -20,10 +20,22 @@
 
 ## 1. Service Mesh 核心架构
 
-### 1.1 Sidecar 模式详解
+### 1.1 Sidecar vs Ambient 模式
+
+#### Sidecar 模式 (传统)
+- **原理**: 每个 Pod 注入一个代理容器 (Envoy)。
+- **优势**: 细粒度控制、协议感知能力强。
+- **缺点**: 资源开销大 (每个 Pod +~50MB)、升级需重启应用。
+
+#### Ambient 模式 (未来趋势)
+- **原理**: 分层架构，ztunnel (L4 转发) + Waypoint Proxy (L7 治理)。
+- **优势**: 零应用干预、显著降低 CPU/内存开销 (可达 70%+)、独立升级。
+- **适用**: 大规模集群、关注资源成本的场景。
+
+### 1.2 流量拦截机制 (Sidecar 模式)
 
 ```yaml
-# Sidecar 注入配置示例
+# Sidecar 注入配置示例 (Istio 1.24+)
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -35,7 +47,7 @@ data:
     templates:
       initContainers:
       - name: istio-init
-        image: docker.io/istio/proxyv2:1.20.0
+        image: docker.io/istio/proxyv2:1.24.0
         args:
         - istio-iptables
         - -p
@@ -56,7 +68,8 @@ data:
         - "15090,15021,15020"
       containers:
       - name: istio-proxy
-        image: docker.io/istio/proxyv2:1.20.0
+        image: docker.io/istio/proxyv2:1.24.0
+```,old_str:
         ports:
         - containerPort: 15090
           protocol: TCP
@@ -147,109 +160,52 @@ data:
 
 ---
 
-## 2. Istio 深度实践
+## 2. Istio 深度实践 (Sidecar & Ambient)
 
-### 2.1 生产级部署架构
+### 2.1 部署方式对比
+
+| 部署方式 | 推荐工具 | 适用版本 | 说明 |
+|----------|----------|----------|------|
+| **Helm** | `helm upgrade --install` | v1.20+ | **生产首选**，符合 GitOps 流程 |
+| **istioctl** | `istioctl install` | 调试/测试 | 简单快速，但不易版本控制 |
+| **Operator** | `IstioOperator` | 传统 | 正在淡出，官方推荐转向 Helm |
+
+### 2.2 Ambient Mesh 快速启用 (v1.24+)
+
+```bash
+# 安装 Ambient Profile
+istioctl install --set profile=ambient --skip-confirmation
+
+# 标记命名空间使用 Ambient 模式
+kubectl label namespace default istio.io/dataplane-mode=ambient
+
+# 验证 ztunnel 状态
+kubectl get pods -n istio-system -l app=ztunnel
+```
+
+### 2.3 生产级 Sidecar 部署配置 (Helm values)
 
 ```yaml
-# Istio 生产部署配置
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-metadata:
-  name: production-istio
-  namespace: istio-system
-spec:
-  profile: demo
-  components:
-    pilot:
-      k8s:
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 1Gi
-          limits:
-            cpu: 2000m
-            memory: 2Gi
-        replicaCount: 3
-        nodeSelector:
-          kubernetes.io/arch: amd64
-        tolerations:
-        - key: dedicated
-          operator: Equal
-          value: istio-control
-          effect: NoSchedule
-    
-    ingressGateways:
-    - name: istio-ingressgateway
-      enabled: true
-      k8s:
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-          limits:
-            cpu: 1000m
-            memory: 1Gi
-        replicaCount: 3
-        service:
-          ports:
-          - name: status-port
-            port: 15021
-            targetPort: 15021
-          - name: http2
-            port: 80
-            targetPort: 8080
-          - name: https
-            port: 443
-            targetPort: 8443
+# istio-proxy 资源限制与优化
+global:
+  proxy:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 2000m
+        memory: 1Gi
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "sleep 15"] # 等待连接排空
 
-  values:
-    global:
-      proxy:
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 2000m
-            memory: 1Gi
-      
-    pilot:
-      autoscaleEnabled: true
-      autoscaleMin: 2
-      autoscaleMax: 5
-      
-    gateways:
-      istio-ingressgateway:
-        autoscaleEnabled: true
-        autoscaleMin: 2
-        autoscaleMax: 5
-
-    telemetry:
-      enabled: true
-      v2:
-        enabled: true
-        metadataExchange:
-          wasmEnabled: false
-        prometheus:
-          enabled: true
-          wasmEnabled: false
-        stackdriver:
-          enabled: false
-
-    sidecarInjectorWebhook:
-      enableNamespacesByDefault: false
-      
-    meshConfig:
-      accessLogFile: /dev/stdout
-      accessLogEncoding: JSON
-      enableTracing: true
-      outboundTrafficPolicy:
-        mode: REGISTRY_ONLY
-      defaultConfig:
-        tracing:
-          zipkin:
-            address: zipkin.istio-system:9411
-        proxyMetadata:
-          ISTIO_META_DNS_CAPTURE: "true"
-          ISTIO_META_DNS_AUTO_ALLOCATE: "true"
+pilot:
+  autoscaleMin: 3
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+```,old_str:

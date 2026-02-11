@@ -13,6 +13,20 @@ ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核�
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **资源存在**：`kubectl get cm,secret -n <ns>`，确认名称与命名空间。
+2. **Pod 事件**：`kubectl describe pod <pod>` 查找 `not found`/`key not defined`/`MountVolume`。
+3. **注入方式**：确认是 env/envFrom 还是 volume；env 变更需重启。
+4. **Secret 解码**：`kubectl get secret <name> -o jsonpath='{.data.<key>}' | base64 -d` 验证内容。
+5. **权限与 SA**：检查 RBAC 与 ServiceAccount 的 `imagePullSecrets` 绑定。
+6. **快速缓解**：
+   - 子路径 subPath：改为目录挂载或重启 Pod。
+   - 热更新迟滞：确认 kubelet sync 周期与应用热加载能力。
+7. **证据留存**：保存资源 YAML、Pod 事件与容器内验证结果。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 ConfigMap/Secret 使用方式

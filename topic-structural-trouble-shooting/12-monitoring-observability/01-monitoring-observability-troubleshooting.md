@@ -2,6 +2,18 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 全栈可观测性保障
 
+## 0. 10 分钟快速诊断
+
+1. **核心组件就绪**：Prometheus/Grafana/Loki/AlertManager Pod 是否 Running。
+2. **采集状态**：Prometheus Targets 是否大量 down；ServiceMonitor/PodMonitor 是否匹配。
+3. **存储压力**：TSDB/日志存储磁盘是否接近满水位。
+4. **告警链路**：AlertManager 接收与路由是否正常。
+5. **Metrics Server**：`kubectl top` 是否可用（影响 HPA）。
+6. **快速缓解**：
+   - 临时提升资源并缩短采样或保留周期。
+   - 对关键告警先设置抑制避免风暴。
+7. **证据留存**：保存 targets 状态、存储水位、告警路由与组件日志。
+
 ## 👁️ 可观测性常见问题与影响分析
 
 ### 可观测性核心组件故障现象

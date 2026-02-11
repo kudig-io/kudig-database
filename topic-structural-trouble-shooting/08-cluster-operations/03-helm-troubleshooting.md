@@ -8,6 +8,18 @@
 > - Helm v3.14+ 改进的 diff 和 upgrade 行为
 > - Helm v2.x 已停止维护，务必使用 v3.x
 
+## 0. 10 分钟快速诊断
+
+1. **Release 状态**：`helm list -A` 与 `helm status <release>`，确认是否 pending/failed。
+2. **模板渲染**：`helm template <release> <chart> --debug` 复现渲染错误。
+3. **资源冲突**：`kubectl get events -n <ns>`，查看是否已有资源冲突或 RBAC 失败。
+4. **Hooks 卡住**：`helm get hooks <release>`，排查 pre/post hook 阻塞。
+5. **超时与回滚**：必要时 `helm rollback <release> <rev>` 恢复服务。
+6. **快速缓解**：
+   - 增大 `--timeout`，或使用 `--atomic` 防止半成品。
+   - 清理卡住的 pending release secret。
+7. **证据留存**：保存渲染输出、release 详情与相关事件。
+
 ## 概述
 
 Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本文档覆盖 Helm Chart 安装、升级、回滚等操作中常见故障的诊断与解决方案。

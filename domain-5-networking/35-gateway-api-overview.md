@@ -1,8 +1,8 @@
 # 71 - Gateway API配置
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)
 
-## Gateway API vs Ingress
+## 1. Gateway API vs Ingress
 
 | 特性 | Ingress | Gateway API | 说明 |
 |-----|---------|-------------|------|
@@ -12,23 +12,48 @@
 | **请求修改** | 注解依赖 | ✅ 标准化 | 统一的Filter机制 |
 | **后端引用** | Service | Service/任意后端 | 更灵活的后端选择 |
 | **跨命名空间** | ❌ | ✅ ReferenceGrant | 安全的跨NS引用 |
-| **状态丰富度** | 简单 | 详细条件状态 | 更好的可观测性 |
-| **扩展性** | 注解 | Policy附件 | 标准化扩展机制 |
+| **网格治理 (GAMMA)** | ❌ | ✅ (v1.1+) | **East-West** 流量治理标准化 |
 
-## Gateway API CRD
+---
 
-| CRD | 作用域 | 说明 |
-|-----|-------|------|
-| GatewayClass | Cluster | 定义网关类型(平台管理) |
-| Gateway | Namespace | 网关实例(平台/团队) |
-| HTTPRoute | Namespace | HTTP路由规则(开发者) |
-| GRPCRoute | Namespace | gRPC路由规则 |
-| TCPRoute | Namespace | TCP路由规则 |
-| UDPRoute | Namespace | UDP路由规则 |
-| TLSRoute | Namespace | TLS路由规则 |
-| ReferenceGrant | Namespace | 跨命名空间引用授权 |
+## 2. Gateway API CRD 体系
 
-## GatewayClass配置
+| CRD | 作用域 | 角色 | 说明 |
+|-----|-------|------|------|
+| **GatewayClass** | Cluster | 基础设施管理员 | 定义底层网关实现 (如 Istio, Nginx) |
+| **Gateway** | Namespace | 平台/集群管理员 | 定义流量入口 (IP, Port, TLS) |
+| **HTTPRoute** | Namespace | 应用开发者 | 定义 L7 路由、过滤、权重 |
+| **ReferenceGrant** | Namespace | 资源所有者 | 允许跨 NS 的安全引用 |
+
+---
+
+## 3. GAMMA: 服务网格治理标准化 (East-West)
+
+GAMMA (Gateway API for Mesh Management and Administration) 将 Gateway API 扩展到服务网格内部。
+
+```yaml
+# 使用 HTTPRoute 治理网格内部流量 (East-West)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mesh-internal-route
+  namespace: production
+spec:
+  parentRefs:
+  - group: ""
+    kind: Service
+    name: users-service # 直接绑定到 Service，而非 Gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /v2
+    backendRefs:
+    - name: users-v2
+      port: 8080
+```
+
+## 4. GatewayClass配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -47,7 +72,7 @@ spec:
   controllerName: nginx.org/gateway-controller
 ```
 
-## Gateway配置
+## 5. Gateway配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -85,7 +110,7 @@ spec:
     value: 10.0.0.100
 ```
 
-## HTTPRoute配置
+## 6. HTTPRoute配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -134,7 +159,7 @@ spec:
       weight: 10
 ```
 
-## HTTPRoute过滤器
+## 7. HTTPRoute过滤器
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -183,7 +208,7 @@ spec:
       port: 8080
 ```
 
-## GRPCRoute配置
+## 8. GRPCRoute配置
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -205,7 +230,7 @@ spec:
       port: 50051
 ```
 
-## ReferenceGrant(跨命名空间)
+## 9. ReferenceGrant(跨命名空间)
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -224,7 +249,7 @@ spec:
     name: backend-service
 ```
 
-## Gateway API实现
+## 10. Gateway API实现
 
 | 实现 | 成熟度 | 支持协议 |
 |-----|-------|---------|
@@ -235,7 +260,7 @@ spec:
 | Traefik | GA | HTTP/HTTPS |
 | HAProxy | Beta | HTTP/HTTPS |
 
-## ACK Gateway支持
+## 11. ACK Gateway支持
 
 | 功能 | 说明 | 配置方式 |
 |-----|------|---------|
@@ -272,7 +297,7 @@ spec:
       - name: alb-cert
 ```
 
-## 迁移指南 (Ingress -> Gateway API)
+## 12. 迁移指南 (Ingress -> Gateway API)
 
 | Ingress配置 | Gateway API对应 |
 |------------|----------------|
@@ -282,7 +307,7 @@ spec:
 | `backend.service` | HTTPRoute `backendRefs` |
 | 注解 | Policy附件/Filter |
 
-## 版本变更记录
+## 13. 版本变更记录
 
 | 版本 | 变更内容 | 状态 |
 |------|---------|------|
@@ -290,7 +315,7 @@ spec:
 | v0.6.0 | ReferenceGrant GA | 生产可用 |
 | v0.8.0 | GRPCRoute GA | 生产可用 |
 | v1.0.0 | 核心API稳定 | GA |
-| v1.1.0 | BackendLBPolicy | Beta |
+| v1.1.0 | BackendLBPolicy & GAMMA | Beta |
 | v1.2.0 | 改进的状态报告 | 最新 |
 
 ---

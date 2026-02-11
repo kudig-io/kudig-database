@@ -2,6 +2,18 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: AI基础设施运维保障
 
+## 0. 10 分钟快速诊断
+
+1. **GPU 可见性**：`kubectl get nodes -o jsonpath='{.items[*].status.allocatable.nvidia\.com/gpu}'`，确认资源暴露。
+2. **设备插件**：检查 Device Plugin DaemonSet 状态与日志。
+3. **训练作业**：查看分布式训练 Pod 事件，关注 NCCL/网络报错。
+4. **数据与存储**：确认数据集 PVC 挂载、I/O 吞吐与热点。
+5. **资源请求**：核对 GPU/CPU/内存 requests/limits，避免碎片化。
+6. **快速缓解**：
+   - 降低 batch size 或启用混合精度。
+   - 调整亲和性/拓扑，让训练 Pod 同机房/同交换机。
+7. **证据留存**：保存训练日志、GPU 指标、Pod 事件与拓扑信息。
+
 ## 🤖 AI/ML 工作负载常见问题与影响分析
 
 ### AI/ML 特有故障现象
