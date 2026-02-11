@@ -1,0 +1,1239 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>128 - Ingress Controller 深入剖析 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="128---ingress-controller-深入剖析"><a class="header" href="#128---ingress-controller-深入剖析">128 - Ingress Controller 深入剖析</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一ingress-controller-架构总览"><a class="header" href="#一ingress-controller-架构总览">一、Ingress Controller 架构总览</a></h2>
+<h3 id="11-ingress-controller-核心组件"><a class="header" href="#11-ingress-controller-核心组件">1.1 Ingress Controller 核心组件</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>组件</th><th>英文名</th><th>作用</th><th>实现方式</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Watch Handler</strong></td><td>监听处理器</td><td>监听 K8s API 资源变化</td><td>client-go informer</td></tr>
+<tr><td><strong>Config Generator</strong></td><td>配置生成器</td><td>生成代理配置</td><td>模板渲染/动态API</td></tr>
+<tr><td><strong>Config Validator</strong></td><td>配置验证器</td><td>验证配置正确性</td><td>语法/语义检查</td></tr>
+<tr><td><strong>Reload Manager</strong></td><td>重载管理器</td><td>触发配置重载</td><td>Signal/API 调用</td></tr>
+<tr><td><strong>Proxy Engine</strong></td><td>代理引擎</td><td>实际处理流量</td><td>NGINX/Envoy/HAProxy</td></tr>
+<tr><td><strong>Health Checker</strong></td><td>健康检查器</td><td>监控后端健康</td><td>主动/被动检查</td></tr>
+<tr><td><strong>Metrics Exporter</strong></td><td>指标导出器</td><td>暴露监控指标</td><td>Prometheus 格式</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-ingress-controller-工作流程"><a class="header" href="#12-ingress-controller-工作流程">1.2 Ingress Controller 工作流程</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          Ingress Controller 架构                                │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────────┐    │
+│  │                        Kubernetes API Server                             │    │
+│  └───────────────────────────────┬─────────────────────────────────────────┘    │
+│                                  │                                               │
+│                    Watch (Ingress/Service/Endpoints/Secret)                      │
+│                                  │                                               │
+│                                  ▼                                               │
+│  ┌─────────────────────────────────────────────────────────────────────────┐    │
+│  │                          Controller Manager                              │    │
+│  │  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐                │    │
+│  │  │  Ingress      │  │  Service      │  │  Secret       │                │    │
+│  │  │  Informer     │  │  Informer     │  │  Informer     │                │    │
+│  │  └───────┬───────┘  └───────┬───────┘  └───────┬───────┘                │    │
+│  │          │                  │                  │                         │    │
+│  │          └──────────────────┼──────────────────┘                         │    │
+│  │                             │                                            │    │
+│  │                             ▼                                            │    │
+│  │                    ┌─────────────────┐                                   │    │
+│  │                    │  Event Queue    │                                   │    │
+│  │                    └────────┬────────┘                                   │    │
+│  │                             │                                            │    │
+│  │                             ▼                                            │    │
+│  │                    ┌─────────────────┐                                   │    │
+│  │                    │  Sync Handler   │                                   │    │
+│  │                    └────────┬────────┘                                   │    │
+│  └─────────────────────────────┼────────────────────────────────────────────┘    │
+│                                │                                                 │
+│                                ▼                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐    │
+│  │                       Config Generator                                   │    │
+│  │  ┌─────────────────────────────────────────────────────────────────┐    │    │
+│  │  │  Template Engine (Go Template / Lua / JSON)                     │    │    │
+│  │  │    - Server blocks                                              │    │    │
+│  │  │    - Location rules                                             │    │    │
+│  │  │    - Upstream definitions                                       │    │    │
+│  │  │    - TLS configurations                                         │    │    │
+│  │  └─────────────────────────────────────────────────────────────────┘    │    │
+│  └─────────────────────────────┬────────────────────────────────────────────┘    │
+│                                │                                                 │
+│                                ▼                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────┐    │
+│  │                         Proxy Engine                                     │    │
+│  │  ┌─────────────────────────────────────────────────────────────────┐    │    │
+│  │  │  NGINX / Envoy / HAProxy / Traefik                              │    │    │
+│  │  │    - TLS Termination                                            │    │    │
+│  │  │    - Load Balancing                                             │    │    │
+│  │  │    - Rate Limiting                                              │    │    │
+│  │  │    - Request Routing                                            │    │    │
+│  │  └─────────────────────────────────────────────────────────────────┘    │    │
+│  └─────────────────────────────────────────────────────────────────────────┘    │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="二主流-ingress-controller-全面对比"><a class="header" href="#二主流-ingress-controller-全面对比">二、主流 Ingress Controller 全面对比</a></h2>
+<h3 id="21-基础能力对比"><a class="header" href="#21-基础能力对比">2.1 基础能力对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>控制器</th><th>代理引擎</th><th>开发语言</th><th>许可证</th><th>维护方</th><th>首次发布</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>NGINX Ingress (K8s)</strong></td><td>NGINX</td><td>Go</td><td>Apache-2.0</td><td>Kubernetes 社区</td><td>2016</td></tr>
+<tr><td><strong>NGINX Ingress (F5)</strong></td><td>NGINX Plus</td><td>Go</td><td>Apache-2.0</td><td>F5/NGINX</td><td>2018</td></tr>
+<tr><td><strong>Traefik</strong></td><td>Traefik</td><td>Go</td><td>MIT</td><td>Traefik Labs</td><td>2016</td></tr>
+<tr><td><strong>HAProxy Ingress</strong></td><td>HAProxy</td><td>Go</td><td>Apache-2.0</td><td>HAProxy 社区</td><td>2017</td></tr>
+<tr><td><strong>Contour</strong></td><td>Envoy</td><td>Go</td><td>Apache-2.0</td><td>VMware/CNCF</td><td>2018</td></tr>
+<tr><td><strong>Kong Ingress</strong></td><td>Kong/NGINX</td><td>Go</td><td>Apache-2.0</td><td>Kong Inc</td><td>2018</td></tr>
+<tr><td><strong>Ambassador/Emissary</strong></td><td>Envoy</td><td>Python/Go</td><td>Apache-2.0</td><td>Ambassador Labs</td><td>2017</td></tr>
+<tr><td><strong>ALB Ingress (阿里云)</strong></td><td>ALB</td><td>Go</td><td>-</td><td>阿里云</td><td>2020</td></tr>
+<tr><td><strong>AWS ALB Ingress</strong></td><td>AWS ALB</td><td>Go</td><td>Apache-2.0</td><td>AWS</td><td>2018</td></tr>
+<tr><td><strong>GCE Ingress</strong></td><td>Google Cloud LB</td><td>Go</td><td>Apache-2.0</td><td>Google</td><td>2016</td></tr>
+<tr><td><strong>Skipper</strong></td><td>Skipper</td><td>Go</td><td>Apache-2.0</td><td>Zalando</td><td>2016</td></tr>
+<tr><td><strong>Voyager</strong></td><td>HAProxy</td><td>Go</td><td>Apache-2.0</td><td>AppsCode</td><td>2017</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="22-功能特性对比"><a class="header" href="#22-功能特性对比">2.2 功能特性对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>特性</th><th>NGINX (K8s)</th><th>Traefik</th><th>HAProxy</th><th>Contour</th><th>Kong</th><th>ALB (阿里云)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>协议支持</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>HTTP/1.1</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>HTTP/2</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>HTTP/3 (QUIC)</td><td>✅ (实验)</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+<tr><td>gRPC</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>WebSocket</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>TCP/UDP</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><strong>TLS 功能</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>TLS 终止</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>TLS 透传</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>mTLS</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>SNI 路由</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>OCSP Stapling</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><strong>路由能力</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>基于主机</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>基于路径</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>基于 Header</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>基于 Cookie</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>基于查询参数</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>正则路径</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td><td>✅</td><td>❌</td></tr>
+<tr><td><strong>流量管理</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>负载均衡</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>会话亲和</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>流量分割</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>金丝雀发布</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>蓝绿部署</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>A/B 测试</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>熔断</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>重试</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><strong>安全功能</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>限流</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>IP 黑白名单</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Basic Auth</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td><td>✅</td><td>❌</td></tr>
+<tr><td>OAuth/OIDC</td><td>插件</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
+<tr><td>JWT 验证</td><td>插件</td><td>插件</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
+<tr><td>WAF</td><td>ModSecurity</td><td>插件</td><td>❌</td><td>❌</td><td>插件</td><td>✅</td></tr>
+<tr><td>CORS</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><strong>自定义 CRD</strong></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>专用 CRD</td><td>❌</td><td>IngressRoute</td><td>❌</td><td>HTTPProxy</td><td>KongIngress</td><td>AlbConfig</td></tr>
+<tr><td>Gateway API</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="23-性能与资源对比"><a class="header" href="#23-性能与资源对比">2.3 性能与资源对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>指标</th><th>NGINX (K8s)</th><th>Traefik</th><th>HAProxy</th><th>Contour (Envoy)</th><th>Kong</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>吞吐量 (RPS)</strong></td><td>50,000+</td><td>30,000+</td><td>100,000+</td><td>50,000+</td><td>40,000+</td></tr>
+<tr><td><strong>延迟 (P99)</strong></td><td>&lt;10ms</td><td>&lt;15ms</td><td>&lt;5ms</td><td>&lt;10ms</td><td>&lt;15ms</td></tr>
+<tr><td><strong>并发连接</strong></td><td>10,000+</td><td>10,000+</td><td>50,000+</td><td>10,000+</td><td>10,000+</td></tr>
+<tr><td><strong>内存占用</strong></td><td>200-500MB</td><td>100-300MB</td><td>100-200MB</td><td>300-600MB</td><td>300-600MB</td></tr>
+<tr><td><strong>CPU 使用</strong></td><td>中</td><td>低</td><td>低</td><td>中</td><td>中-高</td></tr>
+<tr><td><strong>启动时间</strong></td><td>2-5s</td><td>1-3s</td><td>1-2s</td><td>3-5s</td><td>5-10s</td></tr>
+<tr><td><strong>配置重载</strong></td><td>热重载</td><td>动态</td><td>热重载</td><td>动态 (xDS)</td><td>动态</td></tr>
+<tr><td><strong>重载耗时</strong></td><td>100-500ms</td><td>0ms</td><td>&lt;100ms</td><td>0ms</td><td>&lt;100ms</td></tr>
+<tr><td><strong>连接保持</strong></td><td>短暂丢失</td><td>无影响</td><td>无影响</td><td>无影响</td><td>短暂丢失</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="24-运维与生态对比"><a class="header" href="#24-运维与生态对比">2.4 运维与生态对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方面</th><th>NGINX (K8s)</th><th>Traefik</th><th>HAProxy</th><th>Contour</th><th>Kong</th><th>ALB (阿里云)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>学习曲线</strong></td><td>中</td><td>低</td><td>中</td><td>中</td><td>高</td><td>低</td></tr>
+<tr><td><strong>文档质量</strong></td><td>优秀</td><td>优秀</td><td>良好</td><td>良好</td><td>优秀</td><td>良好</td></tr>
+<tr><td><strong>社区活跃度</strong></td><td>非常高</td><td>高</td><td>中</td><td>中</td><td>高</td><td>中</td></tr>
+<tr><td><strong>GitHub Stars</strong></td><td>16k+</td><td>47k+</td><td>1k+</td><td>3k+</td><td>37k+</td><td>-</td></tr>
+<tr><td><strong>商业支持</strong></td><td>F5</td><td>Traefik Labs</td><td>HAProxy Tech</td><td>VMware</td><td>Kong Inc</td><td>阿里云</td></tr>
+<tr><td><strong>企业版</strong></td><td>NGINX Plus</td><td>Traefik EE</td><td>HAProxy EE</td><td>-</td><td>Kong EE</td><td>原生</td></tr>
+<tr><td><strong>Prometheus 集成</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>云监控</td></tr>
+<tr><td><strong>分布式追踪</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td><strong>日志格式</strong></td><td>可定制</td><td>JSON</td><td>可定制</td><td>JSON</td><td>JSON</td><td>云日志</td></tr>
+<tr><td><strong>Helm Chart</strong></td><td>官方</td><td>官方</td><td>社区</td><td>官方</td><td>官方</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="三各控制器深入配置"><a class="header" href="#三各控制器深入配置">三、各控制器深入配置</a></h2>
+<h3 id="31-nginx-ingress-controller"><a class="header" href="#31-nginx-ingress-controller">3.1 NGINX Ingress Controller</a></h3>
+<h4 id="部署方式"><a class="header" href="#部署方式">部署方式</a></h4>
+<pre><code class="language-yaml"># Helm 部署 NGINX Ingress Controller
+# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# helm install ingress-nginx ingress-nginx/ingress-nginx -f values.yaml
+
+# values.yaml 核心配置
+controller:
+  name: controller
+  image:
+    repository: registry.k8s.io/ingress-nginx/controller
+    tag: "v1.10.0"
+  
+  # 副本数与高可用
+  replicaCount: 3
+  
+  # 资源配置
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+  
+  # 部署策略
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  
+  # 反亲和性
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/component
+            operator: In
+            values:
+            - controller
+        topologyKey: kubernetes.io/hostname
+  
+  # 服务类型
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local  # 保留源 IP
+    annotations:
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s2.medium
+  
+  # 配置参数
+  config:
+    # 工作进程
+    worker-processes: "auto"
+    worker-connections: "65535"
+    # 超时设置
+    proxy-connect-timeout: "10"
+    proxy-read-timeout: "60"
+    proxy-send-timeout: "60"
+    # 请求体大小
+    proxy-body-size: "100m"
+    # 日志格式
+    log-format-upstream: '$remote_addr - $request_id - [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_length $request_time [$proxy_upstream_name] [$proxy_alternative_upstream_name] $upstream_addr $upstream_response_length $upstream_response_time $upstream_status $req_id'
+    # 启用指标
+    enable-prometheus-metrics: "true"
+    # SSL 配置
+    ssl-protocols: "TLSv1.2 TLSv1.3"
+    ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+  
+  # 指标
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  
+  # 准入控制器
+  admissionWebhooks:
+    enabled: true
+</code></pre>
+<h4 id="configmap-全局配置"><a class="header" href="#configmap-全局配置">ConfigMap 全局配置</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>配置项</th><th>默认值</th><th>说明</th><th>生产建议</th></tr>
+</thead>
+<tbody>
+<tr><td><code>worker-processes</code></td><td>auto</td><td>工作进程数</td><td>CPU 核数</td></tr>
+<tr><td><code>worker-connections</code></td><td>16384</td><td>单进程最大连接</td><td>65535</td></tr>
+<tr><td><code>keep-alive</code></td><td>75</td><td>Keep-alive 超时 (秒)</td><td>75</td></tr>
+<tr><td><code>keep-alive-requests</code></td><td>1000</td><td>单连接最大请求数</td><td>10000</td></tr>
+<tr><td><code>proxy-connect-timeout</code></td><td>5</td><td>后端连接超时 (秒)</td><td>5-10</td></tr>
+<tr><td><code>proxy-read-timeout</code></td><td>60</td><td>后端读取超时 (秒)</td><td>60-300</td></tr>
+<tr><td><code>proxy-send-timeout</code></td><td>60</td><td>后端发送超时 (秒)</td><td>60</td></tr>
+<tr><td><code>proxy-body-size</code></td><td>1m</td><td>请求体大小限制</td><td>根据业务</td></tr>
+<tr><td><code>proxy-buffer-size</code></td><td>4k</td><td>代理缓冲区大小</td><td>8k-16k</td></tr>
+<tr><td><code>ssl-protocols</code></td><td>TLSv1.2 TLSv1.3</td><td>支持的 TLS 版本</td><td>TLSv1.2 TLSv1.3</td></tr>
+<tr><td><code>ssl-session-cache</code></td><td>true</td><td>SSL 会话缓存</td><td>true</td></tr>
+<tr><td><code>ssl-session-timeout</code></td><td>10m</td><td>SSL 会话超时</td><td>10m</td></tr>
+<tr><td><code>use-gzip</code></td><td>true</td><td>启用 gzip 压缩</td><td>true</td></tr>
+<tr><td><code>gzip-level</code></td><td>1</td><td>gzip 压缩级别</td><td>4-6</td></tr>
+<tr><td><code>enable-brotli</code></td><td>false</td><td>启用 Brotli 压缩</td><td>true</td></tr>
+<tr><td><code>use-forwarded-headers</code></td><td>false</td><td>使用 X-Forwarded-* 头</td><td>按需开启</td></tr>
+<tr><td><code>compute-full-forwarded-for</code></td><td>false</td><td>完整转发链</td><td>true</td></tr>
+<tr><td><code>enable-real-ip</code></td><td>true</td><td>启用真实 IP</td><td>true</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="32-traefik"><a class="header" href="#32-traefik">3.2 Traefik</a></h3>
+<h4 id="部署配置"><a class="header" href="#部署配置">部署配置</a></h4>
+<pre><code class="language-yaml"># Traefik Helm values.yaml
+# helm repo add traefik https://traefik.github.io/charts
+# helm install traefik traefik/traefik -f values.yaml
+
+deployment:
+  replicas: 3
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+# 入口点配置
+ports:
+  web:
+    port: 8000
+    exposedPort: 80
+    protocol: TCP
+  websecure:
+    port: 8443
+    exposedPort: 443
+    protocol: TCP
+    tls:
+      enabled: true
+
+# 提供者配置
+providers:
+  kubernetesIngress:
+    enabled: true
+    allowExternalNameServices: true
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
+
+# 日志配置
+logs:
+  general:
+    level: INFO
+    format: json
+  access:
+    enabled: true
+    format: json
+
+# 指标
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addServicesLabels: true
+
+# 追踪
+tracing:
+  jaeger:
+    samplingServerURL: http://jaeger-agent:5778/sampling
+    localAgentHostPort: jaeger-agent:6831
+
+# 中间件
+additionalArguments:
+  - "--api.dashboard=true"
+  - "--ping=true"
+  - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+  - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+</code></pre>
+<h4 id="traefik-ingressroute-crd"><a class="header" href="#traefik-ingressroute-crd">Traefik IngressRoute (CRD)</a></h4>
+<pre><code class="language-yaml"># Traefik 专用 CRD，更强大的路由能力
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app-route
+  namespace: production
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`app.example.com`) &amp;&amp; PathPrefix(`/api`)
+      kind: Rule
+      priority: 100
+      middlewares:
+        - name: rate-limit
+        - name: strip-prefix
+      services:
+        - name: api-service
+          port: 8080
+          weight: 90
+        - name: api-canary
+          port: 8080
+          weight: 10
+    - match: Host(`app.example.com`)
+      kind: Rule
+      services:
+        - name: web-service
+          port: 80
+  tls:
+    secretName: app-tls
+---
+# 中间件定义
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit
+spec:
+  rateLimit:
+    average: 100
+    burst: 200
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-prefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /api
+</code></pre>
+<h3 id="33-contour-envoy"><a class="header" href="#33-contour-envoy">3.3 Contour (Envoy)</a></h3>
+<h4 id="部署配置-1"><a class="header" href="#部署配置-1">部署配置</a></h4>
+<pre><code class="language-yaml"># Contour 配置
+# helm repo add bitnami https://charts.bitnami.com/bitnami
+# helm install contour bitnami/contour -f values.yaml
+
+contour:
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+envoy:
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+  
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+
+# 配置文件
+configInline:
+  gateway:
+    controllerName: projectcontour.io/gateway-controller
+  rateLimitService:
+    extensionService: projectcontour/ratelimit
+  accesslog-format: json
+  json-fields:
+    - "@timestamp"
+    - "authority"
+    - "bytes_received"
+    - "bytes_sent"
+    - "duration"
+    - "method"
+    - "path"
+    - "protocol"
+    - "request_id"
+    - "response_code"
+    - "upstream_cluster"
+    - "upstream_host"
+    - "user_agent"
+    - "x_forwarded_for"
+</code></pre>
+<h4 id="httpproxy-contour-crd"><a class="header" href="#httpproxy-contour-crd">HTTPProxy (Contour CRD)</a></h4>
+<pre><code class="language-yaml"># HTTPProxy - Contour 专用 CRD
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: app-proxy
+  namespace: production
+spec:
+  virtualhost:
+    fqdn: app.example.com
+    tls:
+      secretName: app-tls
+      minimumProtocolVersion: "1.2"
+  routes:
+    # API 路由 - 带重试和超时
+    - conditions:
+        - prefix: /api
+      services:
+        - name: api-service
+          port: 8080
+          weight: 90
+        - name: api-canary
+          port: 8080
+          weight: 10
+      timeoutPolicy:
+        response: 60s
+        idle: 120s
+      retryPolicy:
+        count: 3
+        perTryTimeout: 10s
+      loadBalancerPolicy:
+        strategy: WeightedLeastRequest
+      healthCheckPolicy:
+        path: /health
+        intervalSeconds: 5
+        timeoutSeconds: 2
+        unhealthyThresholdCount: 3
+        healthyThresholdCount: 2
+    # 默认路由
+    - services:
+        - name: web-service
+          port: 80
+---
+# 限流配置
+apiVersion: projectcontour.io/v1alpha1
+kind: RateLimitPolicy
+metadata:
+  name: api-rate-limit
+spec:
+  virtualHostRateLimits:
+    local:
+      requests: 100
+      unit: second
+      burst: 200
+</code></pre>
+<h3 id="34-kong-ingress-controller"><a class="header" href="#34-kong-ingress-controller">3.4 Kong Ingress Controller</a></h3>
+<h4 id="部署配置-2"><a class="header" href="#部署配置-2">部署配置</a></h4>
+<pre><code class="language-yaml"># Kong Helm values.yaml
+# helm repo add kong https://charts.konghq.com
+# helm install kong kong/kong -f values.yaml
+
+image:
+  repository: kong
+  tag: "3.6"
+
+env:
+  database: "off"  # DB-less 模式
+  nginx_worker_processes: "2"
+  proxy_access_log: /dev/stdout
+  admin_access_log: /dev/stdout
+  proxy_error_log: /dev/stderr
+  admin_error_log: /dev/stderr
+  prefix: /kong_prefix/
+
+ingressController:
+  enabled: true
+  installCRDs: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+proxy:
+  enabled: true
+  type: LoadBalancer
+  http:
+    enabled: true
+    containerPort: 8000
+    servicePort: 80
+  tls:
+    enabled: true
+    containerPort: 8443
+    servicePort: 443
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+</code></pre>
+<h4 id="kong-插件配置"><a class="header" href="#kong-插件配置">Kong 插件配置</a></h4>
+<pre><code class="language-yaml"># Kong 全局插件 - 限流
+apiVersion: configuration.konghq.com/v1
+kind: KongClusterPlugin
+metadata:
+  name: global-rate-limiting
+  annotations:
+    kubernetes.io/ingress.class: kong
+  labels:
+    global: "true"
+plugin: rate-limiting
+config:
+  minute: 1000
+  policy: local
+---
+# Kong Ingress 特定配置
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: api-config
+proxy:
+  protocol: http
+  path: /
+  connect_timeout: 10000
+  read_timeout: 60000
+  write_timeout: 60000
+  retries: 3
+route:
+  strip_path: true
+  preserve_host: true
+upstream:
+  algorithm: round-robin
+  hash_on: none
+  healthchecks:
+    active:
+      http_path: /health
+      healthy:
+        interval: 5
+        successes: 2
+      unhealthy:
+        interval: 5
+        http_failures: 3
+---
+# 应用插件
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress
+  annotations:
+    konghq.com/override: api-config
+    konghq.com/plugins: global-rate-limiting
+spec:
+  ingressClassName: kong
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+</code></pre>
+<h3 id="35-alb-ingress-controller-阿里云"><a class="header" href="#35-alb-ingress-controller-阿里云">3.5 ALB Ingress Controller (阿里云)</a></h3>
+<h4 id="部署与配置"><a class="header" href="#部署与配置">部署与配置</a></h4>
+<pre><code class="language-yaml"># ALB Ingress Controller 组件配置 (通过 ACK 控制台安装)
+# AlbConfig - 定义 ALB 实例
+apiVersion: alibabacloud.com/v1
+kind: AlbConfig
+metadata:
+  name: production-alb
+spec:
+  config:
+    name: production-alb
+    addressType: Internet
+    zoneMappings:
+      - vSwitchId: vsw-xxx1
+        zoneId: cn-hangzhou-a
+      - vSwitchId: vsw-xxx2
+        zoneId: cn-hangzhou-b
+    accessLogConfig:
+      logProject: k8s-log
+      logStore: alb-access-log
+    deletionProtectionEnabled: true
+    addressAllocatedMode: Dynamic
+    loadBalancerBillingConfig:
+      payType: PayAsYouGo
+---
+# IngressClass
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: alb
+spec:
+  controller: ingress.k8s.alibabacloud/alb
+  parameters:
+    apiGroup: alibabacloud.com
+    kind: AlbConfig
+    name: production-alb
+---
+# Ingress 配置
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-ingress
+  annotations:
+    # 监听配置
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    # HTTPS 重定向
+    alb.ingress.kubernetes.io/ssl-redirect: "true"
+    # 健康检查
+    alb.ingress.kubernetes.io/healthcheck-enabled: "true"
+    alb.ingress.kubernetes.io/healthcheck-path: "/health"
+    alb.ingress.kubernetes.io/healthcheck-protocol: "HTTP"
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "5"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "3"
+    # 后端协议
+    alb.ingress.kubernetes.io/backend-protocol: "HTTP"
+    # 会话保持
+    alb.ingress.kubernetes.io/sticky-session: "true"
+    alb.ingress.kubernetes.io/sticky-session-type: "Insert"
+    alb.ingress.kubernetes.io/cookie-timeout: "1800"
+    # 限流
+    alb.ingress.kubernetes.io/traffic-limit-qps: "1000"
+spec:
+  ingressClassName: alb
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h4 id="alb-注解参考"><a class="header" href="#alb-注解参考">ALB 注解参考</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>说明</th><th>示例值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>alb.ingress.kubernetes.io/address-type</code></td><td>地址类型</td><td><code>Internet</code> / <code>Intranet</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/listen-ports</code></td><td>监听端口</td><td><code>'[{"HTTP": 80}, {"HTTPS": 443}]'</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/ssl-redirect</code></td><td>HTTPS 重定向</td><td><code>"true"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/backend-protocol</code></td><td>后端协议</td><td><code>HTTP</code> / <code>HTTPS</code> / <code>gRPC</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/healthcheck-enabled</code></td><td>启用健康检查</td><td><code>"true"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/healthcheck-path</code></td><td>健康检查路径</td><td><code>/health</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/traffic-limit-qps</code></td><td>QPS 限制</td><td><code>"1000"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/sticky-session</code></td><td>会话保持</td><td><code>"true"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/canary</code></td><td>金丝雀发布</td><td><code>"true"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/canary-weight</code></td><td>金丝雀权重</td><td><code>"10"</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/canary-by-header</code></td><td>Header 金丝雀</td><td><code>X-Canary</code></td></tr>
+<tr><td><code>alb.ingress.kubernetes.io/order</code></td><td>规则优先级</td><td><code>"100"</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="四选型决策矩阵"><a class="header" href="#四选型决策矩阵">四、选型决策矩阵</a></h2>
+<h3 id="41-场景推荐"><a class="header" href="#41-场景推荐">4.1 场景推荐</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>场景</th><th>首选</th><th>备选</th><th>理由</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>通用场景/入门</strong></td><td>NGINX Ingress</td><td>Traefik</td><td>文档完善，社区活跃</td></tr>
+<tr><td><strong>高性能要求</strong></td><td>HAProxy</td><td>NGINX Ingress</td><td>HAProxy 原生高性能</td></tr>
+<tr><td><strong>动态配置/微服务</strong></td><td>Traefik</td><td>Contour</td><td>零停机配置更新</td></tr>
+<tr><td><strong>API 网关需求</strong></td><td>Kong</td><td>Ambassador</td><td>丰富的插件生态</td></tr>
+<tr><td><strong>服务网格集成</strong></td><td>Contour</td><td>Istio Gateway</td><td>Envoy 原生支持</td></tr>
+<tr><td><strong>阿里云 ACK</strong></td><td>ALB Ingress</td><td>NGINX Ingress</td><td>云原生，免运维</td></tr>
+<tr><td><strong>AWS EKS</strong></td><td>AWS ALB Ingress</td><td>NGINX Ingress</td><td>原生集成</td></tr>
+<tr><td><strong>多租户隔离</strong></td><td>Contour</td><td>Traefik</td><td>HTTPProxy 支持委派</td></tr>
+<tr><td><strong>金丝雀/灰度发布</strong></td><td>Traefik</td><td>NGINX Ingress</td><td>原生流量分割</td></tr>
+<tr><td><strong>企业级 WAF</strong></td><td>Kong EE</td><td>ALB (云 WAF)</td><td>内置 WAF 能力</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="42-决策流程图"><a class="header" href="#42-决策流程图">4.2 决策流程图</a></h3>
+<pre><code>开始
+  │
+  ├─→ 使用云服务？
+  │      │
+  │      ├─ 是: 阿里云 → ALB Ingress
+  │      │       AWS → AWS ALB Ingress
+  │      │       GCP → GCE Ingress
+  │      │
+  │      └─ 否 ↓
+  │
+  ├─→ 需要 API 网关功能？
+  │      │
+  │      ├─ 是 → Kong Ingress
+  │      │
+  │      └─ 否 ↓
+  │
+  ├─→ 追求极致性能？
+  │      │
+  │      ├─ 是 → HAProxy Ingress
+  │      │
+  │      └─ 否 ↓
+  │
+  ├─→ 需要零停机配置？
+  │      │
+  │      ├─ 是 → Traefik 或 Contour
+  │      │
+  │      └─ 否 ↓
+  │
+  ├─→ 计划使用服务网格？
+  │      │
+  │      ├─ 是 → Contour (Envoy) 或 Istio Gateway
+  │      │
+  │      └─ 否 ↓
+  │
+  └─→ 默认选择 → NGINX Ingress (社区版)
+</code></pre>
+<h3 id="43-成本对比"><a class="header" href="#43-成本对比">4.3 成本对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>控制器</th><th>软件成本</th><th>运维复杂度</th><th>资源消耗</th><th>总体 TCO</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>NGINX Ingress (开源)</strong></td><td>免费</td><td>中</td><td>中</td><td>低</td></tr>
+<tr><td><strong>NGINX Plus</strong></td><td>商业授权</td><td>低</td><td>中</td><td>中</td></tr>
+<tr><td><strong>Traefik (开源)</strong></td><td>免费</td><td>低</td><td>低</td><td>低</td></tr>
+<tr><td><strong>Traefik EE</strong></td><td>商业授权</td><td>低</td><td>低</td><td>中</td></tr>
+<tr><td><strong>HAProxy (开源)</strong></td><td>免费</td><td>中</td><td>低</td><td>低</td></tr>
+<tr><td><strong>Contour</strong></td><td>免费</td><td>中</td><td>中</td><td>低</td></tr>
+<tr><td><strong>Kong (开源)</strong></td><td>免费</td><td>高</td><td>中-高</td><td>中</td></tr>
+<tr><td><strong>Kong EE</strong></td><td>商业授权</td><td>中</td><td>中-高</td><td>高</td></tr>
+<tr><td><strong>ALB (阿里云)</strong></td><td>按量付费</td><td>低</td><td>-</td><td>按流量</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="五高可用部署模式"><a class="header" href="#五高可用部署模式">五、高可用部署模式</a></h2>
+<h3 id="51-部署模式对比"><a class="header" href="#51-部署模式对比">5.1 部署模式对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>模式</th><th>优点</th><th>缺点</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Deployment</strong></td><td>灵活扩缩，易于管理</td><td>需要 Service 暴露</td><td>通用场景</td></tr>
+<tr><td><strong>DaemonSet</strong></td><td>每节点部署，低延迟</td><td>扩缩不灵活</td><td>高性能要求</td></tr>
+<tr><td><strong>DaemonSet + NodeSelector</strong></td><td>指定节点，资源可控</td><td>管理复杂</td><td>专用边缘节点</td></tr>
+<tr><td><strong>Deployment + HPA</strong></td><td>自动扩缩容</td><td>HPA 延迟</td><td>流量波动场景</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-高可用配置示例"><a class="header" href="#52-高可用配置示例">5.2 高可用配置示例</a></h3>
+<pre><code class="language-yaml"># NGINX Ingress 高可用部署
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
+spec:
+  replicas: 3  # 最少 3 副本
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/component: controller
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ingress-nginx
+        app.kubernetes.io/component: controller
+    spec:
+      # 服务账号
+      serviceAccountName: ingress-nginx
+      # 优雅终止
+      terminationGracePeriodSeconds: 300
+      # 反亲和性 - 分散到不同节点
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/component: controller
+            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: controller
+              topologyKey: topology.kubernetes.io/zone
+      # 拓扑分布约束
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/component: controller
+      containers:
+      - name: controller
+        image: registry.k8s.io/ingress-nginx/controller:v1.10.0
+        args:
+          - /nginx-ingress-controller
+          - --election-id=ingress-controller-leader
+          - --controller-class=k8s.io/ingress-nginx
+          - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /wait-shutdown
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10254
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 10254
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+---
+# HPA 自动扩缩
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-ingress-hpa
+  namespace: ingress-nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-ingress-controller
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+# PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-ingress-pdb
+  namespace: ingress-nginx
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+</code></pre>
+<hr>
+<p><strong>Ingress Controller 选型原则</strong>: 评估业务需求 → 对比功能特性 → 测试性能指标 → 考虑运维成本 → 验证高可用方案</p>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/19-ingress-fundamentals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/21-nginx-ingress-complete-guide.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/19-ingress-fundamentals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/21-nginx-ingress-complete-guide.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

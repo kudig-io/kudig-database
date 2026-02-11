@@ -1,0 +1,2205 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>59 - Egress流量管理 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="59---egress流量管理"><a class="header" href="#59---egress流量管理">59 - Egress流量管理</a></h1>
+<h2 id="egress流量架构概述"><a class="header" href="#egress流量架构概述">Egress流量架构概述</a></h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Kubernetes Egress流量管理架构                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │                        Kubernetes Cluster                            │    │
+│  │  ┌────────────────────────────────────────────────────────────────┐ │    │
+│  │  │                     Application Namespace                       │ │    │
+│  │  │  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐    │ │    │
+│  │  │  │  Pod A   │   │  Pod B   │   │  Pod C   │   │  Pod D   │    │ │    │
+│  │  │  │ (web)    │   │ (api)    │   │ (worker) │   │ (batch)  │    │ │    │
+│  │  │  └────┬─────┘   └────┬─────┘   └────┬─────┘   └────┬─────┘    │ │    │
+│  │  │       │              │              │              │          │ │    │
+│  │  │       └──────────────┴──────────────┴──────────────┘          │ │    │
+│  │  │                              │                                 │ │    │
+│  │  │                   ┌──────────▼──────────┐                     │ │    │
+│  │  │                   │   NetworkPolicy     │                     │ │    │
+│  │  │                   │   (L3/L4控制)       │                     │ │    │
+│  │  │                   └──────────┬──────────┘                     │ │    │
+│  │  └──────────────────────────────┼────────────────────────────────┘ │    │
+│  │                                 │                                   │    │
+│  │  ┌──────────────────────────────┼────────────────────────────────┐ │    │
+│  │  │              Service Mesh Layer (Optional)                     │ │    │
+│  │  │  ┌───────────────────────────▼───────────────────────────┐   │ │    │
+│  │  │  │              Egress Gateway (Istio/Cilium)             │   │ │    │
+│  │  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │ │    │
+│  │  │  │  │ TLS终止/发起│  │  L7路由     │  │  访问控制   │    │   │ │    │
+│  │  │  │  └─────────────┘  └─────────────┘  └─────────────┘    │   │ │    │
+│  │  │  └───────────────────────────┬───────────────────────────┘   │ │    │
+│  │  └──────────────────────────────┼────────────────────────────────┘ │    │
+│  │                                 │                                   │    │
+│  │  ┌──────────────────────────────┼────────────────────────────────┐ │    │
+│  │  │                    CNI Layer                                   │ │    │
+│  │  │  ┌──────────────┐  ┌────────▼───────┐  ┌──────────────┐      │ │    │
+│  │  │  │ Calico/Cilium│  │  Egress IP     │  │  SNAT/NAT    │      │ │    │
+│  │  │  │    Policy    │  │   Allocation   │  │   Gateway    │      │ │    │
+│  │  │  └──────────────┘  └────────┬───────┘  └──────────────┘      │ │    │
+│  │  └──────────────────────────────┼────────────────────────────────┘ │    │
+│  └─────────────────────────────────┼─────────────────────────────────┘ │    │
+│                                    │                                    │    │
+│  ┌─────────────────────────────────▼─────────────────────────────────┐ │    │
+│  │                      Cloud NAT/Gateway Layer                       │ │    │
+│  │  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐         │ │    │
+│  │  │  NAT Gateway  │  │  Internet GW  │  │  VPN Gateway  │         │ │    │
+│  │  │  (固定IP出口) │  │  (直接出口)   │  │ (私有链路)    │         │ │    │
+│  │  └───────┬───────┘  └───────┬───────┘  └───────┬───────┘         │ │    │
+│  └──────────┼──────────────────┼──────────────────┼──────────────────┘ │    │
+└─────────────┼──────────────────┼──────────────────┼──────────────────────┘    │
+              │                  │                  │                            
+              ▼                  ▼                  ▼                            
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          External Services                                   │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐            │
+│  │ Public API │  │ SaaS服务   │  │ 合作伙伴API │  │ 数据中心   │            │
+│  │ (Google,   │  │ (Stripe,   │  │ (B2B集成)  │  │ (私有云)   │            │
+│  │  AWS, etc) │  │  Twilio)   │  │            │  │            │            │
+│  └────────────┘  └────────────┘  └────────────┘  └────────────┘            │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="egress流量控制方案对比"><a class="header" href="#egress流量控制方案对比">Egress流量控制方案对比</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方案</th><th>功能</th><th>复杂度</th><th>性能影响</th><th>适用场景</th><th>控制粒度</th><th>监控能力</th></tr>
+</thead>
+<tbody>
+<tr><td>NetworkPolicy</td><td>基础出站控制</td><td>低</td><td>极低</td><td>L3/L4限制</td><td>IP/端口级</td><td>基础</td></tr>
+<tr><td>Egress Gateway</td><td>统一出口IP</td><td>中</td><td>低</td><td>IP白名单场景</td><td>IP级</td><td>中等</td></tr>
+<tr><td>NAT Gateway</td><td>云原生NAT</td><td>低</td><td>低</td><td>云环境</td><td>VPC级</td><td>云监控</td></tr>
+<tr><td>Service Mesh</td><td>L7控制</td><td>高</td><td>中等</td><td>精细控制</td><td>URL/Header级</td><td>全面</td></tr>
+<tr><td>Cilium</td><td>eBPF增强控制</td><td>中</td><td>极低</td><td>高性能场景</td><td>L3-L7全栈</td><td>深度</td></tr>
+<tr><td>Calico</td><td>企业级策略</td><td>中</td><td>低</td><td>混合云</td><td>L3/L4级</td><td>中等</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="egress流量控制层次"><a class="header" href="#egress流量控制层次">Egress流量控制层次</a></h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────┐
+│                        Egress流量控制层次                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  Layer 7 (应用层)                                                        │
+│  ┌────────────────────────────────────────────────────────────────────┐ │
+│  │  • URL路径过滤 (/api/v1/*, /public/*)                              │ │
+│  │  • HTTP方法控制 (GET, POST, PUT, DELETE)                           │ │
+│  │  • Header检查 (Authorization, Content-Type)                         │ │
+│  │  • 请求体检测 (敏感数据过滤)                                        │ │
+│  │  • TLS版本控制 (TLS 1.2+)                                           │ │
+│  │  工具: Istio, Envoy, Kong, nginx                                    │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Layer 4 (传输层)                                                        │
+│  ┌────────────────────────────────────────────────────────────────────┐ │
+│  │  • 端口控制 (80, 443, 3306, 5432)                                  │ │
+│  │  • 协议限制 (TCP, UDP)                                              │ │
+│  │  • 连接数限制                                                       │ │
+│  │  • 带宽控制                                                         │ │
+│  │  工具: NetworkPolicy, iptables, nftables                            │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Layer 3 (网络层)                                                        │
+│  ┌────────────────────────────────────────────────────────────────────┐ │
+│  │  • IP地址/CIDR控制                                                  │ │
+│  │  • 命名空间隔离                                                     │ │
+│  │  • Pod选择器                                                        │ │
+│  │  • 出口IP分配                                                       │ │
+│  │  工具: NetworkPolicy, Calico, Cilium                                │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+│  Infrastructure (基础设施层)                                             │
+│  ┌────────────────────────────────────────────────────────────────────┐ │
+│  │  • NAT Gateway配置                                                  │ │
+│  │  • VPC路由表                                                        │ │
+│  │  • 安全组/防火墙规则                                                │ │
+│  │  • VPN/专线连接                                                     │ │
+│  │  工具: 云提供商控制台, Terraform                                    │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="networkpolicy-egress规则"><a class="header" href="#networkpolicy-egress规则">NetworkPolicy Egress规则</a></h2>
+<h3 id="基础egress策略"><a class="header" href="#基础egress策略">基础Egress策略</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-control
+  namespace: production
+  labels:
+    policy-type: egress
+    environment: production
+  annotations:
+    description: "生产环境出站流量控制策略"
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Egress
+  egress:
+  # 允许访问内部数据库服务
+  - to:
+    - podSelector:
+        matchLabels:
+          app: database
+          tier: backend
+    ports:
+    - protocol: TCP
+      port: 5432
+  
+  # 允许访问Redis缓存
+  - to:
+    - podSelector:
+        matchLabels:
+          app: redis
+    ports:
+    - protocol: TCP
+      port: 6379
+  
+  # 允许访问DNS (kube-dns/CoreDNS)
+  - to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  
+  # 允许访问特定外部API
+  - to:
+    - ipBlock:
+        cidr: 203.0.113.0/24
+        except:
+        - 203.0.113.128/25  # 排除特定子网
+    ports:
+    - protocol: TCP
+      port: 443
+</code></pre>
+<h3 id="命名空间级别egress策略"><a class="header" href="#命名空间级别egress策略">命名空间级别Egress策略</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: namespace-egress-policy
+  namespace: frontend
+spec:
+  podSelector: {}  # 选择命名空间内所有Pod
+  policyTypes:
+  - Egress
+  egress:
+  # 允许访问backend命名空间
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: backend
+    ports:
+    - protocol: TCP
+      port: 8080
+  
+  # 允许访问monitoring命名空间
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 9090  # Prometheus
+    - protocol: TCP
+      port: 3000  # Grafana
+  
+  # 允许DNS
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+</code></pre>
+<h3 id="默认拒绝所有出站"><a class="header" href="#默认拒绝所有出站">默认拒绝所有出站</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-egress
+  namespace: production
+  annotations:
+    description: "默认拒绝所有出站流量，需要显式允许"
+spec:
+  podSelector: {}  # 选择所有Pod
+  policyTypes:
+  - Egress
+  # 空的egress数组意味着拒绝所有出站
+  egress: []
+---
+# 配套的允许策略 - 允许DNS
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+</code></pre>
+<h3 id="外部服务cidr访问控制"><a class="header" href="#外部服务cidr访问控制">外部服务CIDR访问控制</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: external-services-egress
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      role: api-consumer
+  policyTypes:
+  - Egress
+  egress:
+  # AWS服务IP范围 (需要定期更新)
+  - to:
+    - ipBlock:
+        cidr: 52.94.0.0/20      # AWS S3
+    - ipBlock:
+        cidr: 54.239.0.0/17     # AWS DynamoDB
+    ports:
+    - protocol: TCP
+      port: 443
+  
+  # Google Cloud服务
+  - to:
+    - ipBlock:
+        cidr: 142.250.0.0/15    # Google APIs
+    ports:
+    - protocol: TCP
+      port: 443
+  
+  # 支付网关
+  - to:
+    - ipBlock:
+        cidr: 91.218.229.0/24   # Stripe
+    ports:
+    - protocol: TCP
+      port: 443
+  
+  # DNS服务
+  - to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+</code></pre>
+<hr>
+<h2 id="cilium-egress-gateway"><a class="header" href="#cilium-egress-gateway">Cilium Egress Gateway</a></h2>
+<h3 id="cilium-helm配置启用egress-gateway"><a class="header" href="#cilium-helm配置启用egress-gateway">Cilium Helm配置启用Egress Gateway</a></h3>
+<pre><code class="language-yaml"># cilium-values.yaml
+# Helm安装: helm upgrade --install cilium cilium/cilium -f cilium-values.yaml -n kube-system
+kubeProxyReplacement: strict
+k8sServiceHost: "API_SERVER_IP"
+k8sServicePort: "6443"
+
+# 启用Egress Gateway功能
+egressGateway:
+  enabled: true
+  installRoutes: true
+
+# 启用BPF masquerading
+bpf:
+  masquerade: true
+  hostRouting: true
+
+# 启用策略审计
+policyAuditMode: false
+
+# IP池管理
+ipam:
+  mode: kubernetes
+  operator:
+    clusterPoolIPv4PodCIDRList:
+    - "10.244.0.0/16"
+
+# 监控集成
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+  metrics:
+    enabled:
+    - dns
+    - drop
+    - tcp
+    - flow
+    - icmp
+    - http
+
+# 节点初始化
+nodeinit:
+  enabled: true
+  bootstrapFile: "/tmp/cilium-bootstrap-time"
+</code></pre>
+<h3 id="ciliumegressgatewaypolicy配置"><a class="header" href="#ciliumegressgatewaypolicy配置">CiliumEgressGatewayPolicy配置</a></h3>
+<pre><code class="language-yaml"># Cilium Egress Gateway策略
+apiVersion: cilium.io/v2
+kind: CiliumEgressGatewayPolicy
+metadata:
+  name: egress-external-api
+  labels:
+    policy-group: external-access
+spec:
+  # 源选择器 - 指定哪些Pod使用此Egress Gateway
+  selectors:
+  - podSelector:
+      matchLabels:
+        io.kubernetes.pod.namespace: production
+        app: api-client
+        egress-gateway: external
+  
+  # 目标CIDR - 指定通过Egress Gateway的目标
+  destinationCIDRs:
+  - "203.0.113.0/24"    # 外部API服务器
+  - "198.51.100.0/24"   # 合作伙伴网络
+  
+  # 排除的目标 - 不通过Gateway的流量
+  excludedCIDRs:
+  - "10.0.0.0/8"        # 内部网络
+  - "172.16.0.0/12"     # Docker网络
+  - "192.168.0.0/16"    # 私有网络
+  
+  # Egress Gateway配置
+  egressGateway:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/egress-gateway: "true"
+        topology.kubernetes.io/zone: "zone-a"
+    # 固定出口IP
+    egressIP: 10.0.100.50
+    
+---
+# 高可用Egress Gateway配置
+apiVersion: cilium.io/v2
+kind: CiliumEgressGatewayPolicy
+metadata:
+  name: egress-ha-policy
+spec:
+  selectors:
+  - podSelector:
+      matchLabels:
+        io.kubernetes.pod.namespace: critical-services
+        tier: backend
+  
+  destinationCIDRs:
+  - "0.0.0.0/0"  # 所有外部流量
+  
+  excludedCIDRs:
+  - "10.0.0.0/8"
+  - "172.16.0.0/12"
+  - "192.168.0.0/16"
+  - "100.64.0.0/10"  # CGNAT
+  
+  egressGateway:
+    nodeSelector:
+      matchLabels:
+        egress-gateway: "ha-pool"
+    # 使用IP池实现高可用
+    # 当主节点故障时自动切换到备用节点
+</code></pre>
+<h3 id="cilium节点标签配置"><a class="header" href="#cilium节点标签配置">Cilium节点标签配置</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# configure-egress-nodes.sh
+# 配置Egress Gateway节点
+
+# 标记Egress Gateway节点
+kubectl label node egress-node-1 \
+  node-role.kubernetes.io/egress-gateway=true \
+  egress-gateway=ha-pool \
+  topology.kubernetes.io/zone=zone-a
+
+kubectl label node egress-node-2 \
+  node-role.kubernetes.io/egress-gateway=true \
+  egress-gateway=ha-pool \
+  topology.kubernetes.io/zone=zone-b
+
+# 验证节点标签
+kubectl get nodes -l egress-gateway=ha-pool -o wide
+
+# 查看Egress Gateway状态
+cilium egress list
+
+# 查看BPF egress映射
+cilium bpf egress list
+
+# 查看策略状态
+cilium policy get --all
+</code></pre>
+<h3 id="cilium-l7-egress策略"><a class="header" href="#cilium-l7-egress策略">Cilium L7 Egress策略</a></h3>
+<pre><code class="language-yaml"># Cilium L7 Egress网络策略
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: l7-egress-policy
+  namespace: production
+spec:
+  endpointSelector:
+    matchLabels:
+      app: api-client
+  egress:
+  # L3/L4规则 + L7 HTTP规则
+  - toEndpoints:
+    - matchLabels:
+        app: backend-api
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      rules:
+        http:
+        - method: "GET"
+          path: "/api/v1/.*"
+        - method: "POST"
+          path: "/api/v1/orders"
+          headers:
+          - 'Content-Type: application/json'
+  
+  # 允许访问外部FQDN
+  - toFQDNs:
+    - matchName: "api.stripe.com"
+    - matchPattern: "*.googleapis.com"
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      rules:
+        http:
+        - method: "POST"
+          path: "/v1/charges"
+  
+  # DNS出站规则
+  - toEndpoints:
+    - matchLabels:
+        k8s:io.kubernetes.pod.namespace: kube-system
+        k8s-app: kube-dns
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
+      rules:
+        dns:
+        - matchName: "api.stripe.com"
+        - matchPattern: "*.googleapis.com"
+        - matchPattern: "*.cluster.local"
+</code></pre>
+<hr>
+<h2 id="istio-egress-gateway"><a class="header" href="#istio-egress-gateway">Istio Egress Gateway</a></h2>
+<h3 id="istio-egress-gateway部署"><a class="header" href="#istio-egress-gateway部署">Istio Egress Gateway部署</a></h3>
+<pre><code class="language-yaml"># Istio Egress Gateway IstioOperator配置
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-egress
+  namespace: istio-system
+spec:
+  profile: default
+  
+  components:
+    # Egress Gateway组件配置
+    egressGateways:
+    - name: istio-egressgateway
+      enabled: true
+      k8s:
+        # 副本数和高可用
+        replicaCount: 2
+        
+        # 资源配置
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 2000m
+            memory: 1024Mi
+        
+        # HPA配置
+        hpaSpec:
+          minReplicas: 2
+          maxReplicas: 5
+          metrics:
+          - type: Resource
+            resource:
+              name: cpu
+              targetAverageUtilization: 80
+        
+        # 节点亲和性
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/egress
+                  operator: In
+                  values:
+                  - "true"
+          # Pod反亲和性确保高可用
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    istio: egressgateway
+                topologyKey: kubernetes.io/hostname
+        
+        # Service配置
+        service:
+          ports:
+          - port: 80
+            name: http
+          - port: 443
+            name: https
+          - port: 15443
+            name: tls
+        
+        # Pod注解
+        podAnnotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "15020"
+  
+  # 全局Mesh配置
+  meshConfig:
+    # 默认出站流量策略
+    outboundTrafficPolicy:
+      mode: REGISTRY_ONLY  # 只允许注册的外部服务
+    
+    # 访问日志
+    accessLogFile: /dev/stdout
+    accessLogFormat: |
+      [%START_TIME%] "%REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% %PROTOCOL%"
+      %RESPONSE_CODE% %RESPONSE_FLAGS% %BYTES_RECEIVED% %BYTES_SENT%
+      %DURATION% "%REQ(X-FORWARDED-FOR)%" "%REQ(USER-AGENT)%"
+      "%REQ(X-REQUEST-ID)%" "%REQ(:AUTHORITY)%" "%UPSTREAM_HOST%"
+</code></pre>
+<h3 id="gateway资源配置"><a class="header" href="#gateway资源配置">Gateway资源配置</a></h3>
+<pre><code class="language-yaml"># Egress Gateway资源定义
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: egress-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  # HTTPS/TLS透传
+  - port:
+      number: 443
+      name: tls
+      protocol: TLS
+    hosts:
+    - api.external.com
+    - "*.googleapis.com"
+    - api.stripe.com
+    tls:
+      mode: PASSTHROUGH
+  
+  # HTTPS终止 (用于需要修改请求的场景)
+  - port:
+      number: 8443
+      name: https-terminate
+      protocol: HTTPS
+    hosts:
+    - internal-proxy.external.com
+    tls:
+      mode: SIMPLE
+      credentialName: egress-tls-cert
+  
+  # HTTP出口
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*.example.com"
+</code></pre>
+<h3 id="virtualservice和serviceentry配置"><a class="header" href="#virtualservice和serviceentry配置">VirtualService和ServiceEntry配置</a></h3>
+<pre><code class="language-yaml"># ServiceEntry - 定义外部服务
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: external-api
+  namespace: istio-system
+spec:
+  hosts:
+  - api.external.com
+  ports:
+  - number: 443
+    name: https
+    protocol: TLS
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+# VirtualService - 路由到Egress Gateway
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: external-api-routing
+  namespace: istio-system
+spec:
+  hosts:
+  - api.external.com
+  gateways:
+  - mesh            # 来自mesh内部的流量
+  - egress-gateway  # 来自egress gateway的流量
+  
+  tls:
+  # 从mesh内部到egress gateway
+  - match:
+    - gateways:
+      - mesh
+      port: 443
+      sniHosts:
+      - api.external.com
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        port:
+          number: 443
+      weight: 100
+  
+  # 从egress gateway到外部服务
+  - match:
+    - gateways:
+      - egress-gateway
+      port: 443
+      sniHosts:
+      - api.external.com
+    route:
+    - destination:
+        host: api.external.com
+        port:
+          number: 443
+      weight: 100
+---
+# DestinationRule - 配置TLS设置
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: external-api-dr
+  namespace: istio-system
+spec:
+  host: api.external.com
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      sni: api.external.com
+    connectionPool:
+      tcp:
+        maxConnections: 100
+        connectTimeout: 30s
+      http:
+        h2UpgradePolicy: UPGRADE
+        http1MaxPendingRequests: 1024
+        http2MaxRequests: 1024
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 30s
+      baseEjectionTime: 60s
+      maxEjectionPercent: 100
+</code></pre>
+<h3 id="多外部服务完整配置"><a class="header" href="#多外部服务完整配置">多外部服务完整配置</a></h3>
+<pre><code class="language-yaml"># 批量ServiceEntry配置
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: google-apis
+  namespace: istio-system
+spec:
+  hosts:
+  - "*.googleapis.com"
+  - "accounts.google.com"
+  - "oauth2.googleapis.com"
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+  - number: 80
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: payment-services
+  namespace: istio-system
+spec:
+  hosts:
+  - "api.stripe.com"
+  - "*.paypal.com"
+  - "api.braintreegateway.com"
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: monitoring-services
+  namespace: istio-system
+spec:
+  hosts:
+  - "*.datadoghq.com"
+  - "*.newrelic.com"
+  - "*.pagerduty.com"
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+# 统一VirtualService
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: all-external-services
+  namespace: istio-system
+spec:
+  hosts:
+  - "*.googleapis.com"
+  - "api.stripe.com"
+  - "*.datadoghq.com"
+  gateways:
+  - mesh
+  - egress-gateway
+  tls:
+  - match:
+    - gateways:
+      - mesh
+      port: 443
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        port:
+          number: 443
+</code></pre>
+<h3 id="istio-authorizationpolicy控制"><a class="header" href="#istio-authorizationpolicy控制">Istio AuthorizationPolicy控制</a></h3>
+<pre><code class="language-yaml"># 基于源的Egress授权
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: egress-authz
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: egressgateway
+  action: ALLOW
+  rules:
+  # 允许production命名空间访问外部API
+  - from:
+    - source:
+        namespaces:
+        - production
+        principals:
+        - cluster.local/ns/production/sa/api-service
+    to:
+    - operation:
+        hosts:
+        - "api.stripe.com"
+        - "*.googleapis.com"
+        ports:
+        - "443"
+  
+  # 允许monitoring命名空间访问监控服务
+  - from:
+    - source:
+        namespaces:
+        - monitoring
+    to:
+    - operation:
+        hosts:
+        - "*.datadoghq.com"
+        - "*.newrelic.com"
+        ports:
+        - "443"
+---
+# 拒绝未授权访问
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-unauthorized-egress
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: egressgateway
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notNamespaces:
+        - production
+        - staging
+        - monitoring
+    to:
+    - operation:
+        notHosts:
+        - "*.cluster.local"
+</code></pre>
+<hr>
+<h2 id="云提供商egress配置"><a class="header" href="#云提供商egress配置">云提供商Egress配置</a></h2>
+<h3 id="aws-eks-nat-gateway"><a class="header" href="#aws-eks-nat-gateway">AWS EKS NAT Gateway</a></h3>
+<pre><code class="language-yaml"># Terraform配置 AWS NAT Gateway
+# nat-gateway.tf
+
+resource "aws_nat_gateway" "egress" {
+  count         = length(var.availability_zones)
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id
+
+  tags = {
+    Name        = "eks-egress-nat-${count.index}"
+    Environment = var.environment
+    ManagedBy   = "terraform"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+resource "aws_eip" "nat" {
+  count  = length(var.availability_zones)
+  domain = "vpc"
+
+  tags = {
+    Name = "eks-egress-eip-${count.index}"
+  }
+}
+
+# 路由表配置
+resource "aws_route_table" "private" {
+  count  = length(var.availability_zones)
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.egress[count.index].id
+  }
+
+  tags = {
+    Name = "eks-private-rt-${count.index}"
+  }
+}
+
+# 输出NAT Gateway公网IP
+output "nat_gateway_ips" {
+  value = aws_eip.nat[*].public_ip
+}
+</code></pre>
+<pre><code class="language-yaml"># EKS Pod Egress IP注解 (使用AWS VPC CNI)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: egress-enabled-pod
+  annotations:
+    # 使用自定义网络配置
+    k8s.amazonaws.com/pod-networking-config: |
+      {
+        "securityGroups": ["sg-12345678"],
+        "subnetIds": ["subnet-private-1", "subnet-private-2"]
+      }
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+---
+# 使用Security Group for Pods实现精细控制
+apiVersion: vpcresources.k8s.aws/v1beta1
+kind: SecurityGroupPolicy
+metadata:
+  name: egress-sg-policy
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      egress-tier: external
+  securityGroups:
+    groupIds:
+    - sg-egress-allowed  # 允许出站的安全组
+</code></pre>
+<h3 id="azure-aks-nat-gateway"><a class="header" href="#azure-aks-nat-gateway">Azure AKS NAT Gateway</a></h3>
+<pre><code class="language-yaml"># Terraform配置 Azure NAT Gateway
+# aks-nat-gateway.tf
+
+resource "azurerm_public_ip" "nat" {
+  name                = "aks-egress-nat-ip"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  zones               = ["1", "2", "3"]
+}
+
+resource "azurerm_nat_gateway" "main" {
+  name                    = "aks-egress-nat"
+  location                = azurerm_resource_group.main.location
+  resource_group_name     = azurerm_resource_group.main.name
+  sku_name                = "Standard"
+  idle_timeout_in_minutes = 10
+  zones                   = ["1"]
+}
+
+resource "azurerm_nat_gateway_public_ip_association" "main" {
+  nat_gateway_id       = azurerm_nat_gateway.main.id
+  public_ip_address_id = azurerm_public_ip.nat.id
+}
+
+resource "azurerm_subnet_nat_gateway_association" "main" {
+  subnet_id      = azurerm_subnet.aks_nodes.id
+  nat_gateway_id = azurerm_nat_gateway.main.id
+}
+
+# AKS集群配置
+resource "azurerm_kubernetes_cluster" "main" {
+  name                = "aks-cluster"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  dns_prefix          = "aks"
+
+  default_node_pool {
+    name           = "default"
+    node_count     = 3
+    vm_size        = "Standard_D2s_v3"
+    vnet_subnet_id = azurerm_subnet.aks_nodes.id
+  }
+
+  network_profile {
+    network_plugin     = "azure"
+    network_policy     = "calico"
+    outbound_type      = "userAssignedNATGateway"
+    service_cidr       = "10.0.0.0/16"
+    dns_service_ip     = "10.0.0.10"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+</code></pre>
+<h3 id="gcp-gke-cloud-nat"><a class="header" href="#gcp-gke-cloud-nat">GCP GKE Cloud NAT</a></h3>
+<pre><code class="language-yaml"># Terraform配置 GCP Cloud NAT
+# gke-cloud-nat.tf
+
+resource "google_compute_router" "router" {
+  name    = "gke-egress-router"
+  region  = var.region
+  network = google_compute_network.vpc.name
+}
+
+resource "google_compute_router_nat" "nat" {
+  name                               = "gke-egress-nat"
+  router                             = google_compute_router.router.name
+  region                             = google_compute_router.router.region
+  nat_ip_allocate_option             = "MANUAL_ONLY"
+  nat_ips                            = google_compute_address.nat[*].self_link
+  source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+
+  subnetwork {
+    name                    = google_compute_subnetwork.gke_nodes.name
+    source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
+  }
+
+  log_config {
+    enable = true
+    filter = "ERRORS_ONLY"
+  }
+
+  # TCP连接配置
+  tcp_established_idle_timeout_sec = 1200
+  tcp_transitory_idle_timeout_sec  = 30
+  
+  # UDP配置
+  udp_idle_timeout_sec = 30
+  
+  # ICMP配置
+  icmp_idle_timeout_sec = 30
+
+  # 端口分配
+  min_ports_per_vm                    = 64
+  max_ports_per_vm                    = 65536
+  enable_endpoint_independent_mapping = true
+}
+
+resource "google_compute_address" "nat" {
+  count  = 2
+  name   = "gke-egress-nat-ip-${count.index}"
+  region = var.region
+}
+
+# GKE集群配置
+resource "google_container_cluster" "primary" {
+  name     = "gke-cluster"
+  location = var.region
+
+  # 私有集群配置
+  private_cluster_config {
+    enable_private_nodes    = true
+    enable_private_endpoint = false
+    master_ipv4_cidr_block  = "172.16.0.0/28"
+  }
+
+  # 网络配置
+  network    = google_compute_network.vpc.name
+  subnetwork = google_compute_subnetwork.gke_nodes.name
+
+  ip_allocation_policy {
+    cluster_secondary_range_name  = "pods"
+    services_secondary_range_name = "services"
+  }
+
+  # 网络策略
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
+  }
+}
+</code></pre>
+<h3 id="阿里云ack-nat-gateway"><a class="header" href="#阿里云ack-nat-gateway">阿里云ACK NAT Gateway</a></h3>
+<pre><code class="language-yaml"># Terraform配置 阿里云 NAT Gateway
+# ack-nat-gateway.tf
+
+resource "alicloud_nat_gateway" "egress" {
+  vpc_id               = alicloud_vpc.main.id
+  nat_gateway_name     = "ack-egress-nat"
+  payment_type         = "PayAsYouGo"
+  vswitch_id           = alicloud_vswitch.public.id
+  nat_type             = "Enhanced"
+  network_type         = "internet"
+}
+
+resource "alicloud_eip_address" "nat" {
+  count                = 2
+  address_name         = "ack-egress-eip-${count.index}"
+  bandwidth            = "200"
+  internet_charge_type = "PayByTraffic"
+}
+
+resource "alicloud_eip_association" "nat" {
+  count         = 2
+  allocation_id = alicloud_eip_address.nat[count.index].id
+  instance_id   = alicloud_nat_gateway.egress.id
+  instance_type = "Nat"
+}
+
+resource "alicloud_snat_entry" "main" {
+  snat_table_id     = alicloud_nat_gateway.egress.snat_table_ids
+  source_vswitch_id = alicloud_vswitch.private.id
+  snat_ip           = join(",", alicloud_eip_address.nat[*].ip_address)
+}
+
+# ACK集群配置
+resource "alicloud_cs_managed_kubernetes" "cluster" {
+  name                 = "ack-cluster"
+  cluster_spec         = "ack.pro.small"
+  worker_vswitch_ids   = [alicloud_vswitch.private.id]
+  pod_vswitch_ids      = [alicloud_vswitch.pod.id]
+  new_nat_gateway      = false
+  service_cidr         = "172.21.0.0/20"
+  
+  addons {
+    name = "terway-eniip"
+  }
+}
+</code></pre>
+<pre><code class="language-yaml"># ACK Pod EIP注解配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-eip
+  annotations:
+    # 自动分配EIP
+    k8s.aliyun.com/pod-eip: "true"
+    k8s.aliyun.com/eip-bandwidth: "10"
+    k8s.aliyun.com/eip-common-bandwidth-package-id: "cbwp-xxx"
+    k8s.aliyun.com/eip-internet-charge-type: "PayByTraffic"
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+---
+# 使用NAT网关的Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-nat
+  annotations:
+    k8s.aliyun.com/pod-eip: "true"
+    k8s.aliyun.com/eip-bindingtype: "NAT"
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+</code></pre>
+<hr>
+<h2 id="calico-egress配置"><a class="header" href="#calico-egress配置">Calico Egress配置</a></h2>
+<h3 id="calico-bgp-egress-ip"><a class="header" href="#calico-bgp-egress-ip">Calico BGP Egress IP</a></h3>
+<pre><code class="language-yaml"># Calico BGP配置
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  # 日志级别
+  logSeverityScreen: Info
+  
+  # 节点间mesh
+  nodeToNodeMeshEnabled: true
+  
+  # AS号
+  asNumber: 64512
+  
+  # Service IP范围
+  serviceClusterIPs:
+  - cidr: 10.96.0.0/12
+  
+  # 外部IP范围
+  serviceExternalIPs:
+  - cidr: 203.0.113.0/24
+  
+  # Service LoadBalancer IP范围
+  serviceLoadBalancerIPs:
+  - cidr: 198.51.100.0/24
+---
+# BGP Peer配置
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: my-global-peer
+spec:
+  peerIP: 192.168.1.1
+  asNumber: 64513
+  keepOriginalNextHop: true
+</code></pre>
+<h3 id="calico-egress-gateway"><a class="header" href="#calico-egress-gateway">Calico Egress Gateway</a></h3>
+<pre><code class="language-yaml"># Calico Egress Gateway IPPool
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: egress-ippool
+spec:
+  cidr: 10.10.10.0/24
+  natOutgoing: true
+  nodeSelector: egress-gateway == "true"
+  blockSize: 29
+---
+# Egress Gateway策略
+apiVersion: projectcalico.org/v3
+kind: EgressGateway
+metadata:
+  name: egress-gateway
+  namespace: production
+spec:
+  # 副本数
+  replicas: 2
+  
+  # IP池选择
+  ipPool:
+    cidr: 10.10.10.0/24
+  
+  # 外部网络
+  externalNetworks:
+  - name: external-api
+    cidr: 203.0.113.0/24
+    
+  # 节点选择器
+  egressGatewayNode:
+    nodeSelector:
+      egress-gateway: "true"
+---
+# Egress策略
+apiVersion: projectcalico.org/v3
+kind: EgressPolicy
+metadata:
+  name: egress-to-external
+  namespace: production
+spec:
+  # 源选择
+  selector: app == "api-client"
+  
+  # 目标
+  destination:
+  - cidr: 203.0.113.0/24
+  
+  # 使用的Gateway
+  gateway:
+    name: egress-gateway
+    namespace: production
+</code></pre>
+<h3 id="calico-networkpolicy-egress"><a class="header" href="#calico-networkpolicy-egress">Calico NetworkPolicy Egress</a></h3>
+<pre><code class="language-yaml"># Calico增强NetworkPolicy
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: advanced-egress-policy
+  namespace: production
+spec:
+  selector: app == 'backend'
+  types:
+  - Egress
+  
+  egress:
+  # 允许访问特定域名 (需要DNS策略)
+  - action: Allow
+    protocol: TCP
+    destination:
+      domains:
+      - "api.stripe.com"
+      - "*.googleapis.com"
+      ports:
+      - 443
+  
+  # 允许访问内部服务
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == 'database'
+      ports:
+      - 5432
+  
+  # 允许访问特定CIDR
+  - action: Allow
+    protocol: TCP
+    destination:
+      nets:
+      - 10.0.0.0/8
+      notNets:
+      - 10.100.0.0/16  # 排除敏感网段
+      ports:
+      - 80
+      - 443
+  
+  # DNS出站
+  - action: Allow
+    protocol: UDP
+    destination:
+      selector: k8s-app == 'kube-dns'
+      namespaceSelector: projectcalico.org/name == 'kube-system'
+      ports:
+      - 53
+---
+# 全局网络策略
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: default-deny-egress
+spec:
+  selector: all()
+  types:
+  - Egress
+  egress:
+  # 只允许DNS
+  - action: Allow
+    protocol: UDP
+    destination:
+      selector: k8s-app == 'kube-dns'
+      namespaceSelector: projectcalico.org/name == 'kube-system'
+      ports:
+      - 53
+  # 其他流量默认拒绝
+</code></pre>
+<hr>
+<h2 id="egress监控与告警"><a class="header" href="#egress监控与告警">Egress监控与告警</a></h2>
+<h3 id="prometheus监控规则"><a class="header" href="#prometheus监控规则">Prometheus监控规则</a></h3>
+<pre><code class="language-yaml"># Egress监控PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: egress-monitoring-rules
+  namespace: monitoring
+  labels:
+    prometheus: main
+    role: alert-rules
+spec:
+  groups:
+  - name: egress.rules
+    interval: 30s
+    rules:
+    # 出站流量速率
+    - record: egress:traffic_bytes_rate:5m
+      expr: |
+        sum(rate(istio_tcp_sent_bytes_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[5m])) by (source_workload, source_workload_namespace, destination_service)
+    
+    # 出站请求速率
+    - record: egress:requests_rate:5m
+      expr: |
+        sum(rate(istio_requests_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[5m])) by (source_workload, source_workload_namespace, destination_service, response_code)
+    
+    # 出站延迟P99
+    - record: egress:latency_p99:5m
+      expr: |
+        histogram_quantile(0.99,
+          sum(rate(istio_request_duration_milliseconds_bucket{
+            reporter="source",
+            destination_service_namespace!~"kube-.*|istio-.*"
+          }[5m])) by (le, source_workload, destination_service)
+        )
+    
+    # Cilium出站流量
+    - record: egress:cilium_forward_bytes:5m
+      expr: |
+        sum(rate(cilium_forward_bytes_total{direction="EGRESS"}[5m])) 
+        by (source_pod, destination)
+
+  - name: egress.alerts
+    rules:
+    # 异常高出站流量
+    - alert: EgressTrafficSpike
+      expr: |
+        sum(rate(istio_tcp_sent_bytes_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[5m])) by (source_workload_namespace) 
+        &gt; 
+        sum(rate(istio_tcp_sent_bytes_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[1h] offset 1d)) by (source_workload_namespace) * 3
+      for: 10m
+      labels:
+        severity: warning
+        category: network
+      annotations:
+        summary: "出站流量异常增长"
+        description: "命名空间 {{ $labels.source_workload_namespace }} 出站流量是昨日同期的3倍以上"
+    
+    # 出站连接失败率高
+    - alert: EgressConnectionFailures
+      expr: |
+        sum(rate(istio_tcp_connections_closed_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*",
+          response_flags=~"UF|UO|NR|URX"
+        }[5m])) by (source_workload, destination_service)
+        /
+        sum(rate(istio_tcp_connections_opened_total{
+          reporter="source",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[5m])) by (source_workload, destination_service)
+        &gt; 0.1
+      for: 5m
+      labels:
+        severity: critical
+        category: network
+      annotations:
+        summary: "出站连接失败率高"
+        description: "{{ $labels.source_workload }} 到 {{ $labels.destination_service }} 连接失败率超过10%"
+    
+    # 未授权出站访问尝试
+    - alert: UnauthorizedEgressAttempt
+      expr: |
+        sum(rate(istio_requests_total{
+          reporter="source",
+          response_code="403",
+          destination_service_namespace!~"kube-.*|istio-.*"
+        }[5m])) by (source_workload, destination_service) &gt; 1
+      for: 5m
+      labels:
+        severity: warning
+        category: security
+      annotations:
+        summary: "检测到未授权出站访问尝试"
+        description: "{{ $labels.source_workload }} 尝试访问未授权的外部服务 {{ $labels.destination_service }}"
+    
+    # Egress Gateway不可用
+    - alert: EgressGatewayDown
+      expr: |
+        sum(up{job="istio-egressgateway"}) == 0
+        or
+        absent(up{job="istio-egressgateway"})
+      for: 2m
+      labels:
+        severity: critical
+        category: infrastructure
+      annotations:
+        summary: "Egress Gateway不可用"
+        description: "Istio Egress Gateway实例全部不可用，外部服务访问可能受影响"
+    
+    # 出站延迟异常
+    - alert: EgressLatencyHigh
+      expr: |
+        histogram_quantile(0.99,
+          sum(rate(istio_request_duration_milliseconds_bucket{
+            reporter="source",
+            destination_service_namespace!~"kube-.*|istio-.*"
+          }[5m])) by (le, destination_service)
+        ) &gt; 5000
+      for: 10m
+      labels:
+        severity: warning
+        category: performance
+      annotations:
+        summary: "外部服务访问延迟高"
+        description: "访问 {{ $labels.destination_service }} 的P99延迟超过5秒"
+    
+    # NAT Gateway端口耗尽预警
+    - alert: NATGatewayPortExhaustion
+      expr: |
+        (aws_natgateway_active_connection_count / 55000) &gt; 0.8
+      for: 5m
+      labels:
+        severity: warning
+        category: infrastructure
+      annotations:
+        summary: "NAT Gateway连接数接近上限"
+        description: "NAT Gateway活跃连接数已达到上限的80%，可能影响新的出站连接"
+    
+    # DNS查询失败
+    - alert: EgressDNSFailures
+      expr: |
+        sum(rate(coredns_dns_responses_total{rcode="SERVFAIL"}[5m])) 
+        / 
+        sum(rate(coredns_dns_responses_total[5m])) &gt; 0.01
+      for: 5m
+      labels:
+        severity: warning
+        category: network
+      annotations:
+        summary: "DNS查询失败率升高"
+        description: "DNS SERVFAIL响应比例超过1%，可能影响外部服务访问"
+</code></pre>
+<h3 id="grafana-dashboard配置"><a class="header" href="#grafana-dashboard配置">Grafana Dashboard配置</a></h3>
+<pre><code class="language-json">{
+  "dashboard": {
+    "title": "Egress Traffic Dashboard",
+    "uid": "egress-traffic",
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Egress流量概览",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "sum(rate(istio_tcp_sent_bytes_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m]))",
+            "legendFormat": "Total Egress"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps",
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 100000000, "color": "yellow"},
+                {"value": 500000000, "color": "red"}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "title": "按目标服务的出站流量",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "targets": [
+          {
+            "expr": "sum(rate(istio_tcp_sent_bytes_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m])) by (destination_service)",
+            "legendFormat": "{{ destination_service }}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps",
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 1,
+              "fillOpacity": 30
+            }
+          }
+        }
+      },
+      {
+        "title": "出站请求成功率",
+        "type": "gauge",
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+        "targets": [
+          {
+            "expr": "sum(rate(istio_requests_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\",response_code=~\"2..\"}[5m])) / sum(rate(istio_requests_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m])) * 100",
+            "legendFormat": "Success Rate"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 95, "color": "yellow"},
+                {"value": 99, "color": "green"}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "title": "按命名空间的出站流量分布",
+        "type": "piechart",
+        "gridPos": {"h": 8, "w": 6, "x": 12, "y": 4},
+        "targets": [
+          {
+            "expr": "sum(rate(istio_tcp_sent_bytes_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m])) by (source_workload_namespace)",
+            "legendFormat": "{{ source_workload_namespace }}"
+          }
+        ]
+      },
+      {
+        "title": "出站延迟分布",
+        "type": "heatmap",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+        "targets": [
+          {
+            "expr": "sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m])) by (le)",
+            "legendFormat": "{{ le }}"
+          }
+        ]
+      },
+      {
+        "title": "Top 10 出站目标",
+        "type": "table",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+        "targets": [
+          {
+            "expr": "topk(10, sum(rate(istio_requests_total{reporter=\"source\",destination_service_namespace!~\"kube-.*|istio-.*\"}[5m])) by (destination_service))",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "renameByName": {
+                "destination_service": "目标服务",
+                "Value": "请求率 (req/s)"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+</code></pre>
+<h3 id="日志收集配置"><a class="header" href="#日志收集配置">日志收集配置</a></h3>
+<pre><code class="language-yaml"># Fluentd配置 - Egress日志收集
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-egress-config
+  namespace: logging
+data:
+  fluent.conf: |
+    &lt;source&gt;
+      @type tail
+      path /var/log/containers/istio-egressgateway*.log
+      pos_file /var/log/fluentd-egress.pos
+      tag egress.istio
+      &lt;parse&gt;
+        @type json
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+      &lt;/parse&gt;
+    &lt;/source&gt;
+    
+    &lt;filter egress.**&gt;
+      @type record_transformer
+      enable_ruby
+      &lt;record&gt;
+        cluster_name "#{ENV['CLUSTER_NAME']}"
+        egress_type "istio"
+        parsed_log ${record["log"].to_s.include?("upstream_cluster") ? JSON.parse(record["log"]) : {}}
+      &lt;/record&gt;
+    &lt;/filter&gt;
+    
+    &lt;filter egress.**&gt;
+      @type grep
+      &lt;regexp&gt;
+        key log
+        pattern /upstream_cluster|response_code|destination/
+      &lt;/regexp&gt;
+    &lt;/filter&gt;
+    
+    &lt;match egress.**&gt;
+      @type elasticsearch
+      host elasticsearch.logging.svc
+      port 9200
+      index_name egress-logs
+      type_name _doc
+      logstash_format true
+      logstash_prefix egress
+      &lt;buffer&gt;
+        @type file
+        path /var/log/fluentd-egress-buffer
+        flush_interval 5s
+        retry_max_interval 30
+        retry_forever true
+      &lt;/buffer&gt;
+    &lt;/match&gt;
+</code></pre>
+<hr>
+<h2 id="egress故障排查"><a class="header" href="#egress故障排查">Egress故障排查</a></h2>
+<h3 id="排查脚本"><a class="header" href="#排查脚本">排查脚本</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# egress-troubleshoot.sh
+# Egress流量故障排查脚本
+
+set -e
+
+POD_NAME=${1:-""}
+NAMESPACE=${2:-"default"}
+TARGET_HOST=${3:-""}
+
+echo "=========================================="
+echo "Egress流量故障排查"
+echo "=========================================="
+
+# 检查Pod网络配置
+echo -e "\n[1] 检查Pod网络配置"
+if [ -n "$POD_NAME" ]; then
+    kubectl get pod $POD_NAME -n $NAMESPACE -o yaml | grep -A 20 "status:"
+fi
+
+# 检查NetworkPolicy
+echo -e "\n[2] 检查NetworkPolicy规则"
+kubectl get networkpolicy -n $NAMESPACE -o wide
+echo -e "\n--- NetworkPolicy详情 ---"
+kubectl get networkpolicy -n $NAMESPACE -o yaml | grep -A 50 "egress:"
+
+# 检查出站连接
+echo -e "\n[3] 测试出站连接"
+if [ -n "$POD_NAME" ] &amp;&amp; [ -n "$TARGET_HOST" ]; then
+    echo "测试DNS解析..."
+    kubectl exec $POD_NAME -n $NAMESPACE -- nslookup $TARGET_HOST 2&gt;/dev/null || echo "DNS解析失败"
+    
+    echo -e "\n测试TCP连接..."
+    kubectl exec $POD_NAME -n $NAMESPACE -- timeout 10 bash -c "echo | nc -vz $TARGET_HOST 443" 2&gt;&amp;1 || echo "TCP连接失败"
+    
+    echo -e "\n测试HTTPS连接..."
+    kubectl exec $POD_NAME -n $NAMESPACE -- curl -v --connect-timeout 10 https://$TARGET_HOST 2&gt;&amp;1 | head -30
+fi
+
+# 检查Cilium状态
+echo -e "\n[4] 检查Cilium Egress状态"
+if kubectl get crd ciliumegressgatewaypolicies.cilium.io &amp;&gt;/dev/null; then
+    echo "Cilium Egress Gateway策略:"
+    kubectl get ciliumegressgatewaypolicies -A
+    
+    echo -e "\n--- BPF Egress映射 ---"
+    CILIUM_POD=$(kubectl get pods -n kube-system -l k8s-app=cilium -o jsonpath='{.items[0].metadata.name}')
+    kubectl exec -n kube-system $CILIUM_POD -- cilium bpf egress list 2&gt;/dev/null || echo "无法获取BPF映射"
+fi
+
+# 检查Istio Egress Gateway
+echo -e "\n[5] 检查Istio Egress Gateway状态"
+if kubectl get ns istio-system &amp;&gt;/dev/null; then
+    echo "Egress Gateway Pods:"
+    kubectl get pods -n istio-system -l istio=egressgateway
+    
+    echo -e "\n--- ServiceEntry ---"
+    kubectl get serviceentry -A
+    
+    echo -e "\n--- VirtualService (Egress) ---"
+    kubectl get virtualservice -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.gateways[*]}{"\n"}{end}' | grep -i egress
+    
+    if [ -n "$POD_NAME" ]; then
+        echo -e "\n--- Envoy路由配置 ---"
+        istioctl proxy-config routes $POD_NAME -n $NAMESPACE --name "$TARGET_HOST" 2&gt;/dev/null || echo "无匹配路由"
+    fi
+fi
+
+# 检查DNS
+echo -e "\n[6] 检查DNS配置"
+kubectl get configmap coredns -n kube-system -o yaml | grep -A 20 "Corefile"
+
+# 检查NAT Gateway (如果有云提供商CLI)
+echo -e "\n[7] 检查云NAT Gateway状态"
+echo "请使用云提供商CLI检查NAT Gateway状态"
+echo "  AWS: aws ec2 describe-nat-gateways"
+echo "  GCP: gcloud compute routers get-nat-mapping-info"
+echo "  Azure: az network nat gateway show"
+
+# 检查iptables规则
+echo -e "\n[8] 检查节点iptables规则"
+NODE=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.nodeName}' 2&gt;/dev/null)
+if [ -n "$NODE" ]; then
+    echo "Pod运行在节点: $NODE"
+    echo "需要SSH到节点检查: iptables -t nat -L POSTROUTING -v"
+fi
+
+# 网络策略验证
+echo -e "\n[9] 网络策略效果验证"
+if [ -n "$POD_NAME" ]; then
+    echo "Pod标签:"
+    kubectl get pod $POD_NAME -n $NAMESPACE --show-labels
+    
+    echo -e "\n匹配的NetworkPolicy:"
+    POD_LABELS=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.metadata.labels}')
+    kubectl get networkpolicy -n $NAMESPACE -o json | jq --arg labels "$POD_LABELS" '.items[] | select(.spec.podSelector.matchLabels | to_entries | all(. as $e | ($labels | fromjson) | has($e.key) and .[$e.key] == $e.value)) | .metadata.name'
+fi
+
+echo -e "\n=========================================="
+echo "排查完成"
+echo "=========================================="
+</code></pre>
+<h3 id="常用排查命令"><a class="header" href="#常用排查命令">常用排查命令</a></h3>
+<pre><code class="language-bash"># 检查出站连接
+kubectl exec &lt;pod&gt; -- curl -v --connect-timeout 10 https://api.external.com
+
+# 检查DNS解析
+kubectl exec &lt;pod&gt; -- nslookup api.external.com
+kubectl exec &lt;pod&gt; -- dig +short api.external.com
+
+# 检查NetworkPolicy
+kubectl get networkpolicy -n &lt;namespace&gt; -o yaml
+kubectl describe networkpolicy &lt;policy-name&gt; -n &lt;namespace&gt;
+
+# 检查Cilium策略
+cilium policy get --all
+cilium endpoint list
+cilium bpf egress list
+cilium monitor --type policy-verdict
+
+# 检查Istio配置
+istioctl proxy-config routes &lt;pod&gt; -n &lt;namespace&gt;
+istioctl proxy-config clusters &lt;pod&gt; -n &lt;namespace&gt; | grep -i external
+istioctl analyze -n &lt;namespace&gt;
+
+# 检查Egress Gateway日志
+kubectl logs -n istio-system -l istio=egressgateway --tail=100
+
+# 检查Envoy访问日志
+kubectl logs &lt;pod&gt; -c istio-proxy --tail=100 | grep "egress"
+
+# 检查Calico策略
+calicoctl get networkpolicy -n &lt;namespace&gt; -o yaml
+calicoctl get globalnetworkpolicy -o yaml
+
+# 抓包分析
+kubectl debug -it &lt;pod&gt; --image=nicolaka/netshoot -- tcpdump -i any host api.external.com -w /tmp/capture.pcap
+</code></pre>
+<hr>
+<h2 id="最佳实践"><a class="header" href="#最佳实践">最佳实践</a></h2>
+<h3 id="egress安全清单"><a class="header" href="#egress安全清单">Egress安全清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>类别</th><th>检查项</th><th>说明</th><th>优先级</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>默认策略</strong></td><td>默认拒绝出站</td><td>实施default-deny NetworkPolicy</td><td>高</td></tr>
+<tr><td></td><td>显式允许必要流量</td><td>仅允许业务需要的出站连接</td><td>高</td></tr>
+<tr><td><strong>DNS安全</strong></td><td>DNS策略控制</td><td>限制可解析的外部域名</td><td>中</td></tr>
+<tr><td></td><td>DNS流量加密</td><td>使用DoH/DoT</td><td>低</td></tr>
+<tr><td><strong>流量审计</strong></td><td>访问日志</td><td>记录所有出站连接</td><td>高</td></tr>
+<tr><td></td><td>流量监控</td><td>Prometheus metrics</td><td>高</td></tr>
+<tr><td></td><td>异常检测</td><td>告警异常流量模式</td><td>中</td></tr>
+<tr><td><strong>出口IP管理</strong></td><td>固定出口IP</td><td>使用Egress Gateway/NAT</td><td>中</td></tr>
+<tr><td></td><td>IP白名单协调</td><td>与外部服务提供商协调</td><td>中</td></tr>
+<tr><td><strong>加密</strong></td><td>TLS 1.2+</td><td>强制使用现代TLS</td><td>高</td></tr>
+<tr><td></td><td>证书验证</td><td>验证外部服务证书</td><td>高</td></tr>
+<tr><td><strong>访问控制</strong></td><td>命名空间隔离</td><td>按命名空间限制出站</td><td>高</td></tr>
+<tr><td></td><td>服务账户绑定</td><td>按SA限制出站权限</td><td>中</td></tr>
+<tr><td><strong>高可用</strong></td><td>多副本Gateway</td><td>Egress Gateway至少2副本</td><td>高</td></tr>
+<tr><td></td><td>跨AZ部署</td><td>Gateway跨可用区分布</td><td>中</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="配置模板"><a class="header" href="#配置模板">配置模板</a></h3>
+<pre><code class="language-yaml"># 生产环境推荐配置模板
+---
+# 1. 默认拒绝所有出站
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-egress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress: []
+---
+# 2. 允许DNS
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+---
+# 3. 允许内部服务通信
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-internal
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          environment: production
+    ports:
+    - protocol: TCP
+---
+# 4. 允许特定外部服务 (通过Egress Gateway)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-gateway
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      egress-access: external
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: istio-system
+      podSelector:
+        matchLabels:
+          istio: egressgateway
+    ports:
+    - protocol: TCP
+      port: 443
+</code></pre>
+<hr>
+<h2 id="版本变更记录"><a class="header" href="#版本变更记录">版本变更记录</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>版本</th><th>日期</th><th>变更内容</th></tr>
+</thead>
+<tbody>
+<tr><td>v1.0</td><td>2024-01</td><td>初始版本，基础Egress控制</td></tr>
+<tr><td>v2.0</td><td>2024-06</td><td>添加Cilium L7策略支持</td></tr>
+<tr><td>v2.1</td><td>2024-09</td><td>添加云提供商NAT Gateway配置</td></tr>
+<tr><td>v2.2</td><td>2024-12</td><td>增强监控和告警规则</td></tr>
+<tr><td>v3.0</td><td>2025-01</td><td>全面重构，添加架构图和完整配置示例</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/28-coredns-troubleshooting-optimization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/30-service-mesh-deep-dive.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/28-coredns-troubleshooting-optimization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/30-service-mesh-deep-dive.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
