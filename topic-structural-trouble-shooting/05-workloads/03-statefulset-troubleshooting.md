@@ -13,6 +13,19 @@ StatefulSet 是 Kubernetes 中用于管理有状态应用的工作负载控制�
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **Pod 序列**：`kubectl get sts <name> -o wide` 看 `current/update`；`kubectl get pods -l app=<sts>` 查看序号创建是否停滞。
+2. **PVC 绑定**：`kubectl get pvc -l app=<sts>`，Pending 则先排存储类/配额/拓扑。
+3. **Headless DNS**：`kubectl get svc <headless> -o yaml`，确认 `clusterIP: None`，并测试 Pod DNS。
+4. **更新卡住**：`kubectl rollout status sts <name>`，看是否被探针/序列阻塞。
+5. **快速缓解**：
+   - 卡在前序 Pod：先修复 `-0` Pod 的 readiness 或回滚。
+   - 存储问题：修复 CSI/VolumeAttachment，再恢复。
+6. **证据留存**：保存 sts/pod/pvc 描述与相关事件。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 常见问题现象

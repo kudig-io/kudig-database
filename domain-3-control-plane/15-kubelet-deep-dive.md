@@ -509,9 +509,9 @@ mount | grep cgroup
 
 | QoS 类别 | 条件 | cgroup 位置 | 驱逐优先级 |
 |:---|:---|:---|:---|
-| **Guaranteed** | requests = limits (全部资源) | /kubepods/pod<uid> | 最后 |
-| **Burstable** | requests < limits 或部分设置 | /kubepods/burstable/pod<uid> | 中等 |
-| **BestEffort** | 未设置requests和limits | /kubepods/besteffort/pod<uid> | 最先 |
+| **Guaranteed** | requests = limits (全部资源) | `/kubepods/pod<uid>` | 最后 |
+| **Burstable** | requests < limits 或部分设置 | `/kubepods/burstable/pod<uid>` | 中等 |
+| **BestEffort** | 未设置requests和limits | `/kubepods/besteffort/pod<uid>` | 最先 |
 
 ```bash
 # 查看Pod的cgroup

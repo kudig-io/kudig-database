@@ -1,0 +1,35 @@
+[book]
+title = "KUDIG-DATABASE - Kubernetes 生产运维全域知识库"
+authors = ["KUDIG Team"]
+description = "面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库"
+language = "zh-CN"
+src = "src"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/kudig-io/kudig-database"
+site-url = "/kudig-database/"
+additional-css = ["theme/custom.css"]
+additional-js = ["theme/collapse-all.js"]
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.html.print]
+enable = true

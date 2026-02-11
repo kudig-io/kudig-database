@@ -13,6 +13,21 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **确认影响面**：`kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations`，识别是否为系统/业务 Webhook；查看受影响资源类型与命名空间。
+2. **快速复现与事件**：`kubectl apply -f <manifest> --validate=false` 观察输出；`kubectl describe <resource>` 查看准入拒绝/超时事件。
+3. **连通性与证书**：`kubectl get endpoints -n <ns> <svc>`、`kubectl logs -n kube-system kube-apiserver-<node> | grep webhook | head`、`openssl x509 -in <tls.crt> -noout -enddate` 验证到期。
+4. **配置核对**：检查 `failurePolicy` (Fail/Ignore)、`timeoutSeconds`、`namespaceSelector`/`objectSelector`、`matchPolicy`、`sideEffects`，以及是否排除 `kube-system` 防止自阻塞。
+5. **性能与超时**：`kubectl top pod -n <ns> -l app=<webhook>`，必要时提高 Webhook 副本、HPA，或提升 `timeoutSeconds`（默认 10s，建议 ≤ 30s）。
+6. **快速缓解**：
+   - 非关键拦截：临时将 `failurePolicy` 改为 `Ignore`，或收窄 `rules`/`namespaceSelector` 以放行核心流量。
+   - 证书问题：立即轮转 TLS Secret 并更新 CA Bundle；使用 cert-manager 时触发 `renewBefore`。
+   - 循环依赖：为 Webhook 自身资源添加排除标签/命名空间，必要时使用 `reinvocationPolicy=IfNeeded`。
+7. **证据留存**：保存拒绝事件、API Server Webhook 调用日志、Webhook Pod 日志、配置 diff 和 CA/证书到期时间。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 准入控制流程

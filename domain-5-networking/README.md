@@ -1,6 +1,6 @@
 # Domain 5: Networking 网络
 
-> **文档数量**: 36 篇 | **最后更新**: 2026-02 | **状态**: 生产环境就绪
+> **文档数量**: 36 篇 | **最后更新**: 2026-02 | **状态**: 生产环境就绪 (专家级审查完成)
 
 ## 目录结构
 
@@ -46,13 +46,14 @@
 - [29-egress-traffic-management.md](29-egress-traffic-management.md) - 出站流量管理
 
 ### 7. 高级主题 (30-36)
-- [30-service-mesh-deep-dive.md](30-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践
-- [31-multi-cluster-federation.md](31-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信
+- [30-service-mesh-deep-dive.md](30-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践 (Istio Ambient Mesh)
+- [31-multi-cluster-federation.md](31-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信 (Karmada & MCS)
 - [32-multi-cluster-networking.md](32-multi-cluster-networking.md) - 多集群网络
 - [33-network-troubleshooting.md](33-network-troubleshooting.md) - 网络故障排查
 - [34-network-performance-tuning.md](34-network-performance-tuning.md) - 网络性能调优
-- [35-gateway-api-overview.md](35-gateway-api-overview.md) - Gateway API 概览
-- [36-api-gateway-patterns.md](36-api-gateway-patterns.md) - API 网关模式
+- [35-gateway-api-overview.md](35-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
+- [36-api-gateway-patterns.md](36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
+
 
 ## 学习路径建议
 

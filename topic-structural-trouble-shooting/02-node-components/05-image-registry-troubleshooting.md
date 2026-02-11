@@ -7,9 +7,68 @@
 > - v1.30+ 支持 OCI artifacts 镜像
 > - containerd v1.7+ 支持 registry.config_path 多镜像源
 
-## 概述
+## 🎯 本文档价值
 
-镜像拉取是 Pod 启动的关键步骤，ImagePullBackOff 是最常见的 Pod 故障之一。本文档覆盖镜像拉取失败、镜像仓库认证、镜像策略等相关问题的诊断与解决方案。
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 搞清楚 `ImagePullBackOff` 的底层触发链路，学会正确配置 `imagePullSecrets`，掌握镜像拉取策略（Always vs IfNotPresent）的差异及其对生产环境的影响。 |
+| **资深专家** | 深入理解 containerd 的镜像分层存储架构、多架构镜像（Manifest List）的解析机制、大规模拉取时的 P2P 加速与本地缓存治理，以及镜像签名校验（Cosign）的安全加固方案。 |
+
+---
+
+## 0. 10 分钟快速诊断
+
+1. **快速定位失败**：在故障 Pod 上 `kubectl describe pod <name> | grep -A2 -E "Image|ErrImage|BackOff|429|unauthorized"`，记录错误码（DNS/TLS/401/429/空间）。
+2. **连通性与 TLS**：`nslookup <registry>`、`curl -Iv https://<registry>/v2/`，若证书错误检查 CA/中间证书；云私有域注意 443/5000 安全组。
+3. **认证与凭据**：`crictl pull <image> --creds user:pass` 验证，检查 `imagePullSecrets`、SA 绑定；`cat ~/.docker/config.json` 或 `/etc/containerd/config.toml` registry 配置。
+4. **速率与并发**：观察 `toomanyrequests`/`rate limit exceeded`，临时切换私有镜像缓存/镜像加速器，或降低批量创建并开启预拉取。
+5. **磁盘与缓存**：`df -h /var/lib/containerd`、`df -i`，空间/ inode 不足会导致拉取中断；必要时 `crictl rmi --prune` 清理未用镜像。
+6. **镜像一致性**：确认是否使用 Digest（SHA256）而非可变 Tag；比对多架构 Manifest，避免架构不匹配导致 `exec format error`。
+7. **证据留存**：保存 describe 输出、crictl pull 错误、TLS/CA 信息、registry 配置与监控（拉取时延/429 次数），便于复盘。
+
+---
+
+## 1. 核心原理解析：镜像分发链路
+
+### 1.1 镜像的分层与解压逻辑
+
+镜像不是一个大文件，而是由多个 `Layer`（层）组成的。containerd 在拉取时：
+1. **并发拉取**：根据 `max_concurrent_downloads` 并发下载各层。
+2. **内容寻址存储 (CAS)**：使用 SHA256 校验每一层，确保内容完整性。
+3. **Snapshotter 挂载**：将下载的层解压，并通过 `overlayfs` 等快照插件挂载为容器的 `rootfs`。
+
+### 1.2 生产环境典型“镜像坑”
+
+1. **Tag 覆盖导致的一致性问题**：
+   - **现象**：`imagePullPolicy: IfNotPresent` 且使用了固定标签（如 `v1.0`），但镜像仓库中的 `v1.0` 镜像被重新推送了。部分节点由于已有旧镜像，导致集群内 Pod 运行的代码版本不一致。
+   - **对策**：**生产环境严禁重新推送同名 Tag**，必须通过增加版本号（如 `v1.0.1`）或使用镜像 `Digest`（SHA256 哈希）来确保唯一性。
+2. **磁盘 IOPS 饱和导致的拉取超时**：
+   - **现象**：在大规模扩容时，大量 Pod 同时拉取数百 MB 的镜像，导致节点磁盘 IOPS 爆表，从而触发 kubelet 的 CRI 响应超时。
+   - **对策**：配置镜像预热（Image Pre-pulling）或使用 Dragonfly/Kraken 等 P2P 分发工具。
+
+# 专家级观测工具链（Expert's Toolbox）
+
+```bash
+# 专家级：查看镜像各层的详细 Digest 和本地存储路径
+crictl inspecti <image-id> | jq '.status.size, .status.repoDigests'
+
+# 专家级：监控镜像拉取的内部指标
+# containerd 暴露的镜像操作延迟
+curl -s localhost:13387/metrics | grep containerd_image_pull_duration
+
+# 专家级：手动验证镜像层完整性
+ctr -n k8s.io images check
+```
+
+---
+
+## 目录
+
+1. [镜像分发链路逻辑](#1-核心原理解析镜像分发链路)
+2. [专家观测工具链](#专家级观测工具链experts-toolbox)
+3. [故障现象与拉取策略解析](#12-常见问题现象)
+4. [基础排查步骤（初学者）](#22-排查命令集)
+5. [深度治理方案](#第三部分解决方案与风险控制)
 
 ---
 
@@ -92,7 +151,7 @@
 
 ---
 
-## 第二部分：排查原理与方法
+## 第二部分：排查方法（基础与进阶）
 
 ### 2.1 排查决策树
 

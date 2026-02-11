@@ -101,62 +101,70 @@ data:
 
 ---
 
-## 2. Cluster Federation 核心组件
+## 2. 跨集群联邦方案 (Karmada & KubeFed)
 
-### 2.1 KubeFed 架构
+### 2.1 Karmada 现代联邦架构
+
+**Karmada** 已成为 CNCF 毕业项目，是多集群资源分发和治理的事实标准，取代了早期的 KubeFed。
 
 ```yaml
-# KubeFed 控制平面部署
-apiVersion: v1
-kind: Namespace
+# Karmada 资源分发策略 (PropagationPolicy)
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
 metadata:
-  name: kubefed-system
+  name: nginx-propagation
+spec:
+  resourceSelectors:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx
+  placement:
+    clusterAffinity:
+      clusterNames:
+        - cluster-east
+        - cluster-west
+    replicaScheduling:
+      replicaSchedulingType: Divided
+      replicaDivisionPreference: Weighted
+      weightPreference:
+        staticWeightList:
+          - targetCluster:
+              clusterNames:
+                - cluster-east
+            weight: 2
+          - targetCluster:
+              clusterNames:
+                - cluster-west
+            weight: 1
+```
+
+### 2.2 多集群服务 API (MCS)
+
+MCS (Multi-cluster Service) 是 Kubernetes 官方定义的标准 API，用于跨集群服务导出和导入。
+
+```yaml
+# 1. 导出服务 (在源集群)
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: web-service
+  namespace: production
 
 ---
-# KubeFed 控制器配置
-apiVersion: apps/v1
-kind: Deployment
+# 2. 导入服务 (在消费集群 - 由控制器自动生成)
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceImport
 metadata:
-  name: kubefed-controller-manager
-  namespace: kubefed-system
+  name: web-service
+  namespace: production
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: kubefed-controller-manager
-  template:
-    metadata:
-      labels:
-        app: kubefed-controller-manager
-    spec:
-      containers:
-      - name: controller-manager
-        image: kubefed/kubefed:v0.9.2
-        args:
-        - --leader-elect=true
-        - --metrics-addr=:9090
-        - --health-probe-bind-address=:8081
-        - --zap-devel=false
-        - --zap-encoder=json
-        - --zap-log-level=info
-        ports:
-        - containerPort: 9090
-          name: metrics
-        - containerPort: 8081
-          name: health
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8081
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8081
-          initialDelaySeconds: 5
-          periodSeconds: 10
-```
+  ips: ["10.100.1.1"]
+  type: ClusterSetIP
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+```,old_str:
 
 ### 2.2 成员集群注册
 

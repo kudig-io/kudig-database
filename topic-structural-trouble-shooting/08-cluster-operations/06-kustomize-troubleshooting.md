@@ -10,6 +10,19 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **构建验证**：`kustomize build <path>`，先确认构建能通过。
+2. **版本一致性**：`kustomize version` 与 `kubectl version --client` 的内置版本差异。
+3. **路径与资源**：检查 `resources`/`bases`/`patches` 路径是否正确。
+4. **Patch 命中**：遇到 `no resources matched` 优先检查 `target` 选择器。
+5. **快速缓解**：
+   - 先 `--dry-run=client` 验证输出。
+   - 临时移除复杂 patch 逐步定位。
+6. **证据留存**：保存构建输出与报错日志。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 Kustomize 工作原理

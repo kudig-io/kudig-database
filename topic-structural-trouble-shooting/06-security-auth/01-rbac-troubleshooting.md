@@ -12,6 +12,20 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **确认身份**：`kubectl auth whoami` 与 `kubectl config current-context`，排除 kubeconfig 指向错误集群。
+2. **快速权限判断**：`kubectl auth can-i <verb> <resource> -n <ns>`，必要时 `--as=system:serviceaccount:<ns>:<sa>`。
+3. **事件与审计**：`kubectl get events -A --field-selector reason=Forbidden`，并在审计日志中检索 401/403。
+4. **绑定链路检查**：`kubectl get rolebinding,clusterrolebinding -A | grep <user/sa>`，确认角色绑定存在。
+5. **ServiceAccount Token**：Pod 内检查 `/var/run/secrets/kubernetes.io/serviceaccount/token` 是否可读取。
+6. **快速缓解**：
+   - 临时放行最小权限（最小 Role/RoleBinding）。
+   - 对关键操作先使用 `kubectl auth can-i --list` 明确范围。
+7. **证据留存**：保存 `can-i` 输出、角色绑定 YAML、审计日志片段。
+
+---
+
 ## 1. 问题现象与影响分析
 
 ### 1.1 常见问题现象

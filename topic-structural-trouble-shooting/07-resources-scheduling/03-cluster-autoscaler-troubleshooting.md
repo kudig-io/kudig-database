@@ -10,6 +10,20 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **CA 存活**：`kubectl get pods -n kube-system | grep cluster-autoscaler`。
+2. **Pending 原因**：`kubectl get pods -A --field-selector=status.phase=Pending`，确认是否资源不足。
+3. **节点组状态**：`kubectl get cm -n kube-system cluster-autoscaler-status -o yaml`，查看 scale up/down 记录。
+4. **云 API 错误**：查看 CA 日志中的 `authorization`/`quota`/`node group` 错误。
+5. **扩缩容策略**：核对 `scale-down-delay-after-add`、`max-node-provision-time`。
+6. **快速缓解**：
+   - 达到配额：提升云配额或切换节点组。
+   - 扩容慢：调整节点组规格或增加预热节点。
+7. **证据留存**：保存 CA 日志、Pending Pod 事件、节点组状态。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 Cluster Autoscaler 架构

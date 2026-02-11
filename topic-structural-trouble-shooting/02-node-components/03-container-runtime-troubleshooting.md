@@ -4,158 +4,114 @@
 
 ---
 
+## 🎯 本文档价值
+
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 搞清楚容器、镜像、运行时（CRI）之间的层级关系，掌握 `crictl` 命令代替 `docker` 命令的操作习惯，学会解决常见的 `ImagePullBackOff` 和镜像空间爆满问题。 |
+| **资深专家** | 深入理解 OCI 规范、runc 交互、Shim 进程模型，以及在大规模集群下的并发拉取优化、存储驱动（OverlayFS）性能瓶颈分析，和运行时热切换的风险控制。 |
+
+---
+
 ## 目录
 
-1. [问题现象与影响分析](#1-问题现象与影响分析)
-2. [排查方法与步骤](#2-排查方法与步骤)
-3. [解决方案与风险控制](#3-解决方案与风险控制)
+1. [核心原理解析](#11-核心原理解析从-cri-到-oci)
+2. [专家观测工具链](#13-专家观测工具链experts-toolbox)
+3. [高级排查工作流](#2-排查方法与步骤-高级工作流)
+4. [基础排查步骤（初学者）](#5-排查方法与步骤-基础版)
+5. [基础解决方案（初学者）](#6-解决方案与风险控制-基础版)
+
+---
+
+## 🎯 本文档价值
+
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 搞清楚容器、镜像、运行时（CRI）之间的层级关系，掌握 `crictl` 命令代替 `docker` 命令的操作习惯，学会解决常见的 `ImagePullBackOff` 和镜像空间爆满问题。 |
+| **资深专家** | 深入理解 OCI 规范、runc 交互、Shim 进程模型，以及在大规模集群下的并发拉取优化、存储驱动（OverlayFS）性能瓶颈分析，和运行时热切换的风险控制。 |
+
+---
+
+## 0. 10 分钟快速诊断
+
+1. **服务与 Socket**：`systemctl status containerd`（或 dockerd/CRI-O）；`ls -l /run/containerd/containerd.sock`，若不存在或权限拒绝先处理服务启动。
+2. **快速复现**：`crictl ps -a | head`、`crictl info`，若超时则查看 `journalctl -u containerd --since 5m` 错误。
+3. **磁盘/inode**：`df -h /var/lib/containerd /var/lib/docker`、`df -i`，确认空间/ inode；必要时 `crictl images | wc -l` 评估清理。
+4. **镜像/拉取链路**：`crictl pull <image>` 复现，观察 TLS/认证/429 错误；检查 `/etc/containerd/config.toml` registry mirror 与限速设置。
+5. **Overlay/挂载**：`mount | grep overlay | head`，若报错 `invalid argument` 需检查内核版本与层级限制；`dmesg | tail`。
+6. **快速缓解**：
+   - 空间不足：`crictl rmi --prune`、清理未用 snapshots/logs。
+   - 服务卡死：重启 containerd/kubelet（先 cordon 节点），确认 cgroup 驱动一致。
+   - 拉取受限：切换最近的镜像镜像源/私有 cache，开启镜像预热或 P2P。
+7. **证据留存**：保留 containerd 日志、`crictl info` 输出、磁盘/挂载快照、失败的 `crictl pull` 错误信息。
 
 ---
 
 ## 1. 问题现象与影响分析
 
-### 1.1 常见问题现象
+### 1.1 核心原理解析：从 CRI 到 OCI
 
-#### 1.1.1 容器运行时服务不可用
+容器运行时不只是“跑容器”，它是一个分层体系：
+1. **CRI 层 (containerd/CRI-O)**：Kubernetes 的标准接口，负责管理镜像、Pod Sandbox（即 Pause 容器）和网络命名空间。
+2. **中间层 (containerd-shim)**：解耦运行时与容器进程，使得重启运行时服务（containerd）不会导致正在运行的容器也随之重启。
+3. **OCI 层 (runc)**：真正的底层执行者，通过 cgroup 和 namespace 构建隔离环境。
 
-| 现象 | 报错信息 | 报错来源 | 查看方式 |
-|------|----------|----------|----------|
-| containerd 未运行 | `containerd.service: Failed` | systemd | `systemctl status containerd` |
-| Docker 未运行 | `docker.service: Failed` | systemd | `systemctl status docker` |
-| CRI socket 不可用 | `unable to connect to runtime` | kubelet | kubelet 日志 |
-| 运行时响应超时 | `context deadline exceeded` | kubelet | kubelet 日志 |
+### 1.2 常见问题现象
 
-#### 1.1.2 容器生命周期问题
+#### 1.2.1 运行时服务可用性
 
-| 现象 | 报错信息 | 报错来源 | 查看方式 |
-|------|----------|----------|----------|
-| 容器创建失败 | `failed to create containerd task` | 运行时日志 | 运行时日志 |
-| 容器启动失败 | `OCI runtime create failed` | 运行时日志 | 运行时日志 |
-| 容器无法停止 | `failed to stop container` | kubectl | kubectl 日志 |
-| 容器僵死 | 容器状态不更新 | crictl | `crictl ps` |
-| cgroup 错误 | `cgroup: cgroup mountpoint does not exist` | 运行时日志 | 运行时日志 |
+| 现象 | 报错信息关键字 | 根本原因方向 |
+| :--- | :--- | :--- |
+| **Socket 拒绝连接** | `connect: connection refused` | containerd 进程崩溃、系统资源（PID）耗尽 |
+| **CRI 响应超时** | `context deadline exceeded` | 磁盘 IO 极高导致 metadata 写入慢、大量僵尸容器堆积 |
+| **Shim 进程泄露** | 宿主机出现大量 `containerd-shim` | 容器无法正常退出、父进程回收失败 |
 
-#### 1.1.3 镜像相关问题
+#### 1.2.2 镜像与存储瓶颈
 
-| 现象 | 报错信息 | 报错来源 | 查看方式 |
-|------|----------|----------|----------|
-| 镜像拉取失败 | `failed to pull image` | 运行时日志 | 运行时日志 |
-| 镜像解压失败 | `failed to extract` | 运行时日志 | 运行时日志 |
-| 镜像空间不足 | `no space left on device` | 运行时日志 | 运行时日志 |
-| 镜像认证失败 | `unauthorized: authentication required` | 运行时日志 | 运行时日志 |
-| 镜像损坏 | `invalid checksum` | 运行时日志 | 运行时日志 |
+| 故障场景 | 典型表现 | 专家深度分析 |
+| :--- | :--- | :--- |
+| **镜像层损坏** | `invalid checksum` | 磁盘坏道、网络传输链路中的静默错误（需要清理本地缓存） |
+| **OverlayFS 挂载失败** | `lowerdir ...: invalid argument` | 目录层级超过内核限制（通常为 128 层）、内核版本不匹配 |
+| **镜像拉取并发限速** | `429 Too Many Requests` | 命中 DockerHub 或私有仓库的并发限速策略 |
 
-#### 1.1.4 存储驱动问题
+#### 1.2.3 生产环境典型“诡异”故障
 
-| 现象 | 报错信息 | 报错来源 | 查看方式 |
-|------|----------|----------|----------|
-| overlay 错误 | `overlay: invalid argument` | 运行时日志 | 运行时日志 |
-| 存储驱动不支持 | `storage driver not supported` | 运行时日志 | 运行时日志 |
-| 文件系统错误 | `input/output error` | 运行时日志 | 运行时日志 |
-| 快照创建失败 | `failed to create snapshot` | 运行时日志 | 运行时日志 |
+1. **dungeoned Containers（僵死容器）**：
+   - **现象**：`kubectl delete` 无响应，`crictl rm` 报错容器正在停止中。
+   - **深层原因**：容器内进程处于 `D` 状态（不可中断睡眠），通常是由于访问了已挂死的 NFS 或存储卷，导致 IO 阻塞，runc 无法完成信号传递。
+2. **Systemd 重启引发的 cgroup 混乱**：
+   - **现象**：宿主机 systemd 升级或重启后，所有新容器无法启动。
+   - **深层原因**：cgroup 结构被重置，而 kubelet 内存中的 cgroup path 与实际不符。
 
-### 1.2 报错查看方式汇总
+### 1.3 专家观测工具链（Expert's Toolbox）
 
 ```bash
-# containerd 相关
-# 查看 containerd 服务状态
-systemctl status containerd
+# 专家级：绕过 CRI 直接操作原生 containerd (ctr)
+ctr -n k8s.io images ls          # 查看 k8s 命名空间下的镜像
+ctr -n k8s.io tasks list         # 查看底层任务状态
 
-# 查看 containerd 日志
-journalctl -u containerd -f --no-pager -l
+# 专家级：排查存储层 OverlayFS
+ls /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/
+# 查看挂载层叠关系
+mount | grep overlay
 
-# 使用 crictl 检查运行时
-crictl info
-crictl version
-
-# 查看容器列表
-crictl ps -a
-
-# 查看镜像列表
-crictl images
-
-# Docker 相关（如果使用 Docker）
-# 查看 Docker 服务状态
-systemctl status docker
-
-# 查看 Docker 日志
-journalctl -u docker -f --no-pager -l
-
-# Docker 系统信息
-docker info
-docker version
-
-# 查看 kubelet 中的运行时错误
-journalctl -u kubelet | grep -i "runtime"
-
-# 检查 CRI socket
-ls -la /run/containerd/containerd.sock
-ls -la /var/run/cri-dockerd.sock  # Docker + cri-dockerd
-```
-
-### 1.3 影响面分析
-
-#### 1.3.1 直接影响
-
-| 影响范围 | 影响程度 | 影响描述 |
-|----------|----------|----------|
-| **容器创建** | 完全失效 | 新容器无法创建 |
-| **容器启动** | 完全失效 | 已创建的容器无法启动 |
-| **容器停止** | 可能失效 | 容器可能无法正常停止 |
-| **镜像管理** | 完全失效 | 镜像拉取、删除等操作失败 |
-| **kubelet** | 异常 | kubelet 无法管理容器 |
-
-#### 1.3.2 间接影响
-
-| 影响范围 | 影响程度 | 影响描述 |
-|----------|----------|----------|
-| **节点状态** | NotReady | 节点被标记为不健康 |
-| **Pod 调度** | 受影响 | 新 Pod 无法调度到该节点 |
-| **现有容器** | 可能运行 | 已运行的容器可能继续运行 |
-| **监控** | 部分失效 | 容器指标采集可能失败 |
-| **日志采集** | 部分失效 | 容器日志可能无法采集 |
-
-#### 1.3.3 故障传播链
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      容器运行时故障影响传播链                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   容器运行时故障                                                             │
-│       │                                                                      │
-│       ├──► kubelet 无法与运行时通信                                          │
-│       │         │                                                            │
-│       │         ├──► 节点变为 NotReady                                       │
-│       │         │                                                            │
-│       │         ├──► 新 Pod 无法创建                                         │
-│       │         │                                                            │
-│       │         └──► Pod 状态无法更新                                        │
-│       │                                                                      │
-│       ├──► 已有容器可能继续运行（取决于故障类型）                            │
-│       │                                                                      │
-│       ├──► 镜像操作全部失败                                                  │
-│       │                                                                      │
-│       └──► 容器指标/日志采集失败                                             │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+# 专家级：系统调用跟踪 (定位 OCI runtime 失败)
+strace -f -o runtime_err.log crictl run pod.yaml container.yaml
 ```
 
 ---
 
-## 2. 排查方法与步骤
+## 5. 排查方法与步骤 (基础版)
+ (高级工作流)
 
-### 2.1 排查原理
+### 2.1 排查逻辑：剥洋葱法
 
-容器运行时是 kubelet 与容器之间的桥梁，负责实际的容器生命周期管理。排查需要从以下层面：
+1. **接口层**：`crictl info` 是否能通？
+2. **进程层**：`containerd-shim` 和 `runc` 是否正常？
+3. **内核层**：`dmesg` 是否有 OOM 或文件系统报错？
+4. **资源层**：Inode、磁盘空间、PID 限制是否触达？
 
-1. **服务层面**：运行时进程是否正常
-2. **接口层面**：CRI socket 是否可用
-3. **存储层面**：存储驱动和空间
-4. **配置层面**：运行时配置是否正确
-5. **系统层面**：内核、cgroup、namespace 支持
-
-### 2.2 排查逻辑决策树
+### 2.2 专家级排查步骤
 
 ```
 开始排查
@@ -350,7 +306,7 @@ journalctl -u kubelet | grep -i "runtime" | tail -50
 
 ---
 
-## 3. 解决方案与风险控制
+## 6. 解决方案与风险控制 (基础版)
 
 ### 3.1 containerd 服务无法启动
 

@@ -9,6 +9,19 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **PDB 状态**：`kubectl get pdb -A`，查看 `disruptionsAllowed` 是否为 0。
+2. **匹配关系**：`kubectl describe pdb <name>`，确认 selector 是否匹配实际 Pod。
+3. **驱逐阻塞**：`kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` 输出中定位被阻塞的 Pod。
+4. **健康度**：确认 `currentHealthy/expectedPods` 是否满足 minAvailable/maxUnavailable。
+5. **快速缓解**：
+   - 临时放宽 PDB（调整 minAvailable/maxUnavailable）。
+   - 启用 `unhealthyPodEvictionPolicy: AlwaysAllow`（v1.27+）。
+6. **证据留存**：保存 PDB 描述、Pod 就绪状态与 drain 输出。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 PodDisruptionBudget 工作原理

@@ -10,6 +10,20 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **版本与倾斜**：`kubectl version --short` + `kubeadm upgrade plan`，确认版本跨度与倾斜策略。
+2. **控制面健康**：`kubectl get --raw /readyz?verbose`，定位卡在 etcd/认证/聚合 API 的环节。
+3. **etcd 状态**：`etcdctl endpoint health --cluster`，确认有 Leader 且无高延迟。
+4. **节点维护阻塞**：`kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` 看阻塞原因（PDB/本地存储）。
+5. **证书到期**：`kubeadm certs check-expiration`，若临近到期先续期。
+6. **快速缓解**：
+   - 控制面异常先恢复 API 可用，再做升级。
+   - 对升级失败节点回滚到稳定版本后再排查。
+7. **证据留存**：保存 upgrade plan、/readyz 输出、etcd 状态与节点事件。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 集群升级架构与流程

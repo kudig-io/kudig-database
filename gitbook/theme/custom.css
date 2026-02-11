@@ -1,0 +1,46 @@
+/* 中文字体优化 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 
+                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 代码块优化 */
+pre {
+    border-radius: 6px;
+}
+
+/* 目录树行高优化 */
+.chapter li {
+    line-height: 1.8;
+}
+
+/* 隐藏侧边栏的页内标题导航（on-this-page），避免撑开目录 */
+.sidebar-scrollbox .on-this-page {
+    display: none;
+}
+
+/* 内容区域优化 */
+.content {
+    max-width: 900px;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4 {
+    font-weight: 600;
+}
+
+/* 表格样式优化 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px 12px;
+    border: 1px solid var(--table-border-color);
+}
+
+table th {
+    background-color: var(--table-header-bg);
+}

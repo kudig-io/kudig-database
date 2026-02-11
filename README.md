@@ -1,6 +1,6 @@
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 606 | **领域数量**: 31
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 658 | **领域数量**: 33
 
 ---
 
@@ -43,11 +43,15 @@
   - [域29: 自动化测试](#域29-自动化测试-automated-testing)
   - [域30: 灾备业务连续性](#域30-灾备业务连续性-disaster-recovery)
   - [域31: 硬件基础设施](#域31-硬件基础设施-hardware-infrastructure)
+  - [域32: YAML配置清单手册](#域32-yaml配置清单手册-yaml-manifests-reference)
+  - [域33: Kubernetes Events 全域事件大全](#域33-kubernetes-events-全域事件大全)
 - [专题资源](#专题资源)
   - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
   - [topic-presentations: 培训演示](#topic-presentations-培训演示)
   - [topic-structural-trouble-shooting: 结构化故障排查](#topic-structural-trouble-shooting-结构化故障排查)
+  - [topic-cheat-sheet: 快速速查卡](#topic-cheat-sheet-快速速查卡)
 - [多维度查询附录](#多维度查询附录)
+- [本地 Gitbook](#本地-gitbook)
 - [变更记录](#变更记录)
 
 ---
@@ -106,7 +110,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 │                        │  域17 云厂商K8s服务     │                               │
 │                        └─────────────────────────┘                               │
 ├──────────────────────────────────────────────────────────────────────────────────┤
-│                        企业级运维专题 (Domain 18-31)                              │
+│                        企业级运维专题 (Domain 18-32)                              │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
 │  │域18生产运维 │  │域19技术白皮书│  │域20企业监控 │  │域21日志管理 │              │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
@@ -119,6 +123,9 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 │  ┌─────────────┐  ┌─────────────┐                                                │
 │  │域30灾备恢复 │  │域31硬件基础 │                                                │
 │  └─────────────┘  └─────────────┘                                                │
+│                   ┌─────────────┐                                                │
+│                   │域32 YAML手册│                                                │
+│                   └─────────────┘                                                │
 ├──────────────────────────────────────────────────────────────────────────────────┤
 │                              专题资源                                             │
 │  ┌────────────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐│
@@ -813,6 +820,27 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 > **维护工具**: 项目管理和验证脚本
 
+### 快速速查卡 (topic-cheat-sheet)
+
+> **生产环境速查卡** | 3个速查主题 | 全命令覆盖、版本标注、快速查阅
+
+本速查卡集合提供生产环境中 90% 以上常用命令，所有命令均标注适用版本和兼容性信息。
+
+| # | 速查卡名称 | 涵盖内容 | 适用版本 | 适用场景 |
+|:---:|:---|:---|:---|:---|
+| 01 | [Kubernetes 速查卡](./topic-cheat-sheet/k8s.md) | **kubectl 基础操作、集群管理、资源查询、Pod 操作、Deployment 管理、Service 网络、ConfigMap/Secret、存储管理、RBAC 权限、故障排查、资源监控、高级操作、etcd 管理、API Server、集群维护** | K8s v1.25-v1.32 | Kubernetes 日常运维、故障排查、集群管理、资源调度 |
+| 02 | [Linux 速查卡](./topic-cheat-sheet/linux.md) | **系统信息查询、文件与目录操作、文本处理、进程管理、网络管理、磁盘与存储、用户与权限、系统服务管理、性能监控、日志分析、安全与防火墙、包管理、Shell 脚本、容器与虚拟化、故障排查** | RHEL/CentOS 7-9, Ubuntu 20.04-24.04, Debian 11-12 | Linux 系统运维、性能监控、故障排查、安全加固 |
+| 03 | [Go 语言速查卡](./topic-cheat-sheet/go.md) | **环境配置、基础语法、数据结构、函数与方法、并发编程、错误处理、包管理、文件操作、网络编程、数据库操作、测试与基准、性能优化、常用标准库、生产最佳实践** | Go 1.20-1.22 | Go 应用开发、Kubernetes Operator 开发、云原生工具开发 |
+
+**特点**:
+- ✅ **版本标注**: 所有命令明确标注适用的软件版本
+- ✅ **生产导向**: 覆盖生产环境 90%+ 实际使用场景
+- ✅ **兼容性说明**: 详细标注不同发行版/版本的差异
+- ✅ **最佳实践**: 每个速查卡包含生产环境最佳实践章节
+- ✅ **工具版本**: 附录列出常用工具的推荐版本
+
+---
+
 ### 运维知识中枢 (topic-dictionary)
 
 > **生产环境运维专家级知识库** | 16个核心文档 | 全面覆盖AI Infra、云原生安全、多云运维、企业级实践、事故管理、容量规划、变更管理、SLO工程、故障排查等专业领域
@@ -961,6 +989,61 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 
 ---
 
+## 本地 Gitbook
+
+本项目提供基于 [mdBook](https://rust-lang.github.io/mdBook/) 的本地文档浏览，支持全文搜索、目录折叠导航。
+
+### 前置条件
+
+```bash
+# 安装 mdBook（需要 Rust 工具链）
+cargo install mdbook
+```
+
+### 快速启动
+
+```bash
+cd gitbook
+bash refresh.sh          # 一键刷新：生成目录 → 构建 → 启动服务
+# 浏览器访问 http://localhost:3000
+```
+
+### 刷新模式
+
+| 命令 | 说明 |
+|:---|:---|
+| `bash refresh.sh` | 完整刷新：更新符号链接 + 生成 SUMMARY.md + 构建 + 启动服务 |
+| `bash refresh.sh build` | 仅构建：不重新生成目录，适合只修改已有文件内容 |
+| `bash refresh.sh serve` | 等同默认模式 |
+| `PORT=8080 bash refresh.sh` | 指定端口启动 |
+
+### 静态导出
+
+导出可本地直接打开的静态 HTML，无需启动服务。
+
+```bash
+cd gitbook
+bash export-static.sh           # 导出到 gitbook/dist/ 目录
+bash export-static.sh --zip     # 额外打包为 zip 文件
+open dist/index.html             # 直接在浏览器中打开
+```
+
+### 目录结构
+
+```
+gitbook/
+├── book.toml              # mdBook 配置
+├── generate-summary.sh    # SUMMARY.md 自动生成脚本
+├── refresh.sh             # 快速刷新脚本
+├── export-static.sh       # 静态导出脚本
+├── theme/                 # 自定义主题（CSS/JS）
+├── src/                   # 源文件（符号链接指向项目根目录）
+├── book/                  # 构建输出（serve 模式）
+└── dist/                  # 静态导出输出
+```
+
+---
+
 ## 变更记录
 
 
@@ -1056,6 +1139,22 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 ---
 
 ## 变更历史
+
+### 2026-02-10 Domain-32 YAML配置清单手册全新上线
+**Kubernetes YAML 全资源配置完整参考手册**:
+- ✅ 新增 36 篇 YAML 配置参考文档，覆盖 60+ Kubernetes 原生 API 资源类型
+- ✅ 覆盖 Kubernetes v1.25-v1.32 全版本，含版本兼容矩阵和 Feature Gates 时间线
+- ✅ 每篇包含完整字段规范、最小化示例、生产级示例、源码级内部机制解析
+- ✅ 涵盖工作负载（Pod/Deployment/StatefulSet/DaemonSet/Job/CronJob）
+- ✅ 涵盖网络（Service 5 种类型/Ingress/Gateway API 核心+高级路由）
+- ✅ 涵盖存储（PV/PVC/StorageClass/VolumeSnapshot/CSI 驱动资源）
+- ✅ 涵盖安全（RBAC/NetworkPolicy/Pod Security Standards/Admission Webhook/ValidatingAdmissionPolicy+CEL）
+- ✅ 涵盖调度（PriorityClass/RuntimeClass/HPA v2/PDB）
+- ✅ 涵盖扩展（CRD/APIService/API Priority & Fairness）
+- ✅ 涵盖集群基础设施（Lease/Event/Node/kubeadm/组件配置 Kubelet+KubeProxy+Scheduler）
+- ✅ 涵盖生态工具（Kustomize/Helm/ArgoCD 完整配置参考）
+- ✅ 全部中文散文讲解，YAML 使用英文配详细中文注释
+- ✅ 更新文档总数：622 → 658 篇，领域数量：32 → 33
 
 ### 2026-02-07 README文档全面更新
 **根目录README与文件结构同步**:
@@ -1622,6 +1721,149 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 305 | K8s硬件故障 | [kubernetes-hardware-troubleshooting](./domain-31-hardware/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件故障、Node NotReady、PLEG、etcd磁盘问题 |
 | 306 | 错误码速查 | [hardware-error-codes-reference](./domain-31-hardware/17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码、厂商诊断码 |
 | 307 | 故障案例库 | [hardware-failure-case-studies](./domain-31-hardware/18-hardware-failure-case-studies.md) | 生产环境真实故障案例、诊断过程、解决方案、复盘总结 |
+
+---
+
+### 域32: YAML配置清单手册 (YAML Manifests Reference)
+
+> 36 篇 | Kubernetes v1.25-v1.32 全资源 YAML 配置完整参考，覆盖 60+ 原生 API 资源类型和生态工具（Kustomize/Helm/ArgoCD），每篇含完整字段规范、源码级内部机制、版本兼容矩阵和生产案例
+
+#### R1: 基础与约定 (01-02)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | YAML语法与资源约定 | [yaml-syntax-resource-conventions](./domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md) | YAML语法、四字段结构、命名规范、标签注解、kubectl apply三路合并、API版本演进 |
+| 02 | Namespace/配额/限制 | [namespace-resourcequota-limitrange](./domain-32-yaml-manifests/02-namespace-resourcequota-limitrange.md) | Namespace完整字段、ResourceQuota范围选择器、LimitRange默认值、准入控制器机制 |
+
+#### R2: 工作负载 (03-07)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 03 | Pod完整规范 | [pod-specification-complete](./domain-32-yaml-manifests/03-pod-specification-complete.md) | 全部Pod spec字段、容器配置、探针、安全上下文、QoS类、调度字段 |
+| 04 | Deployment/ReplicaSet | [deployment-replicaset](./domain-32-yaml-manifests/04-deployment-replicaset.md) | 滚动更新策略、maxSurge/maxUnavailable计算、修订版本哈希、蓝绿/金丝雀部署 |
+| 05 | StatefulSet | [statefulset-reference](./domain-32-yaml-manifests/05-statefulset-reference.md) | 稳定网络标识、有序创建/删除、PVC保留策略、volumeClaimTemplates |
+| 06 | DaemonSet | [daemonset-reference](./domain-32-yaml-manifests/06-daemonset-reference.md) | 节点选择机制、滚动更新/OnDelete策略、调度器协作、CNI/日志/监控场景 |
+| 07 | Job/CronJob | [job-cronjob-reference](./domain-32-yaml-manifests/07-job-cronjob-reference.md) | completionMode、podFailurePolicy、timeZone、concurrencyPolicy、ETL/备份场景 |
+
+#### R3: 网络与服务发现 (08-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 08 | Service全类型 | [service-all-types](./domain-32-yaml-manifests/08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless、双栈、kube-proxy机制 |
+| 09 | Endpoints/EndpointSlice | [endpoints-endpointslice](./domain-32-yaml-manifests/09-endpoints-endpointslice.md) | 手动Endpoints创建、EndpointSlice分片策略、外部服务集成 |
+| 10 | Ingress/IngressClass | [ingress-ingressclass](./domain-32-yaml-manifests/10-ingress-ingressclass.md) | pathType匹配、多控制器注解、TLS终止、cert-manager集成 |
+| 11 | Gateway API核心 | [gateway-api-core](./domain-32-yaml-manifests/11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute、角色分离模型、路由绑定、权重分流 |
+| 12 | Gateway API高级路由 | [gateway-api-advanced-routes](./domain-32-yaml-manifests/12-gateway-api-advanced-routes.md) | GRPCRoute/TCPRoute/TLSRoute/UDPRoute、ReferenceGrant跨命名空间授权 |
+
+#### R4: 配置与密钥 (13-14)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | ConfigMap | [configmap-reference](./domain-32-yaml-manifests/13-configmap-reference.md) | data/binaryData/immutable、挂载方式、自动更新机制、subPath限制 |
+| 14 | Secret全类型 | [secret-all-types](./domain-32-yaml-manifests/14-secret-all-types.md) | 8种Secret类型、etcd加密配置、tmpfs安全机制、External Secrets集成 |
+
+#### R5: 存储 (15-18)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 15 | PersistentVolume | [persistentvolume-reference](./domain-32-yaml-manifests/15-persistentvolume-reference.md) | 访问模式(含RWOP)、回收策略、claimRef预绑定、生命周期状态机 |
+| 16 | PersistentVolumeClaim | [persistentvolumeclaim-reference](./domain-32-yaml-manifests/16-persistentvolumeclaim-reference.md) | 动态供给、卷扩展、卷克隆、快照恢复、WaitForFirstConsumer延迟绑定 |
+| 17 | StorageClass/VolumeSnapshot | [storageclass-volumesnapshot](./domain-32-yaml-manifests/17-storageclass-volumesnapshot.md) | provisioner参数、volumeBindingMode、VolumeSnapshotClass、定时快照备份 |
+| 18 | CSI驱动资源 | [csi-driver-resources](./domain-32-yaml-manifests/18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity、三阶段架构、拓扑感知调度 |
+
+#### R6: 身份与RBAC (19-22)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | ServiceAccount/Token | [serviceaccount-token](./domain-32-yaml-manifests/19-serviceaccount-token.md) | 绑定SA Token(v1.22+)、TokenRequest/TokenReview、CSR签发 |
+| 20 | Role/RoleBinding | [rbac-role-rolebinding](./domain-32-yaml-manifests/20-rbac-role-rolebinding.md) | rules字段(apiGroups/resources/verbs)、RBAC决策链、开发/运维权限案例 |
+| 21 | ClusterRole/Binding | [rbac-clusterrole-clusterrolebinding](./domain-32-yaml-manifests/21-rbac-clusterrole-clusterrolebinding.md) | aggregationRule聚合、内置角色(cluster-admin/admin/edit/view)、SubjectAccessReview |
+| 22 | NetworkPolicy | [networkpolicy-reference](./domain-32-yaml-manifests/22-networkpolicy-reference.md) | AND/OR选择器语义、endPort范围、CNI实现差异(Calico/Cilium)、零信任网络 |
+
+#### R7: 安全与准入 (23-25)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 23 | Pod安全标准 | [pod-security-standards](./domain-32-yaml-manifests/23-pod-security-standards.md) | Privileged/Baseline/Restricted三级、Namespace标签、PSP迁移指南、豁免配置 |
+| 24 | Admission Webhook | [admission-webhook-configuration](./domain-32-yaml-manifests/24-admission-webhook-configuration.md) | Validating/Mutating Webhook、failurePolicy、reinvocationPolicy、matchConditions(CEL) |
+| 25 | ValidatingAdmissionPolicy | [validatingadmissionpolicy](./domain-32-yaml-manifests/25-validatingadmissionpolicy.md) | CEL表达式语言、Binding机制、validationActions(Deny/Warn/Audit)、Webhook 10-100x性能提升 |
+
+#### R8: 调度与扩缩 (26-28)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 26 | PriorityClass/RuntimeClass | [priorityclass-runtimeclass](./domain-32-yaml-manifests/26-priorityclass-runtimeclass.md) | 优先级抢占算法、Kata/gVisor沙箱隔离、DRA设备分配(v1.26+) |
+| 27 | HPA v2 | [hpa-autoscaling-v2](./domain-32-yaml-manifests/27-hpa-autoscaling-v2.md) | 四种指标类型、behavior稳定窗口/策略、VPA参考、HPA计算算法 |
+| 28 | PodDisruptionBudget | [poddisruptionbudget-reference](./domain-32-yaml-manifests/28-poddisruptionbudget-reference.md) | minAvailable/maxUnavailable、Eviction API工作流、集群升级保护 |
+
+#### R9: 扩展与API (29-31)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 29 | CRD | [customresourcedefinition](./domain-32-yaml-manifests/29-customresourcedefinition.md) | OpenAPI v3 Schema、x-kubernetes-validations(CEL)、多版本转换、additionalPrinterColumns |
+| 30 | APIService聚合 | [apiservice-aggregation](./domain-32-yaml-manifests/30-apiservice-aggregation.md) | 本地/远程APIService、kube-aggregator路由、优先级解析、Metrics Server注册 |
+| 31 | API优先级与公平性 | [api-priority-fairness](./domain-32-yaml-manifests/31-api-priority-fairness.md) | FlowSchema/PriorityLevelConfiguration、Shuffle Sharding、Fair Queuing、内置规则 |
+
+#### R10: 集群基础设施 (32-34)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 32 | Lease/Event/Node | [lease-event-node](./domain-32-yaml-manifests/32-lease-event-node.md) | Lease心跳/选举/API Server标识、Event新旧API、Node spec/status/conditions |
+| 33 | kubeadm集群引导 | [kubeadm-cluster-bootstrap](./domain-32-yaml-manifests/33-kubeadm-cluster-bootstrap.md) | ClusterConfiguration/InitConfiguration/JoinConfiguration、11阶段init流程、HA部署 |
+| 34 | 组件配置 | [component-configuration](./domain-32-yaml-manifests/34-component-configuration.md) | KubeletConfiguration/KubeProxyConfiguration/KubeSchedulerConfiguration、IPVS/nftables、调度框架插件 |
+
+#### R11: 高级模式与生态 (35-36)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 35 | 高级Pod模式 | [advanced-pod-patterns](./domain-32-yaml-manifests/35-advanced-pod-patterns.md) | Init/Sidecar(v1.29+原生)/Adapter模式、拓扑分布约束、Taints/Tolerations、探针最佳实践 |
+| 36 | 生态工具 | [ecosystem-kustomize-helm-argocd](./domain-32-yaml-manifests/36-ecosystem-kustomize-helm-argocd.md) | Kustomize(base+overlays+components)、Helm(Chart/values/templates)、ArgoCD(Application/ApplicationSet/Sync Waves) |
+
+---
+
+### 域33: Kubernetes Events 全域事件大全
+
+> 16 篇 | 系统性收录 230+ 个 K8s 事件，覆盖核心组件、生产插件和生态系统，每个事件含详细排查和解决方案
+
+#### 事件系统架构 (01)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 308 | 事件系统架构 | [event-system-architecture](./domain-33-kubernetes-events/01-event-system-architecture.md) | Event数据模型、API版本演进、事件生命周期、持久化方案 |
+
+#### 核心组件事件 (02-06)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 309 | Pod容器事件 | [pod-container-lifecycle-events](./domain-33-kubernetes-events/02-pod-container-lifecycle-events.md) | Created、Started、BackOff、Evicted、FailedSync等18个事件 |
+| 310 | 镜像拉取事件 | [image-pull-events](./domain-33-kubernetes-events/03-image-pull-events.md) | Pulling、Pulled、ErrImagePull、ImagePullBackOff等7个事件 |
+| 311 | 探针健康事件 | [probe-health-check-events](./domain-33-kubernetes-events/04-probe-health-check-events.md) | Unhealthy(Liveness/Readiness/Startup)、ProbeWarning |
+| 312 | 调度抢占事件 | [scheduling-preemption-events](./domain-33-kubernetes-events/05-scheduling-preemption-events.md) | Scheduled、FailedScheduling、Preempted、WaitingForGates |
+| 313 | 节点状态事件 | [node-lifecycle-condition-events](./domain-33-kubernetes-events/06-node-lifecycle-condition-events.md) | NodeReady、DiskPressure、MemoryPressure、Rebooted等23个事件 |
+
+#### 控制器事件 (07-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 314 | Deployment事件 | [deployment-replicaset-events](./domain-33-kubernetes-events/07-deployment-replicaset-events.md) | ScalingReplicaSet、ProgressDeadlineExceeded、FailedCreate等 |
+| 315 | STS/DS事件 | [statefulset-daemonset-events](./domain-33-kubernetes-events/08-statefulset-daemonset-events.md) | 有序创建/删除、FailedPlacement、UnhealthyPodEviction等 |
+| 316 | Job/CronJob事件 | [job-cronjob-batch-events](./domain-33-kubernetes-events/09-job-cronjob-batch-events.md) | Completed、BackoffLimitExceeded、TooManyMissedTimes等 |
+
+#### 网络存储事件 (10-11)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 317 | Service网络事件 | [service-networking-events](./domain-33-kubernetes-events/10-service-networking-events.md) | LoadBalancer生命周期、EndpointSlice、HostPortConflict等 |
+| 318 | 存储卷事件 | [storage-volume-events](./domain-33-kubernetes-events/11-storage-volume-events.md) | FailedMount、ProvisioningFailed、VolumeResize等22个事件 |
+
+#### 扩展运维事件 (12-15)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 319 | 自动扩缩事件 | [autoscaling-events](./domain-33-kubernetes-events/12-autoscaling-events.md) | HPA SuccessfulRescale、VPA、Cluster Autoscaler等28个事件 |
+| 320 | 安全准入事件 | [security-admission-rbac-events](./domain-33-kubernetes-events/13-security-admission-rbac-events.md) | 证书审批、Admission Webhook、Pod Security等14个事件 |
+| 321 | NS/GC事件 | [namespace-resource-gc-events](./domain-33-kubernetes-events/14-namespace-resource-gc-events.md) | Namespace删除、ResourceQuota、PDB等15个事件 |
+| 322 | 生态插件事件 | [ecosystem-addon-events](./domain-33-kubernetes-events/15-ecosystem-addon-events.md) | NPD、Ingress、cert-manager、Istio、ArgoCD等56+个事件 |
 
 ---
 

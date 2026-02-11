@@ -10,6 +10,20 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **CRD 是否存在**：`kubectl get crd | grep <kind>`，确认版本与资源可用。
+2. **Webhook 健康**：`kubectl get validatingwebhookconfigurations`，检查超时/证书问题。
+3. **Operator 存活**：`kubectl get pods -n <operator-ns>`，查看重启与日志错误。
+4. **Reconcile 失败**：`kubectl logs <operator-pod>`，检索 requeue/error。
+5. **Finalizer 卡住**：资源 Terminating 时查看 `metadata.finalizers`。
+6. **快速缓解**：
+   - 回滚最近的 CR/CRD 变更。
+   - 临时禁用 webhook（谨慎）以恢复核心操作。
+7. **证据留存**：保存 CRD/CR 状态、Operator 日志与 webhook 配置。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 CRD 与 Operator 架构

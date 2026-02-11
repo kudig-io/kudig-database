@@ -1,0 +1,7 @@
+# mdBook 构建输出
+gitbook/book/
+gitbook/dist/
+gitbook/*.zip
+
+# macOS
+.DS_Store

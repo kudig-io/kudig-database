@@ -9,6 +9,21 @@
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **确认 APF 状态**：`kubectl get --raw "/readyz?verbose" | grep flowcontrol` 确认 ready；`kubectl get flowschema,prioritylevelconfiguration` 确认资源存在。
+2. **定位被限流的请求**：查客户端/组件日志的 `429`，配合 API Server 日志 `apiserver_flowcontrol` 相关字段；抓取 `apiserver_flowcontrol_rejected_requests_total`、`apiserver_flowcontrol_request_queue_length_after_enqueue_bucket` 最高的 FlowSchema/PL。
+3. **匹配校验**：`kubectl describe flowschema <name>`，检查 `matchingPrecedence`、`distinguisherMethod`、`rules` 是否覆盖预期请求；`kubectl auth can-i --as=<user> --list` 辅助确认主体匹配。
+4. **并发与队列容量**：检查命中的 PriorityLevelConfiguration：`concurrencyShares`、`queues`、`queueLengthLimit`、`handSize`，确认是否过低导致排队/拒绝。
+5. **系统流量保护**：确保 `exempt`、`system`、`leader-election` 这类 PL 未被错误修改；关键控制面请求应落在高优先级队列。
+6. **快速缓解**：
+   - 对被 429 的业务请求：临时提高对应 PL 的 `concurrencyShares` 或 `queueLengthLimit`，或提升业务客户端 `qps/burst` 合理限速，避免爆发性 LIST/Watch。
+   - 对系统/控制面受影响：恢复官方默认 APF 配置，或将控制面流量重定向到 `exempt/system` 级别；同时压制异常大流量来源。
+   - 若配置混乱：导出当前 FS/PL，回滚到备份或默认模板后再逐步调优。
+7. **证据留存**：保存 `/readyz?verbose` 输出、被限流请求示例、FS/PL 配置、关键 APF 指标快照用于复盘。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 API Priority and Fairness 架构

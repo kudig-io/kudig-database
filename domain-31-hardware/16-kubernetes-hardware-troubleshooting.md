@@ -445,13 +445,13 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │                         Phase 1: 快速隔离 (0-5分钟)                              │   │
 │  │  ┌────────────────────────────────────────────────────────────────────────────┐ │   │
 │  │  │  1. 确认节点状态                                                           │ │   │
-│  │  │     kubectl get node <node> -o wide                                       │ │   │
+│  │  │     kubectl get node `<node>` -o wide                                       │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  2. 立即隔离节点 (阻止新 Pod 调度)                                         │ │   │
-│  │  │     kubectl cordon <node>                                                 │ │   │
+│  │  │     kubectl cordon `<node>`                                                 │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  3. 如果确认硬件故障严重，驱逐工作负载                                     │ │   │
-│  │  │     kubectl drain <node> --ignore-daemonsets --delete-emptydir-data      │ │   │
+│  │  │     kubectl drain `<node>` --ignore-daemonsets --delete-emptydir-data      │ │   │
 │  │  │     --force --grace-period=30                                            │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  4. 通知相关团队                                                          │ │   │
@@ -465,7 +465,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │                         Phase 2: 影响评估 (5-15分钟)                             │   │
 │  │  ┌────────────────────────────────────────────────────────────────────────────┐ │   │
 │  │  │  1. 检查受影响的 Pod                                                       │ │   │
-│  │  │     kubectl get pods --all-namespaces -o wide | grep <node>              │ │   │
+│  │  │     kubectl get pods --all-namespaces -o wide | grep `<node>`              │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  2. 检查重要服务状态                                                       │ │   │
 │  │  │     - etcd 集群状态                                                       │ │   │
@@ -473,7 +473,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │  │     - 存储 PV/PVC 状态                                                    │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  3. 确认 Pod 是否成功迁移                                                  │ │   │
-│  │  │     kubectl get pods -o wide | grep -v <node>                            │ │   │
+│  │  │     kubectl get pods -o wide | grep -v `<node>`                            │ │   │
 │  │  └────────────────────────────────────────────────────────────────────────────┘ │   │
 │  └─────────────────────────────────────────────────────────────────────────────────┘   │
 │                                           │                                             │
@@ -506,7 +506,7 @@ echo "4. 定期检查 SMART 状态和磁盘健康度"
 │  │  │     - 验证 kubelet 正常启动                                               │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  2. 恢复节点                                                              │ │   │
-│  │  │     kubectl uncordon <node>                                               │ │   │
+│  │  │     kubectl uncordon `<node>`                                               │ │   │
 │  │  │                                                                            │ │   │
 │  │  │  3. 监控节点状态                                                          │ │   │
 │  │  │     - 观察 30 分钟无异常                                                  │ │   │
@@ -786,7 +786,7 @@ data:
 | 节点隔离 | `kubectl cordon <node>` |
 | 驱逐工作负载 | `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` |
 | 恢复节点 | `kubectl uncordon <node>` |
-| 查看节点事件 | `kubectl describe node <node> | grep -A 20 Events` |
+| 查看节点事件 | `kubectl describe node <node> \| grep -A 20 Events` |
 | 查看节点硬件条件 | `kubectl get node <node> -o jsonpath='{.status.conditions}'` |
 | 检查 kubelet 日志 | `journalctl -u kubelet --since "30 min ago"` |
 | 检查 containerd 日志 | `journalctl -u containerd --since "30 min ago"` |

@@ -14,6 +14,20 @@ Job 用于运行一次性任务，确保指定数量的 Pod 成功完成；CronJ
 
 ---
 
+## 0. 10 分钟快速诊断
+
+1. **Cron 调度**：`kubectl get cronjob <name> -o wide`，确认 `SUSPEND` 与 `LAST SCHEDULE`。
+2. **Job 状态**：`kubectl get job -o wide`，观察 `active/succeeded/failed`。
+3. **Pod 失败**：`kubectl get pods -l job-name=<job> --field-selector=status.phase!=Running`，结合 `kubectl logs --previous`。
+4. **时间与时区**：检查 `spec.timeZone` 与集群时间，排除时区偏移。
+5. **并发策略**：确认 `concurrencyPolicy` 与 `startingDeadlineSeconds`。
+6. **快速缓解**：
+   - 失败重试：临时增大 `backoffLimit` 或延长 `activeDeadlineSeconds`。
+   - 积压清理：调整 history limit 并清理历史 Job。
+7. **证据留存**：保存 cronjob/job/pod 描述与事件。
+
+---
+
 ## 第一部分：问题现象与影响分析
 
 ### 1.1 常见问题现象

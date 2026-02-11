@@ -95,6 +95,14 @@
 
 ---
 
+## 使用方式与前置
+
+- **面向读者**：初学者可先按“按错误现象查找”快速定位，再跳转具体文档；资深工程师可直接定位到组件章节，结合监控/日志做横向对比。
+- **建议工具**：kubectl + stern/tail、kubectl-debug/ephemeral container、kubectl-trace、eBPF 观测工具 (bcc/bpftrace/inspektor-gadget)、perf/flamegraph、sysdig/ksniff、tcpdump/wireshark。
+- **排查前置**：记录变更窗口、确认影响范围、备份关键配置/证书/etcd、准备回滚方案；生产环境操作优先在低峰执行并预留隔离窗口。
+- **数据留存**：操作前后收集 `kubectl get/describe/logs`, 关键组件 (kube-apiserver/kubelet/etcd/controller-manager/scheduler/coredns/ingress) 日志与指标快照，必要时保留 pprof/heapdump。
+- **安全提示**：涉及证书/密钥/审计日志时注意脱敏；对 Webhook、PSA、NetworkPolicy、PDB 等变更先在灰度/测试环境验证。
+
 ## 快速定位指南
 
 ### 按错误现象查找

@@ -7,9 +7,75 @@
 > - v1.26+ GracefulNodeShutdown 默认启用
 > - v1.28+ SidecarContainers 支持优雅终止
 
-## 概述
+## 🎯 本文档价值
 
-Kubernetes 节点是运行 Pod 的基础设施，节点问题会直接影响其上所有工作负载。本文档覆盖节点资源压力、亲和性调度、污点容忍、节点生命周期等故障的诊断与解决方案。
+| 读者对象 | 价值体现 |
+| :--- | :--- |
+| **初学者** | 掌握 Kubernetes 节点的五种核心状态条件（Conditions），学会识别污点（Taints）与容忍（Tolerations）的匹配逻辑，掌握安全维护节点（Cordon/Drain）的标准流程。 |
+| **资深专家** | 深入理解节点生命周期控制器（Node Lifecycle Controller）的判活机制、在不同网络分区下的驱逐保护策略、Graceful Node Shutdown 的实现细节，以及针对 CPU/内存碎片化的调度优化方案。 |
+
+---
+
+## 0. 10 分钟快速诊断
+
+1. **确认影响面**：`kubectl get nodes -o wide`，统计 NotReady/Unknown 节点比例，区分单点 vs 批量。
+2. **抽样深描**：对 1-2 个异常节点执行 `kubectl describe node <name>`，关注 Conditions、Taints、Allocatable/Capacity、近期事件（心跳超时/驱逐）。
+3. **资源与压力**：登陆节点 `free -m`、`df -h`、`df -i`、`pidstat -p $(pgrep kubelet)`，查 Memory/Disk/PIDPressure；`dmesg | tail` 识别硬件/IO 报错。
+4. **网络连通**：节点到 API Server `curl -k https://$APISERVER:6443/healthz`，检查安全组/防火墙/路由；批量抖动时考虑上游网络分区。
+5. **驱逐/维护状态**：确认是否被 `cordon`/`drain` 或自动污点；检查 `GracefulNodeShutdown`（v1.26+）和 PodDisruptionConditions。
+6. **快速缓解**：
+   - 单节点异常：`cordon` 并修复资源/网络/磁盘，必要时换机或迁移工作负载。
+   - 批量波动：降低驱逐速率（调整 Node Controller 参数），暂停大规模变更，优先恢复网络/APIServer。
+   - 污染/幽灵节点：清理失联节点 (`kubectl delete node <name>`) 前先确认无跑动 Pod。
+7. **证据留存**：记录 describe 输出、Conditions/Taints 快照、系统日志、网络探测结果，便于复盘。
+
+## 1. 核心原理解析：节点治理的逻辑
+
+### 1.1 节点“亚健康”状态判定
+
+节点不只是 Ready 或 NotReady。Kubernetes 通过 `NodeConditions` 描述节点的健康维度：
+- **资源压力（Pressure）**：当节点可用内存或磁盘低于 kubelet 设定的 `eviction-hard` 阈值时，节点会被打上对应的 Condition。
+- **自动污点（Auto-Taints）**：Node Controller 会根据 Condition 自动为节点打上污点（如 `NoSchedule` 或 `NoExecute`），防止新的 Pod 调度进来，或者驱逐已有 Pod。
+
+### 1.2 节点驱逐保护机制（ एक्सपर्ट's Perspective）
+
+在大规模集群中，节点批量 NotReady 是极度危险的场景。
+1. **驱逐速率限制**：当集群中超过 20% 的节点 NotReady 时，Node Controller 会进入“部分故障”模式，将驱逐速率降至每秒 0.01 个节点，防止因网络波动导致全集群 Pod 重新调度。
+2. **Graceful Node Shutdown**：v1.26+ 默认开启。kubelet 能够感知节点关机信号，并优先终止 Pod，给予关键应用（如数据库）数据刷盘的时间。
+
+### 1.3 生产环境典型“节点陷阱”
+
+1. **CPU 节流（Throttling）导致的服务抖动**：
+   - **现象**：节点 CPU 使用率不高，但 Pod 响应变慢，监控显示 CPU Throttling。
+   - **原因**：CFS 调度器的周期限制与 Pod 的 CPU Limit 冲突。
+   - **对策**：推荐使用 CPU Manager 设置 `static` 策略，或在 v1.22+ 尝试 `CPUManagerPolicyAlphaOptions`。
+2. **Ghost Nodes（幽灵节点）**：
+   - **现象**：节点已在云端删除，但 `kubectl get nodes` 仍然可见且显示 NotReady。
+   - **原因**：Cloud Controller Manager (CCM) 同步异常或未正确配置。
+
+# 专家级观测工具链（Expert's Toolbox）
+
+```bash
+# 专家级：查看节点所有 Conditions（包括隐形自定义条件）
+kubectl get node <node-name> -o json | jq '.status.conditions'
+
+# 专家级：分析节点资源分配碎片化程度
+# 使用 kubectl-view-allocations 插件（推荐安装）
+kubectl view-allocations
+
+# 专家级：追踪 Node Controller 的驱逐决策日志
+kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLifecycleController"
+```
+
+---
+
+## 目录
+
+1. [节点治理逻辑](#1-核心原理解析节点治理的逻辑)
+2. [专家观测工具链](#专家级观测工具链experts-toolbox)
+3. [故障现象与分级影响](#12-常见问题现象)
+4. [基础排查步骤（初学者）](#22-排查命令集)
+5. [深度治理方案](#第三部分解决方案与风险控制)
 
 ---
 
@@ -71,7 +137,7 @@ Kubernetes 节点是运行 Pod 的基础设施，节点问题会直接影响其�
 
 ---
 
-## 第二部分：排查原理与方法
+## 第二部分：排查方法（基础与进阶）
 
 ### 2.1 排查决策树
 
