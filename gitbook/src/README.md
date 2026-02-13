@@ -1,1 +1,1575 @@
-../../README.md
+# KUDIG-DATABASE - Kubernetes 生产运维全域知识库
+
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 658 | **领域数量**: 33
+
+---
+
+## 目录
+
+- [项目定位](#项目定位)
+- [快速导航(按角色)](#快速导航按角色)
+- [知识体系架构](#知识体系架构)
+- [核心知识域](#核心知识域)
+  - [域1: 架构基础](#域1-架构基础-architecture-fundamentals)
+  - [域2: 设计原理](#域2-设计原理-design-principles)
+  - [域3: 控制平面](#域3-控制平面-control-plane)
+  - [域4: 工作负载与调度](#域4-工作负载与调度-workloads--scheduling)
+  - [域5: 网络](#域5-网络-networking)
+  - [域6: 存储](#域6-存储-storage)
+  - [域7: 安全合规](#域7-安全合规-security--compliance)
+  - [域8: 可观测性](#域8-可观测性-observability)
+  - [域9: 平台运维](#域9-平台运维-platform-operations)
+  - [域10: 扩展生态](#域10-扩展生态-extensions--ecosystem)
+  - [域11: AI基础设施](#域11-ai基础设施-ai-infrastructure)
+  - [域12: 故障排查](#域12-故障排查-troubleshooting)
+- [底层基础知识域](#底层基础知识域)
+  - [域13: Docker基础](#域13-docker基础-docker-fundamentals)
+  - [域14: Linux基础](#域14-linux基础-linux-fundamentals)
+  - [域15: 网络基础](#域15-网络基础-network-fundamentals)
+  - [域16: 存储基础](#域16-存储基础-storage-fundamentals)
+  - [域17: 云厂商Kubernetes服务](#域17-云厂商kubernetes服务-cloud-provider-kubernetes-services)
+- [企业级运维专题](#企业级运维专题)
+  - [域18: 生产运维实践](#域18-生产运维实践-production-operations)
+  - [域19: 技术白皮书](#域19-技术白皮书-technical-papers)
+  - [域20: 企业监控告警](#域20-企业监控告警-enterprise-monitoring)
+  - [域21: 日志管理分析](#域21-日志管理分析-logging-management)
+  - [域22: 镜像仓库管理](#域22-镜像仓库管理-container-registry)
+  - [域23: GitOps与CI/CD](#域23-gitops与cicd)
+  - [域24: 基础设施即代码](#域24-基础设施即代码-infrastructure-as-code)
+  - [域25: 云原生安全](#域25-云原生安全-cloud-native-security)
+  - [域26: 服务网格](#域26-服务网格-service-mesh)
+  - [域27: 多云混合云](#域27-多云混合云-multi-cloud)
+  - [域28: 数据库中间件](#域28-数据库中间件-database-middleware)
+  - [域29: 自动化测试](#域29-自动化测试-automated-testing)
+  - [域30: 灾备业务连续性](#域30-灾备业务连续性-disaster-recovery)
+  - [域31: 硬件基础设施](#域31-硬件基础设施-hardware-infrastructure)
+  - [域32: YAML配置清单手册](#域32-yaml配置清单手册-yaml-manifests-reference)
+  - [域33: Kubernetes Events 全域事件大全](#域33-kubernetes-events-全域事件大全)
+- [专题资源](#专题资源)
+  - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
+  - [topic-presentations: 培训演示](#topic-presentations-培训演示)
+  - [topic-structural-trouble-shooting: 结构化故障排查](#topic-structural-trouble-shooting-结构化故障排查)
+  - [topic-cheat-sheet: 快速速查卡](#topic-cheat-sheet-快速速查卡)
+- [多维度查询附录](#多维度查询附录)
+- [本地 Gitbook](#本地-gitbook)
+- [变更历史](#变更历史)
+
+---
+
+## 项目定位
+
+Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域知识库，涵盖从基础架构到 AI/LLM 工作负载的完整技术栈。
+
+| 特性 | 说明 |
+|:---|:---|
+| **生产级配置** | 所有 YAML/Shell 示例可直接用于生产环境 |
+| **AI Infra专题** | 覆盖GPU调度、分布式训练、模型服务、成本优化 |
+| **企业级运维** | 包含监控告警、日志分析、镜像管理、CI/CD等企业级平台 |
+| **多维度索引** | 按技术域、场景、角色、组件快速定位 |
+| **深度解析** | 控制平面组件源码级剖析、CRI/CSI/CNI接口详解 |
+
+---
+
+## 快速导航(按角色)
+
+| 角色 | 推荐起点 | 核心关注域 |
+|:---|:---|:---|
+| **开发者** | [05-kubectl](#域1-架构基础-architecture-fundamentals) → [10-工作负载](#域4-工作负载与调度-workloads--scheduling) → [47-Service](#域5-网络-networking) | 工作负载、网络、CI/CD |
+| **运维工程师** | [35-etcd](#域3-控制平面-control-plane) → [99-排障](#域12-故障排查-troubleshooting) → [93-监控](#域8-可观测性-observability) | 控制平面、可观测性、故障排查 |
+| **架构师** | [01-架构](#域1-架构基础-architecture-fundamentals) → [11-设计原则](#域2-设计原理-design-principles) → [18-高可用](#域2-设计原理-design-principles) | 架构基础、设计原理、多集群 |
+| **测试工程师** | [106-混沌工程](#域8-可观测性-observability) → [124-CI/CD](#域10-扩展生态-extensions--ecosystem) | 混沌工程、CI/CD、可观测性 |
+| **产品经理** | [01-架构](#域1-架构基础-architecture-fundamentals) → [26-成本](#域11-ai基础设施-ai-infrastructure) → [12-AI成本](#域11-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
+| **终端用户** | [05-kubectl](#域1-架构基础-architecture-fundamentals) → [126-Helm](#域10-扩展生态-extensions--ecosystem) → [125-GitOps](#域10-扩展生态-extensions--ecosystem) | CLI工具、部署管理 |
+
+---
+
+## 知识体系架构
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│                         Kubernetes 生产运维全域知识体系                            │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                            核心知识域 (Domain 1-12)                               │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域1 架构基础 │→│ 域2 设计原理 │→│ 域3 控制平面 │→│ 域4 工作负载 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│         ↓               ↓               ↓               ↓                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │  域5 网络   │←→│  域6 存储   │←→│ 域7 安全合规 │←→│ 域8 可观测性 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│         ↓               ↓               ↓               ↓                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域9 平台运维 │→│ 域10扩展生态 │→│ 域11 AI基础 │→│ 域12故障排查 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                         底层基础知识域 (Domain 13-17)                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │ 域13 Docker │  │ 域14 Linux  │  │ 域15网络基础 │  │ 域16存储基础 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│                        ┌─────────────────────────┐                               │
+│                        │  域17 云厂商K8s服务     │                               │
+│                        └─────────────────────────┘                               │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                        企业级运维专题 (Domain 18-32)                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域18生产运维 │  │域19技术白皮书│  │域20企业监控 │  │域21日志管理 │              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域22镜像仓库 │  │域23 GitOps  │  │ 域24 IaC   │  │域25云原生安全│              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
+│  │域26服务网格 │  │域27多云混合 │  │域28数据库   │  │域29自动化测试│              │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘              │
+│  ┌─────────────┐  ┌─────────────┐                                                │
+│  │域30灾备恢复 │  │域31硬件基础 │                                                │
+│  └─────────────┘  └─────────────┘                                                │
+│                   ┌─────────────┐                                                │
+│                   │域32 YAML手册│                                                │
+│                   └─────────────┘                                                │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                              专题资源                                             │
+│  ┌────────────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐│
+│  │  topic-dictionary      │  │  topic-presentations   │  │topic-structural-trouble││
+│  │  (运维词典/16篇)       │  │  (培训演示/7篇)        │  │ -shooting(故障排查/40篇)││
+│  └────────────────────────┘  └────────────────────────┘  └────────────────────────┘│
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 域1: 架构基础 (Architecture Fundamentals)
+
+> 17 篇 | **从生产环境运维专家角度深度优化**，新增企业级高可用架构设计、零信任安全实施、基于机器学习的性能优化、高级威胁检测等专家级内容
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | K8s架构 | [kubernetes-architecture-overview](./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md) | **新增第11章生产环境运维专家增强指南**：企业级高可用架构、零信任安全架构、成本优化专家策略、故障应急响应专家手册 |
+| 02 | 核心组件 | [core-components-deep-dive](./domain-1-architecture-fundamentals/02-core-components-deep-dive.md) | 各组件职责与协作 |
+| 03 | API版本 | [api-versions-features](./domain-1-architecture-fundamentals/03-api-versions-features.md) | API版本演进、特性门控 |
+| 04 | 源码结构 | [source-code-structure](./domain-1-architecture-fundamentals/04-source-code-structure.md) | 源码目录、模块划分 |
+| 05 | kubectl | [kubectl-commands-reference](./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md) | 命令大全、常用场景 |
+| 06 | 集群配置 | [cluster-configuration-parameters](./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md) | 集群级配置参数 |
+| 07 | 升级策略 | [upgrade-paths-strategy](./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md) | **新增第8章生产环境升级专家实践**：蓝绿部署、金丝雀升级、智能预检系统、零停机方案、自动回滚机制 |
+| 08 | 多租户 | [multi-tenancy-architecture](./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md) | 多租户隔离模型 |
+| 09 | 边缘计算 | [edge-computing-kubeedge](./domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md) | KubeEdge、边缘场景 |
+| 10 | Win容器 | [windows-containers-support](./domain-1-architecture-fundamentals/10-windows-containers-support.md) | Windows节点支持 |
+| 11 | 源码解读 | [kubernetes-source-code-architecture](./domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md) | 核心代码路径 |
+| 12 | 部署模式 | [cluster-deployment-patterns](./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md) | 集群部署模式 |
+| 13 | 性能调优 | [performance-tuning-guide](./domain-1-architecture-fundamentals/13-performance-tuning-guide.md) | **新增第8章生产环境性能优化专家实践**：超大规模集群优化、智能自动调优系统、容器运行时性能优化、网络性能专家优化 |
+| 14 | 安全架构 | [security-architecture](./domain-1-architecture-fundamentals/14-security-architecture.md) | **新增第8章企业级安全运营专家实践**：零信任安全架构深度实施、高级威胁检测系统、容器安全专家防护体系、合规自动化与审计专家系统 |
+| 15 | 可观测性 | [observability-architecture](./domain-1-architecture-fundamentals/15-observability-architecture.md) | 可观测性架构 |
+| 17 | 运维实践 | [production-operations-best-practices](./domain-17-production-operations/README.md) | **全新24章节生产环境运维专家实践体系**：高可用架构设计、多云混合部署、边缘计算生产部署、企业级监控体系、日志收集分析平台、APM应用性能监控、零信任安全架构、CIS基准合规检查、SBOM软件物料清单、GitOps流水线实践、基础设施即代码、自动化运维工具链、Kubernetes成本治理、资源配额管理、绿色计算可持续发展、企业级备份策略、灾难恢复演练、跨区域容灾部署、集群性能调优、网络性能优化、存储性能优化、变更管理流程、事件响应处理、容量规划预测 |
+
+---
+
+### 域2: 设计原理 (Design Principles)
+
+> 18 篇 | K8s设计哲学、声明式API、控制器模式、分布式原理、可观测性、安全设计、性能优化
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | 设计原则 | [design-principles-foundations](./domain-2-design-principles/01-design-principles-foundations.md) | 核心设计哲学、最佳实践 |
+| 12 | 声明式API | [declarative-api-pattern](./domain-2-design-principles/02-declarative-api-pattern.md) | 声明式 vs 命令式 |
+| 13 | 控制器模式 | [controller-pattern](./domain-2-design-principles/03-controller-pattern.md) | Reconcile循环、最终一致性 |
+| 14 | Watch/List | [watch-list-mechanism](./domain-2-design-principles/04-watch-list-mechanism.md) | 事件监听机制 |
+| 15 | Informer | [informer-workqueue](./domain-2-design-principles/05-informer-workqueue.md) | SharedInformer、WorkQueue |
+| 16 | 乐观并发 | [resource-version-control](./domain-2-design-principles/06-resource-version-control.md) | ResourceVersion、冲突处理 |
+| 17 | etcd共识 | [distributed-consensus-etcd](./domain-2-design-principles/07-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
+| 18 | 高可用模式 | [high-availability-patterns](./domain-2-design-principles/08-high-availability-patterns.md) | HA架构、故障转移 |
+| 19 | 源码解读 | [source-code-walkthrough](./domain-2-design-principles/09-source-code-walkthrough.md) | 核心代码路径 |
+| 20 | CAP定理 | [cap-theorem-distributed-systems](./domain-2-design-principles/10-cap-theorem-distributed-systems.md) | CAP权衡、分布式取舍 |
+| 21 | 扩展设计 | [extensibility-design-patterns](./domain-2-design-principles/11-extensibility-design-patterns.md) | CRD、扩展机制设计 |
+| 22 | Operator | [operator-development-guide](./domain-2-design-principles/12-operator-development-guide.md) | Operator模式实践 |
+| 23 | 准入控制 | [admission-control-webhooks](./domain-2-design-principles/13-admission-control-webhooks.md) | Webhook、验证变更 |
+| 24 | 服务网格 | [service-mesh-architecture](./domain-2-design-principles/14-service-mesh-architecture.md) | 微服务、服务网格设计 |
+| 25 | 混沌工程 | [chaos-engineering](./domain-2-design-principles/15-chaos-engineering.md) | 故障注入、韧性测试 |
+| 26 | 可观测性 | [observability-design-principles](./domain-2-design-principles/16-observability-design-principles.md) | 监控、日志、追踪设计 |
+| 27 | 安全设计 | [security-design-patterns](./domain-2-design-principles/17-security-design-patterns.md) | 零信任、最小权限原则 |
+| 28 | 性能优化 | [performance-optimization-principles](./domain-2-design-principles/18-performance-optimization-principles.md) | 调度、资源、网络优化 |
+
+---
+
+### 域3: 控制平面 (Control Plane)
+
+> 23 篇 | 控制平面架构、组件详解、接口深度解析、调优扩展、故障排查
+
+#### C1: 核心主题文档 (01-10)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 架构总览 | [plane-architecture-overview](./domain-3-control-plane/01-plane-architecture-overview.md) | 控制平面整体架构、组件关系 |
+| 02 | 组件交互 | [plane-components-interaction](./domain-3-control-plane/02-plane-components-interaction.md) | 组件间通信、数据流分析 |
+| 03 | 高可用部署 | [plane-high-availability](./domain-3-control-plane/03-plane-high-availability.md) | HA架构设计、部署模式 |
+| 04 | 安全加固 | [plane-security-hardening](./domain-3-control-plane/04-plane-security-hardening.md) | 安全配置、加固指南 |
+| 05 | 监控可观测 | [plane-monitoring-observability](./domain-3-control-plane/05-plane-monitoring-observability.md) | 监控指标、可观测性 |
+| 06 | 故障排查 | [plane-troubleshooting](./domain-3-control-plane/06-plane-troubleshooting.md) | 故障诊断、排查手册 |
+| 07 | 升级迁移 | [plane-upgrade-migration](./domain-3-control-plane/07-plane-upgrade-migration.md) | 版本升级、迁移策略 |
+| 08 | 性能基准 | [plane-performance-benchmarking](./domain-3-control-plane/08-plane-performance-benchmarking.md) | 性能测试、基准数据 |
+| 09 | 扩缩容指南 | [plane-scalability-guide](./domain-3-control-plane/09-plane-scalability-guide.md) | 水平垂直扩展、自动扩缩 |
+| 10 | 备份灾备 | [plane-backup-disaster-recovery](./domain-3-control-plane/10-plane-backup-disaster-recovery.md) | 备份策略、灾备方案 |
+
+#### C2: 组件深度解析 (11-20)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | etcd详解 | [etcd-deep-dive](./domain-3-control-plane/11-etcd-deep-dive.md) | Raft共识、MVCC存储、备份恢复 |
+| 12 | API Server | [apiserver-deep-dive](./domain-3-control-plane/12-apiserver-deep-dive.md) | 认证授权、APF限流、审计日志 |
+| 13 | KCM详解 | [kube-controller-manager-deep-dive](./domain-3-control-plane/13-kube-controller-manager-deep-dive.md) | 40+控制器、Leader选举 |
+| 14 | CCM详解 | [cloud-controller-manager-deep-dive](./domain-3-control-plane/14-cloud-controller-manager-deep-dive.md) | 云厂商控制器集成 |
+| 15 | Kubelet详解 | [kubelet-deep-dive](./domain-3-control-plane/15-kubelet-deep-dive.md) | Pod生命周期、PLEG、CRI接口 |
+| 16 | kube-proxy | [kube-proxy-deep-dive](./domain-3-control-plane/16-kube-proxy-deep-dive.md) | iptables/IPVS/nftables模式 |
+| 17 | APIServer调优 | [apiserver-tuning](./domain-3-control-plane/17-apiserver-tuning.md) | 性能参数、限流配置 |
+| 18 | APF限流 | [api-priority-fairness](./domain-3-control-plane/18-api-priority-fairness.md) | 优先级、公平分配机制 |
+| 19 | etcd运维 | [etcd-operations](./domain-3-control-plane/19-etcd-operations.md) | 集群运维、故障恢复 |
+| 20 | Scheduler详解 | [kube-scheduler-deep-dive](./domain-3-control-plane/20-kube-scheduler-deep-dive.md) | 调度框架、插件、抢占机制 |
+
+#### C3: 接口深度解析 (21-23)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 21 | CRI详解 | [container-runtime-deep-dive](./domain-3-control-plane/21-container-runtime-deep-dive.md) | containerd/CRI-O、安全容器 |
+| 22 | CSI详解 | [container-storage-deep-dive](./domain-3-control-plane/22-container-storage-deep-dive.md) | CSI规范、驱动开发、快照功能 |
+| 23 | CNI详解 | [container-network-deep-dive](./domain-3-control-plane/23-container-network-deep-dive.md) | CNI规范、Calico/Cilium网络 |
+
+---
+
+### 域4: 工作负载与调度 (Workloads & Scheduling)
+
+> 14 篇 | Pod、Deployment、调度策略、自动扩缩容、资源管理
+
+#### D1: 工作负载控制器
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | 工作负载 | [workload-controllers-overview](./domain-4-workloads/10-workload-controllers-overview.md) | Deployment/StatefulSet/DaemonSet |
+| 11 | Pod生命周期 | [pod-lifecycle-events](./domain-4-workloads/11-pod-lifecycle-events.md) | Phase、Condition、事件 |
+| 12 | Pod模式 | [advanced-pod-patterns](./domain-4-workloads/12-advanced-pod-patterns.md) | Init/Sidecar/Ambassador |
+| 13 | 容器Hook | [container-lifecycle-hooks](./domain-4-workloads/13-container-lifecycle-hooks.md) | PostStart/PreStop |
+| 25 | Sidecar | [sidecar-containers-patterns](./domain-4-workloads/25-sidecar-containers-patterns.md) | Native Sidecar(v1.28+) |
+
+#### D2: 容器运行时
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 26 | CRI接口 | [container-runtime-interfaces](./domain-4-workloads/26-container-runtime-interfaces.md) | CRI规范、运行时选型 |
+| 27 | RuntimeClass | [runtime-class-configuration](./domain-4-workloads/27-runtime-class-configuration.md) | 多运行时配置 |
+| 28 | 镜像仓库 | [container-images-registry](./domain-4-workloads/28-container-images-registry.md) | 镜像拉取、仓库配置 |
+
+#### D3: 调度与资源
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 29 | 节点管理 | [node-management-operations](./domain-4-workloads/29-node-management-operations.md) | 节点维护、cordon/drain |
+| 30 | 调度器 | [scheduler-configuration](./domain-4-workloads/30-scheduler-configuration.md) | 调度策略、亲和性 |
+| 31 | Kubelet | [kubelet-configuration](./domain-4-workloads/31-kubelet-configuration.md) | Kubelet参数配置 |
+| 32 | HPA/VPA | [hpa-vpa-autoscaling](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | 水平/垂直自动扩缩 |
+| 33 | 容量规划 | [cluster-capacity-planning](./domain-4-workloads/33-cluster-capacity-planning.md) | 资源预估、容量模型 |
+| 34 | 资源管理 | [resource-management](./domain-4-workloads/34-resource-management.md) | Request/Limit、QoS |
+
+---
+
+### 域5: 网络 (Networking)
+
+> 36 篇 | CNI、Service、DNS、Ingress、Gateway API、网络策略、服务网格、多集群网络
+
+#### E1: 网络安全与策略
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | NetworkPolicy实践 | [networkpolicy-deep-practice](./domain-5-networking/01-networkpolicy-deep-practice.md) | 生产级网络策略配置、零信任安全模型、策略设计模式 |
+| 02 | 服务网格 | [service-mesh-deep-dive](./domain-5-networking/02-service-mesh-deep-dive.md) | Istio/Linkerd生产部署、Sidecar模式、流量治理 |
+| 03 | 多集群网络 | [multi-cluster-federation](./domain-5-networking/03-multi-cluster-federation.md) | Cluster Federation、跨集群通信、VPC对等连接 |
+| 04 | DNS优化 | [dns-service-discovery-coredns](./domain-5-networking/04-dns-service-discovery-coredns.md) | CoreDNS调优、NodeLocal DNSCache、性能监控 |
+
+#### E2: 网络架构与CNI
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 05 | 网络架构 | [network-architecture-overview](./domain-5-networking/05-network-architecture-overview.md) | K8s网络模型、三层网络 |
+| 06 | CNI架构 | [cni-architecture-fundamentals](./domain-5-networking/06-cni-architecture-fundamentals.md) | CNI规范、插件机制 |
+| 07 | CNI对比 | [cni-plugins-comparison](./domain-5-networking/07-cni-plugins-comparison.md) | Flannel/Calico/Cilium对比 |
+| 08 | Flannel | [flannel-complete-guide](./domain-5-networking/08-flannel-complete-guide.md) | VXLAN/host-gw模式 |
+| 09 | Terway | [terway-advanced-guide](./domain-5-networking/09-terway-advanced-guide.md) | 阿里云ENI网络 |
+| 10 | CNI排障 | [cni-troubleshooting-optimization](./domain-5-networking/10-cni-troubleshooting-optimization.md) | 网络故障诊断 |
+
+#### E3: Service与服务发现
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | Service概念 | [service-concepts-types](./domain-5-networking/11-service-concepts-types.md) | ClusterIP/NodePort/LB |
+| 12 | Service实现 | [service-implementation-details](./domain-5-networking/12-service-implementation-details.md) | Endpoint、流量转发 |
+| 13 | 拓扑感知 | [service-topology-aware](./domain-5-networking/13-service-topology-aware.md) | 拓扑感知路由 |
+| 14 | kube-proxy | [kube-proxy-modes-performance](./domain-5-networking/14-kube-proxy-modes-performance.md) | 代理模式性能对比 |
+| 15 | Service高级 | [service-advanced-features](./domain-5-networking/15-service-advanced-features.md) | 会话亲和、外部流量 |
+| 260 | Service ACK实战 | [service-ack-practical-guide](./tables/service-ack-practical-guide.md) | 阿里云环境完整配置指南 |
+
+#### E4: DNS与服务发现
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 16 | DNS发现 | [dns-service-discovery](./domain-5-networking/16-dns-service-discovery.md) | DNS服务发现机制 |
+| 17 | CoreDNS架构 | [coredns-architecture-principles](./domain-5-networking/17-coredns-architecture-principles.md) | CoreDNS架构原理 |
+| 18 | Corefile | [coredns-configuration-corefile](./domain-5-networking/18-coredns-configuration-corefile.md) | Corefile配置 |
+| 19 | DNS插件 | [coredns-plugins-reference](./domain-5-networking/19-coredns-plugins-reference.md) | 插件详解 |
+| 20 | DNS排障 | [coredns-troubleshooting-optimization](./domain-5-networking/20-coredns-troubleshooting-optimization.md) | DNS故障诊断 |
+
+#### E5: 网络策略与安全
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 21 | 网络策略 | [network-policy-advanced](./domain-5-networking/21-network-policy-advanced.md) | NetworkPolicy高级配置 |
+| 22 | mTLS加密 | [network-encryption-mtls](./domain-5-networking/22-network-encryption-mtls.md) | 服务间mTLS |
+| 23 | Egress管理 | [egress-traffic-management](./domain-5-networking/23-egress-traffic-management.md) | 出站流量控制 |
+| 24 | 多集群网络 | [multi-cluster-networking](./domain-5-networking/24-multi-cluster-networking.md) | 跨集群网络 |
+| 25 | 网络排障 | [network-troubleshooting](./domain-5-networking/25-network-troubleshooting.md) | 网络故障排查 |
+| 26 | 网络调优 | [network-performance-tuning](./domain-5-networking/26-network-performance-tuning.md) | 网络性能优化 |
+
+#### E6: Ingress与流量入口
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 27 | Ingress基础 | [ingress-fundamentals](./domain-5-networking/27-ingress-fundamentals.md) | Ingress核心架构、路由配置、TLS、生产实践 |
+| 28 | Ingress控制器 | [ingress-controller-deep-dive](./domain-5-networking/28-ingress-controller-deep-dive.md) | 控制器选型对比 |
+| 29 | Nginx Ingress | [nginx-ingress-complete-guide](./domain-5-networking/29-nginx-ingress-complete-guide.md) | Nginx配置详解 |
+| 30 | Ingress TLS | [ingress-tls-certificate](./domain-5-networking/30-ingress-tls-certificate.md) | TLS证书配置 |
+| 31 | 高级路由 | [ingress-advanced-routing](./domain-5-networking/31-ingress-advanced-routing.md) | 路由规则、重写 |
+| 32 | Ingress安全 | [ingress-security-hardening](./domain-5-networking/32-ingress-security-hardening.md) | 安全加固 |
+| 33 | Ingress监控 | [ingress-monitoring-troubleshooting](./domain-5-networking/33-ingress-monitoring-troubleshooting.md) | 监控与排障 |
+| 34 | Ingress实践 | [ingress-production-best-practices](./domain-5-networking/34-ingress-production-best-practices.md) | 生产最佳实践 |
+
+#### E7: Gateway API与服务网格
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 35 | Gateway API | [gateway-api-overview](./domain-5-networking/35-gateway-api-overview.md) | 新一代流量管理 |
+| 36 | API网关 | [api-gateway-patterns](./domain-5-networking/36-api-gateway-patterns.md) | 网关模式 |
+
+---
+
+### 域6: 存储 (Storage)
+
+> 15 篇 | 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、PV/PVC核心概念、StorageClass动态供给、CSI驱动集成、性能调优、故障排查、安全合规、备份灾备等企业级实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 存储架构 | [storage-architecture-overview](./domain-6-storage/01-storage-architecture-overview.md) | 存储系统整体架构、核心组件、生产环境最佳实践 |
+| 02 | PV架构 | [pv-architecture-fundamentals](./domain-6-storage/02-pv-architecture-fundamentals.md) | PV/PVC工作机制、企业级配置模板、容量管理优化 |
+| 03 | PVC模式 | [pvc-patterns-practices](./domain-6-storage/03-pvc-patterns-practices.md) | PVC使用模式、配置最佳实践、常见陷阱避免 |
+| 04 | StorageClass | [storageclass-dynamic-provisioning](./domain-6-storage/04-storageclass-dynamic-provisioning.md) | 动态供给机制、多租户策略、成本控制管理 |
+| 05 | CSI驱动 | [csi-drivers-integration](./domain-6-storage/05-csi-drivers-integration.md) | CSI驱动架构、故障处理、性能调优、安全加固 |
+| 06 | 存储基础 | [storage-fundamental-concepts](./domain-6-storage/06-storage-fundamental-concepts.md) | 存储基本概念、访问模式、回收策略深入解析 |
+| 07 | 日常运维 | [storage-daily-operations](./domain-6-storage/07-storage-daily-operations.md) | 日常运维操作、巡检脚本、应急处理流程 |
+| 08 | 存储调优 | [storage-performance-tuning](./domain-6-storage/08-storage-performance-tuning.md) | 性能优化策略、调优参数、监控指标分析 |
+| 09 | 存储排障 | [pv-pvc-troubleshooting](./domain-6-storage/09-pv-pvc-troubleshooting.md) | PV/PVC故障诊断流程、常见问题解决方案、案例分析 |
+| 10 | 存储备份 | [storage-backup-disaster-recovery](./domain-6-storage/10-storage-backup-disaster-recovery.md) | 备份策略、恢复流程、灾难恢复方案设计 |
+| 11 | 高级特性 | [storage-advanced-features](./domain-6-storage/11-storage-advanced-features.md) | 存储快照、克隆、迁移等高级功能 |
+| 12 | 监控告警 | [storage-monitoring-alerting](./domain-6-storage/12-storage-monitoring-alerting.md) | 监控指标体系、告警策略配置、仪表板设计 |
+| 13 | 安全合规 | [storage-security-compliance](./domain-6-storage/13-storage-security-compliance.md) | 数据加密、访问控制、安全审计、合规要求 |
+| 14 | 云原生存储 | [cloud-native-storage](./domain-6-storage/14-cloud-native-storage.md) | 云原生存储架构、最佳实践、厂商方案对比 |
+| 15 | 灾难恢复 | [storage-disaster-recovery](./domain-6-storage/15-storage-disaster-recovery.md) | 灾难恢复架构、演练流程、RTO/RPO管理 |
+
+---
+
+### 域7: 安全合规 (Security & Compliance)
+
+> 16 篇 | 认证授权、网络安全、运行时安全、审计合规、安全实践、策略引擎
+
+#### G1: 核心安全体系 (01-04)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 认证授权 | [authentication-authorization-system](./domain-7-security/01-authentication-authorization-system.md) | RBAC、OIDC、ServiceAccount、认证授权体系 |
+| 02 | 网络安全 | [network-security-policies](./domain-7-security/02-network-security-policies.md) | NetworkPolicy、服务网格、零信任安全模型 |
+| 03 | 运行时安全 | [runtime-security-defense](./domain-7-security/03-runtime-security-defense.md) | Seccomp/AppArmor、Falco威胁检测、运行时防护 |
+| 04 | 审计合规 | [audit-logging-compliance](./domain-7-security/04-audit-logging-compliance.md) | 审计策略、日志收集、合规性检查、SOC2/ISO认证 |
+
+#### G2: 安全实践与工具 (05-16)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 05 | 安全实践 | [security-best-practices](./domain-7-security/05-security-best-practices.md) | 安全最佳实践 |
+| 06 | 安全加固 | [security-hardening-production](./domain-7-security/06-security-hardening-production.md) | 生产加固清单 |
+| 07 | PSS标准 | [pod-security-standards](./domain-7-security/07-pod-security-standards.md) | Pod安全标准 |
+| 08 | RBAC矩阵 | [rbac-matrix-configuration](./domain-7-security/08-rbac-matrix-configuration.md) | 权限矩阵配置 |
+| 09 | 证书管理 | [certificate-management](./domain-7-security/09-certificate-management.md) | PKI、cert-manager |
+| 10 | 镜像扫描 | [image-security-scanning](./domain-7-security/10-image-security-scanning.md) | 漏洞扫描 |
+| 11 | 策略引擎 | [policy-engines-opa-kyverno](./domain-7-security/11-policy-engines-opa-kyverno.md) | OPA/Kyverno策略引擎对比 |
+| 12 | 合规认证 | [compliance-certification](./domain-7-security/12-compliance-certification.md) | SOC2/ISO/PCI合规认证 |
+| 13 | 审计实践 | [compliance-audit-practices](./domain-7-security/13-compliance-audit-practices.md) | 审计日志配置实践 |
+| 14 | 密钥管理 | [secret-management-tools](./domain-7-security/14-secret-management-tools.md) | Vault/ESO集成 |
+| 15 | 安全扫描 | [security-scanning-tools](./domain-7-security/15-security-scanning-tools.md) | Trivy/Falco安全扫描工具 |
+| 16 | 策略验证 | [policy-validation-tools](./domain-7-security/16-policy-validation-tools.md) | 策略校验工具 |
+
+---
+
+### 域8: 可观测性 (Observability)
+
+> 17 篇 | 架构体系、监控指标、日志审计、链路追踪、告警管理、故障排查、性能分析、混沌工程
+
+#### H1: 监控与指标
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 架构概览 | [observability-architecture-overview](./domain-8-observability/01-observability-architecture-overview.md) | 可观测性架构体系 |
+| 02 | 指标监控 | [monitoring-metrics-system](./domain-8-observability/02-monitoring-metrics-system.md) | Prometheus监控体系 |
+| 03 | 日志架构 | [logging-architecture](./domain-8-observability/03-logging-architecture.md) | 日志收集架构 |
+| 04 | 链路追踪 | [distributed-tracing](./domain-8-observability/04-distributed-tracing.md) | OpenTelemetry/Jaeger |
+| 05 | 告警管理 | [alerting-management](./domain-8-observability/05-alerting-management.md) | SLO驱动告警策略 |
+| 06 | Prometheus | [monitoring-metrics-prometheus](./domain-8-observability/06-monitoring-metrics-prometheus.md) | Prometheus监控体系 |
+| 07 | 自定义指标 | [custom-metrics-adapter](./domain-8-observability/07-custom-metrics-adapter.md) | Metrics API扩展 |
+| 10 | 可观测工具 | [observability-tools](./domain-8-observability/10-observability-tools.md) | 可观测性工具栈 |
+
+#### H2: 日志与审计
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 08 | 日志审计 | [logging-auditing](./domain-8-observability/08-logging-auditing.md) | 日志收集架构 |
+| 09 | 事件审计 | [events-audit-logs](./domain-8-observability/09-events-audit-logs.md) | K8s事件与审计 |
+| 11 | 日志聚合 | [log-aggregation-tools](./domain-8-observability/11-log-aggregation-tools.md) | EFK/Loki方案 |
+
+#### H3: 诊断与分析
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 12 | 排障概览 | [troubleshooting-overview](./domain-8-observability/12-troubleshooting-overview.md) | 生产级故障排查全攻略、版本特定问题、SOP流程 |
+| 13 | 排障工具 | [troubleshooting-tools](./domain-8-observability/13-troubleshooting-tools.md) | kubectl debug/netshoot |
+| 14 | 性能分析 | [performance-profiling-tools](./domain-8-observability/14-performance-profiling-tools.md) | pprof/perf |
+| 15 | 健康检查 | [cluster-health-check](./domain-8-observability/15-cluster-health-check.md) | 集群健康检查 |
+
+#### H4: 质量保障
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 16 | 混沌工程 | [chaos-engineering](./domain-8-observability/16-chaos-engineering.md) | Chaos Mesh/Litmus |
+| 17 | 扩展性能 | [scaling-performance](./domain-8-observability/17-scaling-performance.md) | 扩展性测试 |
+
+---
+
+### 域9: 平台运维 (Platform Operations)
+
+> 25 篇 | v2.0 | 运维体系、集群管理、监控告警、GitOps、自动化、成本优化、安全合规、灾备恢复
+
+#### I1: 运维基础与规划 (01-05)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 运维概览 | [platform-ops-overview](./domain-9-platform-ops/01-platform-ops-overview.md) | 平台运维职责、技术架构、成熟度模型 |
+| 02 | 集群管理 | [cluster-lifecycle-management](./domain-9-platform-ops/02-cluster-lifecycle-management.md) | 集群生命周期、创建配置、扩缩容策略 |
+| 03 | 容量规划 | [capacity-planning-resource-assessment](./domain-9-platform-ops/03-capacity-planning-resource-assessment.md) | 资源评估、容量预测、节点选型 |
+| 04 | 性能调优 | [performance-benchmarking-tuning](./domain-9-platform-ops/04-performance-benchmarking-tuning.md) | 基准测试、性能优化、瓶颈分析 |
+| 05 | 指标体系 | [operations-metrics-system](./domain-9-platform-ops/05-operations-metrics-system.md) | USE/RED方法、四大黄金信号、错误预算 |
+
+#### I2: 核心运维能力 (06-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 06 | 监控告警 | [monitoring-alerting-system](./domain-9-platform-ops/06-monitoring-alerting-system.md) | Prometheus/Grafana、AlertManager、SLO/SLI |
+| 07 | GitOps配置 | [gitops-configuration-management](./domain-9-platform-ops/07-gitops-configuration-management.md) | ArgoCD/FluxCD、声明式配置、自动化同步 |
+| 08 | 自动化工具 | [automation-toolchain](./domain-9-platform-ops/08-automation-toolchain.md) | IaC、CI/CD、配置管理、故障自愈 |
+| 09 | 成本优化 | [cost-optimization-finops](./domain-9-platform-ops/09-cost-optimization-finops.md) | Kubecost、资源优化、Spot实例、FinOps实践 |
+| 10 | 安全合规 | [security-compliance](./domain-9-platform-ops/10-security-compliance.md) | 零信任安全、RBAC、网络策略、合规审计 |
+| 11 | 灾备连续 | [disaster-recovery-business-continuity](./domain-9-platform-ops/11-disaster-recovery-business-continuity.md) | 备份恢复、多活架构、应急响应、RTO/RPO |
+| 12 | 备份策略 | [backup-recovery-strategy](./domain-9-platform-ops/12-backup-recovery-strategy.md) | 完整备份方案、恢复策略、Velero实践 |
+
+#### I3: 高级平台管理 (13-18)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 多集群管理 | [multi-cluster-management](./domain-9-platform-ops/13-multi-cluster-management.md) | 多集群联邦、统一管理、跨集群调度 |
+| 14 | 大规模优化 | [large-scale-cluster-optimization](./domain-9-platform-ops/14-large-scale-cluster-optimization.md) | 千节点集群优化、API Server调优、etcd性能 |
+| 15 | 故障诊断 | [production-troubleshooting](./domain-9-platform-ops/15-production-troubleshooting.md) | 系统性诊断方法、自动化工具、根因分析 |
+| 16 | 升级迁移 | [platform-upgrade-migration](./domain-9-platform-ops/16-platform-upgrade-migration.md) | 版本升级策略、平滑迁移、回滚机制 |
+| 17 | 多租户管理 | [multi-tenant-management](./domain-9-platform-ops/17-multi-tenant-management.md) | 资源隔离、租户管理、配额控制 |
+| 18 | 可观测性 | [platform-observability-practice](./domain-9-platform-ops/18-platform-observability-practice.md) | 全栈可观测性、链路追踪、智能告警 |
+
+#### I4: 专项技术主题 (19-25)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | Lease选举 | [lease-leader-election](./domain-9-platform-ops/19-lease-leader-election.md) | Leader选举机制、高可用保障 |
+| 20 | CRD/Operator | [crd-operator-development](./domain-9-platform-ops/20-crd-operator-development.md) | 自定义资源、Operator开发、控制器模式 |
+| 21 | API聚合 | [api-aggregation](./domain-9-platform-ops/21-api-aggregation.md) | API聚合层、扩展API Server |
+| 22 | 客户端库 | [client-libraries](./domain-9-platform-ops/22-client-libraries.md) | client-go、SDK、编程接口 |
+| 23 | CLI工具 | [cli-enhancement-tools](./domain-9-platform-ops/23-cli-enhancement-tools.md) | k9s、kubectx、kubectl插件 |
+| 24 | 插件扩展 | [addons-extensions](./domain-9-platform-ops/24-addons-extensions.md) | 常用插件、扩展组件、生态工具 |
+| 25 | 虚拟集群 | [virtual-clusters](./domain-9-platform-ops/25-virtual-clusters.md) | Loft、vcluster、多租户虚拟化 |
+
+#### I4: 多集群管理 (19-21)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | 多集群 | [multi-cluster-management](./domain-9-platform-ops/19-multi-cluster-management.md) | 多集群架构、联邦管理、资源统筹 |
+| 20 | 联邦集群 | [federated-cluster](./domain-9-platform-ops/20-federated-cluster.md) | KubeFed、跨集群协调、统一管理 |
+| 21 | 虚拟集群 | [virtual-clusters](./domain-9-platform-ops/21-virtual-clusters.md) | vCluster、租户隔离、轻量级集群 |
+
+---
+
+### 域10: 扩展生态 (Extensions & Ecosystem)
+
+> 16 篇 | 扩展开发、包管理、CI/CD、GitOps、构建工具、服务网格、运维基础、多集群管理、监控告警、安全合规
+
+#### J1: 扩展开发 (01-04)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | CRD开发 | [crd-development-guide](./domain-10-extensions/01-crd-development-guide.md) | 自定义资源定义开发 |
+| 02 | Operator模式 | [operator-development-patterns](./domain-10-extensions/02-operator-development-patterns.md) | Kubebuilder开发实践 |
+| 03 | 准入控制 | [admission-webhook-configuration](./domain-10-extensions/03-admission-webhook-configuration.md) | Webhook配置与实现 |
+| 04 | API聚合 | [api-aggregation-extension](./domain-10-extensions/04-api-aggregation-extension.md) | API Server扩展机制 |
+
+#### J2: 包管理与分发 (05-07)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 05 | 包管理 | [package-management-tools](./domain-10-extensions/05-package-management-tools.md) | Helm/Kustomize/Carvel对比 |
+| 06 | Helm管理 | [helm-charts-management](./domain-10-extensions/06-helm-charts-management.md) | Chart开发基础 |
+| 07 | Helm进阶 | [helm-advanced-operations](./domain-10-extensions/07-helm-advanced-operations.md) | 高级运维、CI/CD集成 |
+
+#### J3: CI/CD与GitOps (08-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 08 | CI/CD流水线 | [cicd-pipelines](./domain-10-extensions/08-cicd-pipelines.md) | Jenkins/Tekton/云效 |
+| 09 | ArgoCD | [gitops-workflow-argocd](./domain-10-extensions/09-gitops-workflow-argocd.md) | GitOps工作流、多集群管理 |
+
+#### J4: 构建与部署工具 (10)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | 镜像构建 | [image-build-tools](./domain-10-extensions/10-image-build-tools.md) | Buildah/Kaniko/ko构建工具 |
+
+#### J5: 服务网格 (11-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 11 | 服务网格 | [service-mesh-overview](./domain-10-extensions/11-service-mesh-overview.md) | Istio/Linkerd概览 |
+| 12 | 网格进阶 | [service-mesh-advanced](./domain-10-extensions/12-service-mesh-advanced.md) | 流量管理、可观测 |
+
+#### J6: 运维管理 (13-16)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 运维基础 | [kubernetes-operations-fundamentals](./domain-10-extensions/13-kubernetes-operations-fundamentals.md) | 基础运维命令、集群管理、故障排查 |
+| 14 | 多集群管理 | [multi-cluster-management](./domain-10-extensions/14-multi-cluster-management.md) | Cluster API、注册中心、跨集群部署 |
+| 15 | 监控告警 | [monitoring-alerting-system](./domain-10-extensions/15-monitoring-alerting-system.md) | Prometheus、Grafana、Alertmanager |
+| 16 | 安全合规 | [security-compliance-management](./domain-10-extensions/16-security-compliance-management.md) | 零信任架构、RBAC、审计合规 |
+
+---
+
+### 域11: AI基础设施 (AI Infrastructure)
+
+> 30 篇 | AI平台基础、模型训练、LLM专题、运维监控、成本优化
+
+#### K1: AI平台基础 (01-04)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | AI Infra概览 | [ai-infrastructure-overview](./domain-11-ai-infra/01-ai-infrastructure-overview.md) | AI基础设施架构全景 |
+| 02 | ML工作负载 | [ai-ml-workloads](./domain-11-ai-infra/02-ai-ml-workloads.md) | 训练/推理工作负载运维 |
+| 03 | GPU调度 | [gpu-scheduling-management](./domain-11-ai-infra/03-gpu-scheduling-management.md) | GPU资源调度与管理 |
+| 04 | GPU监控 | [gpu-monitoring-dcgm](./domain-11-ai-infra/04-gpu-monitoring-dcgm.md) | DCGM/nvidia-smi监控 |
+
+#### K2: 模型训练与数据 (05-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 05 | 分布式训练 | [distributed-training-frameworks](./domain-11-ai-infra/05-distributed-training-frameworks.md) | PyTorch DDP/FSDP |
+| 06 | AI数据管道 | [ai-data-pipeline](./domain-11-ai-infra/06-ai-data-pipeline.md) | 数据预处理与特征工程 |
+| 07 | 实验管理 | [ai-experiment-management](./domain-11-ai-infra/07-ai-experiment-management.md) | MLflow/W&B平台 |
+| 08 | AutoML | [automl-hyperparameter-tuning](./domain-11-ai-infra/08-automl-hyperparameter-tuning.md) | Katib超参数调优 |
+| 09 | 模型仓库 | [model-registry](./domain-11-ai-infra/09-model-registry.md) | 模型注册与版本管理 |
+| 10 | 模型部署 | [model-deployment-management](./domain-11-ai-infra/10-model-deployment-management.md) | 模型生命周期管理 |
+| 11 | AI安全 | [ai-security-model-protection](./domain-11-ai-infra/11-ai-security-model-protection.md) | 模型安全防护 |
+| 12 | AI成本 | [ai-cost-analysis-finops](./domain-11-ai-infra/12-ai-cost-analysis-finops.md) | GPU成本分析与FinOps |
+
+#### K3: AI平台运维 (13-14)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 平台可观测 | [ai-platform-observability](./domain-11-ai-infra/13-ai-platform-observability.md) | AI平台可观测性体系 |
+| 14 | 故障排查 | [troubleshooting-performance](./domain-11-ai-infra/14-troubleshooting-performance.md) | 故障排查与性能优化 |
+
+#### K4: LLM训练与推理 (15-21)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 15 | LLM数据管道 | [llm-data-pipeline](./domain-11-ai-infra/15-llm-data-pipeline.md) | 数据处理、Tokenizer |
+| 16 | LLM微调 | [llm-finetuning](./domain-11-ai-infra/16-llm-finetuning.md) | LoRA/QLoRA微调 |
+| 17 | LLM推理 | [llm-inference-serving](./domain-11-ai-infra/17-llm-inference-serving.md) | vLLM/TGI部署 |
+| 18 | LLM架构 | [llm-serving-architecture](./domain-11-ai-infra/18-llm-serving-architecture.md) | 推理服务架构 |
+| 19 | LLM量化 | [llm-quantization](./domain-11-ai-infra/19-llm-quantization.md) | GPTQ/AWQ/GGUF |
+| 20 | 向量库/RAG | [vector-database-rag](./domain-11-ai-infra/20-vector-database-rag.md) | Milvus/Qdrant/RAG |
+| 21 | 多模态 | [multimodal-models](./domain-11-ai-infra/21-multimodal-models.md) | 多模态模型部署 |
+
+#### K5: LLM运维与监控 (22-25)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 22 | LLM安全 | [llm-privacy-security](./domain-11-ai-infra/22-llm-privacy-security.md) | OWASP LLM Top 10 |
+| 23 | LLM成本 | [llm-cost-monitoring](./domain-11-ai-infra/23-llm-cost-monitoring.md) | Token成本分析 |
+| 24 | 模型版本 | [llm-model-versioning](./domain-11-ai-infra/24-llm-model-versioning.md) | 模型版本管理 |
+| 25 | LLM可观测 | [llm-observability](./domain-11-ai-infra/25-llm-observability.md) | 推理监控 |
+
+#### K6: 成本与可持续 (26-30)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 26 | 成本优化 | [cost-optimization-overview](./domain-11-ai-infra/26-cost-optimization-overview.md) | 成本优化策略 |
+| 27 | Kubecost | [cost-management-kubecost](./domain-11-ai-infra/27-cost-management-kubecost.md) | FinOps实践 |
+| 28 | 绿色计算 | [green-computing-sustainability](./domain-11-ai-infra/28-green-computing-sustainability.md) | 碳排放、能效 |
+| 29 | 阿里云集成 | [alibaba-cloud-integration](./domain-11-ai-infra/29-alibaba-cloud-integration.md) | ACK AI能力 |
+| 30 | 安全合规 | [ai-security-compliance](./domain-11-ai-infra/30-ai-security-compliance.md) | AI平台安全加固 |
+
+---
+
+### 域12: 故障排查 (Troubleshooting)
+
+> 100+ 篇 | **全新结构化故障排查知识体系，从生产环境运维专家角度深度优化**
+
+#### L1: 结构化故障排查 (topic-structural-trouble-shooting)
+
+> 100+ 篇 | 涵盖控制平面、节点组件、网络、存储、工作负载、安全认证、资源调度、集群运维、云厂商集成、AI/ML工作负载、GitOps/DevOps、可观测性等12个专业领域
+
+##### 核心特色
+- **专业化分类**：按技术领域精细化分类，便于快速定位
+- **生产级内容**：基于真实生产环境案例，提供专家级解决方案
+- **系统性方法**：从现象到根因的完整排查路径
+- **自动化工具**：丰富的运维脚本和监控配置
+
+##### 详细目录结构
+
+**01-control-plane/** (控制平面组件故障排查)
+- 01-apiserver-troubleshooting.md - API Server 故障排查
+- 02-etcd-troubleshooting.md - etcd 故障排查
+- 03-scheduler-troubleshooting.md - Scheduler 故障排查
+- 04-controller-manager-troubleshooting.md - Controller Manager 故障排查
+- 05-webhook-admission-troubleshooting.md - Webhook/准入控制故障排查
+- 06-apf-troubleshooting.md - API 优先级与公平性故障排查
+- 07-control-plane-security-troubleshooting.md - **新增** 控制平面安全加固故障排查
+- 08-control-plane-performance-troubleshooting.md - **新增** 控制平面性能瓶颈分析
+- 09-control-plane-ha-troubleshooting.md - **新增** 控制平面高可用故障处理
+- 10-control-plane-upgrade-troubleshooting.md - **新增** 控制平面升级迁移问题
+
+**02-node-components/** (节点组件故障排查)
+- 01-kubelet-troubleshooting.md - kubelet 故障排查
+- 02-kube-proxy-troubleshooting.md - kube-proxy 故障排查
+- 03-container-runtime-troubleshooting.md - 容器运行时故障排查
+- 04-node-troubleshooting.md - 节点故障专项排查
+- 05-image-registry-troubleshooting.md - 镜像与镜像仓库故障排查
+- 06-gpu-device-plugin-troubleshooting.md - GPU/设备插件故障排查
+
+**03-networking/** (网络故障排查)
+- 01-cni-troubleshooting.md - CNI 网络插件故障排查
+- 02-dns-troubleshooting.md - CoreDNS/DNS 故障排查
+- 03-service-ingress-troubleshooting.md - Service/Ingress 故障排查
+- 04-networkpolicy-troubleshooting.md - NetworkPolicy 故障排查
+- 05-service-mesh-istio-troubleshooting.md - Service Mesh (Istio) 故障排查
+- 06-gateway-api-troubleshooting.md - Gateway API 故障排查
+
+**04-storage/** (存储故障排查)
+- 01-pv-pvc-troubleshooting.md - PV/PVC 存储故障排查
+- 02-csi-troubleshooting.md - CSI 存储驱动故障排查
+
+**05-workloads/** (工作负载故障排查)
+- 01-pod-troubleshooting.md - Pod 故障排查
+- 02-deployment-troubleshooting.md - Deployment 故障排查
+- 03-statefulset-troubleshooting.md - StatefulSet 故障排查
+- 04-daemonset-troubleshooting.md - DaemonSet 故障排查
+- 05-job-cronjob-troubleshooting.md - Job/CronJob 故障排查
+- 06-configmap-secret-troubleshooting.md - ConfigMap/Secret 故障排查
+
+**06-security-auth/** (安全与认证故障排查)
+- 01-rbac-troubleshooting.md - RBAC 与认证故障排查
+- 02-certificate-troubleshooting.md - 证书故障排查
+- 03-pod-security-troubleshooting.md - Pod 安全故障排查
+- 04-audit-logging-troubleshooting.md - 审计日志故障排查
+
+**07-resources-scheduling/** (资源与调度故障排查)
+- 01-resources-quota-troubleshooting.md - 资源与配额故障排查
+- 02-autoscaling-troubleshooting.md - HPA/VPA 自动扩缩容故障排查
+- 03-cluster-autoscaler-troubleshooting.md - Cluster Autoscaler 故障排查
+- 04-pdb-troubleshooting.md - PodDisruptionBudget 故障排查
+
+**08-cluster-operations/** (集群运维故障排查)
+- 01-cluster-maintenance-troubleshooting.md - 集群运维故障排查
+- 02-logging-monitoring-troubleshooting.md - 日志与监控故障排查
+- 03-helm-troubleshooting.md - Helm 部署故障排查
+- 04-ha-disaster-recovery-troubleshooting.md - 高可用与灾备故障排查
+- 05-crd-operator-troubleshooting.md - CRD/Operator 故障排查
+- 06-kustomize-troubleshooting.md - Kustomize 部署故障排查
+
+**09-cloud-provider/** (云厂商集成故障排查) **全新分类**
+- 01-cloud-provider-integration-troubleshooting.md - 云厂商集成故障排查
+
+**10-ai-ml-workloads/** (AI/ML工作负载故障排查) **全新分类**
+- 01-ai-ml-workloads-troubleshooting.md - AI/ML 工作负载故障排查
+
+**11-gitops-devops/** (GitOps/DevOps故障排查) **全新分类**
+- 01-gitops-devops-troubleshooting.md - GitOps/DevOps 故障排查
+
+**12-monitoring-observability/** (可观测性故障排查) **全新分类**
+- 01-monitoring-observability-troubleshooting.md - 可观测性故障排查
+
+#### L2: 传统故障排查 (domain-12-troubleshooting)
+
+> 38 篇 | 原有的综合性故障排查文档，作为补充参考
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | API Server排障 | [control-plane-apiserver-troubleshooting](./domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md) | API Server不可用、性能问题、认证授权故障 |
+| 02 | etcd排障 | [control-plane-etcd-troubleshooting](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md) | etcd集群不可用、数据一致性、性能优化 |
+| 03 | CNI网络排障 | [networking-cni-troubleshooting](./domain-12-troubleshooting/03-networking-cni-troubleshooting.md) | Pod网络不通、DNS解析失败、跨节点通信 |
+| 04 | CSI驱动排障 | [storage-csi-troubleshooting](./domain-12-troubleshooting/04-storage-csi-troubleshooting.md) | 卷创建/挂载失败、存储性能问题、CSI组件故障 |
+| 05 | Pod Pending诊断 | [pod-pending-diagnosis](./domain-12-troubleshooting/05-pod-pending-diagnosis.md) | Pod调度失败深度诊断 |
+| 06 | Node NotReady诊断 | [node-notready-diagnosis](./domain-12-troubleshooting/06-node-notready-diagnosis.md) | 节点异常深度诊断 |
+| 07 | OOM内存诊断 | [oom-memory-diagnosis](./domain-12-troubleshooting/07-oom-memory-diagnosis.md) | 内存溢出、驱逐问题排查 |
+| 08 | Pod综合排障 | [pod-comprehensive-troubleshooting](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md) | Pod全状态故障排查 |
+| 09 | Node综合排障 | [node-comprehensive-troubleshooting](./domain-12-troubleshooting/09-node-comprehensive-troubleshooting.md) | Node全方位故障诊断 |
+| 10 | Service综合排障 | [service-comprehensive-troubleshooting](./domain-12-troubleshooting/10-service-comprehensive-troubleshooting.md) | Service访问失败、Endpoints问题 |
+| 11 | Deployment排障 | [deployment-comprehensive-troubleshooting](./domain-12-troubleshooting/11-deployment-comprehensive-troubleshooting.md) | Deployment滚动更新、回滚问题 |
+| 12 | RBAC/Quota排障 | [rbac-quota-troubleshooting](./domain-12-troubleshooting/12-rbac-quota-troubleshooting.md) | 权限不足、配额限制问题 |
+| 13 | 证书排障 | [certificate-troubleshooting](./domain-12-troubleshooting/13-certificate-troubleshooting.md) | 证书过期、轮换问题 |
+| 14 | PVC存储排障 | [pvc-storage-troubleshooting](./domain-12-troubleshooting/14-pvc-storage-troubleshooting.md) | PVC绑定、存储类问题 |
+| 15 | Ingress排障 | [ingress-troubleshooting](./domain-12-troubleshooting/15-ingress-troubleshooting.md) | Ingress控制器、路由规则、TLS证书 |
+| 16 | NetworkPolicy排障 | [networkpolicy-troubleshooting](./domain-12-troubleshooting/16-networkpolicy-troubleshooting.md) | 网络策略、安全组、微隔离 |
+| 17 | HPA/VPA排障 | [hpa-vpa-troubleshooting](./domain-12-troubleshooting/17-hpa-vpa-troubleshooting.md) | 自动扩缩容配置、指标监控 |
+| 18 | CronJob排障 | [cronjob-troubleshooting](./domain-12-troubleshooting/18-cronjob-troubleshooting.md) | 定时任务、并发控制、资源清理 |
+| 19 | ConfigMap/Secret排障 | [configmap-secret-troubleshooting](./domain-12-troubleshooting/19-configmap-secret-troubleshooting.md) | 配置注入、热更新、安全性 |
+| 20 | DaemonSet排障 | [daemonset-troubleshooting](./domain-12-troubleshooting/20-daemonset-troubleshooting.md) | 节点级服务、系统守护进程 |
+| 21 | StatefulSet排障 | [statefulset-troubleshooting](./domain-12-troubleshooting/21-statefulset-troubleshooting.md) | 有状态应用、持久化、有序部署 |
+| 22 | Job排障 | [job-troubleshooting](./domain-12-troubleshooting/22-job-troubleshooting.md) | 批处理任务、并行执行、完成策略 |
+| 23 | Namespace排障 | [namespace-troubleshooting](./domain-12-troubleshooting/23-namespace-troubleshooting.md) | 资源隔离、配额管理、生命周期 |
+| 24 | Quota/LimitRange排障 | [quota-limitrange-troubleshooting](./domain-12-troubleshooting/24-quota-limitrange-troubleshooting.md) | 资源限制、配额超限、默认值配置 |
+| 25 | 网络连通性排障 | [network-connectivity-troubleshooting](./domain-12-troubleshooting/25-network-connectivity-troubleshooting.md) | Pod通信、Service访问、DNS解析 |
+| 26 | DNS排障 | [dns-troubleshooting](./domain-12-troubleshooting/26-dns-troubleshooting.md) | CoreDNS配置、外部解析、缓存优化 |
+| 27 | 镜像仓库排障 | [image-registry-troubleshooting](./domain-12-troubleshooting/27-image-registry-troubleshooting.md) | 镜像拉取、认证管理、网络代理 |
+| 28 | 集群扩缩容排障 | [cluster-autoscaler-troubleshooting](./domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.md) | 扩缩容策略、节点驱逐、云API集成 |
+| 29 | 云提供商排障 | [cloud-provider-troubleshooting](./domain-12-troubleshooting/29-cloud-provider-troubleshooting.md) | 认证权限、LoadBalancer、存储卷 |
+| 30 | 监控告警排障 | [monitoring-alerting-troubleshooting](./domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.md) | Prometheus、Alertmanager、Grafana |
+| 31 | 备份恢复排障 | [backup-restore-troubleshooting](./domain-12-troubleshooting/31-backup-restore-troubleshooting.md) | Velero备份、etcd快照、灾难恢复 |
+| 32 | 安全排障 | [security-troubleshooting](./domain-12-troubleshooting/32-security-troubleshooting.md) | 认证授权、网络安全、镜像安全 |
+| 33 | 性能瓶颈排障 | [performance-bottleneck-troubleshooting](./domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.md) | CPU/内存/存储/I/O瓶颈分析 |
+| 34 | 升级迁移排障 | [upgrade-migration-troubleshooting](./domain-12-troubleshooting/34-upgrade-migration-troubleshooting.md) | 版本兼容性、滚动升级、回滚策略 |
+| 35 | 节点组件排障 | [node-component-troubleshooting](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | kubelet、容器运行时、kube-proxy |
+| 36 | Helm Chart排障 | [helm-chart-troubleshooting](./domain-12-troubleshooting/36-helm-chart-troubleshooting.md) | Chart渲染、依赖管理、Release状态 |
+| 37 | 多集群管理排障 | [multi-cluster-management-troubleshooting](./domain-12-troubleshooting/37-multi-cluster-management-troubleshooting.md) | 联邦控制、跨集群网络、故障转移 |
+| 38 | GitOps/ArgoCD排障 | [gitops-argocd-troubleshooting](./domain-12-troubleshooting/38-gitops-argocd-troubleshooting.md) | ArgoCD同步失败、应用状态、RBAC配置 |
+
+---
+
+### 域13: Docker基础 (Docker Fundamentals)
+
+> 11 篇 | Docker架构、镜像管理、容器生命周期、网络、存储、Compose、安全、故障排查、性能监控、日志管理、自动化运维，**从生产环境运维专家角度深度优化，新增企业级CI/CD集成方案和容器平台最佳实践**
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | Docker架构 | [docker-architecture-overview](./domain-13-docker/01-docker-architecture-overview.md) | Docker Engine、containerd、OCI标准 |
+| 02 | 镜像管理 | [docker-images-management](./domain-13-docker/02-docker-images-management.md) | 镜像层、Dockerfile、多阶段构建、安全扫描 |
+| 03 | 容器生命周期 | [docker-container-lifecycle](./domain-13-docker/03-docker-container-lifecycle.md) | 容器状态、资源限制、健康检查、日志 |
+| 04 | Docker网络 | [docker-networking-deep-dive](./domain-13-docker/04-docker-networking-deep-dive.md) | 网络驱动、DNS、端口映射、网络排障 |
+| 05 | Docker存储 | [docker-storage-volumes](./domain-13-docker/05-docker-storage-volumes.md) | 存储驱动、Volume、Bind Mount、备份 |
+| 06 | Compose | [docker-compose-orchestration](./domain-13-docker/06-docker-compose-orchestration.md) | Compose配置、多环境、生产配置 |
+| 07 | Docker安全 | [docker-security-best-practices](./domain-13-docker/07-docker-security-best-practices.md) | 镜像安全、运行时安全、Seccomp、能力 |
+| 08 | Docker排障 | [docker-troubleshooting-guide](./domain-13-docker/08-docker-troubleshooting-guide.md) | 常见问题诊断、网络/存储排障 |
+| 09 | 性能监控 | [docker-performance-monitoring](./domain-13-docker/09-docker-performance-monitoring.md) | 监控指标、调优策略、容量规划 |
+| 10 | 日志管理 | [docker-logging-management](./domain-13-docker/10-docker-logging-management.md) | 日志收集、分析、ELK集成 |
+| 11 | 自动化运维 | [docker-automation-devops](./domain-13-docker/11-docker-automation-devops.md) | CI/CD、IaC、自动部署、**新增企业级DevOps工具链集成和智能运维方案** |
+
+---
+
+### 域14: Linux基础 (Linux Fundamentals)
+
+> 9 篇 | 系统架构、进程管理、文件系统、网络配置、存储管理、性能调优、安全加固、容器技术、运维基础，**从生产环境运维专家角度深度优化，新增大量企业级最佳实践和自动化运维方案**
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | Linux架构 | [linux-system-architecture](./domain-14-linux/01-linux-system-architecture.md) | 内核架构、启动过程、systemd、内核调优、**生产环境系统基线配置、监控告警、安全加固** |
+| 02 | 进程管理 | [linux-process-management](./domain-14-linux/02-linux-process-management.md) | 进程状态、信号、优先级、监控分析、**生产环境进程管理、性能诊断、自动化运维** |
+| 03 | 文件系统 | [linux-filesystem-deep-dive](./domain-14-linux/03-linux-filesystem-deep-dive.md) | VFS、文件系统类型、权限、inode、**生产环境文件系统选择与优化** |
+| 04 | 网络配置 | [linux-networking-configuration](./domain-14-linux/04-linux-networking-configuration.md) | ip/ss命令、路由、iptables、网络调优、**生产环境网络安全配置与性能优化** |
+| 05 | 存储管理 | [linux-storage-management](./domain-14-linux/05-linux-storage-management.md) | LVM、软件RAID、I/O调度、配额、**生产环境存储架构与性能调优** |
+| 06 | 性能调优 | [linux-performance-tuning](./domain-14-linux/06-linux-performance-tuning.md) | CPU/内存/I/O/网络分析、内核参数、**生产环境性能监控与瓶颈诊断** |
+| 07 | 安全加固 | [linux-security-hardening](./domain-14-linux/07-linux-security-hardening.md) | 用户管理、SSH、PAM、SELinux、审计、**生产环境企业级安全策略与合规要求** |
+| 08 | 容器技术 | [linux-container-fundamentals](./domain-14-linux/08-linux-container-fundamentals.md) | Namespaces、Cgroups、OverlayFS、安全、**生产环境容器安全与性能优化** |
+| 09 | 运维基础 | [linux-operations-basics](./domain-14-linux/09-linux-operations-basics.md) | 系统监控、故障排查、备份恢复、自动化、**生产环境运维流程与应急响应，新增企业级监控告警体系和标准化故障处理SOP** |
+
+---
+
+### 域15: 网络基础 (Network Fundamentals)
+
+> 6 篇 | 协议栈、TCP/UDP、DNS、负载均衡、网络安全、SDN，从生产环境运维专家角度深度优化
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 协议栈 | [network-protocols-stack](./domain-15-network-fundamentals/01-network-protocols-stack.md) | OSI/TCP-IP模型、数据封装、协议概览、**生产环境网络诊断与性能调优** |
+| 02 | TCP/UDP | [tcp-udp-deep-dive](./domain-15-network-fundamentals/02-tcp-udp-deep-dive.md) | 连接管理、流量控制、拥塞控制、对比、**生产环境连接池优化与性能监控** |
+| 03 | DNS | [dns-principles-configuration](./domain-15-network-fundamentals/03-dns-principles-configuration.md) | DNS解析、记录类型、配置、排障、**DNS缓存优化、安全配置、大规模部署最佳实践** |
+| 04 | 负载均衡 | [load-balancing-technologies](./domain-15-network-fundamentals/04-load-balancing-technologies.md) | 算法、L4/L7负载均衡、健康检查、**负载均衡器选型、性能基准、高可用部署** |
+| 05 | 网络安全 | [network-security-fundamentals](./domain-15-network-fundamentals/05-network-security-fundamentals.md) | 攻击类型、防火墙、TLS、VPN、**零信任网络架构、DDoS防护、安全运营最佳实践** |
+| 06 | SDN | [sdn-network-virtualization](./domain-15-network-fundamentals/06-sdn-network-virtualization.md) | SDN架构、Overlay、容器网络、服务网格、**网络虚拟化性能优化、多租户隔离、生产部署指南** |
+
+---
+
+### 域16: 存储基础 (Storage Fundamentals)
+
+> 6 篇 | 从生产环境运维专家角度深度优化的存储技术体系，涵盖存储架构、类型详解、RAID配置、分布式系统、性能调优和企业级运维实践
+
+---
+
+## 实用工具
+
+> **维护工具**: 项目管理和验证脚本
+
+### 快速速查卡 (topic-cheat-sheet)
+
+> **生产环境速查卡** | 3个速查主题 | 全命令覆盖、版本标注、快速查阅
+
+本速查卡集合提供生产环境中 90% 以上常用命令，所有命令均标注适用版本和兼容性信息。
+
+| # | 速查卡名称 | 涵盖内容 | 适用版本 | 适用场景 |
+|:---:|:---|:---|:---|:---|
+| 01 | [Kubernetes 速查卡](./topic-cheat-sheet/k8s.md) | **kubectl 基础操作、集群管理、资源查询、Pod 操作、Deployment 管理、Service 网络、ConfigMap/Secret、存储管理、RBAC 权限、故障排查、资源监控、高级操作、etcd 管理、API Server、集群维护** | K8s v1.25-v1.32 | Kubernetes 日常运维、故障排查、集群管理、资源调度 |
+| 02 | [Linux 速查卡](./topic-cheat-sheet/linux.md) | **系统信息查询、文件与目录操作、文本处理、进程管理、网络管理、磁盘与存储、用户与权限、系统服务管理、性能监控、日志分析、安全与防火墙、包管理、Shell 脚本、容器与虚拟化、故障排查** | RHEL/CentOS 7-9, Ubuntu 20.04-24.04, Debian 11-12 | Linux 系统运维、性能监控、故障排查、安全加固 |
+| 03 | [Go 语言速查卡](./topic-cheat-sheet/go.md) | **环境配置、基础语法、数据结构、函数与方法、并发编程、错误处理、包管理、文件操作、网络编程、数据库操作、测试与基准、性能优化、常用标准库、生产最佳实践** | Go 1.20-1.22 | Go 应用开发、Kubernetes Operator 开发、云原生工具开发 |
+
+**特点**:
+- ✅ **版本标注**: 所有命令明确标注适用的软件版本
+- ✅ **生产导向**: 覆盖生产环境 90%+ 实际使用场景
+- ✅ **兼容性说明**: 详细标注不同发行版/版本的差异
+- ✅ **最佳实践**: 每个速查卡包含生产环境最佳实践章节
+- ✅ **工具版本**: 附录列出常用工具的推荐版本
+
+---
+
+### 运维知识中枢 (topic-dictionary)
+
+> **生产环境运维专家级知识库** | 16个核心文档 | 全面覆盖AI Infra、云原生安全、多云运维、企业级实践、事故管理、容量规划、变更管理、SLO工程、故障排查等专业领域
+
+| # | 文档名称 | 关键内容 | 适用场景 |
+|:---:|:---|:---|:---|
+| 01 | [运维最佳实践](./topic-dictionary/01-operations-best-practices.md) | **生产环境配置标准、高可用架构模式、安全加固指南、监控告警最佳实践、灾备恢复方案、自动化运维策略、成本优化实践、多集群管理规范、生产环境故障应急响应** | 企业级Kubernetes生产环境部署和运维，新增真实故障案例和应急响应流程 |
+| 02 | [故障模式分析](./topic-dictionary/02-failure-patterns-analysis.md) | **常见故障模式分类、根因分析方法论、故障树分析(FMEA)、MTTR优化策略、故障复盘模板、预防措施体系、真实故障案例库** | 故障诊断、根因分析、问题预防，新增经典故障案例和处理经验总结 |
+| 03 | [性能调优专家](./topic-dictionary/03-performance-tuning-expert.md) | **系统性能瓶颈识别、资源优化策略、调度器调优参数、网络性能优化、存储IO调优、应用层性能优化、监控与基准测试、性能优化实战案例** | 性能优化、容量规划、系统调优，新增大规模集群性能优化案例 |
+| 04 | [SRE成熟度模型](./topic-dictionary/04-sre-maturity-model.md) | **运维成熟度评估标准、自动化能力分级、监控体系建设指南、运维流程标准化、团队能力建设路径、成熟度评估工具、SRE实践案例与最佳实践** | SRE团队建设、运维能力提升、组织成熟度评估，新增企业级SRE转型路线图 |
+| 05 | [概念参考手册](./topic-dictionary/05-concept-reference.md) | **Kubernetes核心概念、API与认证机制、控制平面组件、工作负载资源、网络与服务发现、存储管理、安全与权限控制、可观测性与监控、分布式系统理论、AI/ML工程概念、前沿技术与新兴概念** | 技术概念查询、知识学习、术语参考，新增WebAssembly、eBPF等前沿技术概念 |
+| 06 | [命令行清单](./topic-dictionary/06-cli-commands.md) | **kubectl基础命令、集群管理命令、Pod调试与交互命令、资源创建与管理命令、集群配置参数、GPU调度与管理命令、AI/ML工作负载命令、故障排查工具命令、安全与认证命令、监控与告警命令、运维效率提升命令集** | 日常运维操作、故障排查、命令参考，新增批量操作和高级调试命令 |
+| 07 | [工具生态系统](./topic-dictionary/07-tool-ecosystem.md) | **Kubernetes核心工具、容器运行时工具、容器网络工具、容器存储工具、Ingress控制器、服务网格工具、DNS与服务发现、包管理与部署工具、GitOps与CI/CD工具、基础设施即代码工具、镜像构建与仓库工具、前沿技术创新工具、边缘计算与5G工具** | 工具选型、技术栈搭建、生态集成，新增WebAssembly、eBPF、GitOps新兴工具 |
+| 08 | [AI基础设施专家指南](./topic-dictionary/08-ai-infra-specialist.md) | **AI工作负载优化、GPU调度策略、分布式训练管理、模型服务部署、AI成本治理、AI安全合规、模型生命周期管理** | AI/ML平台运维、GPU资源管理、机器学习工程化 |
+| 09 | [云原生安全专家指南](./topic-dictionary/09-cloud-native-security.md) | **零信任安全架构、容器安全防护、镜像安全扫描、运行时安全监控、合规自动化体系、威胁检测响应、安全工具链集成** | 云原生安全防护、合规审计、安全运维 |
+| 10 | [多云混合云运维手册](./topic-dictionary/10-multi-cloud-operations.md) | **多云架构设计、跨云部署策略、成本优化管理、统一监控体系、运维自动化、灾备容灾方案、多云治理框架** | 多云环境管理、混合云运维、跨云资源整合 |
+| 11 | [企业级运维最佳实践](./topic-dictionary/11-enterprise-ops-practices.md) | **万级节点集群管理、渐进式交付流水线、智能回滚机制、SRE故障响应体系、灾难恢复策略、团队协作文化、运营指标体系** | 大规模集群运维、企业级DevOps、组织效能提升 |
+| 12 | [生产事故管理与应急手册](./topic-dictionary/12-incident-management-runbooks.md) | **事故管理框架、事故分级标准、应急响应流程、War Room组织、通用应急手册、特定场景Runbook、事后复盘机制、持续改进实践** | 生产事故响应、应急处理、故障恢复、事故管理流程标准化 |
+| 13 | [容量规划与资源预测](./topic-dictionary/13-capacity-planning-forecasting.md) | **容量规划框架、资源使用分析、容量预测模型、集群扩容策略、资源配额管理、成本优化实践、容量监控与告警、实战案例分析** | 容量规划、资源预测、成本优化、集群扩容决策、资源利用率提升 |
+| 14 | [变更管理与发布策略](./topic-dictionary/14-change-management-release.md) | **变更管理框架、发布策略模式、变更审批流程、回滚与恢复策略、发布自动化、风险评估与控制、变更监控与验证、实战案例分析** | 变更管理、发布流程、风险控制、自动化发布、变更审批流程 |
+| 15 | [SLI/SLO/SLA工程实践](./topic-dictionary/15-sli-slo-sla-engineering.md) | **SLI/SLO/SLA概念框架、SLI指标定义与采集、SLO设定与管理、SLA合规与问责、错误预算管理、监控与告警策略、告警响应与处理、实战案例分析** | 服务等级管理、SLO工程、错误预算管理、可靠性工程、SLA合规 |
+| 16 | [生产环境故障排查剧本](./topic-dictionary/16-production-troubleshooting-playbook.md) | **故障排查方法论、系统级故障排查、网络故障排查、存储故障排查、应用故障排查、控制平面故障排查、性能问题排查、实战案例分析** | 故障排查、问题诊断、运维自动化、故障处理、生产环境维护 |
+
+### 链接验证工具
+
+| 工具 | 位置 | 功能 |
+|:---|:---|:---|
+| **链接验证脚本** | [topic-dictionary/validate-links.ps1](./topic-dictionary/validate-links.ps1) | 验证README和演示文档中的链接有效性 |
+
+该PowerShell脚本可以帮助维护人员快速检查项目中所有文档链接的完整性，确保引用路径的准确性。
+
+---
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 存储概述 | [storage-technologies-overview](./domain-16-storage-fundamentals/01-storage-technologies-overview.md) | 存储类型、架构、协议、云存储、**生产环境最佳实践与性能调优策略** |
+| 02 | 存储类型 | [block-file-object-storage](./domain-16-storage-fundamentals/02-block-file-object-storage.md) | 块存储、文件存储、对象存储对比、**企业级配置与故障排查** |
+| 03 | RAID | [raid-storage-redundancy](./domain-16-storage-fundamentals/03-raid-storage-redundancy.md) | RAID级别、配置、监控、硬件/软件对比、**实际运维经验与性能基准** |
+| 04 | 分布式存储 | [distributed-storage-systems](./domain-16-storage-fundamentals/04-distributed-storage-systems.md) | Ceph、MinIO、GlusterFS、**生产部署指南与监控运维** |
+| 05 | 存储管理 | [storage-management-operations](./domain-16-storage-fundamentals/05-storage-management-operations.md) | **企业级存储运维实践**、监控告警、容量规划、备份恢复、故障处理、性能优化 |
+| 06 | 存储性能 | [storage-performance-iops](./domain-16-storage-fundamentals/06-storage-performance-iops.md) | IOPS、吞吐量、延迟、测试优化、**真实环境测试数据与调优案例** |
+
+---
+
+## 多维度查询附录
+
+### 附录A: 开发者视角
+
+> 关注点: 应用部署、服务暴露、配置管理、日志调试
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **快速上手** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [10-工作负载](./domain-4-workloads/21-workload-controllers-overview.md) | P0 |
+| **部署应用** | [10-工作负载](./domain-4-workloads/21-workload-controllers-overview.md), [11-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [06-Helm管理](./domain-10-extensions/06-helm-charts-management.md) | P0 |
+| **服务暴露** | [47-Service](./domain-5-networking/47-service-concepts-types.md), [63-Ingress](./domain-5-networking/63-ingress-fundamentals.md), [71-Gateway API](./domain-5-networking/71-gateway-api-overview.md) | P0 |
+| **配置管理** | [14-Secret管理](./domain-7-security/14-secret-management-tools.md), [08-RBAC矩阵](./domain-7-security/08-rbac-matrix-configuration.md) | P1 |
+| **日志调试** | [95-日志](./domain-8-observability/95-logging-auditing.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [08-Pod排障](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md) | P1 |
+| **CI/CD集成** | [08-CI/CD](./domain-10-extensions/08-cicd-pipelines.md), [09-ArgoCD](./domain-10-extensions/09-gitops-workflow-argocd.md), [10-镜像构建](./domain-10-extensions/10-image-build-tools.md) | P1 |
+| **Operator开发** | [112-CRD/Operator](./domain-9-platform-ops/112-crd-operator-development.md), [115-client-go](./domain-9-platform-ops/115-client-libraries.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md) | P2 |
+| **性能优化** | [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md), [34-资源管理](./domain-4-workloads/34-resource-management.md) | P2 |
+
+---
+
+### 附录B: 运维工程师视角
+
+> 关注点: 集群运维、故障排查、监控告警、容量管理
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **集群部署** | [06-集群配置](./tables/06-cluster-configuration-parameters.md), [31-Kubelet](./domain-4-workloads/31-kubelet-configuration.md), [35-etcd](./domain-3-control-plane/35-etcd-deep-dive.md) | P0 |
+| **日常运维** | [29-节点管理](./domain-4-workloads/29-node-management-operations.md), [07-升级策略](./tables/07-upgrade-paths-strategy.md), [110-etcd运维](./tables/110-etcd-operations.md) | P0 |
+| **监控告警** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P0 |
+| **故障排查** | [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md), [100-排障工具](./domain-8-observability/100-troubleshooting-tools.md), [01-API Server](./domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md), [02-etcd](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md), [05-Pod Pending](./domain-12-troubleshooting/05-pod-pending-diagnosis.md), [06-Node NotReady](./domain-12-troubleshooting/06-node-notready-diagnosis.md), [15-Ingress](./domain-12-troubleshooting/15-ingress-troubleshooting.md), [35-节点组件](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | P0 |
+| **网络运维** | [03-CNI排障](./domain-12-troubleshooting/03-networking-cni-troubleshooting.md), [16-NetworkPolicy](./domain-12-troubleshooting/16-networkpolicy-troubleshooting.md), [25-网络连通性](./domain-12-troubleshooting/25-network-connectivity-troubleshooting.md), [26-DNS排障](./domain-12-troubleshooting/26-dns-troubleshooting.md), [46-CNI排障](./domain-5-networking/46-cni-troubleshooting-optimization.md), [56-DNS排障](./domain-5-networking/56-coredns-troubleshooting-optimization.md), [61-网络排障](./domain-5-networking/61-network-troubleshooting.md) | P1 |
+| **存储运维** | [04-CSI排障](./domain-12-troubleshooting/04-storage-csi-troubleshooting.md), [14-PVC排障](./domain-12-troubleshooting/14-pvc-storage-troubleshooting.md), [31-备份恢复](./domain-12-troubleshooting/31-backup-restore-troubleshooting.md), [79-存储排障](./domain-6-storage/79-pv-pvc-troubleshooting.md), [80-存储备份](./domain-6-storage/80-storage-backup-disaster-recovery.md) | P1 |
+| **备份恢复** | [16-备份概览](./domain-9-platform-ops/16-backup-recovery-overview.md), [17-Velero](./domain-9-platform-ops/17-backup-restore-velero.md), [18-容灾策略](./domain-9-platform-ops/18-disaster-recovery-strategy.md) | P1 |
+| **容量规划** | [33-容量规划](./domain-4-workloads/33-cluster-capacity-planning.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md) | P2 |
+| **安全架构** | [01-认证授权](./domain-7-security/01-authentication-authorization-system.md), [02-网络安全](./domain-7-security/02-network-security-policies.md), [03-运行时安全](./domain-7-security/03-runtime-security-defense.md), [04-审计合规](./domain-7-security/04-audit-logging-compliance.md), [12-合规认证](./domain-7-security/12-compliance-certification.md), [07-安全合规](./domain-9-platform-ops/07-security-compliance.md) | P1 |
+
+---
+
+### 附录C: 架构师视角
+
+> 关注点: 架构设计、高可用、多集群、技术选型
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **架构设计** | [01-K8s架构](./tables/01-kubernetes-architecture-overview.md), [02-核心组件](./tables/02-core-components-deep-dive.md), [11-设计原则](./tables/11-kubernetes-design-principles.md) | P0 |
+| **设计原理** | [12-声明式API](./tables/12-declarative-api-pattern.md), [13-控制器模式](./tables/13-controller-pattern-reconciliation.md), [20-CAP定理](./tables/20-cap-theorem-distributed-systems.md) | P0 |
+| **高可用设计** | [18-高可用模式](./tables/18-high-availability-patterns.md), [17-etcd共识](./tables/17-distributed-consensus-etcd.md), [18-容灾策略](./domain-9-platform-ops/18-disaster-recovery-strategy.md) | P0 |
+| **控制平面** | [35-etcd](./domain-3-control-plane/35-etcd-deep-dive.md), [36-API Server](./domain-3-control-plane/36-kube-apiserver-deep-dive.md), [37-KCM](./domain-3-control-plane/37-kube-controller-manager-deep-dive.md), [164-Scheduler](./domain-3-control-plane/164-kube-scheduler-deep-dive.md) | P0 |
+| **多集群架构** | [19-多集群](./domain-9-platform-ops/19-multi-cluster-management.md), [20-联邦集群](./domain-9-platform-ops/20-federated-cluster.md), [60-多集群网络](./domain-5-networking/60-multi-cluster-networking.md) | P1 |
+| **网络架构** | [41-网络架构](./domain-5-networking/41-network-architecture-overview.md), [43-CNI对比](./domain-5-networking/43-cni-plugins-comparison.md), [167-CNI详解](./domain-3-control-plane/167-cni-container-network-deep-dive.md) | P1 |
+| **存储架构** | [73-存储架构](./domain-6-storage/73-storage-architecture-overview.md), [166-CSI详解](./domain-3-control-plane/166-csi-container-storage-deep-dive.md) | P1 |
+| **运行时选型** | [165-CRI详解](./domain-3-control-plane/165-cri-container-runtime-deep-dive.md), [27-RuntimeClass](./domain-4-workloads/27-runtime-class-configuration.md) | P2 |
+| **服务网格** | [11-服务网格](./domain-10-extensions/11-service-mesh-overview.md), [12-网格进阶](./domain-10-extensions/12-service-mesh-advanced.md) | P2 |
+| **AI基础设施** | [01-AI Infra](./domain-11-ai-infra/01-ai-infrastructure-overview.md), [18-LLM架构](./domain-11-ai-infra/18-llm-serving-architecture.md) | P2 |
+
+---
+
+### 附录D: 测试工程师视角
+
+> 关注点: 测试环境、混沌工程、性能测试、CI集成
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **环境搭建** | [21-虚拟集群](./domain-9-platform-ops/21-virtual-clusters.md), [06-集群配置](./tables/06-cluster-configuration-parameters.md) | P0 |
+| **混沌工程** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md) | P0 |
+| **性能测试** | [101-性能分析](./domain-8-observability/101-performance-profiling-tools.md), [107-扩展性能](./domain-8-observability/107-scaling-performance.md), [62-网络调优](./domain-5-networking/62-network-performance-tuning.md) | P0 |
+| **CI/CD集成** | [08-CI/CD](./domain-10-extensions/08-cicd-pipelines.md), [10-镜像构建](./domain-10-extensions/10-image-build-tools.md) | P1 |
+| **安全测试** | [10-镜像扫描](./domain-7-security/10-image-security-scanning.md), [15-安全扫描](./domain-7-security/15-security-scanning-tools.md) | P1 |
+| **可观测性** | [93-Prometheus](./domain-8-observability/93-monitoring-metrics-prometheus.md), [95-日志](./domain-8-observability/95-logging-auditing.md), [97-可观测工具](./domain-8-observability/97-observability-tools.md) | P2 |
+| **故障注入** | [106-混沌工程](./domain-8-observability/106-chaos-engineering.md), [99-排障概览](./domain-8-observability/99-troubleshooting-overview.md) | P2 |
+
+---
+
+### 附录E: 产品经理视角
+
+> 关注点: 架构理解、成本分析、能力边界、技术选型
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **架构理解** | [01-K8s架构](./tables/01-kubernetes-architecture-overview.md), [11-设计原则](./tables/11-kubernetes-design-principles.md) | P0 |
+| **成本分析** | [26-成本优化](./domain-11-ai-infra/26-cost-optimization-overview.md), [27-Kubecost](./domain-11-ai-infra/27-cost-management-kubecost.md), [12-AI成本](./domain-11-ai-infra/12-ai-cost-analysis-finops.md) | P0 |
+| **AI能力** | [01-AI Infra](./domain-11-ai-infra/01-ai-infrastructure-overview.md), [17-LLM推理](./domain-11-ai-infra/17-llm-inference-serving.md), [23-LLM成本](./domain-11-ai-infra/23-llm-cost-monitoring.md) | P1 |
+| **多租户** | [08-多租户](./tables/08-multi-tenancy-architecture.md), [08-RBAC矩阵](./domain-7-security/08-rbac-matrix-configuration.md) | P1 |
+| **合规认证** | [12-合规认证](./domain-7-security/12-compliance-certification.md), [13-审计实践](./domain-7-security/13-compliance-audit-practices.md) | P1 |
+| **高可用** | [18-高可用模式](./tables/18-high-availability-patterns.md), [18-容灾策略](./domain-9-platform-ops/18-disaster-recovery-strategy.md) | P2 |
+| **边缘计算** | [09-边缘计算](./tables/09-edge-computing-kubeedge.md) | P2 |
+| **绿色计算** | [28-绿色计算](./domain-11-ai-infra/28-green-computing-sustainability.md) | P2 |
+
+---
+
+### 附录F: 终端用户视角
+
+> 关注点: 应用部署、状态查看、日志获取、问题定位
+
+| 场景 | 推荐文档 | 优先级 |
+|:---|:---|:---:|
+| **基础操作** | [05-kubectl](./tables/05-kubectl-commands-reference.md), [14-CLI工具](./domain-9-platform-ops/14-cli-enhancement-tools.md) | P0 |
+| **应用部署** | [06-Helm管理](./domain-10-extensions/06-helm-charts-management.md), [09-ArgoCD](./domain-10-extensions/09-gitops-workflow-argocd.md) | P0 |
+| **状态查看** | [11-Pod生命周期](./domain-4-workloads/22-pod-lifecycle-events.md), [105-健康检查](./domain-8-observability/105-cluster-health-check.md) | P1 |
+| **日志获取** | [95-日志](./domain-8-observability/95-logging-auditing.md), [98-日志聚合](./domain-8-observability/98-log-aggregation-tools.md) | P1 |
+| **问题定位** | [08-Pod综合排障](./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md), [10-Service排障](./domain-12-troubleshooting/10-service-comprehensive-troubleshooting.md), [15-Ingress排障](./domain-12-troubleshooting/15-ingress-troubleshooting.md), [35-节点组件](./domain-12-troubleshooting/35-node-component-troubleshooting.md) | P1 |
+| **资源配置** | [34-资源管理](./domain-4-workloads/34-resource-management.md), [32-HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | P2 |
+
+---
+
+## 本地 Gitbook
+
+本项目提供基于 [mdBook](https://rust-lang.github.io/mdBook/) 的本地文档浏览，支持全文搜索、目录折叠导航。
+
+### 前置条件
+
+```bash
+# 安装 mdBook（需要 Rust 工具链）
+cargo install mdbook
+```
+
+### 快速启动
+
+```bash
+cd gitbook
+bash start.sh
+# 浏览器访问 http://localhost:3000
+```
+
+### 刷新与导出
+
+| 命令 | 说明 |
+|:---|:---|
+| `bash start.sh` | 初始化并启动本地服务（首次使用） |
+| `PORT=8080 bash start.sh` | 指定端口启动 |
+| `bash refresh.sh` | 完整刷新：更新符号链接 + 重新生成目录 + 重新构建 |
+| `bash refresh.sh build` | 仅重新构建，适合只修改了已有文件内容 |
+| `bash export-static.sh` | 导出到 gitbook/dist/ 目录，可直接打开 |
+| `bash export-static.sh --zip` | 导出并打包为 zip 文件 |
+
+### 目录结构
+
+```
+gitbook/
+├── book.toml              # mdBook 配置
+├── start.sh               # 启动脚本
+├── refresh.sh             # 刷新脚本
+├── export-static.sh       # 静态导出脚本
+├── generate-summary.sh    # SUMMARY.md 自动生成脚本
+├── theme/                 # 自定义主题（CSS/JS）
+├── src/                   # 源文件（符号链接指向项目根目录）
+├── book/                  # 构建输出（serve 模式）
+└── dist/                  # 静态导出输出
+```
+
+---
+
+---
+
+## 云厂商Kubernetes产品目录
+
+> **涵盖范围**: 主流公有云和国内云厂商 | **更新时间**: 2026-02
+
+本目录收录各云厂商的Kubernetes托管服务产品，提供产品概览、架构特点、核心功能和最佳实践。
+
+### 国际云厂商
+
+| 云厂商 | 产品名称 | 目录 | 核心特性 | 特色内容 |
+|:---|:---|:---|:---|:---|
+| **Amazon** | EKS (Elastic Kubernetes Service) | [03-aws-eks/aws-eks-overview.md](./domain-17-cloud-provider/03-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、Fargate无服务器 | EKS Anywhere混合云、Bottlerocket OS、Karpenter智能调度 |
+| **Microsoft** | AKS (Azure Kubernetes Service) | [04-azure-aks/azure-aks-overview.md](./domain-17-cloud-provider/04-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、虚拟节点 | Azure Arc多云管理、Confidential Containers机密计算、Dapr集成 |
+| **Google** | GKE (Google Kubernetes Engine) | [05-google-cloud-gke/google-cloud-gke-overview.md](./domain-17-cloud-provider/05-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、智能优化、Anthos多云 | Borg技术传承、Autopilot无服务器、Anthos Service Mesh |
+| **Oracle** | OKE (Oracle Container Engine) | [11-oracle-oke/oracle-oke-overview.md](./domain-17-cloud-provider/11-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群 | OCI原生集成、多云支持、企业级安全 |
+| **IBM** | IKS (IBM Cloud Kubernetes Service) | [10-ibm-iks/ibm-iks-overview.md](./domain-17-cloud-provider/10-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点 | 企业级合规、多云混合部署、IBM Cloud集成 |
+
+### 国内云厂商
+
+| 云厂商 | 产品名称 | 目录 | 核心特性 | 特色内容 |
+|:---|:---|:---|:---|:---|
+| **阿里云** | ACK (Container Service for Kubernetes) | [01-alicloud-ack/alicloud-ack-overview.md](./domain-17-cloud-provider/01-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版、Terway网络、RRSA认证 | Terway网络插件、RRSA身份联合、Serverless节点、双模式架构 |
+| **阿里云** | 专有云K8s | [02-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md](./domain-17-cloud-provider/02-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境、ESS伸缩、SLS日志 | 专有云定制、弹性伸缩、日志分析 |
+| **字节跳动** | VEK (Volcengine Kubernetes) | [13-volcengine-vek/volcengine-vek-overview.md](./domain-17-cloud-provider/13-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维 | 字节跳动技术沉淀、高性能CNI、智能调度算法 |
+| **腾讯云** | TKE (Tencent Kubernetes Engine) | [06-tencent-tke/tencent-tke-overview.md](./domain-17-cloud-provider/06-tencent-tke/tencent-tke-overview.md) | 万级节点、VPC-CNI、超级节点 | 腾讯内部实践、VPC网络优化、超级节点服务 |
+| **华为云** | CCE (Cloud Container Engine) | [07-huawei-cce/huawei-cce-overview.md](./domain-17-cloud-provider/07-huawei-cce/huawei-cce-overview.md) | GPU节点、ASM服务网格、裸金属 | 华为技术优势、GPU加速、服务网格集成 |
+| **天翼云** | TKE (Tianyi Cloud Kubernetes) | [08-ctyun-tke/ctyun-tke-overview.md](./domain-17-cloud-provider/08-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持 | 电信网络优势、5G融合、国产化适配 |
+| **移动云** | CKE (China Mobile Cloud K8s) | [09-ecloud-cke/ecloud-cke-overview.md](./domain-17-cloud-provider/09-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机 | 移动网络集成、CDN优化、专属计算资源 |
+| **联通云** | UK8S (Unicom Cloud K8s) | [12-ucloud-uk8s/ucloud-uk8s-overview.md](./domain-17-cloud-provider/12-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片、政企定制 | 联通网络基础、5G切片技术、政企解决方案 |
+
+**特点**:
+- ✅ 系统化整理各厂商K8s产品信息
+- ✅ 无遗漏覆盖主流云服务商
+- ✅ 完整的产品特性和架构对比
+- ✅ 生产环境最佳实践指导
+- ✅ 多维度分类索引便于查找
+
+---
+
+## 演示文档(topic-presentations)
+
+> **适用环境**: 阿里云专有云、公共云 ACK 集群 | **目标读者**: DevOps 工程师、平台运维工程师
+
+以下演示文档提供从入门到实战的完整技术体系，包含PPT演示内容和生产级配置实践。
+
+| 主题 | 文档 | 关键内容 | 文件大小 |
+|:---|:---|:---|:---:|
+| **CoreDNS** | [kubernetes-coredns-presentation.md](./topic-presentations/kubernetes-coredns-presentation.md) | 架构原理、Corefile配置、ACK优化、监控告警、性能调优、生产级部署 | 100.5KB |
+| **Ingress** | [kubernetes-ingress-presentation.md](./topic-presentations/kubernetes-ingress-presentation.md) | 控制器选型、路由配置、TLS证书、阿里云集成、安全加固、故障排查 | 69.3KB |
+| **Service** | [kubernetes-service-presentation.md](./topic-presentations/kubernetes-service-presentation.md) | Service类型详解、负载均衡、阿里云LB集成、网络策略、高可用配置 | 66.0KB |
+| **存储** | [kubernetes-storage-presentation.md](./topic-presentations/kubernetes-storage-presentation.md) | PV/PVC架构、StorageClass、CSI驱动、阿里云存储、备份恢复 | 82.4KB |
+| **工作负载** | [kubernetes-workload-presentation.md](./topic-presentations/kubernetes-workload-presentation.md) | Pod生命周期、控制器模式、调度策略、资源管理、自动扩缩容 | 100.3KB |
+| **Terway网络** | [kubernetes-terway-presentation.md](./topic-presentations/kubernetes-terway-presentation.md) | Terway架构、网络模式、阿里云ACK集成、固定IP、安全组集成 | 162.5KB |
+| **演示模板** | [presentation-template.md](./topic-presentations/presentation-template.md) | 标准演示模板、章节结构、格式规范、复用指南 | 2.8KB |
+
+**特点**:
+- ✅ 系统化内容组织，无遗漏知识点
+- ✅ 阿里云环境专属配置和最佳实践
+- ✅ 完整的分类索引和风险说明
+- ✅ 生产级YAML配置模板
+- ✅ 故障排查和性能优化指导
+
+---
+
+### 结构化故障排查知识库 (topic-structural-trouble-shooting)
+
+> **生产环境故障排查专家级知识库** | 40篇文档 | 12个分类 | 覆盖K8s全组件故障排查场景
+
+本专题基于生产环境真实案例编写，提供系统性排查方法、实战经验总结、风险控制指导。
+
+| 分类 | 文档数 | 核心内容 | 覆盖组件 |
+|:---|:---:|:---|:---|
+| **控制平面** | 6 | [01-control-plane](./topic-structural-trouble-shooting/01-control-plane/) | API Server、etcd、Scheduler、Controller Manager、Webhook、APF |
+| **节点组件** | 6 | [02-node-components](./topic-structural-trouble-shooting/02-node-components/) | kubelet、kube-proxy、容器运行时、节点故障、镜像仓库、GPU/设备插件 |
+| **网络** | 6 | [03-networking](./topic-structural-trouble-shooting/03-networking/) | CNI、DNS、Service/Ingress、NetworkPolicy、Istio、Gateway API |
+| **存储** | 2 | [04-storage](./topic-structural-trouble-shooting/04-storage/) | PV/PVC、CSI驱动 |
+| **工作负载** | 6 | [05-workloads](./topic-structural-trouble-shooting/05-workloads/) | Pod、Deployment、StatefulSet、DaemonSet、Job/CronJob、ConfigMap/Secret |
+| **安全认证** | 4 | [06-security-auth](./topic-structural-trouble-shooting/06-security-auth/) | RBAC、证书、Pod安全、审计日志 |
+| **资源调度** | 4 | [07-resources-scheduling](./topic-structural-trouble-shooting/07-resources-scheduling/) | 资源配额、HPA/VPA、Cluster Autoscaler、PDB |
+| **集群运维** | 6 | [08-cluster-operations](./topic-structural-trouble-shooting/08-cluster-operations/) | 维护升级、日志监控、Helm、高可用灾备、CRD/Operator、Kustomize |
+| **云厂商** | 1 | [09-cloud-provider](./topic-structural-trouble-shooting/09-cloud-provider/) | 云厂商特定故障排查 |
+| **AI/ML工作负载** | 1 | [10-ai-ml-workloads](./topic-structural-trouble-shooting/10-ai-ml-workloads/) | GPU调度、分布式训练、模型服务故障 |
+| **GitOps/DevOps** | 1 | [11-gitops-devops](./topic-structural-trouble-shooting/11-gitops-devops/) | ArgoCD、FluxCD故障排查 |
+| **监控可观测性** | 1 | [12-monitoring-observability](./topic-structural-trouble-shooting/12-monitoring-observability/) | Prometheus、Grafana故障排查 |
+
+**快速定位**: 详细的[故障排查索引](./topic-structural-trouble-shooting/README.md)支持按错误现象和组件快速查找。
+
+---
+
+## 变更历史
+
+详细变更记录请参阅 [CHANGELOG.md](./CHANGELOG.md)。
+
+---
+
+### 域17: 云厂商Kubernetes服务 (Cloud Provider Kubernetes Services)
+
+> 13 篇 | 主流公有云和国内云厂商的Kubernetes托管服务详解
+
+#### Q1: 国际云厂商 (01-05)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 阿里云ACK | [alicloud-ack-overview](./domain-17-cloud-provider/01-alicloud-ack/alicloud-ack-overview.md) | 托管版/专有版双模式、Terway网络插件、RRSA身份联合、ASI Serverless节点 |
+| 02 | 专有云ACK | [alicloud-apsara-ack](./domain-17-cloud-provider/02-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md) | 专有云环境ESS伸缩、SLS日志服务、POP平台运维 |
+| 03 | AWS EKS | [aws-eks-overview](./domain-17-cloud-provider/03-aws-eks/aws-eks-overview.md) | 托管控制平面、IAM集成、EKS Anywhere混合云、Bottlerocket OS |
+| 04 | Azure AKS | [azure-aks-overview](./domain-17-cloud-provider/04-azure-aks/azure-aks-overview.md) | 免费控制平面、Azure AD集成、Confidential Containers、Dapr集成 |
+| 05 | GCP GKE | [google-cloud-gke-overview](./domain-17-cloud-provider/05-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot模式、Anthos Service Mesh、Config Connector、Borg技术传承 |
+
+#### Q2: 国内云厂商 (06-13)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 06 | 腾讯云TKE | [tencent-tke-overview](./domain-17-cloud-provider/06-tencent-tke/tencent-tke-overview.md) | 万级节点支持、VPC-CNI网络、超级节点、CODING DevOps集成 |
+| 07 | 华为云CCE | [huawei-cce-overview](./domain-17-cloud-provider/07-huawei-cce/huawei-cce-overview.md) | GPU节点优化、ASM服务网格、裸金属节点、软件开发生产线 |
+| 08 | 天翼云TKE | [ctyun-tke-overview](./domain-17-cloud-provider/08-ctyun-tke/ctyun-tke-overview.md) | 电信级SLA、5G融合、国产化支持、边缘计算优化 |
+| 09 | 移动云CKE | [ecloud-cke-overview](./domain-17-cloud-provider/09-ecloud-cke/ecloud-cke-overview.md) | 运营商网络优势、CDN集成、专属宿主机、政企定制方案 |
+| 10 | IBM IKS | [ibm-iks-overview](./domain-17-cloud-provider/10-ibm-iks/ibm-iks-overview.md) | 企业级安全、多云支持、裸金属节点、Red Hat OpenShift集成 |
+| 11 | Oracle OKE | [oracle-oke-overview](./domain-17-cloud-provider/11-oracle-oke/oracle-oke-overview.md) | OCI深度集成、裸金属节点、私有集群、企业级安全 |
+| 12 | UCloud UK8S | [ucloud-uk8s-overview](./domain-17-cloud-provider/12-ucloud-uk8s/ucloud-uk8s-overview.md) | 联通网络支撑、5G切片技术、政企解决方案、混合云部署 |
+| 13 | 字节云VEK | [volcengine-vek-overview](./domain-17-cloud-provider/13-volcengine-vek/volcengine-vek-overview.md) | 字节内部经验、高性能调度、智能运维、火山引擎生态 |
+
+#### Q3: ACK关联产品 (240-245)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 240 | ECS计算 | [ack-ecs-compute](./domain-17-cloud-provider/01-alicloud-ack/240-ack-ecs-compute.md) | 实例规格选型、节点池配置、Spot策略、弹性伸缩组集成 |
+| 241 | 负载均衡 | [ack-slb-nlb-alb](./domain-17-cloud-provider/01-alicloud-ack/241-ack-slb-nlb-alb.md) | CLB/NLB/ALB完整配置、生产级注解参考、多协议支持 |
+| 242 | VPC网络 | [ack-vpc-network](./domain-17-cloud-provider/01-alicloud-ack/242-ack-vpc-network.md) | 网络规划、NAT网关、专线连接、安全组配置 |
+| 243 | RAM权限 | [ack-ram-authorization](./domain-17-cloud-provider/01-alicloud-ack/243-ack-ram-authorization.md) | RRSA认证、权限矩阵、跨账号授权、安全最佳实践 |
+| 244 | ROS编排 | [ack-ros-iac](./domain-17-cloud-provider/01-alicloud-ack/244-ack-ros-iac.md) | 资源模板、与Terraform对比、基础设施即代码 |
+| 245 | EBS存储 | [ack-ebs-storage](./domain-17-cloud-provider/01-alicloud-ack/245-ack-ebs-storage.md) | ESSD性能优化、快照管理、加密配置、存储类动态供应 |
+| 246 | 生产就绪评估 | [production-readiness](./domain-19-papers/01-kubernetes-production-readiness-assessment.md) | 系统性评估框架、12维度检查清单、成熟度模型 |
+| 247 | 大规模性能优化 | [large-scale-optimization](./domain-19-papers/02-kubernetes-large-scale-performance-optimization.md) | 5000+节点优化、控制平面调优、网络存储性能 |
+| 248 | 零信任安全架构 | [zero-trust-security](./domain-19-papers/03-kubernetes-zero-trust-security-architecture.md) | 身份认证、网络微隔离、运行时防护、合规检查 |
+| 249 | 多云混合部署 | [multi-cloud-deployment](./domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.md) | 跨云架构、数据同步、成本优化、故障切换 |
+| 250 | GitOps实践指南 | [gitops-practice](./domain-19-papers/05-kubernetes-gitops-complete-practice-guide.md) | ArgoCD/FluxCD、CI/CD流水线、自动化部署 |
+| 251 | 成本治理FinOps | [cost-governance](./domain-19-papers/06-kubernetes-cost-governance-finops-practice.md) | 成本监控、预算管理、资源优化、价值分析 |
+| 252 | CSI存储深度实践 | [csi-storage](./domain-19-papers/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
+| 253 | 网络策略微隔离 | [network-microsegmentation](./domain-19-papers/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
+| 254 | 服务网格Istio | [service-mesh-istio](./domain-19-papers/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
+| 255 | 自动化SRE实践 | [automation-sre](./domain-19-papers/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 256 | API Server深度优化 | [api-server-optimization](./domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
+| 257 | 调度器深度优化 | [scheduler-optimization](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
+| 258 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
+| 259 | 事件驱动架构 | [event-driven-architecture](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md) | 事件驱动架构、异步处理、CQRS、事件溯源 |
+| 260 | 混沌工程测试 | [chaos-engineering](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md) | 混沌工程、故障注入、系统韧性、可靠性测试 |
+| 261 | 边缘计算实践 | [edge-computing](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md) | 边缘计算、KubeEdge、物联网、边缘自治 |
+
+### 域18: 生产运维实践 (Production Operations)
+
+> 24 篇 | 企业级生产环境运维全方位实践指南
+
+#### P1: 架构与部署 (01-03)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 生产架构设计 | [production-architecture](./domain-18-production-operations/01-production-architecture-design-principles.md) | 高可用架构设计原则、生产环境部署模式 |
+| 02 | 多云混合部署 | [multi-cloud-deployment](./domain-18-production-operations/02-multi-cloud-hybrid-deployment-strategy.md) | 跨云部署策略、混合云架构设计 |
+| 03 | 边缘计算部署 | [edge-computing](./domain-18-production-operations/03-edge-computing-production-deployment.md) | 边缘节点管理、IoT场景部署 |
+
+#### P2: 监控可观测性 (04-06)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 04 | 企业监控体系 | [enterprise-monitoring](./domain-18-production-operations/04-enterprise-monitoring-system.md) | Prometheus架构、告警体系设计 |
+| 05 | 日志分析平台 | [logging-platform](./domain-18-production-operations/05-logging-collection-analysis-platform.md) | ELK/Loki部署、日志分析实践 |
+| 06 | APM性能监控 | [apm-monitoring](./domain-18-production-operations/06-apm-application-performance-monitoring.md) | 应用性能监控、链路追踪 |
+
+#### P3: 安全合规 (07-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 07 | 零信任架构 | [zero-trust](./domain-18-production-operations/07-zero-trust-security-architecture.md) | 零信任安全模型、身份认证 |
+| 08 | CIS基准合规 | [cis-compliance](./domain-18-production-operations/08-cis-benchmark-compliance-audit.md) | CIS基准检查、合规审计 |
+| 09 | SBOM物料清单 | [sbom](./domain-18-production-operations/09-software-bill-of-materials.md) | 软件物料清单、供应链安全 |
+
+#### P4: DevOps与IaC (10-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | GitOps实践 | [gitops-pipeline](./domain-18-production-operations/10-gitops-pipeline-practices.md) | ArgoCD/FluxCD实践、CI/CD流水线 |
+| 11 | 基础设施即代码 | [iac](./domain-18-production-operations/11-infrastructure-as-code.md) | Terraform/Pulumi、资源编排 |
+| 12 | 自动化工具链 | [automation-tools](./domain-18-production-operations/12-automated-operations-toolchain.md) | Ansible、运维自动化 |
+
+#### P5: 成本优化 (13-15)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 成本治理 | [cost-governance](./domain-18-production-operations/13-kubernetes-cost-governance.md) | Kubecost、FinOps实践 |
+| 14 | 资源配额管理 | [quota-management](./domain-18-production-operations/14-resource-quota-management.md) | 配额策略、资源隔离 |
+| 15 | 绿色计算 | [green-computing](./domain-18-production-operations/15-green-computing-sustainability.md) | 节能优化、可持续发展 |
+
+#### P6: 灾备恢复 (16-18)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 16 | 企业备份策略 | [backup-strategy](./domain-18-production-operations/16-enterprise-backup-strategy.md) | Velero备份、数据保护 |
+| 17 | 灾难恢复演练 | [dr-drills](./domain-18-production-operations/17-disaster-recovery-drills.md) | 演练流程、RTO/RPO验证 |
+| 18 | 跨区域容灾 | [cross-region-dr](./domain-18-production-operations/18-cross-region-disaster-recovery.md) | 多活架构、数据同步 |
+
+#### P7: 性能优化 (19-21)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | 集群性能调优 | [cluster-tuning](./domain-18-production-operations/19-cluster-performance-tuning.md) | 控制平面优化、节点调优 |
+| 20 | 网络性能优化 | [network-optimization](./domain-18-production-operations/20-network-performance-optimization.md) | CNI调优、带宽优化 |
+| 21 | 存储性能优化 | [storage-optimization](./domain-18-production-operations/21-storage-performance-optimization.md) | IOPS优化、CSI调优 |
+
+#### P8: 运维管理 (22-24)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 22 | 变更管理流程 | [change-management](./domain-18-production-operations/22-change-management-process.md) | 变更审批、回滚策略 |
+| 23 | 事件响应处理 | [incident-response](./domain-18-production-operations/23-incident-response-handling.md) | 应急响应、故障处理 |
+| 24 | 容量规划预测 | [capacity-planning](./domain-18-production-operations/24-capacity-planning-forecasting.md) | 资源预测、扩容策略 |
+
+### 域19: 技术白皮书 (Technical Papers)
+
+> 16 篇 | Kubernetes生产环境深度技术专题白皮书
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 生产就绪评估 | [production-readiness](./domain-19-papers/01-kubernetes-production-readiness-assessment.md) | 系统性评估框架、12维度检查清单、成熟度模型 |
+| 02 | 大规模性能优化 | [large-scale-optimization](./domain-19-papers/02-kubernetes-large-scale-performance-optimization.md) | 5000+节点优化、控制平面调优、网络存储性能 |
+| 03 | 零信任安全架构 | [zero-trust-security](./domain-19-papers/03-kubernetes-zero-trust-security-architecture.md) | 身份认证、网络微隔离、运行时防护、合规检查 |
+| 04 | 多云混合部署 | [multi-cloud-deployment](./domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.md) | 跨云架构、数据同步、成本优化、故障切换 |
+| 05 | GitOps实践指南 | [gitops-practice](./domain-19-papers/05-kubernetes-gitops-complete-practice-guide.md) | ArgoCD/FluxCD、CI/CD流水线、自动化部署 |
+| 06 | 成本治理FinOps | [cost-governance](./domain-19-papers/06-kubernetes-cost-governance-finops-practice.md) | 成本监控、预算管理、资源优化、价值分析 |
+| 07 | CSI存储深度实践 | [csi-storage](./domain-19-papers/07-kubernetes-csi-storage-deep-practice.md) | 容器存储接口、驱动开发、性能优化、快照管理 |
+| 08 | 网络策略微隔离 | [network-microsegmentation](./domain-19-papers/08-kubernetes-network-policies-security-micro-segmentation.md) | 网络策略、安全微隔离、CNI集成、零信任架构 |
+| 09 | 服务网格Istio | [service-mesh-istio](./domain-19-papers/09-kubernetes-service-mesh-istio-integration.md) | 服务网格架构、Istio集成、流量管理、安全认证 |
+| 10 | 自动化SRE实践 | [automation-sre](./domain-19-papers/10-kubernetes-automation-sre-practices.md) | SRE理念、自动化运维、故障响应、容量规划 |
+| 11 | API Server深度优化 | [api-server-optimization](./domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.md) | API Server架构、扩展机制、性能优化、安全加固 |
+| 12 | 调度器深度优化 | [scheduler-optimization](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md) | 调度算法、自定义调度、资源优化、性能分析 |
+| 13 | 多租户安全隔离 | [multi-tenancy-security](./domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md) | 多租户平台、安全隔离、资源配额、RBAC权限 |
+| 14 | 事件驱动架构 | [event-driven-architecture](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md) | 事件驱动架构、异步处理、CQRS、事件溯源 |
+| 15 | 混沌工程测试 | [chaos-engineering](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md) | 混沌工程、故障注入、系统韧性、可靠性测试 |
+| 16 | 边缘计算实践 | [edge-computing](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md) | 边缘计算、KubeEdge、物联网、边缘自治 |
+
+### 域20: 企业级监控与告警 (Enterprise Monitoring & Alerting)
+
+> 3 篇 | 企业级监控平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 262 | Prometheus监控 | [prometheus-monitoring](./domain-20-enterprise-monitoring-alerting/01-prometheus-enterprise-monitoring.md) | Prometheus高可用部署、告警规则设计、性能优化、Thanos全局视图 |
+| 263 | Zabbix监控 | [zabbix-monitoring](./domain-20-enterprise-monitoring-alerting/07-zabbix-enterprise-monitoring.md) | Zabbix高可用架构、自定义监控、告警策略、性能调优 |
+| 264 | New Relic APM | [new-relic-apm](./domain-20-enterprise-monitoring-alerting/08-new-relic-enterprise-apm.md) | New Relic应用性能监控、分布式追踪、智能告警、AIOps分析 |
+
+### 域21: 日志管理与分析 (Logging Management & Analytics)
+
+> 3 篇 | 企业级日志平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 265 | ELK日志系统 | [elk-logging](./domain-21-logging-management-analytics/01-elk-stack-enterprise-logging.md) | ELK Stack高可用部署、日志处理管道、安全配置、性能调优 |
+| 266 | Splunk日志分析 | [splunk-analytics](./domain-21-logging-management-analytics/05-splunk-enterprise-log-analytics.md) | Splunk SIEM平台、高级搜索、安全分析、企业级部署 |
+| 267 | Loggly云日志 | [loggly-cloud](./domain-21-logging-management-analytics/06-loggly-cloud-log-management.md) | Loggly云原生日志管理、快速部署、实时分析、智能告警 |
+
+### 域22: 容器镜像管理 (Container Image Management)
+
+> 3 篇 | 企业级容器镜像仓库架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 268 | Harbor镜像仓库 | [harbor-registry](./domain-22-container-image-management/01-harbor-enterprise-image-registry.md) | Harbor高可用部署、安全扫描、镜像复制、权限管理 |
+| 269 | GitLab Registry | [gitlab-registry](./domain-22-container-image-management/05-gitlab-container-registry-enterprise.md) | GitLab集成容器注册表、CI/CD集成、安全扫描、权限管理 |
+| 270 | Amazon ECR | [amazon-ecr](./domain-22-container-image-management/06-amazon-ecr-enterprise.md) | AWS弹性容器注册表、跨账户共享、安全扫描、成本优化 |
+
+### 域23: GitOps与CI/CD (GitOps & CI/CD)
+
+> 2 篇 | 企业级持续交付平台架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 271 | Argo CD GitOps | [argo-cd-gitops](./domain-23-gitops-ci-cd/01-argo-cd-enterprise-gitops.md) | Argo CD高可用部署、多环境管理、安全集成、自动化策略 |
+| 272 | GitHub Actions | [github-actions](./domain-23-gitops-ci-cd/04-github-actions-enterprise.md) | GitHub Actions工作流自动化、安全策略、企业治理、性能优化 |
+
+### 域24: 基础设施即代码 (Infrastructure as Code)
+
+> 1 篇 | 企业级基础设施自动化架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 266 | Terraform IaC | [terraform-iac](./domain-24-infrastructure-as-code/01-terraform-enterprise-iac.md) | Terraform模块化设计、策略管理、CI/CD集成、状态治理 |
+
+### 域25: 云原生安全 (Cloud Native Security)
+
+> 1 篇 | 企业级云原生安全防护架构与实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 267 | Falco安全监控 | [falco-security](./domain-25-cloud-native-security/01-falco-cloud-native-security.md) | Falco规则引擎、威胁检测、自动响应、合规管理 |
+| 268 | Sysdig容器安全 | [sysdig-container-security](./domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md) | Sysdig深度监控、容器取证、安全合规、威胁狩猎 |
+| 269 | Aqua容器安全 | [aqua-container-security](./domain-25-cloud-native-security/03-aqua-enterprise-container-security.md) | Aqua安全平台、镜像扫描、运行时防护、合规管理 |
+| 270 | Thanos指标联邦 | [thanos-metrics-federation](./domain-20-enterprise-monitoring-alerting/04-thanos-enterprise-metrics-federation.md) | Thanos高可用架构、联邦策略、长期存储、查询优化 |
+| 271 | Loki日志聚合 | [loki-log-aggregation](./domain-21-logging-management-analytics/03-loki-enterprise-log-aggregation.md) | Loki轻量级架构、日志处理管道、查询分析、性能优化 |
+| 272 | JFrog制品管理 | [jfrog-artifactory](./domain-22-container-image-management/03-jfrog-artifactory-enterprise.md) | JFrog平台架构、多格式支持、安全扫描、DevOps集成 |
+| 273 | GitLab CI/CD | [gitlab-cicd](./domain-23-gitops-ci-cd/03-gitlab-enterprise-cicd.md) | GitLab流水线、Runner配置、安全扫描、部署策略 |
+| 274 | Pulumi基础设施 | [pulumi-iac](./domain-24-infrastructure-as-code/03-pulumi-enterprise-iac.md) | Pulumi编程模型、多云管理、团队协作、安全最佳实践 |
+### 域26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)
+
+> 3 篇 | 企业级服务网格架构与微服务治理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 275 | Istio服务网格 | [istio-service-mesh](./domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md) | Istio高可用部署、流量管理、安全控制、性能优化 |
+| 276 | Linkerd服务网格 | [linkerd-service-mesh](./domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md) | Linkerd轻量级架构、自动mTLS、简化运维、Rust性能优势 |
+| 277 | Consul Connect | [consul-connect](./domain-26-service-mesh-microservices/03-consul-connect-enterprise.md) | Consul一体化解决方案、服务发现、配置管理、网络控制 |
+
+### 域27: 多云与混合云架构管理 (Multi-cloud & Hybrid Cloud Architecture Management)
+
+> 1 篇 | 企业级多云平台架构与混合云管理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 278 | AWS EKS多云 | [aws-eks-multicloud](./domain-27-multi-cloud-hybrid/01-aws-eks-enterprise-multicloud.md) | AWS EKS多云架构、集群管理、安全配置、监控运维 |
+
+### 域28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)
+
+> 1 篇 | 企业级数据库与中间件架构运维实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 279 | MySQL数据库 | [mysql-database](./domain-28-enterprise-database-middleware/01-mysql-enterprise-database.md) | MySQL高可用架构、性能优化、安全配置、监控告警 |
+
+### 域29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)
+
+> 1 篇 | 企业级自动化测试平台与质量保障体系
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 280 | Selenium自动化 | [selenium-automation](./domain-29-automated-testing-quality/01-selenium-enterprise-automation.md) | Selenium测试平台、框架设计、持续集成、监控报告 |
+
+### 域30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)
+
+> 1 篇 | 企业级灾备架构与业务连续性管理实践
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 281 | VMware vSphere灾备 | [vmware-vsphere-dr](./domain-30-disaster-recovery-business-continuity/01-vmware-vsphere-enterprise-dr.md) | VMware vSphere灾备架构、高可用设计、存储复制、故障切换 |
+| 282 | Veeam备份恢复 | [veeam-backup](./domain-30-disaster-recovery-business-continuity/02-veeam-enterprise-backup.md) | Veeam备份恢复解决方案、备份策略、恢复演练、监控告警 |
+| 283 | Envoy服务网格 | [envoy-proxy](./domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md) | Envoy Proxy高性能代理、配置优化、性能调优、生产运维 |
+| 284 | Azure AKS多云 | [azure-aks-multicloud](./domain-27-multi-cloud-hybrid/02-azure-aks-enterprise-multicloud.md) | Azure AKS多云管理、集群配置、Azure AD集成、监控告警 |
+| 285 | PostgreSQL数据库 | [postgresql-database](./domain-28-enterprise-database-middleware/02-postgresql-enterprise-database.md) | PostgreSQL高可用架构、主从复制、Patroni集群、Barman备份 |
+| 286 | JUnit5单元测试 | [junit5-testing](./domain-29-automated-testing-quality/02-junit5-enterprise-testing.md) | JUnit5测试框架、参数化测试、动态测试、扩展机制 |
+| 287 | Datadog监控平台 | [datadog-monitoring](./domain-20-enterprise-monitoring-alerting/05-datadog-enterprise-monitoring.md) | Datadog统一监控平台、APM、基础设施监控、日志管理、合成监控 |
+| 288 | Graylog日志管理 | [graylog-logging](./domain-21-logging-management-analytics/04-graylog-enterprise-logging.md) | Graylog开源日志管理、处理管道、安全配置、高可用部署 |
+| 289 | Quay镜像仓库 | [quay-registry](./domain-22-container-image-management/04-quay-enterprise-registry.md) | Quay企业级镜像管理、安全扫描、签名验证、CI/CD集成 |
+
+### 域31: 硬件基础设施 (Hardware Infrastructure)
+
+> 18 篇 | 云平台硬件架构、服务器原理、CPU/内存/存储/网络技术深度解析、硬件故障排查方法论、K8s硬件故障、错误码速查
+
+#### 基础架构 (01-04)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 290 | 云平台硬件架构 | [cloud-hardware-architecture](./domain-31-hardware/01-cloud-hardware-architecture.md) | 数据中心设计、Tier等级、PUE能效、机架布局、电力冷却 |
+| 291 | 服务器架构原理 | [server-architecture](./domain-31-hardware/02-server-architecture-principles.md) | NUMA拓扑、PCIe总线、BMC/IPMI/Redfish管理、远程管理 |
+| 292 | CPU技术深度 | [cpu-technology](./domain-31-hardware/03-cpu-technology-deep-dive.md) | Intel Xeon/AMD EPYC/ARM架构、微架构、SIMD/AVX、MCE |
+| 293 | 主板芯片组 | [motherboard-chipset](./domain-31-hardware/04-motherboard-chipset-technology.md) | 服务器主板架构、芯片组、PCIe拓扑、BIOS/UEFI |
+
+#### 核心组件 (05-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 294 | 内存技术深度 | [memory-technology](./domain-31-hardware/05-memory-technology-deep-dive.md) | DDR5架构、ECC/RAS特性、EDAC监控、内存RAS层次 |
+| 295 | HDD硬盘技术 | [hdd-technology](./domain-31-hardware/06-storage-hdd-technology.md) | 机械硬盘原理、S.M.A.R.T.监控、企业级HDD、RAID配置 |
+| 296 | SSD固态技术 | [ssd-technology](./domain-31-hardware/07-storage-ssd-technology.md) | NAND闪存、NVMe协议、SSD控制器、寿命管理、磨损均衡 |
+| 297 | 网络硬件技术 | [network-hardware](./domain-31-hardware/08-network-hardware-technology.md) | RDMA、SmartNIC/DPU、高速以太网(25G/100G/400G) |
+| 298 | 硬件厂商生态 | [hardware-vendors](./domain-31-hardware/09-hardware-vendors-ecosystem.md) | Dell/HPE/Lenovo/浪潮/华为服务器、Intel/AMD/NVIDIA |
+
+#### 硬件故障排查 (10-18) - 重点
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 299 | 排查方法论 | [troubleshooting-methodology](./domain-31-hardware/10-hardware-troubleshooting-methodology.md) | 六步诊断法、故障分类、决策树、预测性维护Python框架 |
+| 300 | CPU内存排查 | [cpu-memory-troubleshooting](./domain-31-hardware/11-cpu-memory-troubleshooting.md) | MCE错误分析、ECC故障定位、EDAC监控、turbostat诊断 |
+| 301 | 存储设备排查 | [storage-troubleshooting](./domain-31-hardware/12-storage-troubleshooting.md) | HDD S.M.A.R.T.分析、NVMe健康、RAID故障处理流程 |
+| 302 | 网络硬件排查 | [network-troubleshooting](./domain-31-hardware/13-network-hardware-troubleshooting.md) | 网卡故障诊断、ethtool分析、链路故障、光模块检测 |
+| 303 | 电源散热排查 | [power-thermal-troubleshooting](./domain-31-hardware/14-power-thermal-troubleshooting.md) | PSU故障、功耗监控、温度传感器、风扇故障、热设计 |
+| 304 | BIOS固件排查 | [bios-firmware-troubleshooting](./domain-31-hardware/15-bios-firmware-troubleshooting.md) | BIOS/UEFI故障、固件更新、启动问题、BMC故障诊断 |
+| 305 | K8s硬件故障 | [kubernetes-hardware-troubleshooting](./domain-31-hardware/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件故障、Node NotReady、PLEG、etcd磁盘问题 |
+| 306 | 错误码速查 | [hardware-error-codes-reference](./domain-31-hardware/17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码、厂商诊断码 |
+| 307 | 故障案例库 | [hardware-failure-case-studies](./domain-31-hardware/18-hardware-failure-case-studies.md) | 生产环境真实故障案例、诊断过程、解决方案、复盘总结 |
+
+---
+
+### 域32: YAML配置清单手册 (YAML Manifests Reference)
+
+> 36 篇 | Kubernetes v1.25-v1.32 全资源 YAML 配置完整参考，覆盖 60+ 原生 API 资源类型和生态工具（Kustomize/Helm/ArgoCD），每篇含完整字段规范、源码级内部机制、版本兼容矩阵和生产案例
+
+#### R1: 基础与约定 (01-02)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | YAML语法与资源约定 | [yaml-syntax-resource-conventions](./domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md) | YAML语法、四字段结构、命名规范、标签注解、kubectl apply三路合并、API版本演进 |
+| 02 | Namespace/配额/限制 | [namespace-resourcequota-limitrange](./domain-32-yaml-manifests/02-namespace-resourcequota-limitrange.md) | Namespace完整字段、ResourceQuota范围选择器、LimitRange默认值、准入控制器机制 |
+
+#### R2: 工作负载 (03-07)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 03 | Pod完整规范 | [pod-specification-complete](./domain-32-yaml-manifests/03-pod-specification-complete.md) | 全部Pod spec字段、容器配置、探针、安全上下文、QoS类、调度字段 |
+| 04 | Deployment/ReplicaSet | [deployment-replicaset](./domain-32-yaml-manifests/04-deployment-replicaset.md) | 滚动更新策略、maxSurge/maxUnavailable计算、修订版本哈希、蓝绿/金丝雀部署 |
+| 05 | StatefulSet | [statefulset-reference](./domain-32-yaml-manifests/05-statefulset-reference.md) | 稳定网络标识、有序创建/删除、PVC保留策略、volumeClaimTemplates |
+| 06 | DaemonSet | [daemonset-reference](./domain-32-yaml-manifests/06-daemonset-reference.md) | 节点选择机制、滚动更新/OnDelete策略、调度器协作、CNI/日志/监控场景 |
+| 07 | Job/CronJob | [job-cronjob-reference](./domain-32-yaml-manifests/07-job-cronjob-reference.md) | completionMode、podFailurePolicy、timeZone、concurrencyPolicy、ETL/备份场景 |
+
+#### R3: 网络与服务发现 (08-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 08 | Service全类型 | [service-all-types](./domain-32-yaml-manifests/08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless、双栈、kube-proxy机制 |
+| 09 | Endpoints/EndpointSlice | [endpoints-endpointslice](./domain-32-yaml-manifests/09-endpoints-endpointslice.md) | 手动Endpoints创建、EndpointSlice分片策略、外部服务集成 |
+| 10 | Ingress/IngressClass | [ingress-ingressclass](./domain-32-yaml-manifests/10-ingress-ingressclass.md) | pathType匹配、多控制器注解、TLS终止、cert-manager集成 |
+| 11 | Gateway API核心 | [gateway-api-core](./domain-32-yaml-manifests/11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute、角色分离模型、路由绑定、权重分流 |
+| 12 | Gateway API高级路由 | [gateway-api-advanced-routes](./domain-32-yaml-manifests/12-gateway-api-advanced-routes.md) | GRPCRoute/TCPRoute/TLSRoute/UDPRoute、ReferenceGrant跨命名空间授权 |
+
+#### R4: 配置与密钥 (13-14)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | ConfigMap | [configmap-reference](./domain-32-yaml-manifests/13-configmap-reference.md) | data/binaryData/immutable、挂载方式、自动更新机制、subPath限制 |
+| 14 | Secret全类型 | [secret-all-types](./domain-32-yaml-manifests/14-secret-all-types.md) | 8种Secret类型、etcd加密配置、tmpfs安全机制、External Secrets集成 |
+
+#### R5: 存储 (15-18)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 15 | PersistentVolume | [persistentvolume-reference](./domain-32-yaml-manifests/15-persistentvolume-reference.md) | 访问模式(含RWOP)、回收策略、claimRef预绑定、生命周期状态机 |
+| 16 | PersistentVolumeClaim | [persistentvolumeclaim-reference](./domain-32-yaml-manifests/16-persistentvolumeclaim-reference.md) | 动态供给、卷扩展、卷克隆、快照恢复、WaitForFirstConsumer延迟绑定 |
+| 17 | StorageClass/VolumeSnapshot | [storageclass-volumesnapshot](./domain-32-yaml-manifests/17-storageclass-volumesnapshot.md) | provisioner参数、volumeBindingMode、VolumeSnapshotClass、定时快照备份 |
+| 18 | CSI驱动资源 | [csi-driver-resources](./domain-32-yaml-manifests/18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity、三阶段架构、拓扑感知调度 |
+
+#### R6: 身份与RBAC (19-22)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 19 | ServiceAccount/Token | [serviceaccount-token](./domain-32-yaml-manifests/19-serviceaccount-token.md) | 绑定SA Token(v1.22+)、TokenRequest/TokenReview、CSR签发 |
+| 20 | Role/RoleBinding | [rbac-role-rolebinding](./domain-32-yaml-manifests/20-rbac-role-rolebinding.md) | rules字段(apiGroups/resources/verbs)、RBAC决策链、开发/运维权限案例 |
+| 21 | ClusterRole/Binding | [rbac-clusterrole-clusterrolebinding](./domain-32-yaml-manifests/21-rbac-clusterrole-clusterrolebinding.md) | aggregationRule聚合、内置角色(cluster-admin/admin/edit/view)、SubjectAccessReview |
+| 22 | NetworkPolicy | [networkpolicy-reference](./domain-32-yaml-manifests/22-networkpolicy-reference.md) | AND/OR选择器语义、endPort范围、CNI实现差异(Calico/Cilium)、零信任网络 |
+
+#### R7: 安全与准入 (23-25)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 23 | Pod安全标准 | [pod-security-standards](./domain-32-yaml-manifests/23-pod-security-standards.md) | Privileged/Baseline/Restricted三级、Namespace标签、PSP迁移指南、豁免配置 |
+| 24 | Admission Webhook | [admission-webhook-configuration](./domain-32-yaml-manifests/24-admission-webhook-configuration.md) | Validating/Mutating Webhook、failurePolicy、reinvocationPolicy、matchConditions(CEL) |
+| 25 | ValidatingAdmissionPolicy | [validatingadmissionpolicy](./domain-32-yaml-manifests/25-validatingadmissionpolicy.md) | CEL表达式语言、Binding机制、validationActions(Deny/Warn/Audit)、Webhook 10-100x性能提升 |
+
+#### R8: 调度与扩缩 (26-28)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 26 | PriorityClass/RuntimeClass | [priorityclass-runtimeclass](./domain-32-yaml-manifests/26-priorityclass-runtimeclass.md) | 优先级抢占算法、Kata/gVisor沙箱隔离、DRA设备分配(v1.26+) |
+| 27 | HPA v2 | [hpa-autoscaling-v2](./domain-32-yaml-manifests/27-hpa-autoscaling-v2.md) | 四种指标类型、behavior稳定窗口/策略、VPA参考、HPA计算算法 |
+| 28 | PodDisruptionBudget | [poddisruptionbudget-reference](./domain-32-yaml-manifests/28-poddisruptionbudget-reference.md) | minAvailable/maxUnavailable、Eviction API工作流、集群升级保护 |
+
+#### R9: 扩展与API (29-31)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 29 | CRD | [customresourcedefinition](./domain-32-yaml-manifests/29-customresourcedefinition.md) | OpenAPI v3 Schema、x-kubernetes-validations(CEL)、多版本转换、additionalPrinterColumns |
+| 30 | APIService聚合 | [apiservice-aggregation](./domain-32-yaml-manifests/30-apiservice-aggregation.md) | 本地/远程APIService、kube-aggregator路由、优先级解析、Metrics Server注册 |
+| 31 | API优先级与公平性 | [api-priority-fairness](./domain-32-yaml-manifests/31-api-priority-fairness.md) | FlowSchema/PriorityLevelConfiguration、Shuffle Sharding、Fair Queuing、内置规则 |
+
+#### R10: 集群基础设施 (32-34)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 32 | Lease/Event/Node | [lease-event-node](./domain-32-yaml-manifests/32-lease-event-node.md) | Lease心跳/选举/API Server标识、Event新旧API、Node spec/status/conditions |
+| 33 | kubeadm集群引导 | [kubeadm-cluster-bootstrap](./domain-32-yaml-manifests/33-kubeadm-cluster-bootstrap.md) | ClusterConfiguration/InitConfiguration/JoinConfiguration、11阶段init流程、HA部署 |
+| 34 | 组件配置 | [component-configuration](./domain-32-yaml-manifests/34-component-configuration.md) | KubeletConfiguration/KubeProxyConfiguration/KubeSchedulerConfiguration、IPVS/nftables、调度框架插件 |
+
+#### R11: 高级模式与生态 (35-36)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 35 | 高级Pod模式 | [advanced-pod-patterns](./domain-32-yaml-manifests/35-advanced-pod-patterns.md) | Init/Sidecar(v1.29+原生)/Adapter模式、拓扑分布约束、Taints/Tolerations、探针最佳实践 |
+| 36 | 生态工具 | [ecosystem-kustomize-helm-argocd](./domain-32-yaml-manifests/36-ecosystem-kustomize-helm-argocd.md) | Kustomize(base+overlays+components)、Helm(Chart/values/templates)、ArgoCD(Application/ApplicationSet/Sync Waves) |
+
+---
+
+### 域33: Kubernetes Events 全域事件大全
+
+> 16 篇 | 系统性收录 230+ 个 K8s 事件，覆盖核心组件、生产插件和生态系统，每个事件含详细排查和解决方案
+
+#### 事件系统架构 (01)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 308 | 事件系统架构 | [event-system-architecture](./domain-33-kubernetes-events/01-event-system-architecture.md) | Event数据模型、API版本演进、事件生命周期、持久化方案 |
+
+#### 核心组件事件 (02-06)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 309 | Pod容器事件 | [pod-container-lifecycle-events](./domain-33-kubernetes-events/02-pod-container-lifecycle-events.md) | Created、Started、BackOff、Evicted、FailedSync等18个事件 |
+| 310 | 镜像拉取事件 | [image-pull-events](./domain-33-kubernetes-events/03-image-pull-events.md) | Pulling、Pulled、ErrImagePull、ImagePullBackOff等7个事件 |
+| 311 | 探针健康事件 | [probe-health-check-events](./domain-33-kubernetes-events/04-probe-health-check-events.md) | Unhealthy(Liveness/Readiness/Startup)、ProbeWarning |
+| 312 | 调度抢占事件 | [scheduling-preemption-events](./domain-33-kubernetes-events/05-scheduling-preemption-events.md) | Scheduled、FailedScheduling、Preempted、WaitingForGates |
+| 313 | 节点状态事件 | [node-lifecycle-condition-events](./domain-33-kubernetes-events/06-node-lifecycle-condition-events.md) | NodeReady、DiskPressure、MemoryPressure、Rebooted等23个事件 |
+
+#### 控制器事件 (07-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 314 | Deployment事件 | [deployment-replicaset-events](./domain-33-kubernetes-events/07-deployment-replicaset-events.md) | ScalingReplicaSet、ProgressDeadlineExceeded、FailedCreate等 |
+| 315 | STS/DS事件 | [statefulset-daemonset-events](./domain-33-kubernetes-events/08-statefulset-daemonset-events.md) | 有序创建/删除、FailedPlacement、UnhealthyPodEviction等 |
+| 316 | Job/CronJob事件 | [job-cronjob-batch-events](./domain-33-kubernetes-events/09-job-cronjob-batch-events.md) | Completed、BackoffLimitExceeded、TooManyMissedTimes等 |
+
+#### 网络存储事件 (10-11)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 317 | Service网络事件 | [service-networking-events](./domain-33-kubernetes-events/10-service-networking-events.md) | LoadBalancer生命周期、EndpointSlice、HostPortConflict等 |
+| 318 | 存储卷事件 | [storage-volume-events](./domain-33-kubernetes-events/11-storage-volume-events.md) | FailedMount、ProvisioningFailed、VolumeResize等22个事件 |
+
+#### 扩展运维事件 (12-15)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 319 | 自动扩缩事件 | [autoscaling-events](./domain-33-kubernetes-events/12-autoscaling-events.md) | HPA SuccessfulRescale、VPA、Cluster Autoscaler等28个事件 |
+| 320 | 安全准入事件 | [security-admission-rbac-events](./domain-33-kubernetes-events/13-security-admission-rbac-events.md) | 证书审批、Admission Webhook、Pod Security等14个事件 |
+| 321 | NS/GC事件 | [namespace-resource-gc-events](./domain-33-kubernetes-events/14-namespace-resource-gc-events.md) | Namespace删除、ResourceQuota、PDB等15个事件 |
+| 322 | 生态插件事件 | [ecosystem-addon-events](./domain-33-kubernetes-events/15-ecosystem-addon-events.md) | NPD、Ingress、cert-manager、Istio、ArgoCD等56+个事件 |
+
+---
+
+## 许可证
+
+---

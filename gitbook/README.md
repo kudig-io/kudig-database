@@ -2,9 +2,102 @@
 
 基于 [mdBook](https://rust-lang.github.io/mdBook/) 构建的本地知识库浏览系统，支持全文搜索、目录折叠导航。
 
-## 前置条件
+## 🚀 快速导出离线版本（推荐）
 
-需要安装 Rust 工具链和 mdBook：
+**一键生成完整的离线静态网站：**
+
+**方式 1：双击运行（最简单）**
+```
+双击文件：QUICK-BUILD.cmd
+```
+
+**方式 2：命令行**
+```cmd
+cd gitbook
+QUICK-BUILD.cmd
+```
+
+- ⏱️ 构建时间：1-3 分钟
+- 📦 输出位置：`export/kudig-gitbook-YYYYMMDD-HHMMSS/`
+- 🎯 自动生成ZIP压缩包
+- ✅ UTF-8编码，无乱码
+- 📖 详细说明：[全量导出指南](documentation/全量导出指南.md)
+
+## 📁 目录结构
+
+```
+gitbook/
+├── README.md              # 本文件
+├── book.toml              # mdBook 主配置文件
+│
+├── src/                   # 源文件目录（符号链接到项目内容）
+│   ├── README.md          # → ../../README.md
+│   ├── SUMMARY.md         # 目录索引（自动生成）
+│   ├── domain-*           # → ../../domain-* (符号链接)
+│   └── topic-*            # → ../../topic-* (符号链接)
+│
+├── theme/                 # 主题自定义
+│   ├── custom.css         # 自定义样式
+│   └── collapse-all.js    # 侧边栏折叠脚本
+│
+├── build-scripts/         # 构建和导出脚本
+│   ├── Linux/macOS 脚本:
+│   │   ├── start.sh              # 启动本地服务
+│   │   ├── refresh.sh            # 刷新构建
+│   │   ├── export-static.sh      # 导出静态版本
+│   │   └── generate-summary.sh   # 生成 SUMMARY.md
+│   │
+│   └── Windows 脚本:
+│       ├── install-mdbook.ps1           # 安装 mdbook
+│       ├── FINAL-BUILD.ps1              # 主构建脚本
+│       └── generate-summary-utf8.ps1    # 生成 SUMMARY.md (UTF-8)
+│
+├── documentation/         # 使用文档
+│   ├── Windows-离线版本生成指南.md
+│   ├── 快速安装mdbook.md
+│   └── 生成离线版本指南.md
+│
+├── book/                  # 构建输出（gitignore）
+└── dist/                  # 静态导出输出（gitignore）
+```
+
+## 🚀 快速开始
+
+### Linux/macOS
+
+```bash
+cd gitbook
+
+# 首次使用：启动本地服务
+bash build-scripts/start.sh
+
+# 浏览器访问 http://localhost:3000
+```
+
+### Windows
+
+```powershell
+cd gitbook
+
+# 方式 1：使用CMD脚本（推荐，最简单）
+QUICK-BUILD.cmd
+
+# 方式 2：使用PowerShell
+powershell -ExecutionPolicy Bypass -File build-scripts\FINAL-BUILD.ps1 -Zip
+```
+
+## 📦 前置条件
+
+需要安装 mdBook：
+
+### 方式 1：自动安装（Windows）
+
+```powershell
+cd gitbook
+.\build-scripts\install-mdbook.ps1
+```
+
+### 方式 2：使用 Cargo 安装
 
 ```bash
 # 安装 Rust（如已安装可跳过）
@@ -14,146 +107,149 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install mdbook
 ```
 
-## 快速启动
+## 📋 常用操作
+
+### 本地开发服务（Linux/macOS）
 
 ```bash
-cd gitbook
-bash start.sh
-# 浏览器访问 http://localhost:3000
+# 启动服务
+bash build-scripts/start.sh
+
+# 自定义端口
+PORT=8080 bash build-scripts/start.sh
 ```
 
-首次运行会自动完成：创建符号链接 → 生成目录索引 → 构建 HTML → 启动本地服务。
-
-自定义端口：`PORT=8080 bash start.sh`
-
-### 手动启动
-
-如果不使用脚本，也可以直接用 mdBook 原生命令启动：
+### 内容更新后刷新
 
 ```bash
-cd gitbook
-mdbook serve --open
-# 默认端口 3000，自动打开浏览器
+# 完整刷新（新增/删除了文件）
+bash build-scripts/refresh.sh
+
+# 仅重新构建（只修改了内容）
+bash build-scripts/refresh.sh build
 ```
 
-> 注意：手动启动前需确保 `src/` 下的符号链接和 `SUMMARY.md` 已正确生成。首次使用建议先运行 `bash start.sh`。
+### 导出静态离线版本
 
-## 刷新内容
+**Linux/macOS:**
+```bash
+# 导出到 dist/ 目录
+bash build-scripts/export-static.sh
 
-内容更新后，使用 `refresh.sh` 刷新构建（无需重启服务，mdbook serve 支持热更新）：
+# 导出并打包 ZIP
+bash build-scripts/export-static.sh --zip
+```
 
-| 命令 | 说明 | 适用场景 |
+**Windows:**
+```powershell
+# 推荐使用
+QUICK-BUILD.cmd
+
+# 或使用PowerShell
+.\build-scripts\FINAL-BUILD.ps1 -Zip
+```
+
+## 📚 使用文档
+
+详细文档请查看 `documentation/` 目录：
+
+- `Windows-离线版本生成指南.md` - Windows 环境完整指南
+- `快速安装mdbook.md` - mdbook 快速安装说明
+- `生成离线版本指南.md` - 离线版本生成详细步骤
+
+## 🔧 脚本说明
+
+### Linux/macOS 脚本
+
+| 脚本 | 功能 | 用法 |
 |:---|:---|:---|
-| `bash refresh.sh` | 完整刷新（默认） | 新增/删除了文件或目录 |
-| `bash refresh.sh build` | 仅重新构建 | 只修改了已有文件的内容 |
+| `start.sh` | 初始化并启动本地服务 | `bash build-scripts/start.sh` |
+| `refresh.sh` | 内容变更后刷新构建 | `bash build-scripts/refresh.sh` |
+| `export-static.sh` | 导出离线静态站点 | `bash build-scripts/export-static.sh` |
+| `generate-summary.sh` | 生成 SUMMARY.md | 自动调用，无需单独执行 |
 
-**完整刷新流程**：更新符号链接 → 重新生成 SUMMARY.md → 构建
+### Windows PowerShell 脚本
 
-**仅构建模式**：跳过符号链接和 SUMMARY.md 生成，直接构建。速度更快，适用于只修改了已有 .md 文件内容的场景。
+| 脚本 | 功能 | 推荐度 |
+|:---|:---|:---:|
+| `FINAL-BUILD.ps1` | 一键构建离线版本 | ⭐⭐⭐ |
+| `install-mdbook.ps1` | 安装 mdbook 工具 | ⭐⭐⭐ |
+| `generate-summary-utf8.ps1` | 生成目录索引（UTF-8） | ⭐⭐⭐ |
 
-## 静态导出
+**推荐使用 `QUICK-BUILD.cmd`（根目录）**，它整合了所有功能并确保UTF-8编码正确。
 
-导出完整的静态 HTML 站点，可直接用浏览器打开，无需启动服务。适合离线查看或分享给他人。
+## ⚙️ 配置说明
 
-```bash
-cd gitbook
+### book.toml
 
-# 导出到 gitbook/dist/ 目录
-bash export-static.sh
-
-# 导出并打包为 zip（文件名含时间戳）
-bash export-static.sh --zip
-
-# 直接打开查看
-open dist/index.html
-```
-
-导出时会自动移除 `site-url` 配置，确保所有链接使用相对路径，兼容 `file://` 协议。构建完成后自动恢复原始配置。
-
-## 脚本一览
-
-| 脚本 | 用途 |
-|:---|:---|
-| `start.sh` | 初始化并启动本地服务 |
-| `refresh.sh` | 内容变更后刷新构建 |
-| `export-static.sh` | 导出可离线打开的静态站点 |
-| `generate-summary.sh` | 自动生成 SUMMARY.md（被上述脚本调用，通常不需要单独执行） |
-
-## 目录结构
-
-```
-gitbook/
-├── book.toml              # mdBook 主配置文件
-├── start.sh               # 启动脚本
-├── refresh.sh             # 刷新脚本
-├── export-static.sh       # 静态导出脚本
-├── generate-summary.sh    # SUMMARY.md 自动生成脚本
-├── theme/
-│   ├── custom.css         # 自定义样式（目录行高、标题导航隐藏）
-│   └── collapse-all.js    # 侧边栏默认折叠脚本
-├── src/
-│   ├── README.md          # → ../../README.md（符号链接）
-│   ├── SUMMARY.md         # 目录索引（自动生成，勿手动编辑）
-│   ├── domain-*           # → ../../domain-*（符号链接）
-│   └── topic-*            # → ../../topic-*（符号链接）
-├── book/                  # 构建输出（serve 模式，已 gitignore）
-└── dist/                  # 静态导出输出（已 gitignore）
-```
-
-## 注意事项
+主配置文件，包含：
+- 书籍元数据（标题、作者等）
+- 构建选项
+- HTML 输出配置
+- 搜索功能配置
+- 目录折叠功能
 
 ### 符号链接
 
-- `src/` 下的 domain-\* 和 topic-\* 目录是**符号链接**，指向项目根目录下的实际内容
+- `src/` 下的 `domain-*` 和 `topic-*` 是符号链接
+- 指向项目根目录的实际内容
 - 修改 `src/` 下的文件等同于修改原始文件
-- 新增 domain 或 topic 目录后需运行 `bash refresh.sh` 以创建新的符号链接
+- 新增目录后需运行刷新脚本
 
 ### SUMMARY.md
 
-- 由 `generate-summary.sh` 自动生成，**不要手动编辑**
-- 自动从各目录的 README.md 提取标题
-- 如文件没有 Markdown 标题行，将使用文件名作为标题
-- 新增或删除 .md 文件后需运行 `bash refresh.sh` 以更新目录
+- 由 `generate-summary.sh/ps1` 自动生成
+- **不要手动编辑**
+- 自动从各目录 README.md 提取标题
+- 新增/删除文件后需重新生成
 
-### 构建产物
+## 💡 注意事项
 
-- `book/` 和 `dist/` 目录已在 `.gitignore` 中排除，不会提交到仓库
-- 导出的 zip 文件同样不会提交
+1. **构建产物**
+   - `book/` 和 `dist/` 已在 `.gitignore` 中
+   - 不会提交到 Git 仓库
 
-### 搜索
+2. **搜索功能**
+   - 搜索索引约 85MB
+   - 首次加载需几秒
+   - 支持布尔 AND 搜索
+   - 快捷键：`/` 或 `s`
 
-- 搜索索引较大（约 85MB），首次加载可能需要几秒
-- 支持布尔 AND 搜索，输入多个关键词会取交集
-- 快捷键：按 `/` 或 `s` 打开搜索框
+3. **Windows 环境**
+   - 符号链接需要特殊处理
+   - 推荐使用 PowerShell 脚本
+   - 必要时以管理员身份运行
 
-## 常见问题
+## ❓ 常见问题
 
-**Q: 构建时提示 "unclosed HTML tag" 警告？**
-A: Markdown 中的 `<tag>` 会被 mdBook 解析为 HTML 标签。用反引号包裹即可：`` `<tag>` ``。
-
-**Q: 端口 3000 被占用（Address already in use）？**
-A: 之前的 mdbook serve 进程可能还在后台运行。依次尝试：
+**Q: 端口 3000 被占用？**
 
 ```bash
-# 1. 查看占用端口的进程
-lsof -i :3000
-
-# 2. 停掉残留的 mdbook 进程
+# 停掉残留进程
 pkill -f "mdbook serve"
 
-# 3. 重新启动
-bash start.sh
-# 或手动启动
-mdbook serve --open
-
-# 4. 如果端口仍被其他程序占用，换一个端口
-PORT=4000 bash start.sh
-# 或手动指定
-mdbook serve --open -p 4000
+# 或使用其他端口
+PORT=4000 bash build-scripts/start.sh
 ```
 
-**Q: 侧边栏目录没有折叠？**
-A: 尝试强制刷新浏览器（Cmd+Shift+R），确保加载最新的 CSS 和 JS 文件。
+**Q: 构建时提示 "unclosed HTML tag"？**
 
-**Q: 静态导出后页面跳转 404？**
-A: 确认使用 `export-static.sh` 导出（而非直接复制 `book/` 目录），该脚本会移除 site-url 以确保相对路径正确。
+Markdown 中的 `<tag>` 用反引号包裹：`` `<tag>` ``
+
+**Q: 静态导出后页面 404？**
+
+确保使用 `QUICK-BUILD.cmd`、`export-static.sh` 或 `FINAL-BUILD.ps1` 导出，不要直接复制 `book/` 目录。
+
+**Q: Windows 下符号链接创建失败？**
+
+以管理员身份运行 PowerShell 或查看 `documentation/` 下的详细指南。
+
+## 📞 获取帮助
+
+1. 查看 `documentation/` 目录下的详细文档
+2. 运行脚本时查看输出信息
+3. 检查 mdbook 版本：`mdbook --version`
+
+---
+
+**提示**: Windows 用户最简单的方式是直接双击 `QUICK-BUILD.cmd`，这是经过优化和测试的最可靠方案，确保UTF-8编码无乱码。

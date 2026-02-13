@@ -1,0 +1,1319 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>04 - DNS 服务发现与 CoreDNS 调优 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="04---dns-服务发现与-coredns-调优"><a class="header" href="#04---dns-服务发现与-coredns-调优">04 - DNS 服务发现与 CoreDNS 调优</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32 | <strong>最后更新</strong>: 2026-02 | <strong>难度</strong>: 高级</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a class="header" href="#目录">目录</a></h2>
+<ol>
+<li><a href="#1-coredns-架构深度解析">CoreDNS 架构深度解析</a></li>
+<li><a href="#2-高性能配置优化">高性能配置优化</a></li>
+<li><a href="#3-服务发现机制详解">服务发现机制详解</a></li>
+<li><a href="#4-故障诊断与排错">故障诊断与排错</a></li>
+<li><a href="#5-监控与性能分析">监控与性能分析</a></li>
+<li><a href="#6-安全加固配置">安全加固配置</a></li>
+<li><a href="#7-多集群-dns-管理">多集群 DNS 管理</a></li>
+<li><a href="#8-生产环境最佳实践">生产环境最佳实践</a></li>
+</ol>
+<hr>
+<h2 id="1-coredns-架构深度解析"><a class="header" href="#1-coredns-架构深度解析">1. CoreDNS 架构深度解析</a></h2>
+<h3 id="11-coredns-组件架构"><a class="header" href="#11-coredns-组件架构">1.1 CoreDNS 组件架构</a></h3>
+<pre><code class="language-yaml"># CoreDNS 部署架构图
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns
+  namespace: kube-system
+  labels:
+    k8s-app: kube-dns
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      k8s-app: kube-dns
+  template:
+    metadata:
+      labels:
+        k8s-app: kube-dns
+    spec:
+      priorityClassName: system-cluster-critical
+      serviceAccountName: coredns
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Exists"
+      nodeSelector:
+        kubernetes.io/os: linux
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: k8s-app
+                  operator: In
+                  values: ["kube-dns"]
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: coredns
+        image: registry.k8s.io/coredns/coredns:v1.11.1
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: 170Mi
+          requests:
+            cpu: 100m
+            memory: 70Mi
+        args: [ "-conf", "/etc/coredns/Corefile" ]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/coredns
+          readOnly: true
+        - name: tmp
+          mountPath: /tmp
+        ports:
+        - containerPort: 53
+          name: dns
+          protocol: UDP
+        - containerPort: 53
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 9153
+          name: metrics
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8181
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+      volumes:
+        - name: config-volume
+          configMap:
+            name: coredns
+            items:
+            - key: Corefile
+              path: Corefile
+        - name: tmp
+          emptyDir: {}
+</code></pre>
+<h3 id="12-corefile-配置详解"><a class="header" href="#12-corefile-配置详解">1.2 Corefile 配置详解</a></h3>
+<pre><code class="language-yaml"># 生产级 Corefile 配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        
+        # Kubernetes 服务发现插件
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        
+        # 联邦服务发现
+        federation cluster.local {
+            east us-east-1.cluster.example.com
+            west us-west-1.cluster.example.com
+        }
+        
+        # Prometheus 监控指标
+        prometheus :9153
+        
+        # 上游 DNS 转发
+        forward . /etc/resolv.conf {
+            max_concurrent 1000
+            health_check 5s
+            expire 90s
+        }
+        
+        # 缓存配置
+        cache 30 {
+            success 9984
+            denial 9984
+            prefetch 1 10m 10%
+        }
+        
+        # 循环检测防止
+        loop
+        
+        # 配置重载
+        reload
+        
+        # 负载均衡
+        loadbalance round_robin
+        
+        # 日志记录（生产环境建议关闭）
+        # log
+    }
+    
+    # 特定域的自定义配置
+    example.com:53 {
+        errors
+        cache 300
+        forward . 10.0.0.10 10.0.0.11 {
+            health_check 5s
+        }
+    }
+</code></pre>
+<h3 id="13-插件工作机制"><a class="header" href="#13-插件工作机制">1.3 插件工作机制</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# CoreDNS 插件链分析脚本
+
+echo "=== CoreDNS 插件工作机制分析 ==="
+echo
+
+# 获取 CoreDNS Pod 信息
+COREDNS_POD=$(kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{.items[0].metadata.name}')
+
+echo "1. CoreDNS 插件链顺序:"
+kubectl exec -n kube-system $COREDNS_POD -- cat /etc/coredns/Corefile | \
+  grep -E "^[[:space:]]*[a-z]" | sed 's/{.*//' | nl
+
+echo -e "\n2. 插件配置详情:"
+kubectl exec -n kube-system $COREDNS_POD -- cat /etc/coredns/Corefile
+
+echo -e "\n3. 当前 DNS 解析统计:"
+kubectl exec -n kube-system $COREDNS_POD -- curl -s http://localhost:9153/metrics | \
+  grep -E "(coredns_dns_requests_total|coredns_dns_responses_total)" | head -10
+
+echo -e "\n4. 缓存命中率:"
+kubectl exec -n kube-system $COREDNS_POD -- curl -s http://localhost:9153/metrics | \
+  grep coredns_cache_hits_total
+</code></pre>
+<hr>
+<h2 id="2-高性能配置优化"><a class="header" href="#2-高性能配置优化">2. 高性能配置优化</a></h2>
+<h3 id="21-资源配额优化"><a class="header" href="#21-资源配额优化">2.1 资源配额优化</a></h3>
+<pre><code class="language-yaml"># CoreDNS 性能优化资源配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns-optimized
+  namespace: kube-system
+spec:
+  replicas: 4  # 根据集群规模调整
+  template:
+    spec:
+      containers:
+      - name: coredns
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        env:
+        - name: GOGC
+          value: "20"  # 垃圾回收优化
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+</code></pre>
+<h3 id="22-缓存策略优化"><a class="header" href="#22-缓存策略优化">2.2 缓存策略优化</a></h3>
+<pre><code class="language-yaml"># 高性能缓存配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-cache-optimized
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health
+        
+        # 优化的缓存配置
+        cache 60 {                    # 增加缓存时间
+            success 9984              # 成功响应缓存条目
+            denial 9984               # 否定响应缓存条目
+            prefetch 1 10m 10%        # 预取机制
+        }
+        
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        
+        # 负载均衡优化
+        loadbalance round_robin {
+            response_count 5
+        }
+        
+        forward . /etc/resolv.conf {
+            max_concurrent 2000       # 增加并发连接数
+            health_check 3s           # 缩短健康检查间隔
+            expire 30s                # 缩短过期时间
+        }
+        
+        prometheus :9153
+        reload
+    }
+</code></pre>
+<h3 id="23-nodelocal-dnscache"><a class="header" href="#23-nodelocal-dnscache">2.3 NodeLocal DNSCache</a></h3>
+<pre><code class="language-yaml"># NodeLocal DNSCache 部署
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nodelocaldns
+  namespace: kube-system
+  labels:
+    k8s-app: nodelocaldns
+spec:
+  selector:
+    matchLabels:
+      k8s-app: nodelocaldns
+  template:
+    metadata:
+      labels:
+        k8s-app: nodelocaldns
+    spec:
+      priorityClassName: system-node-critical
+      serviceAccountName: nodelocaldns
+      hostNetwork: true
+      dnsPolicy: Default  # 绕过 Kubelet DNS 配置
+      containers:
+      - name: node-cache
+        image: registry.k8s.io/dns/k8s-dns-node-cache:1.22.28
+        resources:
+          requests:
+            cpu: 25m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 200Mi
+        args:
+        - -localip
+        - 169.254.20.10,10.96.0.10    # 本地 DNS IP
+        - -conf
+        - /etc/Corefile
+        - -upstreamsvc
+        - kube-dns
+        ports:
+        - containerPort: 53
+          name: dns
+          protocol: UDP
+        - containerPort: 53
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 9253
+          name: metrics
+          protocol: TCP
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/coredns
+        - name: kube-dns-config
+          mountPath: /etc/kube-dns
+        livenessProbe:
+          httpGet:
+            host: 169.254.20.10
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            host: 169.254.20.10
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nodelocaldns-config
+          items:
+          - key: Corefile
+            path: Corefile
+      - name: kube-dns-config
+        configMap:
+          name: kube-dns
+          optional: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodelocaldns-config
+  namespace: kube-system
+data:
+  Corefile: |
+    cluster.local:53 {
+        errors
+        cache {
+            success 9984
+            denial 9984
+            prefetch 1 1h 10%
+        }
+        reload
+        loop
+        bind 169.254.20.10 10.96.0.10
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+            prefer_udp
+        }
+        prometheus :9253
+        health 169.254.20.10:8080
+        }
+    in-addr.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind 169.254.20.10 10.96.0.10
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+            prefer_udp
+        }
+        prometheus :9253
+        }
+    ip6.arpa:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind 169.254.20.10 10.96.0.10
+        forward . __PILLAR__CLUSTER__DNS__ {
+            force_tcp
+            prefer_udp
+        }
+        prometheus :9253
+        }
+    .:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind 169.254.20.10 10.96.0.10
+        forward . /etc/resolv.conf
+        prometheus :9253
+        }
+</code></pre>
+<hr>
+<h2 id="3-服务发现机制详解"><a class="header" href="#3-服务发现机制详解">3. 服务发现机制详解</a></h2>
+<h3 id="31-aaaaa-记录生成"><a class="header" href="#31-aaaaa-记录生成">3.1 A/AAAA 记录生成</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# DNS 服务发现机制验证脚本
+
+echo "=== Kubernetes DNS 服务发现验证 ==="
+echo
+
+# 测试 Service DNS 记录
+echo "1. Service DNS 记录测试:"
+SERVICES=$(kubectl get svc --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}')
+
+for svc in $SERVICES; do
+  ns=$(echo $svc | cut -d'/' -f1)
+  name=$(echo $svc | cut -d'/' -f2)
+  
+  echo "  测试 $svc:"
+  
+  # A 记录查询
+  A_RECORD=$(nslookup $name.$ns.svc.cluster.local 2&gt;/dev/null | grep "Address:" | tail -1 | awk '{print $2}')
+  if [ ! -z "$A_RECORD" ]; then
+    echo "    A记录: ✅ $A_RECORD"
+  else
+    echo "    A记录: ❌ 未找到"
+  fi
+  
+  # SRV 记录查询
+  SRV_RECORD=$(nslookup -type=SRV _$name._tcp.$ns.svc.cluster.local 2&gt;/dev/null | grep "SRV" | head -1)
+  if [ ! -z "$SRV_RECORD" ]; then
+    echo "    SRV记录: ✅ $SRV_RECORD"
+  else
+    echo "    SRV记录: ⚠️  无端口信息"
+  fi
+done
+
+# 测试 Headless Service
+echo -e "\n2. Headless Service 测试:"
+HEADLESS_SVCS=$(kubectl get svc --all-namespaces -o jsonpath='{range .items[?(@.spec.clusterIP=="None")]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}')
+
+for svc in $HEADLESS_SVCS; do
+  ns=$(echo $svc | cut -d'/' -f1)
+  name=$(echo $svc | cut -d'/' -f2)
+  
+  echo "  测试 Headless Service $svc:"
+  POD_RECORDS=$(nslookup $name.$ns.svc.cluster.local 2&gt;/dev/null | grep "Address:" | grep -v "#53" | wc -l)
+  echo "    解析到 $POD_RECORDS 个 Pod IP"
+done
+</code></pre>
+<h3 id="32-pod-dns-记录"><a class="header" href="#32-pod-dns-记录">3.2 Pod DNS 记录</a></h3>
+<pre><code class="language-yaml"># Pod DNS 配置验证
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-test-pod
+  namespace: default
+  labels:
+    app: dns-test
+spec:
+  containers:
+  - name: test
+    image: busybox:1.35
+    command: ["sleep", "3600"]
+    env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+  dnsConfig:
+    options:
+    - name: ndots
+      value: "5"
+    - name: timeout
+      value: "2"
+    - name: attempts
+      value: "3"
+</code></pre>
+<pre><code class="language-bash"># Pod DNS 测试脚本
+kubectl exec -it dns-test-pod -- sh -c '
+echo "=== Pod DNS 测试 ==="
+echo
+
+# 测试各种 DNS 查询格式
+echo "1. 基本服务查询:"
+nslookup kubernetes.default
+
+echo -e "\n2. 完整域名查询:"
+nslookup kubernetes.default.svc.cluster.local
+
+echo -e "\n3. 跨命名空间查询:"
+nslookup kube-dns.kube-system.svc.cluster.local
+
+echo -e "\n4. Pod DNS 查询:"
+# 获取其他 Pod 的 DNS 名称
+OTHER_POD=$(kubectl get pods -n default -l app!=dns-test -o jsonpath="{.items[0].metadata.name}")
+if [ ! -z "$OTHER_POD" ]; then
+  nslookup $OTHER_POD.default.pod.cluster.local
+fi
+
+echo -e "\n5. 反向 DNS 查询:"
+MY_IP=$(hostname -i)
+nslookup $MY_IP
+'
+</code></pre>
+<hr>
+<h2 id="4-故障诊断与排错"><a class="header" href="#4-故障诊断与排错">4. 故障诊断与排错</a></h2>
+<h3 id="41-常见故障场景"><a class="header" href="#41-常见故障场景">4.1 常见故障场景</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# CoreDNS 故障诊断脚本
+
+echo "=== CoreDNS 故障诊断工具 ==="
+echo
+
+# 1. 基础健康检查
+echo "1. CoreDNS 健康状态检查:"
+kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+
+echo -e "\n2. CoreDNS 日志分析:"
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50 | \
+  grep -E "(ERROR|WARN|panic)" || echo "未发现明显错误"
+
+# 3. DNS 解析测试
+echo -e "\n3. DNS 解析连通性测试:"
+kubectl run dns-debug --rm -it --image=busybox -- sh -c "
+  echo '测试 Kubernetes 服务:'
+  nslookup kubernetes.default 2&gt;&amp;1
+  
+  echo -e '\n测试外部域名:'
+  nslookup google.com 2&gt;&amp;1
+  
+  echo -e '\n测试 CoreDNS 服务:'
+  nslookup kube-dns.kube-system.svc.cluster.local 2&gt;&amp;1
+"
+
+# 4. 配置验证
+echo -e "\n4. Corefile 配置验证:"
+kubectl get configmap coredns -n kube-system -o yaml | \
+  yq '.data.Corefile' 2&gt;/dev/null || \
+  kubectl get configmap coredns -n kube-system -o jsonpath='{.data.Corefile}'
+
+# 5. 性能指标检查
+echo -e "\n5. CoreDNS 性能指标:"
+if kubectl get pods -n monitoring -l app=prometheus &gt;/dev/null 2&gt;&amp;1; then
+  kubectl exec -n monitoring prometheus-0 -- curl -s http://coredns.kube-system:9153/metrics | \
+    grep -E "(coredns_dns_request_duration_seconds|coredns_dns_responses_total|coredns_cache_hits_total)" | \
+    head -10
+else
+  echo "未检测到 Prometheus 监控"
+fi
+</code></pre>
+<h3 id="42-性能瓶颈诊断"><a class="header" href="#42-性能瓶颈诊断">4.2 性能瓶颈诊断</a></h3>
+<pre><code class="language-yaml"># DNS 性能测试工具
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-perf-test
+  namespace: default
+spec:
+  containers:
+  - name: dnsperf
+    image: quay.io/sscaling/dnsperf:latest
+    command: ["dnsperf"]
+    args:
+    - "-s"
+    - "10.96.0.10"  # CoreDNS Service IP
+    - "-d"
+    - "/queries.txt"
+    - "-l"
+    - "60"
+    - "-Q"
+    - "1000"
+    volumeMounts:
+    - name: queries
+      mountPath: /queries.txt
+      subPath: queries.txt
+  volumes:
+  - name: queries
+    configMap:
+      name: dns-queries
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dns-queries
+  namespace: default
+data:
+  queries.txt: |
+    kubernetes.default A
+    kube-dns.kube-system.svc.cluster.local A
+    google.com A
+    github.com A
+    www.baidu.com A
+</code></pre>
+<h3 id="43-故障排除清单"><a class="header" href="#43-故障排除清单">4.3 故障排除清单</a></h3>
+<pre><code class="language-markdown">## CoreDNS 故障排除 checklist
+
+### 🔍 基础检查
+- [ ] CoreDNS Pod 状态正常
+- [ ] CoreDNS Service 配置正确
+- [ ] kubelet DNS 配置指向正确
+- [ ] NodeLocal DNSCache 部署状态
+
+### 📊 性能检查
+- [ ] DNS 查询延迟 &lt; 50ms
+- [ ] 缓存命中率 &gt; 90%
+- [ ] CPU/Memory 使用率正常
+- [ ] 连接数未达到上限
+
+### 🔧 配置检查
+- [ ] Corefile 语法正确
+- [ ] 插件配置符合需求
+- [ ] 上游 DNS 服务器可达
+- [ ] 网络策略允许 DNS 流量
+
+### 🛡️ 安全检查
+- [ ] DNSSEC 配置正确
+- [ ] 访问控制策略生效
+- [ ] 日志记录完整
+- [ ] 监控告警配置完善
+</code></pre>
+<hr>
+<h2 id="5-监控与性能分析"><a class="header" href="#5-监控与性能分析">5. 监控与性能分析</a></h2>
+<h3 id="51-prometheus-监控配置"><a class="header" href="#51-prometheus-监控配置">5.1 Prometheus 监控配置</a></h3>
+<pre><code class="language-yaml"># CoreDNS 监控配置
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: coredns
+  namespace: monitoring
+  labels:
+    app: coredns
+spec:
+  jobLabel: k8s-app
+  selector:
+    matchLabels:
+      k8s-app: kube-dns
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+    relabelings:
+    - sourceLabels: [__meta_kubernetes_pod_name]
+      targetLabel: pod
+    - sourceLabels: [__meta_kubernetes_namespace]
+      targetLabel: namespace
+
+---
+# CoreDNS Grafana Dashboard
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-dashboard
+  namespace: monitoring
+data:
+  coredns-dashboard.json: |
+    {
+      "dashboard": {
+        "title": "CoreDNS Monitoring",
+        "panels": [
+          {
+            "title": "DNS 查询率",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(coredns_dns_requests_total[5m])",
+                "legendFormat": "{{type}}"
+              }
+            ]
+          },
+          {
+            "title": "DNS 响应时间 P99",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket[5m])) by (le))",
+                "legendFormat": "P99 延迟"
+              }
+            ]
+          },
+          {
+            "title": "缓存命中率",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(coredns_cache_hits_total[5m]) / (rate(coredns_cache_hits_total[5m]) + rate(coredns_cache_misses_total[5m]))",
+                "legendFormat": "缓存命中率"
+              }
+            ]
+          },
+          {
+            "title": "错误率",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(coredns_dns_responses_total{rcode!=\"NOERROR\"}[5m])",
+                "legendFormat": "{{rcode}}"
+              }
+            ]
+          }
+        ]
+      }
+    }
+</code></pre>
+<h3 id="52-关键指标监控"><a class="header" href="#52-关键指标监控">5.2 关键指标监控</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# CoreDNS 关键指标监控脚本
+
+echo "=== CoreDNS 关键性能指标 ==="
+echo
+
+# 获取 CoreDNS 指标
+METRICS_URL="http://coredns.kube-system:9153/metrics"
+
+echo "1. 查询统计:"
+curl -s $METRICS_URL | grep coredns_dns_requests_total | head -5
+
+echo -e "\n2. 响应统计:"
+curl -s $METRICS_URL | grep coredns_dns_responses_total | head -5
+
+echo -e "\n3. 缓存统计:"
+curl -s $METRICS_URL | grep coredns_cache_ | head -10
+
+echo -e "\n4. 延迟统计:"
+curl -s $METRICS_URL | grep coredns_dns_request_duration_seconds_sum | head -3
+
+# 计算关键比率
+echo -e "\n5. 性能比率计算:"
+TOTAL_REQUESTS=$(curl -s $METRICS_URL | grep 'coredns_dns_requests_total' | awk '{sum+=$2} END {print sum}')
+CACHE_HITS=$(curl -s $METRICS_URL | grep 'coredns_cache_hits_total' | awk '{sum+=$2} END {print sum}')
+ERROR_RESPONSES=$(curl -s $METRICS_URL | grep 'coredns_dns_responses_total{rcode!="NOERROR"}' | awk '{sum+=$2} END {print sum}')
+
+if [ $TOTAL_REQUESTS -gt 0 ]; then
+  CACHE_HIT_RATE=$(echo "scale=2; $CACHE_HITS * 100 / $TOTAL_REQUESTS" | bc)
+  ERROR_RATE=$(echo "scale=2; $ERROR_RESPONSES * 100 / $TOTAL_REQUESTS" | bc)
+  
+  echo "  缓存命中率: ${CACHE_HIT_RATE}%"
+  echo "  错误率: ${ERROR_RATE}%"
+fi
+</code></pre>
+<hr>
+<h2 id="6-安全加固配置"><a class="header" href="#6-安全加固配置">6. 安全加固配置</a></h2>
+<h3 id="61-dns-安全策略"><a class="header" href="#61-dns-安全策略">6.1 DNS 安全策略</a></h3>
+<pre><code class="language-yaml"># DNS 安全加固配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-security
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        # 安全日志记录
+        log . {
+            class error
+            class denial
+        }
+        
+        # 访问控制
+        acl {
+            allow net 10.0.0.0/8
+            allow net 172.16.0.0/12
+            allow net 192.168.0.0/16
+            block
+        }
+        
+        errors
+        health
+        
+        # 限制递归查询
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        
+        # 安全的上游转发
+        forward . 8.8.8.8 8.8.4.4 {
+            max_fails 3
+            tls_servername dns.google
+            health_check 5s
+        }
+        
+        # 防止 DNS 放大攻击
+        bufsize 512
+        
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+
+---
+# NetworkPolicy 限制 DNS 访问
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-dns-access
+  namespace: kube-system
+spec:
+  podSelector:
+    matchLabels:
+      k8s-app: kube-dns
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - from:
+    - podSelector:
+        matchLabels:
+          k8s-app: nodelocaldns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+</code></pre>
+<h3 id="62-dnssec-配置"><a class="header" href="#62-dnssec-配置">6.2 DNSSEC 配置</a></h3>
+<pre><code class="language-yaml"># DNSSEC 启用配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-dnssec
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health
+        
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        
+        # 启用 DNSSEC 验证
+        forward . 8.8.8.8 8.8.4.4 {
+            tls_servername dns.google
+            except cluster.local
+            health_check 5s
+        }
+        
+        # 本地权威区域启用 DNSSEC
+        file /etc/coredns/db.cluster.local cluster.local {
+            transfer to *
+            reload
+        }
+        
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+</code></pre>
+<hr>
+<h2 id="7-多集群-dns-管理"><a class="header" href="#7-多集群-dns-管理">7. 多集群 DNS 管理</a></h2>
+<h3 id="71-跨集群-dns-配置"><a class="header" href="#71-跨集群-dns-配置">7.1 跨集群 DNS 配置</a></h3>
+<pre><code class="language-yaml"># 多集群 DNS 联邦配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multicloud-dns
+  namespace: kube-system
+data:
+  Corefile: |
+    # 本地集群配置
+    .:53 {
+        errors
+        health
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+        }
+        prometheus :9153
+        forward . /etc/resolv.conf
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+    
+    # 远程集群联邦配置
+    cluster-east.example.com:53 {
+        errors
+        cache 300
+        forward . 10.10.0.10 10.10.0.11 {
+            health_check 5s
+        }
+    }
+    
+    cluster-west.example.com:53 {
+        errors
+        cache 300
+        forward . 10.20.0.10 10.20.0.11 {
+            health_check 5s
+        }
+    }
+</code></pre>
+<h3 id="72-externaldns-集成"><a class="header" href="#72-externaldns-集成">7.2 ExternalDNS 集成</a></h3>
+<pre><code class="language-yaml"># ExternalDNS 部署配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns
+  namespace: kube-system
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns
+  template:
+    metadata:
+      labels:
+        app: external-dns
+    spec:
+      serviceAccountName: external-dns
+      containers:
+      - name: external-dns
+        image: registry.k8s.io/external-dns/external-dns:v0.13.4
+        args:
+        - --source=service
+        - --source=ingress
+        - --provider=aws
+        - --aws-zone-type=public
+        - --registry=txt
+        - --txt-owner-id=cluster-identifier
+        - --domain-filter=example.com
+        - --policy=sync
+        - --events
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 10m
+          limits:
+            memory: 50Mi
+            cpu: 100m
+</code></pre>
+<hr>
+<h2 id="8-生产环境最佳实践"><a class="header" href="#8-生产环境最佳实践">8. 生产环境最佳实践</a></h2>
+<h3 id="81-部署检查清单"><a class="header" href="#81-部署检查清单">8.1 部署检查清单</a></h3>
+<pre><code class="language-yaml"># CoreDNS 生产部署检查清单
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: coredns-deployment-check
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+      - name: validator
+        image: busybox:1.35
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "=== CoreDNS 生产部署验证 ==="
+          
+          # 1. 基础连通性测试
+          echo "1. DNS 基础连通性测试:"
+          nslookup kubernetes.default || exit 1
+          nslookup google.com || exit 1
+          
+          # 2. 性能测试
+          echo "2. DNS 性能测试:"
+          for i in $(seq 1 100); do
+            nslookup kubernetes.default &gt;/dev/null 2&gt;&amp;1
+          done
+          
+          # 3. 配置验证
+          echo "3. 配置验证:"
+          dig @10.96.0.10 kubernetes.default | grep -q "ANSWER SECTION" || exit 1
+          
+          # 4. 缓存测试
+          echo "4. 缓存效果测试:"
+          time nslookup kubernetes.default
+          time nslookup kubernetes.default  # 第二次应该更快
+          
+          echo "✅ 所有验证通过"
+        env:
+        - name: DNS_SERVER
+          value: "10.96.0.10"
+      restartPolicy: Never
+</code></pre>
+<h3 id="82-滚动更新策略"><a class="header" href="#82-滚动更新策略">8.2 滚动更新策略</a></h3>
+<pre><code class="language-yaml"># CoreDNS 安全滚动更新配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns-canary
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: coredns-canary
+  template:
+    metadata:
+      labels:
+        k8s-app: coredns-canary
+    spec:
+      containers:
+      - name: coredns
+        image: registry.k8s.io/coredns/coredns:v1.11.1
+        args: [ "-conf", "/etc/coredns/Corefile" ]
+        ports:
+        - containerPort: 53
+          name: dns
+          protocol: UDP
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8181
+          initialDelaySeconds: 5
+          periodSeconds: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+</code></pre>
+<p>通过以上全面的 CoreDNS 配置和优化方案，可以确保 Kubernetes 集群的 DNS 服务具备高性能、高可用和高安全性。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/10-service-advanced-features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/12-dns-service-discovery.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/10-service-advanced-features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/12-dns-service-discovery.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

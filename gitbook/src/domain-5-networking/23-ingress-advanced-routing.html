@@ -1,0 +1,1262 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>131 - Ingress 高级路由与流量管理 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="131---ingress-高级路由与流量管理"><a class="header" href="#131---ingress-高级路由与流量管理">131 - Ingress 高级路由与流量管理</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一高级路由策略总览"><a class="header" href="#一高级路由策略总览">一、高级路由策略总览</a></h2>
+<h3 id="11-路由策略类型"><a class="header" href="#11-路由策略类型">1.1 路由策略类型</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>策略类型</th><th>英文</th><th>说明</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>基于主机名</strong></td><td>Host-based</td><td>根据 HTTP Host 头分发</td><td>多域名托管</td></tr>
+<tr><td><strong>基于路径</strong></td><td>Path-based</td><td>根据 URL 路径分发</td><td>微服务路由</td></tr>
+<tr><td><strong>基于 Header</strong></td><td>Header-based</td><td>根据请求头分发</td><td>A/B 测试、版本路由</td></tr>
+<tr><td><strong>基于 Cookie</strong></td><td>Cookie-based</td><td>根据 Cookie 值分发</td><td>用户分组测试</td></tr>
+<tr><td><strong>基于权重</strong></td><td>Weight-based</td><td>按比例分配流量</td><td>金丝雀发布</td></tr>
+<tr><td><strong>基于查询参数</strong></td><td>Query-based</td><td>根据 URL 参数分发</td><td>功能开关</td></tr>
+<tr><td><strong>基于源 IP</strong></td><td>Source IP-based</td><td>根据客户端 IP 分发</td><td>地域路由、灰度</td></tr>
+<tr><td><strong>正则匹配</strong></td><td>Regex-based</td><td>使用正则表达式匹配</td><td>复杂路由规则</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-流量管理策略"><a class="header" href="#12-流量管理策略">1.2 流量管理策略</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>策略</th><th>英文</th><th>说明</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>金丝雀发布</strong></td><td>Canary Deployment</td><td>小比例流量测试新版本</td><td>降低发布风险</td></tr>
+<tr><td><strong>蓝绿部署</strong></td><td>Blue-Green Deployment</td><td>两套环境快速切换</td><td>零停机部署</td></tr>
+<tr><td><strong>A/B 测试</strong></td><td>A/B Testing</td><td>多版本对比测试</td><td>产品验证</td></tr>
+<tr><td><strong>流量镜像</strong></td><td>Traffic Mirroring</td><td>复制流量到测试环境</td><td>生产验证</td></tr>
+<tr><td><strong>流量分割</strong></td><td>Traffic Splitting</td><td>按规则分配流量</td><td>渐进式发布</td></tr>
+<tr><td><strong>熔断</strong></td><td>Circuit Breaking</td><td>故障时快速失败</td><td>服务保护</td></tr>
+<tr><td><strong>限流</strong></td><td>Rate Limiting</td><td>限制请求速率</td><td>过载保护</td></tr>
+<tr><td><strong>重试</strong></td><td>Retry</td><td>失败时自动重试</td><td>提高可用性</td></tr>
+<tr><td><strong>超时</strong></td><td>Timeout</td><td>限制响应等待时间</td><td>资源保护</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="二金丝雀发布-canary-deployment"><a class="header" href="#二金丝雀发布-canary-deployment">二、金丝雀发布 (Canary Deployment)</a></h2>
+<h3 id="21-金丝雀发布策略对比"><a class="header" href="#21-金丝雀发布策略对比">2.1 金丝雀发布策略对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>策略</th><th>触发条件</th><th>优先级</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Header 金丝雀</strong></td><td>特定请求头</td><td>最高</td><td>内部测试、指定用户</td></tr>
+<tr><td><strong>Header 值金丝雀</strong></td><td>特定请求头值</td><td>次高</td><td>精确用户控制</td></tr>
+<tr><td><strong>Header 正则金丝雀</strong></td><td>请求头正则匹配</td><td>次高</td><td>模式匹配</td></tr>
+<tr><td><strong>Cookie 金丝雀</strong></td><td>特定 Cookie</td><td>中</td><td>用户分组</td></tr>
+<tr><td><strong>权重金丝雀</strong></td><td>随机比例</td><td>最低</td><td>流量百分比控制</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="22-基于权重的金丝雀"><a class="header" href="#22-基于权重的金丝雀">2.2 基于权重的金丝雀</a></h3>
+<pre><code class="language-yaml"># 稳定版本 Ingress (90% 流量)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-stable
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v1
+            port:
+              number: 80
+---
+# 金丝雀版本 Ingress (10% 流量)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+</code></pre>
+<h3 id="23-基于-header-的金丝雀"><a class="header" href="#23-基于-header-的金丝雀">2.3 基于 Header 的金丝雀</a></h3>
+<pre><code class="language-yaml"># 场景1: Header 存在即路由到金丝雀
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary-header
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    # 只要存在 X-Canary 头就路由到金丝雀
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+---
+# 场景2: Header 值精确匹配
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary-header-value
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Test-Group"
+    # X-Test-Group: beta 时路由到金丝雀
+    nginx.ingress.kubernetes.io/canary-by-header-value: "beta"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+---
+# 场景3: Header 正则匹配
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary-header-pattern
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-User-Email"
+    # 测试用户邮箱匹配正则
+    nginx.ingress.kubernetes.io/canary-by-header-pattern: ".*@testing\\.example\\.com$"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+</code></pre>
+<h3 id="24-基于-cookie-的金丝雀"><a class="header" href="#24-基于-cookie-的金丝雀">2.4 基于 Cookie 的金丝雀</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary-cookie
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    # Cookie 名称为 canary，值为 always 时路由到金丝雀
+    # 值为 never 时不路由到金丝雀
+    nginx.ingress.kubernetes.io/canary-by-cookie: "canary"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+</code></pre>
+<h3 id="25-组合金丝雀策略"><a class="header" href="#25-组合金丝雀策略">2.5 组合金丝雀策略</a></h3>
+<pre><code class="language-yaml"># 组合策略: Header &gt; Cookie &gt; Weight
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-canary-combined
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    # 1. Header 优先级最高: 测试团队成员
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Test-Team"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "true"
+    # 2. Cookie 次之: 已选择体验新版的用户
+    nginx.ingress.kubernetes.io/canary-by-cookie: "beta-user"
+    # 3. 权重最低: 5% 随机流量
+    nginx.ingress.kubernetes.io/canary-weight: "5"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+</code></pre>
+<h3 id="26-金丝雀发布渐进策略"><a class="header" href="#26-金丝雀发布渐进策略">2.6 金丝雀发布渐进策略</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>阶段</th><th>权重</th><th>持续时间</th><th>观察指标</th><th>回滚条件</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>阶段1</strong></td><td>1%</td><td>1小时</td><td>错误率、延迟</td><td>错误率 &gt;1%</td></tr>
+<tr><td><strong>阶段2</strong></td><td>5%</td><td>2小时</td><td>错误率、延迟、业务指标</td><td>错误率 &gt;0.5%</td></tr>
+<tr><td><strong>阶段3</strong></td><td>10%</td><td>4小时</td><td>全面监控</td><td>异常告警</td></tr>
+<tr><td><strong>阶段4</strong></td><td>25%</td><td>8小时</td><td>全面监控</td><td>异常告警</td></tr>
+<tr><td><strong>阶段5</strong></td><td>50%</td><td>12小时</td><td>全面监控</td><td>异常告警</td></tr>
+<tr><td><strong>阶段6</strong></td><td>100%</td><td>-</td><td>完成切换</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml"># 渐进式金丝雀发布脚本示例
+# canary-rollout.sh
+#!/bin/bash
+WEIGHTS=(1 5 10 25 50 100)
+INTERVALS=(3600 7200 14400 28800 43200 0)
+
+for i in "${!WEIGHTS[@]}"; do
+  weight=${WEIGHTS[$i]}
+  interval=${INTERVALS[$i]}
+  
+  echo "Setting canary weight to ${weight}%"
+  kubectl patch ingress app-canary -n production -p \
+    "{\"metadata\":{\"annotations\":{\"nginx.ingress.kubernetes.io/canary-weight\":\"${weight}\"}}}"
+  
+  if [ $interval -gt 0 ]; then
+    echo "Waiting ${interval} seconds for observation..."
+    sleep $interval
+    
+    # 检查错误率 (示例)
+    error_rate=$(curl -s "http://prometheus:9090/api/v1/query?query=rate(http_requests_total{status=~\"5..\",app=\"app-v2\"}[5m])" | jq '.data.result[0].value[1]')
+    if (( $(echo "$error_rate &gt; 0.01" | bc -l) )); then
+      echo "Error rate too high, rolling back..."
+      kubectl patch ingress app-canary -n production -p \
+        '{"metadata":{"annotations":{"nginx.ingress.kubernetes.io/canary-weight":"0"}}}'
+      exit 1
+    fi
+  fi
+done
+
+echo "Canary rollout completed successfully"
+</code></pre>
+<hr>
+<h2 id="三蓝绿部署-blue-green-deployment"><a class="header" href="#三蓝绿部署-blue-green-deployment">三、蓝绿部署 (Blue-Green Deployment)</a></h2>
+<h3 id="31-蓝绿部署架构"><a class="header" href="#31-蓝绿部署架构">3.1 蓝绿部署架构</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────┐
+│                            蓝绿部署架构                                          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│                              ┌──────────────┐                                   │
+│                              │    Ingress   │                                   │
+│                              │    (切换点)   │                                   │
+│                              └──────┬───────┘                                   │
+│                                     │                                           │
+│                    ┌────────────────┼────────────────┐                         │
+│                    │                │                │                         │
+│                    ▼                ▼                ▼                         │
+│           ┌─────────────┐   ┌─────────────┐  ┌─────────────┐                  │
+│           │ Service-Blue│   │Service-Green│  │  Service    │                  │
+│           │   (v1.0)    │   │   (v1.1)    │  │ (统一入口)  │                  │
+│           └──────┬──────┘   └──────┬──────┘  └──────┬──────┘                  │
+│                  │                 │                │                         │
+│        ┌─────────┴─────────┐      │       ┌────────┴────────┐                │
+│        ▼         ▼         ▼      ▼       ▼        ▼        ▼                │
+│   ┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐┌────────┐    │
+│   │Pod Blue││Pod Blue││Pod Blue││Pod Green│Pod Green│Pod Green│        │    │
+│   │  (v1.0)││ (v1.0) ││ (v1.0) ││ (v1.1) ││ (v1.1) ││ (v1.1) ││        │    │
+│   └────────┘└────────┘└────────┘└────────┘└────────┘└────────┘└────────┘    │
+│                                                                                  │
+│   ← 当前生产 (Blue) →          ← 新版本 (Green) →                              │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="32-蓝绿部署实现"><a class="header" href="#32-蓝绿部署实现">3.2 蓝绿部署实现</a></h3>
+<pre><code class="language-yaml"># Blue 环境 (当前生产)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-blue
+  namespace: production
+  labels:
+    app: myapp
+    version: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: blue
+    spec:
+      containers:
+      - name: app
+        image: myapp:v1.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-blue
+  namespace: production
+spec:
+  selector:
+    app: myapp
+    version: blue
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+# Green 环境 (新版本)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-green
+  namespace: production
+  labels:
+    app: myapp
+    version: green
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: green
+    spec:
+      containers:
+      - name: app
+        image: myapp:v1.1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-green
+  namespace: production
+spec:
+  selector:
+    app: myapp
+    version: green
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+# Ingress - 指向当前活跃环境
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-blue  # 切换时改为 app-green
+            port:
+              number: 80
+</code></pre>
+<h3 id="33-蓝绿切换脚本"><a class="header" href="#33-蓝绿切换脚本">3.3 蓝绿切换脚本</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# blue-green-switch.sh
+
+NAMESPACE="production"
+INGRESS_NAME="app-ingress"
+CURRENT_SERVICE=$(kubectl get ingress $INGRESS_NAME -n $NAMESPACE -o jsonpath='{.spec.rules[0].http.paths[0].backend.service.name}')
+
+if [ "$CURRENT_SERVICE" == "app-blue" ]; then
+  TARGET_SERVICE="app-green"
+else
+  TARGET_SERVICE="app-blue"
+fi
+
+echo "Switching from $CURRENT_SERVICE to $TARGET_SERVICE"
+
+# 验证目标服务就绪
+READY_PODS=$(kubectl get pods -n $NAMESPACE -l app=myapp,version=${TARGET_SERVICE#app-} --field-selector=status.phase=Running -o name | wc -l)
+if [ "$READY_PODS" -lt 3 ]; then
+  echo "Error: Target service not ready (only $READY_PODS pods running)"
+  exit 1
+fi
+
+# 执行切换
+kubectl patch ingress $INGRESS_NAME -n $NAMESPACE -p \
+  "{\"spec\":{\"rules\":[{\"host\":\"app.example.com\",\"http\":{\"paths\":[{\"path\":\"/\",\"pathType\":\"Prefix\",\"backend\":{\"service\":{\"name\":\"$TARGET_SERVICE\",\"port\":{\"number\":80}}}}]}}]}}"
+
+echo "Switch completed: $CURRENT_SERVICE -&gt; $TARGET_SERVICE"
+</code></pre>
+<hr>
+<h2 id="四ab-测试"><a class="header" href="#四ab-测试">四、A/B 测试</a></h2>
+<h3 id="41-ab-测试策略"><a class="header" href="#41-ab-测试策略">4.1 A/B 测试策略</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>策略</th><th>实现方式</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>随机分流</strong></td><td>权重金丝雀</td><td>统计显著性测试</td></tr>
+<tr><td><strong>用户 ID 分流</strong></td><td>Header/Cookie</td><td>用户体验一致性</td></tr>
+<tr><td><strong>地域分流</strong></td><td>源 IP 路由</td><td>地域功能测试</td></tr>
+<tr><td><strong>设备分流</strong></td><td>User-Agent Header</td><td>平台特定测试</td></tr>
+<tr><td><strong>功能开关</strong></td><td>查询参数/Header</td><td>快速功能验证</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="42-基于用户-id-的-ab-测试"><a class="header" href="#42-基于用户-id-的-ab-测试">4.2 基于用户 ID 的 A/B 测试</a></h3>
+<pre><code class="language-yaml"># 使用自定义 Header 实现用户分流
+# 前端设置: X-User-ID-Hash: &lt;hash(user_id) % 100&gt;
+
+# A 组: hash &lt; 50
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-variant-a
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-AB-Group"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "A"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-variant-a
+            port:
+              number: 80
+---
+# B 组: hash &gt;= 50 (默认)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-stable
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-variant-b
+            port:
+              number: 80
+</code></pre>
+<h3 id="43-基于地域的-ab-测试"><a class="header" href="#43-基于地域的-ab-测试">4.3 基于地域的 A/B 测试</a></h3>
+<pre><code class="language-yaml"># 使用 GeoIP 模块或外部服务设置 X-Country Header
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-cn-variant
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Country"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "CN"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-cn
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="五流量镜像-traffic-mirroring"><a class="header" href="#五流量镜像-traffic-mirroring">五、流量镜像 (Traffic Mirroring)</a></h2>
+<h3 id="51-流量镜像概念"><a class="header" href="#51-流量镜像概念">5.1 流量镜像概念</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>特性</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>目的</strong></td><td>将生产流量复制到测试环境，验证新版本</td></tr>
+<tr><td><strong>特点</strong></td><td>不影响生产响应，镜像请求独立处理</td></tr>
+<tr><td><strong>响应</strong></td><td>镜像请求的响应被丢弃</td></tr>
+<tr><td><strong>用途</strong></td><td>性能测试、问题复现、新版本验证</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-nginx-ingress-流量镜像"><a class="header" href="#52-nginx-ingress-流量镜像">5.2 NGINX Ingress 流量镜像</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-with-mirror
+  annotations:
+    # 镜像流量到指定服务
+    nginx.ingress.kubernetes.io/mirror-uri: "http://app-mirror.testing.svc.cluster.local"
+    # 是否镜像请求体
+    nginx.ingress.kubernetes.io/mirror-request-body: "on"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="53-使用-configuration-snippet-实现镜像"><a class="header" href="#53-使用-configuration-snippet-实现镜像">5.3 使用 configuration-snippet 实现镜像</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-custom-mirror
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # 镜像到测试环境
+      mirror /mirror;
+      mirror_request_body on;
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location = /mirror {
+        internal;
+        proxy_pass http://app-test.testing.svc.cluster.local$request_uri;
+        proxy_set_header Host $host;
+        proxy_set_header X-Original-URI $request_uri;
+        proxy_set_header X-Mirror-Request "true";
+      }
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="六负载均衡策略"><a class="header" href="#六负载均衡策略">六、负载均衡策略</a></h2>
+<h3 id="61-负载均衡算法对比"><a class="header" href="#61-负载均衡算法对比">6.1 负载均衡算法对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>算法</th><th>英文</th><th>说明</th><th>适用场景</th><th>NGINX Ingress 支持</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>轮询</strong></td><td>Round Robin</td><td>依次分配请求</td><td>后端性能均衡</td><td>✅ 默认</td></tr>
+<tr><td><strong>加权轮询</strong></td><td>Weighted Round Robin</td><td>按权重分配</td><td>后端性能不均</td><td>✅</td></tr>
+<tr><td><strong>最少连接</strong></td><td>Least Connections</td><td>分配给连接最少的后端</td><td>长连接场景</td><td>✅</td></tr>
+<tr><td><strong>IP 哈希</strong></td><td>IP Hash</td><td>相同 IP 到相同后端</td><td>会话保持</td><td>✅</td></tr>
+<tr><td><strong>EWMA</strong></td><td>Exponentially Weighted Moving Average</td><td>指数加权移动平均</td><td>动态负载</td><td>✅</td></tr>
+<tr><td><strong>随机</strong></td><td>Random</td><td>随机选择后端</td><td>简单均衡</td><td>❌</td></tr>
+<tr><td><strong>最快响应</strong></td><td>Fastest Response</td><td>分配给响应最快的后端</td><td>延迟敏感</td><td>❌</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="62-负载均衡配置"><a class="header" href="#62-负载均衡配置">6.2 负载均衡配置</a></h3>
+<pre><code class="language-yaml"># 轮询 (默认)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-round-robin
+  annotations:
+    nginx.ingress.kubernetes.io/load-balance: "round_robin"
+spec:
+  # ...
+
+---
+# 最少连接
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-least-conn
+  annotations:
+    nginx.ingress.kubernetes.io/load-balance: "least_conn"
+spec:
+  # ...
+
+---
+# EWMA (推荐用于动态负载)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ewma
+  annotations:
+    nginx.ingress.kubernetes.io/load-balance: "ewma"
+spec:
+  # ...
+
+---
+# IP 哈希 (会话保持)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ip-hash
+  annotations:
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
+spec:
+  # ...
+
+---
+# 基于请求 URI 的一致性哈希
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-uri-hash
+  annotations:
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$request_uri"
+spec:
+  # ...
+
+---
+# 基于 Header 的一致性哈希
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-header-hash
+  annotations:
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$http_x_user_id"
+spec:
+  # ...
+</code></pre>
+<h3 id="63-会话亲和性配置"><a class="header" href="#63-会话亲和性配置">6.3 会话亲和性配置</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-sticky-session
+  annotations:
+    # 启用 Cookie 会话亲和
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    # 亲和模式: balanced (默认，故障时重新分配) / persistent (严格保持)
+    nginx.ingress.kubernetes.io/affinity-mode: "persistent"
+    # Cookie 配置
+    nginx.ingress.kubernetes.io/session-cookie-name: "SERVERID"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+    nginx.ingress.kubernetes.io/session-cookie-path: "/"
+    nginx.ingress.kubernetes.io/session-cookie-samesite: "Strict"
+    nginx.ingress.kubernetes.io/session-cookie-change-on-failure: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: stateful-app
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="七重试与超时配置"><a class="header" href="#七重试与超时配置">七、重试与超时配置</a></h2>
+<h3 id="71-超时配置详解"><a class="header" href="#71-超时配置详解">7.1 超时配置详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>超时类型</th><th>注解</th><th>默认值</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>连接超时</strong></td><td><code>proxy-connect-timeout</code></td><td>5s</td><td>与后端建立连接的超时</td></tr>
+<tr><td><strong>读取超时</strong></td><td><code>proxy-read-timeout</code></td><td>60s</td><td>等待后端响应的超时</td></tr>
+<tr><td><strong>发送超时</strong></td><td><code>proxy-send-timeout</code></td><td>60s</td><td>向后端发送请求的超时</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-with-timeouts
+  annotations:
+    # 连接超时 10 秒
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    # 读取超时 120 秒 (长请求)
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    # 发送超时 60 秒
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="72-重试配置详解"><a class="header" href="#72-重试配置详解">7.2 重试配置详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>配置项</th><th>注解</th><th>默认值</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>重试条件</strong></td><td><code>proxy-next-upstream</code></td><td>error timeout</td><td>触发重试的条件</td></tr>
+<tr><td><strong>重试次数</strong></td><td><code>proxy-next-upstream-tries</code></td><td>3</td><td>最大重试次数</td></tr>
+<tr><td><strong>重试超时</strong></td><td><code>proxy-next-upstream-timeout</code></td><td>0</td><td>重试总超时 (0=无限制)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-with-retry
+  annotations:
+    # 重试条件: 错误、超时、5xx 错误
+    nginx.ingress.kubernetes.io/proxy-next-upstream: "error timeout http_502 http_503 http_504"
+    # 最大重试 3 次
+    nginx.ingress.kubernetes.io/proxy-next-upstream-tries: "3"
+    # 重试总超时 30 秒
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "30"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="73-重试条件说明"><a class="header" href="#73-重试条件说明">7.3 重试条件说明</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>条件</th><th>说明</th><th>建议</th></tr>
+</thead>
+<tbody>
+<tr><td><code>error</code></td><td>与后端建立连接或通信时发生错误</td><td>✅ 启用</td></tr>
+<tr><td><code>timeout</code></td><td>与后端通信超时</td><td>✅ 启用</td></tr>
+<tr><td><code>invalid_header</code></td><td>后端返回无效响应</td><td>⚠️ 谨慎</td></tr>
+<tr><td><code>http_500</code></td><td>后端返回 500</td><td>⚠️ 谨慎 (可能加重负载)</td></tr>
+<tr><td><code>http_502</code></td><td>后端返回 502</td><td>✅ 启用</td></tr>
+<tr><td><code>http_503</code></td><td>后端返回 503</td><td>✅ 启用</td></tr>
+<tr><td><code>http_504</code></td><td>后端返回 504</td><td>✅ 启用</td></tr>
+<tr><td><code>non_idempotent</code></td><td>允许对非幂等请求重试</td><td>❌ 危险</td></tr>
+<tr><td><code>off</code></td><td>禁用重试</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="八正则路径与高级匹配"><a class="header" href="#八正则路径与高级匹配">八、正则路径与高级匹配</a></h2>
+<h3 id="81-正则路径匹配"><a class="header" href="#81-正则路径匹配">8.1 正则路径匹配</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-regex-routing
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      # 匹配 /api/v1/*, /api/v2/*
+      - path: /api/v[0-9]+/.*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+      # 匹配用户 ID 路径 /users/123
+      - path: /users/[0-9]+
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 8080
+      # 匹配静态资源
+      - path: /static/.*\.(css|js|png|jpg|gif)$
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: static-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="82-url-重写与捕获组"><a class="header" href="#82-url-重写与捕获组">8.2 URL 重写与捕获组</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-rewrite
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    # /api/v1/users -&gt; /v1/users
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-version-rewrite
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    # /old/v1/path -&gt; /new/v1/path
+    nginx.ingress.kubernetes.io/rewrite-target: /new/$1/$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /old/(v[0-9]+)/(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+</code></pre>
+<hr>
+<h2 id="九多后端与流量分割"><a class="header" href="#九多后端与流量分割">九、多后端与流量分割</a></h2>
+<h3 id="91-使用-service-实现流量分割"><a class="header" href="#91-使用-service-实现流量分割">9.1 使用 Service 实现流量分割</a></h3>
+<pre><code class="language-yaml"># 主版本 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: myapp
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+# 通过调整 Deployment 副本数实现流量分割
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-v1
+spec:
+  replicas: 9  # 90% 流量
+  selector:
+    matchLabels:
+      app: myapp
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v1
+    spec:
+      containers:
+      - name: app
+        image: myapp:v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-v2
+spec:
+  replicas: 1  # 10% 流量
+  selector:
+    matchLabels:
+      app: myapp
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v2
+    spec:
+      containers:
+      - name: app
+        image: myapp:v2
+</code></pre>
+<h3 id="92-使用-gateway-api-实现流量分割"><a class="header" href="#92-使用-gateway-api-实现流量分割">9.2 使用 Gateway API 实现流量分割</a></h3>
+<pre><code class="language-yaml"># Gateway API 原生支持流量分割
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-traffic-split
+spec:
+  parentRefs:
+  - name: main-gateway
+  hostnames:
+  - "app.example.com"
+  rules:
+  - backendRefs:
+    - name: app-v1
+      port: 80
+      weight: 90
+    - name: app-v2
+      port: 80
+      weight: 10
+</code></pre>
+<hr>
+<h2 id="十流量管理最佳实践"><a class="header" href="#十流量管理最佳实践">十、流量管理最佳实践</a></h2>
+<h3 id="101-发布策略选择"><a class="header" href="#101-发布策略选择">10.1 发布策略选择</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>场景</th><th>推荐策略</th><th>理由</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>高风险变更</strong></td><td>金丝雀 (1% -&gt; 5% -&gt; 10% -&gt; …)</td><td>渐进验证，快速回滚</td></tr>
+<tr><td><strong>紧急修复</strong></td><td>蓝绿部署</td><td>快速全量切换</td></tr>
+<tr><td><strong>功能验证</strong></td><td>A/B 测试</td><td>数据驱动决策</td></tr>
+<tr><td><strong>性能测试</strong></td><td>流量镜像</td><td>不影响生产</td></tr>
+<tr><td><strong>日常发布</strong></td><td>金丝雀 (10% -&gt; 50% -&gt; 100%)</td><td>平衡效率与风险</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="102-流量管理检查清单"><a class="header" href="#102-流量管理检查清单">10.2 流量管理检查清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>检查项</th><th>说明</th><th>状态</th></tr>
+</thead>
+<tbody>
+<tr><td>监控就绪</td><td>错误率、延迟、吞吐量监控</td><td>☐</td></tr>
+<tr><td>回滚方案</td><td>明确的回滚步骤和触发条件</td><td>☐</td></tr>
+<tr><td>健康检查</td><td>后端服务健康检查配置</td><td>☐</td></tr>
+<tr><td>合理超时</td><td>连接、读取、发送超时配置</td><td>☐</td></tr>
+<tr><td>重试策略</td><td>重试条件、次数、超时配置</td><td>☐</td></tr>
+<tr><td>限流保护</td><td>防止过载的限流配置</td><td>☐</td></tr>
+<tr><td>日志追踪</td><td>请求 ID 追踪</td><td>☐</td></tr>
+<tr><td>告警配置</td><td>异常情况告警</td><td>☐</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>流量管理原则</strong>: 渐进发布 → 实时监控 → 快速回滚 → 数据驱动</p>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/22-ingress-tls-certificate.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/24-ingress-security-hardening.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/22-ingress-tls-certificate.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/24-ingress-security-hardening.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
