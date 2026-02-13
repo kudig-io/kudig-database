@@ -1,0 +1,931 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>56 - CoreDNS 故障排查与性能优化 (Troubleshooting &amp; Optimization) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="56---coredns-故障排查与性能优化-troubleshooting--optimization"><a class="header" href="#56---coredns-故障排查与性能优化-troubleshooting--optimization">56 - CoreDNS 故障排查与性能优化 (Troubleshooting &amp; Optimization)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: CoreDNS 1.8.0+ / Kubernetes v1.25-v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一故障排查流程-troubleshooting-workflow"><a class="header" href="#一故障排查流程-troubleshooting-workflow">一、故障排查流程 (Troubleshooting Workflow)</a></h2>
+<h3 id="11-排查流程图"><a class="header" href="#11-排查流程图">1.1 排查流程图</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                      CoreDNS 故障排查流程                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ┌───────────────┐                                                         │
+│   │  DNS解析失败   │                                                         │
+│   └───────┬───────┘                                                         │
+│           │                                                                 │
+│           ▼                                                                 │
+│   ┌───────────────────────────────────────────────────────────────────┐    │
+│   │ Step 1: 确认CoreDNS Pod状态                                        │    │
+│   │ kubectl get pods -n kube-system -l k8s-app=kube-dns               │    │
+│   └───────────────────────────────────────────────────────────────────┘    │
+│           │                                                                 │
+│           ├─── Pod不存在/CrashLoopBackOff ──▶ 检查Deployment/日志          │
+│           │                                                                 │
+│           ▼                                                                 │
+│   ┌───────────────────────────────────────────────────────────────────┐    │
+│   │ Step 2: 检查kube-dns Service                                       │    │
+│   │ kubectl get svc kube-dns -n kube-system                           │    │
+│   └───────────────────────────────────────────────────────────────────┘    │
+│           │                                                                 │
+│           ├─── Service不存在/Endpoints为空 ──▶ 重建Service                  │
+│           │                                                                 │
+│           ▼                                                                 │
+│   ┌───────────────────────────────────────────────────────────────────┐    │
+│   │ Step 3: 从Pod内测试DNS解析                                         │    │
+│   │ kubectl exec -it &lt;pod&gt; -- nslookup kubernetes.default             │    │
+│   └───────────────────────────────────────────────────────────────────┘    │
+│           │                                                                 │
+│           ├─── 超时 ──▶ 检查网络策略/CNI                                    │
+│           ├─── NXDOMAIN ──▶ 检查Corefile配置                               │
+│           ├─── SERVFAIL ──▶ 检查上游DNS/Corefile语法                       │
+│           │                                                                 │
+│           ▼                                                                 │
+│   ┌───────────────────────────────────────────────────────────────────┐    │
+│   │ Step 4: 直接查询CoreDNS Pod                                        │    │
+│   │ kubectl exec -n kube-system coredns-xxx -- dig @127.0.0.1 ...     │    │
+│   └───────────────────────────────────────────────────────────────────┘    │
+│           │                                                                 │
+│           ├─── 成功 ──▶ 问题在网络层(Service/kube-proxy)                    │
+│           ├─── 失败 ──▶ CoreDNS配置或上游问题                               │
+│           │                                                                 │
+│           ▼                                                                 │
+│   ┌───────────────────────────────────────────────────────────────────┐    │
+│   │ Step 5: 检查CoreDNS日志                                            │    │
+│   │ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100        │    │
+│   └───────────────────────────────────────────────────────────────────┘    │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="12-快速诊断命令集"><a class="header" href="#12-快速诊断命令集">1.2 快速诊断命令集</a></h3>
+<pre><code class="language-bash"># === CoreDNS Pod状态 ===
+kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+
+# === Service和Endpoints ===
+kubectl get svc,ep kube-dns -n kube-system
+
+# === CoreDNS日志 (最近100行) ===
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100
+
+# === CoreDNS日志 (实时跟踪) ===
+kubectl logs -n kube-system -l k8s-app=kube-dns -f
+
+# === ConfigMap配置 ===
+kubectl get configmap coredns -n kube-system -o yaml
+
+# === 从测试Pod解析 ===
+kubectl run dnstest --rm -it --image=busybox:1.36 --restart=Never -- nslookup kubernetes.default
+
+# === 详细DNS测试 ===
+kubectl run dnstest --rm -it --image=nicolaka/netshoot --restart=Never -- \
+  dig @10.96.0.10 kubernetes.default.svc.cluster.local +short
+
+# === 检查resolv.conf ===
+kubectl exec -it &lt;pod-name&gt; -- cat /etc/resolv.conf
+
+# === CoreDNS指标 ===
+kubectl exec -n kube-system deploy/coredns -- wget -qO- http://localhost:9153/metrics | head -50
+</code></pre>
+<hr>
+<h2 id="二常见故障场景-common-issues"><a class="header" href="#二常见故障场景-common-issues">二、常见故障场景 (Common Issues)</a></h2>
+<h3 id="21-dns解析超时"><a class="header" href="#21-dns解析超时">2.1 DNS解析超时</a></h3>
+<p><strong>症状</strong>:</p>
+<pre><code>;; connection timed out; no servers could be reached
+</code></pre>
+<p><strong>排查步骤</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: center">步骤</th><th style="text-align: left">检查项</th><th style="text-align: left">命令</th><th style="text-align: left">可能原因</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: center">1</td><td style="text-align: left">CoreDNS Pod运行状态</td><td style="text-align: left"><code>kubectl get pods -n kube-system -l k8s-app=kube-dns</code></td><td style="text-align: left">Pod未运行</td></tr>
+<tr><td style="text-align: center">2</td><td style="text-align: left">kube-dns Service</td><td style="text-align: left"><code>kubectl get svc,ep kube-dns -n kube-system</code></td><td style="text-align: left">Service无Endpoints</td></tr>
+<tr><td style="text-align: center">3</td><td style="text-align: left">网络连通性</td><td style="text-align: left"><code>kubectl exec &lt;pod&gt; -- nc -zv 10.96.0.10 53</code></td><td style="text-align: left">网络策略阻断</td></tr>
+<tr><td style="text-align: center">4</td><td style="text-align: left">kube-proxy规则</td><td style="text-align: left"><code>iptables -t nat -L KUBE-SERVICES | grep dns</code></td><td style="text-align: left">iptables规则缺失</td></tr>
+<tr><td style="text-align: center">5</td><td style="text-align: left">CNI状态</td><td style="text-align: left"><code>kubectl get pods -n kube-system -l k8s-app=&lt;cni&gt;</code></td><td style="text-align: left">CNI故障</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>解决方案</strong>:</p>
+<pre><code class="language-bash"># 重启CoreDNS
+kubectl rollout restart deployment/coredns -n kube-system
+
+# 重建kube-dns Service (如果丢失)
+kubectl delete svc kube-dns -n kube-system
+kubectl expose deployment coredns -n kube-system --name=kube-dns --port=53 --target-port=53 --protocol=UDP
+
+# 检查NetworkPolicy
+kubectl get networkpolicy -A | grep -E "kube-system|default"
+</code></pre>
+<h3 id="22-nxdomain错误"><a class="header" href="#22-nxdomain错误">2.2 NXDOMAIN错误</a></h3>
+<p><strong>症状</strong>:</p>
+<pre><code>** server can't find nginx.default.svc.cluster.local: NXDOMAIN
+</code></pre>
+<p><strong>排查矩阵</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">查询类型</th><th style="text-align: left">预期结果</th><th style="text-align: left">NXDOMAIN原因</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>kubernetes.default.svc.cluster.local</code></td><td style="text-align: left">成功</td><td style="text-align: left">Corefile kubernetes插件配置错误</td></tr>
+<tr><td style="text-align: left"><code>nginx.default.svc.cluster.local</code></td><td style="text-align: left">成功</td><td style="text-align: left">Service不存在或命名空间错误</td></tr>
+<tr><td style="text-align: left"><code>www.google.com</code></td><td style="text-align: left">成功</td><td style="text-align: left">forward插件配置错误</td></tr>
+<tr><td style="text-align: left"><code>nginx</code> (短名称)</td><td style="text-align: left">成功</td><td style="text-align: left">resolv.conf search域错误</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>排查命令</strong>:</p>
+<pre><code class="language-bash"># 检查Service是否存在
+kubectl get svc nginx -n default
+
+# 检查kubernetes插件区域配置
+kubectl get configmap coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep kubernetes
+
+# 检查Pod的resolv.conf
+kubectl exec &lt;pod&gt; -- cat /etc/resolv.conf
+</code></pre>
+<h3 id="23-servfail错误"><a class="header" href="#23-servfail错误">2.3 SERVFAIL错误</a></h3>
+<p><strong>症状</strong>:</p>
+<pre><code>** server can't find example.com: SERVFAIL
+</code></pre>
+<p><strong>常见原因</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">原因</th><th style="text-align: left">检查方法</th><th style="text-align: left">解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">Corefile语法错误</td><td style="text-align: left">查看CoreDNS启动日志</td><td style="text-align: left">修复配置语法</td></tr>
+<tr><td style="text-align: left">上游DNS不可达</td><td style="text-align: left"><code>dig @8.8.8.8 example.com</code></td><td style="text-align: left">更换上游DNS</td></tr>
+<tr><td style="text-align: left">转发循环</td><td style="text-align: left">CoreDNS日志出现loop检测</td><td style="text-align: left">检查forward配置</td></tr>
+<tr><td style="text-align: left">kubernetes插件错误</td><td style="text-align: left">日志中kubernetes相关错误</td><td style="text-align: left">检查RBAC权限</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>诊断Corefile语法</strong>:</p>
+<pre><code class="language-bash"># 验证Corefile语法
+kubectl exec -n kube-system deploy/coredns -- coredns -conf /etc/coredns/Corefile -validate
+
+# 查看启动错误
+kubectl logs -n kube-system deploy/coredns | grep -i error
+</code></pre>
+<h3 id="24-dns解析慢"><a class="header" href="#24-dns解析慢">2.4 DNS解析慢</a></h3>
+<p><strong>症状</strong>: DNS查询延迟高(&gt;100ms)</p>
+<p><strong>排查清单</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">检查项</th><th style="text-align: left">正常值</th><th style="text-align: left">检查命令</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">CoreDNS延迟</td><td style="text-align: left">&lt;10ms</td><td style="text-align: left">Prometheus: <code>coredns_dns_request_duration_seconds</code></td></tr>
+<tr><td style="text-align: left">缓存命中率</td><td style="text-align: left">&gt;60%</td><td style="text-align: left">Prometheus: <code>coredns_cache_hits_total / (hits+misses)</code></td></tr>
+<tr><td style="text-align: left">上游延迟</td><td style="text-align: left">&lt;50ms</td><td style="text-align: left"><code>dig @8.8.8.8 example.com +stats</code></td></tr>
+<tr><td style="text-align: left">ndots配置</td><td style="text-align: left">合理</td><td style="text-align: left">外部域名查询次数过多</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>优化方案</strong>:</p>
+<pre><code class="language-yaml"># 1. 增加缓存大小和TTL
+cache {
+    success 50000 3600 60
+    denial 5000 600
+    prefetch 10 1h 10%
+}
+
+# 2. 对于外部域名,使用FQDN
+# 错误: www.google.com (会触发多次search域查询)
+# 正确: www.google.com. (直接查询)
+
+# 3. 减少ndots值 (需要kubelet配置)
+# /var/lib/kubelet/config.yaml
+clusterDNS:
+  - 10.96.0.10
+clusterDomain: cluster.local
+resolvConf: ""
+# 添加Pod DNS Config
+</code></pre>
+<h3 id="25-coredns-crashloopbackoff"><a class="header" href="#25-coredns-crashloopbackoff">2.5 CoreDNS CrashLoopBackOff</a></h3>
+<p><strong>排查步骤</strong>:</p>
+<pre><code class="language-bash"># 1. 查看Pod状态
+kubectl describe pod -n kube-system -l k8s-app=kube-dns
+
+# 2. 查看日志
+kubectl logs -n kube-system -l k8s-app=kube-dns --previous
+
+# 3. 常见原因
+# - Corefile语法错误
+# - ConfigMap未挂载
+# - 端口冲突 (53端口被占用)
+# - 内存不足 (OOM)
+</code></pre>
+<p><strong>常见错误及解决</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">错误日志</th><th style="text-align: left">原因</th><th style="text-align: left">解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>plugin/loop: Loop detected</code></td><td style="text-align: left">DNS转发循环</td><td style="text-align: left">检查forward配置,确保不转发到自己</td></tr>
+<tr><td style="text-align: left"><code>Failed to list *v1.Service</code></td><td style="text-align: left">RBAC权限不足</td><td style="text-align: left">检查ClusterRole/ClusterRoleBinding</td></tr>
+<tr><td style="text-align: left"><code>listen tcp :53: bind: address already in use</code></td><td style="text-align: left">端口冲突</td><td style="text-align: left">检查hostNetwork配置或其他DNS进程</td></tr>
+<tr><td style="text-align: left"><code>OOMKilled</code></td><td style="text-align: left">内存不足</td><td style="text-align: left">增加memory limits</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="三dns调试工具-debug-tools"><a class="header" href="#三dns调试工具-debug-tools">三、DNS调试工具 (Debug Tools)</a></h2>
+<h3 id="31-dig-命令详解"><a class="header" href="#31-dig-命令详解">3.1 dig 命令详解</a></h3>
+<pre><code class="language-bash"># 基本查询
+dig @10.96.0.10 nginx.default.svc.cluster.local
+
+# 指定查询类型
+dig @10.96.0.10 nginx.default.svc.cluster.local A
+dig @10.96.0.10 nginx.default.svc.cluster.local AAAA
+dig @10.96.0.10 _http._tcp.nginx.default.svc.cluster.local SRV
+
+# 简短输出
+dig @10.96.0.10 nginx.default.svc.cluster.local +short
+
+# 详细输出 (含统计)
+dig @10.96.0.10 nginx.default.svc.cluster.local +stats
+
+# 追踪解析路径
+dig @10.96.0.10 nginx.default.svc.cluster.local +trace
+
+# TCP查询 (绕过UDP问题)
+dig @10.96.0.10 nginx.default.svc.cluster.local +tcp
+
+# 反向解析
+dig @10.96.0.10 -x 10.96.0.1
+</code></pre>
+<h3 id="32-nslookup-命令"><a class="header" href="#32-nslookup-命令">3.2 nslookup 命令</a></h3>
+<pre><code class="language-bash"># 基本查询
+nslookup nginx.default.svc.cluster.local 10.96.0.10
+
+# 指定类型
+nslookup -type=SRV _http._tcp.nginx.default.svc.cluster.local 10.96.0.10
+
+# 调试模式
+nslookup -debug nginx.default.svc.cluster.local 10.96.0.10
+</code></pre>
+<h3 id="33-dnsperf-性能测试"><a class="header" href="#33-dnsperf-性能测试">3.3 dnsperf 性能测试</a></h3>
+<pre><code class="language-bash"># 安装
+apt-get install dnsperf
+
+# 创建查询文件
+cat &gt; queries.txt &lt;&lt; EOF
+nginx.default.svc.cluster.local A
+kubernetes.default.svc.cluster.local A
+www.google.com A
+EOF
+
+# 运行测试
+dnsperf -s 10.96.0.10 -d queries.txt -l 30 -c 10 -Q 1000
+
+# 参数说明:
+# -s: DNS服务器
+# -d: 查询文件
+# -l: 测试时长(秒)
+# -c: 并发客户端数
+# -Q: 最大QPS
+</code></pre>
+<h3 id="34-测试pod模板"><a class="header" href="#34-测试pod模板">3.4 测试Pod模板</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-debug
+  namespace: default
+spec:
+  containers:
+  - name: debug
+    image: nicolaka/netshoot
+    command: ["sleep", "infinity"]
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN", "NET_RAW"]
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+---
+# 使用方法:
+# kubectl exec -it dns-debug -- bash
+# dig @10.96.0.10 kubernetes.default.svc.cluster.local
+# nslookup nginx.default 10.96.0.10
+# tcpdump -i any port 53 -nn
+</code></pre>
+<hr>
+<h2 id="四性能优化-performance-optimization"><a class="header" href="#四性能优化-performance-optimization">四、性能优化 (Performance Optimization)</a></h2>
+<h3 id="41-缓存优化"><a class="header" href="#41-缓存优化">4.1 缓存优化</a></h3>
+<p><strong>默认 vs 优化配置对比</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">配置项</th><th style="text-align: left">默认值</th><th style="text-align: left">小型集群</th><th style="text-align: left">大型集群</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">cache TTL</td><td style="text-align: left">30s</td><td style="text-align: left">60s</td><td style="text-align: left">300s</td></tr>
+<tr><td style="text-align: left">success capacity</td><td style="text-align: left">9984</td><td style="text-align: left">10000</td><td style="text-align: left">50000</td></tr>
+<tr><td style="text-align: left">denial capacity</td><td style="text-align: left">9984</td><td style="text-align: left">1000</td><td style="text-align: left">5000</td></tr>
+<tr><td style="text-align: left">prefetch</td><td style="text-align: left">禁用</td><td style="text-align: left"><code>10 1h 10%</code></td><td style="text-align: left"><code>10 1h 20%</code></td></tr>
+<tr><td style="text-align: left">serve_stale</td><td style="text-align: left">禁用</td><td style="text-align: left">禁用</td><td style="text-align: left"><code>1h</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>优化配置示例</strong>:</p>
+<pre><code>cache {
+    success 50000 300 60     # 5万条,最大5分钟,最小1分钟
+    denial 5000 60 30        # 5千条否定缓存
+    prefetch 10 1h 20%       # 剩余20%TTL时预取
+    serve_stale 1h           # 上游故障时服务1小时过期缓存
+}
+</code></pre>
+<h3 id="42-forward优化"><a class="header" href="#42-forward优化">4.2 forward优化</a></h3>
+<pre><code>forward . 8.8.8.8 8.8.4.4 1.1.1.1 {
+    max_concurrent 2000      # 增加并发数(大型集群)
+    policy round_robin       # 负载均衡策略
+    health_check 5s          # 健康检查间隔
+    max_fails 3              # 失败阈值
+    expire 10s               # 连接过期时间
+    prefer_udp               # 优先UDP(更快)
+}
+</code></pre>
+<h3 id="43-kubernetes插件优化"><a class="header" href="#43-kubernetes插件优化">4.3 kubernetes插件优化</a></h3>
+<pre><code>kubernetes cluster.local in-addr.arpa ip6.arpa {
+    pods insecure
+    fallthrough in-addr.arpa ip6.arpa
+    ttl 60                   # 增加TTL(减少API Server压力)
+    noendpoints              # 如果不需要endpoint解析
+}
+</code></pre>
+<h3 id="44-资源配置优化"><a class="header" href="#44-资源配置优化">4.4 资源配置优化</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">集群规模</th><th style="text-align: left">CPU Request</th><th style="text-align: left">CPU Limit</th><th style="text-align: left">Memory Request</th><th style="text-align: left">Memory Limit</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">&lt;50节点</td><td style="text-align: left">100m</td><td style="text-align: left">200m</td><td style="text-align: left">70Mi</td><td style="text-align: left">170Mi</td></tr>
+<tr><td style="text-align: left">50-200节点</td><td style="text-align: left">200m</td><td style="text-align: left">500m</td><td style="text-align: left">128Mi</td><td style="text-align: left">256Mi</td></tr>
+<tr><td style="text-align: left">200-500节点</td><td style="text-align: left">500m</td><td style="text-align: left">1000m</td><td style="text-align: left">256Mi</td><td style="text-align: left">512Mi</td></tr>
+<tr><td style="text-align: left">&gt;500节点</td><td style="text-align: left">1000m</td><td style="text-align: left">2000m</td><td style="text-align: left">512Mi</td><td style="text-align: left">1Gi</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>资源配置示例</strong>:</p>
+<pre><code class="language-yaml">resources:
+  requests:
+    cpu: 200m
+    memory: 128Mi
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+</code></pre>
+<h3 id="45-副本数与hpa"><a class="header" href="#45-副本数与hpa">4.5 副本数与HPA</a></h3>
+<pre><code class="language-yaml">apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: coredns
+  namespace: kube-system
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: coredns
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60    # CPU超过60%扩容
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70    # 内存超过70%扩容
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300    # 缩容稳定期5分钟
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0      # 立即扩容
+      policies:
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+</code></pre>
+<h3 id="46-ndots优化"><a class="header" href="#46-ndots优化">4.6 ndots优化</a></h3>
+<p><strong>问题</strong>: 默认ndots=5导致外部域名查询次数过多</p>
+<p><strong>场景分析</strong>:</p>
+<pre><code>查询: www.google.com (2个点 &lt; 5)
+实际查询序列:
+1. www.google.com.default.svc.cluster.local  → NXDOMAIN
+2. www.google.com.svc.cluster.local          → NXDOMAIN
+3. www.google.com.cluster.local              → NXDOMAIN
+4. www.google.com                            → 成功
+总计: 4次查询 (3次浪费)
+</code></pre>
+<p><strong>优化方案</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">方案</th><th style="text-align: left">配置</th><th style="text-align: left">优点</th><th style="text-align: left">缺点</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>使用FQDN</strong></td><td style="text-align: left"><code>www.google.com.</code></td><td style="text-align: left">无需改配置</td><td style="text-align: left">需修改应用</td></tr>
+<tr><td style="text-align: left"><strong>减少ndots</strong></td><td style="text-align: left"><code>ndots: 2</code></td><td style="text-align: left">减少查询</td><td style="text-align: left">可能影响K8s服务发现</td></tr>
+<tr><td style="text-align: left"><strong>Pod DNS Config</strong></td><td style="text-align: left">见下方</td><td style="text-align: left">精确控制</td><td style="text-align: left">需要配置每个Pod</td></tr>
+<tr><td style="text-align: left"><strong>autopath插件</strong></td><td style="text-align: left">见下方</td><td style="text-align: left">自动优化</td><td style="text-align: left">增加CoreDNS复杂度</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Pod级别DNS配置</strong>:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+  dnsPolicy: ClusterFirst
+  dnsConfig:
+    options:
+    - name: ndots
+      value: "2"           # 减少ndots
+    - name: timeout
+      value: "2"           # 减少超时
+    - name: attempts
+      value: "2"           # 减少重试
+</code></pre>
+<p><strong>autopath插件配置</strong>:</p>
+<pre><code>.:53 {
+    errors
+    health
+    
+    autopath @kubernetes    # 自动优化DNS查询路径
+    
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+    }
+    
+    forward . /etc/resolv.conf
+    cache 30
+    loop
+    reload
+    loadbalance
+}
+</code></pre>
+<hr>
+<h2 id="五监控告警配置-monitoring--alerting"><a class="header" href="#五监控告警配置-monitoring--alerting">五、监控告警配置 (Monitoring &amp; Alerting)</a></h2>
+<h3 id="51-关键指标"><a class="header" href="#51-关键指标">5.1 关键指标</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">指标</th><th style="text-align: left">正常范围</th><th style="text-align: left">告警阈值</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">QPS</td><td style="text-align: left">视集群规模</td><td style="text-align: left">突增3倍</td><td style="text-align: left">DNS查询速率</td></tr>
+<tr><td style="text-align: left">延迟P99</td><td style="text-align: left">&lt;50ms</td><td style="text-align: left">&gt;100ms</td><td style="text-align: left">请求处理延迟</td></tr>
+<tr><td style="text-align: left">错误率</td><td style="text-align: left">&lt;0.1%</td><td style="text-align: left">&gt;1%</td><td style="text-align: left">SERVFAIL/REFUSED比例</td></tr>
+<tr><td style="text-align: left">缓存命中率</td><td style="text-align: left">&gt;60%</td><td style="text-align: left">&lt;50%</td><td style="text-align: left">缓存效率</td></tr>
+<tr><td style="text-align: left">上游延迟</td><td style="text-align: left">&lt;100ms</td><td style="text-align: left">&gt;500ms</td><td style="text-align: left">forward延迟</td></tr>
+<tr><td style="text-align: left">内存使用</td><td style="text-align: left">&lt;80% limits</td><td style="text-align: left">&gt;90% limits</td><td style="text-align: left">内存压力</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-prometheus告警规则"><a class="header" href="#52-prometheus告警规则">5.2 Prometheus告警规则</a></h3>
+<pre><code class="language-yaml">groups:
+- name: coredns.rules
+  rules:
+  # CoreDNS不可用
+  - alert: CoreDNSDown
+    expr: absent(up{job="coredns"} == 1)
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "CoreDNS is down"
+      description: "CoreDNS has been down for more than 5 minutes"
+
+  # 高错误率
+  - alert: CoreDNSHighErrorRate
+    expr: |
+      (
+        sum(rate(coredns_dns_responses_total{rcode=~"SERVFAIL|REFUSED"}[5m]))
+        /
+        sum(rate(coredns_dns_responses_total[5m]))
+      ) &gt; 0.01
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS error rate &gt; 1%"
+      
+  # 高延迟
+  - alert: CoreDNSHighLatency
+    expr: |
+      histogram_quantile(0.99, 
+        sum(rate(coredns_dns_request_duration_seconds_bucket[5m])) by (le)
+      ) &gt; 0.1
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS P99 latency &gt; 100ms"
+      
+  # 低缓存命中率
+  - alert: CoreDNSLowCacheHitRate
+    expr: |
+      (
+        sum(rate(coredns_cache_hits_total[10m]))
+        /
+        (sum(rate(coredns_cache_hits_total[10m])) + sum(rate(coredns_cache_misses_total[10m])))
+      ) &lt; 0.5
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS cache hit rate &lt; 50%"
+      
+  # 上游DNS延迟高
+  - alert: CoreDNSForwardLatencyHigh
+    expr: |
+      histogram_quantile(0.99, 
+        sum(rate(coredns_forward_request_duration_seconds_bucket[5m])) by (le)
+      ) &gt; 0.5
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS forward P99 latency &gt; 500ms"
+      
+  # 内存使用过高
+  - alert: CoreDNSMemoryHigh
+    expr: |
+      (
+        container_memory_working_set_bytes{container="coredns"}
+        /
+        container_spec_memory_limit_bytes{container="coredns"}
+      ) &gt; 0.9
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS memory usage &gt; 90%"
+      
+  # Pod数量低于预期
+  - alert: CoreDNSPodsLow
+    expr: |
+      count(up{job="coredns"} == 1) &lt; 2
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS running pods &lt; 2"
+</code></pre>
+<h3 id="53-日志分析"><a class="header" href="#53-日志分析">5.3 日志分析</a></h3>
+<p><strong>启用详细日志</strong>:</p>
+<pre><code>.:53 {
+    log . "{remote}:{port} - {type} {class} {name} {rcode} {rsize} {duration}"
+    errors
+    # ... 其他配置
+}
+</code></pre>
+<p><strong>日志关键字分析</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">关键字</th><th style="text-align: left">含义</th><th style="text-align: left">处理方式</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>SERVFAIL</code></td><td style="text-align: left">上游错误或配置错误</td><td style="text-align: left">检查forward配置和上游DNS</td></tr>
+<tr><td style="text-align: left"><code>NXDOMAIN</code></td><td style="text-align: left">域名不存在</td><td style="text-align: left">检查服务/配置</td></tr>
+<tr><td style="text-align: left"><code>REFUSED</code></td><td style="text-align: left">拒绝查询</td><td style="text-align: left">检查ACL配置</td></tr>
+<tr><td style="text-align: left"><code>loop detected</code></td><td style="text-align: left">转发循环</td><td style="text-align: left">检查forward目标</td></tr>
+<tr><td style="text-align: left"><code>i/o timeout</code></td><td style="text-align: left">上游超时</td><td style="text-align: left">检查网络/上游DNS</td></tr>
+<tr><td style="text-align: left"><code>plugin/kubernetes</code></td><td style="text-align: left">K8s插件错误</td><td style="text-align: left">检查RBAC/API Server</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="六最佳实践清单-best-practices-checklist"><a class="header" href="#六最佳实践清单-best-practices-checklist">六、最佳实践清单 (Best Practices Checklist)</a></h2>
+<h3 id="61-部署最佳实践"><a class="header" href="#61-部署最佳实践">6.1 部署最佳实践</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">类别</th><th style="text-align: left">检查项</th><th style="text-align: left">推荐配置</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>高可用</strong></td><td style="text-align: left">副本数</td><td style="text-align: left">≥2 (生产环境≥3)</td></tr>
+<tr><td style="text-align: left"><strong>高可用</strong></td><td style="text-align: left">PodDisruptionBudget</td><td style="text-align: left">minAvailable: 1</td></tr>
+<tr><td style="text-align: left"><strong>高可用</strong></td><td style="text-align: left">反亲和</td><td style="text-align: left">分散到不同节点</td></tr>
+<tr><td style="text-align: left"><strong>资源</strong></td><td style="text-align: left">CPU Request</td><td style="text-align: left">100m-500m</td></tr>
+<tr><td style="text-align: left"><strong>资源</strong></td><td style="text-align: left">Memory Request</td><td style="text-align: left">70Mi-256Mi</td></tr>
+<tr><td style="text-align: left"><strong>资源</strong></td><td style="text-align: left">Memory Limit</td><td style="text-align: left">Request的2倍</td></tr>
+<tr><td style="text-align: left"><strong>监控</strong></td><td style="text-align: left">prometheus插件</td><td style="text-align: left">必须启用</td></tr>
+<tr><td style="text-align: left"><strong>监控</strong></td><td style="text-align: left">告警规则</td><td style="text-align: left">覆盖关键指标</td></tr>
+<tr><td style="text-align: left"><strong>健康检查</strong></td><td style="text-align: left">livenessProbe</td><td style="text-align: left">/health:8080</td></tr>
+<tr><td style="text-align: left"><strong>健康检查</strong></td><td style="text-align: left">readinessProbe</td><td style="text-align: left">/ready:8181</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="62-配置最佳实践"><a class="header" href="#62-配置最佳实践">6.2 配置最佳实践</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">类别</th><th style="text-align: left">检查项</th><th style="text-align: left">推荐配置</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>缓存</strong></td><td style="text-align: left">cache插件</td><td style="text-align: left">必须启用</td></tr>
+<tr><td style="text-align: left"><strong>缓存</strong></td><td style="text-align: left">success capacity</td><td style="text-align: left">10000-50000</td></tr>
+<tr><td style="text-align: left"><strong>缓存</strong></td><td style="text-align: left">TTL</td><td style="text-align: left">30-300秒</td></tr>
+<tr><td style="text-align: left"><strong>转发</strong></td><td style="text-align: left">max_concurrent</td><td style="text-align: left">1000-2000</td></tr>
+<tr><td style="text-align: left"><strong>转发</strong></td><td style="text-align: left">health_check</td><td style="text-align: left">5-10秒</td></tr>
+<tr><td style="text-align: left"><strong>转发</strong></td><td style="text-align: left">多上游</td><td style="text-align: left">至少2个</td></tr>
+<tr><td style="text-align: left"><strong>安全</strong></td><td style="text-align: left">loop插件</td><td style="text-align: left">必须启用</td></tr>
+<tr><td style="text-align: left"><strong>安全</strong></td><td style="text-align: left">reload插件</td><td style="text-align: left">推荐启用</td></tr>
+<tr><td style="text-align: left"><strong>kubernetes</strong></td><td style="text-align: left">fallthrough</td><td style="text-align: left">反向解析区域</td></tr>
+<tr><td style="text-align: left"><strong>kubernetes</strong></td><td style="text-align: left">ttl</td><td style="text-align: left">30-60秒</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="63-运维最佳实践"><a class="header" href="#63-运维最佳实践">6.3 运维最佳实践</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">操作</th><th style="text-align: left">最佳实践</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>配置变更</strong></td><td style="text-align: left">先验证语法,再应用,观察日志</td></tr>
+<tr><td style="text-align: left"><strong>升级</strong></td><td style="text-align: left">滚动更新,先测试环境</td></tr>
+<tr><td style="text-align: left"><strong>扩容</strong></td><td style="text-align: left">基于监控指标,使用HPA</td></tr>
+<tr><td style="text-align: left"><strong>备份</strong></td><td style="text-align: left">定期备份ConfigMap</td></tr>
+<tr><td style="text-align: left"><strong>文档</strong></td><td style="text-align: left">记录所有定制配置</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/27-cni-troubleshooting-optimization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/29-egress-traffic-management.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/27-cni-troubleshooting-optimization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/29-egress-traffic-management.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

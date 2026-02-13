@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>133 - Ingress 监控与故障排查 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="133---ingress-监控与故障排查"><a class="header" href="#133---ingress-监控与故障排查">133 - Ingress 监控与故障排查</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一ingress-监控指标"><a class="header" href="#一ingress-监控指标">一、Ingress 监控指标</a></h2>
+<h3 id="11-关键监控指标"><a class="header" href="#11-关键监控指标">1.1 关键监控指标</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>指标类别</th><th>指标名称</th><th>说明</th><th>告警阈值建议</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>可用性</strong></td><td>请求成功率</td><td>2xx/3xx 请求比例</td><td>&lt; 99%</td></tr>
+<tr><td><strong>可用性</strong></td><td>错误率</td><td>4xx/5xx 请求比例</td><td>&gt; 1%</td></tr>
+<tr><td><strong>性能</strong></td><td>请求延迟 (P50)</td><td>50% 请求延迟</td><td>&gt; 100ms</td></tr>
+<tr><td><strong>性能</strong></td><td>请求延迟 (P99)</td><td>99% 请求延迟</td><td>&gt; 1s</td></tr>
+<tr><td><strong>容量</strong></td><td>QPS</td><td>每秒请求数</td><td>接近容量上限</td></tr>
+<tr><td><strong>容量</strong></td><td>并发连接数</td><td>活跃连接数</td><td>接近 max_connections</td></tr>
+<tr><td><strong>资源</strong></td><td>CPU 使用率</td><td>控制器 CPU</td><td>&gt; 80%</td></tr>
+<tr><td><strong>资源</strong></td><td>内存使用率</td><td>控制器内存</td><td>&gt; 80%</td></tr>
+<tr><td><strong>健康</strong></td><td>上游健康状态</td><td>后端服务健康</td><td>有不健康后端</td></tr>
+<tr><td><strong>配置</strong></td><td>配置重载次数</td><td>配置变更频率</td><td>异常频繁</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-nginx-ingress-prometheus-指标"><a class="header" href="#12-nginx-ingress-prometheus-指标">1.2 NGINX Ingress Prometheus 指标</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>指标名称</th><th>类型</th><th>标签</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx_ingress_controller_requests</code></td><td>Counter</td><td>ingress, namespace, status, method, path</td><td>请求总数</td></tr>
+<tr><td><code>nginx_ingress_controller_request_duration_seconds</code></td><td>Histogram</td><td>ingress, namespace, status, method, path</td><td>请求延迟分布</td></tr>
+<tr><td><code>nginx_ingress_controller_request_size</code></td><td>Histogram</td><td>ingress, namespace</td><td>请求大小分布</td></tr>
+<tr><td><code>nginx_ingress_controller_response_size</code></td><td>Histogram</td><td>ingress, namespace</td><td>响应大小分布</td></tr>
+<tr><td><code>nginx_ingress_controller_bytes_sent</code></td><td>Counter</td><td>ingress, namespace</td><td>发送字节总数</td></tr>
+<tr><td><code>nginx_ingress_controller_nginx_process_connections</code></td><td>Gauge</td><td>state</td><td>连接数 (active/reading/writing/waiting)</td></tr>
+<tr><td><code>nginx_ingress_controller_nginx_process_requests_total</code></td><td>Counter</td><td>-</td><td>NGINX 处理请求总数</td></tr>
+<tr><td><code>nginx_ingress_controller_config_hash</code></td><td>Gauge</td><td>-</td><td>配置哈希值</td></tr>
+<tr><td><code>nginx_ingress_controller_config_last_reload_successful</code></td><td>Gauge</td><td>-</td><td>最近配置重载是否成功</td></tr>
+<tr><td><code>nginx_ingress_controller_config_last_reload_successful_timestamp_seconds</code></td><td>Gauge</td><td>-</td><td>最近成功重载时间戳</td></tr>
+<tr><td><code>nginx_ingress_controller_ssl_certificate_info</code></td><td>Gauge</td><td>namespace, secret, host</td><td>证书信息</td></tr>
+<tr><td><code>nginx_ingress_controller_ssl_expire_time_seconds</code></td><td>Gauge</td><td>namespace, secret, host</td><td>证书过期时间</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="13-启用-prometheus-指标"><a class="header" href="#13-启用-prometheus-指标">1.3 启用 Prometheus 指标</a></h3>
+<pre><code class="language-yaml"># NGINX Ingress Controller 启用指标
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-prometheus-metrics: "true"
+  
+---
+# Service 暴露指标端口
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx-controller-metrics
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 10254
+    targetPort: 10254
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/component: controller
+
+---
+# ServiceMonitor (Prometheus Operator)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ingress-nginx-controller
+  namespace: monitoring
+  labels:
+    app: ingress-nginx
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ingress-nginx
+  namespaceSelector:
+    matchNames:
+    - ingress-nginx
+  endpoints:
+  - port: metrics
+    interval: 15s
+    path: /metrics
+</code></pre>
+<hr>
+<h2 id="二grafana-dashboard"><a class="header" href="#二grafana-dashboard">二、Grafana Dashboard</a></h2>
+<h3 id="21-推荐-dashboard"><a class="header" href="#21-推荐-dashboard">2.1 推荐 Dashboard</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Dashboard ID</th><th>名称</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>9614</strong></td><td>NGINX Ingress Controller</td><td>官方推荐 Dashboard</td></tr>
+<tr><td><strong>14314</strong></td><td>Kubernetes Nginx Ingress Prometheus</td><td>详细请求分析</td></tr>
+<tr><td><strong>11875</strong></td><td>Ingress Nginx (Grafana.com)</td><td>社区维护</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="22-关键面板配置"><a class="header" href="#22-关键面板配置">2.2 关键面板配置</a></h3>
+<pre><code class="language-yaml"># 请求成功率
+- title: "请求成功率"
+  query: |
+    sum(rate(nginx_ingress_controller_requests{status=~"2..|3.."}[5m])) 
+    / sum(rate(nginx_ingress_controller_requests[5m])) * 100
+
+# 错误率分布
+- title: "错误率 (按状态码)"
+  query: |
+    sum by (status) (rate(nginx_ingress_controller_requests{status=~"4..|5.."}[5m]))
+
+# 请求延迟 P99
+- title: "请求延迟 P99"
+  query: |
+    histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket[5m])) by (le, ingress))
+
+# QPS
+- title: "QPS (按 Ingress)"
+  query: |
+    sum by (ingress) (rate(nginx_ingress_controller_requests[5m]))
+
+# 连接数
+- title: "连接数"
+  query: |
+    nginx_ingress_controller_nginx_process_connections
+
+# 证书过期时间
+- title: "证书过期剩余时间"
+  query: |
+    (nginx_ingress_controller_ssl_expire_time_seconds - time()) / 86400
+</code></pre>
+<hr>
+<h2 id="三告警规则"><a class="header" href="#三告警规则">三、告警规则</a></h2>
+<h3 id="31-可用性告警"><a class="header" href="#31-可用性告警">3.1 可用性告警</a></h3>
+<pre><code class="language-yaml">apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ingress-availability-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: ingress-availability
+    rules:
+    # Ingress 不可用
+    - alert: IngressControllerDown
+      expr: |
+        absent(nginx_ingress_controller_nginx_process_connections)
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Ingress Controller 不可用"
+        description: "Ingress Controller 无法获取指标，可能已停止运行"
+    
+    # 错误率过高
+    - alert: IngressHighErrorRate
+      expr: |
+        sum(rate(nginx_ingress_controller_requests{status=~"5.."}[5m])) 
+        / sum(rate(nginx_ingress_controller_requests[5m])) &gt; 0.01
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 5xx 错误率过高"
+        description: "Ingress 5xx 错误率: {{ $value | humanizePercentage }}"
+    
+    # 严重错误率
+    - alert: IngressCriticalErrorRate
+      expr: |
+        sum(rate(nginx_ingress_controller_requests{status=~"5.."}[5m])) 
+        / sum(rate(nginx_ingress_controller_requests[5m])) &gt; 0.05
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Ingress 5xx 错误率严重"
+        description: "Ingress 5xx 错误率超过 5%: {{ $value | humanizePercentage }}"
+    
+    # 配置重载失败
+    - alert: IngressConfigReloadFailed
+      expr: |
+        nginx_ingress_controller_config_last_reload_successful == 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 配置重载失败"
+        description: "Ingress Controller 配置重载失败，可能存在配置错误"
+</code></pre>
+<h3 id="32-性能告警"><a class="header" href="#32-性能告警">3.2 性能告警</a></h3>
+<pre><code class="language-yaml">apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ingress-performance-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: ingress-performance
+    rules:
+    # 高延迟告警
+    - alert: IngressHighLatency
+      expr: |
+        histogram_quantile(0.99, sum(rate(nginx_ingress_controller_request_duration_seconds_bucket[5m])) by (le)) &gt; 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress P99 延迟过高"
+        description: "Ingress P99 延迟: {{ $value | humanizeDuration }}"
+    
+    # 连接数过高
+    - alert: IngressHighConnections
+      expr: |
+        nginx_ingress_controller_nginx_process_connections{state="active"} &gt; 10000
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 活跃连接数过高"
+        description: "活跃连接数: {{ $value }}"
+    
+    # CPU 使用率过高
+    - alert: IngressHighCPU
+      expr: |
+        sum(rate(container_cpu_usage_seconds_total{namespace="ingress-nginx",container="controller"}[5m])) 
+        / sum(kube_pod_container_resource_limits{namespace="ingress-nginx",container="controller",resource="cpu"}) &gt; 0.8
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress Controller CPU 使用率过高"
+        description: "CPU 使用率: {{ $value | humanizePercentage }}"
+    
+    # 内存使用率过高
+    - alert: IngressHighMemory
+      expr: |
+        sum(container_memory_working_set_bytes{namespace="ingress-nginx",container="controller"}) 
+        / sum(kube_pod_container_resource_limits{namespace="ingress-nginx",container="controller",resource="memory"}) &gt; 0.8
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress Controller 内存使用率过高"
+        description: "内存使用率: {{ $value | humanizePercentage }}"
+</code></pre>
+<h3 id="33-证书告警"><a class="header" href="#33-证书告警">3.3 证书告警</a></h3>
+<pre><code class="language-yaml">apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ingress-certificate-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: ingress-certificates
+    rules:
+    # 证书即将过期 (30 天)
+    - alert: IngressCertificateExpiringSoon
+      expr: |
+        (nginx_ingress_controller_ssl_expire_time_seconds - time()) &lt; 2592000
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 证书即将过期"
+        description: "证书 {{ $labels.host }} 将在 {{ $value | humanizeDuration }} 后过期"
+    
+    # 证书即将过期 (7 天)
+    - alert: IngressCertificateExpiringCritical
+      expr: |
+        (nginx_ingress_controller_ssl_expire_time_seconds - time()) &lt; 604800
+      for: 1h
+      labels:
+        severity: critical
+      annotations:
+        summary: "Ingress 证书即将过期 (紧急)"
+        description: "证书 {{ $labels.host }} 将在 {{ $value | humanizeDuration }} 后过期，请立即更新！"
+    
+    # 证书已过期
+    - alert: IngressCertificateExpired
+      expr: |
+        nginx_ingress_controller_ssl_expire_time_seconds &lt; time()
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Ingress 证书已过期"
+        description: "证书 {{ $labels.host }} 已过期！"
+</code></pre>
+<hr>
+<h2 id="四日志分析"><a class="header" href="#四日志分析">四、日志分析</a></h2>
+<h3 id="41-访问日志格式"><a class="header" href="#41-访问日志格式">4.1 访问日志格式</a></h3>
+<pre><code class="language-yaml"># ConfigMap 配置 JSON 格式日志
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  log-format-escape-json: "true"
+  log-format-upstream: |
+    {
+      "time": "$time_iso8601",
+      "remote_addr": "$remote_addr",
+      "x_forwarded_for": "$proxy_add_x_forwarded_for",
+      "request_id": "$req_id",
+      "remote_user": "$remote_user",
+      "bytes_sent": $bytes_sent,
+      "request_time": $request_time,
+      "status": $status,
+      "vhost": "$host",
+      "request_proto": "$server_protocol",
+      "path": "$uri",
+      "request_query": "$args",
+      "request_length": $request_length,
+      "duration": $request_time,
+      "method": "$request_method",
+      "http_referrer": "$http_referer",
+      "http_user_agent": "$http_user_agent",
+      "upstream_addr": "$upstream_addr",
+      "upstream_response_time": "$upstream_response_time",
+      "upstream_response_length": "$upstream_response_length",
+      "upstream_status": "$upstream_status"
+    }
+</code></pre>
+<h3 id="42-日志收集配置-fluent-bit"><a class="header" href="#42-日志收集配置-fluent-bit">4.2 日志收集配置 (Fluent Bit)</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: logging
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush         1
+        Log_Level     info
+        Daemon        off
+        Parsers_File  parsers.conf
+
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/ingress-nginx-controller*.log
+        Parser            docker
+        Tag               ingress.*
+        Refresh_Interval  5
+        Mem_Buf_Limit     5MB
+
+    [FILTER]
+        Name          parser
+        Match         ingress.*
+        Key_Name      log
+        Parser        json
+        Reserve_Data  True
+
+    [OUTPUT]
+        Name            es
+        Match           ingress.*
+        Host            elasticsearch.logging.svc.cluster.local
+        Port            9200
+        Index           ingress-logs
+        Type            _doc
+
+  parsers.conf: |
+    [PARSER]
+        Name        docker
+        Format      json
+        Time_Key    time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L
+
+    [PARSER]
+        Name        json
+        Format      json
+</code></pre>
+<h3 id="43-日志查询示例-elasticsearchkibana"><a class="header" href="#43-日志查询示例-elasticsearchkibana">4.3 日志查询示例 (Elasticsearch/Kibana)</a></h3>
+<pre><code class="language-json">// 查询 5xx 错误
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "range": { "status": { "gte": 500, "lt": 600 } } },
+        { "range": { "@timestamp": { "gte": "now-1h" } } }
+      ]
+    }
+  },
+  "sort": [{ "@timestamp": "desc" }]
+}
+
+// 查询高延迟请求
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "range": { "request_time": { "gte": 1 } } },
+        { "range": { "@timestamp": { "gte": "now-1h" } } }
+      ]
+    }
+  }
+}
+
+// 按 URI 聚合错误
+{
+  "size": 0,
+  "query": {
+    "range": { "status": { "gte": 400 } }
+  },
+  "aggs": {
+    "by_uri": {
+      "terms": { "field": "path.keyword", "size": 20 }
+    }
+  }
+}
+</code></pre>
+<hr>
+<h2 id="五故障排查指南"><a class="header" href="#五故障排查指南">五、故障排查指南</a></h2>
+<h3 id="51-常见故障诊断流程"><a class="header" href="#51-常见故障诊断流程">5.1 常见故障诊断流程</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           Ingress 故障诊断流程                                   │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │  Step 1: 确认症状                                                         │  │
+│  │  - 完全无法访问？                                                         │  │
+│  │  - 部分请求失败？                                                         │  │
+│  │  - 响应缓慢？                                                            │  │
+│  │  - 证书错误？                                                            │  │
+│  └─────────────────────────────────┬────────────────────────────────────────┘  │
+│                                    │                                           │
+│                                    ▼                                           │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │  Step 2: 检查 Ingress Controller                                         │  │
+│  │  kubectl get pods -n ingress-nginx                                       │  │
+│  │  kubectl describe pod -n ingress-nginx &lt;pod-name&gt;                        │  │
+│  │  kubectl logs -n ingress-nginx &lt;pod-name&gt;                                │  │
+│  └─────────────────────────────────┬────────────────────────────────────────┘  │
+│                                    │                                           │
+│                                    ▼                                           │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │  Step 3: 检查 Ingress 资源                                                │  │
+│  │  kubectl get ingress -A                                                  │  │
+│  │  kubectl describe ingress &lt;name&gt;                                         │  │
+│  │  kubectl get events --field-selector involvedObject.name=&lt;ingress&gt;       │  │
+│  └─────────────────────────────────┬────────────────────────────────────────┘  │
+│                                    │                                           │
+│                                    ▼                                           │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │  Step 4: 检查后端服务                                                     │  │
+│  │  kubectl get svc,endpoints &lt;service-name&gt;                                │  │
+│  │  kubectl get pods -l &lt;service-selector&gt;                                  │  │
+│  │  kubectl exec -it &lt;pod&gt; -- curl localhost:&lt;port&gt;/health                 │  │
+│  └─────────────────────────────────┬────────────────────────────────────────┘  │
+│                                    │                                           │
+│                                    ▼                                           │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │  Step 5: 检查网络连通性                                                   │  │
+│  │  kubectl exec -n ingress-nginx &lt;pod&gt; -- curl &lt;service&gt;.&lt;ns&gt;.svc:port    │  │
+│  │  kubectl run tmp --rm -it --image=nicolaka/netshoot -- /bin/bash        │  │
+│  └──────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="52-常见问题与解决方案"><a class="header" href="#52-常见问题与解决方案">5.2 常见问题与解决方案</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>问题</th><th>症状</th><th>可能原因</th><th>诊断命令</th><th>解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>502 Bad Gateway</strong></td><td>请求返回 502</td><td>后端服务不可达</td><td><code>kubectl get endpoints</code></td><td>检查后端 Pod 状态</td></tr>
+<tr><td><strong>503 Service Unavailable</strong></td><td>请求返回 503</td><td>无可用后端</td><td><code>kubectl get pods -l app=xxx</code></td><td>扩容或修复后端</td></tr>
+<tr><td><strong>504 Gateway Timeout</strong></td><td>请求超时</td><td>后端响应过慢</td><td>查看 upstream_response_time</td><td>增加超时或优化后端</td></tr>
+<tr><td><strong>404 Not Found</strong></td><td>路径不存在</td><td>Ingress 规则不匹配</td><td><code>kubectl describe ingress</code></td><td>检查 path 配置</td></tr>
+<tr><td><strong>证书错误</strong></td><td>HTTPS 握手失败</td><td>证书过期/不匹配</td><td><code>openssl s_client</code></td><td>更新证书</td></tr>
+<tr><td><strong>重定向循环</strong></td><td>ERR_TOO_MANY_REDIRECTS</td><td>配置冲突</td><td>检查 ssl-redirect</td><td>调整重定向配置</td></tr>
+<tr><td><strong>配置不生效</strong></td><td>新规则无效</td><td>配置重载失败</td><td>检查 controller 日志</td><td>修复配置语法</td></tr>
+<tr><td><strong>高延迟</strong></td><td>响应缓慢</td><td>资源不足/后端慢</td><td>检查 Prometheus 指标</td><td>扩容/优化</td></tr>
+<tr><td><strong>连接拒绝</strong></td><td>Connection refused</td><td>控制器未运行</td><td><code>kubectl get pods</code></td><td>重启控制器</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="53-诊断命令速查"><a class="header" href="#53-诊断命令速查">5.3 诊断命令速查</a></h3>
+<pre><code class="language-bash"># ========== Ingress Controller 检查 ==========
+# 查看控制器 Pod 状态
+kubectl get pods -n ingress-nginx -o wide
+
+# 查看控制器日志
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller --tail=100 -f
+
+# 查看控制器详情
+kubectl describe pod -n ingress-nginx -l app.kubernetes.io/component=controller
+
+# 检查 NGINX 配置
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- cat /etc/nginx/nginx.conf
+
+# 检查特定 server 配置
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- cat /etc/nginx/nginx.conf | grep -A 50 "server_name example.com"
+
+# 测试 NGINX 配置语法
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- nginx -t
+
+# 查看 NGINX 进程状态
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- ps aux
+
+# ========== Ingress 资源检查 ==========
+# 列出所有 Ingress
+kubectl get ingress -A -o wide
+
+# 查看 Ingress 详情
+kubectl describe ingress &lt;ingress-name&gt; -n &lt;namespace&gt;
+
+# 查看 Ingress YAML
+kubectl get ingress &lt;ingress-name&gt; -n &lt;namespace&gt; -o yaml
+
+# 查看 IngressClass
+kubectl get ingressclass
+
+# 查看 Ingress 事件
+kubectl get events --field-selector involvedObject.kind=Ingress
+
+# ========== 后端服务检查 ==========
+# 检查 Service 和 Endpoints
+kubectl get svc,endpoints &lt;service-name&gt; -n &lt;namespace&gt;
+
+# 检查 Pod 状态
+kubectl get pods -l &lt;selector&gt; -n &lt;namespace&gt; -o wide
+
+# 测试后端连通性
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- curl -v http://&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local:&lt;port&gt;/
+
+# 从临时 Pod 测试
+kubectl run tmp-debug --rm -it --image=curlimages/curl -- curl -v http://&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local:&lt;port&gt;/
+
+# ========== TLS/证书检查 ==========
+# 查看证书 Secret
+kubectl get secret &lt;tls-secret&gt; -n &lt;namespace&gt; -o yaml
+
+# 验证证书内容
+kubectl get secret &lt;tls-secret&gt; -n &lt;namespace&gt; -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text -noout
+
+# 检查证书有效期
+kubectl get secret &lt;tls-secret&gt; -n &lt;namespace&gt; -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -dates -noout
+
+# 测试 HTTPS 连接
+curl -vI https://&lt;domain&gt; 2&gt;&amp;1 | grep -E "SSL|subject|issuer|expire"
+
+# 检查 SNI
+openssl s_client -connect &lt;domain&gt;:443 -servername &lt;domain&gt; 2&gt;/dev/null | openssl x509 -noout -text
+
+# ========== 网络排查 ==========
+# DNS 解析测试
+kubectl run tmp-dns --rm -it --image=busybox -- nslookup &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local
+
+# 端口连通性测试
+kubectl run tmp-nc --rm -it --image=nicolaka/netshoot -- nc -zv &lt;service&gt; &lt;port&gt;
+
+# 完整网络诊断
+kubectl run tmp-netshoot --rm -it --image=nicolaka/netshoot -- /bin/bash
+# 在容器内执行:
+# curl -v http://service.namespace.svc.cluster.local:port/
+# traceroute service.namespace.svc.cluster.local
+# dig service.namespace.svc.cluster.local
+
+# ========== 性能排查 ==========
+# 查看控制器资源使用
+kubectl top pod -n ingress-nginx
+
+# 查看 NGINX 连接状态
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- curl -s localhost:10246/nginx_status
+
+# 查看 Prometheus 指标
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- curl -s localhost:10254/metrics | grep nginx_ingress
+
+# ========== 配置验证 ==========
+# 验证 Ingress 配置 (dry-run)
+kubectl apply -f ingress.yaml --dry-run=server
+
+# 使用 ingress-nginx 验证器
+kubectl exec -n ingress-nginx &lt;controller-pod&gt; -- /nginx-ingress-controller --validate-config
+</code></pre>
+<h3 id="54-http-状态码故障排查"><a class="header" href="#54-http-状态码故障排查">5.4 HTTP 状态码故障排查</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>状态码</th><th>描述</th><th>常见原因</th><th>排查步骤</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>400</strong></td><td>Bad Request</td><td>请求格式错误、Header 过大</td><td>检查请求、增大 buffer</td></tr>
+<tr><td><strong>401</strong></td><td>Unauthorized</td><td>认证失败</td><td>检查 auth 配置和凭证</td></tr>
+<tr><td><strong>403</strong></td><td>Forbidden</td><td>IP 黑名单、ACL 限制</td><td>检查白名单和 WAF</td></tr>
+<tr><td><strong>404</strong></td><td>Not Found</td><td>路径不匹配</td><td>检查 Ingress path 配置</td></tr>
+<tr><td><strong>413</strong></td><td>Payload Too Large</td><td>请求体过大</td><td>增大 proxy-body-size</td></tr>
+<tr><td><strong>429</strong></td><td>Too Many Requests</td><td>限流触发</td><td>检查限流配置</td></tr>
+<tr><td><strong>499</strong></td><td>Client Closed Request</td><td>客户端提前关闭</td><td>检查客户端超时</td></tr>
+<tr><td><strong>500</strong></td><td>Internal Server Error</td><td>后端错误</td><td>检查后端应用日志</td></tr>
+<tr><td><strong>502</strong></td><td>Bad Gateway</td><td>后端不可达</td><td>检查后端 Pod/Service</td></tr>
+<tr><td><strong>503</strong></td><td>Service Unavailable</td><td>无可用后端</td><td>检查 Endpoints</td></tr>
+<tr><td><strong>504</strong></td><td>Gateway Timeout</td><td>后端超时</td><td>增加超时或优化后端</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="六分布式追踪"><a class="header" href="#六分布式追踪">六、分布式追踪</a></h2>
+<h3 id="61-启用-opentracing"><a class="header" href="#61-启用-opentracing">6.1 启用 OpenTracing</a></h3>
+<pre><code class="language-yaml"># ConfigMap 配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 启用 OpenTracing
+  enable-opentracing: "true"
+  # Jaeger 配置
+  jaeger-collector-host: jaeger-collector.tracing.svc.cluster.local
+  jaeger-service-name: nginx-ingress
+  jaeger-sampler-type: const
+  jaeger-sampler-param: "1"
+</code></pre>
+<h3 id="62-请求追踪配置"><a class="header" href="#62-请求追踪配置">6.2 请求追踪配置</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traced-ingress
+  annotations:
+    # 启用追踪
+    nginx.ingress.kubernetes.io/enable-opentracing: "true"
+    # 信任入站 span
+    nginx.ingress.kubernetes.io/opentracing-trust-incoming-span: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="63-传递请求-id"><a class="header" href="#63-传递请求-id">6.3 传递请求 ID</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 生成请求 ID
+  generate-request-id: "true"
+  
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: request-id-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # 传递请求 ID 到后端
+      proxy_set_header X-Request-ID $req_id;
+      # 在响应中返回请求 ID
+      add_header X-Request-ID $req_id always;
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="七健康检查与自愈"><a class="header" href="#七健康检查与自愈">七、健康检查与自愈</a></h2>
+<h3 id="71-控制器健康检查"><a class="header" href="#71-控制器健康检查">7.1 控制器健康检查</a></h3>
+<pre><code class="language-yaml"># 控制器健康检查端点
+# /healthz - 存活检查
+# /readyz - 就绪检查
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+spec:
+  template:
+    spec:
+      containers:
+      - name: controller
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+</code></pre>
+<h3 id="72-后端健康检查"><a class="header" href="#72-后端健康检查">7.2 后端健康检查</a></h3>
+<pre><code class="language-yaml"># 通过注解配置后端健康检查
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: healthcheck-ingress
+  annotations:
+    # 健康检查路径
+    nginx.ingress.kubernetes.io/healthcheck-path: "/health"
+    # 自定义 upstream 配置
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="八性能调优"><a class="header" href="#八性能调优">八、性能调优</a></h2>
+<h3 id="81-性能调优参数"><a class="header" href="#81-性能调优参数">8.1 性能调优参数</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>参数</th><th>默认值</th><th>调优建议</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>worker-processes</code></td><td>auto</td><td>CPU 核数</td><td>工作进程数</td></tr>
+<tr><td><code>worker-connections</code></td><td>16384</td><td>65535</td><td>单进程最大连接</td></tr>
+<tr><td><code>keep-alive</code></td><td>75</td><td>75</td><td>Keep-alive 超时</td></tr>
+<tr><td><code>keep-alive-requests</code></td><td>1000</td><td>10000</td><td>单连接最大请求</td></tr>
+<tr><td><code>upstream-keepalive-connections</code></td><td>320</td><td>320-1000</td><td>上游连接池</td></tr>
+<tr><td><code>proxy-buffer-size</code></td><td>4k</td><td>16k</td><td>代理缓冲区</td></tr>
+<tr><td><code>proxy-buffers-number</code></td><td>4</td><td>8</td><td>缓冲区数量</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="82-高性能配置示例"><a class="header" href="#82-高性能配置示例">8.2 高性能配置示例</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 工作进程
+  worker-processes: "auto"
+  worker-cpu-affinity: "auto"
+  worker-shutdown-timeout: "300s"
+  
+  # 连接配置
+  max-worker-connections: "65535"
+  max-worker-open-files: "65535"
+  
+  # Keep-alive
+  keep-alive: "75"
+  keep-alive-requests: "10000"
+  upstream-keepalive-connections: "500"
+  upstream-keepalive-requests: "10000"
+  upstream-keepalive-timeout: "60"
+  
+  # 缓冲区
+  proxy-buffer-size: "16k"
+  proxy-buffers-number: "8"
+  proxy-body-size: "100m"
+  
+  # 压缩
+  use-gzip: "true"
+  gzip-level: "5"
+  gzip-min-length: "1000"
+  gzip-types: "application/json application/javascript text/css text/plain"
+  
+  # HTTP/2
+  use-http2: "true"
+  
+  # 日志
+  access-log-path: "/var/log/nginx/access.log"
+  error-log-level: "warn"
+</code></pre>
+<hr>
+<p><strong>监控与排查原则</strong>: 完善指标 → 主动告警 → 快速定位 → 根因分析</p>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/24-ingress-security-hardening.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/26-ingress-production-best-practices.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/24-ingress-security-hardening.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/26-ingress-production-best-practices.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

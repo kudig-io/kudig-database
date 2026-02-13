@@ -1,4 +1,4 @@
-[book]
+﻿[book]
 title = "KUDIG-DATABASE - Kubernetes 生产运维全域知识库"
 authors = ["KUDIG Team"]
 description = "面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库"
@@ -13,7 +13,7 @@ create-missing = false
 default-theme = "navy"
 preferred-dark-theme = "navy"
 git-repository-url = "https://github.com/kudig-io/kudig-database"
-site-url = "/kudig-database/"
+site-url = "/"
 additional-css = ["theme/custom.css"]
 additional-js = ["theme/collapse-all.js"]
 
