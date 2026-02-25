@@ -28,7 +28,7 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 准入控制流程
 
@@ -100,7 +100,7 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -225,7 +225,7 @@ kubectl exec -n <namespace> <pod> -- nc -zv <webhook-service> <port>
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 Webhook 连接失败
 

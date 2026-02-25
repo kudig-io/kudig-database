@@ -28,6 +28,46 @@
 
 ---
 
+## 问题现象与影响分析
+
+### 常见问题现象
+
+- **Gateway 未就绪**：`Programmed=False` 或 `Accepted=False`，通常是控制器或底层 LB 资源异常。
+- **Route 未绑定**：`Accepted=False` 或 `ResolvedRefs=False`，多为 ParentRef/ReferenceGrant 配置问题。
+- **TLS/证书失败**：Listener 绑定 Secret 不存在或证书链不完整。
+- **后端不可用**：Service/Endpoints 不健康导致 502/503。
+
+### 影响面分析
+
+- **入口流量失败**：网关无法接收或转发请求，产生大面积 5xx。
+- **多租户隔离破坏**：ReferenceGrant 配置错误导致跨命名空间访问异常。
+- **证书风险**：TLS 配置错误导致握手失败或安全降级。
+
+## 排查方法与步骤
+
+1. **确认 GatewayClass/Gateway 状态**：检查 `Accepted/Programmed` 条件是否为 True。
+2. **核对 Route 绑定状态**：查看 `parents` 条件，确认 ParentRef 指向正确。
+3. **检查跨命名空间授权**：确认 `ReferenceGrant` 是否存在且匹配。
+4. **验证后端健康**：核对 Service/Endpoints/探针与健康检查结果。
+5. **检查 TLS/HTTP2**：确认证书 Secret 与 Listener 协议配置一致。
+6. **修复验证**：回归访问测试与控制器日志，确认状态恢复。
+
+## 解决方案与风险控制
+
+### 常见修复策略
+
+- **Programmed 失败**：排查控制器与底层 LB 资源，必要时扩容控制器。
+- **Route 未绑定**：修正 ParentRef 与 AllowedRoutes，补齐 `ReferenceGrant`。
+- **TLS 失败**：更新证书 Secret，确保证书链和主机名一致。
+
+### 风险控制与回滚
+
+- **变更前**：备份 Gateway/Route 配置与控制器日志快照。
+- **回滚策略**：撤销最近 Route 变更或恢复旧 Listener 配置。
+- **验证**：使用 `curl`/`openssl` 验证证书与返回码，确认流量恢复。
+
+---
+
 ## 1. 核心架构与设计哲学
 
 ### 1.1 面向角色的解耦 (Role-based Model)

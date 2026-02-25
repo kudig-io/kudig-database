@@ -22,11 +22,17 @@
    - 对升级失败节点回滚到稳定版本后再排查。
 7. **证据留存**：保存 upgrade plan、/readyz 输出、etcd 状态与节点事件。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 集群升级架构与流程
+### 集群升级架构与流程
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -92,9 +98,9 @@
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 常见问题现象
+### 常见问题现象
 
-#### 1.2.1 集群升级问题
+#### 集群升级问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -106,7 +112,7 @@
 | 证书过期 | `certificate has expired` | kubeadm | kubeadm certs check-expiration |
 | 配置不兼容 | `unknown flag` / `invalid config` | 组件日志 | journalctl |
 
-#### 1.2.2 节点管理问题
+#### 节点管理问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -117,7 +123,7 @@
 | 节点证书过期 | `certificate expired` | kubelet | kubelet 日志 |
 | 节点无法删除 | `node has finalizers` | kubectl | kubectl describe node |
 
-#### 1.2.3 备份恢复问题
+#### 备份恢复问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -126,7 +132,7 @@
 | 数据目录冲突 | `data-dir already exists` | etcdctl | etcdctl 输出 |
 | 集群成员不一致 | `member count mismatch` | etcdctl | etcdctl member list |
 
-### 1.3 报错查看方式汇总
+### 报错查看方式汇总
 
 ```bash
 # 集群版本信息
@@ -163,7 +169,7 @@ kubectl get nodes
 kubectl describe node <node-name>
 ```
 
-### 1.4 影响面分析
+### 影响面分析
 
 | 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |----------|----------|----------|----------|
@@ -176,9 +182,9 @@ kubectl describe node <node-name>
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 集群运维问题
@@ -236,9 +242,9 @@ kubectl describe node <node-name>
                     └─► 快照损坏 ──► 使用其他备份
 ```
 
-### 2.2 排查命令集
+### 排查命令集
 
-#### 2.2.1 升级前检查
+#### 升级前检查
 
 ```bash
 # 检查当前版本
@@ -268,7 +274,7 @@ kubectl get nodes
 kubectl top nodes
 ```
 
-#### 2.2.2 控制平面升级
+#### 控制平面升级
 
 ```bash
 # 查看可用版本
@@ -302,7 +308,7 @@ systemctl daemon-reload
 systemctl restart kubelet
 ```
 
-#### 2.2.3 节点维护
+#### 节点维护
 
 ```bash
 # 禁止调度
@@ -335,7 +341,7 @@ kubeadm token create --print-join-command
 kubeadm join <api-server>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
-#### 2.2.4 etcd 备份恢复
+#### etcd 备份恢复
 
 ```bash
 # 设置环境变量
@@ -372,7 +378,7 @@ mv /tmp/*.yaml /etc/kubernetes/manifests/
 kubectl get nodes
 ```
 
-### 2.3 排查注意事项
+### 排查注意事项
 
 | 注意项 | 说明 | 风险 |
 |--------|------|------|
@@ -385,11 +391,11 @@ kubectl get nodes
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 升级失败回滚
+### 升级失败回滚
 
-#### 3.1.1 控制平面回滚
+#### 控制平面回滚
 
 ```bash
 # 如果升级过程中失败，etcd 数据未损坏
@@ -409,7 +415,7 @@ systemctl restart kubelet
 # 参考 etcd 恢复步骤
 ```
 
-#### 3.1.2 使用 etcd 备份完整回滚
+#### 使用 etcd 备份完整回滚
 
 ```bash
 # 1. 停止所有控制平面节点的控制平面组件
@@ -436,9 +442,9 @@ kubectl get nodes
 kubectl get pods -A
 ```
 
-### 3.2 节点 drain 卡住解决
+### 节点 drain 卡住解决
 
-#### 3.2.1 诊断原因
+#### 诊断原因
 
 ```bash
 # 检查哪些 Pod 阻止了 drain
@@ -451,7 +457,7 @@ kubectl get pdb -A
 kubectl get pdb -A -o jsonpath='{range .items[*]}{.metadata.name}: {.status.disruptionsAllowed}{"\n"}{end}'
 ```
 
-#### 3.2.2 解决方案
+#### 解决方案
 
 ```bash
 # 方案 1：使用更强的 drain 选项
@@ -476,9 +482,9 @@ kubectl delete pod <pod-name> --grace-period=30
 kubectl patch pod <pod-name> -p '{"metadata":{"finalizers":null}}'
 ```
 
-### 3.3 证书过期处理
+### 证书过期处理
 
-#### 3.3.1 检查和续期
+#### 检查和续期
 
 ```bash
 # 检查证书有效期
@@ -503,7 +509,7 @@ mv kube-scheduler.yaml /tmp/ && sleep 5 && mv /tmp/kube-scheduler.yaml .
 cp /etc/kubernetes/admin.conf ~/.kube/config
 ```
 
-#### 3.3.2 kubelet 证书续期
+#### kubelet 证书续期
 
 ```bash
 # 检查 kubelet 证书
@@ -523,7 +529,7 @@ kubectl get csr | grep Pending
 kubectl certificate approve <csr-name>
 ```
 
-### 3.4 升级检查清单
+### 升级检查清单
 
 ```bash
 # 升级前检查脚本
@@ -557,7 +563,7 @@ df -h /var/lib/etcd /var/lib/kubelet
 echo "=== 检查完成 ==="
 ```
 
-### 3.5 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险描述 | 防护措施 |
 |------|----------|----------|----------|
@@ -585,7 +591,7 @@ echo "=== 检查完成 ==="
 
 ## 附录
 
-### A. 版本倾斜策略速查
+### 版本倾斜策略速查
 
 | 组件 | 与 kube-apiserver 版本关系 | 示例 |
 |------|------------------------------|------|
@@ -597,7 +603,7 @@ echo "=== 检查完成 ==="
 | kube-proxy | 同版本或低 2 个次版本 | 1.28, 1.27, 或 1.26 |
 | kubectl | ±1 个次版本 | 1.29, 1.28, 或 1.27 |
 
-### B. 升级检查清单
+### 升级检查清单
 
 **升级前**:
 - [ ] 已备份 etcd (验证备份可用)
@@ -622,7 +628,7 @@ echo "=== 检查完成 ==="
 - [ ] 监控告警正常
 - [ ] 已更新文档记录
 
-### C. 常用命令速查
+### 常用命令速查
 
 ```bash
 # 版本检查
@@ -654,7 +660,7 @@ kubeadm token list
 kubeadm token create --print-join-command
 ```
 
-### D. 故障恢复联系清单
+### 故障恢复联系清单
 
 遇到以下情况建议立即升级处理：
 - etcd 数据损坏或不可用

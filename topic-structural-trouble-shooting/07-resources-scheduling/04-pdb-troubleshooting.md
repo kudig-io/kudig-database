@@ -20,11 +20,17 @@
    - 启用 `unhealthyPodEvictionPolicy: AlwaysAllow`（v1.27+）。
 6. **证据留存**：保存 PDB 描述、Pod 就绪状态与 drain 输出。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 PodDisruptionBudget 工作原理
+### PodDisruptionBudget 工作原理
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -119,7 +125,7 @@ PDB 状态计算:
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 常见问题现象
+### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息 | 查看方式 |
 |----------|----------|----------|----------|
@@ -132,7 +138,7 @@ PDB 状态计算:
 | 状态不更新 | disruptionsAllowed 不正确 | 无 | kubectl get pdb |
 | 冲突配置 | 多个 PDB 匹配同一 Pod | multiple PDBs | kubectl describe |
 
-### 1.3 影响分析
+### 影响分析
 
 | 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |----------|----------|----------|----------|
@@ -141,9 +147,9 @@ PDB 状态计算:
 | 保护不足 | 服务中断 | 用户影响 | 业务可用性 |
 | 配置错误 | PDB 无效 | 失去保护 | 特定应用 |
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 PDB 问题
@@ -274,7 +280,7 @@ kubectl get pods -A --field-selector spec.nodeName=<node>
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --disable-eviction
 ```
 
-### 2.3 排查注意事项
+### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
 |----------|------|----------|
@@ -284,9 +290,9 @@ kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --disable-evicti
 | 多个 PDB 匹配同一 Pod | 所有 PDB 都必须满足 | 中 |
 | PDB 不保护非自愿中断 | OOM/节点故障不受保护 | - |
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 kubectl drain 卡住
+### kubectl drain 卡住
 
 **问题现象**：`kubectl drain` 一直等待，无法完成。
 
@@ -332,7 +338,7 @@ kubectl logs <unhealthy-pod>
 # 解决: 增加副本数到至少 2，或使用 maxUnavailable: 1
 ```
 
-### 3.2 PDB selector 不匹配
+### PDB selector 不匹配
 
 **问题现象**：PDB 创建但未保护任何 Pod，expectedPods = 0。
 
@@ -386,7 +392,7 @@ spec:
       app: my-app      # ← 必须与 Pod 标签匹配
 ```
 
-### 3.3 滚动更新受 PDB 阻塞
+### 滚动更新受 PDB 阻塞
 
 **问题现象**：Deployment 滚动更新非常慢或卡住。
 
@@ -442,7 +448,7 @@ spec:
   maxUnavailable: 1      # 等效于 minAvailable: 2 (当 3 副本时)
 ```
 
-### 3.4 过度保护导致运维困难
+### 过度保护导致运维困难
 
 **问题现象**：合法的运维操作（升级、维护）被 PDB 阻止。
 
@@ -484,7 +490,7 @@ spec:
       app: my-app
 ```
 
-### 3.5 多个 PDB 匹配同一 Pod
+### 多个 PDB 匹配同一 Pod
 
 **问题现象**：Pod 被多个 PDB 匹配，驱逐行为不符合预期。
 
@@ -534,7 +540,7 @@ spec:
       component: worker  # 不同的组件标签
 ```
 
-### 3.6 紧急情况绕过 PDB
+### 紧急情况绕过 PDB
 
 **问题现象**：紧急需要排空节点但 PDB 阻止。
 
@@ -565,7 +571,7 @@ kubectl delete pod <pod-name> -n <namespace>
 # 注意: 这不会触发 PDB 检查，但也不会优雅终止
 ```
 
-### 3.7 PDB 与 Cluster Autoscaler 冲突
+### PDB 与 Cluster Autoscaler 冲突
 
 **问题现象**：CA 无法缩容节点，因为 PDB 阻止驱逐。
 
@@ -602,7 +608,7 @@ spec:
       app: my-app
 ```
 
-### 3.8 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 潜在风险 | 建议措施 |
 |------|----------|----------|----------|

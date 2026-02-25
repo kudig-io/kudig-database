@@ -26,6 +26,46 @@
 
 ---
 
+## 问题现象与影响分析
+
+### 常见问题现象
+
+- **策略未生效**：NetworkPolicy 已创建但流量仍可自由访问（通常是 CNI 不支持或策略未命中）。
+- **误拦截**：业务 Pod 间通信超时或 5xx，DNS 解析失败或监控抓取中断。
+- **跨命名空间访问失败**：`namespaceSelector` 标签缺失导致 `Resolved` 为空。
+- **HostNetwork 逃逸**：Ingress Controller 使用 `hostNetwork`，策略无法限制。
+
+### 影响面分析
+
+- **业务可用性**：关键服务调用超时、请求失败、告警风暴。
+- **可观测性**：监控抓取/日志采集被阻断，形成排障盲区。
+- **安全性**：策略遗漏导致隔离失效或跨命名空间暴露。
+
+## 排查方法与步骤
+
+1. **确认策略是否命中 Pod**：`kubectl get netpol -A`，核对 `podSelector` 与目标 Pod 标签匹配情况。
+2. **检查命名空间标签**：`kubectl get ns --show-labels`，确认 `namespaceSelector` 所需标签存在。
+3. **验证连通性与错误类型**：用 `netshoot` 进行 `curl`/`nc` 测试，区分超时（Drop）与拒绝（Reject）。
+4. **确认 CNI 下发规则**：查看 CNI Agent 日志与规则快照（iptables/eBPF），确认策略已生效。
+5. **核对 DNS 放行**：确认 53/UDP 与 53/TCP 到 `kube-system` 放行策略存在。
+6. **验证修复结果**：回归测试关键路径与监控抓取，确认告警恢复。
+
+## 解决方案与风险控制
+
+### 常见修复策略
+
+- **策略未生效**：切换到支持 NetworkPolicy 的 CNI（如 Calico/Cilium）或修复 CNI Agent 异常。
+- **误拦截**：补齐 DNS/监控/健康检查放行规则，缩小 `podSelector` 范围。
+- **跨命名空间问题**：补充 `ReferenceGrant`/命名空间标签，确保选择器命中。
+
+### 风险控制与回滚
+
+- **变更前**：导出当前策略 YAML 并保存连通性基线。
+- **回滚策略**：临时删除新增策略或应用最小化放行策略，快速恢复核心流量。
+- **验证**：`kubectl get netpol -A` 确认策略状态，配合连通性测试与监控面板验证。
+
+---
+
 ## 1. 核心原理与底层机制
 
 ### 1.1 NetworkPolicy 的声明式本质

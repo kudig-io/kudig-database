@@ -22,11 +22,17 @@
    - 临时禁用 webhook（谨慎）以恢复核心操作。
 7. **证据留存**：保存 CRD/CR 状态、Operator 日志与 webhook 配置。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 CRD 与 Operator 架构
+### CRD 与 Operator 架构
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
@@ -114,7 +120,7 @@ Reconcile 循环详解:
 └─────────────┘     └─────────────┘
 ```
 
-### 1.2 常见问题现象
+### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息 | 查看方式 |
 |----------|----------|----------|----------|
@@ -127,7 +133,7 @@ Reconcile 循环详解:
 | Finalizer 阻塞 | 资源无法删除 | Terminating 状态 | `kubectl get` |
 | Webhook 超时 | CR 操作超时 | context deadline exceeded | API Server 日志 |
 
-### 1.3 影响分析
+### 影响分析
 
 | 问题类型 | 直接影响 | 间接影响 | 影响范围 |
 |----------|----------|----------|----------|
@@ -137,9 +143,9 @@ Reconcile 循环详解:
 | Webhook 问题 | CR 操作被阻塞 | 新资源无法创建 | 所有 CR 操作 |
 | Finalizer 阻塞 | 资源删除卡住 | namespace 可能无法删除 | 特定资源 |
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 CRD/Operator 问题
@@ -242,7 +248,7 @@ CRD/Operator 问题
                                                       └────────────┘
 ```
 
-### 2.2 排查命令集
+### 排查命令集
 
 #### CRD 状态检查
 
@@ -331,7 +337,7 @@ kubectl get endpoints -n <webhook-namespace>
 kubectl logs -n <webhook-namespace> <webhook-pod>
 ```
 
-### 2.3 排查注意事项
+### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
 |----------|------|----------|
@@ -341,9 +347,9 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 | Webhook 故障影响面广 | 可能阻塞整个资源类型的操作 | 高 |
 | Operator RBAC 变更需重启 | 权限变更后 Pod 需要重启 | 低 |
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 CRD 未找到/版本错误
+### CRD 未找到/版本错误
 
 **问题现象**：`kubectl apply` 报 `no matches for kind "XXX" in version "xxx/v1"`
 
@@ -381,7 +387,7 @@ spec:
   # ...
 ```
 
-### 3.2 Webhook 验证失败
+### Webhook 验证失败
 
 **问题现象**：`admission webhook "xxx" denied the request: xxx`
 
@@ -422,7 +428,7 @@ kubectl delete validatingwebhookconfiguration <name>
 # 恢复后务必重新启用
 ```
 
-### 3.3 Operator Reconcile 失败
+### Operator Reconcile 失败
 
 **问题现象**：CR 状态不更新，Operator 日志显示 reconcile 错误。
 
@@ -456,7 +462,7 @@ kubectl annotate <resource-type> <name> force-reconcile=$(date +%s) -n <namespac
 kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 ```
 
-### 3.4 RBAC 权限问题
+### RBAC 权限问题
 
 **问题现象**：Operator 日志显示 `forbidden` 或 `unauthorized` 错误。
 
@@ -508,7 +514,7 @@ rules:
 kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 ```
 
-### 3.5 Finalizer 导致资源删除卡住
+### Finalizer 导致资源删除卡住
 
 **问题现象**：CR 一直处于 `Terminating` 状态无法删除。
 
@@ -542,7 +548,7 @@ kubectl patch <resource-type> <name> -n <namespace> --type='json' \
 - 相关的 Kubernetes 资源未被删除
 - 产生孤儿资源
 
-### 3.6 Operator Pod 启动失败
+### Operator Pod 启动失败
 
 **问题现象**：Operator Pod CrashLoopBackOff 或一直 Pending。
 
@@ -577,7 +583,7 @@ kubectl get lease -n <operator-ns>
 kubectl rollout restart deployment <operator-deployment> -n <operator-ns>
 ```
 
-### 3.7 CRD 版本升级/迁移
+### CRD 版本升级/迁移
 
 **问题现象**：CRD 版本升级后，旧版本 CR 不兼容。
 
@@ -646,7 +652,7 @@ spec:
         caBundle: <base64-encoded-ca-cert>
 ```
 
-### 3.8 Namespace 删除卡住 (因 CR Finalizer)
+### Namespace 删除卡住 (因 CR Finalizer)
 
 **问题现象**：删除 namespace 时卡在 Terminating 状态，因为包含有 Finalizer 的 CR。
 
@@ -678,7 +684,7 @@ kubectl get namespace <namespace> -o json | jq '.spec.finalizers = []' | \
   kubectl replace --raw "/api/v1/namespaces/<namespace>/finalize" -f -
 ```
 
-### 3.9 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 潜在风险 | 建议措施 |
 |------|----------|----------|----------|

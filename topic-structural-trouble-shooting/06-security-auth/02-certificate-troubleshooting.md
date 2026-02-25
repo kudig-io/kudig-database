@@ -26,7 +26,7 @@ Kubernetes 使用 TLS 证书保护组件间通信和 API 访问安全。证书�
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 Kubernetes 证书体系
 
@@ -98,7 +98,7 @@ Kubernetes 使用 TLS 证书保护组件间通信和 API 访问安全。证书�
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -231,7 +231,7 @@ kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authori
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 证书过期处理
 

@@ -28,6 +28,46 @@
 
 ---
 
+## 问题现象与影响分析
+
+### 常见问题现象
+
+- **Sidecar 注入失败**：Pod 中缺少 `istio-proxy` 或注入异常。
+- **503/504/502**：上游 Endpoint 不可用、路由未下发、Gateway 资源不足。
+- **mTLS 握手失败**：证书过期、信任链不一致、模式从 `PERMISSIVE` 切到 `STRICT` 导致旧客户端失败。
+- **配置不同步**：`proxy-status` 出现 `STALE` 或 xDS 推送延迟。
+
+### 影响面分析
+
+- **业务请求失败**：流量被错误路由或被策略拒绝，导致 4xx/5xx。
+- **性能下降**：Envoy CPU/内存激增，影响延迟与吞吐。
+- **可观测性失真**：日志/指标采集异常，误导排障方向。
+
+## 排查方法与步骤
+
+1. **控制面健康检查**：`kubectl get pods -n istio-system`，查看 `istiod` 与 Gateway 状态。
+2. **代理同步状态**：`istioctl proxy-status`，确认配置是否 `SYNCED`。
+3. **路由与端点核对**：`istioctl proxy-config route/endpoint <pod>`，确认 VS/DR 是否下发。
+4. **mTLS 模式核对**：`kubectl get peerauthentication -A`，排查模式切换导致的失败。
+5. **日志与响应标记**：解析 Envoy 日志中的 `response_flags`，定位上游失败类型。
+6. **修复验证**：回归关键路径，验证流量恢复与告警下降。
+
+## 解决方案与风险控制
+
+### 常见修复策略
+
+- **注入失败**：修复命名空间标签或 Webhook 健康，必要时临时手动注入验证。
+- **503/502**：检查 Service/Endpoints 与 Gateway 资源，必要时扩容 gateway/istiod。
+- **mTLS 失败**：先临时回退到 `PERMISSIVE`，确认依赖方全部支持 mTLS 后再收敛。
+
+### 风险控制与回滚
+
+- **变更前**：保存 `istioctl analyze` 输出与 proxy 配置快照。
+- **回滚策略**：回退最近的 VirtualService/DestinationRule 或恢复旧版本 Istiod。
+- **验证**：使用 `istioctl proxy-status` 与关键业务探活确认恢复。
+
+---
+
 ## 1. 核心架构与底层机制
 
 ### 1.1 xDS 协议：Istio 的灵魂

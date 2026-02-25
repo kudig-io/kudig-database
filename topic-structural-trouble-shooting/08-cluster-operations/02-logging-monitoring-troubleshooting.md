@@ -24,11 +24,17 @@
 
 Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系统。本文档覆盖常见的日志收集 (Fluentd/Fluent Bit/Loki) 和监控系统 (Prometheus/Grafana) 故障的诊断与解决方案。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 可观测性架构
+### 可观测性架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -55,7 +61,7 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 日志系统常见问题
+### 日志系统常见问题
 
 | 问题类型 | 现象描述 | 可能原因 | 查看方式 |
 |---------|---------|---------|---------|
@@ -66,7 +72,7 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 | 日志格式错误 | 解析失败/字段缺失 | 解析器配置错误 | 采集器日志 |
 | 磁盘空间不足 | 日志堆积无法写入 | 清理策略/容量规划 | 节点/Pod 存储 |
 
-### 1.3 监控系统常见问题
+### 监控系统常见问题
 
 | 问题类型 | 现象描述 | 可能原因 | 查看方式 |
 |---------|---------|---------|---------|
@@ -77,7 +83,7 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 | 告警风暴 | 大量重复告警 | 阈值设置/抑制规则 | AlertManager |
 | Grafana 无数据 | Dashboard 显示空 | 数据源配置/查询错误 | Grafana 设置 |
 
-### 1.4 影响分析
+### 影响分析
 
 | 故障类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
@@ -89,9 +95,9 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 日志/监控故障
@@ -116,9 +122,9 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
                 └─ 磁盘空间不足 ──→ 清理/扩容
 ```
 
-### 2.2 日志系统排查命令
+### 日志系统排查命令
 
-#### 2.2.1 Fluentd/Fluent Bit 检查
+#### Fluentd/Fluent Bit 检查
 
 ```bash
 # 检查采集器 DaemonSet 状态
@@ -142,7 +148,7 @@ kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/containers/
 kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/pods/
 ```
 
-#### 2.2.2 Elasticsearch/OpenSearch 检查
+#### Elasticsearch/OpenSearch 检查
 
 ```bash
 # 检查集群健康状态
@@ -161,7 +167,7 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/allocation?v
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/shards?v | head -20
 ```
 
-#### 2.2.3 Loki 检查
+#### Loki 检查
 
 ```bash
 # 检查 Loki 状态
@@ -181,9 +187,9 @@ kubectl get pods -n logging -l app=promtail
 kubectl logs -n logging -l app=promtail --tail=100
 ```
 
-### 2.3 监控系统排查命令
+### 监控系统排查命令
 
-#### 2.3.1 Prometheus 检查
+#### Prometheus 检查
 
 ```bash
 # 检查 Prometheus 状态
@@ -208,7 +214,7 @@ curl -s http://localhost:9090/api/v1/rules | jq
 curl -s http://localhost:9090/api/v1/status/tsdb | jq
 ```
 
-#### 2.3.2 AlertManager 检查
+#### AlertManager 检查
 
 ```bash
 # 检查 AlertManager 状态
@@ -230,7 +236,7 @@ curl -s http://localhost:9093/api/v2/silences | jq
 kubectl get secret -n monitoring alertmanager-<name> -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 ```
 
-#### 2.3.3 Grafana 检查
+#### Grafana 检查
 
 ```bash
 # 检查 Grafana 状态
@@ -251,9 +257,9 @@ kubectl get configmap -n monitoring -l grafana_dashboard=1
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 日志采集问题
+### 日志采集问题
 
 #### 场景 1：Fluent Bit 采集器崩溃
 
@@ -375,7 +381,7 @@ kubectl top pods -n logging | grep elasticsearch
 
 ---
 
-### 3.2 Elasticsearch/Loki 后端问题
+### Elasticsearch/Loki 后端问题
 
 #### 场景 1：Elasticsearch 集群红色状态
 
@@ -438,7 +444,7 @@ kubectl logs -n logging -l app=loki | grep -i "storage\|s3\|gcs"
 
 ---
 
-### 3.3 Prometheus 问题
+### Prometheus 问题
 
 #### 场景 1：Prometheus 指标缺失
 
@@ -516,7 +522,7 @@ kubectl patch statefulset prometheus-server -n monitoring --type='json' -p='[
 
 ---
 
-### 3.4 AlertManager 问题
+### AlertManager 问题
 
 #### 场景 1：告警未发送
 
@@ -594,7 +600,7 @@ kubectl edit prometheusrule <name> -n monitoring
 
 ---
 
-### 3.5 Grafana 问题
+### Grafana 问题
 
 #### 场景 1：Grafana 数据源无数据
 
@@ -647,7 +653,7 @@ kubectl edit configmap grafana-config -n monitoring
 
 ---
 
-### 3.6 日志系统配置示例
+### 日志系统配置示例
 
 #### Fluent Bit 配置示例
 
@@ -711,7 +717,7 @@ data:
 
 ---
 
-### 3.7 监控告警规则示例
+### 监控告警规则示例
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -750,7 +756,7 @@ spec:
 
 ---
 
-### 3.8 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险说明 | 建议 |
 |-----|---------|---------|-----|

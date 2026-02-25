@@ -23,6 +23,10 @@
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta_methodology_and_agentic_practices.md) |
 | **FTA vs FEBM 对比** | [topic-febm](../topic-febm/README.md) |
 
+## 最近更新（2026 Q2）
+- **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta_methodology_and_agentic_practices.md#二十三生产级落地基线2026q2-更新)
+- **演练与证据闭环自检**：新增合集章节 [二十四、演练与证据闭环自检](./fta_methodology_and_agentic_practices.md#二十四演练与证据闭环自检)
+
 ---
 
 ## 文档索引

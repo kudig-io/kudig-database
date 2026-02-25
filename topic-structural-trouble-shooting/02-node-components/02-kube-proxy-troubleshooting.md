@@ -121,15 +121,16 @@ conntrack -L -p tcp --dport <ServicePort> | grep <PodIP>
 - **配置 strictARP**：在使用 MetalLB 或 BGP 模式的 CNI 时，必须在 kube-proxy 配置中开启 `strictARP` 以保证 ARP 响应正确。
 
 ---
- (高级工作流)
 
-### 2.1 排查模型：三级跳
+## 排查方法与步骤（高级工作流）
+
+### 排查模型：三级跳
 
 1. **Control Plane**：确认 API Server 中 Service 和 Endpoints 是否正确对齐。
 2. **Data Plane (Kernel)**：确认内核规则（iptables/IPVS）是否已生成并正确映射到 Endpoints。
 3. **Environment Layer**：确认内核参数（conntrack_max）、宿主机防火墙、CNI 网络连通性。
 
-### 2.2 专家级排查步骤
+### 专家级排查步骤
 
 ```
 开始排查
@@ -165,7 +166,7 @@ conntrack -L -p tcp --dport <ServicePort> | grep <PodIP>
             └─► 连接成功 ──► 问题可能在应用层
 ```
 
-### 2.3 排查步骤和具体命令
+### 排查步骤和具体命令
 
 #### 2.3.1 第一步：检查 kube-proxy Pod 状态
 

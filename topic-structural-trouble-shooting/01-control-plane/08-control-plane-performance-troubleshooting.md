@@ -2,7 +2,7 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境性能优化实战
 
-## 📊 性能问题现象与影响分析
+## 问题现象与影响分析
 
 ### 常见性能瓶颈现象
 
@@ -35,7 +35,7 @@ kubectl top nodes
 kubectl top pods -n kube-system
 ```
 
-## 🔍 性能瓶颈诊断方法
+## 排查方法与步骤
 
 ### 诊断原理说明
 
@@ -179,7 +179,7 @@ echo "3. 控制平面组件资源使用:"
 kubectl top pods -n kube-system -l tier=control-plane
 ```
 
-## 🔧 性能优化解决方案
+## 解决方案与风险控制
 
 ### API Server 优化方案
 

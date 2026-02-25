@@ -53,7 +53,7 @@
    - **现象**：节点已在云端删除，但 `kubectl get nodes` 仍然可见且显示 NotReady。
    - **原因**：Cloud Controller Manager (CCM) 同步异常或未正确配置。
 
-# 专家级观测工具链（Expert's Toolbox）
+## 专家级观测工具链（Expert's Toolbox）
 
 ```bash
 # 专家级：查看节点所有 Conditions（包括隐形自定义条件）
@@ -79,7 +79,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 节点状态与条件
 
@@ -137,7 +137,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 ---
 
-## 第二部分：排查方法（基础与进阶）
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -277,7 +277,7 @@ cat /var/lib/kubelet/config.yaml | grep -A20 eviction
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 节点 NotReady 问题
 

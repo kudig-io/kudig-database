@@ -18,15 +18,15 @@
 
 ## 目录
 
-1. [问题现象与影响分析](#1-问题现象与影响分析)
-2. [排查方法与步骤](#2-排查方法与步骤)
-3. [解决方案与风险控制](#3-解决方案与风险控制)
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
 
 ---
 
-## 1. 问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 资源配额问题
+### 资源配额问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -35,7 +35,7 @@
 | LimitRange 违规 | `must be less than or equal to cpu/memory limit` | API Server | kubectl |
 | PVC 配额超限 | `persistentvolumeclaims count limit exceeded` | API Server | kubectl |
 
-### 1.2 OOM 问题
+### OOM 问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -44,7 +44,7 @@
 | 内存压力 | `MemoryPressure` | 节点状态 | `kubectl describe node` |
 | cgroup OOM | `Memory cgroup out of memory` | 系统日志 | `dmesg` |
 
-### 1.3 调度失败问题
+### 调度失败问题
 
 | 现象 | 报错信息 | 报错来源 | 查看方式 |
 |------|----------|----------|----------|
@@ -53,7 +53,7 @@
 | 亲和性不满足 | `didn't match node affinity` | Pod Events | `kubectl describe pod` |
 | PVC 未绑定 | `unbound immediate PersistentVolumeClaims` | Pod Events | `kubectl describe pod` |
 
-### 1.4 报错查看方式汇总
+### 报错查看方式汇总
 
 ```bash
 # 查看 ResourceQuota
@@ -80,7 +80,7 @@ dmesg | grep -i "oom\|killed"
 kubectl describe pod <pod-name> | grep -A10 Events
 ```
 
-### 1.5 影响面分析
+### 影响面分析
 
 | 问题类型 | 影响范围 | 影响描述 |
 |----------|----------|----------|
@@ -91,9 +91,9 @@ kubectl describe pod <pod-name> | grep -A10 Events
 
 ---
 
-## 2. 排查方法与步骤
+## 排查方法与步骤
 
-### 2.1 ResourceQuota 排查
+### ResourceQuota 排查
 
 ```bash
 # 步骤 1：查看命名空间配额使用情况
@@ -124,7 +124,7 @@ kubectl get pods -n <namespace> -o json | \
   jq '[.items[].spec.containers[].resources.requests.memory // "0" | gsub("Mi"; "") | gsub("Gi"; "000") | tonumber] | add'
 ```
 
-### 2.2 OOM 排查
+### OOM 排查
 
 ```bash
 # 步骤 1：确认 OOM 事件
@@ -152,7 +152,7 @@ dmesg | grep -i "oom\|killed" | tail -20
 # container_memory_usage_bytes{pod="<pod-name>"}
 ```
 
-### 2.3 调度失败排查
+### 调度失败排查
 
 ```bash
 # 步骤 1：查看调度失败原因
@@ -181,11 +181,11 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep <pod-name>
 
 ---
 
-## 3. 解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 ResourceQuota 超限解决
+### ResourceQuota 超限解决
 
-#### 3.1.1 解决步骤
+#### 解决步骤
 
 ```bash
 # 方案 1：增加配额
@@ -242,7 +242,7 @@ spec:
 EOF
 ```
 
-#### 3.1.2 安全生产风险提示
+#### 安全生产风险提示
 
 ```
 ⚠️  安全生产风险提示：
@@ -253,9 +253,9 @@ EOF
 5. 定期审计配额使用情况
 ```
 
-### 3.2 OOM 问题解决
+### OOM 问题解决
 
-#### 3.2.1 解决步骤
+#### 解决步骤
 
 ```bash
 # 方案 1：增加内存限制
@@ -309,7 +309,7 @@ EOF
 #   memory.available: "200Mi"
 ```
 
-#### 3.2.2 安全生产风险提示
+#### 安全生产风险提示
 
 ```
 ⚠️  安全生产风险提示：
@@ -320,9 +320,9 @@ EOF
 5. 监控内存使用趋势，提前扩容
 ```
 
-### 3.3 调度失败解决
+### 调度失败解决
 
-#### 3.3.1 资源不足解决
+#### 资源不足解决
 
 ```bash
 # 方案 1：减少资源请求
@@ -388,7 +388,7 @@ kubectl patch deployment <name> -p '{
 }'
 ```
 
-#### 3.3.2 污点容忍问题解决
+#### 污点容忍问题解决
 
 ```bash
 # 添加容忍
@@ -410,7 +410,7 @@ kubectl patch deployment <name> -p '{
 kubectl taint nodes <node-name> <taint-key>-
 ```
 
-#### 3.3.3 安全生产风险提示
+#### 安全生产风险提示
 
 ```
 ⚠️  安全生产风险提示：
@@ -421,7 +421,7 @@ kubectl taint nodes <node-name> <taint-key>-
 5. 集群扩容需要评估成本
 ```
 
-### 3.4 LimitRange 配置
+### LimitRange 配置
 
 ```bash
 # 创建 LimitRange 设置默认值

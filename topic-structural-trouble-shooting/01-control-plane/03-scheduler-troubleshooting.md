@@ -1262,4 +1262,3 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 - **节点同质化**：所有节点规格相同，缺乏灵活性
 - **缺乏预留**：未为大 Pod 预留专用节点池
 - **改进方向**：节点池分层、自动扩缩容、资源预留、碎片化监控
-| `didn't have free ports` | 端口冲突 | 修改 hostPort |

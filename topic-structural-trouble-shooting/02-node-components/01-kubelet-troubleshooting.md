@@ -695,7 +695,7 @@ journalctl -u kubelet | grep -i "probe" | tail -30
 
 ---
 
-## 6. 解决方案与风险控制 (基础版)
+## 解决方案与风险控制（基础版）
 
 ### 6.1 kubelet 进程未运行
 
@@ -1610,7 +1610,7 @@ systemReserved:
    grep SystemdCgroup /etc/containerd/config.toml
    # 预期输出: SystemdCgroup = true
    ```
-   ```
+ 
 
 4. **监控告警**：
    ```yaml
@@ -1632,6 +1632,4 @@ systemReserved:
 - **测试不足**：未在测试环境验证新配置的兼容性
 - **文档缺失**：缺少节点配置标准文档，运维人员配置错误
 - **改进方向**：配置标准化、自动化验证、全集群统一迁移、监控告警
-  nodefs.available: 1m
-rotateCertificates: true
-```
+

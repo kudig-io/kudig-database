@@ -24,11 +24,17 @@
 
 Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes 的自动扩缩容机制。HPA 通过调整 Pod 副本数实现水平扩展，VPA 通过调整 Pod 资源请求/限制实现垂直扩展。本文档覆盖自动扩缩容相关故障的诊断与解决方案。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 自动扩缩容架构
+### 自动扩缩容架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -63,7 +69,7 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 HPA 常见问题
+### HPA 常见问题
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
 |---------|---------|-------------|---------|
@@ -74,7 +80,7 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 | 扩容不足 | 副本数达到 max 但仍不够 | `ScaleUpLimit` | `kubectl describe hpa` |
 | metrics-server 故障 | 所有 HPA 失效 | `the HPA was unable to compute the replica count` | API Server 日志 |
 
-### 1.3 VPA 常见问题
+### VPA 常见问题
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
 |---------|---------|-------------|---------|
@@ -85,7 +91,7 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 | Pod 重启过频 | VPA 频繁调整导致重启 | Pod 频繁 Terminating | `kubectl get pods -w` |
 | VPA 组件故障 | Recommender/Updater 不工作 | VPA 相关 Pod 异常 | `kubectl get pods -n kube-system` |
 
-### 1.4 影响分析
+### 影响分析
 
 | 故障类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
@@ -97,9 +103,9 @@ Horizontal Pod Autoscaler (HPA) 和 Vertical Pod Autoscaler (VPA) 是 Kubernetes
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 HPA 工作原理
+### HPA 工作原理
 
 ```
 HPA 扩缩容决策流程
@@ -135,7 +141,7 @@ HPA 扩缩容决策流程
 └─────────────────────┘
 ```
 
-### 2.2 排查决策树
+### 排查决策树
 
 ```
 HPA/VPA 故障
@@ -173,9 +179,9 @@ HPA/VPA 故障
                └─ 资源不足 ──→ 检查 metrics-server 资源使用
 ```
 
-### 2.3 排查命令集
+### 排查命令集
 
-#### 2.3.1 HPA 基础检查
+#### HPA 基础检查
 
 ```bash
 # 查看 HPA 状态
@@ -194,7 +200,7 @@ kubectl get events --field-selector involvedObject.kind=HorizontalPodAutoscaler
 kubectl get deployment <name> -o jsonpath='{.spec.replicas}'
 ```
 
-#### 2.3.2 metrics-server 检查
+#### metrics-server 检查
 
 ```bash
 # 检查 metrics-server 状态
@@ -215,7 +221,7 @@ kubectl top pods
 kubectl get apiservices | grep metrics
 ```
 
-#### 2.3.3 自定义指标检查
+#### 自定义指标检查
 
 ```bash
 # 检查 custom metrics API
@@ -229,7 +235,7 @@ kubectl get pods -n monitoring -l app=prometheus-adapter
 kubectl logs -n monitoring -l app=prometheus-adapter
 ```
 
-#### 2.3.4 VPA 检查
+#### VPA 检查
 
 ```bash
 # 查看 VPA 状态
@@ -251,7 +257,7 @@ kubectl logs -n kube-system -l app=vpa-recommender
 kubectl logs -n kube-system -l app=vpa-updater
 ```
 
-### 2.4 排查注意事项
+### 排查注意事项
 
 | 注意事项 | 说明 |
 |---------|-----|
@@ -264,9 +270,9 @@ kubectl logs -n kube-system -l app=vpa-updater
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 HPA 指标获取问题
+### HPA 指标获取问题
 
 #### 场景 1：HPA 显示 `<unknown>`
 
@@ -340,7 +346,7 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 ---
 
-### 3.2 HPA 扩缩容问题
+### HPA 扩缩容问题
 
 #### 场景 1：HPA 不扩容
 
@@ -465,7 +471,7 @@ kubectl patch hpa <name> --type='json' -p='[
 
 ---
 
-### 3.3 VPA 问题排查
+### VPA 问题排查
 
 #### 场景 1：VPA 无推荐值
 
@@ -571,7 +577,7 @@ kubectl patch vpa <name> --type='json' -p='[
 
 ---
 
-### 3.4 完整的 HPA 配置示例
+### 完整的 HPA 配置示例
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -634,7 +640,7 @@ spec:
       selectPolicy: Min
 ```
 
-### 3.5 完整的 VPA 配置示例
+### 完整的 VPA 配置示例
 
 ```yaml
 apiVersion: autoscaling.k8s.io/v1
@@ -670,7 +676,7 @@ spec:
 
 ---
 
-### 3.6 监控和告警
+### 监控和告警
 
 ```bash
 # 监控 HPA 状态
@@ -706,7 +712,7 @@ EOF
 
 ---
 
-### 3.7 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险说明 | 建议 |
 |-----|---------|---------|-----|

@@ -25,6 +25,11 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 | **FTA vs FEBM** | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf)（原始论文） |
 | **总纲概览** | [FEBM 方法论深度解析](./febm_methodology_deep_dive.md) |
 
+## 最近更新（2026 Q2）
+- **取证自动化蓝图**：新增总纲章节 [7.1 取证自动化蓝图（E2E 流程）](./febm_methodology_deep_dive.md#71-取证自动化蓝图e2e-流程)
+- **合规落地清单**：新增总纲章节 [7.2 合规落地清单（SOC 2 / ISO 27001 / 等保）](./febm_methodology_deep_dive.md#72-合规落地清单soc-2--iso-27001--等保)
+- **落地度量仪表板**：新增总纲章节 [7.3 落地度量仪表板](./febm_methodology_deep_dive.md#73-落地度量仪表板示例指标)
+
 ---
 
 ## 文档索引

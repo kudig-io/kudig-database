@@ -14,7 +14,13 @@
    - 修复仓库凭证或降低同步频率。
 7. **证据留存**：保存控制器日志、同步状态与失败事件。
 
-## 🔧 GitOps/DevOps 常见问题与影响分析
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
+## 问题现象与影响分析
 
 ### GitOps 核心组件故障现象
 
@@ -55,7 +61,7 @@ kubectl get pipelineruns,taskruns -A 2>/dev/null || echo "Tekton 未部署"
 # 或者检查 Jenkins/GitLab CI 等其他 CI 系统状态
 ```
 
-## 🔍 GitOps/DevOps 问题诊断方法
+## 排查方法与步骤
 
 ### 诊断原理说明
 
@@ -95,7 +101,7 @@ GitOps 故障
 
 ### 详细诊断命令
 
-#### 1. ArgoCD 故障诊断
+#### ArgoCD 故障诊断
 
 ```bash
 #!/bin/bash
@@ -160,7 +166,7 @@ echo "6. 证书和 TLS 配置检查:"
 kubectl get secrets -n argocd -l argocd.argoproj.io/secret-type=repo-creds 2>/dev/null
 ```
 
-#### 2. FluxCD 故障诊断
+#### FluxCD 故障诊断
 
 ```bash
 #!/bin/bash
@@ -226,7 +232,7 @@ kubectl get kustomizations -A -o json | jq -r '
 '
 ```
 
-#### 3. CI/CD 流水线诊断
+#### CI/CD 流水线诊断
 
 ```bash
 #!/bin/bash
@@ -282,7 +288,7 @@ kubectl get eventlisteners -A 2>/dev/null
 kubectl get ingresses -A | grep -i webhook 2>/dev/null
 ```
 
-#### 4. Secret 管理诊断
+#### Secret 管理诊断
 
 ```bash
 #!/bin/bash
@@ -344,7 +350,7 @@ kubectl get secrets --all-namespaces -o json | jq -r '
 '
 ```
 
-## 🔧 GitOps/DevOps 问题解决方案
+## 解决方案与风险控制
 
 ### ArgoCD 问题解决
 
@@ -789,7 +795,7 @@ kubectl apply -f sealed-secret.yaml
 kubectl get sealedsecret my-sensitive-data -n prod
 ```
 
-## ⚠️ 执行风险评估
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
 |------|---------|---------|---------|
@@ -798,7 +804,7 @@ kubectl get sealedsecret my-sensitive-data -n prod
 | CI/CD 流水线变更 | ⭐⭐⭐ 高 | 可能影响部署流程 | 回滚到上一个稳定版本 |
 | Secret 配置修改 | ⭐⭐⭐ 高 | 可能导致应用无法启动 | 恢复原 Secret 配置 |
 
-## 📊 GitOps/DevOps 验证与监控
+### 验证与监控
 
 ### GitOps 验证脚本
 
@@ -931,7 +937,7 @@ groups:
       description: "Sealed Secret 解密同步出现错误"
 ```
 
-## 📚 GitOps/DevOps 最佳实践
+### 最佳实践与成本优化
 
 ### GitOps 配置管理最佳实践
 
@@ -1053,7 +1059,7 @@ BEST_PRACTICES_REPORT="/var/log/kubernetes/cicd-best-practices-$(date +%Y%m%d).l
 echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 ```
 
-## 🔄 典型 GitOps 故障案例
+### 典型故障案例
 
 ### 案例一：ArgoCD 应用持续 OutOfSync
 
@@ -1077,7 +1083,7 @@ echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 2. 重新设计依赖层次结构
 3. 使用 dependsOn 字段明确指定依赖关系
 
-## 📞 GitOps 支持资源
+### 支持资源与参考文档
 
 **官方文档**：
 - ArgoCD: https://argo-cd.readthedocs.io/

@@ -23,15 +23,6 @@
 
 ---
 
-## 🎯 本文档价值
-
-| 读者对象 | 价值体现 |
-| :--- | :--- |
-| **初学者** | 搞清楚容器、镜像、运行时（CRI）之间的层级关系，掌握 `crictl` 命令代替 `docker` 命令的操作习惯，学会解决常见的 `ImagePullBackOff` 和镜像空间爆满问题。 |
-| **资深专家** | 深入理解 OCI 规范、runc 交互、Shim 进程模型，以及在大规模集群下的并发拉取优化、存储驱动（OverlayFS）性能瓶颈分析，和运行时热切换的风险控制。 |
-
----
-
 ## 0. 10 分钟快速诊断
 
 1. **服务与 Socket**：`systemctl status containerd`（或 dockerd/CRI-O）；`ls -l /run/containerd/containerd.sock`，若不存在或权限拒绝先处理服务启动。
@@ -101,8 +92,7 @@ strace -f -o runtime_err.log crictl run pod.yaml container.yaml
 
 ---
 
-## 5. 排查方法与步骤 (基础版)
- (高级工作流)
+## 排查方法与步骤
 
 ### 2.1 排查逻辑：剥洋葱法
 

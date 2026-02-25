@@ -24,11 +24,17 @@
 
 Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本文档覆盖 Helm Chart 安装、升级、回滚等操作中常见故障的诊断与解决方案。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 Helm 架构
+### Helm 架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -58,7 +64,7 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 常见问题现象
+### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
 |---------|---------|-------------|---------|
@@ -71,7 +77,7 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 | 超时 | 安装/升级超时 | `timed out waiting for the condition` | 命令输出 |
 | 挂起状态 | Release 状态为 pending | `status: pending-install` | `helm list` |
 
-### 1.3 Release 状态说明
+### Release 状态说明
 
 | 状态 | 说明 | 处理方式 |
 |-----|-----|---------|
@@ -83,7 +89,7 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 | superseded | 已被新版本替代 | 历史版本，无需处理 |
 | uninstalled | 已卸载 | 已清理 |
 
-### 1.4 影响分析
+### 影响分析
 
 | 故障类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
@@ -94,9 +100,9 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 Helm 部署故障
@@ -121,9 +127,9 @@ Helm 部署故障
                 └─ 缓存问题 ──→ helm repo update
 ```
 
-### 2.2 排查命令集
+### 排查命令集
 
-#### 2.2.1 Release 状态检查
+#### Release 状态检查
 
 ```bash
 # 列出所有 Release
@@ -142,7 +148,7 @@ helm status <release-name> -n <namespace>
 helm history <release-name> -n <namespace>
 ```
 
-#### 2.2.2 模板和配置检查
+#### 模板和配置检查
 
 ```bash
 # 渲染模板但不安装 (检查模板语法)
@@ -167,7 +173,7 @@ helm get hooks <release-name> -n <namespace>
 helm get all <release-name> -n <namespace>
 ```
 
-#### 2.2.3 Chart 检查
+#### Chart 检查
 
 ```bash
 # 检查 Chart 结构
@@ -189,7 +195,7 @@ helm search repo <keyword>
 helm search hub <keyword>
 ```
 
-#### 2.2.4 调试模式
+#### 调试模式
 
 ```bash
 # 安装时启用调试
@@ -202,7 +208,7 @@ helm upgrade <release> <chart> -n <namespace> --debug --dry-run
 helm install <release> <chart> -n <namespace> --debug 2>&1 | tee helm-debug.log
 ```
 
-### 2.3 排查注意事项
+### 排查注意事项
 
 | 注意事项 | 说明 |
 |---------|-----|
@@ -214,9 +220,9 @@ helm install <release> <chart> -n <namespace> --debug 2>&1 | tee helm-debug.log
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 安装失败
+### 安装失败
 
 #### 场景 1：模板渲染错误
 
@@ -326,7 +332,7 @@ kubectl describe pod <pod-name> -n <namespace>
 kubectl get events -n <namespace> --sort-by='.lastTimestamp'
 ```
 
-### 3.2 升级失败
+### 升级失败
 
 #### 场景 1：升级失败后修复
 
@@ -375,7 +381,7 @@ helm upgrade --install <release> <chart> -n <namespace> \
   -f values.yaml
 ```
 
-### 3.3 回滚问题
+### 回滚问题
 
 #### 场景 1：回滚到指定版本
 
@@ -417,7 +423,7 @@ helm uninstall <release> -n <namespace> --keep-history
 helm install <release> <chart> -n <namespace> -f values-backup.yaml
 ```
 
-### 3.4 配置问题
+### 配置问题
 
 #### 场景 1：Values 优先级
 
@@ -463,7 +469,7 @@ helm install myapp ./chart \
   --set-json 'resources={"limits":{"cpu":"1","memory":"512Mi"}}'
 ```
 
-### 3.5 Hooks 问题
+### Hooks 问题
 
 #### 场景 1：Hook 执行失败
 
@@ -490,7 +496,7 @@ helm upgrade <release> <chart> -n <namespace> --no-hooks
 kubectl delete job -n <namespace> <hook-job-name>
 ```
 
-### 3.6 仓库问题
+### 仓库问题
 
 #### 场景 1：Chart 下载失败
 
@@ -513,7 +519,7 @@ export HTTPS_PROXY=http://proxy:port
 helm repo update
 ```
 
-### 3.7 完整的 Helm 操作示例
+### 完整的 Helm 操作示例
 
 ```bash
 # 标准安装流程
@@ -560,7 +566,7 @@ helm uninstall nginx -n web
 
 ---
 
-### 3.8 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险说明 | 建议 |
 |-----|---------|---------|-----|

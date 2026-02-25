@@ -24,11 +24,17 @@
 
 Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境至关重要。本文档覆盖控制平面高可用、etcd 集群故障、备份恢复、跨区域容灾等场景的诊断与解决方案。
 
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
-### 1.1 高可用架构
+### 高可用架构
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -63,7 +69,7 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 常见问题现象
+### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
 |---------|---------|-------------|---------|
@@ -75,7 +81,7 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 | 恢复失败 | 无法从备份恢复 | `restore failed` | 恢复操作日志 |
 | 选主失败 | Controller/Scheduler 无 leader | `leader election lost` | 组件日志 |
 
-### 1.3 影响分析
+### 影响分析
 
 | 故障类型 | 直接影响 | 间接影响 | 影响范围 |
 |---------|---------|---------|---------|
@@ -87,9 +93,9 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
-### 2.1 排查决策树
+### 排查决策树
 
 ```
 高可用/灾备故障
@@ -117,9 +123,9 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
                 └─ 恢复失败 ──→ 检查备份完整性/版本兼容
 ```
 
-### 2.2 排查命令集
+### 排查命令集
 
-#### 2.2.1 控制平面状态检查
+#### 控制平面状态检查
 
 ```bash
 # 检查所有 Master 节点
@@ -141,7 +147,7 @@ kubectl get --raw='/readyz?verbose'
 kubectl get --raw='/healthz?verbose'
 ```
 
-#### 2.2.2 etcd 集群检查
+#### etcd 集群检查
 
 ```bash
 # 设置 etcdctl 环境变量
@@ -170,7 +176,7 @@ etcdctl endpoint status --cluster -w table | awk '{print $1, $5}'
 etcdctl endpoint status --cluster -w json | jq '.[].Status.dbSize'
 ```
 
-#### 2.2.3 选主状态检查
+#### 选主状态检查
 
 ```bash
 # 检查 Controller Manager Leader
@@ -184,7 +190,7 @@ kubectl get endpoints kube-controller-manager -n kube-system -o yaml
 kubectl get endpoints kube-scheduler -n kube-system -o yaml
 ```
 
-### 2.3 排查注意事项
+### 排查注意事项
 
 | 注意事项 | 说明 |
 |---------|-----|
@@ -196,11 +202,11 @@ kubectl get endpoints kube-scheduler -n kube-system -o yaml
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
-### 3.1 etcd 集群故障
+### etcd 集群故障
 
-#### 场景 1：etcd 无 Leader
+#### 场景：etcd 无 Leader
 
 **问题现象：**
 ```
@@ -234,7 +240,7 @@ kubectl logs -n kube-system etcd-<node> --tail=100
 journalctl -u etcd --tail=100
 ```
 
-#### 场景 2：etcd 成员故障恢复
+#### 场景：etcd 成员故障恢复
 
 ```bash
 # 场景: 一个 etcd 成员永久故障，需要替换
@@ -258,7 +264,7 @@ etcdctl member list -w table
 etcdctl endpoint health --cluster
 ```
 
-#### 场景 3：etcd 数据压缩和碎片整理
+#### 场景：etcd 数据压缩和碎片整理
 
 ```bash
 # 检查数据库大小
@@ -279,9 +285,9 @@ etcdctl defrag --endpoints=https://<etcd3>:2379
 etcdctl endpoint status --cluster -w table
 ```
 
-### 3.2 备份与恢复
+### 备份与恢复
 
-#### 场景 1：创建 etcd 备份
+#### 场景：创建 etcd 备份
 
 ```bash
 # 方式 1: 使用 etcdctl snapshot
@@ -322,7 +328,7 @@ chmod +x /usr/local/bin/etcd-backup.sh
 echo "0 */6 * * * root /usr/local/bin/etcd-backup.sh" >> /etc/crontab
 ```
 
-#### 场景 2：从备份恢复 etcd
+#### 场景：从备份恢复 etcd
 
 **警告: 此操作会重置整个集群状态，请谨慎执行！**
 
@@ -362,9 +368,9 @@ kubectl get nodes
 kubectl get pods -n kube-system
 ```
 
-### 3.3 控制平面故障恢复
+### 控制平面故障恢复
 
-#### 场景 1：单 Master 节点故障
+#### 场景：单 Master 节点故障
 
 ```bash
 # 1. 检查故障节点状态
@@ -390,7 +396,7 @@ kubeadm join <lb-endpoint>:6443 \
   --certificate-key <cert-key>
 ```
 
-#### 场景 2：所有 Master 故障后恢复
+#### 场景：所有 Master 故障后恢复
 
 ```bash
 # 最严重的情况: 所有 Master 都不可用
@@ -411,9 +417,9 @@ kubectl get nodes
 # 5. 逐个恢复其他 Master 节点
 ```
 
-### 3.4 负载均衡器故障
+### 负载均衡器故障
 
-#### 场景 1：检查和修复 LB
+#### 场景：检查和修复 LB
 
 ```bash
 # 检查 LB 后端健康
@@ -447,7 +453,7 @@ EOF
 systemctl restart haproxy
 ```
 
-### 3.5 灾难恢复演练
+### 灾难恢复演练
 
 ```bash
 #!/bin/bash
@@ -487,7 +493,7 @@ echo -e "\n=== 检查完成 ==="
 
 ---
 
-### 3.6 高可用最佳实践
+### 高可用最佳实践
 
 ```yaml
 # PodDisruptionBudget 示例 - 保护关键应用
@@ -528,7 +534,7 @@ spec:
 
 ---
 
-### 3.7 安全生产风险提示
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险说明 | 建议 |
 |-----|---------|---------|-----|

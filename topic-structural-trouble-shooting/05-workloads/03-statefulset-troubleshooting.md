@@ -26,7 +26,7 @@ StatefulSet 是 Kubernetes 中用于管理有状态应用的工作负载控制�
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 常见问题现象
 
@@ -63,7 +63,7 @@ StatefulSet 是 Kubernetes 中用于管理有状态应用的工作负载控制�
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 StatefulSet 工作原理
 
@@ -219,7 +219,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep <statefu
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 Pod 创建阻塞问题
 

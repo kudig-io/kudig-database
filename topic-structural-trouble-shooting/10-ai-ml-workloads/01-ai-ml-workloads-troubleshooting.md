@@ -14,7 +14,13 @@
    - 调整亲和性/拓扑，让训练 Pod 同机房/同交换机。
 7. **证据留存**：保存训练日志、GPU 指标、Pod 事件与拓扑信息。
 
-## 🤖 AI/ML 工作负载常见问题与影响分析
+## 目录
+
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
+
+## 问题现象与影响分析
 
 ### AI/ML 特有故障现象
 
@@ -55,7 +61,7 @@ kubectl get services -l app=model-serving --all-namespaces
 kubectl get deployments -l app=model-serving --all-namespaces
 ```
 
-## 🔍 AI/ML 工作负载问题诊断方法
+## 排查方法与步骤
 
 ### 诊断原理说明
 
@@ -95,7 +101,7 @@ AI/ML 工作负载故障
 
 ### 详细诊断命令
 
-#### 1. GPU 资源诊断
+#### GPU 资源诊断
 
 ```bash
 #!/bin/bash
@@ -131,7 +137,7 @@ for node in $(kubectl get nodes -o name | cut -d/ -f2); do
 done
 ```
 
-#### 2. 分布式训练诊断
+#### 分布式训练诊断
 
 ```bash
 #!/bin/bash
@@ -168,7 +174,7 @@ for pod in $(kubectl get pods -l training=distributed --all-namespaces -o name);
 done
 ```
 
-#### 3. 模型服务诊断
+#### 模型服务诊断
 
 ```bash
 #!/bin/bash
@@ -212,7 +218,7 @@ echo "6. 批处理配置检查:"
 kubectl get deployments -l app=model-serving --all-namespaces -o json | jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name): batch_size=\(.spec.template.spec.containers[0].env[] | select(.name=="BATCH_SIZE") .value // "default")"'
 ```
 
-#### 4. 数据处理诊断
+#### 数据处理诊断
 
 ```bash
 #!/bin/bash
@@ -250,7 +256,7 @@ for job in $(kubectl get jobs -l data-preprocessing=active --all-namespaces -o n
 done
 ```
 
-## 🔧 AI/ML 工作负载问题解决方案
+## 解决方案与风险控制
 
 ### GPU 资源问题解决
 
@@ -635,7 +641,7 @@ spec:
           type: Directory
 ```
 
-## ⚠️ 执行风险评估
+### 安全生产风险提示
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
 |------|---------|---------|---------|
@@ -644,7 +650,7 @@ spec:
 | 模型服务扩缩容策略调整 | ⭐⭐ 中 | 可能影响服务质量 | 监控指标并及时调整 |
 | 存储性能优化 | ⭐⭐ 中 | 可能增加存储成本 | 逐步测试并监控成本 |
 
-## 📊 AI/ML 工作负载验证与监控
+### 验证与监控
 
 ### AI/ML 工作负载验证脚本
 
@@ -797,7 +803,7 @@ groups:
       description: "GPU 使用成本异常升高，当前小时费用超过 $10"
 ```
 
-## 📚 AI/ML 工作负载最佳实践
+### 最佳实践与成本优化
 
 ### AI/ML 资源管理配置
 
@@ -926,7 +932,7 @@ COST_REPORT="/var/log/kubernetes/ml-cost-optimization-$(date +%Y%m%d).log"
 echo "成本优化报告已生成: $COST_REPORT"
 ```
 
-## 🔄 典型 AI/ML 故障案例
+### 典型故障案例
 
 ### 案例一：分布式训练 NCCL 错误
 
@@ -950,7 +956,7 @@ echo "成本优化报告已生成: $COST_REPORT"
 2. 调整批处理大小和梯度累积
 3. 使用混合精度训练减少内存使用
 
-## 📞 AI/ML 支持资源
+### 支持资源与参考文档
 
 **框架官方文档**：
 - PyTorch: https://pytorch.org/tutorials/beginner/dist_overview.html

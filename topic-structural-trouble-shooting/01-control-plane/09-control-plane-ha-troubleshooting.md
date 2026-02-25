@@ -2,7 +2,7 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境高可用保障
 
-## 🚨 高可用故障现象与影响分析
+## 问题现象与影响分析
 
 ### 常见高可用故障现象
 
@@ -34,7 +34,7 @@ for component in kube-apiserver kube-controller-manager kube-scheduler; do
 done
 ```
 
-## 🔍 高可用故障诊断方法
+## 排查方法与步骤
 
 ### 诊断原理说明
 
@@ -179,7 +179,7 @@ echo "5. 近期 Leader 切换统计:"
 kubectl get events -n kube-system --field-selector reason=LeaderElection | tail -20
 ```
 
-## 🔧 高可用故障解决方案
+## 解决方案与风险控制
 
 ### etcd 集群故障恢复
 

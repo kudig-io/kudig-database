@@ -23,7 +23,7 @@
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 Deployment 控制器架构
 
@@ -583,7 +583,7 @@ kubectl get deployment <name> -o yaml
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -733,7 +733,7 @@ kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progre
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 滚动更新卡住
 
@@ -1160,7 +1160,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 
 ---
 
-## 第二部分(补充)：深度排查方法
+## 排查方法与步骤（补充）
 
 ### 2.4 progressDeadlineSeconds 深度解析
 
@@ -1470,7 +1470,7 @@ echo "(assuming 2min per pod start time)"
 
 ---
 
-## 第三部分(补充)：生产案例深度剖析
+## 生产案例深度剖析（补充）
 
 ### 案例 1: progressDeadlineSeconds 超时导致发布中断
 

@@ -26,7 +26,7 @@ Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Securit
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 Pod 安全控制体系
 
@@ -92,7 +92,7 @@ Kubernetes 通过 Pod Security Standards (PSS)、SecurityContext 和 Pod Securit
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -199,7 +199,7 @@ kubectl describe constraint <name>
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 PSA 策略问题
 

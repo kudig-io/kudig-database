@@ -77,7 +77,7 @@ cat /etc/nvidia-container-runtime/config.toml
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 Kubernetes 设备插件架构
 
@@ -165,7 +165,7 @@ cat /etc/nvidia-container-runtime/config.toml
 | 驱动不兼容 | CUDA 程序运行失败 | 应用崩溃 | 特定 CUDA 版本应用 |
 | 设备分配失败 | Pod 启动失败 | 工作负载不可用 | 请求该设备的 Pod |
 
-## 第二部分：排查方法（基础与进阶）
+## 排查方法与步骤
 
 ### 2.1 排查决策树
 
@@ -347,7 +347,7 @@ journalctl -u kubelet | grep -i "ListAndWatch" | tail -20
 | 时间片配置谨慎调整 | 影响所有共享 GPU 的 Pod 性能 | 中 |
 | 检查 CUDA 版本兼容性 | 驱动版本决定支持的最高 CUDA 版本 | 中 |
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 设备插件未注册/不可用
 

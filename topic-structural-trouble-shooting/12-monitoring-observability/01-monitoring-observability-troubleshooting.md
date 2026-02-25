@@ -2,19 +2,12 @@
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 全栈可观测性保障
 
-## 0. 10 分钟快速诊断
+## 目录
+1. [问题现象与影响分析](#问题现象与影响分析)
+2. [排查方法与步骤](#排查方法与步骤)
+3. [解决方案与风险控制](#解决方案与风险控制)
 
-1. **核心组件就绪**：Prometheus/Grafana/Loki/AlertManager Pod 是否 Running。
-2. **采集状态**：Prometheus Targets 是否大量 down；ServiceMonitor/PodMonitor 是否匹配。
-3. **存储压力**：TSDB/日志存储磁盘是否接近满水位。
-4. **告警链路**：AlertManager 接收与路由是否正常。
-5. **Metrics Server**：`kubectl top` 是否可用（影响 HPA）。
-6. **快速缓解**：
-   - 临时提升资源并缩短采样或保留周期。
-   - 对关键告警先设置抑制避免风暴。
-7. **证据留存**：保存 targets 状态、存储水位、告警路由与组件日志。
-
-## 👁️ 可观测性常见问题与影响分析
+## 问题现象与影响分析
 
 ### 可观测性核心组件故障现象
 
@@ -28,6 +21,19 @@
 | Metrics Server 不可用 | `metrics not available` 导致 HPA 失效 | ⭐⭐⭐ 高 | P0 |
 | 监控数据存储爆满 | `disk full` 或 `retention exceeded` | ⭐⭐⭐ 高 | P0 |
 | 多集群监控数据孤岛 | 跨集群指标无法聚合查询 | ⭐⭐ 中 | P1 |
+
+## 排查方法与步骤
+
+### 10 分钟快速诊断
+1. **核心组件就绪**：Prometheus/Grafana/Loki/AlertManager Pod 是否 Running。
+2. **采集状态**：Prometheus Targets 是否大量 down；ServiceMonitor/PodMonitor 是否匹配。
+3. **存储压力**：TSDB/日志存储磁盘是否接近满水位。
+4. **告警链路**：AlertManager 接收与路由是否正常。
+5. **Metrics Server**：`kubectl top` 是否可用（影响 HPA）。
+6. **快速缓解**：
+   - 临时提升资源并缩短采样或保留周期。
+   - 对关键告警先设置抑制避免风暴。
+7. **证据留存**：保存 targets 状态、存储水位、告警路由与组件日志。
 
 ### 可观测性状态检查命令
 
@@ -63,8 +69,6 @@ kubectl get pods -n monitoring -l app=alertmanager
 alertmanager_url=$(kubectl get svc alertmanager-main -n monitoring -o jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
 curl -s http://$alertmanager_url/api/v2/status && echo " ✓ AlertManager 正常" || echo " ✗ AlertManager 异常"
 ```
-
-## 🔍 可观测性问题诊断方法
 
 ### 诊断原理说明
 
@@ -104,7 +108,7 @@ curl -s http://$alertmanager_url/api/v2/status && echo " ✓ AlertManager 正常
 
 ### 详细诊断命令
 
-#### 1. Prometheus 故障诊断
+#### Prometheus 故障诊断
 
 ```bash
 #!/bin/bash
@@ -168,7 +172,7 @@ PERFORMANCE_METRICS=$(kubectl exec -n monitoring $PROMETHEUS_POD -- wget -qO- ht
 echo "$PERFORMANCE_METRICS"
 ```
 
-#### 2. Grafana 故障诊断
+#### Grafana 故障诊断
 
 ```bash
 #!/bin/bash
@@ -235,7 +239,7 @@ echo "内存使用情况:"
 kubectl top pod -n monitoring $GRAFANA_POD
 ```
 
-#### 3. Loki 故障诊断
+#### Loki 故障诊断
 
 ```bash
 #!/bin/bash
@@ -305,7 +309,7 @@ echo "最近1小时内的日志流数量:"
 echo "$STREAMS" | jq -r '.data | length'
 ```
 
-#### 4. Jaeger 故障诊断
+#### Jaeger 故障诊断
 
 ```bash
 #!/bin/bash
@@ -372,11 +376,11 @@ else
 fi
 ```
 
-## 🔧 可观测性问题解决方案
+## 解决方案与风险控制
 
 ### Prometheus 问题解决
 
-#### 方案一：Prometheus 配置优化
+#### 方案：Prometheus 配置优化
 
 ```yaml
 # Prometheus 优化配置
@@ -428,7 +432,7 @@ spec:
       action: drop
 ```
 
-#### 方案二：告警规则优化
+#### 方案：告警规则优化
 
 ```yaml
 # Prometheus 告警规则优化
@@ -489,7 +493,7 @@ spec:
 
 ### Grafana 问题解决
 
-#### 方案一：Grafana 性能优化配置
+#### 方案：Grafana 性能优化配置
 
 ```yaml
 # Grafana 性能优化配置
@@ -609,7 +613,7 @@ spec:
           claimName: grafana-storage
 ```
 
-#### 方案二：仪表板优化配置
+#### 方案：仪表板优化配置
 
 ```json
 {
@@ -688,7 +692,7 @@ spec:
 
 ### Loki 问题解决
 
-#### 方案一：Loki 存储和性能优化
+#### 方案：Loki 存储和性能优化
 
 ```yaml
 # Loki 优化配置
@@ -832,7 +836,7 @@ spec:
           storage: 50Gi
 ```
 
-#### 方案二：日志收集优化配置
+#### 方案：日志收集优化配置
 
 ```yaml
 # Promtail 优化配置
@@ -956,7 +960,7 @@ spec:
 
 ### Jaeger 问题解决
 
-#### 方案一：Jaeger 高可用配置
+#### 方案：Jaeger 高可用配置
 
 ```yaml
 # Jaeger 高可用配置
@@ -1044,7 +1048,7 @@ spec:
           storage: 1Mi
 ```
 
-#### 方案二：采样策略配置
+#### 方案：采样策略配置
 
 ```json
 {
@@ -1086,7 +1090,7 @@ spec:
 }
 ```
 
-## ⚠️ 执行风险评估
+### 执行风险评估
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
 |------|---------|---------|---------|
@@ -1095,7 +1099,7 @@ spec:
 | Loki 存储策略调整 | ⭐⭐⭐ 高 | 可能影响日志数据完整性 | 谨慎测试后应用 |
 | Jaeger 采样策略修改 | ⭐⭐ 中 | 可能影响追踪数据覆盖率 | 逐步调整采样率 |
 
-## 📊 可观测性验证与监控
+### 验证与监控
 
 ### 可观测性验证脚本
 
@@ -1244,7 +1248,7 @@ groups:
       description: "Jaeger Collector 丢弃的 spans 数量异常增加"
 ```
 
-## 📚 可观测性最佳实践
+### 最佳实践
 
 ### 可观测性架构设计
 
@@ -1396,9 +1400,9 @@ QUALITY_REPORT="/var/log/kubernetes/observability-quality-$(date +%Y%m%d).log"
 echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 ```
 
-## 🔄 典型可观测性故障案例
+### 典型故障案例
 
-### 案例一：Prometheus 数据存储爆满
+#### 案例：Prometheus 数据存储爆满
 
 **问题描述**：Prometheus 实例磁盘空间耗尽，导致数据无法写入，监控告警失效。
 
@@ -1410,7 +1414,7 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 3. 启用远程写入，将历史数据归档到长期存储
 4. 实施存储容量监控和预警机制
 
-### 案例二：Grafana 查询性能下降
+#### 案例：Grafana 查询性能下降
 
 **问题描述**：Grafana 仪表板加载缓慢，复杂查询经常超时。
 
@@ -1422,7 +1426,7 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 3. 重构复杂仪表板，分解查询
 4. 实施查询性能监控
 
-## 📞 可观测性支持资源
+### 支持资源
 
 **官方文档**：
 - Prometheus: https://prometheus.io/docs/

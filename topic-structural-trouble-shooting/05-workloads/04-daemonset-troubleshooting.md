@@ -26,7 +26,7 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 
 ---
 
-## 第一部分：问题现象与影响分析
+## 问题现象与影响分析
 
 ### 1.1 常见问题现象
 
@@ -64,7 +64,7 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 
 ---
 
-## 第二部分：排查原理与方法
+## 排查方法与步骤
 
 ### 2.1 DaemonSet 工作原理
 
@@ -237,7 +237,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep <daemons
 
 ---
 
-## 第三部分：解决方案与风险控制
+## 解决方案与风险控制
 
 ### 3.1 Pod 未调度到节点
 
