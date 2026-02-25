@@ -1,6 +1,6 @@
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 658 | **领域数量**: 33
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 668 | **领域数量**: 33
 
 ---
 
@@ -50,6 +50,8 @@
   - [topic-presentations: 培训演示](#topic-presentations-培训演示)
   - [topic-structural-trouble-shooting: 结构化故障排查](#topic-structural-trouble-shooting-结构化故障排查)
   - [topic-cheat-sheet: 快速速查卡](#topic-cheat-sheet-快速速查卡)
+  - [topic-fta: 故障树分析(FTA)](#topic-fta-故障树分析fta)
+  - [topic-febm: 取证循证方法论(FEBM)](#topic-febm-取证循证方法论febm)
 - [多维度查询附录](#多维度查询附录)
 - [本地 Gitbook](#本地-gitbook)
 - [变更历史](#变更历史)
@@ -80,6 +82,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | **测试工程师** | [106-混沌工程](#域8-可观测性-observability) → [124-CI/CD](#域10-扩展生态-extensions--ecosystem) | 混沌工程、CI/CD、可观测性 |
 | **产品经理** | [01-架构](#域1-架构基础-architecture-fundamentals) → [26-成本](#域11-ai基础设施-ai-infrastructure) → [12-AI成本](#域11-ai基础设施-ai-infrastructure) | 架构概览、成本优化、AI能力 |
 | **终端用户** | [05-kubectl](#域1-架构基础-architecture-fundamentals) → [126-Helm](#域10-扩展生态-extensions--ecosystem) → [125-GitOps](#域10-扩展生态-extensions--ecosystem) | CLI工具、部署管理 |
+| **SRE/故障调查** | [FTA快速落地](./topic-fta/23_fta_production_quick_start.md) → [FEBM快速落地](./topic-febm/8_febm_production_quick_start.md) → [结构化排障](#域12-故障排查-troubleshooting) | FTA故障树、FEBM取证、故障排查 |
 
 ---
 
@@ -131,6 +134,10 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 │  ┌────────────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐│
 │  │  topic-dictionary      │  │  topic-presentations   │  │topic-structural-trouble││
 │  │  (运维词典/16篇)       │  │  (培训演示/7篇)        │  │ -shooting(故障排查/40篇)││
+│  └────────────────────────┘  └────────────────────────┘  └────────────────────────┘│
+│  ┌────────────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐│
+│  │  topic-fta             │  │  topic-febm            │  │  topic-cheat-sheet     ││
+│  │  (故障树分析FTA/29篇)  │  │  (取证循证FEBM/9篇)   │  │  (速查卡/3篇)          ││
 │  └────────────────────────┘  └────────────────────────┘  └────────────────────────┘│
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -1123,6 +1130,136 @@ gitbook/
 | **监控可观测性** | 1 | [12-monitoring-observability](./topic-structural-trouble-shooting/12-monitoring-observability/) | Prometheus、Grafana故障排查 |
 
 **快速定位**: 详细的[故障排查索引](./topic-structural-trouble-shooting/README.md)支持按错误现象和组件快速查找。
+
+---
+
+### 故障树分析(FTA) (topic-fta)
+
+> **行业级 FTA 方法论与 AI Agent 智能运维实践** | 29篇文档(含23章+4附录+2主文档) | 覆盖 FTA 理论基础、构建实践、AI Agent 编排、AIOps 集成、工程化建设、生产快速落地
+>
+> 详细目录索引请参阅 [topic-fta/README.md](./topic-fta/README.md)
+
+本专题提供 FTA 故障树分析方法论的完整知识体系，从传统安全工程理论到云原生智能运维实践。
+
+**主文档**:
+
+| # | 文档名称 | 核心内容 | 适用场景 |
+|:---:|:---|:---|:---|
+| - | [Kubernetes 全量故障树分析排查手册](./topic-fta/kubernetes_fta_full_analysis.md) | **8个顶事件、63个底事件、完整故障树结构、排查命令速查** | Kubernetes 生产环境全量故障场景排查 |
+| - | [FTA 方法论与 AI Agent 智能运维实践(合集)](./topic-fta/fta_methodology_and_agentic_practices.md) | **22章完整合集** | 通读全文或快速搜索定位 |
+
+**第一部分: FTA 方法论理论基础**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 1 | [FTA 起源与发展史](./topic-fta/1_fta_origin_and_evolution.md) | 1961年贝尔实验室起源、IT运维三阶段演进、核心标准体系(IEC 61025/ISO 26262) |
+| 2 | [FTA 数学基础与理论模型](./topic-fta/2_fta_mathematical_foundations.md) | 布尔代数、概率论、最小割集(MCS)理论、重要度分析、可靠性指标(MTBF/MTTR) |
+| 3 | [FTA 符号体系与标准规范](./topic-fta/3_fta_symbol_system_and_standards.md) | 事件/逻辑门标准符号、编号命名规范、绘制布局规范 |
+| 4 | [FTA 方法论核心原则](./topic-fta/4_fta_core_principles.md) | 演绎法vs归纳法、MECE完备性、可观测性原则、层次化设计、独立性原则 |
+
+**第二部分: FTA 构建实践指南**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 5 | [FTA 构建完整流程](./topic-fta/5_fta_construction_process.md) | 五阶段流程、系统定义、故障模式识别(FMEA)、构建策略、底事件定义规范 |
+| 6 | [FTA 验证与质量保证](./topic-fta/6_fta_verification_and_quality.md) | 静态验证、混沌工程动态验证、Neo4j建模、FTA工具链 |
+| 7 | [FTA 维护与演进策略](./topic-fta/7_fta_maintenance_and_evolution.md) | 触发更新场景、Git版本管理、Owner制度、评审流程 |
+
+**第三部分: FTA 在 AI Agent 智能运维中的应用**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 8 | [AI Agent 时代的运维范式革命](./topic-fta/8_ai_agent_ops_revolution.md) | 传统运维瓶颈、L1-L4运维成熟度、FTA作为最佳知识表示 |
+| 9 | [FTA 作为 AI Agent 的知识骨架](./topic-fta/9_fta_as_agent_knowledge_skeleton.md) | 逻辑门→Agent编排映射、执行引擎架构、Pod CrashLoopBackOff全自愈案例 |
+| 10 | [Agent 编排模式与 FTA 逻辑门映射](./topic-fta/10_agent_orchestration_patterns.md) | 单/多Agent模式、层次化架构(Meta/Domain/Action)、冲突解决机制 |
+| 11 | [FTA 驱动的 Runbook 自动化](./topic-fta/11_fta_driven_runbook_automation.md) | 自动生成算法、结构化Runbook(etcd示例)、Agent集成 |
+| 12 | [FTA 与 AIOps 平台集成架构](./topic-fta/12_fta_aiops_integration.md) | 企业级AIOps架构、推理引擎设计、Prometheus/工单系统集成 |
+| 13 | [智能工单处理的 AI Agent 架构](./topic-fta/13_intelligent_ticket_processing.md) | NLP意图识别→FTA映射、人机协同分级、完整自动处理案例 |
+
+**第四部分: FTA 系统工程实践**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 14 | [构建 FTA 系统的工程化方法](./topic-fta/14_fta_system_engineering.md) | 实施路线图、技术栈选型、MVP三阶段路径、Neo4j数据模型 |
+| 15 | [FTA 质量评估与优化](./topic-fta/15_fta_quality_assessment.md) | 核心质量指标、Grafana Dashboard、A/B测试、混沌工程验证 |
+| 16 | [团队能力建设](./topic-fta/16_team_capability_building.md) | 组织架构设计、技能矩阵、三级培训体系(L1-L3) |
+
+**第五部分: 实战案例与最佳实践**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 17 | [行业标杆案例分析](./topic-fta/17_industry_benchmarks.md) | Google SRE实践、Netflix混沌工程+FTA、云厂商AIOps平台参考 |
+| 18 | [典型场景完整方案](./topic-fta/18_typical_scenarios.md) | 多云K8s集群故障管理、有状态服务(MySQL脑裂)故障自愈 |
+| 19 | [避坑指南与常见误区](./topic-fta/19_pitfalls_and_best_practices.md) | FTA构建5大误区、Agent开发误区、Top 10最佳实践检查清单 |
+
+**第六部分: 未来展望**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 20 | [FTA + 大语言模型的新机遇](./topic-fta/20_fta_llm_opportunities.md) | LLM增强FTA推理、自然语言构建FTA、多模态诊断引擎 |
+| 21 | [自进化的智能运维系统](./topic-fta/21_self_evolving_ops_system.md) | 强化学习优化Agent决策、联邦学习共享FTA知识、数字孪生故障仿真 |
+| 22 | [行业标准化建议](./topic-fta/22_industry_standardization.md) | CNCF标准化提议(KFTS)、OpenTelemetry FTA语义约定 |
+
+**第七部分: 生产环境快速落地**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 23 | [FTA 生产环境快速落地指南](./topic-fta/23_fta_production_quick_start.md) | 30天快速实施路线图、SRE On-Call/Postmortem/SLO集成、真实故障案例(etcd/OOMKilled/网络超时)、ROI量化模型 |
+
+**附录**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| A | [FTA 术语表](./topic-fta/appendix_a_glossary.md) | 完整FTA术语中英文对照表 |
+| B | [工具与资源清单](./topic-fta/appendix_b_tools_and_resources.md) | FTA建模/知识图谱/Agent框架/混沌工程工具 |
+| C | [参考文献](./topic-fta/appendix_c_references.md) | 国际标准、书籍、论文白皮书 |
+| D | [FTA 模板与检查表](./topic-fta/appendix_d_templates.md) | 顶事件/底事件定义模板、评审检查表 |
+
+---
+
+### 取证循证方法论(FEBM) (topic-febm)
+
+> **Forensic Evidence-Based Methodology — 从证据到结论的归纳式故障调查方法论** | 9篇文档(含7章+1生产快速落地+1主文档) | 覆盖 FEBM 理论基础、技术实现、最佳实践、AI Agent集成、建设方法论、未来演进、生产环境K8s故障Runbook
+>
+> 详细目录索引请参阅 [topic-febm/README.md](./topic-febm/README.md)
+
+**FTA 与 FEBM 的互补关系**:
+
+| 维度 | FTA 故障树分析 | FEBM 取证循证方法论 |
+|:---|:---|:---|
+| **认知方法** | 演绎法 (Deductive) — 从假设到验证 | 归纳法 (Inductive) — 从证据到结论 |
+| **核心问题** | "系统可能在哪里出问题？" | "系统实际发生了什么？" |
+| **分析方向** | 自顶向下 (Top-Down) | 自底向上 (Bottom-Up) |
+| **典型场景** | 故障预防、风险评估、自动化诊断 | 事后调查、根因分析、取证复盘 |
+
+**主文档**:
+
+| # | 文档名称 | 核心内容 | 适用场景 |
+|:---:|:---|:---|:---|
+| - | [FEBM 方法论深度剖析(合集)](./topic-febm/febm_methodology_deep_dive.md) | **7章完整合集** | 通读全文或快速搜索定位 |
+
+**第一部分: 理论基础与技术实现**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 1 | [FEBM 理论基础](./topic-febm/1_febm_theory_foundations.md) | Locard交换原理、四大核心支柱(证据中心/程序严谨/时间敏感/可辩护结论)、FEBM vs FTA认知差异、认知偏差识别 |
+| 2 | [FEBM 技术实现](./topic-febm/2_febm_technical_implementation.md) | 证据生命周期6阶段、容器检查点(CRIU)、eBPF监控、内存取证(Volatility)、K8s审计日志深度解析、多源证据关联 |
+| 3 | [FEBM 最佳实践](./topic-febm/3_febm_best_practices.md) | 5层可观测性架构、NIST SP 800-61事件响应、Forensics as Code、持续取证范式、8个反模式与缓解策略 |
+
+**第二部分: AI Agent集成与建设方法论**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 4 | [FEBM Agent工单处理](./topic-febm/4_febm_agent_ticket_processing.md) | AI Agent 7大核心能力、3个完整案例(HPA连接池耗尽/容器逃逸/数据一致性)、FTA+FEBM混合决策模型、人机协同分级 |
+| 5 | [FEBM 建设方法论](./topic-febm/5_febm_construction_methodology.md) | 5级成熟度模型、5阶段建设路线图、工具选型矩阵(15+工具)、组织角色矩阵、合规考量 |
+| 6 | [FEBM 未来演进](./topic-febm/6_febm_future_evolution.md) | AI/ML增强混合方法、云原生取证基础设施(OSDFIR)、DevSecOps集成、数字孪生仿真取证、量子计算影响 |
+| 7 | [FEBM 附录](./topic-febm/7_febm_appendix.md) | 50+术语表(中英对照)、NIST/ISO/RFC参考标准、40+工具速查、K8s审计策略模板、Falco检测规则 |
+
+**第三部分: 生产环境快速落地**
+
+| # | 文档名称 | 核心内容 |
+|:---:|:---|:---|
+| 8 | [FEBM 生产环境快速落地指南](./topic-febm/8_febm_production_quick_start.md) | 7天部署计划、最小FEBM工具栈、6个K8s故障取证Runbook(OOMKilled/CrashLoop/NodeNotReady/间歇超时/证书过期/配置漂移)、FTA+FEBM联合诊断流程、KPI仪表板、合规速查(等保2.0/SOC 2) |
 
 ---
 
