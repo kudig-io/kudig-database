@@ -7,6 +7,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+CONTENT_ROOT="$(dirname "$PROJECT_ROOT")"
 PORT="${PORT:-3000}"
 
 RED='\033[0;31m'
@@ -36,16 +38,16 @@ START_TIME=$(date +%s)
 
 # 1. 创建/更新符号链接
 log_info "更新符号链接..."
-src_dir="$SCRIPT_DIR/src"
-project_root="$(dirname "$SCRIPT_DIR")"
+project_root="$PROJECT_ROOT"
+src_dir="$project_root/src"
 
 find "$src_dir" -maxdepth 1 -type l ! -exec test -e {} \; -delete 2>/dev/null || true
 
-for dir in "$project_root"/domain-* "$project_root"/topic-* "$project_root"/tables; do
+for dir in "$CONTENT_ROOT"/domain-* "$CONTENT_ROOT"/topic-* "$CONTENT_ROOT"/tables; do
     if [[ -d "$dir" ]]; then
         name=$(basename "$dir")
         link="$src_dir/$name"
-        if [[ ! -L "$link" ]]; then
+        if [[ ! -e "$link" ]]; then
             ln -sf "../../$name" "$link"
             log_info "  新增符号链接: $name"
         fi
@@ -58,9 +60,9 @@ bash "$SCRIPT_DIR/generate-summary.sh"
 
 # 3. 构建
 log_info "构建 mdBook..."
-cd "$SCRIPT_DIR"
+cd "$project_root"
 mdbook build 2>&1 | grep -v "^$"
-count=$(find "$SCRIPT_DIR/book" -name "*.html" -not -name "print.html" | wc -l | tr -d ' ')
+count=$(find "$project_root/book" -name "*.html" -not -name "print.html" | wc -l | tr -d ' ')
 log_info "构建完成，共 $count 个 HTML 页面"
 
 # 4. 启动服务

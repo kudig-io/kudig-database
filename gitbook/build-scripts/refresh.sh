@@ -7,6 +7,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+CONTENT_ROOT="$(dirname "$PROJECT_ROOT")"
 MODE="${1:-full}"
 
 RED='\033[0;31m'
@@ -27,21 +29,21 @@ fi
 # 更新符号链接
 update_symlinks() {
     log_info "更新符号链接..."
-    local src_dir="$SCRIPT_DIR/src"
-    local project_root="$(dirname "$SCRIPT_DIR")"
+    local project_root="$PROJECT_ROOT"
+    local src_dir="$project_root/src"
 
     # 清理无效的符号链接
     find "$src_dir" -maxdepth 1 -type l ! -exec test -e {} \; -delete 2>/dev/null || true
 
     # 为所有 domain-* 和 topic-* 目录创建符号链接
-    for dir in "$project_root"/domain-* "$project_root"/topic-* "$project_root"/tables; do
+    for dir in "$CONTENT_ROOT"/domain-* "$CONTENT_ROOT"/topic-* "$CONTENT_ROOT"/tables; do
         if [[ -d "$dir" ]]; then
             local name=$(basename "$dir")
             local link="$src_dir/$name"
-            if [[ ! -L "$link" ]]; then
-                ln -sf "../../$name" "$link"
-                log_info "  新增符号链接: $name"
-            fi
+        if [[ ! -e "$link" ]]; then
+            ln -sf "../../$name" "$link"
+            log_info "  新增符号链接: $name"
+        fi
         fi
     done
 }
@@ -55,10 +57,10 @@ generate_summary() {
 # 构建
 build_book() {
     log_info "构建 mdBook..."
-    cd "$SCRIPT_DIR"
+    cd "$PROJECT_ROOT"
     mdbook build 2>&1 | grep -v "^$"
     local count
-    count=$(find "$SCRIPT_DIR/book" -name "*.html" -not -name "print.html" | wc -l | tr -d ' ')
+    count=$(find "$PROJECT_ROOT/book" -name "*.html" -not -name "print.html" | wc -l | tr -d ' ')
     log_info "构建完成，共 $count 个 HTML 页面"
 }
 

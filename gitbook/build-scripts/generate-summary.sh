@@ -6,8 +6,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-OUTPUT_FILE="$SCRIPT_DIR/src/SUMMARY.md"
+GITBOOK_ROOT="$(dirname "$SCRIPT_DIR")"
+CONTENT_ROOT="$(dirname "$GITBOOK_ROOT")"
+OUTPUT_FILE="$GITBOOK_ROOT/src/SUMMARY.md"
 
 # 提取 README.md 第一行标题
 get_title() {
@@ -39,7 +40,7 @@ get_file_title() {
 get_relative_path() {
     local file="$1"
     # 从项目根目录的相对路径，用于 src 中的符号链接
-    echo "${file#$PROJECT_ROOT/}"
+    echo "${file#$CONTENT_ROOT/}"
 }
 
 # 处理单个目录（非递归），带额外缩进
@@ -136,7 +137,7 @@ EOF
 echo "- [核心知识域 (Domain 1-12)]()" >> "$OUTPUT_FILE"
 
 for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
-    dir=$(find "$PROJECT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
+    dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
         process_directory "$dir" "  " >> "$OUTPUT_FILE"
     fi
@@ -148,7 +149,7 @@ echo "" >> "$OUTPUT_FILE"
 echo "- [底层基础知识域 (Domain 13-17)]()" >> "$OUTPUT_FILE"
 
 for i in 13 14 15 16 17; do
-    dir=$(find "$PROJECT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
+    dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
         # domain-17 有子目录，需要递归处理
         if [[ "$i" == "17" ]]; then
@@ -165,7 +166,7 @@ echo "" >> "$OUTPUT_FILE"
 echo "- [企业级运维专题 (Domain 18-33)]()" >> "$OUTPUT_FILE"
 
 for i in 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33; do
-    dir=$(find "$PROJECT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
+    dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
         process_directory "$dir" "  " >> "$OUTPUT_FILE"
     fi
@@ -177,25 +178,25 @@ echo "" >> "$OUTPUT_FILE"
 echo "- [专题资源]()" >> "$OUTPUT_FILE"
 
 # topic-cheat-sheet
-dir="$PROJECT_ROOT/topic-cheat-sheet"
+dir="$CONTENT_ROOT/topic-cheat-sheet"
 if [[ -d "$dir" ]]; then
     process_directory "$dir" "  " >> "$OUTPUT_FILE"
 fi
 
 # topic-dictionary
-dir="$PROJECT_ROOT/topic-dictionary"
+dir="$CONTENT_ROOT/topic-dictionary"
 if [[ -d "$dir" ]]; then
     process_directory "$dir" "  " >> "$OUTPUT_FILE"
 fi
 
 # topic-presentations
-dir="$PROJECT_ROOT/topic-presentations"
+dir="$CONTENT_ROOT/topic-presentations"
 if [[ -d "$dir" ]]; then
     process_directory "$dir" "  " >> "$OUTPUT_FILE"
 fi
 
 # topic-structural-trouble-shooting（递归处理子目录）
-dir="$PROJECT_ROOT/topic-structural-trouble-shooting"
+dir="$CONTENT_ROOT/topic-structural-trouble-shooting"
 if [[ -d "$dir" ]]; then
     process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
 fi

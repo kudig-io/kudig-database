@@ -10,7 +10,8 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-DIST_DIR="$SCRIPT_DIR/dist"
+CONTENT_ROOT="$(dirname "$PROJECT_ROOT")"
+DIST_DIR="$PROJECT_ROOT/dist"
 ZIP_FLAG="${1:-}"
 
 RED='\033[0;31m'
@@ -32,13 +33,13 @@ START_TIME=$(date +%s)
 
 # 1. 更新符号链接
 log_info "更新符号链接..."
-src_dir="$SCRIPT_DIR/src"
+src_dir="$PROJECT_ROOT/src"
 find "$src_dir" -maxdepth 1 -type l ! -exec test -e {} \; -delete 2>/dev/null || true
-for dir in "$PROJECT_ROOT"/domain-* "$PROJECT_ROOT"/topic-* "$PROJECT_ROOT"/tables; do
+for dir in "$CONTENT_ROOT"/domain-* "$CONTENT_ROOT"/topic-* "$CONTENT_ROOT"/tables; do
     if [[ -d "$dir" ]]; then
         name=$(basename "$dir")
         link="$src_dir/$name"
-        if [[ ! -L "$link" ]]; then
+        if [[ ! -e "$link" ]]; then
             ln -sf "../../$name" "$link"
         fi
     fi
@@ -50,8 +51,8 @@ bash "$SCRIPT_DIR/generate-summary.sh"
 
 # 3. 创建临时 book.toml（去掉 site-url，确保本地 file:// 可访问）
 log_info "准备静态导出配置..."
-ORIG_TOML="$SCRIPT_DIR/book.toml"
-BACKUP_TOML="$SCRIPT_DIR/book.toml.bak"
+ORIG_TOML="$PROJECT_ROOT/book.toml"
+BACKUP_TOML="$PROJECT_ROOT/book.toml.bak"
 cp "$ORIG_TOML" "$BACKUP_TOML"
 
 # 修改 book.toml 用于静态导出
@@ -62,7 +63,7 @@ sed -i '' 's|^build-dir = "book"|build-dir = "dist"|' "$ORIG_TOML"
 
 # 4. 构建静态版本
 log_info "构建静态版本..."
-cd "$SCRIPT_DIR"
+cd "$PROJECT_ROOT"
 mdbook build 2>&1 | grep -v "^$"
 
 # 5. 恢复原始 book.toml
