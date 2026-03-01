@@ -3927,6 +3927,31 @@ fta.evidence: "container_memory_usage > limit"
 - `runbook_contract.yaml`: 统一 Runbook 契约（输入、幂等、超时、回滚、审计字段）。
 - `coverage_report.md`: 顶事件覆盖率、观测信号绑定率、自动化率、审计留存天数。
 
+#### 23.x Kubernetes 版本适配基线（1.19-1.30）
+
+**适配目标**：确保 FTA 在 1.19–1.30 的生产集群中可运行、可验证、可自动化；每棵 FTA 树必须标注对应版本差异与替代路径。
+
+**统一适配逻辑**（所有 FTA 文件遵循）：
+1. **版本确认**：记录 `kubectl version`、控制面组件版本、节点运行时与内核版本。
+2. **API 可用性校验**：用 `kubectl api-resources`/`api-versions` 确认目标 API（如 Ingress、CronJob、PDB、Webhook）是否存在或已迁移版本。
+3. **组件差异映射**：识别控制面/数据面差异（运行时、网络、存储、准入策略），将底事件映射到当前版本可观测信号。
+4. **替代路径**：当某 API/组件在当前版本不可用时，给出等价替代（如 PSP → Pod Security Admission/OPA）。
+5. **证据一致性**：版本差异不影响“事件→指标/日志/事件”的证据闭环可验证性。
+
+**版本差异速查**（用于 FTA 中的“版本适配”段落）：
+- **1.19–1.23**：
+  - Ingress `networking.k8s.io/v1` 已 GA；`v1beta1` 在 1.22 移除，1.23+ 需全部使用 `v1`。
+  - EndpointSlice 在 1.21+ 默认启用；1.19–1.20 可能仍以 Endpoints 为主。
+  - Docker 运行时仍可能存在（dockershim 未移除），需同时覆盖 `dockerd` 与 CRI 信号。
+  - CronJob 从 `batch/v1beta1` 向 `batch/v1` 迁移期，需关注 API 版本与字段差异。
+- **1.24–1.27**：
+  - Dockershim 已移除，运行时以 `containerd/CRI-O` 为主，诊断与日志路径需适配。
+  - PodSecurityPolicy 在 1.25 移除，安全策略需映射到 Pod Security Admission / OPA Gatekeeper。
+  - Ingress/CronJob 等已完成 API 迁移，排查时默认以 `v1` 为准。
+- **1.28–1.30**：
+  - 默认以稳定 API 为基准，历史 beta API 基本完成清理；需要在 FTA 中显式标注“已移除 API 的替代路径”。
+  - 安全与准入策略以内置 PSA 与外部策略引擎并存为主，需补充策略冲突与审计链路。
+
 ### 二十四、演练与证据闭环自检
 
 **季度演练（GameDay）模板**

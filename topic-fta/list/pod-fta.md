@@ -595,3 +595,11 @@ flowchart TD
   ]
 }
 ```
+
+---
+
+## 版本适配（1.19–1.30）
+- **1.19–1.23**：可能同时存在 `dockerd`/`containerd`，需覆盖两类运行时信号；PSP 仍可能生效，准入分支需补充。
+- **1.24–1.27**：Dockershim 移除后，运行时日志与诊断路径需切换为 `containerd/CRI-O`；PSP 在 1.25 移除，策略分支迁移到 PSA/OPA。
+- **1.28–1.30**：稳定 API 为主，证据链需完整覆盖 `Pod` 生命周期与探针事件。
+- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的“版本适配基线”。

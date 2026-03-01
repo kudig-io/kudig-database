@@ -161,3 +161,11 @@ flowchart TD
   ]
 }
 ```
+
+---
+
+## 版本适配（1.19–1.30）
+- **1.19–1.23**：可能仍存在 `dockerd`，需同时覆盖 `dockerd` 与 `containerd` 日志；证书轮换与 kubelet 参数需显式校验。
+- **1.24–1.27**：Dockershim 移除后，运行时诊断路径更新为 CRI；节点证书与 PSA 相关策略需补充分支。
+- **1.28–1.30**：稳定 API 为主，节点健康与驱逐信号需与审计链路一致。
+- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的“版本适配基线”。
