@@ -1,6 +1,6 @@
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 668 | **领域数量**: 33
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-03 | **文档总数**: 886 | **领域数量**: 34
 
 ---
 
@@ -45,6 +45,7 @@
   - [域31: 硬件基础设施](#域31-硬件基础设施-hardware-infrastructure)
   - [域32: YAML配置清单手册](#域32-yaml配置清单手册-yaml-manifests-reference)
   - [域33: Kubernetes Events 全域事件大全](#域33-kubernetes-events-全域事件大全)
+  - [域34: CNCF Landscape 开源项目](#域34-cncf-landscape-开源项目)
 - [专题资源](#专题资源)
   - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
   - [topic-presentations: 培训演示](#topic-presentations-培训演示)
@@ -1704,6 +1705,56 @@ gitbook/
 | 320 | 安全准入事件 | [security-admission-rbac-events](./domain-33-kubernetes-events/13-security-admission-rbac-events.md) | 证书审批、Admission Webhook、Pod Security等14个事件 |
 | 321 | NS/GC事件 | [namespace-resource-gc-events](./domain-33-kubernetes-events/14-namespace-resource-gc-events.md) | Namespace删除、ResourceQuota、PDB等15个事件 |
 | 322 | 生态插件事件 | [ecosystem-addon-events](./domain-33-kubernetes-events/15-ecosystem-addon-events.md) | NPD、Ingress、cert-manager、Istio、ArgoCD等56+个事件 |
+
+---
+
+### 域34: CNCF Landscape 开源项目
+
+> 218 篇 | CNCF 云原生计算基金会旗下全部开源项目技术文档，按成熟度分为 Graduated（34）、Incubating（37）、Sandbox（147）三个级别
+
+#### Graduated 项目 (毕业项目 - 34个)
+
+生产就绪的成熟项目，已被大规模生产环境验证。
+
+| 项目 | 分类 | 简介 |
+|:---|:---|:---|
+| [Kubernetes](./domain-34-cncf-landscape/graduated/kubernetes/kubernetes.md) | Orchestration | 容器编排平台 |
+| [Prometheus](./domain-34-cncf-landscape/graduated/prometheus/prometheus.md) | Observability | 监控和告警系统 |
+| [Envoy](./domain-34-cncf-landscape/graduated/envoy/envoy.md) | Service Mesh | 云原生高性能代理 |
+| [Helm](./domain-34-cncf-landscape/graduated/helm/helm.md) | App Definition | Kubernetes 包管理器 |
+| [Istio](./domain-34-cncf-landscape/graduated/istio/istio.md) | Service Mesh | 服务网格平台 |
+| [etcd](./domain-34-cncf-landscape/graduated/etcd/etcd.md) | Database | 分布式键值存储 |
+| [containerd](./domain-34-cncf-landscape/graduated/containerd/containerd.md) | Container Runtime | 行业标准容器运行时 |
+| [Argo](./domain-34-cncf-landscape/graduated/argo/argo.md) | App Definition | GitOps 和工作流引擎 |
+| [Cilium](./domain-34-cncf-landscape/graduated/cilium/cilium.md) | Networking | 基于 eBPF 的网络和安全 |
+| [Harbor](./domain-34-cncf-landscape/graduated/harbor/harbor.md) | Provisioning | 企业级容器镜像仓库 |
+| [更多...](./domain-34-cncf-landscape/README.md) | - | 查看完整 Graduated 项目列表 |
+
+#### Incubating 项目 (孵化项目 - 37个)
+
+快速发展中的项目，已被多个组织在生产环境中采用。
+
+| 项目 | 分类 | 简介 |
+|:---|:---|:---|
+| [OpenTelemetry](./domain-34-cncf-landscape/incubating/opentelemetry/opentelemetry.md) | Observability | 可观测性框架 |
+| [gRPC](./domain-34-cncf-landscape/incubating/grpc/grpc.md) | RPC | 高性能 RPC 框架 |
+| [Backstage](./domain-34-cncf-landscape/incubating/backstage/backstage.md) | App Definition | 开发者门户平台 |
+| [Kyverno](./domain-34-cncf-landscape/incubating/kyverno/kyverno.md) | Security | Kubernetes 策略引擎 |
+| [Kubeflow](./domain-34-cncf-landscape/incubating/kubeflow/kubeflow.md) | AI/ML | Kubernetes ML 平台 |
+| [更多...](./domain-34-cncf-landscape/README.md) | - | 查看完整 Incubating 项目列表 |
+
+#### Sandbox 项目 (沙箱项目 - 147个)
+
+早期创新项目，代表云原生技术的探索方向。
+
+| 项目 | 分类 | 简介 |
+|:---|:---|:---|
+| [k3s](./domain-34-cncf-landscape/sandbox/k3s/k3s.md) | K8s Distribution | 轻量级 Kubernetes |
+| [MetalLB](./domain-34-cncf-landscape/sandbox/metallb/metallb.md) | Networking | 裸金属负载均衡 |
+| [K8sGPT](./domain-34-cncf-landscape/sandbox/k8sgpt/k8sgpt.md) | AI/ML | AI Kubernetes 助手 |
+| [OpenEBS](./domain-34-cncf-landscape/sandbox/openebs/openebs.md) | Storage | 容器原生存储 |
+| [Kuma](./domain-34-cncf-landscape/sandbox/kuma/kuma.md) | Service Mesh | 通用服务网格 |
+| [更多...](./domain-34-cncf-landscape/README.md) | - | 查看完整 Sandbox 项目列表 |
 
 ---
 

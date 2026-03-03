@@ -1,6 +1,6 @@
 # Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
 
-> **作者**: 多租户架构专家 | **版本**: v1.4 | **更新时间**: 2026-02-07
+> **作者**: 多租户架构专家 | **版本**: v1.5 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级多租户平台 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -718,7 +718,82 @@ spec:
                 memory: "?*"
 ```
 
-## 6. 监控与审计
+## 6. vCluster虚拟集群与ValidatingAdmissionPolicy — 2026更新
+
+### 6.1 vCluster虚拟集群多租户
+
+vCluster提供虚拟Kubernetes集群能力，是多租户架构的重要补充，在隔离性和成本之间提供了优秀的折中方案。
+
+```yaml
+多租户方案演进:
+  | 方案 | 隔离级别 | 成本 | 复杂度 | API兼容 | 适用场景 |
+  |------|---------|------|--------|---------|---------|
+  | Namespace | 弱(共享API Server) | 低 | 低 | 受限 | 信任度高的团队 |
+  | vCluster | 中(虚拟API Server) | 中 | 中 | 完整K8s API | SaaS/开发测试 |
+  | 物理集群 | 强(完全隔离) | 高 | 高 | 完整 | 强合规要求 |
+
+vCluster核心价值:
+  - 每个租户获得独立K8s API Server和控制平面
+  - 租户可自主管理CRD、RBAC、命名空间
+  - 底层共享Host集群资源(节点、网络、存储)
+  - 创建时间 < 30秒(vs 物理集群5-15分钟)
+  - 资源开销: ~256MB内存/vCluster
+  
+  详见: "[26-vCluster与虚拟集群多租户](./26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)"
+```
+
+### 6.2 ValidatingAdmissionPolicy租户策略
+
+```yaml
+# 使用K8s原生VAP实现租户策略强制执行
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: tenant-resource-limits
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+  validations:
+    - expression: >
+        object.spec.containers.all(c,
+          has(c.resources) && has(c.resources.limits) &&
+          quantity(c.resources.limits.memory).isLessThan(quantity("8Gi")) &&
+          quantity(c.resources.limits.cpu).isLessThan(quantity("4"))
+        )
+      message: "租户Pod资源不能超过单Pod限制(CPU<4, Memory<8Gi)"
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: tenant-resource-limits-binding
+spec:
+  policyName: tenant-resource-limits
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        tenant-tier: "standard"
+
+多租户策略分层:
+  平台级(ANP + VAP):
+    - 全局网络隔离(AdminNetworkPolicy)
+    - 全局资源限制(ValidatingAdmissionPolicy)
+    - 镜像源白名单
+    
+  租户级(Kyverno/OPA):
+    - 租户自定义策略
+    - 内部资源配额管理
+    - 标签规范强制
+    
+  详见: "[24-策略即代码与治理自动化](./24-kubernetes-policy-as-code-governance-automation.md)"
+```
+
+## 7. 监控与审计
 
 ### 6.1 多租户监控架构
 
@@ -912,3 +987,8 @@ data:
         Port  9200
         Index tenant-audit-logs
         Type  _doc
+
+---
+*本文档基于大型企业多租户平台的实践经验编写，提供从基础隔离到高级安全控制的完整解决方案。*
+
+*2026-03 更新: 新增vCluster虚拟集群多租户方案、ValidatingAdmissionPolicy原生租户策略；关联文档 [24-策略即代码](./24-kubernetes-policy-as-code-governance-automation.md)、[26-vCluster多租户](./26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)；版本升级至v1.5。*

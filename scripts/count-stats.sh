@@ -4,8 +4,8 @@
 
 set -e
 
-# 切换到脚本所在目录
-cd "$(dirname "$0")"
+# 切换到项目根目录
+cd "$(dirname "$0")/.."
 
 # 格式化数字（添加千分位分隔符）
 format_number() {

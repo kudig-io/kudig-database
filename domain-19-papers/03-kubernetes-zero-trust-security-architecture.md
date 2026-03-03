@@ -1,6 +1,6 @@
 # Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 
-> **作者**: Kubernetes安全架构专家 | **版本**: v1.2 | **更新时间**: 2026-02-07
+> **作者**: Kubernetes安全架构专家 | **版本**: v2.0 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级安全合规要求 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -785,6 +785,80 @@ graph TD
     安全评分: 90-95分
 ```
 
+## 8. 2026安全特性更新
+
+### 8.1 eBPF运行时安全 (Tetragon)
+
+Tetragon是Cilium子项目，提供eBPF驱动的运行时安全强制执行能力，是零信任架构运行时层的关键组件。
+
+```yaml
+Tetragon在零信任体系中的位置:
+  网络层(L3/L4): Cilium eBPF网络策略
+  运行时层: Tetragon TracingPolicy
+    - 进程执行监控: 检测并阻断容器内执行shell/wget/curl等危险操作
+    - 文件访问监控: 检测对/etc/shadow、/var/run/secrets等敏感文件的访问
+    - 网络连接监控: 检测异常外部连接(C2通信、数据外泄)
+    - 内核能力监控: 检测capability提权尝试
+  
+  与Falco互补:
+    Tetragon: 实时阻断(Sigkill/NotifyEnforcer) + 审计
+    Falco: 检测 + 告警 + 合规审计(规则库更丰富)
+    推荐: 两者并用，Tetragon阻断 + Falco审计
+  
+  详见: "[18-eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)"
+```
+
+### 8.2 供应链安全集成
+
+将供应链安全纳入零信任策略体系，确保从构建到运行的全链路可信。
+
+```yaml
+零信任 + 供应链安全整合:
+  构建时:
+    - SLSA Level 3+ 密封构建
+    - Sigstore无密钥签名
+    - SBOM自动生成
+    
+  准入时:
+    - Kyverno/Gatekeeper验证镜像签名
+    - 禁止未签名/未扫描的镜像部署
+    - SBOM存在性检查
+    
+  运行时:
+    - Tetragon监控异常进程执行
+    - Falco检测容器逃逸尝试
+    - 镜像漂移检测(运行时与注册表比对)
+  
+  详见: "[20-供应链安全实践](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)"
+```
+
+### 8.3 Kubernetes 1.33/1.34 原生安全特性
+
+```yaml
+K8s 1.33/1.34安全增强:
+  有序命名空间删除 (Ordered Namespace Deletion):
+    - 防止命名空间删除时的资源泄漏
+    - 确保Finalizer按正确顺序执行
+    - 安全清理Secret和ConfigMap
+    
+  Workload Identity用于镜像拉取:
+    - 基于ServiceAccount的镜像拉取认证
+    - 无需长期凭证(imagePullSecret)
+    - OIDC联邦身份认证
+    - 减少凭证泄露攻击面
+    
+  ValidatingAdmissionPolicy (GA):
+    - K8s原生CEL表达式准入策略
+    - 无需外部Webhook(降低延迟和故障面)
+    - 替代部分Kyverno/OPA场景
+    - 详见 "[24-策略即代码与治理自动化](./24-kubernetes-policy-as-code-governance-automation.md)"
+    
+  Native Sidecar Containers (GA):
+    - 安全代理(如Vault Agent)正式支持生命周期管理
+    - initContainer + restartPolicy: Always
+    - 在主容器之前启动、之后终止
+```
+
 ## 10. 最佳实践总结
 
 ### 10.1 安全实施原则
@@ -843,3 +917,5 @@ graph TD
 
 ---
 *本文档基于企业级安全实践经验编写，符合NIST、ISO 27001等国际安全标准。建议定期进行安全评估和更新。*
+
+*2026-03 更新: 新增eBPF运行时安全(Tetragon)、供应链安全集成、K8s 1.33/1.34原生安全特性；关联文档 [18-eBPF与Cilium](./18-kubernetes-ebpf-cilium-deep-practice.md)、[20-供应链安全](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)、[24-策略即代码](./24-kubernetes-policy-as-code-governance-automation.md)。*

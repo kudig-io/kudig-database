@@ -1,6 +1,6 @@
 # Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)
 
-> **作者**: 网络安全架构专家 | **版本**: v1.3 | **更新时间**: 2026-02-07
+> **作者**: 网络安全架构专家 | **版本**: v2.0 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级网络安全防护 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -997,12 +997,168 @@ spec:
     ☐ 团队培训完成
 ```
 
-## 9. 未来发展趋势
+## 9. AdminNetworkPolicy与eBPF策略执行 — 2026更新
 
-### 9.1 智能化网络策略
+### 9.1 AdminNetworkPolicy (集群级网络策略)
+
+AdminNetworkPolicy (ANP) 和 BaselineAdminNetworkPolicy (BANP) 是Kubernetes原生的集群级网络策略API，在K8s 1.32+进入Beta。它们补充了命名空间级NetworkPolicy，为平台管理员提供全局策略控制能力。
 
 ```yaml
-智能化网络策略趋势:
+# AdminNetworkPolicy vs NetworkPolicy权限层级
+策略优先级(从高到低):
+  1. AdminNetworkPolicy (ANP): 管理员强制策略，不可被命名空间策略覆盖
+  2. NetworkPolicy: 命名空间级策略，开发者自主管理
+  3. BaselineAdminNetworkPolicy (BANP): 管理员默认基线策略，可被NetworkPolicy覆盖
+  
+  执行逻辑:
+    ANP(Allow/Deny/Pass) → NetworkPolicy(Allow/Deny) → BANP(Allow/Deny)
+    - ANP Allow/Deny: 最终决策，跳过后续评估
+    - ANP Pass: 委托给NetworkPolicy评估
+    - NetworkPolicy匹配: 执行策略决策
+    - 无NetworkPolicy匹配: 交给BANP评估
+    - BANP Allow/Deny: 最终兜底决策
+---
+# AdminNetworkPolicy示例：管理员强制禁止访问元数据服务
+apiVersion: policy.networking.k8s.io/v1alpha1
+kind: AdminNetworkPolicy
+metadata:
+  name: deny-cloud-metadata
+spec:
+  priority: 10  # 数字越小优先级越高
+  subject:
+    namespaces:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values: ["kube-system"]
+  egress:
+    - name: "deny-metadata-service"
+      action: Deny
+      to:
+        - networks:
+            - "169.254.169.254/32"  # AWS/GCP元数据服务
+      ports:
+        - portNumber:
+            port: 80
+            protocol: TCP
+        - portNumber:
+            port: 443
+            protocol: TCP
+---
+# AdminNetworkPolicy：强制允许监控采集
+apiVersion: policy.networking.k8s.io/v1alpha1
+kind: AdminNetworkPolicy
+metadata:
+  name: allow-monitoring-scrape
+spec:
+  priority: 20
+  subject:
+    namespaces: {}  # 所有命名空间
+  ingress:
+    - name: "allow-prometheus"
+      action: Allow
+      from:
+        - namespaces:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+      ports:
+        - portNumber:
+            port: 9090
+            protocol: TCP
+        - portNumber:
+            port: 8080
+            protocol: TCP
+---
+# BaselineAdminNetworkPolicy：默认拒绝所有跨命名空间流量
+apiVersion: policy.networking.k8s.io/v1alpha1
+kind: BaselineAdminNetworkPolicy
+metadata:
+  name: default-deny-cross-namespace
+spec:
+  subject:
+    namespaces: {}
+  ingress:
+    - name: "deny-cross-namespace"
+      action: Deny
+      from:
+        - namespaces:
+            notSameLabels:
+              - kubernetes.io/metadata.name
+  egress:
+    - name: "allow-dns"
+      action: Allow
+      to:
+        - namespaces:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - portNumber:
+            port: 53
+            protocol: UDP
+        - portNumber:
+            port: 53
+            protocol: TCP
+    - name: "deny-cross-namespace-egress"
+      action: Deny
+      to:
+        - namespaces:
+            notSameLabels:
+              - kubernetes.io/metadata.name
+```
+
+### 9.2 Cilium替代传统CNI的网络策略增强
+
+```yaml
+# Cilium网络策略与ANP的协同工作
+Cilium与AdminNetworkPolicy集成:
+  Cilium 1.16+:
+    - 完整支持AdminNetworkPolicy和BaselineAdminNetworkPolicy
+    - ANP在eBPF datapath中优先于CiliumNetworkPolicy执行
+    - 策略判决通过Hubble可观测
+    
+  策略层级(Cilium环境):
+    1. AdminNetworkPolicy (K8s原生)
+    2. CiliumClusterwideNetworkPolicy (Cilium集群级)
+    3. CiliumNetworkPolicy / NetworkPolicy (命名空间级)
+    4. BaselineAdminNetworkPolicy (K8s基线)
+    
+  迁移到Cilium CNI:
+    - 现有NetworkPolicy保持兼容(无需修改)
+    - 额外获得L7策略和eBPF加速
+    - 详细迁移指南见 "[18-eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)"
+```
+
+### 9.3 eBPF网络策略执行引擎
+
+```yaml
+eBPF vs iptables策略执行对比:
+  | 维度 | iptables (Calico等) | eBPF (Cilium) |
+  |------|-------------------|---------------|
+  | 规则查找 | O(n) 线性遍历 | O(1) eBPF Map哈希 |
+  | 规则更新 | 全量替换(锁) | 增量更新(无锁) |
+  | 10K规则时延迟 | 显著增加 | 基本无影响 |
+  | conntrack | 内核nf_conntrack | eBPF CT Map |
+  | L7感知 | 不支持 | 支持(HTTP/gRPC/DNS) |
+  | 策略审计 | 需额外工具 | Hubble原生支持 |
+  | 身份感知 | IP地址匹配 | 安全身份(Security Identity) |
+  
+  Cilium安全身份机制:
+    原理: 每个Endpoint分配数字身份(基于标签)
+    优势:
+      - IP地址变化不影响策略(身份不变)
+      - 策略匹配效率高(数字比较 vs CIDR匹配)
+      - 支持跨集群身份同步(ClusterMesh)
+    eBPF Map结构:
+      - Identity Map: IP → Identity映射
+      - Policy Map: (SrcIdentity, DstIdentity, Port) → Verdict
+```
+
+## 10. 未来发展趋势
+
+### 10.1 智能化网络策略
+
+```yaml
+智能化网络策略趋势(2026-2027):
   1. AI驱动的策略生成
      - 基于流量分析自动生成策略
      - 智能异常检测和响应
@@ -1013,11 +1169,16 @@ spec:
      - 动态访问控制决策
      - 行为分析驱动的策略
   
-  3. 服务网格集成
-     - 网络策略与服务网格协同
-     - 统一的策略管理平台
-     - L4-L7策略统一控制
+  3. eBPF全面替代iptables
+     - Cilium成为企业级CNI标准
+     - AdminNetworkPolicy + CiliumNetworkPolicy协同
+     - eBPF LSM增强运行时安全
+     - 详见 "[18-eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)"
+  
+  4. Gateway API与网络策略统一
+     - 流量管理与安全策略统一管理
+     - 详见 "[19-Gateway API与现代流量管理](./19-kubernetes-gateway-api-modern-traffic-management.md)"
 ```
 
 ---
-*本文档基于企业级网络安全实践经验编写，持续更新最新技术和最佳实践。*
+*本文档基于企业级网络安全实践经验编写，持续更新最新技术和最佳实践。2026-03更新：新增AdminNetworkPolicy、eBPF策略执行引擎内容。*
