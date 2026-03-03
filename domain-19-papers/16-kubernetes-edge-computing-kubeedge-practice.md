@@ -1,6 +1,6 @@
 # Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 
-> **作者**: 边缘计算架构专家 | **版本**: v1.5 | **更新时间**: 2026-02-07
+> **作者**: 边缘计算架构专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 边缘计算平台架构 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -1473,6 +1473,19 @@ if __name__ == "__main__":
     ☐ 故障处理流程制定
 ```
 
+## N. 边缘计算 2026更新
+
+### N.1 边缘AI推理
+- KubeEdge + AI模型分发（EdgeMesh + 模型推理服务）
+- 边缘轻量化模型部署（ONNX Runtime/TFLite）
+- 联邦学习架构（云-边协同训练）
+
+### N.2 WebAssembly边缘部署
+- Wasm在资源受限边缘节点的优势（<1MB运行时、毫秒级冷启动）
+- KubeEdge + containerd Wasm shim集成
+- 边缘Wasm应用热更新策略
+- 详见 "[22-WebAssembly工作负载](./22-kubernetes-webassembly-wasm-workloads.md)"
+
 ## 9. 未来发展趋势
 
 ### 9.1 边缘计算演进方向
@@ -1497,3 +1510,4 @@ if __name__ == "__main__":
 
 ---
 *本文档基于企业级边缘计算实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增边缘计算2026更新章节（边缘AI推理、WebAssembly边缘部署）。*

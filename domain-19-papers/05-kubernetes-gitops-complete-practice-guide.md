@@ -1,6 +1,6 @@
 # Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
 
-> **作者**: GitOps实践专家 | **版本**: v2.0 | **更新时间**: 2026-02-07
+> **作者**: GitOps实践专家 | **版本**: v2.1 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级CI/CD流水线 | **复杂度**: ⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -827,6 +827,76 @@ GitOps成熟度等级:
     成熟度: 90-95%
 ```
 
+## N. GitOps 2026技术更新
+
+### N.1 ArgoCD 2.x最新特性
+- ApplicationSet SCM Provider（自动发现GitHub/GitLab组织下所有仓库）
+- ApplicationSet Pull模型（多集群部署无需集群凭证）
+- argocd-image-updater（自动追踪镜像新版本并更新Git）
+
+```yaml
+# ApplicationSet SCM Provider示例
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: org-apps
+  namespace: argocd
+spec:
+  generators:
+  - scmProvider:
+      github:
+        organization: my-org
+        tokenRef:
+          secretName: github-token
+          key: token
+      filters:
+      - repositoryMatch: "^app-.*"
+  template:
+    metadata:
+      name: "{{repository}}"
+    spec:
+      project: default
+      source:
+        repoURL: "{{url}}"
+        targetRevision: main
+        path: k8s/
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{repository}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+```
+
+### N.2 FluxCD OCI支持
+- OCIRepository资源（从OCI Registry拉取Helm Chart/Kustomize overlay）
+- cosign签名验证（供应链安全集成）
+- 详见 "[20-供应链安全](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)"
+
+```yaml
+# OCIRepository资源示例
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: app-manifests
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: oci://ghcr.io/my-org/app-manifests
+  ref:
+    tag: latest
+  verify:
+    provider: cosign
+    secretRef:
+      name: cosign-public-key
+```
+
+### N.3 GitOps + AI/ML Pipeline
+- 模型版本作为GitOps管理对象
+- KServe + ArgoCD模型部署GitOps化
+- DVC + Git管理数据集版本
+
 ## 10. 未来发展趋势
 
 ### 10.1 技术演进方向
@@ -851,3 +921,4 @@ GitOps发展趋势:
 
 ---
 *本文档基于企业级GitOps实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增GitOps 2026技术更新章节（ArgoCD 2.x新特性、FluxCD OCI支持、GitOps + AI/ML Pipeline）。*

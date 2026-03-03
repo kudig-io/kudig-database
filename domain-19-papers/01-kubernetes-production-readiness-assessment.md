@@ -1,6 +1,6 @@
 # Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)
 
-> **作者**: Kubernetes SRE专家团队 | **版本**: v1.0 | **更新时间**: 2026-02-07
+> **作者**: Kubernetes SRE专家团队 | **版本**: v1.1 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级Kubernetes集群评估 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -444,6 +444,16 @@ graph LR
     - 成本优化和治理策略
 ```
 
+## N. 生产就绪性评估 2026更新
+
+### N.1 2026新增评估维度
+- Gateway API就绪性（是否从Ingress迁移到Gateway API）
+- OpenTelemetry可观测性成熟度（是否部署OTel Collector）
+- 供应链安全（是否实施SBOM/SLSA/Sigstore）
+- eBPF/Cilium网络成熟度（是否迁移到Cilium CNI）
+- AI/ML GPU调度能力（如果有GPU工作负载）
+- 策略即代码覆盖率（Kyverno/OPA策略覆盖度）
+
 ## 6. 附录
 
 ### 6.1 参考标准和规范
@@ -466,3 +476,4 @@ trivy               # 镜像安全扫描
 
 ---
 *本文档由Kubernetes生产运维专家团队编写，基于真实企业环境实践经验。建议每季度进行一次完整的生产就绪性评估。*
+*最近更新：2026-03-03，新增生产就绪性评估2026更新章节（Gateway API、OpenTelemetry、供应链安全、eBPF/Cilium、AI/ML GPU、策略即代码等新评估维度）。*

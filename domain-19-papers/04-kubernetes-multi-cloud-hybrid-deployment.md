@@ -1,6 +1,6 @@
 # Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 
-> **作者**: 云原生架构专家 | **版本**: v1.3 | **更新时间**: 2026-02-07
+> **作者**: 云原生架构专家 | **版本**: v1.4 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级多云战略实施 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -877,6 +877,20 @@ kubectl apply -f global-loadbalancer.yaml
     ✓ 绩效评估体系
 ```
 
+## N. 2026多云技术更新
+
+### N.1 Cluster API v1.7+ ClusterClass
+ClusterClass实现集群模板化创建，统一多云集群配置：
+- ClusterClass定义YAML（包含controlPlane和workers模板引用）
+- 变量(variables)机制实现不同云的参数化配置
+- ClusterTopology引用ClusterClass一键创建集群
+
+### N.2 vCluster跨云多租户
+vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟集群：
+- 租户视角统一的K8s API
+- 底层自动路由到对应云的资源
+- 详见 "[26-vCluster与虚拟集群多租户](./26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)"
+
 ## 9. 未来发展趋势
 
 ### 9.1 技术演进方向
@@ -901,3 +915,4 @@ kubectl apply -f global-loadbalancer.yaml
 
 ---
 *本文档基于大型企业多云部署实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增2026多云技术更新章节（Cluster API v1.7+ ClusterClass、vCluster跨云多租户）。*

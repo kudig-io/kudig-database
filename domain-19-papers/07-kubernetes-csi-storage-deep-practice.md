@@ -1,6 +1,6 @@
 # Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
 
-> **作者**: 存储架构专家 | **版本**: v1.4 | **更新时间**: 2026-02-07
+> **作者**: 存储架构专家 | **版本**: v1.5 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级存储架构设计 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -636,6 +636,50 @@ CSI实施检查清单:
     ☐ 安全补丁定期更新
 ```
 
+## N. CSI存储 2026更新
+
+### N.1 ReadWriteOncePod (GA)
+- 第三种访问模式：确保PVC只能被单个Pod挂载
+- 对比RWO/RWX/RWOP三种模式
+- 适用场景：StatefulSet强一致性数据库
+
+```yaml
+# ReadWriteOncePod PVC示例
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-pvc
+  namespace: production
+spec:
+  accessModes:
+  - ReadWriteOncePod
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 100Gi
+```
+
+### N.2 Volume Group Snapshots
+- VolumeGroupSnapshot/VolumeGroupSnapshotContent资源
+- 多Volume一致性快照（数据库WAL+数据文件同时快照）
+- 对比传统单Volume快照的局限
+
+```yaml
+# VolumeGroupSnapshot示例
+apiVersion: groupsnapshot.storage.k8s.io/v1alpha1
+kind: VolumeGroupSnapshot
+metadata:
+  name: db-group-snapshot
+  namespace: production
+spec:
+  volumeGroupSnapshotClassName: csi-hostpath-groupsnapclass
+  source:
+    selector:
+      matchLabels:
+        app: postgres
+        snapshot-group: db-data
+```
+
 ## 8. 未来发展趋势
 
 ### 8.1 存储技术演进
@@ -660,3 +704,4 @@ CSI实施检查清单:
 
 ---
 *本文档基于企业级存储架构实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增CSI存储2026更新章节（ReadWriteOncePod GA、Volume Group Snapshots）。*

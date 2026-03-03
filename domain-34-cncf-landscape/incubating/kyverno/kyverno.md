@@ -18,42 +18,194 @@
 ## 项目概述
 
 ### 简介
-Kyverno 是 Kubernetes 原生的策略引擎，使用 YAML 定义策略，无需学习新语言。
+Kyverno 是 Kubernetes 原生的策略引擎，使用 YAML 定义策略，无需学习新的策略语言。它支持验证、变更和生成资源，简化 Kubernetes 策略管理。
+
+### 发展历程
+| 时间 | 里程碑 |
+|:---|:---|
+| 2019 | Nirmata 公司创建 |
+| 2020-11 | 加入 CNCF Sandbox |
+| 2022-07 | 晋升为 CNCF Incubating |
 
 ### 核心定位
-Kyverno 提供验证、变更和生成策略，简化 Kubernetes 策略管理。
+Kyverno 是 OPA/Gatekeeper 的 Kubernetes 原生替代方案，以"无需学习新语言"著称，使用熟悉的 YAML 定义策略。
 
 ---
 
-## 核心功能
+## 架构设计
 
-### 主要特性
-- **YAML 策略**: 无需学习 Rego
-- **验证策略**: 资源准入控制
-- **变更策略**: 自动修改资源
-- **生成策略**: 自动创建资源
+### 策略类型
 
-### 示例
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   Kyverno 策略类型                               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  1. Validate (验证)                                              │
+│     ┌──────────┐     ┌──────────┐     ┌──────────┐             │
+│     │ Resource │────►│ Kyverno  │────►│ Allow/   │             │
+│     │ Request  │     │ Validate │     │ Deny     │             │
+│     └──────────┘     └──────────┘     └──────────┘             │
+│                                                                  │
+│  2. Mutate (变更)                                                │
+│     ┌──────────┐     ┌──────────┐     ┌──────────┐             │
+│     │ Resource │────►│ Kyverno  │────►│ Modified │             │
+│     │ Request  │     │ Mutate   │     │ Resource │             │
+│     └──────────┘     └──────────┘     └──────────┘             │
+│                                                                  │
+│  3. Generate (生成)                                              │
+│     ┌──────────┐     ┌──────────┐     ┌──────────┐             │
+│     │ Resource │────►│ Kyverno  │────►│ New      │             │
+│     │ Created  │     │ Generate │     │ Resource │             │
+│     └──────────┘     └──────────┘     └──────────┘             │
+│                                                                  │
+│  4. VerifyImages (镜像验证)                                      │
+│     ┌──────────┐     ┌──────────┐     ┌──────────┐             │
+│     │ Pod with │────►│ Kyverno  │────►│ Allow if │             │
+│     │ Image    │     │ Verify   │     │ Signed   │             │
+│     └──────────┘     └──────────┘     └──────────┘             │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 策略示例
+
+### 验证策略
+
+```yaml
+# 要求所有 Pod 必须有资源限制
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-resource-limits
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-resources
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "CPU and memory limits are required"
+        pattern:
+          spec:
+            containers:
+              - resources:
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"
+```
+
+### 变更策略
+
+```yaml
+# 自动添加标签
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-labels
+spec:
+  rules:
+    - name: add-team-label
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            labels:
+              managed-by: kyverno
+```
+
+### 生成策略
+
+```yaml
+# 自动创建 NetworkPolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: generate-network-policy
+spec:
+  rules:
+    - name: default-deny
+      match:
+        any:
+          - resources:
+              kinds:
+                - Namespace
+      generate:
+        apiVersion: networking.k8s.io/v1
+        kind: NetworkPolicy
+        name: default-deny
+        namespace: "{{request.object.metadata.name}}"
+        data:
+          spec:
+            podSelector: {}
+            policyTypes:
+              - Ingress
+              - Egress
+```
+
+### 镜像签名验证
+
 ```yaml
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: require-labels
+  name: verify-image-signature
 spec:
   validationFailureAction: Enforce
   rules:
-  - name: check-labels
-    match:
-      resources:
-        kinds:
-        - Pod
-    validate:
-      message: "The label 'app' is required."
-      pattern:
-        metadata:
-          labels:
-            app: "?*"
+    - name: verify-signature
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      verifyImages:
+        - imageReferences:
+            - "registry.example.com/*"
+          attestors:
+            - entries:
+                - keys:
+                    publicKeys: |
+                      -----BEGIN PUBLIC KEY-----
+                      ...
+                      -----END PUBLIC KEY-----
 ```
+
+---
+
+## 安装部署
+
+```bash
+# Helm 安装
+helm repo add kyverno https://kyverno.github.io/kyverno/
+helm install kyverno kyverno/kyverno -n kyverno --create-namespace
+
+# 验证
+kubectl get pods -n kyverno
+kubectl get clusterpolicies
+```
+
+---
+
+## Kyverno vs OPA/Gatekeeper
+
+| 特性 | Kyverno | OPA/Gatekeeper |
+|:---|:---|:---|
+| **策略语言** | YAML | Rego |
+| **学习曲线** | 低 | 高 |
+| **变更策略** | 原生支持 | 需额外配置 |
+| **生成资源** | 原生支持 | 不支持 |
+| **镜像验证** | 原生支持 | 需 Cosign |
 
 ---
 
@@ -62,6 +214,7 @@ spec:
 - [官方文档](https://kyverno.io/docs)
 - [GitHub Repo](https://github.com/kyverno/kyverno)
 - [CNCF 项目页面](https://www.cncf.io/projects/kyverno/)
+- [策略库](https://kyverno.io/policies/)
 
 ---
 

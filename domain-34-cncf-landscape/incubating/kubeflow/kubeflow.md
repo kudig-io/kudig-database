@@ -18,17 +18,128 @@
 ## 项目概述
 
 ### 简介
-Kubeflow 是 Kubernetes 上的机器学习平台，简化 ML 工作流的部署和管理。
+Kubeflow 是在 Kubernetes 上运行机器学习工作流的开源平台。它提供从实验到生产的完整 ML 生命周期管理，包括数据准备、模型训练、调参、部署和监控。
+
+### 发展历程
+| 时间 | 里程碑 |
+|:---|:---|
+| 2017 | Google 开源 |
+| 2023-07 | 加入 CNCF Incubating |
+
+### 核心定位
+Kubeflow 是 Kubernetes 上 MLOps 的标准平台，让数据科学家可以专注于 ML 而非基础设施。
 
 ---
 
-## 核心功能
+## 核心组件
 
-### 主要特性
-- **Pipelines**: ML 流水线编排
-- **Notebooks**: Jupyter 笔记本服务
-- **Training Operator**: 分布式训练
-- **KServe**: 模型服务
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     Kubeflow 组件                                │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────────┐│
+│  │                    Kubeflow Pipelines                        ││
+│  │  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐    ││
+│  │  │  Data   │──►│ Train   │──►│ Evaluate│──►│ Deploy  │    ││
+│  │  │ Prep    │   │ Model   │   │ Model   │   │ Model   │    ││
+│  │  └─────────┘   └─────────┘   └─────────┘   └─────────┘    ││
+│  └─────────────────────────────────────────────────────────────┘│
+│                                                                  │
+│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐       │
+│  │   Notebooks   │  │   Training    │  │    KServe     │       │
+│  │   (Jupyter)   │  │   Operator    │  │  (Inference)  │       │
+│  │               │  │ TF/PyTorch/   │  │               │       │
+│  │ 交互式开发    │  │ MPI/XGBoost   │  │ 模型部署服务  │       │
+│  └───────────────┘  └───────────────┘  └───────────────┘       │
+│                                                                  │
+│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐       │
+│  │    Katib      │  │   Spark       │  │   Feature     │       │
+│  │   (AutoML)    │  │   Operator    │  │   Store       │       │
+│  │               │  │               │  │               │       │
+│  │ 超参数调优    │  │ Spark 集成    │  │ 特征管理      │       │
+│  └───────────────┘  └───────────────┘  └───────────────┘       │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Kubeflow Pipelines 示例
+
+```python
+from kfp import dsl
+from kfp.dsl import Input, Output, Dataset, Model
+
+@dsl.component
+def preprocess_data(raw_data: Input[Dataset], processed_data: Output[Dataset]):
+    import pandas as pd
+    df = pd.read_csv(raw_data.path)
+    # 数据预处理
+    df.to_csv(processed_data.path, index=False)
+
+@dsl.component
+def train_model(data: Input[Dataset], model: Output[Model]):
+    import pickle
+    from sklearn.ensemble import RandomForestClassifier
+    # 训练模型
+    clf = RandomForestClassifier()
+    # ...
+    with open(model.path, 'wb') as f:
+        pickle.dump(clf, f)
+
+@dsl.pipeline(name='ML Pipeline')
+def ml_pipeline():
+    preprocess = preprocess_data(raw_data=dsl.importer(...))
+    train = train_model(data=preprocess.outputs['processed_data'])
+
+# 编译并提交
+from kfp import compiler
+compiler.Compiler().compile(ml_pipeline, 'pipeline.yaml')
+```
+
+---
+
+## 分布式训练
+
+```yaml
+# TFJob - TensorFlow 分布式训练
+apiVersion: kubeflow.org/v1
+kind: TFJob
+metadata:
+  name: mnist-distributed
+spec:
+  tfReplicaSpecs:
+    PS:
+      replicas: 2
+      template:
+        spec:
+          containers:
+            - name: tensorflow
+              image: tensorflow/tensorflow:2.12.0
+              command: ["python", "/app/train.py"]
+    Worker:
+      replicas: 4
+      template:
+        spec:
+          containers:
+            - name: tensorflow
+              image: tensorflow/tensorflow:2.12.0
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+```
+
+---
+
+## 安装
+
+```bash
+# 使用 kustomize 安装
+git clone https://github.com/kubeflow/manifests.git
+cd manifests
+while ! kustomize build example | kubectl apply -f -; do sleep 10; done
+```
 
 ---
 
@@ -37,6 +148,8 @@ Kubeflow 是 Kubernetes 上的机器学习平台，简化 ML 工作流的部署�
 - [官方文档](https://www.kubeflow.org/docs)
 - [GitHub Repo](https://github.com/kubeflow/kubeflow)
 - [CNCF 项目页面](https://www.cncf.io/projects/kubeflow/)
+- [KServe](https://kserve.github.io/)
+- [Katib](https://www.kubeflow.org/docs/components/katib/)
 
 ---
 

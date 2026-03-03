@@ -1,6 +1,6 @@
 # Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
 
-> **作者**: Kubernetes成本优化专家 | **版本**: v1.5 | **更新时间**: 2026-02-07
+> **作者**: Kubernetes成本优化专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级成本管控 | **复杂度**: ⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -1057,6 +1057,20 @@ if __name__ == "__main__":
     ☐ 成本优化激励机制
 ```
 
+## N. FinOps 2026更新
+
+### N.1 GPU成本治理
+- GPU资源单价远高于CPU（H100 $3-5/小时/卡 vs CPU $0.05/核/小时）
+- GPU利用率监控（DCGM Exporter + Kubecost集成）
+- GPU碎片化成本分析（不可调度GPU的浪费量化）
+- GPU共享策略的成本效益（MIG/时间片/MPS）
+
+### N.2 GKE Autopilot按Pod计费模型
+- Autopilot按Pod实际请求资源计费（无节点浪费）
+- vs Standard模式的TCO对比（Autopilot典型节省30-40%）
+- 适用场景分析（波动型工作负载最受益）
+- 详见 "[25-GKE Autopilot与Google AI基础设施](./25-gke-autopilot-google-cloud-ai-infrastructure.md)"
+
 ## 9. 未来发展趋势
 
 ### 9.1 智能化成本管理
@@ -1081,3 +1095,4 @@ if __name__ == "__main__":
 
 ---
 *本文档基于企业级成本治理实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增FinOps 2026更新章节（GPU成本治理、GKE Autopilot按Pod计费模型）。*

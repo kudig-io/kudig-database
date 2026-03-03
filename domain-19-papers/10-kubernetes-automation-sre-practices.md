@@ -1,6 +1,6 @@
 # Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
 
-> **作者**: SRE专家 | **版本**: v2.2 | **更新时间**: 2026-02-07
+> **作者**: SRE专家 | **版本**: v2.3 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级运维自动化 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -1313,6 +1313,19 @@ SRE实施检查清单:
     ☐ 成本优化机制建立
 ```
 
+## N. SRE实践 2026更新
+
+### N.1 AI辅助事件响应
+- LLM辅助故障排查（结构化Runbook + LLM推理）
+- K8s事件流 → AI分析 → 自动修复建议工作流
+- AI Ops告警聚合与根因分析
+
+### N.2 OpenTelemetry集成SRE
+- SLO基于OTel指标定义
+- Error Budget基于Trace错误率计算
+- Pyrra SLO管理工具集成
+- 详见 "[23-OpenTelemetry原生可观测性](./23-kubernetes-opentelemetry-native-observability.md)"
+
 ## 8. 未来发展趋势
 
 ### 8.1 智能化运维
@@ -1337,3 +1350,4 @@ SRE智能化趋势:
 
 ---
 *本文档基于企业级SRE实践经验编写，持续更新最新技术和最佳实践。*
+*最近更新：2026-03-03，新增SRE实践2026更新章节（AI辅助事件响应、OpenTelemetry集成SRE）。*

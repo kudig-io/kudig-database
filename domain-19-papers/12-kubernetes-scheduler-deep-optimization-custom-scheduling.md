@@ -1,6 +1,6 @@
 # Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 
-> **作者**: Kubernetes调度专家 | **版本**: v1.5 | **更新时间**: 2026-02-07
+> **作者**: Kubernetes调度专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 高性能调度与资源优化 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -1150,9 +1150,250 @@ kubectl get events --all-namespaces --field-selector involvedObject.kind=Pod -o 
     ☐ 节点资源监控
 ```
 
-## 8. 未来发展趋势
+## 8. GPU调度与DRA — 2026更新
 
-### 8.1 智能调度
+> **更新时间**: 2026-03-03 | 涵盖 K8s 1.33 DRA Beta、NVIDIA KAI Scheduler 集成及拓扑感知增强
+
+### 8.1 NVIDIA KAI Scheduler集成
+
+```yaml
+KAI Scheduler与默认调度器的关系:
+  定位: 专门为AI/ML GPU工作负载设计的调度器
+  部署方式: 作为独立调度器与默认kube-scheduler并行运行
+  核心能力:
+    Gang Scheduling: 训练作业所有Pod一起调度或一起等待
+    GPU Bin Packing: 最小化GPU碎片化，提高利用率
+    拓扑感知: NVLink/NVSwitch域感知，优化GPU间通信
+    公平共享: 队列级Priority-based Fairshare，时间衰减
+  使用方式: Pod设置schedulerName: kai-scheduler
+  详见: "[17-AI/ML GPU调度与LLM推理](./17-kubernetes-aiml-gpu-scheduling-llm-inference.md)"
+```
+
+#### Gang Scheduling示例：PodGroup + Job
+
+```yaml
+# 第一步：创建PodGroup，声明Gang调度约束
+apiVersion: scheduling.run.ai/v1
+kind: PodGroup
+metadata:
+  name: pytorch-training-group
+  namespace: ml-workloads
+spec:
+  minMember: 8          # 至少8个Pod同时就绪才能开始调度
+  minResources:
+    nvidia.com/gpu: "8"
+  queue: training-queue  # 绑定到KAI队列（Fairshare调度）
+  priorityClassName: high-priority
+---
+# 第二步：Job中所有Pod引用同一PodGroup
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pytorch-distributed-training
+  namespace: ml-workloads
+spec:
+  parallelism: 8
+  completions: 8
+  template:
+    metadata:
+      labels:
+        app: pytorch-training
+        # KAI Scheduler通过此注解关联PodGroup
+      annotations:
+        scheduling.run.ai/pod-group-name: pytorch-training-group
+    spec:
+      # 关键：指定使用KAI调度器，不走默认kube-scheduler
+      schedulerName: kai-scheduler
+      restartPolicy: OnFailure
+      containers:
+      - name: trainer
+        image: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
+        command: ["torchrun", "--nproc_per_node=1", "train.py"]
+        resources:
+          requests:
+            nvidia.com/gpu: "1"
+            cpu: "8"
+            memory: "32Gi"
+          limits:
+            nvidia.com/gpu: "1"
+            cpu: "16"
+            memory: "64Gi"
+        env:
+        - name: NCCL_DEBUG
+          value: "INFO"
+        - name: NCCL_SOCKET_IFNAME
+          value: "eth0"
+```
+
+> **Gang Scheduling工作原理**：KAI Scheduler持续检查`minMember`数量的Pod是否能同时在集群中找到满足资源需求的节点。若资源不足，所有Pod进入等待队列（而非部分调度），避免死锁和资源浪费。
+
+### 8.2 Dynamic Resource Allocation (DRA)
+
+```yaml
+DRA调度集成(K8s 1.33 Beta):
+  问题: Extended Resources(nvidia.com/gpu: N)只能表达数量，无法表达:
+    - GPU型号选择(H100 vs L4)
+    - 拓扑约束(同NVLink域)
+    - 显存容量要求
+
+  DRA解决方案:
+    ResourceClaim: 声明GPU需求(型号/显存/拓扑)
+    DeviceClass: 定义设备类型和驱动
+    ResourceClaimTemplate: Pod内联声明
+
+  调度流程:
+    1. Pod引用ResourceClaim
+    2. 调度器评估节点上可用设备
+    3. CEL表达式匹配设备属性
+    4. 约束条件确保设备亲和性(同拓扑域)
+    5. 分配设备并绑定Pod到节点
+```
+
+#### ResourceClaim YAML示例（CEL选择器）
+
+```yaml
+# DeviceClass：定义NVIDIA GPU设备类型
+apiVersion: resource.k8s.io/v1beta1
+kind: DeviceClass
+metadata:
+  name: nvidia-gpu-h100
+spec:
+  selectors:
+  - cel:
+      expression: >
+        device.driver == "gpu.nvidia.com" &&
+        device.attributes["gpu.nvidia.com"].productName.matches("H100.*")
+  config:
+  - opaque:
+      driver: gpu.nvidia.com
+      parameters:
+        apiVersion: gpu.nvidia.com/v1alpha1
+        kind: GpuConfig
+        sharing:
+          strategy: TimeSlicing
+---
+# ResourceClaim：为训练作业声明2块H100，要求同一NVLink域
+apiVersion: resource.k8s.io/v1beta1
+kind: ResourceClaim
+metadata:
+  name: llm-training-gpus
+  namespace: ml-workloads
+spec:
+  devices:
+    requests:
+    - name: gpu
+      deviceClassName: nvidia-gpu-h100
+      count: 2
+      selectors:
+      - cel:
+          # 进一步约束：显存>=80GB，且两块GPU在同一NVLink域
+          expression: >
+            device.attributes["gpu.nvidia.com"].memory.isGreaterThan(quantity("80Gi")) &&
+            device.attributes["gpu.nvidia.com"].nvlinkDomain == "domain-0"
+    constraints:
+    # 约束：所有请求的设备必须在同一节点的同一NVLink拓扑域
+    - requests: ["gpu"]
+      matchAttribute: "gpu.nvidia.com/nvlinkDomain"
+---
+# Pod引用ResourceClaim
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llm-trainer
+  namespace: ml-workloads
+spec:
+  schedulerName: kube-scheduler   # DRA由默认调度器内置支持
+  resourceClaims:
+  - name: gpus
+    resourceClaimName: llm-training-gpus
+  containers:
+  - name: trainer
+    image: nvcr.io/nvidia/pytorch:24.05-py3
+    command: ["python", "train_llm.py"]
+    resources:
+      claims:
+      - name: gpus    # 引用Pod级别的ResourceClaim
+    env:
+    - name: CUDA_VISIBLE_DEVICES
+      value: "0,1"
+```
+
+> **DRA vs Extended Resources 对比**：
+>
+> | 能力 | Extended Resources | DRA (1.33 Beta) |
+> |------|--------------------|-----------------|
+> | 数量分配 | ✅ | ✅ |
+> | 型号选择 | ❌ | ✅ CEL表达式 |
+> | 显存约束 | ❌ | ✅ |
+> | 拓扑亲和 | ❌ | ✅ matchAttribute |
+> | 动态参数 | ❌ | ✅ opaque config |
+> | 驱动集成 | 有限 | 原生DRA驱动 |
+
+### 8.3 拓扑感知调度增强
+
+```yaml
+GPU工作负载NUMA感知调度:
+  挑战:
+    - GPU通过PCIe连接到CPU，不同NUMA节点GPU访问延迟差异达2-3倍
+    - NVLink/NVSwitch域跨NUMA边界导致带宽降低
+    - 多GPU训练需要GPU间高速通信（NVLink 4.0: 900 GB/s）
+
+  TopologyManager集成:
+    配置: kubelet --topology-manager-policy=best-effort
+    范围: --topology-manager-scope=pod  # Pod级别NUMA对齐
+    效果:
+      - CPU、内存、GPU设备对齐到同一NUMA节点
+      - 减少跨NUMA内存访问（NUMA latency降低40-60%）
+
+  NVLink拓扑感知调度:
+    工具: NVIDIA GPU Feature Discovery (GFD)
+    节点标签自动生成:
+      nvidia.com/gpu.topology.nvlink.capable: "true"
+      nvidia.com/gpu.topology.nvlink.count: "6"      # NVLink数量
+      nvidia.com/gpu.topology.nvlink.peer-count: "7" # NVLink对等GPU数
+    调度策略: nodeAffinity + DRA matchAttribute双重保障
+```
+
+```yaml
+# 拓扑感知GPU Pod配置示例
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nvlink-aware-training
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          # 要求节点具备NVLink互联能力
+          - key: nvidia.com/gpu.topology.nvlink.capable
+            operator: In
+            values: ["true"]
+          # 要求节点有足够的NVLink对等GPU（适合8-GPU训练）
+          - key: nvidia.com/gpu.product
+            operator: In
+            values: ["NVIDIA-H100-SXM5-80GB", "NVIDIA-A100-SXM4-80GB"]
+  # 配合TopologyManager实现NUMA对齐
+  containers:
+  - name: trainer
+    image: nvcr.io/nvidia/pytorch:24.05-py3
+    resources:
+      requests:
+        nvidia.com/gpu: "8"
+        cpu: "64"         # 与GPU同NUMA节点的CPU核心
+        memory: "512Gi"   # 与GPU同NUMA节点的内存
+      limits:
+        nvidia.com/gpu: "8"
+```
+
+> **相关文档**：
+> - GPU调度深度实践 → [17-AI/ML GPU调度与LLM推理](./17-kubernetes-aiml-gpu-scheduling-llm-inference.md)
+> - GKE Autopilot GPU基础设施 → [25-GKE Autopilot与Google Cloud AI基础设施](./25-gke-autopilot-google-cloud-ai-infrastructure.md)
+
+## 9. 未来发展趋势
+
+### 9.1 智能调度
 
 ```yaml
 智能调度发展趋势:
@@ -1160,17 +1401,23 @@ kubectl get events --all-namespaces --field-selector involvedObject.kind=Pod -o 
      - 机器学习资源预测
      - 智能调度策略
      - 自适应调度算法
-  
+
   2. 多维度资源调度
-     - GPU/FPGA等异构资源
+     - GPU/FPGA等异构资源（参见第8章DRA实践）
      - 网络带宽资源
      - 存储性能资源
-  
+
   3. 混合云调度
      - 跨云资源调度
      - 边缘计算调度
      - 混合部署优化
+
+  4. AI/ML专项调度演进 (2026+)
+     - DRA正式GA（预计K8s 1.34）
+     - KAI Scheduler与Kueue深度集成
+     - 多集群GPU资源联邦调度
+     - 参见: 17-AI/ML GPU调度 & 25-GKE Autopilot AI基础设施
 ```
 
 ---
-*本文档基于企业级调度优化实践经验编写，持续更新最新技术和最佳实践。*
+*本文档基于企业级调度优化实践经验编写，持续更新最新技术和最佳实践。最近更新：2026-03-03，新增GPU/DRA调度章节。*
