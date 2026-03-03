@@ -1,0 +1,267 @@
+# Day 23: Ingress
+
+> **学习时间**: 4-5 小时 | **主题**: Ingress 路由规则与控制器配置
+
+---
+
+## 今日目标
+
+- [ ] 理解 Ingress 资源与 IngressClass 概念
+- [ ] 掌握 ACK 中 ALB Ingress Controller 和 Nginx Ingress Controller 的使用
+- [ ] 能配置基于域名和路径的路由规则
+- [ ] 了解 TLS 证书配置与灰度发布
+
+---
+
+## 理论学习 (2h)
+
+### 必读文档
+
+1. **K8S Ingress 基础**
+   - 文件: `../../../domain-06-service-networking/03-ingress.md`
+   - 重点: Ingress 规则、IngressClass、默认后端
+
+2. **ACK Ingress 管理**
+   - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/260-ack-networking.md`
+   - 重点: ALB Ingress vs Nginx Ingress 选型
+
+### 阅读要点
+
+- **Ingress**: L7 层流量路由，基于域名/路径分发到不同 Service
+- **IngressClass**: 指定使用哪个 Ingress Controller 处理
+- **ALB Ingress Controller**: 阿里云 ALB (应用型负载均衡) 原生集成，推荐生产使用
+- **Nginx Ingress Controller**: 社区方案，ACK 默认组件，灵活度高
+- **TLS 终止**: 在 Ingress 层配置 HTTPS 证书
+- **灰度发布**: 通过 annotation 实现金丝雀/蓝绿发布
+
+---
+
+## 实践任务 (2.5h)
+
+### 任务 1: Nginx Ingress Controller 基础路由 (40min)
+
+```bash
+# 确认 Nginx Ingress Controller 已安装
+kubectl get pods -n kube-system | grep nginx-ingress
+kubectl get svc -n kube-system nginx-ingress-lb
+
+# 创建两个测试应用
+kubectl create deployment app-v1 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24
+kubectl create deployment app-v2 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24
+kubectl expose deployment app-v1 --port=80
+kubectl expose deployment app-v2 --port=80
+
+# 创建基于路径的 Ingress 路由
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v1
+            port:
+              number: 80
+      - path: /v2
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+EOF
+
+# 查看 Ingress
+kubectl get ingress demo-ingress
+kubectl describe ingress demo-ingress
+
+# 获取 Ingress Controller 外部 IP 并测试
+INGRESS_IP=$(kubectl get svc -n kube-system nginx-ingress-lb -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+curl -H "Host: demo.example.com" http://${INGRESS_IP}/v1
+curl -H "Host: demo.example.com" http://${INGRESS_IP}/v2
+```
+
+### 任务 2: TLS 证书配置 (30min)
+
+```bash
+# 创建自签名证书 (测试用)
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout tls.key -out tls.crt \
+  -subj "/CN=demo.example.com"
+
+# 创建 TLS Secret
+kubectl create secret tls demo-tls --cert=tls.crt --key=tls.key
+
+# 更新 Ingress 添加 TLS
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress-tls
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - demo.example.com
+    secretName: demo-tls
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v1
+            port:
+              number: 80
+EOF
+
+# 测试 HTTPS
+curl -k -H "Host: demo.example.com" https://${INGRESS_IP}/
+```
+
+### 任务 3: 灰度发布 (Canary) (40min)
+
+```bash
+# 创建灰度 Ingress (将 20% 流量导向 v2)
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress-canary
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "20"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+EOF
+
+# 基于 Header 的灰度 (精准控制)
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress-canary-header
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "x-canary"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v2
+            port:
+              number: 80
+EOF
+
+# 测试灰度
+curl -H "Host: demo.example.com" -H "x-canary: true" http://${INGRESS_IP}/
+```
+
+### 任务 4: ALB Ingress Controller (30min)
+
+```bash
+# 确认 ALB Ingress Controller 是否安装
+kubectl get pods -n kube-system | grep alb
+
+# ALB Ingress 示例 (如已安装 ALB Ingress Controller)
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-demo
+  annotations:
+    alb.ingress.kubernetes.io/address-type: internet
+    alb.ingress.kubernetes.io/vswitch-ids: "<vswitch-id-1>,<vswitch-id-2>"
+spec:
+  ingressClassName: alb
+  rules:
+  - host: alb-demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-v1
+            port:
+              number: 80
+EOF
+
+# 清理
+kubectl delete ingress --all
+kubectl delete secret demo-tls
+kubectl delete svc app-v1 app-v2
+kubectl delete deploy app-v1 app-v2
+rm -f tls.key tls.crt
+```
+
+---
+
+## 费曼复述 (0.5h)
+
+1. **Ingress 和 Service LoadBalancer 有什么区别？各自适用什么场景？**
+2. **ALB Ingress Controller 和 Nginx Ingress Controller 的核心区别是什么？**
+3. **如何通过 Ingress 实现灰度发布？有哪几种流量分配方式？**
+
+---
+
+## 今日检验
+
+- [ ] 能创建基于域名和路径的 Ingress 路由规则
+- [ ] 能为 Ingress 配置 TLS 证书
+- [ ] 了解灰度发布 (Canary) 的配置方式
+- [ ] 理解 ALB Ingress 与 Nginx Ingress 的选型
+
+---
+
+## 核心概念总结
+
+| Ingress Controller | 提供方 | 特点 | 适用场景 |
+|-------------------|--------|------|---------|
+| Nginx Ingress | 社区/ACK | 灵活、配置丰富 | 通用场景、自定义需求多 |
+| ALB Ingress | 阿里云 | 云原生、高性能 | 生产环境、大流量 |
+
+| 路由方式 | 配置方式 | 说明 |
+|---------|---------|------|
+| 域名路由 | `rules[].host` | 按域名分发 |
+| 路径路由 | `rules[].http.paths[]` | 按 URL 路径分发 |
+| 灰度发布 | canary annotation | 按权重/Header 分流 |
+| TLS 终止 | `tls[]` + Secret | HTTPS 卸载 |
+
+---
+
+## 明日预告
+
+Day 24 将深入学习 Terway CNI 架构与配置。
