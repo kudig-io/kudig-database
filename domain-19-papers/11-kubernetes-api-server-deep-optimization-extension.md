@@ -1,6 +1,6 @@
 # Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)
 
-> **作者**: Kubernetes核心组件专家 | **版本**: v1.6 | **更新时间**: 2026-02-07
+> **作者**: Kubernetes核心组件专家 | **版本**: v1.7 | **更新时间**: 2026-03-03
 > **适用场景**: 大规模集群控制平面优化 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ## 🎯 摘要
@@ -750,7 +750,99 @@ EOF
 echo "性能报告已生成: /tmp/apiserver-performance-report.txt"
 ```
 
-## 6. 安全加固与最佳实践
+## 6. Kubernetes 1.33/1.34 API Server新特性 — 2026更新
+
+### 6.1 Streaming List API
+
+```yaml
+Streaming List优化:
+  问题: 传统List操作将所有对象加载到内存，大集群中可能导致API Server OOM
+  
+  解决方案 (K8s 1.33 Beta):
+    - WatchList: 使用Watch流替代初始List
+    - 分块传输: 客户端流式接收数据
+    - 内存优化: API Server内存峰值大幅降低
+    
+  效果:
+    - 10000个Pod的List操作内存峰值降低60-80%
+    - 对Informer/Controller开发的影响: 自动受益(client-go透明支持)
+    
+  启用方式:
+    - Feature Gate: WatchList=true (1.33 Beta默认启用)
+    - 客户端: 使用client-go v0.30+自动利用
+```
+
+### 6.2 CEL Admission表达式
+
+```yaml
+# ValidatingAdmissionPolicy - 替代部分Webhook
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: require-resource-limits
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+  validations:
+    - expression: >
+        object.spec.containers.all(c,
+          has(c.resources) &&
+          has(c.resources.limits) &&
+          has(c.resources.limits.cpu) &&
+          has(c.resources.limits.memory)
+        )
+      message: "所有容器必须设置CPU和内存limits"
+      reason: Invalid
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: require-resource-limits-binding
+spec:
+  policyName: require-resource-limits
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchExpressions:
+        - key: environment
+          operator: In
+          values: ["production", "staging"]
+
+CEL vs Webhook准入对比:
+  | 维度 | CEL (ValidatingAdmissionPolicy) | Webhook (Kyverno/OPA) |
+  |------|-------------------------------|----------------------|
+  | 延迟 | <1ms (进程内) | 5-50ms (网络往返) |
+  | 可用性 | 无外部依赖 | 依赖Webhook服务可用 |
+  | 表达能力 | CEL表达式(中等) | Rego/YAML(强大) |
+  | 生态集成 | K8s原生 | 丰富的策略库 |
+  | 推荐场景 | 简单验证逻辑 | 复杂策略/mutate/generate |
+```
+
+### 6.3 Aggregated Discovery API
+
+```yaml
+Aggregated Discovery优化:
+  问题: kubectl等客户端启动时需要多次调用API获取资源发现信息
+  
+  解决方案:
+    - /api 和 /apis 端点返回聚合的发现文档
+    - 单次请求获取所有API Group/Version/Resource信息
+    - 减少客户端到API Server的请求次数
+    
+  效果:
+    - kubectl启动速度提升30-50%
+    - 客户端库初始化时间显著减少
+    - 适用场景: 大量CRD的集群(100+ CRD)
+    
+  状态: K8s 1.33 GA
+```
+
+## 7. 安全加固与最佳实践
 
 ### 6.1 安全配置
 
@@ -867,3 +959,8 @@ rules:
   resources:
   - group: ""
     resources: ["endpoints", "services", "services/status"]
+
+---
+*本文档基于大规模生产环境的API Server实践经验编写，覆盖性能优化、扩展开发和安全加固等核心主题。*
+
+*2026-03 更新: 新增K8s 1.33/1.34特性 — Streaming List API、ValidatingAdmissionPolicy CEL准入、Aggregated Discovery GA；版本升级至v1.7。*
