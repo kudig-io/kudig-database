@@ -3,5 +3,9 @@ gitbook/book/
 gitbook/dist/
 gitbook/*.zip
 
+# mdBook generated HTML in domain directories
+domain-*/**/*.html
+domain-*/*.html
+
 # macOS
 .DS_Store

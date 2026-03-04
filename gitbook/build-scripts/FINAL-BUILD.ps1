@@ -6,11 +6,12 @@ param([switch]$Zip)
 $ErrorActionPreference = "Stop"
 $ScriptDir = $PSScriptRoot
 $ProjectRoot = Split-Path $ScriptDir
-$SrcDir = Join-Path $ScriptDir "src"
-$Dist = Join-Path $ScriptDir "dist"
+$SrcDir = Join-Path $ProjectRoot "src"
+$Dist = Join-Path $ProjectRoot "dist"
 
 Write-Host "`n=== GitBook Offline Builder ===" -ForegroundColor Cyan
 Write-Host "Project: $ProjectRoot" -ForegroundColor Gray
+Write-Host "Source: $SrcDir" -ForegroundColor Gray
 Write-Host "Output: $Dist`n" -ForegroundColor Gray
 
 # Find mdbook
@@ -24,30 +25,47 @@ $mdbook = if (Test-Path "$env:USERPROFILE\.local\bin\mdbook.exe") {
 }
 
 Write-Host "[1/6] Cleaning old files..." -ForegroundColor Yellow
-Get-ChildItem $SrcDir -EA SilentlyContinue | Where-Object { 
+Get-ChildItem $SrcDir -ErrorAction SilentlyContinue | Where-Object { 
     $_.Name -like "domain-*" -or $_.Name -like "topic-*" 
-} | Remove-Item -Recurse -Force
+} | Where-Object { $_.Attributes -match 'ReparsePoint' } | Remove-Item -Force
 
 Write-Host "[2/6] Creating directory junctions..." -ForegroundColor Yellow
 $linked = 0
 @("domain-*", "topic-*") | ForEach-Object {
-    Get-ChildItem $ProjectRoot -Directory -Filter $_ | ForEach-Object {
+    Get-ChildItem $ProjectRoot -Directory -Filter $_ -ErrorAction SilentlyContinue | ForEach-Object {
         $link = Join-Path $SrcDir $_.Name
-        $null = cmd /c "mklink /J `"$link`" `"$($_.FullName)`"" 2>&1
-        if ($?) { $linked++ }
+        if (-not (Test-Path $link)) {
+            $null = cmd /c "mklink /J `"$link`" `"$($_.FullName)`"" 2>&1
+            if ($?) { $linked++ }
+        }
     }
 }
 Write-Host "  Created $linked junctions" -ForegroundColor Green
 
 Write-Host "[3/6] Copying README..." -ForegroundColor Yellow
-Copy-Item (Join-Path $ProjectRoot "README.md") (Join-Path $SrcDir "README.md") -Force
+$readmeSrc = Join-Path (Split-Path $ProjectRoot) "README.md"
+if (Test-Path $readmeSrc) {
+    Copy-Item $readmeSrc (Join-Path $SrcDir "README.md") -Force
+} else {
+    $readmeSrc2 = Join-Path $ProjectRoot "README.md"
+    if (Test-Path $readmeSrc2) {
+        # README.md 已在 src 中，无需复制
+        Write-Host "  README.md already in place" -ForegroundColor Gray
+    }
+}
 
 Write-Host "[4/6] Generating SUMMARY.md..." -ForegroundColor Yellow
-& (Join-Path $ScriptDir "generate-summary.ps1")
+$genScript = Join-Path $ScriptDir "generate-summary-three-level.ps1"
+if (Test-Path $genScript) {
+    & $genScript
+} else {
+    Write-Host "  [WARN] generate-summary-three-level.ps1 not found, trying generate-summary-utf8-fixed.ps1" -ForegroundColor Yellow
+    & (Join-Path $ScriptDir "generate-summary-utf8-fixed.ps1")
+}
 
 Write-Host "[5/6] Building with mdbook..." -ForegroundColor Yellow
 # Backup & modify config
-$cfg = Join-Path $ScriptDir "book.toml"
+$cfg = Join-Path $ProjectRoot "book.toml"
 $bak = "$cfg.backup"
 Copy-Item $cfg $bak -Force
 
@@ -58,7 +76,7 @@ try {
     [IO.File]::WriteAllText($cfg, $txt, [Text.Encoding]::UTF8)
     
     # Build
-    Push-Location $ScriptDir
+    Push-Location $ProjectRoot
     $out = & $mdbook build 2>&1
     Pop-Location
     

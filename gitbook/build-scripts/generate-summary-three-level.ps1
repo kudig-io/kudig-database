@@ -108,11 +108,11 @@ for ($i = 1; $i -le 12; $i++) {
 
 $null = $lines.Add("")
 $null = $lines.Add("---")
-$null = $lines.Add("- [" + [char]0x6269 + [char]0x5C55 + [char]0x9886 + [char]0x57DF + " (Domain 13-33)]()")
+$null = $lines.Add("- [" + [char]0x6269 + [char]0x5C55 + [char]0x9886 + [char]0x57DF + " (Domain 13+)]()")
 
-Write-Host "Processing Domain 13-33..." -ForegroundColor Yellow
+Write-Host "Processing Domain 13+..." -ForegroundColor Yellow
 
-for ($i = 13; $i -le 33; $i++) {
+for ($i = 13; $i -le 99; $i++) {
     $Dir = Get-ChildItem $ProjectRoot -Directory -Filter "domain-$i-*" -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($Dir) {
         Write-Host "  Processing $($Dir.Name)..." -ForegroundColor Gray
@@ -129,7 +129,7 @@ $null = $lines.Add("- [" + [char]0x4E13 + [char]0x9898 + [char]0x5185 + [char]0x
 
 Write-Host "Processing Topics..." -ForegroundColor Yellow
 
-@("topic-cheat-sheet", "topic-dictionary", "topic-presentations", "topic-structural-trouble-shooting") | ForEach-Object {
+@("topic-cheat-sheet", "topic-deployment", "topic-dictionary", "topic-febm", "topic-fta", "topic-learn", "topic-presentations", "topic-structural-trouble-shooting") | ForEach-Object {
     $Dir = Join-Path $ProjectRoot $_
     if (Test-Path $Dir) {
         Write-Host "  Processing $_..." -ForegroundColor Gray

@@ -97,11 +97,11 @@ for ($i = 1; $i -le 12; $i++) {
 
 [void]$lines.Add("")
 [void]$lines.Add("---")
-[void]$lines.Add("- [扩展领域 (Domain 13-33)]()")
+[void]$lines.Add("- [扩展领域 (Domain 13+)]()")
 
-# Domain 13-33
-for ($i = 13; $i -le 33; $i++) {
-    $Dir = Get-ChildItem $ProjectRoot -Directory -Filter "domain-$i-*" | Select-Object -First 1
+# Domain 13+
+for ($i = 13; $i -le 99; $i++) {
+    $Dir = Get-ChildItem $ProjectRoot -Directory -Filter "domain-$i-*" -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($Dir) {
         $Items = Process-DirectoryRecursive $Dir.FullName "  "
         foreach ($item in $Items) {
@@ -117,9 +117,10 @@ for ($i = 13; $i -le 33; $i++) {
 $topicHeader = "- [专题内容 (Topics)]()"
 [void]$lines.Add($topicHeader)
 
-# Topics
-@("topic-cheat-sheet", "topic-dictionary", "topic-presentations", "topic-structural-trouble-shooting") | ForEach-Object {
-    $Dir = Join-Path $ProjectRoot $_
+# Topics - auto-discover all topic-* directories
+$TopicDirs = Get-ChildItem $ProjectRoot -Directory -Filter "topic-*" -ErrorAction SilentlyContinue | Sort-Object Name
+foreach ($TopicDir in $TopicDirs) {
+    $Dir = $TopicDir.FullName
     if (Test-Path $Dir) {
         $Items = Process-DirectoryRecursive $Dir "  "
         foreach ($item in $Items) {

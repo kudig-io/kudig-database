@@ -1,6 +1,6 @@
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-03 | **文档总数**: 886 | **领域数量**: 34
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-03 | **文档总数**: 950+ | **领域数量**: 40
 
 ---
 
@@ -46,6 +46,12 @@
   - [域32: YAML配置清单手册](#域32-yaml配置清单手册-yaml-manifests-reference)
   - [域33: Kubernetes Events 全域事件大全](#域33-kubernetes-events-全域事件大全)
   - [域34: CNCF Landscape 开源项目](#域34-cncf-landscape-开源项目)
+  - [域35: eBPF技术体系](#域35-ebpf技术体系-ebpf-technology)
+  - [域36: 平台工程](#域36-平台工程-platform-engineering)
+  - [域37: 边缘计算](#域37-边缘计算-edge-computing)
+  - [域38: WebAssembly云原生](#域38-webassembly云原生-webassembly-cloud-native)
+  - [域39: 供应链安全](#域39-供应链安全-supply-chain-security)
+  - [域98: 云原生API网关](#域98-云原生api网关-cloud-native-api-gateway)
 - [专题资源](#专题资源)
   - [topic-dictionary: 运维词典](#topic-dictionary-运维词典)
   - [topic-presentations: 培训演示](#topic-presentations-培训演示)
@@ -1755,6 +1761,141 @@ gitbook/
 | [OpenEBS](./domain-34-cncf-landscape/sandbox/openebs/openebs.md) | Storage | 容器原生存储 |
 | [Kuma](./domain-34-cncf-landscape/sandbox/kuma/kuma.md) | Service Mesh | 通用服务网格 |
 | [更多...](./domain-34-cncf-landscape/README.md) | - | 查看完整 Sandbox 项目列表 |
+
+---
+
+### 域35: eBPF技术体系 (eBPF Technology)
+
+> 10 篇 | eBPF 内核技术、Cilium CNI、Tetragon 运行时安全、Hubble 网络可观测性、bcc/bpftrace 工具链
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | eBPF架构 | [ebpf-architecture-fundamentals](./domain-35-ebpf-technology/01-ebpf-architecture-fundamentals.md) | eBPF 虚拟机、程序类型、验证器、JIT、BTF/CO-RE |
+| 02 | Map数据结构 | [ebpf-map-types-data-structures](./domain-35-ebpf-technology/02-ebpf-map-types-data-structures.md) | Hash/Array/LRU/RingBuffer Map、用户空间通信 |
+| 03 | Cilium架构 | [cilium-cni-architecture](./domain-35-ebpf-technology/03-cilium-cni-architecture.md) | Agent/Operator/CNI、kube-proxy替代、Cluster Mesh |
+| 04 | Cilium策略 | [cilium-network-policy](./domain-35-ebpf-technology/04-cilium-network-policy.md) | L3/L4/L7策略、HTTP/gRPC/Kafka规则、身份策略 |
+| 05 | Service Mesh | [cilium-service-mesh](./domain-35-ebpf-technology/05-cilium-service-mesh.md) | 无Sidecar架构、mTLS、Gateway API集成 |
+| 06 | Tetragon | [tetragon-runtime-security](./domain-35-ebpf-technology/06-tetragon-runtime-security.md) | TracingPolicy、进程/文件/网络监控、安全策略 |
+| 07 | Hubble | [hubble-network-observability](./domain-35-ebpf-technology/07-hubble-network-observability.md) | 流量可视化、Service Map、Prometheus集成 |
+| 08 | bcc/bpftrace | [bcc-bpftrace-tools](./domain-35-ebpf-technology/08-bcc-bpftrace-tools.md) | execsnoop/tcpconnect/biolatency、脚本开发 |
+| 09 | 性能优化 | [ebpf-performance-optimization](./domain-35-ebpf-technology/09-ebpf-performance-optimization.md) | XDP/TC优化、Map调优、大规模部署 |
+| 10 | 安全应用 | [ebpf-security-applications](./domain-35-ebpf-technology/10-ebpf-security-applications.md) | IDS、DDoS防护、容器逃逸检测、SOC集成 |
+
+---
+
+### 域36: 平台工程 (Platform Engineering)
+
+> 10 篇 | 内部开发者平台 (IDP)、Backstage、Kratix、Crossplane、黄金路径、开发者体验度量
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 平台概述 | [platform-engineering-overview](./domain-36-platform-engineering/01-platform-engineering-overview.md) | 平台工程定义、成熟度模型、组织架构 |
+| 02 | IDP设计 | [idp-design-principles](./domain-36-platform-engineering/02-idp-design-principles.md) | 设计原则、用户体验、API设计、自助服务 |
+| 03 | Backstage部署 | [backstage-deployment](./domain-36-platform-engineering/03-backstage-deployment.md) | Backstage架构、K8s部署、身份集成、RBAC |
+| 04 | 软件目录 | [backstage-catalog-techdocs](./domain-36-platform-engineering/04-backstage-catalog-techdocs.md) | Software Catalog、TechDocs、API文档 |
+| 05 | 脚手架模板 | [backstage-scaffolder-templates](./domain-36-platform-engineering/05-backstage-scaffolder-templates.md) | Scaffolder、模板开发、自动化工作流 |
+| 06 | Kratix | [kratix-platform-as-code](./domain-36-platform-engineering/06-kratix-platform-as-code.md) | Promise CRD、自助服务供给、多集群分发 |
+| 07 | Crossplane | [crossplane-platform-composition](./domain-36-platform-engineering/07-crossplane-platform-composition.md) | XRD/Composition、多云基础设施抽象 |
+| 08 | 黄金路径 | [golden-paths-design](./domain-36-platform-engineering/08-golden-paths-design.md) | Golden Paths模式、最佳实践、模板设计 |
+| 09 | 度量体系 | [developer-experience-metrics](./domain-36-platform-engineering/09-developer-experience-metrics.md) | DORA指标、SPACE框架、平台KPI |
+| 10 | 团队拓扑 | [platform-team-topology](./domain-36-platform-engineering/10-platform-team-topology.md) | Team Topologies、平台运营、支持模式 |
+
+---
+
+### 域37: 边缘计算 (Edge Computing)
+
+> 10 篇 | KubeEdge、OpenYurt、SuperEdge、边缘 AI 推理、联邦学习、边缘存储与安全
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 边缘架构 | [edge-computing-architecture](./domain-37-edge-computing/01-edge-computing-architecture.md) | 边缘计算定义、部署拓扑、云边协同 |
+| 02 | 云边协同 | [cloud-edge-collaboration](./domain-37-edge-computing/02-cloud-edge-collaboration.md) | 通信模式、数据同步、状态管理、离线优先 |
+| 03 | KubeEdge | [kubeedge-architecture-deployment](./domain-37-edge-computing/03-kubeedge-architecture-deployment.md) | CloudCore/EdgeCore架构、Helm部署 |
+| 04 | 设备管理 | [kubeedge-device-edge-apps](./domain-37-edge-computing/04-kubeedge-device-edge-apps.md) | DeviceModel/DeviceTwin、MQTT、边缘应用 |
+| 05 | OpenYurt | [openyurt-architecture](./domain-37-edge-computing/05-openyurt-architecture.md) | YurtHub/YurtTunnel、NodePool、边缘自治 |
+| 06 | SuperEdge | [superedge-architecture](./domain-37-edge-computing/06-superedge-architecture.md) | SuperEdge组件、分布式健康检查、自治 |
+| 07 | 边缘AI | [edge-ai-inference-federated-learning](./domain-37-edge-computing/07-edge-ai-inference-federated-learning.md) | ONNX/TFLite、边缘推理、联邦学习架构 |
+| 08 | 边缘存储网络 | [edge-storage-network](./domain-37-edge-computing/08-edge-storage-network.md) | 边缘存储、弱网优化、断网续传 |
+| 09 | 边缘安全 | [edge-security](./domain-37-edge-computing/09-edge-security.md) | 边缘身份、mTLS、设备安全、安全启动 |
+| 10 | 边缘场景 | [edge-use-cases](./domain-37-edge-computing/10-edge-use-cases.md) | 智慧工厂、智慧城市、车联网、零售 |
+
+---
+
+### 域38: WebAssembly云原生 (WebAssembly Cloud Native)
+
+> 10 篇 | Wasm 运行时、SpinKube、wasmCloud、WasmEdge、组件模型、AI 推理、Serverless
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | Wasm基础 | [wasm-fundamentals-cloud-native](./domain-38-webassembly-cloud-native/01-wasm-fundamentals-cloud-native.md) | WebAssembly原理、WASI、Wasm vs 容器 |
+| 02 | containerd运行时 | [containerd-wasm-shim](./domain-38-webassembly-cloud-native/02-containerd-wasm-shim.md) | runwasi、RuntimeClass、K8s集成 |
+| 03 | SpinKube | [spinkube-framework](./domain-38-webassembly-cloud-native/03-spinkube-framework.md) | Spin应用、SpinApp CRD、KEDA集成 |
+| 04 | wasmCloud | [wasmcloud-platform](./domain-38-webassembly-cloud-native/04-wasmcloud-platform.md) | Actor模型、Capability Providers、Lattice |
+| 05 | WasmEdge | [wasmedge-runtime](./domain-38-webassembly-cloud-native/05-wasmedge-runtime.md) | WasmEdge特性、边缘部署、AI推理 |
+| 06 | 组件模型 | [wasm-component-model](./domain-38-webassembly-cloud-native/06-wasm-component-model.md) | Component Model、WIT、组件组合 |
+| 07 | 插件系统 | [wasm-plugin-system](./domain-38-webassembly-cloud-native/07-wasm-plugin-system.md) | Envoy Wasm、Istio插件、proxy-wasm |
+| 08 | AI推理 | [wasm-ai-inference](./domain-38-webassembly-cloud-native/08-wasm-ai-inference.md) | ONNX/llama.cpp Wasm、WASI-NN、边缘AI |
+| 09 | Serverless | [wasm-serverless](./domain-38-webassembly-cloud-native/09-wasm-serverless.md) | 冷启动<1ms、Scale-to-Zero、FaaS模式 |
+| 10 | 安全沙箱 | [wasm-security-sandbox](./domain-38-webassembly-cloud-native/10-wasm-security-sandbox.md) | 安全模型、能力系统、隔离边界 |
+
+---
+
+### 域39: 供应链安全 (Supply Chain Security)
+
+> 10 篇 | SBOM、SLSA、Sigstore/Cosign、Fulcio/Rekor、Policy Controller、合规自动化
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 供应链概述 | [supply-chain-security-overview](./domain-39-supply-chain-security/01-supply-chain-security-overview.md) | 威胁模型、攻击向量、防护体系 |
+| 02 | 成熟度模型 | [supply-chain-maturity-model](./domain-39-supply-chain-security/02-supply-chain-maturity-model.md) | L1-L5成熟度、合规映射、改进路径 |
+| 03 | SBOM生成 | [sbom-generation-management](./domain-39-supply-chain-security/03-sbom-generation-management.md) | Syft/Trivy SBOM、SPDX/CycloneDX格式 |
+| 04 | 漏洞分析 | [sbom-vulnerability-analysis](./domain-39-supply-chain-security/04-sbom-vulnerability-analysis.md) | Grype、VEX、CVSS/EPSS、风险评估 |
+| 05 | SLSA实施 | [slsa-levels-implementation](./domain-39-supply-chain-security/05-slsa-levels-implementation.md) | SLSA L1-L4、构建证明、可复现构建 |
+| 06 | GitHub SLSA | [github-actions-slsa-build](./domain-39-supply-chain-security/06-github-actions-slsa-build.md) | SLSA Generator、Provenance、签名 |
+| 07 | Sigstore签名 | [sigstore-cosign-signing](./domain-39-supply-chain-security/07-sigstore-cosign-signing.md) | Keyless签名、OIDC、镜像/Blob签名 |
+| 08 | 透明日志 | [fulcio-rekor-transparency](./domain-39-supply-chain-security/08-fulcio-rekor-transparency.md) | Fulcio证书、Rekor日志、审计追踪 |
+| 09 | 策略验证 | [policy-controller-verification](./domain-39-supply-chain-security/09-policy-controller-verification.md) | Kyverno/Gatekeeper签名验证、准入控制 |
+| 10 | 合规自动化 | [compliance-automation-audit](./domain-39-supply-chain-security/10-compliance-automation-audit.md) | SOC 2/PCI-DSS/FedRAMP自动化 |
+
+---
+
+### 域98: 云原生API网关 (Cloud-Native API Gateway)
+
+> 14 篇 | 云原生 API 网关技术体系，涵盖 Higress、APISIX、Kong、Envoy Gateway、Traefik 等主流产品深度实践
+
+#### 基础理论与标准 (01-03)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 01 | 架构总览 | [api-gateway-architecture-overview](./domain-98-cloud-native-api-gateway/01-api-gateway-architecture-overview.md) | API网关 vs Ingress控制器 vs 服务网格网关；控制平面/数据平面分离；CNCF生态定位；选型决策树 |
+| 02 | Gateway API | [kubernetes-gateway-api-deep-dive](./domain-98-cloud-native-api-gateway/02-kubernetes-gateway-api-deep-dive.md) | GatewayClass/Gateway/HTTPRoute/ReferenceGrant CRD体系；角色模型；一致性测试；各产品支持矩阵 |
+| 03 | 选型指南 | [api-gateway-selection-guide](./domain-98-cloud-native-api-gateway/03-api-gateway-selection-guide.md) | 12+维度功能矩阵；场景决策框架；TCO分析；国内企业采用趋势 |
+
+#### 主流产品深度实践 (04-09)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 04 | Higress | [higress-enterprise-gateway](./domain-98-cloud-native-api-gateway/04-higress-enterprise-gateway.md) | Istiod控制平面+Envoy数据平面；Wasm/Lua插件；AI网关能力（LLM代理、Token限流）；Gateway API一致性 |
+| 05 | APISIX | [apisix-enterprise-gateway](./domain-98-cloud-native-api-gateway/05-apisix-enterprise-gateway.md) | etcd控制平面+OpenResty数据平面；100+插件；多语言插件运行时；APISIX Ingress Controller；ADC声明式配置 |
+| 06 | Kong | [kong-enterprise-gateway](./domain-98-cloud-native-api-gateway/06-kong-enterprise-gateway.md) | PostgreSQL/DB-less/Konnect模式；KIC架构；deck声明式配置；Gateway API一致性；CE vs EE对比 |
+| 07 | Envoy GW | [envoy-gateway-enterprise](./domain-98-cloud-native-api-gateway/07-envoy-gateway-enterprise.md) | Gateway API原生实现；ExtensionPolicy/RateLimitPolicy CRD；EnvoyPatchPolicy扩展；Wasm集成 |
+| 08 | Traefik | [traefik-enterprise-gateway](./domain-98-cloud-native-api-gateway/08-traefik-enterprise-gateway.md) | Traefik v3；IngressRoute/Middleware CRD；TLS自动化（ACME）；Hub API门户；Gateway API v1支持 |
+| 09 | 迁移指南 | [nginx-ingress-migration-guide](./domain-98-cloud-native-api-gateway/09-nginx-ingress-migration-guide.md) | nginx-ingress注解映射表；迁移到Higress/APISIX/Kong实战；零停机迁移清单 |
+
+#### 核心能力专题 (10-12)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 10 | Wasm插件 | [wasm-plugin-ecosystem](./domain-98-cloud-native-api-gateway/10-wasm-plugin-ecosystem.md) | proxy-wasm ABI规范；Go/Rust Wasm插件开发；OCI分发；性能开销分析；Wasm vs Lua vs原生对比 |
+| 11 | 安全体系 | [api-gateway-security-practices](./domain-98-cloud-native-api-gateway/11-api-gateway-security-practices.md) | JWT/OIDC/mTLS/API Key认证；OPA鉴权；WAF防护；限流策略；Bot检测；证书自动轮转 |
+| 12 | 可观测性 | [api-gateway-observability](./domain-98-cloud-native-api-gateway/12-api-gateway-observability.md) | 黄金信号；各产品Prometheus指标；结构化访问日志；OpenTelemetry集成；Grafana仪表盘；告警规则 |
+
+#### 生产运维与高级主题 (13-14)
+
+| # | 简称 | 表格 | 关键内容 |
+|:---:|:---|:---|:---|
+| 13 | 性能基准 | [api-gateway-performance-benchmarks](./domain-98-cloud-native-api-gateway/13-api-gateway-performance-benchmarks.md) | 基准测试方法论（wrk2/fortio）；5产品性能对比；Envoy/OpenResty调优；eBPF加速；容量规划 |
+| 14 | 生产运维 | [api-gateway-production-operations](./domain-98-cloud-native-api-gateway/14-api-gateway-production-operations.md) | HA部署；滚动升级；GitOps配置管理；证书管理；灾备恢复；多租户；AI网关生产模式；故障应急 |
 
 ---
 

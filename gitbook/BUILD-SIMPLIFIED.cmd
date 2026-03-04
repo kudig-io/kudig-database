@@ -30,7 +30,19 @@ if exist book (
 
 echo.
 echo [步骤 3/5] 使用 mdbook 构建静态文件...
-C:\Users\Allen\.local\bin\mdbook.exe build
+where mdbook >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    if exist "%USERPROFILE%\.local\bin\mdbook.exe" (
+        set "MDBOOK=%USERPROFILE%\.local\bin\mdbook.exe"
+    ) else (
+        echo [ERROR] mdbook not found! Install with: cargo install mdbook
+        pause
+        exit /b 1
+    )
+) else (
+    set "MDBOOK=mdbook"
+)
+!MDBOOK! build
 
 if %ERRORLEVEL% NEQ 0 (
     echo [错误] mdbook 构建失败!

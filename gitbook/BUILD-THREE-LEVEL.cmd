@@ -9,7 +9,7 @@ echo Three-Level Directory Full Build Script
 echo ========================================
 echo.
 
-cd /d c:\Users\Allen\Documents\GitHub\kudig-io\kudig-database\gitbook
+cd /d %~dp0
 
 echo [步骤 1/6] 生成三级目录的 SUMMARY.md...
 echo [Step 1/6] Generating SUMMARY.md with 3-level structure...
@@ -47,7 +47,19 @@ if exist book (
 echo.
 echo [步骤 4/6] 使用 mdbook 构建静态文件...
 echo [Step 4/6] Building with mdbook...
-C:\Users\Allen\.local\bin\mdbook.exe build
+where mdbook >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    if exist "%USERPROFILE%\.local\bin\mdbook.exe" (
+        set "MDBOOK=%USERPROFILE%\.local\bin\mdbook.exe"
+    ) else (
+        echo [ERROR] mdbook not found! Install with: cargo install mdbook
+        pause
+        exit /b 1
+    )
+) else (
+    set "MDBOOK=mdbook"
+)
+!MDBOOK! build
 
 if %ERRORLEVEL% NEQ 0 (
     echo.

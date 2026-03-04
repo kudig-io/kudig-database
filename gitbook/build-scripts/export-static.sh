@@ -58,8 +58,13 @@ cp "$ORIG_TOML" "$BACKUP_TOML"
 # 修改 book.toml 用于静态导出
 # - 去掉 site-url（使路径完全相对化，兼容 file:// 协议）
 # - 修改 build-dir 为 dist
-sed -i '' '/^site-url/d' "$ORIG_TOML"
-sed -i '' 's|^build-dir = "book"|build-dir = "dist"|' "$ORIG_TOML"
+if [[ "$(uname)" == "Darwin" ]]; then
+    sed -i '' '/^site-url/d' "$ORIG_TOML"
+    sed -i '' 's|^build-dir = "book"|build-dir = "dist"|' "$ORIG_TOML"
+else
+    sed -i '/^site-url/d' "$ORIG_TOML"
+    sed -i 's|^build-dir = "book"|build-dir = "dist"|' "$ORIG_TOML"
+fi
 
 # 4. 构建静态版本
 log_info "构建静态版本..."

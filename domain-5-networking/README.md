@@ -55,6 +55,8 @@
 - [36-api-gateway-patterns.md](36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
 - [37-terway-resources-crud-operations.md](37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
 
+> **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-98-cloud-native-api-gateway)。
+
 
 ## 学习路径建议
 

@@ -5,7 +5,7 @@ echo GitBook Quick Build and Export (UTF-8 Fixed)
 echo ========================================
 echo.
 
-cd /d c:\Users\Allen\Documents\GitHub\kudig-io\kudig-database\gitbook
+cd /d %~dp0
 
 echo [1/5] Generating SUMMARY.md...
 powershell -NoProfile -ExecutionPolicy Bypass -File "build-scripts\generate-summary-utf8-fixed.ps1"
@@ -13,8 +13,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "build-scripts\generate-summ
 echo [2/5] Verifying SUMMARY.md encoding...
 powershell -NoProfile -Command "$file = 'src\SUMMARY.md'; if (Test-Path $file) { $bytes = [System.IO.File]::ReadAllBytes($file); $utf8 = [System.Text.Encoding]::UTF8; $content = $utf8.GetString($bytes); Write-Host 'SUMMARY.md verified - UTF-8 encoding OK' }"
 
+where mdbook >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    if exist "%USERPROFILE%\.local\bin\mdbook.exe" (
+        set "MDBOOK=%USERPROFILE%\.local\bin\mdbook.exe"
+    ) else (
+        echo [ERROR] mdbook not found! Install with: cargo install mdbook
+        pause
+        exit /b 1
+    )
+) else (
+    set "MDBOOK=mdbook"
+)
 echo [3/5] Building with mdbook...
-C:\Users\Allen\.local\bin\mdbook.exe build
+!MDBOOK! build
 
 if %ERRORLEVEL% NEQ 0 (
     echo.

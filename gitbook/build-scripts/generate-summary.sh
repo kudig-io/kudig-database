@@ -162,10 +162,10 @@ done
 
 echo "" >> "$OUTPUT_FILE"
 
-# 企业级运维专题 (Domain 18-33) - 作为可折叠章节
-echo "- [企业级运维专题 (Domain 18-33)]()" >> "$OUTPUT_FILE"
+# 企业级运维专题 (Domain 18+) - 作为可折叠章节
+echo "- [企业级运维专题 (Domain 18+)]()" >> "$OUTPUT_FILE"
 
-for i in 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33; do
+for i in $(seq 18 99); do
     dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
         process_directory "$dir" "  " >> "$OUTPUT_FILE"
@@ -177,29 +177,18 @@ echo "" >> "$OUTPUT_FILE"
 # 专题资源 - 作为可折叠章节
 echo "- [专题资源]()" >> "$OUTPUT_FILE"
 
-# topic-cheat-sheet
-dir="$CONTENT_ROOT/topic-cheat-sheet"
-if [[ -d "$dir" ]]; then
-    process_directory "$dir" "  " >> "$OUTPUT_FILE"
-fi
-
-# topic-dictionary
-dir="$CONTENT_ROOT/topic-dictionary"
-if [[ -d "$dir" ]]; then
-    process_directory "$dir" "  " >> "$OUTPUT_FILE"
-fi
-
-# topic-presentations
-dir="$CONTENT_ROOT/topic-presentations"
-if [[ -d "$dir" ]]; then
-    process_directory "$dir" "  " >> "$OUTPUT_FILE"
-fi
-
-# topic-structural-trouble-shooting（递归处理子目录）
-dir="$CONTENT_ROOT/topic-structural-trouble-shooting"
-if [[ -d "$dir" ]]; then
-    process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
-fi
+# 自动扫描所有 topic-* 目录
+for dir in "$CONTENT_ROOT"/topic-*; do
+    if [[ -d "$dir" ]]; then
+        # 带子目录的 topic 使用递归处理
+        subdirs=$(find "$dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+        if [[ "$subdirs" -gt 0 ]]; then
+            process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
+        else
+            process_directory "$dir" "  " >> "$OUTPUT_FILE"
+        fi
+    fi
+done
 
 echo "" >> "$OUTPUT_FILE"
 
