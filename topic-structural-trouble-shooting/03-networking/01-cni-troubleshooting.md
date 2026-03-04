@@ -1,6 +1,6 @@
 # CNI 网络插件故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-03 | **难度**: 高级
 
 ---
 
@@ -826,9 +826,134 @@ bridge fdb show
 conntrack -L
 ```
 
+### D. conntrack 深度分析
+
+Kubernetes Service DNAT/SNAT 完全依赖 conntrack，它是生产网络故障中最常见但最难定位的问题源。
+
+#### D.1 conntrack 状态机
+
+```
+新建连接 → [NEW] → 收到回包 → [ESTABLISHED] → 超时/FIN → [TIME_WAIT/CLOSE]
+                                                              │
+                                                    无回包超时 → [删除]
+```
+
+#### D.2 conntrack 全面诊断
+
+```bash
+# ========== 1. 基础状态 ==========
+# 使用率检查
+CT_COUNT=$(sysctl -n net.netfilter.nf_conntrack_count)
+CT_MAX=$(sysctl -n net.netfilter.nf_conntrack_max)
+echo "conntrack: $CT_COUNT / $CT_MAX ($((CT_COUNT*100/CT_MAX))%)"
+
+# 统计信息（关键！）
+conntrack -S
+# cpu=0   found=0 invalid=15 insert=0 insert_failed=23456 drop=23456 ...
+# insert_failed > 0 → 表满导致新连接被丢弃
+# drop > 0 → 数据包被丢弃
+
+# ========== 2. 连接分布分析 ==========
+# 按状态统计
+conntrack -L 2>/dev/null | awk '{print $4}' | sort | uniq -c | sort -rn
+# 示例:
+# 45000 ESTABLISHED
+#  8000 TIME_WAIT
+#  2000 SYN_SENT
+
+# 按目标 IP 统计 TOP 10
+conntrack -L 2>/dev/null | awk '{for(i=1;i<=NF;i++) if($i~/^dst=/) print $i}' | sort | uniq -c | sort -rn | head -10
+
+# ========== 3. 查看特定 Service 的 DNAT 条目 ==========
+conntrack -L -d <service-cluster-ip> 2>/dev/null | head -10
+# 可以看到 Service IP 被 DNAT 到哪个 Pod IP
+
+# ========== 4. 实时监控 ==========
+conntrack -E  # 实时查看新建/销毁事件
+conntrack -E -e DESTROY | grep "insert_failed"  # 监控插入失败
+
+# ========== 5. 调优 ==========
+# 临时调大
+sysctl -w net.netfilter.nf_conntrack_max=262144
+sysctl -w net.netfilter.nf_conntrack_buckets=65536
+# 减少 TIME_WAIT 占用
+sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
+# 持久化到 /etc/sysctl.d/99-conntrack.conf
+```
+
+### E. iptables TRACE 深度追踪
+
+当 tcpdump 看到数据包进入节点但未到达目标时，iptables TRACE 可以精确定位数据包被哪条规则丢弃。
+
+```bash
+# ========== 启用 TRACE ==========
+modprobe nf_log_ipv4
+iptables -t raw -A PREROUTING -s <src-ip> -d <dst-ip> -j TRACE
+iptables -t raw -A OUTPUT -s <src-ip> -d <dst-ip> -j TRACE
+
+# ========== 查看输出 ==========
+dmesg -w | grep TRACE
+
+# 输出格式:
+# TRACE: raw:PREROUTING:policy:2      IN=cali12345 OUT= SRC=10.244.1.5 DST=10.244.2.8
+# TRACE: nat:PREROUTING:rule:1        IN=cali12345 ...
+# TRACE: filter:FORWARD:rule:3        IN=cali12345 OUT=cali67890 ...
+# TRACE: nat:POSTROUTING:rule:2       IN= OUT=eth0 ...
+
+# 分析要点:
+# 1) 数据包应依次经过: raw:PREROUTING → nat:PREROUTING → filter:FORWARD → nat:POSTROUTING
+# 2) 如果 TRACE 在某条规则后停止，该规则可能是 DROP/REJECT
+# 3) 观察 IN/OUT 接口变化，确认数据包是否正确路由
+
+# Kubernetes 关键 iptables 链:
+# KUBE-SERVICES → KUBE-SVC-XXX → KUBE-SEP-XXX → DNAT 到 Pod IP
+# Calico: cali-FORWARD → cali-fw-caliXXXX (from-workload) / cali-tw-caliXXXX (to-workload)
+# Cilium: CILIUM_FORWARD / CILIUM_INPUT / CILIUM_OUTPUT
+
+# ⭐ 完成后必须清理
+iptables -t raw -D PREROUTING -s <src-ip> -d <dst-ip> -j TRACE
+iptables -t raw -D OUTPUT -s <src-ip> -d <dst-ip> -j TRACE
+```
+
+### F. eBPF 诊断工具
+
+当传统工具难以定位时，eBPF 提供内核级别的包轨迹信息。
+
+```bash
+# ========== Cilium 内置工具 ==========
+# 丢包监控
+cilium monitor --type drop
+# 示例: xx drop (Policy denied) flow 10.244.1.5:80 -> 10.244.2.8:45678
+
+# 策略判定
+cilium monitor --type policy-verdict
+
+# Hubble 可观测性
+hubble observe --from-pod <ns>/<pod>     # 查看特定 Pod 流量
+hubble observe --verdict DROPPED          # 查看被丢弃的流量
+hubble observe --protocol TCP --port 80   # 按协议/端口过滤
+
+# ========== pwru — 内核数据包轨迹追踪 ==========
+# 安装: go install github.com/cilium/pwru@latest
+pwru --filter-dst <pod-ip>
+# 输出示例:
+# kfree_skb+0x0           netfilter_hook (NF_DROP)
+# → 直接告诉你在哪个内核函数被丢弃
+
+# ========== bpftrace 网络一行线 ==========
+# 追踪数据包丢弃
+bpftrace -e 'kprobe:kfree_skb { @[kstack] = count(); }'
+
+# 追踪 TCP 重传
+bpftrace -e 'kprobe:tcp_retransmit_skb { @[comm] = count(); }'
+
+# 追踪 TCP 连接重置 (RST)
+bpftrace -e 'kprobe:tcp_send_active_reset { printf("%s RST to %s\n", comm, ntop(((struct sock *)arg0)->__sk_common.skc_daddr)); }'
+```
+
 ---
 
-## 📚 D. 生产环境实战案例精选
+## 📚 G. 生产环境实战案例精选
 
 ### 案例 1：Calico IPAM 地址池耗尽导致大规模 Pod 创建失败
 
@@ -1340,3 +1465,105 @@ conntrack -L
 - **测试不足**：仅测试小包连通性，未测试大包传输
 - **文档缺失**：运维人员不了解 Overlay 网络的 MTU 影响
 - **改进方向**：自动检测 MTU、环境适配配置、自动化测试、监控告警
+
+---
+
+### 案例 3：conntrack 表满导致微服务间歇性超时
+
+#### 🎯 故障场景
+某电商平台在大促期间，微服务间调用出现大量间歇性超时（约 2% 请求失败），重试后成功。应用日志显示 `connection timed out`。
+
+#### 🔍 排查过程
+1. **网络层排查**：
+   ```bash
+   # 节点间 ping 正常，无丢包
+   ping -c 100 <other-node-ip>
+   # 100 packets transmitted, 100 received, 0% loss
+   ```
+
+2. **内核日志检查**：
+   ```bash
+   dmesg | grep conntrack
+   # [1234567.890] nf_conntrack: table full, dropping packet
+   # → 確认 conntrack 表满！
+   ```
+
+3. **conntrack 详细分析**：
+   ```bash
+   sysctl net.netfilter.nf_conntrack_count  # 65536
+   sysctl net.netfilter.nf_conntrack_max    # 65536
+   # 使用率 100%！
+   
+   conntrack -S
+   # insert_failed=45678 drop=45678
+   # 大量新连接被丢弃
+   
+   # 连接分布
+   conntrack -L | awk '{print $4}' | sort | uniq -c | sort -rn
+   # 42000 ESTABLISHED
+   # 18000 TIME_WAIT
+   #  5000 SYN_SENT
+   # TIME_WAIT 占用过多
+   ```
+
+#### 🛠️ 解决方案
+1. **紧急处理**：
+   ```bash
+   sysctl -w net.netfilter.nf_conntrack_max=524288
+   sysctl -w net.netfilter.nf_conntrack_buckets=131072
+   sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
+   ```
+
+2. **根治优化**：迁移高并发服务到 Cilium eBPF 模式，绕过 conntrack/iptables
+
+#### 💡 经验总结
+- conntrack 表满是高并发 K8s 集群最常见的网络故障原因之一
+- 表现为“随机丢包”，很容易被误诊为应用问题
+- 建议生产环境配置 conntrack Prometheus 告警
+
+---
+
+### 案例 4：rp_filter 导致 Pod 无法访问宿主机
+
+#### 🎯 故障场景
+升级节点操作系统后，Pod 内 `ping <host-ip>` 超时，但 `ping <other-pod-ip>` 正常。影响了所有依赖宿主机 IP 的健康检查和监控采集。
+
+#### 🔍 排查过程
+1. **网络抓包**：
+   ```bash
+   # 在 Pod 的 veth pair 上抓包
+   tcpdump -i <veth> -nn icmp
+   # 看到 Pod 发出的 ICMP request，但没有 reply
+   
+   # 在宿主机 eth0 上抓包
+   tcpdump -i eth0 -nn icmp and host <pod-ip>
+   # 没有看到回包
+   ```
+
+2. **检查内核参数**：
+   ```bash
+   sysctl net.ipv4.conf.all.rp_filter  # 值为 1
+   sysctl net.ipv4.conf.eth0.rp_filter # 值为 1
+   # rp_filter=1 严格模式：回包必须从请求进入的接口发出
+   # Pod 请求从 veth 进入，但宿主机回包从 eth0 发出
+   # rp_filter 认为路径不对称，静默丢弃回包
+   ```
+
+#### 🛠️ 解决方案
+```bash
+# 关闭严格 rp_filter
+sysctl -w net.ipv4.conf.all.rp_filter=0
+sysctl -w net.ipv4.conf.default.rp_filter=0
+
+# 对 Calico veth 接口:
+for i in /proc/sys/net/ipv4/conf/cali*/rp_filter; do echo 0 > $i; done
+
+# 持久化
+echo "net.ipv4.conf.all.rp_filter = 0" >> /etc/sysctl.d/99-kubernetes.conf
+sysctl -p /etc/sysctl.d/99-kubernetes.conf
+```
+
+#### 💡 经验总结
+- OS 升级后 rp_filter 可能被重置为默认值 1
+- 表现为“Pod-to-Node 不通但 Pod-to-Pod 正常”的经典现象
+- 建议在节点初始化脚本中确保 rp_filter 配置正确

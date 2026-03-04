@@ -1,6 +1,6 @@
 # 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01
+> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-03
 
 ---
 
@@ -183,7 +183,30 @@ Pod A ──▶ veth ──▶ Bridge/路由 ──▶ veth ──▶ Pod B
          检查点1       检查点2        检查点3
 ```
 
-### 6.2 诊断命令
+### 6.2 veth pair 深度诊断
+
+```bash
+# ========== 定位 Pod 对应的 veth ==========
+POD_IFINDEX=$(kubectl exec -it <pod-a> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
+VETH_A=$(ip link show | grep "^${POD_IFINDEX}:" | awk '{print $2}' | tr -d ':@')
+echo "Pod A 的 veth: $VETH_A"
+
+# ========== 检查 veth 状态 ==========
+ip -s link show $VETH_A
+# 关注: RX/TX errors, dropped
+
+ethtool -S $VETH_A
+# 关注: tx_dropped, rx_dropped
+
+# ========== 检查 veth 连接的 bridge/路由 ==========
+# Flannel:
+bridge link show | grep $VETH_A
+
+# Calico:
+ip route show | grep $VETH_A
+```
+
+### 6.3 诊断命令
 
 ```bash
 # 1. 查看 Pod 网络配置
@@ -248,6 +271,48 @@ calicoctl get bgpPeer -o yaml
 traceroute <target-pod-ip>
 ```
 
+### 7.3 多跳 tcpdump 并行抓包
+
+跨节点通信失败时，需要在数据路径的每一跳同时抓包。
+
+```bash
+# 源节点:
+tcpdump -i <src-veth> -nn host <dst-pod-ip> -c 20 &   # 跳1: Pod veth
+tcpdump -i flannel.1 -nn host <dst-pod-ip> -c 20 &    # 跳2: 隧道口
+tcpdump -i eth0 -nn host <dst-node-ip> and udp port 4789 -c 20 &  # 跳3: 出口
+
+# 目的节点:
+tcpdump -i eth0 -nn host <src-node-ip> and udp port 4789 -c 20 &  # 跳4: 入口
+tcpdump -i <dst-veth> -nn host <src-pod-ip> -c 20 &   # 跳5: Pod veth
+
+# 对比各跳包数量，确定丢包位置
+```
+
+### 7.4 Node-to-Node 底层网络诊断
+
+跨节点 Pod 不通时，先确认节点间底层网络是否正常。
+
+```bash
+# L3 连通性
+ping -c 5 -W 2 <other-node-ip>
+traceroute -n <other-node-ip>
+
+# L2 ARP 解析
+ip neigh show | grep <other-node-ip>
+# FAILED → ARP 解析失败，检查安全组/VLAN
+
+# ARP 表容量（大集群关注）
+ip neigh show | wc -l
+sysctl net.ipv4.neigh.default.gc_thresh3  # 默认 1024
+
+# 网卡状态
+ethtool eth0 | grep -E "Speed|Duplex|Link detected"
+ethtool -S eth0 | grep -E "error|drop"
+
+# 云平台安全组必须放行的端口:
+# VXLAN: UDP 4789 | Cilium: UDP 8472 | IPIP: 协议4 | BGP: TCP 179
+```
+
 ---
 
 ## 8. DNS 解析故障
@@ -297,6 +362,14 @@ data:
   veth_mtu: "1440"  # VXLAN: 1500-60=1440
 ```
 
+**MTU 计算参考**:
+| CNI 模式 | 封装开销 | 推荐 Pod MTU (物理 1500) |
+|----------|----------|---------------------------|
+| VXLAN | 50B | 1450 |
+| IPIP | 20B | 1480 |
+| BGP | 0B | 1500 |
+| WireGuard | 60B | 1440 |
+
 ### 9.2 启用 eBPF (Cilium)
 
 ```yaml
@@ -331,7 +404,75 @@ data:
 
 ---
 
-## 10. 监控告警
+## 10. 关键内核网络参数
+
+以下参数直接影响 Kubernetes 网络连通性。
+
+| 参数 | K8s 推荐值 | 错误配置影响 |
+|------|-----------|---------------|
+| `net.ipv4.ip_forward` | **1** | Pod 无法跨节点通信 |
+| `net.bridge.bridge-nf-call-iptables` | **1** | Service ClusterIP 不通 |
+| `net.ipv4.conf.all.rp_filter` | **0/2** | Pod-to-Node 回包被丢弃 |
+| `net.netfilter.nf_conntrack_max` | **262144+** | conntrack 表满，随机丢包 |
+| `net.ipv4.neigh.default.gc_thresh3` | **8192** | 大集群 ARP 溢出 |
+
+```bash
+# 一键检查
+for p in net.ipv4.ip_forward net.bridge.bridge-nf-call-iptables \
+    net.ipv4.conf.all.rp_filter net.netfilter.nf_conntrack_max \
+    net.netfilter.nf_conntrack_count net.ipv4.neigh.default.gc_thresh3; do
+    printf "%-50s %s\n" "$p" "$(sysctl -n $p 2>/dev/null || echo N/A)"
+done
+```
+
+---
+
+## 11. conntrack 诊断
+
+```bash
+# 使用率
+CT_COUNT=$(sysctl -n net.netfilter.nf_conntrack_count)
+CT_MAX=$(sysctl -n net.netfilter.nf_conntrack_max)
+echo "conntrack: $CT_COUNT / $CT_MAX ($((CT_COUNT*100/CT_MAX))%)"
+
+# 统计信息
+conntrack -S
+# insert_failed > 0 → 表满丢包
+
+# 内核报错
+dmesg | grep "nf_conntrack: table full"
+
+# 按状态统计
+conntrack -L 2>/dev/null | awk '{print $4}' | sort | uniq -c | sort -rn
+
+# 调优
+sysctl -w net.netfilter.nf_conntrack_max=262144
+sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
+```
+
+---
+
+## 12. iptables TRACE 链路追踪
+
+```bash
+# 启用追踪
+modprobe nf_log_ipv4
+iptables -t raw -A PREROUTING -s <src-ip> -d <dst-ip> -j TRACE
+iptables -t raw -A OUTPUT -s <src-ip> -d <dst-ip> -j TRACE
+
+# 查看输出
+dmesg -w | grep TRACE
+# 格式: TRACE: <table>:<chain>:<rule|policy>:<num> IN=<iface> ...
+# 最后一条 TRACE 后停止 → 该规则为 DROP/REJECT 位置
+
+# ⭐ 完成后必须清理
+iptables -t raw -D PREROUTING -s <src-ip> -d <dst-ip> -j TRACE
+iptables -t raw -D OUTPUT -s <src-ip> -d <dst-ip> -j TRACE
+```
+
+---
+
+## 13. 监控告警
 
 ### 10.1 关键指标
 
@@ -358,6 +499,15 @@ groups:
         annotations:
           summary: "Pod 网络延迟过高"
           
+      - alert: ConntrackTableNearFull
+        expr: |
+          node_nf_conntrack_entries / node_nf_conntrack_entries_limit > 0.7
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "conntrack 表使用率超过 70%"
+          
       - alert: IPPoolExhausted
         expr: |
           (calico_ipam_blocks_per_node - calico_ipam_blocks_per_node_free) / calico_ipam_blocks_per_node > 0.9
@@ -370,7 +520,35 @@ groups:
 
 ---
 
-## 11. 最佳实践清单
+## 14. 生产案例
+
+### 案例 1: 大促期间 conntrack 表满导致随机丢包
+
+**现象**: 约 2% HTTP 请求超时，重试成功
+
+**排查**: `dmesg` 发现 `nf_conntrack: table full`，`conntrack -S` 显示 `insert_failed > 0`
+
+**解决**: `sysctl -w net.netfilter.nf_conntrack_max=524288`，长期迁移到 Cilium eBPF
+
+### 案例 2: rp_filter 导致 Pod 无法访问宿主机
+
+**现象**: `ping <host-ip>` 超时，但 `ping <pod-ip>` 正常
+
+**排查**: `sysctl net.ipv4.conf.all.rp_filter` = 1，回包路径不对称被丢弃
+
+**解决**: `sysctl -w net.ipv4.conf.all.rp_filter=0`
+
+### 案例 3: 500+ 节点集群 ARP 表溢出
+
+**现象**: 新节点上的 Pod 无法跨节点通信
+
+**排查**: `dmesg` 显示 `neighbour: arp_cache: neighbor table overflow!`
+
+**解决**: `sysctl -w net.ipv4.neigh.default.gc_thresh3=8192`
+
+---
+
+## 15. 最佳实践清单
 
 | 类别 | 建议 |
 |:---|:---|
@@ -379,7 +557,9 @@ groups:
 | **文档** | 记录网络架构和 CNI 配置 |
 | **测试** | 定期执行网络连通性测试 |
 | **备份** | 备份 CNI 配置和 IPAM 数据 |
-| **升级** | CNI 升级前在测试环境验证 |
+| **内核参数** | 确保 ip_forward、bridge-nf-call-iptables、rp_filter、conntrack 配置正确 |
+| **conntrack** | 监控使用率，配置 Prometheus 告警（阈值 70%）|
+| **ARP** | 大集群 (200+ 节点) 调大 gc_thresh 参数 |
 
 ---
 

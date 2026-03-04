@@ -1,6 +1,6 @@
 # 网络协议栈详解
 
-> **适用版本**: TCP/IP 协议族 | **最后更新**: 2026-01
+> **适用版本**: TCP/IP 协议族 | **最后更新**: 2026-03
 
 ---
 
@@ -229,6 +229,228 @@ ss -tunap
 # 网络统计
 netstat -s
 nstat
+```
+
+---
+
+## Netfilter/iptables 链路全景
+
+Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间工具。Kubernetes 的 Service、NetworkPolicy 均依赖此机制。
+
+### 数据包经过 Netfilter 的完整路径
+
+```
+数据包进入
+    │
+    ▼
+[PREROUTING] ───── raw → conntrack → mangle → nat (DNAT)
+    │
+    ├─── 目标是本机? ─── 是 ──▶ [INPUT] ── mangle → filter → 本地进程
+    │                                               │
+    └─── 否 (转发) ─▶ [FORWARD] ── mangle → filter
+                             │                    │
+                             │              本地进程发出
+                             │                    │
+                             │              [OUTPUT] ── raw → conntrack → mangle → nat → filter
+                             │                    │
+                             └───────────────┴───▶ [POSTROUTING] ── mangle → nat (SNAT/MASQUERADE)
+                                                         │
+                                                         ▼
+                                                     数据包发出
+```
+
+### Kubernetes 关键 iptables 链
+
+| 链名 | 所属表 | 功能 | 组件 |
+|------|---------|------|------|
+| `KUBE-SERVICES` | nat | Service ClusterIP 入口，匹配目标为 Service IP 的流量 | kube-proxy |
+| `KUBE-SVC-XXXX` | nat | 特定 Service 的后端选择（随机/轮询） | kube-proxy |
+| `KUBE-SEP-XXXX` | nat | 特定 Endpoint 的 DNAT，将 Service IP 转为 Pod IP | kube-proxy |
+| `KUBE-MARK-MASQ` | nat | 标记需要 SNAT 的数据包 | kube-proxy |
+| `KUBE-POSTROUTING` | nat | 对标记的包执行 MASQUERADE | kube-proxy |
+| `KUBE-NODEPORTS` | nat | NodePort 流量入口 | kube-proxy |
+| `cali-FORWARD` | filter | Calico FORWARD 链入口 | Calico |
+| `cali-fw-caliXXXX` | filter | 特定 Pod 的 from-workload 链 | Calico |
+| `cali-tw-caliXXXX` | filter | 特定 Pod 的 to-workload 链 | Calico |
+
+---
+
+## conntrack 连接跟踪机制
+
+conntrack 是 Netfilter 的有状态数据包检查模块，Kubernetes Service 的 DNAT/SNAT 完全依赖它。
+
+### conntrack 状态机
+
+| 状态 | 含义 | 默认超时 |
+|------|------|----------|
+| NEW | 新建连接（第一个包） | 30s |
+| ESTABLISHED | 双向通信已建立 | 5天 (TCP) |
+| RELATED | 与已有连接相关（如 FTP 数据连接） | - |
+| INVALID | 无法识别的包 | 立即删除 |
+| TIME_WAIT | TCP 连接关闭后等待 | 120s |
+
+### conntrack 与 Kubernetes Service 的关系
+
+```
+Pod A 发送请求到 Service IP (10.96.0.100:80)
+    │
+    ▼
+[PREROUTING nat] KUBE-SERVICES
+    │── 匹配 dst=10.96.0.100
+    ▼
+KUBE-SVC-XXXX
+    │── 随机选择后端
+    ▼
+KUBE-SEP-XXXX
+    │── DNAT: 10.96.0.100:80 → 10.244.2.5:80
+    ▼
+conntrack 记录:
+    src=10.244.1.3 dst=10.96.0.100 sport=45678 dport=80
+    → src=10.244.2.5 dst=10.244.1.3 sport=80 dport=45678 [DNAT]
+    │
+    │ 回包时 conntrack 自动反向 DNAT (Un-DNAT)
+    │ Pod B 回包: src=10.244.2.5 → conntrack 改为 src=10.96.0.100
+    ▼
+Pod A 看到回包来自 10.96.0.100:80 ✅
+```
+
+### conntrack 诊断命令
+
+```bash
+# 查看使用率
+CT_COUNT=$(sysctl -n net.netfilter.nf_conntrack_count)
+CT_MAX=$(sysctl -n net.netfilter.nf_conntrack_max)
+echo "conntrack: $CT_COUNT / $CT_MAX ($((CT_COUNT*100/CT_MAX))%)"
+
+# 统计信息
+conntrack -S
+# 关注: insert_failed > 0 → 表满丢包
+
+# 内核报错
+dmesg | grep "nf_conntrack: table full"
+```
+
+---
+
+## 网络命名空间与 veth pair 基础
+
+### 网络命名空间 (Network Namespace)
+
+Linux 网络命名空间是容器网络隔离的基础。每个命名空间拥有独立的网络接口、路由表、iptables 规则、conntrack 表。
+
+```bash
+# 创建网络命名空间
+ip netns add test-ns
+
+# 在命名空间内执行命令
+ip netns exec test-ns ip addr show
+
+# 列出所有命名空间
+ip netns list
+
+# 进入 Pod 的网络命名空间（生产中用 nsenter）
+CONTAINER_ID=$(crictl ps --name <container> -q)
+PID=$(crictl inspect $CONTAINER_ID | jq '.info.pid')
+nsenter -t $PID -n ip addr show
+nsenter -t $PID -n ip route show
+nsenter -t $PID -n iptables -L -n -v
+```
+
+### veth pair (虚拟以太网对)
+
+veth pair 是成对存在的虚拟网络接口，一端在 Pod 命名空间，另一端在宿主机。这是 Pod 和宿主机通信的“虚拟网线”。
+
+```
+┌────────────────────┐    ┌────────────────────┐
+│ Pod Namespace       │    │ Host Namespace       │
+│                    │    │                    │
+│  eth0 (10.244.1.5) │────│ caliXXXX / vethXXXX │
+│     (veth 一端)     │    │    (veth 另一端)     │
+│                    │    │       │              │
+└────────────────────┘    │   bridge(cni0)       │
+                          │   或 路由表条目       │
+                          └────────────────────┘
+```
+
+```bash
+# 定位 Pod 对应的 veth
+POD_IFINDEX=$(kubectl exec -it <pod> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
+ip link show | grep "^${POD_IFINDEX}:"
+
+# 检查 veth 状态
+ip -s link show <veth-name>
+ethtool -S <veth-name>
+```
+
+### Linux bridge (虚拟交换机)
+
+Flannel 使用 cni0 bridge 连接同节点的 Pod。
+
+```bash
+# 查看 bridge 上的接口
+bridge link show
+
+# 查看 bridge 转发数据库 (FDB)
+bridge fdb show br cni0
+
+# 查看 bridge 统计信息
+ip -s link show cni0
+```
+
+---
+
+## Overlay 网络基础
+
+### VXLAN (Virtual Extensible LAN)
+
+VXLAN 通过 UDP 封装二层帧，实现跨三层网络的二层连通。
+
+```
+原始数据包:       [Eth][IP][TCP][Data]
+                          │
+VXLAN 封装后: [Eth][IP][UDP:4789][VXLAN Header][Eth][IP][TCP][Data]
+              └───外层───┘                    └───内层(原始)───┘
+
+MTU 影响: 外层头 50 字节 (14 Eth + 20 IP + 8 UDP + 8 VXLAN)
+         物理 MTU 1500 → Pod MTU 应设为 1450
+```
+
+```bash
+# 查看 VXLAN 接口
+ip -d link show type vxlan
+
+# 查看 VXLAN FDB（学习了哪些远端 VTEP）
+bridge fdb show dev flannel.1
+
+# 拓包 VXLAN 封装
+tcpdump -i eth0 -nn udp port 4789
+```
+
+### IPIP (IP-in-IP)
+
+比 VXLAN 轻量，仅 20 字节开销，但不支持多租户。
+
+```
+原始数据包: [IP][TCP][Data]
+                  │
+IPIP 封装后: [IP:protocol=4][IP][TCP][Data]
+            └外层 IP┘ └内层(原始)┘
+
+MTU 影响: 外层头 20 字节
+         物理 MTU 1500 → Pod MTU 应设为 1480
+```
+
+### BGP 路由（无封装）
+
+通过 BGP 协议在节点间分发 Pod 子网路由，无封装开销，但要求节点在同一 L2/L3 网络或上游路由器支持 BGP。
+
+```bash
+# Calico BGP 状态
+calicoctl node status
+# 检查 BGP 邻居是否全部 Established
+
+# 查看路由表中的 Pod 子网路由
+ip route show | grep "proto bird"
 ```
 
 ---
