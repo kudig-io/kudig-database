@@ -14,7 +14,7 @@
 - **[03-API网关选型指南与对比矩阵](./03-api-gateway-selection-guide.md)** - 12+ 维度功能矩阵；场景决策框架；TCO 分析；迁移成本评估；国内企业采用趋势
 
 ### 🌐 主流产品深度实践 (04-09)
-- **[04-Higress云原生API网关企业级实践](./04-higress-enterprise-gateway.md)** - Istiod 控制平面 + Envoy 数据平面架构；Helm 部署；Wasm/Lua 插件生态；AI 网关能力（LLM 代理、Token 限流）；Gateway API 一致性
+- **[04-Higress云原生API网关企业级实践](./04-higress-enterprise-gateway.md)** - Istiod 控制平面 + Envoy 数据平面架构；xDS 配置下发原理；Mac 快速 Demo（Docker/Kind）；McpBridge 注册中心对接；Wasm 插件开发实战；AI 网关能力（LLM 代理、Token 限流、多模型 Fallback、语义缓存）；Gateway API 一致性；生产调优与故障排查；竞品横向对比
 - **[05-Apache APISIX企业级API网关实践](./05-apisix-enterprise-gateway.md)** - etcd 控制平面 + OpenResty 数据平面；100+ 插件；Wasm 支持；多语言插件运行时；APISIX Ingress Controller；ADC 声明式配置
 - **[06-Kong API网关企业级实践](./06-kong-enterprise-gateway.md)** - PostgreSQL/DB-less/Konnect 模式；KIC 架构；Kong Gateway Operator；deck 声明式配置；Gateway API 一致性；混合模式部署
 - **[07-Envoy Gateway企业级实践](./07-envoy-gateway-enterprise.md)** - Envoy 官方项目；Gateway API 原生 API 接口；ExtensionPolicy/RateLimitPolicy CRD；EnvoyPatchPolicy 扩展性；Wasm 集成
