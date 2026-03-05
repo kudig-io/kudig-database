@@ -59,6 +59,7 @@
   - [topic-cheat-sheet: 快速速查卡](#topic-cheat-sheet-快速速查卡)
   - [topic-fta: 故障树分析(FTA)](#topic-fta-故障树分析fta)
   - [topic-febm: 取证循证方法论(FEBM)](#topic-febm-取证循证方法论febm)
+  - [topic-skills: 工单智能体诊断技能库](#topic-skills-工单智能体诊断技能库)
 - [多维度查询附录](#多维度查询附录)
 - [本地 Gitbook](#本地-gitbook)
 - [变更历史](#变更历史)
@@ -1267,6 +1268,25 @@ gitbook/
 | # | 文档名称 | 核心内容 |
 |:---:|:---|:---|
 | 8 | [FEBM 生产环境快速落地指南](./topic-febm/8_febm_production_quick_start.md) | 7天部署计划、最小FEBM工具栈、6个K8s故障取证Runbook(OOMKilled/CrashLoop/NodeNotReady/间歇超时/证书过期/配置漂移)、FTA+FEBM联合诊断流程、KPI仪表板、合规速查(等保2.0/SOC 2) |
+
+---
+
+### 工单智能体诊断技能库 (topic-skills)
+
+> **Agent-Executable Incident Handling Skills — 面向 AI Agent 运行时的自包含工单处理 Runbook** | 6 个核心 Skill(第一批) | 覆盖 K8s v1.28-v1.32 | 节点、Pod、DNS、Service、证书等最高频工单场景
+>
+> 详细目录索引请参阅 [topic-skills/README.md](./topic-skills/README.md)
+
+**定位**: 与 FTA(故障树分析)和 FEBM(取证循证方法论)互补，topic-skills 提供 Agent 可直接执行的诊断-修复-验证闭环，每个 Skill 包含 YAML 元数据、症状触发、分步诊断工作流、按风险分级的修复操作、版本兼容矩阵和升级协议。
+
+| # | 文档名称 | 核心内容 | 分类 | 风险等级 |
+|:---:|:---|:---|:---|:---|
+| 01 | [节点 NotReady 诊断与修复](./topic-skills/01-node-notready.md) | kubelet/容器运行时/资源压力/网络分区/证书过期 — 12个根因、10个修复操作 | Node | high |
+| 02 | [Pod CrashLoopBackOff & OOMKilled](./topic-skills/02-pod-crashloop-oomkilled.md) | 退出码速查表/OOM分析/内存泄漏检测/探针配置/Sidecar — 12个根因、9个修复操作 | Pod | medium |
+| 03 | [Pod Pending 调度失败](./topic-skills/03-pod-pending.md) | 资源不足/污点容忍/亲和反亲和/PVC/配额/碎片化 — 13个根因、13个修复操作 | Pod | low |
+| 04 | [DNS 解析故障](./topic-skills/04-dns-resolution-failure.md) | CoreDNS/上游DNS/NetworkPolicy/ndots/NodeLocal DNSCache/conntrack — 12个根因、10个修复操作 | Network | medium |
+| 05 | [Service 连通性异常](./topic-skills/05-service-connectivity.md) | Endpoint/标签匹配/kube-proxy/IPVS/NetworkPolicy/externalTrafficPolicy — 12个根因、11个修复操作 | Network | medium |
+| 06 | [证书过期与 TLS 故障](./topic-skills/06-certificate-expiry.md) | kubeadm证书/kubelet证书/etcd证书/cert-manager/Webhook TLS — 12个根因、11个修复操作 | Security | critical |
 
 ---
 
