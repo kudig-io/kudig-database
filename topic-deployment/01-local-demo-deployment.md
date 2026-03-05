@@ -808,7 +808,67 @@ kind export kubeconfig --name learn-k8s
 
 ---
 
-## 附录：macOS (Apple Silicon) 实战部署记录
+## 附录 A：macOS 方案选型思考记录
+
+> 以下记录了在 macOS 上选择本地 K8s 部署方案的完整决策过程。
+
+### 问题 1：Mac 上最干净好维护的部署方式是 kind 吗？
+
+**结论：是的。** kind 是 Mac 上最干净、最易维护的本地 K8s 方案。
+
+核心理由：
+- **没有 VM 层** — kind 完全运行在 Docker 容器内，不依赖 HyperKit/VirtualBox
+- **生命周期极简** — `kind create cluster` / `kind delete cluster`，删除即干净，无隐藏状态、无残留文件
+- **资源轻量** — 约 300MB/节点（minikube 约 1GB）
+- **启动快** — ~30 秒（minikube 60–120 秒）
+
+minikube 的优势在于开箱即用的 Dashboard、`minikube tunnel`（LoadBalancer 模拟）、`minikube addons enable ingress` 等功能，但这些都需要更多系统开销和隐藏状态。
+
+### 问题 2：如果需要完整的官方 K8s 发行版，用 kind 还是 minikube？
+
+**结论：用 kind。**
+
+两者都不是严格意义上的 K8s 官方发行版，但 kind 最接近原版：
+
+- **`kindest/node` 镜像由 Kubernetes SIG Testing 官方维护**，构建自 Kubernetes 源码
+- 组件完全原版：`etcd + kube-apiserver + kube-controller-manager + kube-scheduler + kubelet + kube-proxy`
+- 没有任何魔改，版本精确对齐官方 release
+- 可通过 `--image kindest/node:v1.32.0` 指定精确版本
+
+minikube 做了更多定制：内置驱动层、addon 系统、修改部分默认配置。
+
+> **例外**：如果需要体验 **kubeadm 手动部署流程**（模拟真实生产环境），应使用 Lima + Ubuntu VM + kubeadm，而非 kind 或 minikube。kind 和 minikube 都跳过了 kubeadm 的手动流程。
+
+### 问题 3：我需要 1 Master + 1 Worker，怎么部署？
+
+**方案**：创建 `kind-config.yaml` 指定多节点拓扑，通过 `--config` 参数传入。
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane   # Master 节点
+- role: worker           # Worker 节点
+```
+
+```bash
+kind create cluster --name my-k8s --image kindest/node:v1.32.0 --config kind-config.yaml
+```
+
+需要更多 Worker 只需在 `nodes` 列表中追加 `- role: worker` 即可。
+
+### 最终选型决策
+
+| 决策项 | 选择 | 理由 |
+|--------|------|------|
+| 部署工具 | **kind** | 最干净、最轻量、官方组件原版 |
+| K8s 版本 | **v1.32.0** | 当前最新稳定版 |
+| 集群拓扑 | **1 Master + 1 Worker** | 可体验跨节点调度，同时资源占用可控 |
+| 运行基座 | **Docker Desktop for Mac** | 已安装，kind 直接复用 |
+
+---
+
+## 附录 B：macOS (Apple Silicon) 实战部署记录
 
 > **环境**: macOS Sequoia / Apple Silicon (arm64) / Docker Desktop 29.x  
 > **日期**: 2026-03  
