@@ -166,32 +166,81 @@ xDS 资源类型:
 
 ### 方式一：Docker All-in-One（最快）
 
+> **⚠️ 镜像仓库说明**: Higress all-in-one 镜像**仅托管在阿里云中国区镜像仓库** (`higress-registry.cn-hangzhou.cr.aliyuncs.com`)，Docker Hub 上不存在该镜像。海外网络环境拉取时可能遇到 EOF 错误，重试几次通常可解决。
+
 ```bash
 # 前提：已安装 Docker Desktop for Mac
 # 确认 Docker 运行中
 docker info
 
+# 创建工作目录（用于持久化配置，官方推荐）
+mkdir -p ~/higress && cd ~/higress
+
 # 一键启动 Higress（All-in-One 模式，内置 Nacos）
-docker run -d --name higress-ai \
+# -v ${PWD}:/data 挂载数据卷，持久化网关配置
+docker run -d --rm --name higress-ai -v ${PWD}:/data \
   -p 8001:8001 -p 8080:8080 -p 8443:8443 \
   higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
 
 # 等待约 30 秒启动完成，检查状态
 docker logs -f higress-ai
-
-# 访问 Higress Console 管理界面
-# 浏览器打开: http://localhost:8001
-# 默认用户名/密码: admin/admin
+# 看到各组件启动完成的日志后，按 Ctrl+C 退出日志跟踪
 ```
 
-**验证网关工作：**
+**拉取失败排查（常见于海外网络）：**
 
 ```bash
-# 测试 Higress 是否响应
-curl -v http://localhost:8080
+# 错误示例 1: EOF（网络中断，重试即可）
+# Error: failed to fetch anonymous token: ... EOF
 
-# 预期返回 404（因为尚未配置路由），说明网关正常运行
-# HTTP/1.1 404 Not Found
+# 错误示例 2: pull access denied（镜像名错误）
+# 注意：镜像不在 Docker Hub，不要使用 higress/all-in-one
+
+# 备选方案：使用官方安装脚本（自带重试机制）
+curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a
+```
+
+**验证安装成功（四步确认）：**
+
+```bash
+# 步骤 1：确认容器运行中
+docker ps --filter name=higress-ai
+# 确认 STATUS 列显示 Up，三个端口 (8001, 8080, 8443) 均已映射
+
+# 步骤 2：测试 HTTP 网关端口
+curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" http://localhost:8080
+# 预期输出: HTTP Status: 200
+# 返回 Higress 欢迎页面 "Thanks for using Higress!"
+
+# 步骤 3：测试 HTTPS 网关端口
+curl -sk -o /dev/null -w "HTTP Status: %{http_code}\n" https://localhost:8443
+# 预期输出: HTTP Status: 200
+# TLS 1.3 握手成功，自签证书 CN=higress-gateway
+
+# 步骤 4：访问管理控制台
+# 浏览器打开: http://localhost:8001
+# ⚠️ 首次访问需初始化管理员账号（设置用户名和密码），非默认 admin/admin
+```
+
+**实测验证输出参考：**
+
+```bash
+$ curl -v http://localhost:8080
+# 关键响应信息：
+# < HTTP/1.1 200 OK
+# < content-type: text/html;charset=ISO-8859-1
+# < server: istio-envoy          ← 确认 Envoy 数据平面正常
+# <html>
+#   <h1>Thanks for using Higress!</h1>
+#   <p>Higress is successfully installed and is functioning properly.</p>
+# </html>
+
+$ curl -vk https://localhost:8443
+# 关键响应信息：
+# * SSL connection using TLSv1.3  ← TLS 1.3 握手成功
+# * Server certificate: CN=higress-gateway
+# < HTTP/1.1 200 OK
+# < server: istio-envoy
 ```
 
 ### 方式二：Docker Compose（带后端服务完整 Demo）
@@ -207,6 +256,8 @@ services:
   # Higress 网关
   higress:
     image: higress-registry.cn-hangzhou.cr.aliyuncs.com/higress/all-in-one:latest
+    volumes:
+      - ./higress-data:/data    # 持久化配置
     ports:
       - "8001:8001"   # Console
       - "8080:8080"   # HTTP
