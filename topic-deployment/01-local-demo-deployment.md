@@ -710,6 +710,22 @@ kubectl config get-contexts  # 查看是否还有残留的 context
 - 用于 **CI/CD 流水线** → kind (启动快，易自动化)
 - 用于 **日常开发调试** → minikube (Dashboard、tunnel 更方便)
 
+### macOS 用户推荐：kind
+
+**对于 macOS 用户，kind 是最干净、最易维护的本地 K8s 方案**，理由如下：
+
+| 维度 | kind 优势 |
+|------|----------|
+| **无 VM 层** | 完全运行在 Docker 容器内，没有 HyperKit/VirtualBox 等虚拟机开销 |
+| **生命周期极简** | `kind create cluster` 创建，`kind delete cluster` 彻底删除，零残留 |
+| **官方原版 K8s** | `kindest/node` 镜像由 K8s SIG Testing 官方维护，组件完全原版，无魔改 |
+| **版本对齐** | 可通过 `--image kindest/node:v1.32.0` 精确指定 K8s 版本 |
+| **资源轻量** | 约 300MB/节点 vs minikube 约 1GB |
+
+> **结论**: macOS + Docker Desktop + kind = 最简洁的本地 K8s 组合，维护成本最低。
+>
+> 如果你需要体验 **kubeadm 手动部署流程**（模拟生产环境），则应使用 Lima + Ubuntu VM + kubeadm，而非 kind 或 minikube。
+
 ---
 
 ## 常见问题 (FAQ)
@@ -789,6 +805,83 @@ kubectl cluster-info      # 测试连接
 # 如果 context 丢失
 kind export kubeconfig --name learn-k8s
 ```
+
+---
+
+## 附录：macOS (Apple Silicon) 实战部署记录
+
+> **环境**: macOS Sequoia / Apple Silicon (arm64) / Docker Desktop 29.x  
+> **日期**: 2026-03  
+> **目标**: 使用 kind 部署 1 Master + 1 Worker 的官方 K8s v1.32.0 集群
+
+### 环境确认
+
+```bash
+$ docker -v
+Docker version 29.2.1, build a5c7197
+```
+
+### 安装 kind 和 kubectl
+
+```bash
+$ brew install kind kubectl
+
+# 实际安装版本:
+# kind:       0.31.0 (arm64_sequoia)
+# kubectl:    1.35.2 (brew formula) / Client Version: v1.34.1
+
+$ kind version
+kind v0.31.0 go1.25.5 darwin/arm64
+
+$ kubectl version --client
+Client Version: v1.34.1
+Kustomize Version: v5.7.1
+```
+
+### 创建多节点集群配置
+
+```bash
+$ cat > kind-config.yaml << 'EOF'
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+EOF
+```
+
+### 创建集群
+
+```bash
+$ kind create cluster \
+  --name my-k8s \
+  --image kindest/node:v1.32.0 \
+  --config kind-config.yaml
+
+Creating cluster "my-k8s" ...
+ ✓ Ensuring node image (kindest/node:v1.32.0) 🖼
+ ✓ Preparing nodes 📦 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+ ✓ Joining worker nodes 🚜
+Set kubectl context to "kind-my-k8s"
+You can now use your cluster with:
+kubectl cluster-info --context kind-my-k8s
+Have a nice day! 👋
+```
+
+### 验证集群状态
+
+```bash
+$ kubectl get nodes
+NAME                   STATUS   ROLES           AGE   VERSION
+my-k8s-control-plane   Ready    control-plane   34s   v1.32.0
+my-k8s-worker          Ready    <none>          25s   v1.32.0
+```
+
+> **结果**: 1 Master + 1 Worker 全部 Ready，K8s v1.32.0 官方发行版，从 `brew install` 到集群就绪约 3 分钟。
 
 ---
 
