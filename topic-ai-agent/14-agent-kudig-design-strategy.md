@@ -215,4 +215,4 @@ Agent:
 
 ---
 
-*本文档为 kudig-database 项目 topic-agent 专题的设计总纲。*
+*本文档为 kudig-database 项目 topic-ai-agent 专题的设计总纲，原 topic-agent 专题已整合至此。*

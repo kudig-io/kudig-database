@@ -358,6 +358,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_nstat_or", "annotation": "节点未被 cordon" }
       },
       "metadata": { "severity": "medium", "probability": "medium", "mttr_minutes": 10,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-012", "remediation_ids": ["REM-001"], "is_fault": false, "script": "scripts/diagnose-quick.sh" },
         "detection": { "events": ["NodeCordon"], "metrics": ["kube_node_spec_unschedulable"], "logs": ["node cordoned"] },
         "remediation": { "manual_steps": ["检查 cordon 原因", "确认维护完成后: kubectl uncordon <node>", "检查自动维护策略"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -420,6 +421,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kubelet_or", "annotation": "kubelet 服务正常运行" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-001", "remediation_ids": ["REM-003"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": [], "logs": ["kubelet: exit", "failed to run Kubelet"] },
         "remediation": { "manual_steps": ["systemctl status kubelet", "journalctl -u kubelet --since '10m ago'", "检查 /var/lib/kubelet/config.yaml", "systemctl restart kubelet"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -441,6 +443,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kubelet_or", "annotation": "心跳上报正常" }
       },
       "metadata": { "severity": "high", "probability": "medium", "mttr_minutes": 20,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-001", "remediation_ids": ["REM-003", "REM-006"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["kubelet_node_status_update_success_total"], "logs": ["failed to update lease", "unable to update node status"] },
         "remediation": { "manual_steps": ["检查 kubelet 到 API Server 连通性", "检查 API Server 负载和可用性", "验证 kubelet 证书有效"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -464,6 +467,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kubelet_or", "annotation": "证书正常" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 45,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-007", "remediation_ids": ["REM-008"], "cross_skill": "SKILL-SEC-001", "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["kubelet_certificate_manager_client_expiration_renew_errors"], "logs": ["x509: certificate has expired", "certificate signed by unknown authority"] },
         "remediation": { "manual_steps": ["检查证书: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates", "确认 rotateCertificates: true", "手动续签: kubeadm alpha certs renew"], "auto_actions": [] },
         "version_notes": { "1.19+": "证书自动轮换默认启用" } },
@@ -511,6 +515,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kubelet_or", "annotation": "PLEG 正常" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-008", "remediation_ids": ["REM-003", "REM-004"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["kubelet_pleg_relist_duration_seconds"], "logs": ["PLEG is not healthy"] },
         "remediation": { "manual_steps": ["检查容器运行时响应速度", "减少节点容器数量", "检查是否有容器 hang", "重启 kubelet 或运行时"], "auto_actions": [] } },
       "next_step": "gate_and_pleg"
@@ -629,6 +634,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_runtime_or", "annotation": "运行时服务正常" }
       },
       "metadata": { "severity": "critical", "probability": "rare", "mttr_minutes": 20,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-002", "remediation_ids": ["REM-004"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["container_runtime_operations_errors_total"], "logs": ["containerd: exit", "runtime not available"] },
         "remediation": { "manual_steps": ["systemctl status containerd", "journalctl -u containerd", "systemctl restart containerd"], "auto_actions": [] },
         "version_notes": { "1.24+": "仅 containerd/CRI-O" } },
@@ -653,6 +659,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_runtime_or", "annotation": "CRI socket 正常" }
       },
       "metadata": { "severity": "critical", "probability": "rare", "mttr_minutes": 15,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-002", "remediation_ids": ["REM-004"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": [], "metrics": [], "logs": ["failed to connect to CRI socket"] },
         "remediation": { "manual_steps": ["检查 socket: ls -la /run/containerd/containerd.sock", "确认 kubelet --container-runtime-endpoint", "重启运行时"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -698,6 +705,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_runtime_or", "annotation": "运行时响应正常" }
       },
       "metadata": { "severity": "critical", "probability": "rare", "mttr_minutes": 15,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-002", "remediation_ids": ["REM-004", "REM-006"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["container_runtime_operations_duration_seconds"], "logs": ["timeout waiting for runtime"] },
         "remediation": { "manual_steps": ["crictl ps 测试运行时", "强制重启运行时", "检查 D 状态进程"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -757,6 +765,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_resource_or", "annotation": "内存充足" }
       },
       "metadata": { "severity": "high", "probability": "common", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-004", "remediation_ids": ["REM-005", "REM-006"], "script": "scripts/check-resources.sh" },
         "detection": { "events": ["NodeHasMemoryPressure", "Evicted"], "metrics": ["node_memory_MemAvailable_bytes"], "logs": ["memory pressure"] },
         "remediation": { "manual_steps": ["free -h 检查内存", "kubectl top pod 定位高内存 Pod", "调整驱逐阈值或扩容"], "auto_actions": ["cluster-autoscaler 扩容"] } },
       "next_step": "gate_root_or"
@@ -779,6 +788,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_resource_or", "annotation": "磁盘空间充足" }
       },
       "metadata": { "severity": "high", "probability": "common", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-003", "remediation_ids": ["REM-002", "REM-005"], "script": "scripts/cleanup-disk.sh" },
         "detection": { "events": ["NodeHasDiskPressure"], "metrics": ["node_filesystem_avail_bytes"], "logs": ["disk pressure", "no space left"] },
         "remediation": { "manual_steps": ["df -h 检查磁盘", "crictl rmi --prune 清理镜像", "清理日志/临时文件", "增加磁盘"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -824,6 +834,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_resource_or", "annotation": "PID/句柄正常" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-005", "remediation_ids": ["REM-005", "REM-006"], "script": "scripts/check-resources.sh" },
         "detection": { "events": ["NodeHasPIDPressure"], "metrics": ["node_filefd_allocated"], "logs": ["cannot allocate memory", "too many open files"] },
         "remediation": { "manual_steps": ["检查 PID: cat /proc/sys/kernel/pid_max", "增加上限: sysctl -w kernel.pid_max=", "检查 ulimit -n", "定位泄漏进程"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -941,6 +952,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_network_or", "annotation": "API Server 可达" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-006", "remediation_ids": [], "note": "manual network investigation required", "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": [], "logs": ["Unable to connect to the server", "connection refused"] },
         "remediation": { "manual_steps": ["telnet <apiserver-ip> 6443", "检查安全组/防火墙", "检查 kube-proxy", "验证 API Server 健康"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -965,6 +977,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_network_or", "annotation": "CNI 正常" }
       },
       "metadata": { "severity": "high", "probability": "low", "mttr_minutes": 30,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-011", "remediation_ids": [], "note": "redeploy CNI DaemonSet manually", "script": "scripts/diagnose-quick.sh" },
         "detection": { "events": ["NetworkNotReady", "FailedCreatePodSandBox"], "metrics": [], "logs": ["cni plugin not initialized"] },
         "remediation": { "manual_steps": ["检查 CNI DaemonSet 状态", "验证 /etc/cni/net.d/", "检查 CNI 日志", "重启 CNI Pod"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -1176,6 +1189,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kernel_or", "annotation": "无内核 panic" }
       },
       "metadata": { "severity": "critical", "probability": "rare", "mttr_minutes": 60,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-009", "remediation_ids": ["REM-006", "REM-009", "REM-010"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["node_boot_time_seconds"], "logs": ["Kernel panic", "BUG:"] },
         "remediation": { "manual_steps": ["检查 dmesg 和 kern.log", "分析 crash dump", "更新内核", "检查硬件"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -1197,6 +1211,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_kernel_or", "annotation": "驱动/模块正常" }
       },
       "metadata": { "severity": "high", "probability": "low", "mttr_minutes": 45,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-009", "remediation_ids": ["REM-006", "REM-009"], "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": [], "metrics": [], "logs": ["module load failed", "driver error"] },
         "remediation": { "manual_steps": ["lsmod 检查", "dmesg | grep error", "modprobe 重载", "更新驱动"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -1279,6 +1294,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_time_or", "annotation": "证书有效" }
       },
       "metadata": { "severity": "critical", "probability": "low", "mttr_minutes": 45,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-007", "remediation_ids": ["REM-008"], "cross_skill": "SKILL-SEC-001", "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": ["NodeNotReady"], "metrics": ["kubelet_certificate_manager_client_expiration_renew_errors"], "logs": ["x509: certificate has expired"] },
         "remediation": { "manual_steps": ["openssl x509 检查证书日期", "启用 rotateCertificates", "手动续签并重启 kubelet"], "auto_actions": [] } },
       "next_step": "gate_root_or"
@@ -1303,6 +1319,7 @@ flowchart TD
         "default": { "action": "skip", "next_step": "gate_time_or", "annotation": "时间同步正常" }
       },
       "metadata": { "severity": "high", "probability": "low", "mttr_minutes": 15,
+        "skill_ref": { "skill_id": "SKILL-NODE-001", "rc_id": "RC-010", "remediation_ids": [], "note": "fix NTP sync manually (chrony/ntpd)", "script": "scripts/diagnose-deep.sh" },
         "detection": { "events": [], "metrics": ["node_timex_offset_seconds"], "logs": ["clock skew"] },
         "remediation": { "manual_steps": ["timedatectl status", "ntpdate 手动同步", "确认 chrony/ntpd 正常"], "auto_actions": [] } },
       "next_step": "gate_root_or"

@@ -234,14 +234,44 @@ Agent 在执行 Skill 后应记录：
 | FTA 故障树库 | [topic-fta/list/](../topic-fta/list/) | 每个 Skill 对应的故障分析模型 |
 | FEBM 循证方法论 | [topic-febm/](../topic-febm/) | Agent 工单处理的理论基础 |
 | 结构化故障排查 | [topic-structural-trouble-shooting/](../topic-structural-trouble-shooting/) | 深度排查参考指南 |
-| Agent 设计 | [topic-agent/](../topic-agent/) | Agent 架构与设计模式 |
+| Agent 设计 | [topic-ai-agent/](../topic-ai-agent/) | AI Agent 工程与架构设计 |
 | 事件管理 Runbook | [topic-dictionary/12-incident-management-runbooks.md](../topic-dictionary/12-incident-management-runbooks.md) | 事件管理流程模板 |
 | 生产排障 Playbook | [topic-dictionary/16-production-troubleshooting-playbook.md](../topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
 | Skill 文档模板 | [_skill-schema.md](./_skill-schema.md) | 新建 Skill 的规范化模板 |
+| IDE 目录格式 Skill | [k8s-node-notready/](./k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
 
 ---
 
-## 7. 后续规划
+## 7. IDE 目录格式 Skill
+
+除单文件 Skill 外，本目录还提供符合主流 IDE（Qoder/Cursor）标准的**目录格式 Skill**，包含可执行脚本、机器可解析数据和模块化参考文档：
+
+### k8s-node-notready/
+
+```
+k8s-node-notready/
+├── SKILL.md                        # 入口: Skill 定义 + Agent 执行指令
+├── reference/
+│   ├── diagnostic-workflow.md      # 完整 Phase 1-3 诊断工作流
+│   ├── root-cause-catalog.md       # 12 个根因详细说明 + 证据映射
+│   ├── remediation-playbook.md     # 10 个修复操作 + 验证 + 升级协议
+│   └── version-matrix.md           # K8s v1.28-v1.32 版本兼容 + 知识进化
+├── scripts/
+│   ├── diagnose-quick.sh           # Phase 1: kubectl 快速检查（只读）
+│   ├── diagnose-deep.sh            # Phase 2: SSH 深度检查（只读）
+│   ├── check-resources.sh          # 资源压力检查（磁盘/内存/PID/inode）
+│   ├── cleanup-disk.sh             # 修复: 磁盘空间清理 (REM-002)
+│   └── verify-node.sh              # 修复后: 节点健康验证
+└── assets/
+    ├── skill-metadata.yaml         # 机器可解析的完整元数据
+    ├── symptom-patterns.yaml       # 症状→Skill 匹配规则
+    ├── root-cause-map.yaml         # 根因决策树数据
+    └── escalation-template.md      # 升级消息模板
+```
+
+---
+
+## 8. 后续规划
 
 第二批 6 个 Skill（按优先级排序）：
 
