@@ -33,6 +33,22 @@
 | 13 | [可信智能体体系 — 运维智能体财年规划](./13-trusted-agent-system-fiscal-plan.md) | 五大产品线智能体基线建设、评测体系、能力提升路线 | 运维专家组、技术决策者 | 60min |
 | 14 | [Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | kudig-database 知识底座、四大 Agent 方向、架构蓝图、落地路线 | 架构师、技术决策者 | 20min |
 | 15 | [Agent 语料库差距分析](./15-agent-corpus-gap-analysis.md) | 10 大类缺失分析、症状→原因映射、SOP 规范、补全路线图 | 架构师、内容工程师 | 25min |
+| **AgentScope 系列** | | | | |
+| 16 | [AgentScope 概述与安装入门](./16-agentscope-overview-installation.md) | 框架定位、设计哲学、安装配置、Hello World | 所有工程师 | 20min |
+| 17 | [AgentScope 核心概念与基础操作](./17-agentscope-core-concepts.md) | State/Message/Agent/Model/Formatter/Memory 六大抽象 | AI 工程师 | 30min |
+| 18 | [AgentScope 工具系统与 MCP 集成](./18-agentscope-tool-system.md) | Toolkit 注册、MCP 集成、并行调用、K8s 工具集 | 研发工程师 | 30min |
+| 19 | [AgentScope 记忆管理与上下文工程](./19-agentscope-memory-context.md) | 短期/长期记忆、Session 持久化、Token 管理、压缩策略 | AI 工程师 | 25min |
+| 20 | [AgentScope 多 Agent 编排与工作流](./20-agentscope-multi-agent-orchestration.md) | MsgHub、Pipeline、Routing、Handoffs、辩论模式 | 架构师 | 35min |
+| 21 | [AgentScope 高级特性与扩展开发](./21-agentscope-advanced-features.md) | Hooks、RAG、A2A、语音 Agent、Agentic RL、评测体系 | AI 工程师、架构师 | 35min |
+| 22 | [AgentScope 生产部署与可观测性](./22-agentscope-production-deployment.md) | Runtime、AgentApp、Sandbox、K8s 部署、OTel Tracing | SRE、平台工程师 | 40min |
+| 29 | [AgentScope Studio 与 Agent Skill 实战指南](./29-agentscope-studio-skill-demo.md) | Studio 功能详解、Agent 创建、Skill 机制、K8s 诊断 Demo | 所有工程师 | 30min |
+| **Agent CLI 系列** | | | | |
+| 23 | [Agent CLI 基础概念与架构模式](./23-agent-cli-fundamentals.md) | CLI Agent 定义、Agent Loop、MCP/A2A 协议、运行模式 | 所有工程师 | 30min |
+| 24 | [主流 Agent CLI 工具全景对比](./24-agent-cli-tools-comparison.md) | Claude Code/Codex CLI/Gemini CLI/Aider/Goose 深度对比 | 研发工程师、架构师 | 35min |
+| 25 | [Agent CLI 与 MCP 协议深度集成](./25-agent-cli-mcp-integration.md) | MCP 协议架构、Server 开发、企业级部署、安全加固 | 研发工程师、平台工程师 | 40min |
+| 26 | [Agent CLI 开发工作流与最佳实践](./26-agent-cli-development-workflow.md) | 自定义指令、Prompt Engineering、Git 集成、团队协作 | 研发工程师 | 30min |
+| 27 | [Agent CLI 安全治理与权限模型](./27-agent-cli-security-governance.md) | 威胁模型、沙箱隔离、权限配置、供应链安全、审计 | 安全工程师、架构师 | 30min |
+| 28 | [Agent CLI 企业级自动化与 CI/CD](./28-agent-cli-enterprise-automation.md) | 无头模式、GitHub Actions、批量处理、企业部署架构 | SRE、平台工程师 | 35min |
 
 ---
 
@@ -72,11 +88,33 @@ graph TB
         A15["15 Agent 语料库差距分析<br/>10 大类缺失 / SOP / 症状映射 / 补全路线"]
     end
 
+    subgraph L6["AgentScope 深度系列 — 从入门到生产"]
+        A16["16 概述与安装<br/>设计哲学 / 安装 / Hello World"]
+        A17["17 核心概念<br/>State / Message / Agent / Model"]
+        A18["18 工具系统<br/>Toolkit / MCP / 并行调用"]
+        A19["19 记忆管理<br/>短期 + 长期记忆 / Session"]
+        A20["20 多 Agent 编排<br/>MsgHub / Pipeline / Routing"]
+        A21["21 高级特性<br/>Hooks / RAG / A2A / Agentic RL"]
+        A22["22 生产部署<br/>Runtime / K8s / OTel Tracing"]
+        A29["29 Studio & Skill 实战<br/>Studio 追踪 / Agent Skill / K8s Demo"]
+    end
+
+    subgraph L7["Agent CLI 系列 — 2026 命令行智能体"]
+        A23["23 CLI 基础与架构<br/>Agent Loop / MCP / A2A"]
+        A24["24 工具全景对比<br/>Claude Code / Codex / Gemini CLI"]
+        A25["25 MCP 协议深度集成<br/>Server 开发 / 企业部署"]
+        A26["26 开发工作流<br/>Custom Instructions / Git"]
+        A27["27 安全治理<br/>沙箱 / 权限 / 供应链"]
+        A28["28 企业自动化<br/>CI/CD / Headless / 批量"]
+    end
+
     ROOT --> L1
     ROOT --> L2
     ROOT --> L3
     ROOT --> L4
     ROOT --> L5
+    ROOT --> L6
+    ROOT --> L7
 
     A01 --> A02
     A02 --> A03
@@ -94,6 +132,22 @@ graph TB
     A14 --> A15
     A04 --> A15
     A12 --> A14
+    A03 --> A16
+    A16 --> A17
+    A17 --> A18
+    A17 --> A19
+    A18 --> A20
+    A19 --> A20
+    A20 --> A21
+    A21 --> A22
+    A22 --> A29
+    A05 --> A23
+    A23 --> A24
+    A24 --> A25
+    A25 --> A26
+    A26 --> A27
+    A27 --> A28
+    A18 --> A25
 ```
 
 ---
@@ -114,6 +168,12 @@ graph TB
 
 **内容工程师 / 知识运营**：
 1. [15 - 语料库差距分析](./15-agent-corpus-gap-analysis.md) → [14 - 赋能设计](./14-agent-kudig-design-strategy.md) → [04 - RAG 指南](./04-rag-knowledge-retrieval.md)
+
+**AgentScope 学习路径**：
+1. [16 - 概述与安装](./16-agentscope-overview-installation.md) → [17 - 核心概念](./17-agentscope-core-concepts.md) → [18 - 工具系统](./18-agentscope-tool-system.md) → [19 - 记忆管理](./19-agentscope-memory-context.md) → [20 - 多 Agent](./20-agentscope-multi-agent-orchestration.md) → [21 - 高级特性](./21-agentscope-advanced-features.md) → [22 - 生产部署](./22-agentscope-production-deployment.md) → [29 - Studio & Skill 实战](./29-agentscope-studio-skill-demo.md)
+
+**Agent CLI 学习路径**：
+1. [23 - CLI 基础与架构](./23-agent-cli-fundamentals.md) → [24 - 工具全景对比](./24-agent-cli-tools-comparison.md) → [25 - MCP 协议集成](./25-agent-cli-mcp-integration.md) → [26 - 开发工作流](./26-agent-cli-development-workflow.md) → [27 - 安全治理](./27-agent-cli-security-governance.md) → [28 - 企业自动化](./28-agent-cli-enterprise-automation.md)
 
 ---
 
@@ -136,12 +196,14 @@ graph TB
 |---------|---------|
 | **推理框架** | ReAct, CoT, ToT, Plan-and-Execute, Reflexion |
 | **LLM 模型** | GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama-3, Qwen-2.5, DeepSeek-R1 |
-| **Agent 框架** | LangChain, LlamaIndex, AutoGen, CrewAI, Dify, Semantic Kernel |
+| **Agent 框架** | LangChain, LlamaIndex, AutoGen, CrewAI, Dify, Semantic Kernel, **AgentScope** |
 | **向量数据库** | Chroma, Weaviate, Qdrant, Milvus, pgvector |
 | **Embedding 模型** | text-embedding-3-large, BGE-M3, Jina Embeddings v3 |
-| **可观测性** | LangSmith, Langfuse, Phoenix (Arize), OpenTelemetry |
+| **可观测性** | LangSmith, Langfuse, Phoenix (Arize), OpenTelemetry, **AgentScope Studio** |
 | **安全框架** | Guardrails AI, NeMo Guardrails, Llama Guard |
-| **部署平台** | Kubernetes, vLLM, TGI, Ray Serve, Triton |
+| **部署平台** | Kubernetes, vLLM, TGI, Ray Serve, Triton, **AgentScope Runtime** |
+| **Agent CLI** | Claude Code, Codex CLI, Gemini CLI, Aider, Goose, Amazon Q Developer CLI |
+| **CLI 协议** | MCP (Model Context Protocol), A2A (Agent-to-Agent), OAuth 2.1 |
 
 ---
 

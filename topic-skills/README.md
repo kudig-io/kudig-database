@@ -239,10 +239,34 @@ Agent 在执行 Skill 后应记录：
 | 生产排障 Playbook | [topic-dictionary/16-production-troubleshooting-playbook.md](../topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
 | Skill 文档模板 | [_skill-schema.md](./_skill-schema.md) | 新建 Skill 的规范化模板 |
 | IDE 目录格式 Skill | [k8s-node-notready/](./k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
+| **本地 Demo** | [demo/](./demo/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
+| Demo 运行指南 | [07-skill-local-demo-guide.md](./07-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
 
 ---
 
-## 7. IDE 目录格式 Skill
+## 7. 本地运行 Demo
+
+在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./07-skill-local-demo-guide.md) 和 [demo/README.md](./demo/README.md)。
+
+```bash
+# 快速开始
+cd topic-skills/demo
+bash setup-kind-cluster.sh     # 创建 1 CP + 2 Worker 的 Kind 集群
+bash run-skill-demo.sh          # 交互式选择场景
+bash teardown.sh                # 清理
+```
+
+| # | 场景 | 对应 Skill | 注入方式 | 修复方式 |
+|---|------|-----------|---------|--------|
+| 01 | 节点 Cordon | SKILL-NODE-001 / RC-012 | `kubectl cordon` | REM-001: uncordon |
+| 02 | Pod CrashLoop | SKILL-POD-001 | 错误启动命令 | 修正 Deployment |
+| 03 | Pod Pending | SKILL-POD-002 | 资源请求超限 | 调整 requests |
+| 04 | DNS 故障 | SKILL-NET-001 | CoreDNS 缩容 | 恢复 CoreDNS |
+| 05 | Service 无 EP | SKILL-NET-002 | Selector typo | 修正 selector |
+
+---
+
+## 8. IDE 目录格式 Skill
 
 除单文件 Skill 外，本目录还提供符合主流 IDE（Qoder/Cursor）标准的**目录格式 Skill**，包含可执行脚本、机器可解析数据和模块化参考文档：
 
@@ -271,7 +295,7 @@ k8s-node-notready/
 
 ---
 
-## 8. 后续规划
+## 9. 后续规划
 
 第二批 6 个 Skill（按优先级排序）：
 

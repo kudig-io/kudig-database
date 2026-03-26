@@ -1,0 +1,130 @@
+# 统一 LLM API 网关专题 — OpenRouter 全量指南
+
+> **文档类型**: 专题索引 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Unified LLM API, AI Gateway, Provider Routing, Model Fallback, Prompt Caching, Structured Outputs, Web Search, BYOK, Enterprise
+
+---
+
+## 概述
+
+本专题系统性地覆盖 **OpenRouter** ——当前最大的统一 LLM API 网关平台——的全生命周期知识：从核心架构与快速接入，到模型与 Provider 管理、智能路由策略、完整 API 参考、Structured Outputs / Tool Calling、插件体系、Prompt Caching、主流框架集成，再到流式传输、安全隐私、企业级高级实践。
+
+所有内容以 **2026 年最新官方文档和高质量社区实践** 为基础，提供可直接落地的配置示例、架构方案和最佳实践。本专题与 `topic-coding`（OpenCode Agent 系列）和 `topic-ai-agent`（Agent CLI 系列）深度联动，形成从 LLM 基础设施到上层智能体的完整知识闭环。
+
+> OpenRouter 提供统一 API 访问 400+ AI 模型，支持 OpenAI SDK 兼容接口、智能 Provider 路由与自动故障转移、Prompt Caching、Web Search 插件、Structured Outputs、BYOK（Bring Your Own Key）等企业级能力。作为 LLM 应用的"中间件层"，OpenRouter 已成为 AI 应用开发者最核心的基础设施之一。
+
+---
+
+## 文档目录
+
+| 序号 | 文档 | 内容概要 | 适用角色 | 阅读耗时 |
+|:---:|------|---------|---------|---------|
+| 01 | [OpenRouter 概述与核心架构](./01-openrouter-overview-architecture.md) | 项目定位、核心能力矩阵、统一网关架构、与竞品对比 | 所有工程师 | 25min |
+| 02 | [快速接入与环境配置](./02-openrouter-quickstart-setup.md) | SDK 安装、API Key 配置、首次请求、OpenAI SDK 兼容 | 所有工程师 | 15min |
+| 03 | [模型与 Provider 生态](./03-openrouter-models-providers.md) | 400+ 模型矩阵、模型元数据 API、模型变体、定价体系 | AI 工程师、架构师 | 25min |
+| 04 | [智能路由与 Provider 选择](./04-openrouter-provider-routing.md) | 负载均衡、Provider 排序、性能阈值、Model Fallback、Auto Router | 架构师、SRE | 30min |
+| 05 | [API 参考与请求/响应规范](./05-openrouter-api-reference.md) | 完整请求 Schema、响应格式、参数详解、Error Handling | 研发工程师 | 30min |
+| 06 | [Structured Outputs 与 Tool Calling](./06-openrouter-structured-outputs-tools.md) | JSON Schema 约束、Tool/Function Calling、Response Healing | 研发工程师 | 20min |
+| 07 | [插件体系与 Web Search](./07-openrouter-plugins-web-search.md) | Web 搜索插件、File Parser、Context Compression、引擎选择 | 研发工程师 | 25min |
+| 08 | [Prompt Caching 与成本优化](./08-openrouter-prompt-caching-optimization.md) | Provider 级缓存策略、Sticky Routing、TTL 配置、成本分析 | 架构师、AI 工程师 | 25min |
+| 09 | [框架集成与生态系统](./09-openrouter-frameworks-integrations.md) | OpenAI SDK、Vercel AI、LangChain、LlamaIndex、Aider/Cline | 研发工程师 | 20min |
+| 10 | [流式传输与多模态输入](./10-openrouter-streaming-multimedia.md) | SSE Streaming、Stream Cancellation、Image/PDF/Audio 输入 | 研发工程师 | 20min |
+| 11 | [安全、隐私与数据治理](./11-openrouter-security-privacy.md) | 数据收集策略、Zero Data Retention、EU 合规、BYOK、API Key 管理 | 安全工程师、架构师 | 25min |
+| 12 | [企业级高级实践](./12-openrouter-enterprise-advanced.md) | Provisioning Keys、Credits 管理、Rate Limits、App Attribution、最佳实践 | SRE、平台工程师 | 30min |
+
+---
+
+## 内容结构全景
+
+```mermaid
+graph TB
+    ROOT["统一 LLM API 网关专题<br/>topic-openrouter · OpenRouter"]
+
+    subgraph L1["基础层 — 概念与接入"]
+        A01["01 概述与核心架构<br/>统一 API · 网关设计 · 竞品对比"]
+        A02["02 快速接入与环境配置<br/>SDK · API Key · 首次请求"]
+        A03["03 模型与 Provider 生态<br/>400+ 模型 · 元数据 API · 定价"]
+    end
+
+    subgraph L2["核心能力层 — 路由 × API × 工具"]
+        A04["04 智能路由与 Provider 选择<br/>负载均衡 · Fallback · Auto Router"]
+        A05["05 API 参考与请求响应<br/>完整 Schema · 参数 · Error"]
+        A06["06 Structured Outputs × Tool Calling<br/>JSON Schema · Function Call · Healing"]
+    end
+
+    subgraph L3["增强能力层 — 插件 × 缓存 × 集成"]
+        A07["07 插件体系与 Web Search<br/>Web · File Parser · 压缩"]
+        A08["08 Prompt Caching 与成本优化<br/>Sticky Routing · TTL · 成本"]
+        A09["09 框架集成与生态系统<br/>OpenAI · LangChain · Vercel AI"]
+    end
+
+    subgraph L4["高级层 — 流式 × 安全 × 企业"]
+        A10["10 流式传输与多模态<br/>SSE · 取消 · Image/PDF"]
+        A11["11 安全、隐私与数据治理<br/>ZDR · EU · BYOK · Key 管理"]
+        A12["12 企业级高级实践<br/>Provisioning · Credits · 最佳实践"]
+    end
+
+    ROOT --> L1
+    ROOT --> L2
+    ROOT --> L3
+    ROOT --> L4
+
+    A01 --> A02
+    A02 --> A03
+    A03 --> A04
+    A04 --> A05
+    A05 --> A06
+    A04 --> A07
+    A07 --> A08
+    A08 --> A09
+    A06 --> A10
+    A09 --> A10
+    A10 --> A11
+    A11 --> A12
+    A08 --> A12
+```
+
+---
+
+## 快速入口
+
+**初学者 / 新手上路**：
+1. [01 - 概述与架构](./01-openrouter-overview-architecture.md) → [02 - 快速接入](./02-openrouter-quickstart-setup.md) → [03 - 模型与 Provider](./03-openrouter-models-providers.md)
+
+**AI 应用工程师**：
+1. [05 - API 参考](./05-openrouter-api-reference.md) → [06 - Structured Outputs](./06-openrouter-structured-outputs-tools.md) → [07 - 插件与 Web Search](./07-openrouter-plugins-web-search.md) → [10 - 流式与多模态](./10-openrouter-streaming-multimedia.md)
+
+**架构师 / SRE**：
+1. [04 - 智能路由](./04-openrouter-provider-routing.md) → [08 - Prompt Caching](./08-openrouter-prompt-caching-optimization.md) → [11 - 安全隐私](./11-openrouter-security-privacy.md) → [12 - 企业高级](./12-openrouter-enterprise-advanced.md)
+
+**框架集成开发者**：
+1. [09 - 框架集成](./09-openrouter-frameworks-integrations.md) → [06 - Tool Calling](./06-openrouter-structured-outputs-tools.md) → [07 - Web Search](./07-openrouter-plugins-web-search.md)
+
+---
+
+## 关联专题
+
+| 专题/领域 | 与本专题的关系 |
+|---------|--------------|
+| [topic-coding](../topic-coding/) | OpenCode Agent 系列，OpenRouter 作为 OpenCode 支持的 75+ Provider 之一 |
+| [topic-ai-agent](../topic-ai-agent/) | Agent CLI 系列，OpenRouter 是主流 Agent 工具的统一 LLM 后端 |
+| [domain-11-ai-infra](../domain-11-ai-infra/) | AI 基础设施，OpenRouter 作为 LLM 推理服务的统一接入层 |
+| [domain-98-cloud-native-api-gateway](../domain-98-cloud-native-api-gateway/) | 云原生 API 网关，OpenRouter 是 LLM 领域的 API Gateway 实践 |
+
+---
+
+## 覆盖的关键技术
+
+| 技术领域 | 覆盖内容 |
+|---------|---------|
+| **核心架构** | 统一 LLM API Gateway、OpenAI 兼容接口、Provider Proxy、自动故障转移 |
+| **模型生态** | 400+ 模型、OpenAI/Anthropic/Google/Meta/DeepSeek 等、模型变体 (:free/:nitro/:online) |
+| **智能路由** | Price-Based Load Balancing、Throughput/Latency Sort、Performance Thresholds、Auto Router |
+| **API 能力** | Chat Completions、Structured Outputs、Tool Calling、Streaming SSE、Assistant Prefill |
+| **插件体系** | Web Search (Native/Exa/Firecrawl/Parallel)、File Parser (PDF)、Response Healing、Context Compression |
+| **成本优化** | Prompt Caching (OpenAI/Anthropic/DeepSeek/Gemini)、Provider Sticky Routing、Cache TTL、Free Models |
+| **框架集成** | OpenAI SDK、Vercel AI SDK、LangChain、LlamaIndex、Mastra、PydanticAI、Aider/Cline/RooCode |
+| **安全治理** | Zero Data Retention、EU Data Residency、BYOK、Provisioning Keys、OAuth PKCE |
+
+---
+
+*本专题为 kudig-database 项目原创内容，基于 OpenRouter 官方文档（openrouter.ai/docs）和高质量社区实践整理。*
