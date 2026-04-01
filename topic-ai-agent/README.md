@@ -1,6 +1,6 @@
 # AI Agent 工程专题
 
-> **文档类型**: 专题索引 | **最后更新**: 2026-03 | **关键词**: AI Agent, LLM, RAG, 多 Agent 编排, 生产部署, 企业级应用, Function Calling, Agent 安全
+> **文档类型**: 专题索引 | **最后更新**: 2026-04 | **关键词**: AI Agent, LLM, RAG, 多 Agent 编排, 生产部署, 企业级应用, Function Calling, Agent 安全, Agent Harness, Harness Engineering
 
 ---
 
@@ -49,6 +49,18 @@
 | 26 | [Agent CLI 开发工作流与最佳实践](./26-agent-cli-development-workflow.md) | 自定义指令、Prompt Engineering、Git 集成、团队协作 | 研发工程师 | 30min |
 | 27 | [Agent CLI 安全治理与权限模型](./27-agent-cli-security-governance.md) | 威胁模型、沙箱隔离、权限配置、供应链安全、审计 | 安全工程师、架构师 | 30min |
 | 28 | [Agent CLI 企业级自动化与 CI/CD](./28-agent-cli-enterprise-automation.md) | 无头模式、GitHub Actions、批量处理、企业部署架构 | SRE、平台工程师 | 35min |
+| **Agent Harness 工程** | | | | |
+| 30 | [Agent Harness 工程：从模型包装到生产级系统设计](./30-agent-harness-engineering.md) | 六层架构、Harness 设计模式、行业实证、基准测试全景、质量门禁、K8S Harness 落地 | 架构师、AI 工程师、SRE | 50min |
+| 31 | [Harness Loop 与执行引擎深度设计](./31-agent-harness-loop-execution.md) | FSM 模型、异步执行引擎、反漂移检测、5 种执行策略、分阶段执行、轨迹管理 | 架构师、AI 工程师 | 45min |
+| 32 | [Harness 工具工程](./32-agent-harness-tool-engineering.md) | Schema 标准、K8S 工具集、工具注册发现、编排模式、安全沙箱、MCP 适配 | 研发工程师、AI 工程师 | 40min |
+| 33 | [Harness 上下文与记忆工程](./33-agent-harness-context-memory.md) | 四层上下文模型、RAG 混合检索、RRF 融合、三层记忆系统、动态窗口管理 | AI 工程师 | 40min |
+| 34 | [Harness 验证与质量门禁](./34-agent-harness-verification-quality.md) | 多维度验证器、自检循环、LLM-as-Judge、RAGAS 评测、CI/CD 质量门禁 | AI 工程师、QA 工程师 | 45min |
+| 35 | [Harness 安全与约束工程](./35-agent-harness-security-constraints.md) | 四层约束模型、提示注入防御、人工审批、成本控制、审计日志 | 安全工程师、架构师 | 40min |
+| 36 | [Harness 可观测性体系](./36-agent-harness-observability.md) | OTel 全链路追踪、Langfuse 集成、Prometheus 指标、告警规则、Dashboard | SRE、AI 工程师 | 40min |
+| 37 | [Harness 多 Agent 编排](./37-agent-harness-multi-agent.md) | 4 种编排模式、Orchestrator、通信协议、Harness 隔离、冲突解决 | 架构师 | 40min |
+| 38 | [Harness 性能与成本优化](./38-agent-harness-performance-cost.md) | 上下文压缩、模型路由、多级缓存、Prompt Caching、Agent FinOps | SRE、AI 工程师 | 35min |
+| 39 | [Harness 测试与基准评测](./39-agent-harness-testing-benchmark.md) | 测试金字塔、K8S 自定义基准、红队测试、回归测试框架 | QA 工程师、AI 工程师 | 40min |
+| 40 | [Harness 生产运维与成熟度模型](./40-agent-harness-production-maturity.md) | 灰度发布、配置热更新、SLA 监控、故障恢复、五级成熟度模型 | SRE、架构师 | 45min |
 
 ---
 
@@ -108,6 +120,20 @@ graph TB
         A28["28 企业自动化<br/>CI/CD / Headless / 批量"]
     end
 
+    subgraph L8["Agent Harness 工程 — 2026 最新范式"]
+        A30["30 Agent Harness 工程<br/>六层架构 / 设计模式 / 质量门禁 / K8S 落地"]
+        A31["31 Loop 与执行引擎<br/>FSM / 异步执行 / 反漂移"]
+        A32["32 工具工程<br/>Schema / 注册发现 / 安全沙箱"]
+        A33["33 上下文与记忆<br/>四层模型 / RAG / 三层记忆"]
+        A34["34 验证与质量门禁<br/>自检循环 / LLM-as-Judge"]
+        A35["35 安全与约束<br/>四层约束 / 注入防御 / 审计"]
+        A36["36 可观测性<br/>OTel / Langfuse / Prometheus"]
+        A37["37 多 Agent 编排<br/>编排模式 / 隔离 / 冲突解决"]
+        A38["38 性能与成本<br/>压缩 / 路由 / 缓存 / FinOps"]
+        A39["39 测试与基准<br/>测试金字塔 / 红队 / 回归"]
+        A40["40 生产运维与成熟度<br/>灰度 / SLA / 五级模型"]
+    end
+
     ROOT --> L1
     ROOT --> L2
     ROOT --> L3
@@ -115,6 +141,7 @@ graph TB
     ROOT --> L5
     ROOT --> L6
     ROOT --> L7
+    ROOT --> L8
 
     A01 --> A02
     A02 --> A03
@@ -148,6 +175,26 @@ graph TB
     A26 --> A27
     A27 --> A28
     A18 --> A25
+    A08 --> A30
+    A10 --> A30
+    A28 --> A30
+    A30 --> A31
+    A30 --> A32
+    A30 --> A33
+    A30 --> A34
+    A30 --> A35
+    A30 --> A36
+    A30 --> A37
+    A30 --> A38
+    A30 --> A39
+    A30 --> A40
+    A31 --> A34
+    A32 --> A33
+    A33 --> A34
+    A34 --> A39
+    A35 --> A36
+    A37 --> A38
+    A39 --> A40
 ```
 
 ---
@@ -174,6 +221,9 @@ graph TB
 
 **Agent CLI 学习路径**：
 1. [23 - CLI 基础与架构](./23-agent-cli-fundamentals.md) → [24 - 工具全景对比](./24-agent-cli-tools-comparison.md) → [25 - MCP 协议集成](./25-agent-cli-mcp-integration.md) → [26 - 开发工作流](./26-agent-cli-development-workflow.md) → [27 - 安全治理](./27-agent-cli-security-governance.md) → [28 - 企业自动化](./28-agent-cli-enterprise-automation.md)
+
+**Harness Engineering 学习路径（2026 前沿）**：
+1. [08 - 评测与可观测性](./08-agent-evaluation-observability.md) → [10 - 安全护栏](./10-security-guardrails.md) → [30 - Agent Harness 工程](./30-agent-harness-engineering.md) → [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) → [32 - 工具工程](./32-agent-harness-tool-engineering.md) → [33 - 上下文与记忆](./33-agent-harness-context-memory.md) → [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) → [35 - 安全与约束](./35-agent-harness-security-constraints.md) → [36 - 可观测性](./36-agent-harness-observability.md) → [37 - 多 Agent 编排](./37-agent-harness-multi-agent.md) → [38 - 性能与成本](./38-agent-harness-performance-cost.md) → [39 - 测试与基准](./39-agent-harness-testing-benchmark.md) → [40 - 生产运维与成熟度](./40-agent-harness-production-maturity.md)
 
 ---
 
@@ -204,6 +254,8 @@ graph TB
 | **部署平台** | Kubernetes, vLLM, TGI, Ray Serve, Triton, **AgentScope Runtime** |
 | **Agent CLI** | Claude Code, Codex CLI, Gemini CLI, Aider, Goose, Amazon Q Developer CLI |
 | **CLI 协议** | MCP (Model Context Protocol), A2A (Agent-to-Agent), OAuth 2.1 |
+| **Harness Engineering** | 六层架构 (Loop/Tools/Context/Persistence/Verification/Constraints)、SOUL.md/SKILL.md、质量门禁 |
+| **Agent 基准测试** | SWE-bench, GAIA, AgentBench, WebArena, ToolBench, τ-bench, BFCL |
 
 ---
 
