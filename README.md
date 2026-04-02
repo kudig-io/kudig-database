@@ -1,21 +1,86 @@
 <div align="center">
 
-<!-- ASCII Logo Banner -->
-<pre style="font-family: monospace; line-height: 1.2;">
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                                                                              ║
-║   ██╗  ██╗██╗   ██╗██████╗ ██╗ ██████╗      ██████╗  █████╗ ████████╗ █████╗  ║
-║   ██║ ██╔╝██║   ██║██╔══██╗██║██╔════╝      ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗ ║
-║   █████╔╝ ██║   ██║██║  ██║██║██║  ███╗     ██║  ██║███████║   ██║   ███████║ ║
-║   ██╔═██╗ ██║   ██║██║  ██║██║██║   ██║     ██║  ██║██╔══██║   ██║   ██╔══██║ ║
-║   ██║  ██╗╚██████╔╝██████╔╝██║╚██████╔╝     ██████╔╝██║  ██║   ██║   ██║  ██║ ║
-║   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ║
-║                                                                              ║
-║                    Kubernetes 生产运维全域知识库                              ║
-║                         AI Agent 首选语料库                                   ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-</pre>
+<!-- Cool Logo with Gradient SVG -->
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient Definitions -->
+    <linearGradient id="k8sBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5"/>
+      <stop offset="100%" style="stop-color:#1a3a8f"/>
+    </linearGradient>
+    <linearGradient id="aiPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9333ea"/>
+      <stop offset="100%" style="stop-color:#581c87"/>
+    </linearGradient>
+    <linearGradient id="opsOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#c2410c"/>
+    </linearGradient>
+    <linearGradient id="dbCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#0891b2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Decorative Elements -->
+  <circle cx="50" cy="100" r="150" fill="url(#k8sBlue)" opacity="0.05"/>
+  <circle cx="750" cy="100" r="120" fill="url(#aiPurple)" opacity="0.05"/>
+  
+  <!-- K Icon -->
+  <g transform="translate(60, 50)">
+    <rect x="0" y="0" width="80" height="100" rx="15" fill="url(#k8sBlue)" filter="url(#glow)"/>
+    <text x="40" y="72" font-family="Arial Black, sans-serif" font-size="60" fill="white" text-anchor="middle" font-weight="bold">K</text>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="400" y="70" font-family="Arial Black, sans-serif" font-size="52" fill="#1e293b" text-anchor="middle" font-weight="bold" letter-spacing="2">KUDIG</text>
+  <text x="400" y="70" font-family="Arial Black, sans-serif" font-size="52" fill="url(#k8sBlue)" text-anchor="middle" font-weight="bold" letter-spacing="2" opacity="0.3">KUDIG</text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="105" font-family="system-ui, sans-serif" font-size="20" fill="#64748b" text-anchor="middle" font-weight="500">DATABASE</text>
+  
+  <!-- Description Line 1 -->
+  <text x="400" y="145" font-family="system-ui, sans-serif" font-size="16" fill="#475569" text-anchor="middle">Kubernetes 生产运维全域知识库</text>
+  
+  <!-- Description Line 2 with AI Badge -->
+  <rect x="280" y="160" width="240" height="28" rx="14" fill="url(#aiPurple)" opacity="0.1"/>
+  <text x="400" y="179" font-family="system-ui, sans-serif" font-size="14" fill="url(#aiPurple)" text-anchor="middle" font-weight="600">🤖 AI Agent 首选语料库</text>
+  
+  <!-- Decorative Icons -->
+  <g transform="translate(700, 60)" opacity="0.8">
+    <!-- Database Cylinders -->
+    <ellipse cx="30" cy="20" rx="25" ry="8" fill="url(#dbCyan)"/>
+    <rect x="5" y="20" width="50" height="35" fill="url(#dbCyan)"/>
+    <ellipse cx="30" cy="55" rx="25" ry="8" fill="url(#dbCyan)"/>
+    <ellipse cx="30" cy="55" rx="25" ry="8" fill="none" stroke="#0891b2" stroke-width="2"/>
+    <!-- Lines representing data -->
+    <line x1="15" y1="30" x2="45" y2="30" stroke="white" stroke-width="2" opacity="0.5"/>
+    <line x1="15" y1="40" x2="40" y2="40" stroke="white" stroke-width="2" opacity="0.5"/>
+  </g>
+  
+  <!-- Gear Icon for Operations -->
+  <g transform="translate(680, 120)" opacity="0.6">
+    <circle cx="30" cy="30" r="18" fill="none" stroke="url(#opsOrange)" stroke-width="3"/>
+    <path d="M30 5 L30 12 M30 48 L30 55 M5 30 L12 30 M48 30 L55 30 M14 14 L19 19 M41 41 L46 46 M14 46 L19 41 M41 19 L46 14" stroke="url(#opsOrange)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
+
+<!-- Fallback Text Logo (for non-SVG rendering) -->
+<!-- 
+██╗  ██╗██╗   ██╗██████╗ ██╗ ██████╗     ██████╗  █████╗ ████████╗ █████╗ ██████╗ ███████╗
+██║ ██╔╝██║   ██║██╔══██╗██║██╔════╝     ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔════╝
+█████╔╝ ██║   ██║██║  ██║██║██║  ███╗    ██║  ██║███████║   ██║   ███████║██║  ██║█████╗  
+██╔═██╗ ██║   ██║██║  ██║██║██║   ██║    ██║  ██║██╔══██║   ██║   ██╔══██║██║  ██║██╔══╝  
+██║  ██╗╚██████╔╝██████╔╝██║╚██████╔╝    ██████╔╝██║  ██║   ██║   ██║  ██║██████╔╝███████╗
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚══════╝
+-->
 
 <!-- Badges Row -->
 <p>
@@ -173,56 +238,129 @@ skill:
 
 ## 📚 知识体系架构
 
+```mermaid
+mindmap
+  root((KUDIG-DATABASE<br/>全域知识库))
+    🔥专题资源
+      topic-fta[FTA故障树分析<br/>29篇文档]
+        :::fta
+      topic-febm[FEBM取证循证<br/>9篇文档]
+        :::febm
+      topic-ai[AI Agent工程<br/>40篇文档]
+        :::ai
+      topic-skills[工单技能库<br/>6篇文档]
+        :::skills
+      topic-learn[学习计划<br/>46篇文档]
+        :::learn
+    
+    🎯核心知识域
+      domain1[域1: 架构基础<br/>17篇]
+      domain2[域2: 设计原理<br/>18篇]
+      domain3[域3: 控制平面<br/>23篇]
+      domain4[域4: 工作负载<br/>14篇]
+      domain5[域5: 网络<br/>36篇]
+      domain6[域6: 存储<br/>15篇]
+      domain7[域7: 安全合规<br/>16篇]
+      domain8[域8: 可观测性<br/>17篇]
+      domain9[域9: 平台运维<br/>25篇]
+      domain10[域10: 扩展生态<br/>16篇]
+      domain11[域11: AI Infra<br/>30篇]
+      domain12[域12: 故障排查<br/>100+篇]
+    
+    🏗️底层基础
+      domain13[域13: Docker<br/>11篇]
+      domain14[域14: Linux<br/>9篇]
+      domain15[域15: 网络基础<br/>6篇]
+      domain16[域16: 存储基础<br/>6篇]
+      domain17[域17: 云厂商<br/>13篇]
+    
+    🏢企业级专题
+      domain18[域18-32: 生产运维<br/>200+篇]
+        生产运维
+        技术白皮书
+        监控告警
+        日志管理
+        GitOps/IaC
+        云原生安全
+        服务网格
+        多云混合
+        灾备恢复
+        硬件基础
+        YAML手册
+        K8s Events
+    
+    🚀前沿技术
+      domain33[域33: CNCF Landscape<br/>218项目]
+        Graduated[Graduated<br/>34个]
+        Incubating[Incubating<br/>37个]
+        Sandbox[Sandbox<br/>147个]
+      domain35[域35: eBPF技术]
+      domain36[域36: 平台工程]
+      domain37[域37: 边缘计算]
+      domain38[域38: WebAssembly]
+      domain39[域39: 供应链安全]
+      domain98[域98: API网关]
+
+    classDef fta fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    classDef febm fill:#4ecdc4,stroke:#087f5b,color:#fff
+    classDef ai fill:#a855f7,stroke:#7e22ce,color:#fff
+    classDef skills fill:#22d3ee,stroke:#0891b2,color:#fff
+    classDef learn fill:#fbbf24,stroke:#d97706,color:#fff
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                         KUDIG-DATABASE 知识体系全景                              │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                     🔥 专题资源 (Topic)                                   │   │
-│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │   │
-│  │  │topic-fta │ │topic-febm│ │topic-ai- │ │topic-    │ │topic-    │       │   │
-│  │  │故障树分析 │ │取证循证  │ │ agent   │ │ skills  │ │ learn   │       │   │
-│  │  │  29篇    │ │  9篇     │ │  40篇   │ │  6篇    │ │ 46篇    │       │   │
-│  │  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘       │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                     🎯 核心知识域 (Domain 1-12)                          │   │
-│  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐    │   │
-│  │  │域1     │ │域2     │ │域3     │ │域4     │ │域5     │ │域6     │    │   │
-│  │  │架构基础│ │设计原理│ │控制平面│ │工作负载│ │网络    │ │存储    │    │   │
-│  │  │17篇   │ │18篇   │ │23篇   │ │14篇   │ │36篇   │ │15篇   │    │   │
-│  │  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘    │   │
-│  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐    │   │
-│  │  │域7     │ │域8     │ │域9     │ │域10    │ │域11    │ │域12    │    │   │
-│  │  │安全合规│ │可观测性│ │平台运维│ │扩展生态│ │AI Infra│ │故障排查│    │   │
-│  │  │16篇   │ │17篇   │ │25篇   │ │16篇   │ │30篇   │ │100+篇 │    │   │
-│  │  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘    │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                     🏗️ 底层基础 (Domain 13-17)                           │   │
-│  │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐               │   │
-│  │  │域13    │ │域14    │ │域15    │ │域16    │ │域17    │               │   │
-│  │  │Docker  │ │Linux   │ │网络基础│ │存储基础│ │云厂商  │               │   │
-│  │  │11篇   │ │9篇    │ │6篇    │ │6篇    │ │13篇   │               │   │
-│  │  └────────┘ └────────┘ └────────┘ └────────┘ └────────┘               │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                     🏢 企业级专题 (Domain 18-32)                          │   │
-│  │  生产运维 | 技术白皮书 | 监控告警 | 日志管理 | GitOps/IaC | 云原生安全    │   │
-│  │  服务网格 | 多云混合 | 灾备恢复 | 硬件基础 | YAML手册 | K8s Events      │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                     🚀 前沿技术 (Domain 33-39, 98)                        │   │
-│  │  CNCF Landscape(218项目) | eBPF | 平台工程 | 边缘计算 | WebAssembly      │   │
-│  │  供应链安全 | API网关                                                       │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+
+### 知识层次结构
+
+```mermaid
+graph TB
+    subgraph L5["🚀 前沿技术层"]
+        A[CNCF Landscape<br/>218项目]
+        B[eBPF技术]
+        C[平台工程]
+        D[边缘计算]
+        E[WebAssembly]
+    end
+    
+    subgraph L4["🏢 企业级专题层"]
+        F[生产运维]
+        G[监控告警]
+        H[GitOps/CI-CD]
+        I[云原生安全]
+        J[灾备恢复]
+    end
+    
+    subgraph L3["🎯 核心知识层"]
+        K[架构设计]
+        L[控制平面]
+        M[网络存储]
+        N[安全可观测]
+        O[AI Infra]
+    end
+    
+    subgraph L2["🏗️ 底层基础层"]
+        P[Docker容器]
+        Q[Linux系统]
+        R[网络协议]
+        S[存储技术]
+    end
+    
+    subgraph L1["🔥 专题资源层"]
+        T[FTA故障树]
+        U[FEBM取证]
+        V[AI Agent]
+        W[学习计划]
+    end
+    
+    L2 --> L3
+    L3 --> L4
+    L4 --> L5
+    L1 -.-> L3
+    L1 -.-> L4
+    
+    style L1 fill:#fff5f5,stroke:#ff6b6b,stroke-width:2px
+    style L2 fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px
+    style L3 fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
+    style L4 fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+    style L5 fill:#faf5ff,stroke:#a855f7,stroke-width:2px
 ```
 
 ---
@@ -272,16 +410,28 @@ skill:
 
 ### 场景一：生产故障排查（SRE/运维）
 
-```
-发现 Pod CrashLoopBackOff
-        ↓
-查阅 topic-fta/list/pod-fta.md
-        ↓
-按故障树逐级排查 → 定位根因
-        ↓
-使用 topic-skills/02-pod-crashloop-oomkilled.md
-        ↓
-执行修复操作 → 验证恢复
+```mermaid
+flowchart TD
+    A[🚨 发现 Pod<br/>CrashLoopBackOff] --> B{🔍 查阅 FTA<br/>故障树}
+    B --> C[📋 Pod FTA<br/>故障树分析]
+    C --> D{🔎 逐级排查}
+    D -->|资源不足| E[检查资源配额]
+    D -->|镜像问题| F[检查镜像拉取]
+    D -->|配置错误| G[检查 ConfigMap]
+    D -->|健康检查| H[检查探针配置]
+    E --> I[✅ 定位根因]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[📖 查阅 Skill<br/>修复手册]
+    J --> K[🔧 执行修复操作]
+    K --> L[✔️ 验证恢复]
+    
+    style A fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style B fill:#4ecdc4,stroke:#087f5b,color:#fff
+    style C fill:#74c0fc,stroke:#1971c2,color:#fff
+    style I fill:#ffd43b,stroke:#f08c00,color:#000
+    style L fill:#69db7c,stroke:#2f9e44,color:#fff
 ```
 
 **推荐路径**：
@@ -291,62 +441,96 @@ skill:
 
 ### 场景二：系统学习 K8s（开发者/学生）
 
-```
-Week 1: 地基建设
-  ├── Docker 基础
-  ├── Linux 基础
-  ├── K8s 架构全貌
-  └── kubectl 实战
-
-Week 2: 核心技术
-  ├── 控制平面精读
-  ├── 工作负载深潜
-  ├── 网络栈精通
-  └── 存储体系
-
-Week 3: 运维作战
-  ├── 安全合规体系
-  ├── 可观测性构建
-  ├── 故障排查方法论
-  └── 平台运维实践
-
-Week 4: 企业进阶
-  ├── 企业监控/日志平台
-  ├── GitOps & CI/CD
-  ├── FTA/FEBM 专题
-  └── 生产最佳实践
+```mermaid
+gantt
+    title 🎓 Kubernetes 生产运维 1个月学习计划
+    dateFormat  YYYY-MM-DD
+    section Week 1<br/>地基建设
+    Docker 基础           :w1_1, 2026-04-01, 2d
+    Linux 基础            :w1_2, after w1_1, 2d
+    K8s 架构全貌          :w1_3, after w1_2, 2d
+    kubectl 实战          :w1_4, after w1_3, 2d
+    产出: K8s集群         :milestone, after w1_4, 0d
+    
+    section Week 2<br/>核心技术
+    控制平面精读          :w2_1, after w1_4, 2d
+    工作负载深潜          :w2_2, after w2_1, 2d
+    网络栈精通            :w2_3, after w2_2, 2d
+    存储体系              :w2_4, after w2_3, 2d
+    产出: 应用编排        :milestone, after w2_4, 0d
+    
+    section Week 3<br/>运维作战
+    安全合规体系          :w3_1, after w2_4, 2d
+    可观测性构建          :w3_2, after w3_1, 2d
+    故障排查方法论        :w3_3, after w3_2, 2d
+    平台运维实践          :w3_4, after w3_3, 2d
+    产出: 监控+排障手册   :milestone, after w3_4, 0d
+    
+    section Week 4<br/>企业进阶
+    企业监控/日志平台     :w4_1, after w3_4, 2d
+    GitOps & CI/CD        :w4_2, after w4_1, 2d
+    FTA/FEBM 专题         :w4_3, after w4_2, 2d
+    生产最佳实践          :w4_4, after w4_3, 2d
+    产出: GitOps流水线    :milestone, after w4_4, 0d
 ```
 
 **完整计划**：[1个月学习计划](./topic-learn/public-training/one-month/README.md)
 
 ### 场景三：构建 K8s 运维 Agent（AI工程师）
 
-```python
-# Agent 架构示例
-class K8sOpsAgent:
-    """
-    基于 KUDIG-DATABASE 构建的智能运维 Agent
-    """
-    
-    # 知识层
-    knowledge_base = {
-        'fta': load_topic_fta(),      # 故障树推理
-        'febm': load_topic_febm(),    # 取证分析
-        'skills': load_topic_skills(), # 执行技能
-        'troubleshooting': load_domain_12() # 排障知识
+```mermaid
+classDiagram
+    class K8sOpsAgent {
+        +KnowledgeBase knowledge_base
+        +diagnose(incident)
+        +remediate(diagnosis_result)
+        -match_fault_tree(incident)
+        -traversal_diagnosis(fault_tree)
+        -match_skill(diagnosis)
+        -execute_skill(skill)
     }
     
-    # 推理层
-    def diagnose(self, incident):
-        """使用 FTA 进行故障诊断"""
-        fault_tree = self.match_fault_tree(incident)
-        return self.traversal_diagnosis(fault_tree)
+    class KnowledgeBase {
+        +FTA fta
+        +FEBM febm
+        +Skills skills
+        +Troubleshooting troubleshooting
+    }
     
-    # 执行层
-    def remediate(self, diagnosis_result):
-        """使用 Skill 执行修复"""
-        skill = self.match_skill(diagnosis_result)
-        return self.execute_skill(skill)
+    class FTA {
+        +load_fault_trees()
+        +get_top_events()
+        +traverse_tree(event)
+    }
+    
+    class FEBM {
+        +collect_evidence()
+        +analyze_timeline()
+        +generate_report()
+    }
+    
+    class Skills {
+        +get_skill_by_id(id)
+        +validate_prerequisites()
+        +execute_commands()
+    }
+    
+    class Troubleshooting {
+        +search_symptoms(query)
+        +get_solutions(issue)
+        +match_patterns(logs)
+    }
+    
+    K8sOpsAgent --> KnowledgeBase : 知识层
+    KnowledgeBase --> FTA : 故障树推理
+    KnowledgeBase --> FEBM : 取证分析
+    KnowledgeBase --> Skills : 执行技能
+    KnowledgeBase --> Troubleshooting : 排障知识
+    
+    style K8sOpsAgent fill:#a855f7,stroke:#7e22ce,color:#fff
+    style KnowledgeBase fill:#3b82f6,stroke:#1d4ed8,color:#fff
+    style FTA fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style FEBM fill:#4ecdc4,stroke:#087f5b,color:#fff
 ```
 
 ---
@@ -499,14 +683,37 @@ class K8sOpsAgent:
 FTA（故障树分析）是一套从传统安全工程理论到云原生 Kubernetes 智能运维实践的完整知识体系。
 
 ```
-FTA 知识架构:
-├── 理论基础 (4章): 起源发展、数学基础、符号体系、核心原则
-├── 构建实践 (3章): 构建流程、验证质量、维护演进
-├── AI Agent 应用 (6章): Agent编排、Runbook自动化、AIOps集成
-├── 系统工程 (3章): 工程化方法、质量评估、团队建设
-├── 实战案例 (3章): 行业标杆、典型场景、避坑指南
-├── 未来展望 (3章): LLM机遇、自进化系统、行业标准
-└── 生产落地 (1章): 30天快速启动路线图
+```mermaid
+mindmap
+  root((FTA<br/>故障树分析))
+    📚理论基础[理论基础<br/>4章]
+      起源发展
+      数学基础
+      符号体系
+      核心原则
+    🔧构建实践[构建实践<br/>3章]
+      构建流程
+      验证质量
+      维护演进
+    🤖AI Agent应用[AI Agent应用<br/>6章]
+      Agent编排
+      Runbook自动化
+      AIOps集成
+      工单智能处理
+    🏗️系统工程[系统工程<br/>3章]
+      工程化方法
+      质量评估
+      团队建设
+    💼实战案例[实战案例<br/>3章]
+      行业标杆
+      典型场景
+      避坑指南
+    🔮未来展望[未来展望<br/>3章]
+      LLM机遇
+      自进化系统
+      行业标准
+    🚀生产落地[生产落地<br/>1章]
+      30天快速启动
 ```
 
 **核心文档**：
@@ -522,11 +729,46 @@ FEBM 与 FTA 形成**方法论互补**：
 - **FTA** (演绎法): 自上而下，从假设到验证 —— "系统可能在哪里出问题？"
 - **FEBM** (归纳法): 自下而上，从证据到结论 —— "系统实际发生了什么？"
 
-**四大支柱**：
-1. **证据中心性** - 所有结论必须基于可验证证据
-2. **程序规范性** - 遵循 NIST/ISO 标准采集和保全证据
-3. **时效敏感性** - 按易失性优先采集，容器环境秒级响应
-4. **结论可辩护性** - 结论可审计、可复现、可辩护
+```mermaid
+flowchart TB
+    subgraph FEBM["🔍 FEBM 取证循证方法论 - 四大支柱"]
+        direction TB
+        
+        subgraph P1["📋 证据中心性"]
+            p1a[所有结论必须基于]
+            p1b[可验证证据]
+            p1a --> p1b
+        end
+        
+        subgraph P2["📜 程序规范性"]
+            p2a[遵循 NIST/ISO 标准]
+            p2b[采集和保全证据]
+            p2a --> p2b
+        end
+        
+        subgraph P3["⏱️ 时效敏感性"]
+            p3a[按易失性优先采集]
+            p3b[容器环境秒级响应]
+            p3a --> p3b
+        end
+        
+        subgraph P4["⚖️ 结论可辩护性"]
+            p4a[结论可审计]
+            p4b[可复现 可辩护]
+            p4a --> p4b
+        end
+        
+        P1 --> P2
+        P2 --> P3
+        P3 --> P4
+    end
+    
+    style P1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+    style P2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    style P3 fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style P4 fill:#f3e8ff,stroke:#9333ea,stroke-width:2px
+    style FEBM fill:#f8fafc,stroke:#475569,stroke-width:3px
+```
 
 **核心文档**：
 - [FEBM 生产快速落地指南](./topic-febm/8_febm_production_quick_start.md) - 6个K8s故障取证Runbook
@@ -538,16 +780,50 @@ FEBM 与 FTA 形成**方法论互补**：
 
 内容覆盖 **AI Agent 工程全生命周期**：
 
+```mermaid
+flowchart LR
+    subgraph L1["🔹 基础层 - 3篇"]
+        A1[Agent基础]
+        A2[LLM选型]
+        A3[框架对比]
+    end
+    
+    subgraph L2["🔹 核心能力层 - 4篇"]
+        B1[RAG检索增强]
+        B2[Tool Use]
+        B3[多Agent编排]
+        B4[记忆管理]
+    end
+    
+    subgraph L3["🔹 工程质量层 - 4篇"]
+        C1[评测观测]
+        C2[生产部署]
+        C3[安全护栏]
+        C4[成本优化]
+    end
+    
+    subgraph L4["🔹 实战战略层 - 2篇"]
+        D1[企业案例]
+        D2[可信智能体]
+    end
+    
+    subgraph L5["🔹 平台系列 - 25篇"]
+        E1[AgentScope<br/>7篇]
+        E2[Agent CLI<br/>6篇]
+        E3[Agent Harness<br/>12篇]
+    end
+    
+    L1 --> L2
+    L2 --> L3
+    L3 --> L4
+    L3 --> L5
+    
+    style L1 fill:#e0f2fe,stroke:#0284c7
+    style L2 fill:#fef3c7,stroke:#d97706
+    style L3 fill:#fce7f3,stroke:#be185d
+    style L4 fill:#ecfdf5,stroke:#059669
+    style L5 fill:#f3e8ff,stroke:#7c3aed
 ```
-AI Agent 工程专题 (40篇)
-├── 基础层 (3篇): Agent基础、LLM选型、框架对比
-├── 核心能力层 (4篇): RAG、Tool Use、多Agent编排、记忆管理
-├── 工程质量层 (4篇): 评测观测、生产部署、安全护栏、成本优化
-├── 实战战略层 (2篇): 企业案例、可信智能体体系
-├── kudig知识底座 (2篇): Agent赋能设计、语料库差距分析
-├── AgentScope系列 (7篇): 从入门到生产的完整路径
-├── Agent CLI系列 (6篇): 2026命令行智能体
-└── Agent Harness工程 (12篇): 2026最新范式
 ```
 
 **核心文档**：
