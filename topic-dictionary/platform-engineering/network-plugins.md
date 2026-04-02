@@ -1,0 +1,34 @@
+# 网络插件
+
+## 概述
+
+Kubernetes 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
+
+## 核心概念/原理
+
+- **CNI 插件**：Kubernetes 从 1.3 到最新的 1.35 均支持 CNI 插件。必须使用与集群兼容且满足需求的 CNI 插件。
+- **兼容性要求**：CNI 插件需兼容 CNI 规范 v0.4.0 或更高版本。Kubernetes 项目推荐使用兼容 v1.0.0 规范的插件。
+- **容器运行时职责**：容器运行时（如 containerd、CRI-O）负责加载 CNI 插件。自 Kubernetes 1.24 起，kubelet 不再直接管理 CNI（`cni-bin-dir` 和 `network-plugin` 参数已移除）。
+
+## 关键机制或特性
+
+- **Loopback CNI**：除主网络插件外，容器运行时还需为每个沙箱（Pod）提供 `lo` 回环接口，可通过 CNI loopback 插件或自定义代码实现。
+- **hostPort 支持**：可通过官方 `portmap` 插件或自定义端口映射插件实现 `hostPort`。需在 CNI 配置中声明 `portMappings` 能力。
+- **流量整形（实验性）**：通过 `bandwidth` 插件支持 Pod 的入站和出站带宽限制。在 Pod 中可通过 `kubernetes.io/ingress-bandwidth` 和 `kubernetes.io/egress-bandwidth` 注解设置带宽。
+
+## 使用场景
+
+- 集群需要实现 Overlay 网络、Underlay 网络或混合网络拓扑时，部署对应的 CNI 插件（如 Calico、Cilium、Flannel）。
+- 需要将容器端口暴露到宿主机端口时，启用 `hostPort` 支持。
+- 需要对特定 Pod 的网络流量进行限速时，启用 bandwidth 流量整形插件。
+
+## 最佳实践/注意事项
+
+- 选择经过广泛验证、与集群版本兼容的 CNI 插件。
+- 自 Kubernetes 1.24 起，CNI 管理职责完全移交给容器运行时，升级集群时需注意相关配置迁移。
+- 启用流量整形功能前，确认 CNI 二进制和配置文件均已正确放置（默认 `/opt/cni/bin` 和 `/etc/cni/net.d`）。
+- 遇到网络问题时，可参考 Troubleshooting CNI plugin-related errors 进行排查。
+
+## 参考链接
+
+- https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/

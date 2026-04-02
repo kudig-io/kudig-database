@@ -1,0 +1,54 @@
+# Dynamic Volume Provisioning（动态卷供给）
+
+## 概述
+
+动态卷供给允许存储卷在需要时按需创建。没有动态供给时，集群管理员必须手动联系云或存储提供商创建新存储，然后再在 Kubernetes 中创建 PersistentVolume 对象来表示它们。动态供给消除了这一繁琐过程，当用户创建 PersistentVolumeClaim（PVC）时，系统会自动为其创建相应的存储卷。
+
+## 核心概念/原理
+
+- **基于 StorageClass**：动态供给的实现依赖于 `storage.k8s.io` API 组中的 StorageClass 对象。
+- **按需创建**：用户创建 PVC 时，Kubernetes 根据 PVC 中指定的 StorageClass 自动调用相应的 provisioner 创建 PV 和底层存储。
+- **解耦用户与管理员**：管理员预先配置好 StorageClass，用户只需在 PVC 中引用即可，无需了解底层存储细节。
+
+## 关键机制或特性
+
+### 启用动态供给
+
+1. 集群管理员预先创建一个或多个 StorageClass，每个类指定：
+   - `provisioner`：使用哪个卷插件/CSI 驱动。
+   - `parameters`：传递给 provisioner 的参数。
+2. 用户在 PVC 中通过 `storageClassName` 字段指定所需的 StorageClass。
+3. 控制平面检测到 PVC 后，调用 provisioner 动态创建 PV 和底层存储。
+
+### 默认 StorageClass
+
+- 通过将 StorageClass 标记为默认（`storageclass.kubernetes.io/is-default-class: "true"`），用户创建未指定 `storageClassName` 的 PVC 时，会自动使用该默认类。
+- 需要确保 API 服务器启用了 `DefaultStorageClass` 准入控制器。
+- 如果存在多个默认 StorageClass，Kubernetes 会选择最新创建的那个。
+
+### 历史变更
+
+- Kubernetes v1.6 之前，通过注解 `volume.beta.kubernetes.io/storage-class` 指定存储类。
+- 从 v1.9 开始，推荐使用 PVC 规格中的 `storageClassName` 字段，旧注解已弃用。
+
+### 多区域集群中的动态供给
+
+- 在跨可用区的集群中，单可用区存储后端应在 Pod 调度的可用区中创建。
+- 通过设置 StorageClass 的 `volumeBindingMode: WaitForFirstConsumer`，可以确保存储在 Pod 被调度后再创建，从而匹配 Pod 所在的拓扑位置。
+
+## 使用场景
+
+- **自助式存储申请**：开发团队可以直接创建 PVC 获取存储，无需等待管理员手动配置。
+- **弹性伸缩**：配合 StatefulSet、Deployment 等控制器，实现有状态应用的自动存储扩展。
+- **多存储后端混合使用**：同一集群中可同时配置多个 StorageClass，分别对接 SSD、HDD、NFS、对象存储等不同后端。
+
+## 最佳实践/注意事项
+
+- 始终使用 `storageClassName` 字段而非旧注解来指定 StorageClass。
+- 为集群配置一个明确的默认 StorageClass，避免用户因遗漏 `storageClassName` 而导致 PVC 无法绑定。
+- 对于拓扑受限的存储（如云盘、本地存储），使用 `WaitForFirstConsumer` 绑定模式，防止 Pod 调度失败。
+- 确保集群中已安装并正确配置了对应 StorageClass 的 CSI 驱动或外部 provisioner。
+
+## 参考链接
+
+- https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/
