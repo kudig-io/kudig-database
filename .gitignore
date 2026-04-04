@@ -7,5 +7,10 @@ gitbook/*.zip
 domain-*/**/*.html
 domain-*/*.html
 
+# gitbook/src 中的符号链接（由 start.sh/refresh.sh 动态生成，指向项目根目录）
+gitbook/src/domain-*
+gitbook/src/topic-*
+gitbook/src/tables
+
 # macOS
 .DS_Store
