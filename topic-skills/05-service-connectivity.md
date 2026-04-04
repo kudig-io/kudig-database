@@ -641,6 +641,228 @@ D1.2: Endpoints 是否为空？
 
 ---
 
+### Phase 4: Service Mesh 场景诊断
+
+> **目标**: 排查 Service Mesh（Istio/Linkerd）的 sidecar proxy 相关的连通性问题。要求集群已部署 Service Mesh。
+> **预计耗时**: 5-10 分钟
+> **前置条件**: 已确认 Service 后端 Pod 运行 Service Mesh sidecar（Istio-proxy / Linkerd-proxy）
+
+**Step D4.1**: 检查 Istio sidecar 注入状态
+- **命令**:
+  ```bash
+  # 检查 Pod 是否包含 istio-proxy 容器
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].name}' | grep -o istio-proxy
+  
+  # 查看 namespace 中所有 Pod 的 sidecar 注入状态
+  kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].name}{"\n"}{end}' | grep istio-proxy
+  
+  # 检查 namespace 的 sidecar 注入标签
+  kubectl get namespace <namespace> -o jsonpath='{.metadata.labels.istio-injection}'
+  ```
+- **超时**: 10s
+- **预期输出模式**: Pod 容器列表包含 `istio-proxy`
+- **判断规则**:
+  - 包含 `istio-proxy` → sidecar 已注入，继续检查 sidecar 状态
+  - 不包含 `istio-proxy` → sidecar 未注入，检查 namespace 标签和 Pod annotation
+  - namespace 标签 `istio-injection=enabled` 但 Pod 无 sidecar → 注入失败，检查 mutating webhook
+  - sidecar 容器状态不是 Running → sidecar 启动失败，检查日志
+- **版本差异**: 无（取决于 Istio 版本）
+
+**Step D4.2**: 检查 Istio VirtualService/DestinationRule 路由规则
+- **命令**:
+  ```bash
+  # 获取影响目标 Service 的 VirtualService
+  kubectl get virtualservice -n <namespace> -o yaml | grep -A 50 "host: <service-name>"
+  
+  # 获取 DestinationRule 配置
+  kubectl get destinationrule -n <namespace> -o yaml | grep -A 30 "host: <service-name>"
+  
+  # 检查是否有全局的 VirtualService/DestinationRule
+  kubectl get virtualservice -A | grep <service-name>
+  kubectl get destinationrule -A | grep <service-name>
+  ```
+- **超时**: 10s
+- **预期输出模式**: VirtualService 和 DestinationRule 的路由规则
+- **判断规则**:
+  - VirtualService 的 route.destination.host 与 Service 名称不匹配 → 路由配置错误
+  - DestinationRule 的 trafficPolicy 配置了不存在的 subset → 路由失败
+  - VirtualService match 条件过于严格 → 请求可能被过滤
+  - 无 VirtualService/DestinationRule → 使用默认路由，非配置问题
+- **版本差异**: 无
+
+**Step D4.3**: 检查 mTLS 模式
+- **命令**:
+  ```bash
+  # 使用 istioctl 检查 mTLS 状态
+  istioctl authn tls-check <pod-name>.<namespace> <target-service>.<target-namespace>.svc.cluster.local
+  
+  # 检查 PeerAuthentication 策略
+  kubectl get peerauthentication -n <namespace> -o yaml
+  kubectl get peerauthentication -n istio-system -o yaml
+  
+  # 检查 DestinationRule 中的 TLS 设置
+  kubectl get destinationrule -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.trafficPolicy.tls.mode}{"\n"}{end}'
+  ```
+- **超时**: 15s
+- **预期输出模式**: mTLS 配置和状态
+- **判断规则**:
+  - `tls-check` 显示 `mTLS` 且状态正常 → mTLS 配置正确
+  - 客户端期望 PERMISSIVE 但服务端配置 STRICT → mTLS 不匹配（RC-011）
+  - DestinationRule TLS mode 与 PeerAuthentication 不一致 → TLS 配置冲突
+  - 跨 namespace 访问时 mTLS 失败 → 检查是否有跨 namespace 的 PeerAuthentication
+- **版本差异**: 无
+
+**Step D4.4**: 检查 Envoy sidecar 配置和日志
+- **命令**:
+  ```bash
+  # 查看 Envoy 的 cluster 配置
+  istioctl proxy-config cluster <pod-name> -n <namespace> | grep <target-service>
+  
+  # 查看 Envoy 的 listener 配置
+  istioctl proxy-config listener <pod-name> -n <namespace>
+  
+  # 查看 Envoy 的 route 配置
+  istioctl proxy-config route <pod-name> -n <namespace> | grep <target-service>
+  
+  # 查看 sidecar 日志
+  kubectl logs <pod-name> -n <namespace> -c istio-proxy --tail=100 | grep -i "error\|upstream\|timeout"
+  ```
+- **超时**: 15s
+- **预期输出模式**: Envoy 配置和日志
+- **判断规则**:
+  - cluster 中不包含目标 Service → 服务发现问题，检查 Istiod 状态
+  - listener 未包含目标端口 → listener 配置缺失
+  - route 中 match 规则与实际请求不匹配 → 路由无法生效
+  - 日志中出现 `upstream connect error` → 后端不可达
+  - 日志中出现 `TLS error` → mTLS 握手失败（RC-011）
+- **版本差异**: 无
+
+**Step D4.5**: Linkerd 诊断
+- **命令**:
+  ```bash
+  # 检查 Linkerd 控制平面状态
+  linkerd check --proxy
+  
+  # 查看特定 Pod 的 proxy metrics
+  linkerd diagnostics proxy-metrics <pod-name> -n <namespace>
+  
+  # 检查 ServiceProfile 配置
+  kubectl get serviceprofile -n <namespace>
+  
+  # 查看 proxy 日志
+  kubectl logs <pod-name> -n <namespace> -c linkerd-proxy --tail=50
+  ```
+- **超时**: 15s
+- **预期输出模式**: Linkerd 状态和 metrics
+- **判断规则**:
+  - `linkerd check` 显示错误 → Linkerd 控制平面或 proxy 有问题
+  - proxy metrics 显示高失败率 → 后端连接问题
+  - identity 证书相关错误 → Linkerd identity 证书过期（RC-011）
+- **版本差异**: 无（取决于 Linkerd 版本）
+
+---
+
+### Phase 5: Gateway API 路由排查
+
+> **目标**: 排查 Gateway API 配置相关的 Service 连通性问题。适用于使用 Gateway API 替代或补充 Ingress 的集群。
+> **预计耗时**: 3-5 分钟
+> **前置条件**: 集群已部署 Gateway API CRDs 和 Gateway Controller
+
+**Step D5.1**: 检查 Gateway 状态
+- **命令**:
+  ```bash
+  # 获取所有 Gateway 资源
+  kubectl get gateway -A
+  
+  # 检查 Gateway 详细状态
+  kubectl describe gateway <gateway-name> -n <namespace>
+  
+  # 检查 Gateway 的 conditions
+  kubectl get gateway <gateway-name> -n <namespace> -o jsonpath='{range .status.conditions[*]}{.type}{"="}{.status}{" "}{end}'
+  
+  # 检查 GatewayClass
+  kubectl get gatewayclass
+  ```
+- **超时**: 10s
+- **预期输出模式**: Gateway 资源列表和状态
+- **判断规则**:
+  - Gateway status.conditions 中 `Accepted=True` 和 `Programmed=True` → Gateway 工作正常
+  - `Accepted=False` → GatewayClass 不存在或配置错误
+  - `Programmed=False` → Gateway Controller 无法配置数据平面
+  - listeners 状态显示 `Ready=False` → listener 配置问题（端口、协议、TLS）
+- **版本差异**:
+  - **[v1.28+]**: Gateway API v0.7.x beta
+  - **[v1.30+]**: Gateway API v1.0 GA
+  - **[v1.31+]**: Gateway API v1.1 新增 BackendLBPolicy
+
+**Step D5.2**: 检查 HTTPRoute 绑定状态
+- **命令**:
+  ```bash
+  # 获取 HTTPRoute 完整配置
+  kubectl get httproute <route-name> -n <namespace> -o yaml
+  
+  # 检查 parentRefs 绑定状态
+  kubectl get httproute <route-name> -n <namespace> -o jsonpath='{.status.parents[*]}' | jq .
+  
+  # 检查 HTTPRoute 是否被 Gateway 接受
+  kubectl get httproute <route-name> -n <namespace> -o jsonpath='{range .status.parents[*]}{.parentRef.name}{" "}{.conditions[*].type}{"="}{.conditions[*].status}{"\n"}{end}'
+  ```
+- **超时**: 10s
+- **预期输出模式**: HTTPRoute 配置和绑定状态
+- **判断规则**:
+  - status.parents 中 parentRef 对应的 Gateway `Accepted=True` → 路由已被接受
+  - `Accepted=False` + reason `NotAllowedByListeners` → listener 不允许此路由
+  - `Accepted=False` + reason `RefNotPermitted` → 缺少 ReferenceGrant
+  - `ResolvedRefs=False` → backendRef 指向的 Service 不存在或不可达
+- **版本差异**: 无
+
+**Step D5.3**: 检查 ReferenceGrant 跨命名空间权限
+- **命令**:
+  ```bash
+  # 获取所有 ReferenceGrant
+  kubectl get referencegrant -A
+  
+  # 检查特定 namespace 的 ReferenceGrant
+  kubectl get referencegrant -n <target-namespace> -o yaml
+  
+  # 检查是否允许从源 namespace 引用
+  kubectl get referencegrant -n <target-namespace> -o jsonpath='{range .items[*]}{.metadata.name}{" from: "}{.spec.from[*].namespace}{" to: "}{.spec.to[*].kind}{"\n"}{end}'
+  ```
+- **超时**: 10s
+- **预期输出模式**: ReferenceGrant 配置
+- **判断规则**:
+  - HTTPRoute 和 backendRef Service 在同一 namespace → 不需要 ReferenceGrant
+  - HTTPRoute 在 ns-A，backendRef Service 在 ns-B，无 ReferenceGrant → 缺少授权（RC-015）
+  - ReferenceGrant 存在但 `from.namespace` 未包含 HTTPRoute 的 namespace → 授权不足
+  - ReferenceGrant `to.kind` 不包含 `Service` → 授权类型不匹配
+- **版本差异**: 无
+
+**Step D5.4**: 验证 BackendRef 目标 Service 可达性
+- **命令**:
+  ```bash
+  # 获取 HTTPRoute 的 backendRefs
+  kubectl get httproute <route-name> -n <namespace> -o jsonpath='{.spec.rules[*].backendRefs[*]}' | jq .
+  
+  # 检查 backendRef 指向的 Service 是否存在
+  kubectl get svc <backend-service> -n <backend-namespace>
+  
+  # 检查 Service 是否有可用 Endpoints
+  kubectl get endpoints <backend-service> -n <backend-namespace>
+  
+  # 从 Gateway Controller Pod 测试到 backend 的连通性
+  kubectl exec <gateway-controller-pod> -n <gateway-ns> -- curl -s --connect-timeout 5 http://<backend-service>.<backend-namespace>.svc.cluster.local:<port>/
+  ```
+- **超时**: 15s
+- **预期输出模式**: Service 和 Endpoints 状态
+- **判断规则**:
+  - backendRef Service 不存在 → 配置错误，需创建 Service
+  - Service 存在但 Endpoints 为空 → 后端 Pod 未就绪（回到 D1.3）
+  - Gateway Controller 无法连接 backend → 网络或 NetworkPolicy 问题
+  - backendRef.port 与 Service.spec.ports 不匹配 → 端口配置错误
+- **版本差异**: 无
+
+---
+
 ## 5. 根因分类
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
@@ -657,6 +879,9 @@ D1.2: Endpoints 是否为空？
 | RC-010 | **Service 协议（TCP/UDP）与应用不匹配** — Service 定义的协议（如 TCP）与应用实际监听的协议（如 UDP）不一致，导致流量无法被正确处理。常见于 DNS 服务（需同时暴露 TCP 和 UDP）或游戏服务器（使用 UDP） | 低 | D2.2 Service protocol 与容器实际协议不一致；D3.2 协议测试失败 | service-fta: BE-protocol-mismatch |
 | RC-011 | **sessionAffinity 配置导致流量不均或粘滞故障** — `sessionAffinity: ClientIP` 配置导致特定客户端的所有请求被固定路由到同一后端 Pod，当该 Pod 异常时客户端持续失败直到 affinity 超时。或 `timeoutSeconds` 配置过大导致负载严重不均 | 低 | D2.10 sessionAffinity 为 ClientIP 且 timeout 过长；特定客户端持续失败但其他客户端正常；更换客户端 IP 后恢复 | service-fta: BE-session-affinity |
 | RC-012 | **跨节点网络（CNI）故障导致部分连通性问题** — CNI 插件（Calico/Cilium/Flannel 等）在某些节点上出现异常，导致跨节点的 Pod 间通信失败。表现为同一节点上的 Pod 互通，但跨节点访问 Service 失败 | 中 | D2.4 同节点 Pod 可直接通信但跨节点失败；D3.1 连通性矩阵显示特定节点模式的失败；CNI Pod 日志有错误 | service-fta: BE-cni-cross-node |
+| RC-013 | **EndpointSlice 与 Endpoints 不一致** — v1.28+ 默认使用 EndpointSlice 作为 endpoint 分发机制，但某些旧版控制器或自定义组件可能仍依赖 legacy Endpoints。两者不一致时可能导致部分流量路由异常或 Service 不可达 | 低 | D1.2 EndpointSlice 与 Endpoints 数据不一致；`kubectl get endpointslices` 与 `kubectl get endpoints` 对比显示差异；kube-proxy 日志显示使用 EndpointSlice 但其他组件使用 Endpoints | service-fta: BE-endpointslice-inconsistent |
+| RC-014 | **Service Mesh sidecar 异常** — Istio/Linkerd 等 Service Mesh 的 sidecar proxy 出现问题，包括：sidecar 未注入、注入失败、mTLS 握手错误、VirtualService/DestinationRule 路由不匹配、identity 证书过期等。表现为 mesh 内部 Service 通信失败 | 中 | D4.1 Pod 不包含 istio-proxy/linkerd-proxy 容器；D4.3 mTLS tls-check 显示配置不一致；D4.4 Envoy 日志出现 upstream connect error 或 TLS error；D4.5 `linkerd check` 显示异常 | service-fta: BE-mesh-sidecar-failure |
+| RC-015 | **多集群 Service (MCS API) 连通性问题** — 使用 Multi-Cluster Service API (ServiceExport/ServiceImport) 或 Submariner 等方案时，跨集群 Service 发现或路由失败。表现为 `clusterset.local` 域名解析失败或跨集群流量无法路由 | 低 | ServiceExport/ServiceImport 状态不同步；跨集群 DNS 解析失败（`nslookup <service>.<namespace>.svc.clusterset.local`）；网络隧道/VPN 连接中断；MCS controller 日志有同步错误 | service-fta: BE-mcs-connectivity |
 
 ---
 
@@ -943,6 +1168,101 @@ D1.2: Endpoints 是否为空？
 - **回滚命令**:
   ```bash
   kubectl patch svc <service> -n <namespace> -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+  ```
+
+#### REM-012: Service Mesh sidecar 修复
+- **适用根因**: RC-014
+- **影响说明**: 修复 Service Mesh sidecar 问题可能涉及重启 Pod、修改注入配置或更新 mTLS 设置。重启 Pod 会导致其上运行的工作负载短暂中断。
+- **审批提示**: "发现 Pod `<pod-name>` 的 Service Mesh sidecar 异常。建议 [**重启 Pod**/**修复注入标签**/**更新 mTLS 配置**]。操作期间 Pod 将短暂不可用。是否批准？"
+- **前置检查**:
+  ```bash
+  # 确认 mesh 控制平面健康
+  # Istio:
+  istioctl version
+  kubectl get pods -n istio-system
+  istioctl analyze -n <namespace>
+  
+  # Linkerd:
+  linkerd check
+  linkerd check --proxy -n <namespace>
+  
+  # 检查目标 Pod sidecar 状态
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].name}'
+  kubectl logs <pod-name> -n <namespace> -c istio-proxy --tail=50 2>/dev/null || \
+  kubectl logs <pod-name> -n <namespace> -c linkerd-proxy --tail=50 2>/dev/null
+  ```
+- **执行命令**:
+  ```bash
+  # 方案A: 重启 Pod 以触发 sidecar 重新注入（最常用）
+  kubectl delete pod <pod-name> -n <namespace>
+  # 等待新 Pod 启动
+  kubectl wait --for=condition=Ready pod -l <selector> -n <namespace> --timeout=120s
+  
+  # 方案B: 修复 namespace 注入标签（如果注入未启用）
+  # Istio:
+  kubectl label namespace <namespace> istio-injection=enabled --overwrite
+  # 然后重启 Deployment 所有 Pod:
+  kubectl rollout restart deployment/<deployment-name> -n <namespace>
+  
+  # 方案C: 修复 mTLS 配置（Istio STRICT -> PERMISSIVE）
+  kubectl apply -f - <<EOF
+  apiVersion: security.istio.io/v1beta1
+  kind: PeerAuthentication
+  metadata:
+    name: default
+    namespace: <namespace>
+  spec:
+    mtls:
+      mode: PERMISSIVE
+  EOF
+  
+  # 方案D: 更新 DestinationRule TLS 配置
+  kubectl apply -f - <<EOF
+  apiVersion: networking.istio.io/v1beta1
+  kind: DestinationRule
+  metadata:
+    name: <service-name>-mtls
+    namespace: <namespace>
+  spec:
+    host: <service-name>.<namespace>.svc.cluster.local
+    trafficPolicy:
+      tls:
+        mode: ISTIO_MUTUAL
+  EOF
+  ```
+- **后置验证**:
+  ```bash
+  # 确认 sidecar 注入成功
+  kubectl get pod <new-pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].name}' | grep -E 'istio-proxy|linkerd-proxy'
+  # 预期: 输出包含 sidecar 容器名
+  
+  # 确认 sidecar 状态正常
+  kubectl get pod <new-pod-name> -n <namespace>
+  # 预期: READY 列显示 2/2 (或包含 sidecar 的正确数量)
+  
+  # Istio: 检查 mTLS 状态
+  istioctl authn tls-check <new-pod-name>.<namespace>
+  # 预期: 显示正确的 mTLS 状态
+  
+  # 测试 Service 连通性
+  kubectl exec <test-pod> -n <namespace> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<service>:<port>/
+  # 预期: 200 或其他正常 HTTP 状态码
+  
+  # Linkerd: 检查 proxy 状态
+  linkerd diagnostics proxy-metrics <new-pod-name> -n <namespace> | head -20
+  # 预期: 无大量错误指标
+  ```
+- **回滚命令**:
+  ```bash
+  # 方案A 回滚: Pod 重启为幂等操作，无需回滚
+  
+  # 方案B 回滚: 移除注入标签
+  kubectl label namespace <namespace> istio-injection-
+  kubectl rollout restart deployment/<deployment-name> -n <namespace>
+  
+  # 方案C/D 回滚: 删除新增的配置
+  kubectl delete peerauthentication default -n <namespace>
+  kubectl delete destinationrule <service-name>-mtls -n <namespace>
   ```
 
 ---

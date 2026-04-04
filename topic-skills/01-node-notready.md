@@ -573,6 +573,99 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ---
 
+### Phase 4: 批量 NotReady 级联故障分析
+
+> **触发条件**: 多个节点同时进入 NotReady 状态（>2 个节点在 5 分钟内）
+> **目标**: 分析批量 NotReady 的关联性，确定是独立故障还是共同根因导致的级联故障
+> **预计耗时**: 5-15 分钟
+
+**Step D4.1**: 批量节点关联性分析
+- **命令**:
+  ```bash
+  # 获取所有 NotReady 节点的基础信息
+  kubectl get nodes --no-headers | grep "NotReady" | awk '{print $1}' | while read node; do
+    echo "=== Node: $node ==="
+    kubectl get node $node -o jsonpath='IP={.status.addresses[?(@.type=="InternalIP")].address} Zone={.metadata.labels.topology\.kubernetes\.io/zone} Rack={.metadata.labels.topology\.kubernetes\.io/rack}{"\n"}'
+  done
+
+  # 检查 NotReady 节点的时间关联性
+  kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.conditions[-1].type,LAST_TRANSITION:.status.conditions[-1].lastTransitionTime | grep -v "NAME"
+  ```
+- **超时**: 15s
+- **判断规则**:
+  - 多个节点在相同时间戳（±1 分钟）进入 NotReady → 可能是网络层面故障或控制平面问题
+  - NotReady 节点属于同一 Zone/Rack → 可能是物理网络设备故障（交换机、TOR 故障）
+  - NotReady 节点分布在不同 Zone → 可能是控制平面问题或 apiserver 网络问题
+  - NotReady 节点 IP 在同一网段 → VLAN/子网故障可能性高
+
+**Step D4.2**: 网络层面排查
+- **命令**:
+  ```bash
+  # 从多个 NotReady 节点之间测试互联性（需要能 SSH 到其中一个）
+  # 如果能 SSH 到任一节点：
+  ssh <accessible-node-ip> "for ip in <other-node-ip1> <other-node-ip2>; do echo \"Testing \$ip:\"; ping -c 3 \$ip; done"
+
+  # 检查 ARP 表（排除 ARP 风暴/无效 ARP）
+  ssh <node-ip> "arp -n | head -20"
+
+  # 检查路由表
+  ssh <node-ip> "ip route show"
+
+  # 检查网卡状态（link up/down）
+  ssh <node-ip> "ip link show | grep -E 'eth|ens|bond'"
+  ```
+- **超时**: 30s
+- **判断规则**:
+  - 节点之间 ping 不通但 SSH 可达 → 云网络/SDN 配置问题
+  - 网卡状态 `DOWN` → 物理网络故障
+  - ARP 表异常（大量 incomplete/failed）→ 网络交换机问题
+  - 路由表缺失默认路由 → 网络配置被破坏
+
+**Step D4.3**: 控制平面健康检查
+- **命令**:
+  ```bash
+  # 检查 etcd 集群健康状态
+  kubectl get pods -n kube-system -l component=etcd
+  kubectl exec -n kube-system etcd-<control-plane-node> -- etcdctl endpoint health --cluster 2>/dev/null || echo "etcdctl not accessible"
+
+  # 检查 apiserver 响应时间
+  time kubectl get nodes --request-timeout=5s >/dev/null 2>&1 && echo "apiserver responsive" || echo "apiserver slow/unresponsive"
+
+  # 检查 kube-controller-manager 状态
+  kubectl get pods -n kube-system -l component=kube-controller-manager
+
+  # 检查控制平面节点负载
+  kubectl top nodes -l node-role.kubernetes.io/control-plane= 2>/dev/null || echo "metrics not available"
+  ```
+- **超时**: 20s
+- **判断规则**:
+  - etcd 集群不健康（member 缺失、leader 频繁切换）→ 控制平面根因，立即升级
+  - apiserver 响应慢（>3s）→ apiserver 过载或 etcd 问题
+  - kube-controller-manager Pod 异常 → node-lifecycle-controller 可能未正确更新节点状态
+  - **重要**: 如果控制平面有问题，多节点 NotReady 可能是误报，实际节点可能是健康的
+
+**Step D4.4**: 时钟偏差批量检查
+- **命令**:
+  ```bash
+  # 批量检查所有 NotReady 节点的时间同步状态
+  kubectl get nodes --no-headers | grep "NotReady" | awk '{print $1}' | while read node; do
+    ip=$(kubectl get node $node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
+    echo "=== Node: $node ($ip) ==="
+    ssh $ip "timedatectl status | grep -E 'synchronized|NTP' 2>/dev/null || date -u" 2>/dev/null || echo "SSH failed"
+  done
+
+  # 如果可以登录到节点，检查与 NTP 服务器的偏差
+  ssh <node-ip> "chronyc tracking 2>/dev/null | grep 'System time' || ntpq -p 2>/dev/null || echo 'No NTP service'"
+  ```
+- **超时**: 30s
+- **判断规则**:
+  - 多节点时钟偏差 >5s → NTP 服务器故障或网络分区导致时钟无法同步
+  - 时钟偏差方向一致（都快或都慢）→ NTP 源问题
+  - 时钟偏差方向不一致 → 各节点独立的 NTP 配置问题
+  - 时钟偏差 >1 分钟 → 几乎确定会导致 TLS 证书验证失败（RC-010 + RC-015 的组合）
+
+---
+
 ## 5. 根因分类
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
@@ -589,6 +682,9 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 | RC-010 | **NTP 时间不同步** — 节点时钟偏差过大，导致 TLS 证书验证失败和 Lease 续租异常 | 低 | D2.10 时钟未同步或偏差 >5s；D2.8 证书看似有效但 TLS 仍失败 | node-fta: BE-ntp-drift |
 | RC-011 | **CNI 插件异常** — CNI 配置文件缺失、CNI 二进制文件损坏、CNI DaemonSet Pod 异常，导致节点网络不可用，kubelet 报告 NetworkUnavailable | 中 | D3.2 CNI 配置缺失或 Pod 未运行；D1.2 NetworkUnavailable=True | node-fta: BE-cni-failure |
 | RC-012 | **节点被手动 cordon/drain** — 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于故障 | 低 | D1.4 存在 unschedulable taint；D1.1 STATUS 包含 "SchedulingDisabled" | N/A（非故障） |
+| RC-013 | **内核 panic / 硬件故障** — 服务器发生内核崩溃、MCE (Machine Check Exception)、EDAC 内存错误或其他硬件级别故障，导致节点完全不可用或反复重启 | ~5% | D2.9 dmesg 包含 `kernel panic`、`MCE`、`EDAC` 错误；SSH 可能完全不可达；节点可能反复重启 | node-fta: BE-kernel-panic |
+| RC-014 | **云厂商节点池异常** — 云平台层面的问题导致节点不可用，包括 ECS/EC2 实例状态异常、安全组变更、VPC 路由表异常、ENI 配额耗尽、节点池升级卡住等 | ~8% | 云厂商控制台/CLI 显示实例状态异常；D2.7 网络测试失败但非 K8s 层面问题；节点可能无法 SSH | node-fta: BE-cloud-provider |
+| RC-015 | **kubelet 证书自动轮转失败** — kubelet 的 RotateKubeletClientCertificate 或 RotateKubeletServerCertificate 机制失败，CSR 未被自动批准或证书轮转过程出错 | ~4% | D2.8 证书已过期或即将过期；D2.2 日志包含 `TLS handshake error`、`certificate has expired`；`kubectl get csr` 显示 Pending CSR | node-fta: BE-cert-rotation-fail |
 
 ---
 
@@ -922,6 +1018,90 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
   ssh <node-ip> "cp /var/lib/kubelet/pki/kubelet-client-current.pem.bak /var/lib/kubelet/pki/kubelet-client-current.pem && systemctl restart kubelet"
   ```
 
+#### REM-011: 内核 panic 后的节点恢复
+- **适用根因**: RC-013（内核 panic / 硬件故障）
+- **风险等级**: 🔴 高
+- **影响说明**: 内核 panic 后的节点可能存在文件系统损坏、硬件故障残留问题。需要确认硬件健康后才能将节点重新投入使用。操作不当可能导致数据丢失或工作负载中断。
+- **操作步骤**:
+  1. **收集 kdump 日志（如果可用）**:
+     ```bash
+     # 检查 kdump 是否已捕获崩溃转储
+     ssh <node-ip> "ls -la /var/crash/ 2>/dev/null || echo 'No crash dump found'"
+
+     # 检查 kdump 服务状态
+     ssh <node-ip> "systemctl status kdump"
+
+     # 备份崩溃转储（用于后续分析）
+     scp -r <node-ip>:/var/crash/ /tmp/crash-$(date +%Y%m%d%H%M%S)/
+     ```
+  2. **确认硬件健康状态**:
+     ```bash
+     # 检查 BIOS/UEFI POST 自检结果（需要控制台访问）
+     # 在云环境中，检查实例状态：
+     # AWS: aws ec2 describe-instance-status --instance-ids <instance-id>
+     # 阿里云: aliyun ecs DescribeInstanceStatus --RegionId <region> --InstanceId.1 <instance-id>
+
+     # 检查磁盘健康
+     ssh <node-ip> "smartctl -H /dev/sda 2>/dev/null || echo 'smartctl not available'"
+
+     # 检查内存错误
+     ssh <node-ip> "dmesg -T | grep -iE 'memory error|EDAC|ECC|corrected|uncorrected' | tail -20"
+
+     # 检查 MCE （Machine Check Exception）
+     ssh <node-ip> "mcelog --client 2>/dev/null || cat /var/log/mcelog 2>/dev/null || echo 'mcelog not available'"
+     ```
+  3. **确认节点文件系统完整性**:
+     ```bash
+     # 检查文件系统错误
+     ssh <node-ip> "dmesg -T | grep -iE 'EXT4-fs error|XFS error|I/O error|filesystem' | tail -20"
+
+     # 检查 kubelet 数据目录完整性
+     ssh <node-ip> "ls -la /var/lib/kubelet/ && ls -la /var/lib/containerd/"
+     ```
+  4. **节点重启（如果节点未自动重启）**:
+     ```bash
+     # 先排空节点工作负载
+     kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --grace-period=60 --timeout=300s
+
+     # 重启节点
+     ssh <node-ip> "reboot"
+     ```
+  5. **重启后验证**:
+     ```bash
+     # 等待节点重启（约 2-5 分钟）
+     sleep 120
+
+     # 检查节点状态
+     kubectl get node <node-name>
+
+     # 检查 kubelet 状态
+     ssh <node-ip> "systemctl status kubelet"
+
+     # 检查 containerd 状态
+     ssh <node-ip> "systemctl status containerd"
+
+     # 确认无新的内核错误
+     ssh <node-ip> "dmesg -T | grep -iE 'error|panic|oops' | tail -20"
+     ```
+- **安全检查**:
+  - 硬件自检通过（磁盘 SMART 正常、无 MCE 错误）
+  - 文件系统无损坏
+  - kdump 日志已备份用于后续分析
+  - **如果硬件检查失败**：不要将节点重新投入使用，转入 REM-010（硬件更换）流程
+- **回滚方案**:
+  ```bash
+  # 如果重启后节点仍不稳定，标记节点为不可调度
+  kubectl cordon <node-name>
+
+  # 通知基础设施团队进行硬件检查
+  # 建议创建维护工单并记录：
+  # - kdump 日志位置
+  # - dmesg 错误输出
+  # - 疑似故障硬件组件
+
+  # 如果确认是硬件故障，按 REM-010 流程更换硬件或 REM-007 更换节点
+  ```
+
 ---
 
 ### 6.4 ⚫ 严重（需高级 SRE 审批）
@@ -1169,17 +1349,24 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 
 - **[v1.30+]**: Node swap support (beta) 可能影响内存压力的判断：
   - 如果 `NodeSwap` feature gate 启用且 `swapBehavior: LimitedSwap`，需同时检查 swap 使用情况
-  - `free -m` 输出中的 Swap 行不再是"异常"信号
+  - `free -m` 输出中的 Swap 行不再是“异常”信号
   - kubelet 的 `--fail-swap-on` 标志在启用 swap 时为 `false`
 
 - **[v1.31+]**: EventedPLEG 默认启用：
   - 传统 GenericPLEG 的 relist 操作频率降低，`PLEG is not healthy` 误报减少
   - 但如果 EventedPLEG 本身异常，可能出现新的故障模式
   - 诊断时需检查 `--feature-gates=EventedPLEG=true` 是否生效
+  - **新增**: kubelet graceful shutdown 行为增强，支持更精细的 Pod 终止顺序控制
+  - **新增**: Pod 的 `terminationGracePeriodSeconds` 会被 kubelet 在 graceful shutdown 期间更准确地尊重
 
 - **[v1.32+]**: nftables kube-proxy 模式 GA：
   - 使用 nftables 模式时，`iptables -L` 不再显示 kube-proxy 规则
   - 需使用 `nft list ruleset` 检查规则
+  - **新增**: InPlacePodVerticalScaling (Beta) 对节点资源压力的影响：
+    - Pod 可以在运行时动态调整 CPU/Memory requests 和 limits
+    - 可能导致节点 allocated resources 突然变化
+    - 诊断 MemoryPressure/DiskPressure 时需考虑 resize 操作的影响
+  - **新增**: kubelet 证书轮转日志更详细，便于诊断 RC-015
 
 ---
 

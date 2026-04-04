@@ -546,6 +546,103 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
   - 如果 Pod 没有设置 PriorityClass 或优先级很低 → 可能被高优先级 Pod 抢占了资源
   - 如果 Pod 的 `preemptionPolicy` 为 `Never` → Pod 不会抢占其他 Pod，只能等待资源释放
 
+**Step D3.4**: **[v1.30+]** Pod Scheduling Readiness 诊断
+- **风险级别**: 🟢 低（只读操作）
+- **命令**:
+  ```bash
+  # 检查 Pod 的 SchedulingGates
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.schedulingGates}' | jq .
+
+  # 检查 Pod 的 Scheduling Readiness Conditions
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{range .status.conditions[?(@.type=="PodScheduled")]}{.type}{"="}{.status}{" reason="}{.reason}{" message="}{.message}{"\n"}{end}'
+
+  # 查看集群中所有带有 SchedulingGates 的 Pod
+  kubectl get pods --all-namespaces -o json | jq '.items[] | select(.spec.schedulingGates != null) | {namespace: .metadata.namespace, name: .metadata.name, gates: .spec.schedulingGates}'
+
+  # 检查是否有控制器负责管理该 gate
+  kubectl get pods --all-namespaces -l <gate-controller-label> 2>/dev/null || echo "Gate controller not identified"
+  ```
+- **超时**: 15s
+- **判断规则**:
+  - `schedulingGates` 非空 → Pod 被外部控制器门控，不会进入调度队列 (RC-012)
+  - 常见的 gate 来源:
+    - `cluster-autoscaler.kubernetes.io/scheduling-gate`: Cluster Autoscaler 等待节点准备就绪
+    - `custom-controller/resource-gate`: 自定义控制器等待资源就绪
+  - 如果 gate 长时间未被清除 → 检查对应的 gate controller 是否正常工作
+  - **[v1.30+]**: SchedulingGates GA，广泛用于资源预留、弹性扩容等场景
+  - **[v1.31+]**: PodSchedulingReadiness 增强，提供更详细的调度就绪状态信息
+
+**Step D3.5**: Topology Spread Constraints 冲突诊断
+- **风险级别**: 🟢 低（只读操作）
+- **命令**:
+  ```bash
+  # 查看 Pod 的 TopologySpreadConstraints 配置
+  kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 20 topologySpreadConstraints
+
+  # 分析具体的拓扑分布约束
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{range .spec.topologySpreadConstraints[*]}{"topologyKey: "}{.topologyKey}{"\n  maxSkew: "}{.maxSkew}{"\n  whenUnsatisfiable: "}{.whenUnsatisfiable}{"\n  labelSelector: "}{.labelSelector}{"\n---\n"}{end}'
+
+  # 查看当前各拓扑域的 Pod 分布情况
+  # 对于 zone 拓扑约束
+  kubectl get pods -n <namespace> -l <label-selector> -o custom-columns=NAME:.metadata.name,NODE:.spec.nodeName,ZONE:.spec.nodeName --no-headers | while read name node zone; do
+    if [ -n "$node" ]; then
+      actual_zone=$(kubectl get node $node -o jsonpath='{.metadata.labels.topology\.kubernetes\.io/zone}')
+      echo "$name -> $node -> $actual_zone"
+    else
+      echo "$name -> (unscheduled)"
+    fi
+  done
+
+  # 检查各 zone 的节点数和可用资源
+  kubectl get nodes -o custom-columns=NAME:.metadata.name,ZONE:.metadata.labels.topology\.kubernetes\.io/zone,CPU_ALLOC:.status.allocatable.cpu,MEM_ALLOC:.status.allocatable.memory
+  ```
+- **超时**: 20s
+- **判断规则**:
+  - **maxSkew 过小**（如 maxSkew=1）且 `whenUnsatisfiable: DoNotSchedule` → 当拓扑域不均衡时无法调度
+  - **zone 数量不足** → 例如只有 2 个 zone 但要求 3 副本均匀分布
+  - **与 nodeAffinity 的组合约束** → nodeAffinity 限制了可用节点，导致拓扑分布无法满足
+  - **labelSelector 不匹配** → 拓扑约束基于的 labelSelector 匹配不到任何 Pod
+  - **minDomains 设置过高** → **[v1.30+ GA]** 要求的最小拓扑域数量超过实际可用数量
+  - 缓解方案:
+    - 将 `whenUnsatisfiable` 从 `DoNotSchedule` 改为 `ScheduleAnyway`
+    - 增加 `maxSkew` 的容忍度
+    - 检查并调整 nodeAffinity 约束
+
+**Step D3.6**: GPU/特殊资源调度诊断
+- **风险级别**: 🟢 低（只读操作）
+- **命令**:
+  ```bash
+  # 检查 Pod 的特殊资源请求
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{range .spec.containers[*]}{"container: "}{.name}{"\n  requests: "}{.resources.requests}{"\n  limits: "}{.resources.limits}{"\n"}{end}'
+
+  # 检查集群中的 GPU 可用情况
+  kubectl describe nodes | grep -E "nvidia.com/gpu|amd.com/gpu|Allocatable" | head -30
+
+  # 查看每个节点的 GPU 分配情况
+  kubectl get nodes -o custom-columns=NAME:.metadata.name,GPU_ALLOC:.status.allocatable.nvidia\.com/gpu,GPU_CAP:.status.capacity.nvidia\.com/gpu
+
+  # 检查 GPU device plugin 状态
+  kubectl get pods -n kube-system -l k8s-app=nvidia-device-plugin-daemonset -o wide 2>/dev/null || \
+  kubectl get pods -n kube-system -l name=nvidia-device-plugin-ds -o wide 2>/dev/null || \
+  echo "NVIDIA device plugin not found - check your GPU plugin deployment"
+
+  # 检查 Node 上的扩展资源（FPGA, RDMA, InfiniBand 等）
+  kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq .
+
+  # **[v1.32+]** 检查 Dynamic Resource Allocation (DRA) 资源
+  kubectl get resourceclaims -n <namespace> 2>/dev/null || echo "DRA not enabled or no ResourceClaims"
+  kubectl get resourceclasses 2>/dev/null || echo "DRA not enabled"
+  ```
+- **超时**: 20s
+- **判断规则**:
+  - `nvidia.com/gpu` 请求但集群无 GPU 节点 → 需要添加 GPU 节点
+  - GPU allocatable 为 0 但 capacity 不为 0 → GPU device plugin 可能未正常工作
+  - Device plugin Pod 不在 Running 状态 → 需要修复 device plugin
+  - **[v1.32+]** ResourceClaim 未绑定 → DRA 控制器或驱动问题
+  - 特殊资源错误模式:
+    - `nvidia.com/gpu: 8` 但节点最大只有 4 GPU → 请求量超过单节点容量
+    - GPU 节点有 taint 但 Pod 未 tolerate → 结合 D2.2 taint 分析
+
 ---
 
 ## 5. 根因分类
@@ -565,6 +662,8 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-hea
 | RC-011 | **自定义调度器未部署** — Pod 的 `schedulerName` 指定了自定义调度器，但该调度器未在集群中运行 | 低 | D1.1 `schedulerName` 非默认值；D1.4 找不到对应调度器 Pod | scheduler-fta: BE-SCHED-CUSTOM |
 | RC-012 | **SchedulingGates 阻止调度** — **[v1.28+]** Pod 的 `spec.schedulingGates` 非空，外部控制器未移除门控 | 低 | D1.1 `schedulingGates` 非空；D2.10 确认 gate 列表 | pod-fta: BE-SCHED-GATE |
 | RC-013 | **TopologySpreadConstraints 无法满足** — Pod 的拓扑分布约束（`whenUnsatisfiable: DoNotSchedule`）在当前拓扑域分布下无法满足 | 中 | D1.3 消息含 `didn't match pod topology spread constraints`；D2.3 确认 TopologySpreadConstraints 配置 | pod-fta: BE-SCHED-TOPOLOGY |
+| RC-014 | **PriorityClass 抢占导致的 Pending 链式反应** — 高优先级 Pod 抢占低优先级 Pod 的资源，导致低优先级 Pod Pending，进而触发连锁反应 | ~4% | Events 中出现 `Preempted` 或 `PreemptionVictim`；D3.3 确认 PriorityClass 配置；低优先级 Pod 被驱逐后无法重新调度 | pod-fta: BE-SCHED-PREEMPTION |
+| RC-015 | **GPU/特殊资源调度失败** — Pod 请求了 nvidia.com/gpu、FPGA、RDMA、InfiniBand 等特殊资源，但集群中无可用资源或 device plugin 未正常工作 | ~7% | Pod requests 包含 `nvidia.com/gpu` 或其他扩展资源；节点 allocatable 中无对应资源或为 0；device plugin DaemonSet Pod 异常；**[v1.32+]** ResourceClaim 未绑定 | pod-fta: BE-SCHED-GPU |
 
 ---
 
@@ -1240,6 +1339,97 @@ kubectl rollout status deployment/<deployment-name> -n <namespace> --timeout=120
 - **v1.30**: SchedulingGates GA。调度器引入 QueueingHint 框架（Beta），改善调度队列性能。`TopologySpreadConstraints.minDomains` GA
 - **v1.31**: TopologySpreadConstraints 的 `matchLabelKeys` GA，允许更精细的拓扑控制。Node swap support 进入 Beta
 - **v1.32**: QueueingHint GA，显著改善大规模集群（5000+ 节点）的调度吞吐量。Dynamic Resource Allocation GA，新型资源调度模型
+
+### 9.5 DRA (Dynamic Resource Allocation) 与 GPU 调度演进
+
+> **背景**: Kubernetes v1.32 中 DRA GA 是 GPU/特殊硬件调度的重大变革，替代了传统 Device Plugin 模式。
+
+#### 9.5.1 传统 Device Plugin vs DRA 模式对比
+
+| 特性 | Device Plugin (v1.8+) | DRA (v1.32 GA) |
+|-----|----------------------|----------------|
+| 资源发现 | 节点级静态注册 | 动态资源声明，支持跨节点 |
+| 分配粒度 | 整数单位（1 GPU, 2 GPU） | 支持分片/共享（MIG, time-slicing） |
+| 拓扑感知 | 有限支持（NUMA hints） | 原生支持复杂拓扑约束 |
+| 声明方式 | `resources.requests["nvidia.com/gpu"]` | `ResourceClaim` + `ResourceClaimTemplate` |
+| 调度器集成 | 简单过滤 | 完整调度协商流程 |
+| 典型厂商 | NVIDIA device-plugin, AMD device-plugin | NVIDIA DRA driver, Intel GPU plugin (DRA mode) |
+
+#### 9.5.2 版本演进详解
+
+**v1.30 (DRA Beta)**:
+```bash
+# 检查 DRA 功能门是否启用
+kubectl get --raw /metrics | grep dra_enabled
+# 或检查 kube-scheduler 启动参数
+ps aux | grep kube-scheduler | grep DynamicResourceAllocation
+```
+- ResourceClaim API 进入 Beta
+- 需要显式启用 `DynamicResourceAllocation` feature gate
+- GPU 厂商驱动开始适配 DRA 模式
+
+**v1.31 (PodSchedulingReadiness 增强)**:
+- SchedulingGates 与 DRA 更好集成
+- ResourceClaim 状态更新更可靠
+- 调度器对 ResourceClaim 绑定的处理优化
+```yaml
+# v1.31+ 中 Pod 可以同时使用 SchedulingGates 和 ResourceClaims
+spec:
+  schedulingGates:
+  - name: "resource-prepared"
+  resourceClaims:
+  - name: gpu
+```
+
+**v1.32 (DRA GA)**:
+```bash
+# 检查 ResourceClaim 状态 (v1.32+)
+kubectl get resourceclaims -A
+kubectl describe resourceclaim <claim-name>
+
+# 检查 ResourceSlice（DRA 资源池）
+kubectl get resourceslices -o wide
+
+# 检查 DeviceClass（替代传统 extended resources）
+kubectl get deviceclasses
+```
+- 默认启用，无需手动开启 feature gate
+- 新增 `ResourceSlice` 和 `DeviceClass` API
+- 调度器完整支持 structured parameters
+
+#### 9.5.3 DRA 相关 Pending 诊断要点
+
+**v1.32+ 中 GPU Pod Pending 的新诊断路径**:
+
+| 检查项 | 命令 | 期望结果 |
+|-------|------|----------|
+| ResourceClaim 是否创建 | `kubectl get resourceclaim -l app=<pod-label>` | 存在对应 claim |
+| ResourceClaim 是否绑定 | `kubectl get rc <claim> -o jsonpath='{.status.allocation}'` | 非空，包含 allocation 信息 |
+| ResourceSlice 是否存在 | `kubectl get resourceslices` | 有可用 slices |
+| DRA driver Pod 状态 | `kubectl get pods -n kube-system -l app.kubernetes.io/component=dra-driver` | Running |
+| Pending 原因是否包含 DRA 关键字 | 检查 FailedScheduling event | `cannot allocate ResourceClaim` 表示 DRA 相关问题 |
+
+**DRA 模式下 GPU 调度失败的典型 Event 消息**:
+```
+Events:
+  Type     Reason            Message
+  ----     ------            -------
+  Warning  FailedScheduling  0/10 nodes are available: 
+           ResourceClaim my-gpu-claim cannot be allocated because:
+           - node1: no device available matching request
+           - node2: no device available matching request
+           ...
+```
+
+#### 9.5.4 DRA 调度故障根因补充
+
+| 根因 | 症状 | 诊断命令 | 修复建议 |
+|-----|------|---------|----------|
+| ResourceClaim 未被 driver 处理 | `.status.allocation` 持续为空 | `kubectl describe resourceclaim <name>` | 检查 DRA driver Pod 日志 |
+| DeviceClass 配置错误 | Event: `DeviceClass not found` | `kubectl get deviceclasses` | 确认 DeviceClass 已创建且名称匹配 |
+| ResourceSlice 容量不足 | 所有节点均无可用设备 | `kubectl get resourceslices -o yaml \| grep -A5 devices` | 扩容 GPU 节点或检查设备分配状态 |
+| structured parameters 语法错误 | ResourceClaim 创建失败 | `kubectl get resourceclaimtemplates -o yaml` | 校验 selector/request 语法 |
+| driver 与 DRA API 版本不兼容 | driver CrashLoop 或 API error | 检查 driver 镜像版本与集群版本兼容性 | 升级 DRA driver 至兼容版本 |
 
 ---
 

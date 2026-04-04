@@ -667,6 +667,265 @@ kubectl 不可用?
 
 ---
 
+### Phase 4: cert-manager 自动轮转排查
+
+> **目标**: 深入检查 cert-manager 证书管理流程，定位自动轮转失败的根因。
+> **预计耗时**: 5-10 分钟
+> **前置条件**: 集群已部署 cert-manager
+
+**Step D4.1**: 检查 Certificate 资源状态
+- **命令**:
+  ```bash
+  # 获取所有 Certificate 资源的详细状态
+  kubectl get certificates -A -o wide
+  
+  # 检查特定 Certificate 的详细信息
+  kubectl describe certificate <cert-name> -n <namespace>
+  
+  # 检查 Certificate 的 conditions
+  kubectl get certificate <cert-name> -n <namespace> -o jsonpath='{range .status.conditions[*]}{.type}{"="}{.status}{" reason="}{.reason}{" message="}{.message}{"\n"}{end}'
+  ```
+- **超时**: 15s
+- **预期输出模式**: Certificate 列表显示 READY 状态和到期时间
+- **判断规则**:
+  - Ready=True → 证书当前有效，检查 renewalTime 是否即将到期
+  - Ready=False + reason=Issuing → 正在签发中，可能是正常轮转
+  - Ready=False + reason=Failed → 签发失败，需检查 CertificateRequest
+  - notAfter 早于当前时间 → 证书已过期（RC-004/RC-005）
+- **版本差异**: 无（取决于 cert-manager 版本）
+
+**Step D4.2**: 检查 CertificateRequest 状态
+- **命令**:
+  ```bash
+  # 获取所有 CertificateRequest
+  kubectl get certificaterequests -A -o wide
+  
+  # 检查与特定 Certificate 关联的 CertificateRequest
+  kubectl get certificaterequests -n <namespace> -l cert-manager.io/certificate-name=<cert-name>
+  
+  # 检查 CertificateRequest 详情
+  kubectl describe certificaterequest <cr-name> -n <namespace>
+  ```
+- **超时**: 10s
+- **预期输出模式**: CertificateRequest 列表显示 Ready 状态
+- **判断规则**:
+  - Ready=True + Approved=True → 请求已批准并签发
+  - Ready=False + Approved=False → 请求未被批准，检查审批策略
+  - Ready=False + Denied=True → 请求被拒绝，查看 deny 原因
+  - Failed=True → Issuer 签发失败，检查 Events
+- **版本差异**: 无
+
+**Step D4.3**: 检查 Issuer/ClusterIssuer 状态
+- **命令**:
+  ```bash
+  # 获取所有 Issuer 和 ClusterIssuer
+  kubectl get issuers -A -o wide
+  kubectl get clusterissuers -o wide
+  
+  # 检查 Issuer 详细状态
+  kubectl describe issuer <issuer-name> -n <namespace>
+  kubectl describe clusterissuer <issuer-name>
+  
+  # 检查 Issuer 的 conditions
+  kubectl get clusterissuer <issuer-name> -o jsonpath='{range .status.conditions[*]}{.type}{"="}{.status}{" reason="}{.reason}{"\n"}{end}'
+  ```
+- **超时**: 10s
+- **预期输出模式**: Issuer Ready 状态
+- **判断规则**:
+  - Ready=True → Issuer 配置正确，可以签发证书
+  - Ready=False + reason=ErrInitIssuer → Issuer 初始化失败（RC-004）
+  - Ready=False + reason=NotFound → 引用的 Secret 不存在
+  - ACME Issuer 的 account 未注册 → 检查 ACME server 连通性
+- **版本差异**: 无
+
+**Step D4.4**: 检查 cert-manager controller 日志
+- **命令**:
+  ```bash
+  # 获取 cert-manager controller 日志
+  kubectl logs -n cert-manager deployment/cert-manager --tail=200 | grep -iE "error|fail|expire|rate.?limit"
+  
+  # 检查 cert-manager webhook 日志
+  kubectl logs -n cert-manager deployment/cert-manager-webhook --tail=50
+  
+  # 检查 cert-manager cainjector 日志
+  kubectl logs -n cert-manager deployment/cert-manager-cainjector --tail=50 | grep -i error
+  ```
+- **超时**: 15s
+- **预期输出模式**: 日志条目
+- **判断规则**:
+  - `rate limited` 或 `too many requests` → Let's Encrypt 限流（RC-005）
+  - `connection refused` 或 `timeout` → 无法连接 ACME server 或 Issuer 后端
+  - `secret not found` → 缺少必要的 Secret（CA 密钥、ACME 账号等）
+  - `failed to verify` → 证书链验证失败
+- **版本差异**: 无
+
+**Step D4.5**: 检查 ACME challenge 失败原因（HTTP-01/DNS-01）
+- **命令**:
+  ```bash
+  # 获取所有 Order
+  kubectl get orders -A
+  
+  # 检查 Order 详情
+  kubectl describe order <order-name> -n <namespace>
+  
+  # 获取所有 Challenge
+  kubectl get challenges -A
+  
+  # 检查 Challenge 详情
+  kubectl describe challenge <challenge-name> -n <namespace>
+  
+  # HTTP-01: 检查 challenge solver Pod
+  kubectl get pods -n cert-manager -l acme.cert-manager.io/http01-solver=true
+  
+  # DNS-01: 检查 DNS 记录是否创建
+  dig +short TXT _acme-challenge.<domain>
+  ```
+- **超时**: 30s
+- **预期输出模式**: Order/Challenge 状态
+- **判断规则**:
+  - Order state=invalid → Challenge 失败，检查 Challenge 详情
+  - Challenge state=pending 且持续时间过长 → 验证未完成
+  - HTTP-01 solver Pod 不存在或异常 → solver 创建失败
+  - DNS TXT 记录不存在 → DNS provider 配置错误或权限不足
+  - `Waiting for DNS record` 持续 → DNS 传播延迟或 DNS provider API 失败
+- **版本差异**: 无
+
+**Step D4.6**: 检查 Private CA / Vault Issuer 连接
+- **命令**:
+  ```bash
+  # Private CA Issuer: 检查 CA Secret
+  kubectl get secret <ca-secret-name> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates -subject
+  
+  # Vault Issuer: 检查 Vault 连通性
+  kubectl exec -n cert-manager deployment/cert-manager -- wget -qO- --timeout=5 <vault-addr>/v1/sys/health 2>/dev/null || echo "Vault unreachable"
+  
+  # 检查 Vault token Secret
+  kubectl get secret <vault-token-secret> -n cert-manager -o jsonpath='{.data.token}' | base64 -d | head -c 20 && echo "..."
+  
+  # 检查 Vault Issuer 的 status
+  kubectl get clusterissuer <vault-issuer-name> -o jsonpath='{.status}' | jq .
+  ```
+- **超时**: 15s
+- **预期输出模式**: CA 证书有效期、Vault 连通性
+- **判断规则**:
+  - CA Secret 不存在 → CA Issuer 配置错误（RC-004）
+  - CA 证书已过期 → Private CA 过期（RC-006）
+  - Vault 不可达 → 网络问题或 Vault 宕机
+  - Vault token 无效 → token 过期或被撤销（RC-004）
+- **版本差异**: 无
+
+---
+
+### Phase 5: mTLS 故障诊断
+
+> **目标**: 诊断双向 TLS 认证失败的问题，包括 Service Mesh mTLS 和应用层 mTLS。
+> **预计耗时**: 5-10 分钟
+> **前置条件**: 应用使用 mTLS 进行通信
+
+**Step D5.1**: 双向 TLS 握手失败分析
+- **命令**:
+  ```bash
+  # 测试双向 TLS 连接
+  openssl s_client -connect <host>:<port> \
+    -cert /path/to/client.crt \
+    -key /path/to/client.key \
+    -CAfile /path/to/ca.crt \
+    -verify_return_error 2>&1 | head -50
+  
+  # 从 Pod 内部测试 mTLS
+  kubectl exec <pod-name> -n <namespace> -- \
+    curl -v --cacert /path/to/ca.crt \
+    --cert /path/to/client.crt \
+    --key /path/to/client.key \
+    https://<service>:<port>/healthz 2>&1 | grep -iE "ssl|tls|error|handshake"
+  ```
+- **超时**: 15s
+- **预期输出模式**: TLS 握手详情
+- **判断规则**:
+  - `certificate has expired` → 客户端或服务端证书过期
+  - `certificate verify failed` → CA 不受信任（RC-008 mTLS 场景）
+  - `tlsv1 alert unknown ca` → 服务端不信任客户端 CA
+  - `sslv3 alert handshake failure` → TLS 版本或密码套件不匹配
+  - 握手成功 → mTLS 配置正确
+- **版本差异**: 无
+
+**Step D5.2**: CA bundle 一致性检查
+- **命令**:
+  ```bash
+  # 检查客户端信任的 CA
+  kubectl get configmap <client-ca-bundle> -n <namespace> -o jsonpath='{.data.ca\.crt}' | \
+    openssl x509 -noout -subject -issuer -fingerprint
+  
+  # 检查服务端信任的 CA
+  kubectl get secret <server-tls-secret> -n <namespace> -o jsonpath='{.data.ca\.crt}' | base64 -d | \
+    openssl x509 -noout -subject -issuer -fingerprint
+  
+  # 比较两个 CA 的 fingerprint 是否一致
+  CLIENT_CA_FP=$(kubectl get configmap <client-ca-bundle> -n <namespace> -o jsonpath='{.data.ca\.crt}' | openssl x509 -noout -fingerprint -sha256 2>/dev/null)
+  SERVER_CA_FP=$(kubectl get secret <server-tls-secret> -n <namespace> -o jsonpath='{.data.ca\.crt}' | base64 -d | openssl x509 -noout -fingerprint -sha256 2>/dev/null)
+  echo "Client CA: $CLIENT_CA_FP"
+  echo "Server CA: $SERVER_CA_FP"
+  [ "$CLIENT_CA_FP" = "$SERVER_CA_FP" ] && echo "CA Match: YES" || echo "CA Match: NO"
+  ```
+- **超时**: 15s
+- **预期输出模式**: CA 指纹对比
+- **判断规则**:
+  - CA fingerprint 一致 → CA bundle 正确
+  - CA fingerprint 不一致 → CA 不匹配（RC-012 mTLS 场景）
+  - CA 无法解析 → CA 数据损坏或格式错误
+- **版本差异**: 无
+
+**Step D5.3**: 证书 SAN (Subject Alternative Name) 匹配验证
+- **命令**:
+  ```bash
+  # 检查服务端证书的 SAN
+  kubectl get secret <server-tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | \
+    openssl x509 -noout -ext subjectAltName
+  
+  # 检查客户端证书的 SAN
+  kubectl get secret <client-tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | \
+    openssl x509 -noout -ext subjectAltName
+  
+  # 检查连接时使用的主机名是否在 SAN 中
+  echo "Connecting to: <service>.<namespace>.svc.cluster.local"
+  kubectl get secret <server-tls-secret> -n <namespace> -o jsonpath='{.data.tls\.crt}' | base64 -d | \
+    openssl x509 -noout -ext subjectAltName | grep -i "<service>"
+  ```
+- **超时**: 10s
+- **预期输出模式**: SAN 列表
+- **判断规则**:
+  - 连接主机名在 SAN 中 → SAN 匹配正确
+  - 连接主机名不在 SAN 中 → SAN 不匹配（RC-012）
+  - 无 SAN 扩展 → 证书缺少 SAN，可能导致 TLS 验证失败
+  - SAN 包含 IP 但连接使用域名（或反之）→ 类型不匹配
+- **版本差异**: 无
+
+**Step D5.4**: TLS 版本协商检查
+- **命令**:
+  ```bash
+  # 检查服务端支持的 TLS 版本
+  echo | openssl s_client -connect <host>:<port> -servername <host> 2>/dev/null | grep "Protocol"
+  
+  # 强制使用 TLS 1.2 测试
+  echo | openssl s_client -connect <host>:<port> -tls1_2 2>&1 | grep -E "Cipher|Protocol|error"
+  
+  # 强制使用 TLS 1.3 测试
+  echo | openssl s_client -connect <host>:<port> -tls1_3 2>&1 | grep -E "Cipher|Protocol|error"
+  
+  # 列出服务端支持的密码套件
+  nmap --script ssl-enum-ciphers -p <port> <host> 2>/dev/null | grep -A 20 "TLSv1"
+  ```
+- **超时**: 30s
+- **预期输出模式**: TLS 版本和密码套件
+- **判断规则**:
+  - TLS 1.2 和 1.3 均支持 → 兼容性良好
+  - 仅支持 TLS 1.3 但客户端仅支持 TLS 1.2 → 版本不兼容
+  - `wrong version number` 错误 → TLS 版本不匹配
+  - `no cipher` 错误 → 无共同支持的密码套件
+- **版本差异**: 无
+
+---
+
 ## 5. 根因分类
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
@@ -683,6 +942,9 @@ kubectl 不可用?
 | RC-010 | **前端代理（front-proxy）证书过期** — API aggregation layer 使用的 front-proxy-client 证书过期，导致 metrics-server、自定义 API server 等聚合 API 不可用 | 低 | D2.4 front-proxy-client 证书 notAfter 已过；metrics-server 返回错误 | certificate-fta: BE-front-proxy-expired |
 | RC-011 | **ServiceAccount token signing key 过期或不匹配** — SA token 签名密钥被替换但 apiserver 未加载新密钥，导致已签发的 SA token 验证失败 | 低 | Pod 中的 ServiceAccount token 认证失败；apiserver 日志出现 `token verification failed` | certificate-fta: BE-sa-key-mismatch |
 | RC-012 | **证书 SAN 不匹配（IP/域名变更后）** — 集群节点 IP 或域名变更后，原有证书的 SAN (Subject Alternative Name) 中不包含新 IP/域名，导致 TLS 连接验证失败 | 低 | D2.1 SAN 不包含当前 IP/域名；TLS 握手返回 `x509: certificate is valid for ..., not ...` | certificate-fta: BE-san-mismatch |
+| RC-013 | **cert-manager 自动轮转失败** — cert-manager 的 Certificate 资源未能在 renewBefore 时间内完成轮转。常见原因：Issuer 不可用、DNS-01 challenge 失败、Let's Encrypt Rate Limit、webhook validation 失败、Secret 权限不足等 | 中 | D4.1 Certificate Ready=False；D4.2 CertificateRequest 失败；D4.4 cert-manager 日志有 error；D4.5 Challenge/Order 处于 pending/invalid 状态 | certificate-fta: BE-certmanager-renewal-fail |
+| RC-014 | **mTLS 配置不匹配** — 双向 TLS 认证场景下，客户端证书未签发、CA 不受信任、证书 SAN 不匹配等。表现为 TLS 握手失败，`certificate verify failed` 或 `unknown ca` 错误 | 中 | D5.1 mTLS 连接测试失败；D5.2 CA bundle 指纹不一致；D5.3 证书 SAN 未包含连接主机名；服务端日志 `peer did not return a certificate` | certificate-fta: BE-mtls-mismatch |
+| RC-015 | **OCSP Stapling / CRL 检查失败** — 证书吸收状态检查（OCSP）失败或证书撤销列表（CRL）下载失败，导致 TLS 握手延迟或失败。OCSP responder 不可达、CRL 文件过大或过期是常见原因 | 低 | `openssl s_client -status` 显示 OCSP 无响应或错误；TLS 握手延迟 >5s；应用日志 `OCSP response verify failed` 或 `unable to get certificate CRL` | certificate-fta: BE-ocsp-crl-fail |
 
 ---
 
@@ -933,6 +1195,65 @@ kubectl 不可用?
   kubectl apply -f /tmp/webhook-backup.yaml
   ```
 
+#### REM-012: cert-manager 证书手动续期
+- **适用根因**: RC-004, RC-005, RC-013
+- **影响说明**: 手动触发 cert-manager 证书续期。如果 Issuer 配置仍然错误，续期仍将失败。该操作会替换现有 TLS Secret，可能导致使用该证书的应用短暂中断（直到应用 reload 新证书）。
+- **审批提示**: "建议手动触发 cert-manager Certificate `<namespace>/<cert-name>` 的证书续期。续期成功后 TLS Secret 将被更新，依赖该证书的应用可能需要重新加载。是否批准？"
+- **前置检查**:
+  ```bash
+  # 确认 Issuer 当前状态正常
+  kubectl get clusterissuer <issuer-name> -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}'
+  # 或
+  kubectl get issuer <issuer-name> -n <namespace> -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}'
+  # 预期: True
+  
+  # 检查当前 Certificate 状态
+  kubectl get certificate <cert-name> -n <namespace> -o yaml
+  
+  # 备份当前 Secret
+  kubectl get secret <tls-secret-name> -n <namespace> -o yaml > /tmp/cert-backup-<cert-name>-$(date +%Y%m%d%H%M%S).yaml
+  ```
+- **执行命令**:
+  ```bash
+  # 方法 1（推荐）: 使用 cmctl CLI 触发续期
+  cmctl renew <cert-name> -n <namespace>
+  
+  # 方法 2: 通过删除 Secret 触发重新签发
+  kubectl delete secret <tls-secret-name> -n <namespace>
+  # cert-manager 会检测到 Secret 缺失并重新签发
+  
+  # 方法 3: 通过添加 annotation 触发续期
+  kubectl annotate certificate <cert-name> -n <namespace> \
+    cert-manager.io/renew-time="$(date -u +%Y-%m-%dT%H:%M:%SZ)" --overwrite
+  
+  # 等待 cert-manager 完成签发
+  kubectl get certificate <cert-name> -n <namespace> -w
+  ```
+- **后置验证**:
+  ```bash
+  # 确认 Certificate 状态恢复为 Ready
+  kubectl get certificate <cert-name> -n <namespace>
+  # 预期: READY=True
+  
+  # 确认新 Secret 已创建且证书有效
+  kubectl get secret <tls-secret-name> -n <namespace> -o jsonpath='{.data.tls\.crt}' | \
+    base64 -d | openssl x509 -noout -dates
+  # 预期: notAfter 为新的到期时间
+  
+  # 检查 CertificateRequest 状态
+  kubectl get certificaterequest -n <namespace> -l cert-manager.io/certificate-name=<cert-name> --sort-by=.metadata.creationTimestamp | tail -1
+  # 预期: READY=True, APPROVED=True
+  
+  # 如果是 Ingress TLS，验证外部访问
+  echo | openssl s_client -connect <host>:443 -servername <host> 2>/dev/null | openssl x509 -noout -dates
+  # 预期: 显示新证书的有效期（可能需要等待 Ingress Controller reload）
+  ```
+- **回滚命令**:
+  ```bash
+  # 从备份恢复旧 Secret
+  kubectl apply -f /tmp/cert-backup-<cert-name>-<timestamp>.yaml
+  ```
+
 ---
 
 ### 6.3 🔴 高风险（Agent 仅提供指导，人工执行）
@@ -1109,9 +1430,99 @@ kubectl 不可用?
   systemctl restart kubelet
   ```
 
+#### REM-013: mTLS CA 信任链修复
+- **适用根因**: RC-014, RC-015
+- **影响说明**: 更新 mTLS 场景下的 CA bundle。如果更新不当，可能导致所有依赖 mTLS 的服务间通信完全中断。更新后需要重启所有依赖该 CA 的服务 Pod。
+- **操作步骤**:
+  1. **备份所有相关证书和 Secret**:
+     ```bash
+     # 备份客户端 CA bundle
+     kubectl get configmap <client-ca-bundle> -n <namespace> -o yaml > /tmp/client-ca-bundle-backup.yaml
+     
+     # 备份服务端 TLS Secret
+     kubectl get secret <server-tls-secret> -n <namespace> -o yaml > /tmp/server-tls-backup.yaml
+     
+     # 如果涉及多个 namespace，批量备份
+     for ns in <ns1> <ns2> <ns3>; do
+       kubectl get secrets -n $ns -l app=<app-name> -o yaml > /tmp/${ns}-secrets-backup.yaml
+     done
+     ```
+  2. **获取正确的 CA 证书**:
+     ```bash
+     # 从权威来源获取 CA 证书
+     # 如果是 cert-manager 管理的 CA:
+     kubectl get secret <ca-secret-name> -n cert-manager -o jsonpath='{.data.ca\.crt}' | base64 -d > /tmp/correct-ca.crt
+     
+     # 或者从 Issuer 配置获取:
+     kubectl get clusterissuer <issuer-name> -o jsonpath='{.spec.ca.secretName}'
+     
+     # 验证 CA 证书有效
+     openssl x509 -in /tmp/correct-ca.crt -noout -dates -subject
+     ```
+  3. **更新客户端 CA bundle ConfigMap**:
+     ```bash
+     # 更新 ConfigMap
+     kubectl create configmap <client-ca-bundle> -n <namespace> \
+       --from-file=ca.crt=/tmp/correct-ca.crt \
+       --dry-run=client -o yaml | kubectl apply -f -
+     
+     # 或使用 patch
+     CA_B64=$(cat /tmp/correct-ca.crt | base64 -w0)
+     kubectl patch configmap <client-ca-bundle> -n <namespace> \
+       --type='json' -p="[{\"op\": \"replace\", \"path\": \"/data/ca.crt\", \"value\": \"$(cat /tmp/correct-ca.crt)\"}]"
+     ```
+  4. **更新服务端证书（如果需要）**:
+     ```bash
+     # 如果服务端证书未由新 CA 签发，需要重新签发
+     # 对于 cert-manager 管理的证书:
+     cmctl renew <server-cert-name> -n <namespace>
+     
+     # 等待签发完成
+     kubectl get certificate <server-cert-name> -n <namespace> -w
+     ```
+  5. **重启依赖 Pod 以加载新证书**:
+     ```bash
+     # 重启客户端应用
+     kubectl rollout restart deployment/<client-app> -n <client-namespace>
+     
+     # 重启服务端应用
+     kubectl rollout restart deployment/<server-app> -n <server-namespace>
+     
+     # 等待滚动更新完成
+     kubectl rollout status deployment/<client-app> -n <client-namespace> --timeout=300s
+     kubectl rollout status deployment/<server-app> -n <server-namespace> --timeout=300s
+     ```
+  6. **验证 mTLS 连接**:
+     ```bash
+     # 从客户端 Pod 测试 mTLS 连接
+     kubectl exec <client-pod> -n <client-namespace> -- \
+       curl -v --cacert /path/to/ca.crt \
+       --cert /path/to/client.crt \
+       --key /path/to/client.key \
+       https://<server-service>.<server-namespace>.svc.cluster.local:<port>/healthz
+     # 预期: TLS 握手成功，HTTP 200
+     ```
+- **安全检查**:
+  - 确认新 CA 证书有效且未过期
+  - 确认所有现有服务端证书由新 CA 签发（或由受信任的 CA 链签发）
+  - 在非生产环境验证 CA 更新流程
+  - 确认滚动重启策略（maxUnavailable）不会导致服务完全不可用
+- **回滚方案**:
+  ```bash
+  # 恢复旧 CA bundle
+  kubectl apply -f /tmp/client-ca-bundle-backup.yaml
+  
+  # 恢复旧 TLS Secret
+  kubectl apply -f /tmp/server-tls-backup.yaml
+  
+  # 重启 Pod 以加载旧证书
+  kubectl rollout restart deployment/<client-app> -n <client-namespace>
+  kubectl rollout restart deployment/<server-app> -n <server-namespace>
+  ```
+
 ---
 
-### 6.4 ⚫ 严重（需高级 SRE 审批）
+### 6.4 ⬤ 严重（需高级 SRE 审批）
 
 #### REM-010: CA 证书轮换
 - **适用根因**: RC-006

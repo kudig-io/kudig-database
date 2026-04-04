@@ -1075,6 +1075,9 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 | [17 - 核心概念与基础操作](./17-agentscope-core-concepts.md) | State/Message/Agent 等核心抽象 |
 | [18 - 工具系统与 MCP 集成](./18-agentscope-tool-system.md) | Toolkit 注册、MCP 集成、自定义工具 |
 | [22 - 生产部署与可观测性](./22-agentscope-production-deployment.md) | Studio 部署、Runtime、OTel Tracing |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | SOUL.md/SKILL.md 分层设计——Harness 架构中的 Skill 层定位 |
+| [43 - OpenClaw File-First 架构集成](./43-openclaw-framework-integration.md) | SKILL.md 与 OpenClaw 完整 7 文件体系的融合方案 |
+| [openclaw-workspace/](./openclaw-workspace/) | 完整的 K8S 运维 Agent 工作区，含 SKILL.md 实例 |
 | [官方 Agent Skill 教程](https://doc.agentscope.io/tutorial/task_agent_skill.html) | Anthropic Agent Skill 原始文档 |
 | [AgentScope Studio GitHub](https://github.com/agentscope-ai/agentscope-studio) | Studio 源码与 API 协议 |
 | [AgentScope Runtime WebUI](https://runtime.agentscope.io/zh/webui.html) | Runtime WebUI 使用指南 |

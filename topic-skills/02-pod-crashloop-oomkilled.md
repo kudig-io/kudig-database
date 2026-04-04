@@ -609,6 +609,131 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 ---
 
+### Phase 4: 应用级内存分析
+
+> **触发条件**: 确认 OOMKilled（Exit Code 137 + Reason: OOMKilled）且需要深入分析应用内存使用模式
+> **目标**: 通过应用级别的 memory profiling 定位内存问题根因
+> **前提**: 应用需要暴露 profiling 端点或支持 profiling 工具
+> **预计耗时**: 10-30 分钟
+
+**Step D4.1**: Go 应用 — pprof heap profiling
+- **前提**: Go 应用已启用 `net/http/pprof` 或 runtime pprof
+- **命令**:
+  ```bash
+  # 通过 port-forward 访问 pprof 端点
+  kubectl port-forward <pod> -n <namespace> 6060:6060 &
+
+  # 采集 heap profile
+  go tool pprof http://localhost:6060/debug/pprof/heap
+
+  # 在 pprof 交互式界面中：
+  # top 20          -- 查看内存占用最高的 20 个函数
+  # list <func>     -- 查看具体函数的内存分配
+  # web             -- 生成可视化图表（需要 graphviz）
+
+  # 或者直接下载 profile 文件
+  curl -o heap.pb.gz http://localhost:6060/debug/pprof/heap
+  go tool pprof heap.pb.gz
+
+  # 对比两个时间点的 heap（定位内存增长）
+  go tool pprof -base heap1.pb.gz heap2.pb.gz
+  ```
+- **判断规则**:
+  - inuse_space 持续增长且不下降 → 内存泄漏
+  - alloc_space 很高但 inuse_space 正常 → 内存分配频繁但有正常 GC、可能需要设置 GOMEMLIMIT
+  - 某个函数占用内存异常高 → 检查该函数的数据结构和缓存逻辑
+  - goroutine 数量异常高 → goroutine 泄漏，检查 `/debug/pprof/goroutine`
+
+**Step D4.2**: Java 应用 — JFR/jmap heap dump
+- **前提**: 容器内有 JDK 工具（jcmd/jmap），或可以使用 ephemeral debug container
+- **命令**:
+  ```bash
+  # 方式 1: 使用 jcmd 生成 heap dump
+  kubectl exec <pod> -n <namespace> -- jcmd 1 GC.heap_dump /tmp/heap.hprof
+
+  # 将 heap dump 复制出来
+  kubectl cp <namespace>/<pod>:/tmp/heap.hprof ./heap.hprof
+
+  # 方式 2: 使用 jmap（如果 jcmd 不可用）
+  kubectl exec <pod> -n <namespace> -- jmap -dump:format=b,file=/tmp/heap.hprof 1
+
+  # 方式 3: 启用 JFR 进行实时 profiling
+  kubectl exec <pod> -n <namespace> -- jcmd 1 JFR.start duration=60s filename=/tmp/recording.jfr
+  # 等待 60 秒
+  kubectl cp <namespace>/<pod>:/tmp/recording.jfr ./recording.jfr
+
+  # 分析工具: 
+  # - Eclipse MAT (Memory Analyzer Tool) 分析 .hprof
+  # - JDK Mission Control 分析 .jfr
+  # - VisualVM
+
+  # 快速检查堆内存概览
+  kubectl exec <pod> -n <namespace> -- jcmd 1 GC.heap_info
+  ```
+- **判断规则**:
+  - Old Gen 使用率持续高且 Full GC 频繁 → 内存泄漏或 -Xmx 设置过低
+  - Metaspace 增长异常 → 类加载泄漏（常见于动态类加载场景）
+  - 大量相同类型对象 → 缓存未清理或集合类未释放
+  - byte[] 或 char[] 占用异常高 → 字符串或二进制数据缓存问题
+  - **Java Heap OOM vs Container OOM**: 
+    - `java.lang.OutOfMemoryError: Java heap space` → 调整 -Xmx 或优化堆使用
+    - Container OOMKilled 无 Java 堆错误 → Native memory / Direct buffer / Metaspace 问题
+
+**Step D4.3**: Python 应用 — tracemalloc / memory_profiler
+- **前提**: 应用代码中已集成 tracemalloc 或可以注入 profiler
+- **命令**:
+  ```bash
+  # 方式 1: 如果应用已启用 tracemalloc，连接到应用的调试接口
+  # 通常需要应用提供 HTTP 端点来获取 tracemalloc snapshot
+
+  # 方式 2: 使用 py-spy 进行内存采样（在容器内或 debug container）
+  kubectl exec <pod> -n <namespace> -- pip install py-spy
+  kubectl exec <pod> -n <namespace> -- py-spy record -o profile.svg --pid 1
+
+  # 方式 3: 使用 memory_profiler（需要重启应用）
+  # 在 Dockerfile 中添加: pip install memory_profiler
+  # 运行: python -m memory_profiler your_script.py
+
+  # 方式 4: 检查进程内存映射
+  kubectl exec <pod> -n <namespace> -- cat /proc/1/smaps | grep -E "^(Size|Rss|Pss|Shared|Private)" | head -40
+  ```
+- **判断规则**:
+  - Rss 持续增长 → 内存泄漏
+  - 某个模块/函数分配内存异常高 → 检查该模块的数据结构
+  - 大量小对象 → 考虑使用 `__slots__` 或优化数据结构
+  - C 扩展内存泄漏 → 需要使用 valgrind 等工具
+
+**Step D4.4**: Node.js 应用 — --inspect + Chrome DevTools / clinic.js
+- **前提**: Node.js 应用启用了 `--inspect` 标志或可以修改启动参数
+- **命令**:
+  ```bash
+  # 方式 1: 使用 --inspect 启动 Node.js并连接 Chrome DevTools
+  # 确保应用以 node --inspect=0.0.0.0:9229 启动
+  kubectl port-forward <pod> -n <namespace> 9229:9229 &
+  # 在 Chrome 中访问 chrome://inspect，连接到 localhost:9229
+  # 使用 Memory tab 进行 heap snapshot
+
+  # 方式 2: 使用 clinic.js 进行综合诊断
+  kubectl exec <pod> -n <namespace> -- npm install -g clinic
+  kubectl exec <pod> -n <namespace> -- clinic heapprofiler -- node /app/index.js
+
+  # 方式 3: 生成 heap snapshot
+  kubectl exec <pod> -n <namespace> -- node -e "require('v8').writeHeapSnapshot('/tmp/heap.heapsnapshot')"
+  kubectl cp <namespace>/<pod>:/tmp/heap.heapsnapshot ./heap.heapsnapshot
+  # 在 Chrome DevTools 的 Memory tab 中加载分析
+
+  # 方式 4: 检查 V8 内存统计
+  kubectl exec <pod> -n <namespace> -- node -e "console.log(process.memoryUsage())"
+  ```
+- **判断规则**:
+  - heapUsed 持续增长 → 内存泄漏
+  - external 异常高 → Native 模块内存问题（如 Buffer）
+  - arrayBuffers 异常高 → 二进制数据处理问题
+  - 大量 Detached DOM 节点 → 前端渲染内存泄漏
+  - EventEmitter listener 堆积 → 事件监听器未移除
+
+---
+
 ## 5. 根因分类
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
@@ -625,6 +750,8 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 | RC-010 | Init 容器失败阻塞主容器启动 / Init container failure blocking main container | 中 | D1.4 init container 状态为 CrashLoopBackOff；主容器 state 为 PodInitializing 或 Blocked | pod-fta:BE-INIT-FAIL |
 | RC-011 | Java 堆内存 vs 容器内存限制不匹配 / Java heap vs container memory mismatch | 中 | D2.3 Java 应用 -Xmx 接近 limits.memory；Exit Code 137 + 日志中无 OOM 但容器级 OOMKilled | pod-fta:BE-JAVA-HEAP |
 | RC-012 | PID 1 僵尸进程问题 / PID 1 zombie process issue | 低 | D3.1 `ps aux` 显示大量 zombie/defunct 进程；容器无 init 系统（如 tini/dumb-init） | pod-fta:BE-PID1-ZOMBIE |
+| RC-013 | **cgroup v2 内存限制行为差异** — cgroup v1 与 v2 在内存会计、swap 处理上的差异导致意外的 OOM 行为 | ~6% | 节点使用 cgroup v2（检查 `/sys/fs/cgroup/cgroup.controllers` 是否存在）；内存限制位于 `memory.max` 而非 `memory.limit_in_bytes`；swap 行为受 `memory.swap.max` 控制 | pod-fta:BE-CGROUP-V2 |
+| RC-014 | **preStop Hook 执行超时导致 SIGKILL** — preStop hook 执行时间超过 `terminationGracePeriodSeconds`，导致容器被强制杀死 | ~5% | Pod 配置了 preStop hook；Exit Code 137（SIGKILL）但 Reason 不是 OOMKilled；Events 中出现 `Killing` 且时间与 `terminationGracePeriodSeconds` 一致；日志显示 preStop 未完成 | pod-fta:BE-PRESTOP-TIMEOUT |
 
 ---
 
@@ -846,6 +973,71 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
   ```bash
   kubectl scale deployment <deployment> -n <namespace> --replicas=<original-count>
   ```
+
+#### REM-010: 基于 Memory Profiling 的内存泄漏修复
+- **适用根因**: RC-003（应用内存泄漏）
+- **风险等级**: 🟡 中
+- **影响说明**: 根据 profiling 结果调整应用配置或资源限制。可能需要重启应用或修改代码。短期内可以通过调整 limits 缓解，但根本修复需要应用层面修改。
+- **审批提示**: "已通过 profiling 确认内存泄漏模式，建议：1) 临时增大 memory limits 到 `<new-limit>`；2) 安排应用团队修复泄漏点 `<leak-location>`。是否批准？"
+- **前置检查**:
+  ```bash
+  # 确认内存增长模式（持续增长 vs 突增）
+  # 查看最近 24h 的内存趋势（需要 Prometheus）
+  # PromQL: container_memory_working_set_bytes{pod="<pod>", container="<container>"}
+
+  # 确认 profiling 结果
+  # 确保已通过 D4.1-D4.4 进行了应用级内存分析
+  # 记录关键发现：泄漏点、增长速率、受影响的数据结构
+  ```
+- **执行命令**:
+  ```bash
+  # Step 1: 临时增大 memory limits（赠送时间给应用团队修复）
+  # 建议: 新 limit = 当前峰值内存 × 2（根据泄漏速率调整）
+  kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
+    {"op": "replace", "path": "/spec/template/spec/containers/0/resources/limits/memory", "value": "<new-limit>"},
+    {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/memory", "value": "<new-request>"}
+  ]'
+
+  # Step 2: 对于 Go 应用，设置 GOMEMLIMIT 限制 GC 压力
+  kubectl patch deployment <deployment> -n <namespace> --type='json' -p='[
+    {"op": "add", "path": "/spec/template/spec/containers/0/env/-", "value": {"name": "GOMEMLIMIT", "value": "<soft-limit>"}}
+  ]'
+
+  # Step 3: 对于 Java 应用，调整 JVM 参数
+  # 在 JAVA_OPTS 中设置:
+  # -Xmx<heap-size> -Xms<heap-size> -XX:MaxMetaspaceSize=<meta-size>
+  # 终极缓解: 启用 NativeMemoryTracking 排查 native 内存
+  # -XX:NativeMemoryTracking=summary
+
+  # Step 4: 记录修复工单，通知应用团队
+  # 包含: profiling 结果、泄漏点位置、建议的代码修复方向
+  ```
+- **后置验证**:
+  ```bash
+  # 等待新 Pod 启动
+  kubectl rollout status deployment/<deployment> -n <namespace> --timeout=180s
+
+  # 观察 24h 内存趋势
+  # 使用 Prometheus/Grafana 监控 container_memory_working_set_bytes
+  # 预期: 内存使用率应小于新 limits 的 70%
+
+  # 确认无再次 OOM
+  kubectl get events -n <namespace> --field-selector reason=OOMKilled --sort-by='.lastTimestamp' | tail -5
+
+  # 检查容器重启次数
+  kubectl get pod -n <namespace> -l <selector> -o custom-columns=NAME:.metadata.name,RESTARTS:.status.containerStatuses[0].restartCount
+  ```
+- **回滚命令**:
+  ```bash
+  kubectl rollout undo deployment/<deployment> -n <namespace>
+  ```
+- **长期修复建议**:
+  - 向应用团队提供 profiling 报告和建议的修复方向
+  - 对于 Go: 检查未关闭的 channel、goroutine 泄漏、全局缓存
+  - 对于 Java: 检查未关闭的资源（Connection、Stream）、集合类未清理
+  - 对于 Python: 检查循环引用、未关闭的文件句柄
+  - 对于 Node.js: 检查 EventEmitter 监听器、未释放的 Buffer
+  - 建议在 CI/CD 中集成内存泄漏检测（如 Go 的 goleak）
 
 ### 6.3 🔴 高风险（Agent 仅提供指导）
 

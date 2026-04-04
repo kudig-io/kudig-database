@@ -139,7 +139,12 @@ echo "- [核心知识域 (Domain 1-12)]()" >> "$OUTPUT_FILE"
 for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
     dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
-        process_directory "$dir" "  " >> "$OUTPUT_FILE"
+        subdirs=$(find "$dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+        if [[ "$subdirs" -gt 0 ]]; then
+            process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
+        else
+            process_directory "$dir" "  " >> "$OUTPUT_FILE"
+        fi
     fi
 done
 
@@ -151,8 +156,8 @@ echo "- [底层基础知识域 (Domain 13-17)]()" >> "$OUTPUT_FILE"
 for i in 13 14 15 16 17; do
     dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
-        # domain-17 有子目录，需要递归处理
-        if [[ "$i" == "17" ]]; then
+        subdirs=$(find "$dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+        if [[ "$subdirs" -gt 0 ]]; then
             process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
         else
             process_directory "$dir" "  " >> "$OUTPUT_FILE"
@@ -168,7 +173,12 @@ echo "- [企业级运维专题 (Domain 18+)]()" >> "$OUTPUT_FILE"
 for i in $(seq 18 99); do
     dir=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -name "domain-$i-*" | head -n 1)
     if [[ -d "$dir" ]]; then
-        process_directory "$dir" "  " >> "$OUTPUT_FILE"
+        subdirs=$(find "$dir" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
+        if [[ "$subdirs" -gt 0 ]]; then
+            process_directory_recursive "$dir" "  " >> "$OUTPUT_FILE"
+        else
+            process_directory "$dir" "  " >> "$OUTPUT_FILE"
+        fi
     fi
 done
 
@@ -195,3 +205,31 @@ echo "" >> "$OUTPUT_FILE"
 echo "SUMMARY.md 生成完成: $OUTPUT_FILE"
 echo "文件数统计:"
 grep -c "\.md)" "$OUTPUT_FILE" || echo "0"
+
+# UTF-8 编码校验：检查 SUMMARY.md 中引用的所有文件
+echo ""
+echo "正在校验 UTF-8 编码..."
+python3 - "$GITBOOK_ROOT/src" "$OUTPUT_FILE" << 'PYEOF'
+import sys, re
+src_dir = sys.argv[1]
+summary_file = sys.argv[2]
+with open(summary_file, 'r', encoding='utf-8') as f:
+    content = f.read()
+paths = re.findall(r'\(([^)]+\.md)\)', content)
+errors = []
+for p in paths:
+    full = f"{src_dir}/{p}"
+    try:
+        with open(full, 'r', encoding='utf-8') as fh:
+            fh.read()
+    except FileNotFoundError:
+        pass
+    except UnicodeDecodeError as e:
+        errors.append(f"{p}: {e}")
+if errors:
+    for err in errors:
+        print(f"\u26a0\ufe0f  UTF-8 \u7f16\u7801\u9519\u8bef: {err}")
+    print(f"\u26a0\ufe0f  \u53d1\u73b0 {len(errors)} \u4e2a UTF-8 \u7f16\u7801\u9519\u8bef\uff0c\u8bf7\u624b\u52a8\u4fee\u590d\u540e\u91cd\u65b0\u6784\u5efa")
+else:
+    print("\u2705 \u6240\u6709\u6587\u4ef6 UTF-8 \u7f16\u7801\u6821\u9a8c\u901a\u8fc7")
+PYEOF

@@ -1,6 +1,6 @@
 # Domain 5: Networking 网络
 
-> **文档数量**: 37 篇 | **最后更新**: 2026-02 | **状态**: 生产环境就绪 (专家级审查完成)
+> **文档数量**: 38 篇 | **最后更新**: 2026-04 | **状态**: 生产环境就绪 (专家级审查完成)
 
 ## 目录结构
 
@@ -54,6 +54,7 @@
 - [35-gateway-api-overview.md](35-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
 - [36-api-gateway-patterns.md](36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
 - [37-terway-resources-crud-operations.md](37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
+- [38-terway-gc-mechanism.md](38-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
 
 > **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-98-cloud-native-api-gateway)。
 
@@ -101,14 +102,14 @@
 ## 质量保证检查清单
 
 ### ✅ 内容完整性检查
-- [x] 所有37个文档均已创建并命名规范
+- [x] 所有38个文档均已创建并命名规范
 - [x] 核心文档包含生产环境专家级内容
 - [x] 提供实用的故障诊断脚本
 - [x] 包含高可用设计模式和配置
 - [x] 涵盖安全加固和最佳实践
 
 ### ✅ 结构组织检查
-- [x] 文件按逻辑顺序编号 01-37
+- [x] 文件按逻辑顺序编号 01-38
 - [x] 目录结构清晰分类
 - [x] 学习路径建议合理
 - [x] 内容层次分明
@@ -130,6 +131,9 @@
 - ✅ 优化容量规划与监控配置
 - ✅ 建立完整的文档体系结构
 - ✅ 新增 Terway 实例 CRUD 操作指南 (37)
+
+### 2026-04
+- ✅ 新增 Terway GC (垃圾回收) 机制详解 (38)
 
 ---
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

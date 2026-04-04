@@ -699,6 +699,223 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 ---
 
+### Phase 4: NodeLocal DNSCache 完整排查（如已部署）
+
+> **目标**: 深入排查 NodeLocal DNSCache 的运行状态、上游连接和缓存行为，确认是否为 DNS 故障根因。
+> **预计耗时**: 3-5 分钟
+> **前置条件**: 已确认集群部署了 NodeLocal DNSCache（D2.6 显示 DaemonSet 存在）
+
+**Step D4.1**: 检查 NodeLocal DNSCache DaemonSet 状态
+- **命令**:
+  ```bash
+  # 获取 NodeLocal DNSCache DaemonSet 状态
+  kubectl -n kube-system get ds node-local-dns -o wide
+  
+  # 检查各节点上的 NodeLocal DNS Pod 状态
+  kubectl -n kube-system get pods -l k8s-app=node-local-dns -o wide --sort-by='{.spec.nodeName}'
+  
+  # 查看 DaemonSet 的滚动更新状态
+  kubectl -n kube-system rollout status ds/node-local-dns
+  ```
+- **超时**: 10s
+- **预期输出模式**: DaemonSet 显示 DESIRED = CURRENT = READY
+- **判断规则**:
+  - READY 数量等于 DESIRED → NodeLocal DNS 在所有目标节点上运行正常
+  - READY 数量少于 DESIRED → 部分节点上的 NodeLocal DNS Pod 不健康，检查具体 Pod 状态和日志
+  - READY = 0 → NodeLocal DNS 完全不可用，所有 DNS 查询将 fallback 到 CoreDNS（如果配置正确）
+  - Pod 状态为 `CrashLoopBackOff` → 检查 Pod 日志确认崩溃原因
+- **版本差异**:
+  - **[v1.28+]**: NodeLocal DNSCache 支持 IPv6 和双栈配置
+  - **[v1.30+]**: 改进的健康检查机制，支持更细粒度的就绪探针
+
+**Step D4.2**: 检查本地 DNS 缓存是否生效
+- **命令**:
+  ```bash
+  # 从 Pod 中测试 NodeLocal DNS 链路本地地址 169.254.20.10
+  kubectl exec -it <pod> -- nslookup kubernetes.default 169.254.20.10
+  
+  # 测试外部域名解析
+  kubectl exec -it <pod> -- nslookup google.com 169.254.20.10
+  
+  # 检查 Pod 的 resolv.conf 是否指向 NodeLocal DNS
+  kubectl exec -it <pod> -- cat /etc/resolv.conf | head -3
+  ```
+- **超时**: 15s
+- **预期输出模式**: nslookup 返回正确的 IP 地址；resolv.conf 中 nameserver 为 169.254.20.10
+- **判断规则**:
+  - 通过 169.254.20.10 解析成功 → NodeLocal DNS 工作正常
+  - 通过 169.254.20.10 解析失败但直接访问 CoreDNS ClusterIP 成功 → NodeLocal DNS 本身有问题（RC-007）
+  - resolv.conf 指向 169.254.20.10 但 NodeLocal DNS Pod 不存在 → DNS 将完全失败
+  - resolv.conf 未指向 169.254.20.10 → kubelet 配置未更新，Pod 仍使用 CoreDNS
+- **版本差异**: 无
+
+**Step D4.3**: 检查 NodeLocal DNSCache 与 CoreDNS 的 upstream 连接
+- **命令**:
+  ```bash
+  # 检查 NodeLocal DNS ConfigMap 中的 upstream 配置
+  kubectl -n kube-system get cm node-local-dns -o yaml | grep -A 20 "Corefile"
+  
+  # 查看 NodeLocal DNS Pod 日志，关注 upstream 连接错误
+  kubectl -n kube-system logs -l k8s-app=node-local-dns --tail=100 | grep -i "upstream\|forward\|error\|timeout"
+  
+  # 从 NodeLocal DNS Pod 中测试到 CoreDNS 的连通性
+  NODE_LOCAL_POD=$(kubectl -n kube-system get pods -l k8s-app=node-local-dns -o jsonpath='{.items[0].metadata.name}')
+  kubectl -n kube-system exec $NODE_LOCAL_POD -- nslookup kubernetes.default <kube-dns-clusterip>
+  ```
+- **超时**: 15s
+- **预期输出模式**: Corefile 配置和日志输出
+- **判断规则**:
+  - 日志包含 `i/o timeout` 指向 CoreDNS IP → NodeLocal DNS 无法连接 CoreDNS（RC-007）
+  - ConfigMap 中 `__PILLAR__CLUSTER__DNS__` 未被替换 → 部署配置错误
+  - 日志包含 `no upstream` → upstream 配置缺失
+  - 无错误日志且 upstream 测试成功 → NodeLocal DNS 到 CoreDNS 链路正常
+- **版本差异**: 无
+
+**Step D4.4**: 验证 iptables/ipvs 劫持规则（169.254.20.10 链路完整性）
+- **命令**:
+  ```bash
+  # SSH 到节点检查 iptables 规则（iptables 模式）
+  ssh <node-ip> "iptables-save | grep 169.254.20.10"
+  
+  # 检查 ipvs 规则（ipvs 模式）
+  ssh <node-ip> "ipvsadm -ln | grep 169.254.20.10"
+  
+  # 验证链路本地地址是否在节点上存在
+  ssh <node-ip> "ip addr show | grep 169.254.20.10"
+  ```
+- **超时**: 10s
+- **预期输出模式**: iptables/ipvs 规则和 IP 地址配置
+- **判断规则**:
+  - 169.254.20.10 地址存在于节点 dummy 接口 → 链路本地地址配置正确
+  - 169.254.20.10 地址不存在 → NodeLocal DNS 未正确设置链路本地地址（RC-007）
+  - iptables/ipvs 规则将 169.254.20.10:53 流量正确路由 → 劫持规则正常
+  - 无相关规则 → kube-proxy 或 NodeLocal DNS 部署异常
+- **版本差异**:
+  - **[v1.29+]**: nftables 模式下需使用 `nft list ruleset | grep 169.254.20.10` 检查规则
+  - **[v1.32+]**: nftables 模式 GA，iptables 命令可能无法显示规则
+
+**Step D4.5**: 检查缓存命中率与 TTL 配置优化
+- **命令**:
+  ```bash
+  # 获取 NodeLocal DNS metrics（如果启用了 Prometheus metrics）
+  NODE_LOCAL_POD=$(kubectl -n kube-system get pods -l k8s-app=node-local-dns -o jsonpath='{.items[0].metadata.name}')
+  kubectl -n kube-system exec $NODE_LOCAL_POD -- wget -qO- http://localhost:9253/metrics 2>/dev/null | grep -E "coredns_cache_hits_total|coredns_cache_misses_total"
+  
+  # 检查 NodeLocal DNS 的 cache 配置
+  kubectl -n kube-system get cm node-local-dns -o yaml | grep -A 5 "cache"
+  ```
+- **超时**: 10s
+- **预期输出模式**: 缓存命中/未命中计数和 cache 配置
+- **判断规则**:
+  - cache_hits_total >> cache_misses_total → 缓存有效，减轻了 CoreDNS 压力
+  - cache_hits_total ≈ 0 → 缓存未生效，检查 cache 配置
+  - cache TTL 设置过低（<10s）→ 可能导致频繁缓存失效，增加 CoreDNS 负载
+  - cache TTL 设置过高（>3600s）→ 可能导致 DNS 记录更新延迟
+- **版本差异**: 无
+
+---
+
+### Phase 5: 自定义 DNS 策略排查
+
+> **目标**: 排查 Pod 的 dnsPolicy 和 dnsConfig 配置，确认是否为自定义配置导致的 DNS 解析问题。
+> **预计耗时**: 2-3 分钟
+
+**Step D5.1**: 检查 Pod dnsPolicy 设置
+- **命令**:
+  ```bash
+  # 获取受影响 Pod 的 dnsPolicy
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsPolicy}'
+  
+  # 批量检查 namespace 中所有 Pod 的 dnsPolicy
+  kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,DNS_POLICY:.spec.dnsPolicy,HOST_NETWORK:.spec.hostNetwork
+  
+  # 检查 Deployment 模板中的 dnsPolicy 配置
+  kubectl get deployment <deployment> -n <namespace> -o jsonpath='{.spec.template.spec.dnsPolicy}'
+  ```
+- **超时**: 10s
+- **预期输出模式**: dnsPolicy 值（ClusterFirst, Default, None, ClusterFirstWithHostNet）
+- **判断规则**:
+  - `ClusterFirst`（默认）→ 使用集群 DNS（CoreDNS），这是标准配置
+  - `Default` → 使用节点的 DNS 配置（/etc/resolv.conf），不使用集群 DNS（RC-012）
+  - `None` → 必须配合 dnsConfig 使用，否则 Pod 无 DNS 配置
+  - `ClusterFirstWithHostNet` → hostNetwork=true 的 Pod 使用集群 DNS
+  - hostNetwork=true 但 dnsPolicy=ClusterFirst → 错误配置，应使用 ClusterFirstWithHostNet（RC-012）
+- **版本差异**: 无
+
+**Step D5.2**: 分析 dnsPolicy 行为差异
+- **命令**:
+  ```bash
+  # 创建测试 Pod 比较不同 dnsPolicy 的行为
+  # ClusterFirst Pod
+  kubectl run dns-test-cf --image=busybox:1.36 --restart=Never --dry-run=client -o yaml -- sleep 3600 | \
+    kubectl apply -f - && sleep 5 && kubectl exec dns-test-cf -- cat /etc/resolv.conf
+  
+  # Default Policy Pod (需要手动指定 dnsPolicy: Default)
+  # 对比两者的 resolv.conf 差异
+  ```
+- **超时**: 30s
+- **预期输出模式**: 不同 dnsPolicy 下的 resolv.conf 内容对比
+- **判断规则**:
+  - **ClusterFirst**: nameserver 指向 kube-dns ClusterIP，search 包含 `svc.cluster.local`
+  - **Default**: nameserver 指向节点 DNS（如 10.0.0.2 或云提供商 DNS），无 svc.cluster.local search 域
+  - **None**: resolv.conf 完全由 dnsConfig 定义，如果 dnsConfig 为空则无 DNS 配置
+  - **ClusterFirstWithHostNet**: 与 ClusterFirst 相同，但用于 hostNetwork Pod
+- **版本差异**: 无
+- **清理**:
+  ```bash
+  kubectl delete pod dns-test-cf --force --grace-period=0
+  ```
+
+**Step D5.3**: 检查自定义 dnsConfig 配置
+- **命令**:
+  ```bash
+  # 获取 Pod 的完整 dnsConfig
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig}' | jq .
+  
+  # 检查 dnsConfig 中的自定义 nameservers
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig.nameservers[*]}'
+  
+  # 检查 dnsConfig 中的自定义 searches
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig.searches[*]}'
+  
+  # 检查 dnsConfig 中的 options
+  kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig.options}' | jq .
+  ```
+- **超时**: 10s
+- **预期输出模式**: dnsConfig 的 nameservers、searches、options 配置
+- **判断规则**:
+  - dnsConfig.nameservers 指向不可达的 DNS → 自定义 DNS 不可用（RC-012）
+  - dnsConfig.searches 缺少必要的搜索域 → 短域名无法解析
+  - dnsConfig.options 中 ndots 值过高或过低 → 影响解析行为（RC-005）
+  - dnsConfig 为空且 dnsPolicy=None → Pod 无 DNS 配置（RC-012）
+- **版本差异**: 无
+
+**Step D5.4**: 分析 ndots 配置对解析性能的影响
+- **命令**:
+  ```bash
+  # 获取当前 ndots 配置
+  kubectl exec <pod> -- cat /etc/resolv.conf | grep ndots
+  
+  # 使用 dig 观察不同 ndots 值下的查询行为
+  # ndots=5 (默认): 域名中 "." 少于 5 个时，先搜索 search 域
+  kubectl exec <pod> -- dig +search +showsearch api.example.com 2>&1 | head -30
+  
+  # 使用 FQDN（尾部带点）绕过 ndots
+  kubectl exec <pod> -- dig api.example.com. +short
+  ```
+- **超时**: 15s
+- **预期输出模式**: ndots 值和 DNS 查询序列
+- **判断规则**:
+  - ndots=5（默认）且应用大量访问外部域名 → 导致 4-5 次无效查询（RC-005），建议降低 ndots
+  - ndots=1 或 ndots=2 → 外部域名查询效率高，但短域名（如 `svc-name`）可能解析失败
+  - **优化建议**:
+    - ndots=2 + 应用使用 FQDN（如 `api.example.com.`）是最佳实践
+    - 或在 dnsConfig 中设置 ndots=2 + single-request-reopen
+  - 计算无效查询数: `(5 - 域名中的点数)` 次无效查询（对于 ndots=5）
+- **版本差异**: 无
+
+---
+
 ## 5. 根因分类
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
@@ -715,6 +932,8 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 | RC-010 | **Headless Service DNS 记录未更新** — Headless Service 的 DNS 记录未反映当前的 Ready Pod 列表，可能由于 Endpoints 更新延迟或 CoreDNS 的 kubernetes 插件缓存问题 | 低 | D2.9 Headless Service DNS 返回的 IP 与实际 Ready Pod 不一致；Endpoints 数量与 Pod 数量不匹配 | dns-fta: BE-headless-stale |
 | RC-011 | **CoreDNS 循环检测（loop plugin 触发）** — CoreDNS 的 `loop` 插件检测到 DNS 查询循环（通常因为 upstream DNS 指回了 CoreDNS 自身），触发 CoreDNS 崩溃以防止无限循环 | 低 | D2.1 日志包含 "Loop detected"；D2.2 Corefile 中 forward 指向的地址最终解析回 CoreDNS；D2.10 CoreDNS Pod 的 resolv.conf 指向 kube-dns ClusterIP | dns-fta: BE-dns-loop |
 | RC-012 | **Pod 的 dnsPolicy 设置错误** — Pod spec 中的 `dnsPolicy` 配置不正确（如 `Default` 替代了 `ClusterFirst`，或 `None` 未配套 `dnsConfig`），导致 Pod 无法使用集群 DNS | 低 | D1.4 resolv.conf 未指向 kube-dns ClusterIP；Pod spec 中 dnsPolicy 为 Default/None；同一 namespace 其他 Pod DNS 正常 | dns-fta: BE-dnspolicy-wrong |
+| RC-013 | **CoreDNS 插件链配置异常** — CoreDNS 的 Corefile 中插件配置错误，包括 forward 插件目标不可达、cache 过期配置不当、loop 检测误触发、或自定义插件加载失败，导致 DNS 解析异常 | ~6% | D2.2 Corefile 中插件配置异常；CoreDNS 日志中出现 `plugin/` 相关错误；`kubectl -n kube-system get cm coredns -o yaml` 显示配置错误；修正配置后问题恢复 | dns-fta: BE-plugin-chain-error |
+| RC-014 | **大规模集群 DNS QPS 压力** — 集群规模较大（>1000 Pod）或 DNS 查询负载峰值时，CoreDNS 资源不足导致 DNS 响应过慢或超时。症状包括 CoreDNS Pod CPU 持续 >80%、DNS 延迟 >100ms | ~5% | D2.4 CoreDNS CPU/内存使用接近 limits；CoreDNS metrics (`coredns_dns_requests_total`, `coredns_dns_response_rcode_count_total`) 显示 QPS 峰值；DNS 延迟与集群负载相关；扩容或启用 NodeLocal DNSCache 后缓解 | dns-fta: BE-dns-qps-overload |
 
 ---
 
@@ -847,6 +1066,66 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
     {"op": "remove", "path": "/spec/template/spec/dnsConfig"}
   ]'
+  ```
+
+#### REM-011: CoreDNS 性能调优
+- **适用根因**: RC-006, RC-013, RC-014
+- **前置检查**:
+  ```bash
+  # 检查 CoreDNS 当前配置和资源使用
+  kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.template.spec.containers[0].resources}'
+  kubectl top pods -n kube-system -l k8s-app=kube-dns
+  
+  # 检查当前 Corefile 配置
+  kubectl get configmap coredns -n kube-system -o jsonpath='{.data.Corefile}'
+  
+  # 检查 CoreDNS 副本数
+  kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.replicas}'
+  ```
+- **执行命令**:
+  ```bash
+  # 优化 1: 调整 cache TTL（延长缓存时间减少上游查询）
+  # 编辑 CoreDNS ConfigMap，将 cache 30 调整为 cache 60 或更高
+  kubectl edit configmap coredns -n kube-system
+  # 在 Corefile 中找到 "cache 30" 并修改为 "cache 60"
+  
+  # 优化 2: 调整 forward 插件配置
+  # 确保 forward 插件的 max_concurrent 设置合理（建议 1000-3000）
+  # forward . 8.8.8.8 8.8.4.4 {
+  #     max_concurrent 2000
+  #     prefer_udp
+  # }
+  
+  # 优化 3: 增加 CoreDNS 副本数（大规模集群）
+  kubectl scale deployment coredns -n kube-system --replicas=3
+  # 建议: 每 500-1000 Pod 增加 1 个 CoreDNS 副本
+  ```
+- **后置验证**:
+  ```bash
+  # 等待 CoreDNS reload（默认 30 秒 reload 周期）
+  sleep 45
+  
+  # 检查 CoreDNS Pod 状态
+  kubectl get pods -n kube-system -l k8s-app=kube-dns
+  
+  # 测试 DNS 延迟
+  kubectl run dns-perf-test --image=busybox:1.36 --rm -it --restart=Never -- sh -c '
+    for i in 1 2 3 4 5; do
+      start=$(date +%s%N)
+      nslookup kubernetes.default.svc.cluster.local > /dev/null 2>&1
+      end=$(date +%s%N)
+      echo "Query $i: $(( (end - start) / 1000000 ))ms"
+    done
+  '
+  # 预期: 延迟显著降低
+  ```
+- **回滚命令**:
+  ```bash
+  # 恢复原始 Corefile 配置
+  kubectl apply -f /tmp/coredns-configmap-backup.yaml
+  
+  # 恢复原始副本数
+  kubectl scale deployment coredns -n kube-system --replicas=<original-count>
   ```
 
 ---
@@ -1050,6 +1329,79 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
   ```bash
   # 删除新创建的 NetworkPolicy
   kubectl delete networkpolicy allow-dns-egress -n <namespace>
+  ```
+
+#### REM-012: NodeLocal DNSCache 部署与修复
+- **适用根因**: RC-007, RC-008, RC-014
+- **影响说明**: 部署或修复 NodeLocal DNSCache 涉及多个组件的配置变更，包括 DaemonSet、ConfigMap 和可能的 kubelet 配置。配置错误可能导致 DNS 完全不可用。
+- **审批提示**: "建议部署/修复 NodeLocal DNSCache 以缓解 DNS QPS 压力和 conntrack 竞态条件。此操作会影响所有新创建 Pod 的 DNS 解析路径。是否批准？"
+- **前置检查**:
+  ```bash
+  # 确认集群 DNS 模式（iptables vs ipvs）
+  kubectl get configmap kube-proxy -n kube-system -o jsonpath='{.data.config\.conf}' | grep mode
+  
+  # 检查 NodeLocal DNSCache 是否已部署
+  kubectl get ds -n kube-system | grep node-local-dns
+  
+  # 获取 kube-dns Service ClusterIP
+  KUBE_DNS_IP=$(kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}')
+  echo "kube-dns ClusterIP: $KUBE_DNS_IP"
+  ```
+- **执行命令**:
+  ```bash
+  # 场景 1: 已部署但故障，修复 NodeLocal DNS Pod
+  # 滚动重启 DaemonSet
+  kubectl rollout restart ds/node-local-dns -n kube-system
+  kubectl rollout status ds/node-local-dns -n kube-system --timeout=300s
+  
+  # 场景 2: 修复 NodeLocal DNS ConfigMap 配置
+  # 确保 upstream DNS 地址正确
+  kubectl edit configmap node-local-dns -n kube-system
+  # 确认 __PILLAR__CLUSTER__DNS__ 已被替换为实际的 kube-dns ClusterIP
+  # 确认 __PILLAR__LOCAL__DNS__ 已被替换为 169.254.20.10
+  
+  # 场景 3: 验证 169.254.20.10 可达
+  kubectl run dns-local-test --image=busybox:1.36 --rm -it --restart=Never -- sh -c '
+    # 测试 NodeLocal DNS
+    nslookup kubernetes.default 169.254.20.10
+    echo "---"
+    # 测试外部域名
+    nslookup google.com 169.254.20.10
+  '
+  ```
+- **后置验证**:
+  ```bash
+  # 确认所有 NodeLocal DNS Pod 运行正常
+  kubectl get pods -n kube-system -l k8s-app=node-local-dns -o wide
+  # 预期: 所有 Pod Running 且 Ready
+  
+  # 检查 DNS 解析延迟是否下降
+  kubectl run dns-perf --image=busybox:1.36 --rm -it --restart=Never -- sh -c '
+    for i in 1 2 3 4 5; do
+      start=$(date +%s%N)
+      nslookup kubernetes.default > /dev/null
+      end=$(date +%s%N)
+      echo "$i: $(( (end - start) / 1000000 ))ms"
+    done
+  '
+  
+  # 检查 CoreDNS QPS 是否降低（通过 metrics）
+  kubectl top pods -n kube-system -l k8s-app=kube-dns
+  ```
+- **回滚命令**:
+  ```bash
+  # 如果 NodeLocal DNSCache 导致问题，可以禁用
+  # 步骤 1: 删除 NodeLocal DNS DaemonSet
+  kubectl delete ds node-local-dns -n kube-system
+  kubectl delete configmap node-local-dns -n kube-system
+  
+  # 步骤 2: 恢复 kubelet --cluster-dns 为原始 kube-dns ClusterIP
+  # 需要在每个节点上执行
+  ssh <node-ip> "systemctl restart kubelet"
+  
+  # 步骤 3: 新创建的 Pod 将使用原始 DNS 配置
+  kubectl run dns-verify --image=busybox:1.36 --rm -it --restart=Never -- cat /etc/resolv.conf
+  # 预期: nameserver 指向 kube-dns ClusterIP（而非 169.254.20.10）
   ```
 
 ---
@@ -1438,14 +1790,18 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
   - `forward` 插件新增 `prefer_udp` 选项，可减少 TCP fallback 的延迟
   - 改进的 NodeLocal DNSCache 健康检查，减少了 RC-007 的发生概率
   - Topology Aware Hints GA，CoreDNS 可感知拓扑进行流量路由
+  - **默认配置变更**: Corefile 中可能新增 `lameduck` 持续时间配置，影响优雅关闭行为
 
 - **[v1.31+]**: DNS 相关改进：
   - CoreDNS 1.11.3 修复了若干稳定性问题
   - AdminNetworkPolicy (beta) 可能在全局层面影响 DNS 流量，诊断 RC-004 时需额外检查 `kubectl get adminnetworkpolicy`
+  - **DNS policy 与 Gateway API 的交互行为**: Gateway API 的 HTTPRoute 可能影响 DNS 解析行为，特别是当使用 parentRef 指向 Gateway 时
 
 - **[v1.32+]**: 稳定性和性能改进：
   - CoreDNS 的 `kubernetes` 插件性能优化，处理大量 Service（>5000）时内存使用更低
   - 改进的 EndpointSlice 支持减少了 RC-010（Headless Service DNS 记录延迟）的发生
+  - **DNS policy 与 Gateway API 的交互行为**: Gateway API GA 后，可通过 GatewayClass 的 parametersRef 配置 DNS 行为
+  - kube-proxy nftables 模式 GA，NodeLocal DNSCache 的 iptables 规则需调整为 nftables
 
 ---
 

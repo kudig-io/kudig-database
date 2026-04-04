@@ -26,6 +26,9 @@
 - **[09-开发者体验度量](./09-developer-experience-metrics.md)** - DORA 指标、SPACE 框架、平台 KPI
 - **[10-平台团队拓扑与运营](./10-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
 
+### 🌐 前端部署平台 (11)
+- **[11-Vercel前端部署平台](./11-vercel-frontend-deployment-platform.md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
+
 ## 🎯 学习路径建议
 
 ### 🔰 平台工程入门
@@ -43,6 +46,11 @@
 2. **07-Crossplane** → 多云基础设施抽象
 3. **09-开发者体验度量** → 建立平台 KPI 体系
 
+### 🌐 前端平台工程师
+1. **11-Vercel平台** → 掌握 Vercel 部署与 Serverless 开发
+2. **08-黄金路径设计** → 标准化前端交付流程
+3. **09-开发者体验度量** → 衡量平台效能
+
 ## 📊 技术深度对比
 
 | 文档 | 技术深度 | 实践价值 | 适用场景 | 复杂度 |
@@ -57,6 +65,7 @@
 | 08-黄金路径 | ⭐⭐⭐⭐ | 很高 | 开发者体验 | 中 |
 | 09-度量体系 | ⭐⭐⭐⭐ | 很高 | 平台运营 | 中 |
 | 10-团队拓扑 | ⭐⭐⭐⭐ | 高 | 组织设计 | 中 |
+| 11-Vercel平台 | ⭐⭐⭐⭐ | 很高 | 前端部署、全栈应用 | 低中 |
 
 ## 🔧 核心技术栈
 
@@ -65,6 +74,11 @@
 Backstage (CNCF Incubating)     # 开发者门户
 Kratix                          # 平台即代码
 Port/Humanitec                  # 商业 IDP 方案
+
+# 前端部署平台
+Vercel                          # Next.js 深度集成，全球 Edge Network
+Netlify                         # JAMstack 部署平台
+Cloudflare Pages                # 边缘优先部署
 
 # 基础设施抽象
 Crossplane (CNCF Incubating)    # 多云组合

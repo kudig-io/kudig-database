@@ -4131,7 +4131,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 ---
 
 *本文档基于Kubernetes故障树分析(FTA)方法编制，覆盖生产环境全量故障场景。*
-�────────────┐                ┌───────────────┐
+┌────────────┐                ┌───────────────┐
     │ 检查集群状态  │                │ 检查性能指标  │
     │ kubectl get   │                │ 监控Dashboard │
     │ nodes         │                │               │

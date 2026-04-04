@@ -1260,6 +1260,8 @@ L5 - 自进化 Harness
 | [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | RAGAS/LLM-as-Judge——Harness Verification 层的评测工具 |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | K8s 部署——Harness 的运行基础设施 |
 | [10 - 安全护栏](./10-security-guardrails.md) | 安全框架——Harness Constraints 层的安全实现 |
+| [43 - OpenClaw File-First 架构集成](./43-openclaw-framework-integration.md) | SOUL.md/SKILL.md 分层设计的完整实施方案、File-First 与 Harness 融合 |
+| [openclaw-workspace/](./openclaw-workspace/) | K8S 运维 Agent 的完整 7 文件工作区配置实例 |
 | [domain-12-troubleshooting](../domain-12-troubleshooting/) | K8S 故障排查——K8S Harness 的知识语料库 |
 | [topic-fta](../topic-fta/) | FTA 故障树——结构化诊断 Harness 的推理骨架 |
 

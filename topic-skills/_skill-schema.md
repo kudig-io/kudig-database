@@ -8,7 +8,7 @@
 
 ## 模板概述
 
-每个 Skill 文档由以下 10 个章节组成，按固定顺序排列。Agent 运行时按章节编号定位内容。
+每个 Skill 文档由以下 12 个章节组成，按固定顺序排列。Agent 运行时按章节编号定位内容。
 
 ```
 YAML Front Matter          → 机器可解析元数据（路由、匹配、分类）
@@ -22,7 +22,28 @@ Section 7: 验证确认         → 修复后的验证序列
 Section 8: 升级协议         → 何时及如何升级到人工处理
 Section 9: 版本兼容矩阵     → K8s v1.28-v1.32 版本差异
 Section 10: 知识进化        → 误诊模式、深度引用、反馈机制
+Section 11: 云厂商特异性    → (可选) 托管 K8s 平台差异化诊断与修复
+Section 12: 自动化集成接口  → (可选) Agent 脚本与 Webhook 集成规范
 ```
+
+---
+
+## Skill 分类体系
+
+| 类别 | 前缀 | 说明 | 示例 |
+|------|------|------|------|
+| Node | SKILL-NODE-xxx | 节点级故障 | Node NotReady |
+| Pod | SKILL-POD-xxx | Pod 生命周期故障 | CrashLoop、Pending |
+| Network | SKILL-NET-xxx | 网络与连通性故障 | DNS、Service、Ingress |
+| Storage | SKILL-STORE-xxx | 存储与持久化故障 | PVC、CSI |
+| Security | SKILL-SEC-xxx | 安全与权限故障 | RBAC、Certificate、Incident |
+| Workload | SKILL-WORK-xxx | 工作负载管理故障 | Deployment Rollout |
+| Image | SKILL-IMAGE-xxx | 镜像管理故障 | ImagePull |
+| ControlPlane | SKILL-CP-xxx | 控制平面故障 | etcd、API Server |
+| Scaling | SKILL-SCALE-xxx | 弹性伸缩故障 | HPA、VPA、CA |
+| Configuration | SKILL-CONFIG-xxx | 配置管理故障 | ConfigMap、Secret |
+| Observability | SKILL-MONITOR-xxx / SKILL-LOG-xxx | 可观测性故障 | Prometheus、日志 |
+| Performance | SKILL-PERF-xxx | 性能瓶颈 | CPU/Memory/IO |
 
 ---
 
@@ -437,3 +458,105 @@ kubectl ...
 | 验证步骤 ID | `V{Seq}` | `V1`, `V2` |
 | 症状 ID | `S{Seq}` | `S1`, `S2` |
 | 版本标记 | `**[vX.XX+]**` 或 `**[vX.XX-vX.XX]**` | `**[v1.30+]**` |
+
+---
+
+## Section 11: 云厂商特异性（可选）
+
+当故障场景涉及云厂商特定行为时，本节提供平台差异化的诊断与修复指导。
+
+### 11.1 适用场景
+- 托管 Kubernetes 服务（ACK/EKS/GKE/AKS）的控制平面不可见层
+- 云厂商特定的存储/网络/负载均衡实现
+- 云平台 API 限流与配额
+
+### 11.2 内容结构
+
+每个云厂商差异项应包含：
+- **平台**: ACK | EKS | GKE | AKS
+- **差异描述**: 与标准 K8s 行为的差异说明
+- **诊断命令**: 云厂商 CLI 的诊断命令
+- **修复方式**: 平台特定的修复路径
+- **文档链接**: 官方文档参考
+
+### 11.3 格式示例
+
+```markdown
+## 11. 云厂商特异性
+
+| 平台 | 差异 | 诊断命令 | 备注 |
+|------|------|---------|------|
+| ACK | 控制平面托管，无法直接访问 etcd | `aliyun cs DescribeClusterDetail` | 需通过工单排查 |
+| EKS | ENI 模式网络，Pod IP 来自 VPC 子网 | `aws eks describe-cluster` | 注意 IP 地址耗尽 |
+| GKE | 自动升级可能导致意外重启 | `gcloud container clusters describe` | 检查维护窗口 |
+| AKS | Azure CNI 与 kubenet 网络差异 | `az aks show` | 检查网络模式 |
+```
+
+---
+
+## Section 12: 自动化集成接口（可选）
+
+定义 Skill 与外部系统集成的标准接口，支持 Agent 自动化调用。
+
+### 12.1 脚本入口
+
+- **diagnose-quick.sh**: Phase 1 快速诊断脚本入口
+- **diagnose-deep.sh**: Phase 2 深度诊断脚本入口
+- **verify.sh**: 修复后验证脚本入口
+- **调用约定**: `./scripts/diagnose-quick.sh --node <NODE_NAME> --namespace <NS>`
+
+### 12.2 Webhook 回调
+
+- **告警路由**: 从 AlertManager/Prometheus 告警自动触发 Skill
+- **工单集成**: 从工单系统（Jira/PagerDuty）自动触发 Skill
+- **回调格式**: JSON payload 含 skill_id、trigger_source、context
+
+### 12.3 输出规范
+
+- **诊断报告**: JSON 格式输出，含 findings、root_cause_candidates、confidence
+- **修复建议**: 结构化的修复步骤，含 risk_level、commands、rollback
+
+### 12.4 格式示例
+
+```markdown
+## 12. 自动化集成接口
+
+### 脚本入口
+
+| 脚本 | 用途 | 示例调用 |
+|------|------|----------|
+| diagnose-quick.sh | Phase 1 快速检查 | `./scripts/diagnose-quick.sh --node node-1` |
+| diagnose-deep.sh | Phase 2 深度检查 | `./scripts/diagnose-deep.sh --node node-1 --ssh` |
+| verify.sh | 修复后验证 | `./scripts/verify.sh --node node-1` |
+
+### Webhook 配置
+
+\`\`\`yaml
+# AlertManager Webhook 示例
+receivers:
+- name: skill-trigger
+  webhook_configs:
+  - url: 'http://agent-gateway/skill/SKILL-NODE-001'
+    send_resolved: true
+\`\`\`
+
+### 输出 JSON Schema
+
+\`\`\`json
+{
+  "skill_id": "SKILL-NODE-001",
+  "findings": [
+    { "step": "D1.2", "result": "Ready=False", "severity": "critical" }
+  ],
+  "root_cause_candidates": [
+    { "rc_id": "RC-001", "confidence": 0.85, "evidence": ["D1.2", "D1.5"] }
+  ],
+  "recommended_action": {
+    "rem_id": "REM-001",
+    "risk_level": "low",
+    "command": "kubectl uncordon <NODE>",
+    "rollback": "kubectl cordon <NODE>"
+  }
+}
+\`\`\`
+```

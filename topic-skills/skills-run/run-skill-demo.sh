@@ -61,6 +61,7 @@ show_menu() {
     echo -e "${CYAN}║  故障注入 → 症状检测 → 快速分级 → 诊断 → 根因 → 修复 → 验证  ║${NC}"
     echo -e "${CYAN}║                                                              ║${NC}"
     echo -e "${CYAN}╠══════════════════════════════════════════════════════════════╣${NC}"
+    echo -e "${CYAN}║  ${BOLD}基础场景 (1-5):${NC}${CYAN}                                            ║${NC}"
     echo -e "${CYAN}║                                                              ║${NC}"
     echo -e "${CYAN}║  ${BOLD}${GREEN}[1]${NC}${CYAN} 节点 Cordon NotReady    ${DIM}SKILL-NODE-001 / RC-012${NC}${CYAN}        ║${NC}"
     echo -e "${CYAN}║      ${DIM}cordon 节点 → 诊断 → uncordon → 验证${NC}${CYAN}                ║${NC}"
@@ -77,6 +78,26 @@ show_menu() {
     echo -e "${CYAN}║  ${BOLD}${GREEN}[5]${NC}${CYAN} Service 无 Endpoints   ${DIM}SKILL-NET-002${NC}${CYAN}                   ║${NC}"
     echo -e "${CYAN}║      ${DIM}selector 不匹配 → 排查 → 修正 → 验证${NC}${CYAN}               ║${NC}"
     echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}╠══════════════════════════════════════════════════════════════╣${NC}"
+    echo -e "${CYAN}║  ${BOLD}扩展场景 (6-10):${NC}${CYAN}                                           ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}║  ${BOLD}${GREEN}[6]${NC}${CYAN} PVC Pending            ${DIM}SKILL-STORE-001 / RC-001${NC}${CYAN}        ║${NC}"
+    echo -e "${CYAN}║      ${DIM}无效 StorageClass → 诊断 → 修复 → 验证${NC}${CYAN}            ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}║  ${BOLD}${GREEN}[7]${NC}${CYAN} Deployment 卡住        ${DIM}SKILL-WORK-001 / RC-002${NC}${CYAN}        ║${NC}"
+    echo -e "${CYAN}║      ${DIM}readinessProbe 失败 → 诊断 → 回滚 → 验证${NC}${CYAN}          ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}║  ${BOLD}${GREEN}[8]${NC}${CYAN} RBAC 权限拒绝          ${DIM}SKILL-SEC-002 / RC-001${NC}${CYAN}         ║${NC}"
+    echo -e "${CYAN}║      ${DIM}SA 无权限 → 诊断 → 创建 RoleBinding → 验证${NC}${CYAN}         ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}║  ${BOLD}${GREEN}[9]${NC}${CYAN} HPA 不触发             ${DIM}SKILL-SCALE-001 / RC-002${NC}${CYAN}       ║${NC}"
+    echo -e "${CYAN}║      ${DIM}未设置 requests → 诊断 → 添加资源配置 → 验证${NC}${CYAN}       ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}║  ${BOLD}${GREEN}[10]${NC}${CYAN} 镜像拉取失败          ${DIM}SKILL-IMAGE-001 / RC-001${NC}${CYAN}      ║${NC}"
+    echo -e "${CYAN}║       ${DIM}镜像不存在 → 诊断 → 修正镜像名 → 验证${NC}${CYAN}          ║${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
+    echo -e "${CYAN}╠══════════════════════════════════════════════════════════════╣${NC}"
+    echo -e "${CYAN}║                                                              ║${NC}"
     echo -e "${CYAN}║  ${BOLD}${YELLOW}[A]${NC}${CYAN} 顺序运行所有场景 / Run all scenarios${NC}${CYAN}              ║${NC}"
     echo -e "${CYAN}║  ${BOLD}${RED}[Q]${NC}${CYAN} 退出 / Quit${NC}${CYAN}                                         ║${NC}"
     echo -e "${CYAN}║                                                              ║${NC}"
@@ -85,7 +106,15 @@ show_menu() {
 
 run_scenario() {
     local num="$1"
-    local script="${SCRIPT_DIR}/scenarios/0${num}-*.sh"
+    local script
+    
+    # 处理双位数场景 (10+)
+    if [[ ${#num} -eq 1 ]]; then
+        script="${SCRIPT_DIR}/scenarios/0${num}-*.sh"
+    else
+        script="${SCRIPT_DIR}/scenarios/${num}-*.sh"
+    fi
+    
     local file
     file=$(ls ${script} 2>/dev/null | head -1)
 
@@ -102,9 +131,9 @@ run_scenario() {
 }
 
 run_all() {
-    for i in 1 2 3 4 5; do
+    for i in 1 2 3 4 5 6 7 8 9 10; do
         run_scenario "${i}"
-        if [[ "${i}" != "5" ]]; then
+        if [[ "${i}" != "10" ]]; then
             echo -e "\n${YELLOW}━━━ 即将运行下一个场景 / Next scenario coming up ━━━${NC}"
             echo -e "${YELLOW}按 Enter 继续 / Press Enter to continue...${NC}"
             read -r
@@ -122,7 +151,7 @@ main() {
     # 支持命令行参数
     if [[ $# -gt 0 ]]; then
         case "$1" in
-            [1-5])
+            [1-9]|10)
                 run_scenario "$1"
                 exit 0
                 ;;
@@ -131,7 +160,7 @@ main() {
                 exit 0
                 ;;
             *)
-                echo "用法 / Usage: $0 [1-5|all]"
+                echo "用法 / Usage: $0 [1-10|all]"
                 exit 1
                 ;;
         esac
@@ -141,9 +170,9 @@ main() {
     while true; do
         show_menu
         echo ""
-        read -rp "请选择 / Select [1-5/A/Q]: " choice
+        read -rp "请选择 / Select [1-10/A/Q]: " choice
         case "${choice}" in
-            1|2|3|4|5)
+            1|2|3|4|5|6|7|8|9|10)
                 run_scenario "${choice}"
                 echo ""
                 echo -e "${YELLOW}按 Enter 返回菜单 / Press Enter to return to menu...${NC}"

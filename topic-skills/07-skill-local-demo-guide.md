@@ -232,7 +232,7 @@ Demo Phase 6 → Skill Section 7: 验证确认
 
 ## 6. 与 IDE Skill 目录的关联
 
-Demo 的场景 01（节点 Cordon）完整映射到 [k8s-node-notready/](./k8s-node-notready/) IDE Skill 目录：
+Demo 的场景 01（节点 Cordon）完整映射到 [k8s-node-notready/](./skill-set/k8s-node-notready/) IDE Skill 目录：
 
 | Demo 步骤 | k8s-node-notready 对应文件 |
 |-----------|--------------------------|
@@ -298,8 +298,8 @@ KIND_IMAGE=kindest/node:v1.30.6 bash setup-kind-cluster.sh
 
 | 资源 | 路径 | 说明 |
 |------|------|------|
-| Demo 脚本 | [demo/](./demo/) | 本地运行脚本和场景 |
+| Demo 脚本 | [skills-run/](./skills-run/) | 本地运行脚本和场景 |
 | Skill Schema | [_skill-schema.md](./_skill-schema.md) | Skill 文档规范模板 |
-| IDE Skill 示例 | [k8s-node-notready/](./k8s-node-notready/) | 完整 IDE 格式 Skill |
+| IDE Skill 示例 | [k8s-node-notready/](./skill-set/k8s-node-notready/) | 完整 IDE 格式 Skill |
 | Skills 索引 | [README.md](./README.md) | Skill 库总索引 |
 | FTA 故障树 | [../topic-fta/](../topic-fta/) | 故障分析模型 |

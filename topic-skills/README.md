@@ -1,9 +1,10 @@
 # topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 
 > **适用版本**: Kubernetes v1.28 - v1.32  
-> **Skill 数量**: 6 个核心场景（第一批）  
+> **Skill 数量**: 18 个核心场景  
+> **覆盖领域**: Node · Pod · Network · Storage · Security · Workload · Scaling · Configuration · Observability · Performance  
 > **定位**: 面向 AI Agent 运行时的自包含工单处理 Runbook  
-> **最后更新**: 2026-03
+> **最后更新**: 2026-04
 
 ---
 
@@ -39,16 +40,65 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 
 ---
 
-## 2. Skill 索引表
+## 2. Skill 全景索引表
 
-| Skill ID | 文件 | 名称 | 分类 | 严重性 | 风险等级 | Agent 模式 |
-|----------|------|------|------|--------|---------|-----------|
-| SKILL-NODE-001 | [01-node-notready.md](./01-node-notready.md) | 节点 NotReady 诊断与修复 | node | P0-P2 | high | L1-advisory |
-| SKILL-POD-001 | [02-pod-crashloop-oomkilled.md](./02-pod-crashloop-oomkilled.md) | Pod CrashLoopBackOff & OOMKilled | pod | P1-P3 | medium | L2-semi-auto |
-| SKILL-POD-002 | [03-pod-pending.md](./03-pod-pending.md) | Pod Pending / 调度失败 | pod | P1-P3 | low | L2-semi-auto |
-| SKILL-NET-001 | [04-dns-resolution-failure.md](./04-dns-resolution-failure.md) | DNS 解析故障 | network | P0-P2 | medium | L2-semi-auto |
-| SKILL-NET-002 | [05-service-connectivity.md](./05-service-connectivity.md) | Service 连通性 / Endpoint 异常 | network | P0-P2 | medium | L2-semi-auto |
-| SKILL-SEC-001 | [06-certificate-expiry.md](./06-certificate-expiry.md) | 证书过期 & TLS 故障 | security | P0-P1 | critical | L1-advisory |
+| 编号 | Skill ID | 名称 | 类别 | 文件 | 成熟度 |
+|------|----------|------|------|------|--------|
+| 01 | SKILL-NODE-001 | 节点 NotReady 诊断与修复 | Node | [01-node-notready.md](./01-node-notready.md) | GA |
+| 02 | SKILL-POD-001 | Pod CrashLoop/OOMKilled 诊断 | Pod | [02-pod-crashloop-oomkilled.md](./02-pod-crashloop-oomkilled.md) | GA |
+| 03 | SKILL-POD-002 | Pod Pending 调度失败诊断 | Pod | [03-pod-pending.md](./03-pod-pending.md) | GA |
+| 04 | SKILL-NET-001 | DNS 解析故障诊断 | Network | [04-dns-resolution-failure.md](./04-dns-resolution-failure.md) | GA |
+| 05 | SKILL-NET-002 | Service 连通性故障诊断 | Network | [05-service-connectivity.md](./05-service-connectivity.md) | GA |
+| 06 | SKILL-SEC-001 | 证书过期与 TLS 故障诊断 | Security | [06-certificate-expiry.md](./06-certificate-expiry.md) | GA |
+| 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](./07-pvc-storage-failure.md) | GA |
+| 08 | SKILL-WORK-001 | Deployment 滚动更新故障诊断 | Workload | [08-deployment-rollout-failure.md](./08-deployment-rollout-failure.md) | GA |
+| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 故障 | Security | [09-rbac-quota-failure.md](./09-rbac-quota-failure.md) | GA |
+| 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](./10-image-pull-failure.md) | GA |
+| 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](./11-control-plane-failure.md) | GA |
+| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩故障 | Scaling | [12-autoscaling-failure.md](./12-autoscaling-failure.md) | GA |
+| 13 | SKILL-NET-003 | Ingress/Gateway 路由故障诊断 | Network | [13-ingress-gateway-failure.md](./13-ingress-gateway-failure.md) | GA |
+| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理故障 | Configuration | [14-configmap-secret-failure.md](./14-configmap-secret-failure.md) | GA |
+| 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](./15-monitoring-alerting-failure.md) | GA |
+| 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](./16-logging-pipeline-failure.md) | GA |
+| 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](./17-performance-bottleneck.md) | GA |
+| 18 | SKILL-SECURITY-001 | 安全事件应急响应 | Security | [18-security-incident-response.md](./18-security-incident-response.md) | GA |
+
+---
+
+## Skill 成熟度标识
+
+| 标识 | 说明 |
+|------|------|
+| **GA** (General Availability) | 生产就绪，10-Section 完整，经过验证 |
+| **Beta** | 功能完整但部分场景未验证 |
+| **Alpha** | 初始版本，覆盖核心场景 |
+
+---
+
+## 按运维场景快速导航
+
+### 故障诊断
+- 节点故障: [01-node-notready](./01-node-notready.md) | [11-control-plane](./11-control-plane-failure.md)
+- Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](./10-image-pull-failure.md)
+- 网络故障: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](./13-ingress-gateway-failure.md)
+- 存储故障: [07-pvc-storage](./07-pvc-storage-failure.md)
+- 配置故障: [14-configmap-secret](./14-configmap-secret-failure.md)
+
+### 工作负载管理
+- 部署与更新: [08-deployment-rollout](./08-deployment-rollout-failure.md)
+- 弹性伸缩: [12-autoscaling](./12-autoscaling-failure.md)
+
+### 安全合规
+- 权限管理: [09-rbac-quota](./09-rbac-quota-failure.md)
+- 证书管理: [06-certificate-expiry](./06-certificate-expiry.md)
+- 安全事件: [18-security-incident](./18-security-incident-response.md)
+
+### 可观测性
+- 监控告警: [15-monitoring-alerting](./15-monitoring-alerting-failure.md)
+- 日志管理: [16-logging-pipeline](./16-logging-pipeline-failure.md)
+
+### 性能调优
+- 性能瓶颈: [17-performance-bottleneck](./17-performance-bottleneck.md)
 
 ---
 
@@ -71,6 +121,26 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 | `x509: certificate has expired` 错误 | [06-certificate-expiry](./06-certificate-expiry.md) | 0.95 |
 | TLS handshake failure | [06-certificate-expiry](./06-certificate-expiry.md) | 0.80 |
 | kubelet 无法连接 apiserver | [01-node-notready](./01-node-notready.md) + [06-certificate-expiry](./06-certificate-expiry.md) | 0.70 |
+| PVC 一直 Pending 状态 | [07-pvc-storage-failure](./07-pvc-storage-failure.md) | 0.95 |
+| StorageClass 不存在或配置错误 | [07-pvc-storage-failure](./07-pvc-storage-failure.md) | 0.90 |
+| Deployment rollout 卡住 | [08-deployment-rollout-failure](./08-deployment-rollout-failure.md) | 0.90 |
+| ReplicaSet 无法创建新 Pod | [08-deployment-rollout-failure](./08-deployment-rollout-failure.md) | 0.85 |
+| RBAC Forbidden / Unauthorized | [09-rbac-quota-failure](./09-rbac-quota-failure.md) | 0.95 |
+| ResourceQuota exceeded | [09-rbac-quota-failure](./09-rbac-quota-failure.md) | 0.90 |
+| ImagePullBackOff / ErrImagePull | [10-image-pull-failure](./10-image-pull-failure.md) | 0.95 |
+| 私有仓库认证失败 | [10-image-pull-failure](./10-image-pull-failure.md) | 0.90 |
+| etcd 集群不健康 / leader 选举失败 | [11-control-plane-failure](./11-control-plane-failure.md) | 0.95 |
+| API Server 无响应 | [11-control-plane-failure](./11-control-plane-failure.md) | 0.90 |
+| HPA 不触发扩容 | [12-autoscaling-failure](./12-autoscaling-failure.md) | 0.90 |
+| Metrics Server 无数据 | [12-autoscaling-failure](./12-autoscaling-failure.md) | 0.85 |
+| Ingress 404/502/503 错误 | [13-ingress-gateway-failure](./13-ingress-gateway-failure.md) | 0.90 |
+| ConfigMap/Secret 未挂载 | [14-configmap-secret-failure](./14-configmap-secret-failure.md) | 0.90 |
+| Prometheus 指标缺失 | [15-monitoring-alerting-failure](./15-monitoring-alerting-failure.md) | 0.85 |
+| AlertManager 告警不发送 | [15-monitoring-alerting-failure](./15-monitoring-alerting-failure.md) | 0.85 |
+| 日志收集中断 | [16-logging-pipeline-failure](./16-logging-pipeline-failure.md) | 0.85 |
+| 应用响应延迟高 | [17-performance-bottleneck](./17-performance-bottleneck.md) | 0.80 |
+| 容器 CPU/内存持续高位 | [17-performance-bottleneck](./17-performance-bottleneck.md) | 0.85 |
+| 疑似入侵/异常访问 | [18-security-incident-response](./18-security-incident-response.md) | 0.90 |
 
 ### 按 Kubernetes Event Reason 查找
 
@@ -238,19 +308,19 @@ Agent 在执行 Skill 后应记录：
 | 事件管理 Runbook | [topic-dictionary/12-incident-management-runbooks.md](../topic-dictionary/12-incident-management-runbooks.md) | 事件管理流程模板 |
 | 生产排障 Playbook | [topic-dictionary/16-production-troubleshooting-playbook.md](../topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
 | Skill 文档模板 | [_skill-schema.md](./_skill-schema.md) | 新建 Skill 的规范化模板 |
-| IDE 目录格式 Skill | [k8s-node-notready/](./k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
-| **本地 Demo** | [demo/](./demo/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
+| IDE 目录格式 Skill | [k8s-node-notready/](./skill-set/k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
+| **本地 Demo** | [skills-run/](./skills-run/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
 | Demo 运行指南 | [07-skill-local-demo-guide.md](./07-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
 
 ---
 
 ## 7. 本地运行 Demo
 
-在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./07-skill-local-demo-guide.md) 和 [demo/README.md](./demo/README.md)。
+在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./07-skill-local-demo-guide.md) 和 [skills-run/README.md](./skills-run/README.md)。
 
 ```bash
 # 快速开始
-cd topic-skills/demo
+cd topic-skills/skills-run
 bash setup-kind-cluster.sh     # 创建 1 CP + 2 Worker 的 Kind 集群
 bash run-skill-demo.sh          # 交互式选择场景
 bash teardown.sh                # 清理
@@ -263,6 +333,13 @@ bash teardown.sh                # 清理
 | 03 | Pod Pending | SKILL-POD-002 | 资源请求超限 | 调整 requests |
 | 04 | DNS 故障 | SKILL-NET-001 | CoreDNS 缩容 | 恢复 CoreDNS |
 | 05 | Service 无 EP | SKILL-NET-002 | Selector typo | 修正 selector |
+| 06 | PVC Pending | SKILL-STORE-001 / RC-001 | 无效 StorageClass | 创建 StorageClass |
+| 07 | Deployment 卡住 | SKILL-WORK-001 / RC-002 | readinessProbe 失败 | 修正配置 |
+| 08 | RBAC 拒绝 | SKILL-SEC-002 / RC-001 | 权限不足 | 调整 Role |
+| 09 | HPA 不触发 | SKILL-SCALE-001 / RC-002 | 未设置 requests | 添加资源配置 |
+| 10 | 镜像拉取失败 | SKILL-IMAGE-001 / RC-001 | 镜像不存在 | 修正镜像名 |
+
+> 更多 Demo 场景说明见 [skills-run/README.md](./skills-run/README.md)
 
 ---
 
@@ -270,10 +347,10 @@ bash teardown.sh                # 清理
 
 除单文件 Skill 外，本目录还提供符合主流 IDE（Qoder/Cursor）标准的**目录格式 Skill**，包含可执行脚本、机器可解析数据和模块化参考文档：
 
-### k8s-node-notready/
+### skill-set/k8s-node-notready/
 
 ```
-k8s-node-notready/
+skill-set/k8s-node-notready/
 ├── SKILL.md                        # 入口: Skill 定义 + Agent 执行指令
 ├── reference/
 │   ├── diagnostic-workflow.md      # 完整 Phase 1-3 诊断工作流
@@ -297,13 +374,20 @@ k8s-node-notready/
 
 ## 9. 后续规划
 
-第二批 6 个 Skill（按优先级排序）：
+### 进行中
+
+| 项目 | 说明 | 状态 |
+|------|------|------|
+| IDE 目录格式 Skill | 为每个 Skill 提供可执行脚本和机器可解析数据 | 进行中 |
+| 云厂商特异性补充 | 为现有 Skill 添加 ACK/EKS/GKE/AKS 差异化内容 | 规划中 |
+| Demo 场景扩展 | 新增 10 个本地演示场景，覆盖全部 Skill 分类 | 进行中 |
+
+### 待开发 Skill
 
 | 优先级 | Skill ID | 场景 | 分类 |
 |--------|---------|------|------|
-| P1 | SKILL-STORE-001 | PVC/存储故障 | storage |
-| P1 | SKILL-WORK-001 | Deployment 滚动更新卡住 | workload |
-| P1 | SKILL-SEC-002 | RBAC 权限拒绝 | security |
-| P2 | SKILL-SCALE-001 | HPA 弹性伸缩故障 | scaling |
-| P2 | SKILL-CP-001 | etcd 集群降级 | control-plane |
-| P2 | SKILL-NET-003 | Ingress/Gateway 路由故障 | network |
+| P1 | SKILL-NODE-002 | 节点磁盘压力诊断 | node |
+| P1 | SKILL-NET-004 | NetworkPolicy 连通性故障 | network |
+| P2 | SKILL-WORK-002 | StatefulSet 故障诊断 | workload |
+| P2 | SKILL-WORK-003 | DaemonSet 故障诊断 | workload |
+| P2 | SKILL-WORK-004 | Job/CronJob 故障诊断 | workload |

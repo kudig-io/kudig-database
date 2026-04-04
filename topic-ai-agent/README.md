@@ -61,6 +61,19 @@
 | 38 | [Harness 性能与成本优化](./38-agent-harness-performance-cost.md) | 上下文压缩、模型路由、多级缓存、Prompt Caching、Agent FinOps | SRE、AI 工程师 | 35min |
 | 39 | [Harness 测试与基准评测](./39-agent-harness-testing-benchmark.md) | 测试金字塔、K8S 自定义基准、红队测试、回归测试框架 | QA 工程师、AI 工程师 | 40min |
 | 40 | [Harness 生产运维与成熟度模型](./40-agent-harness-production-maturity.md) | 灰度发布、配置热更新、SLA 监控、故障恢复、五级成熟度模型 | SRE、架构师 | 45min |
+| **实践参考指南** | | | | |
+| 41 | [ReAct Agent 与 Harness 识别指南](./41-react-harness-identification-guide.md) | ReAct 三要素判断法、Harness 六层检查、五级成熟度清单、代码级识别方法 | 所有工程师 | 20min |
+| 42 | [模型 × Harness 兼容性矩阵](./42-model-harness-compatibility-matrix.md) | GPT/Claude/Gemini/Qwen/DeepSeek/Llama 全系列 Harness 就绪度、场景选型、多模型路由 | 架构师、AI 工程师 | 25min |
+| **OpenClaw File-First 架构** | | | | |
+| 43 | [OpenClaw File-First 架构与 Harness 集成指南](./43-openclaw-framework-integration.md) | OpenClaw 7 文件体系、File-First vs Harness 映射、K8S 运维 Agent 实施方案、AgentScope 集成 | 架构师、AI 工程师 | 35min |
+| 44 | [SOUL.md 机制深度解析](./44-openclaw-soul-mechanism.md) | 三层结构模型、约束精确性原则、SoulConstraintEnforcer 代码、红线拦截案例 | AI 工程师、安全工程师 | 25min |
+| 45 | [USER.md 机制深度解析](./45-openclaw-user-mechanism.md) | 四象限模型、去 AI 味三策略、UserContextBuilder 代码、技术水平校准 | AI 工程师 | 25min |
+| 46 | [AGENTS.md 机制深度解析](./46-openclaw-agents-mechanism.md) | FSM 状态机、五阶段工作流、反漂移检测、AgentWorkflowEngine 代码 | 架构师、AI 工程师 | 30min |
+| 47 | [TOOLS.md 机制深度解析](./47-openclaw-tools-mechanism.md) | 四级权限模型、最小权限原则、ToolsManager 双重安全检查代码 | AI 工程师、安全工程师 | 25min |
+| 48 | [SKILL.md 机制深度解析](./48-openclaw-skill-mechanism.md) | 渐进式披露、三种知识结构化范式、SkillLoader 按需加载代码 | AI 工程师、内容工程师 | 25min |
+| 49 | [MEMORY.md 机制深度解析](./49-openclaw-memory-mechanism.md) | 三层记忆模型、新陈代谢机制、MemoryManager 代码、已知问题命中 | AI 工程师 | 25min |
+| 50 | [IDENTITY.md 机制深度解析](./50-openclaw-identity-mechanism.md) | SOUL/IDENTITY 分离设计、多渠道适配、IdentityManager 代码 | AI 工程师 | 20min |
+| — | [openclaw-workspace/](./openclaw-workspace/) | 完整的 K8S 运维 Agent 工作区配置：SOUL.md / USER.md / AGENTS.md / TOOLS.md / SKILL.md / MEMORY.md / IDENTITY.md | 所有工程师 | 参考 |
 
 ---
 
@@ -134,6 +147,23 @@ graph TB
         A40["40 生产运维与成熟度<br/>灰度 / SLA / 五级模型"]
     end
 
+    subgraph L9["实践参考指南"]
+        A41["41 ReAct & Harness 识别<br/>判断清单 / 成熟度评估"]
+        A42["42 模型 × Harness 矩阵<br/>GPT / Claude / Gemini / Qwen"]
+    end
+
+    subgraph L10["OpenClaw File-First 架构"]
+        A43["43 OpenClaw 集成指南<br/>7 文件体系 / Harness 映射"]
+        A44["44 SOUL.md 机制<br/>三层结构 / 约束精确性"]
+        A45["45 USER.md 机制<br/>四象限 / 去 AI 味"]
+        A46["46 AGENTS.md 机制<br/>FSM / 反漂移"]
+        A47["47 TOOLS.md 机制<br/>四级权限 / 双重检查"]
+        A48["48 SKILL.md 机制<br/>渐进披露 / SOP"]
+        A49["49 MEMORY.md 机制<br/>三层记忆 / 新陈代谢"]
+        A50["50 IDENTITY.md 机制<br/>SOUL分离 / 多渠道"]
+        OC["openclaw-workspace/<br/>SOUL / USER / AGENTS / TOOLS<br/>SKILL / MEMORY / IDENTITY"]
+    end
+
     ROOT --> L1
     ROOT --> L2
     ROOT --> L3
@@ -195,6 +225,20 @@ graph TB
     A35 --> A36
     A37 --> A38
     A39 --> A40
+    A01 --> A41
+    A30 --> A41
+    A02 --> A42
+    A30 --> A42
+    A29 --> A43
+    A30 --> A43
+    A43 --> A44
+    A43 --> A45
+    A43 --> A46
+    A43 --> A47
+    A43 --> A48
+    A43 --> A49
+    A43 --> A50
+    A43 --> OC
 ```
 
 ---
@@ -224,6 +268,13 @@ graph TB
 
 **Harness Engineering 学习路径（2026 前沿）**：
 1. [08 - 评测与可观测性](./08-agent-evaluation-observability.md) → [10 - 安全护栏](./10-security-guardrails.md) → [30 - Agent Harness 工程](./30-agent-harness-engineering.md) → [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) → [32 - 工具工程](./32-agent-harness-tool-engineering.md) → [33 - 上下文与记忆](./33-agent-harness-context-memory.md) → [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) → [35 - 安全与约束](./35-agent-harness-security-constraints.md) → [36 - 可观测性](./36-agent-harness-observability.md) → [37 - 多 Agent 编排](./37-agent-harness-multi-agent.md) → [38 - 性能与成本](./38-agent-harness-performance-cost.md) → [39 - 测试与基准](./39-agent-harness-testing-benchmark.md) → [40 - 生产运维与成熟度](./40-agent-harness-production-maturity.md)
+
+**快速参考**：
+1. [41 - ReAct & Harness 识别指南](./41-react-harness-identification-guide.md)（独立可读，适合随时查阅）
+2. [42 - 模型 × Harness 兼容性矩阵](./42-model-harness-compatibility-matrix.md)（模型选型快速参考）
+3. [43 - OpenClaw File-First 架构集成](./43-openclaw-framework-integration.md)（File-First 配置体系与 Harness 融合）
+4. [44~50 - OpenClaw 7 大配置文件深度解析](./44-openclaw-soul-mechanism.md)（SOUL/USER/AGENTS/TOOLS/SKILL/MEMORY/IDENTITY 各自机制）
+5. [openclaw-workspace/](./openclaw-workspace/)（K8S 运维 Agent 完整工作区配置，可直接参考使用）
 
 ---
 
@@ -255,6 +306,7 @@ graph TB
 | **Agent CLI** | Claude Code, Codex CLI, Gemini CLI, Aider, Goose, Amazon Q Developer CLI |
 | **CLI 协议** | MCP (Model Context Protocol), A2A (Agent-to-Agent), OAuth 2.1 |
 | **Harness Engineering** | 六层架构 (Loop/Tools/Context/Persistence/Verification/Constraints)、SOUL.md/SKILL.md、质量门禁 |
+| **OpenClaw File-First** | SOUL.md、USER.md、AGENTS.md、TOOLS.md、SKILL.md、MEMORY.md、IDENTITY.md |
 | **Agent 基准测试** | SWE-bench, GAIA, AgentBench, WebArena, ToolBench, τ-bench, BFCL |
 
 ---

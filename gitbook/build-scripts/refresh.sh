@@ -40,10 +40,15 @@ update_symlinks() {
         if [[ -d "$dir" ]]; then
             local name=$(basename "$dir")
             local link="$src_dir/$name"
-        if [[ ! -e "$link" ]]; then
-            ln -sf "../../$name" "$link"
-            log_info "  新增符号链接: $name"
-        fi
+            # 如果是真实目录（非符号链接），替换为符号链接以确保动态读取
+            if [[ -d "$link" && ! -L "$link" ]]; then
+                rm -rf "$link"
+                ln -sf "../../$name" "$link"
+                log_info "  替换为符号链接: $name"
+            elif [[ ! -e "$link" ]]; then
+                ln -sf "../../$name" "$link"
+                log_info "  新增符号链接: $name"
+            fi
         fi
     done
 }

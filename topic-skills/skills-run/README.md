@@ -1,6 +1,7 @@
 # Skills Demo — 本地运行工单诊断技能
 
 > **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，体验从故障注入到修复验证的完整流程  
+> **场景数量**: 10 个 (5 个基础 + 5 个扩展)  
 > **耗时**: 环境搭建 ~5min + 每个场景 ~5min  
 > **前置条件**: Docker Desktop + kind + kubectl
 
@@ -24,6 +25,11 @@ bash run-skill-demo.sh 2    # Pod CrashLoop
 bash run-skill-demo.sh 3    # Pod Pending
 bash run-skill-demo.sh 4    # DNS 故障
 bash run-skill-demo.sh 5    # Service 无 Endpoints
+bash run-skill-demo.sh 6    # PVC Pending
+bash run-skill-demo.sh 7    # Deployment 卡住
+bash run-skill-demo.sh 8    # RBAC 拒绝
+bash run-skill-demo.sh 9    # HPA 不触发
+bash run-skill-demo.sh 10   # 镜像拉取失败
 
 # 5. 运行完毕后清理
 bash teardown.sh
@@ -33,13 +39,25 @@ bash teardown.sh
 
 ## 场景列表
 
+### 基础场景 (1-5)
+
 | # | 场景 | 对应 Skill | 根因 | 风险等级 |
-|---|------|-----------|------|---------|
+|---|------|-----------|------|----------|
 | 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | 🟢 低 |
 | 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | 🟢 低 |
 | 03 | Pod Pending | SKILL-POD-002 | 资源超限 | 🟢 低 |
 | 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | 🟢 低 |
 | 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | 🟢 低 |
+
+### 扩展场景 (6-10)
+
+| # | 场景 | 对应 Skill | 根因 | 风险等级 |
+|---|------|-----------|------|----------|
+| 06 | PVC Pending | SKILL-STORE-001 | RC-001 (StorageClass 不存在) | 🟢 低 |
+| 07 | Deployment rollout 卡住 | SKILL-WORK-001 | RC-002 (readinessProbe 失败) | 🟢 低 |
+| 08 | RBAC 权限拒绝 | SKILL-SEC-002 | RC-001 (缺少 RBAC 权限) | 🟡 中 |
+| 09 | HPA 不触发扩容 | SKILL-SCALE-001 | RC-002 (未设置 resources.requests) | 🟡 中 |
+| 10 | 镜像拉取失败 | SKILL-IMAGE-001 | RC-001 (镜像不存在) | 🟢 低 |
 
 ---
 
@@ -81,7 +99,7 @@ Phase 6: 验证确认 (Verification)           ← Skill Section 7
 ## 目录结构
 
 ```
-demo/
+skills-run/
 ├── README.md                              # 本文件
 ├── setup-kind-cluster.sh                  # 创建多节点 Kind 集群
 ├── run-skill-demo.sh                      # 交互式 demo 运行器
@@ -91,7 +109,12 @@ demo/
 │   ├── 02-pod-crashloop.sh               # SKILL-POD-001
 │   ├── 03-pod-pending.sh                 # SKILL-POD-002
 │   ├── 04-dns-failure.sh                 # SKILL-NET-001
-│   └── 05-service-no-endpoints.sh        # SKILL-NET-002
+│   ├── 05-service-no-endpoints.sh        # SKILL-NET-002
+│   ├── 06-pvc-pending.sh                 # SKILL-STORE-001 / RC-001
+│   ├── 07-deployment-stuck.sh            # SKILL-WORK-001 / RC-002
+│   ├── 08-rbac-denied.sh                 # SKILL-SEC-002 / RC-001
+│   ├── 09-hpa-not-scaling.sh             # SKILL-SCALE-001 / RC-002
+│   └── 10-image-pull-failure.sh          # SKILL-IMAGE-001 / RC-001
 └── manifests/                             # (预留) YAML 清单
 ```
 
@@ -153,9 +176,10 @@ sudo mv kubectl /usr/local/bin/kubectl
 
 ### 添加新场景
 
-1. 在 `scenarios/` 下创建 `06-xxx.sh`
+1. 在 `scenarios/` 下创建 `11-xxx.sh` (双位数编号)
 2. 遵循现有场景的 6-Phase 结构
 3. 在 `run-skill-demo.sh` 的菜单中添加入口
+4. 更新本 README 的场景列表
 
 ### 修改集群配置
 

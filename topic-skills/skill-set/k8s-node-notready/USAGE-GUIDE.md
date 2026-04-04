@@ -1,6 +1,6 @@
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
 
-> **范围**：`topic-skills/k8s-node-notready/` ↔ `topic-fta/list/node-fta.md`  
+> **范围**：`topic-skills/skill-set/k8s-node-notready/` ↔ `topic-fta/list/node-fta.md`  
 > **受众**：AI Agent 运行时开发者、集成诊断系统的 SRE 团队，以及扩展知识库的贡献者  
 > **版本**：1.0 — 2026-03
 
@@ -53,7 +53,7 @@
 ### 2.1 Skill 系统文件
 
 ```
-topic-skills/k8s-node-notready/
+topic-skills/skill-set/k8s-node-notready/
 ├── SKILL.md                          # 人机共用的主 Skill 文档
 ├── assets/
 │   ├── skill-metadata.yaml           # 机器可解析的路由与 FTA 索引
