@@ -58,6 +58,89 @@ StorageClass 是 Kubernetes 中用于描述管理员所提供的存储“类别�
 - 使用 `WaitForFirstConsumer` 时，不要在 Pod 规格中使用 `nodeName` 直接指定节点，否则调度器会被绕过，PVC 可能一直停留在 Pending 状态。
 - In-tree 存储插件（如 `kubernetes.io/gce-pd`、`kubernetes.io/vsphere-volume`）大多已弃用或移除，建议迁移到对应的 CSI 驱动。
 
+## 生产 YAML 示例
+
+### 多层级 StorageClass（SSD / HDD / Local）
+
+```yaml
+# 高性能 SSD（AWS EBS gp3）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3-encrypted
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  iops: "3000"
+  throughput: "125"
+  encrypted: "true"
+  kmsKeyId: "arn:aws:kms:us-east-1:123456789:key/xxx"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+---
+# 高吞吐 HDD（AWS EBS st1）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: st1-throughput
+provisioner: ebs.csi.aws.com
+parameters:
+  type: st1
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+---
+# 本地存储（不支持动态供给）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| PVC Pending 无 Events | 无默认 StorageClass 且 PVC 未指定 storageClassName | `kubectl get sc` 确认是否有默认 SC |
+| PVC 绑定了错误可用区的 PV | 使用 Immediate 绑定模式 | 改用 `WaitForFirstConsumer` |
+| 卷扩展失败 | StorageClass 未设置 allowVolumeExpansion | 修改 SC 添加 `allowVolumeExpansion: true` |
+| provisioner 创建卷超时 | CSI 驱动 Pod 异常 | `kubectl get pods -n kube-system -l app=ebs-csi-controller` |
+
+## 生产检查清单
+
+- [ ] 只设置一个默认 StorageClass
+- [ ] 拓扑受限存储使用 `WaitForFirstConsumer`
+- [ ] 关键数据使用 `reclaimPolicy: Retain`
+- [ ] 启用 `allowVolumeExpansion: true`
+- [ ] 使用 CSI 驱动，避免 in-tree 插件
+- [ ] 启用存储加密（encrypted + kmsKeyId）
+
+## 命令快速参考
+
+```bash
+# 查看 StorageClass
+kubectl get sc
+
+# 查看默认 StorageClass
+kubectl get sc -o jsonpath='{range .items[?(@.metadata.annotations.storageclass\.kubernetes\.io/is-default-class=="true")]}{.metadata.name}{"\n"}{end}'
+
+# 设置默认 StorageClass
+kubectl annotate sc gp3-encrypted storageclass.kubernetes.io/is-default-class=true
+```
+
+## 交叉引用
+
+- [持久卷](./persistent-volumes.md) — PV/PVC 与 StorageClass 的关系
+- [动态卷供给](./dynamic-volume-provisioning.md) — StorageClass 驱动的动态供给
+- [卷属性类](./volume-attributes-classes.md) — 运行时修改卷性能属性
+- [存储容量](./storage-capacity.md) — 容量感知调度
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/storage-classes/

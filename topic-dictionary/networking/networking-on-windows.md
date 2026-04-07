@@ -41,6 +41,110 @@ Kubernetes 支持在 Windows 节点上运行工作负载，并允许与 Linux �
 - **确认操作系统版本**：DSR、Session Affinity、双栈等功能对 Windows Server 版本有最低要求，部署前需核对版本和补丁。
 - **注意 CNI 插件兼容性**：确保选用的 CNI 插件在 Windows 上有稳定支持，并了解其对 Service、NetworkPolicy 等功能的实现程度。
 
+## 生产 YAML 示例
+
+### Windows Pod + nodeSelector 配置
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iis-web
+  namespace: windows-apps
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: iis-web
+  template:
+    metadata:
+      labels:
+        app: iis-web
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows       # 调度到 Windows 节点
+      tolerations:
+      - key: "os"
+        operator: "Equal"
+        value: "windows"
+        effect: "NoSchedule"
+      containers:
+      - name: iis
+        image: mcr.microsoft.com/windows/servercore/iis:ltsc2022
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iis-web
+  namespace: windows-apps
+spec:
+  type: LoadBalancer
+  selector:
+    app: iis-web
+  ports:
+  - port: 80
+    targetPort: 80
+  externalTrafficPolicy: Local
+  sessionAffinity: ClientIP          # Windows Server 2022+ 支持
+```
+
+## Windows 网络模式对比
+
+| 模式 | 隔离性 | 性能 | 双栈 | CNI | 适用场景 |
+|------|--------|------|------|-----|----------|
+| L2bridge | 低（共享 MAC） | 最佳 | 支持 | win-bridge, Azure-CNI | 通用生产 |
+| L2tunnel | 中（SDN） | 好 | — | Azure-CNI | Azure 专用 |
+| Overlay (VXLAN) | 高（封装） | 中 | 不支持 | win-overlay, Flannel | IP 隔离需求 |
+| Transparent | 中 | 好 | — | ovn-kubernetes | OVN 生态 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| ping 不通但 curl 可用 | Windows VFP 不支持 ICMP 包转换 | 使用 `curl` 或 `Resolve-DnsName` 替代 `ping` |
+| Service 访问超时 | kube-proxy Windows 模式配置不正确 | `Get-HnsNetwork` 检查 HNS 网络状态 |
+| Session Affinity 不生效 | Windows Server 版本低于 2022 | 确认 OS 版本 ≥ Windows Server 2022 |
+| 双栈不工作 | 使用了 Overlay 网络模式 | 切换到 l2bridge 模式 |
+| DNS 解析异常 | Windows Pod 不支持部分限定域名 | 使用 FQDN 或 Service 短名 |
+
+## 生产检查清单
+
+- [ ] Windows 节点打上 `kubernetes.io/os: windows` 标签
+- [ ] Windows 节点设置 taint 防止 Linux Pod 调度
+- [ ] 选择匹配需求的网络模式（l2bridge 优先）
+- [ ] 需要双栈时使用 l2bridge（Overlay 不支持）
+- [ ] 确认 OS 版本满足功能需求（DSR/Session Affinity 等）
+- [ ] 网络调试使用 curl 而非 ping
+
+## 命令快速参考
+
+```bash
+# Windows 节点 PowerShell 诊断
+Get-HnsNetwork                     # 查看 HNS 网络
+Get-HnsEndpoint                    # 查看 HNS 端点
+Get-NetAdapter                     # 查看网络适配器
+
+# 从 Windows Pod 内调试
+Resolve-DnsName my-service.production.svc.cluster.local
+curl http://my-service:80
+
+# 检查 kube-proxy Windows 模式
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20
+```
+
+## 交叉引用
+
+- [Service](service.md) — Service 类型和流量策略在 Windows 上的支持
+- [IPv4/IPv6 Dual Stack](ipv4-ipv6-dual-stack.md) — 双栈在 Windows 上的限制
+- [DNS for Services](dns-for-services-and-pods.md) — Windows DNS 解析差异
+- [Cluster Networking](cluster-networking.md) — CNI 插件选型
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/windows-networking/

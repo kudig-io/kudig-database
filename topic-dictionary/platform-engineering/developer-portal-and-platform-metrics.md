@@ -110,6 +110,81 @@ spec:
 - **平台也要有 SLO**：如果平台本身不稳定（如 Template 生成失败、Catalog 同步延迟），开发者会迅速失去信心
 - **度量要行动导向**：不要只收集数据，要将指标转化为具体的改进项并公开进度
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| Backstage UI 无法访问 | Pod 崩溃或 Service 配置错误 | `kubectl get pods -n backstage`；`kubectl logs -n backstage <pod>` |
+| Catalog 中组件缺失 | catalog-info.yaml 未注册或格式错误 | Backstage UI → Catalog → 检查 Refresh 状态；验证 YAML 格式 |
+| Template 执行失败 | Scaffolder 步骤出错（Git push 权限/模板语法） | Backstage UI → Templates → 查看 Task Log 详情 |
+| TechDocs 页面 404 | MkDocs 构建失败或 S3 存储未配置 | 检查 TechDocs 后端日志；本地运行 `mkdocs build` 验证 |
+| 插件集成数据为空 | 插件配置的 API Token 过期或 URL 错误 | 检查 `app-config.yaml` 中插件的 `baseUrl` 和认证配置 |
+| Catalog 数据不一致 | 组件的 owner/lifecycle 未更新 | 建立定期 Catalog 审查流程；使用 Backstage API 批量校验 |
+| DORA 指标采集失败 | CI/CD 系统 webhook 断开 | 检查 webhook 投递日志；验证 DORA plugin 数据源配置 |
+| 门户响应缓慢 | Catalog 实体数量过大或数据库性能瓶颈 | 检查 PostgreSQL 慢查询；考虑 Catalog 分页和索引优化 |
+
+## 生产检查清单
+
+- [ ] Backstage 后端使用 PostgreSQL（非 SQLite），并配置了备份
+- [ ] 所有新服务必须通过 Backstage Template 创建（强制 Catalog 注册）
+- [ ] catalog-info.yaml 中的 owner 和 lifecycle 字段保持实时更新
+- [ ] Golden Path Template 内嵌了最佳实践（Health Probe、Resource Limits、NetworkPolicy）
+- [ ] 插件 API Token 使用 External Secrets 管理，定期轮换
+- [ ] DORA 指标采集已配置（部署频率、变更前置时间、变更失败率、MTTR）
+- [ ] 开发者满意度（DX Score）定期调研并追踪趋势
+- [ ] Platform SLO 已定义（Template 执行成功率 > 99%，Catalog 同步延迟 < 5 min）
+- [ ] Backstage 本身配置了 HA 和 PDB
+- [ ] 定期举办 Demo Day 和培训推广平台使用
+
+## 命令快速参考
+
+```bash
+# --- Backstage 运维 ---
+# 查看 Backstage Pod 状态
+kubectl get pods -n backstage
+
+# 查看 Backstage 日志
+kubectl logs -n backstage -l app=backstage --tail=100
+
+# 重启 Backstage（滚动更新）
+kubectl rollout restart deployment/backstage -n backstage
+
+# 查看 Backstage 配置
+kubectl get configmap backstage-app-config -n backstage -o yaml
+
+# --- Catalog 管理 ---
+# 通过 API 查看所有 Catalog 实体
+curl -H "Authorization: Bearer <token>" https://<backstage-url>/api/catalog/entities
+
+# 触发 Catalog Refresh
+curl -X POST -H "Authorization: Bearer <token>" https://<backstage-url>/api/catalog/refresh
+
+# --- DORA 指标查询（Prometheus） ---
+# 部署频率（每天部署次数）
+# PromQL: sum(increase(deployment_total[24h]))
+
+# 变更前置时间（从提交到部署的平均时间）
+# PromQL: histogram_quantile(0.5, sum(rate(lead_time_seconds_bucket[7d])) by (le))
+
+# 变更失败率
+# PromQL: sum(rate(deployment_failure_total[7d])) / sum(rate(deployment_total[7d]))
+
+# --- 平台健康检查 ---
+# 检查 Backstage 健康端点
+curl https://<backstage-url>/healthcheck
+
+# 检查 PostgreSQL 连接
+kubectl exec -n backstage <pod> -- pg_isready -h <db-host>
+```
+
+## 交叉引用
+
+- [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — Argo CD/Flux 与 Backstage 集成
+- [infrastructure-as-code-for-kubernetes.md](./infrastructure-as-code-for-kubernetes.md) — IaC 自动化与开发者自助服务
+- [cluster-api-and-fleet-management.md](./cluster-api-and-fleet-management.md) — 多集群环境的门户管理
+- [operator-pattern.md](./operator-pattern.md) — 平台能力的 Operator 封装
+- [custom-resources.md](./custom-resources.md) — 平台 CRD 与 Backstage Catalog 集成
+
 ## 参考链接
 
 - [Backstage Documentation](https://backstage.io/docs/)

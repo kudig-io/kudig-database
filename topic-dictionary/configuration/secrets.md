@@ -58,6 +58,153 @@ Secret 是 Kubernetes 中用于存储敏感数据（如密码、令牌、密钥�
 - **隔离命名空间**：利用命名空间隔离不同团队或应用的 Secret 访问范围。
 - **替代方案**：对于高安全要求场景，可结合外部密钥管理系统（如 Vault、AWS Secrets Manager、Azure Key Vault）或 CSI 驱动动态注入 Secret。
 
+## 生产 YAML 示例
+
+### TLS Secret + 镜像拉取凭据
+
+```yaml
+# 1. TLS Secret（Ingress HTTPS 证书）
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-wildcard-example
+  namespace: production
+type: kubernetes.io/tls
+data:
+  tls.crt: <base64-encoded-cert>
+  tls.key: <base64-encoded-key>
+immutable: true                            # 证书更新时创建新 Secret + 更新 Ingress 引用
+---
+# 2. 私有镜像仓库凭据
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-credentials
+  namespace: production
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: <base64-encoded-docker-config>
+---
+# 3. 应用数据库密码（Opaque 类型）
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-credentials
+  namespace: production
+  labels:
+    app: order-service
+type: Opaque
+stringData:                                # stringData 接受明文，创建时自动 base64 编码
+  DB_USERNAME: "app_user"
+  DB_PASSWORD: "s3cur3-p@ssw0rd!"
+```
+
+### Pod 安全使用 Secret
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      imagePullSecrets:
+        - name: registry-credentials       # 镜像拉取凭据
+      containers:
+        - name: app
+          image: registry.example.com/order:v3.0
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: tls-certs
+              mountPath: /etc/tls
+              readOnly: true
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+      volumes:
+        - name: tls-certs
+          secret:
+            secretName: tls-wildcard-example
+            defaultMode: 0400              # 严格文件权限
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 启动失败，镜像拉取 ImagePullBackOff | imagePullSecrets 缺失或凭据过期 | `kubectl get secret registry-credentials -o yaml`；重新创建凭据 |
+| Secret 卷挂载后文件内容为空 | Secret data 字段为空或 key 不存在 | `kubectl get secret <name> -o jsonpath='{.data}'` 检查内容 |
+| base64 解码后内容包含多余换行 | 编码时包含了尾部换行符 | `echo -n 'value' | base64`（注意 `-n` 避免换行） |
+| 环境变量中 Secret 未更新 | 环境变量注入不自动更新 | 重启 Pod 或改用卷挂载方式 |
+| etcd 中 Secret 明文可见 | 未启用静态加密 | 配置 EncryptionConfiguration 启用 Secret 加密 |
+
+## 生产检查清单
+
+- [ ] 启用 etcd 静态加密（Encryption at Rest）
+- [ ] 配置 RBAC 最小权限：仅授予 Pod 运行所需的 Secret 访问
+- [ ] 不授予命名空间级别的 `list` / `watch` Secret 权限
+- [ ] 使用 `stringData` 而非手动 base64 编码（减少错误）
+- [ ] 证书类 Secret 设置 `immutable: true`
+- [ ] 建立 Secret 定期轮转机制
+- [ ] 高安全场景集成外部密钥管理（Vault / AWS Secrets Manager / CSI driver）
+- [ ] 卷挂载 Secret 文件权限设为 0400 或 0440
+- [ ] 不将 Secret YAML 提交到版本控制系统
+
+## 命令快速参考
+
+```bash
+# 从字面量创建 Opaque Secret
+kubectl create secret generic db-credentials \
+  --from-literal=DB_USERNAME=app_user \
+  --from-literal=DB_PASSWORD='s3cur3-p@ssw0rd!' \
+  -n production
+
+# 创建 TLS Secret
+kubectl create secret tls tls-wildcard-example \
+  --cert=tls.crt --key=tls.key -n production
+
+# 创建镜像拉取凭据
+kubectl create secret docker-registry registry-credentials \
+  --docker-server=registry.example.com \
+  --docker-username=user --docker-password=pass \
+  -n production
+
+# 查看 Secret（解码值）
+kubectl get secret db-credentials -n production -o jsonpath='{.data.DB_PASSWORD}' | base64 -d
+
+# 检查 Secret 类型
+kubectl get secrets -n production -o custom-columns='NAME:.metadata.name,TYPE:.type'
+
+# 查看引用 Secret 的 Pod
+kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.secret.secretName == "db-credentials") | .metadata.name'
+```
+
+## 交叉引用
+
+- [ConfigMaps](./configmaps.md) — 非机密配置存储
+- [存活、就绪和启动探针](./liveness-readiness-and-startup-probes.md) — 探针可验证密钥/证书加载
+- [使用 kubeconfig 文件组织集群访问](./organizing-cluster-access-using-kubeconfig-files.md) — kubeconfig 中的认证凭据
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)

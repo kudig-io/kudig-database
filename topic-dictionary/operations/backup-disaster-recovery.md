@@ -113,9 +113,58 @@ spec:
 - **文档化恢复流程**：将恢复步骤写成 Runbook，确保在高压情况下任何人都能按步骤执行
 - **网络隔离测试**：在隔离的测试环境中验证从生产备份恢复的数据，避免污染生产环境
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| Velero 备份失败 | 对象存储凭证过期或桶不存在 | `velero backup describe <name> --details` | 更新 BSL 凭证并验证桶存在 |
+| etcd 快照恢复后集群异常 | 快照版本与当前集群不兼容 | `etcdctl snapshot status <file>` | 确认快照来自相同 K8s 版本的集群 |
+| PVC 数据恢复为空 | 快照未正确创建或 CSI 驱动不支持 | `velero backup describe <name> \| grep VolumeSnapshot` | 确认 CSI 驱动支持 VolumeSnapshot |
+| 恢复后 Secret 无法解密 | 加密密钥不匹配 | `kubectl get secret <name> -o yaml` | 使用原集群的 encryption config 解密 |
+| 备份存储空间持续增长 | TTL 过长或过期备份未清理 | `velero backup get` | 设置合理的 `ttl` 并验证 GC 策略 |
+| 跨集群恢复 Service IP 冲突 | 目标集群 Service CIDR 不同 | `kubectl get svc -A` | 恢复前调整目标集群 Service CIDR 或使用 restore mapping |
+
+## 生产检查清单
+
+- [ ] etcd 快照 CronJob 每小时执行，上传至对象存储
+- [ ] Velero 定时备份已配置（生产 Namespace）
+- [ ] 备份遵循 3-2-1 原则（3 副本、2 种介质、1 份异地）
+- [ ] 备份文件已加密存储
+- [ ] 每季度至少进行一次恢复演练
+- [ ] RTO/RPO 目标已定义并经过验证
+- [ ] 数据库使用原生备份工具 + PITR
+- [ ] 恢复流程已写成 Runbook 并可被任何团队成员执行
+- [ ] 空气间隙离线备份已配置（勒索软件防护）
+
+## 命令快速参考
+
+```bash
+# etcd 备份
+ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+
+# etcd 恢复
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/lib/etcd-restored
+
+# Velero: 创建备份
+velero backup create prod-backup --include-namespaces production --snapshot-volumes
+
+# Velero: 定时备份
+velero schedule create daily-prod --schedule="0 2 * * *" --include-namespaces production --ttl 720h
+
+# Velero: 恢复
+velero restore create --from-backup prod-backup --include-namespaces production
+
+# Velero: 查看备份状态
+velero backup get && velero restore get
+```
+
+## 交叉引用
 
 - [Velero Documentation](https://velero.io/docs/)
 - [Kubernetes etcd Backup and Restore](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster)
 - [Kasten K10 Documentation](https://docs.kasten.io/)
-- [3-2-1 Backup Strategy - NIST](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/backup-and-recovery)
+- 相关主题：[有状态服务运维](stateful-services-operations.md) · [Persistent Volumes](../storage/persistent-volumes.md) · [Volume Snapshots](../storage/volume-snapshots.md)

@@ -29,5 +29,173 @@ Kubernetes 提供多个内置 API 用于声明式地管理工作负载及其组�
 - DaemonSet Pod 通常需要较高的优先级，以确保在节点上优先调度。
 - 对于预期会自行终止的任务，使用 Job 而非 ReplicaSet/Deployment。
 
+## 工作负载选型决策指南
+
+```
+需要管理应用？
+├── 无状态应用
+│   ├── 长期运行服务 → Deployment
+│   └── 批处理/一次性任务
+│       ├── 一次执行 → Job
+│       └── 定时执行 → CronJob
+├── 有状态应用
+│   └── 需要稳定标识/存储 → StatefulSet
+└── 节点级别服务
+    └── 每个节点一个副本 → DaemonSet
+```
+
+## 实战 YAML 示例
+
+### 工作负载选型对比矩阵
+
+| 特性 | Deployment | StatefulSet | DaemonSet | Job | CronJob |
+|------|-----------|-------------|-----------|-----|---------|
+| Pod 标识 | 随机，可互换 | 有序，粘性标识 | 每节点一个 | 临时 | 临时 |
+| 网络标识 | 通过 Service | Headless Service | 可用 hostPort | 无 | 无 |
+| 持久存储 | 共享 PVC | 每 Pod 独立 PVC | 通常用 hostPath | 按需 | 按需 |
+| 滚动更新 | 支持 | 支持（有序） | 支持 | 不适用 | 不适用 |
+| 扩缩容 | 手动/HPA | 手动（有序） | 随节点自动 | 并行度控制 | 不适用 |
+| 完成语义 | 无（持续运行） | 无（持续运行） | 无（持续运行） | 运行到完成 | 按计划触发 |
+
+### 典型生产架构示例
+
+```yaml
+# 1. 无状态 API 服务 → Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-server
+  template:
+    metadata:
+      labels:
+        app: api-server
+    spec:
+      containers:
+      - name: api
+        image: myregistry.com/api:v2.0
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+---
+# 2. 有状态数据库 → StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: prod
+spec:
+  serviceName: postgres-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16.3
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "2Gi"
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 100Gi
+---
+# 3. 节点监控 → DaemonSet
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+    spec:
+      tolerations:
+      - operator: Exists
+      containers:
+      - name: exporter
+        image: prom/node-exporter:v1.8.0
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+```
+
+## 故障排查
+
+### 不确定应该使用哪种工作负载类型
+- **判断标准**:
+  ```bash
+  # 查看现有工作负载分布
+  kubectl get deployments,statefulsets,daemonsets,jobs,cronjobs -A --no-headers | awk '{print $1}' | sort | uniq -c | sort -rn
+  ```
+- **指导原则**: 如果应用的所有实例完全等价 → Deployment；如果每个实例需要独立标识或存储 → StatefulSet。
+
+### 工作负载 Pod 不断被驱逐
+- **诊断命令**:
+  ```bash
+  # 查看所有 Evicted Pod
+  kubectl get pods -A --field-selector=status.phase=Failed | grep Evicted
+  # 查看节点资源压力
+  kubectl top nodes
+  kubectl describe node <node-name> | grep -A 5 "Conditions"
+  ```
+
+## 生产就绪检查清单
+
+- [ ] 每个工作负载选择了正确的控制器类型
+- [ ] 所有 Deployment 配置了 PDB（Pod Disruption Budget）
+- [ ] StatefulSet 配合 Headless Service 使用
+- [ ] DaemonSet 设置了合适的 PriorityClass 和 tolerations
+- [ ] Job/CronJob 配置了 `ttlSecondsAfterFinished` 自动清理
+- [ ] 所有工作负载配置了 `resources.requests/limits`
+- [ ] 关键工作负载配置了 `topologySpreadConstraints` 跨可用区分布
+
+## 命令快速参考
+
+```bash
+# 查看所有工作负载
+kubectl get deployments,statefulsets,daemonsets,jobs,cronjobs -n prod
+
+# 查看工作负载事件
+kubectl describe deployment <name> -n prod | tail -20
+
+# 批量查看所有工作负载的副本状态
+kubectl get deployments -n prod -o custom-columns='NAME:.metadata.name,DESIRED:.spec.replicas,READY:.status.readyReplicas,AVAILABLE:.status.availableReplicas'
+```
+
+## 交叉引用
+
+- [Deployments](./deployments.md)
+- [StatefulSets](./statefulsets.md)
+- [DaemonSet](./daemonset.md)
+- [Jobs](./jobs.md)
+- [CronJob](./cronjob.md)
+- [Managing Workloads（操作指南）](./managing-workloads.md)
+- [工作负载概览与架构](../../domain-4-workloads/01-workload-overview-architecture.md)
+- [工作负载故障排查手册](../../domain-4-workloads/07-workload-troubleshooting-handbook.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/

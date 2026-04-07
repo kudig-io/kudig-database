@@ -112,9 +112,63 @@ etcd 集群内部节点之间以及对客户端（主要是 API Server）都采�
 - **使用标准工具**：官方文档推荐使用 `easyrsa`、`openssl` 或 `cfssl` 生成证书；生产环境可结合 `cert-manager` 或 `certificates.k8s.io` API 实现自动化管理。
 - **备份 `sa.key`**：服务账户私钥一旦丢失，所有由它签发的 ServiceAccount Token 都将失效，务必做好备份。
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| API Server 启动失败，TLS 错误 | 证书过期或 SAN 不匹配 | `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates -text` | 重新签发包含正确 SAN 的证书 |
+| kubelet 无法注册到 API Server | 客户端证书无效或 CN/O 不匹配 | `openssl verify -CAfile ca.crt kubelet-client.crt` | 检查 CN 为 `system:node:<nodeName>`，O 为 `system:nodes` |
+| etcd 集群不健康 | peer 证书不被信任 | `etcdctl endpoint health --cluster` | 确认 etcd CA 签发了所有 peer 和 client 证书 |
+| kubectl 报 x509 证书错误 | kubeconfig 中 CA 与集群不匹配 | `kubectl config view --raw` | 更新 kubeconfig 中的 `certificate-authority-data` |
+| 证书即将过期 | 未配置自动轮换 | `kubeadm certs check-expiration` | 运行 `kubeadm certs renew all` 并重启控制平面组件 |
+| front-proxy 认证失败 | front-proxy CA 未正确配置 | `openssl x509 -in front-proxy-ca.crt -noout -subject` | 确认 `--requestheader-client-ca-file` 指向 front-proxy CA |
+| ServiceAccount Token 失效 | sa.key 丢失或不匹配 | `kubectl get sa -A` | 从备份恢复 `sa.key`/`sa.pub` 并重启 API Server |
+
+## 生产检查清单
+
+- [ ] 所有 CA 私钥不存储在集群节点上（外部 CA 模式）
+- [ ] 服务端证书包含所有必要的 SAN（IP + DNS）
+- [ ] etcd 启用 mTLS（双向 TLS）
+- [ ] 证书有效期不超过 1 年，配置自动轮换
+- [ ] `kubeadm certs check-expiration` 纳入定期巡检
+- [ ] `sa.key` / `sa.pub` 已安全备份
+- [ ] 管理员账户使用独立证书，不复用 `system:masters` 组
+- [ ] 证书轮换后所有控制平面组件已重启确认
+- [ ] 生产环境使用 cert-manager 或 certificates.k8s.io API 管理证书
+
+## 命令快速参考
+
+```bash
+# 检查证书过期时间
+kubeadm certs check-expiration
+
+# 轮换所有证书
+kubeadm certs renew all
+
+# 查看证书详情（SAN、有效期、签发者）
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text
+
+# 验证证书链
+openssl verify -CAfile /etc/kubernetes/pki/ca.crt /etc/kubernetes/pki/apiserver.crt
+
+# etcd 快照备份（含 TLS 参数）
+ETCDCTL_API=3 etcdctl snapshot save /backup/etcd.db \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+
+# 手动生成 CSR
+openssl req -new -key server.key -out server.csr -subj "/CN=kube-apiserver"
+
+# 使用 cfssl 签发证书
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json server-csr.json | cfssljson -bare server
+```
+
+## 交叉引用
 
 - [PKI Certificates and Requirements - Kubernetes Best Practices](https://kubernetes.io/docs/setup/best-practices/certificates/)
 - [Generating Certificates Manually](https://kubernetes.io/docs/tasks/administer-cluster/certificates/)
 - [Certificate Management with kubeadm](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/)
 - [Managing TLS in a Cluster](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/)
+- 相关主题：[Secrets](../configuration/secrets.md) · [API Priority and Fairness](../platform-engineering/api-priority-and-fairness.md)

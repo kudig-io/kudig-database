@@ -55,6 +55,51 @@
 - 为 `WaitForFirstConsumer` 模式的 StorageClass 配置容量跟踪，能显著改善 Pod 调度体验。
 - 当 Pod 使用多个卷时，需关注可能出现部分卷创建成功但后续卷容量不足的情况。
 
+## 生产 YAML 示例
+
+### 启用存储容量跟踪的 CSI 驱动
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: CSIDriver
+metadata:
+  name: local.csi.example.com
+spec:
+  storageCapacity: true                    # 启用容量跟踪
+  volumeLifecycleModes:
+    - Persistent
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 被调度到容量不足的节点 | 容量信息过期 | `kubectl get csistoragecapacity` 检查更新时间 |
+| 多卷 Pod 部分创建成功部分失败 | 第一个卷消耗完剩余容量 | 需人工干预：扩容或删除已创建卷 |
+| CSIStorageCapacity 对象不存在 | CSI 驱动未启用容量跟踪 | 确认 CSIDriver 的 `storageCapacity: true` |
+
+## 生产检查清单
+
+- [ ] 本地存储 / 拓扑受限 CSI 驱动启用 `storageCapacity: true`
+- [ ] 配合 `WaitForFirstConsumer` 绑定模式
+- [ ] 监控 CSIStorageCapacity 对象的更新频率
+
+## 命令快速参考
+
+```bash
+# 查看存储容量对象
+kubectl get csistoragecapacity -A
+
+# 查看特定 SC 的容量
+kubectl get csistoragecapacity -A -o custom-columns='SC:.storageClassName,CAPACITY:.capacity,NODES:.nodeTopology'
+```
+
+## 交叉引用
+
+- [存储类](./storage-classes.md) — WaitForFirstConsumer 绑定模式
+- [节点特定卷限制](./node-specific-volume-limits.md) — 节点级卷数量限制
+- [动态卷供给](./dynamic-volume-provisioning.md) — 容量感知供给
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/storage-capacity/

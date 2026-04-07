@@ -40,6 +40,141 @@ Kubernetes 通过集群 DNS（通常由 CoreDNS 实现）为 Service 和 Pod 创
 - **setHostnameAsFQDN 长度检查**：建议在集群中部署 admission webhook，防止用户创建 FQDN 超过 64 字符的 Pod，避免启动失败。
 - **搜索域合并**：自定义 `dnsConfig.searches` 时会与集群默认搜索域合并并去重，留意总数量不要超过 32 条。
 
+## 生产 YAML 示例
+
+### Pod DNS 配置
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: custom-dns-pod
+  namespace: production
+spec:
+  dnsPolicy: None                  # 完全自定义 DNS
+  dnsConfig:
+    nameservers:
+    - 10.96.0.10                   # 集群 DNS
+    - 8.8.8.8                      # 备用外部 DNS
+    searches:
+    - production.svc.cluster.local
+    - svc.cluster.local
+    - cluster.local
+    - corp.example.com             # 企业内部 DNS 域
+    options:
+    - name: ndots
+      value: "5"
+    - name: timeout
+      value: "2"
+    - name: attempts
+      value: "3"
+  containers:
+  - name: app
+    image: registry.example.com/apps/service:v1.0
+```
+
+### Headless Service + StatefulSet Pod DNS
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: cache
+spec:
+  clusterIP: None                  # Headless
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: cache
+spec:
+  serviceName: redis               # 对应 Headless Service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.2
+        ports:
+        - containerPort: 6379
+
+# 生成的 DNS 记录：
+# redis-0.redis.cache.svc.cluster.local → Pod IP
+# redis-1.redis.cache.svc.cluster.local → Pod IP
+# redis-2.redis.cache.svc.cluster.local → Pod IP
+# redis.cache.svc.cluster.local → 所有 Pod IP（轮询）
+```
+
+## DNS 记录格式速查
+
+| 记录类型 | 格式 | 解析结果 |
+|----------|------|----------|
+| Service A/AAAA | `<svc>.<ns>.svc.cluster.local` | ClusterIP |
+| Headless A/AAAA | `<svc>.<ns>.svc.cluster.local` | 所有 Pod IP |
+| Pod A/AAAA | `<pod-name>.<svc>.<ns>.svc.cluster.local` | 单个 Pod IP |
+| SRV | `_<port>._<proto>.<svc>.<ns>.svc.cluster.local` | 端口 + 域名 |
+| Pod（基于 IP） | `<a-b-c-d>.<ns>.pod.cluster.local` | Pod IP |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| DNS 解析超时 | CoreDNS Pod 不健康或资源不足 | `kubectl get pods -n kube-system -l k8s-app=kube-dns` |
+| 短名解析失败 | `ndots` 设置过低 | 检查 `/etc/resolv.conf` 中的 `ndots` 值（默认 5） |
+| 跨命名空间解析失败 | 使用了短名而非 FQDN | 使用 `<svc>.<ns>` 或完整 FQDN |
+| `hostname -f` 返回短名 | 未配置 `subdomain` 或 `setHostnameAsFQDN` | 检查 Pod spec 中的 hostname/subdomain 字段 |
+| Windows Pod DNS 异常 | 不支持 `ClusterFirstWithHostNet` 和部分限定名 | 使用 FQDN 或短名，避免部分限定名如 `svc.ns` |
+
+## 生产检查清单
+
+- [ ] 优先使用 DNS（而非环境变量）进行服务发现
+- [ ] CoreDNS 至少 2 副本 + 资源 request 已配置
+- [ ] 高 QPS 场景配置 CoreDNS 自动扩缩（dns-autoscaler）
+- [ ] 自定义 `dnsConfig` 时确保 searches 总数不超过 32 条
+- [ ] `setHostnameAsFQDN` 启用前检查 FQDN 不超过 64 字符
+- [ ] Windows 节点应用使用完整 FQDN 或短名
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 的 DNS 配置
+kubectl exec <pod> -- cat /etc/resolv.conf
+
+# 测试 DNS 解析
+kubectl exec <pod> -- nslookup my-service.my-namespace.svc.cluster.local
+
+# 查看 CoreDNS 日志
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
+
+# 测试 SRV 记录
+kubectl exec <pod> -- nslookup -type=SRV _http._tcp.my-service.production.svc.cluster.local
+
+# 检查 CoreDNS 配置
+kubectl get configmap coredns -n kube-system -o yaml
+
+# 从集群内 debug DNS
+kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dnsutils -- nslookup kubernetes.default
+```
+
+## 交叉引用
+
+- [Service](service.md) — Service 的 DNS 名称和服务发现
+- [Pod Hostname](../workloads/pod-hostname.md) — Pod 主机名和 FQDN 配置
+- [EndpointSlices](endpointslices.md) — Headless Service 的 DNS 记录来源
+- [IPv4/IPv6 Dual Stack](ipv4-ipv6-dual-stack.md) — 双栈环境下的 DNS 记录
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/

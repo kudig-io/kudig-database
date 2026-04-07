@@ -1885,6 +1885,47 @@ print(f"是否可以发布: {can_release}")
 print(f"发布窗口: {window_info}")
 ```
 
+## 故障排查
+
+> 本文件为 SLI/SLO/SLA 工程完整指南。详见上方各章节：1.概念框架、2.SLI 指标定义与采集、3.SLO 设定与管理、5.错误预算管理、6.监控与告警策略。
+
+## 生产检查清单
+
+- [ ] 核心 SLI 已定义（可用性、延迟、错误率、吞吐量）
+- [ ] SLO 已根据业务需求设定（如 99.9% 可用性）
+- [ ] 错误预算已计算并纳入发布决策
+- [ ] Burn rate 告警已配置（1h/6h/3d 多窗口）
+- [ ] SLO Dashboard 对所有利益相关方可见
+- [ ] 错误预算耗尽时的冻结策略已定义
+- [ ] SLA 合规报告按月自动生成
+- [ ] 季度 SLO 审查和调整机制已建立
+
+## 命令快速参考
+
+```bash
+# 可用性 SLI（PromQL）
+# sum(rate(http_requests_total{code!~"5.."}[5m])) / sum(rate(http_requests_total[5m]))
+
+# 延迟 SLI - P99（PromQL）
+# histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))
+
+# 错误预算剩余（PromQL）
+# 1 - ((1 - avg_over_time(slo:availability:ratio[30d])) / (1 - 0.999))
+
+# Burn rate（PromQL）
+# (1 - slo:availability:ratio:1h) / (1 - 0.999)
+
+# 查看 Service 可用性
+kubectl get endpoints -n <namespace>
+
+# 查看 Prometheus 告警规则
+kubectl get prometheusrule -A
+```
+
+## 交叉引用
+
+- 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [变更管理](change-management-release.md) · [运维最佳实践](operations-best-practices.md) · [SRE 成熟度模型](sre-maturity-model.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

@@ -40,6 +40,112 @@ Kubernetes 支持为 Pod 和 Service 同时分配 IPv4 与 IPv6 地址，实现�
 - **LoadBalancer 双栈限制**：云厂商必须同时支持 IPv4 和 IPv6 的外部负载均衡器，否则双栈 LoadBalancer Service 可能无法正确创建。
 - **避免随意更改主地址族**：修改 `ipFamilies` 时只能增删次要地址族，无法更改第一个元素（主地址族），规划时需提前确定。
 
+## 生产 YAML 示例
+
+### 双栈 Service 配置
+
+```yaml
+# PreferDualStack：优先双栈，不支持时回退单栈
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+  namespace: production
+spec:
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+  - IPv4                           # 主地址族
+  - IPv6                           # 次要地址族
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080
+# 结果：分配一个 IPv4 和一个 IPv6 ClusterIP
+---
+# RequireDualStack：强制双栈
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-server
+  namespace: production
+spec:
+  ipFamilyPolicy: RequireDualStack
+  ipFamilies:
+  - IPv6                           # 主地址族为 IPv6
+  - IPv4
+  type: LoadBalancer
+  selector:
+    app: api
+  ports:
+  - port: 443
+    targetPort: 8443
+```
+
+### 集群组件双栈配置参考
+
+```bash
+# kube-apiserver
+--service-cluster-ip-range=10.96.0.0/16,fd00:10:96::/112
+
+# kube-controller-manager
+--cluster-cidr=10.244.0.0/16,fd00:10:244::/48
+--service-cluster-ip-range=10.96.0.0/16,fd00:10:96::/112
+--node-cidr-mask-size-ipv4=24
+--node-cidr-mask-size-ipv6=64
+
+# kube-proxy
+--cluster-cidr=10.244.0.0/16,fd00:10:244::/48
+
+# kubelet（裸金属节点必需）
+--node-ip=192.168.1.10,fd00:192:168:1::10
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Service 创建失败：RequireDualStack 不满足 | 集群未配置双栈 CIDR | 检查 apiserver 的 `--service-cluster-ip-range` 是否包含两个 CIDR |
+| Pod 只有一个 IP | CNI 不支持双栈 | `kubectl get pod -o jsonpath='{.status.podIPs}'` 确认；升级 CNI |
+| IPv6 出站不通 | 缺少 IPv6 NAT/伪装配置 | 部署 ip-masq-agent 或配置透明代理 |
+| 双栈 LoadBalancer 失败 | 云厂商不支持 IPv6 LB | 确认云厂商 LB 的双栈支持；考虑拆分为两个 Service |
+| 修改 ipFamilies 报错 | 尝试更改主地址族 | 只能增删次要地址族，不能更改第一个元素 |
+
+## 生产检查清单
+
+- [ ] 所有组件（apiserver、controller-manager、kube-proxy、kubelet）配置双栈 CIDR
+- [ ] CNI 插件支持双栈（Calico、Cilium 等）
+- [ ] 云 LB 支持 IPv4/IPv6（使用 LoadBalancer 时）
+- [ ] IPv6 出站配置 ip-masq-agent（非公网路由地址时）
+- [ ] Windows 节点仅使用 l2bridge 网络模式（Overlay 不支持双栈）
+- [ ] 升级现有集群后手动将需要双栈的 Service 修改为 `PreferDualStack`
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 双栈 IP
+kubectl get pod <name> -o jsonpath='{.status.podIPs}'
+
+# 查看 Service 的 ClusterIPs
+kubectl get svc <name> -o jsonpath='{.spec.clusterIPs}'
+
+# 查看 Service ipFamilyPolicy
+kubectl get svc <name> -o jsonpath='{.spec.ipFamilyPolicy} {.spec.ipFamilies}'
+
+# 修改现有 Service 为双栈
+kubectl patch svc <name> -p '{"spec":{"ipFamilyPolicy":"PreferDualStack","ipFamilies":["IPv4","IPv6"]}}'
+
+# 测试 IPv6 连通性
+kubectl exec <pod> -- curl -6 http://[<ipv6-addr>]:80
+```
+
+## 交叉引用
+
+- [Service](service.md) — Service 类型和 ClusterIP 分配
+- [Service ClusterIP Allocation](service-clusterip-allocation.md) — 双栈下的 IP 分配策略
+- [Cluster Networking](cluster-networking.md) — 集群网络类型和 CIDR 规划
+- [Networking on Windows](networking-on-windows.md) — Windows 双栈限制
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/dual-stack/

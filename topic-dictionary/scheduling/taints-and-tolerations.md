@@ -80,6 +80,181 @@ Kubernetes 处理多个污点和容忍度的方式类似于过滤器：从节点
 - 从 v1.29 开始，基于污点的驱逐实现已从节点控制器移到了独立的 `taint-eviction-controller` 组件中。可以通过 `--controllers=-taint-eviction-controller` 禁用基于污点的驱逐。
 - 当使用 `Gt`/`Lt` 操作符时，容忍度和污点的值都必须是有效的有符号 64 位整数。
 
+## 生产 YAML 示例
+
+### GPU 专用节点污点 + 容忍度
+
+```yaml
+# 1. 为 GPU 节点设置污点
+# kubectl taint nodes gpu-node-01 nvidia.com/gpu=present:NoSchedule
+
+# 2. GPU 工作负载 Pod — 容忍 GPU 污点 + nodeSelector
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-inference
+  namespace: ml-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ml-inference
+  template:
+    metadata:
+      labels:
+        app: ml-inference
+    spec:
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Equal"
+          value: "present"
+          effect: "NoSchedule"
+      nodeSelector:
+        accelerator: nvidia-a100           # 结合 nodeSelector 确保只调度到 GPU 节点
+      containers:
+        - name: inference
+          image: registry.example.com/inference:v3.0
+          resources:
+            requests:
+              cpu: "4"
+              memory: 16Gi
+              nvidia.com/gpu: "1"
+            limits:
+              nvidia.com/gpu: "1"
+```
+
+### 专用节点隔离（租户隔离）
+
+```yaml
+# 为租户 A 专用节点设置污点
+# kubectl taint nodes tenant-a-node-01 dedicated=tenant-a:NoSchedule
+# kubectl label nodes tenant-a-node-01 dedicated=tenant-a
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-a-app
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tenant-a-app
+  template:
+    metadata:
+      labels:
+        app: tenant-a-app
+    spec:
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "tenant-a"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: dedicated
+                    operator: In
+                    values: ["tenant-a"]   # 确保只在专用节点运行
+      containers:
+        - name: app
+          image: registry.example.com/tenant-a/app:v1.0
+          resources:
+            requests:
+              cpu: "250m"
+              memory: 256Mi
+```
+
+### NoExecute 容忍度（限时容忍）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tolerant-pod
+  namespace: production
+spec:
+  tolerations:
+    - key: "node.kubernetes.io/not-ready"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationSeconds: 120               # 节点 NotReady 后最多等待 2 分钟
+    - key: "node.kubernetes.io/unreachable"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationSeconds: 120
+  containers:
+    - name: app
+      image: registry.example.com/app:v1.0
+      resources:
+        requests:
+          cpu: "100m"
+          memory: 128Mi
+```
+
+## Effect 类型对比
+
+| Effect | 对新 Pod | 对运行中 Pod | 典型场景 |
+|--------|----------|-------------|----------|
+| `NoSchedule` | 阻止调度 | 不驱逐 | GPU 节点、专用节点 |
+| `PreferNoSchedule` | 尽量避免调度 | 不驱逐 | 软性偏好，如旧节点即将退役 |
+| `NoExecute` | 阻止调度 | 驱逐（除非有容忍度） | 节点故障、维护模式 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod Pending，节点有空闲资源 | 节点有 NoSchedule 污点但 Pod 缺少容忍度 | `kubectl describe node <node>` 检查 Taints；`kubectl get pod -o yaml` 检查 tolerations |
+| Pod 被意外驱逐 | 节点添加了 NoExecute 污点 | `kubectl get events --field-selector reason=TaintManagerEviction` |
+| DaemonSet Pod 被驱逐 | DaemonSet 缺少必要的容忍度 | 检查 DaemonSet spec 中的 tolerations 列表 |
+| 使用 nodeName 后 Pod 仍被驱逐 | 节点有 NoExecute 污点 | nodeName 绕过调度器但不绕过 kubelet 驱逐；添加匹配容忍度 |
+| 大量节点同时 NotReady 导致 Pod 雪崩 | 控制平面速率限制不足 | 检查 `--node-eviction-rate` 和 `--secondary-node-eviction-rate` 参数 |
+
+## 生产检查清单
+
+- [ ] GPU / 特殊硬件节点设置 `NoSchedule` 污点
+- [ ] 专用节点同时使用污点 + nodeAffinity（双重保证）
+- [ ] DaemonSet Pod 配置必要的容忍度（monitoring、logging、CNI）
+- [ ] 为关键 Pod 调整 `tolerationSeconds`（默认 300s 可能过长或过短）
+- [ ] 了解内置污点列表（not-ready、unreachable、memory-pressure 等）
+- [ ] 多租户集群使用 admission webhook 自动注入租户容忍度
+- [ ] 监控 `taint-eviction-controller` 的驱逐速率
+
+## 命令快速参考
+
+```bash
+# 为节点添加污点
+kubectl taint nodes <node-name> key=value:NoSchedule
+
+# 移除节点污点
+kubectl taint nodes <node-name> key=value:NoSchedule-
+
+# 查看节点污点
+kubectl get nodes -o custom-columns='NAME:.metadata.name,TAINTS:.spec.taints[*].key'
+
+# 查看节点详细污点信息
+kubectl describe node <node-name> | grep -A 5 Taints
+
+# 查看 Pod 的容忍度
+kubectl get pod <pod-name> -o jsonpath='{.spec.tolerations}' | jq .
+
+# 查看因污点驱逐的事件
+kubectl get events --field-selector reason=TaintManagerEviction --all-namespaces
+
+# 将节点标记为不可调度（添加 NoSchedule 污点）
+kubectl cordon <node-name>
+```
+
+## 交叉引用
+
+- [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — nodeSelector / nodeAffinity 与污点互补
+- [节点压力驱逐](./node-pressure-eviction.md) — kubelet 自动添加压力相关污点
+- [API 发起驱逐](./api-initiated-eviction.md) — `kubectl drain` 与污点驱逐的区别
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — 高优先级 Pod 仍需容忍节点污点
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter NodePool 中的 taints 配置
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)

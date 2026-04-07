@@ -93,6 +93,68 @@ spec:
 - **证书轮换监控**：服务网格依赖 CA 自动签发证书，必须监控证书过期和轮换失败告警
 - **与 Gateway API 对齐**：2026 年推荐使用 Kubernetes Gateway API 替代 Istio 专用的 VirtualService/Gateway 资源
 
+## 方案选型决策
+
+| 维度 | Istio Sidecar | Istio Ambient | Cilium Mesh | Linkerd |
+|------|--------------|---------------|-------------|---------|
+| 数据面 | Per-Pod Envoy | zTunnel + Waypoint | eBPF + Per-node Envoy | Per-Pod Rust proxy |
+| 资源开销 | 高（每 Pod +100m/128Mi） | 中（按需 L7） | 低 | 最低 |
+| L7 功能 | 最完整 | 完整（Waypoint） | 中等 | 中等 |
+| 启动延迟 | 有（等 Sidecar Ready） | 无 | 无 | 有（较小） |
+| mTLS | 自动 | 自动（zTunnel） | WireGuard/SPIFFE | 自动 |
+| 成熟度 | 最高 | GA（v1.24+） | 生产就绪 | 高 |
+| Gateway API | 原生支持 | 原生支持 | 原生支持 | 支持 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Sidecar 注入后 Pod 启动变慢 | Envoy 初始化和 xDS 配置拉取耗时 | 检查 istiod 负载；调整 Envoy concurrency |
+| 服务间 503 错误 | 目标 Pod 未注入 Sidecar 或 mTLS 模式不匹配 | `istioctl analyze`；检查 PeerAuthentication 模式 |
+| istiod 单点故障导致路由异常 | 控制平面未多副本部署 | `kubectl get deploy istiod -n istio-system` 确认副本数 ≥ 2 |
+| 证书过期导致通信中断 | CA 根证书过期或轮换失败 | `istioctl proxy-config secret <pod>` 检查证书有效期 |
+| L7 策略导致性能下降 | VirtualService/HTTPRoute 规则过多 | 精简路由规则；评估是否仅需 L4 策略 |
+
+## 生产检查清单
+
+- [ ] 控制平面（istiod/linkerd-control-plane）至少 2 副本
+- [ ] mTLS 从 `PERMISSIVE` 模式开始，验证后切 `STRICT`
+- [ ] 监控 Sidecar 资源消耗和注入成功率
+- [ ] 证书轮换机制正常工作，设置过期告警
+- [ ] L7 路由规则定期审查和精简
+- [ ] 使用 Gateway API 替代 Istio 专用的 VirtualService/Gateway
+- [ ] 灰度发布使用 HTTPRoute weight 进行流量分割
+
+## 命令快速参考
+
+```bash
+# Istio 诊断
+istioctl analyze -n production
+istioctl proxy-status
+istioctl proxy-config routes <pod>
+
+# 查看 Sidecar 注入状态
+kubectl get pods -n production -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].name}{"\n"}{end}'
+
+# Linkerd 诊断
+linkerd check
+linkerd viz stat deploy -n production
+linkerd viz top deploy/<name> -n production
+
+# 查看 mTLS 状态
+istioctl authn tls-check <pod>
+
+# 流量镜像验证
+kubectl get virtualservice -n production -o yaml
+```
+
+## 交叉引用
+
+- [eBPF 与 Cilium](ebpf-and-cilium-networking.md) — Cilium Sidecar-less Service Mesh
+- [Gateway API](gateway-api.md) — 推荐的服务网格流量管理 API
+- [Network Policies](network-policies.md) — L3/L4 层面的策略补充
+- [Cluster Mesh](cluster-mesh.md) — 多集群服务网格互联
+
 ## 参考链接
 
 - [Istio Documentation](https://istio.io/latest/docs/)

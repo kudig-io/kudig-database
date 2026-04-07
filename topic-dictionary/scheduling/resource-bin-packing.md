@@ -115,6 +115,122 @@ resources:
 - 使用 `shape` 可以灵活切换装箱和最少请求两种行为模式。
 - 配置完成后，通过 kube-scheduler 的 `--config` 参数引用配置文件。
 
+## 生产 YAML 示例
+
+### 生产环境 MostAllocated 配置（GPU 集群装箱）
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: gpu-bin-packing-scheduler
+    pluginConfig:
+      - name: NodeResourcesFit
+        args:
+          scoringStrategy:
+            type: MostAllocated
+            resources:
+              - name: nvidia.com/gpu
+                weight: 10                 # GPU 权重最高，优先填满 GPU 节点
+              - name: cpu
+                weight: 2
+              - name: memory
+                weight: 1
+    plugins:
+      score:
+        enabled:
+          - name: NodeResourcesFit
+            weight: 5
+        disabled:
+          - name: NodeResourcesBalancedAllocation  # 禁用均衡分配，改用装箱
+```
+
+### RequestedToCapacityRatio 精细调优（扩展资源装箱 + CPU 均衡）
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: hybrid-scheduler
+    pluginConfig:
+      - name: NodeResourcesFit
+        args:
+          scoringStrategy:
+            type: RequestedToCapacityRatio
+            resources:
+              - name: nvidia.com/gpu
+                weight: 8                  # GPU 资源高权重 — 装箱行为
+              - name: cpu
+                weight: 2                  # CPU 低权重
+              - name: memory
+                weight: 1
+            requestedToCapacityRatio:
+              shape:
+                - utilization: 0
+                  score: 0
+                - utilization: 50
+                  score: 7                 # 50% 利用率得 7 分
+                - utilization: 100
+                  score: 10                # 100% 利用率得满分
+```
+
+## 评分策略对比
+
+| 策略 | 行为 | 适用场景 | 配置复杂度 |
+|------|------|----------|-----------|
+| `LeastAllocated`（默认） | 优先选择空闲节点 | 通用工作负载，追求资源均衡 | 低 |
+| `MostAllocated` | 优先填满节点 | GPU 集群、成本优化、减少节点数 | 低 |
+| `RequestedToCapacityRatio` | 自定义利用率-分数曲线 | 精细控制，扩展资源优化 | 中 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| MostAllocated 后节点资源争抢严重 | Burstable Pod 实际使用超过 requests | 调整 Pod 的 requests 更接近实际使用；监控节点 CPU throttling |
+| 装箱后部分节点完全空闲但不回收 | Cluster Autoscaler / Karpenter 未感知 | 检查 Autoscaler 的 scale-down 配置 |
+| 扩展资源权重设置后评分无变化 | 资源名称拼写错误或节点未注册该资源 | `kubectl describe node` 检查 Capacity 中是否有该扩展资源 |
+| Shape 调优后评分不符合预期 | utilization-score 曲线设置不合理 | 使用分段线性函数模拟计算验证 |
+
+## 生产检查清单
+
+- [ ] GPU 集群使用 `MostAllocated` 策略减少空闲 GPU 节点
+- [ ] 通用集群保持默认 `LeastAllocated` 或 `BalancedAllocation`
+- [ ] 为扩展资源（GPU、FPGA、SR-IOV）设置较高权重
+- [ ] 配合 Karpenter / Cluster Autoscaler 在节点空闲时缩容
+- [ ] 使用 `--config` 参数将配置文件传递给 kube-scheduler
+- [ ] 监控节点资源利用率分布，验证装箱效果
+- [ ] 避免在 CPU/Memory 上过度装箱导致性能劣化
+
+## 命令快速参考
+
+```bash
+# 查看节点资源利用率
+kubectl top nodes
+
+# 查看节点 Allocatable vs Requests
+kubectl describe node <node-name> | grep -A 15 "Allocated resources"
+
+# 查看调度器配置
+kubectl get cm -n kube-system kube-scheduler-config -o yaml
+
+# 查看节点的扩展资源
+kubectl get node <node-name> -o jsonpath='{.status.capacity}' | jq .
+
+# 按 CPU 利用率排序节点
+kubectl top nodes --sort-by=cpu
+
+# 验证调度器使用的配置文件
+kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strategy"
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
+- [调度框架](./scheduling-framework.md) — Score 扩展点与 NormalizeScore
+- [调度器性能调优](./scheduler-performance-tuning.md) — 评分节点数量对装箱效果的影响
+- [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备与装箱策略的交互
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 的整合机制与装箱互补
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Resource Bin Packing](https://kubernetes.io/docs/concepts/scheduling-eviction/resource-bin-packing/)

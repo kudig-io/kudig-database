@@ -39,5 +39,177 @@ VerticalPodAutoscaler（VPA）自动调整工作负载（如 Deployment、Statef
 - 使用 `minAllowed` 和 `maxAllowed` 限制推荐范围，防止极端推荐导致应用异常。
 - VPA 不适用于 DaemonSet（通常使用 Cluster Proportional Vertical Autoscaler 替代）。
 
+## 实战 YAML 示例
+
+### 基础 VPA：仅推荐模式（安全起步）
+
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: web-api-vpa
+  namespace: prod
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-api
+  updatePolicy:
+    updateMode: "Off"                        # 仅生成推荐，不自动调整
+  resourcePolicy:
+    containerPolicies:
+    - containerName: api
+      minAllowed:
+        cpu: "100m"                          # 最低不低于 100m
+        memory: "128Mi"
+      maxAllowed:
+        cpu: "4000m"                         # 最高不超过 4 核
+        memory: "8Gi"
+      controlledResources: ["cpu", "memory"]
+```
+
+### 生产 VPA：自动调整 + 资源边界
+
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: web-api-vpa-auto
+  namespace: prod
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-api
+  updatePolicy:
+    updateMode: "Recreate"                   # 驱逐重建应用新资源
+  resourcePolicy:
+    containerPolicies:
+    - containerName: api
+      minAllowed:
+        cpu: "200m"
+        memory: "256Mi"
+      maxAllowed:
+        cpu: "2000m"
+        memory: "4Gi"
+      controlledResources: ["cpu", "memory"]
+      controlledValues: RequestsAndLimits    # 同时调整 request 和 limit
+    # Sidecar 容器使用固定资源，不受 VPA 管理
+    - containerName: fluent-bit
+      mode: "Off"                            # 禁止 VPA 调整此容器
+```
+
+### VPA 与 HPA 共存方案
+
+```yaml
+# VPA: 仅调整 request（不影响 HPA 的副本数决策）
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: web-api-vpa
+  namespace: prod
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-api
+  updatePolicy:
+    updateMode: "Initial"                    # 仅在 Pod 创建时应用，减少中断
+  resourcePolicy:
+    containerPolicies:
+    - containerName: api
+      controlledValues: RequestsOnly         # 仅调整 request，limit 不变
+      minAllowed:
+        cpu: "100m"
+        memory: "128Mi"
+      maxAllowed:
+        cpu: "2000m"
+        memory: "4Gi"
+---
+# HPA: 基于自定义指标（非 CPU/Memory）进行水平扩缩
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-api-hpa
+  namespace: prod
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-api
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "1000"
+```
+
+## 故障排查
+
+### VPA 推荐值不出现
+- **症状**: `kubectl describe vpa` 中 `recommendation` 为空。
+- **常见原因**: Metrics Server 未安装；VPA Recommender 未运行；Pod 运行时间太短（需要几分钟的数据）。
+- **诊断命令**:
+  ```bash
+  # 查看 VPA 推荐值
+  kubectl describe vpa web-api-vpa -n prod
+  
+  # 检查 VPA 组件是否健康
+  kubectl get pods -n kube-system -l app=vpa-recommender
+  kubectl get pods -n kube-system -l app=vpa-updater
+  kubectl get pods -n kube-system -l app=vpa-admission-controller
+  
+  # 验证 Metrics Server
+  kubectl top pods -n prod
+  ```
+
+### VPA 频繁驱逐 Pod
+- **症状**: Pod 被反复驱逐重建，导致服务不稳定。
+- **常见原因**: `minAllowed`/`maxAllowed` 范围过大，推荐值波动剧烈。
+- **解决方案**: 缩小 `minAllowed`/`maxAllowed` 范围；切换到 `Initial` 模式减少中断。
+
+### VPA 与 HPA 冲突
+- **症状**: 副本数和资源同时变化，导致不可预测的行为。
+- **解决方案**: VPA 使用 `controlledValues: RequestsOnly`；HPA 基于自定义指标（非 CPU/Memory）扩缩。
+
+## 生产检查清单
+
+- [ ] VPA CRD 和三个组件（Recommender、Updater、Admission Controller）已安装
+- [ ] Metrics Server 健康运行
+- [ ] 初次部署使用 `Off` 模式观察推荐值，验证合理后再启用自动模式
+- [ ] `minAllowed`/`maxAllowed` 设置了合理的资源边界
+- [ ] 如有 HPA 共存，VPA 使用 `RequestsOnly` 模式
+- [ ] PDB 已配置，防止 VPA 驱逐导致服务不可用
+- [ ] Sidecar 等辅助容器通过 `mode: "Off"` 排除 VPA 管理
+
+## 命令快速参考
+
+```bash
+# 查看 VPA 推荐值
+kubectl describe vpa <vpa-name> -n prod
+
+# 查看 VPA 列表
+kubectl get vpa -n prod
+
+# 查看 VPA 推荐的资源值（JSON 格式）
+kubectl get vpa <vpa-name> -n prod -o jsonpath='{.status.recommendation.containerRecommendations}'
+
+# 查看 VPA 组件状态
+kubectl get pods -n kube-system -l 'app in (vpa-recommender,vpa-updater,vpa-admission-controller)'
+```
+
+## 交叉引用
+
+- [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
+- [自动扩缩容概览](./autoscaling-workloads.md)
+- [VPA 故障树分析 (FTA)](../../topic-fta/list/vpa-fta.md)
+- [Pod QoS 等级](./pod-quality-of-service-classes.md)
+- [工作负载监控与告警](../../domain-4-workloads/06-workload-monitoring-alerting.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/autoscaling/vertical-pod-autoscale/

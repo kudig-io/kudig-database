@@ -63,6 +63,137 @@ API 服务器执行准入检查后可能返回以下响应：
   - 等待一段时间后，直接从集群控制平面删除 Pod（不使用 Eviction API）。
 - API 发起的驱逐会尊重 PodDisruptionBudget，而节点压力驱逐不会。
 
+## 生产 YAML 示例
+
+### PodDisruptionBudget 配合 API 驱逐
+
+```yaml
+# 1. PodDisruptionBudget — 确保至少 2 个副本可用
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: api-gateway-pdb
+  namespace: production
+spec:
+  minAvailable: 2                          # 驱逐时至少保持 2 个 Pod 运行
+  selector:
+    matchLabels:
+      app: api-gateway
+---
+# 2. Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      terminationGracePeriodSeconds: 60    # 给予充足的优雅终止时间
+      containers:
+        - name: gateway
+          image: registry.example.com/gateway:v5.1
+          ports:
+            - containerPort: 8080
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 10"]  # 等待流量排空
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+```
+
+### 使用 curl 发起 API 驱逐
+
+```bash
+# 创建 Eviction 对象
+cat <<EOF > eviction.json
+{
+  "apiVersion": "policy/v1",
+  "kind": "Eviction",
+  "metadata": {
+    "name": "api-gateway-xyz12",
+    "namespace": "production"
+  }
+}
+EOF
+
+curl -v -H 'Content-type: application/json' \
+  -X POST \
+  "https://<api-server>/api/v1/namespaces/production/pods/api-gateway-xyz12/eviction" \
+  -d @eviction.json \
+  --cacert /etc/kubernetes/pki/ca.crt \
+  --cert /etc/kubernetes/pki/admin.crt \
+  --key /etc/kubernetes/pki/admin.key
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| `kubectl drain` 卡住不动 | PDB minAvailable 过高，无法满足 | `kubectl get pdb -n <ns>` 检查 disruptionsAllowed 是否为 0 |
+| API 返回 429 Too Many Requests | PDB 限制当前不允许驱逐 | 等待副本恢复健康后重试；检查 Pod 是否能正常 Ready |
+| API 返回 500 Internal Server Error | 多个 PDB 引用同一 Pod | `kubectl get pdb --all-namespaces -o wide` 检查 selector 重叠 |
+| Pod 驱逐后新 Pod 无法启动 | 新 Pod 未通过 readiness probe | 检查新 Pod 日志和健康检查配置 |
+| drain 时 DaemonSet Pod 阻塞 | 未使用 `--ignore-daemonsets` | 添加 `--ignore-daemonsets` 参数 |
+
+## 生产检查清单
+
+- [ ] 为所有有状态服务和关键 Deployment 配置 PodDisruptionBudget
+- [ ] PDB `minAvailable` 或 `maxUnavailable` 设置合理（不超过 replicas - 1）
+- [ ] Pod 配置 `terminationGracePeriodSeconds`（建议 30-120s）
+- [ ] Pod 实现优雅关闭（preStop hook + readiness probe）
+- [ ] `kubectl drain` 命令使用 `--timeout` 避免无限等待
+- [ ] 自动化维护工具处理 429 响应时实现退避重试
+- [ ] 验证 PDB selector 不与其他 PDB 重叠
+
+## 命令快速参考
+
+```bash
+# 安全排空节点（维护前）
+kubectl drain <node-name> \
+  --ignore-daemonsets \
+  --delete-emptydir-data \
+  --timeout=300s \
+  --grace-period=60
+
+# 查看 PDB 状态
+kubectl get pdb -n production
+
+# 查看 PDB 详情（含 disruptionsAllowed）
+kubectl describe pdb api-gateway-pdb -n production
+
+# 取消节点维护
+kubectl uncordon <node-name>
+
+# 查看驱逐相关事件
+kubectl get events --field-selector reason=Evicted --all-namespaces
+
+# 强制删除卡住的 Pod（最后手段）
+kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
+```
+
+## 交叉引用
+
+- [节点压力驱逐](./node-pressure-eviction.md) — kubelet 驱逐不尊重 PDB，与 API 驱逐行为不同
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — 抢占与 API 驱逐的区别
+- [污点与容忍度](./taints-and-tolerations.md) — 基于污点的驱逐（NoExecute）
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 整合时使用 API 驱逐并尊重 PDB
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - API-initiated Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/api-eviction/)

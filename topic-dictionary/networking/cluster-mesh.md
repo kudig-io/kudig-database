@@ -105,6 +105,54 @@ Cluster Mesh 通过 **Cluster ID** 区分不同集群中的同名服务：
 - **分阶段互联**：不要一次性将所有集群互联，先连接 2–3 个核心集群，验证稳定性后再逐步扩展
 - **故障隔离**：当某个集群出现网络风暴或控制平面故障时，应具备快速将其从 Cluster Mesh 中断开的能力
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 跨集群 Pod 通信失败 | Pod CIDR 重叠 | 对比各集群的 `--cluster-cidr` 确保不重叠 |
+| Global Service 解析到空 | 远程集群 clustermesh-apiserver 连接中断 | `cilium clustermesh status`；检查 apiserver Pod |
+| 跨集群延迟高 | 流量未使用 Topology-aware LB | 配置 `io.cilium/service-affinity: local` 优先本地 |
+| mTLS 握手失败 | 集群间 CA 不互信 | 使用统一 CA（cert-manager + Vault）或配置 CA bundle |
+| 部分 Service 无法跨集群 | 缺少 `io.cilium/global-service` 注解 | 检查 Service 注解是否正确 |
+
+## 生产检查清单
+
+- [ ] 所有集群的 Pod CIDR 和 Service CIDR 不重叠
+- [ ] CIDR 规划预留未来集群扩展空间
+- [ ] 跨集群流量已加密（WireGuard/IPSec/mTLS）
+- [ ] Topology-aware LB 优先本地集群流量
+- [ ] 统一 CA 管理跨集群证书
+- [ ] 监控跨集群连接状态和延迟
+- [ ] 具备快速断开故障集群的运维能力
+- [ ] 分阶段互联，先验证 2-3 个集群
+
+## 命令快速参考
+
+```bash
+# Cilium Cluster Mesh 状态
+cilium clustermesh status
+
+# 查看远程集群连接
+cilium clustermesh vm status
+
+# 查看 Global Service 端点
+kubectl get svc -A -o json | jq '.items[] | select(.metadata.annotations["io.cilium/global-service"]=="true") | .metadata.name'
+
+# Istio 多集群检查
+istioctl remote-clusters
+istioctl proxy-config cluster <pod> | grep outbound
+
+# 跨集群连通性测试
+cilium connectivity test --multi-cluster
+```
+
+## 交叉引用
+
+- [eBPF 与 Cilium](ebpf-and-cilium-networking.md) — Cilium 的 eBPF 基础架构
+- [Service Mesh](service-mesh.md) — Istio 多集群部署模式
+- [Cluster Networking](cluster-networking.md) — CIDR 规划基础
+- [Topology Aware Routing](topology-aware-routing.md) — 单集群内的拓扑感知路由
+
 ## 参考链接
 
 - [Cilium Cluster Mesh Documentation](https://docs.cilium.io/en/stable/network/clustermesh/)

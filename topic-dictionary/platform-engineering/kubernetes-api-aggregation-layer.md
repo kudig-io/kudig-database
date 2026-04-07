@@ -31,6 +31,39 @@ API 聚合层（Aggregation Layer）允许 Kubernetes 通过额外的 API 进行
 - 聚合层需要在环境中进行正确配置（如 CA 证书、代理设置）才能正常工作。
 - 如果扩展 API 的需求较简单，优先考虑使用 CRD，以降低运维复杂度；仅在需要高级特性时才选择聚合层。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| APIService Available=False | 扩展 API server Pod 不健康 | `kubectl get apiservice <name>` 查看 conditions；检查后端 Service |
+| 聚合 API 请求 503 | 后端 Service 端点不存在 | `kubectl get endpoints -n <ns> <svc>` |
+| TLS 握手失败 | CA bundle 不匹配 | 检查 APIService 的 `caBundle` 与实际证书 |
+
+## 生产检查清单
+
+- [ ] 扩展 API server 配置高可用（多副本）
+- [ ] APIService 配置正确的 `caBundle`
+- [ ] 后端 Service 健康检查正常
+- [ ] 配置 `insecureSkipTLSVerify` 仅用于开发环境
+
+## 命令快速参考
+
+```bash
+# 查看所有 APIService 状态
+kubectl get apiservice | grep -v Local
+
+# 查看异常 APIService
+kubectl get apiservice | grep False
+
+# 查看 APIService 详情
+kubectl describe apiservice <name>
+```
+
+## 交叉引用
+
+- [扩展 Kubernetes API](./extending-the-kubernetes-api.md) — API 扩展总览
+- [Custom Resources](./custom-resources.md) — CRD 作为更简单的替代方案
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/

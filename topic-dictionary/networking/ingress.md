@@ -38,6 +38,159 @@ Ingress 是 Kubernetes 中用于管理集群外部 HTTP/HTTPS 访问到内部 Se
 - **TLS 默认规则限制**：TLS 证书中的 `hosts` 必须与 `rules` 中的 `host` 显式匹配，否则默认规则（无 host）下 TLS 可能无法正常工作。
 - **API 冻结与迁移**：Ingress API 已冻结，建议新架构优先考虑 Gateway API，旧系统可规划逐步迁移。
 
+## 生产 YAML 示例
+
+### 多路径 + TLS + 默认后端
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/rate-limit-rps: "100"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    - api.example.com
+    secretName: app-tls-secret      # 包含 tls.crt 和 tls.key
+  defaultBackend:
+    service:
+      name: default-404-page
+      port:
+        number: 80
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-frontend
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-server
+            port:
+              number: 8080
+      - path: /api/v2/exact-match
+        pathType: Exact            # 精确匹配优先于 Prefix
+        backend:
+          service:
+            name: api-v2
+            port:
+              number: 8080
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-server
+            port:
+              number: 8080
+```
+
+### 通配符主机名
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wildcard-ingress
+  namespace: production
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - "*.example.com"
+    secretName: wildcard-tls
+  rules:
+  - host: "*.example.com"           # 匹配 foo.example.com 但不匹配 bar.foo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wildcard-backend
+            port:
+              number: 80
+```
+
+## 路径匹配优先级规则
+
+```
+1. Exact 匹配优先于 Prefix
+2. 更长的 Prefix 路径优先于更短的
+3. 匹配 host 的规则优先于无 host 的规则
+
+示例请求: GET /api/v2/users Host: app.example.com
+
+匹配顺序:
+  1. host=app.example.com, path=/api/v2/users, pathType=Exact ✓ (最高优先)
+  2. host=app.example.com, path=/api/v2, pathType=Prefix ✓
+  3. host=app.example.com, path=/api, pathType=Prefix ✓
+  4. host=app.example.com, path=/, pathType=Prefix ✓ (最低优先)
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 所有请求返回 404 | 后端 Service 无端点或路径匹配失败 | `kubectl describe ingress`；检查后端 Service 的 EndpointSlice |
+| TLS 证书错误 | Secret 中的证书与 host 不匹配 | `openssl s_client -connect <ip>:443 -servername app.example.com` |
+| 请求被重定向到 HTTPS 循环 | 负载均衡器已终止 TLS 但 Ingress 再次重定向 | 设置 `nginx.ingress.kubernetes.io/ssl-redirect: "false"` 或使用 `X-Forwarded-Proto` |
+| 大文件上传失败 | 默认请求体大小限制 | 调整 `proxy-body-size` 注解 |
+| WebSocket 连接断开 | 控制器未开启 WebSocket 支持 | 添加 `nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"` |
+
+## 生产检查清单
+
+- [ ] 所有 Ingress 显式指定 `ingressClassName`
+- [ ] TLS Secret 已创建且证书未过期
+- [ ] 使用 cert-manager 自动续签证书
+- [ ] 配置了合理的 rate-limit 注解
+- [ ] 默认后端返回友好的 404 页面
+- [ ] PathType 使用 `Exact` 或 `Prefix`（避免 `ImplementationSpecific`）
+- [ ] 评估迁移到 Gateway API（Ingress API 已冻结）
+
+## 命令快速参考
+
+```bash
+# 查看 Ingress 列表和 ADDRESS
+kubectl get ingress -n production
+
+# 查看 Ingress 详情（含 Events 和后端状态）
+kubectl describe ingress app-ingress -n production
+
+# 创建 TLS Secret
+kubectl create secret tls app-tls-secret \
+  --cert=tls.crt --key=tls.key -n production
+
+# 测试特定 Host 和路径
+curl -v -H "Host: app.example.com" https://<ingress-ip>/api
+
+# 检查后端 Service 端点
+kubectl get endpointslices -l kubernetes.io/service-name=api-server -n production
+```
+
+## 交叉引用
+
+- [Ingress Controllers](ingress-controllers.md) — 控制器选型和 IngressClass 配置
+- [Gateway API](gateway-api.md) — Ingress 的推荐继任方案
+- [Service](service.md) — Ingress 后端 Service 的类型和端口映射
+- [Network Policies](network-policies.md) — 控制到 Ingress Controller 的入站流量
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/ingress/

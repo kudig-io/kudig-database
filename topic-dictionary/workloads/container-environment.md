@@ -50,6 +50,184 @@ Service 拥有独立的 IP 地址，如果集群启用了 DNS 插件，容器也
 - **注意环境变量顺序和覆盖规则**：Pod 中定义的环境变量可以覆盖镜像中静态设置的环境变量
 - **跨命名空间访问需使用 FQDN**：若通过 DNS 访问其他命名空间的服务，应使用完整域名（如 `my-service.other-namespace.svc.cluster.local`）
 
+## 生产 YAML 示例
+
+### 综合容器环境配置
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-env
+  namespace: production
+  labels:
+    app: order-service
+spec:
+  containers:
+  - name: app
+    image: registry.example.com/apps/order-service:v4.0
+    # === 用户定义的环境变量 ===
+    env:
+    # 直接指定值
+    - name: APP_ENV
+      value: "production"
+    - name: LOG_LEVEL
+      value: "info"
+    # 从 Downward API 获取 Pod 元数据
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    # 从 Downward API 获取资源限制
+    - name: MEMORY_LIMIT
+      valueFrom:
+        resourceFieldRef:
+          containerName: app
+          resource: limits.memory
+    # 从 ConfigMap 获取配置
+    - name: DB_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: database.host
+    # 从 Secret 获取敏感信息
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: app-secrets
+          key: database.password
+    # === 批量注入 ConfigMap 所有键值 ===
+    envFrom:
+    - configMapRef:
+        name: app-feature-flags
+      prefix: "FF_"              # 添加前缀避免冲突：FF_ENABLE_NEW_UI=true
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+    volumeMounts:
+    # Downward API 通过 Volume 暴露标签和注解
+    - name: podinfo
+      mountPath: /etc/podinfo
+      readOnly: true
+  volumes:
+  - name: podinfo
+    downwardAPI:
+      items:
+      - path: "labels"
+        fieldRef:
+          fieldPath: metadata.labels
+      - path: "annotations"
+        fieldRef:
+          fieldPath: metadata.annotations
+      - path: "cpu_limit"
+        resourceFieldRef:
+          containerName: app
+          resource: limits.cpu
+          divisor: "1m"          # 以毫核为单位
+```
+
+### Java 应用自适应内存配置
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-app
+spec:
+  containers:
+  - name: java
+    image: registry.example.com/apps/java-service:v3.0
+    env:
+    - name: MEMORY_LIMIT
+      valueFrom:
+        resourceFieldRef:
+          resource: limits.memory
+    # 使用 Downward API 的内存限制动态设置 JVM 堆大小
+    - name: JAVA_OPTS
+      value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+    resources:
+      requests:
+        memory: "2Gi"
+      limits:
+        memory: "2Gi"
+```
+
+## 环境信息来源对照表
+
+| 信息类型 | 获取方式 | 动态更新 | 示例 |
+|----------|----------|----------|------|
+| Pod 名称/命名空间 | Downward API (env) | 否（创建时固定） | `metadata.name` |
+| Pod IP | Downward API (env) | 否 | `status.podIP` |
+| Pod 标签/注解 | Downward API (volume) | 是（文件自动刷新） | `metadata.labels` |
+| 资源 requests/limits | Downward API (env/volume) | 否 | `limits.memory` |
+| 节点名称 | Downward API (env) | 否 | `spec.nodeName` |
+| 同命名空间 Service | 自动注入 env | 否（仅创建时） | `FOO_SERVICE_HOST` |
+| 跨命名空间 Service | DNS 查询 | 是 | `svc.ns.svc.cluster.local` |
+| ConfigMap 值 | `envFrom`/`env.valueFrom` | 否（Pod 重建后生效） |  |
+| Secret 值 | `env.valueFrom` | 否 | |
+| ConfigMap (Volume) | Volume 挂载 | 是（kubelet 定期同步） | |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 环境变量为空 | ConfigMap/Secret 不存在或 key 拼写错误 | `kubectl get cm/secret <name> -o yaml`；检查 `optional: false` |
+| Service 环境变量缺失 | Service 在 Pod 之后创建 | 确保 Service 先于引用它的 Pod 创建；优先使用 DNS 服务发现 |
+| Downward API 值不更新 | env 方式注入的值在 Pod 创建时固定 | 使用 Volume 方式挂载需要动态更新的值（标签/注解） |
+| 环境变量被意外覆盖 | Pod env 覆盖了镜像中的 ENV | 检查优先级：Pod env > envFrom > 镜像 ENV |
+| envFrom 注入了不需要的变量 | ConfigMap 包含过多键值 | 使用 `prefix` 参数隔离命名空间 |
+
+## 生产检查清单
+
+- [ ] 敏感信息（密码、Token）使用 Secret 而非明文 env
+- [ ] 服务发现优先使用 DNS 而非 Service 环境变量
+- [ ] Downward API 需要动态更新的数据使用 Volume 方式
+- [ ] ConfigMap 批量注入使用 `prefix` 避免变量名冲突
+- [ ] Java 应用使用 `-XX:+UseContainerSupport` 感知容器内存限制
+- [ ] 关键环境变量设置 `optional: false` 确保 Pod 在缺失时无法启动
+
+## 命令快速参考
+
+```bash
+# 查看容器内所有环境变量
+kubectl exec <pod> -c <container> -- env | sort
+
+# 查看特定环境变量
+kubectl exec <pod> -- printenv POD_NAME POD_NAMESPACE
+
+# 检查 Downward API Volume 内容
+kubectl exec <pod> -- cat /etc/podinfo/labels
+
+# 查看 Service 自动注入的环境变量
+kubectl exec <pod> -- env | grep _SERVICE_
+
+# 在集群内测试 DNS 解析
+kubectl exec <pod> -- nslookup my-service.my-namespace.svc.cluster.local
+```
+
+## 交叉引用
+
+- [Downward API](downward-api.md) — 详细的 Downward API 字段和用法
+- [Pod Hostname](pod-hostname.md) — 容器主机名的配置和 DNS
+- [容器生命周期钩子](container-lifecycle-hooks.md) — 容器启动/停止时的事件处理
+- [容器镜像](images.md) — 镜像层文件系统和环境变量继承
+
 ## 参考链接
 
 - [Kubernetes 官方文档：容器环境](https://kubernetes.io/docs/concepts/containers/container-environment/)

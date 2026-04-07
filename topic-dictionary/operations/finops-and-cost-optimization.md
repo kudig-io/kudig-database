@@ -99,10 +99,55 @@ Kubernetes 成本分摊通常基于以下维度：
 - **负载测试后再调优**：在峰值负载测试数据的基础上进行 right-sizing，避免优化后影响 SLA
 - **FinOps 是持续过程**：每月举行成本审查会议，跟踪优化措施的 ROI
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| 成本突然飙升 | 资源请求虚高或新 Deployment 未设 limits | `kubectl top nodes && kubectl get hpa -A` | 使用 Kubecost/OpenCost 定位 top-spending namespace |
+| OpenCost 指标缺失 | Prometheus 未正确 scrape OpenCost | `kubectl logs -n opencost opencost-*` | 检查 ServiceMonitor 和 Prometheus 配置 |
+| VPA 建议不合理 | 采集窗口过短或异常流量影响 | `kubectl get vpa <name> -o yaml` | 延长 VPA 观察窗口，排除异常期间数据 |
+| Spot 节点频繁回收 | 实例池容量不足 | 查看云厂商 Spot 中断事件 | 配置多可用区 + 多实例类型分散风险 |
+| 闲置 PVC 持续计费 | 未清理已删除 Pod 的 PVC | `kubectl get pvc -A --field-selector=status.phase=Bound` | 定期审查和清理未挂载的 PVC |
+| kube-green 缩容未触发 | CronJob 权限不足或时区配置错误 | `kubectl logs -n kube-green kube-green-*` | 检查 SleepInfo CR 的 schedule 和 timezone |
+
+## 生产检查清单
+
+- [ ] OpenCost / Kubecost 已部署并按 Namespace 展示成本
+- [ ] 所有 Deployment 设置了合理的 resource requests
+- [ ] VPA 运行在 Recommendation 模式，定期审查建议
+- [ ] HPA + Cluster Autoscaler / Karpenter 联动已配置
+- [ ] 非生产环境配置了 kube-green 夜间休眠
+- [ ] 关键 Namespace 设置了 ResourceQuota
+- [ ] Spot 节点上的应用支持优雅退出（30s SIGTERM 处理）
+- [ ] 月度成本审查会议已建立
+- [ ] 闲置 PVC 清理纳入定期巡检
+
+## 命令快速参考
+
+```bash
+# 查看集群资源使用率
+kubectl top nodes
+kubectl top pods -A --sort-by=cpu
+
+# 查看 VPA 建议
+kubectl get vpa -A -o custom-columns=NAME:.metadata.name,NS:.metadata.namespace,MODE:.spec.updatePolicy.updateMode
+
+# 查看 ResourceQuota 使用情况
+kubectl get resourcequota -A
+
+# 查看未挂载的 PVC
+kubectl get pvc -A -o json | jq '.items[] | select(.status.phase=="Bound") | {ns: .metadata.namespace, name: .metadata.name}'
+
+# OpenCost API 查询成本
+curl http://opencost.opencost:9003/allocation/compute?window=7d&aggregate=namespace
+
+# 查看 Karpenter 节点利用率
+kubectl get nodeclaim -o custom-columns=NAME:.metadata.name,TYPE:.spec.requirements,PHASE:.status.conditions[-1].type
+```
+
+## 交叉引用
 
 - [OpenCost Documentation](https://www.opencost.io/docs/)
 - [Kubecost Documentation](https://docs.kubecost.com/)
 - [kube-green - Sustainable Kubernetes](https://kube-green.dev/)
-- [Ajeet Singh Raina - Top 5 Trends Shaping Kubernetes in 2026](https://www.ajeetraina.com/top-5-trends-shaping-kubernetes-in-2026/)
-- [Loginline - 10 Kubernetes Trends That Will Redefine Cloud Computing in 2026](https://www.loginline.com/en/blog/2026-kubernetes-trends)
+- 相关主题：[Horizontal Pod Autoscaling](../workloads/horizontal-pod-autoscaling.md) · [Vertical Pod Autoscaling](../workloads/vertical-pod-autoscaling.md) · [Karpenter Autoscaling](../scheduling/karpenter-autoscaling.md) · [Spot and Preemptible Workloads](../workloads/spot-and-preemptible-workloads.md)

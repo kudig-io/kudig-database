@@ -2517,6 +2517,48 @@ microserviceRelease:
       rollbackTrigger: "any-metric-violation"
 ```
 
+## 故障排查
+
+> 本文件涵盖完整的变更管理与发布策略。详见上方各章节：1.变更管理框架、2.发布策略模式、4.回滚与恢复策略、7.变更监控与验证。
+
+## 生产检查清单
+
+- [ ] 变更审批流程已定义并配置自动化门控
+- [ ] 金丝雀/蓝绿/滚动发布策略已根据服务类型选定
+- [ ] 回滚流程经过验证，可在 5 分钟内完成
+- [ ] 发布前后的验证指标（错误率、延迟、可用性）已定义
+- [ ] 发布冻结窗口已与业务关键期对齐
+- [ ] 风险评估矩阵应用于每次变更
+- [ ] 发布自动化 Pipeline（CI/CD）已建立
+- [ ] 变更日志和审计记录完整可追溯
+
+## 命令快速参考
+
+```bash
+# 查看 Deployment 发布状态
+kubectl rollout status deployment/<name> -n <namespace>
+
+# 查看发布历史
+kubectl rollout history deployment/<name> -n <namespace>
+
+# 回滚到上个版本
+kubectl rollout undo deployment/<name> -n <namespace>
+
+# 回滚到指定版本
+kubectl rollout undo deployment/<name> -n <namespace> --to-revision=<N>
+
+# 暂停/恢复发布
+kubectl rollout pause deployment/<name> -n <namespace>
+kubectl rollout resume deployment/<name> -n <namespace>
+
+# 金丝雀验证 - 查看新旧 ReplicaSet
+kubectl get rs -n <namespace> -l app=<name>
+```
+
+## 交叉引用
+
+- 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [GitOps and Continuous Delivery](../platform-engineering/gitops-and-continuous-delivery.md) · [Deployments](../workloads/deployments.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

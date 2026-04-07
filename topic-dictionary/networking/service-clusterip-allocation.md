@@ -39,6 +39,111 @@
 - **并发创建仍可能冲突**：虽然分带策略显著降低了冲突概率，但在极高并发或动态带耗尽回退到静态带时，仍可能发生冲突。若创建失败，可尝试使用其他 IP 重新创建。
 - **不能修改已有 Service 的 ClusterIP**：ClusterIP 在 Service 创建后不可变更，如需更换必须删除并重建 Service。
 
+## 生产 YAML 示例
+
+### 静态 ClusterIP 分配（关键服务）
+
+```yaml
+# 为集群 DNS 固定 IP（通常在集群初始化时配置）
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-dns
+  namespace: kube-system
+spec:
+  clusterIP: 10.96.0.10           # 固定在 lower band（静态带）
+  selector:
+    k8s-app: kube-dns
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+```
+
+### 动态 ClusterIP 分配（默认行为）
+
+```yaml
+# 不指定 clusterIP，系统自动从 upper band 分配
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app
+  namespace: production
+spec:
+  # clusterIP 省略 → 自动分配（优先使用 upper band）
+  selector:
+    app: my-app
+  ports:
+  - port: 80
+    targetPort: 8080
+```
+
+## 分带策略计算示例
+
+```
+Service CIDR: --service-cluster-ip-range
+
+┌────────────────────────────────────────────────────────────────┐
+│            Service IP Range (CIDR)                              │
+│                                                                │
+│  ┌─── Lower Band (静态带) ───┐  ┌─── Upper Band (动态带) ───┐  │
+│  │ 静态分配优先使用此区间     │  │ 动态分配优先使用此区间     │  │
+│  │ 如: DNS=10.96.0.10       │  │ 系统自动分配的 ClusterIP   │  │
+│  └──────────────────────────┘  └──────────────────────────────┘  │
+└────────────────────────────────────────────────────────────────┘
+
+Band Offset = min(max(16, cidrSize / 16), 256)
+
+CIDR 大小        可用 IP    Offset  静态带范围              动态带起始
+10.96.0.0/24    254        16      10.96.0.1~10.96.0.16    10.96.0.17
+10.96.0.0/20    4094       256     10.96.0.1~10.96.1.0     10.96.1.1
+10.96.0.0/16    65534      256     10.96.0.1~10.96.1.0     10.96.1.1
+10.96.0.0/12    1048574    256     10.96.0.1~10.96.1.0     10.96.1.1
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Service 创建失败：ClusterIP 冲突 | 指定的 IP 已被占用 | `kubectl get svc -A -o jsonpath='{.items[*].spec.clusterIP}' \| tr ' ' '\n' \| sort` 查看已分配 IP |
+| 动态带 IP 耗尽 | Service 数量过多或 CIDR 范围过小 | 评估扩大 `--service-cluster-ip-range` |
+| 手动 IP 在 upper band 被占用 | 静态分配使用了动态带地址 | 静态分配应使用 lower band 地址 |
+| ClusterIP 需要修改 | ClusterIP 创建后不可变 | 删除 Service 重建（注意 DNS 缓存） |
+
+## 生产检查清单
+
+- [ ] 关键服务（DNS、监控）使用 lower band 的固定 ClusterIP
+- [ ] 常规服务使用默认动态分配
+- [ ] Service CIDR 大小为集群预期 Service 数量的 4 倍以上
+- [ ] 记录已使用的静态 ClusterIP 分配，避免冲突
+- [ ] 双栈集群为 IPv4 和 IPv6 分别规划 CIDR
+
+## 命令快速参考
+
+```bash
+# 查看集群 Service CIDR 配置
+kubectl cluster-info dump | grep service-cluster-ip-range
+
+# 列出所有已分配的 ClusterIP
+kubectl get svc -A -o custom-columns='NAME:.metadata.name,NS:.metadata.namespace,CLUSTER-IP:.spec.clusterIP'
+
+# 计算 lower band 范围（手动推算）
+# CIDR=10.96.0.0/20 → 4094 IPs → offset=min(max(16,4096/16),256)=256
+# 静态带: 10.96.0.1 ~ 10.96.1.0
+
+# 查看 Service 的 ClusterIP
+kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
+```
+
+## 交叉引用
+
+- [Service](service.md) — Service 类型和 ClusterIP 的使用
+- [DNS for Services](dns-for-services-and-pods.md) — ClusterIP 与 DNS 记录的关系
+- [IPv4/IPv6 Dual Stack](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/

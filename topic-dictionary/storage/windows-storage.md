@@ -60,6 +60,87 @@ Windows 节点上支持的持久化存储插件类别：
 - 尽量使用 CSI 插件来管理 Windows 节点的持久存储，避免依赖已弃用的 in-tree 和 FlexVolume 插件。
 - 如需在 Windows 上运行有状态应用，优先选择支持 Windows 的 CSI 驱动（如 Azure Disk CSI、SMB CSI 等）。
 
+## 生产 YAML 示例
+
+### Windows Pod 使用 CSI PVC
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-app
+  namespace: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dotnet-app
+  template:
+    metadata:
+      labels:
+        app: dotnet-app
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: app
+          image: mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-ltsc2022
+          volumeMounts:
+            - name: app-data
+              mountPath: "C:\\data"          # Windows 路径格式
+            - name: config
+              mountPath: "C:\\config"
+              readOnly: true
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: dotnet-data
+        - name: config
+          configMap:
+            name: dotnet-config              # 注意：不支持 subPath
+      tolerations:
+        - key: "os"
+          value: "windows"
+          effect: "NoSchedule"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Windows Pod 使用 subPath 失败 | Windows 不支持 subPath | 改为挂载整个卷目录 |
+| readOnlyRootFilesystem 导致启动失败 | Windows 不支持只读根文件系统 | 移除 `readOnlyRootFilesystem: true` |
+| NFS 卷挂载失败 | Windows 不支持 NFS | 改用 SMB CSI 或 Azure File |
+
+## 生产检查清单
+
+- [ ] 使用 CSI 驱动（Azure Disk CSI / SMB CSI）而非 in-tree 插件
+- [ ] 不使用 subPath、readOnlyRootFilesystem、DefaultMode
+- [ ] 不使用 emptyDir `medium: Memory`
+- [ ] 使用 nodeSelector 确保调度到 Windows 节点
+
+## 命令快速参考
+
+```bash
+# 查看 Windows 节点
+kubectl get nodes -l kubernetes.io/os=windows
+
+# 查看 Windows Pod 卷挂载
+kubectl get pod <pod> -o jsonpath='{.spec.containers[0].volumeMounts}' | jq .
+```
+
+## 交叉引用
+
+- [卷](./volumes.md) — 卷类型总览
+- [持久卷](./persistent-volumes.md) — PV/PVC 通用概念
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/windows-storage/

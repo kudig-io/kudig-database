@@ -117,6 +117,217 @@ Karpenter 直接调用 AWS EC2 RunInstances API，无需等待 Auto Scaling Grou
 - **定期审查实例选型**：Karpenter 的自动选择通常是优化的，但仍需定期通过 Cost Explorer 审查账单构成
 - **使用 Reserved Instances / Savings Plans 标签**：为长期稳定的工作负载配置特定标签，让其优先调度到已购买预留实例的实例族
 
+## 生产 YAML 示例
+
+### 多 NodePool 生产配置
+
+```yaml
+# 1. 通用工作负载 — Spot 优先
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: general-spot
+spec:
+  template:
+    metadata:
+      labels:
+        workload-type: general
+    spec:
+      requirements:
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["c", "m", "r"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot"]
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64", "arm64"]
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values: ["5"]                    # 只使用第 6 代及以上实例
+      nodeClassRef:
+        name: default
+      taints:
+        - key: workload-type
+          value: general
+          effect: NoSchedule
+  limits:
+    cpu: 500
+    memory: 500Gi
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 336h                      # 14 天后强制轮换
+  weight: 10                               # 低权重 — 优先使用 Spot
+---
+# 2. 通用工作负载 — On-Demand 兜底
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: general-ondemand
+spec:
+  template:
+    metadata:
+      labels:
+        workload-type: general
+    spec:
+      requirements:
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["c", "m", "r"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+      nodeClassRef:
+        name: default
+      taints:
+        - key: workload-type
+          value: general
+          effect: NoSchedule
+  limits:
+    cpu: 200
+    memory: 200Gi
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 720h
+  weight: 50                               # 高权重 — Spot 不足时使用
+---
+# 3. GPU 工作负载 — 独立 NodePool
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: gpu-pool
+spec:
+  template:
+    metadata:
+      labels:
+        workload-type: gpu
+    spec:
+      requirements:
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["p", "g"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]            # GPU 用 On-Demand 保证稳定性
+        - key: karpenter.k8s.aws/instance-gpu-count
+          operator: Gt
+          values: ["0"]
+      nodeClassRef:
+        name: gpu-nodeclass
+      taints:
+        - key: nvidia.com/gpu
+          value: "present"
+          effect: NoSchedule
+  limits:
+    cpu: 1000
+    memory: 4000Gi
+  disruption:
+    consolidationPolicy: WhenEmpty         # GPU 节点仅空闲时整合
+    expireAfter: 720h
+```
+
+### EC2NodeClass 配置
+
+```yaml
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "my-cluster"
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "my-cluster"
+  instanceProfile: "KarpenterNodeInstanceProfile-my-cluster"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 100Gi
+        volumeType: gp3
+        iops: 3000
+        throughput: 125
+        encrypted: true
+  tags:
+    Environment: production
+    ManagedBy: karpenter
+  metadataOptions:
+    httpEndpoint: enabled
+    httpTokens: required                   # 强制使用 IMDSv2
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pending Pod 但 Karpenter 不启动新节点 | NodePool limits 已达上限 | `kubectl get nodepools -o yaml` 检查 limits 与当前使用量 |
+| 新节点启动但 Pod 仍未调度 | 节点未 Ready 或污点不匹配 | `kubectl get nodes` 检查新节点状态；检查 Pod tolerations |
+| Spot 实例频繁被中断 | Spot 容量不足，实例类型太少 | 扩展 requirements 中的实例类型范围；增加 instance-category 和 arch |
+| 整合过于激进导致 Pod 迁移频繁 | WhenUnderutilized 阈值过敏感 | 改用 WhenEmpty；为有状态 Pod 添加 `karpenter.sh/do-not-disrupt: "true"` |
+| Karpenter 启动了非预期的实例类型 | requirements 过于宽泛 | 收紧 instance-category / instance-generation / arch 约束 |
+| Drift 替换节点导致服务中断 | AMI 更新触发大规模轮换 | 确认 PDB 配置；使用 `disruption.budgets` 限制并发替换数量 |
+
+## 生产检查清单
+
+- [ ] 为不同工作负载创建独立 NodePool（general / gpu / arm / spot）
+- [ ] 设置合理的 `limits.cpu` 和 `limits.memory` 防止无限扩容
+- [ ] 配置 `expireAfter` 实现节点定期轮换（AMI 更新、安全补丁）
+- [ ] GPU 节点使用 `consolidationPolicy: WhenEmpty` 避免频繁迁移
+- [ ] EC2NodeClass 强制使用 IMDSv2（`httpTokens: required`）
+- [ ] 最小化 Karpenter Controller IAM 权限
+- [ ] 为关键有状态 Pod 添加 `karpenter.sh/do-not-disrupt: "true"` annotation
+- [ ] 配置 Spot 中断处理：`karpenter.sh/capacity-type` 同时包含 spot + on-demand
+- [ ] 监控 Karpenter 指标：`karpenter_nodes_created`、`karpenter_nodes_terminated`、`karpenter_pods_startup_duration_seconds`
+- [ ] 避免与 Cluster Autoscaler 同时运行
+- [ ] 定期审查 AWS Cost Explorer 验证成本优化效果
+
+## 命令快速参考
+
+```bash
+# 查看 NodePool 状态
+kubectl get nodepools
+
+# 查看 NodePool 详情（含当前资源使用量）
+kubectl describe nodepool general-spot
+
+# 查看 NodeClaim（Karpenter 创建的节点请求）
+kubectl get nodeclaims
+
+# 查看 Karpenter 控制器日志
+kubectl logs -n kube-system -l app.kubernetes.io/name=karpenter -c controller --tail=100
+
+# 查看由 Karpenter 管理的节点
+kubectl get nodes -l karpenter.sh/nodepool
+
+# 查看节点的 Karpenter 标签和注解
+kubectl get node <node-name> -o yaml | grep -A 20 "karpenter"
+
+# 查看 EC2NodeClass
+kubectl get ec2nodeclasses
+
+# 手动触发节点整合（删除 NodeClaim）
+kubectl delete nodeclaim <nodeclaim-name>
+
+# 查看 Karpenter 指标
+kubectl port-forward -n kube-system svc/karpenter 8080:8080
+curl localhost:8080/metrics | grep karpenter_nodes
+```
+
+## 交叉引用
+
+- [资源装箱](./resource-bin-packing.md) — 调度器侧的装箱策略与 Karpenter 整合互补
+- [Pod 拓扑分布约束](./pod-topology-spread-constraints.md) — Karpenter 感知拓扑约束进行节点选型
+- [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — Karpenter 支持 nodeSelector / affinity
+- [污点与容忍度](./taints-and-tolerations.md) — NodePool 中的 taints 配置
+- [API 发起驱逐](./api-initiated-eviction.md) — Karpenter 整合时使用 API 驱逐并尊重 PDB
+- [动态资源分配](./dynamic-resource-allocation.md) — GPU NodePool 与 DRA 的配合
+
 ## 参考链接
 
 - [Karpenter Official Documentation](https://karpenter.sh/docs/)

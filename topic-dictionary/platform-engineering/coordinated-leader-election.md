@@ -79,6 +79,68 @@ Lease 对象包含以下关键字段：
 - 当集群中存在混合版本实例时，协调选举有助于平滑过渡，但仍需遵循 Kubernetes 的版本倾斜策略。
 - 监控 Lease 和 LeaseCandidate 对象的状态，及时发现选举异常或领导者频繁切换的问题。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| 组件未使用协调选举 | 特性门控未启用或 API 组未注册 | 检查 apiserver 启动参数 `--feature-gates` 和 `--runtime-config` |
+| LeaseCandidate 对象未创建 | 组件版本不支持或未启用特性 | `kubectl get leasecandidates -n kube-system` |
+| 领导者频繁切换 | 网络不稳定或续租间隔过短 | `kubectl describe lease <name> -n kube-system` 查看 leaseTransitions |
+| 升级后新版本实例成为领导者 | 策略期望旧版本优先但未生效 | 检查 LeaseCandidate 的 emulationVersion 字段 |
+| Lease 对象过期未恢复 | 所有候选者不可用 | `kubectl get lease -n kube-system` 检查 renewTime |
+| controller-manager 无法获取领导权 | Lease 被其他实例持有且未过期 | `kubectl get lease kube-controller-manager -n kube-system -o yaml` |
+| scheduler 双主运行 | Lease 机制失效，多实例同时活跃 | 检查所有 scheduler Pod 日志中的 "became leader" 消息 |
+
+## 生产检查清单
+
+- [ ] 协调领导者选举仅在 staging 环境充分测试后再启用到生产
+- [ ] `CoordinatedLeaderElection` 特性门控和 `coordination.k8s.io/v1beta1` API 同时启用
+- [ ] 监控 Lease 对象的 `leaseTransitions` 字段，频繁变更需告警
+- [ ] 监控 Lease 的 `renewTime`，超过 `leaseDurationSeconds` 未续租需告警
+- [ ] 混合版本升级时确认 `OldestEmulationVersion` 策略正确选择低版本实例
+- [ ] 控制平面组件的 `--leader-elect-lease-duration` 和 `--leader-elect-renew-deadline` 参数合理
+- [ ] etcd 网络延迟低于 Lease 续租间隔的 1/3
+- [ ] 升级完成后验证所有 LeaseCandidate 版本信息正确
+
+## 命令快速参考
+
+```bash
+# 查看 kube-system 中的 Lease 对象
+kubectl get lease -n kube-system
+
+# 查看 controller-manager 领导者信息
+kubectl get lease kube-controller-manager -n kube-system -o yaml
+
+# 查看 scheduler 领导者信息
+kubectl get lease kube-scheduler -n kube-system -o yaml
+
+# 查看 LeaseCandidate 对象（协调选举）
+kubectl get leasecandidates -n kube-system
+
+# 查看 LeaseCandidate 详情（版本信息）
+kubectl describe leasecandidate -n kube-system
+
+# 查看当前领导者身份
+kubectl get lease kube-controller-manager -n kube-system -o jsonpath='{.spec.holderIdentity}'
+
+# 查看领导权变更次数
+kubectl get lease kube-controller-manager -n kube-system -o jsonpath='{.spec.leaseTransitions}'
+
+# 查看最近续租时间
+kubectl get lease kube-controller-manager -n kube-system -o jsonpath='{.spec.renewTime}'
+
+# 检查控制平面组件日志中的选举信息
+kubectl -n kube-system logs -l component=kube-controller-manager | grep -i "leader"
+kubectl -n kube-system logs -l component=kube-scheduler | grep -i "leader"
+```
+
+## 交叉引用
+
+- [api-priority-and-fairness.md](./api-priority-and-fairness.md) — leader election 请求的 APF 优先级保障
+- [compatibility-version-for-control-plane.md](./compatibility-version-for-control-plane.md) — 控制平面版本兼容与模拟版本
+- [operator-pattern.md](./operator-pattern.md) — Operator 中的 leader election 实现
+- [../scheduling/kubernetes-scheduler.md](../scheduling/kubernetes-scheduler.md) — kube-scheduler 的 HA 与选举
+
 ## 参考链接
 
 - [Coordinated Leader Election - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/coordinated-leader-election/)

@@ -29,6 +29,39 @@ Kubernetes 允许使用 Container Network Interface（CNI）插件来实现集�
 - 启用流量整形功能前，确认 CNI 二进制和配置文件均已正确放置（默认 `/opt/cni/bin` 和 `/etc/cni/net.d`）。
 - 遇到网络问题时，可参考 Troubleshooting CNI plugin-related errors 进行排查。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 节点 NotReady | CNI 插件未安装或配置错误 | `kubectl describe node`；检查 `/etc/cni/net.d/` |
+| Pod 无法获取 IP | CNI IPAM 地址池耗尽 | 检查 CNI 日志；查看 IPAM 配置 |
+| Pod 间网络不通 | CNI 路由配置错误 | `kubectl exec` 测试 ping；检查节点路由表 |
+
+## 生产检查清单
+
+- [ ] CNI 二进制文件部署在 `/opt/cni/bin/`
+- [ ] CNI 配置文件在 `/etc/cni/net.d/`
+- [ ] IPAM 地址池规划充足
+- [ ] kubelet 配置正确的 `--cni-bin-dir` 和 `--cni-conf-dir`
+
+## 命令快速参考
+
+```bash
+# 查看 CNI 配置
+ls /etc/cni/net.d/
+
+# 查看 CNI 二进制
+ls /opt/cni/bin/
+
+# 查看 Pod CIDR 分配
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}: {.spec.podCIDR}{"\n"}{end}'
+```
+
+## 交叉引用
+
+- [计算、存储和网络扩展](./compute-storage-and-networking-extensions.md) — 扩展总览
+- [Device Plugins](./device-plugins.md) — 设备级扩展
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/

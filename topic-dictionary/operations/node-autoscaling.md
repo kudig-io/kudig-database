@@ -71,6 +71,52 @@
 - 在整合过程中，虽然扩缩器会预测调度结果，但实际调度不由扩缩器控制，仍可能出现少量 Pod Pending 的情况（例如整合过程中恰好有新 Pod 创建）。
 - 不建议为 DaemonSet 启用垂直自动扩缩容，以免影响节点资源预测。
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| Pending Pod 长时间无节点扩容 | Autoscaler 未识别到 Pending Pod | `kubectl get pods --field-selector=status.phase=Pending` | 检查 Autoscaler 日志和节点组配置 |
+| 扩容后节点 NotReady | 节点初始化超时或 kubelet 配置错误 | `kubectl describe node <new-node>` | 检查 cloud-init 日志和 kubelet 状态 |
+| 缩容未触发（闲置节点仍存在） | Pod 有 PDB 或 local storage 阻止驱逐 | `kubectl logs -n kube-system cluster-autoscaler-*` | 检查 PDB、annotation `cluster-autoscaler.kubernetes.io/safe-to-evict` |
+| Karpenter 选择了错误的实例类型 | NodePool 约束配置不当 | `kubectl get nodeclaim -o wide` | 调整 NodePool 的 instanceType 和 requirements |
+| 节点频繁扩缩（抖动） | 扩缩阈值设置过于敏感 | 查看 Autoscaler `--scale-down-delay-after-add` | 增大 scale-down 延迟和 utilization 阈值 |
+| DaemonSet 资源预测错误 | VPA 修改了 DaemonSet 的 requests | `kubectl get vpa -A` | 不要为 DaemonSet 启用 VPA |
+
+## 生产检查清单
+
+- [ ] 所有 Pod 已正确设置 resource requests
+- [ ] 节点组 / NodePool 的 min/max 节点数已合理配置
+- [ ] Cluster Autoscaler / Karpenter 日志可正常查看
+- [ ] PDB 不会阻塞整个节点缩容
+- [ ] 扩缩容延迟参数已根据业务特性调优
+- [ ] 节点启动脚本（cloud-init / user-data）经过验证
+- [ ] HPA + 节点自动扩缩容联动测试已通过
+- [ ] Spot/Preemptible 节点配置了正确的 taints 和 labels
+
+## 命令快速参考
+
+```bash
+# 查看 Pending Pods
+kubectl get pods -A --field-selector=status.phase=Pending
+
+# 查看 Cluster Autoscaler 状态
+kubectl get configmap -n kube-system cluster-autoscaler-status -o yaml
+
+# 查看 Karpenter NodePool 和 NodeClaim
+kubectl get nodepool
+kubectl get nodeclaim -o wide
+
+# 查看节点资源分配情况
+kubectl describe nodes | grep -A 5 "Allocated resources"
+
+# 手动标记节点可安全驱逐
+kubectl annotate node <node> cluster-autoscaler.kubernetes.io/safe-to-evict="true"
+
+# 查看 Autoscaler 日志
+kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100
+```
+
+## 交叉引用
 
 - [Node Autoscaling - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/node-autoscaling/)
+- 相关主题：[Horizontal Pod Autoscaling](../workloads/horizontal-pod-autoscaling.md) · [Vertical Pod Autoscaling](../workloads/vertical-pod-autoscaling.md) · [Karpenter Autoscaling](../scheduling/karpenter-autoscaling.md)

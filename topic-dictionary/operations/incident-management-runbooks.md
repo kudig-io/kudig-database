@@ -3239,6 +3239,47 @@ incidentAnalytics:
 | **版本兼容性** | CI/CD 兼容性测试 | 金丝雀发布 | 60% | P1 |
 | **人为误操作** | 操作二次确认 | RBAC 最小权限 | 50% | P2 |
 
+## 故障排查
+
+> 本文件包含完整的事故管理与应急手册。详见上方各章节：1.事故管理框架、2.事故分级标准、3.应急响应流程、5.通用应急手册、6.特定场景 Runbook。
+
+## 生产检查清单
+
+- [ ] 事故分级标准已定义并全团队共识（P0-P4）
+- [ ] On-call 轮换机制已建立，每个时段有主备值班
+- [ ] War Room 组织流程已文档化
+- [ ] 所有关键服务有对应的 Runbook
+- [ ] 事故通信渠道（Slack/PagerDuty）已配置
+- [ ] 事后复盘（Postmortem）模板和流程已标准化
+- [ ] 改进措施有明确的 Owner 和 Deadline
+- [ ] 定期（季度）进行事故演练
+
+## 命令快速参考
+
+```bash
+# 快速查看集群异常事件
+kubectl get events -A --sort-by=.metadata.creationTimestamp | tail -30
+
+# 查看所有非正常 Pod
+kubectl get pods -A | grep -vE 'Running|Completed'
+
+# 快速 cordon 问题节点
+kubectl cordon <node> && kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+
+# 查看 API Server 审计日志
+kubectl logs -n kube-system kube-apiserver-* --tail=100
+
+# 检查控制平面组件健康
+kubectl get componentstatuses
+
+# 快速回滚 Deployment
+kubectl rollout undo deployment/<name> -n <namespace>
+```
+
+## 交叉引用
+
+- 相关主题：[生产故障排查手册](production-troubleshooting-playbook.md) · [故障模式分析](failure-patterns-analysis.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [SRE 成熟度模型](sre-maturity-model.md) · [变更管理](change-management-release.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

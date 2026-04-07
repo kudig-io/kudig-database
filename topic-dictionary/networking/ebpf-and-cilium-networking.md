@@ -81,6 +81,118 @@ Cilium 的网络策略支持基于**身份（Identity）**而非 IP 的细粒度
 - **合理利用 L7 代理**：L7 协议解析需要 per-node Envoy，虽然比 Sidecar 轻量，但仍会消耗额外资源
 - **网络策略测试先行**：在生产启用严格的 Cilium NetworkPolicy 前，先在 `audit` 模式下观察流量影响
 
+## 生产 YAML 示例
+
+### Cilium Helm 安装关键配置
+
+```bash
+# Cilium 安装（替代 kube-proxy）
+helm install cilium cilium/cilium --version 1.16 \
+  --namespace kube-system \
+  --set kubeProxyReplacement=true \
+  --set k8sServiceHost=<api-server-ip> \
+  --set k8sServicePort=6443 \
+  --set hubble.enabled=true \
+  --set hubble.relay.enabled=true \
+  --set hubble.ui.enabled=true \
+  --set encryption.enabled=true \
+  --set encryption.type=wireguard \
+  --set bpf.masquerade=true \
+  --set loadBalancer.mode=dsr \
+  --set loadBalancer.acceleration=native   # XDP 加速
+```
+
+### CiliumNetworkPolicy（L3/L4 + L7）
+
+```yaml
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: api-policy
+  namespace: production
+spec:
+  endpointSelector:
+    matchLabels:
+      app: api-server
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: web-frontend
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      rules:
+        http:                         # L7 HTTP 策略
+        - method: GET
+          path: "/api/v1/.*"
+        - method: POST
+          path: "/api/v1/orders"
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: database
+    toPorts:
+    - ports:
+      - port: "5432"
+  - toFQDNs:                         # DNS-based FQDN 策略
+    - matchName: "api.external.com"
+    toPorts:
+    - ports:
+      - port: "443"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Cilium Agent CrashLoop | 内核版本过低或 eBPF Map 溢出 | `uname -r` 确认 ≥ 5.10；检查 Agent 日志 |
+| Pod 间通信中断 | Agent 崩溃导致 eBPF 规则丢失 | `cilium status`；`cilium connectivity test` |
+| L7 策略不生效 | Envoy per-node 未部署 | `kubectl get pods -n kube-system -l k8s-app=cilium-envoy` |
+| XDP 加速未启用 | 网卡驱动不支持 XDP native | `cilium status \| grep XDP`；回退到 generic 模式 |
+| Hubble 无流量数据 | Hubble Relay 未部署 | `kubectl get pods -n kube-system -l k8s-app=hubble-relay` |
+
+## 生产检查清单
+
+- [ ] Linux 内核 ≥ 5.10（推荐 5.15+）
+- [ ] Cilium Agent 配置 `system-node-critical` 优先级
+- [ ] 启用 Hubble + Relay 用于可观测性
+- [ ] 大规模集群调整 eBPF Map 大小限制
+- [ ] NetworkPolicy 先在 audit 模式验证再 enforce
+- [ ] 监控 Cilium Agent 健康状态和重启次数
+- [ ] 从 Calico 迁移采用蓝绿集群策略
+
+## 命令快速参考
+
+```bash
+# Cilium 状态检查
+cilium status
+cilium connectivity test
+
+# Hubble 流量观测
+hubble observe --namespace production
+hubble observe --verdict DROPPED         # 查看被丢弃的流量
+hubble observe --to-label app=database
+
+# 查看 eBPF 程序
+cilium bpf endpoint list
+cilium bpf ct list global                # 连接追踪表
+
+# 查看网络策略
+cilium policy get -n production
+cilium endpoint list
+
+# 监控 Cilium Agent
+kubectl logs -n kube-system -l k8s-app=cilium --tail=50
+```
+
+## 交叉引用
+
+- [Network Policies](network-policies.md) — 标准 NetworkPolicy 与 CiliumNetworkPolicy 的区别
+- [Cluster Networking](cluster-networking.md) — CNI 选型对比
+- [Service Mesh](service-mesh.md) — Cilium Sidecar-less Service Mesh
+- [Cluster Mesh](cluster-mesh.md) — Cilium 多集群互联
+
 ## 参考链接
 
 - [Cilium Documentation](https://docs.cilium.io/)

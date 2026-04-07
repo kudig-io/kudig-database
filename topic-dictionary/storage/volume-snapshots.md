@@ -58,6 +58,74 @@
 - 删除 VolumeSnapshot 前请确认其 `deletionPolicy`，避免误删底层存储快照。
 - 对于预创建的快照，管理员需要正确设置 `snapshotHandle`（存储后端快照 ID）和 `sourceVolumeMode`。
 
+## 生产 YAML 示例
+
+### 创建卷快照 + 从快照恢复
+
+```yaml
+# 1. 创建 VolumeSnapshot
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: postgres-snap-20260407
+  namespace: database
+spec:
+  volumeSnapshotClassName: csi-ebs-snapclass
+  source:
+    persistentVolumeClaimName: postgres-data
+---
+# 2. 从快照恢复新 PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-restored
+  namespace: database
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: gp3-encrypted
+  resources:
+    requests:
+      storage: 100Gi                       # >= 源卷大小
+  dataSource:
+    name: postgres-snap-20260407
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| VolumeSnapshot 状态 readyToUse: false | 底层快照创建中或失败 | `kubectl describe volumesnapshot`；检查 snapshot-controller 日志 |
+| 从快照恢复 PVC Pending | VolumeSnapshotContent 不存在或未绑定 | `kubectl get volumesnapshotcontent` |
+| 快照删除后底层快照未清理 | deletionPolicy 为 Retain | 手动清理底层存储快照 |
+
+## 生产检查清单
+
+- [ ] 部署 snapshot-controller 和 CSI snapshotter sidecar
+- [ ] 为生产数据使用 `deletionPolicy: Retain`
+- [ ] 定期创建快照并验证恢复流程
+- [ ] 设置快照保留策略（自动清理过期快照）
+
+## 命令快速参考
+
+```bash
+# 查看快照
+kubectl get volumesnapshots -n database
+
+# 查看快照详情
+kubectl describe volumesnapshot postgres-snap-20260407 -n database
+
+# 查看 VolumeSnapshotContent
+kubectl get volumesnapshotcontent
+```
+
+## 交叉引用
+
+- [卷快照类](./volume-snapshot-classes.md) — VolumeSnapshotClass 配置
+- [持久卷](./persistent-volumes.md) — PVC dataSource 恢复
+- [CSI 卷克隆](./csi-volume-cloning.md) — 另一种数据复制方式
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/volume-snapshots/

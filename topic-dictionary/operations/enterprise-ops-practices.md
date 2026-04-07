@@ -1987,6 +1987,43 @@ data:
 
 这份企业级运维最佳实践文档为企业构建了完整的运维体系框架，涵盖了从大规模集群管理到团队协作的各个方面，确保能够支撑万级节点规模的生产环境稳定运行。
 
+## 故障排查
+
+> 本文件为企业级运维最佳实践综合指南。详见上方各章节：大规模集群管理、变更管理与发布策略、故障应急与灾难恢复、运营指标与持续改进。
+
+## 生产检查清单
+
+- [ ] 多集群联邦管理架构已建立
+- [ ] RBAC 和命名空间隔离策略已标准化
+- [ ] 变更审批和发布流程自动化
+- [ ] 灾难恢复计划已制定并定期演练
+- [ ] 团队 on-call 轮换和知识传承机制已建立
+- [ ] 运维知识库结构化并持续更新
+- [ ] 关键运营指标（MTTR、MTTD、变更成功率）持续跟踪
+- [ ] 企业级运维工具链（监控、日志、追踪）已统一部署
+
+## 命令快速参考
+
+```bash
+# 多集群管理 - 切换 context
+kubectl config get-contexts
+kubectl config use-context <cluster-name>
+
+# 跨集群查看节点
+for ctx in $(kubectl config get-contexts -o name); do echo "=== $ctx ===" && kubectl --context=$ctx get nodes; done
+
+# 查看 RBAC 绑定
+kubectl get clusterrolebinding -o wide | head -20
+kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
+
+# 审计日志查看
+kubectl logs -n kube-system kube-apiserver-* --tail=50 | grep audit
+```
+
+## 交叉引用
+
+- 相关主题：[运维最佳实践](operations-best-practices.md) · [SRE 成熟度模型](sre-maturity-model.md) · [事故管理](incident-management-runbooks.md) · [变更管理](change-management-release.md) · [Cluster API](../platform-engineering/cluster-api-and-fleet-management.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

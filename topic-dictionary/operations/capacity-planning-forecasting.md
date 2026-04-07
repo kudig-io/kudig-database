@@ -1670,6 +1670,44 @@ gpu-capacity-planning:
     storage: "FSx for Lustre (100 TB)"
 ```
 
+## 故障排查
+
+> 本文件涵盖容量规划全流程。详见上方各章节：1.容量规划框架、2.资源使用分析、3.容量预测模型、4.集群扩容策略、5.资源配额管理。
+
+## 生产检查清单
+
+- [ ] 集群 CPU/Memory 使用率纳入 Prometheus 持续监控
+- [ ] 容量预测模型（线性回归/ARIMA）已建立并定期校准
+- [ ] 每个 Namespace 配置了 ResourceQuota
+- [ ] 节点扩容阈值和触发机制已定义
+- [ ] 存储容量使用率 >80% 时自动告警
+- [ ] etcd 数据库大小纳入监控（>6GB 告警）
+- [ ] 容量审查会议按月进行
+- [ ] 成本优化措施的 ROI 定期评估
+
+## 命令快速参考
+
+```bash
+# 查看集群节点资源分配
+kubectl describe nodes | grep -A 8 "Allocated resources"
+
+# 查看 Namespace 配额使用
+kubectl get resourcequota -A
+
+# 查看 PVC 使用率
+kubectl get pvc -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,CAPACITY:.status.capacity.storage
+
+# 查看节点可调度资源
+kubectl get nodes -o custom-columns=NAME:.metadata.name,CPU:.status.allocatable.cpu,MEM:.status.allocatable.memory
+
+# etcd 数据库大小
+etcdctl endpoint status --write-out=table
+```
+
+## 交叉引用
+
+- 相关主题：[FinOps 与成本优化](finops-and-cost-optimization.md) · [Node Autoscaling](node-autoscaling.md) · [运维最佳实践](operations-best-practices.md) · [性能调优](performance-tuning-expert.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

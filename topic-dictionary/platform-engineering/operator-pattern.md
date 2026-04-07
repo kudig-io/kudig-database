@@ -37,6 +37,43 @@ Operator 是 Kubernetes 的软件扩展，它利用自定义资源（Custom Reso
 - Operator 控制器通常以 Deployment 形式运行，需要为其配置适当的 RBAC 权限。
 - 设计 Operator 时，应充分考虑故障恢复、幂等性、升级兼容性以及与现有 Kubernetes 原生资源（如 StatefulSet、PersistentVolumeClaim）的协作。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| CR 创建后无响应 | Operator Pod 未运行或未 watch 该 namespace | `kubectl get pods -n <operator-ns>`；检查 Operator 日志 |
+| Operator 频繁重启 | RBAC 权限不足或代码 panic | 查看 Operator Pod 日志和事件 |
+| 调协循环不收敛 | Reconcile 逻辑有 bug 导致无限更新 | 检查 Operator 日志中的 reconcile 频率 |
+| CRD 升级后 Operator 不兼容 | API 版本不匹配 | 确认 Operator 版本与 CRD 版本匹配 |
+
+## 生产检查清单
+
+- [ ] Operator 使用 leader election 确保单实例运行
+- [ ] 配置最小 RBAC 权限
+- [ ] 实现 Reconcile 幂等逻辑
+- [ ] 设置合理的 Reconcile requeue 间隔
+- [ ] 使用 OLM 或 Helm 管理 Operator 生命周期
+- [ ] 监控 Operator 自身的健康和性能
+
+## 命令快速参考
+
+```bash
+# 查看 Operator Pod
+kubectl get pods -n <operator-namespace> -l app=<operator>
+
+# 查看 Operator 日志
+kubectl logs -n <operator-namespace> -l app=<operator> --tail=100
+
+# 查看 Operator 管理的 CR
+kubectl get <cr-type> -A
+```
+
+## 交叉引用
+
+- [Custom Resources](./custom-resources.md) — CRD 定义
+- [扩展 Kubernetes API](./extending-the-kubernetes-api.md) — API 扩展方式对比
+- [Admission Webhook](./admission-webhook-good-practices.md) — Webhook 作为 Operator 辅助
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/operator/

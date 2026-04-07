@@ -31,5 +31,163 @@ Init 容器是在 Pod 启动期间、于应用容器之前运行的特殊容器�
 - 如果通过 Pod 模板修改 init 容器，影响取决于使用该模板的工作负载控制器。
 - 多个 init 容器会延长 Pod 启动时间，应尽量减少不必要的 init 步骤。
 
+## 实战 YAML 示例
+
+以下为使用 Init 容器实现依赖等待和配置生成的生产级示例：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-init
+  namespace: prod
+  labels:
+    app: myapp
+spec:
+  initContainers:
+  # Init 1: 等待数据库就绪
+  - name: wait-for-db
+    image: busybox:1.36
+    command:
+    - sh
+    - -c
+    - |
+      echo "等待 PostgreSQL 就绪..."
+      until nc -z postgres-svc.prod.svc.cluster.local 5432; do
+        echo "数据库未就绪，重试中..."
+        sleep 3
+      done
+      echo "数据库已就绪"
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+      limits:
+        cpu: "50m"
+        memory: "32Mi"
+  # Init 2: 从 ConfigMap 生成应用配置
+  - name: config-generator
+    image: myregistry.com/config-tool:v1.0
+    command:
+    - sh
+    - -c
+    - |
+      # 根据环境变量生成最终配置（幂等操作）
+      envsubst < /templates/app.conf.tmpl > /config/app.conf
+      echo "配置文件已生成"
+    env:
+    - name: DB_HOST
+      value: "postgres-svc.prod.svc.cluster.local"
+    - name: DB_PORT
+      value: "5432"
+    volumeMounts:
+    - name: config-template
+      mountPath: /templates
+      readOnly: true
+    - name: app-config
+      mountPath: /config
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "32Mi"
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+  containers:
+  - name: app
+    image: myregistry.com/myapp:v2.0.0
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - name: app-config
+      mountPath: /etc/app
+      readOnly: true
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "256Mi"
+      limits:
+        cpu: "1000m"
+        memory: "512Mi"
+  volumes:
+  - name: config-template
+    configMap:
+      name: app-config-template
+  - name: app-config
+    emptyDir: {}                             # Init 容器写入，主容器只读
+```
+
+## 故障排查
+
+### Pod 卡在 Init 阶段 (Init:0/2)
+- **症状**: Pod 状态显示 `Init:0/2` 或 `Init:CrashLoopBackOff`。
+- **常见原因**: Init 容器中的依赖服务不可达（如数据库未启动）、命令语法错误、镜像拉取失败。
+- **诊断命令**:
+  ```bash
+  # 查看 init 容器状态
+  kubectl describe pod <pod-name> -n prod | grep -A 30 "Init Containers"
+  # 查看 init 容器日志
+  kubectl logs <pod-name> -c wait-for-db -n prod
+  # 检查 init 容器退出码
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.status.initContainerStatuses[*].lastState}'
+  ```
+- **解决方案**: 确认依赖服务已部署、DNS 解析正常，检查 Init 容器命令和镜像。
+
+### Init 容器无限重启
+- **症状**: Init 容器反复执行失败，Pod 始终无法进入 Running 状态。
+- **常见原因**: Init 容器脚本逻辑错误、权限不足、挂载卷路径错误。
+- **诊断命令**:
+  ```bash
+  # 查看 init 容器的上一次退出日志
+  kubectl logs <pod-name> -c <init-container-name> --previous -n prod
+  # 查看 Pod 事件
+  kubectl describe pod <pod-name> -n prod | tail -20
+  ```
+
+### Init 容器拖慢 Pod 启动
+- **症状**: Pod 从创建到 Running 耗时过长。
+- **诊断命令**:
+  ```bash
+  # 查看 Pod 各阶段时间
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions}'
+  # 查看各 init 容器的启动和完成时间
+  kubectl get pod <pod-name> -n prod -o jsonpath='{range .status.initContainerStatuses[*]}{.name}: started={.state.terminated.startedAt}, finished={.state.terminated.finishedAt}{"\n"}{end}'
+  ```
+- **解决方案**: 优化 Init 容器逻辑、减少不必要的等待、合并可并行的初始化步骤。
+
+## 生产就绪检查清单
+
+- [ ] Init 容器脚本具备幂等性（可安全重复执行）
+- [ ] Init 容器设置了 `resources.requests/limits`，避免争抢节点资源
+- [ ] 等待依赖服务的 Init 容器有超时退出机制，而非无限循环
+- [ ] Init 容器镜像版本固定（避免 `latest` 标签）
+- [ ] 敏感操作（密钥获取等）放在 Init 容器中，与应用镜像分离
+- [ ] 共享卷权限设置正确（Init 写入，主容器只读）
+- [ ] 已通过 `activeDeadlineSeconds` 设置 Pod 整体超时时间
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 中 init 容器的状态
+kubectl get pod <pod-name> -n prod -o jsonpath='{.status.initContainerStatuses}'
+
+# 查看指定 init 容器的日志
+kubectl logs <pod-name> -c <init-container-name> -n prod
+
+# 查看 init 容器的上一次执行日志（重启后）
+kubectl logs <pod-name> -c <init-container-name> --previous -n prod
+
+# 快速查看 Pod 初始化条件
+kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions[?(@.type=="Initialized")]}'
+```
+
+## 交叉引用
+
+- [Sidecar 容器](./sidecar-containers.md)
+- [容器生命周期钩子](./container-lifecycle-hooks.md)
+- [Pod 生命周期事件](../../domain-4-workloads/11-pod-lifecycle-events.md)
+- [高级 Pod 运维模式](../../domain-4-workloads/12-advanced-pod-patterns.md)
+- [Pod 综合故障排查手册](../../domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/init-containers/

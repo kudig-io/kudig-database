@@ -51,6 +51,93 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 - 对于 `podCertificate` 投影，推荐优先使用 `credentialBundlePath`（合并的 PEM 文件），而不是分离的 `keyPath` 和 `certificateChainPath`，以避免证书轮换时出现密钥与证书不匹配的问题。
 - `clusterTrustBundle` 和 `podCertificate` 功能需要开启对应的特性门和 runtime-config。
 
+## 生产 YAML 示例
+
+### 多源投射卷（ServiceAccountToken + ConfigMap + Secret）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-client
+  namespace: production
+spec:
+  serviceAccountName: api-client-sa
+  containers:
+    - name: client
+      image: registry.example.com/api-client:v2.0
+      volumeMounts:
+        - name: credentials
+          mountPath: /var/run/secrets/app
+          readOnly: true
+      resources:
+        requests:
+          cpu: "100m"
+          memory: 128Mi
+  volumes:
+    - name: credentials
+      projected:
+        defaultMode: 0400
+        sources:
+          - serviceAccountToken:
+              audience: "https://api.example.com"
+              expirationSeconds: 3600        # 1 小时过期，自动轮转
+              path: token
+          - configMap:
+              name: api-client-config
+              items:
+                - key: endpoints.yaml
+                  path: endpoints.yaml
+          - secret:
+              name: api-client-tls
+              items:
+                - key: tls.crt
+                  path: tls.crt
+                - key: tls.key
+                  path: tls.key
+                  mode: 0400                 # 私钥严格权限
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    fieldPath: metadata.namespace
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 投射卷中某个文件缺失 | 源 ConfigMap/Secret 不存在 | `kubectl get configmap/secret` 确认存在；检查 items 中的 key |
+| ServiceAccountToken 过期后应用报错 | 应用未重新读取 token 文件 | 确保应用定期重新读取 token 文件（kubelet 会自动轮转） |
+| Windows Pod 卡在 ContainerCreating | 使用了 Linux 的 RunAsUser | 移除 Pod SecurityContext 中的 runAsUser |
+| 文件权限不正确 | defaultMode 或 mode 设置不当 | 检查 `defaultMode` 和各 items 的 `mode` |
+
+## 生产检查清单
+
+- [ ] ServiceAccountToken 设置合理的 `expirationSeconds`（建议 3600）
+- [ ] 私钥文件 mode 设置为 0400（仅所有者可读）
+- [ ] 不使用 subPath 挂载（无法自动更新）
+- [ ] 应用实现 token 文件的热重载逻辑
+- [ ] Windows Pod 不使用 runAsUser
+
+## 命令快速参考
+
+```bash
+# 查看投射卷中的文件
+kubectl exec <pod-name> -- ls -la /var/run/secrets/app/
+
+# 检查 token 内容
+kubectl exec <pod-name> -- cat /var/run/secrets/app/token
+
+# 查看 Pod 的 projected volume 配置
+kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[?(@.projected)]}' | jq .
+```
+
+## 交叉引用
+
+- [卷](./volumes.md) — 卷类型总览
+- [临时卷](./ephemeral-volumes.md) — 其他临时存储方式
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/projected-volumes/

@@ -67,6 +67,48 @@ Kubernetes v1.35 [alpha]（默认禁用）
 - 对于已迁移到 CSI 的 in-tree 插件，动态卷限制以 CSI 驱动为准，无需额外配置。
 - 在 v1.35+ 集群中，`MutableCSINodeAllocatableCount` 默认启用，CSI 驱动开发者可利用此特性提高调度准确性。
 
+## 生产 YAML 示例
+
+### 查看节点卷限制
+
+```bash
+# 查看节点的可附加卷上限
+kubectl get csinode <node-name> -o yaml
+
+# 查看节点 Allocatable 中的 attachable-volumes
+kubectl describe node <node-name> | grep attachable-volumes
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 卡在 ContainerCreating，提示 volume limit reached | 节点已附加卷数达上限 | `kubectl describe node` 查看 `attachable-volumes-*` |
+| 新 CSI 驱动的限制为 0 | 驱动未在 NodeGetInfo 报告限制 | 检查 CSI 驱动实现 |
+| 限制值与预期不符 | in-tree 迁移到 CSI 后限制以 CSI 为准 | `kubectl get csinode -o yaml` 查看报告的限制 |
+
+## 生产检查清单
+
+- [ ] 规划节点卷密度：每节点最大 Pod 数 × 每 Pod 卷数 <= 节点卷限制
+- [ ] 大规模 StatefulSet 注意分散到足够多节点
+- [ ] CSI 驱动正确实现 NodeGetInfo 报告最大卷数
+
+## 命令快速参考
+
+```bash
+# 查看各节点的卷限制
+kubectl get nodes -o custom-columns='NAME:.metadata.name,VOLUMES:.status.allocatable.attachable-volumes-csi-ebs\.csi\.aws\.com'
+
+# 查看 CSINode 信息
+kubectl get csinodes -o wide
+```
+
+## 交叉引用
+
+- [存储容量](./storage-capacity.md) — 容量维度的调度约束
+- [持久卷](./persistent-volumes.md) — PV 附加到节点
+- [存储类](./storage-classes.md) — 不同存储后端的卷限制差异
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/storage-limits/

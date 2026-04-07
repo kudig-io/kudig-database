@@ -57,6 +57,108 @@ Kubernetes Volumes 为 Pod 中的容器提供了一种通过文件系统访问�
 - 使用 `subPath` 挂载的容器不会自动接收到 ConfigMap/Secret 的更新。
 - 尽量使用 CSI 驱动替代已弃用的 in-tree 存储插件。
 
+## 生产 YAML 示例
+
+### 多卷类型组合（emptyDir + ConfigMap + PVC）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: app
+          image: registry.example.com/web:v3.0
+          volumeMounts:
+            - name: cache
+              mountPath: /tmp/cache          # emptyDir 缓存
+            - name: config
+              mountPath: /etc/app/config
+              readOnly: true                 # ConfigMap 配置
+            - name: data
+              mountPath: /var/data           # PVC 持久数据
+          resources:
+            requests:
+              cpu: "250m"
+              memory: 256Mi
+        - name: log-collector
+          image: registry.example.com/fluentbit:v2.0
+          volumeMounts:
+            - name: cache
+              mountPath: /var/log/app        # 与 app 容器共享 emptyDir
+              readOnly: true
+          resources:
+            requests:
+              cpu: "50m"
+              memory: 64Mi
+      volumes:
+        - name: cache
+          emptyDir:
+            sizeLimit: 1Gi                   # 限制 emptyDir 大小
+        - name: config
+          configMap:
+            name: web-app-config
+            items:
+              - key: application.yaml
+                path: application.yaml
+        - name: data
+          persistentVolumeClaim:
+            claimName: web-app-data
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 卡在 ContainerCreating | PVC 未绑定或 CSI 驱动异常 | `kubectl describe pod`；`kubectl get pvc` 检查绑定状态 |
+| 容器内挂载点为空 | ConfigMap/Secret 不存在或 key 拼写错误 | `kubectl get configmap/secret` 确认存在；检查 items 配置 |
+| emptyDir 数据丢失 | Pod 重新调度到不同节点 | emptyDir 随 Pod 销毁是正常行为；持久数据应使用 PVC |
+| subPath 挂载后内容不更新 | subPath 挂载不接收自动更新 | 改为挂载整个目录或重启 Pod |
+| 递归只读挂载失败 | 容器运行时或内核版本不支持 | 确认使用 Linux 5.12+ 内核和兼容运行时 |
+
+## 生产检查清单
+
+- [ ] 避免使用 hostPath 卷，使用 CSI 或 local PV 替代
+- [ ] emptyDir 设置 `sizeLimit` 防止磁盘撑满
+- [ ] Memory-backed emptyDir (`medium: Memory`) 计入内存 limits
+- [ ] 使用 CSI 驱动替代已弃用的 in-tree 存储插件
+- [ ] ConfigMap/Secret 卷避免使用 subPath（无法自动更新）
+- [ ] 敏感卷文件设置合适的 defaultMode（如 0400）
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 的卷配置
+kubectl get pod <pod-name> -o jsonpath='{.spec.volumes}' | jq .
+
+# 查看容器挂载点
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[0].volumeMounts}' | jq .
+
+# 进入容器检查挂载内容
+kubectl exec <pod-name> -- ls -la /var/data
+
+# 查看 PVC 绑定状态
+kubectl get pvc -n production
+```
+
+## 交叉引用
+
+- [持久卷](./persistent-volumes.md) — PV/PVC 持久化存储
+- [临时卷](./ephemeral-volumes.md) — CSI 临时卷和通用临时卷
+- [投射卷](./projected-volumes.md) — 多源投射到同一目录
+- [存储类](./storage-classes.md) — 动态供给后端配置
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/volumes/

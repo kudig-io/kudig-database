@@ -61,6 +61,70 @@ Pod 级别的请求和限制是各容器值的总和。
 - 注意区分 `emptyDir` 的默认磁盘介质和 `medium: Memory`（tmpfs）在资源统计上的差异。
 - 如果 kubelet 未按支持的方式配置本地临时存储，即使 Pod 超出限制也不会被驱逐。
 
+## 生产 YAML 示例
+
+### Pod 临时存储 requests/limits
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: build-agent
+  namespace: ci
+spec:
+  containers:
+    - name: builder
+      image: registry.example.com/builder:v3.0
+      resources:
+        requests:
+          cpu: "2"
+          memory: 4Gi
+          ephemeral-storage: 10Gi          # 请求 10Gi 临时存储
+        limits:
+          cpu: "4"
+          memory: 8Gi
+          ephemeral-storage: 20Gi          # 最大 20Gi
+      volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+  volumes:
+    - name: workspace
+      emptyDir:
+        sizeLimit: 15Gi                    # emptyDir 独立限制
+  restartPolicy: Never
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 被驱逐，reason: Evicted | 临时存储使用超限 | `kubectl describe pod` 查看 eviction 原因；`kubectl exec` 检查磁盘使用 |
+| emptyDir 数据丢失 | Pod 重建（非容器重启） | 正常行为；持久数据用 PVC |
+| kubelet 未执行存储限制 | kubelet 未配置本地临时存储管理 | 检查 kubelet 配置和文件系统 |
+
+## 生产检查清单
+
+- [ ] CI/CD 构建 Pod 设置 `ephemeral-storage` limits
+- [ ] emptyDir 设置 `sizeLimit`
+- [ ] tmpfs emptyDir (`medium: Memory`) 计入内存使用
+- [ ] 命名空间配置 ResourceQuota 包含 ephemeral-storage
+- [ ] 配置日志轮转避免日志撑满临时存储
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 临时存储使用
+kubectl exec <pod-name> -- df -h /
+
+# 查看节点临时存储
+kubectl describe node <node-name> | grep ephemeral-storage
+```
+
+## 交叉引用
+
+- [临时卷](./ephemeral-volumes.md) — CSI 临时卷和通用临时卷
+- [卷](./volumes.md) — emptyDir 卷类型
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/ephemeral-storage/

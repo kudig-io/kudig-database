@@ -127,6 +127,47 @@ spec:
 - **数据加密**：启用服务端加密（SSE-S3 / SSE-KMS）和传输中加密（TLS 1.3）
 - **监控对象存储成本**：对象存储虽然单价低，但请求费用和出口流量费用可能出乎意料地高
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| S3 CSI 挂载后读写极慢 | FUSE 挂载开销大 | 改用 SDK 直接访问；或使用 Alluxio/Fluid 缓存层 |
+| boto3 报 AccessDenied | IAM 权限不足或 IRSA 未配置 | 检查 ServiceAccount 的 IAM 角色注解；验证 IAM Policy |
+| MinIO Pod OOMKilled | 内存不足 | 增大 MinIO Pod 的 memory limits；减少并发写入 |
+| Argo Workflow 步骤失败 | S3 Artifact 上传超时 | 检查网络连通性；增大超时配置 |
+
+## 生产检查清单
+
+- [ ] S3 Access Key 存储在 Kubernetes Secret 或使用 IRSA
+- [ ] 启用服务端加密（SSE-S3 / SSE-KMS）和 TLS 传输加密
+- [ ] 配置对象生命周期策略（冷数据自动转 Glacier）
+- [ ] Bucket 权限最小化，禁止公开访问
+- [ ] 大文件使用 Multipart Upload
+- [ ] GPU 节点使用 Alluxio/Fluid 缓存热数据集
+- [ ] 监控对象存储请求费用和出口流量
+
+## 命令快速参考
+
+```bash
+# 使用 aws cli 列出 bucket 内容
+aws s3 ls s3://my-dataset-bucket/
+
+# MinIO 客户端
+mc ls myminio/my-bucket
+
+# 查看 S3 CSI PVC
+kubectl get pvc -l storage-type=s3
+
+# 查看 Argo Workflow 状态
+kubectl get workflows -n data-pipeline
+```
+
+## 交叉引用
+
+- [持久卷](./persistent-volumes.md) — S3 CSI PVC
+- [存储类](./storage-classes.md) — S3 CSI StorageClass
+- [高性能存储网络](./high-performance-storage-networks.md) — AI 训练存储加速
+
 ## 参考链接
 
 - [MinIO Documentation](https://min.io/docs/minio/kubernetes/upstream/)

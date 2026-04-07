@@ -80,6 +80,44 @@ Kubernetes 项目建议在可能的情况下优先使用基于 CEL 的内置准�
 - 为 webhook 配置适当的超时和失败策略，避免单个 webhook 故障拖垮整个集群的 API 请求处理。
 - 使用 `matchConditions` 实现细粒度的请求过滤，显著减少不必要的 webhook 调用。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 所有 Pod 创建被拒绝 | Webhook 服务不可用 + failurePolicy: Fail | 检查 Webhook Pod 健康；临时改为 Ignore |
+| Webhook 超时导致 API 慢 | Webhook 处理逻辑过慢 | 降低 `timeoutSeconds`；优化 Webhook 代码 |
+| Webhook 未被调用 | namespace/objectSelector 不匹配 | 检查 WebhookConfiguration 的 selector 规则 |
+| TLS 证书错误 | caBundle 与 Webhook 服务证书不匹配 | 使用 cert-manager 自动管理证书 |
+
+## 生产检查清单
+
+- [ ] 关键 Webhook 设置 `failurePolicy: Fail`
+- [ ] 非关键 Webhook 设置 `failurePolicy: Ignore`
+- [ ] 配置 `timeoutSeconds`（建议 5-10s）
+- [ ] 排除 kube-system 等系统命名空间
+- [ ] 使用 cert-manager 自动轮转 TLS 证书
+- [ ] Webhook 服务配置多副本 + PDB
+- [ ] 监控 Webhook 延迟和错误率
+
+## 命令快速参考
+
+```bash
+# 查看 Webhook 配置
+kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
+
+# 查看 Webhook 详情
+kubectl describe validatingwebhookconfiguration <name>
+
+# 测试 Webhook 是否影响 Pod 创建
+kubectl run test --image=nginx --dry-run=server -o yaml
+```
+
+## 交叉引用
+
+- [Custom Resources](./custom-resources.md) — CRD 验证与 Webhook 互补
+- [Operator 模式](./operator-pattern.md) — Operator 中的 Webhook 组件
+- [API 优先级与公平性](./api-priority-and-fairness.md) — API 请求流控
+
 ## 参考链接
 
 - [Admission Webhook Good Practices - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/admission-webhooks-good-practices/)

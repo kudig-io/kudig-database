@@ -53,6 +53,49 @@ FEATURE STATE: `Kubernetes v1.28 [stable]`（默认启用）
 - 使用非优雅节点关闭流程时需谨慎，操作不当可能导致数据损坏。
 - 控制平面节点不建议配置 swap，且应确保关键系统守护进程不受 swap 影响。
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| Pod 长时间 Terminating（节点关机后） | 非优雅关闭，kubelet 未检测到 shutdown | `kubectl get pods -o wide --field-selector=status.phase=Running` | 添加 `node.kubernetes.io/out-of-service` 污点 |
+| StatefulSet Pod 无法在新节点重建 | 卷未分离，仍绑定到旧节点 | `kubectl describe pv <pv-name>` | 使用 out-of-service 污点触发强制卷分离 |
+| 优雅关闭期间 Pod 被强杀 | shutdownGracePeriod 设置过短 | `journalctl -u kubelet \| grep shutdown` | 增大 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` |
+| 节点关机后 kubelet 未正确终止 Pod | systemd 抑制锁未生效 | `systemd-inhibit --list` | 确认 kubelet 注册了 shutdown inhibitor lock |
+| 关键 Pod 优先级关闭策略未生效 | `GracefulNodeShutdownBasedOnPodPriority` 未启用 | `kubelet --feature-gates` | 确认特性门控已启用并配置 `shutdownGracePeriodByPodPriority` |
+
+## 生产检查清单
+
+- [ ] `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 已合理配置
+- [ ] 关键 Pod 设置了高 PriorityClass
+- [ ] 计划内维护使用 `kubectl drain` 而非直接关机
+- [ ] 非优雅关闭的 out-of-service 污点操作流程已文档化
+- [ ] StatefulSet 的 PDB 已正确配置
+- [ ] 强制卷分离超时（6 分钟）的行为已确认
+- [ ] Windows 节点的 kubelet 以服务方式运行
+
+## 命令快速参考
+
+```bash
+# 优雅清空节点（计划内维护）
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+
+# 标记节点为 out-of-service（非优雅关闭）
+kubectl taint nodes <node> node.kubernetes.io/out-of-service=nodeshutdown:NoExecute
+
+# 移除 out-of-service 污点（节点恢复后）
+kubectl taint nodes <node> node.kubernetes.io/out-of-service-
+
+# 检查节点 condition
+kubectl get nodes -o custom-columns=NAME:.metadata.name,READY:.status.conditions[-1].status
+
+# 查看 kubelet shutdown 日志
+journalctl -u kubelet | grep -i shutdown
+
+# 检查 systemd 抑制锁
+systemd-inhibit --list
+```
+
+## 交叉引用
 
 - [Node Shutdowns - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/)
+- 相关主题：[Disruptions](../workloads/disruptions.md) · [Taints and Tolerations](../scheduling/taints-and-tolerations.md) · [Pod Lifecycle](../workloads/pod-lifecycle.md)

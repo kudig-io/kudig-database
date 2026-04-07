@@ -28,6 +28,40 @@ Kubernetes 提供了多种扩展机制，用于增强集群中节点的能力，
 - 确保所选 CNI 插件与集群版本兼容，并满足 Kubernetes 网络模型要求。
 - 设备插件和网络插件通常需要特权访问节点资源，部署时需注意安全配置。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Device Plugin 注册失败 | gRPC socket 路径不正确 | 检查 `/var/lib/kubelet/device-plugins/` 目录下的 socket 文件 |
+| CSI 驱动未被识别 | CSIDriver 对象未创建 | `kubectl get csidrivers` 确认驱动已注册 |
+| CNI 插件初始化失败 | CNI 二进制文件缺失 | 检查 `/opt/cni/bin/` 和 `/etc/cni/net.d/` |
+
+## 生产检查清单
+
+- [ ] Device Plugin 注册正常，`kubectl describe node` 可见扩展资源
+- [ ] CSI 驱动 Pod 运行正常（controller + node DaemonSet）
+- [ ] CNI 插件正确配置且所有节点 Ready
+- [ ] 使用 CSI 替代 in-tree 存储插件
+
+## 命令快速参考
+
+```bash
+# 查看节点扩展资源
+kubectl describe node <node> | grep -A 10 "Allocatable"
+
+# 查看 CSI 驱动
+kubectl get csidrivers
+
+# 查看 Device Plugin socket
+ls /var/lib/kubelet/device-plugins/
+```
+
+## 交叉引用
+
+- [Device Plugins](./device-plugins.md) — 设备插件详解
+- [Network Plugins](./network-plugins.md) — CNI 插件详解
+- [Operator 模式](./operator-pattern.md) — 扩展 Kubernetes 的另一种方式
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/

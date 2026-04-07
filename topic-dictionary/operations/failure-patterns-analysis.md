@@ -1537,6 +1537,44 @@ echo "✅ 混沌工程实验完成"
 | SLI/SLO | [15-sli-slo-sla-engineering.md](15-sli-slo-sla-engineering.md) | 衡量故障影响 |
 | 容量规划 | [13-capacity-planning-forecasting.md](13-capacity-planning-forecasting.md) | 预防资源不足故障 |
 
+## 故障排查
+
+> 本文件即为完整的故障模式与根因分析字典。详见上方各章节：1.常见故障模式分类、2.根因分析方法论、3.故障树分析(FMEA)、4.MTTR优化策略、7.真实故障案例库、8.高级故障诊断技术。
+
+## 生产检查清单
+
+- [ ] 常见故障模式已分类并建立知识库
+- [ ] 5 Whys 根因分析方法全团队掌握
+- [ ] FMEA 故障树已覆盖关键服务路径
+- [ ] MTTR 优化策略已落地（自动化诊断、Runbook）
+- [ ] 每次 P0/P1 事故完成复盘并产出改进项
+- [ ] 故障案例库持续更新（每月至少新增 1 个案例）
+- [ ] 预防措施体系已建立（混沌工程、自动化测试）
+- [ ] 高级诊断工具（eBPF、core dump 分析）团队可用
+
+## 命令快速参考
+
+```bash
+# 查看最近的异常事件
+kubectl get events -A --sort-by=.metadata.creationTimestamp --field-selector=type=Warning | tail -20
+
+# 查看 OOMKilled Pod
+kubectl get pods -A -o json | jq '.items[] | select(.status.containerStatuses[]?.lastState.terminated.reason=="OOMKilled") | {ns:.metadata.namespace, name:.metadata.name}'
+
+# 查看节点 Condition
+kubectl get nodes -o custom-columns=NAME:.metadata.name,READY:.status.conditions[-1].status,DISK:.status.conditions[3].status,MEM:.status.conditions[2].status,PID:.status.conditions[1].status
+
+# CrashLoopBackOff 诊断
+kubectl logs <pod> --previous -n <namespace>
+
+# 网络连通性诊断
+kubectl exec -it <pod> -- ping <target-svc>.<ns>.svc.cluster.local
+```
+
+## 交叉引用
+
+- 相关主题：[生产故障排查手册](production-troubleshooting-playbook.md) · [事故管理与 Runbooks](incident-management-runbooks.md) · [混沌工程](chaos-engineering.md) · [SRE 成熟度模型](sre-maturity-model.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

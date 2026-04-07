@@ -111,6 +111,98 @@ MEC 边缘节点 (K8s 集群)
 - **多层冗余**：控制平面采用多主 etcd 和跨区域备份；数据平面采用主备 UPF 和热切换机制
 - **监控电信级 KPI**：不仅监控 Pod CPU/内存，还要监控吞吐量（Gbps）、包转发率（Mpps）、连接建立成功率
 
+## 生产 YAML 示例
+
+### 电信级 Pod 配置（CPU Pinning + HugePages + SR-IOV）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: upf-dataplane
+  namespace: 5g-core
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-dpdk    # SR-IOV 第二张网卡
+spec:
+  runtimeClassName: performance                   # 低延迟运行时
+  containers:
+  - name: upf
+    image: registry.example.com/5g/upf:v3.2
+    resources:
+      requests:
+        cpu: "8"                                  # 8 个独占 CPU 核心
+        memory: "16Gi"
+        hugepages-1Gi: "4Gi"                      # 4GB 大页内存
+        intel.com/sriov_netdevice: "1"            # SR-IOV VF
+      limits:
+        cpu: "8"
+        memory: "16Gi"
+        hugepages-1Gi: "4Gi"
+        intel.com/sriov_netdevice: "1"
+    securityContext:
+      privileged: false
+      capabilities:
+        add: ["IPC_LOCK", "NET_ADMIN"]            # DPDK 必需
+    volumeMounts:
+    - name: hugepages
+      mountPath: /dev/hugepages
+  volumes:
+  - name: hugepages
+    emptyDir:
+      medium: HugePages-1Gi
+  # Topology Manager 确保 CPU 和内存在同一 NUMA 节点
+  # kubelet 配置：topologyManagerPolicy: single-numa-node
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| UPF 吞吐量低于预期 | CPU 未绑定或跨 NUMA 访问 | `lstopo` 检查 NUMA 拓扑；确认 Topology Manager 策略 |
+| SR-IOV VF 分配失败 | SR-IOV Device Plugin 未安装 | `kubectl get node -o json \| jq '.status.allocatable'` 检查 VF 资源 |
+| HugePages 分配不足 | 节点 HugePages 未预留 | `cat /proc/meminfo \| grep HugePages` |
+| PTP 时间同步偏差大 | PTP Grandmaster 不可达 | `pmc -u -b 0 'GET TIME_STATUS_NP'` 检查同步状态 |
+| 网络切片 QoS 不满足 SLA | 缺少 TC 或 eBPF QoS 策略 | 检查流量整形配置和队列调度 |
+
+## 生产检查清单
+
+- [ ] 使用 RT-PREEMPT 实时内核
+- [ ] Topology Manager 策略设为 `single-numa-node`
+- [ ] HugePages 在节点启动时预留（grub/sysctl）
+- [ ] SR-IOV Device Plugin 和 Multus CNI 已部署
+- [ ] CPU Manager 策略设为 `static`（独占核心）
+- [ ] PTP 时间同步精度 < 1us
+- [ ] CNF Pod 设置 `system-node-critical` 或自定义高优先级
+- [ ] 监控电信级 KPI：吞吐量(Gbps)、包转发率(Mpps)、连接建立成功率
+
+## 命令快速参考
+
+```bash
+# 检查节点 NUMA 拓扑
+lstopo --of txt
+numactl --hardware
+
+# 检查 HugePages 状态
+cat /proc/meminfo | grep -i huge
+sysctl vm.nr_hugepages
+
+# 检查 SR-IOV VF 资源
+kubectl get node <name> -o json | jq '.status.allocatable | to_entries[] | select(.key | contains("sriov"))'
+
+# 检查 CPU Manager 分配
+cat /var/lib/kubelet/cpu_manager_state
+
+# PTP 同步状态
+pmc -u -b 0 'GET TIME_STATUS_NP'
+```
+
+## 交叉引用
+
+- [eBPF 与 Cilium](ebpf-and-cilium-networking.md) — eBPF 在电信网络中的应用
+- [Cluster Mesh](cluster-mesh.md) — 边缘-中心多集群互联
+- [RuntimeClass](../workloads/runtime-class.md) — 低延迟运行时配置
+- [Network Policies](network-policies.md) — 网络切片的逻辑隔离
+
 ## 参考链接
 
 - [CNF Testbed by CNCF](https://github.com/cncf/cnf-testbed)

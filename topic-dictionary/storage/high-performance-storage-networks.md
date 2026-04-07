@@ -95,6 +95,47 @@ resources:
 - **Operator 化部署**：复杂的 RDMA 和 NVMe-oF 配置应通过 Operator 自动化，避免手工配置错误
 - **应用改造**：要发挥 RDMA 的最大价值，应用需要使用支持 RDMA 的库（如 librdmacm、NVMe-oF initiator）
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| RDMA 带宽远低于预期 | PFC/ECN 未正确配置导致丢包 | 检查交换机 PFC 配置；`perftest` 工具测试原始 RDMA 带宽 |
+| Pod 请求 rdma/hca 但 Pending | Device Plugin 未安装或设备不足 | `kubectl describe node` 查看 `rdma/hca` Allocatable |
+| NVMe-oF 挂载延迟高 | 使用 NVMe-TCP 而非 NVMe-RDMA | 确认 fabric 类型；切换到 NVMe over RDMA |
+| SR-IOV VF 分配失败 | BIOS 未启用 SR-IOV | 检查 BIOS 设置；确认 VF 驱动已加载 |
+
+## 生产检查清单
+
+- [ ] RoCE 部署配置无损以太网（PFC + ECN）
+- [ ] SR-IOV 启用 BIOS 支持 + VF 驱动
+- [ ] RDMA 网络与业务网络物理隔离
+- [ ] 监控 RDMA 带宽、P99 延迟、重传率
+- [ ] 存储目标端配置多路径和冗余控制器
+- [ ] 使用 Operator 自动化 RDMA/NVMe-oF 配置
+- [ ] Pod 调度感知网络拓扑（同 Leaf 交换机优先）
+
+## 命令快速参考
+
+```bash
+# 查看节点 RDMA 设备
+kubectl describe node <node> | grep rdma
+
+# 查看 SR-IOV VF 状态
+kubectl get sriovnetworknodepolicies -A
+
+# RDMA 性能测试
+ib_write_bw -d mlx5_0 <server-ip>
+
+# 查看 NVMe-oF 连接
+nvme list-subsys
+```
+
+## 交叉引用
+
+- [对象存储与数据流水线](./object-storage-and-data-pipelines.md) — 数据湖存储层
+- [持久卷](./persistent-volumes.md) — CSI PV 与 RDMA 集成
+- [存储类](./storage-classes.md) — 高性能 StorageClass 配置
+
 ## 参考链接
 
 - [NVIDIA GPUDirect Storage](https://developer.nvidia.com/gpudirect-storage)

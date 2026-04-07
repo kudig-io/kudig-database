@@ -49,6 +49,72 @@
 - 对于拓扑受限的存储（如云盘、本地存储），使用 `WaitForFirstConsumer` 绑定模式，防止 Pod 调度失败。
 - 确保集群中已安装并正确配置了对应 StorageClass 的 CSI 驱动或外部 provisioner。
 
+## 生产 YAML 示例
+
+### 动态供给完整流程
+
+```yaml
+# 1. StorageClass（管理员创建）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  encrypted: "true"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+---
+# 2. PVC（用户创建 — 触发动态供给）
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-data
+  namespace: production
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 50Gi
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| PVC Pending 无 provisioning 事件 | StorageClass provisioner 不存在 | `kubectl describe pvc`；确认 CSI 驱动已安装 |
+| 默认 SC 未生效 | DefaultStorageClass 准入控制器未启用 | 检查 apiserver 的 `--enable-admission-plugins` |
+| 多区域集群 PV 创建在错误区域 | 使用 Immediate 绑定模式 | 改用 `WaitForFirstConsumer` |
+
+## 生产检查清单
+
+- [ ] 配置一个明确的默认 StorageClass
+- [ ] 使用 `storageClassName` 字段（非旧注解）
+- [ ] 拓扑受限存储使用 `WaitForFirstConsumer`
+- [ ] 确认 CSI 驱动已正确安装
+
+## 命令快速参考
+
+```bash
+# 查看 StorageClass
+kubectl get sc
+
+# 查看 PVC 的 provisioning 事件
+kubectl describe pvc app-data -n production
+
+# 查看 CSI 驱动 Pod
+kubectl get pods -n kube-system -l app.kubernetes.io/name=aws-ebs-csi-driver
+```
+
+## 交叉引用
+
+- [存储类](./storage-classes.md) — StorageClass 定义与参数
+- [持久卷](./persistent-volumes.md) — PV/PVC 生命周期
+- [存储容量](./storage-capacity.md) — 容量感知动态供给
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/

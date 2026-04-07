@@ -52,6 +52,143 @@ DRA 涉及以下几类用户：
 - 使用设备污点和容忍度等 alpha 特性时，需要启用相应的特性门控和 API 版本。
 - DRA 驱动必须正确实现 ResourceSlice 的创建和更新，以反映集群中资源容量的变化。
 
+## 生产 YAML 示例
+
+### DeviceClass + ResourceClaimTemplate + Pod（GPU 分配）
+
+```yaml
+# 1. 设备类定义
+apiVersion: resource.k8s.io/v1
+kind: DeviceClass
+metadata:
+  name: gpu-a100
+spec:
+  selectors:
+    - cel:
+        expression: "device.driver == 'gpu.nvidia.com' && device.attributes['model'] == 'A100'"
+---
+# 2. ResourceClaimTemplate（每 Pod 一个 claim）
+apiVersion: resource.k8s.io/v1
+kind: ResourceClaimTemplate
+metadata:
+  name: gpu-claim-template
+  namespace: ml-platform
+spec:
+  spec:
+    devices:
+      requests:
+        - name: gpu
+          deviceClassName: gpu-a100
+          count: 1
+---
+# 3. 使用 DRA 的 Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: inference-server
+  namespace: ml-platform
+spec:
+  containers:
+    - name: model-server
+      image: registry.example.com/inference:v3.0
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+      resourceClaims:
+        - name: gpu-claim
+  resourceClaims:
+    - name: gpu-claim
+      resourceClaimTemplateName: gpu-claim-template
+  restartPolicy: Always
+```
+
+### ResourceClaim 共享（多容器共享同一 GPU）
+
+```yaml
+apiVersion: resource.k8s.io/v1
+kind: ResourceClaim
+metadata:
+  name: shared-gpu
+  namespace: ml-platform
+spec:
+  devices:
+    requests:
+      - name: gpu
+        deviceClassName: gpu-a100
+        count: 1
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-gpu
+  namespace: ml-platform
+spec:
+  containers:
+    - name: trainer
+      image: registry.example.com/trainer:v2.0
+      resourceClaims:
+        - name: shared
+    - name: monitor
+      image: registry.example.com/gpu-monitor:v1.0
+      resourceClaims:
+        - name: shared
+  resourceClaims:
+    - name: shared
+      resourceClaimName: shared-gpu        # 两个容器共享同一个 claim
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod Pending，提示 ResourceClaim 未分配 | DRA 驱动未安装或 ResourceSlice 缺失 | `kubectl get resourceslices` 确认驱动已注册设备 |
+| DeviceClass 不匹配任何设备 | CEL 表达式属性名不正确 | `kubectl get resourceslices -o yaml` 检查设备属性名 |
+| 使用 `spec.nodeName` 后 Pod 卡住 | 绕过调度器导致 ResourceClaim 未分配 | 改用 nodeSelector / nodeAffinity 而非 nodeName |
+| ResourceClaim 分配后设备健康状态异常 | 设备硬件故障 | 检查 Pod 状态 `allocatedResourcesStatus` 字段 |
+| 管理员访问请求被拒绝 | 未启用 DRAAdminAccess 特性门控 | 确认 apiserver 启用 `DRAAdminAccess` 特性门控 |
+
+## 生产检查清单
+
+- [ ] 安装对应硬件的 DRA 驱动（GPU / FPGA / 网络设备）
+- [ ] 确认 DRA 驱动正确创建和更新 ResourceSlice
+- [ ] 为常用设备创建 DeviceClass（如 gpu-a100、gpu-h100、fpga-xilinx）
+- [ ] 使用 ResourceClaimTemplate 为每个 Pod 创建独立的 claim
+- [ ] 多容器共享设备时使用具名 ResourceClaim
+- [ ] 避免使用 `spec.nodeName` 绕过调度器
+- [ ] 在多租户集群中限制管理员访问权限
+- [ ] 监控设备健康状态（`allocatedResourcesStatus`）
+
+## 命令快速参考
+
+```bash
+# 查看集群中的 DeviceClass
+kubectl get deviceclasses
+
+# 查看 ResourceSlice（驱动注册的设备）
+kubectl get resourceslices -o wide
+
+# 查看 ResourceClaim 状态
+kubectl get resourceclaims -n ml-platform
+
+# 查看 ResourceClaim 详情（含分配信息）
+kubectl describe resourceclaim shared-gpu -n ml-platform
+
+# 查看 Pod 的设备分配状态
+kubectl get pod inference-server -n ml-platform -o jsonpath='{.status.allocatedResourcesStatus}'
+
+# 查看 ResourceClaimTemplate
+kubectl get resourceclaimtemplates -n ml-platform
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 ResourceClaim
+- [调度框架](./scheduling-framework.md) — Reserve / PreBind 阶段与 DRA 的交互
+- [Gang Scheduling](./gang-scheduling.md) — 分布式 GPU 训练需要 DRA + gang 调度
+- [Pod Overhead](./pod-overhead.md) — DRA 设备的额外资源开销
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 DRA 设备需求自动扩展 GPU 节点
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Dynamic Resource Allocation](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/)

@@ -128,6 +128,71 @@ APF 暴露了大量 Prometheus 指标，包括：
 - 修改默认 FlowSchema 或 PriorityLevelConfiguration 时，需要将其 `apf.kubernetes.io/autoupdate-spec` 注解设为 `false`，防止被自动维护覆盖。
 - 在递归服务器场景中，确保附属请求免于 APF 限制或合理配置优先级，避免死锁和优先级反转。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| 客户端收到 HTTP 429 Too Many Requests | 请求被 APF 限流 | `kubectl get --raw /metrics \| grep apiserver_flowcontrol_rejected_requests_total` |
+| 特定控制器请求延迟高 | 该 flow 排队拥挤 | 检查 `apiserver_flowcontrol_request_wait_duration_seconds` 按 priority_level 分组 |
+| 关键操作（leader election）被限流 | FlowSchema 匹配优先级不正确 | `kubectl get flowschema --sort-by='.spec.matchingPrecedence'` 检查匹配顺序 |
+| 自定义 FlowSchema 被覆盖 | `apf.kubernetes.io/autoupdate-spec` 注解未设为 false | `kubectl get flowschema <name> -o yaml \| grep autoupdate` |
+| apiserver 整体响应变慢 | 总并发限制不足 | 检查 `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 参数 |
+| Webhook 递归调用死锁 | 优先级反转，附属请求被限流 | 为 webhook 回调创建 exempt FlowSchema 或独立高优先级 |
+| 建议配置被删除后自动重建 | 这是预期行为 | 如需修改，覆盖 spec 而非删除；设置 `autoupdate-spec: false` |
+
+## 生产检查清单
+
+- [ ] 确认 APF 已启用（1.29+ 默认稳定版启用）
+- [ ] 监控 `apiserver_flowcontrol_rejected_requests_total`，配置告警阈值
+- [ ] 监控 `apiserver_flowcontrol_request_wait_duration_seconds` P99 延迟
+- [ ] 为关键控制器（如 cert-manager、ArgoCD）创建独立 FlowSchema 和高份额 PriorityLevel
+- [ ] 自定义配置的 `apf.kubernetes.io/autoupdate-spec` 注解已设为 `false`
+- [ ] 避免大量未分页的 list 请求，使用 `limit` 和 `continue` 参数
+- [ ] 递归 webhook 场景已测试，确保无死锁风险
+- [ ] 定期审查 FlowSchema 匹配情况，清理无效规则
+- [ ] `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 根据集群规模调优
+- [ ] 建议配置的 `global-default` 优先级未被过度限制
+
+## 命令快速参考
+
+```bash
+# 查看所有 FlowSchema（按匹配优先级排序）
+kubectl get flowschema --sort-by='.spec.matchingPrecedence'
+
+# 查看所有 PriorityLevelConfiguration
+kubectl get prioritylevelconfiguration
+
+# 查看特定 FlowSchema 详情
+kubectl describe flowschema <name>
+
+# 查看 APF 相关指标（被拒绝请求数）
+kubectl get --raw /metrics | grep apiserver_flowcontrol_rejected_requests_total
+
+# 查看当前排队和执行中请求数
+kubectl get --raw /metrics | grep apiserver_flowcontrol_current_inqueue_requests
+kubectl get --raw /metrics | grep apiserver_flowcontrol_current_executing_requests
+
+# 查看各优先级 seat 利用率
+kubectl get --raw /metrics | grep apiserver_flowcontrol_priority_level_seat_utilization
+
+# 查看请求等待时间分布
+kubectl get --raw /metrics | grep apiserver_flowcontrol_request_wait_duration_seconds
+
+# 检查自定义配置是否被自动更新保护
+kubectl get flowschema <name> -o jsonpath='{.metadata.annotations.apf\.kubernetes\.io/autoupdate-spec}'
+
+# 查看请求匹配到的 FlowSchema（通过审计日志）
+# 请求响应头中包含：X-Kubernetes-PF-FlowSchema-UID 和 X-Kubernetes-PF-PriorityLevel-UID
+```
+
+## 交叉引用
+
+- [proxies-in-kubernetes.md](./proxies-in-kubernetes.md) — apiserver 代理与流量入口
+- [admission-webhook-good-practices.md](./admission-webhook-good-practices.md) — webhook 递归调用与 APF 配合
+- [extending-the-kubernetes-api.md](./extending-the-kubernetes-api.md) — API 扩展机制
+- [coordinated-leader-election.md](./coordinated-leader-election.md) — leader election 请求的优先级保障
+- [compatibility-version-for-control-plane.md](./compatibility-version-for-control-plane.md) — 控制平面版本兼容性
+
 ## 参考链接
 
 - [API Priority and Fairness - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/)

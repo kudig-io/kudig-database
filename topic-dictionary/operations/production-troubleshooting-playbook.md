@@ -2746,6 +2746,47 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
 done
 ```
 
+## 故障排查
+
+> 本文件本身即为完整的生产故障排查手册。详见上方各章节：1.故障排查方法论、2.系统级、3.网络、4.存储、5.应用、6.控制平面、7.性能问题排查。
+
+## 生产检查清单
+
+- [ ] 故障排查工具链（kubectl debug、tcpdump、strace）已在所有节点预装
+- [ ] 监控告警（Prometheus + Alertmanager）覆盖 CPU/Memory/Disk/Network
+- [ ] 所有 Namespace 配置了 ResourceQuota 和 LimitRange
+- [ ] etcd 健康检查和定时快照已启用
+- [ ] API Server 审计日志已开启并持久化
+- [ ] CoreDNS 配置了合理的缓存和上游超时
+- [ ] 节点 kernel 参数已按生产标准调优（conntrack、文件描述符等）
+- [ ] 故障排查 Runbook 对所有 on-call 人员可访问
+
+## 命令快速参考
+
+```bash
+# 快速诊断集群健康
+kubectl get cs && kubectl get nodes && kubectl top nodes
+
+# 查找 CrashLoopBackOff Pod
+kubectl get pods -A --field-selector=status.phase!=Running | grep -v Completed
+
+# 查看节点资源压力
+kubectl describe nodes | grep -A 5 "Conditions:"
+
+# API Server 延迟检查
+kubectl get --raw /readyz?verbose
+
+# etcd 健康检查
+etcdctl endpoint health --cluster
+
+# 网络连通性快速测试
+kubectl run nettest --image=nicolaka/netshoot --rm -it -- bash
+```
+
+## 交叉引用
+
+- 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [故障模式分析](failure-patterns-analysis.md) · [运维最佳实践](operations-best-practices.md) · [性能调优](performance-tuning-expert.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

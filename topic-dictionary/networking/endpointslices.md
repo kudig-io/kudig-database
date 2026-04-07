@@ -37,6 +37,144 @@ EndpointSlice 是 Kubernetes 自 v1.21 起稳定的 API，用于跟踪 Service �
 - **设置 managed-by 标签**：自定义工具或控制器管理 EndpointSlice 时，应设置合适的 `managed-by` 标签值，避免与系统控制器冲突。
 - **客户端需聚合去重**：读取 EndpointSlice 的客户端必须遍历 Service 关联的所有 Slice，并合并去重，参考 `kube-proxy` 中的 `EndpointSliceCache` 实现。
 
+## 生产 YAML 示例
+
+### 手动创建 EndpointSlice（外部服务）
+
+```yaml
+# 无 selector Service — 将流量转发到集群外部数据库
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-database
+  namespace: production
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+    protocol: TCP
+  # 无 selector，需手动管理 EndpointSlice
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: external-database-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: external-database
+    endpointslice.kubernetes.io/managed-by: manual-controller
+  ownerReferences:
+  - apiVersion: v1
+    kind: Service
+    name: external-database
+    uid: "<service-uid>"          # kubectl get svc external-database -o jsonpath='{.metadata.uid}'
+addressType: IPv4
+ports:
+- name: postgres
+  port: 5432
+  protocol: TCP
+endpoints:
+- addresses:
+  - "10.200.1.100"               # 主库
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: ""                    # 外部地址无 nodeName
+- addresses:
+  - "10.200.1.101"               # 从库
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+```
+
+### 查看自动生成的 EndpointSlice
+
+```yaml
+# kubectl get endpointslices -l kubernetes.io/service-name=my-svc -o yaml
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: my-svc-abc12
+  labels:
+    kubernetes.io/service-name: my-svc
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+addressType: IPv4
+ports:
+- name: http
+  port: 8080
+  protocol: TCP
+endpoints:
+- addresses: ["10.244.1.5"]
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: worker-1
+  zone: us-east-1a
+- addresses: ["10.244.2.8"]
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: worker-2
+  zone: us-east-1b
+```
+
+## EndpointSlice 条件字段说明
+
+| 字段 | 含义 | 典型场景 |
+|------|------|----------|
+| `ready` | 端点可接收流量 | Pod 的 readinessProbe 通过 |
+| `serving` | 端点正在提供服务 | 即使在终止中仍可能为 true |
+| `terminating` | 端点正在终止 | Pod 收到删除时间戳 |
+| `ready=false, serving=true, terminating=true` | Pod 正在终止但仍在服务 | 滚动更新期间排空连接 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Service 无后端 | EndpointSlice 为空或不存在 | `kubectl get endpointslices -l kubernetes.io/service-name=<svc>` |
+| 后端 Pod 存在但不在 EndpointSlice 中 | Pod 的 readinessProbe 失败或标签不匹配 | `kubectl get pods -l <selector> -o wide`；检查 Pod Ready 状态 |
+| 手动 EndpointSlice 被覆盖 | `managed-by` 标签与系统控制器冲突 | 使用唯一的 `managed-by` 值；确认 Service 无 selector |
+| 端点出现重复 | 异步更新导致同一 Pod 出现在多个 Slice 中 | 正常现象，消费端需聚合去重 |
+| 外部端点创建失败 | 地址使用了 loopback 或 link-local IP | 使用有效的可路由 IP 地址 |
+
+## 生产检查清单
+
+- [ ] 新开发优先使用 EndpointSlice API（而非旧版 Endpoints）
+- [ ] 手动管理 EndpointSlice 时设置唯一的 `managed-by` 标签
+- [ ] 手动 EndpointSlice 不使用 loopback、link-local 或 ClusterIP 作为地址
+- [ ] 消费 EndpointSlice 的客户端实现聚合去重逻辑
+- [ ] 监控 EndpointSlice 数量和端点总数
+
+## 命令快速参考
+
+```bash
+# 列出 Service 关联的 EndpointSlice
+kubectl get endpointslices -l kubernetes.io/service-name=<svc> -n <ns>
+
+# 查看 EndpointSlice 详情
+kubectl describe endpointslice <name> -n <ns>
+
+# 统计端点总数
+kubectl get endpointslices -l kubernetes.io/service-name=<svc> -o json | jq '[.items[].endpoints[]] | length'
+
+# 查看端点的节点和可用区分布
+kubectl get endpointslices -l kubernetes.io/service-name=<svc> -o json | jq '.items[].endpoints[] | {address: .addresses[0], node: .nodeName, zone: .zone}'
+
+# 检查旧版 Endpoints（已弃用）
+kubectl get endpoints <svc> -n <ns>
+```
+
+## 交叉引用
+
+- [Service](service.md) — Service 如何通过 selector 自动生成 EndpointSlice
+- [Service Internal Traffic Policy](service-internal-traffic-policy.md) — kube-proxy 如何基于 EndpointSlice 的 nodeName 过滤端点
+- [Topology Aware Routing](topology-aware-routing.md) — EndpointSlice 中 zone hints 的生成和消费
+- [DNS for Services and Pods](dns-for-services-and-pods.md) — Headless Service 的 EndpointSlice 与 DNS 记录
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/

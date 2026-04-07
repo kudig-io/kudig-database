@@ -97,6 +97,89 @@ KubeVirt 支持在不影响业务的情况下将运行中的 VM 从一个节点�
 - **监控扩展**：除了 Kubernetes 原生监控，还需在 VM 内部署 Guest Agent 以获取 OS 级指标
 - **多租户隔离**：通过 Namespace + ResourceQuota 隔离不同团队的 VM 资源，防止" noisy neighbor "
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| VM 启动失败（virt-launcher CrashLoopBackOff） | 节点不支持 KVM 或 BIOS 未启用虚拟化 | `kubectl get vmi <name> -o yaml` 查看 conditions；`cat /dev/kvm` 检查 KVM |
+| VM 无法分配 IP | CNI 插件不支持 VM 或 Multus 配置错误 | `kubectl get vmi <name> -o jsonpath='{.status.interfaces}'` |
+| Live Migration 失败 | 存储非共享或节点资源不足 | `kubectl get vmim <name> -o yaml`；确保 PVC 使用 RWX 存储 |
+| VM 磁盘 I/O 极慢 | 存储后端性能不足或未使用 virtio 驱动 | 检查 disk bus 配置（应为 `virtio`）；检查 StorageClass IOPS 限制 |
+| DataVolume Import 卡住 | 源镜像不可达或 CDI 控制器异常 | `kubectl get dv <name>`；`kubectl -n cdi logs -l app=cdi-deployment` |
+| GPU 透传不生效 | IOMMU 未启用或设备未绑定 vfio-pci | 节点检查 `dmesg \| grep -i iommu`；`ls /dev/vfio/` |
+| VM 内存被杀 | 宿主机 memory overcommit 导致 OOM | 确保 VM requests 与 limits 一致；检查节点 memory pressure |
+| Guest Agent 无数据 | VM 内未安装 qemu-guest-agent | 进入 VM 检查 `systemctl status qemu-guest-agent` |
+
+## 生产检查清单
+
+- [ ] 所有 KubeVirt 节点 BIOS 已启用虚拟化（Intel VT-x / AMD-V）
+- [ ] `/dev/kvm` 设备在所有 KubeVirt 节点可用
+- [ ] VM 使用 virtio 磁盘和网络驱动以获得最佳性能
+- [ ] Live Migration 场景使用 RWX 共享存储（Ceph RBD、NFS）
+- [ ] CNI 支持二层网络保持 VM 迁移时 IP/MAC 不变（OVN、Cilium）
+- [ ] VM 的 CPU 和内存 requests 与 limits 一致（避免宿主机 overcommit）
+- [ ] QEMU 进程和 virt-launcher 的资源开销已预留
+- [ ] VM 内部署了 qemu-guest-agent 以获取 OS 级指标
+- [ ] VM 磁盘镜像使用内部镜像仓库（如 Harbor），避免外部下载
+- [ ] Velero / Kasten 备份策略覆盖 VM 磁盘和配置
+- [ ] 多租户通过 Namespace + ResourceQuota 隔离 VM 资源
+- [ ] GPU 透传场景已启用 IOMMU 和 vfio-pci 驱动绑定
+
+## 命令快速参考
+
+```bash
+# 查看所有 VirtualMachine
+kubectl get vm -A
+
+# 查看运行中的 VirtualMachineInstance
+kubectl get vmi -A
+
+# 查看 VM 详情
+kubectl describe vm <name>
+
+# 启动 VM
+virtctl start <vm-name>
+
+# 停止 VM
+virtctl stop <vm-name>
+
+# 重启 VM
+virtctl restart <vm-name>
+
+# 通过 console 连接 VM
+virtctl console <vm-name>
+
+# 通过 VNC 连接 VM
+virtctl vnc <vm-name>
+
+# 触发 Live Migration
+virtctl migrate <vm-name>
+
+# 查看迁移状态
+kubectl get vmim -A
+
+# 查看 DataVolume 状态（磁盘导入进度）
+kubectl get dv -A
+
+# 检查节点 KVM 支持
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.allocatable.devices\.kubevirt\.io/kvm}{"\n"}{end}'
+
+# 查看 KubeVirt 组件状态
+kubectl get pods -n kubevirt
+
+# 查看 CDI（Containerized Data Importer）组件状态
+kubectl get pods -n cdi
+```
+
+## 交叉引用
+
+- [device-plugins.md](./device-plugins.md) — GPU 透传和 Device Plugin 机制
+- [compute-storage-and-networking-extensions.md](./compute-storage-and-networking-extensions.md) — 计算/存储/网络扩展
+- [custom-resources.md](./custom-resources.md) — KubeVirt CRD 体系
+- [operator-pattern.md](./operator-pattern.md) — KubeVirt Operator 部署模式
+- [../storage/persistent-volumes.md](../storage/persistent-volumes.md) — VM 磁盘的 PV/PVC 管理
+- [../networking/service.md](../networking/service.md) — VM 的 Service 暴露
+
 ## 参考链接
 
 - [KubeVirt Official Documentation](https://kubevirt.io/user-guide/)

@@ -84,6 +84,134 @@ kubelet 在驱逐用户 Pod 之前会先尝试回收节点级资源：
 - 对于 Linux 节点，`memory.available` 的计算排除了 `inactive_file`，因为 kubelet 假设这部分内存可以在压力下回收。
 - 大量使用本地存储的工作负载可能会因内核缓存被计为 `active_file` 而触发内存压力驱逐，可以通过将内存限制和请求设为相同值来缓解。
 
+## 生产 YAML 示例
+
+### kubelet 驱逐阈值配置
+
+```yaml
+# /var/lib/kubelet/config.yaml
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+evictionHard:
+  memory.available: "200Mi"                # 内存低于 200Mi 时硬驱逐
+  nodefs.available: "10%"                  # 根分区低于 10% 时硬驱逐
+  imagefs.available: "15%"                 # 镜像分区低于 15% 时硬驱逐
+  nodefs.inodesFree: "5%"
+  pid.available: "5%"
+evictionSoft:
+  memory.available: "500Mi"                # 内存低于 500Mi 时触发软驱逐
+  nodefs.available: "15%"
+evictionSoftGracePeriod:
+  memory.available: "1m30s"                # 软驱逐等待 90 秒
+  nodefs.available: "2m"
+evictionMaxPodGracePeriod: 60              # 软驱逐最大优雅终止期 60 秒
+evictionMinimumReclaim:
+  memory.available: "256Mi"                # 驱逐后至少回收 256Mi
+  nodefs.available: "1Gi"
+evictionPressureTransitionPeriod: 5m0s     # 节点条件状态切换等待时间
+```
+
+### 确保关键 Pod 不被驱逐（Guaranteed QoS）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: critical-service
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: critical-service
+  template:
+    metadata:
+      labels:
+        app: critical-service
+    spec:
+      priorityClassName: system-critical   # 高优先级 — 最后被驱逐
+      containers:
+        - name: app
+          image: registry.example.com/critical:v2.0
+          resources:
+            requests:
+              cpu: "500m"                  # requests == limits → Guaranteed QoS
+              memory: 1Gi
+            limits:
+              cpu: "500m"
+              memory: 1Gi                  # 防止内存突增触发 OOM
+```
+
+## 驱逐顺序快速参考
+
+```
+节点资源压力触发
+    ↓
+1. 垃圾回收：清理死掉的 Pod/容器 + 未使用的镜像
+    ↓（不足以缓解压力）
+2. 驱逐用户 Pod，排序规则：
+   ├─ BestEffort Pod（无 requests/limits）         → 最先被驱逐
+   ├─ Burstable Pod（资源使用超过 requests）        → 其次
+   ├─ Burstable Pod（资源使用未超过 requests）      → 再次
+   └─ Guaranteed Pod（requests == limits）          → 最后被驱逐
+   
+   同 QoS 类内按 Pod Priority 排序：低优先级先驱逐
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 节点频繁出现 MemoryPressure | 驱逐阈值设置过高或 Pod 内存请求不准确 | `kubectl describe node` 查看 Conditions；检查 `evictionHard.memory.available` |
+| Pod 被 OOM Killed 而非被 kubelet 驱逐 | 内存增长过快，kubelet 来不及驱逐 | 检查 Pod 的 OOMKilled 事件；调高硬驱逐阈值 |
+| 节点条件频繁在 True/False 间振荡 | evictionPressureTransitionPeriod 过短 | 增大 `evictionPressureTransitionPeriod`（默认 5 分钟） |
+| 驱逐后立即又触发新的驱逐 | evictionMinimumReclaim 未设置或过小 | 配置 `evictionMinimumReclaim` 确保每次驱逐回收足够资源 |
+| DaemonSet Pod 被驱逐 | DaemonSet Pod 优先级不够高 | 为 DaemonSet 设置高 PriorityClass |
+| 大量使用本地存储的 Pod 触发 DiskPressure | 容器日志或临时文件占用过多 | 配置日志轮转；设置 Pod 的 `ephemeral-storage` limits |
+
+## 生产检查清单
+
+- [ ] 为所有节点配置合理的硬驱逐阈值（memory / disk / inode / pid）
+- [ ] 配置软驱逐阈值 + 宽限期，给 Pod 优雅终止时间
+- [ ] 设置 `evictionMinimumReclaim` 避免反复驱逐
+- [ ] 关键服务使用 Guaranteed QoS（requests == limits）+ 高 PriorityClass
+- [ ] DaemonSet Pod 设置足够高的优先级避免被驱逐
+- [ ] 监控节点条件：MemoryPressure / DiskPressure / PIDPressure
+- [ ] 为 Pod 设置合理的 `ephemeral-storage` requests 和 limits
+- [ ] 配置日志轮转和镜像清理策略减少磁盘压力
+
+## 命令快速参考
+
+```bash
+# 查看节点压力条件
+kubectl get nodes -o custom-columns='NAME:.metadata.name,MEM_PRESSURE:.status.conditions[?(@.type=="MemoryPressure")].status,DISK_PRESSURE:.status.conditions[?(@.type=="DiskPressure")].status'
+
+# 查看节点详细条件
+kubectl describe node <node-name> | grep -A 20 Conditions
+
+# 查看因压力驱逐的 Pod
+kubectl get events --field-selector reason=Evicted --all-namespaces
+
+# 查看节点资源使用
+kubectl top nodes
+
+# 查看 kubelet 驱逐配置
+ssh <node> cat /var/lib/kubelet/config.yaml | grep -A 20 eviction
+
+# 查看 Pod QoS 等级
+kubectl get pods -o custom-columns='NAME:.metadata.name,QOS:.status.qosClass'
+
+# 查看节点内存使用详情
+kubectl describe node <node-name> | grep -A 5 "Allocated resources"
+```
+
+## 交叉引用
+
+- [API 发起驱逐](./api-initiated-eviction.md) — API 驱逐尊重 PDB，节点压力驱逐不尊重
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — 驱逐排序中 Pod Priority 的作用
+- [污点与容忍度](./taints-and-tolerations.md) — kubelet 自动添加 memory-pressure / disk-pressure 污点
+- [Pod Overhead](./pod-overhead.md) — kubelet 驱逐排序包含 Pod overhead
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Node-pressure Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/)

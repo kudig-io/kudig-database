@@ -71,6 +71,83 @@ parameters:
 - 参数的具体键值对完全取决于 CSI 驱动的实现，使用前请查阅对应驱动的文档。
 - 如果集群中不需要动态修改卷属性，可以选择禁用该特性门。
 
+## 生产 YAML 示例
+
+### 分级 VolumeAttributesClass + PVC 动态切换
+
+```yaml
+# Silver 级别 — 标准性能
+apiVersion: storage.k8s.io/v1
+kind: VolumeAttributesClass
+metadata:
+  name: silver
+driverName: ebs.csi.aws.com
+parameters:
+  iops: "3000"
+  throughput: "125"
+---
+# Gold 级别 — 高性能
+apiVersion: storage.k8s.io/v1
+kind: VolumeAttributesClass
+metadata:
+  name: gold
+driverName: ebs.csi.aws.com
+parameters:
+  iops: "10000"
+  throughput: "500"
+---
+# PVC 使用 Silver 级别
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data
+  namespace: database
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: gp3-encrypted
+  volumeAttributesClassName: silver         # 初始使用 Silver
+  resources:
+    requests:
+      storage: 200Gi
+```
+
+```bash
+# 业务高峰期切换到 Gold 级别
+kubectl patch pvc db-data -n database \
+  -p '{"spec":{"volumeAttributesClassName":"gold"}}'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| VAC 切换后性能未变 | CSI 驱动不支持 ModifyVolume | 确认 CSI 驱动版本支持 ModifyVolume API |
+| PVC 状态显示 ModifyVolumeFailed | 底层存储不支持指定参数 | 检查 PVC conditions；查看 external-resizer 日志 |
+
+## 生产检查清单
+
+- [ ] CSI 驱动支持 ModifyVolume API
+- [ ] 建立 Silver/Gold/Platinum 分级体系
+- [ ] 参数值参考 CSI 驱动文档
+
+## 命令快速参考
+
+```bash
+# 查看 VolumeAttributesClass
+kubectl get volumeattributesclasses
+
+# 切换 PVC 的 VAC
+kubectl patch pvc <name> -n <ns> -p '{"spec":{"volumeAttributesClassName":"gold"}}'
+
+# 查看 PVC 当前 VAC
+kubectl get pvc <name> -o jsonpath='{.spec.volumeAttributesClassName}'
+```
+
+## 交叉引用
+
+- [存储类](./storage-classes.md) — StorageClass 关注初始供给，VAC 关注运行时修改
+- [持久卷](./persistent-volumes.md) — PVC 引用 VAC
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/

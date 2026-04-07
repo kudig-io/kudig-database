@@ -62,6 +62,75 @@ Ephemeral Volumes（临时卷）是生命周期与 Pod 绑定的存储卷，随 
 - 集群管理员可以通过从 CSIDriver 的 `volumeLifecycleModes` 中移除 `Ephemeral` 来禁止特定 CSI 驱动作为内联临时卷使用。
 - 通用临时卷的 PVC 名称由 Pod 名和卷名组合而成，注意避免与其他 Pod 或手动创建的 PVC 发生命名冲突。
 
+## 生产 YAML 示例
+
+### 通用临时卷（Generic Ephemeral Volume）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: data-processor
+  namespace: batch
+spec:
+  containers:
+    - name: processor
+      image: registry.example.com/processor:v2.0
+      volumeMounts:
+        - name: scratch
+          mountPath: /tmp/work
+      resources:
+        requests:
+          cpu: "2"
+          memory: 4Gi
+  volumes:
+    - name: scratch
+      ephemeral:
+        volumeClaimTemplate:
+          metadata:
+            labels:
+              app: data-processor
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: fast-ssd       # 使用高性能存储
+            resources:
+              requests:
+                storage: 50Gi
+  restartPolicy: Never
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 通用临时卷 PVC Pending | StorageClass 不存在或 provisioner 异常 | `kubectl get pvc -n batch` 查看自动创建的 PVC 状态 |
+| PVC 名称冲突 | 同名 Pod 快速重建导致 PVC 残留 | 等待旧 PVC 被 GC 清理；检查 ownerReferences |
+| CSI 临时卷创建失败 | 节点上未安装 CSI 驱动 | `kubectl get csinode` 确认节点注册了对应驱动 |
+
+## 生产检查清单
+
+- [ ] 需要调度器感知的场景使用通用临时卷 + WaitForFirstConsumer
+- [ ] 设置合理的 `storage` 大小请求
+- [ ] CSI 临时卷不暴露管理员级参数
+- [ ] 注意 PVC 命名规则：`{pod-name}-{volume-name}`
+
+## 命令快速参考
+
+```bash
+# 查看自动创建的临时 PVC
+kubectl get pvc -n batch -l app=data-processor
+
+# 查看 CSI 节点信息
+kubectl get csinodes
+```
+
+## 交叉引用
+
+- [卷](./volumes.md) — emptyDir 等本地临时卷
+- [存储类](./storage-classes.md) — 通用临时卷依赖 StorageClass
+- [存储容量](./storage-capacity.md) — 通用临时卷支持容量感知调度
+- [本地临时存储](./local-ephemeral-storage.md) — kubelet 管理的本地临时存储
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/

@@ -44,6 +44,170 @@ Gateway API 是 Kubernetes 中用于暴露网络服务的一组扩展 API（以 
 - **按角色分配 RBAC**：建议为基础设施团队授予 GatewayClass/Gateway 的管理权限，为开发团队授予 Route 资源的管理权限。
 - **规划迁移路径**：Ingress API 已冻结，建议新系统直接采用 Gateway API；存量系统可逐步将路由规则从 Ingress 迁移到 HTTPRoute。
 
+## 生产 YAML 示例
+
+### 完整的 GatewayClass + Gateway + HTTPRoute
+
+```yaml
+# 1. GatewayClass — 基础设施提供商定义
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+---
+# 2. Gateway — 集群运维配置入口
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: production-gateway
+  namespace: infra
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+  - name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: wildcard-tls
+        namespace: infra
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            gateway-access: "true"     # 仅允许标记的命名空间附加路由
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Same                     # 仅同命名空间
+---
+# 3. HTTPRoute — 应用开发者定义路由
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: web-routes
+  namespace: production                # 需要有 gateway-access: true 标签
+spec:
+  parentRefs:
+  - name: production-gateway
+    namespace: infra
+    sectionName: https
+  hostnames:
+  - "app.example.com"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api
+      headers:
+      - name: X-API-Version
+        value: "v2"
+    backendRefs:
+    - name: api-v2
+      port: 8080
+      weight: 90
+    - name: api-v3-canary
+      port: 8080
+      weight: 10                       # 10% 金丝雀流量
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: web-frontend
+      port: 80
+```
+
+### GRPCRoute 示例
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: GRPCRoute
+metadata:
+  name: grpc-routes
+  namespace: production
+spec:
+  parentRefs:
+  - name: production-gateway
+    namespace: infra
+  hostnames:
+  - "grpc.example.com"
+  rules:
+  - matches:
+    - method:
+        service: myapp.UserService
+        method: GetUser
+    backendRefs:
+    - name: user-service
+      port: 9090
+```
+
+## Gateway API vs Ingress 对比
+
+| 维度 | Ingress | Gateway API |
+|------|---------|-------------|
+| API 状态 | 冻结（不再添加新功能） | 活跃开发 |
+| 角色分离 | 无 | GatewayClass/Gateway/Route 分层 |
+| Header 匹配 | 需注解（控制器特定） | 原生支持 |
+| 流量加权 | 不支持 | 原生支持（backendRef weight） |
+| 跨命名空间路由 | 不支持 | 原生支持（双向信任模型） |
+| gRPC 路由 | 通过注解 | GRPCRoute 原生 |
+| 可移植性 | 低（依赖注解） | 高（一致性测试套件） |
+| 实现数量 | 非常多 | 快速增长 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Gateway 无 Address | 控制器未安装或 GatewayClass 不匹配 | `kubectl get gatewayclass`；检查控制器 Pod |
+| HTTPRoute 未生效 | parentRef 不匹配或命名空间不在 allowedRoutes 中 | `kubectl describe httproute` 查看 status.parents |
+| 路由冲突 | 多个 HTTPRoute 匹配同一路径 | 检查 hostnames 和 matches 的优先级 |
+| TLS 证书错误 | certificateRefs 指向的 Secret 不存在 | `kubectl get secret -n infra wildcard-tls` |
+
+## 生产检查清单
+
+- [ ] 安装 Gateway API CRD（`kubectl apply -k "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.2.0"`）
+- [ ] 部署选定的实现控制器（Envoy Gateway、NGINX Gateway Fabric 等）
+- [ ] 按角色分配 RBAC（infra 团队管 Gateway，dev 团队管 Route）
+- [ ] 命名空间标记 `gateway-access` 标签用于 allowedRoutes
+- [ ] TLS Secret 使用 cert-manager 自动管理
+- [ ] 新项目直接使用 Gateway API，存量 Ingress 规划迁移
+
+## 命令快速参考
+
+```bash
+# 安装 Gateway API CRD
+kubectl apply -k "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.2.0"
+
+# 查看 GatewayClass
+kubectl get gatewayclasses
+
+# 查看 Gateway 状态和 Address
+kubectl get gateways -A
+kubectl describe gateway production-gateway -n infra
+
+# 查看 HTTPRoute 状态
+kubectl get httproutes -n production
+kubectl describe httproute web-routes -n production
+
+# 检查 Route 是否被 Gateway 接受
+kubectl get httproute web-routes -n production -o jsonpath='{.status.parents}'
+```
+
+## 交叉引用
+
+- [Ingress](ingress.md) — 被 Gateway API 取代的旧方案
+- [Ingress Controllers](ingress-controllers.md) — 多数控制器同时支持 Ingress 和 Gateway API
+- [Service](service.md) — Gateway API 后端指向的 Service
+- [Service Mesh](service-mesh.md) — Istio 通过 Gateway API 管理服务网格流量
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/gateway/

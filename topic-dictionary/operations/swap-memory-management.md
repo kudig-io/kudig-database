@@ -61,6 +61,50 @@ kubelet 通过 CRI 指示容器运行时在 cgroup 层面（如 cgroup v2 的 `m
 - **驱逐阈值调整**：建议将 kubelet 的内存驱逐阈值设置为略低于 `vm.min_free_kbytes`，以便在 kubelet 驱逐 Pod 之前，内核可以先尝试 swap。
 - **性能可预测性降低**：启用 swap 可能导致“吵闹邻居”问题和意外性能回退，尤其在 IOPS 受限环境（如云 VM）中。
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| kubelet 启动失败 | swap 已启用但 `failSwapOn` 未设为 false | `journalctl -u kubelet \| grep swap` | 在 KubeletConfiguration 中设置 `failSwapOn: false` |
+| Pod 性能下降，响应变慢 | 容器内存被换出到 swap | `kubectl top pods --show-swap` | 检查 `swapBehavior` 设置，考虑使用 `NoSwap` |
+| Guaranteed QoS Pod 使用了 swap | 配置错误，应仅 Burstable 可用 | `kubectl get pod <pod> -o jsonpath='{.status.qosClass}'` | 确认 `LimitedSwap` 模式下 Guaranteed Pod 不使用 swap |
+| 节点 I/O 延迟飙升 | swap 分区与系统盘共享磁盘 | `iostat -x 1` | 为 swap 使用专用 SSD/NVMe |
+| tmpfs 内容被换出 | 内核不支持 `noswap` 挂载选项 | `uname -r`（需 6.3+） | 升级 Linux 内核至 6.3+ 或禁用 swap |
+
+## 生产检查清单
+
+- [ ] swap 空间已加密
+- [ ] 控制平面节点未启用 swap
+- [ ] `swapBehavior` 设置为 `NoSwap` 或 `LimitedSwap`
+- [ ] swap 使用专用高速磁盘（SSD/NVMe）
+- [ ] 系统关键守护进程的 swap 已禁用（cgroup `memory.swap.max=0`）
+- [ ] 驱逐阈值已调整为低于 `vm.min_free_kbytes`
+- [ ] swap 使用指标已纳入 Prometheus 监控
+- [ ] 启用 swap 的节点已添加专用 taint
+
+## 命令快速参考
+
+```bash
+# 查看节点 swap 使用情况
+kubectl top nodes --show-swap
+
+# 查看 Pod swap 使用
+kubectl top pods --show-swap
+
+# 检查节点 swap 容量
+kubectl get node <node> -o jsonpath='{.status.nodeInfo.swap}'
+
+# 查看系统 swap 状态
+swapon --show && free -h
+
+# 检查 kubelet swap 配置
+cat /var/lib/kubelet/config.yaml | grep -A 3 memorySwap
+
+# 查看 cgroup v2 swap 限制
+cat /sys/fs/cgroup/kubepods.slice/memory.swap.max
+```
+
+## 交叉引用
 
 - [Swap Memory Management - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/swap-memory-management/)
+- 相关主题：[Pod Quality of Service Classes](../workloads/pod-quality-of-service-classes.md) · [Resource Management for Pods and Containers](../configuration/resource-management-for-pods-and-containers.md) · [Node Pressure Eviction](../scheduling/node-pressure-eviction.md)

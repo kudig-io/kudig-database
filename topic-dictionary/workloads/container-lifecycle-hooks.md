@@ -90,6 +90,203 @@ Kubernetes 目前为容器暴露以下两种生命周期钩子：
 - **确保钩子幂等性**：考虑到 at least once 的投递语义，handler 应能安全地处理重复调用
 - **通过事件排查问题**：使用 `kubectl describe pod` 查看 `FailedPostStartHook` 或 `FailedPreStopHook` 事件定位失败原因
 
+## 生产 YAML 示例
+
+### PostStart + PreStop 综合配置
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      terminationGracePeriodSeconds: 60    # PreStop + 正常关闭的总时间
+      containers:
+      - name: web
+        image: registry.example.com/apps/web-server:v4.0
+        ports:
+        - containerPort: 8080
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - |
+                # PostStart：注册到服务发现
+                # 注意：与 ENTRYPOINT 并发执行
+                until curl -sf http://localhost:8080/healthz; do sleep 1; done
+                curl -X POST http://consul.service:8500/v1/agent/service/register \
+                  -d '{"name":"web-server","port":8080}'
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - |
+                # PreStop：优雅下线
+                # 1. 从服务发现注销
+                curl -X PUT http://consul.service:8500/v1/agent/service/deregister/web-server
+                # 2. 等待已有连接排空（给 LB 更新时间）
+                sleep 10
+                # 3. 通知应用开始优雅关闭
+                curl -X POST http://localhost:8080/admin/shutdown
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+### 使用 Sleep 钩子（简化版 PreStop）
+
+```yaml
+# 适用于不需要执行脚本的场景
+# 仅需等待 LB 更新 Endpoints
+lifecycle:
+  preStop:
+    sleep:
+      seconds: 15              # 等待 15 秒让 kube-proxy/LB 更新
+```
+
+### HTTP 钩子示例
+
+```yaml
+lifecycle:
+  postStart:
+    httpGet:
+      path: /hooks/post-start
+      port: 8080
+      httpHeaders:
+      - name: X-Hook-Type
+        value: PostStart
+  preStop:
+    httpGet:
+      path: /hooks/pre-stop
+      port: 8080
+```
+
+### StopSignal 自定义
+
+```yaml
+containers:
+- name: nginx
+  image: nginx:1.27
+  lifecycle:
+    stopSignal: SIGQUIT        # Nginx 使用 SIGQUIT 优雅关闭
+                               # 覆盖镜像的 STOPSIGNAL（默认 SIGTERM）
+```
+
+## 生命周期钩子执行时序
+
+```
+Pod 创建
+  │
+  ├─ 1. 创建 Sandbox（网络、存储）
+  ├─ 2. 拉取镜像
+  ├─ 3. 创建容器
+  ├─ 4. 同时启动：
+  │     ├─ ENTRYPOINT（容器主进程）
+  │     └─ PostStart Hook ←── 与主进程并发，不保证顺序
+  │         ├─ 成功 → 容器正常运行
+  │         └─ 失败 → 容器被杀死
+  │
+  ... 容器运行中 ...
+  │
+Pod 终止
+  │
+  ├─ 1. terminationGracePeriodSeconds 开始倒计时
+  ├─ 2. 执行 PreStop Hook ←── 必须在倒计时内完成
+  │     ├─ 完成 → 发送 StopSignal（默认 SIGTERM）
+  │     └─ 超时 → 直接发送 SIGKILL
+  ├─ 3. 容器收到 StopSignal，开始优雅关闭
+  ├─ 4. 若容器在宽限期内未退出 → SIGKILL 强制终止
+  └─ 5. Pod 进入 Succeeded/Failed 终止状态
+```
+
+## 钩子处理程序对比
+
+| 类型 | 执行位置 | 适用场景 | 注意事项 |
+|------|----------|----------|----------|
+| exec | 容器内部 | 执行脚本/命令 | 消耗容器资源配额 |
+| httpGet | kubelet 发起 | 调用 HTTP API | PostStart 时服务可能未就绪 |
+| sleep | kubelet 执行 | 仅等待 | 最简单的 PreStop 方案 |
+| tcpSocket | 已弃用 | — | 不推荐使用 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 容器反复重启，Events 显示 FailedPostStartHook | PostStart 脚本执行失败或超时 | `kubectl describe pod` 查看事件；简化 PostStart 逻辑 |
+| Pod 长时间 Terminating | PreStop 挂起或超时 | 检查 `terminationGracePeriodSeconds` 是否足够；PreStop 脚本是否有阻塞操作 |
+| PostStart HTTP 钩子返回错误 | 容器 ENTRYPOINT 尚未启动完成，HTTP 端口不可用 | PostStart 慎用 httpGet；改用 exec + 重试循环 |
+| PreStop 执行后容器被立即杀死 | PreStop + 容器关闭总时间超过 terminationGracePeriodSeconds | 增大宽限期；优化 PreStop 执行时间 |
+| 钩子被执行了多次 | kubelet 重启导致重复投递（at least once 语义） | 确保钩子 handler 具有幂等性 |
+
+## terminationGracePeriodSeconds 计算公式
+
+```
+所需宽限期 = PreStop 执行时间 + 容器正常关闭时间 + 安全余量
+
+示例：
+  PreStop sleep 10s + 服务发现注销 5s = 15s
+  容器关闭（排空连接）= 20s
+  安全余量 = 5s
+  → terminationGracePeriodSeconds = 40
+```
+
+## 生产检查清单
+
+- [ ] `terminationGracePeriodSeconds` 覆盖 PreStop + 容器关闭的总时间
+- [ ] PreStop 实现服务注销或从 LB 摘除的逻辑
+- [ ] PreStop 加入 `sleep 5-15s` 等待 kube-proxy Endpoints 更新
+- [ ] PostStart 避免使用 httpGet（服务可能未就绪）
+- [ ] 所有钩子 handler 具有幂等性（应对 at least once 语义）
+- [ ] Exec 类型钩子脚本设置了超时机制
+- [ ] 监控 FailedPostStartHook 和 FailedPreStopHook 事件
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 的生命周期钩子配置
+kubectl get pod <name> -o jsonpath='{.spec.containers[0].lifecycle}' | jq .
+
+# 查看钩子失败事件
+kubectl get events -n <ns> --field-selector reason=FailedPostStartHook
+kubectl get events -n <ns> --field-selector reason=FailedPreStopHook
+
+# 查看 Pod 终止宽限期
+kubectl get pod <name> -o jsonpath='{.spec.terminationGracePeriodSeconds}'
+
+# 测试 PreStop 行为（触发 Pod 删除并观察）
+kubectl delete pod <name> --grace-period=60 &
+kubectl get pod <name> -w
+
+# 强制终止（跳过 PreStop）
+kubectl delete pod <name> --grace-period=0 --force
+```
+
+## 交叉引用
+
+- [Pod 生命周期](pod-lifecycle.md) — 完整的 Pod 生命周期阶段和终止流程
+- [容器环境](container-environment.md) — 容器运行时的环境信息
+- [Disruptions](disruptions.md) — PDB 与优雅终止的配合
+- [Deployments](deployments.md) — 滚动更新中的 PreStop 行为
+
 ## 参考链接
 
 - [Kubernetes 官方文档：容器生命周期钩子](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)

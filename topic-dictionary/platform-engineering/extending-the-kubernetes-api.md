@@ -29,6 +29,40 @@ Kubernetes API 是平台的核心，扩展 Kubernetes API 允许用户在不修�
 - 自定义资源会占用 API server 的存储空间，创建过多可能压垮存储。
 - 使用 RBAC 时，默认角色通常不会授予新资源的访问权限，需要显式配置权限。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| CRD 创建后 API 不可用 | CRD YAML 格式错误 | `kubectl get crd` 检查状态；查看 apiserver 日志 |
+| Aggregated API 503 | 扩展 API server Pod 不健康 | `kubectl get apiservice` 检查 Available 状态 |
+| Webhook 超时 | Webhook 服务不可达 | 检查 Webhook service/endpoint 连通性 |
+
+## 生产检查清单
+
+- [ ] 优先使用 CRD + Controller 而非 Aggregated API（更简单）
+- [ ] Webhook 配置 failurePolicy 和 timeoutSeconds
+- [ ] CRD 配置 validation schema
+- [ ] 测试 API 版本升级兼容性
+
+## 命令快速参考
+
+```bash
+# 查看 CRD
+kubectl get crd
+
+# 查看 API Service 状态
+kubectl get apiservice | grep -v Local
+
+# 查看 Webhook 配置
+kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
+```
+
+## 交叉引用
+
+- [Custom Resources](./custom-resources.md) — CRD 详解
+- [API Aggregation Layer](./kubernetes-api-aggregation-layer.md) — 聚合 API 详解
+- [Operator 模式](./operator-pattern.md) — CRD + Controller 组合
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/

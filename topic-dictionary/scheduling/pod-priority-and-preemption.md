@@ -46,6 +46,132 @@ PriorityClass 是一个非命名空间对象，定义了优先级类名称到整
 - 调度器不支持跨节点抢占（cross node preemption）。
 - 现有 Pod 在添加 `globalDefault` PriorityClass 后优先级不会自动改变，只影响之后创建的 Pod。
 
+## 生产 YAML 示例
+
+### PriorityClass 分级体系
+
+```yaml
+# 系统关键组件 — 不可抢占
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: system-critical
+value: 1000000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "系统关键组件（monitoring、logging、ingress-controller）"
+---
+# 生产业务 — 默认优先级
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: production
+value: 100000
+globalDefault: true                        # 未指定 priorityClassName 的 Pod 默认使用此级别
+preemptionPolicy: PreemptLowerPriority
+description: "生产业务工作负载"
+---
+# 批处理作业 — 高优先级但不抢占
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: batch-high-priority
+value: 80000
+globalDefault: false
+preemptionPolicy: Never                    # 排队优先但不驱逐运行中的 Pod
+description: "高优先级批处理，排队靠前但不抢占"
+---
+# 开发/测试 — 最低优先级
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: development
+value: 1000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "开发测试环境，资源紧张时优先被抢占"
+```
+
+### 使用 PriorityClass 的 Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      priorityClassName: production         # 引用上面的 PriorityClass
+      containers:
+        - name: gateway
+          image: registry.example.com/gateway:v5.1
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 高优先级 Pod 仍然 Pending | 即使抢占也无法满足资源需求 | `kubectl describe pod` 查看 FailedScheduling 事件；检查节点总容量是否足够 |
+| 低优先级 Pod 被意外驱逐 | 高优先级 Pod 触发抢占 | 检查 Events 中 `Preempted` 信息；审查 PriorityClass 值是否合理 |
+| preemptionPolicy: Never 的 Pod 仍触发驱逐 | 误设了 PriorityClass 的 preemptionPolicy | `kubectl get priorityclass -o yaml` 确认 preemptionPolicy 值 |
+| PDB 被违反 | 调度器 best-effort 尊重 PDB，但无替代方案时仍会抢占 | 检查 PDB minAvailable 设置是否合理 |
+| 多个 PriorityClass 标记为 globalDefault | 只允许一个 globalDefault | `kubectl get priorityclass -o jsonpath='{range .items[?(@.globalDefault==true)]}{.metadata.name}{"\n"}{end}'` |
+
+## 生产检查清单
+
+- [ ] 建立 PriorityClass 分级体系（critical > production > batch > dev）
+- [ ] 确保只有一个 PriorityClass 标记为 `globalDefault: true`
+- [ ] 使用 ResourceQuota 限制高优先级 PriorityClass 的使用（多租户场景）
+- [ ] 为关键服务配置 PodDisruptionBudget，降低抢占影响
+- [ ] 数据科学 / 批处理作业使用 `preemptionPolicy: Never` 避免打断生产服务
+- [ ] 审查低优先级 Pod 的 terminationGracePeriodSeconds，减少抢占延迟
+- [ ] 监控 `scheduler_preemption_attempts_total` 和 `scheduler_preemption_victims` 指标
+
+## 命令快速参考
+
+```bash
+# 查看所有 PriorityClass
+kubectl get priorityclass
+
+# 查看 PriorityClass 详情
+kubectl get priorityclass production -o yaml
+
+# 查看 Pod 的优先级
+kubectl get pods -o custom-columns='NAME:.metadata.name,PRIORITY:.spec.priority,CLASS:.spec.priorityClassName'
+
+# 查找被抢占的 Pod 事件
+kubectl get events --field-selector reason=Preempted --all-namespaces
+
+# 检查 globalDefault PriorityClass
+kubectl get priorityclass -o jsonpath='{range .items[?(@.globalDefault==true)]}{.metadata.name}: {.value}{"\n"}{end}'
+
+# 通过 ResourceQuota 限制高优先级 Pod
+kubectl describe resourcequota -n <namespace> | grep -i priority
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度队列排序受优先级影响
+- [节点压力驱逐](./node-pressure-eviction.md) — kubelet 驱逐顺序同样考虑 Pod 优先级
+- [API 发起驱逐](./api-initiated-eviction.md) — API 驱逐与调度器抢占的区别
+- [污点与容忍度](./taints-and-tolerations.md) — 高优先级 Pod 仍需容忍节点污点
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Pod Priority and Preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)

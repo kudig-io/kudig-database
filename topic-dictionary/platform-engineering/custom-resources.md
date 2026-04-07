@@ -35,6 +35,45 @@
 - **存储影响**：自定义资源占用 API server 存储空间，创建过多会压垮存储。资源按当前存储版本存入 etcd，更新时会使用定义的存储版本。
 - **RBAC 授权**：新资源默认不会被现有 RBAC 角色授予访问权限（除 cluster-admin 或通配符规则外），需显式授权。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| CRD 创建后 kubectl get 报错 | CRD spec 中 names/group 不正确 | `kubectl get crd <name> -o yaml` 检查 spec |
+| CR 创建被拒绝 | CRD validation schema 不匹配 | 检查 CR YAML 与 CRD openAPIV3Schema |
+| Controller 未处理 CR 事件 | Controller 未 watch 正确的 GVR | 检查 Controller 的 informer 配置和 RBAC |
+| CRD 版本升级后旧 CR 不兼容 | 缺少 conversion webhook | 配置 CRD conversion strategy |
+
+## 生产检查清单
+
+- [ ] CRD 配置完整的 openAPIV3Schema validation
+- [ ] 配置 additionalPrinterColumns 提升 kubectl 可读性
+- [ ] 多版本 CRD 配置 conversion webhook
+- [ ] Controller 配置正确的 RBAC
+- [ ] 为 CRD 创建 RBAC ClusterRole 供用户使用
+
+## 命令快速参考
+
+```bash
+# 查看 CRD
+kubectl get crd
+
+# 查看 CRD 详情
+kubectl describe crd <crd-name>
+
+# 查看自定义资源实例
+kubectl get <resource-name> -A
+
+# 删除 CRD（会级联删除所有 CR 实例）
+kubectl delete crd <crd-name>
+```
+
+## 交叉引用
+
+- [扩展 Kubernetes API](./extending-the-kubernetes-api.md) — API 扩展总览
+- [Operator 模式](./operator-pattern.md) — CRD + Controller 最佳实践
+- [Admission Webhook](./admission-webhook-good-practices.md) — CR 验证与变更
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/

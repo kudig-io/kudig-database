@@ -57,6 +57,146 @@ Pod 拓扑分布约束（Pod Topology Spread Constraints）用于控制 Pod 在�
 - 确保 Pod 的标签与其 `topologySpreadConstraints` 中的 `labelSelector` 匹配。
 - 缩容后分布可能失衡，可以使用 Descheduler 等工具重新平衡 Pod 分布。
 
+## 生产 YAML 示例
+
+### 跨可用区 + 跨节点双层拓扑分布
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: production
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+    spec:
+      topologySpreadConstraints:
+        # 跨可用区均匀分布（硬约束）
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: web-frontend
+          nodeAffinityPolicy: Honor        # 只考虑 affinity 匹配的节点
+          nodeTaintsPolicy: Honor          # 只考虑无污点/有容忍的节点
+        # 跨节点均匀分布（软约束）
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: web-frontend
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values: ["us-east-1a", "us-east-1b", "us-east-1c"]
+      containers:
+        - name: frontend
+          image: registry.example.com/frontend:v4.2
+          resources:
+            requests:
+              cpu: "250m"
+              memory: 256Mi
+            limits:
+              cpu: "500m"
+              memory: 512Mi
+```
+
+### 使用 matchLabelKeys 实现滚动更新平滑分布
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+  namespace: production
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: api-server
+  template:
+    metadata:
+      labels:
+        app: api-server
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: api-server
+          matchLabelKeys:
+            - pod-template-hash            # 按 revision 分组计算 skew
+      containers:
+        - name: api
+          image: registry.example.com/api:v3.0
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod Pending，不满足拓扑约束 | maxSkew=1 + DoNotSchedule 且节点/区域数量不均 | 适当放宽 maxSkew 或改用 ScheduleAnyway |
+| 缩容后 Pod 分布不均 | 拓扑约束只在调度时生效，不自动重平衡 | 使用 Descheduler 重新平衡 Pod 分布 |
+| 自动扩容后 Pod 仍集中在旧节点 | 新节点未标记拓扑标签 | 确认新节点有 `topology.kubernetes.io/zone` 和 `kubernetes.io/hostname` 标签 |
+| "幽灵 Pod" 导致 skew 计算错误 | Pod 标签不匹配自身的 labelSelector | 确保 Pod 标签包含 labelSelector 中的所有键 |
+| 滚动更新时新旧版本分布不均 | 未使用 matchLabelKeys | 添加 `matchLabelKeys: [pod-template-hash]` |
+
+## 生产检查清单
+
+- [ ] 为高可用服务配置跨区域（zone）+ 跨节点（hostname）双层拓扑约束
+- [ ] 确保所有节点一致标记 `topology.kubernetes.io/zone` 和 `kubernetes.io/hostname`
+- [ ] 确认 Pod 标签与 `topologySpreadConstraints.labelSelector` 匹配
+- [ ] 滚动更新场景使用 `matchLabelKeys: [pod-template-hash]`
+- [ ] 设置 `nodeAffinityPolicy: Honor` 和 `nodeTaintsPolicy: Honor` 排除不相关节点
+- [ ] 使用 Descheduler `RemovePodsViolatingTopologySpreadConstraint` 策略自动重平衡
+- [ ] 与 Karpenter / Cluster Autoscaler 配合，确保多区域有足够节点
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 分布在各节点/区域的情况
+kubectl get pods -l app=web-frontend -o wide
+
+# 按区域统计 Pod 数量
+kubectl get pods -l app=web-frontend -o jsonpath='{range .items[*]}{.spec.nodeName}{"\n"}{end}' | \
+  xargs -I{} kubectl get node {} -o jsonpath='{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}' | sort | uniq -c
+
+# 查看 Pod 的拓扑约束配置
+kubectl get pod <pod-name> -o jsonpath='{.spec.topologySpreadConstraints}' | jq .
+
+# 查看集群默认拓扑约束
+kubectl get cm -n kube-system kube-scheduler-config -o yaml | grep -A 10 PodTopologySpread
+
+# 查看节点的拓扑标签
+kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.topology\.kubernetes\.io/zone'
+```
+
+## 交叉引用
+
+- [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — podAntiAffinity 与拓扑分布约束的对比
+- [调度器性能调优](./scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
+- [调度框架](./scheduling-framework.md) — PodTopologySpread 插件的扩展点
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Pod Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)

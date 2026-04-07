@@ -33,6 +33,91 @@ Pod 调度就绪性（Pod Scheduling Readiness）允许用户通过设置或移�
 - 移除所有 `schedulingGates` 后，Pod 才会进入正常的调度流程。
 - 在变更调度指令时要确保只收紧约束，否则更新会被拒绝。
 
+## 生产 YAML 示例
+
+### 带 Scheduling Gate 的 Pod
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ml-training-worker-0
+  namespace: ml-platform
+  labels:
+    app: ml-training
+    job-id: "20260407-001"
+spec:
+  schedulingGates:
+    - name: "example.com/dataset-ready"     # 等待数据集下载完成
+    - name: "example.com/gpu-quota-approved" # 等待 GPU 配额审批
+  containers:
+    - name: trainer
+      image: registry.example.com/ml-trainer:v4.0
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+          nvidia.com/gpu: "1"
+        limits:
+          nvidia.com/gpu: "1"
+  nodeSelector:
+    accelerator: nvidia-a100
+  restartPolicy: Never
+```
+
+### 外部控制器移除 Scheduling Gate（示例 patch）
+
+```bash
+# 当数据集准备就绪时，外部控制器移除对应的 gate
+kubectl patch pod ml-training-worker-0 -n ml-platform \
+  --type='json' \
+  -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 一直处于 SchedulingGated 状态 | schedulingGates 未被移除 | `kubectl get pod -o jsonpath='{.spec.schedulingGates}'` 检查剩余 gate |
+| 外部控制器 patch 失败 | RBAC 权限不足 | 确认控制器 ServiceAccount 有 pods/patch 权限 |
+| Pod 进入调度后因节点不足 Pending | gate 移除时机不当 | 先确认节点资源充足，再移除 gate；或配合 Cluster AutoScaler |
+| scheduler_pending_pods 指标中 gated 数量持续增长 | 外部系统故障导致 gate 未释放 | 检查外部控制器日志；设置 gated Pod 告警 |
+| 尝试添加新 gate 被拒绝 | 只允许在创建时设置 gate | 使用 admission webhook 在创建时注入所有需要的 gate |
+
+## 生产检查清单
+
+- [ ] 仅在 Pod 创建时（或 admission webhook 阶段）设置 `schedulingGates`
+- [ ] 为每个 gate 实现对应的外部控制器，负责在条件满足时移除 gate
+- [ ] 配置监控告警：`scheduler_pending_pods{queue="gated"}` 超过阈值时报警
+- [ ] 外部控制器具备幂等的 gate 移除逻辑
+- [ ] 设置 gate 超时机制：长时间未移除的 gate 自动告警或清理
+- [ ] 变更调度指令时只收紧约束（增加 nodeSelector / matchExpressions）
+
+## 命令快速参考
+
+```bash
+# 查看所有 SchedulingGated 状态的 Pod
+kubectl get pods --all-namespaces --field-selector=status.phase=Pending \
+  -o jsonpath='{range .items[?(@.spec.schedulingGates)]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}'
+
+# 查看 Pod 的 scheduling gates
+kubectl get pod <pod-name> -o jsonpath='{.spec.schedulingGates}'
+
+# 移除指定的 scheduling gate
+kubectl patch pod <pod-name> --type='json' \
+  -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
+
+# 查看调度器指标中 gated Pod 数量
+curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 gated Pod
+- [Gang Scheduling](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
+- [动态资源分配](./dynamic-resource-allocation.md) — DRA ResourceClaim 就绪后移除 gate
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Pod Scheduling Readiness](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)

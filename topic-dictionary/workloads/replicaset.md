@@ -34,5 +34,117 @@ ReplicaSet 的作用是维护一组稳定运行的 Pod 副本。它通常不直�
 - ReplicaSet 本身不支持滚动更新；如需受控更新，请使用 Deployment。
 - 可利用 `pod-deletion-cost` 注解影响缩容时优先保留的 Pod。
 
+## 实战 YAML 示例
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: web-frontend
+  namespace: prod
+  labels:
+    app: web-frontend
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+        tier: frontend
+      annotations:
+        # 设置 pod-deletion-cost，值越高越不容易被缩容时删除
+        controller.kubernetes.io/pod-deletion-cost: "100"
+    spec:
+      containers:
+      - name: web
+        image: myregistry.com/web-frontend:v1.0
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          periodSeconds: 10
+```
+
+> **注意**: 上述示例仅用于理解 ReplicaSet 结构。生产环境中应使用 Deployment 代替直接创建 ReplicaSet。
+
+## 故障排查
+
+### ReplicaSet 副本数不符合预期
+- **症状**: `kubectl get rs` 显示 `DESIRED` 与 `READY` 不一致。
+- **常见原因**: Pod 调度失败（资源不足）；Pod 启动失败（镜像错误、探针失败）。
+- **诊断命令**:
+  ```bash
+  # 查看 ReplicaSet 状态
+  kubectl get rs -n prod -l app=web-frontend
+  
+  # 查看 ReplicaSet 事件
+  kubectl describe rs web-frontend -n prod | tail -20
+  
+  # 查看相关 Pod 状态
+  kubectl get pods -n prod -l app=web-frontend -o wide
+  ```
+
+### 裸 Pod 被 ReplicaSet 意外收养
+- **症状**: 手动创建的 Pod 被某个 ReplicaSet 获取并管理。
+- **常见原因**: Pod 标签与 ReplicaSet 选择器匹配，且 Pod 没有 OwnerReference。
+- **诊断命令**:
+  ```bash
+  # 查看 Pod 的 ownerReferences
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences}'
+  ```
+- **解决方案**: 为手动创建的 Pod 使用不与任何控制器重叠的标签。
+
+### Deployment 下有多个 ReplicaSet
+- **症状**: 一个 Deployment 关联了多个 ReplicaSet，其中旧的 RS 副本数为 0。
+- **说明**: 这是正常行为。Deployment 每次更新 Pod 模板都会创建新的 ReplicaSet，旧的 RS 保留用于回滚。数量受 `revisionHistoryLimit` 控制。
+
+## 生产就绪检查清单
+
+- [ ] 通过 Deployment 间接管理 ReplicaSet（而非直接创建）
+- [ ] Pod 模板配置了 `resources.requests/limits`
+- [ ] 标签选择器不与其他控制器重叠
+- [ ] 了解缩容算法，合理使用 `pod-deletion-cost` 注解
+- [ ] Deployment 的 `revisionHistoryLimit` 设置合理，控制旧 ReplicaSet 数量
+
+## 命令快速参考
+
+```bash
+# 查看 ReplicaSet 列表
+kubectl get rs -n prod
+
+# 查看特定 Deployment 关联的所有 ReplicaSet
+kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
+
+# 手动扩缩容 ReplicaSet
+kubectl scale rs web-frontend -n prod --replicas=5
+
+# 查看 ReplicaSet 详情
+kubectl describe rs <rs-name> -n prod
+
+# 查看 Pod 的 OwnerReference（确认由哪个 RS 管理）
+kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences[0].name}'
+```
+
+## 交叉引用
+
+- [Deployments](./deployments.md)
+- [工作负载概览与架构](../../domain-4-workloads/01-workload-overview-architecture.md)
+- [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
+- [工作负载管理总览](./workload-management.md)
+- [ReplicationController（旧版）](./replicationcontroller.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/

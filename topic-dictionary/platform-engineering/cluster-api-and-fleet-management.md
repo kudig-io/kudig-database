@@ -91,6 +91,77 @@ spec:
 - **漂移检测与治理**：定期检查工作负载集群的实际配置是否与 Git/CAPI 定义一致
 - **分批次升级策略**：控制平面升级应按 dev → staging → production 的顺序分批进行，避免全局故障
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| Cluster 对象长时间处于 Provisioning | Infrastructure Provider 认证失败或配额不足 | `kubectl describe cluster <name>`；查看 provider 控制器日志 |
+| Machine 创建失败 | AMI/镜像不可用或子网配置错误 | `kubectl get machines` 查看状态；`kubectl describe machine <name>` |
+| MachineHealthCheck 持续触发替换 | 节点网络不稳定或 kubelet 配置问题 | `kubectl get machinehealthcheck`；降低 unhealthyConditions 的灵敏度 |
+| 控制平面升级卡住 | etcd 健康检查失败或证书过期 | `kubectl get kubeadmcontrolplane <name> -o yaml` 检查 status |
+| 工作负载集群无法访问 | kubeconfig Secret 未创建或网络不通 | `kubectl get secret <cluster>-kubeconfig`；检查 API endpoint 可达性 |
+| 节点滚动升级导致服务中断 | PDB 未配置或 maxUnavailable 过大 | 确保工作负载配置了 PDB；调整 MachineDeployment 的 `maxUnavailable` |
+| Provider 控制器 OOM | 管理大量集群时内存不足 | `kubectl top pod -n capi-system`；增加控制器资源限制 |
+| 管理集群与工作负载集群版本不兼容 | CAPI 版本不支持目标 K8s 版本 | 查阅 CAPI 兼容性矩阵文档 |
+
+## 生产检查清单
+
+- [ ] 管理集群配置多控制平面和 etcd 备份（管理集群是所有集群的"大脑"）
+- [ ] MachineHealthCheck 已为所有工作负载集群配置自动修复
+- [ ] 节点使用预构建的 Golden Image（OS 补丁 + 容器镜像预拉取）
+- [ ] 云 Provider API 凭证使用 External Secrets 管理，定期轮换
+- [ ] 舰队中所有集群的 Pod CIDR / Service CIDR 不重叠（为 Cluster Mesh 做准备）
+- [ ] 控制平面和工作节点升级策略按 dev → staging → production 分批执行
+- [ ] MachineDeployment 配置了合理的 maxSurge/maxUnavailable
+- [ ] 管理集群的 CAPI 控制器资源限制根据管理集群数量调优
+- [ ] 集群配置漂移检测已启用（定期对比 Git 定义与实际状态）
+- [ ] 灾难恢复计划已演练：管理集群不可用时的 pivot 和重建流程
+
+## 命令快速参考
+
+```bash
+# 查看所有管理的集群
+kubectl get clusters -A
+
+# 查看集群详情和状态
+kubectl describe cluster <name>
+
+# 查看所有 Machine 及其状态
+kubectl get machines -A
+
+# 查看 MachineDeployment（类似 Deployment）
+kubectl get machinedeployment -A
+
+# 查看控制平面状态
+kubectl get kubeadmcontrolplane -A
+
+# 获取工作负载集群的 kubeconfig
+kubectl get secret <cluster-name>-kubeconfig -o jsonpath='{.data.value}' | base64 -d > kubeconfig.yaml
+
+# 查看 MachineHealthCheck 状态
+kubectl get machinehealthcheck -A
+
+# 查看 CAPI 控制器日志
+kubectl -n capi-system logs -l cluster.x-k8s.io/provider=cluster-api --tail=100
+
+# 查看 Infrastructure Provider 控制器日志
+kubectl -n capa-system logs -l cluster.x-k8s.io/provider=infrastructure-aws --tail=100
+
+# 暂停集群协调（维护窗口）
+kubectl annotate cluster <name> cluster.x-k8s.io/paused=""
+
+# 恢复集群协调
+kubectl annotate cluster <name> cluster.x-k8s.io/paused-
+```
+
+## 交叉引用
+
+- [infrastructure-as-code-for-kubernetes.md](./infrastructure-as-code-for-kubernetes.md) — Terraform/Pulumi/Crossplane 与 CAPI 的分层 IaC
+- [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — 多集群 GitOps 交付策略
+- [operator-pattern.md](./operator-pattern.md) — CAPI 控制器的 Operator 模式
+- [custom-resources.md](./custom-resources.md) — Cluster API 使用的 CRD 体系
+- [compatibility-version-for-control-plane.md](./compatibility-version-for-control-plane.md) — 控制平面版本管理
+
 ## 参考链接
 
 - [Cluster API Documentation](https://cluster-api.sigs.k8s.io/)

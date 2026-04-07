@@ -65,6 +65,39 @@ ResourceClaim 控制器由 kube-controller-manager 内部管理。关键指标�
 - 在大规模集群中，监控并适当提升 kube-controller-manager 和 kube-scheduler 的 QPS/Burst 配置。
 - 持续关注 DRA 相关的工作队列指标和调度延迟指标，及时发现性能瓶颈。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| DRA 驱动未注册设备 | ResourceSlice 未创建 | `kubectl get resourceslices` |
+| Pod Pending 等待 ResourceClaim | 设备数量不足 | `kubectl describe resourceclaim`；检查节点可用设备 |
+| 管理员访问被拒绝 | DRAAdminAccess 特性门控未启用 | 确认 apiserver 特性门控配置 |
+
+## 生产检查清单
+
+- [ ] DRA 驱动正确创建和更新 ResourceSlice
+- [ ] 多租户集群限制管理员访问权限
+- [ ] 设备健康状态纳入监控
+- [ ] 避免 `spec.nodeName` 绕过调度器
+
+## 命令快速参考
+
+```bash
+# 查看 ResourceSlice
+kubectl get resourceslices -o wide
+
+# 查看 DeviceClass
+kubectl get deviceclasses
+
+# 查看 ResourceClaim
+kubectl get resourceclaims -A
+```
+
+## 交叉引用
+
+- [Device Plugins](./device-plugins.md) — 传统设备插件方式
+- [Operator 模式](./operator-pattern.md) — DRA 驱动通常以 Operator 形式部署
+
 ## 参考链接
 
 - [Good practices for Dynamic Resource Allocation as a Cluster Admin - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/dra/)

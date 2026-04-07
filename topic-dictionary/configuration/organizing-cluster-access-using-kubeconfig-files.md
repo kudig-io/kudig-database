@@ -76,6 +76,157 @@ clusters:
 - **合并文件时的冲突意识**：了解 kubeconfig 合并规则，避免多个文件中同名 context 或 user 的覆盖行为导致意外连接错误集群。
 - **使用 `--kubeconfig` 进行隔离**：在自动化脚本中，优先使用 `--kubeconfig` 指定独立的配置文件，避免受环境变量 `KUBECONFIG` 影响。
 
+## 生产 YAML 示例
+
+### 多集群 kubeconfig 文件
+
+```yaml
+apiVersion: v1
+kind: Config
+preferences: {}
+current-context: prod-us-east
+
+clusters:
+  - name: dev-cluster
+    cluster:
+      server: https://dev-api.example.com:6443
+      certificate-authority-data: <base64-ca-cert>
+  - name: staging-cluster
+    cluster:
+      server: https://staging-api.example.com:6443
+      certificate-authority-data: <base64-ca-cert>
+  - name: prod-us-east
+    cluster:
+      server: https://prod-us-east-api.example.com:6443
+      certificate-authority-data: <base64-ca-cert>
+      proxy-url: http://corporate-proxy.example.com:3128  # 企业代理
+
+users:
+  - name: dev-admin
+    user:
+      client-certificate-data: <base64-cert>
+      client-key-data: <base64-key>
+  - name: staging-readonly
+    user:
+      token: <bearer-token>
+  - name: prod-deployer
+    user:
+      exec:                                # 使用外部凭据提供程序（推荐）
+        apiVersion: client.authentication.k8s.io/v1beta1
+        command: aws
+        args:
+          - eks
+          - get-token
+          - --cluster-name
+          - prod-us-east
+          - --region
+          - us-east-1
+
+contexts:
+  - name: dev
+    context:
+      cluster: dev-cluster
+      user: dev-admin
+      namespace: development
+  - name: staging
+    context:
+      cluster: staging-cluster
+      user: staging-readonly
+      namespace: staging
+  - name: prod-us-east
+    context:
+      cluster: prod-us-east
+      user: prod-deployer
+      namespace: production
+```
+
+### CI/CD 最小权限 kubeconfig
+
+```yaml
+apiVersion: v1
+kind: Config
+current-context: ci-deploy
+clusters:
+  - name: prod
+    cluster:
+      server: https://prod-api.example.com:6443
+      certificate-authority-data: <base64-ca-cert>
+users:
+  - name: ci-deployer
+    user:
+      token: <short-lived-token>           # 短期令牌，由 CI 系统动态注入
+contexts:
+  - name: ci-deploy
+    context:
+      cluster: prod
+      user: ci-deployer
+      namespace: app-team-a                # 限制到特定命名空间
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| `Unable to connect to the server` | server 地址错误或网络不通 | `kubectl config view` 确认 server URL；`curl -k <server-url>` 测试连通性 |
+| `x509: certificate signed by unknown authority` | CA 证书不匹配 | 确认 `certificate-authority-data` 与集群 CA 一致 |
+| 操作了错误的集群 | current-context 指向非目标集群 | `kubectl config current-context` 检查；操作前确认 |
+| 合并多个 kubeconfig 后 context 冲突 | 同名 context 被覆盖 | 重命名冲突的 context；使用 `--kubeconfig` 隔离 |
+| exec 凭据提供程序超时 | AWS/GCP CLI 未配置或凭据过期 | 手动运行 exec command 测试；刷新云凭据 |
+| 文件权限警告 | kubeconfig 文件权限过于宽松 | `chmod 600 ~/.kube/config` |
+
+## 生产检查清单
+
+- [ ] kubeconfig 文件权限设置为 600（仅所有者可读写）
+- [ ] 不将包含凭据的 kubeconfig 提交到版本控制
+- [ ] 生产集群使用 exec 凭据提供程序（短期令牌）而非长期静态 token
+- [ ] 为每个环境创建清晰命名的 context（如 `prod-us-east`、`dev-beijing`）
+- [ ] CI/CD 流水线使用 `--kubeconfig` 指定独立文件，避免 `KUBECONFIG` 环境变量影响
+- [ ] 执行高危操作前确认 `kubectl config current-context`
+- [ ] 定期轮转 kubeconfig 中的凭据
+- [ ] 使用 RBAC 限制 CI/CD 凭据只能访问特定命名空间
+
+## 命令快速参考
+
+```bash
+# 查看当前上下文
+kubectl config current-context
+
+# 切换上下文
+kubectl config use-context prod-us-east
+
+# 查看所有上下文
+kubectl config get-contexts
+
+# 查看 kubeconfig 配置（隐藏敏感数据）
+kubectl config view --minify
+
+# 合并多个 kubeconfig 文件
+KUBECONFIG=~/.kube/config:~/.kube/staging-config kubectl config view --flatten > ~/.kube/merged-config
+
+# 设置命名空间快捷方式
+kubectl config set-context --current --namespace=production
+
+# 添加新集群
+kubectl config set-cluster new-cluster --server=https://api.example.com --certificate-authority=ca.crt
+
+# 添加新用户
+kubectl config set-credentials new-user --token=<token>
+
+# 添加新上下文
+kubectl config set-context new-context --cluster=new-cluster --user=new-user --namespace=default
+
+# 删除上下文
+kubectl config delete-context old-context
+
+# 使用独立 kubeconfig 执行命令
+kubectl --kubeconfig=/path/to/config get pods
+```
+
+## 交叉引用
+
+- [Secrets](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
+- [ConfigMaps](./configmaps.md) — 集群配置管理的另一种方式
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Organizing Cluster Access Using kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)

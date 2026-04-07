@@ -53,6 +53,113 @@
 - 对于大规模集群，注意 CNI 插件的 IPAM 性能和可扩展性。
 - 定期评估 CNI 插件的社区活跃度和安全更新情况。
 
+## 生产 YAML 示例
+
+### CIDR 规划参考
+
+```yaml
+# 集群网络 CIDR 规划（确保不重叠）
+# kube-apiserver 配置
+--service-cluster-ip-range=10.96.0.0/16      # Service CIDR（65534 个 IP）
+
+# kube-controller-manager 配置
+--cluster-cidr=10.244.0.0/16                 # Pod CIDR
+--node-cidr-mask-size=24                      # 每节点 /24（254 个 Pod IP）
+
+# 节点 IP 范围（由基础设施决定）
+# Node Network: 192.168.0.0/16
+
+# 验证不重叠：
+# Pod:     10.244.0.0/16 ✓
+# Service: 10.96.0.0/16  ✓
+# Node:    192.168.0.0/16 ✓
+```
+
+### Multus 多网卡配置
+
+```yaml
+# 为 Pod 添加第二张网卡（如 SR-IOV 高性能网络）
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: fast-network
+  namespace: production
+spec:
+  config: '{
+    "cniVersion": "0.3.1",
+    "type": "macvlan",
+    "master": "eth1",
+    "mode": "bridge",
+    "ipam": {
+      "type": "host-local",
+      "subnet": "10.10.0.0/16"
+    }
+  }'
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-nic-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: fast-network
+spec:
+  containers:
+  - name: app
+    image: registry.example.com/apps/high-perf:v1.0
+```
+
+## CNI 插件选型对比
+
+| CNI | 网络策略 | eBPF | 双栈 | 加密 | 多网卡 | 适用场景 |
+|-----|---------|------|------|------|--------|----------|
+| Calico | 完整 | 可选 | 支持 | WireGuard | Multus | 通用生产 |
+| Cilium | 完整+L7 | 原生 | 支持 | WireGuard/IPSec | 支持 | 高性能/安全 |
+| Flannel | 不支持 | 否 | 有限 | 否 | 否 | 简单/学习 |
+| Weave Net | 支持 | 否 | 支持 | IPSec | 否 | 小规模 |
+| Antrea | 支持 | 否 | 支持 | IPSec | 否 | VMware 生态 |
+| OVN-K8s | 支持 | 否 | 支持 | 否 | 支持 | OpenStack 集成 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 间无法通信 | CNI 未正确安装或 Pod CIDR 配置错误 | `kubectl get pods -n kube-system`；`ip route` 检查路由 |
+| 节点 NotReady | CNI DaemonSet Pod 未启动 | `kubectl get ds -n kube-system`；查看 CNI Pod 日志 |
+| Pod IP 耗尽 | 节点 CIDR mask 过小 | 调整 `--node-cidr-mask-size`；扩大 `--cluster-cidr` |
+| 跨节点通信丢包 | overlay 封装 MTU 不匹配 | 检查 CNI 的 MTU 配置（通常需要 -50 for VXLAN） |
+
+## 生产检查清单
+
+- [ ] Pod CIDR、Service CIDR、Node IP 范围不重叠
+- [ ] CNI 插件满足功能需求（网络策略、双栈、性能等）
+- [ ] 节点 CIDR mask 大小为预期最大 Pod 数的 2 倍以上
+- [ ] MTU 配置考虑 overlay 封装开销
+- [ ] 大规模集群评估 CNI 的 IPAM 性能和可扩展性
+
+## 命令快速参考
+
+```bash
+# 查看节点分配的 Pod CIDR
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
+
+# 查看集群 CIDR 配置
+kubectl cluster-info dump | grep -E "cluster-cidr|service-cluster-ip-range"
+
+# 查看 CNI DaemonSet 状态
+kubectl get ds -n kube-system
+
+# 检查 Pod 网络
+kubectl exec <pod> -- ip addr
+kubectl exec <pod> -- ip route
+```
+
+## 交叉引用
+
+- [eBPF 与 Cilium](ebpf-and-cilium-networking.md) — 基于 eBPF 的 CNI 方案
+- [Network Policies](network-policies.md) — 依赖 CNI 实现的流量控制
+- [IPv4/IPv6 Dual Stack](ipv4-ipv6-dual-stack.md) — 双栈 CIDR 规划
+- [Service ClusterIP Allocation](service-clusterip-allocation.md) — Service CIDR 的分带策略
+
 ## 参考链接
 
 - [Cluster Networking - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/networking/)

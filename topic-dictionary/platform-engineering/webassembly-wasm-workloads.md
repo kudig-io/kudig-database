@@ -99,6 +99,78 @@ Wasm 采用 **Capability-based Security**：
 - **监控 Wasm 运行时健康**：除了应用指标，还需监控 Wasm runtime（如 WasmEdge）的内存和 CPU 占用
 - **渐进式采用**：从边缘网关、Serverless 函数等适合场景开始，逐步探索核心业务负载的 Wasm 化
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| Pod 启动失败 RuntimeClass not found | 节点未安装 Wasm shim 或 RuntimeClass 未创建 | `kubectl get runtimeclass`；检查节点 containerd 配置 |
+| Wasm 模块执行报错 | WASI 接口不兼容或缺少权限声明 | 查看 Pod 日志 `kubectl logs <pod>`；验证 Wasm 模块本地运行 |
+| 镜像拉取失败 | 镜像仓库不支持 Wasm OCI artifact | 确认使用 OCI-compliant 仓库（Harbor 2.5+）；`ctr images pull` 测试 |
+| 网络请求失败 | WASI 网络能力未授权 | 检查 Wasm 模块的 capability 声明；确认 WASI Preview 2 支持 |
+| 性能低于预期 | I/O 密集型工作负载不适合 Wasm | 分析工作负载特征；I/O 密集场景考虑使用容器 |
+| Pod 调度到非 Wasm 节点 | RuntimeClass 未配置 nodeSelector | 为 RuntimeClass 添加 `scheduling.nodeSelector` |
+| Wasm 模块体积过大 | 依赖了大型标准库或未优化 | 使用 `wasm-opt` 优化；选择 Rust/TinyGo 等轻量编译目标 |
+| Scale-to-Zero 后冷启动慢 | 非 Wasm 运行时（回退到容器） | 确认 `runtimeClassName` 正确指向 Wasm RuntimeClass |
+
+## 生产检查清单
+
+- [ ] Wasm 节点已安装对应的 containerd shim（spin/wasmtime/wasmedge）
+- [ ] RuntimeClass 已创建并配置了正确的 handler 和 nodeSelector
+- [ ] 使用 OCI-compliant 镜像仓库存储 Wasm artifact
+- [ ] Wasm 模块的 WASI capability 权限遵循最小授权原则
+- [ ] I/O 密集型工作负载已排除在 Wasm 化之外（仍使用容器）
+- [ ] Wasm 运行时版本与 WASI Preview 版本兼容
+- [ ] 监控 Wasm runtime 的内存和 CPU 使用（WasmEdge/Wasmtime 级别）
+- [ ] 语言工具链已确认（Rust/Go 最成熟，Python/JS 需评估体积和性能）
+- [ ] 从边缘/Serverless 等适合场景开始渐进式采用
+- [ ] 调试和可观测性工具已配置（日志收集、Trace 集成）
+
+## 命令快速参考
+
+```bash
+# 查看已注册的 RuntimeClass
+kubectl get runtimeclass
+
+# 查看 RuntimeClass 详情（handler 和 scheduling）
+kubectl describe runtimeclass <name>
+
+# 部署 Wasm 工作负载
+kubectl apply -f wasm-deployment.yaml
+
+# 查看 Wasm Pod 状态
+kubectl get pods -l app=wasm-app
+
+# 查看 Wasm Pod 日志
+kubectl logs -l app=wasm-app
+
+# 检查节点 containerd shim 安装（SSH 到节点）
+ls /usr/bin/containerd-shim-*
+
+# 查看节点 containerd 运行时配置
+cat /etc/containerd/config.toml | grep -A5 "runtime_type"
+
+# 验证 Wasm 模块本地运行（开发调试）
+wasmtime run module.wasm
+spin up
+
+# 优化 Wasm 模块体积
+wasm-opt -Oz input.wasm -o output.wasm
+
+# 推送 Wasm OCI artifact 到仓库
+wasm-to-oci push module.wasm <registry>/<repo>:<tag>
+
+# 查看使用 Wasm RuntimeClass 的 Pod
+kubectl get pods -A -o jsonpath='{range .items[?(@.spec.runtimeClassName)]}{.metadata.namespace}{"/"}{.metadata.name}{"\t"}{.spec.runtimeClassName}{"\n"}{end}'
+```
+
+## 交叉引用
+
+- [compute-storage-and-networking-extensions.md](./compute-storage-and-networking-extensions.md) — 运行时扩展机制
+- [custom-resources.md](./custom-resources.md) — RuntimeClass 作为 K8s API 资源
+- [kubevirt-virtual-machines.md](./kubevirt-virtual-machines.md) — VM 作为另一种非容器运行时
+- [developer-portal-and-platform-metrics.md](./developer-portal-and-platform-metrics.md) — Golden Path 中的 Wasm 模板
+- [../workloads/runtime-class.md](../workloads/runtime-class.md) — RuntimeClass 机制详解
+
 ## 参考链接
 
 - [WasmEdge Documentation](https://wasmedge.org/book/en/)

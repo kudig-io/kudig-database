@@ -34,6 +34,37 @@
 - 扩展资源仅支持整型请求，不能被超额分配（overcommit），且设备不能在容器间共享。
 - 升级 Kubernetes 前，建议设备插件同时支持新旧两个 API 版本，以确保升级期间设备分配不中断。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 节点无扩展资源 | Device Plugin 未注册 | `kubectl describe node` 查看 Capacity；检查 device plugin Pod 日志 |
+| Pod Pending 请求设备资源 | 设备数量不足 | `kubectl describe node` 查看 Allocatable 中的设备数量 |
+| 设备分配后容器启动失败 | 设备挂载或权限问题 | 检查容器日志；确认 /dev 下设备文件存在 |
+| kubelet 重启后设备丢失 | Device Plugin 未实现 GetPreferredAllocation | 确认插件支持 kubelet 重启恢复 |
+
+## 生产检查清单
+
+- [ ] Device Plugin DaemonSet 运行正常
+- [ ] 节点 Capacity/Allocatable 中可见扩展资源
+- [ ] 设备健康检查正确报告
+- [ ] kubelet 重启后设备自动恢复
+
+## 命令快速参考
+
+```bash
+# 查看节点设备资源
+kubectl describe node <node> | grep -E "nvidia|rdma|fpga"
+
+# 查看 device plugin Pod
+kubectl get pods -n kube-system -l app=nvidia-device-plugin
+```
+
+## 交叉引用
+
+- [计算、存储和网络扩展](./compute-storage-and-networking-extensions.md) — 扩展总览
+- [Network Plugins](./network-plugins.md) — CNI 网络插件
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/

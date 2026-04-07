@@ -30,5 +30,159 @@ Kubernetes 根据 Pod 内容器的资源请求（requests）和限制（limits�
 - 调度器在进行抢占（preemption）时**不考虑** QoS 等级，抢占决策基于优先级和资源需求。
 - 使用 Pod 级资源（Beta）简化 Guaranteed 配置时，需确保 Pod 级 request 和 limit 相等。
 
+## 实战 YAML 示例
+
+### Guaranteed QoS（生产关键应用）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: guaranteed-app
+  namespace: prod
+spec:
+  containers:
+  - name: app
+    image: myregistry.com/critical-app:v1.0
+    resources:
+      requests:
+        cpu: "500m"          # request == limit → Guaranteed
+        memory: "512Mi"
+      limits:
+        cpu: "500m"          # 必须与 request 完全相等
+        memory: "512Mi"      # 必须与 request 完全相等
+```
+
+### Burstable QoS（一般业务应用）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: burstable-app
+  namespace: prod
+spec:
+  containers:
+  - name: app
+    image: myregistry.com/web-app:v1.0
+    resources:
+      requests:
+        cpu: "250m"          # request < limit → Burstable
+        memory: "256Mi"
+      limits:
+        cpu: "1000m"         # 允许突发使用更多 CPU
+        memory: "1Gi"        # 允许突发使用更多内存
+```
+
+### BestEffort QoS（非关键后台任务）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: besteffort-task
+  namespace: dev
+spec:
+  containers:
+  - name: task
+    image: myregistry.com/batch-task:v1.0
+    # 不设置任何 resources → BestEffort
+    # 注意：生产环境不建议使用 BestEffort
+```
+
+### QoS 等级对比矩阵
+
+| 特性 | Guaranteed | Burstable | BestEffort |
+|------|-----------|-----------|------------|
+| 资源配置 | request == limit（全设） | 至少设置一项 | 不设置任何资源 |
+| 驱逐优先级 | 最低（最后驱逐） | 中等 | 最高（最先驱逐） |
+| CPU 限流 | 严格限制在 limit | 可突发到 limit | 无限制 |
+| OOM Kill 顺序 | 最后被 Kill | 按 OOM Score | 最先被 Kill |
+| 独占 CPU | 支持（static CPU Manager） | 不支持 | 不支持 |
+| 适用场景 | 延迟敏感、关键服务 | 一般业务 | 开发测试、非关键任务 |
+
+## 故障排查
+
+### Pod 被 OOMKilled
+- **症状**: Pod 状态显示 `OOMKilled`，容器被反复重启。
+- **常见原因**: 内存 limit 设置过低；应用存在内存泄漏；JVM 堆大小未与容器 limit 对齐。
+- **诊断命令**:
+  ```bash
+  # 查看 Pod QoS 等级
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.status.qosClass}'
+  
+  # 检查容器退出原因
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.status.containerStatuses[0].lastState.terminated.reason}'
+  
+  # 查看节点上的 OOM 事件
+  kubectl describe node <node-name> | grep -A 5 "OOMKilling"
+  
+  # 查看 Pod 实际内存使用
+  kubectl top pod <pod-name> -n prod --containers
+  ```
+- **解决方案**: 增大内存 limit；修复内存泄漏；Java 应用设置 `-XX:MaxRAMPercentage=75.0`。
+
+### 意外的 QoS 等级
+- **症状**: Pod 的 QoS 等级不是期望的 Guaranteed。
+- **常见原因**: 多容器 Pod 中某个容器（包括 Sidecar）未设置资源，或 request != limit。
+- **诊断命令**:
+  ```bash
+  # 查看 Pod QoS 等级
+  kubectl get pod <pod-name> -n prod -o jsonpath='{.status.qosClass}'
+  
+  # 检查所有容器的资源配置
+  kubectl get pod <pod-name> -n prod -o jsonpath='{range .spec.containers[*]}{.name}: requests={.resources.requests}, limits={.resources.limits}{"\n"}{end}'
+  
+  # 检查 init 容器（Sidecar）的资源配置
+  kubectl get pod <pod-name> -n prod -o jsonpath='{range .spec.initContainers[*]}{.name}: requests={.resources.requests}, limits={.resources.limits}{"\n"}{end}'
+  ```
+
+### 节点资源不足导致大量驱逐
+- **症状**: 多个 BestEffort/Burstable Pod 同时被驱逐。
+- **诊断命令**:
+  ```bash
+  # 查看节点资源压力
+  kubectl describe node <node-name> | grep -A 10 "Conditions"
+  
+  # 查看被驱逐的 Pod
+  kubectl get pods -A --field-selector=status.phase=Failed -o wide | grep Evicted
+  
+  # 查看节点资源使用率
+  kubectl top node <node-name>
+  ```
+
+## 生产就绪检查清单
+
+- [ ] 关键服务（数据库、API 网关等）配置为 `Guaranteed` QoS
+- [ ] 所有生产 Pod 至少设置了 `resources.requests`（避免 BestEffort）
+- [ ] 多容器 Pod（含 Sidecar）的每个容器都设置了资源
+- [ ] Java 应用的 JVM 堆大小与容器内存 limit 对齐（建议 `-XX:MaxRAMPercentage=75.0`）
+- [ ] 监控节点资源使用率，设置驱逐前告警
+- [ ] 了解 CPU limit 的限流权衡（部分团队选择不设置 CPU limit）
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 的 QoS 等级
+kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.qosClass}'
+
+# 批量查看所有 Pod 的 QoS 等级
+kubectl get pods -n <namespace> -o custom-columns='NAME:.metadata.name,QOS:.status.qosClass,CPU_REQ:.spec.containers[0].resources.requests.cpu,MEM_REQ:.spec.containers[0].resources.requests.memory'
+
+# 查找所有 BestEffort Pod（生产环境不应存在）
+kubectl get pods -A -o jsonpath='{range .items[?(@.status.qosClass=="BestEffort")]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}'
+
+# 查看节点驱逐阈值
+kubectl describe node <node-name> | grep -A 5 "eviction"
+```
+
+## 交叉引用
+
+- [Pod 生命周期](./pod-lifecycle.md)
+- [OOM 内存诊断](../../domain-12-troubleshooting/07-oom-memory-diagnosis.md)
+- [高级 Pod 配置](./advanced-pod-configuration.md)
+- [工作负载监控与告警](../../domain-4-workloads/06-workload-monitoring-alerting.md)
+- [VPA 垂直自动扩缩](./vertical-pod-autoscaling.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/

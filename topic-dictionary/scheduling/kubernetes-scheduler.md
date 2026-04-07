@@ -32,6 +32,116 @@
 - 如果没有节点满足 Pod 的调度需求，Pod 将保持未调度状态，直到有合适的节点出现。
 - 可以通过配置多个调度配置文件来适应不同类型的工作负载。
 
+## 生产 YAML 示例
+
+### 多调度配置文件
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+  # 默认配置文件 — 通用工作负载
+  - schedulerName: default-scheduler
+    plugins:
+      score:
+        enabled:
+          - name: NodeResourcesBalancedAllocation
+            weight: 1
+          - name: ImageLocality
+            weight: 1
+  # 高吞吐配置文件 — 批处理作业
+  - schedulerName: batch-scheduler
+    plugins:
+      score:
+        enabled:
+          - name: NodeResourcesFit
+            weight: 2
+    pluginConfig:
+      - name: NodeResourcesFit
+        args:
+          scoringStrategy:
+            type: MostAllocated
+            resources:
+              - name: cpu
+                weight: 1
+              - name: memory
+                weight: 1
+```
+
+### Pod 指定调度器
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: batch-job
+  namespace: data-pipeline
+spec:
+  schedulerName: batch-scheduler          # 使用自定义调度配置文件
+  containers:
+    - name: etl
+      image: registry.example.com/etl:v3.2
+      resources:
+        requests:
+          cpu: "2"
+          memory: 4Gi
+        limits:
+          cpu: "4"
+          memory: 8Gi
+  restartPolicy: Never
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 长时间 Pending | 无节点满足 Filter 阶段 | `kubectl describe pod <name>` 查看 Events 中的 FailedScheduling 原因 |
+| Pod 被调度到非预期节点 | Score 阶段权重不合理 | 检查 KubeSchedulerConfiguration 中的 pluginConfig 权重设置 |
+| 调度器日志报错插件冲突 | 多个配置文件启用冲突插件 | `kubectl logs -n kube-system kube-scheduler-*` 查看启动日志 |
+| 使用自定义 schedulerName 但 Pod 不被调度 | 调度器配置文件名不匹配 | 确认 KubeSchedulerConfiguration 中 `schedulerName` 与 Pod spec 一致 |
+| 调度延迟高 | 集群规模大，评分节点过多 | 调整 `percentageOfNodesToScore` 参数，参考调度器性能调优 |
+
+## 生产检查清单
+
+- [ ] 确认 kube-scheduler 组件健康：`kubectl get componentstatuses`
+- [ ] 为不同工作负载类型配置独立的调度配置文件（default / batch / gpu 等）
+- [ ] 设置调度器 Leader Election 确保高可用
+- [ ] 配置 `--v=2` 日志级别用于生产环境；调试时临时切换到 `--v=4`
+- [ ] 为 kube-scheduler Pod 设置合理的 CPU / Memory requests
+- [ ] 监控 `scheduler_scheduling_attempt_duration_seconds` 和 `scheduler_pending_pods` 指标
+- [ ] 验证调度器 RBAC 权限最小化
+
+## 命令快速参考
+
+```bash
+# 查看调度器组件状态
+kubectl get componentstatuses | grep scheduler
+
+# 查看 Pod 调度事件
+kubectl describe pod <pod-name> | grep -A 10 Events
+
+# 查看调度器日志
+kubectl logs -n kube-system -l component=kube-scheduler --tail=100
+
+# 查看哪些 Pod 处于 Pending 状态
+kubectl get pods --all-namespaces --field-selector=status.phase=Pending
+
+# 查看节点可分配资源
+kubectl describe node <node-name> | grep -A 10 "Allocatable"
+
+# 查看调度器指标（需要端口转发）
+kubectl port-forward -n kube-system svc/kube-scheduler 10259:10259
+curl -k https://localhost:10259/metrics | grep scheduler_pending_pods
+```
+
+## 交叉引用
+
+- [调度框架](./scheduling-framework.md) — 深入了解调度器插件架构
+- [调度器性能调优](./scheduler-performance-tuning.md) — 大规模集群调度优化
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — 调度队列排序与抢占逻辑
+- [资源装箱](./resource-bin-packing.md) — MostAllocated / RequestedToCapacityRatio 评分策略
+- [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — nodeSelector / affinity 约束
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - kube-scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)

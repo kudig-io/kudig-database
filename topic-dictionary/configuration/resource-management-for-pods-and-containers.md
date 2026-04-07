@@ -70,6 +70,174 @@
 - **使用 ResourceQuota 和 LimitRange**：在命名空间级别限制总资源消耗和默认资源配额，防止单个团队或应用过度使用资源。
 - **区分 CPU 和内存的行为差异**：CPU 是**可压缩资源**（超限时节流），内存是**不可压缩资源**（超限时可能被 Kill），因此内存配置应更加保守。
 
+## 生产 YAML 示例
+
+### Guaranteed QoS Pod（关键服务）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+    spec:
+      containers:
+        - name: app
+          image: registry.example.com/payment:v4.0
+          resources:
+            requests:
+              cpu: "1"                     # requests == limits → Guaranteed QoS
+              memory: 2Gi
+              ephemeral-storage: 1Gi
+            limits:
+              cpu: "1"
+              memory: 2Gi
+              ephemeral-storage: 2Gi
+```
+
+### Burstable QoS Pod（弹性服务）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: production
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: registry.example.com/frontend:v3.0
+          resources:
+            requests:
+              cpu: "250m"                  # requests < limits → Burstable QoS
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+```
+
+### LimitRange + ResourceQuota（命名空间资源治理）
+
+```yaml
+# 1. LimitRange — 默认资源限制
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+  namespace: dev-team-a
+spec:
+  limits:
+    - type: Container
+      default:                             # 未设置 limits 时的默认值
+        cpu: "500m"
+        memory: 512Mi
+      defaultRequest:                      # 未设置 requests 时的默认值
+        cpu: "100m"
+        memory: 128Mi
+      max:
+        cpu: "4"
+        memory: 8Gi
+      min:
+        cpu: "50m"
+        memory: 64Mi
+---
+# 2. ResourceQuota — 命名空间总量限制
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: dev-team-a
+spec:
+  hard:
+    requests.cpu: "20"
+    requests.memory: 40Gi
+    limits.cpu: "40"
+    limits.memory: 80Gi
+    pods: "50"
+    persistentvolumeclaims: "20"
+```
+
+## QoS 等级对比
+
+| QoS 等级 | 条件 | 驱逐优先级 | 适用场景 |
+|-----------|------|-----------|----------|
+| `Guaranteed` | 所有容器 requests == limits | 最低（最后被驱逐） | 关键业务服务 |
+| `Burstable` | 至少一个容器有 requests 但 requests != limits | 中等 | 弹性 Web 服务 |
+| `BestEffort` | 所有容器均无 requests 和 limits | 最高（最先被驱逐） | 开发测试、批处理 |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod OOMKilled | 内存使用超过 limits | `kubectl describe pod` 查看 Last State；增大 memory limits |
+| CPU 性能差（延迟高） | CPU throttling（达到 limits） | `kubectl top pod` 查看 CPU 使用；增大 CPU limits 或优化代码 |
+| Pod 创建被拒绝（Forbidden） | ResourceQuota 超出 | `kubectl describe resourcequota -n <ns>` 检查配额使用情况 |
+| 未设置 limits 但被强制限制 | LimitRange 自动注入默认值 | `kubectl describe limitrange -n <ns>` 查看默认限制 |
+| 节点内存不足但 Pod requests 不高 | BestEffort/Burstable Pod 实际使用远超 requests | 调整 requests 更接近实际使用量 |
+| In-place resize 失败 | 节点容量不足或 resize 策略限制 | 检查 `resizePolicy` 和节点 Allocatable |
+
+## 生产检查清单
+
+- [ ] 所有生产 Pod 设置 CPU 和 Memory 的 requests 和 limits
+- [ ] 关键服务使用 Guaranteed QoS（requests == limits）
+- [ ] 为每个命名空间配置 LimitRange（防止漏设资源限制）
+- [ ] 为每个团队/项目命名空间配置 ResourceQuota
+- [ ] requests 基于实际监控数据的 p90 使用量设置
+- [ ] limits 设置为 requests 的 1.5-2 倍覆盖峰值
+- [ ] Memory backed emptyDir 计入内存使用预算
+- [ ] 监控 CPU throttling（`container_cpu_cfs_throttled_seconds_total`）
+- [ ] 使用 VPA 或 Goldilocks 辅助确定最佳资源配置
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 资源使用
+kubectl top pods -n production
+
+# 查看节点资源分配
+kubectl describe node <node-name> | grep -A 15 "Allocated resources"
+
+# 查看 Pod QoS 等级
+kubectl get pods -n production -o custom-columns='NAME:.metadata.name,QOS:.status.qosClass'
+
+# 查看命名空间 ResourceQuota 使用
+kubectl describe resourcequota -n dev-team-a
+
+# 查看 LimitRange 配置
+kubectl describe limitrange -n dev-team-a
+
+# 查看 Pod 资源配置
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}' | jq .
+
+# 触发 In-place resize（v1.35+）
+kubectl patch pod <pod-name> --subresource resize --type merge \
+  -p '{"spec":{"containers":[{"name":"app","resources":{"requests":{"cpu":"2"},"limits":{"cpu":"2"}}}]}}'
+```
+
+## 交叉引用
+
+- [存活、就绪和启动探针](./liveness-readiness-and-startup-probes.md) — 资源不足可导致探针超时和误判
+- [ConfigMaps](./configmaps.md) — 应用配置中的线程池/连接池大小应与资源 limits 匹配
+- [Windows 节点资源管理](./resource-management-for-windows-nodes.md) — Windows 节点上资源管理的特殊行为
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)

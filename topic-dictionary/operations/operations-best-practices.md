@@ -2960,6 +2960,45 @@ kubectl argo rollouts get rollout <name> -n <namespace>
 | SLI/SLO | [15-sli-slo-sla-engineering.md](15-sli-slo-sla-engineering.md) | 服务质量目标工程 |
 | 故障排查 | [16-production-troubleshooting-playbook.md](16-production-troubleshooting-playbook.md) | 生产故障排查手册 |
 
+## 故障排查
+
+> 本文件为运维最佳实践综合指南。详见上方各章节：1.生产环境配置标准、2.高可用架构模式、3.安全加固指南、4.监控告警、9.故障应急响应。
+
+## 生产检查清单
+
+- [ ] 控制平面高可用（3+ master 节点）
+- [ ] etcd 集群 3 或 5 节点，跨可用区部署
+- [ ] 所有 Namespace 配置 ResourceQuota 和 LimitRange
+- [ ] NetworkPolicy 默认 deny-all，白名单放通
+- [ ] Pod Security Standards 已启用
+- [ ] Prometheus + Alertmanager 监控告警覆盖核心指标
+- [ ] 日志收集（Fluentd/Vector）已统一部署
+- [ ] 灾备恢复方案已制定并季度演练
+- [ ] 成本优化措施已落地并持续跟踪
+
+## 命令快速参考
+
+```bash
+# 集群健康概览
+kubectl cluster-info && kubectl get cs && kubectl get nodes
+
+# 安全扫描 - 查看 Pod 安全上下文
+kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].securityContext.privileged==true) | {ns:.metadata.namespace, name:.metadata.name}'
+
+# 资源使用率排行
+kubectl top pods -A --sort-by=cpu | head -20
+
+# 检查无 limits 的 Pod
+kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].resources.limits==null) | {ns:.metadata.namespace, name:.metadata.name}'
+
+# 查看 PDB 状态
+kubectl get pdb -A
+```
+
+## 交叉引用
+
+- 相关主题：[企业级运维实践](enterprise-ops-practices.md) · [容量规划](capacity-planning-forecasting.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [生产故障排查](production-troubleshooting-playbook.md) · [变更管理](change-management-release.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

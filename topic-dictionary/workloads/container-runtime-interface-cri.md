@@ -69,6 +69,182 @@ CRI 定义了两类核心服务：
 - **升级时先升级运行时或确认兼容性**：在进行 Kubernetes 大版本升级前，确认当前容器运行时的 CRI 支持情况
 - **监控节点注册状态**：若节点长时间 NotReady，可检查 kubelet 日志中是否存在 CRI 连接或版本不相关的错误
 
+## 生产 YAML 示例
+
+### kubelet CRI 端点配置
+
+```yaml
+# /var/lib/kubelet/config.yaml（kubelet 配置文件）
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+containerRuntimeEndpoint: unix:///run/containerd/containerd.sock
+# 或 CRI-O：unix:///var/run/crio/crio.sock
+# 或 cri-dockerd：unix:///var/run/cri-dockerd.sock
+imageServiceEndpoint: ""       # 为空时使用与 containerRuntimeEndpoint 相同的值
+```
+
+### containerd 多 handler 配置
+
+```toml
+# /etc/containerd/config.toml
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+
+  # 默认 runc handler
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      SystemdCgroup = true
+
+  # Kata Containers handler（沙箱运行时）
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata]
+    runtime_type = "io.containerd.kata.v2"
+    privileged_without_host_devices = true
+
+  # gVisor handler
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.gvisor]
+    runtime_type = "io.containerd.runsc.v1"
+```
+
+### CRI-O 运行时配置
+
+```ini
+# /etc/crio/crio.conf.d/10-runtimes.conf
+[crio.runtime]
+default_runtime = "runc"
+
+[crio.runtime.runtimes.runc]
+runtime_path = "/usr/bin/runc"
+runtime_type = "oci"
+monitor_path = "/usr/bin/conmon"
+
+[crio.runtime.runtimes.kata]
+runtime_path = "/usr/bin/kata-runtime"
+runtime_type = "oci"
+privileged_without_host_devices = true
+```
+
+### 结合 RuntimeClass 使用
+
+```yaml
+# RuntimeClass 对象映射到 CRI handler
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: gvisor
+handler: gvisor                  # 对应 containerd 配置中的 handler 名称
+---
+# Pod 使用该 RuntimeClass
+apiVersion: v1
+kind: Pod
+metadata:
+  name: untrusted-workload
+spec:
+  runtimeClassName: gvisor       # 通过 CRI 调用 gvisor handler
+  containers:
+  - name: app
+    image: nginx:1.27
+```
+
+## 运行时对比矩阵
+
+| 维度 | containerd | CRI-O | cri-dockerd |
+|------|-----------|-------|-------------|
+| 定位 | 通用容器运行时 | 专为 K8s 设计 | Docker 适配层 |
+| CNCF 状态 | 毕业项目 | 孵化项目 | 社区维护 |
+| 性能 | 优秀 | 优秀 | 额外开销（经过 Docker） |
+| 镜像构建 | 需搭配 BuildKit/nerdctl | 不支持（需外部工具） | 支持 docker build |
+| 默认 socket | `/run/containerd/containerd.sock` | `/var/run/crio/crio.sock` | `/var/run/cri-dockerd.sock` |
+| 多 handler | 支持（config.toml） | 支持（crio.conf） | 不支持 |
+| 推荐场景 | 通用生产集群 | Red Hat/OpenShift 生态 | 仅限迁移过渡期 |
+
+## CRI 架构流程
+
+```
+                    kubelet
+                      │
+                      │ gRPC (CRI v1)
+                      ▼
+              ┌───────────────┐
+              │   CRI Server  │ (containerd / CRI-O)
+              └───┬───────┬───┘
+                  │       │
+         RuntimeService  ImageService
+              │               │
+    ┌─────────┴──────┐       │
+    │  OCI Runtime   │   Pull/List/Remove
+    │ (runc/kata/    │   Images
+    │  runsc/...)    │
+    └────────────────┘
+
+RuntimeService 操作：
+  - RunPodSandbox / StopPodSandbox / RemovePodSandbox
+  - CreateContainer / StartContainer / StopContainer / RemoveContainer
+  - ListContainers / ContainerStatus
+  - ExecSync / Exec / Attach / PortForward
+
+ImageService 操作：
+  - PullImage / ListImages / RemoveImage / ImageStatus
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 节点 NotReady，kubelet 日志报 CRI 连接失败 | CRI socket 路径不正确或运行时服务未启动 | `systemctl status containerd`；检查 socket 文件是否存在 |
+| kubelet 报 "CRI v1 runtime API is not implemented" | 运行时版本过旧，不支持 CRI v1 | 升级 containerd ≥ 1.6 或 CRI-O ≥ 1.24 |
+| 升级 K8s 后节点无法注册 | 运行时不支持新版 CRI API | 先升级容器运行时，再升级 kubelet |
+| Pod 创建超时 | 运行时响应慢或 hang | `crictl pods`/`crictl ps` 检查运行时状态；查看 containerd/cri-o 日志 |
+| 镜像拉取失败但网络正常 | CRI ImageService 配置问题 | `crictl pull <image>` 直接测试；检查 mirror/proxy 配置 |
+
+## 生产检查清单
+
+- [ ] 容器运行时支持 CRI v1 API（containerd ≥ 1.6，CRI-O ≥ 1.24）
+- [ ] kubelet 的 `containerRuntimeEndpoint` 指向正确的 socket 路径
+- [ ] 运行时配置了 systemd cgroup driver（与 kubelet 一致）
+- [ ] 多 handler 场景下各 handler 配置正确并已测试
+- [ ] 运行时服务设置为开机自启（`systemctl enable containerd`）
+- [ ] 升级 Kubernetes 前先确认运行时版本兼容性
+- [ ] 监控运行时进程的 CPU/内存使用和 gRPC 延迟
+
+## 命令快速参考
+
+```bash
+# 检查运行时版本
+containerd --version
+crio --version
+
+# 使用 crictl 诊断（CRI 命令行工具）
+crictl info                            # 运行时基本信息
+crictl pods                            # 列出 sandbox
+crictl ps -a                           # 列出所有容器
+crictl images                          # 列出镜像
+crictl pull registry.example.com/app:v1   # 测试镜像拉取
+crictl stats                           # 容器资源使用统计
+
+# 检查 kubelet 的 CRI 配置
+ps aux | grep kubelet | grep container-runtime-endpoint
+
+# 检查 socket 文件
+ls -la /run/containerd/containerd.sock
+ls -la /var/run/crio/crio.sock
+
+# 查看运行时日志
+journalctl -u containerd -f --no-pager
+journalctl -u crio -f --no-pager
+
+# 重启运行时（影响节点上所有容器）
+sudo systemctl restart containerd
+```
+
+## 交叉引用
+
+- [RuntimeClass](runtime-class.md) — 如何通过 RuntimeClass 选择不同 CRI handler
+- [容器镜像](images.md) — ImageService 的镜像拉取策略
+- [高级 Pod 配置](advanced-pod-configuration.md) — 安全运行时与隔离配置
+
 ## 参考链接
 
 - [Kubernetes 官方文档：容器运行时接口（CRI）](https://kubernetes.io/docs/concepts/containers/cri/)

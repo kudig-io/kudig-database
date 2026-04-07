@@ -50,6 +50,102 @@ kube-scheduler 是 Kubernetes 的默认调度器，负责将 Pod 放置到集群
 - 检查的可行节点越少，某些可能获得更高评分的节点可能根本不会进入评分阶段，导致次优放置。
 - 启用 Opportunistic Batching 时，需要满足特定配置条件（禁用默认拓扑分布、禁用 DRAExtendedResource 等）。
 
+## 生产 YAML 示例
+
+### 大规模集群调度器性能配置
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+percentageOfNodesToScore: 15               # 5000+ 节点集群建议 10-20%
+profiles:
+  - schedulerName: default-scheduler
+    plugins:
+      score:
+        enabled:
+          - name: NodeResourcesBalancedAllocation
+            weight: 1
+          - name: ImageLocality
+            weight: 1
+    pluginConfig:
+      - name: DefaultPreemption
+        args:
+          minCandidateNodesPercentage: 10   # 抢占时评估的最小候选节点百分比
+          minCandidateNodesAbsolute: 100
+```
+
+### 启用 Opportunistic Batching（v1.35+ beta）
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+percentageOfNodesToScore: 10
+profiles:
+  - schedulerName: default-scheduler
+    plugins:
+      preScore:
+        disabled:
+          - name: PodTopologySpread         # Opportunistic Batching 要求禁用
+      score:
+        disabled:
+          - name: PodTopologySpread
+    pluginConfig:
+      - name: DefaultPreemption
+        args:
+          minCandidateNodesPercentage: 5
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 调度延迟 > 1s | percentageOfNodesToScore 过高或集群规模大 | 降低 `percentageOfNodesToScore`；检查 `scheduler_scheduling_attempt_duration_seconds` |
+| Pod 被调度到非最优节点 | percentageOfNodesToScore 过低 | 提高百分比或检查 Score 插件配置 |
+| 批量创建 Pod 时调度吞吐量低 | 未启用 Opportunistic Batching | 确认 v1.35+；检查是否满足 batching 前置条件 |
+| Batching 缓存命中率低 | Pod 间亲和性 / 拓扑分布约束阻止 batching | 对批量 Pod 移除 podAffinity 和 topologySpreadConstraints |
+| 调度器 CPU 使用率异常高 | Filter 阶段插件过多或节点数过大 | 使用 profiling 工具分析；禁用不必要的 Filter 插件 |
+
+## 生产检查清单
+
+- [ ] 100 节点以下集群保持默认值，无需调整
+- [ ] 1000+ 节点集群设置 `percentageOfNodesToScore` 为 10-25%
+- [ ] 5000+ 节点集群设置 `percentageOfNodesToScore` 为 5-15%
+- [ ] 监控 `scheduler_scheduling_attempt_duration_seconds` p99 延迟
+- [ ] 监控 `scheduler_schedule_attempts_total` 吞吐量
+- [ ] 批量工作负载场景评估启用 Opportunistic Batching
+- [ ] 禁用不需要的 Score 插件减少评分开销
+- [ ] 配置调度器 HA（多副本 + Leader Election）
+
+## 命令快速参考
+
+```bash
+# 查看调度器当前配置
+kubectl get cm -n kube-system kube-scheduler-config -o yaml
+
+# 查看调度延迟指标
+kubectl port-forward -n kube-system svc/kube-scheduler 10259:10259
+curl -sk https://localhost:10259/metrics | grep scheduler_scheduling_attempt_duration
+
+# 查看调度吞吐量
+curl -sk https://localhost:10259/metrics | grep scheduler_schedule_attempts_total
+
+# 查看 pending Pod 队列深度
+curl -sk https://localhost:10259/metrics | grep scheduler_pending_pods
+
+# 查看调度器 Leader 信息
+kubectl get leases -n kube-system kube-scheduler -o yaml
+
+# 查看调度器资源使用
+kubectl top pod -n kube-system -l component=kube-scheduler
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 过滤与评分两阶段流程
+- [调度框架](./scheduling-framework.md) — 各扩展点的性能影响
+- [资源装箱](./resource-bin-packing.md) — MostAllocated 策略的评分效率
+- [Pod 拓扑分布约束](./pod-topology-spread-constraints.md) — 拓扑分布与 Batching 的冲突
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Scheduler Performance Tuning](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduler-perf-tuning/)

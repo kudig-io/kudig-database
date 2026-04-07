@@ -86,6 +86,88 @@ Flux 的 Image Automation Controller 可：
 - **多租户隔离**：为不同团队创建独立的 Application/Namespace，配置 ResourceQuota 和 NetworkPolicy
 - **Git 分支策略**：生产环境仅接受 main 分支的同步，所有变更必须经过 PR Review 和自动化检查
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| Application 状态为 OutOfSync | Git 与集群状态不一致 | `argocd app diff <app>` 查看差异；检查是否有手动修改 |
+| Sync 失败 | YAML 语法错误或资源冲突 | `argocd app sync <app> --dry-run`；查看 Argo CD UI 的 Sync 错误详情 |
+| Git 仓库连接失败 | 凭证过期或网络问题 | `argocd repo list` 检查仓库状态；验证 SSH Key/Token 有效性 |
+| Helm 渲染失败 | values 文件缺失或版本不兼容 | `helm template` 本地验证；检查 Chart.yaml 依赖版本 |
+| Flux Kustomization 未就绪 | Source 未同步或依赖未满足 | `flux get kustomizations`；`flux get sources git` |
+| 集群状态持续漂移 | 有外部系统/CRD 控制器持续修改资源 | 配置 Argo CD 的 ignoreDifferences 排除受管字段 |
+| Image Automation 未更新标签 | Image Policy 未匹配或权限不足 | `flux get image policy`；检查 Git Push 权限 |
+| 多集群同步延迟大 | 控制器资源不足或并发限制 | 检查 Argo CD controller 日志；调整 `--app-resync` 和 `--repo-server-timeout` |
+
+## 生产检查清单
+
+- [ ] Source Repo 与 Config Repo 分离，应用代码和部署配置独立管理
+- [ ] 生产环境仅同步 main/release 分支，PR 必须经过 Review
+- [ ] Secret 使用 External Secrets Operator 或 Sealed Secrets 管理，不存入 Git
+- [ ] Argo CD/Flux 控制器使用最小权限 RBAC，仅限目标 Namespace
+- [ ] 配置 Sync Windows，禁止在业务高峰时段自动同步
+- [ ] 漂移检测告警已配置（Slack/PagerDuty），OutOfSync 超过 15 分钟告警
+- [ ] Argo CD/Flux 控制器本身配置了 HA（多副本 + PDB）
+- [ ] Git 仓库凭证定期轮换，使用短期 Token 而非长期密码
+- [ ] 关键应用配置了 Resource Hooks（PreSync/PostSync）进行数据库迁移等操作
+- [ ] 回滚流程已验证：Git Revert → Sync → 集群状态恢复
+
+## 命令快速参考
+
+```bash
+# --- Argo CD ---
+# 查看所有 Application 状态
+argocd app list
+
+# 查看特定 Application 详情
+argocd app get <app-name>
+
+# 查看 Sync 差异
+argocd app diff <app-name>
+
+# 手动触发同步
+argocd app sync <app-name>
+
+# Dry-run 同步（不实际执行）
+argocd app sync <app-name> --dry-run
+
+# 回滚到上一个版本
+argocd app rollback <app-name>
+
+# 查看同步历史
+argocd app history <app-name>
+
+# --- Flux ---
+# 查看所有 Git Source 状态
+flux get sources git
+
+# 查看所有 Kustomization 状态
+flux get kustomizations
+
+# 查看所有 HelmRelease 状态
+flux get helmreleases
+
+# 手动触发 Source 同步
+flux reconcile source git <name>
+
+# 手动触发 Kustomization 同步
+flux reconcile kustomization <name>
+
+# 查看 Image Policy 状态
+flux get image policy
+
+# 查看 Flux 系统日志
+flux logs --all-namespaces
+```
+
+## 交叉引用
+
+- [infrastructure-as-code-for-kubernetes.md](./infrastructure-as-code-for-kubernetes.md) — IaC 与 GitOps 的分层架构
+- [cluster-api-and-fleet-management.md](./cluster-api-and-fleet-management.md) — 多集群 GitOps 交付
+- [developer-portal-and-platform-metrics.md](./developer-portal-and-platform-metrics.md) — 开发者门户与 GitOps 集成
+- [operator-pattern.md](./operator-pattern.md) — Operator 的 GitOps 部署管理
+- [../configuration/secrets.md](../configuration/secrets.md) — Secret 管理与 GitOps 安全实践
+
 ## 参考链接
 
 - [Argo CD Documentation](https://argo-cd.readthedocs.io/)

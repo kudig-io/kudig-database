@@ -2719,6 +2719,45 @@ Q5-Q6: 全面推广
 | [../topic-structural-trouble-shooting/README.md](../topic-structural-trouble-shooting/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
 | [../topic-presentations/kubernetes-observability-presentation.md](../topic-presentations/kubernetes-observability-presentation.md) | 知识扩展 | 可观测性演讲稿深入讲解监控体系建设,是第3节的补充 |
 
+## 故障排查
+
+> 本文件为 SRE 运维成熟度模型完整指南。详见上方各章节：1.运维成熟度评估标准、2.自动化能力分级、3.监控体系建设、4.运维流程标准化、5.团队能力建设路径、6.成熟度评估工具。
+
+## 生产检查清单
+
+- [ ] SRE 成熟度评估已完成（L1-L5 分级）
+- [ ] 自动化能力覆盖部署、扩缩容、故障自愈
+- [ ] 监控体系（指标、日志、追踪）三大支柱已建立
+- [ ] 运维流程标准化（SOP/Runbook）覆盖率 >80%
+- [ ] 团队能力建设路径和培训计划已制定
+- [ ] 定期（半年）进行成熟度评估并跟踪改进
+- [ ] SRE 转型路线图有明确的里程碑和 Owner
+- [ ] 知识管理（Wiki/知识库）持续更新
+
+## 命令快速参考
+
+```bash
+# 查看自动化覆盖率 - 检查 HPA 覆盖
+kubectl get hpa -A | wc -l
+
+# 查看 PDB 覆盖率
+kubectl get pdb -A | wc -l
+
+# 监控覆盖率 - 检查 ServiceMonitor
+kubectl get servicemonitor -A | wc -l
+
+# 查看告警规则数量
+kubectl get prometheusrule -A -o json | jq '[.items[].spec.groups[].rules | length] | add'
+
+# 自动化工具链检查
+helm list -A | wc -l
+kubectl get crd | wc -l
+```
+
+## 交叉引用
+
+- 相关主题：[运维最佳实践](operations-best-practices.md) · [企业级运维实践](enterprise-ops-practices.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [事故管理](incident-management-runbooks.md) · [混沌工程](chaos-engineering.md)
+
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

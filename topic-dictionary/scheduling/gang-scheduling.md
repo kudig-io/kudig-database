@@ -41,6 +41,108 @@ Gang Scheduling 依赖于 Workload API。需要启用 `GenericWorkload` 特性�
 - 由于当前是 alpha 特性，实现方式是基于逐个 Pod 调度，可能存在一定的调度延迟。
 - 超时后 Pod 会进入不可调度队列，工作负载设计需要能容忍这种等待。
 
+## 生产 YAML 示例
+
+### Workload 定义（Gang Pod Group）
+
+```yaml
+apiVersion: scheduling.k8s.io/v1alpha1
+kind: Workload
+metadata:
+  name: distributed-training-job
+  namespace: ml-platform
+spec:
+  podGroups:
+    - name: workers
+      policy: gang
+      minCount: 4                          # 至少 4 个 worker 同时调度
+      selector:
+        matchLabels:
+          app: pytorch-trainer
+          role: worker
+```
+
+### 引用 Workload 的 Pod（PyTorch 分布式训练）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pytorch-worker-0
+  namespace: ml-platform
+  labels:
+    app: pytorch-trainer
+    role: worker
+  annotations:
+    scheduling.k8s.io/workload: distributed-training-job
+    scheduling.k8s.io/pod-group: workers
+spec:
+  containers:
+    - name: trainer
+      image: registry.example.com/pytorch-trainer:v2.3
+      resources:
+        requests:
+          cpu: "8"
+          memory: 32Gi
+          nvidia.com/gpu: "1"
+        limits:
+          nvidia.com/gpu: "1"
+      env:
+        - name: WORLD_SIZE
+          value: "4"
+        - name: RANK
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
+  restartPolicy: Never
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 所有 Pod 卡在 PreEnqueue，不进入调度队列 | Workload 对象未创建或 Pod 数量不满足 minCount | 确认 Workload 对象存在；检查创建的 Pod 数量 >= minCount |
+| Pod 在 WaitOnPermit 超时后全部被退回 | 集群资源不足，无法同时放置 minCount 个 Pod | 检查集群可用资源；考虑增加节点或降低 minCount |
+| 部分 Pod 调度成功但部分失败 | 非 gang 策略的 Pod 被混入 | 确认所有相关 Pod 的 annotation 正确引用 Workload 和 pod-group |
+| 特性门控未启用导致功能无效 | GenericWorkload 特性门控未开启 | 确认 apiserver 和 scheduler 启用 `GenericWorkload` 和 `scheduling.k8s.io/v1alpha1` |
+
+## 生产检查清单
+
+- [ ] 启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组
+- [ ] 在调度器配置中启用 `GangScheduling` 插件
+- [ ] 合理设置 `minCount`（不宜过大，避免长时间无法满足法定数量）
+- [ ] 为分布式训练 Pod 设置合理的资源请求，避免碎片化
+- [ ] 配置 Karpenter / Cluster Autoscaler 感知 gang 调度需求
+- [ ] 监控 WaitOnPermit 超时事件，设置告警
+- [ ] 工作负载设计需容忍 5 分钟超时后的重试
+
+## 命令快速参考
+
+```bash
+# 查看 Workload 对象
+kubectl get workloads -n ml-platform
+
+# 查看 Workload 详情
+kubectl describe workload distributed-training-job -n ml-platform
+
+# 查看 gang 组内 Pod 状态
+kubectl get pods -n ml-platform -l app=pytorch-trainer,role=worker
+
+# 查看调度器日志中 gang 相关事件
+kubectl logs -n kube-system -l component=kube-scheduler | grep -i gang
+
+# 查看 Pending Pod 的调度事件
+kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度周期与绑定周期
+- [调度框架](./scheduling-framework.md) — PreEnqueue / Permit 扩展点
+- [Pod 调度就绪性](./pod-scheduling-readiness.md) — schedulingGates 与 gang 调度互补
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — gang 组 Pod 的优先级设置
+- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 gang 组快速准备节点
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Gang Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/gang-scheduling/)

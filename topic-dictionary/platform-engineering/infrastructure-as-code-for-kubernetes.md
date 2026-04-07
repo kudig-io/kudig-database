@@ -147,6 +147,113 @@ Layer 1: 基础设施（Foundation Infrastructure）
 - **文档化变量**：所有输入变量都应有清晰的描述、类型约束和默认值，降低使用门槛
 - **备份 State 文件**：State 文件损坏或丢失可能导致资源孤儿化，必须定期备份
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令/方法 |
+|------|---------|-------------|
+| `terraform apply` 失败 | Provider 认证过期或 API 配额超限 | `terraform plan` 查看错误详情；检查云凭证有效性 |
+| State 文件锁定无法释放 | 上次操作异常中断 | `terraform force-unlock <lock-id>`；检查 DynamoDB 锁表 |
+| State 中资源与实际不一致（Drift） | 手动修改了云资源 | `terraform plan` 检测漂移；`terraform refresh` 更新 State |
+| Crossplane 资源长时间 Pending | Provider 配置错误或 CRD 未安装 | `kubectl describe <managed-resource>`；检查 Provider Pod 日志 |
+| Pulumi up 报 conflict 错误 | 并发操作或 State 不一致 | `pulumi refresh`；确保同一时间只有一个操作 |
+| Module 版本升级后出错 | 上游 Module 引入破坏性变更 | 锁定 Module 版本；使用 `~>` 版本约束 |
+| IaC 安全扫描大量告警 | 默认配置不满足安全基线 | 根据 Checkov/tfsec 输出逐项修复；配置 baseline 忽略规则 |
+| Terraform Plan 显示大量不必要变更 | Provider 版本升级导致 Schema 变化 | 锁定 Provider 版本；使用 `ignore_changes` 排除特定字段 |
+
+## 生产检查清单
+
+- [ ] State 文件加密存储在远程后端（S3 + DynamoDB / Terraform Cloud）
+- [ ] State 文件定期备份，丢失恢复流程已验证
+- [ ] Terraform/Pulumi 使用的云凭证遵循最小权限原则
+- [ ] 所有 IaC 变更必须通过 CI Pipeline 的 `plan`/`preview` 审查
+- [ ] Provider 和 Module 版本已锁定（`.terraform.lock.hcl` / `go.sum`）
+- [ ] IaC 安全扫描（Checkov/tfsec/Snyk）集成到 CI Pipeline
+- [ ] dev/staging/production 使用独立的 State 文件和工作区
+- [ ] 定期运行 `terraform plan` 检测配置漂移（建议每日）
+- [ ] 所有输入变量有清晰的描述、类型约束和默认值
+- [ ] 三层 IaC 架构已建立（Foundation → Platform → Application）
+- [ ] Crossplane 管理的云资源与 GitOps 集成
+
+## 命令快速参考
+
+```bash
+# --- Terraform ---
+# 初始化工作区
+terraform init
+
+# 查看执行计划
+terraform plan
+
+# 应用变更
+terraform apply
+
+# 检测配置漂移
+terraform plan -detailed-exitcode
+
+# 更新 State 与实际资源同步
+terraform refresh
+
+# 释放锁定
+terraform force-unlock <lock-id>
+
+# 导入已有资源到 State
+terraform import <resource_type>.<name> <cloud_resource_id>
+
+# 查看 State 中的资源列表
+terraform state list
+
+# 删除 State 中的资源记录（不删除实际资源）
+terraform state rm <resource_address>
+
+# 输出格式化的 Plan 文件
+terraform plan -out=tfplan && terraform show -json tfplan > plan.json
+
+# --- Pulumi ---
+# 预览变更
+pulumi preview
+
+# 应用变更
+pulumi up
+
+# 刷新 State
+pulumi refresh
+
+# 查看 Stack 输出
+pulumi stack output
+
+# --- Crossplane ---
+# 查看 Crossplane 管理的云资源
+kubectl get managed
+
+# 查看特定 Provider 的资源状态
+kubectl get <provider-resource> -A
+
+# 查看 Crossplane Provider 状态
+kubectl get providers
+
+# 查看 Composition 和 XRD
+kubectl get compositions
+kubectl get compositeresourcedefinitions
+
+# --- IaC 安全扫描 ---
+# Checkov 扫描 Terraform
+checkov -d .
+
+# tfsec 扫描
+tfsec .
+
+# Snyk IaC 扫描
+snyk iac test
+```
+
+## 交叉引用
+
+- [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — GitOps 与 IaC 的分层协作
+- [cluster-api-and-fleet-management.md](./cluster-api-and-fleet-management.md) — Cluster API 作为 IaC 管理集群
+- [developer-portal-and-platform-metrics.md](./developer-portal-and-platform-metrics.md) — 开发者自助申请触发 IaC 自动化
+- [custom-resources.md](./custom-resources.md) — Crossplane 使用 CRD 管理云资源
+- [operator-pattern.md](./operator-pattern.md) — Crossplane Provider 的 Operator 模式
+
 ## 参考链接
 
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)

@@ -87,12 +87,53 @@ Kubernetes 资源优化直接带来能耗降低：
 - **考虑隐含碳排放**：硬件采购决策应考虑设备制造过程中的碳排放，优先选择碳中和认证的云服务
 - **定期评估供应商可持续性**：审查云服务商和硬件供应商的可再生能源使用比例和碳中和承诺
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| Kepler 指标为零 | RAPL 接口不可用或 eBPF 未加载 | `kubectl logs -n kepler kepler-*` | 确认节点支持 RAPL，内核启用 eBPF |
+| 碳感知调度器未生效 | 碳强度 API 不可达 | 检查 Electricity Maps / WattTime API 连通性 | 配置 API key 和网络出口策略 |
+| 能耗数据不准确 | 虚拟机环境无法直接读取 RAPL | `cat /sys/class/powercap/intel-rapl:0/energy_uj` | 使用 Kepler 的估算模型替代直接读取 |
+| 批处理任务未在低碳时段运行 | 调度器插件优先级配置错误 | 查看自定义调度器配置 | 确认碳感知插件的 Score 权重设置 |
+| kube-green 环境未按时关闭 | SleepInfo CR 时区不匹配 | `kubectl get sleepinfo -A -o yaml` | 设置正确的 timezone 字段 |
+
+## 生产检查清单
+
+- [ ] Kepler 已部署并导出 Pod 级能耗 Prometheus 指标
+- [ ] 碳强度 API（Electricity Maps / WattTime）已集成
+- [ ] 非紧急批处理任务配置了碳感知调度策略
+- [ ] 非生产环境配置了自动休眠（kube-green）
+- [ ] ARM 节点池已创建用于能效优化的无状态工作负载
+- [ ] 能耗和碳排放仪表盘对各团队可见
+- [ ] 季度碳排放报告流程已建立（ESG 合规）
+- [ ] swap 加密已启用以降低数据安全风险
+
+## 命令快速参考
+
+```bash
+# 查看 Kepler Pod 级能耗指标
+kubectl port-forward -n kepler svc/kepler 9103:9103
+curl -s localhost:9103/metrics | grep kepler_container_joules_total
+
+# 查看节点能耗汇总（PromQL）
+# sum(rate(kepler_container_joules_total[5m])) by (node)
+
+# 查看 kube-green SleepInfo 状态
+kubectl get sleepinfo -A
+
+# 检查 ARM 节点
+kubectl get nodes -l kubernetes.io/arch=arm64
+
+# 查看云厂商碳足迹
+# AWS: aws ce get-cost-and-usage --granularity MONTHLY --metrics "CO2e"
+# GCP: bq query --use_legacy_sql=false 'SELECT * FROM carbon_footprint.carbon_footprint'
+```
+
+## 交叉引用
 
 - [Kepler GitHub Repository](https://github.com/sustainable-computing-io/kepler)
 - [Green Software Foundation](https://greensoftware.foundation/)
 - [SCI Specification - Software Carbon Intensity](https://sci.greensoftware.foundation/)
 - [Electricity Maps](https://app.electricitymaps.com/)
 - [WattTime API](https://www.watttime.org/)
-- [Loginline - 10 Kubernetes Trends That Will Redefine Cloud Computing in 2026](https://www.loginline.com/en/blog/2026-kubernetes-trends)
-- [Ajeet Singh Raina - Top 5 Trends Shaping Kubernetes in 2026](https://www.ajeetraina.com/top-5-trends-shaping-kubernetes-in-2026/)
+- 相关主题：[FinOps 与成本优化](finops-and-cost-optimization.md) · [Kubernetes Scheduler](../scheduling/kubernetes-scheduler.md) · [Karpenter Autoscaling](../scheduling/karpenter-autoscaling.md)

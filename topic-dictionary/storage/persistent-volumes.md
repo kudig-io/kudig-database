@@ -69,6 +69,119 @@ PersistentVolume（PV）和 PersistentVolumeClaim（PVC）是 Kubernetes 中用�
 - 注意不同存储插件对访问模式的支持差异，选择合适的访问模式。
 - 尽量使用 CSI 驱动，避免依赖已弃用或移除的 in-tree 插件。
 
+## 生产 YAML 示例
+
+### PVC + StorageClass 动态供给
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+  namespace: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3-encrypted          # 引用 StorageClass
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: database
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data
+```
+
+### 从快照恢复 PVC
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-restored
+  namespace: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp3-encrypted
+  resources:
+    requests:
+      storage: 100Gi
+  dataSource:
+    name: postgres-snapshot-20260407
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| PVC 一直 Pending | 无匹配 PV 或 StorageClass provisioner 异常 | `kubectl describe pvc` 查看 Events；检查 CSI 驱动 Pod 日志 |
+| PV 状态为 Released 但无法被新 PVC 绑定 | Retain 策略下 PV 需要手动清理 | 删除 PV 的 `claimRef`：`kubectl patch pv <name> -p '{"spec":{"claimRef":null}}'` |
+| 卷扩展后容器内大小未变 | 文件系统未扩展 | 检查 PVC conditions `FileSystemResizePending`；确认 CSI 支持在线扩展 |
+| Pod 被删除但 PV 未释放 | Storage Object in Use Protection | PVC 被 Pod 引用时有 Finalizer 保护；等待 Pod 终止 |
+
+## 生产检查清单
+
+- [ ] 使用动态供给 + StorageClass，避免手动创建 PV
+- [ ] 关键数据 PV 使用 `reclaimPolicy: Retain`
+- [ ] StorageClass 启用 `allowVolumeExpansion: true`
+- [ ] 拓扑受限存储使用 `volumeBindingMode: WaitForFirstConsumer`
+- [ ] 需要严格单 Pod 访问时使用 RWOP 访问模式
+- [ ] 迁移 in-tree 插件到 CSI 驱动
+
+## 命令快速参考
+
+```bash
+# 查看 PV/PVC 状态
+kubectl get pv,pvc -n database
+
+# 查看 PVC 详情
+kubectl describe pvc postgres-data -n database
+
+# 扩展 PVC
+kubectl patch pvc postgres-data -n database -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+
+# 清理 Released PV 的 claimRef
+kubectl patch pv <pv-name> -p '{"spec":{"claimRef":null}}'
+```
+
+## 交叉引用
+
+- [存储类](./storage-classes.md) — StorageClass 定义与 provisioner 配置
+- [卷快照](./volume-snapshots.md) — 从快照恢复 PVC
+- [CSI 卷克隆](./csi-volume-cloning.md) — 从现有 PVC 克隆
+- [动态卷供给](./dynamic-volume-provisioning.md) — 动态供给机制
+- [卷](./volumes.md) — 卷类型总览
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/persistent-volumes/

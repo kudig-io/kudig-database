@@ -2952,4 +2952,46 @@ groups:
 > **最后更新**: 2026-02 | **维护者**: Kubernetes SRE团队  
 > **反馈渠道**: 如发现内容问题或有优化建议,请提交Issue
 
+## 故障排查
+
+> 本文件为性能调优专家指南。详见上方各章节：1.系统性能瓶颈识别、2.资源优化策略、3.调度器调优、4.网络性能优化、5.存储IO调优、6.应用层优化。
+
+## 生产检查清单
+
+- [ ] 性能基准测试已建立（Pod 启动延迟、API 调用延迟、网络吞吐）
+- [ ] 节点 kernel 参数已调优（conntrack、net.core、vm）
+- [ ] 调度器 percentageOfNodesToScore 已根据集群规模优化
+- [ ] CNI 插件性能已评估（考虑 eBPF/Cilium）
+- [ ] 存储 IOPS 和延迟已基准测试并匹配工作负载需求
+- [ ] JVM/Go/Python 应用的运行时参数已调优
+- [ ] 性能监控仪表盘覆盖关键路径
+- [ ] 定期（季度）进行性能基准回归测试
+
+## 命令快速参考
+
+```bash
+# CPU 性能分析
+kubectl top nodes --sort-by=cpu
+kubectl top pods -A --sort-by=cpu | head -20
+
+# 网络延迟测试
+kubectl exec -it <pod> -- curl -o /dev/null -s -w "DNS: %{time_namelookup}s, Connect: %{time_connect}s, Total: %{time_total}s\n" http://<svc>
+
+# 存储 IOPS 测试
+kubectl exec -it <pod> -- fio --name=test --size=1G --rw=randread --bs=4k --runtime=30
+
+# API Server 延迟
+kubectl get --raw /metrics | grep apiserver_request_duration
+
+# 调度器性能
+kubectl get --raw /metrics | grep scheduler_scheduling_duration
+
+# conntrack 表使用率
+cat /proc/sys/net/netfilter/nf_conntrack_count && cat /proc/sys/net/netfilter/nf_conntrack_max
+```
+
+## 交叉引用
+
+- 相关主题：[运维最佳实践](operations-best-practices.md) · [容量规划](capacity-planning-forecasting.md) · [Scheduler Performance Tuning](../scheduling/scheduler-performance-tuning.md) · [eBPF and Cilium Networking](../networking/ebpf-and-cilium-networking.md)
+
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com) | 最后更新: 2026-02 | 版本: v1.25-v1.32 | 质量等级: ⭐⭐⭐⭐⭐ 专家级

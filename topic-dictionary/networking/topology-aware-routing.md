@@ -41,6 +41,98 @@
 - **关注控制器和节点标签**：确保所有工作节点都正确设置了 zone 标签，并且控制平面节点若运行工作负载也纳入考量。
 - **监控与回退**：应监控 Service 的 EndpointSlice hints 设置情况，及时发现因 safeguards 触发导致的回退行为。
 
+## 生产 YAML 示例
+
+### 启用拓扑感知路由
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-backend
+  namespace: production
+  annotations:
+    service.kubernetes.io/topology-mode: Auto     # 启用拓扑感知路由
+spec:
+  selector:
+    app: api-backend
+  ports:
+  - port: 80
+    targetPort: 8080
+  # 注意：不能同时设置 internalTrafficPolicy: Local
+```
+
+### 确保每个可用区有足够端点
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-backend
+  namespace: production
+spec:
+  replicas: 9                      # 3 个 zone × 每 zone 至少 3 个
+  selector:
+    matchLabels:
+      app: api-backend
+  template:
+    metadata:
+      labels:
+        app: api-backend
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: api-backend
+      containers:
+      - name: api
+        image: registry.example.com/apps/api:v3.0
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| EndpointSlice 无 hints | Safeguard 触发回退 | `kubectl get endpointslice -l kubernetes.io/service-name=<svc> -o yaml` 检查 hints 字段 |
+| 流量仍跨可用区 | 端点数 < zone 数或节点缺少 zone 标签 | `kubectl get nodes --show-labels \| grep zone` |
+| 局部端点过载 | 流量集中在某个 zone | 评估使用 `trafficDistribution` 替代 |
+| 与 internalTrafficPolicy 冲突 | 同一 Service 同时配置了两者 | 移除其中一个配置 |
+
+## 生产检查清单
+
+- [ ] 所有工作节点设置 `topology.kubernetes.io/zone` 标签
+- [ ] 每个 zone 至少 3 个端点（否则可能回退到全集群路由）
+- [ ] 不与 `internalTrafficPolicy: Local` 同时使用
+- [ ] 使用 topologySpreadConstraints 保证 Pod 跨 zone 均匀分布
+- [ ] 监控 EndpointSlice hints 设置情况
+
+## 命令快速参考
+
+```bash
+# 查看节点 zone 标签
+kubectl get nodes -L topology.kubernetes.io/zone
+
+# 检查 EndpointSlice 的 hints
+kubectl get endpointslice -l kubernetes.io/service-name=<svc> -o json | jq '.items[].endpoints[] | {address: .addresses[0], zone: .zone, hints: .hints}'
+
+# 查看 Service 注解
+kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
+```
+
+## 交叉引用
+
+- [Service Internal Traffic Policy](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
+- [EndpointSlices](endpointslices.md) — hints 字段和 zone 信息
+- [Service](service.md) — trafficDistribution 字段
+- [Cluster Networking](cluster-networking.md) — 跨可用区流量优化
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/

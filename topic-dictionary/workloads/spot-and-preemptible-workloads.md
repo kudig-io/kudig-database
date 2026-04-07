@@ -90,11 +90,244 @@ Kubernetes 提供了多个机制配合 Spot 实例：
 - **避免跨可用区通信**：Spot 节点分散在不同 AZ 时，注意控制平面和数据传输的跨 AZ 带宽成本
 - **成本建模**：不仅比较实例单价，还需考虑因中断导致的重复计算成本和额外存储开销
 
+## 生产 YAML 示例
+
+### Spot 节点 Taint + Toleration 配置
+
+```yaml
+# Karpenter NodePool 定义 Spot 节点
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: spot-gpu-pool
+spec:
+  template:
+    spec:
+      requirements:
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values: ["spot"]               # 仅使用 Spot 实例
+      - key: node.kubernetes.io/instance-type
+        operator: In
+        values:                        # 多实例类型提高 Spot 可用性
+        - p3.2xlarge
+        - p3.8xlarge
+        - g5.2xlarge
+        - g5.4xlarge
+      - key: topology.kubernetes.io/zone
+        operator: In
+        values: ["us-east-1a", "us-east-1b", "us-east-1c"]
+      taints:
+      - key: spot-instance
+        value: "true"
+        effect: NoSchedule
+  limits:
+    cpu: "1000"
+    nvidia.com/gpu: "64"
+---
+# 训练 Job 容忍 Spot 节点 taint
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: llm-finetune
+  namespace: ml-team
+spec:
+  parallelism: 8
+  completions: 8
+  completionMode: Indexed
+  template:
+    spec:
+      tolerations:
+      - key: spot-instance
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+      containers:
+      - name: trainer
+        image: registry.example.com/ml/trainer:v5.0
+        env:
+        - name: CHECKPOINT_DIR
+          value: "s3://ml-checkpoints/llm-finetune/"
+        - name: CHECKPOINT_INTERVAL_MINUTES
+          value: "10"                    # 每 10 分钟 checkpoint
+        resources:
+          requests:
+            nvidia.com/gpu: "1"
+            memory: "32Gi"
+            cpu: "8"
+          limits:
+            nvidia.com/gpu: "1"
+            memory: "32Gi"
+      restartPolicy: Never
+  backoffLimit: 10                      # Spot 中断需要多次重试
+```
+
+### Node Termination Handler DaemonSet
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: aws-node-termination-handler
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: aws-node-termination-handler
+  template:
+    metadata:
+      labels:
+        app: aws-node-termination-handler
+    spec:
+      nodeSelector:
+        karpenter.sh/capacity-type: spot    # 仅在 Spot 节点运行
+      tolerations:
+      - key: spot-instance
+        operator: Exists
+      serviceAccountName: nth-sa
+      hostNetwork: true
+      containers:
+      - name: handler
+        image: public.ecr.aws/aws-ec2/aws-node-termination-handler:1.22
+        env:
+        - name: ENABLE_SPOT_INTERRUPTION_DRAINING
+          value: "true"
+        - name: ENABLE_REBALANCE_DRAINING
+          value: "true"
+        - name: GRACE_PERIOD
+          value: "120"                      # 与 Pod terminationGracePeriodSeconds 匹配
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+      priorityClassName: system-node-critical
+```
+
+### Kueue Spot 队列配置
+
+```yaml
+# ResourceFlavor 标记 Spot 容量
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: ResourceFlavor
+metadata:
+  name: spot-gpu
+spec:
+  nodeLabels:
+    karpenter.sh/capacity-type: spot
+  tolerations:
+  - key: spot-instance
+    operator: Exists
+---
+# ClusterQueue 定义 Spot 资源配额
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: ClusterQueue
+metadata:
+  name: spot-training-queue
+spec:
+  resourceGroups:
+  - coveredResources: ["cpu", "memory", "nvidia.com/gpu"]
+    flavors:
+    - name: spot-gpu
+      resources:
+      - name: "nvidia.com/gpu"
+        nominalQuota: 64
+      - name: "cpu"
+        nominalQuota: 512
+      - name: "memory"
+        nominalQuota: "2Ti"
+  preemption:
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+```
+
+## Spot 中断处理时间线
+
+```
+T=0s   云厂商发出中断通知
+       ├─ AWS: 2 分钟（ITN）
+       ├─ GCP: 30 秒
+       └─ Azure: 随时
+          │
+T+2s   Node Termination Handler 检测到 IMDS 信号
+          │
+T+3s   节点被 cordon（禁止新 Pod 调度）
+          │
+T+5s   Pod 驱逐开始 → PreStop Hook 执行
+          │
+T+5~35s 应用执行 checkpoint 并保存到对象存储
+          │
+T+35s  SIGTERM 发送给容器进程
+          │
+T+60s  宽限期到期 → SIGKILL（如果还未退出）
+          │
+T+120s  Spot 实例被回收
+          │
+T+125s Cluster Autoscaler/Karpenter 开始补充新节点
+          │
+T+180s 新节点就绪，Pod 被重新调度
+          │
+T+185s Pod 从 checkpoint 恢复，继续执行
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Spot 中断后 Pod 未被重新调度 | 无可用节点或 Cluster Autoscaler 未触发 | `kubectl get nodes`；检查 CA/Karpenter 日志 |
+| Checkpoint 数据丢失 | 使用了本地存储而非对象存储 | 确认 checkpoint 写入 S3/GCS/Azure Blob |
+| 训练从头开始而非恢复 | 应用未正确实现 checkpoint 恢复逻辑 | 在测试环境手动模拟 Pod 重启验证恢复 |
+| Spot 节点频繁被回收 | 实例类型过于热门或未多样化 | 增加可选实例类型和可用区数量 |
+| 有状态服务被调度到 Spot 节点 | 缺少 nodeSelector 或 taint 隔离 | 为 Spot 节点配置专用 taint；有状态服务不容忍该 taint |
+
+## 生产检查清单
+
+- [ ] Spot 节点配置专用 taint，防止非容错工作负载调度
+- [ ] 有状态服务（数据库、消息队列）不调度到 Spot 节点
+- [ ] 训练/批处理任务实现 checkpoint 机制，间隔 ≤ 15 分钟
+- [ ] Checkpoint 数据写入持久化对象存储（S3/GCS/PVC）
+- [ ] 部署 Node Termination Handler 监听中断通知
+- [ ] 配置多实例类型和多可用区提高 Spot 可用性
+- [ ] Cluster Autoscaler/Karpenter 配置 Spot 到 On-Demand 的回退策略
+- [ ] 监控核心指标：Spot 中断频率、checkpoint 成功率、任务总完成时间
+- [ ] 成本分析考虑重复计算和跨 AZ 数据传输开销
+- [ ] PreStop + terminationGracePeriodSeconds 足够完成 checkpoint
+
+## 命令快速参考
+
+```bash
+# 查看 Spot 节点
+kubectl get nodes -l karpenter.sh/capacity-type=spot
+
+# 查看 Spot 节点上运行的 Pod
+kubectl get pods -A --field-selector spec.nodeName=<spot-node>
+
+# 手动模拟 Spot 中断（测试）
+kubectl drain <node> --grace-period=30 --delete-emptydir-data --ignore-daemonsets
+
+# 查看 Node Termination Handler 日志
+kubectl logs -n kube-system -l app=aws-node-termination-handler --tail=50
+
+# 检查 Karpenter 节点池状态
+kubectl get nodepools
+kubectl describe nodepool spot-gpu-pool
+
+# 查看最近的节点驱逐事件
+kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp'
+```
+
+## 交叉引用
+
+- [Disruptions](disruptions.md) — PDB 在 Spot 中断时的保护作用
+- [Jobs](jobs.md) — 批处理 Job 的 backoffLimit 和失败策略
+- [DaemonSet](daemonset.md) — Node Termination Handler 的 DaemonSet 部署
+- [自动扩缩工作负载](autoscaling-workloads.md) — KEDA 与 Spot 队列的结合
+
 ## 参考链接
 
-- [AWS Spot Instances Best Practices](https://docs.aws精华剃须刀.com/AWSEC2/latest/UserGuide/spot-best-practices.html)
+- [AWS Spot Instances Best Practices](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html)
 - [GCP Preemptible VMs](https://cloud.google.com/compute/docs/instances/preemptible)
 - [Azure Spot Virtual Machines](https://docs.microsoft.com/en-us/azure/virtual-machines/spot-vms)
 - [AWS Node Termination Handler](https://github.com/aws/aws-node-termination-handler)
 - [Karpenter Documentation](https://karpenter.sh/docs/)
-- [CIO - Kubernetes GPU Utilization Best Practices](https://www.cio.com/article/4152554/how-kubernetes-is-finally-solving-the-gpu-utilization-crisis-to-save-your-ai-budget.html)

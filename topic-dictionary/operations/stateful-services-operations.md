@@ -90,10 +90,57 @@
 - **配置独立的监控账号**：为 Prometheus/监控工具创建只读账号，避免使用高权限账号采集指标
 - **数据卷扩容策略**：使用支持在线扩容的 StorageClass 和 CSI 驱动，避免停机扩容
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| StatefulSet Pod 启动失败 | PVC 绑定失败或存储类不存在 | `kubectl describe pod <sts-pod>` | 确认 StorageClass 存在且有可用容量 |
+| 主从复制延迟过高 | 网络跨 AZ 延迟或从库 I/O 瓶颈 | 查看数据库 replication lag 指标 | 将副本调度到同 AZ 或升级存储 IOPS |
+| Operator 状态异常 | CRD 版本不兼容或 RBAC 权限不足 | `kubectl logs -n <operator-ns> <operator-pod>` | 升级 Operator 或修正 ClusterRole |
+| 数据库 failover 未触发 | Patroni/Operator 健康检查配置不当 | 查看 Operator CR status | 调整健康检查间隔和故障检测阈值 |
+| 滚动升级导致数据损坏 | 大版本升级未使用升级工具 | `kubectl rollout status sts/<name>` | 大版本升级使用 `pg_upgrade` 等原生工具 |
+| PVC 扩容失败 | CSI 驱动不支持在线扩容 | `kubectl describe pvc <pvc>` | 确认 StorageClass 的 `allowVolumeExpansion: true` |
+
+## 生产检查清单
+
+- [ ] 使用成熟的 Operator 管理有状态服务（CloudNativePG、Strimzi 等）
+- [ ] StorageClass 使用高 IOPS SSD 类型
+- [ ] StatefulSet 配置了 PDB（maxUnavailable: 1）
+- [ ] 数据库复制延迟（Replication Lag）纳入告警
+- [ ] 定期进行备份恢复演练
+- [ ] 主从节点分布在不同可用区
+- [ ] 数据库监控使用独立只读账号
+- [ ] 数据卷使用支持在线扩容的 CSI 驱动
+- [ ] 大版本升级有完整的备份和回滚计划
+
+## 命令快速参考
+
+```bash
+# 查看 StatefulSet 状态
+kubectl get sts -A
+kubectl rollout status sts/<name> -n <namespace>
+
+# 查看 PVC 绑定和容量
+kubectl get pvc -n <namespace> -o wide
+
+# CloudNativePG: 查看集群状态
+kubectl get cluster -A
+kubectl cnpg status <cluster-name> -n <namespace>
+
+# Strimzi Kafka: 查看集群状态
+kubectl get kafka -A
+kubectl get kafkatopic -n <namespace>
+
+# 手动触发 PostgreSQL 故障转移
+kubectl cnpg promote <cluster-name> <target-pod> -n <namespace>
+
+# 检查 PVC 扩容支持
+kubectl get sc -o custom-columns=NAME:.metadata.name,EXPAND:.allowVolumeExpansion
+```
+
+## 交叉引用
 
 - [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/)
 - [Strimzi Kafka Operator](https://strimzi.io/docs/operators/latest/)
-- [Zalando Postgres Operator](https://github.com/zalando/postgres-operator)
 - [Kubernetes StatefulSet Basics](https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/)
-- [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html)
+- 相关主题：[StatefulSets](../workloads/statefulsets.md) · [Persistent Volumes](../storage/persistent-volumes.md) · [备份与灾难恢复](backup-disaster-recovery.md) · [Operator Pattern](../platform-engineering/operator-pattern.md)

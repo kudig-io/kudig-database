@@ -78,6 +78,50 @@
 - 定期检查已安装插件的版本，及时应用安全补丁和功能更新。
 - 在提议向 Kubernetes 官方文档添加新的第三方插件链接时，需先阅读内容指南（content guide）。
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| CNI 插件 Pod CrashLoopBackOff | 网络配置冲突或权限不足 | `kubectl logs -n kube-system <cni-pod>` | 检查 CNI 配置文件和 RBAC 权限 |
+| CoreDNS 解析失败 | CoreDNS Pod 未就绪或 ConfigMap 错误 | `kubectl get pods -n kube-system -l k8s-app=kube-dns` | 检查 Corefile 配置和上游 DNS |
+| Dashboard 无法访问 | Service 类型或 Ingress 未正确配置 | `kubectl get svc -n kubernetes-dashboard` | 确认 NodePort/LoadBalancer/Ingress 配置 |
+| 插件版本与 K8s 不兼容 | 安装了与当前 K8s 版本不兼容的插件 | `kubectl version && helm list -A` | 查阅插件兼容性矩阵并升级 |
+| Node Problem Detector 无事件 | NPD DaemonSet 未部署或 journald 配置问题 | `kubectl get ds -n kube-system node-problem-detector` | 确认 NPD 有 host 日志访问权限 |
+| kube-state-metrics 指标缺失 | RBAC ClusterRole 权限不足 | `kubectl logs -n monitoring kube-state-metrics-*` | 检查 ClusterRole 是否覆盖所有需要的资源类型 |
+
+## 生产检查清单
+
+- [ ] CNI 插件已部署并通过 Pod 网络连通性测试
+- [ ] CoreDNS 已部署且 `nslookup kubernetes.default` 正常解析
+- [ ] 所有插件版本与当前 Kubernetes 版本兼容
+- [ ] 插件的 RBAC 权限遵循最小权限原则
+- [ ] 关键插件（CNI、DNS）配置了资源 requests/limits
+- [ ] 插件安装使用 Helm Chart 或 GitOps 管理，可重复部署
+- [ ] 已评估插件社区活跃度和安全更新频率
+
+## 命令快速参考
+
+```bash
+# 查看所有 kube-system 组件状态
+kubectl get pods -n kube-system -o wide
+
+# 检查 CNI 插件配置
+ls /etc/cni/net.d/
+
+# 测试集群 DNS 解析
+kubectl run dns-test --image=busybox:1.36 --rm -it -- nslookup kubernetes.default
+
+# 查看已安装的 Helm releases
+helm list -A
+
+# 查看 CoreDNS 配置
+kubectl get configmap -n kube-system coredns -o yaml
+
+# 检查 Node Problem Detector 事件
+kubectl get events --field-selector source=node-problem-detector
+```
+
+## 交叉引用
 
 - [Installing Addons - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
+- 相关主题：[Network Plugins](../platform-engineering/network-plugins.md) · [Cluster Networking](../networking/cluster-networking.md) · [DNS for Services and Pods](../networking/dns-for-services-and-pods.md)

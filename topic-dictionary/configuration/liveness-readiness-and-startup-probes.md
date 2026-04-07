@@ -54,6 +54,186 @@ Kubernetes 提供三种探针（Probe）来持续监控 Pod 中容器的健康�
 - **配置适当的超时和阈值**：根据应用实际响应时间调整 `timeoutSeconds` 和 `failureThreshold`，减少误报。
 - **Startup + Liveness 组合**：对于启动慢的应用，使用 Startup Probe 保护启动过程，Liveness Probe 配置较短的周期用于运行时健康检查。
 
+## 生产 YAML 示例
+
+### 完整的三探针配置（Java 微服务）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: app
+          image: registry.example.com/order:v3.0
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 8081
+              name: management
+          # Startup Probe — JVM 启动慢，最长等待 5 分钟
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 60           # 5s × 60 = 最多等待 300s
+            timeoutSeconds: 3
+          # Liveness Probe — 运行时健康检查，简单快速
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 3
+          # Readiness Probe — 检查依赖就绪状态
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: management
+            periodSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+            limits:
+              cpu: "1"
+              memory: 2Gi
+```
+
+### gRPC 健康检查探针
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: grpc-service
+  namespace: production
+spec:
+  containers:
+    - name: server
+      image: registry.example.com/grpc-server:v2.0
+      ports:
+        - containerPort: 50051
+      livenessProbe:
+        grpc:
+          port: 50051
+          service: "myservice"             # 可选：gRPC 健康检查服务名
+        periodSeconds: 10
+        failureThreshold: 3
+      readinessProbe:
+        grpc:
+          port: 50051
+        periodSeconds: 5
+      resources:
+        requests:
+          cpu: "250m"
+          memory: 256Mi
+```
+
+### TCP + exec 探针（数据库 Sidecar）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-proxy
+  namespace: production
+spec:
+  containers:
+    - name: proxy
+      image: registry.example.com/pgbouncer:v1.20
+      ports:
+        - containerPort: 5432
+      livenessProbe:
+        tcpSocket:
+          port: 5432
+        periodSeconds: 10
+      readinessProbe:
+        exec:
+          command:
+            - /bin/sh
+            - -c
+            - "pg_isready -h 127.0.0.1 -p 5432"
+        periodSeconds: 5
+        timeoutSeconds: 2
+      resources:
+        requests:
+          cpu: "100m"
+          memory: 64Mi
+```
+
+## 探针类型决策参考
+
+| 检查方式 | 适用场景 | 优点 | 注意事项 |
+|----------|----------|------|----------|
+| `httpGet` | Web 服务、REST API | 语义清晰，支持自定义 Header | 确保探针端点不触发写操作 |
+| `tcpSocket` | 数据库代理、TCP 服务 | 简单轻量 | 只验证端口可连接，不验证应用逻辑 |
+| `exec` | 自定义健康检查脚本 | 灵活度最高 | 进程创建有开销；确保命令快速返回 |
+| `grpc` | gRPC 服务 | 原生协议支持 | 需要应用实现 gRPC Health Checking |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 容器反复重启（CrashLoopBackOff） | Liveness 探针在应用启动前就失败 | 添加 Startup Probe 或增大 `initialDelaySeconds` |
+| Pod Running 但无流量 | Readiness 探针失败，Pod 被从 Endpoints 摘除 | `kubectl describe pod` 查看 Readiness 事件；检查探针端点 |
+| 探针超时（Unhealthy: timeout） | `timeoutSeconds` 过短或应用响应慢 | 增大 `timeoutSeconds`；优化探针端点响应时间 |
+| exec 探针失败但手动执行成功 | 容器内 PATH 或权限不同 | 使用绝对路径；确认脚本有执行权限 |
+| 外部依赖故障导致 Liveness 失败引发重启雪崩 | Liveness 探针检查了外部依赖 | Liveness 只检查应用自身状态；外部依赖检查放在 Readiness |
+
+## 生产检查清单
+
+- [ ] 所有生产服务配置 Readiness Probe（流量控制）
+- [ ] 启动慢的应用（JVM / Python ML 模型加载）配置 Startup Probe
+- [ ] Liveness Probe 只检查应用自身状态，不依赖外部服务
+- [ ] Readiness Probe 可检查关键依赖（数据库连接、缓存就绪）
+- [ ] 探针端点不触发业务写操作或副作用
+- [ ] `timeoutSeconds` 设置合理（建议 2-5 秒）
+- [ ] `failureThreshold` 不要太小（建议 >= 3）避免抖动
+- [ ] 探针使用独立的管理端口（如 8081）避免业务流量干扰
+
+## 命令快速参考
+
+```bash
+# 查看 Pod 探针配置
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[0].livenessProbe}' | jq .
+
+# 查看探针事件（成功/失败）
+kubectl describe pod <pod-name> | grep -A 5 -E "(Liveness|Readiness|Startup)"
+
+# 手动测试 HTTP 探针端点
+kubectl exec <pod-name> -- curl -s http://localhost:8081/actuator/health/liveness
+
+# 查看 Pod 的 Ready 条件
+kubectl get pods -o custom-columns='NAME:.metadata.name,READY:.status.conditions[?(@.type=="Ready")].status'
+
+# 查看非 Ready 的 Pod
+kubectl get pods --field-selector=status.phase=Running -o json | jq '.items[] | select(.status.conditions[] | select(.type=="Ready" and .status=="False")) | .metadata.name'
+```
+
+## 交叉引用
+
+- [ConfigMaps](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
+- [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — 资源不足可导致探针超时
+- [Secrets](./secrets.md) — 需要认证的探针端点可使用 Secret 中的凭据
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)

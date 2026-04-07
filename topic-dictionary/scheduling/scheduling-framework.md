@@ -50,6 +50,139 @@ v1.33+ alpha（`StorageCapacityScoring` 特性门控）：扩展 VolumeBinding �
 - 大多数调度插件在 Kubernetes v1.18+ 中默认启用。
 - 可以配置多个调度配置文件以适应不同类型的负载。
 
+## 生产 YAML 示例
+
+### 自定义调度配置文件（多插件组合）
+
+```yaml
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: default-scheduler
+    plugins:
+      preFilter:
+        enabled:
+          - name: NodeResourcesFit
+          - name: NodePorts
+          - name: VolumeBinding
+      filter:
+        enabled:
+          - name: NodeResourcesFit
+          - name: NodePorts
+          - name: NodeAffinity
+          - name: VolumeBinding
+          - name: TaintToleration
+      preScore:
+        enabled:
+          - name: InterPodAffinity
+          - name: TaintToleration
+      score:
+        enabled:
+          - name: NodeResourcesBalancedAllocation
+            weight: 1
+          - name: ImageLocality
+            weight: 1
+          - name: InterPodAffinity
+            weight: 1
+          - name: NodeAffinity
+            weight: 1
+          - name: TaintToleration
+            weight: 3
+      reserve:
+        enabled:
+          - name: VolumeBinding
+      preBind:
+        enabled:
+          - name: VolumeBinding
+      bind:
+        enabled:
+          - name: DefaultBinder
+  # GPU 工作负载专用配置文件
+  - schedulerName: gpu-scheduler
+    plugins:
+      score:
+        enabled:
+          - name: NodeResourcesFit
+            weight: 5                      # GPU 节点优先按资源利用率评分
+        disabled:
+          - name: NodeResourcesBalancedAllocation
+    pluginConfig:
+      - name: NodeResourcesFit
+        args:
+          scoringStrategy:
+            type: MostAllocated            # GPU 节点采用装箱策略
+            resources:
+              - name: nvidia.com/gpu
+                weight: 10
+              - name: cpu
+                weight: 1
+              - name: memory
+                weight: 1
+```
+
+### 调度框架扩展点流程图
+
+```
+Pod 入队 → [PreEnqueue] → 活动队列 → [QueueSort] → 调度周期开始
+  ↓
+[PreFilter] → [Filter] → 可行节点列表
+  ↓
+[PostFilter]（仅在无可行节点时）→ 尝试抢占
+  ↓
+[PreScore] → [Score] → [NormalizeScore] → 选择最优节点
+  ↓
+[Reserve] → [Permit] → 绑定周期开始
+  ↓
+[PreBind] → [Bind] → [PostBind] → 完成
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 自定义插件导致调度器崩溃 | 插件实现有 bug 或 panic | 查看调度器日志 `kubectl logs -n kube-system -l component=kube-scheduler` |
+| Reserve 后绑定失败 | Unreserve 未正确清理状态 | 确认 Unreserve 方法幂等且不返回错误 |
+| Permit 阶段 Pod 超时 | wait 超时时间设置过短 | 调整 Permit 插件的超时参数 |
+| PostFilter 未触发抢占 | PostFilter 插件被禁用 | 确认 `DefaultPreemption` 插件已启用 |
+| VolumeBinding PreBind 失败 | PV 准备未就绪 | 检查 PVC 绑定状态和 CSI 驱动日志 |
+
+## 生产检查清单
+
+- [ ] 为不同工作负载类型配置独立的 schedulerName 和 profile
+- [ ] 确认 Unreserve 方法实现幂等且不会失败
+- [ ] 禁用不需要的插件减少调度开销
+- [ ] 启用 VolumeBinding 插件确保存储卷在绑定前就绪
+- [ ] 为 GPU 工作负载配置 MostAllocated 装箱策略
+- [ ] 监控各扩展点的延迟指标：`scheduler_plugin_execution_duration_seconds`
+- [ ] 测试自定义插件在异常场景下的行为
+
+## 命令快速参考
+
+```bash
+# 查看调度器启用的插件
+kubectl logs -n kube-system -l component=kube-scheduler --tail=50 | grep -i plugin
+
+# 查看插件执行延迟
+curl -sk https://localhost:10259/metrics | grep scheduler_plugin_execution_duration
+
+# 查看各阶段耗时
+curl -sk https://localhost:10259/metrics | grep scheduler_framework_extension_point_duration
+
+# 查看 Pod 使用的调度器
+kubectl get pod <pod-name> -o jsonpath='{.spec.schedulerName}'
+
+# 验证多配置文件生效
+kubectl get pods --all-namespaces -o custom-columns='NAME:.metadata.name,SCHEDULER:.spec.schedulerName'
+```
+
+## 交叉引用
+
+- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器整体架构
+- [调度器性能调优](./scheduler-performance-tuning.md) — 插件层面的性能优化
+- [资源装箱](./resource-bin-packing.md) — NodeResourcesFit 插件的评分策略配置
+- [Pod 优先级与抢占](./pod-priority-and-preemption.md) — PostFilter 阶段的抢占实现
+- [动态资源分配](./dynamic-resource-allocation.md) — DRA 与 Reserve/PreBind 阶段的交互
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Scheduling Framework](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/)

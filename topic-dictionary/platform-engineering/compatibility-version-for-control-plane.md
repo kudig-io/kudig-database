@@ -32,6 +32,33 @@
 - 模拟版本仅影响控制平面组件自身的行为，不替代对节点、工作负载和插件的版本兼容性验证。
 - 逐步减少对模拟版本的依赖，最终切换到原生新版本行为，以利用最新的安全性和性能改进。
 
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 升级后新特性未生效 | compatibility-version 设置为旧版本 | 检查组件启动参数中的 `--emulation-version` |
+| API 行为与预期不符 | 兼容版本限制了新行为 | 确认 emulation-version 设置 |
+
+## 生产检查清单
+
+- [ ] 滚动升级时配置 compatibility-version 确保平滑过渡
+- [ ] 升级完成后调整 emulation-version 到新版本
+- [ ] 测试环境先验证新版本行为
+
+## 命令快速参考
+
+```bash
+# 查看组件版本
+kubectl version
+
+# 查看 apiserver 启动参数
+kubectl get pod -n kube-system kube-apiserver-* -o yaml | grep emulation-version
+```
+
+## 交叉引用
+
+- [协调式 Leader Election](./coordinated-leader-election.md) — 控制平面高可用
+
 ## 参考链接
 
 - [Compatibility Version For Kubernetes Control Plane Components - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/compatibility-version/)

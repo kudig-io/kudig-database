@@ -59,6 +59,125 @@
 - **不要假设 Linux 的行为**：Windows 不会因为内存超限而杀死容器，而是性能下降；因此不能像 Linux 那样依赖 OOM Killer 来快速恢复。
 - **合理评估 Pod 密度**：根据节点规格和系统开销，确定 Windows 节点上安全的最大 Pod 数量，避免资源争用。
 
+## 生产 YAML 示例
+
+### Windows 节点 Pod 资源配置
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iis-webapp
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: iis-webapp
+  template:
+    metadata:
+      labels:
+        app: iis-webapp
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows          # 确保调度到 Windows 节点
+      containers:
+        - name: iis
+          image: mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2022
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "500m"                  # 务必设置 requests
+              memory: 1Gi
+            limits:
+              cpu: "2"                     # 务必设置 limits，防止过度配置
+              memory: 2Gi
+      tolerations:
+        - key: "os"
+          operator: "Equal"
+          value: "windows"
+          effect: "NoSchedule"
+```
+
+### Windows 节点 kubelet 资源预留配置
+
+```yaml
+# kubelet 配置（Windows 节点）
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+systemReserved:
+  cpu: "500m"
+  memory: "2Gi"                            # Windows 至少预留 2 GiB
+kubeReserved:
+  cpu: "250m"
+  memory: "512Mi"
+enforceNodeAllocatable:
+  - pods                                   # Windows 上不通过 cgroup 强制执行
+windowsPriorityClass: ABOVE_NORMAL_PRIORITY_CLASS  # 防止 kubelet 被饿死
+```
+
+## Linux vs Windows 资源管理对比
+
+| 维度 | Linux | Windows |
+|------|-------|---------|
+| 进程隔离 | cgroups | Job Object |
+| 内存超限 | OOM Killer 终止进程 | 页面文件换页，性能下降 |
+| 内存 overcommit | 支持 | 不支持 |
+| CPU 最低保证 | 通过 cpu.shares 保证 | 不保证最小 CPU 时间 |
+| 特权容器 | 支持 | 不支持 |
+| 资源强制执行 | cgroup 硬限制 | 仅用于计算 NodeAllocatable |
+| 内存不足指标 | memory.available | 页面文件活动 + 磁盘 I/O |
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Windows 节点响应极慢 | 内存过度配置导致频繁页面换页 | 监控磁盘 I/O 和页面文件使用率；减少 Pod 数量或增加内存 |
+| Pod 未被调度到 Windows 节点 | 缺少 `nodeSelector: kubernetes.io/os: windows` | 检查 Pod spec 的 nodeSelector |
+| kubelet 无响应 | kubelet 被业务 Pod 饿死 CPU | 设置 `--windows-priorityclass=ABOVE_NORMAL_PRIORITY_CLASS` |
+| 节点显示资源充足但 Pod Pending | 未设置 limits 导致 NodeAllocatable 计算不准确 | 为所有 Windows Pod 设置 CPU 和 Memory limits |
+| 容器内存使用远超 limits 但未被终止 | Windows 无 OOM Killer | 正常行为；监控页面文件使用；设置合理 limits 防止性能劣化 |
+
+## 生产检查清单
+
+- [ ] 所有 Windows Pod 必须设置 CPU 和 Memory 的 requests 和 limits
+- [ ] Windows 节点至少预留 2 GiB 内存给系统组件
+- [ ] kubelet 设置 `windowsPriorityClass` 为 `ABOVE_NORMAL_PRIORITY_CLASS` 或更高
+- [ ] 混合集群使用 nodeSelector + tolerations 确保 Pod 调度到正确 OS 节点
+- [ ] 监控页面文件活动作为内存压力的早期指标
+- [ ] 根据节点规格确定 Windows 节点最大 Pod 密度
+- [ ] 不依赖 OOM Killer 行为，Windows 上内存超限只会性能下降
+- [ ] 使用 `kube-reserved` + `system-reserved` 设置合理的资源预留
+
+## 命令快速参考
+
+```bash
+# 查看 Windows 节点
+kubectl get nodes -l kubernetes.io/os=windows
+
+# 查看 Windows 节点资源分配
+kubectl describe node <windows-node> | grep -A 15 "Allocated resources"
+
+# 查看 Windows Pod 资源使用
+kubectl top pods -n production -l kubernetes.io/os=windows
+
+# 查看节点 Allocatable
+kubectl get node <windows-node> -o jsonpath='{.status.allocatable}' | jq .
+
+# 远程检查 Windows 页面文件使用
+# PowerShell:
+# Get-WmiObject Win32_PageFileUsage | Select-Object Name, CurrentUsage, AllocatedBaseSize
+
+# 查看 Windows 节点上运行的 Pod
+kubectl get pods --all-namespaces --field-selector spec.nodeName=<windows-node>
+```
+
+## 交叉引用
+
+- [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — Linux 节点资源管理（对比参考）
+- [存活、就绪和启动探针](./liveness-readiness-and-startup-probes.md) — Windows Pod 同样需要健康检查
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - Resource Management for Windows nodes](https://kubernetes.io/docs/concepts/configuration/windows-resource-management/)

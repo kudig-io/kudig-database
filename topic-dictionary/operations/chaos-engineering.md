@@ -101,9 +101,54 @@ spec:
 - **自动化常态化**：将混沌实验纳入 CI/CD 或每周定时任务，而不是一年一度的"运动式"演练
 - **渐进式增加复杂度**：从单 Pod 故障开始，逐步过渡到多节点、网络分区、级联故障
 
-## 参考链接
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| ChaosEngine 状态为 Failed | Litmus ServiceAccount 权限不足 | `kubectl describe chaosengine <name>` | 检查 `chaosServiceAccount` 的 RBAC 权限 |
+| 混沌实验未注入到目标 Pod | Label selector 不匹配 | `kubectl get pods -l <applabel>` | 确认 `appinfo.applabel` 与目标 Pod 匹配 |
+| 实验后服务未恢复 | abort condition 未配置或 cleanup 失败 | `kubectl get chaosresult <name> -o yaml` | 手动清理实验残留资源 |
+| Chaos Mesh Dashboard 不可用 | chaos-dashboard Service 未暴露 | `kubectl get svc -n chaos-mesh` | 配置 Ingress 或 port-forward 访问 |
+| 网络延迟注入无效果 | tc/iptables 权限不足（缺少 NET_ADMIN） | `kubectl logs -n chaos-mesh chaos-daemon-*` | 确认 chaos-daemon 以 privileged 模式运行 |
+| 实验超出爆炸半径 | namespace selector 过宽 | 查看 ChaosExperiment 的 scope 配置 | 限制实验范围到特定 namespace 和 label |
+
+## 生产检查清单
+
+- [ ] 混沌工程工具使用独立的 ServiceAccount，最小权限
+- [ ] 所有实验配置了自动终止条件（abort conditions）
+- [ ] 生产实验前已在 staging 环境验证
+- [ ] 实验期间有值班人员在线监控
+- [ ] 已与相关团队沟通实验计划和时间窗口
+- [ ] 稳态指标（P99 延迟、错误率）已定义和监控
+- [ ] 每次实验都有详细的复盘报告
+- [ ] GameDay 演练已纳入季度计划
+
+## 命令快速参考
+
+```bash
+# Litmus: 查看混沌实验状态
+kubectl get chaosengine -A
+kubectl get chaosresult -A
+
+# Litmus: 取消正在运行的实验
+kubectl delete chaosengine <name> -n <namespace>
+
+# Chaos Mesh: 查看所有混沌实验
+kubectl get podchaos,networkchaos,iochaos,stresschaos -A
+
+# Chaos Mesh: 暂停实验
+kubectl annotate podchaos <name> experiment.chaos-mesh.org/pause=true
+
+# 端口转发 Chaos Mesh Dashboard
+kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
+
+# 检查稳态指标（PromQL 示例）
+# histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))
+```
+
+## 交叉引用
 
 - [Principles of Chaos Engineering](https://principlesofchaos.org/)
 - [Litmus Chaos Documentation](https://docs.litmuschaos.io/)
 - [Chaos Mesh Documentation](https://chaos-mesh.org/docs/)
-- [Gremlin - Chaos Engineering Best Practices](https://www.gremlin.com/community/tutorials/)
+- 相关主题：[Disruptions](../workloads/disruptions.md) · [Pod Lifecycle](../workloads/pod-lifecycle.md) · [Horizontal Pod Autoscaling](../workloads/horizontal-pod-autoscaling.md)

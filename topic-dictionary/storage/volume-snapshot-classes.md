@@ -50,6 +50,60 @@ VolumeSnapshotClass 与 StorageClass 类似，它提供了一种由管理员描�
 - VolumeSnapshotClass 创建后不可更新；如需更改配置，需删除旧类并创建新类。
 - 在创建 VolumeSnapshot 之前，确认目标 CSI 驱动已正确安装并支持快照功能。
 
+## 生产 YAML 示例
+
+### VolumeSnapshotClass（Retain + Delete）
+
+```yaml
+# 生产环境 — 保留快照
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: csi-ebs-snapclass-retain
+  annotations:
+    snapshot.storage.kubernetes.io/is-default-class: "true"
+driver: ebs.csi.aws.com
+deletionPolicy: Retain
+parameters:
+  tagSpecification_1: "Environment=production"
+---
+# 开发测试 — 自动删除
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: csi-ebs-snapclass-delete
+driver: ebs.csi.aws.com
+deletionPolicy: Delete
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 创建快照失败，提示无默认 VolumeSnapshotClass | 未配置默认类 | 添加 `is-default-class: "true"` 注解 |
+| 同一 CSI 驱动有多个默认类 | 每个驱动只允许一个默认类 | `kubectl get volumesnapshotclass` 检查注解 |
+
+## 生产检查清单
+
+- [ ] 每个 CSI 驱动最多一个默认 VolumeSnapshotClass
+- [ ] 生产数据使用 `deletionPolicy: Retain`
+- [ ] 测试环境使用 `deletionPolicy: Delete` 避免快照堆积
+
+## 命令快速参考
+
+```bash
+# 查看 VolumeSnapshotClass
+kubectl get volumesnapshotclass
+
+# 查看详情
+kubectl describe volumesnapshotclass csi-ebs-snapclass-retain
+```
+
+## 交叉引用
+
+- [卷快照](./volume-snapshots.md) — VolumeSnapshot 创建与恢复
+- [存储类](./storage-classes.md) — StorageClass 与 VolumeSnapshotClass 类比
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/

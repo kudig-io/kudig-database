@@ -35,5 +35,133 @@
 - 集群管理员应使用遵守 Eviction API 的工具执行维护操作。
 - 为 PDB 设置 `AlwaysAllow` 不健康 Pod 驱逐策略，避免节点 drain 被卡住。
 
+## 实战 YAML 示例
+
+### 使用 minAvailable 的 PDB
+
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web-api-pdb
+  namespace: prod
+spec:
+  minAvailable: 2                            # 任何时候至少保持 2 个可用副本
+  selector:
+    matchLabels:
+      app: web-api
+  unhealthyPodEvictionPolicy: AlwaysAllow    # 允许驱逐不健康 Pod，避免 drain 卡住
+```
+
+### 使用 maxUnavailable 的 PDB
+
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: cache-pdb
+  namespace: prod
+spec:
+  maxUnavailable: 1                          # 最多允许 1 个副本不可用
+  selector:
+    matchLabels:
+      app: redis-cache
+  unhealthyPodEvictionPolicy: AlwaysAllow
+```
+
+### 使用百分比的 PDB
+
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: worker-pdb
+  namespace: prod
+spec:
+  maxUnavailable: "25%"                      # 最多允许 25% 副本不可用
+  selector:
+    matchLabels:
+      app: worker
+```
+
+### minAvailable vs maxUnavailable 对比
+
+| 参数 | 3 副本场景 | 5 副本场景 | 适用场景 |
+|------|-----------|-----------|---------|
+| `minAvailable: 2` | 允许 1 个不可用 | 允许 3 个不可用 | 有固定仲裁要求的应用 |
+| `maxUnavailable: 1` | 允许 1 个不可用 | 允许 1 个不可用 | 保守策略，每次最多中断 1 个 |
+| `maxUnavailable: "25%"` | 允许 0 个不可用（向上取整） | 允许 1 个不可用 | 大规模 Deployment |
+
+## 故障排查
+
+### kubectl drain 被 PDB 阻塞
+- **症状**: `kubectl drain` 长时间卡住，提示 `Cannot evict pod as it would violate the pod's disruption budget`。
+- **常见原因**: PDB 设置过于严格（如 `minAvailable` 等于副本数）；有 Pod 不健康导致可用副本不足。
+- **诊断命令**:
+  ```bash
+  # 查看 PDB 状态
+  kubectl get pdb -n prod
+  # 查看 PDB 详情（当前可用/期望/中断允许数）
+  kubectl describe pdb web-api-pdb -n prod
+  # 查看受 PDB 保护的 Pod 状态
+  kubectl get pods -n prod -l app=web-api -o wide
+  # 检查是否有不健康的 Pod
+  kubectl get pods -n prod -l app=web-api -o jsonpath='{range .items[*]}{.metadata.name}: Ready={.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'
+  ```
+- **解决方案**:
+  - 确认不健康 Pod 并修复，或设置 `unhealthyPodEvictionPolicy: AlwaysAllow`
+  - 降低 `minAvailable` 或增大 `maxUnavailable`
+  - 紧急情况可临时删除 PDB：`kubectl delete pdb web-api-pdb -n prod`
+
+### 滚动更新时 PDB 导致更新缓慢
+- **症状**: Deployment 滚动更新每次只能终止一个 Pod，非常缓慢。
+- **原因**: 这通常是正常行为。滚动更新不受 PDB 限制（由 Deployment 控制器管理），但如果 `maxUnavailable` 设置为 0 且 `maxSurge` 为 1，更新确实会很慢。
+- **解决方案**: 调整 Deployment 的 `strategy.rollingUpdate.maxSurge` 和 `maxUnavailable`，而非 PDB。
+
+### PDB 状态显示 disruptionsAllowed: 0
+- **症状**: PDB 的 `disruptionsAllowed` 始终为 0，阻止所有驱逐。
+- **诊断命令**:
+  ```bash
+  kubectl get pdb web-api-pdb -n prod -o yaml
+  ```
+- **常见原因**: 当前可用 Pod 数恰好等于 `minAvailable`，或有 Pod 不健康导致可用数不足。
+
+## 生产检查清单
+
+- [ ] 所有高可用应用（>= 2 副本）都配置了 PDB
+- [ ] PDB 的 `minAvailable` 满足应用仲裁/可用性要求（如 etcd 至少 N/2+1）
+- [ ] `unhealthyPodEvictionPolicy: AlwaysAllow` 已设置，防止 drain 卡死
+- [ ] PDB 选择器与工作负载标签正确匹配
+- [ ] 集群升级前验证所有 PDB 的 `disruptionsAllowed` > 0
+- [ ] 应用副本跨可用区分布，降低单点故障影响
+- [ ] 运维团队使用 `kubectl drain`（Eviction API）而非 `kubectl delete pod`
+
+## 命令快速参考
+
+```bash
+# 查看所有 PDB 状态
+kubectl get pdb -A
+
+# 查看 PDB 详细信息（含 disruptionsAllowed）
+kubectl describe pdb <pdb-name> -n <namespace>
+
+# 安全驱逐节点上的 Pod（遵守 PDB）
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+
+# 强制驱逐（忽略 PDB，慎用！）
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --disable-eviction
+
+# 检查特定 Pod 是否受 PDB 保护
+kubectl get pdb -n <namespace> -o wide
+```
+
+## 交叉引用
+
+- [Deployments 中断管理](./deployments.md)
+- [StatefulSet 有序管理](./statefulsets.md)
+- [工作负载概览与架构](../../domain-4-workloads/01-workload-overview-architecture.md)
+- [节点 NotReady 诊断](../../domain-12-troubleshooting/06-node-notready-diagnosis.md)
+- [Pod Pending 诊断](../../domain-12-troubleshooting/05-pod-pending-diagnosis.md)
+
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/disruptions/

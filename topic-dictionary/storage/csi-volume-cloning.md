@@ -58,6 +58,58 @@ spec:
 - 克隆操作的速度和效率取决于底层存储系统的实现，不同 CSI 驱动的性能可能有显著差异。
 - 源 PVC 和目标 PVC 必须在同一命名空间中；跨命名空间克隆需借助其他机制（如快照恢复）。
 
+## 生产 YAML 示例
+
+### 从生产 PVC 克隆到测试环境
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data-clone
+  namespace: staging
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: gp3-encrypted
+  resources:
+    requests:
+      storage: 100Gi                       # >= 源 PVC 容量
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: db-data                          # 源 PVC（同命名空间）
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| 克隆 PVC Pending | 源 PVC 未绑定或正在使用 | `kubectl get pvc` 检查源 PVC 状态 |
+| 容量不足错误 | 目标 PVC storage < 源 PVC | 设置目标 PVC storage >= 源 PVC |
+| CSI 驱动不支持 | 驱动未实现克隆能力 | 查阅 CSI 驱动文档确认克隆支持 |
+
+## 生产检查清单
+
+- [ ] 源 PVC 已绑定且未被使用
+- [ ] 目标 PVC storage >= 源 PVC
+- [ ] 源和目标 PVC 在同一命名空间
+- [ ] CSI 驱动支持克隆能力
+
+## 命令快速参考
+
+```bash
+# 创建克隆 PVC
+kubectl apply -f clone-pvc.yaml
+
+# 查看克隆进度
+kubectl describe pvc db-data-clone -n staging
+```
+
+## 交叉引用
+
+- [卷快照](./volume-snapshots.md) — 另一种数据复制方式（跨命名空间可用）
+- [持久卷](./persistent-volumes.md) — dataSource 机制
+- [动态卷供给](./dynamic-volume-provisioning.md) — 克隆依赖动态供给
+
 ## 参考链接
 
 - https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/

@@ -39,6 +39,156 @@ Pod 中使用 ConfigMap 的四种方式：
 - **使用不可变 ConfigMap**：对于大规模使用的 ConfigMap，建议标记为 `immutable`，以避免意外更新导致的应用中断，并提升集群性能。
 - **键名合法性**：确保键名符合环境变量命名规则，否则部分键可能无法注入为环境变量。
 
+## 生产 YAML 示例
+
+### 多格式 ConfigMap（键值 + 配置文件）
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: production
+  labels:
+    app: order-service
+    environment: production
+data:
+  # 简单键值对 — 用于环境变量
+  LOG_LEVEL: "info"
+  DB_HOST: "postgres-primary.database.svc.cluster.local"
+  DB_PORT: "5432"
+  CACHE_TTL: "300"
+  # 配置文件 — 用于卷挂载
+  application.yaml: |
+    server:
+      port: 8080
+      shutdown: graceful
+    spring:
+      datasource:
+        hikari:
+          maximum-pool-size: 20
+          minimum-idle: 5
+          connection-timeout: 30000
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health,info,prometheus
+  nginx.conf: |
+    worker_processes auto;
+    events { worker_connections 1024; }
+    http {
+      upstream backend {
+        server 127.0.0.1:8080;
+      }
+      server {
+        listen 80;
+        location / { proxy_pass http://backend; }
+        location /healthz { return 200 'ok'; }
+      }
+    }
+immutable: false                           # 生产环境建议设为 true（稳定后）
+```
+
+### Pod 引用 ConfigMap（环境变量 + 卷挂载）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+      annotations:
+        checksum/config: "{{ sha256sum .Values.configmap }}"  # Helm：ConfigMap 变更时触发滚动更新
+    spec:
+      containers:
+        - name: app
+          image: registry.example.com/order:v3.0
+          envFrom:
+            - configMapRef:
+                name: app-config            # 注入所有键值对为环境变量
+          env:
+            - name: SPECIFIC_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_HOST
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+              readOnly: true
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
+            items:                          # 只挂载配置文件类型的 key
+              - key: application.yaml
+                path: application.yaml
+              - key: nginx.conf
+                path: nginx.conf
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| Pod 启动失败，提示 ConfigMap 不存在 | ConfigMap 未创建或名称拼写错误 | `kubectl get configmap -n <ns>` 确认 ConfigMap 存在 |
+| 环境变量值未更新 | 环境变量注入不会自动更新 | 需要重启 Pod 或使用卷挂载方式 |
+| 卷挂载文件内容过期 | kubelet 同步周期（默认 60s）+ configMap 缓存 TTL | 等待同步周期完成；或设置 `kubelet --sync-frequency` |
+| subPath 挂载后内容不更新 | subPath 挂载不接收自动更新 | 改为挂载整个目录或重启 Pod |
+| 键名含特殊字符导致环境变量注入失败 | 键名包含 `.` 或 `-` 等不合法字符 | 使用 `envFrom` 时检查键名是否符合环境变量命名规则 |
+
+## 生产检查清单
+
+- [ ] 敏感数据使用 Secret 而非 ConfigMap
+- [ ] 大规模使用的 ConfigMap 设置 `immutable: true`
+- [ ] ConfigMap 数据总量不超过 1 MiB
+- [ ] 使用 Helm checksum annotation 或 Reloader 确保 ConfigMap 变更触发 Pod 滚动更新
+- [ ] 避免使用 `subPath` 挂载（无法自动更新）
+- [ ] 为 ConfigMap 添加版本标签（如 `config-version: v2`）方便回滚
+- [ ] 确认 Static Pod 不引用 ConfigMap（不支持）
+
+## 命令快速参考
+
+```bash
+# 从文件创建 ConfigMap
+kubectl create configmap app-config --from-file=application.yaml --from-file=nginx.conf -n production
+
+# 从字面量创建
+kubectl create configmap app-config --from-literal=LOG_LEVEL=info --from-literal=DB_HOST=postgres -n production
+
+# 查看 ConfigMap 内容
+kubectl get configmap app-config -n production -o yaml
+
+# 编辑 ConfigMap
+kubectl edit configmap app-config -n production
+
+# 查看 Pod 中挂载的配置文件
+kubectl exec -n production <pod-name> -- cat /etc/config/application.yaml
+
+# 查看 ConfigMap 在哪些 Pod 中被引用
+kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.configMap.name == "app-config") | .metadata.name'
+```
+
+## 交叉引用
+
+- [Secrets](./secrets.md) — 机密数据存储，与 ConfigMap 互补
+- [存活、就绪和启动探针](./liveness-readiness-and-startup-probes.md) — 探针可检测配置加载是否就绪
+- [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — 资源配置与应用配置分离
+
 ## 参考链接
 
 - [Kubernetes 官方文档 - ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
