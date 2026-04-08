@@ -91,7 +91,7 @@ Kubernetes 扩展生态域涵盖 CRD 开发、Operator 模式、准入控制、�
 
 | 文档 | 关键内容 | 适用场景 |
 |:---|:---|:---|
-| [企业级最佳实践](./ENTERPRISE_BEST_PRACTICES.md) | CRD/Operator安全加固、监控告警、合规检查 | 生产环境部署 |
+| [企业级最佳实践](../reports/quality/ENTERPRISE_BEST_PRACTICES.md) | CRD/Operator安全加固、监控告警、合规检查 | 生产环境部署 |
 
 ---
 

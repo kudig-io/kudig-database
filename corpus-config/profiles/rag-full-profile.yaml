@@ -1,0 +1,27 @@
+# 全量语料配置
+# 用途：完整知识库导入
+# 预计 Token：~15M+ tokens
+
+name: full-corpus
+description: "KUDIG-DATABASE 全量语料导入配置"
+
+include:
+  - path: "domain-*/"
+    chunking: by_h2
+  - path: "topic-*/"
+    chunking: by_h2
+
+exclude:
+  - "*.pdf"
+  - "*.png"
+  - "*.xlsx"
+  - ".git/"
+  - ".ruff_cache/"
+  - "gitbook/book/"
+  - "gitbook/dist/"
+  - "gitbook/build-scripts/"
+  - "CHANGELOG.md"
+  - "ENHANCEMENT-RECORD.md"
+  - "QUALITY_REPORT*"
+  - "GAP-ANALYSIS.md"
+  - "topic-release-notes/"  # 大量版本说明，通常不需要导入

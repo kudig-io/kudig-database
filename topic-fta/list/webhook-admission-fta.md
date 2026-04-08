@@ -1423,4 +1423,4 @@ flowchart TD
 - **共性**：
   - Webhook 是集群稳定性的关键组件，配置需谨慎
   - failurePolicy 选择需权衡可用性和安全性
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

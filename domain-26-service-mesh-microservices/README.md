@@ -79,7 +79,7 @@ This domain focuses on deep practice of enterprise service mesh technology stack
 ## 📚 相关领域链接
 
 - **[Domain-5: 网络](../domain-5-networking)** - Kubernetes 网络架构、Ingress 基础
-- **[Domain-98: 云原生 API 网关](../domain-98-cloud-native-api-gateway)** - 南北向 API 网关（Higress、APISIX、Kong 等），与本领域东西向服务网格形成互补
+- **[Domain-98: 云原生 API 网关](../domain-40-cloud-native-api-gateway)** - 南北向 API 网关（Higress、APISIX、Kong 等），与本领域东西向服务网格形成互补
 
 ---
 *持续更新最新服务网格技术和最佳实践*

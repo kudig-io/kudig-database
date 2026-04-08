@@ -101,8 +101,8 @@ Domain15(网络基础)┘       │                 │                     │
 - `../domain-1-architecture-fundamentals/02-core-components-deep-dive.md`
 
 ### 故障排查体系
-- `../topic-fta/23_fta_production_quick_start.md`
-- `../topic-febm/8_febm_production_quick_start.md`
+- `../topic-fta/23-fta-production-quick-start.md`
+- `../topic-febm/08-febm-production-quick-start.md`
 - `../domain-12-troubleshooting/` (42篇)
 
 ### 生产运维实践

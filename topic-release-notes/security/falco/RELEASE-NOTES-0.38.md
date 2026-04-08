@@ -1,0 +1,48 @@
+# falco v0.38 Release Notes
+
+Source: [0.38.2](https://github.com/falcosecurity/falco/releases/tag/0.38.2)
+
+[![LIBS](https://img.shields.io/badge/LIBS-0.17.3-yellow)](https://github.com/falcosecurity/libs/releases/tag/0.17.3)
+[![DRIVER](https://img.shields.io/badge/DRIVER-7.2.1+driver-yellow)](https://github.com/falcosecurity/libs/releases/tag/7.2.1+driver)
+
+| Packages | Download                                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rpm-x86_64      | [![rpm](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/rpm/falco-0.38.2-x86_64.rpm)        |
+| deb-x86_64      | [![deb](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/deb/stable/falco-0.38.2-x86_64.deb) |
+| tgz-x86_64      | [![tgz](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/bin/x86_64/falco-0.38.2-x86_64.tar.gz) |
+| rpm-aarch64      | [![rpm](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/rpm/falco-0.38.2-aarch64.rpm)        |
+| deb-aarch64      | [![deb](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/deb/stable/falco-0.38.2-aarch64.deb) |
+| tgz-aarch64      | [![tgz](https://img.shields.io/badge/Falco-0.38.2-%2300aec7?style=flat-square)](https://download.falco.org/packages/bin/aarch64/falco-0.38.2-aarch64.tar.gz) |
+
+| Images                                                                      |
+| --------------------------------------------------------------------------- |
+| `docker pull docker.io/falcosecurity/falco:0.38.2`                           |
+| `docker pull public.ecr.aws/falcosecurity/falco:0.38.2`                      |
+| `docker pull docker.io/falcosecurity/falco-driver-loader:0.38.2`             |
+| `docker pull docker.io/falcosecurity/falco-driver-loader-legacy:0.38.2`      |
+| `docker pull docker.io/falcosecurity/falco-no-driver:0.38.2`                 |
+| `docker pull docker.io/falcosecurity/falco-distroless:0.38.2`                |
+
+## v0.38.2
+
+Released on 2024-08-19
+
+
+
+
+### Bug Fixes
+
+* fix(engine): fix metrics names to better adhere to best practices [[#3272](https://github.com/falcosecurity/falco/pull/3272)] - [@incertum](https://github.com/incertum)
+* fix(ci): use vault.centos.org for centos:7 CI build. [[#3274](https://github.com/falcosecurity/falco/pull/3274)] - [@FedeDP](https://github.com/FedeDP)
+
+
+
+### Statistics
+
+|   MERGED PRS    | NUMBER |
+|-----------------|--------|
+| Not user-facing |      0 |
+| Release note    |      2 |
+| Total           |      2 |
+
+#### Release Manager @LucaGuerra

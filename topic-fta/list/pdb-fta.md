@@ -800,4 +800,4 @@ flowchart TD
 - **共性**：
   - PDB 是保护应用可用性的关键机制
   - 配置需要与 Deployment 策略协调
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

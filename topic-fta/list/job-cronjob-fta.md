@@ -268,4 +268,4 @@ flowchart TD
 - **1.19–1.23**：CronJob 仍可能使用 `batch/v1beta1`，需明确 API 迁移路径。
 - **1.24–1.27**：默认使用 `batch/v1`，字段差异需校验；timeZone 字段在 1.25+ 可用。
 - **1.28–1.30**：仅保留稳定 API，调度触发与审计链路需统一。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

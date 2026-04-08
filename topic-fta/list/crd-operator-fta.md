@@ -720,4 +720,4 @@ flowchart TD
 | **1.25** | CEL validation beta；PodSecurityPolicy 移除，Operator 部署需迁移到 PodSecurity admission |
 | **1.26–1.27** | CRD validation ratcheting（alpha 1.26, beta 1.28）；WatchList（alpha 1.27） |
 | **1.28–1.30** | CRD SelectableFields（1.30 beta）；ValidatingAdmissionPolicy GA（1.30）可替代部分 Webhook |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；Operator 框架（controller-runtime/kubebuilder/operator-sdk）版本需与 K8s API 版本对齐 |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；Operator 框架（controller-runtime/kubebuilder/operator-sdk）版本需与 K8s API 版本对齐 |

@@ -1,0 +1,265 @@
+.TH ISTIO 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+istio \- 开源服务网格平台
+.SH SYNOPSIS
+.B istioctl
+[\fIOPTIONS\fR] [\fICOMMAND\fR]
+.SH DESCRIPTION
+Istio 是一个开源的服务网格，提供了一种统一的方式来连接、保护、监控和可观测微服务。
+它提供负载均衡、服务到服务认证、监控等功能，且无需对服务代码进行更改。
+.PP
+Istio 是 CNCF 的毕业项目，是企业级服务网格的行业标准。
+.PP
+KUDIG-DATABASE 提供 Istio 企业级部署、流量管理、安全策略和运维指南。
+.SH CORE FEATURES
+.TP
+.B 流量管理
+智能路由、流量分割、熔断、重试、超时
+.TP
+.B 安全
+自动 mTLS、访问控制、认证授权
+.TP
+.B 可观测性
+分布式追踪、指标收集、日志记录
+.TP
+.B 多集群
+跨集群服务发现、流量管理
+.TP
+.B VM 支持
+将虚拟机工作负载纳入网格
+.TP
+.B 扩展性
+WebAssembly 扩展、自定义策略
+.SH ARCHITECTURE
+.SS 数据平面
+.TP
+Envoy Proxy
+高性能代理，作为 Sidecar 注入到应用 Pod
+.TP
+ztunnel
+Ambient 模式下的每节点代理（可选）
+.TP
+waypoint
+Ambient 模式下的 L7 代理（可选）
+.SS 控制平面 (istiod)
+.TP
+Pilot
+服务发现和流量管理配置
+.TP
+Citadel
+证书管理和密钥分发
+.TP
+Galley
+配置验证和分发
+.SH INSTALLATION
+.SS 标准安装
+.RS
+.nf
+# 下载 istioctl
+curl -L https://istio.io/downloadIstio | sh -
+cd istio-*/bin
+
+# 安装控制平面
+istioctl install --set profile=default
+
+# 验证安装
+istioctl verify-install
+.fi
+.RE
+.SS 配置 Profile
+.TP
+default
+生产环境推荐，包含核心功能
+.TP
+demo
+展示配置，包含所有功能和较高的资源限制
+.TP
+minimal
+最小化安装，仅包含控制平面
+.TP
+ambient
+Ambient 网格模式（新一代架构）
+.SH TRAFFIC MANAGEMENT
+.SS 虚拟服务
+.RS
+.nf
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 90
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 10
+.fi
+.RE
+.SS 目标规则
+.RS
+.nf
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+    outlierDetection:
+      consecutiveErrors: 5
+      interval: 30s
+      baseEjectionTime: 30s
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+.fi
+.RE
+.SS 网关
+.RS
+.nf
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*.example.com"
+.fi
+.RE
+.SH SECURITY
+.SS 自动 mTLS
+默认启用双向 TLS：
+.RS
+.nf
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  mtls:
+    mode: STRICT
+.fi
+.RE
+.SS 授权策略
+.RS
+.nf
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: productpage
+spec:
+  selector:
+    matchLabels:
+      app: productpage
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/bookinfo-productpage"]
+  - to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/productpage"]
+.fi
+.RE
+.SH OBSERVABILITY
+.SS Kiali
+服务网格可视化：
+.RS
+.nf
+kubectl apply -f samples/addons/kiali.yaml
+istioctl dashboard kiali
+.fi
+.RE
+.SS Grafana
+预配置仪表板：
+.RS
+.nf
+istioctl dashboard grafana
+.fi
+.RE
+.SS Jaeger
+分布式追踪：
+.RS
+.nf
+istioctl dashboard jaeger
+.fi
+.RE
+.SH ISTIOCTL COMMANDS
+.RS
+.nf
+# 分析配置
+istioctl analyze
+
+# 注入 Sidecar
+istioctl kube-inject -f deployment.yaml
+
+# 代理配置检查
+istioctl proxy-config cluster <pod>
+istioctl proxy-config listener <pod>
+istioctl proxy-config route <pod>
+
+# 代理状态
+istioctl proxy-status
+
+# 调试日志
+istioctl proxy-config log <pod> --level debug
+
+# 实验性功能
+istioctl experimental authz check <pod>
+.fi
+.RE
+.SH KUDIG DOCUMENTATION
+.TP
+服务网格
+\fBdomain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md\fR
+.TP
+网络架构
+\fBdomain-5-networking/05-network-architecture-overview.md\fR
+.TP
+CNI 深度解析
+\fBdomain-3-control-plane/23-container-network-deep-dive.md\fR
+.SH TROUBLESHOOTING
+.TP
+Sidecar 未注入
+检查命名空间标签、webhook 配置
+.TP
+流量不路由
+验证 VirtualService、DestinationRule 配置
+.TP
+mTLS 连接失败
+检查 PeerAuthentication、证书状态
+.TP
+性能问题
+调整代理资源限制、启用连接池
+.SH SEE ALSO
+.BR kubectl (1),
+.BR envoy (8)
+.PP
+KUDIG-DATABASE: \fBdomain-26-service-mesh-microservices/\fR
+.SH AUTHOR
+Istio Authors <https://istio.io>
+.SH COPYRIGHT
+Apache License 2.0

@@ -1,0 +1,54 @@
+# K8s 学习助手语料配置
+# 用途：构建 Kubernetes 学习问答助手
+# 预计 Token：~3M tokens
+
+name: k8s-learning-assistant
+description: "面向 K8s 学习者的问答助手语料配置"
+use_case: "概念解释、学习引导、命令查询"
+
+core:
+  - path: topic-learn/                    # 学习计划
+    priority: critical
+    chunking: by_h2
+  - path: topic-cheat-sheet/              # 全部速查卡
+    priority: critical
+    chunking: full_doc
+  - path: domain-1-architecture-fundamentals/
+    priority: critical
+    chunking: by_h2
+
+knowledge:
+  - path: domain-2-design-principles/     # 设计原理
+    priority: high
+    chunking: by_h2
+  - path: domain-3-control-plane/         # 控制平面
+    priority: high
+    chunking: by_h2
+  - path: domain-4-workloads/             # 工作负载
+    priority: high
+    chunking: by_h2
+  - path: domain-5-networking/            # 网络
+    priority: high
+    chunking: by_h2
+  - path: domain-6-storage/              # 存储
+    priority: high
+    chunking: by_h2
+
+reference:
+  - path: domain-13-docker/              # Docker 基础
+    priority: medium
+    chunking: by_h2
+  - path: domain-14-linux/               # Linux 基础
+    priority: medium
+    chunking: by_h2
+  - path: domain-32-yaml-manifests/      # YAML 参考
+    priority: medium
+    chunking: by_h2
+  - path: topic-dictionary/              # 运维词典
+    priority: medium
+    chunking: by_entry
+
+exclude:
+  - "*.pdf"
+  - "CHANGELOG.md"
+  - "QUALITY_REPORT*"

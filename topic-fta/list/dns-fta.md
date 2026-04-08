@@ -1678,4 +1678,4 @@ flowchart TD
 - **1.19–1.23**：CoreDNS 版本差异较大，需关注缓存与插件兼容性；autopath 插件在早期版本可能不稳定。
 - **1.24–1.27**：运行时切换后 coredns 日志路径与资源限制需校验；NodeLocal DNSCache 成为推荐配置。
 - **1.28–1.30**：稳定 API 为主，DNS 观测信号应与审计链路一致；EndpointSlice 成为默认服务发现机制。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

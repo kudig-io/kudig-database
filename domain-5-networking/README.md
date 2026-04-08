@@ -56,7 +56,7 @@
 - [37-terway-resources-crud-operations.md](37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
 - [38-terway-gc-mechanism.md](38-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
 
-> **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-98-cloud-native-api-gateway)。
+> **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-40-cloud-native-api-gateway)。
 
 
 ## 学习路径建议

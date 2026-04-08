@@ -305,7 +305,7 @@ spec:
 | `nginx.ingress.kubernetes.io/configuration-snippet` | **需审查** | 自定义 Nginx 片段需逐条验证 |
 | `cert-manager.io/cluster-issuer` | 相同（需安装 cert-manager） | 需在 ACK 安装 cert-manager |
 
-> 详细 Ingress 迁移参考: `domain-98-cloud-native-api-gateway/09-nginx-ingress-migration-guide.md`
+> 详细 Ingress 迁移参考: `domain-40-cloud-native-api-gateway/09-nginx-ingress-migration-guide.md`
 
 ---
 

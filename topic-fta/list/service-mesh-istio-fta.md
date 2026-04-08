@@ -689,4 +689,4 @@ flowchart TD
 | **1.25** | PodSecurity Admission 替代 PSP，Istio sidecar 需配置合适的 security context |
 | **1.26–1.27** | K8s Gateway API 逐步成熟（Istio 1.17+ 支持）；ambient mode alpha |
 | **1.28–1.30** | Gateway API v1 GA（Istio 1.22+）；ambient mode beta；delta xDS 稳定 |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；Istio 版本与 K8s 版本有严格兼容矩阵 |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；Istio 版本与 K8s 版本有严格兼容矩阵 |

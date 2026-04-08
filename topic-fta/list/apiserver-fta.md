@@ -354,4 +354,4 @@ flowchart TD
 - **1.19–1.23**：优先确认 APF 启用状态、聚合 API 可用性；若存在 `v1beta1` API（如 Admission/CRD）需对照迁移路径。
 - **1.24–1.27**：控制面组件版本与配置需与集群 minor 对齐；安全准入策略从 PSP 迁移后，鉴权/准入路径需补充 PSA/OPA 分支。
 - **1.28–1.30**：仅保留稳定 API，务必在 FTA 中标注"已移除 API 的替代路径"；确保审计链路与 APF 观测可用。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

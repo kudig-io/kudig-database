@@ -1501,4 +1501,4 @@ flowchart TD
 - **共性**：
   - CA 是集群弹性的关键组件
   - 需要配合云平台配额规划
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

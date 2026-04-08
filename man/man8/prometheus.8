@@ -1,0 +1,129 @@
+.TH PROMETHEUS 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+prometheus \- 开源监控和告警工具包
+.SH SYNOPSIS
+.B prometheus
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+Prometheus 是一个开源的系统监控和告警工具包，最初在 SoundCloud 构建。
+它是 Cloud Native Computing Foundation 的毕业项目，与 Kubernetes 一起成为云原生监控的事实标准。
+.PP
+KUDIG-DATABASE 提供 Prometheus 生产级部署、配置和运维指南。
+.SH CORE FEATURES
+.TP
+.B 多维数据模型
+由指标名称和键/值对标识的时间序列数据
+.TP
+.B PromQL
+灵活的查询语言，用于利用维度数据
+.TP
+.B 不依赖分布式存储
+单个服务器节点是自治的
+.TP
+.B HTTP 拉取模型
+通过 HTTP 协议抓取时间序列数据
+.TP
+.B 推送网关支持
+用于批量作业监控
+.TP
+.B 多种可视化方案
+内置表达式浏览器，支持 Grafana 集成
+.TP
+.B 高效存储
+自定义的每样本压缩格式
+.SH ARCHITECTURE COMPONENTS
+.TP
+.B Prometheus Server
+抓取和存储时间序列数据
+.TP
+.B Client Libraries
+用于应用程序埋点（Go、Java、Python、Ruby 等）
+.TP
+.B Exporters
+用于第三方系统指标暴露（Node Exporter、Blackbox Exporter 等）
+.TP
+.B Alertmanager
+处理告警，包括分组、抑制和路由
+.TP
+.B Pushgateway
+支持短期作业的指标推送
+.SH PROMETHEUS QUERY LANGUAGE (PromQL)
+.SS 基本查询
+.RS
+.nf
+# 查询指标
+http_requests_total
+
+# 带标签过滤
+http_requests_total{job="apiserver",handler="/api/v1/pods"}
+
+# 范围向量
+http_requests_total[5m]
+
+# 聚合操作
+sum by (job) (rate(http_requests_total[5m]))
+.fi
+.RE
+.SS 常用函数
+.TP
+.B rate()
+计算每秒变化率
+.TP
+.B increase()
+计算时间范围内的增量
+.TP
+.B histogram_quantile()
+从直方图计算分位数
+.TP
+.B predict_linear()
+预测时间序列的未来值
+.SH KUBERNETES INTEGRATION
+.TP
+ServiceMonitor
+custom resource for Prometheus Operator
+.TP
+PodMonitor
+监控 Pod 级别的指标
+.TP
+PrometheusRule
+定义告警规则和记录规则
+.TP
+AlertmanagerConfig
+配置告警路由和接收器
+.SH KUDIG DOCUMENTATION
+.TP
+监控体系
+\fBdomain-8-observability/02-monitoring-metrics-system.md\fR
+.TP
+企业监控
+\fBdomain-20-enterprise-monitoring-alerting/01-prometheus-production-guide.md\fR
+.TP
+可观测性架构
+\fBdomain-8-observability/01-observability-architecture-overview.md\fR
+.SH ALERTING RULES EXAMPLE
+.RS
+.nf
+groups:
+  - name: kubernetes-resources
+    rules:
+      - alert: HighMemoryUsage
+        expr: |
+          (container_memory_usage_bytes /
+           container_spec_memory_limit_bytes) > 0.85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+.fi
+.RE
+.SH SEE ALSO
+.BR alertmanager (8),
+.BR grafana (8),
+.BR node_exporter (8)
+.PP
+KUDIG-DATABASE: \fBdomain-8-observability/\fR, \fBdomain-20-enterprise-monitoring-alerting/\fR
+.SH AUTHOR
+Prometheus Authors <https://prometheus.io>
+.SH COPYRIGHT
+Apache License 2.0

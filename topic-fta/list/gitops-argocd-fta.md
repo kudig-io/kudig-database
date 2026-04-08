@@ -647,4 +647,4 @@ flowchart TD
 | **1.25** | PSP 移除，清单中的 PSP 资源同步到新集群会失败；使用 pluto 检测 |
 | **1.26–1.28** | ArgoCD 2.8+ 支持 ApplicationSet Progressive Syncs；Server-Side Apply 改进 |
 | **1.29–1.30** | ArgoCD 2.10+ Server-Side Diff 减少误报；Gateway API 资源同步支持 |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；ArgoCD 版本与 K8s 版本有兼容矩阵要求 |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；ArgoCD 版本与 K8s 版本有兼容矩阵要求 |

@@ -153,7 +153,7 @@
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 |
 |:---:|---------|---------|---------|
 | 9.1 | **FTA 故障树分析方法论：从贝尔实验室到 K8S 智能运维** | topic-fta/01-07 | 方法论创新 |
-| 9.2 | **K8S 全量故障树：8 个顶事件、63 个底事件的完整分析手册** | topic-fta/kubernetes_fta_full_analysis | 独家内容 |
+| 9.2 | **K8S 全量故障树：8 个顶事件、63 个底事件的完整分析手册** | topic-fta/kubernetes-fta-full-analysis | 独家内容 |
 | 9.3 | **FTA + AI Agent：故障树驱动的工单智能处理架构** | topic-fta/08-13 | AI+运维融合 |
 | 9.4 | **FEBM 法医鉴定循证方法论：从证据到结论的 K8S 故障取证** | topic-febm/01-03 | 方法论互补 |
 | 9.5 | **FTA vs FEBM：演绎法与归纳法在 K8S 运维中的适用性对比** | topic-febm/FTA-vs-FEBM + 总纲 | 学术深度 |
@@ -283,11 +283,11 @@
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 |
 |:---:|---------|---------|----------|
 | 18.1 | **Istio/Linkerd/Consul/Envoy/Dapr 服务网格深度对比** | domain-26/01-06 | 东西向流量治理 |
-| 18.2 | **云原生 API 网关架构：Gateway API + 产品选型** | domain-98/01-03 | 南北向流量管理 |
-| 18.3 | **Higress/APISIX/Kong/Envoy Gateway/Traefik 深度实践** | domain-98/04-08 | 5 大网关产品实战 |
-| 18.4 | **API 网关安全、可观测性与生产运维** | domain-98/10-14 | Wasm 插件/WAF/性能调优 |
+| 18.2 | **云原生 API 网关架构：Gateway API + 产品选型** | domain-40/01-03 | 南北向流量管理 |
+| 18.3 | **Higress/APISIX/Kong/Envoy Gateway/Traefik 深度实践** | domain-40/04-08 | 5 大网关产品实战 |
+| 18.4 | **API 网关安全、可观测性与生产运维** | domain-40/10-14 | Wasm 插件/WAF/性能调优 |
 
-> **来源**: domain-26 (6 篇) + domain-98 (14 篇)。**第 20 周发布**。
+> **来源**: domain-26 (6 篇) + domain-40 (14 篇)。**第 20 周发布**。
 
 ---
 

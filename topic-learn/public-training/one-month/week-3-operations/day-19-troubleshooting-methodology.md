@@ -21,11 +21,11 @@
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**
-   - 文件: `../../topic-fta/4_fta_core_principles.md`
+   - 文件: `../../topic-fta/04-fta-core-principles.md`
    - 重点: 故障树构建、根因分析
 
 3. **FEBM 理论基础**
-   - 文件: `../../topic-febm/1_febm_theory_foundations.md`
+   - 文件: `../../topic-febm/01-febm-theory-foundations.md`
    - 重点: 取证循证方法论
 
 ---

@@ -647,4 +647,4 @@ flowchart TD
 | **1.25–1.26** | DRA (Dynamic Resource Allocation) alpha 引入，为 GPU 调度提供新模型 |
 | **1.27** | Topology Manager GA；DRA 进入 beta 阶段 |
 | **1.28–1.30** | DRA 持续改进；Device Plugin API v1 讨论中；CDI (Container Device Interface) 支持增强 |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；NVIDIA GPU Operator 可简化跨版本驱动/运行时管理 |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；NVIDIA GPU Operator 可简化跨版本驱动/运行时管理 |

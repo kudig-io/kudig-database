@@ -721,4 +721,4 @@ flowchart TD
 | **1.25** | PodSecurityPolicy 移除，备份中包含 PSP 对象在新集群恢复会失败 |
 | **1.26–1.28** | etcd 3.5.x 稳定性改进；CSI snapshot data movement 支持 |
 | **1.29–1.30** | Velero 新版本支持更细粒度的资源过滤和 API 转换 |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；**必须将加密密钥存储在集群外部** |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；**必须将加密密钥存储在集群外部** |

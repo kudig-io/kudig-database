@@ -1,0 +1,18 @@
+# flux v0.29 Release Notes
+
+Source: [v0.29.5](https://github.com/fluxcd/flux2/releases/tag/v0.29.5)
+
+Flux v0.29.5 is patch release which improves the Condition handling of `HelmRepository` resources, and handling of file formats while decrypting Secret generator entries with SOPS to ensure encrypted files in format A can be decrypted to target format B.
+
+In addition, we now recover from Kustomize build panics to guarantee continuity of operations when running into invalid object data.
+
+**Note** that [v0.29.0](https://github.com/fluxcd/flux2/releases/v0.29.0) includes breaking changes.
+
+## Components Changelog
+
+- source-controller to [v0.24.3](https://github.com/fluxcd/source-controller/blob/v0.24.3/CHANGELOG.md)
+- kustomize-controller to [v0.24.4](https://github.com/fluxcd/kustomize-controller/blob/v0.24.4/CHANGELOG.md)
+
+## CLI Changelog
+- PR #2686 - @fluxcdbot - Update toolkit components
+

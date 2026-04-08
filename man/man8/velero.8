@@ -1,0 +1,229 @@
+.TH VELERO 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+velero \- Kubernetes 备份和灾难恢复工具
+.SH SYNOPSIS
+.B velero
+[\fIOPTIONS\fR] [\fICOMMAND\fR]
+.SH DESCRIPTION
+Velero（前身为 Heptio Ark）是一个开源工具，用于安全地备份和恢复、
+执行灾难恢复以及迁移 Kubernetes 集群资源和持久卷。
+.PP
+Velero 提供：
+.IP \(bu 2
+Kubernetes 集群资源和持久卷的备份和恢复
+.IP \(bu 2
+支持将集群资源备份到对象存储后端
+.IP \(bu 2
+支持备份和恢复持久卷（通过快照或 restic）
+.IP \(bu 2
+支持备份调度和保留策略
+.IP \(bu 2
+支持跨集群应用迁移
+.PP
+KUDIG-DATABASE 提供 Velero 生产级部署、备份策略和灾难恢复指南。
+.SH CORE FEATURES
+.TP
+.B 集群备份
+备份 Kubernetes 资源和配置
+.TP
+.B 持久卷备份
+支持云提供商快照和文件级备份（restic）
+.TP
+.B 调度备份
+定期自动执行备份任务
+.TP
+.B 保留策略
+自动清理过期备份
+.TP
+.B 集群迁移
+将应用迁移到其他集群
+.TP
+.B 灾难恢复
+从备份快速恢复集群状态
+.TP
+.B 钩子支持
+备份前后执行自定义操作
+.SH ARCHITECTURE
+.SS 服务端组件
+.TP
+.B velero server
+部署在集群中的控制器
+.TP
+.B BackupStorageLocation
+对象存储后端配置（S3、GCS、Azure Blob 等）
+.TP
+.B VolumeSnapshotLocation
+云提供商快照配置
+.SS 客户端组件
+.TP
+.B velero CLI
+命令行工具，与 Velero 服务器交互
+.TP
+.B Plugins
+云提供商和存储后端插件
+.SH INSTALLATION
+.SS 安装 Velero CLI
+.RS
+.nf
+# macOS
+brew install velero
+
+# Linux
+wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz
+tar -xzf velero-v*.tar.gz
+sudo mv velero /usr/local/bin/
+.fi
+.RE
+.SS 安装服务端
+.RS
+.nf
+# AWS 示例
+velero install \
+  --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.8.0 \
+  --bucket my-backup-bucket \
+  --backup-location-config region=us-east-1 \
+  --snapshot-location-config region=us-east-1 \
+  --secret-file ./credentials-velero
+
+# 使用 restic 备份文件系统
+velero install --use-restic
+.fi
+.RE
+.SH BACKUP OPERATIONS
+.SS 创建备份
+.RS
+.nf
+# 完整集群备份
+velero backup create full-backup
+
+# 特定命名空间备份
+velero backup create ns-backup --include-namespaces production
+
+# 包含资源类型
+velero backup create app-backup --include-resources deployments,pods,services
+
+# 带标签选择器
+velero backup create labeled-backup --selector app=myapp
+
+# 等待完成
+velero backup create daily-backup --wait
+.fi
+.RE
+.SS 查看备份
+.RS
+.nf
+# 列出备份
+velero backup get
+
+# 查看详情
+velero backup describe daily-backup
+
+# 查看日志
+velero backup logs daily-backup
+
+# 查看内容
+velero backup describe daily-backup --details
+.fi
+.RE
+.SS 恢复备份
+.RS
+.nf
+# 恢复完整备份
+velero restore create --from-backup full-backup
+
+# 恢复到特定命名空间
+velero restore create --from-backup ns-backup \
+  --namespace-mappings old-ns:new-ns
+
+# 仅恢复特定资源
+velero restore create --from-backup app-backup \
+  --include-resources deployments
+
+# 查看恢复进度
+velero restore get
+velero restore describe restore-name
+.fi
+.RE
+.SH SCHEDULES
+.SS 创建备份计划
+.RS
+.nf
+# 每日备份
+velero schedule create daily \
+  --schedule="0 2 * * *" \
+  --include-namespaces production
+
+# 保留策略（7天）
+velero schedule create weekly \
+  --schedule="0 0 * * 0" \
+  --ttl 168h0m0s
+
+# Cron 表达式
+velero schedule create hourly \
+  --schedule="@every 1h"
+.fi
+.RE
+.SH RESTIC INTEGRATION
+用于不支持快照的存储或 NFS 卷：
+.RS
+.nf
+# 安装时启用
+velero install --use-restic
+
+# 备份时排除卷
+kubectl annotate pod/my-pod backup.velero.io/backup-volumes-exclude=scratch
+
+# 查看 restic 仓库
+velero restic repo get
+velero restic repo check my-repo
+.fi
+.RE
+.SH KUDIG DOCUMENTATION
+.TP
+灾备恢复
+\fBdomain-30-disaster-recovery-business-continuity/\fR
+.TP
+集群生命周期管理
+\fBdomain-9-platform-ops/02-cluster-lifecycle-management.md\fR
+.TP
+存储备份
+\fBdomain-6-storage/07-storage-backup-recovery.md\fR
+.SH BEST PRACTICES
+.TP
+备份频率
+关键数据每小时，一般数据每天
+.TP
+保留策略
+本地保留 7-30 天，归档存储长期保留
+.TP
+恢复测试
+定期进行恢复演练
+.TP
+加密
+启用备份加密，保护敏感数据
+.TP
+异地备份
+跨区域复制备份数据
+.SH TROUBLESHOOTING
+.TP
+备份失败
+检查存储凭证、网络连通性、权限
+.TP
+卷备份失败
+确认 CSI 驱动支持、快照类配置
+.TP
+恢复不完整
+验证备份完整性、资源依赖关系
+.TP
+存储空间不足
+监控备份大小，调整保留策略
+.SH SEE ALSO
+.BR kubectl (1),
+.BR restic (1)
+.PP
+KUDIG-DATABASE: \fBdomain-30-disaster-recovery-business-continuity/\fR
+.SH AUTHOR
+VMware Tanzu <https://velero.io>
+.SH COPYRIGHT
+Apache License 2.0

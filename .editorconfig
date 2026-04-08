@@ -1,0 +1,38 @@
+# EditorConfig - https://editorconfig.org
+# 确保跨编辑器的一致编码和格式
+
+root = true
+
+# 全局默认
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Markdown 文件
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# YAML 文件
+[*.{yml,yaml}]
+indent_size = 2
+
+# Shell 脚本
+[*.sh]
+indent_size = 4
+
+# Python 脚本
+[*.py]
+indent_size = 4
+
+# JSON 文件
+[*.json]
+indent_size = 2
+
+# TOML 文件 (mdBook 配置)
+[*.toml]
+indent_size = 2

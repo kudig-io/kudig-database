@@ -88,8 +88,8 @@
 
 ### Day 19-21: 故障排查
 1. `topic-structural-trouble-shooting/README.md` ⭐
-2. `topic-fta/4_fta_core_principles.md` ⭐
-3. `topic-febm/1_febm_theory_foundations.md` ⭐
+2. `topic-fta/04-fta-core-principles.md` ⭐
+3. `topic-febm/01-febm-theory-foundations.md` ⭐
 4. `domain-12-troubleshooting/05-pod-pending-diagnosis.md`
 5. `domain-12-troubleshooting/06-node-notready-diagnosis.md`
 6. `domain-12-troubleshooting/07-oom-memory-diagnosis.md`
@@ -119,10 +119,10 @@
 7. `domain-18-production-operations/24-capacity-planning-forecasting.md`
 
 ### Day 26-27: 专题深化
-1. `topic-fta/23_fta_production_quick_start.md` ⭐
-2. `topic-fta/kubernetes_fta_full_analysis.md`
-3. `topic-febm/8_febm_production_quick_start.md` ⭐
-4. `topic-fta/10_agent_orchestration_patterns.md`
+1. `topic-fta/23-fta-production-quick-start.md` ⭐
+2. `topic-fta/kubernetes-fta-full-analysis.md`
+3. `topic-febm/08-febm-production-quick-start.md` ⭐
+4. `topic-fta/10-agent-orchestration-patterns.md`
 5. `domain-10-extensions/01-crd-development-guide.md`
 6. `domain-10-extensions/06-helm-charts-management.md`
 7. `domain-9-platform-ops/20-crd-operator-development.md`

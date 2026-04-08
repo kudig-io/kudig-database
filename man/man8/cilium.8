@@ -1,0 +1,199 @@
+.TH CILIUM 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+cilium \- 基于 eBPF 的容器网络和安全平台
+.SH SYNOPSIS
+.B cilium
+[\fIOPTIONS\fR] [\fICOMMAND\fR]
+.SH DESCRIPTION
+Cilium 是一个开源软件，用于透明地保护使用 Docker 和 Kubernetes 等 Linux 容器管理平台部署的应用程序服务之间的网络连接。
+.PP
+Cilium 基于 eBPF 技术，提供高性能的网络、可观测性和安全性，
+是 Kubernetes CNI 的领先实现之一。
+.PP
+KUDIG-DATABASE 提供 Cilium 企业级部署、策略配置和故障排查指南。
+.SH CORE FEATURES
+.TP
+.B eBPF 数据平面
+内核级高效网络处理，无需 iptables
+.TP
+.B 身份感知安全
+基于服务身份而非 IP 的安全策略
+.TP
+.B L3-L7 网络策略
+支持 HTTP、gRPC、Kafka 等应用层协议
+.TP
+.B 透明加密
+基于 WireGuard 或 IPSec 的 Pod 间加密
+.TP
+.B 负载均衡
+高效的 K8s Service 实现，支持 DSR
+.TP
+.B 可观测性
+Hubble 提供网络流量可视化
+.TP
+.B 集群网格
+多集群连通性和全局服务
+.SH ARCHITECTURE
+.SS 核心组件
+.TP
+.B cilium-agent
+运行在每个节点上的 DaemonSet，管理 eBPF 程序
+.TP
+.B cilium-operator
+管理集群级操作（IPAM、kvstore 等）
+.TP
+.B hubble-relay
+为 Hubble 提供集群范围的可见性
+.TP
+.B hubble-ui
+可视化网络流量界面
+.TP
+.B clustermesh-apiserver
+集群网格连接端点
+.SS eBPF 程序类型
+.TP
+XDP
+高性能数据包处理（入口）
+.TP
+tc
+流量控制和重定向
+.TP
+sockops
+Socket 层优化
+.TP
+cgroup
+容器级网络策略执行
+.SH INSTALLATION
+.SS Helm 安装
+.RS
+.nf
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium --namespace kube-system
+.fi
+.RE
+.SS Cilium CLI
+.RS
+.nf
+cilium install
+cilium status
+cilium connectivity test
+.fi
+.RE
+.SH NETWORK POLICIES
+.SS L3/L4 策略
+.RS
+.nf
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-frontend
+spec:
+  endpointSelector:
+    matchLabels:
+      app: backend
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: frontend
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+.fi
+.RE
+.SS L7 HTTP 策略
+.RS
+.nf
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+spec:
+  endpointSelector:
+    matchLabels:
+      app: api
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: frontend
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+      rules:
+        http:
+        - method: "GET"
+          path: "/api/v1/.*"
+.fi
+.RE
+.SH OBSERVABILITY (HUBBLE)
+.SS 命令行工具
+.RS
+.nf
+# 查看网络流
+hubble observe
+
+# 监控特定 Pod
+hubble observe --pod default/nginx
+
+# 查看 HTTP 请求
+hubble observe --protocol http
+
+# 网络策略丢弃事件
+hubble observe --type drop --verdict DROPPED
+.fi
+.RE
+.SS 常用指标
+.TP
+hubble_flows_processed_total
+处理的网络流总数
+.TP
+hubble_drop_total
+丢弃的数据包统计
+.SH CLUSTER MESH
+连接多个 Kubernetes 集群：
+.RS
+.nf
+# 启用集群网格
+cilium clustermesh enable
+
+# 连接集群
+cilium clustermesh connect --destination-context <ctx>
+
+# 查看状态
+cilium clustermesh status
+.fi
+.RE
+.SH KUDIG DOCUMENTATION
+.TP
+CNI 深度解析
+\fBdomain-3-control-plane/23-container-network-deep-dive.md\fR
+.TP
+网络架构
+\fBdomain-5-networking/05-network-architecture-overview.md\fR
+.TP
+CNI 对比
+\fBdomain-5-networking/07-cni-plugins-comparison.md\fR
+.TP
+网络安全
+\fBdomain-7-security/02-network-security-policies.md\fR
+.SH TROUBLESHOOTING
+.TP
+cilium status 显示失败
+检查 eBPF 支持、内核版本、特权权限
+.TP
+策略不生效
+验证端点标签、策略选择器、日志
+.TP
+DNS 解析问题
+检查 CoreDNS 集成、L7 策略配置
+.TP
+性能问题
+启用 XDP、优化 eBPF 地图大小、调整 MTU
+.SH SEE ALSO
+.BR cilium-agent (8),
+.BR hubble (1)
+.PP
+KUDIG-DATABASE: \fBdomain-5-networking/\fR
+.SH AUTHOR
+Cilium Authors <https://cilium.io>
+.SH COPYRIGHT
+Apache License 2.0

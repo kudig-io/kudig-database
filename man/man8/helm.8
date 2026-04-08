@@ -1,0 +1,219 @@
+.TH HELM 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+helm \- Kubernetes 包管理器
+.SH SYNOPSIS
+.B helm
+[\fIOPTIONS\fR] [\fICOMMAND\fR]
+.SH DESCRIPTION
+Helm 是 Kubernetes 的包管理器，帮助您管理 Kubernetes 应用程序。
+Helm Charts 帮助您定义、安装和升级复杂的 Kubernetes 应用程序。
+.PP
+Helm 是 CNCF 的毕业项目，是 Kubernetes 生态系统中应用分发的标准工具。
+.PP
+KUDIG-DATABASE 提供 Helm 企业级使用指南，涵盖 Chart 开发、
+仓库管理、发布策略和最佳实践。
+.SH CORE CONCEPTS
+.SS Chart
+Helm 包，包含运行应用程序所需的所有资源定义。
+.TP
+结构
+Chart.yaml、values.yaml、templates/、charts/
+.TP
+版本
+语义化版本控制（SemVer 2）
+.SS Release
+在 Kubernetes 集群中运行的 Chart 实例。
+.TP
+修订历史
+支持回滚到任意历史版本
+.TP
+状态跟踪
+部署、失败、挂起、卸载等状态
+.SS Repository
+Chart 的发布和共享集合。
+.TP
+公共仓库
+Artifact Hub、Helm Hub
+.TP
+私有仓库
+Harbor、ChartMuseum、OCI 注册表
+.SH COMMON COMMANDS
+.SS 仓库管理
+.RS
+.nf
+# 添加仓库
+helm repo add stable https://charts.helm.sh/stable
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# 更新索引
+helm repo update
+
+# 列出仓库
+helm repo list
+
+# 搜索 Chart
+helm search repo nginx
+helm search hub prometheus
+.fi
+.RE
+.SS 安装和升级
+.RS
+.nf
+# 安装 Chart
+helm install my-nginx bitnami/nginx
+
+# 指定 values 文件
+helm install my-app ./my-chart -f custom-values.yaml
+
+# 设置值
+helm install my-app ./my-chart --set replicaCount=3
+
+# 升级发布
+helm upgrade my-app ./my-chart
+
+# 安装或升级（原子操作）
+helm upgrade --install my-app ./my-chart
+.fi
+.RE
+.SS 发布管理
+.RS
+.nf
+# 列出发布
+helm list
+helm list --all-namespaces
+
+# 查看状态
+helm status my-app
+
+# 查看历史
+helm history my-app
+
+# 回滚
+helm rollback my-app 2
+
+# 卸载
+helm uninstall my-app
+.fi
+.RE
+.SS 调试和模板
+.RS
+.nf
+# 渲染模板（不安装）
+helm template my-app ./my-chart
+
+# 检查 Chart
+helm lint ./my-chart
+
+# 打包 Chart
+helm package ./my-chart
+
+# 获取发布值
+helm get values my-app
+helm get manifest my-app
+.fi
+.RE
+.SH CHART DEVELOPMENT
+.SS 目录结构
+.RS
+.nf
+mychart/
+├── Chart.yaml          # Chart 元数据
+├── values.yaml         # 默认值
+├── values.schema.json  # 值验证模式
+├── charts/             # 依赖 Chart
+├── templates/          # K8s 模板
+│   ├── _helpers.tpl    # 命名模板
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── NOTES.txt       # 安装后说明
+└── README.md
+.fi
+.RE
+.SS 模板函数
+.RS
+.nf
+# 包含模板
+{{ include "mychart.fullname" . }}
+
+# 引用值
+{{ .Values.replicaCount }}
+
+# 条件
+{{ if .Values.ingress.enabled }}
+{{ end }}
+
+# 循环
+{{ range .Values.env }}
+- name: {{ .name }}
+  value: {{ .value }}
+{{ end }}
+.fi
+.RE
+.SH BEST PRACTICES
+.TP
+版本控制
+使用语义化版本，记录变更日志
+.TP
+依赖管理
+明确声明 Chart 依赖版本
+.TP
+安全配置
+默认启用安全选项，使用最小权限
+.TP
+文档完善
+提供清晰的 README 和 values 注释
+.TP
+测试覆盖
+包含 tests/ 目录进行安装验证
+.SH OCI REGISTRY SUPPORT
+Helm 3.8+ 支持 OCI 注册表作为 Chart 仓库：
+.RS
+.nf
+# 登录注册表
+helm registry login registry.example.com
+
+# 保存 Chart 为 OCI 格式
+helm package ./my-chart
+
+# 推送 Chart
+helm push my-chart-1.0.0.tgz oci://registry.example.com/charts
+
+# 安装 OCI Chart
+helm install my-app oci://registry.example.com/charts/my-chart --version 1.0.0
+.fi
+.RE
+.SH KUDIG DOCUMENTATION
+.TP
+包管理工具
+\fBdomain-10-extensions/05-package-management-tools.md\fR
+.TP
+Helm 生产实践
+\fBdomain-10-extensions/06-helm-production-patterns.md\fR
+.TP
+GitOps 工作流
+\fBdomain-10-extensions/09-gitops-workflow-argocd.md\fR
+.TP
+FTA 故障树
+\fBtopic-fta/list/helm-fta.md\fR
+.SH TROUBLESHOOTING
+.TP
+Chart 安装失败
+检查 values 值、依赖、K8s 版本兼容性
+.TP
+Hook 不执行
+验证 hook 注解、权重、删除策略
+.TP
+CRD 问题
+确认 CRD 安装顺序、版本兼容性
+.TP
+权限不足
+检查 RBAC、ServiceAccount 配置
+.SH SEE ALSO
+.BR kubectl (1),
+.BR argocd (8)
+.PP
+KUDIG-DATABASE: \fBdomain-10-extensions/\fR
+.SH AUTHOR
+Helm Authors <https://helm.sh>
+.SH COPYRIGHT
+Apache License 2.0

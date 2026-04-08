@@ -1,0 +1,87 @@
+.TH KUDIG-STATS 1 "April 2026" "KUDIG-DATABASE 1.0" "User Commands"
+.SH NAME
+kudig-stats \- KUDIG-DATABASE README 数字指标自动统计工具
+.SH SYNOPSIS
+.B kudig-stats
+[\fIOPTION\fR]
+.SH DESCRIPTION
+.B kudig-stats
+是 KUDIG-DATABASE 项目的核心统计脚本，用于自动计算 README.md 中引用的所有数字指标，
+包括文档数、字符数、知识域、FTA/FEBM/CNCF 等项目统计数据。
+.PP
+该脚本确保每次内容更新后，README 中的数字与实际文件保持一致。
+.SH OPTIONS
+.TP
+.BR \-j ", " \-\-json
+以 JSON 格式输出统计结果，可供其他脚本消费。
+.TP
+.BR \-b ", " \-\-badges
+输出生成 README 徽章所需的 HTML 代码。
+.TP
+.BR \-d ", " \-\-diff
+输出指标并与 README.md 当前数字进行比对。
+.TP
+.BR \-h ", " \-\-help
+显示帮助信息并退出。
+.SH EXIT STATUS
+.TP
+.B 0
+成功执行
+.TP
+.B 1
+一般错误
+.SH EXAMPLES
+.PP
+默认表格输出：
+.RS
+.nf
+$ ./scripts/generate-readme-stats.sh
+.fi
+.RE
+.PP
+JSON 格式输出：
+.RS
+.nf
+$ ./scripts/generate-readme-stats.sh --json
+.fi
+.RE
+.PP
+生成徽章代码：
+.RS
+.nf
+$ ./scripts/generate-readme-stats.sh --badges
+.fi
+.RE
+.SH ENVIRONMENT
+.TP
+.B LC_ALL
+设置为 C 以正确处理字符计数
+.SH FILES
+.TP
+.I ./README.md
+项目主文档，脚本会读取其中的数字进行比对
+.TP
+.I ./domain-*/
+知识域目录
+.TP
+.I ./topic-*/
+专题资源目录
+.SH STATISTICS COVERAGE
+.TP
+整体规模指标
+文件总数、Markdown 文档数、总字符数、知识域数量、开源产品数量
+.TP
+AI 相关指标
+AI Agent 文档数、FTA 故障树数量、FTA 总文档数、FEBM 取证文档数、
+学习课程数、CNCF 项目数
+.TP
+运维专题指标
+故障排查文档数、技能库 Skills 数量、速查卡数量、演示文档数、
+技术白皮书数、云厂商数量
+.SH AUTHOR
+KUDIG Team <https://github.com/your-org/kudig-database>
+.SH SEE ALSO
+.BR kudig-quality (1),
+.BR kudig-validate (1)
+.SH COPYRIGHT
+Licensed under CC BY-SA 4.0

@@ -260,4 +260,4 @@ flowchart TD
 - **1.19–1.23**：部分审计字段不全，需补充审计链路与鉴权事件映射；SA Token 投射卷功能需确认。
 - **1.24–1.27**：PSP 移除后 RBAC 与准入策略的权限边界需重新校验；BoundServiceAccountTokenVolume 默认启用。
 - **1.28–1.30**：稳定 API 为主，审计证据链路需与策略回滚一致；关注 ValidatingAdmissionPolicy 与 RBAC 的交互。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

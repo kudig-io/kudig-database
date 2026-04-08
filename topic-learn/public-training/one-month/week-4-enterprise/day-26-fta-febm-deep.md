@@ -17,16 +17,16 @@
 ### 必读文档
 
 1. **FTA 生产快速落地**
-   - 文件: `../../topic-fta/23_fta_production_quick_start.md`
+   - 文件: `../../topic-fta/23-fta-production-quick-start.md`
 
 2. **K8s 完整故障树分析**
-   - 文件: `../../topic-fta/kubernetes_fta_full_analysis.md`
+   - 文件: `../../topic-fta/kubernetes-fta-full-analysis.md`
 
 3. **FEBM 生产快速落地**
-   - 文件: `../../topic-febm/8_febm_production_quick_start.md`
+   - 文件: `../../topic-febm/08-febm-production-quick-start.md`
 
 4. **AI Agent 运维模式**
-   - 文件: `../../topic-fta/10_agent_orchestration_patterns.md`
+   - 文件: `../../topic-fta/10-agent-orchestration-patterns.md`
 
 ---
 

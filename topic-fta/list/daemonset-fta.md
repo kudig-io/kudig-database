@@ -270,4 +270,4 @@ flowchart TD
 - **1.19–1.23**：节点选择与污点容忍字段需核对；旧版事件可能不全。
 - **1.24–1.27**：运行时切换后日志路径需更新。
 - **1.28–1.30**：稳定 API 为主，滚动策略与审计链路需统一。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

@@ -283,4 +283,4 @@ flowchart TD
 - **1.19–1.23**：确保核心控制器配置与 API 版本匹配；对象字段变更需同步调整监控与告警。
 - **1.24–1.27**：安全准入迁移后，控制器创建对象的权限链路需补充 PSA/OPA 分支；关注 EndpointSlice 控制器迁移。
 - **1.28–1.30**：只使用稳定 API，控制器与对象状态同步需保证证据闭环；关注新增控制器如 ValidatingAdmissionPolicy 控制器。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

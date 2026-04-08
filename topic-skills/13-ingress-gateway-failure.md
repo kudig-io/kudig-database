@@ -59,7 +59,7 @@ fta_refs:
 knowledge_refs:
   - "domain-12-troubleshooting/15-ingress-troubleshooting.md"
   - "domain-5-networking/"
-  - "domain-98-cloud-native-api-gateway/"
+  - "domain-40-cloud-native-api-gateway/"
 ---
 
 # Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
@@ -1361,7 +1361,7 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 |------|---------|---------|
 | Ingress 故障排查深度指南 | `domain-12-troubleshooting/15-ingress-troubleshooting.md` | 超出本 Skill 覆盖范围的深度排查 |
 | Kubernetes 网络模型 | `domain-5-networking/` | 理解 Service、Endpoints、网络策略 |
-| Gateway API 详解 | `domain-98-cloud-native-api-gateway/` | Gateway API 概念和最佳实践 |
+| Gateway API 详解 | `domain-40-cloud-native-api-gateway/` | Gateway API 概念和最佳实践 |
 | TLS/证书管理 | `SKILL-SEC-001` | 证书过期和 TLS 配置问题 |
 | Service 网络排障 | `SKILL-NET-001` | Service 层面的网络问题 |
 | Pod 故障诊断 | `SKILL-POD-001` | 后端 Pod 问题导致的 502/503 |

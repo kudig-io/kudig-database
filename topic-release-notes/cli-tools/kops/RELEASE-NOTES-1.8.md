@@ -1,0 +1,10 @@
+# kops v1.8 Release Notes
+
+Source: [1.8.1](https://github.com/kubernetes/kops/releases/tag/1.8.1)
+
+Release 1.8.1 is a small patch release, which updates network plugins, but also tolerates a new schema
+file that will be added in kops 1.9.0.  This will provide a downgrade option from kops 1.9.0.
+
+* Ignore keyset.yaml files; provides a downgrade option from (upcoming) kops 1.9.0
+* Update flannel, weave, romana, kopeio-networking, calico, canal
+* Stop passing deprecated require-kubeconfig flag for kubernetes >= 1.9

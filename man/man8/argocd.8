@@ -1,0 +1,243 @@
+.TH ARGOCD 8 "April 2026" "KUDIG-DATABASE 1.0" "System Administration"
+.SH NAME
+argocd \- 声明式 GitOps 持续交付工具
+.SH SYNOPSIS
+.B argocd
+[\fIOPTIONS\fR] [\fICOMMAND\fR]
+.SH DESCRIPTION
+Argo CD 是一个为 Kubernetes 设计的声明式 GitOps 持续交付工具。
+它遵循 GitOps 模式，使用 Git 仓库作为定义应用程序目标状态的真实来源。
+.PP
+Argo CD 自动化地将目标环境中的应用状态与 Git 仓库中指定的期望状态同步。
+.PP
+KUDIG-DATABASE 提供 Argo CD 企业级部署、多集群管理、
+安全加固和生产运维指南。
+.SH CORE FEATURES
+.TP
+.B 自动同步
+自动将应用状态同步到 Git 中定义的期望状态
+.TP
+.B 可视化
+提供应用程序活动的可视化界面
+.TP
+.B 多云/多集群
+支持管理多个 Kubernetes 集群的应用
+.TP
+.B 回滚
+支持回滚到 Git 历史中的任意提交
+.TP
+.B 健康状态
+评估应用的健康状况，支持自定义健康检查
+.TP
+.B 配置管理
+支持 Kustomize、Helm、Jsonnet、普通 YAML
+.TP
+.B SSO 集成
+支持 OIDC、OAuth2、LDAP、SAML 2.0
+.TP
+.B RBAC
+基于角色的访问控制
+.SH ARCHITECTURE
+.SS 核心组件
+.TP
+.B API Server
+提供 Web UI、CLI 和 CI/CD 集成接口
+.TP
+.B Repository Server
+内部服务，维护 Git 仓库的本地缓存
+.TP
+.B Application Controller
+Kubernetes 控制器，持续监控运行中的应用
+.TP
+.B Dex
+身份认证服务（可选）
+.TP
+.B Redis
+缓存和状态存储
+.SS 应用程序资源
+.TP
+Application
+定义单个应用从 Git 到目标集群的部署
+.TP
+AppProject
+对应用进行分组，定义资源配额和访问策略
+.TP
+ApplicationSet
+在多个集群/环境中自动创建应用
+.SH INSTALLATION
+.SS 标准安装
+.RS
+.nf
+# 创建命名空间
+kubectl create namespace argocd
+
+# 安装 Argo CD
+kubectl apply -n argocd \
+  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# 暴露服务（开发测试）
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+.fi
+.RE
+.SS Helm 安装
+.RS
+.nf
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install argocd argo/argo-cd --namespace argocd --create-namespace
+.fi
+.RE
+.SH CLI COMMANDS
+.SS 认证
+.RS
+.nf
+# 登录
+argocd login <server-host>:<port>
+
+# 获取初始密码
+argocd admin initial-password -n argocd
+.fi
+.RE
+.SS 应用管理
+.RS
+.nf
+# 创建应用
+argocd app create guestbook \
+  --repo https://github.com/argoproj/argocd-example-apps.git \
+  --path guestbook \
+  --dest-server https://kubernetes.default.svc \
+  --dest-namespace default
+
+# 列出应用
+argocd app list
+
+# 同步应用
+argocd app sync guestbook
+
+# 查看应用详情
+argocd app get guestbook
+
+# 删除应用
+argocd app delete guestbook
+.fi
+.RE
+.SS 仓库管理
+.RS
+.nf
+# 添加仓库
+argocd repo add https://github.com/org/repo.git
+
+# 添加私有仓库（SSH）
+argocd repo add git@github.com:org/repo.git \
+  --ssh-private-key-path ~/.ssh/id_rsa
+
+# 列出仓库
+argocd repo list
+.fi
+.RE
+.SH SYNC POLICIES
+.SS 自动同步
+.RS
+.nf
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+.fi
+.RE
+.SS 同步选项
+.RS
+.nf
+spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
+.fi
+.RE
+.SH HEALTH CHECKS
+自定义资源健康检查：
+.RS
+.nf
+resource.customizations.health.<group>_<kind>:
+  hs = {}
+  if obj.status.phase == "Running" then
+    hs.status = "Healthy"
+    hs.message = "Job is running"
+  else
+    hs.status = "Progressing"
+    hs.message = "Waiting for job"
+  end
+  return hs
+.fi
+.RE
+.SH MULTI-CLUSTER
+管理多个集群：
+.RS
+.nf
+# 添加集群
+argocd cluster add <context-name>
+
+# 列出集群
+argocd cluster list
+
+# 在特定集群部署
+argocd app create my-app \
+  --dest-server https://<cluster-endpoint> \
+  --dest-namespace production
+.fi
+.RE
+.SH KUDIG DOCUMENTATION
+.TP
+GitOps 配置管理
+\fBdomain-9-platform-ops/07-gitops-configuration-management.md\fR
+.TP
+Argo CD 企业实践
+\fBdomain-10-extensions/09-gitops-workflow-argocd.md\fR
+.TP
+CI/CD 流水线
+\fBdomain-23-gitops-ci-cd/01-argo-cd-enterprise-gitops.md\fR
+.TP
+FTA 故障树
+\fBtopic-fta/list/argocd-fta.md\fR
+.SH SECURITY BEST PRACTICES
+.TP
+RBAC 配置
+最小权限原则，项目级隔离
+.TP
+SSO 集成
+使用企业身份提供商
+.TP
+Secret 管理
+集成 External Secrets Operator
+.TP
+网络策略
+限制组件间网络访问
+.TP
+审计日志
+启用详细审计记录
+.SH TROUBLESHOOTING
+.TP
+同步失败
+检查 Git 访问权限、manifests 语法、目标集群状态
+.TP
+资源健康未知
+添加自定义健康检查脚本
+.TP
+性能问题
+调整资源限制、启用分片
+.TP
+Webhook 不触发
+验证 Git 提供商配置、网络连通性
+.SH SEE ALSO
+.BR kubectl (1),
+.BR helm (8)
+.PP
+KUDIG-DATABASE: \fBdomain-9-platform-ops/\fR, \fBdomain-23-gitops-ci-cd/\fR
+.SH AUTHOR
+Argo Project Authors <https://argoproj.github.io>
+.SH COPYRIGHT
+Apache License 2.0

@@ -620,4 +620,4 @@ flowchart TD
 - **1.19–1.23**：RollingUpdate 字段稳定，需关注旧版 webhook 与 API 兼容性；PSP 可能仍在使用。
 - **1.24–1.27**：PSP 移除后安全策略迁移影响准入链路，需补充 PSA/OPA 分支；progressDeadlineSeconds 默认值变化。
 - **1.28–1.30**：使用稳定 API 与策略，版本差异主要体现在准入与审计链路；建议使用 Gateway API 替代部分 Ingress 场景。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

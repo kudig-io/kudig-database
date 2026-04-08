@@ -1,0 +1,61 @@
+# minikube v0.31 Release Notes
+
+Source: [v0.31.0](https://github.com/kubernetes/minikube/releases/tag/v0.31.0)
+
+# Minikube v0.31.0
+Minikube is still under active development, and features may change at any time. Release notes are available [here](https://github.com/kubernetes/minikube/blob/v0.31.0/CHANGELOG.md).
+
+## Distribution
+Minikube is distributed in binary form for Linux, OSX, and Windows systems for the v0.31.0 release. Please note that Windows support is currently experimental and may have issues.  Binaries are available through GitHub or on Google Cloud Storage. The direct GCS links are:
+[Darwin/amd64](https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-darwin-amd64)
+[Linux/amd64](https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-linux-amd64)
+[Windows/amd64](https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-windows-amd64.exe)
+
+## Installation
+### OSX
+```shell
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-darwin-amd64 && chmod +x minikube && sudo cp minikube /usr/local/bin/ && rm minikube
+```
+Feel free to leave off ```sudo cp minikube /usr/local/bin/ && rm minikube``` if you would like to add minikube to your path manually.
+
+Or you can install via homebrew with `brew cask install minikube`.
+
+### Linux
+```shell
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /usr/local/bin/ && rm minikube
+```
+Feel free to leave off ```sudo cp minikube /usr/local/bin/ && rm minikube``` if you would like to add minikube to your path manually.
+
+### Debian Package (.deb) [Experimental]
+Download the `minikube_0.31-0.deb` file, and install it using `sudo dpkg -i minikube_.deb`
+
+### Windows [Experimental]
+Download the `minikube-windows-amd64.exe` file, rename it to `minikube.exe` and add it to your path.
+
+### Windows Installer [Experimental]
+Download the `minikube-installer.exe` file, and execute the installer.  This will automatically add minikube.exe to your path with an uninstaller available as well.
+
+## Usage
+Documentation is available [here](https://github.com/kubernetes/minikube/blob/v0.31.0/README.md).
+
+## Checksums
+Minikube consists of a binary executable and a VM image in ISO format. To verify the contents of your distribution, you can compare sha256 hashes with these values:
+
+```
+$ tail -n +1 -- out/*.sha256
+==> out/minikube-darwin-amd64.sha256 <==
+621189b5ec9cbb55003ee3577d480e847c0f80a9ed58f4fb3ed567bb7be623a1
+
+==> out/minikube-linux-amd64.sha256 <==
+5926978aee75776af0867d112a77334b10ec65f687d734f238bfd88960c983c2
+
+==> out/minikube-windows-amd64.exe.sha256 <==
+1ae607a849569664f6c5d87f969b1f9a096524515a6524be07fd364b7d405f6c
+```
+
+### ISO
+```shell
+$ openssl sha256 minikube.iso
+SHA256(minikube.iso)=
+1f175bd724f387d27acd57552b064d52c4eb268c77e2f978825b90573b0019eb
+```

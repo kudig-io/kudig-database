@@ -2601,7 +2601,7 @@ flowchart TD
 - **1.19–1.23**：Gateway API 仍为新兴能力，需确认 CRD 与控制器版本兼容；部分功能为 Alpha。
 - **1.24–1.27**：HTTPRoute 等资源趋于稳定，需补充与 Ingress 的共存路径；GRPCRoute 支持增强。
 - **1.28–1.30**：稳定 API 为主，策略冲突与审计链路需补全；关注 BackendLBPolicy 等新特性。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。default": "continue_to:gate_health_or"
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。default": "continue_to:gate_health_or"
       }
     },
     { "name": "健康检查 OR 门", "action": "gate_or", "step": "gate_health_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_health_fail", "evt_health_config_error"], "cmd": { "type": "single", "commands": [{ "id": "check_health", "description": "检查健康状态", "exec": "kubectl get pods -n ${NAMESPACE} -l ${POD_SELECTOR} -o jsonpath='{range .items[*]}{.metadata.name}: ready={.status.containerStatuses[0].ready}{\"\\n\"}{end}'", "timeout": "5s" }] }, "match": { "rules": [{ "if": "ready=false", "then": "check:evt_health_fail", "confidence": 0.9 }], "default": "check_all_events" } },
@@ -2636,4 +2636,4 @@ flowchart TD
 - **1.19–1.23**：Gateway API 仍为新兴能力，需确认 CRD 与控制器版本兼容；部分功能为 Alpha。
 - **1.24–1.27**：HTTPRoute 等资源趋于稳定，需补充与 Ingress 的共存路径；GRPCRoute 支持增强。
 - **1.28–1.30**：稳定 API 为主，策略冲突与审计链路需补全；关注 BackendLBPolicy 等新特性。
-- **共性**：遵循 \`fta_methodology_and_agentic_practices.md\` 中的"版本适配基线"。
+- **共性**：遵循 \`fta-methodology-and-agentic-practices.md\` 中的"版本适配基线"。

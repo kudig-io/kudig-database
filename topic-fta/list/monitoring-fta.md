@@ -711,4 +711,4 @@ flowchart TD
 | **1.25** | PSP 移除，Prometheus/Alertmanager Pod 安全上下文需调整为 PodSecurity Admission |
 | **1.26–1.28** | 稳定 API 为主；kube-state-metrics 需更新以支持新资源类型 |
 | **1.29–1.30** | 新增资源类型的监控（如 Gateway API 资源）需补充 ServiceMonitor |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；**必须配置 Watchdog 告警和 DeadMansSnitch 验证告警链路完整性** |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；**必须配置 Watchdog 告警和 DeadMansSnitch 验证告警链路完整性** |

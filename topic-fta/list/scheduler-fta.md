@@ -274,4 +274,4 @@ flowchart TD
 - **1.19–1.23**：确认调度插件与策略配置是否可用；如存在旧版调度策略需迁移与校验。
 - **1.24–1.27**：与 Cluster Autoscaler 版本对齐，确保扩缩容信号可用；KubeSchedulerConfiguration API 变更需注意。
 - **1.28–1.30**：仅保留稳定 API，拓扑约束与资源配额的可观测信号需补全；调度框架插件成熟稳定。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

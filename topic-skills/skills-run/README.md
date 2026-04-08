@@ -63,7 +63,7 @@ bash teardown.sh
 
 ## 每个场景的执行流程
 
-每个 demo 场景严格按照 [_skill-schema.md](../_skill-schema.md) 定义的 Skill 执行闭环运行:
+每个 demo 场景严格按照 [skill-schema.md](../skill-schema.md) 定义的 Skill 执行闭环运行:
 
 ```
 Phase 0: 故障注入 (Fault Injection)

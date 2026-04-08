@@ -1301,4 +1301,4 @@ flowchart TD
 - **共性**：
   - 迁移期间需要谨慎评估影响
   - 推荐先用 warn 模式测试
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

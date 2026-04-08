@@ -637,4 +637,4 @@ flowchart TD
 | **1.25** | CSI Migration GA（Azure/vSphere）；in-tree cloud provider 标记 deprecated |
 | **1.26–1.27** | in-tree cloud provider 移除推进；CCM 必须外置部署 |
 | **1.28–1.30** | 大部分 in-tree 存储插件已移除；CCM 外置为标准模式 |
-| **共性** | 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"；CCM/CSI 版本需与 K8s 版本严格匹配 |
+| **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；CCM/CSI 版本需与 K8s 版本严格匹配 |

@@ -1,0 +1,15 @@
+# rook v1.4 Release Notes
+
+Source: [v1.4.9](https://github.com/rook/rook/releases/tag/v1.4.9)
+
+# Improvements
+Rook v1.4.9 is a patch release limited in scope and focusing on small feature additions and bug fixes.
+
+This patch release updates the Rook CRDs to v1 as part of the migration to Helm 3. While we have tested this helm upgrade scenario, you may want to consider upgrading to 1.5 where there has been more comprehensive testing with this conversion rather than deploy v1.4.9 with helm.
+
+## Ceph
+- Update to Helm 3 and convert deprecated v1beta1 resources to v1 (#6910, @travisn)
+- Add devices to schema at overall storage level (#6938, @travisn)
+- Update operator base image and example manifests to Ceph v15.2.8 (#6847, @travisn)
+- Tune fast device class for OSD on PVC in the Azure (#6303, @subhamkrai)
+- RGW service selector should not change during upgrade (#6742, @travisn)

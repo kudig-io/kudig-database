@@ -708,4 +708,4 @@ flowchart TD
 - **1.19–1.23**：HPA v2beta2 API 与指标适配需核对；旧版 metrics-server 兼容性需关注；behavior 字段可能不可用。
 - **1.24–1.27**：HPA v2 GA；自定义指标适配器与 API 版本对齐，避免指标读取失败；behavior 策略成为标准配置。
 - **1.28–1.30**：稳定 API 为主，需确保指标链路与审计一致性；ContainerResource 指标类型可用。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

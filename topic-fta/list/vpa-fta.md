@@ -856,4 +856,4 @@ flowchart TD
 - **共性**：
   - VPA 不应与 HPA 同时管理相同资源类型
   - 生产环境建议先用 Off 模式观察推荐
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

@@ -307,16 +307,16 @@ Agent 在执行 Skill 后应记录：
 | Agent 设计 | [topic-ai-agent/](../topic-ai-agent/) | AI Agent 工程与架构设计 |
 | 事件管理 Runbook | [topic-dictionary/12-incident-management-runbooks.md](../topic-dictionary/12-incident-management-runbooks.md) | 事件管理流程模板 |
 | 生产排障 Playbook | [topic-dictionary/16-production-troubleshooting-playbook.md](../topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
-| Skill 文档模板 | [_skill-schema.md](./_skill-schema.md) | 新建 Skill 的规范化模板 |
+| Skill 文档模板 | [skill-schema.md](./skill-schema.md) | 新建 Skill 的规范化模板 |
 | IDE 目录格式 Skill | [k8s-node-notready/](./skill-set/k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
 | **本地 Demo** | [skills-run/](./skills-run/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
-| Demo 运行指南 | [07-skill-local-demo-guide.md](./07-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
+| Demo 运行指南 | [19-skill-local-demo-guide.md](./19-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
 
 ---
 
 ## 7. 本地运行 Demo
 
-在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./07-skill-local-demo-guide.md) 和 [skills-run/README.md](./skills-run/README.md)。
+在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./19-skill-local-demo-guide.md) 和 [skills-run/README.md](./skills-run/README.md)。
 
 ```bash
 # 快速开始

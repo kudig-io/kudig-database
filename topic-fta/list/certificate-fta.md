@@ -1468,4 +1468,4 @@ flowchart TD
 - **共性**：
   - 证书到期是集群最常见的故障原因之一
   - 时间同步是证书验证的前提条件
-  - 遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"
+  - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"

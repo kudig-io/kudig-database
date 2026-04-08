@@ -61,7 +61,7 @@
 - ✅ 涵盖：RBAC、NetworkPolicy、HPA/VPA、PDB、PSP/SCC、Resource Quota
 - ✅ 涵盖：Deployment、StatefulSet、DaemonSet、Job/CronJob、Helm、GitOps/ArgoCD
 - ✅ 涵盖：GPU、Cluster Autoscaler、Cloud Provider、备份恢复、集群升级、证书管理、Webhook/准入控制、监控告警
-- ✅ 新增 `fta_methodology_and_agentic_practices.md` FTA 方法论与 AI Agent 实践文档
+- ✅ 新增 `fta-methodology-and-agentic-practices.md` FTA 方法论与 AI Agent 实践文档
 
 ### 2026-02-28 Topic-FTA 故障树分析体系创建
 **FTA (Fault Tree Analysis) 故障树分析专题上线**:
@@ -70,7 +70,7 @@
 - ✅ FTA 方法论理论基础（23 篇）：起源与发展、数学基础、符号体系、核心原则、构建流程、验证与质量、维护与演进
 - ✅ AI Agent 智能运维实践：Agent 编排模式、FTA 驱动 Runbook 自动化、AIOps 集成、智能工单处理
 - ✅ 附录：术语表、工具与资源、参考文献、模板
-- ✅ `kubernetes_fta_full_analysis.md` Kubernetes 全量故障树分析（126KB）
+- ✅ `kubernetes-fta-full-analysis.md` Kubernetes 全量故障树分析（126KB）
 
 ### 2026-02-26 GitBook 离线静态导出与 FEBM/FTA 更新
 **跨平台文档浏览系统完善**:

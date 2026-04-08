@@ -18,17 +18,17 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 
 | 目标 | 推荐起点 |
 |:---|:---|
-| **快速了解 FEBM** | [第一章：FEBM 方法论原理与理论基础](./1_febm_theory_foundations.md) |
-| **快速落地 FEBM** | [第八章：生产环境快速启动与 K8s 故障取证手册](./8_febm_production_quick_start.md) |
-| **技术实现深度** | [第二章：FEBM 技术实现体系](./2_febm_technical_implementation.md) |
-| **AI Agent 工单处理** | [第四章：FEBM 对云平台工单智能体托管的意义](./4_febm_agent_ticket_processing.md) |
+| **快速了解 FEBM** | [第一章：FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) |
+| **快速落地 FEBM** | [第八章：生产环境快速启动与 K8s 故障取证手册](./08-febm-production-quick-start.md) |
+| **技术实现深度** | [第二章：FEBM 技术实现体系](./02-febm-technical-implementation.md) |
+| **AI Agent 工单处理** | [第四章：FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) |
 | **FTA vs FEBM** | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf)（原始论文） |
-| **总纲概览** | [FEBM 方法论深度解析](./febm_methodology_deep_dive.md) |
+| **总纲概览** | [FEBM 方法论深度解析](./febm-methodology-deep-dive.md) |
 
 ## 最近更新（2026 Q2）
-- **取证自动化蓝图**：新增总纲章节 [7.1 取证自动化蓝图（E2E 流程）](./febm_methodology_deep_dive.md#71-取证自动化蓝图e2e-流程)
-- **合规落地清单**：新增总纲章节 [7.2 合规落地清单（SOC 2 / ISO 27001 / 等保）](./febm_methodology_deep_dive.md#72-合规落地清单soc-2--iso-27001--等保)
-- **落地度量仪表板**：新增总纲章节 [7.3 落地度量仪表板](./febm_methodology_deep_dive.md#73-落地度量仪表板示例指标)
+- **取证自动化蓝图**：新增总纲章节 [7.1 取证自动化蓝图（E2E 流程）](./febm-methodology-deep-dive.md#71-取证自动化蓝图e2e-流程)
+- **合规落地清单**：新增总纲章节 [7.2 合规落地清单（SOC 2 / ISO 27001 / 等保）](./febm-methodology-deep-dive.md#72-合规落地清单soc-2--iso-27001--等保)
+- **落地度量仪表板**：新增总纲章节 [7.3 落地度量仪表板](./febm-methodology-deep-dive.md#73-落地度量仪表板示例指标)
 
 ---
 
@@ -38,21 +38,21 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 
 | 文档 | 说明 |
 |:---|:---|
-| [febm_methodology_deep_dive.md](./febm_methodology_deep_dive.md) | 总纲文档，六大部分概览（1041行） |
+| [febm-methodology-deep-dive.md](./febm-methodology-deep-dive.md) | 总纲文档，六大部分概览（1041行） |
 | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf) | FTA 与 FEBM 在 Kubernetes 运维中的适用性对比研究（原始论文） |
 
 ### 分章详解
 
 | # | 文档 | 核心内容 | 行数 |
 |:---:|:---|:---|:---:|
-| 1 | [FEBM 方法论原理与理论基础](./1_febm_theory_foundations.md) | 洛卡德交换原理、四大支柱（证据中心性/程序规范性/时效敏感性/结论可辩护性）、FEBM vs FTA 认识论差异、认知偏差防范 | 684 |
-| 2 | [FEBM 技术实现体系](./2_febm_technical_implementation.md) | 证据生命周期管理、容器检查点（CRIU）、eBPF 遥测、内存取证（Volatility）、时间线重建、网络取证、K8s 审计日志深度解析、多源证据融合 | 3,388 |
-| 3 | [FEBM 最佳实践](./3_febm_best_practices.md) | 五层可观测性栈、证据采集策略、NIST SP 800-61 事件响应流程、Forensics as Code、持续取证、证据存储管理、取证环境隔离、常见陷阱与反模式 | 3,163 |
-| 4 | [FEBM 对云平台工单智能体托管的意义](./4_febm_agent_ticket_processing.md) | Agent 工单处理架构、七大核心能力模型、FTA+FEBM 融合模式、三个完整案例（连接池耗尽/容器逃逸/静默失败）、人机协同分级、知识进化机制 | 2,690 |
-| 5 | [FEBM 体系建设方法论](./5_febm_construction_methodology.md) | 五级成熟度模型、分阶段建设路线（Phase 1-5）、工具链参考、组织角色矩阵、实施建议、预算规划、合规法律考量 | 2,873 |
-| 6 | [未来演进方向](./6_febm_future_evolution.md) | AI/ML 增强混合方法、云原生取证基础设施（OSDFIR）、DevSecOps 融合、意图模型协同、数字孪生、量子计算影响、标准化 | 3,916 |
-| 7 | [附录](./7_febm_appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、Falco 检测规则模板、事件响应 Checklist | 1,267 |
-| 8 | [生产环境快速启动与 K8s 故障取证手册](./8_febm_production_quick_start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 故障取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
+| 1 | [FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) | 洛卡德交换原理、四大支柱（证据中心性/程序规范性/时效敏感性/结论可辩护性）、FEBM vs FTA 认识论差异、认知偏差防范 | 684 |
+| 2 | [FEBM 技术实现体系](./02-febm-technical-implementation.md) | 证据生命周期管理、容器检查点（CRIU）、eBPF 遥测、内存取证（Volatility）、时间线重建、网络取证、K8s 审计日志深度解析、多源证据融合 | 3,388 |
+| 3 | [FEBM 最佳实践](./03-febm-best-practices.md) | 五层可观测性栈、证据采集策略、NIST SP 800-61 事件响应流程、Forensics as Code、持续取证、证据存储管理、取证环境隔离、常见陷阱与反模式 | 3,163 |
+| 4 | [FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) | Agent 工单处理架构、七大核心能力模型、FTA+FEBM 融合模式、三个完整案例（连接池耗尽/容器逃逸/静默失败）、人机协同分级、知识进化机制 | 2,690 |
+| 5 | [FEBM 体系建设方法论](./05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线（Phase 1-5）、工具链参考、组织角色矩阵、实施建议、预算规划、合规法律考量 | 2,873 |
+| 6 | [未来演进方向](./06-febm-future-evolution.md) | AI/ML 增强混合方法、云原生取证基础设施（OSDFIR）、DevSecOps 融合、意图模型协同、数字孪生、量子计算影响、标准化 | 3,916 |
+| 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、Falco 检测规则模板、事件响应 Checklist | 1,267 |
+| 8 | [生产环境快速启动与 K8s 故障取证手册](./08-febm-production-quick-start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 故障取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
 
 ---
 

@@ -620,4 +620,4 @@ flowchart TD
 - **1.19–1.23**：关注 PVC 绑定与 Headless Service 解析路径差异；旧版 CSI 事件需补充；volumeBindingMode 设置重要。
 - **1.24–1.27**：容器运行时切换后，挂载日志路径需更新为 `containerd` 相关；minReadySeconds 字段可用。
 - **1.28–1.30**：仅保留稳定 API，滚动策略与分区字段需校验；PVC 自动删除策略可用。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

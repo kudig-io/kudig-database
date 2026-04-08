@@ -63,7 +63,7 @@
 
 | 组件 | 更新内容 |
 |------|---------|
-| _skill-schema.md | 新增 Skill 分类体系（12 类）、Section 11（云厂商特异性）、Section 12（自动化集成接口） |
+| skill-schema.md | 新增 Skill 分类体系（12 类）、Section 11（云厂商特异性）、Section 12（自动化集成接口） |
 | README.md | 全景索引扩展至 18 个 Skill、运维场景快速导航、成熟度标识（GA/Beta/Alpha） |
 | Demo 体系 | 新增 5 个场景脚本（06-pvc-pending / 07-deployment-stuck / 08-rbac-denied / 09-hpa-not-scaling / 10-image-pull-failure）、更新 run-skill-demo.sh 菜单 |
 
@@ -122,7 +122,7 @@
 
 ```
 topic-skills/
-├── _skill-schema.md                    # Schema 规范（新增 Section 11/12 + 分类体系）
+├── skill-schema.md                    # Schema 规范（新增 Section 11/12 + 分类体系）
 ├── README.md                           # 全景索引（扩展至 18 Skill）
 ├── 01-node-notready.md                 # 增强
 ├── 02-pod-crashloop-oomkilled.md       # 增强

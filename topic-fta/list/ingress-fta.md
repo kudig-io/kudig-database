@@ -1860,4 +1860,4 @@ flowchart TD
 - **1.19–1.23**：`networking.k8s.io/v1` 已 GA，1.22 起移除 `v1beta1`，需统一迁移；pathType 成为必填字段。
 - **1.24–1.27**：Ingress API 稳定，证书与 Controller 版本需与集群对齐；IngressClass 成为推荐配置方式。
 - **1.28–1.30**：稳定 API 为主，需补充 Gateway API 并行存在的路由差异说明；考虑迁移到 Gateway API。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

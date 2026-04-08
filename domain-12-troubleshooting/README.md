@@ -74,6 +74,29 @@
 
 ---
 
+## 🔗 故障排查全景资源（跨目录统一索引）
+
+本项目的故障排查知识分布在三个互补的模块中，各有侧重：
+
+| 模块 | 定位 | 内容 | 入口 |
+|:---|:---|:---|:---|
+| **domain-12** (本目录) | 按组件/资源类型的完整排查指南 | 42 篇深度文档 | [本文档](#文档目录) |
+| **topic-fta** | FTA 故障树分析（演绎法推理骨架） | 36 个组件故障树 | [topic-fta/list/](../topic-fta/list/) |
+| **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [topic-structural-trouble-shooting/](../topic-structural-trouble-shooting/) |
+| **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [topic-skills/](../topic-skills/) |
+| **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [topic-febm/](../topic-febm/) |
+
+### 推荐使用路径
+
+```
+故障现象 → topic-fta (定位根因方向)
+         → domain-12 (查看详细排查步骤)
+         → topic-skills (执行自动化修复)
+         → topic-febm (复盘取证分析)
+```
+
+---
+
 ## 使用指南
 
 ### 新手运维工程师

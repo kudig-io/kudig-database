@@ -1,0 +1,60 @@
+# minikube v0.5 Release Notes
+
+Source: [v0.5.0](https://github.com/kubernetes/minikube/releases/tag/v0.5.0)
+
+# Minikube v0.5.0
+
+Minikube is still under active development, and features may change at any time. Release notes are available [here](https://github.com/kubernetes/minikube/blob/master/CHANGELOG.md).
+
+## Distribution
+
+Minikube is only distributed in binary form for Linux and OSX systems for the v0.5.0 release. Binaries are available through Github or on Google Cloud Storage. The direct GCS links are:
+[Darwin/amd64](https://storage.googleapis.com/minikube/releases/v0.5.0/minikube-darwin-amd64)
+[Linux/amd64](https://storage.googleapis.com/minikube/releases/v0.5.0/minikube-linux-amd64)
+
+## Installation
+
+### OSX
+
+``` shell
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.5.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+```
+
+Feel free to leave off the `sudo mv minikube /usr/local/bin` if you would like to add minikube to your path manually.
+
+### Linux
+
+``` shell
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.5.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+```
+
+Feel free to leave off the `sudo mv minikube /usr/local/bin` if you would like to add minikube to your path manually.
+
+## Usage
+
+Documentation is available [here](https://github.com/kubernetes/minikube/blob/master/README.md).
+
+## Checksums
+
+Minikube consists of a binary executable and a VM image in ISO format. To verify the contents of your distribution, you can compare SHA1 hashes with these values:
+
+### OSX
+
+``` shell
+$ openssl sha1 out/minikube-darwin-amd64
+SHA1(out/minikube-darwin-amd64)= 1c639c213c2c0b52ac0c9fa64ded6e052a82eafe
+```
+
+### Linux
+
+``` shell
+$ openssl sha1 out/minikube-linux-amd64
+SHA1(out/minikube-linux-amd64)= d1dd7c758183c143e7810c98db17246255ee6db6
+```
+
+### ISO
+
+``` shell
+$ openssl sha1 deploy/iso/minikube.iso
+SHA1(deploy/iso/minikube.iso)= 75982c8278d02dabfbfa605d176814da34360a33
+```

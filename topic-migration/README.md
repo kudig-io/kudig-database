@@ -124,7 +124,7 @@ aliyun ecs DescribeZones --RegionId cn-hangzhou --output cols=ZoneId,LocalName
 | ACK VPC 网络 | `domain-17-cloud-provider/04-alicloud-ack/242-ack-vpc-network.md` | VPC/CIDR 规划详解 |
 | ACK ECS 计算 | `domain-17-cloud-provider/04-alicloud-ack/240-ack-ecs-compute.md` | 节点规格选型 |
 | 升级迁移策略 | `domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md` | 通用升级迁移理论 |
-| API 网关迁移 | `domain-98-cloud-native-api-gateway/09-nginx-ingress-migration-guide.md` | Ingress 控制器迁移 |
+| API 网关迁移 | `domain-40-cloud-native-api-gateway/09-nginx-ingress-migration-guide.md` | Ingress 控制器迁移 |
 | 生产运维实践 | `domain-18-production-operations/` | 生产环境运维全集 |
 | 故障排查大全 | `domain-12-troubleshooting/` | 各类故障排查手册 |
 | 灾备恢复 | `domain-30-disaster-recovery-business-continuity/` | 备份与恢复策略 |

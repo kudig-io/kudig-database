@@ -35,6 +35,24 @@ python3 scripts/fta_tree_visualization.py     # 生成 FTA 故障树图片
 | `count-stats.sh` | 功能已被 `generate-readme-stats.sh` 完全覆盖并大幅增强（支持 JSON/徽章/差异比对，覆盖 README 全部指标） |
 | `check-concepts.ps1` | PowerShell 脚本，仅限 Windows；引用的 `reference/concept.md` 路径在项目中不存在，实际不可用 |
 
+## 文档参考
+
+每个脚本都配有完整的 Unix manpage，可通过以下方式查看：
+
+```bash
+# 查看 manpage
+man ./man/man1/kudig-stats.1
+man ./man/man1/kudig-quality.1
+man ./man/man1/kudig-validate.1
+man ./man/man1/kudig-fta-viz.1
+
+# 或安装到系统后直接使用
+man kudig-stats
+man kudig-quality
+```
+
+更多安装选项详见 [`man/INSTALL.md`](../man/INSTALL.md) 和 [`man/README.md`](../man/README.md)。
+
 ## 其他工具
 
 Domain 级别的专用工具存放在各自目录下：

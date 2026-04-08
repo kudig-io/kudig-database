@@ -46,6 +46,8 @@
   <img src="https://img.shields.io/badge/FTA%E6%95%85%E9%9A%9C%E6%A0%91-36%E4%B8%AA-4ecdc4?style=flat-square" alt="FTA"/>
   <img src="https://img.shields.io/badge/FEBM%E5%8F%96%E8%AF%81-9%E7%AF%87-45b7d1?style=flat-square" alt="FEBM"/>
   <img src="https://img.shields.io/badge/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92-46%E7%AF%87-f9ca24?style=flat-square&logo=graduation-cap" alt="学习计划"/>
+  <img src="https://img.shields.io/badge/Manpage-14%E4%B8%AA-9b59b6?style=flat-square&logo=linux" alt="Manpage"/>
+  <img src="https://img.shields.io/badge/%E9%80%9F%E6%9F%A5%E5%8D%A1-9%E5%BC%A0-blueviolet?style=flat-square&logo=bookstack" alt="速查卡"/>
 </p>
 
 <!-- One-liner Description -->
@@ -62,6 +64,8 @@
   <a href="#-知识体系架构">📚 知识体系</a> •
   <a href="#-ai-语料库场景">🤖 AI 语料库</a> •
   <a href="#-使用场景">🎯 使用场景</a> •
+  <a href="#-manpage-参考手册">📖 Manpage</a> •
+  <a href="#-项目基础设施">🏗️ 基础设施</a> •
   <a href="#-内容统计">📊 统计</a>
 </p>
 
@@ -255,6 +259,8 @@ graph TD
 
 ### 3. RAG 应用 - 企业知识库
 
+> 📋 详细的分块策略与 Embedding 模型推荐请参阅 [corpus-config/rag-chunking-strategy.md](./corpus-config/rag-chunking-strategy.md)，预置的 RAG Profile 请参阅 [corpus-config/profiles/](./corpus-config/profiles/)。
+
 ```python
 # 推荐分块策略
 ├── domain-*/          # 按知识域分块，用于专业问答
@@ -293,7 +299,7 @@ flowchart LR
 ```
 
 **推荐路径**：
-1. [FTA 生产快速落地](./topic-fta/23_fta_production_quick_start.md)
+1. [FTA 生产快速落地](./topic-fta/23-fta-production-quick-start.md)
 2. [Pod 故障树分析](./topic-fta/list/pod-fta.md)
 3. [Pod CrashLoopBackOff Skill](./topic-skills/02-pod-crashloop-oomkilled.md)
 
@@ -372,9 +378,10 @@ flowchart TD
 |------|------|
 | 故障排查文档 | 150+ |
 | 技能库 (Skills) | 6 个 |
-| 速查卡 | 3 张 |
+| 速查卡 | 9 张 |
 | 演示文档 | 12 篇 |
 | 技术白皮书 | 16 篇 |
+| Manpage | 14 个 |
 
 </td>
 </tr>
@@ -399,6 +406,7 @@ flowchart TD
 | 13-17 | 底层基础 | 45 | Docker、Linux、网络/存储基础、云厂商 |
 | 18-32 | 企业级专题 | 200+ | 生产运维、监控日志、GitOps、安全合规 |
 | 33-39 | 前沿技术 | 300+ | CNCF项目、eBPF、平台工程、边缘计算 |
+| 40 | 云原生API网关 | 15 | Gateway API、网关选型、安全策略、性能优化 |
 
 ---
 
@@ -422,7 +430,7 @@ flowchart TD
 <a href="./domain-3-control-plane/11-etcd-deep-dive.md">etcd 运维</a> → 
 <a href="./domain-12-troubleshooting/">故障排查</a> → 
 <a href="./domain-8-observability/06-monitoring-metrics-prometheus.md">监控告警</a> → 
-<a href="./topic-fta/23_fta_production_quick_start.md">FTA 快速落地</a>
+<a href="./topic-fta/23-fta-production-quick-start.md">FTA 快速落地</a>
 </td>
 </tr>
 <tr>
@@ -455,8 +463,8 @@ flowchart TD
 <tr>
 <td align="center"><b>🚨 SRE/故障调查</b></td>
 <td>
-<a href="./topic-fta/23_fta_production_quick_start.md">FTA 快速落地</a> → 
-<a href="./topic-febm/8_febm_production_quick_start.md">FEBM 快速落地</a> → 
+<a href="./topic-fta/23-fta-production-quick-start.md">FTA 快速落地</a> → 
+<a href="./topic-febm/08-febm-production-quick-start.md">FEBM 快速落地</a> → 
 <a href="./topic-structural-trouble-shooting/">结构化排障</a> → 
 <a href="./topic-skills/">工单技能库</a>
 </td>
@@ -473,6 +481,7 @@ flowchart TD
 | **⚡ 命令速查** | [topic-cheat-sheet/](./topic-cheat-sheet/) | K8s/Linux/Go 速查卡 |
 | **🏢 企业部署** | [topic-deployment/](./topic-deployment/) | 从本地Demo到生产环境的完整路径 |
 | **🔄 集群迁移** | [topic-migration/](./topic-migration/) | 10步完整迁移指南 |
+| **🎤 技术演示** | [topic-presentations/](./topic-presentations/) | 11个K8s专题Presentation |
 
 ---
 
@@ -502,9 +511,9 @@ flowchart LR
 ```
 
 **核心文档**：
-- [FTA 生产快速落地指南](./topic-fta/23_fta_production_quick_start.md) - 30天实施路线图
-- [Kubernetes 全量故障树分析](./topic-fta/kubernetes_fta_full_analysis.md) - 8顶事件、63底事件
-- [FTA 方法论与 AI Agent 实践合集](./topic-fta/fta_methodology_and_agentic_practices.md)
+- [FTA 生产快速落地指南](./topic-fta/23-fta-production-quick-start.md) - 30天实施路线图
+- [Kubernetes 全量故障树分析](./topic-fta/kubernetes-fta-full-analysis.md) - 8顶事件、63底事件
+- [FTA 方法论与 AI Agent 实践合集](./topic-fta/fta-methodology-and-agentic-practices.md)
 
 ### 🔍 FEBM 取证循证方法论 (Forensic Evidence-Based Methodology)
 
@@ -531,8 +540,8 @@ flowchart LR
 ```
 
 **核心文档**：
-- [FEBM 生产快速落地指南](./topic-febm/8_febm_production_quick_start.md) - 6个K8s故障取证Runbook
-- [FEBM 方法论深度剖析](./topic-febm/febm_methodology_deep_dive.md)
+- [FEBM 生产快速落地指南](./topic-febm/08-febm-production-quick-start.md) - 6个K8s故障取证Runbook
+- [FEBM 方法论深度剖析](./topic-febm/febm-methodology-deep-dive.md)
 
 ### 🤖 AI Agent 工程
 
@@ -618,6 +627,12 @@ flowchart LR
 | [Kubernetes 速查卡](./topic-cheat-sheet/k8s.md) | kubectl、集群管理、Pod操作、网络、存储、RBAC、排障 | v1.25-v1.32 |
 | [Linux 速查卡](./topic-cheat-sheet/linux.md) | 系统管理、进程、网络、存储、安全、Shell脚本 | RHEL 7-9, Ubuntu 20-24 |
 | [Go 语言速查卡](./topic-cheat-sheet/go.md) | 语法、并发、网络、数据库、测试、性能优化 | Go 1.20-1.22 |
+| [Docker/Containerd 速查卡](./topic-cheat-sheet/docker.md) | 容器生命周期、镜像管理、网络、存储、Compose、ctr | Docker 20.10+, containerd 1.6+ |
+| [PromQL 速查卡](./topic-cheat-sheet/promql.md) | 指标查询、聚合函数、Kubernetes监控、告警规则 | Prometheus 2.40+ |
+| [网络诊断速查卡](./topic-cheat-sheet/networking.md) | DNS诊断、TCP调试、HTTP测试、抓包分析、K8s网络 | TCP/IP |
+| [Git 速查表](./topic-cheat-sheet/git.md) | 日常操作、分支管理、撤销操作、故障排查 | Git 2.30+ |
+| [SQL 速查表](./topic-cheat-sheet/sql.md) | 查询语法、表操作、索引优化、数据库管理 | MySQL 8.0, PostgreSQL 14 |
+| [TLS/PKI 速查卡](./topic-cheat-sheet/tls-pki.md) | 证书格式、OpenSSL命令、证书链、K8s证书管理、监控脚本 | x509, TLS 1.2/1.3 |
 
 ### 运维词典 (Dictionary)
 
@@ -663,6 +678,66 @@ bash start.sh
 
 ---
 
+## 📖 Manpage 参考手册
+
+项目提供完整的 Unix manpage 文档，方便在终端快速查阅核心开源产品和项目脚本的使用方法。
+
+### 支持的命令
+
+| Section | 命令 | 描述 |
+|:---:|:---|:---|
+| **man1** | `kudig-stats` | README 数字指标自动统计工具 |
+| | `kudig-quality` | 知识库全面质量检查工具 |
+| | `kudig-validate` | 代码示例语法校验工具 |
+| | `kudig-fta-viz` | FTA 故障树可视化工具 |
+| **man8** | `kubernetes` | Kubernetes 容器编排平台 |
+| | `prometheus` | 监控和告警系统 |
+| | `etcd` | 分布式键值存储 |
+| | `containerd` | 容器运行时 |
+| | `cilium` | eBPF 网络和安全平台 |
+| | `helm` | Kubernetes 包管理器 |
+| | `argocd` | GitOps 持续交付工具 |
+| | `istio` | 服务网格平台 |
+| | `velero` | 备份和灾难恢复工具 |
+| | `cert-manager` | 证书管理自动化与 PKI 基础设施工具 |
+
+### 使用方法
+
+```bash
+# 方式一：直接查看（无需安装）
+man ./man/man1/kudig-stats.1
+man ./man/man8/kubernetes.8
+
+# 方式二：安装到系统（推荐）
+sudo cp -r man/man1/* /usr/local/share/man/man1/
+sudo cp -r man/man8/* /usr/local/share/man/man8/
+sudo mandb  # Linux 系统更新 man 数据库
+
+# 安装后直接使用
+man kudig-stats
+man kubernetes
+man prometheus
+```
+
+更多安装选项详见 [`man/INSTALL.md`](./man/INSTALL.md)。
+
+---
+
+## 🏗️ 项目基础设施
+
+| 文件/目录 | 说明 |
+|:---|:---|
+| [INDEX.md](./INDEX.md) | 全局知识库索引，按逻辑分组组织所有 domain/topic 目录 |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | 贡献指南：命名规范、文档结构、质量标准、提交约定 |
+| [CHANGELOG.md](./CHANGELOG.md) | 版本变更日志 |
+| [templates/](./templates/) | 文档模板（域文章、FTA 故障树、速查卡、Skill 工单） |
+| [metadata/](./metadata/) | 元数据索引：标签体系、难度分级、知识图谱 |
+| [corpus-config/](./corpus-config/) | AI 语料配置：RAG 分块策略、NotebookLM/IMA/RAG Profile |
+| [reports/](./reports/) | 质量报告、统计数据（STATS、QUALITY_REPORT 系列） |
+| [.editorconfig](./.editorconfig) | 跨编辑器格式一致性配置 |
+
+---
+
 ## 📝 版本说明
 
 - **适用 Kubernetes 版本**: v1.25 - v1.32
@@ -673,6 +748,10 @@ bash start.sh
 
 | 日期 | 更新内容 |
 |:---|:---|
+| 2026-04 | **目录结构优化** - 统一命名规范(FTA/FEBM)、新增 metadata/corpus-config/templates/reports/ 基础设施、domain-98→domain-40 重编号 |
+| 2026-04 | **速查表全面补齐** - 新增 Docker、PromQL、网络诊断、Git、SQL 速查表，总数达 9 张 (9716 行) |
+| 2026-04 | **TLS/PKI 证书内容加强** - cert-manager manpage 全面扩展 (245行→996行)，新增 TLS/PKI 速查表 |
+| 2026-04 | **Manpage 参考手册上线** - 为核心开源产品和项目脚本提供 14 个 Unix manpage |
 | 2026-03 | **CNCF Landscape 218项目全量上线** - Graduated 34 + Incubating 37 + Sandbox 147 |
 | 2026-03 | **Kubernetes 部署方案指南** - 从零到生产的完整部署路径 |
 | 2026-03 | **1个月学习计划** - 46篇系统化学习课程 |
@@ -685,7 +764,7 @@ bash start.sh
 
 ## 🤝 贡献指南
 
-我们欢迎各种形式的贡献！
+我们欢迎各种形式的贡献！详细规范请参阅 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
 ### 如何贡献
 

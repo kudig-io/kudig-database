@@ -234,5 +234,5 @@
 ## 相关资源
 
 - [topic-fta README](../README.md) - FTA 方法论主页
-- [kubernetes_fta_full_analysis.md](../kubernetes_fta_full_analysis.md) - K8s 全量故障树概览
-- [23_fta_production_quick_start.md](../23_fta_production_quick_start.md) - 生产环境快速启动指南
+- [kubernetes-fta-full-analysis.md](../kubernetes-fta-full-analysis.md) - K8s 全量故障树概览
+- [23-fta-production-quick-start.md](../23-fta-production-quick-start.md) - 生产环境快速启动指南

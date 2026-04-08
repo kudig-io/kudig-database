@@ -268,4 +268,4 @@ flowchart TD
 - **1.19–1.23**：关注 etcd 磁盘与压缩策略，避免碎片化导致写入抖动；证书与 peer/client 配置需明确。
 - **1.24–1.27**：升级窗口需与控制面组件一致，确保版本兼容与快照恢复流程可用。
 - **1.28–1.30**：仅保留稳定 API 与审计链路，etcd 读写超时需与 APIServer 侧证据闭环。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

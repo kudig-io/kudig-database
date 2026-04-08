@@ -1823,4 +1823,4 @@ flowchart TD
 - **1.19–1.23**：EndpointSlice 可能未默认启用，需同时覆盖 Endpoints 与 EndpointSlice；kube-proxy iptables 模式为主。
 - **1.24–1.27**：kube-proxy 与 ipvs/iptables 模式差异需注明；topology aware routing 成为 beta 特性。
 - **1.28–1.30**：稳定 API 为主，internalTrafficPolicy 和 externalTrafficPolicy 成为标准配置；LB 集成与审计链路需统一。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。

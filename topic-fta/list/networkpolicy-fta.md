@@ -2685,4 +2685,4 @@ flowchart TD
 - **1.19–1.23**：部分 CNI 策略能力受限，需在 FTA 中标注实现差异；egress 策略支持需确认。
 - **1.24–1.27**：运行时切换后策略下发/审计链路需校验；关注 endPort 字段支持。
 - **1.28–1.30**：稳定 API 为主，策略冲突与审计证据闭环需补全；关注 AdminNetworkPolicy 新特性。
-- **共性**：遵循 `fta_methodology_and_agentic_practices.md` 中的"版本适配基线"。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
