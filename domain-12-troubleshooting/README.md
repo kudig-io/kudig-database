@@ -85,11 +85,13 @@
 | **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [topic-structural-trouble-shooting/](../topic-structural-trouble-shooting/) |
 | **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [topic-skills/](../topic-skills/) |
 | **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [topic-febm/](../topic-febm/) |
+| **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../topic-structural-trouble-shooting/00-configuration-first-methodology.md) |
 
 ### 推荐使用路径
 
 ```
-故障现象 → topic-fta (定位根因方向)
+故障现象 → 配置优先方法论 (疑难问题排查策略)
+         → topic-fta (定位根因方向)
          → domain-12 (查看详细排查步骤)
          → topic-skills (执行自动化修复)
          → topic-febm (复盘取证分析)

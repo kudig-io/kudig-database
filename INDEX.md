@@ -89,7 +89,8 @@ FTA 故障树、FEBM 取证、Skills 技能库等独创方法论。
 | [FTA 故障树分析](./topic-fta/) | 29+36 | 方法论 23 篇 + 36 个组件故障树 |
 | [FEBM 取证循证](./topic-febm/) | 9 | 从证据到结论的归纳式方法论 |
 | [Skills 运维技能库](./topic-skills/) | 18 | 生产级诊断-修复闭环 |
-| [结构化故障排查](./topic-structural-trouble-shooting/) | 48 | 12 个分类 × 结构化流程 |
+| [结构化故障排查](./topic-structural-trouble-shooting/) | 49 | 12 个分类 × 结构化流程 + 配置优先方法论 |
+| [配置优先排查方法论](./topic-structural-trouble-shooting/00-configuration-first-methodology.md) | 1 | 疑难问题系统性排查：先配置后链路，CoreDNS 完整示例 |
 | [运维词典](./topic-dictionary/) | 200+ | 13 个分类的运维知识条目 |
 
 ---
