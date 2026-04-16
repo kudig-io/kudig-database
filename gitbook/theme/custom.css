@@ -1,46 +1,848 @@
-/* 中文字体优化 */
+/* ==========================================================================
+   KUDIG Database — Impeccable Design System v3
+
+   Brand voice: Systematic · Authoritative · Approachable
+   Typography: Inter variable + Noto Sans SC
+   Color: Slate-blue tinted neutrals (hex only, cross-browser safe)
+   Spacing: 4pt modular grid
+   ========================================================================== */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* --- Brand --- */
+  --kd-brand:       #2563eb;
+  --kd-brand-hover: #1d4ed8;
+  --kd-brand-light: #dbeafe;
+  --kd-brand-muted: #eff6ff;
+
+  /* --- Tinted neutrals (slate) --- */
+  --kd-n950: #0f172a;
+  --kd-n900: #1e293b;
+  --kd-n800: #334155;
+  --kd-n700: #475569;
+  --kd-n600: #64748b;
+  --kd-n500: #94a3b8;
+  --kd-n400: #94a3b8;
+  --kd-n300: #cbd5e1;
+  --kd-n200: #e2e8f0;
+  --kd-n100: #f1f5f9;
+  --kd-n50:  #f8fafc;
+
+  /* --- Surfaces --- */
+  --kd-page:    #ffffff;
+  --kd-sidebar: #f8fafc;
+  --kd-card:    #ffffff;
+  --kd-code-bg: #f1f5f9;
+  --kd-hover:   #f1f5f9;
+
+  /* --- Spacing (4pt) --- */
+  --sp-2xs: 2px;  --sp-xs: 4px;  --sp-sm: 8px;  --sp-md: 12px;
+  --sp-base: 16px; --sp-lg: 24px; --sp-xl: 32px;
+  --sp-2xl: 48px; --sp-3xl: 64px; --sp-4xl: 80px;
+
+  /* --- Type scale (adapts via .font-size-* class) --- */
+  --ts-2xs: 0.6875rem;
+  --ts-xs:  0.75rem;
+  --ts-sm:  0.8125rem;
+  --ts-base: 0.9375rem;
+  --ts-lg:  1.0625rem;
+  --ts-xl:  1.25rem;
+  --ts-2xl: 1.5rem;
+  --ts-3xl: 2rem;
+
+  /* --- Font-size level vars --- */
+  --fs-body:    0.9375rem;
+  --fs-sidebar: 0.8125rem;
+
+  /* --- Radii --- */
+  --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px;
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms; --dur-norm: 200ms; --dur-slow: 350ms;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================================
+   FORCE ALL mdBook THEMES to light palette
+   mdBook applies .light / .rust / .coal / .navy / .ayu on <html>
+   We override ALL of them to guarantee consistent white/light appearance.
+   ========================================================================== */
+.light, .rust, .coal, .navy, .ayu {
+  --bg:                  #ffffff;
+  --fg:                  #334155;
+  --sidebar-bg:          #f8fafc;
+  --sidebar-fg:          #64748b;
+  --sidebar-non-existant:#94a3b8;
+  --sidebar-active:      #2563eb;
+  --sidebar-spacer:      #e2e8f0;
+  --scrollbar:           #e2e8f0;
+  --icons:               #94a3b8;
+  --icons-hover:         #2563eb;
+  --links:               #2563eb;
+  --inline-code-color:   #4f6b96;
+  --theme-popup-bg:      #ffffff;
+  --theme-popup-border:  #e2e8f0;
+  --theme-hover:         #f1f5f9;
+  --quote-bg:            #f8fafc;
+  --quote-border:        #e2e8f0;
+  --table-border-color:  #e2e8f0;
+  --table-header-bg:     #f8fafc;
+  --table-alternate-bg:  #ffffff;
+  --searchbar-border-color: #e2e8f0;
+  --searchbar-bg:        #ffffff;
+  --searchbar-fg:        #334155;
+  --searchbar-shadow-color: rgba(37,99,235,0.04);
+  --searchresults-header-fg: #94a3b8;
+  --searchresults-border-color: #f1f5f9;
+  --searchresults-li-bg: transparent;
+  --search-mark-bg:      #fef08a;
+  color: #334155;
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   Font-size Levels — JS toggles class on <html>; all type & sidebar scale
+   ========================================================================== */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  scroll-behavior: smooth;
+}
+
+html.font-size-sm {
+  --fs-body: 0.8125rem; --fs-sidebar: 0.75rem;
+  --ts-2xs: 0.625rem; --ts-xs: 0.6875rem; --ts-sm: 0.75rem; --ts-base: 0.8125rem;
+  --ts-lg: 0.9375rem; --ts-xl: 1.125rem; --ts-2xl: 1.375rem; --ts-3xl: 1.75rem;
+}
+html.font-size-md {
+  --fs-body: 0.9375rem; --fs-sidebar: 0.8125rem;
+  --ts-2xs: 0.6875rem; --ts-xs: 0.75rem; --ts-sm: 0.8125rem; --ts-base: 0.9375rem;
+  --ts-lg: 1.0625rem; --ts-xl: 1.25rem; --ts-2xl: 1.5rem; --ts-3xl: 2rem;
+}
+html.font-size-lg {
+  --fs-body: 1.0625rem; --fs-sidebar: 0.875rem;
+  --ts-2xs: 0.75rem; --ts-xs: 0.8125rem; --ts-sm: 0.875rem; --ts-base: 1.0625rem;
+  --ts-lg: 1.1875rem; --ts-xl: 1.375rem; --ts-2xl: 1.625rem; --ts-3xl: 2.125rem;
+}
+html.font-size-xl {
+  --fs-body: 1.125rem; --fs-sidebar: 0.9375rem;
+  --ts-2xs: 0.8125rem; --ts-xs: 0.875rem; --ts-sm: 0.9375rem; --ts-base: 1.125rem;
+  --ts-lg: 1.25rem; --ts-xl: 1.5rem; --ts-2xl: 1.75rem; --ts-3xl: 2.25rem;
+}
+
+/* ==========================================================================
+   Global Base
+   ========================================================================== */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 
-                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 
-                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", system-ui, -apple-system, sans-serif !important;
+  font-feature-settings: "cv01" 1, "cv02" 1, "ss01" 1;
+  color: var(--kd-n800) !important;
+  background: var(--kd-page) !important;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  letter-spacing: -0.011em;
 }
 
-/* 代码块优化 */
-pre {
-    border-radius: 6px;
+/* ==========================================================================
+   Menu Bar — frosted glass
+   ========================================================================== */
+.menu-bar, #menu-bar, #mdbook-menu-bar {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--kd-n200) !important;
+  box-shadow: none !important;
+  color: var(--kd-n600) !important;
+  z-index: 200;
+  position: relative;
 }
 
-/* 目录树行高优化 */
+.menu-bar i, #menu-bar i, #mdbook-menu-bar i {
+  color: var(--kd-n500) !important;
+  transition: color var(--dur-fast) var(--ease);
+}
+.menu-bar i:hover, #menu-bar i:hover, #mdbook-menu-bar i:hover {
+  color: var(--kd-brand) !important;
+}
+
+.menu-bar .menu-title, #mdbook-menu-bar .menu-title {
+  font-weight: 600;
+  font-size: var(--ts-2xs);
+  color: var(--kd-n500) !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+.sidebar, #sidebar, .sidebar-scrollbox {
+  background: var(--kd-sidebar) !important;
+  color: var(--kd-n600) !important;
+}
+
+.sidebar {
+  border-right: 1px solid var(--kd-n200) !important;
+  font-size: var(--fs-sidebar);
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif !important;
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+.sidebar-scrollbox {
+  padding: var(--sp-md) var(--sp-sm) var(--sp-3xl) var(--sp-md) !important;
+}
+
+/* Chapter items */
 .chapter li {
-    line-height: 1.8;
+  line-height: 1.55;
+  margin-bottom: 0;
 }
 
-/* 隐藏侧边栏的页内标题导航（on-this-page），避免撑开目录 */
-.sidebar-scrollbox .on-this-page {
-    display: none;
+.sidebar .chapter-item a,
+.sidebar-scrollbox a {
+  color: var(--kd-n600) !important;
+  border-radius: var(--r-md);
+  padding: 5px 10px !important;
+  transition: all var(--dur-fast) var(--ease);
+  font-weight: 400;
+  letter-spacing: -0.006em;
+  display: block;
 }
 
-/* 内容区域优化 */
+.sidebar .chapter-item a:hover,
+.sidebar-scrollbox a:hover {
+  color: var(--kd-n900) !important;
+  background: var(--kd-hover) !important;
+  text-decoration: none !important;
+}
+
+.sidebar .chapter-item a.active,
+.sidebar-scrollbox a.active {
+  color: var(--kd-brand) !important;
+  background: var(--kd-brand-muted) !important;
+  font-weight: 600;
+  position: relative;
+}
+
+.sidebar .chapter-item a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: var(--kd-brand);
+}
+
+/* Part titles */
+.sidebar .part-title {
+  font-size: var(--ts-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--kd-n500) !important;
+  padding: var(--sp-xl) var(--sp-sm) var(--sp-xs);
+  margin-top: var(--sp-sm);
+}
+
+/* Hide sidebar on-this-page nav */
+.sidebar-scrollbox .on-this-page { display: none; }
+
+/* Sidebar scrollbar */
+.sidebar-scrollbox::-webkit-scrollbar { width: 3px; }
+.sidebar-scrollbox::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scrollbox::-webkit-scrollbar-thumb { background: var(--kd-n300); border-radius: 3px; }
+.sidebar-scrollbox::-webkit-scrollbar-thumb:hover { background: var(--kd-n400); }
+
+/* ==========================================================================
+   Page Wrapper & Content Area
+   ========================================================================== */
+.page-wrapper, .page-wrapper .page {
+  background: var(--kd-page) !important;
+  color: var(--kd-n800) !important;
+}
+
+#content, #content main, .content {
+  background: var(--kd-page) !important;
+  color: var(--kd-n800) !important;
+}
+
 .content {
-    max-width: 900px;
+  max-width: 760px;
+  padding: var(--sp-2xl) var(--sp-3xl) var(--sp-4xl) !important;
 }
 
-/* 标题样式 */
-h1, h2, h3, h4 {
-    font-weight: 600;
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", "Noto Sans SC", "PingFang SC", system-ui, -apple-system, sans-serif;
+  font-feature-settings: "cv01" 1, "cv02" 1;
+  font-weight: 700;
+  color: var(--kd-n950) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
 }
 
-/* 表格样式优化 */
+h1 {
+  font-size: var(--ts-3xl);
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: var(--sp-lg);
+  padding-bottom: 0;
+  border-bottom: none !important;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: var(--ts-2xl);
+  margin-top: var(--sp-3xl);
+  margin-bottom: var(--sp-lg);
+  padding-bottom: var(--sp-sm);
+  border-bottom: none !important;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--kd-brand);
+  border-radius: 1px;
+  margin-top: var(--sp-sm);
+  opacity: 0.4;
+}
+
+h3 {
+  font-size: var(--ts-xl);
+  margin-top: var(--sp-2xl);
+  margin-bottom: var(--sp-md);
+  border-bottom: none !important;
+}
+
+h4 {
+  font-size: var(--ts-lg);
+  margin-top: var(--sp-xl);
+  margin-bottom: var(--sp-md);
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+h5, h6 {
+  font-size: var(--ts-base);
+  margin-top: var(--sp-lg);
+  margin-bottom: var(--sp-sm);
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+/* Heading anchor links */
+h1 a.header, h2 a.header, h3 a.header,
+h4 a.header, h5 a.header, h6 a.header {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* ==========================================================================
+   Body Text
+   ========================================================================== */
+p {
+  font-size: var(--ts-base);
+  line-height: 1.75;
+  margin-bottom: var(--sp-base);
+  max-width: 68ch;
+  color: var(--kd-n700);
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+a {
+  color: var(--kd-brand) !important;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--kd-brand-hover) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(37,99,235,0.3);
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+ul, ol {
+  padding-left: var(--sp-lg);
+  margin-bottom: var(--sp-base);
+}
+
+li {
+  margin-bottom: var(--sp-xs);
+  line-height: 1.7;
+  color: var(--kd-n700);
+  font-size: var(--ts-base);
+}
+
+li > p { margin-bottom: var(--sp-sm); }
+li > ul, li > ol { margin-top: var(--sp-xs); margin-bottom: var(--sp-xs); }
+
+ul > li::marker { color: var(--kd-n300); }
+ol > li::marker { color: var(--kd-n500); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* ==========================================================================
+   Blockquotes
+   ========================================================================== */
+blockquote {
+  background: var(--kd-n50) !important;
+  border: none !important;
+  border-left: 3px solid var(--kd-brand) !important;
+  border-right: none !important;
+  border-radius: 0 var(--r-md) var(--r-md) 0 !important;
+  padding: var(--sp-base) var(--sp-lg) !important;
+  margin: var(--sp-lg) 0 !important;
+  color: var(--kd-n600) !important;
+  font-size: var(--ts-sm);
+  line-height: 1.7;
+}
+
+blockquote p { margin-bottom: var(--sp-sm); color: var(--kd-n600) !important; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { color: var(--kd-n800) !important; }
+
+/* ==========================================================================
+   Code
+   ========================================================================== */
+/* Inline code */
+code {
+  font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", "Fira Code",
+               "Menlo", monospace !important;
+  font-size: 0.84em;
+  font-variant-ligatures: none;
+  background: var(--kd-code-bg) !important;
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+  color: #4f6b96 !important;
+  font-weight: 400;
+}
+
+/* Code blocks */
+pre {
+  background: #1e293b !important;
+  border-radius: var(--r-xl) !important;
+  padding: var(--sp-lg) var(--sp-lg) !important;
+  margin: var(--sp-lg) 0 var(--sp-xl) !important;
+  overflow-x: auto;
+  font-size: var(--ts-sm);
+  line-height: 1.65;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  box-shadow: var(--shadow-md);
+}
+
+pre code {
+  background: transparent !important;
+  padding: 0;
+  border-radius: 0;
+  color: #e2e8f0 !important;
+  font-size: inherit;
+}
+
+/* Code block scrollbar */
+pre::-webkit-scrollbar { height: 5px; }
+pre::-webkit-scrollbar-track { background: transparent; }
+pre::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
 table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 8px 12px;
-    border: 1px solid var(--table-border-color);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: var(--sp-lg) 0;
+  font-size: var(--ts-sm);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--kd-n200) !important;
 }
 
 table th {
-    background-color: var(--table-header-bg);
+  background: var(--kd-n50) !important;
+  font-weight: 600;
+  text-align: left;
+  padding: var(--sp-md) var(--sp-base);
+  color: var(--kd-n700) !important;
+  font-size: var(--ts-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--kd-n200) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+table td {
+  padding: var(--sp-md) var(--sp-base);
+  border-bottom: 1px solid var(--kd-n100) !important;
+  color: var(--kd-n700) !important;
+  vertical-align: top;
+  background: transparent !important;
+  font-size: var(--ts-sm);
+}
+
+table tr:last-child td { border-bottom: none !important; }
+
+table tr:hover td {
+  background: var(--kd-brand-muted) !important;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+/* ==========================================================================
+   Horizontal Rules
+   ========================================================================== */
+hr {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  height: 1px !important;
+  background: var(--kd-n200) !important;
+  margin: var(--sp-2xl) 0 !important;
+}
+
+/* ==========================================================================
+   Images
+   ========================================================================== */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
+/* ==========================================================================
+   Strong & Em
+   ========================================================================== */
+strong { font-weight: 600; color: var(--kd-n900) !important; }
+em { font-style: italic; }
+
+/* ==========================================================================
+   Search
+   ========================================================================== */
+#searchbar {
+  background: var(--kd-card) !important;
+  border: 1px solid var(--kd-n200) !important;
+  border-radius: var(--r-lg) !important;
+  padding: var(--sp-sm) var(--sp-md) !important;
+  font-size: var(--ts-sm) !important;
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif !important;
+  color: var(--kd-n800) !important;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+
+#searchbar:focus {
+  border-color: var(--kd-brand) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important;
+  outline: none !important;
+}
+
+#searchbar::placeholder { color: var(--kd-n500); }
+
+.search-results {
+  background: var(--kd-card) !important;
+  border: 1px solid var(--kd-n200) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+mark { background: #fef08a; border-radius: 2px; padding: 0 2px; }
+
+/* ==========================================================================
+   Navigation Arrows
+   ========================================================================== */
+.nav-wrapper {
+  margin-top: var(--sp-3xl);
+  padding-top: var(--sp-xl);
+  border-top: 1px solid var(--kd-n100) !important;
+}
+
+.nav-chapters {
+  color: var(--kd-n500) !important;
+  font-size: var(--ts-lg);
+  padding: var(--sp-base);
+  border-radius: var(--r-lg);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.nav-chapters:hover {
+  color: var(--kd-brand) !important;
+  background: var(--kd-brand-muted);
+  text-decoration: none !important;
+}
+
+/* ==========================================================================
+   Theme Toggle Popup
+   ========================================================================== */
+.theme-popup {
+  border-radius: var(--r-xl) !important;
+  border: 1px solid var(--kd-n200) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: var(--sp-xs) !important;
+  background: var(--kd-card) !important;
+}
+
+.theme-popup button {
+  border-radius: var(--r-md) !important;
+  padding: var(--sp-sm) var(--sp-md) !important;
+  color: var(--kd-n700) !important;
+  font-family: "Inter", system-ui, sans-serif !important;
+}
+
+.theme-popup button:hover {
+  background: var(--kd-hover) !important;
+}
+
+/* ==========================================================================
+   Details / Summary
+   ========================================================================== */
+details {
+  background: var(--kd-card) !important;
+  border: 1px solid var(--kd-n200) !important;
+  border-radius: var(--r-lg);
+  padding: 0;
+  margin: var(--sp-base) 0;
+}
+
+details summary {
+  padding: var(--sp-md) var(--sp-base);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--ts-sm);
+  color: var(--kd-n700) !important;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+details summary:hover { color: var(--kd-brand) !important; }
+details[open] summary { border-bottom: 1px solid var(--kd-n100); }
+details > *:not(summary) { padding: var(--sp-md) var(--sp-base); }
+
+/* ==========================================================================
+   Reading Progress Bar
+   ========================================================================== */
+.reading-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%; height: 2px;
+  background: var(--kd-brand);
+  z-index: 9999;
+  transition: width 60ms linear;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Page Meta
+   ========================================================================== */
+.page-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-base);
+  margin-bottom: var(--sp-xl);
+  padding-bottom: var(--sp-md);
+  border-bottom: 1px solid var(--kd-n100);
+  font-size: var(--ts-xs);
+  color: var(--kd-n500);
+  flex-wrap: wrap;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.page-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.page-meta-item svg { width: 13px; height: 13px; opacity: 0.5; }
+
+/* ==========================================================================
+   Breadcrumb
+   ========================================================================== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ts-xs);
+  color: var(--kd-n500);
+  margin-bottom: var(--sp-lg);
+  flex-wrap: wrap;
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+}
+
+.breadcrumb a { color: var(--kd-n500) !important; font-weight: 400; }
+.breadcrumb a:hover { color: var(--kd-brand) !important; text-decoration: none !important; }
+.breadcrumb .separator { color: var(--kd-n300); font-size: 10px; }
+.breadcrumb .current { color: var(--kd-n700); font-weight: 500; }
+
+/* ==========================================================================
+   Back to Top
+   ========================================================================== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--sp-xl); right: var(--sp-xl);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--kd-n200);
+  color: var(--kd-n500);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--dur-norm) var(--ease);
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  font-size: 15px;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+
+.back-to-top:hover {
+  background: var(--kd-brand);
+  color: #fff;
+  border-color: var(--kd-brand);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.2);
+}
+
+/* ==========================================================================
+   Selection
+   ========================================================================== */
+::selection {
+  background: rgba(37,99,235,0.12);
+  color: var(--kd-n950);
+}
+
+/* ==========================================================================
+   Footnotes
+   ========================================================================== */
+.footnote-definition {
+  font-size: var(--ts-sm);
+  color: var(--kd-n600);
+  padding: var(--sp-sm) 0;
+  border-top: 1px solid var(--kd-n100);
+}
+
+/* ==========================================================================
+   Page Load Animation
+   ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#content main { animation: fadeIn 250ms var(--ease); }
+
+/* ==========================================================================
+   Focus States (a11y)
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--kd-brand);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ==========================================================================
+   Font Size Control — pill toggle in menu bar
+   ========================================================================== */
+.font-size-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-left: var(--sp-md);
+  padding: 2px;
+  background: var(--kd-n100);
+  border: none;
+  border-radius: 8px;
+  vertical-align: middle;
+  height: 30px;
+}
+
+.font-size-control .fs-prefix {
+  font-size: 11px;
+  color: var(--kd-n500);
+  padding: 0 6px 0 4px;
+  font-weight: 600;
+  font-family: "Inter", system-ui, sans-serif;
+  user-select: none;
+  line-height: 1;
+}
+
+.font-size-control button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--kd-n500);
+  cursor: pointer;
+  padding: 0 10px;
+  height: 26px;
+  border-radius: 6px;
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1;
+  transition: all var(--dur-fast) var(--ease);
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.font-size-control button:hover {
+  color: var(--kd-n800);
+  background: rgba(255,255,255,0.6);
+}
+
+.font-size-control button.active {
+  background: #fff !important;
+  color: var(--kd-n900) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+@media print {
+  .sidebar, .menu-bar, #mdbook-menu-bar, .nav-wrapper,
+  .back-to-top, .reading-progress, .font-size-control { display: none !important; }
+  .content { max-width: 100%; padding: 0 !important; }
+  pre { white-space: pre-wrap; word-break: break-all; }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+  .content { padding: var(--sp-lg) var(--sp-base) var(--sp-2xl) !important; }
+  h1 { font-size: var(--ts-2xl); }
+  h2 { font-size: var(--ts-xl); }
+  h3 { font-size: var(--ts-lg); }
+  pre { border-radius: var(--r-lg) !important; padding: var(--sp-base) !important; font-size: var(--ts-xs) !important; }
+  table { font-size: var(--ts-xs); }
+  .back-to-top { bottom: var(--sp-base); right: var(--sp-base); }
+  .font-size-control { display: none; }
 }

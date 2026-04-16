@@ -10,12 +10,12 @@ build-dir = "book"
 create-missing = false
 
 [output.html]
-default-theme = "navy"
+default-theme = "light"
 preferred-dark-theme = "navy"
 git-repository-url = "https://github.com/kudig-io/kudig-database"
 site-url = "/"
 additional-css = ["theme/custom.css"]
-additional-js = ["theme/collapse-all.js"]
+additional-js = ["theme/collapse-all.js", "theme/enhanced-ui.js"]
 
 [output.html.search]
 enable = true
