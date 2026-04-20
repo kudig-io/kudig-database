@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>D3 领域知识地图 | kudig-database</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f7f8fb;--bg2:#ffffff;--t1:#1a1f36;--t2:#525f7f;--t3:#8898aa;--bdr:#e3e8ee;--fm:'SF Mono','Fira Code',monospace;--fb:'Helvetica Neue','PingFang SC',sans-serif;--shadow:0 1px 3px rgba(0,0,0,.06)}
+body{background:var(--bg);font-family:var(--fb);color:var(--t1);overflow:hidden;height:100vh;display:flex;flex-direction:column}
+/* Topbar */
+.topbar{height:48px;display:flex;align-items:center;gap:1rem;padding:0 1.2rem;border-bottom:1px solid var(--bdr);background:rgba(255,255,255,.95);backdrop-filter:blur(12px);flex-shrink:0;z-index:10}
+.topbar a{font-family:var(--fm);font-size:.72rem;color:var(--t3);text-decoration:none;transition:color .2s}
+.topbar a:hover{color:var(--t1)}
+.topbar h1{font-size:.88rem;font-weight:700;flex:1}
+.topbar .legend{display:flex;gap:.8rem;font-size:.68rem;color:var(--t3)}
+.topbar .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+/* Controls */
+.controls{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:10}
+.controls button{padding:.3rem .7rem;font-size:.68rem;border:1px solid var(--bdr);background:rgba(255,255,255,.9);color:var(--t2);border-radius:6px;cursor:pointer;font-family:var(--fb);backdrop-filter:blur(8px);transition:all .15s;box-shadow:var(--shadow)}
+.controls button:hover{border-color:#cdd5e0;color:var(--t1)}
+.controls button.active{background:rgba(45,94,168,.08);border-color:rgba(45,94,168,.25);color:#2d5ea8}
+/* Canvas */
+.canvas{flex:1;position:relative}
+svg{width:100%;height:100%;display:block}
+/* Tooltip */
+.tip{position:absolute;padding:.6rem .9rem;background:rgba(255,255,255,.96);border:1px solid var(--bdr);border-radius:8px;font-size:.75rem;color:var(--t1);pointer-events:none;opacity:0;transition:opacity .15s;z-index:20;max-width:280px;backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.tip .tt{font-weight:700;margin-bottom:.2rem}.tip .td{color:var(--t2);font-size:.7rem;line-height:1.5}
+.tip .tb{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.58rem;font-family:var(--fm);margin-bottom:.3rem}
+/* Info Panel */
+.info{position:absolute;top:60px;right:1rem;width:260px;background:rgba(255,255,255,.96);border:1px solid var(--bdr);border-radius:12px;padding:1rem;font-size:.75rem;z-index:10;backdrop-filter:blur(12px);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.info h3{font-size:.82rem;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.info .stat{display:flex;justify-content:space-between;padding:.25rem 0;border-bottom:1px solid var(--bdr);color:var(--t2)}
+.info .stat span:last-child{font-family:var(--fm);color:var(--t1)}
+@media(max-width:768px){.info{display:none}.topbar .legend{display:none}}
+svg{background:#f7f8fb}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html">← 首页</a>
+  <h1>D3 领域知识地图</h1>
+  <div class="legend">
+    <span><i style="background:#0e7490"></i>K8s</span>
+    <span><i style="background:#7c3aed"></i>AI Infra</span>
+    <span><i style="background:#059669"></i>Linux</span>
+    <span><i style="background:#d97706"></i>Hardware</span>
+    <span><i style="background:#dc2626"></i>Security</span>
+  </div>
+</div>
+<div class="canvas" id="canvas">
+  <div class="tip" id="tip"></div>
+  <div class="info" id="info"></div>
+</div>
+<div class="controls">
+  <button onclick="resetZoom()">重置视图</button>
+  <button id="labelBtn" class="active" onclick="toggleLabels()">标签</button>
+  <button id="linkBtn" class="active" onclick="toggleLinks()">连线</button>
+</div>
+
+<script>
+(function(){
+// ═══ DATA ═══
+var DOMAINS=[
+  {id:'k8s',name:'K8s 架构基础',color:'#0e7490',count:18,r:38},
+  {id:'ai',name:'AI 基础设施',color:'#7c3aed',count:36,r:44},
+  {id:'linux',name:'Linux 基础',color:'#059669',count:9,r:28},
+  {id:'hw',name:'硬件基础设施',color:'#d97706',count:18,r:38},
+  {id:'sec',name:'云安全与合规',color:'#dc2626',count:16,r:34}
+];
+var TOPICS=[
+  {id:'k-api',name:'API Server',d:'k8s'},{id:'k-etcd',name:'etcd',d:'k8s'},{id:'k-sched',name:'调度器',d:'k8s'},
+  {id:'k-ctrl',name:'控制器',d:'k8s'},{id:'k-net',name:'集群网络',d:'k8s'},{id:'k-store',name:'存储系统',d:'k8s'},
+  {id:'k-sec',name:'安全策略',d:'k8s'},{id:'k-obs',name:'可观测性',d:'k8s'},
+  {id:'a-gpu',name:'GPU 调度',d:'ai'},{id:'a-train',name:'分布式训练',d:'ai'},{id:'a-serve',name:'模型服务',d:'ai'},
+  {id:'a-llm',name:'LLM 推理',d:'ai'},{id:'a-vec',name:'向量数据库',d:'ai'},{id:'a-mlops',name:'MLOps',d:'ai'},
+  {id:'a-cost',name:'成本优化',d:'ai'},{id:'a-mon',name:'AI 可观测',d:'ai'},
+  {id:'l-proc',name:'进程管理',d:'linux'},{id:'l-fs',name:'文件系统',d:'linux'},{id:'l-net',name:'网络配置',d:'linux'},
+  {id:'l-perf',name:'性能调优',d:'linux'},{id:'l-cg',name:'cgroup/ns',d:'linux'},
+  {id:'h-cpu',name:'CPU/NUMA',d:'hw'},{id:'h-gpu',name:'GPU 架构',d:'hw'},{id:'h-nvme',name:'NVMe 存储',d:'hw'},
+  {id:'h-rdma',name:'RDMA 网络',d:'hw'},{id:'h-cool',name:'散热电源',d:'hw'},{id:'h-diag',name:'硬件诊断',d:'hw'},
+  {id:'s-img',name:'镜像安全',d:'sec'},{id:'s-rbac',name:'RBAC',d:'sec'},{id:'s-net',name:'NetworkPolicy',d:'sec'},
+  {id:'s-supply',name:'供应链安全',d:'sec'},{id:'s-audit',name:'合规审计',d:'sec'},{id:'s-zt',name:'零信任',d:'sec'}
+];
+var CROSS_LINKS=[
+  {s:'k-sec',t:'s-rbac',label:'RBAC 深度实践'},{s:'k-net',t:'s-net',label:'网络安全策略'},
+  {s:'a-gpu',t:'h-gpu',label:'GPU 拓扑优化'},{s:'a-gpu',t:'h-cpu',label:'NUMA 感知调度'},
+  {s:'l-cg',t:'k-ctrl',label:'cgroup 资源隔离'},{s:'l-perf',t:'k-obs',label:'性能诊断'},
+  {s:'h-nvme',t:'k-store',label:'存储性能'},{s:'s-img',t:'a-serve',label:'模型供应链安全'},
+  {s:'l-net',t:'k-net',label:'CNI 底层实现'},{s:'h-rdma',t:'a-train',label:'RDMA 训练加速'},
+  {s:'s-audit',t:'k-obs',label:'审计日志'},{s:'l-proc',t:'l-cg',label:'进程隔离'}
+];
+
+// Build nodes & links
+var nodes=[],links=[];
+var domainMap={},colorMap={};
+DOMAINS.forEach(function(d){domainMap[d.id]=d;colorMap[d.id]=d.color;
+  nodes.push({id:d.id,name:d.name,type:'domain',color:d.color,r:d.r,count:d.count,fx:null,fy:null})});
+TOPICS.forEach(function(t){var c=colorMap[t.d];
+  nodes.push({id:t.id,name:t.name,type:'topic',domain:t.d,color:c,r:10});
+  links.push({source:t.d,target:t.id,type:'parent'})});
+CROSS_LINKS.forEach(function(cl){links.push({source:cl.s,target:cl.t,type:'cross',label:cl.label})});
+
+// ═══ D3 SETUP ═══
+var W=document.getElementById('canvas').clientWidth,H=document.getElementById('canvas').clientHeight;
+var svg=d3.select('#canvas').append('svg');
+var g=svg.append('g');
+var showLabels=true,showLinks=true;
+
+// Zoom
+var zoom=d3.zoom().scaleExtent([0.3,4]).on('zoom',function(e){g.attr('transform',e.transform)});
+svg.call(zoom);
+
+// Simulation
+var sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(function(d){return d.id}).distance(function(l){return l.type==='cross'?180:80}).strength(function(l){return l.type==='cross'?0.1:0.6}))
+  .force('charge',d3.forceManyBody().strength(function(d){return d.type==='domain'?-600:-120}))
+  .force('center',d3.forceCenter(W/2,H/2))
+  .force('collision',d3.forceCollide().radius(function(d){return d.r+6}))
+  .force('x',d3.forceX(W/2).strength(0.03))
+  .force('y',d3.forceY(H/2).strength(0.03));
+
+// Links
+var linkG=g.append('g');
+var linkEls=linkG.selectAll('line').data(links).join('line')
+  .attr('stroke',function(d){return d.type==='cross'?'rgba(0,0,0,.12)':'rgba(0,0,0,.06)'})
+  .attr('stroke-width',function(d){return d.type==='cross'?1.2:0.8})
+  .attr('stroke-dasharray',function(d){return d.type==='cross'?'4 4':null});
+
+// Nodes
+var nodeG=g.append('g');
+var nodeEls=nodeG.selectAll('g').data(nodes).join('g').attr('cursor','pointer');
+nodeEls.append('circle')
+  .attr('r',function(d){return d.r})
+  .attr('fill',function(d){return d.type==='domain'?d.color+'18':d.color+'0c'})
+  .attr('stroke',function(d){return d.color})
+  .attr('stroke-width',function(d){return d.type==='domain'?2:1.2})
+  .attr('stroke-opacity',function(d){return d.type==='domain'?0.7:0.4});
+// Domain labels (always)
+nodeEls.filter(function(d){return d.type==='domain'}).append('text')
+  .text(function(d){return d.name.split(' ')[0]})
+  .attr('text-anchor','middle').attr('dy','0.35em')
+  .attr('fill',function(d){return d.color}).attr('font-size','11px').attr('font-weight','700');
+// Topic labels (toggleable)
+var topicLabels=nodeEls.filter(function(d){return d.type==='topic'}).append('text')
+  .text(function(d){return d.name})
+  .attr('text-anchor','middle').attr('dy',function(d){return d.r+12})
+  .attr('fill','rgba(0,0,0,.45)').attr('font-size','9px').attr('class','topic-label');
+
+// Drag
+nodeEls.call(d3.drag()
+  .on('start',function(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y})
+  .on('drag',function(e,d){d.fx=e.x;d.fy=e.y})
+  .on('end',function(e,d){if(!e.active)sim.alphaTarget(0);if(d.type!=='domain'){d.fx=null;d.fy=null}}));
+
+// Hover
+var tip=document.getElementById('tip');
+nodeEls.on('mouseover',function(e,d){
+  // Highlight connected
+  var connected=new Set();connected.add(d.id);
+  links.forEach(function(l){var s=l.source.id||l.source,t=l.target.id||l.target;
+    if(s===d.id)connected.add(t);if(t===d.id)connected.add(s)});
+  nodeEls.select('circle').attr('opacity',function(n){return connected.has(n.id)?1:0.15});
+  linkEls.attr('opacity',function(l){var s=l.source.id||l.source,t=l.target.id||l.target;return connected.has(s)&&connected.has(t)?0.8:0.05});
+  // Tooltip
+  var badge=d.type==='domain'?'<span class="tb" style="background:'+d.color+'20;color:'+d.color+'">DOMAIN · '+d.count+' 篇</span>'
+    :'<span class="tb" style="background:'+d.color+'20;color:'+d.color+'">TOPIC · '+(domainMap[d.domain]?domainMap[d.domain].name:'')+'</span>';
+  var crossInfo='';
+  if(d.type==='topic'){var cx=[];CROSS_LINKS.forEach(function(cl){if(cl.s===d.id||cl.t===d.id)cx.push(cl.label)});
+    if(cx.length)crossInfo='<div class="td" style="margin-top:.3rem">跨域: '+cx.join(', ')+'</div>';}
+  tip.innerHTML=badge+'<div class="tt">'+d.name+'</div>'+crossInfo;
+  tip.style.opacity='1';
+  tip.style.left=(e.pageX+14)+'px';tip.style.top=(e.pageY-10)+'px';
+}).on('mousemove',function(e){tip.style.left=(e.pageX+14)+'px';tip.style.top=(e.pageY-10)+'px'})
+.on('mouseout',function(){
+  nodeEls.select('circle').attr('opacity',1);linkEls.attr('opacity',1);tip.style.opacity='0';
+});
+
+// Tick
+sim.on('tick',function(){
+  linkEls.attr('x1',function(d){return d.source.x}).attr('y1',function(d){return d.source.y})
+    .attr('x2',function(d){return d.target.x}).attr('y2',function(d){return d.target.y});
+  nodeEls.attr('transform',function(d){return 'translate('+d.x+','+d.y+')'});
+});
+
+// Info panel
+var infoEl=document.getElementById('info');
+infoEl.innerHTML='<h3>📊 知识地图统计</h3>'
+  +DOMAINS.map(function(d){return '<div class="stat"><span><i style="display:inline-block;width:6px;height:6px;border-radius:50%;background:'+d.color+';margin-right:.4rem;vertical-align:middle"></i>'+d.name+'</span><span>'+d.count+' 篇</span></div>'}).join('')
+  +'<div class="stat" style="margin-top:.3rem;border:none"><span>跨域连接</span><span>'+CROSS_LINKS.length+'</span></div>'
+  +'<div class="stat" style="border:none"><span>主题节点</span><span>'+TOPICS.length+'</span></div>';
+
+// Controls
+window.resetZoom=function(){svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity)};
+window.toggleLabels=function(){showLabels=!showLabels;d3.selectAll('.topic-label').attr('opacity',showLabels?1:0);
+  document.getElementById('labelBtn').classList.toggle('active',showLabels)};
+window.toggleLinks=function(){showLinks=!showLinks;linkEls.attr('display',showLinks?null:'none');
+  document.getElementById('linkBtn').classList.toggle('active',showLinks)};
+
+// Resize
+window.addEventListener('resize',function(){W=document.getElementById('canvas').clientWidth;H=document.getElementById('canvas').clientHeight;
+  sim.force('center',d3.forceCenter(W/2,H/2));sim.alpha(0.3).restart()});
+})();
+</script>
+</body>
+</html>

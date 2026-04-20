@@ -12,5 +12,12 @@ gitbook/src/domain-*
 gitbook/src/topic-*
 gitbook/src/tables
 
+# Web 服务运行时文件
+.web-server.pid
+.web-server.log
+
+# 根目录跳转页（由 start-web.sh 自动生成）
+index.html
+
 # macOS
 .DS_Store
