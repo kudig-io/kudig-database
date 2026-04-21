@@ -1,0 +1,920 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>53 - CoreDNS 架构与核心原理 (Architecture &amp; Principles) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="53---coredns-架构与核心原理-architecture--principles"><a class="header" href="#53---coredns-架构与核心原理-architecture--principles">53 - CoreDNS 架构与核心原理 (Architecture &amp; Principles)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: CoreDNS 1.8.0+ / Kubernetes v1.25-v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一coredns-架构概览-architecture-overview"><a class="header" href="#一coredns-架构概览-architecture-overview">一、CoreDNS 架构概览 (Architecture Overview)</a></h2>
+<h3 id="11-设计哲学"><a class="header" href="#11-设计哲学">1.1 设计哲学</a></h3>
+<p>CoreDNS 采用<strong>模块化插件架构</strong>，每个功能以独立插件实现，通过链式调用完成DNS请求处理。</p>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                          CoreDNS 整体架构                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ┌─────────────┐    ┌─────────────────────────────────────────────────┐   │
+│   │  DNS Query  │───▶│              CoreDNS Server                      │   │
+│   │  (UDP/TCP)  │    │  ┌─────────────────────────────────────────┐    │   │
+│   └─────────────┘    │  │         Server Block Manager            │    │   │
+│                      │  │  ┌───────────┬───────────┬───────────┐  │    │   │
+│                      │  │  │ Zone 1    │ Zone 2    │ Zone N    │  │    │   │
+│                      │  │  │ :53       │ :53       │ :5353     │  │    │   │
+│                      │  │  └─────┬─────┴─────┬─────┴─────┬─────┘  │    │   │
+│                      │  └────────┼───────────┼───────────┼────────┘    │   │
+│                      │           │           │           │              │   │
+│                      │           ▼           ▼           ▼              │   │
+│                      │  ┌─────────────────────────────────────────┐    │   │
+│                      │  │            Plugin Chain                 │    │   │
+│                      │  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐       │    │   │
+│                      │  │  │log  │→│cache│→│k8s  │→│fwd  │→...   │    │   │
+│                      │  │  └─────┘ └─────┘ └─────┘ └─────┘       │    │   │
+│                      │  └─────────────────────────────────────────┘    │   │
+│                      └─────────────────────────────────────────────────┘   │
+│                                        │                                    │
+│                                        ▼                                    │
+│   ┌─────────────┐              ┌─────────────┐                             │
+│   │ DNS Response│◀─────────────│   Response  │                             │
+│   └─────────────┘              │  Generator  │                             │
+│                                └─────────────┘                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="12-核心组件详解"><a class="header" href="#12-核心组件详解">1.2 核心组件详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">组件</th><th style="text-align: left">英文</th><th style="text-align: left">职责</th><th style="text-align: left">关键特性</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>CoreDNS Server</strong></td><td style="text-align: left">Server</td><td style="text-align: left">监听DNS端口,管理请求生命周期</td><td style="text-align: left">支持UDP/TCP/DoT/DoH,并发处理</td></tr>
+<tr><td style="text-align: left"><strong>Server Block</strong></td><td style="text-align: left">Server Block</td><td style="text-align: left">配置单元,绑定端口和区域</td><td style="text-align: left">一个Corefile可有多个Server Block</td></tr>
+<tr><td style="text-align: left"><strong>Zone</strong></td><td style="text-align: left">Zone</td><td style="text-align: left">DNS域名空间划分</td><td style="text-align: left">支持正向/反向解析区域</td></tr>
+<tr><td style="text-align: left"><strong>Plugin Chain</strong></td><td style="text-align: left">Plugin Chain</td><td style="text-align: left">有序插件序列</td><td style="text-align: left">顺序执行,支持短路返回</td></tr>
+<tr><td style="text-align: left"><strong>Plugin</strong></td><td style="text-align: left">Plugin</td><td style="text-align: left">功能模块</td><td style="text-align: left">50+内置插件,支持自定义</td></tr>
+<tr><td style="text-align: left"><strong>Middleware</strong></td><td style="text-align: left">Middleware</td><td style="text-align: left">请求/响应拦截器</td><td style="text-align: left">日志、监控、重写等</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="13-请求处理流程详解"><a class="header" href="#13-请求处理流程详解">1.3 请求处理流程详解</a></h3>
+<pre><code>┌──────────────────────────────────────────────────────────────────────────────┐
+│                        DNS 请求处理流程                                       │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌─────────┐     ┌─────────────────────────────────────────────────────┐    │
+│  │ Client  │────▶│ 1. 协议/端口匹配                                     │    │
+│  │ Query   │     │    - UDP:53 / TCP:53 / TLS:853 / HTTPS:443          │    │
+│  └─────────┘     └─────────────────────┬───────────────────────────────┘    │
+│                                        │                                     │
+│                                        ▼                                     │
+│                  ┌─────────────────────────────────────────────────────┐    │
+│                  │ 2. Zone 最长后缀匹配                                  │    │
+│                  │    Query: api.prod.svc.cluster.local                │    │
+│                  │    Match: cluster.local (优先于 . 根区域)            │    │
+│                  └─────────────────────┬───────────────────────────────┘    │
+│                                        │                                     │
+│                                        ▼                                     │
+│  ┌───────────────────────────────────────────────────────────────────────┐  │
+│  │ 3. Plugin Chain 执行                                                   │  │
+│  │                                                                        │  │
+│  │   ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐   │  │
+│  │   │ log  │──▶│errors│──▶│cache │──▶│  k8s │──▶│forward──▶│ ... │   │  │
+│  │   └──────┘   └──────┘   └──┬───┘   └──┬───┘   └──┬───┘   └──────┘   │  │
+│  │                            │          │          │                    │  │
+│  │                     Cache  │   K8s    │  Forward │                    │  │
+│  │                      Hit   │  Found   │   to     │                    │  │
+│  │                       │    │    │     │ Upstream │                    │  │
+│  │                       ▼    │    ▼     │    │     │                    │  │
+│  │                  ┌────────┐│┌────────┐│    ▼     │                    │  │
+│  │                  │Response│││Response││┌────────┐│                    │  │
+│  │                  └────┬───┘│└────┬───┘││Upstream││                    │  │
+│  │                       │    │     │    ││  DNS   ││                    │  │
+│  │                       │    │     │    │└────┬───┘│                    │  │
+│  │                       │    │     │    │     │    │                    │  │
+│  └───────────────────────┼────┼─────┼────┼─────┼────┼────────────────────┘  │
+│                          │    │     │    │     │    │                        │
+│                          ▼    ▼     ▼    ▼     ▼    ▼                        │
+│                  ┌─────────────────────────────────────┐                    │
+│                  │          Response to Client         │                    │
+│                  └─────────────────────────────────────┘                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="14-插件执行模式"><a class="header" href="#14-插件执行模式">1.4 插件执行模式</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">模式</th><th style="text-align: left">说明</th><th style="text-align: left">示例插件</th><th style="text-align: left">行为</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>Authoritative</strong></td><td style="text-align: left">权威响应</td><td style="text-align: left">kubernetes, file, hosts</td><td style="text-align: left">直接生成响应,终止链</td></tr>
+<tr><td style="text-align: left"><strong>Passthrough</strong></td><td style="text-align: left">传递模式</td><td style="text-align: left">log, prometheus, errors</td><td style="text-align: left">处理后传递给下一个插件</td></tr>
+<tr><td style="text-align: left"><strong>Fallthrough</strong></td><td style="text-align: left">回退模式</td><td style="text-align: left">kubernetes (配置fallthrough)</td><td style="text-align: left">无法处理时传递</td></tr>
+<tr><td style="text-align: left"><strong>Terminal</strong></td><td style="text-align: left">终止模式</td><td style="text-align: left">forward</td><td style="text-align: left">作为最后一环处理</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="二kubernetes-集成架构-kubernetes-integration"><a class="header" href="#二kubernetes-集成架构-kubernetes-integration">二、Kubernetes 集成架构 (Kubernetes Integration)</a></h2>
+<h3 id="21-部署架构"><a class="header" href="#21-部署架构">2.1 部署架构</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                     CoreDNS in Kubernetes 部署架构                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                        kube-system Namespace                         │   │
+│  │                                                                      │   │
+│  │  ┌──────────────────┐    ┌──────────────────────────────────────┐   │   │
+│  │  │   ConfigMap      │    │        Deployment: coredns           │   │   │
+│  │  │   coredns        │    │  ┌──────────────────────────────┐    │   │   │
+│  │  │  ┌────────────┐  │    │  │     ReplicaSet (replicas=2)  │    │   │   │
+│  │  │  │  Corefile  │──┼────┼─▶│  ┌────────┐    ┌────────┐    │    │   │   │
+│  │  │  └────────────┘  │    │  │  │ Pod 1  │    │ Pod 2  │    │    │   │   │
+│  │  └──────────────────┘    │  │  │coredns │    │coredns │    │    │   │   │
+│  │                          │  │  └────┬───┘    └────┬───┘    │    │   │   │
+│  │  ┌──────────────────┐    │  └───────┼────────────┼─────────┘    │   │   │
+│  │  │   Service        │    └──────────┼────────────┼──────────────┘   │   │
+│  │  │   kube-dns       │               │            │                  │   │
+│  │  │  ClusterIP:      │◀──────────────┴────────────┘                  │   │
+│  │  │  10.96.0.10:53   │                                               │   │
+│  │  └──────────────────┘                                               │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                           │                                                 │
+│                           │ DNS Query                                       │
+│                           ▼                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                      Application Namespace                           │   │
+│  │                                                                      │   │
+│  │  ┌──────────────────────────────────────────────────────────────┐   │   │
+│  │  │                        Pod                                    │   │   │
+│  │  │  ┌────────────────────────────────────────────────────────┐  │   │   │
+│  │  │  │  /etc/resolv.conf                                      │  │   │   │
+│  │  │  │  nameserver 10.96.0.10                                 │  │   │   │
+│  │  │  │  search default.svc.cluster.local svc.cluster.local    │  │   │   │
+│  │  │  │         cluster.local                                  │  │   │   │
+│  │  │  │  options ndots:5                                       │  │   │   │
+│  │  │  └────────────────────────────────────────────────────────┘  │   │   │
+│  │  └──────────────────────────────────────────────────────────────┘   │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="22-kubernetes-资源清单"><a class="header" href="#22-kubernetes-资源清单">2.2 Kubernetes 资源清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">资源类型</th><th style="text-align: left">名称</th><th style="text-align: left">命名空间</th><th style="text-align: left">用途</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">Deployment</td><td style="text-align: left">coredns</td><td style="text-align: left">kube-system</td><td style="text-align: left">管理CoreDNS Pod副本</td></tr>
+<tr><td style="text-align: left">Service</td><td style="text-align: left">kube-dns</td><td style="text-align: left">kube-system</td><td style="text-align: left">提供ClusterIP供集群内DNS解析</td></tr>
+<tr><td style="text-align: left">ConfigMap</td><td style="text-align: left">coredns</td><td style="text-align: left">kube-system</td><td style="text-align: left">存储Corefile配置</td></tr>
+<tr><td style="text-align: left">ServiceAccount</td><td style="text-align: left">coredns</td><td style="text-align: left">kube-system</td><td style="text-align: left">Pod身份认证</td></tr>
+<tr><td style="text-align: left">ClusterRole</td><td style="text-align: left">system:coredns</td><td style="text-align: left">-</td><td style="text-align: left">RBAC权限定义</td></tr>
+<tr><td style="text-align: left">ClusterRoleBinding</td><td style="text-align: left">system:coredns</td><td style="text-align: left">-</td><td style="text-align: left">绑定SA和ClusterRole</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="23-dns-解析类型"><a class="header" href="#23-dns-解析类型">2.3 DNS 解析类型</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">解析类型</th><th style="text-align: left">格式</th><th style="text-align: left">示例</th><th style="text-align: left">返回值</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>Service A记录</strong></td><td style="text-align: left"><code>&lt;svc&gt;.&lt;ns&gt;.svc.&lt;zone&gt;</code></td><td style="text-align: left">nginx.default.svc.cluster.local</td><td style="text-align: left">ClusterIP</td></tr>
+<tr><td style="text-align: left"><strong>Service SRV记录</strong></td><td style="text-align: left"><code>_&lt;port&gt;._&lt;proto&gt;.&lt;svc&gt;.&lt;ns&gt;.svc.&lt;zone&gt;</code></td><td style="text-align: left">_http._tcp.nginx.default.svc.cluster.local</td><td style="text-align: left">端口+主机名</td></tr>
+<tr><td style="text-align: left"><strong>Headless Service</strong></td><td style="text-align: left"><code>&lt;svc&gt;.&lt;ns&gt;.svc.&lt;zone&gt;</code></td><td style="text-align: left">mysql-headless.db.svc.cluster.local</td><td style="text-align: left">所有Pod IP列表</td></tr>
+<tr><td style="text-align: left"><strong>StatefulSet Pod</strong></td><td style="text-align: left"><code>&lt;pod&gt;.&lt;svc&gt;.&lt;ns&gt;.svc.&lt;zone&gt;</code></td><td style="text-align: left">mysql-0.mysql-headless.db.svc.cluster.local</td><td style="text-align: left">特定Pod IP</td></tr>
+<tr><td style="text-align: left"><strong>Pod A记录</strong></td><td style="text-align: left"><code>&lt;pod-ip-dashed&gt;.&lt;ns&gt;.pod.&lt;zone&gt;</code></td><td style="text-align: left">10-244-1-5.default.pod.cluster.local</td><td style="text-align: left">Pod IP</td></tr>
+<tr><td style="text-align: left"><strong>ExternalName</strong></td><td style="text-align: left"><code>&lt;svc&gt;.&lt;ns&gt;.svc.&lt;zone&gt;</code></td><td style="text-align: left">ext-db.default.svc.cluster.local</td><td style="text-align: left">CNAME到外部域名</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="24-resolvconf-配置详解"><a class="header" href="#24-resolvconf-配置详解">2.4 resolv.conf 配置详解</a></h3>
+<pre><code># Pod 内 /etc/resolv.conf 示例
+nameserver 10.96.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">参数</th><th style="text-align: left">值</th><th style="text-align: left">说明</th><th style="text-align: left">影响</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>nameserver</strong></td><td style="text-align: left">10.96.0.10</td><td style="text-align: left">kube-dns Service ClusterIP</td><td style="text-align: left">所有DNS查询发送到此地址</td></tr>
+<tr><td style="text-align: left"><strong>search</strong></td><td style="text-align: left">default.svc…</td><td style="text-align: left">搜索域列表(最多6个)</td><td style="text-align: left">短名称自动补全后缀</td></tr>
+<tr><td style="text-align: left"><strong>ndots</strong></td><td style="text-align: left">5</td><td style="text-align: left">点号阈值</td><td style="text-align: left">&lt;5个点视为短名称,触发search</td></tr>
+<tr><td style="text-align: left"><strong>timeout</strong></td><td style="text-align: left">5 (默认)</td><td style="text-align: left">查询超时秒数</td><td style="text-align: left">单次查询等待时间</td></tr>
+<tr><td style="text-align: left"><strong>attempts</strong></td><td style="text-align: left">2 (默认)</td><td style="text-align: left">重试次数</td><td style="text-align: left">超时后重试次数</td></tr>
+<tr><td style="text-align: left"><strong>rotate</strong></td><td style="text-align: left">-</td><td style="text-align: left">轮询nameserver</td><td style="text-align: left">多nameserver时负载均衡</td></tr>
+<tr><td style="text-align: left"><strong>single-request</strong></td><td style="text-align: left">-</td><td style="text-align: left">串行A/AAAA查询</td><td style="text-align: left">解决某些NAT问题</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="25-ndots-与-dns-查询次数"><a class="header" href="#25-ndots-与-dns-查询次数">2.5 ndots 与 DNS 查询次数</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">查询域名</th><th style="text-align: center">点数</th><th style="text-align: left">ndots=5行为</th><th style="text-align: left">实际查询序列</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>nginx</code></td><td style="text-align: center">0</td><td style="text-align: left">短名称,应用search</td><td style="text-align: left">nginx.default.svc.cluster.local → nginx.svc.cluster.local → nginx.cluster.local → nginx.</td></tr>
+<tr><td style="text-align: left"><code>nginx.default</code></td><td style="text-align: center">1</td><td style="text-align: left">短名称</td><td style="text-align: left">nginx.default.default.svc.cluster.local → …</td></tr>
+<tr><td style="text-align: left"><code>www.google.com</code></td><td style="text-align: center">2</td><td style="text-align: left">短名称(!)</td><td style="text-align: left">www.google.com.default.svc.cluster.local → … → www.google.com.</td></tr>
+<tr><td style="text-align: left"><code>api.v1.prod.company.com</code></td><td style="text-align: center">4</td><td style="text-align: left">短名称</td><td style="text-align: left">先尝试search后缀</td></tr>
+<tr><td style="text-align: left"><code>api.v1.prod.company.io.</code></td><td style="text-align: center">5</td><td style="text-align: left">FQDN(末尾有.)</td><td style="text-align: left">直接查询,不应用search</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>生产建议</strong>: 外部域名务必使用FQDN格式(末尾加<code>.</code>)避免不必要的DNS查询。</p>
+<hr>
+<h2 id="三插件链机制深度解析-plugin-chain-in-depth"><a class="header" href="#三插件链机制深度解析-plugin-chain-in-depth">三、插件链机制深度解析 (Plugin Chain In-Depth)</a></h2>
+<h3 id="31-插件分类"><a class="header" href="#31-插件分类">3.1 插件分类</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">类别</th><th style="text-align: left">职责</th><th style="text-align: left">插件示例</th><th style="text-align: left">执行特点</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>数据源插件</strong></td><td style="text-align: left">提供DNS记录</td><td style="text-align: left">kubernetes, file, etcd, hosts</td><td style="text-align: left">权威响应</td></tr>
+<tr><td style="text-align: left"><strong>缓存插件</strong></td><td style="text-align: left">缓存响应</td><td style="text-align: left">cache</td><td style="text-align: left">命中则短路返回</td></tr>
+<tr><td style="text-align: left"><strong>转发插件</strong></td><td style="text-align: left">转发查询</td><td style="text-align: left">forward, proxy</td><td style="text-align: left">终止链,等待上游</td></tr>
+<tr><td style="text-align: left"><strong>修改插件</strong></td><td style="text-align: left">修改请求/响应</td><td style="text-align: left">rewrite, template</td><td style="text-align: left">传递给下一个</td></tr>
+<tr><td style="text-align: left"><strong>监控插件</strong></td><td style="text-align: left">记录/暴露指标</td><td style="text-align: left">log, prometheus, trace</td><td style="text-align: left">传递给下一个</td></tr>
+<tr><td style="text-align: left"><strong>安全插件</strong></td><td style="text-align: left">访问控制</td><td style="text-align: left">acl, dnssec</td><td style="text-align: left">可能拒绝请求</td></tr>
+<tr><td style="text-align: left"><strong>辅助插件</strong></td><td style="text-align: left">辅助功能</td><td style="text-align: left">errors, health, ready, reload</td><td style="text-align: left">传递给下一个</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="32-最佳插件顺序"><a class="header" href="#32-最佳插件顺序">3.2 最佳插件顺序</a></h3>
+<pre><code>.:53 {
+    # 1. 错误处理 (必须最先)
+    errors
+    
+    # 2. 日志记录
+    log
+    
+    # 3. 健康检查
+    health {
+        lameduck 5s
+    }
+    ready
+    
+    # 4. 监控指标
+    prometheus :9153
+    
+    # 5. 循环检测
+    loop
+    
+    # 6. 名称重写 (在缓存之前)
+    rewrite name suffix .old.local .new.local
+    
+    # 7. 缓存 (在权威解析之前!)
+    cache 30
+    
+    # 8. 权威解析
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+    }
+    
+    # 9. 本地hosts
+    hosts {
+        10.0.0.1 custom.local
+        fallthrough
+    }
+    
+    # 10. 转发到上游 (最后)
+    forward . /etc/resolv.conf {
+        max_concurrent 1000
+    }
+    
+    # 11. 配置热重载
+    reload
+    
+    # 12. 负载均衡
+    loadbalance
+}
+</code></pre>
+<h3 id="33-插件顺序错误示例"><a class="header" href="#33-插件顺序错误示例">3.3 插件顺序错误示例</a></h3>
+<p><strong>错误1: cache在kubernetes之后</strong></p>
+<pre><code># 错误配置
+kubernetes cluster.local
+cache 30  # 永远不会缓存kubernetes的响应!
+</code></pre>
+<p><strong>错误2: rewrite在cache之后</strong></p>
+<pre><code># 错误配置  
+cache 30
+rewrite name ...  # 重写后的查询无法利用缓存
+</code></pre>
+<p><strong>错误3: forward在kubernetes之前</strong></p>
+<pre><code># 错误配置
+forward . 8.8.8.8  # 所有查询都转发了!
+kubernetes cluster.local  # 永远不会执行
+</code></pre>
+<h3 id="34-插件间数据传递"><a class="header" href="#34-插件间数据传递">3.4 插件间数据传递</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────┐
+│                        Plugin Chain 数据流                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ┌─────────┐                                                               │
+│   │ Request │                                                               │
+│   │ Context │ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐               │
+│   └────┬────┘                                              │               │
+│        │                                                   │               │
+│        ▼                                                   ▼               │
+│   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐               │
+│   │  log    │───▶│  cache  │───▶│  k8s    │───▶│ forward │               │
+│   └────┬────┘    └────┬────┘    └────┬────┘    └────┬────┘               │
+│        │              │              │              │                      │
+│        │ ctx.SetVar   │ Cache Hit?   │ K8s Found?   │ Forward             │
+│        │ "client_ip"  │     │        │    │         │ to Upstream         │
+│        │              │     ▼        │    ▼         │    │                 │
+│        │              │  ┌─────┐     │ ┌─────┐      │    ▼                 │
+│        │              │  │Return│    │ │Return│     │ ┌──────┐            │
+│        │              │  └─────┘     │ └─────┘      │ │Upstream│           │
+│        │              │     │        │    │         │ │Response│           │
+│        │              │     │        │    │         │ └───┬───┘            │
+│        │              │     │        │    │         │     │                 │
+│   ┌────┴────┐    ┌────┴────┐    ┌────┴────┐    ┌────┴─────┐               │
+│   │Response │◀───│Response │◀───│Response │◀───│Response  │               │
+│   │ (logged)│    │ (cached)│    │ (k8s)   │    │(upstream)│               │
+│   └─────────┘    └─────────┘    └─────────┘    └──────────┘               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="四高可用架构设计-high-availability"><a class="header" href="#四高可用架构设计-high-availability">四、高可用架构设计 (High Availability)</a></h2>
+<h3 id="41-多副本部署"><a class="header" href="#41-多副本部署">4.1 多副本部署</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">配置项</th><th style="text-align: left">推荐值</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">replicas</td><td style="text-align: left">2-3</td><td style="text-align: left">小型集群2个,大型集群3个</td></tr>
+<tr><td style="text-align: left">podAntiAffinity</td><td style="text-align: left">preferredDuringScheduling</td><td style="text-align: left">分散到不同节点</td></tr>
+<tr><td style="text-align: left">PodDisruptionBudget</td><td style="text-align: left">minAvailable: 1</td><td style="text-align: left">保证至少1个可用</td></tr>
+<tr><td style="text-align: left">resources.requests.cpu</td><td style="text-align: left">100m</td><td style="text-align: left">CPU请求</td></tr>
+<tr><td style="text-align: left">resources.requests.memory</td><td style="text-align: left">70Mi</td><td style="text-align: left">内存请求</td></tr>
+<tr><td style="text-align: left">resources.limits.memory</td><td style="text-align: left">170Mi</td><td style="text-align: left">内存限制</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="42-生产级部署配置"><a class="header" href="#42-生产级部署配置">4.2 生产级部署配置</a></h3>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns
+  namespace: kube-system
+  labels:
+    k8s-app: kube-dns
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      k8s-app: kube-dns
+  template:
+    metadata:
+      labels:
+        k8s-app: kube-dns
+    spec:
+      priorityClassName: system-cluster-critical
+      serviceAccountName: coredns
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Exists"
+        - key: "node-role.kubernetes.io/control-plane"
+          effect: NoSchedule
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: k8s-app
+                  operator: In
+                  values:
+                  - kube-dns
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: coredns
+        image: coredns/coredns:1.11.1
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: 170Mi
+          requests:
+            cpu: 100m
+            memory: 70Mi
+        args: [ "-conf", "/etc/coredns/Corefile" ]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/coredns
+          readOnly: true
+        ports:
+        - containerPort: 53
+          name: dns
+          protocol: UDP
+        - containerPort: 53
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 9153
+          name: metrics
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8181
+            scheme: HTTP
+      dnsPolicy: Default
+      volumes:
+      - name: config-volume
+        configMap:
+          name: coredns
+          items:
+          - key: Corefile
+            path: Corefile
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: coredns
+  namespace: kube-system
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      k8s-app: kube-dns
+</code></pre>
+<h3 id="43-autoscaling-配置"><a class="header" href="#43-autoscaling-配置">4.3 AutoScaling 配置</a></h3>
+<pre><code class="language-yaml">apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: coredns
+  namespace: kube-system
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: coredns
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+</code></pre>
+<hr>
+<h2 id="五集群规模与容量规划-capacity-planning"><a class="header" href="#五集群规模与容量规划-capacity-planning">五、集群规模与容量规划 (Capacity Planning)</a></h2>
+<h3 id="51-规模参考表"><a class="header" href="#51-规模参考表">5.1 规模参考表</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">集群规模</th><th style="text-align: center">节点数</th><th style="text-align: center">Pod数</th><th style="text-align: center">CoreDNS副本</th><th style="text-align: center">CPU Request</th><th style="text-align: center">Memory Request</th><th style="text-align: center">缓存大小</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>小型</strong></td><td style="text-align: center">&lt;50</td><td style="text-align: center">&lt;1000</td><td style="text-align: center">2</td><td style="text-align: center">100m</td><td style="text-align: center">70Mi</td><td style="text-align: center">10000</td></tr>
+<tr><td style="text-align: left"><strong>中型</strong></td><td style="text-align: center">50-200</td><td style="text-align: center">1000-5000</td><td style="text-align: center">3</td><td style="text-align: center">200m</td><td style="text-align: center">128Mi</td><td style="text-align: center">30000</td></tr>
+<tr><td style="text-align: left"><strong>大型</strong></td><td style="text-align: center">200-1000</td><td style="text-align: center">5000-20000</td><td style="text-align: center">5</td><td style="text-align: center">500m</td><td style="text-align: center">256Mi</td><td style="text-align: center">50000</td></tr>
+<tr><td style="text-align: left"><strong>超大型</strong></td><td style="text-align: center">&gt;1000</td><td style="text-align: center">&gt;20000</td><td style="text-align: center">7+</td><td style="text-align: center">1000m</td><td style="text-align: center">512Mi</td><td style="text-align: center">100000</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-qps-估算"><a class="header" href="#52-qps-估算">5.2 QPS 估算</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">因素</th><th style="text-align: left">计算方式</th><th style="text-align: left">示例</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">基础QPS</td><td style="text-align: left">Pod数 × 每Pod平均QPS</td><td style="text-align: left">5000 × 2 = 10000 QPS</td></tr>
+<tr><td style="text-align: left">峰值系数</td><td style="text-align: left">基础QPS × 3-5倍</td><td style="text-align: left">10000 × 4 = 40000 QPS</td></tr>
+<tr><td style="text-align: left">缓存命中率</td><td style="text-align: left">通常60-80%</td><td style="text-align: left">实际后端QPS = 40000 × 0.3 = 12000</td></tr>
+<tr><td style="text-align: left">单Pod处理能力</td><td style="text-align: left">~30000 QPS (取决于配置)</td><td style="text-align: left">需要至少1个Pod</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="53-资源计算公式"><a class="header" href="#53-资源计算公式">5.3 资源计算公式</a></h3>
+<pre><code>CPU (millicores) = (集群Pod数 / 1000) × 50m + 100m (基础)
+Memory (Mi) = (缓存条目数 / 10000) × 20Mi + 70Mi (基础)
+副本数 = max(2, ceil(预期QPS / 20000))
+</code></pre>
+<hr>
+<h2 id="六监控指标体系-monitoring-metrics"><a class="header" href="#六监控指标体系-monitoring-metrics">六、监控指标体系 (Monitoring Metrics)</a></h2>
+<h3 id="61-关键prometheus指标"><a class="header" href="#61-关键prometheus指标">6.1 关键Prometheus指标</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">指标名称</th><th style="text-align: left">类型</th><th style="text-align: left">说明</th><th style="text-align: left">告警阈值建议</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>coredns_dns_requests_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">总请求数</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_dns_responses_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">总响应数(按rcode)</td><td style="text-align: left">SERVFAIL &gt; 1%</td></tr>
+<tr><td style="text-align: left"><code>coredns_dns_request_duration_seconds</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">请求延迟</td><td style="text-align: left">P99 &gt; 100ms</td></tr>
+<tr><td style="text-align: left"><code>coredns_dns_request_size_bytes</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">请求大小</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_dns_response_size_bytes</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">响应大小</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_cache_hits_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">缓存命中</td><td style="text-align: left">命中率 &lt; 50%</td></tr>
+<tr><td style="text-align: left"><code>coredns_cache_misses_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">缓存未命中</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_cache_size</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">当前缓存条目数</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_forward_requests_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">转发请求数</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_forward_responses_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">转发响应数</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>coredns_forward_request_duration_seconds</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">转发延迟</td><td style="text-align: left">P99 &gt; 500ms</td></tr>
+<tr><td style="text-align: left"><code>coredns_kubernetes_dns_programming_duration_seconds</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">K8s同步延迟</td><td style="text-align: left">P99 &gt; 5s</td></tr>
+<tr><td style="text-align: left"><code>coredns_panics_total</code></td><td style="text-align: left">Counter</td><td style="text-align: left">panic次数</td><td style="text-align: left">&gt; 0</td></tr>
+<tr><td style="text-align: left"><code>coredns_plugin_enabled</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">启用的插件</td><td style="text-align: left">-</td></tr>
+<tr><td style="text-align: left"><code>process_resident_memory_bytes</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">内存使用</td><td style="text-align: left">&gt; limits 80%</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="62-告警规则示例"><a class="header" href="#62-告警规则示例">6.2 告警规则示例</a></h3>
+<pre><code class="language-yaml">groups:
+- name: coredns
+  rules:
+  - alert: CoreDNSDown
+    expr: absent(up{job="coredns"} == 1)
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "CoreDNS is down"
+      
+  - alert: CoreDNSHighErrorRate
+    expr: |
+      sum(rate(coredns_dns_responses_total{rcode="SERVFAIL"}[5m])) 
+      / 
+      sum(rate(coredns_dns_responses_total[5m])) &gt; 0.01
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS error rate &gt; 1%"
+      
+  - alert: CoreDNSHighLatency
+    expr: |
+      histogram_quantile(0.99, 
+        sum(rate(coredns_dns_request_duration_seconds_bucket[5m])) by (le)
+      ) &gt; 0.1
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS P99 latency &gt; 100ms"
+      
+  - alert: CoreDNSLowCacheHitRate
+    expr: |
+      sum(rate(coredns_cache_hits_total[5m])) 
+      / 
+      (sum(rate(coredns_cache_hits_total[5m])) + sum(rate(coredns_cache_misses_total[5m]))) &lt; 0.5
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS cache hit rate &lt; 50%"
+      
+  - alert: CoreDNSForwardLatencyHigh
+    expr: |
+      histogram_quantile(0.99, 
+        sum(rate(coredns_forward_request_duration_seconds_bucket[5m])) by (le)
+      ) &gt; 0.5
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "CoreDNS forward P99 latency &gt; 500ms"
+</code></pre>
+<h3 id="63-grafana-dashboard-关键面板"><a class="header" href="#63-grafana-dashboard-关键面板">6.3 Grafana Dashboard 关键面板</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">面板名称</th><th style="text-align: left">查询</th><th style="text-align: left">用途</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>QPS</strong></td><td style="text-align: left"><code>sum(rate(coredns_dns_requests_total[1m]))</code></td><td style="text-align: left">总请求速率</td></tr>
+<tr><td style="text-align: left"><strong>Error Rate</strong></td><td style="text-align: left"><code>sum(rate(coredns_dns_responses_total{rcode=~"SERVFAIL|REFUSED"}[1m]))/sum(rate(coredns_dns_responses_total[1m]))</code></td><td style="text-align: left">错误率</td></tr>
+<tr><td style="text-align: left"><strong>Latency P50/P99</strong></td><td style="text-align: left"><code>histogram_quantile(0.99, sum(rate(coredns_dns_request_duration_seconds_bucket[1m])) by (le))</code></td><td style="text-align: left">延迟分布</td></tr>
+<tr><td style="text-align: left"><strong>Cache Hit Rate</strong></td><td style="text-align: left"><code>sum(rate(coredns_cache_hits_total[1m]))/(sum(rate(coredns_cache_hits_total[1m]))+sum(rate(coredns_cache_misses_total[1m])))</code></td><td style="text-align: left">缓存效率</td></tr>
+<tr><td style="text-align: left"><strong>Forward Latency</strong></td><td style="text-align: left"><code>histogram_quantile(0.99, sum(rate(coredns_forward_request_duration_seconds_bucket[1m])) by (le))</code></td><td style="text-align: left">上游延迟</td></tr>
+<tr><td style="text-align: left"><strong>Memory Usage</strong></td><td style="text-align: left"><code>process_resident_memory_bytes{job="coredns"}</code></td><td style="text-align: left">内存使用</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="七与kube-dns对比-comparison-with-kube-dns"><a class="header" href="#七与kube-dns对比-comparison-with-kube-dns">七、与kube-dns对比 (Comparison with kube-dns)</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">特性</th><th style="text-align: left">CoreDNS</th><th style="text-align: left">kube-dns</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>架构</strong></td><td style="text-align: left">单进程,插件化</td><td style="text-align: left">多容器(kubedns+dnsmasq+sidecar)</td><td style="text-align: left">CoreDNS更简洁</td></tr>
+<tr><td style="text-align: left"><strong>配置</strong></td><td style="text-align: left">Corefile (声明式)</td><td style="text-align: left">ConfigMap + 命令行参数</td><td style="text-align: left">CoreDNS更灵活</td></tr>
+<tr><td style="text-align: left"><strong>扩展性</strong></td><td style="text-align: left">插件系统,易扩展</td><td style="text-align: left">需修改源码</td><td style="text-align: left">CoreDNS优势明显</td></tr>
+<tr><td style="text-align: left"><strong>缓存</strong></td><td style="text-align: left">内置cache插件</td><td style="text-align: left">dnsmasq提供</td><td style="text-align: left">CoreDNS原生支持</td></tr>
+<tr><td style="text-align: left"><strong>性能</strong></td><td style="text-align: left">高性能,Go原生</td><td style="text-align: left">依赖dnsmasq</td><td style="text-align: left">CoreDNS略优</td></tr>
+<tr><td style="text-align: left"><strong>资源占用</strong></td><td style="text-align: left">单容器,资源少</td><td style="text-align: left">3容器,资源多</td><td style="text-align: left">CoreDNS节省约50%</td></tr>
+<tr><td style="text-align: left"><strong>监控</strong></td><td style="text-align: left">原生Prometheus</td><td style="text-align: left">需额外配置</td><td style="text-align: left">CoreDNS更易集成</td></tr>
+<tr><td style="text-align: left"><strong>负载均衡</strong></td><td style="text-align: left">内置loadbalance</td><td style="text-align: left">依赖dnsmasq</td><td style="text-align: left">CoreDNS原生支持</td></tr>
+<tr><td style="text-align: left"><strong>热重载</strong></td><td style="text-align: left">reload插件支持</td><td style="text-align: left">需重启Pod</td><td style="text-align: left">CoreDNS支持无缝更新</td></tr>
+<tr><td style="text-align: left"><strong>Kubernetes支持</strong></td><td style="text-align: left">v1.13+ 默认</td><td style="text-align: left">v1.12及之前默认</td><td style="text-align: left">CoreDNS是现代标准</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/12-dns-service-discovery.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/14-coredns-configuration-corefile.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/12-dns-service-discovery.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/14-coredns-configuration-corefile.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

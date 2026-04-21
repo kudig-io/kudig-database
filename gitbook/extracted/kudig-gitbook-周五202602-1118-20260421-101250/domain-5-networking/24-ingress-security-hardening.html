@@ -1,0 +1,1141 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>132 - Ingress 安全加固与防护 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="132---ingress-安全加固与防护"><a class="header" href="#132---ingress-安全加固与防护">132 - Ingress 安全加固与防护</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一ingress-安全威胁概览"><a class="header" href="#一ingress-安全威胁概览">一、Ingress 安全威胁概览</a></h2>
+<h3 id="11-常见攻击类型"><a class="header" href="#11-常见攻击类型">1.1 常见攻击类型</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>攻击类型</th><th>英文</th><th>描述</th><th>风险等级</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>DDoS 攻击</strong></td><td>Distributed Denial of Service</td><td>大量请求导致服务不可用</td><td>高</td></tr>
+<tr><td><strong>SQL 注入</strong></td><td>SQL Injection</td><td>通过输入执行恶意 SQL</td><td>高</td></tr>
+<tr><td><strong>XSS 攻击</strong></td><td>Cross-Site Scripting</td><td>注入恶意脚本</td><td>高</td></tr>
+<tr><td><strong>CSRF 攻击</strong></td><td>Cross-Site Request Forgery</td><td>伪造用户请求</td><td>中</td></tr>
+<tr><td><strong>路径遍历</strong></td><td>Path Traversal</td><td>访问受限目录</td><td>高</td></tr>
+<tr><td><strong>HTTP 走私</strong></td><td>HTTP Request Smuggling</td><td>利用解析差异</td><td>高</td></tr>
+<tr><td><strong>慢速攻击</strong></td><td>Slowloris</td><td>耗尽连接资源</td><td>中</td></tr>
+<tr><td><strong>暴力破解</strong></td><td>Brute Force</td><td>猜测密码/密钥</td><td>中</td></tr>
+<tr><td><strong>信息泄露</strong></td><td>Information Disclosure</td><td>暴露敏感信息</td><td>中</td></tr>
+<tr><td><strong>中间人攻击</strong></td><td>Man-in-the-Middle</td><td>截获/篡改通信</td><td>高</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-ingress-安全防护层次"><a class="header" href="#12-ingress-安全防护层次">1.2 Ingress 安全防护层次</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────┐
+│                            Ingress 安全防护层次                                  │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Layer 1: 网络层防护 (Network Security)                                  │   │
+│  │  - 云防火墙 / 安全组                                                     │   │
+│  │  - DDoS 防护                                                            │   │
+│  │  - IP 黑白名单                                                          │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                       │                                         │
+│                                       ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Layer 2: 传输层防护 (Transport Security)                                │   │
+│  │  - TLS 1.2/1.3 加密                                                     │   │
+│  │  - 证书验证                                                             │   │
+│  │  - HSTS                                                                 │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                       │                                         │
+│                                       ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Layer 3: 应用层防护 (Application Security)                              │   │
+│  │  - WAF (Web Application Firewall)                                       │   │
+│  │  - 限流 / 速率限制                                                      │   │
+│  │  - 认证 / 授权                                                          │   │
+│  │  - 输入验证                                                             │   │
+│  │  - 安全响应头                                                           │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                       │                                         │
+│                                       ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Layer 4: 后端防护 (Backend Security)                                    │   │
+│  │  - 网络策略 (NetworkPolicy)                                             │   │
+│  │  - 服务间 mTLS                                                          │   │
+│  │  - 最小权限原则                                                         │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="二ip-访问控制"><a class="header" href="#二ip-访问控制">二、IP 访问控制</a></h2>
+<h3 id="21-ip-白名单配置"><a class="header" href="#21-ip-白名单配置">2.1 IP 白名单配置</a></h3>
+<pre><code class="language-yaml"># 只允许特定 IP 访问
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whitelist-ingress
+  annotations:
+    # IP 白名单 (CIDR 格式)
+    nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,203.0.113.0/24"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: internal.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="22-ip-黑名单配置"><a class="header" href="#22-ip-黑名单配置">2.2 IP 黑名单配置</a></h3>
+<pre><code class="language-yaml"># 禁止特定 IP 访问
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: denylist-ingress
+  annotations:
+    # IP 黑名单
+    nginx.ingress.kubernetes.io/denylist-source-range: "1.2.3.4/32,5.6.7.0/24"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="23-基于地理位置的访问控制"><a class="header" href="#23-基于地理位置的访问控制">2.3 基于地理位置的访问控制</a></h3>
+<pre><code class="language-yaml"># 使用 configuration-snippet 实现地理位置访问控制
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: geo-restricted-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # 假设已配置 GeoIP 模块
+      # 只允许中国和美国访问
+      if ($geoip2_data_country_code !~ ^(CN|US)$) {
+        return 403;
+      }
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="三限流与防-ddos"><a class="header" href="#三限流与防-ddos">三、限流与防 DDoS</a></h2>
+<h3 id="31-请求速率限制"><a class="header" href="#31-请求速率限制">3.1 请求速率限制</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>限流类型</th><th>注解</th><th>说明</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>每秒请求数</strong></td><td><code>limit-rps</code></td><td>限制每秒请求数</td><td>API 保护</td></tr>
+<tr><td><strong>每分钟请求数</strong></td><td><code>limit-rpm</code></td><td>限制每分钟请求数</td><td>一般限流</td></tr>
+<tr><td><strong>并发连接数</strong></td><td><code>limit-connections</code></td><td>限制并发连接</td><td>连接保护</td></tr>
+<tr><td><strong>响应速率</strong></td><td><code>limit-rate</code></td><td>限制响应带宽</td><td>带宽控制</td></tr>
+<tr><td><strong>全局限流</strong></td><td><code>global-rate-limit</code></td><td>分布式限流</td><td>集群级别</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml"># 综合限流配置
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rate-limited-ingress
+  annotations:
+    # 每秒最多 100 个请求
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    # 每分钟最多 1000 个请求
+    nginx.ingress.kubernetes.io/limit-rpm: "1000"
+    # 最多 50 个并发连接
+    nginx.ingress.kubernetes.io/limit-connections: "50"
+    # 白名单 (不受限流影响)
+    nginx.ingress.kubernetes.io/limit-whitelist: "10.0.0.0/8,172.16.0.0/12"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+</code></pre>
+<h3 id="32-分级限流策略"><a class="header" href="#32-分级限流策略">3.2 分级限流策略</a></h3>
+<pre><code class="language-yaml"># 公共 API - 严格限流
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: public-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/limit-rps: "10"
+    nginx.ingress.kubernetes.io/limit-connections: "5"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /public
+        pathType: Prefix
+        backend:
+          service:
+            name: public-api
+            port:
+              number: 8080
+---
+# 认证 API - 中等限流
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auth-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/limit-rps: "50"
+    nginx.ingress.kubernetes.io/limit-connections: "20"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+---
+# 内部 API - 宽松限流
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: internal-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/limit-rps: "500"
+    nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: internal-api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-api
+            port:
+              number: 8080
+</code></pre>
+<h3 id="33-防慢速攻击配置"><a class="header" href="#33-防慢速攻击配置">3.3 防慢速攻击配置</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 客户端请求体超时
+  client-body-timeout: "10"
+  # 客户端请求头超时
+  client-header-timeout: "10"
+  # Keep-alive 超时
+  keep-alive: "75"
+  # Keep-alive 最大请求数
+  keep-alive-requests: "1000"
+  # 大请求体缓冲
+  large-client-header-buffers: "4 16k"
+  # 请求体缓冲区
+  client-body-buffer-size: "16k"
+</code></pre>
+<hr>
+<h2 id="四认证与授权"><a class="header" href="#四认证与授权">四、认证与授权</a></h2>
+<h3 id="41-basic-auth-认证"><a class="header" href="#41-basic-auth-认证">4.1 Basic Auth 认证</a></h3>
+<pre><code class="language-yaml"># 创建认证 Secret
+# htpasswd -c auth admin
+# kubectl create secret generic basic-auth --from-file=auth
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: basic-auth
+  namespace: default
+type: Opaque
+data:
+  auth: YWRtaW46JGFwcjEkSDBHWS5CN3IkVnlDV2ZYREJSUGhQMXY3SGNPV0FlLgo=
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: basic-auth-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - Admin Area"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="42-外部认证-oauth2oidc"><a class="header" href="#42-外部认证-oauth2oidc">4.2 外部认证 (OAuth2/OIDC)</a></h3>
+<pre><code class="language-yaml"># 使用 OAuth2 Proxy 进行外部认证
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oauth2-protected-ingress
+  annotations:
+    # 外部认证 URL
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.auth.svc.cluster.local/oauth2/auth"
+    # 登录页面
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.example.com/oauth2/start?rd=$scheme://$host$escaped_request_uri"
+    # 传递用户信息到后端
+    nginx.ingress.kubernetes.io/auth-response-headers: "X-Auth-Request-User,X-Auth-Request-Email,X-Auth-Request-Groups,Authorization"
+    # 缓存认证结果
+    nginx.ingress.kubernetes.io/auth-cache-key: "$cookie_oauth2_proxy"
+    nginx.ingress.kubernetes.io/auth-cache-duration: "200 202 10m, 401 1m"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: protected-app
+            port:
+              number: 80
+</code></pre>
+<h3 id="43-mtls-客户端证书认证"><a class="header" href="#43-mtls-客户端证书认证">4.3 mTLS 客户端证书认证</a></h3>
+<pre><code class="language-yaml"># 创建 CA Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: client-ca
+  namespace: default
+type: Opaque
+data:
+  ca.crt: &lt;base64-encoded-ca-certificate&gt;
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mtls-ingress
+  annotations:
+    # 客户端 CA 证书
+    nginx.ingress.kubernetes.io/auth-tls-secret: "default/client-ca"
+    # 强制客户端证书验证
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    # 证书链验证深度
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "2"
+    # 传递客户端证书信息到后端
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - secure.example.com
+    secretName: server-tls
+  rules:
+  - host: secure.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: secure-service
+            port:
+              number: 80
+</code></pre>
+<hr>
+<h2 id="五安全响应头"><a class="header" href="#五安全响应头">五、安全响应头</a></h2>
+<h3 id="51-安全响应头说明"><a class="header" href="#51-安全响应头说明">5.1 安全响应头说明</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>响应头</th><th>作用</th><th>推荐值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>X-Frame-Options</code></td><td>防止点击劫持</td><td><code>SAMEORIGIN</code> 或 <code>DENY</code></td></tr>
+<tr><td><code>X-Content-Type-Options</code></td><td>防止 MIME 类型嗅探</td><td><code>nosniff</code></td></tr>
+<tr><td><code>X-XSS-Protection</code></td><td>XSS 过滤器</td><td><code>1; mode=block</code></td></tr>
+<tr><td><code>Strict-Transport-Security</code></td><td>强制 HTTPS</td><td><code>max-age=31536000; includeSubDomains</code></td></tr>
+<tr><td><code>Content-Security-Policy</code></td><td>内容安全策略</td><td>按需配置</td></tr>
+<tr><td><code>Referrer-Policy</code></td><td>控制 Referer 头</td><td><code>strict-origin-when-cross-origin</code></td></tr>
+<tr><td><code>Permissions-Policy</code></td><td>功能权限控制</td><td>按需配置</td></tr>
+<tr><td><code>X-Permitted-Cross-Domain-Policies</code></td><td>Flash 跨域策略</td><td><code>none</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-安全响应头配置"><a class="header" href="#52-安全响应头配置">5.2 安全响应头配置</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: secure-headers-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # 防止点击劫持
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      
+      # 防止 MIME 类型嗅探
+      add_header X-Content-Type-Options "nosniff" always;
+      
+      # XSS 过滤器
+      add_header X-XSS-Protection "1; mode=block" always;
+      
+      # 强制 HTTPS (HSTS)
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+      
+      # 内容安全策略
+      add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.example.com" always;
+      
+      # Referrer 策略
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+      
+      # 功能权限策略
+      add_header Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()" always;
+      
+      # 隐藏服务器信息
+      more_clear_headers Server;
+      more_clear_headers X-Powered-By;
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: secure.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="53-全局安全响应头配置"><a class="header" href="#53-全局安全响应头配置">5.3 全局安全响应头配置</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 隐藏服务器版本
+  server-tokens: "false"
+  
+  # 隐藏特定响应头
+  hide-headers: "X-Powered-By,Server"
+  
+  # HSTS 配置
+  hsts: "true"
+  hsts-max-age: "31536000"
+  hsts-include-subdomains: "true"
+  hsts-preload: "true"
+  
+  # SSL 配置
+  ssl-protocols: "TLSv1.2 TLSv1.3"
+  ssl-ciphers: "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384"
+</code></pre>
+<hr>
+<h2 id="六waf-web-application-firewall"><a class="header" href="#六waf-web-application-firewall">六、WAF (Web Application Firewall)</a></h2>
+<h3 id="61-modsecurity-waf"><a class="header" href="#61-modsecurity-waf">6.1 ModSecurity WAF</a></h3>
+<pre><code class="language-yaml"># 启用 ModSecurity
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 启用 ModSecurity
+  enable-modsecurity: "true"
+  # 启用 OWASP 核心规则集
+  enable-owasp-modsecurity-crs: "true"
+  # ModSecurity 配置
+  modsecurity-snippet: |
+    # 检测模式 (DetectionOnly) 或阻断模式 (On)
+    SecRuleEngine On
+    
+    # 审计日志
+    SecAuditEngine RelevantOnly
+    SecAuditLogRelevantStatus "^(?:5|4(?!04))"
+    SecAuditLogParts ABIJDEFHZ
+    SecAuditLogType Serial
+    SecAuditLog /var/log/modsec_audit.log
+    
+    # 请求体处理
+    SecRequestBodyAccess On
+    SecRequestBodyLimit 13107200
+    SecRequestBodyNoFilesLimit 131072
+    
+    # 响应体处理
+    SecResponseBodyAccess On
+    SecResponseBodyLimit 1048576
+    
+    # 文件上传
+    SecUploadDir /tmp
+    SecUploadKeepFiles Off
+    
+    # 临时文件
+    SecTmpDir /tmp
+    SecDataDir /tmp
+</code></pre>
+<h3 id="62-modsecurity-自定义规则"><a class="header" href="#62-modsecurity-自定义规则">6.2 ModSecurity 自定义规则</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: waf-protected-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-modsecurity-crs: "true"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      # 自定义规则: 阻止特定 User-Agent
+      SecRule REQUEST_HEADERS:User-Agent "@contains badbot" \
+        "id:10001,phase:1,deny,status:403,msg:'Bad bot detected'"
+      
+      # 自定义规则: 阻止 SQL 注入尝试
+      SecRule ARGS "@detectSQLi" \
+        "id:10002,phase:2,deny,status:403,msg:'SQL Injection attempt detected'"
+      
+      # 自定义规则: 限制请求体大小
+      SecRule REQUEST_BODY_LENGTH "@gt 1048576" \
+        "id:10003,phase:2,deny,status:413,msg:'Request body too large'"
+      
+      # 白名单规则: 允许特定路径跳过检查
+      SecRule REQUEST_URI "@beginsWith /api/webhook" \
+        "id:10004,phase:1,pass,nolog,ctl:ruleEngine=Off"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+</code></pre>
+<h3 id="63-owasp-top-10-防护规则"><a class="header" href="#63-owasp-top-10-防护规则">6.3 OWASP Top 10 防护规则</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>威胁</th><th>规则 ID 范围</th><th>防护措施</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>注入攻击</strong></td><td>941xxx</td><td>SQL/NoSQL/LDAP/XPath 注入检测</td></tr>
+<tr><td><strong>身份验证</strong></td><td>942xxx</td><td>弱认证检测</td></tr>
+<tr><td><strong>敏感数据暴露</strong></td><td>943xxx</td><td>敏感信息泄露检测</td></tr>
+<tr><td><strong>XXE</strong></td><td>944xxx</td><td>XML 外部实体检测</td></tr>
+<tr><td><strong>访问控制</strong></td><td>945xxx</td><td>访问控制绕过检测</td></tr>
+<tr><td><strong>安全配置</strong></td><td>946xxx</td><td>错误配置检测</td></tr>
+<tr><td><strong>XSS</strong></td><td>941xxx</td><td>跨站脚本检测</td></tr>
+<tr><td><strong>反序列化</strong></td><td>944xxx</td><td>不安全反序列化检测</td></tr>
+<tr><td><strong>组件漏洞</strong></td><td>-</td><td>依赖外部漏洞扫描</td></tr>
+<tr><td><strong>日志监控</strong></td><td>-</td><td>审计日志配置</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="七ingress-controller-安全加固"><a class="header" href="#七ingress-controller-安全加固">七、Ingress Controller 安全加固</a></h2>
+<h3 id="71-rbac-最小权限"><a class="header" href="#71-rbac-最小权限">7.1 RBAC 最小权限</a></h3>
+<pre><code class="language-yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ingress-nginx-controller
+rules:
+# 最小必要权限
+- apiGroups: [""]
+  resources: ["configmaps", "endpoints", "pods", "secrets", "namespaces"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses", "ingressclasses"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses/status"]
+  verbs: ["update"]
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["create", "patch"]
+# 禁止不必要的权限
+# - apiGroups: [""]
+#   resources: ["*"]
+#   verbs: ["*"]
+</code></pre>
+<h3 id="72-pod-安全配置"><a class="header" href="#72-pod-安全配置">7.2 Pod 安全配置</a></h3>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  template:
+    spec:
+      # 安全上下文
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: controller
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
+        # 资源限制
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        # 只读挂载
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: var-run
+          mountPath: /var/run
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
+</code></pre>
+<h3 id="73-networkpolicy-隔离"><a class="header" href="#73-networkpolicy-隔离">7.3 NetworkPolicy 隔离</a></h3>
+<pre><code class="language-yaml"># 限制 Ingress Controller 网络访问
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  # 允许来自外部的流量
+  - from: []
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443
+  # 允许来自 Prometheus 的指标抓取
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 10254
+  egress:
+  # 允许访问 Kubernetes API
+  - to:
+    - ipBlock:
+        cidr: &lt;API-SERVER-IP&gt;/32
+    ports:
+    - protocol: TCP
+      port: 443
+  # 允许访问所有 Service
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+  # 允许 DNS 查询
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+</code></pre>
+<hr>
+<h2 id="八注解安全"><a class="header" href="#八注解安全">八、注解安全</a></h2>
+<h3 id="81-限制危险注解"><a class="header" href="#81-限制危险注解">8.1 限制危险注解</a></h3>
+<pre><code class="language-yaml"># ConfigMap 配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 禁用 snippet 注解 (防止注入)
+  allow-snippet-annotations: "false"
+  
+  # 注解值黑名单
+  annotation-value-word-blocklist: "load_module,lua_package,_by_lua,root,alias"
+</code></pre>
+<h3 id="82-snippet-安全风险"><a class="header" href="#82-snippet-安全风险">8.2 Snippet 安全风险</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>风险</th><th>描述</th><th>缓解措施</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>配置注入</strong></td><td>恶意注解修改 NGINX 配置</td><td>禁用 snippet 注解</td></tr>
+<tr><td><strong>文件读取</strong></td><td>通过 alias/root 读取文件</td><td>配置黑名单</td></tr>
+<tr><td><strong>代码执行</strong></td><td>Lua 代码执行</td><td>禁用 Lua 指令</td></tr>
+<tr><td><strong>权限提升</strong></td><td>修改进程权限</td><td>使用 securityContext</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml"># 如果必须启用 snippet，限制使用范围
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # 允许 snippet 但限制危险指令
+  allow-snippet-annotations: "true"
+  annotation-value-word-blocklist: |
+    load_module,
+    lua_package,
+    _by_lua,
+    _by_lua_block,
+    root,
+    alias,
+    internal,
+    proxy_pass http://unix:,
+    proxy_pass https://unix:
+</code></pre>
+<hr>
+<h2 id="九审计与日志"><a class="header" href="#九审计与日志">九、审计与日志</a></h2>
+<h3 id="91-访问日志配置"><a class="header" href="#91-访问日志配置">9.1 访问日志配置</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  # JSON 格式日志
+  log-format-escape-json: "true"
+  log-format-upstream: |
+    {
+      "time": "$time_iso8601",
+      "remote_addr": "$remote_addr",
+      "x_forwarded_for": "$proxy_add_x_forwarded_for",
+      "request_id": "$req_id",
+      "remote_user": "$remote_user",
+      "bytes_sent": $bytes_sent,
+      "request_time": $request_time,
+      "status": $status,
+      "request": "$request",
+      "request_method": "$request_method",
+      "host": "$host",
+      "uri": "$uri",
+      "http_referrer": "$http_referer",
+      "http_user_agent": "$http_user_agent",
+      "upstream_addr": "$upstream_addr",
+      "upstream_response_time": "$upstream_response_time",
+      "upstream_status": "$upstream_status",
+      "ssl_protocol": "$ssl_protocol",
+      "ssl_cipher": "$ssl_cipher"
+    }
+</code></pre>
+<h3 id="92-审计日志告警"><a class="header" href="#92-审计日志告警">9.2 审计日志告警</a></h3>
+<pre><code class="language-yaml"># Prometheus 告警规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ingress-security-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: ingress-security
+    rules:
+    # 高错误率告警
+    - alert: IngressHighErrorRate
+      expr: |
+        sum(rate(nginx_ingress_controller_requests{status=~"5.."}[5m])) 
+        / sum(rate(nginx_ingress_controller_requests[5m])) &gt; 0.05
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 错误率过高"
+        description: "Ingress 5xx 错误率超过 5%: {{ $value | humanizePercentage }}"
+    
+    # 限流触发告警
+    - alert: IngressRateLimitTriggered
+      expr: |
+        sum(rate(nginx_ingress_controller_requests{status="429"}[5m])) &gt; 10
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 限流触发"
+        description: "Ingress 限流请求数: {{ $value }}/s"
+    
+    # 认证失败告警
+    - alert: IngressAuthFailures
+      expr: |
+        sum(rate(nginx_ingress_controller_requests{status="401"}[5m])) &gt; 50
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 认证失败过多"
+        description: "认证失败请求数: {{ $value }}/s，可能存在暴力破解攻击"
+    
+    # 异常流量告警
+    - alert: IngressAbnormalTraffic
+      expr: |
+        sum(rate(nginx_ingress_controller_nginx_process_requests_total[5m])) 
+        &gt; 2 * avg_over_time(sum(rate(nginx_ingress_controller_nginx_process_requests_total[5m]))[1h:5m])
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Ingress 异常流量"
+        description: "当前流量是过去 1 小时平均值的 2 倍以上"
+</code></pre>
+<hr>
+<h2 id="十安全检查清单"><a class="header" href="#十安全检查清单">十、安全检查清单</a></h2>
+<h3 id="101-部署前检查"><a class="header" href="#101-部署前检查">10.1 部署前检查</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>检查项</th><th>说明</th><th>状态</th></tr>
+</thead>
+<tbody>
+<tr><td>TLS 1.2+</td><td>禁用低版本 TLS</td><td>☐</td></tr>
+<tr><td>强制 HTTPS</td><td>配置 SSL 重定向</td><td>☐</td></tr>
+<tr><td>安全响应头</td><td>配置所有安全头</td><td>☐</td></tr>
+<tr><td>限流配置</td><td>配置适当的限流</td><td>☐</td></tr>
+<tr><td>IP 白名单</td><td>敏感路径访问控制</td><td>☐</td></tr>
+<tr><td>认证配置</td><td>管理接口启用认证</td><td>☐</td></tr>
+<tr><td>RBAC 配置</td><td>最小权限原则</td><td>☐</td></tr>
+<tr><td>NetworkPolicy</td><td>网络隔离</td><td>☐</td></tr>
+<tr><td>Pod 安全</td><td>非 root 运行</td><td>☐</td></tr>
+<tr><td>资源限制</td><td>配置 requests/limits</td><td>☐</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="102-运行时检查"><a class="header" href="#102-运行时检查">10.2 运行时检查</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>检查项</th><th>说明</th><th>状态</th></tr>
+</thead>
+<tbody>
+<tr><td>日志监控</td><td>访问日志收集分析</td><td>☐</td></tr>
+<tr><td>指标监控</td><td>错误率、延迟监控</td><td>☐</td></tr>
+<tr><td>告警配置</td><td>安全事件告警</td><td>☐</td></tr>
+<tr><td>证书续期</td><td>自动证书管理</td><td>☐</td></tr>
+<tr><td>漏洞扫描</td><td>定期安全扫描</td><td>☐</td></tr>
+<tr><td>配置审计</td><td>定期审计配置</td><td>☐</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p><strong>Ingress 安全原则</strong>: 纵深防御 → 最小权限 → 持续监控 → 快速响应</p>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/23-ingress-advanced-routing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/25-ingress-monitoring-troubleshooting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/23-ingress-advanced-routing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/25-ingress-monitoring-troubleshooting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>55 - CoreDNS 插件完整参考 (Plugins Reference) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="55---coredns-插件完整参考-plugins-reference"><a class="header" href="#55---coredns-插件完整参考-plugins-reference">55 - CoreDNS 插件完整参考 (Plugins Reference)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: CoreDNS 1.8.0+ / Kubernetes v1.25-v1.32 | <strong>最后更新</strong>: 2026-01</p>
+</blockquote>
+<hr>
+<h2 id="一插件分类总览-plugin-categories-overview"><a class="header" href="#一插件分类总览-plugin-categories-overview">一、插件分类总览 (Plugin Categories Overview)</a></h2>
+<h3 id="11-插件分类表"><a class="header" href="#11-插件分类表">1.1 插件分类表</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">类别</th><th style="text-align: center">插件数量</th><th style="text-align: left">主要用途</th><th style="text-align: left">核心插件</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>数据源</strong></td><td style="text-align: center">8</td><td style="text-align: left">提供DNS记录数据</td><td style="text-align: left">kubernetes, file, hosts, etcd</td></tr>
+<tr><td style="text-align: left"><strong>缓存</strong></td><td style="text-align: center">2</td><td style="text-align: left">缓存DNS响应</td><td style="text-align: left">cache, nsid</td></tr>
+<tr><td style="text-align: left"><strong>转发/代理</strong></td><td style="text-align: center">3</td><td style="text-align: left">转发查询到上游</td><td style="text-align: left">forward, proxy, grpc</td></tr>
+<tr><td style="text-align: left"><strong>修改</strong></td><td style="text-align: center">4</td><td style="text-align: left">修改请求或响应</td><td style="text-align: left">rewrite, template, header, metadata</td></tr>
+<tr><td style="text-align: left"><strong>监控</strong></td><td style="text-align: center">4</td><td style="text-align: left">日志/指标/追踪</td><td style="text-align: left">log, prometheus, trace, debug</td></tr>
+<tr><td style="text-align: left"><strong>安全</strong></td><td style="text-align: center">4</td><td style="text-align: left">访问控制/加密</td><td style="text-align: left">acl, dnssec, tls, dnstap</td></tr>
+<tr><td style="text-align: left"><strong>辅助</strong></td><td style="text-align: center">10+</td><td style="text-align: left">健康检查/错误处理等</td><td style="text-align: left">errors, health, ready, loop, reload</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-插件启用状态检查"><a class="header" href="#12-插件启用状态检查">1.2 插件启用状态检查</a></h3>
+<pre><code class="language-bash"># 查看CoreDNS编译包含的插件
+kubectl exec -n kube-system deploy/coredns -- coredns -plugins
+
+# 常见输出
+Server types:
+  dns
+
+Caddyfile loaders:
+  flag
+  default
+
+Other plugins:
+  dns.acl
+  dns.any
+  dns.autopath
+  dns.bind
+  dns.bufsize
+  dns.cache
+  dns.cancel
+  dns.chaos
+  dns.clouddns
+  dns.debug
+  dns.dns64
+  dns.dnssec
+  dns.dnstap
+  dns.erratic
+  dns.errors
+  dns.etcd
+  dns.file
+  dns.forward
+  dns.grpc
+  dns.header
+  dns.health
+  dns.hosts
+  dns.k8s_external
+  dns.kubernetes
+  dns.loadbalance
+  dns.log
+  dns.loop
+  dns.metadata
+  dns.nsid
+  dns.pprof
+  dns.prometheus
+  dns.ready
+  dns.reload
+  dns.rewrite
+  dns.root
+  dns.route53
+  dns.secondary
+  dns.sign
+  dns.template
+  dns.tls
+  dns.trace
+  dns.transfer
+  dns.whoami
+</code></pre>
+<hr>
+<h2 id="二数据源插件-data-source-plugins"><a class="header" href="#二数据源插件-data-source-plugins">二、数据源插件 (Data Source Plugins)</a></h2>
+<h3 id="21-kubernetes-插件"><a class="header" href="#21-kubernetes-插件">2.1 kubernetes 插件</a></h3>
+<p><strong>功能</strong>: Kubernetes服务发现核心插件</p>
+<pre><code>kubernetes [ZONES...] {
+    endpoint URL                    # API Server URL
+    tls CERT KEY CACERT            # 客户端TLS
+    kubeconfig KUBECONFIG CONTEXT  # kubeconfig路径
+    namespaces NAMESPACE...         # 命名空间过滤
+    labels EXPRESSION               # 标签选择器
+    pods POD-MODE                   # disabled|insecure|verified
+    endpoint_pod_names              # 使用Pod名称作为endpoint名
+    ttl SECONDS                     # 响应TTL
+    noendpoints                     # 不返回endpoint
+    fallthrough [ZONES...]          # 回退到下一个插件
+    ignore empty_service            # 忽略没有endpoint的服务
+}
+</code></pre>
+<p><strong>完整配置示例</strong>:</p>
+<pre><code>kubernetes cluster.local in-addr.arpa ip6.arpa {
+    pods verified
+    namespaces kube-system default production
+    labels environment in (production,staging)
+    ttl 60
+    fallthrough in-addr.arpa ip6.arpa
+    ignore empty_service
+}
+</code></pre>
+<p><strong>支持的DNS记录类型</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">记录类型</th><th style="text-align: left">场景</th><th style="text-align: left">示例查询</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>A</strong></td><td style="text-align: left">Service ClusterIP</td><td style="text-align: left">nginx.default.svc.cluster.local</td></tr>
+<tr><td style="text-align: left"><strong>AAAA</strong></td><td style="text-align: left">IPv6 ClusterIP</td><td style="text-align: left">nginx.default.svc.cluster.local</td></tr>
+<tr><td style="text-align: left"><strong>SRV</strong></td><td style="text-align: left">服务端口发现</td><td style="text-align: left">_http._tcp.nginx.default.svc.cluster.local</td></tr>
+<tr><td style="text-align: left"><strong>PTR</strong></td><td style="text-align: left">反向解析</td><td style="text-align: left">10.96.0.1.in-addr.arpa</td></tr>
+<tr><td style="text-align: left"><strong>CNAME</strong></td><td style="text-align: left">ExternalName服务</td><td style="text-align: left">ext.default.svc.cluster.local</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="22-file-插件"><a class="header" href="#22-file-插件">2.2 file 插件</a></h3>
+<p><strong>功能</strong>: 从区域文件加载DNS记录</p>
+<pre><code>file DBFILE [ZONES...] {
+    transfer to ADDRESS...         # 允许区域传输的地址
+    transfer from ADDRESS...       # 从主服务器拉取区域
+    reload DURATION                # 重新加载间隔
+    upstream [ADDRESS...]          # 上游解析器
+}
+</code></pre>
+<p><strong>区域文件示例</strong> (<code>db.example.com</code>):</p>
+<pre><code>$ORIGIN example.com.
+$TTL 3600
+
+@       IN      SOA     ns1.example.com. admin.example.com. (
+                        2024010101      ; Serial
+                        3600            ; Refresh
+                        900             ; Retry
+                        604800          ; Expire
+                        86400 )         ; Minimum TTL
+
+        IN      NS      ns1.example.com.
+        IN      NS      ns2.example.com.
+
+ns1     IN      A       10.0.0.1
+ns2     IN      A       10.0.0.2
+
+www     IN      A       10.0.0.10
+api     IN      A       10.0.0.11
+db      IN      A       10.0.0.20
+
+mail    IN      MX      10 mail1.example.com.
+mail1   IN      A       10.0.0.30
+</code></pre>
+<p><strong>Corefile配置</strong>:</p>
+<pre><code>example.com:53 {
+    file /etc/coredns/db.example.com example.com {
+        reload 10s
+        transfer to *
+    }
+    errors
+    log
+}
+</code></pre>
+<h3 id="23-hosts-插件"><a class="header" href="#23-hosts-插件">2.3 hosts 插件</a></h3>
+<p><strong>功能</strong>: /etc/hosts格式的静态记录</p>
+<pre><code>hosts [FILE [ZONES...]] {
+    INLINE_HOSTS                   # 内联主机记录
+    fallthrough [ZONES...]         # 回退
+    no_reverse                     # 禁用反向记录
+    ttl SECONDS                    # TTL
+    reload DURATION                # 重载间隔
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>hosts {
+    # 内部服务
+    10.0.0.100 api.internal.local api
+    10.0.0.101 db.internal.local db
+    10.0.0.102 cache.internal.local cache
+    
+    # 外部服务映射
+    203.0.113.50 partner-api.external.local
+    
+    # IPv6
+    2001:db8::1 ipv6-service.internal.local
+    
+    fallthrough
+    ttl 60
+    reload 5s
+}
+</code></pre>
+<h3 id="24-etcd-插件"><a class="header" href="#24-etcd-插件">2.4 etcd 插件</a></h3>
+<p><strong>功能</strong>: 从etcd v3存储读取DNS记录</p>
+<pre><code>etcd [ZONES...] {
+    stubzones                      # 启用存根区域
+    fallthrough [ZONES...]         # 回退
+    path PATH                      # etcd路径前缀
+    endpoint ENDPOINT...           # etcd端点
+    credentials USERNAME PASSWORD  # 认证
+    tls CERT KEY CACERT           # TLS配置
+    ttl SECONDS                    # 默认TTL
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>etcd example.com {
+    path /skydns
+    endpoint https://etcd1:2379 https://etcd2:2379 https://etcd3:2379
+    tls /etc/coredns/etcd-client.crt /etc/coredns/etcd-client.key /etc/coredns/etcd-ca.crt
+    fallthrough
+    ttl 300
+}
+</code></pre>
+<p><strong>etcd中的数据格式</strong>:</p>
+<pre><code class="language-json">// Key: /skydns/com/example/www
+{
+    "host": "10.0.0.10",
+    "ttl": 300
+}
+
+// Key: /skydns/com/example/api
+{
+    "host": "10.0.0.11",
+    "port": 8080,
+    "priority": 10
+}
+</code></pre>
+<h3 id="25-auto-插件"><a class="header" href="#25-auto-插件">2.5 auto 插件</a></h3>
+<p><strong>功能</strong>: 自动加载目录中的区域文件</p>
+<pre><code>auto [ZONES...] {
+    directory DIR [REGEXP ORIGIN_TEMPLATE]
+    reload DURATION
+    no_reload
+    upstream [ADDRESS...]
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>auto {
+    directory /etc/coredns/zones (.*).db {1}
+    reload 10s
+}
+</code></pre>
+<h3 id="26-secondary-插件"><a class="header" href="#26-secondary-插件">2.6 secondary 插件</a></h3>
+<p><strong>功能</strong>: 作为辅助DNS服务器，从主服务器传输区域</p>
+<pre><code>secondary [ZONES...] {
+    transfer from ADDRESS
+    transfer to ADDRESS
+}
+</code></pre>
+<h3 id="27-route53-插件"><a class="header" href="#27-route53-插件">2.7 route53 插件</a></h3>
+<p><strong>功能</strong>: 从AWS Route 53读取DNS记录</p>
+<pre><code>route53 [ZONE:HOSTED_ZONE_ID...] {
+    credentials PROFILE [FILENAME]
+    refresh DURATION
+    fallthrough [ZONES...]
+    upstream [ADDRESS...]
+}
+</code></pre>
+<h3 id="28-clouddns-插件"><a class="header" href="#28-clouddns-插件">2.8 clouddns 插件</a></h3>
+<p><strong>功能</strong>: 从Google Cloud DNS读取记录</p>
+<pre><code>clouddns [ZONE:PROJECT:HOSTED_ZONE_NAME...] {
+    credentials FILE
+    fallthrough [ZONES...]
+    upstream [ADDRESS...]
+}
+</code></pre>
+<hr>
+<h2 id="三缓存插件-cache-plugins"><a class="header" href="#三缓存插件-cache-plugins">三、缓存插件 (Cache Plugins)</a></h2>
+<h3 id="31-cache-插件"><a class="header" href="#31-cache-插件">3.1 cache 插件</a></h3>
+<p><strong>功能</strong>: DNS响应缓存</p>
+<pre><code>cache [TTL] [ZONES...] {
+    success CAPACITY [TTL] [MINTTL]   # 成功响应缓存
+    denial CAPACITY [TTL] [MINTTL]    # 否定响应缓存 (NXDOMAIN)
+    prefetch AMOUNT DURATION [PERCENTAGE%]
+    serve_stale [DURATION]
+    servfail DURATION
+    disable success|denial
+    keepttl
+}
+</code></pre>
+<p><strong>参数详解</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">参数</th><th style="text-align: left">默认值</th><th style="text-align: left">说明</th><th style="text-align: left">推荐值</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">TTL</td><td style="text-align: left">3600</td><td style="text-align: left">最大缓存时间</td><td style="text-align: left">30-300</td></tr>
+<tr><td style="text-align: left">success CAPACITY</td><td style="text-align: left">9984</td><td style="text-align: left">成功响应缓存条数</td><td style="text-align: left">10000-100000</td></tr>
+<tr><td style="text-align: left">denial CAPACITY</td><td style="text-align: left">9984</td><td style="text-align: left">否定响应缓存条数</td><td style="text-align: left">1000-10000</td></tr>
+<tr><td style="text-align: left">MINTTL</td><td style="text-align: left">5</td><td style="text-align: left">最小TTL</td><td style="text-align: left">5-30</td></tr>
+<tr><td style="text-align: left">prefetch</td><td style="text-align: left">禁用</td><td style="text-align: left">预取设置</td><td style="text-align: left"><code>10 1h 10%</code></td></tr>
+<tr><td style="text-align: left">serve_stale</td><td style="text-align: left">禁用</td><td style="text-align: left">过期缓存服务时间</td><td style="text-align: left"><code>1h</code></td></tr>
+<tr><td style="text-align: left">servfail</td><td style="text-align: left">5s</td><td style="text-align: left">SERVFAIL缓存时间</td><td style="text-align: left">5s</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>生产配置示例</strong>:</p>
+<pre><code>cache {
+    success 50000 3600 60      # 5万条成功缓存,最大1小时,最小1分钟
+    denial 5000 600 30         # 5千条否定缓存,最大10分钟
+    prefetch 10 1h 20%         # 剩余20%TTL时预取
+    serve_stale 2h             # 上游故障时服务2小时过期缓存
+    servfail 5s                # SERVFAIL缓存5秒
+}
+</code></pre>
+<h3 id="32-nsid-插件"><a class="header" href="#32-nsid-插件">3.2 nsid 插件</a></h3>
+<p><strong>功能</strong>: 添加NSID (Name Server Identifier) EDNS0选项</p>
+<pre><code>nsid [DATA]
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>nsid coredns-pod-1
+</code></pre>
+<hr>
+<h2 id="四转发插件-forwarding-plugins"><a class="header" href="#四转发插件-forwarding-plugins">四、转发插件 (Forwarding Plugins)</a></h2>
+<h3 id="41-forward-插件"><a class="header" href="#41-forward-插件">4.1 forward 插件</a></h3>
+<p><strong>功能</strong>: 转发DNS查询到上游服务器</p>
+<pre><code>forward FROM TO... {
+    except IGNORED_NAMES...
+    force_tcp
+    prefer_udp
+    expire DURATION
+    max_fails INTEGER
+    tls CERT KEY CA
+    tls_servername NAME
+    policy random|round_robin|sequential
+    health_check DURATION [no_rec]
+    max_concurrent INTEGER
+}
+</code></pre>
+<p><strong>策略对比</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">策略</th><th style="text-align: left">说明</th><th style="text-align: left">适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">random</td><td style="text-align: left">随机选择</td><td style="text-align: left">通用场景</td></tr>
+<tr><td style="text-align: left">round_robin</td><td style="text-align: left">轮询</td><td style="text-align: left">负载均衡</td></tr>
+<tr><td style="text-align: left">sequential</td><td style="text-align: left">顺序(失败才下一个)</td><td style="text-align: left">主备模式</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>多上游配置示例</strong>:</p>
+<pre><code># 公共DNS (负载均衡)
+forward . 8.8.8.8 8.8.4.4 1.1.1.1 {
+    max_concurrent 1000
+    policy round_robin
+    health_check 5s
+    max_fails 3
+}
+
+# DoT上游
+forward . tls://8.8.8.8 tls://8.8.4.4 {
+    tls_servername dns.google
+    health_check 10s
+}
+
+# 内部DNS (顺序)
+forward internal.company.com 10.0.0.53 10.0.0.54 {
+    policy sequential
+    max_fails 2
+}
+</code></pre>
+<h3 id="42-grpc-插件"><a class="header" href="#42-grpc-插件">4.2 grpc 插件</a></h3>
+<p><strong>功能</strong>: 通过gRPC转发DNS查询</p>
+<pre><code>grpc FROM TO... {
+    tls CERT KEY CA
+    tls_servername NAME
+    policy random|round_robin|sequential
+}
+</code></pre>
+<h3 id="43-alternate-插件"><a class="header" href="#43-alternate-插件">4.3 alternate 插件</a></h3>
+<p><strong>功能</strong>: 基于响应码切换上游</p>
+<pre><code>alternate RCODE FROM TO... {
+    same options as forward
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code># 当主DNS返回SERVFAIL或REFUSED时使用备用DNS
+forward . 10.0.0.53 {
+    max_concurrent 1000
+}
+alternate SERVFAIL,REFUSED . 8.8.8.8 8.8.4.4
+</code></pre>
+<hr>
+<h2 id="五修改插件-modification-plugins"><a class="header" href="#五修改插件-modification-plugins">五、修改插件 (Modification Plugins)</a></h2>
+<h3 id="51-rewrite-插件"><a class="header" href="#51-rewrite-插件">5.1 rewrite 插件</a></h3>
+<p><strong>功能</strong>: 重写DNS请求或响应</p>
+<pre><code>rewrite [continue|stop] FIELD FROM TO [OPTIONS]
+</code></pre>
+<p><strong>FIELD类型</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">FIELD</th><th style="text-align: left">说明</th><th style="text-align: left">示例</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">name</td><td style="text-align: left">查询名称</td><td style="text-align: left"><code>rewrite name exact old.com new.com</code></td></tr>
+<tr><td style="text-align: left">type</td><td style="text-align: left">查询类型</td><td style="text-align: left"><code>rewrite type AAAA A</code></td></tr>
+<tr><td style="text-align: left">class</td><td style="text-align: left">查询类别</td><td style="text-align: left"><code>rewrite class CH IN</code></td></tr>
+<tr><td style="text-align: left">edns0</td><td style="text-align: left">EDNS0选项</td><td style="text-align: left">复杂配置</td></tr>
+<tr><td style="text-align: left">ttl</td><td style="text-align: left">响应TTL</td><td style="text-align: left"><code>rewrite ttl exact . 60</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>FROM匹配模式</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">模式</th><th style="text-align: left">语法</th><th style="text-align: left">示例</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">exact</td><td style="text-align: left"><code>exact:name</code></td><td style="text-align: left"><code>exact:old.example.com</code></td></tr>
+<tr><td style="text-align: left">prefix</td><td style="text-align: left"><code>prefix:name</code></td><td style="text-align: left"><code>prefix:old.</code></td></tr>
+<tr><td style="text-align: left">suffix</td><td style="text-align: left"><code>suffix:name</code></td><td style="text-align: left"><code>suffix:.old.com</code></td></tr>
+<tr><td style="text-align: left">substring</td><td style="text-align: left"><code>substring:name</code></td><td style="text-align: left"><code>substring:old</code></td></tr>
+<tr><td style="text-align: left">regex</td><td style="text-align: left"><code>regex:pattern</code></td><td style="text-align: left"><code>regex:(.*)\.old\.com$</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>完整示例集</strong>:</p>
+<pre><code># 1. 精确域名重写
+rewrite name exact legacy-db.default.svc.cluster.local new-db.default.svc.cluster.local
+
+# 2. 后缀重写
+rewrite name suffix .old.internal .new.internal
+
+# 3. 正则重写 (保留子域名)
+rewrite name regex (.*)\.old\.example\.com {1}.new.example.com
+
+# 4. 类型重写 (AAAA转A)
+rewrite type AAAA A
+
+# 5. 响应重写
+rewrite stop {
+    name regex (.*)\.internal\.local
+    answer name (.*)\.internal\.local {1}.external.local
+    answer value 10\.0\.0\.(\d+) 192.168.0.{1}
+}
+
+# 6. TTL重写
+rewrite ttl regex .* 60
+</code></pre>
+<h3 id="52-template-插件"><a class="header" href="#52-template-插件">5.2 template 插件</a></h3>
+<p><strong>功能</strong>: 基于模板生成DNS响应</p>
+<pre><code>template CLASS TYPE [ZONE...] {
+    match REGEX...
+    answer RR
+    additional RR
+    authority RR
+    rcode CODE
+    fallthrough [ZONES...]
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code># 1. 阻止域名 (返回0.0.0.0)
+template IN A blocked.local {
+    match .*\.blocked\.local$
+    answer "{{ .Name }} 60 IN A 0.0.0.0"
+}
+
+# 2. 动态生成PTR记录
+template IN PTR 10.in-addr.arpa {
+    match ^(\d+)\.(\d+)\.(\d+)\.10\.in-addr\.arpa$
+    answer "{{ .Name }} 60 IN PTR host-{{ .Group.3 }}-{{ .Group.2 }}-{{ .Group.1 }}.internal.local."
+}
+
+# 3. 返回NXDOMAIN
+template ANY ANY forbidden.example.com {
+    rcode NXDOMAIN
+    authority "forbidden.example.com. 60 IN SOA ns.example.com. admin.example.com. 1 3600 300 86400 60"
+}
+</code></pre>
+<h3 id="53-header-插件"><a class="header" href="#53-header-插件">5.3 header 插件</a></h3>
+<p><strong>功能</strong>: 修改DNS消息头部</p>
+<pre><code>header {
+    response FIELD VALUE
+    request FIELD VALUE
+}
+</code></pre>
+<h3 id="54-metadata-插件"><a class="header" href="#54-metadata-插件">5.4 metadata 插件</a></h3>
+<p><strong>功能</strong>: 在请求上下文中添加元数据</p>
+<pre><code>metadata
+</code></pre>
+<hr>
+<h2 id="六监控插件-monitoring-plugins"><a class="header" href="#六监控插件-monitoring-plugins">六、监控插件 (Monitoring Plugins)</a></h2>
+<h3 id="61-log-插件"><a class="header" href="#61-log-插件">6.1 log 插件</a></h3>
+<p><strong>功能</strong>: 查询日志记录</p>
+<pre><code>log [NAME] [FORMAT]
+</code></pre>
+<p><strong>格式变量</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">变量</th><th style="text-align: left">说明</th><th style="text-align: left">示例值</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>{type}</code></td><td style="text-align: left">查询类型</td><td style="text-align: left">A, AAAA, SRV</td></tr>
+<tr><td style="text-align: left"><code>{name}</code></td><td style="text-align: left">查询域名</td><td style="text-align: left">nginx.default.svc.cluster.local</td></tr>
+<tr><td style="text-align: left"><code>{class}</code></td><td style="text-align: left">查询类别</td><td style="text-align: left">IN</td></tr>
+<tr><td style="text-align: left"><code>{proto}</code></td><td style="text-align: left">协议</td><td style="text-align: left">udp, tcp</td></tr>
+<tr><td style="text-align: left"><code>{remote}</code></td><td style="text-align: left">客户端IP</td><td style="text-align: left">10.244.1.5</td></tr>
+<tr><td style="text-align: left"><code>{port}</code></td><td style="text-align: left">客户端端口</td><td style="text-align: left">53482</td></tr>
+<tr><td style="text-align: left"><code>{size}</code></td><td style="text-align: left">请求大小</td><td style="text-align: left">45</td></tr>
+<tr><td style="text-align: left"><code>{rcode}</code></td><td style="text-align: left">响应码</td><td style="text-align: left">NOERROR, NXDOMAIN</td></tr>
+<tr><td style="text-align: left"><code>{rsize}</code></td><td style="text-align: left">响应大小</td><td style="text-align: left">128</td></tr>
+<tr><td style="text-align: left"><code>{duration}</code></td><td style="text-align: left">处理时长</td><td style="text-align: left">0.5ms</td></tr>
+<tr><td style="text-align: left"><code>{&gt;id}</code></td><td style="text-align: left">请求ID</td><td style="text-align: left">12345</td></tr>
+<tr><td style="text-align: left"><code>{&gt;opcode}</code></td><td style="text-align: left">操作码</td><td style="text-align: left">QUERY</td></tr>
+<tr><td style="text-align: left"><code>{server_ip}</code></td><td style="text-align: left">服务器IP</td><td style="text-align: left">10.96.0.10</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>配置示例</strong>:</p>
+<pre><code># 默认格式
+log
+
+# 详细格式
+log . "{remote}:{port} - [{time}] {&gt;id} \"{type} {class} {name} {proto} {size}\" {rcode} {rsize} {duration}"
+
+# 仅记录错误
+log . {
+    class error
+}
+
+# 特定域名
+log cluster.local
+</code></pre>
+<h3 id="62-prometheus-插件"><a class="header" href="#62-prometheus-插件">6.2 prometheus 插件</a></h3>
+<p><strong>功能</strong>: 暴露Prometheus指标</p>
+<pre><code>prometheus [ADDRESS]
+</code></pre>
+<p><strong>暴露的指标</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">指标</th><th style="text-align: left">类型</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">coredns_dns_requests_total</td><td style="text-align: left">Counter</td><td style="text-align: left">总请求数</td></tr>
+<tr><td style="text-align: left">coredns_dns_responses_total</td><td style="text-align: left">Counter</td><td style="text-align: left">总响应数(按rcode)</td></tr>
+<tr><td style="text-align: left">coredns_dns_request_duration_seconds</td><td style="text-align: left">Histogram</td><td style="text-align: left">请求延迟</td></tr>
+<tr><td style="text-align: left">coredns_dns_request_size_bytes</td><td style="text-align: left">Histogram</td><td style="text-align: left">请求大小</td></tr>
+<tr><td style="text-align: left">coredns_dns_response_size_bytes</td><td style="text-align: left">Histogram</td><td style="text-align: left">响应大小</td></tr>
+<tr><td style="text-align: left">coredns_cache_hits_total</td><td style="text-align: left">Counter</td><td style="text-align: left">缓存命中</td></tr>
+<tr><td style="text-align: left">coredns_cache_misses_total</td><td style="text-align: left">Counter</td><td style="text-align: left">缓存未命中</td></tr>
+<tr><td style="text-align: left">coredns_cache_size</td><td style="text-align: left">Gauge</td><td style="text-align: left">缓存条目数</td></tr>
+<tr><td style="text-align: left">coredns_forward_requests_total</td><td style="text-align: left">Counter</td><td style="text-align: left">转发请求数</td></tr>
+<tr><td style="text-align: left">coredns_forward_request_duration_seconds</td><td style="text-align: left">Histogram</td><td style="text-align: left">转发延迟</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="63-trace-插件"><a class="header" href="#63-trace-插件">6.3 trace 插件</a></h3>
+<p><strong>功能</strong>: 分布式追踪(OpenTelemetry)</p>
+<pre><code>trace [ENDPOINT] {
+    every FRACTION
+    service NAME
+    client_server
+    datadog_analytics_rate RATE
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>trace zipkin:9411 {
+    every 100        # 每100个请求采样1个
+    service coredns
+    client_server
+}
+</code></pre>
+<h3 id="64-debug-插件"><a class="header" href="#64-debug-插件">6.4 debug 插件</a></h3>
+<p><strong>功能</strong>: 启用调试模式</p>
+<pre><code>debug
+</code></pre>
+<h3 id="65-pprof-插件"><a class="header" href="#65-pprof-插件">6.5 pprof 插件</a></h3>
+<p><strong>功能</strong>: 暴露Go pprof端点</p>
+<pre><code>pprof [ADDRESS]
+</code></pre>
+<hr>
+<h2 id="七安全插件-security-plugins"><a class="header" href="#七安全插件-security-plugins">七、安全插件 (Security Plugins)</a></h2>
+<h3 id="71-acl-插件"><a class="header" href="#71-acl-插件">7.1 acl 插件</a></h3>
+<p><strong>功能</strong>: 访问控制列表</p>
+<pre><code>acl [ZONES...] {
+    allow|deny|block|filter net CIDR...
+    allow|deny|block|filter net CIDR... {
+        CLASS TYPE [CLASS TYPE...]
+    }
+}
+</code></pre>
+<p><strong>动作说明</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">动作</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">allow</td><td style="text-align: left">允许查询</td></tr>
+<tr><td style="text-align: left">deny</td><td style="text-align: left">拒绝(返回REFUSED)</td></tr>
+<tr><td style="text-align: left">block</td><td style="text-align: left">阻止(返回NXDOMAIN)</td></tr>
+<tr><td style="text-align: left">filter</td><td style="text-align: left">过滤响应中的记录</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>配置示例</strong>:</p>
+<pre><code>acl {
+    # 允许内部网络
+    allow net 10.0.0.0/8
+    allow net 172.16.0.0/12
+    allow net 192.168.0.0/16
+    
+    # 允许Pod CIDR
+    allow net 10.244.0.0/16
+    
+    # 拒绝其他
+    block net *
+}
+
+# 按类型控制
+acl cluster.local {
+    allow net 10.0.0.0/8 {
+        IN A
+        IN AAAA
+        IN SRV
+    }
+    deny net * {
+        IN AXFR    # 禁止区域传输
+        IN ANY     # 禁止ANY查询
+    }
+}
+</code></pre>
+<h3 id="72-dnssec-插件"><a class="header" href="#72-dnssec-插件">7.2 dnssec 插件</a></h3>
+<p><strong>功能</strong>: DNSSEC签名</p>
+<pre><code>dnssec [ZONES...] {
+    key file KEY...
+    cache_capacity CAPACITY
+}
+</code></pre>
+<h3 id="73-dnstap-插件"><a class="header" href="#73-dnstap-插件">7.3 dnstap 插件</a></h3>
+<p><strong>功能</strong>: DNS tap日志(详细流量记录)</p>
+<pre><code>dnstap ENDPOINT {
+    identity IDENTITY
+    version VERSION
+    extra EXTRA
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>dnstap tcp://dnstap-collector:6000 {
+    identity coredns-cluster-1
+    version 1.11.1
+}
+</code></pre>
+<hr>
+<h2 id="八辅助插件-helper-plugins"><a class="header" href="#八辅助插件-helper-plugins">八、辅助插件 (Helper Plugins)</a></h2>
+<h3 id="81-errors-插件"><a class="header" href="#81-errors-插件">8.1 errors 插件</a></h3>
+<p><strong>功能</strong>: 错误日志输出</p>
+<pre><code>errors [FILE]
+</code></pre>
+<h3 id="82-health-插件"><a class="header" href="#82-health-插件">8.2 health 插件</a></h3>
+<p><strong>功能</strong>: 健康检查端点</p>
+<pre><code>health [ADDRESS] {
+    lameduck DURATION
+}
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>health :8080 {
+    lameduck 5s    # 关闭前等待5秒
+}
+</code></pre>
+<h3 id="83-ready-插件"><a class="header" href="#83-ready-插件">8.3 ready 插件</a></h3>
+<p><strong>功能</strong>: 就绪探针端点</p>
+<pre><code>ready [ADDRESS]
+</code></pre>
+<h3 id="84-loop-插件"><a class="header" href="#84-loop-插件">8.4 loop 插件</a></h3>
+<p><strong>功能</strong>: 转发循环检测</p>
+<pre><code>loop
+</code></pre>
+<h3 id="85-reload-插件"><a class="header" href="#85-reload-插件">8.5 reload 插件</a></h3>
+<p><strong>功能</strong>: 配置热重载</p>
+<pre><code>reload [INTERVAL] [JITTER]
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>reload 30s 15s    # 每30秒检查,随机延迟0-15秒
+</code></pre>
+<h3 id="86-loadbalance-插件"><a class="header" href="#86-loadbalance-插件">8.6 loadbalance 插件</a></h3>
+<p><strong>功能</strong>: A/AAAA记录轮询</p>
+<pre><code>loadbalance [round_robin|weighted]
+</code></pre>
+<h3 id="87-bufsize-插件"><a class="header" href="#87-bufsize-插件">8.7 bufsize 插件</a></h3>
+<p><strong>功能</strong>: 设置EDNS0缓冲区大小</p>
+<pre><code>bufsize SIZE
+</code></pre>
+<h3 id="88-bind-插件"><a class="header" href="#88-bind-插件">8.8 bind 插件</a></h3>
+<p><strong>功能</strong>: 绑定特定IP地址</p>
+<pre><code>bind ADDRESS...
+</code></pre>
+<p><strong>配置示例</strong>:</p>
+<pre><code>bind 10.0.0.10 127.0.0.1
+</code></pre>
+<h3 id="89-chaos-插件"><a class="header" href="#89-chaos-插件">8.9 chaos 插件</a></h3>
+<p><strong>功能</strong>: 响应CH类查询(版本信息等)</p>
+<pre><code>chaos [VERSION] [AUTHORS...]
+</code></pre>
+<h3 id="810-any-插件"><a class="header" href="#810-any-插件">8.10 any 插件</a></h3>
+<p><strong>功能</strong>: 处理ANY类型查询</p>
+<pre><code>any
+</code></pre>
+<hr>
+<h2 id="九插件优先级与顺序-plugin-order"><a class="header" href="#九插件优先级与顺序-plugin-order">九、插件优先级与顺序 (Plugin Order)</a></h2>
+<h3 id="91-编译时顺序"><a class="header" href="#91-编译时顺序">9.1 编译时顺序</a></h3>
+<p>CoreDNS插件按照编译时定义的顺序执行，以下是官方推荐顺序：</p>
+<pre><code>1.  metadata
+2.  cancel
+3.  tls
+4.  reload
+5.  nsid
+6.  bufsize
+7.  root
+8.  bind
+9.  debug
+10. trace
+11. ready
+12. health
+13. pprof
+14. prometheus
+15. errors
+16. log
+17. dnstap
+18. local
+19. dns64
+20. acl
+21. any
+22. chaos
+23. loadbalance
+24. tsig
+25. cache
+26. rewrite
+27. header
+28. dnssec
+29. autopath
+30. minimal
+31. template
+32. transfer
+33. hosts
+34. route53
+35. clouddns
+36. k8s_external
+37. kubernetes
+38. file
+39. auto
+40. secondary
+41. etcd
+42. loop
+43. forward
+44. grpc
+45. erratic
+46. whoami
+47. on
+48. sign
+49. view
+50. geoip
+</code></pre>
+<h3 id="92-实践中的推荐顺序"><a class="header" href="#92-实践中的推荐顺序">9.2 实践中的推荐顺序</a></h3>
+<pre><code>.:53 {
+    # 1. 辅助插件 (最先)
+    errors
+    log
+    debug              # 仅调试时
+    
+    # 2. 监控插件
+    prometheus :9153
+    
+    # 3. 健康检查
+    health {
+        lameduck 5s
+    }
+    ready
+    
+    # 4. 安全插件
+    acl {
+        allow net 10.0.0.0/8
+        block net *
+    }
+    
+    # 5. 循环检测
+    loop
+    
+    # 6. 修改插件 (在缓存之前)
+    rewrite name suffix .old.local .new.local
+    
+    # 7. 缓存 (在数据源之前!)
+    cache 30
+    
+    # 8. 数据源插件
+    hosts /etc/coredns/hosts {
+        fallthrough
+    }
+    
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+    }
+    
+    # 9. 转发插件 (最后)
+    forward . /etc/resolv.conf {
+        max_concurrent 1000
+    }
+    
+    # 10. 配置管理
+    reload
+    loadbalance
+}
+</code></pre>
+<hr>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/14-coredns-configuration-corefile.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/16-networkpolicy-deep-practice.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/14-coredns-configuration-corefile.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/16-networkpolicy-deep-practice.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

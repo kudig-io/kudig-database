@@ -1,0 +1,3399 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Linux 命令大全参考 - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">棣栭〉</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><div><strong aria-hidden="true">1.</strong> 鏍稿績鐭ヨ瘑鍩?(Domain 1-12)</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/index.html"><strong aria-hidden="true">1.1.</strong> Domain-1: Kubernetes架构基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.html"><strong aria-hidden="true">1.1.1.</strong> Kubernetes 架构全景图 (Architecture Overview)</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/02-core-components-deep-dive.html"><strong aria-hidden="true">1.1.2.</strong> Kubernetes 核心组件深度剖析 (Core Components Deep Dive)</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/03-api-versions-features.html"><strong aria-hidden="true">1.1.3.</strong> 03 - 功能和API表</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/04-source-code-structure.html"><strong aria-hidden="true">1.1.4.</strong> 04 - Kubernetes 源码结构深度解析</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/05-kubectl-commands-reference.html"><strong aria-hidden="true">1.1.5.</strong> kubectl 命令完整参考 (kubectl Commands Complete Reference)</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/06-cluster-configuration-parameters.html"><strong aria-hidden="true">1.1.6.</strong> 06 - 集群配置参数完全参考</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/07-upgrade-paths-strategy.html"><strong aria-hidden="true">1.1.7.</strong> 07 - 升级路径与策略指南</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/08-multi-tenancy-architecture.html"><strong aria-hidden="true">1.1.8.</strong> 19 - 多租户管理表</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/09-edge-computing-kubeedge.html"><strong aria-hidden="true">1.1.9.</strong> 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/10-windows-containers-support.html"><strong aria-hidden="true">1.1.10.</strong> 10 - Windows 容器支持与集成指南</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.html"><strong aria-hidden="true">1.1.11.</strong> 11 - Kubernetes 源码架构深度分析</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/12-cluster-deployment-patterns.html"><strong aria-hidden="true">1.1.12.</strong> 12 - Kubernetes 集群部署架构模式指南</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/13-performance-tuning-guide.html"><strong aria-hidden="true">1.1.13.</strong> 13 - Kubernetes 性能调优专项指南</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/14-security-architecture.html"><strong aria-hidden="true">1.1.14.</strong> 14 - Kubernetes 安全架构深度分析</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/15-observability-architecture.html"><strong aria-hidden="true">1.1.15.</strong> 15 - Kubernetes 可观测性架构体系</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/16-troubleshooting-guide.html"><strong aria-hidden="true">1.1.16.</strong> 16 - Kubernetes 故障排查专家级指南</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/17-production-operations-best-practices.html"><strong aria-hidden="true">1.1.17.</strong> 17 - 生产环境运维最佳实践 (Production Operations Best Practices)</a></li><li class="chapter-item "><a href="../domain-1-architecture-fundamentals/18-upgrade-migration-strategy.html"><strong aria-hidden="true">1.1.18.</strong> 18 - Kubernetes 升级和迁移策略指南</a></li></ol></li><li class="chapter-item "><a href="../domain-2-design-principles/index.html"><strong aria-hidden="true">1.2.</strong> Domain-2: Kubernetes 设计原则与核心机制</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-2-design-principles/01-design-principles-foundations.html"><strong aria-hidden="true">1.2.1.</strong> 01 - Kubernetes 设计原则与哲学 (Foundations)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/02-declarative-api-pattern.html"><strong aria-hidden="true">1.2.2.</strong> 02 - 声明式 API 与面向终态设计 (Declarative API)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/03-controller-pattern.html"><strong aria-hidden="true">1.2.3.</strong> 03 - 控制器模式与调谐循环 (Controller Pattern)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/04-watch-list-mechanism.html"><strong aria-hidden="true">1.2.4.</strong> 04 - List-Watch 机制深度解析 (List-Watch)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/05-informer-workqueue.html"><strong aria-hidden="true">1.2.5.</strong> 05 - Informer 架构与工作队列 (Informer & Workqueue)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/06-resource-version-control.html"><strong aria-hidden="true">1.2.6.</strong> 06 - 资源版本与并发控制 (Concurrency Control)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/07-distributed-consensus-etcd.html"><strong aria-hidden="true">1.2.7.</strong> 07 - 分布式共识与 etcd 原理 (etcd & Raft)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/08-high-availability-patterns.html"><strong aria-hidden="true">1.2.8.</strong> 08 - 高可用架构模式 (HA Patterns)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/09-source-code-walkthrough.html"><strong aria-hidden="true">1.2.9.</strong> 09 - Kubernetes 源码结构与阅读指南 (Source Code)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/10-cap-theorem-distributed-systems.html"><strong aria-hidden="true">1.2.10.</strong> 10 - CAP 定理与分布式系统基础 (CAP Theorem)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/11-extensibility-design-patterns.html"><strong aria-hidden="true">1.2.11.</strong> 11 - 扩展性设计模式 (Extensibility)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/12-operator-development-guide.html"><strong aria-hidden="true">1.2.12.</strong> 12 - Operator 模式与控制器开发 (Operator Guide)</a></li><li class="chapter-item "><a href="../domain-2-design-principles/13-admission-control-webhooks.html"><strong aria-hidden="true">1.2.13.</strong> 13 - 准入控制与 Webhook 机制深度解析</a></li><li class="chapter-item "><a href="../domain-2-design-principles/14-service-mesh-architecture.html"><strong aria-hidden="true">1.2.14.</strong> 14 - 服务网格与微服务架构设计</a></li><li class="chapter-item "><a href="../domain-2-design-principles/15-chaos-engineering.html"><strong aria-hidden="true">1.2.15.</strong> 15 - 混沌工程与故障注入设计</a></li><li class="chapter-item "><a href="../domain-2-design-principles/16-observability-design-principles.html"><strong aria-hidden="true">1.2.16.</strong> 16 - 可观测性设计原则</a></li><li class="chapter-item "><a href="../domain-2-design-principles/17-security-design-patterns.html"><strong aria-hidden="true">1.2.17.</strong> 17 - 安全设计模式</a></li><li class="chapter-item "><a href="../domain-2-design-principles/18-performance-optimization-principles.html"><strong aria-hidden="true">1.2.18.</strong> 18 - 性能优化原理</a></li></ol></li><li class="chapter-item "><a href="../domain-3-control-plane/index.html"><strong aria-hidden="true">1.3.</strong> Domain-3: Kubernetes控制平面</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-3-control-plane/01-plane-architecture-overview.html"><strong aria-hidden="true">1.3.1.</strong> Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/02-plane-components-interaction.html"><strong aria-hidden="true">1.3.2.</strong> 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/03-plane-high-availability.html"><strong aria-hidden="true">1.3.3.</strong> 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/04-plane-security-hardening.html"><strong aria-hidden="true">1.3.4.</strong> 控制平面安全加固指南 (Control Plane Security Hardening Guide)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/05-plane-monitoring-observability.html"><strong aria-hidden="true">1.3.5.</strong> 控制平面监控与可观测性 (Control Plane Monitoring & Observability)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/06-plane-troubleshooting.html"><strong aria-hidden="true">1.3.6.</strong> 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/07-plane-upgrade-migration.html"><strong aria-hidden="true">1.3.7.</strong> 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/08-plane-performance-benchmarking.html"><strong aria-hidden="true">1.3.8.</strong> 控制平面性能基准测试 (Control Plane Performance Benchmarking)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/09-plane-scalability-guide.html"><strong aria-hidden="true">1.3.9.</strong> 控制平面扩缩容指南 (Control Plane Scalability Guide)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/10-plane-backup-disaster-recovery.html"><strong aria-hidden="true">1.3.10.</strong> 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/11-etcd-deep-dive.html"><strong aria-hidden="true">1.3.11.</strong> etcd 深度解析 (etcd Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/12-apiserver-deep-dive.html"><strong aria-hidden="true">1.3.12.</strong> kube-apiserver 深度解析 (kube-apiserver Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/13-kube-controller-manager-deep-dive.html"><strong aria-hidden="true">1.3.13.</strong> kube-controller-manager 深度解析 (KCM Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/14-cloud-controller-manager-deep-dive.html"><strong aria-hidden="true">1.3.14.</strong> cloud-controller-manager 深度解析 (CCM Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/15-kubelet-deep-dive.html"><strong aria-hidden="true">1.3.15.</strong> kubelet 深度解析 (kubelet Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/16-kube-proxy-deep-dive.html"><strong aria-hidden="true">1.3.16.</strong> kube-proxy 深度解析 (kube-proxy Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/17-apiserver-tuning.html"><strong aria-hidden="true">1.3.17.</strong> API Server 性能调优</a></li><li class="chapter-item "><a href="../domain-3-control-plane/18-api-priority-fairness.html"><strong aria-hidden="true">1.3.18.</strong> 68 - API 优先级与公平性 (API Priority and Fairness)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/19-etcd-operations.html"><strong aria-hidden="true">1.3.19.</strong> 30 - etcd运维操作</a></li><li class="chapter-item "><a href="../domain-3-control-plane/20-kube-scheduler-deep-dive.html"><strong aria-hidden="true">1.3.20.</strong> Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/21-container-runtime-deep-dive.html"><strong aria-hidden="true">1.3.21.</strong> 容器运行时深度解析 (Container Runtime Interface Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/22-container-storage-deep-dive.html"><strong aria-hidden="true">1.3.22.</strong> CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/23-container-network-deep-dive.html"><strong aria-hidden="true">1.3.23.</strong> CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/24-production-deployment-best-practices.html"><strong aria-hidden="true">1.3.24.</strong> 生产环境部署最佳实践 (Production Deployment Best Practices)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/25-multi-cloud-hybrid-deployment.html"><strong aria-hidden="true">1.3.25.</strong> 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/26-gitops-automation-operations.html"><strong aria-hidden="true">1.3.26.</strong> GitOps自动化运维实践 (GitOps Automation Operations Practice)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/27-authz-authn-deep-dive.html"><strong aria-hidden="true">1.3.27.</strong> Kubernetes 认证授权深度解析 (Authentication & Authorization Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/28-api-extension-deep-dive.html"><strong aria-hidden="true">1.3.28.</strong> Kubernetes API扩展深度解析 (API Extensions Deep Dive)</a></li><li class="chapter-item "><a href="../domain-3-control-plane/final-completion-check.html"><strong aria-hidden="true">1.3.29.</strong> Domain-3 控制平面最终完整性检查清单</a></li><li class="chapter-item "><a href="../domain-3-control-plane/quality-report.html"><strong aria-hidden="true">1.3.30.</strong> Domain-3 控制平面质量检查报告</a></li></ol></li><li class="chapter-item "><a href="../domain-4-workloads/index.html"><strong aria-hidden="true">1.4.</strong> Domain-4: Kubernetes工作负载管理</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-4-workloads/01-workload-overview-architecture.html"><strong aria-hidden="true">1.4.1.</strong> 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)</a></li><li class="chapter-item "><a href="../domain-4-workloads/02-deployment-production-patterns.html"><strong aria-hidden="true">1.4.2.</strong> 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)</a></li><li class="chapter-item "><a href="../domain-4-workloads/03-statefulset-advanced-operations.html"><strong aria-hidden="true">1.4.3.</strong> 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)</a></li><li class="chapter-item "><a href="../domain-4-workloads/04-daemonset-management.html"><strong aria-hidden="true">1.4.4.</strong> 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)</a></li><li class="chapter-item "><a href="../domain-4-workloads/05-job-cronjob-advanced.html"><strong aria-hidden="true">1.4.5.</strong> 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)</a></li><li class="chapter-item "><a href="../domain-4-workloads/06-workload-monitoring-alerting.html"><strong aria-hidden="true">1.4.6.</strong> 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)</a></li><li class="chapter-item "><a href="../domain-4-workloads/07-workload-troubleshooting-handbook.html"><strong aria-hidden="true">1.4.7.</strong> 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)</a></li><li class="chapter-item "><a href="../domain-4-workloads/08-multi-cloud-workload-strategy.html"><strong aria-hidden="true">1.4.8.</strong> 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)</a></li><li class="chapter-item "><a href="../domain-4-workloads/09-edge-computing-deployment.html"><strong aria-hidden="true">1.4.9.</strong> 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)</a></li><li class="chapter-item "><a href="../domain-4-workloads/10-workload-controllers-overview.html"><strong aria-hidden="true">1.4.10.</strong> 35 - 工作负载控制器详解 (Workload Controllers)</a></li><li class="chapter-item "><a href="../domain-4-workloads/11-pod-lifecycle-events.html"><strong aria-hidden="true">1.4.11.</strong> 37 - Pod生命周期事件表</a></li><li class="chapter-item "><a href="../domain-4-workloads/12-advanced-pod-patterns.html"><strong aria-hidden="true">1.4.12.</strong> 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)</a></li><li class="chapter-item "><a href="../domain-4-workloads/13-container-lifecycle-hooks.html"><strong aria-hidden="true">1.4.13.</strong> 74 - 容器生命周期钩子 (Container Lifecycle Hooks)</a></li><li class="chapter-item "><a href="../domain-4-workloads/14-sidecar-containers-patterns.html"><strong aria-hidden="true">1.4.14.</strong> Sidecar 容器模式</a></li><li class="chapter-item "><a href="../domain-4-workloads/15-container-runtime-interfaces.html"><strong aria-hidden="true">1.4.15.</strong> 39 - 容器运行时对比表</a></li><li class="chapter-item "><a href="../domain-4-workloads/16-runtime-class-configuration.html"><strong aria-hidden="true">1.4.16.</strong> 70 - RuntimeClass配置</a></li><li class="chapter-item "><a href="../domain-4-workloads/17-container-images-registry.html"><strong aria-hidden="true">1.4.17.</strong> 51 - 容器镜像管理与仓库 (Container Images & Registry)</a></li><li class="chapter-item "><a href="../domain-4-workloads/18-node-management-operations.html"><strong aria-hidden="true">1.4.18.</strong> 27 - 节点与节点池管理 (Node & NodePool Management)</a></li><li class="chapter-item "><a href="../domain-4-workloads/19-scheduler-configuration.html"><strong aria-hidden="true">1.4.19.</strong> 28 - 调度器配置与优化</a></li><li class="chapter-item "><a href="../domain-4-workloads/20-kubelet-configuration.html"><strong aria-hidden="true">1.4.20.</strong> Kubelet 配置与调优</a></li><li class="chapter-item "><a href="../domain-4-workloads/21-hpa-vpa-autoscaling.html"><strong aria-hidden="true">1.4.21.</strong> HPA/VPA 自动伸缩配置</a></li><li class="chapter-item "><a href="../domain-4-workloads/22-cluster-capacity-planning.html"><strong aria-hidden="true">1.4.22.</strong> 集群容量规划</a></li><li class="chapter-item "><a href="../domain-4-workloads/23-resource-management.html"><strong aria-hidden="true">1.4.23.</strong> 16 - 资源管理表</a></li><li class="chapter-item "><a href="../domain-4-workloads/QUALITY_REPORT.html"><strong aria-hidden="true">1.4.24.</strong> Domain-4 工作负载管理质量报告</a></li><li class="chapter-item "><a href="../domain-4-workloads/README-old.html"><strong aria-hidden="true">1.4.25.</strong> Domain-4: Kubernetes工作负载</a></li></ol></li><li class="chapter-item "><a href="../domain-5-networking/index.html"><strong aria-hidden="true">1.5.</strong> Domain 5: Networking 网络</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-5-networking/01-network-architecture-overview.html"><strong aria-hidden="true">1.5.1.</strong> 网络核心组件</a></li><li class="chapter-item "><a href="../domain-5-networking/01-network-architecture-overview-faq.html"><strong aria-hidden="true">1.5.2.</strong> FAQ 文档</a></li><li class="chapter-item "><a href="../domain-5-networking/02-cni-architecture-fundamentals.html"><strong aria-hidden="true">1.5.3.</strong> 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)</a></li><li class="chapter-item "><a href="../domain-5-networking/03-cni-plugins-comparison.html"><strong aria-hidden="true">1.5.4.</strong> 76 - CNI插件深度对比</a></li><li class="chapter-item "><a href="../domain-5-networking/04-flannel-complete-guide.html"><strong aria-hidden="true">1.5.5.</strong> 142 - Flannel 完整指南 (Flannel Complete Guide)</a></li><li class="chapter-item "><a href="../domain-5-networking/05-terway-advanced-guide.html"><strong aria-hidden="true">1.5.6.</strong> 143 - Terway 高级指南 (Terway Advanced Guide)</a></li><li class="chapter-item "><a href="../domain-5-networking/06-service-concepts-types.html"><strong aria-hidden="true">1.5.7.</strong> Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)</a></li><li class="chapter-item "><a href="../domain-5-networking/07-service-implementation-details.html"><strong aria-hidden="true">1.5.8.</strong> 77 - Service实现机制</a></li><li class="chapter-item "><a href="../domain-5-networking/08-service-topology-aware.html"><strong aria-hidden="true">1.5.9.</strong> 72 - 服务拓扑与端点切片</a></li><li class="chapter-item "><a href="../domain-5-networking/09-kube-proxy-modes-performance.html"><strong aria-hidden="true">1.5.10.</strong> Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)</a></li><li class="chapter-item "><a href="../domain-5-networking/10-service-advanced-features.html"><strong aria-hidden="true">1.5.11.</strong> Service 高级特性与应用案例 (Service Advanced Features)</a></li><li class="chapter-item "><a href="../domain-5-networking/11-dns-service-discovery-coredns.html"><strong aria-hidden="true">1.5.12.</strong> 04 - DNS 服务发现与 CoreDNS 调优</a></li><li class="chapter-item "><a href="../domain-5-networking/12-dns-service-discovery.html"><strong aria-hidden="true">1.5.13.</strong> 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)</a></li><li class="chapter-item "><a href="../domain-5-networking/13-coredns-architecture-principles.html"><strong aria-hidden="true">1.5.14.</strong> 53 - CoreDNS 架构与核心原理 (Architecture & Principles)</a></li><li class="chapter-item "><a href="../domain-5-networking/14-coredns-configuration-corefile.html"><strong aria-hidden="true">1.5.15.</strong> 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)</a></li><li class="chapter-item "><a href="../domain-5-networking/15-coredns-plugins-reference.html"><strong aria-hidden="true">1.5.16.</strong> 55 - CoreDNS 插件完整参考 (Plugins Reference)</a></li><li class="chapter-item "><a href="../domain-5-networking/16-networkpolicy-deep-practice.html"><strong aria-hidden="true">1.5.17.</strong> 01 - NetworkPolicy 深度实践指南</a></li><li class="chapter-item "><a href="../domain-5-networking/17-network-policy-advanced.html"><strong aria-hidden="true">1.5.18.</strong> 78 - NetworkPolicy高级配置</a></li><li class="chapter-item "><a href="../domain-5-networking/18-network-encryption-mtls.html"><strong aria-hidden="true">1.5.19.</strong> 83 - 网络加密与mTLS</a></li><li class="chapter-item "><a href="../domain-5-networking/19-ingress-fundamentals.html"><strong aria-hidden="true">1.5.20.</strong> Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)</a></li><li class="chapter-item "><a href="../domain-5-networking/20-ingress-controller-deep-dive.html"><strong aria-hidden="true">1.5.21.</strong> 128 - Ingress Controller 深入剖析</a></li><li class="chapter-item "><a href="../domain-5-networking/21-nginx-ingress-complete-guide.html"><strong aria-hidden="true">1.5.22.</strong> 129 - NGINX Ingress 完整配置指南</a></li><li class="chapter-item "><a href="../domain-5-networking/22-ingress-tls-certificate.html"><strong aria-hidden="true">1.5.23.</strong> 130 - Ingress TLS 与证书管理</a></li><li class="chapter-item "><a href="../domain-5-networking/23-ingress-advanced-routing.html"><strong aria-hidden="true">1.5.24.</strong> 131 - Ingress 高级路由与流量管理</a></li><li class="chapter-item "><a href="../domain-5-networking/24-ingress-security-hardening.html"><strong aria-hidden="true">1.5.25.</strong> 132 - Ingress 安全加固与防护</a></li><li class="chapter-item "><a href="../domain-5-networking/25-ingress-monitoring-troubleshooting.html"><strong aria-hidden="true">1.5.26.</strong> 133 - Ingress 监控与故障排查</a></li><li class="chapter-item "><a href="../domain-5-networking/26-ingress-production-best-practices.html"><strong aria-hidden="true">1.5.27.</strong> 134 - Ingress 生产最佳实践</a></li><li class="chapter-item "><a href="../domain-5-networking/27-cni-troubleshooting-optimization.html"><strong aria-hidden="true">1.5.28.</strong> 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)</a></li><li class="chapter-item "><a href="../domain-5-networking/28-coredns-troubleshooting-optimization.html"><strong aria-hidden="true">1.5.29.</strong> 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)</a></li><li class="chapter-item "><a href="../domain-5-networking/29-egress-traffic-management.html"><strong aria-hidden="true">1.5.30.</strong> 59 - Egress流量管理</a></li><li class="chapter-item "><a href="../domain-5-networking/30-service-mesh-deep-dive.html"><strong aria-hidden="true">1.5.31.</strong> 02 - Service Mesh 深度解析与生产实践</a></li><li class="chapter-item "><a href="../domain-5-networking/31-multi-cluster-federation.html"><strong aria-hidden="true">1.5.32.</strong> 03 - 多集群网络联邦与跨集群通信</a></li><li class="chapter-item "><a href="../domain-5-networking/32-multi-cluster-networking.html"><strong aria-hidden="true">1.5.33.</strong> 80 - 多集群网络互联</a></li><li class="chapter-item "><a href="../domain-5-networking/33-network-troubleshooting.html"><strong aria-hidden="true">1.5.34.</strong> 81 - 网络故障诊断</a></li><li class="chapter-item "><a href="../domain-5-networking/34-network-performance-tuning.html"><strong aria-hidden="true">1.5.35.</strong> 84 - 网络性能调优</a></li><li class="chapter-item "><a href="../domain-5-networking/35-gateway-api-overview.html"><strong aria-hidden="true">1.5.36.</strong> 71 - Gateway API配置</a></li><li class="chapter-item "><a href="../domain-5-networking/36-api-gateway-patterns.html"><strong aria-hidden="true">1.5.37.</strong> 38 - Ingress和API Gateway对比表</a></li><li class="chapter-item "><a href="../domain-5-networking/37-terway-resources-crud-operations.html"><strong aria-hidden="true">1.5.38.</strong> 37-terway-resources-crud-operations</a></li></ol></li><li class="chapter-item "><a href="../domain-6-storage/index.html"><strong aria-hidden="true">1.6.</strong> Storage Domain 存储领域知识库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-6-storage/01-storage-architecture-overview.html"><strong aria-hidden="true">1.6.1.</strong> 01 - 存储架构概览与核心组件</a></li><li class="chapter-item "><a href="../domain-6-storage/02-pv-architecture-fundamentals.html"><strong aria-hidden="true">1.6.2.</strong> 02 - PV/PVC核心概念与企业级实践</a></li><li class="chapter-item "><a href="../domain-6-storage/03-pvc-patterns-practices.html"><strong aria-hidden="true">1.6.3.</strong> 03 - PVC使用模式与最佳实践</a></li><li class="chapter-item "><a href="../domain-6-storage/04-storageclass-dynamic-provisioning.html"><strong aria-hidden="true">1.6.4.</strong> 04 - StorageClass动态供给与多租户管理</a></li><li class="chapter-item "><a href="../domain-6-storage/05-csi-drivers-integration.html"><strong aria-hidden="true">1.6.5.</strong> 05 - CSI驱动集成与运维管理</a></li><li class="chapter-item "><a href="../domain-6-storage/06-storage-fundamental-concepts.html"><strong aria-hidden="true">1.6.6.</strong> 09 - 存储基础概念详解</a></li><li class="chapter-item "><a href="../domain-6-storage/07-storage-daily-operations.html"><strong aria-hidden="true">1.6.7.</strong> 10 - 存储日常运维操作手册</a></li><li class="chapter-item "><a href="../domain-6-storage/08-storage-performance-tuning.html"><strong aria-hidden="true">1.6.8.</strong> 08 - 存储性能调优与优化策略</a></li><li class="chapter-item "><a href="../domain-6-storage/09-pv-pvc-troubleshooting.html"><strong aria-hidden="true">1.6.9.</strong> 09 - PV/PVC故障排查与解决方案</a></li><li class="chapter-item "><a href="../domain-6-storage/10-storage-backup-disaster-recovery.html"><strong aria-hidden="true">1.6.10.</strong> 10 - 存储备份与灾难恢复</a></li><li class="chapter-item "><a href="../domain-6-storage/11-storage-advanced-features.html"><strong aria-hidden="true">1.6.11.</strong> 11 - 存储高级特性与优化策略</a></li><li class="chapter-item "><a href="../domain-6-storage/12-storage-monitoring-alerting.html"><strong aria-hidden="true">1.6.12.</strong> 12 - 存储监控告警与性能调优</a></li><li class="chapter-item "><a href="../domain-6-storage/13-storage-security-compliance.html"><strong aria-hidden="true">1.6.13.</strong> 13 - 存储安全与合规管理</a></li><li class="chapter-item "><a href="../domain-6-storage/14-cloud-native-storage.html"><strong aria-hidden="true">1.6.14.</strong> 14 - 云原生存储与多云策略</a></li><li class="chapter-item "><a href="../domain-6-storage/15-storage-disaster-recovery.html"><strong aria-hidden="true">1.6.15.</strong> 15 - 存储灾备与迁移策略</a></li><li class="chapter-item "><a href="../domain-6-storage/completion-summary.html"><strong aria-hidden="true">1.6.16.</strong> Domain-6 存储知识库查漏补缺完成报告</a></li><li class="chapter-item "><a href="../domain-6-storage/quality-check-report.html"><strong aria-hidden="true">1.6.17.</strong> Domain-6 存储知识库质量检查报告</a></li></ol></li><li class="chapter-item "><a href="../domain-7-security/index.html"><strong aria-hidden="true">1.7.</strong> Security Domain</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-7-security/01-authentication-authorization-system.html"><strong aria-hidden="true">1.7.1.</strong> 01 - Kubernetes认证授权体系详解</a></li><li class="chapter-item "><a href="../domain-7-security/02-network-security-policies.html"><strong aria-hidden="true">1.7.2.</strong> 02 - 网络安全策略与零信任架构</a></li><li class="chapter-item "><a href="../domain-7-security/03-runtime-security-defense.html"><strong aria-hidden="true">1.7.3.</strong> 03 - 运行时安全防护与威胁检测</a></li><li class="chapter-item "><a href="../domain-7-security/04-audit-logging-compliance.html"><strong aria-hidden="true">1.7.4.</strong> 04 - 审计日志与合规性管理</a></li><li class="chapter-item "><a href="../domain-7-security/05-policy-validation-tools.html"><strong aria-hidden="true">1.7.5.</strong> 05 - 策略校验与准入控制工具 (Policy Validation)</a></li><li class="chapter-item "><a href="../domain-7-security/06-pod-security-standards.html"><strong aria-hidden="true">1.7.6.</strong> 06 - Pod安全标准详解</a></li><li class="chapter-item "><a href="../domain-7-security/07-rbac-matrix-configuration.html"><strong aria-hidden="true">1.7.7.</strong> 07 - RBAC权限矩阵表</a></li><li class="chapter-item "><a href="../domain-7-security/08-security-best-practices.html"><strong aria-hidden="true">1.7.8.</strong> 08 - 安全最佳实践表</a></li><li class="chapter-item "><a href="../domain-7-security/09-security-hardening-production.html"><strong aria-hidden="true">1.7.9.</strong> Kubernetes 安全加固</a></li><li class="chapter-item "><a href="../domain-7-security/10-certificate-management.html"><strong aria-hidden="true">1.7.10.</strong> 证书管理与 TLS 配置</a></li><li class="chapter-item "><a href="../domain-7-security/11-secret-management-tools.html"><strong aria-hidden="true">1.7.11.</strong> 11 - 密钥与敏感信息管理工具</a></li><li class="chapter-item "><a href="../domain-7-security/12-compliance-certification.html"><strong aria-hidden="true">1.7.12.</strong> 12 - 合规与认证表</a></li><li class="chapter-item "><a href="../domain-7-security/13-image-security-scanning.html"><strong aria-hidden="true">1.7.13.</strong> 13 - 镜像安全扫描与漏洞管理</a></li><li class="chapter-item "><a href="../domain-7-security/14-policy-engines-opa-kyverno.html"><strong aria-hidden="true">1.7.14.</strong> 14 - 策略引擎与合规</a></li><li class="chapter-item "><a href="../domain-7-security/15-runtime-security-detection.html"><strong aria-hidden="true">1.7.15.</strong> 15 - 安全扫描与检测工具</a></li><li class="chapter-item "><a href="../domain-7-security/16-compliance-audit-practices.html"><strong aria-hidden="true">1.7.16.</strong> Kubernetes 合规与审计</a></li><li class="chapter-item "><a href="../domain-7-security/17-comprehensive-security-scanning.html"><strong aria-hidden="true">1.7.17.</strong> 17 - 安全扫描与漏洞检测工具</a></li><li class="chapter-item "><a href="../domain-7-security/18-network-defense-depth.html"><strong aria-hidden="true">1.7.18.</strong> 18 - 网络安全纵深防御体系</a></li><li class="chapter-item "><a href="../domain-7-security/19-zero-trust-architecture.html"><strong aria-hidden="true">1.7.19.</strong> 19 - 零信任安全架构实施指南</a></li><li class="chapter-item "><a href="../domain-7-security/20-incident-response-process.html"><strong aria-hidden="true">1.7.20.</strong> 20 - 安全事件响应与应急处理流程</a></li><li class="chapter-item "><a href="../domain-7-security/21-multicluster-security.html"><strong aria-hidden="true">1.7.21.</strong> 21 - 多集群安全管理与联邦认证</a></li></ol></li><li class="chapter-item "><a href="../domain-8-observability/index.html"><strong aria-hidden="true">1.8.</strong> Observability Domain (可观测性领域)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-8-observability/01-observability-architecture-overview.html"><strong aria-hidden="true">1.8.1.</strong> 01 - Kubernetes 可观测性架构体系 (Observability Architecture)</a></li><li class="chapter-item "><a href="../domain-8-observability/02-monitoring-metrics-system.html"><strong aria-hidden="true">1.8.2.</strong> 02 - 指标监控体系详解 (Monitoring Metrics System)</a></li><li class="chapter-item "><a href="../domain-8-observability/03-logging-architecture.html"><strong aria-hidden="true">1.8.3.</strong> 03 - 日志收集架构详解 (Logging Architecture)</a></li><li class="chapter-item "><a href="../domain-8-observability/04-distributed-tracing.html"><strong aria-hidden="true">1.8.4.</strong> 04 - 分布式追踪体系 (Distributed Tracing)</a></li><li class="chapter-item "><a href="../domain-8-observability/05-alerting-management.html"><strong aria-hidden="true">1.8.5.</strong> 05 - 告警管理策略 (Alerting Management)</a></li><li class="chapter-item "><a href="../domain-8-observability/06-monitoring-alerting-practice.html"><strong aria-hidden="true">1.8.6.</strong> 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)</a></li><li class="chapter-item "><a href="../domain-8-observability/07-monitoring-dashboards.html"><strong aria-hidden="true">1.8.7.</strong> 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)</a></li><li class="chapter-item "><a href="../domain-8-observability/08-logging-audit-compliance.html"><strong aria-hidden="true">1.8.8.</strong> 08 - 日志审计与合规管理 (Logging Auditing & Compliance)</a></li><li class="chapter-item "><a href="../domain-8-observability/09-events-audit-logs.html"><strong aria-hidden="true">1.8.9.</strong> 05 - 事件与审计日志管理 (Events & Audit Logs)</a></li><li class="chapter-item "><a href="../domain-8-observability/10-monitoring-metrics-prometheus.html"><strong aria-hidden="true">1.8.10.</strong> 07 - 监控和指标表</a></li><li class="chapter-item "><a href="../domain-8-observability/11-custom-metrics-adapter.html"><strong aria-hidden="true">1.8.11.</strong> 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)</a></li><li class="chapter-item "><a href="../domain-8-observability/12-logging-auditing.html"><strong aria-hidden="true">1.8.12.</strong> 17 - 日志和审计表</a></li><li class="chapter-item "><a href="../domain-8-observability/13-cluster-health-check.html"><strong aria-hidden="true">1.8.13.</strong> 13 - 集群健康检查指南 (Cluster Health Check Guide)</a></li><li class="chapter-item "><a href="../domain-8-observability/14-chaos-engineering.html"><strong aria-hidden="true">1.8.14.</strong> 52 - 混沌工程实践</a></li><li class="chapter-item "><a href="../domain-8-observability/15-enterprise-scale-monitoring.html"><strong aria-hidden="true">1.8.15.</strong> 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices)</a></li><li class="chapter-item "><a href="../domain-8-observability/16-multi-cluster-monitoring-governance.html"><strong aria-hidden="true">1.8.16.</strong> 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)</a></li><li class="chapter-item "><a href="../domain-8-observability/17-monitoring-cost-optimization.html"><strong aria-hidden="true">1.8.17.</strong> 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance)</a></li><li class="chapter-item "><a href="../domain-8-observability/18-slo-sli-system.html"><strong aria-hidden="true">1.8.18.</strong> 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)</a></li><li class="chapter-item "><a href="../domain-8-observability/19-security-compliance-governance.html"><strong aria-hidden="true">1.8.19.</strong> 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance)</a></li><li class="chapter-item "><a href="../domain-8-observability/20-high-availability-disaster-recovery.html"><strong aria-hidden="true">1.8.20.</strong> 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)</a></li><li class="chapter-item "><a href="../domain-8-observability/21-monitoring-playbooks.html"><strong aria-hidden="true">1.8.21.</strong> 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)</a></li><li class="chapter-item "><a href="../domain-8-observability/22-best-practices-case-studies.html"><strong aria-hidden="true">1.8.22.</strong> 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)</a></li><li class="chapter-item "><a href="../domain-8-observability/23-enterprise-implementation-roadmap.html"><strong aria-hidden="true">1.8.23.</strong> 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap)</a></li><li class="chapter-item "><a href="../domain-8-observability/24-observability-tool-ecosystem.html"><strong aria-hidden="true">1.8.24.</strong> 25 - 可观测性工具生态系统 (Observability Tool Ecosystem)</a></li><li class="chapter-item "><a href="../domain-8-observability/25-troubleshooting-overview.html"><strong aria-hidden="true">1.8.25.</strong> 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)</a></li><li class="chapter-item "><a href="../domain-8-observability/26-troubleshooting-tools.html"><strong aria-hidden="true">1.8.26.</strong> 100 - 故障排查增强工具</a></li><li class="chapter-item "><a href="../domain-8-observability/27-performance-profiling-tools.html"><strong aria-hidden="true">1.8.27.</strong> 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools)</a></li><li class="chapter-item "><a href="../domain-8-observability/FINAL-QUALITY-ASSESSMENT.html"><strong aria-hidden="true">1.8.28.</strong> Domain-8 可观测性领域最终质量评估报告</a></li><li class="chapter-item "><a href="../domain-8-observability/QUALITY-REPORT.html"><strong aria-hidden="true">1.8.29.</strong> Domain-8 可观测性领域查漏补缺质量报告</a></li><li class="chapter-item "><a href="../domain-8-observability/UPDATED-QUALITY-REPORT.html"><strong aria-hidden="true">1.8.30.</strong> Domain-8 可观测性领域最终质量报告 (2026年2月更新版)</a></li></ol></li><li class="chapter-item "><a href="../domain-9-platform-ops/index.html"><strong aria-hidden="true">1.9.</strong> Platform Ops Domain (平台运维领域)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-9-platform-ops/01-platform-ops-overview.html"><strong aria-hidden="true">1.9.1.</strong> 平台运维概述 (Platform Operations Overview)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/02-cluster-lifecycle-management.html"><strong aria-hidden="true">1.9.2.</strong> 集群生命周期管理 (Cluster Lifecycle Management)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/03-capacity-planning-resource-assessment.html"><strong aria-hidden="true">1.9.3.</strong> 容量规划与资源评估 (Capacity Planning & Resource Assessment)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/04-performance-benchmarking-tuning.html"><strong aria-hidden="true">1.9.4.</strong> 性能基准测试与调优 (Performance Benchmarking & Tuning)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/05-operations-metrics-system.html"><strong aria-hidden="true">1.9.5.</strong> 运维指标体系建设 (Operations Metrics System)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/06-monitoring-alerting-system.html"><strong aria-hidden="true">1.9.6.</strong> 监控告警体系 (Monitoring & Alerting System)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/07-gitops-configuration-management.html"><strong aria-hidden="true">1.9.7.</strong> GitOps配置管理 (GitOps Configuration Management)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/08-automation-toolchain.html"><strong aria-hidden="true">1.9.8.</strong> 运维自动化工具链 (Operations Automation Toolchain)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/09-cost-optimization-finops.html"><strong aria-hidden="true">1.9.9.</strong> 成本优化与FinOps实践 (Cost Optimization & FinOps)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/10-security-compliance.html"><strong aria-hidden="true">1.9.10.</strong> 安全合规管理 (Security & Compliance Management)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/11-disaster-recovery-business-continuity.html"><strong aria-hidden="true">1.9.11.</strong> 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/12-backup-recovery-strategy.html"><strong aria-hidden="true">1.9.12.</strong> Kubernetes 备份与恢复概述 (Backup & Recovery Overview)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/13-multi-cluster-management.html"><strong aria-hidden="true">1.9.13.</strong> 多集群管理</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/14-large-scale-cluster-optimization.html"><strong aria-hidden="true">1.9.14.</strong> 大规模集群性能优化 (Large Scale Cluster Optimization)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/15-production-troubleshooting.html"><strong aria-hidden="true">1.9.15.</strong> 生产环境故障诊断 (Production Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/16-platform-upgrade-migration.html"><strong aria-hidden="true">1.9.16.</strong> 平台升级与迁移策略 (Platform Upgrade & Migration Strategy)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/17-multi-tenant-management.html"><strong aria-hidden="true">1.9.17.</strong> 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/18-platform-observability-practice.html"><strong aria-hidden="true">1.9.18.</strong> 平台可观测性深度实践 (Platform Observability Deep Practice)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/19-lease-leader-election.html"><strong aria-hidden="true">1.9.19.</strong> 69 - Lease 与 Leader 选举机制 (Lease & Leader Election)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/20-crd-operator-development.html"><strong aria-hidden="true">1.9.20.</strong> 31 - CRD与Operator开发</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/21-api-aggregation.html"><strong aria-hidden="true">1.9.21.</strong> 32 - API聚合层配置</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/22-client-libraries.html"><strong aria-hidden="true">1.9.22.</strong> 46 - Kubernetes客户端库</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/23-cli-enhancement-tools.html"><strong aria-hidden="true">1.9.23.</strong> 110 - CLI 增强与效率工具 (CLI Enhancement)</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/24-addons-extensions.html"><strong aria-hidden="true">1.9.24.</strong> 14 - 附加组件和扩展表</a></li><li class="chapter-item "><a href="../domain-9-platform-ops/25-virtual-clusters.html"><strong aria-hidden="true">1.9.25.</strong> 55 - 虚拟集群与多租户</a></li></ol></li><li class="chapter-item "><a href="../domain-10-extensions/index.html"><strong aria-hidden="true">1.10.</strong> Domain-10: Kubernetes 扩展生态</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-10-extensions/01-crd-development-guide.html"><strong aria-hidden="true">1.10.1.</strong> 01 - CRD自定义资源定义开发指南</a></li><li class="chapter-item "><a href="../domain-10-extensions/02-operator-development-patterns.html"><strong aria-hidden="true">1.10.2.</strong> 02 - Operator开发模式与控制器实现</a></li><li class="chapter-item "><a href="../domain-10-extensions/03-admission-webhook-configuration.html"><strong aria-hidden="true">1.10.3.</strong> 03 - 准入控制器(Webhook)配置与实现</a></li><li class="chapter-item "><a href="../domain-10-extensions/04-api-aggregation-extension.html"><strong aria-hidden="true">1.10.4.</strong> Kubernetes API 聚合扩展机制详解</a></li><li class="chapter-item "><a href="../domain-10-extensions/05-package-management-tools.html"><strong aria-hidden="true">1.10.5.</strong> 101 - 包管理与应用分发工具 (Package Management & Distribution)</a></li><li class="chapter-item "><a href="../domain-10-extensions/06-helm-charts-management.html"><strong aria-hidden="true">1.10.6.</strong> 47 - Helm Chart开发与管理</a></li><li class="chapter-item "><a href="../domain-10-extensions/07-helm-advanced-operations.html"><strong aria-hidden="true">1.10.7.</strong> 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践</a></li><li class="chapter-item "><a href="../domain-10-extensions/08-cicd-pipelines.html"><strong aria-hidden="true">1.10.8.</strong> 21 - CI/CD管道表</a></li><li class="chapter-item "><a href="../domain-10-extensions/09-gitops-workflow-argocd.html"><strong aria-hidden="true">1.10.9.</strong> 48 - GitOps工作流</a></li><li class="chapter-item "><a href="../domain-10-extensions/10-image-build-tools.html"><strong aria-hidden="true">1.10.10.</strong> 103 - 容器镜像构建工具 (Container Image Build)</a></li><li class="chapter-item "><a href="../domain-10-extensions/11-service-mesh-overview.html"><strong aria-hidden="true">1.10.11.</strong> 20 - 服务网格集成表</a></li><li class="chapter-item "><a href="../domain-10-extensions/12-service-mesh-advanced.html"><strong aria-hidden="true">1.10.12.</strong> 49 - 服务网格进阶配置</a></li><li class="chapter-item "><a href="../domain-10-extensions/13-kubernetes-operations-fundamentals.html"><strong aria-hidden="true">1.10.13.</strong> 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优</a></li><li class="chapter-item "><a href="../domain-10-extensions/14-multi-cluster-management.html"><strong aria-hidden="true">1.10.14.</strong> 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)</a></li><li class="chapter-item "><a href="../domain-10-extensions/15-monitoring-alerting-system.html"><strong aria-hidden="true">1.10.15.</strong> 15 - 监控告警体系 (Monitoring & Alerting System)</a></li><li class="chapter-item "><a href="../domain-10-extensions/16-security-compliance-management.html"><strong aria-hidden="true">1.10.16.</strong> 16 - 安全合规管理 (Security & Compliance Management)</a></li><li class="chapter-item "><a href="../domain-10-extensions/ENTERPRISE_BEST_PRACTICES.html"><strong aria-hidden="true">1.10.17.</strong> Kubernetes扩展生态企业级最佳实践</a></li><li class="chapter-item "><a href="../domain-10-extensions/QUALITY_REPORT.html"><strong aria-hidden="true">1.10.18.</strong> Domain-10 扩展生态质量报告</a></li><li class="chapter-item "><a href="../domain-10-extensions/QUALITY_REPORT_v2.0.html"><strong aria-hidden="true">1.10.19.</strong> Domain-10 扩展生态质量报告 (v2.0)</a></li><li class="chapter-item "><a href="../domain-10-extensions/QUALITY_REPORT_v3.0.html"><strong aria-hidden="true">1.10.20.</strong> Domain-10 扩展生态质量报告 (v3.0)</a></li><li class="chapter-item "><a href="../domain-10-extensions/QUALITY_REPORT_v4.0.html"><strong aria-hidden="true">1.10.21.</strong> Domain-10 扩展生态质量报告 (v4.0)</a></li></ol></li><li class="chapter-item "><a href="../domain-11-ai-infra/index.html"><strong aria-hidden="true">1.11.</strong> Domain-11: AI基础设施</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-11-ai-infra/01-ai-infrastructure-overview.html"><strong aria-hidden="true">1.11.1.</strong> AI基础设施架构</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/02-ai-ml-workloads.html"><strong aria-hidden="true">1.11.2.</strong> 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/03-gpu-scheduling-management.html"><strong aria-hidden="true">1.11.3.</strong> 133 - GPU调度与管理 (GPU Scheduling & Management)</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/04-gpu-monitoring-dcgm.html"><strong aria-hidden="true">1.11.4.</strong> GPU监控与可观测性</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/05-distributed-training-frameworks.html"><strong aria-hidden="true">1.11.5.</strong> 分布式训练框架</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/06-ai-data-pipeline.html"><strong aria-hidden="true">1.11.6.</strong> AI数据处理Pipeline与特征工程</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/07-ai-experiment-management.html"><strong aria-hidden="true">1.11.7.</strong> AI实验管理与MLOps平台</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/08-automl-hyperparameter-tuning.html"><strong aria-hidden="true">1.11.8.</strong> AutoML与超参数调优</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/09-model-registry.html"><strong aria-hidden="true">1.11.9.</strong> AI模型注册中心与版本管理</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/10-model-deployment-management.html"><strong aria-hidden="true">1.11.10.</strong> AI模型部署与生命周期管理</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/11-ai-security-model-protection.html"><strong aria-hidden="true">1.11.11.</strong> AI安全与模型保护</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/12-ai-cost-analysis-finops.html"><strong aria-hidden="true">1.11.12.</strong> 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/13-ai-platform-observability.html"><strong aria-hidden="true">1.11.13.</strong> AI平台可观测性体系</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/14-troubleshooting-performance.html"><strong aria-hidden="true">1.11.14.</strong> AI平台故障排查与性能优化</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/15-llm-data-pipeline.html"><strong aria-hidden="true">1.11.15.</strong> 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/16-llm-finetuning.html"><strong aria-hidden="true">1.11.16.</strong> 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/17-llm-inference-serving.html"><strong aria-hidden="true">1.11.17.</strong> 144 - LLM推理服务部署</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/18-llm-serving-architecture.html"><strong aria-hidden="true">1.11.18.</strong> LLM模型Serving架构与推理优化</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/19-llm-quantization.html"><strong aria-hidden="true">1.11.19.</strong> 146 - LLM模型量化技术</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/20-vector-database-rag.html"><strong aria-hidden="true">1.11.20.</strong> 147 - 向量数据库与RAG架构</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/21-multimodal-models.html"><strong aria-hidden="true">1.11.21.</strong> 21 - 多模态模型融合与部署</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/22-llm-privacy-security.html"><strong aria-hidden="true">1.11.22.</strong> LLM 隐私与安全</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/23-llm-cost-monitoring.html"><strong aria-hidden="true">1.11.23.</strong> LLM 成本监控与 FinOps</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/24-llm-model-versioning.html"><strong aria-hidden="true">1.11.24.</strong> 24 - LLM模型版本管理与治理</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/25-llm-observability.html"><strong aria-hidden="true">1.11.25.</strong> 25 - LLM可观测性与监控体系</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/26-cost-optimization-overview.html"><strong aria-hidden="true">1.11.26.</strong> 26 - AI基础设施成本优化概览</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/27-cost-management-kubecost.html"><strong aria-hidden="true">1.11.27.</strong> 成本管理与 FinOps</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/28-green-computing-sustainability.html"><strong aria-hidden="true">1.11.28.</strong> 28 - AI绿色计算与可持续发展</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/29-alibaba-cloud-integration.html"><strong aria-hidden="true">1.11.29.</strong> 15 - 阿里云特定集成表</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/30-ai-security-compliance.html"><strong aria-hidden="true">1.11.30.</strong> AI平台安全加固与合规</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/31-ai-platform-governance.html"><strong aria-hidden="true">1.11.31.</strong> 31 - AI平台治理框架</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/32-mlops-pipeline.html"><strong aria-hidden="true">1.11.32.</strong> 32 - MLOps端到端流水线</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/33-model-explainability.html"><strong aria-hidden="true">1.11.33.</strong> 33 - 模型可解释性与透明度</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/34-federated-learning.html"><strong aria-hidden="true">1.11.34.</strong> 34 - 联邦学习与分布式协同训练</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/35-model-drift-monitoring.html"><strong aria-hidden="true">1.11.35.</strong> 35 - 模型漂移监控与预警</a></li><li class="chapter-item "><a href="../domain-11-ai-infra/36-ai-platform-observability-enhanced.html"><strong aria-hidden="true">1.11.36.</strong> 36 - AI平台增强可观测性</a></li></ol></li><li class="chapter-item "><a href="../domain-12-troubleshooting/index.html"><strong aria-hidden="true">1.12.</strong> Domain-12 故障排查 (Troubleshooting)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.html"><strong aria-hidden="true">1.12.1.</strong> 01 - API Server 故障排查 (API Server Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.html"><strong aria-hidden="true">1.12.2.</strong> 02 - etcd 故障排查 (etcd Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/03-networking-cni-troubleshooting.html"><strong aria-hidden="true">1.12.3.</strong> 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/04-storage-csi-troubleshooting.html"><strong aria-hidden="true">1.12.4.</strong> 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/05-pod-pending-diagnosis.html"><strong aria-hidden="true">1.12.5.</strong> 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/06-node-notready-diagnosis.html"><strong aria-hidden="true">1.12.6.</strong> 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/07-oom-memory-diagnosis.html"><strong aria-hidden="true">1.12.7.</strong> 07 - OOM和内存问题诊断</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.html"><strong aria-hidden="true">1.12.8.</strong> 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/09-node-comprehensive-troubleshooting.html"><strong aria-hidden="true">1.12.9.</strong> 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/10-service-comprehensive-troubleshooting.html"><strong aria-hidden="true">1.12.10.</strong> 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/11-deployment-comprehensive-troubleshooting.html"><strong aria-hidden="true">1.12.11.</strong> 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/12-rbac-quota-troubleshooting.html"><strong aria-hidden="true">1.12.12.</strong> 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/13-certificate-troubleshooting.html"><strong aria-hidden="true">1.12.13.</strong> 13 - 证书故障排查 (Certificate Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/14-pvc-storage-troubleshooting.html"><strong aria-hidden="true">1.12.14.</strong> 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/15-ingress-troubleshooting.html"><strong aria-hidden="true">1.12.15.</strong> 15 - Ingress 故障排查 (Ingress Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/16-networkpolicy-troubleshooting.html"><strong aria-hidden="true">1.12.16.</strong> 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/17-hpa-vpa-troubleshooting.html"><strong aria-hidden="true">1.12.17.</strong> 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/18-cronjob-troubleshooting.html"><strong aria-hidden="true">1.12.18.</strong> 18 - CronJob 故障排查 (CronJob Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/19-configmap-secret-troubleshooting.html"><strong aria-hidden="true">1.12.19.</strong> 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/20-daemonset-troubleshooting.html"><strong aria-hidden="true">1.12.20.</strong> 20 - DaemonSet 故障排查 (DaemonSet Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/21-statefulset-troubleshooting.html"><strong aria-hidden="true">1.12.21.</strong> 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/22-job-troubleshooting.html"><strong aria-hidden="true">1.12.22.</strong> 22 - Job 故障排查 (Job Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/23-namespace-troubleshooting.html"><strong aria-hidden="true">1.12.23.</strong> 23 - Namespace 故障排查 (Namespace Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/24-quota-limitrange-troubleshooting.html"><strong aria-hidden="true">1.12.24.</strong> 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/25-network-connectivity-troubleshooting.html"><strong aria-hidden="true">1.12.25.</strong> 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/26-dns-troubleshooting.html"><strong aria-hidden="true">1.12.26.</strong> 26 - DNS 故障排查 (DNS Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/27-image-registry-troubleshooting.html"><strong aria-hidden="true">1.12.27.</strong> 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.html"><strong aria-hidden="true">1.12.28.</strong> 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/29-cloud-provider-troubleshooting.html"><strong aria-hidden="true">1.12.29.</strong> 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.html"><strong aria-hidden="true">1.12.30.</strong> 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/31-backup-restore-troubleshooting.html"><strong aria-hidden="true">1.12.31.</strong> 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/32-security-troubleshooting.html"><strong aria-hidden="true">1.12.32.</strong> 32 - 安全相关故障排查 (Security Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.html"><strong aria-hidden="true">1.12.33.</strong> 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/34-upgrade-migration-troubleshooting.html"><strong aria-hidden="true">1.12.34.</strong> 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/35-node-component-troubleshooting.html"><strong aria-hidden="true">1.12.35.</strong> 35 - 节点组件故障排查 (Node Component Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/36-helm-chart-troubleshooting.html"><strong aria-hidden="true">1.12.36.</strong> 36 - Helm Chart 故障排查 (Helm Chart Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/37-multi-cluster-management-troubleshooting.html"><strong aria-hidden="true">1.12.37.</strong> 37 - 多集群管理故障排查 (Multi-Cluster Management Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/38-gitops-argocd-troubleshooting.html"><strong aria-hidden="true">1.12.38.</strong> 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/39-enterprise-monitoring-alerting-system.html"><strong aria-hidden="true">1.12.39.</strong> 39 - 企业级监控告警体系 (Enterprise Monitoring and Alerting System)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/40-large-scale-cluster-operations.html"><strong aria-hidden="true">1.12.40.</strong> 40 - 大规模集群运维 (Large Scale Cluster Operations)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/41-event-driven-architecture-troubleshooting.html"><strong aria-hidden="true">1.12.41.</strong> 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/42-chaos-engineering-fault-injection-testing.html"><strong aria-hidden="true">1.12.42.</strong> 42 - 混沌工程和故障注入测试 (Chaos Engineering and Fault Injection Testing)</a></li><li class="chapter-item "><a href="../domain-12-troubleshooting/SUMMARY.html"><strong aria-hidden="true">1.12.43.</strong> Domain-12 故障排查文档体系完整总结报告</a></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 鎵╁睍棰嗗煙 (Domain 13-33)</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-13-docker/index.html"><strong aria-hidden="true">2.1.</strong> Docker 容器技术深度解析</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-13-docker/01-docker-architecture-overview.html"><strong aria-hidden="true">2.1.1.</strong> Docker 架构概述与核心概念</a></li><li class="chapter-item "><a href="../domain-13-docker/02-docker-images-management.html"><strong aria-hidden="true">2.1.2.</strong> Docker 镜像管理详解</a></li><li class="chapter-item "><a href="../domain-13-docker/03-docker-container-lifecycle.html"><strong aria-hidden="true">2.1.3.</strong> Docker 容器生命周期管理</a></li><li class="chapter-item "><a href="../domain-13-docker/04-docker-networking-deep-dive.html"><strong aria-hidden="true">2.1.4.</strong> Docker 网络深度解析</a></li><li class="chapter-item "><a href="../domain-13-docker/05-docker-storage-volumes.html"><strong aria-hidden="true">2.1.5.</strong> Docker 存储与数据卷</a></li><li class="chapter-item "><a href="../domain-13-docker/06-docker-compose-orchestration.html"><strong aria-hidden="true">2.1.6.</strong> Docker Compose 编排</a></li><li class="chapter-item "><a href="../domain-13-docker/07-docker-security-best-practices.html"><strong aria-hidden="true">2.1.7.</strong> Docker 安全最佳实践</a></li><li class="chapter-item "><a href="../domain-13-docker/08-docker-troubleshooting-guide.html"><strong aria-hidden="true">2.1.8.</strong> Docker 故障排查指南</a></li><li class="chapter-item "><a href="../domain-13-docker/09-docker-performance-monitoring.html"><strong aria-hidden="true">2.1.9.</strong> Docker 性能监控与调优</a></li><li class="chapter-item "><a href="../domain-13-docker/10-docker-logging-management.html"><strong aria-hidden="true">2.1.10.</strong> Docker 日志管理与分析</a></li><li class="chapter-item "><a href="../domain-13-docker/11-docker-automation-devops.html"><strong aria-hidden="true">2.1.11.</strong> Docker 自动化运维与CI/CD集成</a></li><li class="chapter-item "><a href="../domain-13-docker/99-docker-commands-reference.html"><strong aria-hidden="true">2.1.12.</strong> Docker 命令大全参考</a></li></ol></li><li class="chapter-item expanded "><a href="../domain-14-linux/index.html"><strong aria-hidden="true">2.2.</strong> Domain-14: Linux 基础知识体系</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-14-linux/01-linux-system-architecture.html"><strong aria-hidden="true">2.2.1.</strong> 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/02-linux-process-management.html"><strong aria-hidden="true">2.2.2.</strong> 02 - Linux 进程管理与系统监控：生产环境运维专家实践</a></li><li class="chapter-item "><a href="../domain-14-linux/03-linux-filesystem-deep-dive.html"><strong aria-hidden="true">2.2.3.</strong> 03 - Linux 文件系统深度解析：生产环境存储管理专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/04-linux-networking-configuration.html"><strong aria-hidden="true">2.2.4.</strong> 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/05-linux-storage-management.html"><strong aria-hidden="true">2.2.5.</strong> 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/06-linux-performance-tuning.html"><strong aria-hidden="true">2.2.6.</strong> 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/07-linux-security-hardening.html"><strong aria-hidden="true">2.2.7.</strong> 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/08-linux-container-fundamentals.html"><strong aria-hidden="true">2.2.8.</strong> 08 - Linux 容器技术深度解析：生产环境容器运维专家指南</a></li><li class="chapter-item "><a href="../domain-14-linux/09-linux-operations-basics.html"><strong aria-hidden="true">2.2.9.</strong> 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南</a></li><li class="chapter-item expanded "><a href="../domain-14-linux/99-linux-commands-reference.html" class="active"><strong aria-hidden="true">2.2.10.</strong> Linux 命令大全参考</a></li></ol></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/index.html"><strong aria-hidden="true">2.3.</strong> Domain-15: 网络基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-15-network-fundamentals/01-network-protocols-stack.html"><strong aria-hidden="true">2.3.1.</strong> 网络协议栈详解</a></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/02-tcp-udp-deep-dive.html"><strong aria-hidden="true">2.3.2.</strong> TCP/UDP 协议深度解析</a></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/03-dns-principles-configuration.html"><strong aria-hidden="true">2.3.3.</strong> DNS 原理与配置</a></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/04-load-balancing-technologies.html"><strong aria-hidden="true">2.3.4.</strong> 负载均衡技术</a></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/05-network-security-fundamentals.html"><strong aria-hidden="true">2.3.5.</strong> 网络安全基础</a></li><li class="chapter-item "><a href="../domain-15-network-fundamentals/06-sdn-network-virtualization.html"><strong aria-hidden="true">2.3.6.</strong> SDN 与网络虚拟化</a></li></ol></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/index.html"><strong aria-hidden="true">2.4.</strong> Domain-16: 存储基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-16-storage-fundamentals/01-storage-technologies-overview.html"><strong aria-hidden="true">2.4.1.</strong> 存储技术概述</a></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/02-block-file-object-storage.html"><strong aria-hidden="true">2.4.2.</strong> 块存储、文件存储、对象存储</a></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/03-raid-storage-redundancy.html"><strong aria-hidden="true">2.4.3.</strong> RAID 与存储冗余</a></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/04-distributed-storage-systems.html"><strong aria-hidden="true">2.4.4.</strong> 分布式存储系统</a></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/05-storage-management-operations.html"><strong aria-hidden="true">2.4.5.</strong> 企业级存储管理与运维实践</a></li><li class="chapter-item "><a href="../domain-16-storage-fundamentals/06-storage-performance-iops.html"><strong aria-hidden="true">2.4.6.</strong> 存储性能与 IOPS</a></li></ol></li><li class="chapter-item "><a href="../domain-17-cloud-provider/index.html"><strong aria-hidden="true">2.5.</strong> Domain-17: 云厂商Kubernetes服务企业级深度指南</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-17-cloud-provider/01-aws-eks/aws-eks-overview.html"><strong aria-hidden="true">2.5.1.</strong> AWS EKS (Elastic Kubernetes Service) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.html"><strong aria-hidden="true">2.5.2.</strong> Google Cloud GKE (Google Kubernetes Engine) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/03-azure-aks/azure-aks-overview.html"><strong aria-hidden="true">2.5.3.</strong> Azure AKS (Azure Kubernetes Service) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/240-ack-ecs-compute.html"><strong aria-hidden="true">2.5.4.</strong> ACK 关联产品 - ECS 计算资源</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/241-ack-slb-nlb-alb.html"><strong aria-hidden="true">2.5.5.</strong> ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/242-ack-vpc-network.html"><strong aria-hidden="true">2.5.6.</strong> ACK 关联产品 - VPC 网络</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/243-ack-ram-authorization.html"><strong aria-hidden="true">2.5.7.</strong> ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/244-ack-ros-iac.html"><strong aria-hidden="true">2.5.8.</strong> ACK 关联产品 - ROS 资源编排 (IaC)</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/245-ack-ebs-storage.html"><strong aria-hidden="true">2.5.9.</strong> ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.html"><strong aria-hidden="true">2.5.10.</strong> 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/04-alicloud-ack/service-ack-practical-guide.html"><strong aria-hidden="true">2.5.11.</strong> Kubernetes Service ACK 实战指南</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.html"><strong aria-hidden="true">2.5.12.</strong> 腾讯云 TKE (Tencent Kubernetes Engine) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.html"><strong aria-hidden="true">2.5.13.</strong> 华为云 CCE (Cloud Container Engine) 企业级深度实战指南</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/07-ucloud-uk8s/ucloud-uk8s-overview.html"><strong aria-hidden="true">2.5.14.</strong> UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/08-ibm-iks/ibm-iks-overview.html"><strong aria-hidden="true">2.5.15.</strong> IBM IKS (IBM Cloud Kubernetes Service) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/09-oracle-oke/oracle-oke-overview.html"><strong aria-hidden="true">2.5.16.</strong> Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.html"><strong aria-hidden="true">2.5.17.</strong> 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/11-ctyun-tke/ctyun-tke-overview.html"><strong aria-hidden="true">2.5.18.</strong> 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.html"><strong aria-hidden="true">2.5.19.</strong> 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.html"><strong aria-hidden="true">2.5.20.</strong> 专有云 (Apsara Stack) - ESS 弹性伸缩</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/13-alicloud-apsara-ack/251-apsara-stack-sls-logging.html"><strong aria-hidden="true">2.5.21.</strong> 专有云 (Apsara Stack) - SLS 日志服务</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/13-alicloud-apsara-ack/252-apsara-stack-pop-operations.html"><strong aria-hidden="true">2.5.22.</strong> 专有云 (Apsara Stack) - POP 平台运维 (ASOP)</a></li><li class="chapter-item "><a href="../domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.html"><strong aria-hidden="true">2.5.23.</strong> 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析</a></li></ol></li><li class="chapter-item "><a href="../domain-18-production-operations/index.html"><strong aria-hidden="true">2.6.</strong> Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-18-production-operations/01-production-architecture-design-principles.html"><strong aria-hidden="true">2.6.1.</strong> 01-生产架构设计原则</a></li><li class="chapter-item "><a href="../domain-18-production-operations/02-multi-cloud-hybrid-deployment-strategy.html"><strong aria-hidden="true">2.6.2.</strong> 02-多云混合部署策略</a></li><li class="chapter-item "><a href="../domain-18-production-operations/03-edge-computing-production-deployment.html"><strong aria-hidden="true">2.6.3.</strong> 03-边缘计算生产部署</a></li><li class="chapter-item "><a href="../domain-18-production-operations/04-enterprise-monitoring-system.html"><strong aria-hidden="true">2.6.4.</strong> 04-企业级监控体系</a></li><li class="chapter-item "><a href="../domain-18-production-operations/05-logging-collection-analysis-platform.html"><strong aria-hidden="true">2.6.5.</strong> 05-日志收集分析平台</a></li><li class="chapter-item "><a href="../domain-18-production-operations/06-apm-application-performance-monitoring.html"><strong aria-hidden="true">2.6.6.</strong> 06-APM应用性能监控</a></li><li class="chapter-item "><a href="../domain-18-production-operations/07-zero-trust-security-architecture.html"><strong aria-hidden="true">2.6.7.</strong> 07-零信任安全架构</a></li><li class="chapter-item "><a href="../domain-18-production-operations/08-cis-benchmark-compliance-audit.html"><strong aria-hidden="true">2.6.8.</strong> 08-CIS基准合规检查</a></li><li class="chapter-item "><a href="../domain-18-production-operations/09-software-bill-of-materials.html"><strong aria-hidden="true">2.6.9.</strong> 09-软件物料清单</a></li><li class="chapter-item "><a href="../domain-18-production-operations/10-gitops-pipeline-practices.html"><strong aria-hidden="true">2.6.10.</strong> 10-GitOps流水线实践</a></li><li class="chapter-item "><a href="../domain-18-production-operations/11-infrastructure-as-code.html"><strong aria-hidden="true">2.6.11.</strong> 11-基础设施即代码</a></li><li class="chapter-item "><a href="../domain-18-production-operations/12-automated-operations-toolchain.html"><strong aria-hidden="true">2.6.12.</strong> 12-自动化运维工具链</a></li><li class="chapter-item "><a href="../domain-18-production-operations/13-kubernetes-cost-governance.html"><strong aria-hidden="true">2.6.13.</strong> 13-Kubernetes成本治理</a></li><li class="chapter-item "><a href="../domain-18-production-operations/14-resource-quota-management.html"><strong aria-hidden="true">2.6.14.</strong> 14-资源配额管理</a></li><li class="chapter-item "><a href="../domain-18-production-operations/15-green-computing-sustainability.html"><strong aria-hidden="true">2.6.15.</strong> 15-绿色计算可持续发展</a></li><li class="chapter-item "><a href="../domain-18-production-operations/16-enterprise-backup-strategy.html"><strong aria-hidden="true">2.6.16.</strong> 16-企业级备份策略</a></li><li class="chapter-item "><a href="../domain-18-production-operations/17-disaster-recovery-drills.html"><strong aria-hidden="true">2.6.17.</strong> 17-灾难恢复演练</a></li><li class="chapter-item "><a href="../domain-18-production-operations/18-cross-region-disaster-recovery.html"><strong aria-hidden="true">2.6.18.</strong> 18-跨区域容灾部署</a></li><li class="chapter-item "><a href="../domain-18-production-operations/19-cluster-performance-tuning.html"><strong aria-hidden="true">2.6.19.</strong> 19-集群性能调优</a></li><li class="chapter-item "><a href="../domain-18-production-operations/20-network-performance-optimization.html"><strong aria-hidden="true">2.6.20.</strong> 20-网络性能优化</a></li><li class="chapter-item "><a href="../domain-18-production-operations/21-storage-performance-optimization.html"><strong aria-hidden="true">2.6.21.</strong> 21-存储性能优化</a></li><li class="chapter-item "><a href="../domain-18-production-operations/22-change-management-process.html"><strong aria-hidden="true">2.6.22.</strong> 22-变更管理流程</a></li><li class="chapter-item "><a href="../domain-18-production-operations/23-incident-response-handling.html"><strong aria-hidden="true">2.6.23.</strong> 23. 事件响应处理 (Incident Response Handling)</a></li><li class="chapter-item "><a href="../domain-18-production-operations/24-capacity-planning-forecasting.html"><strong aria-hidden="true">2.6.24.</strong> 24. 容量规划与预测 (Capacity Planning & Forecasting)</a></li></ol></li><li class="chapter-item "><a href="../domain-19-papers/index.html"><strong aria-hidden="true">2.7.</strong> Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-19-papers/01-kubernetes-production-readiness-assessment.html"><strong aria-hidden="true">2.7.1.</strong> Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)</a></li><li class="chapter-item "><a href="../domain-19-papers/02-kubernetes-large-scale-performance-optimization.html"><strong aria-hidden="true">2.7.2.</strong> Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)</a></li><li class="chapter-item "><a href="../domain-19-papers/03-kubernetes-zero-trust-security-architecture.html"><strong aria-hidden="true">2.7.3.</strong> Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)</a></li><li class="chapter-item "><a href="../domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.html"><strong aria-hidden="true">2.7.4.</strong> Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)</a></li><li class="chapter-item "><a href="../domain-19-papers/05-kubernetes-gitops-complete-practice-guide.html"><strong aria-hidden="true">2.7.5.</strong> Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)</a></li><li class="chapter-item "><a href="../domain-19-papers/06-kubernetes-cost-governance-finops-practice.html"><strong aria-hidden="true">2.7.6.</strong> Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)</a></li><li class="chapter-item "><a href="../domain-19-papers/07-kubernetes-csi-storage-deep-practice.html"><strong aria-hidden="true">2.7.7.</strong> Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)</a></li><li class="chapter-item "><a href="../domain-19-papers/08-kubernetes-network-policies-security-micro-segmentation.html"><strong aria-hidden="true">2.7.8.</strong> Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation Practice)</a></li><li class="chapter-item "><a href="../domain-19-papers/09-kubernetes-service-mesh-istio-integration.html"><strong aria-hidden="true">2.7.9.</strong> Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)</a></li><li class="chapter-item "><a href="../domain-19-papers/10-kubernetes-automation-sre-practices.html"><strong aria-hidden="true">2.7.10.</strong> Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)</a></li><li class="chapter-item "><a href="../domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.html"><strong aria-hidden="true">2.7.11.</strong> Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)</a></li><li class="chapter-item "><a href="../domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.html"><strong aria-hidden="true">2.7.12.</strong> Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)</a></li><li class="chapter-item "><a href="../domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.html"><strong aria-hidden="true">2.7.13.</strong> Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)</a></li><li class="chapter-item "><a href="../domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.html"><strong aria-hidden="true">2.7.14.</strong> Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)</a></li><li class="chapter-item "><a href="../domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.html"><strong aria-hidden="true">2.7.15.</strong> Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)</a></li><li class="chapter-item "><a href="../domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.html"><strong aria-hidden="true">2.7.16.</strong> Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)</a></li></ol></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/index.html"><strong aria-hidden="true">2.8.</strong> Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/01-prometheus-enterprise-monitoring.html"><strong aria-hidden="true">2.8.1.</strong> Prometheus企业级监控系统深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/02-grafana-enterprise-observability.html"><strong aria-hidden="true">2.8.2.</strong> Grafana Enterprise Observability Platform 深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/03-opentelemetry-distributed-tracing.html"><strong aria-hidden="true">2.8.3.</strong> OpenTelemetry分布式追踪与可观测性深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/04-thanos-enterprise-metrics-federation.html"><strong aria-hidden="true">2.8.4.</strong> Thanos Enterprise Metrics Federation and Long-term Storage</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/05-datadog-enterprise-apm.html"><strong aria-hidden="true">2.8.5.</strong> Datadog企业级APM深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/05-datadog-enterprise-monitoring.html"><strong aria-hidden="true">2.8.6.</strong> Datadog 企业级监控平台深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/06-elastic-stack-enterprise-logging.html"><strong aria-hidden="true">2.8.7.</strong> Elastic Stack企业级日志分析深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/06-elastic-stack-enterprise-observability.html"><strong aria-hidden="true">2.8.8.</strong> Elastic Stack企业级可观测性平台深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/07-zabbix-enterprise-monitoring.html"><strong aria-hidden="true">2.8.9.</strong> Zabbix Enterprise Monitoring Platform 深度实践</a></li><li class="chapter-item "><a href="../domain-20-enterprise-monitoring-alerting/08-new-relic-enterprise-apm.html"><strong aria-hidden="true">2.8.10.</strong> New Relic Enterprise APM Platform 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/index.html"><strong aria-hidden="true">2.9.</strong> Domain 21: 日志管理与分析 (Logging Management & Analytics)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-21-logging-management-analytics/01-elk-stack-enterprise-logging.html"><strong aria-hidden="true">2.9.1.</strong> ELK Stack企业级日志管理系统深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/02-fluentd-enterprise-log-processing.html"><strong aria-hidden="true">2.9.2.</strong> Fluentd企业级日志收集与处理深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/03-loki-enterprise-log-aggregation.html"><strong aria-hidden="true">2.9.3.</strong> Loki Enterprise Log Aggregation and Analytics Platform</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/04-enterprise-log-governance-compliance.html"><strong aria-hidden="true">2.9.4.</strong> 企业级日志治理与合规审计深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/04-graylog-enterprise-logging.html"><strong aria-hidden="true">2.9.5.</strong> Graylog 企业级日志管理平台深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/04-splunk-enterprise-siem.html"><strong aria-hidden="true">2.9.6.</strong> Splunk企业级日志分析与安全智能平台深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/05-real-time-analytics-business-insights.html"><strong aria-hidden="true">2.9.7.</strong> 企业级实时日志分析与业务洞察深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/05-splunk-enterprise-log-analytics.html"><strong aria-hidden="true">2.9.8.</strong> Splunk Enterprise Log Analytics Platform 深度实践</a></li><li class="chapter-item "><a href="../domain-21-logging-management-analytics/06-loggly-cloud-log-management.html"><strong aria-hidden="true">2.9.9.</strong> Loggly Cloud Log Management Platform 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-22-container-image-management/index.html"><strong aria-hidden="true">2.10.</strong> Domain 22: 容器镜像管理 (Container Image Management)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-22-container-image-management/01-harbor-enterprise-image-registry.html"><strong aria-hidden="true">2.10.1.</strong> Harbor企业级容器镜像仓库深度实践</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/02-docker-registry-enterprise-distribution.html"><strong aria-hidden="true">2.10.2.</strong> Docker Registry企业级镜像分发深度实践</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/03-jfrog-artifactory-enterprise.html"><strong aria-hidden="true">2.10.3.</strong> JFrog Artifactory Enterprise Container Registry Platform</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/04-harbor-enterprise-security-scanning.html"><strong aria-hidden="true">2.10.4.</strong> Harbor企业级镜像安全扫描深度实践</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/04-quay-enterprise-registry.html"><strong aria-hidden="true">2.10.5.</strong> Quay Container Registry 企业级镜像管理深度实践</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/05-gitlab-container-registry-enterprise.html"><strong aria-hidden="true">2.10.6.</strong> GitLab Container Registry Enterprise 深度实践</a></li><li class="chapter-item "><a href="../domain-22-container-image-management/06-amazon-ecr-enterprise.html"><strong aria-hidden="true">2.10.7.</strong> Amazon ECR (Elastic Container Registry) Enterprise 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-23-gitops-ci-cd/index.html"><strong aria-hidden="true">2.11.</strong> Domain 23: GitOps与CI/CD (GitOps & CI/CD)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-23-gitops-ci-cd/01-argo-cd-enterprise-gitops.html"><strong aria-hidden="true">2.11.1.</strong> Argo CD企业级GitOps实践指南</a></li><li class="chapter-item "><a href="../domain-23-gitops-ci-cd/02-jenkins-enterprise-cicd.html"><strong aria-hidden="true">2.11.2.</strong> Jenkins企业级CI/CD流水线深度实践</a></li><li class="chapter-item "><a href="../domain-23-gitops-ci-cd/03-gitlab-enterprise-cicd.html"><strong aria-hidden="true">2.11.3.</strong> GitLab CI/CD Enterprise Pipeline Automation Platform</a></li><li class="chapter-item "><a href="../domain-23-gitops-ci-cd/04-github-actions-enterprise.html"><strong aria-hidden="true">2.11.4.</strong> GitHub Actions Enterprise CI/CD Platform 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/index.html"><strong aria-hidden="true">2.12.</strong> Domain 24: 基础设施即代码 (Infrastructure as Code)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/01-terraform-enterprise-iac.html"><strong aria-hidden="true">2.12.1.</strong> Terraform企业级基础设施即代码实践</a></li><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/02-ansible-enterprise-automation.html"><strong aria-hidden="true">2.12.2.</strong> Ansible企业级自动化运维深度实践</a></li><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/03-pulumi-enterprise-iac.html"><strong aria-hidden="true">2.12.3.</strong> Pulumi Enterprise Infrastructure as Code Platform</a></li><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/04-azure-resource-manager-enterprise.html"><strong aria-hidden="true">2.12.4.</strong> Azure Resource Manager (ARM) Enterprise 深度实践</a></li><li class="chapter-item "><a href="../domain-24-infrastructure-as-code/05-crossplane-enterprise-orchestration.html"><strong aria-hidden="true">2.12.5.</strong> Crossplane Enterprise Infrastructure Orchestration 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-25-cloud-native-security/index.html"><strong aria-hidden="true">2.13.</strong> Domain 25: 云原生安全 (Cloud Native Security)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-25-cloud-native-security/01-falco-cloud-native-security.html"><strong aria-hidden="true">2.13.1.</strong> Falco云原生安全监控深度实践</a></li><li class="chapter-item "><a href="../domain-25-cloud-native-security/02-sysdig-enterprise-container-security.html"><strong aria-hidden="true">2.13.2.</strong> Sysdig企业级容器安全深度实践</a></li><li class="chapter-item "><a href="../domain-25-cloud-native-security/03-aqua-enterprise-container-security.html"><strong aria-hidden="true">2.13.3.</strong> Aqua Security Enterprise Container Security Platform</a></li><li class="chapter-item "><a href="../domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.html"><strong aria-hidden="true">2.13.4.</strong> Kyverno Enterprise Policy Management 深度实践</a></li><li class="chapter-item "><a href="../domain-25-cloud-native-security/05-vault-enterprise-secrets-management.html"><strong aria-hidden="true">2.13.5.</strong> HashiCorp Vault Enterprise Secrets Management 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/index.html"><strong aria-hidden="true">2.14.</strong> Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.html"><strong aria-hidden="true">2.14.1.</strong> Istio 企业级服务网格架构与实践</a></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.html"><strong aria-hidden="true">2.14.2.</strong> Linkerd 企业级服务网格深度实践</a></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/03-consul-connect-enterprise.html"><strong aria-hidden="true">2.14.3.</strong> Consul Connect 企业级服务网格管理</a></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.html"><strong aria-hidden="true">2.14.4.</strong> Envoy Proxy 企业级服务网格数据平面深度实践</a></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.html"><strong aria-hidden="true">2.14.5.</strong> Dapr (Distributed Application Runtime) Enterprise 深度实践</a></li><li class="chapter-item "><a href="../domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.html"><strong aria-hidden="true">2.14.6.</strong> Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/index.html"><strong aria-hidden="true">2.15.</strong> Domain 27: 多云与混合云架构管理 (Multi-cloud & Hybrid Cloud Architecture Management)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/01-aws-eks-enterprise-multicloud.html"><strong aria-hidden="true">2.15.1.</strong> AWS EKS 企业级多云管理平台</a></li><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/02-azure-aks-enterprise-multicloud.html"><strong aria-hidden="true">2.15.2.</strong> Azure AKS 企业级多云管理平台</a></li><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/03-enterprise-multicloud-governance.html"><strong aria-hidden="true">2.15.3.</strong> 企业级多云治理与成本优化深度实践</a></li><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/04-google-gke-enterprise-multicloud.html"><strong aria-hidden="true">2.15.4.</strong> Google GKE (Google Kubernetes Engine) Enterprise Multi-Cloud Management 深度实践</a></li><li class="chapter-item "><a href="../domain-27-multi-cloud-hybrid/05-ibm-cloud-kubernetes-service-enterprise.html"><strong aria-hidden="true">2.15.5.</strong> IBM Cloud Kubernetes Service (IKS) Enterprise 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/index.html"><strong aria-hidden="true">2.16.</strong> Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/01-mysql-enterprise-database.html"><strong aria-hidden="true">2.16.1.</strong> MySQL 企业级数据库运维管理</a></li><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/02-postgresql-enterprise-database.html"><strong aria-hidden="true">2.16.2.</strong> PostgreSQL 企业级数据库高可用架构</a></li><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/03-distributed-database-enterprise.html"><strong aria-hidden="true">2.16.3.</strong> 分布式数据库企业级实践深度指南</a></li><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/05-mongodb-enterprise-database.html"><strong aria-hidden="true">2.16.4.</strong> MongoDB Enterprise Database Operations 深度实践</a></li><li class="chapter-item "><a href="../domain-28-enterprise-database-middleware/06-redis-enterprise-cache.html"><strong aria-hidden="true">2.16.5.</strong> Redis Enterprise Cache Operations 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-29-automated-testing-quality/index.html"><strong aria-hidden="true">2.17.</strong> Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-29-automated-testing-quality/01-selenium-enterprise-automation.html"><strong aria-hidden="true">2.17.1.</strong> Selenium 企业级自动化测试平台</a></li><li class="chapter-item "><a href="../domain-29-automated-testing-quality/02-junit5-enterprise-testing.html"><strong aria-hidden="true">2.17.2.</strong> JUnit 5 企业级单元测试框架深度实践</a></li><li class="chapter-item "><a href="../domain-29-automated-testing-quality/03-ai-testing-quality-assurance.html"><strong aria-hidden="true">2.17.3.</strong> 企业级AI测试与质量保障深度实践</a></li><li class="chapter-item "><a href="../domain-29-automated-testing-quality/05-cypress-enterprise-automation.html"><strong aria-hidden="true">2.17.4.</strong> Cypress Enterprise Automation Testing 深度实践</a></li><li class="chapter-item "><a href="../domain-29-automated-testing-quality/06-playwright-enterprise-automation.html"><strong aria-hidden="true">2.17.5.</strong> Playwright Enterprise Automation Testing 深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/index.html"><strong aria-hidden="true">2.18.</strong> Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/01-vmware-vsphere-enterprise-dr.html"><strong aria-hidden="true">2.18.1.</strong> VMware vSphere 企业级灾备与业务连续性</a></li><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/02-veeam-enterprise-backup.html"><strong aria-hidden="true">2.18.2.</strong> Veeam Backup & Replication 企业级备份恢复解决方案</a></li><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/03-enterprise-disaster-recovery-chaos-engineering.html"><strong aria-hidden="true">2.18.3.</strong> 企业级容灾架构与混沌工程深度实践</a></li><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/05-commvault-enterprise-disaster-recovery.html"><strong aria-hidden="true">2.18.4.</strong> Commvault 企业级灾备与业务连续性深度实践</a></li><li class="chapter-item "><a href="../domain-30-disaster-recovery-business-continuity/06-rubrik-enterprise-disaster-recovery.html"><strong aria-hidden="true">2.18.5.</strong> Rubrik 企业级灾备与业务连续性深度实践</a></li></ol></li><li class="chapter-item "><a href="../domain-31-hardware/index.html"><strong aria-hidden="true">2.19.</strong> Domain 31 - 硬件基础设施</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-31-hardware/01-cloud-hardware-architecture.html"><strong aria-hidden="true">2.19.1.</strong> 云平台硬件基础架构</a></li><li class="chapter-item "><a href="../domain-31-hardware/02-server-architecture-principles.html"><strong aria-hidden="true">2.19.2.</strong> 服务器架构原理</a></li><li class="chapter-item "><a href="../domain-31-hardware/03-cpu-technology-deep-dive.html"><strong aria-hidden="true">2.19.3.</strong> CPU技术深度解析</a></li><li class="chapter-item "><a href="../domain-31-hardware/04-motherboard-chipset-technology.html"><strong aria-hidden="true">2.19.4.</strong> 主板与芯片组技术</a></li><li class="chapter-item "><a href="../domain-31-hardware/05-memory-technology-deep-dive.html"><strong aria-hidden="true">2.19.5.</strong> 内存技术深度解析</a></li><li class="chapter-item "><a href="../domain-31-hardware/06-storage-hdd-technology.html"><strong aria-hidden="true">2.19.6.</strong> 机械硬盘技术</a></li><li class="chapter-item "><a href="../domain-31-hardware/07-storage-ssd-technology.html"><strong aria-hidden="true">2.19.7.</strong> SSD固态硬盘技术</a></li><li class="chapter-item "><a href="../domain-31-hardware/08-network-hardware-technology.html"><strong aria-hidden="true">2.19.8.</strong> 网络硬件技术</a></li><li class="chapter-item "><a href="../domain-31-hardware/09-hardware-vendors-ecosystem.html"><strong aria-hidden="true">2.19.9.</strong> 硬件厂商生态</a></li><li class="chapter-item "><a href="../domain-31-hardware/10-hardware-troubleshooting-methodology.html"><strong aria-hidden="true">2.19.10.</strong> 硬件故障排查方法论</a></li><li class="chapter-item "><a href="../domain-31-hardware/11-cpu-memory-troubleshooting.html"><strong aria-hidden="true">2.19.11.</strong> CPU与内存故障排查</a></li><li class="chapter-item "><a href="../domain-31-hardware/12-storage-troubleshooting.html"><strong aria-hidden="true">2.19.12.</strong> 存储设备故障排查</a></li><li class="chapter-item "><a href="../domain-31-hardware/13-network-hardware-troubleshooting.html"><strong aria-hidden="true">2.19.13.</strong> 网络硬件故障排查</a></li><li class="chapter-item "><a href="../domain-31-hardware/14-power-thermal-troubleshooting.html"><strong aria-hidden="true">2.19.14.</strong> 电源与散热故障排查</a></li><li class="chapter-item "><a href="../domain-31-hardware/15-bios-firmware-troubleshooting.html"><strong aria-hidden="true">2.19.15.</strong> BIOS与固件故障排查</a></li><li class="chapter-item "><a href="../domain-31-hardware/16-kubernetes-hardware-troubleshooting.html"><strong aria-hidden="true">2.19.16.</strong> Kubernetes 运维硬件故障排查专题</a></li><li class="chapter-item "><a href="../domain-31-hardware/17-hardware-error-codes-reference.html"><strong aria-hidden="true">2.19.17.</strong> 硬件错误码速查大全</a></li><li class="chapter-item "><a href="../domain-31-hardware/18-hardware-failure-case-studies.html"><strong aria-hidden="true">2.19.18.</strong> 硬件故障实战案例库</a></li></ol></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/index.html"><strong aria-hidden="true">2.20.</strong> Domain-32: Kubernetes YAML 配置完整参考手册</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.html"><strong aria-hidden="true">2.20.1.</strong> 01 - YAML 语法基础与 Kubernetes 资源通用规范</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/02-namespace-resourcequota-limitrange.html"><strong aria-hidden="true">2.20.2.</strong> 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/03-pod-specification-complete.html"><strong aria-hidden="true">2.20.3.</strong> 03 - Pod 完整规格说明书</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/04-deployment-replicaset.html"><strong aria-hidden="true">2.20.4.</strong> 04 - Deployment / ReplicaSet YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/05-statefulset-reference.html"><strong aria-hidden="true">2.20.5.</strong> 05 - StatefulSet YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/06-daemonset-reference.html"><strong aria-hidden="true">2.20.6.</strong> 06 - DaemonSet YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/07-job-cronjob-reference.html"><strong aria-hidden="true">2.20.7.</strong> 07 - Job / CronJob YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/08-service-all-types.html"><strong aria-hidden="true">2.20.8.</strong> 08 - Service 全类型 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/09-endpoints-endpointslice.html"><strong aria-hidden="true">2.20.9.</strong> 09 - Endpoints / EndpointSlice YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/10-ingress-ingressclass.html"><strong aria-hidden="true">2.20.10.</strong> 10 - Ingress / IngressClass YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/11-gateway-api-core.html"><strong aria-hidden="true">2.20.11.</strong> 11 - Gateway API 核心资源 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/12-gateway-api-advanced-routes.html"><strong aria-hidden="true">2.20.12.</strong> 12 - Gateway API 高级路由 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/13-configmap-reference.html"><strong aria-hidden="true">2.20.13.</strong> 13 - ConfigMap YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/14-secret-all-types.html"><strong aria-hidden="true">2.20.14.</strong> 14 - Secret 全类型 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/15-persistentvolume-reference.html"><strong aria-hidden="true">2.20.15.</strong> 15 - PersistentVolume YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/16-persistentvolumeclaim-reference.html"><strong aria-hidden="true">2.20.16.</strong> 16 - PersistentVolumeClaim YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/17-storageclass-volumesnapshot.html"><strong aria-hidden="true">2.20.17.</strong> 17 - StorageClass / VolumeSnapshot YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/18-csi-driver-resources.html"><strong aria-hidden="true">2.20.18.</strong> 18 - CSI 驱动资源 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/19-serviceaccount-token.html"><strong aria-hidden="true">2.20.19.</strong> 19 - ServiceAccount / Token 管理 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/20-rbac-role-rolebinding.html"><strong aria-hidden="true">2.20.20.</strong> 20 - Role / RoleBinding YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/21-rbac-clusterrole-clusterrolebinding.html"><strong aria-hidden="true">2.20.21.</strong> 21 - ClusterRole / ClusterRoleBinding YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/22-networkpolicy-reference.html"><strong aria-hidden="true">2.20.22.</strong> 22 - NetworkPolicy YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/23-pod-security-standards.html"><strong aria-hidden="true">2.20.23.</strong> 23 - Pod Security Standards (PSS/PSA) YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/24-admission-webhook-configuration.html"><strong aria-hidden="true">2.20.24.</strong> 24 - Admission Webhook 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/25-validatingadmissionpolicy.html"><strong aria-hidden="true">2.20.25.</strong> 25 - ValidatingAdmissionPolicy YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/26-priorityclass-runtimeclass.html"><strong aria-hidden="true">2.20.26.</strong> 26 - PriorityClass / RuntimeClass YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/27-hpa-autoscaling-v2.html"><strong aria-hidden="true">2.20.27.</strong> 27 - HorizontalPodAutoscaler v2 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/28-poddisruptionbudget-reference.html"><strong aria-hidden="true">2.20.28.</strong> 28 - PodDisruptionBudget YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/29-customresourcedefinition.html"><strong aria-hidden="true">2.20.29.</strong> 29 - CustomResourceDefinition (CRD) YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/30-apiservice-aggregation.html"><strong aria-hidden="true">2.20.30.</strong> 30 - APIService YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/31-api-priority-fairness.html"><strong aria-hidden="true">2.20.31.</strong> 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/32-lease-event-node.html"><strong aria-hidden="true">2.20.32.</strong> 32 - Lease / Event / Node YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/33-kubeadm-cluster-bootstrap.html"><strong aria-hidden="true">2.20.33.</strong> 33 - kubeadm 集群引导配置 YAML 参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/34-component-configuration.html"><strong aria-hidden="true">2.20.34.</strong> 34. Kubernetes 组件配置（Component Configuration）</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/35-advanced-pod-patterns.html"><strong aria-hidden="true">2.20.35.</strong> 35 - 高级 Pod 模式与调度策略 YAML 配置参考</a></li><li class="chapter-item "><a href="../domain-32-yaml-manifests/36-ecosystem-kustomize-helm-argocd.html"><strong aria-hidden="true">2.20.36.</strong> 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考</a></li></ol></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/index.html"><strong aria-hidden="true">2.21.</strong> Domain-33: Kubernetes Events 全域事件大全</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../domain-33-kubernetes-events/01-event-system-architecture.html"><strong aria-hidden="true">2.21.1.</strong> 01 - Kubernetes 事件系统架构与 API 参考</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/02-pod-container-lifecycle-events.html"><strong aria-hidden="true">2.21.2.</strong> 02 - Pod 与容器生命周期事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/03-image-pull-events.html"><strong aria-hidden="true">2.21.3.</strong> 03 - 镜像拉取事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/04-probe-health-check-events.html"><strong aria-hidden="true">2.21.4.</strong> 04 - 探针与健康检查事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/05-scheduling-preemption-events.html"><strong aria-hidden="true">2.21.5.</strong> 05 - 调度与抢占事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/06-node-lifecycle-condition-events.html"><strong aria-hidden="true">2.21.6.</strong> 06 - 节点生命周期与状态事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/07-deployment-replicaset-events.html"><strong aria-hidden="true">2.21.7.</strong> 07 - Deployment 与 ReplicaSet 控制器事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/08-statefulset-daemonset-events.html"><strong aria-hidden="true">2.21.8.</strong> 08 - StatefulSet 与 DaemonSet 控制器事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/09-job-cronjob-batch-events.html"><strong aria-hidden="true">2.21.9.</strong> 09 - Job 与 CronJob 批处理事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/10-service-networking-events.html"><strong aria-hidden="true">2.21.10.</strong> 10 - Service 与网络事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/11-storage-volume-events.html"><strong aria-hidden="true">2.21.11.</strong> 11 - 存储与卷事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/12-autoscaling-events.html"><strong aria-hidden="true">2.21.12.</strong> 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/13-security-admission-rbac-events.html"><strong aria-hidden="true">2.21.13.</strong> 13 - 安全、准入控制与 RBAC 事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/14-namespace-resource-gc-events.html"><strong aria-hidden="true">2.21.14.</strong> 14 - Namespace、资源管理与垃圾回收事件</a></li><li class="chapter-item "><a href="../domain-33-kubernetes-events/15-ecosystem-addon-events.html"><strong aria-hidden="true">2.21.15.</strong> 15 - 生态系统与插件事件</a></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><div><strong aria-hidden="true">3.</strong> 涓撻鍐呭 (Topics)</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../topic-cheat-sheet/go.html"><strong aria-hidden="true">3.1.</strong> Go 生产环境速查卡</a></li><li class="chapter-item "><a href="../topic-cheat-sheet/k8s.html"><strong aria-hidden="true">3.2.</strong> Kubernetes 生产环境速查卡</a></li><li class="chapter-item "><a href="../topic-cheat-sheet/linux.html"><strong aria-hidden="true">3.3.</strong> Linux 生产环境速查卡</a></li><li class="chapter-item "><a href="../topic-dictionary/01-operations-best-practices.html"><strong aria-hidden="true">3.4.</strong> 01 - Kubernetes 生产环境运维最佳实践字典</a></li><li class="chapter-item "><a href="../topic-dictionary/02-failure-patterns-analysis.html"><strong aria-hidden="true">3.5.</strong> 02 - Kubernetes 故障模式与根因分析字典</a></li><li class="chapter-item "><a href="../topic-dictionary/03-performance-tuning-expert.html"><strong aria-hidden="true">3.6.</strong> 03 - Kubernetes 性能调优专家指南</a></li><li class="chapter-item "><a href="../topic-dictionary/04-sre-maturity-model.html"><strong aria-hidden="true">3.7.</strong> 04 - SRE运维成熟度模型</a></li><li class="chapter-item "><a href="../topic-dictionary/05-concept-reference.html"><strong aria-hidden="true">3.8.</strong> Kubernetes 与 AI/ML 概念参考手册（完整恢复版）</a></li><li class="chapter-item "><a href="../topic-dictionary/06-cli-commands.html"><strong aria-hidden="true">3.9.</strong> Kubernetes & AI/ML 命令行清单 (Complete CLI Commands Reference)</a></li><li class="chapter-item "><a href="../topic-dictionary/07-tool-ecosystem.html"><strong aria-hidden="true">3.10.</strong> Kusheet 工具与开源项目 URL 汇总</a></li><li class="chapter-item "><a href="../topic-dictionary/08-ai-infra-specialist.html"><strong aria-hidden="true">3.11.</strong> 08 - AI/ML基础设施专业词典</a></li><li class="chapter-item "><a href="../topic-dictionary/09-cloud-native-security.html"><strong aria-hidden="true">3.12.</strong> 09 - 云原生安全专家指南</a></li><li class="chapter-item "><a href="../topic-dictionary/10-multi-cloud-operations.html"><strong aria-hidden="true">3.13.</strong> 10 - 多云混合云运维手册</a></li><li class="chapter-item "><a href="../topic-dictionary/11-enterprise-ops-practices.html"><strong aria-hidden="true">3.14.</strong> 企业级运维最佳实践</a></li><li class="chapter-item "><a href="../topic-dictionary/12-incident-management-runbooks.html"><strong aria-hidden="true">3.15.</strong> 12 - 生产事故管理与应急手册</a></li><li class="chapter-item "><a href="../topic-dictionary/13-capacity-planning-forecasting.html"><strong aria-hidden="true">3.16.</strong> 13 - 容量规划与资源预测</a></li><li class="chapter-item "><a href="../topic-dictionary/14-change-management-release.html"><strong aria-hidden="true">3.17.</strong> 14 - 变更管理与发布策略</a></li><li class="chapter-item "><a href="../topic-dictionary/15-sli-slo-sla-engineering.html"><strong aria-hidden="true">3.18.</strong> 15 - SLI/SLO/SLA工程实践</a></li><li class="chapter-item "><a href="../topic-dictionary/16-production-troubleshooting-playbook.html"><strong aria-hidden="true">3.19.</strong> 16 - 生产环境故障排查剧本</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-architecture-fundamentals-presentation.html"><strong aria-hidden="true">3.20.</strong> Kubernetes 架构与基础概念全栈培训</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-coredns-presentation.html"><strong aria-hidden="true">3.21.</strong> Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-ingress-presentation.html"><strong aria-hidden="true">3.22.</strong> Kubernetes Ingress 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-observability-presentation.html"><strong aria-hidden="true">3.23.</strong> Kubernetes 可观测性全栈培训 (监控、日志、追踪)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-scheduling-presentation.html"><strong aria-hidden="true">3.24.</strong> Kubernetes 调度与编排策略全栈培训</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-security-rbac-presentation.html"><strong aria-hidden="true">3.25.</strong> Kubernetes 安全与 RBAC 权限管理全栈培训</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-service-presentation.html"><strong aria-hidden="true">3.26.</strong> Kubernetes Service 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-storage-presentation.html"><strong aria-hidden="true">3.27.</strong> Kubernetes 存储体系全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-terway-presentation.html"><strong aria-hidden="true">3.28.</strong> Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-troubleshooting-methodology-presentation.html"><strong aria-hidden="true">3.29.</strong> Kubernetes 故障排查方法论全栈培训</a></li><li class="chapter-item "><a href="../topic-presentations/kubernetes-workload-presentation.html"><strong aria-hidden="true">3.30.</strong> Kubernetes Workload 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-presentations/presentation-template.html"><strong aria-hidden="true">3.31.</strong> Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家)</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/index.html"><strong aria-hidden="true">3.32.</strong> Kubernetes 结构化故障排查知识库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.html"><strong aria-hidden="true">3.32.1.</strong> API Server 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.html"><strong aria-hidden="true">3.32.2.</strong> etcd 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.html"><strong aria-hidden="true">3.32.3.</strong> Scheduler 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.html"><strong aria-hidden="true">3.32.4.</strong> Controller Manager 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.html"><strong aria-hidden="true">3.32.5.</strong> Webhook 与准入控制故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.html"><strong aria-hidden="true">3.32.6.</strong> API 优先级与公平性 (APF) 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.html"><strong aria-hidden="true">3.32.7.</strong> 控制平面安全加固故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.html"><strong aria-hidden="true">3.32.8.</strong> 控制平面性能瓶颈分析与优化指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.html"><strong aria-hidden="true">3.32.9.</strong> 控制平面高可用故障处理指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.html"><strong aria-hidden="true">3.32.10.</strong> 控制平面升级迁移问题处理指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.html"><strong aria-hidden="true">3.32.11.</strong> kubelet 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.html"><strong aria-hidden="true">3.32.12.</strong> kube-proxy 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.html"><strong aria-hidden="true">3.32.13.</strong> 容器运行时故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.html"><strong aria-hidden="true">3.32.14.</strong> 节点故障专项排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.html"><strong aria-hidden="true">3.32.15.</strong> 镜像与镜像仓库故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.html"><strong aria-hidden="true">3.32.16.</strong> GPU 与设备插件故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.html"><strong aria-hidden="true">3.32.17.</strong> CNI 网络插件故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.html"><strong aria-hidden="true">3.32.18.</strong> CoreDNS/DNS 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.html"><strong aria-hidden="true">3.32.19.</strong> Service 与 Ingress 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.html"><strong aria-hidden="true">3.32.20.</strong> NetworkPolicy 深度排查与零信任安全治理指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.html"><strong aria-hidden="true">3.32.21.</strong> Service Mesh (Istio) 深度排查与性能调优指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.html"><strong aria-hidden="true">3.32.22.</strong> Gateway API 深度排查与下一代流量治理指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.html"><strong aria-hidden="true">3.32.23.</strong> PV/PVC 存储深度排查与持久化治理指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.html"><strong aria-hidden="true">3.32.24.</strong> CSI 存储驱动深度排查与架构优化指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.html"><strong aria-hidden="true">3.32.25.</strong> Pod 故障排查与运行机制深度指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.html"><strong aria-hidden="true">3.32.26.</strong> Deployment 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.html"><strong aria-hidden="true">3.32.27.</strong> StatefulSet 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.html"><strong aria-hidden="true">3.32.28.</strong> DaemonSet 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.html"><strong aria-hidden="true">3.32.29.</strong> Job 与 CronJob 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.html"><strong aria-hidden="true">3.32.30.</strong> ConfigMap 与 Secret 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.html"><strong aria-hidden="true">3.32.31.</strong> RBAC 与认证故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.html"><strong aria-hidden="true">3.32.32.</strong> Kubernetes 证书故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.html"><strong aria-hidden="true">3.32.33.</strong> Pod 安全与 SecurityContext 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.html"><strong aria-hidden="true">3.32.34.</strong> 审计日志故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.html"><strong aria-hidden="true">3.32.35.</strong> 资源与调度故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.html"><strong aria-hidden="true">3.32.36.</strong> HPA 与 VPA 自动扩缩容故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.html"><strong aria-hidden="true">3.32.37.</strong> Cluster Autoscaler 节点自动扩缩容故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.html"><strong aria-hidden="true">3.32.38.</strong> PodDisruptionBudget (PDB) 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.html"><strong aria-hidden="true">3.32.39.</strong> 集群运维与升级故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.html"><strong aria-hidden="true">3.32.40.</strong> 日志与监控故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.html"><strong aria-hidden="true">3.32.41.</strong> Helm 部署故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.html"><strong aria-hidden="true">3.32.42.</strong> 集群高可用与灾备故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.html"><strong aria-hidden="true">3.32.43.</strong> CRD 与 Operator 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.html"><strong aria-hidden="true">3.32.44.</strong> Kustomize 部署故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.html"><strong aria-hidden="true">3.32.45.</strong> 云厂商集成故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.html"><strong aria-hidden="true">3.32.46.</strong> AI/ML 工作负载故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.html"><strong aria-hidden="true">3.32.47.</strong> GitOps/DevOps 故障排查指南</a></li><li class="chapter-item "><a href="../topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.html"><strong aria-hidden="true">3.32.48.</strong> 可观测性故障排查指南</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="linux-命令大全参考"><a class="header" href="#linux-命令大全参考">Linux 命令大全参考</a></h1>
+<h2 id="概述"><a class="header" href="#概述">概述</a></h2>
+<p>本文档提供了 Linux 系统完整的命令参考，包括命令名称、命令用途、功能清单、注意事项以及安全生产风险提示。</p>
+<h2 id="系统信息命令"><a class="header" href="#系统信息命令">系统信息命令</a></h2>
+<h3 id="uname"><a class="header" href="#uname">uname</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示系统信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示内核名称 (-s)</li>
+<li>显示内核版本 (-r)</li>
+<li>显示硬件架构 (-m)</li>
+<li>显示所有信息 (-a)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要基本系统访问权限</li>
+<li>不涉及敏感信息</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>输出可能暴露系统版本信息</li>
+<li>避免在不安全环境中显示详细系统信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsb_release"><a class="header" href="#lsb_release">lsb_release</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示发行版信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示发行版描述</li>
+<li>显示发行版代号</li>
+<li>显示版本号</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>某些发行版可能不预装此命令</li>
+<li>需要适当权限访问系统文件</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露系统版本信息给攻击者</li>
+<li>有助于针对特定漏洞进行攻击</li>
+</ul>
+</li>
+</ul>
+<h3 id="uptime"><a class="header" href="#uptime">uptime</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示系统运行时间</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示系统运行时长</li>
+<li>显示当前时间</li>
+<li>显示系统负载</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>负载信息反映系统压力</li>
+<li>高负载可能表示性能问题</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>负载信息可用于系统分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="hostname"><a class="header" href="#hostname">hostname</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示或设置系统主机名</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前主机名</li>
+<li>临时修改主机名</li>
+<li>永久修改主机名</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>临时修改重启后失效</li>
+<li>永久修改需编辑配置文件</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>主机名变更可能影响网络服务</li>
+<li>确保 DNS 记录同步更新</li>
+</ul>
+</li>
+</ul>
+<h3 id="whoamiid"><a class="header" href="#whoamiid">whoami/id</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示用户身份信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前用户名</li>
+<li>显示用户ID和组ID</li>
+<li>显示所属组信息</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于权限验证</li>
+<li>检查当前执行权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>用于权限审计</li>
+</ul>
+</li>
+</ul>
+<h3 id="wwho"><a class="header" href="#wwho">w/who</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示登录用户信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前登录用户</li>
+<li>显示用户登录时间</li>
+<li>显示用户活动状态</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>w 命令显示更详细信息</li>
+<li>who 命令显示基本信息</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露在线用户信息</li>
+<li>可用于安全审计</li>
+</ul>
+</li>
+</ul>
+<h3 id="last"><a class="header" href="#last">last</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示用户登录历史</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示最近登录记录</li>
+<li>显示登录时间和来源</li>
+<li>显示系统重启记录</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>读取 /var/log/wtmp 文件</li>
+<li>用于安全审计</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露登录历史信息</li>
+<li>可识别异常登录行为</li>
+</ul>
+</li>
+</ul>
+<h3 id="date"><a class="header" href="#date">date</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示或设置系统日期时间</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前系统时间</li>
+<li>格式化时间输出</li>
+<li>设置系统时间（需要root权限）</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>时间同步对系统很重要</li>
+<li>建议使用 NTP 服务同步时间</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>时间修改可能影响日志时间戳</li>
+<li>可能影响基于时间的安全策略</li>
+</ul>
+</li>
+</ul>
+<h3 id="cal"><a class="header" href="#cal">cal</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示日历</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前月日历</li>
+<li>显示指定月份日历</li>
+<li>显示全年日历</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>主要用于查看日期信息</li>
+<li>简单实用的日期工具</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无显著安全风险</li>
+<li>仅用于日期查询</li>
+</ul>
+</li>
+</ul>
+<h3 id="timedatectl"><a class="header" href="#timedatectl">timedatectl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 控制系统时间和日期</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示时间状态信息</li>
+<li>设置系统时间</li>
+<li>配置时区</li>
+<li>管理 NTP 同步</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代 Linux 系统推荐使用</li>
+<li>替代传统的 date 命令</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>时间配置错误可能影响系统日志</li>
+<li>确保时区设置正确</li>
+</ul>
+</li>
+</ul>
+<h3 id="hwclock"><a class="header" href="#hwclock">hwclock</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 硬件时钟管理</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示硬件时钟时间</li>
+<li>同步系统时间到硬件时钟</li>
+<li>同步硬件时钟到系统时间</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>系统启动时使用硬件时钟</li>
+<li>需要 root 权限操作</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>硬件时钟错误影响系统启动</li>
+<li>时间同步问题可能影响服务</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件系统命令"><a class="header" href="#文件系统命令">文件系统命令</a></h2>
+<h3 id="ls"><a class="header" href="#ls">ls</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 列出目录内容</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件和目录列表</li>
+<li>显示权限信息 (-l)</li>
+<li>显示隐藏文件 (-a)</li>
+<li>递归显示 (-R)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>使用 <code>-h</code> 参数人性化显示文件大小</li>
+<li>避免在大目录中使用递归选项</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露目录结构和文件名</li>
+<li>某些文件名可能包含敏感信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="cp"><a class="header" href="#cp">cp</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 复制文件和目录</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>复制文件</li>
+<li>复制目录 (-r)</li>
+<li>保持属性 (-p)</li>
+<li>交互式复制 (-i)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>复制大文件时注意磁盘空间</li>
+<li>使用 <code>-i</code> 参数避免意外覆盖</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>误复制敏感文件到不安全位置</li>
+<li>可能导致权限问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="mv"><a class="header" href="#mv">mv</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 移动或重命名文件</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>移动文件</li>
+<li>重命名文件</li>
+<li>交互式移动 (-i)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>重命名操作会覆盖同名文件</li>
+<li>跨文件系统移动相当于复制后删除</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>误移动或重命名关键系统文件</li>
+<li>可能破坏系统功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="rm"><a class="header" href="#rm">rm</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 删除文件和目录</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>删除文件</li>
+<li>递归删除目录 (-r)</li>
+<li>交互式删除 (-i)</li>
+<li>强制删除 (-f)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>删除操作无法恢复</li>
+<li>使用 <code>-i</code> 参数增加安全性</li>
+<li>避免使用 <code>rm -rf /</code></li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>误删除系统关键文件可能导致系统崩溃</li>
+<li>使用通配符时格外小心</li>
+<li><code>-f</code> 参数会强制删除，跳过确认</li>
+</ul>
+</li>
+</ul>
+<h3 id="find"><a class="header" href="#find">find</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 搜索文件和目录</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>按名称搜索</li>
+<li>按类型搜索</li>
+<li>按大小搜索</li>
+<li>按修改时间搜索</li>
+<li>执行操作 (-exec)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>在大目录中搜索可能消耗大量资源</li>
+<li>使用适当的搜索条件缩小范围</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li><code>-exec</code> 参数可能执行危险操作</li>
+<li>搜索结果可能暴露敏感文件位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="mkdir"><a class="header" href="#mkdir">mkdir</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 创建目录</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建单个目录</li>
+<li>递归创建多层目录 (-p)</li>
+<li>设置目录权限 (-m)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>使用 <code>-p</code> 参数避免父目录不存在错误</li>
+<li>合理设置目录权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>创建敏感路径可能暴露系统结构</li>
+<li>权限设置不当可能造成安全漏洞</li>
+</ul>
+</li>
+</ul>
+<h3 id="rmdir"><a class="header" href="#rmdir">rmdir</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 删除空目录</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>删除空目录</li>
+<li>递归删除空目录树 (-p)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>只能删除空目录</li>
+<li>非空目录需使用 rm -r</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>误删重要系统目录</li>
+<li>影响目录结构完整性</li>
+</ul>
+</li>
+</ul>
+<h3 id="touch"><a class="header" href="#touch">touch</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 创建空文件或更新文件时间戳</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建新文件</li>
+<li>更新文件访问时间</li>
+<li>更新文件修改时间</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>不会覆盖已有文件内容</li>
+<li>可用于测试文件权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>在敏感目录创建文件可能暴露信息</li>
+<li>时间戳修改可能影响日志分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="ln"><a class="header" href="#ln">ln</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 创建链接</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建硬链接</li>
+<li>创建软链接 (-s)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>硬链接不能跨文件系统</li>
+<li>软链接可以指向目录</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>循环链接可能导致系统问题</li>
+<li>恶意链接可能绕过安全控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="stat"><a class="header" href="#stat">stat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示文件详细状态信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件权限和所有权</li>
+<li>显示文件时间戳</li>
+<li>显示文件大小和inode信息</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>提供比 ls 更详细的文件信息</li>
+<li>用于文件系统分析</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露文件详细属性信息</li>
+<li>可用于权限分析和攻击规划</li>
+</ul>
+</li>
+</ul>
+<h3 id="file"><a class="header" href="#file">file</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 识别文件类型</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>检测文件实际类型</li>
+<li>识别二进制文件格式</li>
+<li>检测文本文件编码</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>不依赖文件扩展名判断</li>
+<li>可检测文件是否被篡改</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可识别隐藏的恶意文件</li>
+<li>用于安全扫描和病毒检测</li>
+</ul>
+</li>
+</ul>
+<h3 id="headtail"><a class="header" href="#headtail">head/tail</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示文件开头/结尾内容</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>head: 显示文件前几行（默认10行）</li>
+<li>tail: 显示文件后几行（默认10行）</li>
+<li>支持指定行数 (-n)</li>
+<li>tail 支持实时监控 (-f)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>快速查看文件内容</li>
+<li>tail -f 常用于日志监控</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露文件敏感内容</li>
+<li>实时监控可能影响性能</li>
+</ul>
+</li>
+</ul>
+<h3 id="cat"><a class="header" href="#cat">cat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 连接并显示文件内容</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件内容</li>
+<li>连接多个文件</li>
+<li>创建新文件</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>适用于较小文件</li>
+<li>大文件建议使用 less</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露文件完整内容</li>
+<li>确保文件访问权限控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="lessmore"><a class="header" href="#lessmore">less/more</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 分页显示文件内容</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>less: 支持向前向后翻页</li>
+<li>more: 只支持向前翻页</li>
+<li>支持搜索功能</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>适用于大文件浏览</li>
+<li>less 功能更丰富</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露文件敏感信息</li>
+<li>确保文件访问授权</li>
+</ul>
+</li>
+</ul>
+<h3 id="whichwhereis"><a class="header" href="#whichwhereis">which/whereis</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 查找命令位置</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>which: 查找可执行文件路径</li>
+<li>whereis: 查找二进制、源码和手册页</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>which 只查找 PATH 中的命令</li>
+<li>whereis 查找范围更广</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露系统命令结构</li>
+<li>用于安全审计和入侵检测</li>
+</ul>
+</li>
+</ul>
+<h3 id="locatefind"><a class="header" href="#locatefind">locate/find</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文件查找工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>locate: 基于数据库快速查找</li>
+<li>find: 实时遍历文件系统查找</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>locate 速度快但可能不是最新</li>
+<li>find 功能强大但速度较慢</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能发现隐藏的敏感文件</li>
+<li>用于安全扫描和取证分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="xargs"><a class="header" href="#xargs">xargs</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 构造参数列表并执行命令</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>将标准输入转换为命令参数</li>
+<li>支持批量处理</li>
+<li>可控制并发执行</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>避免参数过长问题</li>
+<li>注意命令注入风险</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能执行危险的批量操作</li>
+<li>确保输入数据安全性</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程管理命令"><a class="header" href="#进程管理命令">进程管理命令</a></h2>
+<h3 id="ps"><a class="header" href="#ps">ps</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示进程状态</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前终端进程</li>
+<li>显示所有进程 (-e)</li>
+<li>详细信息 (-f)</li>
+<li>树状显示 (-efH)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>结合 grep 过滤特定进程</li>
+<li>定期监控关键进程状态</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能显示进程命令行参数（含敏感信息）</li>
+<li>用于识别异常进程</li>
+</ul>
+</li>
+</ul>
+<h3 id="top"><a class="header" href="#top">top</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 实时显示进程信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示CPU使用率</li>
+<li>显示内存使用情况</li>
+<li>显示运行进程</li>
+<li>动态排序</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>按 'q' 退出</li>
+<li>可按不同列排序</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能显示进程详情和命令行参数</li>
+<li>用于识别资源滥用进程</li>
+</ul>
+</li>
+</ul>
+<h3 id="kill"><a class="header" href="#kill">kill</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 发送信号给进程</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>终止进程 (TERM)</li>
+<li>强制终止 (KILL)</li>
+<li>暂停进程 (STOP)</li>
+<li>恢复进程 (CONT)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>优先使用 SIGTERM 让进程优雅退出</li>
+<li>仅在必要时使用 SIGKILL</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>终止关键系统进程可能导致系统不稳定</li>
+<li>强制终止可能导致数据丢失</li>
+</ul>
+</li>
+</ul>
+<h3 id="pkill"><a class="header" href="#pkill">pkill</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 按名称发送信号给进程</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>按进程名终止进程</li>
+<li>支持模式匹配</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>精确指定进程名避免误杀</li>
+<li>谨慎使用模糊匹配</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能误杀多个同名进程</li>
+<li>影响业务连续性</li>
+</ul>
+</li>
+</ul>
+<h3 id="htop"><a class="header" href="#htop">htop</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 交互式进程查看器</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>实时显示进程信息</li>
+<li>支持进程排序和筛选</li>
+<li>可直接操作进程</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>比 top 更友好的用户界面</li>
+<li>需要额外安装</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露详细的进程信息</li>
+<li>交互操作可能影响系统稳定性</li>
+</ul>
+</li>
+</ul>
+<h3 id="nicerenice"><a class="header" href="#nicerenice">nice/renice</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 设置进程优先级</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>启动时设置进程优先级 (nice)</li>
+<li>动态调整运行中进程优先级 (renice)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>优先级范围 -20 到 19</li>
+<li>需要适当权限调整其他用户进程</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>不当的优先级设置可能影响系统性能</li>
+<li>高优先级进程可能垄断系统资源</li>
+</ul>
+</li>
+</ul>
+<h3 id="nohup"><a class="header" href="#nohup">nohup</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 后台运行命令忽略挂起信号</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>使进程在终端关闭后继续运行</li>
+<li>将输出重定向到 nohup.out</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>通常与 &amp; 符号配合使用</li>
+<li>注意输出文件的磁盘空间</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>后台进程难以监控</li>
+<li>可能持续消耗系统资源</li>
+</ul>
+</li>
+</ul>
+<h3 id="screentmux"><a class="header" href="#screentmux">screen/tmux</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 终端复用工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建多个终端会话</li>
+<li>会话分离和重新连接</li>
+<li>窗口分割和管理</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>screen 更古老，tmux 功能更丰富</li>
+<li>用于长时间运行的任务</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>会话可能包含敏感操作</li>
+<li>确保会话访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="jobsbgfg"><a class="header" href="#jobsbgfg">jobs/bg/fg</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 作业控制命令</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看后台作业 (jobs)</li>
+<li>将作业放到后台运行 (bg)</li>
+<li>将作业调到前台运行 (fg)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>仅在当前 shell 会话中有效</li>
+<li>Ctrl+Z 可暂停前台进程</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>后台作业可能消耗资源</li>
+<li>恢复前台可能影响当前工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="ps-aux"><a class="header" href="#ps-aux">ps aux</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示详细进程信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示所有用户的所有进程</li>
+<li>显示进程详细资源使用</li>
+<li>显示进程启动时间</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>输出信息非常详细</li>
+<li>常用于系统监控和故障排查</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露进程详细信息</li>
+<li>用于安全审计和入侵检测</li>
+</ul>
+</li>
+</ul>
+<h3 id="killallpkill"><a class="header" href="#killallpkill">killall/pkill</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 按名称终止进程</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>killall: 按进程名终止所有匹配进程</li>
+<li>pkill: 支持模式匹配终止进程</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>可能同时终止多个进程</li>
+<li>使用前确认进程名准确性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能误杀关键系统进程</li>
+<li>影响系统稳定性和服务连续性</li>
+</ul>
+</li>
+</ul>
+<h3 id="fuser"><a class="header" href="#fuser">fuser</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 查找使用文件或端口的进程</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查找使用特定文件的进程</li>
+<li>查找监听特定端口的进程</li>
+<li>支持强制终止进程</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于资源冲突排查</li>
+<li>可直接终止占用进程</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>强制终止可能影响服务</li>
+<li>确保操作目标正确性</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsof"><a class="header" href="#lsof">lsof</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 列出打开的文件</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示进程打开的文件</li>
+<li>显示网络连接信息</li>
+<li>显示设备使用情况</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 root 权限查看完整信息</li>
+<li>输出信息量大需过滤</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露进程和文件关联信息</li>
+<li>可用于安全审计和攻击分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="straceltrace"><a class="header" href="#straceltrace">strace/ltrace</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统调用跟踪工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>strace: 跟踪系统调用</li>
+<li>ltrace: 跟踪库函数调用</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>强大的调试和分析工具</li>
+<li>可能影响程序性能</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露程序内部逻辑</li>
+<li>用于逆向工程和安全分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="perf"><a class="header" href="#perf">perf</a></h3>
+<ul>
+<li><strong>命令用途</strong>: Linux 性能分析工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>CPU 性能分析</li>
+<li>缓存命中率分析</li>
+<li>函数调用热点分析</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 perf_events 支持</li>
+<li>功能强大但使用复杂</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>性能监控可能暴露系统瓶颈</li>
+<li>用于系统优化和攻击规划</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络管理命令"><a class="header" href="#网络管理命令">网络管理命令</a></h2>
+<h3 id="ping"><a class="header" href="#ping">ping</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 测试网络连通性</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>测试主机可达性</li>
+<li>测试响应时间</li>
+<li>持续测试 (-c)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>某些网络可能禁用 ICMP</li>
+<li>过度使用可能被视为攻击</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可用于网络探测</li>
+<li>滥用可能导致网络拥塞</li>
+</ul>
+</li>
+</ul>
+<h3 id="netstat"><a class="header" href="#netstat">netstat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示网络连接和统计</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示 TCP/UDP 连接</li>
+<li>显示监听端口</li>
+<li>显示路由表</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>已被 ss 命令取代</li>
+<li>需要管理员权限查看所有连接</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>显示开放端口和服务信息</li>
+<li>用于网络攻击前期侦察</li>
+</ul>
+</li>
+</ul>
+<h3 id="ss"><a class="header" href="#ss">ss</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示套接字统计</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示网络连接</li>
+<li>显示监听端口</li>
+<li>过滤特定协议</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>更现代的 netstat 替代品</li>
+<li>性能更好</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露网络服务信息</li>
+<li>用于识别潜在攻击目标</li>
+</ul>
+</li>
+</ul>
+<h3 id="ifconfig"><a class="header" href="#ifconfig">ifconfig</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 配置网络接口</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示网络接口信息</li>
+<li>配置 IP 地址</li>
+<li>启用/禁用接口</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代系统推荐使用 ip 命令</li>
+<li>需要管理员权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误配置可能导致网络中断</li>
+<li>可能改变网络安全配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="curl"><a class="header" href="#curl">curl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 传输数据工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>HTTP GET/POST 请求</li>
+<li>下载文件</li>
+<li>测试 API 接口</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>验证 SSL 证书</li>
+<li>避免从不可信源下载</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能下载恶意内容</li>
+<li>泄露敏感 URL 和参数</li>
+</ul>
+</li>
+</ul>
+<h3 id="ip"><a class="header" href="#ip">ip</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 现代网络配置工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示和配置网络接口</li>
+<li>管理路由表</li>
+<li>配置地址和邻居</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>逐步替代 ifconfig 和 route</li>
+<li>功能更强大且统一</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误配置可能导致网络中断</li>
+<li>确保配置变更经过测试</li>
+</ul>
+</li>
+</ul>
+<h3 id="traceroutemtr"><a class="header" href="#traceroutemtr">traceroute/mtr</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络路径追踪工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示数据包路由路径</li>
+<li>显示每跳延迟时间</li>
+<li>mtr 提供实时追踪</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>可能被防火墙阻止</li>
+<li>用于网络故障诊断</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可暴露网络拓扑结构</li>
+<li>用于网络侦察和攻击规划</li>
+</ul>
+</li>
+</ul>
+<h3 id="nslookupdig"><a class="header" href="#nslookupdig">nslookup/dig</a></h3>
+<ul>
+<li><strong>命令用途</strong>: DNS 查询工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查询域名解析记录</li>
+<li>显示 DNS 服务器信息</li>
+<li>dig 提供更详细的输出</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>dig 是更现代的 DNS 工具</li>
+<li>可用于 DNS 故障排查</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可获取内部 DNS 信息</li>
+<li>用于域名信息收集</li>
+</ul>
+</li>
+</ul>
+<h3 id="iptablesnftables"><a class="header" href="#iptablesnftables">iptables/nftables</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 防火墙配置工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>配置网络访问控制规则</li>
+<li>设置数据包过滤策略</li>
+<li>管理网络地址转换</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>iptables 逐渐被 nftables 替代</li>
+<li>规则配置需谨慎测试</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误规则可能阻断合法流量</li>
+<li>配置不当可能造成安全漏洞</li>
+</ul>
+</li>
+</ul>
+<h3 id="scprsync"><a class="header" href="#scprsync">scp/rsync</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 安全文件传输工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>scp: 基于 SSH 的文件复制</li>
+<li>rsync: 增量同步和备份工具</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>scp 简单但功能有限</li>
+<li>rsync 支持增量同步和压缩</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>传输过程可能暴露敏感数据</li>
+<li>确保使用加密传输和访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="ssh"><a class="header" href="#ssh">ssh</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 安全远程登录工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>加密远程 shell 访问</li>
+<li>端口转发和隧道</li>
+<li>密钥认证支持</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>使用密钥认证比密码更安全</li>
+<li>配置适当的访问控制</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>SSH 服务可能成为攻击目标</li>
+<li>确保使用最新版本和安全配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="telnetnc-netcat"><a class="header" href="#telnetnc-netcat">telnet/nc (netcat)</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络连接测试工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>telnet: 测试 TCP 端口连通性</li>
+<li>nc: 多功能网络工具，支持端口扫描</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>telnet 传输不加密，已被 SSH 替代</li>
+<li>nc 功能强大但需谨慎使用</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可用于端口扫描和网络探测</li>
+<li>可能被恶意用于建立后门连接</li>
+</ul>
+</li>
+</ul>
+<h3 id="tcpdump"><a class="header" href="#tcpdump">tcpdump</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络数据包捕获工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>实时捕获网络数据包</li>
+<li>支持多种过滤条件</li>
+<li>可保存抓包文件</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 root 权限</li>
+<li>输出信息量大需过滤</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可捕获敏感网络数据</li>
+<li>确保抓包文件安全存储</li>
+</ul>
+</li>
+</ul>
+<h3 id="wiresharktshark"><a class="header" href="#wiresharktshark">wireshark/tshark</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络协议分析工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>wireshark: 图形化协议分析</li>
+<li>tshark: 命令行协议分析</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>功能强大的网络分析工具</li>
+<li>需要专业知识使用</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可深度分析网络通信</li>
+<li>可能暴露敏感协议信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="nmap"><a class="header" href="#nmap">nmap</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络探测和安全审计工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>端口扫描和服务识别</li>
+<li>操作系统指纹识别</li>
+<li>漏洞检测</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>强大的网络安全工具</li>
+<li>使用需合法授权</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可用于网络侦察和攻击规划</li>
+<li>确保使用符合法律法规</li>
+</ul>
+</li>
+</ul>
+<h3 id="openssl"><a class="header" href="#openssl">openssl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: OpenSSL 密码学工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>生成密钥和证书</li>
+<li>加密解密文件</li>
+<li>SSL/TLS 连接测试</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>功能复杂的密码学工具</li>
+<li>需要密码学知识背景</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>密钥管理不当可能造成安全风险</li>
+<li>确保密钥和证书安全存储</li>
+</ul>
+</li>
+</ul>
+<h3 id="gpg"><a class="header" href="#gpg">gpg</a></h3>
+<ul>
+<li><strong>命令用途</strong>: GnuPG 加密工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>文件加密和签名</li>
+<li>密钥管理</li>
+<li>数字签名验证</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>非对称加密工具</li>
+<li>需要妥善保管私钥</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>私钥泄露可能造成严重后果</li>
+<li>确保密钥管理安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="route"><a class="header" href="#route">route</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示和操作路由表</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前路由表</li>
+<li>添加静态路由</li>
+<li>删除路由条目</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代系统推荐使用 ip route</li>
+<li>路由配置影响网络连通性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误路由配置可能导致网络中断</li>
+<li>可用于网络攻击和流量劫持</li>
+</ul>
+</li>
+</ul>
+<h3 id="arp"><a class="header" href="#arp">arp</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 地址解析协议管理</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示 ARP 缓存表</li>
+<li>添加静态 ARP 条目</li>
+<li>清除 ARP 缓存</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于局域网地址解析</li>
+<li>ARP 欺骗是常见攻击手段</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>ARP 缓存可能被恶意篡改</li>
+<li>可用于中间人攻击</li>
+</ul>
+</li>
+</ul>
+<h3 id="ethtool"><a class="header" href="#ethtool">ethtool</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络接口高级配置工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看网卡详细信息</li>
+<li>配置网卡参数</li>
+<li>诊断网络硬件问题</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 root 权限</li>
+<li>可影响网络性能</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>网卡配置错误可能影响网络连接</li>
+<li>可用于网络性能分析和攻击</li>
+</ul>
+</li>
+</ul>
+<h3 id="sysctl"><a class="header" href="#sysctl">sysctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 内核参数配置工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看内核运行时参数</li>
+<li>修改内核参数配置</li>
+<li>网络和安全参数调优</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>修改需谨慎测试</li>
+<li>临时修改重启后失效</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>内核参数配置错误可能影响系统稳定性</li>
+<li>安全相关参数配置不当可能造成漏洞</li>
+</ul>
+</li>
+</ul>
+<h3 id="ulimit"><a class="header" href="#ulimit">ulimit</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 用户资源限制管理</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看当前资源限制</li>
+<li>设置进程资源上限</li>
+<li>配置文件描述符、内存等限制</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>影响用户进程资源使用</li>
+<li>可在 shell 中临时设置</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>资源限制过严可能影响服务</li>
+<li>配置不当可能被绕过</li>
+</ul>
+</li>
+</ul>
+<h3 id="chattrlsattr"><a class="header" href="#chattrlsattr">chattr/lsattr</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文件属性管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>chattr: 设置文件特殊属性</li>
+<li>lsattr: 查看文件属性</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>只在 ext2/3/4 文件系统有效</li>
+<li>可设置不可删除、不可修改等属性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>属性设置错误可能影响文件管理</li>
+<li>可用于文件保护和攻击防护</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户和权限管理命令"><a class="header" href="#用户和权限管理命令">用户和权限管理命令</a></h2>
+<h3 id="useradduserdelusermod"><a class="header" href="#useradduserdelusermod">useradd/userdel/usermod</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 管理用户账户</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>添加用户 (useradd)</li>
+<li>删除用户 (userdel)</li>
+<li>修改用户 (usermod)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>设置强密码策略</li>
+<li>限制不必要的权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>创建高权限账户存在安全风险</li>
+<li>删除用户时需备份重要数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="passwd"><a class="header" href="#passwd">passwd</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 修改用户密码</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>修改当前用户密码</li>
+<li>修改其他用户密码（root）</li>
+<li>设置密码策略</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>使用强密码</li>
+<li>定期更换密码</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>密码强度不足易受攻击</li>
+<li>root 密码泄露影响整个系统</li>
+</ul>
+</li>
+</ul>
+<h3 id="chmod"><a class="header" href="#chmod">chmod</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 修改文件权限</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>设置读写执行权限</li>
+<li>使用数字模式</li>
+<li>递归设置 (-R)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>谨慎设置可执行权限</li>
+<li>避免过度宽松的权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>权限设置不当可能导致安全漏洞</li>
+<li>可执行文件权限可能被利用</li>
+</ul>
+</li>
+</ul>
+<h3 id="chown"><a class="header" href="#chown">chown</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 修改文件所有者</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>更改文件属主</li>
+<li>更改文件组</li>
+<li>递归更改 (-R)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要适当权限</li>
+<li>影响文件访问控制</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误的所有权设置可能影响系统安全</li>
+<li>可能绕过访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="groupaddgroupdelgroupmod"><a class="header" href="#groupaddgroupdelgroupmod">groupadd/groupdel/groupmod</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 管理用户组</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>添加用户组 (groupadd)</li>
+<li>删除用户组 (groupdel)</li>
+<li>修改用户组 (groupmod)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>管理组权限和访问控制</li>
+<li>确保组配置一致性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误的组配置可能影响权限控制</li>
+<li>删除重要组可能影响系统功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="usermod"><a class="header" href="#usermod">usermod</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 修改用户账户属性</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>修改用户主目录</li>
+<li>修改用户登录shell</li>
+<li>添加/移除用户组成员</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>可动态修改运行中用户的属性</li>
+<li>影响用户当前会话</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>修改关键用户属性可能影响系统安全</li>
+<li>确保变更经过适当审批</li>
+</ul>
+</li>
+</ul>
+<h3 id="susudo"><a class="header" href="#susudo">su/sudo</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 切换用户身份</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>su: 切换到其他用户身份</li>
+<li>sudo: 以管理员权限执行命令</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>su 需要知道目标用户密码</li>
+<li>sudo 基于配置文件控制权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>权限提升可能绕过安全控制</li>
+<li>确保 sudo 配置严格限制</li>
+</ul>
+</li>
+</ul>
+<h3 id="visudo"><a class="header" href="#visudo">visudo</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 安全编辑 sudo 配置文件</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>编辑 /etc/sudoers 文件</li>
+<li>语法检查防止配置错误</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>错误的 sudoers 配置可能导致系统锁定</li>
+<li>使用 visudo 确保配置正确性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>sudoers 配置错误可能造成严重安全问题</li>
+<li>权限配置不当可能被恶意利用</li>
+</ul>
+</li>
+</ul>
+<h3 id="chage"><a class="header" href="#chage">chage</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 管理用户密码有效期</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>设置密码过期时间</li>
+<li>设置账号锁定策略</li>
+<li>管理密码修改历史</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于强化密码安全策略</li>
+<li>定期审查密码策略有效性</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>过严的密码策略可能影响用户体验</li>
+<li>确保策略平衡安全性和可用性</li>
+</ul>
+</li>
+</ul>
+<h3 id="crontab"><a class="header" href="#crontab">crontab</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 定时任务管理</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建和编辑定时任务</li>
+<li>查看当前用户的定时任务</li>
+<li>管理系统级定时任务</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>时间格式需严格遵循</li>
+<li>确保定时任务脚本安全</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>定时任务可能执行危险操作</li>
+<li>确保任务脚本来源可靠</li>
+</ul>
+</li>
+</ul>
+<h3 id="atbatch"><a class="header" href="#atbatch">at/batch</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 一次性任务调度</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>at: 在指定时间执行一次任务</li>
+<li>batch: 在系统负载低时执行任务</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>适用于非周期性任务</li>
+<li>需要 atd 服务运行</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能执行延迟的危险操作</li>
+<li>确保任务内容安全性</li>
+</ul>
+</li>
+</ul>
+<h3 id="systemctl"><a class="header" href="#systemctl">systemctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统服务管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>启动、停止、重启服务</li>
+<li>查看服务状态</li>
+<li>管理服务开机自启</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代 Linux 系统标准工具</li>
+<li>替代传统的 service 命令</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>服务启停可能影响系统功能</li>
+<li>确保关键服务稳定运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="journalctl"><a class="header" href="#journalctl">journalctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: systemd 日志查看工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看系统日志</li>
+<li>按服务过滤日志</li>
+<li>实时跟踪日志</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代日志管理系统</li>
+<li>替代传统的 syslog</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>日志可能包含敏感信息</li>
+<li>确保日志访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="rsync"><a class="header" href="#rsync">rsync</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 远程文件同步工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>本地和远程文件同步</li>
+<li>增量备份</li>
+<li>支持压缩传输</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>功能强大的数据同步工具</li>
+<li>支持断点续传</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能同步敏感数据</li>
+<li>确保传输通道加密</li>
+</ul>
+</li>
+</ul>
+<h3 id="targzipbzip2"><a class="header" href="#targzipbzip2">tar/gzip/bzip2</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文件打包和压缩工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>tar: 文件打包工具</li>
+<li>gzip/bzip2: 文件压缩工具</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>常组合使用进行备份</li>
+<li>注意压缩比和速度平衡</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>备份文件可能包含敏感数据</li>
+<li>确保备份文件安全存储</li>
+</ul>
+</li>
+</ul>
+<h3 id="du--sh-"><a class="header" href="#du--sh-">du -sh *</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示目录和文件大小汇总</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示当前目录下各项目大小</li>
+<li>人性化显示文件大小</li>
+<li>支持递归显示子目录</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>大目录扫描可能耗时较长</li>
+<li>可用于磁盘空间分析</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露目录结构信息</li>
+<li>用于存储容量规划和分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="watch"><a class="header" href="#watch">watch</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 定期执行命令并显示结果</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>定期刷新命令输出</li>
+<li>监控系统状态变化</li>
+<li>支持自定义刷新间隔</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>默认2秒刷新一次</li>
+<li>适用于实时监控场景</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>频繁执行可能影响系统性能</li>
+<li>确保监控命令安全性</li>
+</ul>
+</li>
+</ul>
+<h3 id="timeout"><a class="header" href="#timeout">timeout</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 限制命令执行时间</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>设置命令最大执行时间</li>
+<li>超时自动终止命令</li>
+<li>支持发送不同信号</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>防止命令无限期运行</li>
+<li>可用于脚本超时控制</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>强制终止可能影响数据完整性</li>
+<li>确保超时设置合理性</li>
+</ul>
+</li>
+</ul>
+<h3 id="time"><a class="header" href="#time">time</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 测量命令执行时间</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示实际执行时间</li>
+<li>显示用户和系统CPU时间</li>
+<li>显示CPU使用百分比</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于性能基准测试</li>
+<li>可分析程序效率</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>性能数据可能暴露系统能力</li>
+<li>用于系统优化和攻击规划</li>
+</ul>
+</li>
+</ul>
+<h3 id="bcdc"><a class="header" href="#bcdc">bc/dc</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 命令行计算器</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>bc: 支持浮点运算的计算器</li>
+<li>dc: 逆波兰表示法计算器</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于脚本数学计算</li>
+<li>支持任意精度运算</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>用于数据处理和计算</li>
+</ul>
+</li>
+</ul>
+<h3 id="expect"><a class="header" href="#expect">expect</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 自动化交互式命令执行</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>自动响应命令提示</li>
+<li>批量执行交互式任务</li>
+<li>密码自动输入</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要安装 expect 包</li>
+<li>脚本中可能包含敏感信息</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>脚本可能包含密码等敏感信息</li>
+<li>确保脚本文件访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="ansible"><a class="header" href="#ansible">ansible</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 自动化运维工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>批量执行命令</li>
+<li>配置管理</li>
+<li>应用部署</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要安装 ansible</li>
+<li>基于 SSH 连接管理</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>自动化操作可能影响多个系统</li>
+<li>确保 playbook 安全性和权限控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="systemctl-1"><a class="header" href="#systemctl-1">systemctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统服务管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>启动、停止、重启系统服务</li>
+<li>查看服务状态和日志</li>
+<li>管理服务开机自启</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代 Linux 系统标准工具</li>
+<li>替代传统的 service 命令</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>服务管理操作可能影响系统稳定性</li>
+<li>确保关键服务操作经过验证</li>
+</ul>
+</li>
+</ul>
+<h3 id="journalctl-1"><a class="header" href="#journalctl-1">journalctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: systemd 日志查看工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看系统和服务日志</li>
+<li>按时间、服务、优先级过滤</li>
+<li>实时跟踪日志输出</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代日志管理系统</li>
+<li>替代传统的 syslog</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>日志可能包含敏感系统信息</li>
+<li>确保日志访问权限控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="firewalld"><a class="header" href="#firewalld">firewalld</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 动态防火墙管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>管理网络区域和规则</li>
+<li>动态添加/删除防火墙规则</li>
+<li>支持 rich rules 高级配置</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代 Linux 防火墙解决方案</li>
+<li>替代传统的 iptables 静态配置</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>防火墙规则配置错误可能影响网络安全</li>
+<li>确保规则变更经过安全评审</li>
+</ul>
+</li>
+</ul>
+<h3 id="podman"><a class="header" href="#podman">podman</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 无守护进程容器引擎</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>与 Docker 命令兼容的容器管理</li>
+<li>无需守护进程运行</li>
+<li>支持 rootless 容器运行</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代容器运行时替代方案</li>
+<li>更安全的容器执行环境</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>容器配置错误可能影响系统安全</li>
+<li>确保镜像来源可信</li>
+</ul>
+</li>
+</ul>
+<h3 id="kubectl"><a class="header" href="#kubectl">kubectl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: Kubernetes 命令行工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>管理 Kubernetes 集群资源</li>
+<li>部署和管理应用</li>
+<li>查看集群状态和日志</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>容器编排平台管理工具</li>
+<li>需要配置 kubeconfig 访问权限</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>集群操作权限过高可能影响整个平台</li>
+<li>确保 RBAC 权限最小化原则</li>
+</ul>
+</li>
+</ul>
+<h3 id="helm"><a class="header" href="#helm">helm</a></h3>
+<ul>
+<li><strong>命令用途</strong>: Kubernetes 包管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>管理 Kubernetes 应用包 (Charts)</li>
+<li>应用部署和版本管理</li>
+<li>依赖关系管理</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>Kubernetes 应用标准化部署工具</li>
+<li>支持模板化配置管理</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>Charts 可能包含不安全配置</li>
+<li>确保 Helm Charts 来源可信</li>
+</ul>
+</li>
+</ul>
+<h3 id="terraform"><a class="header" href="#terraform">terraform</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 基础设施即代码工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>声明式基础设施管理</li>
+<li>多云平台资源编排</li>
+<li>基础设施版本控制</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要学习 HCL 配置语言</li>
+<li>状态文件需要安全存储</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>基础设施变更可能影响整个环境</li>
+<li>确保状态文件和配置安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="prometheus"><a class="header" href="#prometheus">prometheus</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统监控和告警工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>时间序列数据收集</li>
+<li>多维数据模型</li>
+<li>强大的查询语言 PromQL</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>现代监控系统核心组件</li>
+<li>需要配置数据采集规则</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>监控数据可能暴露系统架构信息</li>
+<li>确保监控端点访问控制</li>
+</ul>
+</li>
+</ul>
+<h2 id="磁盘和存储命令"><a class="header" href="#磁盘和存储命令">磁盘和存储命令</a></h2>
+<h3 id="df"><a class="header" href="#df">df</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示磁盘空间使用情况</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件系统使用率</li>
+<li>人性化显示 (-h)</li>
+<li>显示 inode 使用情况 (-i)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>定期监控磁盘使用情况</li>
+<li>关注根分区使用率</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>磁盘空间耗尽可能导致系统故障</li>
+<li>用于评估系统资源状况</li>
+</ul>
+</li>
+</ul>
+<h3 id="du"><a class="header" href="#du">du</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示目录空间使用情况</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示目录大小</li>
+<li>人性化显示 (-h)</li>
+<li>最大深度 (-d)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>大目录扫描可能耗时较长</li>
+<li>用于查找大文件和目录</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>扫描过程可能影响系统性能</li>
+<li>显示目录结构信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="fdisk"><a class="header" href="#fdisk">fdisk</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 磁盘分区工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>查看磁盘分区</li>
+<li>创建/删除分区</li>
+<li>改变分区类型</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>分区操作会导致数据丢失</li>
+<li>操作前备份重要数据</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误操作导致数据完全丢失</li>
+<li>影响系统启动和运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsblk"><a class="header" href="#lsblk">lsblk</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 列出块设备信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示所有块设备</li>
+<li>显示设备挂载点</li>
+<li>显示设备大小和类型</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>不需要 root 权限查看基本信息</li>
+<li>用于存储设备识别</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露存储设备信息</li>
+<li>可用于系统架构分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="blkid"><a class="header" href="#blkid">blkid</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示块设备属性</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件系统类型</li>
+<li>显示 UUID 和标签</li>
+<li>显示设备标识信息</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于设备识别和挂载</li>
+<li>帮助管理存储设备</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露文件系统详细信息</li>
+<li>UUID 可用于设备定位</li>
+</ul>
+</li>
+</ul>
+<h3 id="mountumount"><a class="header" href="#mountumount">mount/umount</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 挂载/卸载文件系统</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>挂载存储设备到目录</li>
+<li>卸载已挂载的文件系统</li>
+<li>显示当前挂载信息</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>挂载前确保文件系统健康</li>
+<li>卸载前确保没有进程使用</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误挂载可能影响系统稳定性</li>
+<li>挂载敏感设备可能暴露数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="fsck"><a class="header" href="#fsck">fsck</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文件系统检查和修复</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>检查文件系统完整性</li>
+<li>修复文件系统错误</li>
+<li>恢复损坏的文件系统</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>通常在系统启动时自动运行</li>
+<li>需要卸载文件系统才能检查</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误修复可能造成数据丢失</li>
+<li>确保备份重要数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="mkfs"><a class="header" href="#mkfs">mkfs</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 创建文件系统</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>在块设备上创建文件系统</li>
+<li>支持多种文件系统类型</li>
+<li>设置文件系统参数</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>操作会清除设备上所有数据</li>
+<li>选择适当的文件系统类型</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>数据完全丢失风险</li>
+<li>错误的文件系统类型可能影响性能</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsof-1"><a class="header" href="#lsof-1">lsof</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 列出打开的文件</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示进程打开的文件</li>
+<li>显示网络连接信息</li>
+<li>显示设备使用情况</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要适当权限查看所有信息</li>
+<li>输出信息非常详细</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露进程和文件关联信息</li>
+<li>可用于安全审计和攻击分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="falco"><a class="header" href="#falco">falco</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 云原生运行时安全检测工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>实时检测容器和主机异常行为</li>
+<li>基于规则的威胁检测</li>
+<li>支持 syscall 和 Kubernetes 审计日志</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>专门针对容器环境设计</li>
+<li>需要配置检测规则</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>检测规则配置不当可能产生误报</li>
+<li>确保告警机制及时响应</li>
+</ul>
+</li>
+</ul>
+<h3 id="osquery"><a class="header" href="#osquery">osquery</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 操作系统 instrumentation 框架</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>将操作系统抽象为数据库</li>
+<li>SQL 方式查询系统信息</li>
+<li>实时监控系统状态变化</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>强大的系统可视化工具</li>
+<li>需要学习 SQL 查询语法</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露详细的系统配置信息</li>
+<li>确保查询权限最小化</li>
+</ul>
+</li>
+</ul>
+<h3 id="clamav"><a class="header" href="#clamav">clamav</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 开源反病毒工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>病毒和恶意软件扫描</li>
+<li>实时文件系统监控</li>
+<li>邮件附件扫描</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要定期更新病毒库</li>
+<li>可能影响系统性能</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>病毒库更新可能暴露扫描活动</li>
+<li>确保扫描过程不影响业务运行</li>
+</ul>
+</li>
+</ul>
+<h3 id="lynis"><a class="header" href="#lynis">lynis</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统安全审计工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>全面的系统安全扫描</li>
+<li>合规性检查 (CIS, PCI DSS等)</li>
+<li>安全配置建议</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>非侵入式安全评估工具</li>
+<li>生成详细的审计报告</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>安全扫描可能暴露系统弱点</li>
+<li>确保扫描结果妥善处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="auditd"><a class="header" href="#auditd">auditd</a></h3>
+<ul>
+<li><strong>命令用途</strong>: Linux 审计框架</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>记录系统安全相关事件</li>
+<li>文件访问监控</li>
+<li>系统调用审计</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>内核级审计功能</li>
+<li>需要配置审计规则</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>审计日志可能包含敏感操作记录</li>
+<li>确保日志存储和访问安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="aide"><a class="header" href="#aide">aide</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文件完整性检查工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>创建文件系统基线</li>
+<li>检测文件修改和篡改</li>
+<li>支持多种哈希算法</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于入侵检测和合规检查</li>
+<li>需要定期更新基线数据库</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>基线数据库可能暴露系统文件结构</li>
+<li>确保基线数据安全存储</li>
+</ul>
+</li>
+</ul>
+<h3 id="tripwire"><a class="header" href="#tripwire">tripwire</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 主机入侵检测系统</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>文件完整性监控</li>
+<li>系统配置变更检测</li>
+<li>安全策略违规报警</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>商业级安全监控工具</li>
+<li>需要专业配置和维护</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>监控配置可能影响系统性能</li>
+<li>确保检测规则准确性和及时性</li>
+</ul>
+</li>
+</ul>
+<h3 id="snort"><a class="header" href="#snort">snort</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 网络入侵检测系统</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>实时网络流量分析</li>
+<li>恶意流量检测和阻断</li>
+<li>支持自定义检测规则</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要网络流量镜像或串联部署</li>
+<li>规则维护需要专业知识</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>网络监控可能暴露流量模式</li>
+<li>确保检测规则及时更新</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统监控命令"><a class="header" href="#系统监控命令">系统监控命令</a></h2>
+<h3 id="iostat"><a class="header" href="#iostat">iostat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示 I/O 统计信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示 CPU 使用率</li>
+<li>显示设备 I/O 统计</li>
+<li>定期采样</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 sysstat 包</li>
+<li>用于性能调优</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>用于系统性能分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="vmstat"><a class="header" href="#vmstat">vmstat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示虚拟内存统计</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示进程活动</li>
+<li>显示内存使用</li>
+<li>显示 I/O 统计</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于系统性能分析</li>
+<li>定期采样观察趋势</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>提供系统运行状态信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="free"><a class="header" href="#free">free</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示内存使用情况</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示物理内存使用</li>
+<li>显示交换空间使用</li>
+<li>人性化显示 (-h)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>关注可用内存</li>
+<li>了解缓存和缓冲区</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>内存不足影响系统性能</li>
+<li>用于系统资源规划</li>
+</ul>
+</li>
+</ul>
+<h2 id="日志管理命令"><a class="header" href="#日志管理命令">日志管理命令</a></h2>
+<h3 id="journalctl-2"><a class="header" href="#journalctl-2">journalctl</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 查询 systemd 日志</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示系统日志</li>
+<li>按时间过滤</li>
+<li>实时跟踪 (-f)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要适当权限</li>
+<li>日志可能很大</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>日志可能包含敏感信息</li>
+<li>确保日志访问受到控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="tail"><a class="header" href="#tail">tail</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示文件末尾内容</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示最后几行 (-n)</li>
+<li>实时跟踪 (-f)</li>
+<li>多文件显示 (-F)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>常用于监控日志文件</li>
+<li>避免同时跟踪过多文件</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能显示敏感日志信息</li>
+<li>用于日志泄露</li>
+</ul>
+</li>
+</ul>
+<h3 id="sar"><a class="header" href="#sar">sar</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 系统活动报告工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>收集和报告系统性能数据</li>
+<li>显示 CPU、内存、I/O 统计</li>
+<li>历史数据分析</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要 sysstat 包支持</li>
+<li>数据收集需预先配置</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>用于性能分析和容量规划</li>
+</ul>
+</li>
+</ul>
+<h3 id="mpstat"><a class="header" href="#mpstat">mpstat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 多处理器统计信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示每个 CPU 核心使用率</li>
+<li>显示中断和上下文切换统计</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于多核系统性能分析</li>
+<li>需要 sysstat 包</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>无直接安全风险</li>
+<li>用于 CPU 性能调优</li>
+</ul>
+</li>
+</ul>
+<h3 id="pidstat"><a class="header" href="#pidstat">pidstat</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 进程统计信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示进程 CPU 使用情况</li>
+<li>显示进程内存使用情况</li>
+<li>显示进程 I/O 统计</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于进程级别性能分析</li>
+<li>可监控特定进程</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露进程详细信息</li>
+<li>用于性能监控和问题诊断</li>
+</ul>
+</li>
+</ul>
+<h3 id="dmesg"><a class="header" href="#dmesg">dmesg</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 显示内核环形缓冲区消息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示系统启动信息</li>
+<li>显示硬件检测信息</li>
+<li>显示内核错误和警告</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>包含重要的系统诊断信息</li>
+<li>可用于硬件故障排查</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>暴露系统和硬件详细信息</li>
+<li>可能包含敏感的错误信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="logger"><a class="header" href="#logger">logger</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 向系统日志发送消息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>发送自定义日志消息</li>
+<li>指定日志设施和优先级</li>
+<li>用于脚本日志记录</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>需要适当权限</li>
+<li>遵循 syslog 标准格式</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能伪造系统日志</li>
+<li>确保日志消息真实性</li>
+</ul>
+</li>
+</ul>
+<h3 id="logrotate"><a class="header" href="#logrotate">logrotate</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 日志轮转管理工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>自动轮转日志文件</li>
+<li>压缩旧日志文件</li>
+<li>删除过期日志</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>配置文件位于 /etc/logrotate.conf</li>
+<li>避免日志文件无限增长</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>配置错误可能导致日志丢失</li>
+<li>确保重要日志得到保留</li>
+</ul>
+</li>
+</ul>
+<h2 id="文本处理命令"><a class="header" href="#文本处理命令">文本处理命令</a></h2>
+<h3 id="grep"><a class="header" href="#grep">grep</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文本搜索工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>搜索文本模式</li>
+<li>忽略大小写 (-i)</li>
+<li>递归搜索 (-r)</li>
+<li>行号显示 (-n)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>支持正则表达式</li>
+<li>在大文件中搜索可能较慢</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能在敏感文件中搜索到敏感信息</li>
+<li>用于信息收集</li>
+</ul>
+</li>
+</ul>
+<h3 id="sed"><a class="header" href="#sed">sed</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 流编辑器</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>文本替换</li>
+<li>文本插入/删除</li>
+<li>模式匹配</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>使用 <code>-i</code> 参数直接修改文件前先备份</li>
+<li>正则表达式需谨慎编写</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>错误的编辑可能损坏重要文件</li>
+<li>使用不当可能影响系统配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="awk"><a class="header" href="#awk">awk</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 文本处理语言</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>文本分析</li>
+<li>数据提取</li>
+<li>报告生成</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>功能强大但复杂</li>
+<li>慎用外部命令执行</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可执行外部命令存在安全风险</li>
+<li>处理不受信任输入时需谨慎</li>
+</ul>
+</li>
+</ul>
+<h3 id="sort"><a class="header" href="#sort">sort</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 对文本行进行排序</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>按字母顺序排序</li>
+<li>按数值大小排序</li>
+<li>去除重复行 (-u)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>支持多种排序选项</li>
+<li>可处理大文件</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>排序过程可能暴露数据模式</li>
+<li>处理敏感数据时需谨慎</li>
+</ul>
+</li>
+</ul>
+<h3 id="uniq"><a class="header" href="#uniq">uniq</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 处理重复行</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示重复行</li>
+<li>显示唯一行</li>
+<li>统计重复次数</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>输入需预先排序</li>
+<li>用于数据去重和统计</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露数据分布特征</li>
+<li>用于数据分析和隐私保护</li>
+</ul>
+</li>
+</ul>
+<h3 id="wc"><a class="header" href="#wc">wc</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 统计文件信息</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>统计行数 (-l)</li>
+<li>统计单词数 (-w)</li>
+<li>统计字符数 (-c)</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>快速获取文件基本信息</li>
+<li>常与其他命令管道使用</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>统计信息可能暴露文件规模</li>
+<li>用于容量估算和分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="tr"><a class="header" href="#tr">tr</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 字符转换和删除工具</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>字符集转换</li>
+<li>删除指定字符</li>
+<li>压缩重复字符</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>主要用于字符级处理</li>
+<li>支持字符范围指定</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>字符转换可能改变数据含义</li>
+<li>确保转换操作正确性</li>
+</ul>
+</li>
+</ul>
+<h3 id="cut"><a class="header" href="#cut">cut</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 从文件中提取列</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>按字段分隔符提取</li>
+<li>按字符位置提取</li>
+<li>支持多种分隔符</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于结构化数据处理</li>
+<li>需要明确的数据格式</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能提取敏感字段</li>
+<li>确保数据访问授权</li>
+</ul>
+</li>
+</ul>
+<h3 id="paste"><a class="header" href="#paste">paste</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 合并文件行</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>横向合并多个文件</li>
+<li>使用指定分隔符合并</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>文件行数需匹配</li>
+<li>用于数据整合处理</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>合并操作可能暴露数据关联</li>
+<li>确保数据合并合理性</li>
+</ul>
+</li>
+</ul>
+<h3 id="diff"><a class="header" href="#diff">diff</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 比较文件差异</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>显示文件行级差异</li>
+<li>生成补丁文件</li>
+<li>支持递归目录比较</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>用于版本控制和变更管理</li>
+<li>可生成统一差异格式</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>可能暴露配置文件变更</li>
+<li>用于安全审计和合规检查</li>
+</ul>
+</li>
+</ul>
+<h3 id="patch"><a class="header" href="#patch">patch</a></h3>
+<ul>
+<li><strong>命令用途</strong>: 应用补丁文件</li>
+<li><strong>功能清单</strong>:
+<ul>
+<li>应用 diff 生成的补丁</li>
+<li>撤销已应用的补丁</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>:
+<ul>
+<li>确保补丁文件来源可靠</li>
+<li>备份原始文件</li>
+</ul>
+</li>
+<li><strong>安全生产风险</strong>:
+<ul>
+<li>恶意补丁可能破坏系统</li>
+<li>确保补丁完整性和来源验证</li>
+</ul>
+</li>
+</ul>
+<h2 id="安全最佳实践"><a class="header" href="#安全最佳实践">安全最佳实践</a></h2>
+<h3 id="命令使用安全建议"><a class="header" href="#命令使用安全建议">命令使用安全建议</a></h3>
+<ol>
+<li>避免以 root 权限执行不必要的命令</li>
+<li>验证命令参数避免注入攻击</li>
+<li>对敏感操作进行确认</li>
+<li>定期审计系统命令使用</li>
+<li>使用最小权限原则</li>
+<li>启用命令历史记录审计</li>
+<li>配置安全的 umask 值</li>
+<li>使用 SELinux/AppArmor 强制访问控制</li>
+<li>定期更新系统和软件包</li>
+<li>实施多因素认证</li>
+<li>启用系统完整性监控</li>
+<li>配置入侵检测系统(IDS)</li>
+<li>实施零信任网络架构</li>
+<li>建立安全事件响应流程</li>
+<li>定期进行安全培训和意识提升</li>
+<li>实施命令白名单机制</li>
+<li>启用实时威胁检测</li>
+<li>配置安全日志聚合分析</li>
+<li>实施微隔离网络策略</li>
+<li>建立安全运营中心(SOC)</li>
+<li>部署运行时安全防护 (Falco)</li>
+<li>实施文件完整性监控 (AIDE)</li>
+<li>启用系统审计框架 (auditd)</li>
+<li>配置网络入侵检测 (Snort)</li>
+<li>实施安全配置基线扫描 (Lynis)</li>
+</ol>
+<h3 id="生产环境注意事项"><a class="header" href="#生产环境注意事项">生产环境注意事项</a></h3>
+<ol>
+<li>在生产环境执行危险操作前制定回滚计划</li>
+<li>对关键系统文件进行备份</li>
+<li>监控系统日志中的异常命令执行</li>
+<li>限制对系统的物理和远程访问</li>
+<li>定期进行安全审计和渗透测试</li>
+<li>实施零信任网络架构</li>
+<li>配置入侵检测系统(IDS)</li>
+<li>启用系统完整性监控</li>
+<li>定期审查用户权限分配</li>
+<li>建立安全事件响应流程</li>
+<li>实施变更管理流程</li>
+<li>配置系统监控和告警</li>
+<li>定期更新安全策略</li>
+<li>建立灾难恢复计划</li>
+<li>实施供应商安全管理</li>
+<li>配置自动化安全响应</li>
+<li>实施持续安全监控</li>
+<li>建立威胁情报共享机制</li>
+<li>实施安全开发生命周期</li>
+<li>定期进行红蓝对抗演练</li>
+<li>部署容器安全运行时防护</li>
+<li>实施基础设施即代码安全检查</li>
+<li>配置云原生安全监控</li>
+<li>建立安全左移实践</li>
+<li>实施 DevSecOps 流程集成</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../domain-14-linux/09-linux-operations-basics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../domain-15-network-fundamentals/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../domain-14-linux/09-linux-operations-basics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../domain-15-network-fundamentals/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/collapse-all.js"></script>
+
+
+    </div>
+    </body>
+</html>

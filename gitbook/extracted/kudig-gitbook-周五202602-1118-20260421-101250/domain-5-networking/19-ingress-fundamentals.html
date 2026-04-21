@@ -1,0 +1,2384 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="kubernetes-ingress-基础概念与核心原理-ingress-fundamentals"><a class="header" href="#kubernetes-ingress-基础概念与核心原理-ingress-fundamentals">Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32<br><strong>文档版本</strong>: v3.0 | 生产级 Ingress 配置参考<br><strong>最后更新</strong>: 2026-01<br><strong>参考</strong>: <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">kubernetes.io/docs/concepts/services-networking/ingress</a></p>
+</blockquote>
+<hr>
+<h2 id="ingress-核心架构"><a class="header" href="#ingress-核心架构">Ingress 核心架构</a></h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                              Kubernetes Ingress Architecture                                     │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐    │
+│  │                                   External Layer                                         │    │
+│  │                                                                                          │    │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐    │    │
+│  │  │   Browser       │  │   Mobile App    │  │   API Client    │  │   IoT Device    │    │    │
+│  │  │                 │  │                 │  │                 │  │                 │    │    │
+│  │  │ HTTPS Request   │  │ HTTPS Request   │  │ REST/gRPC       │  │ MQTT/HTTP       │    │    │
+│  │  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘    │    │
+│  │           │                    │                    │                    │             │    │
+│  │           └──────────────────┬─┴────────────────────┴─┬──────────────────┘             │    │
+│  │                              │                        │                                │    │
+│  └──────────────────────────────┼────────────────────────┼────────────────────────────────┘    │
+│                                 │                        │                                     │
+│                                 ▼                        ▼                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           Cloud Load Balancer / Edge Proxy                               │   │
+│  │                                                                                          │   │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────────┐   │   │
+│  │  │  AWS ALB/NLB │ Azure App GW │ GCP Cloud LB │ Alibaba ALB │ On-Prem F5/HAProxy  │   │   │
+│  │  │                                                                                  │   │   │
+│  │  │  • SSL Termination (可选)    • DDoS Protection    • WAF (可选)                  │   │   │
+│  │  │  • Health Check              • Geographic Routing  • Rate Limiting              │   │   │
+│  │  └─────────────────────────────────────────────────────────────────────────────────┘   │   │
+│  └──────────────────────────────────────┬──────────────────────────────────────────────────┘   │
+│                                         │                                                      │
+│                                         │ NodePort / LoadBalancer Service                     │
+│                                         ▼                                                      │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                              Ingress Controller Layer                                    │   │
+│  │                                                                                          │   │
+│  │  ┌────────────────────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │                        Ingress Controller (NGINX/Traefik/Envoy)                     │ │   │
+│  │  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │ │   │
+│  │  │  │  Watcher     │  │  Config Gen  │  │  Proxy Engine│  │  Metrics     │           │ │   │
+│  │  │  │              │  │              │  │              │  │  Exporter    │           │ │   │
+│  │  │  │ Watch:       │  │ Generate:    │  │ • TLS Term   │  │              │           │ │   │
+│  │  │  │ • Ingress    │─&gt;│ • nginx.conf │─&gt;│ • L7 Route   │  │ Prometheus   │           │ │   │
+│  │  │  │ • Service    │  │ • envoy.yaml │  │ • Load Bal   │  │ metrics      │           │ │   │
+│  │  │  │ • Endpoints  │  │ • traefik    │  │ • Rate Limit │  │ /metrics     │           │ │   │
+│  │  │  │ • Secret     │  │   config     │  │ • Auth       │  │              │           │ │   │
+│  │  │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘           │ │   │
+│  │  └────────────────────────────────────────────────────────────────────────────────────┘ │   │
+│  └──────────────────────────────────────┬──────────────────────────────────────────────────┘   │
+│                                         │                                                      │
+│                    ┌────────────────────┼────────────────────┐                                │
+│                    │                    │                    │                                │
+│                    ▼                    ▼                    ▼                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                               Kubernetes Service Layer                                   │   │
+│  │                                                                                          │   │
+│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐                       │   │
+│  │  │  Service A       │  │  Service B       │  │  Service C       │                       │   │
+│  │  │  (ClusterIP)     │  │  (ClusterIP)     │  │  (ClusterIP)     │                       │   │
+│  │  │                  │  │                  │  │                  │                       │   │
+│  │  │  api.example.com │  │  www.example.com │  │  admin.example.  │                       │   │
+│  │  │  /api/*          │  │  /*              │  │  com/*           │                       │   │
+│  │  └────────┬─────────┘  └────────┬─────────┘  └────────┬─────────┘                       │   │
+│  │           │                     │                     │                                 │   │
+│  └───────────┼─────────────────────┼─────────────────────┼─────────────────────────────────┘   │
+│              │                     │                     │                                     │
+│              ▼                     ▼                     ▼                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                              EndpointSlice / Pod Layer                                   │   │
+│  │                                                                                          │   │
+│  │  ┌────────────────────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │  Node 1                    Node 2                    Node 3                         │ │   │
+│  │  │  ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐             │ │   │
+│  │  │  │ Pod A-1         │      │ Pod A-2         │      │ Pod B-1         │             │ │   │
+│  │  │  │ 10.244.1.10:8080│      │ 10.244.2.11:8080│      │ 10.244.3.12:3000│             │ │   │
+│  │  │  └─────────────────┘      └─────────────────┘      └─────────────────┘             │ │   │
+│  │  │  ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐             │ │   │
+│  │  │  │ Pod B-2         │      │ Pod C-1         │      │ Pod C-2         │             │ │   │
+│  │  │  │ 10.244.1.13:3000│      │ 10.244.2.14:9000│      │ 10.244.3.15:9000│             │ │   │
+│  │  │  └─────────────────┘      └─────────────────┘      └─────────────────┘             │ │   │
+│  │  └────────────────────────────────────────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐   │
+│  │                              Control Plane Components                                    │   │
+│  │                                                                                          │   │
+│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐                       │   │
+│  │  │  API Server      │  │  etcd            │  │  Controller Mgr  │                       │   │
+│  │  │                  │  │                  │  │                  │                       │   │
+│  │  │  Store Ingress   │  │  Persist         │  │  EndpointSlice   │                       │   │
+│  │  │  Resources       │  │  All Resources   │  │  Controller      │                       │   │
+│  │  └──────────────────┘  └──────────────────┘  └──────────────────┘                       │   │
+│  └─────────────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="一ingress-概念总览"><a class="header" href="#一ingress-概念总览">一、Ingress 概念总览</a></h2>
+<h3 id="11-ingress-核心定义"><a class="header" href="#11-ingress-核心定义">1.1 Ingress 核心定义</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>概念</th><th>英文术语</th><th>定义</th><th>作用</th><th>版本要求</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Ingress</strong></td><td>Ingress</td><td>Kubernetes API 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则</td><td>定义 L7 路由规则、TLS 终止、虚拟主机</td><td>v1.19+ GA</td></tr>
+<tr><td><strong>Ingress Controller</strong></td><td>Ingress Controller</td><td>负责实现 Ingress 规则的控制器组件，通常是反向代理服务器</td><td>监听 Ingress 资源变化，配置代理规则，实际处理流量转发</td><td>-</td></tr>
+<tr><td><strong>IngressClass</strong></td><td>IngressClass</td><td>定义 Ingress 控制器类型的 API 对象</td><td>支持多控制器共存，指定 Ingress 由哪个控制器处理</td><td>v1.19+ GA</td></tr>
+<tr><td><strong>Backend</strong></td><td>Backend</td><td>Ingress 路由到的后端 Service</td><td>接收转发的流量，负载均衡到 Pod</td><td>v1.19+</td></tr>
+<tr><td><strong>Default Backend</strong></td><td>Default Backend</td><td>未匹配任何规则时的默认后端</td><td>处理未知请求、健康检查、404 页面</td><td>v1.19+</td></tr>
+<tr><td><strong>TLS Secret</strong></td><td>TLS Secret</td><td>存储 TLS 证书的 Kubernetes Secret</td><td>为 Ingress 提供 HTTPS 加密能力</td><td>v1.19+</td></tr>
+<tr><td><strong>Path Type</strong></td><td>Path Type</td><td>路径匹配类型</td><td>控制 URL 路径如何匹配</td><td>v1.18+</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="12-ingress-vs-其他流量入口方案对比"><a class="header" href="#12-ingress-vs-其他流量入口方案对比">1.2 Ingress vs 其他流量入口方案对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方案</th><th>协议层</th><th>协议支持</th><th>外部访问方式</th><th>负载均衡</th><th>TLS 终止</th><th>路由能力</th><th>适用场景</th><th>复杂度</th><th>成本</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>ClusterIP</strong></td><td>L4</td><td>TCP/UDP</td><td>仅集群内部</td><td>kube-proxy</td><td>无</td><td>无</td><td>内部服务通信</td><td>低</td><td>无</td></tr>
+<tr><td><strong>NodePort</strong></td><td>L4</td><td>TCP/UDP</td><td>Node IP:30000-32767</td><td>kube-proxy</td><td>无</td><td>无</td><td>开发测试、简单对外</td><td>低</td><td>无</td></tr>
+<tr><td><strong>LoadBalancer</strong></td><td>L4</td><td>TCP/UDP</td><td>云 LB 外部 IP</td><td>云 LB + kube-proxy</td><td>云 LB (可选)</td><td>无</td><td>单服务对外暴露</td><td>中</td><td>每服务一个 LB</td></tr>
+<tr><td><strong>Ingress</strong></td><td>L7</td><td>HTTP/HTTPS</td><td>统一入口 IP</td><td>Ingress Controller</td><td>支持</td><td>Host/Path 路由</td><td>多服务 HTTP 路由</td><td>中</td><td>共享控制器</td></tr>
+<tr><td><strong>Gateway API</strong></td><td>L4/L7</td><td>HTTP/HTTPS/TCP/UDP/gRPC/TLS</td><td>统一入口</td><td>Gateway 实现</td><td>支持</td><td>丰富 (Header/Query 等)</td><td>复杂多协议场景</td><td>高</td><td>共享网关</td></tr>
+<tr><td><strong>Service Mesh</strong></td><td>L4/L7</td><td>全协议</td><td>Sidecar 代理</td><td>Envoy/Linkerd</td><td>mTLS</td><td>全功能</td><td>微服务治理、零信任</td><td>高</td><td>Sidecar 开销</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="13-ingress-核心能力矩阵"><a class="header" href="#13-ingress-核心能力矩阵">1.3 Ingress 核心能力矩阵</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>能力</th><th>英文</th><th>说明</th><th>依赖</th><th>生产建议</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>基于主机名路由</strong></td><td>Host-based Routing</td><td>根据 HTTP Host 头转发请求到不同后端</td><td>DNS 配置</td><td>必备</td></tr>
+<tr><td><strong>基于路径路由</strong></td><td>Path-based Routing</td><td>根据 URL 路径转发请求到不同后端</td><td>无</td><td>必备</td></tr>
+<tr><td><strong>TLS 终止</strong></td><td>TLS Termination</td><td>在 Ingress Controller 解密 HTTPS 流量</td><td>TLS Secret</td><td>必备</td></tr>
+<tr><td><strong>TLS 透传</strong></td><td>TLS Passthrough</td><td>不解密，直接透传到后端 (需控制器支持)</td><td>后端 TLS 配置</td><td>特殊场景</td></tr>
+<tr><td><strong>名称虚拟主机</strong></td><td>Name-based Virtual Hosting</td><td>同一 IP 托管多个域名</td><td>DNS 配置</td><td>必备</td></tr>
+<tr><td><strong>负载均衡</strong></td><td>Load Balancing</td><td>在后端 Pod 间分配流量</td><td>多副本 Pod</td><td>必备</td></tr>
+<tr><td><strong>会话保持</strong></td><td>Session Affinity</td><td>将同一客户端请求路由到同一 Pod</td><td>注解配置</td><td>有状态应用</td></tr>
+<tr><td><strong>重写规则</strong></td><td>URL Rewrite</td><td>重写请求 URL 路径</td><td>注解配置</td><td>常用</td></tr>
+<tr><td><strong>限流</strong></td><td>Rate Limiting</td><td>限制请求速率</td><td>注解配置</td><td>必备</td></tr>
+<tr><td><strong>认证</strong></td><td>Authentication</td><td>Basic Auth/OAuth/JWT</td><td>注解/插件</td><td>推荐</td></tr>
+<tr><td><strong>金丝雀发布</strong></td><td>Canary Release</td><td>按权重/Header/Cookie 分流</td><td>注解配置</td><td>推荐</td></tr>
+<tr><td><strong>跨域 (CORS)</strong></td><td>CORS</td><td>跨域资源共享配置</td><td>注解配置</td><td>Web 应用</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="14-为什么需要-ingress"><a class="header" href="#14-为什么需要-ingress">1.4 为什么需要 Ingress</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>没有 Ingress</th><th>使用 Ingress</th></tr>
+</thead>
+<tbody>
+<tr><td>每个服务需要独立 LoadBalancer，成本高</td><td>多服务共享一个入口，降低成本</td></tr>
+<tr><td>无法基于域名/路径路由</td><td>支持灵活的 L7 路由规则</td></tr>
+<tr><td>TLS 需要在每个服务单独配置</td><td>集中管理 TLS 证书</td></tr>
+<tr><td>无法实现金丝雀发布等高级流量管理</td><td>支持金丝雀、蓝绿、A/B 测试</td></tr>
+<tr><td>难以统一实施安全策略</td><td>集中配置认证、限流、WAF</td></tr>
+<tr><td>缺乏统一的可观测性</td><td>统一的访问日志和指标</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="二ingress-资源模型"><a class="header" href="#二ingress-资源模型">二、Ingress 资源模型</a></h2>
+<h3 id="21-ingress-api-结构-networkingk8siov1"><a class="header" href="#21-ingress-api-结构-networkingk8siov1">2.1 Ingress API 结构 (networking.k8s.io/v1)</a></h3>
+<pre><code>Ingress (networking.k8s.io/v1)
+├── apiVersion: networking.k8s.io/v1
+├── kind: Ingress
+├── metadata
+│   ├── name                          # Ingress 名称 (必填)
+│   ├── namespace                     # 命名空间 (默认 default)
+│   ├── labels                        # 标签 (推荐)
+│   │   ├── app: &lt;app-name&gt;
+│   │   ├── environment: &lt;env&gt;
+│   │   └── team: &lt;team-name&gt;
+│   └── annotations                   # 控制器特定配置 (重要)
+│       ├── nginx.ingress.kubernetes.io/*
+│       ├── traefik.ingress.kubernetes.io/*
+│       └── alb.ingress.kubernetes.io/*
+├── spec
+│   ├── ingressClassName              # 指定 IngressClass (强烈推荐)
+│   ├── defaultBackend                # 默认后端 (可选)
+│   │   ├── service
+│   │   │   ├── name                  # Service 名称
+│   │   │   └── port
+│   │   │       ├── number            # 端口号
+│   │   │       └── name              # 或端口名称
+│   │   └── resource                  # 或自定义资源 (少用)
+│   │       ├── apiGroup
+│   │       ├── kind
+│   │       └── name
+│   ├── tls[]                         # TLS 配置数组
+│   │   ├── hosts[]                   # 证书适用的主机名列表
+│   │   └── secretName                # TLS 证书 Secret 名称
+│   └── rules[]                       # 路由规则数组 (核心)
+│       ├── host                      # 主机名 (可选，空则匹配所有)
+│       └── http
+│           └── paths[]               # 路径规则数组
+│               ├── path              # URL 路径
+│               ├── pathType          # 路径匹配类型 (必填)
+│               │   # Exact | Prefix | ImplementationSpecific
+│               └── backend           # 后端服务
+│                   └── service
+│                       ├── name      # Service 名称
+│                       └── port
+│                           ├── number
+│                           └── name
+└── status                            # 状态 (只读)
+    └── loadBalancer
+        └── ingress[]
+            ├── ip                    # 分配的 IP 地址
+            ├── hostname              # 分配的主机名 (云环境)
+            └── ports[]               # 端口信息 (v1.30+)
+</code></pre>
+<h3 id="22-ingress-规范字段详解"><a class="header" href="#22-ingress-规范字段详解">2.2 Ingress 规范字段详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段路径</th><th>类型</th><th>必填</th><th>默认值</th><th>说明</th><th>示例</th></tr>
+</thead>
+<tbody>
+<tr><td><code>metadata.name</code></td><td>string</td><td>是</td><td>-</td><td>Ingress 资源名称，需符合 DNS 子域名规范</td><td><code>api-ingress</code></td></tr>
+<tr><td><code>metadata.namespace</code></td><td>string</td><td>否</td><td>default</td><td>命名空间</td><td><code>production</code></td></tr>
+<tr><td><code>metadata.annotations</code></td><td>map[string]string</td><td>否</td><td>-</td><td>控制器特定配置，是扩展 Ingress 能力的主要方式</td><td>见注解章节</td></tr>
+<tr><td><code>spec.ingressClassName</code></td><td>string</td><td>推荐</td><td>默认 IngressClass</td><td>指定处理此 Ingress 的 IngressClass</td><td><code>nginx</code></td></tr>
+<tr><td><code>spec.defaultBackend.service.name</code></td><td>string</td><td>条件</td><td>-</td><td>默认后端 Service 名称</td><td><code>default-backend</code></td></tr>
+<tr><td><code>spec.defaultBackend.service.port.number</code></td><td>int32</td><td>条件</td><td>-</td><td>默认后端端口号</td><td><code>80</code></td></tr>
+<tr><td><code>spec.defaultBackend.service.port.name</code></td><td>string</td><td>条件</td><td>-</td><td>默认后端端口名称 (与 number 二选一)</td><td><code>http</code></td></tr>
+<tr><td><code>spec.tls[].hosts</code></td><td>[]string</td><td>否</td><td>-</td><td>TLS 证书适用的主机名列表</td><td><code>["api.example.com"]</code></td></tr>
+<tr><td><code>spec.tls[].secretName</code></td><td>string</td><td>否</td><td>-</td><td>TLS 证书 Secret 名称</td><td><code>api-tls-secret</code></td></tr>
+<tr><td><code>spec.rules[].host</code></td><td>string</td><td>否</td><td>-</td><td>主机名，空则匹配所有主机</td><td><code>api.example.com</code></td></tr>
+<tr><td><code>spec.rules[].http.paths[].path</code></td><td>string</td><td>是</td><td>-</td><td>URL 路径</td><td><code>/api</code></td></tr>
+<tr><td><code>spec.rules[].http.paths[].pathType</code></td><td>string</td><td>是</td><td>-</td><td>路径类型: Exact/Prefix/ImplementationSpecific</td><td><code>Prefix</code></td></tr>
+<tr><td><code>spec.rules[].http.paths[].backend.service.name</code></td><td>string</td><td>是</td><td>-</td><td>后端 Service 名称</td><td><code>api-service</code></td></tr>
+<tr><td><code>spec.rules[].http.paths[].backend.service.port.number</code></td><td>int32</td><td>条件</td><td>-</td><td>后端端口号</td><td><code>8080</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="23-路径类型详解-pathtype"><a class="header" href="#23-路径类型详解-pathtype">2.3 路径类型详解 (pathType)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>路径类型</th><th>英文</th><th>匹配规则</th><th>正则等价</th><th>性能</th><th>推荐场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Exact</strong></td><td>精确匹配</td><td>完全匹配 URL 路径，大小写敏感</td><td><code>^/foo$</code></td><td>最高</td><td>特定端点，如 <code>/health</code>, <code>/metrics</code></td></tr>
+<tr><td><strong>Prefix</strong></td><td>前缀匹配</td><td>基于 <code>/</code> 分隔的路径元素前缀匹配</td><td><code>^/foo(/.*)?$</code></td><td>高</td><td>服务路由，如 <code>/api/*</code></td></tr>
+<tr><td><strong>ImplementationSpecific</strong></td><td>实现特定</td><td>由 IngressClass/控制器决定</td><td>取决于控制器</td><td>取决于实现</td><td>需要正则匹配等高级场景</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Prefix 路径匹配详细规则:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Ingress Path</th><th>请求 Path</th><th>匹配结果</th><th>原因</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/foo</code></td><td><code>/foo</code></td><td>匹配</td><td>精确前缀</td></tr>
+<tr><td><code>/foo</code></td><td><code>/foo/</code></td><td>匹配</td><td>尾部 <code>/</code> 被忽略</td></tr>
+<tr><td><code>/foo</code></td><td><code>/foo/bar</code></td><td>匹配</td><td><code>/foo</code> 是 <code>/foo/bar</code> 的前缀元素</td></tr>
+<tr><td><code>/foo</code></td><td><code>/foobar</code></td><td><strong>不匹配</strong></td><td><code>/foo</code> 不是 <code>/foobar</code> 的前缀元素 (无 <code>/</code> 分隔)</td></tr>
+<tr><td><code>/foo/</code></td><td><code>/foo</code></td><td>匹配</td><td>尾部 <code>/</code> 被忽略</td></tr>
+<tr><td><code>/foo/</code></td><td><code>/foo/bar</code></td><td>匹配</td><td>前缀元素匹配</td></tr>
+<tr><td><code>/</code></td><td><code>/foo</code></td><td>匹配</td><td><code>/</code> 匹配所有路径</td></tr>
+<tr><td><code>/</code></td><td><code>/</code></td><td>匹配</td><td>精确匹配根路径</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>路径优先级规则:</strong></p>
+<ol>
+<li><strong>Exact 优先于 Prefix</strong>: 相同路径时，Exact 匹配优先</li>
+<li><strong>长路径优先</strong>: 多个 Prefix 规则时，最长匹配路径优先</li>
+<li><strong>同长度按定义顺序</strong>: 相同长度路径按 YAML 定义顺序</li>
+</ol>
+<pre><code class="language-yaml"># 路径优先级示例
+spec:
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      # 优先级 1: Exact 匹配
+      - path: /api/v1/health
+        pathType: Exact
+        backend: {service: {name: health-check, port: {number: 80}}}
+      # 优先级 2: 最长 Prefix
+      - path: /api/v1/users
+        pathType: Prefix
+        backend: {service: {name: user-service, port: {number: 8080}}}
+      # 优先级 3: 较短 Prefix
+      - path: /api/v1
+        pathType: Prefix
+        backend: {service: {name: api-v1, port: {number: 8080}}}
+      # 优先级 4: 根路径
+      - path: /
+        pathType: Prefix
+        backend: {service: {name: default-backend, port: {number: 80}}}
+</code></pre>
+<hr>
+<h2 id="三ingressclass-详解"><a class="header" href="#三ingressclass-详解">三、IngressClass 详解</a></h2>
+<h3 id="31-ingressclass-概念与作用"><a class="header" href="#31-ingressclass-概念与作用">3.1 IngressClass 概念与作用</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>属性</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>目的</strong></td><td>支持集群中运行多个不同的 Ingress Controller</td></tr>
+<tr><td><strong>作用</strong></td><td>明确指定 Ingress 资源由哪个控制器处理</td></tr>
+<tr><td><strong>默认 IngressClass</strong></td><td>可设置一个为集群默认，未指定 ingressClassName 的 Ingress 自动使用</td></tr>
+<tr><td><strong>参数传递</strong></td><td>支持通过 <code>parameters</code> 字段传递控制器特定的全局配置</td></tr>
+<tr><td><strong>命名空间作用域</strong></td><td>parameters 可以是集群级别或命名空间级别</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="32-ingressclass-api-结构"><a class="header" href="#32-ingressclass-api-结构">3.2 IngressClass API 结构</a></h3>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx                                    # IngressClass 名称
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/component: controller
+  annotations:
+    # 设置为默认 IngressClass (集群中只能有一个)
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  # 控制器标识符 - 必须与控制器 --controller-class 参数匹配
+  controller: k8s.io/ingress-nginx
+  
+  # 可选: 控制器参数配置
+  parameters:
+    # API Group (可选，默认 core)
+    apiGroup: k8s.nginx.org
+    # 资源类型
+    kind: IngressNginxConfiguration
+    # 资源名称
+    name: nginx-config
+    # 命名空间 (Namespace 作用域时需要)
+    namespace: ingress-nginx
+    # 作用域: Namespace 或 Cluster
+    scope: Namespace
+</code></pre>
+<h3 id="33-常见-ingress-controller-标识符"><a class="header" href="#33-常见-ingress-controller-标识符">3.3 常见 Ingress Controller 标识符</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>控制器</th><th>Controller 标识符</th><th>IngressClass 名称建议</th><th>维护方</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>NGINX Ingress (K8s 社区版)</strong></td><td><code>k8s.io/ingress-nginx</code></td><td><code>nginx</code></td><td>Kubernetes 社区</td></tr>
+<tr><td><strong>NGINX Ingress (F5 版)</strong></td><td><code>nginx.org/ingress-controller</code></td><td><code>nginx-plus</code></td><td>F5/NGINX</td></tr>
+<tr><td><strong>Traefik</strong></td><td><code>traefik.io/ingress-controller</code></td><td><code>traefik</code></td><td>Traefik Labs</td></tr>
+<tr><td><strong>HAProxy</strong></td><td><code>haproxy.org/ingress-controller</code></td><td><code>haproxy</code></td><td>HAProxy Tech</td></tr>
+<tr><td><strong>Contour</strong></td><td><code>projectcontour.io/ingress-controller</code></td><td><code>contour</code></td><td>VMware/CNCF</td></tr>
+<tr><td><strong>Kong</strong></td><td><code>ingress-controllers.konghq.com/kong</code></td><td><code>kong</code></td><td>Kong Inc</td></tr>
+<tr><td><strong>Ambassador/Emissary</strong></td><td><code>getambassador.io/ingress-controller</code></td><td><code>ambassador</code></td><td>Ambassador Labs</td></tr>
+<tr><td><strong>ALB (阿里云)</strong></td><td><code>ingress.k8s.alibabacloud/alb</code></td><td><code>alb</code></td><td>阿里云</td></tr>
+<tr><td><strong>AWS ALB</strong></td><td><code>ingress.k8s.aws/alb</code></td><td><code>alb</code></td><td>AWS</td></tr>
+<tr><td><strong>GCE</strong></td><td><code>ingress.gce.io/ingress</code></td><td><code>gce</code></td><td>Google</td></tr>
+<tr><td><strong>Azure Application Gateway</strong></td><td><code>azure/application-gateway</code></td><td><code>azure-agic</code></td><td>Microsoft</td></tr>
+<tr><td><strong>Istio</strong></td><td><code>istio.io/ingress-controller</code></td><td><code>istio</code></td><td>Istio 社区</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="34-多-ingressclass-配置示例"><a class="header" href="#34-多-ingressclass-配置示例">3.4 多 IngressClass 配置示例</a></h3>
+<pre><code class="language-yaml"># 生产环境 NGINX IngressClass (默认)
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
+  parameters:
+    apiGroup: k8s.nginx.org
+    kind: IngressNginxConfiguration
+    name: nginx-production-config
+    namespace: ingress-nginx
+    scope: Namespace
+---
+# 内部流量 Traefik IngressClass
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: traefik-internal
+spec:
+  controller: traefik.io/ingress-controller
+---
+# 阿里云 ALB IngressClass
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: alb
+spec:
+  controller: ingress.k8s.alibabacloud/alb
+  parameters:
+    apiGroup: alibabacloud.com
+    kind: AlbConfig
+    name: production-alb
+---
+# 使用特定 IngressClass 的 Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: internal-api
+  namespace: internal
+spec:
+  ingressClassName: traefik-internal  # 明确指定
+  rules:
+  - host: internal-api.corp.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-api
+            port:
+              number: 8080
+</code></pre>
+<hr>
+<h2 id="四ingress-工作原理"><a class="header" href="#四ingress-工作原理">四、Ingress 工作原理</a></h2>
+<h3 id="41-ingress-controller-工作流程"><a class="header" href="#41-ingress-controller-工作流程">4.1 Ingress Controller 工作流程</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                        Ingress Controller 工作流程                                   │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                      │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           1. Watch 阶段                                       │   │
+│  │                                                                               │   │
+│  │  Ingress Controller 通过 client-go Informer 机制监听以下资源:                  │   │
+│  │                                                                               │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │   │
+│  │  │   Ingress   │  │   Service   │  │ Endpoints/  │  │   Secret    │         │   │
+│  │  │  资源变化    │  │  资源变化    │  │EndpointSlice│  │  (TLS证书)   │         │   │
+│  │  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘         │   │
+│  │         │                │                │                │                 │   │
+│  │         └────────────────┴────────────────┴────────────────┘                 │   │
+│  │                                    │                                          │   │
+│  │                                    ▼                                          │   │
+│  │                          ┌─────────────────┐                                  │   │
+│  │                          │   Event Queue   │                                  │   │
+│  │                          │   (WorkQueue)   │                                  │   │
+│  │                          └────────┬────────┘                                  │   │
+│  └───────────────────────────────────┼──────────────────────────────────────────┘   │
+│                                      │                                               │
+│                                      ▼                                               │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           2. Sync 阶段                                        │   │
+│  │                                                                               │   │
+│  │  ┌─────────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │  Sync Handler 处理流程:                                                  │ │   │
+│  │  │                                                                          │ │   │
+│  │  │  1. 从 Queue 获取事件                                                    │ │   │
+│  │  │  2. 获取所有相关的 Ingress 资源                                          │ │   │
+│  │  │  3. 过滤: 只处理匹配当前 IngressClass 的 Ingress                         │ │   │
+│  │  │  4. 解析 Ingress rules 和 annotations                                    │ │   │
+│  │  │  5. 查询关联的 Service 和 Endpoints                                      │ │   │
+│  │  │  6. 获取 TLS Secret 中的证书                                             │ │   │
+│  │  │  7. 构建内部路由模型                                                      │ │   │
+│  │  └─────────────────────────────────────────────────────────────────────────┘ │   │
+│  └───────────────────────────────────┬──────────────────────────────────────────┘   │
+│                                      │                                               │
+│                                      ▼                                               │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                        3. Config Generation 阶段                              │   │
+│  │                                                                               │   │
+│  │  根据控制器类型生成对应的代理配置:                                             │   │
+│  │                                                                               │   │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐               │   │
+│  │  │     NGINX       │  │     Envoy       │  │    Traefik      │               │   │
+│  │  │                 │  │                 │  │                 │               │   │
+│  │  │  nginx.conf     │  │  xDS API        │  │  Dynamic Config │               │   │
+│  │  │  ┌───────────┐ │  │  ┌───────────┐ │  │  ┌───────────┐ │               │   │
+│  │  │  │ server {} │ │  │  │ Listener  │ │  │  │ Router    │ │               │   │
+│  │  │  │ location  │ │  │  │ Route     │ │  │  │ Service   │ │               │   │
+│  │  │  │ upstream  │ │  │  │ Cluster   │ │  │  │ Middleware│ │               │   │
+│  │  │  └───────────┘ │  │  └───────────┘ │  │  └───────────┘ │               │   │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘               │   │
+│  └───────────────────────────────────────────┬──────────────────────────────────┘   │
+│                                              │                                       │
+│                                              ▼                                       │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           4. Reload 阶段                                      │   │
+│  │                                                                               │   │
+│  │  ┌─────────────────────────────────────────────────────────────────────────┐ │   │
+│  │  │  不同控制器的配置更新方式:                                                │ │   │
+│  │  │                                                                          │ │   │
+│  │  │  NGINX:                                                                  │ │   │
+│  │  │    - 配置文件变更 → nginx -t 验证 → nginx -s reload                      │ │   │
+│  │  │    - Endpoints 变更 → Lua 动态更新 (无需 reload)                         │ │   │
+│  │  │                                                                          │ │   │
+│  │  │  Envoy (Contour/Istio):                                                  │ │   │
+│  │  │    - xDS API 推送 → 热更新，无需重启                                      │ │   │
+│  │  │                                                                          │ │   │
+│  │  │  Traefik:                                                                │ │   │
+│  │  │    - 内置动态配置 → 实时更新，无需重启                                     │ │   │
+│  │  └─────────────────────────────────────────────────────────────────────────┘ │   │
+│  └───────────────────────────────────────────┬──────────────────────────────────┘   │
+│                                              │                                       │
+│                                              ▼                                       │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐   │
+│  │                           5. Status Update 阶段                               │   │
+│  │                                                                               │   │
+│  │  更新 Ingress 的 status.loadBalancer 字段:                                    │   │
+│  │                                                                               │   │
+│  │  status:                                                                      │   │
+│  │    loadBalancer:                                                              │   │
+│  │      ingress:                                                                 │   │
+│  │      - ip: "203.0.113.10"           # 分配的外部 IP                          │   │
+│  │        hostname: "xxx.elb.amazonaws.com"  # 或云 LB 的域名                   │   │
+│  │                                                                               │   │
+│  └──────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                      │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="42-流量转发路径对比"><a class="header" href="#42-流量转发路径对比">4.2 流量转发路径对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>转发模式</th><th>路径</th><th>数据流</th><th>优点</th><th>缺点</th><th>控制器支持</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Service 转发</strong></td><td>Ingress → Service (ClusterIP) → Pod</td><td><code>Client → LB → IC → Service VIP → kube-proxy → Pod</code></td><td>简单，利用 K8s 原生负载均衡</td><td>额外跳转，延迟稍高</td><td>所有控制器默认</td></tr>
+<tr><td><strong>Endpoints 直连</strong></td><td>Ingress → Endpoints → Pod</td><td><code>Client → LB → IC → Pod IP</code></td><td>绕过 kube-proxy，延迟更低</td><td>需要控制器支持</td><td>NGINX, Traefik, Kong</td></tr>
+<tr><td><strong>EndpointSlice 直连</strong></td><td>Ingress → EndpointSlice → Pod</td><td><code>Client → LB → IC → Pod IP</code></td><td>大规模集群优化，支持 Zone 感知</td><td>需要 v1.21+</td><td>现代控制器</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="43-请求处理流程详解"><a class="header" href="#43-请求处理流程详解">4.3 请求处理流程详解</a></h3>
+<pre><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              HTTP 请求处理详细流程                                       │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                         │
+│  Client Request: GET https://api.example.com/v1/users HTTP/1.1                         │
+│                                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 1: DNS 解析                                                                 │   │
+│  │                                                                                  │   │
+│  │ api.example.com → 203.0.113.10 (Ingress Controller External IP)                 │   │
+│  │                                                                                  │   │
+│  │ 来源: external-dns 自动创建 或 手动 DNS 记录                                     │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 2: TLS 握手 (HTTPS)                                                         │   │
+│  │                                                                                  │   │
+│  │ 1. Client Hello (支持的 TLS 版本、密码套件)                                      │   │
+│  │ 2. Server Hello (选择 TLS 1.3, AES-256-GCM)                                     │   │
+│  │ 3. Certificate (api.example.com 证书，来自 TLS Secret)                          │   │
+│  │ 4. Key Exchange (ECDHE)                                                          │   │
+│  │ 5. Finished (加密通道建立)                                                       │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 3: Host 匹配                                                                │   │
+│  │                                                                                  │   │
+│  │ HTTP Host Header: api.example.com                                               │   │
+│  │                                                                                  │   │
+│  │ 匹配 Ingress Rule:                                                              │   │
+│  │   rules:                                                                         │   │
+│  │   - host: api.example.com  ← 匹配                                               │   │
+│  │   - host: www.example.com  ← 不匹配                                             │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 4: Path 匹配                                                                │   │
+│  │                                                                                  │   │
+│  │ Request Path: /v1/users                                                          │   │
+│  │                                                                                  │   │
+│  │ 匹配规则 (按优先级):                                                             │   │
+│  │   - path: /v1/users  pathType: Exact   → 优先匹配 (如存在)                      │   │
+│  │   - path: /v1        pathType: Prefix  → 次优先匹配 ← 选中                       │   │
+│  │   - path: /          pathType: Prefix  → 最低优先                               │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 5: 后端选择与负载均衡                                                        │   │
+│  │                                                                                  │   │
+│  │ Backend Service: api-v1-service:8080                                             │   │
+│  │                                                                                  │   │
+│  │ EndpointSlice 后端 Pod:                                                          │   │
+│  │   - 10.244.1.10:8080 (Ready)                                                    │   │
+│  │   - 10.244.2.11:8080 (Ready)                                                    │   │
+│  │   - 10.244.3.12:8080 (Ready)                                                    │   │
+│  │                                                                                  │   │
+│  │ 负载均衡算法: Round Robin (默认)                                                  │   │
+│  │ 选中: 10.244.2.11:8080                                                           │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 6: 请求转发                                                                 │   │
+│  │                                                                                  │   │
+│  │ 原始请求:                                                                        │   │
+│  │   GET /v1/users HTTP/1.1                                                        │   │
+│  │   Host: api.example.com                                                         │   │
+│  │   X-Real-IP: (无)                                                               │   │
+│  │                                                                                  │   │
+│  │ 转发请求 (添加代理头):                                                           │   │
+│  │   GET /v1/users HTTP/1.1                                                        │   │
+│  │   Host: api.example.com                                                         │   │
+│  │   X-Real-IP: 1.2.3.4                                                            │   │
+│  │   X-Forwarded-For: 1.2.3.4                                                      │   │
+│  │   X-Forwarded-Proto: https                                                      │   │
+│  │   X-Forwarded-Host: api.example.com                                             │   │
+│  │   X-Request-ID: abc-123-def-456                                                 │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                        │                                                │
+│                                        ▼                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │ Step 7: 响应处理                                                                 │   │
+│  │                                                                                  │   │
+│  │ Pod 响应 → Ingress Controller → 返回 Client                                     │   │
+│  │                                                                                  │   │
+│  │ 可选处理:                                                                        │   │
+│  │   - 响应压缩 (gzip/brotli)                                                      │   │
+│  │   - 响应头修改                                                                   │   │
+│  │   - 缓存 (如配置)                                                               │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                         │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="五ingress-配置示例"><a class="header" href="#五ingress-配置示例">五、Ingress 配置示例</a></h2>
+<h3 id="51-基础配置示例"><a class="header" href="#51-基础配置示例">5.1 基础配置示例</a></h3>
+<h4 id="511-最简单的-ingress-单服务"><a class="header" href="#511-最简单的-ingress-单服务">5.1.1 最简单的 Ingress (单服务)</a></h4>
+<pre><code class="language-yaml"># minimal-ingress.yaml
+# 将所有流量转发到一个服务
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  namespace: default
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: web-service
+      port:
+        number: 80
+</code></pre>
+<h4 id="512-基于主机名的路由"><a class="header" href="#512-基于主机名的路由">5.1.2 基于主机名的路由</a></h4>
+<pre><code class="language-yaml"># host-based-routing.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: host-based-routing
+  namespace: production
+  labels:
+    app: multi-domain
+    environment: production
+spec:
+  ingressClassName: nginx
+  rules:
+  # 主站
+  - host: www.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: www-frontend
+            port:
+              number: 80
+  # API 服务
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-gateway
+            port:
+              number: 8080
+  # 管理后台
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-dashboard
+            port:
+              number: 3000
+  # 文档站点
+  - host: docs.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: docs-service
+            port:
+              number: 80
+</code></pre>
+<h4 id="513-基于路径的路由"><a class="header" href="#513-基于路径的路由">5.1.3 基于路径的路由</a></h4>
+<pre><code class="language-yaml"># path-based-routing.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: path-based-routing
+  namespace: production
+  annotations:
+    # NGINX 特定: 启用 URL 重写
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      # API v1 - 精确匹配健康检查端点
+      - path: /api/v1/health
+        pathType: Exact
+        backend:
+          service:
+            name: api-v1-health
+            port:
+              number: 80
+      # API v1 服务
+      - path: /api/v1(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-v1-service
+            port:
+              number: 8080
+      # API v2 服务
+      - path: /api/v2(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api-v2-service
+            port:
+              number: 8080
+      # 用户服务
+      - path: /users
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 8081
+      # 订单服务
+      - path: /orders
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service
+            port:
+              number: 8082
+      # 静态资源
+      - path: /static
+        pathType: Prefix
+        backend:
+          service:
+            name: static-service
+            port:
+              number: 80
+      # 默认 - 前端应用 (最低优先级)
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80
+</code></pre>
+<h4 id="514-混合路由-主机名--路径"><a class="header" href="#514-混合路由-主机名--路径">5.1.4 混合路由 (主机名 + 路径)</a></h4>
+<pre><code class="language-yaml"># mixed-routing.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mixed-routing
+  namespace: production
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - "*.example.com"
+    secretName: wildcard-tls-secret
+  rules:
+  # 生产环境 API - 多版本
+  - host: api.example.com
+    http:
+      paths:
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v1
+            port:
+              number: 8080
+      - path: /v2
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v2
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-latest
+            port:
+              number: 8080
+  # 移动端专用 API
+  - host: mobile-api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mobile-bff
+            port:
+              number: 8080
+  # Web 应用
+  - host: www.example.com
+    http:
+      paths:
+      - path: /assets
+        pathType: Prefix
+        backend:
+          service:
+            name: cdn-origin
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-frontend
+            port:
+              number: 3000
+</code></pre>
+<h3 id="52-tls-配置示例"><a class="header" href="#52-tls-配置示例">5.2 TLS 配置示例</a></h3>
+<h4 id="521-基础-tls-配置"><a class="header" href="#521-基础-tls-配置">5.2.1 基础 TLS 配置</a></h4>
+<pre><code class="language-yaml"># tls-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tls-ingress
+  namespace: production
+  annotations:
+    # 强制 HTTPS 重定向
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # HSTS 配置
+    nginx.ingress.kubernetes.io/hsts: "true"
+    nginx.ingress.kubernetes.io/hsts-max-age: "31536000"
+    nginx.ingress.kubernetes.io/hsts-include-subdomains: "true"
+    nginx.ingress.kubernetes.io/hsts-preload: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  # 单域名证书
+  - hosts:
+    - api.example.com
+    secretName: api-tls-secret
+  # 通配符证书
+  - hosts:
+    - "*.example.com"
+    secretName: wildcard-tls-secret
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+  - host: www.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-service
+            port:
+              number: 80
+---
+# TLS Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-tls-secret
+  namespace: production
+type: kubernetes.io/tls
+data:
+  # base64 编码的证书和私钥
+  tls.crt: LS0tLS1CRUdJTi...
+  tls.key: LS0tLS1CRUdJTi...
+</code></pre>
+<h4 id="522-cert-manager-自动证书管理"><a class="header" href="#522-cert-manager-自动证书管理">5.2.2 cert-manager 自动证书管理</a></h4>
+<pre><code class="language-yaml"># cert-manager-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auto-tls-ingress
+  namespace: production
+  annotations:
+    # cert-manager 自动签发证书
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # 可选: 使用 DNS01 challenge
+    # cert-manager.io/acme-challenge-type: dns01
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.example.com
+    - www.example.com
+    secretName: example-com-tls  # cert-manager 自动创建
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+---
+# ClusterIssuer 配置
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: admin@example.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    solvers:
+    # HTTP01 Challenge (需要 Ingress 可从公网访问)
+    - http01:
+        ingress:
+          class: nginx
+    # 或 DNS01 Challenge (适用于内网 Ingress)
+    # - dns01:
+    #     cloudflare:
+    #       email: admin@example.com
+    #       apiTokenSecretRef:
+    #         name: cloudflare-api-token
+    #         key: api-token
+</code></pre>
+<h3 id="53-高级配置示例"><a class="header" href="#53-高级配置示例">5.3 高级配置示例</a></h3>
+<h4 id="531-金丝雀发布配置-nginx-ingress"><a class="header" href="#531-金丝雀发布配置-nginx-ingress">5.3.1 金丝雀发布配置 (NGINX Ingress)</a></h4>
+<pre><code class="language-yaml"># canary-ingress.yaml
+# 主 Ingress - 生产流量
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: production-ingress
+  namespace: production
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-stable
+            port:
+              number: 8080
+---
+# 金丝雀 Ingress - 10% 流量
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: canary-ingress
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    # 方式1: 按权重分流 (10%)
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+    # 方式2: 按 Header 分流 (可与权重组合)
+    # nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"
+    # nginx.ingress.kubernetes.io/canary-by-header-value: "true"
+    # 方式3: 按 Cookie 分流
+    # nginx.ingress.kubernetes.io/canary-by-cookie: "canary"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-canary
+            port:
+              number: 8080
+</code></pre>
+<h4 id="532-限流配置"><a class="header" href="#532-限流配置">5.3.2 限流配置</a></h4>
+<pre><code class="language-yaml"># rate-limit-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rate-limited-ingress
+  namespace: production
+  annotations:
+    # 全局限流
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-rpm: "1000"
+    # 并发连接限制
+    nginx.ingress.kubernetes.io/limit-connections: "10"
+    # 限流白名单
+    nginx.ingress.kubernetes.io/limit-whitelist: "10.0.0.0/8,192.168.0.0/16"
+    # 超出限流返回 429
+    nginx.ingress.kubernetes.io/limit-rate-after: "10m"
+    nginx.ingress.kubernetes.io/limit-rate: "100k"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+</code></pre>
+<h4 id="533-认证配置"><a class="header" href="#533-认证配置">5.3.3 认证配置</a></h4>
+<pre><code class="language-yaml"># auth-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auth-ingress
+  namespace: production
+  annotations:
+    # Basic Auth
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth-secret
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+    # 或 External Auth (OAuth2 Proxy)
+    # nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.example.com/oauth2/auth"
+    # nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.example.com/oauth2/start?rd=$scheme://$host$request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 8080
+---
+# Basic Auth Secret (htpasswd 格式)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: basic-auth-secret
+  namespace: production
+type: Opaque
+data:
+  # 生成方式: htpasswd -c auth admin
+  auth: YWRtaW46JGFwcjEkc29tZXNhbHQkdGhlcGFzc3dvcmRoYXNo
+</code></pre>
+<h3 id="54-生产环境完整配置示例"><a class="header" href="#54-生产环境完整配置示例">5.4 生产环境完整配置示例</a></h3>
+<pre><code class="language-yaml"># production-ingress-complete.yaml
+---
+# IngressClass
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx-production
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
+---
+# TLS Secret (由 cert-manager 管理)
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-example-com
+  namespace: production
+spec:
+  secretName: api-example-com-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - api.example.com
+  - "*.api.example.com"
+---
+# Production Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-gateway-ingress
+  namespace: production
+  labels:
+    app: api-gateway
+    environment: production
+    team: platform
+  annotations:
+    # 基础配置
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    
+    # 安全加固
+    nginx.ingress.kubernetes.io/hsts: "true"
+    nginx.ingress.kubernetes.io/hsts-max-age: "31536000"
+    nginx.ingress.kubernetes.io/hsts-include-subdomains: "true"
+    nginx.ingress.kubernetes.io/hsts-preload: "true"
+    
+    # 代理配置
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+    
+    # 负载均衡
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$request_uri"
+    nginx.ingress.kubernetes.io/load-balance: "ewma"
+    
+    # 限流
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-connections: "50"
+    
+    # 后端协议
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    
+    # 跨域配置
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://www.example.com,https://app.example.com"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-max-age: "86400"
+    
+    # 自定义响应头
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+    
+    # 访问日志
+    nginx.ingress.kubernetes.io/enable-access-log: "true"
+    
+    # 监控集成
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10254"
+spec:
+  ingressClassName: nginx-production
+  tls:
+  - hosts:
+    - api.example.com
+    - "*.api.example.com"
+    secretName: api-example-com-tls
+  rules:
+  # API v2 (当前稳定版)
+  - host: api.example.com
+    http:
+      paths:
+      # 健康检查 - 精确匹配
+      - path: /health
+        pathType: Exact
+        backend:
+          service:
+            name: health-check-service
+            port:
+              number: 80
+      # API v2 路由
+      - path: /v2
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v2-service
+            port:
+              number: 8080
+      # API v1 路由 (旧版本，逐步下线)
+      - path: /v1
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v1-service
+            port:
+              number: 8080
+      # 默认路由到最新版本
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v2-service
+            port:
+              number: 8080
+  # 内部 API (子域名)
+  - host: internal.api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-api-service
+            port:
+              number: 8080
+---
+# 对应的后端 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-v2-service
+  namespace: production
+  labels:
+    app: api
+    version: v2
+spec:
+  type: ClusterIP
+  selector:
+    app: api
+    version: v2
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-v2
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: api
+        version: v2
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: api
+      containers:
+      - name: api
+        image: api-server:v2.0.0
+        ports:
+        - name: http
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 2
+            memory: 2Gi
+---
+# PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: api-v2-pdb
+  namespace: production
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: api
+      version: v2
+</code></pre>
+<hr>
+<h2 id="六nginx-ingress-常用注解参考"><a class="header" href="#六nginx-ingress-常用注解参考">六、NGINX Ingress 常用注解参考</a></h2>
+<h3 id="61-基础配置注解"><a class="header" href="#61-基础配置注解">6.1 基础配置注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>默认值</th><th>说明</th><th>示例</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/ssl-redirect</code></td><td>true</td><td>HTTPS 重定向</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/force-ssl-redirect</code></td><td>false</td><td>强制 HTTPS 重定向</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/backend-protocol</code></td><td>HTTP</td><td>后端协议</td><td><code>"HTTP"</code>, <code>"HTTPS"</code>, <code>"GRPC"</code>, <code>"GRPCS"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/rewrite-target</code></td><td>-</td><td>URL 重写目标</td><td><code>"/$2"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/use-regex</code></td><td>false</td><td>启用正则路径</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/app-root</code></td><td>-</td><td>应用根路径重定向</td><td><code>"/app"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/default-backend</code></td><td>-</td><td>自定义默认后端</td><td><code>"namespace/service"</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="62-代理配置注解"><a class="header" href="#62-代理配置注解">6.2 代理配置注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>默认值</th><th>说明</th><th>生产建议</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-body-size</code></td><td>1m</td><td>请求体大小限制</td><td>根据业务，如 <code>"100m"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-connect-timeout</code></td><td>5</td><td>连接超时 (秒)</td><td><code>"10"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-read-timeout</code></td><td>60</td><td>读取超时 (秒)</td><td><code>"60"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-send-timeout</code></td><td>60</td><td>发送超时 (秒)</td><td><code>"60"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-buffer-size</code></td><td>4k</td><td>代理缓冲区大小</td><td><code>"16k"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-buffers-number</code></td><td>4</td><td>缓冲区数量</td><td><code>"8"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-next-upstream</code></td><td>error timeout</td><td>故障转移条件</td><td><code>"error timeout http_502 http_503"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/proxy-next-upstream-tries</code></td><td>3</td><td>故障转移次数</td><td><code>"3"</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="63-负载均衡注解"><a class="header" href="#63-负载均衡注解">6.3 负载均衡注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>默认值</th><th>说明</th><th>可选值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/load-balance</code></td><td>round_robin</td><td>负载均衡算法</td><td><code>round_robin</code>, <code>least_conn</code>, <code>ip_hash</code>, <code>ewma</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/upstream-hash-by</code></td><td>-</td><td>一致性哈希键</td><td><code>"$request_uri"</code>, <code>"$remote_addr"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/affinity</code></td><td>-</td><td>会话亲和性</td><td><code>"cookie"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/session-cookie-name</code></td><td>INGRESSCOOKIE</td><td>会话 Cookie 名称</td><td>自定义名称</td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/session-cookie-max-age</code></td><td>-</td><td>Cookie 过期时间</td><td><code>"172800"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/session-cookie-path</code></td><td>/</td><td>Cookie 路径</td><td><code>"/"</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="64-安全相关注解"><a class="header" href="#64-安全相关注解">6.4 安全相关注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>默认值</th><th>说明</th><th>生产建议</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/whitelist-source-range</code></td><td>-</td><td>IP 白名单</td><td>CIDR 格式</td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/limit-rps</code></td><td>-</td><td>每秒请求限制</td><td><code>"100"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/limit-rpm</code></td><td>-</td><td>每分钟请求限制</td><td><code>"1000"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/limit-connections</code></td><td>-</td><td>并发连接限制</td><td><code>"50"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/auth-type</code></td><td>-</td><td>认证类型</td><td><code>basic</code>, <code>digest</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/auth-secret</code></td><td>-</td><td>认证 Secret</td><td>Secret 名称</td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/auth-url</code></td><td>-</td><td>外部认证 URL</td><td>OAuth2 Proxy URL</td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/enable-modsecurity</code></td><td>false</td><td>启用 ModSecurity WAF</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/modsecurity-snippet</code></td><td>-</td><td>ModSecurity 规则</td><td>自定义规则</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="65-tlsssl-注解"><a class="header" href="#65-tlsssl-注解">6.5 TLS/SSL 注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>默认值</th><th>说明</th><th>推荐值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/ssl-protocols</code></td><td>TLSv1.2 TLSv1.3</td><td>TLS 协议版本</td><td><code>"TLSv1.2 TLSv1.3"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/ssl-ciphers</code></td><td>-</td><td>密码套件</td><td>现代密码套件</td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/ssl-prefer-server-ciphers</code></td><td>true</td><td>优先服务端密码</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/hsts</code></td><td>false</td><td>启用 HSTS</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/hsts-max-age</code></td><td>15724800</td><td>HSTS 有效期</td><td><code>"31536000"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/hsts-include-subdomains</code></td><td>false</td><td>HSTS 包含子域</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/hsts-preload</code></td><td>false</td><td>HSTS 预加载</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/ssl-passthrough</code></td><td>false</td><td>TLS 透传</td><td><code>"true"</code> (特殊场景)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="66-金丝雀发布注解"><a class="header" href="#66-金丝雀发布注解">6.6 金丝雀发布注解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>注解</th><th>说明</th><th>示例</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nginx.ingress.kubernetes.io/canary</code></td><td>启用金丝雀</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/canary-weight</code></td><td>权重分流 (0-100)</td><td><code>"10"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/canary-by-header</code></td><td>Header 分流键</td><td><code>"X-Canary"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/canary-by-header-value</code></td><td>Header 分流值</td><td><code>"true"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/canary-by-header-pattern</code></td><td>Header 正则匹配</td><td><code>"^(true|yes)$"</code></td></tr>
+<tr><td><code>nginx.ingress.kubernetes.io/canary-by-cookie</code></td><td>Cookie 分流</td><td><code>"canary"</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="七ingress-版本演进"><a class="header" href="#七ingress-版本演进">七、Ingress 版本演进</a></h2>
+<h3 id="71-api-版本演进历史"><a class="header" href="#71-api-版本演进历史">7.1 API 版本演进历史</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>版本</th><th>API Version</th><th>状态</th><th>K8s 版本</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Alpha</strong></td><td><code>extensions/v1beta1</code></td><td>已移除</td><td>v1.1 - v1.13</td><td>最初版本</td></tr>
+<tr><td><strong>Beta</strong></td><td><code>networking.k8s.io/v1beta1</code></td><td>已移除</td><td>v1.14 - v1.21</td><td>迁移到 networking API Group</td></tr>
+<tr><td><strong>GA</strong></td><td><code>networking.k8s.io/v1</code></td><td>稳定</td><td>v1.19+</td><td>当前生产版本</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="72-各-k8s-版本-ingress-相关变更"><a class="header" href="#72-各-k8s-版本-ingress-相关变更">7.2 各 K8s 版本 Ingress 相关变更</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>K8s 版本</th><th>Ingress 相关变更</th><th>影响</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>v1.18</strong></td><td>IngressClass 引入 (Beta)，pathType 字段引入</td><td>需要指定 pathType</td></tr>
+<tr><td><strong>v1.19</strong></td><td>Ingress 和 IngressClass GA，networking.k8s.io/v1 稳定</td><td>推荐使用 GA 版本</td></tr>
+<tr><td><strong>v1.20</strong></td><td><code>kubernetes.io/ingress.class</code> 注解弃用警告</td><td>建议迁移到 ingressClassName</td></tr>
+<tr><td><strong>v1.22</strong></td><td><code>extensions/v1beta1</code> 和 <code>networking.k8s.io/v1beta1</code> 移除</td><td>必须使用 v1</td></tr>
+<tr><td><strong>v1.25</strong></td><td>默认 IngressClass 行为改进，多个默认 IngressClass 处理优化</td><td>更一致的行为</td></tr>
+<tr><td><strong>v1.28</strong></td><td>Ingress 路径匹配增强，更严格的验证</td><td>验证更严格</td></tr>
+<tr><td><strong>v1.29</strong></td><td>PortStatus 字段添加到 IngressLoadBalancerStatus</td><td>更多状态信息</td></tr>
+<tr><td><strong>v1.30</strong></td><td>Gateway API v1.0 GA</td><td>Ingress 与 Gateway API 长期共存</td></tr>
+<tr><td><strong>v1.31</strong></td><td>持续稳定性改进</td><td>-</td></tr>
+<tr><td><strong>v1.32</strong></td><td>当前最新稳定版</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="73-api-迁移指南"><a class="header" href="#73-api-迁移指南">7.3 API 迁移指南</a></h3>
+<pre><code class="language-yaml"># 旧版本 (v1.21 前) - 已不支持
+apiVersion: extensions/v1beta1  # 或 networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: old-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx  # 旧方式指定控制器
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-service  # 旧字段名
+          servicePort: 80           # 旧字段名
+---
+# 新版本 (v1.22+) - 当前标准
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: new-ingress
+  # annotations 中的 ingress.class 不再推荐
+spec:
+  ingressClassName: nginx  # 新方式指定控制器
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix  # 必填字段
+        backend:
+          service:        # 结构化配置
+            name: web-service
+            port:
+              number: 80  # 或 name: http
+</code></pre>
+<p><strong>迁移步骤:</strong></p>
+<ol>
+<li>将 <code>apiVersion</code> 改为 <code>networking.k8s.io/v1</code></li>
+<li>添加 <code>spec.ingressClassName</code> 替代 <code>kubernetes.io/ingress.class</code> 注解</li>
+<li>为每个 path 添加 <code>pathType</code> 字段</li>
+<li>将 <code>backend.serviceName/servicePort</code> 改为 <code>backend.service.name/port.number</code></li>
+</ol>
+<hr>
+<h2 id="八kubectl-ingress-操作命令"><a class="header" href="#八kubectl-ingress-操作命令">八、kubectl Ingress 操作命令</a></h2>
+<h3 id="81-基础命令"><a class="header" href="#81-基础命令">8.1 基础命令</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>命令</th><th>说明</th><th>示例</th></tr>
+</thead>
+<tbody>
+<tr><td><code>kubectl get ingress</code></td><td>列出当前命名空间的 Ingress</td><td><code>kubectl get ing</code></td></tr>
+<tr><td><code>kubectl get ingress -A</code></td><td>列出所有命名空间的 Ingress</td><td><code>kubectl get ing -A</code></td></tr>
+<tr><td><code>kubectl get ingress -o wide</code></td><td>显示更多信息 (ADDRESS, PORTS)</td><td><code>kubectl get ing -o wide</code></td></tr>
+<tr><td><code>kubectl get ingress &lt;name&gt; -o yaml</code></td><td>查看 Ingress YAML</td><td><code>kubectl get ing my-ingress -o yaml</code></td></tr>
+<tr><td><code>kubectl describe ingress &lt;name&gt;</code></td><td>查看 Ingress 详情和事件</td><td><code>kubectl describe ing my-ingress</code></td></tr>
+<tr><td><code>kubectl delete ingress &lt;name&gt;</code></td><td>删除 Ingress</td><td><code>kubectl delete ing my-ingress</code></td></tr>
+<tr><td><code>kubectl edit ingress &lt;name&gt;</code></td><td>编辑 Ingress</td><td><code>kubectl edit ing my-ingress</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="82-创建-ingress-命令"><a class="header" href="#82-创建-ingress-命令">8.2 创建 Ingress 命令</a></h3>
+<pre><code class="language-bash"># 创建简单 Ingress
+kubectl create ingress simple-ingress \
+  --class=nginx \
+  --rule="demo.example.com/*=demo-service:80"
+
+# 创建带 TLS 的 Ingress
+kubectl create ingress tls-ingress \
+  --class=nginx \
+  --rule="secure.example.com/*=web-service:80,tls=my-tls-secret"
+
+# 创建多规则 Ingress
+kubectl create ingress multi-rule-ingress \
+  --class=nginx \
+  --rule="api.example.com/v1*=api-v1:8080" \
+  --rule="api.example.com/v2*=api-v2:8080" \
+  --rule="www.example.com/*=frontend:80"
+
+# 创建带默认后端的 Ingress
+kubectl create ingress default-backend-ingress \
+  --class=nginx \
+  --default-backend=default-service:80 \
+  --rule="app.example.com/*=app-service:8080"
+</code></pre>
+<h3 id="83-调试和排障命令"><a class="header" href="#83-调试和排障命令">8.3 调试和排障命令</a></h3>
+<pre><code class="language-bash"># 查看 IngressClass
+kubectl get ingressclass
+kubectl describe ingressclass nginx
+
+# 查看默认 IngressClass
+kubectl get ingressclass -o jsonpath='{.items[?(@.metadata.annotations.ingressclass\.kubernetes\.io/is-default-class=="true")].metadata.name}'
+
+# 检查 Ingress Controller Pod 状态
+kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller --tail=100
+
+# 查看 Ingress Controller 配置 (NGINX)
+kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- cat /etc/nginx/nginx.conf
+kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- nginx -T
+
+# 测试 Ingress 配置
+# 方式1: 通过 curl
+curl -H "Host: api.example.com" http://&lt;INGRESS-IP&gt;/
+curl -k -H "Host: api.example.com" https://&lt;INGRESS-IP&gt;/
+
+# 方式2: 通过临时 Pod
+kubectl run -it --rm debug --image=curlimages/curl --restart=Never -- \
+  curl -H "Host: api.example.com" http://ingress-nginx-controller.ingress-nginx.svc/
+
+# 查看 Ingress 状态
+kubectl get ingress -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.loadBalancer.ingress[*].ip}{"\n"}{end}'
+
+# 检查后端 Service 和 Endpoints
+kubectl get svc &lt;service-name&gt;
+kubectl get endpoints &lt;service-name&gt;
+kubectl get endpointslices -l kubernetes.io/service-name=&lt;service-name&gt;
+
+# 查看 Ingress Events
+kubectl get events --field-selector involvedObject.kind=Ingress
+</code></pre>
+<h3 id="84-常用排障-shell-脚本"><a class="header" href="#84-常用排障-shell-脚本">8.4 常用排障 Shell 脚本</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# ingress-debug.sh - Ingress 排障脚本
+
+NAMESPACE=${1:-default}
+INGRESS_NAME=${2:-}
+
+echo "=== Ingress 列表 ==="
+kubectl get ingress -n $NAMESPACE -o wide
+
+if [ -n "$INGRESS_NAME" ]; then
+  echo ""
+  echo "=== Ingress 详情: $INGRESS_NAME ==="
+  kubectl describe ingress $INGRESS_NAME -n $NAMESPACE
+  
+  echo ""
+  echo "=== 关联的 Service ==="
+  kubectl get ingress $INGRESS_NAME -n $NAMESPACE -o jsonpath='{.spec.rules[*].http.paths[*].backend.service.name}' | tr ' ' '\n' | sort -u | while read svc; do
+    echo "--- Service: $svc ---"
+    kubectl get svc $svc -n $NAMESPACE -o wide
+    kubectl get endpoints $svc -n $NAMESPACE
+  done
+  
+  echo ""
+  echo "=== TLS 证书 ==="
+  kubectl get ingress $INGRESS_NAME -n $NAMESPACE -o jsonpath='{.spec.tls[*].secretName}' | tr ' ' '\n' | while read secret; do
+    echo "--- Secret: $secret ---"
+    kubectl get secret $secret -n $NAMESPACE -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates -subject
+  done
+fi
+
+echo ""
+echo "=== IngressClass ==="
+kubectl get ingressclass
+
+echo ""
+echo "=== Ingress Controller Pods ==="
+kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller
+
+echo ""
+echo "=== 最近 Events ==="
+kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | grep -i ingress | tail -20
+</code></pre>
+<hr>
+<h2 id="九ingress-设计原则与最佳实践"><a class="header" href="#九ingress-设计原则与最佳实践">九、Ingress 设计原则与最佳实践</a></h2>
+<h3 id="91-设计原则"><a class="header" href="#91-设计原则">9.1 设计原则</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>原则</th><th>说明</th><th>实践建议</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>单一职责</strong></td><td>每个 Ingress 负责一个域名或一组紧密相关的服务</td><td>避免单个 Ingress 过于复杂</td></tr>
+<tr><td><strong>命名规范</strong></td><td>使用有意义、一致的命名</td><td><code>&lt;app&gt;-&lt;env&gt;-ingress</code> 或 <code>&lt;domain&gt;-ingress</code></td></tr>
+<tr><td><strong>版本控制</strong></td><td>Ingress 配置纳入 GitOps</td><td>使用 Git 管理，配合 ArgoCD/Flux</td></tr>
+<tr><td><strong>安全优先</strong></td><td>默认启用 TLS，配置安全头</td><td>强制 HTTPS、HSTS、安全响应头</td></tr>
+<tr><td><strong>可观测性</strong></td><td>配置监控和日志</td><td>Prometheus 指标、访问日志、告警</td></tr>
+<tr><td><strong>渐进发布</strong></td><td>使用金丝雀/蓝绿部署</td><td>降低发布风险</td></tr>
+<tr><td><strong>资源隔离</strong></td><td>按环境/团队使用不同 IngressClass 或命名空间</td><td>避免配置冲突</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="92-反模式与解决方案"><a class="header" href="#92-反模式与解决方案">9.2 反模式与解决方案</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>反模式</th><th>问题</th><th>正确做法</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>无 IngressClass</strong></td><td>依赖隐式默认，升级可能中断</td><td>始终指定 <code>ingressClassName</code></td></tr>
+<tr><td><strong>单点故障</strong></td><td>控制器无高可用</td><td>多副本 + PodAntiAffinity + PDB</td></tr>
+<tr><td><strong>资源无限制</strong></td><td>控制器 OOM/CPU 饱和</td><td>配置合理的 requests/limits</td></tr>
+<tr><td><strong>无 TLS</strong></td><td>明文传输敏感数据</td><td>启用 TLS，强制 HTTPS 重定向</td></tr>
+<tr><td><strong>过长超时</strong></td><td>连接资源耗尽</td><td>合理配置超时 (10s 连接，60s 读取)</td></tr>
+<tr><td><strong>无速率限制</strong></td><td>易受 DDoS 攻击</td><td>配置限流策略</td></tr>
+<tr><td><strong>过大 Ingress</strong></td><td>单个 Ingress 规则过多，难以维护</td><td>拆分为多个 Ingress</td></tr>
+<tr><td><strong>硬编码 IP</strong></td><td>IP 变更导致配置失效</td><td>使用 DNS 和 Service 名称</td></tr>
+<tr><td><strong>忽略健康检查</strong></td><td>流量发送到不健康 Pod</td><td>配置 readiness/liveness probe</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="93-生产环境检查清单"><a class="header" href="#93-生产环境检查清单">9.3 生产环境检查清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>检查项</th><th>状态</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>高可用部署</td><td>[ ]</td><td>控制器至少 3 副本，跨可用区分布</td></tr>
+<tr><td>TLS 配置</td><td>[ ]</td><td>所有 Ingress 启用 TLS，证书自动续期</td></tr>
+<tr><td>HTTPS 重定向</td><td>[ ]</td><td>HTTP 自动重定向到 HTTPS</td></tr>
+<tr><td>HSTS 配置</td><td>[ ]</td><td>启用 HSTS，建议预加载</td></tr>
+<tr><td>限流策略</td><td>[ ]</td><td>配置 RPS/连接数限制</td></tr>
+<tr><td>超时配置</td><td>[ ]</td><td>合理的连接/读取/发送超时</td></tr>
+<tr><td>请求体限制</td><td>[ ]</td><td>根据业务配置 proxy-body-size</td></tr>
+<tr><td>监控告警</td><td>[ ]</td><td>Prometheus 指标、Grafana 仪表板、告警规则</td></tr>
+<tr><td>访问日志</td><td>[ ]</td><td>启用访问日志，配置日志轮转</td></tr>
+<tr><td>安全头</td><td>[ ]</td><td>X-Content-Type-Options, X-Frame-Options 等</td></tr>
+<tr><td>后端健康检查</td><td>[ ]</td><td>Service 后端 Pod 有 readinessProbe</td></tr>
+<tr><td>PDB 配置</td><td>[ ]</td><td>控制器和后端服务配置 PodDisruptionBudget</td></tr>
+<tr><td>资源限制</td><td>[ ]</td><td>控制器配置 CPU/内存 requests/limits</td></tr>
+<tr><td>网络策略</td><td>[ ]</td><td>NetworkPolicy 限制 Ingress Controller 访问范围</td></tr>
+<tr><td>备份恢复</td><td>[ ]</td><td>Ingress 配置纳入备份策略</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="十故障排除"><a class="header" href="#十故障排除">十、故障排除</a></h2>
+<h3 id="101-常见问题诊断"><a class="header" href="#101-常见问题诊断">10.1 常见问题诊断</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>问题</th><th>可能原因</th><th>诊断命令</th><th>解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Ingress 无 ADDRESS</strong></td><td>控制器未运行或未分配 IP</td><td><code>kubectl get pods -n ingress-nginx</code></td><td>检查控制器状态，查看 Service 类型</td></tr>
+<tr><td><strong>404 Not Found</strong></td><td>规则不匹配或后端不存在</td><td><code>kubectl describe ingress &lt;name&gt;</code></td><td>检查 host/path 配置，确认 Service 存在</td></tr>
+<tr><td><strong>502 Bad Gateway</strong></td><td>后端 Pod 不健康</td><td><code>kubectl get endpoints &lt;service&gt;</code></td><td>检查 Pod 状态和 readinessProbe</td></tr>
+<tr><td><strong>503 Service Unavailable</strong></td><td>无可用后端</td><td><code>kubectl get endpoints &lt;service&gt;</code></td><td>确认 Pod 运行且通过健康检查</td></tr>
+<tr><td><strong>SSL 证书错误</strong></td><td>证书不匹配或过期</td><td><code>openssl s_client -connect &lt;host&gt;:443</code></td><td>检查 Secret 证书有效性</td></tr>
+<tr><td><strong>路径匹配问题</strong></td><td>pathType 配置错误</td><td>对比请求路径和 Ingress 规则</td><td>调整 pathType 和 path</td></tr>
+<tr><td><strong>超时错误</strong></td><td>后端响应慢或超时配置过短</td><td><code>kubectl logs &lt;ingress-pod&gt;</code></td><td>调整超时参数或优化后端</td></tr>
+<tr><td><strong>限流生效</strong></td><td>触发限流规则</td><td>查看 429 状态码</td><td>调整限流参数或优化客户端</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="102-诊断流程图"><a class="header" href="#102-诊断流程图">10.2 诊断流程图</a></h3>
+<pre><code>请求失败
+    │
+    ├─→ 检查 DNS 解析
+    │      │
+    │      └─ nslookup &lt;host&gt;
+    │              │
+    │              ├─ 解析失败 → 检查 DNS 记录
+    │              │
+    │              └─ 解析成功 ↓
+    │
+    ├─→ 检查网络连通性
+    │      │
+    │      └─ curl -v http://&lt;ip&gt;
+    │              │
+    │              ├─ 连接失败 → 检查防火墙、LoadBalancer
+    │              │
+    │              └─ 连接成功 ↓
+    │
+    ├─→ 检查 TLS
+    │      │
+    │      └─ curl -kv https://&lt;host&gt;
+    │              │
+    │              ├─ 证书错误 → 检查 TLS Secret
+    │              │
+    │              └─ TLS 正常 ↓
+    │
+    ├─→ 检查 Ingress 规则
+    │      │
+    │      └─ kubectl describe ingress &lt;name&gt;
+    │              │
+    │              ├─ 规则不匹配 → 调整 host/path/pathType
+    │              │
+    │              └─ 规则匹配 ↓
+    │
+    ├─→ 检查后端 Service
+    │      │
+    │      └─ kubectl get endpoints &lt;svc&gt;
+    │              │
+    │              ├─ Endpoints 为空 → 检查 Pod 和 Selector
+    │              │
+    │              └─ Endpoints 存在 ↓
+    │
+    └─→ 检查 Pod 健康状态
+           │
+           └─ kubectl describe pod &lt;pod&gt;
+                   │
+                   ├─ Pod 不健康 → 修复 Pod 问题
+                   │
+                   └─ Pod 健康 → 检查应用日志
+</code></pre>
+<h3 id="103-常用诊断命令集合"><a class="header" href="#103-常用诊断命令集合">10.3 常用诊断命令集合</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# ingress-troubleshoot.sh
+
+# 1. 检查 Ingress Controller 状态
+echo "=== Ingress Controller Status ==="
+kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller -o wide
+kubectl get svc -n ingress-nginx
+
+# 2. 检查 Ingress 资源
+echo ""
+echo "=== Ingress Resources ==="
+kubectl get ingress -A -o wide
+
+# 3. 检查特定 Ingress
+INGRESS_NAME=${1:-""}
+NAMESPACE=${2:-"default"}
+if [ -n "$INGRESS_NAME" ]; then
+  echo ""
+  echo "=== Ingress Details: $INGRESS_NAME ==="
+  kubectl describe ingress $INGRESS_NAME -n $NAMESPACE
+  
+  # 4. 检查关联的 Service 和 Endpoints
+  echo ""
+  echo "=== Backend Services ==="
+  SERVICES=$(kubectl get ingress $INGRESS_NAME -n $NAMESPACE -o jsonpath='{.spec.rules[*].http.paths[*].backend.service.name}')
+  for svc in $SERVICES; do
+    echo "--- Service: $svc ---"
+    kubectl get svc $svc -n $NAMESPACE -o wide
+    kubectl get endpoints $svc -n $NAMESPACE
+    kubectl get endpointslices -l kubernetes.io/service-name=$svc -n $NAMESPACE
+  done
+fi
+
+# 5. 检查控制器日志
+echo ""
+echo "=== Controller Logs (last 50 lines) ==="
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller --tail=50
+
+# 6. 检查 Events
+echo ""
+echo "=== Recent Events ==="
+kubectl get events -A --sort-by='.lastTimestamp' | grep -i ingress | tail -20
+
+# 7. 测试连通性
+INGRESS_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+if [ -n "$INGRESS_IP" ]; then
+  echo ""
+  echo "=== Connectivity Test ==="
+  echo "Ingress IP: $INGRESS_IP"
+  curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" http://$INGRESS_IP/
+fi
+</code></pre>
+<hr>
+<h2 id="十一ingress-与-gateway-api-对比"><a class="header" href="#十一ingress-与-gateway-api-对比">十一、Ingress 与 Gateway API 对比</a></h2>
+<h3 id="111-功能对比"><a class="header" href="#111-功能对比">11.1 功能对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>Ingress</th><th>Gateway API</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>协议支持</strong></td><td>HTTP/HTTPS</td><td>HTTP/HTTPS/TCP/UDP/gRPC/TLS</td><td>Gateway API 更全面</td></tr>
+<tr><td><strong>路由能力</strong></td><td>Host/Path</td><td>Host/Path/Header/Query/Method</td><td>Gateway API 更丰富</td></tr>
+<tr><td><strong>流量分割</strong></td><td>注解 (控制器特定)</td><td>原生支持 (BackendRef weight)</td><td>Gateway API 标准化</td></tr>
+<tr><td><strong>跨命名空间</strong></td><td>受限</td><td>ReferenceGrant 支持</td><td>Gateway API 更灵活</td></tr>
+<tr><td><strong>角色分离</strong></td><td>无</td><td>Gateway/HTTPRoute 分离</td><td>Gateway API 更清晰</td></tr>
+<tr><td><strong>扩展方式</strong></td><td>注解</td><td>Policy Attachment</td><td>Gateway API 更标准</td></tr>
+<tr><td><strong>成熟度</strong></td><td>GA (稳定)</td><td>GA (v1.0)</td><td>两者都稳定</td></tr>
+<tr><td><strong>控制器支持</strong></td><td>广泛</td><td>逐渐增加</td><td>Ingress 更成熟</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="112-选型建议"><a class="header" href="#112-选型建议">11.2 选型建议</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>场景</th><th>推荐方案</th><th>理由</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>简单 HTTP 路由</strong></td><td>Ingress</td><td>成熟稳定，配置简单</td></tr>
+<tr><td><strong>现有 Ingress 基础设施</strong></td><td>Ingress</td><td>避免迁移成本</td></tr>
+<tr><td><strong>多协议需求 (TCP/UDP/gRPC)</strong></td><td>Gateway API</td><td>原生支持非 HTTP 协议</td></tr>
+<tr><td><strong>复杂流量管理</strong></td><td>Gateway API</td><td>更丰富的路由和流量分割</td></tr>
+<tr><td><strong>多团队协作</strong></td><td>Gateway API</td><td>清晰的角色分离</td></tr>
+<tr><td><strong>跨命名空间路由</strong></td><td>Gateway API</td><td>ReferenceGrant 机制</td></tr>
+<tr><td><strong>服务网格集成</strong></td><td>Gateway API</td><td>与 Istio 等更好集成</td></tr>
+<tr><td><strong>新项目</strong></td><td>Gateway API</td><td>面向未来的选择</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="113-迁移路径"><a class="header" href="#113-迁移路径">11.3 迁移路径</a></h3>
+<pre><code>当前状态                                     目标状态
+┌─────────────────────┐                    ┌─────────────────────┐
+│     Ingress         │                    │    Gateway API      │
+│                     │                    │                     │
+│  ┌───────────────┐ │                    │  ┌───────────────┐ │
+│  │ Ingress       │ │   渐进式迁移        │  │ Gateway       │ │
+│  │ (多规则)      │ │ ──────────────────&gt; │  │ (基础设施层)  │ │
+│  └───────────────┘ │                    │  └───────────────┘ │
+│                     │                    │         │          │
+│                     │                    │         ▼          │
+│                     │                    │  ┌───────────────┐ │
+│                     │                    │  │ HTTPRoute     │ │
+│                     │                    │  │ (应用层)      │ │
+│                     │                    │  └───────────────┘ │
+└─────────────────────┘                    └─────────────────────┘
+
+迁移策略:
+1. 评估当前 Ingress 使用情况
+2. 确认 Ingress Controller 支持 Gateway API
+3. 创建 Gateway 资源 (平台团队)
+4. 逐步将 Ingress 转换为 HTTPRoute
+5. 验证功能和性能
+6. 完成迁移，下线旧 Ingress
+</code></pre>
+<hr>
+<h2 id="十二资源依赖关系"><a class="header" href="#十二资源依赖关系">十二、资源依赖关系</a></h2>
+<h3 id="121-ingress-相关资源关系图"><a class="header" href="#121-ingress-相关资源关系图">12.1 Ingress 相关资源关系图</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                           Ingress 资源依赖关系                                       │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                      │
+│   ┌────────────────────────────────────────────────────────────────────────────┐    │
+│   │                            IngressClass                                     │    │
+│   │  spec.controller: k8s.io/ingress-nginx                                     │    │
+│   │  spec.parameters: → IngressNginxConfiguration (可选)                        │    │
+│   └────────────────────────────────────────────────────────────────────────────┘    │
+│                                        ↑                                             │
+│                            spec.ingressClassName                                    │
+│                                        │                                             │
+│   ┌────────────────────────────────────┴───────────────────────────────────────┐    │
+│   │                              Ingress                                        │    │
+│   │                                                                             │    │
+│   │   metadata:                                                                 │    │
+│   │     name: my-ingress                                                        │    │
+│   │     namespace: production                                                   │    │
+│   │     annotations: {...}  ←─── 控制器特定配置                                 │    │
+│   │                                                                             │    │
+│   │   spec:                                                                     │    │
+│   │     ingressClassName: nginx  ───→ IngressClass                             │    │
+│   │     tls:                                                                    │    │
+│   │       - secretName: tls-secret ───→ Secret (TLS)                           │    │
+│   │     rules:                                                                  │    │
+│   │       - backend.service.name ───→ Service                                  │    │
+│   └─────────────────────────────────────────────────────────────────────────────┘    │
+│            │                              │                              │            │
+│            │                              │                              │            │
+│            ▼                              ▼                              ▼            │
+│   ┌─────────────────┐          ┌─────────────────┐          ┌─────────────────┐     │
+│   │  Secret (TLS)   │          │    Service      │          │ Ingress Ctrl    │     │
+│   │                 │          │                 │          │   Deployment    │     │
+│   │  type: tls      │          │  type:ClusterIP │          │                 │     │
+│   │  tls.crt        │          │  selector: ...  │          │  Watch:         │     │
+│   │  tls.key        │          │  ports: ...     │          │  - Ingress      │     │
+│   └─────────────────┘          └────────┬────────┘          │  - Service      │     │
+│                                         │                    │  - Endpoints    │     │
+│                                         │                    │  - Secret       │     │
+│                                         ▼                    └─────────────────┘     │
+│                                ┌─────────────────┐                                   │
+│                                │  EndpointSlice  │                                   │
+│                                │                 │                                   │
+│                                │  endpoints:     │                                   │
+│                                │  - 10.244.1.10  │                                   │
+│                                │  - 10.244.2.11  │                                   │
+│                                └────────┬────────┘                                   │
+│                                         │                                            │
+│                           ┌─────────────┴─────────────┐                             │
+│                           │                           │                             │
+│                           ▼                           ▼                             │
+│                  ┌─────────────────┐        ┌─────────────────┐                    │
+│                  │      Pod 1      │        │      Pod 2      │                    │
+│                  │  10.244.1.10    │        │  10.244.2.11    │                    │
+│                  │  :8080          │        │  :8080          │                    │
+│                  └─────────────────┘        └─────────────────┘                    │
+│                                                                                      │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="122-完整资源配置示例"><a class="header" href="#122-完整资源配置示例">12.2 完整资源配置示例</a></h3>
+<pre><code class="language-yaml"># 1. IngressClass (通常由平台团队创建)
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
+---
+# 2. Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    environment: production
+---
+# 3. TLS Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-tls-secret
+  namespace: production
+type: kubernetes.io/tls
+data:
+  tls.crt: &lt;base64-encoded-certificate&gt;
+  tls.key: &lt;base64-encoded-private-key&gt;
+---
+# 4. ConfigMap (应用配置)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: production
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+---
+# 5. Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: production
+  labels:
+    app: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web
+        image: web-app:v1.0.0
+        ports:
+        - name: http
+          containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: app-config
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+# 6. Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-service
+  namespace: production
+  labels:
+    app: web-app
+spec:
+  type: ClusterIP
+  selector:
+    app: web-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+    protocol: TCP
+---
+# 7. Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-app-ingress
+  namespace: production
+  labels:
+    app: web-app
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-secret
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-app-service
+            port:
+              number: 80
+---
+# 8. PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web-app-pdb
+  namespace: production
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: web-app
+---
+# 9. HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-app-hpa
+  namespace: production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-app
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+</code></pre>
+<hr>
+<p><strong>Ingress 核心原则</strong>: 选择合适的控制器 → 明确指定 IngressClass → 合理规划路由结构 → 启用 TLS 加密 → 配置高可用与监控 → 实施安全策略</p>
+<hr>
+<blockquote>
+<p><strong>参考文档</strong>:</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Kubernetes Ingress 官方文档</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class">Kubernetes IngressClass 文档</a></li>
+<li><a href="https://kubernetes.github.io/ingress-nginx/">NGINX Ingress Controller 文档</a></li>
+<li><a href="https://gateway-api.sigs.k8s.io/">Gateway API 官方文档</a></li>
+</ul>
+</blockquote>
+<hr>
+<p><em>Kusheet - Kubernetes 知识速查表项目</em></p>
+<p><strong>表格底部标记</strong>: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/18-network-encryption-mtls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/20-ingress-controller-deep-dive.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/18-network-encryption-mtls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/20-ingress-controller-deep-dive.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

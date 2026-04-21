@@ -1,0 +1,2762 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Kubernetes Service 核心概念与类型深度解析 (Service Concepts &amp; Types Deep Dive) - KUDIG-DATABASE - Kubernetes 生产运维全域知识库</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-70c25c6f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "navy";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-1731bb1c.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-35217294.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KUDIG-DATABASE - Kubernetes 生产运维全域知识库</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/kudig-io/kudig-database" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="kubernetes-service-核心概念与类型深度解析-service-concepts--types-deep-dive"><a class="header" href="#kubernetes-service-核心概念与类型深度解析-service-concepts--types-deep-dive">Kubernetes Service 核心概念与类型深度解析 (Service Concepts &amp; Types Deep Dive)</a></h1>
+<blockquote>
+<p><strong>适用版本</strong>: Kubernetes v1.25 - v1.32<br><strong>文档版本</strong>: v3.0 | 生产级 Service 完整配置参考<br><strong>最后更新</strong>: 2026-01<br><strong>参考文档</strong>: <a href="https://kubernetes.io/docs/concepts/services-networking/service/">kubernetes.io/docs/concepts/services-networking/service</a></p>
+</blockquote>
+<hr>
+<h2 id="1-service-核心架构-architecture-overview"><a class="header" href="#1-service-核心架构-architecture-overview">1. Service 核心架构 (Architecture Overview)</a></h2>
+<h3 id="11-整体架构图"><a class="header" href="#11-整体架构图">1.1 整体架构图</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                              Kubernetes Service Architecture                                     │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                  │
+│  ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                   Client Layer                                              │ │
+│  │                                                                                             │ │
+│  │  ┌───────────────────┐  ┌───────────────────┐  ┌───────────────────┐  ┌─────────────────┐ │ │
+│  │  │  Internal Client  │  │  External Client  │  │   DNS Client      │  │  Service Mesh   │ │ │
+│  │  │  (Pod in Cluster) │  │  (Browser/CLI)    │  │   Resolution      │  │  (Istio/Linkerd)│ │ │
+│  │  │                   │  │                   │  │                   │  │                 │ │ │
+│  │  │  ClusterIP:80     │  │  NodePort:30080   │  │  svc.ns.svc       │  │  VirtualService │ │ │
+│  │  │  svc-name:port    │  │  LoadBalancer IP  │  │  cluster.local    │  │  DestinationRule│ │ │
+│  │  └─────────┬─────────┘  └─────────┬─────────┘  └─────────┬─────────┘  └────────┬────────┘ │ │
+│  │            │                      │                      │                     │          │ │
+│  └────────────┼──────────────────────┼──────────────────────┼─────────────────────┼──────────┘ │
+│               │                      │                      │                     │            │
+│               ▼                      ▼                      ▼                     ▼            │
+│  ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                Service Layer (API Server)                                   │ │
+│  │                                                                                             │ │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────────────┐  │ │
+│  │  │                              Service Object (core/v1)                                │  │ │
+│  │  │                                                                                      │  │ │
+│  │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────────┐ │  │ │
+│  │  │  │ ClusterIP   │  │ NodePort    │  │LoadBalancer │  │ExternalName │  │ Headless  │ │  │ │
+│  │  │  │             │  │             │  │             │  │             │  │           │ │  │ │
+│  │  │  │ 10.96.x.x   │  │ 30000-32767 │  │ Cloud LB IP │  │ CNAME DNS   │  │ None      │ │  │ │
+│  │  │  │ Internal    │  │ Node-level  │  │ External    │  │ External    │  │ Direct IP │ │  │ │
+│  │  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────────┘ │  │ │
+│  │  └─────────────────────────────────────────────────────────────────────────────────────┘  │ │
+│  │                                           │                                                │ │
+│  │                                           │ selector: app=myapp                           │ │
+│  │                                           ▼                                                │ │
+│  │  ┌─────────────────────────────────────────────────────────────────────────────────────┐  │ │
+│  │  │                    EndpointSlice (discovery.k8s.io/v1)                               │  │ │
+│  │  │                                                                                      │  │ │
+│  │  │  endpoints:                                                                          │  │ │
+│  │  │    - addresses: [10.244.1.10]  conditions: {ready: true, serving: true}             │  │ │
+│  │  │    - addresses: [10.244.2.11]  conditions: {ready: true, serving: true}             │  │ │
+│  │  │    - addresses: [10.244.3.12]  conditions: {ready: false, terminating: true}        │  │ │
+│  │  │  ports: [{name: http, port: 8080, protocol: TCP, appProtocol: http}]               │  │ │
+│  │  └─────────────────────────────────────────────────────────────────────────────────────┘  │ │
+│  └────────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                           │                                                     │
+│                                           │ Watch &amp; Sync (Informer)                            │
+│                                           ▼                                                     │
+│  ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                              kube-proxy / CNI Layer                                         │ │
+│  │                                                                                             │ │
+│  │  ┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐            │ │
+│  │  │       Node 1         │  │       Node 2         │  │       Node 3         │            │ │
+│  │  │                      │  │                      │  │                      │            │ │
+│  │  │  ┌────────────────┐ │  │  ┌────────────────┐ │  │  ┌────────────────┐ │            │ │
+│  │  │  │   kube-proxy   │ │  │  │   kube-proxy   │ │  │  │   kube-proxy   │ │            │ │
+│  │  │  │ ┌────────────┐ │ │  │  │ ┌────────────┐ │ │  │  │ ┌────────────┐ │ │            │ │
+│  │  │  │ │  iptables  │ │ │  │  │ │    IPVS    │ │ │  │  │ │  nftables  │ │ │            │ │
+│  │  │  │ │  (legacy)  │ │ │  │  │ │ (recommend)│ │ │  │  │ │  (v1.29+)  │ │ │            │ │
+│  │  │  │ └────────────┘ │ │  │  │ └────────────┘ │ │  │  │ └────────────┘ │ │            │ │
+│  │  │  └────────────────┘ │  │  └────────────────┘ │  │  └────────────────┘ │            │ │
+│  │  │                      │  │                      │  │                      │            │ │
+│  │  │  Alternative: Cilium eBPF / Calico eBPF (无kube-proxy模式)                          │ │
+│  │  └──────────────────────┘  └──────────────────────┘  └──────────────────────┘            │ │
+│  └────────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                           │                                                     │
+│                                           │ Traffic Forwarding (NAT/DNAT)                      │
+│                                           ▼                                                     │
+│  ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                   Pod Layer                                                 │ │
+│  │                                                                                             │ │
+│  │  ┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐            │ │
+│  │  │       Pod 1          │  │       Pod 2          │  │       Pod 3          │            │ │
+│  │  │   10.244.1.10:8080   │  │   10.244.2.11:8080   │  │   10.244.3.12:8080   │            │ │
+│  │  │                      │  │                      │  │                      │            │ │
+│  │  │  ┌────────────────┐ │  │  ┌────────────────┐ │  │  ┌────────────────┐ │            │ │
+│  │  │  │   Container    │ │  │  │   Container    │ │  │  │   Container    │ │            │ │
+│  │  │  │ readiness: OK  │ │  │  │ readiness: OK  │ │  │  │ terminating    │ │            │ │
+│  │  │  └────────────────┘ │  │  └────────────────┘ │  │  └────────────────┘ │            │ │
+│  │  └──────────────────────┘  └──────────────────────┘  └──────────────────────┘            │ │
+│  └────────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="12-核心组件职责"><a class="header" href="#12-核心组件职责">1.2 核心组件职责</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">组件</th><th style="text-align: left">英文名</th><th style="text-align: left">职责</th><th style="text-align: left">关键特性</th><th style="text-align: left">版本说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>Service</strong></td><td style="text-align: left">Service</td><td style="text-align: left">为 Pod 提供稳定访问入口</td><td style="text-align: left">虚拟IP、负载均衡、服务发现</td><td style="text-align: left">所有版本</td></tr>
+<tr><td style="text-align: left"><strong>Endpoints</strong></td><td style="text-align: left">Endpoints</td><td style="text-align: left">存储后端 Pod IP 列表</td><td style="text-align: left">自动更新、Watch 机制</td><td style="text-align: left">所有版本(推荐用EndpointSlice)</td></tr>
+<tr><td style="text-align: left"><strong>EndpointSlice</strong></td><td style="text-align: left">EndpointSlice</td><td style="text-align: left">分片存储端点信息</td><td style="text-align: left">大规模高效、拓扑感知</td><td style="text-align: left">v1.21+ GA</td></tr>
+<tr><td style="text-align: left"><strong>kube-proxy</strong></td><td style="text-align: left">kube-proxy</td><td style="text-align: left">实现 Service 流量转发</td><td style="text-align: left">iptables/IPVS/nftables</td><td style="text-align: left">所有版本</td></tr>
+<tr><td style="text-align: left"><strong>CoreDNS</strong></td><td style="text-align: left">CoreDNS</td><td style="text-align: left">服务名称解析</td><td style="text-align: left">A/AAAA/SRV 记录</td><td style="text-align: left">v1.13+ 默认</td></tr>
+<tr><td style="text-align: left"><strong>EndpointSlice Controller</strong></td><td style="text-align: left">EndpointSlice Controller</td><td style="text-align: left">管理 EndpointSlice 生命周期</td><td style="text-align: left">自动创建、更新、清理</td><td style="text-align: left">v1.19+</td></tr>
+<tr><td style="text-align: left"><strong>Service Controller</strong></td><td style="text-align: left">Service Controller</td><td style="text-align: left">管理 LoadBalancer 类型</td><td style="text-align: left">云控制器集成</td><td style="text-align: left">所有版本</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="13-service-工作流程"><a class="header" href="#13-service-工作流程">1.3 Service 工作流程</a></h3>
+<pre><code>┌──────────────────────────────────────────────────────────────────────────────────────────┐
+│                            Service 创建与流量转发流程                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                           │
+│  1. Service 创建                                                                          │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │  kubectl apply -f service.yaml                                                       │ │
+│  │         │                                                                            │ │
+│  │         ▼                                                                            │ │
+│  │  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────────────────────┐ │ │
+│  │  │   API Server    │───▶│      etcd       │    │  Service Controller (KCM)       │ │ │
+│  │  │  - 验证 Service │    │  - 存储 Service │    │  - 分配 ClusterIP               │ │ │
+│  │  │  - 分配 ClusterIP│    │  - 持久化       │    │  - LoadBalancer: 调用云 API     │ │ │
+│  │  └─────────────────┘    └─────────────────┘    └─────────────────────────────────┘ │ │
+│  └─────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                           │
+│  2. EndpointSlice 同步                                                                   │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │  ┌─────────────────────────────┐    ┌─────────────────────────────────────────────┐ │ │
+│  │  │  EndpointSlice Controller   │    │           EndpointSlice                     │ │ │
+│  │  │                             │    │                                             │ │ │
+│  │  │  - Watch Service selector   │───▶│  - 记录匹配 Pod 的 IP/Port                  │ │ │
+│  │  │  - Watch Pod (Ready)        │    │  - conditions: ready/serving/terminating   │ │ │
+│  │  │  - 更新 EndpointSlice       │    │  - 最多 100 个 endpoint/slice              │ │ │
+│  │  └─────────────────────────────┘    └─────────────────────────────────────────────┘ │ │
+│  └─────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                           │
+│  3. kube-proxy 同步规则                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │  ┌─────────────────────────────┐    ┌─────────────────────────────────────────────┐ │ │
+│  │  │       kube-proxy            │    │         Linux Kernel                        │ │ │
+│  │  │                             │    │                                             │ │ │
+│  │  │  - Watch Service            │    │  iptables 模式:                             │ │ │
+│  │  │  - Watch EndpointSlice      │───▶│    KUBE-SERVICES → KUBE-SVC-xxx → KUBE-SEP  │ │ │
+│  │  │  - 生成转发规则             │    │  IPVS 模式:                                 │ │ │
+│  │  │                             │    │    ipvsadm -A -t ClusterIP:port -s rr       │ │ │
+│  │  └─────────────────────────────┘    └─────────────────────────────────────────────┘ │ │
+│  └─────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                           │
+│  4. 流量转发                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │  Client Pod          kube-proxy Rules           Backend Pod                         │ │
+│  │  ┌────────┐         ┌────────────────┐         ┌────────────┐                      │ │
+│  │  │        │ ──────▶ │  DNAT:         │ ──────▶ │            │                      │ │
+│  │  │ curl   │  dst:   │  ClusterIP:80  │  dst:   │ Container  │                      │ │
+│  │  │ svc:80 │ 10.96.  │  → PodIP:8080  │ 10.244. │  :8080     │                      │ │
+│  │  └────────┘  0.100  └────────────────┘  1.10   └────────────┘                      │ │
+│  └─────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="2-service-字段完整参考-field-reference"><a class="header" href="#2-service-字段完整参考-field-reference">2. Service 字段完整参考 (Field Reference)</a></h2>
+<h3 id="21-spec-核心字段"><a class="header" href="#21-spec-核心字段">2.1 spec 核心字段</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">字段</th><th style="text-align: left">类型</th><th style="text-align: center">必填</th><th style="text-align: left">默认值</th><th style="text-align: left">描述</th><th style="text-align: left">版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>spec.type</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">ClusterIP</td><td style="text-align: left">Service 类型</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.selector</code></td><td style="text-align: left">map[string]string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">标签选择器，关联后端 Pod</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.ports</code></td><td style="text-align: left">[]ServicePort</td><td style="text-align: center">是</td><td style="text-align: left">-</td><td style="text-align: left">端口配置列表</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.clusterIP</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">自动分配</td><td style="text-align: left">指定 ClusterIP，“None” 为 Headless</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.clusterIPs</code></td><td style="text-align: left">[]string</td><td style="text-align: center">否</td><td style="text-align: left">自动分配</td><td style="text-align: left">双栈 IP 列表</td><td style="text-align: left">v1.20+</td></tr>
+<tr><td style="text-align: left"><code>spec.externalIPs</code></td><td style="text-align: left">[]string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">外部 IP 列表</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.sessionAffinity</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">None</td><td style="text-align: left">会话亲和性 (None/ClientIP)</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.sessionAffinityConfig</code></td><td style="text-align: left">SessionAffinityConfig</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">会话亲和性配置</td><td style="text-align: left">v1.7+</td></tr>
+<tr><td style="text-align: left"><code>spec.externalName</code></td><td style="text-align: left">string</td><td style="text-align: center">条件</td><td style="text-align: left">-</td><td style="text-align: left">ExternalName 类型必填</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.externalTrafficPolicy</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">Cluster</td><td style="text-align: left">外部流量策略 (Cluster/Local)</td><td style="text-align: left">v1.7+</td></tr>
+<tr><td style="text-align: left"><code>spec.internalTrafficPolicy</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">Cluster</td><td style="text-align: left">内部流量策略 (Cluster/Local)</td><td style="text-align: left">v1.26+ GA</td></tr>
+<tr><td style="text-align: left"><code>spec.healthCheckNodePort</code></td><td style="text-align: left">int32</td><td style="text-align: center">否</td><td style="text-align: left">自动分配</td><td style="text-align: left">externalTrafficPolicy=Local 时健康检查端口</td><td style="text-align: left">v1.7+</td></tr>
+<tr><td style="text-align: left"><code>spec.publishNotReadyAddresses</code></td><td style="text-align: left">bool</td><td style="text-align: center">否</td><td style="text-align: left">false</td><td style="text-align: left">发布未就绪 Pod 地址</td><td style="text-align: left">v1.9+</td></tr>
+<tr><td style="text-align: left"><code>spec.ipFamilyPolicy</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">SingleStack</td><td style="text-align: left">IP 协议族策略</td><td style="text-align: left">v1.20+</td></tr>
+<tr><td style="text-align: left"><code>spec.ipFamilies</code></td><td style="text-align: left">[]string</td><td style="text-align: center">否</td><td style="text-align: left">[IPv4]</td><td style="text-align: left">IP 协议族列表</td><td style="text-align: left">v1.20+</td></tr>
+<tr><td style="text-align: left"><code>spec.allocateLoadBalancerNodePorts</code></td><td style="text-align: left">bool</td><td style="text-align: center">否</td><td style="text-align: left">true</td><td style="text-align: left">是否为 LB 分配 NodePort</td><td style="text-align: left">v1.24+</td></tr>
+<tr><td style="text-align: left"><code>spec.loadBalancerClass</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">LoadBalancer 控制器类</td><td style="text-align: left">v1.24+ GA</td></tr>
+<tr><td style="text-align: left"><code>spec.loadBalancerIP</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">指定 LB IP (已弃用)</td><td style="text-align: left">弃用</td></tr>
+<tr><td style="text-align: left"><code>spec.loadBalancerSourceRanges</code></td><td style="text-align: left">[]string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">LB 允许的源 CIDR</td><td style="text-align: left">所有</td></tr>
+<tr><td style="text-align: left"><code>spec.trafficDistribution</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">-</td><td style="text-align: left">流量分布策略</td><td style="text-align: left">v1.30+ Alpha</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="22-serviceport-字段"><a class="header" href="#22-serviceport-字段">2.2 ServicePort 字段</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">字段</th><th style="text-align: left">类型</th><th style="text-align: center">必填</th><th style="text-align: left">描述</th><th style="text-align: left">示例</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>name</code></td><td style="text-align: left">string</td><td style="text-align: center">多端口时必填</td><td style="text-align: left">端口名称 (DNS_LABEL)</td><td style="text-align: left">http, grpc, metrics</td></tr>
+<tr><td style="text-align: left"><code>protocol</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">协议 (TCP/UDP/SCTP)</td><td style="text-align: left">TCP</td></tr>
+<tr><td style="text-align: left"><code>port</code></td><td style="text-align: left">int32</td><td style="text-align: center">是</td><td style="text-align: left">Service 端口</td><td style="text-align: left">80, 443, 9090</td></tr>
+<tr><td style="text-align: left"><code>targetPort</code></td><td style="text-align: left">IntOrString</td><td style="text-align: center">否</td><td style="text-align: left">Pod 端口 (数字或名称)</td><td style="text-align: left">8080, “http”</td></tr>
+<tr><td style="text-align: left"><code>nodePort</code></td><td style="text-align: left">int32</td><td style="text-align: center">否</td><td style="text-align: left">NodePort 端口 (30000-32767)</td><td style="text-align: left">30080</td></tr>
+<tr><td style="text-align: left"><code>appProtocol</code></td><td style="text-align: left">string</td><td style="text-align: center">否</td><td style="text-align: left">应用层协议 (v1.20+ GA)</td><td style="text-align: left">http, https, grpc, h2c</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="23-ipfamilypolicy-详解"><a class="header" href="#23-ipfamilypolicy-详解">2.3 ipFamilyPolicy 详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">值</th><th style="text-align: left">描述</th><th style="text-align: left">行为</th><th style="text-align: left">适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>SingleStack</code></td><td style="text-align: left">单栈模式</td><td style="text-align: left">仅分配一个 IP 族</td><td style="text-align: left">默认，IPv4 或 IPv6 单一环境</td></tr>
+<tr><td style="text-align: left"><code>PreferDualStack</code></td><td style="text-align: left">优先双栈</td><td style="text-align: left">如果集群支持则分配双栈</td><td style="text-align: left">混合环境，兼容性优先</td></tr>
+<tr><td style="text-align: left"><code>RequireDualStack</code></td><td style="text-align: left">要求双栈</td><td style="text-align: left">必须分配双栈，否则失败</td><td style="text-align: left">严格双栈要求</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="24-externaltrafficpolicy-详解"><a class="header" href="#24-externaltrafficpolicy-详解">2.4 externalTrafficPolicy 详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">值</th><th style="text-align: left">描述</th><th style="text-align: center">源 IP 保留</th><th style="text-align: left">负载分布</th><th style="text-align: left">适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>Cluster</code></td><td style="text-align: left">集群范围负载均衡</td><td style="text-align: center">否 (SNAT)</td><td style="text-align: left">均匀分布到所有 Pod</td><td style="text-align: left">默认，大多数场景</td></tr>
+<tr><td style="text-align: left"><code>Local</code></td><td style="text-align: left">仅本地节点 Pod</td><td style="text-align: center">是</td><td style="text-align: left">仅发送到本节点 Pod</td><td style="text-align: left">需要源 IP，审计日志</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                      externalTrafficPolicy 对比                                          │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                          │
+│  Cluster (默认)                               Local                                      │
+│  ┌────────────────────────────────────┐      ┌────────────────────────────────────┐    │
+│  │                                    │      │                                    │    │
+│  │  Client: 1.2.3.4                   │      │  Client: 1.2.3.4                   │    │
+│  │         │                          │      │         │                          │    │
+│  │         ▼                          │      │         ▼                          │    │
+│  │  ┌─────────────┐                   │      │  ┌─────────────┐                   │    │
+│  │  │  Node 1     │                   │      │  │  Node 1     │                   │    │
+│  │  │  NodePort   │                   │      │  │  NodePort   │                   │    │
+│  │  └──────┬──────┘                   │      │  └──────┬──────┘                   │    │
+│  │         │                          │      │         │                          │    │
+│  │         │ SNAT: Node1 IP           │      │         │ 保留: 1.2.3.4            │    │
+│  │         ▼                          │      │         ▼                          │    │
+│  │  ┌──────┴──────┐                   │      │  仅转发到 Node 1 上的 Pod          │    │
+│  │  │ 转发到任意  │                   │      │  ┌─────────────┐                   │    │
+│  │  │ 节点的 Pod  │                   │      │  │  Pod (本地) │                   │    │
+│  │  └─────────────┘                   │      │  └─────────────┘                   │    │
+│  │                                    │      │                                    │    │
+│  │  优点: 负载均衡                    │      │  优点: 源 IP 保留                  │    │
+│  │  缺点: 源 IP 丢失                  │      │  缺点: 可能不均衡                  │    │
+│  └────────────────────────────────────┘      └────────────────────────────────────┘    │
+│                                                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="3-service-类型详解-service-types"><a class="header" href="#3-service-类型详解-service-types">3. Service 类型详解 (Service Types)</a></h2>
+<h3 id="31-service-类型对比矩阵"><a class="header" href="#31-service-类型对比矩阵">3.1 Service 类型对比矩阵</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">类型</th><th style="text-align: center">ClusterIP</th><th style="text-align: center">NodePort</th><th style="text-align: center">外部 LB</th><th style="text-align: left">DNS 记录</th><th style="text-align: left">访问范围</th><th style="text-align: left">典型场景</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>ClusterIP</strong></td><td style="text-align: center">自动分配</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: left">A/AAAA</td><td style="text-align: left">集群内部</td><td style="text-align: left">内部微服务通信</td></tr>
+<tr><td style="text-align: left"><strong>NodePort</strong></td><td style="text-align: center">自动分配</td><td style="text-align: center">30000-32767</td><td style="text-align: center">-</td><td style="text-align: left">A/AAAA</td><td style="text-align: left">集群内+节点</td><td style="text-align: left">开发测试、简单暴露</td></tr>
+<tr><td style="text-align: left"><strong>LoadBalancer</strong></td><td style="text-align: center">自动分配</td><td style="text-align: center">可禁用</td><td style="text-align: center">云 LB</td><td style="text-align: left">A/AAAA</td><td style="text-align: left">集群内+外部</td><td style="text-align: left">生产环境外部访问</td></tr>
+<tr><td style="text-align: left"><strong>ExternalName</strong></td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: left">CNAME</td><td style="text-align: left">DNS 映射</td><td style="text-align: left">外部服务代理</td></tr>
+<tr><td style="text-align: left"><strong>Headless</strong></td><td style="text-align: center">None</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: left">多 A 记录</td><td style="text-align: left">Pod 直连</td><td style="text-align: left">StatefulSet、自定义 LB</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="32-clusterip-service-默认类型"><a class="header" href="#32-clusterip-service-默认类型">3.2 ClusterIP Service (默认类型)</a></h3>
+<pre><code class="language-yaml"># clusterip-service-production.yaml
+# 生产级 ClusterIP Service 完整配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api
+  namespace: production
+  labels:
+    app.kubernetes.io/name: backend-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: myapp
+    app.kubernetes.io/version: v2.1.0
+    app.kubernetes.io/managed-by: kubectl
+  annotations:
+    # 文档注解
+    description: "Backend API service for internal microservice communication"
+    owner: "platform-team@example.com"
+    oncall: "platform-oncall@example.com"
+    
+    # Prometheus 服务发现
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9091"
+    prometheus.io/path: "/metrics"
+    prometheus.io/scheme: "http"
+    
+    # 链路追踪
+    opentelemetry.io/inject: "true"
+spec:
+  type: ClusterIP  # 默认类型，可省略
+  
+  # 标签选择器
+  selector:
+    app.kubernetes.io/name: backend-api
+    app.kubernetes.io/component: api
+  
+  # 端口配置
+  ports:
+    # HTTP API 端口
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+      appProtocol: http
+    
+    # gRPC 端口
+    - name: grpc
+      protocol: TCP
+      port: 9090
+      targetPort: grpc  # 使用命名端口
+      appProtocol: grpc
+    
+    # Prometheus metrics 端口
+    - name: metrics
+      protocol: TCP
+      port: 9091
+      targetPort: metrics
+      appProtocol: http
+    
+    # 健康检查端口
+    - name: health
+      protocol: TCP
+      port: 8081
+      targetPort: 8081
+      appProtocol: http
+  
+  # 双栈配置 (v1.20+)
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
+  
+  # 会话亲和性
+  sessionAffinity: None
+  
+  # 内部流量策略 (v1.26+ GA)
+  internalTrafficPolicy: Cluster
+---
+# 对应的 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backend-api
+      app.kubernetes.io/component: api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backend-api
+        app.kubernetes.io/component: api
+    spec:
+      containers:
+        - name: api
+          image: backend-api:v2.1.0
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 9090
+              protocol: TCP
+            - name: metrics
+              containerPort: 9091
+              protocol: TCP
+            - name: health
+              containerPort: 8081
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz/ready
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz/live
+              port: health
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+</code></pre>
+<h3 id="33-nodeport-service"><a class="header" href="#33-nodeport-service">3.3 NodePort Service</a></h3>
+<pre><code class="language-yaml"># nodeport-service-production.yaml
+# 生产级 NodePort Service 配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-nodeport
+  namespace: production
+  labels:
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/component: web
+  annotations:
+    description: "Frontend service exposed via NodePort for development/testing"
+spec:
+  type: NodePort
+  
+  selector:
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/component: web
+  
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+      nodePort: 30080  # 指定 NodePort (30000-32767)
+    
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 3443
+      nodePort: 30443
+  
+  # 外部流量策略
+  # Local: 保留客户端源 IP，但可能导致不均衡
+  # Cluster: 均衡分布，但丢失源 IP
+  externalTrafficPolicy: Local
+  
+  # 健康检查端口 (externalTrafficPolicy=Local 时使用)
+  # 云负载均衡器使用此端口检查节点健康状态
+  healthCheckNodePort: 32000
+</code></pre>
+<h3 id="34-loadbalancer-service"><a class="header" href="#34-loadbalancer-service">3.4 LoadBalancer Service</a></h3>
+<pre><code class="language-yaml"># loadbalancer-service-aws.yaml
+# AWS NLB 生产级配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public
+  namespace: production
+  labels:
+    app.kubernetes.io/name: web
+    app.kubernetes.io/component: frontend
+  annotations:
+    # AWS Load Balancer Controller 注解
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    
+    # 跨可用区负载均衡
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    
+    # 目标组属性
+    service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: &gt;-
+      deregistration_delay.timeout_seconds=30,
+      stickiness.enabled=false,
+      proxy_protocol_v2.enabled=false
+    
+    # 健康检查配置
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "HTTP"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/healthz"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8081"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "10"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: "5"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "2"
+    
+    # TLS 终止 (NLB 支持 TLS 终止)
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-west-2:123456789012:certificate/xxx-xxx"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: "ELBSecurityPolicy-TLS13-1-2-2021-06"
+    
+    # 访问日志
+    service.beta.kubernetes.io/aws-load-balancer-access-log-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-name: "my-lb-logs"
+    service.beta.kubernetes.io/aws-load-balancer-access-log-s3-bucket-prefix: "nlb/web-public"
+    
+    # 外部 DNS 集成
+    external-dns.alpha.kubernetes.io/hostname: "api.example.com"
+    external-dns.alpha.kubernetes.io/ttl: "300"
+spec:
+  type: LoadBalancer
+  
+  # 指定 LoadBalancer 控制器类 (v1.24+)
+  loadBalancerClass: service.k8s.aws/nlb
+  
+  # 不分配 NodePort (NLB IP 模式)
+  allocateLoadBalancerNodePorts: false
+  
+  selector:
+    app.kubernetes.io/name: web
+    app.kubernetes.io/component: frontend
+  
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8443
+  
+  # 外部流量策略
+  externalTrafficPolicy: Local
+  
+  # 源 IP 范围限制 (可选，建议在安全组配置)
+  # loadBalancerSourceRanges:
+  #   - 10.0.0.0/8
+  #   - 192.168.0.0/16
+---
+# loadbalancer-service-aliyun.yaml
+# 阿里云 SLB 生产级配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public-aliyun
+  namespace: production
+  annotations:
+    # 基本配置
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "internet"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s2.medium"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-charge-type: "paybybandwidth"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-bandwidth: "100"
+    
+    # 复用已有 SLB (可选)
+    # service.beta.kubernetes.io/alibaba-cloud-loadbalancer-id: "lb-xxx"
+    # service.beta.kubernetes.io/alibaba-cloud-loadbalancer-force-override-listeners: "true"
+    
+    # 健康检查
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-flag: "on"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-type: "http"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-uri: "/healthz"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-connect-port: "8081"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-healthy-threshold: "2"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-unhealthy-threshold: "2"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-interval: "5"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-connect-timeout: "3"
+    
+    # 调度算法
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-scheduler: "wrr"
+    
+    # 会话保持
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-persistence-timeout: "0"
+    
+    # 访问控制
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-acl-status: "on"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-acl-type: "white"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-acl-id: "acl-xxx"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+---
+# loadbalancer-service-gcp.yaml
+# GCP 负载均衡配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public-gcp
+  namespace: production
+  annotations:
+    # 内部负载均衡
+    # networking.gke.io/load-balancer-type: "Internal"
+    
+    # Container-native 负载均衡 (NEG)
+    cloud.google.com/neg: '{"ingress": true}'
+    
+    # 后端配置
+    cloud.google.com/backend-config: '{"ports": {"http": "backend-config"}}'
+    
+    # 全局访问 (仅内部 LB)
+    # networking.gke.io/internal-load-balancer-allow-global-access: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+---
+# loadbalancer-service-azure.yaml
+# Azure 负载均衡配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-public-azure
+  namespace: production
+  annotations:
+    # 内部负载均衡
+    # service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    # service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "subnet-name"
+    
+    # 资源组
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: "my-rg"
+    
+    # 健康探测协议
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-protocol: "Http"
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
+    
+    # TCP 重置 (空闲超时时发送 RST)
+    service.beta.kubernetes.io/azure-load-balancer-tcp-idle-timeout: "4"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+</code></pre>
+<h3 id="35-externalname-service"><a class="header" href="#35-externalname-service">3.5 ExternalName Service</a></h3>
+<pre><code class="language-yaml"># externalname-service.yaml
+# 外部服务 DNS 映射
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-database
+  namespace: production
+  labels:
+    app.kubernetes.io/name: external-database
+    app.kubernetes.io/component: database
+  annotations:
+    description: "Maps to external RDS database"
+spec:
+  type: ExternalName
+  externalName: mydb.us-west-2.rds.amazonaws.com
+  # 注意: ExternalName 不支持端口映射，客户端需使用实际端口
+---
+# 外部服务 (带端口映射) - 使用无 selector Service + EndpointSlice
+apiVersion: v1
+kind: Service
+metadata:
+  name: legacy-api
+  namespace: production
+  labels:
+    app.kubernetes.io/name: legacy-api
+  annotations:
+    description: "External legacy API service with manual endpoints"
+spec:
+  type: ClusterIP
+  ports:
+    - name: https
+      port: 443
+      targetPort: 443
+      appProtocol: https
+    - name: http
+      port: 80
+      targetPort: 80
+      appProtocol: http
+  # 无 selector，手动管理 EndpointSlice
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: legacy-api-1
+  namespace: production
+  labels:
+    kubernetes.io/service-name: legacy-api
+  annotations:
+    description: "Manual endpoints for legacy API"
+addressType: IPv4
+ports:
+  - name: https
+    appProtocol: https
+    protocol: TCP
+    port: 443
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - "203.0.113.10"
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    hostname: legacy-api-1
+    zone: us-west-2a
+  - addresses:
+      - "203.0.113.11"
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    hostname: legacy-api-2
+    zone: us-west-2b
+</code></pre>
+<hr>
+<h2 id="4-headless-service-深度解析-headless-service"><a class="header" href="#4-headless-service-深度解析-headless-service">4. Headless Service 深度解析 (Headless Service)</a></h2>
+<h3 id="41-headless-service-架构"><a class="header" href="#41-headless-service-架构">4.1 Headless Service 架构</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                            Headless Service vs Regular Service                                   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                  │
+│  Regular Service (ClusterIP)                     Headless Service (clusterIP: None)            │
+│                                                                                                  │
+│  ┌─────────────────────────────────────┐        ┌─────────────────────────────────────┐       │
+│  │          DNS Query                   │        │          DNS Query                   │       │
+│  │   my-svc.ns.svc.cluster.local        │        │   my-svc.ns.svc.cluster.local        │       │
+│  └──────────────────┬──────────────────┘        └──────────────────┬──────────────────┘       │
+│                     │                                              │                           │
+│                     ▼                                              ▼                           │
+│  ┌─────────────────────────────────────┐        ┌─────────────────────────────────────┐       │
+│  │          DNS Response                │        │          DNS Response                │       │
+│  │                                      │        │                                      │       │
+│  │  单一 A 记录: 10.96.0.100 (VIP)     │        │  多 A 记录 (所有 Ready Pod):        │       │
+│  │                                      │        │    10.244.1.10 (pod-0)              │       │
+│  │                                      │        │    10.244.2.11 (pod-1)              │       │
+│  │                                      │        │    10.244.3.12 (pod-2)              │       │
+│  └──────────────────┬──────────────────┘        └──────────────────┬──────────────────┘       │
+│                     │                                              │                           │
+│                     ▼                                              ▼                           │
+│  ┌─────────────────────────────────────┐        ┌─────────────────────────────────────┐       │
+│  │       kube-proxy 负载均衡            │        │     客户端自行选择 (Client-side)    │       │
+│  │                                      │        │                                      │       │
+│  │  iptables/IPVS 规则:                │        │  应用层负载均衡:                     │       │
+│  │  - 随机/轮询选择后端                 │        │  - DNS 轮询                          │       │
+│  │  - DNAT 到 Pod IP                   │        │  - gRPC 客户端负载均衡               │       │
+│  │                                      │        │  - 自定义策略                        │       │
+│  └──────────────────┬──────────────────┘        └──────────────────┬──────────────────┘       │
+│                     │                                              │                           │
+│                     ▼                                              ▼                           │
+│  ┌─────────────────────────────────────┐        ┌─────────────────────────────────────┐       │
+│  │         Backend Pods                 │        │         Backend Pods                 │       │
+│  │  ┌───────┐ ┌───────┐ ┌───────┐     │        │  ┌───────┐ ┌───────┐ ┌───────┐     │       │
+│  │  │Pod-0  │ │Pod-1  │ │Pod-2  │     │        │  │Pod-0  │ │Pod-1  │ │Pod-2  │     │       │
+│  │  └───────┘ └───────┘ └───────┘     │        │  └───────┘ └───────┘ └───────┘     │       │
+│  └─────────────────────────────────────┘        └─────────────────────────────────────┘       │
+│                                                                                                  │
+│  StatefulSet + Headless Service DNS 记录:                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────────────────────┐  │
+│  │  Service DNS (所有 Pod):                                                                  │  │
+│  │  └── my-svc.ns.svc.cluster.local → [10.244.1.10, 10.244.2.11, 10.244.3.12]              │  │
+│  │                                                                                           │  │
+│  │  Pod DNS (单独访问):                                                                      │  │
+│  │  ├── pod-0.my-svc.ns.svc.cluster.local → 10.244.1.10                                    │  │
+│  │  ├── pod-1.my-svc.ns.svc.cluster.local → 10.244.2.11                                    │  │
+│  │  └── pod-2.my-svc.ns.svc.cluster.local → 10.244.3.12                                    │  │
+│  │                                                                                           │  │
+│  │  SRV 记录 (端口发现):                                                                     │  │
+│  │  └── _mysql._tcp.my-svc.ns.svc.cluster.local → 0 100 3306 pod-0.my-svc.ns.svc...       │  │
+│  └─────────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="42-headless-service-生产配置"><a class="header" href="#42-headless-service-生产配置">4.2 Headless Service 生产配置</a></h3>
+<pre><code class="language-yaml"># headless-service-mysql.yaml
+# MySQL 集群 Headless Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: database
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+spec:
+  clusterIP: None  # Headless Service 关键配置
+  
+  selector:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+  
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      appProtocol: mysql
+    - name: mysqlx
+      port: 33060
+      targetPort: 33060
+    - name: metrics
+      port: 9104
+      targetPort: 9104
+  
+  # 发布未就绪地址 (用于初始化场景)
+  publishNotReadyAddresses: false
+---
+# MySQL 只读 Service (正常 ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-read
+  namespace: database
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+# StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: database
+spec:
+  serviceName: mysql  # 关联 Headless Service
+  replicas: 3
+  podManagementPolicy: Parallel  # 或 OrderedReady
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mysql
+      app.kubernetes.io/component: database
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mysql
+        app.kubernetes.io/component: database
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - name: mysql
+              containerPort: 3306
+            - name: mysqlx
+              containerPort: 33060
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: root-password
+            - name: MYSQL_CLUSTER_NAME
+              value: "mysql-cluster"
+            - name: MYSQL_SERVER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - "-c"
+                - "mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - bash
+                - "-c"
+                - "mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD"
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+            - name: config
+              mountPath: /etc/mysql/conf.d
+        - name: exporter
+          image: prom/mysqld-exporter:v0.15.0
+          ports:
+            - name: metrics
+              containerPort: 9104
+          env:
+            - name: DATA_SOURCE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: exporter-dsn
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: config
+          configMap:
+            name: mysql-config
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app.kubernetes.io/name: mysql
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: fast-ssd
+        resources:
+          requests:
+            storage: 100Gi
+</code></pre>
+<h3 id="43-headless-service-使用场景矩阵"><a class="header" href="#43-headless-service-使用场景矩阵">4.3 Headless Service 使用场景矩阵</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">场景</th><th style="text-align: left">描述</th><th style="text-align: left">DNS 行为</th><th style="text-align: left">示例应用</th><th style="text-align: left">配置要点</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>StatefulSet</strong></td><td style="text-align: left">有状态应用</td><td style="text-align: left">Pod DNS 名称</td><td style="text-align: left">MySQL, PostgreSQL, MongoDB</td><td style="text-align: left"><code>serviceName</code> 必须匹配</td></tr>
+<tr><td style="text-align: left"><strong>点对点通信</strong></td><td style="text-align: left">节点间直接通信</td><td style="text-align: left">所有 Pod IP</td><td style="text-align: left">etcd, ZooKeeper, Kafka</td><td style="text-align: left">使用 Pod DNS 互相发现</td></tr>
+<tr><td style="text-align: left"><strong>自定义负载均衡</strong></td><td style="text-align: left">客户端控制</td><td style="text-align: left">所有 Pod IP</td><td style="text-align: left">gRPC 负载均衡</td><td style="text-align: left">客户端实现 LB 逻辑</td></tr>
+<tr><td style="text-align: left"><strong>Leader 选举</strong></td><td style="text-align: left">连接特定 Pod</td><td style="text-align: left">指定 Pod IP</td><td style="text-align: left">Raft 集群</td><td style="text-align: left">通过 Pod DNS 连接 Leader</td></tr>
+<tr><td style="text-align: left"><strong>服务发现</strong></td><td style="text-align: left">获取所有实例</td><td style="text-align: left">所有 Pod IP</td><td style="text-align: left">集群协调</td><td style="text-align: left">DNS A 记录查询</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="5-endpointslice-深度解析-endpointslice"><a class="header" href="#5-endpointslice-深度解析-endpointslice">5. EndpointSlice 深度解析 (EndpointSlice)</a></h2>
+<h3 id="51-endpointslice-架构"><a class="header" href="#51-endpointslice-架构">5.1 EndpointSlice 架构</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">特性</th><th style="text-align: left">Endpoints (旧)</th><th style="text-align: left">EndpointSlice (新)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>引入版本</strong></td><td style="text-align: left">v1.0</td><td style="text-align: left">v1.16 Alpha, v1.21 GA</td></tr>
+<tr><td style="text-align: left"><strong>存储方式</strong></td><td style="text-align: left">单一对象存储所有端点</td><td style="text-align: left">分片存储，每片最多 100 个端点</td></tr>
+<tr><td style="text-align: left"><strong>大规模支持</strong></td><td style="text-align: left">差 (单对象过大)</td><td style="text-align: left">优 (分片+增量更新)</td></tr>
+<tr><td style="text-align: left"><strong>拓扑信息</strong></td><td style="text-align: left">无</td><td style="text-align: left">支持 zone、hostname</td></tr>
+<tr><td style="text-align: left"><strong>端点状态</strong></td><td style="text-align: left">ready/notReady</td><td style="text-align: left">ready、serving、terminating</td></tr>
+<tr><td style="text-align: left"><strong>推荐使用</strong></td><td style="text-align: left">仅兼容旧系统</td><td style="text-align: left">所有新系统</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-endpointslice-结构"><a class="header" href="#52-endpointslice-结构">5.2 EndpointSlice 结构</a></h3>
+<pre><code class="language-yaml"># endpointslice-example.yaml
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: my-service-abc123
+  namespace: production
+  labels:
+    # 必须标签：关联 Service
+    kubernetes.io/service-name: my-service
+    # 可选标签
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+  ownerReferences:
+    - apiVersion: v1
+      kind: Service
+      name: my-service
+      uid: xxx-xxx
+# 地址类型: IPv4, IPv6, FQDN
+addressType: IPv4
+
+# 端口列表 (所有端点共享)
+ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    appProtocol: http
+  - name: grpc
+    protocol: TCP
+    port: 9090
+    appProtocol: grpc
+
+# 端点列表 (最多 100 个)
+endpoints:
+  # 端点 1
+  - addresses:
+      - "10.244.1.10"
+    conditions:
+      ready: true      # Pod Ready
+      serving: true    # Pod 可接收流量 (v1.22+)
+      terminating: false  # Pod 正在终止 (v1.22+)
+    hostname: pod-0
+    nodeName: node-1
+    zone: us-west-2a
+    targetRef:
+      kind: Pod
+      name: my-service-pod-0
+      namespace: production
+      uid: xxx-xxx
+    deprecatedTopology:  # 已弃用，使用 zone/nodeName
+      kubernetes.io/hostname: node-1
+  
+  # 端点 2
+  - addresses:
+      - "10.244.2.11"
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    hostname: pod-1
+    nodeName: node-2
+    zone: us-west-2b
+    targetRef:
+      kind: Pod
+      name: my-service-pod-1
+      namespace: production
+      uid: xxx-xxx
+  
+  # 端点 3 (正在终止)
+  - addresses:
+      - "10.244.3.12"
+    conditions:
+      ready: false      # 不再 ready
+      serving: true     # 但仍可接收流量 (graceful)
+      terminating: true # 正在终止
+    hostname: pod-2
+    nodeName: node-3
+    zone: us-west-2c
+    targetRef:
+      kind: Pod
+      name: my-service-pod-2
+      namespace: production
+      uid: xxx-xxx
+</code></pre>
+<h3 id="53-endpointslice-条件状态"><a class="header" href="#53-endpointslice-条件状态">5.3 EndpointSlice 条件状态</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">条件</th><th style="text-align: left">描述</th><th style="text-align: left">true</th><th style="text-align: left">false</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>ready</code></td><td style="text-align: left">Pod 是否 Ready</td><td style="text-align: left">通过 readinessProbe</td><td style="text-align: left">未通过或 Pod 终止中</td></tr>
+<tr><td style="text-align: left"><code>serving</code></td><td style="text-align: left">是否可接收流量</td><td style="text-align: left">Pod 可处理请求</td><td style="text-align: left">Pod 不可处理请求</td></tr>
+<tr><td style="text-align: left"><code>terminating</code></td><td style="text-align: left">是否正在终止</td><td style="text-align: left">Pod 正在 terminating</td><td style="text-align: left">Pod 正常运行</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>状态组合场景</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: center">ready</th><th style="text-align: center">serving</th><th style="text-align: center">terminating</th><th style="text-align: left">场景</th><th style="text-align: left">kube-proxy 行为</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: center">true</td><td style="text-align: center">true</td><td style="text-align: center">false</td><td style="text-align: left">正常运行</td><td style="text-align: left">包含在负载均衡中</td></tr>
+<tr><td style="text-align: center">false</td><td style="text-align: center">true</td><td style="text-align: center">true</td><td style="text-align: left">优雅终止中</td><td style="text-align: left">继续接收流量直到完全终止</td></tr>
+<tr><td style="text-align: center">false</td><td style="text-align: center">false</td><td style="text-align: center">true</td><td style="text-align: left">终止完成</td><td style="text-align: left">移除出负载均衡</td></tr>
+<tr><td style="text-align: center">false</td><td style="text-align: center">false</td><td style="text-align: center">false</td><td style="text-align: left">未就绪</td><td style="text-align: left">不包含在负载均衡中</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="6-service-与-dns-集成-dns-integration"><a class="header" href="#6-service-与-dns-集成-dns-integration">6. Service 与 DNS 集成 (DNS Integration)</a></h2>
+<h3 id="61-dns-记录类型详解"><a class="header" href="#61-dns-记录类型详解">6.1 DNS 记录类型详解</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">记录类型</th><th style="text-align: left">格式</th><th style="text-align: left">用途</th><th style="text-align: left">示例</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>A/AAAA</strong></td><td style="text-align: left"><code>&lt;svc&gt;.&lt;ns&gt;.svc.&lt;cluster-domain&gt;</code></td><td style="text-align: left">Service ClusterIP</td><td style="text-align: left"><code>my-svc.prod.svc.cluster.local → 10.96.0.100</code></td></tr>
+<tr><td style="text-align: left"><strong>A (Headless)</strong></td><td style="text-align: left"><code>&lt;svc&gt;.&lt;ns&gt;.svc.&lt;cluster-domain&gt;</code></td><td style="text-align: left">所有 Pod IP</td><td style="text-align: left"><code>my-svc.prod.svc.cluster.local → 10.244.1.10, 10.244.2.11</code></td></tr>
+<tr><td style="text-align: left"><strong>SRV</strong></td><td style="text-align: left"><code>_&lt;port&gt;._&lt;proto&gt;.&lt;svc&gt;.&lt;ns&gt;.svc.&lt;cluster-domain&gt;</code></td><td style="text-align: left">端口和协议发现</td><td style="text-align: left"><code>_http._tcp.my-svc.prod.svc.cluster.local</code></td></tr>
+<tr><td style="text-align: left"><strong>Pod A</strong></td><td style="text-align: left"><code>&lt;pod-ip-dashed&gt;.&lt;ns&gt;.pod.&lt;cluster-domain&gt;</code></td><td style="text-align: left">Pod IP 查询</td><td style="text-align: left"><code>10-244-1-10.prod.pod.cluster.local</code></td></tr>
+<tr><td style="text-align: left"><strong>StatefulSet Pod</strong></td><td style="text-align: left"><code>&lt;pod&gt;.&lt;svc&gt;.&lt;ns&gt;.svc.&lt;cluster-domain&gt;</code></td><td style="text-align: left">特定 Pod</td><td style="text-align: left"><code>web-0.nginx.prod.svc.cluster.local</code></td></tr>
+<tr><td style="text-align: left"><strong>PTR</strong></td><td style="text-align: left"><code>&lt;reversed-ip&gt;.in-addr.arpa</code></td><td style="text-align: left">反向 DNS</td><td style="text-align: left"><code>100.0.96.10.in-addr.arpa → my-svc.prod.svc.cluster.local</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="62-dns-配置最佳实践"><a class="header" href="#62-dns-配置最佳实践">6.2 DNS 配置最佳实践</a></h3>
+<pre><code class="language-yaml"># pod-dns-config.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-optimized-pod
+  namespace: production
+spec:
+  containers:
+    - name: app
+      image: myapp:latest
+  
+  # DNS 策略
+  # ClusterFirst: 优先使用集群 DNS (默认)
+  # Default: 继承节点 DNS 配置
+  # ClusterFirstWithHostNet: hostNetwork 时使用集群 DNS
+  # None: 完全自定义
+  dnsPolicy: ClusterFirst
+  
+  # 自定义 DNS 配置
+  dnsConfig:
+    # 额外的 nameserver (会添加到列表开头)
+    nameservers:
+      - 10.96.0.10  # CoreDNS ClusterIP
+    
+    # 搜索域 (最多 6 个，总字符 &lt;= 256)
+    searches:
+      - production.svc.cluster.local
+      - svc.cluster.local
+      - cluster.local
+    
+    # DNS 选项
+    options:
+      # ndots: FQDN 判断阈值
+      # 小于此值的点数会追加搜索域
+      # 例: ndots=5, "my-svc.prod" (1个点) 会追加搜索域
+      # 优化: 对于已知 FQDN，使用尾部点 "my-svc.prod.svc.cluster.local."
+      - name: ndots
+        value: "2"  # 降低默认值 5，减少 DNS 查询
+      
+      # 单个请求超时 (秒)
+      - name: timeout
+        value: "2"
+      
+      # 重试次数
+      - name: attempts
+        value: "3"
+      
+      # 使用 TCP (当 UDP 被截断时)
+      - name: use-vc
+        value: ""
+      
+      # 单一请求 (禁用 A 和 AAAA 并行查询)
+      - name: single-request-reopen
+        value: ""
+---
+# CoreDNS 优化配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        
+        # Kubernetes 服务发现
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        
+        # 自动路径 (减少搜索域查询)
+        autopath @kubernetes
+        
+        # 负缓存
+        # 缓存 NXDOMAIN 响应，减少重复失败查询
+        cache {
+            success 9984 30
+            denial 9984 5
+        }
+        
+        # 上游 DNS
+        forward . /etc/resolv.conf {
+            max_concurrent 1000
+            prefer_udp
+        }
+        
+        # 循环检测
+        loop
+        
+        # 重新加载配置
+        reload
+        
+        # 负载报告
+        loadbalance
+        
+        # Prometheus 指标
+        prometheus :9153
+    }
+</code></pre>
+<h3 id="63-dns-查询优化"><a class="header" href="#63-dns-查询优化">6.3 DNS 查询优化</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# dns-optimization-tips.sh
+
+# 1. 使用 FQDN (带尾部点) 避免搜索域追加
+# 不优化:
+curl http://my-service.production
+# 可能触发多次 DNS 查询:
+#   my-service.production.default.svc.cluster.local (NXDOMAIN)
+#   my-service.production.svc.cluster.local (NXDOMAIN)
+#   my-service.production.cluster.local (NXDOMAIN)
+#   my-service.production (NXDOMAIN 或成功)
+
+# 优化:
+curl http://my-service.production.svc.cluster.local.
+# 只触发一次 DNS 查询
+
+# 2. 同命名空间内使用短名称
+# 在 production 命名空间内:
+curl http://my-service
+# 解析为 my-service.production.svc.cluster.local
+
+# 3. 跨命名空间使用 &lt;svc&gt;.&lt;ns&gt; 格式
+curl http://my-service.other-ns
+# 解析为 my-service.other-ns.svc.cluster.local
+
+# 4. 降低 ndots 值 (在 dnsConfig 中配置)
+# 默认 ndots=5，意味着 4 个点以下都会追加搜索域
+# 对于大多数应用，ndots=2 足够
+
+# 5. 使用 DNS 缓存 (NodeLocal DNSCache)
+# 在每个节点运行本地 DNS 缓存，减少 CoreDNS 负载
+</code></pre>
+<hr>
+<h2 id="7-kube-proxy-模式详解-kube-proxy-modes"><a class="header" href="#7-kube-proxy-模式详解-kube-proxy-modes">7. kube-proxy 模式详解 (kube-proxy Modes)</a></h2>
+<h3 id="71-模式对比"><a class="header" href="#71-模式对比">7.1 模式对比</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">特性</th><th style="text-align: left">iptables</th><th style="text-align: left">IPVS</th><th style="text-align: left">nftables</th><th style="text-align: left">eBPF (Cilium)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>引入版本</strong></td><td style="text-align: left">v1.2+</td><td style="text-align: left">v1.9+</td><td style="text-align: left">v1.29+ Alpha</td><td style="text-align: left">外部 CNI</td></tr>
+<tr><td style="text-align: left"><strong>默认模式</strong></td><td style="text-align: left">v1.2-v1.28</td><td style="text-align: left">可选</td><td style="text-align: left">v1.31+ 可选</td><td style="text-align: left">需 Cilium</td></tr>
+<tr><td style="text-align: left"><strong>性能</strong></td><td style="text-align: left">中等 (O(n))</td><td style="text-align: left">高 (O(1))</td><td style="text-align: left">高</td><td style="text-align: left">最高</td></tr>
+<tr><td style="text-align: left"><strong>规则数量</strong></td><td style="text-align: left">大 (线性增长)</td><td style="text-align: left">小 (哈希表)</td><td style="text-align: left">中</td><td style="text-align: left">最小</td></tr>
+<tr><td style="text-align: left"><strong>功能</strong></td><td style="text-align: left">基础</td><td style="text-align: left">丰富 (多种调度算法)</td><td style="text-align: left">基础</td><td style="text-align: left">最丰富</td></tr>
+<tr><td style="text-align: left"><strong>调试难度</strong></td><td style="text-align: left">低</td><td style="text-align: left">中</td><td style="text-align: left">低</td><td style="text-align: left">高</td></tr>
+<tr><td style="text-align: left"><strong>依赖</strong></td><td style="text-align: left">iptables</td><td style="text-align: left">ipvs 内核模块</td><td style="text-align: left">nftables</td><td style="text-align: left">eBPF</td></tr>
+<tr><td style="text-align: left"><strong>推荐场景</strong></td><td style="text-align: left">小规模/兼容性</td><td style="text-align: left">生产环境</td><td style="text-align: left">新集群</td><td style="text-align: left">高性能</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="72-kube-proxy-配置"><a class="header" href="#72-kube-proxy-配置">7.2 kube-proxy 配置</a></h3>
+<pre><code class="language-yaml"># kube-proxy-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+data:
+  config.conf: |
+    apiVersion: kubeproxy.config.k8s.io/v1alpha1
+    kind: KubeProxyConfiguration
+    
+    # 绑定地址
+    bindAddress: 0.0.0.0
+    
+    # 健康检查
+    healthzBindAddress: 0.0.0.0:10256
+    metricsBindAddress: 0.0.0.0:10249
+    
+    # 代理模式: iptables, ipvs, nftables (v1.29+)
+    mode: ipvs
+    
+    # iptables 模式配置
+    iptables:
+      masqueradeAll: false
+      masqueradeBit: 14
+      minSyncPeriod: 1s
+      syncPeriod: 30s
+      # 本地化 Service (v1.22+)
+      localhostNodePorts: true
+    
+    # IPVS 模式配置
+    ipvs:
+      # 调度算法
+      # rr: 轮询 (默认)
+      # lc: 最少连接
+      # dh: 目标地址哈希
+      # sh: 源地址哈希
+      # sed: 最短期望延迟
+      # nq: 永不排队
+      scheduler: rr
+      
+      # 同步周期
+      syncPeriod: 30s
+      minSyncPeriod: 2s
+      
+      # TCP 超时
+      tcpTimeout: 0s
+      tcpFinTimeout: 0s
+      udpTimeout: 0s
+      
+      # 严格 ARP (MetalLB 需要)
+      strictARP: true
+      
+      # 排除 CIDR (不代理这些地址)
+      excludeCIDRs: []
+    
+    # nftables 模式配置 (v1.29+)
+    nftables:
+      masqueradeAll: false
+      masqueradeBit: 14
+      minSyncPeriod: 1s
+      syncPeriod: 30s
+    
+    # conntrack 配置
+    conntrack:
+      maxPerCore: 32768
+      min: 131072
+      tcpEstablishedTimeout: 86400s  # 24h
+      tcpCloseWaitTimeout: 3600s     # 1h
+    
+    # 节点端口地址
+    # 空表示所有本地地址
+    nodePortAddresses: []
+    
+    # 配置同步模式
+    configSyncPeriod: 15m
+    
+    # 检测本地流量
+    detectLocalMode: ClusterCIDR
+    # detectLocal:
+    #   bridgeInterface: ""
+    #   interfaceNamePrefix: ""
+    
+    # 日志级别
+    logging:
+      flushFrequency: 5s
+      verbosity: 0
+---
+# IPVS 调度算法详解
+# kube-proxy IPVS scheduler comparison
+#
+# | 算法 | 参数 | 描述 | 适用场景 |
+# |-----|------|------|---------|
+# | rr | roundrobin | 轮询分发 | 通用场景 (默认) |
+# | lc | leastconn | 最少连接优先 | 长连接服务 |
+# | dh | destinationhash | 目标IP哈希 | 需要目标亲和 |
+# | sh | sourcehash | 源IP哈希 | 需要源亲和 |
+# | sed | shortestexpecteddelay | 最短期望延迟 | 异构后端 |
+# | nq | neverqueue | 永不排队 | 低延迟要求 |
+</code></pre>
+<h3 id="73-ipvs-调度算法详解"><a class="header" href="#73-ipvs-调度算法详解">7.3 IPVS 调度算法详解</a></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              IPVS 调度算法对比                                           │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                          │
+│  1. Round Robin (rr) - 轮询                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │  请求 1 → Pod A                                                                  │   │
+│  │  请求 2 → Pod B                                                                  │   │
+│  │  请求 3 → Pod C                                                                  │   │
+│  │  请求 4 → Pod A (循环)                                                           │   │
+│  │                                                                                   │   │
+│  │  优点: 简单，均衡                                                                │   │
+│  │  缺点: 不考虑后端负载                                                            │   │
+│  │  场景: 无状态服务，后端能力相近                                                  │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+│  2. Least Connection (lc) - 最少连接                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │  当前连接: Pod A(10), Pod B(5), Pod C(8)                                         │   │
+│  │  新请求 → Pod B (连接数最少)                                                     │   │
+│  │                                                                                   │   │
+│  │  优点: 自动平衡负载                                                              │   │
+│  │  缺点: 不适合短连接                                                              │   │
+│  │  场景: 数据库连接池，WebSocket                                                   │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+│  3. Source Hash (sh) - 源地址哈希                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │  Client 1.2.3.4 → hash(1.2.3.4) → Pod A (始终)                                  │   │
+│  │  Client 5.6.7.8 → hash(5.6.7.8) → Pod B (始终)                                  │   │
+│  │                                                                                   │   │
+│  │  优点: 会话保持                                                                  │   │
+│  │  缺点: 后端变化时重新分布                                                        │   │
+│  │  场景: 需要会话亲和但不支持 cookie                                               │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+│  4. Destination Hash (dh) - 目标地址哈希                                                │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│  │  访问 /api/v1 → hash(/api/v1) → Pod A                                           │   │
+│  │  访问 /api/v2 → hash(/api/v2) → Pod B                                           │   │
+│  │                                                                                   │   │
+│  │  优点: 缓存友好                                                                  │   │
+│  │  缺点: 需要 L7 支持                                                              │   │
+│  │  场景: CDN，代理缓存                                                             │   │
+│  └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="8-生产环境配置示例-production-examples"><a class="header" href="#8-生产环境配置示例-production-examples">8. 生产环境配置示例 (Production Examples)</a></h2>
+<h3 id="81-完整微服务架构"><a class="header" href="#81-完整微服务架构">8.1 完整微服务架构</a></h3>
+<pre><code class="language-yaml"># production-microservice-stack.yaml
+# API Gateway Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  namespace: production
+  labels:
+    app.kubernetes.io/name: api-gateway
+    app.kubernetes.io/component: gateway
+    app.kubernetes.io/part-of: myapp
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9091"
+    external-dns.alpha.kubernetes.io/hostname: "api.example.com"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: service.k8s.aws/nlb
+  externalTrafficPolicy: Local
+  selector:
+    app.kubernetes.io/name: api-gateway
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8443
+    - name: metrics
+      port: 9091
+      targetPort: 9091
+---
+# User Service (内部)
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: production
+  labels:
+    app.kubernetes.io/name: user-service
+    app.kubernetes.io/component: backend
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: user-service
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: 9090
+      appProtocol: grpc
+    - name: http
+      port: 80
+      targetPort: 8080
+      appProtocol: http
+    - name: metrics
+      port: 9091
+      targetPort: 9091
+---
+# Order Service (内部)
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: order-service
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: 9090
+      appProtocol: grpc
+    - name: metrics
+      port: 9091
+      targetPort: 9091
+---
+# Redis (Headless for Sentinel)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: production
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: redis
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+    - name: sentinel
+      port: 26379
+      targetPort: 26379
+---
+# Redis 只读 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-readonly
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: redis
+    role: replica
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+---
+# PostgreSQL Primary (Headless)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: production
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+---
+# PostgreSQL 只读 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-readonly
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: postgres
+    role: replica
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+---
+# PodDisruptionBudget for API Gateway
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: api-gateway-pdb
+  namespace: production
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api-gateway
+</code></pre>
+<h3 id="82-grpc-服务负载均衡"><a class="header" href="#82-grpc-服务负载均衡">8.2 gRPC 服务负载均衡</a></h3>
+<pre><code class="language-yaml"># grpc-service-loadbalancing.yaml
+# gRPC 服务需要特殊处理，因为 HTTP/2 连接复用
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+  namespace: production
+  labels:
+    app.kubernetes.io/name: grpc-service
+  annotations:
+    # Istio: 指定协议
+    # service.istio.io/canonical-name: grpc-service
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: grpc-service
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: 9090
+      appProtocol: grpc  # 重要：指定应用层协议
+---
+# Headless Service for client-side load balancing
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service-headless
+  namespace: production
+  annotations:
+    description: "Headless service for gRPC client-side load balancing"
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: grpc-service
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: 9090
+      appProtocol: grpc
+---
+# gRPC 客户端配置示例 (Go)
+# client.go:
+#
+# import (
+#     "google.golang.org/grpc"
+#     "google.golang.org/grpc/resolver"
+#     _ "google.golang.org/grpc/resolver/dns" // DNS resolver
+# )
+#
+# func main() {
+#     // 使用 dns:/// 前缀启用 DNS 解析
+#     // 使用 Headless Service 获取所有 Pod IP
+#     conn, err := grpc.Dial(
+#         "dns:///grpc-service-headless.production.svc.cluster.local:9090",
+#         grpc.WithDefaultServiceConfig(`{
+#             "loadBalancingPolicy": "round_robin",
+#             "healthCheckConfig": {
+#                 "serviceName": "grpc.health.v1.Health"
+#             }
+#         }`),
+#         grpc.WithInsecure(),
+#     )
+# }
+</code></pre>
+<h3 id="83-多区域服务拓扑"><a class="header" href="#83-多区域服务拓扑">8.3 多区域服务拓扑</a></h3>
+<pre><code class="language-yaml"># topology-aware-service.yaml
+# 拓扑感知服务路由 (v1.21+)
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: production
+  annotations:
+    # 拓扑感知提示 (v1.23+)
+    # 首选同一 zone 的端点
+    service.kubernetes.io/topology-mode: Auto
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  # 内部流量策略
+  internalTrafficPolicy: Cluster
+---
+# 使用 trafficDistribution (v1.30+ Alpha)
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service-v130
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  # 流量分布 (v1.30+)
+  # PreferClose: 优先同一拓扑区域
+  trafficDistribution: PreferClose
+---
+# EndpointSlice 拓扑信息示例
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: web-service-zone-a
+  namespace: production
+  labels:
+    kubernetes.io/service-name: web-service
+addressType: IPv4
+ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+endpoints:
+  - addresses: ["10.244.1.10"]
+    zone: us-west-2a  # 拓扑区域
+    nodeName: node-1
+    conditions:
+      ready: true
+      serving: true
+  - addresses: ["10.244.1.11"]
+    zone: us-west-2a
+    nodeName: node-2
+    conditions:
+      ready: true
+      serving: true
+---
+# 多区域 Deployment 配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: production
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: web
+    spec:
+      # 拓扑分布约束
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: web
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: web
+      containers:
+        - name: web
+          image: web:v1.0.0
+          ports:
+            - containerPort: 8080
+</code></pre>
+<hr>
+<h2 id="9-会话亲和性与流量策略-session-affinity--traffic-policy"><a class="header" href="#9-会话亲和性与流量策略-session-affinity--traffic-policy">9. 会话亲和性与流量策略 (Session Affinity &amp; Traffic Policy)</a></h2>
+<h3 id="91-会话亲和性配置"><a class="header" href="#91-会话亲和性配置">9.1 会话亲和性配置</a></h3>
+<pre><code class="language-yaml"># session-affinity-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sticky-service
+  namespace: production
+  annotations:
+    description: "Service with client IP session affinity"
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: sticky-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  
+  # 会话亲和性类型
+  # None: 无亲和性 (默认)
+  # ClientIP: 基于客户端 IP
+  sessionAffinity: ClientIP
+  
+  # 会话亲和性配置
+  sessionAffinityConfig:
+    clientIP:
+      # 会话保持时间 (秒)
+      # 默认: 10800 (3 小时)
+      # 最大: 86400 (24 小时)
+      timeoutSeconds: 3600  # 1 小时
+</code></pre>
+<h3 id="92-流量策略组合"><a class="header" href="#92-流量策略组合">9.2 流量策略组合</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">场景</th><th style="text-align: left">externalTrafficPolicy</th><th style="text-align: left">internalTrafficPolicy</th><th style="text-align: left">效果</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>默认</strong></td><td style="text-align: left">Cluster</td><td style="text-align: left">Cluster</td><td style="text-align: left">所有流量均匀分布</td></tr>
+<tr><td style="text-align: left"><strong>保留源 IP</strong></td><td style="text-align: left">Local</td><td style="text-align: left">Cluster</td><td style="text-align: left">外部流量保留源 IP，内部正常</td></tr>
+<tr><td style="text-align: left"><strong>完全本地化</strong></td><td style="text-align: left">Local</td><td style="text-align: left">Local</td><td style="text-align: left">所有流量仅发送到本地 Pod</td></tr>
+<tr><td style="text-align: left"><strong>内部优化</strong></td><td style="text-align: left">Cluster</td><td style="text-align: left">Local</td><td style="text-align: left">外部正常，内部优先本地</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="10-监控与故障排查-monitoring--troubleshooting"><a class="header" href="#10-监控与故障排查-monitoring--troubleshooting">10. 监控与故障排查 (Monitoring &amp; Troubleshooting)</a></h2>
+<h3 id="101-service-监控指标"><a class="header" href="#101-service-监控指标">10.1 Service 监控指标</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">指标</th><th style="text-align: left">类型</th><th style="text-align: left">来源</th><th style="text-align: left">描述</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><code>kube_service_info</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">Service 基本信息</td></tr>
+<tr><td style="text-align: left"><code>kube_service_spec_type</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">Service 类型</td></tr>
+<tr><td style="text-align: left"><code>kube_service_spec_external_ip</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">外部 IP</td></tr>
+<tr><td style="text-align: left"><code>kube_service_status_load_balancer_ingress</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">LB Ingress 信息</td></tr>
+<tr><td style="text-align: left"><code>kube_endpoint_address_available</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">可用端点数</td></tr>
+<tr><td style="text-align: left"><code>kube_endpoint_address_not_ready</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">未就绪端点数</td></tr>
+<tr><td style="text-align: left"><code>kube_endpointslice_endpoints</code></td><td style="text-align: left">Gauge</td><td style="text-align: left">kube-state-metrics</td><td style="text-align: left">EndpointSlice 端点数</td></tr>
+<tr><td style="text-align: left"><code>kubeproxy_sync_proxy_rules_duration_seconds</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">kube-proxy</td><td style="text-align: left">规则同步耗时</td></tr>
+<tr><td style="text-align: left"><code>kubeproxy_network_programming_duration_seconds</code></td><td style="text-align: left">Histogram</td><td style="text-align: left">kube-proxy</td><td style="text-align: left">网络编程耗时</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="102-故障排查命令"><a class="header" href="#102-故障排查命令">10.2 故障排查命令</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# service-troubleshooting.sh
+
+# ==================== 基本检查 ====================
+
+# 1. 查看 Service 详情
+kubectl get svc my-service -n production -o wide
+kubectl describe svc my-service -n production
+
+# 2. 检查 Endpoints
+kubectl get endpoints my-service -n production
+kubectl describe endpoints my-service -n production
+
+# 3. 检查 EndpointSlice
+kubectl get endpointslice -n production -l kubernetes.io/service-name=my-service
+kubectl describe endpointslice -n production -l kubernetes.io/service-name=my-service
+
+# 4. 检查 Pod 状态和标签
+kubectl get pods -n production -l app=my-app -o wide
+kubectl get pods -n production -l app=my-app --show-labels
+
+# ==================== 网络连通性测试 ====================
+
+# 5. DNS 解析测试
+kubectl run -it --rm debug --image=busybox --restart=Never -- \
+  nslookup my-service.production.svc.cluster.local
+
+# 6. Service 连通性测试
+kubectl run -it --rm debug --image=curlimages/curl --restart=Never -- \
+  curl -v http://my-service.production.svc.cluster.local
+
+# 7. 直接访问 Pod IP
+kubectl run -it --rm debug --image=curlimages/curl --restart=Never -- \
+  curl -v http://&lt;pod-ip&gt;:8080
+
+# 8. NodePort 测试 (从集群外部)
+curl -v http://&lt;node-ip&gt;:30080
+
+# ==================== kube-proxy 检查 ====================
+
+# 9. 查看 kube-proxy 日志
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100
+
+# 10. 检查 kube-proxy 配置
+kubectl get configmap kube-proxy -n kube-system -o yaml
+
+# 11. iptables 规则检查 (在节点上执行)
+# 查看 Service 相关的 NAT 规则
+iptables -t nat -L KUBE-SERVICES -n -v | grep my-service
+iptables -t nat -L KUBE-SVC-XXXX -n -v
+
+# 12. IPVS 规则检查 (在节点上执行)
+ipvsadm -Ln | grep -A 5 &lt;ClusterIP&gt;
+ipvsadm -Ln --stats | grep &lt;ClusterIP&gt;
+
+# ==================== DNS 排查 ====================
+
+# 13. CoreDNS 日志
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100
+
+# 14. CoreDNS 配置
+kubectl get configmap coredns -n kube-system -o yaml
+
+# 15. DNS 详细查询
+kubectl run -it --rm debug --image=tutum/dnsutils --restart=Never -- \
+  dig +short my-service.production.svc.cluster.local
+
+# 16. DNS SRV 记录查询
+kubectl run -it --rm debug --image=tutum/dnsutils --restart=Never -- \
+  dig +short SRV _http._tcp.my-service.production.svc.cluster.local
+
+# ==================== 高级诊断 ====================
+
+# 17. 使用 netshoot 进行网络诊断
+kubectl run -it --rm netshoot --image=nicolaka/netshoot --restart=Never -- bash
+# 在 netshoot 容器内:
+# tcpdump -i any host &lt;service-ip&gt; -n
+# ss -tuln
+# netstat -rn
+
+# 18. 检查 conntrack 表
+# 在节点上执行
+conntrack -L -d &lt;ClusterIP&gt; 2&gt;/dev/null | head
+
+# 19. 端口监听检查 (在 Pod 内)
+kubectl exec -it &lt;pod-name&gt; -n production -- ss -tuln
+
+# 20. 查看 Service 事件
+kubectl get events -n production --field-selector involvedObject.name=my-service
+</code></pre>
+<h3 id="103-常见问题诊断矩阵"><a class="header" href="#103-常见问题诊断矩阵">10.3 常见问题诊断矩阵</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">问题现象</th><th style="text-align: left">可能原因</th><th style="text-align: left">诊断命令</th><th style="text-align: left">解决方案</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>Service 无法访问</strong></td><td style="text-align: left">Selector 不匹配</td><td style="text-align: left"><code>kubectl get ep &lt;svc&gt;</code></td><td style="text-align: left">检查 Pod 标签和 Service selector</td></tr>
+<tr><td style="text-align: left"><strong>Endpoints 为空</strong></td><td style="text-align: left">Pod 未 Ready</td><td style="text-align: left"><code>kubectl get pods -o wide</code></td><td style="text-align: left">检查 Pod readinessProbe</td></tr>
+<tr><td style="text-align: left"><strong>DNS 解析失败</strong></td><td style="text-align: left">CoreDNS 异常</td><td style="text-align: left"><code>kubectl get pods -n kube-system -l k8s-app=kube-dns</code></td><td style="text-align: left">检查 CoreDNS 状态和日志</td></tr>
+<tr><td style="text-align: left"><strong>NodePort 无法访问</strong></td><td style="text-align: left">防火墙阻止</td><td style="text-align: left"><code>iptables -L INPUT -n</code></td><td style="text-align: left">开放 30000-32767 端口</td></tr>
+<tr><td style="text-align: left"><strong>LoadBalancer Pending</strong></td><td style="text-align: left">无云控制器</td><td style="text-align: left"><code>kubectl describe svc &lt;svc&gt;</code></td><td style="text-align: left">安装 cloud-controller-manager</td></tr>
+<tr><td style="text-align: left"><strong>源 IP 丢失</strong></td><td style="text-align: left">externalTrafficPolicy=Cluster</td><td style="text-align: left"><code>kubectl get svc &lt;svc&gt; -o yaml</code></td><td style="text-align: left">设置 externalTrafficPolicy=Local</td></tr>
+<tr><td style="text-align: left"><strong>连接超时</strong></td><td style="text-align: left">NetworkPolicy 阻止</td><td style="text-align: left"><code>kubectl get networkpolicy</code></td><td style="text-align: left">检查并调整 NetworkPolicy</td></tr>
+<tr><td style="text-align: left"><strong>间歇性失败</strong></td><td style="text-align: left">Pod 重启/驱逐</td><td style="text-align: left"><code>kubectl get events</code></td><td style="text-align: left">检查 Pod 稳定性，增加副本数</td></tr>
+<tr><td style="text-align: left"><strong>负载不均衡</strong></td><td style="text-align: left">会话亲和性</td><td style="text-align: left"><code>kubectl get svc &lt;svc&gt; -o yaml</code></td><td style="text-align: left">调整 sessionAffinity 设置</td></tr>
+<tr><td style="text-align: left"><strong>跨 AZ 延迟高</strong></td><td style="text-align: left">无拓扑感知</td><td style="text-align: left">检查 EndpointSlice zone</td><td style="text-align: left">启用拓扑感知路由</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="11-版本变更记录-version-history"><a class="header" href="#11-版本变更记录-version-history">11. 版本变更记录 (Version History)</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">K8s 版本</th><th style="text-align: left">变更内容</th><th style="text-align: left">特性状态</th><th style="text-align: left">影响</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>v1.32</strong></td><td style="text-align: left">TrafficDistribution 字段增强</td><td style="text-align: left">Beta</td><td style="text-align: left">更精细的流量控制</td></tr>
+<tr><td style="text-align: left"><strong>v1.31</strong></td><td style="text-align: left">nftables 代理模式</td><td style="text-align: left">Beta</td><td style="text-align: left">新的代理实现选项</td></tr>
+<tr><td style="text-align: left"><strong>v1.30</strong></td><td style="text-align: left">TrafficDistribution 字段</td><td style="text-align: left">Alpha</td><td style="text-align: left">流量分布策略</td></tr>
+<tr><td style="text-align: left"><strong>v1.30</strong></td><td style="text-align: left">internalTrafficPolicy</td><td style="text-align: left">GA</td><td style="text-align: left">内部流量策略稳定</td></tr>
+<tr><td style="text-align: left"><strong>v1.29</strong></td><td style="text-align: left">nftables 代理模式</td><td style="text-align: left">Alpha</td><td style="text-align: left">新代理后端</td></tr>
+<tr><td style="text-align: left"><strong>v1.29</strong></td><td style="text-align: left">Multi-network Service</td><td style="text-align: left">Alpha</td><td style="text-align: left">多网络支持</td></tr>
+<tr><td style="text-align: left"><strong>v1.28</strong></td><td style="text-align: left">Service 端口分配改进</td><td style="text-align: left">-</td><td style="text-align: left">NodePort 分配更灵活</td></tr>
+<tr><td style="text-align: left"><strong>v1.27</strong></td><td style="text-align: left">LoadBalancerClass</td><td style="text-align: left">GA</td><td style="text-align: left">LB 控制器类选择稳定</td></tr>
+<tr><td style="text-align: left"><strong>v1.26</strong></td><td style="text-align: left">internalTrafficPolicy</td><td style="text-align: left">GA</td><td style="text-align: left">内部流量策略稳定</td></tr>
+<tr><td style="text-align: left"><strong>v1.26</strong></td><td style="text-align: left">EndpointSlice 增强</td><td style="text-align: left">-</td><td style="text-align: left">大规模更高效</td></tr>
+<tr><td style="text-align: left"><strong>v1.25</strong></td><td style="text-align: left">拓扑感知路由</td><td style="text-align: left">Beta</td><td style="text-align: left">跨 AZ 优化</td></tr>
+<tr><td style="text-align: left"><strong>v1.24</strong></td><td style="text-align: left">LoadBalancerClass</td><td style="text-align: left">Beta</td><td style="text-align: left">多 LB 控制器支持</td></tr>
+<tr><td style="text-align: left"><strong>v1.24</strong></td><td style="text-align: left">allocateLoadBalancerNodePorts</td><td style="text-align: left">GA</td><td style="text-align: left">可禁用 NodePort 分配</td></tr>
+<tr><td style="text-align: left"><strong>v1.23</strong></td><td style="text-align: left">拓扑感知提示</td><td style="text-align: left">Beta</td><td style="text-align: left">service.kubernetes.io/topology-mode</td></tr>
+<tr><td style="text-align: left"><strong>v1.22</strong></td><td style="text-align: left">EndpointSlice 条件字段</td><td style="text-align: left">GA</td><td style="text-align: left">serving, terminating</td></tr>
+<tr><td style="text-align: left"><strong>v1.21</strong></td><td style="text-align: left">EndpointSlice</td><td style="text-align: left">GA</td><td style="text-align: left">默认启用</td></tr>
+<tr><td style="text-align: left"><strong>v1.20</strong></td><td style="text-align: left">双栈 Service</td><td style="text-align: left">GA</td><td style="text-align: left">IPv4/IPv6 支持</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="12-最佳实践总结-best-practices"><a class="header" href="#12-最佳实践总结-best-practices">12. 最佳实践总结 (Best Practices)</a></h2>
+<h3 id="121-service-配置检查清单"><a class="header" href="#121-service-配置检查清单">12.1 Service 配置检查清单</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">检查项</th><th style="text-align: left">推荐配置</th><th style="text-align: left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>类型选择</strong></td><td style="text-align: left">内部用 ClusterIP，外部用 LoadBalancer</td><td style="text-align: left">NodePort 仅用于开发测试</td></tr>
+<tr><td style="text-align: left"><strong>标签规范</strong></td><td style="text-align: left">使用 app.kubernetes.io/* 标签</td><td style="text-align: left">标准化命名</td></tr>
+<tr><td style="text-align: left"><strong>端口命名</strong></td><td style="text-align: left">使用有意义的名称 (http, grpc, metrics)</td><td style="text-align: left">便于识别和 Istio 协议检测</td></tr>
+<tr><td style="text-align: left"><strong>appProtocol</strong></td><td style="text-align: left">指定应用层协议</td><td style="text-align: left">http, https, grpc, h2c</td></tr>
+<tr><td style="text-align: left"><strong>健康检查</strong></td><td style="text-align: left">配置 readinessProbe</td><td style="text-align: left">确保只有健康 Pod 接收流量</td></tr>
+<tr><td style="text-align: left"><strong>PDB</strong></td><td style="text-align: left">配置 PodDisruptionBudget</td><td style="text-align: left">保证服务可用性</td></tr>
+<tr><td style="text-align: left"><strong>资源限制</strong></td><td style="text-align: left">设置 requests/limits</td><td style="text-align: left">防止资源争用</td></tr>
+<tr><td style="text-align: left"><strong>拓扑分布</strong></td><td style="text-align: left">使用 topologySpreadConstraints</td><td style="text-align: left">跨 AZ 高可用</td></tr>
+<tr><td style="text-align: left"><strong>监控</strong></td><td style="text-align: left">添加 Prometheus 注解</td><td style="text-align: left">服务可观测性</td></tr>
+<tr><td style="text-align: left"><strong>文档</strong></td><td style="text-align: left">添加 description 注解</td><td style="text-align: left">便于运维理解</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="122-性能优化建议"><a class="header" href="#122-性能优化建议">12.2 性能优化建议</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">优化项</th><th style="text-align: left">建议</th><th style="text-align: left">效果</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>kube-proxy 模式</strong></td><td style="text-align: left">生产使用 IPVS</td><td style="text-align: left">O(1) 复杂度</td></tr>
+<tr><td style="text-align: left"><strong>DNS 优化</strong></td><td style="text-align: left">降低 ndots，使用 FQDN</td><td style="text-align: left">减少 DNS 查询</td></tr>
+<tr><td style="text-align: left"><strong>拓扑感知</strong></td><td style="text-align: left">启用拓扑感知路由</td><td style="text-align: left">减少跨 AZ 流量</td></tr>
+<tr><td style="text-align: left"><strong>连接复用</strong></td><td style="text-align: left">gRPC 使用客户端负载均衡</td><td style="text-align: left">避免 HTTP/2 热点</td></tr>
+<tr><td style="text-align: left"><strong>NodeLocal DNSCache</strong></td><td style="text-align: left">部署本地 DNS 缓存</td><td style="text-align: left">减少 CoreDNS 负载</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<blockquote>
+<p><strong>参考文档</strong>:</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Kubernetes Service 官方文档</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS for Services and Pods</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/">EndpointSlices</a></li>
+<li><a href="https://kubernetes.io/docs/reference/config-api/kube-proxy-config.v1alpha1/">kube-proxy 配置参考</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/">拓扑感知路由</a></li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h2 id="16-生产环境service运维最佳实践"><a class="header" href="#16-生产环境service运维最佳实践">16. 生产环境Service运维最佳实践</a></h2>
+<h3 id="161-service高可用设计模式"><a class="header" href="#161-service高可用设计模式">16.1 Service高可用设计模式</a></h3>
+<pre><code class="language-yaml"># 生产环境Service高可用配置模板
+apiVersion: v1
+kind: Service
+metadata:
+  name: production-service
+  namespace: production
+  annotations:
+    # 健康检查配置
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8080"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /health
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "30"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: "5"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "3"
+    
+    # 负载均衡算法
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    
+    # 安全配置
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+spec:
+  type: LoadBalancer
+  selector:
+    app: production-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 8080
+    protocol: TCP
+  externalTrafficPolicy: Local  # 保持客户端源IP
+  sessionAffinity: ClientIP     # 会话亲和性
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800     # 3小时会话保持
+
+---
+# Headless Service用于StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-headless
+  namespace: production
+spec:
+  clusterIP: None
+  selector:
+    app: database
+  ports:
+  - name: postgres
+    port: 5432
+    targetPort: 5432
+  publishNotReadyAddresses: true  # 即使Pod未就绪也发布地址
+</code></pre>
+<h3 id="162-service性能优化配置"><a class="header" href="#162-service性能优化配置">16.2 Service性能优化配置</a></h3>
+<pre><code class="language-yaml"># kube-proxy优化配置
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: ipvs
+ipvs:
+  scheduler: "rr"           # 轮询调度
+  syncPeriod: 30s          # 同步周期
+  minSyncPeriod: 5s        # 最小同步周期
+  excludeCIDRs:
+  - "10.0.0.0/8"           # 排除不需要的CIDR
+conntrack:
+  maxPerCore: 65536        # 每核最大连接跟踪数
+  min: 262144              # 最小连接跟踪数
+iptables:
+  masqueradeAll: false     # 避免不必要的SNAT
+  syncPeriod: 60s          # iptables同步周期
+
+---
+# Service监控和服务发现优化
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-optimization
+  namespace: kube-system
+data:
+  # CoreDNS优化配置
+  coredns-config: |
+    .:53 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        prometheus :9153
+        forward . /etc/resolv.conf {
+            max_concurrent 1000
+            expire 300s
+        }
+        cache 30 {
+            success 9984 30
+            denial 9984 5
+        }
+        loop
+        reload
+        loadbalance
+    }
+  
+  # NodeLocal DNSCache配置
+  nodelocal-config: |
+    apiVersion: apps/v1
+    kind: DaemonSet
+    metadata:
+      name: nodelocaldns
+      namespace: kube-system
+    spec:
+      selector:
+        matchLabels:
+          k8s-app: nodelocaldns
+      template:
+        metadata:
+          labels:
+            k8s-app: nodelocaldns
+        spec:
+          priorityClassName: system-node-critical
+          serviceAccountName: nodelocaldns
+          containers:
+          - name: node-cache
+            image: k8s.gcr.io/dns/k8s-dns-node-cache:1.21.1
+            args:
+            - -localip
+            - "169.254.20.10,10.96.0.10"  # 本地DNS IP
+            - -conf
+            - /etc/Corefile
+            - -upstreamsvc
+            - "kube-dns-upstream"
+            resources:
+              requests:
+                cpu: 25m
+                memory: 50Mi
+              limits:
+                cpu: 100m
+                memory: 200Mi
+</code></pre>
+<h3 id="163-service故障诊断与恢复"><a class="header" href="#163-service故障诊断与恢复">16.3 Service故障诊断与恢复</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# service-troubleshooting.sh - Service故障诊断脚本
+
+set -euo pipefail
+
+NAMESPACE="${1:-default}"
+SERVICE_NAME="${2:-}"
+
+echo "=== Kubernetes Service 故障诊断工具 ==="
+echo "Namespace: ${NAMESPACE}"
+echo "Service: ${SERVICE_NAME:-所有Service}"
+echo "诊断时间: $(date)"
+echo
+
+# 1. Service基本信息检查
+echo "[1/8] 检查Service基本信息..."
+{
+  echo "=== Service基本信息 ==="
+  if [ -n "$SERVICE_NAME" ]; then
+    kubectl get svc $SERVICE_NAME -n $NAMESPACE -o wide
+    kubectl describe svc $SERVICE_NAME -n $NAMESPACE
+  else
+    echo "所有Service概览:"
+    kubectl get svc -n $NAMESPACE -o wide
+    echo -e "\n异常Service:"
+    kubectl get svc -n $NAMESPACE --no-headers | awk '$5=="&lt;none&gt;" {print $1}'
+  fi
+} &gt; /tmp/service-basic-info.log
+
+# 2. Endpoints检查
+echo "[2/8] 检查Endpoints..."
+{
+  echo "=== Endpoints检查 ==="
+  if [ -n "$SERVICE_NAME" ]; then
+    kubectl get endpoints $SERVICE_NAME -n $NAMESPACE -o wide
+    kubectl describe endpoints $SERVICE_NAME -n $NAMESPACE
+  else
+    echo "Endpoints统计:"
+    kubectl get endpoints -n $NAMESPACE --no-headers | awk '{print $NF}' | sort | uniq -c
+    
+    echo -e "\n无Endpoints的Service:"
+    kubectl get svc,endpoints -n $NAMESPACE -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\t"}{.subsets[*].addresses[*]}{"\n"}{end}' | \
+      while read svc endpoints; do
+        if [ -z "$endpoints" ]; then
+          echo "$svc - 无Endpoints"
+        fi
+      done
+  fi
+} &gt; /tmp/service-endpoints.log
+
+# 3. 后端Pod状态检查
+echo "[3/8] 检查后端Pod状态..."
+{
+  echo "=== 后端Pod状态检查 ==="
+  if [ -n "$SERVICE_NAME" ]; then
+    SELECTOR=$(kubectl get svc $SERVICE_NAME -n $NAMESPACE -o jsonpath='{.spec.selector}' | tr -d '{}')
+    if [ -n "$SELECTOR" ]; then
+      echo "Service选择器: $SELECTOR"
+      kubectl get pods -n $NAMESPACE -l $SELECTOR -o wide
+      echo -e "\nPod详细状态:"
+      kubectl describe pods -n $NAMESPACE -l $SELECTOR
+    else
+      echo "Service没有定义选择器"
+    fi
+  else
+    echo "各Service后端Pod统计:"
+    kubectl get svc -n $NAMESPACE -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.selector}{"\n"}{end}' | \
+      while read svc selector; do
+        if [ -n "$selector" ]; then
+          pod_count=$(kubectl get pods -n $NAMESPACE -l $selector --no-headers 2&gt;/dev/null | wc -l)
+          ready_count=$(kubectl get pods -n $NAMESPACE -l $selector --no-headers 2&gt;/dev/null | grep Running | grep -c "1/1" 2&gt;/dev/null || echo 0)
+          echo "$svc: $ready_count/$pod_count Pods就绪"
+        fi
+      done
+  fi
+} &gt; /tmp/service-backend-pods.log
+
+# 4. 网络连通性测试
+echo "[4/8] 测试网络连通性..."
+{
+  echo "=== 网络连通性测试 ==="
+  
+  # 创建测试Pod
+  cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: service-test-pod
+  namespace: $NAMESPACE
+spec:
+  containers:
+  - name: tester
+    image: nicolaka/netshoot
+    command: ["sleep", "3600"]
+  restartPolicy: Never
+EOF
+
+  sleep 10
+  kubectl wait --for=condition=Ready pod/service-test-pod -n $NAMESPACE --timeout=60s
+  
+  if [ -n "$SERVICE_NAME" ]; then
+    SERVICE_CLUSTER_IP=$(kubectl get svc $SERVICE_NAME -n $NAMESPACE -o jsonpath='{.spec.clusterIP}')
+    SERVICE_PORT=$(kubectl get svc $SERVICE_NAME -n $NAMESPACE -o jsonpath='{.spec.ports[0].port}')
+    
+    echo "测试Service: $SERVICE_NAME"
+    echo "ClusterIP: $SERVICE_CLUSTER_IP"
+    echo "Port: $SERVICE_PORT"
+    
+    echo -e "\nDNS解析测试:"
+    kubectl exec service-test-pod -n $NAMESPACE -- nslookup $SERVICE_NAME.$NAMESPACE.svc.cluster.local
+    
+    echo -e "\n端口连通性测试:"
+    kubectl exec service-test-pod -n $NAMESPACE -- nc -zv $SERVICE_CLUSTER_IP $SERVICE_PORT
+    
+    echo -e "\nHTTP测试 (如果适用):"
+    kubectl exec service-test-pod -n $NAMESPACE -- curl -s -w "%{http_code}" http://$SERVICE_NAME.$NAMESPACE.svc.cluster.local:$SERVICE_PORT/ -o /dev/null || echo "非HTTP服务"
+  else
+    echo "测试默认Kubernetes服务:"
+    kubectl exec service-test-pod -n $NAMESPACE -- curl -sk https://kubernetes.default/api/
+  fi
+  
+  # 清理测试Pod
+  kubectl delete pod service-test-pod -n $NAMESPACE --force --grace-period=0
+} &gt; /tmp/service-connectivity-test.log
+
+# 5. kube-proxy状态检查
+echo "[5/8] 检查kube-proxy状态..."
+{
+  echo "=== kube-proxy状态检查 ==="
+  echo "kube-proxy Pod状态:"
+  kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
+  
+  echo -e "\nkube-proxy配置:"
+  kubectl get cm -n kube-system kube-proxy -o yaml | grep -A 10 "mode:"
+  
+  echo -e "\nkube-proxy日志采样:"
+  kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -E "(error|Error|failed|Failed)" || echo "未发现明显错误"
+} &gt; /tmp/kube-proxy-status.log
+
+# 6. Service相关事件检查
+echo "[6/8] 检查相关事件..."
+{
+  echo "=== Service相关事件 ==="
+  if [ -n "$SERVICE_NAME" ]; then
+    kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$SERVICE_NAME,involvedObject.kind=Service
+  else
+    kubectl get events -n $NAMESPACE --field-selector involvedObject.kind=Service --sort-by='.lastTimestamp' | tail -20
+  fi
+} &gt; /tmp/service-events.log
+
+# 7. 性能指标检查
+echo "[7/8] 检查性能指标..."
+{
+  echo "=== 性能指标检查 ==="
+  echo "Service延迟统计:"
+  kubectl get svc -n $NAMESPACE -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.type}{"\n"}{end}' | \
+    while read svc type; do
+      echo "$svc ($type)"
+    done
+  
+  echo -e "\n连接数统计:"
+  kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | \
+    head -3 | while read node; do
+      echo "--- Node: $node ---"
+      kubectl debug node/$node -it --image=nicolaka/netshoot -- \
+        ss -tuln | grep -c ":80\|:443" || echo "0"
+    done
+} &gt; /tmp/service-performance.log
+
+# 8. 生成诊断报告
+echo "[8/8] 生成诊断报告..."
+{
+  echo "=========================================="
+  echo "         Kubernetes Service诊断报告"
+  echo "=========================================="
+  echo "命名空间: ${NAMESPACE}"
+  echo "Service: ${SERVICE_NAME:-所有Service}"
+  echo "诊断时间: $(date)"
+  echo
+  
+  echo "=== 关键指标 ==="
+  TOTAL_SVCS=$(kubectl get svc -n $NAMESPACE --no-headers | wc -l)
+  NO_ENDPOINTS=$(grep -c "无Endpoints" /tmp/service-endpoints.log 2&gt;/dev/null || echo 0)
+  UNHEALTHY_PODS=$(grep -c "CrashLoopBackOff\|Error\|Pending" /tmp/service-backend-pods.log 2&gt;/dev/null || echo 0)
+  
+  echo "Service总数: $TOTAL_SVCS"
+  echo "无Endpoints的Service: $NO_ENDPOINTS"
+  echo "异常状态Pod数: $UNHEALTHY_PODS"
+  
+  echo
+  echo "=== 发现的问题 ==="
+  if [ "$NO_ENDPOINTS" -gt 0 ]; then
+    echo "⚠️  存在Service无Endpoints的情况"
+  fi
+  
+  if [ "$UNHEALTHY_PODS" -gt 0 ]; then
+    echo "⚠️  存在后端Pod异常"
+  fi
+  
+  if grep -q "error\|Error\|failed\|Failed" /tmp/kube-proxy-status.log; then
+    echo "⚠️  kube-proxy存在错误日志"
+  fi
+  
+  echo
+  echo "=== 建议操作 ==="
+  echo "1. 详细日志已保存至/tmp目录"
+  echo "2. 如需进一步分析，请查看对应日志文件"
+  echo "3. 常见解决方案:"
+  echo "   - 无Endpoints: 检查Service选择器和Pod标签"
+  echo "   - Pod异常: 检查Pod日志和资源配额"
+  echo "   - kube-proxy问题: 重启kube-proxy Pod"
+  echo "   - DNS问题: 检查CoreDNS状态"
+} &gt; /tmp/service-diagnosis-report.txt
+
+echo
+echo "=== 诊断完成 ==="
+echo "诊断报告: /tmp/service-diagnosis-report.txt"
+echo "各检查项日志已分别保存"
+echo
+echo "使用方法:"
+echo "  全局检查: ./service-troubleshooting.sh production"
+echo "  特定Service: ./service-troubleshooting.sh production my-service"
+</code></pre>
+<h3 id="164-service容量规划与监控"><a class="header" href="#164-service容量规划与监控">16.4 Service容量规划与监控</a></h3>
+<pre><code class="language-yaml"># Service容量规划配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-capacity-planning
+  namespace: monitoring
+data:
+  capacity-guidelines.md: |
+    # Service容量规划指南
+    
+    ## 基准指标
+    - 单集群Service数量: 建议不超过5000个
+    - 单节点Pod密度: 建议不超过110个
+    - Service端口范围: 30000-32767 (NodePort)
+    - 连接跟踪表大小: 每节点建议65536+
+    
+    ## 性能优化阈值
+    - kube-proxy同步延迟: &lt;5秒
+    - Service发现延迟: &lt;100ms
+    - DNS解析时间: &lt;50ms
+    - 连接建立时间: &lt;200ms
+    
+    ## 监控告警配置
+    - Service无Endpoints: 立即告警
+    - kube-proxy重启频率: &gt;3次/小时告警
+    - 连接跟踪表使用率: &gt;80%告警
+    - DNS错误率: &gt;1%告警
+
+---
+# Service监控告警规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: service-monitoring-rules
+  namespace: monitoring
+spec:
+  groups:
+  - name: service.rules
+    rules:
+    # Service可用性告警
+    - alert: ServiceHasNoEndpoints
+      expr: kube_service_spec_endpoints == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Service {{ $labels.namespace }}/{{ $labels.service }} 无可用Endpoints"
+        description: "Service没有关联的健康Pod，可能导致服务不可用"
+    
+    # kube-proxy性能告警
+    - alert: KubeProxySyncSlow
+      expr: rate(kubeproxy_sync_proxy_rules_duration_seconds_sum[5m]) / rate(kubeproxy_sync_proxy_rules_duration_seconds_count[5m]) &gt; 5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "kube-proxy规则同步缓慢"
+        description: "kube-proxy平均同步时间为{{ $value }}秒，可能影响Service路由"
+    
+    # 连接跟踪告警
+    - alert: ConntrackTableNearlyFull
+      expr: node_nf_conntrack_entries / node_nf_conntrack_entries_limit &gt; 0.8
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "连接跟踪表接近满载"
+        description: "节点{{ $labels.instance }}的conntrack使用率达到{{ $value | humanizePercentage }}"
+    
+    # DNS服务告警
+    - alert: ServiceDNSErrorsHigh
+      expr: rate(coredns_dns_responses_total{rcode!="NOERROR"}[5m]) / rate(coredns_dns_responses_total[5m]) &gt; 0.01
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Service DNS错误率过高"
+        description: "DNS错误率为{{ $value | humanizePercentage }}，可能影响服务发现"
+</code></pre>
+<h3 id="165-service安全加固配置"><a class="header" href="#165-service安全加固配置">16.5 Service安全加固配置</a></h3>
+<pre><code class="language-yaml"># Service网络安全策略
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: service-access-control
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: critical-service
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: frontend
+    - podSelector:
+        matchLabels:
+          app: api-gateway
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: database
+    ports:
+    - protocol: TCP
+      port: 5432
+
+---
+# Service账户安全配置
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-account-secure
+  namespace: production
+automountServiceAccountToken: false  # 禁用自动挂载
+
+---
+# RBAC权限最小化
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: service-reader
+  namespace: production
+rules:
+- apiGroups: [""]
+  resources: ["services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: service-reader-binding
+  namespace: production
+subjects:
+- kind: ServiceAccount
+  name: service-account-secure
+  namespace: production
+roleRef:
+  kind: Role
+  name: service-reader
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../domain-5-networking/05-terway-advanced-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../domain-5-networking/07-service-implementation-details.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../domain-5-networking/05-terway-advanced-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../domain-5-networking/07-service-implementation-details.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
