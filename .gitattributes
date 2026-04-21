@@ -1,0 +1,28 @@
+# 确保所有文本文件使用 LF 换行符
+* text=auto eol=lf
+
+# 确保路径分隔符使用正斜杠（解决 macOS Finder 解压错误 94）
+# GitHub 在生成 ZIP 时会遵循此配置
+* -text eol=lf
+
+# 特定文件类型
+*.md text
+*.html text
+*.css text
+*.js text
+*.json text
+*.yaml text
+*.yml text
+*.toml text
+*.sh text eol=lf
+*.txt text
+
+# 二进制文件
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.woff2 binary
+*.ttf binary
