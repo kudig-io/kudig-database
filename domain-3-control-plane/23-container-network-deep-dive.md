@@ -1818,3 +1818,7 @@ spec:
 ---
 
 *本文档持续更新，建议结合官方文档和实际环境进行验证。*
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

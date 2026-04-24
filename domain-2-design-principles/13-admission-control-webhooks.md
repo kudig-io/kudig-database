@@ -16,6 +16,10 @@
 
 ---
 
+---
+
+> **交叉引用**：API Server 准入控制的详细实现请参考 [Domain-3: API Server 深度解析](../domain-3-control-plane/12-apiserver-deep-dive.md) 和 [Domain-3: 认证授权深度解析](../domain-3-control-plane/27-authz-authn-deep-dive.md)。
+
 ## 一、准入控制架构全景
 
 ### 1.1 准入控制流程架构
@@ -70,7 +74,7 @@ admission_controller_classification:
     examples:
       - ValidatingAdmissionWebhook
       - ResourceQuota
-      - PodSecurityPolicy
+      - PodSecurity  # 替代已移除的 PodSecurityPolicy (v1.25+)
       - NamespaceLifecycle
       
   built_in_controllers:
@@ -342,7 +346,7 @@ func (i *LimitRangeInjector) applyDefaultLimits(pod *corev1.Pod, lr *corev1.Limi
 
 #### Pod 安全策略验证
 ```go
-// PSP 风格的安全验证
+// Pod 安全验证 (PSP 已在 v1.25 移除，此为等效的准入策略实现)
 type SecurityPolicyValidator struct {
     allowedImages    []string
     disallowedImages []string
@@ -476,9 +480,193 @@ func (ls *LabelStandardizer) MutateLabels(pod *corev1.Pod) *corev1.Pod {
 
 ---
 
-## 四、高级 Webhook 模式
+## 四、CEL 准入策略 (ValidatingAdmissionPolicy)
 
-### 4.1 多阶段准入控制
+> **K8s 1.30+ GA**：CEL (Common Expression Language) 准入策略将验证逻辑直接注入 API Server 进程内执行，消除了 RPC 开销，是 Webhook 的现代替代方案。
+
+### 4.1 ValidatingAdmissionPolicy 核心概念
+
+| 概念 | 说明 |
+|------|------|
+| ValidatingAdmissionPolicy | 策略定义，包含 CEL 表达式 |
+| ValidatingAdmissionPolicyBinding | 将策略绑定到特定资源/命名空间 |
+| CEL 表达式 | 内嵌在 Policy 中的验证逻辑 |
+| auditAnnotations | 审计注解，记录验证决策原因 |
+| variables | 可复用的 CEL 变量定义 |
+
+### 4.2 基础策略示例：禁止以 root 运行
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: "deny-run-as-root"
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups:   [""]
+        apiVersions: ["v1"]
+        operations:  ["CREATE", "UPDATE"]
+        resources:   ["pods"]
+  variables:
+    - name: containers
+      expression: "object.spec.containers"
+    - name: initContainers
+      expression: "object.spec.initContainers.orValue([])"
+    - name: hasRunAsNonRoot
+      expression: >-
+        variables.containers.all(c, c.?securityContext.?runAsNonRoot.orValue(false) == true) &&
+        variables.initContainers.all(c, c.?securityContext.?runAsNonRoot.orValue(false) == true)
+  validations:
+    - expression: "variables.hasRunAsNonRoot"
+      message: "All containers must set runAsNonRoot=true"
+      messageExpression: "'Found containers without runAsNonRoot: ' + variables.containers.filter(c, c.?securityContext.?runAsNonRoot.orValue(false) != true).map(c, c.name).join(', ')"
+      reason: Forbidden
+```
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: "deny-run-as-root-binding"
+spec:
+  policyName: "deny-run-as-root"
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        enforce-run-as-root: "true"
+```
+
+### 4.3 资源配额强制策略
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: "require-resource-limits"
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups:   [""]
+        apiVersions: ["v1"]
+        operations:  ["CREATE", "UPDATE"]
+        resources:   ["pods"]
+      - apiGroups:   ["apps"]
+        apiVersions: ["v1"]
+        operations:  ["CREATE", "UPDATE"]
+        resources:   ["deployments", "statefulsets", "daemonsets"]
+  variables:
+    - name: allContainers
+      expression: >-
+        object.spec.containers +
+        (has(object.spec.initContainers) ? object.spec.initContainers : []) +
+        (has(object.spec.ephemeralContainers) ? object.spec.ephemeralContainers : [])
+  validations:
+    - expression: >-
+        variables.allContainers.all(c,
+          has(c.resources) &&
+          has(c.resources.limits) &&
+          has(c.resources.limits.cpu) &&
+          has(c.resources.limits.memory) &&
+          has(c.resources.requests) &&
+          has(c.resources.requests.cpu) &&
+          has(c.resources.requests.memory))
+      message: "All containers must define requests and limits for both CPU and memory"
+      reason: Forbidden
+    - expression: >-
+        variables.allContainers.all(c,
+          !c.resources.requests.cpu.isQuantity() ||
+          !c.resources.limits.cpu.isQuantity() ||
+          int(c.resources.limits.cpu) >= int(c.resources.requests.cpu))
+      message: "Container CPU limits must be >= requests"
+      reason: Forbidden
+    - expression: >-
+        variables.allContainers.all(c,
+          int(c.resources.limits.memory) >= int(c.resources.requests.memory))
+      message: "Container memory limits must be >= requests"
+      reason: Forbidden
+  auditAnnotations:
+    - key: "containers-without-limits"
+      valueExpression: >-
+        variables.allContainers.filter(c, !has(c.resources) || !has(c.resources.limits)).map(c, c.name).join(', ')
+```
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: "require-resource-limits-binding"
+spec:
+  policyName: "require-resource-limits"
+  validationActions: [Deny, Audit]
+  matchResources:
+    namespaceSelector:
+      matchExpressions:
+        - key: environment
+          operator: In
+          values: ["production", "staging"]
+```
+
+### 4.4 镜像来源白名单策略
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: "image-whitelist"
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups:   [""]
+        apiVersions: ["v1"]
+        operations:  ["CREATE", "UPDATE"]
+        resources:   ["pods"]
+  variables:
+    - name: allowedRegistries
+      expression: >-
+        ['registry.example.com/', 'gcr.io/', 'docker.io/library/']
+    - name: allImages
+      expression: >-
+        object.spec.containers.map(c, c.image) +
+        (has(object.spec.initContainers) ? object.spec.initContainers.map(c, c.image) : [])
+    - name: violatingImages
+      expression: >-
+        variables.allImages.filter(image,
+          !variables.allowedRegistries.exists(reg, image.startsWith(reg)))
+  validations:
+    - expression: "size(variables.violatingImages) == 0"
+      message: "Images must come from approved registries"
+      messageExpression: >-
+        'Unapproved image registries: ' + variables.violatingImages.join(', ')
+      reason: Forbidden
+  auditAnnotations:
+    - key: "unapproved-images"
+      valueExpression: "variables.violatingImages.join(', ')"
+```
+
+### 4.5 CEL vs Webhook 对比
+
+| 维度 | ValidatingAdmissionPolicy (CEL) | ValidatingWebhook |
+|------|--------------------------------|-------------------|
+| 执行位置 | API Server 进程内 | 独立服务 |
+| 延迟 | 微秒级 | 毫秒~秒级 (网络RTT) |
+| 运维复杂度 | 无需额外部署 | 需维护 Webhook Server + 证书 |
+| 适用场景 | 纯逻辑验证，不依赖外部数据 | 需访问外部数据源（数据库、策略引擎） |
+| 可用性 | 随 API Server 高可用 | 需独立保证 HA |
+| 配置方式 | 原生 K8s 资源 YAML | YAML + 独立服务代码 |
+| 语言支持 | CEL 表达式 | 任意语言 (Go/Python/...) |
+
+> **最佳实践**：新开发的准入策略应首选 CEL，仅在需要查询外部系统（如 CMDB、策略引擎 OPA）时才使用 Webhook。
+
+---
+
+## 五、高级 Webhook 模式
+
+### 5.1 多阶段准入控制
 
 #### 渐进式验证策略
 ```go
@@ -551,7 +739,7 @@ func (pv *ProgressiveValidator) Handle(ctx context.Context, req admission.Reques
 }
 ```
 
-### 4.2 动态配置管理
+### 5.2 动态配置管理
 
 #### 配置热更新机制
 ```go
@@ -620,7 +808,7 @@ func (cm *ConfigManager) loadConfig(ctx context.Context) error {
 }
 ```
 
-### 4.3 审计与合规集成
+### 5.3 审计与合规集成
 
 #### 审计日志增强
 ```go
@@ -675,9 +863,9 @@ func (ae *AuditEnricher) extractSourceIP(req admission.Request) string {
 
 ---
 
-## 五、性能优化与高可用
+## 六、性能优化与高可用
 
-### 5.1 Webhook 性能优化
+### 6.1 Webhook 性能优化
 
 #### 缓存与批处理
 ```go
@@ -730,7 +918,7 @@ func (hw *HighPerformanceWebhook) Handle(ctx context.Context, req admission.Requ
 }
 ```
 
-### 5.2 高可用部署策略
+### 6.2 高可用部署策略
 
 #### 多实例部署配置
 ```yaml
@@ -804,7 +992,7 @@ spec:
   type: ClusterIP
 ```
 
-### 5.3 故障转移与降级
+### 6.3 故障转移与降级
 
 #### 智能故障处理
 ```go
@@ -864,9 +1052,9 @@ func (fw *FailoverWebhook) Handle(ctx context.Context, req admission.Request) ad
 
 ---
 
-## 六、监控与调试
+## 七、监控与调试
 
-### 6.1 指标监控体系
+### 7.1 指标监控体系
 
 #### 关键指标定义
 ```go
@@ -911,7 +1099,7 @@ func init() {
 }
 ```
 
-### 6.2 调试与测试工具
+### 7.2 调试与测试工具
 
 #### 本地测试环境
 ```bash
@@ -1068,9 +1256,9 @@ if __name__ == "__main__":
 
 ---
 
-## 七、最佳实践与安全建议
+## 八、最佳实践与安全建议
 
-### 7.1 安全配置基线
+### 8.1 安全配置基线
 
 ```yaml
 security_best_practices:
@@ -1095,7 +1283,7 @@ security_best_practices:
     pii_handling: according_to_policy
 ```
 
-### 7.2 生产部署检查清单
+### 8.2 生产部署检查清单
 
 ```yaml
 production_checklist:
@@ -1119,3 +1307,4 @@ production_checklist:
 ```
 
 ---
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

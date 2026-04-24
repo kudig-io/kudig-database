@@ -1,5 +1,7 @@
 # 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
+> **交叉引用**：Domain-1 中有更详细的 Kubernetes 源码架构分析，请参考 [Domain-1: 源码结构](../domain-1-architecture-fundamentals/04-source-code-structure.md) 和 [Domain-1: 源码架构](../domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md)。
+
 ## 阅读建议：先看抽象，再看实现
 
 阅读 K8s 源码最忌讳“深陷细节”。建议遵循以下路径：

@@ -974,3 +974,6 @@ class CapacityPredictor:
 ## 总结
 
 性能优化是一个持续的过程，需要从架构设计、资源配置、监控告警等多个维度综合考虑。通过建立科学的性能指标体系，采用合适的优化策略和工具，可以显著提升 Kubernetes 平台的整体性能表现，为业务发展提供强有力的支撑。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

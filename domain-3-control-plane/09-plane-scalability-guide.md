@@ -1411,3 +1411,6 @@ spec:
 ```
 
 这份扩缩容指南涵盖了从设计原则到具体实施的完整内容，包括水平扩展、垂直扩展、etcd管理、自动扩缩容等多个方面，为Kubernetes控制平面的扩展性提供了全面的技术指导。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

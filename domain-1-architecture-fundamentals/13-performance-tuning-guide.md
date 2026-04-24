@@ -147,8 +147,11 @@ etcd 的性能核心在于 WAL 日志的写入速度。推荐使用 NVMe SSD 并
   - `--election-timeout`: 相应地从 1000ms 调整为 2000ms-5000ms。
 - **Learner 节点应用**：在大规模集群中，使用 Learner 节点进行只读扩展，减少 Leader 的心跳压力。
 
----
-  extraArgs:
+#### API Server 参数优化配置
+
+```yaml
+# API Server 性能优化参数
+extraArgs:
     # 性能相关参数
     profiling: "true"
     enable-swagger-ui: "false"  # 禁用 Swagger UI 节省资源
@@ -1223,3 +1226,5 @@ cilium_config:
 ```
 
 ---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

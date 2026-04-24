@@ -198,6 +198,160 @@ nodeStatusUpdateFrequency: 10s      # 上报频率(默认10s)
 | 专用健康端点 | 不依赖业务逻辑 |
 | 级联检查 | 检查关键依赖 |
 
+## etcd 高可用切换场景深度分析
+
+### etcd Leader 故障切换时间线
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    etcd Leader 故障切换详细时间线                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  T+0s      Leader 心跳停止 (进程崩溃/网络分区/磁盘故障)                     │
+│  │                                                                          │
+│  T+0.1s    Followers 等待 heartbeat-interval (默认 100ms) 心跳              │
+│  │                                                                          │
+│  T+1s      Followers 进入 election-timeout (默认 1000ms)                    │
+│  │          → 转为 Candidate，自增 term，发起选举                           │
+│  │                                                                          │
+│  T+1.1s    收到多数派选票 (通常 < 200ms 完成选举)                            │
+│  │          → 新 Leader 当选                                                │
+│  │                                                                          │
+│  T+1.5s    新 Leader 开始服务写入请求                                       │
+│  │                                                                          │
+│  总停写时间: ~1-2s (取决于网络延迟)                                          │
+│                                                                              │
+│  注意事项:                                                                    │
+│  • election-timeout 不宜过短 (避免网络抖动触发误选举)                        │
+│  • election-timeout 不宜过长 (延长控制面不可用时间)                           │
+│  • 推荐范围: 1000ms - 5000ms，必须大于 heartbeat-interval 的 10 倍          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### etcd 集群规模选择指南
+
+| 集群规模 | 容忍故障数 | 读性能 | 写性能 | 推荐场景 |
+|----------|-----------|--------|--------|---------|
+| 1 节点 | 0 | 最高 | 最高 | 开发/测试 |
+| 3 节点 | 1 | 高 | 中 | 小型生产 (< 100 节点) |
+| 5 节点 | 2 | 中 | 低 | 大型生产 (> 100 节点) |
+| 7 节点 | 3 | 低 | 最低 | 超大规模或合规要求 |
+
+> **关键公式**：容忍故障数 = (N-1)/2，写入延迟与节点数正相关（需要多数派确认）。
+
+### 多集群高可用架构
+
+#### 集群级故障切换设计
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    多集群高可用架构                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│                        ┌─────────────────────┐                               │
+│                        │   Global DNS/LB      │                               │
+│                        │  (Route 53 / F5)     │                               │
+│                        └──────────┬──────────┘                               │
+│                                   │                                          │
+│          ┌────────────────────────┼────────────────────────┐                 │
+│          │                        │                        │                 │
+│          ▼                        ▼                        ▼                 │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐          │
+│  │  Cluster A      │    │  Cluster B      │    │  Cluster C      │          │
+│  │  (Active)       │    │  (Active)       │    │  (Standby)      │          │
+│  │                 │    │                 │    │                 │          │
+│  │  etcd (3节点)   │    │  etcd (3节点)   │    │  etcd (3节点)   │          │
+│  │  APIServer x3   │    │  APIServer x3   │    │  APIServer x3   │          │
+│  │  Worker x50     │    │  Worker x50     │    │  Worker x50     │          │
+│  └─────────────────┘    └─────────────────┘    └─────────────────┘          │
+│           │                       │                       │                  │
+│           └───────────────────────┼───────────────────────┘                  │
+│                                   │                                          │
+│                    ┌────────────────────────┐                                │
+│                    │  联邦控制平面            │                                │
+│                    │  (Karmada / KubeFed)   │                                │
+│                    │  • 资源分发策略         │                                │
+│                    │  • 跨集群负载均衡       │                                │
+│                    │  • 故障自动转移         │                                │
+│                    └────────────────────────┘                                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 集群故障切换策略
+
+| 策略 | 说明 | RTO | 实现方式 |
+|------|------|-----|---------|
+| Active-Active | 多集群同时服务，DNS 权重分流 | 接近 0 | Global LB + 健康检查 |
+| Active-Standby | 主集群故障后切换到备集群 | 分钟级 | DNS 切换 / VIP 漂移 |
+| Pilot Light | 备集群运行最小资源，故障时扩容 | 10-30 分钟 | 自动扩缩 + 镜像预热 |
+| Warm Standby | 备集群运行完整服务但低流量 | 秒-分钟级 | 权重调整逐步切流 |
+
+### 控制面 HA 生产级配置参数
+
+```yaml
+# kube-apiserver HA 参数
+api_server_ha:
+  --etcd-servers: "https://etcd-1:2379,https://etcd-2:2379,https://etcd-3:2379"
+  --etcd-servers-overrides: "/events#https://etcd-1:2379;https://etcd-2:2379;https://etcd-3:2379"
+  --apiserver-count: 3
+  --endpoint-reconciler-type: lease
+  --max-requests-inflight: 800
+  --max-mutating-requests-inflight: 400
+
+# kube-controller-manager HA 参数
+controller_manager_ha:
+  --leader-elect: true
+  --leader-elect-lease-duration: 15s
+  --leader-elect-renew-deadline: 10s
+  --leader-elect-retry-period: 2s
+  --node-monitor-period: 5s
+  --node-monitor-grace-period: 40s
+  --pod-eviction-timeout: 300s
+
+# kube-scheduler HA 参数
+scheduler_ha:
+  --leader-elect: true
+  --leader-elect-lease-duration: 15s
+  --leader-elect-renew-deadline: 10s
+  --leader-elect-retry-period: 2s
+```
+
+### 数据面 HA 设计
+
+#### 有状态应用 HA 策略
+
+| 应用类型 | HA 策略 | 实现方式 | 示例 |
+|----------|---------|---------|------|
+| 数据库 (MySQL) | 主从复制 + 自动故障转移 | Operator (Orchestrator/Vitess) | MySQL Operator |
+| 数据库 (PostgreSQL) | 流复制 + Patroni | Patroni + etcd | PGO Operator |
+| 缓存 (Redis) | Sentinel / Cluster 模式 | Redis Operator | Redis Sentinel |
+| 消息队列 (Kafka) | 多副本 + ISR | Kafka Operator (Strimzi) | Strimzi |
+| 对象存储 (MinIO) | 纠删码 + 多节点 | MinIO Operator | MinIO Tenant |
+
+#### PodDisruptionBudget 最佳实践矩阵
+
+| 场景 | minAvailable | maxUnavailable | 说明 |
+|------|-------------|----------------|------|
+| 关键服务 (3 副本) | 2 | - | 始终保持至少 2 个可用 |
+| 关键服务 (5 副本) | 4 | - | 始终保持至少 4 个可用 |
+| 一般服务 (3 副本) | - | 1 | 最多 1 个不可用 |
+| 批处理任务 | - | 100% | 允许全部不可用 |
+| 单副本服务 | - | 0 | 阻止任何自愿中断 |
+
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: critical-service-pdb
+spec:
+  minAvailable: "66%"
+  selector:
+    matchLabels:
+      app: critical-service
+```
+
 ## 常见故障场景
 
 | 故障 | 影响 | 缓解措施 |
@@ -207,6 +361,8 @@ nodeStatusUpdateFrequency: 10s      # 上报频率(默认10s)
 | 控制平面故障 | 无法变更资源 | 控制平面HA |
 | etcd故障 | 集群不可用 | etcd集群化 |
 | 网络分区 | 部分节点隔离 | 多网络路径 |
+
+> **交叉引用**：控制平面 HA 的详细配置请参考 [Domain-3: 控制平面高可用](../domain-3-control-plane/03-plane-high-availability.md)。
 
 ---
 

@@ -710,3 +710,6 @@ func (sched *Scheduler) scheduleOne(ctx context.Context) {
 - 认证授权链确保了系统安全
 
 掌握这些交互机制将帮助您更好地运维和优化Kubernetes集群。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

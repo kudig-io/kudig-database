@@ -2223,3 +2223,7 @@ kubectl get --raw='/healthz/etcd'
 ---
 
 > **文档维护**: 本文档随 Kubernetes 版本更新持续维护，当前适用于 v1.25 - v1.32
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

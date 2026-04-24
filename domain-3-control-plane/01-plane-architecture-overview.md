@@ -733,3 +733,6 @@ Kubernetes控制平面是整个系统的指挥中枢，其架构设计直接影�
 5. **性能**: 关键指标监控 + 瓶颈识别 + 持续优化
 
 掌握这些核心概念将帮助您更好地设计、部署和维护生产级Kubernetes集群。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

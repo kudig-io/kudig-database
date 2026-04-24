@@ -963,7 +963,150 @@ spec:
 | Device Scheduling | 设备调度 (GPU/RDMA) |
 | QoS 管理 | 服务质量保障 |
 
-### 7.6 Descheduler 重调度
+### 7.6 Pod 调度就绪性 (Pod Scheduling Readiness)
+
+> **适用版本**: Kubernetes v1.30 Alpha, v1.32 Beta (默认启用)
+
+#### 核心概念
+
+`schedulingGates` 字段允许外部控制器或准入系统在 Pod 进入调度队列之前显式阻止其调度。只有当所有 gate 都被移除后，Pod 才会被调度器考虑。
+
+| 特性 | schedulingGates | nodeSelector/affinity |
+|------|-----------------|-----------------------|
+| 作用阶段 | **调度前** (Pre-Scheduling) | **调度中** (Scheduling Cycle) |
+| 机制 | 阻止 Pod 进入 ActiveQ | 在 Filter 阶段筛选节点 |
+| 控制器 | 外部控制器/用户负责移除 gate | 调度器自动评估 |
+| 事件 | 无 FailedScheduling 事件 | 产生 FailedScheduling 事件 |
+| 典型场景 | 等待外部资源就绪 | 节点选择约束 |
+
+#### YAML 示例
+
+```yaml
+# 带 schedulingGates 的 Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gated-pod
+  namespace: default
+spec:
+  schedulingGates:
+  - name: "example.com/pvc-ready"      # Gate 名称
+  - name: "example.com/network-configured"
+  containers:
+  - name: app
+    image: nginx:1.25
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+```
+
+```bash
+# 查看 Pod 调度状态 - PodSchedulingReadiness condition
+kubectl get pod gated-pod -o jsonpath='{.status.conditions[?(@.type=="PodSchedulingReady")]}'
+
+# 通过 patch 移除 gate 触发调度
+kubectl patch pod gated-pod --type=merge -p \
+  '{"spec":{"schedulingGates":[{"name":"example.com/network-configured"}]}}'
+
+# 移除所有 gate
+kubectl patch pod gated-pod --type=merge -p '{"spec":{"schedulingGates":[]}}'
+```
+
+#### 内部机制
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                        Pod Scheduling Readiness 状态流转                         │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  Pod 创建 (含 schedulingGates)                                                   │
+│         │                                                                        │
+│         ▼                                                                        │
+│  ┌─────────────────────────┐                                                    │
+│  │  PreEnqueue 扩展点检查   │ ── SchedulingGates 插件检查 gate 列表              │
+│  └─────────────────────────┘                                                    │
+│         │                                                                        │
+│         ▼ 存在未移除 gate                                                        │
+│  ┌─────────────────────────┐     gate 全部移除                                  │
+│  │  UnschedulablePods      │ ─────────────────────► 重新进入 ActiveQ             │
+│  │  (非真正 Unschedulable) │                                                    │
+│  └─────────────────────────┘                                                    │
+│         ▲                                                                        │
+│         │ 集群状态变化不触发迁移 (gate 由外部控制)                                │
+│                                                                                  │
+│  Pod Condition: PodSchedulingReady = False                                       │
+│  Reason: SchedulingGated                                                         │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+| 队列/状态 | 行为 | 触发条件 |
+|-----------|------|----------|
+| ActiveQ | 正常情况下待调度 Pod 存放处 | Gate 全部移除后入队 |
+| UnschedulablePods | Gate Pod 实际停留位置 | 存在未移除的 schedulingGate |
+| BackoffQ | 不涉及 | Gate 机制不触发退避 |
+| PodSchedulingReady Condition | `False` (存在 gate) / `True` (gate 清空) | 由调度器同步更新 |
+
+> **注意**: 与因资源不足进入 `UnschedulablePods` 的 Pod 不同，带 gate 的 Pod 不会触发 `FailedScheduling` 事件，也不会被调度器尝试调度。
+
+#### 使用场景
+
+| 场景 | 说明 | 实现方式 |
+|------|------|----------|
+| 等待外部资源就绪 | PVC 动态预配、快照恢复、网络策略下发完成前阻止调度 | 外部 Provisioner 就绪后 patch 移除 gate |
+| 多集群调度准入控制 | 联邦调度器或控制平面在目标集群确认资源后再允许调度 | 多集群控制器作为 gate 管理者 |
+| 自定义调度器/控制器集成 | 第三方调度框架在预处理完成后放行 Pod | Controller 监听 Pod 状态并移除 gate |
+| 安全/合规检查 | 在 Pod 被调度前完成镜像扫描、策略校验 | 安全控制器添加/移除 gate |
+
+#### 调度框架扩展点
+
+`schedulingGates` 通过内置的 **SchedulingGates** 插件（属于 `PreEnqueue` 扩展点）实现：
+
+| 扩展点 | 插件 | 功能 |
+|--------|------|------|
+| PreEnqueue | SchedulingGates | 检查 `pod.spec.schedulingGates`，若非空则返回 `Unschedulable`，阻止进入 ActiveQ |
+| QueueSort | PrioritySort | 进入队列后正常按优先级排序 |
+| Filter | NodeResourcesFit 等 | Gate 移除后正常参与调度筛选 |
+
+#### kubectl 操作命令
+
+```bash
+# 查看带 schedulingGates 的 Pod
+kubectl get pods -o custom-columns=NAME:.metadata.name,SCHEDULING_GATES:.spec.schedulingGates
+
+# 查看 PodSchedulingReady 状态
+kubectl get pod <pod-name> -o jsonpath='{range .status.conditions[?(@.type=="PodSchedulingReady")]}{.status}{"\t"}{.reason}{"\t"}{.message}{end}'
+
+# 为已有 Pod 添加 gate (阻止后续调度)
+kubectl patch pod <pod-name> --type=merge -p \
+  '{"spec":{"schedulingGates":[{"name":"example.com/maintenance"}]}}'
+
+# 移除指定 gate
+kubectl patch pod <pod-name> --type=merge -p \
+  '{"spec":{"schedulingGates":[{"name":"example.com/other-gate"}]}}'
+
+# 查看调度器日志中 PreEnqueue 阶段信息
+kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scheduling gate"
+```
+
+#### 故障排查
+
+**现象**: Pod 一直 `Pending`，但 `kubectl describe pod` 看不到 `FailedScheduling` 事件，节点资源充足且亲和性/污点配置正常。
+
+| 排查步骤 | 命令/操作 | 预期结果 |
+|----------|-----------|----------|
+| 检查 schedulingGates | `kubectl get pod <name> -o jsonpath='{.spec.schedulingGates}'` | 若返回非空数组，说明存在 gate |
+| 检查 PodSchedulingReady 状态 | `kubectl get pod <name> -o jsonpath='{.status.conditions[?(@.type=="PodSchedulingReady")]}'` | 状态应为 `False`，Reason 为 `SchedulingGated` |
+| 确认 gate 管理者 | 检查是否有控制器/Operator 负责移除 gate | 确认外部系统状态正常 |
+| 手动移除 gate (测试) | `kubectl patch pod <name> --type=merge -p '{"spec":{"schedulingGates":[]}}'` | Pod 应立即进入调度流程 |
+
+**常见原因**:
+- 外部控制器（如 PVC provisioner、网络配置器）未完成工作，未移除对应 gate。
+- 多集群/联邦环境中，目标集群调度器未同步移除 gate。
+- 手动或 CI/CD 流程中误添加 gate 但未在后续步骤清理。
+
+### 7.7 Descheduler 重调度
 
 ```yaml
 # Descheduler 配置示例
@@ -1828,3 +1971,7 @@ kubectl delete pod <pod-name>
 ---
 
 *本文档持续更新，建议结合官方文档和实际集群环境进行验证。*
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

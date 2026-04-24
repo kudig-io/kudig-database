@@ -1589,3 +1589,6 @@ Level 5 - 自主GitOps (Autonomous GitOps)
 ```
 
 通过实施这套完整的GitOps自动化运维体系，企业可以实现软件交付的标准化、自动化和智能化，显著提升运维效率和系统可靠性。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

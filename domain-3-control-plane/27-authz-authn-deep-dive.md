@@ -333,7 +333,7 @@ DefaultTolerationSeconds,\
 MutatingAdmissionWebhook,\
 ValidatingAdmissionWebhook,\
 ResourceQuota,\
-PodSecurityPolicy,\
+PodSecurity,\
 NodeRestriction
 ```
 
@@ -345,7 +345,7 @@ NodeRestriction
 # ServiceAccount - 自动挂载service account token
 # DefaultStorageClass - 设置默认存储类
 # ResourceQuota - 实施资源配额
-# PodSecurityPolicy - Pod安全策略(已弃用，请使用 Pod Security Admission)
+# PodSecurityPolicy - Pod安全策略(已在 v1.25 中移除，请使用 Pod Security Admission)
 # NodeRestriction - 限制节点自我修改权限
 ```
 
@@ -738,3 +738,6 @@ kubectl get serviceaccounts --all-namespaces | grep -E "(default|system)"
 
 ---
 **文档维护**: Kusheet Security Team | **最后审查**: 2026-02 | **安全等级**: ★★★★★
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

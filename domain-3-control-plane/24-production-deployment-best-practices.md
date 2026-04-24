@@ -865,7 +865,7 @@ compliance_baseline:
               - secrets
               - configmaps
               providers:
-              - aescbc:
+              - aesgcm:
                   keys:
                   - name: key1
                     secret: <base64-encoded-key>
@@ -1430,4 +1430,261 @@ prepare_dr_test() {
     kubectl create namespace dr-test --dry-run=client -o yaml | kubectl apply -f -
     
     # 部署测试应用
-    cat > /tmp/dr-test-app.yaml <
+    cat > /tmp/dr-test-app.yaml << 'EOF'
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dr-test-app
+      namespace: dr-test
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: dr-test
+      template:
+        metadata:
+          labels:
+            app: dr-test
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:1.25
+            ports:
+            - containerPort: 80
+    EOF
+
+    kubectl apply -f /tmp/dr-test-app.yaml --context $DR_TEST_ENV
+
+    # 验证测试应用运行正常
+    kubectl get pods -n dr-test --context $DR_TEST_ENV
+
+    echo "DR test preparation completed"
+}
+
+# 2. 模拟故障切换
+simulate_failover() {
+    echo "Simulating failover to DR environment..."
+
+    # 在DR环境中恢复最新备份
+    # 恢复etcd数据
+    # 恢复应用配置
+    # 更新DNS指向DR环境
+
+    echo "Failover simulation completed"
+}
+
+# 3. 验证恢复结果
+verify_recovery() {
+    echo "Verifying recovery results..."
+
+    # 检查所有Pod运行状态
+    kubectl get pods --all-namespaces --context $DR_TEST_ENV
+
+    # 检查Service可用性
+    kubectl get svc --all-namespaces --context $DR_TEST_ENV
+
+    # 运行冒烟测试
+    kubectl run smoke-test --image=curlimages/curl --restart=Never \
+      --context $DR_TEST_ENV -- \
+      curl -s -o /dev/null -w "%{http_code}" http://dr-test-app.dr-test.svc.cluster.local
+
+    echo "Recovery verification completed"
+}
+
+# 4. 生成演练报告
+generate_dr_report() {
+    cat > /tmp/dr-test-report-$(date +%Y%m%d).md << 'REPORT'
+    # 灾难恢复演练报告
+
+    ## 演练信息
+    - 演练日期: $(date +%Y-%m-%d)
+    - 演练环境: DR测试集群
+    - RTO目标: < 4小时
+    - RPO目标: < 1小时
+
+    ## 演练结果
+    - [ ] etcd数据恢复成功
+    - [ ] 控制平面启动正常
+    - [ ] 所有命名空间恢复
+    - [ ] 应用服务可访问
+    - [ ] DNS解析正常
+
+    ## 改进建议
+    _(填写演练中发现的问题和改进建议)_
+    REPORT
+
+    echo "DR test report generated"
+}
+
+prepare_dr_test
+simulate_failover
+verify_recovery
+generate_dr_report
+
+echo "=== DR drill completed ==="
+```
+
+---
+
+## 8. 成本优化方案
+
+### 8.1 资源成本分析
+
+```yaml
+# 成本分析维度
+cost_analysis:
+  compute:
+    description: "计算资源成本"
+    metrics:
+      - node_cpu_utilization: "目标 > 60%"
+      - pod_resource_efficiency: "requests vs actual usage"
+      - spot_instance_ratio: "目标 > 30% for non-critical workloads"
+      
+  storage:
+    description: "存储资源成本"
+    metrics:
+      - pvc_utilization: "目标 > 70%"
+      - storage_tier_distribution: "hot/warm/cold ratio"
+      - snapshot_cost: "备份存储开销"
+      
+  network:
+    description: "网络资源成本"
+    metrics:
+      - cross_zone_traffic: "跨AZ流量"
+      - egress_traffic: "公网出口流量"
+      - load_balancer_count: "LB实例数"
+```
+
+### 8.2 成本优化策略
+
+| 策略 | 节省幅度 | 实施复杂度 | 适用场景 |
+|------|---------|----------|---------|
+| **请求/限制优化** | 20-40% | 低 | 所有集群 |
+| **Spot/抢占式实例** | 60-90% | 中 | 无状态工作负载 |
+| **自动扩缩容(HPA/VPA)** | 15-30% | 低 | 波动负载 |
+| **存储分级** | 30-50% | 中 | 数据生命周期 |
+| **集群右调整** | 10-25% | 低 | 资源碎片化 |
+| **Kubecost成本分摊** | 管理优化 | 低 | 多租户场景 |
+
+### 8.3 Kubecost集成配置
+
+```yaml
+# Kubecost安装配置
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubecost
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cost-analyzer
+  namespace: kubecost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cost-analyzer
+  template:
+    spec:
+      containers:
+      - name: cost-analyzer
+        image: kubecost/cost-analyzer:latest
+        ports:
+        - containerPort: 9090
+        env:
+        - name: PROMETHEUS_SERVER_ENDPOINT
+          value: "http://prometheus-server.monitoring.svc.cluster.local:80"
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+```
+
+---
+
+## 9. 多云混合部署
+
+### 9.1 多集群管理架构
+
+| 方案 | 说明 | 适用场景 | 管理工具 |
+|------|------|---------|---------|
+| **KubeFed** | 联邦集群管理 | 多集群调度 | kubefedctl |
+| **Liqo** | 动态集群互联 | 弹性扩容 | liqoctl |
+| **Karmada** | 多云调度管理 | 生产多云 | karmadactl |
+| **ACK One** | 阿里云多集群 | ACK环境 | Alibaba CLI |
+| **Rancher** | 统一管理平台 | 混合多云 | Rancher UI |
+
+### 9.2 多集群网络互联
+
+```yaml
+# 多集群Service导出 (KubeFed / MCS)
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: backend-service
+  namespace: production
+---
+# 多集群Service导入
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceImport
+metadata:
+  name: backend-service
+  namespace: production
+spec:
+  type: ClusterSetIP
+  ports:
+  - port: 80
+    protocol: TCP
+```
+
+---
+
+## 10. 自动化运维实践
+
+### 10.1 GitOps部署流水线
+
+```yaml
+# ArgoCD Application配置
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://git.example.com/k8s-manifests.git
+    targetRevision: main
+    path: overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+```
+
+### 10.2 自动化运维检查清单
+
+| 自动化项 | 工具 | 频率 | 说明 |
+|---------|------|------|------|
+| **配置漂移检测** | ArgoCD/Flux | 持续 | 确保声明式一致性 |
+| **证书轮转** | cert-manager | 自动 | 30天前自动续签 |
+| **密钥轮转** | External Secrets | 每月 | 外部密钥同步 |
+| **节点自动修复** | Machine API | 实时 | NotReady节点自动替换 |
+| **安全扫描** | Trivy/Snyk | 每日 | 镜像漏洞扫描 |
+| **合规审计** | kube-bench | 每周 | CIS基准检查 |
+| **成本报告** | Kubecost | 每日 | 成本异常告警 |
+| **备份验证** | etcdctl | 每日 | 备份完整性校验 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -826,3 +826,7 @@ etcdctl user grant-role user role        # 授权
 --key=client.key                         # 客户端私钥
 -w table|json|simple                     # 输出格式
 ```
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

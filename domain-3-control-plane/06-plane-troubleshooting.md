@@ -816,3 +816,6 @@ kubectl get networkpolicies -n <namespace>
 5. 持续优化预防措施
 
 掌握这些故障排查技能将大大提高Kubernetes集群的稳定性和可靠性。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

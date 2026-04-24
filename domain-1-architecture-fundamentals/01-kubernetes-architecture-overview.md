@@ -21,129 +21,85 @@
 
 ### 1.1 宏观架构图
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    Kubernetes Cluster Architecture                                      │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                                         │
-│  ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐   │
-│  │                                    Control Plane (Master Nodes)                                  │   │
-│  │  ┌───────────────────────────────────────────────────────────────────────────────────────────┐  │   │
-│  │  │                                  API Server Layer                                          │  │   │
-│  │  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐  ┌────────────────────────┐  │  │   │
-  │  │  │  │  kube-apiserver │  │  kube-apiserver │  │  kube-apiserver │  │   API Aggregation      │  │  │   │
-  │  │  │  │  (Instance 1) │  │    (Instance 2) │  │    (Instance 3) │  │   Layer & APF          │  │  │   │
-  │  │  │  │     :6443       │  │     :6443       │  │     :6443       │  │   (FlowControl)        │  │  │   │
-  │  │  │  └────────┬───────┘  └────────┬───────┘  └────────┬───────┘  └────────────────────────┘  │  │   │
+```mermaid
+graph TB
+    subgraph Cluster["Kubernetes Cluster"]
+        subgraph CP["Control Plane (Master Nodes)"]
+            subgraph API["API Server Layer"]
+                AP1["kube-apiserver<br/>Instance 1 :6443"]
+                AP2["kube-apiserver<br/>Instance 2 :6443"]
+                AP3["kube-apiserver<br/>Instance 3 :6443"]
+                APF["API Aggregation<br/>& APF (FlowControl)"]
+                LB["Load Balancer<br/>(HAProxy/Nginx/Cloud LB)"]
+            end
 
-│  │  │           └──────────────┬─────┴──────────────┬───────┬───────────────────────────────────┘  │   │
-│  │  │                          │                    │       │                                       │   │
-│  │  │                          ▼                    │       │                                       │   │
-│  │  │         ┌────────────────────────────────────┐│       │                                       │   │
-│  │  │         │         Load Balancer              ││       │                                       │   │
-│  │  │         │   (HAProxy / Nginx / Cloud LB)     ││       │                                       │   │
-│  │  │         └────────────────────────────────────┘│       │                                       │   │
-│  │  └──────────────────────────────────────────────────────┼────────────────────────────────────────┘  │
-│  │                                                           │                                           │
-│  │  ┌────────────────────────────────────────────────────────┴──────────────────────────────────────┐  │
-│  │  │                                  Core Services Layer                                          │  │
-│  │  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐  │  │
-│  │  │  │  kube-scheduler  │  │kube-controller-  │  │  cloud-controller │  │   Admission          │  │  │
-│  │  │  │                  │  │   manager        │  │    -manager       │  │   Controllers        │  │  │
-│  │  │  │  - 调度算法       │  │  - Deployment    │  │  - Node          │  │  - Webhooks          │  │  │
-│  │  │  │  - 策略执行       │  │  - ReplicaSet    │  │  - Service       │  │  - Policy Engines    │  │  │
-│  │  │  │  - 资源分配       │  │  - StatefulSet   │  │  - Route         │  │    (OPA/Gatekeeper)  │  │  │
-│  │  │  │  :10259 (HTTPS)  │  │  - DaemonSet     │  │  - Volume        │  │                      │  │  │
-│  │  │  │                  │  │  - Job/CronJob   │  │  :10258 (HTTPS)  │  │                      │  │  │
-│  │  │  │                  │  │  - Node          │  │                  │  │                      │  │  │
-│  │  │  │                  │  │  :10257 (HTTPS)  │  │                  │  │                      │  │  │
-│  │  │  └──────────────────┘  └──────────────────┘  └──────────────────┘  └──────────────────────┘  │  │
-│  │  └────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-│  │                                                           │                                           │
-│  │                                                           │ Watch / List (etcd)                       │
-│  │                                                           ▼                                           │
-│  │  ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐│
-│  │  │                                   Data Store Layer                                              ││
-│  │  │  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ ││
-│  │  │  │                                    etcd Cluster                                            │ ││
-│  │  │  │  ┌──────────────┐       ┌──────────────┐       ┌──────────────┐                          │ ││
-│  │  │  │  │   etcd-1     │  ◄──► │   etcd-2     │  ◄──► │   etcd-3     │                          │ ││
-│  │  │  │  │              │       │              │       │              │                          │ ││
-│  │  │  │  │  :2379 (客户端)│       │  :2379 (客户端)│       │  :2379 (客户端)│                          │ ││
-│  │  │  │  │  :2380 (集群) │       │  :2380 (集群) │       │  :2380 (集群) │                          │ ││
-│  │  │  │  │              │       │              │       │              │                          │ ││
-│  │  │  │  │   Raft 共识   │       │   Raft 共识   │       │   Raft 共识   │                          │ ││
-│  │  │  │  │   MVCC 存储   │       │   MVCC 存储   │       │   MVCC 存储   │                          │ ││
-│  │  │  │  └──────────────┘       └──────────────┘       └──────────────┘                          │ ││
-│  │  │  └───────────────────────────────────────────────────────────────────────────────────────────┘ ││
-│  │  └─────────────────────────────────────────────────────────────────────────────────────────────────┘│
-│  └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
-│                                                           │                                              │
-│                                                           │ TLS / gRPC                                   │
-│                                                           ▼                                              │
-│  ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐│
-│  │                                    Worker Nodes (Data Plane)                                        ││
-│  │                                                                                                      ││
-│  │  ┌─────────────────────────────────────── Node 1 ────────────────────────────────────────────────┐ ││
-│  │  │ ┌────────────────────────────────────────────────────────────────────────────────────────────┐│ ││
-│  │  │ │                                 Node Runtime Layer                                         ││ ││
-│  │  │ │ ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────────────────┐││ ││
-│  │  │ │ │   kubelet    │  │ kube-proxy   │  │  Container   │  │       CNI Plugin                 │││ ││
-│  │  │ │ │              │  │              │  │   Runtime    │  │   (Calico/Cilium/Flannel)        │││ ││
-│  │  │ │ │ - Pod管理     │  │ - iptables   │  │              │  │  - 网络配置                      │││ ││
-│  │  │ │ │ - 容器生命周期 │  │ - IPVS       │  │ containerd   │  │  - IP分配 (IPAM)                 │││ ││
-│  │  │ │ │ - 健康检查    │  │ - Service LB │  │  or CRI-O    │  │  - 网络策略 (NetworkPolicy)      │││ ││
-│  │  │ │ │ - 资源监控    │  │ :10249       │  │              │  │                                  │││ ││
-│  │  │ │ │ :10250       │  │              │  │ CRI Interface│  │                                  │││ ││
-│  │  │ │ └──────┬───────┘  └──────────────┘  └──────┬───────┘  └──────────────────────────────────┘││ ││
-│  │  │ └────────┼──────────────────────────────────┼──────────────────────────────────────────────────┘│ ││
-│  │  │          │                                   │                                                  │ ││
-│  │  │          ▼                                   ▼                                                  │ ││
-│  │  │ ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │ ││
-│  │  │ │                                Pod Execution Layer                                         │ │ ││
-│  │  │ │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐  ┌────────────────────────────┐│ │ ││
-│  │  │ │  │   Pod 1        │  │   Pod 2        │  │   Pod 3        │  │   Pod N                    ││ │ ││
-│  │  │ │  │  ┌──────────┐  │  │  ┌──────────┐  │  │  ┌──────────┐  │  │  ┌──────────┐  ┌──────────┐││ │ ││
-│  │  │ │  │  │Container │  │  │  │Container │  │  │  │Container │  │  │  │Container │  │Container │││ │ ││
-│  │  │ │  │  │    A     │  │  │  │    B     │  │  │  │    C     │  │  │  │    X     │  │    Y     │││ │ ││
-│  │  │ │  │  └──────────┘  │  │  └──────────┘  │  │  └──────────┘  │  │  └──────────┘  └──────────┘││ │ ││
-│  │  │ │  │  Network NS    │  │  Network NS    │  │  Network NS    │  │  Network NS                ││ │ ││
-│  │  │ │  │  PID NS        │  │  PID NS        │  │  PID NS        │  │  PID NS                    ││ │ ││
-│  │  │ │  │  Mount NS      │  │  Mount NS      │  │  Mount NS      │  │  Mount NS                  ││ │ ││
-│  │  │ │  │  Cgroup        │  │  Cgroup        │  │  Cgroup        │  │  Cgroup                    ││ │ ││
-│  │  │ │  └────────────────┘  └────────────────┘  └────────────────┘  └────────────────────────────┘│ │ ││
-│  │  │ └────────────────────────────────────────────────────────────────────────────────────────────┘ │ ││
-│  │  │                                                                                                  │ ││
-│  │  │ ┌────────────────────────────────────────────────────────────────────────────────────────────┐ │ ││
-│  │  │ │                               Storage & Plugins Layer                                      │ │ ││
-│  │  │ │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐│ │ ││
-│  │  │ │  │   CSI Plugin     │  │  Device Plugin   │  │   FlexVolume     │  │   CRI Plugins        ││ │ ││
-│  │  │ │  │  (块存储/文件)    │  │  (GPU/RDMA/TPU)  │  │   (遗留)         │  │   (镜像/运行时)       ││ │ ││
-│  │  │ │  └──────────────────┘  └──────────────────┘  └──────────────────┘  └──────────────────────┘│ │ ││
-│  │  │ └────────────────────────────────────────────────────────────────────────────────────────────┘ │ ││
-│  │  └──────────────────────────────────────────────────────────────────────────────────────────────────┘ ││
-│  │                                                                                                      ││
-│  │  ┌─────────────────────────────────────── Node 2 ────────────────────────────────────────────────┐ ││
-│  │  │  (Similar structure as Node 1)                                                                 │ ││
-│  │  └────────────────────────────────────────────────────────────────────────────────────────────────┘ ││
-│  │                                                                                                      ││
-│  │  ┌─────────────────────────────────────── Node N ────────────────────────────────────────────────┐ ││
-│  │  │  (Similar structure as Node 1)                                                                 │ ││
-│  │  └────────────────────────────────────────────────────────────────────────────────────────────────┘ ││
-│  └──────────────────────────────────────────────────────────────────────────────────────────────────────┘│
-│                                                                                                          │
-│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐│
-│  │                                    Addons & Extensions                                              ││
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐ ││
-│  │  │   CoreDNS    │  │  Metrics     │  │  Dashboard   │  │  Ingress     │  │   Service Mesh       │ ││
-│  │  │   (DNS)      │  │  Server      │  │   (Web UI)   │  │  Controller  │  │   (Istio/Linkerd)    │ ││
-│  │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────────────┘ ││
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐ ││
-│  │  │  Monitoring  │  │    Logging   │  │    CI/CD     │  │    Backup    │  │    Security          │ ││
-│  │  │ (Prometheus) │  │  (EFK/ELK)   │  │  (ArgoCD)    │  │   (Velero)   │  │  (Falco/Kyverno)     │ ││
-│  │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────────────┘ ││
-│  └──────────────────────────────────────────────────────────────────────────────────────────────────────┘│
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+            subgraph Core["Core Services Layer"]
+                KS["kube-scheduler<br/>:10259 (HTTPS)<br/>- 调度算法<br/>- 策略执行<br/>- 资源分配"]
+                KCM["kube-controller-manager<br/>:10257 (HTTPS)<br/>- Deployment/RS<br/>- StatefulSet/DS<br/>- Job/CronJob/Node"]
+                CCM["cloud-controller-manager<br/>:10258 (HTTPS)<br/>- Node/Service/Route"]
+                ADM["Admission Controllers<br/>- Webhooks<br/>- Policy Engines<br/>(OPA/Gatekeeper)"]
+            end
+
+            subgraph Data["Data Store Layer"]
+                subgraph ETCD["etcd Cluster"]
+                    E1["etcd-1<br/>:2379/:2380<br/>Raft | MVCC"]
+                    E2["etcd-2<br/>:2379/:2380<br/>Raft | MVCC"]
+                    E3["etcd-3<br/>:2379/:2380<br/>Raft | MVCC"]
+                end
+            end
+        end
+
+        subgraph WP["Worker Nodes (Data Plane)"]
+            subgraph Node1["Node 1"]
+                subgraph N1Runtime["Node Runtime Layer"]
+                    K1["kubelet :10250<br/>- Pod管理<br/>- 容器生命周期<br/>- 健康检查<br/>- 资源监控"]
+                    KP1["kube-proxy<br/>- iptables/IPVS<br/>- Service LB :10249"]
+                    CR1["Container Runtime<br/>containerd / CRI-O<br/>CRI Interface"]
+                    CNI1["CNI Plugin<br/>(Calico/Cilium/Flannel)<br/>- 网络配置 / IPAM<br/>- NetworkPolicy"]
+                end
+                subgraph N1Pod["Pod Execution Layer"]
+                    P1["Pod 1<br/>(Network/PID/Mount NS + Cgroup)"]
+                    P2["Pod 2<br/>(Network/PID/Mount NS + Cgroup)"]
+                    P3["Pod 3 ... Pod N"]
+                end
+                subgraph N1Plugin["Storage & Plugins"]
+                    CSI1["CSI Plugin<br/>(块存储/文件)"]
+                    DP1["Device Plugin<br/>(GPU/RDMA/TPU)"]
+                    FV1["FlexVolume (遗留)"]
+                end
+            end
+            Node2["Node 2 ... Node N<br/>(Same structure)"]
+        end
+
+        subgraph Addons["Addons & Extensions"]
+            DNS["CoreDNS (DNS)"]
+            MS["Metrics Server"]
+            DB["Dashboard (Web UI)"]
+            IC["Ingress Controller"]
+            SM["Service Mesh<br/>(Istio/Linkerd)"]
+            MON["Monitoring (Prometheus)"]
+            LOG["Logging (EFK/ELK)"]
+            CICD["CI/CD (ArgoCD)"]
+            BK["Backup (Velero)"]
+            SEC["Security (Falco/Kyverno)"]
+        end
+    end
+
+    AP1 --> LB
+    AP2 --> LB
+    AP3 --> LB
+    LB --> AP1 & AP2 & AP3
+    AP1 --> KS & KCM & CCM & ADM
+    AP2 --> KS & KCM & CCM & ADM
+    AP3 --> KS & KCM & CCM & ADM
+    KS --> E1 & E2 & E3
+    KCM --> E1 & E2 & E3
+    CCM --> E1 & E2 & E3
+    E1 <--> E2 <--> E3
+    AP1 --> K1 & KP1
+    K1 --> CR1
+    CR1 --> P1 & P2 & P3
+    K1 --> CSI1 & DP1
 ```
 
 ### 1.2 设计理念与核心原则
@@ -177,63 +133,71 @@
 
 ### 2.1 kube-apiserver
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           kube-apiserver Architecture                            │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────── Request Flow ───────────────────────────────────┐  │
-│  │                                                                            │  │
-│  │  1. Client Request (kubectl/controller/kubelet) ──► HTTPS :6443           │  │
-│  │                                │                                           │  │
-│  │                                ▼                                           │  │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐  │  │
-│  │  │                    Authentication (认证)                             │  │  │
-│  │  │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────────┐  │  │  │
-│  │  │  │ X509 Certs   │ │   Token      │ │   OIDC       │ │  Webhook   │  │  │  │
-│  │  │  └──────────────┘ └──────────────┘ └──────────────┘ └────────────┘  │  │  │
-│  │  └────────────────────────────┬────────────────────────────────────────┘  │  │
-│  │                                ▼                                           │  │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐  │  │
-│  │  │                    Authorization (授权)                              │  │  │
-│  │  │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────────┐  │  │  │
-│  │  │  │    RBAC      │ │     ABAC     │ │     Node     │ │  Webhook   │  │  │  │
-│  │  │  └──────────────┘ └──────────────┘ └──────────────┘ └────────────┘  │  │  │
-│  │  └────────────────────────────┬────────────────────────────────────────┘  │  │
-│  │                                ▼                                           │  │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐  │  │
-│  │  │              Admission Control (准入控制)                            │  │  │
-│  │  │                                                                      │  │  │
-│  │  │  Mutating Phase:                                                     │  │  │
-│  │  │  ┌──────────────────────────────────────────────────────────────┐   │  │  │
-│  │  │  │ MutatingAdmissionWebhook → NamespaceLifecycle → ...          │   │  │  │
-│  │  │  └──────────────────────────────────────────────────────────────┘   │  │  │
-│  │  │                              ▼                                       │  │  │
-│  │  │  Validation Phase:                                                   │  │  │
-│  │  │  ┌──────────────────────────────────────────────────────────────┐   │  │  │
-│  │  │  │ ValidatingAdmissionWebhook → ResourceQuota → LimitRanger ... │   │  │  │
-│  │  │  └──────────────────────────────────────────────────────────────┘   │  │  │
-│  │  └────────────────────────────┬────────────────────────────────────────┘  │  │
-│  │                                ▼                                           │  │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐  │  │
-│  │  │                    Schema Validation                                 │  │  │
-│  │  │         (OpenAPI Schema, CRD Validation)                             │  │  │
-│  │  └────────────────────────────┬────────────────────────────────────────┘  │  │
-│  │                                ▼                                           │  │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐  │  │
-│  │  │                      etcd Storage                                    │  │  │
-│  │  │   ┌──────────┐      ┌──────────┐      ┌──────────┐                 │  │  │
-│  │  │   │  Create  │ ───► │  Update  │ ───► │  Delete  │                 │  │  │
-│  │  │   │  (POST)  │      │  (PUT)   │      │ (DELETE) │                 │  │  │
-│  │  │   └──────────┘      └──────────┘      └──────────┘                 │  │  │
-│  │  │                                                                      │  │  │
-│  │  │   - Watch (实时监听资源变化)                                         │  │  │
-│  │  │   - List (列出资源)                                                  │  │  │
-│  │  │   - Get (获取单个资源)                                               │  │  │
-│  │  └──────────────────────────────────────────────────────────────────────┘  │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph RequestFlow["请求处理流程"]
+        direction TB
+        Client["1. 客户端请求<br/>kubectl/controller/kubelet"]
+        AuthN["2. Authentication 认证"]
+        AuthZ["3. Authorization 授权"]
+        Admission["4. Admission Control 准入控制"]
+        Schema["5. Schema Validation"]
+        Etcd["6. etcd Storage"]
+    end
+
+    subgraph AuthNMethods["认证方式"]
+        direction LR
+        X509["X509 Certs"]
+        Token["Token"]
+        OIDC["OIDC"]
+        AuthWebhook["Webhook"]
+    end
+
+    subgraph AuthZMethods["授权方式"]
+        direction LR
+        RBAC["RBAC"]
+        ABAC["ABAC"]
+        NodeAuth["Node"]
+        AuthZWebhook["Webhook"]
+    end
+
+    subgraph AdmissionPhases["准入控制阶段"]
+        direction TB
+        Mutating["Mutating Phase"]
+        MutatingWebhook["MutatingAdmissionWebhook<br/>NamespaceLifecycle..."]
+        Validating["Validating Phase"]
+        ValidatingWebhook["ValidatingAdmissionWebhook<br/>ResourceQuota<br/>LimitRanger..."]
+    end
+
+    subgraph EtcdOps["etcd 操作"]
+        direction LR
+        Create["Create POST"]
+        Update["Update PUT"]
+        Delete["Delete DELETE"]
+        Watch["Watch 监听"]
+        List["List 列出"]
+        Get["Get 获取"]
+    end
+
+    Client -->|"HTTPS :6443"| AuthN
+    AuthN --> AuthZ
+    AuthZ --> Admission
+    Admission --> Schema
+    Schema --> Etcd
+
+    AuthN -.-> AuthNMethods
+    AuthZ -.-> AuthZMethods
+    Admission -.-> Mutating
+    Mutating --> MutatingWebhook
+    MutatingWebhook --> Validating
+    Validating --> ValidatingWebhook
+    Etcd -.-> EtcdOps
+
+    style Client fill:#e1f5fe
+    style AuthN fill:#fff3e0
+    style AuthZ fill:#fff3e0
+    style Admission fill:#fff3e0
+    style Etcd fill:#e8f5e9
 ```
 
 #### 核心功能
@@ -269,43 +233,47 @@
 
 #### 架构与特性
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              etcd Cluster Architecture                           │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │                         Raft Consensus Layer                           │     │
-│  │  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐           │     │
-│  │  │   Leader     │ ──► │   Follower   │     │   Follower   │           │     │
-│  │  │   (etcd-1)   │     │   (etcd-2)   │     │   (etcd-3)   │           │     │
-│  │  │              │ ◄── │              │ ──► │              │           │     │
-│  │  │  :2379/:2380 │     │  :2379/:2380 │     │  :2379/:2380 │           │     │
-│  │  └──────────────┘     └──────────────┘     └──────────────┘           │     │
-│  │                                                                         │     │
-│  │  - Leader Election (Leader 选举)                                       │     │
-│  │  - Log Replication (日志复制)                                          │     │
-│  │  - Quorum (法定人数: 2f+1, 最少3节点)                                   │     │
-│  └────────────────────────────────────────────────────────────────────────┘     │
-│                                                                                  │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │                            MVCC Storage                                 │     │
-│  │  ┌───────────────────────────────────────────────────────────────────┐ │     │
-│  │  │  Key-Value Store (B+ Tree)                                        │ │     │
-│  │  │  ┌────────────┬─────────────────┬──────────────┬────────────────┐│ │     │
-│  │  │  │   Key      │  Revision       │   Value      │   Lease TTL    ││ │     │
-│  │  │  ├────────────┼─────────────────┼──────────────┼────────────────┤│ │     │
-│  │  │  │ /registry/ │  1000 → 1005    │  JSON/Proto  │   N/A          ││ │     │
-│  │  │  │  pods/...  │  (版本链)       │              │                ││ │     │
-│  │  │  └────────────┴─────────────────┴──────────────┴────────────────┘│ │     │
-│  │  │                                                                   │ │     │
-│  │  │  - Multi-Version Concurrency Control (多版本并发控制)             │ │     │
-│  │  │  - Watch 机制 (基于 Revision 变化推送)                            │ │     │
-│  │  │  - Compaction (压缩历史版本)                                      │ │     │
-│  │  └───────────────────────────────────────────────────────────────────┘ │     │
-│  └────────────────────────────────────────────────────────────────────────┘     │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph etcd_cluster["🔷 etcd Cluster (Raft Consensus)"]
+        direction TB
+        e1["etcd-1<br/>Leader<br/>:2379/:2380"]
+        e2["etcd-2<br/>Follower<br/>:2379/:2380"]
+        e3["etcd-3<br/>Follower<br/>:2379/:2380"]
+        e1 <-->|"Log Replication"| e2
+        e2 <-->|"Log Replication"| e3
+        e3 <-->|"Log Replication"| e1
+    end
+
+    subgraph raft_features["Raft Features"]
+        rf1["Leader Election<br/>Leader 选举"]
+        rf2["Log Replication<br/>日志复制"]
+        rf3["Quorum (2f+1)<br/>法定人数"]
+    end
+
+    subgraph mvcc["MVCC Storage Layer"]
+        direction TB
+        kv["Key-Value Store (B+ Tree)"]
+        kv --> rev["Revision Chain<br/>1000 → 1005"]
+        kv --> val["JSON/Proto Value"]
+        kv --> lease["Lease TTL"]
+    end
+
+    subgraph mvcc_features["MVCC Features"]
+        mf1["Multi-Version<br/>Concurrency Control"]
+        mf2["Watch Mechanism<br/>基于 Revision"]
+        mf3["Compaction<br/>压缩历史版本"]
+    end
+
+    etcd_cluster --> mvcc
+    raft_features -.-> etcd_cluster
+    mvcc -.-> mvcc_features
+
+    style e1 fill:#4a90e2,stroke:#333,stroke-width:2px,color:#fff
+    style e2 fill:#7bb3f0,stroke:#333,stroke-width:2px
+    style e3 fill:#7bb3f0,stroke:#333,stroke-width:2px
+    style etcd_cluster fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style mvcc fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
 ```
 
 | 特性 | 描述 | 技术细节 |
@@ -356,72 +324,32 @@
 
 #### 调度流程
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                         Scheduling Framework Workflow                            │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────────── Scheduling Cycle ──────────────────────────┐   │
-│  │                                                                           │   │
-│  │  1. Pod 进入 SchedulingQueue (优先级队列)                                │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  2. PreFilter Phase (预过滤)                                             │   │
-│  │     ├── NodeResourcesFit: 计算资源需求                                   │   │
-│  │     └── PreFilter Plugins ...                                            │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  3. Filter Phase (过滤不可用节点)                                        │   │
-│  │     ├── NodeUnschedulable: 节点不可调度检查                              │   │
-│  │     ├── NodeResourcesFit: 资源是否满足                                   │   │
-│  │     ├── NodeAffinity: 节点亲和性                                         │   │
-│  │     ├── PodTopologySpread: 拓扑分布                                      │   │
-│  │     ├── TaintToleration: 污点容忍                                        │   │
-│  │     └── VolumeBinding: 存储卷绑定                                        │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  4. PostFilter Phase (如果所有节点被过滤)                                │   │
-│  │     └── Preemption: 抢占低优先级 Pod                                     │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  5. PreScore Phase (评分前处理)                                          │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  6. Score Phase (为候选节点打分)                                         │   │
-│  │     ├── NodeResourcesBalancedAllocation: 资源均衡                        │   │
-│  │     ├── ImageLocality: 镜像本地性                                        │   │
-│  │     ├── InterPodAffinity: Pod 间亲和性                                   │   │
-│  │     └── PodTopologySpread: 拓扑分布评分                                  │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  7. NormalizeScore (归一化到 0-100)                                      │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  8. Select Best Node (选择最高分节点)                                    │   │
-│  │                     │                                                     │   │
-│  │                     ▼                                                     │   │
-│  │  9. Reserve Phase (预留资源)                                             │   │
-│  │                     │                                                     │   │
-│  └─────────────────────┼──────────────────────────────────────────────────────┘   │
-│                        │                                                         │
-│  ┌─────────────────────┼──────────────── Binding Cycle ───────────────────────┐  │
-│  │                     ▼                                                       │  │
-│  │  10. Permit Phase (批准/拒绝/等待)                                         │  │
-│  │                     │                                                       │  │
-│  │                     ▼                                                       │  │
-│  │  11. PreBind Phase (绑定前准备)                                            │  │
-│  │      └── VolumeBinding: PV 绑定                                            │  │
-│  │                     │                                                       │  │
-│  │                     ▼                                                       │  │
-│  │  12. Bind Phase (绑定 Pod 到节点)                                          │  │
-│  │      └── DefaultBinder: 更新 Pod.spec.nodeName                             │  │
-│  │                     │                                                       │  │
-│  │                     ▼                                                       │  │
-│  │  13. PostBind Phase (绑定后处理)                                           │  │
-│  │                                                                             │  │
-│  └─────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                   │
-└───────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph SchedulingCycle["🔄 Scheduling Cycle"]
+        direction TB
+        S1["1. SchedulingQueue<br/>Pod进入优先级队列"] --> S2["2. PreFilter Phase<br/>NodeResourcesFit / 预过滤插件"]
+        S2 --> S3["3. Filter Phase<br/>NodeUnschedulable / NodeResourcesFit<br/>NodeAffinity / PodTopologySpread<br/>TaintToleration / VolumeBinding"]
+        S3 --> S4["4. PostFilter Phase<br/>Preemption 抢占低优先级Pod"]
+        S4 --> S5["5. PreScore Phase<br/>评分前预处理"]
+        S5 --> S6["6. Score Phase<br/>NodeResourcesBalancedAllocation<br/>ImageLocality / InterPodAffinity<br/>PodTopologySpread"]
+        S6 --> S7["7. NormalizeScore<br/>归一化到 0-100"]
+        S7 --> S8["8. Select Best Node<br/>选择最高分节点"]
+        S8 --> S9["9. Reserve Phase<br/>预留资源"]
+    end
+
+    subgraph BindingCycle["📌 Binding Cycle"]
+        direction TB
+        B10["10. Permit Phase<br/>批准 / 拒绝 / 等待"]
+        B10 --> B11["11. PreBind Phase<br/>VolumeBinding / PV绑定"]
+        B11 --> B12["12. Bind Phase<br/>DefaultBinder<br/>更新 Pod.spec.nodeName"]
+        B12 --> B13["13. PostBind Phase<br/>绑定后处理"]
+    end
+
+    S9 --> B10
+
+    style SchedulingCycle fill:#e1f5fe
+    style BindingCycle fill:#fff3e0
 ```
 
 #### 调度策略
@@ -515,95 +443,35 @@ metadata:
 
 #### 核心功能架构
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              kubelet Architecture                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────── API Server Communication ──────────────────────┐   │
-│  │  - Watch Pods assigned to this node                                      │   │
-│  │  - Report Node/Pod status                                                │   │
-│  │  - Certificate rotation                                                  │   │
-│  └────────────────────────────────────────────────────────────────────────────┘   │
-│                                    │                                             │
-│                                    ▼                                             │
-│  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                          kubelet Core Modules                            │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    Pod Lifecycle Manager                          │   │    │
-│  │  │  - syncPod() - 核心调谐循环                                       │   │    │
-│  │  │  - Pod 创建/更新/删除                                             │   │    │
-│  │  │  - Init Containers → Main Containers → Sidecar Containers       │   │    │
-│  │  │  - PreStop Hook → Termination Grace Period                       │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    PLEG (Pod Lifecycle Event Generator)          │   │    │
-│  │  │  - 监听容器运行时事件                                             │   │    │
-│  │  │  - 生成 Pod 状态变化事件                                          │   │    │
-│  │  │  - 触发 syncPod                                                   │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    Probe Manager                                  │   │    │
-│  │  │  - Liveness Probe (存活探测)                                      │   │    │
-│  │  │  - Readiness Probe (就绪探测)                                     │   │    │
-│  │  │  - Startup Probe (启动探测)                                       │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    Volume Manager                                 │   │    │
-│  │  │  - Volume Mount/Unmount                                           │   │    │
-│  │  │  - CSI Plugin 交互                                                │   │    │
-│  │  │  - Secret/ConfigMap 挂载                                          │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    Status Manager                                 │   │    │
-│  │  │  - 收集 Pod/Container 状态                                        │   │    │
-│  │  │  - 同步到 API Server                                              │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    Eviction Manager                               │   │    │
-│  │  │  - 监控节点资源压力                                               │   │    │
-│  │  │  - 驱逐 Pod (内存/磁盘/inode 压力)                                │   │    │
-│  │  │  - Hard Eviction / Soft Eviction                                 │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    cAdvisor (Container Advisor)                   │   │    │
-│  │  │  - 容器资源使用监控                                               │   │    │
-│  │  │  - CPU/内存/网络/磁盘 I/O                                         │   │    │
-│  │  │  - 提供 /metrics 端点                                             │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  └─────────────────────────────────────────────────────────────────────────┘    │
-│                                    │                                             │
-│                                    ▼                                             │
-│  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                          CRI (Container Runtime Interface)               │    │
-│  │  ┌────────────────────────────────────────────────────────────────────┐ │    │
-│  │  │  RuntimeService:                                                    │ │    │
-│  │  │  - RunPodSandbox / StopPodSandbox                                  │ │    │
-│  │  │  - CreateContainer / StartContainer / StopContainer                │ │    │
-│  │  │  - RemoveContainer / ListContainers                                │ │    │
-│  │  │  - Exec / Attach / PortForward                                     │ │    │
-│  │  │                                                                     │ │    │
-│  │  │  ImageService:                                                      │ │    │
-│  │  │  - PullImage / RemoveImage / ListImages                            │ │    │
-│  │  └────────────────────────────────────────────────────────────────────┘ │    │
-│  └─────────────────────────────────────────────────────────────────────────┘    │
-│                                    │                                             │
-│                                    ▼                                             │
-│  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    Container Runtime (containerd/CRI-O)                  │    │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                     │    │
-│  │  │   runc      │  │   crun      │  │   gVisor    │ ... (OCI Runtime)   │    │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘                     │    │
-│  └─────────────────────────────────────────────────────────────────────────┘    │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph kubelet["kubelet Core Modules"]
+        direction TB
+        plm[Pod Lifecycle Manager<br/>syncPod/创建/更新/删除<br/>Init → Main → Sidecar<br/>PreStop/Termination Grace]
+        pleg[PLEG<br/>监听容器运行时事件<br/>生成状态变化事件<br/>触发 syncPod]
+        probe[Probe Manager<br/>Liveness Probe<br/>Readiness Probe<br/>Startup Probe]
+        vol[Volume Manager<br/>Mount/Unmount<br/>CSI Plugin 交互<br/>Secret/ConfigMap 挂载]
+        status[Status Manager<br/>收集 Pod/Container 状态<br/>同步到 API Server]
+        evict[Eviction Manager<br/>监控节点资源压力<br/>驱逐 Pod<br/>Hard/Soft Eviction]
+        cadvisor[cAdvisor<br/>容器资源使用监控<br/>CPU/内存/网络/磁盘 I/O<br/>提供 /metrics 端点]
+    end
+
+    api[API Server Communication<br/>Watch Pods<br/>Report Node/Pod status<br/>Certificate rotation] --> kubelet
+
+    kubelet --> cri[CRI<br/>RuntimeService: RunPodSandbox/CreateContainer<br/>ImageService: PullImage/ListImages]
+
+    cri --> runtime[Container Runtime<br/>containerd / CRI-O]
+    runtime --> oci1[runc]
+    runtime --> oci2[crun]
+    runtime --> oci3[gVisor]
+
+    plm --> pleg
+    pleg --> plm
+    plm --> probe
+    plm --> vol
+    plm --> status
+    cadvisor --> status
+    kubelet --> evict
 ```
 
 #### 关键配置参数
@@ -626,37 +494,32 @@ metadata:
 
 #### 工作模式对比
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                         kube-proxy Mode Comparison                               │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────── iptables Mode ────────────────────────────────┐    │
-│  │  Client ──► Service VIP ──► iptables NAT ──► Random Backend Pod         │    │
-│  │                                                                           │    │
-│  │  优点: 简单、兼容性好                                                     │    │
-│  │  缺点: 性能差 (O(n) 规则匹配)、无法均衡负载、规则更新慢                  │    │
-│  │  适用: 小规模集群 (<1000 Service)                                        │    │
-│  └───────────────────────────────────────────────────────────────────────────┘    │
-│                                                                                  │
-│  ┌────────────────────────── IPVS Mode ──────────────────────────────────────┐  │
-│  │  Client ──► Service VIP ──► IPVS (LVS) ──► Load Balanced Backend Pod     │  │
-│  │                                                                            │  │
-│  │  优点: 高性能 (O(1) 哈希表)、支持多种负载均衡算法、规则更新快            │  │
-│  │  缺点: 需要内核模块 (ip_vs)                                               │  │
-│  │  适用: 大规模集群 (>1000 Service)                                         │  │
-│  │  算法: rr (轮询), lc (最少连接), dh (目标哈希), sh (源哈希), sed (最短期望延迟) │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-│  ┌────────────────────────── eBPF Mode (Cilium) ──────────────────────────────┐ │
-│  │  Client ──► XDP/TC eBPF ──► Socket Redirect ──► Backend Pod (Bypass TCP/IP)│ │
-│  │                                                                             │ │
-│  │  优点: 最高性能、内核旁路、L7 感知、集成 NetworkPolicy                     │ │
-│  │  缺点: 需要新内核 (>= 4.19)、复杂度高                                      │ │
-│  │  适用: 高性能场景、Service Mesh                                            │ │
-│  └─────────────────────────────────────────────────────────────────────────────┘ │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph iptables["iptables 模式"]
+        direction LR
+        C1[Client] --> VIP1[Service VIP]
+        VIP1 --> NAT[iptables NAT]
+        NAT --> B1[Random Backend Pod]
+    end
+
+    subgraph ipvs["IPVS 模式"]
+        direction LR
+        C2[Client] --> VIP2[Service VIP]
+        VIP2 --> LVS[IPVS LVS]
+        LVS --> B2[Load Balanced Backend Pod]
+    end
+
+    subgraph ebpf["eBPF 模式 (Cilium)"]
+        direction LR
+        C3[Client] --> XDP[XDP/TC eBPF]
+        XDP --> SR[Socket Redirect]
+        SR --> B3[Backend Pod<br/>Bypass TCP/IP]
+    end
+
+    style iptables fill:#e1f5e1,stroke:#2e7d32
+    style ipvs fill:#e3f2fd,stroke:#1565c0
+    style ebpf fill:#fff3e0,stroke:#e65100
 ```
 
 | 模式 | 延迟 | 吞吐量 | CPU 消耗 | Service 规模 | 推荐场景 |
@@ -721,57 +584,63 @@ Kubernetes 1.24+ 移除 dockershim，推荐:
 
 ### 4.1 Kubernetes 对象层次
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                       Kubernetes Object Hierarchy                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌───────────────────────────── Cluster Scope ──────────────────────────────┐   │
-│  │                                                                           │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐│   │
-│  │  │    Node     │  │ Namespace   │  │ StorageClass│  │ ClusterRole     ││   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────┘│   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐│   │
-│  │  │PersistentVol│  │  PriorityClass │ │CertSignReq  │  │CustomResDefn    ││   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────┘│   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌───────────────────────────── Namespace Scope ────────────────────────────┐   │
-│  │                                                                           │   │
-│  │  Workload Resources (工作负载资源)                                       │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌───────────────────┐ │   │
-│  │  │    Pod     │  │ ReplicaSet │  │ Deployment │  │   StatefulSet     │ │   │
-│  │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘  └────────┬──────────┘ │   │
-│  │        │                │                │                 │            │   │
-│  │        │                └────────────────┴─────────────────┘            │   │
-│  │        │                         ▼                                      │   │
-│  │        │                    管理 Pod 副本                               │   │
-│  │        │                                                                │   │
-│  │  ┌────┴──────┐  ┌────────────┐  ┌────────────┐  ┌───────────────────┐ │   │
-│  │  │ DaemonSet │  │    Job     │  │  CronJob   │  │   ReplicationCtl  │ │   │
-│  │  └───────────┘  └────────────┘  └────────────┘  └───────────────────┘ │   │
-│  │                                                                         │   │
-│  │  Service Resources (服务资源)                                          │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌───────────────────┐ │   │
-│  │  │  Service   │  │  Endpoints │  │EndpointSlice│  │      Ingress      │ │   │
-│  │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘  └───────────────────┘ │   │
-│  │        │                │                │                              │   │
-│  │        └────────────────┴────────────────┘                              │   │
-│  │                          ▼                                              │   │
-│  │                    负载均衡到 Pod                                       │   │
-│  │                                                                         │   │
-│  │  Config & Storage (配置与存储)                                         │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌───────────────────┐ │   │
-│  │  │ ConfigMap  │  │   Secret   │  │     PVC    │  │   ServiceAccount  │ │   │
-│  │  └────────────┘  └────────────┘  └────────────┘  └───────────────────┘ │   │
-│  │                                                                         │   │
-│  │  Policy & RBAC (策略与权限)                                            │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌───────────────────┐ │   │
-│  │  │ NetworkPolicy│ │    Role    │  │ RoleBinding│  │  ResourceQuota    │ │   │
-│  │  └────────────┘  └────────────┘  └────────────┘  └───────────────────┘ │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph ClusterScope["集群级别资源 (Cluster Scope)"]
+        direction LR
+        Node["Node"]
+        NS["Namespace"]
+        SC["StorageClass"]
+        CR["ClusterRole"]
+        PV["PersistentVolume"]
+        PC["PriorityClass"]
+        CSR["CertificateSigningRequest"]
+        CRD["CustomResourceDefinition"]
+    end
+
+    subgraph NSWorkloads["命名空间资源: 工作负载 (Namespace Scope)"]
+        direction TB
+        Deploy["Deployment"] --> RS["ReplicaSet"] --> Pod["Pod"]
+        STS["StatefulSet"] --> Pod
+        DS["DaemonSet"] --> Pod
+        Job["Job"] --> Pod
+        CJ["CronJob"] --> Job
+        RC["ReplicationController"] --> Pod
+    end
+
+    subgraph NSServices["命名空间资源: 服务与网络"]
+        direction LR
+        Svc["Service"] --> EP["Endpoints"]
+        Svc --> EPS["EndpointSlice"]
+        Ing["Ingress"] --> Svc
+    end
+
+    subgraph NSConfig["命名空间资源: 配置与存储"]
+        direction LR
+        CM["ConfigMap"]
+        Secret["Secret"]
+        PVC["PersistentVolumeClaim"]
+        SA["ServiceAccount"]
+    end
+
+    subgraph NSPolicy["命名空间资源: 策略与权限"]
+        direction LR
+        NP["NetworkPolicy"]
+        Role["Role"]
+        RB["RoleBinding"]
+        RQ["ResourceQuota"]
+    end
+
+    ClusterScope -.-> NSWorkloads
+    ClusterScope -.-> NSServices
+    ClusterScope -.-> NSConfig
+    ClusterScope -.-> NSPolicy
+
+    style ClusterScope fill:#f9d5bb,stroke:#e67e22,stroke-width:2px
+    style NSWorkloads fill:#d5f5e3,stroke:#27ae60,stroke-width:2px
+    style NSServices fill:#d6eaf8,stroke:#2980b9,stroke-width:2px
+    style NSConfig fill:#e8daef,stroke:#8e44ad,stroke-width:2px
+    style NSPolicy fill:#fadbd8,stroke:#c0392b,stroke-width:2px
 ```
 
 ### 4.2 对象元数据结构
@@ -832,69 +701,50 @@ status:                  # 当前状态 (由 Controller 更新)
 
 ### 4.3 Pod 生命周期
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              Pod Lifecycle Phases                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  1. Pending (等待)                                                        │   │
-│  │     - API Server 已创建 Pod 对象                                          │   │
-│  │     - 等待 Scheduler 调度                                                 │   │
-│  │     - 等待镜像拉取                                                        │   │
-│  │     - 等待存储卷挂载                                                      │   │
-│  └────────────────────────────┬──────────────────────────────────────────────┘   │
-│                                ▼                                                 │
-│  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  2. Creating (创建中)                                                     │   │
-│  │     a. kubelet 接收 Pod 分配                                              │   │
-│  │     b. 创建 Pod Sandbox (pause 容器)                                      │   │
-│  │        └── 创建 Network Namespace                                         │   │
-│  │        └── 调用 CNI 配置网络                                              │   │
-│  │     c. 拉取镜像 (如未缓存)                                                │   │
-│  │     d. 创建 Init Containers (按顺序)                                      │   │
-│  │        └── InitContainer-1 → InitContainer-2 → ...                        │   │
-│  │     e. 创建 Main Containers (并行)                                        │   │
-│  └────────────────────────────┬──────────────────────────────────────────────┘   │
-│                                ▼                                                 │
-│  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  3. Running (运行中)                                                      │   │
-│  │     - 至少一个容器在运行                                                  │   │
-│  │     - Startup Probe (启动探测) → 成功后开始其他探测                      │   │
-│  │     - Liveness Probe (存活探测) → 失败则重启容器                         │   │
-│  │     - Readiness Probe (就绪探测) → 失败则从 Service 移除                 │   │
-│  │     - PostStart Hook 执行                                                 │   │
-│  └────────────────────────────┬──────────────────────────────────────────────┘   │
-│                                │                                                 │
-│                  ┌─────────────┴─────────────┐                                   │
-│                  │                           │                                   │
-│                  ▼                           ▼                                   │
-│  ┌────────────────────────────────┐  ┌──────────────────────────────────────┐   │
-│  │  4a. Succeeded (成功完成)      │  │  4b. Failed (失败)                   │   │
-│  │      - 所有容器正常退出 (0)    │  │      - 容器异常退出 (非0)            │   │
-│  │      - restartPolicy: Never    │  │      - restartPolicy:                │   │
-│  │                                │  │        Always/OnFailure → 重启       │   │
-│  │                                │  │        Never → 保持 Failed           │   │
-│  └────────────────────────────────┘  └──────────────────────────────────────┘   │
-│                  │                           │                                   │
-│                  └─────────────┬─────────────┘                                   │
-│                                ▼                                                 │
-│  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  5. Terminating (终止中)                                                  │   │
-│  │     a. PreStop Hook 执行 (同时进行)                                       │   │
-│  │     b. SIGTERM 信号发送给容器                                             │   │
-│  │     c. 等待 terminationGracePeriodSeconds (默认30s)                       │   │
-│  │     d. 超时后发送 SIGKILL 强制终止                                        │   │
-│  │     e. 清理网络、存储卷                                                   │   │
-│  └────────────────────────────┬──────────────────────────────────────────────┘   │
-│                                ▼                                                 │
-│  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  6. Completed / Unknown                                                   │   │
-│  │     - Completed: Pod 已终止 (不会重启)                                    │   │
-│  │     - Unknown: 节点失联，Pod 状态未知                                     │   │
-│  └──────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph PodLifecycle["Pod 生命周期状态机"]
+        direction TB
+
+        Pending["["<b>Pending</b><br/>等待调度"]
+        PendingDetail["API Server 已创建 Pod<br/>• 等待 Scheduler 调度<br/>• 等待镜像拉取<br/>• 等待存储卷挂载"]
+
+        Creating["["<b>Creating</b><br/>创建中"]
+        CreatingDetail["kubelet 接收分配<br/>• 创建 Pod Sandbox<br/>• 调用 CNI 配置网络<br/>• 拉取镜像<br/>• 顺序启动 Init Containers<br/>• 并行启动 Main Containers"]
+
+        Running["["<b>Running</b><br/>运行中"]
+        RunningDetail["至少一个容器运行<br/>• Startup Probe → Liveness Probe<br/>• Readiness Probe → Service 流量<br/>• PostStart Hook"]
+
+        Succeeded["["<b>Succeeded</b><br/>成功完成"]
+        SucceededDetail["所有容器正常退出 (0)<br/>restartPolicy: Never"]
+
+        Failed["["<b>Failed</b><br/>失败"]
+        FailedDetail["容器异常退出 (非0)<br/>Always/OnFailure → 重启<br/>Never → 保持 Failed"]
+
+        Terminating["["<b>Terminating</b><br/>终止中"]
+        TerminatingDetail["PreStop Hook<br/>SIGTERM → grace period<br/>SIGKILL → 清理资源"]
+
+        Completed["["<b>Completed</b>"]
+        Unknown["["<b>Unknown</b>"]
+
+        Pending --> Creating
+        Creating --> Running
+        Running --> Succeeded
+        Running --> Failed
+        Succeeded --> Terminating
+        Failed --> Terminating
+        Terminating --> Completed
+        Terminating --> Unknown
+    end
+
+    style Pending fill:#e1f5fe
+    style Creating fill:#e8f5e9
+    style Running fill:#fff3e0
+    style Succeeded fill:#e8f5e9
+    style Failed fill:#ffebee
+    style Terminating fill:#fce4ec
+    style Completed fill:#f3e5f5
+    style Unknown fill:#fff8e1
 ```
 
 #### Pod 状态条件 (Conditions)
@@ -912,46 +762,56 @@ status:                  # 当前状态 (由 Controller 更新)
 
 ### 5.1 组件间通信
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                       Component Communication Matrix                             │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    API Server (中心化通信)                               │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                     etcd (唯一写入者)                             │   │    │
-│  │  │  - API Server ──► etcd (gRPC :2379)                              │   │    │
-│  │  │  - TLS 双向认证                                                  │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                   Scheduler (Watch API)                           │   │    │
-│  │  │  - Scheduler ──Watch──► API Server                               │   │    │
-│  │  │  - Scheduler ──Bind──► API Server (更新 Pod.spec.nodeName)       │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │              Controller Manager (Watch API)                       │   │    │
-│  │  │  - CM ──Watch──► API Server (监听资源变化)                       │   │    │
-│  │  │  - CM ──Update──► API Server (更新资源状态)                      │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                    kubelet (双向通信)                             │   │    │
-│  │  │  - kubelet ──Watch──► API Server (获取 Pod 分配)                 │   │    │
-│  │  │  - kubelet ──Update──► API Server (上报 Node/Pod 状态)           │   │    │
-│  │  │  - API Server ──HTTPS──► kubelet :10250 (Exec/Logs/PortForward) │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  │                                                                          │    │
-│  │  ┌──────────────────────────────────────────────────────────────────┐   │    │
-│  │  │                   kube-proxy (Watch API)                          │   │    │
-│  │  │  - kube-proxy ──Watch──► API Server (Service/Endpoints/Nodes)    │   │    │
-│  │  └──────────────────────────────────────────────────────────────────┘   │    │
-│  └─────────────────────────────────────────────────────────────────────────┘    │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph "控制平面"
+        API["🔷 kube-apiserver<br/>:6443 HTTPS"]
+        ETCD[("🗄️ etcd Cluster<br/>:2379 gRPC")]
+        SCHED["📋 kube-scheduler<br/>:10259 HTTPS"]
+        CM["🎮 kube-controller-manager<br/>:10257 HTTPS"]
+    end
+
+    subgraph "工作节点"
+        KUBELET["⚙️ kubelet<br/>:10250 HTTPS"]
+        KPROXY["🔗 kube-proxy<br/>:10249 HTTP"]
+        CONTAINER["📦 Container Runtime<br/>CRI Socket"]
+    end
+
+    subgraph "客户端"
+        KUBECTL["💻 kubectl"]
+        CONTROLLER["🤖 Custom Controllers"]
+    end
+
+    %% API Server 与 etcd 通信
+    API -->|"写入/读取<br/>gRPC + TLS"| ETCD
+    ETCD -->|"Watch 事件"| API
+
+    %% Scheduler 通信
+    SCHED -->|"Watch Pods<br/>List/Watch"| API
+    SCHED -->|"Bind Pod<br/>Update nodeName"| API
+
+    %% Controller Manager 通信
+    CM -->|"Watch 资源变化"| API
+    CM -->|"Update 资源状态"| API
+
+    %% kubelet 双向通信
+    KUBELET -->|"Watch PodSpec<br/>获取分配"| API
+    KUBELET -->|"Update Node/Pod 状态"| API
+    API -->|"Exec/Logs/PortForward<br/>HTTPS :10250"| KUBELET
+
+    %% kube-proxy 通信
+    KPROXY -->|"Watch Service<br/>Endpoints/Nodes"| API
+
+    %% kubelet 与容器运行时
+    KUBELET -->|"CRI gRPC"| CONTAINER
+
+    %% 客户端通信
+    KUBECTL -->|"REST API<br/>HTTPS :6443"| API
+    CONTROLLER -->|"List/Watch/Update"| API
+
+    style API fill:#3498db,color:#fff,stroke:#2980b9,stroke-width:3px
+    style ETCD fill:#e67e22,color:#fff,stroke:#d35400
+    style KUBELET fill:#27ae60,color:#fff,stroke:#229954
 ```
 
 ### 5.2 认证与授权流程
@@ -965,46 +825,36 @@ status:                  # 当前状态 (由 Controller 更新)
 
 ### 5.3 Watch 机制详解
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                            Watch Mechanism Flow                                  │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  1. Client (Controller) 发起 Watch 请求                                         │
-│     GET /api/v1/pods?watch=true&resourceVersion=1000                            │
-│                                │                                                 │
-│                                ▼                                                 │
-│  2. API Server 创建 Watch Stream (HTTP Chunked Transfer)                        │
-│                                │                                                 │
-│                                ▼                                                 │
-│  3. API Server 从 etcd Watch 资源变化                                           │
-│     etcd.Watch("/registry/pods/", WithRev(1001))                                │
-│                                │                                                 │
-│                                ▼                                                 │
-│  4. etcd 检测到变化 (Revision 1001 → 1002)                                      │
-│     - Event Type: ADDED / MODIFIED / DELETED / BOOKMARK                         │
-│     - Object: Pod 对象                                                          │
-│                                │                                                 │
-│                                ▼                                                 │
-│  5. API Server 推送 Event 到 Client                                             │
-│     {                                                                            │
-│       "type": "MODIFIED",                                                        │
-│       "object": {"kind": "Pod", "metadata": {"resourceVersion": "1002"}, ...}   │
-│     }                                                                            │
-│                                │                                                 │
-│                                ▼                                                 │
-│  6. Client 处理 Event                                                            │
-│     - 更新本地缓存 (Informer)                                                    │
-│     - 触发 EventHandler                                                          │
-│     - 调谐逻辑 (Reconcile)                                                       │
-│                                                                                  │
-│  7. 如果连接断开 (网络/超时)                                                     │
-│     - Client 重连                                                                │
-│     - 使用最后的 resourceVersion 继续 Watch                                      │
-│     - 如果 resourceVersion 过期 (etcd 已 Compact)                               │
-│       └── List 全量数据重新同步                                                 │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as Client (Controller)
+    participant API as API Server
+    participant E as etcd
+
+    C->>+API: GET /api/v1/pods?watch=true&resourceVersion=1000
+    API->>API: 创建 Watch Stream (HTTP Chunked)
+    API->>+E: etcd.Watch("/registry/pods/", WithRev(1001))
+
+    loop 持续监听
+        E->>E: 检测数据变化 (Rev 1001 → 1002)
+        E-->>-API: Event: ADDED/MODIFIED/DELETED/BOOKMARK
+        API-->>C: 推送 Event<br/>{type:"MODIFIED", object:{...}}
+        C->>C: 更新 Informer 缓存
+        C->>C: 触发 EventHandler
+        C->>C: 执行 Reconcile 调谐
+    end
+
+    alt 连接断开 (网络/超时)
+        C->>+API: 使用最后 resourceVersion 重连
+        API->>+E: 继续 Watch
+    else resourceVersion 过期 (已 Compact)
+        C->>+API: List 全量数据重新同步
+        API->>E: 获取完整资源列表
+        E-->>API: 返回当前数据
+        API-->>-C: 全量同步 + 新的 resourceVersion
+        C->>API: 使用新版本重新 Watch
+    end
 ```
 
 #### Watch 关键参数
@@ -1022,49 +872,53 @@ status:                  # 当前状态 (由 Controller 更新)
 
 ### 6.1 控制平面高可用部署
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                       HA Control Plane Architecture                              │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────── External Load Balancer ────────────────────────┐   │
-│  │                                                                           │   │
-│  │  ┌─────────────────────────────────────────────────────────────────────┐ │   │
-│  │  │  HAProxy / Nginx / Cloud LB (健康检查 :6443/healthz)                │ │   │
-│  │  │  VIP: 192.168.1.100:6443                                             │ │   │
-│  │  └─────────────────────────────────────────────────────────────────────┘ │   │
-│  └────────────────────────────┬──────────────────────────────────────────────┘   │
-│                                │                                                 │
-│                  ┌─────────────┼─────────────┬───────────────┐                   │
-│                  │             │             │               │                   │
-│                  ▼             ▼             ▼               ▼                   │
-│  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────────────────────┐ │
-│  │   Master-1       │ │   Master-2       │ │   Master-3                       │ │
-│  │                  │ │                  │ │                                  │ │
-│  │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐                │ │
-│  │ │ kube-apiserver│ │ │ │kube-apiserver│ │ │ │kube-apiserver│ (Active-Active)│ │
-│  │ │   (Active)   │ │ │ │   (Active)   │ │ │ │   (Active)   │                │ │
-│  │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘                │ │
-│  │                  │ │                  │ │                                  │ │
-│  │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐                │ │
-│  │ │kube-scheduler│ │ │ │kube-scheduler│ │ │ │kube-scheduler│                │ │
-│  │ │  (Leader)    │◄├─┤►│  (Standby)   │◄├─┤►│  (Standby)   │ (Leader Election)│
-│  │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘                │ │
-│  │                  │ │                  │ │                                  │ │
-│  │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐                │ │
-│  │ │kube-controller│ │ │ │kube-controller│ │ │ │kube-controller│               │ │
-│  │ │  -manager    │◄├─┤►│  -manager    │◄├─┤►│  -manager    │ (Leader Election)│
-│  │ │  (Leader)    │ │ │ │  (Standby)   │ │ │ │  (Standby)   │                │ │
-│  │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘                │ │
-│  │                  │ │                  │ │                                  │ │
-│  │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐                │ │
-│  │ │    etcd      │◄├─┤►│    etcd      │◄├─┤►│    etcd      │ (Raft Cluster) │ │
-│  │ │   (Leader)   │ │ │ │  (Follower)  │ │ │ │  (Follower)  │                │ │
-│  │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘                │ │
-│  │ 192.168.1.101    │ │ 192.168.1.102    │ │ 192.168.1.103                   │ │
-│  └──────────────────┘ └──────────────────┘ └──────────────────────────────────┘ │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph LB["🌐 External Load Balancer"]
+        LB_NODE["HAProxy / Nginx / Cloud LB<br/>VIP: 192.168.1.100:6443<br/>健康检查 :6443/healthz"]
+    end
+
+    subgraph M1["🖥️ Master-1<br/>192.168.1.101"]
+        API1["kube-apiserver<br/>(Active)"]
+        SCH1["kube-scheduler<br/>(Leader)"]
+        CM1["kube-controller-manager<br/>(Leader)"]
+        ETCD1["etcd<br/>(Leader)"]
+    end
+
+    subgraph M2["🖥️ Master-2<br/>192.168.1.102"]
+        API2["kube-apiserver<br/>(Active)"]
+        SCH2["kube-scheduler<br/>(Standby)"]
+        CM2["kube-controller-manager<br/>(Standby)"]
+        ETCD2["etcd<br/>(Follower)"]
+    end
+
+    subgraph M3["🖥️ Master-3<br/>192.168.1.103"]
+        API3["kube-apiserver<br/>(Active)"]
+        SCH3["kube-scheduler<br/>(Standby)"]
+        CM3["kube-controller-manager<br/>(Standby)"]
+        ETCD3["etcd<br/>(Follower)"]
+    end
+
+    LB_NODE --> API1
+    LB_NODE --> API2
+    LB_NODE --> API3
+
+    ETCD1 <-->|Raft| ETCD2
+    ETCD2 <-->|Raft| ETCD3
+    ETCD3 <-->|Raft| ETCD1
+
+    classDef active fill:#e1f5e1,stroke:#4caf50,stroke-width:2px
+    classDef standby fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef leader fill:#e3f2fd,stroke:#2196f3,stroke-width:3px
+    classDef follower fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    classDef lb fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+
+    class API1,API2,API3 active
+    class SCH2,SCH3,CM2,CM3 standby
+    class SCH1,CM1 leader
+    class ETCD1 leader
+    class ETCD2,ETCD3 follower
+    class LB_NODE lb
 ```
 
 #### HA 关键配置
@@ -1140,62 +994,51 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20260120.db \
 
 ### 7.1 Kubernetes 扩展点
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                        Kubernetes Extension Points                               │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌─────────────────────────── API 层扩展 ───────────────────────────────────┐   │
-│  │  1. CustomResourceDefinition (CRD)                                        │   │
-│  │     - 定义自定义资源类型                                                  │   │
-│  │     - 无需修改 API Server 代码                                            │   │
-│  │     - 示例: Ingress, Prometheus CRD                                       │   │
-│  │                                                                           │   │
-│  │  2. API Aggregation (AA)                                                  │   │
-│  │     - 扩展 Kubernetes API                                                 │   │
-│  │     - 运行独立 API Server                                                 │   │
-│  │     - 示例: metrics-server, service-catalog                               │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────── 准入控制扩展 ─────────────────────────────────┐   │
-│  │  3. MutatingAdmissionWebhook                                              │   │
-│  │     - 修改资源对象                                                        │   │
-│  │     - 示例: Istio Sidecar 注入                                            │   │
-│  │                                                                           │   │
-│  │  4. ValidatingAdmissionWebhook                                            │   │
-│  │     - 验证资源对象                                                        │   │
-│  │     - 示例: OPA/Gatekeeper 策略验证                                       │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────── 运行时扩展 ───────────────────────────────────┐   │
-│  │  5. Container Runtime Interface (CRI)                                     │   │
-│  │     - containerd, CRI-O                                                   │   │
-│  │                                                                           │   │
-│  │  6. Container Network Interface (CNI)                                     │   │
-│  │     - Calico, Cilium, Flannel                                             │   │
-│  │                                                                           │   │
-│  │  7. Container Storage Interface (CSI)                                     │   │
-│  │     - AWS EBS CSI, Ceph CSI                                               │   │
-│  │                                                                           │   │
-│  │  8. Device Plugin                                                         │   │
-│  │     - GPU (NVIDIA), RDMA, FPGA                                            │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────── 调度扩展 ─────────────────────────────────────┐   │
-│  │  9. Scheduler Framework Plugins                                           │   │
-│  │     - 自定义 Filter/Score 插件                                            │   │
-│  │                                                                           │   │
-│  │  10. Scheduler Extender (已废弃)                                          │   │
-│  │     - 外部 HTTP 调度器扩展                                                │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-│  ┌─────────────────────────── 控制器扩展 ───────────────────────────────────┐   │
-│  │  11. Operator Pattern                                                     │   │
-│  │     - CRD + Controller 管理复杂应用                                       │   │
-│  │     - 示例: Prometheus Operator, MySQL Operator                           │   │
-│  └───────────────────────────────────────────────────────────────────────────┘   │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+mindmap
+  root((Kubernetes<br/>扩展点))
+    API层扩展
+      CustomResourceDefinition["CRD 自定义资源定义"]
+        定义自定义资源类型
+        无需修改API Server代码
+        示例: Ingress, Prometheus
+      APIAggregation["API Aggregation 聚合层"]
+        扩展Kubernetes API
+        运行独立API Server
+        示例: metrics-server
+    准入控制扩展
+      MutatingAdmissionWebhook["Mutating Webhook"]
+        修改资源对象
+        示例: Istio Sidecar注入
+      ValidatingAdmissionWebhook["Validating Webhook"]
+        验证资源对象
+        示例: OPA/Gatekeeper策略
+    运行时扩展
+      CRI["CRI 容器运行时接口"]
+        containerd
+        CRI-O
+      CNI["CNI 容器网络接口"]
+        Calico
+        Cilium
+        Flannel
+      CSI["CSI 容器存储接口"]
+        AWS EBS CSI
+        Ceph CSI
+      DevicePlugin["Device Plugin 设备插件"]
+        GPU
+        RDMA
+        FPGA
+    调度扩展
+      SchedulerPlugins["Scheduler Framework"]
+        自定义Filter插件
+        自定义Score插件
+      SchedulerExtender["Scheduler Extender (已废弃)"]
+        外部HTTP调度扩展
+    控制器扩展
+      OperatorPattern["Operator Pattern"]
+        CRD + Controller
+        示例: Prometheus Operator
+        示例: MySQL Operator
 ```
 
 ### 7.2 CRD 示例
@@ -1273,45 +1116,65 @@ spec:
 
 ### 7.3 Operator 模式
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                             Operator Pattern                                     │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │  1. 用户创建 CR (Custom Resource)                                      │     │
-│  │     kubectl apply -f database.yaml                                     │     │
-│  └────────────────────────────┬────────────────────────────────────────────┘     │
-│                                ▼                                                 │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │  2. API Server 存储 CR 到 etcd                                          │     │
-│  └────────────────────────────┬────────────────────────────────────────────┘     │
-│                                ▼                                                 │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │  3. Operator Controller Watch CR 变化                                  │     │
-│  │     - Informer 监听 Database 资源                                       │     │
-│  │     - 触发 Reconcile 循环                                               │     │
-│  └────────────────────────────┬────────────────────────────────────────────┘     │
-│                                ▼                                                 │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │  4. Operator 调谐逻辑 (Reconciliation)                                 │     │
-│  │     a. 对比当前状态 (Status) vs 期望状态 (Spec)                        │     │
-│  │     b. 执行操作:                                                        │     │
-│  │        - 创建 StatefulSet (数据库副本)                                 │     │
-│  │        - 创建 Service (访问入口)                                        │     │
-│  │        - 创建 PVC (持久化存储)                                          │     │
-│  │        - 执行数据库初始化 (Job)                                         │     │
-│  │     c. 更新 CR Status (就绪状态)                                        │     │
-│  └────────────────────────────┬────────────────────────────────────────────┘     │
-│                                ▼                                                 │
-│  ┌────────────────────────────────────────────────────────────────────────┐     │
-│  │  5. 持续监控与修复                                                      │     │
-│  │     - Pod 故障 → 重建                                                   │     │
-│  │     - 配置变更 → 滚动更新                                               │     │
-│  │     - 扩缩容 → 调整 StatefulSet 副本                                    │     │
-│  └────────────────────────────────────────────────────────────────────────┘     │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as 👤 用户
+    participant K as kubectl
+    participant API as API Server
+    participant E as etcd
+    participant O as Operator Controller
+    participant K8s as Kubernetes 集群
+
+    U->>K: kubectl apply -f database.yaml
+    K->>API: POST /apis/example.com/v1/databases
+    API->>E: 存储 CR 对象
+    E-->>API: 确认写入
+    API-->>K: 返回创建结果
+    K-->>U: database/my-mysql created
+
+    rect rgb(230, 245, 255)
+        Note over O: Informer Watch 机制
+        O->>API: Watch /databases
+        API->>E: 监听资源变化
+        E-->>API: MODIFIED Event (新 CR)
+        API-->>O: 推送 CR 变化事件
+    end
+
+    rect rgb(255, 248, 230)
+        Note over O: Reconcile 调谐循环
+        O->>O: 对比 Status vs Spec
+
+        alt 需要创建资源
+            O->>K8s: 创建 StatefulSet
+            O->>K8s: 创建 Service
+            O->>K8s: 创建 PVC
+            O->>K8s: 创建 Job (初始化)
+        else 需要更新资源
+            O->>K8s: 更新 StatefulSet
+            O->>K8s: 滚动更新 Pod
+        else 需要扩缩容
+            O->>K8s: 调整 StatefulSet 副本数
+        end
+
+        K8s-->>O: 资源状态更新
+        O->>API: Update CR Status
+        API->>E: 写入最新状态
+    end
+
+    rect rgb(230, 255, 235)
+        Note over O: 持续监控与修复
+        loop 持续监控
+            O->>K8s: 检查 Pod 健康状态
+            K8s-->>O: Pod 状态
+
+            alt Pod 故障
+                O->>K8s: 重建 Pod
+            else 配置变更
+                O->>K8s: 执行滚动更新
+            end
+        end
+    end
 ```
 
 ---
@@ -1320,76 +1183,69 @@ spec:
 
 ### 8.1 安全层次
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           Security Defense-in-Depth                              │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌────────────────────────── Layer 1: 集群访问控制 ──────────────────────────┐  │
-│  │  1. Authentication (认证)                                                  │  │
-│  │     ├── X.509 Client Certificates (客户端证书)                            │  │
-│  │     ├── Static Token Files (静态 Token)                                   │  │
-│  │     ├── Bootstrap Tokens (引导 Token)                                     │  │
-│  │     ├── Service Account Tokens (服务账户 Token)                           │  │
-│  │     ├── OpenID Connect (OIDC)                                             │  │
-│  │     └── Webhook Token Authentication                                      │  │
-│  │                                                                            │  │
-│  │  2. Authorization (授权)                                                   │  │
-│  │     ├── RBAC (Role-Based Access Control) - 推荐                           │  │
-│  │     ├── ABAC (Attribute-Based Access Control)                             │  │
-│  │     ├── Node Authorization (节点授权)                                     │  │
-│  │     └── Webhook Authorization                                             │  │
-│  │                                                                            │  │
-│  │  3. Admission Control (准入控制)                                          │  │
-│  │     ├── PodSecurity (替代 PodSecurityPolicy)                              │  │
-│  │     ├── MutatingAdmissionWebhook                                          │  │
-│  │     ├── ValidatingAdmissionWebhook                                        │  │
-│  │     └── ResourceQuota / LimitRanger                                       │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-│  ┌────────────────────────── Layer 2: 网络隔离 ─────────────────────────────┐  │
-│  │  4. NetworkPolicy                                                          │  │
-│  │     ├── Ingress/Egress 规则                                               │  │
-│  │     ├── 命名空间隔离                                                       │  │
-│  │     └── Pod 级防火墙                                                       │  │
-│  │                                                                            │  │
-│  │  5. Service Mesh mTLS                                                      │  │
-│  │     ├── Istio / Linkerd                                                    │  │
-│  │     └── 东西向流量加密                                                     │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-│  ┌────────────────────────── Layer 3: 容器安全 ─────────────────────────────┐  │
-│  │  6. 镜像安全                                                               │  │
-│  │     ├── 镜像签名验证 (Cosign/Notary)                                      │  │
-│  │     ├── 镜像扫描 (Trivy/Clair)                                            │  │
-│  │     └── 私有镜像仓库                                                       │  │
-│  │                                                                            │  │
-│  │  7. Runtime Security                                                       │  │
-│  │     ├── Seccomp (系统调用过滤)                                            │  │
-│  │     ├── AppArmor / SELinux                                                 │  │
-│  │     ├── Capabilities Drop (能力剥离)                                      │  │
-│  │     ├── User Namespaces (用户命名空间隔离)                                │  │
-│  │     └── 安全容器 (gVisor/Kata)                                            │  │
-│  │                                                                            │  │
-│  │  8. Pod Security Standards                                                 │  │
-│  │     ├── Privileged (特权模式)                                             │  │
-│  │     ├── Baseline (基线)                                                   │  │
-│  │     └── Restricted (受限模式) - 推荐                                      │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-│  ┌────────────────────────── Layer 4: 数据安全 ─────────────────────────────┐  │
-│  │  9. Secrets Management                                                     │  │
-│  │     ├── etcd 加密 (EncryptionConfiguration)                               │  │
-│  │     ├── Secret 对象 (Base64 编码)                                         │  │
-│  │     ├── Sealed Secrets (加密 Secret)                                      │  │
-│  │     └── 外部 Secret 管理 (Vault/ESO)                                      │  │
-│  │                                                                            │  │
-│  │  10. Audit Logging                                                         │  │
-│  │     ├── API 审计日志                                                       │  │
-│  │     └── Falco 运行时审计                                                   │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph "Layer 1: 集群访问控制"
+        L1["🔐 认证 Authentication"] --> L2["🛡️ 授权 Authorization"]
+        L2 --> L3["✅ 准入控制 Admission Control"]
+
+        L1 --> AUTH1["X.509 Client Certificates"]
+        L1 --> AUTH2["Static/Bootstrap Token"]
+        L1 --> AUTH3["ServiceAccount Token"]
+        L1 --> AUTH4["OpenID Connect"]
+        L1 --> AUTH5["Webhook Token"]
+
+        L2 --> AUTHZ1["RBAC"]
+        L2 --> AUTHZ2["ABAC"]
+        L2 --> AUTHZ3["Node Authorization"]
+        L2 --> AUTHZ4["Webhook Authorization"]
+
+        L3 --> ADM1["PodSecurity"]
+        L3 --> ADM2["Mutating Webhook"]
+        L3 --> ADM3["Validating Webhook"]
+        L3 --> ADM4["ResourceQuota/LimitRanger"]
+    end
+
+    subgraph "Layer 2: 网络隔离"
+        L4["🌐 NetworkPolicy"] --> L5["🔒 Service Mesh mTLS"]
+        L4 --> NET1["Ingress/Egress 规则"]
+        L4 --> NET2["命名空间隔离"]
+        L4 --> NET3["Pod 级防火墙"]
+        L5 --> NET4["Istio/Linkerd"]
+        L5 --> NET5["东西向流量加密"]
+    end
+
+    subgraph "Layer 3: 容器安全"
+        L6["📦 镜像安全"] --> L7["🛡️ Runtime Security"]
+        L7 --> L8["📋 Pod Security Standards"]
+
+        L6 --> IMG1["镜像签名验证 Cosign/Notary"]
+        L6 --> IMG2["镜像扫描 Trivy/Clair"]
+        L6 --> IMG3["私有镜像仓库"]
+
+        L7 --> RUN1["Seccomp"]
+        L7 --> RUN2["AppArmor/SELinux"]
+        L7 --> RUN3["Capabilities Drop"]
+        L7 --> RUN4["User Namespaces"]
+        L7 --> RUN5["安全容器 gVisor/Kata"]
+
+        L8 --> SEC1["Privileged 特权模式"]
+        L8 --> SEC2["Baseline 基线"]
+        L8 --> SEC3["Restricted 受限模式"]
+    end
+
+    subgraph "Layer 4: 数据安全"
+        L9["🔑 Secrets Management"] --> L10["📊 Audit Logging"]
+        L9 --> SECM1["etcd 加密"]
+        L9 --> SECM2["Secret 对象"]
+        L9 --> SECM3["Sealed Secrets"]
+        L9 --> SECM4["Vault/ESO 外部密钥"]
+        L10 --> AUD1["API 审计日志"]
+        L10 --> AUD2["Falco 运行时审计"]
+    end
+
+    L3 -.-> L4
+    L8 -.-> L9
 ```
 
 ### 8.2 RBAC 权限模型
@@ -1478,33 +1334,49 @@ metadata:
 
 ### 9.1 可观测性三大支柱
 
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                       Observability Three Pillars                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│  ┌─────────────────────────── Metrics (指标) ─────────────────────────────────┐ │
-│  │  - Prometheus (采集、存储、查询)                                            │ │
-│  │  - Grafana (可视化)                                                         │ │
-│  │  - 四大黄金信号: Latency (延迟), Traffic (流量), Errors (错误), Saturation (饱和度) │ │
-│  │  - USE 方法: Utilization (利用率), Saturation (饱和度), Errors (错误)      │ │
-│  │  - RED 方法: Rate (请求速率), Errors (错误率), Duration (请求时长)         │ │
-│  └──────────────────────────────────────────────────────────────────────────────┘ │
-│                                                                                  │
-│  ┌─────────────────────────── Logging (日志) ─────────────────────────────────┐ │
-│  │  - EFK (Elasticsearch + Fluentd + Kibana)                                   │ │
-│  │  - ELK (Elasticsearch + Logstash + Kibana)                                  │ │
-│  │  - Loki (Grafana Loki)                                                      │ │
-│  │  - 日志级别: ERROR > WARN > INFO > DEBUG > TRACE                            │ │
-│  └──────────────────────────────────────────────────────────────────────────────┘ │
-│                                                                                  │
-│  ┌─────────────────────────── Tracing (追踪) ─────────────────────────────────┐ │
-│  │  - Jaeger / Zipkin                                                          │ │
-│  │  - OpenTelemetry (统一标准)                                                 │ │
-│  │  - 分布式追踪: Trace → Span → Context Propagation                          │ │
-│  └──────────────────────────────────────────────────────────────────────────────┘ │
-│                                                                                  │
-└─────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+mindmap
+  root((可观测性<br/>三大支柱))
+    Metrics[指标 Metrics]
+      Prometheus[Prometheus 采集/存储/查询]
+      Grafana[Grafana 可视化]
+      GoldenSignals[四大黄金信号]
+        Latency[Latency 延迟]
+        Traffic[Traffic 流量]
+        Errors[Errors 错误]
+        Saturation[Saturation 饱和度]
+      USE[USE 方法]
+        Utilization[利用率]
+        Saturation2[饱和度]
+        Errors2[错误]
+      RED[RED 方法]
+        Rate[请求速率]
+        Errors3[错误率]
+        Duration[请求时长]
+    Logging[日志 Logging]
+      EFK[EFK Stack]
+        Elasticsearch
+        Fluentd
+        Kibana
+      ELK[ELK Stack]
+        Elasticsearch2[Elasticsearch]
+        Logstash
+        Kibana2[Kibana]
+      Loki[Grafana Loki]
+      Levels[日志级别]
+        ERROR
+        WARN
+        INFO
+        DEBUG
+        TRACE
+    Tracing[追踪 Tracing]
+      Jaeger[Jaeger]
+      Zipkin[Zipkin]
+      OpenTelemetry[OpenTelemetry 统一标准]
+      Distributed[分布式追踪]
+        Trace[Trace]
+        Span[Span]
+        Context[Context Propagation]
 ```
 
 ### 9.2 核心监控指标

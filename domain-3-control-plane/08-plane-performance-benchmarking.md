@@ -1733,3 +1733,6 @@ performance_test_checklist:
 ```
 
 通过建立完善的性能基准测试体系，可以确保Kubernetes控制平面在各种负载条件下都能提供稳定、高效的服务，为业务系统的可靠运行奠定坚实基础。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

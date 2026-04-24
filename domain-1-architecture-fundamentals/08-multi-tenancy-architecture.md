@@ -1,4 +1,4 @@
-# 19 - 多租户管理表
+# 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 
@@ -289,12 +289,6 @@ roleRef:
 | **监控隔离** | 租户独立Dashboard | P2 |
 | **日志隔离** | 租户独立日志存储 | P2 |
 
-# 19 - 多租户管理表
-
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
-
-(保持原有内容基础上补充)
-
 ## 多租户成本分摊
 
 ### Kubecost集成
@@ -390,4 +384,4 @@ roleRef:
 
 ---
 
-**表格维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com)
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

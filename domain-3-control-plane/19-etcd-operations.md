@@ -388,4 +388,114 @@ groups:
 
 ---
 
+## 日常运维操作手册
+
+### 集群成员管理
+
+```bash
+# 查看成员列表
+etcdctl member list -w table
+
+# 添加新成员 (扩容)
+etcdctl member add etcd-3 --peer-urls=https://10.0.0.3:2380
+
+# 移除成员 (缩容)
+etcdctl member remove <member-id>
+
+# 更新成员地址
+etcdctl member update <member-id> --peer-urls=https://10.0.0.3:2380
+```
+
+### 数据备份与恢复
+
+```bash
+# 创建快照 (在线备份)
+etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db
+
+# 验证快照完整性
+etcdctl snapshot status /backup/etcd-xxx.db -w table
+
+# 从快照恢复 (到新目录)
+etcdctl snapshot restore /backup/etcd-xxx.db \
+  --data-dir=/var/lib/etcd-new \
+  --name=etcd-1 \
+  --initial-cluster="etcd-1=https://10.0.0.1:2380,etcd-2=https://10.0.0.2:2380,etcd-3=https://10.0.0.3:2380" \
+  --initial-cluster-token=etcd-cluster-1 \
+  --initial-advertise-peer-urls=https://10.0.0.1:2380
+```
+
+### 数据维护
+
+```bash
+# 手动压缩历史版本 (保留最近1小时)
+etcdctl compact $(etcdctl get "" --prefix --keys-only | head -1 | awk '{print $1}')
+
+# 碎片整理 (释放空间，需在低峰期执行)
+etcdctl defrag --cluster
+
+# 查看告警
+etcdctl alarm list
+
+# 解除空间不足告警
+etcdctl alarm disarm
+
+# 查看数据库大小
+etcdctl endpoint status --cluster -w table | awk '{print $1, $6}'
+```
+
+### 故障排查场景
+
+| 场景 | 现象 | 排查命令 | 处理措施 |
+|-----|------|---------|---------|
+| **Leader 选举频繁** | 集群不稳定 | `etcdctl endpoint status --cluster` | 检查网络延迟、磁盘IO |
+| **空间不足** | `mvcc: database space exceeded` | `etcdctl alarm list` | 压缩+碎片整理+扩容 |
+| **成员不一致** | 数据不同步 | `etcdctl endpoint status` | 移除并重新添加成员 |
+| **连接拒绝** | `connection refused` | `netstat -tlnp \| grep 2379` | 检查证书、防火墙、服务状态 |
+| **慢查询** | API Server 响应慢 | `etcdctl check perf` | 优化磁盘、调整 heartbeat-interval |
+
+### 性能测试
+
+```bash
+# 写入性能测试
+etcdctl check perf
+
+# 指定负载测试
+etcdctl check perf --load="s"
+
+# 数据一致性检查
+etcdctl check datascale
+```
+
+### Kubernetes 集成运维
+
+```bash
+# 查看 etcd 中所有 K8s 键前缀
+etcdctl get /registry --prefix --keys-only --limit 10
+
+# 查看特定资源 (如所有 namespace)
+etcdctl get /registry/namespaces --prefix --keys-only
+
+# 查看特定 Pod
+etcdctl get /registry/pods/default/nginx
+
+# 统计 key 数量
+etcdctl get "" --prefix --keys-only | wc -l
+
+# 查找孤儿 Lease
+etcdctl get /registry/leases --prefix --keys-only
+```
+
+### 安全配置检查清单
+
+| 检查项 | 命令 | 预期结果 |
+|--------|------|---------|
+| TLS 启用 | `etcdctl endpoint health` | 使用 HTTPS |
+| 客户端认证 | `cat /etc/etcd/pki/client.crt` | 证书有效 |
+| 对等节点认证 | `cat /etc/etcd/pki/peer.crt` | 证书有效 |
+| 自动压缩 | `--auto-compaction-retention=1h` | 已配置 |
+| 配额限制 | `--quota-backend-bytes` | 已设置 |
+| 审计日志 | 日志文件存在 | 启用状态变更记录 |
+
+---
+
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

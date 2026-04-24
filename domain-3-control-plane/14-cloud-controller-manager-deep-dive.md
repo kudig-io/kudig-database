@@ -2123,3 +2123,7 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 ---
 
 > **文档版本**: v2.0 | **维护者**: Platform Team | **审核日期**: 2026-01
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

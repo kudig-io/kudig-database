@@ -197,8 +197,8 @@ spec:
             summary: "etcd领导者频繁变更"
             description: "过去1小时领导者变更了 {{ $value }} 次"
 
-        # 磁盘空间
-        - alert: EtcdDiskSpaceLow
+        # 磁盘IO延迟
+        - alert: EtcdDiskIOHigh
           expr: etcd_disk_backend_commit_duration_seconds > 1
           for: 5m
           labels:
@@ -493,12 +493,25 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout
 2. **参数调优**：根据负载调整心跳和选举超时
 3. **压缩策略**：定期自动压缩，控制数据库大小
 4. **资源限制**：合理设置CPU和内存限制
-5. **网络优化**：就近部署，减少网络延迟
-| 3. 请求投票 | 向其他节点发送RequestVote |
-| 4. 收集选票 | 等待多数派响应 |
-| 5a. 当选 | 获得多数票,成为Leader |
-| 5b. 落选 | 收到更高term,退回Follower |
-| 5c. 平局 | 超时重新选举 |
+ 5. **网络优化**：就近部署，减少网络延迟
+
+---
+
+> **交叉引用**：etcd 的详细操作实践（成员管理、备份恢复、性能调优）请参考 [Domain-3: etcd 深度解析](../domain-3-control-plane/11-etcd-deep-dive.md) 和 [Domain-3: etcd 运维操作](../domain-3-control-plane/19-etcd-operations.md)。
+
+---
+
+## Raft 选举流程
+
+| 步骤 | 操作 | 说明 |
+|-----|------|------|
+| 1 | Follower超时 | 心跳超时后转为Candidate |
+| 2 | 自增term | 当前term+1,投票给自己 |
+| 3 | 请求投票 | 向其他节点发送RequestVote |
+| 4 | 收集选票 | 等待多数派响应 |
+| 5a | 当选 | 获得多数票,成为Leader |
+| 5b | 落选 | 收到更高term,退回Follower |
+| 5c | 平局 | 超时重新选举 |
 
 ## Raft日志复制
 

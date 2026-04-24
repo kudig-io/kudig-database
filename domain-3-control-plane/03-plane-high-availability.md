@@ -941,3 +941,6 @@ echo "✓ All tests completed successfully"
 ```
 
 通过实施这些高可用部署模式和最佳实践，可以显著提升Kubernetes控制平面的可靠性和稳定性，确保生产环境的持续可用性。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

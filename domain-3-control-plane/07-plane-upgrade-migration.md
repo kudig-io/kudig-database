@@ -671,3 +671,6 @@ upgrade_validation_checklist:
 | 大型(200+节点) | 计划性停机 | 4-8小时 |
 
 通过遵循这些升级和迁移策略，可以最大程度降低升级风险，确保Kubernetes集群的平稳演进。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

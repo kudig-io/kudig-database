@@ -1985,3 +1985,6 @@ done
 ```
 
 这份灾备方案提供了完整的备份恢复策略，包括etcd备份、配置管理、证书保护、存储卷快照等各个方面，并配有详细的演练流程和监控告警配置，确保在灾难发生时能够快速有效地恢复Kubernetes控制平面。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

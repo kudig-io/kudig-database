@@ -19,6 +19,8 @@
 | **日志和监控** | Logging/Metrics | 容器日志收集、暴露指标 |
 | **设备插件** | Device Plugins | GPU等特殊硬件资源管理 |
 | **镜像管理** | Image Management | 镜像拉取、清理 |
+| **静态Pod管理** | Static Pods | 通过manifest目录管理 |
+| **拓扑管理** | Topology Manager | NUMA感知资源协调 |
 
 ### 1.2 整体架构
 
@@ -781,6 +783,384 @@ sysctl -p
 
 ---
 
+## 11. 静态 Pod (Static Pods)
+
+### 11.1 核心概念
+
+静态 Pod 是由 **kubelet 直接管理**的 Pod，**不经过 API Server**，通过本地 manifest 目录中的 YAML/JSON 文件创建。每个节点上的 kubelet 独立监视其 manifest 目录，根据文件变化创建或删除对应的 Pod。
+
+| 特性 | 说明 |
+|:---|:---|
+| **管理方式** | kubelet 直接管理，无需 API Server |
+| **生命周期** | 删除 manifest 文件即删除 Pod |
+| **可见性** | 通过 Mirror Pod 同步到 API Server（只读） |
+| **调度** | 绑定到特定节点，不可调度 |
+| **控制器** | 无控制器，kubelet 是唯一的控制者 |
+
+### 11.2 管理流程
+
+```
+/etc/kubernetes/manifests/
+        │
+        ▼
+┌─────────────────────────────────────┐
+│            kubelet                   │
+│  ┌───────────────────────────────┐  │
+│  │   File Check (默认 20s)       │  │
+│  │   读取 manifest 目录变化      │  │
+│  └───────────────────────────────┘  │
+│                 │                    │
+│                 ▼                    │
+│  ┌───────────────────────────────┐  │
+│  │   SyncPod (静态 Pod)          │  │
+│  │   创建/更新/删除容器          │  │
+│  └───────────────────────────────┘  │
+│                 │                    │
+│                 ▼                    │
+│  ┌───────────────────────────────┐  │
+│  │   Mirror Pod 同步             │  │
+│  │   创建只读副本到 API Server   │  │
+│  └───────────────────────────────┘  │
+└─────────────────────────────────────┘
+```
+
+### 11.3 关键配置参数
+
+| 参数 | 配置方式 | 说明 |
+|:---|:---|:---|
+| `--pod-manifest-path` | 命令行 | 静态 Pod manifest 目录路径 |
+| `staticPodPath` | KubeletConfiguration | 配置文件中的等效参数 |
+| `--file-check-frequency` | 命令行 | 静态 Pod 检查频率（默认 20s） |
+
+```yaml
+# KubeletConfiguration
+staticPodPath: "/etc/kubernetes/manifests"
+```
+
+### 11.4 示例 Manifest（kube-apiserver 静态 Pod）
+
+```yaml
+# /etc/kubernetes/manifests/kube-apiserver.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+  labels:
+    component: kube-apiserver
+    tier: control-plane
+spec:
+  hostNetwork: true
+  priorityClassName: system-node-critical
+  containers:
+  - name: kube-apiserver
+    image: registry.k8s.io/kube-apiserver:v1.29.0
+    command:
+    - kube-apiserver
+    - --advertise-address=192.168.1.10
+    - --allow-privileged=true
+    - --authorization-mode=Node,RBAC
+    - --client-ca-file=/etc/kubernetes/pki/ca.crt
+    - --etcd-servers=https://127.0.0.1:2379
+    - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
+    - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt
+    - --etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key
+    - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
+    - --tls-private-key-file=/etc/kubernetes/pki/apiserver.key
+    - --kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt
+    - --kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key
+    - --service-account-issuer=https://kubernetes.default.svc.cluster.local
+    - --service-account-key-file=/etc/kubernetes/pki/sa.pub
+    - --service-account-signing-key-file=/etc/kubernetes/pki/sa.key
+    - --service-cluster-ip-range=10.96.0.0/12
+    - --secure-port=6443
+    volumeMounts:
+    - mountPath: /etc/kubernetes/pki
+      name: k8s-certs
+      readOnly: true
+    - mountPath: /etc/ssl/certs
+      name: ca-certs
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki
+      type: DirectoryOrCreate
+    name: k8s-certs
+  - hostPath:
+      path: /etc/ssl/certs
+      type: DirectoryOrCreate
+    name: ca-certs
+```
+
+### 11.5 镜像 Pod (Mirror Pod)
+
+当 kubelet 创建静态 Pod 后，会自动在 API Server 中创建一个对应的 **Mirror Pod**，使静态 Pod 可以被 `kubectl` 查看。
+
+| 特性 | 说明 |
+|:---|:---|
+| **命名规则** | 静态 Pod 名称后缀为 `-<node-name>` |
+| **只读性** | 通过 API Server 无法修改或删除（`kubectl delete` 无效） |
+| **删除方式** | 只能删除节点上的 manifest 文件 |
+| **状态同步** | kubelet 将容器状态同步到 Mirror Pod |
+
+```bash
+# 查看静态 Pod 的 Mirror Pod
+kubectl get pods -n kube-system
+# NAME                               READY   STATUS
+# kube-apiserver-master-1            1/1     Running    <- 镜像 Pod
+# kube-controller-manager-master-1   1/1     Running
+# kube-scheduler-master-1            1/1     Running
+
+# 尝试删除会提示无法删除（或自动重建）
+kubectl delete pod kube-apiserver-master-1 -n kube-system
+```
+
+### 11.6 与 DaemonSet 的区别
+
+| 对比项 | 静态 Pod (Static Pod) | DaemonSet |
+|:---|:---|:---|
+| **控制器** | kubelet 直接管理 | DaemonSet Controller |
+| **API Server** | 不依赖（创建时不经过） | 必须经过 API Server |
+| **调度** | 绑定到特定节点 | 由调度器分配到所有/指定节点 |
+| **更新方式** | 手动修改 manifest 文件 | `kubectl apply` 或 RollingUpdate |
+| **副本管理** | 每个节点独立管理 | 控制器确保副本数 |
+| **回滚** | 手动备份/恢复文件 | 支持 `kubectl rollout undo` |
+| **健康检查** | kubelet 探针 | kubelet 探针 + 控制器 |
+| **适用场景** | 控制平面组件、节点级服务 | 集群级守护进程（日志、监控） |
+
+### 11.7 使用场景
+
+| 场景 | 说明 |
+|:---|:---|
+| **控制平面自托管** | kubeadm 使用静态 Pod 部署 kube-apiserver、kube-controller-manager、kube-scheduler |
+| **节点级守护服务** | 需要在 kubelet 启动前运行的关键服务 |
+| **网络插件初始化** | 某些 CNI 插件使用静态 Pod 确保网络就绪 |
+| **单节点集群** | minikube、kind 等使用静态 Pod 简化部署 |
+
+---
+
+## 12. Topology Manager
+
+### 12.1 核心概念
+
+Topology Manager 是 kubelet 的一个 **NUMA 感知资源协调组件**，负责协调 CPU Manager、Memory Manager 和设备插件（Device Plugin）之间的资源分配决策，确保 Pod 的所有资源（CPU、内存、GPU 等）分配在同一个 NUMA 节点上，从而优化性能。
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        kubelet                               │
+│                                                              │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│   │ CPU Manager │  │Memory Manager│  │  Device Plugin      │ │
+│   │  (static/   │  │  (None/      │  │  Manager            │ │
+│   │   none)     │  │   Static)    │  │                     │ │
+│   └──────┬──────┘  └──────┬──────┘  └──────────┬──────────┘ │
+│          │                │                      │            │
+│          └────────────────┼──────────────────────┘            │
+│                           ▼                                  │
+│              ┌─────────────────────────┐                     │
+│              │    Topology Manager     │                     │
+│              │  (none/best-effort/     │                     │
+│              │   restricted/           │                     │
+│              │   single-numa-node)     │                     │
+│              └───────────┬─────────────┘                     │
+│                          │                                   │
+│                          ▼                                   │
+│              ┌─────────────────────────┐                     │
+│              │   合并 NUMA 亲和性提示   │                     │
+│              │   决定最优 NUMA 分配     │                     │
+│              └─────────────────────────┘                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 12.2 策略对比
+
+| 策略 | 说明 | NUMA 亲和性要求 | 资源分配失败行为 |
+|:---|:---|:---|:---|
+| **none** | 禁用 Topology Manager，各管理器独立工作 | 无要求 | 从不失败 |
+| **best-effort** | 尝试按 NUMA 亲和性分配，但不强制 | 尽量满足 | 允许跨 NUMA |
+| **restricted** | 强制按 NUMA 亲和性分配，不满足则拒绝 | 强制满足 | Pod 进入 Terminated |
+| **single-numa-node** | 所有资源必须在单个 NUMA 节点上 | 最严格 | Pod 进入 Terminated |
+
+### 12.3 KubeletConfiguration 配置示例
+
+```yaml
+# /var/lib/kubelet/config.yaml
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+
+# 必须同时启用相关管理器
+cpuManagerPolicy: "static"           # 必须设置为 static
+memoryManagerPolicy: "Static"        # 启用 Memory Manager
+topologyManagerPolicy: "restricted"  # 或 best-effort / single-numa-node
+topologyManagerScope: "container"    # container / pod
+
+# Memory Manager 预留配置 (NUMA 节点内存预留)
+reservedMemory:
+  - numaNode: 0
+    limits:
+      memory: 1Gi
+  - numaNode: 1
+    limits:
+      memory: 1Gi
+
+# 特性门控
+featureGates:
+  CPUManager: true
+  MemoryManager: true
+  TopologyManager: true
+```
+
+### 12.4 与 CPU Manager / Memory Manager 的交互
+
+| 管理器 | 配置要求 | 向 Topology Manager 提供 |
+|:---|:---|:---|
+| **CPU Manager** | `cpuManagerPolicy: static` | CPU 亲和性提示 (Affinity Hints) |
+| **Memory Manager** | `memoryManagerPolicy: Static` | 内存 NUMA 亲和性提示 |
+| **Device Plugin** | 设备插件实现 `Topology` 接口 | 设备 NUMA 亲和性提示 |
+
+```yaml
+# 使用 Topology Manager 的 Pod 示例
+apiVersion: v1
+kind: Pod
+metadata:
+  name: numa-aware-pod
+spec:
+  containers:
+  - name: app
+    image: my-app:latest
+    resources:
+      limits:
+        cpu: "4"
+        memory: "8Gi"
+        nvidia.com/gpu: "1"    # GPU 设备
+      requests:
+        cpu: "4"
+        memory: "8Gi"
+        nvidia.com/gpu: "1"
+    # 必须设置 Guaranteed QoS (limits = requests)
+```
+
+> **注意**：Pod 必须是 **Guaranteed QoS**（所有容器的 limits = requests，且只设置 CPU/Memory），Topology Manager 才能生效。
+
+### 12.5 适用场景
+
+| 场景 | 说明 |
+|:---|:---|
+| **AI/ML GPU 训练** | 确保 GPU、CPU、内存处于同一 NUMA 节点，减少跨 NUMA 访问延迟 |
+| **HPC 高性能计算** | MPI 等应用对 NUMA 亲和性敏感 |
+| **低延迟应用** | 金融交易、实时游戏等对延迟要求严格的场景 |
+| **DPDK/网络加速** | 网卡与 CPU 内存的 NUMA 对齐 |
+
+---
+
+## 13. Memory QoS (cgroup v2)
+
+### 13.1 核心概念
+
+Memory QoS 是 Kubernetes 利用 **cgroup v2** 的 `memory.min` 和 `memory.high` 机制实现的 Pod 内存服务质量保障。通过为不同 QoS 类别的 Pod 设置不同的 cgroup v2 内存参数，确保高优先级 Pod 获得更稳定的内存资源，减少被系统回收（reclaim）的概率。
+
+| cgroup v2 参数 | 作用 | 对应 K8s 概念 |
+|:---|:---|:---|
+| **memory.min** | 内存硬保护，系统不会回收这部分内存 | 预留/保证内存 |
+| **memory.high** | 内存软限制，超过后内核开始节流（throttle） | 限制内存突发 |
+| **memory.max** | 内存硬限制，超过后触发 OOM Kill | limits |
+
+### 13.2 K8s Memory QoS 分类与 cgroup v2 配置
+
+| QoS 类别 | Pod 条件 | memory.min | memory.high | memory.max |
+|:---|:---|:---|:---|:---|
+| **Guaranteed** | limits = requests，且只设 CPU/Memory | requests 值 | limits 值 | limits 值 |
+| **Burstable** | requests < limits 或部分资源设置 | requests 值 | limits 值 | limits 值 |
+| **BestEffort** | 未设置 requests 和 limits | 0 | 节点可分配内存 | 无限制 |
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    cgroup v2 内存层级                         │
+│                                                              │
+│   ┌────────────────────────────────────────────────────┐    │
+│   │              kubepods (Pod 总限制)                  │    │
+│   │                                                      │    │
+│   │   ┌─────────────────┐  ┌──────────────────────┐    │    │
+│   │   │ Guaranteed Pod  │  │   Burstable Pod      │    │    │
+│   │   │ memory.min=X    │  │   memory.min=Y       │    │    │
+│   │   │ memory.high=X   │  │   memory.high=Z      │    │    │
+│   │   │ memory.max=X    │  │   memory.max=Z       │    │    │
+│   │   └─────────────────┘  └──────────────────────┘    │    │
+│   │                                                      │    │
+│   │   ┌────────────────────────────────────────────┐    │    │
+│   │   │         BestEffort Pod                      │    │    │
+│   │   │         memory.min=0                        │    │    │
+│   │   │         memory.high=node_allocatable        │    │    │
+│   │   └────────────────────────────────────────────┘    │    │
+│   └────────────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 13.3 KubeletConfiguration 启用配置
+
+```yaml
+# /var/lib/kubelet/config.yaml
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+
+# 启用 Memory QoS (cgroup v2 必需)
+memoryThrottlingFactor: 0.8   # memory.high = limits * 0.8
+                              # 取值范围: 0-1，默认 0.8
+
+# 必须使用 cgroup v2
+cgroupDriver: "systemd"
+
+# 特性门控 (K8s 1.22+ 默认启用)
+featureGates:
+  MemoryQoS: true
+```
+
+> `memoryThrottlingFactor` 控制 `memory.high` 的计算：
+> - `memory.high = limits * memoryThrottlingFactor`
+> - 当 Pod 内存使用超过 `memory.high` 时，内核会开始对内存分配进行节流（throttle），而不是直接 OOM Kill
+
+### 13.4 与驱逐机制的关系
+
+| 机制 | 触发条件 | 行为 |
+|:---|:---|:---|
+| **Memory QoS (memory.high)** | 内存使用超过 `limits * factor` | 内核节流内存分配，进程变慢 |
+| **软驱逐 (eviction-soft)** | 节点内存压力达到阈值 | 优雅终止低优先级 Pod |
+| **硬驱逐 (eviction-hard)** | 节点内存严重压力 | 立即强制驱逐 Pod |
+| **OOM Kill** | 内存使用超过 `memory.max` (limits) | 触发 cgroup OOM，杀死容器 |
+
+```
+内存使用增长路径:
+
+0% ────────────────────────────────────────────────────> 100%
+│          │                    │              │
+│          ▼                    ▼              ▼
+│      memory.high       eviction-soft   memory.max / eviction-hard
+│      (开始节流)         (开始驱逐)      (强制 OOM Kill)
+│
+└─ Memory QoS 提供更早的干预，避免直接 OOM
+```
+
+### 13.5 适用版本与前提
+
+| 要求 | 说明 |
+|:---|:---|
+| **Kubernetes** | 1.22+（Alpha），1.27+（Beta，默认启用） |
+| **cgroup** | 必须启用 cgroup v2 |
+| **容器运行时** | containerd 1.4+ / CRI-O 1.20+ |
+| **操作系统** | Linux 内核 5.2+（推荐 5.8+） |
+
+```bash
+# 检查系统是否使用 cgroup v2
+stat -fc %T /sys/fs/cgroup/
+# 输出: cgroup2fs
+
+# 检查 Memory QoS 是否生效
+cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.high
+cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
+```
+
+---
+
 ## 附录: kubelet API 端点
 
 | 端点 | 端口 | 说明 |
@@ -799,3 +1179,7 @@ sysctl -p
 | `/attach` | 10250 | 容器attach |
 | `/portForward` | 10250 | 端口转发 |
 | `/containerLogs` | 10250 | 容器日志 |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

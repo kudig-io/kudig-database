@@ -798,3 +798,6 @@ esac
 ---
 
 通过以上专业的多云混合部署架构文档，我们提供了从架构设计到具体实施的完整指南，涵盖了企业在多云环境下所需的关键技术和最佳实践。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

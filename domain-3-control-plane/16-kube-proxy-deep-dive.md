@@ -780,3 +780,7 @@ cilium status
 | **规则复杂度** | O(n) iptables | O(1) eBPF |
 | **功能** | 基础 | 高级(L7策略等) |
 | **可观测性** | 基础 | 深度(Hubble) |
+
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

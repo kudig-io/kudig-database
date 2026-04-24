@@ -1,13 +1,13 @@
 # Domain-3: Kubernetes控制平面
 
-> **文档数量**: 28 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.25 - 1.32+
-> **专家审查状态**: ✅ 已完成全域深度技术审计 (2026-02)
+> **文档数量**: 32 篇 | **最后更新**: 2026-04 | **适用版本**: Kubernetes 1.25 - 1.32+
+> **专家审查状态**: ✅ 已完成全域深度技术审计 (2026-04)
 
 ---
 
 ## 概述
 
-Kubernetes 控制平面域深入解析 API Server、etcd、Scheduler、Controller Manager 等核心组件的详细配置和高级特性。本域文档已根据 K8s v1.30+ 特性进行全面补强，包括 **PSA (Pod Security Admission)**、**CEL (Common Expression Language)** 准入策略以及 **APF (API Priority and Fairness)** 增强机制。
+Kubernetes 控制平面域深入解析 API Server、etcd、Scheduler、Controller Manager 等核心组件的详细配置和高级特性。本域文档已根据 K8s v1.30+ 特性进行全面补强，包括 **PSA (Pod Security Admission)**、**CEL (Common Expression Language)** 准入策略、**APF (API Priority and Fairness)** 增强机制、**Structured Authentication Configuration**、**Dynamic Resource Allocation (DRA)** 以及 **In-Place Pod Resize** 等前沿特性。
 
 **核心价值**：
 - 🔧 **组件配置**：详细配置参数和最佳实践
@@ -71,6 +71,18 @@ Kubernetes 控制平面域深入解析 API Server、etcd、Scheduler、Controlle
 | 27 | [认证授权深度解析](./27-authz-authn-deep-dive.md) | 认证机制、RBAC、准入控制、安全配置 | ⭐⭐⭐⭐⭐ |
 | 28 | [API扩展深度解析](./28-api-extension-deep-dive.md) | CRD、API聚合、Operator模式、扩展开发 | ⭐⭐⭐⭐⭐ |
 
+### K8s 1.30+ 前沿特性 (29-30)
+| # | 文档 | 关键内容 | 重要程度 |
+|:---:|:---|:---|:---|
+| 29 | [原地Pod资源调整](./29-in-place-pod-resize.md) | 在线调整CPU/内存、resizePolicy、与VPA集成 | ⭐⭐⭐⭐ |
+| 30 | [动态资源分配DRA](./30-dynamic-resource-allocation.md) | 下一代硬件资源分配、ResourceClaim、GPU共享 | ⭐⭐⭐⭐ |
+
+### 运维工具与集群管理 (31-32)
+| # | 文档 | 关键内容 | 重要程度 |
+|:---:|:---|:---|:---|
+| 31 | [kubectl完全命令参考](./31-kubectl-complete-reference.md) | 完整kubectl命令族、生产速查表 | ⭐⭐⭐⭐⭐ |
+| 32 | [kubeadm集群生命周期](./32-kubeadm-cluster-lifecycle.md) | 集群初始化、升级、证书管理、HA | ⭐⭐⭐⭐⭐ |
+
 ---
 
 ## 学习路径建议
@@ -94,6 +106,14 @@ Kubernetes 控制平面域深入解析 API Server、etcd、Scheduler、Controlle
 ### ⚡ 性能优化路径
 **08 → 17 → 18 → 19**  
 专注控制平面性能调优和高级配置优化
+
+### 🚀 前沿特性路径
+**29 → 30**  
+掌握 K8s 1.30+ 最新资源调度与分配特性
+
+### 🔧 运维工具路径
+**31 → 32**  
+掌握 kubectl 完整命令参考和 kubeadm 集群生命周期管理
 
 ---
 

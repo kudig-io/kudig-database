@@ -1568,13 +1568,13 @@ resources:
 
 | 主题 | 文档编号 | 说明 |
 |------|---------|------|
-| etcd详解 | [35-etcd-deep-dive](./35-etcd-deep-dive.md) | Raft共识、MVCC、备份恢复 |
-| API Server详解 | [36-kube-apiserver-deep-dive](./36-kube-apiserver-deep-dive.md) | 认证授权、APF限流 |
-| Controller Manager详解 | [37-kube-controller-manager-deep-dive](./37-kube-controller-manager-deep-dive.md) | 40+控制器详解 |
-| CCM详解 | [38-cloud-controller-manager-deep-dive](./38-cloud-controller-manager-deep-dive.md) | 云厂商集成 |
-| Kubelet详解 | [39-kubelet-deep-dive](./39-kubelet-deep-dive.md) | Pod生命周期、PLEG |
-| kube-proxy详解 | [40-kube-proxy-deep-dive](./40-kube-proxy-deep-dive.md) | iptables/IPVS/eBPF |
-| Scheduler详解 | [164-kube-scheduler-deep-dive](./164-kube-scheduler-deep-dive.md) | 调度框架、插件 |
+| etcd详解 | [Domain-3: etcd运维操作](../domain-3-control-plane/19-etcd-operations.md) | Raft共识、MVCC、备份恢复 |
+| API Server详解 | [Domain-3: API Server深度解析](../domain-3-control-plane/12-apiserver-deep-dive.md) | 认证授权、APF限流 |
+| Controller Manager详解 | [Domain-3: Controller Manager](../domain-3-control-plane/13-controller-manager-deep-dive.md) | 40+控制器详解 |
+| CCM详解 | [Domain-3: Cloud Controller Manager](../domain-3-control-plane/14-cloud-controller-manager.md) | 云厂商集成 |
+| Kubelet详解 | [Domain-3: Kubelet深度解析](../domain-3-control-plane/15-kubelet-deep-dive.md) | Pod生命周期、PLEG |
+| kube-proxy详解 | [Domain-3: kube-proxy](../domain-3-control-plane/16-kube-proxy-deep-dive.md) | iptables/IPVS/eBPF |
+| Scheduler详解 | [Domain-3: Scheduler深度解析](../domain-3-control-plane/11-scheduler-deep-dive.md) | 调度框架、插件 |
 
 ---
 

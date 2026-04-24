@@ -1017,7 +1017,7 @@ jobs:
         
     - name: Extract version
       id: version
-      run: echo "::set-output name=version::$(git describe --tags --always)"
+      run: echo "version=$(git describe --tags --always)" >> "$GITHUB_OUTPUT"
       
     - name: Build and push
       uses: docker/build-push-action@v3
@@ -1094,3 +1094,4 @@ func (r *MySQLClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 ```
 
 ---
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

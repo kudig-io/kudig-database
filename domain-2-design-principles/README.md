@@ -73,8 +73,11 @@
 ## 相关领域
 
 - **[Domain-1: 架构基础](../domain-1-architecture-fundamentals)** - 理解 K8s 的物理与逻辑组件。
-- **[Domain-3: 控制平面](../domain-3-control-plane)** - 深入 APIServer、Scheduler、Controller-Manager 细节。
+- **[Domain-3: 控制平面](../domain-3-control-plane)** - 深入 APIServer、Scheduler、Controller-Manager、etcd 细节。
+- **[Domain-5: 网络](../domain-5-networking)** - 网络模型与 CNI 实践，与服务网格（14 篇）强相关。
+- **[Domain-7: 安全](../domain-7-security)** - 安全策略实践，与安全设计模式（17 篇）和准入控制（13 篇）强相关。
 - **[Domain-8: 可观测性](../domain-8-observability)** - 具体的监控、日志与链路追踪实施。
+- **[Domain-10: 扩展](../domain-10-extensions)** - 扩展开发实践，与扩展性设计（11/12 篇）互补。
 
 ---
 

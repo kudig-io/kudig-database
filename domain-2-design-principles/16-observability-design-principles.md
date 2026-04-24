@@ -478,3 +478,6 @@ observability_culture:
 ## 总结
 
 可观测性是现代云原生系统的必备能力，需要从设计之初就考虑监控、日志、追踪的完整体系。通过建立标准化的可观测性架构和治理机制，可以显著提升系统的可靠性和运维效率，为业务稳定运行提供坚实保障。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

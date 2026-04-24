@@ -629,7 +629,7 @@ resources:
     - configmaps
     - pandas
     providers:
-    - aescbc:
+    - aesgcm:
         keys:
         - name: key1
           secret: <32-byte-base64-encoded-key>
@@ -1169,3 +1169,6 @@ verify_security_hardening() {
 ```
 
 通过实施这些安全加固措施，可以显著提升Kubernetes控制平面的安全性，有效防范各种安全威胁和攻击。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

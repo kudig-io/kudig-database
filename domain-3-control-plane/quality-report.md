@@ -2,9 +2,9 @@
 
 ## 📊 文档统计
 
-**总计文档数量**: 28篇技术文档 + 1个README = 29个文件
+**总计文档数量**: 32篇技术文档 + 1个README = 33个文件
 
-**文件命名规范**: ✅ 全部采用01-28连续编号格式
+**文件命名规范**: ✅ 全部采用01-32连续编号格式
 
 **文档完整性**: ✅ 覆盖控制平面所有核心领域
 
@@ -28,19 +28,19 @@
 
 ### 组件深度解析层 (11-16)
 - 11-etcd-deep-dive.md (828行)
-- 12-apiserver-deep-dive.md (850行)
-- 13-kube-controller-manager-deep-dive.md (675行)
+- 12-apiserver-deep-dive.md (1633行)
+- 13-kube-controller-manager-deep-dive.md (1202行)
 - 14-cloud-controller-manager-deep-dive.md (2453行)
-- 15-kubelet-deep-dive.md (799行)
+- 15-kubelet-deep-dive.md (1185行)
 - 16-kube-proxy-deep-dive.md (782行)
 
 ### 高级调优层 (17-19)
 - 17-apiserver-tuning.md (1153行)
 - 18-api-priority-fairness.md (687行)
-- 19-etcd-operations.md (390行)
+- 19-etcd-operations.md (500行)
 
 ### 容器技术层 (20-23)
-- 20-kube-scheduler-deep-dive.md (1910行)
+- 20-kube-scheduler-deep-dive.md (1977行)
 - 21-container-runtime-deep-dive.md (2125行)
 - 22-container-storage-deep-dive.md (2227行)
 - 23-container-network-deep-dive.md (1830行)
@@ -51,6 +51,12 @@
 - 26-gitops-automation-operations.md (1734行)
 - 27-authz-authn-deep-dive.md (688行)
 - 28-api-extension-deep-dive.md (998行)
+- 29-in-place-pod-resize.md (775行)
+- 30-dynamic-resource-allocation.md (951行)
+
+### 运维工具与集群管理层 (31-32)
+- 31-kubectl-complete-reference.md (1934行)
+- 32-kubeadm-cluster-lifecycle.md (2183行)
 
 ## 🎯 新增内容亮点
 
@@ -72,6 +78,44 @@
 - Operator模式深度实践
 - Webhook扩展机制详解
 - 扩展开发安全最佳实践
+
+**技术深度**: ★★★★★
+
+### 29-in-place-pod-resize.md (原地Pod资源调整)
+**内容特色**:
+- K8s 1.27+ 在线资源调整完整指南
+- resizePolicy 与容器状态转换详解
+- 与 VPA 集成的生产实践
+- 故障排查与限制条件速查
+
+**技术深度**: ★★★★
+
+### 30-dynamic-resource-allocation.md (动态资源分配DRA)
+**内容特色**:
+- 下一代硬件资源分配架构解析
+- ResourceClaim/ResourceClass 完整API指南
+- GPU MIG/MPS、FPGA、RDMA 多场景实践
+- Device Plugin 迁移路径与共存策略
+
+**技术深度**: ★★★★★
+
+### 31-kubectl-complete-reference.md (kubectl完全命令参考)
+**内容特色**:
+- 完整覆盖 kubectl 所有命令族和子命令
+- 生产环境常用命令速查表
+- 高级用法、输出格式化、资源筛选技巧
+- 插件生态和自定义配置指南
+- 多集群管理和上下文切换最佳实践
+
+**技术深度**: ★★★★★
+
+### 32-kubeadm-cluster-lifecycle.md (kubeadm集群生命周期)
+**内容特色**:
+- 集群初始化、加入节点的完整流程
+- 版本升级、证书轮换管理
+- 高可用(HA)控制平面部署
+- 生产环境配置模板和故障排查
+- etcd 外部集群和自定义 CA 实践
 
 **技术深度**: ★★★★★
 
@@ -99,17 +143,28 @@
 
 ## 📈 改进效果
 
-**文档数量增长**: 从26篇增加到28篇 (+7.7%)
+**文档数量增长**: 从26篇增加到32篇 (+23.1%)
 
-**内容覆盖面**: 
+**内容覆盖面**:
 - 新增认证授权专题 ✅
 - 新增API扩展开发专题 ✅
-- 补全了安全和扩展两大核心领域
+- 新增原地Pod资源调整专题 ✅
+- 新增动态资源分配DRA专题 ✅
+- 新增kubectl完整命令参考 ✅
+- 新增kubeadm集群生命周期 ✅
+- 补全kubelet静态Pod、Topology Manager、Memory QoS ✅
+- 补全API Server结构化认证配置 ✅
+- 补全准入控制插件完整列表 ✅
+- 补全控制器完整解析 ✅
+- 补全节点问题检测器NPD ✅
+- 补全Scheduler Pod Scheduling Readiness ✅
+- 补全etcd日常运维操作手册 ✅
 
 **技术深度提升**:
-- 增加了2篇高深度技术文档
-- 提供了完整的安全和扩展解决方案
+- 增加了6篇高深度技术文档
+- 提供了完整的安全、扩展、资源调度解决方案
 - 增强了企业级应用场景覆盖
+- 补全了K8s 1.30+前沿特性
 
 ## 🎯 学习路径优化
 
@@ -132,7 +187,7 @@
 **完整性**: ★★★★★ (全面覆盖)
 
 ---
-**报告生成时间**: 2026-02-09 | **检查人**: Kusheet Senior Technical Expert (AI)
+**报告生成时间**: 2026-04-23 | **检查人**: Kusheet Senior Technical Expert (AI)
 
 ## 专家评审总结 (Expert Review Summary)
 
@@ -141,3 +196,7 @@
 3. **性能调优**: 补充了 APF (API Priority and Fairness) 的借用机制 (Borrowing) 和 Seat 计算逻辑，适用于超大规模集群。
 4. **扩展开发**: 在 CRD 设计中引入了 `x-kubernetes-validations` (CEL)，降低了对准入 Webhook 的运维依赖。
 5. **生产就绪**: 所有文档均包含故障排查、监控指标和合规性清单，具备极高的实战指导意义。
+6. **资源调度革新**: 补充了 In-Place Pod Resize 和 Dynamic Resource Allocation (DRA) 的完整实践指南，覆盖下一代资源管理技术。
+7. **kubelet 增强**: 全面补全了 Static Pod、Topology Manager (NUMA感知) 和 Memory QoS (cgroup v2) 的深度解析。
+8. **运维工具完善**: 新增 kubectl 完全命令参考和 kubeadm 集群生命周期管理，填补了控制平面日常运维操作手册的空白。
+9. **控制器深度**: 全面扩充了 kube-controller-manager 所有控制器的详细解析，覆盖工作负载、网络、存储、节点、安全、垃圾回收全领域。

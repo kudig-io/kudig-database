@@ -1909,3 +1909,6 @@ Level 5 - 自主运维 (Autonomous Operations)
 ```
 
 通过实施这套完整的监控和可观测性解决方案，您可以全面掌握Kubernetes控制平面的运行状态，快速发现和解决问题，确保系统的稳定性和可靠性。
+---
+
+**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
