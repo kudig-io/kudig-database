@@ -1,6 +1,6 @@
 # 03 - 功能和API表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
+> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [kubernetes.io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
 
 ## 核心工作负载API
 
@@ -82,22 +82,37 @@
 | **v1.25** | 移除PodSecurityPolicy | 安全策略 | 迁移到Pod Security Admission | 重新设计安全策略 |
 | **v1.26** | FlowSchema v1稳定 | API优先级 | 可选升级 | - |
 | **v1.29** | 移除flowcontrol.apiserver.k8s.io/v1beta2 | FlowSchema | 升级到v1 | kubectl convert |
+| **v1.29** | 弃用Node v1beta1 metrics | metrics | 升级到v1 | 更新监控查询 |
+| **v1.30** | 弃用in-tree storage drivers | 存储驱动 | 迁移到CSI | 安装CSI驱动 |
+| **v1.31** | 弃用kubelet --cloud-provider flag | kubelet配置 | 使用外部云控制器 | 更新kubelet配置 |
 | **v1.32** | 多个Beta API升级 | 多个 | 检查变更日志 | - |
+| **v1.33** | Sidecar Containers GA | Pod Spec | 无需操作(自动启用) | - |
 
 ## 功能门控(Feature Gates)状态
 
-| 功能名称 | 功能门控 | v1.25 | v1.26 | v1.27 | v1.28 | v1.29 | v1.30 | v1.31 | v1.32 | 说明 |
-|---------|---------|-------|-------|-------|-------|-------|-------|-------|-------|------|
-| **Pod Security Admission** | PodSecurity | GA | GA | GA | GA | GA | GA | GA | GA | PSP替代方案 |
-| **Ephemeral Containers** | EphemeralContainers | GA | GA | GA | GA | GA | GA | GA | GA | 调试容器 |
-| **Server-side Apply** | ServerSideApply | GA | GA | GA | GA | GA | GA | GA | GA | 声明式管理 |
-| **IPv6 DualStack** | IPv6DualStack | GA | GA | GA | GA | GA | GA | GA | GA | 双栈网络 |
-| **Graceful Node Shutdown** | GracefulNodeShutdown | Beta | GA | GA | GA | GA | GA | GA | GA | 优雅关机 |
-| **In-Place Pod Resize** | InPlacePodVerticalScaling | - | Alpha | Alpha | Alpha | Beta | Beta | Beta | GA | 就地调整资源 |
-| **Sidecar Containers** | SidecarContainers | - | - | Alpha | Beta | Beta | GA | GA | GA | Sidecar生命周期 |
-| **CEL Admission** | ValidatingAdmissionPolicy | - | Alpha | Beta | Beta | GA | GA | GA | GA | CEL验证策略 |
-| **User Namespaces** | UserNamespacesSupport | Alpha | Alpha | Beta | Beta | Beta | Beta | GA | GA | 用户命名空间 |
-| **Dynamic Resource Allocation** | DynamicResourceAllocation | Alpha | Alpha | Alpha | Beta | Beta | Beta | Beta | GA | GPU等设备分配 |
+| 功能名称 | 功能门控 | v1.29 | v1.30 | v1.31 | v1.32 | v1.33 | 说明 |
+|---------|---------|-------|-------|-------|-------|-------|------|
+| **Pod Security Admission** | PodSecurity | GA | GA | GA | GA | GA | PSP替代方案 |
+| **Ephemeral Containers** | EphemeralContainers | GA | GA | GA | GA | GA | 调试容器 |
+| **Server-side Apply** | ServerSideApply | GA | GA | GA | GA | GA | 声明式管理 |
+| **IPv6 DualStack** | IPv6DualStack | GA | GA | GA | GA | GA | 双栈网络 |
+| **Graceful Node Shutdown** | GracefulNodeShutdown | GA | GA | GA | GA | GA | 优雅关机 |
+| **Sidecar Containers** | SidecarContainers | Beta | GA | GA | GA | **GA** | Sidecar原生生命周期管理 |
+| **CEL Admission** | ValidatingAdmissionPolicy | Beta | **GA** | GA | GA | GA | CEL表达式验证策略 |
+| **User Namespaces** | UserNamespacesSupport | Beta | Beta | **GA** | GA | GA | 用户命名空间隔离 |
+| **Dynamic Resource Allocation** | DynamicResourceAllocation | Beta | Beta | Beta | **Beta** | **GA** | GPU/FPGA动态资源分配 |
+| **In-Place Pod Resize** | InPlacePodVerticalScaling | Beta | Beta | Beta | Beta | **Alpha** | 原地调整Pod资源(注意: v1.33仍为Alpha) |
+| **AppArmor Support** | AppArmor | - | - | **GA** | GA | GA | Linux AppArmor安全配置 |
+| **Pod Scheduling Readiness** | PodSchedulingReadiness | Beta | **GA** | GA | GA | GA | Pod调度门控 |
+| **Node Log Query** | NodeLogQuery | - | Alpha | Alpha | Alpha | Alpha | kubectl node日志查询 |
+| **nftables kube-proxy** | NFTablesProxyMode | - | - | Alpha | Alpha | **Beta** | nftables后端kube-proxy |
+| **PersistentVolume Last Phase** | PersistentVolumeLastPhaseTransitionTime | - | - | **GA** | GA | GA | PV最后阶段转换时间 |
+| **Parallel Image Pulls** | ParallelImagePulls | - | - | **默认启用** | 默认启用 | 默认启用 | kubelet并行拉取镜像 |
+| **DRA Pod Resources** | DRAControlPlaneController | - | - | - | **Beta** | **GA** | DRA控制平面 |
+| **TopologyManager Per Pod** | TopologyManagerPolicyOptions | - | - | - | **Beta** | **GA** | Pod级拓扑管理策略 |
+| **Scheduler Queueing Hints** | SchedulerQueueingHints | - | - | - | Alpha | **Beta** | 调度器队列提示优化 |
+| **Kubelet Resource Metrics** | KubeletResourceMetrics | - | - | - | - | **Beta** | kubelet资源指标端点 |
+| **Cross-Namespace References** | CrossNamespaceVolumeDataSource | - | - | - | - | **Alpha** | 跨命名空间存储引用 |
 
 ## API废弃时间线
 
@@ -132,7 +147,91 @@ kubectl convert -f old-deployment.yaml --output-version apps/v1
 
 ---
 
-**兼容性提示**: 升级前务必检查API版本兼容性，使用`kubectl api-versions`确认目标版本支持的API。
+## v1.29 - v1.33 版本关键特性速查
+
+### v1.29 (2023年12月)
+
+| 特性 | 状态 | 影响 | 操作 |
+|:---|:---|:---|:---|
+| **Sidecar 容器** | Beta (默认启用) | Pod 中 init 容器支持 `restartPolicy: Always` | 无需操作，自动可用 |
+| **ReadWriteOncePod** | GA | PVC 访问模式，确保单 Pod 独占读写 | 更新 StorageClass 可用 |
+| **KMS v2** | GA | etcd 加密性能提升 | 更新 KMS 配置 |
+| **Node Volume 健康监测** | GA | 自动检测节点存储健康 | 无需操作 |
+| **弃用 Node v1beta1 metrics** | 弃用 | 监控查询需更新 | 更新 Prometheus 规则 |
+| **弃用 in-tree cloud providers** | 弃用 | 需迁移外部云控制器 | 安装 CCM |
+
+### v1.30 (2024年4月)
+
+| 特性 | 状态 | 影响 | 操作 |
+|:---|:---|:---|:---|
+| **ValidatingAdmissionPolicy** | GA | CEL 表达式替代 Validating Webhook | 可迁移策略到原生 CEL |
+| **BoundServiceAccountToken** | GA | ServiceAccount Token 1 小时过期 | 无需操作，自动生效 |
+| **Pod Scheduling Readiness** | GA | PodScheduling Gates 稳定 | 无需操作 |
+| **弃用 in-tree storage drivers** | 弃用 | CSI 迁移完成 | 确认 CSI 驱动已安装 |
+| **禁止 anonymous→cluster-admin** | 安全加固 | 默认禁止匿名绑定 cluster-admin | 检查现有 RBAC |
+
+### v1.31 (2024年8月)
+
+| 特性 | 状态 | 影响 | 操作 |
+|:---|:---|:---|:---|
+| **AppArmor Support** | GA | Pod 安全上下文支持 AppArmorProfile | Linux 节点可用 |
+| **Parallel Image Pulls** | 默认启用 | kubelet 默认并行拉取镜像 | 无需操作 |
+| **PersistentVolume Last Phase** | GA | PV 记录最后状态转换时间 | 无需操作 |
+| **nftables kube-proxy** | Alpha | 新网络后端替代 iptables/ipvs | 实验性，暂不推荐生产 |
+| **OpenTelemetry Tracing** | GA | kubelet 支持 OTel 链路追踪 | 配置 OTel Collector |
+
+### v1.32 (2024年12月)
+
+| 特性 | 状态 | 影响 | 操作 |
+|:---|:---|:---|:---|
+| **DRA (Dynamic Resource Allocation)** | Beta | GPU/FPGA 动态资源分配 | 需启用 Feature Gate |
+| **TopologyManager Per Pod** | Beta | Pod 级 NUMA 拓扑策略 | 需启用 Feature Gate |
+| **Pod-level Resource Limits** | Alpha | Pod 级别资源限制 (非容器级) | 实验性 |
+| **多个 Beta API 升级** | 升级 | 检查变更日志 | 验证兼容性 |
+
+### v1.33 (2025年4月 - 最新)
+
+| 特性 | 状态 | 影响 | 操作 |
+|:---|:---|:---|:---|
+| **Sidecar 容器** | **GA** | 原生 Sidecar 生命周期管理 | **推荐生产使用** |
+| **Dynamic Resource Allocation** | **GA** | GPU/FPGA 动态资源分配稳定 | 需启用 Feature Gate |
+| **TopologyManager Per Pod** | **GA** | NUMA 拓扑策略稳定 | 需启用 Feature Gate |
+| **Scheduler Queueing Hints** | Beta | 调度器队列提示优化性能 | 需启用 Feature Gate |
+| **Kubelet Resource Metrics** | Beta | kubelet /metrics/resource 端点 | 无需操作 |
+| **In-Place Pod Vertical Scaling** | Alpha | 原地调整 Pod 资源 (无需重启) | 实验性 |
+| **Cross-Namespace References** | Alpha | PVC 跨命名空间引用数据源 | 实验性 |
+| **Windows HostProcess** | GA | Windows 容器 HostProcess 模式稳定 | Windows 节点可用 |
+| **PodIndexLabel** | GA | StatefulSet 自动生成 pod-index 标签 | 无需操作 |
+
+## 生产环境升级检查清单 (v1.29 → v1.33)
+
+```bash
+# 1. 检查已弃用 API 使用情况
+kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+
+# 2. 验证 CSI 驱动就绪 (v1.30+ in-tree 存储驱动弃用)
+kubectl get csidrivers
+
+# 3. 检查云控制器管理器 (CCM) 状态 (v1.31+ kubelet --cloud-provider 弃用)
+kubectl get pods -n kube-system | grep cloud-controller
+
+# 4. 验证 Sidecar 容器兼容性 (v1.33 GA)
+kubectl get pods -A -o yaml | grep -A2 "restartPolicy: Always"
+
+# 5. 检查 Feature Gate 状态
+kubectl get --raw /api/v1/nodes/NODE_NAME/proxy/configz | jq '.kubeletconfig.featureGates'
+
+# 6. 验证 API 版本兼容性
+kubectl api-versions | sort
+
+# 7. 检查 ValidatingAdmissionPolicy (v1.30 GA)
+kubectl get validatingadmissionpolicies
+
+# 8. 验证 Pod Security Admission 配置
+kubectl get ns -o json | jq '.items[].metadata.labels | keys[]' | grep pod-security
+```
+
+**兼容性提示**: 升级前务必检查API版本兼容性，使用`kubectl api-versions`确认目标版本支持的API。建议按照 v1.29 → v1.30 → v1.31 → v1.32 → v1.33 的渐进式升级路径。
 
 ---
 

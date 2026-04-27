@@ -1,6 +1,6 @@
 # Security Domain
 
-> **文档数量**:       21 篇 | **最后更新**: 2026-02 | **维护者**: Production Security Team
+> **文档数量**: 21 篇 | **最后更新**: 2026-04 | **维护者**: Production Security Team | **适用版本**: Kubernetes 1.25 - 1.33+
 
 ## 📚 学习路径与文档结构
 

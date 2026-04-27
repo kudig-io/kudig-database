@@ -1,6 +1,6 @@
 # Domain-1: Kubernetes架构基础
 
-> **文档数量**: 18 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+
+> **文档数量**: 25 篇 | **最后更新**: 2026-04-24 | **适用版本**: Kubernetes v1.29 - v1.33
 
 ---
 
@@ -51,6 +51,22 @@ Kubernetes架构基础域深入解析K8s核心架构设计原理，涵盖控制�
 | 16 | [故障排查指南](./16-troubleshooting-guide.md) | 架构级故障诊断逻辑、核心指标分析 | ⭐⭐⭐⭐⭐ |
 | 17 | [生产运维最佳实践](./17-production-operations-best-practices.md) | 备份恢复、健康巡检、容量规划 | ⭐⭐⭐⭐⭐ |
 | 18 | [升级与迁移策略](./18-upgrade-migration-strategy.md) | 蓝绿升级、跨云迁移、回滚自动化 | ⭐⭐⭐⭐⭐ |
+
+### K8s v1.29-v1.33 版本特性参考 (99-系列)
+| # | 文档 | 关键内容 | 重要程度 |
+|:---:|:---|:---|:---|
+| 99a | [v1.29-v1.33 特性深度指南](./99-kubernetes-v1.29-v1.33-features-guide.md) | 按版本详解核心特性与 YAML 示例 | ⭐⭐⭐⭐⭐ |
+| 99b | [核心组件新特性速查](./99-kubernetes-core-components-v1.29-v1.33-update.md) | 按 10 个组件速查新特性 | ⭐⭐⭐⭐⭐ |
+| 99c | [v1.33 升级实操指南](./99-kubernetes-v1.33-upgrade-guide.md) | 检查清单、升级脚本、回滚预案 | ⭐⭐⭐⭐⭐ |
+| 99d | [kubectl 新命令速查](./99-kubectl-v1.29-v1.33-new-commands-guide.md) | v1.29-v1.33 kubectl 新命令与用法 | ⭐⭐⭐⭐ |
+| 99e | [v1.33 生产最佳实践](./99-kubernetes-v1.33-production-best-practices.md) | Sidecar/CEL/DRA 生产落地决策树 | ⭐⭐⭐⭐⭐ |
+| 99f | [版本生命周期支持策略](./99-kubernetes-version-lifecycle-support-policy.md) | 版本支持周期、EOL 时间线 | ⭐⭐⭐⭐ |
+| 99g | [生态兼容性矩阵](./99-kubernetes-v1.33-ecosystem-compatibility-matrix.md) | 容器运行时/CNI/CSI/服务网格兼容表 | ⭐⭐⭐⭐⭐ |
+| 99h | [一页纸速查卡](./99-kubernetes-v1.33-quick-reference-card.md) | v1.33 关键变更速查 | ⭐⭐⭐⭐ |
+| 99i | [弃用功能迁移指南](./99-kubernetes-v1.33-deprecation-migration-guide.md) | 已弃用功能清单与迁移方案 | ⭐⭐⭐⭐ |
+| 99j | [全版本特性对比总表](./99-kubernetes-v1.25-v1.33-feature-comparison-table.md) | v1.25-v1.33 横向特性对比 | ⭐⭐⭐⭐⭐ |
+| 99k | [完整 Feature Gate 参考手册](./99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md) | 80+ Feature Gate 状态速查与配置 | ⭐⭐⭐⭐⭐ |
+| 99l | [v1.33 实战案例集](./99-kubernetes-v1.33-practical-cookbook.md) | 14 个新特性实战案例含完整 YAML | ⭐⭐⭐⭐⭐ |
 
 ---
 

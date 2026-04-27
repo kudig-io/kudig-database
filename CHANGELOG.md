@@ -1,5 +1,159 @@
 # 变更历史
 
+### 2026-04-24 Kubernetes v1.29-v1.33 特性全面补充 (v5)
+**16 篇版本特性指南 + 核心 Domain 深度对齐 + 设计原理/工作负载/可观测性/运维全覆盖**:
+- ✅ 新增 `domain-2/99-kubernetes-v1.33-design-principles-evolution.md`: 设计原理演进与影响分析
+  - 声明式 API 演进 (CEL 准入策略)、Sidecar 生命周期语义增强
+  - DRA 控制器模式扩展、Queueing Hints 调度架构优化
+  - In-Place Resize 弹性契约、用户命名空间安全边界、OpenTelemetry 内建化
+  - BtreeWatchCache 与协调领导者选举优化
+- ✅ 新增 `domain-4/99-kubernetes-v1.33-workloads-guide.md`: 工作负载管理新特性指南
+  - Sidecar 容器完整配置 (含 Job 场景)、原地 Pod Resize 实操
+  - Job 成功策略、Pod 调度就绪、Parallel Image Pulls
+  - AppArmor GA 配置、用户命名空间隔离、Pod 失败策略增强
+  - CRD 字段选择器与 Operator 开发建议
+- ✅ 新增 `domain-8/99-kubernetes-v1.33-observability-guide.md`: 可观测性新特性指南
+  - Kubelet OpenTelemetry Tracing GA 配置与上下文传播
+  - Kubelet Resource Metrics Beta 端点与 Prometheus 集成
+  - Structured Logging JSON 格式与 Fluent Bit 解析
+  - Node Log Query Alpha 命令与 RBAC 配置
+  - Event 流式传输优化与持久化方案
+- ✅ 新增 `domain-9/99-kubernetes-v1.33-platform-ops-guide.md`: 平台运维新特性指南
+  - v1.33 升级路径与 kubeadm 完整步骤
+  - Queueing Hints 性能影响与监控
+  - 协调领导者选举配置与 LeaseCandidate
+  - Karpenter NodePool 与 DRA 集成
+  - 多租户 PSA/资源配额/网络策略模板
+  - 节点运维新工具 (kubectl debug/节点日志/优雅维护)
+  - 每日/每周运维检查脚本与版本特性启用状态总览脚本
+- ✅ 核心 Domain README 全面更新:
+  - domain-2: 文档数 18→19，适用版本 1.30+ → 1.33+
+  - domain-4: 文档数 23→24，适用版本 1.32 → 1.33+
+  - domain-8: 文档数 27→28，适用版本 1.33+
+  - domain-9: 文档数 25→26，版本 v2.1 → v2.2，适用版本 1.33+
+- ✅ `INDEX.md` 导航更新: 新增 4 篇指南链接
+- ✅ 累计 K8s 版本特性文档: 16 篇
+
+### 2026-04-24 Kubernetes v1.29-v1.33 特性全面补充 (v4)
+**12 篇版本特性指南 + API 特性表更新 + 核心 Domain 版本对齐**:
+- ✅ 新增 `99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md`: 完整 Feature Gate 参考手册
+  - 覆盖全部 GA/Beta/Alpha/已移除 Feature Gate (80+ 门控)
+  - 按 API Server / Scheduler / Kubelet / 工作负载 / 存储 / 网络 / 安全 组件分类
+  - 含启用/禁用配置示例与验证命令
+- ✅ 新增 `99-kubernetes-v1.33-practical-cookbook.md`: v1.33 实战案例集 (14 个案例)
+  - Sidecar 容器、CEL 准入策略、DRA GPU 分配、nftables kube-proxy
+  - 原地 Pod 资源调整、跨命名空间存储引用、VolumeAttributesClass
+  - SELinux 挂载优化、协调领导者选举、节点 Swap 支持、NUMA 拓扑策略
+  - 用户命名空间安全隔离、kubectl 节点日志查询、Queueing Hints 优化
+  - 含一键启用所有 v1.33 特性脚本
+- ✅ 现有文档版本升级:
+  - `03-api-versions-features.md`: 更新 Feature Gates 状态表至 v1.33 (20+ 门控)
+  - `domain-3-control-plane/README.md`: 适用版本 1.32+ → 1.33+
+  - `domain-5-networking/README.md`: 适用版本 1.33+
+  - `domain-6-storage/README.md`: 适用版本 1.33+
+  - `domain-7-security/README.md`: 适用版本 1.33+
+- ✅ `INDEX.md` 导航更新: 新增 2 篇指南链接
+- ✅ 累计 K8s 版本特性文档: 12 篇 (10 篇原有 + 2 篇新增)
+
+### 2026-04-24 Kubernetes 开源项目全景生态全面更新
+**200+ 开源项目、41 个知识域全覆盖**:
+- ✅ 新增根目录 `OPEN-SOURCE-ECOSYSTEM.md`: Kubernetes 开源项目全景生态图谱
+  - CNCF Graduated 32 个项目完整索引与版本速查
+  - CNCF Incubating 40+ 个项目分类整理
+  - 按 17 个核心知识域分类的项目索引表
+  - 核心项目版本速查表 (Prometheus v3.3 / Argo CD v3.3 / Istio v1.29 等)
+  - 2025-2026 重大里程碑: Crossplane/Knative/Dragonfly 毕业、KServe Incubating、Prometheus 3.0、Helm 4 启动
+- ✅ 新增 `PROJECT-INDEX-TEMPLATE.md`: 标准化项目索引模板，供后续 Domain 快速复用
+- ✅ 为核心 Domain 批量创建 `00-open-source-projects-index.md` (17 个 Domain):
+  - domain-1 (架构基础): K8s 发行版、边缘计算项目
+  - domain-10 (扩展): Helm、Operator SDK、KubeVirt、Backstage、Kro
+  - domain-11 (AI 基础设施): Kubeflow、KServe、Fluid、KubeRay、Volcano、GPU Operator
+  - domain-12 (故障排查): kubectl、K9s、Stern、Kubeshark、Inspektor Gadget
+  - domain-13 (Docker): containerd、CRI-O、Podman、Buildah、Lima
+  - domain-15 (网络基础): Cilium、Calico、CNI、Gateway API
+  - domain-16 (存储基础): Rook、Longhorn、CubeFS、OpenEBS、JuiceFS
+  - domain-17 (云厂商): AWS/GCP/Azure/阿里云/腾讯云/火山引擎开源项目与托管服务
+  - domain-18 (生产运维): KEDA、Cluster API、OpenCost、Karpenter、Chaos Mesh
+  - domain-20 (监控告警): Prometheus 生态、Grafana 生态、Thanos、Mimir、OpenTelemetry
+  - domain-21 (日志管理): Fluentd、Loki、ELK、Vector、OpenSearch
+  - domain-22 (镜像管理): Harbor、Dragonfly、cosign、Trivy、SBOM 工具
+  - domain-23 (GitOps CI/CD): Argo 全家桶、Flux、Tekton、Jenkins、GitLab CI
+  - domain-24 (IaC): Terraform、OpenTofu、Crossplane、Pulumi、Ansible
+  - domain-25 (云原生安全): Falco、OPA、Kyverno、cert-manager、SPIFFE、Vault
+  - domain-26 (服务网格): Istio、Linkerd、Cilium Service Mesh、Dapr、Envoy
+  - domain-27 (多云混合): Karmada、Cluster API、Rancher、vCluster、Submariner
+- ✅ 新增重要项目独立知识文档 (3 篇深度指南):
+  - `domain-20/99-prometheus-enterprise-guide.md`: Prometheus 企业级监控部署 (Helm、HA、告警规则、性能调优)
+  - `domain-23/99-argo-cd-gitops-guide.md`: Argo CD GitOps 实践 (多租户、ApplicationSet、密钥管理)
+  - `domain-26/99-istio-service-mesh-guide.md`: Istio 服务网格入门 (Ambient/Sidecar、安全、流量管理)
+- ✅ 所有文档统一格式: 版本信息块、目录、表格、YAML 示例、决策树、参考链接
+
+### 2026-04-26 Kubernetes 开源项目生态 — 专业级查漏补缺 (v2)
+**300+ 开源项目全覆盖、10 篇深度指南、40 Domain 完整索引**:
+- ✅ 生态图谱全面扩展: `OPEN-SOURCE-ECOSYSTEM.md` 从 18KB → 30KB (646行/473+表格项)
+  - 新增 13 个知识域分类: domain-28~40 全部补齐
+  - 新增 "其他重要交叉领域项目" 汇总: 60+ 个跨领域工具
+  - 补充新兴领域: GreenOps (Kepler/Kube-green)、eBPF 加速 (Merbridge/Kmesh)、
+    中国开源项目 (Higress/Sermant/Kmesh/Nocalhost)、服务网格管理 (Meshery)、
+    安全供应链 (Trivy Operator/Trust-manager/VAP)、沙箱运行时 (gVisor/Kata/Firecracker)
+- ✅ Domain 项目索引从 17 个扩展至 40 个 (100% 覆盖):
+  - 核心 Domain 深度增强: domain-10~27 补充 150+ 遗漏项目
+  - 新增 Domain 标准索引: domain-1~9、domain-28~40 (23 个 Domain)
+  - 重点补充: CloudNativePG/Strimzi/Redpanda(数据库)、DevSpace/Tilt/Okteto(开发工具)、
+    SOPS/Kubewarden/NeuVector(安全)、Kubecost/Infracost(FinOps)、
+    Spinnaker/Concourse/Renovate(CI/CD)、Popeye/Kube-score(测试)
+- ✅ 独立深度指南从 3 篇扩展至 10 篇:
+  - `domain-20/99-prometheus-enterprise-guide.md`: Prometheus 企业监控部署
+  - `domain-22/99-harbor-enterprise-guide.md`: Harbor 企业镜像仓库
+  - `domain-23/99-argo-cd-gitops-guide.md`: Argo CD GitOps 实践
+  - `domain-24/99-crossplane-platform-guide.md`: Crossplane 平台工程
+  - `domain-25/99-falco-runtime-security-guide.md`: Falco 运行时安全
+  - `domain-25/99-kyverno-policy-guide.md`: Kyverno K8s 原生策略
+  - `domain-26/99-istio-service-mesh-guide.md`: Istio 服务网格
+  - `domain-15/99-cilium-ebpf-network-guide.md`: Cilium eBPF 网络
+  - `domain-11/99-kubeflow-ai-platform-guide.md`: Kubeflow AI 平台
+  - `domain-36/99-backstage-idp-guide.md`: Backstage IDP 构建
+- ✅ `INDEX.md` 全局导航更新: 新增开源项目生态索引入口段落
+- ✅ 总交付: 51 个新文件、8,500+ 行内容、300+ 开源项目
+
+### 2026-04-24 Kubernetes 开源项目生态 — 专业级查漏补缺 (v3)
+**500+ 开源项目、26 篇深度指南、40 Domain 100% 覆盖**:
+- ✅ 生态图谱最终完善: `OPEN-SOURCE-ECOSYSTEM.md` 从 30KB → 35KB (705行/532表格项)
+  - 补充 40+ 新兴交叉领域项目: CloudNativePG、Strimzi、Kubecost、Infracost、OpenFunction、DevSpace、Tilt
+- ✅ 新增根目录 `OPEN-SOURCE-SELECTION-GUIDE.md`: 按场景/角色的快速选型索引
+- ✅ 独立深度指南从 10 篇扩展至 26 篇:
+  - `domain-20/99-distributed-tracing-guide.md`: Jaeger/Tempo/OpenTelemetry 分布式追踪
+  - `domain-20/99-keda-event-driven-autoscaling-guide.md`: KEDA 事件驱动自动缩放
+  - `domain-18/99-finops-cost-optimization-guide.md`: Kubecost/OpenCost/Infracost FinOps
+  - `domain-18/99-karpenter-node-autoscaling-guide.md`: Karpenter 节点自动扩展
+  - `domain-23/99-flux-gitops-guide.md`: Flux GitOps 实践
+  - `domain-23/99-tekton-cicd-guide.md`: Tekton CI/CD 流水线
+  - `domain-25/99-vault-k8s-secrets-guide.md`: Vault K8s 密钥管理
+  - `domain-25/99-cert-manager-tls-guide.md`: cert-manager TLS 证书管理
+  - `domain-25/99-opa-gatekeeper-policy-guide.md`: OPA Gatekeeper 策略即代码
+  - `domain-25/99-slsa-supply-chain-security-guide.md`: SLSA 供应链安全/cosign/Tekton Chains
+  - `domain-26/99-linkerd-service-mesh-guide.md`: Linkerd 轻量级服务网格
+  - `domain-28/99-cloudnativepg-enterprise-guide.md`: CloudNativePG 企业级 PostgreSQL
+  - `domain-30/99-velero-backup-recovery-guide.md`: Velero 备份恢复
+  - `domain-37/99-kubernetes-developer-toolchain-guide.md`: k9s/Headlamp/stern 开发者工具链
+  - `domain-38/99-wasmedge-cloud-native-guide.md`: WebAssembly/WasmEdge/Spin 云原生
+  - `domain-40/99-envoy-gateway-enterprise-guide.md`: Envoy Gateway API Gateway
+  - `domain-10/99-serverless-faas-guide.md`: Knative/OpenFunction Serverless FaaS
+- ✅ Kubernetes 最新版本特性全面补充 (v1.29-v1.33):
+  - 更新 `domain-1/03-api-versions-features.md`: 添加 v1.33 列、修正 Feature Gate 状态 (20+ 门控)、API 变更时间线、生产环境升级检查清单
+  - 新增 `domain-1/99-kubernetes-v1.29-v1.33-features-guide.md`: 按版本详细讲解 v1.29-v1.33 核心特性，含 Sidecar/CEL Admission/DRA/In-Place Resize/AppArmor 等完整 YAML 示例和 Feature Gate 配置
+  - 新增 `domain-1/99-kubernetes-core-components-v1.29-v1.33-update.md`: 按 API Server/Scheduler/Kubelet/Controller Manager/Kube-proxy/etcd/Workloads/Network/Storage/Security 10 个核心组件的新特性速查
+  - 新增 `domain-1/99-kubernetes-v1.33-upgrade-guide.md`: 从 v1.32 升级到 v1.33 的完整实操步骤，含检查清单、备份脚本、升级脚本、回滚预案、常见问题排查
+  - 新增 `domain-1/99-kubectl-v1.29-v1.33-new-commands-guide.md`: kubectl v1.29-v1.33 新命令与增强功能速查，含插件生态和快捷别名
+  - 新增 `domain-1/99-kubernetes-v1.33-production-best-practices.md`: v1.33 生产环境最佳实践，含 Sidecar/CEL/DRA 生产落地指南、安全加固清单、性能优化、可观测性增强、升级策略、特性启用决策树
+  - 新增 `domain-1/99-kubernetes-version-lifecycle-support-policy.md`: K8s 版本生命周期与支持策略，含发布节奏、EOL 时间表、版本选择决策树、云厂商版本策略、升级窗口规划、EOL 预警脚本
+  - 新增 `domain-1/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md`: K8s v1.33 生态系统兼容性矩阵，含容器运行时/CNI/CSI/Ingress/服务网格/可观测性/安全/GitOps/集群管理工具的版本对应关系和兼容性状态
+  - 新增 `domain-1/99-kubernetes-v1.33-quick-reference-card.md`: K8s v1.33 一页纸速查卡，浓缩 v1.29-v1.33 所有关键变更、Feature Gate 启用方式、kubectl 快捷命令、升级路径、生产检查清单
+  - 新增 `domain-1/99-kubernetes-v1.33-deprecation-migration-guide.md`: K8s v1.33 弃用功能与迁移指南，含 v1.25-v1.33 所有已移除/已弃用功能列表、PSP→PSA/in-tree→CSI/cloud-provider→CCM 迁移操作、自动化检测脚本、兼容性保障检查清单
+  - 新增 `domain-1/99-kubernetes-v1.25-v1.33-feature-comparison-table.md`: K8s v1.25-v1.33 全版本特性对比总表，横向对比 Workloads/Networking/Storage/Security/Scheduling/Observability/Node/Control Plane/API 废弃 9 个维度，含 Feature Gate 状态总览
+  - 覆盖关键特性: Sidecar GA (v1.33)、CEL Admission GA (v1.30)、DRA GA (v1.33)、In-Place Resize Alpha (v1.33)、AppArmor GA (v1.31)、nftables kube-proxy Beta (v1.33)、SchedulingGates GA (v1.30)、ValidatingAdmissionPolicy GA (v1.30)、BoundServiceAccountToken GA (v1.30)、Parallel Image Pulls 默认启用 (v1.31)、ReadWriteOncePod GA (v1.29)、KMS v2 GA (v1.29)、OpenTelemetry Tracing GA (v1.31)、Kubelet Resource Metrics Beta (v1.33)、Scheduler Queueing Hints Beta (v1.33)
+- ✅ 总交付: 约 79 个新文件、25,000+ 行内容、500+ 开源项目
+
 ### 2026-03-03 Domain-34 CNCF Landscape 全量项目库上线
 **CNCF 云原生全景图 218 个开源项目完整收录**:
 - ✅ 新增 `domain-34-cncf-landscape/` 目录，包含 219 篇文档（1 README + 218 项目）

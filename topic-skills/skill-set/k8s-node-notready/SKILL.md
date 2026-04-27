@@ -6,13 +6,26 @@ version: 1.0.0
 category: Kubernetes-Incident-Response
 skill_id: SKILL-NODE-001
 severity_range: P0-P2
-k8s_versions: [1.28, 1.29, 1.30, 1.31, 1.32]
+k8s_versions: ["1.28.x", "1.29.x", "1.30.x", "1.31.x", "1.32.x"]
+tested_on: ["1.28.15", "1.29.12", "1.30.8", "1.31.4", "1.32.0"]
+last_validated: "2026-04-26"
 risk_level: high
 agent_execution_mode: L1-advisory
 requires:
-  - kubectl
-  - ssh
-  - openssl
+  tools:
+    - name: kubectl
+      min_version: "1.28"
+      check_cmd: "kubectl version --client"
+    - name: ssh
+      description: "SSH access to target nodes for deep diagnostics"
+    - name: openssl
+      min_version: "1.1.1"
+  optional_tools:
+    - name: jq
+      min_version: "1.6"
+    - name: crictl
+      min_version: "1.28"
+    - name: curl
 provides:
   - node_notready_diagnosis
   - node_notready_remediation
@@ -119,7 +132,7 @@ NotReady 节点数 / 总节点数
        ▼
 ┌──────────────┐    参考: reference/remediation-playbook.md
 │ 修复操作      │    脚本: scripts/cleanup-disk.sh (REM-002)
-│ REM-001~010  │    风险: 🟢低 → 🟡中 → 🔴高 → ⚫严重
+│ REM-001~010  │    风险: LOW → MEDIUM → HIGH → CRITICAL
 └──────┬───────┘
        │
        ▼
@@ -160,18 +173,18 @@ bash scripts/verify-node.sh <node-name>
 
 | RC ID | 根因 | 概率 | 首选修复 | 风险 |
 |-------|------|------|---------|------|
-| RC-001 | kubelet 进程崩溃或未运行 | 高 | REM-003 重启 kubelet | 🟡 |
-| RC-002 | 容器运行时(containerd)异常 | 高 | REM-004 重启 containerd | 🟡 |
-| RC-003 | 磁盘空间耗尽 (DiskPressure) | 高 | REM-002 清理磁盘 | 🟢 |
-| RC-004 | 内存耗尽 (MemoryPressure) | 中 | REM-006 排空重启 | 🔴 |
-| RC-005 | PID 耗尽 (PIDPressure) | 中 | REM-003 重启 kubelet | 🟡 |
-| RC-006 | 节点与 apiserver 网络不通 | 中 | 网络修复(手动) | 🔴 |
-| RC-007 | kubelet 客户端证书过期 | 中 | REM-008 证书轮转 | 🔴 |
-| RC-008 | PLEG 不健康 | 中 | REM-004 重启 containerd | 🟡 |
-| RC-009 | 内核故障/硬件异常 | 低 | REM-007 替换节点 | 🔴 |
-| RC-010 | NTP 时间不同步 | 低 | 修复 NTP(手动) | 🟡 |
-| RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod(手动) | 🟡 |
-| RC-012 | 节点被手动 cordon | 低 | REM-001 uncordon | 🟢 |
+| RC-001 | kubelet 进程崩溃或未运行 | 高 | REM-003 重启 kubelet | MEDIUM |
+| RC-002 | 容器运行时(containerd)异常 | 高 | REM-004 重启 containerd | MEDIUM |
+| RC-003 | 磁盘空间耗尽 (DiskPressure) | 高 | REM-002 清理磁盘 | LOW |
+| RC-004 | 内存耗尽 (MemoryPressure) | 中 | REM-006 排空重启 | HIGH |
+| RC-005 | PID 耗尽 (PIDPressure) | 中 | REM-003 重启 kubelet | MEDIUM |
+| RC-006 | 节点与 apiserver 网络不通 | 中 | 网络修复(手动) | HIGH |
+| RC-007 | kubelet 客户端证书过期 | 中 | REM-008 证书轮转 | HIGH |
+| RC-008 | PLEG 不健康 | 中 | REM-004 重启 containerd | MEDIUM |
+| RC-009 | 内核故障/硬件异常 | 低 | REM-007 替换节点 | HIGH |
+| RC-010 | NTP 时间不同步 | 低 | 修复 NTP(手动) | MEDIUM |
+| RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod(手动) | MEDIUM |
+| RC-012 | 节点被手动 cordon | 低 | REM-001 uncordon | LOW |
 
 > 完整根因详情见 [reference/root-cause-catalog.md](./reference/root-cause-catalog.md)
 > 完整修复步骤见 [reference/remediation-playbook.md](./reference/remediation-playbook.md)

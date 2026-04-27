@@ -4,11 +4,24 @@ skill_name: "Skill 本地运行 Demo 指南 / Skill Local Demo Guide"
 version: "1.0"
 category: "demo"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Kind v0.20+ supports node images for v1.28+"
+  - "v1.29+: Kind v0.21+ recommended"
+  - "v1.30+: Kind v0.22+ recommended"
+  - "v1.31+: Kind v0.24+ recommended (kindest/node:v1.31.4 default)"
+  - "v1.32+: Kind v0.26+ recommended"
+last_updated: "2026-04-26"
 ---
 
 # Skill 本地运行 Demo 指南

@@ -5,11 +5,24 @@ version: "1.0"
 category: "network"
 severity_range: "P0-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Ingress v1 stable since v1.19, Gateway API v1beta1"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: Gateway API v1 for Gateway/HTTPRoute/GRPCRoute"
+  - "v1.31+: AdminNetworkPolicy / BaselineAdminNetworkPolicy (alpha)"
+  - "v1.32+: nftables kube-proxy mode (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "5-45min"
 risk_level: "medium"
 agent_execution_mode: "L2-semi-auto"
@@ -80,9 +93,16 @@ Ingress 和 Gateway API 是 Kubernetes 集群中**南北向流量**的核心入�
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或至少对 ingresses、gateways、httproutes、services、endpoints、secrets 的 get/list/watch 权限
+- **RBAC 权限**:
+  - 最小权限: 对 `ingresses` (networking.k8s.io), `gateways` (gateway.networking.k8s.io), `httproutes` (gateway.networking.k8s.io), `services`, `endpoints`, `endpointslices`, `secrets`, `pods`, `events` 的 `get/list/watch`
+  - 修复权限: `ingresses`, `gateways`, `httproutes`, `services` 的 `patch/update`
+  - 验证命令: `kubectl auth can-i list ingresses`
 - **网络访问**: 能够从集群外部访问 Ingress/Gateway 的 LoadBalancer IP 或 NodePort
-- **工具要求**: kubectl (v1.28+), curl, openssl, jq（可选但推荐）
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `curl`
+  - `openssl` >= 1.1.1
+  - `jq` >= 1.6（可选但推荐）
 - **监控系统**: Prometheus + Ingress Controller 指标（用于 trigger_metrics 匹配）
 
 > ⚠️ **重要**: 本 Skill 覆盖多种 Ingress Controller（Nginx Ingress、Traefik、ALB Ingress、Envoy Gateway）以及 Gateway API 资源。不同控制器的诊断命令和日志格式有所差异，诊断时需确认实际使用的控制器类型。
@@ -905,6 +925,7 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 - **执行命令**:
   ```bash
   cat <<EOF | kubectl apply -f -
+  # Valid for v1.28+ (v1beta1); v1 API available since v1.32+
   apiVersion: gateway.networking.k8s.io/v1beta1
   kind: ReferenceGrant
   metadata:

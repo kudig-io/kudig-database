@@ -59,6 +59,11 @@ echo -e "${BLUE}[2/5] 检查已有集群 / Checking existing clusters...${NC}"
 
 if kind get clusters 2>/dev/null | grep -q "^${CLUSTER_NAME}$"; then
     echo -e "  ${YELLOW}⚠ 集群 '${CLUSTER_NAME}' 已存在 / Cluster already exists${NC}"
+    if [[ ! -t 0 ]]; then
+        echo -e "  ${YELLOW}非交互式环境 detected，使用已有集群 / Non-interactive mode, using existing cluster${NC}"
+        kubectl cluster-info --context "kind-${CLUSTER_NAME}" 2>/dev/null || true
+        exit 0
+    fi
     read -rp "  删除并重新创建? / Delete and recreate? [y/N] " answer
     if [[ "${answer,,}" == "y" ]]; then
         echo -e "  正在删除 / Deleting..."
@@ -75,7 +80,10 @@ echo ""
 # ---- Step 3: 创建 Kind 配置 / Create Kind config ----
 echo -e "${BLUE}[3/5] 生成集群配置 / Generating cluster config...${NC}"
 
-KIND_CONFIG=$(mktemp /tmp/kind-config-XXXXXX.yaml)
+# mktemp 模板需要兼容 BSD(macOS) 和 GNU(Linux)
+# BSD mktemp 要求 XXXXXX 在末尾，因此使用纯后缀格式，然后重命名
+KIND_CONFIG=$(mktemp "${TMPDIR:-/tmp}/kind-config-XXXXXXXX") || exit 1
+trap 'rm -f "${KIND_CONFIG}"' EXIT
 cat > "${KIND_CONFIG}" <<EOF
 # Kind multi-node cluster for Skills Demo
 # 1 control-plane + 2 workers — 模拟生产环境多节点场景
@@ -147,7 +155,9 @@ echo ""
 
 # 等待所有节点 Ready
 echo -e "  等待所有节点 Ready / Waiting for all nodes to be Ready..."
-kubectl wait --for=condition=Ready nodes --all --timeout=120s
+if ! kubectl wait --for=condition=Ready nodes --all --timeout=300s; then
+    echo -e "  ${YELLOW}⚠ 部分节点未在 300s 内就绪，继续执行...${NC}"
+fi
 echo ""
 
 # 显示系统 Pod
@@ -179,11 +189,17 @@ spec:
       labels:
         app: demo-nginx
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: nginx
           image: nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+              protocol: TCP
           resources:
             requests:
               cpu: 50m
@@ -191,6 +207,28 @@ spec:
             limits:
               cpu: 100m
               memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service
@@ -206,11 +244,10 @@ spec:
 EOF
 
 echo -e "  等待工作负载就绪 / Waiting for workloads to be ready..."
-kubectl rollout status deployment/demo-nginx -n skill-demo --timeout=120s
+if ! kubectl rollout status deployment/demo-nginx -n skill-demo --timeout=120s; then
+    echo -e "  ${YELLOW}⚠ Deployment 未在 120s 内就绪，请手动检查${NC}"
+fi
 echo ""
-
-# ---- 清理临时文件 ----
-rm -f "${KIND_CONFIG}"
 
 # ---- 完成 ----
 echo -e "${GREEN}╔══════════════════════════════════════════════════════════════╗${NC}"

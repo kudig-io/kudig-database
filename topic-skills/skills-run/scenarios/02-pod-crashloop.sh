@@ -32,11 +32,23 @@ section() { echo -e "\n${CYAN}━━━━━━━━━━━━━━━━�
 step()    { echo -e "\n${MAGENTA}▸ [$1] $2${NC}"; }
 info()    { echo -e "  ${GREEN}ℹ${NC} $1"; }
 warn()    { echo -e "  ${YELLOW}⚠${NC} $1"; }
-run_cmd() { echo -e "  ${CYAN}\$ $1${NC}"; eval "$1" 2>&1 | sed 's/^/    /'; }
+run_cmd() {
+    echo -e "  ${CYAN}\$ $1${NC}"
+    ( bash -c "$1" 2>&1 | sed 's/^/    /' ) || {
+        echo -e "    ${RED}[命令失败 / Command failed with exit code $?]${NC}"
+    }
+}
 pause()   { echo -e "\n  ${YELLOW}按 Enter 继续 / Press Enter to continue...${NC}"; read -r; }
 
 NS="skill-demo"
 DEPLOY_NAME="crashloop-demo"
+
+# ---- trap 清理: 脚本退出时自动清理资源 ----
+cleanup() {
+    echo -e "\n${YELLOW}正在清理 / Cleaning up...${NC}"
+    kubectl delete deployment ${DEPLOY_NAME} -n ${NS} --ignore-not-found=true 2>/dev/null || true
+}
+trap cleanup EXIT ERR
 
 echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║  📋 Scenario 02: Pod CrashLoopBackOff (SKILL-POD-001)      ║${NC}"
@@ -194,7 +206,9 @@ kubectl patch deployment ${DEPLOY_NAME} -n ${NS} --type='json' -p='[
 info "✓ 已修正启动命令"
 
 info "等待 rollout 完成..."
-kubectl rollout status deployment/${DEPLOY_NAME} -n ${NS} --timeout=90s
+if ! kubectl rollout status deployment/${DEPLOY_NAME} -n ${NS} --timeout=90s; then
+    echo -e "  ${YELLOW}⚠ rollout 未在 90s 内完成，请手动检查${NC}"
+fi
 pause
 
 # =====================================================================

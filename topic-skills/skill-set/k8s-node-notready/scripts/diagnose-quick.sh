@@ -74,10 +74,18 @@ fi
 
 NODE_NAME="$1"
 
-# --- 检查 kubectl 可用性 / Check kubectl availability ---
+# --- 检查 kubectl 可用性和版本 / Check kubectl availability and version ---
 if ! command -v kubectl &>/dev/null; then
     echo -e "${RED}Error: kubectl is not installed or not in PATH.${NC}"
     exit 1
+fi
+
+# 尝试 jq 优先解析，回退到 sed (更健壮，不受 JSON 空格格式影响)
+KUBECTL_VERSION=$(kubectl version --client -o json 2>/dev/null | jq -r '.gitVersion' 2>/dev/null | sed 's/^v//' || \
+                  kubectl version --client -o json 2>/dev/null | sed -n 's/.*"gitVersion":[[:space:]]*"v\([^"]*\)".*/\1/p' | head -1 || \
+                  echo "")
+if [[ -n "$KUBECTL_VERSION" ]]; then
+    print_info "kubectl version: v${KUBECTL_VERSION}"
 fi
 
 # --- 检查 kubectl 连接 / Check kubectl connectivity ---
@@ -344,10 +352,13 @@ else
     print_info "Lease renewTime: $LEASE_RENEW_TIME"
     
     # 计算 Lease 距当前时间的秒数 / Calculate seconds since last renewal
-    CURRENT_TIME=$(date -u +%s 2>/dev/null)
-    # 尝试解析 Lease 时间 / Try to parse lease time
-    LEASE_EPOCH=$(date -u -jf "%Y-%m-%dT%H:%M:%S" "${LEASE_RENEW_TIME%%.*}" +%s 2>/dev/null || \
-                  date -u -d "${LEASE_RENEW_TIME}" +%s 2>/dev/null || \
+    CURRENT_TIME=$(date -u +%s 2>/dev/null || echo "")
+    # 尝试解析 Lease 时间 / Try to parse lease time (cross-platform: macOS BSD date vs GNU date)
+    # Strip fractional seconds and timezone suffix for consistent parsing
+    LEASE_TIME_CLEAN="${LEASE_RENEW_TIME%%.*}"
+    LEASE_TIME_CLEAN="${LEASE_TIME_CLEAN//Z/}"
+    LEASE_EPOCH=$(date -u -jf "%Y-%m-%dT%H:%M:%S" "$LEASE_TIME_CLEAN" +%s 2>/dev/null || \
+                  date -u -d "$LEASE_TIME_CLEAN" +%s 2>/dev/null || \
                   echo "")
     
     if [[ -n "$LEASE_EPOCH" && -n "$CURRENT_TIME" ]]; then

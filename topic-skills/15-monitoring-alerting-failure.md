@@ -5,11 +5,24 @@ version: "1.0"
 category: "observability"
 severity_range: "P0-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Metrics Server v0.7+ compatible, Prometheus Operator v0.70+"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA"
+  - "v1.31+: BoundServiceAccountTokenVolume GA"
+  - "v1.32+: No monitoring API changes"
+last_updated: "2026-04-26"
 estimated_resolution_time: "10-60min"
 risk_level: "medium"
 agent_execution_mode: "L2-semi-auto"
@@ -76,7 +89,10 @@ knowledge_refs:
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（至少需要对 monitoring namespace 中资源的 get/list/watch 权限）
+- **RBAC 权限**:
+  - 最小权限: 对 monitoring namespace 内 `pods`, `pods/log`, `services`, `configmaps`, `secrets`, `deployments`, `statefulsets`, `persistentvolumeclaims`, `servicemonitors` (monitoring.coreos.com), `prometheusrules` (monitoring.coreos.com) 的 `get/list/watch`
+  - 修复权限: `configmaps`, `deployments`, `statefulsets`, `servicemonitors`, `prometheusrules` 的 `patch/update`
+  - 验证命令: `kubectl auth can-i list servicemonitors -n monitoring`
 - **访问方式**: 能够访问 Prometheus/AlertManager/Grafana 的 Web UI 或 API
 - **工具要求**: kubectl (v1.28+), curl, jq（可选但推荐）, promtool, amtool
 - **监控栈部署**: 本 Skill 假设使用 kube-prometheus-stack（Prometheus Operator）部署模式

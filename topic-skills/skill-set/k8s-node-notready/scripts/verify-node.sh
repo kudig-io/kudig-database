@@ -200,10 +200,13 @@ if [[ -z "$LEASE_RENEW_TIME" || "$LEASE_RENEW_TIME" == *"not found"* ]]; then
 else
     print_info "Lease renewTime: $LEASE_RENEW_TIME"
     
-    # 计算 Lease 距当前时间的秒数 / Calculate seconds since last renewal
-    CURRENT_TIME=$(date -u +%s 2>/dev/null)
-    LEASE_EPOCH=$(date -jf "%Y-%m-%dT%H:%M:%S" "${LEASE_RENEW_TIME%%.*}" +%s 2>/dev/null || \
-                  date -d "${LEASE_RENEW_TIME}" +%s 2>/dev/null || \
+    # 计算 Lease 距当前时间的秒数 / Calculate seconds since last renewal (cross-platform)
+    CURRENT_TIME=$(date -u +%s 2>/dev/null || echo "")
+    # Strip fractional seconds and timezone suffix for consistent parsing
+    LEASE_TIME_CLEAN="${LEASE_RENEW_TIME%%.*}"
+    LEASE_TIME_CLEAN="${LEASE_TIME_CLEAN//Z/}"
+    LEASE_EPOCH=$(date -u -jf "%Y-%m-%dT%H:%M:%S" "$LEASE_TIME_CLEAN" +%s 2>/dev/null || \
+                  date -u -d "$LEASE_TIME_CLEAN" +%s 2>/dev/null || \
                   echo "")
     
     if [[ -n "$LEASE_EPOCH" && -n "$CURRENT_TIME" ]]; then
@@ -310,8 +313,8 @@ echo "$NODE_INFO" | while IFS= read -r line; do
 done
 echo ""
 
-KUBELET_VER=$(echo "$NODE_INFO" | grep "^kubelet=" | cut -d= -f2)
-RUNTIME_VER=$(echo "$NODE_INFO" | grep "^runtime=" | cut -d= -f2)
+KUBELET_VER=$(echo "$NODE_INFO" | grep "^kubelet=" | cut -d= -f2-)
+RUNTIME_VER=$(echo "$NODE_INFO" | grep "^runtime=" | cut -d= -f2-)
 
 if [[ -n "$KUBELET_VER" && "$KUBELET_VER" != "null" && -n "$RUNTIME_VER" && "$RUNTIME_VER" != "null" ]]; then
     print_pass "V5: Node system info available (kubelet=$KUBELET_VER, runtime=$RUNTIME_VER)"
@@ -321,7 +324,7 @@ if [[ -n "$KUBELET_VER" && "$KUBELET_VER" != "null" && -n "$RUNTIME_VER" && "$RU
     if [[ -n "$OTHER_VERSIONS" ]]; then
         print_info "Other nodes' kubelet versions (for comparison):"
         echo "$OTHER_VERSIONS" | while IFS= read -r line; do
-            OTHER_VER=$(echo "$line" | cut -d= -f2)
+            OTHER_VER=$(echo "$line" | cut -d= -f2-)
             if [[ "$OTHER_VER" == "$KUBELET_VER" ]]; then
                 echo -e "    ${GREEN}$line (match)${NC}"
             else
@@ -349,10 +352,7 @@ echo ""
 # 显示每项检查状态条 / Show status bar for each check
 echo -e "  ${BOLD}Check Details:${NC}"
 
-# 重新检查各项结果（用简洁格式展示）
-V1_RESULT=$(echo "$TARGET_STATUS" | grep -q "^Ready$" && echo "PASS" || echo "FAIL")
-V2_RESULT=$([[ "$V2_ALL_OK" == "true" ]] && echo "PASS" || echo "FAIL")
-
+# 显示各项检查描述 / Show check descriptions
 for V in V1 V2 V3 V4 V5; do
     case "$V" in
         V1) DESC="Node status is Ready" ;;

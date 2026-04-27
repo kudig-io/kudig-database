@@ -5,11 +5,24 @@ version: "1.0"
 category: "storage"
 severity_range: "P0-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: CSI migration GA for all in-tree drivers"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ReadWriteOncePod access mode (GA)"
+  - "v1.31+: VolumeAttributesClass (beta)"
+  - "v1.32+: No storage API changes"
+last_updated: "2026-04-26"
 estimated_resolution_time: "10-60min"
 risk_level: "high"
 agent_execution_mode: "L1-advisory"
@@ -75,10 +88,16 @@ PVC/PV/CSI 存储故障是 Kubernetes 集群中**影响数据持久化和有状�
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（至少需要对 pvc、pv、storageclass、csidriver、csinode、volumeattachment、pods、events 的 get/list/watch 权限）
+- **RBAC 权限**:
+  - 最小权限: 对 `persistentvolumeclaims`, `persistentvolumes`, `storageclasses`, `csidrivers`, `csinodes`, `volumeattachments`, `pods`, `events` 的 `get/list/watch`
+  - 修复权限: `persistentvolumeclaims` 的 `patch/update/delete`, `pods` 的 `delete`
+  - 验证命令: `kubectl auth can-i list persistentvolumes`
 - **存储后端信息**: StorageClass 配置、CSI Driver 版本、存储后端类型（云盘/NFS/Ceph 等）
 - **云厂商凭证**: 深度诊断可能需要云厂商 CLI 工具和凭证（如 aliyun cli、aws cli）
-- **工具要求**: kubectl (v1.28+), SSH 访问（用于节点级诊断）
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `jq` >= 1.6（可选）
+  - SSH 访问（用于节点级诊断）
 
 > ⚠️ **重要**: 存储故障涉及数据安全，修复操作需格外谨慎。P0 级别的数据丢失风险场景需立即升级到高级 SRE。
 

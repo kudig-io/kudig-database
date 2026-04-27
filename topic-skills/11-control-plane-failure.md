@@ -5,11 +5,24 @@ version: "1.0"
 category: "control-plane"
 severity_range: "P0-P2"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: API Priority and Fairness (APF) stable, etcd v3.5+ required"
+  - "v1.29+: APF enhancements, PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA"
+  - "v1.31+: BoundServiceAccountTokenVolume GA"
+  - "v1.32+: No control-plane API changes"
+last_updated: "2026-04-26"
 estimated_resolution_time: "10-60min"
 risk_level: "critical"
 agent_execution_mode: "L1-advisory"
@@ -75,10 +88,17 @@ knowledge_refs:
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 权限（或对 kube-system namespace、nodes、pods、events 的完整访问权限）
+- **RBAC 权限**:
+  - 最小权限: 对 `nodes`, `pods`, `events`, `leases` (coordination.k8s.io), `componentstatuses` 的 `get/list/watch`
+  - 如需 etcd 诊断: 控制平面节点本地访问权限（etcd 通常不通过 API Server 暴露）
+  - 验证命令: `kubectl auth can-i list nodes`
 - **SSH 访问**: 自建集群需要对控制平面节点的 SSH 访问权限；托管集群无需 SSH
-- **工具要求**: kubectl (v1.28+), etcdctl (v3.5+), jq, openssl
-- **监控系统**: Prometheus + etcd exporter + kube-state-metrics（用于 trigger_metrics 匹配）
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `etcdctl` >= v3.5 # Requires v3.5+ (v3.4 deprecated for v1.28+)
+  - `jq` >= 1.6
+  - `openssl` >= 1.1.1
+- **监控系统**: Prometheus + etcd exporter + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 
 > ⚠️ **重要**: 本 Skill 覆盖自建集群和托管集群的控制平面故障场景。对于托管集群，部分诊断步骤不适用（控制平面不可见），需要通过云厂商控制台或 API 进行排查。所有 etcd 修复操作（🔴⚫级别）执行前**必须备份 etcd 快照**。
 

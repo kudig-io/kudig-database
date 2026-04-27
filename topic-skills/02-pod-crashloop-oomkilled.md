@@ -5,11 +5,24 @@ version: "1.0"
 category: "pod"
 severity_range: "P1-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Ephemeral Containers GA, Native Sidecar Containers (beta)"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: Node swap support (beta), cgroup v2 memory stats stable"
+  - "v1.31+: EventedPLEG GA"
+  - "v1.32+: Sidecar Containers (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "5-20min"
 risk_level: "medium"
 agent_execution_mode: "L2-semi-auto"
@@ -61,15 +74,27 @@ knowledge_refs:
 - **CrashLoopBackOff**: 容器反复退出（exit），kubelet 以指数退避（exponential backoff, 10s → 20s → 40s → ... → 5min cap）策略不断尝试重启容器。这是一个**状态描述**，不是根因本身——真正的问题隐藏在容器的 exit code 和日志中。
 - **OOMKilled**: Linux 内核的 OOM Killer 终止了容器进程（发送 SIGKILL, exit code 137），通常由容器实际内存用量超过 cgroup memory limit 触发。在 Kubernetes 中，这意味着 `resources.limits.memory` 设置不足或应用存在内存泄漏。
 
+> **版本差异说明 / Version Notes**:
+> - v1.28+ **Ephemeral Containers GA**: `kubectl debug` 可直接使用，无需启用 feature gate
+> - v1.28+ **Native Sidecar Containers** (beta, v1.32 GA): init container 类型为 `restartPolicy: Always` 时，sidecar 容器与主容器并行运行。sidecar 崩溃不会导致 Pod 进入 CrashLoopBackOff，但可能隐藏 sidecar 自身的故障
+> - v1.25+ **cgroup v2 默认启用**: 内存统计使用 `memory.current` 而非 `memory.usage_in_bytes`，`kubectl top pod` 显示的内存值可能与 cgroup v1 环境有差异
+> - v1.29+ **PodDisruptionConditions** (GA): OOMKilled 的 Pod 会记录 `DisruptionTarget` condition，可用于关联分析
+
 **典型触发场景**:
 1. 应用代码 bug 导致进程启动后立即崩溃，Pod 进入 CrashLoopBackOff
 2. Java/Go 应用内存占用超过容器 limits，被 OOMKilled 后持续重启
 3. 配置错误（缺少 ConfigMap/Secret、命令参数错误）导致容器无法正常启动
 
 **前置条件**:
-- Agent 需要 namespace 级别的 RBAC 读权限（get/list pods, events, logs, nodes, configmaps, secrets）
-- `kubectl top` 命令需要集群已部署 Metrics Server
-- `kubectl debug` 命令需要 Kubernetes v1.28+（Ephemeral Containers GA）
+- **RBAC 权限**:
+  - 最小权限: 对 `pods`, `pods/log`, `pods/status`, `events`, `nodes`, `configmaps`, `secrets` 的 `get/list/watch`
+  - 验证命令: `kubectl auth can-i list pods -n <namespace>`
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `jq` >= 1.6（可选，用于 JSON 解析）
+- **集群组件**:
+  - Metrics Server（`kubectl top` 需要）
+  - `kubectl debug` 需要 v1.28+（Ephemeral Containers GA）# Requires v1.28+
 
 ---
 

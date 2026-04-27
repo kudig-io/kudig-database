@@ -157,7 +157,7 @@ OLD_SIZE_MB=$(( ${OLD_SIZE:-0} / 1024 / 1024 ))
 print_info "Old compressed logs (*.gz, >7 days): ~${GZ_SIZE_MB}Mi"
 print_info "Old rotated logs (*.old, >3 days): ~${OLD_SIZE_MB}Mi"
 
-JOURNAL_SIZE=$(run_ssh "journalctl --disk-usage 2>/dev/null | grep -oP '[0-9.]+[GMK]' || echo 'unknown'")
+JOURNAL_SIZE=$(run_ssh "journalctl --disk-usage 2>/dev/null | grep -oE '[0-9.]+[GMK]' || echo 'unknown'")
 print_info "Journal log size: $JOURNAL_SIZE"
 
 # =============================================================================
@@ -267,7 +267,7 @@ if [[ -n "$STEP4_OUTPUT" ]]; then
         fi
     done
     
-    FREED_JOURNAL=$(echo "$STEP4_OUTPUT" | grep -oP 'freed [0-9.]+[GMK]' || echo "")
+    FREED_JOURNAL=$(echo "$STEP4_OUTPUT" | grep -oE 'freed [0-9.]+[GMK]' || echo "")
     if [[ -n "$FREED_JOURNAL" ]]; then
         print_ok "Journal cleanup: $FREED_JOURNAL"
     else

@@ -5,11 +5,24 @@ version: "1.0"
 category: "performance"
 severity_range: "P1-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: CPU Manager GA, Memory Manager GA, Topology Manager GA"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA, Node swap support (beta)"
+  - "v1.31+: EventedPLEG GA"
+  - "v1.32+: Sidecar Containers (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "15-120min"
 risk_level: "medium"
 agent_execution_mode: "L2-semi-auto"
@@ -82,7 +95,17 @@ knowledge_refs:
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（需要对 nodes、pods、metrics 的读取权限）
+- **RBAC 权限**:
+  - 最小权限: 对 `nodes`, `pods`, `pods/log`, `events`, `configmaps`, `deployments`, `services` 的 `get/list/watch`
+  - 节点诊断: 对 `nodes/proxy` 的 `get` 权限（用于 `kubectl proxy` 访问节点指标）
+  - 验证命令: `kubectl auth can-i list nodes`
+- **SSH 访问**: 深度诊断（Phase 2+）需要对节点的 SSH 访问权限
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `ssh`
+  - `jq` >= 1.6
+  - `curl`
+- **监控系统**: Prometheus + Grafana + kube-state-metrics >= v2.10 + node-exporter
 - **SSH 访问**: 深度诊断（Phase 2+）需要对节点的 SSH 访问权限
 - **工具要求**: kubectl (v1.28+), ssh, jq, curl
 - **监控系统**: Prometheus + Grafana + kube-state-metrics + node-exporter

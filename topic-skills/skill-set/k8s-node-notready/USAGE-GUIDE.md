@@ -70,7 +70,7 @@ topic-skills/skill-set/k8s-node-notready/
     ├── diagnose-deep.sh              # 全面深度诊断
     ├── check-resources.sh            # 资源压力分析
     ├── cleanup-disk.sh               # 磁盘清理操作
-    └── remediate.sh                  # 引导式修复运行器
+    └── verify-node.sh                # 修复后节点健康验证
 ```
 
 ### 2.2 FTA 系统文件

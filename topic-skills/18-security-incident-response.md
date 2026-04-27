@@ -5,11 +5,24 @@ version: "1.0"
 category: "security"
 severity_range: "P0-P2"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Pod Security Standards enforce mode stable, seccomp default runtime"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA (alternative to OPA/Gatekeeper)"
+  - "v1.31+: BoundServiceAccountTokenVolume GA"
+  - "v1.32+: Sidecar Containers (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "15-120min"
 risk_level: "critical"
 agent_execution_mode: "L1-advisory"
@@ -94,7 +107,12 @@ knowledge_refs:
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效安全管理权限（至少需要对 pods、secrets、events、audit logs 的完全访问）
+- **RBAC 权限**:
+  - 最小权限: 对 `pods`, `pods/log`, `pods/exec`, `pods/eviction`, `secrets`, `events`, `serviceaccounts`, `clusterroles`, `clusterrolebindings`, `configmaps`, `nodes` 的 `get/list/watch`
+  - 应急响应权限: `pods` 的 `delete`, `pods/eviction` 的 `create`, `networkpolicies` 的 `create/update`
+  - 审计权限: 访问 Kubernetes 审计日志（通常需要节点文件系统访问或日志系统权限）
+  - 验证命令: `kubectl auth can-i list secrets`
+- **安全工具**: 部署运行时安全工具（Falco/Tetragon）、镜像扫描工具（Trivy/Grype）
 - **安全工具**: 部署运行时安全工具（Falco/Tetragon）、镜像扫描工具（Trivy/Grype）
 - **SSH/节点访问**: 取证阶段需要对受影响节点的特权访问
 - **审计日志**: Kubernetes 审计日志已启用并可访问

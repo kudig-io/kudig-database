@@ -5,11 +5,24 @@ version: "1.0"
 category: "security"
 severity_range: "P0-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: RBAC v1 stable since v1.8"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA (alternative to OPA/Gatekeeper/Kyverno)"
+  - "v1.31+: BoundServiceAccountTokenVolume GA"
+  - "v1.32+: No RBAC API changes"
+last_updated: "2026-04-26"
 estimated_resolution_time: "5-60min"
 risk_level: "medium"
 agent_execution_mode: "L1-advisory"
@@ -67,10 +80,15 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 Kubernetes 中最核心
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（至少需要对 roles、rolebindings、clusterroles、clusterrolebindings、resourcequotas、limitranges 的 get/list 权限）
-- **工具要求**: kubectl (v1.28+), jq（可选但推荐）
-- **监控系统**: Prometheus + kube-state-metrics（用于 trigger_metrics 匹配）
-- **可选**: kubectl-who-can 插件、rbac-lookup 工具
+- **RBAC 权限**:
+  - 最小权限: 对 `roles`, `rolebindings`, `clusterroles`, `clusterrolebindings`, `resourcequotas`, `limitranges`, `pods`, `events` 的 `get/list/watch`
+  - 修复权限: `roles`, `rolebindings`, `clusterroles`, `clusterrolebindings`, `resourcequotas`, `limitranges` 的 `create/update/delete`
+  - 验证命令: `kubectl auth can-i list clusterroles`
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `jq` >= 1.6（可选但推荐）
+- **监控系统**: Prometheus + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
+- **可选**: `kubectl-who-can` 插件、`rbac-lookup` 工具
 
 > ⚠️ **重要**: 本 Skill 覆盖 RBAC、ResourceQuota、LimitRange 以及 Admission Controller（OPA/Gatekeeper/Kyverno）导致的访问拒绝和资源创建失败场景。
 

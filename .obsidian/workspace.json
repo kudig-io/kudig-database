@@ -186,6 +186,7 @@
   },
   "active": "dd686546e360a4e2",
   "lastOpenFiles": [
+    "OPEN-SOURCE-ECOSYSTEM.md",
     "updated-deploy.yaml",
     "domain-3-control-plane/31-kubectl-complete-reference.md",
     "domain-3-control-plane/32-kubeadm-cluster-lifecycle.md",

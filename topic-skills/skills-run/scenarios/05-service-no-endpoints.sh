@@ -20,12 +20,26 @@ NC='\033[0m'
 section() { echo -e "\n${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"; echo -e "${BOLD}${BLUE}$1${NC}"; echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"; }
 step()    { echo -e "\n${MAGENTA}▸ [$1] $2${NC}"; }
 info()    { echo -e "  ${GREEN}ℹ${NC} $1"; }
-run_cmd() { echo -e "  ${CYAN}\$ $1${NC}"; eval "$1" 2>&1 | sed 's/^/    /'; }
+run_cmd() {
+    echo -e "  ${CYAN}\$ $1${NC}"
+    ( bash -c "$1" 2>&1 | sed 's/^/    /' ) || {
+        echo -e "    ${RED}[命令失败 / Command failed with exit code $?]${NC}"
+    }
+}
 pause()   { echo -e "\n  ${YELLOW}按 Enter 继续 / Press Enter to continue...${NC}"; read -r; }
 
 NS="skill-demo"
 SVC_NAME="broken-svc"
 DEPLOY_NAME="backend-app"
+
+# ---- 清理函数 / Cleanup ----
+cleanup() {
+    echo -e "\n${YELLOW}正在清理 / Cleaning up...${NC}"
+    kubectl delete svc ${SVC_NAME} -n ${NS} --ignore-not-found 2>/dev/null || true
+    kubectl delete deployment ${DEPLOY_NAME} -n ${NS} --ignore-not-found 2>/dev/null || true
+    kubectl delete pod curl-test -n ${NS} --ignore-not-found --grace-period=0 --force 2>/dev/null || true
+}
+trap cleanup EXIT ERR
 
 echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║  📋 Scenario 05: Service No Endpoints (SKILL-NET-002)      ║${NC}"

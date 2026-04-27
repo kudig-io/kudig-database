@@ -60,16 +60,21 @@ add_finding() {
 }
 
 # SSH 命令封装，带超时和错误处理 / SSH command wrapper with timeout and error handling
+# Usage: run_ssh "command" [timeout_seconds]
 run_ssh() {
-    local timeout="${2:-15}"
+    local cmd="$1"
+    local timeout_sec="${2:-15}"
     local output
-    if output=$(ssh $SSH_OPTS "$NODE_IP" "$1" 2>&1); then
-        echo "$output"
-        return 0
-    else
-        echo "$output"
-        return 1
+    local rc=0
+    # 使用 timeout 命令确保 SSH 不会无限挂起
+    output=$(timeout "${timeout_sec}" ssh $SSH_OPTS "$NODE_IP" "$cmd" 2>&1) || rc=$?
+    echo "$output"
+    # timeout 命令退出码 124 表示超时
+    if [[ $rc -eq 124 ]]; then
+        echo "[SSH TIMEOUT after ${timeout_sec}s]" >&2
+        return 124
     fi
+    return $rc
 }
 
 # --- 参数验证 / Argument Validation ---
@@ -485,16 +490,16 @@ APISERVER_LINE=$(run_ssh "cat /etc/kubernetes/kubelet.conf 2>/dev/null | grep se
 print_info "Apiserver config: $APISERVER_LINE"
 
 # 提取 apiserver IP 和端口
-APISERVER_URL=$(echo "$APISERVER_LINE" | grep -oP 'https?://[^\s"]+' | head -1 || true)
+APISERVER_URL=$(echo "$APISERVER_LINE" | sed -n 's|.*\(https\?://[^ "]*\).*|&1|p' | head -1 || true)
 if [[ -n "$APISERVER_URL" ]]; then
     APISERVER_HOST=$(echo "$APISERVER_URL" | sed 's|https\?://||' | sed 's|:.*||')
-    APISERVER_PORT=$(echo "$APISERVER_URL" | grep -oP ':\K[0-9]+' || echo "6443")
+    APISERVER_PORT=$(echo "$APISERVER_URL" | sed 's|.*:\([0-9]*\).*|\1|' || echo "6443")
     
     print_info "Testing TCP connectivity to $APISERVER_HOST:$APISERVER_PORT..."
     
-    # TCP 连通性测试
-    TCP_RESULT=$(run_ssh "nc -zv $APISERVER_HOST $APISERVER_PORT -w 5 2>&1 || echo 'TCP_FAILED'" 15 || true)
-    if echo "$TCP_RESULT" | grep -qi "succeeded\|connected\|open"; then
+    # TCP 连通性测试 (使用 bash 内置 /dev/tcp 实现跨平台兼容)
+    TCP_RESULT=$(run_ssh "bash -c '</dev/tcp/$APISERVER_HOST/$APISERVER_PORT' 2>&1 && echo 'TCP_OK' || echo 'TCP_FAILED'" 15 || true)
+    if echo "$TCP_RESULT" | grep -q "TCP_OK"; then
         print_ok "TCP connection to apiserver successful"
         
         # TLS/HTTPS 测试
@@ -538,8 +543,15 @@ done
 
 if echo "$CLIENT_CERT" | grep -q "notAfter"; then
     CERT_EXPIRY=$(echo "$CLIENT_CERT" | grep "notAfter" | sed 's/notAfter=//')
+    # Cross-platform date parsing (macOS BSD date vs GNU date)
+    # Strip timezone suffix if present for consistent parsing
+    CERT_EXPIRY_CLEAN="${CERT_EXPIRY// GMT/}"
+    CERT_EXPIRY_CLEAN="${CERT_EXPIRY_CLEAN// UTC/}"
+    # 尝试多种日期格式解析 / Try multiple date formats for cross-platform compatibility
     CERT_EPOCH=$(date -jf "%b %d %H:%M:%S %Y %Z" "$CERT_EXPIRY" +%s 2>/dev/null || \
-                 date -d "$CERT_EXPIRY" +%s 2>/dev/null || echo "")
+                 date -jf "%b %d %H:%M:%S %Y" "$CERT_EXPIRY_CLEAN" +%s 2>/dev/null || \
+                 date -d "$CERT_EXPIRY_CLEAN" +%s 2>/dev/null || \
+                 echo "")
     NOW_EPOCH=$(date +%s)
     
     if [[ -n "$CERT_EPOCH" ]]; then
@@ -574,8 +586,13 @@ done
 
 if echo "$SERVING_CERT" | grep -q "notAfter"; then
     CERT_EXPIRY=$(echo "$SERVING_CERT" | grep "notAfter" | sed 's/notAfter=//')
+    # Cross-platform date parsing (macOS BSD date vs GNU date)
+    CERT_EXPIRY_CLEAN="${CERT_EXPIRY// GMT/}"
+    CERT_EXPIRY_CLEAN="${CERT_EXPIRY_CLEAN// UTC/}"
     CERT_EPOCH=$(date -jf "%b %d %H:%M:%S %Y %Z" "$CERT_EXPIRY" +%s 2>/dev/null || \
-                 date -d "$CERT_EXPIRY" +%s 2>/dev/null || echo "")
+                 date -jf "%b %d %H:%M:%S %Y" "$CERT_EXPIRY_CLEAN" +%s 2>/dev/null || \
+                 date -d "$CERT_EXPIRY_CLEAN" +%s 2>/dev/null || \
+                 echo "")
     NOW_EPOCH=$(date +%s)
     
     if [[ -n "$CERT_EPOCH" ]]; then
@@ -604,7 +621,7 @@ if [[ -z "$DMESG_OUTPUT" ]]; then
     print_warn "Could not retrieve kernel logs"
 else
     # 显示最近的关键条目 / Show recent critical entries
-    CRITICAL_DMESG=$(echo "$DMESG_OUTPUT" | grep -i "Out of memory\|oom_kill\|Hardware Error\|MCE\|I/O error\|device not responding\|soft lockup\|nf_conntrack.*table full\|EXT4-fs error\|XFS error\|panic\|BUG\|oops" || true)
+    CRITICAL_DMESG=$(echo "$DMESG_OUTPUT" | grep -iE "Out of memory|oom_kill|Hardware Error|MCE|I/O error|device not responding|soft lockup|nf_conntrack.*table full|EXT4-fs error|XFS error|panic|BUG|oops" || true)
     
     if [[ -n "$CRITICAL_DMESG" ]]; then
         print_error "Critical kernel log entries found:"

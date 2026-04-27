@@ -5,11 +5,24 @@ version: "1.0"
 category: "node"
 severity_range: "P0-P2"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: Ephemeral Containers GA, Native Sidecar Containers (beta), GracefulNodeShutdown GA"
+  - "v1.29+: PodDisruptionConditions GA, EventedPLEG promoted to beta"
+  - "v1.30+: Node swap support (beta), ValidatingAdmissionPolicy GA"
+  - "v1.31+: VolumeAttributesClass (beta), EventedPLEG GA"
+  - "v1.32+: nftables kube-proxy mode (GA), Sidecar Containers (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "5-30min"
 risk_level: "high"
 agent_execution_mode: "L1-advisory"
@@ -56,6 +69,12 @@ knowledge_refs:
 
 Node NotReady 是 Kubernetes 集群中**爆炸半径最大**的故障类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 DaemonSet Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
 
+> **版本差异说明 / Version Notes**:
+> - `pod-eviction-timeout` 默认 5 分钟，自 v1.28+ 可通过 kube-controller-manager 的 `--node-monitor-grace-period` 调整
+> - v1.29+ 引入 **PodDisruptionConditions** (GA)，驱逐的 Pod 会在 `.status.conditions` 中记录 `DisruptionTarget` 原因，便于后续排查
+> - v1.28+ **GracefulNodeShutdown** (GA) 使节点在计划关机时可优雅驱逐 Pod，需检查是否因计划内关机导致 NotReady
+> - v1.31+ **EventedPLEG** (GA) 替代 GenericPLEG，若 kubelet 日志中出现 `EventedPLEG` 相关错误，诊断方式有所不同（见 D2.6）
+
 ### 典型触发场景
 
 1. **kubelet 异常**: kubelet 进程崩溃、OOM、配置错误或无法启动，导致节点无法向 apiserver 上报心跳
@@ -66,10 +85,17 @@ Node NotReady 是 Kubernetes 集群中**爆炸半径最大**的故障类型之�
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（至少需要对 nodes、pods、events 的 get/list/watch 权限）
+- **RBAC 权限**:
+  - 最小权限: 对 `nodes`, `pods`, `events`, `pods/log`, `pods/status`, `leases` (coordination.k8s.io) 的 `get/list/watch`
+  - 如需执行修复: 额外需要 `nodes` 的 `patch`, `pods` 的 `delete/evict`
+  - 验证命令: `kubectl auth can-i list nodes && kubectl auth can-i list pods`
 - **SSH 访问**: 深度诊断（Phase 2+）需要对故障节点的 SSH 访问权限
-- **工具要求**: kubectl (v1.28+), ssh, jq（可选但推荐）
-- **监控系统**: Prometheus + kube-state-metrics（用于 trigger_metrics 匹配）
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `ssh` 及目标节点登录权限
+  - `jq` >= 1.6（可选但推荐用于 JSON 解析）
+  - `crictl` >= 1.28（如需直接操作容器运行时）
+- **监控系统**: Prometheus + kube-state-metrics >= v2.10（用于 trigger_metrics 匹配）
 
 > ⚠️ **重要**: 本 Skill 覆盖工作节点和控制平面节点的 NotReady 场景。控制平面节点 NotReady 属于 P0 事件，需立即升级。
 

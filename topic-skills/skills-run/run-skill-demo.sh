@@ -10,6 +10,7 @@
 # ============================================================================
 
 set -euo pipefail
+shopt -s nullglob  # 确保 glob 不匹配时返回空数组而非字面量
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -40,12 +41,15 @@ preflight_check() {
         ok=false
     fi
 
-    # 确保 skill-demo namespace 存在
-    kubectl create namespace skill-demo --dry-run=client -o yaml | kubectl apply -f - &>/dev/null
-
     if [[ "${ok}" == "false" ]]; then
         exit 1
     fi
+
+    # 确保 skill-demo namespace 存在 (仅在集群连接成功后执行)
+    if ! kubectl create namespace skill-demo --dry-run=client -o yaml | kubectl apply -f - &>/dev/null; then
+        echo -e "  ${YELLOW}⚠ 无法创建 namespace skill-demo (权限不足或 API 不可达)${NC}"
+    fi
+
     echo -e "  ${GREEN}✓ 集群就绪${NC}"
     echo ""
 }
@@ -115,11 +119,13 @@ run_scenario() {
         script="${SCRIPT_DIR}/scenarios/${num}-*.sh"
     fi
     
-    local file
-    file=$(ls ${script} 2>/dev/null | head -1)
+    local files
+    files=( ${script} )
+    local file="${files[0]:-}"
 
-    if [[ -z "${file}" || ! -f "${file}" ]]; then
-        echo -e "${RED}✗ 场景 ${num} 脚本未找到${NC}"
+    if [[ -z "${file}" || ! -f "${file}" || ! -x "${file}" ]]; then
+        echo -e "${RED}✗ 场景 ${num} 脚本未找到或未设置可执行权限${NC}"
+        echo -e "${YELLOW}  提示: chmod +x ${script}${NC}"
         return 1
     fi
 
@@ -127,7 +133,18 @@ run_scenario() {
     echo -e "${MAGENTA}  运行场景 ${num}: $(basename "${file}")${NC}"
     echo -e "${MAGENTA}════════════════════════════════════════════════════════════════${NC}"
 
-    bash "${file}"
+    # 使用子 shell 运行场景，避免单个场景失败导致主脚本退出
+    # 同时通过 pipe 捕获退出码
+    if ! ( bash "${file}" ); then
+        echo -e "\n${YELLOW}⚠ 场景 ${num} 执行异常，是否继续?${NC}"
+        echo -e "${YELLOW}  按 Enter 继续 / 输入 q 退出${NC}"
+        local cont
+        read -r cont
+        if [[ "${cont}" == "q" || "${cont}" == "Q" ]]; then
+            echo -e "${RED}已退出 / Exited${NC}"
+            exit 1
+        fi
+    fi
 }
 
 run_all() {
@@ -147,6 +164,27 @@ run_all() {
 # ---- 主逻辑 / Main ----
 main() {
     preflight_check
+
+    # 安全校验: 确认当前 context 是 kind- 开头的 Kind 集群
+    CURRENT_CTX=$(kubectl config current-context 2>/dev/null || echo "")
+    if [[ -z "${CURRENT_CTX}" ]]; then
+        echo -e "${RED}✗ 无法获取当前 kubectl context${NC}"
+        exit 1
+    fi
+    if [[ "${CURRENT_CTX}" != kind-* ]]; then
+        echo -e "${RED}╔══════════════════════════════════════════════════════════════╗${NC}"
+        echo -e "${RED}║  ⚠ 安全警告 / SAFETY WARNING                                ║${NC}"
+        echo -e "${RED}║                                                              ║${NC}"
+        echo -e "${RED}║  当前 context '${CURRENT_CTX}' 不是 Kind 集群。${NC}"
+        echo -e "${RED}║  本脚本可能会修改非 Kind 集群的资源。                        ║${NC}"
+        echo -e "${RED}║                                                              ║${NC}"
+        echo -e "${RED}║  请先运行: bash setup-kind-cluster.sh                       ║${NC}"
+        echo -e "${RED}║  或切换 context: kubectl config use-context kind-<name>     ║${NC}"
+        echo -e "${RED}╚══════════════════════════════════════════════════════════════╝${NC}"
+        exit 1
+    fi
+    echo -e "  ${GREEN}✓ 当前 context: ${CURRENT_CTX}${NC}"
+    echo ""
 
     # 支持命令行参数
     if [[ $# -gt 0 ]]; then

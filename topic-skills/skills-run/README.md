@@ -11,7 +11,7 @@
 
 ```bash
 # 1. 进入 demo 目录
-cd topic-skills/demo
+cd topic-skills/skills-run
 
 # 2. 创建本地多节点 Kind 集群 (1 control-plane + 2 workers)
 bash setup-kind-cluster.sh
@@ -43,21 +43,21 @@ bash teardown.sh
 
 | # | 场景 | 对应 Skill | 根因 | 风险等级 |
 |---|------|-----------|------|----------|
-| 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | 🟢 低 |
-| 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | 🟢 低 |
-| 03 | Pod Pending | SKILL-POD-002 | 资源超限 | 🟢 低 |
-| 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | 🟢 低 |
-| 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | 🟢 低 |
+| 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | LOW |
+| 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | LOW |
+| 03 | Pod Pending | SKILL-POD-002 | 资源超限 | LOW |
+| 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | LOW |
+| 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | LOW |
 
 ### 扩展场景 (6-10)
 
 | # | 场景 | 对应 Skill | 根因 | 风险等级 |
 |---|------|-----------|------|----------|
-| 06 | PVC Pending | SKILL-STORE-001 | RC-001 (StorageClass 不存在) | 🟢 低 |
-| 07 | Deployment rollout 卡住 | SKILL-WORK-001 | RC-002 (readinessProbe 失败) | 🟢 低 |
-| 08 | RBAC 权限拒绝 | SKILL-SEC-002 | RC-001 (缺少 RBAC 权限) | 🟡 中 |
-| 09 | HPA 不触发扩容 | SKILL-SCALE-001 | RC-002 (未设置 resources.requests) | 🟡 中 |
-| 10 | 镜像拉取失败 | SKILL-IMAGE-001 | RC-001 (镜像不存在) | 🟢 低 |
+| 06 | PVC Pending | SKILL-STORE-001 | RC-001 (StorageClass 不存在) | LOW |
+| 07 | Deployment rollout 卡住 | SKILL-WORK-001 | RC-002 (readinessProbe 失败) | LOW |
+| 08 | RBAC 权限拒绝 | SKILL-SEC-002 | RC-001 (缺少 RBAC 权限) | MEDIUM |
+| 09 | HPA 不触发扩容 | SKILL-SCALE-001 | RC-002 (未设置 resources.requests) | MEDIUM |
+| 10 | 镜像拉取失败 | SKILL-IMAGE-001 | RC-001 (镜像不存在) | LOW |
 
 ---
 
@@ -87,7 +87,7 @@ Phase 4: 根因确认 (Root Cause)             ← Skill Section 5
     ▼
 Phase 5: 修复操作 (Remediation)            ← Skill Section 6
     │   前置检查 → 执行 → 后置验证
-    │   风险门控 (🟢🟡🔴⚫)
+    │   风险门控 (LOW → MEDIUM → HIGH → CRITICAL)
     ▼
 Phase 6: 验证确认 (Verification)           ← Skill Section 7
     │   V1-V4 即时验证
@@ -194,3 +194,53 @@ sudo mv kubectl /usr/local/bin/kubectl
 |------|-------|------|
 | `CLUSTER_NAME` | `skill-demo` | Kind 集群名称 |
 | `KIND_IMAGE` | `kindest/node:v1.31.4` | Kind 节点镜像 |
+
+---
+
+## 硬件资源要求
+
+运行本 Demo 需要以下最低配置：
+
+| 资源 | 最低要求 | 推荐配置 |
+|------|---------|---------|
+| CPU | 4 核 | 6 核 |
+| 内存 | 8 GB | 12 GB |
+| 磁盘 | 20 GB 可用空间 | 40 GB |
+| Docker Desktop | 已安装并运行 | 已安装并运行 |
+
+> **注意**: macOS Apple Silicon (M1/M2/M3) 用户需使用 `kindest/node` 的 arm64 镜像，或通过 Rosetta 运行 amd64 镜像。Kind v0.20+ 自动处理架构选择。
+
+---
+
+## 故障排查
+
+### Kind 集群创建失败
+
+**症状**: `kind create cluster` 报错或超时
+
+**排查步骤**:
+1. 检查 Docker 是否运行: `docker info`
+2. 检查可用内存: Docker Desktop Preferences → Resources → Memory (建议 >= 8GB)
+3. 检查端口冲突: `lsof -i :30000` 和 `lsof -i :30001`
+4. 清理旧集群: `kind delete cluster --name skill-demo`
+5. 手动重试并增加超时: `kind create cluster --config <config> --wait 300s`
+
+### 节点长时间不 Ready
+
+**症状**: `kubectl get nodes` 显示 NotReady
+
+**排查步骤**:
+1. 检查 Kind 容器状态: `docker ps -a | grep kind`
+2. 查看 kubelet 日志: `docker exec kind-control-plane journalctl -u kubelet -n 50`
+3. 检查 Docker 资源限制: 确保分配给 Docker 的内存 >= 6GB
+4. 重启 Docker Desktop 后重试
+
+### 场景脚本运行失败
+
+**症状**: 场景脚本报错或中途退出
+
+**排查步骤**:
+1. 确认 kubectl 版本: `kubectl version --client` (建议 v1.28+)
+2. 确认 context 正确: `kubectl config current-context` 应显示 `kind-skill-demo`
+3. 检查 namespace 存在: `kubectl get namespace skill-demo`
+4. 查看具体错误后手动清理: `kubectl delete namespace skill-demo` 然后重新运行

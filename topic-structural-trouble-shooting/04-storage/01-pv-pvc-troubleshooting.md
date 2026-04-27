@@ -11,6 +11,9 @@
 | **中级运维** | 实施存储扩容、快照备份与多节点共享存储 | 理解 CSI 架构、掌握动态供给原理、解决多重挂载（Multi-Attach）冲突。 |
 | **资深专家** | 解决大规模集群下的 I/O 瓶颈与数据一致性危机 | 深入底层：Attach/Detach 控制流、Mount 传播机制、块设备层故障诊断与专家级清理技巧。 |
 
+> **专项排查文档**：
+> - [StorageClass 配置与动态供给专项排查](05-storageclass-troubleshooting.md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
+
 ---
 
 ## 0. 10 分钟快速诊断

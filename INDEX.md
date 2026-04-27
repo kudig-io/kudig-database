@@ -4,6 +4,65 @@
 
 ---
 
+## 📦 开源项目生态索引 (2026-04-24 新增)
+
+**全景图谱**: [OPEN-SOURCE-ECOSYSTEM.md](./OPEN-SOURCE-ECOSYSTEM.md) — 200+ CNCF / K8s 开源项目全景分类索引，含版本速查与选型决策树。
+
+**各 Domain 项目索引**: 全部 40 个 Domain 已新增 `00-open-source-projects-index.md`，覆盖项目清单、版本信息、兼容矩阵与选型指南。
+
+**深度项目指南 (26 篇)**:
+- [Prometheus 企业监控部署指南](./domain-20-enterprise-monitoring-alerting/99-prometheus-enterprise-guide.md)
+- [分布式追踪实践指南 (Jaeger/Tempo/OpenTelemetry)](./domain-20-enterprise-monitoring-alerting/99-distributed-tracing-guide.md)
+- [KEDA 事件驱动自动缩放指南](./domain-18-production-operations/99-keda-event-driven-autoscaling-guide.md)
+- [Argo CD GitOps 实践指南](./domain-23-gitops-ci-cd/99-argo-cd-gitops-guide.md)
+- [Flux GitOps 实践指南](./domain-23-gitops-ci-cd/99-flux-gitops-guide.md)
+- [Tekton CI/CD 实践指南](./domain-23-gitops-ci-cd/99-tekton-cicd-guide.md)
+- [Istio 服务网格入门指南](./domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md)
+- [Linkerd 轻量级服务网格指南](./domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md)
+- [Harbor 企业镜像仓库指南](./domain-22-container-image-management/99-harbor-enterprise-guide.md)
+- [Falco 运行时安全监控指南](./domain-25-cloud-native-security/99-falco-runtime-security-guide.md)
+- [Kyverno K8s 原生策略管理指南](./domain-25-cloud-native-security/99-kyverno-policy-guide.md)
+- [OPA Gatekeeper 策略即代码指南](./domain-25-cloud-native-security/99-opa-gatekeeper-policy-guide.md)
+- [Vault K8s 密钥管理指南](./domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md)
+- [cert-manager TLS 证书管理指南](./domain-25-cloud-native-security/99-cert-manager-tls-guide.md)
+- [SLSA 供应链安全实践指南](./domain-39-supply-chain-security/99-slsa-supply-chain-security-guide.md)
+- [Crossplane 平台工程实践指南](./domain-24-infrastructure-as-code/99-crossplane-platform-guide.md)
+- [Cilium eBPF 网络与安全指南](./domain-15-network-fundamentals/99-cilium-ebpf-network-guide.md)
+- [Envoy Gateway API Gateway 指南](./domain-40-cloud-native-api-gateway/99-envoy-gateway-enterprise-guide.md)
+- [Kubeflow AI 平台部署指南](./domain-11-ai-infra/99-kubeflow-ai-platform-guide.md)
+- [Backstage 内部开发者平台 (IDP) 构建指南](./domain-36-platform-engineering/99-backstage-idp-guide.md)
+- [Serverless / FaaS 实践指南 (Knative/OpenFunction)](./domain-10-extensions/99-serverless-faas-guide.md)
+- [Kubernetes v1.29-v1.33 版本特性深度指南](./domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md)
+- [Kubernetes 核心组件 v1.29-v1.33 新特性速查](./domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md)
+- [Kubernetes v1.33 升级实操指南](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md)
+- [Kubectl v1.29-v1.33 新命令与用法速查](./domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md)
+- [Kubernetes v1.33 生产环境最佳实践](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md)
+- [Kubernetes 版本生命周期与支持策略](./domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md)
+- [Kubernetes v1.33 生态系统兼容性矩阵](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md)
+- [Kubernetes v1.33 一页纸速查卡](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md)
+- [Kubernetes v1.33 弃用功能与迁移指南](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md)
+- [Kubernetes v1.25-v1.33 特性对比总表](./domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md)
+- [Kubernetes v1.29-v1.33 完整 Feature Gate 参考手册](./domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md)
+- [Kubernetes v1.33 实战案例集 (14个案例)](./domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md)
+- [Kubernetes v1.29-v1.33 设计原理演进与影响分析](./domain-2-design-principles/99-kubernetes-v1.33-design-principles-evolution.md)
+- [Kubernetes v1.29-v1.33 工作负载管理新特性指南](./domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md)
+- [Kubernetes v1.29-v1.33 可观测性新特性指南](./domain-8-observability/99-kubernetes-v1.33-observability-guide.md)
+- [Kubernetes v1.29-v1.33 平台运维新特性指南](./domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md)
+- [CloudNativePG 企业级 PostgreSQL 指南](./domain-28-enterprise-database-middleware/99-cloudnativepg-enterprise-guide.md)
+- [Velero 备份恢复指南](./domain-30-disaster-recovery-business-continuity/99-velero-backup-recovery-guide.md)
+- [FinOps 成本优化指南 (Kubecost/OpenCost/Infracost)](./domain-18-production-operations/99-finops-cost-optimization-guide.md)
+- [Karpenter 节点自动扩展指南](./domain-18-production-operations/99-karpenter-node-autoscaling-guide.md)
+- [WebAssembly 云原生实践指南 (WasmEdge/Spin)](./domain-38-webassembly-cloud-native/99-wasmedge-cloud-native-guide.md)
+- [K8s 开发者工具链指南 (k9s/Headlamp/stern)](./domain-37-edge-computing/99-kubernetes-developer-toolchain-guide.md)
+
+**快速选型**: [OPEN-SOURCE-SELECTION-GUIDE.md](./OPEN-SOURCE-SELECTION-GUIDE.md) — 按场景/角色的 30 秒快速选型索引。
+
+**模板工具**: [PROJECT-INDEX-TEMPLATE.md](./PROJECT-INDEX-TEMPLATE.md) — 标准化项目索引模板，供后续快速扩展复用。
+
+---
+
+---
+
 ## 核心知识域 (Core Kubernetes)
 
 基础架构、设计原理到故障排查的完整 Kubernetes 技术栈。

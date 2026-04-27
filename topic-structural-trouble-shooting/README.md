@@ -1,6 +1,6 @@
 # Kubernetes 结构化故障排查知识库
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **文档数量**: 41篇
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **文档数量**: 63篇
 
 本目录包含 Kubernetes 各组件的全面故障排查指南，每篇文档均基于生产环境真实案例编写，提供：
 - **系统性排查方法**：从现象到根因的完整排查路径
@@ -33,6 +33,10 @@
 | [04-controller-manager-troubleshooting.md](01-control-plane/04-controller-manager-troubleshooting.md) | Controller Manager 故障排查 | 控制器异常、资源不同步、Endpoints 问题 |
 | [05-webhook-admission-troubleshooting.md](01-control-plane/05-webhook-admission-troubleshooting.md) | Webhook/准入控制故障排查 | Webhook 超时、资源被拒绝、准入控制器问题 |
 | [06-apf-troubleshooting.md](01-control-plane/06-apf-troubleshooting.md) | API 优先级与公平性故障排查 | 请求限流 (429)、API 延迟、FlowSchema 配置 |
+| [07-control-plane-security-troubleshooting.md](01-control-plane/07-control-plane-security-troubleshooting.md) | 控制平面安全故障排查 | PSA 策略冲突、安全上下文配置、准入控制绕过 |
+| [08-control-plane-performance-troubleshooting.md](01-control-plane/08-control-plane-performance-troubleshooting.md) | 控制平面性能故障排查 | API Server 延迟、etcd 性能退化、大规模 LIST 请求 |
+| [09-control-plane-ha-troubleshooting.md](01-control-plane/09-control-plane-ha-troubleshooting.md) | 控制平面高可用故障排查 | 多 master 节点故障、etcd 仲裁丢失、VIP 漂移 |
+| [10-control-plane-upgrade-troubleshooting.md](01-control-plane/10-control-plane-upgrade-troubleshooting.md) | 控制平面升级故障排查 | 版本升级失败、API 废弃、 kubeadm 升级卡住 |
 
 ### 02-node-components（节点组件）
 
@@ -55,6 +59,8 @@
 | [04-networkpolicy-troubleshooting.md](03-networking/04-networkpolicy-troubleshooting.md) | NetworkPolicy 故障排查 | 网络策略不生效、流量被误拦截、策略配置问题 |
 | [05-service-mesh-istio-troubleshooting.md](03-networking/05-service-mesh-istio-troubleshooting.md) | Service Mesh (Istio) 故障排查 | Sidecar 注入失败、mTLS 问题、流量路由异常、Gateway 不可用 |
 | [06-gateway-api-troubleshooting.md](03-networking/06-gateway-api-troubleshooting.md) | Gateway API 故障排查 | GatewayClass/Gateway/HTTPRoute 配置、跨 namespace 路由、TLS 配置 |
+| [07-terway-troubleshooting.md](03-networking/07-terway-troubleshooting.md) | Terway（阿里云 CNI）故障排查 | ENI/IPVlan 模式、IPAM、安全组、跨节点通信、网络策略 |
+| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel 网络故障排查 | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
 
 ### 04-storage（存储）
 
@@ -62,6 +68,9 @@
 |------|------|----------|
 | [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC 存储故障排查 | PVC Pending、卷挂载失败、存储类问题 |
 | [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动故障、卷创建/挂载/扩容问题 |
+| [03-snapshot-backup-troubleshooting.md](04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
+| [04-storage-performance-troubleshooting.md](04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
+| [05-storageclass-troubleshooting.md](04-storage/05-storageclass-troubleshooting.md) | StorageClass 配置与动态供给故障排查 | StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级 |
 
 ### 05-workloads（工作负载）
 
@@ -102,6 +111,39 @@
 | [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面故障、etcd 恢复、备份还原、灾难恢复 |
 | [05-crd-operator-troubleshooting.md](08-cluster-operations/05-crd-operator-troubleshooting.md) | CRD/Operator 故障排查 | CRD 版本冲突、Operator 崩溃、Reconcile 失败、Finalizer 阻塞 |
 | [06-kustomize-troubleshooting.md](08-cluster-operations/06-kustomize-troubleshooting.md) | Kustomize 部署故障排查 | 构建失败、Patch 不生效、多环境配置、镜像替换问题 |
+
+### 09-cloud-provider（云厂商集成）
+
+| 文档 | 说明 | 适用场景 |
+|------|------|----------|
+| [01-cloud-provider-integration-troubleshooting.md](09-cloud-provider/01-cloud-provider-integration-troubleshooting.md) | 云厂商集成故障排查 | CCM 认证失败、LoadBalancer 创建失败、云 API 限流 |
+| [02-multi-cloud-networking-troubleshooting.md](09-cloud-provider/02-multi-cloud-networking-troubleshooting.md) | 多云/混合云网络故障排查 | 跨云 VPC Peering、VPN 隧道、集群网格互联 |
+| [03-cloud-resource-quota-troubleshooting.md](09-cloud-provider/03-cloud-resource-quota-troubleshooting.md) | 云资源配额与 API 限流故障排查 | 配额耗尽、实例扩容失败、API Throttling |
+
+### 10-ai-ml-workloads（AI/ML 工作负载）
+
+| 文档 | 说明 | 适用场景 |
+|------|------|----------|
+| [01-ai-ml-workloads-troubleshooting.md](10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md) | AI/ML 工作负载通用故障排查 | GPU 调度、分布式训练、模型服务、数据处理 |
+| [02-kubeflow-troubleshooting.md](10-ai-ml-workloads/02-kubeflow-troubleshooting.md) | Kubeflow 平台故障排查 | Pipeline 失败、Katib 实验、KServe 推理、Notebook |
+| [03-mpi-operator-troubleshooting.md](10-ai-ml-workloads/03-mpi-operator-troubleshooting.md) | MPI Operator 与分布式训练故障排查 | MPIJob 启动、NCCL 通信、多节点 GPU 训练 |
+
+### 11-gitops-devops（GitOps 与 DevOps）
+
+| 文档 | 说明 | 适用场景 |
+|------|------|----------|
+| [01-gitops-devops-troubleshooting.md](11-gitops-devops/01-gitops-devops-troubleshooting.md) | GitOps/DevOps 通用故障排查 | ArgoCD/Flux 同步、CI/CD 流水线、Secret 管理 |
+| [02-tekton-troubleshooting.md](11-gitops-devops/02-tekton-troubleshooting.md) | Tekton CI/CD 流水线故障排查 | PipelineRun 失败、Workspace 问题、触发器异常 |
+| [03-flux-image-automation-troubleshooting.md](11-gitops-devops/03-flux-image-automation-troubleshooting.md) | Flux 镜像自动化故障排查 | 镜像扫描失败、策略不匹配、Git 自动提交异常 |
+
+### 12-monitoring-observability（可观测性）
+
+| 文档 | 说明 | 适用场景 |
+|------|------|----------|
+| [01-monitoring-observability-troubleshooting.md](12-monitoring-observability/01-monitoring-observability-troubleshooting.md) | 可观测性通用故障排查 | Prometheus/Grafana/Loki/Jaeger/AlertManager |
+| [02-opentelemetry-troubleshooting.md](12-monitoring-observability/02-opentelemetry-troubleshooting.md) | OpenTelemetry Collector 故障排查 | OTLP 接收/导出失败、采样、数据丢失 |
+| [03-ebpf-observability-troubleshooting.md](12-monitoring-observability/03-ebpf-observability-troubleshooting.md) | eBPF 可观测性故障排查 | Cilium Hubble、Tetragon、Pixie、eBPF 加载 |
+| [04-finops-cost-optimization-troubleshooting.md](12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md) | FinOps 成本优化故障排查 | 成本飙升、闲置资源、Spot 优化、预算告警 |
 
 ---
 
@@ -149,11 +191,30 @@
 | Operator 无法调谐 | CRD/Operator 故障排查 |
 | Finalizer 阻塞删除 | CRD/Operator 故障排查 |
 | API 请求限流 (429) | API 优先级与公平性故障排查 |
+| 控制平面安全告警 | 控制平面安全故障排查 |
+| API Server 响应缓慢 | 控制平面性能故障排查 |
+| 多 master 节点故障 | 控制平面高可用故障排查 |
+| 集群升级失败 | 控制平面升级故障排查 |
 | kubectl drain 卡住 | PodDisruptionBudget 故障排查 |
 | 节点不扩容/不缩容 | Cluster Autoscaler 故障排查 |
 | Gateway API 路由不生效 | Gateway API 故障排查 |
 | Kustomize 构建失败 | Kustomize 部署故障排查 |
 | 审计日志缺失 | 审计日志故障排查 |
+| 快照创建/恢复失败 | CSI 快照与卷备份故障排查 |
+| 存储 I/O 性能差 | 存储 I/O 性能故障排查 |
+| StorageClass 配置错误 | StorageClass 配置与动态供给故障排查 |
+| PVC 扩容失败 | StorageClass 配置与动态供给故障排查 |
+| 跨云网络不通 | 多云/混合云网络故障排查 |
+| Terway Pod 无 IP | Terway（阿里云 CNI）故障排查 |
+| Flannel 跨节点不通 | Flannel 网络故障排查 |
+| 云配额超限无法扩容 | 云资源配额与 API 限流故障排查 |
+| Kubeflow Pipeline 失败 | Kubeflow 平台故障排查 |
+| MPI 分布式训练失败 | MPI Operator 故障排查 |
+| Tekton 流水线失败 | Tekton CI/CD 流水线故障排查 |
+| Flux 镜像未自动更新 | Flux 镜像自动化故障排查 |
+| OpenTelemetry 数据丢失 | OpenTelemetry Collector 故障排查 |
+| eBPF 程序加载失败 | eBPF 可观测性故障排查 |
+| 云成本异常飙升 | FinOps 成本优化故障排查 |
 
 ### 按组件查找
 
@@ -172,6 +233,8 @@
 | GPU/Device Plugin | 02-node-components/06-gpu-device-plugin-troubleshooting.md |
 | CoreDNS | 03-networking/02-dns-troubleshooting.md |
 | CNI (Calico/Flannel/Cilium) | 03-networking/01-cni-troubleshooting.md |
+| Terway (阿里云 CNI) | 03-networking/07-terway-troubleshooting.md |
+| Flannel | 03-networking/08-flannel-troubleshooting.md |
 | Ingress Controller | 03-networking/03-service-ingress-troubleshooting.md |
 | NetworkPolicy | 03-networking/04-networkpolicy-troubleshooting.md |
 | Istio/Service Mesh | 03-networking/05-service-mesh-istio-troubleshooting.md |
@@ -182,11 +245,15 @@
 | DaemonSet | 05-workloads/04-daemonset-troubleshooting.md |
 | Job/CronJob | 05-workloads/05-job-cronjob-troubleshooting.md |
 | ConfigMap/Secret | 05-workloads/06-configmap-secret-troubleshooting.md |
+| Pod | 05-workloads/01-pod-troubleshooting.md |
+| Resource Quota | 07-resources-scheduling/01-resources-quota-troubleshooting.md |
 | HPA/VPA | 07-resources-scheduling/02-autoscaling-troubleshooting.md |
 | metrics-server | 07-resources-scheduling/02-autoscaling-troubleshooting.md |
 | Prometheus | 08-cluster-operations/02-logging-monitoring-troubleshooting.md |
 | Fluentd/Fluent Bit | 08-cluster-operations/02-logging-monitoring-troubleshooting.md |
 | Helm | 08-cluster-operations/03-helm-troubleshooting.md |
+| Cluster Maintenance | 08-cluster-operations/01-cluster-maintenance-troubleshooting.md |
+| HA/Disaster Recovery | 08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md |
 | cert-manager | 06-security-auth/02-certificate-troubleshooting.md |
 | CRD/Operator | 08-cluster-operations/05-crd-operator-troubleshooting.md |
 | Kustomize | 08-cluster-operations/06-kustomize-troubleshooting.md |
@@ -194,7 +261,24 @@
 | Cluster Autoscaler | 07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md |
 | PodDisruptionBudget | 07-resources-scheduling/04-pdb-troubleshooting.md |
 | APF (FlowSchema) | 01-control-plane/06-apf-troubleshooting.md |
+| Control Plane Security | 01-control-plane/07-control-plane-security-troubleshooting.md |
+| Control Plane Performance | 01-control-plane/08-control-plane-performance-troubleshooting.md |
+| Control Plane HA | 01-control-plane/09-control-plane-ha-troubleshooting.md |
+| Control Plane Upgrade | 01-control-plane/10-control-plane-upgrade-troubleshooting.md |
 | Audit Logging | 06-security-auth/04-audit-logging-troubleshooting.md |
+| CSI Snapshot/Backup | 04-storage/03-snapshot-backup-troubleshooting.md |
+| Storage Performance | 04-storage/04-storage-performance-troubleshooting.md |
+| StorageClass | 04-storage/05-storageclass-troubleshooting.md |
+| Cloud Provider Integration | 09-cloud-provider/01-cloud-provider-integration-troubleshooting.md |
+| Multi-Cloud Network | 09-cloud-provider/02-multi-cloud-networking-troubleshooting.md |
+| Cloud Quota/API | 09-cloud-provider/03-cloud-resource-quota-troubleshooting.md |
+| Kubeflow | 10-ai-ml-workloads/02-kubeflow-troubleshooting.md |
+| MPI Operator | 10-ai-ml-workloads/03-mpi-operator-troubleshooting.md |
+| Tekton | 11-gitops-devops/02-tekton-troubleshooting.md |
+| Flux Image Automation | 11-gitops-devops/03-flux-image-automation-troubleshooting.md |
+| OpenTelemetry | 12-monitoring-observability/02-opentelemetry-troubleshooting.md |
+| eBPF Observability | 12-monitoring-observability/03-ebpf-observability-troubleshooting.md |
+| FinOps/Cost | 12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md |
 
 ---
 
@@ -236,15 +320,19 @@
 
 | 类别 | 文档数 | 覆盖内容 | 生产环境重点 |
 |------|--------|----------|--------------|
-| 控制平面 | 6 | API Server、etcd、Scheduler、Controller Manager、Webhook、APF | ⭐⭐⭐ 集群核心组件 |
+| 控制平面 | 10 | API Server、etcd、Scheduler、Controller Manager、Webhook、APF、安全、性能、高可用、升级 | ⭐⭐⭐ 集群核心组件 |
 | 节点组件 | 6 | kubelet、kube-proxy、容器运行时、节点故障专项、镜像仓库、GPU/设备插件 | ⭐⭐⭐ 节点稳定性保障 |
-| 网络 | 6 | CNI、DNS、Service/Ingress、NetworkPolicy、Service Mesh、Gateway API | ⭐⭐ 网络连通性保障 |
-| 存储 | 2 | PV/PVC、CSI 驱动 | ⭐⭐ 数据持久化保障 |
+| 网络 | 8 | CNI、DNS、Service/Ingress、NetworkPolicy、Service Mesh、Gateway API、Terway、Flannel | ⭐⭐ 网络连通性保障 |
+| 存储 | 5 | PV/PVC、CSI 驱动、快照备份、存储性能、StorageClass | ⭐⭐ 数据持久化保障 |
 | 工作负载 | 6 | Pod、Deployment、StatefulSet、DaemonSet、Job/CronJob、ConfigMap/Secret | ⭐⭐⭐ 业务应用保障 |
 | 安全认证 | 4 | RBAC、证书、Pod 安全、审计日志 | ⭐⭐⭐ 安全合规保障 |
 | 资源调度 | 4 | 资源配额、HPA/VPA、Cluster Autoscaler、PDB | ⭐⭐ 性能优化保障 |
 | 集群运维 | 6 | 维护升级、日志监控、Helm、高可用灾备、CRD/Operator、Kustomize | ⭐⭐⭐ 运维效率提升 |
-| **总计** | **40** | | |
+| 云厂商集成 | 3 | 云厂商集成、多云网络、资源配额 | ⭐⭐ 多云环境保障 |
+| AI/ML 工作负载 | 3 | AI/ML 通用、Kubeflow、MPI 分布式训练 | ⭐⭐ AI 基础设施保障 |
+| GitOps/DevOps | 3 | GitOps 通用、Tekton 流水线、Flux 镜像自动化 | ⭐⭐ 交付效率保障 |
+| 可观测性 | 4 | 可观测性通用、OpenTelemetry、eBPF、FinOps 成本 | ⭐⭐ 全链路可观测 |
+| **总计** | **63** | | |
 
 ---
 
@@ -283,7 +371,16 @@
 
 ## 📝 更新日志
 
-### 2026-01 (最新)
+### 2026-04 (最新)
+- ✨ 全面加强 03-networking、04-storage 核心网络与存储内容
+- ✨ 新增 3 篇专项排查文档：Terway（阿里云 CNI）深度排查、Flannel 专项排查、StorageClass 配置与动态供给专项排查
+- ✨ 全面扩充 04-storage、09-cloud-provider、10-ai-ml-workloads、11-gitops-devops、12-monitoring-observability 目录
+- ✨ 新增 11 篇高质量故障排查文档，覆盖 CSI 快照、存储性能、多云网络、云配额、Kubeflow、MPI Operator、Tekton、Flux 镜像自动化、OpenTelemetry、eBPF 可观测性、FinOps 成本优化
+- ✨ 所有新文档严格遵循"四要素法"（问题现象、报错信息、排查方案、解决方案）
+- ✨ 更新 README 目录结构、快速定位指南、文档统计，总计 63 篇故障排查文档（含 1 篇方法论）
+- ✨ 补充 Prometheus 监控告警规则、自动化诊断脚本和风险控制矩阵
+
+### 2026-01
 - ✨ 丰富所有文档内容，添加生产环境实战经验和最佳实践
 - ✨ 增加典型故障场景分析和预防措施
 - ✨ 补充自动化运维脚本和监控告警配置

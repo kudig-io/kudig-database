@@ -5,11 +5,24 @@ version: "1.0"
 category: "pod"
 severity_range: "P1-P3"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: SchedulingGates GA, PodDisruptionConditions GA"
+  - "v1.29+: DynamicResourceAllocation (alpha), PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA"
+  - "v1.31+: VolumeAttributesClass (beta)"
+  - "v1.32+: Sidecar Containers (GA)"
+last_updated: "2026-04-26"
 estimated_resolution_time: "5-30min"
 risk_level: "low"
 agent_execution_mode: "L2-semi-auto"
@@ -72,9 +85,14 @@ Pod Pending 是 Kubernetes 集群中最常见的工单类型之一。当 Pod 被
 - **SchedulingGates 阻止**: **[v1.28+]** Pod 被 schedulingGates 门控阻止进入调度队列
 
 **前置条件**：
-- Agent 需具备目标 namespace 的 `get`/`list`/`describe` 权限（pods、events、nodes、pvc、resourcequota）
-- 对于修复操作，需具备对应资源的 `patch`/`update` 权限
-- `kubectl` CLI 可访问目标集群
+- **RBAC 权限**:
+  - 最小权限: 目标 namespace 内 `pods`, `events`, `nodes`, `persistentvolumeclaims`, `resourcequotas`, `limitranges` 的 `get/list/watch`
+  - 修复权限: 上述资源的 `patch`/`update`，以及 `pods/eviction` 的 `create`（如需驱逐）
+  - 验证命令: `kubectl auth can-i list pods -n <namespace>`
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `jq` >= 1.6（可选，用于 JSON 解析）
+- **集群组件**: Metrics Server（`kubectl top node` 需要）
 
 ---
 

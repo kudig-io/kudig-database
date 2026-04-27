@@ -5,11 +5,24 @@ version: "1.0"
 category: "security"
 severity_range: "P0-P1"
 k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
+  - "1.28.x"
+  - "1.29.x"
+  - "1.30.x"
+  - "1.31.x"
+  - "1.32.x"
+tested_on:
+  - "1.28.15"
+  - "1.29.12"
+  - "1.30.8"
+  - "1.31.4"
+  - "1.32.0"
+k8s_version_notes:
+  - "v1.28+: CertificateSigningRequest v1 stable, kubelet certificate rotation GA"
+  - "v1.29+: PodDisruptionConditions GA"
+  - "v1.30+: ValidatingAdmissionPolicy GA"
+  - "v1.31+: BoundServiceAccountTokenVolume GA"
+  - "v1.32+: No certificate-related API changes"
+last_updated: "2026-04-26"
 estimated_resolution_time: "10-60min"
 risk_level: "critical"
 agent_execution_mode: "L1-advisory"
@@ -73,10 +86,18 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 
 ### 前置条件
 
-- **RBAC 权限**: cluster-admin 或等效权限（需要对 nodes、secrets、certificates、certificaterequests 的完整 CRUD 权限）
+- **RBAC 权限**:
+  - 最小权限: 对 `nodes`, `secrets`, `certificatesigningrequests` (certificates.k8s.io), `events` 的 `get/list/watch`
+  - 修复权限: `secrets`, `certificatesigningrequests` 的 `create/update/delete`
+  - 验证命令: `kubectl auth can-i list secrets`
 - **SSH 访问**: 控制平面节点的 SSH 权限（用于直接操作证书文件）
-- **工具要求**: kubectl (v1.28+), openssl, ssh, kubeadm（kubeadm 管理的集群）, jq（推荐）
-- **cert-manager 访问**（如适用）: 对 cert-manager namespace 的访问权限
+- **工具要求**:
+  - `kubectl` >= v1.28（客户端版本建议与集群版本相差不超过 1 个 minor）
+  - `openssl` >= 1.1.1
+  - `ssh`
+  - `kubeadm` >= v1.28（kubeadm 管理的集群）
+  - `jq` >= 1.6（推荐）
+- **cert-manager 访问**（如适用）: 对 cert-manager namespace 的 `get/list/watch` 权限
 - **证书文件路径**: 默认路径为 `/etc/kubernetes/pki/`（kubeadm 集群），自定义安装可能不同
 
 > **重要**: 当 apiserver 证书过期时，所有 kubectl 命令将失败。此时必须通过 SSH 直接登录控制平面节点，使用 `kubeadm` 或 `openssl` 工具进行证书操作。本 Skill 包含 kubectl 不可用场景下的完整恢复流程。

@@ -33,15 +33,35 @@ section() { echo -e "\n${CYAN}━━━━━━━━━━━━━━━━�
 step()    { echo -e "\n${MAGENTA}▸ [$1] $2${NC}"; }
 info()    { echo -e "  ${GREEN}ℹ${NC} $1"; }
 warn()    { echo -e "  ${YELLOW}⚠${NC} $1"; }
-run_cmd() { echo -e "  ${CYAN}\$ $1${NC}"; eval "$1" 2>&1 | sed 's/^/    /'; }
+run_cmd() {
+    echo -e "  ${CYAN}\$ $1${NC}"
+    # 使用子 shell 运行命令，即使失败也不中断父脚本
+    ( bash -c "$1" 2>&1 | sed 's/^/    /' ) || {
+        echo -e "    ${RED}[命令失败 / Command failed with exit code $?]${NC}"
+    }
+}
 pause()   { echo -e "\n  ${YELLOW}按 Enter 继续 / Press Enter to continue...${NC}"; read -r; }
 
 # ---- 选择目标节点 / Select target node ----
-WORKER_NODE=$(kubectl get nodes --selector='!node-role.kubernetes.io/control-plane' -o jsonpath='{.items[0].metadata.name}')
+# 兼容单节点集群: 如果没有非 control-plane 节点，则使用第一个可用节点
+WORKER_NODES=$(kubectl get nodes --selector='!node-role.kubernetes.io/control-plane' -o jsonpath='{.items[*].metadata.name}' 2>/dev/null || true)
+if [[ -n "${WORKER_NODES}" ]]; then
+    WORKER_NODE=$(echo "${WORKER_NODES}" | awk '{print $1}')
+else
+    echo -e "${YELLOW}⚠ 未找到独立的 worker 节点，使用第一个可用节点...${NC}"
+    WORKER_NODE=$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}' 2>/dev/null || true)
+fi
 if [[ -z "${WORKER_NODE}" ]]; then
-    echo -e "${RED}✗ 未找到 worker 节点 / No worker node found${NC}"
+    echo -e "${RED}✗ 未找到任何节点 / No nodes found${NC}"
     exit 1
 fi
+
+# ---- 设置 trap 清理 / Set trap for cleanup ----
+cleanup() {
+    echo -e "\n${YELLOW}正在清理 / Cleaning up...${NC}"
+    kubectl uncordon "${WORKER_NODE}" 2>/dev/null || true
+}
+trap cleanup EXIT
 
 echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║  📋 Scenario 01: Node Cordon (SKILL-NODE-001 / RC-012)     ║${NC}"

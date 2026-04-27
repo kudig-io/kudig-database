@@ -21,17 +21,30 @@ section() { echo -e "\n${CYAN}━━━━━━━━━━━━━━━━�
 step()    { echo -e "\n${MAGENTA}▸ [$1] $2${NC}"; }
 info()    { echo -e "  ${GREEN}ℹ${NC} $1"; }
 warn()    { echo -e "  ${YELLOW}⚠${NC} $1"; }
-run_cmd() { echo -e "  ${CYAN}\$ $1${NC}"; eval "$1" 2>&1 | sed 's/^/    /'; }
+run_cmd() {
+    echo -e "  ${CYAN}\$ $1${NC}"
+    ( bash -c "$1" 2>&1 | sed 's/^/    /' ) || {
+        echo -e "    ${RED}[命令失败 / Command failed with exit code $?]${NC}"
+    }
+}
 pause()   { echo -e "\n  ${YELLOW}按 Enter 继续 / Press Enter to continue...${NC}"; read -r; }
 
 NS="skill-demo"
 
+# ---- 保存当前 CoreDNS 副本数 ----
+ORIGINAL_REPLICAS=$(kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.replicas}')
+
+# ---- 清理函数 / Cleanup ----
+cleanup() {
+    echo -e "\n${YELLOW}正在清理 / Cleaning up...${NC}"
+    kubectl scale deployment coredns -n kube-system --replicas=${ORIGINAL_REPLICAS} 2>/dev/null || true
+    kubectl delete pod dns-test -n ${NS} --ignore-not-found --grace-period=0 --force 2>/dev/null || true
+}
+trap cleanup EXIT ERR
+
 echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║  📋 Scenario 04: DNS Resolution Failure (SKILL-NET-001)    ║${NC}"
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${NC}"
-
-# ---- 保存当前 CoreDNS 副本数 ----
-ORIGINAL_REPLICAS=$(kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.replicas}')
 info "当前 CoreDNS 副本数: ${ORIGINAL_REPLICAS}"
 
 # =====================================================================
@@ -55,7 +68,7 @@ section "Phase 1: 症状检测 / Symptom Detection (Skill Section 2)"
 
 step "S1" "从 Pod 内测试 DNS 解析 / Test DNS resolution from pod (置信度: 0.95)"
 # 创建一个测试 Pod
-kubectl run dns-test --image=busybox:1.36 --restart=Never -n ${NS} --command -- sleep 300 --overrides='{"spec":{"terminationGracePeriodSeconds":0}}' 2>/dev/null || true
+kubectl run dns-test --image=busybox:1.36 --restart=Never -n ${NS} --overrides='{"spec":{"terminationGracePeriodSeconds":0}}' --command -- sleep 300 2>/dev/null || true
 sleep 5
 kubectl wait --for=condition=Ready pod/dns-test -n ${NS} --timeout=30s 2>/dev/null || true
 
