@@ -67,6 +67,7 @@ Kubernetes架构基础域深入解析K8s核心架构设计原理，涵盖控制�
 | 99j | [全版本特性对比总表](./99-kubernetes-v1.25-v1.33-feature-comparison-table.md) | v1.25-v1.33 横向特性对比 | ⭐⭐⭐⭐⭐ |
 | 99k | [完整 Feature Gate 参考手册](./99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md) | 80+ Feature Gate 状态速查与配置 | ⭐⭐⭐⭐⭐ |
 | 99l | [v1.33 实战案例集](./99-kubernetes-v1.33-practical-cookbook.md) | 14 个新特性实战案例含完整 YAML | ⭐⭐⭐⭐⭐ |
+| 99m | [核心特性架构图集](./99-kubernetes-core-features-mermaid-diagrams.md) | Sidecar/CEL/DRA/Resize/nftables/QueueingHints/用户命名空间 Mermaid 图解 | ⭐⭐⭐⭐⭐ |
 
 ---
 

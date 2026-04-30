@@ -69,12 +69,13 @@ run_ssh() {
     # 使用 timeout 命令确保 SSH 不会无限挂起
     output=$(timeout "${timeout_sec}" ssh $SSH_OPTS "$NODE_IP" "$cmd" 2>&1) || rc=$?
     echo "$output"
-    # timeout 命令退出码 124 表示超时
+    # timeout 命令退出码 124 表示超时，将超时信息输出到 stderr 供上层感知
     if [[ $rc -eq 124 ]]; then
-        echo "[SSH TIMEOUT after ${timeout_sec}s]" >&2
-        return 124
+        echo -e "  ${YELLOW}[WARN]${NC} SSH command timed out after ${timeout_sec}s: $cmd" >&2
     fi
-    return $rc
+    # 诊断脚本中，远程命令的非零返回码是诊断信息的一部分，不视为脚本错误
+    # 超时信息通过 stderr 输出，上层可通过检查输出感知超时状态
+    return 0
 }
 
 # --- 参数验证 / Argument Validation ---
@@ -121,7 +122,7 @@ echo -e "  Risk Level:     ${GREEN}NONE (read-only via SSH)${NC}"
 # =============================================================================
 print_section "D2.1: Kubelet Service Status / kubelet 服务状态"
 
-KUBELET_STATUS=$(run_ssh "systemctl status kubelet" 10 || true)
+KUBELET_STATUS=$(run_ssh "systemctl status kubelet" 10)
 echo "$KUBELET_STATUS" | head -20 | while IFS= read -r line; do
     if echo "$line" | grep -q "Active:.*running"; then
         echo -e "  ${GREEN}$line${NC}"
@@ -162,7 +163,7 @@ fi
 # =============================================================================
 print_section "D2.2: Kubelet Logs (Last 30 min) / kubelet 日志（最近30分钟）"
 
-KUBELET_LOGS=$(run_ssh "journalctl -u kubelet --since '30 minutes ago' --no-pager -n 200" 15 || true)
+KUBELET_LOGS=$(run_ssh "journalctl -u kubelet --since '30 minutes ago' --no-pager -n 200" 15)
 
 if [[ -z "$KUBELET_LOGS" || "$KUBELET_LOGS" == *"No entries"* ]]; then
     print_warn "No kubelet logs found in the last 30 minutes"
@@ -245,7 +246,7 @@ fi
 # =============================================================================
 print_section "D2.3: Container Runtime Status / 容器运行时状态"
 
-CONTAINERD_STATUS=$(run_ssh "systemctl status containerd" 10 || true)
+CONTAINERD_STATUS=$(run_ssh "systemctl status containerd" 10)
 echo "$CONTAINERD_STATUS" | head -15 | while IFS= read -r line; do
     if echo "$line" | grep -q "Active:.*running"; then
         echo -e "  ${GREEN}$line${NC}"
@@ -269,7 +270,7 @@ elif echo "$CONTAINERD_STATUS" | grep -q "Active: activating (auto-restart)"; th
 elif echo "$CONTAINERD_STATUS" | grep -q "not-found\|could not be found"; then
     # 尝试检查 CRI-O / Try checking CRI-O
     print_info "containerd service not found, checking CRI-O..."
-    CRIO_STATUS=$(run_ssh "systemctl status crio" 10 || true)
+    CRIO_STATUS=$(run_ssh "systemctl status crio" 10)
     if echo "$CRIO_STATUS" | grep -q "Active: active (running)"; then
         print_ok "CRI-O is running (alternative runtime)"
     elif [[ -n "$CRIO_STATUS" ]]; then
@@ -289,7 +290,7 @@ fi
 # =============================================================================
 print_section "D2.4: Container Runtime Logs (Last 30 min) / 容器运行时日志"
 
-CONTAINERD_LOGS=$(run_ssh "journalctl -u containerd --since '30 minutes ago' --no-pager -n 100" 15 || true)
+CONTAINERD_LOGS=$(run_ssh "journalctl -u containerd --since '30 minutes ago' --no-pager -n 100" 15)
 
 if [[ -z "$CONTAINERD_LOGS" || "$CONTAINERD_LOGS" == *"No entries"* ]]; then
     print_warn "No containerd logs found in the last 30 minutes"
@@ -333,7 +334,7 @@ print_section "D2.5: System Resource Pressure / 系统资源压力"
 
 # --- 磁盘使用 / Disk Usage ---
 echo -e "  ${BOLD}Disk Usage / 磁盘使用:${NC}"
-DISK_OUTPUT=$(run_ssh "df -h / /var/lib/kubelet /var/lib/containerd /var/log 2>/dev/null || df -h /" 10 || true)
+DISK_OUTPUT=$(run_ssh "df -h / /var/lib/kubelet /var/lib/containerd /var/log 2>/dev/null || df -h /" 10)
 echo "$DISK_OUTPUT" | while IFS= read -r line; do
     if echo "$line" | grep -q "Filesystem"; then
         echo "  $line"
@@ -355,7 +356,7 @@ echo "$DISK_OUTPUT" | while IFS= read -r line; do
 done
 
 # 检查磁盘阈值 / Check disk thresholds
-DISK_CRITICAL=$(run_ssh "df -h / /var/lib/kubelet /var/lib/containerd /var/log 2>/dev/null | awk 'NR>1{gsub(/%/,\"\",\$5); if(\$5>=85) print \$6, \$5\"%\"}'" 10 || true)
+DISK_CRITICAL=$(run_ssh "df -h / /var/lib/kubelet /var/lib/containerd /var/log 2>/dev/null | awk 'NR>1{gsub(/%/,\"\",\$5); if(\$5>=85) print \$6, \$5\"%\"}'" 10)
 if [[ -n "$DISK_CRITICAL" ]]; then
     while IFS= read -r line; do
         print_error "Disk usage >= 85%: $line (RC-003)"
@@ -367,7 +368,7 @@ echo ""
 
 # --- 内存使用 / Memory Usage ---
 echo -e "  ${BOLD}Memory Usage / 内存使用:${NC}"
-MEMORY_OUTPUT=$(run_ssh "free -m" 10 || true)
+MEMORY_OUTPUT=$(run_ssh "free -m" 10)
 echo "$MEMORY_OUTPUT" | while IFS= read -r line; do
     echo "  $line"
 done
@@ -388,7 +389,7 @@ echo ""
 
 # --- PID 使用 / PID Usage ---
 echo -e "  ${BOLD}PID Usage / PID 使用:${NC}"
-PID_OUTPUT=$(run_ssh "echo 'Current PIDs:' && ps aux --no-heading | wc -l && echo 'Max PIDs:' && cat /proc/sys/kernel/pid_max" 10 || true)
+PID_OUTPUT=$(run_ssh "echo 'Current PIDs:' && ps aux --no-heading | wc -l && echo 'Max PIDs:' && cat /proc/sys/kernel/pid_max" 10)
 echo "$PID_OUTPUT" | while IFS= read -r line; do
     echo "  $line"
 done
@@ -411,7 +412,7 @@ echo ""
 
 # --- inode 使用 / inode Usage ---
 echo -e "  ${BOLD}Inode Usage / inode 使用:${NC}"
-INODE_OUTPUT=$(run_ssh "df -i / /var/lib/kubelet /var/lib/containerd 2>/dev/null || df -i /" 10 || true)
+INODE_OUTPUT=$(run_ssh "df -i / /var/lib/kubelet /var/lib/containerd 2>/dev/null || df -i /" 10)
 echo "$INODE_OUTPUT" | while IFS= read -r line; do
     if echo "$line" | grep -q "Filesystem"; then
         echo "  $line"
@@ -431,7 +432,7 @@ echo "$INODE_OUTPUT" | while IFS= read -r line; do
     fi
 done
 
-INODE_CRITICAL=$(run_ssh "df -i / /var/lib/kubelet /var/lib/containerd 2>/dev/null | awk 'NR>1{gsub(/%/,\"\",\$5); if(\$5>=90) print \$6, \$5\"%\"}'" 10 || true)
+INODE_CRITICAL=$(run_ssh "df -i / /var/lib/kubelet /var/lib/containerd 2>/dev/null | awk 'NR>1{gsub(/%/,\"\",\$5); if(\$5>=90) print \$6, \$5\"%\"}'" 10)
 if [[ -n "$INODE_CRITICAL" ]]; then
     while IFS= read -r line; do
         print_error "Inode usage >= 90%: $line (RC-003)"
@@ -447,7 +448,7 @@ fi
 print_section "D2.6: PLEG Health / PLEG 健康状态"
 
 # 检查 kubelet 日志中的 PLEG 相关信息
-PLEG_LOGS=$(run_ssh "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG\|pleg'" 10 || true)
+PLEG_LOGS=$(run_ssh "journalctl -u kubelet --since '30 minutes ago' --no-pager | grep -i 'PLEG\|pleg'" 10)
 if [[ -n "$PLEG_LOGS" ]]; then
     PLEG_COUNT=$(echo "$PLEG_LOGS" | grep -ci "PLEG is not healthy" || true)
     if [[ "$PLEG_COUNT" -gt 0 ]]; then
@@ -468,7 +469,7 @@ fi
 
 # 检查 kubelet healthz 端点
 echo ""
-HEALTHZ_OUTPUT=$(run_ssh "curl -sk --max-time 5 https://localhost:10250/healthz 2>&1" 10 || true)
+HEALTHZ_OUTPUT=$(run_ssh "curl -sk --max-time 5 https://localhost:10250/healthz 2>&1" 10)
 if [[ "$HEALTHZ_OUTPUT" == "ok" ]]; then
     print_ok "kubelet healthz endpoint: ok"
 else
@@ -486,7 +487,7 @@ fi
 print_section "D2.7: Network to Apiserver / 到 apiserver 的网络连通性"
 
 # 获取 apiserver 地址
-APISERVER_LINE=$(run_ssh "cat /etc/kubernetes/kubelet.conf 2>/dev/null | grep server || cat /var/lib/kubelet/kubeconfig 2>/dev/null | grep server || echo 'config not found'" 10 || true)
+APISERVER_LINE=$(run_ssh "cat /etc/kubernetes/kubelet.conf 2>/dev/null | grep server || cat /var/lib/kubelet/kubeconfig 2>/dev/null | grep server || echo 'config not found'" 10)
 print_info "Apiserver config: $APISERVER_LINE"
 
 # 提取 apiserver IP 和端口
@@ -498,12 +499,12 @@ if [[ -n "$APISERVER_URL" ]]; then
     print_info "Testing TCP connectivity to $APISERVER_HOST:$APISERVER_PORT..."
     
     # TCP 连通性测试 (使用 bash 内置 /dev/tcp 实现跨平台兼容)
-    TCP_RESULT=$(run_ssh "bash -c '</dev/tcp/$APISERVER_HOST/$APISERVER_PORT' 2>&1 && echo 'TCP_OK' || echo 'TCP_FAILED'" 15 || true)
+    TCP_RESULT=$(run_ssh "bash -c '</dev/tcp/$APISERVER_HOST/$APISERVER_PORT' 2>&1 && echo 'TCP_OK' || echo 'TCP_FAILED'" 15)
     if echo "$TCP_RESULT" | grep -q "TCP_OK"; then
         print_ok "TCP connection to apiserver successful"
         
         # TLS/HTTPS 测试
-        CURL_RESULT=$(run_ssh "curl -sk --max-time 5 ${APISERVER_URL}/healthz 2>&1" 10 || true)
+        CURL_RESULT=$(run_ssh "curl -sk --max-time 5 ${APISERVER_URL}/healthz 2>&1" 10)
         if [[ "$CURL_RESULT" == "ok" ]]; then
             print_ok "Apiserver healthz: ok (TLS connection successful)"
         elif echo "$CURL_RESULT" | grep -qi "TLS\|SSL\|certificate\|x509"; then
@@ -530,7 +531,7 @@ print_section "D2.8: Certificate Validity / 证书有效期"
 
 # 检查 kubelet 客户端证书
 echo -e "  ${BOLD}Kubelet Client Certificate:${NC}"
-CLIENT_CERT=$(run_ssh "openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject 2>/dev/null || echo 'Certificate file not found or not readable'" 10 || true)
+CLIENT_CERT=$(run_ssh "openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject 2>/dev/null || echo 'Certificate file not found or not readable'" 10)
 echo "$CLIENT_CERT" | while IFS= read -r line; do
     if echo "$line" | grep -qi "not found\|not readable"; then
         echo -e "  ${RED}$line${NC}"
@@ -575,7 +576,7 @@ echo ""
 
 # 检查 kubelet serving 证书
 echo -e "  ${BOLD}Kubelet Serving Certificate:${NC}"
-SERVING_CERT=$(run_ssh "openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -noout -dates -subject 2>/dev/null || echo 'Certificate file not found or not readable'" 10 || true)
+SERVING_CERT=$(run_ssh "openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -noout -dates -subject 2>/dev/null || echo 'Certificate file not found or not readable'" 10)
 echo "$SERVING_CERT" | while IFS= read -r line; do
     if echo "$line" | grep -qi "not found\|not readable"; then
         echo -e "  ${YELLOW}$line${NC}"
@@ -615,7 +616,7 @@ fi
 # =============================================================================
 print_section "D2.9: Kernel Logs (dmesg) / 内核日志"
 
-DMESG_OUTPUT=$(run_ssh "dmesg -T | tail -50" 10 || true)
+DMESG_OUTPUT=$(run_ssh "dmesg -T | tail -50" 10)
 
 if [[ -z "$DMESG_OUTPUT" ]]; then
     print_warn "Could not retrieve kernel logs"
@@ -674,7 +675,7 @@ fi
 print_section "D2.10: Time Synchronization / 时间同步"
 
 # 检查时间同步状态
-TIMEDATECTL_OUTPUT=$(run_ssh "timedatectl status 2>/dev/null || echo 'timedatectl not available'" 10 || true)
+TIMEDATECTL_OUTPUT=$(run_ssh "timedatectl status 2>/dev/null || echo 'timedatectl not available'" 10)
 if [[ "$TIMEDATECTL_OUTPUT" != *"not available"* ]]; then
     echo "$TIMEDATECTL_OUTPUT" | while IFS= read -r line; do
         if echo "$line" | grep -qi "synchronized: yes"; then
@@ -699,7 +700,7 @@ fi
 echo ""
 
 # 检查 chrony/ntpd 状态
-NTP_OUTPUT=$(run_ssh "chronyc tracking 2>/dev/null || ntpq -p 2>/dev/null || echo 'No NTP service found'" 10 || true)
+NTP_OUTPUT=$(run_ssh "chronyc tracking 2>/dev/null || ntpq -p 2>/dev/null || echo 'No NTP service found'" 10)
 if echo "$NTP_OUTPUT" | grep -qi "No NTP service found"; then
     print_warn "No NTP service (chrony/ntpd) found"
 else
@@ -712,13 +713,13 @@ fi
 echo ""
 
 # 对比节点时间与本地时间
-NODE_TIME=$(run_ssh "date -u '+%Y-%m-%d %H:%M:%S'" 10 || true)
+NODE_TIME=$(run_ssh "date -u '+%Y-%m-%d %H:%M:%S'" 10)
 LOCAL_TIME=$(date -u '+%Y-%m-%d %H:%M:%S')
 print_info "Node time (UTC):  $NODE_TIME"
 print_info "Local time (UTC): $LOCAL_TIME"
 
 # 计算时间偏差（简单比较秒数）
-NODE_EPOCH=$(run_ssh "date -u +%s" 5 || true)
+NODE_EPOCH=$(run_ssh "date -u +%s" 5)
 LOCAL_EPOCH=$(date -u +%s)
 if [[ -n "$NODE_EPOCH" && "$NODE_EPOCH" =~ ^[0-9]+$ ]]; then
     TIME_DIFF=$(( LOCAL_EPOCH - NODE_EPOCH ))

@@ -1,6 +1,6 @@
 # Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)
 
-> **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐
+> **适用范围**: Kubernetes v1.25-v1.33+ | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **文档数量**: 28 篇
 
 ## 📋 文档概览
 
@@ -47,6 +47,11 @@
 - **[22-变更管理流程](./22-change-management-process.md)** - RFC、灰度发布、回滚机制
 - **[23-事件响应处理](./23-incident-response-handling.md)** - SRE实践和故障处理流程
 - **[24-容量规划预测](./24-capacity-planning-forecasting.md)** - 资源需求预测和扩容策略
+
+### 🏗️ 生产架构蓝图 (99-系列)
+- **[99-生产环境完整架构蓝图](./99-kubernetes-production-architecture-blueprint.md)** - 10 大生产架构 Mermaid 图解：整体架构、控制平面 HA、网络/存储/安全/可观测性/多集群/灾备/GitOps 架构
+- **[99-部署模式架构详解](./99-kubernetes-deployment-patterns-architecture.md)** - 6 大部署模式 Mermaid 状态机：滚动更新、蓝绿、金丝雀、A/B 测试、影子流量、特性开关
+- **[99-多租户与资源隔离架构](./99-kubernetes-multi-tenant-architecture.md)** - 多租户隔离模型 Mermaid 图：Namespace/节点池/vCluster/PSA/FinOps/PaaS 架构
 
 ## 🎯 学习路径建议
 

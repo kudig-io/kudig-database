@@ -1,5 +1,410 @@
 # 变更历史
 
+### 2026-04-24 应用层架构设计专题 — 第九批 10 大行业场景 (v16)
+**前沿科技与基础设施场景，10 篇行业架构文档 + 50+ Mermaid 图解 + 30+ K8s YAML 配置**:
+- ✅ `81-smart-customs.md`: 智慧海关架构 — AI审图/风险布控/跨境电商通关/冷链监管/智慧口岸
+  - 6+ Mermaid 图：智慧海关全景、智能审图时序、跨境电商风险扫描、AI审图GPU Deployment
+  - 阿里云组件：ACK Pro GPU、PAI 视觉智能、蚂蚁链BaaS、PolarDB、MaxCompute、ARMS
+  - K8s 特性：GPU、Deployment、HPA
+- ✅ `82-legaltech.md`: 司法科技架构 — 智能审判/区块链存证/智慧法院/类案推送/量刑辅助
+  - 5+ Mermaid 图：司法科技全景、类案智能推送、智能审判辅助
+  - 阿里云组件：ACK Pro、PAI NLP、蚂蚁链BaaS、PolarDB、OSS
+  - K8s 特性：Deployment、NLP、Blockchain
+- ✅ `83-cultural-digitization.md`: 文化数字化架构 — 文物三维/数字博物馆/非遗传承/古籍保护/知识图谱
+  - 5+ Mermaid 图：文化数字化全景、文物数字化流程、三维文物渲染GPU
+  - 阿里云组件：ACK Pro GPU、OSS+CDN、PAI 视觉智能、蚂蚁链BaaS、PolarDB
+  - K8s 特性：GPU、OSS、CDN
+- ✅ `84-national-park.md`: 国家公园架构 — 生态监测/野生动物AI/智慧巡护/防火预警/游客服务
+  - 5+ Mermaid 图：国家公园全景、野生动物监测、边缘感知IoT
+  - 阿里云组件：ACK Edge、阿里云IoT、PAI、Lindorm、PolarDB、OSS
+  - K8s 特性：ACK Edge、IoT、AI
+- ✅ `85-hydrogen-energy.md`: 氢能源架构 — 绿氢制备/加氢站安全/燃料电池/储运管理/氢能车辆
+  - 5+ Mermaid 图：氢能源全景、加氢站安全监控、电解槽控制边缘DaemonSet
+  - 阿里云组件：ACK Edge、阿里云IoT、PAI、Lindorm、PolarDB
+  - K8s 特性：DaemonSet、IoT、Edge
+- ✅ `86-solid-state-battery.md`: 固态电池架构 — 材料模拟/BMS/分子动力学/高通量计算/安全测试
+  - 5+ Mermaid 图：固态电池全景、电池研发数据闭环、DFT计算GPU Job
+  - 阿里云组件：ACK Pro GPU、E-HPC、PAI、PolarDB、OSS
+  - K8s 特性：GPU、E-HPC、Job
+- ✅ `87-flexible-manufacturing.md`: 柔性制造架构 — C2M定制/智能排产/数字主线/产线重构/供应链协同
+  - 5+ Mermaid 图：柔性制造全景、C2M定制流程、智能排产
+  - 阿里云组件：ACK Pro、PAI、PolarDB、阿里云IoT
+  - K8s 特性：Deployment、AI、HPA
+- ✅ `88-nanomaterials.md`: 纳米材料架构 — 高通量筛选/材料基因组/分子模拟/性能预测/安全评估
+  - 5+ Mermaid 图：纳米材料全景、材料基因组流水线、高通量计算Job
+  - 阿里云组件：ACK Pro GPU、E-HPC、PAI、PolarDB、OSS
+  - K8s 特性：GPU、E-HPC、Job
+- ✅ `89-crispr-gene-editing.md`: CRISPR基因编辑架构 — gRNA设计/脱靶检测/基因治疗/功能筛选/伦理合规
+  - 5+ Mermaid 图：CRISPR全景、gRNA设计流水线、脱靶分析
+  - 阿里云组件：ACK Pro、E-HPC、PAI、PolarDB、OSS
+  - K8s 特性：Deployment、E-HPC
+- ✅ `90-neuromorphic-computing.md`: 类脑计算架构 — 脉冲神经网络/神经形态芯片/边缘智能/脑机接口/机器人控制
+  - 5+ Mermaid 图：类脑计算全景、脉冲神经网络推理、SNN训练GPU
+  - 阿里云组件：ACK Pro GPU、GN10/GN7实例、PAI、OSS
+  - K8s 特性：GPU、Deployment、HPA
+- ✅ `README.md`: 专题索引更新 — 90 篇文档索引 + 前沿科技与基础设施扩展
+- ✅ 累计 Mermaid 图示: 900+ | 累计 K8s YAML 示例: 680+ | 覆盖行业: 90 个
+
+### 2026-04-24 应用层架构设计专题 — 第八批 10 大行业场景 (v15)
+**政务与极端科技场景，10 篇行业架构文档 + 70+ Mermaid 图解 + 90+ K8s YAML 配置**：
+- ✅ `71-smart-tax.md`: 智慧税务架构 — 电子税务局/全电发票/税务风控/大数据治税/银税互动
+  - 8+ Mermaid 图：智慧税务全景、全电发票流转时序、税务大数据风控、电子税务局Deployment、税务风控GPU
+  - 阿里云组件：ACK Pro、PolarDB、Redis、蚂蚁链BaaS、PAI、MaxCompute、ARMS
+  - K8s 特性：Deployment、GPU风控引擎、HPA、StatefulSet
+- ✅ `72-digital-twin-city.md`: 数字孪生城市架构 — CIM平台/城市大脑/三维可视化/城市规划仿真/应急指挥
+  - 7+ Mermaid 图：数字孪生城市全景、CIM数据融合、三维渲染GPU、城市信息模型
+  - 阿里云组件：ACK Pro+GPU、GN7/GN10、PolarDB、Lindorm、阿里云GIS、PAI、OSS、DataV
+  - K8s 特性：GPU三维渲染、Deployment、PersistentVolume
+- ✅ `73-smart-firefighting.md`: 智慧消防架构 — 消防物联网/AI火眼/应急指挥/消防设施监测/安全评估
+  - 7+ Mermaid 图：智慧消防全景、火灾应急指挥时序、消防设施状态监测、AI火眼GPU
+  - 阿里云组件：ACK Pro+GPU、IoT平台、PAI/视觉智能、PolarDB、Lindorm、OSS、阿里云视频直播
+  - K8s 特性：GPU视频分析、Deployment、DaemonSet边缘网关
+- ✅ `74-immersive-xr.md`: 沉浸式XR架构 — VR/AR/MR/空间计算/云渲染/数字人交互
+  - 7+ Mermaid 图：XR全景架构、空间锚点共享、云渲染GPU、多用户协同
+  - 阿里云组件：ACK Pro+GPU、GN7/GN10、RTC、OSS+CDN、PAI、ARMS
+  - K8s 特性：GPU云渲染、Deployment、HPA
+- ✅ `75-affective-computing.md`: 情感计算AI架构 — 情绪识别/多模态融合/智能客服/心理评估/驾驶员监测
+  - 6+ Mermaid 图：情感计算全景、实时情绪识别、多模态融合推理GPU
+  - 阿里云组件：ACK Pro+GPU、PAI/视觉智能/语音智能、PolarDB、OSS
+  - K8s 特性：GPU多模态推理、Deployment、HPA
+- ✅ `76-synthetic-biology.md`: 合成生物学架构 — 基因设计/蛋白质工程/自动化实验/AlphaFold/生物制造
+  - 6+ Mermaid 图：合成生物学全景、设计-构建-测试-学习循环、蛋白质结构预测GPU Job
+  - 阿里云组件：ACK Pro+GPU、GN10/GN7、E-HPC、PAI、PolarDB、OSS
+  - K8s 特性：GPU分子动力学Job、Deployment、PersistentVolume
+- ✅ `77-fusion-energy-monitoring.md`: 可控核聚变监控架构 — 托卡马克/等离子体控制/偏滤器监测/中子测量/长脉冲运行
+  - 6+ Mermaid 图：核聚变监控全景、等离子体放电控制、边缘控制DaemonSet
+  - 阿里云组件：ACK Edge、Lindorm、PolarDB、E-HPC、PAI、ARMS
+  - K8s 特性：DaemonSet边缘控制、Deployment、HostNetwork
+- ✅ `78-deep-sea-exploration.md`: 深海探测架构 — 载人潜水器/ROV/AUV/海底观测网/声通信/资源勘探
+  - 5+ Mermaid 图：深海探测全景、深海数据回传、科考船数据处理Deployment
+  - 阿里云组件：ACK Pro、OSS、PolarDB、PAI/视觉智能、ARMS
+  - K8s 特性：Deployment、DaemonSet
+- ✅ `79-polar-research.md`: 极地科考架构 — 冰川监测/气象观测/生态研究/天文观测/海洋调查/卫星回传
+  - 5+ Mermaid 图：极地科考全景、极地数据回传、边缘计算DaemonSet
+  - 阿里云组件：ACK Edge、OSS、PolarDB、PAI、ARMS
+  - K8s 特性：DaemonSet边缘计算、Deployment
+- ✅ `80-tsn-network.md`: TSN时间敏感网络架构 — 确定性网络/工业以太网/IEEE1588/门控调度/汽车网络
+  - 7+ Mermaid 图：TSN网络全景、门控调度时序、流量调度、网络管理Deployment
+  - 阿里云组件：ACK Edge、阿里云TSN网关、Lindorm、PolarDB、ARMS
+  - K8s 特性：Deployment、DaemonSet、HostNetwork、NET_ADMIN
+- ✅ `README.md`: 专题索引更新 — 80 篇文档索引 + 政务与极端科技扩展
+- ✅ 累计 Mermaid 图示: 800+ | 累计 K8s YAML 示例: 650+ | 覆盖行业: 80 个
+
+### 2026-04-24 应用层架构设计专题 — 第七批 10 大行业场景 (v14)
+**能源与前沿科技场景，10 篇行业架构文档 + 70+ Mermaid 图解 + 90+ K8s YAML 配置**：
+- ✅ `61-smart-grid.md`: 智慧电网架构 — 虚拟电厂/负荷预测/新能源预测/需求响应/源网荷储协同
+  - 8+ Mermaid 图：智慧电网全景、虚拟电厂调度时序、源网荷储协同优化、边缘测控DaemonSet
+  - 阿里云组件：ACK Pro + ACK Edge、PAI、Lindorm、Flink、PolarDB、OSS、ARMS
+  - K8s 特性：GPU预测引擎、DaemonSet边缘测控、StatefulSet、HPA、Privileged
+- ✅ `62-distributed-energy.md`: 分布式能源架构 — 光伏/储能/微电网/EMS能量管理/碳资产
+  - 6+ Mermaid 图：分布式能源全景、光储充一体化优化、EMS Deployment
+  - 阿里云组件：ACK Edge、IoT平台、Lindorm、PolarDB、PAI、ARMS
+  - K8s 特性：Deployment、CronJob、DaemonSet
+- ✅ `63-industrial-visual-inspection.md`: 工业视觉检测架构 — AOI/缺陷检测/PCB/半导体/锂电池/数据闭环
+  - 7+ Mermaid 图：工业视觉全景、检测流水线时序、缺陷数据闭环、GPU模型训练
+  - 阿里云组件：ACK Pro + GPU、PAI/视觉智能、OSS、PolarDB、ARMS
+  - K8s 特性：GPU模型训练Job、Deployment、PersistentVolume
+- ✅ `64-ai-drug-discovery.md`: AI 制药架构 — 分子生成/分子动力学/临床试验/老药新用
+  - 6+ Mermaid 图：AI制药全景、分子生成与验证时序、药物发现流水线、分子动力学GPU Job
+  - 阿里云组件：ACK Pro + GPU、GN10/GN7、E-HPC、PAI、PolarDB、OSS
+  - K8s 特性：GPU分子动力学Job、Deployment、PersistentVolume
+- ✅ `65-autonomous-driving-sim.md`: 自动驾驶仿真架构 — SIL/HIL/场景生成/传感器仿真/数据闭环
+  - 7+ Mermaid 图：自动驾驶仿真全景、大规模并行仿真时序、数据闭环流水线、GPU仿真集群
+  - 阿里云组件：ACK Pro + GPU、GN7/GN10、OSS、PolarDB、PAI
+  - K8s 特性：GPU仿真工作器、Deployment、HPA
+- ✅ `66-space-internet.md`: 太空互联网架构 — 低轨卫星/星间链路/遥感服务/物联网/应急通信
+  - 6+ Mermaid 图：太空互联网全景、遥感数据处理、卫星运管Deployment
+  - 阿里云组件：ACK Pro、MaxCompute、PAI、OSS、PolarDB
+  - K8s 特性：Deployment、NodeSelector
+- ✅ `67-brain-computer-interface.md`: 脑机接口架构 — 神经信号采集/运动想象解码/医疗康复/神经隐私
+  - 6+ Mermaid 图：脑机接口全景、运动想象解码、神经信号处理GPU
+  - 阿里云组件：ACK Pro + GPU、PAI、PolarDB、OSS
+  - K8s 特性：GPU神经解码、Deployment、HPA
+- ✅ `68-quantum-computing-cloud.md`: 量子计算云平台架构 — 量子计算服务/混合计算/量子模拟/量子机器学习
+  - 5+ Mermaid 图：量子计算云全景、量子-经典混合计算、量子任务调度Deployment
+  - 阿里云组件：ACK Pro、阿里云量子计算、PolarDB、OSS
+  - K8s 特性：Deployment、HPA
+- ✅ `69-6g-core-network.md`: 6G 核心网架构 — 通感一体/智能超表面/空天地一体化/算网融合/全息通信
+  - 6+ Mermaid 图：6G核心网全景、通感算一体化、核心网控制面Deployment
+  - 阿里云组件：ACK Pro、PolarDB、Redis、PAI、ARMS
+  - K8s 特性：Deployment、HPA、StatefulSet
+- ✅ `70-ecny-cbdc.md`: 数字人民币架构 — e-CNY/双离线支付/智能合约/可控匿名/跨境支付
+  - 9+ Mermaid 图：数字人民币全景、双离线支付时序、可控匿名交易、交易StatefulSet
+  - 阿里云组件：ACK Pro、PolarDB、Lindorm、Redis、蚂蚁链、云盾、KMS、WAF
+  - K8s 特性：StatefulSet交易服务、Deployment、HPA、Secret密钥管理
+- ✅ `README.md`: 专题索引更新 — 70 篇文档索引 + 能源与前沿科技扩展
+- ✅ 累计 Mermaid 图示: 700+ | 累计 K8s YAML 示例: 560+ | 覆盖行业: 70 个
+
+### 2026-04-24 应用层架构设计专题 — 第六批 10 大行业场景 (v13)
+**工业与前沿科技场景，10 篇行业架构文档 + 70+ Mermaid 图解 + 90+ K8s YAML 配置**：
+- ✅ `51-smart-manufacturing-mes.md`: 智能制造 MES 架构 — MES/APS/SCADA/数字孪生/预测性维护/AI质检
+  - 9+ Mermaid 图：智能制造全景、生产工单执行时序、设备预测性维护状态机、全链路质量追溯、OEE实时计算
+  - 阿里云组件：ACK Pro + ACK Edge、Lindorm、PolarDB、RocketMQ、PAI/视觉智能、DataV、蚂蚁链、IoT平台
+  - K8s 特性：DaemonSet边缘采集、GPU AI质检、StatefulSet消息存储、HPA、Privileged容器
+- ✅ `52-smart-water.md`: 智慧水务架构 — 智慧供水/智慧排水/漏损控制/爆管预警/水质监测
+  - 7+ Mermaid 图：智慧水务全景、爆管预警与关阀时序、DMA分区漏损分析、水质采集CronJob
+  - 阿里云组件：ACK Pro、IoT平台、Lindorm、PolarDB、阿里云GIS、PAI、OSS
+  - K8s 特性：Deployment、CronJob水质采集、DaemonSet边缘网关
+- ✅ `53-new-retail-dtc.md`: 新零售 DTC 架构 — 品牌直营/全渠道融合/会员订阅/柔性供应链
+  - 6+ Mermaid 图：DTC品牌全景、订阅服务时序、用户旅程数据闭环、官网前端Deployment
+  - 阿里云组件：ACK Pro、CDN+DCDN、PolarDB、Redis、OSS、OpenSearch、阿里云CDP
+  - K8s 特性：Deployment、HPA、Pod AntiAffinity
+- ✅ `54-social-gaming-metaverse.md`: 社交游戏元宇宙架构 — 虚拟空间/Avatar/UGC资产/虚拟经济/NFT
+  - 7+ Mermaid 图：元宇宙社交全景、虚拟空间进入时序、Avatar装扮系统、状态同步StatefulSet
+  - 阿里云组件：ACK Pro+GPU、GN7/GN10、RTC、PolarDB、Lindorm、OSS、蚂蚁链BaaS
+  - K8s 特性：StatefulSet状态同步、HostNetwork、GPU Deployment、HPA
+- ✅ `55-crossborder-dtc.md`: 跨境电商独立站架构 — DTC品牌出海/全球支付/社媒引流/海外仓履约
+  - 7+ Mermaid 图：跨境DTC全景、支付路由时序、社媒广告归因、独立站前端Deployment
+  - 阿里云组件：ACK Pro、CDN全球加速、PolarDB、Redis、OSS、OpenSearch
+  - K8s 特性：Deployment、HPA、Pod AntiAffinity
+- ✅ `56-smart-elderly-care.md`: 智慧养老架构 — 跌倒检测/健康监测/紧急救助/智能照护/服务聚合
+  - 6+ Mermaid 图：智慧养老全景、跌倒检测与救助时序、慢病管理数据流、健康监测Deployment
+  - 阿里云组件：ACK Pro、IoT平台、PAI/视觉智能、PolarDB、Lindorm、阿里云语音服务
+  - K8s 特性：Deployment、HPA、DaemonSet边缘设备
+- ✅ `57-digital-therapeutics.md`: 数字疗法架构 — DTx/远程诊疗/AI自适应治疗/疗效评估
+  - 6+ Mermaid 图：数字疗法全景、数字疗法执行时序、疗效评估数据流、治疗引擎Deployment
+  - 阿里云组件：ACK Pro、PAI、PolarDB、OSS、RTC、ARMS
+  - K8s 特性：Deployment、HPA、CronJob
+- ✅ `58-web3-gamefi.md`: Web3 GameFi 架构 — 链游/NFT铸造/代币经济/P2E/智能合约
+  - 6+ Mermaid 图：GameFi全景、游戏资产铸造时序、P2E奖励分发、游戏逻辑服Deployment
+  - 阿里云组件：ACK Pro、蚂蚁链BaaS、PolarDB、Redis、OSS
+  - K8s 特性：Deployment、HPA、StatefulSet
+- ✅ `59-industrial-internet-platform.md`: 工业互联网平台架构 — IIoT/设备上云/工业APP/数字孪生
+  - 7+ Mermaid 图：工业互联网全景、设备接入与建模时序、工业数据融合、设备接入Deployment
+  - 阿里云组件：ACK Pro+ACK Edge、IoT平台、Lindorm、PolarDB、Flink、PAI、DataV
+  - K8s 特性：Deployment、DaemonSet边缘网关、HPA、StatefulSet
+- ✅ `60-v2x-autonomous-driving.md`: 车路协同自动驾驶架构 — V2X/协同感知/高精地图/数据闭环
+  - 8+ Mermaid 图：车路协同全景、协同感知时序、数据闭环流水线、感知融合GPU、RSU控制DaemonSet
+  - 阿里云组件：ACK Pro+ACK Edge、GN7/GN10、IoT平台、5G专网、高精地图、MaxCompute、PAI
+  - K8s 特性：GPU感知融合、DaemonSet RSU边缘、HostNetwork、Deployment
+- ✅ `README.md`: 专题索引更新 — 60 篇文档索引 + 工业与前沿科技扩展
+- ✅ 累计 Mermaid 图示: 600+ | 累计 K8s YAML 示例: 470+ | 覆盖行业: 60 个
+
+### 2026-04-24 应用层架构设计专题 — 第五批 10 大行业场景 (v12)
+**细分与前沿行业场景，10 篇行业架构文档 + 70+ Mermaid 图解 + 80+ K8s YAML 配置**：
+- ✅ `41-beauty-ecommerce.md`: 美妆电商架构 — AI试妆/直播带货/内容种草/正品溯源
+  - 8+ Mermaid 图：美妆电商全景、AI试妆时序、种草-转化-复购闭环、直播服务HPA
+  - 阿里云组件：ACK Pro、PAI/视觉智能、视频直播+CDN、PolarDB、Redis、OSS、蚂蚁链
+  - K8s 特性：GPU Deployment、HPA、PersistentVolume、Deployment
+- ✅ `42-secondhand-circular.md`: 二手交易架构 — C2C信用/AI定价/图像搜索/担保交易
+  - 7+ Mermaid 图：二手交易全景、担保交易状态机、AI智能定价、图像搜索GPU
+  - 阿里云组件：ACK Pro、PAI/视觉智能、向量检索服务、PolarDB、Redis、OSS
+  - K8s 特性：GPU Deployment、HPA、Deployment
+- ✅ `43-enterprise-im.md`: 企业即时通讯架构 — 千万级长连接/音视频会议/协同办公/开放平台
+  - 9+ Mermaid 图：企业IM全景、消息收发时序、多端消息同步、长连接网关StatefulSet
+  - 阿里云组件：ACK Pro、IoT平台、RTC、PolarDB、Lindorm、Redis、RocketMQ、OSS
+  - K8s 特性：StatefulSet长连接网关、HostNetwork、消息存储StatefulSet、HPA
+- ✅ `44-martech-adtech.md`: 数字营销广告科技架构 — RTB实时竞价/DSP/SSP/用户画像/反作弊
+  - 7+ Mermaid 图：广告科技全景、RTB实时竞价时序、用户标签实时计算、低延迟部署
+  - 阿里云组件：ACK Pro、Flink、MaxCompute、PolarDB、Hologres、Redis、PAI
+  - K8s 特性：Deployment、HPA、NodeSelector低延迟节点
+- ✅ `45-smart-port-shipping.md`: 智慧港口航运架构 — TOS码头系统/无人集卡/海关通关/集装箱追踪
+  - 7+ Mermaid 图：智慧港口全景、集装箱进出闸时序、全球追踪数据流、边缘DaemonSet
+  - 阿里云组件：ACK Pro + ACK Edge、IoT平台、PAI/视觉智能、PolarDB、Lindorm、DataV
+  - K8s 特性：Deployment、DaemonSet边缘节点、HPA
+- ✅ `46-satellite-internet.md`: 卫星互联网架构 — 低轨卫星/星间链路/遥感数据/天地一体
+  - 6+ Mermaid 图：卫星互联网全景、卫星数据传输时序、遥感图像处理流水线
+  - 阿里云组件：ACK Pro、MaxCompute、Flink、PAI、PolarDB、OSS
+  - K8s 特性：Deployment、NodeSelector地面站节点
+- ✅ `47-smart-mining.md`: 智慧矿山架构 — 无人矿卡/智能综采/瓦斯监测/人员定位
+  - 6+ Mermaid 图：智慧矿山全景、无人矿卡调度时序、瓦斯监测预警、边缘DaemonSet
+  - 阿里云组件：ACK Edge、IoT平台、PAI/视觉智能、PolarDB、Lindorm、高精度定位
+  - K8s 特性：DaemonSet边缘监测、HostNetwork
+- ✅ `48-vocational-edtech.md`: 职业教育培训架构 — 虚拟实训/AI监考/区块链证书/就业对接
+  - 7+ Mermaid 图：职业教育全景、AI监考时序、学习进度追踪、云桌面GPU StatefulSet
+  - 阿里云组件：ACK Pro + GPU、视频直播、无影云电脑、PAI/视觉智能、PolarDB、蚂蚁链
+  - K8s 特性：GPU StatefulSet云桌面、Deployment、AI监考
+- ✅ `49-livestream-ecommerce.md`: 直播电商架构 — 千万级并发/直播秒杀/弹幕互动/实时大屏
+  - 9+ Mermaid 图：直播电商全景、直播秒杀时序、弹幕服务Deployment、实时数据大屏
+  - 阿里云组件：ACK Pro、视频直播+CDN、RTC、PolarDB、Redis、RocketMQ、PAI/内容安全
+  - K8s 特性：HostNetwork弹幕、HPA秒杀、Deployment、WebSocket
+- ✅ `50-unmanned-retail.md`: 无人零售架构 — 视觉识别/重力感应/智能补货/动态定价
+  - 8+ Mermaid 图：无人零售全景、购物流程时序、智能补货调度、边缘DaemonSet+GPU
+  - 阿里云组件：ACK Edge、IoT平台、PAI/视觉智能、PolarDB、Lindorm、OSS、支付宝
+  - K8s 特性：GPU商品识别、DaemonSet边缘管理、Deployment、离线自治
+- ✅ `README.md`: 专题索引更新 — 50 篇文档索引 + 细分行业扩展
+- ✅ 累计 Mermaid 图示: 500+ | 累计 K8s YAML 示例: 380+ | 覆盖行业: 50 个
+
+### 2026-04-24 应用层架构设计专题 — 第四批 10 大行业场景 (v11)
+**新兴与细分行业场景，10 篇行业架构文档 + 60+ Mermaid 图解 + 70+ K8s YAML 配置**：
+- ✅ `31-instant-retail.md`: 即时零售架构 — 同城配送/前置仓/运力调度/30分钟达
+  - 8+ Mermaid 图：即时零售全景、订单履约时序、运力调度状态机、LBS 搜索、骑手位置同步
+  - 阿里云组件：ACK Pro、Redis 企业版 (Geo)、PolarDB、RocketMQ、阿里云位置服务
+  - K8s 特性：KEDA 多触发器弹性、HPA、NetworkPolicy、Pod AntiAffinity
+- ✅ `32-smart-restaurant.md`: 智慧餐饮架构 — 扫码点餐/KDS后厨/会员营销/供应链
+  - 6+ Mermaid 图：智慧餐饮全景、后厨智能排单时序、会员精准营销数据流
+  - 阿里云组件：ACK Pro、PolarDB、Redis、RocketMQ、OSS、阿里云视频直播
+  - K8s 特性：Deployment、HPA、CronJob、阿里云视觉智能
+- ✅ `33-crossborder-warehouse.md`: 跨境电商海外仓架构 — WMS/多仓协同/头程物流/库存同步
+  - 6+ Mermaid 图：海外仓全景、入库上架流程、库存实时同步数据流
+  - 阿里云组件：ACK Pro、PolarDB、Redis、RocketMQ、OSS、Flink
+  - K8s 特性：Deployment、StatefulSet、HPA
+- ✅ `34-sportstech.md`: 体育科技架构 — 智慧场馆/赛事直播/票务/运动健康
+  - 7+ Mermaid 图：体育科技全景、赛事开票时序、场馆 IoT 数据流
+  - 阿里云组件：ACK Pro、视频直播 + CDN、PolarDB、Redis、IoT 平台、OpenSearch
+  - K8s 特性：HPA、StatefulSet、Pod AntiAffinity、Deployment
+- ✅ `35-metaverse-digital-twin.md`: 元宇宙数字孪生架构 — 3D渲染/IoT融合/实时交互/GPU集群
+  - 7+ Mermaid 图：元宇宙全景、数字孪生数据同步时序、3D 模型流水线、GPU 渲染集群
+  - 阿里云组件：ACK Pro + GPU 节点池、GN7/GN10 实例、IoT 平台、OSS + CDN、DataV
+  - K8s 特性：GPU Deployment、HostNetwork、SharedMemory、PersistentVolume
+- ✅ `36-carbon-esg-management.md`: 碳资产管理 ESG 架构 — 碳盘查/区块链存证/ESG报告/绿色金融
+  - 6+ Mermaid 图：碳资产管理全景、碳核算流程、供应链碳足迹追踪
+  - 阿里云组件：ACK Pro、IoT 平台、PolarDB、Lindorm、Flink、蚂蚁链 BaaS、PAI
+  - K8s 特性：Deployment、CronJob、区块链节点集成
+- ✅ `37-pet-economy.md`: 宠物经济架构 — 宠物电商/服务预约/智能硬件/宠物保险
+  - 5+ Mermaid 图：宠物经济全景、宠物健康档案数据流
+  - 阿里云组件：ACK Pro、PolarDB、Redis、IoT 平台、OSS、视觉智能
+  - K8s 特性：Deployment、HPA
+- ✅ `38-supply-chain-finance.md`: 供应链金融架构 — 应收账款/区块链确权/贸易真实性/联盟链
+  - 6+ Mermaid 图：供应链金融全景、应收账款融资时序、贸易真实性验证
+  - 阿里云组件：ACK Pro、PolarDB、Redis、RocketMQ、蚂蚁链 BaaS、PAI
+  - K8s 特性：Deployment、区块链节点集成
+- ✅ `39-smart-campus.md`: 智慧园区架构 — 通行管理/智慧停车/能耗优化/安防监控
+  - 7+ Mermaid 图：智慧园区全景、访客通行时序、园区数字孪生数据流
+  - 阿里云组件：ACK Pro、IoT 平台、视觉智能、PolarDB、Lindorm、DataV
+  - K8s 特性：Deployment、DaemonSet、CronJob、阿里云 IoT 平台
+- ✅ `40-cloud-gaming.md`: 云游戏架构 — GPU渲染串流/WebRTC/边缘节点/云存档
+  - 8+ Mermaid 图：云游戏全景、游戏串流时序、输入-渲染-编码-传输流水线、GPU Pod
+  - 阿里云组件：ACK Pro + GPU 节点池、GN7/GN10、ENS 边缘节点、阿里云 RTC、CDN、OSS
+  - K8s 特性：GPU Pod、HPA 自定义指标、WebRTC、SharedMemory、PersistentVolume
+- ✅ `README.md`: 专题索引更新 — 40 篇文档索引 + 新兴行业扩展
+- ✅ 累计 Mermaid 图示: 400+ | 累计 K8s YAML 示例: 300+ | 覆盖行业: 40 个
+
+### 2026-04-24 应用层架构设计专题 — 第三批 10 大行业场景 (v10)
+**深耕行业场景，10 篇行业架构文档 + 70+ Mermaid 图解 + 80+ K8s YAML 配置**：
+- ✅ `21-cross-border-ecommerce.md`: 跨境电商架构 — 全球部署/多币种支付/海关申报/跨境物流
+  - 9+ Mermaid 图：全球业务架构、跨境支付时序、海关三单对碰状态机、多 Region 部署、订单履约数据流
+  - 阿里云组件：ACK Pro、PolarDB 全球多活、Redis 全球版、CDN、GTM、CEN、RocketMQ
+  - K8s 特性：HPA + KEDA 组合弹性、NetworkPolicy 支付隔离、Pod Topology Spread、StatefulSet
+- ✅ `22-nev-connected-vehicle.md`: 新能源车联网架构 — T-Box 接入/电池管理/OTA/车路协同
+  - 8+ Mermaid 图：车路云一体化、OTA 升级状态机、V2X 协同时序、边缘云协同、车辆数据上报流
+  - 阿里云组件：ACK Pro + ACK Edge、IoT 平台、Lindorm、PAI、ENS 边缘节点、RocketMQ
+  - K8s 特性：DaemonSet 边缘代理、HostNetwork、KubeEdge、CronJob 电池分析、Privileged 容器
+- ✅ `23-xinchuang-it-innovation.md`: 信创替代架构 — 国产化芯片/操作系统/数据库/去 IOE
+  - 7+ Mermaid 图：信创云整体架构、金融去 IOE 迁移流程、信创应用部署状态机、双轨并行数据流
+  - 阿里云组件：ACK 信创版、龙蜥 Anolis OS、OceanBase、PolarDB 国产化版、飞天平台
+  - K8s 特性：NodeSelector arm64、国产操作系统镜像、Pod Security、NetworkPolicy
+- ✅ `24-insurtech.md`: 保险科技架构 — 智能核保/AI 理赔/反欺诈/精算定价
+  - 8+ Mermaid 图：保险科技全景、智能核保时序、理赔处理状态机、反欺诈检测数据流
+  - 阿里云组件：ACK Pro、PolarDB、PAI-EAS、MaxCompute、RocketMQ、OSS
+  - K8s 特性：StatefulSet、GPU 推理 Deployment、HPA 自定义指标、CronJob
+- ✅ `25-quantitative-trading.md`: 证券量化交易架构 — FPGA 低延迟/高频交易/实时风控/回测
+  - 7+ Mermaid 图：量化交易系统全景、高频交易时序、行情处理流水线、低延迟部署拓扑
+  - 阿里云组件：ACK Pro + FPGA 节点池、f3 实例、eRDMA、神龙架构、金融云行情接入
+  - K8s 特性：DaemonSet FPGA、HostNetwork、Privileged、HugePages、共享内存
+- ✅ `26-aviation-travel.md`: 航空出行架构 — GDS 接入/动态运价/出票/收益管理
+  - 7+ Mermaid 图：航空出行全景、航班搜索时序、出票流程、运价计算
+  - 阿里云组件：ACK Pro、PolarDB、Redis 企业版、OpenSearch、RocketMQ、CDN
+  - K8s 特性：HPA、StatefulSet、Pod AntiAffinity、Deployment
+- ✅ `27-hospitality-tourism.md`: 酒店旅游架构 — OTA 平台/动态定价/打包产品/内容社区
+  - 6+ Mermaid 图：酒店旅游全景、打包产品预订时序、房态同步流水线
+  - 阿里云组件：ACK Pro、PolarDB、Redis、OpenSearch、OSS + CDN、RocketMQ
+  - K8s 特性：HPA、Deployment、NodeSelector、阿里云内容安全
+- ✅ `28-proptech.md`: 房地产科技架构 — 房产交易/智慧社区/BIM/资产管理
+  - 6+ Mermaid 图：房地产科技全景、VR 看房时序、智慧社区 IoT 数据流
+  - 阿里云组件：ACK Pro、IoT 平台、PolarDB、OSS + CDN、PAI、视觉智能
+  - K8s 特性：GPU VR 渲染、DaemonSet IoT 代理、边缘计算
+- ✅ `29-agritech-iot.md`: 农业物联网架构 — 精准农业/环境监测/无人机植保/溯源
+  - 6+ Mermaid 图：智慧农业全景、精准灌溉决策流、农产品溯源数据流
+  - 阿里云组件：ACK + ACK Edge、IoT 平台、PolarDB、Lindorm、Flink、PAI、蚂蚁链 BaaS
+  - K8s 特性：KubeEdge、DaemonSet 边缘网关、CronJob、低功耗采集
+- ✅ `30-hrtech-saas.md`: 人力资源 SaaS 架构 — 多租户隔离/薪酬核算/招聘/绩效
+  - 8+ Mermaid 图：HR SaaS 全景、薪资核算时序、多租户 K8s 架构、员工入职流程、数据隔离
+  - 阿里云组件：ACK Pro、PolarDB、Redis 企业版、RocketMQ、OSS、IDaaS
+  - K8s 特性：vCluster、Namespace 隔离、ResourceQuota、NetworkPolicy、CronJob 薪酬计算
+- ✅ `README.md`: 专题索引更新 — 30 篇文档索引 + 扩展学习路径
+- ✅ 累计 Mermaid 图示: 300+ | 累计 K8s YAML 示例: 230+ | 覆盖行业: 30 个
+
+### 2026-04-24 应用层架构设计专题 — 第二批 10 大行业场景 (v9)
+**阿里云解决方案架构师视角，10 篇行业架构文档 + 120+ Mermaid 图解 + 100+ K8s YAML 配置**：
+- ✅ `11-smart-retail-architecture.md`: 智慧零售架构 — 新零售/全渠道/智能补货/会员中台
+  - 9+ Mermaid 图：整体架构、全渠道用户旅程、智能补货数据流、会员中台、门店云边协同
+  - 阿里云组件：ACK Pro、PolarDB、Tablestore、CDN、函数计算、ARMS、DataWorks
+  - K8s 特性：KEDA Cron Scaler、Ingress-Nginx、PostgreSQL HA、HPA 自定义指标
+- ✅ `12-smart-logistics-architecture.md`: 智慧物流架构 — 物流追踪/路径优化/仓储自动化/冷链监控
+  - 8+ Mermaid 图：物流网络拓扑、订单履约时序、仓储自动化、路径优化算法、冷链监控
+  - 阿里云组件：ACK Pro、PolarDB-X、Lindorm、IoT 平台、AMQP、函数计算
+  - K8s 特性：Knative Serving、MQTT、TiDB、Descheduler、Node Affinity
+- ✅ `13-digital-government-architecture.md`: 数字政务架构 — 一网通办/数据共享/等保合规/信创替代
+  - 10+ Mermaid 图：政务云架构、一网通办流程、数据共享交换、等保三级合规、信创替代路径
+  - 阿里云组件：政务云、专有云、PolarDB、OSS、云盾、WAF、堡垒机
+  - K8s 特性：Pod Security、Gatekeeper、NetworkPolicy、Secrets Store CSI、审计日志
+- ✅ `14-smart-healthcare-architecture.md`: 智慧医疗架构 — 互联网医院/电子病历/医学影像/医保对接
+  - 9+ Mermaid 图：医疗云架构、在线问诊时序、影像 AI 流水线、电子病历流转、医保结算
+  - 阿里云组件：医疗云、PolarDB、OSS、函数计算、PAI、ARMS、SLS
+  - K8s 特性：StatefulSet、MinIO、PostgreSQL、Helm Chart、Pod Security
+- ✅ `15-energy-power-architecture.md`: 能源电力架构 — 新能源监控/智能电网/电力交易/边缘计算
+  - 8+ Mermaid 图：能源云架构、新能源监控、智能电网调度、电力交易、边缘站房
+  - 阿里云组件：IoT 平台、MaxCompute、DataV、实时计算、边缘计算、函数计算
+  - K8s 特性：KubeEdge、EdgeMesh、Node Affinity、vCluster、KEDA
+- ✅ `16-video-shortform-architecture.md`: 音视频平台架构 — 直播/点播/RTC/CDN/内容审核
+  - 9+ Mermaid 图：音视频架构、直播推拉流、点播转码、RTC 信令、内容审核流水线
+  - 阿里云组件：CDN、视频直播、视频点播、RTC、函数计算、PAI、ARMS
+  - K8s 特性：FFmpeg GPU、KEDA HTTP Scaler、CDN、Ingress-Nginx、StatefulSet
+- ✅ `17-saas-multi-tenant-architecture.md`: SaaS 多租户架构 — 租户隔离/数据分片/计费计量/自助开通
+  - 8+ Mermaid 图：多租户隔离金字塔、租户开通时序、数据路由层、可观测性隔离、灰度发布
+  - 阿里云组件：ACK、PolarDB-X、Redis 企业版、RocketMQ、ARMS、SLS
+  - K8s 特性：vCluster、NetworkPolicy、ResourceQuota、LimitRange、RBAC
+- ✅ `18-data-midplatform-architecture.md`: 数据中台架构 — 数据采集/实时计算/数据治理/BI 分析
+  - 8+ Mermaid 图：数据中台架构、数据采集流水线、实时计算、数据治理、BI 分析
+  - 阿里云组件：DataWorks、MaxCompute、Flink、Hologres、DataV、OSS
+  - K8s 特性：Airflow、Spark Operator、Kyverno、Pod Topology Spread、Karpenter
+- ✅ `19-cloudnative-devops-architecture.md`: 云原生 DevOps 架构 — GitOps/CI-CD/平台工程/内部开发者平台
+  - 7+ Mermaid 图：DevOps 架构、GitOps 流水线、CI/CD 流程、平台工程、IDP 门户
+  - 阿里云组件：ACK、ACR、函数计算、ARMS、SLS、云效、钉钉
+  - K8s 特性：Tekton、ArgoCD、Ingress-Nginx、Cluster Autoscaler、KEDA
+- ✅ `20-microservice-governance-architecture.md`: 微服务治理架构 — 服务网格/流量治理/可观测性/混沌工程
+  - 9+ Mermaid 图：微服务治理架构、服务网格数据面、流量治理、可观测性、混沌工程
+  - 阿里云组件：MSE、ARMS、SLS、ACM、AHAS、函数计算
+  - K8s 特性：OpenTelemetry、Jaeger、Istio、mTLS、Sidecar、KEDA
+- ✅ `README.md`: 专题索引更新 — 20 篇文档索引 + 行业选型速查 + 角色学习路径
+- ✅ 累计 Mermaid 图示: 200+ | 累计 K8s YAML 示例: 150+ | 覆盖行业: 20 个
+
+### 2026-04-24 应用层架构设计专题 — 10 大行业场景 (v7)
+**新增 `topic-application-architecture/` 专题目录，10 篇行业架构文档 + 80+ Mermaid 图解**:
+- ✅ `01-ecommerce-architecture.md`: 电商系统架构 — 秒杀/支付核心/库存/搜索/多租户/高可用
+  - 10+ Mermaid 图：整体架构、微服务拆分、下单时序、支付状态机、秒杀系统、存储分层、多 AZ 部署
+- ✅ `02-mini-program-architecture.md`: 小程序平台架构 — 运行时/Serverless/发布审核/沙箱隔离
+  - 8+ Mermaid 图：双线程模型、发布状态机、沙箱隔离、Serverless 架构
+- ✅ `03-cms-architecture.md`: CMS 内容管理架构 — Headless/SSG/协同编辑/多语言/工作流
+  - 7+ Mermaid 图：Headless 架构、协同编辑 OT、发布状态机、多站点模型
+- ✅ `04-im-rtc-architecture.md`: 实时通信架构 — WebRTC/SFU/MCU/信令/全球加速
+  - 9+ Mermaid 图：消息收发时序、WebRTC 信令、直播连麦、媒体处理流水线
+- ✅ `05-online-education-architecture.md`: 在线教育架构 — 直播课堂/录播/考试/白板/学习数据
+  - 8+ Mermaid 图：课堂时序、录播流水线、防作弊状态机、知识图谱
+- ✅ `06-fintech-architecture.md`: 金融科技架构 — 支付核心/账务/风控/合规/PCI-DSS
+  - 9+ Mermaid 图：支付时序、状态机、复式记账、风控流水线、灾备架构
+- ✅ `07-iot-platform-architecture.md`: 物联网架构 — EMQX/边缘计算/数字孪生/OTA
+  - 7+ Mermaid 图：设备接入、MQTT 架构、规则引擎、边缘计算拓扑
+- ✅ `08-ai-ml-inference-architecture.md`: AI/ML 推理架构 — vLLM/DRA GPU/KServe/RAG
+  - 8+ Mermaid 图：模型服务化、vLLM PagedAttention、多模态编排、A/B 测试
+- ✅ `09-gaming-backend-architecture.md`: 游戏后端架构 — 帧同步/状态同步/匹配/区服
+  - 8+ Mermaid 图：匹配时序、游戏服务器循环、帧同步 vs 状态同步、区服架构
+- ✅ `10-social-media-architecture.md`: 社交媒体架构 — Feed 流/社交图谱/推荐/内容审核
+  - 7+ Mermaid 图：推拉模型对比、Feed 写入时序、社交图谱、推荐流水线
+- ✅ `README.md`: 专题索引 + 通用架构模式速查表 + 学习路径建议
+- ✅ 累计 Mermaid 图示: 80+ | 累计 K8s YAML 示例: 50+ | 覆盖行业: 10 个
+
+### 2026-04-24 K8s 生产环境架构与 Mermaid 图解全面补充 (v6)
+**20 篇版本特性/架构文档 + 核心 Domain 深度对齐 + 生产架构蓝图全覆盖**:
+- ✅ 新增 `domain-18/99-kubernetes-production-architecture-blueprint.md`: 生产环境完整架构蓝图
+  - 10 大生产架构 Mermaid 图解：整体架构、控制平面 HA、工作节点/运行时、网络/存储/安全/可观测性
+  - 多集群联邦、灾备与业务连续性、GitOps 与 CI/CD 架构
+  - 架构决策树 (mermaid flowchart)
+- ✅ 新增 `domain-18/99-kubernetes-deployment-patterns-architecture.md`: 部署模式架构详解
+  - 6 大部署模式 Mermaid 状态机：滚动更新、蓝绿部署、金丝雀发布、A/B 测试、影子流量、特性开关
+  - 多环境晋升流水线 Mermaid 序列图、部署模式选型决策树
+  - 生产部署检查清单脚本
+- ✅ 新增 `domain-18/99-kubernetes-multi-tenant-architecture.md`: 多租户与资源隔离架构
+  - 多租户隔离层级金字塔、Namespace/节点池/vCluster 隔离模型 Mermaid 图
+  - PSA 实施架构、零信任网络模型、FinOps 成本归因架构
+  - PaaS 自服务平台架构 Mermaid 序列图
+- ✅ 新增 `domain-1/99-kubernetes-core-features-mermaid-diagrams.md`: 核心特性架构图集
+  - Sidecar 启动顺序状态机、CEL 准入执行流程序列图
+  - DRA 完整数据流、In-Place Resize 状态流转、nftables 数据包路径
+  - Queueing Hints 注册机制、用户命名空间 UID 映射、协调领导者选举对比
+- ✅ domain-18 README 更新: 适用版本 v1.32 → v1.33+，文档数 24 → 28
+
 ### 2026-04-24 Kubernetes v1.29-v1.33 特性全面补充 (v5)
 **16 篇版本特性指南 + 核心 Domain 深度对齐 + 设计原理/工作负载/可观测性/运维全覆盖**:
 - ✅ 新增 `domain-2/99-kubernetes-v1.33-design-principles-evolution.md`: 设计原理演进与影响分析
