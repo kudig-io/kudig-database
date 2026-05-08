@@ -1730,3 +1730,7 @@ main
 - [Kubernetes 持久化存储](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [CSI 规范](https://github.com/container-storage-interface/spec)
 - [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
+
+---
+
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

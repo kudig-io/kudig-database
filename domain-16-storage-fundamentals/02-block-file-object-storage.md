@@ -1,4 +1,4 @@
-# 块存储、文件存储、对象存储
+# 02 - 块存储、文件存储、对象存储
 
 > **适用版本**: 通用 | **最后更新**: 2026-01
 
@@ -395,7 +395,52 @@ services:
       retries: 3
 
   minio2:
-    # 类似配置...
+    image: minio/minio:latest
+    ports:
+      - "9002:9000"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123456
+    volumes:
+      - minio-data2:/data
+    command: server http://minio{1...4}/data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio3:
+    image: minio/minio:latest
+    ports:
+      - "9003:9000"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123456
+    volumes:
+      - minio-data3:/data
+    command: server http://minio{1...4}/data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio4:
+    image: minio/minio:latest
+    ports:
+      - "9004:9000"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123456
+    volumes:
+      - minio-data4:/data
+    command: server http://minio{1...4}/data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
   
   nginx:
     image: nginx:alpine
@@ -569,4 +614,4 @@ chmod +x s3-benchmark_linux_amd64
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
 - [03-raid-storage-redundancy](./03-raid-storage-redundancy.md) - RAID 配置
-- [70-storage-architecture](./70-storage-architecture.md) - K8s 存储架构
+- [K8s 存储架构](../domain-6-storage/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件

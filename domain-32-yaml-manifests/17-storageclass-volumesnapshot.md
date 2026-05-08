@@ -1,7 +1,7 @@
 # 17 - StorageClass / VolumeSnapshot YAML 配置参考
 
 > **文档版本**: 2026-02  
-> **适用范围**: Kubernetes v1.25 - v1.32  
+> **适用范围**: Kubernetes v1.25 - v1.33
 > **资源类型**: StorageClass, VolumeSnapshot, VolumeSnapshotClass, VolumeSnapshotContent  
 > **API 版本**: storage.k8s.io/v1, snapshot.storage.k8s.io/v1  
 > **用途**: 动态存储供给与卷快照管理

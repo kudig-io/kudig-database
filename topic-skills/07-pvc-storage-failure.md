@@ -63,7 +63,7 @@ related_skills:
   - "SKILL-POD-002"
   - "SKILL-NODE-001"
 fta_refs:
-  - "topic-fta/list/storage-fta.md"
+  - "topic-fta/list/csi-fta.md"
 knowledge_refs:
   - "domain-12-troubleshooting/04-storage-csi-troubleshooting.md"
   - "domain-12-troubleshooting/14-pvc-storage-troubleshooting.md"

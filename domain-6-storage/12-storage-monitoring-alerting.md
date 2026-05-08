@@ -418,10 +418,24 @@ analyze_storage_performance() {
 $(jq -r '.items[] | "- \(.metadata.name): \(.spec.resources.requests.storage) (\(.status.phase))"' $OUTPUT_DIR/pvc-info.json)
 
 ## 性能发现
-TODO: 自动生成性能分析结论
+$(if [ -f "$OUTPUT_DIR/pvc-info.json" ]; then
+  PENDING_COUNT=$(jq -r '[.items[] | select(.status.phase=="Pending")] | length' "$OUTPUT_DIR/pvc-info.json" 2>/dev/null || echo "N/A")
+  BOUND_COUNT=$(jq -r '[.items[] | select(.status.phase=="Bound")] | length' "$OUTPUT_DIR/pvc-info.json" 2>/dev/null || echo "N/A")
+  echo "- PVC状态分布: Pending=$PENDING_COUNT, Bound=$BOUND_COUNT"
+  HIGH_USAGE=$(jq -r --arg threshold "${STORAGE_THRESHOLD:-80}" '[.items[] | select(.status.capacity.storage // "0" | rtrimstr("Gi") | tonumber > ($threshold | tonumber))] | length' "$OUTPUT_DIR/pvc-info.json" 2>/dev/null || echo "0")
+  echo "- 高使用率PVC数量 (>${STORAGE_THRESHOLD:-80}%): $HIGH_USAGE"
+fi)
 
 ## 建议优化项
-TODO: 根据分析结果提供优化建议
+$(if [ -f "$OUTPUT_DIR/pvc-info.json" ]; then
+  echo "1. 定期检查Pending状态PVC，确认StorageClass和配额配置"
+  echo "2. 对高使用率PVC执行扩容或数据清理"
+  echo "3. 审查StorageClass的volumeBindingMode设置是否匹配调度需求"
+  echo "4. 验证CSI驱动版本与Kubernetes版本的兼容性"
+  echo "5. 检查存储后端性能指标(IOPS/吞吐/延迟)是否满足SLA"
+else
+  echo "无数据可供分析，请确保PVC信息已正确采集"
+fi)
 EOF
   
   echo "✅ 分析完成，报告位置: $OUTPUT_DIR"
@@ -839,3 +853,4 @@ kubectl get pvc --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namesp
 ```
 
 ---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

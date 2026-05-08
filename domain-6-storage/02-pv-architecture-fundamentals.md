@@ -67,6 +67,7 @@
 | `volumeMode` | string | 否 | 卷模式：Filesystem(默认)/Block |
 | `mountOptions` | []string | 否 | 挂载选项，如 `["noatime","discard"]` |
 | `nodeAffinity` | NodeAffinity | 否 | 节点亲和性约束（Local PV必须） |
+| `claimRef` | ObjectReference | 否 | PVC 绑定引用（绑定后自动填充，包含 namespace/name/uid） |
 | `csi` | CSIPersistentVolumeSource | 否 | CSI 卷配置 |
 
 ---
@@ -108,6 +109,8 @@
 
 ## 4. 访问模式 (Access Modes) 深度解析
 
+> 基础概念和访问模式选择指南详见 [06-存储基础概念](./06-storage-fundamental-concepts.md)。本节侧重 PV 层面的访问模式约束和生产注意事项。
+
 | 模式 | 全称 | 说明 | 典型场景 |
 |:---:|:---|:---|:---|
 | **RWO** | ReadWriteOnce | 单节点读写 | 数据库、有状态应用 |
@@ -134,6 +137,8 @@
 ---
 
 ## 5. 回收策略 (Reclaim Policy) 详解
+
+> 基础概念和运维操作详见 [06-存储基础概念 - 回收策略机制](./06-storage-fundamental-concepts.md)。本节侧重 PV 层面的回收策略选择和生产实践。
 
 | 策略 | 行为 | 适用场景 | 风险 |
 |:---|:---|:---|:---|
@@ -194,8 +199,33 @@ spec:
     │  1. 精确容量匹配优先                              │
     │  2. 最小满足容量优先                              │
     │  3. 先创建的 PV 优先                              │
-    └───────────────────────────────────────────────────┘
+     └───────────────────────────────────────────────────┘
 ```
+
+### PV 绑定保护机制
+
+PV 与 PVC 绑定后，Kubernetes 会自动添加以下保护机制：
+
+| 保护机制 | 说明 |
+|---------|------|
+| **`pv.kubernetes.io/bind-completed`** (PVC annotation) | 标记 PVC 已完成绑定，**阻止 PVC 被重新绑定到其他 PV**。即使原有 PV 被删除，PVC 也不会尝试绑定新 PV，而是进入 Lost 状态 |
+| **`pv.kubernetes.io/bound-by-controller`** (PV/PVC annotation) | 标记绑定由 Controller 完成（非手动），用于区分自动绑定和手动绑定 |
+| **`kubernetes.io/pv-protection`** (PV finalizer) | PV 绑定到 PVC 后添加，**阻止 PV 被直接删除**。必须先删除 PVC，PV 才能被回收 |
+| **`kubernetes.io/pvc-protection`** (PVC finalizer) | PVC 被 Pod 使用时添加，**阻止 PVC 在 Pod 使用期间被删除**。所有引用 PVC 的 Pod 终止后才能删除 PVC |
+
+```bash
+# 查看绑定保护 annotation
+kubectl get pvc <name> -o jsonpath='{.metadata.annotations}'
+
+# 查看 PV/PVC protection finalizer
+kubectl get pv <name> -o jsonpath='{.metadata.finalizers}'
+kubectl get pvc <name> -o jsonpath='{.metadata.finalizers}'
+
+# 强制删除卡住的 PVC（谨慎使用）
+kubectl patch pvc <name> -p '{"metadata":{"finalizers":null}}'
+```
+
+> **运维注意**: 不要手动删除 `bind-completed` annotation，否则 PVC 可能被错误地重新绑定到其他 PV，导致数据访问异常。
 
 ### 绑定延迟模式 (VolumeBindingMode)
 

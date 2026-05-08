@@ -16,7 +16,7 @@
 ║              KUBERNETES  PRODUCTION  OPERATIONS  KNOWLEDGE BASE          ║
 ║                                                                          ║
 ║  ┌──────────────────────────────────────────────────────────────────┐   ║
-║  │  📚 950+ Docs  │  🌐 41 Domains  │  🤖 AI-Ready  │  ⚡ Production  │   ║
+║  │  📚 3200+ Docs  │  🌐 40 Domains  │  🤖 AI-Ready  │  ⚡ Production  │   ║
 ║  └──────────────────────────────────────────────────────────────────┘   ║
 ║                                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════╝
@@ -33,19 +33,19 @@
 
 <!-- Badges Row -->
 <p>
-  <img src="https://img.shields.io/badge/文档-950%2B-blue?style=flat-square&logo=readthedocs" alt="文档数量"/>
-  <img src="https://img.shields.io/badge/知识域-41%2B-green?style=flat-square&logo=bookstack" alt="知识领域"/>
-  <img src="https://img.shields.io/badge/总字数-4300万%2B-orange?style=flat-square&logo=markdown" alt="总字数"/>
-  <img src="https://img.shields.io/badge/CNCF项目-218-purple?style=flat-square&logo=cncf" alt="CNCF项目"/>
+  <img src="https://img.shields.io/badge/文档-3200%2B-blue?style=flat-square&logo=readthedocs" alt="文档数量"/>
+  <img src="https://img.shields.io/badge/知识域-40%2B-green?style=flat-square&logo=bookstack" alt="知识领域"/>
+  <img src="https://img.shields.io/badge/总字数-5500万%2B-orange?style=flat-square&logo=markdown" alt="总字数"/>
+  <img src="https://img.shields.io/badge/CNCF项目-219-purple?style=flat-square&logo=cncf" alt="CNCF项目"/>
   <img src="https://img.shields.io/badge/K8s版本-v1.25--v1.32-326ce5?style=flat-square&logo=kubernetes" alt="K8s版本"/>
-  <img src="https://img.shields.io/badge/最后更新-2026--04-brightgreen?style=flat-square" alt="最后更新"/>
+  <img src="https://img.shields.io/badge/最后更新-2026--05-brightgreen?style=flat-square" alt="最后更新"/>
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/AI%20Agent-40%E7%AF%87-ff6b6b?style=flat-square&logo=openai" alt="AI Agent"/>
-  <img src="https://img.shields.io/badge/FTA%E6%95%85%E9%9A%9C%E6%A0%91-36%E4%B8%AA-4ecdc4?style=flat-square" alt="FTA"/>
-  <img src="https://img.shields.io/badge/FEBM%E5%8F%96%E8%AF%81-9%E7%AF%87-45b7d1?style=flat-square" alt="FEBM"/>
-  <img src="https://img.shields.io/badge/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92-46%E7%AF%87-f9ca24?style=flat-square&logo=graduation-cap" alt="学习计划"/>
+  <img src="https://img.shields.io/badge/AI%20Agent-58%E7%AF%87-ff6b6b?style=flat-square&logo=openai" alt="AI Agent"/>
+  <img src="https://img.shields.io/badge/FTA%E6%95%85%E9%9A%9C%E6%A0%91-67%E7%AF%87-4ecdc4?style=flat-square" alt="FTA"/>
+  <img src="https://img.shields.io/badge/FEBM%E5%8F%96%E8%AF%81-10%E7%AF%87-45b7d1?style=flat-square" alt="FEBM"/>
+  <img src="https://img.shields.io/badge/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92-92%E7%AF%87-f9ca24?style=flat-square&logo=graduation-cap" alt="学习计划"/>
   <img src="https://img.shields.io/badge/Manpage-14%E4%B8%AA-9b59b6?style=flat-square&logo=linux" alt="Manpage"/>
   <img src="https://img.shields.io/badge/%E9%80%9F%E6%9F%A5%E5%8D%A1-9%E5%BC%A0-blueviolet?style=flat-square&logo=bookstack" alt="速查卡"/>
 </p>
@@ -93,12 +93,12 @@
 <td width="50%">
 
 ### 📚 内容全面性
-- **4300万+** 字符（约1500万中文字）
-- **950+** 篇技术文档
-- **41** 个知识领域
-- **218** 个 CNCF 开源项目
-- **36** 个 FTA 故障树
-- **40** 篇 AI Agent 工程
+- **5500万+** 字符（约1800万中文字）
+- **3200+** 篇技术文档
+- **40** 个核心知识域 + **19** 个专题目录
+- **219** 个 CNCF 开源项目
+- **67** 个 FTA 故障树
+- **58** 篇 AI Agent 工程
 
 ### 🔬 深度解析
 - 控制平面组件源码级剖析
@@ -143,8 +143,8 @@
 
 ```python
 # 使用 LangChain 加载知识库
-from langchain.document_loaders import DirectoryLoader
-from langchain.text_splitter import MarkdownHeaderTextSplitter
+from langchain_community.document_loaders import DirectoryLoader
+from langchain_text_splitters import MarkdownHeaderTextSplitter
 
 # 加载所有 Markdown 文档
 loader = DirectoryLoader('./', glob='**/*.md')
@@ -154,10 +154,12 @@ docs = loader.load()
 splitter = MarkdownHeaderTextSplitter(
     headers_to_split_on=[('#', 'Header 1'), ('##', 'Header 2')]
 )
-chunks = splitter.split_text(docs)
+chunks = []
+for doc in docs:
+    chunks.extend(splitter.split_text(doc.page_content))
 
 # 构建向量库
-# ... 接入 OpenAI /  Claude /  Qwen Embedding
+# ... 接入 OpenAI / Claude / Qwen Embedding
 ```
 </details>
 
@@ -165,7 +167,7 @@ chunks = splitter.split_text(docs)
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-org/kudig-database.git
+git clone https://github.com/kudig-io/kudig-database.git
 cd kudig-database
 
 # 启动本地 GitBook 浏览（需要安装 mdBook）
@@ -199,17 +201,18 @@ graph TD
     ROOT --> ENTERPRISE[🏢 企业级专题]
     ROOT --> ADVANCED[🚀 前沿技术]
     
-    TOPIC --> T1[FTA故障树 29篇]
-    TOPIC --> T2[FEBM取证 9篇]
-    TOPIC --> T3[AI Agent 40篇]
-    TOPIC --> T4[学习计划 46篇]
+    TOPIC --> T1[FTA故障树 67篇]
+    TOPIC --> T2[FEBM取证 10篇]
+    TOPIC --> T3[AI Agent 58篇]
+    TOPIC --> T4[学习计划 92篇]
+    TOPIC --> T5[应用架构/运维函数等]
     
-    CORE --> C1[架构/设计 35篇]
-    CORE --> C2[控制平面 23篇]
-    CORE --> C3[网络/存储 51篇]
-    CORE --> C4[安全/可观测 33篇]
-    CORE --> C5[平台运维 25篇]
-    CORE --> C6[AI Infra 30篇]
+    CORE --> C1[架构/设计 52篇]
+    CORE --> C2[控制平面 35篇]
+    CORE --> C3[网络/存储 60篇]
+    CORE --> C4[安全/可观测 52篇]
+    CORE --> C5[平台运维 28篇]
+    CORE --> C6[AI Infra 38篇]
     
     BASE --> B1[Docker]
     BASE --> B2[Linux]
@@ -222,7 +225,7 @@ graph TD
     ENTERPRISE --> E3[监控日志]
     ENTERPRISE --> E4[灾备恢复]
     
-    ADVANCED --> A1[CNCF 218项目]
+    ADVANCED --> A1[CNCF 219项目]
     ADVANCED --> A2[eBPF]
     ADVANCED --> A3[边缘计算]
     ADVANCED --> A4[WebAssembly]
@@ -261,7 +264,7 @@ graph TD
 
 > 📋 详细的分块策略与 Embedding 模型推荐请参阅 [corpus-config/rag-chunking-strategy.md](./corpus-config/rag-chunking-strategy.md)，预置的 RAG Profile 请参阅 [corpus-config/profiles/](./corpus-config/profiles/)。
 
-```python
+```text
 # 推荐分块策略
 ├── domain-*/          # 按知识域分块，用于专业问答
 ├── topic-fta/          # 故障树结构，用于诊断推理
@@ -352,11 +355,11 @@ flowchart TD
 ### 📈 整体规模
 | 指标 | 数值 |
 |------|------|
-| 文件总数 | 1,477+ |
-| Markdown 文档 | 950+ |
-| 总字符数 | 4300万+ |
-| 知识领域 | 41 |
-| 开源产品 | 36 |
+| 文件总数 | 12,700+ |
+| Markdown 文档 | 3,200+ |
+| 总字符数 | 5500万+ |
+| 核心知识域 | 40 |
+| 专题目录 | 19 |
 
 </td>
 <td width="33%">
@@ -364,11 +367,11 @@ flowchart TD
 ### 🤖 AI 相关
 | 指标 | 数值 |
 |------|------|
-| AI Agent 文档 | 40 篇 |
-| FTA 故障树 | 36 个 |
-| FEBM 取证 | 9 篇 |
-| 学习课程 | 46 篇 |
-| CNCF 项目 | 218 个 |
+| AI Agent 文档 | 58 篇 |
+| FTA 故障树 | 67 篇 |
+| FEBM 取证 | 10 篇 |
+| 学习课程 | 92 篇 |
+| CNCF 项目 | 219 个 |
 
 </td>
 <td width="33%">
@@ -376,11 +379,11 @@ flowchart TD
 ### 🔧 运维专题
 | 指标 | 数值 |
 |------|------|
-| 故障排查文档 | 150+ |
-| 技能库 (Skills) | 6 个 |
+| 故障排查文档 | 48+ |
+| 技能库 (Skills) | 30 篇 |
 | 速查卡 | 9 张 |
-| 演示文档 | 12 篇 |
-| 技术白皮书 | 16 篇 |
+| 演示文档 | 13 篇 |
+| 运维词典 | 207 篇 |
 | Manpage | 14 个 |
 
 </td>
@@ -391,22 +394,45 @@ flowchart TD
 
 | 域 | 名称 | 文档数 | 关键内容 |
 |:---:|:---|:---:|:---|
-| 1 | 架构基础 | 17 | K8s 架构、核心组件、升级策略、性能调优 |
-| 2 | 设计原理 | 18 | 声明式API、控制器模式、etcd共识、高可用 |
-| 3 | 控制平面 | 23 | etcd、API Server、Scheduler、CRI/CSI/CNI |
-| 4 | 工作负载 | 14 | Pod生命周期、调度器、HPA/VPA、资源管理 |
-| 5 | 网络 | 36 | CNI、Service、DNS、Ingress、Gateway API |
-| 6 | 存储 | 15 | PV/PVC、StorageClass、CSI驱动、备份恢复 |
-| 7 | 安全合规 | 16 | RBAC、网络安全、运行时安全、审计合规 |
-| 8 | 可观测性 | 17 | 监控指标、日志审计、链路追踪、混沌工程 |
-| 9 | 平台运维 | 25 | 集群管理、GitOps、成本优化、灾备恢复 |
-| 10 | 扩展生态 | 16 | CRD/Operator、Helm、CI/CD、服务网格 |
-| 11 | AI基础设施 | 30 | GPU调度、分布式训练、LLM推理、成本优化 |
-| 12 | 故障排查 | 150+ | 全组件故障排查、FTA故障树、结构化排障 |
-| 13-17 | 底层基础 | 45 | Docker、Linux、网络/存储基础、云厂商 |
-| 18-32 | 企业级专题 | 200+ | 生产运维、监控日志、GitOps、安全合规 |
-| 33-39 | 前沿技术 | 300+ | CNCF项目、eBPF、平台工程、边缘计算 |
-| 40 | 云原生API网关 | 15 | Gateway API、网关选型、安全策略、性能优化 |
+| 1 | 架构基础 | 32 | K8s 架构、核心组件、升级策略、性能调优 |
+| 2 | 设计原理 | 20 | 声明式API、控制器模式、etcd共识、高可用 |
+| 3 | 控制平面 | 35 | etcd、API Server、Scheduler、CRI/CSI/CNI |
+| 4 | 工作负载 | 27 | Pod生命周期、调度器、HPA/VPA、资源管理 |
+| 5 | 网络 | 41 | CNI、Service、DNS、Ingress、Gateway API |
+| 6 | 存储 | 19 | PV/PVC、StorageClass、CSI驱动、备份恢复 |
+| 7 | 安全合规 | 22 | RBAC、网络安全、运行时安全、审计合规 |
+| 8 | 可观测性 | 30 | 监控指标、日志审计、链路追踪、混沌工程 |
+| 9 | 平台运维 | 28 | 集群管理、GitOps、成本优化、灾备恢复 |
+| 10 | 扩展生态 | 20 | CRD/Operator、Helm、CI/CD、服务网格 |
+| 11 | AI基础设施 | 38 | GPU调度、分布式训练、LLM推理、成本优化 |
+| 12 | 故障排查 | 46 | 全组件故障排查、FTA故障树、结构化排障 |
+| 13 | Docker容器 | 14 | Docker基础、容器运行时、镜像管理 |
+| 14 | Linux系统 | 11 | Linux基础、系统管理、性能调优 |
+| 15 | 网络基础 | 8 | TCP/IP、网络模型、协议栈 |
+| 16 | 存储基础 | 7 | 存储原理、文件系统、块存储 |
+| 17 | 云厂商 | 24 | 13家云厂商K8s服务（AWS/GCP/Azure/阿里云等） |
+| 18 | 生产运维 | 32 | 生产环境运维、集群运维、容量规划 |
+| 19 | 技术白皮书 | 27 | 经典论文、技术白皮书、RFC |
+| 20 | 监控告警 | 13 | 企业级监控、告警体系、SLO/SLA |
+| 21 | 日志管理 | 10 | 日志采集、分析、审计 |
+| 22 | 容器镜像 | 9 | 镜像管理、安全扫描、仓库 |
+| 23 | GitOps/CI-CD | 9 | ArgoCD、FluxCD、Tekton、CI/CD |
+| 24 | 基础设施即代码 | 7 | IaC、Terraform、Pulumi |
+| 25 | 云原生安全 | 12 | 安全策略、合规、零信任 |
+| 26 | 服务网格 | 10 | Istio、Envoy、流量治理 |
+| 27 | 多云混合 | 6 | 多云管理、混合云架构 |
+| 28 | 数据库中间件 | 7 | 数据库、消息队列、中间件 |
+| 29 | 自动化测试 | 6 | 测试策略、质量保障 |
+| 30 | 灾备恢复 | 7 | Velero、灾备方案、业务连续性 |
+| 31 | 硬件基础 | 19 | 服务器硬件、GPU、网络设备 |
+| 32 | YAML清单 | 37 | K8s全资源YAML参考 |
+| 33 | K8s事件 | 16 | 事件体系、事件驱动 |
+| 34 | CNCF生态 | 219 | Graduated/Incubating/Sandbox全景 || 35 | eBPF | 11 | eBPF技术、网络可观测 |
+| 36 | 平台工程 | 13 | 内部开发者平台、IDP |
+| 37 | 边缘计算 | 12 | KubeEdge、边缘部署 |
+| 38 | WebAssembly | 12 | Wasm运行时、边缘计算 |
+| 39 | 供应链安全 | 12 | SBOM、签名验证、安全供应链 |
+| 40 | API网关 | 16 | Gateway API、网关选型、安全策略 |
 
 ---
 
@@ -420,7 +446,7 @@ flowchart TD
 <td>
 <a href="./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md">kubectl 命令</a> → 
 <a href="./domain-4-workloads/10-workload-controllers-overview.md">工作负载</a> → 
-<a href="./domain-5-networking/11-service-concepts-types.md">Service</a> → 
+<a href="./domain-5-networking/06-service-concepts-types.md">Service</a> → 
 <a href="./domain-10-extensions/08-cicd-pipelines.md">CI/CD</a>
 </td>
 </tr>
@@ -429,7 +455,7 @@ flowchart TD
 <td>
 <a href="./domain-3-control-plane/11-etcd-deep-dive.md">etcd 运维</a> → 
 <a href="./domain-12-troubleshooting/">故障排查</a> → 
-<a href="./domain-8-observability/06-monitoring-metrics-prometheus.md">监控告警</a> → 
+<a href="./domain-8-observability/10-monitoring-metrics-prometheus.md">监控告警</a> → 
 <a href="./topic-fta/23-fta-production-quick-start.md">FTA 快速落地</a>
 </td>
 </tr>
@@ -456,7 +482,7 @@ flowchart TD
 <td>
 <a href="./topic-learn/public-training/one-month/README.md">1个月计划</a> → 
 <a href="./topic-cheat-sheet/k8s.md">K8s 速查卡</a> → 
-<a href="./topic-dictionary/05-concept-reference.md">概念手册</a> → 
+<a href="./topic-dictionary/">概念手册</a> → 
 <a href="./domain-12-troubleshooting/">故障排查</a>
 </td>
 </tr>
@@ -475,13 +501,75 @@ flowchart TD
 
 | 场景 | 推荐起点 | 核心文档 |
 |:---|:---|:---|
-| **🔥 故障排查** | [topic-fta/README.md](./topic-fta/README.md) | 36个FTA故障树 + 100+篇排障文档 |
-| **📚 系统学习** | [topic-learn/](./topic-learn/) | 1个月学习计划 + 46篇课程 |
-| **🤖 Agent开发** | [topic-ai-agent/](./topic-ai-agent/) | 40篇AI Agent工程文档 |
-| **⚡ 命令速查** | [topic-cheat-sheet/](./topic-cheat-sheet/) | K8s/Linux/Go 速查卡 |
+| **🔥 故障排查** | [topic-fta/README.md](./topic-fta/README.md) | 67篇FTA故障树 + 排障文档 |
+| **📚 系统学习** | [topic-learn/](./topic-learn/) | 1个月学习计划 + 92篇课程 |
+| **🤖 Agent开发** | [topic-ai-agent/](./topic-ai-agent/) | 58篇AI Agent工程文档 |
+| **⚡ 命令速查** | [topic-cheat-sheet/](./topic-cheat-sheet/) | 9张 K8s/Linux/Go 速查卡 |
 | **🏢 企业部署** | [topic-deployment/](./topic-deployment/) | 从本地Demo到生产环境的完整路径 |
 | **🔄 集群迁移** | [topic-migration/](./topic-migration/) | 10步完整迁移指南 |
-| **🎤 技术演示** | [topic-presentations/](./topic-presentations/) | 11个K8s专题Presentation |
+| **🎤 技术演示** | [topic-presentations/](./topic-presentations/) | 13个K8s专题Presentation |
+| **🤖 AI 编码** | [topic-ai-coding/](./topic-ai-coding/) | 25篇AI辅助编码与开发工具链文档 |
+| **🏗️ 应用架构** | [topic-application-architecture/](./topic-application-architecture/) | 97篇电商/IM/教育等典型架构文档 |
+| **⚙️ 运维函数** | [topic-functions/](./topic-functions/) | 80篇集群/部署/节点操作函数库 |
+| **🌐 Terway专题** | [topic-terway/](./topic-terway/) | 10篇阿里云Terway CNI深度文档 |
+| **☕ Java × K8s** | [topic-java-kubernetes/](./topic-java-kubernetes/) | Java应用K8s部署实践 |
+| **📋 版本发布** | [topic-release-notes/](./topic-release-notes/) | 核心组件版本发布说明 |
+| **📝 出版计划** | [topic-publish/](./topic-publish/) | AI Infra/K8s系列出版路线图 |
+
+---
+
+## 🗂️ 全局专题索引
+
+> 横向跨域聚合：突破 `domain-*` 按领域组织的限制，按**关键技术关键字**全局关联所有相关内容，支持从单一视角穿透全库。
+
+### 计算与运行时
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`pod-index.md`](./topic-index/pod-index.md) | Pod 全景：生命周期、Pending 诊断、全面故障排查、YAML 规格、事件体系 | ~260+ 篇关联 |
+| [`node-index.md`](./topic-index/node-index.md) | Node 全景：Kubelet 深度解析、NotReady 诊断、节点组件故障排查 | ~270+ 篇关联 |
+| [`scheduler-index.md`](./topic-index/scheduler-index.md) | 调度与弹性伸缩：调度器原理、亲和性/污点容忍、HPA/VPA/Karpenter、资源配额 | ~300+ 篇关联 |
+
+### 网络与安全
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`network-index.md`](./topic-index/network-index.md) | 网络全景：CNI、Service/Ingress/Gateway API、DNS、NetworkPolicy、负载均衡 | ~360+ 篇关联 |
+| [`terway-index.md`](./topic-index/terway-index.md) | Terway 专题：阿里云 CNI 产品、源码分析、故障树、云厂商集成 | ~120+ 篇关联 |
+| [`dns-index.md`](./topic-index/dns-index.md) | DNS 专题：CoreDNS 原理与配置、DNS 故障排查、Linux 解析链 | ~250+ 篇关联 |
+| [`service-mesh-index.md`](./topic-index/service-mesh-index.md) | 服务网格全景：Istio/Linkerd/Envoy 企业实践、Ambient/Sidecar、流量治理 | ~280+ 篇关联 |
+| [`security-index.md`](./topic-index/security-index.md) | 安全全景：RBAC、准入控制/Webhook、Pod 安全标准、运行时安全、合规审计 | ~400+ 篇关联 |
+| [`cert-index.md`](./topic-index/cert-index.md) | 证书/TLS 全景：证书管理、Ingress TLS、cert-manager、PKI 速查表 | ~280+ 篇关联 |
+
+### 存储与数据保护
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`storage-index.md`](./topic-index/storage-index.md) | 存储全景：CSI 驱动、StorageClass、分布式存储（Ceph/Longhorn/Rook）、性能调优 | ~310+ 篇关联 |
+| [`pvc-index.md`](./topic-index/pvc-index.md) | PVC 使用层：PV/PVC 架构、CSI 存储、YAML 清单、故障排查 | ~360+ 篇关联 |
+| [`backup-dr-index.md`](./topic-index/backup-dr-index.md) | 备份与灾备：Velero、etcd 备份恢复、跨区灾备、存储快照、业务连续性 | ~280+ 篇关联 |
+
+### 集群与基础设施
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`cluster-index.md`](./topic-index/cluster-index.md) | 集群生命周期：新建（kubeadm 26 篇源码分析）、删除、证书、升级、部署 | ~390+ 篇关联 |
+| [`etcd-index.md`](./topic-index/etcd-index.md) | etcd 专题：Raft 共识、数据模型、Lease/Watch、备份恢复、性能调优 | ~280+ 篇关联 |
+
+### 平台工程与可观测性
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`observability-index.md`](./topic-index/observability-index.md) | 可观测性全景：Prometheus/Grafana、日志（Loki/ELK）、链路追踪、事件体系 | ~390+ 篇关联 |
+| [`gitops-cicd-index.md`](./topic-index/gitops-cicd-index.md) | 持续交付全景：ArgoCD/Flux GitOps、Tekton/Jenkins/GitHub Actions、Helm | ~300+ 篇关联 |
+
+### AI 基础设施
+
+| 索引 | 说明 | 覆盖规模 |
+|:---|:---|:---|
+| [`ai-gpu-index.md`](./topic-index/ai-gpu-index.md) | AI 基础设施全景：GPU 调度、分布式训练（MPI/Horovod）、LLM 推理（KServe/vLLM） | ~330+ 篇关联 |
+
+**总计 17 个全局索引，6,100+ 行，覆盖全库 3,200+ 篇 Markdown 的横向关联内容。**
 
 ---
 
@@ -489,14 +577,13 @@ flowchart TD
 
 ### 🧠 FTA 故障树分析 (Fault Tree Analysis)
 
-> **29篇文档** | 行业级 FTA 方法论与 AI Agent 智能运维实践
+> **67篇文档** | 行业级 FTA 方法论与 AI Agent 智能运维实践
 
 FTA（故障树分析）是一套从传统安全工程理论到云原生 Kubernetes 智能运维实践的完整知识体系。
 
-```
 ```mermaid
 flowchart LR
-    A[FTA故障树分析<br/>29篇] --> B[理论基础 4章]
+    A[FTA故障树分析<br/>67篇] --> B[理论基础 4章]
     A --> C[构建实践 3章]
     A --> D[AI Agent应用 6章]
     A --> E[实战案例 3章]
@@ -517,7 +604,7 @@ flowchart LR
 
 ### 🔍 FEBM 取证循证方法论 (Forensic Evidence-Based Methodology)
 
-> **9篇文档** | 从证据到结论的归纳式故障调查方法论
+> **10篇文档** | 从证据到结论的归纳式故障调查方法论
 
 FEBM 与 FTA 形成**方法论互补**：
 - **FTA** (演绎法): 自上而下，从假设到验证 —— "系统可能在哪里出问题？"
@@ -525,7 +612,7 @@ FEBM 与 FTA 形成**方法论互补**：
 
 ```mermaid
 flowchart LR
-    A[FEBM取证循证<br/>9篇] --> B[证据中心性]
+    A[FEBM取证循证<br/>10篇] --> B[证据中心性]
     A --> C[程序规范性]
     A --> D[时效敏感性]
     A --> E[结论可辩护性]
@@ -545,16 +632,16 @@ flowchart LR
 
 ### 🤖 AI Agent 工程
 
-> **40篇文档** | 从基础概念到 Harness 工程的完整 Agent 构建指南
+> **58篇文档** | 从基础概念到 Harness 工程的完整 Agent 构建指南
 
-内容覆盖 **AI Agent 工程全生命周期**（40篇）：
+内容覆盖 **AI Agent 工程全生命周期**（58篇）：
 
 ```mermaid
 flowchart LR
     A[基础层<br/>3篇] --> B[核心能力<br/>4篇]
     B --> C[工程质量<br/>4篇]
     C --> D[实战战略<br/>2篇]
-    C --> E[平台系列<br/>25篇]
+    C --> E[平台系列<br/>45篇]
     
     style A fill:#3b82f6,stroke:#1d4ed8,color:#fff
     style B fill:#22c55e,stroke:#166534,color:#fff
@@ -570,7 +657,7 @@ flowchart LR
 
 ### 🎓 1个月学习计划
 
-> **46篇文档** | 从零到全栈运维的完整学习路径
+> **92篇文档** | 从零到全栈运维的完整学习路径
 
 **Week 1: 地基建设期**
 - Docker 基础 → Linux 基础 → K8s 架构 → kubectl 实战
@@ -592,7 +679,7 @@ flowchart LR
 
 ### 🌐 CNCF Landscape 开源项目库
 
-> **218篇文档** | CNCF 云原生全景图完整收录
+> **219篇文档** | CNCF 云原生全景图完整收录
 
 | 成熟度 | 数量 | 代表项目 |
 |:---|:---:|:---|
@@ -608,13 +695,19 @@ flowchart LR
 
 | 云厂商 | 产品 | 特色 | 文档 |
 |:---|:---|:---|:---|
-| **阿里云** | ACK | 托管版/专有版、Terway网络、RRSA认证 | [查看](./domain-17-cloud-provider/01-alicloud-ack/) |
-| **AWS** | EKS | IAM集成、EKS Anywhere混合云、Karpenter | [查看](./domain-17-cloud-provider/03-aws-eks/) |
-| **Azure** | AKS | Azure AD集成、Confidential Containers | [查看](./domain-17-cloud-provider/04-azure-aks/) |
-| **GCP** | GKE | Autopilot模式、Anthos多云、Borg传承 | [查看](./domain-17-cloud-provider/05-google-cloud-gke/) |
-| **腾讯云** | TKE | 万级节点、VPC-CNI、超级节点 | [查看](./domain-17-cloud-provider/06-tencent-tke/) |
-| **华为云** | CCE | GPU节点、ASM服务网格、鲲鹏ARM | [查看](./domain-17-cloud-provider/07-huawei-cce/) |
-| **字节云** | VEK | 字节内部经验、高性能调度 | [查看](./domain-17-cloud-provider/13-volcengine-vek/) |
+| **AWS** | EKS | IAM集成、EKS Anywhere混合云、Karpenter | [查看](./domain-17-cloud-provider/01-aws-eks/) |
+| **GCP** | GKE | Autopilot模式、Anthos多云、Borg传承 | [查看](./domain-17-cloud-provider/02-google-cloud-gke/) |
+| **Azure** | AKS | Azure AD集成、Confidential Containers | [查看](./domain-17-cloud-provider/03-azure-aks/) |
+| **阿里云** | ACK | 托管版/专有版、Terway网络、RRSA认证 | [查看](./domain-17-cloud-provider/04-alicloud-ack/) |
+| **腾讯云** | TKE | 万级节点、VPC-CNI、超级节点 | [查看](./domain-17-cloud-provider/05-tencent-tke/) |
+| **华为云** | CCE | GPU节点、ASM服务网格、鲲鹏ARM | [查看](./domain-17-cloud-provider/06-huawei-cce/) |
+| **UCloud** | UK8S | 轻量托管、快杰主机 | [查看](./domain-17-cloud-provider/07-ucloud-uk8s/) |
+| **IBM** | IKS | Red Hat OpenShift、混合多云 | [查看](./domain-17-cloud-provider/08-ibm-iks/) |
+| **Oracle** | OKE | OCI集成、ARM实例 | [查看](./domain-17-cloud-provider/09-oracle-oke/) |
+| **字节云** | VEK | 字节内部经验、高性能调度 | [查看](./domain-17-cloud-provider/10-volcengine-vek/) |
+| **天翼云** | TKE | 电信级基础设施、CTyun OS | [查看](./domain-17-cloud-provider/11-ctyun-tke/) |
+| **移动云** | CKE | 移动网络基础设施 | [查看](./domain-17-cloud-provider/12-ecloud-cke/) |
+| **阿里云** | APSARA | 飞天架构、企业版 | [查看](./domain-17-cloud-provider/13-alicloud-apsara-ack/) |
 
 ---
 
@@ -636,7 +729,7 @@ flowchart LR
 
 ### 运维词典 (Dictionary)
 
-**16篇专家级运维文档**，全面覆盖：
+**207篇专家级运维文档**，全面覆盖：
 - 运维最佳实践、故障模式分析、性能调优专家指南
 - SRE成熟度模型、概念参考手册、命令行清单
 - AI基础设施专家指南、云原生安全专家指南
@@ -734,6 +827,10 @@ man prometheus
 | [metadata/](./metadata/) | 元数据索引：标签体系、难度分级、知识图谱 |
 | [corpus-config/](./corpus-config/) | AI 语料配置：RAG 分块策略、NotebookLM/IMA/RAG Profile |
 | [reports/](./reports/) | 质量报告、统计数据（STATS、QUALITY_REPORT 系列） |
+| [visualizations/](./visualizations/) | 知识库可视化图表与架构图 |
+| [OPEN-SOURCE-ECOSYSTEM.md](./OPEN-SOURCE-ECOSYSTEM.md) | 开源生态全景分析 |
+| [OPEN-SOURCE-SELECTION-GUIDE.md](./OPEN-SOURCE-SELECTION-GUIDE.md) | 开源产品选型指南 |
+| [STORAGE-INDEX.md](./STORAGE-INDEX.md) | 存储知识域全局索引 |
 | [.editorconfig](./.editorconfig) | 跨编辑器格式一致性配置 |
 
 ---
@@ -741,21 +838,22 @@ man prometheus
 ## 📝 版本说明
 
 - **适用 Kubernetes 版本**: v1.25 - v1.32
-- **最后更新时间**: 2026年4月
+- **最后更新时间**: 2026年5月
 - **更新频率**: 持续更新，详见 [CHANGELOG.md](./CHANGELOG.md)
 
 ### 近期重大更新
 
 | 日期 | 更新内容 |
 |:---|:---|
+| 2026-05 | **README 全面审核修复** - 修复 21 个断链、刷新统计数据、补充 7 个遗漏专题、云厂商表格扩充至 13 家 |
 | 2026-04 | **目录结构优化** - 统一命名规范(FTA/FEBM)、新增 metadata/corpus-config/templates/reports/ 基础设施、domain-98→domain-40 重编号 |
-| 2026-04 | **速查表全面补齐** - 新增 Docker、PromQL、网络诊断、Git、SQL 速查表，总数达 9 张 (9716 行) |
+| 2026-04 | **速查表全面补齐** - 新增 Docker、PromQL、网络诊断、Git、SQL 速查表，总数达 9 张 |
 | 2026-04 | **TLS/PKI 证书内容加强** - cert-manager manpage 全面扩展 (245行→996行)，新增 TLS/PKI 速查表 |
 | 2026-04 | **Manpage 参考手册上线** - 为核心开源产品和项目脚本提供 14 个 Unix manpage |
-| 2026-03 | **CNCF Landscape 218项目全量上线** - Graduated 34 + Incubating 37 + Sandbox 147 |
+| 2026-03 | **CNCF Landscape 219项目全量上线** - Graduated 34 + Incubating 37 + Sandbox 147 + 索引 |
 | 2026-03 | **Kubernetes 部署方案指南** - 从零到生产的完整部署路径 |
-| 2026-03 | **1个月学习计划** - 46篇系统化学习课程 |
-| 2026-03 | **FTA v2.0 全量故障树** - 36个组件故障树全面深化 |
+| 2026-03 | **1个月学习计划** - 92篇系统化学习课程 |
+| 2026-03 | **FTA v2.0 全量故障树** - 67篇组件故障树全面深化 |
 | 2026-02 | **YAML配置清单手册** - 36篇K8s全资源YAML参考 |
 | 2026-02 | **Domain 18-30 企业级专题** - 生产运维、监控日志、GitOps、安全合规等 |
 | 2026-02 | **Agent Harness 工程** - 12篇2026最新范式 |
@@ -764,30 +862,7 @@ man prometheus
 
 ## 🤝 贡献指南
 
-我们欢迎各种形式的贡献！详细规范请参阅 [CONTRIBUTING.md](./CONTRIBUTING.md)。
-
-### 如何贡献
-
-1. **Fork** 本仓库
-2. **创建分支** (`git checkout -b feature/amazing-feature`)
-3. **提交更改** (`git commit -m 'Add some amazing feature'`)
-4. **推送分支** (`git push origin feature/amazing-feature`)
-5. **创建 Pull Request**
-
-### 贡献内容
-
-- 📚 补充新的知识文档
-- 🔧 修正现有文档错误
-- 🌍 翻译文档
-- 🐛 报告问题
-- 💡 提出改进建议
-
-### 文档规范
-
-- 使用 Markdown 格式
-- 遵循现有文档结构和风格
-- 所有示例需经过验证
-- 添加必要的引用和参考链接
+我们欢迎各种形式的贡献！详细的命名规范、文档结构、质量标准和提交约定请参阅 **[CONTRIBUTING.md](./CONTRIBUTING.md)**。
 
 ---
 
@@ -805,25 +880,11 @@ man prometheus
 
 ---
 
-## 🙏 致谢
+## 🙏 致谢与联系
 
-感谢所有为这个项目做出贡献的人！
+感谢 **Kubernetes 社区**、**CNCF** 及所有贡献者！
 
-### 特别感谢
-
-- **Kubernetes 社区** - 提供了如此优秀的开源项目
-- **CNCF** - 云原生计算基金会的所有项目
-- **所有贡献者** - 你们的努力让这个项目变得更好
-
----
-
-## 📮 联系我们
-
-如有问题或建议，欢迎通过以下方式联系：
-
-- 📧 邮箱: [your-email@example.com](mailto:your-email@example.com)
-- 💬 Issues: [GitHub Issues](../../issues)
-- 💭 Discussions: [GitHub Discussions](../../discussions)
+有问题或建议？欢迎通过 [GitHub Issues](../../issues) 或 [GitHub Discussions](../../discussions) 联系我们。
 
 ---
 
@@ -833,10 +894,10 @@ man prometheus
 
 <p>
   <a href="../../stargazers">
-    <img src="https://img.shields.io/github/stars/your-org/kudig-database?style=social" alt="Stars"/>
+    <img src="https://img.shields.io/github/stars/kudig-io/kudig-database?style=social" alt="Stars"/>
   </a>
   <a href="../../forks">
-    <img src="https://img.shields.io/github/forks/your-org/kudig-database?style=social" alt="Forks"/>
+    <img src="https://img.shields.io/github/forks/kudig-io/kudig-database?style=social" alt="Forks"/>
   </a>
 </p>
 
@@ -859,7 +920,9 @@ man prometheus
 <!-- 以下为完整的详细目录，默认折叠 -->
 
 <details>
-<summary><b>📂 点击查看完整目录结构</b></summary>
+<summary><b>📂 点击查看核心知识域 (Domain 1-12) 详细目录</b></summary>
+
+> Domain 13-40 的完整列表见上方「各知识域文档分布」表格。
 
 ## 核心知识域 (Domain 1-12)
 
@@ -876,11 +939,11 @@ man prometheus
 ### 域2: 设计原理 (Design Principles)
 | # | 文档 | 关键内容 |
 |:---:|:---|:---|
-| 11 | [设计原则](./domain-2-design-principles/01-design-principles-foundations.md) | 核心设计哲学 |
-| 12 | [声明式API](./domain-2-design-principles/02-declarative-api-pattern.md) | 声明式 vs 命令式 |
-| 13 | [控制器模式](./domain-2-design-principles/03-controller-pattern.md) | Reconcile循环、最终一致性 |
-| 17 | [etcd共识](./domain-2-design-principles/07-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
-| 22 | [Operator开发](./domain-2-design-principles/12-operator-development-guide.md) | Operator模式实践 |
+| 01 | [设计原则](./domain-2-design-principles/01-design-principles-foundations.md) | 核心设计哲学 |
+| 02 | [声明式API](./domain-2-design-principles/02-declarative-api-pattern.md) | 声明式 vs 命令式 |
+| 03 | [控制器模式](./domain-2-design-principles/03-controller-pattern.md) | Reconcile循环、最终一致性 |
+| 07 | [etcd共识](./domain-2-design-principles/07-distributed-consensus-etcd.md) | Raft协议、数据一致性 |
+| 12 | [Operator开发](./domain-2-design-principles/12-operator-development-guide.md) | Operator模式实践 |
 
 ### 域3: 控制平面 (Control Plane)
 | # | 文档 | 关键内容 |
@@ -898,17 +961,17 @@ man prometheus
 |:---:|:---|:---|
 | 10 | [工作负载控制器](./domain-4-workloads/10-workload-controllers-overview.md) | Deployment/StatefulSet/DaemonSet |
 | 11 | [Pod生命周期](./domain-4-workloads/11-pod-lifecycle-events.md) | Phase、Condition、事件 |
-| 30 | [调度器配置](./domain-4-workloads/30-scheduler-configuration.md) | 调度策略、亲和性 |
-| 32 | [HPA/VPA](./domain-4-workloads/32-hpa-vpa-autoscaling.md) | 水平/垂直自动扩缩 |
+| 19 | [调度器配置](./domain-4-workloads/19-scheduler-configuration.md) | 调度策略、亲和性 |
+| 21 | [HPA/VPA](./domain-4-workloads/21-hpa-vpa-autoscaling.md) | 水平/垂直自动扩缩 |
 
 ### 域5: 网络 (Networking)
 | # | 文档 | 关键内容 |
 |:---:|:---|:---|
-| 05 | [网络架构](./domain-5-networking/05-network-architecture-overview.md) | K8s网络模型、三层网络 |
-| 07 | [CNI对比](./domain-5-networking/07-cni-plugins-comparison.md) | Flannel/Calico/Cilium对比 |
-| 11 | [Service概念](./domain-5-networking/11-service-concepts-types.md) | ClusterIP/NodePort/LB |
-| 16 | [DNS发现](./domain-5-networking/16-dns-service-discovery.md) | DNS服务发现机制 |
-| 27 | [Ingress基础](./domain-5-networking/27-ingress-fundamentals.md) | Ingress核心架构、路由配置 |
+| 01 | [网络架构](./domain-5-networking/01-network-architecture-overview.md) | K8s网络模型、三层网络 |
+| 03 | [CNI对比](./domain-5-networking/03-cni-plugins-comparison.md) | Flannel/Calico/Cilium对比 |
+| 06 | [Service概念](./domain-5-networking/06-service-concepts-types.md) | ClusterIP/NodePort/LB |
+| 12 | [DNS发现](./domain-5-networking/12-dns-service-discovery.md) | DNS服务发现机制 |
+| 19 | [Ingress基础](./domain-5-networking/19-ingress-fundamentals.md) | Ingress核心架构、路由配置 |
 | 35 | [Gateway API](./domain-5-networking/35-gateway-api-overview.md) | 新一代流量管理 |
 
 ### 域6: 存储 (Storage)
@@ -925,7 +988,7 @@ man prometheus
 | 01 | [认证授权](./domain-7-security/01-authentication-authorization-system.md) | RBAC、OIDC、ServiceAccount |
 | 02 | [网络安全](./domain-7-security/02-network-security-policies.md) | NetworkPolicy、零信任安全 |
 | 03 | [运行时安全](./domain-7-security/03-runtime-security-defense.md) | Seccomp/AppArmor、Falco |
-| 11 | [策略引擎](./domain-7-security/11-policy-engines-opa-kyverno.md) | OPA/Kyverno策略引擎对比 |
+| 14 | [策略引擎](./domain-7-security/14-policy-engines-opa-kyverno.md) | OPA/Kyverno策略引擎对比 |
 
 ### 域8: 可观测性 (Observability)
 | # | 文档 | 关键内容 |
@@ -933,8 +996,9 @@ man prometheus
 | 01 | [架构概览](./domain-8-observability/01-observability-architecture-overview.md) | 可观测性架构体系 |
 | 02 | [指标监控](./domain-8-observability/02-monitoring-metrics-system.md) | Prometheus监控体系 |
 | 04 | [链路追踪](./domain-8-observability/04-distributed-tracing.md) | OpenTelemetry/Jaeger |
-| 12 | [排障概览](./domain-8-observability/12-troubleshooting-overview.md) | 生产级故障排查全攻略 |
-| 16 | [混沌工程](./domain-8-observability/16-chaos-engineering.md) | Chaos Mesh/Litmus |
+| 10 | [Prometheus监控实践](./domain-8-observability/10-monitoring-metrics-prometheus.md) | Prometheus监控实践 |
+| 14 | [混沌工程](./domain-8-observability/14-chaos-engineering.md) | Chaos Mesh/Litmus |
+| 25 | [排障概览](./domain-8-observability/25-troubleshooting-overview.md) | 生产级故障排查全攻略 |
 
 ### 域9: 平台运维 (Platform Operations)
 | # | 文档 | 关键内容 |
@@ -972,6 +1036,6 @@ man prometheus
 
 **FTA故障树**: [topic-fta/list/](./topic-fta/list/)
 - Pod、Node、etcd、API Server、Scheduler、Ingress
-- DNS、CSI、HPA/VPA、证书、RBAC、Helm、ArgoCD 等 36个
+- DNS、CSI、HPA/VPA、证书、RBAC、Helm、ArgoCD 等 67篇
 
 </details>

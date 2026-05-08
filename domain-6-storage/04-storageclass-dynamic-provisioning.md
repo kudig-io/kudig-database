@@ -99,6 +99,30 @@ PVC 创建 ──▶ 等待 Pod 调度 ──▶ 根据 Pod 节点选择存储 �
 | 跨可用区风险 | 高 | 无 |
 | 适用场景 | 无拓扑要求 | 云环境、Local PV |
 
+### StorageClass 变更对已有 PVC 的影响
+
+> **重要运维常识**: 修改 StorageClass 的参数（如 `performanceLevel`、`type`、`encrypted` 等）**不会影响已绑定的 PVC/PV**。
+
+原因：PVC 绑定到 PV 后，PVC 直接引用的是 PV 对象而非 StorageClass 对象。StorageClass 仅在以下时机生效：
+
+| 时机 | StorageClass 是否生效 |
+|------|---------------------|
+| 创建新 PVC（动态供给） | ✅ 生效 — 使用当前 SC 参数创建 PV |
+| 已绑定 PVC 的 PV | ❌ 不受影响 — PV 已独立存在 |
+| PVC 扩容（`allowVolumeExpansion`） | ✅ 部分生效 — 仅 `allowVolumeExpansion` 字段被检查 |
+| 删除 PVC 后重建 | ✅ 生效 — 重新走动态供给流程 |
+
+```bash
+# 验证：修改 SC 参数后已有 PV 不受影响
+kubectl patch sc fast-ssd -p '{"parameters":{"performanceLevel":"PL3"}}'
+# 已有 PV 的 performanceLevel 保持不变
+kubectl get pv -o custom-columns=NAME:.metadata.name,PL:.spec.csi.volumeAttributes.performanceLevel
+```
+
+**运维建议**:
+- 如需对已有 PVC 应用新 SC 参数，需重建 PVC（先备份，删除 PVC，再从快照恢复）
+- 生产环境建议使用 SC 分层（platinum/gold/silver）而非修改现有 SC
+
 ---
 
 ## 4. 多云平台 StorageClass 配置
@@ -1236,8 +1260,47 @@ debug_provisioning_issues() {
     
     # 4. 验证云服务商配额
     echo "☁️  云服务商配额检查:"
-    # 这里需要根据具体的云服务商API实现
-    echo "TODO: 实现云服务商配额检查"
+    CLOUD_PROVIDER=$(kubectl get storageclass -o jsonpath='{.items[0].provisioner}' 2>/dev/null | cut -d'.' -f1)
+    case "$CLOUD_PROVIDER" in
+      disk|csi-disk)
+        echo "  [阿里云] 检查ECS磁盘配额..."
+        if command -v aliyun &>/dev/null; then
+          aliyun ecs DescribeAccountAttributes --RegionId "$(curl -s --connect-timeout 2 http://100.100.100.200/latest/meta-data/region-id 2>/dev/null || echo cn-hangzhou)" 2>/dev/null | \
+            jq -r '.AccountAttributeItems.AccountAttributeItem[] | select(.AttributeName=="max-num-of-disk") | "磁盘配额: \(.AttributeValues.AttributeValueItem[].AttributeValue)"' || echo "  无法获取配额信息，请手动检查"
+        else
+          echo "  aliyun CLI 未安装，跳过自动配额检查"
+        fi
+        ;;
+      ebs|ebs.csi.aws.com)
+        echo "  [AWS] 检查EBS卷配额..."
+        if command -v aws &>/dev/null; then
+          AWS_REGION=$(curl -s --connect-timeout 2 http://169.254.169.254/latest/meta-data/placement/region 2>/dev/null || echo us-east-1)
+          aws service-quotas get-service-quota --service-code ebs --quota-code L-D18FCDCE --region "$AWS_REGION" 2>/dev/null | \
+            jq -r '"EBS通用SSD(gp3)配额: \(.Quota.Value) GiB"' || echo "  无法获取配额信息，请手动检查"
+        else
+          echo "  aws CLI 未安装，跳过自动配额检查"
+        fi
+        ;;
+      disk.csi.azure.com)
+        echo "  [Azure] 检查磁盘配额..."
+        if command -v az &>/dev/null; then
+          az vm list-usage --location "$(curl -s --connect-timeout 2 -H Metadata:true "http://169.254.169.254/metadata/instance/compute/location?api-version=2021-02-01" 2>/dev/null || echo eastus)" --query "[?name.value=='PremiumDiskCount']" -o tsv 2>/dev/null || echo "  无法获取配额信息，请手动检查"
+        else
+          echo "  az CLI 未安装，跳过自动配额检查"
+        fi
+        ;;
+      pd.csi.storage.gke.io)
+        echo "  [GCP] 检查Persistent Disk配额..."
+        if command -v gcloud &>/dev/null; then
+          gcloud compute quota describe --project "$(gcloud config get-value project 2>/dev/null)" pd-ssd-total-gb 2>/dev/null || echo "  无法获取配额信息，请手动检查"
+        else
+          echo "  gcloud CLI 未安装，跳过自动配额检查"
+        fi
+        ;;
+      *)
+        echo "  未知云提供商 ($CLOUD_PROVIDER)，请手动检查配额"
+        ;;
+    esac
     
     # 5. 生成诊断报告
     REPORT_FILE="/tmp/provisioning-diagnostic-$(date +%Y%m%d-%H%M%S).txt"
@@ -1394,6 +1457,151 @@ EOF
 # 定期执行
 automate_storage_operations
 ```
+
+---
+
+## 补充云厂商 CSI StorageClass 配置
+
+### VMware vSphere CSI
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: vsphere-sc
+provisioner: csi.vsphere.vmware.com
+parameters:
+  storagepolicyname: "vSAN Default Storage Policy"
+  datastore: "datastore1"
+  csi.storage.k8s.io/fstype: ext4
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```bash
+# vSphere CSI 部署
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/vsphere-csi-driver/master/manifests/vanilla/deploy/vsphere-csi-driver.yaml
+
+# 验证
+kubectl get csidriver csi.vsphere.vmware.com
+kubectl get pods -n vmware-system-csi
+```
+
+### DigitalOcean CSI
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: do-block-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: dobs.csi.digitalocean.com
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+```
+
+```bash
+# DigitalOcean CSI 部署
+helm repo add digitalocean https://digitalocean.github.io/csi-digitalocean
+helm install csi-digitalocean digitalocean/csi-digitalocean \
+  --namespace kube-system \
+  --set digitalocean.token=<DO_API_TOKEN>
+```
+
+### Oracle Cloud Infrastructure (OCI) CSI
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: oci-bv
+provisioner: blockvolume.csi.oraclecloud.com
+parameters:
+  attachment-type: "paravirtualized"
+  csi.storage.k8s.io/fstype: "ext4"
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```yaml
+# OCI 高性能 NVMe StorageClass
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: oci-bv-high
+provisioner: blockvolume.csi.oraclecloud.com
+parameters:
+  attachment-type: "nvme"
+  csi.storage.k8s.io/fstype: "ext4"
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```bash
+# OKE 集群默认已安装 OCI CSI
+kubectl get csidriver blockvolume.csi.oraclecloud.com
+kubectl get pods -n kube-system -l app=oci-csi-controller
+```
+
+### IBM Cloud (VPC) CSI
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-vpc-block-10iops-tier
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: vpc.block.csi.ibm.io
+parameters:
+  profile: "10iops-tier"
+  csi.storage.k8s.io/fstype: "ext4"
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```yaml
+# IBM Cloud 高性能存储
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-vpc-block-custom
+provisioner: vpc.block.csi.ibm.io
+parameters:
+  profile: "custom"
+  csi.storage.k8s.io/fstype: "xfs"
+  iops: "10000"
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```bash
+# IBM Cloud CSI 驱动
+kubectl get csidriver vpc.block.csi.ibm.io
+kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
+```
+
+### 云厂商 CSI 对比矩阵
+
+| 云厂商 | CSI 驱动名 | 最大卷 | 最大单卷 | 扩容 | 快照 | 加密 |
+|--------|-----------|--------|---------|------|------|------|
+| 阿里云 | `diskplugin.csi.alibabacloud.com` | 64/节点 | 32TiB | ✅ | ✅ | ✅ (KMS) |
+| AWS | `ebs.csi.aws.com` | 39/节点 | 16TiB | ✅ | ✅ | ✅ (KMS) |
+| GCP | `pd.csi.storage.gke.io` | 128/节点 | 64TiB | ✅ | ✅ | ✅ (CMEK) |
+| Azure | `disk.csi.azure.com` | 64/节点 | 32TiB | ✅ | ✅ | ✅ (SSE) |
+| VMware | `csi.vsphere.vmware.com` | 255/节点 | 62TiB | ✅ | ✅ | ✅ |
+| DigitalOcean | `dobs.csi.digitalocean.com` | 16/节点 | 16TiB | ✅ | ✅ | ✅ |
+| Oracle Cloud | `blockvolume.csi.oraclecloud.com` | 32/节点 | 32TiB | ✅ | ✅ | ✅ |
+| IBM Cloud | `vpc.block.csi.ibm.io` | 64/节点 | 16TiB | ✅ | ✅ | ✅ (KYOK) |
 
 ---
 

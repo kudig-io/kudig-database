@@ -1,6 +1,8 @@
 # 10 - 存储备份与灾难恢复
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 备份策略、灾难恢复、数据保护 | **最后更新**: 2026-02
+>
+> **文档定位**: 本文档聚焦 **备份工具链（Velero）** 和 **应用级备份操作**（MySQL/PostgreSQL dump、VolumeSnapshot 自动化）。如需了解灾备架构设计、存储迁移方案、灾备演练计划及 RTO/RPO SLA 监控，请参阅 [15 - 存储灾备与迁移策略](./15-storage-disaster-recovery.md)。
 
 ## 目录
 

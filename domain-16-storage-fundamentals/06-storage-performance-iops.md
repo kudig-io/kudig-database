@@ -1,4 +1,4 @@
-# 存储性能与 IOPS
+# 06 - 存储性能与 IOPS
 
 > **适用版本**: 通用 | **最后更新**: 2026-01
 
@@ -589,5 +589,5 @@ chmod +x /usr/local/bin/storage-analyzer.sh
 ## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- [215-linux-performance-tuning](./215-linux-performance-tuning.md) - Linux 性能调优
-- [214-linux-storage-management](./214-linux-storage-management.md) - Linux 存储管理
+- [K8s 存储性能调优](../domain-6-storage/08-storage-performance-tuning.md) - Kubernetes 存储性能优化
+- [Linux 存储管理](../domain-14-linux/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）

@@ -454,8 +454,47 @@ verify_encryption_status() {
   # 3. 检查KMS服务状态
   echo ""
   echo "3. KMS服务状态检查..."
-  # 这里需要根据具体的云服务商API进行检查
-  echo "TODO: 实现KMS服务状态检查"
+  KMS_TYPE=$(kubectl get storageclass -o json | jq -r '[.items[] | select(.parameters.encrypted=="true" or .parameters."csi.storage.k8s.io/node-publish-secret-name"!=null)] | .[0].provisioner // "unknown"' 2>/dev/null)
+  case "$KMS_TYPE" in
+    disk|csi-disk)
+      echo "  [阿里云KMS] 检查密钥服务..."
+      if command -v aliyun &>/dev/null; then
+        KMS_KEYS=$(kubectl get storageclass -o json | jq -r '[.items[].parameters."disk-encryption-kms-key-id" // empty] | unique[]')
+        for KEY_ID in $KMS_KEYS; do
+          KEY_STATUS=$(aliyun kms DescribeKey --KeyId "$KEY_ID" 2>/dev/null | jq -r '.KeyMetadata.KeyState // "unknown"')
+          if [ "$KEY_STATUS" = "Enabled" ]; then
+            echo "  ✅ 密钥 $KEY_ID 状态: $KEY_STATUS"
+          else
+            echo "  ❌ 密钥 $KEY_ID 状态: $KEY_STATUS (需关注)"
+          fi
+        done
+      else
+        echo "  aliyun CLI 未安装，请手动执行: aliyun kms DescribeKey --KeyId <KEY_ID>"
+      fi
+      ;;
+    ebs.csi.aws.com)
+      echo "  [AWS KMS] 检查密钥服务..."
+      if command -v aws &>/dev/null; then
+        KMS_KEYS=$(kubectl get storageclass -o json | jq -r '[.items[].parameters."kms-key-id" // empty] | unique[]')
+        for KEY_ID in $KMS_KEYS; do
+          KEY_STATUS=$(aws kms describe-key --key-id "$KEY_ID" --query 'KeyMetadata.KeyState' --output text 2>/dev/null)
+          if [ "$KEY_STATUS" = "Enabled" ]; then
+            echo "  ✅ 密钥 $KEY_ID 状态: $KEY_STATUS"
+          else
+            echo "  ❌ 密钥 $KEY_ID 状态: $KEY_STATUS (需关注)"
+          fi
+        done
+      else
+        echo "  aws CLI 未安装，请手动执行: aws kms describe-key --key-id <KEY_ID>"
+      fi
+      ;;
+    *)
+      echo "  通用KMS检查: 验证CSI驱动Secret配置..."
+      kubectl get secrets -n kube-system -l app=csi-driver -o json | \
+        jq -r '.items[] | "  Secret: \(.metadata.name) - 创建: \(.metadata.creationTimestamp)"' 2>/dev/null || \
+        echo "  未发现CSI驱动Secret，请检查KMS集成配置"
+      ;;
+  esac
   
   # 4. 生成加密合规报告
   echo ""
@@ -872,3 +911,4 @@ optimize_storage_costs
 ```
 
 ---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

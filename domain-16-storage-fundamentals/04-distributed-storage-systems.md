@@ -1,4 +1,4 @@
-# 分布式存储系统
+# 04 - 分布式存储系统
 
 > **适用版本**: 通用 | **最后更新**: 2026-01
 
@@ -554,4 +554,4 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
 - [02-block-file-object-storage](./02-block-file-object-storage.md) - 存储类型详解
-- [70-storage-architecture](./70-storage-architecture.md) - K8s 存储架构
+- [K8s 存储架构](../domain-6-storage/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件

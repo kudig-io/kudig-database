@@ -1,6 +1,8 @@
 # 15 - 存储灾备与迁移策略
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 灾难恢复、数据迁移、业务连续性
+>
+> **文档定位**: 本文档聚焦 **灾备架构分层设计**、**自动/手动故障转移**、**存储迁移**、**跨集群数据同步** 及 **灾备演练与 SLA 管理**。如需了解 Velero 企业备份方案、应用级（MySQL/PostgreSQL）备份操作及 VolumeSnapshot CronJob 自动化，请参阅 [10 - 存储备份与灾难恢复](./10-storage-backup-disaster-recovery.md)。
 
 ## 目录
 
@@ -594,3 +596,4 @@ generate_sla_report
 ```
 
 ---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "eedeb0482aaf0ee5",
+        "id": "638d59a9b789ad30",
         "type": "tabs",
         "children": [
           {
-            "id": "dd686546e360a4e2",
+            "id": "3604e6cd3def3713",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "01-kubernetes-architecture-overview"
+              "title": "新标签页"
             }
           }
         ]
@@ -78,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.50271224975586,
-    "collapsed": true
+    "width": 299.50271224975586
   },
   "right": {
     "id": "42fc23bae0182ba0",
@@ -184,8 +179,9 @@
       "bases:新建数据库": false
     }
   },
-  "active": "dd686546e360a4e2",
+  "active": "3604e6cd3def3713",
   "lastOpenFiles": [
+    "domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
     "OPEN-SOURCE-ECOSYSTEM.md",
     "updated-deploy.yaml",
     "domain-3-control-plane/31-kubectl-complete-reference.md",

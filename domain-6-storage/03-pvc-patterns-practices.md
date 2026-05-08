@@ -58,6 +58,179 @@
 | `dataSource` | TypedLocalObjectReference | 否 | 克隆/恢复数据源 |
 | `dataSourceRef` | TypedObjectReference | 否 | 跨命名空间数据源(v1.26+) |
 
+### PVC 三种状态详解
+
+| 状态 | 含义 | 触发条件 | 排查命令 |
+|------|------|---------|---------|
+| **Pending** | 等待绑定 | PVC 刚创建，尚未匹配到 PV 或 StorageClass 无法动态供给 | `kubectl describe pvc <name>` 查看 Events |
+| **Bound** | 已绑定 | PVC 成功匹配到 PV（静态或动态） | `kubectl get pvc <name> -o jsonpath='{.spec.volumeName}'` 查看绑定的 PV |
+| **Lost** | 丢失 | PVC 引用的 PV 被删除，绑定关系断裂 | `kubectl get pv` 确认 PV 是否存在 |
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: 用户创建 PVC
+    Pending --> Bound: 匹配到 PV / 动态创建 PV 成功
+    Bound --> Lost: 绑定的 PV 被删除
+    Pending --> [*]: PVC 被删除
+    Bound --> [*]: PVC 被删除（PV 进入 Released）
+    Lost --> Bound: 管理员重建同名 PV（罕见）
+```
+
+**Pending 常见原因速查**:
+
+| 原因 | Events 关键词 | 解决方案 |
+|------|-------------|---------|
+| StorageClass 不存在 | `storageclass.storage.k8s.io "xxx" not found` | 创建 SC 或修正 PVC 中的名称 |
+| CSI Provisioner 异常 | `failed to provision volume` | `kubectl get pods -n kube-system -l app=csi-controller` |
+| 云商配额不足 | `quota exceeded` / `limit exceeded` | 申请提升配额 |
+| 拓扑不匹配 | `node(s) had volume node affinity conflict` | 检查 `allowedTopologies` 和节点标签 |
+| ResourceQuota 限制 | `exceeded quota` | `kubectl describe resourcequota -n <ns>` |
+| 无可用 PV（静态） | `no persistent volumes available` | 创建匹配的 PV 或改用动态供给 |
+
+### volumeMode 选择指南
+
+| volumeMode | 行为 | Pod 中使用方式 | 适用场景 |
+|------------|------|--------------|---------|
+| **Filesystem**（默认） | PV 先被格式化为文件系统（ext4/xfs），再挂载到 Pod | `volumeMounts.mountPath` | 通用场景（日志、配置、应用数据） |
+| **Block** | PV 作为原始块设备直接暴露给 Pod，不经过文件系统 | `volumeDevices.devicePath` | 数据库裸设备、高性能 I/O、自定义文件系统 |
+
+```yaml
+# Filesystem 模式（默认）
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fs-pvc
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fs-pod
+spec:
+  containers:
+  - name: app
+    image: nginx
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: fs-pvc
+```
+
+```yaml
+# Block 模式 — 数据库裸设备
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block-pvc
+spec:
+  volumeMode: Block
+  accessModes: [ReadWriteOnce]
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 500Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-pod
+spec:
+  containers:
+  - name: mysql
+    image: mysql:8.0
+    volumeDevices:
+    - name: data
+      devicePath: /dev/xvda
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "password"
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: block-pvc
+```
+
+**选择决策**:
+
+```
+应用需要什么?
+├─ 文件操作（读写文件、日志）→ Filesystem
+├─ 共享目录（多 Pod 访问）→ Filesystem
+├─ 数据库需要最高 I/O 性能 → Block（绕过文件系统开销）
+├─ 自定义文件系统（如 ZFS/Btrfs）→ Block
+└─ 不确定? → Filesystem（默认，99% 场景够用）
+```
+
+### 跨命名空间 PVC 使用限制
+
+> **重要**: PVC 是 **命名空间级（namespace-scoped）** 资源，Pod 只能引用**同一命名空间**内的 PVC。PV 是集群级资源，但通过 PVC 间接访问。
+
+```bash
+# ❌ 错误：Pod 无法引用其他命名空间的 PVC
+# Pod 在 namespace-A，PVC 在 namespace-B → 不可用
+
+# ✅ 正确做法：
+# 方案1: 在每个需要的命名空间中创建独立的 PVC
+# 方案2: 使用共享文件存储（RWX 模式的 NFS/NAS），每个命名空间各创建 PVC 指向同一后端
+# 方案3: 使用 CSI 的跨命名空间克隆（v1.26+ dataSourceRef）
+```
+
+```yaml
+# 方案2 示例：多个命名空间共享同一 NFS 后端
+# namespace: team-a
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-data
+  namespace: team-a
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 10Gi
+---
+# namespace: team-b（同一 NFS 后端，独立 PVC）
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-data
+  namespace: team-b
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 10Gi
+```
+
+```yaml
+# 方案3 示例：跨命名空间卷克隆（v1.26+）
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cloned-pvc
+  namespace: team-b
+spec:
+  accessModes: [ReadWriteOnce]
+  dataSourceRef:
+    name: source-pvc
+    namespace: team-a
+    kind: PersistentVolumeClaim
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 50Gi
+```
+
 ---
 
 ## 3. PVC 使用模式
@@ -391,6 +564,44 @@ kubectl apply -f mysql-snapshot-restore.yaml
 # 方案二：手动清理（危险）
 kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
 ```
+
+### 6.4 离线扩容（需要停止 Pod）
+
+部分场景下在线扩容不生效，必须执行离线扩容：
+
+| 场景 | 原因 |
+|------|------|
+| CSI 驱动不支持在线文件系统扩容 | 需要卸载后执行 `xfs_growfs` / `resize2fs` |
+| PVC 使用 Block volumeMode | 无文件系统层，需要应用自行管理 |
+| 内核版本过低（< 4.2） | 不支持在线 resize |
+
+```bash
+# 离线扩容操作步骤:
+
+# 1. 扩容 PVC（存储后端扩容）
+kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+
+# 2. 等待底层卷扩容完成
+kubectl get pvc mysql-data -o jsonpath='{.status.conditions[?(@.type=="FileSystemResizePending")]}'
+
+# 3. 停止使用 PVC 的 Pod
+kubectl scale statefulset mysql --replicas=0
+
+# 4. 等待 Pod 终止和卷卸载
+kubectl get pods -l app=mysql --watch
+
+# 5. 删除 PVC 的 VolumeAttachment（如卡住）
+kubectl get volumeattachment | grep mysql-data
+kubectl delete volumeattachment <va-name>  # 仅在卡住时执行
+
+# 6. 重新启动 Pod（触发文件系统扩容）
+kubectl scale statefulset mysql --replicas=3
+
+# 7. 验证扩容结果
+kubectl exec mysql-0 -- df -h /var/lib/mysql
+```
+
+> **注意**: 离线扩容期间应用不可用。生产环境建议在维护窗口执行，并提前通知业务方。
 
 ---
 

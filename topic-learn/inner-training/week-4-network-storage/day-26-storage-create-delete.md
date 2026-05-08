@@ -18,15 +18,15 @@
 ### 必读文档
 
 1. **K8S 存储基础**
-   - 文件: `../../../domain-07-storage/01-storage-overview.md`
+   - 文件: `../../../domain-6-storage/01-storage-architecture-overview.md`
    - 重点: PV/PVC 概念、绑定机制、访问模式
 
 2. **ACK 存储管理**
-   - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/270-ack-storage.md`
+   - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/245-ack-ebs-storage.md`
    - 重点: ACK CSI 插件、阿里云存储产品集成
 
 3. **StorageClass 与动态供给**
-   - 文件: `../../../domain-07-storage/02-storage-class.md`
+   - 文件: `../../../domain-6-storage/04-storageclass-dynamic-provisioning.md`
    - 重点: StorageClass 参数、默认 StorageClass
 
 ### 阅读要点

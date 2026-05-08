@@ -18,11 +18,11 @@
 ### 必读文档
 
 1. **K8S Volume 类型**
-   - 文件: `../../../domain-07-storage/03-volume-types.md`
+   - 文件: `../../../domain-6-storage/02-pv-architecture-fundamentals.md`
    - 重点: emptyDir、hostPath、PVC、configMap、secret
 
 2. **ACK 存储最佳实践**
-   - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/270-ack-storage.md`
+   - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/245-ack-ebs-storage.md`
    - 重点: 云盘扩容、NAS 子目录挂载
 
 ### 阅读要点

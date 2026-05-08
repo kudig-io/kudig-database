@@ -1,4 +1,4 @@
-# 存储技术概述
+# 01 - 存储技术概述
 
 > **适用版本**: 通用 | **最后更新**: 2026-01
 
@@ -429,5 +429,5 @@ EOF
 ## 相关文档
 
 - [02-block-file-object-storage](./02-block-file-object-storage.md) - 存储类型详解
-- [214-linux-storage-management](./214-linux-storage-management.md) - Linux 存储管理
-- [70-storage-architecture](./70-storage-architecture.md) - K8s 存储架构
+- [Linux 存储管理](../domain-14-linux/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- [K8s 存储架构](../domain-6-storage/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件

@@ -91,8 +91,48 @@ validate_encryption_status() {
   # 4. KMS密钥状态检查
   echo ""
   echo "4. KMS密钥状态检查:"
-  # 这里需要根据具体的云服务商API实现
-  echo "TODO: 实现KMS密钥有效性检查"
+  KMS_PROVIDER=$(kubectl get storageclass -o json | jq -r '[.items[] | select(.parameters.encrypted=="true" or .parameters."disk-encryption-kms-key-id"!=null or .parameters."kms-key-id"!=null)] | .[0].provisioner // "unknown"' 2>/dev/null)
+  case "$KMS_PROVIDER" in
+    disk|csi-disk)
+      KMS_KEYS=$(kubectl get storageclass -o json | jq -r '[.items[].parameters."disk-encryption-kms-key-id" // empty] | unique[]' 2>/dev/null)
+      if [ -z "$KMS_KEYS" ]; then
+        echo "  未发现KMS密钥配置"
+      else
+        for KEY_ID in $KMS_KEYS; do
+          if command -v aliyun &>/dev/null; then
+            KEY_STATE=$(aliyun kms DescribeKey --KeyId "$KEY_ID" 2>/dev/null | jq -r '.KeyMetadata.KeyState // "unknown"')
+            KEY_EXPIRY=$(aliyun kms DescribeKey --KeyId "$KEY_ID" 2>/dev/null | jq -r '.KeyMetadata.ExpirationDate // "无过期时间"')
+            if [ "$KEY_STATE" = "Enabled" ]; then
+              echo "  ✅ 密钥 $KEY_ID 状态正常 (过期时间: $KEY_EXPIRY)"
+            else
+              echo "  ❌ 密钥 $KEY_ID 状态异常: $KEY_STATE (过期时间: $KEY_EXPIRY)"
+            fi
+          else
+            echo "  ⚠️ aliyun CLI 未安装，请手动检查密钥: $KEY_ID"
+          fi
+        done
+      fi
+      ;;
+    ebs.csi.aws.com)
+      KMS_KEYS=$(kubectl get storageclass -o json | jq -r '[.items[].parameters."kms-key-id" // empty] | unique[]' 2>/dev/null)
+      for KEY_ID in $KMS_KEYS; do
+        if command -v aws &>/dev/null; then
+          KEY_STATE=$(aws kms describe-key --key-id "$KEY_ID" --query 'KeyMetadata.KeyState' --output text 2>/dev/null)
+          if [ "$KEY_STATE" = "Enabled" ]; then
+            echo "  ✅ 密钥 $KEY_ID 状态正常"
+          else
+            echo "  ❌ 密钥 $KEY_ID 状态异常: $KEY_STATE"
+          fi
+        else
+          echo "  ⚠️ aws CLI 未安装，请手动检查密钥: $KEY_ID"
+        fi
+      done
+      ;;
+    *)
+      echo "  通用检查: 验证加密密钥Secret引用完整性..."
+      kubectl get storageclass -o json | jq -r '.items[] | select(.parameters.encrypted=="true") | "  StorageClass: \(.metadata.name) - 加密: 已启用"' 2>/dev/null || echo "  未发现加密StorageClass"
+      ;;
+  esac
 }
 
 # 生成合规报告
@@ -1019,3 +1059,4 @@ main
 ```
 
 ---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

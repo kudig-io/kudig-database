@@ -800,4 +800,4 @@ big_data_platform_optimization:
 
 ---
 
-**表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

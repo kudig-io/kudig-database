@@ -1,4 +1,4 @@
-# 10 - 存储日常运维操作手册
+# 07 - 存储日常运维操作手册
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 日常操作、故障处理、性能监控
 
@@ -604,3 +604,4 @@ emergency_response
 ```
 
 ---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)

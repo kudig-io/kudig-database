@@ -594,8 +594,8 @@ docker volume create --driver rexray/ebs --opt size=100 ebs-volume
 
 ## 相关文档
 
-- [200-docker-architecture-overview](./200-docker-architecture-overview.md) - Docker 架构
-- [202-docker-container-lifecycle](./202-docker-container-lifecycle.md) - 容器生命周期
-- [203-docker-networking-deep-dive](./203-docker-networking-deep-dive.md) - Docker 网络
-- [214-linux-storage-management](./214-linux-storage-management.md) - Linux 存储管理
-- [230-storage-technologies-overview](./230-storage-technologies-overview.md) - 存储技术概述
+- [Docker 架构](./01-docker-architecture-overview.md) - Docker 架构概览
+- [容器生命周期](./03-docker-container-lifecycle.md) - 容器生命周期管理
+- [Docker 网络](./04-docker-networking-deep-dive.md) - Docker 网络深度解析
+- [Linux 存储管理](../domain-14-linux/05-linux-storage-management.md) - Linux 存储管理
+- [存储技术概览](../domain-16-storage-fundamentals/01-storage-technologies-overview.md) - 存储技术全景

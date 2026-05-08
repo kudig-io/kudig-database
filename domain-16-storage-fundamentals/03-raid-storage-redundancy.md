@@ -1,4 +1,4 @@
-# RAID 与存储冗余
+# 03 - RAID 与存储冗余
 
 > **适用版本**: 通用 | **最后更新**: 2026-01
 
@@ -445,5 +445,5 @@ done
 ## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- [214-linux-storage-management](./214-linux-storage-management.md) - Linux 存储管理
+- [Linux 存储管理](../domain-14-linux/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 - [04-distributed-storage-systems](./04-distributed-storage-systems.md) - 分布式存储

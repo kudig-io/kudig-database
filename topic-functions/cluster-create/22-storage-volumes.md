@@ -141,7 +141,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: standard
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 parameters:
   type: gp3
   fsType: ext4
@@ -189,8 +189,8 @@ kubectl get storageclass
 
 # 输出 (取决于云厂商):
 # NAME         PROVISIONER           RECLAIMPOLICY   VOLUMEBINDINGMODE
-# standard     kubernetes.io/aws-ebs Retain          WaitForFirstConsumer
-# fast         kubernetes.io/aws-ebs Delete         Immediate
+# standard     ebs.csi.aws.com       Retain          WaitForFirstConsumer
+# fast         ebs.csi.aws.com       Delete          Immediate
 ```
 
 ---

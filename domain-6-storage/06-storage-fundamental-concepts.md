@@ -1,4 +1,4 @@
-# 09 - 存储基础概念详解
+# 06 - 存储基础概念详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 存储抽象、生命周期、访问模式
 
@@ -11,6 +11,100 @@
 5. [回收策略机制](#回收策略机制)
 6. [存储生命周期管理](#存储生命周期管理)
 7. [运维最佳实践](#运维最佳实践)
+
+---
+
+## PV/PVC/StorageClass 三者关系全景图
+
+### 一句话理解
+
+| 概念 | 一句话 | 类比 |
+|------|--------|------|
+| **PV** | 集群中的一块存储，独立于 Pod 存在 | 一块插在集群上的硬盘 |
+| **PVC** | 用户对存储的声明（"我要多少、怎么用"） | 向 IT 部门提交的硬盘申请单 |
+| **StorageClass** | 存储的"工厂模板"，按需自动造 PV | 硬盘的自动化生产线 |
+
+### 为什么需要三层抽象？
+
+```
+问题: Volume 的局限性
+├── Volume 生命周期与 Pod 绑定 → Pod 删除，存储丢失
+├── Volume 无法在 Pod 间共享（同一 PVC 除外）
+└── 管理员无法统一管理存储资源
+
+解决: 三层抽象
+├── PV = 管理员视角: 集群有一块 500Gi 的 ESSD 云盘
+├── PVC = 开发者视角: "我需要 100Gi，读写，高性能"
+└── StorageClass = 自动化: PVC 来了，按模板自动创建 PV
+```
+
+### 两条绑定路径（核心机制）
+
+```mermaid
+graph TB
+    subgraph 路径1: 静态供给
+        A1[管理员预先创建 PV] --> B1[PV: Available]
+        C1[用户创建 PVC] --> D1{PV Controller 匹配}
+        B1 --> D1
+        D1 --> E1[PV ↔ PVC 绑定: Bound]
+    end
+
+    subgraph 路径2: 动态供给
+        A2[管理员定义 StorageClass] --> B2[用户创建 PVC<br/>指定 storageClassName]
+        B2 --> C2{PVC 引用 StorageClass?}
+        C2 -->|是| D2[CSI Provisioner 自动创建 PV]
+        D2 --> E2[PV ↔ PVC 绑定: Bound]
+    end
+
+    E1 --> F[Pod 通过 volumeMounts 使用 PVC]
+    E2 --> F
+```
+
+### 静态供给 vs 动态供给对比
+
+| 维度 | 静态供给 | 动态供给 |
+|------|---------|---------|
+| **流程** | 管理员创建 PV → 用户创建 PVC → 自动匹配 | 用户创建 PVC（指定 SC）→ 自动创建 PV → 自动绑定 |
+| **谁创建 PV** | 管理员手动 | StorageClass + CSI 驱动自动 |
+| **适用场景** | 固定存储、预留存储、本地存储 | 云盘、NAS、按需分配 |
+| **灵活性** | 低（需提前规划容量） | 高（按需创建） |
+| **运维成本** | 高（手动管理 PV 生命周期） | 低（自动化管理） |
+| **推荐程度** | 特定场景（Local PV、预留盘） | **生产环境首选** |
+
+### 完整交互时序
+
+```
+管理员                          Kubernetes                     存储后端
+  │                               │                             │
+  │  创建 StorageClass            │                             │
+  │──────────────────────────────▶│                             │
+  │                               │                             │
+  │                               │  用户创建 PVC               │
+  │                               │◀────────── 用户              │
+  │                               │                             │
+  │                               │  检查 StorageClass          │
+  │                               │  ───┐                       │
+  │                               │     │ 匹配到 SC              │
+  │                               │  ◀──┘                       │
+  │                               │                             │
+  │                               │  CSI Provisioner            │
+  │                               │────────────────────────────▶│
+  │                               │  CreateVolume               │
+  │                               │◀────────────────────────────│
+  │                               │  Volume Created             │
+  │                               │                             │
+  │                               │  自动创建 PV 对象           │
+  │                               │  PVC 状态: Pending → Bound  │
+  │                               │                             │
+  │                               │  用户创建 Pod（引用 PVC）    │
+  │                               │◀────────── 用户              │
+  │                               │                             │
+  │                               │  CSI Node Plugin            │
+  │                               │────────────────────────────▶│
+  │                               │  Attach + Mount             │
+  │                               │◀────────────────────────────│
+  │                               │  Pod Running ✓              │
+```
 
 ---
 
@@ -474,3 +568,411 @@ production_storage_config:
 ```
 
 ---
+
+## 存储诊断工具集
+
+### PVC 全链路诊断脚本
+
+```bash
+#!/bin/bash
+# pvc-diagnostic.sh - PVC 存储全链路诊断工具
+# 用法: ./pvc-diagnostic.sh <namespace> <pvc-name>
+
+NAMESPACE="${1:-default}"
+PVC_NAME="$2"
+
+if [ -z "$PVC_NAME" ]; then
+  echo "用法: $0 <namespace> <pvc-name>"
+  exit 1
+fi
+
+echo "=========================================="
+echo "PVC 诊断报告: ${NAMESPACE}/${PVC_NAME}"
+echo "时间: $(date)"
+echo "=========================================="
+
+# 1. PVC 状态检查
+echo ""
+echo "## 1. PVC 状态"
+PVC_PHASE=$(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.status.phase}' 2>/dev/null)
+if [ -z "$PVC_PHASE" ]; then
+  echo "❌ PVC 不存在: ${NAMESPACE}/${PVC_NAME}"
+  exit 1
+fi
+echo "   状态: $PVC_PHASE"
+echo "   容量: $(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.spec.resources.requests.storage}')"
+echo "   访问模式: $(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.spec.accessModes[*]}')"
+echo "   StorageClass: $(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.spec.storageClassName}')"
+
+# 2. 绑定 PV 检查
+PV_NAME=$(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.spec.volumeName}' 2>/dev/null)
+if [ -n "$PV_NAME" ]; then
+  echo ""
+  echo "## 2. 绑定 PV: $PV_NAME"
+  echo "   回收策略: $(kubectl get pv "$PV_NAME" -o jsonpath='{.spec.persistentVolumeReclaimPolicy}')"
+  echo "   存储类型: $(kubectl get pv "$PV_NAME" -o jsonpath='{.spec.csi.driver}' 2>/dev/null || kubectl get pv "$PV_NAME" -o jsonpath='{.spec.nfs.server}' 2>/dev/null || echo "unknown")"
+else
+  echo ""
+  echo "## 2. ❌ 未绑定 PV (PVC 处于 Pending 状态)"
+  SC_NAME=$(kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.spec.storageClassName}')
+  if [ "$SC_NAME" != "" ] && [ "$SC_NAME" != "null" ]; then
+    echo "   检查 StorageClass: $SC_NAME"
+    kubectl get storageclass "$SC_NAME" -o wide 2>/dev/null || echo "   StorageClass 不存在!"
+    echo "   Events:"
+    kubectl get pvc "$PVC_NAME" -n "$NAMESPACE" -o jsonpath='{.status.conditions[*].message}' 2>/dev/null
+    kubectl describe pvc "$PVC_NAME" -n "$NAMESPACE" 2>/dev/null | grep -A 20 "Events:" | tail -20
+  fi
+fi
+
+# 3. 使用此 PVC 的 Pod 检查
+echo ""
+echo "## 3. 使用此 PVC 的 Pod"
+PODS=$(kubectl get pods -n "$NAMESPACE" -o json | jq -r ".items[] | select(.spec.volumes[]?.persistentVolumeClaim?.claimName == \"$PVC_NAME\") | .metadata.name" 2>/dev/null)
+if [ -n "$PODS" ]; then
+  for POD in $PODS; do
+    POD_STATUS=$(kubectl get pod "$POD" -n "$NAMESPACE" -o jsonpath='{.status.phase}')
+    NODE=$(kubectl get pod "$POD" -n "$NAMESPACE" -o jsonpath='{.spec.nodeName}')
+    echo "   Pod: $POD | 状态: $POD_STATUS | 节点: $NODE"
+  done
+else
+  echo "   ⚠️ 无 Pod 使用此 PVC"
+fi
+
+# 4. CSI 驱动状态
+echo ""
+echo "## 4. CSI 驱动状态"
+CSI_PODS=$(kubectl get pods -n kube-system -l app=csi-plugin -o wide --no-headers 2>/dev/null || kubectl get pods -n kube-system -l app=csi-nodeplugin --no-headers 2>/dev/null)
+if [ -n "$CSI_PODS" ]; then
+  echo "$CSI_PODS" | head -5
+else
+  echo "   ⚠️ 未发现 CSI 插件 Pod"
+fi
+
+# 5. 事件检查
+echo ""
+echo "## 5. 最近事件"
+kubectl get events -n "$NAMESPACE" --field-selector involvedObject.name="$PVC_NAME" --sort-by='.lastTimestamp' 2>/dev/null | tail -10
+
+echo ""
+echo "=========================================="
+echo "诊断完成"
+echo "=========================================="
+```
+
+### 存储容量巡检脚本
+
+```bash
+#!/bin/bash
+# storage-capacity-check.sh - 存储容量巡检工具
+# 用法: ./storage-capacity-check.sh [--namespace <ns>] [--threshold 80]
+
+NAMESPACE="all"
+THRESHOLD=80
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --namespace) NAMESPACE="$2"; shift 2 ;;
+    --threshold) THRESHOLD="$2"; shift 2 ;;
+    *) echo "未知参数: $1"; exit 1 ;;
+  esac
+done
+
+echo "=========================================="
+echo "存储容量巡检报告"
+echo "时间: $(date)"
+echo "阈值: ${THRESHOLD}%"
+echo "=========================================="
+
+# 1. PVC 使用统计
+echo ""
+echo "## PVC 状态分布"
+if [ "$NAMESPACE" = "all" ]; then
+  PVC_LIST=$(kubectl get pvc --all-namespaces -o json)
+else
+  PVC_LIST=$(kubectl get pvc -n "$NAMESPACE" -o json)
+fi
+
+TOTAL_PVC=$(echo "$PVC_LIST" | jq '.items | length')
+PENDING_PVC=$(echo "$PVC_LIST" | jq '[.items[] | select(.status.phase=="Pending")] | length')
+BOUND_PVC=$(echo "$PVC_LIST" | jq '[.items[] | select(.status.phase=="Bound")] | length')
+LOST_PVC=$(echo "$PVC_LIST" | jq '[.items[] | select(.status.phase=="Lost")] | length')
+
+echo "   总计: $TOTAL_PVC | Bound: $BOUND_PVC | Pending: $PENDING_PVC | Lost: $LOST_PVC"
+
+# 2. StorageClass 使用分析
+echo ""
+echo "## StorageClass 使用分布"
+echo "$PVC_LIST" | jq -r '.items[] | .spec.storageClassName // "none"' | sort | uniq -c | sort -rn
+
+# 3. 总存储申请量
+echo ""
+echo "## 总存储申请量"
+TOTAL_GI=$(echo "$PVC_LIST" | jq -r '[.items[].spec.resources.requests.storage | rtrimstr("Gi") | tonumber] | add // 0' 2>/dev/null)
+echo "   ${TOTAL_GI} GiB (仅统计 Gi 单位 PVC)"
+
+# 4. PV 回收策略审计
+echo ""
+echo "## PV 回收策略审计"
+kubectl get pv -o json | jq -r '.items[] | "\(.metadata.name) \(.spec.persistentVolumeReclaimPolicy) \(.status.phase)"' | \
+  awk '{policy[$2]++} END {for(p in policy) print "   " p ": " policy[p]}'
+
+# 5. 异常 PVC 告警
+echo ""
+echo "## 异常 PVC (Pending/Lost)"
+echo "$PVC_LIST" | jq -r '.items[] | select(.status.phase=="Pending" or .status.phase=="Lost") | "   [\(.status.phase)] \(.metadata.namespace)/\(.metadata.name) - SC: \(.spec.storageClassName // "none")"' | head -20
+
+echo ""
+echo "=========================================="
+echo "巡检完成"
+echo "=========================================="
+```
+
+---
+
+## 端到端快速入门（SC → PVC → Pod 三步走）
+
+以下是从零开始创建存储并挂载到 Pod 的最简完整流程：
+
+### 第 1 步: 创建 StorageClass
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: quick-start-sc
+provisioner: diskplugin.csi.alibabacloud.com
+parameters:
+  type: cloud_essd
+  performanceLevel: PL1
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+```
+
+```bash
+kubectl apply -f storageclass.yaml
+kubectl get sc quick-start-sc
+```
+
+### 第 2 步: 创建 PVC（引用 StorageClass）
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: quick-start-pvc
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: quick-start-sc
+  resources:
+    requests:
+      storage: 20Gi
+```
+
+```bash
+kubectl apply -f pvc.yaml
+kubectl get pvc quick-start-pvc
+# 注意: 使用 WaitForFirstConsumer 时 PVC 会保持 Pending 直到 Pod 调度
+```
+
+### 第 3 步: 创建 Pod（引用 PVC）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: quick-start-pod
+spec:
+  containers:
+  - name: app
+    image: nginx:alpine
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: quick-start-pvc
+```
+
+```bash
+kubectl apply -f pod.yaml
+
+# 验证：PVC 应该已绑定
+kubectl get pvc quick-start-pvc
+
+# 验证：Pod 应该在运行
+kubectl get pod quick-start-pod
+
+# 验证：存储已挂载
+kubectl exec quick-start-pod -- df -h /usr/share/nginx/html
+
+# 写入测试数据
+kubectl exec quick-start-pod -- sh -c 'echo "Hello from PVC!" > /usr/share/nginx/html/index.html'
+kubectl exec quick-start-pod -- cat /usr/share/nginx/html/index.html
+```
+
+### 清理
+
+```bash
+kubectl delete pod quick-start-pod
+kubectl delete pvc quick-start-pvc
+kubectl delete sc quick-start-sc
+```
+
+> **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` gRPC 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
+
+---
+
+## 实操练习
+
+### 练习 1: 静态供给与动态供给对比
+
+**目标**: 分别通过静态和动态方式创建 PVC，并验证绑定过程。
+
+```bash
+# 1. 创建静态 PV
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: lab-static-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: lab-manual
+  hostPath:
+    path: /tmp/lab-static-pv
+EOF
+
+# 2. 创建使用静态 PV 的 PVC
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lab-static-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: lab-manual
+  resources:
+    requests:
+      storage: 3Gi
+EOF
+
+# 3. 验证绑定
+kubectl get pv lab-static-pv -o jsonpath='{.status.phase}'
+kubectl get pvc lab-static-pvc -o jsonpath='{.status.phase}'
+
+# 4. 清理
+kubectl delete pvc lab-static-pvc
+kubectl delete pv lab-static-pv
+```
+
+### 练习 2: 访问模式验证
+
+**目标**: 验证 RWO 卷的多节点挂载限制。
+
+```bash
+# 创建 PVC (RWO)
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lab-rwo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+EOF
+
+# 创建 Pod A 使用该 PVC
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab-pod-a
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: lab-rwo-pvc
+EOF
+
+# 观察 Pod A 运行状态后清理
+kubectl delete pod lab-pod-a --force
+kubectl delete pvc lab-rwo-pvc
+```
+
+### 练习 3: 回收策略行为验证
+
+**目标**: 对比 Retain 和 Delete 策略在 PVC 删除后的行为差异。
+
+```bash
+# 1. 创建两种 StorageClass
+cat <<EOF | kubectl apply -f -
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: lab-retain
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Retain
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: lab-delete
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Delete
+EOF
+
+# 2. 分别创建 PVC 并绑定
+# 3. 删除 PVC，观察 PV 状态差异
+# Retain: PV 进入 Released 状态
+# Delete: PV 被自动删除
+
+# 清理
+kubectl delete sc lab-retain lab-delete
+```
+
+---
+
+## 常见问题速查表
+
+| 症状 | 可能原因 | 快速诊断命令 | 解决方案 |
+|------|---------|-------------|---------|
+| PVC 一直 Pending | StorageClass 不存在 | `kubectl get sc` | 创建或修正 StorageClass 名称 |
+| PVC 一直 Pending | 无可用 PV（静态供给） | `kubectl get pv` | 创建匹配的 PV 或切换动态供给 |
+| PVC 一直 Pending | 云商配额不足 | 检查云商控制台 | 申请提升配额或释放闲置资源 |
+| PVC 一直 Pending | 拓扑不匹配 | `kubectl describe pvc` 查看 events | 检查 allowedTopologies 和节点标签 |
+| Pod ContainerCreating | 卷挂载失败 | `kubectl describe pod` 查看 events | 检查 CSI 驱动状态和节点磁盘 |
+| Pod Multi-Attach 错误 | RWO 卷被多节点挂载 | `kubectl get pv -o wide` | 确保同 PVC 的 Pod 调度到同一节点 |
+| PV Released 不回收 | Retain 策略 | `kubectl get pv` | 手动清理 claimRef 或删除 PV |
+| PVC Lost | 底层 PV 被删除 | `kubectl get pv` | 重建 PV 或恢复存储后端 |
+| 卷扩容失败 | StorageClass 未开启 | `kubectl get sc -o yaml` | 设置 `allowVolumeExpansion: true` |
+| 数据写入慢 | 存储性能不足 | `iostat -xz 1` | 升级存储规格或优化 I/O 模式 |
+
+---
+
+## 相关文档
+
+- [01 - 存储架构概览](./01-storage-architecture-overview.md) - 存储架构与核心组件
+- [02 - PV 架构基础](./02-pv-architecture-fundamentals.md) - PV 生命周期与状态机
+- [04 - StorageClass 动态供给](./04-storageclass-dynamic-provisioning.md) - 动态供给深度配置
+- [09 - PV/PVC 故障排查](./09-pv-pvc-troubleshooting.md) - 故障诊断与排查
+
+---
+**表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)
