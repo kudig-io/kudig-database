@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-CSI-009"
+title: "CSI 存储异常故障树分析"
+component: "csi"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-CSI-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, csi, storage, volume, snapshot]
+related_skills:
+  - "../topic-skills/18-storage.md"
+knowledge_refs:
+  - "../domain-6-storage/01-persistent-volume.md"
+  - "../domain-12-troubleshooting/10-storage-pvc-troubleshooting.md"
+---
+
 # CSI 存储异常 FTA 树
 
 ## 适用范围与说明

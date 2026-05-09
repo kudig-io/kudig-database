@@ -1,3 +1,26 @@
+---
+title: "分布式追踪体系"
+description: "深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在 K8s 中的集成实践"
+category: "domain-8-observability"
+tags: [k8s, tracing, opentelemetry, jaeger, span, distributed-tracing, observability]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-observability-architecture-overview.md"
+    type: "depth"
+    desc: "可观测性架构体系"
+  - path: "02-monitoring-metrics-system.md"
+    type: "depth"
+    desc: "指标监控体系"
+  - path: "../domain-26-service-mesh/"
+    type: "depth"
+    desc: "服务网格"
+---
+
 # 04 - 分布式追踪体系 (Distributed Tracing)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [opentelemetry.io](https://opentelemetry.io/)

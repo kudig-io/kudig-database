@@ -1,3 +1,26 @@
+---
+title: "Kubernetes 设计原则与哲学"
+description: "深入理解 Kubernetes 的核心设计哲学：声明式面向终态的闭环控制系统，以及控制器模式、水平触发、最终一致性等核心概念"
+category: "domain-2-design"
+tags: [k8s, design-principles, philosophy, declarative, controller, level-triggered]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "02-declarative-api-pattern.md"
+    type: "depth"
+    desc: "声明式 API 与 SSA"
+  - path: "03-controller-pattern.md"
+    type: "depth"
+    desc: "控制器模式与调谐循环"
+  - path: "../domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md"
+    type: "depth"
+    desc: "架构全景图"
+---
+
 # 01 - Kubernetes 设计原则与哲学 (Foundations)
 
 ## 现代化演进：从管理 Pod 到管理“意图”

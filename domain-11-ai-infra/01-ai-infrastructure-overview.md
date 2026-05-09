@@ -1,3 +1,26 @@
+---
+title: "AI 基础设施架构"
+description: "全面介绍 AI Infrastructure 在 K8s 上的架构设计：GPU 调度、分布式训练（PyTorch DDP/FSDP/TensorRT）、LLM 推理（vLLM/TGI/KServe）、向量数据库与 RAG"
+category: "domain-11-ai-infra"
+tags: [k8s, ai, gpu, inference, training, llm, rag, vector-database, kubeflow]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "03-gpu-scheduling-management.md"
+    type: "depth"
+    desc: "GPU 调度与管理"
+  - path: "05-distributed-training-frameworks.md"
+    type: "depth"
+    desc: "分布式训练框架"
+  - path: "../topic-ai-agent/"
+    type: "ai-agent"
+    desc: "AI Agent 工程"
+---
+
 # AI基础设施架构
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [Kubeflow](https://www.kubeflow.org/)

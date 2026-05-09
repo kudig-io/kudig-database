@@ -1,3 +1,26 @@
+---
+title: "CRD 自定义资源定义开发指南"
+description: "深入解析 K8s CRD 开发：CustomResourceDefinition 规范、Validation/Webhook、Subresources、Conversion、Webhook Debug、企业级 CRD 开发最佳实践"
+category: "domain-10-extensions"
+tags: [k8s, crd, custom-resource, operator, admission-webhook, api-extension]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "05-package-management-tools.md"
+    type: "depth"
+    desc: "包管理与应用分发"
+  - path: "08-cicd-pipelines.md"
+    type: "depth"
+    desc: "CI/CD 管道"
+  - path: "../topic-fta/list/crd-operator-fta.md"
+    type: "fta"
+    desc: "CRD/Operator 故障树"
+---
+
 # 01 - CRD自定义资源定义开发指南
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)

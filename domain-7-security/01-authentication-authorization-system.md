@@ -1,3 +1,26 @@
+---
+title: "Kubernetes 认证授权体系详解"
+description: "深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、Service Account Token Volume Projection 与最小权限原则"
+category: "domain-7-security"
+tags: [k8s, rbac, authentication, authorization, serviceaccount, oidc, security, access-control]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "02-network-security-policies.md"
+    type: "depth"
+    desc: "网络安全策略与零信任"
+  - path: "03-runtime-security-defense.md"
+    type: "depth"
+    desc: "运行时安全防护"
+  - path: "../topic-fta/list/certificate-fta.md"
+    type: "fta"
+    desc: "证书与 TLS 故障树"
+---
+
 # 01 - Kubernetes认证授权体系详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/reference/access-authn-authz](https://kubernetes.io/docs/reference/access-authn-authz/)

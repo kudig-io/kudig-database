@@ -1,3 +1,21 @@
+---
+fta_id: "FTA-PDB-025"
+title: "PDB 异常故障树分析"
+component: "pdb"
+severity: "P2-P3"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-PDB-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, pdb, pod-disruption-budget, eviction, drain]
+related_skills: []
+knowledge_refs:
+  - "../domain-4-workloads/10-daemonset.md"
+---
+
 # PDB 异常 FTA 树
 
 ## 适用范围与说明

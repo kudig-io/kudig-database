@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-CERT-003"
+title: "证书异常故障树分析"
+component: "certificate"
+severity: "P0-P1"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-CERT-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, certificate, tls, pki, kubeadm]
+related_skills:
+  - "../topic-skills/09-security-certificates.md"
+knowledge_refs:
+  - "../domain-7-security/01-certificate-management.md"
+  - "../domain-12-troubleshooting/13-certificate-troubleshooting.md"
+---
+
 # 证书异常 FTA 树
 
 ## 适用范围与说明

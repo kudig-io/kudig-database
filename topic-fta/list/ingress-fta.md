@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-INGRESS-019"
+title: "Ingress 异常故障树分析"
+component: "ingress"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-INGRESS-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, ingress, nginx, controller, tls]
+related_skills:
+  - "../topic-skills/22-networking.md"
+knowledge_refs:
+  - "../domain-5-networking/06-ingress-load-balancer.md"
+  - "../domain-12-troubleshooting/03-networking-cni-troubleshooting.md"
+---
+
 # Ingress 异常 FTA 树
 
 ## 适用范围与说明

@@ -1,3 +1,26 @@
+---
+title: "kube-apiserver 深度解析"
+description: "深入解析 kube-apiserver 的架构设计、请求处理流程、认证授权机制、Admission Control、APF 限流、审计日志与高可用部署"
+category: "domain-3-control-plane"
+tags: [k8s, apiserver, authentication, authorization, admission, apf, audit, high-availability]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "11-etcd-deep-dive.md"
+    type: "depth"
+    desc: "etcd 深度解析"
+  - path: "13-kube-controller-manager-deep-dive.md"
+    type: "depth"
+    desc: "KCM 深度解析"
+  - path: "../topic-fta/list/apiserver-fta.md"
+    type: "fta"
+    desc: "API Server 故障树"
+---
+
 # kube-apiserver 深度解析 (kube-apiserver Deep Dive)
 
 > kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API 接口，是所有组件通信的唯一入口

@@ -427,7 +427,8 @@ flowchart TD
 | 31 | 硬件基础 | 19 | 服务器硬件、GPU、网络设备 |
 | 32 | YAML清单 | 37 | K8s全资源YAML参考 |
 | 33 | K8s事件 | 16 | 事件体系、事件驱动 |
-| 34 | CNCF生态 | 219 | Graduated/Incubating/Sandbox全景 || 35 | eBPF | 11 | eBPF技术、网络可观测 |
+| 34 | CNCF生态 | 219 | Graduated/Incubating/Sandbox全景 |
+| 35 | eBPF | 11 | eBPF技术、网络可观测 |
 | 36 | 平台工程 | 13 | 内部开发者平台、IDP |
 | 37 | 边缘计算 | 12 | KubeEdge、边缘部署 |
 | 38 | WebAssembly | 12 | Wasm运行时、边缘计算 |
@@ -501,7 +502,7 @@ flowchart TD
 
 | 场景 | 推荐起点 | 核心文档 |
 |:---|:---|:---|
-| **🔥 故障排查** | [topic-fta/README.md](./topic-fta/README.md) | 67篇FTA故障树 + 排障文档 |
+| **🔥 故障排查** | [topic-fta/README.md](./topic-fta/README.md) + [topic-febm/README.md](./topic-febm/README.md) | 67篇FTA故障树 + 10篇FEBM取证 + 排障文档 |
 | **📚 系统学习** | [topic-learn/](./topic-learn/) | 1个月学习计划 + 92篇课程 |
 | **🤖 Agent开发** | [topic-ai-agent/](./topic-ai-agent/) | 58篇AI Agent工程文档 |
 | **⚡ 命令速查** | [topic-cheat-sheet/](./topic-cheat-sheet/) | 9张 K8s/Linux/Go 速查卡 |

@@ -1,3 +1,21 @@
+---
+fta_id: "FTA-CLUSTER-UPGRADE-006"
+title: "集群升级异常故障树分析"
+component: "cluster-upgrade"
+severity: "P0-P1"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-CLUSTER-UPGRADE-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, cluster-upgrade, kubeadm, version-compatibility]
+related_skills: []
+knowledge_refs:
+  - "../domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md"
+---
+
 # 集群升级异常 FTA 树
 
 ## 适用范围与说明

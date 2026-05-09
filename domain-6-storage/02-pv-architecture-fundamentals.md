@@ -1,3 +1,26 @@
+---
+title: "PV/PVC 核心概念与企业级实践"
+description: "深入解析 PV/PVC 的核心概念、绑定机制、回收策略、扩缩容、跨命名空间共享、以及企业级生产环境配置与故障排查"
+category: "domain-6-storage"
+tags: [k8s, pv, pvc, storage, volume, persistent, reclaim-policy]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-storage-architecture-overview.md"
+    type: "depth"
+    desc: "存储架构概览"
+  - path: "04-storageclass-dynamic-provisioning.md"
+    type: "depth"
+    desc: "StorageClass 动态供给"
+  - path: "../topic-fta/list/persistentvolume-fta.md"
+    type: "fta"
+    desc: "持久化存储故障树"
+---
+
 # 02 - PV/PVC核心概念与企业级实践
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 企业级配置、生产环境最佳实践、故障预防 | **最后更新**: 2026-02

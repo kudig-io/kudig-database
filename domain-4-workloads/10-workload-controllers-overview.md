@@ -1,3 +1,26 @@
+---
+title: "工作负载控制器详解"
+description: "全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob 的架构设计、核心机制与生产级配置"
+category: "domain-4-workloads"
+tags: [k8s, workload, deployment, statefulset, daemonset, job, cronjob, controllers]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "11-pod-lifecycle-events.md"
+    type: "depth"
+    desc: "Pod 生命周期事件"
+  - path: "19-scheduler-configuration.md"
+    type: "depth"
+    desc: "调度器配置与优化"
+  - path: "../topic-fta/list/pod-fta.md"
+    type: "fta"
+    desc: "Pod 故障树"
+---
+
 # 35 - 工作负载控制器详解 (Workload Controllers)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [Kubernetes Workloads](https://kubernetes.io/docs/concepts/workloads/)

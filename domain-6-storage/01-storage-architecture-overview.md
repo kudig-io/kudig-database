@@ -1,3 +1,26 @@
+---
+title: "存储架构概览与核心组件"
+description: "深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS 等主流存储后端"
+category: "domain-6-storage"
+tags: [k8s, storage, csi, pvc, pv, storageclass, snapshot, ceph, longhorn]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "02-pv-architecture-fundamentals.md"
+    type: "depth"
+    desc: "PV/PVC 核心概念"
+  - path: "04-storageclass-dynamic-provisioning.md"
+    type: "depth"
+    desc: "StorageClass 动态供给"
+  - path: "../topic-fta/list/persistentvolume-fta.md"
+    type: "fta"
+    desc: "持久化存储故障树"
+---
+
 # 01 - 存储架构概览与核心组件
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 生产环境架构设计、性能优化、故障预防

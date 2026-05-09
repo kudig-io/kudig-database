@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-DNS-012"
+title: "DNS 异常故障树分析"
+component: "dns"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-DNS-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, dns, coredns, kube-dns, resolv]
+related_skills:
+  - "../topic-skills/22-networking.md"
+knowledge_refs:
+  - "../domain-5-networking/01-network-architecture-overview.md"
+  - "../domain-12-troubleshooting/03-networking-cni-troubleshooting.md"
+---
+
 # DNS 异常 FTA 树
 
 ## 适用范围与说明

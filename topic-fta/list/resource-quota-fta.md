@@ -1,3 +1,22 @@
+---
+fta_id: "FTA-QUOTA-029"
+title: "ResourceQuota 异常故障树分析"
+component: "resource-quota"
+severity: "P2-P3"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-QUOTA-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, resource-quota, limitrange, namespace, quota]
+related_skills: []
+knowledge_refs:
+  - "../domain-7-security/04-resource-quota.md"
+  - "../domain-12-troubleshooting/12-rbac-quota-troubleshooting.md"
+---
+
 # ResourceQuota 异常 FTA 树
 
 ## 适用范围与说明

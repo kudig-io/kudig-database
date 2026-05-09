@@ -1,3 +1,22 @@
+---
+fta_id: "FTA-ISTIO-032"
+title: "Service Mesh(Istio) 异常故障树分析"
+component: "service-mesh-istio"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-ISTIO-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, istio, service-mesh, sidecar, xds, envoy, mtls]
+related_skills:
+  - "../topic-skills/22-networking.md"
+knowledge_refs:
+  - "../domain-5-networking/01-network-architecture-overview.md"
+---
+
 # Service Mesh（Istio）异常 FTA 树
 
 ## 适用范围与说明

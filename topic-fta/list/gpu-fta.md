@@ -1,3 +1,22 @@
+---
+fta_id: "FTA-GPU-016"
+title: "GPU 异常故障树分析"
+component: "gpu"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-GPU-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, gpu, nvidia, device-plugin, cuda]
+related_skills:
+  - "../topic-skills/21-ai-infra.md"
+knowledge_refs:
+  - "../domain-11-ai-infra/01-gpu-scheduling.md"
+---
+
 # GPU 异常 FTA 树
 
 ## 适用范围与说明

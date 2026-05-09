@@ -1,3 +1,26 @@
+---
+title: "控制器模式与调谐循环"
+description: "深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践"
+category: "domain-2-design"
+tags: [k8s, controller, reconcile, control-loop, level-triggered, operator]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-design-principles-foundations.md"
+    type: "depth"
+    desc: "设计原则与哲学"
+  - path: "02-declarative-api-pattern.md"
+    type: "depth"
+    desc: "声明式 API"
+  - path: "../domain-2-design-principles/12-operator-development-guide.md"
+    type: "depth"
+    desc: "Operator 开发指南"
+---
+
 # 03 - 控制器模式与调谐循环 (Controller Pattern)
 
 ## 架构师洞察：水平触发 (Level-triggered) 的力量

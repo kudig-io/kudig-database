@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-MONITORING-021"
+title: "监控与告警异常故障树分析"
+component: "monitoring"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-MONITORING-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, prometheus, alertmanager, monitoring, observability]
+related_skills:
+  - "../topic-skills/25-observability.md"
+knowledge_refs:
+  - "../domain-8-observability/01-metrics-monitoring.md"
+  - "../domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.md"
+---
+
 # 监控与告警异常 FTA 树
 
 ## 适用范围与说明

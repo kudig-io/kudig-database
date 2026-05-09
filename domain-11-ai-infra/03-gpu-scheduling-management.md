@@ -1,3 +1,26 @@
+---
+title: "GPU 调度与管理"
+description: "深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD GPU 调度与 GPU 健康监控"
+category: "domain-11-ai-infra"
+tags: [k8s, gpu, nvidia, amd, device-plugin, mig, gpu-scheduling, time-slicing]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-ai-infrastructure-overview.md"
+    type: "depth"
+    desc: "AI 基础设施架构"
+  - path: "05-distributed-training-frameworks.md"
+    type: "depth"
+    desc: "分布式训练框架"
+  - path: "../topic-fta/list/gpu-fta.md"
+    type: "fta"
+    desc: "GPU 故障树"
+---
+
 # 133 - GPU调度与管理 (GPU Scheduling & Management)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin)

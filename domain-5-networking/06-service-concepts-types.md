@@ -1,3 +1,26 @@
+---
+title: "Kubernetes Service 核心概念与类型深度解析"
+description: "深入解析 Service 的核心概念与类型：ClusterIP、NodePort、LoadBalancer、ExternalName、Headless Service、无头部署与 Endpoint 切片"
+category: "domain-5-networking"
+tags: [k8s, service, clusterip, nodeport, loadbalancer, endpoints, service-discovery]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "03-cni-architecture-fundamentals.md"
+    type: "depth"
+    desc: "网络核心组件"
+  - path: "../topic-fta/list/service-fta.md"
+    type: "fta"
+    desc: "Service 故障树"
+  - path: "../topic-cheat-sheet/k8s.md"
+    type: "cheatsheet"
+    desc: "K8s 速查卡"
+---
+
 # Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  

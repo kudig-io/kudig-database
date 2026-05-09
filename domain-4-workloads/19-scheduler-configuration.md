@@ -1,3 +1,26 @@
+---
+title: "调度器配置与优化"
+description: "深入解析 Kubernetes 调度器的工作原理、调度策略与插件、亲和性/反亲和、污点容忍、拓扑分布约束、抢占机制与生产级调优"
+category: "domain-4-workloads"
+tags: [k8s, scheduler, affinity, taint, toleration, topology, pod-scheduling, scheduling]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "10-workload-controllers-overview.md"
+    type: "depth"
+    desc: "工作负载控制器详解"
+  - path: "../domain-3-control-plane/20-kube-scheduler-deep-dive.md"
+    type: "depth"
+    desc: "Scheduler 深度解析"
+  - path: "../topic-fta/list/scheduler-fta.md"
+    type: "fta"
+    desc: "Scheduler 故障树"
+---
+
 # 28 - 调度器配置与优化
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)

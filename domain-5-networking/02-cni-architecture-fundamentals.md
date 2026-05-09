@@ -1,3 +1,26 @@
+---
+title: "CNI 架构与核心原理"
+description: "深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM 与网络策略"
+category: "domain-5-networking"
+tags: [k8s, cni, network, flannel, calico, cilium, weave, ipam, network-policy]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "06-service-concepts-types.md"
+    type: "depth"
+    desc: "Service 核心概念与类型"
+  - path: "../topic-fta/list/network-policy-fta.md"
+    type: "fta"
+    desc: "网络策略故障树"
+  - path: "../topic-fta/list/csi-fta.md"
+    type: "fta"
+    desc: "CSI 故障树"
+---
+
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01

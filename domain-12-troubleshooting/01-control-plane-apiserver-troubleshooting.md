@@ -1,3 +1,29 @@
+---
+title: "API Server 故障排查"
+description: "系统化故障排查 K8s API Server 故障：apiserver 无法启动、认证授权异常、请求超时、etcd 写入延迟、Watch 阻塞、OOM、API 限流与 P99 延迟异常的诊断与修复"
+category: "domain-12-troubleshooting"
+tags: [k8s, troubleshooting, apiserver, etcd, authentication, authorization, latency, debugging]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "02-control-plane-etcd-troubleshooting.md"
+    type: "depth"
+    desc: "etcd 故障排查"
+  - path: "../domain-3-control-plane/12-apiserver-deep-dive.md"
+    type: "depth"
+    desc: "API Server 深度解析"
+  - path: "../topic-fta/list/apiserver-fta.md"
+    type: "fta"
+    desc: "API Server 故障树"
+  - path: "../topic-fta/list/etcd-fta.md"
+    type: "fta"
+    desc: "etcd 故障树"
+---
+
 # 01 - API Server 故障排查 (API Server Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)

@@ -1,6 +1,29 @@
+---
+title: "kubectl 命令完整参考"
+description: "Kubernetes kubectl 命令完整参考，覆盖日常操作、故障排查、资源管理、集群运维等场景"
+category: "domain-1-architecture"
+tags: [k8s, kubectl, cli, command, reference, devops]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "beginner"
+related_docs:
+  - path: "01-kubernetes-architecture-overview.md"
+    type: "depth"
+    desc: "架构全景图"
+  - path: "../topic-cheat-sheet/k8s.md"
+    type: "cheatsheet"
+    desc: "K8s 速查卡"
+  - path: "../domain-12-troubleshooting/"
+    type: "troubleshooting"
+    desc: "故障排查专题"
+---
+
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **文档类型**: 生产运维参考
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-05 | **文档类型**: 生产运维参考
 
 ---
 

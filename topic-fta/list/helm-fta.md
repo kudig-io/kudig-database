@@ -1,3 +1,21 @@
+---
+fta_id: "FTA-HELM-017"
+title: "Helm 发布异常故障树分析"
+component: "helm"
+severity: "P2-P3"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-HELM-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, helm, chart, release, hook]
+related_skills: []
+knowledge_refs:
+  - "../domain-9-platform-ops/01-helm.md"
+---
+
 # Helm 发布异常 FTA 树
 
 ## 适用范围与说明

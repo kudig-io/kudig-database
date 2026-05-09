@@ -1,3 +1,26 @@
+---
+title: "etcd 深度解析"
+description: "深入解析 etcd 分布式键值存储的架构原理、Raft 共识协议、MVCC 数据模型、Watch 机制、Lease 生命周期、备份恢复与性能调优"
+category: "domain-3-control-plane"
+tags: [k8s, etcd, raft, consensus, storage, mvcc, backup, disaster-recovery]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "12-apiserver-deep-dive.md"
+    type: "depth"
+    desc: "API Server 深度解析"
+  - path: "13-kube-controller-manager-deep-dive.md"
+    type: "depth"
+    desc: "KCM 深度解析"
+  - path: "../topic-fta/list/backup-restore-fta.md"
+    type: "fta"
+    desc: "备份恢复故障树"
+---
+
 # etcd 深度解析 (etcd Deep Dive)
 
 > etcd 是 Kubernetes 的核心存储组件，所有集群状态数据的唯一真相来源 (Single Source of Truth)

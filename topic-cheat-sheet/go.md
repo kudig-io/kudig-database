@@ -1,6 +1,24 @@
+---
+title: "Go 生产环境速查卡"
+description: "涵盖 Go 1.20-1.22 生产环境 90% 以上常用语法和工具，支持快速开发和故障排查"
+category: cheatsheet
+tags: [go, golang, programming, cheatsheet, quick-reference]
+k8s_versions: []
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "../domain-11-ai-infra/"
+    desc: "AI 基础设施文档"
+  - path: "../topic-cheat-sheet/linux.md"
+    desc: "Linux 速查卡"
+---
+
 # Go 生产环境速查卡
 
-> **适用版本**: Go 1.20 - 1.22 | **最后更新**: 2026-02  
+> **适用版本**: Go 1.20 - 1.22 | **最后更新**: 2026-05
 > **目标**: 涵盖生产环境 90% 以上常用语法和工具，支持快速开发和故障排查
 
 ---

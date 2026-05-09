@@ -1,6 +1,29 @@
+---
+title: "Kubernetes 核心组件深度剖析"
+description: "深入剖析 Kubernetes 各核心组件（API Server、etcd、Controller Manager、Scheduler、Kubelet、Kube-proxy、CNI）的架构设计与工作原理"
+category: "domain-1-architecture"
+tags: [k8s, components, api-server, etcd, scheduler, kubelet, kube-proxy, cni]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-kubernetes-architecture-overview.md"
+    type: "depth"
+    desc: "架构全景图"
+  - path: "../domain-3-control-plane/01-plane-architecture-overview.md"
+    type: "depth"
+    desc: "控制平面架构"
+  - path: "../domain-3-control-plane/11-etcd-deep-dive.md"
+    type: "depth"
+    desc: "etcd 深度解析"
+---
+
 # Kubernetes 核心组件深度剖析 (Core Components Deep Dive)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/overview/components](https://kubernetes.io/docs/concepts/overview/components/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-05 | **参考**: [kubernetes.io/docs/concepts/overview/components](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 

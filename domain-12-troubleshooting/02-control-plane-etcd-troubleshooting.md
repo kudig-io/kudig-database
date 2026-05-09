@@ -1,3 +1,26 @@
+---
+title: "etcd 故障排查"
+description: "系统化故障排查 etcd 故障：Leader 选举失败、WAL 写入延迟、snapshot 阻塞、磁盘 IO 瓶颈、空间配额耗尽、证书过期、MVRR 读延迟与集群 quorum 丢失的诊断与修复"
+category: "domain-12-troubleshooting"
+tags: [k8s, troubleshooting, etcd, raft, leader-election, snapshot, disk-io, debugging]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-control-plane-apiserver-troubleshooting.md"
+    type: "depth"
+    desc: "API Server 故障排查"
+  - path: "../domain-3-control-plane/11-etcd-deep-dive.md"
+    type: "depth"
+    desc: "etcd 深度解析"
+  - path: "../topic-fta/list/backup-restore-fta.md"
+    type: "fta"
+    desc: "备份恢复故障树"
+---
+
 # 02 - etcd 故障排查 (etcd Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)

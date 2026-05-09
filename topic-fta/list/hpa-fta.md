@@ -1,3 +1,22 @@
+---
+fta_id: "FTA-HPA-018"
+title: "HPA 异常故障树分析"
+component: "hpa"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-HPA-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, hpa, horizontal-pod-autoscaler, metrics-server]
+related_skills:
+  - "../topic-skills/19-scaling.md"
+knowledge_refs:
+  - "../domain-4-workloads/19-auto-scaling.md"
+---
+
 # HPA 异常 FTA 树
 
 ## 适用范围与说明

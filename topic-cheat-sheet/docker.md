@@ -1,6 +1,26 @@
+---
+title: "Docker & Containerd 速查卡"
+description: "容器运行时操作命令快速参考，覆盖 Docker v20.10+ 和 containerd v1.6+"
+category: cheatsheet
+tags: [docker, containerd, container, cheatsheet, quick-reference, cri]
+k8s_versions: []
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "beginner"
+related_docs:
+  - path: "../domain-13-docker-container/"
+    desc: "Docker 容器深度文档"
+  - path: "../topic-cheat-sheet/k8s.md"
+    desc: "Kubernetes 速查卡"
+  - path: "../domain-3-control-plane/21-container-runtime-deep-dive.md"
+    desc: "CRI 深度解析"
+---
+
 # Docker & Containerd 速查表
 
-> 容器运行时操作命令快速参考 | Docker v20.10+ / containerd v1.6+
+> 容器运行时操作命令快速参考 | Docker v20.10+ / containerd v1.6+ | **最后更新**: 2026-05
 
 ---
 

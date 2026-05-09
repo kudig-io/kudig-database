@@ -1,3 +1,26 @@
+---
+title: "平台运维概述"
+description: "全面介绍 Kubernetes 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径"
+category: "domain-9-platform-ops"
+tags: [k8s, platform, platform-engineering, idp, sre, devops, operations]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "02-cluster-lifecycle-management.md"
+    type: "depth"
+    desc: "集群生命周期管理"
+  - path: "06-monitoring-alerting-system.md"
+    type: "depth"
+    desc: "监控告警体系"
+  - path: "../domain-36-platform-engineering/"
+    type: "depth"
+    desc: "平台工程专题"
+---
+
 # 平台运维概述 (Platform Operations Overview)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v2.0 | **最后更新**: 2026-02

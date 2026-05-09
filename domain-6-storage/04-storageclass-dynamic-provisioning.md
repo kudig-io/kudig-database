@@ -1,3 +1,26 @@
+---
+title: "StorageClass 动态供给与多租户管理"
+description: "深入解析 StorageClass 的动态供给机制、Provisioner 插件、多租户存储配额、存储类选择策略、成本优化与备份恢复"
+category: "domain-6-storage"
+tags: [k8s, storageclass, provisioner, dynamic-provisioning, multi-tenant, storage-quota]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-storage-architecture-overview.md"
+    type: "depth"
+    desc: "存储架构概览"
+  - path: "02-pv-architecture-fundamentals.md"
+    type: "depth"
+    desc: "PV/PVC 核心概念"
+  - path: "../topic-fta/list/storageclass-fta.md"
+    type: "fta"
+    desc: "StorageClass 故障树"
+---
+
 # 04 - StorageClass动态供给与多租户管理
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 多租户配置、动态供给优化、成本控制 | **最后更新**: 2026-02

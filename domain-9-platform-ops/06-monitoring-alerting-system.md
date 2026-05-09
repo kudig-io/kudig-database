@@ -1,3 +1,26 @@
+---
+title: "监控告警体系"
+description: "深入解析企业级监控告警体系：Prometheus/Grafana 深度集成、SLO/SLI/SLA 工程实践、告警收敛与静默、On-Call 值班流程与 MTTR 优化"
+category: "domain-9-platform-ops"
+tags: [k8s, monitoring, alerting, prometheus, grafana, slo, sli, sla, oncall, mttr]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-platform-ops-overview.md"
+    type: "depth"
+    desc: "平台运维概述"
+  - path: "02-cluster-lifecycle-management.md"
+    type: "depth"
+    desc: "集群生命周期管理"
+  - path: "../domain-8-observability/02-monitoring-metrics-system.md"
+    type: "depth"
+    desc: "指标监控体系"
+---
+
 # 监控告警体系 (Monitoring & Alerting System)
 
 ## 概述

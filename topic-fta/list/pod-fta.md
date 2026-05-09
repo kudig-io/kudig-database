@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-POD-026"
+title: "Pod 异常故障树分析"
+component: "pod"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-POD-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, pod, scheduling, image, runtime, network, storage]
+related_skills:
+  - "../topic-skills/05-pod.md"
+knowledge_refs:
+  - "../domain-4-workloads/01-pod-lifecycle.md"
+  - "../domain-12-troubleshooting/04-workload-troubleshooting.md"
+---
+
 # Pod 异常 FTA 树
 
 ## 适用范围与说明

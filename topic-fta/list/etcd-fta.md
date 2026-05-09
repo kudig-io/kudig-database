@@ -1,3 +1,23 @@
+---
+fta_id: "FTA-ETCD-013"
+title: "etcd 异常故障树分析"
+component: "etcd"
+severity: "P0-P1"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-ETCD-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, etcd, storage, consensus, disk-io]
+related_skills:
+  - "../topic-skills/11-control-plane-failure.md"
+knowledge_refs:
+  - "../domain-3-control-plane/11-etcd-deep-dive.md"
+  - "../domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md"
+---
+
 # etcd 异常 FTA 树
 
 ## 适用范围与说明

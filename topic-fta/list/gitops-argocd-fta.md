@@ -1,3 +1,21 @@
+---
+fta_id: "FTA-GITOPS-015"
+title: "GitOps(ArgoCD) 异常故障树分析"
+component: "gitops-argocd"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-GITOPS-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, argocd, gitops, application, sync]
+related_skills: []
+knowledge_refs:
+  - "../domain-9-platform-ops/06-cd-argocd.md"
+---
+
 # GitOps（ArgoCD）异常 FTA 树
 
 ## 适用范围与说明

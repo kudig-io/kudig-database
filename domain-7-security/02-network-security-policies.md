@@ -1,3 +1,26 @@
+---
+title: "网络安全策略与零信任架构"
+description: "深入解析 K8s NetworkPolicy 的配置与最佳实践、Cilium Network Policy、零信任架构、入侵检测与微分段安全策略"
+category: "domain-7-security"
+tags: [k8s, network, networkpolicy, zero-trust, security, cilium, segmentation]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-authentication-authorization-system.md"
+    type: "depth"
+    desc: "认证授权体系"
+  - path: "03-runtime-security-defense.md"
+    type: "depth"
+    desc: "运行时安全防护"
+  - path: "../topic-fta/list/network-policy-fta.md"
+    type: "fta"
+    desc: "网络策略故障树"
+---
+
 # 02 - 网络安全策略与零信任架构
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)

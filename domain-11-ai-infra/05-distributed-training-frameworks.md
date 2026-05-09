@@ -1,3 +1,26 @@
+---
+title: "分布式训练框架"
+description: "深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI 作业调度与 NCCL 调优"
+category: "domain-11-ai-infra"
+tags: [k8s, ai, distributed-training, pytorch, tensorflow, deepspeed, horovod, nccl, mpi]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "01-ai-infrastructure-overview.md"
+    type: "depth"
+    desc: "AI 基础设施架构"
+  - path: "03-gpu-scheduling-management.md"
+    type: "depth"
+    desc: "GPU 调度与管理"
+  - path: "../topic-ai-agent/"
+    type: "ai-agent"
+    desc: "AI Agent 工程"
+---
+
 # 分布式训练框架
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [PyTorch Distributed](https://pytorch.org/tutorials/beginner/dist_overview.html) | [DeepSpeed](https://www.deepspeed.ai/)

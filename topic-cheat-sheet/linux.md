@@ -1,6 +1,26 @@
+---
+title: "Linux 生产环境速查卡"
+description: "涵盖 Linux 生产环境 90% 以上常用命令，支持系统运维和故障排查"
+category: cheatsheet
+tags: [linux, bash, system-admin, cheatsheet, quick-reference, shell]
+k8s_versions: []
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "beginner"
+related_docs:
+  - path: "../domain-14-linux-system/"
+    desc: "Linux 系统深度文档"
+  - path: "../topic-cheat-sheet/networking.md"
+    desc: "网络诊断速查卡"
+  - path: "../topic-cheat-sheet/tls-pki.md"
+    desc: "TLS/PKI 证书速查卡"
+---
+
 # Linux 生产环境速查卡
 
-> **适用系统**: RHEL/CentOS 7-9, Ubuntu 20.04-24.04, Debian 11-12 | **最后更新**: 2026-02  
+> **适用系统**: RHEL/CentOS 7-9, Ubuntu 20.04-24.04, Debian 11-12 | **最后更新**: 2026-05
 > **目标**: 涵盖生产环境 90% 以上常用命令，支持系统运维和故障排查
 
 ---

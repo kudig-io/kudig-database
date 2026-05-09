@@ -1,3 +1,26 @@
+---
+title: "kube-controller-manager 深度解析"
+description: "深入解析 kube-controller-manager 的架构设计、40+ 内置控制器、Leader 选举机制、控制器协同工作原理与生产级运维"
+category: "domain-3-control-plane"
+tags: [k8s, controller-manager, controllers, leader-election, reconcile, kubernetes]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "advanced"
+related_docs:
+  - path: "11-etcd-deep-dive.md"
+    type: "depth"
+    desc: "etcd 深度解析"
+  - path: "12-apiserver-deep-dive.md"
+    type: "depth"
+    desc: "API Server 深度解析"
+  - path: "../topic-fta/list/controller-manager-fta.md"
+    type: "fta"
+    desc: "Controller Manager 故障树"
+---
+
 # kube-controller-manager 深度解析 (KCM Deep Dive)
 
 > kube-controller-manager (KCM) 是 Kubernetes 控制平面的核心组件，运行所有内置控制器，确保集群状态与期望状态一致

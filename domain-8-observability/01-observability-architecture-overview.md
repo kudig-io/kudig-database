@@ -1,3 +1,26 @@
+---
+title: "Kubernetes 可观测性架构体系"
+description: "深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry 的架构设计与集成"
+category: "domain-8-observability"
+tags: [k8s, observability, metrics, logging, tracing, prometheus, loki, jaeger, opentelemetry]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "02-monitoring-metrics-system.md"
+    type: "depth"
+    desc: "指标监控体系"
+  - path: "04-distributed-tracing.md"
+    type: "depth"
+    desc: "分布式追踪体系"
+  - path: "../topic-cheat-sheet/promql.md"
+    type: "cheatsheet"
+    desc: "PromQL 速查卡"
+---
+
 # 01 - Kubernetes 可观测性架构体系 (Observability Architecture)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/monitoring](https://kubernetes.io/docs/concepts/cluster-administration/monitoring/)

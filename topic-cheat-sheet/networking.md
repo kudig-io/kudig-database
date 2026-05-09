@@ -1,6 +1,26 @@
+---
+title: "网络诊断速查卡"
+description: "TCP/IP 网络故障排查与诊断工具快速参考"
+category: cheatsheet
+tags: [network, tcpip, dns, troubleshooting, cheatsheet, quick-reference]
+k8s_versions: []
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "../domain-5-networking/"
+    desc: "Kubernetes 网络深度文档"
+  - path: "../domain-15-network-fundamentals/"
+    desc: "网络基础理论"
+  - path: "../topic-cheat-sheet/tls-pki.md"
+    desc: "TLS/PKI 证书速查卡"
+---
+
 # 网络诊断速查表
 
-> TCP/IP 网络故障排查与诊断工具快速参考
+> TCP/IP 网络故障排查与诊断工具快速参考 | **最后更新**: 2026-05
 
 ---
 

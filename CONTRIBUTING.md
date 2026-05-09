@@ -164,7 +164,61 @@ metadata:
 
 ---
 
-## 6. 提交规范
+## 6. 模板使用规范
+
+### 模板目录
+
+所有文档模板统一存放在 [`templates/`](./templates/) 目录。新建文档时应从对应模板创建。
+
+| 模板文件 | 用途 | 适用目录 |
+|:---|:---|:---|
+| `domain-article-template.md` | 知识域深度文档 | `domain-*/` |
+| `fta-template.md` | FTA 故障树分析（含评审检查表） | `topic-fta/list/` |
+| `skill-template.md` | Skill 工单技能（完整 12 节结构） | `topic-skills/` |
+| `febm-template.md` | FEBM 法医取证分析 | `topic-febm/` |
+| `cheat-sheet-template.md` | 技术速查卡 | `topic-cheat-sheet/` |
+| `presentation-template.md` | 培训课程/演讲稿 | `topic-presentations/` |
+
+详细说明见 [`templates/README.md`](./templates/README.md)。
+
+### 使用流程
+
+```bash
+# 1. 选择对应模板
+cp templates/fta-template.md topic-fta/list/12-new-component-fta.md
+
+# 2. 全局替换占位符
+# {{组件名称}} → 实际内容
+
+# 3. 按模板章节结构填充内容
+
+# 4. 提交前检查
+# - 所有 {{PLACEHOLDER}} 已替换
+# - YAML front matter 已填写
+# - 相关文档链接已验证
+```
+
+### YAML Front Matter 要求
+
+所有 `domain-*`、`topic-*`、`topic-fta/list/*.md` 文档**强烈建议**在文件开头包含 YAML front matter：
+
+```yaml
+---
+title: "{{文档标题}}"
+description: "{{一句话摘要}}"
+tags: [k8s, {{tag1}}, {{tag2}}]
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "{{YYYY-MM}}"
+related_docs:
+  - path: "{{相对路径}}"
+    type: "depth|fta|skill|cheatsheet"
+    desc: "{{说明}}"
+---
+```
+
+---
+
+## 7. 提交规范
 
 ### Commit Message 格式
 
@@ -188,7 +242,7 @@ chore:    脚本、配置等非文档改动
 
 ---
 
-## 7. 贡献类型
+## 8. 贡献类型
 
 | 类型 | 说明 | 难度 |
 |:---|:---|:---:|
@@ -201,7 +255,7 @@ chore:    脚本、配置等非文档改动
 
 ---
 
-## 8. 联系方式
+## 9. 联系方式
 
 - 📧 邮箱: [your-email@example.com](mailto:your-email@example.com)
 - 💬 Issues: [GitHub Issues](../../issues)

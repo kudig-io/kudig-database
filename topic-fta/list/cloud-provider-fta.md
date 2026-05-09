@@ -1,3 +1,21 @@
+---
+fta_id: "FTA-CLOUD-004"
+title: "云平台集成异常故障树分析"
+component: "cloud-provider"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-CLOUD-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, cloud-provider, ccm, aws, gcp, azure, aliyun]
+related_skills: []
+knowledge_refs:
+  - "../domain-10-extensions/01-cloud-controller-manager.md"
+---
+
 # 云平台集成异常 FTA 树
 
 ## 适用范围与说明

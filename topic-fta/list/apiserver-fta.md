@@ -1,3 +1,24 @@
+---
+fta_id: "FTA-APISERVER-001"
+title: "API Server 异常故障树分析"
+component: "apiserver"
+severity: "P0-P1"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-APISERVER-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, apiserver, etcd, authentication, authorization]
+related_skills:
+  - "../topic-skills/11-control-plane-failure.md"
+knowledge_refs:
+  - "../domain-3-control-plane/12-apiserver-deep-dive.md"
+  - "../domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md"
+  - "../topic-structural-trouble-shooting/"
+---
+
 # API Server 异常 FTA 树
 
 ## 适用范围与说明
@@ -355,3 +376,34 @@ flowchart TD
 - **1.24–1.27**：控制面组件版本与配置需与集群 minor 对齐；安全准入策略从 PSP 迁移后，鉴权/准入路径需补充 PSA/OPA 分支。
 - **1.28–1.30**：仅保留稳定 API，务必在 FTA 中标注"已移除 API 的替代路径"；确保审计链路与 APF 观测可用。
 - **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
+
+---
+
+## FTA 评审检查表
+
+> 完成 FTA 文档后，必须通过以下检查项。
+
+### 结构完整性
+- [ ] 顶事件定义清晰，与 SLO 关联
+- [ ] 所有中间事件都有子事件
+- [ ] 所有底事件都是叶子节点
+- [ ] 没有悬挂的孤立事件
+
+### 逻辑正确性
+- [ ] 逻辑门类型选择正确（OR vs AND）
+- [ ] 同一门下的子事件满足 MECE 原则
+- [ ] 层数在 3-5 层之间
+
+### 可观测性
+- [ ] 每个底事件至少有 1 个指标监控
+- [ ] 每个底事件至少有 1 种诊断命令
+- [ ] 每个底事件有明确的判定条件
+
+### 可维护性
+- [ ] 编号遵循规范（TE-/IE-/BE- 前缀）
+- [ ] 修复动作有风险分级（🟢/🟡/🔴）
+- [ ] 修复操作包含回滚方案
+
+### Agent 友好性
+- [ ] 每个底事件有结构化的修复动作
+- [ ] 修复动作标注了自动化程度（L1/L2/L3）

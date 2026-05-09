@@ -1,3 +1,26 @@
+---
+title: "包管理与应用分发工具"
+description: "深入解析 K8s 包管理工具生态：Helm v3、Kustomize、Carvel (kapp-controller)、Helmfile、ChartMuseum 与企业级应用交付最佳实践"
+category: "domain-10-extensions"
+tags: [k8s, helm, kustomize, carvel, package-manager, gitops, application-delivery]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-crd-development-guide.md"
+    type: "depth"
+    desc: "CRD 开发指南"
+  - path: "08-cicd-pipelines.md"
+    type: "depth"
+    desc: "CI/CD 管道"
+  - path: "../topic-fta/list/helm-fta.md"
+    type: "fta"
+    desc: "Helm 故障树"
+---
+
 # 101 - 包管理与应用分发工具 (Package Management & Distribution)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级

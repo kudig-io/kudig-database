@@ -1,3 +1,22 @@
+---
+fta_id: "FTA-BACKUP-002"
+title: "备份/恢复异常故障树分析"
+component: "backup-restore"
+severity: "P1-P2"
+k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+top_event_id: "TE-BACKUP-001"
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+reviewers: []
+tags: [fta, troubleshooting, backup, velero, etcd-snapshot, restore]
+related_skills: []
+knowledge_refs:
+  - "../domain-3-control-plane/11-etcd-deep-dive.md"
+  - "../topic-structural-trouble-shooting/"
+---
+
 # 备份/恢复异常 FTA 树
 
 ## 适用范围与说明
@@ -722,3 +741,34 @@ flowchart TD
 | **1.26–1.28** | etcd 3.5.x 稳定性改进；CSI snapshot data movement 支持 |
 | **1.29–1.30** | Velero 新版本支持更细粒度的资源过滤和 API 转换 |
 | **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；**必须将加密密钥存储在集群外部** |
+
+---
+
+## FTA 评审检查表
+
+> 完成 FTA 文档后，必须通过以下检查项。
+
+### 结构完整性
+- [ ] 顶事件定义清晰，与 SLO 关联
+- [ ] 所有中间事件都有子事件
+- [ ] 所有底事件都是叶子节点
+- [ ] 没有悬挂的孤立事件
+
+### 逻辑正确性
+- [ ] 逻辑门类型选择正确（OR vs AND）
+- [ ] 同一门下的子事件满足 MECE 原则
+- [ ] 层数在 3-5 层之间
+
+### 可观测性
+- [ ] 每个底事件至少有 1 个指标监控
+- [ ] 每个底事件至少有 1 种诊断命令
+- [ ] 每个底事件有明确的判定条件
+
+### 可维护性
+- [ ] 编号遵循规范（TE-/IE-/BE- 前缀）
+- [ ] 修复动作有风险分级（🟢/🟡/🔴）
+- [ ] 修复操作包含回滚方案
+
+### Agent 友好性
+- [ ] 每个底事件有结构化的修复动作
+- [ ] 修复动作标注了自动化程度（L1/L2/L3）

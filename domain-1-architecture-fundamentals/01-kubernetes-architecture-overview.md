@@ -1,6 +1,32 @@
+---
+title: "Kubernetes 架构全景图"
+description: "全面介绍 Kubernetes 架构总览、控制平面、节点组件、核心对象模型、高可用架构、扩展机制、安全架构和可观测性"
+category: "domain-1-architecture"
+tags: [k8s, architecture, kubernetes, control-plane, node, ha, security, observability]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "../domain-2-design-principles/01-design-principles-foundations.md"
+    type: "depth"
+    desc: "设计原则——理解 K8s 的设计哲学"
+  - path: "../domain-3-control-plane/01-plane-architecture-overview.md"
+    type: "depth"
+    desc: "控制平面架构深度解析"
+  - path: "../topic-fta/list/pod-fta.md"
+    type: "fta"
+    desc: "Pod 故障树分析"
+  - path: "../topic-cheat-sheet/k8s.md"
+    type: "cheatsheet"
+    desc: "K8s 命令速查卡"
+---
+
 # Kubernetes 架构全景图 (Architecture Overview)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [Kubernetes Concepts](https://kubernetes.io/docs/concepts/architecture/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-05 | **参考**: [Kubernetes Concepts](https://kubernetes.io/docs/concepts/architecture/)
 
 ## 目录
 

@@ -1,3 +1,26 @@
+---
+title: "集群生命周期管理"
+description: "深入解析 K8s 集群生命周期管理：集群创建（kubeadm/ACK/EKS/GKE）、证书管理、升级策略、扩缩容、节点池管理与集群退役"
+category: "domain-9-platform-ops"
+tags: [k8s, cluster, lifecycle, upgrade, kubeadm, certificate, node-pool, operations]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-platform-ops-overview.md"
+    type: "depth"
+    desc: "平台运维概述"
+  - path: "06-monitoring-alerting-system.md"
+    type: "depth"
+    desc: "监控告警体系"
+  - path: "../topic-fta/list/cluster-upgrade-fta.md"
+    type: "fta"
+    desc: "集群升级故障树"
+---
+
 # 集群生命周期管理 (Cluster Lifecycle Management)
 
 ## 概述

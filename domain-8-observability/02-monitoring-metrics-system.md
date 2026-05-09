@@ -1,3 +1,26 @@
+---
+title: "指标监控体系详解"
+description: "深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus Operator、Alertmanager 与告警规则配置"
+category: "domain-8-observability"
+tags: [k8s, prometheus, metrics, monitoring, alertmanager, promql, servicemonitor]
+k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
+last_updated: "2026-05"
+authors:
+  - name: "KUDIG Team"
+    role: "contributor"
+difficulty: "intermediate"
+related_docs:
+  - path: "01-observability-architecture-overview.md"
+    type: "depth"
+    desc: "可观测性架构体系"
+  - path: "04-distributed-tracing.md"
+    type: "depth"
+    desc: "分布式追踪体系"
+  - path: "../topic-cheat-sheet/promql.md"
+    type: "cheatsheet"
+    desc: "PromQL 速查卡"
+---
+
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [prometheus.io/docs](https://prometheus.io/docs/)
