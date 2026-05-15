@@ -1,0 +1,144 @@
+site_name: KUDIG-DATABASE - Kubernetes 生产运维全域知识库
+site_description: 面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库
+site_author: KUDIG Team
+site_url: http://localhost:8000
+
+repo_name: kudig-io/kudig-database
+repo_url: https://github.com/kudig-io/kudig-database
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.integrity
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+      prebuild_index: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.snippets
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - 核心知识域 (Domain 1-12):
+    - domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md
+    - domain-2-design-principles/01-design-principles-foundations.md
+    - domain-3-control-plane/01-plane-architecture-overview.md
+    - domain-4-workloads/01-workload-overview-architecture.md
+    - domain-5-networking/01-networking-overview.md
+    - domain-6-storage/01-storage-overview.md
+    - domain-7-security/01-security-overview.md
+    - domain-8-observability/01-observability-overview.md
+    - domain-9-platform-ops/01-platform-ops-overview.md
+    - domain-10-extensions/01-extensions-overview.md
+    - domain-11-ai-infra/01-ai-infra-overview.md
+    - domain-12-troubleshooting/01-troubleshooting-overview.md
+  - 底层基础知识域 (Domain 13-17):
+    - domain-13-docker/01-docker-overview.md
+    - domain-14-linux/01-linux-overview.md
+    - domain-15-network-fundamentals/01-network-overview.md
+    - domain-16-storage-fundamentals/01-storage-fundamentals.md
+    - domain-17-cloud-provider/01-cloud-provider-overview.md
+  - 企业级运维专题 (Domain 18+):
+    - domain-18-production-operations/01-production-ops-overview.md
+    - domain-19-papers/01-papers-overview.md
+    - domain-20-enterprise-monitoring-alerting/01-monitoring-overview.md
+    - domain-21-logging-management-analytics/01-logging-overview.md
+    - domain-22-container-image-management/01-container-image-overview.md
+    - domain-23-gitops-ci-cd/01-gitops-overview.md
+    - domain-24-infrastructure-as-code/01-iac-overview.md
+    - domain-25-cloud-native-security/01-security-overview.md
+    - domain-26-service-mesh-microservices/01-service-mesh-overview.md
+    - domain-27-multi-cloud-hybrid/01-multi-cloud-overview.md
+    - domain-28-enterprise-database-middleware/01-database-overview.md
+    - domain-29-automated-testing-quality/01-testing-overview.md
+    - domain-30-disaster-recovery-business-continuity/01-dr-overview.md
+    - domain-31-hardware/01-hardware-overview.md
+    - domain-32-yaml-manifests/01-yaml-overview.md
+    - domain-33-kubernetes-events/01-events-overview.md
+    - domain-34-cncf-landscape/01-cncf-overview.md
+    - domain-35-ebpf-technology/01-ebpf-overview.md
+    - domain-36-platform-engineering/01-platform-eng-overview.md
+    - domain-37-edge-computing/01-edge-overview.md
+    - domain-38-webassembly-cloud-native/01-wasm-overview.md
+    - domain-39-supply-chain-security/01-supply-chain-overview.md
+    - domain-40-cloud-native-api-gateway/01-api-gateway-overview.md
+  - 专题资源:
+    - topic-ai-agent/01-ai-agent-fundamentals.md
+    - topic-ai-coding/01-ai-coding-overview.md
+    - topic-application-architecture/01-app-arch-overview.md
+    - topic-cheat-sheet/01-cheat-sheet-overview.md
+    - topic-deployment/01-deployment-overview.md
+    - topic-dictionary/01-dictionary-overview.md
+    - topic-febm/01-febm-overview.md
+    - topic-fta/01-fta-methodology.md
+    - topic-functions/01-functions-overview.md
+    - topic-index/01-index-overview.md
+    - topic-java-kubernetes/01-java-k8s-overview.md
+    - topic-learn/01-learn-overview.md
+    - topic-migration/01-migration-overview.md
+    - topic-presentations/01-presentations-overview.md
+    - topic-publish/01-publish-overview.md
+    - topic-release-notes/01-release-notes.md
+    - topic-skills/01-skills-overview.md
+    - topic-structural-trouble-shooting/01-structural-ts-overview.md
+    - topic-terway/01-terway-overview.md
+  - 可视化:
+    - visualizations/index.md
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/kudig-io/kudig-database

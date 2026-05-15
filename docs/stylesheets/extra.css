@@ -1,0 +1,107 @@
+/* ==========================================================================
+   KUDIG Database — Material Theme Customizations
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  --kd-brand: #2563eb;
+  --kd-brand-hover: #1d4ed8;
+  --kd-brand-light: #dbeafe;
+  --kd-brand-muted: #eff6ff;
+
+  --kd-n950: #0f172a;
+  --kd-n900: #1e293b;
+  --kd-n800: #334155;
+  --kd-n700: #475569;
+  --kd-n600: #64748b;
+  --kd-n500: #94a3b8;
+  --kd-n400: #94a3b8;
+  --kd-n300: #cbd5e1;
+  --kd-n200: #e2e8f0;
+  --kd-n100: #f1f5f9;
+  --kd-n50: #f8fafc;
+}
+
+/* ---------- Typography ---------- */
+html {
+  font-family: "Inter", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+}
+
+/* ---------- Font-size Control ---------- */
+html.font-size-sm { font-size: 14px; }
+html.font-size-md { font-size: 16px; }
+html.font-size-lg { font-size: 18px; }
+html.font-size-xl { font-size: 20px; }
+
+/* ---------- Code Blocks ---------- */
+.highlight pre {
+  background: #1e293b !important;
+  border-radius: 6px;
+  padding: 1rem;
+}
+.highlight code {
+  background: transparent !important;
+  color: #e2e8f0;
+}
+
+/* ---------- Tables ---------- */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  width: 100%;
+}
+.md-typeset table:not([class]) th {
+  background: var(--kd-n100);
+  font-weight: 600;
+}
+.md-typeset table:not([class]) tr:hover {
+  background: var(--kd-n50);
+}
+
+/* ---------- Links ---------- */
+.md-typeset a {
+  color: var(--kd-brand);
+}
+.md-typeset a:hover {
+  color: var(--kd-brand-hover);
+}
+
+/* ---------- Admonitions ---------- */
+.md-typeset .admonition {
+  border-radius: 6px;
+}
+
+/* ---------- Visualization iframe container ---------- */
+.viz-iframe {
+  width: 100%;
+  height: 800px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ---------- Reading Progress ---------- */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--kd-brand);
+  z-index: 9999;
+  transition: width 0.1s ease;
+}
+
+/* ---------- Back to Top ---------- */
+.md-top__link {
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.9);
+}
