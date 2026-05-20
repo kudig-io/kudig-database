@@ -1,3 +1,39 @@
+---
+title: 集群高可用与灾备故障排查指南
+description: '# 集群高可用与灾备故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- pdb
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 集群高可用与灾备故障排查指南 是什么
+- 如何 集群高可用与灾备故障排查指南
+- 集群高可用与灾备故障排查指南 故障排查
+- 集群高可用与灾备故障排查指南 排障步骤
+trigger_keywords:
+- 集群高可用与灾备故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 集群高可用与灾备故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, etcd v3.4 - v3.5 | **最后更新**: 2026-01 | **难度**: 高级

@@ -1,3 +1,38 @@
+---
+title: 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册 是什么
+- 如何 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+trigger_keywords:
+- 第八章：FEBM
+- 生产环境快速启动与
+- Kubernetes
+- 故障取证手册
+- febm
+---
+
+
 # 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
 
 > **目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队  

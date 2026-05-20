@@ -1,3 +1,34 @@
+---
+title: Agent CLI 基础概念与架构模式
+description: '# Agent CLI 基础概念与架构模式'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent CLI 基础概念与架构模式 是什么
+- 如何 Agent CLI 基础概念与架构模式
+trigger_keywords:
+- Agent
+- CLI
+- 基础概念与架构模式
+- ai
+- agent
+---
+
+
 # Agent CLI 基础概念与架构模式
 
 > **文档类型**: 基础概念专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI, Terminal Agent, REPL Loop, MCP, Agentic Coding, CLI Architecture

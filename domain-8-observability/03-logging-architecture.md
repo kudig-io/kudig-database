@@ -1,3 +1,54 @@
+---
+title: 03 - 日志收集架构详解 (Logging Architecture)
+description: '# 03 - 日志收集架构详解 (Logging Architecture)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- kubelet
+- grafana
+- containerd
+- docker
+- elasticsearch
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 日志收集架构详解 (Logging Architecture) 是什么
+- 如何 日志收集架构详解 (Logging Architecture)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 日志收集架构详解
+- Logging
+- Architecture
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 03 - 日志收集架构详解 (Logging Architecture)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/)

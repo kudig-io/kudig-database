@@ -1,3 +1,42 @@
+---
+title: OpenTelemetry分布式追踪与可观测性深度实践
+description: '# OpenTelemetry分布式追踪与可观测性深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- jaeger
+- opa
+- postgresql
+- kafka
+- elasticsearch
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- OpenTelemetry分布式追踪与可观测性深度实践 是什么
+- 如何 OpenTelemetry分布式追踪与可观测性深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- OpenTelemetry分布式追踪与可观测性深度实践
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # OpenTelemetry分布式追踪与可观测性深度实践
 
 > **作者**: 可观测性架构专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

@@ -1,25 +1,72 @@
 ---
-title: "kubectl 命令完整参考"
-description: "Kubernetes kubectl 命令完整参考，覆盖日常操作、故障排查、资源管理、集群运维等场景"
-category: "domain-1-architecture"
-tags: [k8s, kubectl, cli, command, reference, devops]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: kubectl 命令完整参考
+description: Kubernetes kubectl 命令完整参考，覆盖日常操作、故障排查、资源管理、集群运维等场景
+category: domain-1-architecture
+tags:
+- k8s
+- kubectl
+- cli
+- command
+- reference
+- devops
+- etcd
+- apiserver
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 10min
+intent_queries:
+- kubectl 命令完整参考 是什么
+- 如何 kubectl 命令完整参考
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- kubectl
+- 命令完整参考
+- architecture
+- fundamentals
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "beginner"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-kubernetes-architecture-overview.md"
-    type: "depth"
-    desc: "架构全景图"
-  - path: "../topic-cheat-sheet/k8s.md"
-    type: "cheatsheet"
-    desc: "K8s 速查卡"
-  - path: "../domain-12-troubleshooting/"
-    type: "troubleshooting"
-    desc: "故障排查专题"
+- path: 01-kubernetes-architecture-overview.md
+  type: depth
+  desc: 架构全景图
+- path: ../topic-cheat-sheet/k8s.md
+  type: cheatsheet
+  desc: K8s 速查卡
+- path: ../domain-12-troubleshooting/
+  type: troubleshooting
+  desc: 故障排查专题
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
 ---
+
 
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
 

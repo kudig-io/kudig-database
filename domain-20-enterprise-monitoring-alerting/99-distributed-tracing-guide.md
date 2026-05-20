@@ -1,3 +1,46 @@
+---
+title: K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)
+description: '# K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- jaeger
+- helm
+- docker
+- mysql
+- elasticsearch
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) 是什么
+- 如何 K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- K8s
+- 分布式追踪实践指南
+- Jaeger
+- Tempo
+- OpenTelemetry
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)
 
 > **适用版本**: Jaeger v1.65 / Grafana Tempo v2.7 / OpenTelemetry Collector v0.120  

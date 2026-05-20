@@ -1,3 +1,53 @@
+---
+title: Kubernetes PKI 安全最佳实践
+description: '# Kubernetes PKI 安全最佳实践'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- job
+- rbac
+- webhook
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- Kubernetes 管理员
+- 合规管理员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes PKI 安全加固 私钥保护 证书监控
+- Kubernetes CA 私钥离线存储 HSM KMS
+- 证书有效期配置 轮换策略 Prometheus 告警
+- CIS Benchmark Kubernetes 证书相关检查项
+- 最小权限原则 CA 证书 Organization 策略
+trigger_keywords:
+- PKI 安全
+- 私钥保护
+- KMS
+- HSM
+- 证书监控
+- Prometheus 告警
+- CIS Benchmark
+- 最小权限
+- CA 离线存储
+- 证书轮换
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/ca-generation
+- cluster-cert/cert-rotation
+---
+
+
 # Kubernetes PKI 安全最佳实践
 
 ## 概述
@@ -323,3 +373,53 @@ echo "Inventory saved to $OUTPUT"
 | 手动编辑证书文件 | 格式损坏、密钥不匹配 | 使用 kubeadm 或脚本自动化 |
 | 没有证书备份 | 丢失后无法恢复 | 定期备份 /etc/kubernetes/pki 到加密存储 |
 | Webhook 使用 kubernetes-ca | CA 轮换影响 Webhook | Webhook 使用独立的 CA |
+
+---
+
+## 七、供应链安全
+
+### 7.1 证书签发审批流程
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                证书签发审批流程 (企业级)                      │
+├─────────────────────────────────────────────────────────────┤
+│  1. 申请阶段                                                 │
+│     - 组件/服务提交 CSR 或证书申请单                          │
+│     - 指定 CommonName、Organization、有效期、SAN             │
+│     - 关联到具体的 RBAC 权限申请                             │
+│                                                              │
+│  2. 安全审查                                                 │
+│     - CN/O 命名规范检查                                      │
+│     - Organization 权限范围评估                              │
+│     - SAN 必要性确认                                         │
+│     - 签名算法检查（拒绝 SHA-1、MD5）                        │
+│                                                              │
+│  3. 审批与签发                                               │
+│     - 由安全团队审批                                         │
+│     - 使用 HSM 或 KMS 保护的 CA 私钥签发                     │
+│     - 签发记录审计日志                                       │
+│                                                              │
+│  4. 分发与配置                                               │
+│     - 证书分发到目标组件                                      │
+│     - 更新对应的 RBAC 绑定                                   │
+│     - 监控证书使用情况                                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 7.2 入侵检测与证书异常监控
+
+```yaml
+# 异常证书行为监控指标
+# 1. 新证书签发（除 kubeadm 正常轮换外）
+# 2. 证书 Subject 异常变更
+# 3. 来自异常 IP/区域的证书申请
+# 4. CA 密钥访问日志异常
+
+# 推荐告警规则 (PromQL)
+- alert: CertificateSigningRateAnomaly
+  expr: rate(apiserver_certificate_signing_requests_total[5m]) > 10
+  for: 5m
+  labels:
+    severity: warning
+```

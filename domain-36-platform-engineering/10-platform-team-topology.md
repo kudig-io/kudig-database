@@ -1,3 +1,42 @@
+---
+title: 平台团队拓扑与运营 (Platform Team Topology and Operations)
+description: '## 概述 (Overview)'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- jaeger
+- istio
+- cilium
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 平台团队拓扑与运营 (Platform Team Topology and Operations) 是什么
+- 如何 平台团队拓扑与运营 (Platform Team Topology and Operations)
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- 平台团队拓扑与运营
+- Platform
+- Team
+- Topology
+- and
+- Operations
+- platform
+- engineering
+---
+
+
 # 平台团队拓扑与运营 (Platform Team Topology and Operations)
 
 ## 概述 (Overview)

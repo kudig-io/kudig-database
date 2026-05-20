@@ -1,3 +1,33 @@
+---
+title: 控制对 Kubernetes API 的访问
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 控制对 Kubernetes API 的访问 是什么
+- 如何 控制对 Kubernetes API 的访问
+trigger_keywords:
+- 控制对
+- Kubernetes
+- API
+- 的访问
+- dictionary
+title_en: Controlling Access To The Kubernetes Api
+---
+
+
 # 控制对 Kubernetes API 的访问
 
 ## 概述

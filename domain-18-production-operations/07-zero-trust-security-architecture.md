@@ -1,3 +1,37 @@
+---
+title: 07-零信任安全架构
+description: '# 07-零信任安全架构'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- istio
+- docker
+- opa
+- falco
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 零信任安全架构 是什么
+- 如何 零信任安全架构
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 零信任安全架构
+- production
+- operations
+---
+
+
 # 07-零信任安全架构
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

@@ -1,3 +1,33 @@
+---
+title: 第八章：AI Agent 时代的运维范式革命
+description: '# 第八章：AI Agent 时代的运维范式革命'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第八章：AI Agent 时代的运维范式革命 是什么
+- 如何 第八章：AI Agent 时代的运维范式革命
+- 第八章：AI Agent 时代的运维范式革命 根因分析
+- 第八章：AI Agent 时代的运维范式革命 故障树
+trigger_keywords:
+- 第八章：AI
+- Agent
+- 时代的运维范式革命
+- fta
+---
+
 # 第八章：AI Agent 时代的运维范式革命
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  

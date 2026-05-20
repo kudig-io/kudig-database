@@ -1,20 +1,72 @@
 ---
-fta_id: "FTA-PDB-025"
-title: "PDB 异常故障树分析"
-component: "pdb"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-PDB-001"
-last_updated: "2026-05"
+title: PDB 异常故障树分析
+description: '- **目标**：覆盖 PDB 阻塞驱逐、配置错误与升级失败的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- pdb
+- pod-disruption-budget
+- eviction
+- drain
+- apiserver
+- controller-manager
+- opa
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- PDB 异常故障树分析 是什么
+- 如何 PDB 异常故障树分析
+- PDB 异常故障树分析 根因分析
+- PDB 异常故障树分析 故障树
+trigger_keywords:
+- PDB
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, pdb, pod-disruption-budget, eviction, drain]
-related_skills: []
-knowledge_refs:
-  - "../domain-4-workloads/10-daemonset.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md
+  label: '结构化排障: 04-pdb-troubleshooting'
+fta_metadata:
+  fta_id: FTA-PDB-001
+  top_event: PDB 异常 (阻塞驱逐/配置错误/升级失败)
+  top_event_id: TE-PDB-001
+  bottom_events_count: 14
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl drain node <name> --ignore-daemonsets 卡住超过 5 分钟"
+    - "kubectl get events -A | grep CannotEvict 显示 PDB 阻止驱逐"
+    - "滚动更新一直处于暂停状态"
+agent_notes:
+  decision_tree_entry: "kubectl get pdb -A -o wide 检查 PDB 状态; kubectl describe pdb <name> -n <ns>"
+  critical_commands:
+    - "kubectl get pdb -A -o wide"
+    - "kubectl describe pdb <name> -n <ns>"
+    - "kubectl get events -A | grep -E 'Eviction|CannotEvict|PdbViolations'"
+    - "kubectl get pods -n <ns> -l app=<name> -o wide"
+  danger_operations:
+    - action: "kubectl delete pdb <name> -n <ns>"
+      risk: "删除 PDB 会移除对 Pod 数量的保护，可能导致服务中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'CannotEvict|PdbViolations|Eviction' 显示 PDB 相关阻止事件 -->
 
 # PDB 异常 FTA 树
 

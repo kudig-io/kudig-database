@@ -1,3 +1,50 @@
+---
+title: GPU监控与可观测性
+description: '# GPU监控与可观测性'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- kubelet
+- prometheus
+- grafana
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- GPU监控与可观测性 是什么
+- 如何 GPU监控与可观测性
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- GPU监控与可观测性
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # GPU监控与可观测性
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) | [GPU Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/)

@@ -1,25 +1,72 @@
 ---
-title: "GPU 调度与管理"
-description: "深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD GPU 调度与 GPU 健康监控"
-category: "domain-11-ai-infra"
-tags: [k8s, gpu, nvidia, amd, device-plugin, mig, gpu-scheduling, time-slicing]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: GPU 调度与管理
+description: 深入解析 K8s GPU 调度：NVIDIA Device Plugin、MIG 调度、GPU 资源配额、时间切片、多实例 GPU (MIG)、AMD GPU 调度与 GPU 健康监控
+category: domain-11-ai-infra
+tags:
+- k8s
+- gpu
+- nvidia
+- amd
+- device-plugin
+- mig
+- gpu-scheduling
+- time-slicing
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- GPU 调度与管理 是什么
+- 如何 GPU 调度与管理
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- GPU
+- 调度与管理
+- ai
+- infra
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-ai-infrastructure-overview.md"
-    type: "depth"
-    desc: "AI 基础设施架构"
-  - path: "05-distributed-training-frameworks.md"
-    type: "depth"
-    desc: "分布式训练框架"
-  - path: "../topic-fta/list/gpu-fta.md"
-    type: "fta"
-    desc: "GPU 故障树"
+- path: 01-ai-infrastructure-overview.md
+  type: depth
+  desc: AI 基础设施架构
+- path: 05-distributed-training-frameworks.md
+  type: depth
+  desc: 分布式训练框架
+- path: ../topic-fta/list/gpu-fta.md
+  type: fta
+  desc: GPU 故障树
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: fta
+  path: ../topic-fta/list/gpu-fta.md
+  label: '故障树: gpu'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
 ---
+
 
 # 133 - GPU调度与管理 (GPU Scheduling & Management)
 

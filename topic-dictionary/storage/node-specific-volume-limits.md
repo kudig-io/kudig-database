@@ -1,3 +1,34 @@
+---
+title: Node-specific Volume Limits（节点特定卷限制）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- statefulset
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Node-specific Volume Limits（节点特定卷限制） 是什么
+- 如何 Node-specific Volume Limits（节点特定卷限制）
+trigger_keywords:
+- Node-specific
+- Volume
+- Limits
+- 节点特定卷限制
+- dictionary
+title_en: Nodes
+---
+
+
 # Node-specific Volume Limits（节点特定卷限制）
 
 ## 概述

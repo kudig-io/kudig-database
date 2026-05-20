@@ -1,3 +1,46 @@
+---
+title: 'Domain-4: Kubernetes工作负载'
+description: '## 概述'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- hpa
+- vpa
+- daemonset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-4: Kubernetes工作负载 是什么'
+- '如何 Domain-4: Kubernetes工作负载'
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 'Domain-4:'
+- Kubernetes工作负载
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
 # Domain-4: Kubernetes工作负载
 
 > **文档数量**: 24 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes 1.20+

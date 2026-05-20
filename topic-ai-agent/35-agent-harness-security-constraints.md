@@ -1,3 +1,36 @@
+---
+title: Agent Harness 安全与约束工程
+description: '# Agent Harness 安全与约束工程'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- helm
+- rbac
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness 安全与约束工程 是什么
+- 如何 Agent Harness 安全与约束工程
+trigger_keywords:
+- Agent
+- Harness
+- 安全与约束工程
+- ai
+- agent
+---
+
+
 # Agent Harness 安全与约束工程
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Constraints, Security, 安全边界, 权限控制, PII 保护, 提示注入防御, 人工审批, 成本控制, RBAC, 合规审计

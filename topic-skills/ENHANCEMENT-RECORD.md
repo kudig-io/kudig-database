@@ -1,3 +1,37 @@
+---
+title: topic-skills 全面增强记录
+description: 本文档记录 topic-skills 目录从运维角度进行的系统性全面增强工作。
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- prometheus
+- grafana
+- hpa
+- vpa
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- topic-skills 全面增强记录 是什么
+- 如何 topic-skills 全面增强记录
+trigger_keywords:
+- topic-skills
+- 全面增强记录
+- skills
+agent_execution_mode: L1
+---
+
+
 # topic-skills 全面增强记录
 
 > 本文档记录 topic-skills 目录从运维角度进行的系统性全面增强工作。

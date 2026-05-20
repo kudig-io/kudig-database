@@ -1,3 +1,36 @@
+---
+title: 第十一章：FTA 驱动的 Runbook 自动化
+description: '**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- rag
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十一章：FTA 驱动的 Runbook 自动化 是什么
+- 如何 第十一章：FTA 驱动的 Runbook 自动化
+- 第十一章：FTA 驱动的 Runbook 自动化 根因分析
+- 第十一章：FTA 驱动的 Runbook 自动化 故障树
+trigger_keywords:
+- 第十一章：FTA
+- 驱动的
+- Runbook
+- 自动化
+- fta
+---
+
 # 第十一章：FTA 驱动的 Runbook 自动化
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  

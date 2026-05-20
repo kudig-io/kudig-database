@@ -1,3 +1,38 @@
+---
+title: 第十四章：构建 FTA 系统的工程化方法
+description: '**所属部分**: 第四部分 - FTA 系统工程实践'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- kubelet
+- prometheus
+- grafana
+- jaeger
+- coredns
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十四章：构建 FTA 系统的工程化方法 是什么
+- 如何 第十四章：构建 FTA 系统的工程化方法
+- 第十四章：构建 FTA 系统的工程化方法 根因分析
+- 第十四章：构建 FTA 系统的工程化方法 故障树
+trigger_keywords:
+- 第十四章：构建
+- FTA
+- 系统的工程化方法
+- fta
+---
+
 # 第十四章：构建 FTA 系统的工程化方法
 
 > **所属部分**: 第四部分 - FTA 系统工程实践  

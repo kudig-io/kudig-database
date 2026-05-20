@@ -1,3 +1,35 @@
+---
+title: 主流 Agent CLI 工具全景对比
+description: '**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code, Codex CLI, Aider, Goose, Amazon Q, Gemini CLI,
+  Agent CLI 选型'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- 主流 Agent CLI 工具全景对比 是什么
+- 如何 主流 Agent CLI 工具全景对比
+trigger_keywords:
+- 主流
+- Agent
+- CLI
+- 工具全景对比
+- ai
+- agent
+---
+
+
 # 主流 Agent CLI 工具全景对比
 
 > **文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code, Codex CLI, Aider, Goose, Amazon Q, Gemini CLI, Agent CLI 选型

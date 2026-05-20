@@ -1,3 +1,56 @@
+---
+title: HA 集群删除注意事项
+category: cluster-delete
+tags:
+- ha
+- high-availability
+- etcd
+- quorum
+- load-balancer
+- control-plane
+- kubeadm
+- cluster-delete
+last_updated: 2026-05-18
+description: 深入分析高可用（HA）Kubernetes 集群删除的关键注意事项，涵盖 etcd 仲裁维护、删除顺序要求、负载均衡器处理、控制面组件顺序退出、External etcd HA 集群删除以及部分删除（缩小控制面规模）等场景。
+difficulty: advanced
+intent_queries:
+- kubernetes HA cluster deletion注意事项
+- etcd quorum maintenance cluster deletion
+- HA cluster control plane removal sequence
+- kubernetes HA cluster teardown etcd member
+- load balancer update HA cluster deletion
+trigger_keywords:
+- HA cluster deletion
+- etcd quorum
+- etcd member removal
+- stacked etcd
+- external etcd
+- kube-vip
+- load balancer
+- control plane
+- upload-certs
+- kubeadm-config
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-3-control-plane
+- domain-2-installation
+related_topics:
+- cluster-delete
+- etcd-cleanup
+- reset
+- force-delete
+- cleanup
+- cloud-delete
+domain_link: '[Control Plane](../domain-3-control-plane/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # HA 集群删除注意事项
 
 ## 概述

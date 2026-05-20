@@ -1,3 +1,24 @@
+---
+title: 快速安装 mdbook（Windows）
+description: '## 方案 1：使用 Cargo 安装（需要先安装 Rust）'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 快速安装 mdbook（Windows） 是什么
+- 如何 快速安装 mdbook（Windows）
+trigger_keywords:
+- 快速安装
+- mdbook
+- Windows
+---
+
 # 快速安装 mdbook（Windows）
 
 ## 方案 1：使用 Cargo 安装（需要先安装 Rust）

@@ -1,3 +1,42 @@
+---
+title: 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+description: '## 概述 (Overview)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- scheduler
+- prometheus
+- opa
+- redis
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning) 是什么
+- 如何 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 边缘
+- AI
+- 推理与联邦学习
+- Edge
+- AI
+- Inference
+- and
+- Federated
+---
+
+
 # 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
 
 ## 概述 (Overview)

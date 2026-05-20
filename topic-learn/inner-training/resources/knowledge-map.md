@@ -1,3 +1,51 @@
+---
+title: ACK/ACR/K8S 内部培训知识图谱
+description: '├── Week 2: 安全认证与监控运维'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- prometheus
+- grafana
+- flannel
+- coredns
+- ingress
+- rbac
+- networkpolicy
+last_updated: 2026-05-18
+difficulty: beginner
+reading_level: beginner
+audience:
+- All kudig-database users
+- ACK learners
+- New joiners
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes knowledge system architecture
+- ACK/ACR learning path knowledge graph
+- Kubernetes core concepts relationship
+- Inner training curriculum knowledge map
+- Kubernetes week by week learning
+trigger_keywords:
+- knowledge graph
+- knowledge map
+- concept relationship
+- curriculum
+- ACK
+- ACR
+- Kubernetes
+- week
+- core concept
+related_domains:
+- domain-17-cloud-provider
+- domain-1-architecture-fundamentals
+related_topics:
+- reading-sequence
+- commands-cheatsheet
+---
+
+
 # ACK/ACR/K8S 内部培训知识图谱
 
 > 按周组织的核心知识体系，用于系统回顾和查漏补缺

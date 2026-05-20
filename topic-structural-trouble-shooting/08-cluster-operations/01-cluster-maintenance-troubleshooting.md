@@ -1,8 +1,48 @@
+---
+title: 集群运维与升级故障排查指南
+description: '# 集群运维与升级故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+- pdb
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 集群运维与升级故障排查指南 是什么
+- 如何 集群运维与升级故障排查指南
+- 集群运维与升级故障排查指南 故障排查
+- 集群运维与升级故障排查指南 排障步骤
+trigger_keywords:
+- 集群运维与升级故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 集群运维与升级故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
 > - v1.25+ 移除 PodSecurityPolicy，使用 PSA 替代
 > - v1.27+ 移除部分废弃 API (如 CSIStorageCapacity v1beta1)
 > - v1.28+ 支持 UVIP (Unknown Version Interoperability Proxy)

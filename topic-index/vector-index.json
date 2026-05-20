@@ -1,0 +1,2092 @@
+{
+  "ai-gpu-index.md": {
+    "keyword": "ai-gpu",
+    "category": "TC-DATA-AI",
+    "severity_hint": "P1-P2",
+    "description": "GPU 调度、CUDA、模型训练、AI 工作负载相关问题",
+    "related_skills": [
+      "ai-gpu",
+      "ai gpu",
+      "AI-GPU",
+      "ai-gpu"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "control_plane": 339
+    },
+    "total_links": 339,
+    "links": [
+      {
+        "title": "控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)",
+        "url": "./domain-3-control-plane/07-plane-upgrade-migration.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)",
+        "url": "./domain-3-control-plane/22-container-storage-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Domain-6 存储 — 开源项目索引",
+        "url": "./domain-6-storage/00-open-source-projects-index.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "01 - 存储架构概览与核心组件",
+        "url": "./domain-6-storage/01-storage-architecture-overview.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "02 - PV/PVC核心概念与企业级实践",
+        "url": "./domain-6-storage/02-pv-architecture-fundamentals.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "03 - PVC使用模式与最佳实践",
+        "url": "./domain-6-storage/03-pvc-patterns-practices.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "04 - StorageClass动态供给与多租户管理",
+        "url": "./domain-6-storage/04-storageclass-dynamic-provisioning.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "05 - CSI驱动集成与运维管理",
+        "url": "./domain-6-storage/05-csi-drivers-integration.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "06 - 存储基础概念详解",
+        "url": "./domain-6-storage/06-storage-fundamental-concepts.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "07 - 存储日常运维操作手册",
+        "url": "./domain-6-storage/07-storage-daily-operations.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "08 - 存储性能调优与优化策略",
+        "url": "./domain-6-storage/08-storage-performance-tuning.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "09 - PV/PVC故障排查与解决方案",
+        "url": "./domain-6-storage/09-pv-pvc-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "10 - 存储备份与灾难恢复",
+        "url": "./domain-6-storage/10-storage-backup-disaster-recovery.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "11 - 存储高级特性与优化策略",
+        "url": "./domain-6-storage/11-storage-advanced-features.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "12 - 存储监控告警与性能调优",
+        "url": "./domain-6-storage/12-storage-monitoring-alerting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "13 - 存储安全与合规管理",
+        "url": "./domain-6-storage/13-storage-security-compliance.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "14 - 云原生存储与多云策略",
+        "url": "./domain-6-storage/14-cloud-native-storage.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "15 - 存储灾备与迁移策略",
+        "url": "./domain-6-storage/15-storage-disaster-recovery.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "16 - CSI 迁移：从 In-Tree 存储插件到 CSI",
+        "url": "./domain-6-storage/16-csi-migration-in-tree-to-csi.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "平台升级与迁移策略 (Platform Upgrade & Migration Strategy)",
+        "url": "./domain-9-platform-ops/16-platform-upgrade-migration.md",
+        "section": "control_plane"
+      }
+    ]
+  },
+  "backup-dr-index.md": {
+    "keyword": "backup",
+    "category": "TC-DATA-BACKUP",
+    "severity_hint": "P1-P2",
+    "description": "Velero 备份、快照、灾难恢复相关问题",
+    "related_skills": [
+      "FTA-BACKUP-001",
+      "backup",
+      "backup",
+      "BACKUP",
+      "backup"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 15,
+      "design": 272
+    },
+    "total_links": 287,
+    "links": [
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "03 - 功能和API表",
+        "url": "./domain-1-architecture-fundamentals/03-api-versions-features.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "13 - Kubernetes 性能调优专项指南",
+        "url": "./domain-1-architecture-fundamentals/13-performance-tuning-guide.md",
+        "section": ""
+      },
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "17 - 生产环境运维最佳实践 (Production Operations Best Practices)",
+        "url": "./domain-1-architecture-fundamentals/17-production-operations-best-practices.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.25 - v1.33 特性对比总表",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 生态系统兼容性矩阵",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 实战案例集",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 升级实操指南",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - Operator 模式与控制器开发 (Operator Guide)",
+        "url": "./domain-2-design-principles/12-operator-development-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 准入控制与 Webhook 机制深度解析",
+        "url": "./domain-2-design-principles/13-admission-control-webhooks.md",
+        "section": "design"
+      },
+      {
+        "title": "控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)",
+        "url": "./domain-3-control-plane/10-plane-backup-disaster-recovery.md",
+        "section": "design"
+      }
+    ]
+  },
+  "cert-index.md": {
+    "keyword": "certificate",
+    "category": "TC-SEC-CERT",
+    "severity_hint": "P0",
+    "description": "证书过期、CSR、TLS 握手相关问题",
+    "related_skills": [
+      "SKILL-SEC-001",
+      "FTA-CERT-001",
+      "certificate",
+      "certificate",
+      "CERTIFICATE",
+      "certificate",
+      "tls",
+      "csr",
+      "x509",
+      "cert-manager"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 22,
+      "troubleshooting": 200
+    },
+    "total_links": 222,
+    "links": [
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "13 - Kubernetes 性能调优专项指南",
+        "url": "./domain-1-architecture-fundamentals/13-performance-tuning-guide.md",
+        "section": ""
+      },
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "15 - Kubernetes 可观测性架构体系",
+        "url": "./domain-1-architecture-fundamentals/15-observability-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "17 - 生产环境运维最佳实践 (Production Operations Best Practices)",
+        "url": "./domain-1-architecture-fundamentals/17-production-operations-best-practices.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "Kubectl v1.29 - v1.33 新命令与用法速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件 v1.29 - v1.33 新特性速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 生态系统兼容性矩阵",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 实战案例集",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 生产环境最佳实践",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.33 升级实操指南",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md",
+        "section": ""
+      },
+      {
+        "title": "83 - 网络加密与mTLS",
+        "url": "./domain-5-networking/18-network-encryption-mtls.md",
+        "section": ""
+      },
+      {
+        "title": "130 - Ingress TLS 与证书管理",
+        "url": "./domain-5-networking/22-ingress-tls-certificate.md",
+        "section": ""
+      },
+      {
+        "title": "证书管理与 TLS 配置",
+        "url": "./domain-7-security/10-certificate-management.md",
+        "section": ""
+      }
+    ]
+  },
+  "cluster-index.md": {
+    "keyword": "cluster",
+    "category": "TC-INFRA-CP",
+    "severity_hint": "P0",
+    "description": "集群整体可用性、升级、高可用相关问题",
+    "related_skills": [
+      "SKILL-CP-001",
+      "SKILL-NODE-001",
+      "FTA-CLUSTER-001",
+      "cluster",
+      "cluster",
+      "CLUSTER",
+      "cluster"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 3,
+      "design": 311
+    },
+    "total_links": 314,
+    "links": [
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 声明式 API 与面向终态设计 (Declarative API)",
+        "url": "./domain-2-design-principles/02-declarative-api-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 高可用架构模式 (HA Patterns)",
+        "url": "./domain-2-design-principles/08-high-availability-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Kubernetes 源码结构与阅读指南 (Source Code)",
+        "url": "./domain-2-design-principles/09-source-code-walkthrough.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - Operator 模式与控制器开发 (Operator Guide)",
+        "url": "./domain-2-design-principles/12-operator-development-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)",
+        "url": "./domain-3-control-plane/07-plane-upgrade-migration.md",
+        "section": "design"
+      },
+      {
+        "title": "生产环境部署最佳实践 (Production Deployment Best Practices)",
+        "url": "./domain-3-control-plane/24-production-deployment-best-practices.md",
+        "section": "design"
+      },
+      {
+        "title": "32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)",
+        "url": "./domain-3-control-plane/32-kubeadm-cluster-lifecycle.md",
+        "section": "design"
+      },
+      {
+        "title": "集群容量规划",
+        "url": "./domain-4-workloads/22-cluster-capacity-planning.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 多集群网络联邦与跨集群通信",
+        "url": "./domain-5-networking/31-multi-cluster-federation.md",
+        "section": "design"
+      },
+      {
+        "title": "80 - 多集群网络互联",
+        "url": "./domain-5-networking/32-multi-cluster-networking.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 集群健康检查指南 (Cluster Health Check Guide)",
+        "url": "./domain-8-observability/13-cluster-health-check.md",
+        "section": "design"
+      },
+      {
+        "title": "20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)",
+        "url": "./domain-8-observability/16-multi-cluster-monitoring-governance.md",
+        "section": "design"
+      },
+      {
+        "title": "集群生命周期管理 (Cluster Lifecycle Management)",
+        "url": "./domain-9-platform-ops/02-cluster-lifecycle-management.md",
+        "section": "design"
+      },
+      {
+        "title": "多集群管理",
+        "url": "./domain-9-platform-ops/13-multi-cluster-management.md",
+        "section": "design"
+      }
+    ]
+  },
+  "dns-index.md": {
+    "keyword": "dns",
+    "category": "TC-INFRA-NET",
+    "severity_hint": "P1",
+    "description": "CoreDNS、域名解析、服务发现相关问题",
+    "related_skills": [
+      "SKILL-NET-001",
+      "FTA-DNS-001",
+      "dns",
+      "dns",
+      "DNS",
+      "dns"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 15,
+      "design": 238
+    },
+    "total_links": 253,
+    "links": [
+      {
+        "title": "Domain-1 架构基础 — 开源项目索引",
+        "url": "./domain-1-architecture-fundamentals/00-open-source-projects-index.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "08 - 多租户架构设计 (Multi-Tenancy Architecture)",
+        "url": "./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "13 - Kubernetes 性能调优专项指南",
+        "url": "./domain-1-architecture-fundamentals/13-performance-tuning-guide.md",
+        "section": ""
+      },
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "15 - Kubernetes 可观测性架构体系",
+        "url": "./domain-1-architecture-fundamentals/15-observability-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件 v1.29 - v1.33 新特性速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.29 - v1.33 版本特性深度指南",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md",
+        "section": ""
+      },
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 高可用架构模式 (HA Patterns)",
+        "url": "./domain-2-design-principles/08-high-availability-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "10 - CAP 定理与分布式系统基础 (CAP Theorem)",
+        "url": "./domain-2-design-principles/10-cap-theorem-distributed-systems.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      }
+    ]
+  },
+  "etcd-index.md": {
+    "keyword": "etcd",
+    "category": "TC-INFRA-CP",
+    "severity_hint": "P0",
+    "description": "etcd 存储、空间配额、选主、备份恢复相关问题",
+    "related_skills": [
+      "SKILL-CP-001",
+      "FTA-ETCD-001",
+      "etcd",
+      "etcd",
+      "ETCD",
+      "etcd"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 2,
+      "design": 286
+    },
+    "total_links": 288,
+    "links": [
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "Domain-2 设计原则 — 开源项目索引",
+        "url": "./domain-2-design-principles/00-open-source-projects-index.md",
+        "section": "design"
+      },
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 声明式 API 与面向终态设计 (Declarative API)",
+        "url": "./domain-2-design-principles/02-declarative-api-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 控制器模式与调谐循环 (Controller Pattern)",
+        "url": "./domain-2-design-principles/03-controller-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - List-Watch 机制深度解析 (List-Watch)",
+        "url": "./domain-2-design-principles/04-watch-list-mechanism.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - Informer 架构与工作队列 (Informer & Workqueue)",
+        "url": "./domain-2-design-principles/05-informer-workqueue.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - 资源版本与并发控制 (Concurrency Control)",
+        "url": "./domain-2-design-principles/06-resource-version-control.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Kubernetes 源码结构与阅读指南 (Source Code)",
+        "url": "./domain-2-design-principles/09-source-code-walkthrough.md",
+        "section": "design"
+      },
+      {
+        "title": "etcd 深度解析 (etcd Deep Dive)",
+        "url": "./domain-3-control-plane/11-etcd-deep-dive.md",
+        "section": "design"
+      },
+      {
+        "title": "30 - etcd运维操作",
+        "url": "./domain-3-control-plane/19-etcd-operations.md",
+        "section": "design"
+      },
+      {
+        "title": "集群生命周期管理 (Cluster Lifecycle Management)",
+        "url": "./domain-9-platform-ops/02-cluster-lifecycle-management.md",
+        "section": "design"
+      },
+      {
+        "title": "69 - Lease 与 Leader 选举机制 (Lease & Leader Election)",
+        "url": "./domain-9-platform-ops/19-lease-leader-election.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - etcd 故障排查 (etcd Troubleshooting)",
+        "url": "./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "API Server 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "etcd 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "Scheduler 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "Controller Manager 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md",
+        "section": "design"
+      }
+    ]
+  },
+  "gitops-cicd-index.md": {
+    "keyword": "gitops",
+    "category": "TC-APP-WORKLOAD",
+    "severity_hint": "P2-P3",
+    "description": "Argo CD、Flux、Jenkins、GitHub Actions 相关问题",
+    "related_skills": [
+      "gitops",
+      "gitops",
+      "GITOPS",
+      "gitops"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 11,
+      "control_plane": 295
+    },
+    "total_links": 306,
+    "links": [
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "08 - 多租户架构设计 (Multi-Tenancy Architecture)",
+        "url": "./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "15 - Kubernetes 可观测性架构体系",
+        "url": "./domain-1-architecture-fundamentals/15-observability-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "17 - 生产环境运维最佳实践 (Production Operations Best Practices)",
+        "url": "./domain-1-architecture-fundamentals/17-production-operations-best-practices.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "Kubectl v1.29 - v1.33 新命令与用法速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md",
+        "section": ""
+      },
+      {
+        "title": "GitOps自动化运维实践 (GitOps Automation Operations Practice)",
+        "url": "./domain-3-control-plane/26-gitops-automation-operations.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "GitOps配置管理 (GitOps Configuration Management)",
+        "url": "./domain-9-platform-ops/07-gitops-configuration-management.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "47 - Helm Chart开发与管理",
+        "url": "./domain-10-extensions/06-helm-charts-management.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践",
+        "url": "./domain-10-extensions/07-helm-advanced-operations.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "21 - CI/CD管道表",
+        "url": "./domain-10-extensions/08-cicd-pipelines.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "48 - GitOps工作流",
+        "url": "./domain-10-extensions/09-gitops-workflow-argocd.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "API Server 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Scheduler 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Controller Manager 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md",
+        "section": "control_plane"
+      }
+    ]
+  },
+  "network-index.md": {
+    "keyword": "network",
+    "category": "TC-INFRA-NET",
+    "severity_hint": "P1-P2",
+    "description": "CNI、DNS、Service、Ingress、NetworkPolicy 相关问题",
+    "related_skills": [
+      "SKILL-NET-001",
+      "SKILL-NET-002",
+      "SKILL-NET-003",
+      "SKILL-NET-004",
+      "FTA-NET-001",
+      "network",
+      "network",
+      "NETWORK",
+      "network",
+      "networking",
+      "cni",
+      "dns",
+      "service",
+      "ingress"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "design": 361
+    },
+    "total_links": 361,
+    "links": [
+      {
+        "title": "14 - 服务网格与微服务架构设计",
+        "url": "./domain-2-design-principles/14-service-mesh-architecture.md",
+        "section": "design"
+      },
+      {
+        "title": "CNI 容器网络接口深度解析 (Container Network Interface Deep Dive)",
+        "url": "./domain-3-control-plane/23-container-network-deep-dive.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes 网络基础 Network in a Nutshell",
+        "url": "./domain-5-networking/00-network-in-nutshell.md",
+        "section": "design"
+      },
+      {
+        "title": "Domain-5 网络 — 开源项目索引",
+        "url": "./domain-5-networking/00-open-source-projects-index.md",
+        "section": "design"
+      },
+      {
+        "title": "FAQ 文档",
+        "url": "./domain-5-networking/01-network-architecture-overview-faq.md",
+        "section": "design"
+      },
+      {
+        "title": "网络核心组件",
+        "url": "./domain-5-networking/01-network-architecture-overview.md",
+        "section": "design"
+      },
+      {
+        "title": "141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)",
+        "url": "./domain-5-networking/02-cni-architecture-fundamentals.md",
+        "section": "design"
+      },
+      {
+        "title": "76 - CNI插件深度对比",
+        "url": "./domain-5-networking/03-cni-plugins-comparison.md",
+        "section": "design"
+      },
+      {
+        "title": "142 - Flannel 完整指南 (Flannel Complete Guide)",
+        "url": "./domain-5-networking/04-flannel-complete-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "143 - Terway 高级指南 (Terway Advanced Guide)",
+        "url": "./domain-5-networking/05-terway-advanced-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)",
+        "url": "./domain-5-networking/06-service-concepts-types.md",
+        "section": "design"
+      },
+      {
+        "title": "77 - Service实现机制",
+        "url": "./domain-5-networking/07-service-implementation-details.md",
+        "section": "design"
+      },
+      {
+        "title": "72 - 服务拓扑与端点切片",
+        "url": "./domain-5-networking/08-service-topology-aware.md",
+        "section": "design"
+      },
+      {
+        "title": "Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)",
+        "url": "./domain-5-networking/09-kube-proxy-modes-performance.md",
+        "section": "design"
+      },
+      {
+        "title": "Service 高级特性与应用案例 (Service Advanced Features)",
+        "url": "./domain-5-networking/10-service-advanced-features.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - DNS 服务发现与 CoreDNS 调优",
+        "url": "./domain-5-networking/11-dns-service-discovery-coredns.md",
+        "section": "design"
+      },
+      {
+        "title": "33 - 服务发现与 DNS 配置 (Service Discovery & DNS)",
+        "url": "./domain-5-networking/12-dns-service-discovery.md",
+        "section": "design"
+      },
+      {
+        "title": "53 - CoreDNS 架构与核心原理 (Architecture & Principles)",
+        "url": "./domain-5-networking/13-coredns-architecture-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "54 - CoreDNS Corefile 配置详解 (Corefile Configuration)",
+        "url": "./domain-5-networking/14-coredns-configuration-corefile.md",
+        "section": "design"
+      },
+      {
+        "title": "55 - CoreDNS 插件完整参考 (Plugins Reference)",
+        "url": "./domain-5-networking/15-coredns-plugins-reference.md",
+        "section": "design"
+      }
+    ]
+  },
+  "node-index.md": {
+    "keyword": "node",
+    "category": "TC-INFRA-NODE",
+    "severity_hint": "P0-P1",
+    "description": "节点生命周期、状态、kubelet、容器运行时相关问题",
+    "related_skills": [
+      "SKILL-NODE-001",
+      "FTA-NODE-023",
+      "node",
+      "node",
+      "NODE",
+      "node",
+      "kubelet",
+      "runtime",
+      "containerd"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "design": 224
+    },
+    "total_links": 224,
+    "links": [
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 声明式 API 与面向终态设计 (Declarative API)",
+        "url": "./domain-2-design-principles/02-declarative-api-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 控制器模式与调谐循环 (Controller Pattern)",
+        "url": "./domain-2-design-principles/03-controller-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 高可用架构模式 (HA Patterns)",
+        "url": "./domain-2-design-principles/08-high-availability-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Kubernetes 源码结构与阅读指南 (Source Code)",
+        "url": "./domain-2-design-principles/09-source-code-walkthrough.md",
+        "section": "design"
+      },
+      {
+        "title": "10 - CAP 定理与分布式系统基础 (CAP Theorem)",
+        "url": "./domain-2-design-principles/10-cap-theorem-distributed-systems.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "15 - 混沌工程与故障注入设计",
+        "url": "./domain-2-design-principles/15-chaos-engineering.md",
+        "section": "design"
+      },
+      {
+        "title": "16 - 可观测性设计原则",
+        "url": "./domain-2-design-principles/16-observability-design-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "17 - 安全设计模式",
+        "url": "./domain-2-design-principles/17-security-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "18 - 性能优化原理",
+        "url": "./domain-2-design-principles/18-performance-optimization-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes v1.29-v1.33 设计原理演进与影响分析",
+        "url": "./domain-2-design-principles/99-kubernetes-v1.33-design-principles-evolution.md",
+        "section": "design"
+      },
+      {
+        "title": "kubelet 深度解析 (kubelet Deep Dive)",
+        "url": "./domain-3-control-plane/15-kubelet-deep-dive.md",
+        "section": "design"
+      },
+      {
+        "title": "27 - 节点与节点池管理 (Node & NodePool Management)",
+        "url": "./domain-4-workloads/18-node-management-operations.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubelet 配置与调优",
+        "url": "./domain-4-workloads/20-kubelet-configuration.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)",
+        "url": "./domain-12-troubleshooting/06-node-notready-diagnosis.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)",
+        "url": "./domain-12-troubleshooting/09-node-comprehensive-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "35 - 节点组件故障排查 (Node Component Troubleshooting)",
+        "url": "./domain-12-troubleshooting/35-node-component-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "API Server 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "etcd 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md",
+        "section": "design"
+      }
+    ]
+  },
+  "observability-index.md": {
+    "keyword": "observability",
+    "category": "TC-DATA-OBS",
+    "severity_hint": "P2",
+    "description": "监控、告警、日志、可视化相关问题",
+    "related_skills": [
+      "FTA-OBS-001",
+      "observability",
+      "observability",
+      "OBSERVABILITY",
+      "observability"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "design": 390
+    },
+    "total_links": 390,
+    "links": [
+      {
+        "title": "16 - 可观测性设计原则",
+        "url": "./domain-2-design-principles/16-observability-design-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "控制平面监控与可观测性 (Control Plane Monitoring & Observability)",
+        "url": "./domain-3-control-plane/05-plane-monitoring-observability.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)",
+        "url": "./domain-4-workloads/06-workload-monitoring-alerting.md",
+        "section": "design"
+      },
+      {
+        "title": "133 - Ingress 监控与故障排查",
+        "url": "./domain-5-networking/25-ingress-monitoring-troubleshooting.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - 存储监控告警与性能调优",
+        "url": "./domain-6-storage/12-storage-monitoring-alerting.md",
+        "section": "design"
+      },
+      {
+        "title": "Domain-8 可观测性 — 开源项目索引",
+        "url": "./domain-8-observability/00-open-source-projects-index.md",
+        "section": "design"
+      },
+      {
+        "title": "01 - Kubernetes 可观测性架构体系 (Observability Architecture)",
+        "url": "./domain-8-observability/01-observability-architecture-overview.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 指标监控体系详解 (Monitoring Metrics System)",
+        "url": "./domain-8-observability/02-monitoring-metrics-system.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 日志收集架构详解 (Logging Architecture)",
+        "url": "./domain-8-observability/03-logging-architecture.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - 分布式追踪体系 (Distributed Tracing)",
+        "url": "./domain-8-observability/04-distributed-tracing.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - 告警管理策略 (Alerting Management)",
+        "url": "./domain-8-observability/05-alerting-management.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)",
+        "url": "./domain-8-observability/06-monitoring-alerting-practice.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)",
+        "url": "./domain-8-observability/07-monitoring-dashboards.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 日志审计与合规管理 (Logging Auditing & Compliance)",
+        "url": "./domain-8-observability/08-logging-audit-compliance.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - 事件与审计日志管理 (Events & Audit Logs)",
+        "url": "./domain-8-observability/09-events-audit-logs.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 监控和指标表",
+        "url": "./domain-8-observability/10-monitoring-metrics-prometheus.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)",
+        "url": "./domain-8-observability/11-custom-metrics-adapter.md",
+        "section": "design"
+      },
+      {
+        "title": "17 - 日志和审计表",
+        "url": "./domain-8-observability/12-logging-auditing.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 集群健康检查指南 (Cluster Health Check Guide)",
+        "url": "./domain-8-observability/13-cluster-health-check.md",
+        "section": "design"
+      },
+      {
+        "title": "52 - 混沌工程实践",
+        "url": "./domain-8-observability/14-chaos-engineering.md",
+        "section": "design"
+      }
+    ]
+  },
+  "pod-index.md": {
+    "keyword": "pod",
+    "category": "TC-APP-POD",
+    "severity_hint": "P1-P2",
+    "description": "Pod 创建、调度、运行、终止相关问题",
+    "related_skills": [
+      "SKILL-POD-001",
+      "SKILL-POD-002",
+      "SKILL-IMAGE-001",
+      "FTA-POD-001",
+      "pod",
+      "pod",
+      "POD",
+      "pod",
+      "container",
+      "workload",
+      "deployment",
+      "statefulset"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "control_plane": 224
+    },
+    "total_links": 224,
+    "links": [
+      {
+        "title": "29 - 原地 Pod 资源调整 (In-Place Pod Resize)",
+        "url": "./domain-3-control-plane/29-in-place-pod-resize.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "37 - Pod生命周期事件表",
+        "url": "./domain-4-workloads/11-pod-lifecycle-events.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)",
+        "url": "./domain-4-workloads/12-advanced-pod-patterns.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)",
+        "url": "./domain-12-troubleshooting/05-pod-pending-diagnosis.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)",
+        "url": "./domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "API Server 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "etcd 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Scheduler 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Controller Manager 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Webhook 与准入控制故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "控制平面安全加固故障排查指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "控制平面性能瓶颈分析与优化指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "控制平面高可用故障处理指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "控制平面升级迁移问题处理指南",
+        "url": "./topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "kubelet 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "kube-proxy 故障排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "容器运行时故障排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "节点故障专项排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "镜像与镜像仓库故障排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "GPU 与设备插件故障排查指南",
+        "url": "./topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md",
+        "section": "control_plane"
+      }
+    ]
+  },
+  "pvc-index.md": {
+    "keyword": "pvc",
+    "category": "TC-INFRA-STORE",
+    "severity_hint": "P1",
+    "description": "PVC 绑定、存储供给、卷扩容相关问题",
+    "related_skills": [
+      "SKILL-STORE-001",
+      "FTA-PVC-001",
+      "pvc",
+      "pvc",
+      "PVC",
+      "pvc"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 10,
+      "control_plane": 296
+    },
+    "total_links": 306,
+    "links": [
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "03 - 功能和API表",
+        "url": "./domain-1-architecture-fundamentals/03-api-versions-features.md",
+        "section": ""
+      },
+      {
+        "title": "04 - Kubernetes 源码结构深度解析",
+        "url": "./domain-1-architecture-fundamentals/04-source-code-structure.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "08 - 多租户架构设计 (Multi-Tenancy Architecture)",
+        "url": "./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "16 - Kubernetes 故障排查专家级指南",
+        "url": "./domain-1-architecture-fundamentals/16-troubleshooting-guide.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)",
+        "url": "./domain-3-control-plane/10-plane-backup-disaster-recovery.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "kube-apiserver 深度解析 (kube-apiserver Deep Dive)",
+        "url": "./domain-3-control-plane/12-apiserver-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "kube-controller-manager 深度解析 (KCM Deep Dive)",
+        "url": "./domain-3-control-plane/13-kube-controller-manager-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "cloud-controller-manager 深度解析 (CCM Deep Dive)",
+        "url": "./domain-3-control-plane/14-cloud-controller-manager-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)",
+        "url": "./domain-3-control-plane/20-kube-scheduler-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)",
+        "url": "./domain-3-control-plane/22-container-storage-deep-dive.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "生产环境部署最佳实践 (Production Deployment Best Practices)",
+        "url": "./domain-3-control-plane/24-production-deployment-best-practices.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "30 - 动态资源分配 (Dynamic Resource Allocation)",
+        "url": "./domain-3-control-plane/30-dynamic-resource-allocation.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "31 - kubectl 完全命令参考 (kubectl Complete Reference)",
+        "url": "./domain-3-control-plane/31-kubectl-complete-reference.md",
+        "section": "control_plane"
+      },
+      {
+        "title": "32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)",
+        "url": "./domain-3-control-plane/32-kubeadm-cluster-lifecycle.md",
+        "section": "control_plane"
+      }
+    ]
+  },
+  "scheduler-index.md": {
+    "keyword": "scheduler",
+    "category": "TC-INFRA-SCALE",
+    "severity_hint": "P1-P2",
+    "description": "调度失败、亲和性、污点、拓扑约束相关问题",
+    "related_skills": [
+      "SKILL-SCALE-001",
+      "FTA-SCHEDULER-001",
+      "scheduler",
+      "scheduler",
+      "SCHEDULER",
+      "scheduler"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "design": 308
+    },
+    "total_links": 308,
+    "links": [
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 声明式 API 与面向终态设计 (Declarative API)",
+        "url": "./domain-2-design-principles/02-declarative-api-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - Informer 架构与工作队列 (Informer & Workqueue)",
+        "url": "./domain-2-design-principles/05-informer-workqueue.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 高可用架构模式 (HA Patterns)",
+        "url": "./domain-2-design-principles/08-high-availability-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Kubernetes 源码结构与阅读指南 (Source Code)",
+        "url": "./domain-2-design-principles/09-source-code-walkthrough.md",
+        "section": "design"
+      },
+      {
+        "title": "10 - CAP 定理与分布式系统基础 (CAP Theorem)",
+        "url": "./domain-2-design-principles/10-cap-theorem-distributed-systems.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - Operator 模式与控制器开发 (Operator Guide)",
+        "url": "./domain-2-design-principles/12-operator-development-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 准入控制与 Webhook 机制深度解析",
+        "url": "./domain-2-design-principles/13-admission-control-webhooks.md",
+        "section": "design"
+      },
+      {
+        "title": "14 - 服务网格与微服务架构设计",
+        "url": "./domain-2-design-principles/14-service-mesh-architecture.md",
+        "section": "design"
+      },
+      {
+        "title": "15 - 混沌工程与故障注入设计",
+        "url": "./domain-2-design-principles/15-chaos-engineering.md",
+        "section": "design"
+      },
+      {
+        "title": "16 - 可观测性设计原则",
+        "url": "./domain-2-design-principles/16-observability-design-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "17 - 安全设计模式",
+        "url": "./domain-2-design-principles/17-security-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)",
+        "url": "./domain-3-control-plane/20-kube-scheduler-deep-dive.md",
+        "section": "design"
+      },
+      {
+        "title": "30 - 动态资源分配 (Dynamic Resource Allocation)",
+        "url": "./domain-3-control-plane/30-dynamic-resource-allocation.md",
+        "section": "design"
+      },
+      {
+        "title": "28 - 调度器配置与优化",
+        "url": "./domain-4-workloads/19-scheduler-configuration.md",
+        "section": "design"
+      },
+      {
+        "title": "HPA/VPA 自动伸缩配置",
+        "url": "./domain-4-workloads/21-hpa-vpa-autoscaling.md",
+        "section": "design"
+      },
+      {
+        "title": "集群容量规划",
+        "url": "./domain-4-workloads/22-cluster-capacity-planning.md",
+        "section": "design"
+      },
+      {
+        "title": "16 - 资源管理表",
+        "url": "./domain-4-workloads/23-resource-management.md",
+        "section": "design"
+      }
+    ]
+  },
+  "security-index.md": {
+    "keyword": "security",
+    "category": "TC-SEC-RBAC",
+    "severity_hint": "P0-P1",
+    "description": "RBAC、PSP、PSA、准入控制相关问题",
+    "related_skills": [
+      "SKILL-SEC-002",
+      "SKILL-SECURITY-001",
+      "FTA-SEC-001",
+      "security",
+      "security",
+      "SECURITY",
+      "security",
+      "rbac",
+      "psp",
+      "psa",
+      "admission"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 1,
+      "design": 402
+    },
+    "total_links": 403,
+    "links": [
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "13 - 准入控制与 Webhook 机制深度解析",
+        "url": "./domain-2-design-principles/13-admission-control-webhooks.md",
+        "section": "design"
+      },
+      {
+        "title": "控制平面安全加固指南 (Control Plane Security Hardening Guide)",
+        "url": "./domain-3-control-plane/04-plane-security-hardening.md",
+        "section": "design"
+      },
+      {
+        "title": "01 - NetworkPolicy 深度实践指南",
+        "url": "./domain-5-networking/16-networkpolicy-deep-practice.md",
+        "section": "design"
+      },
+      {
+        "title": "83 - 网络加密与mTLS",
+        "url": "./domain-5-networking/18-network-encryption-mtls.md",
+        "section": "design"
+      },
+      {
+        "title": "132 - Ingress 安全加固与防护",
+        "url": "./domain-5-networking/24-ingress-security-hardening.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 存储安全与合规管理",
+        "url": "./domain-6-storage/13-storage-security-compliance.md",
+        "section": "design"
+      },
+      {
+        "title": "Domain-7 安全 — 开源项目索引",
+        "url": "./domain-7-security/00-open-source-projects-index.md",
+        "section": "design"
+      },
+      {
+        "title": "01 - Kubernetes认证授权体系详解",
+        "url": "./domain-7-security/01-authentication-authorization-system.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 网络安全策略与零信任架构",
+        "url": "./domain-7-security/02-network-security-policies.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 运行时安全防护与威胁检测",
+        "url": "./domain-7-security/03-runtime-security-defense.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - 审计日志与合规性管理",
+        "url": "./domain-7-security/04-audit-logging-compliance.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - 策略校验与准入控制工具 (Policy Validation)",
+        "url": "./domain-7-security/05-policy-validation-tools.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - Pod安全标准详解",
+        "url": "./domain-7-security/06-pod-security-standards.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - RBAC权限矩阵表",
+        "url": "./domain-7-security/07-rbac-matrix-configuration.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 安全最佳实践表",
+        "url": "./domain-7-security/08-security-best-practices.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes 安全加固",
+        "url": "./domain-7-security/09-security-hardening-production.md",
+        "section": "design"
+      },
+      {
+        "title": "证书管理与 TLS 配置",
+        "url": "./domain-7-security/10-certificate-management.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 密钥与敏感信息管理工具",
+        "url": "./domain-7-security/11-secret-management-tools.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - 合规与认证表",
+        "url": "./domain-7-security/12-compliance-certification.md",
+        "section": "design"
+      }
+    ]
+  },
+  "service-mesh-index.md": {
+    "keyword": "service-mesh",
+    "category": "TC-APP-SVC",
+    "severity_hint": "P1-P2",
+    "description": "Istio、Envoy sidecar、mTLS、流量管理相关问题",
+    "related_skills": [
+      "FTA-MESH-001",
+      "service-mesh",
+      "service mesh",
+      "SERVICE-MESH",
+      "service-mesh"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "design": 286
+    },
+    "total_links": 286,
+    "links": [
+      {
+        "title": "01 - Kubernetes 设计原则与哲学 (Foundations)",
+        "url": "./domain-2-design-principles/01-design-principles-foundations.md",
+        "section": "design"
+      },
+      {
+        "title": "02 - 声明式 API 与面向终态设计 (Declarative API)",
+        "url": "./domain-2-design-principles/02-declarative-api-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "03 - 控制器模式与调谐循环 (Controller Pattern)",
+        "url": "./domain-2-design-principles/03-controller-pattern.md",
+        "section": "design"
+      },
+      {
+        "title": "04 - List-Watch 机制深度解析 (List-Watch)",
+        "url": "./domain-2-design-principles/04-watch-list-mechanism.md",
+        "section": "design"
+      },
+      {
+        "title": "05 - Informer 架构与工作队列 (Informer & Workqueue)",
+        "url": "./domain-2-design-principles/05-informer-workqueue.md",
+        "section": "design"
+      },
+      {
+        "title": "06 - 资源版本与并发控制 (Concurrency Control)",
+        "url": "./domain-2-design-principles/06-resource-version-control.md",
+        "section": "design"
+      },
+      {
+        "title": "07 - 分布式共识与 etcd 原理 (etcd & Raft)",
+        "url": "./domain-2-design-principles/07-distributed-consensus-etcd.md",
+        "section": "design"
+      },
+      {
+        "title": "08 - 高可用架构模式 (HA Patterns)",
+        "url": "./domain-2-design-principles/08-high-availability-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "09 - Kubernetes 源码结构与阅读指南 (Source Code)",
+        "url": "./domain-2-design-principles/09-source-code-walkthrough.md",
+        "section": "design"
+      },
+      {
+        "title": "10 - CAP 定理与分布式系统基础 (CAP Theorem)",
+        "url": "./domain-2-design-principles/10-cap-theorem-distributed-systems.md",
+        "section": "design"
+      },
+      {
+        "title": "11 - 扩展性设计模式 (Extensibility)",
+        "url": "./domain-2-design-principles/11-extensibility-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "12 - Operator 模式与控制器开发 (Operator Guide)",
+        "url": "./domain-2-design-principles/12-operator-development-guide.md",
+        "section": "design"
+      },
+      {
+        "title": "13 - 准入控制与 Webhook 机制深度解析",
+        "url": "./domain-2-design-principles/13-admission-control-webhooks.md",
+        "section": "design"
+      },
+      {
+        "title": "14 - 服务网格与微服务架构设计",
+        "url": "./domain-2-design-principles/14-service-mesh-architecture.md",
+        "section": "design"
+      },
+      {
+        "title": "15 - 混沌工程与故障注入设计",
+        "url": "./domain-2-design-principles/15-chaos-engineering.md",
+        "section": "design"
+      },
+      {
+        "title": "16 - 可观测性设计原则",
+        "url": "./domain-2-design-principles/16-observability-design-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "17 - 安全设计模式",
+        "url": "./domain-2-design-principles/17-security-design-patterns.md",
+        "section": "design"
+      },
+      {
+        "title": "18 - 性能优化原理",
+        "url": "./domain-2-design-principles/18-performance-optimization-principles.md",
+        "section": "design"
+      },
+      {
+        "title": "Kubernetes v1.29-v1.33 设计原理演进与影响分析",
+        "url": "./domain-2-design-principles/99-kubernetes-v1.33-design-principles-evolution.md",
+        "section": "design"
+      },
+      {
+        "title": "Sidecar 容器模式",
+        "url": "./domain-4-workloads/14-sidecar-containers-patterns.md",
+        "section": "design"
+      }
+    ]
+  },
+  "storage-index.md": {
+    "keyword": "storage",
+    "category": "TC-INFRA-STORE",
+    "severity_hint": "P1-P2",
+    "description": "PV/PVC、CSI、StorageClass、卷挂载相关问题",
+    "related_skills": [
+      "SKILL-STORE-001",
+      "FTA-STORE-001",
+      "storage",
+      "storage",
+      "STORAGE",
+      "storage",
+      "pvc",
+      "pv",
+      "csi",
+      "volume"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 28,
+      "control_plane": 289
+    },
+    "total_links": 317,
+    "links": [
+      {
+        "title": "Kubernetes 架构全景图 (Architecture Overview)",
+        "url": "./domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "03 - 功能和API表",
+        "url": "./domain-1-architecture-fundamentals/03-api-versions-features.md",
+        "section": ""
+      },
+      {
+        "title": "04 - Kubernetes 源码结构深度解析",
+        "url": "./domain-1-architecture-fundamentals/04-source-code-structure.md",
+        "section": ""
+      },
+      {
+        "title": "kubectl 命令完整参考 (kubectl Commands Complete Reference)",
+        "url": "./domain-1-architecture-fundamentals/05-kubectl-commands-reference.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "07 - 升级路径与策略指南",
+        "url": "./domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "08 - 多租户架构设计 (Multi-Tenancy Architecture)",
+        "url": "./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "10 - Windows 容器支持与集成指南",
+        "url": "./domain-1-architecture-fundamentals/10-windows-containers-support.md",
+        "section": ""
+      },
+      {
+        "title": "11 - Kubernetes 源码架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "12 - Kubernetes 集群部署架构模式指南",
+        "url": "./domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md",
+        "section": ""
+      },
+      {
+        "title": "13 - Kubernetes 性能调优专项指南",
+        "url": "./domain-1-architecture-fundamentals/13-performance-tuning-guide.md",
+        "section": ""
+      },
+      {
+        "title": "14 - Kubernetes 安全架构深度分析",
+        "url": "./domain-1-architecture-fundamentals/14-security-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "15 - Kubernetes 可观测性架构体系",
+        "url": "./domain-1-architecture-fundamentals/15-observability-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "16 - Kubernetes 故障排查专家级指南",
+        "url": "./domain-1-architecture-fundamentals/16-troubleshooting-guide.md",
+        "section": ""
+      },
+      {
+        "title": "17 - 生产环境运维最佳实践 (Production Operations Best Practices)",
+        "url": "./domain-1-architecture-fundamentals/17-production-operations-best-practices.md",
+        "section": ""
+      },
+      {
+        "title": "18 - Kubernetes 升级和迁移策略指南",
+        "url": "./domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md",
+        "section": ""
+      },
+      {
+        "title": "Kubectl v1.29 - v1.33 新命令与用法速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 核心组件 v1.29 - v1.33 新特性速查",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes v1.25 - v1.33 特性对比总表",
+        "url": "./domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md",
+        "section": ""
+      }
+    ]
+  },
+  "terway-index.md": {
+    "keyword": "terway",
+    "category": "TC-INFRA-NET",
+    "severity_hint": "P1-P2",
+    "description": "阿里云 Terway ENI、IPVLAN、网络模式相关问题",
+    "related_skills": [
+      "FTA-TERWAY-001",
+      "terway",
+      "terway",
+      "TERWAY",
+      "terway"
+    ],
+    "fta_codes": [],
+    "section_counts": {
+      "": 18,
+      "troubleshooting": 64
+    },
+    "total_links": 82,
+    "links": [
+      {
+        "title": "Kubernetes 核心组件深度剖析 (Core Components Deep Dive)",
+        "url": "./domain-1-architecture-fundamentals/02-core-components-deep-dive.md",
+        "section": ""
+      },
+      {
+        "title": "06 - 集群配置参数完全参考",
+        "url": "./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md",
+        "section": ""
+      },
+      {
+        "title": "08 - 多租户架构设计 (Multi-Tenancy Architecture)",
+        "url": "./domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md",
+        "section": ""
+      },
+      {
+        "title": "Kubernetes 网络基础 Network in a Nutshell",
+        "url": "./domain-5-networking/00-network-in-nutshell.md",
+        "section": ""
+      },
+      {
+        "title": "FAQ 文档",
+        "url": "./domain-5-networking/01-network-architecture-overview-faq.md",
+        "section": ""
+      },
+      {
+        "title": "网络核心组件",
+        "url": "./domain-5-networking/01-network-architecture-overview.md",
+        "section": ""
+      },
+      {
+        "title": "141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)",
+        "url": "./domain-5-networking/02-cni-architecture-fundamentals.md",
+        "section": ""
+      },
+      {
+        "title": "76 - CNI插件深度对比",
+        "url": "./domain-5-networking/03-cni-plugins-comparison.md",
+        "section": ""
+      },
+      {
+        "title": "143 - Terway 高级指南 (Terway Advanced Guide)",
+        "url": "./domain-5-networking/05-terway-advanced-guide.md",
+        "section": ""
+      },
+      {
+        "title": "72 - 服务拓扑与端点切片",
+        "url": "./domain-5-networking/08-service-topology-aware.md",
+        "section": ""
+      },
+      {
+        "title": "83 - 网络加密与mTLS",
+        "url": "./domain-5-networking/18-network-encryption-mtls.md",
+        "section": ""
+      },
+      {
+        "title": "144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)",
+        "url": "./domain-5-networking/27-cni-troubleshooting-optimization.md",
+        "section": ""
+      },
+      {
+        "title": "59 - Egress流量管理",
+        "url": "./domain-5-networking/29-egress-traffic-management.md",
+        "section": ""
+      },
+      {
+        "title": "33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)",
+        "url": "./domain-5-networking/33-network-troubleshooting.md",
+        "section": ""
+      },
+      {
+        "title": "84 - 网络性能调优",
+        "url": "./domain-5-networking/34-network-performance-tuning.md",
+        "section": ""
+      },
+      {
+        "title": "37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)",
+        "url": "./domain-5-networking/37-terway-resources-crud-operations.md",
+        "section": ""
+      },
+      {
+        "title": "38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)",
+        "url": "./domain-5-networking/38-terway-gc-mechanism.md",
+        "section": ""
+      },
+      {
+        "title": "Domain 5: Networking 网络",
+        "url": "./domain-5-networking/README.md",
+        "section": ""
+      },
+      {
+        "title": "03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)",
+        "url": "./domain-12-troubleshooting/03-networking-cni-troubleshooting.md",
+        "section": "troubleshooting"
+      },
+      {
+        "title": "06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)",
+        "url": "./domain-12-troubleshooting/06-node-notready-diagnosis.md",
+        "section": "troubleshooting"
+      }
+    ]
+  }
+}

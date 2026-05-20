@@ -1,3 +1,39 @@
+---
+title: Docker 镜像管理详解
+description: '# Docker 镜像管理详解'
+category: docker
+tags:
+- docker
+- container
+- image
+- harbor
+- mysql
+- job
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Docker 镜像管理详解 是什么
+- 如何 Docker 镜像管理详解
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Docker
+- 镜像管理详解
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
+
 # Docker 镜像管理详解
 
 > **适用版本**: Docker 20.10+ / Docker 24.0+ / Docker 25.0+ | **最后更新**: 2026-01

@@ -1,3 +1,34 @@
+---
+title: v1.25.16
+description: v1.25.16 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- envoy
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 330min
+intent_queries:
+- v1.25.16 是什么
+- 如何 v1.25.16
+trigger_keywords:
+- v1.25.16
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.25.16](#v12516)
@@ -265,6 +296,10 @@
     - [Container Images](#container-images-16)
   - [Changelog since v1.24.0](#changelog-since-v1240)
   - [What's New (Major Themes)](#whats-new-major-themes)
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
     - [PodSecurityPolicy is Removed, Pod Security Admission graduates to Stable](#podsecuritypolicy-is-removed-pod-security-admission-graduates-to-stable)
     - [Ephemeral Containers Graduate to Stable](#ephemeral-containers-graduate-to-stable)
     - [Support for cgroups v2 Graduates to Stable](#support-for-cgroups-v2-graduates-to-stable)

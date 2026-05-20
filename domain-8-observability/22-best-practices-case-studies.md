@@ -1,3 +1,58 @@
+---
+title: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)
+description: '# 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- grafana
+- jaeger
+- istio
+- cilium
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 是什么
+- 如何 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 可观测性平台最佳实践与案例
+- Observability
+- Platform
+- Best
+- Practices
+- Case
+- Studies
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [CNCF云原生可观测性白皮书](https://www.cncf.io/reports/cloud-native-observability-white-paper/)

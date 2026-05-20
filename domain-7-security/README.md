@@ -1,3 +1,45 @@
+---
+title: Security Domain
+description: '### 🔰 基础安全概念 (01-04)'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- opa
+- falco
+- networkpolicy
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Security Domain 是什么
+- 如何 Security Domain
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- Security
+- Domain
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
 # Security Domain
 
 > **文档数量**: 21 篇 | **最后更新**: 2026-04 | **维护者**: Production Security Team | **适用版本**: Kubernetes 1.25 - 1.33+

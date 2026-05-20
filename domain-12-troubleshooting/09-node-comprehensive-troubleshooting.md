@@ -1,6 +1,61 @@
-# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
+---
+title: Node 全面故障排查
+description: '# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)'
+category: troubleshooting
+tags:
+- node
+- hardware
+- kernel
+- system
+- cpu
+- memory
+- disk
+- etcd
+- apiserver
+- kubelet
+last_updated: 2026-01
+difficulty: beginner
+reading_level: beginner
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Node 问题怎么排查
+- 节点硬件故障
+- 内核参数
+- 系统资源
+trigger_keywords:
+- Node
+- 全面故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/node-fta.md
+  label: '故障树: node'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+
+# 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
 
 ---
 

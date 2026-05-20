@@ -1,3 +1,33 @@
+---
+title: ORAS
+description: '| **适用场景** | OCI 工件管理 |'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- wasm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- ORAS 是什么
+- 如何 ORAS
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- ORAS
+- cncf
+- landscape
+---
+
 # ORAS
 
 > **成熟度**: Sandbox | **加入时间**: 2021-11 | **最后更新**: 2026-03

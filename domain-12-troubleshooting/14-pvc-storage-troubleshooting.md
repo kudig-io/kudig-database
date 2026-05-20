@@ -1,6 +1,62 @@
-# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
+---
+title: PVC 与存储全面故障排查
+description: '# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)'
+category: troubleshooting
+tags:
+- pvc
+- storage
+- csi
+- pv
+- storageclass
+- volume
+- mount
+- kubelet
+- prometheus
+- ceph
+last_updated: 2026-01
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- PVC Pending
+- 存储卷挂载失败
+- volume attach failed
+- CSI driver
+- StorageClass
+trigger_keywords:
+- PVC
+- 与存储全面故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: skill
+  path: ../topic-skills/07-pvc-storage-failure.md
+  label: '运维技能: 07-pvc-storage-failure'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+
+# 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
 
 ---
 

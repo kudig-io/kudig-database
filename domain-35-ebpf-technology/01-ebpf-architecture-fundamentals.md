@@ -1,3 +1,40 @@
+---
+title: eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
+description: '# eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- docker
+- ingress
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types) 是什么
+- 如何 eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- eBPF
+- 架构基础与程序类型
+- eBPF
+- Architecture
+- Fundamentals
+- and
+- Program
+- Types
+---
+
+
 # eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
 
 > **适用范围**: 内核开发、网络加速、安全监控 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-03

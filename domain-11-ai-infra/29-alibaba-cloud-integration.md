@@ -1,3 +1,47 @@
+---
+title: 15 - 阿里云特定集成表
+description: '| **ACK专有版** | 用户管理 | 完全控制需求 | 按ECS计费 | 99.5% | 自行维护控制平面 |'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- etcd
+- kubelet
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- 阿里云特定集成表 是什么
+- 如何 阿里云特定集成表
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 阿里云特定集成表
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 15 - 阿里云特定集成表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [help.aliyun.com/product/85222.html](https://help.aliyun.com/product/85222.html)

@@ -1,3 +1,34 @@
+---
+title: Operator 模式
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- helm
+- statefulset
+- rbac
+- crd
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Operator 模式 是什么
+- 如何 Operator 模式
+trigger_keywords:
+- Operator
+- 模式
+- dictionary
+title_en: Operator Pattern
+---
+
+
 # Operator 模式
 
 ## 概述

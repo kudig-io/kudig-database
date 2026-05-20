@@ -1,3 +1,52 @@
+---
+title: LLM 成本监控与 FinOps
+description: '# LLM 成本监控与 FinOps'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- grafana
+- helm
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM 成本监控与 FinOps 是什么
+- 如何 LLM 成本监控与 FinOps
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- LLM
+- 成本监控与
+- FinOps
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # LLM 成本监控与 FinOps
 
 ## 概述

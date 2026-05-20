@@ -1,3 +1,35 @@
+---
+title: 'Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)'
+description: '## 📚 领域概述'
+category: automated-testing-quality
+tags:
+- k8s
+- testing
+- quality
+- automation
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- QA 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance) 是什么'
+- '如何 Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)'
+- Kubernetes 29 automated testing quality 最佳实践
+trigger_keywords:
+- Domain
+- '29:'
+- 自动化测试与质量保障
+- Automated
+- Testing
+- Quality
+- Assurance
+- automated
+---
+
 # Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance)
 
 > **领域定位**: 企业级自动化测试平台与质量保障体系 | **文档数量**: 6篇 | **更新时间**: 2026-02-07

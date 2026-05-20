@@ -1,3 +1,50 @@
+---
+title: 03 - 功能和API表
+description: '| **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits |'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- cilium
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 10min
+intent_queries:
+- 功能和API表 是什么
+- 如何 功能和API表
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- 功能和API表
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # 03 - 功能和API表
 
 > **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [kubernetes.io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)

@@ -1,3 +1,42 @@
+---
+title: 05 - Apache APISIX 企业级 API 网关实践
+description: '# 05 - Apache APISIX 企业级 API 网关实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- prometheus
+- helm
+- docker
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Apache APISIX 企业级 API 网关实践 是什么
+- 如何 Apache APISIX 企业级 API 网关实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Apache
+- APISIX
+- 企业级
+- API
+- 网关实践
+- cloud
+- native
+- api
+---
+
+
 # 05 - Apache APISIX 企业级 API 网关实践
 
 > **文档版本**: v1.0 | **适用版本**: APISIX 3.x, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: APISIX, OpenResty, etcd, Lua, 插件, APISIX Ingress Controller

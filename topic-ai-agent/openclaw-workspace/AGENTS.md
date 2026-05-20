@@ -1,8 +1,29 @@
 ---
-name: k8s-diagnosis-workflow
+title: 行为规范与工作流
 description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- rbac
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 行为规范与工作流 是什么
+- 如何 行为规范与工作流
+trigger_keywords:
+- 行为规范与工作流
+- ai
+- agent
 ---
 
 # 行为规范与工作流

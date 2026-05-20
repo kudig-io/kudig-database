@@ -1,3 +1,58 @@
+---
+title: etcd 数据清理与成员移除 — 源码分析
+category: cluster-delete
+tags:
+- etcd
+- member
+- remove
+- cleanup
+- data-dir
+- stacked
+- external
+- quorum
+- raft
+last_updated: 2026-05-18
+description: 深入分析 control-plane 节点删除时 etcd 集群成员移除和数据清理的源码实现，涵盖 remove-etcd-member 阶段的 etcd 类型检测、数据目录获取、RemoveStackedEtcdMemberFromCluster
+  成员移除逻辑、唯一成员特殊处理以及外部 etcd 处理策略。
+difficulty: advanced
+intent_queries:
+- kubernetes etcd member removal source code
+- RemoveStackedEtcdMemberFromCluster kubernetes
+- etcd data directory cleanup kubernetes
+- etcd quorum maintenance cluster deletion
+- external etcd vs stacked etcd kubernetes
+trigger_keywords:
+- etcd member removal
+- RemoveStackedEtcdMember
+- getEtcdDataDir
+- etcd.yaml
+- etcd manifest
+- ListMembers
+- RemoveMember
+- etcd quorum
+- raft consensus
+- external etcd
+reading_level: advanced
+audience:
+- platform-engineer
+- etcd-operator
+- kubernetes-administrator
+estimated_read_time: 5min
+related_domains:
+- domain-3-control-plane
+- domain-2-installation
+related_topics:
+- cluster-delete
+- reset
+- cleanup
+- force-delete
+- ha-delete
+- troubleshooting
+domain_link: '[Control Plane](../domain-3-control-plane/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # etcd 数据清理与成员移除 — 源码分析
 
 ## 概述

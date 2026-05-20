@@ -1,6 +1,60 @@
-# 32 - 安全相关故障排查 (Security Troubleshooting)
+---
+title: 安全相关故障排查
+description: '# 32 - 安全相关故障排查 (Security Troubleshooting)'
+category: troubleshooting
+tags:
+- security
+- psp
+- scc
+- authentication
+- authorization
+- policy
+- apiserver
+- cilium
+- calico
+- docker
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- PSP 拒绝
+- SecurityContext
+- 认证失败
+- 授权被拒
+trigger_keywords:
+- 安全相关故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: skill
+  path: ../topic-skills/18-security-incident-response.md
+  label: '运维技能: 18-security-incident-response'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Security](https://kubernetes.io/docs/concepts/security/)
+
+# 32 - 安全相关故障排查 (Security Troubleshooting)
 
 ---
 
@@ -303,6 +357,11 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].secu
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].securityContext.privileged}'
 
 # ========== 2. PSP/PSS策略检查 ==========
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 # 检查PodSecurityPolicy (如果启用)
 kubectl get psp
 

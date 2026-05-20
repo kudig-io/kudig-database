@@ -1,3 +1,46 @@
+---
+title: 06 - Pod安全标准详解
+description: '# 06 - Pod安全标准详解'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- apiserver
+- istio
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Pod安全标准详解 是什么
+- 如何 Pod安全标准详解
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- Pod安全标准详解
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
 # 06 - Pod安全标准详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)

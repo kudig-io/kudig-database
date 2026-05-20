@@ -1,3 +1,68 @@
+---
+title: 'Day 4: K8S 新建集群'
+description: '**学习时间**: 4-5 小时 | **主题**: 掌握集群创建流程与配置选项'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- prometheus
+- flannel
+- ingress
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 4: K8S 新建集群 是什么'
+- '如何 Day 4: K8S 新建集群'
+trigger_keywords:
+- Day
+- '4:'
+- K8S
+- 新建集群
+- learn
+---
+
+---
+title: Day 4: K8S 新建集群
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - ACK cluster creation process VPC vSwitch
+  - Kubernetes cluster network CIDR planning
+  - aliyun cs POST clusters API
+  - ACK console cluster creation wizard
+  - Terway Flannel CNI selection
+trigger_keywords:
+  - create cluster
+  - VPC
+  - vSwitch
+  - CIDR
+  - Pod CIDR
+  - Service CIDR
+  - CNI
+  - Terway
+  - Flannel
+  - cluster creation
+reading_level: intermediate
+audience:
+  - ACK beginners
+  - DevOps engineers
+  - Platform engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-17-cloud-provider
+  - domain-6-networking
+  - domain-12-troubleshooting
+related_topics:
+  - ack-overview
+  - ack-vpc-network
+  - ack-ecs-compute
+---
+
 # Day 4: K8S 新建集群
 
 > **学习时间**: 4-5 小时 | **主题**: 掌握集群创建流程与配置选项

@@ -1,3 +1,38 @@
+---
+title: LLM 基座模型选型与评估
+description: '**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude 3.5, Gemini, Llama-3, Qwen-2.5, DeepSeek,
+  微调 vs RAG, 模型评估, Agent 基座'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- docker
+- networkpolicy
+- operator
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM 基座模型选型与评估 是什么
+- 如何 LLM 基座模型选型与评估
+trigger_keywords:
+- LLM
+- 基座模型选型与评估
+- ai
+- agent
+---
+
+
 # LLM 基座模型选型与评估
 
 > **文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude 3.5, Gemini, Llama-3, Qwen-2.5, DeepSeek, 微调 vs RAG, 模型评估, Agent 基座

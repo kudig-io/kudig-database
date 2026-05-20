@@ -1,3 +1,42 @@
+---
+title: FTA 故障树清单索引
+description: '## 概述'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- FTA 故障树清单索引 是什么
+- 如何 FTA 故障树清单索引
+- FTA 故障树清单索引 根因分析
+- FTA 故障树清单索引 故障树
+trigger_keywords:
+- FTA
+- 故障树清单索引
+- fta
+cross_refs:
+- type: skill
+  path: ../topic-skills/README.md
+  label: '运维技能: README'
+---
+
+
 # FTA 故障树清单索引
 
 > **文档数量**: 36 个故障树 | **总大小**: ~1.2 MB | **最后更新**: 2026-03-02

@@ -1,3 +1,43 @@
+---
+title: GraalVM Native Image 云原生实践指南
+description: '# GraalVM Native Image 云原生实践指南'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- docker
+- job
+- cronjob
+- serverless
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- GraalVM Native Image 云原生实践指南 是什么
+- 如何 GraalVM Native Image 云原生实践指南
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- GraalVM
+- Native
+- Image
+- 云原生实践指南
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # GraalVM Native Image 云原生实践指南
 
 > **适用版本**: GraalVM for JDK 21 / Spring Boot 3.4+ / Native Build Tools 0.10+  

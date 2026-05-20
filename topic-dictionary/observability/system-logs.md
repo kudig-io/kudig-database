@@ -1,3 +1,33 @@
+---
+title: 系统日志（System Logs）
+description: '# 系统日志（System Logs）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 系统日志（System Logs） 是什么
+- 如何 系统日志（System Logs）
+trigger_keywords:
+- 系统日志
+- System
+- Logs
+- dictionary
+title_en: Logging
+---
+
+
 # 系统日志（System Logs）
 
 ## 概述

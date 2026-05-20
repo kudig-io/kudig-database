@@ -1,3 +1,41 @@
+---
+title: 06 - Kong API 网关企业级实践
+description: '# 06 - Kong API 网关企业级实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- prometheus
+- helm
+- opa
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kong API 网关企业级实践 是什么
+- 如何 Kong API 网关企业级实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Kong
+- API
+- 网关企业级实践
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 06 - Kong API 网关企业级实践
 
 > **文档版本**: v1.0 | **适用版本**: Kong Gateway 3.x, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Kong, KIC, Kong Ingress Controller, deck, Konnect, DB-less

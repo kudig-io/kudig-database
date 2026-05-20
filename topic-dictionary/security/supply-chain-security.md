@@ -1,3 +1,33 @@
+---
+title: 软件供应链安全
+description: '# 软件供应链安全'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- docker
+- harbor
+- opa
+- falco
+- operator
+- ebpf
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 软件供应链安全 是什么
+- 如何 软件供应链安全
+trigger_keywords:
+- 软件供应链安全
+- dictionary
+title_en: Supply Chain Security
+---
+
+
 # 软件供应链安全
 
 ## 概述

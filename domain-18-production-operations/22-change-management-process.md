@@ -1,3 +1,37 @@
+---
+title: 22-变更管理流程
+description: '# 22-变更管理流程'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- prometheus
+- istio
+- job
+- cronjob
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 变更管理流程 是什么
+- 如何 变更管理流程
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 变更管理流程
+- production
+- operations
+---
+
+
 # 22-变更管理流程
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

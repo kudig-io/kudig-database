@@ -1,3 +1,27 @@
+---
+title: Finalizers
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Finalizers 是什么
+- 如何 Finalizers
+trigger_keywords:
+- Finalizers
+- dictionary
+title_en: Finalizers
+---
+
+
 # Finalizers
 
 ## 概述

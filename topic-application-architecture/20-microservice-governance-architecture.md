@@ -1,3 +1,57 @@
+---
+title: 微服务治理与Service Mesh架构设计
+description: '# 微服务治理与 Service Mesh Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- jaeger
+- istio
+- envoy
+- cilium
+- redis
+- mysql
+- statefulset
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- 微服务架构师
+- 云原生工程师
+- DevOps工程师
+- 阿里云解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- Service Mesh服务网格架构设计
+- Istio阿里云ASM部署配置
+- 全链路灰度发布方案
+- 微服务熔断限流Sentinel
+- 零信任安全架构mTLS
+trigger_keywords:
+- Service Mesh
+- Istio
+- ASM
+- 微服务治理
+- 全链路灰度
+- Sentinel
+- MSE
+- Nacos
+- Envoy
+- mTLS
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-1-architecture-fundamentals
+- domain-7-observability
+- domain-26-service-mesh
+related_topics:
+- topic-application-architecture/17-saas-multitenant-architecture
+- topic-application-architecture/11-smart-retail-architecture
+- topic-functions/03-observability-monitoring
+- topic-functions/06-service-mesh
+---
+
+
 # 微服务治理与 Service Mesh Kubernetes 生产架构设计
 
 > **适用场景**: 企业微服务转型 / 服务网格治理 / 全链路灰度 / 多活架构 / 零信任网络  

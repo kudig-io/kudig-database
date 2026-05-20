@@ -1,3 +1,30 @@
+---
+title: grafana v5.4 Release Notes
+description: grafana v5.4 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- grafana v5.4 Release Notes 是什么
+- 如何 grafana v5.4 Release Notes
+trigger_keywords:
+- grafana
+- v5.4
+- Release
+- Notes
+- release
+- notes
+---
+
 # grafana v5.4 Release Notes
 
 Source: [v5.4.5](https://github.com/grafana/grafana/releases/tag/v5.4.5)

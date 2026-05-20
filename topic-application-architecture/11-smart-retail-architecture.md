@@ -1,3 +1,57 @@
+---
+title: 智慧零售与新零售Kubernetes生产架构设计
+description: '# 智慧零售与新零售 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- minio
+- redis
+- mysql
+- kafka
+- ingress
+- gateway
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 零售行业架构师
+- 阿里云解决方案架构师
+- 全渠道技术负责人
+- 电商开发者
+estimated_read_time: 5min
+intent_queries:
+- 智慧零售系统K8s架构设计
+- 全渠道交易单元化部署
+- 门店数字化边缘ACK@Edge
+- 会员中台营销引擎
+- 即时配送骑手调度
+trigger_keywords:
+- 智慧零售
+- 新零售
+- 全渠道
+- 单元化
+- ACK@Edge
+- 会员中台
+- 即时配送
+- 直播带货
+- 库存一盘货
+- O2O
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-26-service-mesh-microservices
+- domain-7-observability
+- domain-5-iot-edge-computing
+related_topics:
+- topic-application-architecture/26-aviation-travel
+- topic-application-architecture/12-smart-logistics-architecture
+- topic-application-architecture/17-saas-multitenant-architecture
+- topic-functions/04-high-concurrency-system
+---
+
+
 # 智慧零售与新零售 Kubernetes 生产架构设计
 
 > **适用场景**: 连锁门店数字化 / 全渠道零售 / 会员中台 / 智能导购 / O2O 即时配送 / 直播带货  

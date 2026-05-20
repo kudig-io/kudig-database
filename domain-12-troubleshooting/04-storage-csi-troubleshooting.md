@@ -1,6 +1,61 @@
-# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)
+---
+title: CSI 存储驱动故障排查
+description: '# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)'
+category: troubleshooting
+tags:
+- csi
+- storage
+- volume
+- disk
+- provisioner
+- attacher
+- kubelet
+- prometheus
+- ceph
+- daemonset
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- CSI 不工作
+- 卷挂载失败
+- 存储性能差
+- CSI driver
+trigger_keywords:
+- CSI
+- 存储驱动故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/csi-fta.md
+  label: '故障树: csi'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes-csi.github.io](https://kubernetes-csi.github.io/)
+
+# 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)
 
 ---
 

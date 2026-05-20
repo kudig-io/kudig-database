@@ -1,3 +1,49 @@
+---
+title: Domain-12 故障排查 (Troubleshooting)
+description: '# Domain-12 故障排查 (Troubleshooting)'
+category: troubleshooting
+tags:
+- k8s
+- troubleshooting
+- debugging
+- fault-analysis
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Domain-12 故障排查 (Troubleshooting) 是什么
+- 如何 Domain-12 故障排查 (Troubleshooting)
+- Kubernetes 12 troubleshooting 最佳实践
+- Domain-12 故障排查 (Troubleshooting) 故障排查
+- Domain-12 故障排查 (Troubleshooting) 排障步骤
+trigger_keywords:
+- Domain-12
+- 故障排查
+- Troubleshooting
+- troubleshooting
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
+
 # Domain-12 故障排查 (Troubleshooting)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **文档数量**: 42篇 | **最后更新**: 2026-02 | **质量等级**: 专家级 ⭐⭐⭐⭐⭐

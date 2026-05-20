@@ -1,3 +1,40 @@
+---
+title: 14 - API 网关生产运维最佳实践
+description: '# 14 - API 网关生产运维最佳实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- prometheus
+- grafana
+- helm
+- argocd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API 网关生产运维最佳实践 是什么
+- 如何 API 网关生产运维最佳实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- API
+- 网关生产运维最佳实践
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 14 - API 网关生产运维最佳实践
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.27+ | **更新日期**: 2026-03-04 | **关键词**: HA, 滚动升级, GitOps, 证书, 灾备, 容量规划, 多租户, AI网关

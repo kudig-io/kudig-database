@@ -1,3 +1,39 @@
+---
+title: 'Domain-33: Kubernetes Events 全域事件大全'
+description: '## 领域概述'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- istio
+- argocd
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- 'Domain-33: Kubernetes Events 全域事件大全 是什么'
+- '如何 Domain-33: Kubernetes Events 全域事件大全'
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 'Domain-33:'
+- Kubernetes
+- Events
+- 全域事件大全
+- kubernetes
+- events
+---
+
 # Domain-33: Kubernetes Events 全域事件大全
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档数量**: 15篇 | **最后更新**: 2026-02 | **质量等级**: 专家级

@@ -1,25 +1,70 @@
 ---
-title: "调度器配置与优化"
-description: "深入解析 Kubernetes 调度器的工作原理、调度策略与插件、亲和性/反亲和、污点容忍、拓扑分布约束、抢占机制与生产级调优"
-category: "domain-4-workloads"
-tags: [k8s, scheduler, affinity, taint, toleration, topology, pod-scheduling, scheduling]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 调度器配置与优化
+description: 深入解析 Kubernetes 调度器的工作原理、调度策略与插件、亲和性/反亲和、污点容忍、拓扑分布约束、抢占机制与生产级调优
+category: domain-4-workloads
+tags:
+- k8s
+- scheduler
+- affinity
+- taint
+- toleration
+- topology
+- pod-scheduling
+- scheduling
+- prometheus
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 调度器配置与优化 是什么
+- 如何 调度器配置与优化
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 调度器配置与优化
+- workloads
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "10-workload-controllers-overview.md"
-    type: "depth"
-    desc: "工作负载控制器详解"
-  - path: "../domain-3-control-plane/20-kube-scheduler-deep-dive.md"
-    type: "depth"
-    desc: "Scheduler 深度解析"
-  - path: "../topic-fta/list/scheduler-fta.md"
-    type: "fta"
-    desc: "Scheduler 故障树"
+- path: 10-workload-controllers-overview.md
+  type: depth
+  desc: 工作负载控制器详解
+- path: ../domain-3-control-plane/20-kube-scheduler-deep-dive.md
+  type: depth
+  desc: Scheduler 深度解析
+- path: ../topic-fta/list/scheduler-fta.md
+  type: fta
+  desc: Scheduler 故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/scheduler-fta.md
+  label: '故障树: scheduler'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
 ---
+
 
 # 28 - 调度器配置与优化
 

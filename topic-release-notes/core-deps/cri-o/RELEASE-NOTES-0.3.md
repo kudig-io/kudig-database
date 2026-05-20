@@ -1,3 +1,30 @@
+---
+title: cri-o v0.3 Release Notes
+description: cri-o v0.3 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- cri-o
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- cri-o v0.3 Release Notes 是什么
+- 如何 cri-o v0.3 Release Notes
+trigger_keywords:
+- cri-o
+- v0.3
+- Release
+- Notes
+- release
+- notes
+---
+
 # cri-o v0.3 Release Notes
 
 Source: [v0.3](https://github.com/cri-o/cri-o/releases/tag/v0.3)

@@ -1,3 +1,41 @@
+---
+title: 边缘存储与网络 (Edge Storage and Network)
+description: '# 边缘存储与网络 (Edge Storage and Network)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- helm
+- flux
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘存储与网络 (Edge Storage and Network) 是什么
+- 如何 边缘存储与网络 (Edge Storage and Network)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 边缘存储与网络
+- Edge
+- Storage
+- and
+- Network
+- edge
+- computing
+---
+
+
 # 边缘存储与网络 (Edge Storage and Network)
 
 ## 概述 (Overview)

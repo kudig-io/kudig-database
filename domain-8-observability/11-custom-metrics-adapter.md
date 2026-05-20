@@ -1,3 +1,57 @@
+---
+title: 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
+description: 本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 Prometheus Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- kubelet
+- prometheus
+- helm
+- hpa
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 是什么
+- 如何 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 自定义指标适配器与HPA扩展
+- Custom
+- Metrics
+- Adapter
+- HPA
+- Extension
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)

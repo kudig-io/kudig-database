@@ -1,74 +1,79 @@
 ---
-skill_id: "SKILL-CP-001"
-skill_name: "etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation"
-version: "1.0"
-category: "control-plane"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: API Priority and Fairness (APF) stable, etcd v3.5+ required"
-  - "v1.29+: APF enhancements, PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: No control-plane API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "critical"
-agent_execution_mode: "L1-advisory"
+title: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+description: '## 1. 概述'
+category: control-plane
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 是什么
+- 如何 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 trigger_keywords:
-  - "etcd unhealthy"
-  - "etcd leader lost"
-  - "apiserver unavailable"
-  - "apiserver high latency"
-  - "scheduler not leading"
-  - "controller-manager restart"
-  - "etcd disk slow"
-  - "etcd member lost"
-  - "control plane certificate expired"
-  - "apiserver throttling"
-  - "控制平面故障"
-  - "etcd 不健康"
-  - "apiserver 不可用"
-  - "apiserver 延迟高"
-  - "调度器异常"
-trigger_events:
-  - "LeaderElectionLost"
-  - "Unhealthy"
-  - "BackOff"
-  - "TLSHandshakeError"
-  - "EtcdMemberUnhealthy"
-  - "FailedScheduling"
-trigger_metrics:
-  - 'etcd_server_has_leader == 0'
-  - 'etcd_disk_wal_fsync_duration_seconds_bucket'
-  - 'apiserver_request_duration_seconds_bucket'
-  - 'apiserver_current_inflight_requests'
-  - 'workqueue_depth'
-  - 'etcd_mvcc_db_total_size_in_bytes'
-  - 'etcd_server_leader_changes_seen_total'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-SEC-001"
-  - "SKILL-NET-001"
-fta_refs:
-  - "topic-fta/list/control-plane-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md"
-  - "domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md"
-  - "domain-3-control-plane/"
-  - "domain-1-architecture-fundamentals/"
+- etcd unhealthy
+- etcd leader lost
+- apiserver unavailable
+- apiserver high latency
+- scheduler not leading
+- controller-manager restart
+- etcd disk slow
+- etcd member lost
+- control plane certificate expired
+- apiserver throttling
+- 控制平面故障
+- etcd 不健康
+- apiserver 不可用
+- apiserver 延迟高
+- 调度器异常
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-11
+  category: control-plane
+  subcategory: etcd-apiserver
+  severity: P0
+  time_to_diagnosis_minutes: 10
+  time_to_remediation_minutes: 30
+  escalation_required: true
+  control_plane_impact: true
+agent_notes:
+  decision_tree_entry: "kubectl get --raw /healthz 检查 API Server 健康状态; kubectl get pods -n kube-system 检查控制面组件"
+  critical_commands:
+    - "kubectl get --raw /healthz"
+    - "kubectl get --raw /healthz/etcd"
+    - "kubectl get pods -n kube-system -l component=etcd -o wide"
+    - "etcdctl endpoint health --cluster"
+    - "kubectl get events -n kube-system --sort-by='.lastTimestamp'"
+  danger_operations:
+    - action: "systemctl restart kubelet"
+      risk: "重启 kubelet 会导致节点上所有 Pod 被驱逐，影响服务可用性"
+      requires_confirmation: true
+    - action: "kubectl delete pod -n kube-system -l component=etcd --force"
+      risk: "强制删除 etcd Pod 会导致集群控制面不稳定，可能导致数据丢失"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get pods -n kube-system -l component=etcd 显示非 Running -->
 
 # etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 

@@ -1,60 +1,75 @@
 ---
-skill_id: "SKILL-SEC-001"
-skill_name: "证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis"
-version: "1.0"
-category: "security"
-severity_range: "P0-P1"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: CertificateSigningRequest v1 stable, kubelet certificate rotation GA"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: No certificate-related API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "critical"
-agent_execution_mode: "L1-advisory"
+title: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+description: '## 1. 概述'
+category: security
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 30min
+intent_queries:
+- 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 是什么
+- 如何 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 trigger_keywords:
-  - "certificate expired"
-  - "x509"
-  - "证书过期"
-  - "TLS handshake"
-  - "证书错误"
-  - "cert-manager"
-  - "certificate renewal"
-  - "kubelet certificate"
-  - "证书轮换"
-  - "unable to connect to the server"
-  - "certificate signed by unknown authority"
-trigger_events:
-  - "TLSHandshakeError"
-  - "CertificateExpired"
-trigger_metrics:
-  - 'apiserver_client_certificate_expiration_seconds'
-  - 'certmanager_certificate_ready_status'
-  - 'certmanager_certificate_expiration_timestamp_seconds'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-NET-002"
-fta_refs:
-  - "topic-fta/list/certificate-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-7-security-compliance/"
-  - "domain-12-troubleshooting/"
+- certificate expired
+- x509
+- 证书过期
+- TLS handshake
+- 证书错误
+- cert-manager
+- certificate renewal
+- kubelet certificate
+- 证书轮换
+- unable to connect to the server
+- certificate signed by unknown authority
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-06
+  category: security
+  subcategory: certificate
+  severity: P0
+  time_to_diagnosis_minutes: 10
+  time_to_remediation_minutes: 30
+  escalation_required: true
+  control_plane_impact: true
+agent_notes:
+  decision_tree_entry: "kubeadm certs check-expiration 检查证书过期状态"
+  critical_commands:
+    - "kubeadm certs check-expiration"
+    - "openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates"
+    - "kubectl get nodes -o wide"
+    - "journalctl -u kubelet --since '1 hour ago' | grep -E 'certificate|tls|expired'"
+    - "kubectl get csr"
+  danger_operations:
+    - action: "kubeadm certs renew all --force"
+      risk: "强制续期所有证书会触发 kubeconfig 重新生成，需要重新配置 kubeconfig"
+      requires_confirmation: true
+    - action: "systemctl restart kubelet"
+      risk: "重启 kubelet 会导致所有 Pod 被驱逐，影响服务可用性"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubeadm certs check-expiration 2>/dev/null | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
 
 # 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 

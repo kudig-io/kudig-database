@@ -1,3 +1,33 @@
+---
+title: OpenCode 概述与核心架构
+description: '# OpenCode 概述与核心架构'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- OpenCode 概述与核心架构 是什么
+- 如何 OpenCode 概述与核心架构
+trigger_keywords:
+- OpenCode
+- 概述与核心架构
+- ai
+- coding
+---
+
+
 # OpenCode 概述与核心架构
 
 > **文档类型**: 基础概念专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, AI Coding Agent, Client/Server Architecture, Agent Loop, Bubble Tea, Bun, Hono, AI SDK

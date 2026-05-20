@@ -1,24 +1,64 @@
 ---
-title: "声明式 API 与面向终态设计"
-description: "深入解析 Kubernetes 声明式 API 的核心概念、Server-Side Apply (SSA)、字段管理与冲突处理的底层机制"
-category: "domain-2-design"
-tags: [k8s, declarative, api, ssa, server-side-apply, field-management]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 声明式 API 与面向终态设计
+description: 深入解析 Kubernetes 声明式 API 的核心概念、Server-Side Apply (SSA)、字段管理与冲突处理的底层机制
+category: domain-2-design
+tags:
+- k8s
+- declarative
+- api
+- ssa
+- server-side-apply
+- field-management
+- etcd
+- opa
+- hpa
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 声明式 API 与面向终态设计 是什么
+- 如何 声明式 API 与面向终态设计
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 声明式
+- API
+- 与面向终态设计
+- design
+- principles
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-design-principles-foundations.md"
-    type: "depth"
-    desc: "设计原则与哲学"
-  - path: "03-controller-pattern.md"
-    type: "depth"
-    desc: "控制器模式与调谐循环"
-  - path: "../domain-3-control-plane/12-apiserver-deep-dive.md"
-    type: "depth"
-    desc: "API Server 深度解析"
+- path: 01-design-principles-foundations.md
+  type: depth
+  desc: 设计原则与哲学
+- path: 03-controller-pattern.md
+  type: depth
+  desc: 控制器模式与调谐循环
+- path: ../domain-3-control-plane/12-apiserver-deep-dive.md
+  type: depth
+  desc: API Server 深度解析
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
 ---
 
 # 02 - 声明式 API 与面向终态设计 (Declarative API)

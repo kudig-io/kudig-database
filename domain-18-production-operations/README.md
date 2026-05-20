@@ -1,3 +1,41 @@
+---
+title: 'Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)'
+description: '# Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- prometheus
+- grafana
+- helm
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices) 是什么'
+- '如何 Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)'
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- Domain
+- '17:'
+- 生产环境运维最佳实践
+- Production
+- Operations
+- Best
+- Practices
+- production
+---
+
 # Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)
 
 > **适用范围**: Kubernetes v1.25-v1.33+ | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **文档数量**: 28 篇

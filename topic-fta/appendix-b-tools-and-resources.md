@@ -1,3 +1,33 @@
+---
+title: 附录 B：工具与资源清单
+description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- llm
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 附录 B：工具与资源清单 是什么
+- 如何 附录 B：工具与资源清单
+- 附录 B：工具与资源清单 根因分析
+- 附录 B：工具与资源清单 故障树
+trigger_keywords:
+- 附录
+- B：工具与资源清单
+- fta
+---
+
 # 附录 B：工具与资源清单
 
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  

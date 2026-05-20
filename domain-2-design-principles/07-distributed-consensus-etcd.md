@@ -1,3 +1,50 @@
+---
+title: 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+description: 作为 K8s 的唯一数据存储，etcd 的性能直接决定了集群的上限。在生产运维中，仅仅知道 Raft 协议是不够的，必须掌握 **MVCC 存储的维护逻辑**。
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- coredns
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 分布式共识与 etcd 原理 (etcd & Raft) 是什么
+- 如何 分布式共识与 etcd 原理 (etcd & Raft)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 分布式共识与
+- etcd
+- 原理
+- etcd
+- Raft
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: fta
+  path: ../topic-fta/list/etcd-fta.md
+  label: '故障树: etcd'
+---
+
+
 # 07 - 分布式共识与 etcd 原理 (etcd & Raft)
 
 ## 生产环境 etcd 核心痛点：Compaction 与 Defrag

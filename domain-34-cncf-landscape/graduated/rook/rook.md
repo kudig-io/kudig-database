@@ -1,3 +1,37 @@
+---
+title: Rook
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- grafana
+- rook
+- ceph
+- mysql
+- gateway
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Rook 是什么
+- 如何 Rook
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Rook
+- cncf
+- landscape
+---
+
+
 # Rook
 
 > **成熟度**: Graduated | **加入时间**: 2018-01 | **最后更新**: 2026-03

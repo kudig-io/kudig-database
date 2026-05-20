@@ -1,3 +1,49 @@
+---
+title: GitOps配置管理 (GitOps Configuration Management)
+description: '# GitOps配置管理 (GitOps Configuration Management)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- helm
+- argocd
+- flux
+- ingress
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- GitOps配置管理 (GitOps Configuration Management) 是什么
+- 如何 GitOps配置管理 (GitOps Configuration Management)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- GitOps配置管理
+- GitOps
+- Configuration
+- Management
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # GitOps配置管理 (GitOps Configuration Management)
 
 ## 概述

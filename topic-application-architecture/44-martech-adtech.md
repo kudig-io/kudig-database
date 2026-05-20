@@ -1,3 +1,49 @@
+---
+title: 数字营销与广告科技架构设计
+description: '# 数字营销与广告科技架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 广告科技架构师
+- DSP/SSP开发者
+- 数字营销工程师
+- 广告平台技术负责人
+estimated_read_time: 5min
+intent_queries:
+- martech adtech kubernetes architecture
+- 程序化广告K8s部署
+- DSP SSP广告平台
+- RTB实时竞价系统
+- 广告大数据平台
+trigger_keywords:
+- 数字营销
+- AdTech
+- 程序化广告
+- DSP
+- SSP
+- RTB
+- 广告科技
+- MarTech
+- DMP
+- 广告K8s
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-12-troubleshooting
+- domain-26-service-mesh-microservices
+related_topics:
+- social-media-architecture
+- livestream-ecommerce
+- fintech-architecture
+---
+
+
 # 数字营销与广告科技架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

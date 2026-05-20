@@ -1,3 +1,41 @@
+---
+title: 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
+description: '# 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南'
+category: linux
+tags:
+- linux
+- system
+- kernel
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- containerd
+- cri-o
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 运维工程师
+- SRE
+- 系统管理员
+estimated_read_time: 5min
+intent_queries:
+- Linux 系统架构与内核深度解析：生产环境运维专家指南 是什么
+- 如何 Linux 系统架构与内核深度解析：生产环境运维专家指南
+- Kubernetes 14 linux 最佳实践
+trigger_keywords:
+- Linux
+- 系统架构与内核深度解析：生产环境运维专家指南
+- linux
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/linux.md
+  label: '速查卡: linux'
+---
+
+
 # 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 
 > **适用版本**: Linux Kernel 5.x/6.x | **最后更新**: 2026-02 | **作者**: Allen Galler (allengaller@gmail.com)
@@ -866,6 +904,123 @@ tar -czf "$BACKUP_DIR/system_config_$DATE.tar.gz" -C "$BACKUP_DIR" "$DATE"
 find $BACKUP_DIR -name "system_config_*.tar.gz" -mtime +7 -delete
 
 echo "配置备份完成: $BACKUP_DIR/system_config_$DATE.tar.gz"
+```
+
+---
+
+## 与 Kubernetes 的关系
+
+### systemd 在 K8s 中的角色
+
+Kubernetes 的 kubelet 就是作为 systemd 服务运行的。每个 Kubelet 管理的容器最终也由容器运行时（containerd/CRI-O）通过 systemd 或 cgroupfs 管理 cgroup。理解 systemd 对于管理 K8s 节点至关重要。
+
+```bash
+# kubelet 作为 systemd 服务
+systemctl status kubelet
+journalctl -u kubelet -f
+
+# containerd 作为 systemd 服务
+systemctl status containerd
+journalctl -u containerd -f
+
+# 查看容器 slice 层级
+systemd-cgls                          # 查看完整 cgroup 树
+systemd-cgls | grep -A10 kubepods     # K8s Pod 的 cgroup
+```
+
+### cgroups 与 K8s 资源管理
+
+Kubernetes 通过 cgroups 实现资源管理。kubelet 支持 cgroupfs 和 systemd 两种 cgroup 驱动：
+
+| cgroup 驱动 | 管理方式 | 配置 | 推荐 |
+|:---|:---|:---|:---|
+| **systemd** | 通过 systemd 管理单位 | kubelet: `--cgroup-driver=systemd` | 推荐（与发行版默认一致） |
+| **cgroupfs** | 直接操作 cgroup 文件系统 | kubelet: `--cgroup-driver=cgroupfs` | 仅在特定场景使用 |
+
+```
+K8s 节点 cgroup 层级 (systemd 驱动):
+
+/sys/fs/cgroup/
+├── kubepods.slice/
+│   ├── kubepods-pod<pod-uid>.slice/
+│   │   ├── cri-containerd-<id>.scope/
+│   │   │   ├── cpu.max         ← resources.limits.cpu
+│   │   │   ├── memory.max      ← resources.limits.memory
+│   │   │   └── cgroup.procs    ← 容器内所有进程
+│   │   └── cri-containerd-<id>.scope/
+│   └── kubepods-pod<pod-uid>.slice/
+├── system.slice/
+│   ├── containerd.service
+│   ├── kubelet.service
+│   └── docker.service
+└── user.slice/
+```
+
+### 内核模块与 K8s
+
+Kubernetes 依赖以下内核模块才能正常工作：
+
+```bash
+# 必需的内核模块
+modprobe overlay                    # OverlayFS - 容器存储驱动
+modprobe br_netfilter               # 网桥 netfilter - kube-proxy 必需
+modprobe ip_vs                      # IPVS - kube-proxy IPVS 模式
+modprobe ip_vs_rr                   # IPVS 轮询调度
+modprobe ip_vs_wrr                  # IPVS 加权轮询
+modprobe ip_vs_sh                   # IPVS 源地址哈希
+modprobe nf_conntrack               # 连接跟踪 - Service 会话管理
+
+# 永久加载
+cat > /etc/modules-load.d/k8s.conf << 'EOF'
+overlay
+br_netfilter
+ip_vs
+ip_vs_rr
+ip_vs_wrr
+ip_vs_sh
+nf_conntrack
+EOF
+
+# 必需的内核参数
+cat > /etc/sysctl.d/99-kubernetes.conf << 'EOF'
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+sysctl --system
+```
+
+---
+
+## 最佳实践
+
+1. **使用 LTS 内核**: 生产环境使用长期支持版本（5.10, 5.15, 6.1）
+2. **统一 cgroup 驱动**: kubelet 和容器运行时使用相同的 cgroup 驱动（推荐 systemd）
+3. **预加载内核模块**: 将 K8s 所需的内核模块加入 /etc/modules-load.d/
+4. **合理规划分区**: /var/lib/containerd 和 /var/lib/kubelet 需要足够空间
+5. **启用 kdump**: 配置内核崩溃转储，便于分析内核 panic
+6. **定期更新内核**: 保持内核安全补丁更新，但避免跨大版本升级
+
+---
+
+## 故障排查
+
+### 内核相关故障
+
+```bash
+# 内核 panic 后分析
+crash /var/crash/vmcore /usr/lib/debug/lib/modules/$(uname -r)/vmlinux
+
+# 查看内核日志
+dmesg -T | tail -50
+journalctl -k --since "1 hour ago"
+
+# 查看内核崩溃历史
+last reboot | head -20
+
+# 检查内核模块冲突
+lsmod | sort -k 2 -n -r | head
+cat /proc/modules | wc -l
 ```
 
 ---

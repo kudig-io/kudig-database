@@ -1,3 +1,51 @@
+---
+title: Observability Domain (可观测性领域)
+description: '- **01** - 可观测性架构体系概述 ⭐增强版⭐'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- kubelet
+- prometheus
+- ebpf
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- Observability Domain (可观测性领域) 是什么
+- 如何 Observability Domain (可观测性领域)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- Observability
+- Domain
+- 可观测性领域
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
 # Observability Domain (可观测性领域)
 
 > **文档数量**: 28 篇 | **最后更新**: 2026-04 | **专业级别**: 企业级生产环境 ⭐⭐⭐⭐⭐ | **适用版本**: Kubernetes 1.25 - 1.33+

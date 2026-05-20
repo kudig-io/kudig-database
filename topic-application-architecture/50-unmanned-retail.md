@@ -1,3 +1,48 @@
+---
+title: 无人零售与智能货柜架构设计
+description: '# 无人零售与智能货柜架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- daemonset
+- gpu
+- nvidia
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 新零售架构师
+- IoT工程师
+- 边缘计算专家
+estimated_read_time: 5min
+intent_queries:
+- 无人零售 Kubernetes 边缘计算
+- 智能货柜 AI视觉 Kubernetes
+- IoT零售 阿里云 Kubernetes
+- 商品识别 GPU Kubernetes
+- 无人零售 离线自治 K8s
+trigger_keywords:
+- 无人零售
+- 智能货柜
+- 自动售货
+- AI视觉
+- IoT
+- 边缘计算
+- 商品识别
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+related_topics:
+- 31-instant-retail
+- 11-smart-retail-architecture
+- 32-smart-restaurant
+---
+
+
 # 无人零售与智能货柜架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

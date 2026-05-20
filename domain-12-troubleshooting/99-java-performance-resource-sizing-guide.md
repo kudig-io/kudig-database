@@ -1,3 +1,51 @@
+---
+title: Java 应用性能调优与资源 Sizing 指南
+description: '# Java 应用性能调优与资源 Sizing 指南'
+category: troubleshooting
+tags:
+- k8s
+- troubleshooting
+- debugging
+- fault-analysis
+- prometheus
+- docker
+- redis
+- postgresql
+- hpa
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Java 应用性能调优与资源 Sizing 指南 是什么
+- 如何 Java 应用性能调优与资源 Sizing 指南
+- Kubernetes 12 troubleshooting 最佳实践
+- Java 应用性能调优与资源 Sizing 指南 故障排查
+- Java 应用性能调优与资源 Sizing 指南 排障步骤
+trigger_keywords:
+- Java
+- 应用性能调优与资源
+- Sizing
+- 指南
+- troubleshooting
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
+
+
 # Java 应用性能调优与资源 Sizing 指南
 
 > **适用版本**: JDK 21 (LTS) / Spring Boot 3.4+ / Kubernetes v1.29-v1.33  

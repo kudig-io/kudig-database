@@ -1,3 +1,58 @@
+---
+title: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)
+description: '# 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 20min
+intent_queries:
+- Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 是什么
+- 如何 Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)
+- Kubernetes 8 observability 最佳实践
+- Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 故障排查
+- Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 排障步骤
+trigger_keywords:
+- Kubernetes
+- 生产环境故障排查全攻略
+- Production
+- Troubleshooting
+- Guide
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/)
@@ -1118,6 +1173,11 @@ done
 
 | 问题类型 | 描述 | 影响范围 | 解决方案 |
 |:---|:---|:---|:---|
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 | **PSP移除** | PodSecurityPolicy完全移除 | 安全策略 | 迁移到PSS |
 | **Ephemeral Containers GA** | 临时容器正式发布 | Pod调试 | 使用kubectl debug |
 | **CronJob时区** | 时区支持正式发布 | 定时任务 | 配置.spec.timeZone |

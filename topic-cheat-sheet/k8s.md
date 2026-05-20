@@ -1,22 +1,53 @@
 ---
-title: "Kubernetes 生产环境速查卡"
-description: "涵盖 Kubernetes 生产环境 90% 以上常用命令，支持快速查阅和故障排查"
+title: Kubernetes 生产环境速查卡
+description: 涵盖 Kubernetes 生产环境 90% 以上常用命令，支持快速查阅和故障排查
 category: cheatsheet
-tags: [k8s, kubernetes, cheatsheet, quick-reference, kubectl, devops]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+tags:
+- k8s
+- kubernetes
+- cheatsheet
+- quick-reference
+- kubectl
+- devops
+- etcd
+- apiserver
+- kubelet
+- istio
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 生产环境速查卡 是什么
+- 如何 Kubernetes 生产环境速查卡
+trigger_keywords:
+- Kubernetes
+- 生产环境速查卡
+- cheat
+- sheet
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "beginner"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-1-architecture-fundamentals/05-kubectl-commands-reference.md"
-    desc: "kubectl 命令完整参考"
-  - path: "../domain-5-networking/06-service-concepts-types.md"
-    desc: "Service 概念与类型"
-  - path: "../domain-12-troubleshooting/"
-    desc: "故障排查专题"
+- path: ../domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  desc: kubectl 命令完整参考
+- path: ../domain-5-networking/06-service-concepts-types.md
+  desc: Service 概念与类型
+- path: ../domain-12-troubleshooting/
+  desc: 故障排查专题
 ---
+
 
 # Kubernetes 生产环境速查卡
 

@@ -1,6 +1,42 @@
+---
+title: 'Domain-34: CNCF Landscape 开源项目'
+description: '## 概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- kubelet
+- prometheus
+- jaeger
+- istio
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 15min
+intent_queries:
+- 'Domain-34: CNCF Landscape 开源项目 是什么'
+- '如何 Domain-34: CNCF Landscape 开源项目'
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- 'Domain-34:'
+- CNCF
+- Landscape
+- 开源项目
+- cncf
+- landscape
+---
+
 # Domain-34: CNCF Landscape 开源项目
 
-> **文档数量**: 218 篇 | **最后更新**: 2026-03 | **数据来源**: [CNCF Landscape](https://landscape.cncf.io/)
+> **文档数量**: 226 篇 | **最后更新**: 2026-05 | **数据来源**: [CNCF Landscape](https://landscape.cncf.io/)
 
 ---
 
@@ -24,6 +60,35 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | **Incubating** | 37 | 快速成长，社区活跃 |
 | **Sandbox** | 147 | 早期阶段，创新探索 |
 | **总计** | **218** | - |
+
+---
+
+## 深度补充文档
+
+以下项目拥有详细的深度补充文档：
+
+### containerd (8 篇)
+| 文档 | 说明 |
+|:-----|:-----|
+| [02-containerd-v2-features.md](./graduated/containerd/02-containerd-v2-features.md) | containerd v2 新特性 |
+| [03-containerd-security-hardening.md](./graduated/containerd/03-containerd-security-hardening.md) | 安全加固 |
+| [04-containerd-upgrade-migration.md](./graduated/containerd/04-containerd-upgrade-migration.md) | 升级迁移 |
+| [05-containerd-windows-support.md](./graduated/containerd/05-containerd-windows-support.md) | Windows 支持 |
+| [06-containerd-observability.md](./graduated/containerd/06-containerd-observability.md) | 可观测性 |
+| [07-containerd-disaster-recovery.md](./graduated/containerd/07-containerd-disaster-recovery.md) | 灾难恢复 |
+| [08-containerd-multi-tenant.md](./graduated/containerd/08-containerd-multi-tenant.md) | 多租户 |
+
+### Istio (3 篇)
+| 文档 | 说明 |
+|:-----|:-----|
+| [02-istio-advanced-traffic-management.md](./graduated/istio/02-istio-advanced-traffic-management.md) | 高级流量管理 |
+| [03-istio-security-hardening.md](./graduated/istio/03-istio-security-hardening.md) | 安全加固 |
+
+### Prometheus (3 篇)
+| 文档 | 说明 |
+|:-----|:-----|
+| [02-prometheus-promql-advanced.md](./graduated/prometheus/02-prometheus-promql-advanced.md) | 高级 PromQL |
+| [03-prometheus-ha-deployment.md](./graduated/prometheus/03-prometheus-ha-deployment.md) | 高可用部署 |
 
 ---
 
@@ -324,6 +389,17 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 
 ---
 
+## 核心指南
+
+| 指南 | 说明 | 链接 |
+|:-----|:-----|:-----|
+| **集成实践指南** | CNCF 项目组合使用、最佳实践集成方案 | [01-cncf-integration-guide.md](./01-cncf-integration-guide.md) |
+| **学习路径** | 按角色规划学习顺序（CKA/CKS 认证） | [02-cncf-learning-paths.md](./02-cncf-learning-paths.md) |
+| **项目选型指南** | CNI/Service Mesh/存储等类目选型对比矩阵 | [03-cncf-selection-guide.md](./03-cncf-selection-guide.md) |
+| **FTA 故障树索引** | CNCF 项目故障树分析和排障索引 | [04-cncf-fta-index.md](./04-cncf-fta-index.md) |
+
+---
+
 ## 学习路径建议
 
 ### 云原生入门路径
@@ -359,6 +435,10 @@ Flux → Argo → Helm → Crossplane
 - **[Domain-10: 扩展生态](../domain-10-extensions)** - Helm、Operator、GitOps 详解
 - **[Domain-25: 云原生安全](../domain-25-cloud-native-security)** - 安全策略与合规实践
 - **[Domain-26: 服务网格](../domain-26-service-mesh-microservices)** - Istio、Linkerd 深度分析
+- **[CNCF 集成实践](./01-cncf-integration-guide.md)** - 项目组合使用
+- **[CNCF 学习路径](./02-cncf-learning-paths.md)** - 系统学习指南
+- **[CNCF 选型指南](./03-cncf-selection-guide.md)** - 决策参考
+- **[CNCF FTA 索引](./04-cncf-fta-index.md)** - 故障树分析
 
 ---
 
@@ -371,4 +451,4 @@ Flux → Argo → Helm → Crossplane
 
 ---
 
-**维护者**: Kudig Team | **许可证**: MIT | **最后更新**: 2026-03
+**维护者**: Kudig Team | **许可证**: MIT | **最后更新**: 2026-05

@@ -1,3 +1,54 @@
+---
+title: 05 - 告警管理策略 (Alerting Management)
+description: '# 05 - 告警管理策略 (Alerting Management)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 告警管理策略 (Alerting Management) 是什么
+- 如何 告警管理策略 (Alerting Management)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 告警管理策略
+- Alerting
+- Management
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 05 - 告警管理策略 (Alerting Management)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [prometheus.io/docs/alerting](https://prometheus.io/docs/alerting/)

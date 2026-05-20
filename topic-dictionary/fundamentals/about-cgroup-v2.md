@@ -1,3 +1,33 @@
+---
+title: About cgroup v2（关于 cgroup v2）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- About cgroup v2（关于 cgroup v2） 是什么
+- 如何 About cgroup v2（关于 cgroup v2）
+trigger_keywords:
+- About
+- cgroup
+- v2
+- 关于
+- cgroup
+- v2
+- dictionary
+title_en: About Cgroup V2
+---
+
+
 # About cgroup v2（关于 cgroup v2）
 
 ## 概述

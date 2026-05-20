@@ -1,3 +1,46 @@
+---
+title: Thanos Enterprise Metrics Federation and Long-term Storage
+description: '## 概述 (Overview)'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- minio
+- statefulset
+- job
+- cronjob
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Thanos Enterprise Metrics Federation and Long-term Storage 是什么
+- 如何 Thanos Enterprise Metrics Federation and Long-term Storage
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Thanos
+- Enterprise
+- Metrics
+- Federation
+- and
+- Long-term
+- Storage
+- enterprise
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Thanos Enterprise Metrics Federation and Long-term Storage
 
 ## 概述 (Overview)

@@ -1,3 +1,35 @@
+---
+title: 第七章:附录
+description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- apiserver
+- prometheus
+- grafana
+- jaeger
+- istio
+- cilium
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 第七章:附录 是什么
+- 如何 第七章:附录
+trigger_keywords:
+- 第七章:附录
+- febm
+---
+
+
 # 第七章:附录
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  

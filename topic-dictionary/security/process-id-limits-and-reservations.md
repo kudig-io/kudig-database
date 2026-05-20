@@ -1,3 +1,34 @@
+---
+title: Process ID Limits And Reservations（进程 ID 限制与预留）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Process ID Limits And Reservations（进程 ID 限制与预留） 是什么
+- 如何 Process ID Limits And Reservations（进程 ID 限制与预留）
+trigger_keywords:
+- Process
+- ID
+- Limits
+- And
+- Reservations
+- 进程
+- ID
+- 限制与预留
+title_en: Process Id Limits And Reservations
+---
+
+
 # Process ID Limits And Reservations（进程 ID 限制与预留）
 
 ## 概述

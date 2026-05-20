@@ -1,3 +1,35 @@
+---
+title: 13 - 容量规划与资源预测
+description: '**生产环境实战经验总结**: 基于万级节点集群容量管理经验，涵盖从资源预测到成本优化的全方位最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- scheduler
+- prometheus
+- grafana
+- hpa
+- job
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- 容量规划与资源预测 是什么
+- 如何 容量规划与资源预测
+trigger_keywords:
+- 容量规划与资源预测
+- dictionary
+title_en: Capacity Planning
+---
+
+
+
 # 13 - 容量规划与资源预测
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

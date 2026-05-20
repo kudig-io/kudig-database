@@ -1,4 +1,73 @@
+---
+title: 'Day 28: 综合复习与实践'
+description: '# Day 28: 综合复习与实践'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- prometheus
+- flannel
+- ingress
+- rbac
+- operator
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 28: 综合复习与实践 是什么'
+- '如何 Day 28: 综合复习与实践'
+trigger_keywords:
+- Day
+- '28:'
+- 综合复习与实践
+- learn
+---
+
 # Day 28: 综合复习与实践
+
+```yaml
+---
+title: Day 28: 综合复习与实践
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Kubernetes四周培训复习"
+  - "综合复习题目"
+  - "培训自测"
+  - "K8s知识点回顾"
+trigger_keywords:
+  - "综合复习"
+  - "四周总结"
+  - "自测"
+  - "培训考核"
+  - "K8s复习"
+reading_level: intermediate
+audience:
+  - sre工程师
+  - ops工程师
+  - 运维工程师
+estimated_read_time: 45min
+related_domains:
+  - domain-1-architecture-fundamentals
+  - domain-4-workloads
+  - domain-5-networking
+  - domain-6-storage
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/week-4-network-storage/checkpoint
+  - topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+id: WEEK4-DAY28
+topic: training
+type: review
+tags: [week-4, day-28, review, checkpoint, k8s, k8s-1.28-1.33]
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: 全流程实操与问题答疑
 

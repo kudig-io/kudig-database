@@ -1,3 +1,43 @@
+---
+title: 20 - 服务网格集成表
+description: '| **架构** | Envoy Sidecar | Rust Sidecar | eBPF无Sidecar | Envoy Sidecar |'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- prometheus
+- grafana
+- jaeger
+- istio
+- envoy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 服务网格集成表 是什么
+- 如何 服务网格集成表
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 服务网格集成表
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
+
+
 # 20 - 服务网格集成表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [istio.io/latest/docs](https://istio.io/latest/docs/) | [linkerd.io/docs](https://linkerd.io/docs/)

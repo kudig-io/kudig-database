@@ -1,3 +1,47 @@
+---
+title: 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+description: '# 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- prometheus
+- helm
+- opa
+- job
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践 是什么
+- 如何 Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- Helm
+- 高级运维：复杂部署
+- CI
+- CD
+- 集成与安全最佳实践
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/helm-fta.md
+  label: '故障树: helm'
+---
+
+
 # 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
 
 ## Helm 高级配置管理

@@ -1,21 +1,72 @@
 ---
-fta_id: "FTA-GPU-016"
-title: "GPU 异常故障树分析"
-component: "gpu"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-GPU-001"
-last_updated: "2026-05"
+title: GPU 异常故障树分析
+description: '- **目标**：覆盖 GPU 设备不可用、调度失败、驱动不兼容、运行时异常与资源碎片化的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- gpu
+- nvidia
+- device-plugin
+- cuda
+- kubelet
+- containerd
+- docker
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- GPU 异常故障树分析 是什么
+- 如何 GPU 异常故障树分析
+- GPU 异常故障树分析 根因分析
+- GPU 异常故障树分析 故障树
+trigger_keywords:
+- GPU
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, gpu, nvidia, device-plugin, cuda]
-related_skills:
-  - "../topic-skills/21-ai-infra.md"
-knowledge_refs:
-  - "../domain-11-ai-infra/01-gpu-scheduling.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md
+  label: '结构化排障: 06-gpu-device-plugin-troubleshooting'
+fta_metadata:
+  fta_id: FTA-GPU-001
+  top_event: GPU 异常 (设备不可用/调度失败/驱动不兼容/运行时异常)
+  top_event_id: TE-GPU-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl describe node <node> | grep nvidia 显示 GPU 信息缺失"
+    - "kubectl get nodes -o jsonpath='{.items[*].status.capacity.nvidia.com/gpu}' 显示为 0"
+    - "Pod 日志显示 CUDA_ERROR_OUT_OF_MEMORY 或 device not found"
+agent_notes:
+  decision_tree_entry: "kubectl describe node <node> | grep -E 'nvidia|gpu' 检查 GPU 状态"
+  critical_commands:
+    - "kubectl describe node <node> | grep -E 'nvidia|gpu'"
+    - "nvidia-smi"
+    - "kubectl get pods -n kube-system -l k8s-app=nvidia-device-plugin -o wide"
+    - "kubectl logs -n kube-system -l k8s-app=nvidia-device-plugin --tail=50"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l k8s-app=nvidia-device-plugin --force"
+      risk: "强制删除会导致 GPU 设备插件重启，该节点上的 GPU 调度会失败"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get nodes -o jsonpath='{.items[*].status.capacity.nvidia.com/gpu}' 返回 0 或 Pod 日志显示 CUDA_ERROR -->
 
 # GPU 异常 FTA 树
 

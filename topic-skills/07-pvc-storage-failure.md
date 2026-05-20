@@ -1,74 +1,78 @@
 ---
-skill_id: "SKILL-STORE-001"
-skill_name: "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation"
-version: "1.0"
-category: "storage"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: CSI migration GA for all in-tree drivers"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ReadWriteOncePod access mode (GA)"
-  - "v1.31+: VolumeAttributesClass (beta)"
-  - "v1.32+: No storage API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "high"
-agent_execution_mode: "L1-advisory"
+title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+description: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
+category: storage
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- ceph
+- mysql
+- postgresql
+- statefulset
+- rbac
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 是什么
+- 如何 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 trigger_keywords:
-  - "PVC Pending"
-  - "PV bound failed"
-  - "CSI error"
-  - "volume mount failed"
-  - "storage provisioning"
-  - "disk full"
-  - "volume attach timeout"
-  - "filesystem error"
-  - "storage class not found"
-  - "volume expansion failed"
-  - "FailedMount"
-  - "FailedAttachVolume"
-  - "存储挂载失败"
-  - "PVC无法绑定"
-  - "磁盘挂载超时"
-  - "存储扩容失败"
-trigger_events:
-  - "FailedMount"
-  - "FailedAttachVolume"
-  - "ProvisioningFailed"
-  - "VolumeResizeFailed"
-  - "FailedScheduling"
-  - "ExternalProvisioning"
-  - "WaitForFirstConsumer"
-  - "FailedBinding"
-trigger_metrics:
-  - 'kubelet_volume_stats_available_bytes < threshold'
-  - 'kube_persistentvolumeclaim_status_phase{phase="Pending"}'
-  - 'csi_operations_seconds_bucket'
-  - 'kubelet_volume_stats_inodes_free'
-  - 'kube_persistentvolume_status_phase{phase!="Bound"}'
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-NODE-001"
-fta_refs:
-  - "topic-fta/list/csi-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/04-storage-csi-troubleshooting.md"
-  - "domain-12-troubleshooting/14-pvc-storage-troubleshooting.md"
-  - "domain-6-storage/"
+- PVC Pending
+- PV bound failed
+- CSI error
+- volume mount failed
+- storage provisioning
+- disk full
+- volume attach timeout
+- filesystem error
+- storage class not found
+- volume expansion failed
+- FailedMount
+- FailedAttachVolume
+- 存储挂载失败
+- PVC无法绑定
+- 磁盘挂载超时
+- 存储扩容失败
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-07
+  category: storage
+  subcategory: pvc
+  severity: P1
+  time_to_diagnosis_minutes: 20
+  time_to_remediation_minutes: 30
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get pvc -A 检查 PVC 状态; kubectl describe pvc <name> -n <ns> 查看详情"
+  critical_commands:
+    - "kubectl get pvc -A -o wide"
+    - "kubectl describe pvc <name> -n <ns>"
+    - "kubectl get pv <pv-name> -o wide"
+    - "kubectl get pods -n <ns> | grep -E 'Pending|Mount'"
+    - "kubectl logs -n kube-system -l app=csi-driver --tail=50"
+  danger_operations:
+    - action: "kubectl delete pvc <name> -n <ns> --force"
+      risk: "强制删除 PVC 可能导致数据丢失，PV 也会被删除"
+      requires_confirmation: true
 ---
+---
+
+
 
 # PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 

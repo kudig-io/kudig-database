@@ -1,3 +1,42 @@
+---
+title: Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
+description: '# Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- grafana
+- opa
+- hpa
+- vpa
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice) 是什么
+- 如何 Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 成本治理与
+- FinOps
+- 实践
+- Kubernetes
+- Cost
+- Governance
+- and
+---
+
+
 # Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
 
 > **作者**: Kubernetes成本优化专家 | **版本**: v1.6 | **更新时间**: 2026-03-03

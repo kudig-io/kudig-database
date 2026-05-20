@@ -1,25 +1,77 @@
 ---
-title: "指标监控体系详解"
-description: "深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus Operator、Alertmanager 与告警规则配置"
-category: "domain-8-observability"
-tags: [k8s, prometheus, metrics, monitoring, alertmanager, promql, servicemonitor]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 指标监控体系详解
+description: 深入解析 Prometheus 监控体系：指标类型（Counter/Gauge/Histogram/Summary）、PromQL 查询、ServiceMonitor、Prometheus Operator、Alertmanager
+  与告警规则配置
+category: domain-8-observability
+tags:
+- k8s
+- prometheus
+- metrics
+- monitoring
+- alertmanager
+- promql
+- servicemonitor
+- etcd
+- apiserver
+- scheduler
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 指标监控体系详解 是什么
+- 如何 指标监控体系详解
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 指标监控体系详解
+- observability
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-observability-architecture-overview.md"
-    type: "depth"
-    desc: "可观测性架构体系"
-  - path: "04-distributed-tracing.md"
-    type: "depth"
-    desc: "分布式追踪体系"
-  - path: "../topic-cheat-sheet/promql.md"
-    type: "cheatsheet"
-    desc: "PromQL 速查卡"
+- path: 01-observability-architecture-overview.md
+  type: depth
+  desc: 可观测性架构体系
+- path: 04-distributed-tracing.md
+  type: depth
+  desc: 分布式追踪体系
+- path: ../topic-cheat-sheet/promql.md
+  type: cheatsheet
+  desc: PromQL 速查卡
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
 ---
+
 
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 

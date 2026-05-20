@@ -1,63 +1,175 @@
+---
+title: 能源电力 Kubernetes 生产架构设计
+description: '# 能源电力 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- flux
+- redis
+- mysql
+- kafka
+- hpa
+- gateway
+- operator
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 能源电力架构师
+- 电力系统工程师
+- 充电运营平台开发者
+- 阿里云能源解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 能源电力 Kubernetes 集群部署架构
+- 虚拟电厂 VPP 调度优化系统
+- 新能源功率预测 AI 模型
+- 充电桩运营平台百万级设备接入
+- 电力数据时序库 Lindorm 架构
+trigger_keywords:
+- 能源电力
+- 智能电网
+- 虚拟电厂
+- 新能源
+- 充电桩
+- 碳资产
+- 电力交易
+- 调度自动化
+- 新能源预测
+- 储能
+related_domains:
+- domain-5-edge-computing
+- domain-26-service-mesh-microservices
+- domain-9-security-compliance
+- domain-12-observability-comprehensive
+- domain-7-ai-ml-platform
+related_topics:
+- topic-application-architecture/86-solid-state-battery
+- topic-application-architecture/52-smart-water
+- topic-application-architecture/72-digital-twin-city
+---
+
+
 # 能源电力 Kubernetes 生产架构设计
 
-> **适用场景**: 智能电网 / 新能源发电 / 虚拟电厂 / 碳资产管理 / 电力交易 / 充电桩运营  
-> **云厂商**: 阿里云 ACK + 产品体系 (电力监控系统安全防护规定 / 等保 2.0)  
-> **适用版本**: Kubernetes v1.29 - v1.33  
-> **最后更新**: 2026-04-24  
+> **适用场景**: 智能电网 / 新能源发电 / 虚拟电厂 / 碳资产管理 / 电力交易 / 充电桩运营
+> **云厂商**: 阿里云 ACK + 产品体系 (电力监控系统安全防护规定 / 等保 2.0)
+> **适用版本**: Kubernetes v1.29 - v1.33
+> **最后更新**: 2026-05-18
 > **目标读者**: 能源行业架构师、电力系统工程师、阿里云解决方案架构师
 
 ---
 
-## 📋 目录
+## 目录
 
-- [一、整体架构全景](#一整体架构全景)
-- [二、智能电网调度架构](#二智能电网调度架构)
-- [三、新能源发电监控架构](#三新能源发电监控架构)
-- [四、虚拟电厂 (VPP) 架构](#四虚拟电厂-vpp-架构)
-- [五、电力市场交易架构](#五电力市场交易架构)
-- [六、充电桩运营平台架构](#六充电桩运营平台架构)
-- [七、碳资产管理架构](#七碳资产管理架构)
-- [八、ACK 阿里云部署架构](#八ack-阿里云部署架构)
+1. [行业概述](#1-行业概述)
+2. [业务场景](#2-业务场景)
+3. [架构设计](#3-架构设计)
+4. [核心技术栈](#4-核心技术栈)
+5. [K8s 部署方案](#5-k8s-部署方案)
+6. [数据架构](#6-数据架构)
+7. [AI/ML 组件](#7-aiml-组件)
+8. [安全合规](#8-安全合规)
+9. [最佳实践](#9-最佳实践)
+10. [反模式](#10-反模式)
+11. [参考资源](#11-参考资源)
 
 ---
 
-## 一、整体架构全景
+## 1. 行业概述
+
+### 1.1 行业背景
+
+能源电力行业是国民经济的命脉，正在经历从传统化石能源向清洁能源的深刻转型。中国"双碳"目标（2030 年碳达峰、2060 年碳中和）驱动着电力系统的全面升级：新能源装机容量持续增长（风电 + 光伏超过 10 亿千瓦），特高压输电网络加速建设，电力市场化改革深入推进，虚拟电厂、储能、电动汽车等新业态蓬勃发展。能源电力行业的信息化建设正在从传统的 SCADA/EMS 系统向云原生、大数据、AI 驱动的智慧能源平台演进。
+
+能源电力平台的核心信息化需求涵盖：新能源功率预测（短期 72 小时/超短期 4 小时）、虚拟电厂资源聚合与优化调度、电力现货市场交易（日前/实时双市场）、充电桩运营管理（百万级设备接入）、碳资产核算与交易、配电自动化与故障自愈。这些需求对计算资源（AI 推理 + 优化求解器）、存储资源（亿级电表测点时序数据）和实时性（毫秒级保护控制）提出了极高要求。电力行业还面临严格的监管合规要求：电力监控系统安全防护规定（安全分区/网络专用/横向隔离/纵向认证）、等保 2.0 三级、关键信息基础设施保护。
+
+### 1.2 行业挑战
+
+| 挑战 | 说明 | 架构影响 |
+|:---|:---|:---|
+| 新能源波动性 | 风电光伏出力预测误差大 | AI 预测 + 储能调度 + 备用优化 |
+| 负荷峰谷差扩大 | 极端天气/电动汽车充电加剧峰谷差 | 需求响应 + 虚拟电厂削峰填谷 |
+| 海量分布式接入 | 百万级分布式光伏/储能并网 | 边缘计算 + 即插即用协议 |
+| 电力网络安全 | 电力监控系统面临国家级网络威胁 | 零信任 + 安全分区 + 纵深防御 |
+| 实时平衡要求 | 频率稳定要求 50±0.2Hz | 毫秒级 AGC + 安全自动装置 |
+| 电力市场化 | 现货市场实时出清复杂度高 | 高并发交易引擎 + 风险控制 |
+| 数据规模巨大 | 亿级电表 15 分钟采集，PB 级时序数据 | Lindorm 时序 + 数据湖 |
+| 合规监管严格 | 电力监控安全防护 + 等保 + 密评 | 专有云/物理隔离 + 国密 |
+
+### 1.3 市场格局
+
+中国能源电力行业由国家电网和南方电网两大央企主导，分别覆盖 26 个和 5 个省份，年投资总额超过 5000 亿元。国电南瑞、许继电气、平高电气等传统电力设备企业是信息化建设的主力军。阿里云、华为云、腾讯云等云服务商凭借云原生和 AI 能力正在深入能源行业，提供智慧电网解决方案。虚拟电厂、电力交易、综合能源服务、充电运营等细分赛道涌现了大量创新企业，如特来电、星星充电、国能日新、朗新科技等。
+
+---
+
+## 2. 业务场景
+
+### 2.1 智能电网调度
+
+电网调度是电力系统的核心职能，负责维持发电和用电的实时平衡。调度系统包括 SCADA（数据采集与监视控制）、EMS（能量管理系统）、DMS（配电管理系统）、WAMS（广域测量系统）。新一代调度系统需要支撑大规模新能源接入场景下的经济调度、安全校核、自动发电控制（AGC）、自动电压控制（AVC）等功能。调度系统的实时性要求极高：AGC 控制周期为 4 秒，保护动作响应时间 < 100ms。系统需要支持多级调度协同（国调-网调-省调-地调-县调）。
+
+### 2.2 新能源发电监控
+
+集中式和分布式新能源场站的远程监控与功率预测。核心功能包括：设备状态监测（风机/逆变器实时数据采集）、功率预测（基于 NWP 数值天气预报 + AI 模型）、健康管理（设备故障预警与诊断）、生产管理（发电量统计/报表/对标）。新能源场站通常位于偏远地区，需要通过专线或 5G 网络将数据传输到集控中心，场站内部署边缘计算节点实现本地监控和断网自治。
+
+### 2.3 虚拟电厂（VPP）
+
+虚拟电厂将分布式电源、储能、可调负荷等资源通过通信技术聚合起来，作为一个整体参与电网调度和电力市场。VPP 平台的核心功能包括：资源注册与能力评估、实时状态监测与聚合能力计算、优化调度策略生成（经济性最优/响应速度最优）、指令下发与执行跟踪、收益结算与分成。VPP 需要协调数万到数十万个分布式资源，对平台的并发处理能力和优化求解能力要求极高。
+
+### 2.4 充电桩运营
+
+电动汽车充电桩的运营管理平台。中国充电桩保有量已超过 800 万根，涵盖交流慢充、直流快充、超充桩（480kW+）和换电站。核心功能包括：设备接入与管理（OCPP/自定义协议适配）、充电订单管理（启动/停止/计费/支付）、智能导航与预约（找桩/排队/预约充电）、运营监控（设备故障/利用率/收益分析）、互联互通（与各大车企/地图平台对接）。充电桩平台需要支撑百万级设备的并发连接和高峰时段的订单洪峰。
+
+### 2.5 碳资产管理
+
+企业碳排放核算、碳配额管理和碳交易。核心功能包括：排放核算（范围 1/2/3 温室气体排放计算）、减排项目管理（CCER/绿电/绿证）、碳盘查（年度碳排放核查）、碳目标管理（碳达峰/碳中和路径规划）、碳市场交易（CEA 配额交易/CCER 抵消）。碳资产管理平台需要与企业的能源管理系统、生产管理系统对接，自动采集能耗数据并核算碳排放。
+
+---
+
+## 3. 架构设计
+
+### 3.1 能源电力全景架构
 
 ```mermaid
 flowchart TB
     subgraph Generation["发电侧"]
-        COAL["火电<br">传统能源"]
-        WIND["风电<br">陆上/海上"]
-        SOLAR["光伏<br">分布式/集中式"]
-        HYDRO["水电<br">抽水蓄能"]
-        STORAGE["储能<br">电化学/压缩空气"]
+        COAL["火电 灵活性改造"]
+        WIND["风电 陆上/海上"]
+        SOLAR["光伏 分布式/集中式"]
+        HYDRO["水电 抽水蓄能"]
+        STORAGE_E["储能 电化学/压缩空气"]
     end
 
     subgraph Transmission["输变电"]
-        UHV["特高压<br">远距离输送"]
-        SUBSTATION["变电站<br">升压/降压"]
-        GRID["配电网<br">智能配电"]
+        UHV["特高压 ±1100kV"]
+        SUBSTATION["变电站 智能变压器"]
+        GRID_DIST["配电网 自动化/FA"]
     end
 
     subgraph Consumption["用电侧"]
-        INDUSTRY["工业<br">大用户"]
-        COMMERCIAL["商业<br">楼宇/园区"]
-        RESIDENTIAL["居民<br">户用光伏/充电桩"]
-        EV["电动汽车<br">V2G 互动"]
+        INDUSTRY["工业 大用户需求响应"]
+        COMMERCIAL["商业 楼宇/园区"]
+        RESIDENTIAL["居民 户用光伏"]
+        EV["电动汽车 V2G"]
     end
 
-    subgraph Platform["能源平台 (ACK)"]
-        SCADA_CLOUD["SCADA 云化<br">监控/采集"]
-        EMS["能量管理系统<br">优化调度"]
-        TRADING["电力交易<br">中长期/现货"]
-        CARBON["碳资产管理<br">核算/交易"]
-        CHARGE["充电运营<br">桩/站/网"]
+    subgraph Platform["能源平台 ACK"]
+        SCADA_CLOUD["SCADA 云化监控"]
+        EMS_P["EMS 能量管理调度"]
+        VPP_P["VPP 虚拟电厂"]
+        TRADING_P["电力交易平台"]
+        CARBON_P["碳资产管理"]
+        CHARGE_P["充电运营平台"]
     end
 
     subgraph DataEnergy["数据智能"]
-        FORECAST["功率预测<br">风/光/负荷"]
-        OPTIMIZE["优化算法<br">经济调度"]
-        DIGITAL_TWIN_ENERGY["数字孪生<br">电网仿真"]
+        FORECAST["功率预测 AI"]
+        OPTIMIZE["优化求解器 MILP"]
+        TWIN["数字孪生 电网仿真"]
+        ANALYTICS["运营分析 BI"]
     end
 
     Generation --> Transmission --> Consumption
@@ -67,218 +179,82 @@ flowchart TB
     style DataEnergy fill:#e8f5e9
 ```
 
-### 阿里云产品映射
+### 3.2 虚拟电厂调度时序
 
-| 架构层 | 阿里云方案 | 能源行业特性 |
-|:---|:---|:---|
-| 容器平台 | **ACK 专有版** / **Apsara Stack** | 电力专网/物理隔离 |
-| 时序数据库 | **Lindorm** / **InfluxDB** | 海量测点/高频采集 |
-| 大数据 | **MaxCompute** + **实时计算 Flink** | 功率预测/负荷预测 |
-| AI | **PAI** | 新能源功率预测 |
-| IoT | **阿里云 IoT 平台** | 百万级设备接入 |
-| 数字孪生 | **DataV** + **UE/Unity** | 电网可视化 |
-| 安全 | **云安全中心** + **堡垒机** | 等保 2.0 + 电力监控安全 |
-| 边缘 | **ACK@Edge** | 场站/变电站边缘计算 |
+```mermaid
+sequenceDiagram
+    participant GRID as 电网调度
+    participant VPP as 虚拟电厂平台
+    participant DER as 分布式电源
+    participant STORE as 储能系统
+    participant EV as 充电桩/V2G
+    participant LOAD as 可调负荷
 
----
+    GRID->>VPP: 下发调峰需求 (MW/时段)
+    VPP->>VPP: 聚合资源能力评估
+    VPP->>VPP: 优化调度策略生成
+    VPP->>DER: 调度分布式电源出力
+    DER-->>VPP: 响应确认
+    VPP->>STORE: 调度储能放电
+    STORE-->>VPP: 响应确认
+    VPP->>EV: 调度V2G反向送电
+    EV-->>VPP: 响应确认
+    VPP->>LOAD: 调度可调负荷
+    LOAD-->>VPP: 响应确认
+    VPP->>GRID: 聚合出力上报
+```
 
-## 二、智能电网调度架构
+### 3.3 充电桩运营平台
 
 ```mermaid
 flowchart TB
-    subgraph ControlCenter["调度控制中心"]
-        AGCD["国调/网调"]
-        PROVINCIAL["省调"]
-        REGIONAL["地调"]
-        COUNTY["县配调"]
+    subgraph Piles["充电桩"]
+        AC["交流桩 慢充 7kW"]
+        DC["直流桩 快充 120kW"]
+        SUPER["超充桩 480kW+"]
+        SWAP["换电站 3分钟"]
     end
 
-    subgraph System["调度系统"]
-        SCADA_SYS["SCADA<br">数据采集监视"]
-        EMS_SYS["EMS<br">能量管理"]
-        DMS["DMS<br">配电管理"]
-        WAMS["WAMS<br">广域测量"]
+    subgraph Platform_C["充电平台 ACK"]
+        CONNECT_C["设备接入 OCPP"]
+        ORDER_C["充电订单 计费"]
+        PAY_C["支付 预付/后付"]
+        NAVI_C["导航 预约"]
     end
 
-    subgraph Field["现场层"]
-        RTU["RTU/FTU"]
-        PMU["PMU<br">同步相量"]
-        METER["智能电表"]
-        PROTECTION["保护装置"]
+    subgraph Ops["运营管理"]
+        MONITOR_C["监控 故障告警"]
+        MAINT_C["运维 巡检保养"]
+        ANALYSIS_C["分析 利用率/收益"]
+        SETTLE_C["结算 分成/对账"]
     end
 
-    ControlCenter --> System --> Field
-
-    style ControlCenter fill:#e3f2fd
-    style System fill:#fff8e1
-    style Field fill:#e8f5e9
+    Piles --> Platform_C --> Ops
 ```
 
 ---
 
-## 三、新能源发电监控架构
+## 4. 核心技术栈
 
-```mermaid
-flowchart TB
-    subgraph FarmSite["新能源场站"]
-        TURBINE["风机<br">单机控制器"]
-        INVERTER["逆变器<br">组串/集中"]
-        METEO["气象站<br">辐照/风速/温度"]
-        SUBSTATION_FARM["升压站<br">箱变/主变"]
-    end
-
-    subgraph EdgeCompute["边缘计算"]
-        EDGE_BOX["边缘网关<br">协议转换"]
-        LOCAL_SCADA["本地 SCADA<br">实时监控"]
-        LOCAL_AI["边缘 AI<br">故障预警"]
-    end
-
-    subgraph CloudPlatform["云平台"]
-        REMOTE_SCADA["远程集控<br">多站集中"]
-        POWER_FORECAST["功率预测<br">短期/超短期"]
-        HEALTH_MGMT["健康管理<br">设备诊断"]
-        PRODUCTION_MGMT["生产管理<br">报表/对标"]
-    end
-
-    FarmSite --> EdgeCompute --> CloudPlatform
-
-    style EdgeCompute fill:#e3f2fd
-    style CloudPlatform fill:#e8f5e9
-```
+| 类别 | 开源工具 | 阿里云方案 | 说明 |
+|:---|:---|:---|:---|
+| 时序数据库 | InfluxDB, TDengine | Lindorm 时序引擎 | 亿级测点高频采集 |
+| 实时计算 | Flink, Kafka Streams | 实时计算 Flink 版 | 功率/负荷实时计算 |
+| 离线计算 | Spark, Hive | MaxCompute | 历史数据分析 |
+| AI 预测 | Prophet, Transformer | PAI | 功率/负荷预测 |
+| 优化求解 | Pyomo, Gurobi | E-HPC | MILP 调度优化 |
+| 边缘计算 | KubeEdge, OpenYurt | ACK@Edge | 场站/变电站边缘 |
+| IoT 接入 | EMQX, Mosquitto | 阿里云 IoT 平台 | 设备协议适配 |
+| 协议转换 | IEC 61850, IEC 104, Modbus | 自研协议网关 | 电力设备通信 |
+| 数字孪生 | Unity, Cesium | DataV + 3D 可视化 | 电网全景展示 |
+| 区块链 | Fabric, FISCO BCOS | 蚂蚁链 BaaS | 碳交易存证 |
+| 容器平台 | K8s | ACK 专有版/Pro | 安全合规部署 |
 
 ---
 
-## 四、虚拟电厂 (VPP) 架构
+## 5. K8s 部署方案
 
-```mermaid
-flowchart TB
-    subgraph Resources["分布式资源"]
-        SOLAR_ROOF["屋顶光伏"]
-        HOME_BATTERY["户用储能"]
-        EV_V2G["电动汽车 V2G"]
-        INDUSTRIAL_LOAD["工业可调负荷"]
-        COMMERCIAL_AC["商业空调"]
-    end
-
-    subgraph Aggregation["聚合层"]
-        AGG_GATEWAY["资源网关<br">协议适配"]
-        FLEXIBILITY["灵活性评估<br">可调度容量"]
-        OPTIM_VPP["优化调度<br">收益最大化"]
-    end
-
-    subgraph Market["市场参与"]
-        PEAK_SHAVING["削峰填谷<br">需求响应"]
-        FREQ_REG["调频辅助服务"]
-        ENERGY_TRADE["电力交易<br">现货/中长期"]
-        CAPACITY_MARKET["容量市场"]
-    end
-
-    Resources --> Aggregation --> Market
-
-    style Aggregation fill:#e3f2fd
-    style Market fill:#e8f5e9
-```
-
----
-
-## 五、电力市场交易架构
-
-```mermaid
-flowchart TB
-    subgraph Participants["市场参与者"]
-        GEN_COMPANY["发电企业"]
-        GRID_COMPANY["电网企业"]
-        USER_COMPANY["电力用户"]
-        SELLER["售电公司"]
-    end
-
-    subgraph TradePlatform["交易平台"]
-        LONG_TERM["中长期交易<br">年度/月度/月内"]
-        DAY_AHEAD["日前市场<br">D-1"]
-        REAL_TIME["实时市场<br">平衡机制"]
-        AUXILIARY["辅助服务<br">调频/备用"]
-    end
-
-    subgraph Settlement["结算"]
-        METERING["计量<br">发电量/用电量"]
-        PRICE_CALC["电价计算<br">节点/分时"]
-        BILLING_ELEC["账单<br">发用两侧"]
-        PAYMENT_ELEC["清分结算<br">资金流转"]
-    end
-
-    Participants --> TradePlatform --> Settlement
-
-    style TradePlatform fill:#e3f2fd
-    style Settlement fill:#e8f5e9
-```
-
----
-
-## 六、充电桩运营平台架构
-
-```mermaid
-flowchart TB
-    subgraph ChargePile["充电桩"]
-        AC_PILE["交流桩<br">慢充"]
-        DC_PILE["直流桩<br">快充"]
-        SUPER_CHARGE["超充桩<br">480kW+"]
-        SWAP["换电站<br">电池更换"]
-    end
-
-    subgraph PlatformCharge["充电平台"]
-        CONNECT["设备接入<br">协议适配"]
-        ORDER_CHARGE["充电订单<br">启动/停止/计费"]
-        PAY_CHARGE["支付<br">预付费/后付费"]
-        NAVI["导航<br">找桩/预约"]
-    end
-
-    subgraph Operation["运营管理"]
-        MONITOR_CHARGE["监控<br">故障/告警"]
-        MAINTENANCE["运维<br">巡检/保养"]
-        ANALYSIS_CHARGE["分析<br">利用率/收益"]
-    end
-
-    ChargePile --> PlatformCharge --> Operation
-
-    style PlatformCharge fill:#e3f2fd
-    style Operation fill:#e8f5e9
-```
-
----
-
-## 七、碳资产管理架构
-
-```mermaid
-flowchart TB
-    subgraph CarbonData["碳数据"]
-        EMISSION["排放核算<br">范围1/2/3"]
-        REDUCTION["减排项目<br">CCER/绿电"]
-        INVENTORY["碳盘查<br">年度核查"]
-    end
-
-    subgraph Management["碳管理"]
-        TARGET["目标设定<br">碳达峰/碳中和"]
-        PATHWAY["路径规划<br">减排路线"]
-        MONITOR_CARBON["监测报告<br">MRV"]
-    end
-
-    subgraph MarketCarbon["碳市场"]
-        ALLOWANCE["配额管理<br">CEA"]
-        CCER_TRADE["CCER 交易<br">抵消机制"]
-        GREEN_POWER["绿电交易<br">绿证"]
-    end
-
-    CarbonData --> Management --> MarketCarbon
-
-    style Management fill:#e3f2fd
-    style MarketCarbon fill:#e8f5e9
-```
-
----
-
-## 八、ACK 阿里云部署架构
-
-### 新能源集控平台 ACK 部署
+### 5.1 SCADA 数据采集器
 
 ```yaml
 apiVersion: apps/v1
@@ -334,8 +310,11 @@ spec:
             limits:
               cpu: "8"
               memory: "16Gi"
----
-# 功率预测服务 (GPU)
+```
+
+### 5.2 功率预测 GPU 服务
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -360,13 +339,20 @@ spec:
       containers:
         - name: forecast
           image: registry.cn-hangzhou.aliyuncs.com/energy/power-forecast:v2.0
+          ports:
+            - containerPort: 8080
           env:
             - name: MODEL_PATH
-              value: "/models/wind-power-forecast"
+              value: "/models/wind-power-forecast-v3"
             - name: FORECAST_HORIZON
-              value: "72"  # 小时
+              value: "72"
             - name: RESOLUTION
               value: "15min"
+            - name: LINDORM_URL
+              valueFrom:
+                secretKeyRef:
+                  name: energy-db-secret
+                  key: lindorm-url
           resources:
             requests:
               cpu: "4"
@@ -376,12 +362,210 @@ spec:
               cpu: "16"
               memory: "64Gi"
               nvidia.com/gpu: "1"
+          volumeMounts:
+            - name: model-storage
+              mountPath: /models
+      volumes:
+        - name: model-storage
+          persistentVolumeClaim:
+            claimName: forecast-model-pvc
+```
+
+### 5.3 充电桩设备接入
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: charge-station-gateway
+  namespace: energy-platform
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: charge-gateway
+  template:
+    metadata:
+      labels:
+        app: charge-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: registry.cn-hangzhou.aliyuncs.com/energy/charge-gateway:v3.0.0
+          ports:
+            - containerPort: 8080
+            - containerPort: 1883
+              name: mqtt
+          env:
+            - name: PROTOCOL
+              value: "ocpp2.0"
+            - name: MAX_DEVICES
+              value: "100000"
+            - name: MQTT_BROKER
+              value: "mqtt-broker:1883"
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: energy-db-secret
+                  key: polardb-url
+          resources:
+            requests:
+              cpu: "2"
+              memory: "4Gi"
+            limits:
+              cpu: "4"
+              memory: "8Gi"
 ```
 
 ---
 
-## 参考链接
+## 6. 数据架构
 
-- [阿里云能源行业解决方案](https://www.aliyun.com/solution/scenario/energy)
-- [电力监控系统安全防护规定](https://www.ndrc.gov.cn/)
-- [IEC 61850 / IEC 104 标准](https://www.iec.ch/)
+### 6.1 数据分层
+
+```mermaid
+flowchart TB
+    subgraph 采集层["数据采集"]
+        M1["智能电表 15min/亿级"]
+        M2["PMU 同步相量 μs级"]
+        M3["气象数据 NWP 1h"]
+        M4["充电桩数据 实时"]
+    end
+
+    subgraph 存储层["数据存储"]
+        S1["Lindorm 时序 测点数据"]
+        S2["PolarDB 业务 交易/资产"]
+        S3["OSS 归档 历史数据"]
+        S4["Redis 实时 状态缓存"]
+    end
+
+    subgraph 分析层["数据分析"]
+        A1["Flink 实时 功率/负荷"]
+        A2["MaxCompute 离线 历史分析"]
+        A3["PAI AI 预测训练"]
+        A4["Hologres OLAP 即席查询"]
+    end
+
+    采集层 --> 存储层 --> 分析层
+```
+
+### 6.2 存储策略
+
+| 数据类型 | 存储方案 | 保留策略 | 写入频率 | 数据量级 |
+|:---|:---|:---|:---|:---|
+| 电表采集 | Lindorm 时序 | 3 年热 + 7 年冷 | 15 分钟 | 亿级测点 |
+| PMU 相量 | Lindorm 时序 | 1 月热 + 1 年冷 | 毫秒级 | TB/天 |
+| 气象预报 | PolarDB + OSS | 1 年 | 1 小时 | GB/天 |
+| 交易数据 | PolarDB MySQL | 永久 | 秒级 | GB/天 |
+| 充电桩数据 | Lindorm 时序 | 3 年 | 秒级 | TB/月 |
+| 碳排放数据 | PolarDB MySQL | 永久 | 日级 | GB 级 |
+
+---
+
+## 7. AI/ML 组件
+
+### 7.1 AI 应用矩阵
+
+| AI 场景 | 模型/算法 | 输入 | 输出 | 说明 |
+|:---|:---|:---|:---|:---|
+| 风电功率预测 | Transformer + CNN | NWP + 历史功率 | 72h 功率曲线 | 精度 > 85% |
+| 光伏功率预测 | LSTM + 注意力 | 辐照 + 云图 | 72h 功率曲线 | 精度 > 90% |
+| 负荷预测 | DeepAR + Prophet | 历史负荷 + 气象 | 96 点负荷曲线 | 精度 > 95% |
+| VPP 优化调度 | MILP 求解器 | 资源状态 + 约束 | 调度方案 | 分钟级求解 |
+| 设备故障预测 | LSTM 异常检测 | 振动/温度/电流 | 故障预警 | 提前 24h |
+| 线损分析 | XGBoost | 量测数据 | 线损率/异常 | 月度分析 |
+| 碳排放核算 | 规则引擎 + ML | 能耗数据 | 碳排放量 | 实时核算 |
+
+---
+
+## 8. 安全合规
+
+### 8.1 安全分区架构
+
+电力监控系统按照"安全分区、网络专用、横向隔离、纵向认证"的原则划分为四个安全区：
+
+| 安全区 | 功能 | 网络要求 | 部署方案 |
+|:---|:---|:---|:---|
+| I 区（控制区） | 实时控制/保护 | 物理隔离 | 专有云/裸金属 |
+| II 区（非控制区） | 调度管理/监测 | 逻辑隔离 | 专有云/ACK 专有版 |
+| III 区（管理区） | 生产管理/OA | 网闸隔离 | ACK Pro |
+| IV 区（信息区） | 对外服务/互联网 | 防火墙隔离 | ACK Pro + WAF |
+
+### 8.2 合规框架
+
+- **电力监控系统安全防护规定**: 安全分区/网络专用/横向隔离/纵向认证
+- **等保 2.0 三级**: 电力关键信息基础设施等级保护
+- **关键信息基础设施保护条例**: 电力 CII 安全保护
+- **国密合规**: SM2/SM3/SM4 密码算法应用
+- **数据安全法**: 电力数据分类分级管理
+
+---
+
+## 9. 最佳实践
+
+- **预测精度保障**: 风电预测准确率 > 85%，光伏 > 90%，通过多模型集成学习提升精度
+- **调度实时性**: VPP 调度指令端到端延迟 < 100ms，使用 Redis 缓存资源实时状态
+- **边缘自治**: 变电站/场站边缘节点断网后独立运行 24 小时，保障基本监控和控制功能
+- **数据质量**: 建立测点数据质量评估体系，自动识别坏数据（通信中断/传感器漂移/数据跳变）
+- **弹性伸缩**: 极端天气和突发事件场景的计算弹性，使用 HPA + 预热策略应对计算洪峰
+- **碳核算自动化**: 对接能耗数据自动核算碳排放，支持碳盘查和碳交易数据报送
+
+---
+
+## 10. 反模式
+
+### 10.1 安全分区违规
+
+将生产控制区（I/II 区）和管理信息区（III/IV 区）部署在同一网络平面。
+
+**解决方案**: 严格执行安全分区原则，I/II 区部署在专有云或物理机房，III/IV 区部署在 ACK Pro，不同区间通过网闸物理隔离。
+
+### 10.2 边缘无自治
+
+边缘节点完全依赖云端，网络中断时变电站/场站失去监控能力。
+
+**解决方案**: 边缘节点部署 ACK@Edge，关键监控和控制逻辑本地执行，网络恢复后自动同步数据到云端。
+
+### 10.3 忽视协议兼容
+
+只支持 MQTT 协议接入设备，忽视电力行业广泛使用的 IEC 61850/IEC 104/Modbus 协议。
+
+**解决方案**: 部署协议适配网关，支持 IEC 61850（变电站）、IEC 104（远动）、Modbus（设备）、MQTT（IoT）等多种电力通信协议。
+
+---
+
+## 11. 参考资源
+
+### 11.1 阿里云组件映射
+
+| 功能域 | 阿里云方案 | 说明 |
+|:---|:---|:---|
+| 容器平台 | **ACK 专有版 / ACK Pro** | 安全分区合规部署 |
+| 边缘计算 | **ACK@Edge** | 变电站/场站边缘节点 |
+| 时序数据库 | **Lindorm** | 亿级测点时序数据 |
+| 实时计算 | **Flink** | 功率/负荷实时计算 |
+| 离线计算 | **MaxCompute** | 历史数据分析 |
+| AI 平台 | **PAI** | 功率预测模型训练推理 |
+| IoT 平台 | **阿里云 IoT** | 设备接入协议适配 |
+| 数字孪生 | **DataV + 3D** | 电网全景可视化 |
+| 对象存储 | **OSS** | 历史数据归档 |
+| 区块链 | **蚂蚁链 BaaS** | 碳交易/绿证存证 |
+| 可观测性 | **ARMS + SLS** | 全链路监控审计 |
+| 密码服务 | **阿里云 KMS + HSM** | 国密算法/密钥管理 |
+
+### 11.2 生产检查清单
+
+- [ ] 新能源预测模型准确率验证（风电 > 85%，光伏 > 90%）
+- [ ] 虚拟电厂资源聚合与调度端到端测试
+- [ ] 电网安全稳定约束校验通过
+- [ ] 边缘测控实时性 < 100ms 验证
+- [ ] 电力监控系统等保三级合规审计
+- [ ] 安全分区网闸隔离验证
+- [ ] 充电桩设备接入压测（10 万级并发）
+- [ ] 碳排放核算准确性校验
+- [ ] 边缘节点断网自治能力 24h 测试
+- [ ] 国密算法合规验证
+
+---
+
+**维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT

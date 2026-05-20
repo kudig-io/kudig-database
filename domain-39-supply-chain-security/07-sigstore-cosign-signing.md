@@ -1,3 +1,42 @@
+---
+title: Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
+description: '## 概述 (Overview)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- prometheus
+- helm
+- docker
+- redis
+- mysql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 是什么
+- 如何 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- Sigstore
+- Cosign
+- 签名
+- Sigstore
+- and
+- Cosign
+- Signing
+- supply
+---
+
+
 # Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
 
 ## 概述 (Overview)

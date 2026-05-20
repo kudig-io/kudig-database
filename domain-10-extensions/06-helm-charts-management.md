@@ -1,3 +1,43 @@
+---
+title: 47 - Helm Chart开发与管理
+description: '# 47 - Helm Chart开发与管理'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- helm
+- argocd
+- flux
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Helm Chart开发与管理 是什么
+- 如何 Helm Chart开发与管理
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- Helm
+- Chart开发与管理
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/helm-fta.md
+  label: '故障树: helm'
+---
+
 # 47 - Helm Chart开发与管理
 
 ## Helm版本对比

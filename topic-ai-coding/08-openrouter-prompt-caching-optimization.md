@@ -1,3 +1,32 @@
+---
+title: Prompt Caching 与成本优化
+description: '# Prompt Caching 与成本优化'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Prompt Caching 与成本优化 是什么
+- 如何 Prompt Caching 与成本优化
+trigger_keywords:
+- Prompt
+- Caching
+- 与成本优化
+- ai
+- coding
+---
+
 # Prompt Caching 与成本优化
 
 > **文档类型**: 架构与优化 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Prompt Caching, Sticky Routing, Cache TTL, Cost Optimization, Anthropic Cache, OpenAI Cache, DeepSeek, Credits

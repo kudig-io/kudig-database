@@ -1,3 +1,40 @@
+---
+title: Kubernetes 全量故障树分析(FTA)排查手册
+description: '# Kubernetes 全量故障树分析(FTA)排查手册'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- Kubernetes 全量故障树分析(FTA)排查手册 是什么
+- 如何 Kubernetes 全量故障树分析(FTA)排查手册
+- Kubernetes 全量故障树分析(FTA)排查手册 根因分析
+- Kubernetes 全量故障树分析(FTA)排查手册 故障树
+trigger_keywords:
+- Kubernetes
+- 全量故障树分析
+- FTA
+- 排查手册
+- fta
+---
+
+
 # Kubernetes 全量故障树分析(FTA)排查手册
 
 > **文档版本**: v1.0  

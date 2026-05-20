@@ -1,3 +1,32 @@
+---
+title: API-initiated Eviction
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- pdb
+- daemonset
+- gateway
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- API-initiated Eviction 是什么
+- 如何 API-initiated Eviction
+trigger_keywords:
+- API-initiated
+- Eviction
+- dictionary
+title_en: Api Initiated Eviction
+---
+
+
 # API-initiated Eviction
 
 ## 概述

@@ -1,20 +1,37 @@
 ---
-title: "Git 速查卡"
-description: "版本控制日常操作快速参考，覆盖 Git 2.30+ 常用命令"
+title: Git 速查卡
+description: 版本控制日常操作快速参考，覆盖 Git 2.30+ 常用命令
 category: cheatsheet
-tags: [git, version-control, cheatsheet, quick-reference, devops]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- git
+- version-control
+- cheatsheet
+- quick-reference
+- devops
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Git 速查卡 是什么
+- 如何 Git 速查卡
+trigger_keywords:
+- Git
+- 速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "beginner"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-9-platform-ops/"
-    desc: "GitOps 平台运维文档"
-  - path: "../topic-cheat-sheet/linux.md"
-    desc: "Linux 速查卡"
+- path: ../domain-9-platform-ops/
+  desc: GitOps 平台运维文档
+- path: ../topic-cheat-sheet/linux.md
+  desc: Linux 速查卡
 ---
+
 
 # Git 速查表
 

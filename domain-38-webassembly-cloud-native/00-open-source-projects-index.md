@@ -1,3 +1,40 @@
+---
+title: Domain-38 WebAssembly 云原生 — 开源项目索引
+description: Domain-38 WebAssembly 云原生 — 开源项目索引 — Kubernetes 生产运维知识库
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- kubelet
+- envoy
+- containerd
+- gateway
+- operator
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Domain-38 WebAssembly 云原生 — 开源项目索引 是什么
+- 如何 Domain-38 WebAssembly 云原生 — 开源项目索引
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Domain-38
+- WebAssembly
+- 云原生
+- 开源项目索引
+- webassembly
+- cloud
+- native
+---
+
 # Domain-38 WebAssembly 云原生 — 开源项目索引
 
 > **最后更新**: 2026-04-24

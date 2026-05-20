@@ -1,3 +1,34 @@
+---
+title: DaemonSet
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- cilium
+- flannel
+- calico
+- docker
+- opa
+- pdb
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- DaemonSet 是什么
+- 如何 DaemonSet
+trigger_keywords:
+- DaemonSet
+- dictionary
+title_en: Daemonset
+---
+
+
 # DaemonSet
 
 ## 概述

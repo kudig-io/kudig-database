@@ -1,3 +1,40 @@
+---
+title: Linux 命令大全参考
+description: '## 概述'
+category: linux
+tags:
+- linux
+- system
+- kernel
+- prometheus
+- helm
+- docker
+- falco
+- job
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 运维工程师
+- SRE
+- 系统管理员
+estimated_read_time: 20min
+intent_queries:
+- Linux 命令大全参考 是什么
+- 如何 Linux 命令大全参考
+- Kubernetes 14 linux 最佳实践
+trigger_keywords:
+- Linux
+- 命令大全参考
+- linux
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/linux.md
+  label: '速查卡: linux'
+---
+
+
 # Linux 命令大全参考
 
 ## 概述

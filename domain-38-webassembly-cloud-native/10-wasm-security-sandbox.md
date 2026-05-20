@@ -1,3 +1,42 @@
+---
+title: Wasm 安全与沙箱 (Wasm Security and Sandbox)
+description: '# Wasm 安全与沙箱 (Wasm Security and Sandbox)'
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- istio
+- envoy
+- containerd
+- opa
+- ingress
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Wasm 安全与沙箱 (Wasm Security and Sandbox) 是什么
+- 如何 Wasm 安全与沙箱 (Wasm Security and Sandbox)
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Wasm
+- 安全与沙箱
+- Wasm
+- Security
+- and
+- Sandbox
+- webassembly
+- cloud
+---
+
+
 # Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 > WebAssembly 的安全沙箱模型、基于能力的安全机制和供应链安全实践，构建云原生环境中的安全执行边界。

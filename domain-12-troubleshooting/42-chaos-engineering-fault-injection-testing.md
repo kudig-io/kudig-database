@@ -1,6 +1,57 @@
-# 42 - 混沌工程和故障注入测试 (Chaos Engineering and Fault Injection Testing)
+---
+title: 混沌工程和故障注入测试
+description: '### 🔗 关联故障排查文档'
+category: troubleshooting
+tags:
+- chaos-mesh
+- litmus
+- fault-injection
+- resilience
+- chaos
+- scheduler
+- prometheus
+- grafana
+- helm
+- containerd
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Chaos Mesh
+- 故障注入
+- 混沌工程
+- 韧性测试
+trigger_keywords:
+- 混沌工程和故障注入测试
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Chaos Engineering Principles](https://principlesofchaos.org/), [Chaos Mesh Documentation](https://chaos-mesh.org/docs/), [LitmusChaos Documentation](https://docs.litmuschaos.io/)
+
+# 42 - 混沌工程和故障注入测试 (Chaos Engineering and Fault Injection Testing)
 
 ---
 

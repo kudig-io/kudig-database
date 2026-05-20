@@ -1,3 +1,37 @@
+---
+title: 05-日志收集分析平台
+description: '# 05-日志收集分析平台'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- prometheus
+- docker
+- opa
+- redis
+- kafka
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 日志收集分析平台 是什么
+- 如何 日志收集分析平台
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 日志收集分析平台
+- production
+- operations
+---
+
+
 # 05-日志收集分析平台
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

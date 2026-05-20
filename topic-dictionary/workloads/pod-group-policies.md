@@ -1,3 +1,31 @@
+---
+title: Pod Group Policies
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- job
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Group Policies 是什么
+- 如何 Pod Group Policies
+trigger_keywords:
+- Pod
+- Group
+- Policies
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Group Policies
 
 ## 概述

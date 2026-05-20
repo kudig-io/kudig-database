@@ -1,3 +1,41 @@
+---
+title: SuperEdge 架构实践 (SuperEdge Architecture Practice)
+description: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- SuperEdge 架构实践 (SuperEdge Architecture Practice) 是什么
+- 如何 SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- SuperEdge
+- 架构实践
+- SuperEdge
+- Architecture
+- Practice
+- edge
+- computing
+---
+
+
 # SuperEdge 架构实践 (SuperEdge Architecture Practice)
 
 ## 概述 (Overview)

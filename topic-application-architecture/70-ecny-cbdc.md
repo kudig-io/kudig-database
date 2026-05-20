@@ -1,3 +1,50 @@
+---
+title: 数字人民币架构设计
+description: '# 数字人民币架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- statefulset
+- operator
+- wasm
+last_updated: 2026-05-18
+difficulty: expert
+reading_level: expert
+audience:
+- 金融科技架构师
+- 区块链工程师
+- 支付系统专家
+estimated_read_time: 5min
+intent_queries:
+- 数字人民币 e-CNY Kubernetes 架构
+- 央行数字货币 CBDC 区块链 K8s
+- 双离线支付 可信硬件 K8s
+- 数字人民币智能合约 Kubernetes
+- 金融级 Kubernetes 高可用
+trigger_keywords:
+- 数字人民币
+- e-CNY
+- CBDC
+- 央行数字货币
+- 区块链
+- 双离线支付
+- 智能合约
+- 国密
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-26-service-mesh-microservices
+related_topics:
+- 06-fintech-architecture
+- 38-supply-chain-finance
+- 25-quantitative-trading
+---
+
+
 # 数字人民币架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

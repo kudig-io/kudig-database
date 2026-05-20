@@ -1,3 +1,38 @@
+---
+title: Harbor企业级容器镜像仓库深度实践
+description: '# Harbor企业级容器镜像仓库深度实践'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- prometheus
+- helm
+- docker
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Harbor企业级容器镜像仓库深度实践 是什么
+- 如何 Harbor企业级容器镜像仓库深度实践
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- Harbor企业级容器镜像仓库深度实践
+- container
+- image
+- management
+---
+
+
 # Harbor企业级容器镜像仓库深度实践
 
 > **作者**: 容器镜像管理专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

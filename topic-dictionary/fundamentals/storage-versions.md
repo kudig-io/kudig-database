@@ -1,3 +1,30 @@
+---
+title: 存储版本
+description: '# 存储版本'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- crd
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储版本 是什么
+- 如何 存储版本
+trigger_keywords:
+- 存储版本
+- dictionary
+title_en: Storage Versions
+---
+
+
 # 存储版本
 
 ## 概述

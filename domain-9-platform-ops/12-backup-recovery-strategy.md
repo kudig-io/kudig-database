@@ -1,3 +1,51 @@
+---
+title: Kubernetes 备份与恢复概述 (Backup & Recovery Overview)
+description: '# Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- etcd
+- kubelet
+- prometheus
+- grafana
+- helm
+- argocd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 是什么
+- 如何 Kubernetes 备份与恢复概述 (Backup & Recovery Overview)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- Kubernetes
+- 备份与恢复概述
+- Backup
+- Recovery
+- Overview
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # Kubernetes 备份与恢复概述 (Backup & Recovery Overview)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  

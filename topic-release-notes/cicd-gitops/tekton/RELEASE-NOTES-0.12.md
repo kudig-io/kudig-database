@@ -1,3 +1,31 @@
+---
+title: tekton v0.12 Release Notes
+description: tekton v0.12 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- tekton v0.12 Release Notes 是什么
+- 如何 tekton v0.12 Release Notes
+trigger_keywords:
+- tekton
+- v0.12
+- Release
+- Notes
+- release
+- notes
+---
+
 # tekton v0.12 Release Notes
 
 Source: [v0.12.1](https://github.com/tektoncd/pipeline/releases/tag/v0.12.1)
@@ -20,6 +48,10 @@ N/A
 ## Changes
 
 # Fixes
+
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 * :bug: Add PodSecurityPolicy access to webhook's clusterrole (#2620)
 * :bug: Fix typo introduced in git-init  (#2620)

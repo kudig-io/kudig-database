@@ -1,3 +1,30 @@
+---
+title: 进阶话题与生产最佳实践
+description: '# 进阶话题与生产最佳实践'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 进阶话题与生产最佳实践 是什么
+- 如何 进阶话题与生产最佳实践
+trigger_keywords:
+- 进阶话题与生产最佳实践
+- ai
+- coding
+---
+
+
 # 进阶话题与生产最佳实践
 
 > **文档类型**: 进阶实践专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Auto Compact, Session Management, Security, Cost Control, Non-interactive, Team Collaboration, Configuration

@@ -1,3 +1,51 @@
+---
+title: 77 - Service实现机制
+description: '## IPVS调度算法'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- scheduler
+- cilium
+- mysql
+- statefulset
+- ebpf
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Service实现机制 是什么
+- 如何 Service实现机制
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Service实现机制
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # 77 - Service实现机制
 
 ## Service类型对比

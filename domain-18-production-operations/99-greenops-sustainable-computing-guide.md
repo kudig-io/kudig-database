@@ -1,3 +1,37 @@
+---
+title: GreenOps 可持续计算与碳足迹优化指南
+description: '# GreenOps 可持续计算与碳足迹优化指南'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- scheduler
+- prometheus
+- grafana
+- helm
+- vpa
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- GreenOps 可持续计算与碳足迹优化指南 是什么
+- 如何 GreenOps 可持续计算与碳足迹优化指南
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- GreenOps
+- 可持续计算与碳足迹优化指南
+- production
+- operations
+---
+
 # GreenOps 可持续计算与碳足迹优化指南
 
 > **适用版本**: Kepler v0.7.12 / Kube-green v0.6 / Scaphandre v1.0  

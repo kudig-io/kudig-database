@@ -1,3 +1,42 @@
+---
+title: 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南
+description: '# 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- etcd
+- statefulset
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南 是什么
+- 如何 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- 移动云
+- CKE
+- China
+- Mobile
+- Cloud
+- Kubernetes
+- Engine
+- 企业级深度实战指南
+---
+
+
 # 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南
 
 ## 产品概述与战略定位

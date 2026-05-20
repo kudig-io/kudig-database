@@ -1,3 +1,37 @@
+---
+title: minikube v1.36 Release Notes
+description: minikube v1.36 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- cilium
+- flannel
+- coredns
+- docker
+- ingress
+- nvidia
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- minikube v1.36 Release Notes 是什么
+- 如何 minikube v1.36 Release Notes
+trigger_keywords:
+- minikube
+- v1.36
+- Release
+- Notes
+- release
+- notes
+---
+
+
 # minikube v1.36 Release Notes
 
 Source: [v1.36.0](https://github.com/kubernetes/minikube/releases/tag/v1.36.0)

@@ -1,3 +1,37 @@
+---
+title: AgentScope 生产部署与可观测性
+description: '# AgentScope 生产部署与可观测性'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- grafana
+- jaeger
+- docker
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 生产部署与可观测性 是什么
+- 如何 AgentScope 生产部署与可观测性
+trigger_keywords:
+- AgentScope
+- 生产部署与可观测性
+- ai
+- agent
+---
+
+
 # AgentScope 生产部署与可观测性
 
 > **文档类型**: 生产部署专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Runtime, AgentApp, 生产部署, Docker, Kubernetes, Serverless, Sandbox, AgentScope Studio, OpenTelemetry, Tracing, 可观测性, AaaS, Agent-as-a-Service

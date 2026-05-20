@@ -1,3 +1,30 @@
+---
+title: Storage Classes（存储类）
+description: '# Storage Classes（存储类）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Storage Classes（存储类） 是什么
+- 如何 Storage Classes（存储类）
+trigger_keywords:
+- Storage
+- Classes
+- 存储类
+- dictionary
+title_en: Storage Classes
+---
+
+
 # Storage Classes（存储类）
 
 ## 概述

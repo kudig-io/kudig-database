@@ -1,3 +1,35 @@
+---
+title: Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- agent
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Communication between Nodes and the Control Plane（节点与控制平面之间的通信） 是什么
+- 如何 Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
+trigger_keywords:
+- Communication
+- between
+- Nodes
+- and
+- the
+- Control
+- Plane
+- 节点与控制平面之间的通信
+title_en: Nodes
+---
+
+
 # Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
 
 ## 概述

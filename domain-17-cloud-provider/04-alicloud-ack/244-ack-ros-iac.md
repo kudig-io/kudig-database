@@ -1,3 +1,37 @@
+---
+title: ACK 关联产品 - ROS 资源编排 (IaC)
+description: '- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- ACK 关联产品 - ROS 资源编排 (IaC) 是什么
+- 如何 ACK 关联产品 - ROS 资源编排 (IaC)
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- ACK
+- 关联产品
+- ROS
+- 资源编排
+- IaC
+- cloud
+- provider
+---
+
 # ACK 关联产品 - ROS 资源编排 (IaC)
 
 > **适用版本**: ACK v1.25 - v1.32 | **最后更新**: 2026-01

@@ -1,3 +1,32 @@
+---
+title: CSI Volume Cloning（CSI 卷克隆）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- CSI Volume Cloning（CSI 卷克隆） 是什么
+- 如何 CSI Volume Cloning（CSI 卷克隆）
+trigger_keywords:
+- CSI
+- Volume
+- Cloning
+- CSI
+- 卷克隆
+- dictionary
+title_en: Csi Volume Cloning
+---
+
+
 # CSI Volume Cloning（CSI 卷克隆）
 
 ## 概述

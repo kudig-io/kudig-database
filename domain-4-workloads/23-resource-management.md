@@ -1,3 +1,46 @@
+---
+title: 16 - 资源管理表
+description: '# 16 - 资源管理表'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- hpa
+- vpa
+- pdb
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 资源管理表 是什么
+- 如何 资源管理表
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 资源管理表
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 16 - 资源管理表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/configuration/manage-resources-containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)

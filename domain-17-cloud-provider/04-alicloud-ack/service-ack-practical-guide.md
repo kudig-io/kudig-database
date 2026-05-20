@@ -1,3 +1,43 @@
+---
+title: Kubernetes Service ACK 实战指南
+description: '# Kubernetes Service ACK 实战指南'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- etcd
+- apiserver
+- scheduler
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Service ACK 实战指南 是什么
+- 如何 Kubernetes Service ACK 实战指南
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- Kubernetes
+- Service
+- ACK
+- 实战指南
+- cloud
+- provider
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
+
 # Kubernetes Service ACK 实战指南
 
 > **文档类型**: 技术实践文档 | **适用环境**: 阿里云ACK/专有云 | **Kubernetes版本**: v1.25-v1.32  

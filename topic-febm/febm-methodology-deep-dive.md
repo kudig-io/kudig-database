@@ -1,3 +1,37 @@
+---
+title: 法医鉴定循证方法论（FEBM）深度解析
+description: '# 法医鉴定循证方法论（FEBM）深度解析'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- prometheus
+- grafana
+- jaeger
+- cilium
+- calico
+- argocd
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 法医鉴定循证方法论（FEBM）深度解析 是什么
+- 如何 法医鉴定循证方法论（FEBM）深度解析
+trigger_keywords:
+- 法医鉴定循证方法论
+- FEBM
+- 深度解析
+- febm
+---
+
+
 # 法医鉴定循证方法论（FEBM）深度解析
 
 > **Forensic Evidence-Based Methodology for Cloud-Native Operations**  

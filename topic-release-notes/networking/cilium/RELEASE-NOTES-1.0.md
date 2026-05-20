@@ -1,3 +1,34 @@
+---
+title: cilium v1.0 Release Notes
+description: cilium v1.0 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- envoy
+- cilium
+- docker
+- ingress
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- cilium v1.0 Release Notes 是什么
+- 如何 cilium v1.0 Release Notes
+trigger_keywords:
+- cilium
+- v1.0
+- Release
+- Notes
+- release
+- notes
+---
+
 # cilium v1.0 Release Notes
 
 Source: [v1.0.7](https://github.com/cilium/cilium/releases/tag/v1.0.7)

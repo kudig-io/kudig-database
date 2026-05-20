@@ -1,28 +1,75 @@
 ---
-title: "Kubernetes 架构全景图"
-description: "全面介绍 Kubernetes 架构总览、控制平面、节点组件、核心对象模型、高可用架构、扩展机制、安全架构和可观测性"
-category: "domain-1-architecture"
-tags: [k8s, architecture, kubernetes, control-plane, node, ha, security, observability]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Kubernetes 架构全景图
+description: 全面介绍 Kubernetes 架构总览、控制平面、节点组件、核心对象模型、高可用架构、扩展机制、安全架构和可观测性
+category: domain-1-architecture
+tags:
+- k8s
+- architecture
+- kubernetes
+- control-plane
+- node
+- ha
+- security
+- observability
+- etcd
+- apiserver
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 10min
+intent_queries:
+- Kubernetes 架构全景图 是什么
+- 如何 Kubernetes 架构全景图
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Kubernetes
+- 架构全景图
+- architecture
+- fundamentals
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-2-design-principles/01-design-principles-foundations.md"
-    type: "depth"
-    desc: "设计原则——理解 K8s 的设计哲学"
-  - path: "../domain-3-control-plane/01-plane-architecture-overview.md"
-    type: "depth"
-    desc: "控制平面架构深度解析"
-  - path: "../topic-fta/list/pod-fta.md"
-    type: "fta"
-    desc: "Pod 故障树分析"
-  - path: "../topic-cheat-sheet/k8s.md"
-    type: "cheatsheet"
-    desc: "K8s 命令速查卡"
+- path: ../domain-2-design-principles/01-design-principles-foundations.md
+  type: depth
+  desc: 设计原则——理解 K8s 的设计哲学
+- path: ../domain-3-control-plane/01-plane-architecture-overview.md
+  type: depth
+  desc: 控制平面架构深度解析
+- path: ../topic-fta/list/pod-fta.md
+  type: fta
+  desc: Pod 故障树分析
+- path: ../topic-cheat-sheet/k8s.md
+  type: cheatsheet
+  desc: K8s 命令速查卡
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
 ---
+
 
 # Kubernetes 架构全景图 (Architecture Overview)
 

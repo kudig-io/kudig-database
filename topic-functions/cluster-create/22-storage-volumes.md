@@ -1,3 +1,55 @@
+---
+title: 存储与卷管理
+description: '# 存储与卷管理'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- kubelet
+- scheduler
+- ceph
+- operator
+- rag
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- DevOps工程师
+- Kubernetes管理员
+- 应用开发者
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes storage volumes PV PVC StorageClass CSI
+- Kubernetes emptyDir hostPath persistentVolumeClaim
+- Kubernetes CSI driver provisioner cloud storage
+- Kubernetes local PV volume topology scheduling
+- Kubernetes volume limits attach detach
+trigger_keywords:
+- storage
+- volume
+- PV
+- PVC
+- StorageClass
+- CSI
+- emptyDir
+- hostPath
+- PersistentVolume
+- PersistentVolumeClaim
+- dynamic provision
+- volumeBindingMode
+related_domains:
+- domain-7-storage
+- domain-12-troubleshooting
+related_topics:
+- StatefulSet
+- volume
+- CSI
+- storage provisioner
+- cloud storage
+---
+
+
 # 存储与卷管理
 
 ## 源码路径

@@ -1,3 +1,42 @@
+---
+title: 'Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
+description: '# Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- kubelet
+- grafana
+- cilium
+- helm
+- argocd
+- flux
+- containerd
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- 'Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore) 是什么'
+- '如何 Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)'
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 供应链安全实践
+- Supply
+- Chain
+- 'Security:'
+- SBOM
+- SLSA
+- and
+---
+
+
 # Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
 
 > **作者**: 云原生安全架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03

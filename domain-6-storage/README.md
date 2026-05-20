@@ -1,3 +1,44 @@
+---
+title: Storage Domain 存储领域知识库
+description: '# Storage Domain 存储领域知识库'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- prometheus
+- grafana
+- rook
+- ceph
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Storage Domain 存储领域知识库 是什么
+- 如何 Storage Domain 存储领域知识库
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- Storage
+- Domain
+- 存储领域知识库
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
 # Storage Domain 存储领域知识库
 
 > **文档数量**: 16 篇 | **最后更新**: 2026-05 | **维护者**: Kusheet Project | **适用版本**: Kubernetes 1.25 - 1.33+

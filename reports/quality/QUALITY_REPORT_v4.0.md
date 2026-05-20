@@ -1,3 +1,33 @@
+---
+title: Domain-10 扩展生态质量报告 (v4.0)
+description: '- **配置模板**: 350+ 个 (新增50个)'
+category: general
+tags:
+- k8s
+- prometheus
+- grafana
+- helm
+- hpa
+- vpa
+- rbac
+- crd
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-10 扩展生态质量报告 (v4.0) 是什么
+- 如何 Domain-10 扩展生态质量报告 (v4.0)
+trigger_keywords:
+- Domain-10
+- 扩展生态质量报告
+- v4.0
+---
+
 # Domain-10 扩展生态质量报告 (v4.0)
 
 > **报告日期**: 2026-02-05 | **版本**: v4.0 | **状态**: ✅ 高质量完成

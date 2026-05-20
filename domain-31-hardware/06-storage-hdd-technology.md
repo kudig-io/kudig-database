@@ -1,3 +1,33 @@
+---
+title: 机械硬盘技术
+description: '## 概述'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- opa
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 机械硬盘技术 是什么
+- 如何 机械硬盘技术
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 机械硬盘技术
+- hardware
+---
+
+
 # 机械硬盘技术
 
 ## 概述

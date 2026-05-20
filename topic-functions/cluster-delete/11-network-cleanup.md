@@ -1,3 +1,59 @@
+---
+title: 网络清理详解 — CNI / iptables / ipvs / 路由
+category: cluster-delete
+tags:
+- network
+- cni
+- iptables
+- ipvs
+- flannel
+- calico
+- cilium
+- weave
+- cleanup
+- routing
+last_updated: 2026-05-18
+description: 深入分析 Kubernetes 集群删除后的网络清理机制，涵盖 CNI 配置清理（Flannel/Calico/Cilium/Weave）、iptables KUBE 链清理、ipvs 规则清理、虚拟网络接口清理（cni0/flannel.1/tunl0/kube-ipvs0）以及路由清理等完整网络残留清除方案。
+difficulty: advanced
+intent_queries:
+- kubernetes network cleanup after cluster deletion
+- cni plugin cleanup flannel calico cilium
+- iptables KUBE chain cleanup kubernetes
+- ipvs cleanup kubernetes cluster delete
+- kubelet network namespace cleanup
+trigger_keywords:
+- network cleanup
+- cni cleanup
+- iptables cleanup
+- ipvs cleanup
+- flannel cleanup
+- calico cleanup
+- cilium cleanup
+- weave cleanup
+- cni0
+- flannel.1
+- tunl0
+- kube-ipvs0
+- veth cleanup
+reading_level: advanced
+audience:
+- platform-engineer
+- network-engineer
+- kubernetes-administrator
+estimated_read_time: 5min
+related_domains:
+- domain-2-installation
+- domain-5-networking
+related_topics:
+- cluster-delete
+- cleanup
+- security-delete
+- force-delete
+domain_link: '[Networking](../domain-5-networking/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # 网络清理详解 — CNI / iptables / ipvs / 路由
 
 ## 概述

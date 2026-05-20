@@ -1,3 +1,23 @@
+---
+title: GitBook 构建脚本
+description: '- 构建后恢复原始配置'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitBook 构建脚本 是什么
+- 如何 GitBook 构建脚本
+trigger_keywords:
+- GitBook
+- 构建脚本
+---
+
 # GitBook 构建脚本
 
 本目录包含用于构建、导出和维护 GitBook 的所有脚本。

@@ -1,3 +1,34 @@
+---
+title: 第十九章：避坑指南与常见误区
+description: '# 第十九章：避坑指南与常见误区'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- kubelet
+- prometheus
+- llm
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十九章：避坑指南与常见误区 是什么
+- 如何 第十九章：避坑指南与常见误区
+- 第十九章：避坑指南与常见误区 根因分析
+- 第十九章：避坑指南与常见误区 故障树
+trigger_keywords:
+- 第十九章：避坑指南与常见误区
+- fta
+---
+
 # 第十九章：避坑指南与常见误区
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  

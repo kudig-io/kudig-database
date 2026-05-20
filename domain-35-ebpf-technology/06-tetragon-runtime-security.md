@@ -1,3 +1,41 @@
+---
+title: Tetragon 运行时安全 (Tetragon Runtime Security)
+description: '# Tetragon 运行时安全 (Tetragon Runtime Security)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- kubelet
+- prometheus
+- jaeger
+- coredns
+- helm
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- Tetragon 运行时安全 (Tetragon Runtime Security) 是什么
+- 如何 Tetragon 运行时安全 (Tetragon Runtime Security)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Tetragon
+- 运行时安全
+- Tetragon
+- Runtime
+- Security
+- ebpf
+- technology
+---
+
+
 # Tetragon 运行时安全 (Tetragon Runtime Security)
 
 > **文档版本**: v1.0 | **适用版本**: Tetragon 1.1+ | **更新日期**: 2026-03-03  
@@ -1666,6 +1704,11 @@ rules:
 ---
 # 安全策略（限制 Tetragon 自身权限）
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 kind: PodSecurityPolicy
 metadata:
   name: tetragon-psp

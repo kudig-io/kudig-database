@@ -1,3 +1,32 @@
+---
+title: 安全清单
+description: '# 安全清单'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- controller-manager
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 安全清单 是什么
+- 如何 安全清单
+trigger_keywords:
+- 安全清单
+- dictionary
+title_en: Security Checklist
+---
+
+
 # 安全清单
 
 ## 概述

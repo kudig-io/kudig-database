@@ -1,3 +1,45 @@
+---
+title: Prometheus企业级监控系统深度实践
+description: '# Prometheus企业级监控系统深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- etcd
+- apiserver
+- scheduler
+- grafana
+- redis
+- mysql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Prometheus企业级监控系统深度实践 是什么
+- 如何 Prometheus企业级监控系统深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Prometheus企业级监控系统深度实践
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Prometheus企业级监控系统深度实践
 
 > **作者**: 监控系统架构专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

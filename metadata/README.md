@@ -1,3 +1,24 @@
+---
+title: 元数据索引 (Metadata)
+description: 元数据索引 (Metadata) — Kubernetes 生产运维知识库
+category: general
+tags:
+- k8s
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 元数据索引 (Metadata) 是什么
+- 如何 元数据索引 (Metadata)
+trigger_keywords:
+- 元数据索引
+- Metadata
+---
+
 # 元数据索引 (Metadata)
 
 > 文档标签、难度分级和知识图谱索引，提升检索和 RAG 分块质量

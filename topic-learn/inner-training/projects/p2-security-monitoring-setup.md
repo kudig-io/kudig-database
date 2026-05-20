@@ -1,3 +1,67 @@
+---
+title: 'P2: 安全与监控体系搭建'
+description: 'title: P2: 安全与监控体系搭建'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- prometheus
+- rbac
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'P2: 安全与监控体系搭建 是什么'
+- '如何 P2: 安全与监控体系搭建'
+trigger_keywords:
+- 'P2:'
+- 安全与监控体系搭建
+- learn
+---
+
+---
+title: P2: 安全与监控体系搭建
+last_updated: 2026-05-18
+difficulty: advanced
+intent_queries:
+  - ACK RBAC RAM two-layer permission model
+  - Prometheus monitoring alerting configuration
+  - Kubernetes audit log SLS integration
+  - ResourceQuota LimitRange configuration
+  - Security hardening best practices
+trigger_keywords:
+  - RBAC
+  - RAM
+  - permission
+  - Prometheus
+  - alert
+  - audit log
+  - SLS
+  - ResourceQuota
+  - LimitRange
+  - security
+reading_level: advanced
+audience:
+  - ACK operators
+  - SRE engineers
+  - Security engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-7-security
+  - domain-8-observability
+  - domain-17-cloud-provider
+related_topics:
+  - ram-integration
+  - vulnerability
+  - risk-prevention
+  - cluster-monitoring
+---
+
 # P2: 安全与监控体系搭建
 
 > **对应周次**: Week 2 | **预计时间**: 3-4 小时 | **难度**: ⭐⭐⭐

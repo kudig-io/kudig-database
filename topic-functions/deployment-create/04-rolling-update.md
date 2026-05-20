@@ -1,3 +1,53 @@
+---
+title: 滚动更新源码分析
+category: deployment
+tags:
+- rolling-update
+- maxSurge
+- maxUnavailable
+- rolloutRolling
+- proportion
+- deployment
+last_updated: 2026-05-18
+description: 深入分析 Kubernetes Deployment RollingUpdate 策略的源码实现，涵盖 rolloutRolling 入口、reconcileNewReplicaSet 扩容、reconcileOldReplicaSets
+  缩容、比例缩放算法以及暂停恢复机制。
+difficulty: advanced
+intent_queries:
+- kubernetes rolling update source code
+- maxSurge maxUnavailable calculation kubernetes
+- rolloutRolling reconcileNewReplicaSet kubernetes
+- deployment proportion scaling algorithm
+- kubectl rollout pause resume kubernetes
+trigger_keywords:
+- RollingUpdate
+- maxSurge
+- maxUnavailable
+- rolloutRolling
+- reconcileNewReplicaSet
+- reconcileOldReplicaSets
+- GetProportion
+- progressDeadlineSeconds
+- NewRSNewReplicas
+- kubectl rollout pause
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-4-workloads
+- domain-3-control-plane
+related_topics:
+- deployment-controller
+- replicaset-controller
+- deployment-status
+- revision-history
+domain_link: '[Workloads](../domain-4-workloads/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+---
+
+
 # 滚动更新源码分析
 
 ## 概述
@@ -230,6 +280,31 @@ func GetProportion(rs *apps.ReplicaSet, d *apps.Deployment) int32 {
   比例缩放确保：
     RS-v3 逐步增加
     RS-v2 和 RS-v1 按各自比例缩容
+```
+
+### maxUnavailable=0 的滚动更新
+
+```yaml
+# spec:
+#   strategy:
+#     type: RollingUpdate
+#     rollingUpdate:
+#       maxSurge: 1
+#       maxUnavailable: 0  # 关键：不允许不可用
+```
+
+**行为**：
+- 始终保持所有 Pod 可用
+- 新 Pod 必须 Ready 后才缩容旧 Pod
+- 适合对可用性要求高的服务
+
+**时序**：
+```
+Step 1: RS-v2 replicas=1, RS-v1 replicas=10 (总 11 Pod)
+Step 2: RS-v2 replicas=2, RS-v1 replicas=9  (总 11 Pod)
+...
+Step 10: RS-v2 replicas=10, RS-v1 replicas=1 (总 11 Pod)
+Step 11: RS-v2 replicas=10, RS-v1 replicas=0 (总 10 Pod，滚动完成)
 ```
 
 ---

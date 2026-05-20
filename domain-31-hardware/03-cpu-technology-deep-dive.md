@@ -1,3 +1,32 @@
+---
+title: CPU技术深度解析
+description: '# CPU技术深度解析'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- scheduler
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CPU技术深度解析 是什么
+- 如何 CPU技术深度解析
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- CPU技术深度解析
+- hardware
+---
+
+
 # CPU技术深度解析
 
 ## 概述

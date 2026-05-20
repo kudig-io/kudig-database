@@ -1,0 +1,160 @@
+domain: domain-9-platform-ops
+total_questions: 33
+generated_at: '2026-05-19'
+qa_pairs:
+- type: operation
+  question: '如何执行与 集群生命周期管理 相关的操作: CPU: 8核/节点 (控制平面), 4核/节点 (工作节点)?'
+  answer: 参见 domain-9-platform-ops/02-cluster-lifecycle-management.md 中的操作步骤。
+  source: domain-9-platform-ops/02-cluster-lifecycle-management.md
+  command: 'CPU: 8核/节点 (控制平面), 4核/节点 (工作节点)'
+- type: concept
+  question: 在 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中, 容量规划框架 是什么?
+  answer: 参见 domain-9-platform-ops/03-capacity-planning-resource-assessment.md 的「容量规划框架」章节。
+  source: domain-9-platform-ops/03-capacity-planning-resource-assessment.md
+  section: 容量规划框架
+- type: concept
+  question: 在 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中, 业务需求分析 是什么?
+  answer: 参见 domain-9-platform-ops/03-capacity-planning-resource-assessment.md 的「业务需求分析」章节。
+  source: domain-9-platform-ops/03-capacity-planning-resource-assessment.md
+  section: 业务需求分析
+- type: comparison
+  question: 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/03-capacity-planning-resource-assessment.md 中的对比分析。
+  source: domain-9-platform-ops/03-capacity-planning-resource-assessment.md
+- type: operation
+  question: '如何执行与 性能基准测试与调优 (Performance Benchmarking & Tuning) 相关的操作: test_api_server_performance() {?'
+  answer: 参见 domain-9-platform-ops/04-performance-benchmarking-tuning.md 中的操作步骤。
+  source: domain-9-platform-ops/04-performance-benchmarking-tuning.md
+  command: test_api_server_performance() {
+- type: comparison
+  question: 性能基准测试与调优 (Performance Benchmarking & Tuning) 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/04-performance-benchmarking-tuning.md 中的对比分析。
+  source: domain-9-platform-ops/04-performance-benchmarking-tuning.md
+- type: concept
+  question: 在 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity) 中, 灾难恢复策略 是什么?
+  answer: 参见 domain-9-platform-ops/11-disaster-recovery-business-continuity.md 的「灾难恢复策略」章节。
+  source: domain-9-platform-ops/11-disaster-recovery-business-continuity.md
+  section: 灾难恢复策略
+- type: concept
+  question: 在 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity) 中, 备份策略体系 是什么?
+  answer: 参见 domain-9-platform-ops/11-disaster-recovery-business-continuity.md 的「备份策略体系」章节。
+  source: domain-9-platform-ops/11-disaster-recovery-business-continuity.md
+  section: 备份策略体系
+- type: comparison
+  question: Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/12-backup-recovery-strategy.md 中的对比分析。
+  source: domain-9-platform-ops/12-backup-recovery-strategy.md
+- type: comparison
+  question: 多集群管理 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/13-multi-cluster-management.md 中的对比分析。
+  source: domain-9-platform-ops/13-multi-cluster-management.md
+- type: operation
+  question: '如何执行与 大规模集群性能优化 (Large Scale Cluster Optimization) 相关的操作: optimize_etcd_for_large_cluster() {?'
+  answer: 参见 domain-9-platform-ops/14-large-scale-cluster-optimization.md 中的操作步骤。
+  source: domain-9-platform-ops/14-large-scale-cluster-optimization.md
+  command: optimize_etcd_for_large_cluster() {
+- type: operation
+  question: '如何执行与 生产环境故障诊断 (Production Troubleshooting) 相关的操作: layered_troubleshooting() {?'
+  answer: 参见 domain-9-platform-ops/15-production-troubleshooting.md 中的操作步骤。
+  source: domain-9-platform-ops/15-production-troubleshooting.md
+  command: layered_troubleshooting() {
+- type: operation
+  question: '如何执行与 生产环境故障诊断 (Production Troubleshooting) 相关的操作: diagnose_pending_pods() {?'
+  answer: 参见 domain-9-platform-ops/15-production-troubleshooting.md 中的操作步骤。
+  source: domain-9-platform-ops/15-production-troubleshooting.md
+  command: diagnose_pending_pods() {
+- type: comparison
+  question: 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/17-multi-tenant-management.md 中的对比分析。
+  source: domain-9-platform-ops/17-multi-tenant-management.md
+- type: operation
+  question: '如何执行与 69 - Lease 与 Leader 选举机制 (Lease & Leader Election) 相关的操作: kubectl get leases -A?'
+  answer: 参见 domain-9-platform-ops/19-lease-leader-election.md 中的操作步骤。
+  source: domain-9-platform-ops/19-lease-leader-election.md
+  command: kubectl get leases -A
+- type: best_practice
+  question: 关于 69 - Lease 与 Leader 选举机制 (Lease & Leader Election), 有什么最佳实践?
+  answer: │
+  source: domain-9-platform-ops/19-lease-leader-election.md
+- type: operation
+  question: '如何执行与 31 - CRD与Operator开发 相关的操作: kubebuilder init --domain example.com --repo github.com/exam?'
+  answer: 参见 domain-9-platform-ops/20-crd-operator-development.md 中的操作步骤。
+  source: domain-9-platform-ops/20-crd-operator-development.md
+  command: kubebuilder init --domain example.com --repo github.com/example/app-operator
+- type: comparison
+  question: 31 - CRD与Operator开发 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/20-crd-operator-development.md 中的对比分析。
+  source: domain-9-platform-ops/20-crd-operator-development.md
+- type: concept
+  question: 在 110 - CLI 增强与效率工具 (CLI Enhancement) 中, kubectx / kubens 快速切换 是什么?
+  answer: 参见 domain-9-platform-ops/23-cli-enhancement-tools.md 的「kubectx / kubens 快速切换」章节。
+  source: domain-9-platform-ops/23-cli-enhancement-tools.md
+  section: kubectx / kubens 快速切换
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: kubectx?'
+  answer: 参见 domain-9-platform-ops/23-cli-enhancement-tools.md 中的操作步骤。
+  source: domain-9-platform-ops/23-cli-enhancement-tools.md
+  command: kubectx
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: alias kx=''kubectx''?'
+  answer: 参见 domain-9-platform-ops/23-cli-enhancement-tools.md 中的操作步骤。
+  source: domain-9-platform-ops/23-cli-enhancement-tools.md
+  command: alias kx='kubectx'
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: kube-capacity?'
+  answer: 参见 domain-9-platform-ops/23-cli-enhancement-tools.md 中的操作步骤。
+  source: domain-9-platform-ops/23-cli-enhancement-tools.md
+  command: kube-capacity
+- type: operation
+  question: '如何执行与 kubectl 插件生态知识手册 相关的操作: (?'
+  answer: 参见 domain-9-platform-ops/26-kubectl-plugin-ecosystem.md 中的操作步骤。
+  source: domain-9-platform-ops/26-kubectl-plugin-ecosystem.md
+  command: (
+- type: operation
+  question: '如何执行与 kubectl 插件生态知识手册 相关的操作: kubectl whoami?'
+  answer: 参见 domain-9-platform-ops/26-kubectl-plugin-ecosystem.md 中的操作步骤。
+  source: domain-9-platform-ops/26-kubectl-plugin-ecosystem.md
+  command: kubectl whoami
+- type: concept
+  question: 在 Java Kubernetes Client 与 Operator SDK 开发指南 中, Java K8s Client 生态全景 是什么?
+  answer: 参见 domain-9-platform-ops/99-java-k8s-client-operator-guide.md 的「Java K8s Client 生态全景」章节。
+  source: domain-9-platform-ops/99-java-k8s-client-operator-guide.md
+  section: Java K8s Client 生态全景
+- type: concept
+  question: 在 Java Kubernetes Client 与 Operator SDK 开发指南 中, fabric8 Kubernetes Client 是什么?
+  answer: 参见 domain-9-platform-ops/99-java-k8s-client-operator-guide.md 的「fabric8 Kubernetes Client」章节。
+  source: domain-9-platform-ops/99-java-k8s-client-operator-guide.md
+  section: fabric8 Kubernetes Client
+- type: operation
+  question: '如何执行与 Java Kubernetes Client 与 Operator SDK 开发指南 相关的操作: ./mvnw package -Dnative \?'
+  answer: 参见 domain-9-platform-ops/99-java-k8s-client-operator-guide.md 中的操作步骤。
+  source: domain-9-platform-ops/99-java-k8s-client-operator-guide.md
+  command: ./mvnw package -Dnative \
+- type: operation
+  question: '如何执行与 Java Kubernetes Client 与 Operator SDK 开发指南 相关的操作: ./mvnw k8s:generate-crd?'
+  answer: 参见 domain-9-platform-ops/99-java-k8s-client-operator-guide.md 中的操作步骤。
+  source: domain-9-platform-ops/99-java-k8s-client-operator-guide.md
+  command: ./mvnw k8s:generate-crd
+- type: comparison
+  question: Java Kubernetes Client 与 Operator SDK 开发指南 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/99-java-k8s-client-operator-guide.md 中的对比分析。
+  source: domain-9-platform-ops/99-java-k8s-client-operator-guide.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 平台运维新特性指南 中, 版本升级策略与工具 是什么?
+  answer: 参见 domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md 的「版本升级策略与工具」章节。
+  source: domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md
+  section: 版本升级策略与工具
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 平台运维新特性指南 相关的操作: VERSION="1.33"?'
+  answer: 参见 domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md 中的操作步骤。
+  source: domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md
+  command: VERSION="1.33"
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 平台运维新特性指南 相关的操作: apt-mark unhold kubeadm && \?'
+  answer: 参见 domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md 中的操作步骤。
+  source: domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md
+  command: apt-mark unhold kubeadm && \
+- type: comparison
+  question: Kubernetes v1.29-v1.33 平台运维新特性指南 中有哪些技术对比?
+  answer: 参见 domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md 中的对比分析。
+  source: domain-9-platform-ops/99-kubernetes-v1.33-platform-ops-guide.md

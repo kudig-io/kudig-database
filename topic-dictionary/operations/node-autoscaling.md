@@ -1,3 +1,36 @@
+---
+title: 节点自动扩缩容（Node Autoscaling）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- hpa
+- vpa
+- pdb
+- daemonset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 节点自动扩缩容（Node Autoscaling） 是什么
+- 如何 节点自动扩缩容（Node Autoscaling）
+trigger_keywords:
+- 节点自动扩缩容
+- Node
+- Autoscaling
+- dictionary
+title_en: Nodes
+---
+
+
 # 节点自动扩缩容（Node Autoscaling）
 
 ## 概述

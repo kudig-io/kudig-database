@@ -1,3 +1,35 @@
+---
+title: OpenTelemetry 与分布式链路追踪
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- grafana
+- jaeger
+- istio
+- cilium
+- opa
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- OpenTelemetry 与分布式链路追踪 是什么
+- 如何 OpenTelemetry 与分布式链路追踪
+trigger_keywords:
+- OpenTelemetry
+- 与分布式链路追踪
+- dictionary
+title_en: Tracing
+---
+
+
 # OpenTelemetry 与分布式链路追踪
 
 ## 概述

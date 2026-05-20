@@ -1,3 +1,42 @@
+---
+title: bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+description: 1. [bcc 项目概述与安装](#1-bcc-项目概述与安装)
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- prometheus
+- jaeger
+- containerd
+- docker
+- mysql
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- bcc 与 bpftrace 工具链 (bcc and bpftrace Tools) 是什么
+- 如何 bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- bcc
+- bpftrace
+- 工具链
+- bcc
+- and
+- bpftrace
+- Tools
+- ebpf
+---
+
+
 # bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
 
 > bcc (BPF Compiler Collection) 和 bpftrace 是两个最重要的 eBPF 用户空间工具链，为 Linux 系统提供了强大的动态追踪、性能分析和调试能力，是现代云原生可观测性体系的基础工具。

@@ -1,336 +1,368 @@
+---
+title: PostgreSQL 企业级数据库高可用架构
+description: '# PostgreSQL 企业级数据库高可用架构'
+category: enterprise-database-middleware
+tags:
+- k8s
+- database
+- middleware
+- mysql
+- redis
+- etcd
+- prometheus
+- grafana
+- minio
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- DBA
+- SRE
+- 后端开发
+estimated_read_time: 5min
+intent_queries:
+- PostgreSQL 企业级数据库高可用架构 是什么
+- 如何 PostgreSQL 企业级数据库高可用架构
+- Kubernetes 28 enterprise database middleware 最佳实践
+trigger_keywords:
+- PostgreSQL
+- 企业级数据库高可用架构
+- enterprise
+- database
+- middleware
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/sql.md
+  label: '速查卡: sql'
+---
+
+
 # PostgreSQL 企业级数据库高可用架构
 
-## 概述 (Overview)
+> **适用版本**: PostgreSQL 15 ~ 17  
+> **最后更新**: 2026-04-26  
+> **难度**: 中级 → 高级
 
-PostgreSQL是功能强大的开源对象关系型数据库系统，以其稳定性、可扩展性和丰富的功能而闻名。本文档从企业级数据库专家角度，深入探讨PostgreSQL的高可用架构设计、性能优化策略和生产运维最佳实践。
+---
 
-PostgreSQL is a powerful open-source object-relational database system known for its stability, scalability, and rich features. This document explores PostgreSQL's high availability architecture design, performance optimization strategies, and production operations best practices from an enterprise database expert perspective.
+## 概述
 
-## 架构设计 (Architecture Design)
+PostgreSQL 是全球功能最丰富的开源对象关系型数据库系统，以其 ANSI-SQL 合规性、丰富的扩展生态、出色的并发控制（MVCC）机制和卓越的可扩展性而闻名。2026 年 PostgreSQL 17 版本在逻辑复制、并行查询、JSON 操作、性能诊断等方面持续增强，进一步巩固了其在企业级数据库市场的领先地位。
 
-### 企业级PostgreSQL高可用架构 (Enterprise PostgreSQL High Availability Architecture)
+企业级 PostgreSQL 运维的核心挑战在于：如何构建零数据丢失的高可用集群（Patroni + etcd）、如何实现大规模连接池化（PgBouncer）、如何设计高效的备份恢复策略（WAL-G / Barman + S3）、以及如何建立全链路可观测体系（pg_stat_statements + Prometheus）。本文档将从架构设计到故障排查，系统性地覆盖这些主题。
 
-```yaml
-# PostgreSQL主从复制架构
-version: '3.8'
-services:
-  postgres-primary:
-    image: postgres:15-alpine
-    container_name: postgres-primary
-    environment:
-      POSTGRES_DB: production_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - postgres-primary-data:/var/lib/postgresql/data
-      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres-network
-    command: >
-      postgres
-      -c config_file=/etc/postgresql/postgresql.conf
-      -c hba_file=/etc/postgresql/pg_hba.conf
+PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发控制（MVCC）、丰富的数据类型（JSONB、GIS、UUID、数组）、强大的扩展系统（PostGIS、TimescaleDB、pgvector）、以及活跃的社区生态。在 K8s 环境中，CloudNativePG、Zalando Postgres Operator、Crunchy PGO 等三个主流 Operator 可供选择。
 
-  postgres-standby-1:
-    image: postgres:15-alpine
-    container_name: postgres-standby-1
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres-standby-1-data:/var/lib/postgresql/data
-      - ./config/standby.conf:/etc/postgresql/postgresql.conf
-    ports:
-      - "5433:5432"
-    networks:
-      - postgres-network
-    depends_on:
-      - postgres-primary
-    command: >
-      bash -c "
-        pg_basebackup -h postgres-primary -D /var/lib/postgresql/data -U replicator -v -P -W &&
-        touch /var/lib/postgresql/data/standby.signal &&
-        postgres -c config_file=/etc/postgresql/postgresql.conf
-      "
+---
 
-  postgres-standby-2:
-    image: postgres:15-alpine
-    container_name: postgres-standby-2
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres-standby-2-data:/var/lib/postgresql/data
-      - ./config/standby.conf:/etc/postgresql/postgresql.conf
-    ports:
-      - "5434:5432"
-    networks:
-      - postgres-network
-    depends_on:
-      - postgres-primary
-    command: >
-      bash -c "
-        pg_basebackup -h postgres-primary -D /var/lib/postgresql/data -U replicator -v -P -W &&
-        touch /var/lib/postgresql/data/standby.signal &&
-        postgres -c config_file=/etc/postgresql/postgresql.conf
-      "
+## 架构设计
 
-  pgpool:
-    image: pgpool/pgpool-II:4.4
-    container_name: pgpool-loadbalancer
-    environment:
-      PCP_USER: pgpool
-      PCP_PASSWORD: ${PGPOOL_PASSWORD}
-    volumes:
-      - ./config/pgpool.conf:/etc/pgpool-II/pgpool.conf
-      - ./config/pool_hba.conf:/etc/pgpool-II/pool_hba.conf
-    ports:
-      - "9999:9999"
-      - "9898:9898"
-    networks:
-      - postgres-network
-    depends_on:
-      - postgres-primary
-      - postgres-standby-1
-      - postgres-standby-2
-
-volumes:
-  postgres-primary-data:
-  postgres-standby-1-data:
-  postgres-standby-2-data:
-
-networks:
-  postgres-network:
-    driver: bridge
-```
-
-### PostgreSQL高可用架构图 (PostgreSQL High Availability Architecture)
+### 企业级 PostgreSQL 高可用架构
 
 ```mermaid
 graph TB
-    subgraph "应用层"
-        APP1[Application 1]
-        APP2[Application 2]
-        APP3[Application 3]
+    subgraph "应用接入层"
+        APP1[应用服务 1]
+        APP2[应用服务 2]
+        APPN[应用服务 N]
     end
-    
-    subgraph "负载均衡层"
-        PGPOOL[PgPool-II<br/>连接池&负载均衡]
-        HAPROXY[HAProxy<br/>高可用代理]
+
+    subgraph "连接池层"
+        PGBOUNCER[PgBouncer<br/>事务级连接池]
+        PGPOOL[PgPool-II<br/>负载均衡/读写分离]
     end
-    
-    subgraph "主数据库集群"
-        PRIMARY[PostgreSQL Primary<br/>主节点]
-        STANDBY1[PostgreSQL Standby 1<br/>从节点1]
-        STANDBY2[PostgreSQL Standby 2<br/>从节点2]
+
+    subgraph "高可用控制面"
+        PATRONI[Patroni<br/>集群管理]
+        ETCD[etcd<br/>分布式配置]
+        HAPROXY_PG[HAProxy<br/>连接代理]
     end
-    
+
+    subgraph "主数据库集群 - DC1"
+        PRIMARY[PostgreSQL Primary<br/>读写节点<br/>port: 5432]
+        REPLICA1[PostgreSQL Replica 1<br/>同步复制<br/>port: 5432]
+        REPLICA2[PostgreSQL Replica 2<br/>异步复制<br/>port: 5432]
+    end
+
+    subgraph "容灾节点 - DC2"
+        DRREPLICA[PostgreSQL DR Replica<br/>跨机房异步复制]
+    end
+
+    subgraph "备份存储"
+        WALG[WAL-G<br/>WAL 连续归档]
+        BARMAN[Barman<br/>备份管理器]
+        S3[S3 / MinIO<br/>对象存储]
+    end
+
     subgraph "监控告警"
-        PROMETHEUS[Prometheus<br/>指标收集]
-        GRAFANA[Grafana<br/>可视化]
-        ALERTMANAGER[AlertManager<br/>告警]
+        PGEXP[PostgreSQL Exporter]
+        PROM[Prometheus]
+        GRAF[Grafana]
+        ALERT[AlertManager]
     end
-    
-    subgraph "备份恢复"
-        WALG[WAL-G<br/>WAL备份]
-        BARMAN[Barman<br/>备份管理]
-        S3[S3存储<br/>云端备份]
-    end
-    
-    APP1 --> PGPOOL
-    APP2 --> PGPOOL
-    APP3 --> HAPROXY
-    
-    PGPOOL --> PRIMARY
-    PGPOOL --> STANDBY1
-    PGPOOL --> STANDBY2
-    
-    HAPROXY --> PRIMARY
-    HAPROXY --> STANDBY1
-    HAPROXY --> STANDBY2
-    
-    PRIMARY --> PROMETHEUS
-    STANDBY1 --> PROMETHEUS
-    STANDBY2 --> PROMETHEUS
-    
-    PROMETHEUS --> GRAFANA
-    PROMETHEUS --> ALERTMANAGER
-    
+
+    APP1 --> PGBOUNCER
+    APP2 --> PGBOUNCER
+    APPN --> PGPOOL
+    PGBOUNCER --> HAPROXY_PG
+    PGPOOL --> HAPROXY_PG
+    HAPROXY_PG --> PRIMARY
+    HAPROXY_PG --> REPLICA1
+    HAPROXY_PG --> REPLICA2
+
+    PATRONI --> ETCD
+    PATRONI --> PRIMARY
+    PATRONI --> REPLICA1
+    PATRONI --> REPLICA2
+
+    PRIMARY -->|Synchronous| REPLICA1
+    PRIMARY -->|Asynchronous| REPLICA2
+    PRIMARY -->|Asynchronous| DRREPLICA
+
     PRIMARY --> WALG
     WALG --> S3
     BARMAN --> S3
+
+    PRIMARY --> PGEXP
+    REPLICA1 --> PGEXP
+    PGEXP --> PROM
+    PROM --> GRAF
+    PROM --> ALERT
 ```
 
-## 核心配置优化 (Core Configuration Optimization)
+### PostgreSQL 进程模型
 
-### PostgreSQL主节点配置 (PostgreSQL Primary Configuration)
+```mermaid
+graph LR
+    subgraph "客户端进程"
+        C1[Backend Process 1]
+        C2[Backend Process 2]
+        CN[Backend Process N]
+    end
+
+    subgraph "Postmaster"
+        PM[Postmaster Main<br/>连接管理]
+    end
+
+    subgraph "后台进程"
+        AUTOVAC[autovacuum launcher]
+        BGWRITER[bgwriter<br/>后台写进程]
+        CHECKPT[checkpointer<br/>检查点进程]
+        WALW[walwriter<br/>WAL 写进程]
+        STATS[stats collector<br/>统计收集]
+        ARCH[archiver<br/>WAL 归档]
+        LOGCOLL[log collector<br/>日志收集]
+    end
+
+    subgraph "共享内存"
+        SHARED_BUF[Shared Buffers]
+        WAL_BUF[WAL Buffer]
+        CLOG[clog<br/>事务状态]
+        LOCKT[Lock Table]
+    end
+
+    subgraph "存储"
+    DATA[数据文件<br/>tablespace/relfilenode]
+    WAL_FILES[WAL 文件<br/>pg_wal/]
+    END
+
+    C1 --> PM
+    C2 --> PM
+    CN --> PM
+    PM --> C1
+    PM --> C2
+    PM --> CN
+
+    C1 --> SHARED_BUF
+    C2 --> SHARED_BUF
+    SHARED_BUF --> DATA
+    WAL_BUF --> WAL_FILES
+    BGWRITER --> SHARED_BUF
+    CHECKPT --> SHARED_BUF
+    CHECKPT --> WAL_FILES
+    WALW --> WAL_BUF
+    ARCH --> WAL_FILES
+```
+
+---
+
+## 核心组件配置
+
+### PostgreSQL 主节点完整配置
 
 ```ini
-# postgresql.conf - 主节点优化配置
-# 基础配置
-listen_addresses = '*'
-port = 5432
-max_connections = 200
+# postgresql.conf - PostgreSQL 17 生产优化配置
+# 适用场景: 64GB 内存 / NVMe SSD / 16 核 CPU
+
+# ============================================================
+# 连接配置
+# ============================================================
+listen_addresses              = '*'
+port                          = 5432
+max_connections               = 300
 superuser_reserved_connections = 3
+unix_socket_directories       = '/var/run/postgresql'
+tcp_keepalives_idle           = 600
+tcp_keepalives_interval       = 30
+tcp_keepalives_count          = 3
 
+# ============================================================
 # 内存配置
-shared_buffers = 2GB                    # 物理内存的25%
-effective_cache_size = 6GB              # 物理内存的75%
-work_mem = 64MB                         # 每个排序操作的内存
-maintenance_work_mem = 512MB            # 维护操作内存
-temp_buffers = 32MB                     # 临时表缓冲区
+# ============================================================
+shared_buffers                = 16GB
+effective_cache_size          = 48GB
+work_mem                      = 32MB
+maintenance_work_mem          = 1GB
+autovacuum_work_mem           = 256MB
+temp_buffers                  = 16MB
+huge_pages                    = try
 
-# WAL配置
-wal_level = replica
-wal_buffers = 64MB
-checkpoint_completion_target = 0.9
-checkpoint_timeout = 15min
-max_wal_size = 4GB
-min_wal_size = 1GB
+# ============================================================
+# WAL 配置
+# ============================================================
+wal_level                     = replica
+wal_buffers                   = 64MB
+wal_writer_delay              = 200ms
+wal_writer_flush_after        = 1MB
+wal_keep_size                 = 2GB
+max_wal_size                  = 8GB
+min_wal_size                  = 2GB
+checkpoint_completion_target  = 0.9
+checkpoint_timeout            = 15min
+checkpoint_flush_after        = 256kB
+checkpoint_warning            = 30s
+archive_mode                  = on
+archive_command               = 'wal-g wal-push %p'
+archive_timeout               = 60
 
+# ============================================================
 # 复制配置
-max_wal_senders = 10
-max_replication_slots = 10
-hot_standby = on
-hot_standby_feedback = on
-wal_receiver_status_interval = 10s
-max_standby_archive_delay = 30s
-max_standby_streaming_delay = 30s
+# ============================================================
+max_wal_senders               = 10
+max_replication_slots         = 10
+wal_sender_delay              = 200ms
+hot_standby                   = on
+hot_standby_feedback          = on
+wal_receiver_status_interval  = 10s
+max_standby_archive_delay     = 30s
+max_standby_streaming_delay   = 30s
+wal_log_hints                 = on
 
-# 性能优化
-random_page_cost = 1.1                  # SSD存储优化
-effective_io_concurrency = 200          # 并发I/O操作数
-seq_page_cost = 1.0
-cpu_tuple_cost = 0.01
-cpu_index_tuple_cost = 0.005
-cpu_operator_cost = 0.0025
-
+# ============================================================
 # 查询优化
-enable_bitmapscan = on
-enable_hashagg = on
-enable_hashjoin = on
-enable_indexscan = on
-enable_indexonlyscan = on
-enable_material = on
-enable_mergejoin = on
-enable_nestloop = on
-enable_seqscan = on
-enable_sort = on
-enable_tidscan = on
+# ============================================================
+random_page_cost              = 1.1
+seq_page_cost                 = 1.0
+cpu_tuple_cost                = 0.01
+cpu_index_tuple_cost          = 0.005
+cpu_operator_cost             = 0.0025
+effective_io_concurrency      = 200
+parallel_setup_cost           = 100
+parallel_tuple_cost           = 0.01
+min_parallel_table_scan_size  = 8MB
+min_parallel_index_scan_size  = 512kB
+max_parallel_workers_per_gather = 4
+max_parallel_workers          = 8
+max_parallel_maintenance_workers = 4
+jit                           = on
 
-# 日志配置
-logging_collector = on
-log_destination = 'stderr'
-log_directory = 'log'
-log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
-log_rotation_age = 1d
-log_rotation_size = 100MB
-log_min_duration_statement = 1000       # 记录超过1秒的查询
-log_checkpoints = on
-log_connections = on
-log_disconnections = on
-log_lock_waits = on
-log_temp_files = 0
-log_autovacuum_min_duration = 0
-
-# 自动清理配置
-autovacuum = on
-autovacuum_max_workers = 3
-autovacuum_naptime = 1min
-autovacuum_vacuum_threshold = 50
-autovacuum_analyze_threshold = 50
-autovacuum_vacuum_scale_factor = 0.2
-autovacuum_analyze_scale_factor = 0.1
-autovacuum_freeze_max_age = 200000000
+# ============================================================
+# 自动清理
+# ============================================================
+autovacuum                    = on
+autovacuum_max_workers        = 4
+autovacuum_naptime            = 1min
+autovacuum_vacuum_threshold   = 50
+autovacuum_analyze_threshold  = 50
+autovacuum_vacuum_scale_factor = 0.1
+autovacuum_analyze_scale_factor = 0.05
+autovacuum_vacuum_cost_delay  = 2ms
+autovacuum_vacuum_cost_limit  = 1000
+autovacuum_freeze_max_age     = 200000000
 autovacuum_multixact_freeze_max_age = 400000000
+log_autovacuum_min_duration   = 0
+
+# ============================================================
+# 日志配置
+# ============================================================
+logging_collector             = on
+log_destination               = 'stderr'
+log_directory                 = 'log'
+log_filename                  = 'postgresql-%Y-%m-%d_%H%M%S.log'
+log_rotation_age              = 1d
+log_rotation_size             = 100MB
+log_min_duration_statement    = 500
+log_checkpoints               = on
+log_connections               = on
+log_disconnections            = on
+log_lock_waits                = on
+log_temp_files                = 0
+log_line_prefix               = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
+log_statement                 = 'ddl'
+log_replication_commands      = on
+
+# ============================================================
+# 统计信息
+# ============================================================
+track_activities              = on
+track_counts                  = on
+track_io_timing               = on
+track_functions               = all
+stats_temp_directory          = 'pg_stat_tmp'
+shared_preload_libraries      = 'pg_stat_statements,auto_explain'
+
+# pg_stat_statements
+pg_stat_statements.max        = 10000
+pg_stat_statements.track      = all
+pg_stat_statements.track_utility = on
+pg_stat_statements.save       = on
+
+# auto_explain
+auto_explain.log_min_duration = 3000
+auto_explain.log_analyze      = true
+auto_explain.log_verbose      = true
+auto_explain.log_nested_statements = true
+
+# ============================================================
+# 安全配置
+# ============================================================
+ssl                           = on
+ssl_cert_file                 = '/etc/ssl/certs/postgresql.crt'
+ssl_key_file                  = '/etc/ssl/private/postgresql.key'
+ssl_ca_file                   = '/etc/ssl/certs/ca.crt'
+ssl_min_protocol_version      = 'TLSv1.2'
+ssl_prefer_server_ciphers     = on
+password_encryption           = scram-sha-256
+
+# ============================================================
+# 锁与等待
+# ============================================================
+deadlock_timeout              = 5s
+lock_wait_timeout             = 30s
+idle_in_transaction_session_timeout = 600000
+statement_timeout             = 0
 ```
 
-### 从节点配置 (Standby Configuration)
-
-```ini
-# standby.conf - 从节点配置
-# 继承主节点大部分配置
-include_dir = '/etc/postgresql/conf.d'
-
-# 从节点特有配置
-hot_standby = on
-hot_standby_feedback = on
-max_standby_archive_delay = 30s
-max_standby_streaming_delay = 30s
-wal_receiver_status_interval = 10s
-```
-
-### PgPool-II配置 (PgPool-II Configuration)
-
-```ini
-# pgpool.conf - PgPool配置
-# 连接池配置
-listen_addresses = '*'
-port = 9999
-socket_dir = '/tmp'
-pcp_port = 9898
-pcp_socket_dir = '/tmp'
-
-# 池化配置
-num_init_children = 100
-max_pool = 4
-child_life_time = 300
-child_max_connections = 0
-connection_life_time = 0
-client_idle_limit = 0
-
-# 负载均衡配置
-load_balance_mode = on
-ignore_leading_white_space = on
-white_function_list = ''
-black_function_list = 'nextval,setval,lastval,currval'
-database_redirect_preference_list = ''
-app_name_redirect_list = ''
-allow_sql_comments = off
-
-# 复制配置
-replicate_select = off
-insert_lock = on
-lobj_lock_table = ''
-
-# 健康检查配置
-health_check_period = 10
-health_check_timeout = 20
-health_check_user = 'postgres'
-health_check_password = ''
-health_check_database = 'postgres'
-health_check_max_retries = 3
-health_check_retry_delay = 1
-
-# 故障转移配置
-failover_command = '/etc/pgpool-II/failover.sh %d %h %p %D %m %M %H %P %r %R'
-failback_command = '/etc/pgpool-II/failback.sh %d %h %p %D %m %M %H %P %r %R'
-follow_master_command = ''
-recovery_user = 'postgres'
-recovery_password = ''
-recovery_1st_stage_command = 'recovery_1st_stage'
-recovery_2nd_stage_command = ''
-search_primary_node_timeout = 10
-```
-
-## 高可用方案 (High Availability Solutions)
-
-### Patroni配置 (Patroni Configuration)
+### Patroni 高可用配置
 
 ```yaml
-# patroni.yml - Patroni高可用配置
+# patroni.yml - Patroni 生产配置
 scope: postgres-cluster
-namespace: /db/
+namespace: /service/
 name: postgresql0
 
 restapi:
   listen: 0.0.0.0:8008
   connect_address: 192.168.1.10:8008
+  authentication:
+    username: patroni
+    password: "${PATRONI_REST_PASSWORD}"
 
 etcd:
-  hosts: etcd1:2379,etcd2:2379,etcd3:2379
+  hosts: etcd-0:2379,etcd-1:2379,etcd-2:2379
+  username: patroni
+  password: "${ETCD_PASSWORD}"
 
 bootstrap:
   dcs:
@@ -338,90 +370,478 @@ bootstrap:
     loop_wait: 10
     retry_timeout: 10
     maximum_lag_on_failover: 1048576
+    maximum_lag_on_syncnode: -1
+    synchronous_mode: true
+    synchronous_mode_strict: false
     postgresql:
       use_pg_rewind: true
       use_slots: true
       parameters:
         wal_level: replica
         hot_standby: "on"
-        max_connections: 200
-        max_worker_processes: 8
-        wal_keep_segments: 64
         max_wal_senders: 10
         max_replication_slots: 10
-        checkpoint_timeout: 15min
+        wal_log_hints: "on"
+        max_connections: 300
+        shared_buffers: "16GB"
+        effective_cache_size: "48GB"
+        checkpoint_timeout: "15min"
         archive_mode: "on"
-        archive_timeout: 1800s
-        archive_command: "/etc/patroni/archive.sh %p"
+        archive_timeout: "60"
+        archive_command: "wal-g wal-push %p"
+      synchronous_standby_names: "*"
 
   initdb:
-  - encoding: UTF8
-  - data-checksums
+    - encoding: UTF8
+    - locale: en_US.UTF-8
+    - data-checksums
+    - auth-local: trust
 
   pg_hba:
-  - host replication replicator 127.0.0.1/32 md5
-  - host all all 0.0.0.0/0 md5
+    - local   all             all                                   trust
+    - host    replication     replicator   127.0.0.1/32            scram-sha-256
+    - host    replication     replicator   192.168.1.0/24          scram-sha-256
+    - host    all             all          192.168.1.0/24          scram-sha-256
+    - hostssl all             all          0.0.0.0/0               scram-sha-256
+    - host    all             all          ::/0                     scram-sha-256
 
   users:
     admin:
-      password: admin_password
+      password: "${PG_ADMIN_PASSWORD}"
       options:
         - createrole
         - createdb
+    replicator:
+      password: "${PG_REPL_PASSWORD}"
+      options:
+        - replication
 
 postgresql:
   listen: 0.0.0.0:5432
   connect_address: 192.168.1.10:5432
-  data_dir: /var/lib/postgresql/15/main
-  bin_dir: /usr/lib/postgresql/15/bin
+  data_dir: /var/lib/postgresql/17/main
+  bin_dir: /usr/lib/postgresql/17/bin
   pgpass: /tmp/pgpass
   authentication:
     replication:
       username: replicator
-      password: rep_password
+      password: "${PG_REPL_PASSWORD}"
     superuser:
       username: postgres
-      password: postgres_password
+      password: "${PG_SUPER_PASSWORD}"
+  parameters:
+    shared_preload_libraries: "pg_stat_statements,auto_explain"
+    pg_stat_statements.max: "10000"
+    pg_stat_statements.track: "all"
+
+tags:
+  nofailover: false
+  noloadbalance: false
+  clonefrom: false
+  promote: false
 
 watchdog:
   mode: automatic
   device: /dev/watchdog
+  safety_margin: -1
 ```
 
-### Barman备份配置 (Barman Backup Configuration)
+### PgBouncer 连接池配置
 
 ```ini
-# barman.conf - Barman配置
-[barman]
-barman_user = barman
-configuration_files_directory = /etc/barman.d
-barman_home = /var/lib/barman
-log_file = /var/log/barman/barman.log
-log_level = INFO
+# pgbouncer.ini - PgBouncer 生产配置
+[databases]
+production_db = host=127.0.0.1 port=5432 dbname=production_db
+production_db_ro = host=192.168.1.11 port=5432 dbname=production_db
 
-[production-postgres]
-description = "Production PostgreSQL Server"
-ssh_command = ssh postgres@192.168.1.10
-conninfo = host=192.168.1.10 user=barman dbname=postgres
-backup_method = rsync
-reuse_backup = link
-archiver = on
-minimum_redundancy = 2
-retention_policy = RECOVERY WINDOW OF 4 WEEKS
-wal_retention_policy = main
+[pgbouncer]
+listen_addr = 0.0.0.0
+listen_port = 6432
+unix_socket_dir = /var/run/postgresql
+unix_socket_mode = 0777
+auth_type = scram-sha-256
+auth_file = /etc/pgbouncer/userlist.txt
+admin_users = pgbouncer_admin
+stats_users = pgbouncer_stats
+pool_mode = transaction
+server_reset_query = DISCARD ALL
+server_reset_query_always = 0
+server_check_query = SELECT 1
+server_check_delay = 30
+server_lifetime = 3600
+server_idle_timeout = 600
+server_connect_timeout = 15
+server_login_retry = 3
+query_timeout = 30
+query_wait_timeout = 60
+client_idle_timeout = 0
+client_login_timeout = 15
+autodb_idle_timeout = 3600
+max_client_conn = 10000
+default_pool_size = 25
+min_pool_size = 5
+reserve_pool_size = 5
+reserve_pool_timeout = 3
+max_db_connections = 0
+max_user_connections = 0
+pkt_buf = 4096
+tcp_defer_accept = 0
+tcp_socket_buffer = 0
+tcp_keepalive = 1
+tcp_keepcnt = 3
+tcp_keepidle = 600
+tcp_keepintvl = 30
+tcp_user_timeout = 0
+idle_transaction_timeout = 600
+disable_pqexec = 0
+
+[users]
+app_user = pool_mode=transaction max_user_connections=200
 ```
 
-## 性能监控 (Performance Monitoring)
+---
 
-### 监控指标配置 (Monitoring Metrics Configuration)
+## 性能调优
+
+### 内存参数计算公式
+
+```
+PostgreSQL 内存分配参考（64GB 物理内存）：
+
+shared_buffers            = 物理内存 × 25% = 16GB
+effective_cache_size      = 物理内存 × 75% = 48GB
+work_mem                  = (物理内存 - shared_buffers) / (max_connections × 3) ≈ 32MB
+maintenance_work_mem      = 物理内存 × 1.5% = ~1GB
+autovacuum_work_mem       = 物理内存 × 0.4% = ~256MB
+wal_buffers               = shared_buffers × 0.03% = ~64MB（最大 64MB）
+
+work_mem 精确计算：
+work_mem = (总可用内存 - shared_buffers - OS保留) / (max_connections × avg_parallel_workers)
+        = (64GB - 16GB - 4GB) / (300 × 2)
+        = 44GB / 600
+        = ~75MB → 建议设为 32MB（保守值，避免极端情况 OOM）
+```
+
+### 关键性能参数对照表
+
+| 参数 | 默认值 | 推荐值（64GB/SSD） | 说明 |
+|:---|:---|:---|:---|
+| `shared_buffers` | 128MB | 16GB | 共享缓冲池，存储热数据页 |
+| `effective_cache_size` | 4GB | 48GB | 查询规划器参考的可用缓存 |
+| `work_mem` | 4MB | 32MB | 排序/哈希操作内存上限 |
+| `random_page_cost` | 4.0 | 1.1 | SSD 环境降低随机 IO 代价 |
+| `effective_io_concurrency` | 1 | 200 | SSD 环境提高并发 IO 数 |
+| `max_parallel_workers_per_gather` | 2 | 4 | 并行查询 worker 数 |
+| `checkpoint_completion_target` | 0.9 | 0.9 | 检查点写出的时间比例 |
+| `max_wal_size` | 1GB | 8GB | WAL 最大累积量 |
+| `wal_buffers` | -1(auto) | 64MB | WAL 缓冲区 |
+| `autovacuum_max_workers` | 3 | 4 | 自动清理工作进程数 |
+
+### 查询性能诊断 SQL
+
+```sql
+-- 1. Top 20 最耗时的查询
+SELECT query, calls, total_exec_time, mean_exec_time,
+       rows, shared_blks_hit, shared_blks_read
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 20;
+
+-- 2. 缓存命中率（目标 > 99%）
+SELECT
+    datname,
+    blks_hit,
+    blks_read,
+    ROUND(blks_hit::numeric / NULLIF(blks_hit + blks_read, 0) * 100, 2) AS cache_hit_pct
+FROM pg_stat_database
+WHERE datname NOT IN ('postgres', 'template0', 'template1');
+
+-- 3. 表膨胀检测
+SELECT
+    schemaname,
+    tablename,
+    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS total_size,
+    n_dead_tup,
+    n_live_tup,
+    ROUND(n_dead_tup::numeric / NULLIF(n_live_tup + n_dead_tup, 0) * 100, 2) AS dead_tuple_pct,
+    last_autovacuum,
+    last_autoanalyze
+FROM pg_stat_user_tables
+WHERE n_dead_tup > 10000
+ORDER BY n_dead_tup DESC;
+
+-- 4. 索引使用率分析
+SELECT
+    schemaname,
+    tablename,
+    indexname,
+    idx_scan,
+    idx_tup_read,
+    idx_tup_fetch,
+    pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
+FROM pg_stat_user_indexes
+WHERE idx_scan < 50
+  AND pg_relation_size(indexrelid) > 1024 * 1024
+ORDER BY pg_relation_size(indexrelid) DESC;
+
+-- 5. 锁等待分析
+SELECT
+    blocked.pid AS blocked_pid,
+    blocked.query AS blocked_query,
+    blocking.pid AS blocking_pid,
+    blocking.query AS blocking_query,
+    blocked.mode AS blocked_mode,
+    EXTRACT(EPOCH FROM (now() - blocked.query_start)) AS blocked_seconds
+FROM pg_locks blocked
+JOIN pg_locks blocking ON blocked.locktype = blocking.locktype
+    AND blocked.database IS NOT DISTINCT FROM blocking.database
+    AND blocked.relation IS NOT DISTINCT FROM blocking.relation
+    AND blocked.page IS NOT DISTINCT FROM blocking.page
+    AND blocked.tuple IS NOT DISTINCT FROM blocking.tuple
+    AND blocked.virtualxid IS NOT DISTINCT FROM blocking.virtualxid
+    AND blocked.transactionid IS NOT DISTINCT FROM blocking.transactionid
+    AND blocked.pid != blocking.pid
+    AND NOT blocked.granted
+JOIN pg_stat_activity blocked ON blocked.pid = blocked.pid
+JOIN pg_stat_activity blocking ON blocking.pid = blocking.pid;
+
+-- 6. 复制延迟监控
+SELECT
+    client_addr,
+    state,
+    sync_state,
+    sent_lsn,
+    replay_lsn,
+    pg_wal_lsn_diff(sent_lsn, replay_lsn) AS lag_bytes,
+    replay_lag
+FROM pg_stat_replication;
+
+-- 7. 活跃连接分析
+SELECT
+    datname,
+    state,
+    COUNT(*) AS conn_count,
+    COUNT(*) FILTER (WHERE wait_event_type IS NOT NULL) AS waiting_count,
+    MAX(EXTRACT(EPOCH FROM (now() - query_start))) AS max_query_seconds
+FROM pg_stat_activity
+WHERE pid != pg_backend_pid()
+GROUP BY datname, state
+ORDER BY conn_count DESC;
+```
+
+---
+
+## 高可用与容灾
+
+### Patroni 集群管理操作
+
+```bash
+#!/bin/bash
+# patroni_ops.sh - Patroni 集群管理脚本
+
+PATRONI_PORT=8008
+PATRONI_HOST="localhost"
+
+# 查看集群状态
+cluster_status() {
+    patronictl -c /etc/patroni/patroni.yml list
+    echo ""
+    echo "--- Detailed Info ---"
+    curl -s "http://${PATRONI_HOST}:${PATRONI_PORT}/cluster" | jq .
+}
+
+# 手动切换（switchover）
+switchover() {
+    local candidate="${1:-}"
+    echo "Current cluster state:"
+    patronictl -c /etc/patroni/patroni.yml list
+
+    if [[ -n "$candidate" ]]; then
+        echo "Switching over to $candidate..."
+        patronictl -c /etc/patroni/patroni.yml switchover --master pg-cluster --candidate "$candidate" --force
+    else
+        patronictl -c /etc/patroni/patroni.yml switchover --master pg-cluster --force
+    fi
+
+    echo "New cluster state:"
+    patronictl -c /etc/patroni/patroni.yml list
+}
+
+# 重新加载配置
+reload_config() {
+    patronictl -c /etc/patroni/patroni.yml reload pg-cluster
+}
+
+# 重新初始化失败的节点
+reinit_node() {
+    local node="$1"
+    echo "Reinitializing node: $node"
+    patronictl -c /etc/patroni/patroni.yml reinit pg-cluster "$node" --force
+}
+
+case "${1:-status}" in
+    status)     cluster_status ;;
+    switchover) switchover "${2:-}" ;;
+    reload)     reload_config ;;
+    reinit)     reinit_node "${2:?Node name required}" ;;
+    *)          echo "Usage: $0 {status|switchover [node]|reload|reinit <node>}" ;;
+esac
+```
+
+### 跨机房容灾方案
 
 ```yaml
-# Prometheus PostgreSQL Exporter配置
+# 跨机房容灾架构配置
+disaster_recovery:
+  primary_dc: "dc-beijing"
+  dr_dc: "dc-shanghai"
+
+  replication:
+    method: "streaming_replication"
+    mode: "async"
+    slot_name: "dc_shanghai_slot"
+    application_name: "dc_shanghai_repl"
+
+  failover:
+    rto: "15 minutes"
+    rpo: "5 seconds"
+    auto_failover: false
+    procedure:
+      - "验证主机房故障不可恢复"
+      - "提升 DR 机房 replica 为主"
+      - "更新 DNS/VIP 指向新主"
+      - "通知应用层刷新连接"
+      - "恢复后反向同步数据"
+
+  consistency_check:
+    schedule: "0 */4 * * *"
+    tool: "pg_comparator"
+    report_channel: "#dba-alerts"
+```
+
+---
+
+## 备份恢复
+
+### WAL-G 备份配置
+
+```bash
+#!/bin/bash
+# pg_walg_backup.sh - WAL-G 备份管理脚本
+set -euo pipefail
+
+# WAL-G 环境变量
+export WALG_S3_PREFIX="s3://company-pg-backups/production"
+export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY}"
+export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_KEY}"
+export AWS_REGION="cn-north-1"
+export WALG_COMPRESSION_METHOD="zstd"
+export WALG_DELTA_MAX_STEPS=7
+export PGHOST="/var/run/postgresql"
+
+FULL_BACKUP_CRON="0 2 * * 0"
+INCR_BACKUP_CRON="0 2 * * 1-6"
+RETENTION_DAYS=30
+
+full_backup() {
+    echo "$(date): Starting full backup..."
+    wal-g backup-push /var/lib/postgresql/17/main --full
+    echo "$(date): Full backup completed"
+}
+
+incremental_backup() {
+    echo "$(date): Starting incremental backup..."
+    wal-g backup-push /var/lib/postgresql/17/main
+    echo "$(date): Incremental backup completed"
+}
+
+verify_backup() {
+    echo "$(date): Verifying backups..."
+    wal-g verify
+    echo "$(date): Backup verification passed"
+}
+
+list_backups() {
+    wal-g backup-list
+}
+
+cleanup_backups() {
+    echo "$(date): Cleaning up old backups (retention: ${RETENTION_DAYS} days)..."
+    wal-g delete retain 7d --confirm
+    echo "$(date): Cleanup completed"
+}
+
+restore_to_latest() {
+    echo "!!! PRODUCTION RESTORE !!!"
+    echo "Target: latest backup"
+    read -p "Are you sure? (yes/no): " confirm
+    [[ "$confirm" != "yes" ]] && echo "Aborted" && exit 1
+
+    sudo -u postgres pg_ctlcluster 17 main stop
+    rm -rf /var/lib/postgresql/17/main/*
+    wal-g backup-fetch /var/lib/postgresql/17/main LATEST
+
+    cat > /var/lib/postgresql/17/main/recovery.signal <<EOF
+restore_command = 'wal-g wal-fetch %f %p'
+recovery_target = 'immediate'
+recovery_target_action = 'promote'
+EOF
+
+    sudo -u postgres pg_ctlcluster 17 main start
+    echo "Restore completed"
+}
+
+point_in_time_restore() {
+    local target_time="${1:?Usage: point_in_time_restore '2026-04-26 15:30:00+08'}"
+    echo "!!! PITR RESTORE to $target_time !!!"
+    read -p "Are you sure? (yes/no): " confirm
+    [[ "$confirm" != "yes" ]] && echo "Aborted" && exit 1
+
+    sudo -u postgres pg_ctlcluster 17 main stop
+    rm -rf /var/lib/postgresql/17/main/*
+    wal-g backup-fetch /var/lib/postgresql/17/main LATEST
+
+    cat > /var/lib/postgresql/17/main/recovery.signal <<EOF
+restore_command = 'wal-g wal-fetch %f %p'
+recovery_target_time = '${target_time}'
+recovery_target_action = 'promote'
+EOF
+
+    sudo -u postgres pg_ctlcluster 17 main start
+    echo "PITR restore completed to $target_time"
+}
+
+case "${1:-help}" in
+    full)      full_backup ;;
+    incr)      incremental_backup ;;
+    verify)    verify_backup ;;
+    list)      list_backups ;;
+    cleanup)   cleanup_backups ;;
+    restore)   restore_to_latest ;;
+    pitr)      point_in_time_restore "${2:?Target time required}" ;;
+    *)
+        echo "Usage: $0 {full|incr|verify|list|cleanup|restore|pitr <time>}"
+        ;;
+esac
+```
+
+---
+
+## 监控告警
+
+### Prometheus Exporter 配置
+
+```yaml
 scrape_configs:
-  - job_name: 'postgresql-exporter'
+  - job_name: 'postgresql'
     static_configs:
-      - targets: ['postgresql-exporter:9187']
-    metrics_path: /metrics
+      - targets:
+          - 'pg-exporter-0:9187'
+          - 'pg-exporter-1:9187'
+          - 'pg-exporter-2:9187'
+        labels:
+          cluster: 'production-pg'
+    scrape_interval: 15s
     params:
       collect[]:
         - pg_stat_bgwriter
@@ -430,276 +850,320 @@ scrape_configs:
         - pg_statio_user_tables
         - pg_stat_replication
         - pg_stat_activity
-
-# 关键监控指标
-pg_stat_database_xact_commit{}        # 提交事务数
-pg_stat_database_xact_rollback{}      # 回滚事务数
-pg_stat_database_blks_read{}          # 块读取数
-pg_stat_database_blks_hit{}           # 缓冲命中数
-pg_stat_database_deadlocks{}          # 死锁数
-pg_stat_replication_pg_wal_lsn_diff{} # 复制延迟
+        - pg_stat_statements
+        - pg_settings
 ```
 
-### 告警规则配置 (Alerting Rules Configuration)
+### 生产级告警规则
 
 ```yaml
-# Prometheus告警规则
 groups:
-- name: postgresql.rules
-  rules:
-  - alert: PostgreSQLDown
-    expr: pg_up == 0
-    for: 2m
-    labels:
-      severity: critical
-    annotations:
-      summary: "PostgreSQL instance is down"
-      description: "PostgreSQL instance {{ $labels.instance }} is down for more than 2 minutes"
+  - name: postgresql.rules
+    rules:
+      - alert: PostgreSQLDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: dba
+        annotations:
+          summary: "PostgreSQL 实例宕机"
+          description: "实例 {{ $labels.instance }} 已宕机超过 1 分钟"
 
-  - alert: PostgreSQLHighConnectionCount
-    expr: pg_stat_database_numbackends > 150
-    for: 2m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High PostgreSQL connection count"
-      description: "PostgreSQL instance {{ $labels.instance }} has {{ $value }} connections"
+      - alert: PostgreSQLReplicationLag
+        expr: pg_replication_lag > 30
+        for: 5m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "PostgreSQL 复制延迟"
+          description: "从库延迟 {{ $value }} 秒"
 
-  - alert: PostgreSQLReplicationLag
-    expr: pg_stat_replication_pg_wal_lsn_diff > 100*1024*1024
-    for: 2m
-    labels:
-      severity: warning
-    annotations:
-      summary: "PostgreSQL replication lag"
-      description: "PostgreSQL standby {{ $labels.instance }} is {{ $value }} bytes behind master"
+      - alert: PostgreSQLReplicationByteLag
+        expr: pg_replication_lag_bytes > 1073741824
+        for: 5m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "复制字节延迟超过 1GB"
 
-  - alert: PostgreSQLSlowQueries
-    expr: rate(pg_stat_statements_mean_time_ms[5m]) > 5000
-    for: 2m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High PostgreSQL query latency"
-      description: "PostgreSQL instance {{ $labels.instance }} has average query time above 5 seconds"
+      - alert: PostgreSQLConnectionsHigh
+        expr: pg_stat_activity_count / pg_settings_max_connections > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "连接使用率超过 85%"
+
+      - alert: PostgreSQLCacheHitRateLow
+        expr: |
+          rate(pg_stat_database_blks_hit[5m]) /
+          (rate(pg_stat_database_blks_hit[5m]) + rate(pg_stat_database_blks_read[5m])) < 0.95
+        for: 10m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "缓存命中率低于 95%"
+
+      - alert: PostgreSQLDeadTuplesHigh
+        expr: |
+          pg_stat_user_tables_n_dead_tup /
+          (pg_stat_user_tables_n_live_tup + pg_stat_user_tables_n_dead_tup) > 0.2
+        for: 30m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "死元组占比超过 20%"
+
+      - alert: PostgreSQLTransactionWraparound
+        expr: pg_database_xid_age > 1500000000
+        for: 1h
+        labels:
+          severity: critical
+          team: dba
+        annotations:
+          summary: "事务 ID 即将耗尽（距 wraparound 不足 200M）"
+
+      - alert: PostgreSQLTableBloat
+        expr: |
+          (pg_stat_user_tables_n_dead_tup * pg_relation_size_bytes) /
+          pg_settings_block_size > 1073741824
+        for: 1h
+        labels:
+          severity: info
+          team: dba
+        annotations:
+          summary: "表膨胀超过 1GB"
 ```
-
-## 运维管理 (Operational Management)
-
-### 故障排查工具 (Troubleshooting Tools)
-
-```bash
-#!/bin/bash
-# PostgreSQL故障排查脚本
-
-# 数据库健康检查
-check_postgres_health() {
-    echo "=== PostgreSQL Health Check ==="
-    
-    # 检查PostgreSQL服务状态
-    systemctl status postgresql | grep Active
-    
-    # 检查连接数
-    psql -c "SELECT count(*) FROM pg_stat_activity;"
-    
-    # 检查锁等待
-    psql -c "SELECT * FROM pg_locks WHERE NOT granted;"
-    
-    # 检查复制状态
-    psql -c "SELECT client_addr, state, sync_state, pg_wal_lsn_diff(sent_lsn, replay_lsn) AS lag_bytes FROM pg_stat_replication;"
-}
-
-# 性能分析
-performance_analysis() {
-    echo "=== Performance Analysis ==="
-    
-    # 检查慢查询
-    psql -c "SELECT query, mean_time, calls FROM pg_stat_statements ORDER BY mean_time DESC LIMIT 10;"
-    
-    # 检查缓存命中率
-    psql -c "SELECT datname, blks_read, blks_hit, round(blks_hit::float/(blks_hit+blks_read)*100, 2) as cache_hit_ratio FROM pg_stat_database;"
-    
-    # 检查表膨胀
-    psql -c "SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size, (pgstatstuples.n_dead_tup::float / NULLIF(pgstatstuples.n_live_tup + pgstatstuples.n_dead_tup, 0) * 100)::numeric(5,2) as dead_tuple_percent FROM pg_stat_user_tables pgstatstuples ORDER BY dead_tuple_percent DESC LIMIT 10;"
-}
-
-# 备份验证
-backup_verification() {
-    echo "=== Backup Verification ==="
-    
-    # 检查WAL归档状态
-    psql -c "SELECT * FROM pg_stat_archiver;"
-    
-    # 验证备份完整性
-    barman check production-postgres
-    
-    # 检查备份历史
-    barman list-backup production-postgres
-}
-```
-
-### 日常运维脚本 (Daily Operations Scripts)
-
-```bash
-#!/bin/bash
-# PostgreSQL日常运维脚本
-
-# 自动备份
-auto_backup() {
-    echo "Performing automatic backup..."
-    
-    # WAL-G备份
-    wal-g backup-push /var/lib/postgresql/15/main
-    
-    # Barman备份
-    barman backup production-postgres
-    
-    # 清理旧备份
-    wal-g delete retain 7 DAY
-    barman cron
-    
-    # 验证备份
-    wal-g backup-list
-    barman check production-postgres
-}
-
-# 性能优化
-performance_optimization() {
-    echo "Optimizing PostgreSQL performance..."
-    
-    # 分析表统计信息
-    psql -c "ANALYZE;"
-    
-    # 清理膨胀表
-    psql -c "SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size FROM pg_stat_user_tables WHERE (pgstatstuples.n_dead_tup::float / NULLIF(pgstatstuples.n_live_tup + pgstatstuples.n_dead_tup, 0) * 100) > 20;" | while read schema table size; do
-        if [[ $schema != "schemaname" ]]; then
-            echo "Vacuuming $schema.$table"
-            psql -c "VACUUM ANALYZE $schema.$table;"
-        fi
-    done
-    
-    # 重建索引
-    psql -c "SELECT schemaname, tablename, indexname FROM pg_stat_user_indexes WHERE idx_scan < 10;" | while read schema table index; do
-        if [[ $schema != "schemaname" ]]; then
-            echo "Rebuilding index $index on $schema.$table"
-            psql -c "REINDEX INDEX CONCURRENTLY $schema.$index;"
-        fi
-    done
-}
-
-# 安全检查
-security_audit() {
-    echo "Performing security audit..."
-    
-    # 检查弱密码用户
-    psql -c "SELECT usename FROM pg_shadow WHERE passwd !~ 'md5';"
-    
-    # 检查超级用户
-    psql -c "SELECT usename FROM pg_shadow WHERE usesuper;"
-    
-    # 检查未使用的角色
-    psql -c "SELECT rolname FROM pg_roles WHERE rolname NOT IN (SELECT DISTINCT usename FROM pg_shadow UNION SELECT 'postgres');"
-    
-    # 检查公共模式权限
-    psql -c "SELECT nspname, relname, relacl FROM pg_class c JOIN pg_namespace n ON c.relnamespace = n.oid WHERE nspname = 'public';"
-}
-```
-
-## 最佳实践 (Best Practices)
-
-### 部署最佳实践 (Deployment Best Practices)
-
-1. **硬件规划**
-   ```bash
-   # 内存分配建议
-   shared_buffers = 物理内存的25%
-   effective_cache_size = 物理内存的75%
-   work_mem = 每个连接64-256MB
-   
-   # 存储配置
-   # 使用SSD存储
-   # RAID 10配置
-   # LVM快照用于备份
-   ```
-
-2. **网络配置**
-   ```ini
-   # 网络优化参数
-   listen_addresses = '*'
-   tcp_keepalives_idle = 600
-   tcp_keepalives_interval = 30
-   tcp_keepalives_count = 3
-   ```
-
-3. **版本管理**
-   ```bash
-   # 使用最新的稳定版本
-   # 定期应用安全补丁
-   # 测试环境先行验证
-   ```
-
-### 安全最佳实践 (Security Best Practices)
-
-1. **访问控制**
-   ```sql
-   -- 创建应用专用用户
-   CREATE USER app_user WITH PASSWORD 'strong_password';
-   GRANT CONNECT ON DATABASE production_db TO app_user;
-   GRANT USAGE ON SCHEMA public TO app_user;
-   GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_user;
-   
-   -- 限制超级用户访问
-   REVOKE ALL ON SCHEMA public FROM PUBLIC;
-   GRANT ALL ON SCHEMA public TO postgres;
-   ```
-
-2. **数据加密**
-   ```ini
-   # 启用SSL连接
-   ssl = on
-   ssl_cert_file = '/etc/ssl/certs/postgresql.crt'
-   ssl_key_file = '/etc/ssl/private/postgresql.key'
-   ssl_ca_file = '/etc/ssl/certs/ca.crt'
-   ```
-
-3. **审计日志**
-   ```sql
-   -- 启用详细日志记录
-   ALTER SYSTEM SET log_statement = 'all';
-   ALTER SYSTEM SET log_duration = on;
-   ALTER SYSTEM SET log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h ';
-   SELECT pg_reload_conf();
-   ```
-
-### 监控最佳实践 (Monitoring Best Practices)
-
-1. **关键指标监控**
-   - 连接数使用率 < 80%
-   - 缓存命中率 > 95%
-   - 复制延迟 < 100MB
-   - 死锁率 < 0.01%
-
-2. **告警策略**
-   ```yaml
-   # 分级告警
-   critical: 数据库宕机、复制中断
-   warning: 连接数过高、性能下降
-   info: 常规状态更新
-   ```
-
-3. **容量规划**
-   ```sql
-   -- 监控表增长趋势
-   SELECT schemaname, tablename, 
-          pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as size,
-          pg_stat_get_tuples_inserted(relid) as inserts,
-          pg_stat_get_tuples_updated(relid) as updates
-   FROM pg_stat_user_tables 
-   ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
-   ```
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2024年2月7日  
-**适用版本**: PostgreSQL 15+
+## 运维管理
+
+### 综合运维脚本
+
+```bash
+#!/bin/bash
+# pg_ops.sh - PostgreSQL 运维管理脚本
+set -euo pipefail
+
+PSQL="psql -U postgres -At"
+
+cmd_health() {
+    echo "=== PostgreSQL Health Check $(date) ==="
+
+    echo ""
+    echo "--- Uptime ---"
+    $PSQL -c "SELECT pg_postmaster_start_time(), now() - pg_postmaster_start_time() AS uptime;"
+
+    echo ""
+    echo "--- Connections ---"
+    $PSQL -c "
+        SELECT state, COUNT(*) AS cnt
+        FROM pg_stat_activity
+        WHERE pid != pg_backend_pid()
+        GROUP BY state ORDER BY cnt DESC;
+    "
+
+    echo ""
+    echo "--- Replication ---"
+    $PSQL -c "
+        SELECT client_addr, state, sync_state,
+               pg_wal_lsn_diff(sent_lsn, replay_lsn) AS lag_bytes,
+               replay_lag
+        FROM pg_stat_replication;
+    "
+
+    echo ""
+    echo "--- Cache Hit Rate ---"
+    $PSQL -c "
+        SELECT datname,
+               ROUND(blks_hit::numeric / NULLIF(blks_hit + blks_read, 0) * 100, 2) AS hit_pct
+        FROM pg_stat_database
+        WHERE datname NOT IN ('postgres','template0','template1');
+    "
+
+    echo ""
+    echo "--- Dead Tuples (Top 10) ---"
+    $PSQL -c "
+        SELECT schemaname||'.'||tablename AS tbl,
+               n_dead_tup,
+               ROUND(n_dead_tup::numeric / NULLIF(n_live_tup + n_dead_tup, 0) * 100, 2) AS dead_pct,
+               last_autovacuum
+        FROM pg_stat_user_tables
+        WHERE n_dead_tup > 10000
+        ORDER BY n_dead_tup DESC LIMIT 10;
+    "
+
+    echo ""
+    echo "--- Blocking Queries ---"
+    $PSQL -c "
+        SELECT blocked.pid, blocked.query, blocking.pid AS blocked_by,
+               EXTRACT(EPOCH FROM (now() - blocked.query_start)) AS wait_seconds
+        FROM pg_locks blocked
+        JOIN pg_locks blocking ON blocked.locktype = blocking.locktype
+            AND blocked.database IS NOT DISTINCT FROM blocking.database
+            AND blocked.relation IS NOT DISTINCT FROM blocking.relation
+            AND NOT blocked.granted AND blocked.pid != blocking.pid
+        JOIN pg_stat_activity blocked ON blocked.pid = blocked.pid
+        JOIN pg_stat_activity blocking ON blocking.pid = blocking.pid
+        LIMIT 10;
+    "
+
+    echo ""
+    echo "--- Disk Usage ---"
+    $PSQL -c "
+        SELECT pg_size_pretty(pg_database_size(datname)) AS db_size, datname
+        FROM pg_database
+        WHERE datistemplate = false
+        ORDER BY pg_database_size(datname) DESC;
+    "
+}
+
+cmd_vacuum() {
+    echo "=== Vacuum Analysis ==="
+    $PSQL -c "
+        SELECT 'VACUUM ANALYZE ' || schemaname || '.' || tablename || ';'
+        FROM pg_stat_user_tables
+        WHERE n_dead_tup > 100000
+          OR (n_dead_tup::numeric / NULLIF(n_live_tup + n_dead_tup, 0)) > 0.1
+        ORDER BY n_dead_tup DESC;
+    " | while read sql; do
+        echo "Executing: $sql"
+        $PSQL -c "$sql"
+    done
+}
+
+cmd_reindex() {
+    echo "=== Reindex Analysis ==="
+    $PSQL -c "
+        SELECT 'REINDEX INDEX CONCURRENTLY ' || schemaname || '.' || indexname || ';'
+        FROM pg_stat_user_indexes
+        WHERE idx_scan < 10
+          AND pg_relation_size(indexrelid) > 100 * 1024 * 1024
+        ORDER BY pg_relation_size(indexrelid) DESC;
+    " | while read sql; do
+        echo "Executing: $sql"
+        $PSQL -c "$sql"
+    done
+}
+
+case "${1:-help}" in
+    health)  cmd_health ;;
+    vacuum)  cmd_vacuum ;;
+    reindex) cmd_reindex ;;
+    *)       echo "Usage: $0 {health|vacuum|reindex}" ;;
+esac
+```
+
+---
+
+## 最佳实践
+
+### 0. 生产环境部署清单
+
+PostgreSQL 生产环境部署需要在硬件选型、操作系统调优和数据库参数配置三个层面进行系统性优化。以下清单基于多个大规模 PostgreSQL 集群（数据量 10TB+、QPS 10万+）的运维经验总结。
+
+**硬件规划原则**：PostgreSQL 对存储 I/O 性能极为敏感，尤其是在 checkpoint 和 autovacuum 期间。生产环境强烈推荐使用 NVMe SSD 存储，IOPS 不低于 30000。内存配置建议 64GB 以上，`shared_buffers` 设置为物理内存的 25%（注意不要超过 40%，因为 OS 文件缓存同样重要）。网络方面，主从复制链路延迟应低于 1ms，推荐使用万兆网络。
+
+**操作系统优化**：调整 `vm.dirty_background_ratio=5` 和 `vm.dirty_ratio=10`，避免大量脏页一次性刷新导致的 IO 尖峰。设置 `vm.overcommit_memory=2` 防止 OOM Killer 误杀 PostgreSQL 进程。配置 Transparent Huge Pages 为 `madvise` 模式（或直接关闭），避免 THP 导致的内存碎片问题。文件系统推荐使用 XFS，挂载参数添加 `noatime,nodiratime` 减少不必要的元数据更新。
+
+**连接池设计**：PostgreSQL 的进程模型（每个连接一个进程）意味着高并发场景下连接数过多会消耗大量内存。生产环境必须使用 PgBouncer 做事务级连接池（`pool_mode=transaction`），将应用侧的数千连接复用到 PostgreSQL 侧的数百连接。`default_pool_size` 建议设置为 `max_connections / 4`，`max_client_conn` 设置为应用总连接数的 1.5 倍。
+
+**Vacuum 管理策略**：PostgreSQL 的 MVCC 机制意味着频繁的 UPDATE 和 DELETE 操作会产生大量死元组（Dead Tuples），如果不及时清理会导致表膨胀（Bloat）和查询性能下降。默认的 `autovacuum_vacuum_scale_factor=0.2` 对于大表来说过于保守（一张 10 亿行的表需要变更 2 亿行才触发 vacuum）。建议对写入频繁的大表设置更激进的参数：
+
+```sql
+ALTER TABLE large_table SET (
+    autovacuum_vacuum_scale_factor = 0.02,
+    autovacuum_analyze_scale_factor = 0.01,
+    autovacuum_vacuum_cost_delay = 2,
+    autovacuum_vacuum_cost_limit = 2000
+);
+```
+
+同时，建议启用 `log_autovacuum_min_duration=0` 记录所有 autovacuum 操作，以便监控 vacuum 频率和耗时，及时调整参数。
+
+### 1. 连接池设计
+
+- 使用 PgBouncer 做事务级连接池，`pool_mode = transaction`
+- `default_pool_size` 设置为 `(max_connections × 0.8) / pool_count`
+- 应用层使用 `PgBouncer` 端口（6432），不直连 PostgreSQL
+- 读写分离使用 PgBouncer 配置不同数据库指向主/从节点
+
+### 2. Vacuum 管理策略
+
+```sql
+-- 对写入频繁的大表设置更激进的 autovacuum 参数
+ALTER TABLE orders SET (
+    autovacuum_vacuum_scale_factor = 0.05,
+    autovacuum_analyze_scale_factor = 0.02,
+    autovacuum_vacuum_cost_delay = 2,
+    autovacuum_vacuum_cost_limit = 2000
+);
+
+-- 监控 vacuum 进度
+SELECT pid, datname, relid::regclass, phase,
+       heap_blks_total, heap_blks_scanned, heap_blks_vacuumed,
+       index_vacuum_count
+FROM pg_stat_progress_vacuum;
+```
+
+### 3. 分区表设计
+
+```sql
+-- 按月声明式分区（PostgreSQL 17）
+CREATE TABLE access_logs (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT NOT NULL,
+    path TEXT NOT NULL,
+    method TEXT NOT NULL,
+    status_code SMALLINT NOT NULL,
+    response_time_ms INTEGER,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+) PARTITION BY RANGE (created_at);
+
+CREATE TABLE access_logs_2026_01 PARTITION OF access_logs
+    FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');
+CREATE TABLE access_logs_2026_02 PARTITION OF access_logs
+    FOR VALUES FROM ('2026-02-01') TO ('2026-03-01');
+CREATE TABLE access_logs_2026_03 PARTITION OF access_logs
+    FOR VALUES FROM ('2026-03-01') TO ('2026-04-01');
+CREATE TABLE access_logs_2026_04 PARTITION OF access_logs
+    FOR VALUES FROM ('2026-04-01') TO ('2026-05-01');
+CREATE TABLE access_logs_default PARTITION OF access_logs DEFAULT;
+
+-- 定期维护脚本：创建下月分区 + 归档旧分区
+-- CREATE TABLE access_logs_2026_05 PARTITION OF access_logs
+--     FOR VALUES FROM ('2026-05-01') TO ('2026-06-01');
+-- DETACH PARTITION access_logs_2025_12 CONCURRENTLY;
+```
+
+---
+
+## 故障排查
+
+### 常见故障速查表
+
+| 故障现象 | 可能原因 | 排查方法 | 解决方案 |
+|:---|:---|:---|:---|
+| `FATAL: sorry, too many clients already` | 连接数耗尽 | `SELECT count(*) FROM pg_stat_activity;` | 增加 `max_connections`，配置 PgBouncer |
+| `ERROR: deadlock detected` | 死锁 | 查看 `log_lock_waits` 日志 | 调整事务访问顺序 |
+| 复制延迟持续增大 | 大事务/长查询 | `pg_stat_replication` + `pg_stat_activity` | 优化长事务，检查 `wal_keep_size` |
+| `ERROR: relation "xxx" does not exist` | search_path 问题或表不存在 | `SET search_path` 检查 | 修改 `search_path`，检查 schema |
+| `WARNING: checkpoint is occurring too frequently` | `max_wal_size` 太小 | 查看 `pg_stat_bgwriter` | 增大 `max_wal_size` |
+| 表查询变慢 | 膨胀/统计信息过期 | `pg_stat_user_tables` | `VACUUM ANALYZE`，检查 `n_dead_tup` |
+| `ERROR: cannot execute INSERT in a read-only transaction` | 连接到从库 | 检查连接目标 | 使用 Proxy/HAProxy 路由写操作到主库 |
+| `FATAL: the database system is starting up` | 正在恢复 | `pg_is_in_recovery()` | 等待恢复完成，检查 `recovery_target` |
+| WAL 归档堆积 | 归档命令失败 | 查看 `pg_stat_archiver` | 检查 S3 连接和权限 |
+| `ERROR: out of memory` | work_mem 过大 | `SHOW work_mem` | 降低 `work_mem`，减少 `max_connections` |
+
+---
+
+**文档版本**: v2.0  
+**最后更新**: 2026-04-26  
+**适用版本**: PostgreSQL 15 ~ 17

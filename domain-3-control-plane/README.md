@@ -1,3 +1,59 @@
+---
+title: 'Domain-3: Kubernetes控制平面'
+description: '**专家审查状态**: ✅ 已完成全域深度技术审计 (2026-04)'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- kubelet
+- containerd
+- docker
+- vpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-3: Kubernetes控制平面 是什么'
+- '如何 Domain-3: Kubernetes控制平面'
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- 'Domain-3:'
+- Kubernetes控制平面
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # Domain-3: Kubernetes控制平面
 
 > **文档数量**: 32 篇 | **最后更新**: 2026-04 | **适用版本**: Kubernetes 1.25 - 1.33+

@@ -1,21 +1,76 @@
 ---
-fta_id: "FTA-JOB-020"
-title: "Job/CronJob 异常故障树分析"
-component: "job-cronjob"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-JOB-001"
-last_updated: "2026-05"
+title: Job/CronJob 异常故障树分析
+description: '- **范围**：调度触发、并发与重试策略、镜像与探针、资源与配额、控制器依赖。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- job
+- cronjob
+- scheduled-job
+- batch
+- etcd
+- apiserver
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Job/CronJob 异常故障树分析 是什么
+- 如何 Job/CronJob 异常故障树分析
+- Job/CronJob 异常故障树分析 根因分析
+- Job/CronJob 异常故障树分析 故障树
+trigger_keywords:
+- Job
+- CronJob
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, job, cronjob, scheduled-job, batch]
-related_skills:
-  - "../topic-skills/06-deployment.md"
-knowledge_refs:
-  - "../domain-4-workloads/13-job-cronjob.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md
+  label: '结构化排障: 05-job-cronjob-troubleshooting'
+fta_metadata:
+  fta_id: FTA-JOB-001
+  top_event: Job/CronJob 异常 (未触发/失败/重复执行)
+  top_event_id: TE-JOB-001
+  bottom_events_count: 24
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get jobs -A 显示 Failed 或 BackoffLimitExceeded"
+    - "kubectl get cronjobs -A 显示下一次执行时间异常"
+    - "Job Pod 一直处于 Pending 或 CrashLoopBackOff"
+agent_notes:
+  decision_tree_entry: "kubectl get jobs -A; kubectl get cronjobs -A 检查 Job/CronJob 状态"
+  critical_commands:
+    - "kubectl get jobs -A -o wide"
+    - "kubectl describe job <name> -n <ns>"
+    - "kubectl get cronjob <name> -n <ns> -o jsonpath='{.status}'"
+    - "kubectl logs job/<name> -n <ns> --tail=50"
+  danger_operations:
+    - action: "kubectl delete job <name> -n <ns> --force"
+      risk: "强制删除会导致 Job 直接终止，可能丢失执行状态"
+      requires_confirmation: true
+    - action: "kubectl delete cronjob <name> -n <ns> --force"
+      risk: "删除 CronJob 会停止所有后续调度，可能影响业务"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get jobs -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
 
 # Job/CronJob 异常 FTA 树
 

@@ -1,3 +1,49 @@
+---
+title: FAQ 文档
+description: '## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- prometheus
+- envoy
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- FAQ 文档 是什么
+- 如何 FAQ 文档
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- FAQ
+- 文档
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # FAQ 文档
 本文档适用于：产品手册、官网页面、课程测验、现场 Q&A。
 

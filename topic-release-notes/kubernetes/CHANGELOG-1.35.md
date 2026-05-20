@@ -1,3 +1,34 @@
+---
+title: v1.35.3
+description: v1.35.3 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 210min
+intent_queries:
+- v1.35.3 是什么
+- 如何 v1.35.3
+trigger_keywords:
+- v1.35.3
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.35.3](#v1353)

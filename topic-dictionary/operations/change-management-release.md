@@ -1,3 +1,35 @@
+---
+title: 14 - 变更管理与发布策略
+description: '# 14 - 变更管理与发布策略'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- istio
+- cilium
+- calico
+- helm
+- argocd
+- docker
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- 变更管理与发布策略 是什么
+- 如何 变更管理与发布策略
+trigger_keywords:
+- 变更管理与发布策略
+- dictionary
+title_en: Change Management Release
+---
+
+
+
 # 14 - 变更管理与发布策略
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

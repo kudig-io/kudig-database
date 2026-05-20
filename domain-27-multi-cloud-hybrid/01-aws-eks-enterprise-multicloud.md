@@ -1,23 +1,70 @@
+---
+title: AWS EKS 企业级多云管理平台
+description: '# AWS EKS 企业级多云管理平台'
+category: multi-cloud-hybrid
+tags:
+- k8s
+- multi-cloud
+- hybrid-cloud
+- etcd
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- coredns
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 云架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- AWS EKS 企业级多云管理平台 是什么
+- 如何 AWS EKS 企业级多云管理平台
+- Kubernetes 27 multi cloud hybrid 最佳实践
+trigger_keywords:
+- AWS
+- EKS
+- 企业级多云管理平台
+- multi
+- cloud
+- hybrid
+---
+
+
 # AWS EKS 企业级多云管理平台
 
-## 概述 (Overview)
+## 概述
 
-Amazon Elastic Kubernetes Service (EKS) 是AWS提供的托管Kubernetes服务，为企业提供高度可扩展、安全可靠的容器编排平台。本文档从生产环境运维专家角度，深入探讨EKS的企业级部署架构、多云管理策略和运维最佳实践。
+Amazon Elastic Kubernetes Service (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，消除了企业自行维护 etcd 集群和 API Server 的复杂度，使团队能够专注于应用交付和业务创新。
 
-Amazon Elastic Kubernetes Service (EKS) is AWS's managed Kubernetes service that provides enterprises with a highly scalable, secure, and reliable container orchestration platform. This document explores EKS's enterprise deployment architecture, multi-cloud management strategies, and operational best practices from a production environment operations expert perspective.
+在多云架构场景下，EKS 通常作为核心工作负载承载平台，与 Azure AKS、Google GKE 等云平台形成多云协同架构。企业通过统一的管理平面（如 Karmada、Rancher）实现跨云资源调度、服务发现和故障转移，构建真正意义上的多云混合云平台。本文档从生产环境运维专家角度，深入探讨 EKS 的企业级部署架构、多云管理策略和运维最佳实践，涵盖集群规划、网络设计、安全加固、可观测性建设等关键技术领域。
 
-## 架构设计 (Architecture Design)
+### EKS 核心特性
 
-### 企业级EKS集群架构 (Enterprise EKS Cluster Architecture)
+- **托管控制平面**: AWS 负责 Kubernetes API Server、etcd 等核心组件的高可用运维
+- **深度集成 AWS 服务**: IAM 认证、ALB 负载均衡、EBS 存储、CloudWatch 监控等原生集成
+- **多区域部署**: 支持跨可用区部署，提供 99.95% 的 SLA 保障
+- **Fargate 无服务器**: 支持无节点管理的 Pod 运行模式，按需付费
+- **安全合规**: 满足 SOC、PCI DSS、HIPAA 等多项合规认证
+- **混合云连接**: 通过 Direct Connect、VPN 等方式与本地数据中心互联
+
+## 架构设计
+
+### 企业级 EKS 集群架构
+
+企业级 EKS 部署需要从网络、计算、存储、安全等多个维度进行全局设计。以下架构展示了典型的生产环境 EKS 集群配置，包含系统节点组、应用节点组和 GPU 节点组的分层设计。
 
 ```yaml
-# EKS 集群基础设施定义
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
   name: production-eks-cluster
   region: us-west-2
-  version: "1.28"
+  version: "1.30"
 
 availabilityZones: ["us-west-2a", "us-west-2b", "us-west-2c"]
 
@@ -29,6 +76,16 @@ iam:
       namespace: kube-system
     attachPolicyARNs:
     - "arn:aws:iam::aws:policy/AutoScalingFullAccess"
+  - metadata:
+      name: aws-load-balancer-controller
+      namespace: kube-system
+    attachPolicyARNs:
+    - "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
+  - metadata:
+      name: ebs-csi-controller-sa
+      namespace: kube-system
+    attachPolicyARNs:
+    - "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 
 vpc:
   cidr: "10.0.0.0/16"
@@ -41,6 +98,11 @@ vpc:
       us-west-2a: { cidr: "10.0.96.0/19" }
       us-west-2b: { cidr: "10.0.128.0/19" }
       us-west-2c: { cidr: "10.0.160.0/19" }
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: false
+  nat:
+    gateway: HighlyAvailable
 
 managedNodeGroups:
   - name: system-ng
@@ -52,15 +114,19 @@ managedNodeGroups:
     volumeType: gp3
     amiFamily: AmazonLinux2
     labels: { role: system }
+    taints:
+      - key: CriticalAddonsOnly
+        value: "true"
+        effect: NoSchedule
     tags:
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/production-eks-cluster: "owned"
-      
+
   - name: application-ng
     instanceType: m5.xlarge
     desiredCapacity: 6
     minSize: 3
-    maxSize: 20
+    maxSize: 30
     volumeSize: 100
     volumeType: gp3
     amiFamily: AmazonLinux2
@@ -68,16 +134,37 @@ managedNodeGroups:
     tags:
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/production-eks-cluster: "owned"
-      
+
+  - name: memory-ng
+    instanceType: r5.xlarge
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 10
+    volumeSize: 200
+    volumeType: gp3
+    amiFamily: AmazonLinux2
+    labels: { role: memory-intensive }
+    taints:
+      - key: memory-intensive
+        value: "true"
+        effect: NoSchedule
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/production-eks-cluster: "owned"
+
   - name: gpu-ng
     instanceType: g4dn.xlarge
     desiredCapacity: 2
-    minSize: 1
+    minSize: 0
     maxSize: 5
     volumeSize: 200
     volumeType: gp3
     amiFamily: AmazonLinux2
     labels: { role: gpu, accelerator: nvidia }
+    taints:
+      - key: nvidia.com/gpu
+        value: "true"
+        effect: NoSchedule
     tags:
       k8s.io/cluster-autoscaler/enabled: "true"
       k8s.io/cluster-autoscaler/production-eks-cluster: "owned"
@@ -89,72 +176,152 @@ addons:
     env:
       ENABLE_PREFIX_DELEGATION: "true"
       WARM_PREFIX_TARGET: "1"
+      POD_SECURITY_GROUP_ENFORCING_MODE: "standard"
 - name: coredns
   version: latest
 - name: kube-proxy
   version: latest
+- name: aws-ebs-csi-driver
+  version: latest
+  serviceAccountRoleARN: arn:aws:iam::123456789012:role/AmazonEKS_EBS_CSI_DriverRole
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+    logRetentionInDays: 90
 ```
 
-### 多云架构集成 (Multi-cloud Architecture Integration)
+### 多云架构集成
+
+以下 Mermaid 图展示了 EKS 在多云环境中的集成架构，包括与 Azure AKS、Google GKE 的跨云协同设计，以及统一管理平台和监控告警体系。
 
 ```mermaid
 graph TB
-    subgraph "AWS基础设施"
-        EKS[EKS集群]
-        RDS[RDS数据库]
-        S3[S3存储]
-        ELB[负载均衡器]
+    subgraph "AWS 基础设施"
+        EKS[EKS 集群]
+        RDS[RDS 数据库]
+        S3[S3 存储]
+        ELB[ALB 负载均衡]
+        CLOUDWATCH[CloudWatch]
+        KMS[KMS 密钥管理]
+        SECRETSMGR[Secrets Manager]
     end
-    
-    subgraph "Azure混合云"
-        AKS[AKS集群]
+
+    subgraph "Azure 混合云"
+        AKS[AKS 集群]
         SQLDB[Azure SQL]
-        BLOB[Blob存储]
+        BLOB[Blob 存储]
         APPGW[应用网关]
+        KV[Key Vault]
     end
-    
+
     subgraph "Google Cloud"
-        GKE[GKE集群]
+        GKE[GKE 集群]
         CLOUDSQL[Cloud SQL]
-        GCS[GCS存储]
+        GCS[GCS 存储]
         CLOUDLB[Cloud Load Balancer]
     end
-    
+
     subgraph "多云管理平台"
-        CROSS[Crosplane]
+        KARMADA[Karmada 调度器]
+        CROSS[Crossplane]
         ARGO[Argo CD]
         TERRAFORM[Terraform]
-        PROMETHEUS[Prometheus]
     end
-    
-    subgraph "统一监控"
-        GRAFANA[Grafana仪表板]
+
+    subgraph "跨云网络"
+        SUBMARINER[Submariner]
+        TRANSITGW[Transit Gateway]
+        EXPRESS[Azure ExpressRoute]
+        INTERCONNECT[Cloud Interconnect]
+    end
+
+    subgraph "统一可观测性"
+        THANOS[Thanos 全局查询]
+        GRAFANA[Grafana 仪表板]
         ALERTMANAGER[告警管理]
-        LOGGING[集中日志]
+        LOKI[Loki 日志聚合]
+        OTEL[OpenTelemetry]
     end
-    
-    EKS --> CROSS
-    AKS --> CROSS
-    GKE --> CROSS
-    CROSS --> ARGO
-    ARGO --> TERRAFORM
-    TERRAFORM --> PROMETHEUS
-    PROMETHEUS --> GRAFANA
-    PROMETHEUS --> ALERTMANAGER
-    PROMETHEUS --> LOGGING
+
+    EKS --> KARMADA
+    AKS --> KARMADA
+    GKE --> KARMADA
+    KARMADA --> ARGO
+    CROSS --> TERRAFORM
+    EKS --> SUBMARINER
+    AKS --> SUBMARINER
+    GKE --> SUBMARINER
+    EKS --> TRANSITGW
+    TRANSITGW --> EXPRESS
+    EXPRESS --> INTERCONNECT
+    EKS --> THANOS
+    AKS --> THANOS
+    GKE --> THANOS
+    THANOS --> GRAFANA
+    THANOS --> ALERTMANAGER
+    OTEL --> LOKI
+    EKS --> KMS
+    EKS --> SECRETSMGR
 ```
 
-## 核心组件配置 (Core Component Configuration)
+### 多区域高可用架构
 
-### 节点组管理 (Node Group Management)
+```mermaid
+graph TB
+    subgraph "Region: us-west-2"
+        subgraph "AZ: us-west-2a"
+            EKS1A[EKS Node]
+            RDS1A[RDS Read Replica]
+        end
+        subgraph "AZ: us-west-2b"
+            EKS1B[EKS Node]
+            RDS1B[RDS Primary]
+        end
+        subgraph "AZ: us-west-2c"
+            EKS1C[EKS Node]
+            RDS1C[RDS Read Replica]
+        end
+        ALB1[ALB 主集群]
+    end
+
+    subgraph "Region: us-east-1"
+        subgraph "AZ: us-east-1a"
+            EKS2A[EKS Node]
+        end
+        subgraph "AZ: us-east-1b"
+            EKS2B[EKS Node]
+        end
+        ALB2[ALB 备集群]
+    end
+
+    ROUTE53[Route 53 DNS]
+    CF[CloudFront CDN]
+
+    ROUTE53 --> ALB1
+    ROUTE53 --> ALB2
+    CF --> ROUTE53
+    ALB1 --> EKS1A
+    ALB1 --> EKS1B
+    ALB1 --> EKS1C
+    ALB2 --> EKS2A
+    ALB2 --> EKS2B
+    RDS1B --> RDS1A
+    RDS1B --> RDS1C
+```
+
+## 核心组件配置
+
+### 节点组与自动扩缩容
+
+生产环境需要根据工作负载特征设计差异化节点组，并通过 HPA、VPA 和 Cluster Autoscaler 的协同实现精准的弹性伸缩。
 
 ```yaml
-# 自动扩缩容配置
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: vpa-recommender
-  namespace: kube-system
+  name: application-vpa
+  namespace: production
 spec:
   targetRef:
     apiVersion: "apps/v1"
@@ -166,24 +333,25 @@ spec:
     containerPolicies:
     - containerName: '*'
       maxAllowed:
-        cpu: 2
-        memory: 4Gi
+        cpu: "4"
+        memory: 8Gi
       minAllowed:
         cpu: 100m
         memory: 128Mi
+      controlledResources: ["cpu", "memory"]
 ---
-apiVersion: autoscaling.k8s.io/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: application-hpa
-  namespace: default
+  namespace: production
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: application-deployment
   minReplicas: 3
-  maxReplicas: 30
+  maxReplicas: 50
   metrics:
   - type: Resource
     resource:
@@ -197,12 +365,93 @@ spec:
       target:
         type: Utilization
         averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "1000"
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 60
+      - type: Pods
+        value: 4
+        periodSeconds: 60
+      selectPolicy: Max
 ```
 
-### 网络策略配置 (Network Policy Configuration)
+### Cluster Autoscaler 配置
 
 ```yaml
-# 网络安全策略
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+  labels:
+    app: cluster-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-autoscaler
+  template:
+    metadata:
+      labels:
+        app: cluster-autoscaler
+    spec:
+      serviceAccountName: cluster-autoscaler
+      containers:
+      - image: registry.k8s.io/autoscaling/cluster-autoscaler:v1.30.0
+        name: cluster-autoscaler
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
+        command:
+        - ./cluster-autoscaler
+        - --v=4
+        - --stderrthreshold=info
+        - --cloud-provider=aws
+        - --skip-nodes-with-local-storage=false
+        - --expander=least-waste
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/production-eks-cluster
+        - --balance-similar-node-groups
+        - --skip-nodes-with-system-pods=false
+        - --scale-down-unneeded-time=5m
+        - --scale-down-delay-after-add=10m
+        - --scale-down-delay-after-delete=2m
+        - --max-node-provision-time=15m
+        env:
+        - name: AWS_REGION
+          value: us-west-2
+        volumeMounts:
+        - name: ssl-certs
+          mountPath: /etc/ssl/certs/ca-certificates.crt
+          readOnly: true
+      volumes:
+      - name: ssl-certs
+        hostPath:
+          path: "/etc/ssl/certs/ca-bundle.crt"
+```
+
+### 网络策略配置
+
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -237,6 +486,26 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: allow-dns-egress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: allow-external-api
   namespace: production
 spec:
@@ -254,12 +523,33 @@ spec:
       port: 80
     - protocol: TCP
       port: 443
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-monitoring
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 9090
+    - protocol: TCP
+      port: 15090
 ```
 
-### 存储类配置 (Storage Class Configuration)
+### 存储类配置
 
 ```yaml
-# AWS EBS CSI Driver 配置
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -269,11 +559,13 @@ metadata:
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
+reclaimPolicy: Retain
 parameters:
   type: gp3
   fsType: ext4
   iops: "3000"
   throughput: "125"
+  encrypted: "true"
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -282,82 +574,293 @@ metadata:
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
+reclaimPolicy: Retain
 parameters:
   type: io2
-  fsType: ext4
+  fsType: xfs
   iopsPerGB: "100"
+  encrypted: "true"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-sc
+provisioner: efs.csi.aws.com
+volumeBindingMode: Immediate
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0123456789abcdef0
+  directoryPerms: "700"
+  basePath: "/dynamic_provisioning"
 ```
 
-## 安全配置 (Security Configuration)
-
-### IAM角色绑定 (IAM Role Binding)
+### AWS Load Balancer Controller 配置
 
 ```yaml
-# Kubernetes服务账户IAM角色映射
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-nlb
+  namespace: production
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "HTTP"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/healthz"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "10"
+    service.beta.kubernetes.io/aws-load-balancer-attributes: "load_balancing.cross_zone.enabled=true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: application
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: application-alb
+  namespace: production
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:123456789012:certificate/abcd1234
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "10"
+    alb.ingress.kubernetes.io/success-codes: "200"
+    alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:us-west-2:123456789012:regional/webacl/prod-waf/abcd1234
+    alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+    alb.ingress.kubernetes.io/group.name: production-apps
+spec:
+  ingressClassName: alb
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: application-service
+            port:
+              number: 80
+```
+
+## 安全配置
+
+### IAM 角色与服务账户关联
+
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: s3-access-sa
-  namespace: default
+  namespace: production
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/S3AccessRole
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dynamodb-access-sa
+  namespace: production
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/DynamoDBAccessRole
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: s3-access-role
-  namespace: default
+  name: application-role
+  namespace: production
 rules:
 - apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list"]
+  resources: ["pods", "configmaps"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: s3-access-binding
-  namespace: default
+  name: application-binding
+  namespace: production
 subjects:
 - kind: ServiceAccount
   name: s3-access-sa
-  namespace: default
+  namespace: production
 roleRef:
   kind: Role
-  name: s3-access-role
+  name: application-role
   apiGroup: rbac.authorization.k8s.io
 ```
 
-### 加密配置 (Encryption Configuration)
+### Pod 安全标准
 
 ```yaml
-# KMS加密配置
 apiVersion: v1
-kind: Secret
+kind: Namespace
 metadata:
-  name: encryption-config
-  namespace: kube-system
-type: Opaque
-data:
-  aws-encryption-provider.yaml: |
-    apiVersion: apiserver.config.k8s.io/v1
-    kind: EncryptionConfiguration
-    resources:
-      - resources:
-        - secrets
-        providers:
-        - kms:
-            name: aws-kms-provider
-            endpoint: unix:///var/run/kmsplugin/socket.sock
-            cachesize: 1000
-        - identity: {}
+  name: production
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: v1.30
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-application
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: secure-app
+  template:
+    metadata:
+      labels:
+        app: secure-app
+    spec:
+      serviceAccountName: s3-access-sa
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: app
+        image: 123456789012.dkr.ecr.us-west-2.amazonaws.com/app:latest
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: secure-app
 ```
 
-## 监控告警 (Monitoring and Alerting)
-
-### Prometheus监控配置 (Prometheus Monitoring Configuration)
+### KMS 加密与 Secrets Manager 集成
 
 ```yaml
-# ServiceMonitor配置
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: aws-secrets-manager
+  namespace: production
+spec:
+  provider: aws
+  parameters:
+    objects: |
+      - objectName: "prod/database/credentials"
+        objectType: "secretsmanager"
+        objectAlias: "db-credentials"
+      - objectName: "prod/api/keys"
+        objectType: "secretsmanager"
+        objectAlias: "api-keys"
+      - objectName: "prod/tls/certificate"
+        objectType: "secretsmanager"
+        objectAlias: "tls-cert"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-with-secrets
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-with-secrets
+  template:
+    metadata:
+      labels:
+        app: app-with-secrets
+    spec:
+      containers:
+      - name: app
+        image: app:latest
+        volumeMounts:
+        - name: secrets-store
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+      volumes:
+      - name: secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: aws-secrets-manager
+```
+
+### KMS 信封加密配置
+
+```bash
+aws eks create-cluster \
+  --name production-eks-cluster \
+  --role-arn arn:aws:iam::123456789012:role/EKSClusterRole \
+  --resources-vpc-config subnetIds=subnet-abc123,subnet-def456,subnet-ghi789,securityGroupIds=sg-12345678 \
+  --kubernetes-version 1.30 \
+  --encryption-config '[
+    {
+      "provider": {
+        "keyArn": "arn:aws:kms:us-west-2:123456789012:key/abcd1234-5678-efgh-9012-ijklmnopqrst"
+      },
+      "resources": ["secrets"]
+    }
+  ]'
+```
+
+## 监控告警
+
+### Prometheus 监控配置
+
+```yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -373,6 +876,7 @@ spec:
     matchNames:
     - kube-system
     - monitoring
+    - production
   endpoints:
   - port: metrics
     interval: 30s
@@ -382,6 +886,8 @@ spec:
       targetLabel: pod
     - sourceLabels: [__meta_kubernetes_namespace]
       targetLabel: namespace
+    - sourceLabels: [__meta_kubernetes_node_name]
+      targetLabel: node
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -390,245 +896,381 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: eks.rules
+  - name: eks.infra.rules
     rules:
-    - alert: EKSClusterUnhealthy
-      expr: aws_eks_cluster_status_condition{condition="Ready"} != 1
+    - alert: EKSNodeNotReady
+      expr: kube_node_status_condition{condition="Ready",status="false"} == 1
       for: 5m
       labels:
         severity: critical
       annotations:
-        summary: "EKS cluster is unhealthy"
-        description: "EKS cluster {{ $labels.cluster }} is not in ready state"
-        
-    - alert: NodeNotReady
-      expr: kube_node_status_condition{condition="Ready",status="false"} == 1
+        summary: "EKS 节点不可用"
+        description: "节点 {{ $labels.node }} 已持续 5 分钟处于 NotReady 状态"
+
+    - alert: EKSPodCrashLooping
+      expr: rate(kube_pod_container_status_restarts_total[15m]) * 60 * 5 > 0
       for: 5m
       labels:
         severity: warning
       annotations:
-        summary: "Kubernetes node is not ready"
-        description: "Node {{ $labels.node }} has been not ready for more than 5 minutes"
+        summary: "Pod 持续重启"
+        description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 在过去 15 分钟内重启次数超过阈值"
+
+    - alert: EKSHighCPUUtilization
+      expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点 CPU 使用率过高"
+        description: "节点 {{ $labels.instance }} CPU 使用率超过 85%，当前值 {{ $value }}%"
+
+    - alert: EKSHighMemoryUtilization
+      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "节点内存使用率过高"
+        description: "节点 {{ $labels.instance }} 内存使用率超过 90%，当前值 {{ $value }}%"
+
+    - alert: EKSDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "节点磁盘压力"
+        description: "节点 {{ $labels.node }} 存在磁盘压力"
+
+    - alert: EKSPVCAlmostFull
+      expr: (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) * 100 > 85
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "PVC 使用率接近满"
+        description: "PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} 使用率超过 85%"
+
+    - alert: EKSHPAMaxedOut
+      expr: kube_hpa_status_current_replicas == kube_hpa_spec_max_replicas
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: "HPA 已达最大副本数"
+        description: "HPA {{ $labels.namespace }}/{{ $labels.hpa }} 已达到最大副本数 {{ $value }}"
 ```
 
-## 运维管理 (Operational Management)
+### CloudWatch Container Insights 集成
 
-### 故障排查工具 (Troubleshooting Tools)
+```bash
+aws logs create-log-group \
+  --log-group-name /aws/eks/production-eks-cluster/performance
+
+aws eks update-addon \
+  --cluster-name production-eks-cluster \
+  --addon-name amazon-cloudwatch-observability \
+  --configuration-values '{
+    "agent": {
+      "metrics": {
+        "metrics_collected": {
+          "kubernetes": {
+            "cluster_name": "production-eks-cluster",
+            "metrics_collection_interval": 60
+          }
+        }
+      },
+      "logs": {
+        "metrics_collected": {
+          "kubernetes": {
+            "cluster_name": "production-eks-cluster"
+          }
+        }
+      }
+    }
+  }'
+```
+
+## 运维管理
+
+### 故障排查脚本
 
 ```bash
 #!/bin/bash
-# EKS故障排查脚本
+set -euo pipefail
 
-# 集群健康检查
+CLUSTER_NAME="production-eks-cluster"
+REGION="us-west-2"
+
 check_cluster_health() {
-    echo "=== EKS Cluster Health Check ==="
-    
-    # 检查集群状态
-    aws eks describe-cluster --name production-eks-cluster --query 'cluster.status'
-    
-    # 检查节点组状态
-    aws eks list-nodegroups --cluster-name production-eks-cluster
-    
-    # 检查Kubernetes组件状态
+    echo "=== EKS 集群健康检查 ==="
+    echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
+
+    echo -e "\n--- 集群状态 ---"
+    aws eks describe-cluster --name $CLUSTER_NAME --region $REGION \
+      --query 'cluster.{Status:status,Version:version,Endpoint:endpoint}'
+
+    echo -e "\n--- 节点组状态 ---"
+    aws eks list-nodegroups --cluster-name $CLUSTER_NAME --region $REGION \
+      --query 'nodegroups[*]' --output table
+
+    echo -e "\n--- Kubernetes 节点 ---"
     kubectl get nodes -o wide
-    kubectl get pods -A | grep -v Running
-    
-    # 检查核心组件
-    kubectl get pods -n kube-system
+
+    echo -e "\n--- 异常 Pod ---"
+    kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded
+
+    echo -e "\n--- 核心组件状态 ---"
+    kubectl get pods -n kube-system -o wide
+
+    echo -e "\n--- 最近事件 ---"
+    kubectl get events -A --sort-by='.lastTimestamp' | tail -30
 }
 
-# 网络诊断
 network_diagnostics() {
-    echo "=== Network Diagnostics ==="
-    
-    # 检查CNI插件状态
+    echo "=== 网络诊断 ==="
+
+    echo -e "\n--- VPC CNI 状态 ---"
     kubectl get daemonset -n kube-system aws-node
-    
-    # 检查网络策略
+    kubectl get pods -n kube-system -l k8s-app=aws-node -o wide
+
+    echo -e "\n--- 网络策略 ---"
     kubectl get networkpolicies -A
-    
-    # 测试Pod间连通性
-    kubectl run debug-pod --image=busybox --rm -it -- sh -c "ping -c 4 8.8.8.8"
+
+    echo -e "\n--- Service Endpoints ---"
+    kubectl get endpoints -A | grep -v "<none>"
+
+    echo -e "\n--- 跨可用区 Pod 分布 ---"
+    kubectl get pods -A -o json | jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name) \(.spec.nodeName)"' | sort
+
+    echo -e "\n--- Pod IP 分配 ---"
+    kubectl get pods -A -o json | jq -r '.items[] | select(.status.podIP != null) | "\(.metadata.namespace)/\(.metadata.name) \(.status.podIP)"' | head -20
 }
 
-# 性能分析
 performance_analysis() {
-    echo "=== Performance Analysis ==="
-    
-    # 检查资源使用情况
+    echo "=== 性能分析 ==="
+
+    echo -e "\n--- 节点资源使用 ---"
     kubectl top nodes
-    kubectl top pods -A
-    
-    # 检查Pod重启次数
-    kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount'
-    
-    # 检查事件日志
-    kubectl get events --sort-by='.lastTimestamp' | tail -20
+
+    echo -e "\n--- 命名空间资源使用 ---"
+    kubectl top pods -A --sort-by=cpu | head -20
+
+    echo -e "\n--- 高重启次数 Pod ---"
+    kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount' | tail -10
+
+    echo -e "\n--- PVC 使用情况 ---"
+    kubectl get pvc -A
+
+    echo -e "\n--- HPA 状态 ---"
+    kubectl get hpa -A
+
+    echo -e "\n--- 资源请求与限制对比 ---"
+    kubectl resource-capacity --sort cpu.request
 }
+
+security_audit() {
+    echo "=== 安全审计 ==="
+
+    echo -e "\n--- 特权容器检查 ---"
+    kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].securityContext.privileged == true) | .metadata.namespace + "/" + .metadata.name'
+
+    echo -e "\n--- 无资源限制 Pod ---"
+    kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[]?.resources.limits == null) | .metadata.namespace + "/" + .metadata.name'
+
+    echo -e "\n--- TLS 证书过期检查 ---"
+    kubectl get secrets -A -o json | jq '.items[] | select(.type=="kubernetes.io/tls") | {name: .metadata.name, namespace: .metadata.namespace, expires: .data["tls.crt"]}' 2>/dev/null
+
+    echo -e "\n--- ClusterRoleBinding 审计 ---"
+    kubectl get clusterrolebindings -o json | jq '.items[] | select(.subjects[]?.name == "system:anonymous" or .roleRef.name == "cluster-admin") | .metadata.name'
+}
+
+case "${1:-all}" in
+    health) check_cluster_health ;;
+    network) network_diagnostics ;;
+    performance) performance_analysis ;;
+    security) security_audit ;;
+    all)
+        check_cluster_health
+        network_diagnostics
+        performance_analysis
+        security_audit
+        ;;
+    *) echo "Usage: $0 {health|network|performance|security|all}" ;;
+esac
 ```
 
-### 日常运维脚本 (Daily Operations Scripts)
+### 集群升级脚本
 
 ```bash
 #!/bin/bash
-# EKS日常运维脚本
+set -euo pipefail
 
-# 自动扩缩容管理
-manage_autoscaling() {
-    echo "Managing auto-scaling..."
-    
-    # 检查HPA状态
-    kubectl get hpa -A
-    
-    # 检查集群自动扩缩容器状态
-    kubectl -n kube-system get deployment cluster-autoscaler
-    
-    # 根据CPU使用率调整节点组大小
-    local avg_cpu=$(kubectl top nodes | awk 'NR>1 {sum+=$3} END {print sum/NR}')
-    
-    if (( $(echo "$avg_cpu > 70" | bc -l) )); then
-        echo "CPU usage high, considering scale up"
-        # 实施扩缩容逻辑
-    fi
-}
+CLUSTER_NAME="production-eks-cluster"
+REGION="us-west-2"
+TARGET_VERSION="1.30"
 
-# 安全扫描
-security_scan() {
-    echo "Performing security scan..."
-    
-    # 检查过期证书
-    kubectl get secrets -A -o json | jq '.items[] | select(.type=="kubernetes.io/tls") | .metadata.name'
-    
-    # 扫描不安全的Pod配置
-    kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].securityContext == null)'
-    
-    # 检查RBAC权限
-    kubectl get clusterroles,clusterrolebindings -o wide
-}
+echo "=== EKS 集群升级流程 ==="
+echo "目标版本: $TARGET_VERSION"
 
-# 备份管理
-manage_backups() {
-    echo "Managing backups..."
-    
-    # etcd备份
-    kubectl exec -n kube-system etcd-production-eks-cluster -c etcd -- \
-        etcdctl snapshot save /backup/etcd-snapshot-$(date +%Y%m%d-%H%M%S)
-    
-    # 资源清单备份
-    kubectl get all -A -o yaml > /backup/k8s-resources-$(date +%Y%m%d-%H%M%S).yaml
-}
+CURRENT_VERSION=$(aws eks describe-cluster --name $CLUSTER_NAME --region $REGION \
+  --query 'cluster.version' --output text)
+echo "当前版本: $CURRENT_VERSION"
+
+echo -e "\n[1/6] 升级前检查..."
+aws eks describe-addon-versions --kubernetes-version $TARGET_VERSION \
+  --query 'addons[].{Name:addonName,Versions:addonVersions[0].addonVersion}' --output table
+
+echo -e "\n[2/6] 更新集群控制平面..."
+aws eks update-cluster-version --name $CLUSTER_NAME --region $REGION \
+  --kubernetes-version $TARGET_VERSION
+
+echo "等待控制平面升级完成..."
+aws eks wait cluster-active --name $CLUSTER_NAME --region $REGION
+
+echo -e "\n[3/6] 更新 EKS Addons..."
+for addon in vpc-cni coredns kube-proxy aws-ebs-csi-driver; do
+    LATEST_VERSION=$(aws eks describe-addon-versions --kubernetes-version $TARGET_VERSION \
+      --query "addons[?addonName=='$addon'].addonVersions[0].addonVersion" --output text)
+    echo "升级 $addon 到版本 $LATEST_VERSION"
+    aws eks update-addon --cluster-name $CLUSTER_NAME --addon-name $addon \
+      --addon-version $LATEST_VERSION --region $REGION
+    sleep 30
+done
+
+echo -e "\n[4/6] 更新节点组..."
+for ng in $(aws eks list-nodegroups --cluster-name $CLUSTER_NAME --region $REGION --query 'nodegroups[*]' --output text); do
+    echo "升级节点组: $ng"
+    aws eks update-nodegroup-version --cluster-name $CLUSTER_NAME \
+      --nodegroup-name $ng --region $REGION
+    sleep 60
+done
+
+echo -e "\n[5/6] 验证集群状态..."
+kubectl get nodes -o wide
+kubectl version --short
+
+echo -e "\n[6/6] 升级完成。"
 ```
 
-## 最佳实践 (Best Practices)
+## 最佳实践
 
-### 部署最佳实践 (Deployment Best Practices)
+### 部署最佳实践
 
-1. **基础设施即代码**
-   ```yaml
-   # 使用Terraform管理EKS基础设施
-   module "eks" {
-     source  = "terraform-aws-modules/eks/aws"
-     version = "~> 19.0"
-     
-     cluster_name    = "production-eks"
-     cluster_version = "1.28"
-     
-     vpc_id          = module.vpc.vpc_id
-     subnet_ids      = module.vpc.private_subnets
-     
-     eks_managed_node_groups = {
-       system = {
-         desired_size = 3
-         min_size     = 3
-         max_size     = 10
-         instance_types = ["m5.large"]
-       }
-     }
-   }
-   ```
+1. **基础设施即代码**: 使用 Terraform 或 eksctl 管理集群生命周期，确保可重复、可审计
+2. **多可用区部署**: 跨至少 3 个可用区部署节点，确保高可用
+3. **资源请求与限制**: 所有 Pod 必须设置 requests 和 limits，避免资源争抢
+4. **拓扑分布约束**: 使用 topologySpreadConstraints 确保跨可用区均匀分布
+5. **PDB 配置**: 为关键服务配置 PodDisruptionBudget，保障升级期间可用性
 
-2. **资源优化**
-   ```yaml
-   # Pod资源请求和限制
-   resources:
-     requests:
-       cpu: "100m"
-       memory: "128Mi"
-     limits:
-       cpu: "500m"
-       memory: "512Mi"
-   ```
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: application-pdb
+  namespace: production
+spec:
+  minAvailable: "66%"
+  selector:
+    matchLabels:
+      app: application
+```
 
-3. **标签策略**
-   ```yaml
-   # 标准化标签
-   metadata:
-     labels:
-       app: my-app
-       version: v1.0.0
-       environment: production
-       team: backend
-       cost-center: engineering
-   ```
+### 安全最佳实践
 
-### 安全最佳实践 (Security Best Practices)
+1. **最小权限原则**: 使用 IRSA（IAM Roles for Service Accounts）替代节点级权限
+2. **网络分段**: 启用安全组策略，限制 Pod 级别网络访问
+3. **信封加密**: 启用 KMS Secrets 加密，保护敏感数据
+4. **镜像安全**: 使用 ECR 镜像扫描，配置 Pod 安全标准为 Restricted
+5. **审计日志**: 启用 Kubernetes 审计日志，发送到 CloudWatch 或 S3
 
-1. **网络隔离**
-   ```yaml
-   # 网络策略实施
-   networkPolicy:
-     enabled: true
-     allowExternal: false
-   ```
+### 成本优化最佳实践
 
-2. **镜像安全**
-   ```yaml
-   # 镜像扫描和策略
-   image:
-     repository: my-app
-     tag: v1.0.0
-     pullPolicy: Always
-     securityContext:
-       runAsNonRoot: true
-       readOnlyRootFilesystem: true
-   ```
+1. **Spot 实例**: 对无状态工作负载使用 Spot 实例节点组
+2. **Karpenter**: 使用 Karpenter 替代 Cluster Autoscaler，实现更精准的节点调度
+3. **资源右调**: 定期分析 VPA 推荐值，调整资源请求
+4. **预留实例**: 对长期稳定工作负载购买 RI 或 Savings Plans
+5. **FinOps 分析**: 使用 Kubecost 或 CloudHealth 进行成本归因分析
 
-3. **密钥管理**
-   ```bash
-   # 使用AWS Secrets Manager
-   aws secretsmanager create-secret \
-     --name kubernetes/my-app/database-credentials \
-     --description "Database credentials for my-app" \
-     --secret-string file://db-credentials.json
-   ```
+```yaml
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: spot-pool
+spec:
+  template:
+    spec:
+      requirements:
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values: ["spot"]
+      - key: kubernetes.io/arch
+        operator: In
+        values: ["amd64"]
+      - key: karpenter.k8s.aws/instance-category
+        operator: In
+        values: ["c", "m", "r"]
+      nodeClassRef:
+        name: default
+  limits:
+    cpu: "1000"
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 30s
+```
 
-### 监控最佳实践 (Monitoring Best Practices)
+## 故障排查
 
-1. **多维度监控**
-   - 基础设施层面：CPU、内存、磁盘、网络
-   - 应用层面：请求率、错误率、延迟
-   - 业务层面：关键业务指标、用户体验
+### 常见问题与解决方案
 
-2. **告警分级**
-   ```yaml
-   # 告警严重程度分级
-   severity: 
-     critical: 影响业务连续性
-     warning:  潜在问题
-     info:     信息性通知
-   ```
+| 问题 | 可能原因 | 排查步骤 |
+|:---|:---|:---|
+| Pod 一直 Pending | 资源不足、节点选择器不匹配 | `kubectl describe pod <name>` 查看事件 |
+| 节点 NotReady | kubelet 异常、磁盘/内存压力 | 检查 kubelet 日志、节点资源使用率 |
+| ImagePullBackOff | 镜像不存在、ECR 权限不足 | 检查镜像名称、IRSA 配置 |
+| Pod 网络不通 | CNI IP 耗尽、安全组限制 | 检查 VPC CNI 日志、安全组规则 |
+| PV 挂载失败 | EBS CSI Driver 未安装、AZ 不匹配 | 检查 CSI Driver 状态、StorageClass 配置 |
+| HPA 无法获取指标 | Metrics Server 未部署 | `kubectl get deployment metrics-server -n kube-system` |
 
-3. **日志管理**
-   ```yaml
-   # 结构化日志配置
-   logging:
-     format: json
-     level: info
-     destination: cloudwatch
-   ```
+### 紧急恢复流程
+
+```bash
+#!/bin/bash
+CLUSTER_NAME="production-eks-cluster"
+
+echo "=== 紧急恢复流程 ==="
+
+echo "[1] 检查集群 API Server 可达性"
+if ! kubectl cluster-info 2>/dev/null; then
+    echo "API Server 不可达，检查 AWS 控制平面状态"
+    aws eks describe-cluster --name $CLUSTER_NAME --query 'cluster.status'
+fi
+
+echo "[2] 检查节点健康"
+kubectl get nodes -o json | jq -r '.items[] | select(.status.conditions[] | select(.type=="Ready" and .status=="False")) | .metadata.name'
+
+echo "[3] 检查关键组件"
+kubectl get pods -n kube-system --field-selector=status.phase!=Running
+
+echo "[4] 强制重启异常 Pod"
+kubectl get pods -A --field-selector=status.phase=Failed -o name | xargs -r kubectl delete
+
+echo "[5] 检查集群自动扩缩容"
+kubectl -n kube-system logs -l app=cluster-autoscaler --tail=50
+```
+
+## 参考资源
+
+- [AWS EKS 官方文档](https://docs.aws.amazon.com/eks/latest/userguide/)
+- [EKS 最佳实践指南](https://aws.github.io/aws-eks-best-practices/)
+- [Karpenter 文档](https://karpenter.sh/docs/)
+- [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
+- [EKS CSI Drivers](https://docs.aws.amazon.com/eks/latest/userguide/csi-drivers.html)
+- [Amazon EKS 安全文档](https://docs.aws.amazon.com/eks/latest/userguide/security.html)
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2024年2月7日  
+**文档版本**: v2.0
+**最后更新**: 2026年5月17日
 **适用版本**: EKS 1.28+

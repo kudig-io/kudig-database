@@ -1,3 +1,30 @@
+---
+title: 所有者和依赖者
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- daemonset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 所有者和依赖者 是什么
+- 如何 所有者和依赖者
+trigger_keywords:
+- 所有者和依赖者
+- dictionary
+title_en: Owners And Dependents
+---
+
+
 # 所有者和依赖者
 
 ## 概述

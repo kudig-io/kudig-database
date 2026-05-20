@@ -1,3 +1,37 @@
+---
+title: 'Domain 39: 供应链安全 (Supply Chain Security)'
+description: '# Domain 39: 供应链安全 (Supply Chain Security)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 39: 供应链安全 (Supply Chain Security) 是什么'
+- '如何 Domain 39: 供应链安全 (Supply Chain Security)'
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- Domain
+- '39:'
+- 供应链安全
+- Supply
+- Chain
+- Security
+- supply
+- chain
+---
+
 # Domain 39: 供应链安全 (Supply Chain Security)
 
 > **适用范围**: 软件供应链、SBOM、镜像签名、合规自动化 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-04

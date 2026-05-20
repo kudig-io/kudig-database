@@ -1,3 +1,36 @@
+---
+title: 08 - AI/ML基础设施专业词典
+description: '| **适合读者** | ML工程师入门K8s → 平台工程师管理AI工作负载 → SRE优化AI基础设施 |'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- scheduler
+- prometheus
+- grafana
+- istio
+- opa
+- ceph
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- AI/ML基础设施专业词典 是什么
+- 如何 AI/ML基础设施专业词典
+trigger_keywords:
+- AI
+- ML基础设施专业词典
+- dictionary
+title_en: Ai Infra Specialist
+---
+
+
+
 # 08 - AI/ML基础设施专业词典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

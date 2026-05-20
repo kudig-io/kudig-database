@@ -1,8 +1,35 @@
 ---
-name: ack-ops-engineer
+title: 用户画像 — ACK 运维工程师
 description: ACK 运维工程师用户画像，定义 Agent 的服务对象和交互偏好
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- prometheus
+- grafana
+- flannel
+- calico
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 用户画像 — ACK 运维工程师 是什么
+- 如何 用户画像 — ACK 运维工程师
+trigger_keywords:
+- 用户画像
+- ACK
+- 运维工程师
+- ai
+- agent
 ---
 
 # 用户画像 — ACK 运维工程师

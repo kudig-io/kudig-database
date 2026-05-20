@@ -1,3 +1,55 @@
+---
+title: 16 - Kubernetes 故障排查专家级指南
+description: '# 16 - Kubernetes 故障排查专家级指南'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- cilium
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 故障排查专家级指南 是什么
+- 如何 Kubernetes 故障排查专家级指南
+- Kubernetes 1 architecture fundamentals 最佳实践
+- Kubernetes 故障排查专家级指南 故障排查
+- Kubernetes 故障排查专家级指南 排障步骤
+trigger_keywords:
+- Kubernetes
+- 故障排查专家级指南
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: skill
+  path: ../topic-skills/19-skill-local-demo-guide.md
+  label: '运维技能: 19-skill-local-demo-guide'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # 16 - Kubernetes 故障排查专家级指南
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐

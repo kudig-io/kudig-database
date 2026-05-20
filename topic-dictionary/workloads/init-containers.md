@@ -1,3 +1,30 @@
+---
+title: Init Containers
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- postgresql
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Init Containers 是什么
+- 如何 Init Containers
+trigger_keywords:
+- Init
+- Containers
+- dictionary
+title_en: Init Containers
+---
+
+
 # Init Containers
 
 ## 概述

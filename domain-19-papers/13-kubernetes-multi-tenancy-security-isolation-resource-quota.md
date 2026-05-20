@@ -1,3 +1,46 @@
+---
+title: Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
+description: '# Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- apiserver
+- kubelet
+- prometheus
+- cilium
+- opa
+- elasticsearch
+- statefulset
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management) 是什么
+- 如何 Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 多租户安全隔离与资源配额管理
+- Multi-Tenancy
+- Security
+- Isolation
+- and
+- Resource
+- Quota
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/resource-quota-fta.md
+  label: '故障树: resource-quota'
+---
+
+
 # Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
 
 > **作者**: 多租户架构专家 | **版本**: v1.5 | **更新时间**: 2026-03-03

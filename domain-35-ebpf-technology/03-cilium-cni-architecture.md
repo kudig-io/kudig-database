@@ -1,3 +1,46 @@
+---
+title: Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+description: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- etcd
+- kubelet
+- prometheus
+- grafana
+- envoy
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment) 是什么
+- 如何 Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Cilium
+- CNI
+- 架构与部署
+- Cilium
+- CNI
+- Architecture
+- and
+- Deployment
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/cilium-fta.md
+  label: '故障树: cilium'
+---
+
+
 # Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 
 > **文档版本**: v1.0 | **适用版本**: Cilium 1.15/1.16 | **更新时间**: 2026-03  

@@ -1,3 +1,36 @@
+---
+title: 'Domain 36: 平台工程 (Platform Engineering)'
+description: 平台工程 (Platform Engineering) 是 2026 年最热门的技术趋势之一。Gartner 预测到 2026 年，80% 的大型软件工程组织将建立平台团队作为应用交付可重用服务、组件和工具的内部提供者。本领域深入探讨内部开发者平台
+  (IDP) 的设计与实施，涵盖 Backstage、Kratix、Golden Paths 等核心技术栈。
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- serverless
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 36: 平台工程 (Platform Engineering) 是什么'
+- '如何 Domain 36: 平台工程 (Platform Engineering)'
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Domain
+- '36:'
+- 平台工程
+- Platform
+- Engineering
+- platform
+- engineering
+---
+
 # Domain 36: 平台工程 (Platform Engineering)
 
 > **适用范围**: 内部开发者平台、开发者体验、自助服务 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-04

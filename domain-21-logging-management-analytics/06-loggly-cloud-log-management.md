@@ -1,3 +1,42 @@
+---
+title: Loggly Cloud Log Management Platform 深度实践
+description: '# Loggly Cloud Log Management Platform 深度实践'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- docker
+- opa
+- elasticsearch
+- job
+- ingress
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- Loggly Cloud Log Management Platform 深度实践 是什么
+- 如何 Loggly Cloud Log Management Platform 深度实践
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Loggly
+- Cloud
+- Log
+- Management
+- Platform
+- 深度实践
+- logging
+- management
+---
+
+
 # Loggly Cloud Log Management Platform 深度实践
 
 > **Author**: Cloud Logging Platform Specialist | **Version**: v1.0 | **Update Time**: 2026-02-07

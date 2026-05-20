@@ -1,3 +1,54 @@
+---
+title: 企业即时通讯架构设计
+description: '# 企业即时通讯架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- statefulset
+- gateway
+- rag
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 协同办公架构师
+- 消息系统开发者
+- 云原生工程师
+- 企业安全工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业IM即时通讯系统架构设计
+- 长连接网关Socket集群K8s部署
+- 消息可靠传输系统设计
+- 企业IM多端消息同步方案
+- 企业级IM安全与等保合规
+trigger_keywords:
+- 企业IM
+- 即时通讯
+- 长连接网关
+- 消息同步
+- 协同办公
+- 钉钉
+- WebSocket
+- 消息推送
+- 已读未读
+- 端到端加密
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-26-service-mesh-microservices
+- domain-7-observability
+- domain-8-storage
+related_topics:
+- topic-application-architecture/17-saas-multitenant-architecture
+- topic-application-architecture/11-smart-retail-architecture
+- topic-functions/04-high-concurrency-system
+- topic-functions/10-message-queue
+---
+
+
 # 企业即时通讯架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

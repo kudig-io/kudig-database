@@ -1,3 +1,45 @@
+---
+title: Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
+description: '# Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- istio
+- helm
+- mysql
+- elasticsearch
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture) 是什么
+- 如何 Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 多云混合部署架构与实践
+- Multi-Cloud
+- Hybrid
+- Deployment
+- Architecture
+- papers
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
+
+
 # Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 
 > **作者**: 云原生架构专家 | **版本**: v1.4 | **更新时间**: 2026-03-03

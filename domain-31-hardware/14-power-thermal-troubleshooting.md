@@ -1,3 +1,32 @@
+---
+title: 电源与散热故障排查
+description: '# 电源与散热故障排查'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 电源与散热故障排查 是什么
+- 如何 电源与散热故障排查
+- Kubernetes 31 hardware 最佳实践
+- 电源与散热故障排查 故障排查
+- 电源与散热故障排查 排障步骤
+trigger_keywords:
+- 电源与散热故障排查
+- hardware
+---
+
 # 电源与散热故障排查
 
 ## 概述

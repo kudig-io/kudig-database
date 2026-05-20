@@ -1,3 +1,33 @@
+---
+title: Gang Scheduling
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- scheduler
+- job
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Gang Scheduling 是什么
+- 如何 Gang Scheduling
+trigger_keywords:
+- Gang
+- Scheduling
+- dictionary
+title_en: Gang Scheduling
+---
+
+
 # Gang Scheduling
 
 ## 概述

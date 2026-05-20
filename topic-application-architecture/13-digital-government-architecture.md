@@ -1,9 +1,60 @@
+---
+title: 数字政务Kubernetes生产架构设计
+description: '# 数字政务 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- apiserver
+- ingress
+- rbac
+- networkpolicy
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 政务云架构师
+- 智慧城市技术负责人
+- 等保合规专家
+- 政务开发者
+estimated_read_time: 5min
+intent_queries:
+- digital government kubernetes architecture
+- 数字政务K8s部署方案
+- 智慧城市政务中台
+- 等保三级K8s合规
+- 电子证照区块链
+trigger_keywords:
+- 数字政务
+- 智慧城市
+- 政务中台
+- 一网通办
+- 电子证照
+- 数据共享
+- 等保合规
+- 数字政务架构
+- 政务K8s
+- 城市大脑
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-12-troubleshooting
+- domain-26-service-mesh-microservices
+related_topics:
+- digital-twin-city
+- legaltech
+- fintech-architecture
+---
+
+
 # 数字政务 Kubernetes 生产架构设计
 
-> **适用场景**: 一网通办 / 智慧城市 / 政务中台 / 数据共享交换 / 电子证照 / 城市大脑  
-> **云厂商**: 阿里云 ACK + 产品体系 (等保 2.0 / 密评合规)  
-> **适用版本**: Kubernetes v1.29 - v1.33  
-> **最后更新**: 2026-04-24  
+> **适用场景**: 一网通办 / 智慧城市 / 政务中台 / 数据共享交换 / 电子证照 / 城市大脑
+> **云厂商**: 阿里云 ACK + 产品体系 (等保 2.0 / 密评合规)
+> **适用版本**: Kubernetes v1.29 - v1.33
+> **最后更新**: 2026-04-24
 > **目标读者**: 政务云架构师、等保合规专家、智慧城市技术负责人
 
 ---

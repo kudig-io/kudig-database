@@ -1,3 +1,29 @@
+---
+title: 推荐标签
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- helm
+- mysql
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 推荐标签 是什么
+- 如何 推荐标签
+trigger_keywords:
+- 推荐标签
+- dictionary
+title_en: Labels
+---
+
+
 # 推荐标签
 
 ## 概述

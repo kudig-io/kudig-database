@@ -1,3 +1,52 @@
+---
+title: 实时通信 IM/RTC 架构设计
+description: '# 实时通信 (IM / RTC) Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- redis
+- mysql
+- kafka
+- elasticsearch
+- statefulset
+- gateway
+last_updated: 2026-05-18
+difficulty: expert
+reading_level: expert
+audience:
+- 实时通信架构师
+- 音视频工程师
+- 后端开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 即时通讯 IM 即时消息 Kubernetes 部署
+- 音视频通话 WebRTC SFU MCU 架构
+- 实时消息推送信令服务设计
+- 消息存储漫游搜索系统
+- 阿里云 RTC 实时音视频
+trigger_keywords:
+- 即时通讯
+- IM聊天
+- RTC音视频通话
+- WebRTC
+- SFU选择性转发
+- MCU混音混画
+- 信令服务器
+- 消息推送
+- 阿里云RTC
+- 实时消息
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-im-rtc-architecture
+- topic-streaming-architecture
+---
+
+
 # 实时通信 (IM / RTC) Kubernetes 生产架构设计
 
 > **适用场景**: 即时消息 / 音视频通话 / 直播连麦 / 在线客服 / 会议系统  

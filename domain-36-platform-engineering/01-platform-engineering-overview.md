@@ -1,3 +1,37 @@
+---
+title: 平台工程概述与成熟度模型
+description: '# 平台工程概述与成熟度模型'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- jaeger
+- istio
+- helm
+- argocd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 10min
+intent_queries:
+- 平台工程概述与成熟度模型 是什么
+- 如何 平台工程概述与成熟度模型
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- 平台工程概述与成熟度模型
+- platform
+- engineering
+---
+
+
 # 平台工程概述与成熟度模型
 # Platform Engineering Overview and Maturity Model
 

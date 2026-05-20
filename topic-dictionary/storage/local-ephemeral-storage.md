@@ -1,3 +1,33 @@
+---
+title: Local ephemeral storage（本地临时存储）
+description: '# Local ephemeral storage（本地临时存储）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- rag
+- agent
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Local ephemeral storage（本地临时存储） 是什么
+- 如何 Local ephemeral storage（本地临时存储）
+trigger_keywords:
+- Local
+- ephemeral
+- storage
+- 本地临时存储
+- dictionary
+title_en: Local Ephemeral Storage
+---
+
+
 # Local ephemeral storage（本地临时存储）
 
 ## 概述

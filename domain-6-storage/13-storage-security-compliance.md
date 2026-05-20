@@ -1,3 +1,43 @@
+---
+title: 13 - 存储安全与合规管理
+description: '# 13 - 存储安全与合规管理'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- apiserver
+- statefulset
+- daemonset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储安全与合规管理 是什么
+- 如何 存储安全与合规管理
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储安全与合规管理
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 13 - 存储安全与合规管理
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 数据加密、访问控制、合规审计
@@ -272,6 +312,11 @@ rules:
 ```yaml
 # 限制容器直接访问主机存储
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 kind: PodSecurityPolicy
 metadata:
   name: restricted-storage-access

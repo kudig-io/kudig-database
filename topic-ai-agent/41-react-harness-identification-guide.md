@@ -1,3 +1,36 @@
+---
+title: ReAct Agent 与 Harness 识别指南
+description: '# ReAct Agent 与 Harness 识别指南'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- ReAct Agent 与 Harness 识别指南 是什么
+- 如何 ReAct Agent 与 Harness 识别指南
+trigger_keywords:
+- ReAct
+- Agent
+- Harness
+- 识别指南
+- ai
+- agent
+---
+
+
 # ReAct Agent 与 Harness 识别指南
 
 > **文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: ReAct, Agent Harness, 识别判断, 推理框架, 成熟度模型, 分类标准, Agent Loop, Verification, Constraints

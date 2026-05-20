@@ -1,3 +1,29 @@
+---
+title: Kubernetes 控制平面组件的兼容版本
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 控制平面组件的兼容版本 是什么
+- 如何 Kubernetes 控制平面组件的兼容版本
+trigger_keywords:
+- Kubernetes
+- 控制平面组件的兼容版本
+- dictionary
+title_en: Control Plane
+---
+
+
 # Kubernetes 控制平面组件的兼容版本
 
 ## 概述

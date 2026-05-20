@@ -1,3 +1,38 @@
+---
+title: Kubernetes 多租户与资源隔离生产架构
+description: '# Kubernetes 多租户与资源隔离生产架构'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- grafana
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 多租户与资源隔离生产架构 是什么
+- 如何 Kubernetes 多租户与资源隔离生产架构
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- Kubernetes
+- 多租户与资源隔离生产架构
+- production
+- operations
+---
+
+
 # Kubernetes 多租户与资源隔离生产架构
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

@@ -1,3 +1,40 @@
+---
+title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计
+description: '# Agent Harness 工程：从模型包装到生产级 Agent 系统设计'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- kubelet
+- scheduler
+- prometheus
+- helm
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 15min
+intent_queries:
+- Agent Harness 工程：从模型包装到生产级 Agent 系统设计 是什么
+- 如何 Agent Harness 工程：从模型包装到生产级 Agent 系统设计
+trigger_keywords:
+- Agent
+- Harness
+- 工程：从模型包装到生产级
+- Agent
+- 系统设计
+- ai
+- agent
+---
+
+
 # Agent Harness 工程：从模型包装到生产级 Agent 系统设计
 
 > **文档类型**: 前沿工程专题 | **最后更新**: 2026-04 | **关键词**: Agent Harness, Harness Engineering, 六层架构, Loop, Verification, Constraints, 基准测试, SWE-bench, GAIA, AgentBench, 质量门禁, 可观测性, Martin Fowler, Anthropic, Agentic AI

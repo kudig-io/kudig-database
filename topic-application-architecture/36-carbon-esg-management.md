@@ -1,3 +1,45 @@
+---
+title: 碳资产管理与 ESG 架构设计
+description: '# 碳资产管理与 ESG 架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- postgresql
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 可持续发展架构师
+- 企业数字化转型负责人
+- 区块链开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业碳中和 Kubernetes 碳核算引擎
+- 区块链碳排放存证溯源方案
+- ESG报告自动化生成系统
+- 碳交易与碳资产管理平台
+- 供应链碳足迹追踪
+trigger_keywords:
+- 碳中和
+- ESG环境社会治理
+- 碳资产管理
+- 碳核算
+- 碳足迹
+- 区块链存证
+- 碳交易
+- 蚂蚁链BaaS
+- 碳信用CCER
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-blockchain-architecture
+- topic-data-midplatform-architecture
+---
+
+
 # 碳资产管理与 ESG 架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

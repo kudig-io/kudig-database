@@ -1,3 +1,33 @@
+---
+title: velero v1.18 Release Notes
+description: velero v1.18 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- prometheus
+- job
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- velero v1.18 Release Notes 是什么
+- 如何 velero v1.18 Release Notes
+trigger_keywords:
+- velero
+- v1.18
+- Release
+- Notes
+- release
+- notes
+---
+
+
 # velero v1.18 Release Notes
 
 Source: [v1.18.0](https://github.com/vmware-tanzu/velero/releases/tag/v1.18.0)

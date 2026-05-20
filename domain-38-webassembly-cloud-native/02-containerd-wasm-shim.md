@@ -1,3 +1,40 @@
+---
+title: containerd Wasm 运行时
+description: 1. [containerd 架构回顾](#1-containerd-架构回顾)
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- kubelet
+- scheduler
+- prometheus
+- helm
+- argocd
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- containerd Wasm 运行时 是什么
+- 如何 containerd Wasm 运行时
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- containerd
+- Wasm
+- 运行时
+- webassembly
+- cloud
+- native
+---
+
+
 # containerd Wasm 运行时
 # containerd Wasm Runtime
 

@@ -1,3 +1,41 @@
+---
+title: 负载均衡技术
+description: '- [负载均衡概述](#负载均衡概述)'
+category: network-fundamentals
+tags:
+- network
+- tcp
+- ip
+- dns
+- scheduler
+- istio
+- envoy
+- docker
+- redis
+- mysql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 网络工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 负载均衡技术 是什么
+- 如何 负载均衡技术
+- Kubernetes 15 network fundamentals 最佳实践
+trigger_keywords:
+- 负载均衡技术
+- network
+- fundamentals
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 负载均衡技术
 
 > **适用版本**: 通用 | **最后更新**: 2026-01

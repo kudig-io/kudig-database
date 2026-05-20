@@ -1,3 +1,37 @@
+---
+title: Wasm 组件模型 (Wasm Component Model)
+description: 1. [组件模型概述](#1-组件模型概述)
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Wasm 组件模型 (Wasm Component Model) 是什么
+- 如何 Wasm 组件模型 (Wasm Component Model)
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Wasm
+- 组件模型
+- Wasm
+- Component
+- Model
+- webassembly
+- cloud
+- native
+---
+
+
 # Wasm 组件模型 (Wasm Component Model)
 
 > WebAssembly Component Model 是下一代 Wasm 模块化标准，通过 WIT 接口定义实现跨语言组件组合与复用。

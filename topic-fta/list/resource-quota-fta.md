@@ -1,21 +1,75 @@
 ---
-fta_id: "FTA-QUOTA-029"
-title: "ResourceQuota 异常故障树分析"
-component: "resource-quota"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-QUOTA-001"
-last_updated: "2026-05"
+title: ResourceQuota 异常故障树分析
+description: OR0 --> CONF[配置错误]
+category: fta
+tags:
+- fta
+- troubleshooting
+- resource-quota
+- limitrange
+- namespace
+- quota
+- etcd
+- apiserver
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- ResourceQuota 异常故障树分析 是什么
+- 如何 ResourceQuota 异常故障树分析
+- ResourceQuota 异常故障树分析 根因分析
+- ResourceQuota 异常故障树分析 故障树
+trigger_keywords:
+- ResourceQuota
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, resource-quota, limitrange, namespace, quota]
-related_skills: []
-knowledge_refs:
-  - "../domain-7-security/04-resource-quota.md"
-  - "../domain-12-troubleshooting/12-rbac-quota-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md
+  label: '结构化排障: 03-cloud-resource-quota-troubleshooting'
+fta_metadata:
+  fta_id: FTA-QUOTA-001
+  top_event: ResourceQuota 异常 (配额耗尽/计算异常/误拦截)
+  top_event_id: TE-QUOTA-001
+  bottom_events_count: 14
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get events -A | grep -E 'exceeded quota|forbidden.*quota' 显示配额超限"
+    - "kubectl describe quota -n <ns> 显示 Used 接近 Hard"
+    - "kubectl describe limitrange -n <ns> 显示限制异常"
+agent_notes:
+  decision_tree_entry: "kubectl describe quota -n <ns> 检查配额使用情况"
+  critical_commands:
+    - "kubectl describe quota -n <ns>"
+    - "kubectl describe limitrange -n <ns>"
+    - "kubectl get events -A | grep -E 'exceeded quota|forbidden.*quota'"
+    - "kubectl get resourcequota,limitrange -n <ns>"
+  danger_operations:
+    - action: "kubectl delete resourcequota <name> -n <ns>"
+      risk: "删除 ResourceQuota 会移除命名空间资源限制，可能导致资源耗尽"
+      requires_confirmation: true
+    - action: "kubectl edit quota -n <ns> 手动增加 hard 限制"
+      risk: "修改配额可能导致其他命名空间资源不足"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'exceeded quota|forbidden.*quota' 显示配额超限 -->
 
 # ResourceQuota 异常 FTA 树
 

@@ -1,3 +1,42 @@
+---
+title: Backstage 部署与配置
+description: '# Backstage 部署与配置'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- argocd
+- docker
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Backstage 部署与配置 是什么
+- 如何 Backstage 部署与配置
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Backstage
+- 部署与配置
+- platform
+- engineering
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
+
+
 # Backstage 部署与配置
 # Backstage Deployment and Configuration
 

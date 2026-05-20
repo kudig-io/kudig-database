@@ -1,3 +1,46 @@
+---
+title: 12 - Operator 模式与控制器开发 (Operator Guide)
+description: '## 专家实践：Controller-Runtime 的 Cache 陷阱'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- helm
+- docker
+- mysql
+- statefulset
+- job
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Operator 模式与控制器开发 (Operator Guide) 是什么
+- 如何 Operator 模式与控制器开发 (Operator Guide)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- Operator
+- 模式与控制器开发
+- Operator
+- Guide
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 12 - Operator 模式与控制器开发 (Operator Guide)
 
 ## 专家实践：Controller-Runtime 的 Cache 陷阱

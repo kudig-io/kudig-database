@@ -1,3 +1,42 @@
+---
+title: Karpenter 节点自动扩展实践指南
+description: '# Karpenter 节点自动扩展实践指南'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- prometheus
+- cilium
+- helm
+- operator
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Karpenter 节点自动扩展实践指南 是什么
+- 如何 Karpenter 节点自动扩展实践指南
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- Karpenter
+- 节点自动扩展实践指南
+- production
+- operations
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/node-fta.md
+  label: '故障树: node'
+---
+
+
 # Karpenter 节点自动扩展实践指南
 
 > **适用版本**: Karpenter v1.3  

@@ -1,3 +1,36 @@
+---
+title: Agent Harness 测试与基准评测
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark, SWE-bench, GAIA, AgentBench, 评测框架,
+  测试用例, 红队测试, 对抗测试, 回归测试, 自定义基准'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- kubelet
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness 测试与基准评测 是什么
+- 如何 Agent Harness 测试与基准评测
+trigger_keywords:
+- Agent
+- Harness
+- 测试与基准评测
+- ai
+- agent
+---
+
+
 # Agent Harness 测试与基准评测
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark, SWE-bench, GAIA, AgentBench, 评测框架, 测试用例, 红队测试, 对抗测试, 回归测试, 自定义基准

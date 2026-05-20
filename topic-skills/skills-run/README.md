@@ -1,3 +1,36 @@
+---
+title: Skills Demo — 本地运行工单诊断技能
+description: '| 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | LOW |'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- coredns
+- docker
+- hpa
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Skills Demo — 本地运行工单诊断技能 是什么
+- 如何 Skills Demo — 本地运行工单诊断技能
+trigger_keywords:
+- Skills
+- Demo
+- 本地运行工单诊断技能
+- skills
+---
+
 # Skills Demo — 本地运行工单诊断技能
 
 > **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，体验从故障注入到修复验证的完整流程  

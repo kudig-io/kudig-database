@@ -1,3 +1,34 @@
+---
+title: v1.21.14
+description: v1.21.14 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 300min
+intent_queries:
+- v1.21.14 是什么
+- 如何 v1.21.14
+trigger_keywords:
+- v1.21.14
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.21.14](#v12114)
@@ -216,6 +247,10 @@
     - [Node Binaries](#node-binaries-14)
   - [Changelog since v1.20.0](#changelog-since-v1200)
   - [What's New (Major Themes)](#whats-new-major-themes)
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
     - [Deprecation of PodSecurityPolicy](#deprecation-of-podsecuritypolicy)
     - [Kubernetes API Reference Documentation](#kubernetes-api-reference-documentation)
     - [Kustomize Updates in Kubectl](#kustomize-updates-in-kubectl)

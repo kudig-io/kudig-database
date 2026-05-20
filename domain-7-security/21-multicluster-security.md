@@ -1,3 +1,46 @@
+---
+title: 21 - 多集群安全管理与联邦认证
+description: '# 21 - 多集群安全管理与联邦认证'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- prometheus
+- argocd
+- docker
+- opa
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 多集群安全管理与联邦认证 是什么
+- 如何 多集群安全管理与联邦认证
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 多集群安全管理与联邦认证
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 21 - 多集群安全管理与联邦认证
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Kubernetes Federation v2](https://github.com/kubernetes-sigs/kubefed) | [Red Hat Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) | [Rancher Fleet](https://fleet.rancher.io/)

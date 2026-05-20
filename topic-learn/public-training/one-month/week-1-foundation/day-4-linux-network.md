@@ -1,4 +1,76 @@
+---
+title: 'Day 4: Linux 网络 + 性能调优'
+description: '# Day 4: Linux 网络 + 性能调优'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- docker
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 4: Linux 网络 + 性能调优 是什么'
+- '如何 Day 4: Linux 网络 + 性能调优'
+trigger_keywords:
+- Day
+- '4:'
+- Linux
+- 网络
+- 性能调优
+- learn
+---
+
 # Day 4: Linux 网络 + 性能调优
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W1-DAY4
+title: Day 4 - Linux 网络 + 性能调优
+topic: linux
+type: hands-on-guide
+tags: [linux, network, ip, iptables, tcpdump, sysctl, performance, tuning, hands-on, week-1]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Linux 网络命令怎么用"
+  - "ip netns 网络命名空间怎么用"
+  - "iptables NAT 规则怎么看"
+  - "K8s 节点内核参数怎么调优"
+trigger_keywords:
+  - ip addr
+  - ip route
+  - ip netns
+  - veth
+  - iptables
+  - NAT
+  - tcpdump
+  - ss
+  - sysctl
+  - ip_forward
+  - 内核调优
+  - 网络排障
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+estimated_read_time: 40min
+related_domains:
+  - domain-14-linux
+  - domain-5-networking
+related_topics:
+  - linux
+  - networking
+  - performance
+related:
+  - topic-learn/public-training/one-month/week-1-foundation/day-3-linux-core.md
+  - domain-14-linux/04-linux-networking-configuration.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: Linux 网络配置与内核调优
 

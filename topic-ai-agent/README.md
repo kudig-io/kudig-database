@@ -1,3 +1,37 @@
+---
+title: AI Agent 工程专题
+description: '# AI Agent 工程专题'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- hpa
+- gpu
+- vllm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- AI Agent 工程专题 是什么
+- 如何 AI Agent 工程专题
+trigger_keywords:
+- AI
+- Agent
+- 工程专题
+- ai
+- agent
+---
+
+
 # AI Agent 工程专题
 
 > **文档类型**: 专题索引 | **最后更新**: 2026-04 | **关键词**: AI Agent, LLM, RAG, 多 Agent 编排, 生产部署, 企业级应用, Function Calling, Agent 安全, Agent Harness, Harness Engineering

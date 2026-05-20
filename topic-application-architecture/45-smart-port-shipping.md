@@ -1,3 +1,44 @@
+---
+title: 智慧港口与航运架构设计
+description: '# 智慧港口与航运架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- daemonset
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 港口自动化架构师
+- 物流系统工程师
+- 云原生开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 智慧港口 TOS 系统 Kubernetes 部署
+- 集装箱码头自动化管理架构
+- 无人集卡 AGV 调度系统
+- 海关 EDI 电子数据交换
+- 阿里云 ACK Edge 边缘计算港口
+trigger_keywords:
+- 智慧港口
+- TOS码头操作系统
+- 集装箱管理
+- 无人集卡AGV
+- 海关通关
+- EDI数据交换
+- 边缘计算
+- 阿里云IoT
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-iot-platform-architecture
+- topic-edge-computing
+---
+
+
 # 智慧港口与航运架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

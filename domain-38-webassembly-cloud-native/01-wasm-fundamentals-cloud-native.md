@@ -1,3 +1,39 @@
+---
+title: WebAssembly 云原生基础
+description: 1. [WebAssembly 概述](#1-webassembly-概述)
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- scheduler
+- containerd
+- docker
+- redis
+- hpa
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- WebAssembly 云原生基础 是什么
+- 如何 WebAssembly 云原生基础
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- WebAssembly
+- 云原生基础
+- webassembly
+- cloud
+- native
+---
+
+
 # WebAssembly 云原生基础
 # WebAssembly Cloud Native Fundamentals
 

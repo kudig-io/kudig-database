@@ -1,3 +1,34 @@
+---
+title: Disruptions
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- scheduler
+- redis
+- pdb
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Disruptions 是什么
+- 如何 Disruptions
+trigger_keywords:
+- Disruptions
+- dictionary
+title_en: Disruptions
+---
+
+
 # Disruptions
 
 ## 概述

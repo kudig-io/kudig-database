@@ -1,0 +1,190 @@
+domain: domain-8-observability
+total_questions: 40
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Kubernetes 可观测性架构体系 中, 可观测性架构设计原则 是什么?
+  answer: 参见 domain-8-observability/01-observability-architecture-overview.md 的「可观测性架构设计原则」章节。
+  source: domain-8-observability/01-observability-architecture-overview.md
+  section: 可观测性架构设计原则
+- type: concept
+  question: 在 Kubernetes 可观测性架构体系 中, 指标监控体系架构 是什么?
+  answer: 参见 domain-8-observability/01-observability-architecture-overview.md 的「指标监控体系架构」章节。
+  source: domain-8-observability/01-observability-architecture-overview.md
+  section: 指标监控体系架构
+- type: comparison
+  question: Kubernetes 可观测性架构体系 中有哪些技术对比?
+  answer: 参见 domain-8-observability/01-observability-architecture-overview.md 中的对比分析。
+  source: domain-8-observability/01-observability-architecture-overview.md
+- type: comparison
+  question: 03 - 日志收集架构详解 (Logging Architecture) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/03-logging-architecture.md 中的对比分析。
+  source: domain-8-observability/03-logging-architecture.md
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-apiserver 关键指标 是什么?
+  answer: 参见 domain-8-observability/10-monitoring-metrics-prometheus.md 的「kube-apiserver 关键指标」章节。
+  source: domain-8-observability/10-monitoring-metrics-prometheus.md
+  section: kube-apiserver 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-scheduler 关键指标 是什么?
+  answer: 参见 domain-8-observability/10-monitoring-metrics-prometheus.md 的「kube-scheduler 关键指标」章节。
+  source: domain-8-observability/10-monitoring-metrics-prometheus.md
+  section: kube-scheduler 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-controller-manager 关键指标 是什么?
+  answer: 参见 domain-8-observability/10-monitoring-metrics-prometheus.md 的「kube-controller-manager 关键指标」章节。
+  source: domain-8-observability/10-monitoring-metrics-prometheus.md
+  section: kube-controller-manager 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kubelet 关键指标 是什么?
+  answer: 参见 domain-8-observability/10-monitoring-metrics-prometheus.md 的「kubelet 关键指标」章节。
+  source: domain-8-observability/10-monitoring-metrics-prometheus.md
+  section: kubelet 关键指标
+- type: operation
+  question: '如何执行与 07 - 监控和指标表 相关的操作: kubectl get --raw /metrics?'
+  answer: 参见 domain-8-observability/10-monitoring-metrics-prometheus.md 中的操作步骤。
+  source: domain-8-observability/10-monitoring-metrics-prometheus.md
+  command: kubectl get --raw /metrics
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, KEDA(Kubernetes Event-driven Autoscaling) 是什么?
+  answer: 参见 domain-8-observability/11-custom-metrics-adapter.md 的「KEDA(Kubernetes Event-driven Autoscaling)」章节。
+  source: domain-8-observability/11-custom-metrics-adapter.md
+  section: KEDA(Kubernetes Event-driven Autoscaling)
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== 控制平面健康检查 ======"?'
+  answer: 参见 domain-8-observability/13-cluster-health-check.md 中的操作步骤。
+  source: domain-8-observability/13-cluster-health-check.md
+  command: echo "====== 控制平面健康检查 ======"
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== etcd深度健康检查 ======"?'
+  answer: 参见 domain-8-observability/13-cluster-health-check.md 中的操作步骤。
+  source: domain-8-observability/13-cluster-health-check.md
+  command: echo "====== etcd深度健康检查 ======"
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== 节点健康检查 ======"?'
+  answer: 参见 domain-8-observability/13-cluster-health-check.md 中的操作步骤。
+  source: domain-8-observability/13-cluster-health-check.md
+  command: echo "====== 节点健康检查 ======"
+- type: concept
+  question: 在 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中, 多集群监控治理挑战 是什么?
+  answer: 参见 domain-8-observability/16-multi-cluster-monitoring-governance.md 的「多集群监控治理挑战」章节。
+  source: domain-8-observability/16-multi-cluster-monitoring-governance.md
+  section: 多集群监控治理挑战
+- type: concept
+  question: 在 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中, 统一监控架构设计 是什么?
+  answer: 参见 domain-8-observability/16-multi-cluster-monitoring-governance.md 的「统一监控架构设计」章节。
+  source: domain-8-observability/16-multi-cluster-monitoring-governance.md
+  section: 统一监控架构设计
+- type: comparison
+  question: 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/16-multi-cluster-monitoring-governance.md 中的对比分析。
+  source: domain-8-observability/16-multi-cluster-monitoring-governance.md
+- type: comparison
+  question: 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/17-monitoring-cost-optimization.md 中的对比分析。
+  source: domain-8-observability/17-monitoring-cost-optimization.md
+- type: concept
+  question: 在 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery) 中, 高可用架构设计 是什么?
+  answer: 参见 domain-8-observability/20-high-availability-disaster-recovery.md 的「高可用架构设计」章节。
+  source: domain-8-observability/20-high-availability-disaster-recovery.md
+  section: 高可用架构设计
+- type: comparison
+  question: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/22-best-practices-case-studies.md 中的对比分析。
+  source: domain-8-observability/22-best-practices-case-studies.md
+- type: concept
+  question: 在 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中, 企业现状评估与成熟度诊断 是什么?
+  answer: 参见 domain-8-observability/23-enterprise-implementation-roadmap.md 的「企业现状评估与成熟度诊断」章节。
+  source: domain-8-observability/23-enterprise-implementation-roadmap.md
+  section: 企业现状评估与成熟度诊断
+- type: concept
+  question: 在 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中, 分阶段实施路线图 是什么?
+  answer: 参见 domain-8-observability/23-enterprise-implementation-roadmap.md 的「分阶段实施路线图」章节。
+  source: domain-8-observability/23-enterprise-implementation-roadmap.md
+  section: 分阶段实施路线图
+- type: comparison
+  question: 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/23-enterprise-implementation-roadmap.md 中的对比分析。
+  source: domain-8-observability/23-enterprise-implementation-roadmap.md
+- type: comparison
+  question: 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/24-observability-tool-ecosystem.md 中的对比分析。
+  source: domain-8-observability/24-observability-tool-ecosystem.md
+- type: operation
+  question: '如何执行与 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 相关的操作: POD_NAME=$1?'
+  answer: 参见 domain-8-observability/25-troubleshooting-overview.md 中的操作步骤。
+  source: domain-8-observability/25-troubleshooting-overview.md
+  command: POD_NAME=$1
+- type: operation
+  question: '如何执行与 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 相关的操作: POD_NAME=$1?'
+  answer: 参见 domain-8-observability/25-troubleshooting-overview.md 中的操作步骤。
+  source: domain-8-observability/25-troubleshooting-overview.md
+  command: POD_NAME=$1
+- type: comparison
+  question: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/25-troubleshooting-overview.md 中的对比分析。
+  source: domain-8-observability/25-troubleshooting-overview.md
+- type: operation
+  question: '如何执行与 100 - 故障排查增强工具 相关的操作: brew install derailed/k9s/k9s?'
+  answer: 参见 domain-8-observability/26-troubleshooting-tools.md 中的操作步骤。
+  source: domain-8-observability/26-troubleshooting-tools.md
+  command: brew install derailed/k9s/k9s
+- type: operation
+  question: '如何执行与 100 - 故障排查增强工具 相关的操作: kubectl run netshoot --rm -it \?'
+  answer: 参见 domain-8-observability/26-troubleshooting-tools.md 中的操作步骤。
+  source: domain-8-observability/26-troubleshooting-tools.md
+  command: kubectl run netshoot --rm -it \
+- type: comparison
+  question: 100 - 故障排查增强工具 中有哪些技术对比?
+  answer: 参见 domain-8-observability/26-troubleshooting-tools.md 中的对比分析。
+  source: domain-8-observability/26-troubleshooting-tools.md
+- type: concept
+  question: 在 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中, Inspektor Gadget eBPF 分析平台 是什么?
+  answer: 参见 domain-8-observability/27-performance-profiling-tools.md 的「Inspektor Gadget eBPF 分析平台」章节。
+  source: domain-8-observability/27-performance-profiling-tools.md
+  section: Inspektor Gadget eBPF 分析平台
+- type: operation
+  question: '如何执行与 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 相关的操作: kubectl krew install gadget?'
+  answer: 参见 domain-8-observability/27-performance-profiling-tools.md 中的操作步骤。
+  source: domain-8-observability/27-performance-profiling-tools.md
+  command: kubectl krew install gadget
+- type: best_practice
+  question: 关于 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools), 有什么最佳实践?
+  answer: 1) 检查 pprof CPU profile 2) 考虑水平扩容"
+  source: domain-8-observability/27-performance-profiling-tools.md
+- type: best_practice
+  question: 关于 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools), 有什么最佳实践?
+  answer: 1) 检查 pprof heap profile 2) 检查是否存在内存泄漏"
+  source: domain-8-observability/27-performance-profiling-tools.md
+- type: comparison
+  question: 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中有哪些技术对比?
+  answer: 参见 domain-8-observability/27-performance-profiling-tools.md 中的对比分析。
+  source: domain-8-observability/27-performance-profiling-tools.md
+- type: concept
+  question: 在 Java 应用 Kubernetes 可观测性整合指南 中, Java 可观测性架构全景 是什么?
+  answer: 参见 domain-8-observability/99-java-observability-kubernetes-guide.md 的「Java 可观测性架构全景」章节。
+  source: domain-8-observability/99-java-observability-kubernetes-guide.md
+  section: Java 可观测性架构全景
+- type: concept
+  question: 在 Java 应用 Kubernetes 可观测性整合指南 中, Micrometer + Prometheus 指标体系 是什么?
+  answer: 参见 domain-8-observability/99-java-observability-kubernetes-guide.md 的「Micrometer + Prometheus 指标体系」章节。
+  source: domain-8-observability/99-java-observability-kubernetes-guide.md
+  section: Micrometer + Prometheus 指标体系
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 可观测性新特性指南 中, Kubelet OpenTelemetry Tracing (v1.31 GA) 是什么?
+  answer: 参见 domain-8-observability/99-kubernetes-v1.33-observability-guide.md 的「Kubelet OpenTelemetry Tracing (v1.31 GA)」章节。
+  source: domain-8-observability/99-kubernetes-v1.33-observability-guide.md
+  section: Kubelet OpenTelemetry Tracing (v1.31 GA)
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 可观测性新特性指南 相关的操作: curl -s http://localhost:10248/healthz?verbose | grep tracin?'
+  answer: 参见 domain-8-observability/99-kubernetes-v1.33-observability-guide.md 中的操作步骤。
+  source: domain-8-observability/99-kubernetes-v1.33-observability-guide.md
+  command: curl -s http://localhost:10248/healthz?verbose | grep tracing
+- type: comparison
+  question: Kubernetes v1.29-v1.33 可观测性新特性指南 中有哪些技术对比?
+  answer: 参见 domain-8-observability/99-kubernetes-v1.33-observability-guide.md 中的对比分析。
+  source: domain-8-observability/99-kubernetes-v1.33-observability-guide.md
+- type: comparison
+  question: Domain-8 可观测性领域最终质量评估报告 中有哪些技术对比?
+  answer: 参见 domain-8-observability/FINAL-QUALITY-ASSESSMENT.md 中的对比分析。
+  source: domain-8-observability/FINAL-QUALITY-ASSESSMENT.md

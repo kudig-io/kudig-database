@@ -1,3 +1,39 @@
+---
+title: Domain-21 日志管理与分析 — 开源项目索引
+description: '# Domain-21 日志管理与分析 — 开源项目索引'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- prometheus
+- grafana
+- docker
+- falco
+- elasticsearch
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-21 日志管理与分析 — 开源项目索引 是什么
+- 如何 Domain-21 日志管理与分析 — 开源项目索引
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Domain-21
+- 日志管理与分析
+- 开源项目索引
+- logging
+- management
+- analytics
+---
+
 # Domain-21 日志管理与分析 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

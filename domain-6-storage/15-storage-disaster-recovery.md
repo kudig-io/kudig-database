@@ -1,3 +1,43 @@
+---
+title: 15 - 存储灾备与迁移策略
+description: '# 15 - 存储灾备与迁移策略'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- prometheus
+- mysql
+- postgresql
+- statefulset
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储灾备与迁移策略 是什么
+- 如何 存储灾备与迁移策略
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储灾备与迁移策略
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 15 - 存储灾备与迁移策略
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 灾难恢复、数据迁移、业务连续性

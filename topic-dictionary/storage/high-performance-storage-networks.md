@@ -1,3 +1,35 @@
+---
+title: 高性能存储网络（RDMA / NVMe-oF）
+description: '# 高性能存储网络（RDMA / NVMe-oF）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- operator
+- gpu
+- nvidia
+- llm
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 高性能存储网络（RDMA / NVMe-oF） 是什么
+- 如何 高性能存储网络（RDMA / NVMe-oF）
+trigger_keywords:
+- 高性能存储网络
+- RDMA
+- NVMe-oF
+- dictionary
+title_en: High Performance Storage Networks
+---
+
+
 # 高性能存储网络（RDMA / NVMe-oF）
 
 ## 概述

@@ -1,3 +1,34 @@
+---
+title: v1.8.15
+description: v1.8.15 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- flannel
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 240min
+intent_queries:
+- v1.8.15 是什么
+- 如何 v1.8.15
+trigger_keywords:
+- v1.8.15
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 - [v1.8.15](#v1815)
   - [Downloads for v1.8.15](#downloads-for-v1815)
@@ -865,6 +896,10 @@ filename | sha256 hash
 * change default azure file/dir mode to 0755 ([#56551](https://github.com/kubernetes/kubernetes/pull/56551), [@andyzhangx](https://github.com/andyzhangx))
 * Retry 'connection refused' errors when setting up clusters on GCE. ([#57394](https://github.com/kubernetes/kubernetes/pull/57394), [@mborsz](https://github.com/mborsz))
 * enable flexvolume on Windows node ([#56921](https://github.com/kubernetes/kubernetes/pull/56921), [@andyzhangx](https://github.com/andyzhangx))
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
 * Add prometheus metrics for the PodSecurityPolicy admission controller ([#57346](https://github.com/kubernetes/kubernetes/pull/57346), [@tallclair](https://github.com/tallclair))
 * fix CreateVolume func: use search mode instead ([#54687](https://github.com/kubernetes/kubernetes/pull/54687), [@andyzhangx](https://github.com/andyzhangx))
 * remove time waiting after create storage account (save 25s) ([#56679](https://github.com/kubernetes/kubernetes/pull/56679), [@andyzhangx](https://github.com/andyzhangx))

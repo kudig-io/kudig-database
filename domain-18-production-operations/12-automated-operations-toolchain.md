@@ -1,3 +1,37 @@
+---
+title: 12-自动化运维工具链
+description: '# 12-自动化运维工具链'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- kubelet
+- prometheus
+- helm
+- containerd
+- docker
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 自动化运维工具链 是什么
+- 如何 自动化运维工具链
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 自动化运维工具链
+- production
+- operations
+---
+
+
 # 12-自动化运维工具链
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

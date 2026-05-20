@@ -1,3 +1,40 @@
+---
+title: 边缘安全架构 (Edge Security Architecture)
+description: '# 边缘安全架构 (Edge Security Architecture)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- istio
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘安全架构 (Edge Security Architecture) 是什么
+- 如何 边缘安全架构 (Edge Security Architecture)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 边缘安全架构
+- Edge
+- Security
+- Architecture
+- edge
+- computing
+---
+
+
 # 边缘安全架构 (Edge Security Architecture)
 
 ## 概述 (Overview)

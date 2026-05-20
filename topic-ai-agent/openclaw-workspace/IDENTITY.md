@@ -1,8 +1,31 @@
 ---
-name: kudig-doctor-identity
+title: KuDig Doctor — 身份标识
 description: KuDig Doctor Agent 的外观标识、交互风格与品牌定义
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- KuDig Doctor — 身份标识 是什么
+- 如何 KuDig Doctor — 身份标识
+trigger_keywords:
+- KuDig
+- Doctor
+- 身份标识
+- ai
+- agent
 ---
 
 # KuDig Doctor — 身份标识

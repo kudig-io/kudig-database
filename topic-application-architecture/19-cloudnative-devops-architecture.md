@@ -1,3 +1,56 @@
+---
+title: 云原生 DevOps 平台架构设计
+description: '# 云原生 DevOps 平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- grafana
+- helm
+- argocd
+- flux
+- docker
+- harbor
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- DevOps架构师
+- 平台工程师
+- SRE工程师
+- 云原生开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业级 DevOps 平台 GitOps 架构设计
+- Kubernetes 多环境晋升 CI/CD 流水线
+- Argo CD 渐进式发布与灰度发布
+- SLSA 安全供应链架构
+- 阿里云 ACK 云效 DevOps
+trigger_keywords:
+- DevOps
+- GitOps
+- ArgoCD
+- CI/CD
+- 持续交付
+- 渐进式发布
+- 金丝雀发布
+- SLSA
+- 安全供应链
+- 平台工程
+- IDP
+- Backstage
+- FinOps
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-cloudnative-devops-architecture
+- topic-platform-architecture
+---
+
+
 # 云原生 DevOps 平台 Kubernetes 生产架构设计
 
 > **适用场景**: 企业级 DevOps 平台 / GitOps / 持续交付 / 平台工程 (Platform Engineering) / IDP 内部开发者平台  
@@ -454,3 +507,59 @@ spec:
 - [Argo CD 文档](https://argo-cd.readthedocs.io/)
 - [Backstage 文档](https://backstage.io/docs/)
 - [SLSA 框架](https://slsa.dev/)
+
+---
+
+## 多云部署方案对照
+
+### 阿里云服务 → 多云映射表
+
+| 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
+|:---|:---|:---|:---|:---|
+| 容器编排 | **ACK** | **EKS** | **GKE** | **AKS** |
+| 代码仓库 | **云效 Codeup** | **CodeCommit** | **Cloud Source Repos** | **Azure Repos** |
+| CI/CD 流水线 | **云效流水线** | **CodePipeline / CodeBuild** | **Cloud Build** | **Azure Pipelines** |
+| 镜像仓库 | **ACR 企业版** | **ECR** | **Artifact Registry** | **ACR (Azure)** |
+| 制品管理 | **云效制品库** | **CodeArtifact** | **Artifact Registry** | **Azure Artifacts** |
+| 应用监控 | **ARMS** | **CloudWatch / X-Ray** | **Cloud Monitoring / Trace** | **Application Insights** |
+| 日志服务 | **SLS** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
+| 安全中心 | **云安全中心** | **Security Hub / Inspector** | **Security Command Center** | **Microsoft Defender** |
+| 镜像扫描 | **ACR 镜像扫描** | **ECR Scan / Inspector** | **Artifact Analysis** | **ACR Tasks Scan** |
+| 服务网格 | **MSE (微服务引擎)** | **App Mesh** | **Anthos Service Mesh** | **Istio (Azure)** |
+| 配置中心 | **ACM** | **AppConfig** | **Config Connector** | **App Configuration** |
+| 密钥管理 | **KMS** | **KMS / Secrets Manager** | **Secret Manager** | **Key Vault** |
+| 测试管理 | **云效测试管理** | **CodeGuru** | **Cloud Test Lab** | **Azure Test Plans** |
+| GitOps | **ACK + Argo CD** | **EKS + Argo CD** | **GKE + Argo CD** | **AKS + Argo CD** |
+
+### 多云部署注意事项
+
+1. **GitOps 跨云管理**: Argo CD 天然支持多集群管理。通过注册不同云的 K8s 集群为 Argo CD 的目标集群，可实现一套 Git 仓库管理多云部署。需确保各集群的 kubeconfig 和认证方式统一。
+2. **CI/CD 流水线选择**: 若需多云部署，建议使用云中立的 CI/CD 工具（GitHub Actions / GitLab CI / Tekton），而非各云原生的 CI/CD 服务。这样只需维护一套流水线配置。
+3. **镜像仓库同步**: 各云的镜像仓库（ECR / GCR / ACR）间不互通。建议使用 Harbor 作为中心仓库，或配置各云 Registry 的跨区域复制。镜像 Tag 需统一规范。
+4. **可观测性统一**: 多云部署时，每朵云的监控/日志服务不同。建议使用 Prometheus Federation 或 OpenTelemetry Collector 统一采集，Grafana 作为统一可视化面板。
+5. **网络策略**: 跨云 Pod 通信需通过 Service Mesh（Istio 多集群模式）或 VPN 打通。注意 MTU 差异和跨云延迟对微服务调用链的影响。
+6. **成本分摊**: 各云计费模型不同（AWS 按小时、GCP 按秒、Azure 按分钟），FinOps 工具需支持多云成本聚合。OpenCost 可作为开源多云成本分析工具。
+
+### 云中立方案（开源替代）
+
+| 能力域 | 开源方案 | 说明 |
+|:---|:---|:---|
+| 容器编排 | **Kubernetes** (RKE2 / k3s / kind) | 本文档已以 K8s 为核心 |
+| 代码仓库 | **GitLab** / **Gitea** | 自建 Git 服务 |
+| CI/CD | **Tekton** / **GitHub Actions** / **GitLab CI** | 云中立 CI/CD |
+| GitOps | **Argo CD** / **Flux** | 本文档已使用 Argo CD |
+| 镜像仓库 | **Harbor** | 企业级开源，支持镜像扫描和签名 |
+| 制品管理 | **Nexus** / **JFrog Artifactory (CE)** | 通用制品仓库 |
+| 镜像构建 | **Kaniko** / **Buildah** / **BuildKit** | 本文档已提及 Kaniko/BuildKit |
+| 镜像签名 | **cosign** (Sigstore) | 本文档已提及 |
+| 镜像扫描 | **Trivy** / **Grype** | 开源镜像漏洞扫描 |
+| 应用监控 | **Prometheus** + **Grafana** | 全栈开源可观测性 |
+| 链路追踪 | **Jaeger** / **Tempo** | 本文档已提及 |
+| 日志 | **Loki** + **Promtail** / **Fluent Bit** | 轻量级日志聚合 |
+| 持续剖析 | **Pyroscope** / **Parca** | 替代 ARMS Profiler |
+| 开发者门户 | **Backstage** | 本文档已使用 |
+| 安全运行时 | **Falco** / **Tetragon** | 运行时安全监控 |
+| 策略引擎 | **OPA / Kyverno** | K8s 准入策略 |
+| 成本分析 | **OpenCost** / **Kubecost** | 多云 K8s 成本分析 |
+| 渐进发布 | **Flagger** / **Argo Rollouts** | 金丝雀 / 蓝绿 / A/B 发布 |
+| 密钥管理 | **HashiCorp Vault** + **External Secrets** | 本文档已提及 External Secrets |

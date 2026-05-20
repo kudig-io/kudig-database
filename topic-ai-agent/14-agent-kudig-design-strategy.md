@@ -1,3 +1,36 @@
+---
+title: Agent 作为技术赋能新方式：设计思路与落地路径
+description: '# Agent 作为技术赋能新方式：设计思路与落地路径'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- helm
+- argocd
+- redis
+- hpa
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent 作为技术赋能新方式：设计思路与落地路径 是什么
+- 如何 Agent 作为技术赋能新方式：设计思路与落地路径
+trigger_keywords:
+- Agent
+- 作为技术赋能新方式：设计思路与落地路径
+- ai
+- agent
+---
+
 # Agent 作为技术赋能新方式：设计思路与落地路径
 
 > **文档类型**: 战略设计专题 | **最后更新**: 2026-03 | **关键词**: Agent, 技术赋能, RAG, K8s 运维, 知识驱动, 自动化, 平台工程

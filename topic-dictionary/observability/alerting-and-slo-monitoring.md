@@ -1,3 +1,32 @@
+---
+title: 告警与 SLO 监控工程
+description: '# 告警与 SLO 监控工程'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- grafana
+- hpa
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 告警与 SLO 监控工程 是什么
+- 如何 告警与 SLO 监控工程
+trigger_keywords:
+- 告警与
+- SLO
+- 监控工程
+- dictionary
+title_en: Alerting
+---
+
+
 # 告警与 SLO 监控工程
 
 ## 概述

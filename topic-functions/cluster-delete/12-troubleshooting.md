@@ -1,3 +1,58 @@
+---
+title: 集群删除故障排查手册
+category: cluster-delete
+tags:
+- troubleshooting
+- reset
+- error
+- kubectl
+- drain
+- etcd
+- container
+- unmount
+- kubernetes
+last_updated: 2026-05-18
+description: 集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见故障场景，提供系统化的排查方法和解决方案，涵盖 kubeadm reset、etcd、容器删除、卸载、kubectl
+  delete node 以及重新初始化失败等场景。
+difficulty: intermediate
+intent_queries:
+- kubeadm reset troubleshooting common errors
+- kubernetes cluster deletion failure recovery
+- etcd member removal failure kubernetes
+- kubectl drain failure troubleshooting
+- container deletion failure kubernetes cluster
+trigger_keywords:
+- reset卡住
+- etcd移除失败
+- failed to unmount
+- device busy
+- could not obtain a client
+- unhealthy cluster
+- port 10250 is in use
+- ProgressDeadlineExceeded equivalent
+- container runtime error
+- NFS mount stuck
+reading_level: intermediate
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-2-installation
+- domain-3-control-plane
+related_topics:
+- cluster-delete
+- reset
+- cleanup
+- etcd-cleanup
+- force-delete
+- ha-delete
+domain_link: '[Installation](../domain-2-installation/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # 集群删除故障排查手册
 
 ## 概述

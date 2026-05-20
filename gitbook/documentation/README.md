@@ -1,3 +1,23 @@
+---
+title: GitBook 使用文档索引
+description: 本目录包含 GitBook 的详细使用文档和操作指南。
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitBook 使用文档索引 是什么
+- 如何 GitBook 使用文档索引
+trigger_keywords:
+- GitBook
+- 使用文档索引
+---
+
 # GitBook 使用文档索引
 
 本目录包含 GitBook 的详细使用文档和操作指南。

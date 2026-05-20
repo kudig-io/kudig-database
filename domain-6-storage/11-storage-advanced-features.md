@@ -1,3 +1,43 @@
+---
+title: 11 - 存储高级特性与优化策略
+description: '# 11 - 存储高级特性与优化策略'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- opa
+- minio
+- redis
+- mysql
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储高级特性与优化策略 是什么
+- 如何 存储高级特性与优化策略
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储高级特性与优化策略
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 11 - 存储高级特性与优化策略
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 高级功能、性能优化、容量规划

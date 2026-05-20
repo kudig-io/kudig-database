@@ -1,18 +1,61 @@
+---
+title: Domain-34 CNCF Landscape — 开源项目索引
+description: 本域已包含 **222 篇深度文档**（1 README + 218 个 CNCF 项目 + 4 篇指南），按成熟度分目录组织：
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- kserve
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Domain-34 CNCF Landscape — 开源项目索引 是什么
+- 如何 Domain-34 CNCF Landscape — 开源项目索引
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Domain-34
+- CNCF
+- Landscape
+- 开源项目索引
+- cncf
+- landscape
+---
+
 # Domain-34 CNCF Landscape — 开源项目索引
 
-> **最后更新**: 2026-04-24
+> **最后更新**: 2026-05-19
 
 ---
 
 ## 说明
 
-本域已包含 **219 篇深度文档**（1 README + 218 个 CNCF 项目），按成熟度分目录组织：
+本域已包含 **222 篇深度文档**（1 README + 218 个 CNCF 项目 + 4 篇指南），按成熟度分目录组织：
 
 | 目录 | 项目数 | 说明 |
 |:---|:---|:---|
 | `graduated/` | 34 | Graduated 项目深度文档 |
 | `incubating/` | 37 | Incubating 项目深度文档 |
 | `sandbox/` | 147 | Sandbox 项目基础文档 |
+
+---
+
+## 核心指南
+
+| 指南 | 文件 | 说明 |
+|:-----|:-----|:-----|
+| 集成实践指南 | [01-cncf-integration-guide.md](./01-cncf-integration-guide.md) | 项目组合使用，最佳实践 |
+| 学习路径 | [02-cncf-learning-paths.md](./02-cncf-learning-paths.md) | 角色学习规划，认证备考 |
+| 项目选型指南 | [03-cncf-selection-guide.md](./03-cncf-selection-guide.md) | CNI/存储/监控等选型对比 |
+| FTA 故障树索引 | [04-cncf-fta-index.md](./04-cncf-fta-index.md) | 项目故障树和排障索引 |
 
 ---
 

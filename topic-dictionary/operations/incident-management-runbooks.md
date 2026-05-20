@@ -1,3 +1,35 @@
+---
+title: 12 - 生产事故管理与应急手册
+description: '# 12 - 生产事故管理与应急手册'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- helm
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 1h
+intent_queries:
+- 生产事故管理与应急手册 是什么
+- 如何 生产事故管理与应急手册
+trigger_keywords:
+- 生产事故管理与应急手册
+- dictionary
+title_en: Incident Management Runbooks
+---
+
+
+
 # 12 - 生产事故管理与应急手册
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

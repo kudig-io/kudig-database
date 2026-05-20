@@ -1,3 +1,45 @@
+---
+title: 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+description: '# 09 - Kubernetes 源码结构与阅读指南 (Source Code)'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 源码结构与阅读指南 (Source Code) 是什么
+- 如何 Kubernetes 源码结构与阅读指南 (Source Code)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- Kubernetes
+- 源码结构与阅读指南
+- Source
+- Code
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
 # 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 > **交叉引用**：Domain-1 中有更详细的 Kubernetes 源码架构分析，请参考 [Domain-1: 源码结构](../domain-1-architecture-fundamentals/04-source-code-structure.md) 和 [Domain-1: 源码架构](../domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md)。

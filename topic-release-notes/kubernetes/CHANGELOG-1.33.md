@@ -1,3 +1,34 @@
+---
+title: v1.33.10
+description: v1.33.10 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 300min
+intent_queries:
+- v1.33.10 是什么
+- 如何 v1.33.10
+trigger_keywords:
+- v1.33.10
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.33.10](#v13310)

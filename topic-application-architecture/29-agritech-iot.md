@@ -1,3 +1,55 @@
+---
+title: 农业物联网架构设计
+description: '# 农业物联网架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- mysql
+- daemonset
+- gateway
+- operator
+- agent
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 农业科技架构师
+- IoT平台工程师
+- 精准农业开发者
+- 阿里云解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 农业物联网系统架构设计
+- 智慧农业边缘网关K8s
+- 精准灌溉AI决策
+- 农产品溯源区块链
+- 无人机植保系统
+trigger_keywords:
+- 农业物联网
+- 智慧农业
+- 精准农业
+- LoRa
+- 边缘网关
+- 精准灌溉
+- 溯源
+- KubeEdge
+- 无人机植保
+- 农业大数据
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-5-iot-edge-computing
+- domain-9-ai-ml
+- domain-7-observability
+related_topics:
+- topic-application-architecture/47-smart-mining
+- topic-application-architecture/12-smart-logistics-architecture
+- topic-functions/05-iot-edge-computing
+- topic-functions/09-data-security-privacy
+---
+
+
 # 农业物联网架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

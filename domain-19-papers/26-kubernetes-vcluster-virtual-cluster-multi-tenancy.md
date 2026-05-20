@@ -1,3 +1,42 @@
+---
+title: Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
+description: '作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- istio
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy) 是什么
+- 如何 Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- vCluster
+- 与虚拟集群多租户
+- vCluster
+- and
+- Virtual
+- Cluster
+- Multi-Tenancy
+---
+
+
 # Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 > 作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03

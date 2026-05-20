@@ -6,11 +6,13 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
+  /* Brand Colors */
   --kd-brand: #2563eb;
   --kd-brand-hover: #1d4ed8;
   --kd-brand-light: #dbeafe;
   --kd-brand-muted: #eff6ff;
 
+  /* Neutral Palette */
   --kd-n950: #0f172a;
   --kd-n900: #1e293b;
   --kd-n800: #334155;
@@ -22,6 +24,43 @@
   --kd-n200: #e2e8f0;
   --kd-n100: #f1f5f9;
   --kd-n50: #f8fafc;
+
+  /* Callout Colors */
+  --kd-callout-info-bg: #dbeafe;
+  --kd-callout-info-border: #2563eb;
+  --kd-callout-tip-bg: #dcfce7;
+  --kd-callout-tip-border: #059669;
+  --kd-callout-warning-bg: #fef3c7;
+  --kd-callout-warning-border: #f59e0b;
+  --kd-callout-danger-bg: #fef2f2;
+  --kd-callout-danger-border: #dc2626;
+
+  /* Difficulty Badge Colors */
+  --kd-badge-beginner-bg: #dcfce7;
+  --kd-badge-beginner-color: #166534;
+  --kd-badge-intermediate-bg: #dbeafe;
+  --kd-badge-intermediate-color: #1e40af;
+  --kd-badge-advanced-bg: #fef3c7;
+  --kd-badge-advanced-color: #92400e;
+  --kd-badge-expert-bg: #fce7f3;
+  --kd-badge-expert-color: #9f1239;
+
+  /* Typography Scale */
+  --kd-text-xs: 0.75rem;
+  --kd-text-sm: 0.875rem;
+  --kd-text-base: 1rem;
+  --kd-text-lg: 1.125rem;
+  --kd-text-xl: 1.25rem;
+  --kd-text-2xl: 1.5rem;
+  --kd-text-3xl: 1.875rem;
+
+  /* Spacing */
+  --kd-space-1: 0.25rem;
+  --kd-space-2: 0.5rem;
+  --kd-space-3: 0.75rem;
+  --kd-space-4: 1rem;
+  --kd-space-6: 1.5rem;
+  --kd-space-8: 2rem;
 }
 
 /* ---------- Typography ---------- */
@@ -104,4 +143,146 @@ html.font-size-xl { font-size: 20px; }
 .md-top__link {
   backdrop-filter: blur(8px);
   background: rgba(255,255,255,0.9);
+}
+
+/* ---------- Callout Blocks ---------- */
+.callout {
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid;
+  margin: 1.5rem 0;
+}
+.callout.info {
+  background: var(--kd-callout-info-bg);
+  border-color: var(--kd-callout-info-border);
+}
+.callout.tip {
+  background: var(--kd-callout-tip-bg);
+  border-color: var(--kd-callout-tip-border);
+}
+.callout.warning {
+  background: var(--kd-callout-warning-bg);
+  border-color: var(--kd-callout-warning-border);
+}
+.callout.danger, .callout.critical {
+  background: var(--kd-callout-danger-bg);
+  border-color: var(--kd-callout-danger-border);
+}
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Difficulty Badges ---------- */
+.difficulty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: var(--kd-text-xs);
+  font-weight: 600;
+}
+.difficulty-badge.beginner {
+  background: var(--kd-badge-beginner-bg);
+  color: var(--kd-badge-beginner-color);
+}
+.difficulty-badge.intermediate {
+  background: var(--kd-badge-intermediate-bg);
+  color: var(--kd-badge-intermediate-color);
+}
+.difficulty-badge.advanced {
+  background: var(--kd-badge-advanced-bg);
+  color: var(--kd-badge-advanced-color);
+}
+.difficulty-badge.expert {
+  background: var(--kd-badge-expert-bg);
+  color: var(--kd-badge-expert-color);
+}
+
+/* ---------- Reading Time ---------- */
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--kd-text-sm);
+  color: var(--kd-n600);
+  margin-left: 1rem;
+}
+
+/* ---------- Tabbed Content (pymdownx.tabbed) ---------- */
+.tabbed-set {
+  margin: 1.5rem 0;
+}
+.tabbed-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 2px solid var(--kd-n200);
+  margin-bottom: -1px;
+}
+.tabbed-label {
+  padding: 0.5rem 1rem;
+  font-size: var(--kd-text-sm);
+  font-weight: 500;
+  color: var(--kd-n600);
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  background: transparent;
+  transition: color 0.2s, background 0.2s;
+}
+.tabbed-label:hover {
+  color: var(--kd-brand);
+}
+.tabbed-label.is-active {
+  color: var(--kd-brand);
+  background: white;
+  border-color: var(--kd-n200);
+}
+.tabbed-content {
+  padding: 1rem;
+  border: 1px solid var(--kd-n200);
+  border-radius: 0 6px 6px 6px;
+}
+
+/* ---------- Details/Summary (Collapsible) ---------- */
+details {
+  margin: 1.5rem 0;
+  border: 1px solid var(--kd-n200);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+details summary {
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  list-style: none;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+details[open] {
+  padding-bottom: 1rem;
+}
+
+/* ---------- Breadcrumb Styling ---------- */
+.md-breadcrumb {
+  font-size: var(--kd-text-sm);
+}
+.md-breadcrumb__list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
 }

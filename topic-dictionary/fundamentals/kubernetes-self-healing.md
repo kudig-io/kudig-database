@@ -1,3 +1,33 @@
+---
+title: Kubernetes Self-Healing（Kubernetes 自愈能力）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Self-Healing（Kubernetes 自愈能力） 是什么
+- 如何 Kubernetes Self-Healing（Kubernetes 自愈能力）
+trigger_keywords:
+- Kubernetes
+- Self-Healing
+- Kubernetes
+- 自愈能力
+- dictionary
+title_en: Kubernetes Self Healing
+---
+
+
 # Kubernetes Self-Healing（Kubernetes 自愈能力）
 
 ## 概述

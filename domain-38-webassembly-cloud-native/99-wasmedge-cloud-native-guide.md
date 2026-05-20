@@ -1,3 +1,40 @@
+---
+title: WebAssembly (Wasm) 云原生实践指南
+description: '# WebAssembly (Wasm) 云原生实践指南'
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- kubelet
+- istio
+- envoy
+- containerd
+- docker
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- WebAssembly (Wasm) 云原生实践指南 是什么
+- 如何 WebAssembly (Wasm) 云原生实践指南
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- WebAssembly
+- Wasm
+- 云原生实践指南
+- webassembly
+- cloud
+- native
+---
+
+
 # WebAssembly (Wasm) 云原生实践指南
 
 > **适用版本**: WasmEdge v0.14 / containerd wasm shims v0.8 / Spin v3.2  

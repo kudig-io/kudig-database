@@ -1,3 +1,44 @@
+---
+title: 13 - 安全、准入控制与 RBAC 事件
+description: '# 13 - 安全、准入控制与 RBAC 事件'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- prometheus
+- istio
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 安全、准入控制与 RBAC 事件 是什么
+- 如何 安全、准入控制与 RBAC 事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 安全
+- 准入控制与
+- RBAC
+- 事件
+- kubernetes
+- events
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/rbac-fta.md
+  label: '故障树: rbac'
+---
+
+
 # 13 - 安全、准入控制与 RBAC 事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

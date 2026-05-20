@@ -1,3 +1,38 @@
+---
+title: Domain-17 云厂商 — 开源项目索引
+description: '| **EKS Anywhere** | 本地部署 EKS | 部分开源 | 基于 Cluster API |'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- helm
+- ingress
+- operator
+- serverless
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-17 云厂商 — 开源项目索引 是什么
+- 如何 Domain-17 云厂商 — 开源项目索引
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- Domain-17
+- 云厂商
+- 开源项目索引
+- cloud
+- provider
+---
+
 # Domain-17 云厂商 — 开源项目索引
 
 > **最后更新**: 2026-04-24

@@ -1,3 +1,43 @@
+---
+title: 103 - 容器镜像构建工具 (Container Image Build)
+description: '## 容器镜像构建生态架构'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- scheduler
+- containerd
+- docker
+- harbor
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 容器镜像构建工具 (Container Image Build) 是什么
+- 如何 容器镜像构建工具 (Container Image Build)
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 容器镜像构建工具
+- Container
+- Image
+- Build
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # 103 - 容器镜像构建工具 (Container Image Build)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级

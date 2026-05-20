@@ -1,3 +1,53 @@
+---
+title: 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
+description: '# 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- etcd
+- apiserver
+- scheduler
+- hpa
+- vpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 是什么
+- 如何 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
+- Kubernetes 4 workloads 最佳实践
+- 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 故障排查
+- 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 排障步骤
+trigger_keywords:
+- 工作负载故障排查与应急响应手册
+- Workload
+- Troubleshooting
+- Incident
+- Response
+- Handbook
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **紧急程度**: ⚡ 高优先级

@@ -1,3 +1,31 @@
+---
+title: KUDIG-DATABASE Manpages
+description: '├── man8/           # 系统管理命令 (System Administration)'
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- istio
+- cilium
+- helm
+- argocd
+- containerd
+- ebpf
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- KUDIG-DATABASE Manpages 是什么
+- 如何 KUDIG-DATABASE Manpages
+trigger_keywords:
+- KUDIG-DATABASE
+- Manpages
+---
+
 # KUDIG-DATABASE Manpages
 
 > 核心开源产品和项目脚本的 manpage 参考文档

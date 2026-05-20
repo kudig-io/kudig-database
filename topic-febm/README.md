@@ -1,3 +1,33 @@
+---
+title: 'topic-febm: FEBM 法医鉴定循证方法论深度解析'
+description: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- falco
+- ebpf
+- agent
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 'topic-febm: FEBM 法医鉴定循证方法论深度解析 是什么'
+- '如何 topic-febm: FEBM 法医鉴定循证方法论深度解析'
+trigger_keywords:
+- 'topic-febm:'
+- FEBM
+- 法医鉴定循证方法论深度解析
+- febm
+---
+
 # topic-febm: FEBM 法医鉴定循证方法论深度解析
 
 > **文档数量**: 10 篇（8章 + 1主文档 + 1 PDF原文） | **最后更新**: 2026-02

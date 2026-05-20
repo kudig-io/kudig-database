@@ -1,3 +1,47 @@
+---
+title: 31 - AI平台治理框架
+description: '## 一、AI平台治理全景架构'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- argocd
+- flux
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AI平台治理框架 是什么
+- 如何 AI平台治理框架
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- AI平台治理框架
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 31 - AI平台治理框架
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery

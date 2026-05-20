@@ -1,3 +1,38 @@
+---
+title: 'Domain 21: 日志管理与分析 (Logging Management & Analytics)'
+description: '# Domain 21: 日志管理与分析 (Logging Management & Analytics)'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- grafana
+- kafka
+- elasticsearch
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 21: 日志管理与分析 (Logging Management & Analytics) 是什么'
+- '如何 Domain 21: 日志管理与分析 (Logging Management & Analytics)'
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Domain
+- '21:'
+- 日志管理与分析
+- Logging
+- Management
+- Analytics
+- logging
+- management
+---
+
 # Domain 21: 日志管理与分析 (Logging Management & Analytics)
 
 > **领域定位**: 企业级日志平台架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07

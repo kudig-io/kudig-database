@@ -1,3 +1,48 @@
+---
+title: AI 制药架构设计
+description: '# AI 制药架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- job
+- gpu
+- nvidia
+last_updated: 2026-05-18
+difficulty: expert
+reading_level: expert
+audience:
+- AI制药研究员
+- 计算化学家
+- 药物研发工程师
+estimated_read_time: 5min
+intent_queries:
+- AI 制药分子生成与虚拟筛选
+- GPU 分子动力学模拟 GROMACS
+- 药物发现深度学习模型
+- 靶点预测与化合物生成
+- 阿里云 PAI 药物研发
+trigger_keywords:
+- AI制药
+- 药物发现
+- 分子生成
+- 分子对接
+- 分子动力学
+- 靶点发现
+- ADMET预测
+- 虚拟筛选
+- GPU计算
+- 临床试验
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-ai-algorithm
+- topic-hpc-architecture
+---
+
+
 # AI 制药架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

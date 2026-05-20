@@ -1,3 +1,57 @@
+---
+title: 信创替代架构设计
+description: '# 信创替代架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- etcd
+- scheduler
+- prometheus
+- grafana
+- calico
+- docker
+- ceph
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- 信创架构师
+- 国产化迁移工程师
+- 阿里云解决方案架构师
+- 数据库内核工程师
+estimated_read_time: 5min
+intent_queries:
+- 信创替代架构设计
+- 去IOE Oracle迁移OceanBase
+- 鲲鹏920飞腾ARM架构K8s
+- 等保三级国密算法
+- 双轨并行迁移方案
+trigger_keywords:
+- 信创
+- 国产化
+- 自主可控
+- 去IOE
+- 鲲鹏
+- 飞腾
+- OceanBase
+- 麒麟
+- 等保三级
+- 国密
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-26-service-mesh-microservices
+- domain-7-observability
+- domain-9-ai-ml
+related_topics:
+- topic-application-architecture/51-smart-manufacturing-mes
+- topic-application-architecture/14-smart-healthcare-architecture
+- topic-functions/09-data-security-privacy
+- topic-domain-1/05-compliance-auditing
+---
+
+
 # 信创替代架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

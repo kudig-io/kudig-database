@@ -1,4 +1,72 @@
+---
+title: 'Day 25: Flannel 网络'
+description: '# Day 25: Flannel 网络'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- flannel
+- ingress
+- networkpolicy
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 25: Flannel 网络 是什么'
+- '如何 Day 25: Flannel 网络'
+trigger_keywords:
+- Day
+- '25:'
+- Flannel
+- 网络
+- learn
+---
+
 # Day 25: Flannel 网络
+
+```yaml
+---
+title: Day 25: Flannel 网络
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Flannel CNI"
+  - "VxLAN"
+  - "Kubernetes网络"
+  - "Flannel配置"
+  - "Pod CIDR"
+trigger_keywords:
+  - "Flannel"
+  - "Flannel CNI"
+  - "VxLAN"
+  - "Overlay网络"
+  - "Pod CIDR"
+  - "网络插件"
+  - "Flannel配置"
+reading_level: intermediate
+audience:
+  - sre工程师
+  - ops工程师
+  - 运维工程师
+estimated_read_time: 45min
+related_domains:
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - domain-5-networking/02-cni-architecture-fundamentals
+id: WEEK4-DAY25
+topic: training
+type: hands-on
+tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: Flannel 网络模型与故障排查
 

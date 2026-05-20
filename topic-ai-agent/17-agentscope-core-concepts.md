@@ -1,3 +1,37 @@
+---
+title: AgentScope 核心概念与基础操作
+description: '**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 核心概念, State, Message, Agent, Model, Formatter, Memory,
+  ReActAgent, AgentBase, 自定义智能体'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- redis
+- mysql
+- postgresql
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 核心概念与基础操作 是什么
+- 如何 AgentScope 核心概念与基础操作
+trigger_keywords:
+- AgentScope
+- 核心概念与基础操作
+- ai
+- agent
+---
+
+
 # AgentScope 核心概念与基础操作
 
 > **文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 核心概念, State, Message, Agent, Model, Formatter, Memory, ReActAgent, AgentBase, 自定义智能体

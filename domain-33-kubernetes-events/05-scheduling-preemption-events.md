@@ -1,3 +1,37 @@
+---
+title: 05 - 调度与抢占事件
+description: '# 05 - 调度与抢占事件'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- coredns
+- docker
+- vpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 调度与抢占事件 是什么
+- 如何 调度与抢占事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 调度与抢占事件
+- kubernetes
+- events
+---
+
+
 # 05 - 调度与抢占事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

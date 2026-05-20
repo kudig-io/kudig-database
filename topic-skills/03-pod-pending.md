@@ -1,61 +1,71 @@
 ---
-skill_id: "SKILL-POD-002"
-skill_name: "Pod Pending 调度失败诊断与修复 / Pod Pending & Scheduling Failure Diagnosis"
-version: "1.0"
-category: "pod"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: SchedulingGates GA, PodDisruptionConditions GA"
-  - "v1.29+: DynamicResourceAllocation (alpha), PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: VolumeAttributesClass (beta)"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-30min"
-risk_level: "low"
-agent_execution_mode: "L2-semi-auto"
+title: Pod Pending 调度失败诊断与修复
+description: '# Pod Pending 调度失败诊断与修复'
+category: pod
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- scheduler
+- helm
+- hpa
+- pdb
+- statefulset
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 30min
+intent_queries:
+- Pod Pending 调度失败诊断与修复 是什么
+- 如何 Pod Pending 调度失败诊断与修复
 trigger_keywords:
-  - "Pending"
-  - "FailedScheduling"
-  - "Unschedulable"
-  - "调度失败"
-  - "Pod挂起"
-  - "无法调度"
-  - "资源不足"
-  - "Insufficient cpu"
-  - "Insufficient memory"
-  - "node(s) had taint"
-  - "no nodes available"
-trigger_events:
-  - "FailedScheduling"
-  - "Unschedulable"
-trigger_metrics:
-  - 'kube_pod_status_phase{phase="Pending"}'
-  - 'kube_pod_status_unschedulable'
-  - 'kube_pod_status_scheduled_time'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-fta_refs:
-  - "topic-fta/list/pod-fta.md"
-  - "topic-fta/list/scheduler-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-4-workloads-scheduling/"
-  - "domain-12-troubleshooting/"
+- Pending
+- FailedScheduling
+- Unschedulable
+- 调度失败
+- Pod挂起
+- 无法调度
+- 资源不足
+- Insufficient cpu
+- Insufficient memory
+- node(s) had taint
+- no nodes available
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-03
+  category: pod
+  subcategory: scheduling
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 25
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get events -A --field-selector reason=FailedScheduling --sort-by='.lastTimestamp' 检查调度失败事件"
+  critical_commands:
+    - "kubectl get pods -A --field-selector=status.phase=Pending -o wide"
+    - "kubectl describe pod <pending-pod> -n <ns> | grep -A 10 Events"
+    - "kubectl describe nodes | grep -A 5 'Allocated resources'"
+    - "kubectl get events -A --field-selector reason=FailedScheduling"
+  danger_operations:
+    - action: "kubectl delete pod <pod-name> -n <ns> --force"
+      risk: "强制删除会导致 Pod 重建，如果调度问题未解决会持续 Pending"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有 Pending Pod -->
 
 # Pod Pending 调度失败诊断与修复
 

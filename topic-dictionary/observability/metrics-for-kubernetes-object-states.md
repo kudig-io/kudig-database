@@ -1,3 +1,33 @@
+---
+title: Kubernetes 对象状态指标（kube-state-metrics）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- prometheus
+- grafana
+- statefulset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 对象状态指标（kube-state-metrics） 是什么
+- 如何 Kubernetes 对象状态指标（kube-state-metrics）
+trigger_keywords:
+- Kubernetes
+- 对象状态指标
+- kube-state-metrics
+- dictionary
+title_en: Metrics
+---
+
+
 # Kubernetes 对象状态指标（kube-state-metrics）
 
 ## 概述

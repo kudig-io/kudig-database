@@ -1,3 +1,39 @@
+---
+title: AgentScope 多 Agent 编排与工作流
+description: '**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub, Pipeline, 多 Agent, 消息编排, sequential_pipeline,
+  并发 Agent, Routing, Handoffs, Plan, 工作流'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- docker
+- redis
+- hpa
+- vpa
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 多 Agent 编排与工作流 是什么
+- 如何 AgentScope 多 Agent 编排与工作流
+trigger_keywords:
+- AgentScope
+- Agent
+- 编排与工作流
+- ai
+- agent
+---
+
+
 # AgentScope 多 Agent 编排与工作流
 
 > **文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub, Pipeline, 多 Agent, 消息编排, sequential_pipeline, 并发 Agent, Routing, Handoffs, Plan, 工作流

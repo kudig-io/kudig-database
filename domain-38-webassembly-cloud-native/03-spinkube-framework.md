@@ -1,3 +1,39 @@
+---
+title: SpinKube 框架实践
+description: '# SpinKube 框架实践'
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- apiserver
+- controller-manager
+- prometheus
+- grafana
+- helm
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- SpinKube 框架实践 是什么
+- 如何 SpinKube 框架实践
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- SpinKube
+- 框架实践
+- webassembly
+- cloud
+- native
+---
+
+
 # SpinKube 框架实践
 # SpinKube Framework Practice
 

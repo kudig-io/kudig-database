@@ -1,3 +1,24 @@
+---
+title: GitBook 三级目录构建脚本使用说明
+description: '## 概述'
+category: general
+tags:
+- k8s
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitBook 三级目录构建脚本使用说明 是什么
+- 如何 GitBook 三级目录构建脚本使用说明
+trigger_keywords:
+- GitBook
+- 三级目录构建脚本使用说明
+---
+
 # GitBook 三级目录构建脚本使用说明
 
 ## 概述

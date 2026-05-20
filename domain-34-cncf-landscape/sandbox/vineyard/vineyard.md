@@ -1,3 +1,34 @@
+---
+title: Vineyard (v6d)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- redis
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Vineyard (v6d) 是什么
+- 如何 Vineyard (v6d)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Vineyard
+- v6d
+- cncf
+- landscape
+---
+
 # Vineyard (v6d)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

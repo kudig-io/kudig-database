@@ -1,3 +1,32 @@
+---
+title: 插件体系与 Web Search
+description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Plugins, Web Search, Exa, Firecrawl, Parallel, File
+  Parser, Context Compression, Domain Filtering'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 插件体系与 Web Search 是什么
+- 如何 插件体系与 Web Search
+trigger_keywords:
+- 插件体系与
+- Web
+- Search
+- ai
+- coding
+---
+
 # 插件体系与 Web Search
 
 > **文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Plugins, Web Search, Exa, Firecrawl, Parallel, File Parser, Context Compression, Domain Filtering

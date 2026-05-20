@@ -1,3 +1,39 @@
+---
+title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
+description: '# 专有云 (Apsara Stack) - POP 平台运维 (ASOP)'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- gateway
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 专有云 (Apsara Stack) - POP 平台运维 (ASOP) 是什么
+- 如何 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- 专有云
+- Apsara
+- Stack
+- POP
+- 平台运维
+- ASOP
+- cloud
+- provider
+---
+
 # 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
 
 > **环境**: Apsara Stack 企业版/精简版 | **最后更新**: 2026-01

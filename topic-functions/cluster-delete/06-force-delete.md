@@ -1,3 +1,59 @@
+---
+title: 强制删除与异常场景处理
+category: cluster-delete
+tags:
+- force
+- reset
+- error
+- exception
+- node
+- unreachable
+- etcd
+- container
+- unmount
+last_updated: 2026-05-18
+description: 生产环境中集群删除常遇到各种异常场景：节点不可达、etcd 仲裁丢失、kubelet 无法停止、容器运行时异常等。本文档分析 kubeadm reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖
+  --force 标志、错误处理、跳过阶段、异常场景与处理方案。
+difficulty: advanced
+intent_queries:
+- kubeadm reset force flag error handling
+- kubernetes cluster deletion exception handling
+- etcd quorum lost cluster deletion
+- node unreachable cluster deletion
+- container runtime failure cluster reset
+trigger_keywords:
+- force reset
+- --force
+- best effort
+- skip-phases
+- unreachable node
+- API Server unavailable
+- etcd quorum lost
+- container runtime error
+- device busy
+- unmount failed
+- NFS mount stuck
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-2-installation
+- domain-3-control-plane
+related_topics:
+- cluster-delete
+- reset
+- cleanup
+- etcd-cleanup
+- ha-delete
+- troubleshooting
+domain_link: '[Installation](../domain-2-installation/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # 强制删除与异常场景处理
 
 ## 概述

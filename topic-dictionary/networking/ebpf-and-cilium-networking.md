@@ -1,3 +1,36 @@
+---
+title: eBPF 与 Cilium 网络
+description: '# eBPF 与 Cilium 网络'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- grafana
+- istio
+- envoy
+- cilium
+- calico
+- helm
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- eBPF 与 Cilium 网络 是什么
+- 如何 eBPF 与 Cilium 网络
+trigger_keywords:
+- eBPF
+- Cilium
+- 网络
+- dictionary
+title_en: Cilium
+---
+
+
 # eBPF 与 Cilium 网络
 
 ## 概述

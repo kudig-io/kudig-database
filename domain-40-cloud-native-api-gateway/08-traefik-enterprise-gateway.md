@@ -1,3 +1,41 @@
+---
+title: 08 - Traefik API 网关企业级实践
+description: '# 08 - Traefik API 网关企业级实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- prometheus
+- helm
+- docker
+- ceph
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Traefik API 网关企业级实践 是什么
+- 如何 Traefik API 网关企业级实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Traefik
+- API
+- 网关企业级实践
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 08 - Traefik API 网关企业级实践
 
 > **文档版本**: v1.0 | **适用版本**: Traefik v3.x, Kubernetes 1.24+ | **更新日期**: 2026-03-04 | **关键词**: Traefik, IngressRoute, Middleware, ACME, Let's Encrypt, Hub

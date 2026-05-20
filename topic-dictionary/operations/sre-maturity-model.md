@@ -1,3 +1,35 @@
+---
+title: 04 - SRE运维成熟度模型
+description: '# 04 - SRE运维成熟度模型'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- grafana
+- jaeger
+- helm
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- SRE运维成熟度模型 是什么
+- 如何 SRE运维成熟度模型
+trigger_keywords:
+- SRE运维成熟度模型
+- dictionary
+title_en: Sre Maturity Model
+---
+
+
+
 # 04 - SRE运维成熟度模型
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

@@ -1,3 +1,43 @@
+---
+title: 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
+description: '# 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- istio
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 多集群管理与联邦 (Multi-Cluster Management & Federation) 是什么
+- 如何 多集群管理与联邦 (Multi-Cluster Management & Federation)
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 多集群管理与联邦
+- Multi-Cluster
+- Management
+- Federation
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/architecture/multicluster](https://kubernetes.io/docs/concepts/architecture/multicluster/)

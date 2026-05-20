@@ -1,6 +1,65 @@
-# 15 - Ingress 故障排查 (Ingress Troubleshooting)
+---
+title: Ingress 故障排查
+description: '# 15 - Ingress 故障排查 (Ingress Troubleshooting)'
+category: troubleshooting
+tags:
+- ingress
+- nginx
+- traefik
+- tls
+- certificate
+- hostname
+- ssl
+- prometheus
+- statefulset
+- job
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Ingress 404
+- Ingress Controller 不工作
+- TLS 证书错误
+- 域名解析失败
+- ingress not found
+trigger_keywords:
+- Ingress
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/ingress-fta.md
+  label: '故障树: ingress'
+- type: skill
+  path: ../topic-skills/13-ingress-gateway-failure.md
+  label: '运维技能: 13-ingress-gateway-failure'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+# 15 - Ingress 故障排查 (Ingress Troubleshooting)
 
 ---
 

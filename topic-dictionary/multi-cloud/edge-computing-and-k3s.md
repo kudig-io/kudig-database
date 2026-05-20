@@ -1,3 +1,35 @@
+---
+title: 边缘计算与轻量级 Kubernetes
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- prometheus
+- grafana
+- cilium
+- flannel
+- coredns
+- flux
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘计算与轻量级 Kubernetes 是什么
+- 如何 边缘计算与轻量级 Kubernetes
+trigger_keywords:
+- 边缘计算与轻量级
+- Kubernetes
+- dictionary
+title_en: Edge Computing
+---
+
+
 # 边缘计算与轻量级 Kubernetes
 
 ## 概述

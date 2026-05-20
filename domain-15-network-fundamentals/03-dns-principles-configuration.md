@@ -1,3 +1,43 @@
+---
+title: DNS 原理与配置
+description: '# DNS 原理与配置'
+category: network-fundamentals
+tags:
+- network
+- tcp
+- ip
+- dns
+- prometheus
+- coredns
+- docker
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 网络工程师
+- SRE
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- DNS 原理与配置 是什么
+- 如何 DNS 原理与配置
+- Kubernetes 15 network fundamentals 最佳实践
+trigger_keywords:
+- DNS
+- 原理与配置
+- network
+- fundamentals
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/dns-fta.md
+  label: '故障树: dns'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # DNS 原理与配置
 
 > **适用版本**: DNS 协议 | **最后更新**: 2026-01

@@ -1,22 +1,81 @@
 ---
-fta_id: "FTA-SVC-031"
-title: "Service 异常故障树分析"
-component: "service"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-SVC-001"
-last_updated: "2026-05"
+title: Service 异常故障树分析
+description: '- **范围**：Endpoint/EndpointSlice、kube-proxy、网络策略、DNS、云 LB 依赖。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- service
+- endpoint
+- kube-proxy
+- dns
+- load-balancer
+- kubelet
+- controller-manager
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Service 异常故障树分析 是什么
+- 如何 Service 异常故障树分析
+- Service 异常故障树分析 根因分析
+- Service 异常故障树分析 故障树
+trigger_keywords:
+- Service
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, service, endpoint, kube-proxy, dns, load-balancer]
-related_skills:
-  - "../topic-skills/22-networking.md"
-knowledge_refs:
-  - "../domain-5-networking/01-network-architecture-overview.md"
-  - "../domain-12-troubleshooting/03-networking-cni-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-5-networking/06-service-concepts-types.md
+  label: '深度文档: 06-service-concepts-types'
+- type: skill
+  path: ../topic-skills/05-service-connectivity.md
+  label: '运维技能: 05-service-connectivity'
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md
+  label: '结构化排障: 05-service-mesh-istio-troubleshooting'
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md
+  label: '结构化排障: 03-service-ingress-troubleshooting'
+fta_metadata:
+  fta_id: FTA-SERVICE-001
+  top_event: Service 异常 (连接失败/负载不均/Endpoint 缺失)
+  top_event_id: TE-SERVICE-001
+  bottom_events_count: 22
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get endpoints <service-name> -n <ns> 显示为空或异常"
+    - "Pod 无法通过 Service 名称访问其他 Pod"
+    - "kubectl get service <name> -n <ns> 显示 ClusterIP 为 None"
+agent_notes:
+  decision_tree_entry: "kubectl get endpoints <service-name> -n <ns> 检查 Endpoint 状态"
+  critical_commands:
+    - "kubectl get endpoints <service-name> -n <ns> -o wide"
+    - "kubectl get pod -n <ns> -l app=<selector> -o wide"
+    - "kubectl describe service <name> -n <ns>"
+    - "kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50"
+  danger_operations:
+    - action: "kubectl delete service <name> -n <ns> --force"
+      risk: "强制删除 Service 会断开所有依赖该 Service 的流量"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get endpoints <service-name> -n <ns> -o jsonpath='{.subsets}' | jq 'length == 0 or . == null' 显示 Endpoint 为空 -->
 
 # Service 异常 FTA 树
 

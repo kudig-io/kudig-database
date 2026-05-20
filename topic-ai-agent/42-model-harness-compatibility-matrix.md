@@ -1,3 +1,37 @@
+---
+title: 模型 × Harness 兼容性矩阵（2025-2026）
+description: '**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility, Harness Support, Function Calling, Tool
+  Use, Structured Output, Agent Ready, GPT, Claude, Gemini, Qwen, DeepSeek, Llama'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- gpu
+- vllm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- 模型 × Harness 兼容性矩阵（2025-2026） 是什么
+- 如何 模型 × Harness 兼容性矩阵（2025-2026）
+trigger_keywords:
+- 模型
+- Harness
+- 兼容性矩阵
+- 2025-2026
+- ai
+- agent
+---
+
+
 # 模型 × Harness 兼容性矩阵（2025-2026）
 
 > **文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility, Harness Support, Function Calling, Tool Use, Structured Output, Agent Ready, GPT, Claude, Gemini, Qwen, DeepSeek, Llama

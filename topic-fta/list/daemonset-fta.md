@@ -1,20 +1,75 @@
 ---
-fta_id: "FTA-DAEMONSET-010"
-title: "DaemonSet 异常故障树分析"
-component: "daemonset"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-DAEMONSET-001"
-last_updated: "2026-05"
+title: DaemonSet 异常故障树分析
+description: NODE_OR --> NODE2[污点/容忍配置问题]
+category: fta
+tags:
+- fta
+- troubleshooting
+- daemonset
+- scheduling
+- node-affinity
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- DaemonSet 异常故障树分析 是什么
+- 如何 DaemonSet 异常故障树分析
+- DaemonSet 异常故障树分析 根因分析
+- DaemonSet 异常故障树分析 故障树
+trigger_keywords:
+- DaemonSet
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, daemonset, scheduling, node-affinity]
-related_skills: []
-knowledge_refs:
-  - "../domain-4-workloads/10-daemonset.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/04-daemonset-management.md
+  label: '深度文档: 04-daemonset-management'
+- type: structural
+  path: ../topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md
+  label: '结构化排障: 04-daemonset-troubleshooting'
+fta_metadata:
+  fta_id: FTA-DAEMONSET-001
+  top_event: DaemonSet 异常 (未覆盖节点/更新失败/启动错误)
+  top_event_id: TE-DAEMONSET-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get daemonset -A -o wide 显示Desired 未等于 NumberAvailable"
+    - "kubectl get nodes -o wide 显示部分节点未部署 DaemonSet Pod"
+    - "DaemonSet Pod 显示非 Running 状态"
+agent_notes:
+  decision_tree_entry: "kubectl get daemonset -A -o wide 检查各节点部署情况"
+  critical_commands:
+    - "kubectl get daemonset -A -o wide"
+    - "kubectl describe daemonset <name> -n <ns>"
+    - "kubectl logs -n <ns> -l name=<daemonset-name> --tail=50"
+    - "kubectl get nodes -o wide | grep <node-name>"
+  danger_operations:
+    - action: "kubectl delete pod -n <ns> -l name=<daemonset-name> --force"
+      risk: "强制删除会导致 DaemonSet 在该节点重建，可能短暂中断服务"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get daemonset -A -o jsonpath='{range .items[?(@.status.desiredNumberScheduled != @.status.numberAvailable)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示节点覆盖不全 -->
 
 # DaemonSet 异常 FTA 树
 

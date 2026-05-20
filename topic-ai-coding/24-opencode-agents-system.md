@@ -1,3 +1,32 @@
+---
+title: Agent 系统深度指南
+description: '# Agent 系统深度指南'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- helm
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Agent 系统深度指南 是什么
+- 如何 Agent 系统深度指南
+trigger_keywords:
+- Agent
+- 系统深度指南
+- ai
+- coding
+---
+
+
 # Agent 系统深度指南
 
 > **文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Agent, Build, Plan, Subagent, Custom Agent, Temperature, Max Steps, Markdown Agent

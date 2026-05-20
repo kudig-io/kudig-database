@@ -1,21 +1,76 @@
 ---
-fta_id: "FTA-WEBHOOK-036"
-title: "Admission Webhook 异常故障树分析"
-component: "webhook-admission"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-WEBHOOK-001"
-last_updated: "2026-05"
+title: Admission Webhook 异常故障树分析
+description: '- **范围**：Webhook 服务可用性、规则配置、证书与 TLS、回退策略、审计。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- webhook
+- admission
+- mutating
+- validating
+- timeout
+- apiserver
+- coredns
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Admission Webhook 异常故障树分析 是什么
+- 如何 Admission Webhook 异常故障树分析
+- Admission Webhook 异常故障树分析 根因分析
+- Admission Webhook 异常故障树分析 故障树
+trigger_keywords:
+- Admission
+- Webhook
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, webhook, admission, mutating, validating, timeout]
-related_skills:
-  - "../topic-skills/09-security-certificates.md"
-knowledge_refs:
-  - "../domain-7-security/01-certificate-management.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md
+  label: '结构化排障: 05-webhook-admission-troubleshooting'
+fta_metadata:
+  fta_id: FTA-WEBHOOK-001
+  top_event: Admission Webhook 异常 (拒绝/超时/策略冲突)
+  top_event_id: TE-WEBHOOK-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get events -A | grep -E 'Webhook\|MutatingWebhook\|ValidatingWebhook' 显示拒绝"
+    - "kubectl describe pod <name> -n <ns> | grep -E 'admission webhook|denied' 显示 webhook 拒绝"
+    - "kubectl run 测试 --image=nginx 失败显示 webhook 错误"
+agent_notes:
+  decision_tree_entry: "kubectl get mutatingwebhookconfiguration,validatingwebhookconfiguration -A 检查 webhook 配置"
+  critical_commands:
+    - "kubectl get mutatingwebhookconfiguration,validatingwebhookconfiguration -A"
+    - "kubectl describe mutatingwebhookconfiguration <name>"
+    - "kubectl get events -A | grep -E 'Webhook|admission'"
+    - "kubectl logs -n <ns> -l app=<webhook-name> --tail=50"
+  danger_operations:
+    - action: "kubectl delete mutatingwebhookconfiguration <name>"
+      risk: "删除 MutatingWebhook 会关闭变异钩子功能，可能影响 Pod 注入和修改"
+      requires_confirmation: true
+    - action: "kubectl delete validatingwebhookconfiguration <name>"
+      risk: "删除 ValidatingWebhook 会关闭验证钩子功能，可能允许非法配置通过"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'Webhook.*denied|admission.*rejected' 显示 Webhook 拒绝事件 -->
 
 # Admission Webhook 异常 FTA 树
 

@@ -1,3 +1,35 @@
+---
+title: Pod Priority and Preemption
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- pdb
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Priority and Preemption 是什么
+- 如何 Pod Priority and Preemption
+trigger_keywords:
+- Pod
+- Priority
+- and
+- Preemption
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Priority and Preemption
 
 ## 概述

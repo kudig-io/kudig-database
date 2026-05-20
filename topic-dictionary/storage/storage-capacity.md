@@ -1,3 +1,30 @@
+---
+title: Storage Capacity（存储容量）
+description: '# Storage Capacity（存储容量）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Storage Capacity（存储容量） 是什么
+- 如何 Storage Capacity（存储容量）
+trigger_keywords:
+- Storage
+- Capacity
+- 存储容量
+- dictionary
+title_en: Storage Capacity
+---
+
+
 # Storage Capacity（存储容量）
 
 ## 概述

@@ -1,3 +1,43 @@
+---
+title: Kubernetes Gateway API 与现代流量管理实践
+description: '# Kubernetes Gateway API 与现代流量管理实践'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- istio
+- envoy
+- cilium
+- argocd
+- flux
+- redis
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 10min
+intent_queries:
+- Kubernetes Gateway API 与现代流量管理实践 是什么
+- 如何 Kubernetes Gateway API 与现代流量管理实践
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- Gateway
+- API
+- 与现代流量管理实践
+- papers
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/gateway-api-fta.md
+  label: '故障树: gateway-api'
+---
+
+
 # Kubernetes Gateway API 与现代流量管理实践
 # Kubernetes Gateway API & Modern Traffic Management
 

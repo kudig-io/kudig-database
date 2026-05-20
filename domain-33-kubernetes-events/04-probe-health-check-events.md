@@ -1,3 +1,37 @@
+---
+title: 04 - 探针与健康检查事件
+description: '## 概述'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- prometheus
+- containerd
+- cri-o
+- redis
+- mysql
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 探针与健康检查事件 是什么
+- 如何 探针与健康检查事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 探针与健康检查事件
+- kubernetes
+- events
+---
+
+
 # 04 - 探针与健康检查事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

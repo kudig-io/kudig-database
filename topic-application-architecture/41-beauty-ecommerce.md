@@ -1,3 +1,51 @@
+---
+title: 美妆电商架构设计
+description: '# 美妆电商架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- hpa
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 电商架构师
+- 云原生工程师
+- SRE
+- 解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 阿里云美妆电商解决方案 直播带货 K8s部署
+- 美妆电商 AR试妆 Kubernetes 架构
+- 跨境美妆保税仓 电商架构设计
+- 个性化推荐 美妆电商 技术架构
+- 区块链溯源 化妆品防伪 架构
+trigger_keywords:
+- 美妆电商
+- 种草
+- 直播带货
+- AR试妆
+- 个性化推荐
+- 正品溯源
+- 跨境保税
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+related_topics:
+- 01-ecommerce-architecture
+- 31-instant-retail
+- 55-crossborder-dtc
+---
+
+
 # 美妆电商架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

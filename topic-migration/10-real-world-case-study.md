@@ -1,3 +1,35 @@
+---
+title: 10 - 生产迁移实战案例
+description: '| **团队规模** | 后端 15 人、运维 3 人、DBA 1 人 |'
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- prometheus
+- grafana
+- calico
+- argocd
+- docker
+- harbor
+- ceph
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 生产迁移实战案例 是什么
+- 如何 生产迁移实战案例
+trigger_keywords:
+- 生产迁移实战案例
+- migration
+---
+
+
 # 10 - 生产迁移实战案例
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: 案例复盘, 50+ 微服务, 零停机, 灰度切流, 生产实战

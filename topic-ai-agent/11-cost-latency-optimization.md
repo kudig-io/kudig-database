@@ -1,3 +1,36 @@
+---
+title: 成本与延迟优化策略
+description: '# 成本与延迟优化策略'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 成本与延迟优化策略 是什么
+- 如何 成本与延迟优化策略
+trigger_keywords:
+- 成本与延迟优化策略
+- ai
+- agent
+---
+
+
 # 成本与延迟优化策略
 
 > **文档类型**: 工程优化专题 | **最后更新**: 2026-03 | **关键词**: Token 优化, 语义缓存, 模型路由, 成本控制, 延迟优化, KV Cache, 批处理, LLM 成本, vLLM 优化

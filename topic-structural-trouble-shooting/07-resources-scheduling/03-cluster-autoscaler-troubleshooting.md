@@ -1,3 +1,38 @@
+---
+title: Cluster Autoscaler 节点自动扩缩容故障排查指南
+description: '# Cluster Autoscaler 节点自动扩缩容故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- pdb
+- operator
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Cluster Autoscaler 节点自动扩缩容故障排查指南 是什么
+- 如何 Cluster Autoscaler 节点自动扩缩容故障排查指南
+- Cluster Autoscaler 节点自动扩缩容故障排查指南 故障排查
+- Cluster Autoscaler 节点自动扩缩容故障排查指南 排障步骤
+trigger_keywords:
+- Cluster
+- Autoscaler
+- 节点自动扩缩容故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # Cluster Autoscaler 节点自动扩缩容故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级

@@ -1,3 +1,43 @@
+---
+title: Elastic Stack企业级日志分析深度实践
+description: '# Elastic Stack企业级日志分析深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- docker
+- redis
+- kafka
+- elasticsearch
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Elastic Stack企业级日志分析深度实践 是什么
+- 如何 Elastic Stack企业级日志分析深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Elastic
+- Stack企业级日志分析深度实践
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Elastic Stack企业级日志分析深度实践
 
 > **作者**: 企业级日志分析架构专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

@@ -1,3 +1,55 @@
+---
+title: 云厂商集群删除方案对比
+category: cluster-delete
+tags:
+- cloud-provider
+- eks
+- aks
+- gke
+- ack
+- tke
+- cluster-deletion
+- comparison
+last_updated: 2026-05-18
+description: 对比分析 AWS EKS、Azure AKS、GCP GKE、阿里云 ACK、腾讯云 TKE 以及 kubeadm 自建集群的删除/销毁方案差异，涵盖删除命令、控制面清理、etcd 处理和需要手动清理的资源。
+difficulty: intermediate
+intent_queries:
+- eksctl delete cluster vs kubeadm reset
+- gcp gke cluster deletion cleanup
+- aliyun ack cluster delete vs manual cleanup
+- cloud provider managed kubernetes deletion comparison
+- kubernetes cluster teardown cloud vs self-managed
+trigger_keywords:
+- eksctl delete cluster
+- az aks delete
+- gcloud container clusters delete
+- aliyun cs DELETE cluster
+- tencentcloud delete-cluster
+- kubeadm reset comparison
+- cloud provider managed etcd
+- EKS AKS GKE deletion
+- ACK TKE cluster delete
+- hybrid cluster deletion
+reading_level: intermediate
+audience:
+- platform-engineer
+- devops-engineer
+- cloud-engineer
+estimated_read_time: 5min
+related_domains:
+- domain-1-quick-start
+- domain-2-installation
+related_topics:
+- cluster-delete
+- reset-phase-commands
+- cleanup
+- security-delete
+- network-cleanup
+domain_link: '[Installation](../domain-2-installation/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # 云厂商集群删除方案对比
 
 ## 概述
@@ -36,6 +88,8 @@
 │  ⚠️ 每一步都需要人工介入，容易遗漏                               │
 └──────────────────────────────────────────────────────────────────┘
 ```
+
+### 混合场景：云托管 + kubeadm Worker 节点
 
 ---
 
@@ -334,3 +388,23 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 - [gcloud container clusters delete](https://cloud.google.com/sdk/gcloud/reference/container/clusters/delete)
 - [ACK 集群删除](https://www.alibabacloud.com/help/zh/ack/)
 - [TKE 集群删除](https://cloud.tencent.com/document/product/457/)
+
+### 云厂商删除命令汇总
+
+| 云厂商 | 命令 | 文档链接 |
+|--------|------|----------|
+| AWS EKS | `eksctl delete cluster --name <name> --region <region>` | [eksctl 文档](https://eksctl.io/usage/deleting-clusters/) |
+| Azure AKS | `az aks delete --name <name> --resource-group <rg> --yes` | [Azure 文档](https://learn.microsoft.com/en-us/cli/azure/aks#az-aks-delete) |
+| GCP GKE | `gcloud container clusters delete <name> --zone=<zone> --quiet` | [GCP 文档](https://cloud.google.com/sdk/gcloud/reference/container/clusters/delete) |
+| 阿里云 ACK | `aliyun cs DELETE /clusters/<cluster-id>` | [ACK 文档](https://help.aliyun.com/zh/ack/ack-enterprise-user-guide/delete-a-cluster-1) |
+| 腾讯云 TKE | `tencentcloud cli cvm DeleteCluster --cluster-id <id>` | [TKE 文档](https://cloud.tencent.com/document/product/457) |
+
+### 删除失败常见原因与处理
+
+| 场景 | 原因 | 处理 |
+|------|------|------|
+| 资源保护 | 云资源启用删除保护 | 禁用保护后重试 |
+| 依赖资源 | LB 仍关联后端 | 先删除 LB |
+| 权限不足 | IAM 权限不足 | 提升权限后重试 |
+| 异步删除 | 删除操作异步执行 | 等待几分钟后重试 |
+| 账单未结清 | 仍有未结清账单 | 结清账单后重试 |

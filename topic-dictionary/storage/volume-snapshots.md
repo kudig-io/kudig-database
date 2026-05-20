@@ -1,3 +1,31 @@
+---
+title: Volume Snapshots（卷快照）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- crd
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Volume Snapshots（卷快照） 是什么
+- 如何 Volume Snapshots（卷快照）
+trigger_keywords:
+- Volume
+- Snapshots
+- 卷快照
+- dictionary
+title_en: Volume Snapshots
+---
+
+
 # Volume Snapshots（卷快照）
 
 ## 概述

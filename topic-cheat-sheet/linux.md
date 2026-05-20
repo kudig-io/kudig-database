@@ -1,22 +1,44 @@
 ---
-title: "Linux 生产环境速查卡"
-description: "涵盖 Linux 生产环境 90% 以上常用命令，支持系统运维和故障排查"
+title: Linux 生产环境速查卡
+description: 涵盖 Linux 生产环境 90% 以上常用命令，支持系统运维和故障排查
 category: cheatsheet
-tags: [linux, bash, system-admin, cheatsheet, quick-reference, shell]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- linux
+- bash
+- system-admin
+- cheatsheet
+- quick-reference
+- shell
+- kubelet
+- prometheus
+- grafana
+- containerd
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Linux 生产环境速查卡 是什么
+- 如何 Linux 生产环境速查卡
+trigger_keywords:
+- Linux
+- 生产环境速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "beginner"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-14-linux-system/"
-    desc: "Linux 系统深度文档"
-  - path: "../topic-cheat-sheet/networking.md"
-    desc: "网络诊断速查卡"
-  - path: "../topic-cheat-sheet/tls-pki.md"
-    desc: "TLS/PKI 证书速查卡"
+- path: ../domain-14-linux-system/
+  desc: Linux 系统深度文档
+- path: ../topic-cheat-sheet/networking.md
+  desc: 网络诊断速查卡
+- path: ../topic-cheat-sheet/tls-pki.md
+  desc: TLS/PKI 证书速查卡
 ---
+
 
 # Linux 生产环境速查卡
 

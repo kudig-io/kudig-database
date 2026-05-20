@@ -1,3 +1,42 @@
+---
+title: Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+description: '# Golden Paths 黄金路径设计 (Golden Paths Design Patterns)'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- jaeger
+- helm
+- argocd
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns) 是什么
+- 如何 Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Golden
+- Paths
+- 黄金路径设计
+- Golden
+- Paths
+- Design
+- Patterns
+- platform
+---
+
+
 # Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
 
 ## 概述 (Overview)

@@ -1,3 +1,41 @@
+---
+title: Pulumi Enterprise Infrastructure as Code Platform
+description: '## 概述 (Overview)'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- ingress
+- gateway
+- operator
+- rag
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Pulumi Enterprise Infrastructure as Code Platform 是什么
+- 如何 Pulumi Enterprise Infrastructure as Code Platform
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Pulumi
+- Enterprise
+- Infrastructure
+- as
+- Code
+- Platform
+- infrastructure
+- as
+---
+
+
 # Pulumi Enterprise Infrastructure as Code Platform
 
 ## 概述 (Overview)

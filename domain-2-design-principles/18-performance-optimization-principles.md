@@ -1,3 +1,43 @@
+---
+title: 18 - 性能优化原理
+description: '# 18 - 性能优化原理'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- scheduler
+- prometheus
+- istio
+- cilium
+- flannel
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 性能优化原理 是什么
+- 如何 性能优化原理
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 性能优化原理
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 18 - 性能优化原理
 
 ## 资深视点：性能优化是关于“平衡”的艺术

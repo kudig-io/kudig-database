@@ -1,3 +1,37 @@
+---
+title: 内部开发者平台设计原则
+description: '# 内部开发者平台设计原则'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- jaeger
+- istio
+- cilium
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 内部开发者平台设计原则 是什么
+- 如何 内部开发者平台设计原则
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- 内部开发者平台设计原则
+- platform
+- engineering
+---
+
+
 # 内部开发者平台设计原则
 # Internal Developer Platform Design Principles
 

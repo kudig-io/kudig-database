@@ -1,3 +1,52 @@
+---
+title: 物联网 IoT 平台架构设计
+description: '# 物联网 (IoT) 平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- flux
+- kafka
+- statefulset
+- gateway
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- IoT架构师
+- 嵌入式工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- IoT 平台 Kubernetes 设备接入架构
+- MQTT Broker EMQX 集群部署
+- 边缘计算 KubeEdge 设备管理
+- 时序数据库 TDengine 物联网数据
+- 数字孪生物联网平台
+trigger_keywords:
+- 物联网平台
+- IoT
+- MQTT
+- EMQX
+- 设备接入
+- 边缘计算
+- KubeEdge
+- OpenYurt
+- 时序数据库
+- OTA升级
+- 设备影子
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-iot-platform-architecture
+- topic-edge-computing
+---
+
+
 # 物联网 (IoT) 平台 Kubernetes 生产架构设计
 
 > **适用场景**: 智能家居 / 工业物联网 / 车联网 / 智慧城市 / 农业监测 / 能源管理  

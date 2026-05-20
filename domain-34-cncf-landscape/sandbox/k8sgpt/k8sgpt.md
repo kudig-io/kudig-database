@@ -1,3 +1,37 @@
+---
+title: K8sGPT
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- helm
+- opa
+- statefulset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- K8sGPT 是什么
+- 如何 K8sGPT
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- K8sGPT
+- cncf
+- landscape
+---
+
+
 # K8sGPT
 
 > **成熟度**: Sandbox | **加入时间**: 2023-04 | **最后更新**: 2026-03

@@ -1,3 +1,38 @@
+---
+title: Operator Framework
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- helm
+- docker
+- rbac
+- crd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Operator Framework 是什么
+- 如何 Operator Framework
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Operator
+- Framework
+- cncf
+- landscape
+---
+
+
 # Operator Framework
 
 > **成熟度**: Incubating | **加入时间**: 2019-07 | **最后更新**: 2026-03

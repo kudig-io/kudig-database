@@ -1,22 +1,78 @@
 ---
-fta_id: "FTA-INGRESS-019"
-title: "Ingress 异常故障树分析"
-component: "ingress"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-INGRESS-001"
-last_updated: "2026-05"
+title: Ingress 异常故障树分析
+description: '- **范围**：Ingress Controller、规则配置、TLS 证书、后端服务、网络与 DNS。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- ingress
+- nginx
+- controller
+- tls
+- calico
+- hpa
+- gateway
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Ingress 异常故障树分析 是什么
+- 如何 Ingress 异常故障树分析
+- Ingress 异常故障树分析 根因分析
+- Ingress 异常故障树分析 故障树
+trigger_keywords:
+- Ingress
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, ingress, nginx, controller, tls]
-related_skills:
-  - "../topic-skills/22-networking.md"
-knowledge_refs:
-  - "../domain-5-networking/06-ingress-load-balancer.md"
-  - "../domain-12-troubleshooting/03-networking-cni-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-5-networking/22-ingress-tls-certificate.md
+  label: '深度文档: 22-ingress-tls-certificate'
+- type: skill
+  path: ../topic-skills/13-ingress-gateway-failure.md
+  label: '运维技能: 13-ingress-gateway-failure'
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md
+  label: '结构化排障: 03-service-ingress-troubleshooting'
+fta_metadata:
+  fta_id: FTA-INGRESS-001
+  top_event: Ingress 异常 (请求失败/证书异常/路由错误)
+  top_event_id: TE-INGRESS-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get ingress -A 显示异常或配置错误"
+    - "外部请求返回 404/502/503"
+    - "kubectl get pods -n ingress-nginx -l app=ingress-nginx 显示异常"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n ingress-nginx -l app=ingress-nginx 检查 Ingress Controller 状态"
+  critical_commands:
+    - "kubectl get pods -n ingress-nginx -l app=ingress-nginx -o wide"
+    - "kubectl describe ingress <name> -n <ns>"
+    - "kubectl logs -n ingress-nginx -l app=ingress-nginx --tail=100"
+    - "kubectl get events -A --field-selector involvedObject.kind=Ingress --sort-by='.lastTimestamp'"
+  danger_operations:
+    - action: "kubectl delete pod -n ingress-nginx -l app=ingress-nginx --force"
+      risk: "强制删除会导致 Ingress Controller 重启，可能短暂中断入口流量"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\"Running\")]} {.metadata.name}{\"\n\"}{end}' 显示 Ingress Controller 异常 -->
 
 # Ingress 异常 FTA 树
 

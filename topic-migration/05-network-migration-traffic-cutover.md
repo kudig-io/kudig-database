@@ -1,3 +1,35 @@
+---
+title: 05 - 网络迁移与流量切换
+description: '# 05 - 网络迁移与流量切换'
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- grafana
+- cilium
+- flannel
+- calico
+- helm
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 网络迁移与流量切换 是什么
+- 如何 网络迁移与流量切换
+trigger_keywords:
+- 网络迁移与流量切换
+- migration
+---
+
+
 # 05 - 网络迁移与流量切换
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: CNI, Terway, Ingress, DNS, SLB, NLB, ALB, 灰度切流, NetworkPolicy

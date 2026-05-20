@@ -1,3 +1,37 @@
+---
+title: 03 - 镜像拉取事件
+description: '**本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和 Docker Hub 限流等生产环境高频问题。**'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- kubelet
+- scheduler
+- prometheus
+- coredns
+- helm
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- 镜像拉取事件 是什么
+- 如何 镜像拉取事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 镜像拉取事件
+- kubernetes
+- events
+---
+
+
 # 03 - 镜像拉取事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

@@ -1,6 +1,57 @@
+---
+title: 保险科技架构设计
+description: '# 保险科技架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- mysql
+- hpa
+- operator
+- gpu
+- nvidia
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 保险科技架构师
+- 保险系统开发者
+- 阿里云解决方案架构师
+- 金融科技工程师
+estimated_read_time: 5min
+intent_queries:
+- 保险科技系统 Kubernetes 部署架构
+- 智能核保引擎 AI 模型设计
+- 保险反欺诈图计算架构
+- 理赔自动化 RPA AI 定损
+- 偿二代 IFRS17 合规架构
+trigger_keywords:
+- 保险科技
+- 智能核保
+- AI理赔
+- 反欺诈
+- 图计算
+- 规则引擎
+- 精算定价
+- 偿二代
+- IFRS17
+- 理赔自动化
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-observability-comprehensive
+- domain-9-security-compliance
+- domain-7-ai-ml-platform
+related_topics:
+- topic-application-architecture/06-fintech-architecture
+- topic-application-architecture/82-legaltech
+---
+
+
 # 保险科技架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-05-18
 > **作者**: 阿里云解决方案架构师 | **标签**: `#保险科技` `#智能核保` `#理赔` `#精算` `#阿里云`
 
 ---

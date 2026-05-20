@@ -1,3 +1,36 @@
+---
+title: OpenClaw TOOLS.md 机制深度解析
+description: '# OpenClaw TOOLS.md 机制深度解析'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- prometheus
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- OpenClaw TOOLS.md 机制深度解析 是什么
+- 如何 OpenClaw TOOLS.md 机制深度解析
+trigger_keywords:
+- OpenClaw
+- TOOLS.md
+- 机制深度解析
+- ai
+- agent
+---
+
+
 # OpenClaw TOOLS.md 机制深度解析
 
 > **文档类型**: 前沿工程专题 | **最后更新**: 2026-04 | **关键词**: OpenClaw, TOOLS.md, 工具授权, Tools 层, 四级权限, 安全沙箱, MCP 集成, kubectl

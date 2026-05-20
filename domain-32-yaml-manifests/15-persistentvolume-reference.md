@@ -1,3 +1,39 @@
+---
+title: 15 - PersistentVolume YAML 配置参考
+description: '# 15 - PersistentVolume YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- kubelet
+- controller-manager
+- ceph
+- redis
+- mysql
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- PersistentVolume YAML 配置参考 是什么
+- 如何 PersistentVolume YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- PersistentVolume
+- YAML
+- 配置参考
+- yaml
+- manifests
+---
+
+
 # 15 - PersistentVolume YAML 配置参考
 
 > **文档版本**: 2026-02  

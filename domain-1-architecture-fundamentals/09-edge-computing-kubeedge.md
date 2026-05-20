@@ -1,3 +1,51 @@
+---
+title: 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+description: '# 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- controller-manager
+- flannel
+- minio
+- daemonset
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘计算集成架构 (KubeEdge/OpenYurt) 是什么
+- 如何 边缘计算集成架构 (KubeEdge/OpenYurt)
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- 边缘计算集成架构
+- KubeEdge
+- OpenYurt
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [openyurt.io](https://openyurt.io/)

@@ -1,3 +1,33 @@
+---
+title: Leases（租约）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Leases（租约） 是什么
+- 如何 Leases（租约）
+trigger_keywords:
+- Leases
+- 租约
+- dictionary
+title_en: Leases
+---
+
+
 # Leases（租约）
 
 ## 概述

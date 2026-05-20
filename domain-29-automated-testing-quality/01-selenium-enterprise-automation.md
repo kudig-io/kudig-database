@@ -1,3 +1,39 @@
+---
+title: Selenium 企业级自动化测试平台
+description: '## 概述 (Overview)'
+category: automated-testing-quality
+tags:
+- k8s
+- testing
+- quality
+- automation
+- prometheus
+- grafana
+- docker
+- job
+- gateway
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- QA 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Selenium 企业级自动化测试平台 是什么
+- 如何 Selenium 企业级自动化测试平台
+- Kubernetes 29 automated testing quality 最佳实践
+trigger_keywords:
+- Selenium
+- 企业级自动化测试平台
+- automated
+- testing
+- quality
+---
+
+
 # Selenium 企业级自动化测试平台
 
 ## 概述 (Overview)

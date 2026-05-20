@@ -1,3 +1,36 @@
+---
+title: 电信云与 5G 多接入边缘计算（MEC）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- cilium
+- networkpolicy
+- nvidia
+- ebpf
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 电信云与 5G 多接入边缘计算（MEC） 是什么
+- 如何 电信云与 5G 多接入边缘计算（MEC）
+trigger_keywords:
+- 电信云与
+- 5G
+- 多接入边缘计算
+- MEC
+- dictionary
+title_en: Edge Computing
+---
+
+
 # 电信云与 5G 多接入边缘计算（MEC）
 
 ## 概述

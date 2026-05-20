@@ -1,3 +1,37 @@
+---
+title: 企业级实战案例
+description: '**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent, AIOps, 智能客服, 代码审查 Agent, 企业落地, ROI, 生产指标, 最佳实践,
+  Agent 案例'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- prometheus
+- redis
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 企业级实战案例 是什么
+- 如何 企业级实战案例
+trigger_keywords:
+- 企业级实战案例
+- ai
+- agent
+---
+
+
 # 企业级实战案例
 
 > **文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent, AIOps, 智能客服, 代码审查 Agent, 企业落地, ROI, 生产指标, 最佳实践, Agent 案例

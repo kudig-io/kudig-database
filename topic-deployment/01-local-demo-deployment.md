@@ -1,3 +1,36 @@
+---
+title: 01 - 本机单机 Demo 部署
+description: '# 01 - 本机单机 Demo 部署'
+category: deployment
+tags:
+- k8s
+- deployment
+- rolling-update
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- coredns
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 本机单机 Demo 部署 是什么
+- 如何 本机单机 Demo 部署
+trigger_keywords:
+- 本机单机
+- Demo
+- 部署
+- deployment
+---
+
+
 # 01 - 本机单机 Demo 部署
 
 > **适用场景**: 初学者快速体验 | **预计时间**: 30-60 分钟 | **复杂度**: ⭐  

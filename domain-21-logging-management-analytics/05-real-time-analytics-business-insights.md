@@ -1,3 +1,38 @@
+---
+title: 企业级实时日志分析与业务洞察深度实践
+description: '# 企业级实时日志分析与业务洞察深度实践'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- prometheus
+- flux
+- redis
+- kafka
+- elasticsearch
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业级实时日志分析与业务洞察深度实践 是什么
+- 如何 企业级实时日志分析与业务洞察深度实践
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- 企业级实时日志分析与业务洞察深度实践
+- logging
+- management
+- analytics
+---
+
+
 # 企业级实时日志分析与业务洞察深度实践
 
 > **作者**: 企业级实时分析架构专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

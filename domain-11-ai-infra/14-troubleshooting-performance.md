@@ -1,3 +1,52 @@
+---
+title: AI平台故障排查与性能优化
+description: '# AI平台故障排查与性能优化'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- kubelet
+- prometheus
+- jaeger
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AI平台故障排查与性能优化 是什么
+- 如何 AI平台故障排查与性能优化
+- Kubernetes 11 ai infra 最佳实践
+- AI平台故障排查与性能优化 故障排查
+- AI平台故障排查与性能优化 排障步骤
+trigger_keywords:
+- AI平台故障排查与性能优化
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: skill
+  path: ../topic-skills/17-performance-bottleneck.md
+  label: '运维技能: 17-performance-bottleneck'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # AI平台故障排查与性能优化
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Troubleshooting](https://kubernetes.io/docs/tasks/debug/) | [NVIDIA DCGM](https://developer.nvidia.com/dcgm)

@@ -1,3 +1,62 @@
+---
+title: 30 - etcd运维操作
+description: '# 30 - etcd运维操作'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- job
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- etcd运维操作 是什么
+- 如何 etcd运维操作
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- etcd运维操作
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: fta
+  path: ../topic-fta/list/etcd-fta.md
+  label: '故障树: etcd'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # 30 - etcd运维操作
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [etcd.io/docs](https://etcd.io/docs/)

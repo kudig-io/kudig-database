@@ -1,3 +1,34 @@
+---
+title: Server 模式与 HTTP API
+description: '**文档类型**: 平台集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Server, HTTP API, OpenAPI 3.1, SDK, SSE, Headless,
+  Stainless, Hono'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Server 模式与 HTTP API 是什么
+- 如何 Server 模式与 HTTP API
+trigger_keywords:
+- Server
+- 模式与
+- HTTP
+- API
+- ai
+- coding
+---
+
 # Server 模式与 HTTP API
 
 > **文档类型**: 平台集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Server, HTTP API, OpenAPI 3.1, SDK, SSE, Headless, Stainless, Hono

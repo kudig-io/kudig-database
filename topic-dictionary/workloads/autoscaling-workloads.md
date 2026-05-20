@@ -1,3 +1,35 @@
+---
+title: Autoscaling Workloads
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- coredns
+- hpa
+- vpa
+- statefulset
+- crd
+- operator
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Autoscaling Workloads 是什么
+- 如何 Autoscaling Workloads
+trigger_keywords:
+- Autoscaling
+- Workloads
+- dictionary
+title_en: Autoscaling Workloads
+---
+
+
 # Autoscaling Workloads
 
 ## 概述

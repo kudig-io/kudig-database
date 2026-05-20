@@ -1,3 +1,37 @@
+---
+title: longhorn v1.3 Release Notes
+description: longhorn v1.3 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- kubelet
+- scheduler
+- helm
+- docker
+- pdb
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- longhorn v1.3 Release Notes 是什么
+- 如何 longhorn v1.3 Release Notes
+trigger_keywords:
+- longhorn
+- v1.3
+- Release
+- Notes
+- release
+- notes
+---
+
+
 # longhorn v1.3 Release Notes
 
 Source: [v1.3.3](https://github.com/longhorn/longhorn/releases/tag/v1.3.3)

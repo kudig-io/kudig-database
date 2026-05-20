@@ -1,3 +1,36 @@
+---
+title: 02 - ACK 目标集群设计与搭建
+description: '# 02 - ACK 目标集群设计与搭建'
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- etcd
+- prometheus
+- grafana
+- cilium
+- flannel
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- ACK 目标集群设计与搭建 是什么
+- 如何 ACK 目标集群设计与搭建
+trigger_keywords:
+- ACK
+- 目标集群设计与搭建
+- migration
+---
+
+
 # 02 - ACK 目标集群设计与搭建
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: ACK, 集群设计, VPC, Terway, 节点池, Addon

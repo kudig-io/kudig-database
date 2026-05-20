@@ -1,3 +1,41 @@
+---
+title: Quay Container Registry 企业级镜像管理深度实践
+description: '# Quay Container Registry 企业级镜像管理深度实践'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- prometheus
+- docker
+- ceph
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Quay Container Registry 企业级镜像管理深度实践 是什么
+- 如何 Quay Container Registry 企业级镜像管理深度实践
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- Quay
+- Container
+- Registry
+- 企业级镜像管理深度实践
+- container
+- image
+- management
+---
+
+
 # Quay Container Registry 企业级镜像管理深度实践
 
 ## 概述 (Overview)

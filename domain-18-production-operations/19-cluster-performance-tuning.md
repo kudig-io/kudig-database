@@ -1,3 +1,37 @@
+---
+title: 19-集群性能调优
+description: '## 📋 概述'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 集群性能调优 是什么
+- 如何 集群性能调优
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 集群性能调优
+- production
+- operations
+---
+
+
 # 19-集群性能调优
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

@@ -1,3 +1,42 @@
+---
+title: Service Mesh (Istio) 深度排查与性能调优指南
+description: '# Service Mesh (Istio) 深度排查与性能调优指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- prometheus
+- jaeger
+- istio
+- envoy
+- helm
+- hpa
+- pdb
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Service Mesh (Istio) 深度排查与性能调优指南 是什么
+- 如何 Service Mesh (Istio) 深度排查与性能调优指南
+- Service Mesh (Istio) 深度排查与性能调优指南 故障排查
+- Service Mesh (Istio) 深度排查与性能调优指南 排障步骤
+trigger_keywords:
+- Service
+- Mesh
+- Istio
+- 深度排查与性能调优指南
+- structural
+- trouble
+- shooting
+---
+
+
 # Service Mesh (Istio) 深度排查与性能调优指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, Istio v1.18 - v1.24 | **最后更新**: 2026-02 | **难度**: 资深专家级
@@ -1429,18 +1468,953 @@ echo -e "\n=== Check Complete ==="
 
 ---
 
-**Service Mesh 文档补强完成统计**
+## 6. Terway + ASM (阿里云 ACK) 交互故障场景
 
-- **原始行数**: 149 行
-- **补充内容**: ~1400 行
-- **最终行数**: ~1550 行
-- **新增章节**:
-  - Istio 控制平面深度解析 (Istiod 架构、xDS 流程伪代码)
-  - xDS 配置示例 (LDS/RDS/CDS/EDS 完整示例)
-  - mTLS 证书体系 (SPIFFE Identity、证书轮换、握手过程)
-  - Envoy Sidecar 生命周期 (注入机制、iptables 劫持、启动顺序)
-  - 专家级故障矩阵 (按控制平面/数据平面/Gateway/性能分类)
-  - 深度排查脚本 (健康检查、配置调试、流量追踪)
-  - 大规模集群性能优化 (xDS 推送、Envoy 调优、mTLS 优化)
-  - 生产案例 (Istio 升级导致 OOM)
-  - 完整巡检清单 (日常自动化 + 每周手动)
+> **适用集群**: 阿里云 ACK + Terway 网络模式 + ASM (Alibaba Service Mesh)
+> **难度**: 高级
+> **最后更新**: 2026-05
+
+### 6.1 Terway ENI 模式与 Istio Sidecar 流量劫持异常
+
+#### 问题现象
+
+| 现象 | 报错信息 | 影响 |
+|------|----------|------|
+| Pod 内流量全部走 istio-proxy 但延迟极高 | Envoy 内部 `Connection reset` | 业务请求超时 |
+| Terway ENI 模式下 sidecar 无法劫持流量 | `iptables: No chain/target` | 服务网格功能失效 |
+| Pod IP 无法被 Envoy 健康检查 | `health check failed` | Endpoints 被剔除 |
+
+#### 根因分析
+
+Terway ENI 模式使用阿里云弹性网卡（ENI）直接挂载到 Pod，网络流量不经过节点主网卡。当 Istio 的 iptables 规则尝试劫持流量时：
+- ENI 模式的 veth pair 命名方式与标准 CNI 不同
+- `istio-init` 容器初始化脚本无法找到正确的网卡接口
+- 流量被直接路由到 ENI，绕过了 Envoy sidecar
+
+#### 排查步骤
+
+```bash
+# Step 1: 确认 Pod 使用 Terway ENI 模式
+kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/eni-mode}'
+
+# Step 2: 检查 Pod 的网络接口
+kubectl exec -it {pod-name} -n {namespace} -c istio-proxy -- ip addr
+
+# Step 3: 对比 istio-proxy 和主容器的网络命名
+kubectl exec -it {pod-name} -n {namespace} -- sh -c 'ip link show'
+
+# Step 4: 检查 iptables 规则是否正确
+kubectl exec -it {pod-name} -n {namespace} -c istio-proxy -- iptables -L -t nat | grep ISTIO
+```
+
+#### 解决方案
+
+**方案 A: 启用 Istio eBPF 模式（推荐）**
+
+Istio 1.18+ 支持 eBPF 模式，可以绕过 iptables 直接劫持流量：
+
+```yaml
+# 在 IstioOperator 中启用 eBPF
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-ebpf
+spec:
+  profile: default
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true
+  values:
+    global:
+      meshConfig:
+        enablePrometheusMerge: true
+    pilot:
+      env:
+        # 启用 eBPF 模式
+        PILOT_ENABLE_EBPF: "true"
+```
+
+**方案 B: 降级到 Veth 模式**
+
+如果集群支持，可以在 Pod annotation 中指定使用 Veth 模式：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.aliyun.com/eni-mode: "false"  # 禁用 ENI 模式，使用 Veth
+spec:
+```
+
+### 6.2 Terway VPC 路由与 Istio Ingress Gateway 冲突
+
+#### 问题现象
+
+| 现象 | 报错信息 | 影响 |
+|------|----------|------|
+| Istio Ingress Gateway 无法接收外部流量 | `connection refused` | 外部请求全部 502 |
+| VPC 路由表显示正常但流量不达 | Pod ENI 直接绑定 EIP | 无法通过 Gateway 路由 |
+| Gateway Pod 显示 Running 但无法访问 | CLB 健康检查超时 | CLB 后端无响应 |
+
+#### 根因分析
+
+Terway ENI 模式下的 Pod 可以直接绑定 EIP（阿里云弹性公网 IP），流量绕过 Istio Ingress Gateway。当 Ingress Gateway 的 CLB 配置了 Pod 后端时：
+- CLB 直接指向 Pod ENI IP
+- 流量不经过 Istio sidecar，无法被服务网格策略拦截
+- mTLS 双向认证失败
+
+#### 排查步骤
+
+```bash
+# Step 1: 检查 Pod 是否有 EIP 直接绑定
+kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/eip}'
+
+# Step 2: 检查 Istio Ingress Gateway 的 CLB 配置
+aliyun slb describeloadbalancer --region {region} --loadbalancer-id {lb-id}
+
+# Step 3: 检查 VPC 路由表
+aliyun vpc describeRouteEntries --VpcId {vpc-id} --RouteTableId {rt-id}
+
+# Step 4: 查看 Ingress Gateway 日志
+kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip\|eni"
+```
+
+#### 解决方案
+
+**方案 A: 移除 Pod EIP 绑定，统一通过 Ingress Gateway 入口**
+
+```bash
+# 移除 Pod 的 EIP 直接绑定
+kubectl annotate pod {pod-name} -n {namespace} k8s.aliyun.com/eip-
+
+# 确认 Ingress Gateway CLB 后端已更新
+aliyun slb describebackendservers --region {region} --loadbalancer-id {lb-id}
+```
+
+**方案 B: 配置 Service 对齐到 Gateway**
+
+确保应用 Service 类型为 ClusterIP/NodePort，由 Istio Ingress Gateway 统一处理入口流量：
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {app-svc}
+  annotations:
+    # 明确指定通过 Ingress Gateway 接入
+    istio.io/ingress: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+```
+
+### 6.3 Terway IPVLAN 模式与 Envoy XDP Offload 兼容性
+
+#### 问题现象
+
+| 现象 | 报错信息 | 影响 |
+|------|----------|------|
+| Terway IPVLAN 模式下 Envoy XDP 报 `No such device` | XDP offload 失败 | 性能无法优化 |
+| 高吞吐场景下 CPU 使用率异常高 | iptables 软中断瓶颈 | 网络延迟增加 |
+| Pod 网络延迟抖动但指标正常 | 内核 IPVlan L2 模式冲突 | 服务间通信不稳定 |
+
+#### 根因分析
+
+Terway IPVLAN 模式使用内核 IPVLAN 驱动，在 L2 或 L3 模式下工作。Istio 的 XDP offload（通过 eBPF）需要直接访问网络设备，但：
+- IPVLAN 创建的是虚拟接口，不是标准 eth0
+- eBPF 程序无法 attach 到 IPVLAN 接口
+- 需要内核版本 >= 5.10 且支持 netlink
+
+#### 排查步骤
+
+```bash
+# Step 1: 检查 Pod 使用 IPVLAN 模式
+kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/network-mode}'
+# 期望输出: ipvlan
+
+# Step 2: 检查内核版本
+uname -r
+# 要求 >= 5.10
+
+# Step 3: 检查 IPVLAN 接口状态
+ip link show | grep ipvlan
+
+# Step 4: 检查 eBPF/XDP 可用性
+bpftool net show
+cat /proc/sys/net/core/bpf_jit_enable
+```
+
+#### 解决方案
+
+**方案 A: 降级到标准 Veth 模式**
+
+如果 XDP offload 是关键性能优化点，可以降级 Pod 网络模式：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.aliyun.com/network-mode: "veth"
+spec:
+```
+
+**方案 B: 禁用 XDP offload，使用 iptables**
+
+在 Istio 配置中禁用 XDP：
+
+```yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-no-xdp
+spec:
+  profile: default
+  values:
+    pilot:
+      env:
+        PILOT_ENABLE_XDP_OFFLOAD: "false"
+```
+
+### 6.4 Terway + ASM 故障快速检测命令
+
+```bash
+#!/bin/bash
+# Terway + ASM 交互故障快速检测
+
+echo "=== Terway + ASM 交互故障检测 ==="
+
+# 检测 1: Pod ENI 模式检查
+echo -e "\n--- Pod ENI Mode ---"
+kubectl get pods -n istio-system -l app=istio-ingressgateway -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/eni-mode}{"\n"}{end}'
+
+# 检测 2: Istio sidecar 流量劫持检查
+echo -e "\n--- Sidecar iptables Rules ---"
+for pod in $(kubectl get pods -n default -o jsonpath='{.items[*].metadata.name}'); do
+  if kubectl exec -it $pod -c istio-proxy -- iptables -L -t nat 2>/dev/null | grep -q ISTIO; then
+    echo "$pod: iptables ISTIO rules present"
+  else
+    echo "$pod: WARNING - No ISTIO iptables rules found"
+  fi
+done
+
+# 检测 3: EIP 直接绑定检查
+echo -e "\n--- Pod EIP Binding ---"
+kubectl get pods -n default -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/eip}{"\n"}{end}' | grep -v "<no value>"
+
+# 检测 4: IPVLAN 模式检查
+echo -e "\n--- Pod IPVLAN Mode ---"
+kubectl get pods -n default -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/network-mode}{"\n"}{end}' | grep ipvlan
+
+# 检测 5: Envoy XDP 可用性检查
+echo -e "\n--- Envoy XDP Status ---"
+kubectl exec -it istiod-0 -n istio-system -- pilot-agent status 2>/dev/null | grep -i xdp || echo "XDP status unknown"
+
+echo -e "\n=== 检测完成 ==="
+```
+
+---
+
+## 7. 多集群服务网格
+
+### 7.1 跨集群流量管理
+
+```yaml
+multicluster_mesh:
+  # 集群联邦配置
+  federation:
+    primary_cluster: "prod-cluster-1"
+    secondary_clusters:
+      - name: "prod-cluster-2"
+        failover_priority: 1
+      - name: "prod-cluster-3"
+        failover_priority: 2
+
+    # 跨集群服务发现
+    service_discovery:
+      method: "Primary-Cluster DNS"
+      replication_delay: 5s
+      failover_timeout: 30s
+
+  # 跨集群流量策略
+  traffic_policy:
+    locality_lb:
+      enabled: true
+      failover:
+        - from: "zone-1"
+          to: "zone-2"
+    outlier_detection:
+      consecutive_5xx: 5
+      interval: 10s
+      base_ejection_time: 30s
+```
+
+### 7.2 跨集群故障转移
+
+```yaml
+cross_cluster_failover:
+  # 自动故障转移配置
+  auto_failover:
+    enabled: true
+    health_check_interval: 10s
+    failure_threshold: 3
+    recovery_threshold: 2
+
+  # 故障转移流程
+  failover_steps:
+    - name: "检测主集群不可用"
+      condition: "3 次健康检查失败"
+      action: "触发故障转移"
+
+    - name: "更新 DNS 路由"
+      action: |
+        # 通过阿里云 DNS API 更新解析
+        aliyun alidns UpdateDomainRecord \
+          --RecordId {record_id} \
+          --Value new_cluster_ip
+
+    - name: "通知备用集群"
+      action: |
+        kubectl label namespace {ns} \
+          istio-injection=enabled \
+          cluster=failover-target
+
+    - name: "验证流量切换"
+      action: |
+        kubectl exec -it {test-pod} -- \
+          curl -s {service}.{namespace}.svc.cluster.local
+
+  # 回滚流程
+  rollback:
+    enabled: true
+    manual_approval_required: true
+    steps:
+      - "确认主集群恢复"
+      - "等待流量稳定"
+      - "切换回主集群"
+```
+
+---
+
+## 8. 生产可观测性
+
+### 8.1 服务网格指标体系
+
+```yaml
+mesh_observability:
+  # 关键指标
+  metrics:
+    # 流量指标
+    - name: "istio_requests_total"
+      type: "counter"
+      labels: ["destination_service", "response_code"]
+      slo: "成功率 >= 99.9%"
+
+    - name: "istio_request_duration_seconds"
+      type: "histogram"
+      labels: ["destination_service"]
+      slo: "P99 < 500ms"
+
+    # 副作用car代理指标
+    - name: "istio_proxy_cpu_seconds_total"
+      type: "counter"
+      labels: ["pod_name"]
+      slo: "CPU < 1 core"
+
+    - name: "istio_proxy_memory_bytes"
+      type: "gauge"
+      labels: ["pod_name"]
+      slo: "Memory < 512MB"
+
+    # 控制面指标
+    - name: "istiod_xds_push_duration_seconds"
+      type: "histogram"
+      labels: ["component"]
+      slo: "P99 < 1s"
+
+    - name: "istiod_conflict_config_total"
+      type: "counter"
+      labels: ["type"]
+      alert_threshold: "> 0"
+
+  # SLO 告警规则
+  alert_rules:
+    - name: "Request Success Rate Low"
+      severity: P1
+      condition: "rate(istio_requests_total{response_code=~'5..'}) / rate(istio_requests_total) > 0.001"
+      channels: ["pagerduty", "slack-mesh-alerts"]
+
+    - name: "Proxy Memory High"
+      severity: P2
+      condition: "istio_proxy_memory_bytes > 536870912"  # 512MB
+      channels: ["slack-mesh-alerts"]
+
+    - name: "XDS Push Slow"
+      severity: P2
+      condition: "histogram_quantile(0.99, istiod_xds_push_duration_seconds) > 1"
+      channels: ["slack-mesh-alerts"]
+```
+
+### 8.2 分布式追踪集成
+
+```yaml
+distributed_tracing:
+  # Jaeger 配置
+  jaeger:
+    enabled: true
+    sampling:
+      type: "probabilistic"
+      rate: 0.1  # 10% 采样
+      min_rate: 100  # 最低每秒 100 个采样
+
+  # B3 传播头配置
+  propagation:
+    headers:
+      - "x-b3-traceid"
+      - "x-b3-spanid"
+      - "x-b3-parentspanid"
+      - "x-b3-sampled"
+
+  # 追踪上下文注入
+  context_propagation:
+    injection_points:
+      - "application"
+      - "istio-proxy"
+      - "gateway"
+    baggage_headers:
+      - "x-ot-span-context"
+      - "x-request-id"
+```
+
+### 8.3 服务拓扑图
+
+```yaml
+service_topology:
+  # 自动生成拓扑图
+  kiali_integration:
+    enabled: true
+    refresh_interval: 30s
+    graph_depth: 3
+
+  # 服务依赖分析
+  dependency_analysis:
+    enabled: true
+    interval: 5m
+    output: "service-dependencies.json"
+
+  # 健康度评分
+  health_score:
+    calculation: "weighted_average"
+    weights:
+      request_success_rate: 0.4
+      latency_p99: 0.3
+      proxy_resource_usage: 0.2
+      config_sync_status: 0.1
+    thresholds:
+      healthy: "> 0.9"
+      degraded: "0.7-0.9"
+      unhealthy: "< 0.7"
+```
+
+---
+
+## 9. 安全加固
+
+### 9.1 mTLS 与证书管理
+
+```yaml
+security_hardening:
+  # mTLS 配置
+  mtls:
+    mode: "STRICT"  # 生产环境必须 STRICT
+    auto_rotation: true
+    rotation_interval: 24h
+    grace_period: 1h
+
+  # 证书颁发者配置
+  certificate_authority:
+    type: "Istiod"  # 使用 Istiod 内置 CA
+    root_cert_rotation: 365d
+    workload_cert_ttl: 24h
+
+  # SPIFFE 身份配置
+  spiffe:
+    trust_domain: "cluster.local"
+    workload_selector:
+      method: "namespace"  # 按命名空间选择
+      namespaces: ["prod", "core"]
+
+  # AuthorizationPolicy 示例
+  authorization_policy:
+    # 默认拒绝
+    default: "deny-all"
+    # 允许特定流量
+    rules:
+      - from:
+          - source:
+              principals: ["cluster.local/ns/prod/sa/gateway"]
+        to:
+          - operation:
+              ports: ["8080", "8443"]
+      - from:
+          - source:
+              principals: ["cluster.local/ns/prod/sa/*"]
+        to:
+          - operation:
+              ports: ["8080"]
+```
+
+### 9.2 网络策略
+
+```yaml
+network_policies:
+  # 控制面命名空间保护
+  control_plane:
+    ingress:
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                name: "kube-system"
+        ports:
+          - protocol: TCP
+            port: 15012  # istiod 端口
+          - protocol: TCP
+            port: 15014  # istiod metrics
+    egress:
+      - to:
+          - podSelector:
+              matchLabels:
+                app: "istiod"
+
+  # 数据面命名空间隔离
+  data_plane:
+    strict_isolation:
+      enabled: true
+      require_mtls: true
+      namespace_isolation:
+        - name: "prod"
+          allowed_egress:
+            - "*.svc.cluster.local"
+            - "metrics-server.kube-system.svc.cluster.local"
+          allowed_ingress: []  # 默认无允许
+
+  # 应用命名空间策略
+  application_ns:
+    name: "prod"
+    ingress_from_gateway:
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                name: "istio-system"
+            port: 8080
+    egress_to_external:
+      enabled: false  # 默认禁止访问外部
+```
+
+### 9.3 审计日志
+
+```yaml
+audit_logging:
+  # 记录的操作
+  operations:
+    - "AuthorizationPolicy created/updated/deleted"
+    - "PeerAuthentication created/updated/deleted"
+    - "RequestAuthentication created/updated/deleted"
+    - "Sidecar created/updated/deleted"
+    - "DestinationRule created/updated/deleted"
+
+  # 日志格式
+  log_format:
+    timestamp: ISO8601
+    operation: string
+    resource_type: string
+    resource_name: string
+    namespace: string
+    actor: string  # user or system
+    result: "success|failure"
+    change_detail: object
+
+  # 告警规则
+  security_alerts:
+    - name: "AuthorizationPolicy Allow-All"
+      severity: P1
+      condition: 'rule[*].from[0].source.namespaces[0] == "*"'
+      action: "通知安全团队"
+
+    - name: "PeerAuthentication PERMISSIVE"
+      severity: P1
+      condition: 'mtls.mode == "PERMISSIVE"'
+      action: "要求切换 STRICT"
+```
+
+---
+
+## 10. 成本优化
+
+### 10.1 Envoy 资源优化
+
+```yaml
+envoy_optimization:
+  # 资源限制
+  resource_limits:
+    cpu_limit: "500m"
+    memory_limit: "512Mi"
+    cpu_request: "100m"
+    memory_request: "128Mi"
+
+  # 性能调优
+  performance_tuning:
+    # 连接池配置
+    http2_settings:
+      max_concurrent_streams: 100
+      initial_window_size: 65536
+      connection_window_size: 1048576
+
+    # 缓冲区配置
+    upstream_buffer: 8MB
+    downstream_buffer: 8MB
+
+    # 追踪采样优化
+    tracing:
+      sampling_rate: 0.1  # 降低采样率
+      min_sampling_rate: 100
+```
+
+### 10.2 控制面扩展性
+
+```yaml
+control_plane_scaling:
+  # istiod 扩展配置
+  istiod:
+    replicas: 2  # 生产至少 2 个
+    hpa:
+      min_replicas: 2
+      max_replicas: 5
+      target_cpu: 70
+
+  # xDS 推送优化
+  xds_optimization:
+    debounce_duration: 100ms
+    node_cache_duration: 5m
+    fetch_debounce: 250ms
+    enable_eds_caching: true
+
+  # Gateway 扩展配置
+  ingress_gateway:
+    replicas: 3
+    hpa:
+      min_replicas: 2
+      max_replicas: 10
+      target_cpu: 80
+    resources:
+      cpu_limit: "2"
+      memory_limit: "2Gi"
+```
+
+### 10.3 成本监控与告警
+
+```yaml
+cost_monitoring:
+  # 成本指标
+  metrics:
+    - name: "mesh_proxy_cpu_cost"
+      calculation: "sum(envoy_cpu_seconds) * cpu_cost_per_core_hour"
+      unit: "USD/hour"
+
+    - name: "mesh_proxy_memory_cost"
+      calculation: "sum(envoy_memory_bytes) * memory_cost_per_gb_hour"
+      unit: "USD/hour"
+
+    - name: "mesh_total_daily_cost"
+      calculation: "sum(mesh_proxy_*_cost) * 24"
+      unit: "USD/day"
+
+  # 成本告警
+  cost_alerts:
+    - name: "Daily Cost Spike"
+      severity: P2
+      condition: "mesh_total_daily_cost > daily_average * 1.5"
+      channels: ["slack-cost-alerts"]
+```
+
+---
+
+## 11. 升级策略与回滚
+
+### 11.1 升级流程
+
+```yaml
+upgrade_procedure:
+  # 升级前检查
+  pre_upgrade_check:
+    - "确认备份已成功"
+    - "检查配置兼容性"
+    - "验证支持矩阵"
+    - "准备回滚方案"
+
+  # 金丝雀升级
+  canary_upgrade:
+    strategy: "Istio revision + Traffic Splitting"
+    steps:
+      - name: "安装新版本 Istiod"
+        command: "istioctl install --set revision={new_version}"
+
+      - name: "迁移单个命名空间"
+        command: |
+          kubectl label namespace {namespace} \
+            istio.io/rev={new_version}
+
+      - name: "验证流量正常"
+        command: |
+          # 检查错误率
+          kubectl exec -it {test-pod} -- \
+            curl -s {service}:{port}/health
+
+      - name: "切换流量 10%"
+        command: |
+          kubectl apply -f - <<EOF
+          apiVersion: networking.istio.io/v1alpha3
+          kind: VirtualService
+          metadata:
+            name: {service}-canary
+          spec:
+            hosts:
+            - {service}
+            http:
+            - route:
+              - destination:
+                  host: {service}
+                  subset: stable
+                weight: 90
+              - destination:
+                  host: {service}
+                  subset: canary
+                weight: 10
+          EOF
+
+      - name: "逐步增加流量"
+        weights: ["10%", "30%", "50%", "100%"]
+        interval: 30m
+        verification: "检查错误率和延迟"
+
+  # 回滚方案
+  rollback:
+    command: |
+      # 回滚到旧版本
+      kubectl label namespace {namespace} \
+        istio.io/rev={old_version}
+
+      # 删除新版本
+      istioctl uninstall --set revision={new_version}
+```
+
+### 11.2 升级检查清单
+
+```yaml
+upgrade_checklist:
+  pre_upgrade:
+    - [ ] "阅读升级注意事项 ( Release Notes)"
+    - [ ] "确认 etcd 快照已成功"
+    - [ ] "确认 Velero 备份已完成"
+    - [ ] "检查应用兼容性 (Envoy API 版本)"
+    - [ ] "准备回滚验证测试"
+    - [ ] "通知相关团队升级窗口"
+
+  during_upgrade:
+    - [ ] "记录升级开始时间"
+    - [ ] "按命名空间逐步迁移"
+    - [ ] "监控错误率变化"
+    - [ ] "监控延迟变化"
+    - [ ] "记录发现的问题"
+
+  post_upgrade:
+    - [ ] "确认所有命名空间已迁移"
+    - [ ] "删除旧版本 Istio"
+    - [ ] "运行完整回归测试"
+    - [ ] "更新监控仪表板"
+    - [ ] "更新文档"
+    - [ ] "通知团队升级完成"
+```
+
+---
+
+## 12. 性能基准测试
+
+### 12.1 基准测试套件
+
+```yaml
+benchmark_suite:
+  # 测试场景
+  test_scenarios:
+    - name: "P99 延迟基准"
+      test_type: "latency"
+      command: |
+        fortio load -H "Host: {service}" \
+          http://{gateway}:80/{path} \
+          -c 50 -n 10000 -qps 1000
+      thresholds:
+        p50: < 10ms
+        p95: < 50ms
+        p99: < 100ms
+
+    - name: "吞吐量基准"
+      test_type: "throughput"
+      command: |
+        fortio load -H "Host: {service}" \
+          http://{gateway}:80/{path} \
+          -c 100 -n 100000 -qps 0
+      thresholds:
+        max_rps: "> 10000"
+        error_rate: "< 0.01%"
+
+    - name: "长连接基准"
+      test_type: "connection"
+      command: |
+        fortio load -H "Host: {service}" \
+          http://{gateway}:80/{path} \
+          -c 10 -n 0 -duration 5m -keepalive
+      thresholds:
+        connection_stability: "99.99%"
+        latency_p99: "< 200ms"
+
+  # 定期执行
+  schedule:
+    baseline: "weekly"
+    regression: "pre-release"
+    capacity_planning: "monthly"
+
+  # 结果存储
+  results:
+    storage: "prometheus + Grafana"
+    retention: 90d
+    trend_analysis: true
+```
+
+---
+
+## 13. 日常运维脚本
+
+### 13.1 自动化巡检脚本
+
+```bash
+#!/bin/bash
+# Istio 服务网格每日巡检
+
+set -e
+
+NAMESPACE="istio-system"
+ALERT_THRESHOLD=0.9
+
+echo "=== Istio 服务网格每日巡检 ==="
+echo "时间: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+# 1. 控制面健康检查
+echo -e "\n--- 1. 控制面健康 ---"
+kubectl get pods -n $NAMESPACE -l app=istiod
+ISTIOD_READY=$(kubectl get pods -n $NAMESPACE -l app=istiod -o jsonpath='{.items[*].status.conditions[?(@.type=="Ready")].status}')
+if [ "$ISTIOD_READY" != "TrueTrue" ]; then
+  echo "ALERT: Istiod Pod 不健康"
+fi
+
+# 2. Gateway 健康检查
+echo -e "\n--- 2. Gateway 健康 ---"
+kubectl get pods -n $NAMESPACE -l app=istio-ingressgateway
+GATEWAY_READY=$(kubectl get pods -n $NAMESPACE -l app=istio-ingressgateway -o jsonpath='{.items[*].status.conditions[?(@.type=="Ready")].status}')
+if [ "$GATEWAY_READY" != "True" ]; then
+  echo "ALERT: Gateway Pod 不健康"
+fi
+
+# 3. mTLS 模式检查
+echo -e "\n--- 3. mTLS 配置 ---"
+PERMISSIVE_NS=$(kubectl get peerauthentication -A -o jsonpath='{.items[?(@.spec.mtls.mode=="PERMISSIVE")].metadata.namespace}' || echo "")
+if [ -n "$PERMISSIVE_NS" ]; then
+  echo "WARNING: 以下命名空间使用 PERMISSIVE 模式: $PERMISSIVE_NS"
+fi
+
+# 4. xDS 同步状态
+echo -e "\n--- 4. xDS 同步状态 ---"
+STALE_PROXIES=$(istioctl proxy-status 2>/dev/null | grep -c "STALE" || echo "0")
+if [ "$STALE_PROXIES" -gt 0 ]; then
+  echo "ALERT: $STALE_PROXIES 个代理配置 STALE"
+fi
+
+# 5. 资源使用检查
+echo -e "\n--- 5. 资源使用 ---"
+kubectl top pods -n $NAMESPACE --no-headers 2>/dev/null || echo "Metrics Server 不可用"
+
+# 6. 证书过期检查
+echo -e "\n--- 6. 证书过期检查 ---"
+kubectl get secret -n $NAMESPACE -l istio.io/canonical-app=istiod \
+  -o jsonpath='{.items[*]}' | jq -r '.[] | select(.type=="kubernetes.io/tls") | .metadata.name' | while read secret; do
+  EXPIRE_DATE=$(kubectl get secret $secret -n $NAMESPACE -o jsonpath='{.data.cert\.pem}' | base64 -d | openssl x509 -enddate -noout | cut -d= -f2)
+  echo "$secret: 到期 $EXPIRE_DATE"
+done
+
+# 7. 配置冲突检查
+echo -e "\n--- 7. 配置冲突检查 ---"
+CONFLICTS=$(istioctl analyze -n $NAMESPACE 2>/dev/null | grep -c "Conflict" || echo "0")
+echo "配置冲突数: $CONFLICTS"
+
+echo -e "\n=== 巡检完成 ==="
+```
+
+---
+
+## 14. 生产问题案例库
+
+### 14.1 高频问题速查
+
+| 问题 | 快速诊断 | 解决方案 |
+|------|----------|----------|
+| 503 UH | Endpoints 为空 | 检查 Pod 就绪状态 |
+| 503 UF | mTLS 握手失败 | 检查证书有效期 |
+| 403 RBAC | AuthorizationPolicy 拒绝 | 检查策略配置 |
+| 404 NR | 路由未配置 | 检查 VirtualService |
+| 500 DC | 上游连接重置 | 检查 Pod 健康状态 |
+| 超时 | 重试配置不当 | 增加超时时间 |
+
+### 14.2 疑难问题深度分析
+
+```yaml
+# 问题: xDS 配置延迟导致偶发性 503
+symptom: "偶发性 503，持续 < 1s"
+root_cause: |
+  大规模集群中，istiod xDS 推送存在抖动。
+  当 Endpoint 数量 > 10000 时，推送延迟 P99 > 5s。
+diagnosis:
+  - "istioctl proxy-status 检查 STALE 状态"
+  - "观察 istiod 日志: kubectl logs -n istio-system istiod-* | grep 'push'
+  - "检查 istiod 资源使用"
+solution: |
+  1. 启用 EDS 分量推送:
+     meshConfig:
+       enableEdsCaching: true
+       defaultInvocationInterval: 10s
+  2. 增加 istiod 资源:
+     resources:
+       requests:
+         cpu: "500m"
+         memory: "1Gi"
+  3. 考虑启用 Ambient Mesh 模式
+verification: |
+  持续监控 24h 无偶发性 503
+```
+
+---
+
+> **版本**: v2.0
+> **维护团队**: SRE Team / Platform Team
+> **更新日期**: 2026-05-19
+> **新增章节**:
+> - [x] 多集群服务网格 (跨集群流量管理、故障转移)
+> - [x] 生产可观测性 (SLO/SLA、指标体系、分布式追踪)
+> - [x] 安全加固 (mTLS、NetworkPolicy、审计日志)
+> - [x] 成本优化 (Envoy 资源、控制面扩展)
+> - [x] 升级策略与回滚 (金丝雀升级、检查清单)
+> - [x] 性能基准测试 (Fortio 基准测试套件)
+> - [x] 日常运维脚本 (自动化巡检脚本)
+> - [x] 生产问题案例库 (高频问题、疑难问题)

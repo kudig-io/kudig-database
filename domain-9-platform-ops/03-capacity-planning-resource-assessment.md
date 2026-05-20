@@ -1,3 +1,50 @@
+---
+title: 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+description: '**目标读者**: 平台运维工程师、架构师、SRE团队'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- prometheus
+- grafana
+- hpa
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- 容量规划与资源评估 (Capacity Planning & Resource Assessment) 是什么
+- 如何 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 容量规划与资源评估
+- Capacity
+- Planning
+- Resource
+- Assessment
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 容量规划与资源评估 (Capacity Planning & Resource Assessment)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v2.0 | **最后更新**: 2026-02

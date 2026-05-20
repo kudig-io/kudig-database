@@ -1,3 +1,39 @@
+---
+title: Azure Resource Manager (ARM) Enterprise 深度实践
+description: '# Azure Resource Manager (ARM) Enterprise 深度实践'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- job
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Azure Resource Manager (ARM) Enterprise 深度实践 是什么
+- 如何 Azure Resource Manager (ARM) Enterprise 深度实践
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Azure
+- Resource
+- Manager
+- ARM
+- Enterprise
+- 深度实践
+- infrastructure
+- as
+---
+
+
 # Azure Resource Manager (ARM) Enterprise 深度实践
 
 > **Author**: Cloud Infrastructure Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

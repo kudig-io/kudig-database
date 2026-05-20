@@ -1,3 +1,41 @@
+---
+title: Agent CLI 企业级自动化与 CI/CD 集成
+description: '**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Automation, CI/CD, GitHub Actions, Headless Mode,
+  Batch Processing, Code Review Bot, 自动化流水线'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- grafana
+- redis
+- job
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent CLI 企业级自动化与 CI/CD 集成 是什么
+- 如何 Agent CLI 企业级自动化与 CI/CD 集成
+trigger_keywords:
+- Agent
+- CLI
+- 企业级自动化与
+- CI
+- CD
+- 集成
+- ai
+- agent
+---
+
+
 # Agent CLI 企业级自动化与 CI/CD 集成
 
 > **文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Automation, CI/CD, GitHub Actions, Headless Mode, Batch Processing, Code Review Bot, 自动化流水线

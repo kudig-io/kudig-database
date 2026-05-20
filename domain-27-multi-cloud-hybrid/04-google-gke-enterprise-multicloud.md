@@ -1,717 +1,1236 @@
-# Google GKE (Google Kubernetes Engine) Enterprise Multi-Cloud Management 深度实践
+---
+title: Google GKE 企业级多云管理深度实践
+description: '# Google GKE 企业级多云管理深度实践'
+category: multi-cloud-hybrid
+tags:
+- k8s
+- multi-cloud
+- hybrid-cloud
+- etcd
+- kubelet
+- prometheus
+- istio
+- calico
+- containerd
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 云架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Google GKE 企业级多云管理深度实践 是什么
+- 如何 Google GKE 企业级多云管理深度实践
+- Kubernetes 27 multi cloud hybrid 最佳实践
+trigger_keywords:
+- Google
+- GKE
+- 企业级多云管理深度实践
+- multi
+- cloud
+- hybrid
+---
 
-> **Author**: Multi-Cloud Platform Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
-> **Scenario**: Enterprise-grade multi-cloud Kubernetes management with Google GKE | **Complexity**: ⭐⭐⭐⭐
 
-## 🎯 Abstract
+# Google GKE 企业级多云管理深度实践
 
-This document provides comprehensive exploration of Google GKE enterprise deployment architecture, multi-cloud management practices, and hybrid cloud integration strategies. Based on large-scale production environment experience, it offers complete technical guidance from cluster setup to cross-cloud governance, helping enterprises build unified, scalable Kubernetes platforms across Google Cloud, AWS, and Azure with integrated security, monitoring, and cost optimization capabilities.
+## 概述
 
-## 1. GKE Enterprise Architecture
+Google Kubernetes Engine (GKE) 是 Google Cloud 提供的托管 Kubernetes 服务，以其卓越的自动化能力、全球网络基础设施和 Anthos 多云管理平台闻名。GKE Autopilot 模式提供完全无服务器化的 Kubernetes 体验，使企业无需关心节点管理，按 Pod 资源消耗计费，SLA 直接覆盖 Pod 可用性而非仅覆盖节点。
 
-### 1.1 Core Component Architecture
+在多云架构场景下，GKE 通过 Anthos 平台实现跨 Google Cloud、AWS、Azure 的统一集群管理，提供一致的服务网格（Anthos Service Mesh）、配置管理（Config Management）和安全策略（Policy Controller）。Google 的全球骨干网络为多云互联提供了低延迟、高带宽的连接基础，Cloud Interconnect 和 Partner Interconnect 提供了可靠的专线连接方案。
+
+本文档从生产环境运维专家角度，深入探讨 GKE 的企业级部署架构、Anthos 多云管理实践、Binary Authorization 安全供应链和混合云集成策略。内容涵盖完整的 Terraform 基础设施即代码、详细的 YAML 配置、监控告警规则和运维自动化脚本，为企业在 Google Cloud 上构建生产级 Kubernetes 平台提供全面参考。
+
+### GKE 核心特性
+
+| 特性 | 说明 | 适用场景 |
+|:---|:---|:---|
+| Autopilot 模式 | Google 管理所有节点，按 Pod 资源使用计费，SLA 覆盖 Pod | 通用工作负载、无运维需求 |
+| Standard 模式 | 用户管理节点池，完全控制节点配置 | GPU 工作负载、特殊硬件需求 |
+| Anthos 多云 | 统一管理 GKE、EKS、AKS 和本地 Kubernetes 集群 | 多云统一管理 |
+| Global VPC | Google 全球 VPC 网络，跨区域低延迟互联 | 全球化业务 |
+| Binary Authorization | 镜像签名验证，确保仅受信镜像部署 | 安全敏感行业 |
+| Confidential Computing | 机密计算节点，数据使用中加密 | 金融、医疗 |
+| Cloud Operations | 集成 Cloud Monitoring、Cloud Logging、Cloud Trace | 统一可观测性 |
+| Workload Identity | GCP IAM 与 K8s ServiceAccount 联邦 | 安全访问 GCP 资源 |
+
+## 架构设计
+
+### GKE 企业架构总览
 
 ```mermaid
 graph TB
-    subgraph "Google Cloud Infrastructure"
-        A[GCP Projects]
-        B[Cloud Identity]
-        C[Cloud Billing]
-        D[Organization Hierarchy]
-        E[Resource Hierarchy]
+    subgraph "Google Cloud Organization"
+        ORG[Organization] --> FOLDER_PROD[Production Folder]
+        ORG --> FOLDER_DEV[Development Folder]
+        ORG --> FOLDER_SHARED[Shared Services Folder]
+        FOLDER_PROD --> PROJ1[GKE Production Project]
+        FOLDER_PROD --> PROJ2[Platform Services Project]
+        FOLDER_DEV --> PROJ3[GKE Staging Project]
+        FOLDER_SHARED --> PROJ4[Shared VPC Project]
+        FOLDER_SHARED --> PROJ5[Security Project]
     end
-    
-    subgraph "GKE Components"
-        F[GKE Control Plane]
-        G[Node Pools]
-        H[Cluster Autoscaler]
-        I[Binary Authorization]
-        J[Cloud Operations]
+
+    subgraph "GKE 集群层"
+        PROJ1 --> GKE_PROD[Prod GKE Cluster<br/>us-central1 Autopilot]
+        PROJ1 --> GKE_EU[Prod GKE Cluster<br/>europe-west1 Autopilot]
+        PROJ1 --> GKE_APAC[Prod GKE Cluster<br/>asia-east1 Standard]
+        PROJ3 --> GKE_STG[Staging GKE Cluster<br/>us-central1]
     end
-    
-    subgraph "Multi-Cloud Integration"
-        K[AWS Integration]
-        L[Azure Integration]
-        M[Anthos Config Management]
-        N[Anthos Service Mesh]
-        O[Anthos Multi-Cloud]
+
+    subgraph "Anthos 多云管理"
+        ANTHOS[Anthos Fleet] --> HUB[GKE Hub]
+        ANTHOS --> ACM[Config Management]
+        ANTHOS --> ASM[Anthos Service Mesh]
+        ANTHOS --> AMC[Anthos Multi-Cloud]
+        ANTHOS --> ACM_POL[Policy Controller]
     end
-    
-    subgraph "Security & Governance"
-        P[Cloud IAM]
-        Q[Security Command Center]
-        R[Policy Controller]
-        S[Vulnerability Scanning]
-        T[Compliance Reporting]
+
+    subgraph "跨云集群"
+        AMC --> AWS_CLUSTER[Anthos on AWS]
+        AMC --> AZURE_CLUSTER[Anthos on Azure]
+        AMC --> ONPREM[Anthos on Bare Metal]
     end
-    
-    subgraph "Observability Stack"
-        U[Cloud Monitoring]
-        V[Cloud Logging]
-        W[Cloud Trace]
-        X[Cloud Profiler]
-        Y[Cloud Debugger]
+
+    subgraph "安全与治理"
+        IAM[Cloud IAM]
+        SCC[Security Command Center]
+        BINAUTH[Binary Authorization]
+        POLICY[Policy Controller]
+        KMS[Cloud KMS]
+        DLP[Cloud DLP]
     end
-    
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    
-    E --> F
-    F --> G
-    G --> H
-    H --> I
-    I --> J
-    
-    F --> K
-    F --> L
-    K --> M
-    L --> N
-    M --> O
-    
-    P --> Q
-    Q --> R
-    R --> S
-    S --> T
-    
-    U --> V
-    V --> W
-    W --> X
-    X --> Y
+
+    subgraph "可观测性"
+        CM[Cloud Monitoring]
+        CL[Cloud Logging]
+        CT[Cloud Trace]
+        CP[Cloud Profiler]
+        CB[Cloud BigQuery<br/>Usage Export]
+    end
+
+    subgraph "网络"
+        GVPC[Shared VPC]
+        CI[Cloud Interconnect]
+        CVPN[Cloud VPN]
+        PSC[Private Service Connect]
+        ILB[Internal Load Balancer]
+    end
+
+    GKE_PROD --> ANTHOS
+    GKE_EU --> ANTHOS
+    GKE_APAC --> ANTHOS
+    AWS_CLUSTER --> ANTHOS
+    AZURE_CLUSTER --> ANTHOS
+    ONPREM --> ANTHOS
+    HUB --> POLICY
+    IAM --> BINAUTH
+    KMS --> GKE_PROD
+    GKE_PROD --> CM
+    GKE_PROD --> CL
+    GKE_PROD --> CB
+    GVPC --> GKE_PROD
+    GVPC --> GKE_EU
+    CI --> GVPC
 ```
 
-### 1.2 Enterprise Deployment Architecture
+### Terraform 基础设施部署
+
+```hcl
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 5.40"
+    }
+  }
+
+  backend "gcs" {
+    bucket = "terraform-state-production"
+    prefix = "gke-infrastructure"
+  }
+}
+
+variable "project_id" {
+  description = "GCP Project ID"
+  type        = string
+  default     = "gke-production"
+}
+
+variable "region" {
+  description = "Primary region"
+  type        = string
+  default     = "us-central1"
+}
+
+variable "network_name" {
+  description = "VPC network name"
+  type        = string
+  default     = "production-vpc"
+}
+
+resource "google_compute_network" "production_vpc" {
+  name                    = var.network_name
+  project                 = var.project_id
+  auto_create_subnetworks = false
+  routing_mode            = "GLOBAL"
+
+  delete_default_routes_on_create = true
+}
+
+resource "google_compute_subnetwork" "primary_subnet" {
+  name          = "gke-primary-subnet"
+  project       = var.project_id
+  region        = var.region
+  network       = google_compute_network.production_vpc.id
+  ip_cidr_range = "10.0.0.0/20"
+
+  secondary_ip_range {
+    range_name    = "pods-range"
+    ip_cidr_range = "10.4.0.0/14"
+  }
+
+  secondary_ip_range {
+    range_name    = "services-range"
+    ip_cidr_range = "10.8.0.0/20"
+  }
+
+  private_ip_google_access = true
+
+  log_config {
+    aggregation_interval = "INTERVAL_5_SEC"
+    flow_sampling        = 0.5
+    metadata             = "INCLUDE_ALL_METADATA"
+  }
+}
+
+resource "google_compute_subnetwork" "eu_subnet" {
+  name          = "gke-eu-subnet"
+  project       = var.project_id
+  region        = "europe-west1"
+  network       = google_compute_network.production_vpc.id
+  ip_cidr_range = "10.1.0.0/20"
+
+  secondary_ip_range {
+    range_name    = "eu-pods-range"
+    ip_cidr_range = "10.16.0.0/14"
+  }
+
+  secondary_ip_range {
+    range_name    = "eu-services-range"
+    ip_cidr_range = "10.20.0.0/20"
+  }
+
+  private_ip_google_access = true
+}
+
+resource "google_compute_firewall" "allow_internal" {
+  name          = "allow-internal"
+  project       = var.project_id
+  network       = google_compute_network.production_vpc.name
+  source_ranges = ["10.0.0.0/8"]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["0-65535"]
+  }
+
+  allow {
+    protocol = "udp"
+    ports    = ["0-65535"]
+  }
+
+  allow {
+    protocol = "icmp"
+  }
+}
+
+resource "google_compute_firewall" "allow_health_checks" {
+  name          = "allow-health-checks"
+  project       = var.project_id
+  network       = google_compute_network.production_vpc.name
+  source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
+
+  allow {
+    protocol = "tcp"
+  }
+}
+
+resource "google_compute_router" "production_router" {
+  name    = "production-router"
+  project = var.project_id
+  region  = var.region
+  network = google_compute_network.production_vpc.id
+}
+
+resource "google_compute_router_nat" "production_nat" {
+  name                               = "production-nat"
+  project                            = var.project_id
+  region                             = var.region
+  router                             = google_compute_router.production_router.name
+  nat_ip_allocate_option             = "AUTO_ONLY"
+  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+
+  min_ports_per_vm                 = 1024
+  tcp_transient_idle_timeout_sec   = 30
+  tcp_established_idle_timeout_sec = 1200
+  udp_idle_timeout_sec             = 30
+  icmp_idle_timeout_sec            = 30
+}
+
+resource "google_kms_key_ring" "gke_keyring" {
+  name     = "gke-keyring"
+  project  = var.project_id
+  location = var.region
+}
+
+resource "google_kms_crypto_key" "gke_etcd_key" {
+  name     = "gke-etcd-key"
+  key_ring = google_kms_key_ring.gke_keyring.id
+  purpose  = "ENCRYPT_DECRYPT"
+
+  version_template {
+    algorithm        = "GOOGLE_SYMMETRIC_ENCRYPTION"
+    protection_level = "HSM"
+  }
+
+  rotation_period = "7776000s"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "google_kms_crypto_key" "gke_disk_key" {
+  name     = "gke-disk-key"
+  key_ring = google_kms_key_ring.gke_keyring.id
+  purpose  = "ENCRYPT_DECRYPT"
+
+  version_template {
+    algorithm        = "GOOGLE_SYMMETRIC_ENCRYPTION"
+    protection_level = "HSM"
+  }
+
+  rotation_period = "7776000s"
+}
+
+resource "google_container_cluster" "production" {
+  name     = "prod-gke-cluster"
+  project  = var.project_id
+  location = var.region
+
+  release_channel {
+    channel = "REGULAR"
+  }
+
+  network    = google_compute_network.production_vpc.id
+  subnetwork = google_compute_subnetwork.primary_subnet.id
+
+  ip_allocation_policy {
+    cluster_secondary_range_name  = "pods-range"
+    services_secondary_range_name = "services-range"
+  }
+
+  private_cluster_config {
+    enable_private_endpoint = false
+    enable_private_nodes    = true
+    master_ipv4_cidr_block  = "172.16.0.0/28"
+  }
+
+  master_authorized_networks_config {
+    cidr_blocks {
+      cidr_block   = "10.0.0.0/8"
+      display_name = "Corporate Network"
+    }
+    cidr_blocks {
+      cidr_block   = "172.16.0.0/12"
+      display_name = "VPN Network"
+    }
+  }
+
+  binary_authorization {
+    evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
+  }
+
+  database_encryption {
+    state    = "ENCRYPTED"
+    key_name = google_kms_crypto_key.gke_etcd_key.id
+  }
+
+  default_snat_status {
+    disabled = true
+  }
+
+  enable_intranode_visibility = true
+  enable_shielded_nodes       = true
+  enable_binary_authorization = true
+  enable_l4_ilb_subsetting    = true
+
+  network_policy {
+    enabled  = true
+    provider = "CALICO"
+  }
+
+  logging_config {
+    enable_components = ["SYSTEM_COMPONENTS", "WORKLOADS"]
+  }
+
+  monitoring_config {
+    enable_components = ["SYSTEM_COMPONENTS", "WORKLOADS"]
+    managed_prometheus {
+      enabled = true
+    }
+  }
+
+  notification_config {
+    pubsub {
+      enabled = true
+      topic   = "projects/${var.project_id}/topics/gke-notifications"
+    }
+  }
+
+  resource_usage_export_config {
+    bigquery_destination {
+      dataset_id = "gke_usage_dataset"
+    }
+    enable_network_egress_metering       = true
+    enable_resource_consumption_metering = true
+  }
+
+  vertical_pod_autoscaling {
+    enabled = true
+  }
+
+  addons_config {
+    http_load_balancing {
+      disabled = false
+    }
+    horizontal_pod_autoscaling {
+      disabled = false
+    }
+    network_policy_config {
+      disabled = false
+    }
+    gce_persistent_disk_csi_driver_config {
+      enabled = true
+    }
+    gcp_filestore_csi_driver_config {
+      enabled = true
+    }
+    cloudrun_config {
+      disabled = true
+    }
+    dns_cache_config {
+      enabled = true
+    }
+    gateway_api_config {
+      enabled = true
+    }
+    gke_backup_agent_config {
+      enabled = true
+    }
+  }
+
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
+
+  mesh_certificates {
+    enable_certificates = true
+  }
+
+  cost_management_config {
+    enabled = true
+  }
+
+  node_pool {
+    name               = "system-pool"
+    initial_node_count = 3
+
+    management {
+      auto_repair  = true
+      auto_upgrade = true
+    }
+
+    node_config {
+      machine_type = "e2-medium"
+      disk_size_gb = 100
+      disk_type    = "pd-balanced"
+      image_type   = "COS_CONTAINERD"
+
+      shielded_instance_config {
+        enable_secure_boot          = true
+        enable_integrity_monitoring = true
+      }
+
+      workload_metadata_config {
+        mode = "GKE_METADATA"
+      }
+
+      labels = {
+        environment = "production"
+        nodepool    = "system"
+      }
+
+      taint {
+        key    = "CriticalAddonsOnly"
+        value  = "true"
+        effect = "NO_SCHEDULE"
+      }
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      node_pool,
+    ]
+  }
+
+  timeouts {
+    create = "60m"
+    update = "60m"
+    delete = "60m"
+  }
+}
+
+resource "google_container_node_pool" "compute_pool" {
+  name       = "compute-pool"
+  project    = var.project_id
+  location   = var.region
+  cluster    = google_container_cluster.production.name
+  node_count = 3
+
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+
+  autoscaling {
+    min_node_count = 3
+    max_node_count = 30
+  }
+
+  upgrade_settings {
+    max_surge       = 3
+    max_unavailable = 1
+    strategy        = "SURGE"
+  }
+
+  node_config {
+    machine_type = "n2-standard-8"
+    disk_size_gb = 200
+    disk_type    = "pd-ssd"
+    image_type   = "COS_CONTAINERD"
+
+    shielded_instance_config {
+      enable_secure_boot          = true
+      enable_integrity_monitoring = true
+    }
+
+    workload_metadata_config {
+      mode = "GKE_METADATA"
+    }
+
+    labels = {
+      environment = "production"
+      nodepool    = "compute"
+    }
+  }
+}
+
+resource "google_container_node_pool" "high_memory_pool" {
+  name       = "high-memory-pool"
+  project    = var.project_id
+  location   = var.region
+  cluster    = google_container_cluster.production.name
+  node_count = 2
+
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+
+  autoscaling {
+    min_node_count = 2
+    max_node_count = 15
+  }
+
+  node_config {
+    machine_type = "n2-highmem-16"
+    disk_size_gb = 500
+    disk_type    = "pd-ssd"
+    image_type   = "COS_CONTAINERD"
+
+    labels = {
+      environment       = "production"
+      nodepool          = "memory-intensive"
+      workload-type     = "memory"
+    }
+
+    taint {
+      key    = "workload"
+      value  = "memory"
+      effect = "NO_SCHEDULE"
+    }
+  }
+}
+
+resource "google_container_node_pool" "gpu_pool" {
+  name       = "gpu-pool"
+  project    = var.project_id
+  location   = var.region
+  cluster    = google_container_cluster.production.name
+  node_count = 0
+
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+
+  autoscaling {
+    min_node_count = 0
+    max_node_count = 10
+  }
+
+  node_config {
+    machine_type = "n1-standard-4"
+    disk_size_gb = 200
+    disk_type    = "pd-ssd"
+    image_type   = "COS_CONTAINERD"
+
+    guest_accelerator {
+      type  = "nvidia-tesla-t4"
+      count = 1
+    }
+
+    labels = {
+      environment = "production"
+      nodepool    = "gpu"
+      accelerator = "nvidia"
+    }
+
+    taint {
+      key    = "nvidia.com/gpu"
+      value  = "true"
+      effect = "NO_SCHEDULE"
+    }
+  }
+}
+
+output "cluster_name" {
+  value = google_container_cluster.production.name
+}
+
+output "cluster_endpoint" {
+  value = google_container_cluster.production.endpoint
+}
+
+output "cluster_ca_certificate" {
+  value     = google_container_cluster.production.master_auth[0].cluster_ca_certificate
+  sensitive = true
+}
+```
+
+## 核心组件配置
+
+### 存储类配置
 
 ```yaml
-gke_enterprise_deployment:
-  organization_structure:
-    organization_id: "123456789012"
-    folders:
-      - name: "production"
-        display_name: "Production Environment"
-        billing_account: "billingAccounts/AAAAAA-BBBBBB-CCCCCC"
-        
-      - name: "non-production"
-        display_name: "Non-Production Environments"
-        billing_account: "billingAccounts/XXXXXX-YYYYYY-ZZZZZZ"
-        
-      - name: "platform"
-        display_name: "Platform Services"
-        billing_account: "billingAccounts/AAAAAA-BBBBBB-CCCCCC"
-  
-  project_organization:
-    projects:
-      - name: "gke-production"
-        folder: "production"
-        services:
-          - "container.googleapis.com"
-          - "compute.googleapis.com"
-          - "cloudresourcemanager.googleapis.com"
-          - "iam.googleapis.com"
-          - "monitoring.googleapis.com"
-          - "logging.googleapis.com"
-        
-      - name: "gke-staging"
-        folder: "non-production"
-        services:
-          - "container.googleapis.com"
-          - "compute.googleapis.com"
-          - "cloudresourcemanager.googleapis.com"
-        
-      - name: "gke-platform"
-        folder: "platform"
-        services:
-          - "anthos.googleapis.com"
-          - "gkehub.googleapis.com"
-          - "cloudasset.googleapis.com"
-  
-  cluster_configuration:
-    production_cluster:
-      name: "prod-gke-cluster"
-      location: "us-central1"
-      release_channel: "REGULAR"
-      initial_node_count: 3
-      autoscaling:
-        enabled: true
-        min_node_count: 3
-        max_node_count: 50
-      node_config:
-        machine_type: "n1-standard-4"
-        disk_size_gb: 100
-        disk_type: "pd-ssd"
-        image_type: "COS_CONTAINERD"
-        service_account: "gke-node@project-id.iam.gserviceaccount.com"
-        oauth_scopes:
-          - "https://www.googleapis.com/auth/cloud-platform"
-        labels:
-          environment: "production"
-          team: "platform"
-        taints:
-          - key: "dedicated"
-            value: "production"
-            effect: "NO_SCHEDULE"
-      
-      master_authorized_networks:
-        enabled: true
-        cidr_blocks:
-          - cidr_block: "10.0.0.0/8"
-            display_name: "Corporate Network"
-          - cidr_block: "172.16.0.0/12"
-            display_name: "VPN Network"
-      
-      private_cluster_config:
-        enable_private_nodes: true
-        enable_private_endpoint: false
-        master_ipv4_cidr_block: "172.16.0.0/28"
-      
-      addons_config:
-        http_load_balancing:
-          disabled: false
-        horizontal_pod_autoscaling:
-          disabled: false
-        network_policy_config:
-          disabled: false
-        cloud_run_config:
-          disabled: true
-```
-
-## 2. Advanced Cluster Management
-
-### 2.1 Multi-Region Cluster Setup
-
-```bash
-#!/bin/bash
-# gke_multi_region_setup.sh
-
-PROJECT_ID="gke-production"
-CLUSTER_NAME="multi-region-cluster"
-
-# 1. 创建多区域集群
-gcloud container clusters create-auto $CLUSTER_NAME \
-    --project=$PROJECT_ID \
-    --region=us-central1 \
-    --release-channel=regular \
-    --enable-master-authorized-networks \
-    --master-authorized-networks=10.0.0.0/8,172.16.0.0/12 \
-    --enable-private-nodes \
-    --enable-private-endpoint \
-    --master-ipv4-cidr=172.16.0.0/28 \
-    --enable-ip-alias \
-    --network=default \
-    --subnetwork=default \
-    --cluster-secondary-range-name=pods \
-    --services-secondary-range-name=services \
-    --enable-autoscaling \
-    --min-nodes=3 \
-    --max-nodes=20 \
-    --num-nodes=3 \
-    --enable-autorepair \
-    --enable-autoupgrade \
-    --enable-shielded-nodes \
-    --enable-binary-authorization \
-    --enable-cloud-logging \
-    --enable-cloud-monitoring \
-    --workload-pool=$PROJECT_ID.svc.id.goog
-
-# 2. 创建节点池
-gcloud container node-pools create compute-pool \
-    --project=$PROJECT_ID \
-    --cluster=$CLUSTER_NAME \
-    --region=us-central1 \
-    --machine-type=n1-standard-4 \
-    --disk-size=100 \
-    --disk-type=pd-ssd \
-    --image-type=COS_CONTAINERD \
-    --num-nodes=3 \
-    --enable-autoscaling \
-    --min-nodes=3 \
-    --max-nodes=15 \
-    --enable-autorepair \
-    --enable-autoupgrade \
-    --shielded-secure-boot \
-    --labels=environment=production,pool=compute
-
-# 3. 创建专用节点池
-gcloud container node-pools create high-memory-pool \
-    --project=$PROJECT_ID \
-    --cluster=$CLUSTER_NAME \
-    --region=us-central1 \
-    --machine-type=n1-highmem-8 \
-    --disk-size=200 \
-    --num-nodes=2 \
-    --enable-autoscaling \
-    --min-nodes=2 \
-    --max-nodes=10 \
-    --labels=environment=production,pool=memory-intensive
-```
-
-### 2.2 Cluster Configuration Management
-
-```yaml
-# cluster_config.yaml
-apiVersion: container.cnrm.cloud.google.com/v1beta1
-kind: ContainerCluster
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
-  name: production-cluster
-  namespace: config-control
-spec:
-  location: us-central1
-  initialNodeCount: 3
-  releaseChannel:
-    channel: REGULAR
-  networkRef:
-    name: default
-  subnetworkRef:
-    name: default
-  ipAllocationPolicy:
-    clusterSecondaryRangeName: pods
-    servicesSecondaryRangeName: services
-  privateClusterConfig:
-    enablePrivateEndpoint: false
-    enablePrivateNodes: true
-    masterIpv4CidrBlock: 172.16.0.0/28
-  masterAuthorizedNetworksConfig:
-    cidrBlocks:
-      - cidrBlock: 10.0.0.0/8
-        displayName: Corporate Network
-      - cidrBlock: 172.16.0.0/12
-        displayName: VPN Network
-  binaryAuthorization:
-    evaluationMode: PROJECT_SINGLETON_POLICY_ENFORCE
-  databaseEncryption:
-    state: ENCRYPTED
-    keyName: projects/project-id/locations/us-central1/keyRings/gke-keyring/cryptoKeys/gke-key
-  defaultSnatStatus:
-    disabled: true
-  enableAutopilot: false
-  enableBinaryAuthorization: true
-  enableIntranodeVisibility: true
-  enableKubernetesAlpha: false
-  enableL4IlbSubsetting: true
-  enableLegacyAbac: false
-  enableShieldedNodes: true
-  enableTpu: false
-  loggingConfig:
-    enableComponents:
-      - SYSTEM_COMPONENTS
-      - WORKLOADS
-  monitoringConfig:
-    enableComponents:
-      - SYSTEM_COMPONENTS
-  networkPolicy:
-    enabled: true
-    provider: CALICO
-  notificationConfig:
-    pubsub:
-      enabled: true
-      topic: projects/project-id/topics/gke-notifications
-  resourceUsageExportConfig:
-    bigqueryDestination:
-      datasetId: gke_usage_dataset
-    enableNetworkEgressMetering: true
-    enableResourceConsumptionMetering: true
-```
-
-## 3. Multi-Cloud Integration
-
-### 3.1 Anthos Multi-Cloud Setup
-
-```bash
-#!/bin/bash
-# anthos_multicloud_setup.sh
-
-PROJECT_ID="anthos-platform"
-AWS_REGION="us-west-2"
-AZURE_REGION="eastus"
-
-# 1. 启用Anthos API
-gcloud services enable \
-    anthos.googleapis.com \
-    gkemulticloud.googleapis.com \
-    gkeconnect.googleapis.com \
-    connectgateway.googleapis.com \
-    cloudresourcemanager.googleapis.com
-
-# 2. AWS多云集群配置
-gcloud container aws clusters create aws-cluster \
-    --project=$PROJECT_ID \
-    --location=$AWS_REGION \
-    --aws-region=$AWS_REGION \
-    --control-plane-version=1.25.7-gke.1000 \
-    --fleet-project=$PROJECT_ID \
-    --admin-user-arns="arn:aws:iam::123456789012:user/admin" \
-    --networking-service-address-cidr-blocks=172.20.0.0/16 \
-    --networking-pod-address-cidr-blocks=10.40.0.0/14 \
-    --networking-service-load-balancer-subnet-ids=subnet-12345 \
-    --aws-services-subnet-ids=subnet-67890 \
-    --database-encryption-kms-key-arn="arn:aws:kms:us-west-2:123456789012:key/abcd1234" \
-    --iam-instance-profile="arn:aws:iam::123456789012:instance-profile/gke-node"
-
-# 3. Azure多云集群配置
-gcloud container azure clusters create azure-cluster \
-    --project=$PROJECT_ID \
-    --location=$AZURE_REGION \
-    --azure-region=$AZURE_REGION \
-    --control-plane-version=1.25.7-gke.1000 \
-    --fleet-project=$PROJECT_ID \
-    --network-path="azure-network" \
-    --azure-services-subnet-id="/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/services" \
-    --pod-address-cidr-blocks=10.40.0.0/14 \
-    --service-address-cidr-blocks=172.20.0.0/16 \
-    --replica-placements=zone-failure-domain=1,subnet-id="/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/pods-zone1"
-```
-
-### 3.2 Cross-Cloud Service Mesh
-
-```yaml
-# anthos_service_mesh.yaml
-apiVersion: mesh.cloud.google.com/v1beta1
-kind: Mesh
-metadata:
-  name: enterprise-mesh
-  namespace: istio-system
-spec:
-  mtls:
-    mode: STRICT
-  trustDomain: "company.com"
-  meshMemberships:
-    - name: "projects/gke-production/locations/us-central1/memberships/gke-cluster"
-    - name: "projects/anthos-platform/locations/aws-region/memberships/aws-cluster"
-    - name: "projects/anthos-platform/locations/azure-region/memberships/azure-cluster"
-  controlPlane:
-    managed:
-      location: "us-central1"
-  revision: "asm-managed"
-  channel: "rapid"
-
----
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  mtls:
-    mode: STRICT
-
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: cross-cloud-routing
-  namespace: production
-spec:
-  hosts:
-    - "api.company.com"
-  gateways:
-    - istio-system/ingressgateway
-  http:
-    - match:
-        - headers:
-            cloud:
-              exact: "gcp"
-      route:
-        - destination:
-            host: gke-service.production.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - headers:
-            cloud:
-              exact: "aws"
-      route:
-        - destination:
-            host: aws-service.production.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - headers:
-            cloud:
-              exact: "azure"
-      route:
-        - destination:
-            host: azure-service.production.svc.cluster.local
-            port:
-              number: 80
-```
-
-## 4. Security and Compliance
-
-### 4.1 Advanced Security Configuration
-
-```bash
-#!/bin/bash
-# gke_security_hardening.sh
-
-PROJECT_ID="gke-production"
-CLUSTER_NAME="prod-cluster"
-
-# 1. 启用二进制授权
-gcloud container clusters update $CLUSTER_NAME \
-    --project=$PROJECT_ID \
-    --region=us-central1 \
-    --enable-binauthz
-
-# 2. 配置网络安全策略
-cat > network_policy.yaml << 'EOF'
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: default-deny
-  namespace: production
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-    - Egress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-dns
-  namespace: production
-spec:
-  podSelector: {}
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
-EOF
-
-# 3. 配置Pod安全策略
-cat > pod_security_policy.yaml << 'EOF'
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: restricted
+  name: gce-ssd
   annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
-    apparmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
-    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'runtime/default'
-    apparmor.security.beta.kubernetes.io/defaultProfileName:  'runtime/default'
-spec:
-  privileged: false
-  allowPrivilegeEscalation: false
-  requiredDropCapabilities:
-    - ALL
-  volumes:
-    - 'configMap'
-    - 'emptyDir'
-    - 'projected'
-    - 'secret'
-    - 'downwardAPI'
-    - 'persistentVolumeClaim'
-  hostNetwork: false
-  hostIPC: false
-  hostPID: false
-  runAsUser:
-    rule: 'MustRunAsNonRoot'
-  seLinux:
-    rule: 'RunAsAny'
-  supplementalGroups:
-    rule: 'MustRunAs'
-    ranges:
-      - min: 1
-        max: 65535
-  fsGroup:
-    rule: 'MustRunAs'
-    ranges:
-      - min: 1
-        max: 65535
-  readOnlyRootFilesystem: true
-EOF
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: pd.csi.storage.gke.io
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+parameters:
+  type: pd-ssd
+  replication-type: regional-pd
+  disk-encryption-kms-key: projects/gke-production/locations/us-central1/keyRings/gke-keyring/cryptoKeys/gke-disk-key
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-balanced
+provisioner: pd.csi.storage.gke.io
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+parameters:
+  type: pd-balanced
+  replication-type: regional-pd
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-filestore
+provisioner: filestore.csi.storage.gke.io
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  tier: STANDARD
+  network: projects/gke-production/global/networks/production-vpc
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-filestore-premium
+provisioner: filestore.csi.storage.gke.io
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  tier: PREMIUM
+  network: projects/gke-production/global/networks/production-vpc
+  nfsExportOptions:
+  - accessMode: READ_WRITE
+    squashMode: NO_ROOT_SQUASH
+    uid: 0
+    gid: 0
 ```
 
-### 4.2 Compliance and Audit Setup
+### 多集群 Ingress 配置
 
 ```yaml
-# compliance_config.yaml
-apiVersion: securitycenter.googleapis.com/v1
-kind: SecurityHealthAnalyticsCustomConfig
+apiVersion: networking.gke.io/v1
+kind: MultiClusterService
 metadata:
-  name: gke-compliance-rules
-  namespace: security
+  name: global-service
+  namespace: production
 spec:
-  rules:
-    - name: "require-private-clusters"
-      description: "All GKE clusters must be private"
-      severity: "HIGH"
-      expression: "resource.type == 'gke_cluster' && resource.data.private_cluster_config.enable_private_nodes == false"
-    
-    - name: "require-master-authorized-networks"
-      description: "Master authorized networks must be enabled"
-      severity: "HIGH"
-      expression: "resource.type == 'gke_cluster' && resource.data.master_authorized_networks_config.enabled == false"
-    
-    - name: "require-shielded-nodes"
-      description: "Shielded nodes must be enabled"
-      severity: "MEDIUM"
-      expression: "resource.type == 'gke_cluster' && resource.data.shielded_nodes.enabled == false"
-    
-    - name: "require-binary-authorization"
-      description: "Binary authorization must be enabled"
-      severity: "HIGH"
-      expression: "resource.type == 'gke_cluster' && resource.data.binary_authorization.enabled == false"
+  template:
+    spec:
+      selector:
+        app: global-app
+      ports:
+      - name: http
+        protocol: TCP
+        port: 80
+        targetPort: 8080
+      - name: grpc
+        protocol: TCP
+        port: 9090
+        targetPort: 9090
+---
+apiVersion: networking.gke.io/v1
+kind: MultiClusterIngress
+metadata:
+  name: global-ingress
+  namespace: production
+  annotations:
+    networking.gke.io/frontend-config: "global-frontend-config"
+    networking.gke.io/backend-config: "global-backend-config"
+spec:
+  template:
+    spec:
+      backend:
+        serviceName: global-service
+        servicePort: 80
+      rules:
+      - host: app.example.com
+        http:
+          paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              serviceName: global-service
+              servicePort: 80
+          - path: /grpc
+            pathType: Prefix
+            backend:
+              serviceName: global-service
+              servicePort: 9090
+  clusters:
+  - link: "projects/gke-production/locations/us-central1/clusters/prod-cluster"
+  - link: "projects/gke-production/locations/europe-west1/clusters/eu-cluster"
+  - link: "projects/gke-production/locations/asia-east1/clusters/apac-cluster"
+---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: global-frontend-config
+  namespace: production
+spec:
+  redirectToHttps:
+    enabled: true
+    responseCodeName: MOVED_PERMANENTLY_DEFAULT
+  sslPolicy: gke-production-ssl-policy
+---
+apiVersion: networking.gke.io/v1beta1
+kind: BackendConfig
+metadata:
+  name: global-backend-config
+  namespace: production
+spec:
+  healthCheck:
+    checkIntervalSec: 10
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 3
+    type: HTTP
+    requestPath: /healthz
+    port: 8080
+  connectionDraining:
+    drainingTimeoutSec: 60
+  sessionAffinity:
+    affinityType: GENERATED_COOKIE
+    affinityCookieTtlSec: 3600
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHostHeader: true
+      includeProtocol: true
+      includeQueryString: false
+```
 
+### Workload Identity 配置
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gcp-workload-sa
+  namespace: production
+  annotations:
+    iam.gke.io/gcp-service-account: production-sa@gke-production.iam.gserviceaccount.com
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workload-identity-app
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wi-app
+  template:
+    metadata:
+      labels:
+        app: wi-app
+    spec:
+      serviceAccountName: gcp-workload-sa
+      containers:
+      - name: app
+        image: gcr.io/gke-production/app:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        env:
+        - name: GOOGLE_CLOUD_PROJECT
+          value: "gke-production"
+        - name: SPANNER_INSTANCE
+          value: "production-instance"
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: compliance-audit-config
-  namespace: audit
-data:
-  audit-policy.yaml: |
-    apiVersion: audit.k8s.io/v1
-    kind: Policy
-    rules:
-      - level: Metadata
-        resources:
-          - group: ""
-            resources: ["pods", "services", "namespaces"]
-      
-      - level: Request
-        resources:
-          - group: "authorization.k8s.io"
-            resources: ["subjectaccessreviews"]
-      
-      - level: RequestResponse
-        resources:
-          - group: ""
-            resources: ["secrets"]
-      
-      - level: None
-        users: ["system:kube-proxy"]
-        verbs: ["watch"]
-```
-
-## 5. Cost Optimization and Management
-
-### 5.1 Cost Monitoring Configuration
-
-```bash
-#!/bin/bash
-# gke_cost_optimization.sh
-
-PROJECT_ID="gke-production"
-
-# 1. 启用计费导出
-gcloud beta billing accounts link $PROJECT_ID \
-    --billing-account="billingAccounts/AAAAAA-BBBBBB-CCCCCC"
-
-# 2. 创建BigQuery数据集用于成本分析
-bq mk --dataset $PROJECT_ID:gke_billing
-
-# 3. 配置计费导出到BigQuery
-gcloud beta billing accounts projects link $PROJECT_ID \
-    --account-id="AAAAAA-BBBBBB-CCCCCC"
-
-# 4. 创建成本优化策略
-cat > cost_optimization_policy.yaml << 'EOF'
-apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sContainerRequests
-metadata:
-  name: container-cpu-memory-constraints
-spec:
-  match:
-    kinds:
-      - apiGroups: [""]
-        kinds: ["Pod"]
-  parameters:
-    cpu: "500m"
-    memory: "1Gi"
-    limits:
-      cpu: "2000m"
-      memory: "4Gi"
-EOF
-
-# 5. 资源使用监控脚本
-cat > resource_monitoring.sh << 'EOF'
-#!/bin/bash
-
-# 监控CPU和内存使用情况
-monitor_resources() {
-    echo "=== Resource Usage Report ==="
-    echo "Timestamp: $(date)"
-    
-    # 节点资源使用
-    echo -e "\nNode Resource Usage:"
-    kubectl top nodes
-    
-    # Pod资源使用
-    echo -e "\nTop Resource Consumers:"
-    kubectl top pods --all-namespaces | head -20
-    
-    # 检查未使用的资源
-    echo -e "\nPotentially Wasted Resources:"
-    kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,STATUS:.status.phase,CPU:.spec.containers[*].resources.requests.cpu,MEMORY:.spec.containers[*].resources.requests.memory | grep -E "(0m|0$|<none>)"
-}
-
-# 成本分析
-analyze_costs() {
-    echo -e "\n=== Cost Analysis ==="
-    
-    # 使用Cloud Billing API查询成本
-    gcloud beta billing accounts get-iam-policy "AAAAAA-BBBBBB-CCCCCC" \
-        --format="table(bindings.members, bindings.role)"
-    
-    # 查询最近的费用
-    bq query --nouse_legacy_sql '
-        SELECT 
-            service.description as service,
-            SUM(cost) as total_cost,
-            SUM((SELECT SUM(amount) FROM UNNEST(credits))) as total_credit,
-            SUM(cost) + SUM((SELECT SUM(amount) FROM UNNEST(credits))) as net_cost
-        FROM `project-id.gke_billing.gcp_billing_export_v1_*`
-        WHERE _TABLE_SUFFIX BETWEEN FORMAT_TIMESTAMP("%Y%m%d", DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY))
-        AND FORMAT_TIMESTAMP("%Y%m%d", CURRENT_DATE())
-        GROUP BY service
-        ORDER BY net_cost DESC
-        LIMIT 10
-    '
-}
-
-monitor_resources
-analyze_costs
-EOF
-```
-
-### 5.2 Automated Scaling and Optimization
-
-```yaml
-# autoscaling_config.yaml
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: app-vpa
+  name: wi-app-service
   namespace: production
 spec:
-  targetRef:
-    apiVersion: "apps/v1"
-    kind: Deployment
-    name: application-deployment
-  updatePolicy:
-    updateMode: "Auto"
-  resourcePolicy:
-    containerPolicies:
-      - containerName: "application"
-        minAllowed:
-          cpu: "100m"
-          memory: "256Mi"
-        maxAllowed:
-          cpu: "1000m"
-          memory: "2Gi"
-        controlledResources: ["cpu", "memory"]
+  selector:
+    app: wi-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP
+```
 
+## 安全配置
+
+### Binary Authorization 策略
+
+```yaml
+apiVersion: binaryauthorization.cnrm.cloud.google.com/v1beta1
+kind: BinaryAuthorizationPolicy
+metadata:
+  name: production-binauthz-policy
+spec:
+  admissionWhitelistPatterns:
+  - namePattern: "gcr.io/gke-production/*"
+  - namePattern: "gcr.io/google-containers/*"
+  - namePattern: "gcr.io/stackdriver-agents/*"
+  - namePattern: "gke.gcr.io/*"
+  defaultAdmissionRule:
+    evaluationMode: REQUIRE_ATTESTATION
+    enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
+    requireAttestationsBy:
+    - projects/gke-production/attestors/build-attestor
+    - projects/gke-production/attestors/security-attestor
+  clusterAdmissionRules:
+    us-central1.production-gke-cluster:
+      evaluationMode: REQUIRE_ATTESTATION
+      enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
+      requireAttestationsBy:
+      - projects/gke-production/attestors/build-attestor
+      - projects/gke-production/attestors/security-attestor
 ---
+apiVersion: binaryauthorization.cnrm.cloud.google.com/v1beta1
+kind: BinaryAuthorizationAttestor
+metadata:
+  name: build-attestor
+spec:
+  description: "CI/CD Pipeline Build Attestor"
+  attestationAuthorityNote:
+    noteReference: "projects/gke-production/notes/build-attestor-note"
+    publicKeys:
+    - asciiArmoredPgpPublicKey: |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+        mQINBGV...build attestor key...
+        -----END PGP PUBLIC KEY BLOCK-----
+      id: "build-attestor-key-2026"
+---
+apiVersion: binaryauthorization.cnrm.cloud.google.com/v1beta1
+kind: BinaryAuthorizationAttestor
+metadata:
+  name: security-attestor
+spec:
+  description: "Security Scan Attestor"
+  attestationAuthorityNote:
+    noteReference: "projects/gke-production/notes/security-attestor-note"
+    publicKeys:
+    - asciiArmoredPgpPublicKey: |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+        mQINBGV...security attestor key...
+        -----END PGP PUBLIC KEY BLOCK-----
+      id: "security-attestor-key-2026"
+```
+
+### Anthos Policy Controller 配置
+
+```yaml
+apiVersion: configmanagement.gke.io/v1
+kind: Repo
+metadata:
+  name: policy-repo
+spec:
+  version: "1.16.0"
+---
+apiVersion: configmanagement.gke.io/v1
+kind: ConfigManagement
+metadata:
+  name: config-management
+spec:
+  policyController:
+    enabled: true
+    templateLibrary:
+      installed: true
+    referentialRulesEnabled: true
+    audit:
+      dryRunMode: true
+      interval: 120s
+    exemptableNamespaces:
+    - kube-system
+    - config-management-system
+    - istio-system
+  configSync:
+    enabled: true
+    sourceFormat: unstructured
+    syncRepo: "https://gitlab.com/company/config-sync"
+    syncBranch: main
+    syncRev: HEAD
+    policyDir: "config"
+    secretType: ssh
+```
+
+### 网络策略配置
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-cache
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:
+    - protocol: TCP
+      port: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-database
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: cloud-sql-proxy
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:
+    - protocol: TCP
+      port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-to-gcp-api
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - protocol: TCP
+      port: 443
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: v1.30
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+    geo: us-central1
+    environment: production
+```
+
+## 监控告警
+
+### Prometheus 告警规则
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: gke-alert-rules
+  namespace: monitoring
+spec:
+  groups:
+  - name: gke.infra.rules
+    rules:
+    - alert: GKENodeNotReady
+      expr: kube_node_status_condition{condition="Ready",status="false"} == 1
+      for: 5m
+      labels:
+        severity: critical
+        team: infrastructure
+      annotations:
+        summary: "GKE 节点不可用"
+        description: "节点 {{ $labels.node }} 在 GKE 集群中 NotReady 已超过 5 分钟"
+        runbook_url: "https://wiki.company.com/runbooks/gke-node-not-ready"
+
+    - alert: GKEPreemptibleNodeTerminating
+      expr: kube_node_status_condition{condition="Ready",status="unknown"} == 1
+      for: 2m
+      labels:
+        severity: warning
+        team: infrastructure
+      annotations:
+        summary: "Preemptible 节点可能正在终止"
+        description: "节点 {{ $labels.node }} 状态未知，可能是 Preemptible 节点被回收"
+
+    - alert: GKEHighPodRestarts
+      expr: rate(kube_pod_container_status_restarts_total[15m]) * 60 * 5 > 0
+      for: 5m
+      labels:
+        severity: warning
+        team: application
+      annotations:
+        summary: "Pod 高重启率"
+        description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 在 15 分钟内持续重启"
+
+    - alert: GKEPVCUsageHigh
+      expr: (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) * 100 > 85
+      for: 10m
+      labels:
+        severity: warning
+        team: infrastructure
+      annotations:
+        summary: "PVC 使用率过高"
+        description: "PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} 使用率超过 85%"
+
+    - alert: GKEPVCUsageCritical
+      expr: (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) * 100 > 95
+      for: 5m
+      labels:
+        severity: critical
+        team: infrastructure
+      annotations:
+        summary: "PVC 使用率严重"
+        description: "PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} 使用率超过 95%，即将写满"
+
+    - alert: GKEHPAMaxReplicas
+      expr: kube_hpa_status_current_replicas == kube_hpa_spec_max_replicas
+      for: 15m
+      labels:
+        severity: warning
+        team: application
+      annotations:
+        summary: "HPA 达到最大副本数"
+        description: "HPA {{ $labels.namespace }}/{{ $labels.hpa }} 已达上限 {{ $value }}"
+
+    - alert: GKEClusterAutoscalerScaleUp
+      expr: increase(cluster_autoscaler_scale_up_total[1h]) > 5
+      for: 5m
+      labels:
+        severity: info
+        team: infrastructure
+      annotations:
+        summary: "集群频繁扩容"
+        description: "集群在过去 1 小时内扩容超过 5 次，建议检查资源规划"
+
+    - alert: GKEHighErrorRate
+      expr: |
+        sum(rate(http_requests_total{status=~"5..",namespace="production"}[5m]))
+        /
+        sum(rate(http_requests_total{namespace="production"}[5m]))
+        > 0.05
+      for: 5m
+      labels:
+        severity: critical
+        team: application
+      annotations:
+        summary: "生产环境错误率过高"
+        description: "生产环境 5xx 错误率超过 5%，当前值 {{ $value | humanizePercentage }}"
+
+    - alert: GKEHighLatency
+      expr: |
+        histogram_quantile(0.95,
+          sum(rate(http_request_duration_seconds_bucket{namespace="production"}[5m]))
+          by (le, job)
+        ) > 2
+      for: 10m
+      labels:
+        severity: warning
+        team: application
+      annotations:
+        summary: "生产环境延迟过高"
+        description: "P95 延迟超过 2 秒，当前值 {{ $value }}s"
+
+    - alert: GKEMemoryPressure
+      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+      for: 5m
+      labels:
+        severity: warning
+        team: infrastructure
+      annotations:
+        summary: "节点内存压力"
+        description: "节点 {{ $labels.node }} 内存压力持续 5 分钟"
+
+    - alert: GKEDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 5m
+      labels:
+        severity: warning
+        team: infrastructure
+      annotations:
+        summary: "节点磁盘压力"
+        description: "节点 {{ $labels.node }} 磁盘压力持续 5 分钟"
+
+    - alert: GKEPodDisruptionBudgetViolation
+      expr: |
+        kube_poddisruptionbudget_status_current_healthy
+        < kube_poddisruptionbudget_status_desired_healthy
+      for: 15m
+      labels:
+        severity: warning
+        team: application
+      annotations:
+        summary: "PDB 违规"
+        description: "PDB {{ $labels.namespace }}/{{ $labels.poddisruptionbudget }} 健康副本数低于期望值"
+```
+
+### 自动扩缩容配置
+
+```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -725,262 +1244,394 @@ spec:
   minReplicas: 3
   maxReplicas: 50
   metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization: 80
-    - type: External
-      external:
-        metric:
-          name: "queue_depth"
-        target:
-          type: Value
-          value: "100"
-```
-
-## 6. Hybrid Cloud Networking
-
-### 6.1 Cloud Interconnect Setup
-
-```bash
-#!/bin/bash
-# hybrid_networking.sh
-
-PROJECT_ID="gke-platform"
-
-# 1. 创建Cloud Router
-gcloud compute routers create hybrid-router \
-    --project=$PROJECT_ID \
-    --region=us-central1 \
-    --network=default
-
-# 2. 创建Cloud Interconnect附件
-gcloud compute interconnects attachments partner create dc-interconnect \
-    --project=$PROJECT_ID \
-    --region=us-central1 \
-    --router=hybrid-router \
-    --mtu=1500 \
-    --type=PARTNER
-
-# 3. 配置BGP对等
-cat > bgp_config.yaml << 'EOF'
-apiVersion: compute.cnrm.cloud.google.com/v1beta1
-kind: ComputeRouter
-metadata:
-  name: hybrid-router
-  namespace: networking
-spec:
-  region: us-central1
-  networkRef:
-    name: default
-  bgp:
-    asn: 65001
-    advertiseMode: CUSTOM
-    advertisedGroups:
-      - ALL_SUBNETS
-    peers:
-      - name: on-prem-router
-        peerIpAddress: 169.254.0.1
-        peerAsn: 65000
-        interfaceName: if-google-1
-        advertiseMode: CUSTOM
-        advertisedRoutes:
-          - prefix: 10.0.0.0/16
-          - prefix: 172.16.0.0/16
-EOF
-
-# 4. 配置防火墙规则
-gcloud compute firewall-rules create allow-hybrid-traffic \
-    --project=$PROJECT_ID \
-    --network=default \
-    --allow=tcp:80,tcp:443,tcp:22 \
-    --source-ranges=10.0.0.0/8,172.16.0.0/12 \
-    --target-tags=gke-node
-```
-
-### 6.2 Multi-Cloud Load Balancing
-
-```yaml
-# multi_cloud_load_balancer.yaml
-apiVersion: networking.gke.io/v1
-kind: MultiClusterService
-metadata:
-  name: global-service
-  namespace: production
-spec:
-  template:
-    spec:
-      selector:
-        app: global-app
-      ports:
-        - name: http
-          protocol: TCP
-          port: 80
-          targetPort: 8080
-
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: External
+    external:
+      metric:
+        name: custom.googleapis.com|queue_depth
+      target:
+        type: AverageValue
+        averageValue: "100"
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "1000"
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+      selectPolicy: Min
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 60
+      - type: Pods
+        value: 5
+        periodSeconds: 60
+      selectPolicy: Max
 ---
-apiVersion: networking.gke.io/v1
-kind: MultiClusterIngress
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
 metadata:
-  name: global-ingress
+  name: application-vpa
   namespace: production
 spec:
-  template:
-    spec:
-      rules:
-        - host: "app.company.com"
-          http:
-            paths:
-              - path: "/*"
-                pathType: ImplementationSpecific
-                backend:
-                  service:
-                    name: global-service
-                    port:
-                      number: 80
-  clusters:
-    - link: "projects/gke-production/locations/us-central1/clusters/prod-cluster"
-    - link: "projects/anthos-platform/locations/aws-region/clusters/aws-cluster"
-    - link: "projects/anthos-platform/locations/azure-region/clusters/azure-cluster"
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: application-deployment
+  updatePolicy:
+    updateMode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+    - containerName: "application"
+      minAllowed:
+        cpu: "100m"
+        memory: "256Mi"
+      maxAllowed:
+        cpu: "2000m"
+        memory: "4Gi"
+      controlledResources: ["cpu", "memory"]
 ```
 
-## 7. Disaster Recovery and Backup
+## 运维管理
 
-### 7.1 Backup Configuration
+### 备份与恢复
 
 ```bash
 #!/bin/bash
-# gke_backup_restore.sh
+set -euo pipefail
 
 PROJECT_ID="gke-production"
-CLUSTER_NAME="prod-cluster"
-BACKUP_BUCKET="gke-backups-company"
+CLUSTER_NAME="prod-gke-cluster"
+LOCATION="us-central1"
 
-# 1. 启用备份API
-gcloud services enable gkebackup.googleapis.com
+echo "=== GKE 备份管理 ==="
+echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
 
-# 2. 创建备份计划
-gcloud container backup-restore backup-plans create daily-backup \
+echo "[1] 启用 Backup for GKE API"
+gcloud services enable gkebackup.googleapis.com --project=$PROJECT_ID
+
+echo "[2] 创建备份计划 - 每日全量备份"
+gcloud container backup-restore backup-plans create daily-full-backup \
     --project=$PROJECT_ID \
-    --location=us-central1 \
+    --location=$LOCATION \
     --cluster=$CLUSTER_NAME \
     --all-namespaces \
     --include-volume-data \
     --retention-period=30d \
-    --cron-schedule="0 2 * * *"
+    --cron-schedule="0 2 * * *" \
+    --description="每日凌晨2点全量备份，保留30天"
 
-# 3. 手动创建备份
-gcloud container backup-restore backups create manual-backup-$(date +%Y%m%d) \
-    --project=$PROJECT_ID \
-    --location=us-central1 \
-    --backup-plan=daily-backup
-
-# 4. 验证备份
-gcloud container backup-restore backups list \
-    --project=$PROJECT_ID \
-    --location=us-central1 \
-    --backup-plan=daily-backup
-
-# 5. 恢复脚本
-cat > restore_cluster.sh << 'EOF'
-#!/bin/bash
-
-PROJECT_ID="gke-production"
-LOCATION="us-central1"
-BACKUP_NAME=$1
-RESTORE_CLUSTER=$2
-
-if [ -z "$BACKUP_NAME" ] || [ -z "$RESTORE_CLUSTER" ]; then
-    echo "Usage: $0 <backup-name> <restore-cluster-name>"
-    exit 1
-fi
-
-# 创建恢复操作
-gcloud container backup-restore restores create restore-$(date +%Y%m%d-%H%M%S) \
+echo "[3] 创建备份计划 - 每小时增量备份（仅 production 命名空间）"
+gcloud container backup-restore backup-plans create hourly-incremental \
     --project=$PROJECT_ID \
     --location=$LOCATION \
-    --backup-plan=daily-backup \
-    --backup=$BACKUP_NAME \
-    --cluster=$RESTORE_CLUSTER \
-    --namespaces="production,staging" \
-    --volume-data-restore-policy=RESTORE_VOLUME_DATA_FROM_BACKUP
+    --cluster=$CLUSTER_NAME \
+    --selected-namespaces="production" \
+    --include-volume-data \
+    --retention-period=7d \
+    --cron-schedule="0 * * * *" \
+    --description="每小时增量备份 production 命名空间"
 
-echo "Restore operation initiated for backup: $BACKUP_NAME"
-echo "Restore cluster: $RESTORE_CLUSTER"
-EOF
+echo "[4] 创建按需备份"
+BACKUP_NAME="manual-backup-$(date +%Y%m%d-%H%M%S)"
+gcloud container backup-restore backups create $BACKUP_NAME \
+    --project=$PROJECT_ID \
+    --location=$LOCATION \
+    --backup-plan=daily-full-backup \
+    --wait-for-completion
+
+echo "[5] 列出所有备份"
+gcloud container backup-restore backups list \
+    --project=$PROJECT_ID \
+    --location=$LOCATION \
+    --backup-plan=daily-full-backup \
+    --format="table(name,cluster,status.state,createTime)"
+
+echo "[6] 创建恢复（跨集群恢复）"
+restore_cluster() {
+    local backup_name=$1
+    local target_cluster=$2
+    local target_project=$3
+    echo "恢复 $backup_name 到 $target_cluster..."
+    gcloud container backup-restore restores create restore-$(date +%Y%m%d-%H%M%S) \
+        --project=$target_project \
+        --location=$LOCATION \
+        --backup-plan=daily-full-backup \
+        --backup=$backup_name \
+        --cluster=$target_cluster \
+        --namespaces="production,staging" \
+        --volume-data-restore-policy=RESTORE_VOLUME_DATA_FROM_BACKUP \
+        --wait-for-completion
+    echo "恢复完成: $backup_name -> $target_cluster"
+}
+
+echo "=== 备份管理完成 ==="
 ```
 
-### 7.2 Cross-Region Failover
+### 集群升级脚本
 
-```yaml
-# cross_region_failover.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: failover-config
-  namespace: disaster-recovery
-data:
-  failover-policy.yaml: |
-    apiVersion: dr.backuprestore.gke.io/v1alpha1
-    kind: FailoverPolicy
-    metadata:
-      name: cross-region-failover
-    spec:
-      primaryRegion: us-central1
-      secondaryRegions:
-        - us-west1
-        - us-east1
-      failoverConditions:
-        - type: ClusterUnhealthy
-          threshold: 5m
-        - type: RegionOutage
-          threshold: 10m
-      recoveryTimeObjective: 15m
-      recoveryPointObjective: 5m
-      automatedFailover: true
-      testSchedule: "0 0 * * 0"  # Weekly tests
+```bash
+#!/bin/bash
+set -euo pipefail
 
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: failover-test
-  namespace: disaster-recovery
-spec:
-  schedule: "0 0 * * 0"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-            - name: failover-test
-              image: gcr.io/google-samples/failover-tester:latest
-              env:
-                - name: PRIMARY_CLUSTER
-                  value: "projects/gke-production/locations/us-central1/clusters/prod-cluster"
-                - name: SECONDARY_CLUSTER
-                  value: "projects/gke-production/locations/us-west1/clusters/backup-cluster"
-              command:
-                - "/bin/sh"
-                - "-c"
-                - |
-                  echo "Starting failover test..."
-                  # 执行故障转移测试逻辑
-                  kubectl config use-context $SECONDARY_CLUSTER
-                  kubectl apply -f test-workloads.yaml
-                  sleep 300
-                  kubectl delete -f test-workloads.yaml
-                  echo "Failover test completed"
-          restartPolicy: OnFailure
+PROJECT_ID="gke-production"
+CLUSTER_NAME="prod-gke-cluster"
+LOCATION="us-central1"
+
+echo "=== GKE 集群滚动升级 ==="
+echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
+
+CURRENT_VERSION=$(gcloud container clusters describe $CLUSTER_NAME \
+  --project=$PROJECT_ID --region=$LOCATION \
+  --format="value(currentMasterVersion)")
+echo "当前版本: $CURRENT_VERSION"
+
+LATEST_VERSION=$(gcloud container get-server-config \
+  --project=$PROJECT_ID --region=$LOCATION \
+  --format="value(validMasterVersions[0])")
+echo "最新版本: $LATEST_VERSION"
+
+if [[ "$CURRENT_VERSION" == "$LATEST_VERSION" ]]; then
+    echo "集群已是最新版本，无需升级"
+    exit 0
+fi
+
+echo "[1] 创建升级前备份"
+gcloud container backup-restore backups create pre-upgrade-backup-$(date +%Y%m%d) \
+    --project=$PROJECT_ID \
+    --location=$LOCATION \
+    --backup-plan=daily-full-backup
+
+echo "[2] 升级控制平面（先升级 Master）"
+gcloud container clusters upgrade $CLUSTER_NAME \
+    --project=$PROJECT_ID --region=$LOCATION \
+    --master --cluster-version=$LATEST_VERSION
+
+echo "[3] 等待控制平面稳定"
+sleep 120
+
+echo "[4] 逐个升级节点池"
+for pool in $(gcloud container node-pools list --cluster=$CLUSTER_NAME \
+  --project=$PROJECT_ID --region=$LOCATION --format="value(name)"); do
+    echo "升级节点池: $pool"
+    gcloud container clusters upgrade $CLUSTER_NAME \
+        --project=$PROJECT_ID --region=$LOCATION \
+        --node-pool=$pool \
+        --cluster-version=$LATEST_VERSION \
+        --max-surge-upgrade=3 \
+        --max-unavailable-upgrade=1
+    
+    echo "等待节点池 $pool 就绪..."
+    sleep 60
+    
+    echo "验证节点池 $pool 状态:"
+    kubectl get nodes -l cloud.google.com/gke-nodepool=$pool -o wide
+done
+
+echo "[5] 验证集群版本"
+gcloud container clusters describe $CLUSTER_NAME \
+    --project=$PROJECT_ID --region=$LOCATION \
+    --format="table(name,currentMasterVersion,currentNodeVersion,nodeCount)"
+
+echo "[6] 验证所有节点"
+kubectl get nodes -o wide
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded
+
+echo "[7] 验证核心组件"
+kubectl get pods -n kube-system -o wide
+kubectl get pods -n istio-system -o wide
+kubectl get pods -n monitoring -o wide
+
+echo "=== 升级完成 ==="
 ```
 
+### 日常运维检查脚本
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+PROJECT_ID="gke-production"
+CLUSTER_NAME="prod-gke-cluster"
+LOCATION="us-central1"
+
+echo "=== GKE 集群日常运维检查 ==="
+echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
+
+echo -e "\n[1] 集群基本信息"
+gcloud container clusters describe $CLUSTER_NAME \
+    --project=$PROJECT_ID --region=$LOCATION \
+    --format="table(name,status,currentMasterVersion,currentNodeVersion,nodeCount,location)"
+
+echo -e "\n[2] 节点池状态"
+gcloud container node-pools list --cluster=$CLUSTER_NAME \
+    --project=$PROJECT_ID --region=$LOCATION \
+    --format="table(name,status,version,machineType,initialNodeCount,autoscaling.enabled)"
+
+echo -e "\n[3] Kubernetes 节点状态"
+kubectl get nodes -o wide
+
+echo -e "\n[4] 节点资源使用"
+kubectl top nodes 2>/dev/null || echo "Metrics Server 未就绪"
+
+echo -e "\n[5] 异常 Pod 检查"
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded
+
+echo -e "\n[6] 高重启率 Pod"
+kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount' | tail -10
+
+echo -e "\n[7] 资源使用 Top 20 Pod"
+kubectl top pods -A --sort-by=cpu 2>/dev/null | head -20 || echo "Metrics Server 未就绪"
+
+echo -e "\n[8] PVC 使用状态"
+kubectl get pvc -A -o wide
+
+echo -e "\n[9] 最近事件"
+kubectl get events -A --sort-by='.lastTimestamp' | tail -30
+
+echo -e "\n[10] Ingress 状态"
+kubectl get ingress -A -o wide
+
+echo -e "\n[11] 备份状态"
+gcloud container backup-restore backups list \
+    --project=$PROJECT_ID --location=$LOCATION \
+    --backup-plan=daily-full-backup \
+    --format="table(name,status.state,createTime)" \
+    --limit=5
+
+echo -e "\n[12] 安全扫描结果"
+gcloud container binauthz attestations list \
+    --project=$PROJECT_ID \
+    --attestor=build-attestor \
+    --format="table(name,createTime)" \
+    --limit=5 2>/dev/null || echo "Binary Authorization 未配置"
+
+echo "=== 运维检查完成 ==="
+```
+
+## 最佳实践
+
+| 类别 | 最佳实践 | 说明 |
+|:---|:---|:---|
+| 集群 | 使用 Autopilot 模式 | 对大多数工作负载使用 Autopilot，简化运维 |
+| 集群 | Regional 集群 | 使用 Regional 集群替代 Zonal，确保控制平面高可用 |
+| 集群 | Release Channel | 使用 REGULAR Release Channel，平衡稳定性和新功能 |
+| 安全 | Binary Authorization | 启用镜像签名验证，确保供应链安全 |
+| 安全 | Workload Identity | 使用 Workload Identity 替代服务账户密钥 |
+| 安全 | Shielded Nodes | 启用安全启动和完整性监控 |
+| 安全 | KMS 加密 | 使用 Cloud KMS HSM 密钥加密 etcd 和磁盘 |
+| 网络 | Private Cluster | 使用私有集群，仅通过授权网络访问 API Server |
+| 网络 | Network Policy | 启用 Calico Network Policy，配置默认拒绝策略 |
+| 存储 | Regional PD | 使用 Regional Persistent Disk，跨区域数据冗余 |
+| 存储 | CSI Driver | 启用 GCE PD CSI 和 Filestore CSI Driver |
+| 可观测性 | Managed Prometheus | 启用 GKE Managed Prometheus，无需自建 |
+| 可观测性 | Usage Export | 启用 BigQuery 使用量导出，支持 FinOps 分析 |
+| 成本 | Spot VM | 对可中断工作负载使用 Spot VM 节点池 |
+| 成本 | Committed Use | 对稳定工作负载购买承诺使用折扣 |
+| 运维 | Anthos Config Management | 使用 ACM 统一管理多集群配置 |
+| 运维 | Backup for GKE | 启用 GKE 备份，定期验证恢复 |
+
+## 故障排查
+
+### 常见问题
+
+| 问题 | 原因 | 解决方案 | 诊断命令 |
+|:---|:---|:---|:---|
+| Pod Pending | 资源不足、配额限制 | 检查节点资源、项目配额 | `kubectl describe pod <name>` |
+| ImagePullBackOff | GCR 权限 | 检查 Workload Identity 配置 | `kubectl describe pod <name>` |
+| PVC 挂载失败 | CSI Driver 未启用 | 启用相应 CSI Driver addon | `kubectl get csidriver` |
+| 节点自动修复 | 健康检查失败 | 检查节点状态 | `gcloud compute instances get-serial-port-output` |
+| 网络策略不生效 | Network Policy 未启用 | 集群创建时启用 Network Policy | `kubectl get networkpolicy -A` |
+| HPA 无法扩容 | VPA 冲突 | 不要在同一 Deployment 同时启用 HPA 和 VPA Auto | `kubectl get hpa,vpa` |
+| Binary Auth 拒绝 | 镜像未签名 | 确认镜像已通过 CI/CD 签名 | `gcloud container binauthz attestations list` |
+| Workload Identity 失败 | IAM 绑定缺失 | 检查 ServiceAccount 注解和 IAM 绑定 | `gcloud iam service-accounts get-iam-policy` |
+| 节点 NotReady | 磁盘满/OOM | 检查磁盘和内存 | `kubectl describe node <name>` |
+| Ingress 502 | 后端 Pod 不健康 | 检查 Pod 健康检查和 readinessProbe | `kubectl describe ingress <name>` |
+
+### 诊断脚本
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+PROJECT_ID="${1:-gke-production}"
+CLUSTER_NAME="${2:-prod-gke-cluster}"
+LOCATION="${3:-us-central1}"
+
+echo "=== GKE 深度诊断 ==="
+echo "集群: $CLUSTER_NAME | 区域: $LOCATION"
+echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
+
+echo -e "\n[1] 集群健康状态"
+gcloud container clusters describe $CLUSTER_NAME \
+    --project=$PROJECT_ID --region=$LOCATION \
+    --format="table(name,status,currentMasterVersion,nodeCount)"
+
+echo -e "\n[2] 节点详细状态"
+for node in $(kubectl get nodes -o name); do
+    echo "--- $node ---"
+    kubectl get $node -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 
+    echo " (Ready)"
+    kubectl get $node -o jsonpath='{.status.capacity.cpu}' 
+    echo " CPU"
+    kubectl get $node -o jsonpath='{.status.capacity.memory}'
+    echo " Memory"
+done
+
+echo -e "\n[3] Pod 异常详情"
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded -o wide 2>/dev/null || echo "所有 Pod 运行正常"
+
+echo -e "\n[4] 资源压力检查"
+kubectl top nodes 2>/dev/null
+echo ""
+kubectl top pods -A --sort-by=memory 2>/dev/null | head -15
+
+echo -e "\n[5] 事件分析"
+kubectl get events -A --sort-by='.lastTimestamp' -o json | \
+    jq -r '.items[] | select(.type=="Warning") | "\(.lastTimestamp) \(.namespace)/\(.involvedObject.name) \(.message)"' | tail -20
+
+echo -e "\n[6] PVC 使用率"
+kubectl get pvc -A -o json | \
+    jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name) \(.status.capacity.storage // "N/A") \(.status.accessModes[0])"'
+
+echo "=== 诊断完成 ==="
+```
+
+## 参考资源
+
+- [GKE 官方文档](https://cloud.google.com/kubernetes-engine/docs)
+- [Anthos 文档](https://cloud.google.com/anthos/docs)
+- [GKE 最佳实践](https://cloud.google.com/kubernetes-engine/docs/best-practices)
+- [Binary Authorization](https://cloud.google.com/binary-authorization/docs)
+- [Backup for GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/backup-for-gke)
+- [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity)
+- [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview)
+
 ---
-*This document is based on enterprise-level Google GKE practice experience and continuously updated with the latest technologies and best practices.*
+
+**文档版本**: v2.0
+**最后更新**: 2026年5月17日

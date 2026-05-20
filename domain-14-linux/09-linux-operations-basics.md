@@ -1,3 +1,41 @@
+---
+title: 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
+description: '# 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南'
+category: linux
+tags:
+- linux
+- system
+- kernel
+- etcd
+- kubelet
+- prometheus
+- containerd
+- docker
+- opa
+- redis
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 运维工程师
+- SRE
+- 系统管理员
+estimated_read_time: 5min
+intent_queries:
+- Linux 运维基础与应急响应：生产环境运维专家实践指南 是什么
+- 如何 Linux 运维基础与应急响应：生产环境运维专家实践指南
+- Kubernetes 14 linux 最佳实践
+trigger_keywords:
+- Linux
+- 运维基础与应急响应：生产环境运维专家实践指南
+- linux
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/linux.md
+  label: '速查卡: linux'
+---
+
+
 # 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
 
 > **适用版本**: Linux Kernel 5.x/6.x | **最后更新**: 2026-02 | **作者**: Allen Galler (allengaller@gmail.com)
@@ -718,9 +756,126 @@ crontab -e
 */5 * * * * /usr/local/bin/monitor.sh
 ```
 
-## 总结
+## 与 Kubernetes 的关系
 
-Linux运维是Kubernetes运维的重要基础，掌握这些基础技能对于有效管理和维护Kubernetes集群至关重要。运维人员应熟练使用这些工具和命令，并结合实际场景进行应用。
+### 节点运维与 K8s 集群稳定性
+
+Linux 运维技能直接关系到 Kubernetes 集群的稳定性。以下是关键的关联点：
+
+| Linux 运维技能 | Kubernetes 关联 | 影响 |
+|:---|:---|:---|
+| 系统资源监控 | kubelet 节点压力管理 | 内存/CPU/磁盘压力驱逐 Pod |
+| 磁盘管理 | etcd 数据存储、容器镜像存储 | etcd 磁盘延迟导致集群不稳定 |
+| 网络配置 | CNI 插件、kube-proxy | 网络配置错误导致 Service 不可达 |
+| 日志管理 | 容器日志收集、审计日志 | 磁盘满导致 Pod 驱逐 |
+| 安全加固 | Pod 安全策略、RBAC | 节点被入侵影响整个集群 |
+| 内核参数 | kubelet 系统要求 | 参数错误导致集群功能异常 |
+
+### 节点维护标准操作
+
+```bash
+# 1. 节点维护模式 (驱离 Pod)
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+
+# 2. 标记节点为不可调度
+kubectl cordon <node>
+
+# 3. 执行系统维护
+yum update -y                      # 系统更新
+systemctl restart docker           # 重启容器运行时
+reboot                             # 重启节点
+
+# 4. 恢复节点
+kubectl uncordon <node>
+
+# 5. 验证节点恢复
+kubectl get nodes
+kubectl describe node <node> | grep -A5 "Conditions"
+```
+
+### 常见 K8s 节点级故障排查
+
+```bash
+# 节点 NotReady
+kubectl describe node <node> | grep -A10 "Conditions"
+# 检查 kubelet 状态
+systemctl status kubelet
+journalctl -u kubelet -f
+
+# 节点磁盘压力
+df -h /var/lib/docker /var/lib/kubelet /var/lib/etcd
+docker system df
+docker system prune -a --volumes
+
+# 节点内存压力
+free -h
+cat /proc/meminfo | grep -E "MemAvailable|MemTotal|SwapTotal"
+# 查看 OOM 事件
+dmesg | grep -i "oom-killer\|out of memory"
+
+# 容器运行时问题
+systemctl status containerd        # 或 docker
+crictl ps                          # 查看容器
+crictl pods                        # 查看 Pod
+journalctl -u containerd -f        # 日志
+```
+
+---
+
+## 最佳实践
+
+### 生产环境运维清单
+
+1. **定期检查系统健康**: 每日自动运行健康检查脚本，关注 CPU/内存/磁盘使用趋势
+2. **日志轮转配置**: 确保 /var/log 不会因为日志积累导致磁盘满，配置 logrotate 策略
+3. **时间同步**: 所有节点必须使用 NTP 同步时间，etcd 对时间一致性敏感
+4. **内核参数基线**: 统一配置生产环境内核参数，特别是网络和文件系统参数
+5. **安全基线扫描**: 定期使用 Lynis 或 OpenSCAP 进行安全基线检查
+6. **备份关键数据**: 定期备份 etcd 数据、Kubernetes 资源清单、系统配置文件
+7. **变更管理**: 所有系统变更必须通过变更管理流程，保留回滚方案
+8. **监控告警**: 部署 Prometheus + Alertmanager，配置关键指标告警
+9. **应急演练**: 定期进行故障恢复演练，验证应急预案有效性
+10. **文档维护**: 保持运维文档更新，记录已知问题和解决方案
+
+---
+
+## 故障排查
+
+### 系统诊断快速命令
+
+```bash
+#!/bin/bash
+# 快速系统诊断 - k8s-node-diagnostic.sh
+
+echo "=== K8s 节点诊断 $(date) ==="
+echo "节点: $(hostname)"
+
+echo -e "\n[1] 系统负载"
+uptime
+
+echo -e "\n[2] 内存"
+free -h
+
+echo -e "\n[3] 磁盘"
+df -h --type=ext4 --type=xfs 2>/dev/null
+
+echo -e "\n[4] kubelet 状态"
+systemctl is-active kubelet
+
+echo -e "\n[5] 容器运行时"
+systemctl is-active containerd || systemctl is-active docker
+
+echo -e "\n[6] 关键内核参数"
+sysctl net.ipv4.ip_forward net.bridge.bridge-nf-call-iptables vm.swappiness
+
+echo -e "\n[7] 内核错误"
+dmesg | grep -i -E "oom|error|hung_task" | tail -5
+
+echo -e "\n[8] 网络连接统计"
+ss -s
+
+echo "=== 诊断完成 ==="
+```
 
 ---
 

@@ -1,8 +1,90 @@
-# etcd 全局索引
+---
+title: etcd 知识图谱索引
+description: '## 知识图谱'
+category: index
+tags:
+- k8s
+- index
+- catalog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- istio
+- envoy
+- knowledge-graph
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 30min
+intent_queries:
+- etcd 知识图谱索引 是什么
+- 如何 etcd 知识图谱索引
+- etcd 相关文档汇总
+trigger_keywords:
+- etcd
+- 知识图谱索引
+- index
+- knowledge-graph
+---
 
-> 全局索引：按关键字 **etcd** 聚合项目内所有相关内容。
+# etcd 知识图谱索引
 
-## 架构基础
+> 知识图谱：按主题 **etcd** 聚合项目内所有相关内容，按关联度分层级组织。
+
+---
+
+## 一、etcd 核心文档 (直接相关)
+
+> 这些文档以 etcd 为主题或直接面向 etcd 运维场景。
+
+### 深度技术
+
+- [etcd 深度解析 (etcd Deep Dive)](./domain-3-control-plane/11-etcd-deep-dive.md)
+- [etcd运维操作](./domain-3-control-plane/19-etcd-operations.md)
+
+### 故障排查与维护
+
+- [etcd 故障排查 (etcd Troubleshooting)](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md)
+- [etcd 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md)
+- [etcd 维护专项文档](./topic-structural-trouble-shooting/10-etcd-maintenance.md)
+- [etcd 异常故障树分析 (etcd FTA)](./topic-fta/list/etcd-fta.md)
+
+### CNCF 生态
+
+- [etcd (CNCF Graduated)](./domain-34-cncf-landscape/graduated/etcd/etcd.md)
+
+---
+
+## 二、etcd 关联文档 (K8s 集成)
+
+> 这些文档涉及 etcd 但以其他 K8s 组件为主题。
+
+### 控制平面核心
+
+- [备份与灾难恢复 (含 etcd 备份)](./domain-3-control-plane/10-plane-backup-disaster-recovery.md)
+- [API Server 深度解析 (etcd 依赖)](./domain-3-control-plane/12-apiserver-deep-dive.md)
+- [API Server 调优 (含 etcd 分库策略)](./domain-3-control-plane/17-apiserver-tuning.md)
+- [kubeadm 集群生命周期管理](./domain-3-control-plane/32-kubeadm-cluster-lifecycle.md)
+- [控制平面监控可观测性](./domain-3-control-plane/05-plane-monitoring-observability.md)
+
+### 集群创建与证书
+
+- [etcd 集群初始化细节](./topic-functions/cluster-create/07-etcd.md)
+- [etcd 进阶: 数据存储与维护](./topic-functions/cluster-create/13-etcd-advanced.md)
+- [etcd 证书体系源码分析](./topic-functions/cluster-cert/04-etcd-cert.md)
+
+### 平台运维
+
+- [集群生命周期管理 (Cluster Lifecycle Management)](./domain-9-platform-ops/02-cluster-lifecycle-management.md)
+- [Lease 与 Leader 选举机制 (与 etcd 强相关)](./domain-9-platform-ops/19-lease-leader-election.md)
+
+---
+
+## 三、架构基础
 
 - [Kubernetes 核心组件深度剖析 (Core Components Deep Dive)](./domain-1-architecture-fundamentals/02-core-components-deep-dive.md)
 - [06 - 集群配置参数完全参考](./domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md)
@@ -19,95 +101,26 @@
 - [07 - 分布式共识与 etcd 原理 (etcd & Raft)](./domain-2-design-principles/07-distributed-consensus-etcd.md)
 - [09 - Kubernetes 源码结构与阅读指南 (Source Code)](./domain-2-design-principles/09-source-code-walkthrough.md)
 
-## 控制平面
+---
 
-- [etcd 深度解析 (etcd Deep Dive)](./domain-3-control-plane/11-etcd-deep-dive.md)
-- [30 - etcd运维操作](./domain-3-control-plane/19-etcd-operations.md)
+## 四、扩展故障排查参考
 
-## 平台运维
+> 以下为 K8s 全域故障排查索引，etcd 故障可参考控制平面、网络、存储等章节。
 
-- [集群生命周期管理 (Cluster Lifecycle Management)](./domain-9-platform-ops/02-cluster-lifecycle-management.md)
-- [69 - Lease 与 Leader 选举机制 (Lease & Leader Election)](./domain-9-platform-ops/19-lease-leader-election.md)
-
-## 故障排查域
-
-- [02 - etcd 故障排查 (etcd Troubleshooting)](./domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md)
-
-## 结构化故障排查 - 控制平面
+### 控制平面故障排查
 
 - [API Server 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md)
 - [Scheduler 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md)
 - [Controller Manager 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md)
-- [Webhook 与准入控制故障排查指南](./topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md)
-- [API 优先级与公平性 (APF) 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md)
-- [控制平面安全加固故障排查指南](./topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md)
 - [控制平面性能瓶颈分析与优化指南](./topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md)
 - [控制平面高可用故障处理指南](./topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md)
-- [控制平面升级迁移问题处理指南](./topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md)
 
-## 结构化故障排查 - 网络
+### 网络与存储故障排查
 
 - [CNI 网络插件故障排查指南](./topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md)
-- [Service 与 Ingress 故障排查指南](./topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md)
-- [NetworkPolicy 深度排查与零信任安全治理指南](./topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md)
-- [Service Mesh (Istio) 深度排查与性能调优指南](./topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md)
-- [Terway（阿里云 CNI）网络故障排查指南](./topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md)
-- [Flannel 网络故障排查指南](./topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md)
-
-## 结构化故障排查 - 存储
-
 - [PV/PVC 存储深度排查与持久化治理指南](./topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md)
-- [CSI 存储驱动深度排查与架构优化指南](./topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md)
-- [CSI 快照与卷备份故障排查指南](./topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md)
-- [存储 I/O 性能故障排查指南](./topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md)
 
-## 结构化故障排查 - 安全
-
-- [RBAC 与认证故障排查指南](./topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md)
-- [Kubernetes 证书故障排查指南](./topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md)
-- [审计日志故障排查指南](./topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md)
-
-## 结构化故障排查 - 调度资源
-
-- [HPA 与 VPA 自动扩缩容故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md)
-
-## 结构化故障排查 - AI/ML
-
-- [Kubeflow 平台故障排查指南](./topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md)
-
-## 结构化故障排查 - GitOps/DevOps
-
-- [GitOps/DevOps 故障排查指南](./topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md)
-- [Tekton CI/CD 流水线故障排查指南](./topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md)
-
-## 结构化故障排查 - 可观测性
-
-- [可观测性故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md)
-- [OpenTelemetry Collector 故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md)
-
-## 结构化故障排查
-
-- [kubelet 故障排查指南](./topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md)
-- [kube-proxy 故障排查指南](./topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md)
-- [容器运行时故障排查指南](./topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md)
-- [节点故障专项排查指南](./topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md)
-- [镜像与镜像仓库故障排查指南](./topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md)
-- [GPU 与设备插件故障排查指南](./topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md)
-- [Pod 故障排查与运行机制深度指南](./topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)
-- [Deployment 故障排查指南](./topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md)
-- [StatefulSet 故障排查指南](./topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md)
-- [DaemonSet 故障排查指南](./topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md)
-- [Job 与 CronJob 故障排查指南](./topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md)
-- [ConfigMap 与 Secret 故障排查指南](./topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md)
-- [集群运维与升级故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md)
-- [Helm 部署故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md)
-- [集群高可用与灾备故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md)
-- [CRD 与 Operator 故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md)
-- [云厂商集成故障排查指南](./topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md)
-- [云资源配额与 API 限流故障排查指南](./topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md)
-
-## 技能卡片
+### 技能卡片
 
 - [升级消息模板 / Escalation Message Template](./topic-skills/skill-set/k8s-node-notready/assets/escalation-template.md)
 - [诊断工作流 / Diagnostic Workflow](./topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow.md)
@@ -358,15 +371,8 @@
 - [youki](./domain-34-cncf-landscape/sandbox/youki/youki.md)
 - [zot](./domain-34-cncf-landscape/sandbox/zot/zot.md)
 
-## 功能操作 - 集群创建
+---
 
-- [etcd 集群初始化细节](./topic-functions/cluster-create/07-etcd.md)
-- [etcd 进阶: 数据存储与维护](./topic-functions/cluster-create/13-etcd-advanced.md)
-
-## 功能操作 - 集群证书
-
-- [etcd 证书体系源码分析](./topic-functions/cluster-cert/04-etcd-cert.md)
-
-## 培训学习
+## 五、培训学习
 
 - [Day 7: K8S 集群证书](./topic-learn/inner-training/week-1-ack-acr-lifecycle/day-7-cluster-certificate.md)

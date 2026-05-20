@@ -1,5 +1,23 @@
 ---
 title: KUDIG-DATABASE 首页
+description: '# Kubernetes 生产运维全域知识库'
+category: general
+tags:
+- k8s
+- docker
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- KUDIG-DATABASE 首页 是什么
+- 如何 KUDIG-DATABASE 首页
+trigger_keywords:
+- KUDIG-DATABASE
+- 首页
 ---
 
 # Kubernetes 生产运维全域知识库

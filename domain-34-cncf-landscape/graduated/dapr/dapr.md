@@ -1,3 +1,36 @@
+---
+title: Dapr
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- redis
+- mysql
+- postgresql
+- kafka
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Dapr 是什么
+- 如何 Dapr
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Dapr
+- cncf
+- landscape
+---
+
+
 # Dapr
 
 > **成熟度**: Graduated | **加入时间**: 2021-11 | **最后更新**: 2026-03

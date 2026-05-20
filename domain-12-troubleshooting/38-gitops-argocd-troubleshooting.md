@@ -1,6 +1,62 @@
-# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)
+---
+title: GitOps 和 ArgoCD 故障排查
+description: '# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)'
+category: troubleshooting
+tags:
+- argocd
+- gitops
+- application
+- sync
+- repo
+- etcd
+- prometheus
+- grafana
+- redis
+- job
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- ArgoCD 同步失败
+- Application out of sync
+- gitops
+- 仓库连接失败
+trigger_keywords:
+- GitOps
+- ArgoCD
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/gitops-argocd-fta.md
+  label: '故障树: gitops-argocd'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | ArgoCD v2.4+ | **最后更新**: 2026-02 | **参考**: [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
+
+# 38 - GitOps和ArgoCD故障排查 (GitOps and ArgoCD Troubleshooting)
 
 ---
 

@@ -1,4 +1,72 @@
+---
+title: 'Day 27: 存储卷挂载'
+description: '# Day 27: 存储卷挂载'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- statefulset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 27: 存储卷挂载 是什么'
+- '如何 Day 27: 存储卷挂载'
+trigger_keywords:
+- Day
+- '27:'
+- 存储卷挂载
+- learn
+---
+
 # Day 27: 存储卷挂载
+
+```yaml
+---
+title: Day 27: 存储卷挂载
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Kubernetes存储挂载"
+  - "Volume挂载"
+  - "PVC挂载"
+  - "ConfigMap Secret挂载"
+  - "StatefulSet存储"
+trigger_keywords:
+  - "存储挂载"
+  - "Volume"
+  - "PVC"
+  - "ConfigMap"
+  - "Secret"
+  - "subPath"
+  - "emptyDir"
+  - "hostPath"
+  - "StatefulSet"
+  - "volumeMounts"
+reading_level: intermediate
+audience:
+  - sre工程师
+  - ops工程师
+  - 运维工程师
+estimated_read_time: 45min
+related_domains:
+  - domain-6-storage
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - topic-learn/inner-training/week-4-network-storage/checkpoint
+  - domain-6-storage/02-pv-architecture-fundamentals
+id: WEEK4-DAY27
+topic: training
+type: hands-on
+tags: [week-4, day-27, storage, volume, mount, k8s, k8s-1.28-1.33]
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: 存储挂载方式与最佳实践
 

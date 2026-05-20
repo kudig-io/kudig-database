@@ -1,3 +1,39 @@
+---
+title: 控制平面升级迁移问题处理指南
+description: '# 控制平面升级迁移问题处理指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 控制平面升级迁移问题处理指南 是什么
+- 如何 控制平面升级迁移问题处理指南
+- 控制平面升级迁移问题处理指南 故障排查
+- 控制平面升级迁移问题处理指南 排障步骤
+trigger_keywords:
+- 控制平面升级迁移问题处理指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 控制平面升级迁移问题处理指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境升级保障

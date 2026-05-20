@@ -1,3 +1,37 @@
+---
+title: Agent Harness 验证与质量门禁
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification, Quality Gate, 自检循环, LLM-as-Judge, RAGAS,
+  幻觉检测, 事实一致性, CI/CD, 回归测试, 灰度评估'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- helm
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness 验证与质量门禁 是什么
+- 如何 Agent Harness 验证与质量门禁
+trigger_keywords:
+- Agent
+- Harness
+- 验证与质量门禁
+- ai
+- agent
+---
+
+
 # Agent Harness 验证与质量门禁
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification, Quality Gate, 自检循环, LLM-as-Judge, RAGAS, 幻觉检测, 事实一致性, CI/CD, 回归测试, 灰度评估

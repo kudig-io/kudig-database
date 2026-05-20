@@ -1,3 +1,37 @@
+---
+title: Kubernetes Concepts Reference
+description: '| **适合读者** | 初学者（查概念）→ 中级（理解原理）→ 专家（深度参考） |'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 90min
+intent_queries:
+- Kubernetes Concepts Reference 是什么
+- 如何 Kubernetes Concepts Reference
+trigger_keywords:
+- Kubernetes
+- Concepts
+- Reference
+- dictionary
+title_en: Kubernetes Concepts Reference
+---
+
+
+
 ﻿# Kubernetes 与 AI/ML 概念参考手册（完整恢复版）
 
 > 本文档包含kusheet项目涉及的300+核心技术概念，涵盖Kubernetes、分布式系统、AI/ML、DevOps等领域的完整知识体系。

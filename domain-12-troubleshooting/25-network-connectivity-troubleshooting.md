@@ -1,6 +1,57 @@
-# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)
+---
+title: 网络连通性故障排查
+description: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
+category: troubleshooting
+tags:
+- network
+- connectivity
+- cni
+- node
+- pod-to-pod
+- cross-node
+- prometheus
+- cilium
+- flannel
+- calico
+last_updated: 2026-03
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Pod 连不通
+- 网络不通
+- 跨节点通信失败
+- ping 不通
+trigger_keywords:
+- 网络连通性故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-03 | **参考**: [Kubernetes Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+
+# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)
 
 ---
 

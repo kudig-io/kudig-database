@@ -1,4 +1,74 @@
+---
+title: Kubernetes 生产运维实战训练营
+description: 'title: Kubernetes 生产运维实战训练营'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- etcd
+- scheduler
+- prometheus
+- grafana
+- helm
+- argocd
+- docker
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 生产运维实战训练营 是什么
+- 如何 Kubernetes 生产运维实战训练营
+trigger_keywords:
+- Kubernetes
+- 生产运维实战训练营
+- learn
+---
+
 <div align="center">
+
+```yaml
+---
+title: Kubernetes 生产运维实战训练营
+last_updated: 2026-05-18
+difficulty: beginner
+intent_queries:
+  - "Kubernetes运维培训"
+  - "28天训练营"
+  - "SRE工程师培训"
+  - "云原生运维课程"
+trigger_keywords:
+  - "K8s培训"
+  - "28天课程"
+  - "SRE训练营"
+  - "云原生"
+  - "生产运维"
+  - "故障排查"
+  - "监控告警"
+  - "GitOps"
+reading_level: beginner
+audience:
+  - sre工程师
+  - devops工程师
+  - 运维工程师
+  - 开发工程师转型
+estimated_read_time: 15min
+related_domains:
+  - domain-1-architecture-fundamentals
+  - domain-4-workloads
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/quick-start
+  - topic-learn/public-training/one-month/README
+id: PUBLIC-TRAINING-BOOT-001
+topic: training
+type: landing-page
+tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
+---
+```
 
 # 🔥 Kubernetes 生产运维实战训练营 🔥
 

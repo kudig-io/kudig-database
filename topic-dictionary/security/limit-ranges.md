@@ -1,3 +1,29 @@
+---
+title: Limit Ranges（限制范围）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Limit Ranges（限制范围） 是什么
+- 如何 Limit Ranges（限制范围）
+trigger_keywords:
+- Limit
+- Ranges
+- 限制范围
+- dictionary
+title_en: Limit Ranges
+---
+
+
 # Limit Ranges（限制范围）
 
 ## 概述

@@ -1,3 +1,40 @@
+---
+title: Kubernetes 结构化故障排查知识库
+description: '# Kubernetes 结构化故障排查知识库'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- Kubernetes 结构化故障排查知识库 是什么
+- 如何 Kubernetes 结构化故障排查知识库
+- Kubernetes 结构化故障排查知识库 故障排查
+- Kubernetes 结构化故障排查知识库 排障步骤
+trigger_keywords:
+- Kubernetes
+- 结构化故障排查知识库
+- structural
+- trouble
+- shooting
+---
+
+
 # Kubernetes 结构化故障排查知识库
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **文档数量**: 63篇

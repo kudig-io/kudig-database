@@ -1,22 +1,74 @@
 ---
-fta_id: "FTA-CERT-003"
-title: "证书异常故障树分析"
-component: "certificate"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CERT-001"
-last_updated: "2026-05"
+title: 证书异常故障树分析
+description: ROT_AUTO_OR --> ROT_AUTO2[轮换触发阈值配置错误]
+category: fta
+tags:
+- fta
+- troubleshooting
+- certificate
+- tls
+- pki
+- kubeadm
+- etcd
+- apiserver
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 证书异常故障树分析 是什么
+- 如何 证书异常故障树分析
+- 证书异常故障树分析 根因分析
+- 证书异常故障树分析 故障树
+trigger_keywords:
+- 证书异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, certificate, tls, pki, kubeadm]
-related_skills:
-  - "../topic-skills/09-security-certificates.md"
-knowledge_refs:
-  - "../domain-7-security/01-certificate-management.md"
-  - "../domain-12-troubleshooting/13-certificate-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: skill
+  path: ../topic-skills/06-certificate-expiry.md
+  label: '运维技能: 06-certificate-expiry'
+- type: structural
+  path: ../topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md
+  label: '结构化排障: 02-certificate-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CERT-001
+  top_event: 证书异常 (过期/链不完整/轮换失败)
+  top_event_id: TE-CERT-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.kubeletVersion}' 显示版本不一致"
+    - "openssl s_client -connect <apiserver>:6443 显示证书错误"
+    - "journalctl -u kubelet --since '1 hour ago' | grep -E 'certificate|tls|expired'"
+agent_notes:
+  decision_tree_entry: "openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates 检查证书过期时间"
+  critical_commands:
+    - "openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates"
+    - "kubeadm certs check-expiration"
+    - "kubectl get nodes -o wide"
+    - "journalctl -u kubelet --since '1 hour ago' | grep -E 'certificate|tls'"
+  danger_operations:
+    - action: "kubeadm certs renew all --force"
+      risk: "强制续期所有证书会触发 kubeconfig 重新生成，需要重新配置 kubeconfig"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubeadm certs check-expiration | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
 
 # 证书异常 FTA 树
 

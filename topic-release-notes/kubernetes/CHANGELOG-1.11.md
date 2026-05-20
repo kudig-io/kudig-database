@@ -1,3 +1,34 @@
+---
+title: v1.11.10
+description: v1.11.10 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 270min
+intent_queries:
+- v1.11.10 是什么
+- 如何 v1.11.10
+trigger_keywords:
+- v1.11.10
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 - [v1.11.10](#v11110)
   - [Downloads for v1.11.10](#downloads-for-v11110)
@@ -444,6 +475,10 @@ filename | sha512 hash
 * change azure disk host cache to ReadOnly by default ([#72229](https://github.com/kubernetes/kubernetes/pull/72229), [@andyzhangx](https://github.com/andyzhangx))
 * Fixes issue with cleaning up stale NFS subpath mounts ([#71804](https://github.com/kubernetes/kubernetes/pull/71804), [@msau42](https://github.com/msau42))
 * Update Cluster Autoscaler to version 1.3.5. Release notes: https://github.com/kubernetes/autoscaler/releases/tag/cluster-autoscaler-1.3.5 ([#72579](https://github.com/kubernetes/kubernetes/pull/72579), [@MaciekPytel](https://github.com/MaciekPytel))
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
 * Fix kube-proxy PodSecurityPolicy binding on GCE & GKE. This was only an issue when running kube-proxy as a DaemonSet, with PodSecurityPolicy enabled. ([#72761](https://github.com/kubernetes/kubernetes/pull/72761), [@tallclair](https://github.com/tallclair))
 * Scheduler only activates unschedulable pods if node's scheduling related properties change. ([#71551](https://github.com/kubernetes/kubernetes/pull/71551), [@mlmhl](https://github.com/mlmhl))
 * Fix a race condition in the scheduler preemption logic that could cause nominatedNodeName of a pod not to be considered in one or more scheduling cycles. ([#72504](https://github.com/kubernetes/kubernetes/pull/72504), [@bsalamat](https://github.com/bsalamat))

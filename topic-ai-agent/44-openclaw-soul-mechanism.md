@@ -1,3 +1,35 @@
+---
+title: OpenClaw SOUL.md 机制深度解析
+description: '# OpenClaw SOUL.md 机制深度解析'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- OpenClaw SOUL.md 机制深度解析 是什么
+- 如何 OpenClaw SOUL.md 机制深度解析
+trigger_keywords:
+- OpenClaw
+- SOUL.md
+- 机制深度解析
+- ai
+- agent
+---
+
+
 # OpenClaw SOUL.md 机制深度解析
 
 > **文档类型**: 前沿工程专题 | **最后更新**: 2026-04 | **关键词**: OpenClaw, SOUL.md, 角色人格, 绝对红线, Constraints 层, 安全边界, Agent 人格工程

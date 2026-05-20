@@ -1,3 +1,41 @@
+---
+title: 12 - API 网关可观测性：指标、日志与链路追踪
+description: '# 12 - API 网关可观测性：指标、日志与链路追踪'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- prometheus
+- grafana
+- jaeger
+- elasticsearch
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API 网关可观测性：指标、日志与链路追踪 是什么
+- 如何 API 网关可观测性：指标、日志与链路追踪
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- API
+- 网关可观测性：指标
+- 日志与链路追踪
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 12 - API 网关可观测性：指标、日志与链路追踪
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Prometheus, OpenTelemetry, Grafana, 访问日志, 链路追踪, 黄金信号, Loki, Jaeger, Zipkin

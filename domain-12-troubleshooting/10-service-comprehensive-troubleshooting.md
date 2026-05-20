@@ -1,6 +1,62 @@
-# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
+---
+title: Service 全面故障排查
+description: '# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)'
+category: troubleshooting
+tags:
+- service
+- network
+- endpoint
+- dns
+- clusterip
+- loadbalancer
+- nodeport
+- controller-manager
+- ingress
+- networkpolicy
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Service 访问不了
+- Pod 连不上 Service
+- Endpoints 为空
+- DNS 解析失败
+- Service 无响应
+trigger_keywords:
+- Service
+- 全面故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Kubernetes Service官方文档](https://kubernetes.io/docs/concepts/services-networking/service/)
+
+# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
 
 ## 🎯 本文档价值
 

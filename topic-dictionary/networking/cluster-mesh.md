@@ -1,3 +1,36 @@
+---
+title: 多集群网络互联（Cluster Mesh）
+description: '# 多集群网络互联（Cluster Mesh）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- prometheus
+- istio
+- cilium
+- coredns
+- gateway
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 多集群网络互联（Cluster Mesh） 是什么
+- 如何 多集群网络互联（Cluster Mesh）
+trigger_keywords:
+- 多集群网络互联
+- Cluster
+- Mesh
+- dictionary
+title_en: Clusters
+---
+
+
 # 多集群网络互联（Cluster Mesh）
 
 ## 概述

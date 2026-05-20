@@ -1,3 +1,45 @@
+---
+title: 04 - Higress 云原生 API 网关企业级实践
+description: '# 04 - Higress 云原生 API 网关企业级实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- scheduler
+- prometheus
+- istio
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- Higress 云原生 API 网关企业级实践 是什么
+- 如何 Higress 云原生 API 网关企业级实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Higress
+- 云原生
+- API
+- 网关企业级实践
+- cloud
+- native
+- api
+- gateway
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/higress-fta.md
+  label: '故障树: higress'
+---
+
 # 04 - Higress 云原生 API 网关企业级实践
 
 > **文档版本**: v2.0 | **适用版本**: Higress v1.x - v2.x, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Higress, Envoy, Istiod, Wasm, AI Gateway, Gateway API, xDS, 阿里云, McpBridge

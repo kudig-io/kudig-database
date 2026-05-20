@@ -1,3 +1,34 @@
+---
+title: Workload API
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- job
+- cronjob
+- gpu
+- nvidia
+- llm
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Workload API 是什么
+- 如何 Workload API
+trigger_keywords:
+- Workload
+- API
+- dictionary
+title_en: Workload Api
+---
+
+
 # Workload API
 
 ## 概述

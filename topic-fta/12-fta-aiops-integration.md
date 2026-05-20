@@ -1,3 +1,39 @@
+---
+title: 第十二章：FTA 与 AIOps 平台集成架构
+description: '# 第十二章：FTA 与 AIOps 平台集成架构'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- apiserver
+- prometheus
+- jaeger
+- coredns
+- kafka
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十二章：FTA 与 AIOps 平台集成架构 是什么
+- 如何 第十二章：FTA 与 AIOps 平台集成架构
+- 第十二章：FTA 与 AIOps 平台集成架构 根因分析
+- 第十二章：FTA 与 AIOps 平台集成架构 故障树
+trigger_keywords:
+- 第十二章：FTA
+- AIOps
+- 平台集成架构
+- fta
+---
+
+
 # 第十二章：FTA 与 AIOps 平台集成架构
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  

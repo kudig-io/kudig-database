@@ -1,3 +1,37 @@
+---
+title: 05 - 企业级存储管理与运维实践
+description: '# 05 - 企业级存储管理与运维实践'
+category: storage-fundamentals
+tags:
+- storage
+- filesystem
+- block
+- scheduler
+- prometheus
+- grafana
+- ceph
+- minio
+- mysql
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 存储工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业级存储管理与运维实践 是什么
+- 如何 企业级存储管理与运维实践
+- Kubernetes 16 storage fundamentals 最佳实践
+trigger_keywords:
+- 企业级存储管理与运维实践
+- storage
+- fundamentals
+---
+
+
 # 05 - 企业级存储管理与运维实践
 
 > **适用版本**: 通用 | **最后更新**: 2026-02 | **作者**: 存储运维专家团队

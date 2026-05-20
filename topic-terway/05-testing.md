@@ -1,3 +1,37 @@
+---
+title: 05 - Terway 测试验证 (Testing & Validation)
+description: '## 1. Pod 网络基础验证'
+category: terway
+tags:
+- k8s
+- terway
+- networking
+- alicloud
+- cilium
+- flannel
+- coredns
+- ingress
+- gateway
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+estimated_read_time: 5min
+intent_queries:
+- Terway 测试验证 (Testing & Validation) 是什么
+- 如何 Terway 测试验证 (Testing & Validation)
+trigger_keywords:
+- Terway
+- 测试验证
+- Testing
+- Validation
+- terway
+---
+
+
 # 05 - Terway 测试验证 (Testing & Validation)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32+ | **Terway 版本**: v1.5+ | **最后更新**: 2026-05

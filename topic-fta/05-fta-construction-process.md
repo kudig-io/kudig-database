@@ -1,3 +1,38 @@
+---
+title: 第五章：FTA 构建完整流程
+description: '**所属部分**: 第二部分 - FTA 构建实践指南'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- kubelet
+- scheduler
+- coredns
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第五章：FTA 构建完整流程 是什么
+- 如何 第五章：FTA 构建完整流程
+- 第五章：FTA 构建完整流程 根因分析
+- 第五章：FTA 构建完整流程 故障树
+trigger_keywords:
+- 第五章：FTA
+- 构建完整流程
+- fta
+---
+
+
 # 第五章：FTA 构建完整流程
 
 > **所属部分**: 第二部分 - FTA 构建实践指南  

@@ -1,3 +1,35 @@
+---
+title: 速查卡 (Cheat Sheet)
+description: 覆盖 Kubernetes 生产运维全场景的快速参考卡片集
+category: cheatsheet
+tags:
+- cheatsheet
+- quick-reference
+- prometheus
+- helm
+- containerd
+- docker
+- mysql
+- postgresql
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 速查卡 (Cheat Sheet) 是什么
+- 如何 速查卡 (Cheat Sheet)
+trigger_keywords:
+- 速查卡
+- Cheat
+- Sheet
+- cheat
+- sheet
+---
+
 # 速查卡 (Cheat Sheet)
 
 > 覆盖 Kubernetes 生产运维全场景的快速参考卡片集

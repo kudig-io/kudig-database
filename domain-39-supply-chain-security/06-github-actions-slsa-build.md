@@ -1,3 +1,42 @@
+---
+title: GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
+description: '## 概述 (Overview)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- prometheus
+- grafana
+- docker
+- job
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 是什么
+- 如何 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- GitHub
+- Actions
+- SLSA
+- 构建
+- GitHub
+- Actions
+- SLSA
+- Build
+---
+
+
 # GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
 
 ## 概述 (Overview)

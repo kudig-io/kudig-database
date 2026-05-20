@@ -1,3 +1,39 @@
+---
+title: 云厂商集成故障排查指南
+description: '# 云厂商集成故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- controller-manager
+- prometheus
+- opa
+- daemonset
+- job
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 云厂商集成故障排查指南 是什么
+- 如何 云厂商集成故障排查指南
+- 云厂商集成故障排查指南 故障排查
+- 云厂商集成故障排查指南 排障步骤
+trigger_keywords:
+- 云厂商集成故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 云厂商集成故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 多云环境故障处理

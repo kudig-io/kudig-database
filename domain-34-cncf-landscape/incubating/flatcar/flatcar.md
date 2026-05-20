@@ -1,3 +1,37 @@
+---
+title: Flatcar Container Linux
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- kubelet
+- containerd
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Flatcar Container Linux 是什么
+- 如何 Flatcar Container Linux
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Flatcar
+- Container
+- Linux
+- cncf
+- landscape
+---
+
 # Flatcar Container Linux
 
 > **成熟度**: Incubating | **加入时间**: 2023-03 | **最后更新**: 2026-03

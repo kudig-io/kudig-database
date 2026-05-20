@@ -1,3 +1,67 @@
+---
+title: 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
+description: '# 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- kubelet
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm) 是什么
+- 如何 kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- kubeadm
+- 集群生命周期管理
+- Cluster
+- Lifecycle
+- with
+- kubeadm
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: fta
+  path: ../topic-fta/list/kubeadm-fta.md
+  label: '故障树: kubeadm'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 
 > **适用版本**: Kubernetes v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 运维操作指南

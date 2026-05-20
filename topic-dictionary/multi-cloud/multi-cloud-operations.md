@@ -1,3 +1,35 @@
+---
+title: 10 - 多云混合云运维手册
+description: '# 10 - 多云混合云运维手册'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- grafana
+- istio
+- calico
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 多云混合云运维手册 是什么
+- 如何 多云混合云运维手册
+trigger_keywords:
+- 多云混合云运维手册
+- dictionary
+title_en: Multi Cloud Operations
+---
+
+
+
 # 10 - 多云混合云运维手册
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

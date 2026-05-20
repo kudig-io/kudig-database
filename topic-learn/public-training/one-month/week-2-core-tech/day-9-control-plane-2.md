@@ -1,4 +1,88 @@
+---
+title: 'Day 9: 控制平面 - Scheduler + Controller Manager'
+description: '- "Scheduler 调度算法是什么"'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- scheduler
+- controller-manager
+- statefulset
+- daemonset
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 9: 控制平面 - Scheduler + Controller Manager 是什么'
+- '如何 Day 9: 控制平面 - Scheduler + Controller Manager'
+trigger_keywords:
+- Day
+- '9:'
+- 控制平面
+- Scheduler
+- Controller
+- Manager
+- learn
+---
+
 # Day 9: 控制平面 - Scheduler + Controller Manager
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY9
+title: Day 9 - 控制平面 - Scheduler + Controller Manager
+topic: kubernetes
+type: hands-on-guide
+tags: [scheduler, controller-manager, affinity, taint, toleration, nodeelector, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Scheduler 调度算法是什么"
+  - "Filter/Score 阶段怎么做"
+  - "nodeSelector/nodeAffinity 怎么用"
+  - "Taint/Toleration 区别"
+  - "Controller Manager 工作原理"
+trigger_keywords:
+  - Scheduler
+  - Filter
+  - Score
+  - Scheduling
+  - nodeSelector
+  - nodeAffinity
+  - podAffinity
+  - podAntiAffinity
+  - Taint
+  - Toleration
+  - Controller Manager
+  - Reconcile
+  - 调度
+  - 亲和性
+  - 污点
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+estimated_read_time: 45min
+related_domains:
+  - domain-3-control-plane
+  - domain-12-troubleshooting
+related_topics:
+  - control-plane
+  - scheduler
+  - scheduling
+  - affinity
+  - taint
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-8-control-plane-1.md
+  - domain-3-control-plane/20-kube-scheduler-deep-dive.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: K8s 调度与控制循环
 

@@ -1,3 +1,23 @@
+---
+title: 贡献指南
+description: '# 贡献指南'
+category: general
+tags:
+- k8s
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 贡献指南 是什么
+- 如何 贡献指南
+trigger_keywords:
+- 贡献指南
+---
+
 # 贡献指南
 
 感谢您对 KUDIG-DATABASE 的关注！以下是参与贡献的完整指南。

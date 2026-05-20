@@ -1,3 +1,43 @@
+---
+title: 16 - 安全合规管理 (Security & Compliance Management)
+description: '# 16 - 安全合规管理 (Security & Compliance Management)'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- etcd
+- apiserver
+- cilium
+- docker
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 安全合规管理 (Security & Compliance Management) 是什么
+- 如何 安全合规管理 (Security & Compliance Management)
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 安全合规管理
+- Security
+- Compliance
+- Management
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # 16 - 安全合规管理 (Security & Compliance Management)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)

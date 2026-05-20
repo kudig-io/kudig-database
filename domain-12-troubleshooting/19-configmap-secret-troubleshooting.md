@@ -1,6 +1,62 @@
-# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)
+---
+title: ConfigMap/Secret 故障排查
+description: '# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)'
+category: troubleshooting
+tags:
+- configmap
+- secret
+- volume
+- env
+- mount
+- config
+- etcd
+- apiserver
+- kubelet
+- prometheus
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- ConfigMap 没生效
+- 环境变量为空
+- Secret 挂载失败
+- 配置没更新
+trigger_keywords:
+- ConfigMap
+- Secret
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: skill
+  path: ../topic-skills/14-configmap-secret-failure.md
+  label: '运维技能: 14-configmap-secret-failure'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/), [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+
+# 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)
 
 ---
 

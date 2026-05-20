@@ -1,67 +1,43 @@
 ---
-title: "K8s Node NotReady 诊断与修复"
-description: "Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill"
-author: kudig-io
-version: 1.0.0
+title: K8s Node NotReady 诊断与修复
+description: Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill
 category: Kubernetes-Incident-Response
-skill_id: SKILL-NODE-001
-severity_range: P0-P2
-k8s_versions: ["1.28.x", "1.29.x", "1.30.x", "1.31.x", "1.32.x"]
-tested_on: ["1.28.15", "1.29.12", "1.30.8", "1.31.4", "1.32.0"]
-last_validated: "2026-04-26"
-risk_level: high
-agent_execution_mode: L1-advisory
-requires:
-  tools:
-    - name: kubectl
-      min_version: "1.28"
-      check_cmd: "kubectl version --client"
-    - name: ssh
-      description: "SSH access to target nodes for deep diagnostics"
-    - name: openssl
-      min_version: "1.1.1"
-  optional_tools:
-    - name: jq
-      min_version: "1.6"
-    - name: crictl
-      min_version: "1.28"
-    - name: curl
-provides:
-  - node_notready_diagnosis
-  - node_notready_remediation
-  - node_health_verification
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- prometheus
+- containerd
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- K8s Node NotReady 诊断与修复 是什么
+- 如何 K8s Node NotReady 诊断与修复
 trigger_keywords:
-  - NotReady
-  - NodeNotReady
-  - 节点不可用
-  - 节点异常
-  - kubelet stopped
-  - node unreachable
-  - 节点不可达
-  - NodeStatusUnknown
-trigger_events:
-  - NodeNotReady
-  - NodeStatusUnknown
-  - KubeletNotReady
-  - NodeHasDiskPressure
-  - NodeHasMemoryPressure
-  - NodeHasPIDPressure
-trigger_metrics:
-  - 'kube_node_status_condition{condition="Ready",status="false"}'
-  - 'kube_node_status_condition{condition="Ready",status="unknown"}'
-  - 'kube_node_status_condition{condition="MemoryPressure",status="true"}'
-  - 'kube_node_status_condition{condition="DiskPressure",status="true"}'
-  - 'kube_node_status_condition{condition="PIDPressure",status="true"}'
-related_skills:
-  - SKILL-POD-001
-  - SKILL-POD-002
-  - SKILL-SEC-001
-fta_refs:
-  - topic-fta/list/node-fta.md
-knowledge_refs:
-  - topic-structural-trouble-shooting/
-  - domain-12-troubleshooting/
-  - domain-1-architecture-fundamentals/
+- NotReady
+- NodeNotReady
+- 节点不可用
+- 节点异常
+- kubelet stopped
+- node unreachable
+- 节点不可达
+- NodeStatusUnknown
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ---
 
 # K8s Node NotReady 诊断与修复

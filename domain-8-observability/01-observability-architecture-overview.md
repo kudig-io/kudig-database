@@ -1,25 +1,74 @@
 ---
-title: "Kubernetes 可观测性架构体系"
-description: "深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry 的架构设计与集成"
-category: "domain-8-observability"
-tags: [k8s, observability, metrics, logging, tracing, prometheus, loki, jaeger, opentelemetry]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Kubernetes 可观测性架构体系
+description: 深入解析 K8s 可观测性三大支柱：指标（Metrics）、日志（Logging）、追踪（Tracing），介绍 Prometheus、Loki、Jaeger、OpenTelemetry 的架构设计与集成
+category: domain-8-observability
+tags:
+- k8s
+- observability
+- metrics
+- logging
+- tracing
+- prometheus
+- loki
+- jaeger
+- opentelemetry
+- etcd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 可观测性架构体系 是什么
+- 如何 Kubernetes 可观测性架构体系
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- Kubernetes
+- 可观测性架构体系
+- observability
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "02-monitoring-metrics-system.md"
-    type: "depth"
-    desc: "指标监控体系"
-  - path: "04-distributed-tracing.md"
-    type: "depth"
-    desc: "分布式追踪体系"
-  - path: "../topic-cheat-sheet/promql.md"
-    type: "cheatsheet"
-    desc: "PromQL 速查卡"
+- path: 02-monitoring-metrics-system.md
+  type: depth
+  desc: 指标监控体系
+- path: 04-distributed-tracing.md
+  type: depth
+  desc: 分布式追踪体系
+- path: ../topic-cheat-sheet/promql.md
+  type: cheatsheet
+  desc: PromQL 速查卡
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
 ---
+
 
 # 01 - Kubernetes 可观测性架构体系 (Observability Architecture)
 

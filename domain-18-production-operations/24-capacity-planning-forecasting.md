@@ -1,3 +1,41 @@
+---
+title: 24. 容量规划与预测 (Capacity Planning & Forecasting)
+description: 本章节深入探讨Kubernetes环境下的容量规划方法论，包括资源需求预测、扩容策略制定、容量优化和成本效益分析等核心内容。
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- kubelet
+- prometheus
+- grafana
+- hpa
+- job
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 24. 容量规划与预测 (Capacity Planning & Forecasting) 是什么
+- 如何 24. 容量规划与预测 (Capacity Planning & Forecasting)
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- '24.'
+- 容量规划与预测
+- Capacity
+- Planning
+- Forecasting
+- production
+- operations
+---
+
+
 # 24. 容量规划与预测 (Capacity Planning & Forecasting)
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 50分钟

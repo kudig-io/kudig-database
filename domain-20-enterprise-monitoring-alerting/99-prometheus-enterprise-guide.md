@@ -1,3 +1,43 @@
+---
+title: Prometheus 企业级监控部署指南
+description: '# Prometheus 企业级监控部署指南'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- helm
+- hpa
+- statefulset
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Prometheus 企业级监控部署指南 是什么
+- 如何 Prometheus 企业级监控部署指南
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Prometheus
+- 企业级监控部署指南
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Prometheus 企业级监控部署指南
 
 > **适用版本**: Prometheus v3.3.0 / kube-state-metrics v2.15 / Alertmanager v0.28  

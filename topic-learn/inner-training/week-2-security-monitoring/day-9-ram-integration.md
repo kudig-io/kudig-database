@@ -1,3 +1,66 @@
+---
+title: 'Day 9: RAM 账号管理'
+description: 'title: Day 9: RAM 账号管理'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- rbac
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 9: RAM 账号管理 是什么'
+- '如何 Day 9: RAM 账号管理'
+trigger_keywords:
+- Day
+- '9:'
+- RAM
+- 账号管理
+- learn
+---
+
+---
+title: Day 9: RAM 账号管理
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - ACK RAM authorization Kubernetes RBAC integration
+  - aliyun cs grant_permissions RAM user cluster access
+  - RAM role assume role Kubernetes
+  - Multi-team RBAC namespace isolation
+  - kubeconfig RAM user authentication
+trigger_keywords:
+  - RAM
+  - RBAC
+  -权限管理
+  - grant_permissions
+  - kubeconfig
+  - 双层权限
+  - 云平台权限
+  - 集群权限
+  - AssumeRole
+reading_level: intermediate
+audience:
+  - ACK operators
+  - DevOps engineers
+  - Platform engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-7-security
+  - domain-17-cloud-provider
+  - domain-12-troubleshooting
+related_topics:
+  - rbac-configuration
+  - ack-cluster-lifecycle
+  - certificate-management
+---
+
 # Day 9: RAM 账号管理
 
 > **学习时间**: 4-5 小时 | **主题**: RAM 账号与 K8S 集成方案

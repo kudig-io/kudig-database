@@ -1,3 +1,32 @@
+---
+title: 针对 Pod 和容器的 Linux 内核安全约束
+description: '# 针对 Pod 和容器的 Linux 内核安全约束'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 针对 Pod 和容器的 Linux 内核安全约束 是什么
+- 如何 针对 Pod 和容器的 Linux 内核安全约束
+trigger_keywords:
+- 针对
+- Pod
+- 和容器的
+- Linux
+- 内核安全约束
+- dictionary
+title_en: Pods
+---
+
+
 # 针对 Pod 和容器的 Linux 内核安全约束
 
 ## 概述

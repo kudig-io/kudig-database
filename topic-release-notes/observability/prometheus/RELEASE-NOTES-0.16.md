@@ -1,3 +1,31 @@
+---
+title: prometheus v0.16 Release Notes
+description: prometheus v0.16 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- prometheus
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- prometheus v0.16 Release Notes 是什么
+- 如何 prometheus v0.16 Release Notes
+trigger_keywords:
+- prometheus
+- v0.16
+- Release
+- Notes
+- release
+- notes
+---
+
 # prometheus v0.16 Release Notes
 
 Source: [0.16.2](https://github.com/prometheus/prometheus/releases/tag/0.16.2)

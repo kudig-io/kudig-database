@@ -1,6 +1,58 @@
-# 23 - Namespace 故障排查 (Namespace Troubleshooting)
+---
+title: Namespace 故障排查
+description: '# 23 - Namespace 故障排查 (Namespace Troubleshooting)'
+category: troubleshooting
+tags:
+- namespace
+- finalizer
+- garbage-collection
+- terminating
+- stuck
+- apiserver
+- prometheus
+- grafana
+- statefulset
+- daemonset
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Namespace 卡住
+- Terminating
+- 无法删除
+- finalizer
+trigger_keywords:
+- Namespace
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+
+# 23 - Namespace 故障排查 (Namespace Troubleshooting)
 
 ---
 

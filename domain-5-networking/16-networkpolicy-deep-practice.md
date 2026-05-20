@@ -1,3 +1,53 @@
+---
+title: 01 - NetworkPolicy 深度实践指南
+description: '# 01 - NetworkPolicy 深度实践指南'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- prometheus
+- cilium
+- calico
+- postgresql
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- NetworkPolicy 深度实践指南 是什么
+- 如何 NetworkPolicy 深度实践指南
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- NetworkPolicy
+- 深度实践指南
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/networkpolicy-fta.md
+  label: '故障树: networkpolicy'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 01 - NetworkPolicy 深度实践指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 高级

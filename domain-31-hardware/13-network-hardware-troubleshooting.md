@@ -1,3 +1,33 @@
+---
+title: 网络硬件故障排查
+description: '# 网络硬件故障排查'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 网络硬件故障排查 是什么
+- 如何 网络硬件故障排查
+- Kubernetes 31 hardware 最佳实践
+- 网络硬件故障排查 故障排查
+- 网络硬件故障排查 排障步骤
+trigger_keywords:
+- 网络硬件故障排查
+- hardware
+---
+
 # 网络硬件故障排查
 
 ## 概述

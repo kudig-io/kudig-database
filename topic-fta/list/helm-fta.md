@@ -1,20 +1,79 @@
 ---
-fta_id: "FTA-HELM-017"
-title: "Helm 发布异常故障树分析"
-component: "helm"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-HELM-001"
-last_updated: "2026-05"
+title: Helm 发布异常故障树分析
+description: '- **范围**：Chart 仓库与渲染、Hook、K8s API 兼容、权限与审计、状态管理。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- helm
+- chart
+- release
+- hook
+- apiserver
+- flux
+- docker
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Helm 发布异常故障树分析 是什么
+- 如何 Helm 发布异常故障树分析
+- Helm 发布异常故障树分析 根因分析
+- Helm 发布异常故障树分析 故障树
+trigger_keywords:
+- Helm
+- 发布异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, helm, chart, release, hook]
-related_skills: []
-knowledge_refs:
-  - "../domain-9-platform-ops/01-helm.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-10-extensions/07-helm-advanced-operations.md
+  label: '深度文档: 07-helm-advanced-operations'
+- type: structural
+  path: ../topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md
+  label: '结构化排障: 03-helm-troubleshooting'
+fta_metadata:
+  fta_id: FTA-HELM-001
+  top_event: Helm 发布异常 (发布失败/回滚失败/资源不一致)
+  top_event_id: TE-HELM-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "helm list -A 显示 RELEASE 状态为 failed 或 pending-install"
+    - "kubectl get pods -n <ns> 显示 Helm hook Job 失败"
+    - "kubectl get hr,release -n <ns> 显示资源与 release 状态不一致"
+agent_notes:
+  decision_tree_entry: "helm list -A 检查所有 Release 状态"
+  critical_commands:
+    - "helm list -A"
+    - "helm status <release-name> -n <ns>"
+    - "helm history <release-name> -n <ns>"
+    - "kubectl get hr -n <ns>"
+    - "kubectl describe hr <name> -n <ns>"
+  danger_operations:
+    - action: "helm uninstall <release-name> -n <ns> --no-hooks"
+      risk: "卸载 Release 会删除所有关联资源，无法恢复"
+      requires_confirmation: true
+    - action: "helm rollback <release-name> -n <ns> --force"
+      risk: "强制回滚会覆盖当前配置，可能导致服务中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: helm list -A 2>/dev/null | grep -E 'failed|pending-install' 显示失败的 Release -->
 
 # Helm 发布异常 FTA 树
 
@@ -173,6 +232,10 @@ flowchart TD
       "metadata": { "severity": "critical", "probability": "common", "mttr_minutes": 30,
         "detection": { "events": [], "metrics": [], "logs": ["no matches for kind", "the server could not find the requested resource"] },
         "remediation": { "manual_steps": ["使用 helm-mapkubeapis 插件修复 Release 元数据", "更新 Chart 模板到新 API 版本", "使用 .Capabilities.APIVersions 做条件判断", "升级 Chart 到兼容版本"], "auto_actions": [] },
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
         "version_notes": { "1.22": "移除 Ingress extensions/v1beta1, CRD v1beta1", "1.25": "移除 PodSecurityPolicy", "1.29": "移除 FlowSchema v1beta2" } },
       "next_step": "gate_root_or"
     },

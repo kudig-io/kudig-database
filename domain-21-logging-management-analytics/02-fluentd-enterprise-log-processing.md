@@ -1,3 +1,38 @@
+---
+title: Fluentd企业级日志收集与处理深度实践
+description: '# Fluentd企业级日志收集与处理深度实践'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- kubelet
+- prometheus
+- docker
+- kafka
+- elasticsearch
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- Fluentd企业级日志收集与处理深度实践 是什么
+- 如何 Fluentd企业级日志收集与处理深度实践
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Fluentd企业级日志收集与处理深度实践
+- logging
+- management
+- analytics
+---
+
+
 # Fluentd企业级日志收集与处理深度实践
 
 > **Author**: Logging System Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

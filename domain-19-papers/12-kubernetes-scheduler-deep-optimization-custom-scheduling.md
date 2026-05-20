@@ -1,3 +1,46 @@
+---
+title: Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
+description: '# Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- kubelet
+- scheduler
+- prometheus
+- opa
+- vpa
+- job
+- operator
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling) 是什么
+- 如何 Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 调度器深度优化与自定义调度
+- Scheduler
+- Deep
+- Optimization
+- and
+- Custom
+- Scheduling
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/scheduler-fta.md
+  label: '故障树: scheduler'
+---
+
+
 # Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 
 > **作者**: Kubernetes调度专家 | **版本**: v1.6 | **更新时间**: 2026-03-03

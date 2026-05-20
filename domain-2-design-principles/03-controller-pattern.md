@@ -1,25 +1,64 @@
 ---
-title: "控制器模式与调谐循环"
-description: "深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践"
-category: "domain-2-design"
-tags: [k8s, controller, reconcile, control-loop, level-triggered, operator]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 控制器模式与调谐循环
+description: 深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践
+category: domain-2-design
+tags:
+- k8s
+- controller
+- reconcile
+- control-loop
+- level-triggered
+- operator
+- prometheus
+- helm
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 控制器模式与调谐循环 是什么
+- 如何 控制器模式与调谐循环
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 控制器模式与调谐循环
+- design
+- principles
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-design-principles-foundations.md"
-    type: "depth"
-    desc: "设计原则与哲学"
-  - path: "02-declarative-api-pattern.md"
-    type: "depth"
-    desc: "声明式 API"
-  - path: "../domain-2-design-principles/12-operator-development-guide.md"
-    type: "depth"
-    desc: "Operator 开发指南"
+- path: 01-design-principles-foundations.md
+  type: depth
+  desc: 设计原则与哲学
+- path: 02-declarative-api-pattern.md
+  type: depth
+  desc: 声明式 API
+- path: ../domain-2-design-principles/12-operator-development-guide.md
+  type: depth
+  desc: Operator 开发指南
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
 ---
+
 
 # 03 - 控制器模式与调谐循环 (Controller Pattern)
 

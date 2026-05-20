@@ -1,3 +1,34 @@
+---
+title: v1.36.0-beta.0
+description: v1.36.0-beta.0 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 120min
+intent_queries:
+- v1.36.0-beta.0 是什么
+- 如何 v1.36.0-beta.0
+trigger_keywords:
+- v1.36.0-beta.0
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.36.0-beta.0](#v1360-beta0)

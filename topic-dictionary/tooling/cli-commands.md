@@ -1,3 +1,37 @@
+---
+title: 查看所有 Pod 及其详细信息
+description: '**运维效率提升宝典**: 300+实用命令集合，涵盖日常运维、故障排查、性能调优等全方位操作'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- cilium
+- flannel
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 查看所有 Pod 及其详细信息 是什么
+- 如何 查看所有 Pod 及其详细信息
+trigger_keywords:
+- 查看所有
+- Pod
+- 及其详细信息
+- dictionary
+title_en: Pods
+---
+
+
+
 ﻿# Kubernetes & AI/ML 命令行清单 (Complete CLI Commands Reference)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

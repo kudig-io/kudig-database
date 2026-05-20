@@ -1,3 +1,39 @@
+---
+title: 可观测性故障排查指南
+description: '# 可观测性故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- scheduler
+- prometheus
+- grafana
+- jaeger
+- docker
+- redis
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 可观测性故障排查指南 是什么
+- 如何 可观测性故障排查指南
+- 可观测性故障排查指南 故障排查
+- 可观测性故障排查指南 排障步骤
+trigger_keywords:
+- 可观测性故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 可观测性故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 全栈可观测性保障

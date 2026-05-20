@@ -1,3 +1,36 @@
+---
+title: 安装插件（Installing Addons）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- cilium
+- flannel
+- calico
+- coredns
+- helm
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 安装插件（Installing Addons） 是什么
+- 如何 安装插件（Installing Addons）
+trigger_keywords:
+- 安装插件
+- Installing
+- Addons
+- dictionary
+title_en: Installing Addons
+---
+
+
 # 安装插件（Installing Addons）
 
 ## 概述

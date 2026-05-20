@@ -1,6 +1,62 @@
-# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
+---
+title: Deployment 全面故障排查
+description: '# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)'
+category: troubleshooting
+tags:
+- deployment
+- replicaset
+- rollout
+- rollback
+- replica
+- maxSurge
+- maxUnavailable
+- controller-manager
+- docker
+- hpa
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Deployment 滚动更新失败
+- 回滚到上一个版本
+- 副本数不对
+- Pod 没重建
+- Deployment 状态异常
+trigger_keywords:
+- Deployment
+- 全面故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Kubernetes Deployment官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+# 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
 
 ## 🎯 本文档价值
 

@@ -1,3 +1,37 @@
+---
+title: AgentScope 工具系统与 MCP 集成
+description: '**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit, 工具注册, MCP, Model Context Protocol, Function
+  Calling, 并行工具调用, Agent Skill, Meta Tool, 自定义工具'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 工具系统与 MCP 集成 是什么
+- 如何 AgentScope 工具系统与 MCP 集成
+trigger_keywords:
+- AgentScope
+- 工具系统与
+- MCP
+- 集成
+- ai
+- agent
+---
+
+
 # AgentScope 工具系统与 MCP 集成
 
 > **文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit, 工具注册, MCP, Model Context Protocol, Function Calling, 并行工具调用, Agent Skill, Meta Tool, 自定义工具

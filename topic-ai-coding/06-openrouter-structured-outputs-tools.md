@@ -1,3 +1,34 @@
+---
+title: Structured Outputs 与 Tool Calling
+description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Structured Outputs, JSON Schema, Tool Calling, Function
+  Calling, Response Healing, Parallel Tools'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Structured Outputs 与 Tool Calling 是什么
+- 如何 Structured Outputs 与 Tool Calling
+trigger_keywords:
+- Structured
+- Outputs
+- Tool
+- Calling
+- ai
+- coding
+---
+
+
 # Structured Outputs 与 Tool Calling
 
 > **文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Structured Outputs, JSON Schema, Tool Calling, Function Calling, Response Healing, Parallel Tools

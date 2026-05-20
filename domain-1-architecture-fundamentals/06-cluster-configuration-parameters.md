@@ -1,3 +1,50 @@
+---
+title: 06 - 集群配置参数完全参考
+description: '# 06 - 集群配置参数完全参考'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- flannel
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 30min
+intent_queries:
+- 集群配置参数完全参考 是什么
+- 如何 集群配置参数完全参考
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- 集群配置参数完全参考
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # 06 - 集群配置参数完全参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/command-line-tools-reference](https://kubernetes.io/docs/reference/command-line-tools-reference/)

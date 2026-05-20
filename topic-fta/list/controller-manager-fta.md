@@ -1,22 +1,75 @@
 ---
-fta_id: "FTA-CM-007"
-title: "Controller Manager 异常故障树分析"
-component: "controller-manager"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CM-001"
-last_updated: "2026-05"
+title: Controller Manager 异常故障树分析
+description: OR0 --> DEP[依赖与存储异常]
+category: fta
+tags:
+- fta
+- troubleshooting
+- controller-manager
+- kube-controller
+- leader-election
+- etcd
+- apiserver
+- kubelet
+- opa
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Controller Manager 异常故障树分析 是什么
+- 如何 Controller Manager 异常故障树分析
+- Controller Manager 异常故障树分析 根因分析
+- Controller Manager 异常故障树分析 故障树
+trigger_keywords:
+- Controller
+- Manager
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, controller-manager, kube-controller, leader-election]
-related_skills:
-  - "../topic-skills/11-control-plane-failure.md"
-knowledge_refs:
-  - "../domain-3-control-plane/11-etcd-deep-dive.md"
-  - "../domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/13-kube-controller-manager-deep-dive.md
+  label: '深度文档: 13-kube-controller-manager-deep-dive'
+- type: structural
+  path: ../topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md
+  label: '结构化排障: 04-controller-manager-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CONTROLLER-001
+  top_event: Controller Manager 异常 (控制器失调/资源创建失败/状态同步异常)
+  top_event_id: TE-CONTROLLER-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get pods -n kube-system -l component=kube-controller-manager 显示非 Running"
+    - "Deployment/ReplicaSet/ReplicationController 副本数异常"
+    - "kubectl get events --field-selector reason=LeaderElection -A 显示 leader 问题"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system -l component=kube-controller-manager -o wide 检查 CM 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l component=kube-controller-manager -o wide"
+    - "kubectl logs -n kube-system -l component=kube-controller-manager --tail=100"
+    - "kubectl get endpoints kube-controller-manager -n kube-system -o jsonpath='{.metadata.annotations.control-plane.alpha.kubernetes.io/leader}'"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l component=kube-controller-manager --force"
+      risk: "强制删除会导致 Controller Manager 重启，影响所有控制器正常工作"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n kube-system -l component=kube-controller-manager -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示 Controller Manager 异常 -->
 
 # Controller Manager 异常 FTA 树
 

@@ -1,3 +1,43 @@
+---
+title: Domain-20 企业监控与告警 — 开源项目索引
+description: '# Domain-20 企业监控与告警 — 开源项目索引'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- flux
+- elasticsearch
+- hpa
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-20 企业监控与告警 — 开源项目索引 是什么
+- 如何 Domain-20 企业监控与告警 — 开源项目索引
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Domain-20
+- 企业监控与告警
+- 开源项目索引
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
 # Domain-20 企业监控与告警 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

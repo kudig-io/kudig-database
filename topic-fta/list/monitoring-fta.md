@@ -1,22 +1,78 @@
 ---
-fta_id: "FTA-MONITORING-021"
-title: "监控与告警异常故障树分析"
-component: "monitoring"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-MONITORING-001"
-last_updated: "2026-05"
+title: 监控与告警异常故障树分析
+description: '# 监控与告警异常 FTA 树'
+category: fta
+tags:
+- fta
+- troubleshooting
+- prometheus
+- alertmanager
+- monitoring
+- observability
+- kubelet
+- grafana
+- job
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 监控与告警异常故障树分析 是什么
+- 如何 监控与告警异常故障树分析
+- 监控与告警异常故障树分析 根因分析
+- 监控与告警异常故障树分析 故障树
+trigger_keywords:
+- 监控与告警异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, prometheus, alertmanager, monitoring, observability]
-related_skills:
-  - "../topic-skills/25-observability.md"
-knowledge_refs:
-  - "../domain-8-observability/01-metrics-monitoring.md"
-  - "../domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: skill
+  path: ../topic-skills/15-monitoring-alerting-failure.md
+  label: '运维技能: 15-monitoring-alerting-failure'
+- type: structural
+  path: ../topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md
+  label: '结构化排障: 02-logging-monitoring-troubleshooting'
+- type: structural
+  path: ../topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md
+  label: '结构化排障: 01-monitoring-observability-troubleshooting'
+fta_metadata:
+  fta_id: FTA-MONITOR-001
+  top_event: 监控与告警异常 (指标丢失/告警未触发/面板不可用)
+  top_event_id: TE-MONITOR-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "Grafana 面板显示 No Data 或无指标数据"
+    - "Prometheus 显示 target 为 down"
+    - "AlertManager 未收到告警或告警静默"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n monitoring -o wide 检查监控组件状态"
+  critical_commands:
+    - "kubectl get pods -n monitoring -o wide"
+    - "kubectl logs -n monitoring -l app=prometheus --tail=100"
+    - "kubectl get servicemonitor -A"
+    - "kubectl get prometheus -A -o wide"
+    - "kubectl exec -it prometheus-<pod> -n monitoring -- promtool tsdb analyze"
+  danger_operations:
+    - action: "kubectl delete pod -n monitoring -l app=prometheus --force"
+      risk: "强制删除 Prometheus 会导致监控数据丢失，可能影响告警触发"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示监控组件异常 -->
 
 # 监控与告警异常 FTA 树
 

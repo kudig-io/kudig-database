@@ -1,3 +1,36 @@
+---
+title: 动态资源分配（DRA）集群管理员最佳实践
+description: '# 动态资源分配（DRA）集群管理员最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- daemonset
+- job
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 动态资源分配（DRA）集群管理员最佳实践 是什么
+- 如何 动态资源分配（DRA）集群管理员最佳实践
+trigger_keywords:
+- 动态资源分配
+- DRA
+- 集群管理员最佳实践
+- dictionary
+title_en: Clusters
+---
+
+
 # 动态资源分配（DRA）集群管理员最佳实践
 
 ## 概述

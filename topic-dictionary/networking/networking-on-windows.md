@@ -1,3 +1,33 @@
+---
+title: Networking on Windows
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- flannel
+- gateway
+- networkpolicy
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Networking on Windows 是什么
+- 如何 Networking on Windows
+trigger_keywords:
+- Networking
+- 'on'
+- Windows
+- dictionary
+title_en: Networking On Windows
+---
+
+
 # Networking on Windows
 
 ## 概述

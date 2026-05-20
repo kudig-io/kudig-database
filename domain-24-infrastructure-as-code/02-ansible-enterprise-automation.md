@@ -1,3 +1,38 @@
+---
+title: Ansible企业级自动化运维深度实践
+description: '# Ansible企业级自动化运维深度实践'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- prometheus
+- grafana
+- docker
+- redis
+- postgresql
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Ansible企业级自动化运维深度实践 是什么
+- 如何 Ansible企业级自动化运维深度实践
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Ansible企业级自动化运维深度实践
+- infrastructure
+- as
+- code
+---
+
+
 # Ansible企业级自动化运维深度实践
 
 > **Author**: Automation Operations Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

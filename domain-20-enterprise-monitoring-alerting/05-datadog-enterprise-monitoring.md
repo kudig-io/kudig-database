@@ -1,3 +1,46 @@
+---
+title: Datadog 企业级监控平台深度实践
+description: '# Datadog 企业级监控平台深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- docker
+- opa
+- redis
+- daemonset
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Datadog 企业级监控平台深度实践 是什么
+- 如何 Datadog 企业级监控平台深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Datadog
+- 企业级监控平台深度实践
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Datadog 企业级监控平台深度实践
 
 ## 概述 (Overview)

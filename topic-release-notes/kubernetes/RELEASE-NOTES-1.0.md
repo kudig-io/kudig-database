@@ -1,3 +1,34 @@
+---
+title: Kubernetes v1.0 Release Notes
+description: Kubernetes v1.0 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- kubelet
+- flannel
+- minio
+- job
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes v1.0 Release Notes 是什么
+- 如何 Kubernetes v1.0 Release Notes
+trigger_keywords:
+- Kubernetes
+- v1.0
+- Release
+- Notes
+- release
+- notes
+---
+
 # Kubernetes v1.0 Release Notes
 
 Source: GitHub Release [v1.0.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.0.7)

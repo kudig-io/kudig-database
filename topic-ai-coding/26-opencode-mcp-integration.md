@@ -1,3 +1,31 @@
+---
+title: MCP 协议集成指南
+description: '# MCP 协议集成指南'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- postgresql
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- MCP 协议集成指南 是什么
+- 如何 MCP 协议集成指南
+trigger_keywords:
+- MCP
+- 协议集成指南
+- ai
+- coding
+---
+
 # MCP 协议集成指南
 
 > **文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, MCP, Model Context Protocol, Local MCP, Remote MCP, OAuth, Per-Agent MCP, Sentry, Linear

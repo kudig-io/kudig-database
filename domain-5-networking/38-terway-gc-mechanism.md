@@ -1,3 +1,58 @@
+---
+title: 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
+description: '# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- kubelet
+- prometheus
+- statefulset
+- daemonset
+- crd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism) 是什么
+- 如何 Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Terway
+- GC
+- 垃圾回收
+- 机制详解
+- Terway
+- Garbage
+- Collection
+- Mechanism
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/terway-fta.md
+  label: '故障树: terway'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-04

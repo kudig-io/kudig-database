@@ -1,3 +1,46 @@
+---
+title: 12 - 存储监控告警与性能调优
+description: '# 12 - 存储监控告警与性能调优'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- kubelet
+- prometheus
+- grafana
+- redis
+- mysql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储监控告警与性能调优 是什么
+- 如何 存储监控告警与性能调优
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储监控告警与性能调优
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+---
+
+
 # 12 - 存储监控告警与性能调优
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 监控体系、告警策略、性能优化

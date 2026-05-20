@@ -1,3 +1,23 @@
+---
+title: 项目报告 (Reports)
+description: '│   └── ENTERPRISE_BEST_PRACTICES.md  # 企业最佳实践评估'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 项目报告 (Reports) 是什么
+- 如何 项目报告 (Reports)
+trigger_keywords:
+- 项目报告
+- Reports
+---
+
 # 项目报告 (Reports)
 
 > 项目质量评估、统计数据和覆盖率报告

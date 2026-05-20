@@ -1,3 +1,30 @@
+---
+title: Manpage 安装指南
+description: '# Manpage 安装指南'
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- istio
+- cilium
+- helm
+- argocd
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Manpage 安装指南 是什么
+- 如何 Manpage 安装指南
+trigger_keywords:
+- Manpage
+- 安装指南
+---
+
 # Manpage 安装指南
 
 本文档介绍如何将 KUDIG-DATABASE 的 manpage 安装到您的系统中。

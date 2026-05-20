@@ -1,3 +1,42 @@
+---
+title: 49 - 服务网格进阶配置
+description: '# 49 - 服务网格进阶配置'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- prometheus
+- istio
+- envoy
+- cilium
+- kafka
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 服务网格进阶配置 是什么
+- 如何 服务网格进阶配置
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 服务网格进阶配置
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
+
 # 49 - 服务网格进阶配置
 
 ## Istio流量管理CRD

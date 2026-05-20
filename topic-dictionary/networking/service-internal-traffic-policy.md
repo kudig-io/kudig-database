@@ -1,3 +1,31 @@
+---
+title: Service Internal Traffic Policy
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Service Internal Traffic Policy 是什么
+- 如何 Service Internal Traffic Policy
+trigger_keywords:
+- Service
+- Internal
+- Traffic
+- Policy
+- dictionary
+title_en: Service Internal Traffic Policy
+---
+
+
 # Service Internal Traffic Policy
 
 ## 概述

@@ -1,20 +1,71 @@
 ---
-fta_id: "FTA-NODEPOOL-024"
-title: "NodePool 异常故障树分析"
-component: "nodepool"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-NODEPOOL-001"
-last_updated: "2026-05"
+title: NodePool 异常故障树分析
+description: '- **范围**：容量管理、自动扩缩容、调度与标签、节点初始化、镜像与运行时、网络与安全策略、控制面依赖。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- nodepool
+- node-group
+- scaling
+- lifecycle
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- NodePool 异常故障树分析 是什么
+- 如何 NodePool 异常故障树分析
+- NodePool 异常故障树分析 根因分析
+- NodePool 异常故障树分析 故障树
+trigger_keywords:
+- NodePool
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, nodepool, node-group, scaling, lifecycle]
-related_skills: []
-knowledge_refs:
-  - "../domain-4-workloads/35-node-component-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+fta_metadata:
+  fta_id: FTA-NODEPOOL-001
+  top_event: NodePool 异常 (扩容失败/缩容误删/生命周期异常)
+  top_event_id: TE-NODEPOOL-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get nodes -o wide | grep -E 'nodepool|node-group' 显示节点标签异常"
+    - "Cluster Autoscaler 日志显示 ScaleUp failed"
+    - "kubectl get events -A | grep -E 'NodePool|NodeGroup|ScaleUpError' 显示节点池异常"
+agent_notes:
+  decision_tree_entry: "kubectl get nodes -o wide | grep -E 'nodepool|node-group' 检查节点池标签"
+  critical_commands:
+    - "kubectl get nodes -o wide -l nodepool=<pool-name>"
+    - "kubectl describe nodepool <name>"
+    - "kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100 | grep -i scaleup"
+    - "kubectl get events -A --field-selector reason=ScaleUpError"
+  danger_operations:
+    - action: "kubectl delete node <node-name> --force"
+      risk: "删除节点会终止该节点上所有 Pod，可能导致服务中断"
+      requires_confirmation: true
+    - action: "kubectl scale nodepool <name> --replicas=0"
+      risk: "缩容到 0 会删除该节点池所有节点，可能导致服务中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'NodePool|ScaleUpError|NodeGroup' 显示节点池异常 -->
 
 # NodePool 异常 FTA 树
 

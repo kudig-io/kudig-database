@@ -1,3 +1,30 @@
+---
+title: Kubernetes 中的对象
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- statefulset
+- ingress
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 中的对象 是什么
+- 如何 Kubernetes 中的对象
+trigger_keywords:
+- Kubernetes
+- 中的对象
+- dictionary
+title_en: Objects In Kubernetes
+---
+
+
 # Kubernetes 中的对象
 
 ## 概述

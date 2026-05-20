@@ -1,3 +1,47 @@
+---
+title: Sidecar 容器模式
+description: '## 概述'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- istio
+- envoy
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Sidecar 容器模式 是什么
+- 如何 Sidecar 容器模式
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Sidecar
+- 容器模式
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # Sidecar 容器模式
 
 ## 概述

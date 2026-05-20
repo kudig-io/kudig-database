@@ -1,21 +1,76 @@
 ---
-fta_id: "FTA-BACKUP-002"
-title: "备份/恢复异常故障树分析"
-component: "backup-restore"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-BACKUP-001"
-last_updated: "2026-05"
+title: 备份/恢复异常故障树分析
+description: '- **范围**：etcd 快照、Velero/自定义备份工具、存储后端（S3/OSS/NFS）、加密与校验、恢复流程与顺序、依赖组件。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- backup
+- velero
+- etcd-snapshot
+- restore
+- etcd
+- controller-manager
+- prometheus
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 备份/恢复异常故障树分析 是什么
+- 如何 备份/恢复异常故障树分析
+- 备份/恢复异常故障树分析 根因分析
+- 备份/恢复异常故障树分析 故障树
+trigger_keywords:
+- 备份
+- 恢复异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, backup, velero, etcd-snapshot, restore]
-related_skills: []
-knowledge_refs:
-  - "../domain-3-control-plane/11-etcd-deep-dive.md"
-  - "../topic-structural-trouble-shooting/"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md
+  label: '结构化排障: 04-backup-restore-troubleshooting'
+fta_metadata:
+  fta_id: FTA-BACKUP-001
+  top_event: 备份/恢复异常 (备份失败/恢复失败/数据不一致/RPO-RTO 未达标)
+  top_event_id: TE-BACKUP-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "velero backup get 显示 Backup 失败或 PartiallyFailed"
+    - "etcdctl snapshot save 失败或快照损坏"
+    - "kubectl get events -A | grep -E 'Backup|Restore|Snapshot' 显示异常"
+agent_notes:
+  decision_tree_entry: "kubectl get backups -n velero; velero backup get 检查备份状态"
+  critical_commands:
+    - "kubectl get backups -n velero -o wide"
+    - "velero backup describe <backup-name>"
+    - "velero restore get"
+    - "etcdctl snapshot status /path/to/snapshot.db"
+    - "kubectl get events -n velero --sort-by='.lastTimestamp'"
+  danger_operations:
+    - action: "velero backup delete <backup-name>"
+      risk: "删除备份可能导致数据丢失，无法恢复到该时间点"
+      requires_confirmation: true
+    - action: "etcdctl snapshot restore /path/to/snapshot.db --force"
+      risk: "恢复快照会覆盖当前 etcd 数据，可能导致集群状态丢失"
+      requires_confirmation: true
 ---
+
+<!-- condition: velero backup get | grep -E 'Failed|PartiallyFailed' 显示备份失败 -->
 
 # 备份/恢复异常 FTA 树
 
@@ -569,6 +624,10 @@ flowchart TD
           "manual_steps": ["使用 Velero API 版本转换插件", "手动提取备份内容并修改 API 版本", "在源集群升级 API 版本后重新备份", "使用 velero restore describe 查看具体哪些资源失败"],
           "auto_actions": []
         },
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
         "version_notes": "1.22 移除 extensions/v1beta1 Ingress; 1.25 移除 PodSecurityPolicy"
       }
     },

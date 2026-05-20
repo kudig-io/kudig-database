@@ -1,3 +1,36 @@
+---
+title: 01 - Kubernetes 生产环境运维最佳实践字典
+description: '# 01 - Kubernetes 生产环境运维最佳实践字典'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- istio
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 20min
+intent_queries:
+- Kubernetes 生产环境运维最佳实践字典 是什么
+- 如何 Kubernetes 生产环境运维最佳实践字典
+trigger_keywords:
+- Kubernetes
+- 生产环境运维最佳实践字典
+- dictionary
+title_en: Operations Best Practices
+---
+
+
+
 # 01 - Kubernetes 生产环境运维最佳实践字典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

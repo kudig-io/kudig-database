@@ -1,3 +1,52 @@
+---
+title: ReplicaSet 控制器源码分析
+category: deployment
+tags:
+- replicaset
+- controller
+- pod
+- syncReplicaset
+- manageReplicas
+- workload
+last_updated: 2026-05-18
+description: 深入分析 Kubernetes ReplicaSet 控制器的源码实现，涵盖 syncReplicaSet 核心同步函数、manageReplicas 期望状态对齐、Pod 创建流程、Status 更新以及与 Deployment
+  的数据流关系。
+difficulty: advanced
+intent_queries:
+- kubernetes replicaset controller source code analysis
+- syncReplicaSet manageReplicas kubernetes
+- replicaset pod creation workflow kubernetes
+- BurstReplicas 500 kubernetes controller manager
+- replicaset status availableReplicas readyReplicas
+trigger_keywords:
+- ReplicaSet Controller
+- syncReplicaSet
+- manageReplicas
+- BurstReplicas
+- CreatePods
+- Pod OwnerReference
+- FilterActivePods
+- PodTemplateHash
+- replicaset status
+- FullyLabeledReplicas
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-4-workloads
+- domain-3-control-plane
+related_topics:
+- deployment-controller
+- rolling-update
+- deployment-status
+domain_link: '[Workloads](../domain-4-workloads/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+---
+
+
 # ReplicaSet 控制器源码分析
 
 ## 概述
@@ -152,6 +201,52 @@ func (rsc *ReplicaSetController) manageReplicas(ctx context.Context, rs *apps.Re
 | 并发创建 | 使用 Goroutine 并发创建 Pod，提高吞吐量 |
 | 限速器 | 全局 `podCreationRateLimiter` 控制创建速率 |
 | 优雅删除 | 调用 `DeletePod` 而非强制终止，让 kubelet 执行优雅关闭 |
+
+### Pod 创建限速器设计
+
+```go
+// pkg/controller/controller_utils.go
+var podCreationRateLimiter = workqueue.NewRateLimiter(
+    workqueue.NewItemExponentialFailureRateLimiter(1*time.Millisecond, 1*time.Minute),
+    100, // QPS
+)
+
+// 在 manageReplicas 中使用
+if err := rsc.podControl.CreatePods(...); err != nil {
+    // 如果创建失败，将 RS 重新入队等待重试
+    rsc.enqueueRS(rs)
+}
+```
+
+**RateLimiter 配置**：
+- 初始延迟：1ms（指数增长）
+- 最大延迟：1分钟
+- 增长因子：2（每次失败翻倍）
+- 最大并发：100 QPS
+
+### Pod 删除与 PDB 交互
+
+```go
+// 删除 Pod 前的 PDB 检查
+func (r *RealPodControl) deletePod(namespace, name string, pod *v1.Pod) error {
+    // 1. 获取 Pod 的 PDB
+    pdbs, err := r.pdbLister.PodDisruptionBudgets(namespace).List(...)
+    
+    for _, pdb := range pdbs {
+        if selector.Matches(labels.Set(pod.Labels)) {
+            // 2. 检查 PDB 当前允许的 disruptions
+            allowed := pdb.Status.DisruptionsAllowed
+            if allowed == 0 {
+                // 等待或跳过
+                return fmt.Errorf("PodDisruptionBudget %s blocks deletion", pdb.Name)
+            }
+        }
+    }
+    
+    // 3. 执行删除
+    return r.KubeClient.CoreV1().Pods(namespace).Delete(ctx, name, ...)
+}
+```
 
 ---
 

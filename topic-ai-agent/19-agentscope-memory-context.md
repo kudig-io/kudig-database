@@ -1,3 +1,37 @@
+---
+title: AgentScope 记忆管理与上下文工程
+description: '# AgentScope 记忆管理与上下文工程'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- redis
+- mysql
+- postgresql
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 记忆管理与上下文工程 是什么
+- 如何 AgentScope 记忆管理与上下文工程
+trigger_keywords:
+- AgentScope
+- 记忆管理与上下文工程
+- ai
+- agent
+---
+
+
 # AgentScope 记忆管理与上下文工程
 
 > **文档类型**: 记忆管理专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Memory, 记忆管理, InMemoryMemory, AsyncSQLAlchemyMemory, RedisMemory, 长期记忆, Mem0, ReMe, Session, JSONSession, 状态持久化, Token 管理, 上下文窗口, 记忆压缩, CompressionConfig, marks

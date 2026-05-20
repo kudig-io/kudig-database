@@ -1,4 +1,82 @@
+---
+title: 'Day 12: 网络栈 - CNI + Service + DNS'
+description: '# Day 12: 网络栈 - CNI + Service + DNS'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- coredns
+- ingress
+- networkpolicy
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 12: 网络栈 - CNI + Service + DNS 是什么'
+- '如何 Day 12: 网络栈 - CNI + Service + DNS'
+trigger_keywords:
+- Day
+- '12:'
+- 网络栈
+- CNI
+- Service
+- DNS
+- learn
+---
+
 # Day 12: 网络栈 - CNI + Service + DNS
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY12
+title: Day 12 - 网络栈 - CNI + Service + DNS
+topic: kubernetes
+type: hands-on-guide
+tags: [cni, service, dns, coredns, iptables, ipvs, networking, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "K8s 网络模型是什么"
+  - "Service 四种类型怎么选"
+  - "CoreDNS 怎么工作"
+  - "iptables vs IPVS 区别"
+trigger_keywords:
+  - CNI
+  - Container Network Interface
+  - Service
+  - ClusterIP
+  - NodePort
+  - LoadBalancer
+  - DNS
+  - CoreDNS
+  - kube-proxy
+  - iptables
+  - IPVS
+  - Endpoints
+  - Service Discovery
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+  - developer
+estimated_read_time: 45min
+related_domains:
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - networking
+  - service
+  - dns
+  - cni
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2.md
+  - domain-5-networking/01-network-architecture-overview.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: K8s 网络基础架构
 

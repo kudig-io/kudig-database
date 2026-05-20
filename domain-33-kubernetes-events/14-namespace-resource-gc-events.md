@@ -1,3 +1,38 @@
+---
+title: 14 - Namespace、资源管理与垃圾回收事件
+description: '# 14 - Namespace、资源管理与垃圾回收事件'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- apiserver
+- controller-manager
+- prometheus
+- hpa
+- pdb
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- Namespace、资源管理与垃圾回收事件 是什么
+- 如何 Namespace、资源管理与垃圾回收事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- Namespace
+- 资源管理与垃圾回收事件
+- kubernetes
+- events
+---
+
+
 # 14 - Namespace、资源管理与垃圾回收事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

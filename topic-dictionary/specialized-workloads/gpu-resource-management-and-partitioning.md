@@ -1,3 +1,31 @@
+---
+title: GPU 资源管理与分区技术
+description: '# GPU 资源管理与分区技术'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- gpu
+- cuda
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GPU 资源管理与分区技术 是什么
+- 如何 GPU 资源管理与分区技术
+trigger_keywords:
+- GPU
+- 资源管理与分区技术
+- dictionary
+title_en: Gpu Resource Management And Partitioning
+---
+
+
 # GPU 资源管理与分区技术
 
 ## 概述

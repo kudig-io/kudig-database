@@ -1,3 +1,39 @@
+---
+title: 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+description: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- grafana
+- llm
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 是什么'
+- '如何 topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+- 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 根因分析'
+- 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 故障树'
+trigger_keywords:
+- 'topic-fta:'
+- 故障树分析
+- FTA
+- 方法论与
+- AI
+- Agent
+- 智能运维实践
+- fta
+---
+
 # topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践
 
 > **文档数量**: 29 篇（23章 + 4附录 + 2主文档） | **最后更新**: 2026-02

@@ -1,6 +1,60 @@
-# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)
+---
+title: 集群自动扩缩容故障排查
+description: '# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)'
+category: troubleshooting
+tags:
+- cluster-autoscaler
+- nodepool
+- scaling
+- auto-scaling
+- node
+- scheduler
+- prometheus
+- pdb
+- daemonset
+- job
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Cluster Autoscaler 不工作
+- 节点池扩容失败
+- 无法扩容
+- 缩容太激进
+trigger_keywords:
+- 集群自动扩缩容故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/cluster-autoscaler-fta.md
+  label: '故障树: cluster-autoscaler'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
+
+# 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)
 
 ---
 

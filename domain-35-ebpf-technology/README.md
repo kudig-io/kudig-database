@@ -1,3 +1,41 @@
+---
+title: 'Domain 35: eBPF 技术体系 (eBPF Technology Stack)'
+description: '**适用范围**: 云原生网络、安全、可观测性 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-03'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- kafka
+- networkpolicy
+- operator
+- rag
+- agent
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 35: eBPF 技术体系 (eBPF Technology Stack) 是什么'
+- '如何 Domain 35: eBPF 技术体系 (eBPF Technology Stack)'
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Domain
+- '35:'
+- eBPF
+- 技术体系
+- eBPF
+- Technology
+- Stack
+- ebpf
+---
+
 # Domain 35: eBPF 技术体系 (eBPF Technology Stack)
 
 > **适用范围**: 云原生网络、安全、可观测性 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-03

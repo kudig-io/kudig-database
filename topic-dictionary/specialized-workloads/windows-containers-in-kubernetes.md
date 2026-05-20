@@ -1,3 +1,35 @@
+---
+title: Windows 容器在 Kubernetes 中的支持
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- containerd
+- docker
+- opa
+- hpa
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Windows 容器在 Kubernetes 中的支持 是什么
+- 如何 Windows 容器在 Kubernetes 中的支持
+trigger_keywords:
+- Windows
+- 容器在
+- Kubernetes
+- 中的支持
+- dictionary
+title_en: Containers
+---
+
+
 # Windows 容器在 Kubernetes 中的支持
 
 ## 概述

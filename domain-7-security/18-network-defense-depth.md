@@ -1,3 +1,46 @@
+---
+title: 18 - 网络安全纵深防御体系
+description: '# 18 - 网络安全纵深防御体系'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- kubelet
+- prometheus
+- istio
+- envoy
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 网络安全纵深防御体系 是什么
+- 如何 网络安全纵深防御体系
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 网络安全纵深防御体系
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 18 - 网络安全纵深防御体系
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [NIST SP 800-207 Zero Trust Architecture](https://csrc.nist.gov/publications/detail/sp/800-207/final) | [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes)

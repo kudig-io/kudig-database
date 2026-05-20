@@ -1,3 +1,33 @@
+---
+title: CPU与内存故障排查
+description: '# CPU与内存故障排查'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CPU与内存故障排查 是什么
+- 如何 CPU与内存故障排查
+- Kubernetes 31 hardware 最佳实践
+- CPU与内存故障排查 故障排查
+- CPU与内存故障排查 排障步骤
+trigger_keywords:
+- CPU与内存故障排查
+- hardware
+---
+
+
 # CPU与内存故障排查
 
 ## 概述

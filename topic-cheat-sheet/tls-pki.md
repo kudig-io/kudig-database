@@ -1,22 +1,46 @@
 ---
-title: "TLS/SSL 与 PKI 速查卡"
-description: "证书管理、TLS 配置和 PKI 运维的快速参考"
+title: TLS/SSL 与 PKI 速查卡
+description: 证书管理、TLS 配置和 PKI 运维的快速参考
 category: cheatsheet
-tags: [tls, ssl, pki, certificate, cheatsheet, quick-reference, security]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- tls
+- ssl
+- pki
+- certificate
+- cheatsheet
+- quick-reference
+- security
+- etcd
+- apiserver
+- kubelet
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- TLS/SSL 与 PKI 速查卡 是什么
+- 如何 TLS/SSL 与 PKI 速查卡
+trigger_keywords:
+- TLS
+- SSL
+- PKI
+- 速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../topic-skills/06-certificate-expiry.md"
-    desc: "证书过期 Skill"
-  - path: "../domain-7-security-compliance/01-authentication-authorization-system.md"
-    desc: "认证授权系统"
-  - path: "../topic-cheat-sheet/networking.md"
-    desc: "网络诊断速查卡"
+- path: ../topic-skills/06-certificate-expiry.md
+  desc: 证书过期 Skill
+- path: ../domain-7-security-compliance/01-authentication-authorization-system.md
+  desc: 认证授权系统
+- path: ../topic-cheat-sheet/networking.md
+  desc: 网络诊断速查卡
 ---
+
 
 # TLS/SSL 与 PKI 速查表
 

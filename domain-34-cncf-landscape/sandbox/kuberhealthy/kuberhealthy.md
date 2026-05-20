@@ -1,3 +1,35 @@
+---
+title: Kuberhealthy
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- helm
+- daemonset
+- job
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kuberhealthy 是什么
+- 如何 Kuberhealthy
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Kuberhealthy
+- cncf
+- landscape
+---
+
 # Kuberhealthy
 
 > **成熟度**: Sandbox | **加入时间**: 2021-06 | **最后更新**: 2026-03

@@ -1,19 +1,103 @@
+---
+title: Kubernetes 生产运维 1 个月学习计划
+description: '# Kubernetes 生产运维 1 个月学习计划'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- etcd
+- scheduler
+- prometheus
+- jaeger
+- helm
+- argocd
+- docker
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 生产运维 1 个月学习计划 是什么
+- 如何 Kubernetes 生产运维 1 个月学习计划
+trigger_keywords:
+- Kubernetes
+- 生产运维
+- 个月学习计划
+- learn
+---
+
+
 # Kubernetes 生产运维 1 个月学习计划
+
+```yaml
+---
+title: Kubernetes 生产运维一个月学习计划
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Kubernetes运维学习计划"
+  - "一个月学习路径"
+  - "云原生工程师培训"
+  - "全栈运维课程"
+trigger_keywords:
+  - "K8s学习"
+  - "一个月计划"
+  - "云原生工程师"
+  - "全栈运维"
+  - "Docker"
+  - "Kubernetes"
+  - "监控排障"
+  - "GitOps"
+reading_level: intermediate
+audience:
+  - 运维工程师
+  - sre工程师
+  - devops工程师
+estimated_read_time: 25min
+related_domains:
+  - domain-1-architecture-fundamentals
+  - domain-3-control-plane
+  - domain-4-workloads
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/public-training/README
+  - topic-learn/quick-start
+  - domain-12-troubleshooting
+id: PUBLIC-TRAINING-PLAN-001
+topic: training
+type: training-plan
+tags: [training, 28-days, k8s, learning-path, sre, devops, k8s-1.28-1.33]
+---
+```
 
 > **目标人群**: 入门级 -> 全栈运维 | **投入**: 4+ 小时/天 | **知识库**: kudig-database (668+ 篇)
 
 ---
 
+## 概述
+
+本学习计划旨在帮助运维工程师在一个月内从 Kubernetes 入门级提升到全栈运维能力。课程设计遵循"理论 + 实践"的黄金比例（40% 理论 : 60% 实践），每天 4-5 小时的学习时间，通过 28 天的系统性学习，覆盖从集群搭建到生产运维的完整知识体系。
+
+整个学习计划基于 kudig-database 知识库中 668+ 篇文档构建，分为四个阶段：地基建设期（Week 1）、核心技术构建期（Week 2）、运维作战能力期（Week 3）、企业级进阶期（Week 4）。每个阶段有明确的产出目标和评估标准，确保学习效果可量化验证。
+
+**学习路线核心思路**: 先建立全局认知（架构全貌），再深入核心组件（控制平面、网络、存储），然后构建运维能力（监控、排障、安全），最后掌握企业级实践（GitOps、生产运维）。
+
+---
+
 ## 快速导航
 
-| 周次 | 主题 | 目录 |
-|------|------|------|
-| Week 1 | 地基建设期 | [week-1-foundation/](./week-1-foundation/) |
-| Week 2 | 核心技术构建期 | [week-2-core-tech/](./week-2-core-tech/) |
-| Week 3 | 运维作战能力期 | [week-3-operations/](./week-3-operations/) |
-| Week 4 | 企业级进阶期 | [week-4-enterprise/](./week-4-enterprise/) |
-| - | 实践项目 | [projects/](./projects/) |
-| - | 补充资源 | [resources/](./resources/) |
+| 周次 | 主题 | 核心产出 | 目录 |
+|------|------|---------|------|
+| Week 1 | 地基建设期 | K8s 集群环境 + 架构图 | [week-1-foundation/](./week-1-foundation/) |
+| Week 2 | 核心技术构建期 | 生产级应用 YAML 编排 | [week-2-core-tech/](./week-2-core-tech/) |
+| Week 3 | 运维作战能力期 | 监控大盘 + 排障手册 | [week-3-operations/](./week-3-operations/) |
+| Week 4 | 企业级进阶期 | GitOps 流水线 + Playbook | [week-4-enterprise/](./week-4-enterprise/) |
+| - | 实践项目 | 5 个递进式项目 | [projects/](./projects/) |
+| - | 补充资源 | 知识图谱模板 | [resources/](./resources/) |
 
 ---
 
@@ -29,6 +113,39 @@ Week 1: 地基建设期     Week 2: 核心技术构建期    Week 3: 运维作�
     v                     v                         v                         v
  产出: K8s 集群搭建    产出: 生产级应用编排      产出: 监控大盘+排障手册   产出: GitOps 流水线
 ```
+
+### 每周详细内容
+
+| 周次 | Day | 主题 | 核心技能 | 对应 Domain |
+|------|-----|------|---------|-------------|
+| **W1** | Day 1 | Docker 容器基础 | 镜像构建、容器运行 | Domain 13 |
+| | Day 2 | Linux 基础回顾 | Namespace/Cgroup | Domain 14 |
+| | Day 3 | K8s 架构全览 | 控制面 + 数据面 | Domain 1 |
+| | Day 4 | kubectl 实战 | 常用命令、资源操作 | Domain 1 |
+| | Day 5 | Pod 深入理解 | 生命周期、探针 | Domain 4 |
+| | Day 6 | Deployment 管理 | 滚动更新、回滚 | Domain 4 |
+| | Day 7 | 项目 P1: 集群搭建 | kind/minikube 实操 | 综合 |
+| **W2** | Day 8 | etcd + API Server | Raft、请求链路 | Domain 3 |
+| | Day 9 | Scheduler + Controller | 调度算法、控制循环 | Domain 3 |
+| | Day 10 | Service 网络 | 四种类型、Endpoint | Domain 5 |
+| | Day 11 | Ingress 路由 | Nginx Ingress 配置 | Domain 5 |
+| | Day 12 | 存储基础 | PV/PVC/StorageClass | Domain 6 |
+| | Day 13 | 有状态应用 | StatefulSet 实践 | Domain 4 |
+| | Day 14 | 项目 P2: 应用编排 | 多层应用全栈部署 | 综合 |
+| **W3** | Day 15 | RBAC 安全 | Role/ClusterRole | Domain 7 |
+| | Day 16 | Pod 安全 + Secret | PSS、Kyverno | Domain 7 |
+| | Day 17 | Prometheus 监控 | 部署、PromQL | Domain 8 |
+| | Day 18 | 日志 + 追踪 | Loki、Jaeger | Domain 8 |
+| | Day 19 | 故障排查基础 | 排障方法论 | Domain 12 |
+| | Day 20 | FTA + FEBM | 故障树、取证分析 | topic-fta |
+| | Day 21 | 项目 P3: 监控排障 | 监控 + 故障演练 | 综合 |
+| **W4** | Day 22 | 平台运维基础 | 节点维护、组件管理 | Domain 9 |
+| | Day 23 | ELK + GitOps | ArgoCD 实践 | Domain 21/23 |
+| | Day 24 | Helm 包管理 | Chart 开发、Repo | Domain 22 |
+| | Day 25 | 生产最佳实践 | 变更管理、事故响应 | Domain 18 |
+| | Day 26 | FTA/FEBM 深化 | 复杂故障分析 | topic-fta |
+| | Day 27 | 项目 P4: GitOps | ArgoCD 多环境 | 综合 |
+| | Day 28 | 项目 P5: 毕业 | 综合实践 | 综合 |
 
 ---
 
@@ -48,6 +165,21 @@ Domain15(网络基础)┘       │                 │                     │
                           v
                  Domain18-33(企业级专题)
 ```
+
+### Domain 学习优先级
+
+| 优先级 | Domain | 说明 | 学习周次 |
+|--------|--------|------|---------|
+| **P0** | Domain 1: 架构基础 | 必须最先掌握 | Week 1 |
+| **P0** | Domain 4: 工作负载 | 最常用的资源类型 | Week 1-2 |
+| **P1** | Domain 3: 控制平面 | 理解 K8s 运作机制 | Week 2 |
+| **P1** | Domain 5: 网络 | Service/Ingress/CNI | Week 2 |
+| **P1** | Domain 6: 存储 | PV/PVC/CSI | Week 2 |
+| **P2** | Domain 7: 安全 | RBAC/PSS/Secret | Week 3 |
+| **P2** | Domain 8: 可观测性 | Prometheus/日志 | Week 3 |
+| **P2** | Domain 12: 故障排查 | 排障方法论 | Week 3 |
+| **P3** | Domain 18: 生产运维 | 最佳实践 | Week 4 |
+| **P3** | Domain 23: GitOps | ArgoCD/CI-CD | Week 4 |
 
 ---
 
@@ -69,6 +201,9 @@ Domain15(网络基础)┘       │                 │                     │
 ### 5. 结构化记录
 每个 Domain 学完后，产出一张思维导图或 README 摘要，形成个人知识图谱。
 
+### 6. 项目驱动学习
+每个周末完成一个实践项目，将本周所学知识串联应用。
+
 ---
 
 ## 每周目标与产出
@@ -84,13 +219,13 @@ Domain15(网络基础)┘       │                 │                     │
 
 ## 实践项目清单
 
-| # | 项目名称 | 周 | 详情 |
-|---|----------|---|------|
-| P1 | 从零搭建 K8s 集群 | Week 1 | [p1-k8s-cluster-setup.md](./projects/p1-k8s-cluster-setup.md) |
-| P2 | 生产级应用全栈编排 | Week 2 | [p2-production-app-orchestration.md](./projects/p2-production-app-orchestration.md) |
-| P3 | 可观测性体系 + 故障演练 | Week 3 | [p3-observability-fault-drill.md](./projects/p3-observability-fault-drill.md) |
-| P4 | GitOps 流水线 | Week 4 | [p4-gitops-pipeline.md](./projects/p4-gitops-pipeline.md) |
-| P5 | 毕业综合实践项目 | Week 4 | [p5-graduation-project.md](./projects/p5-graduation-project.md) |
+| # | 项目名称 | 周 | 难度 | 详情 | 核心技能 |
+|---|----------|---|------|------|---------|
+| P1 | 从零搭建 K8s 集群 | Week 1 | ★★☆ | [p1-k8s-cluster-setup.md](./projects/p1-k8s-cluster-setup.md) | kind, kubectl, Deployment |
+| P2 | 生产级应用全栈编排 | Week 2 | ★★★ | [p2-production-app-orchestration.md](./projects/p2-production-app-orchestration.md) | Service, Ingress, PVC |
+| P3 | 可观测性体系 + 故障演练 | Week 3 | ★★★ | [p3-observability-fault-drill.md](./projects/p3-observability-fault-drill.md) | Prometheus, 排障 |
+| P4 | GitOps 流水线 | Week 4 | ★★★ | [p4-gitops-pipeline.md](./projects/p4-gitops-pipeline.md) | ArgoCD, Kustomize |
+| P5 | 毕业综合实践项目 | Week 4 | ★★★★ | [p5-graduation-project.md](./projects/p5-graduation-project.md) | 全栈综合 |
 
 ---
 
@@ -123,5 +258,25 @@ Domain15(网络基础)┘       │                 │                     │
 3. **周末检验**: 每周末完成 `checkpoint.md` 中的自测题
 4. **项目驱动**: 每周末完成一个实践项目，巩固所学知识
 5. **记录成长**: 在 `resources/knowledge-map.md` 中记录个人知识图谱
+
+---
+
+## 要点总结
+
+- **4 周学习路径**: 地基建设 → 核心技术 → 运维能力 → 企业级实践
+- **每天 4 小时**: 理论 <= 1.5h，实践 >= 2.5h
+- **5 个递进式项目**: 从集群搭建到 GitOps 流水线
+- **知识库 668+ 篇文档**: 按需深入，不需要全部读完
+- **费曼学习法**: 每天用自己的语言复述核心概念
+- **产出导向**: 每周有明确的可验证产出
+
+---
+
+## 延伸阅读
+
+- [Kubernetes 官方文档](https://kubernetes.io/docs/home/)
+- [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
+- [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- [CNCF 云原生全景图](https://landscape.cncf.io/)
 
 开始你的 Kubernetes 全栈运维之旅吧!

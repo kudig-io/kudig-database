@@ -1,3 +1,41 @@
+---
+title: 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
+description: '- [HPA 事件详解](#hpa-事件详解)'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- apiserver
+- kubelet
+- prometheus
+- hpa
+- vpa
+- pdb
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler) 是什么
+- 如何 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 自动扩缩容事件
+- HPA
+- VPA
+- Cluster
+- Autoscaler
+- kubernetes
+- events
+---
+
+
 # 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

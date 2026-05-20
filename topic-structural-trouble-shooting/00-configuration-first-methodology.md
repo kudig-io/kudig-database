@@ -1,3 +1,40 @@
+---
+title: 疑难问题系统性排查方法论：配置优先（Configuration-First）
+description: '# 疑难问题系统性排查方法论：配置优先（Configuration-First）'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- kubelet
+- prometheus
+- coredns
+- daemonset
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 疑难问题系统性排查方法论：配置优先（Configuration-First） 是什么
+- 如何 疑难问题系统性排查方法论：配置优先（Configuration-First）
+- 疑难问题系统性排查方法论：配置优先（Configuration-First） 故障排查
+- 疑难问题系统性排查方法论：配置优先（Configuration-First） 排障步骤
+trigger_keywords:
+- 疑难问题系统性排查方法论：配置优先
+- Configuration-First
+- structural
+- trouble
+- shooting
+---
+
+
 # 疑难问题系统性排查方法论：配置优先（Configuration-First）
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级 | **定位**: 跨组件方法论

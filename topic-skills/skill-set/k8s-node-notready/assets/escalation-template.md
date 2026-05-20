@@ -1,3 +1,35 @@
+---
+title: 升级消息模板 / Escalation Message Template
+description: '- 故障概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 升级消息模板 / Escalation Message Template 是什么
+- 如何 升级消息模板 / Escalation Message Template
+trigger_keywords:
+- 升级消息模板
+- Escalation
+- Message
+- Template
+- skills
+---
+
 # 升级消息模板 / Escalation Message Template
 
 > **Skill ID**: SKILL-NODE-001  

@@ -1,3 +1,47 @@
+---
+title: AI平台安全加固与合规
+description: '# AI平台安全加固与合规'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- kubelet
+- istio
+- docker
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AI平台安全加固与合规 是什么
+- 如何 AI平台安全加固与合规
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- AI平台安全加固与合规
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # AI平台安全加固与合规
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [NIST AI RMF](https://csrc.nist.gov/publications/detail/white-paper/2023/03/01/artificial-intelligence-risk-management-framework-ai-rmf-10/final) | [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

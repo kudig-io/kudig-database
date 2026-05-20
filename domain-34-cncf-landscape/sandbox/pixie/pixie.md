@@ -1,3 +1,37 @@
+---
+title: Pixie
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- redis
+- mysql
+- postgresql
+- kafka
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Pixie 是什么
+- 如何 Pixie
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Pixie
+- cncf
+- landscape
+---
+
+
 # Pixie
 
 > **成熟度**: Sandbox | **加入时间**: 2021-06 | **最后更新**: 2026-03
@@ -274,3 +308,71 @@ spec:
 ---
 
 **维护者**: Kudig Team | **许可证**: MIT
+
+## 生产实战与调优
+
+### 典型生产场景
+
+1. **无侵入式全栈可观测** — Pixie 通过 eBPF 自动捕获 HTTP/gRPC/MySQL/PostgreSQL/Kafka 等协议流量，无需手动埋点即可获得服务间的请求拓扑和延迟分布。
+2. **K8s 网络流量分析** — 实时监控 Pod 间通信，快速定位网络策略配置错误、DNS 解析失败、连接超时等问题。
+3. **安全审计与异常检测** — 通过 `openssl` eBPF hook 捕获加密流量的元数据（不捕获明文），检测异常的 API 调用模式和未授权访问。
+4. **分布式追踪自动采集** — 自动从 HTTP 头中提取 trace context（支持 B3/W3C TraceContext），无需修改业务代码即可构建调用链。
+5. **生产环境 Debug** — 使用 PxL 脚本在线查询特定时间窗口的请求详情，替代传统的 "加日志重发布" 模式。
+
+### 配置调优参数
+
+```yaml
+# pixie-cloud Helm values 关键配置
+# vizier (集群内采集组件)
+vizier:
+  pem:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        cpu: "1"
+        memory: 1Gi
+    flags:
+      # eBPF 表大小限制，影响可追踪的并发连接数
+      tables_store: "percpu_cache"
+      # 数据保留时间（内存中）
+      data_access_ttl: "24h"
+  # Cloud 接收端
+  cloud:
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1Gi
+      limits:
+        cpu: "2"
+        memory: 4Gi
+
+# 关键环境变量
+# PL_TABLE_STORE_DATA_TTL: 数据保留时间，默认 24h
+# PL_MAX_HTTP_EVENTS: 最大 HTTP 事件缓存数，默认 1000000
+```
+
+关键调优点：
+- PEM (Pixie Edge Module) 资源限制：每节点一个 PEM，CPU/Memory 需根据节点流量规模调整
+- `data_access_ttl`：内存中的数据保留时间，降低可减少内存占用但缩短可查询时间窗口
+- 收集策略：可通过 `PixieConfig` 选择性关闭某些协议的采集以降低开销
+
+### 性能基准数据（参考值）
+
+| 节点规模 | 业务 Pod 数 | PEM CPU 开销 | PEM 内存开销 | 数据采集延迟 |
+|----------|------------|-------------|-------------|-------------|
+| 100 节点 | 2000 | 0.2-0.5 core | 300-500 Mi | < 1s |
+| 500 节点 | 10000 | 0.3-0.8 core | 500-800 Mi | < 2s |
+| 1000 节点 | 30000 | 0.5-1.0 core | 800Mi-1.2Gi | < 3s |
+
+> 注：PEM 开销与节点上的活跃连接数和协议类型相关。数据库密集型节点开销更高。
+
+### 常见坑和注意事项
+
+1. **内核版本要求** — Pixie 的 eBPF 程序需要 Linux Kernel >= 4.14，推荐 >= 5.4 以获得最佳协议解析支持。部分老版本内核的 eBPF verifier 限制较多。
+2. **内存 OOM 风险** — PEM 默认内存限制 1Gi，在高流量节点上可能 OOM。建议根据 `pl_stats` 指标监控 PEM 内存使用，必要时提升 limit 或关闭部分协议采集。
+3. **ARM64 支持** — Pixie 从 v0.12+ 开始支持 ARM64，但部分 eBPF 程序在 ARM 上的兼容性仍需验证，建议先在测试环境确认。
+4. **数据不出集群** — Pixie 默认数据存储在集群内 PEM 的内存中，不上传到外部（除非部署了 Pixie Cloud）。这对数据合规有优势，但受限于内存容量，历史数据查询时间窗口较短。
+5. **加密流量限制** — Pixie 只能解析非加密的 L7 流量（HTTP/MySQL 等）。对于 TLS 流量，需要配合 service mesh 的 sidecar（如 Istio 的 mTLS 终止）或使用 Pixie 的 OpenSSL eBPF hook（仅获取元数据，不获取 payload）。
+6. **与 Prometheus/Viz 的关系** — Pixie 是 CNCF sandbox 项目，已被 New Relic 收购后开源。长期社区活跃度需关注。

@@ -1,3 +1,46 @@
+---
+title: Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
+description: '# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- istio
+- envoy
+- cilium
+- flannel
+- calico
+- helm
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice) 是什么
+- 如何 Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- eBPF与Cilium深度实践
+- eBPF
+- and
+- Cilium
+- Deep
+- Practice
+- papers
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/cilium-fta.md
+  label: '故障树: cilium'
+---
+
+
 # Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
 
 > **作者**: 云原生网络架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03

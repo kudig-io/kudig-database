@@ -1,3 +1,34 @@
+---
+title: v1.30.14
+description: v1.30.14 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- coredns
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 330min
+intent_queries:
+- v1.30.14 是什么
+- 如何 v1.30.14
+trigger_keywords:
+- v1.30.14
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.30.14](#v13014)

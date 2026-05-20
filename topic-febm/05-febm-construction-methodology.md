@@ -1,3 +1,36 @@
+---
+title: 第五章：FEBM 体系建设方法论
+description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- jaeger
+- cilium
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 第五章：FEBM 体系建设方法论 是什么
+- 如何 第五章：FEBM 体系建设方法论
+trigger_keywords:
+- 第五章：FEBM
+- 体系建设方法论
+- febm
+---
+
+
 # 第五章：FEBM 体系建设方法论
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  

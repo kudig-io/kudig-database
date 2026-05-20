@@ -1,3 +1,36 @@
+---
+title: BFE (Baidu Front End)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- docker
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- BFE (Baidu Front End) 是什么
+- 如何 BFE (Baidu Front End)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- BFE
+- Baidu
+- Front
+- End
+- cncf
+- landscape
+---
+
 # BFE (Baidu Front End)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

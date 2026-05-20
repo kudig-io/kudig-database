@@ -1,3 +1,57 @@
+---
+title: 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)
+description: '# 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- gateway
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management) 是什么
+- 如何 SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- SLO
+- SLI体系建设与管理
+- SLO
+- SLI
+- System
+- Construction
+- Management
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)

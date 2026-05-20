@@ -1,3 +1,36 @@
+---
+title: Metal3-io
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- opa
+- gateway
+- crd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Metal3-io 是什么
+- 如何 Metal3-io
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Metal3-io
+- cncf
+- landscape
+---
+
+
 # Metal3-io
 
 > **成熟度**: Incubating | **加入时间**: 2020-09 | **最后更新**: 2026-03

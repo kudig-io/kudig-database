@@ -23,6 +23,28 @@ authors:
     role: "{{角色}}"
 reviewers: []
 tags: [fta, troubleshooting, {{component}}]
+
+# ---- 阅读体验增强字段 ----
+difficulty: "intermediate"              # beginner | intermediate | advanced | expert
+reading_level: "intermediate"          # beginner | intermediate | advanced | expert (同 difficulty)
+audience: ["SRE", "Ops Engineer"]      # 目标读者
+estimated_read_time: "20min"             # 预计阅读时间
+prerequisites:                         # 前置知识依赖
+  - "domain-3-control-plane"
+  - "basic-kubectl"
+
+# ---- 统一 cross_refs ----
+cross_refs:
+  - type: "skill"
+    path: "../topic-skills/{{NN}}-{{scenario}}.md"
+    label: "{{技能名称}}"
+  - type: "domain"
+    path: "../domain-{{N}}-{{name}}/{{doc}}.md"
+    label: "{{文档名称}}"
+  - type: "structural"
+    path: "../topic-structural-trouble-shooting/{{component}}-*.md"
+    label: "结构化故障排查"
+
 related_skills:
   - "../topic-skills/{{NN}}-{{scenario}}.md"
 knowledge_refs:

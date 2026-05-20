@@ -1,3 +1,44 @@
+---
+title: 11 - 扩展性设计模式 (Extensibility)
+description: '# 11 - 扩展性设计模式 (Extensibility)'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- kubelet
+- scheduler
+- istio
+- envoy
+- cilium
+- calico
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 扩展性设计模式 (Extensibility) 是什么
+- 如何 扩展性设计模式 (Extensibility)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 扩展性设计模式
+- Extensibility
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 11 - 扩展性设计模式 (Extensibility)
 
 ## 资深视点：CEL (Common Expression Language) 的革命

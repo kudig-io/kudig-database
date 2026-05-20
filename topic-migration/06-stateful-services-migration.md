@@ -1,3 +1,35 @@
+---
+title: 06 - 有状态服务迁移
+description: '### 2.1 方案 A: 迁移到阿里云 RDS（推荐）'
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- etcd
+- docker
+- redis
+- mysql
+- kafka
+- elasticsearch
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 有状态服务迁移 是什么
+- 如何 有状态服务迁移
+trigger_keywords:
+- 有状态服务迁移
+- migration
+---
+
+
 # 06 - 有状态服务迁移
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: MySQL, Redis, Elasticsearch, Kafka, StatefulSet, RDS, 数据一致性

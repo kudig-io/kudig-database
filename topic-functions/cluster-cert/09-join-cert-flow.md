@@ -1,3 +1,51 @@
+---
+title: kubeadm join 证书分发流程
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- rbac
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- Kubernetes 管理员
+- 集群运维人员
+- SRE 工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes kubeadm join 证书获取流程 Bootstrap Token
+- 节点加入集群 CA 发现 discovery-token-ca-cert-hash
+- kubeadm join Control Plane 高可用 证书复制
+- kubelet Bootstrap kubeconfig 生成流程
+- CSR 自动审批 node-autoapprove-clusterrolebinding
+trigger_keywords:
+- kubeadm join
+- Bootstrap Token
+- cluster-info
+- CA 发现
+- certificate-key
+- kubeadm-certs
+- Control Plane
+- HA
+- CSR 自动审批
+- node-autoapprove
+related_domains:
+- domain-3-control-plane
+- domain-4-nodes
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/kubelet-cert
+- cluster-cert/cert-rotation
+---
+
+
 # kubeadm join 证书分发流程
 
 ## 概述
@@ -336,15 +384,103 @@ func DownloadCerts(...) error {
 
 ---
 
-## join 失败排查
+# 节点加入失败排查
 
-| 阶段 | 现象 | 排查命令 |
-|-----|------|---------|
-| CA 发现失败 | `failed to retrieve CA cert` | `kubectl get cm cluster-info -n kube-public` |
-| Token 无效 | `invalid bearer token` | `kubeadm token list` |
-| CSR 未审批 | `CSR pending approval` | `kubectl get csr` |
-| 证书下载失败 | `unable to fetch client cert` | `journalctl -u kubelet` |
-| 网络不通 | `connection refused` | `curl -k https://<api-server>:6443/healthz` |
+## 完整排查流程图
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                 kubeadm join 失败排查流程                         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌─────────────▼─────────────┐                                   │
+│  │ Step 1: 检查 Bootstrap Token │                                  │
+│  └─────────────┬─────────────┘                                   │
+│                │                                                  │
+│         Token 有效？                                              │
+│         ┌──────┴──────┐                                          │
+│         ▼             ▼                                          │
+│      [ 是 ]        [ 否 ]                                        │
+│         │             │                                          │
+│         │        kubeadm token list                              │
+│         │        kubeadm token create --print-join-command       │
+│         │                                                                  │
+│  ┌──────▼─────────────┐                                         │
+│  │ Step 2: 检查 CA 发现  │                                        │
+│  └──────┬─────────────┘                                         │
+│         │                                                        │
+│    curl -k https://<api>:6443/api/v1/namespaces/kube-public/    │
+│              configmaps/cluster-info                             │
+│         │                                                        │
+│    CA 指纹匹配？                                                  │
+│    ┌────┴────┐                                                  │
+│    ▼         ▼                                                  │
+│ [ 是 ]    [ 否 ]                                                │
+│    │         │                                                  │
+│    │    获取正确的 discovery-token-ca-cert-hash:                 │
+│    │    openssl x509 -in /etc/kubernetes/pki/ca.crt            │
+│    │      -noout -pubkey | openssl rsa -pubin -outform DER      │
+│    │      | sha256sum                                            │
+│    │                                                                  │
+│  ┌──▼─────────────┐                                             │
+│  │ Step 3: 检查 CSR │                                            │
+│  └──┬─────────────┘                                              │
+│     │                                                             │
+│     kubectl get csr                                              │
+│     │                                                             │
+│     CSR 存在但未批准？                                            │
+│     ┌───┴───┐                                                    │
+│     ▼       ▼                                                    │
+│  [ 是 ]   [ 否 ]                                                 │
+│     │       │                                                    │
+│     │   检查 kubelet 日志                                         │
+│     │   journalctl -u kubelet -f                                 │
+│     │                                                             │
+│     kubectl certificate approve <csr-name>                        │
+│     │                                                             │
+│  ┌──▼─────────────┐                                             │
+│  │ Step 4: 检查证书下载 │                                        │
+│  └──┬─────────────┘                                              │
+│     │                                                             │
+│     ls -la /var/lib/kubelet/pki/                                 │
+│     │                                                             │
+│     kubelet-client-current.pem 存在？                             │
+│     ┌───┴───┐                                                    │
+│     ▼       ▼                                                    │
+│  [ 是 ]   [ 否 ]                                                 │
+│     │       │                                                    │
+│     │   kubelet 未成功从 CSR 下载证书                            │
+│     │   检查 API Server 日志                                      │
+│     │   kubectl logs -n kube-system kube-apiserver-<node>        │
+│     │       | grep -i "csr\|certificate"                        │
+│     │                                                             │
+│  ┌──▼─────────────┐                                             │
+│  │ Step 5: 网络连通性 │                                           │
+│  └──┬─────────────┘                                              │
+│     │                                                             │
+│     curl -k https://<api>:6443/healthz                           │
+│     │                                                             │
+│     连接成功？                                                    │
+│     ┌───┴───┐                                                    │
+│     ▼       ▼                                                    │
+│  [ 是 ]   [ 否 ]                                                 │
+│     │       │                                                    │
+│     │   检查防火墙/安全组/负载均衡器                              │
+│     │   检查 6443 端口是否可达                                    │
+│     │                                                             │
+│  ✅ 排查完成                                                      │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+| 阶段 | 现象 | 排查命令 | 解决方案 |
+|-----|------|---------|----------|
+| CA 发现失败 | `failed to retrieve CA cert` | `kubectl get cm cluster-info -n kube-public` | 确保 API Server 可达，检查 Token |
+| Token 无效 | `invalid bearer token` | `kubeadm token list` | 重新创建 Token |
+| CA 指纹不匹配 | `CA hash mismatch` | `kubeadm token create --print-join-command` | 使用正确的 --discovery-token-ca-cert-hash |
+| CSR 未审批 | `CSR pending approval` | `kubectl get csr` | `kubectl certificate approve <csr-name>` |
+| 证书下载失败 | `unable to fetch client cert` | `journalctl -u kubelet` | 检查 API Server 日志 |
+| 网络不通 | `connection refused` | `curl -k https://<api-server>:6443/healthz` | 检查网络/防火墙/负载均衡器 |
 
 ```bash
 # 查看 join 过程中的 CSR

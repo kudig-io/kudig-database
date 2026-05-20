@@ -1,3 +1,34 @@
+---
+title: Admission Webhook 最佳实践
+description: '# Admission Webhook 最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- pdb
+- rbac
+- crd
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Admission Webhook 最佳实践 是什么
+- 如何 Admission Webhook 最佳实践
+trigger_keywords:
+- Admission
+- Webhook
+- 最佳实践
+- dictionary
+title_en: Admission Webhook Good Practices
+---
+
+
 # Admission Webhook 最佳实践
 
 ## 概述

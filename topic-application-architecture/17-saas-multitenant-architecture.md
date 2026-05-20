@@ -1,3 +1,57 @@
+---
+title: SaaS多租户平台Kubernetes生产架构设计
+description: '# SaaS 多租户平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- helm
+- redis
+- mysql
+- elasticsearch
+- ingress
+- gateway
+- rbac
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- SaaS架构师
+- 云平台技术负责人
+- 阿里云解决方案架构师
+- 数据库开发者
+estimated_read_time: 5min
+intent_queries:
+- SaaS多租户平台架构设计
+- ShardingSphere数据库分片
+- vCluster虚拟集群隔离
+- 租户计费Metering架构
+- 多租户数据安全隔离
+trigger_keywords:
+- SaaS
+- 多租户
+- vCluster
+- ShardingSphere
+- 租户隔离
+- 计费
+- Metering
+- RBAC
+- 开放平台
+- ISV
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-26-service-mesh-microservices
+- domain-7-observability
+- domain-8-storage
+related_topics:
+- topic-application-architecture/43-enterprise-im
+- topic-application-architecture/11-smart-retail-architecture
+- topic-functions/04-high-concurrency-system
+- topic-functions/07-distributed-transaction
+---
+
+
 # SaaS 多租户平台 Kubernetes 生产架构设计
 
 > **适用场景**: 企业 SaaS / 行业云 / 低代码平台 / 云原生应用市场 / B2B 服务平台  

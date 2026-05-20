@@ -1,3 +1,49 @@
+---
+title: Kubernetes v1.29-v1.33 平台运维新特性指南
+description: '# Kubernetes v1.29-v1.33 平台运维新特性指南'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes v1.29-v1.33 平台运维新特性指南 是什么
+- 如何 Kubernetes v1.29-v1.33 平台运维新特性指南
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- Kubernetes
+- v1.29-v1.33
+- 平台运维新特性指南
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # Kubernetes v1.29-v1.33 平台运维新特性指南
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

@@ -1,3 +1,36 @@
+---
+title: Virtual Kubelet
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- kubelet
+- scheduler
+- helm
+- operator
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Virtual Kubelet 是什么
+- 如何 Virtual Kubelet
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Virtual
+- Kubelet
+- cncf
+- landscape
+---
+
 # Virtual Kubelet
 
 > **成熟度**: Sandbox | **加入时间**: 2019-11 | **最后更新**: 2026-03

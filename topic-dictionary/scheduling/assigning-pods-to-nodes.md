@@ -1,3 +1,34 @@
+---
+title: Assigning Pods to Nodes
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- redis
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Assigning Pods to Nodes 是什么
+- 如何 Assigning Pods to Nodes
+trigger_keywords:
+- Assigning
+- Pods
+- to
+- Nodes
+- dictionary
+title_en: Pods
+---
+
+
 # Assigning Pods to Nodes
 
 ## 概述

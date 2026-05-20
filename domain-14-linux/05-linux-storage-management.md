@@ -1,3 +1,41 @@
+---
+title: 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
+description: '# 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南'
+category: linux
+tags:
+- linux
+- system
+- kernel
+- etcd
+- scheduler
+- helm
+- containerd
+- docker
+- ceph
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 运维工程师
+- SRE
+- 系统管理员
+estimated_read_time: 5min
+intent_queries:
+- Linux 存储管理与RAID配置：生产环境存储架构专家指南 是什么
+- 如何 Linux 存储管理与RAID配置：生产环境存储架构专家指南
+- Kubernetes 14 linux 最佳实践
+trigger_keywords:
+- Linux
+- 存储管理与RAID配置：生产环境存储架构专家指南
+- linux
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/linux.md
+  label: '速查卡: linux'
+---
+
+
 # 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
 
 > **适用版本**: Linux Kernel 5.x/6.x | **最后更新**: 2026-02 | **作者**: Allen Galler (allengaller@gmail.com)
@@ -639,12 +677,264 @@ multipath -ll
 
 ---
 
+## 与 Kubernetes 的关系
+
+### K8s 持久化存储架构
+
+Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象存储管理，底层依赖 Linux 存储技术。
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    K8s 持久化存储映射                              │
+│                                                                  │
+│  Kubernetes 抽象          Linux 底层技术                          │
+│  ──────────────          ─────────────                           │
+│  StorageClass         →  LVM 精简池 / Ceph Pool / NFS           │
+│  PV (块模式)          →  /dev/sdX → mkfs → mount                │
+│  PV (文件系统模式)     →  NFS mount / hostPath mount             │
+│  PVC                  →  lvcreate (动态供应)                     │
+│  Volume Mount         →  bind mount / overlay mount              │
+│  emptyDir             →  tmpfs / host path (临时)               │
+│  hostPath             →  直接挂载主机目录                        │
+│  Local PV             →  本地块设备 + mount                      │
+│                                                                  │
+│  CSI (Container Storage Interface) 驱动:                         │
+│  ├── Amazon EBS CSI     →  AWS EBS 卷                           │
+│  ├── GCE PD CSI        →  GCE Persistent Disk                   │
+│  ├── Azure Disk CSI    →  Azure Managed Disk                    │
+│  ├── Ceph CSI          →  Ceph RBD / CephFS                     │
+│  ├── NFS CSI           →  NFS 挂载                              │
+│  ├── Local Path CSI    →  本地路径 (hostPath 增强)              │
+│  └── TopoLVM CSI       →  LVM 动态供应                          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### etcd 存储要求
+
+etcd 是 Kubernetes 的核心数据存储，对磁盘 I/O 延迟极度敏感：
+
+```bash
+# etcd 磁盘性能要求
+# FSYNC 延迟 < 10ms (推荐 < 2ms)
+# IOPS > 300 (推荐 > 1000)
+
+# 测试 etcd 磁盘性能
+fio --name=etcd-test --rw=write --bs=4k --numjobs=1 \
+    --size=1G --runtime=60 --filename=/var/lib/etcd/test \
+    --direct=1 --fsync=1 --ioengine=libaio
+
+# etcd 数据目录
+# 推荐使用独立 SSD
+mount -o noatime,data=ordered /dev/nvme0n1p1 /var/lib/etcd
+
+# 查看 etcd 磁盘使用
+du -sh /var/lib/etcd/
+etcdctl endpoint status --write-out=table
+```
+
+---
+
+## 性能调优
+
+### 存储性能优化矩阵
+
+| 场景 | 文件系统 | I/O 调度器 | 挂载参数 | RAID 级别 |
+|:---|:---|:---|:---|:---|
+| **K8s 通用节点** | XFS | none (SSD) | noatime | RAID1 或 JBOD |
+| **etcd** | XFS | none (SSD) | noatime,data=ordered | 独立 SSD |
+| **数据库** | XFS | mq-deadline | noatime,logbufs=8 | RAID10 |
+| **日志存储** | ext4 | mq-deadline | noatime,data=writeback | RAID5/6 |
+| **容器镜像** | XFS | none (SSD) | noatime | JBOD |
+| **NFS 服务** | XFS | mq-deadline | noatime | RAID6 |
+
+### LVM 与 K8s 动态存储供应
+
+```bash
+# 使用 TopoLVM CSI 实现 LVM 动态供应
+# 1. 在所有节点创建 VG
+pvcreate /dev/nvme0n1p3
+vgcreate vg-k8s /dev/nvme0n1p3
+
+# 2. 安装 TopoLVM CSI
+# helm install --namespace toplvm-system toplvm toplvm/topolvm
+
+# 3. 创建 StorageClass
+cat << 'EOF' | kubectl apply -f -
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: toplvm-ssd
+provisioner: toplvm.cybozu.com
+parameters:
+  "csi.storage.k8s.io/fstype": xfs
+volumeBindingMode: WaitForFirstConsumer
+allowedTopologies:
+- matchLabelExpressions:
+  - key: toplvm.cybozu.com/ssd
+    values: ["true"]
+EOF
+```
+
+---
+
+## 安全加固
+
+### 存储安全
+
+在生产环境中，存储安全是不可忽视的重要环节。数据加密、访问控制和完整性校验是存储安全的三大支柱。LUKS (Linux Unified Key Setup) 提供透明的块设备加密，确保即使物理磁盘被盗也无法读取数据。LVM 的精简配置需要特别监控，避免空间耗尽导致数据丢失。
+
+```bash
+# LUKS 磁盘加密
+cryptsetup luksFormat /dev/sdb1
+cryptsetup luksOpen /dev/sdb1 encrypted-data
+mkfs.xfs /dev/mapper/encrypted-data
+mount /dev/mapper/encrypted-data /secure-data
+
+# 自动挂载 (需要 keyfile 或密码输入)
+# /etc/crypttab
+encrypted-data /dev/sdb1 /root/luks-key luks
+
+# LVM 加密
+cryptsetup luksFormat /dev/vg01/lv_secret
+cryptsetup luksOpen /dev/vg01/lv_secret crypted
+mkfs.xfs /dev/mapper/crypted
+
+# 文件系统级别安全
+# 挂载选项安全加固
+mount -o noexec,nosuid,nodev /dev/sdb1 /data     # 禁止执行/SUID/设备文件
+mount -o noatime,nodiratime /dev/sdb1 /backup     # 性能优化
+
+# NFS 安全配置
+mount -t nfs -o sec=krb5,vers=4.2 nfs-server:/export /mnt/nfs  # Kerberos 认证
+
+# iSCSI 安全 (CHAP 认证)
+iscsiadm -m node -T iqn.2024.storage:vol01 -p 192.168.1.100:3260 \
+  --op=update -n node.session.auth.authmethod -v CHAP
+iscsiadm -m node -T iqn.2024.storage:vol01 -p 192.168.1.100:3260 \
+  --op=update -n node.session.auth.username -v admin
+iscsiadm -m node -T iqn.2024.storage:vol01 -p 192.168.1.100:3260 \
+  --op=update -n node.session.auth.password -v secret123
+```
+
+---
+
+## 最佳实践
+
+1. **使用独立磁盘存放 etcd 数据**: etcd 对 I/O 延迟极其敏感
+2. **LVM 用于动态存储**: 配合 CSI 驱动实现动态 PV 供应
+3. **XFS 用于大文件**: 日志和数据库存储推荐 XFS
+4. **监控磁盘 SMART**: 定期检查磁盘健康状态
+5. **预留空间**: LVM 精简池预留 20% 安全余量
+6. **RAID 选型**: 数据安全用 RAID1/10，归档用 RAID5/6
+
+---
+
+## 故障排查
+
+### 存储故障诊断
+
+```bash
+# LVM 问题
+vgs -o+vg_attr                        # VG 状态
+lvs -a -o+lv_attr,devices             # LV 状态（含隐藏 LV）
+pvs -a -o+pv_attr                     # PV 状态
+
+# RAID 故障
+cat /proc/mdstat                       # RAID 状态
+mdadm --detail /dev/md0               # 详细信息
+mdadm --examine /dev/sdb1             # 检查磁盘超级块
+
+# 磁盘错误
+smartctl -a /dev/sda                   # SMART 信息
+smartctl -H /dev/sda                   # 健康状态
+badblocks -sv /dev/sda                 # 坏块检测
+```
+
+### 存储性能监控脚本
+
+```bash
+#!/bin/bash
+# storage-perf-monitor.sh - 存储性能监控
+
+echo "=== 存储性能监控 $(date) ==="
+
+echo -e "\n[1] I/O 延迟 (await > 10ms 警告)"
+iostat -xz 1 3 | tail -n +4 | \
+  awk 'NF>1 && $9+0 > 10 {print "  警告: "$1" await="$9"ms"}'
+
+echo -e "\n[2] 磁盘利用率 (>80% 警告)"
+iostat -xz 1 3 | tail -n +4 | \
+  awk 'NF>1 && $14+0 > 80 {print "  警告: "$1" util="$14"%"}'
+
+echo -e "\n[3] LVM 使用率"
+lvs --units g --noheadings -o lv_name,vg_name,lv_size,data_percent 2>/dev/null | \
+  while read lv vg size pct; do
+    if [ -n "$pct" ] && [ "$(echo "$pct > 80" | bc 2>/dev/null)" = "1" ]; then
+      echo "  警告: $vg/$lv 使用率 ${pct}%"
+    fi
+  done
+
+echo -e "\n[4] RAID 状态"
+if [ -f /proc/mdstat ]; then
+  grep -E "resync|recovery|degraded|failed" /proc/mdstat || echo "  所有 RAID 正常"
+else
+  echo "  未配置软件 RAID"
+fi
+
+echo -e "\n[5] SMART 健康"
+for disk in $(ls /dev/sd? 2>/dev/null); do
+  health=$(smartctl -H "$disk" 2>/dev/null | grep -i "overall" | awk '{print $NF}')
+  echo "  $disk: ${health:-未知}"
+done
+
+echo "=== 监控完成 ==="
+```
+
+### 存储容量规划
+
+存储容量规划是避免磁盘空间耗尽导致服务中断的关键。在 Kubernetes 环境中，需要同时关注节点本地存储和持久化存储的容量趋势。
+
+```bash
+#!/bin/bash
+# storage-capacity-check.sh - 存储容量检查
+
+echo "=== 存储容量检查 $(date) ==="
+
+echo -e "\n[1] 本地存储使用"
+df -h --type=ext4 --type=xfs 2>/dev/null | awk '
+NR==1 {print "  "$0; next}
+{printf "  %-20s %6s / %6s (%s)\n", $6, $3, $2, $5}'
+
+echo -e "\n[2] LVM 可用空间"
+vgs --units g --noheadings -o vg_name,vg_free 2>/dev/null | \
+  while read vg free; do
+    echo "  VG $vg: ${free}G 可用"
+  done
+
+echo -e "\n[3] inode 使用率 (>80% 警告)"
+df -i --type=ext4 --type=xfs 2>/dev/null | \
+  awk 'NR==1 || +$5 > 80 {printf "  %-20s %s\n", $6, $5}'
+
+echo -e "\n[4] 容器存储使用"
+if [ -d /var/lib/docker ]; then
+  docker system df 2>/dev/null
+elif [ -d /var/lib/containerd ]; then
+  du -sh /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ 2>/dev/null
+fi
+
+echo -e "\n[5] 大目录 TOP 10"
+du -sh /* 2>/dev/null | sort -rh | head -10
+
+echo "=== 检查完成 ==="
+```
+
+---
+
 ## 相关文档
 
 - [Linux 文件系统详解](./03-linux-filesystem-deep-dive.md) - 文件系统深度解析
-- [RAID 存储冗余](../domain-16-storage-fundamentals/03-raid-storage-redundancy.md) - RAID 深度配置
-- [存储技术概览](../domain-16-storage-fundamentals/01-storage-technologies-overview.md) - 存储技术全景
-- [Linux 存储性能](../domain-16-storage-fundamentals/06-storage-performance-iops.md) - IOPS 与性能基准
+- [Linux 性能调优](./06-linux-performance-tuning.md) - 性能分析
+- [Linux 系统架构](./01-linux-system-architecture.md) - 系统架构
 
 ---
 

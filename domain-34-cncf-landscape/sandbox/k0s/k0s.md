@@ -1,3 +1,37 @@
+---
+title: K0s
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- flannel
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- K0s 是什么
+- 如何 K0s
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- K0s
+- cncf
+- landscape
+---
+
+
 # K0s
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

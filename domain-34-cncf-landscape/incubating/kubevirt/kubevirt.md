@@ -1,3 +1,34 @@
+---
+title: KubeVirt
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- containerd
+- hpa
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- KubeVirt 是什么
+- 如何 KubeVirt
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- KubeVirt
+- cncf
+- landscape
+---
+
 # KubeVirt
 
 > **成熟度**: Incubating | **加入时间**: 2019-04 | **最后更新**: 2026-03

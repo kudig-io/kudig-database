@@ -1,3 +1,45 @@
+---
+title: 02 - Kubernetes Gateway API 标准深度解析
+description: '# 02 - Kubernetes Gateway API 标准深度解析'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- ingress
+- gateway
+- crd
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Gateway API 标准深度解析 是什么
+- 如何 Kubernetes Gateway API 标准深度解析
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Kubernetes
+- Gateway
+- API
+- 标准深度解析
+- cloud
+- native
+- api
+- gateway
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/gateway-api-fta.md
+  label: '故障树: gateway-api'
+---
+
+
 # 02 - Kubernetes Gateway API 标准深度解析
 
 > **文档版本**: v1.0 | **适用版本**: Gateway API v1.0 - v1.2, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Gateway API, GatewayClass, HTTPRoute, ReferenceGrant, 一致性测试

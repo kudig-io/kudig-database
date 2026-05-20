@@ -1,0 +1,3286 @@
+{
+  "keyword_to_category": {
+    "NotReady": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "驱逐": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-STORE"
+    ],
+    "节点": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-APP-POD",
+      "TC-INFRA-STORE"
+    ],
+    "kubelet": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-SEC-CERT",
+      "TC-INFRA-UPGRADE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "node": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-APP-POD",
+      "TC-INFRA-NODE"
+    ],
+    "Unknown": [
+      "TC-INFRA-NODE"
+    ],
+    "apiserver": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "flapping": [
+      "TC-INFRA-NODE"
+    ],
+    "Ready": [
+      "TC-INFRA-NODE"
+    ],
+    "DiskPressure": [
+      "TC-INFRA-NODE"
+    ],
+    "磁盘压力": [
+      "TC-INFRA-NODE"
+    ],
+    "MemoryPressure": [
+      "TC-INFRA-NODE"
+    ],
+    "内存压力": [
+      "TC-INFRA-NODE"
+    ],
+    "崩溃": [
+      "TC-INFRA-NODE",
+      "TC-APP-POD"
+    ],
+    "containerd": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "容器创建失败": [
+      "TC-INFRA-NODE"
+    ],
+    "disk pressure": [
+      "TC-INFRA-NODE"
+    ],
+    "evicted": [
+      "TC-INFRA-NODE"
+    ],
+    "多个节点": [
+      "TC-INFRA-NODE"
+    ],
+    "可用性": [
+      "TC-INFRA-NODE"
+    ],
+    "控制平面": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "API响应": [
+      "TC-INFRA-NODE"
+    ],
+    "SSH": [
+      "TC-INFRA-NODE"
+    ],
+    "无法连接": [
+      "TC-INFRA-NODE"
+    ],
+    "Lease": [
+      "TC-INFRA-NODE"
+    ],
+    "not renewed": [
+      "TC-INFRA-NODE"
+    ],
+    "5min": [
+      "TC-INFRA-NODE"
+    ],
+    "PLEG": [
+      "TC-INFRA-NODE"
+    ],
+    "KubeletNotReady": [
+      "TC-INFRA-NODE"
+    ],
+    "网络分区": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NET"
+    ],
+    "通信中断": [
+      "TC-INFRA-NODE"
+    ],
+    "PIDPressure": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "进程数": [
+      "TC-INFRA-NODE"
+    ],
+    "超限": [
+      "TC-INFRA-NODE"
+    ],
+    "too many processes": [
+      "TC-INFRA-NODE"
+    ],
+    "网络接口": [
+      "TC-INFRA-NODE"
+    ],
+    "down": [
+      "TC-INFRA-NODE"
+    ],
+    "集群网络": [
+      "TC-INFRA-NODE"
+    ],
+    "etcd": [
+      "TC-INFRA-NODE",
+      "TC-SEC-INCIDENT",
+      "TC-INFRA-CP",
+      "TC-INFRA-CP",
+      "TC-INFRA-UPGRADE",
+      "TC-SEC-INCIDENT",
+      "TC-INFRA-CP",
+      "TC-INFRA-CP"
+    ],
+    "宕机": [
+      "TC-INFRA-NODE"
+    ],
+    "control plane": [
+      "TC-INFRA-NODE"
+    ],
+    "unresponsive": [
+      "TC-INFRA-NODE"
+    ],
+    "API server": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE",
+      "TC-SEC-CERT",
+      "TC-INFRA-CP"
+    ],
+    "swap": [
+      "TC-INFRA-NODE"
+    ],
+    "OOM killer": [
+      "TC-INFRA-NODE"
+    ],
+    "clock skew": [
+      "TC-INFRA-NODE"
+    ],
+    "time sync": [
+      "TC-INFRA-NODE"
+    ],
+    "文件系统": [
+      "TC-INFRA-NODE"
+    ],
+    "只读": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-STORE"
+    ],
+    "写入失败": [
+      "TC-INFRA-NODE"
+    ],
+    "read-only": [
+      "TC-INFRA-NODE"
+    ],
+    "filesystem": [
+      "TC-INFRA-NODE"
+    ],
+    "write": [
+      "TC-INFRA-NODE"
+    ],
+    "iptables": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NET"
+    ],
+    "规则异常": [
+      "TC-INFRA-NODE"
+    ],
+    "网络不通": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NET"
+    ],
+    "certificate expired": [
+      "TC-INFRA-NODE"
+    ],
+    "启动卡住": [
+      "TC-INFRA-NODE"
+    ],
+    "证书拉取": [
+      "TC-INFRA-NODE"
+    ],
+    "not registered": [
+      "TC-INFRA-NODE"
+    ],
+    "starting": [
+      "TC-INFRA-NODE"
+    ],
+    "资源不足": [
+      "TC-INFRA-NODE",
+      "TC-APP-POD"
+    ],
+    "无告警": [
+      "TC-INFRA-NODE"
+    ],
+    "硬件传感器": [
+      "TC-INFRA-NODE"
+    ],
+    "压力异常": [
+      "TC-INFRA-NODE"
+    ],
+    "CrashLoopBackOff": [
+      "TC-APP-POD"
+    ],
+    "无法运行": [
+      "TC-APP-POD"
+    ],
+    "Pod": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-INFRA-NET",
+      "TC-SEC-INCIDENT",
+      "TC-APP-WORKLOAD",
+      "TC-APP-POD",
+      "TC-INFRA-NET",
+      "TC-APP-POD"
+    ],
+    "OOMKilled": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "内存限制": [
+      "TC-APP-POD"
+    ],
+    "OOM": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-DATA-CACHE"
+    ],
+    "Pending": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-INFRA-STORE",
+      "TC-APP-POD"
+    ],
+    "调度失败": [
+      "TC-APP-POD",
+      "TC-INFRA-STORE",
+      "TC-APP-WORKLOAD",
+      "TC-INFRA-CP",
+      "TC-APP-POD"
+    ],
+    "ImagePullBackOff": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "ErrImagePull": [
+      "TC-APP-POD"
+    ],
+    "镜像": [
+      "TC-APP-POD"
+    ],
+    "exit code 137": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "立即退出": [
+      "TC-APP-POD"
+    ],
+    "不断重启": [
+      "TC-APP-POD"
+    ],
+    "CrashLoop": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "repeatedly crashing": [
+      "TC-APP-POD"
+    ],
+    "container": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "内存": [
+      "TC-APP-POD"
+    ],
+    "多个Pod": [
+      "TC-APP-POD",
+      "TC-INFRA-STORE"
+    ],
+    "FailedScheduling": [
+      "TC-APP-POD"
+    ],
+    "affinity": [
+      "TC-APP-POD"
+    ],
+    "no nodes": [
+      "TC-APP-POD"
+    ],
+    "镜像拉取": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "liveness probe": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "健康检查": [
+      "TC-APP-POD"
+    ],
+    "失败": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-INFRA-NET",
+      "TC-INFRA-STORE",
+      "TC-APP-WORKLOAD",
+      "TC-APP-INGRESS",
+      "TC-APP-SVC",
+      "TC-INFRA-NET",
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "failed": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "restarting": [
+      "TC-APP-POD"
+    ],
+    "readiness probe": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "traffic": [
+      "TC-APP-POD"
+    ],
+    "启动超时": [
+      "TC-APP-POD"
+    ],
+    "初始化": [
+      "TC-APP-POD"
+    ],
+    "entrypoint": [
+      "TC-APP-POD"
+    ],
+    "脚本失败": [
+      "TC-APP-POD"
+    ],
+    "容器": [
+      "TC-APP-POD",
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT"
+    ],
+    "Terminating": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "无法删除": [
+      "TC-APP-POD"
+    ],
+    "stuck": [
+      "TC-APP-POD",
+      "TC-INFRA-NET"
+    ],
+    "安全策略": [
+      "TC-APP-POD"
+    ],
+    "拒绝创建": [
+      "TC-APP-POD",
+      "TC-SEC-INCIDENT"
+    ],
+    "创建后删除": [
+      "TC-APP-POD"
+    ],
+    "生命周期": [
+      "TC-APP-POD",
+      "TC-INFRA-STORE"
+    ],
+    "init container": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "主容器": [
+      "TC-APP-POD"
+    ],
+    "main container": [
+      "TC-APP-POD"
+    ],
+    "hostPort": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "端口冲突": [
+      "TC-APP-POD",
+      "TC-APP-INGRESS",
+      "TC-APP-POD"
+    ],
+    "conflict": [
+      "TC-APP-POD"
+    ],
+    "master": [
+      "TC-APP-POD"
+    ],
+    "调度拒绝": [
+      "TC-APP-POD"
+    ],
+    "污点": [
+      "TC-APP-POD"
+    ],
+    "亲和性": [
+      "TC-APP-POD"
+    ],
+    "无法满足": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "反亲和性": [
+      "TC-APP-POD"
+    ],
+    "冲突": [
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-APP-POD",
+      "TC-SEC-RBAC"
+    ],
+    "拓扑分布": [
+      "TC-APP-POD"
+    ],
+    "约束": [
+      "TC-APP-POD"
+    ],
+    "DNS解析失败": [
+      "TC-INFRA-NET"
+    ],
+    "服务发现": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "NXDOMAIN": [
+      "TC-INFRA-NET"
+    ],
+    "CoreDNS": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "不健康": [
+      "TC-INFRA-NET",
+      "TC-INFRA-CP"
+    ],
+    "DNS异常": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET",
+      "TC-APP-SVC"
+    ],
+    "DNS timeout": [
+      "TC-INFRA-NET"
+    ],
+    "resolution": [
+      "TC-INFRA-NET"
+    ],
+    "external": [
+      "TC-INFRA-NET"
+    ],
+    "无Endpoints": [
+      "TC-INFRA-NET"
+    ],
+    "selector": [
+      "TC-INFRA-NET"
+    ],
+    "不匹配": [
+      "TC-INFRA-NET",
+      "TC-INFRA-CP"
+    ],
+    "ClusterIP": [
+      "TC-INFRA-NET"
+    ],
+    "cannot access": [
+      "TC-INFRA-NET"
+    ],
+    "Service": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "404": [
+      "TC-APP-INGRESS"
+    ],
+    "Ingress": [
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS",
+      "TC-APP-INGRESS"
+    ],
+    "路由错误": [
+      "TC-APP-INGRESS"
+    ],
+    "503": [
+      "TC-APP-INGRESS",
+      "TC-APP-POD"
+    ],
+    "gateway": [
+      "TC-APP-INGRESS"
+    ],
+    "unavailable": [
+      "TC-APP-INGRESS"
+    ],
+    "NetworkPolicy": [
+      "TC-INFRA-NET"
+    ],
+    "无法通信": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "隔离": [
+      "TC-INFRA-NET"
+    ],
+    "跨节点": [
+      "TC-INFRA-NET"
+    ],
+    "cannot resolve": [
+      "TC-INFRA-NET"
+    ],
+    "cluster domain": [
+      "TC-INFRA-NET"
+    ],
+    "DNS": [
+      "TC-INFRA-NET"
+    ],
+    "DNS缓慢": [
+      "TC-INFRA-NET"
+    ],
+    "偶尔超时": [
+      "TC-INFRA-NET"
+    ],
+    "集群内": [
+      "TC-INFRA-NET"
+    ],
+    "ExternalName": [
+      "TC-INFRA-NET",
+      "TC-APP-SVC"
+    ],
+    "Headless": [
+      "TC-INFRA-NET"
+    ],
+    "无负载均衡": [
+      "TC-INFRA-NET"
+    ],
+    "NodePort": [
+      "TC-INFRA-NET"
+    ],
+    "无法访问": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "端口范围": [
+      "TC-INFRA-NET"
+    ],
+    "LoadBalancer": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "pending": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET",
+      "TC-SEC-CERT"
+    ],
+    "超时": [
+      "TC-INFRA-NET",
+      "TC-INFRA-STORE",
+      "TC-APP-POD"
+    ],
+    "TLS": [
+      "TC-APP-INGRESS"
+    ],
+    "握手失败": [
+      "TC-APP-INGRESS"
+    ],
+    "路径重写": [
+      "TC-APP-INGRESS"
+    ],
+    "不生效": [
+      "TC-APP-INGRESS",
+      "TC-APP-WORKLOAD",
+      "TC-DATA-DB"
+    ],
+    "Header路由": [
+      "TC-APP-INGRESS"
+    ],
+    "失效": [
+      "TC-APP-INGRESS",
+      "TC-INFRA-NODE"
+    ],
+    "CNI": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "初始化失败": [
+      "TC-INFRA-NET"
+    ],
+    "网络异常": [
+      "TC-INFRA-NET"
+    ],
+    "failed to initialize": [
+      "TC-INFRA-NET"
+    ],
+    "networking": [
+      "TC-INFRA-NET"
+    ],
+    "MTU": [
+      "TC-INFRA-NET"
+    ],
+    "大包传输": [
+      "TC-INFRA-NET"
+    ],
+    "VLAN": [
+      "TC-INFRA-NET"
+    ],
+    "Overlay": [
+      "TC-INFRA-NET"
+    ],
+    "证书过期": [
+      "TC-SEC-CERT"
+    ],
+    "TLS握手失败": [
+      "TC-SEC-CERT"
+    ],
+    "x509": [
+      "TC-SEC-CERT",
+      "TC-SEC-CERT"
+    ],
+    "expired": [
+      "TC-SEC-CERT",
+      "TC-SEC-CERT"
+    ],
+    "certificate": [
+      "TC-SEC-CERT"
+    ],
+    "Forbidden": [
+      "TC-SEC-RBAC",
+      "TC-SEC-RBAC"
+    ],
+    "RBAC": [
+      "TC-SEC-RBAC",
+      "TC-SEC-RBAC"
+    ],
+    "权限不足": [
+      "TC-SEC-RBAC",
+      "TC-SEC-RBAC"
+    ],
+    "ServiceAccount": [
+      "TC-SEC-RBAC",
+      "TC-SEC-INCIDENT",
+      "TC-SEC-RBAC"
+    ],
+    "权限": [
+      "TC-SEC-RBAC",
+      "TC-SEC-RBAC"
+    ],
+    "ResourceQuota": [
+      "TC-SEC-RBAC"
+    ],
+    "exceeded": [
+      "TC-SEC-RBAC"
+    ],
+    "配额": [
+      "TC-SEC-RBAC"
+    ],
+    "入侵": [
+      "TC-SEC-INCIDENT"
+    ],
+    "异常Pod": [
+      "TC-SEC-INCIDENT"
+    ],
+    "异常创建": [
+      "TC-SEC-INCIDENT"
+    ],
+    "unauthorized": [
+      "TC-SEC-INCIDENT"
+    ],
+    "access": [
+      "TC-SEC-INCIDENT"
+    ],
+    "security": [
+      "TC-SEC-INCIDENT"
+    ],
+    "audit": [
+      "TC-SEC-INCIDENT"
+    ],
+    "suspicious": [
+      "TC-SEC-INCIDENT"
+    ],
+    "API calls": [
+      "TC-SEC-INCIDENT"
+    ],
+    "serving certificate": [
+      "TC-SEC-CERT"
+    ],
+    "client certificate": [
+      "TC-SEC-CERT"
+    ],
+    "about to expire": [
+      "TC-SEC-CERT"
+    ],
+    "CSR": [
+      "TC-SEC-CERT",
+      "TC-SEC-CERT"
+    ],
+    "被拒绝": [
+      "TC-SEC-CERT"
+    ],
+    "证书签名": [
+      "TC-SEC-CERT"
+    ],
+    "证书链": [
+      "TC-SEC-CERT"
+    ],
+    "不完整": [
+      "TC-SEC-CERT"
+    ],
+    "信任验证": [
+      "TC-SEC-CERT"
+    ],
+    "IAM": [
+      "TC-SEC-RBAC"
+    ],
+    "权限边界": [
+      "TC-SEC-RBAC"
+    ],
+    "模糊": [
+      "TC-SEC-RBAC"
+    ],
+    "默认ServiceAccount": [
+      "TC-SEC-RBAC"
+    ],
+    "权限过大": [
+      "TC-SEC-RBAC"
+    ],
+    "安全": [
+      "TC-SEC-RBAC",
+      "TC-SEC-INCIDENT"
+    ],
+    "ClusterRoleBinding": [
+      "TC-SEC-RBAC"
+    ],
+    "授权过大": [
+      "TC-SEC-RBAC"
+    ],
+    "范围": [
+      "TC-SEC-RBAC"
+    ],
+    "RoleBinding": [
+      "TC-SEC-RBAC"
+    ],
+    "跨命名空间": [
+      "TC-SEC-RBAC"
+    ],
+    "授权": [
+      "TC-SEC-RBAC"
+    ],
+    "PSP": [
+      "TC-SEC-INCIDENT"
+    ],
+    "PSA": [
+      "TC-SEC-INCIDENT"
+    ],
+    "违反基线": [
+      "TC-SEC-INCIDENT"
+    ],
+    "命名空间": [
+      "TC-SEC-INCIDENT"
+    ],
+    "挖矿": [
+      "TC-SEC-INCIDENT"
+    ],
+    "异常进程": [
+      "TC-SEC-INCIDENT"
+    ],
+    "容器内": [
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT"
+    ],
+    "恶意进程": [
+      "TC-SEC-INCIDENT"
+    ],
+    "CPU异常": [
+      "TC-SEC-INCIDENT"
+    ],
+    "未加密": [
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT"
+    ],
+    "ConfigMap": [
+      "TC-SEC-INCIDENT",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG"
+    ],
+    "Secret": [
+      "TC-SEC-INCIDENT",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG"
+    ],
+    "数据泄露": [
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT"
+    ],
+    "PVC": [
+      "TC-INFRA-STORE",
+      "TC-INFRA-STORE",
+      "TC-INFRA-STORE"
+    ],
+    "存储": [
+      "TC-INFRA-STORE"
+    ],
+    "not bound": [
+      "TC-INFRA-STORE"
+    ],
+    "StorageClass": [
+      "TC-INFRA-STORE",
+      "TC-INFRA-STORE"
+    ],
+    "CSI": [
+      "TC-INFRA-STORE"
+    ],
+    "挂载失败": [
+      "TC-INFRA-STORE",
+      "TC-APP-CONFIG"
+    ],
+    "卷": [
+      "TC-INFRA-STORE"
+    ],
+    "存储卷": [
+      "TC-INFRA-STORE"
+    ],
+    "写入": [
+      "TC-INFRA-STORE"
+    ],
+    "VolumeAttachment": [
+      "TC-INFRA-STORE"
+    ],
+    "卡住": [
+      "TC-INFRA-STORE",
+      "TC-APP-WORKLOAD",
+      "TC-DATA-BACKUP",
+      "TC-INFRA-SCALE",
+      "TC-APP-WORKLOAD"
+    ],
+    "PV": [
+      "TC-INFRA-STORE"
+    ],
+    "Released": [
+      "TC-INFRA-STORE"
+    ],
+    "删除卡住": [
+      "TC-INFRA-STORE",
+      "TC-APP-WORKLOAD"
+    ],
+    "参数错误": [
+      "TC-INFRA-STORE"
+    ],
+    "配置": [
+      "TC-INFRA-STORE"
+    ],
+    "扩容失败": [
+      "TC-INFRA-STORE"
+    ],
+    "云盘": [
+      "TC-INFRA-STORE"
+    ],
+    "空间不足": [
+      "TC-INFRA-STORE",
+      "TC-INFRA-CP"
+    ],
+    "NFS": [
+      "TC-INFRA-STORE"
+    ],
+    "挂载超时": [
+      "TC-INFRA-STORE"
+    ],
+    "无响应": [
+      "TC-INFRA-STORE"
+    ],
+    "快照恢复": [
+      "TC-INFRA-STORE"
+    ],
+    "一致性检查": [
+      "TC-INFRA-STORE"
+    ],
+    "resize": [
+      "TC-INFRA-STORE"
+    ],
+    "same size": [
+      "TC-INFRA-STORE"
+    ],
+    "emptyDir": [
+      "TC-INFRA-STORE"
+    ],
+    "内存不足": [
+      "TC-INFRA-STORE"
+    ],
+    "跨可用区": [
+      "TC-INFRA-STORE"
+    ],
+    "拓扑限制": [
+      "TC-INFRA-STORE"
+    ],
+    "滚动更新": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "Deployment": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "rollout stuck": [
+      "TC-APP-WORKLOAD"
+    ],
+    "new pods": [
+      "TC-APP-WORKLOAD"
+    ],
+    "StatefulSet": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "有序部署": [
+      "TC-APP-WORKLOAD"
+    ],
+    "DaemonSet": [
+      "TC-APP-WORKLOAD"
+    ],
+    "新节点": [
+      "TC-APP-WORKLOAD"
+    ],
+    "ReplicaSet": [
+      "TC-APP-WORKLOAD"
+    ],
+    "副本数不一致": [
+      "TC-APP-WORKLOAD"
+    ],
+    "少于期望": [
+      "TC-APP-WORKLOAD"
+    ],
+    "HPA": [
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE"
+    ],
+    "无法扩展": [
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE"
+    ],
+    "指标失败": [
+      "TC-INFRA-SCALE"
+    ],
+    "scaling failed": [
+      "TC-INFRA-SCALE"
+    ],
+    "metric": [
+      "TC-INFRA-SCALE"
+    ],
+    "VPA": [
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE"
+    ],
+    "推荐值": [
+      "TC-INFRA-SCALE"
+    ],
+    "差距过大": [
+      "TC-INFRA-SCALE"
+    ],
+    "Autoscaler": [
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE"
+    ],
+    "限流": [
+      "TC-INFRA-SCALE",
+      "TC-INFRA-SCALE"
+    ],
+    "数据库告警": [
+      "TC-INFRA-CP"
+    ],
+    "disk space": [
+      "TC-INFRA-CP"
+    ],
+    "low": [
+      "TC-INFRA-CP"
+    ],
+    "API Server": [
+      "TC-INFRA-CP",
+      "TC-SEC-INCIDENT",
+      "TC-INFRA-CP",
+      "TC-INFRA-CP",
+      "TC-SEC-RBAC"
+    ],
+    "5xx": [
+      "TC-INFRA-CP"
+    ],
+    "无法处理": [
+      "TC-INFRA-CP"
+    ],
+    "rate limit": [
+      "TC-INFRA-CP"
+    ],
+    "too many": [
+      "TC-INFRA-CP"
+    ],
+    "Scheduler": [
+      "TC-INFRA-CP",
+      "TC-INFRA-CP"
+    ],
+    "资源准确": [
+      "TC-INFRA-CP"
+    ],
+    "Controller Manager": [
+      "TC-INFRA-CP",
+      "TC-INFRA-CP"
+    ],
+    "异常": [
+      "TC-INFRA-CP",
+      "TC-APP-SVC",
+      "TC-SEC-INCIDENT"
+    ],
+    "升级失败": [
+      "TC-INFRA-UPGRADE"
+    ],
+    "损坏": [
+      "TC-INFRA-UPGRADE",
+      "TC-INFRA-CP"
+    ],
+    "升级后": [
+      "TC-INFRA-UPGRADE"
+    ],
+    "无法启动": [
+      "TC-INFRA-UPGRADE"
+    ],
+    "未生效": [
+      "TC-APP-CONFIG",
+      "TC-APP-SVC",
+      "TC-SEC-RBAC"
+    ],
+    "滚动重启": [
+      "TC-APP-CONFIG"
+    ],
+    "subpath": [
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG"
+    ],
+    "挂载": [
+      "TC-APP-CONFIG",
+      "TC-SEC-INCIDENT"
+    ],
+    "配置变更": [
+      "TC-APP-CONFIG"
+    ],
+    "动态更新": [
+      "TC-APP-CONFIG"
+    ],
+    "无法读取": [
+      "TC-APP-CONFIG"
+    ],
+    "base64": [
+      "TC-APP-CONFIG"
+    ],
+    "特殊字符": [
+      "TC-APP-CONFIG"
+    ],
+    "编码问题": [
+      "TC-APP-CONFIG"
+    ],
+    "环境变量": [
+      "TC-APP-CONFIG"
+    ],
+    "key不存在": [
+      "TC-APP-CONFIG",
+      "TC-APP-CONFIG"
+    ],
+    "volume权限": [
+      "TC-APP-CONFIG"
+    ],
+    "CronJob": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "未执行": [
+      "TC-APP-WORKLOAD",
+      "TC-INFRA-SCALE"
+    ],
+    "时间异常": [
+      "TC-APP-WORKLOAD"
+    ],
+    "重复执行": [
+      "TC-APP-WORKLOAD"
+    ],
+    "并发冲突": [
+      "TC-APP-WORKLOAD"
+    ],
+    "Job": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "并发策略": [
+      "TC-APP-WORKLOAD"
+    ],
+    "过多": [
+      "TC-APP-WORKLOAD"
+    ],
+    "未清理": [
+      "TC-APP-WORKLOAD",
+      "TC-APP-WORKLOAD"
+    ],
+    "僵尸Pod": [
+      "TC-APP-WORKLOAD"
+    ],
+    "PDB": [
+      "TC-APP-WORKLOAD"
+    ],
+    "阻止驱逐": [
+      "TC-APP-WORKLOAD"
+    ],
+    "Eviction": [
+      "TC-APP-WORKLOAD"
+    ],
+    "PDB拒绝": [
+      "TC-APP-WORKLOAD"
+    ],
+    "API": [
+      "TC-APP-WORKLOAD"
+    ],
+    "证书到期": [
+      "TC-APP-INGRESS"
+    ],
+    "HTTPS降级": [
+      "TC-APP-INGRESS"
+    ],
+    "499": [
+      "TC-APP-INGRESS"
+    ],
+    "客户端断开": [
+      "TC-APP-INGRESS"
+    ],
+    "websocket": [
+      "TC-APP-INGRESS"
+    ],
+    "断连": [
+      "TC-APP-INGRESS"
+    ],
+    "Gateway API": [
+      "TC-APP-INGRESS"
+    ],
+    "CRD未安装": [
+      "TC-APP-INGRESS"
+    ],
+    "sidecar": [
+      "TC-APP-SVC"
+    ],
+    "注入失败": [
+      "TC-APP-SVC",
+      "TC-APP-CONFIG"
+    ],
+    "Service mesh": [
+      "TC-APP-SVC"
+    ],
+    "mTLS": [
+      "TC-APP-SVC"
+    ],
+    "双向认证": [
+      "TC-APP-SVC"
+    ],
+    "流量镜像": [
+      "TC-APP-SVC"
+    ],
+    "mesh": [
+      "TC-APP-SVC"
+    ],
+    "金丝雀": [
+      "TC-APP-SVC"
+    ],
+    "流量比例": [
+      "TC-APP-SVC"
+    ],
+    "跨集群": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "DNS解析": [
+      "TC-INFRA-NET"
+    ],
+    "ServiceExport": [
+      "TC-INFRA-NET"
+    ],
+    "网络策略": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "命名空间隔离": [
+      "TC-INFRA-NET"
+    ],
+    "测试": [
+      "TC-INFRA-NET"
+    ],
+    "Egress": [
+      "TC-INFRA-NET",
+      "TC-INFRA-NET"
+    ],
+    "外部API": [
+      "TC-INFRA-NET"
+    ],
+    "IPVS": [
+      "TC-INFRA-NET"
+    ],
+    "连接重置": [
+      "TC-INFRA-NET"
+    ],
+    "负载均衡": [
+      "TC-INFRA-NET"
+    ],
+    "kube-proxy": [
+      "TC-INFRA-NET"
+    ],
+    "规则不一致": [
+      "TC-INFRA-NET"
+    ],
+    "网络延迟": [
+      "TC-INFRA-NET"
+    ],
+    "异常高": [
+      "TC-INFRA-NET"
+    ],
+    "节点间": [
+      "TC-INFRA-NET"
+    ],
+    "网络抖动": [
+      "TC-INFRA-NET"
+    ],
+    "偶发超时": [
+      "TC-INFRA-NET"
+    ],
+    "Pod间": [
+      "TC-INFRA-NET"
+    ],
+    "出口流量": [
+      "TC-SEC-INCIDENT"
+    ],
+    "token": [
+      "TC-SEC-INCIDENT",
+      "TC-SEC-RBAC"
+    ],
+    "不受信": [
+      "TC-SEC-INCIDENT"
+    ],
+    "特权模式": [
+      "TC-SEC-INCIDENT"
+    ],
+    "SecurityContext": [
+      "TC-SEC-INCIDENT"
+    ],
+    "违规": [
+      "TC-SEC-INCIDENT"
+    ],
+    "root用户": [
+      "TC-SEC-INCIDENT"
+    ],
+    "安全问题": [
+      "TC-SEC-INCIDENT"
+    ],
+    "privilege escalation": [
+      "TC-SEC-INCIDENT"
+    ],
+    "允许": [
+      "TC-SEC-INCIDENT"
+    ],
+    "敏感端口": [
+      "TC-SEC-INCIDENT"
+    ],
+    "公网暴露": [
+      "TC-SEC-INCIDENT"
+    ],
+    "未授权": [
+      "TC-SEC-INCIDENT",
+      "TC-SEC-INCIDENT"
+    ],
+    "端口": [
+      "TC-SEC-INCIDENT"
+    ],
+    "dashboard": [
+      "TC-SEC-INCIDENT"
+    ],
+    "非法访问": [
+      "TC-SEC-INCIDENT"
+    ],
+    "Kubernetes": [
+      "TC-SEC-INCIDENT"
+    ],
+    "审计日志": [
+      "TC-SEC-INCIDENT"
+    ],
+    "认证失败": [
+      "TC-SEC-INCIDENT",
+      "TC-APP-POD"
+    ],
+    "大量": [
+      "TC-SEC-INCIDENT"
+    ],
+    "异常IP": [
+      "TC-SEC-INCIDENT"
+    ],
+    "扫描": [
+      "TC-SEC-INCIDENT"
+    ],
+    "证书": [
+      "TC-SEC-CERT",
+      "TC-SEC-CERT"
+    ],
+    "30天": [
+      "TC-SEC-CERT"
+    ],
+    "未自动续期": [
+      "TC-SEC-CERT"
+    ],
+    "外部Issuer": [
+      "TC-SEC-CERT"
+    ],
+    "续期失败": [
+      "TC-SEC-CERT",
+      "TC-SEC-CERT"
+    ],
+    "Aggregator": [
+      "TC-SEC-CERT"
+    ],
+    "聚合API": [
+      "TC-SEC-CERT"
+    ],
+    "证书错误": [
+      "TC-SEC-CERT"
+    ],
+    "bootstrap": [
+      "TC-SEC-CERT"
+    ],
+    "证书签发": [
+      "TC-SEC-CERT"
+    ],
+    "加入集群": [
+      "TC-SEC-CERT"
+    ],
+    "CSI driver": [
+      "TC-SEC-RBAC",
+      "TC-INFRA-STORE"
+    ],
+    "node authorizer": [
+      "TC-SEC-RBAC"
+    ],
+    "LimitRange": [
+      "TC-SEC-RBAC"
+    ],
+    "启动失败": [
+      "TC-SEC-RBAC",
+      "TC-APP-CONFIG"
+    ],
+    "资源限制": [
+      "TC-SEC-RBAC"
+    ],
+    "Namespace quota": [
+      "TC-SEC-RBAC"
+    ],
+    "不足": [
+      "TC-SEC-RBAC"
+    ],
+    "无法创建": [
+      "TC-SEC-RBAC"
+    ],
+    "PriorityClass": [
+      "TC-SEC-RBAC"
+    ],
+    "整数溢出": [
+      "TC-SEC-RBAC"
+    ],
+    "调度异常": [
+      "TC-SEC-RBAC"
+    ],
+    "MySQL": [
+      "TC-DATA-DB"
+    ],
+    "主从复制": [
+      "TC-DATA-DB"
+    ],
+    "中断": [
+      "TC-DATA-DB"
+    ],
+    "PostgreSQL": [
+      "TC-DATA-DB"
+    ],
+    "慢SQL": [
+      "TC-DATA-DB"
+    ],
+    "查询缓慢": [
+      "TC-DATA-DB"
+    ],
+    "connection pool": [
+      "TC-DATA-DB"
+    ],
+    "exhausted": [
+      "TC-DATA-DB"
+    ],
+    "database": [
+      "TC-DATA-DB"
+    ],
+    "Redis": [
+      "TC-DATA-CACHE",
+      "TC-DATA-CACHE"
+    ],
+    "slot迁移": [
+      "TC-DATA-CACHE"
+    ],
+    "集群不可用": [
+      "TC-DATA-CACHE"
+    ],
+    "内存耗尽": [
+      "TC-DATA-CACHE"
+    ],
+    "Kafka": [
+      "TC-DATA-MQ"
+    ],
+    "消费者lag": [
+      "TC-DATA-MQ"
+    ],
+    "消息积压": [
+      "TC-DATA-MQ"
+    ],
+    "RabbitMQ": [
+      "TC-DATA-MQ"
+    ],
+    "队列不可用": [
+      "TC-DATA-MQ"
+    ],
+    "新连接": [
+      "TC-DATA-MQ"
+    ],
+    "Velero": [
+      "TC-DATA-BACKUP"
+    ],
+    "restore": [
+      "TC-DATA-BACKUP"
+    ],
+    "快照损坏": [
+      "TC-DATA-BACKUP"
+    ],
+    "无法恢复": [
+      "TC-DATA-BACKUP"
+    ],
+    "校验失败": [
+      "TC-DATA-BACKUP"
+    ],
+    "不存在的key": [
+      "TC-APP-CONFIG"
+    ],
+    "静默更新": [
+      "TC-APP-CONFIG"
+    ],
+    "旧值": [
+      "TC-APP-CONFIG"
+    ],
+    "更新无效": [
+      "TC-APP-CONFIG"
+    ],
+    "wal日志": [
+      "TC-INFRA-CP"
+    ],
+    "watch事件": [
+      "TC-INFRA-CP"
+    ],
+    "积压": [
+      "TC-INFRA-CP"
+    ],
+    "内存增长": [
+      "TC-INFRA-CP"
+    ],
+    "持续重启": [
+      "TC-INFRA-CP"
+    ],
+    "死循环": [
+      "TC-INFRA-CP"
+    ],
+    "调度不均": [
+      "TC-INFRA-CP"
+    ],
+    "热点节点": [
+      "TC-INFRA-CP"
+    ],
+    "过期镜像": [
+      "TC-INFRA-NODE"
+    ],
+    "无法清理": [
+      "TC-INFRA-NODE",
+      "TC-INFRA-NODE"
+    ],
+    "磁盘空间": [
+      "TC-INFRA-NODE"
+    ],
+    "内存泄漏": [
+      "TC-INFRA-NODE"
+    ],
+    "RSS增长": [
+      "TC-INFRA-NODE"
+    ],
+    "containerd shim": [
+      "TC-INFRA-NODE"
+    ],
+    "进程异常": [
+      "TC-INFRA-NODE"
+    ],
+    "nvidia-docker2": [
+      "TC-INFRA-NODE"
+    ],
+    "GPU调度": [
+      "TC-INFRA-NODE"
+    ],
+    "内核版本": [
+      "TC-INFRA-NODE"
+    ],
+    "CNI特性": [
+      "TC-INFRA-NODE"
+    ],
+    "不支持": [
+      "TC-INFRA-NODE"
+    ],
+    "文件句柄": [
+      "TC-INFRA-NODE"
+    ],
+    "FD耗尽": [
+      "TC-INFRA-NODE"
+    ],
+    "系统": [
+      "TC-INFRA-NODE"
+    ],
+    "版本不兼容": [
+      "TC-INFRA-NODE"
+    ],
+    "沙箱": [
+      "TC-INFRA-NODE"
+    ],
+    "镜像仓库": [
+      "TC-APP-POD"
+    ],
+    "credentials": [
+      "TC-APP-POD"
+    ],
+    "私有镜像": [
+      "TC-APP-POD"
+    ],
+    "连接超时": [
+      "TC-APP-POD"
+    ],
+    "防火墙": [
+      "TC-APP-POD"
+    ],
+    "镜像tag": [
+      "TC-APP-POD"
+    ],
+    "不存在": [
+      "TC-APP-POD",
+      "TC-APP-POD"
+    ],
+    "latest": [
+      "TC-APP-POD"
+    ],
+    "镜像层解压": [
+      "TC-APP-POD"
+    ],
+    "存储驱动": [
+      "TC-APP-POD"
+    ],
+    "指标正常": [
+      "TC-INFRA-SCALE"
+    ],
+    "副本数不调": [
+      "TC-INFRA-SCALE"
+    ],
+    "资源震荡": [
+      "TC-INFRA-SCALE"
+    ],
+    "Karpenter": [
+      "TC-INFRA-SCALE"
+    ],
+    "AWS API": [
+      "TC-INFRA-SCALE"
+    ],
+    "节点池": [
+      "TC-INFRA-SCALE"
+    ],
+    "Pod调度": [
+      "TC-INFRA-SCALE"
+    ],
+    "scale-down": [
+      "TC-INFRA-SCALE"
+    ],
+    "禁用标记": [
+      "TC-INFRA-SCALE"
+    ],
+    "资源释放": [
+      "TC-INFRA-SCALE"
+    ],
+    "concurrency-forbid": [
+      "TC-APP-WORKLOAD"
+    ],
+    "仍在运行": [
+      "TC-APP-WORKLOAD"
+    ],
+    "Job残留": [
+      "TC-APP-WORKLOAD"
+    ],
+    "Pod未清理": [
+      "TC-APP-WORKLOAD"
+    ],
+    "数量超限": [
+      "TC-APP-WORKLOAD"
+    ],
+    "paused": [
+      "TC-APP-WORKLOAD"
+    ],
+    "PVC残留": [
+      "TC-APP-WORKLOAD"
+    ],
+    "数据未清理": [
+      "TC-APP-WORKLOAD"
+    ],
+    "路由冲突": [
+      "TC-APP-INGRESS"
+    ],
+    "gzip": [
+      "TC-APP-INGRESS"
+    ],
+    "压缩": [
+      "TC-APP-INGRESS"
+    ],
+    "cookie亲和": [
+      "TC-APP-INGRESS"
+    ],
+    "灰度发布": [
+      "TC-APP-INGRESS"
+    ],
+    "ACME": [
+      "TC-SEC-CERT"
+    ],
+    "HTTP01": [
+      "TC-SEC-CERT"
+    ],
+    "挑战超时": [
+      "TC-SEC-CERT"
+    ],
+    "DNS01": [
+      "TC-SEC-CERT"
+    ],
+    "TXT记录": [
+      "TC-SEC-CERT"
+    ],
+    "被覆盖": [
+      "TC-SEC-CERT"
+    ],
+    "未签发": [
+      "TC-SEC-CERT"
+    ],
+    "ClusterIssuer": [
+      "TC-SEC-CERT"
+    ],
+    "solver": [
+      "TC-SEC-CERT"
+    ],
+    "Webhook": [
+      "TC-SEC-RBAC"
+    ],
+    "回调失败": [
+      "TC-SEC-RBAC"
+    ],
+    "配置错误": [
+      "TC-SEC-RBAC",
+      "TC-INFRA-NODE"
+    ],
+    "ValidatingWebhook": [
+      "TC-SEC-RBAC"
+    ],
+    "阻止": [
+      "TC-SEC-RBAC"
+    ],
+    "合法": [
+      "TC-SEC-RBAC"
+    ],
+    "MutatingWebhook": [
+      "TC-SEC-RBAC"
+    ],
+    "修改": [
+      "TC-SEC-RBAC"
+    ],
+    "Gatekeeper": [
+      "TC-SEC-RBAC"
+    ],
+    "策略拒绝": [
+      "TC-SEC-RBAC"
+    ],
+    "OPA": [
+      "TC-SEC-RBAC"
+    ],
+    "Kyverno": [
+      "TC-SEC-RBAC"
+    ],
+    "enforce": [
+      "TC-SEC-RBAC"
+    ],
+    "审计模式": [
+      "TC-SEC-RBAC"
+    ],
+    "拓扑感知": [
+      "TC-INFRA-STORE"
+    ],
+    "storage class": [
+      "TC-INFRA-STORE"
+    ],
+    "区域不匹配": [
+      "TC-INFRA-STORE"
+    ],
+    "在线扩容": [
+      "TC-INFRA-STORE"
+    ],
+    "重启Pod": [
+      "TC-INFRA-STORE"
+    ],
+    "数据卷": [
+      "TC-INFRA-STORE"
+    ],
+    "snapshotter": [
+      "TC-INFRA-STORE",
+      "TC-INFRA-NODE"
+    ],
+    "CRD": [
+      "TC-INFRA-STORE"
+    ],
+    "未找到": [
+      "TC-INFRA-STORE"
+    ],
+    "LocalPV": [
+      "TC-INFRA-STORE"
+    ],
+    "调度错误": [
+      "TC-INFRA-STORE"
+    ],
+    "共享存储": [
+      "TC-INFRA-STORE"
+    ],
+    "数据不一致": [
+      "TC-INFRA-STORE"
+    ],
+    "etcd快照": [
+      "TC-INFRA-CP"
+    ],
+    "恢复后": [
+      "TC-INFRA-CP"
+    ],
+    "状态不一致": [
+      "TC-INFRA-CP"
+    ],
+    "secure port": [
+      "TC-INFRA-CP"
+    ],
+    "无法监听": [
+      "TC-INFRA-CP"
+    ],
+    "etcd选主": [
+      "TC-INFRA-CP"
+    ],
+    "cluster id": [
+      "TC-INFRA-CP"
+    ],
+    "etcd watch reset": [
+      "TC-INFRA-CP"
+    ],
+    "日志": [
+      "TC-INFRA-CP"
+    ],
+    "Kube-apiserver": [
+      "TC-INFRA-CP"
+    ],
+    "CPU 100%": [
+      "TC-INFRA-NET"
+    ],
+    "DNS服务": [
+      "TC-INFRA-NET"
+    ],
+    "clusterIP": [
+      "TC-INFRA-NET"
+    ],
+    "旧IP": [
+      "TC-INFRA-NET"
+    ],
+    "仍有流量": [
+      "TC-INFRA-NET"
+    ],
+    "EndpointSlice": [
+      "TC-INFRA-NET"
+    ],
+    "同步延迟": [
+      "TC-INFRA-NET"
+    ],
+    "端点过期": [
+      "TC-INFRA-NET"
+    ],
+    "MetalLB": [
+      "TC-INFRA-NET"
+    ],
+    "L2": [
+      "TC-INFRA-NET"
+    ],
+    "ARP公告": [
+      "TC-INFRA-NET"
+    ],
+    "Cilium": [
+      "TC-INFRA-NET"
+    ],
+    "BGP": [
+      "TC-INFRA-NET"
+    ],
+    "邻居断开": [
+      "TC-INFRA-NET"
+    ],
+    "hostNetwork": [
+      "TC-APP-POD"
+    ],
+    "volume mount": [
+      "TC-APP-POD"
+    ],
+    "同一路径": [
+      "TC-APP-POD"
+    ],
+    "Init container": [
+      "TC-APP-POD"
+    ],
+    "HTTP port": [
+      "TC-APP-POD"
+    ],
+    "过于激进": [
+      "TC-APP-POD"
+    ],
+    "误杀": [
+      "TC-APP-POD"
+    ],
+    "Endpoints": [
+      "TC-APP-POD",
+      "TC-APP-SVC",
+      "TC-APP-SVC"
+    ],
+    "startup probe": [
+      "TC-APP-POD"
+    ],
+    "无法拦截": [
+      "TC-APP-POD"
+    ],
+    "rootfs": [
+      "TC-SEC-INCIDENT"
+    ],
+    "根文件系统": [
+      "TC-SEC-INCIDENT"
+    ],
+    "隐藏cron": [
+      "TC-SEC-INCIDENT"
+    ],
+    "安全事件": [
+      "TC-SEC-INCIDENT"
+    ],
+    "allowPrivilegeEscalation": [
+      "TC-SEC-INCIDENT"
+    ],
+    "未设置": [
+      "TC-SEC-INCIDENT"
+    ],
+    "/etc/shadow": [
+      "TC-SEC-INCIDENT"
+    ],
+    "访问": [
+      "TC-SEC-INCIDENT"
+    ],
+    "Falco": [
+      "TC-SEC-INCIDENT"
+    ],
+    "异常shell": [
+      "TC-SEC-INCIDENT"
+    ],
+    "告警": [
+      "TC-SEC-INCIDENT"
+    ],
+    "访问失败": [
+      "TC-INFRA-NET"
+    ],
+    "互相": [
+      "TC-INFRA-NET"
+    ],
+    "允许所有": [
+      "TC-INFRA-NET"
+    ],
+    "隔离失效": [
+      "TC-INFRA-NET"
+    ],
+    "named port": [
+      "TC-INFRA-NET"
+    ],
+    "未定义": [
+      "TC-INFRA-NET"
+    ],
+    "同命名空间": [
+      "TC-INFRA-NET"
+    ],
+    "内存使用率": [
+      "TC-INFRA-NODE"
+    ],
+    "90%": [
+      "TC-INFRA-NODE"
+    ],
+    "未驱逐": [
+      "TC-INFRA-NODE"
+    ],
+    "eviction manager": [
+      "TC-INFRA-NODE"
+    ],
+    "阈值": [
+      "TC-INFRA-NODE"
+    ],
+    "配置异常": [
+      "TC-INFRA-NODE"
+    ],
+    "影子资源": [
+      "TC-INFRA-NODE"
+    ],
+    "报告不符": [
+      "TC-INFRA-NODE"
+    ],
+    "device plugin": [
+      "TC-INFRA-NODE"
+    ],
+    "GPU": [
+      "TC-INFRA-NODE"
+    ],
+    "无法使用": [
+      "TC-INFRA-NODE"
+    ],
+    "RuntimeClass": [
+      "TC-APP-POD"
+    ],
+    "handler": [
+      "TC-APP-POD"
+    ],
+    "topology spread": [
+      "TC-APP-POD"
+    ],
+    "constraints": [
+      "TC-APP-POD"
+    ],
+    "Taint": [
+      "TC-APP-POD"
+    ],
+    "不容忍": [
+      "TC-APP-POD"
+    ],
+    "NoSchedule": [
+      "TC-APP-POD"
+    ],
+    "绕过": [
+      "TC-APP-POD"
+    ],
+    "调度": [
+      "TC-APP-POD"
+    ],
+    "证书即将到期": [
+      "TC-SEC-CERT"
+    ],
+    "集群可用性": [
+      "TC-SEC-CERT"
+    ],
+    "影响": [
+      "TC-SEC-CERT"
+    ],
+    "未使用": [
+      "TC-SEC-RBAC"
+    ],
+    "cgroup driver": [
+      "TC-INFRA-NODE"
+    ],
+    "错误": [
+      "TC-INFRA-NODE"
+    ],
+    "mount.recursive": [
+      "TC-INFRA-STORE"
+    ],
+    "信号占用": [
+      "TC-INFRA-STORE"
+    ],
+    "RWO": [
+      "TC-INFRA-STORE"
+    ],
+    "同时挂载": [
+      "TC-INFRA-STORE"
+    ],
+    "写入异常": [
+      "TC-INFRA-STORE"
+    ],
+    "CSI ephemeral": [
+      "TC-INFRA-STORE"
+    ],
+    "数据丢失": [
+      "TC-INFRA-STORE"
+    ],
+    "scale down": [
+      "TC-INFRA-SCALE"
+    ],
+    "KEDA": [
+      "TC-INFRA-SCALE"
+    ],
+    "未触发": [
+      "TC-INFRA-SCALE"
+    ],
+    "ScaledObject": [
+      "TC-INFRA-SCALE"
+    ],
+    "震荡": [
+      "TC-INFRA-SCALE"
+    ],
+    "扩展删除": [
+      "TC-INFRA-SCALE"
+    ],
+    "maxSurge": [
+      "TC-APP-WORKLOAD"
+    ],
+    "资源浪费": [
+      "TC-APP-WORKLOAD"
+    ],
+    "PVC保护": [
+      "TC-APP-WORKLOAD"
+    ],
+    "历史ReplicaSet": [
+      "TC-APP-WORKLOAD"
+    ],
+    "Job并发": [
+      "TC-APP-WORKLOAD"
+    ],
+    "数据库锁": [
+      "TC-APP-WORKLOAD"
+    ],
+    "竞争": [
+      "TC-APP-WORKLOAD"
+    ],
+    "时区不一致": [
+      "TC-APP-WORKLOAD"
+    ],
+    "scheduled time": [
+      "TC-APP-WORKLOAD"
+    ],
+    "HTTP": [
+      "TC-APP-INGRESS"
+    ],
+    "未启用HTTPS": [
+      "TC-APP-INGRESS"
+    ],
+    "默认证书": [
+      "TC-APP-INGRESS"
+    ],
+    "不安全": [
+      "TC-APP-INGRESS"
+    ],
+    "annotation": [
+      "TC-APP-INGRESS"
+    ],
+    "不兼容": [
+      "TC-APP-INGRESS"
+    ],
+    "集群外": [
+      "TC-APP-SVC"
+    ],
+    "Session Affinity": [
+      "TC-APP-SVC"
+    ],
+    "ClientIP": [
+      "TC-APP-SVC"
+    ],
+    "无效": [
+      "TC-APP-SVC"
+    ],
+    "topologyKeys": [
+      "TC-APP-SVC"
+    ],
+    "分布不均": [
+      "TC-APP-SVC"
+    ],
+    "etcd member": [
+      "TC-INFRA-CP"
+    ],
+    "移除未清理": [
+      "TC-INFRA-CP"
+    ],
+    "集群": [
+      "TC-INFRA-CP"
+    ],
+    "WAL fsync": [
+      "TC-INFRA-CP"
+    ],
+    "延迟过高": [
+      "TC-INFRA-CP"
+    ],
+    "磁盘I/O": [
+      "TC-INFRA-CP"
+    ],
+    "写入超时": [
+      "TC-INFRA-CP"
+    ],
+    "调度队列": [
+      "TC-INFRA-CP"
+    ],
+    "堆积": [
+      "TC-INFRA-CP"
+    ],
+    "等待调度": [
+      "TC-INFRA-CP"
+    ],
+    "资源版本": [
+      "TC-INFRA-CP"
+    ],
+    "过旧": [
+      "TC-INFRA-CP"
+    ],
+    "CRUD失败": [
+      "TC-INFRA-CP"
+    ],
+    "认证插件": [
+      "TC-SEC-RBAC"
+    ],
+    "RBAC继承": [
+      "TC-SEC-RBAC"
+    ],
+    "过深": [
+      "TC-SEC-RBAC"
+    ],
+    "权限传播": [
+      "TC-SEC-RBAC"
+    ],
+    "Certificate CRD": [
+      "TC-SEC-CERT"
+    ],
+    "未安装": [
+      "TC-SEC-CERT"
+    ],
+    "签名者": [
+      "TC-SEC-CERT"
+    ],
+    "Prometheus": [
+      "TC-DATA-DB",
+      "TC-INFRA-NODE"
+    ],
+    "kube-state-metrics": [
+      "TC-DATA-DB"
+    ],
+    "抓取失败": [
+      "TC-DATA-DB"
+    ],
+    "监控指标": [
+      "TC-INFRA-SCALE"
+    ],
+    "缺失": [
+      "TC-INFRA-SCALE"
+    ],
+    "Alertmanager": [
+      "TC-DATA-DB"
+    ],
+    "抑制规则": [
+      "TC-DATA-DB"
+    ],
+    "日志延迟": [
+      "TC-DATA-DB"
+    ],
+    "Elasticsearch": [
+      "TC-DATA-DB"
+    ],
+    "写入阻塞": [
+      "TC-DATA-DB"
+    ],
+    "缓冲区满": [
+      "TC-DATA-DB"
+    ],
+    "日志丢失": [
+      "TC-DATA-DB"
+    ],
+    "Fluentd": [
+      "TC-DATA-DB"
+    ],
+    "kubectl exec": [
+      "TC-SEC-RBAC"
+    ],
+    "kubectl cp": [
+      "TC-APP-POD"
+    ],
+    "tar崩溃": [
+      "TC-APP-POD"
+    ],
+    "复制失败": [
+      "TC-APP-POD"
+    ],
+    "port-forward": [
+      "TC-APP-POD"
+    ],
+    "端口占用": [
+      "TC-APP-POD"
+    ],
+    "转发": [
+      "TC-APP-POD"
+    ],
+    "kubectl top": [
+      "TC-INFRA-NODE"
+    ],
+    "数据不准": [
+      "TC-INFRA-NODE"
+    ],
+    "previous logs": [
+      "TC-APP-POD"
+    ],
+    "历史日志": [
+      "TC-APP-POD"
+    ],
+    "获取失败": [
+      "TC-APP-POD"
+    ],
+    "describe": [
+      "TC-APP-POD"
+    ],
+    "事件不符": [
+      "TC-APP-POD"
+    ],
+    "dry-run": [
+      "TC-SEC-RBAC"
+    ],
+    "报错": [
+      "TC-SEC-RBAC"
+    ],
+    "仍创建": [
+      "TC-SEC-RBAC"
+    ],
+    "scale": [
+      "TC-APP-WORKLOAD"
+    ],
+    "副本数未变": [
+      "TC-APP-WORKLOAD"
+    ],
+    "命令成功": [
+      "TC-APP-WORKLOAD"
+    ],
+    "rollout status": [
+      "TC-APP-WORKLOAD"
+    ],
+    "等待": [
+      "TC-APP-WORKLOAD"
+    ],
+    "rollout undo": [
+      "TC-APP-WORKLOAD"
+    ],
+    "回滚失败": [
+      "TC-APP-WORKLOAD"
+    ],
+    "历史丢失": [
+      "TC-APP-WORKLOAD"
+    ],
+    "label": [
+      "TC-APP-SVC"
+    ],
+    "未同步": [
+      "TC-APP-SVC"
+    ],
+    "annotate": [
+      "TC-APP-CONFIG"
+    ],
+    "未读取": [
+      "TC-APP-CONFIG"
+    ],
+    "注解": [
+      "TC-APP-CONFIG"
+    ],
+    "JSON patch": [
+      "TC-APP-CONFIG"
+    ],
+    "格式错误": [
+      "TC-APP-CONFIG"
+    ],
+    "patch": [
+      "TC-APP-CONFIG"
+    ],
+    "replace": [
+      "TC-APP-CONFIG"
+    ],
+    "uid不匹配": [
+      "TC-APP-CONFIG"
+    ],
+    "替换失败": [
+      "TC-APP-CONFIG"
+    ],
+    "drain": [
+      "TC-APP-WORKLOAD"
+    ],
+    "PDBs阻止": [
+      "TC-APP-WORKLOAD"
+    ],
+    "驱逐失败": [
+      "TC-APP-WORKLOAD"
+    ],
+    "cordon": [
+      "TC-APP-WORKLOAD"
+    ],
+    "新Pod调度": [
+      "TC-APP-WORKLOAD"
+    ],
+    "标记后": [
+      "TC-APP-WORKLOAD"
+    ],
+    "kubectl debug": [
+      "TC-APP-POD"
+    ],
+    "top pod": [
+      "TC-INFRA-NODE"
+    ],
+    "指标不一致": [
+      "TC-INFRA-NODE"
+    ],
+    "can-i": [
+      "TC-SEC-RBAC"
+    ],
+    "RBAC不符": [
+      "TC-SEC-RBAC"
+    ],
+    "查询": [
+      "TC-SEC-RBAC"
+    ],
+    "api-resources": [
+      "TC-INFRA-CP"
+    ],
+    "数量不符": [
+      "TC-INFRA-CP"
+    ],
+    "资源": [
+      "TC-INFRA-CP"
+    ],
+    "get events": [
+      "TC-INFRA-CP"
+    ],
+    "排序异常": [
+      "TC-INFRA-CP"
+    ],
+    "时间": [
+      "TC-INFRA-CP"
+    ]
+  },
+  "category_to_keywords": {
+    "TC-INFRA-NODE": [
+      "apiserver",
+      "NotReady",
+      "进程数",
+      "KubeletNotReady",
+      "集群网络",
+      "多个节点",
+      "硬件传感器",
+      "eviction manager",
+      "iptables",
+      "过期镜像",
+      "启动卡住",
+      "etcd",
+      "崩溃",
+      "90%",
+      "Prometheus",
+      "内存压力",
+      "filesystem",
+      "资源不足",
+      "API server",
+      "无法使用",
+      "down",
+      "网络接口",
+      "数据不准",
+      "无法连接",
+      "containerd",
+      "write",
+      "通信中断",
+      "Unknown",
+      "API响应",
+      "证书拉取",
+      "文件系统",
+      "node",
+      "文件句柄",
+      "CNI特性",
+      "宕机",
+      "版本不兼容",
+      "read-only",
+      "too many processes",
+      "网络不通",
+      "containerd shim",
+      "阈值",
+      "MemoryPressure",
+      "swap",
+      "压力异常",
+      "只读",
+      "配置异常",
+      "网络分区",
+      "写入失败",
+      "驱逐",
+      "GPU调度",
+      "指标不一致",
+      "Lease",
+      "unresponsive",
+      "FD耗尽",
+      "not renewed",
+      "snapshotter",
+      "内核版本",
+      "系统",
+      "OOM killer",
+      "cgroup driver",
+      "SSH",
+      "clock skew",
+      "certificate expired",
+      "disk pressure",
+      "配置错误",
+      "磁盘压力",
+      "沙箱",
+      "磁盘空间",
+      "Ready",
+      "失效",
+      "无法清理",
+      "未驱逐",
+      "device plugin",
+      "不支持",
+      "错误",
+      "kubelet",
+      "top pod",
+      "规则异常",
+      "nvidia-docker2",
+      "control plane",
+      "PLEG",
+      "5min",
+      "节点",
+      "not registered",
+      "内存泄漏",
+      "报告不符",
+      "kubectl top",
+      "无告警",
+      "evicted",
+      "PIDPressure",
+      "starting",
+      "time sync",
+      "内存使用率",
+      "DiskPressure",
+      "进程异常",
+      "影子资源",
+      "可用性",
+      "GPU",
+      "flapping",
+      "超限",
+      "控制平面",
+      "RSS增长",
+      "容器创建失败"
+    ],
+    "TC-APP-POD": [
+      "failed",
+      "Pod",
+      "约束",
+      "conflict",
+      "startup probe",
+      "restarting",
+      "镜像tag",
+      "误杀",
+      "历史日志",
+      "kubectl debug",
+      "镜像层解压",
+      "容器",
+      "认证失败",
+      "port-forward",
+      "同一路径",
+      "事件不符",
+      "container",
+      "崩溃",
+      "健康检查",
+      "安全策略",
+      "FailedScheduling",
+      "连接超时",
+      "镜像仓库",
+      "资源不足",
+      "readiness probe",
+      "创建后删除",
+      "503",
+      "repeatedly crashing",
+      "镜像",
+      "constraints",
+      "内存限制",
+      "镜像拉取",
+      "Init container",
+      "Terminating",
+      "stuck",
+      "Endpoints",
+      "调度失败",
+      "获取失败",
+      "亲和性",
+      "不容忍",
+      "调度拒绝",
+      "无法运行",
+      "端口冲突",
+      "exit code 137",
+      "node",
+      "冲突",
+      "tar崩溃",
+      "失败",
+      "不存在",
+      "topology spread",
+      "kubectl cp",
+      "脚本失败",
+      "超时",
+      "credentials",
+      "无法删除",
+      "describe",
+      "ErrImagePull",
+      "启动超时",
+      "handler",
+      "污点",
+      "无法满足",
+      "main container",
+      "Taint",
+      "OOM",
+      "CrashLoop",
+      "master",
+      "OOMKilled",
+      "调度",
+      "过于激进",
+      "防火墙",
+      "无法拦截",
+      "转发",
+      "latest",
+      "私有镜像",
+      "hostPort",
+      "绕过",
+      "存储驱动",
+      "主容器",
+      "Pending",
+      "不断重启",
+      "init container",
+      "多个Pod",
+      "初始化",
+      "ImagePullBackOff",
+      "生命周期",
+      "拓扑分布",
+      "hostNetwork",
+      "节点",
+      "previous logs",
+      "liveness probe",
+      "affinity",
+      "volume mount",
+      "复制失败",
+      "no nodes",
+      "反亲和性",
+      "CrashLoopBackOff",
+      "NoSchedule",
+      "entrypoint",
+      "立即退出",
+      "内存",
+      "traffic",
+      "HTTP port",
+      "RuntimeClass",
+      "拒绝创建",
+      "端口占用"
+    ],
+    "TC-INFRA-NET": [
+      "Egress",
+      "L2",
+      "Pod",
+      "初始化失败",
+      "命名空间隔离",
+      "LoadBalancer",
+      "Cilium",
+      "failed to initialize",
+      "clusterIP",
+      "负载均衡",
+      "ClusterIP",
+      "iptables",
+      "selector",
+      "网络策略",
+      "MetalLB",
+      "DNS解析失败",
+      "互相",
+      "cannot access",
+      "网络异常",
+      "Pod间",
+      "允许所有",
+      "不健康",
+      "stuck",
+      "cluster domain",
+      "NodePort",
+      "kube-proxy",
+      "DNS timeout",
+      "Service",
+      "邻居断开",
+      "pending",
+      "DNS异常",
+      "偶发超时",
+      "跨集群",
+      "BGP",
+      "端口范围",
+      "Overlay",
+      "隔离",
+      "隔离失效",
+      "ARP公告",
+      "旧IP",
+      "无负载均衡",
+      "节点间",
+      "异常高",
+      "失败",
+      "MTU",
+      "CoreDNS",
+      "超时",
+      "网络不通",
+      "仍有流量",
+      "NetworkPolicy",
+      "VLAN",
+      "Headless",
+      "CPU 100%",
+      "网络分区",
+      "跨节点",
+      "IPVS",
+      "networking",
+      "CNI",
+      "未定义",
+      "外部API",
+      "无法访问",
+      "不匹配",
+      "DNS缓慢",
+      "网络延迟",
+      "DNS服务",
+      "网络抖动",
+      "resolution",
+      "external",
+      "集群内",
+      "端点过期",
+      "DNS",
+      "无Endpoints",
+      "EndpointSlice",
+      "测试",
+      "同步延迟",
+      "cannot resolve",
+      "连接重置",
+      "同命名空间",
+      "服务发现",
+      "规则不一致",
+      "ServiceExport",
+      "无法通信",
+      "访问失败",
+      "NXDOMAIN",
+      "named port",
+      "偶尔超时",
+      "大包传输",
+      "DNS解析",
+      "ExternalName"
+    ],
+    "TC-APP-INGRESS": [
+      "不安全",
+      "404",
+      "gzip",
+      "unavailable",
+      "不生效",
+      "gateway",
+      "端口冲突",
+      "未启用HTTPS",
+      "客户端断开",
+      "HTTPS降级",
+      "TLS",
+      "Ingress",
+      "路由冲突",
+      "Header路由",
+      "websocket",
+      "annotation",
+      "499",
+      "失败",
+      "默认证书",
+      "HTTP",
+      "CRD未安装",
+      "失效",
+      "cookie亲和",
+      "证书到期",
+      "503",
+      "压缩",
+      "握手失败",
+      "Gateway API",
+      "灰度发布",
+      "路径重写",
+      "不兼容",
+      "断连",
+      "路由错误"
+    ],
+    "TC-SEC-CERT": [
+      "证书错误",
+      "TXT记录",
+      "外部Issuer",
+      "证书过期",
+      "证书",
+      "HTTP01",
+      "bootstrap",
+      "CSR",
+      "pending",
+      "certificate",
+      "ACME",
+      "expired",
+      "未签发",
+      "未自动续期",
+      "Aggregator",
+      "证书签发",
+      "client certificate",
+      "30天",
+      "挑战超时",
+      "ClusterIssuer",
+      "solver",
+      "about to expire",
+      "聚合API",
+      "续期失败",
+      "TLS握手失败",
+      "x509",
+      "不完整",
+      "API server",
+      "签名者",
+      "未安装",
+      "serving certificate",
+      "证书链",
+      "Certificate CRD",
+      "被覆盖",
+      "kubelet",
+      "被拒绝",
+      "加入集群",
+      "影响",
+      "集群可用性",
+      "信任验证",
+      "证书签名",
+      "证书即将到期",
+      "DNS01"
+    ],
+    "TC-SEC-RBAC": [
+      "LimitRange",
+      "认证插件",
+      "kubectl exec",
+      "enforce",
+      "can-i",
+      "API Server",
+      "ServiceAccount",
+      "CSI driver",
+      "查询",
+      "过深",
+      "IAM",
+      "ValidatingWebhook",
+      "Kyverno",
+      "ResourceQuota",
+      "授权过大",
+      "MutatingWebhook",
+      "合法",
+      "默认ServiceAccount",
+      "RoleBinding",
+      "范围",
+      "配额",
+      "Gatekeeper",
+      "未使用",
+      "报错",
+      "未生效",
+      "PriorityClass",
+      "资源限制",
+      "权限边界",
+      "Forbidden",
+      "RBAC继承",
+      "RBAC不符",
+      "Namespace quota",
+      "回调失败",
+      "整数溢出",
+      "RBAC",
+      "冲突",
+      "权限传播",
+      "权限不足",
+      "ClusterRoleBinding",
+      "配置错误",
+      "跨命名空间",
+      "权限过大",
+      "启动失败",
+      "阻止",
+      "仍创建",
+      "策略拒绝",
+      "无法创建",
+      "Webhook",
+      "token",
+      "node authorizer",
+      "权限",
+      "修改",
+      "模糊",
+      "OPA",
+      "审计模式",
+      "dry-run",
+      "授权",
+      "exceeded",
+      "不足",
+      "调度异常",
+      "安全"
+    ],
+    "TC-SEC-INCIDENT": [
+      "非法访问",
+      "security",
+      "未加密",
+      "API Server",
+      "ServiceAccount",
+      "出口流量",
+      "命名空间",
+      "dashboard",
+      "敏感端口",
+      "扫描",
+      "Pod",
+      "异常创建",
+      "容器内",
+      "异常进程",
+      "允许",
+      "特权模式",
+      "异常IP",
+      "访问",
+      "数据泄露",
+      "挖矿",
+      "SecurityContext",
+      "容器",
+      "认证失败",
+      "未授权",
+      "privilege escalation",
+      "大量",
+      "/etc/shadow",
+      "异常shell",
+      "Secret",
+      "etcd",
+      "suspicious",
+      "API calls",
+      "Kubernetes",
+      "CPU异常",
+      "安全",
+      "恶意进程",
+      "入侵",
+      "root用户",
+      "端口",
+      "token",
+      "审计日志",
+      "违规",
+      "安全事件",
+      "rootfs",
+      "不受信",
+      "隐藏cron",
+      "allowPrivilegeEscalation",
+      "异常Pod",
+      "unauthorized",
+      "access",
+      "ConfigMap",
+      "公网暴露",
+      "安全问题",
+      "拒绝创建",
+      "未设置",
+      "PSA",
+      "audit",
+      "异常",
+      "违反基线",
+      "告警",
+      "挂载",
+      "Falco",
+      "PSP",
+      "根文件系统"
+    ],
+    "TC-INFRA-STORE": [
+      "StorageClass",
+      "驱逐",
+      "生命周期",
+      "一致性检查",
+      "same size",
+      "快照恢复",
+      "调度失败",
+      "CSI driver",
+      "VolumeAttachment",
+      "NFS",
+      "not bound",
+      "挂载失败",
+      "参数错误",
+      "卷",
+      "Released",
+      "扩容失败",
+      "重启Pod",
+      "snapshotter",
+      "节点",
+      "写入异常",
+      "CSI ephemeral",
+      "删除卡住",
+      "内存不足",
+      "存储卷",
+      "数据不一致",
+      "共享存储",
+      "在线扩容",
+      "空间不足",
+      "CSI",
+      "数据卷",
+      "storage class",
+      "信号占用",
+      "resize",
+      "卡住",
+      "拓扑限制",
+      "LocalPV",
+      "mount.recursive",
+      "失败",
+      "emptyDir",
+      "无响应",
+      "数据丢失",
+      "超时",
+      "CRD",
+      "PV",
+      "Pending",
+      "RWO",
+      "存储",
+      "拓扑感知",
+      "挂载超时",
+      "未找到",
+      "调度错误",
+      "PVC",
+      "配置",
+      "写入",
+      "云盘",
+      "多个Pod",
+      "只读",
+      "跨可用区",
+      "同时挂载",
+      "区域不匹配"
+    ],
+    "TC-APP-WORKLOAD": [
+      "阻止驱逐",
+      "重复执行",
+      "调度失败",
+      "僵尸Pod",
+      "API",
+      "数据未清理",
+      "命令成功",
+      "回滚失败",
+      "驱逐失败",
+      "滚动更新",
+      "资源浪费",
+      "Pod",
+      "drain",
+      "时间异常",
+      "rollout stuck",
+      "并发策略",
+      "PVC残留",
+      "删除卡住",
+      "DaemonSet",
+      "不生效",
+      "scale",
+      "并发冲突",
+      "scheduled time",
+      "PDBs阻止",
+      "Deployment",
+      "Job并发",
+      "卡住",
+      "少于期望",
+      "Job",
+      "maxSurge",
+      "副本数未变",
+      "rollout undo",
+      "Pod未清理",
+      "CronJob",
+      "失败",
+      "cordon",
+      "StatefulSet",
+      "concurrency-forbid",
+      "新节点",
+      "未执行",
+      "Job残留",
+      "历史丢失",
+      "PDB",
+      "PDB拒绝",
+      "paused",
+      "副本数不一致",
+      "数量超限",
+      "等待",
+      "竞争",
+      "仍在运行",
+      "时区不一致",
+      "标记后",
+      "历史ReplicaSet",
+      "ReplicaSet",
+      "new pods",
+      "rollout status",
+      "有序部署",
+      "过多",
+      "PVC保护",
+      "Eviction",
+      "新Pod调度",
+      "未清理",
+      "数据库锁"
+    ],
+    "TC-INFRA-SCALE": [
+      "Karpenter",
+      "AWS API",
+      "节点池",
+      "Autoscaler",
+      "无法扩展",
+      "ScaledObject",
+      "震荡",
+      "推荐值",
+      "KEDA",
+      "VPA",
+      "HPA",
+      "资源震荡",
+      "资源释放",
+      "卡住",
+      "指标失败",
+      "扩展删除",
+      "差距过大",
+      "指标正常",
+      "scale down",
+      "metric",
+      "scaling failed",
+      "未执行",
+      "未触发",
+      "Pod调度",
+      "监控指标",
+      "副本数不调",
+      "禁用标记",
+      "限流",
+      "缺失",
+      "scale-down"
+    ],
+    "TC-INFRA-CP": [
+      "损坏",
+      "etcd选主",
+      "Scheduler",
+      "API Server",
+      "rate limit",
+      "调度失败",
+      "etcd watch reset",
+      "状态不一致",
+      "low",
+      "etcd member",
+      "WAL fsync",
+      "磁盘I/O",
+      "CRUD失败",
+      "too many",
+      "排序异常",
+      "堆积",
+      "内存增长",
+      "不匹配",
+      "api-resources",
+      "资源准确",
+      "延迟过高",
+      "数量不符",
+      "空间不足",
+      "资源版本",
+      "disk space",
+      "持续重启",
+      "调度队列",
+      "热点节点",
+      "etcd",
+      "Kube-apiserver",
+      "集群",
+      "secure port",
+      "无法监听",
+      "等待调度",
+      "无法处理",
+      "watch事件",
+      "死循环",
+      "5xx",
+      "cluster id",
+      "过旧",
+      "Controller Manager",
+      "写入超时",
+      "资源",
+      "移除未清理",
+      "调度不均",
+      "API server",
+      "日志",
+      "get events",
+      "etcd快照",
+      "时间",
+      "异常",
+      "wal日志",
+      "数据库告警",
+      "积压",
+      "恢复后",
+      "不健康"
+    ],
+    "TC-INFRA-UPGRADE": [
+      "损坏",
+      "升级后",
+      "升级失败",
+      "kubelet",
+      "无法启动",
+      "etcd"
+    ],
+    "TC-APP-CONFIG": [
+      "未读取",
+      "替换失败",
+      "subpath",
+      "环境变量",
+      "配置变更",
+      "挂载失败",
+      "key不存在",
+      "未生效",
+      "滚动重启",
+      "编码问题",
+      "静默更新",
+      "base64",
+      "注解",
+      "Secret",
+      "无法读取",
+      "启动失败",
+      "更新无效",
+      "patch",
+      "旧值",
+      "replace",
+      "注入失败",
+      "volume权限",
+      "特殊字符",
+      "JSON patch",
+      "ConfigMap",
+      "不存在的key",
+      "annotate",
+      "uid不匹配",
+      "挂载",
+      "动态更新",
+      "格式错误"
+    ],
+    "TC-APP-SVC": [
+      "Endpoints",
+      "集群外",
+      "Session Affinity",
+      "流量镜像",
+      "DNS异常",
+      "mTLS",
+      "未生效",
+      "金丝雀",
+      "ClientIP",
+      "失败",
+      "sidecar",
+      "无效",
+      "topologyKeys",
+      "Service mesh",
+      "未同步",
+      "分布不均",
+      "注入失败",
+      "label",
+      "双向认证",
+      "mesh",
+      "异常",
+      "ExternalName",
+      "流量比例"
+    ],
+    "TC-DATA-DB": [
+      "日志延迟",
+      "Alertmanager",
+      "抑制规则",
+      "Fluentd",
+      "主从复制",
+      "写入阻塞",
+      "日志丢失",
+      "exhausted",
+      "不生效",
+      "缓冲区满",
+      "中断",
+      "Elasticsearch",
+      "慢SQL",
+      "kube-state-metrics",
+      "PostgreSQL",
+      "MySQL",
+      "database",
+      "Prometheus",
+      "抓取失败",
+      "connection pool",
+      "查询缓慢"
+    ],
+    "TC-DATA-CACHE": [
+      "Redis",
+      "内存耗尽",
+      "slot迁移",
+      "集群不可用",
+      "OOM"
+    ],
+    "TC-DATA-MQ": [
+      "Kafka",
+      "消费者lag",
+      "消息积压",
+      "RabbitMQ",
+      "队列不可用",
+      "新连接"
+    ],
+    "TC-DATA-BACKUP": [
+      "restore",
+      "校验失败",
+      "快照损坏",
+      "无法恢复",
+      "卡住",
+      "Velero"
+    ]
+  },
+  "intent_corpus_stats": {
+    "total_intents": 729,
+    "categories": [
+      "TC-INFRA-NODE",
+      "TC-APP-POD",
+      "TC-INFRA-NET",
+      "TC-APP-INGRESS",
+      "TC-SEC-CERT",
+      "TC-SEC-RBAC",
+      "TC-SEC-INCIDENT",
+      "TC-INFRA-STORE",
+      "TC-APP-WORKLOAD",
+      "TC-INFRA-SCALE",
+      "TC-INFRA-CP",
+      "TC-INFRA-UPGRADE",
+      "TC-APP-CONFIG",
+      "TC-APP-SVC",
+      "TC-DATA-DB",
+      "TC-DATA-CACHE",
+      "TC-DATA-MQ",
+      "TC-DATA-BACKUP"
+    ]
+  }
+}

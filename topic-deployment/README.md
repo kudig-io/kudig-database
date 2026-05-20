@@ -1,3 +1,36 @@
+---
+title: Kubernetes 部署方案指南 (Deployment Guide)
+description: '# Kubernetes 部署方案指南 (Deployment Guide)'
+category: deployment
+tags:
+- k8s
+- deployment
+- rolling-update
+- etcd
+- prometheus
+- grafana
+- helm
+- argocd
+- docker
+- harbor
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 部署方案指南 (Deployment Guide) 是什么
+- 如何 Kubernetes 部署方案指南 (Deployment Guide)
+trigger_keywords:
+- Kubernetes
+- 部署方案指南
+- Deployment
+- Guide
+- deployment
+---
+
 # Kubernetes 部署方案指南 (Deployment Guide)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档类型**: 部署方案汇总 | **最后更新**: 2025-01

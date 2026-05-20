@@ -1,3 +1,47 @@
+---
+title: 25 - LLM可观测性与监控体系
+description: '# 25 - LLM可观测性与监控体系'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- grafana
+- elasticsearch
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM可观测性与监控体系 是什么
+- 如何 LLM可观测性与监控体系
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- LLM可观测性与监控体系
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 25 - LLM可观测性与监控体系
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Prometheus](https://prometheus.io/) | [OpenTelemetry](https://opentelemetry.io/) | [Grafana](https://grafana.com/) | [Elasticsearch](https://www.elastic.co/)

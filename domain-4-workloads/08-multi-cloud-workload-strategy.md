@@ -1,3 +1,51 @@
+---
+title: 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
+description: '# 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- controller-manager
+- istio
+- argocd
+- opa
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy) 是什么
+- 如何 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 多云混合部署工作负载管理策略
+- Multi-Cloud
+- Hybrid
+- Deployment
+- Workload
+- Strategy
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Federation](https://github.com/kubernetes-sigs/kubefed)

@@ -1,3 +1,52 @@
+---
+title: 71 - Gateway API配置
+description: '# 71 - Gateway API配置'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- istio
+- envoy
+- helm
+- gateway
+- crd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Gateway API配置 是什么
+- 如何 Gateway API配置
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Gateway
+- API配置
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/gateway-api-fta.md
+  label: '故障树: gateway-api'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # 71 - Gateway API配置
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)

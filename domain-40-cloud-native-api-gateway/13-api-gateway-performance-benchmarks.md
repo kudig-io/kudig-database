@@ -1,3 +1,40 @@
+---
+title: 13 - API 网关性能基准测试与调优
+description: '│ L2: 单插件        │ 仅 JWT 认证 / 仅限流，隔离单插件开销          │'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- kubelet
+- prometheus
+- istio
+- cilium
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API 网关性能基准测试与调优 是什么
+- 如何 API 网关性能基准测试与调优
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- API
+- 网关性能基准测试与调优
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 13 - API 网关性能基准测试与调优
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.27+ | **更新日期**: 2026-03-04 | **关键词**: 性能, 基准测试, wrk2, fortio, QPS, 延迟, 调优

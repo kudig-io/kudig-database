@@ -1,3 +1,32 @@
+---
+title: 硬件错误码速查大全
+description: '## 概述'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 硬件错误码速查大全 是什么
+- 如何 硬件错误码速查大全
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 硬件错误码速查大全
+- hardware
+---
+
+
 # 硬件错误码速查大全
 
 ## 概述

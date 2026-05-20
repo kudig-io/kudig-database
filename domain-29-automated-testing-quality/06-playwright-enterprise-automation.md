@@ -1,3 +1,40 @@
+---
+title: Playwright Enterprise Automation Testing 深度实践
+description: '# Playwright Enterprise Automation Testing 深度实践'
+category: automated-testing-quality
+tags:
+- k8s
+- testing
+- quality
+- automation
+- hpa
+- job
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- QA 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Playwright Enterprise Automation Testing 深度实践 是什么
+- 如何 Playwright Enterprise Automation Testing 深度实践
+- Kubernetes 29 automated testing quality 最佳实践
+trigger_keywords:
+- Playwright
+- Enterprise
+- Automation
+- Testing
+- 深度实践
+- automated
+- testing
+- quality
+---
+
+
 # Playwright Enterprise Automation Testing 深度实践
 
 > **Author**: Test Automation Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

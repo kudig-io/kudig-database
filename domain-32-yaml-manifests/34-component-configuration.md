@@ -1,3 +1,41 @@
+---
+title: 34. Kubernetes 组件配置（Component Configuration）
+description: '# 34. Kubernetes 组件配置（Component Configuration）'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- etcd
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- cilium
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 40min
+intent_queries:
+- 34. Kubernetes 组件配置（Component Configuration） 是什么
+- 如何 34. Kubernetes 组件配置（Component Configuration）
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- '34.'
+- Kubernetes
+- 组件配置
+- Component
+- Configuration
+- yaml
+- manifests
+---
+
+
 # 34. Kubernetes 组件配置（Component Configuration）
 
 > **适用版本**：Kubernetes v1.25 – v1.32 | **文档日期**：2026-02

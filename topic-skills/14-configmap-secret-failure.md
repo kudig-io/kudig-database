@@ -1,67 +1,75 @@
 ---
-skill_id: "SKILL-CONFIG-001"
-skill_name: "ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting"
-version: "1.0"
-category: "configuration"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Immutable ConfigMap/Secret GA since v1.21"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: No config API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-30min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
+description: '# ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting'
+category: configuration
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- helm
+- argocd
+- flux
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 是什么
+- 如何 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 trigger_keywords:
-  - "configmap not found"
-  - "secret not found"
-  - "mount failed configmap"
-  - "environment variable missing"
-  - "config hot reload failed"
-  - "secret decryption error"
-  - "immutable configmap"
-  - "subpath mount"
-  - "external secrets sync failed"
-  - "vault agent inject failed"
-  - "配置未生效"
-  - "环境变量为空"
-  - "配置挂载失败"
-  - "Secret 解密失败"
-  - "配置热更新"
-trigger_events:
-  - "FailedMount"
-  - "CreateContainerConfigError"
-  - "InvalidKeyRef"
-  - "FailedToUpdateEndpoint"
-trigger_metrics:
-  - 'kube_configmap_info'
-  - 'kube_secret_info'
-  - 'externalsecret_status_condition{condition="Ready",status="False"}'
-  - 'kube_pod_container_status_waiting_reason{reason="CreateContainerConfigError"}'
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-SEC-001"
-fta_refs:
-  - "topic-fta/list/config-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/19-configmap-secret-troubleshooting.md"
-  - "domain-7-security/"
-  - "topic-structural-trouble-shooting/"
+- configmap not found
+- secret not found
+- mount failed configmap
+- environment variable missing
+- config hot reload failed
+- secret decryption error
+- immutable configmap
+- subpath mount
+- external secrets sync failed
+- vault agent inject failed
+- 配置未生效
+- 环境变量为空
+- 配置挂载失败
+- Secret 解密失败
+- 配置热更新
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-14
+  category: configuration
+  subcategory: configmap-secret
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl describe pod <name> -n <ns> | grep -E 'ConfigMap|Secret|mount failed' 检查配置挂载错误"
+  critical_commands:
+    - "kubectl get configmap <name> -n <ns>"
+    - "kubectl get secret <name> -n <ns>"
+    - "kubectl describe pod <name> -n <ns> | grep -A 5 'ConfigMap'"
+    - "kubectl logs <pod-name> -n <ns> --previous | grep -E 'config|secret|not found'"
+  danger_operations:
+    - action: "kubectl delete configmap <name> -n <ns> --force"
+      risk: "删除 ConfigMap 会导致引用它的 Pod 配置丢失，可能导致服务中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl describe pod <pod> -n <ns> | grep -E 'ConfigMap.*not found|Secret.*not found|mount failed' 显示配置挂载错误 -->
 
 # ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 

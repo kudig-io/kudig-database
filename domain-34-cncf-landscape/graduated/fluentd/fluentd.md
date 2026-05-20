@@ -1,3 +1,35 @@
+---
+title: Fluentd
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- kafka
+- elasticsearch
+- daemonset
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Fluentd 是什么
+- 如何 Fluentd
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Fluentd
+- cncf
+- landscape
+---
+
+
 # Fluentd
 
 > **成熟度**: Graduated | **加入时间**: 2016-11 | **最后更新**: 2026-03

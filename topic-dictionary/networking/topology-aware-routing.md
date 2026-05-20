@@ -1,3 +1,29 @@
+---
+title: Topology Aware Routing
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Topology Aware Routing 是什么
+- 如何 Topology Aware Routing
+trigger_keywords:
+- Topology
+- Aware
+- Routing
+- dictionary
+title_en: Topology Aware Routing
+---
+
+
 # Topology Aware Routing
 
 ## 概述

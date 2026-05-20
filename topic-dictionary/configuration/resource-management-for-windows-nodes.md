@@ -1,3 +1,34 @@
+---
+title: Resource Management for Windows nodes
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- job
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Resource Management for Windows nodes 是什么
+- 如何 Resource Management for Windows nodes
+trigger_keywords:
+- Resource
+- Management
+- for
+- Windows
+- nodes
+- dictionary
+title_en: Resource Management For Windows Nodes
+---
+
+
 # Resource Management for Windows nodes
 
 ## 概述

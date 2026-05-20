@@ -1,21 +1,78 @@
 ---
-fta_id: "FTA-ISTIO-032"
-title: "Service Mesh(Istio) 异常故障树分析"
-component: "service-mesh-istio"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-ISTIO-001"
-last_updated: "2026-05"
+title: Service Mesh(Istio) 异常故障树分析
+description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- istio
+- service-mesh
+- sidecar
+- xds
+- envoy
+- mtls
+- apiserver
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Service Mesh(Istio) 异常故障树分析 是什么
+- 如何 Service Mesh(Istio) 异常故障树分析
+- Service Mesh(Istio) 异常故障树分析 根因分析
+- Service Mesh(Istio) 异常故障树分析 故障树
+trigger_keywords:
+- Service
+- Mesh
+- Istio
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, istio, service-mesh, sidecar, xds, envoy, mtls]
-related_skills:
-  - "../topic-skills/22-networking.md"
-knowledge_refs:
-  - "../domain-5-networking/01-network-architecture-overview.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md
+  label: '结构化排障: 05-service-mesh-istio-troubleshooting'
+fta_metadata:
+  fta_id: FTA-ISTIO-001
+  top_event: Istio 异常 (控制面不可用/Sidecar 注入失败/xDS 配置异常/mTLS 问题)
+  top_event_id: TE-ISTIO-001
+  bottom_events_count: 22
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get pods -n istio-system -l app=istiod 显示非 Running"
+    - "kubectl get pods -n <ns> -l sidecar-injection=enabled 显示 Sidecar 异常"
+    - "kubectl get envoyfilters,xDestinationRules,VirtualService -A 显示配置异常"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n istio-system -o wide 检查 Istiod 和 Sidecar 状态"
+  critical_commands:
+    - "kubectl get pods -n istio-system -o wide"
+    - "kubectl logs -n istio-system -l app=istiod --tail=100"
+    - "istioctl proxy-status"
+    - "istioctl x ps"
+    - "kubectl get destinationrule,virtualservice -A"
+  danger_operations:
+    - action: "kubectl delete pod -n istio-system -l app=istiod --force"
+      risk: "强制删除 Istiod 会导致所有 Sidecar 配置丢失，影响服务网格"
+      requires_confirmation: true
+    - action: "istioctl x uninstall --purge"
+      risk: "卸载 Istio 会删除所有网格配置，无法恢复"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n istio-system -o jsonpath='{range .items[?(@.status.phase!="Running")]}{.metadata.name}{\"\n\"}{end}' 显示 Istio 控制面异常 -->
 
 # Service Mesh（Istio）异常 FTA 树
 

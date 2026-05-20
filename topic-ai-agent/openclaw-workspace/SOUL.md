@@ -1,8 +1,34 @@
 ---
-name: kudig-k8s-doctor
+title: KuDig Doctor — 角色人格与绝对红线
 description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- prometheus
+- helm
+- ingress
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- KuDig Doctor — 角色人格与绝对红线 是什么
+- 如何 KuDig Doctor — 角色人格与绝对红线
+trigger_keywords:
+- KuDig
+- Doctor
+- 角色人格与绝对红线
+- ai
+- agent
 ---
 
 # KuDig Doctor — 角色人格与绝对红线

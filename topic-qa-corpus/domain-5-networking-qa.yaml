@@ -1,0 +1,382 @@
+domain: domain-5-networking
+total_questions: 80
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 FAQ 文档 中, 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？ 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 的「问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？」章节。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+  section: 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？
+- type: concept
+  question: 在 FAQ 文档 中, 问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？ 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 的「问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？」章节。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+  section: 问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？
+- type: concept
+  question: 在 FAQ 文档 中, 问题3：什么时候需要为 ClusterIP 固定 `clusterIP`？ 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 的「问题3：什么时候需要为 ClusterIP 固定 `clusterIP`？」章节。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+  section: 问题3：什么时候需要为 ClusterIP 固定 `clusterIP`？
+- type: concept
+  question: 在 FAQ 文档 中, 问题4：什么是“拓扑感知路由（Topology Aware Hints）”，能带来什么收益？ 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 的「问题4：什么是“拓扑感知路由（Topology Aware Hints）”，能带来什么收益？」章节。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+  section: 问题4：什么是“拓扑感知路由（Topology Aware Hints）”，能带来什么收益？
+- type: concept
+  question: 在 FAQ 文档 中, 问题5：NodePort 适合生产吗？有哪些典型用途与风险？ 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 的「问题5：NodePort 适合生产吗？有哪些典型用途与风险？」章节。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+  section: 问题5：NodePort 适合生产吗？有哪些典型用途与风险？
+- type: best_practice
+  question: 关于 FAQ 文档, 有什么最佳实践?
+  answer: 需要审计、IP 白名单、真实源 IP 的场景选 `Local`；无源 IP 强需求、追求均衡选 `Cluster`。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+- type: best_practice
+  question: 关于 FAQ 文档, 有什么最佳实践?
+  answer: ACK 优先 Terway；追求 L7 策略与可观测性可考虑 Cilium；需要成熟策略体系可考虑 Calico。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+- type: comparison
+  question: FAQ 文档 中有哪些技术对比?
+  answer: 参见 domain-5-networking/01-network-architecture-overview-faq.md 中的对比分析。
+  source: domain-5-networking/01-network-architecture-overview-faq.md
+- type: concept
+  question: 在 网络核心组件 中, Service 核心类型深度解析 是什么?
+  answer: 参见 domain-5-networking/01-network-architecture-overview.md 的「Service 核心类型深度解析」章节。
+  source: domain-5-networking/01-network-architecture-overview.md
+  section: Service 核心类型深度解析
+- type: comparison
+  question: 网络核心组件 中有哪些技术对比?
+  answer: 参见 domain-5-networking/01-network-architecture-overview.md 中的对比分析。
+  source: domain-5-networking/01-network-architecture-overview.md
+- type: concept
+  question: 在 CNI 架构与核心原理 中, Kubernetes 网络模型 是什么?
+  answer: 参见 domain-5-networking/02-cni-architecture-fundamentals.md 的「Kubernetes 网络模型」章节。
+  source: domain-5-networking/02-cni-architecture-fundamentals.md
+  section: Kubernetes 网络模型
+- type: operation
+  question: '如何执行与 CNI 架构与核心原理 相关的操作: ls -la /etc/cni/net.d/?'
+  answer: 参见 domain-5-networking/02-cni-architecture-fundamentals.md 中的操作步骤。
+  source: domain-5-networking/02-cni-architecture-fundamentals.md
+  command: ls -la /etc/cni/net.d/
+- type: comparison
+  question: CNI 架构与核心原理 中有哪些技术对比?
+  answer: 参见 domain-5-networking/02-cni-architecture-fundamentals.md 中的对比分析。
+  source: domain-5-networking/02-cni-architecture-fundamentals.md
+- type: concept
+  question: 在 Kubernetes Service 核心概念与类型深度解析 中, Service 核心架构 (Architecture Overview) 是什么?
+  answer: 参见 domain-5-networking/06-service-concepts-types.md 的「Service 核心架构 (Architecture Overview)」章节。
+  source: domain-5-networking/06-service-concepts-types.md
+  section: Service 核心架构 (Architecture Overview)
+- type: concept
+  question: 在 Kubernetes Service 核心概念与类型深度解析 中, Service 字段完整参考 (Field Reference) 是什么?
+  answer: 参见 domain-5-networking/06-service-concepts-types.md 的「Service 字段完整参考 (Field Reference)」章节。
+  source: domain-5-networking/06-service-concepts-types.md
+  section: Service 字段完整参考 (Field Reference)
+- type: concept
+  question: 在 77 - Service实现机制 中, kube-proxy模式对比 是什么?
+  answer: 参见 domain-5-networking/07-service-implementation-details.md 的「kube-proxy模式对比」章节。
+  source: domain-5-networking/07-service-implementation-details.md
+  section: kube-proxy模式对比
+- type: concept
+  question: 在 77 - Service实现机制 中, kube-proxy IPVS配置 是什么?
+  answer: 参见 domain-5-networking/07-service-implementation-details.md 的「kube-proxy IPVS配置」章节。
+  source: domain-5-networking/07-service-implementation-details.md
+  section: kube-proxy IPVS配置
+- type: comparison
+  question: 77 - Service实现机制 中有哪些技术对比?
+  answer: 参见 domain-5-networking/07-service-implementation-details.md 中的对比分析。
+  source: domain-5-networking/07-service-implementation-details.md
+- type: concept
+  question: 在 72 - 服务拓扑与端点切片 中, EndpointSlice vs Endpoints 是什么?
+  answer: 参见 domain-5-networking/08-service-topology-aware.md 的「EndpointSlice vs Endpoints」章节。
+  source: domain-5-networking/08-service-topology-aware.md
+  section: EndpointSlice vs Endpoints
+- type: concept
+  question: 在 Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance) 中, Kube-proxy 工作模式对比 是什么?
+  answer: 参见 domain-5-networking/09-kube-proxy-modes-performance.md 的「Kube-proxy 工作模式对比」章节。
+  source: domain-5-networking/09-kube-proxy-modes-performance.md
+  section: Kube-proxy 工作模式对比
+- type: operation
+  question: '如何执行与 Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance) 相关的操作: set -euo pipefail?'
+  answer: 参见 domain-5-networking/09-kube-proxy-modes-performance.md 中的操作步骤。
+  source: domain-5-networking/09-kube-proxy-modes-performance.md
+  command: set -euo pipefail
+- type: comparison
+  question: Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/09-kube-proxy-modes-performance.md 中的对比分析。
+  source: domain-5-networking/09-kube-proxy-modes-performance.md
+- type: comparison
+  question: Service 高级特性与应用案例 (Service Advanced Features) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/10-service-advanced-features.md 中的对比分析。
+  source: domain-5-networking/10-service-advanced-features.md
+- type: operation
+  question: '如何执行与 04 - DNS 服务发现与 CoreDNS 调优 相关的操作: echo "=== CoreDNS 插件工作机制分析 ==="?'
+  answer: 参见 domain-5-networking/11-dns-service-discovery-coredns.md 中的操作步骤。
+  source: domain-5-networking/11-dns-service-discovery-coredns.md
+  command: echo "=== CoreDNS 插件工作机制分析 ==="
+- type: best_practice
+  question: 关于 33 - 服务发现与 DNS 配置 (Service Discovery & DNS), 有什么最佳实践?
+  answer: '- 内部服务为主: ndots=5 (默认)'
+  source: domain-5-networking/12-dns-service-discovery.md
+- type: concept
+  question: 在 53 - CoreDNS 架构与核心原理 (Architecture & Principles) 中, CoreDNS 架构概览 (Architecture Overview) 是什么?
+  answer: 参见 domain-5-networking/13-coredns-architecture-principles.md 的「CoreDNS 架构概览 (Architecture Overview)」章节。
+  source: domain-5-networking/13-coredns-architecture-principles.md
+  section: CoreDNS 架构概览 (Architecture Overview)
+- type: comparison
+  question: 53 - CoreDNS 架构与核心原理 (Architecture & Principles) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/13-coredns-architecture-principles.md 中的对比分析。
+  source: domain-5-networking/13-coredns-architecture-principles.md
+- type: concept
+  question: 在 54 - CoreDNS Corefile 配置详解 (Corefile Configuration) 中, Corefile 语法基础 (Syntax Fundamentals) 是什么?
+  answer: 参见 domain-5-networking/14-coredns-configuration-corefile.md 的「Corefile 语法基础 (Syntax Fundamentals)」章节。
+  source: domain-5-networking/14-coredns-configuration-corefile.md
+  section: Corefile 语法基础 (Syntax Fundamentals)
+- type: concept
+  question: 在 54 - CoreDNS Corefile 配置详解 (Corefile Configuration) 中, Kubernetes 默认配置详解 (Default Configuration) 是什么?
+  answer: 参见 domain-5-networking/14-coredns-configuration-corefile.md 的「Kubernetes 默认配置详解 (Default Configuration)」章节。
+  source: domain-5-networking/14-coredns-configuration-corefile.md
+  section: Kubernetes 默认配置详解 (Default Configuration)
+- type: operation
+  question: '如何执行与 54 - CoreDNS Corefile 配置详解 (Corefile Configuration) 相关的操作: kubectl get configmap coredns -n kube-system
+    -o yaml > cored?'
+  answer: 参见 domain-5-networking/14-coredns-configuration-corefile.md 中的操作步骤。
+  source: domain-5-networking/14-coredns-configuration-corefile.md
+  command: kubectl get configmap coredns -n kube-system -o yaml > coredns-backup.yaml
+- type: comparison
+  question: 54 - CoreDNS Corefile 配置详解 (Corefile Configuration) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/14-coredns-configuration-corefile.md 中的对比分析。
+  source: domain-5-networking/14-coredns-configuration-corefile.md
+- type: concept
+  question: 在 55 - CoreDNS 插件完整参考 (Plugins Reference) 中, 插件分类总览 (Plugin Categories Overview) 是什么?
+  answer: 参见 domain-5-networking/15-coredns-plugins-reference.md 的「插件分类总览 (Plugin Categories Overview)」章节。
+  source: domain-5-networking/15-coredns-plugins-reference.md
+  section: 插件分类总览 (Plugin Categories Overview)
+- type: concept
+  question: 在 55 - CoreDNS 插件完整参考 (Plugins Reference) 中, 数据源插件 (Data Source Plugins) 是什么?
+  answer: 参见 domain-5-networking/15-coredns-plugins-reference.md 的「数据源插件 (Data Source Plugins)」章节。
+  source: domain-5-networking/15-coredns-plugins-reference.md
+  section: 数据源插件 (Data Source Plugins)
+- type: operation
+  question: '如何执行与 55 - CoreDNS 插件完整参考 (Plugins Reference) 相关的操作: kubectl exec -n kube-system deploy/coredns -- coredns -plugi?'
+  answer: 参见 domain-5-networking/15-coredns-plugins-reference.md 中的操作步骤。
+  source: domain-5-networking/15-coredns-plugins-reference.md
+  command: kubectl exec -n kube-system deploy/coredns -- coredns -plugins
+- type: comparison
+  question: 55 - CoreDNS 插件完整参考 (Plugins Reference) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/15-coredns-plugins-reference.md 中的对比分析。
+  source: domain-5-networking/15-coredns-plugins-reference.md
+- type: concept
+  question: 在 01 - NetworkPolicy 深度实践指南 中, 生产环境 NetworkPolicy 设计原则 是什么?
+  answer: 参见 domain-5-networking/16-networkpolicy-deep-practice.md 的「生产环境 NetworkPolicy 设计原则」章节。
+  source: domain-5-networking/16-networkpolicy-deep-practice.md
+  section: 生产环境 NetworkPolicy 设计原则
+- type: comparison
+  question: 83 - 网络加密与mTLS 中有哪些技术对比?
+  answer: 参见 domain-5-networking/18-network-encryption-mtls.md 中的对比分析。
+  source: domain-5-networking/18-network-encryption-mtls.md
+- type: concept
+  question: 在 128 - Ingress Controller 深入剖析 中, Ingress Controller 架构总览 是什么?
+  answer: 参见 domain-5-networking/20-ingress-controller-deep-dive.md 的「Ingress Controller 架构总览」章节。
+  source: domain-5-networking/20-ingress-controller-deep-dive.md
+  section: Ingress Controller 架构总览
+- type: concept
+  question: 在 128 - Ingress Controller 深入剖析 中, 主流 Ingress Controller 全面对比 是什么?
+  answer: 参见 domain-5-networking/20-ingress-controller-deep-dive.md 的「主流 Ingress Controller 全面对比」章节。
+  source: domain-5-networking/20-ingress-controller-deep-dive.md
+  section: 主流 Ingress Controller 全面对比
+- type: comparison
+  question: 128 - Ingress Controller 深入剖析 中有哪些技术对比?
+  answer: 参见 domain-5-networking/20-ingress-controller-deep-dive.md 中的对比分析。
+  source: domain-5-networking/20-ingress-controller-deep-dive.md
+- type: concept
+  question: 在 129 - NGINX Ingress 完整配置指南 中, NGINX Ingress 注解完整参考 是什么?
+  answer: 参见 domain-5-networking/21-nginx-ingress-complete-guide.md 的「NGINX Ingress 注解完整参考」章节。
+  source: domain-5-networking/21-nginx-ingress-complete-guide.md
+  section: NGINX Ingress 注解完整参考
+- type: concept
+  question: 在 130 - Ingress TLS 与证书管理 中, Kubernetes TLS Secret 是什么?
+  answer: 参见 domain-5-networking/22-ingress-tls-certificate.md 的「Kubernetes TLS Secret」章节。
+  source: domain-5-networking/22-ingress-tls-certificate.md
+  section: Kubernetes TLS Secret
+- type: operation
+  question: '如何执行与 130 - Ingress TLS 与证书管理 相关的操作: kubectl create secret tls example-tls \?'
+  answer: 参见 domain-5-networking/22-ingress-tls-certificate.md 中的操作步骤。
+  source: domain-5-networking/22-ingress-tls-certificate.md
+  command: kubectl create secret tls example-tls \
+- type: comparison
+  question: 130 - Ingress TLS 与证书管理 中有哪些技术对比?
+  answer: 参见 domain-5-networking/22-ingress-tls-certificate.md 中的对比分析。
+  source: domain-5-networking/22-ingress-tls-certificate.md
+- type: concept
+  question: 在 131 - Ingress 高级路由与流量管理 中, 金丝雀发布 (Canary Deployment) 是什么?
+  answer: 参见 domain-5-networking/23-ingress-advanced-routing.md 的「金丝雀发布 (Canary Deployment)」章节。
+  source: domain-5-networking/23-ingress-advanced-routing.md
+  section: 金丝雀发布 (Canary Deployment)
+- type: comparison
+  question: 131 - Ingress 高级路由与流量管理 中有哪些技术对比?
+  answer: 参见 domain-5-networking/23-ingress-advanced-routing.md 中的对比分析。
+  source: domain-5-networking/23-ingress-advanced-routing.md
+- type: concept
+  question: 在 133 - Ingress 监控与故障排查 中, Ingress 监控指标 是什么?
+  answer: 参见 domain-5-networking/25-ingress-monitoring-troubleshooting.md 的「Ingress 监控指标」章节。
+  source: domain-5-networking/25-ingress-monitoring-troubleshooting.md
+  section: Ingress 监控指标
+- type: concept
+  question: 在 133 - Ingress 监控与故障排查 中, Grafana Dashboard 是什么?
+  answer: 参见 domain-5-networking/25-ingress-monitoring-troubleshooting.md 的「Grafana Dashboard」章节。
+  source: domain-5-networking/25-ingress-monitoring-troubleshooting.md
+  section: Grafana Dashboard
+- type: operation
+  question: '如何执行与 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization) 相关的操作: ls -la /etc/cni/net.d/?'
+  answer: 参见 domain-5-networking/27-cni-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/27-cni-troubleshooting-optimization.md
+  command: ls -la /etc/cni/net.d/
+- type: operation
+  question: '如何执行与 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization) 相关的操作: kubectl get ippools -o yaml?'
+  answer: 参见 domain-5-networking/27-cni-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/27-cni-troubleshooting-optimization.md
+  command: kubectl get ippools -o yaml
+- type: operation
+  question: '如何执行与 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization) 相关的操作: cat /run/flannel/subnet.env?'
+  answer: 参见 domain-5-networking/27-cni-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/27-cni-troubleshooting-optimization.md
+  command: cat /run/flannel/subnet.env
+- type: comparison
+  question: 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/27-cni-troubleshooting-optimization.md 中的对比分析。
+  source: domain-5-networking/27-cni-troubleshooting-optimization.md
+- type: concept
+  question: 在 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 中, 故障排查流程 (Troubleshooting Workflow) 是什么?
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 的「故障排查流程 (Troubleshooting Workflow)」章节。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+  section: 故障排查流程 (Troubleshooting Workflow)
+- type: concept
+  question: 在 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 中, 常见故障场景 (Common Issues) 是什么?
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 的「常见故障场景 (Common Issues)」章节。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+  section: 常见故障场景 (Common Issues)
+- type: operation
+  question: '如何执行与 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 相关的操作: kubectl get pods -n kube-system -l k8s-app=kube-dns
+    -o wide?'
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+  command: kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+- type: operation
+  question: '如何执行与 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 相关的操作: kubectl rollout restart deployment/coredns
+    -n kube-system?'
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+  command: kubectl rollout restart deployment/coredns -n kube-system
+- type: operation
+  question: '如何执行与 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 相关的操作: kubectl get svc nginx -n default?'
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 中的操作步骤。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+  command: kubectl get svc nginx -n default
+- type: comparison
+  question: 56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/28-coredns-troubleshooting-optimization.md 中的对比分析。
+  source: domain-5-networking/28-coredns-troubleshooting-optimization.md
+- type: concept
+  question: 在 59 - Egress流量管理 中, NetworkPolicy Egress规则 是什么?
+  answer: 参见 domain-5-networking/29-egress-traffic-management.md 的「NetworkPolicy Egress规则」章节。
+  source: domain-5-networking/29-egress-traffic-management.md
+  section: NetworkPolicy Egress规则
+- type: comparison
+  question: 59 - Egress流量管理 中有哪些技术对比?
+  answer: 参见 domain-5-networking/29-egress-traffic-management.md 中的对比分析。
+  source: domain-5-networking/29-egress-traffic-management.md
+- type: comparison
+  question: 03 - 多集群网络联邦与跨集群通信 中有哪些技术对比?
+  answer: 参见 domain-5-networking/31-multi-cluster-federation.md 中的对比分析。
+  source: domain-5-networking/31-multi-cluster-federation.md
+- type: concept
+  question: 在 80 - 多集群网络互联 中, Submariner ServiceExport 是什么?
+  answer: 参见 domain-5-networking/32-multi-cluster-networking.md 的「Submariner ServiceExport」章节。
+  source: domain-5-networking/32-multi-cluster-networking.md
+  section: Submariner ServiceExport
+- type: concept
+  question: 在 80 - 多集群网络互联 中, Cilium Cluster Mesh配置 是什么?
+  answer: 参见 domain-5-networking/32-multi-cluster-networking.md 的「Cilium Cluster Mesh配置」章节。
+  source: domain-5-networking/32-multi-cluster-networking.md
+  section: Cilium Cluster Mesh配置
+- type: concept
+  question: 在 80 - 多集群网络互联 中, Cilium ClusterMesh服务发现 是什么?
+  answer: 参见 domain-5-networking/32-multi-cluster-networking.md 的「Cilium ClusterMesh服务发现」章节。
+  source: domain-5-networking/32-multi-cluster-networking.md
+  section: Cilium ClusterMesh服务发现
+- type: operation
+  question: '如何执行与 80 - 多集群网络互联 相关的操作: curl -Ls https://get.submariner.io | bash?'
+  answer: 参见 domain-5-networking/32-multi-cluster-networking.md 中的操作步骤。
+  source: domain-5-networking/32-multi-cluster-networking.md
+  command: curl -Ls https://get.submariner.io | bash
+- type: concept
+  question: 在 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis) 中, 数据路径概览 (Data Path Overview) 是什么?
+  answer: 参见 domain-5-networking/33-network-troubleshooting.md 的「数据路径概览 (Data Path Overview)」章节。
+  source: domain-5-networking/33-network-troubleshooting.md
+  section: 数据路径概览 (Data Path Overview)
+- type: concept
+  question: 在 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis) 中, 诊断工具箱 (Diagnostic Toolkit) 是什么?
+  answer: 参见 domain-5-networking/33-network-troubleshooting.md 的「诊断工具箱 (Diagnostic Toolkit)」章节。
+  source: domain-5-networking/33-network-troubleshooting.md
+  section: 诊断工具箱 (Diagnostic Toolkit)
+- type: operation
+  question: '如何执行与 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis) 相关的操作: kubectl exec -it netshoot -- nslookup
+    kubernetes.default?'
+  answer: 参见 domain-5-networking/33-network-troubleshooting.md 中的操作步骤。
+  source: domain-5-networking/33-network-troubleshooting.md
+  command: kubectl exec -it netshoot -- nslookup kubernetes.default
+- type: operation
+  question: '如何执行与 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis) 相关的操作: kubectl exec -it netshoot -- ping
+    -c 3 <target-pod-ip>?'
+  answer: 参见 domain-5-networking/33-network-troubleshooting.md 中的操作步骤。
+  source: domain-5-networking/33-network-troubleshooting.md
+  command: kubectl exec -it netshoot -- ping -c 3 <target-pod-ip>
+- type: comparison
+  question: 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis) 中有哪些技术对比?
+  answer: 参见 domain-5-networking/33-network-troubleshooting.md 中的对比分析。
+  source: domain-5-networking/33-network-troubleshooting.md
+- type: concept
+  question: '在 71 - Gateway API配置 中, GAMMA: 服务网格治理标准化 (East-West) 是什么?'
+  answer: '参见 domain-5-networking/35-gateway-api-overview.md 的「GAMMA: 服务网格治理标准化 (East-West)」章节。'
+  source: domain-5-networking/35-gateway-api-overview.md
+  section: 'GAMMA: 服务网格治理标准化 (East-West)'
+- type: concept
+  question: 在 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations) 中, Terway CRD 资源概览 是什么?
+  answer: 参见 domain-5-networking/37-terway-resources-crud-operations.md 的「Terway CRD 资源概览」章节。
+  source: domain-5-networking/37-terway-resources-crud-operations.md
+  section: Terway CRD 资源概览
+- type: operation
+  question: '如何执行与 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations) 相关的操作: kubectl get crd | grep -E ''network.alibabacloud|terway''?'
+  answer: 参见 domain-5-networking/37-terway-resources-crud-operations.md 中的操作步骤。
+  source: domain-5-networking/37-terway-resources-crud-operations.md
+  command: kubectl get crd | grep -E 'network.alibabacloud|terway'
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: 根据节点 Pod 密度设置，通常 20-30
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: max_pool_size 的 30%-50%
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: 大规模集群 (>100 节点) 可调大至 600
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: 如果集群有大镜像/Init 容器较慢，可调大至 300
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: 小集群可保持默认; 大集群 IP 泄漏严重时可临时调大
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: best_practice
+  question: 关于 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism), 有什么最佳实践?
+  answer: 频繁扩缩容场景可调大至 1800 (30 分钟) 减少 ENI 反复创删
+  source: domain-5-networking/38-terway-gc-mechanism.md
+- type: concept
+  question: 在 CSI / CNI 版本兼容矩阵 中, CSI (Container Storage Interface) 版本对照 是什么?
+  answer: 参见 domain-5-networking/39-csi-cni-version-matrix.md 的「CSI (Container Storage Interface) 版本对照」章节。
+  source: domain-5-networking/39-csi-cni-version-matrix.md
+  section: CSI (Container Storage Interface) 版本对照

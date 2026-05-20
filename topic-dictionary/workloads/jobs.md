@@ -1,3 +1,30 @@
+---
+title: Jobs
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Jobs 是什么
+- 如何 Jobs
+trigger_keywords:
+- Jobs
+- dictionary
+title_en: Jobs
+---
+
+
 # Jobs
 
 ## 概述

@@ -1,3 +1,43 @@
+---
+title: 10 - 存储备份与灾难恢复
+description: '# 10 - 存储备份与灾难恢复'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- mysql
+- postgresql
+- statefulset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储备份与灾难恢复 是什么
+- 如何 存储备份与灾难恢复
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储备份与灾难恢复
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 10 - 存储备份与灾难恢复
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 备份策略、灾难恢复、数据保护 | **最后更新**: 2026-02

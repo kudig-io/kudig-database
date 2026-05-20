@@ -1,3 +1,28 @@
+---
+title: Linux 节点安全
+description: '# Linux 节点安全'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Linux 节点安全 是什么
+- 如何 Linux 节点安全
+trigger_keywords:
+- Linux
+- 节点安全
+- dictionary
+title_en: Nodes
+---
+
+
 # Linux 节点安全
 
 ## 概述

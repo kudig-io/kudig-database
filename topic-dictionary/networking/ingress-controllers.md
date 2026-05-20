@@ -1,3 +1,35 @@
+---
+title: Ingress Controllers
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- istio
+- envoy
+- cilium
+- helm
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Ingress Controllers 是什么
+- 如何 Ingress Controllers
+trigger_keywords:
+- Ingress
+- Controllers
+- dictionary
+title_en: Ingress Controllers
+---
+
+
 # Ingress Controllers
 
 ## 概述

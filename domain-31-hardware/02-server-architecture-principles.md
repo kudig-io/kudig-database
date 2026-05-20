@@ -1,3 +1,31 @@
+---
+title: 服务器架构原理
+description: '# 服务器架构原理'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 服务器架构原理 是什么
+- 如何 服务器架构原理
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 服务器架构原理
+- hardware
+---
+
+
 # 服务器架构原理
 
 ## 概述

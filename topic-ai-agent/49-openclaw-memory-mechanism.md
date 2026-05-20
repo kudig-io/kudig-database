@@ -1,3 +1,36 @@
+---
+title: OpenClaw MEMORY.md 机制深度解析
+description: '# OpenClaw MEMORY.md 机制深度解析'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- kubelet
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- OpenClaw MEMORY.md 机制深度解析 是什么
+- 如何 OpenClaw MEMORY.md 机制深度解析
+trigger_keywords:
+- OpenClaw
+- MEMORY.md
+- 机制深度解析
+- ai
+- agent
+---
+
+
 # OpenClaw MEMORY.md 机制深度解析
 
 > **文档类型**: 前沿工程专题 | **最后更新**: 2026-04 | **关键词**: OpenClaw, MEMORY.md, 记忆系统, Persistence 层, 长期记忆, 短期记忆, 新陈代谢, 经验积累

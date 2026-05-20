@@ -1,3 +1,34 @@
+---
+title: K8s 开发者体验工具链指南
+description: '# K8s 开发者体验工具链指南'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- prometheus
+- helm
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- K8s 开发者体验工具链指南 是什么
+- 如何 K8s 开发者体验工具链指南
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- K8s
+- 开发者体验工具链指南
+- edge
+- computing
+---
+
 # K8s 开发者体验工具链指南
 
 > **适用版本**: k9s v0.40 / Headlamp v0.30 / stern v1.31  

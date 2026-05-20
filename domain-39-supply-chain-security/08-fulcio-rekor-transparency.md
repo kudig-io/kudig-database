@@ -1,3 +1,42 @@
+---
+title: Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
+description: '# Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- prometheus
+- helm
+- redis
+- mysql
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 是什么
+- 如何 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- Fulcio
+- Rekor
+- 透明日志
+- Fulcio
+- and
+- Rekor
+- Transparency
+- Logs
+---
+
+
 # Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
 
 ## 概述 (Overview)

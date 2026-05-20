@@ -1,3 +1,64 @@
+---
+title: API Server 性能调优
+description: '## API Server架构'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- kubelet
+- prometheus
+- grafana
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API Server 性能调优 是什么
+- 如何 API Server 性能调优
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- API
+- Server
+- 性能调优
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: fta
+  path: ../topic-fta/list/apiserver-fta.md
+  label: '故障树: apiserver'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # API Server 性能调优
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
@@ -133,6 +194,11 @@ spec:
     - --advertise-address=$(POD_IP)
     - --allow-privileged=true
     - --enable-admission-plugins=NodeRestriction,ResourceQuota,LimitRanger,PodSecurity,ValidatingAdmissionPolicy
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
     - --disable-admission-plugins=PodSecurityPolicy
     
     # ==================== 认证授权 ====================

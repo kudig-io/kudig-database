@@ -1,65 +1,75 @@
 ---
-skill_id: "SKILL-NODE-001"
-skill_name: "节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation"
-version: "1.0"
-category: "node"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Ephemeral Containers GA, Native Sidecar Containers (beta), GracefulNodeShutdown GA"
-  - "v1.29+: PodDisruptionConditions GA, EventedPLEG promoted to beta"
-  - "v1.30+: Node swap support (beta), ValidatingAdmissionPolicy GA"
-  - "v1.31+: VolumeAttributesClass (beta), EventedPLEG GA"
-  - "v1.32+: nftables kube-proxy mode (GA), Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-30min"
-risk_level: "high"
-agent_execution_mode: "L1-advisory"
+title: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+description: '## 1. 概述'
+category: node
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- prometheus
+- cilium
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 30min
+intent_queries:
+- 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 是什么
+- 如何 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 trigger_keywords:
-  - "NotReady"
-  - "NodeNotReady"
-  - "节点不可用"
-  - "节点异常"
-  - "kubelet stopped"
-  - "node unreachable"
-  - "节点不可达"
-  - "NodeStatusUnknown"
-trigger_events:
-  - "NodeNotReady"
-  - "NodeStatusUnknown"
-  - "KubeletNotReady"
-  - "NodeHasDiskPressure"
-  - "NodeHasMemoryPressure"
-  - "NodeHasPIDPressure"
-  - "NodeHasInsufficientMemory"
-trigger_metrics:
-  - 'kube_node_status_condition{condition="Ready",status="false"}'
-  - 'kube_node_status_condition{condition="Ready",status="unknown"}'
-  - 'kube_node_status_condition{condition="MemoryPressure",status="true"}'
-  - 'kube_node_status_condition{condition="DiskPressure",status="true"}'
-  - 'kube_node_status_condition{condition="PIDPressure",status="true"}'
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-SEC-001"
-fta_refs:
-  - "topic-fta/list/node-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-12-troubleshooting/"
-  - "domain-1-architecture-fundamentals/"
+- NotReady
+- NodeNotReady
+- 节点不可用
+- 节点异常
+- kubelet stopped
+- node unreachable
+- 节点不可达
+- NodeStatusUnknown
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-01
+  category: node
+  subcategory: node-status
+  severity: P0
+  time_to_diagnosis_minutes: 10
+  time_to_remediation_minutes: 30
+  escalation_required: true
+  control_plane_impact: true
+agent_notes:
+  decision_tree_entry: "kubectl get nodes 检查节点状态; kubectl describe node <node> 查看详细状态"
+  critical_commands:
+    - "kubectl get nodes -o wide"
+    - "kubectl describe node <node-name>"
+    - "kubectl get events --field-selector involvedObject.kind=Node --sort-by='.lastTimestamp'"
+    - "kubectl get pods -n kube-node-lease -o wide"
+    - "ssh <node> 'journalctl -u kubelet --since \"1 hour ago\" | tail -100'"
+  danger_operations:
+    - action: "kubectl drain node <node-name> --ignore-daemonsets --force"
+      risk: "强制排水会导致 Pod 被驱逐，可能中断服务"
+      requires_confirmation: true
+    - action: "kubectl delete node <node-name> --force"
+      risk: "删除节点会移除节点信息，可能导致集群状态不一致"
+      requires_confirmation: true
+    - action: "kubectl label node <node-name> node.kubernetes.io/exclude-eviction=true"
+      risk: "标记节点为排除驱逐状态后，节点压力不会再触发自动驱逐"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
 
 # 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 

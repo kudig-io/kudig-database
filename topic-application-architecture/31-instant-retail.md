@@ -1,3 +1,50 @@
+---
+title: 即时零售架构设计
+description: '# 即时零售架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- statefulset
+- operator
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 新零售架构师
+- 即时配送技术负责人
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 即时零售 Kubernetes 30分钟达
+- 同城配送 骑手调度 K8s
+- LBS搜索 Redis Geo Kubernetes
+- 前置仓 履约 Kubernetes
+- 即时零售 KEDA 弹性伸缩
+trigger_keywords:
+- 即时零售
+- O2O
+- 同城配送
+- 前置仓
+- LBS
+- 骑手调度
+- 运力调度
+- KEDA
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-7-observability
+related_topics:
+- 50-unmanned-retail
+- 01-ecommerce-architecture
+- 11-smart-retail-architecture
+---
+
+
 # 即时零售架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

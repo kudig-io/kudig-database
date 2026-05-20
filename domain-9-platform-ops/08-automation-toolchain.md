@@ -1,3 +1,50 @@
+---
+title: 运维自动化工具链 (Operations Automation Toolchain)
+description: '# 运维自动化工具链 (Operations Automation Toolchain)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- kubelet
+- prometheus
+- grafana
+- helm
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 运维自动化工具链 (Operations Automation Toolchain) 是什么
+- 如何 运维自动化工具链 (Operations Automation Toolchain)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 运维自动化工具链
+- Operations
+- Automation
+- Toolchain
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 运维自动化工具链 (Operations Automation Toolchain)
 
 ## 概述

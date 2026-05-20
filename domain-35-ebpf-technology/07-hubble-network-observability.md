@@ -1,3 +1,41 @@
+---
+title: Hubble 网络可观测性 (Hubble Network Observability)
+description: '# Hubble 网络可观测性 (Hubble Network Observability)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- apiserver
+- prometheus
+- grafana
+- jaeger
+- envoy
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- Hubble 网络可观测性 (Hubble Network Observability) 是什么
+- 如何 Hubble 网络可观测性 (Hubble Network Observability)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Hubble
+- 网络可观测性
+- Hubble
+- Network
+- Observability
+- ebpf
+- technology
+---
+
+
 # Hubble 网络可观测性 (Hubble Network Observability)
 
 > Hubble 是构建在 Cilium 和 eBPF 之上的完全分布式网络与安全可观测性平台，能够以完全透明的方式深度观测服务通信行为、网络基础设施以及应用层协议。

@@ -1,3 +1,39 @@
+---
+title: API 优先级与公平性 (APF) 故障排查指南
+description: '# API 优先级与公平性 (APF) 故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- API 优先级与公平性 (APF) 故障排查指南 是什么
+- 如何 API 优先级与公平性 (APF) 故障排查指南
+- API 优先级与公平性 (APF) 故障排查指南 故障排查
+- API 优先级与公平性 (APF) 故障排查指南 排障步骤
+trigger_keywords:
+- API
+- 优先级与公平性
+- APF
+- 故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # API 优先级与公平性 (APF) 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级

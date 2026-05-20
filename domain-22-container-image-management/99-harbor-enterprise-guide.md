@@ -1,3 +1,38 @@
+---
+title: Harbor 企业级镜像仓库部署指南
+description: '# Harbor 企业级镜像仓库部署指南'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- helm
+- docker
+- redis
+- postgresql
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Harbor 企业级镜像仓库部署指南 是什么
+- 如何 Harbor 企业级镜像仓库部署指南
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- Harbor
+- 企业级镜像仓库部署指南
+- container
+- image
+- management
+---
+
 # Harbor 企业级镜像仓库部署指南
 
 > **适用版本**: Harbor v2.13.0 / Helm Chart v1.16.0  

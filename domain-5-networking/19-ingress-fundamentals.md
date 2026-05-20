@@ -1,3 +1,56 @@
+---
+title: Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)
+description: '**文档版本**: v3.0 | 生产级 Ingress 配置参考'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- etcd
+- prometheus
+- grafana
+- istio
+- envoy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals) 是什么
+- 如何 Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Kubernetes
+- Ingress
+- 基础概念与核心原理
+- Ingress
+- Fundamentals
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/ingress-fta.md
+  label: '故障树: ingress'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  

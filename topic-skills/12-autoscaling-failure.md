@@ -1,75 +1,77 @@
 ---
-skill_id: "SKILL-SCALE-001"
-skill_name: "HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation"
-version: "1.0"
-category: "scaling"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: HPA v2 stable, containerResource metrics (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: containerResource metrics type GA (HPA)"
-  - "v1.32+: No autoscaling API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
+description: '## 1. 概述'
+category: scaling
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- prometheus
+- helm
+- kafka
+- hpa
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 是什么
+- 如何 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 trigger_keywords:
-  - "HPA not scaling"
-  - "VPA recommendation not applied"
-  - "cluster autoscaler failed"
-  - "node pool scale up failed"
-  - "metrics server unavailable"
-  - "custom metrics missing"
-  - "KEDA scaledobject error"
-  - "scaling delay"
-  - "autoscaler flapping"
-  - "resource fragmentation"
-  - "HPA 不扩容"
-  - "HPA 不缩容"
-  - "VPA 推荐值异常"
-  - "节点池扩容失败"
-  - "自动扩缩容不生效"
-  - "指标获取失败"
-trigger_events:
-  - "FailedGetResourceMetric"
-  - "FailedComputeMetricsReplicas"
-  - "FailedRescale"
-  - "ScaleDown"
-  - "ScaleUp"
-  - "TriggeredScaleUp"
-  - "ScaleDownFailed"
-  - "ScaleUpFailed"
-  - "NotTriggerScaleUp"
-trigger_metrics:
-  - 'kube_horizontalpodautoscaler_status_current_replicas != kube_horizontalpodautoscaler_spec_max_replicas'
-  - 'cluster_autoscaler_unschedulable_pods_count > 0'
-  - 'kube_horizontalpodautoscaler_status_condition{condition="ScalingActive",status="false"}'
-  - 'kube_horizontalpodautoscaler_status_condition{condition="AbleToScale",status="false"}'
-  - 'kube_vpa_status_recommendation == 0'
-related_skills:
-  - "SKILL-POD-002"
-  - "SKILL-NODE-001"
-  - "SKILL-WORK-001"
-fta_refs:
-  - "topic-fta/list/scaling-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/17-hpa-vpa-troubleshooting.md"
-  - "domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.md"
-  - "domain-4-workloads/"
+- HPA not scaling
+- VPA recommendation not applied
+- cluster autoscaler failed
+- node pool scale up failed
+- metrics server unavailable
+- custom metrics missing
+- KEDA scaledobject error
+- scaling delay
+- autoscaler flapping
+- resource fragmentation
+- HPA 不扩容
+- HPA 不缩容
+- VPA 推荐值异常
+- 节点池扩容失败
+- 自动扩缩容不生效
+- 指标获取失败
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-12
+  category: scaling
+  subcategory: hpa-vpa-ca
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 25
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get hpa -A -o wide 检查 HPA 状态; kubectl describe hpa <name> -n <ns> 查看详情"
+  critical_commands:
+    - "kubectl get hpa -A -o wide"
+    - "kubectl describe hpa <name> -n <ns>"
+    - "kubectl top pods -n <ns>"
+    - "kubectl get --raw /apis/metrics.k8s.io/v1beta1/pods"
+    - "kubectl get apiservices | grep metrics"
+  danger_operations:
+    - action: "kubectl delete hpa <name> -n <ns>"
+      risk: "删除 HPA 会停止自动扩缩容，需要确认业务可以手动扩缩"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get hpa -A -o jsonpath='{range .items[?(@.status.currentReplicas != @.status.desiredReplicas)]} {.metadata.namespace}/{.metadata.name}{"\n"}{end}' 显示副本数不匹配 -->
 
 # HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 

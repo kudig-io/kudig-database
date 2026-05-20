@@ -1,3 +1,34 @@
+---
+title: v1.9.11
+description: v1.9.11 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 240min
+intent_queries:
+- v1.9.11 是什么
+- 如何 v1.9.11
+trigger_keywords:
+- v1.9.11
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 - [v1.9.11](#v1911)
   - [Downloads for v1.9.11](#downloads-for-v1911)
@@ -1124,6 +1155,10 @@ Extensibility. SIG API Machinery added a new class of admission control webhooks
 The core workloads API, which is composed of the DaemonSet, Deployment, ReplicaSet, and StatefulSet kinds, has been promoted to GA stability in the apps/v1 group version. As such, the apps/v1beta2 group version is deprecated, and all new code should use the kinds in the apps/v1 group version.
 
 ### Auth
+
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 SIG Auth focused on extension-related authorization improvements. Permissions can now be added to the built-in RBAC admin/edit/view roles using [cluster role aggregation](https://kubernetes.io/docs/admin/authorization/rbac/#aggregated-clusterroles). [Webhook authorizers](https://kubernetes.io/docs/admin/authorization/webhook/) can now deny requests and short-circuit checking subsequent authorizers. Performance and usability of the beta [PodSecurityPolicy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) feature was also improved.
 

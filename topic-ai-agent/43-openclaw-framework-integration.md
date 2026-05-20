@@ -1,3 +1,37 @@
+---
+title: OpenClaw File-First 架构与 Agent Harness 集成指南
+description: '# OpenClaw File-First 架构与 Agent Harness 集成指南'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- OpenClaw File-First 架构与 Agent Harness 集成指南 是什么
+- 如何 OpenClaw File-First 架构与 Agent Harness 集成指南
+trigger_keywords:
+- OpenClaw
+- File-First
+- 架构与
+- Agent
+- Harness
+- 集成指南
+- ai
+- agent
+---
+
+
 # OpenClaw File-First 架构与 Agent Harness 集成指南
 
 > **文档类型**: 前沿工程专题 | **最后更新**: 2026-04 | **关键词**: OpenClaw, File-First Architecture, SOUL.md, USER.md, AGENTS.md, TOOLS.md, SKILL.md, MEMORY.md, IDENTITY.md, Agent Harness, Harness Engineering, K8S 运维 Agent

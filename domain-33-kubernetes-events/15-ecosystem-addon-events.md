@@ -1,3 +1,37 @@
+---
+title: 15 - 生态系统与插件事件
+description: '- [四、cert-manager 证书管理事件](#四cert-manager-证书管理事件)'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- prometheus
+- istio
+- envoy
+- argocd
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- 生态系统与插件事件 是什么
+- 如何 生态系统与插件事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 生态系统与插件事件
+- kubernetes
+- events
+---
+
+
 # 15 - 生态系统与插件事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

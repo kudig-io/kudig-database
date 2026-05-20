@@ -1,3 +1,42 @@
+---
+title: Wasm AI 推理 (Wasm AI Inference)
+description: 通过 WebAssembly 在边缘节点和云原生环境中运行 AI/ML 推理，实现安全、高效、可移植的模型部署。
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- prometheus
+- docker
+- hpa
+- gpu
+- cuda
+- serverless
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Wasm AI 推理 (Wasm AI Inference) 是什么
+- 如何 Wasm AI 推理 (Wasm AI Inference)
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Wasm
+- AI
+- 推理
+- Wasm
+- AI
+- Inference
+- webassembly
+- cloud
+---
+
+
 # Wasm AI 推理 (Wasm AI Inference)
 
 > 通过 WebAssembly 在边缘节点和云原生环境中运行 AI/ML 推理，实现安全、高效、可移植的模型部署。

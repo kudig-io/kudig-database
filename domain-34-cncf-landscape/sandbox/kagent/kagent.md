@@ -1,3 +1,39 @@
+---
+title: Kagent (Kubernetes AI Agent)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- grafana
+- helm
+- rbac
+- crd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kagent (Kubernetes AI Agent) 是什么
+- 如何 Kagent (Kubernetes AI Agent)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Kagent
+- Kubernetes
+- AI
+- Agent
+- cncf
+- landscape
+---
+
 # Kagent (Kubernetes AI Agent)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

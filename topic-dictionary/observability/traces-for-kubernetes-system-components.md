@@ -1,3 +1,34 @@
+---
+title: Kubernetes 系统组件链路追踪
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- containerd
+- cri-o
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 系统组件链路追踪 是什么
+- 如何 Kubernetes 系统组件链路追踪
+trigger_keywords:
+- Kubernetes
+- 系统组件链路追踪
+- dictionary
+title_en: Tracing
+---
+
+
 # Kubernetes 系统组件链路追踪
 
 ## 概述

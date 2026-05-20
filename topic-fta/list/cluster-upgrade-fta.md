@@ -1,20 +1,70 @@
 ---
-fta_id: "FTA-CLUSTER-UPGRADE-006"
-title: "集群升级异常故障树分析"
-component: "cluster-upgrade"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CLUSTER-UPGRADE-001"
-last_updated: "2026-05"
+title: 集群升级异常故障树分析
+description: NODE_KUBELET_OR --> NODE_KUBELET3[kubelet 配置不兼容]
+category: fta
+tags:
+- fta
+- troubleshooting
+- cluster-upgrade
+- kubeadm
+- version-compatibility
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 集群升级异常故障树分析 是什么
+- 如何 集群升级异常故障树分析
+- 集群升级异常故障树分析 根因分析
+- 集群升级异常故障树分析 故障树
+trigger_keywords:
+- 集群升级异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, cluster-upgrade, kubeadm, version-compatibility]
-related_skills: []
-knowledge_refs:
-  - "../domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md"
+- name: KUDIG Team
+  role: contributor
+fta_metadata:
+  fta_id: FTA-UPGRADE-001
+  top_event: 集群升级异常 (升级失败/版本不兼容/回滚失败)
+  top_event_id: TE-UPGRADE-001
+  bottom_events_count: 24
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubeadm upgrade plan 显示版本兼容性问题"
+    - "kubectl get nodes 显示 NotReady 状态"
+    - "kubectl get pods -n kube-system 显示控制面组件异常"
+agent_notes:
+  decision_tree_entry: "kubectl get nodes -o wide 检查集群节点状态和版本"
+  critical_commands:
+    - "kubectl get nodes -o wide"
+    - "kubeadm upgrade plan"
+    - "kubectl get pods -n kube-system -o wide"
+    - "journalctl -u kubelet --since '1 hour ago' | tail -100"
+  danger_operations:
+    - action: "kubeadm upgrade apply --force"
+      risk: "强制升级可能跳过兼容性检查，导致集群不稳定"
+      requires_confirmation: true
+    - action: "kubectl drain node <name> --ignore-daemonsets --force"
+      risk: "强制排水会导致 Pod 被驱逐，可能中断服务"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].name)]} {.}{"\n"}{end}' 显示有 NotReady 节点 -->
 
 # 集群升级异常 FTA 树
 

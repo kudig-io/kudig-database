@@ -1,3 +1,32 @@
+---
+title: Connect RPC
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Connect RPC 是什么
+- 如何 Connect RPC
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Connect
+- RPC
+- cncf
+- landscape
+---
+
+
 # Connect RPC
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

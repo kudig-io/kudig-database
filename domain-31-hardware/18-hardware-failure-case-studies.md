@@ -1,3 +1,36 @@
+---
+title: 硬件故障实战案例库
+description: '## 概述'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 硬件故障实战案例库 是什么
+- 如何 硬件故障实战案例库
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 硬件故障实战案例库
+- hardware
+---
+
+
 # 硬件故障实战案例库
 
 ## 概述

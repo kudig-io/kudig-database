@@ -1,3 +1,33 @@
+---
+title: 日志架构（Logging Architecture）
+description: '# 日志架构（Logging Architecture）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- daemonset
+- agent
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 日志架构（Logging Architecture） 是什么
+- 如何 日志架构（Logging Architecture）
+trigger_keywords:
+- 日志架构
+- Logging
+- Architecture
+- dictionary
+title_en: Logging
+---
+
+
 # 日志架构（Logging Architecture）
 
 ## 概述

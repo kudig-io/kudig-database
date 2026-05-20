@@ -1,3 +1,47 @@
+---
+title: AI模型注册中心与版本管理
+description: '# AI模型注册中心与版本管理'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- grafana
+- minio
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AI模型注册中心与版本管理 是什么
+- 如何 AI模型注册中心与版本管理
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- AI模型注册中心与版本管理
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # AI模型注册中心与版本管理
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [MLflow Model Registry](https://mlflow.org/docs/latest/model-registry.html) | [ModelMesh](https://github.com/kserve/modelmesh-serving)

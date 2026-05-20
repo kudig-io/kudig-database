@@ -1,3 +1,37 @@
+---
+title: 11 - 存储与卷事件
+description: '# 11 - 存储与卷事件'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- controller-manager
+- prometheus
+- helm
+- ceph
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- 存储与卷事件 是什么
+- 如何 存储与卷事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 存储与卷事件
+- kubernetes
+- events
+---
+
+
 # 11 - 存储与卷事件
 
 > **适用版本**: Kubernetes v1.25 - v1.33 | **最后更新**: 2026-05 | **作者**: Allen Galler

@@ -1,22 +1,87 @@
 ---
-fta_id: "FTA-POD-026"
-title: "Pod 异常故障树分析"
-component: "pod"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-POD-001"
-last_updated: "2026-05"
+title: Pod 异常故障树分析
+description: '- **范围**：以 Kubernetes Pod 生命周期为主线，包含调度、镜像、运行时、健康检查、网络、存储、资源配额、安全策略、节点与控制面等因素。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- pod
+- scheduling
+- image
+- runtime
+- network
+- storage
+- etcd
+- apiserver
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- Pod 异常故障树分析 是什么
+- 如何 Pod 异常故障树分析
+- Pod 异常故障树分析 根因分析
+- Pod 异常故障树分析 故障树
+trigger_keywords:
+- Pod
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, pod, scheduling, image, runtime, network, storage]
-related_skills:
-  - "../topic-skills/05-pod.md"
-knowledge_refs:
-  - "../domain-4-workloads/01-pod-lifecycle.md"
-  - "../domain-12-troubleshooting/04-workload-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/11-pod-lifecycle-events.md
+  label: '深度文档: 11-pod-lifecycle-events'
+- type: skill
+  path: ../topic-skills/02-pod-crashloop-oomkilled.md
+  label: '运维技能: 02-pod-crashloop-oomkilled'
+- type: skill
+  path: ../topic-skills/03-pod-pending.md
+  label: '运维技能: 03-pod-pending'
+- type: structural
+  path: ../topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md
+  label: '结构化排障: 01-pod-troubleshooting'
+- type: structural
+  path: ../topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md
+  label: '结构化排障: 03-pod-security-troubleshooting'
+fta_metadata:
+  fta_id: FTA-POD-001
+  top_event: Pod 异常 (Pending/CrashLoop/OOM/网络/存储/安全)
+  top_event_id: TE-POD-001
+  bottom_events_count: 40
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get pods -A --field-selector=status.phase!=Running 显示异常 Pod"
+    - "kubectl describe pod <name> -n <ns> | grep -E 'Failed|Warning|Error' 显示异常事件"
+    - "应用日志显示连接失败或进程退出"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -A -o wide | grep -v Running 检查所有非 Running Pod"
+  critical_commands:
+    - "kubectl get pods -A -o wide"
+    - "kubectl describe pod <name> -n <ns>"
+    - "kubectl logs <name> -n <ns> --tail=100"
+    - "kubectl get events -A --field-selector involvedObject.name=<pod>,involvedObject.namespace=<ns>"
+  danger_operations:
+    - action: "kubectl delete pod <name> -n <ns> --force"
+      risk: "强制删除会导致 Pod 重建，可能丢失状态或中断服务"
+      requires_confirmation: true
+    - action: "kubectl exec -n <ns> <pod> -- rm -rf /data/*"
+      risk: "删除容器内数据会导致不可逆的数据丢失"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\"Running\")]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示异常 Pod -->
 
 # Pod 异常 FTA 树
 

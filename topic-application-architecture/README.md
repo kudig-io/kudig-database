@@ -1,3 +1,55 @@
+---
+title: Topic 应用层架构设计最佳实践
+description: '# Topic: 应用层架构设计最佳实践'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- scheduler
+- jaeger
+- istio
+- cilium
+- helm
+- argocd
+- falco
+last_updated: 2026-05-18
+difficulty: beginner
+reading_level: beginner
+audience:
+- 架构师
+- SRE
+- DevOps
+- 技术负责人
+estimated_read_time: 10min
+intent_queries:
+- Kubernetes 应用架构设计 行业场景
+- 阿里云 K8s 解决方案 电商游戏
+- 应用层架构 Mermaid 图 K8s YAML
+- 阿里云 ACK 生产架构 参考
+- 云原生架构设计 最佳实践
+trigger_keywords:
+- 应用架构
+- Kubernetes
+- 阿里云
+- 电商
+- 游戏
+- 教育
+- 金融
+- IoT
+- AI
+- 生产架构
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+related_topics:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+---
+
+
 # Topic: 应用层架构设计最佳实践
 
 > **文档数量**: 90 篇  

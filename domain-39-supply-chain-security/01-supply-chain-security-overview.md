@@ -1,3 +1,42 @@
+---
+title: 供应链安全概述 (Supply Chain Security Overview)
+description: '# 供应链安全概述 (Supply Chain Security Overview)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- docker
+- harbor
+- opa
+- kafka
+- elasticsearch
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 供应链安全概述 (Supply Chain Security Overview) 是什么
+- 如何 供应链安全概述 (Supply Chain Security Overview)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- 供应链安全概述
+- Supply
+- Chain
+- Security
+- Overview
+- supply
+- chain
+- security
+---
+
+
 # 供应链安全概述 (Supply Chain Security Overview)
 
 > 软件供应链安全是现代云原生应用程序安全的核心支柱，涵盖从代码提交到生产部署的完整生命周期保护。

@@ -1,21 +1,72 @@
 ---
-fta_id: "FTA-HPA-018"
-title: "HPA 异常故障树分析"
-component: "hpa"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-HPA-001"
-last_updated: "2026-05"
+title: HPA 异常故障树分析
+description: ALG_OR --> ALG1[阈值配置不当]
+category: fta
+tags:
+- fta
+- troubleshooting
+- hpa
+- horizontal-pod-autoscaler
+- metrics-server
+- apiserver
+- kubelet
+- controller-manager
+- prometheus
+- pdb
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- HPA 异常故障树分析 是什么
+- 如何 HPA 异常故障树分析
+- HPA 异常故障树分析 根因分析
+- HPA 异常故障树分析 故障树
+trigger_keywords:
+- HPA
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, hpa, horizontal-pod-autoscaler, metrics-server]
-related_skills:
-  - "../topic-skills/19-scaling.md"
-knowledge_refs:
-  - "../domain-4-workloads/19-auto-scaling.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/21-hpa-vpa-autoscaling.md
+  label: '深度文档: 21-hpa-vpa-autoscaling'
+fta_metadata:
+  fta_id: FTA-HPA-001
+  top_event: HPA 异常 (扩缩容失效/指标不可用/震荡)
+  top_event_id: TE-HPA-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get hpa -A -o wide 显示 Target 指标异常"
+    - "HPA 副本数一直卡在 minReplicas 不扩展"
+    - "kubectl top pods 显示指标为 <unknown>"
+agent_notes:
+  decision_tree_entry: "kubectl get hpa -A 检查 HPA 状态; kubectl describe hpa <name> -n <ns> 查看详情"
+  critical_commands:
+    - "kubectl get hpa -A -o wide"
+    - "kubectl describe hpa <name> -n <ns>"
+    - "kubectl top pods -n <ns>"
+    - "kubectl get --raw /apis/metrics.k8s.io/v1beta1/pods"
+  danger_operations:
+    - action: "kubectl delete hpa <name> -n <ns>"
+      risk: "删除 HPA 会停止自动扩缩容，需要确认业务可以手动扩缩"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get hpa -A -o jsonpath='{range .items[?(@.status.currentReplicas != @.status.desiredReplicas)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示副本数不匹配 -->
 
 # HPA 异常 FTA 树
 

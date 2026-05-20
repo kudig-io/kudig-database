@@ -1,3 +1,46 @@
+---
+title: 14 - 服务网格与微服务架构设计
+description: '# 14 - 服务网格与微服务架构设计'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- prometheus
+- jaeger
+- istio
+- envoy
+- cilium
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 服务网格与微服务架构设计 是什么
+- 如何 服务网格与微服务架构设计
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 服务网格与微服务架构设计
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
+
+
 # 14 - 服务网格与微服务架构设计
 
 ## 资深视点：从 Sidecar 到 Ambient 的架构跃迁

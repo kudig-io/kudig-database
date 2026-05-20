@@ -1,3 +1,36 @@
+---
+title: cilium v0.9 Release Notes
+description: cilium v0.9 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- cilium
+- docker
+- daemonset
+- ingress
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- cilium v0.9 Release Notes 是什么
+- 如何 cilium v0.9 Release Notes
+trigger_keywords:
+- cilium
+- v0.9
+- Release
+- Notes
+- release
+- notes
+---
+
 # cilium v0.9 Release Notes
 
 Source: [v0.9.0](https://github.com/cilium/cilium/releases/tag/v0.9.0)

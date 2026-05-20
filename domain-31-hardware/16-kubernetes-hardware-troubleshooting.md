@@ -1,3 +1,39 @@
+---
+title: Kubernetes 运维硬件故障排查专题
+description: '# Kubernetes 运维硬件故障排查专题'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- etcd
+- kubelet
+- prometheus
+- containerd
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 运维硬件故障排查专题 是什么
+- 如何 Kubernetes 运维硬件故障排查专题
+- Kubernetes 31 hardware 最佳实践
+- Kubernetes 运维硬件故障排查专题 故障排查
+- Kubernetes 运维硬件故障排查专题 排障步骤
+trigger_keywords:
+- Kubernetes
+- 运维硬件故障排查专题
+- hardware
+---
+
+
 # Kubernetes 运维硬件故障排查专题
 
 ## 概述

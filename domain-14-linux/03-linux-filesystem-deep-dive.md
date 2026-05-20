@@ -1,3 +1,40 @@
+---
+title: 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
+description: '# 03 - Linux 文件系统深度解析：生产环境存储管理专家指南'
+category: linux
+tags:
+- linux
+- system
+- kernel
+- kubelet
+- containerd
+- docker
+- ceph
+- mysql
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 运维工程师
+- SRE
+- 系统管理员
+estimated_read_time: 5min
+intent_queries:
+- Linux 文件系统深度解析：生产环境存储管理专家指南 是什么
+- 如何 Linux 文件系统深度解析：生产环境存储管理专家指南
+- Kubernetes 14 linux 最佳实践
+trigger_keywords:
+- Linux
+- 文件系统深度解析：生产环境存储管理专家指南
+- linux
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/linux.md
+  label: '速查卡: linux'
+---
+
+
 # 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
 
 > **适用版本**: Linux Kernel 5.x/6.x | **最后更新**: 2026-02 | **作者**: Allen Galler (allengaller@gmail.com)
@@ -700,8 +737,231 @@ esac
 
 ---
 
+## 与 Kubernetes 的关系
+
+### 容器存储 (Container Storage)
+
+Kubernetes 的容器存储建立在 Linux 文件系统之上，理解底层原理对于排查存储问题至关重要。
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    K8s 容器存储架构                               │
+│                                                                  │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                    Pod                                    │  │
+│  │  ┌──────────────┐  ┌──────────────┐                     │  │
+│  │  │  Container 1  │  │  Container 2  │                     │  │
+│  │  │  /app/data ←─┼──┼─→ /shared     │  ← Volume Mount    │  │
+│  │  └──────────────┘  └──────────────┘                     │  │
+│  └──────────────────────────────────────────────────────────┘  │
+│                           │                                      │
+│  ┌────────────────────────┴─────────────────────────────────┐  │
+│  │                  Volume 抽象层                             │  │
+│  │  emptyDir │ hostPath │ PVC │ ConfigMap │ Secret            │  │
+│  └────────────────────────┬─────────────────────────────────┘  │
+│                           │                                      │
+│  ┌────────────────────────┴─────────────────────────────────┐  │
+│  │                  PV / StorageClass                         │  │
+│  │  NFS │ iSCSI │ Ceph RBD │ Local PV │ Cloud EBS             │  │
+│  └────────────────────────┬─────────────────────────────────┘  │
+│                           │                                      │
+│  ┌────────────────────────┴─────────────────────────────────┐  │
+│  │              Linux 存储栈                                  │  │
+│  │  OverlayFS (容器层) → ext4/xfs (主机文件系统) → 块设备     │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### OverlayFS 与容器存储
+
+```bash
+# 查看 Kubernetes 使用的 overlay 挂载
+mount | grep overlay
+
+# containerd 的 overlay 目录
+/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/
+
+# 查看 overlay 层数
+docker inspect <image> --format '{{len .RootFS.Layers}}'
+
+# overlay2 的磁盘使用
+du -sh /var/lib/docker/overlay2/
+docker system df -v
+```
+
+### inode 耗尽问题
+
+inode 耗尽是 Kubernetes 集群中常见的存储问题，特别是日志量大的场景：
+
+```bash
+# 检查 inode 使用
+df -i
+
+# inode 耗尽的症状:
+# - "No space left on device" 但 df -h 显示有空间
+# - 无法创建新文件
+# - Pod 无法启动
+
+# 常见原因和解决方案:
+# 1. 容器日志文件过多
+find /var/log/containers/ -type f | wc -l
+# 解决: 配置日志轮转
+cat > /etc/docker/daemon.json << 'EOF'
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+EOF
+
+# 2. 已删除但被进程占用的文件
+lsof +L1 | grep deleted
+# 解决: 重启占用文件的进程
+
+# 3. 小文件过多 (大量 ConfigMap/Secret 挂载)
+find /var/lib/kubelet/pods/ -type f | wc -l
+```
+
+---
+
+## 性能调优
+
+### 文件系统性能优化
+
+```bash
+# 挂载参数优化
+# 数据库
+mount -o noatime,nodiratime,data=ordered,barrier=1 /dev/sdb1 /data
+
+# 容器存储
+mount -o noatime,nodiratime,logbufs=8,logbsize=256k /dev/sdb1 /var/lib/containerd
+
+# 日志存储
+mount -o noatime,nodiratime,data=writeback,commit=30 /dev/sdc1 /var/log
+
+# 调整文件系统预留空间
+tune2fs -m 1 /dev/sdb1              # ext4: 预留 1%（默认 5%）
+
+# 调整文件系统检查间隔
+tune2fs -i 0 -c 0 /dev/sdb1         # 禁用定期检查
+
+# 查看文件系统参数
+tune2fs -l /dev/sdb1                 # ext4 详细参数
+xfs_info /data                       # XFS 参数
+```
+
+---
+
+## 安全加固
+
+### 文件系统安全
+
+```bash
+# 查找 SUID 文件 (安全审计)
+find / -perm -4000 -type f -exec ls -la {} \; 2>/dev/null
+
+# 查找可写文件 (安全审计)
+find / -type f -perm -0002 ! -path "/proc/*" ! -path "/sys/*" 2>/dev/null
+
+# 设置不可变属性 (保护关键文件)
+chattr +i /etc/resolv.conf           # 防止修改
+lsattr /etc/resolv.conf              # 查看属性
+chattr -i /etc/resolv.conf           # 取消不可变
+
+# 加密文件系统 (LUKS)
+cryptsetup luksFormat /dev/sdb1
+cryptsetup luksOpen /dev/sdb1 encrypted
+mkfs.ext4 /dev/mapper/encrypted
+mount /dev/mapper/encrypted /secure
+```
+
+---
+
+## 最佳实践
+
+1. **XFS 用于容器存储**: XFS 处理大文件和并发 I/O 性能更优
+2. **ext4 用于通用场景**: ext4 稳定性和兼容性最好
+3. **noatime 挂载**: 减少不必要的磁盘写入
+4. **监控 inode 使用**: 防止 inode 耗尽导致的故障
+5. **预留 10% 空间**: XFS 在 95% 满时性能严重下降
+6. **日志轮转**: 配置 logrotate 防止日志撑满磁盘
+7. **使用 Local PV**: 对 I/O 敏感的数据库使用本地持久卷
+
+---
+
+## 故障排查
+
+### 文件系统常见故障
+
+```bash
+# 文件系统变为只读
+# 原因: 磁盘故障、文件系统损坏
+dmesg | grep -i "remounting\|read-only\|error"
+# 修复: fsck (ext4) 或 xfs_repair
+umount /data
+fsck -y /dev/sdb1
+# 或
+xfs_repair /dev/sdb1
+
+# 磁盘空间不足但 du 显示正常
+# 原因: 已删除文件被进程占用
+lsof +L1 | grep deleted
+lsof +L1 | awk '{sum+=$7} END {print sum/1024/1024 "MB"}'
+# 解决: 重启占用进程或 truncate
+> /proc/<pid>/fd/<fd>
+
+# inode 耗尽
+df -i
+# 查找大量小文件
+find /path -type f | awk -F/ '{print NF-1, $0}' | sort -n | tail -20
+```
+
+---
+
 ## 相关文档
 
 - [01-linux-system-architecture](./01-linux-system-architecture.md) - 系统架构
 - [05-linux-storage-management](./05-linux-storage-management.md) - 存储管理
 - [06-linux-performance-tuning](./06-linux-performance-tuning.md) - 性能调优
+
+---
+
+### 生产环境文件系统运维脚本
+
+```bash
+#!/bin/bash
+# fs-health-check.sh - 文件系统健康巡检
+
+echo "=== 文件系统健康巡检 $(date) ==="
+echo "主机: $(hostname)"
+
+echo -e "\n[1] 磁盘空间使用 (>85% 警告)"
+df -h --type=ext4 --type=xfs --type=btrfs 2>/dev/null | \
+  awk 'NR==1 || +$5 > 85 {print "  "$0}'
+
+echo -e "\n[2] inode 使用 (>90% 警告)"
+df -i --type=ext4 --type=xfs 2>/dev/null | \
+  awk 'NR==1 || +$5 > 90 {print "  "$0}'
+
+echo -e "\n[3] 只读文件系统检测"
+mount | grep " ro," && echo "  警告: 发现只读文件系统!" || echo "  正常"
+
+echo -e "\n[4] 内核文件系统错误"
+dmesg | grep -i -E "ext4.*error|xfs.*error|I/O error" | tail -5 || echo "  无错误"
+
+echo -e "\n[5] 大文件 TOP 10"
+find / -type f -size +100M -exec ls -lh {} \; 2>/dev/null | \
+  sort -k5 -hr | head -10
+
+echo -e "\n[6] 磁盘 I/O 等待"
+iostat -xz 1 1 2>/dev/null | tail -n +4 | \
+  awk '$12+0 > 10 {print "  警告: "$1" await="$12"%"}'
+
+echo "=== 巡检完成 ==="
+```
+
+---
+
+**维护者**: Allen Galler (allengaller@gmail.com) | **许可证**: MIT

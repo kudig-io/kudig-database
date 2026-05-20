@@ -1,3 +1,34 @@
+---
+title: Gateway API
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- istio
+- envoy
+- ingress
+- gateway
+- rbac
+- crd
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Gateway API 是什么
+- 如何 Gateway API
+trigger_keywords:
+- Gateway
+- API
+- dictionary
+title_en: Gateway Api
+---
+
+
 # Gateway API
 
 ## 概述

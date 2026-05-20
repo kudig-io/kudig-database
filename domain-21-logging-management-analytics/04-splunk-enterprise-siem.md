@@ -1,3 +1,38 @@
+---
+title: Splunk企业级日志分析与安全智能平台深度实践
+description: '# Splunk企业级日志分析与安全智能平台深度实践'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- statefulset
+- job
+- ingress
+- networkpolicy
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- Splunk企业级日志分析与安全智能平台深度实践 是什么
+- 如何 Splunk企业级日志分析与安全智能平台深度实践
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Splunk企业级日志分析与安全智能平台深度实践
+- logging
+- management
+- analytics
+---
+
+
 # Splunk企业级日志分析与安全智能平台深度实践
 
 > **文档定位**: 企业级日志分析、安全信息和事件管理(SIEM)平台 | **更新时间**: 2026-02-07

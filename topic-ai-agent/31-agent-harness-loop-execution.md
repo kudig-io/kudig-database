@@ -1,3 +1,35 @@
+---
+title: Agent Harness Loop 与执行引擎深度设计
+description: '# Agent Harness Loop 与执行引擎深度设计'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness Loop 与执行引擎深度设计 是什么
+- 如何 Agent Harness Loop 与执行引擎深度设计
+trigger_keywords:
+- Agent
+- Harness
+- Loop
+- 与执行引擎深度设计
+- ai
+- agent
+---
+
+
 # Agent Harness Loop 与执行引擎深度设计
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Agent Loop, 执行引擎, 状态机, ReAct Loop, 反漂移, 超时保护, 异步执行, 有限状态机, Trajectory, 执行策略

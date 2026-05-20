@@ -1,83 +1,91 @@
 ---
-skill_id: "SKILL-SECURITY-001"
-skill_name: "安全事件应急响应 / Security Incident Response"
-version: "1.0"
-category: "security"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Pod Security Standards enforce mode stable, seccomp default runtime"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA (alternative to OPA/Gatekeeper)"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "15-120min"
-risk_level: "critical"
-agent_execution_mode: "L1-advisory"
+title: 安全事件应急响应 / Security Incident Response
+description: '# 安全事件应急响应 / Security Incident Response'
+category: security
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- istio
+- cilium
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 安全事件应急响应 / Security Incident Response 是什么
+- 如何 安全事件应急响应 / Security Incident Response
 trigger_keywords:
-  - "container escape"
-  - "容器逃逸"
-  - "privilege escalation"
-  - "权限提升"
-  - "suspicious process"
-  - "可疑进程"
-  - "cryptominer detected"
-  - "挖矿程序"
-  - "secret leaked"
-  - "凭据泄露"
-  - "unauthorized access"
-  - "未授权访问"
-  - "abnormal network traffic"
-  - "异常网络流量"
-  - "supply chain attack"
-  - "供应链攻击"
-  - "cve vulnerability"
-  - "CVE漏洞"
-  - "compliance violation"
-  - "合规违规"
-  - "pod security violation"
-  - "lateral movement"
-  - "横向移动"
-  - "dns tunneling"
-  - "DNS隧道"
-  - "image vulnerability"
-  - "镜像漏洞"
-trigger_events:
-  - "FailedValidation"
-  - "ImagePolicyViolation"
-  - "AuditPolicyViolation"
-  - "SecurityContextDenied"
-  - "PodSecurityViolation"
-trigger_metrics:
-  - 'falco_events_total'
-  - 'trivy_vulnerability_count{severity="CRITICAL"}'
-  - 'kube_pod_container_status_running{container_security_context_privileged="true"}'
-  - 'tetragon_events_total{type="process_exec"}'
-  - 'audit_event_total{verb="create",resource="secrets"}'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-  - "SKILL-NET-001"
-fta_refs:
-  - "topic-fta/list/security-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/32-security-troubleshooting.md"
-  - "domain-7-security/"
-  - "domain-25-cloud-native-security/"
-  - "domain-39-supply-chain-security/"
+- container escape
+- 容器逃逸
+- privilege escalation
+- 权限提升
+- suspicious process
+- 可疑进程
+- cryptominer detected
+- 挖矿程序
+- secret leaked
+- 凭据泄露
+- unauthorized access
+- 未授权访问
+- abnormal network traffic
+- 异常网络流量
+- supply chain attack
+- 供应链攻击
+- cve vulnerability
+- CVE漏洞
+- compliance violation
+- 合规违规
+- pod security violation
+- lateral movement
+- 横向移动
+- dns tunneling
+- DNS隧道
+- image vulnerability
+- 镜像漏洞
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-18
+  category: security
+  subcategory: incident-response
+  severity: P0
+  time_to_diagnosis_minutes: 30
+  time_to_remediation_minutes: 60
+  escalation_required: true
+  control_plane_impact: true
+agent_notes:
+  decision_tree_entry: "kubectl get events -A --sort-by='.lastTimestamp' | grep -E 'Warning|Forbidden|Denied' 检查异常事件"
+  critical_commands:
+    - "kubectl get events -A --sort-by='.lastTimestamp'"
+    - "kubectl auth can-i --list"
+    - "kubectl get pod -A -o wide | grep -E 'Privileged|HostNetwork'"
+    - "kubectl logs -n <ns> <pod> --previous | grep -E 'crypto|miner|wget|curl' | head -20"
+    - "kubectl get networkpolicy -A"
+  danger_operations:
+    - action: "kubectl delete pod <pod-name> -n <ns> --force"
+      risk: "删除 Pod 可能销毁证据，应先收集日志和配置快照"
+      requires_confirmation: true
+    - action: "kubectl label namespace <ns> pod-security.kubernetes.io/enforce=baseline"
+      risk: "修改命名空间标签会影响业务运行"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A --sort-by='.lastTimestamp' | grep -E 'Warning|Forbidden|Denied' | tail -20 显示异常安全事件 -->
 
 # 安全事件应急响应 / Security Incident Response
 

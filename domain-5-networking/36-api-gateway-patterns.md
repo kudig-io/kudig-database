@@ -1,3 +1,49 @@
+---
+title: 38 - Ingress和API Gateway对比表
+description: '| **Traefik** | Traefik | 动态配置，中间件 | v1.25+ | 中-高 | 低 | - |'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- istio
+- envoy
+- hpa
+- daemonset
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Ingress和API Gateway对比表 是什么
+- 如何 Ingress和API Gateway对比表
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Ingress和API
+- Gateway对比表
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # 38 - Ingress和API Gateway对比表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)

@@ -1,3 +1,34 @@
+---
+title: 节点关闭（Node Shutdowns）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- controller-manager
+- pdb
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 节点关闭（Node Shutdowns） 是什么
+- 如何 节点关闭（Node Shutdowns）
+trigger_keywords:
+- 节点关闭
+- Node
+- Shutdowns
+- dictionary
+title_en: Nodes
+---
+
+
 # 节点关闭（Node Shutdowns）
 
 ## 概述

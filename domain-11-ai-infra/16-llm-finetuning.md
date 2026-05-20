@@ -1,3 +1,51 @@
+---
+title: 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)
+description: '# 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- scheduler
+- job
+- operator
+- cuda
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices) 是什么
+- 如何 LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- LLM微调技术与实践
+- LLM
+- Fine-tuning
+- Techniques
+- Practices
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [PEFT](https://huggingface.co/docs/peft/), [TRL](https://huggingface.co/docs/trl/)

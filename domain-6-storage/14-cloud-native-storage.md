@@ -1,3 +1,43 @@
+---
+title: 14 - 云原生存储与多云策略
+description: '# 14 - 云原生存储与多云策略'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- kubelet
+- prometheus
+- grafana
+- helm
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 云原生存储与多云策略 是什么
+- 如何 云原生存储与多云策略
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 云原生存储与多云策略
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 14 - 云原生存储与多云策略
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 多云架构、混合部署、成本优化

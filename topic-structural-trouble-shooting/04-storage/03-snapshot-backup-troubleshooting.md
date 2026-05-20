@@ -1,3 +1,40 @@
+---
+title: CSI 快照与卷备份故障排查指南
+description: '# CSI 快照与卷备份故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- prometheus
+- postgresql
+- job
+- cronjob
+- crd
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- CSI 快照与卷备份故障排查指南 是什么
+- 如何 CSI 快照与卷备份故障排查指南
+- CSI 快照与卷备份故障排查指南 故障排查
+- CSI 快照与卷备份故障排查指南 排障步骤
+trigger_keywords:
+- CSI
+- 快照与卷备份故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # CSI 快照与卷备份故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级

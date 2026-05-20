@@ -1,3 +1,33 @@
+---
+title: Domain-37 边缘计算 — 开源项目索引
+description: '| **KubeEdge** | 边缘 K8s 方案 | Graduated | v1.20.0 | 7k+ | Apache-2.0 |'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- wasm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-37 边缘计算 — 开源项目索引 是什么
+- 如何 Domain-37 边缘计算 — 开源项目索引
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- Domain-37
+- 边缘计算
+- 开源项目索引
+- edge
+- computing
+---
+
 # Domain-37 边缘计算 — 开源项目索引
 
 > **最后更新**: 2026-04-24

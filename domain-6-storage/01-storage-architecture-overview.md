@@ -1,25 +1,64 @@
 ---
-title: "存储架构概览与核心组件"
-description: "深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS 等主流存储后端"
-category: "domain-6-storage"
-tags: [k8s, storage, csi, pvc, pv, storageclass, snapshot, ceph, longhorn]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 存储架构概览与核心组件
+description: 深入解析 Kubernetes 存储架构：CSI 驱动、StorageClass、PV/PVC 机制、快照与克隆、存储QoS、以及 Ceph/Longhorn/NFS 等主流存储后端
+category: domain-6-storage
+tags:
+- k8s
+- storage
+- csi
+- pvc
+- pv
+- storageclass
+- snapshot
+- ceph
+- longhorn
+- kubelet
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储架构概览与核心组件 是什么
+- 如何 存储架构概览与核心组件
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储架构概览与核心组件
+- storage
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "02-pv-architecture-fundamentals.md"
-    type: "depth"
-    desc: "PV/PVC 核心概念"
-  - path: "04-storageclass-dynamic-provisioning.md"
-    type: "depth"
-    desc: "StorageClass 动态供给"
-  - path: "../topic-fta/list/persistentvolume-fta.md"
-    type: "fta"
-    desc: "持久化存储故障树"
+- path: 02-pv-architecture-fundamentals.md
+  type: depth
+  desc: PV/PVC 核心概念
+- path: 04-storageclass-dynamic-provisioning.md
+  type: depth
+  desc: StorageClass 动态供给
+- path: ../topic-fta/list/persistentvolume-fta.md
+  type: fta
+  desc: 持久化存储故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
 ---
+
 
 # 01 - 存储架构概览与核心组件
 

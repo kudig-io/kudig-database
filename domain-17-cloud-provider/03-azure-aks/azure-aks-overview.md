@@ -1,3 +1,42 @@
+---
+title: Azure AKS (Azure Kubernetes Service) 概述
+description: '# Azure AKS (Azure Kubernetes Service) 概述'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- Azure AKS (Azure Kubernetes Service) 概述 是什么
+- 如何 Azure AKS (Azure Kubernetes Service) 概述
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- Azure
+- AKS
+- Azure
+- Kubernetes
+- Service
+- 概述
+- cloud
+- provider
+---
+
+
 # Azure AKS (Azure Kubernetes Service) 概述
 
 ## 产品简介

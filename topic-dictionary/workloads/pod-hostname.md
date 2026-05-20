@@ -1,3 +1,30 @@
+---
+title: Pod Hostname
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- statefulset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Hostname 是什么
+- 如何 Pod Hostname
+trigger_keywords:
+- Pod
+- Hostname
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Hostname
 
 ## 概述

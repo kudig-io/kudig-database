@@ -1,79 +1,190 @@
+---
+title: kubeconfig 中的证书嵌入逻辑
+description: '| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig 解析库 |'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- Kubernetes 管理员
+- 集群运维人员
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes kubeconfig 证书嵌入 Base64 编码逻辑
+- kubeadm kubeconfig 生成 admin.conf controller-manager.conf scheduler.conf
+- kubeconfig 证书续期 renewKubeConfigCert
+- 嵌入模式 vs 引用模式 kubeconfig
+- kubectl config set-credentials 证书更新
+trigger_keywords:
+- kubeconfig
+- buildKubeConfigFromSpec
+- embed-certs
+- Base64
+- admin.conf
+- controller-manager.conf
+- scheduler.conf
+- kubelet.conf
+- 证书嵌入
+- client-certificate-data
+related_domains:
+- domain-3-control-plane
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/ca-generation
+- cluster-cert/cert-rotation
+---
+
+
 # kubeconfig 中的证书嵌入逻辑
 
-## 概述
+## 函数签名
 
-kubeadm 在证书阶段不仅生成 `.crt`/`.key` 文件，还会生成多个 kubeconfig 文件。这些 kubeconfig 文件将 **CA 证书和客户端证书以 Base64 编码直接嵌入**，使组件无需依赖外部证书文件即可建立 TLS 连接。本文档基于 `cmd/kubeadm/app/phases/kubeconfig` 源码，分析证书嵌入的完整逻辑。
+```go
+func CreateJoinControlPlaneKubeConfigFiles(outDir string, cfg *kubeadmapi.InitConfiguration, kubeConfigFileNames []string) error
 
----
+func buildKubeConfigFromSpec(spec *kubeConfigSpec) (*clientcmdapi.Config, error)
 
-## 源码路径
+func createKubeConfigFile(certDir string, spec *kubeConfigSpec, kubeConfigFileName string) error
 
-- **kubeconfig 生成主控**: `cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go`
-- **kubeconfig 工具**: `cmd/kubeadm/app/util/kubeconfig/kubeconfig.go`
-- **客户端证书创建**: `cmd/kubeadm/app/phases/certs/certs.go`
+func WriteKubeConfig(out io.Writer, kubeConfigFileName string, cfg *kubeadmapi.InitConfiguration, kubeConfigSpec *kubeConfigSpec) error
 
----
+func renewKubeConfigCert(cfg *kubeadmapi.InitConfiguration, cert *certs.KubeadmCert) error
+```
 
-## kubeadm 生成的 kubeconfig 列表
+## 源码位置
 
-| kubeconfig 文件 | 使用者 | 证书来源 | 存储路径 |
-|----------------|-------|---------|---------|
-| `admin.conf` | 集群管理员 (kubectl) | `kubernetes-ca` 签发 | `/etc/kubernetes/admin.conf` |
-| `controller-manager.conf` | kube-controller-manager | `kubernetes-ca` 签发 | `/etc/kubernetes/controller-manager.conf` |
-| `scheduler.conf` | kube-scheduler | `kubernetes-ca` 签发 | `/etc/kubernetes/scheduler.conf` |
-| `kubelet.conf` | kubelet (正式) | CSR 动态签发 | `/etc/kubernetes/kubelet.conf` |
+| 组件 | 源码路径 | 说明 |
+|------|---------|------|
+| kubeconfig 生成主控 | `cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go` | 创建所有 kubeconfig 文件 |
+| kubeconfig 工具 | `cmd/kubeadm/app/util/kubeconfig/kubeconfig.go` | 加载/写入/验证 kubeconfig |
+| 客户端证书创建 | `cmd/kubeadm/app/phases/certs/certs.go` | 证书 CN/O 定义 |
+| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig 解析库 |
 
-**注意**：`kubelet.conf` 在 `kubeadm init` 阶段**不生成**，而是由 kubelet 通过 Bootstrap 机制在首次启动时自动创建。
+## 参数说明
 
----
+### kubeadm 生成的 kubeconfig 列表
 
-## kubeconfig 证书嵌入源码分析
+| kubeconfig 文件 | 使用者 | CN | Organization | CA 来源 | 存储 |
+|----------------|-------|-----|-------------|--------|------|
+| `admin.conf` | 集群管理员 | `kubernetes-admin` | `system:masters` | kubernetes-ca | `/etc/kubernetes/admin.conf` |
+| `super-admin.conf` | 超级管理员(v1.29+) | `kubernetes-super-admin` | `system:masters` | kubernetes-ca | `/etc/kubernetes/super-admin.conf` |
+| `controller-manager.conf` | kube-controller-manager | `system:kube-controller-manager` | `system:kube-controller-manager` | kubernetes-ca | `/etc/kubernetes/controller-manager.conf` |
+| `scheduler.conf` | kube-scheduler | `system:kube-scheduler` | `system:kube-scheduler` | kubernetes-ca | `/etc/kubernetes/scheduler.conf` |
+| `kubelet.conf` | kubelet | `system:node:<name>` | `system:nodes` | kubernetes-ca | `/etc/kubernetes/kubelet.conf` |
 
-### 1. 生成 kubeconfig 的主控函数
+### kubeConfigSpec 字段
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `ClientName` | `string` | 客户端证书 CommonName |
+| `Organization` | `[]string` | 客户端证书 Organization |
+| `CAPath` | `string` | CA 证书文件路径 |
+| `ClientCertPath` | `string` | 客户端证书文件路径 |
+| `ClientKeyPath` | `string` | 客户端私钥文件路径 |
+| `APIServerEndpoint` | `string` | API Server 地址 |
+| `ClusterName` | `string` | 集群名称 |
+
+### 嵌入模式 vs 引用模式对比
+
+| 特性 | 嵌入模式 | 引用模式 |
+|-----|---------|---------|
+| 文件数量 | 单个 kubeconfig 文件 | kubeconfig + 多个证书文件 |
+| 分发便利性 | 高（单文件） | 低（需同步多文件） |
+| 证书更新 | 需重新生成 kubeconfig | 替换证书文件即可 |
+| 安全性 | 私钥在文件中 | 私钥可单独设置权限 |
+| kubeadm 默认 | **是** | 否 |
+
+## 返回值
+
+| 函数 | 返回值 | 说明 |
+|------|--------|------|
+| `CreateJoinControlPlaneKubeConfigFiles` | `error` | 所有 kubeconfig 创建成功或失败 |
+| `buildKubeConfigFromSpec` | `(*clientcmdapi.Config, error)` | 构建的 kubeconfig 对象 |
+| `createKubeConfigFile` | `error` | 单个 kubeconfig 写入成功或失败 |
+| `renewKubeConfigCert` | `error` | 证书续期成功或失败 |
+
+## 调用链
+
+```mermaid
+graph TD
+    A[kubeadm init phase kubeconfig] --> B[CreateJoinControlPlaneKubeConfigFiles]
+    B --> C[遍历文件列表: admin/cm/scheduler]
+    C --> D[createKubeConfigFile]
+    D --> E[buildKubeConfigFromSpec]
+    E --> F[读取 CA 证书: ca.crt]
+    F --> G[创建客户端证书: client.crt + client.key]
+    G --> H[Base64 编码嵌入]
+    H --> I[构建 clientcmdapi.Config]
+    I --> I1[clusters: server + CA data]
+    I --> I2[users: client-cert + client-key data]
+    I --> I3[contexts: cluster + user]
+    I --> I4[current-context]
+    I --> J[clientcmd.WriteToFile]
+    J --> K[写入 /etc/kubernetes/<name>.conf]
+
+    L[kubeadm certs renew] --> M[renewKubeConfigCert]
+    M --> N[生成新客户端证书]
+    N --> O[加载现有 kubeconfig]
+    O --> P[替换 AuthInfo 中的证书数据]
+    P --> Q[写回文件]
+```
+
+## 源码分析
+
+### 概述
+
+kubeadm 在证书阶段不仅生成 `.crt`/`.key` 文件，还会生成多个 kubeconfig 文件。这些 kubeconfig 文件将 CA 证书和客户端证书以 Base64 编码直接嵌入，使组件无需依赖外部证书文件即可建立 TLS 连接。
+
+### kubeconfig 生成核心源码
 
 ```go
 // cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go
-func CreateJoinControlPlaneKubeConfigFiles(...) error {
-    // 定义需要生成的 kubeconfig 列表
-    files := []string{
-        kubeadmconstants.AdminKubeConfigFileName,
-        kubeadmconstants.ControllerManagerKubeConfigFileName,
-        kubeadmconstants.SchedulerKubeConfigFileName,
-    }
-    
-    for _, file := range files {
-        // 生成每个 kubeconfig
-        if err := createKubeConfigFile(...); err != nil {
+func CreateJoinControlPlaneKubeConfigFiles(outDir string, cfg *kubeadmapi.InitConfiguration, kubeConfigFileNames []string) error {
+    for _, kubeConfigFileName := range kubeConfigFileNames {
+        spec, err := buildKubeConfigSpec(cfg, kubeConfigFileName)
+        if err != nil {
+            return err
+        }
+
+        if err := createKubeConfigFile(outDir, spec, kubeConfigFileName); err != nil {
             return err
         }
     }
     return nil
 }
-```
 
-### 2. 构建 kubeconfig 的核心逻辑
-
-```go
-// cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go
 func buildKubeConfigFromSpec(spec *kubeConfigSpec) (*clientcmdapi.Config, error) {
-    // 1. 读取或生成客户端证书
-    clientCert, clientKey, err := getOrCreateClientCert(spec)
-    
-    // 2. 读取 CA 证书
     caCert, err := os.ReadFile(spec.CAPath)
-    
-    // 3. 构建 kubeconfig 结构
+    if err != nil {
+        return nil, fmt.Errorf("failed to read CA cert: %v", err)
+    }
+
+    clientCert, clientKey, err := getOrCreateClientCert(spec)
+    if err != nil {
+        return nil, fmt.Errorf("failed to get client cert: %v", err)
+    }
+
     config := &clientcmdapi.Config{
         Clusters: map[string]*clientcmdapi.Cluster{
             spec.ClusterName: {
                 Server:                   spec.APIServerEndpoint,
-                CertificateAuthorityData: caCert,  // ← CA 证书嵌入
+                CertificateAuthorityData: caCert,
             },
         },
         AuthInfos: map[string]*clientcmdapi.AuthInfo{
             spec.ClientName: {
-                ClientCertificateData: clientCert,  // ← 客户端证书嵌入
-                ClientKeyData:         clientKey,   // ← 客户端私钥嵌入
+                ClientCertificateData: clientCert,
+                ClientKeyData:         clientKey,
             },
         },
         Contexts: map[string]*clientcmdapi.Context{
@@ -84,199 +195,204 @@ func buildKubeConfigFromSpec(spec *kubeConfigSpec) (*clientcmdapi.Config, error)
         },
         CurrentContext: spec.ClientName + "@" + spec.ClusterName,
     }
-    
+
     return config, nil
 }
 ```
 
-**关键设计**：
-- `CertificateAuthorityData` — CA 证书以 **Base64 编码** 嵌入
-- `ClientCertificateData` — 客户端证书以 **Base64 编码** 嵌入
-- `ClientKeyData` — 客户端私钥以 **Base64 编码** 嵌入
-- 组件启动时无需挂载 hostPath 证书卷，只需读取 kubeconfig 文件
-
----
-
-## 证书嵌入 vs 文件引用的对比
-
-### 嵌入模式（kubeadm 默认）
+### 嵌入模式示例
 
 ```yaml
 apiVersion: v1
 kind: Config
 clusters:
 - cluster:
-    certificate-authority-data: LS0tLS1CRUdJTi...  # Base64 编码的 CA
+    certificate-authority-data: LS0tLS1CRUdJTi...  # Base64 ca.crt
     server: https://192.168.1.10:6443
   name: kubernetes
 users:
 - name: kubernetes-admin
   user:
-    client-certificate-data: LS0tLS1CRUdJTi...    # Base64 编码的证书
-    client-key-data: LS0tLS1CRUdJTi...            # Base64 编码的私钥
+    client-certificate-data: LS0tLS1CRUdJTi...    # Base64 admin.crt
+    client-key-data: LS0tLS1CRUdJTi...            # Base64 admin.key
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
 ```
 
-### 引用模式（手动配置时可选）
-
-```yaml
-clusters:
-- cluster:
-    certificate-authority: /etc/kubernetes/pki/ca.crt  # 文件路径引用
-    server: https://192.168.1.10:6443
-  name: kubernetes
-users:
-- name: kubernetes-admin
-  user:
-    client-certificate: /etc/kubernetes/pki/admin.crt
-    client-key: /etc/kubernetes/pki/admin.key
-```
-
-**对比**：
-
-| 特性 | 嵌入模式 | 引用模式 |
-|-----|---------|---------|
-| 文件数量 | 单个 kubeconfig 文件 | kubeconfig + 多个证书文件 |
-| 分发便利性 | 高（单文件即可） | 低（需同步多个文件） |
-| 证书更新 | 需重新生成 kubeconfig | 替换证书文件即可 |
-| 安全性 | 私钥在文件中（风险较高） | 私钥可单独设置权限 |
-| kubeadm 默认 | **是** | 否 |
-
----
-
-## 各组件 kubeconfig 的证书配置
-
-### 1. admin.conf
+### 证书轮换对 kubeconfig 的影响
 
 ```go
-// cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go
-// admin kubeconfig 的证书配置
-&KubeadmCertAdmin.Config
-// CommonName: "kubernetes-admin"
-// Organization: ["system:masters"]
+func renewKubeConfigCert(cfg *kubeadmapi.InitConfiguration, cert *certs.KubeadmCert) error {
+    newCert, newKey, err := generateNewClientCert(cfg, cert)
+    if err != nil {
+        return err
+    }
+
+    kubeConfig, err := clientcmd.LoadFromFile(cert.KubeConfigFile)
+    if err != nil {
+        return err
+    }
+
+    authInfo := kubeConfig.AuthInfos[cert.ClientName]
+    authInfo.ClientCertificateData = certToPEM(newCert)
+    authInfo.ClientKeyData = keyToPEM(newKey)
+
+    return clientcmd.WriteToFile(*kubeConfig, cert.KubeConfigFile)
+}
 ```
 
-**用途**：
-- kubectl 默认使用 `~/.kube/config`（通常从 admin.conf 复制）
-- 具有集群完全控制权限
+### 各组件 kubeconfig 的启动参数
 
-### 2. controller-manager.conf
-
-```go
-// CommonName: "system:kube-controller-manager"
-// Organization: ["system:kube-controller-manager"]
-```
-
-**Controller Manager 启动参数**：
 ```bash
+# Controller Manager
 --kubeconfig=/etc/kubernetes/controller-manager.conf
 --authentication-kubeconfig=/etc/kubernetes/controller-manager.conf
 --authorization-kubeconfig=/etc/kubernetes/controller-manager.conf
-```
 
-### 3. scheduler.conf
-
-```go
-// CommonName: "system:kube-scheduler"
-// Organization: ["system:kube-scheduler"]
-```
-
-**Scheduler 启动参数**：
-```bash
+# Scheduler
 --kubeconfig=/etc/kubernetes/scheduler.conf
 --authentication-kubeconfig=/etc/kubernetes/scheduler.conf
 --authorization-kubeconfig=/etc/kubernetes/scheduler.conf
 ```
 
----
-
-## kubeconfig 证书轮换的特殊性
-
-### kubeadm certs renew 对 kubeconfig 的处理
-
-```go
-// cmd/kubeadm/app/phases/certs/renew.go
-func renewKubeConfigCert(cfg *kubeadmapi.InitConfiguration, cert *certs.KubeadmCert) error {
-    // 1. 生成新客户端证书
-    newCert, newKey, err := generateNewClientCert(cfg, cert)
-    
-    // 2. 读取现有 kubeconfig
-    kubeConfig, err := clientcmd.LoadFromFile(cert.KubeConfigFile)
-    
-    // 3. 替换嵌入的证书和私钥
-    authInfo := kubeConfig.AuthInfos[cert.ClientName]
-    authInfo.ClientCertificateData = certToPEM(newCert)
-    authInfo.ClientKeyData = keyToPEM(newKey)
-    
-    // 4. 写回文件
-    return clientcmd.WriteToFile(*kubeConfig, cert.KubeConfigFile)
-}
-```
-
-**关键区别**：
-- 轮换 `.crt`/`.key` 文件时，只需重写证书文件
-- 轮换 kubeconfig 时，需要 **解析 YAML → 替换 Base64 字段 → 重写 YAML**
-- kubeadm 会自动处理这一逻辑
-
----
-
-## 手动更新 kubeconfig 中的证书
-
-```bash
-# 1. 提取 kubeconfig 中的证书信息
-kubectl config view --raw
-
-# 2. 提取并解码 CA 证书
-kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 -d > ca-from-kubeconfig.crt
-
-# 3. 提取并解码客户端证书
-kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d > client-from-kubeconfig.crt
-
-# 4. 查看客户端证书有效期
-kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d | openssl x509 -noout -enddate
-
-# 5. 更新 kubeconfig 中的 CA（如果需要）
-kubectl config set-cluster kubernetes \
-  --certificate-authority=/etc/kubernetes/pki/ca.crt \
-  --embed-certs=true
-
-# 6. 更新 kubeconfig 中的客户端证书
-kubectl config set-credentials kubernetes-admin \
-  --client-certificate=/etc/kubernetes/pki/admin.crt \
-  --client-key=/etc/kubernetes/pki/admin.key \
-  --embed-certs=true
-```
-
----
-
-## 高可用集群中的 kubeconfig 证书
-
-### 外部负载均衡场景
+### 高可用集群中的 kubeconfig
 
 ```yaml
 # admin.conf 中的 server 地址
 clusters:
 - cluster:
-    server: https://lb.example.com:6443  # 负载均衡地址
+    server: https://lb.example.com:6443  # controlPlaneEndpoint
 ```
 
-**证书要求**：
-- `apiserver.crt` 的 SAN 必须包含 `lb.example.com`
-- 否则 kubectl 会报告 `x509: certificate is valid for ...`
+## 执行流程
 
-**修复方式**：
+```mermaid
+sequenceDiagram
+    participant kubeadm
+    participant Certs as 证书文件
+    participant KubeConfig
+    participant Disk
+
+    kubeadm->>Certs: 读取 ca.crt
+    kubeadm->>Certs: 读取 admin.crt + admin.key
+    kubeadm->>KubeConfig: buildKubeConfigFromSpec
+    KubeConfig->>KubeConfig: Base64(ca.crt) → certificate-authority-data
+    KubeConfig->>KubeConfig: Base64(admin.crt) → client-certificate-data
+    KubeConfig->>KubeConfig: Base64(admin.key) → client-key-data
+    KubeConfig->>Disk: WriteToFile /etc/kubernetes/admin.conf
+
+    kubeadm->>Certs: 读取 cm.crt + cm.key
+    kubeadm->>KubeConfig: buildKubeConfigFromSpec
+    KubeConfig->>Disk: WriteToFile controller-manager.conf
+
+    kubeadm->>Certs: 读取 scheduler.crt + scheduler.key
+    kubeadm->>KubeConfig: buildKubeConfigFromSpec
+    KubeConfig->>Disk: WriteToFile scheduler.conf
+```
+
+## 使用场景
+
+1. **管理员访问**：使用 admin.conf 作为 kubectl 配置
+2. **组件认证**：Controller Manager/Scheduler 使用各自的 kubeconfig
+3. **证书续期**：`kubeadm certs renew` 自动更新嵌入的证书
+4. **多集群管理**：不同 kubeconfig 指向不同集群
+5. **CI/CD 集成**：将 kubeconfig 作为 Secret 注入 Pipeline
+
+## 配置示例
+
+### kubeconfig 文件结构
+
+```yaml
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUR...
+    server: https://192.168.1.10:6443
+  name: production
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUR...
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUl...
+contexts:
+- context:
+    cluster: production
+    user: kubernetes-admin
+  name: admin@production
+current-context: admin@production
+```
+
+## 实战示例
+
+### kubeconfig 证书检查
+
 ```bash
-# 在 kubeadm-config 中添加 certSANs，然后重新生成 API Server 证书
-kubeadm init phase certs apiserver --config kubeadm-config.yaml
+# 查看 kubeconfig
+kubectl config view --raw
+
+# 提取并解码 CA 证书
+kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 -d > ca.crt
+openssl x509 -in ca.crt -noout -subject -issuer
+# subject=CN = kubernetes-ca
+# issuer=CN = kubernetes-ca
+
+# 提取并解码客户端证书
+kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d > client.crt
+openssl x509 -in client.crt -noout -subject -enddate
+# subject=CN = kubernetes-admin, O = system:masters
+# notAfter=Jan  1 00:00:00 2026 GMT
+
+# 查看证书有效期
+kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d | openssl x509 -noout -enddate
+# notAfter=Jan  1 00:00:00 2026 GMT
+
+# 更新 kubeconfig 中的证书
+kubectl config set-credentials kubernetes-admin \
+  --client-certificate=/etc/kubernetes/pki/admin.crt \
+  --client-key=/etc/kubernetes/pki/admin.key \
+  --embed-certs=true
+
+# 更新 CA
+kubectl config set-cluster kubernetes \
+  --certificate-authority=/etc/kubernetes/pki/ca.crt \
+  --embed-certs=true
 ```
 
----
+### 高可用场景 kubeconfig
 
-## 故障排查
+```bash
+# 使用 controlPlaneEndpoint 的 admin.conf
+cat /etc/kubernetes/admin.conf | grep server:
+#     server: https://lb.example.com:6443
 
-| 问题 | 现象 | 排查 |
-|-----|------|------|
-| kubeconfig 证书过期 | `Unable to connect to the server: x509: certificate has expired` | `kubectl config view` 解码证书检查有效期 |
-| CA 不匹配 | `x509: certificate signed by unknown authority` | 对比 kubeconfig 中的 CA 与 `/etc/kubernetes/pki/ca.crt` |
-| 证书链不完整 | `x509: certificate has expired or is not yet valid` | 检查系统时间与证书有效期 |
-| 私钥不匹配 | `tls: private key does not match public key` | 验证 modulus 一致性 |
-| 权限不足 | `Error from server (Forbidden)` | 检查证书中的 CN/O 对应的 RBAC 权限 |
+# 如果 SAN 缺少 lb.example.com
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName | grep lb.example.com
+# (empty - SAN missing)
+
+# 修复: 添加 certSANs 并重新生成
+kubeadm init phase certs apiserver --config kubeadm-config.yaml
+kubeadm init phase kubeconfig admin --config kubeadm-config.yaml
+```
+
+## 常见错误
+
+| 错误 | 现象 | 原因 | 解决方案 |
+|------|------|------|----------|
+| kubeconfig 证书过期 | `Unable to connect: x509: certificate has expired` | 嵌入的客户端证书过期 | `kubeadm certs renew admin.conf` |
+| CA 不匹配 | `certificate signed by unknown authority` | kubeconfig 中 CA 与服务端 CA 不同 | 重新生成 kubeconfig |
+| 私钥不匹配 | `tls: private key does not match public key` | 证书与密钥不匹配 | 完整续期所有相关证书 |
+| 权限不足 | `Error from server (Forbidden)` | 证书 CN/O 的 RBAC 权限不够 | 检查并创建对应的 ClusterRoleBinding |
+| server 地址不可达 | `connection refused` | controlPlaneEndpoint 配置错误 | 检查负载均衡器配置 |
+
+## 相关函数
+
+- [`CreatePKIAssets`](02-ca-generation.md) — 证书生成入口
+- [`buildKubeConfigFromSpec`](README.md) — kubeconfig 构建核心
+- [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 计算
+- [`kubeadm certs renew`](README.md) — 证书续期命令
+- [`X509 Authenticator`](08-rbac-mapping.md) — 证书身份提取

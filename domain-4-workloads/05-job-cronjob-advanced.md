@@ -1,3 +1,55 @@
+---
+title: 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+description: '## Job 类型详解与使用场景'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- job
+- cronjob
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage) 是什么
+- 如何 Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Job
+- CronJob
+- 高级用法
+- Job
+- CronJob
+- Advanced
+- Usage
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/job-cronjob-fta.md
+  label: '故障树: job-cronjob'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/)

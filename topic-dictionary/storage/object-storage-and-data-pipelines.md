@@ -1,3 +1,34 @@
+---
+title: 对象存储与数据流水线
+description: '# 对象存储与数据流水线'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- ceph
+- minio
+- kafka
+- job
+- cronjob
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 对象存储与数据流水线 是什么
+- 如何 对象存储与数据流水线
+trigger_keywords:
+- 对象存储与数据流水线
+- dictionary
+title_en: Object Storage And Data Pipelines
+---
+
+
 # 对象存储与数据流水线
 
 ## 概述

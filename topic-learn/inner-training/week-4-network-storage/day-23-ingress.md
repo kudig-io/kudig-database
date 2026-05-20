@@ -1,4 +1,70 @@
+---
+title: 'Day 23: Ingress'
+description: '- "Kubernetes Ingress配置"'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- ingress
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 23: Ingress 是什么'
+- '如何 Day 23: Ingress'
+trigger_keywords:
+- Day
+- '23:'
+- Ingress
+- learn
+---
+
 # Day 23: Ingress
+
+```yaml
+---
+title: Day 23: Ingress
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Kubernetes Ingress配置"
+  - "Ingress Controller"
+  - "Nginx Ingress"
+  - "ALB Ingress"
+  - "IngressClass"
+trigger_keywords:
+  - "Ingress"
+  - "Ingress Controller"
+  - "Nginx Ingress"
+  - "ALB Ingress"
+  - "IngressClass"
+  - "TLS证书"
+  - "灰度发布"
+  - "金丝雀发布"
+reading_level: intermediate
+audience:
+  - sre工程师
+  - ops工程师
+  - 运维工程师
+estimated_read_time: 45min
+related_domains:
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - domain-5-networking/19-ingress-fundamentals
+id: WEEK4-DAY23
+topic: training
+type: hands-on
+tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: Ingress 路由规则与控制器配置
 

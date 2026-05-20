@@ -27,15 +27,27 @@ authors:
     role: "{{角色}}"
 reviewers: []
 difficulty: "intermediate"               # beginner | intermediate | advanced | expert
+# ---- New Reading Experience Fields ----
+reading_level: "intermediate"            # beginner | intermediate | advanced | expert (同 difficulty)
+audience: ["SRE", "Ops Engineer"]        # 目标读者: SRE / DevOps / Developer / Architect
+estimated_read_time: "15min"            # 预计阅读时间: "5min" / "30min" / "1h"
+prerequisites:                          # 前置知识依赖（文档路径或主题名）
+  - "domain-1-architecture-fundamentals"
+  - "basic-linux-commands"
+# ---- Cross-References (统一格式) ----
+cross_refs:
+  - type: "domain"
+    path: "../domain-{{N}}-{{name}}/{{doc}}.md"
+    label: "{{说明}}"
+  - type: "fta"
+    path: "../topic-fta/list/{{component}}-fta.md"
+    label: "{{说明}}"
+  - type: "cheatsheet"
+    path: "../topic-cheat-sheet/{{cheat-sheet}}.md"
+    label: "{{说明}}"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     type: "depth"
-    desc: "{{说明}}"
-  - path: "../topic-fta/list/{{component}}-fta.md"
-    type: "fta"
-    desc: "{{说明}}"
-  - path: "../topic-cheat-sheet/{{cheat-sheet}}.md"
-    type: "cheatsheet"
     desc: "{{说明}}"
 ---
 ```

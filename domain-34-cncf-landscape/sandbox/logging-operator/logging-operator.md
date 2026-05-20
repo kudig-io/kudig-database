@@ -1,3 +1,38 @@
+---
+title: Logging Operator
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- apiserver
+- prometheus
+- helm
+- kafka
+- elasticsearch
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Logging Operator 是什么
+- 如何 Logging Operator
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Logging
+- Operator
+- cncf
+- landscape
+---
+
+
 # Logging Operator
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

@@ -1,3 +1,36 @@
+---
+title: 第四章：FEBM 对云平台工单智能体托管的意义
+description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
+category: febm
+tags:
+- k8s
+- forensics
+- evidence-based
+- methodology
+- kubelet
+- prometheus
+- grafana
+- jaeger
+- envoy
+- cilium
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 运维专家
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第四章：FEBM 对云平台工单智能体托管的意义 是什么
+- 如何 第四章：FEBM 对云平台工单智能体托管的意义
+trigger_keywords:
+- 第四章：FEBM
+- 对云平台工单智能体托管的意义
+- febm
+---
+
+
 # 第四章：FEBM 对云平台工单智能体托管的意义
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  

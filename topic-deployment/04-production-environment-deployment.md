@@ -1,3 +1,37 @@
+---
+title: 04 - 生产环境部署 (Production Environment Deployment)
+description: '# 04 - 生产环境部署 (Production Environment Deployment)'
+category: deployment
+tags:
+- k8s
+- deployment
+- rolling-update
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- calico
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 生产环境部署 (Production Environment Deployment) 是什么
+- 如何 生产环境部署 (Production Environment Deployment)
+trigger_keywords:
+- 生产环境部署
+- Production
+- Environment
+- Deployment
+- deployment
+---
+
+
 # 04 - 生产环境部署 (Production Environment Deployment)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **适用场景**: 企业级生产部署 | **复杂度**: ⭐⭐⭐⭐⭐  

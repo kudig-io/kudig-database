@@ -1,3 +1,33 @@
+---
+title: 网络硬件技术
+description: '# 网络硬件技术'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- ceph
+- nvidia
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 网络硬件技术 是什么
+- 如何 网络硬件技术
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 网络硬件技术
+- hardware
+---
+
+
 # 网络硬件技术
 
 ## 概述

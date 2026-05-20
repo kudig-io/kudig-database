@@ -1,3 +1,57 @@
+---
+title: 云厂商方案与 kubeadm 对比
+description: '# 云厂商方案与 kubeadm 对比'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- cilium
+- flannel
+- calico
+- helm
+- gateway
+- gpu
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- DevOps工程师
+- Kubernetes管理员
+- 云架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- kubeadm vs EKS AKS GKE cloud provider managed Kubernetes comparison
+- self-hosted Kubernetes vs managed Kubernetes cost and features
+- EKS Anywhere vs kubeadm on premises Kubernetes
+- Alibaba Cloud ACK Terway CNI vs self-managed Kubernetes
+- Kubernetes managed vs self-managed pros cons enterprise
+trigger_keywords:
+- EKS
+- AKS
+- GKE
+- ACK
+- TKE
+- EKS Anywhere
+- kubeadm
+- managed Kubernetes
+- cloud Kubernetes
+- Terway
+- CNI comparison
+- cloud provider comparison
+related_domains:
+- domain-1-cluster-architecture
+- domain-12-troubleshooting
+related_topics:
+- kubeadm init
+- HA cluster setup
+- CNI networking
+- cloud integration
+---
+
+
 # 云厂商方案与 kubeadm 对比
 
 ## 主要云厂商托管 K8s 方案

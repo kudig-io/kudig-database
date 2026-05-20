@@ -1,3 +1,40 @@
+---
+title: 第十三章：智能工单处理的 AI Agent 架构
+description: '# 第十三章：智能工单处理的 AI Agent 架构'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- prometheus
+- grafana
+- mysql
+- ingress
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十三章：智能工单处理的 AI Agent 架构 是什么
+- 如何 第十三章：智能工单处理的 AI Agent 架构
+- 第十三章：智能工单处理的 AI Agent 架构 根因分析
+- 第十三章：智能工单处理的 AI Agent 架构 故障树
+trigger_keywords:
+- 第十三章：智能工单处理的
+- AI
+- Agent
+- 架构
+- fta
+---
+
+
 # 第十三章：智能工单处理的 AI Agent 架构
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  

@@ -1,3 +1,27 @@
+---
+title: AI 语料库配置 (Corpus Config)
+description: '# AI 语料库配置 (Corpus Config)'
+category: general
+tags:
+- k8s
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- AI 语料库配置 (Corpus Config) 是什么
+- 如何 AI 语料库配置 (Corpus Config)
+trigger_keywords:
+- AI
+- 语料库配置
+- Corpus
+- Config
+---
+
 # AI 语料库配置 (Corpus Config)
 
 > 面向 NotebookLM / IMA / RAG 等 AI 场景的语料配置和最佳实践

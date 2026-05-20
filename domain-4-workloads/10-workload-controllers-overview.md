@@ -1,24 +1,65 @@
 ---
-title: "工作负载控制器详解"
-description: "全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob 的架构设计、核心机制与生产级配置"
-category: "domain-4-workloads"
-tags: [k8s, workload, deployment, statefulset, daemonset, job, cronjob, controllers]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 工作负载控制器详解
+description: 全面解析 Kubernetes 工作负载控制器：Deployment、StatefulSet、DaemonSet、Job、CronJob 的架构设计、核心机制与生产级配置
+category: domain-4-workloads
+tags:
+- k8s
+- workload
+- deployment
+- statefulset
+- daemonset
+- job
+- cronjob
+- controllers
+- mysql
+- hpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 工作负载控制器详解 是什么
+- 如何 工作负载控制器详解
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 工作负载控制器详解
+- workloads
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "11-pod-lifecycle-events.md"
-    type: "depth"
-    desc: "Pod 生命周期事件"
-  - path: "19-scheduler-configuration.md"
-    type: "depth"
-    desc: "调度器配置与优化"
-  - path: "../topic-fta/list/pod-fta.md"
-    type: "fta"
-    desc: "Pod 故障树"
+- path: 11-pod-lifecycle-events.md
+  type: depth
+  desc: Pod 生命周期事件
+- path: 19-scheduler-configuration.md
+  type: depth
+  desc: 调度器配置与优化
+- path: ../topic-fta/list/pod-fta.md
+  type: fta
+  desc: Pod 故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
 ---
 
 # 35 - 工作负载控制器详解 (Workload Controllers)

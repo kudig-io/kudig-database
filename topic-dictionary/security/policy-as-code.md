@@ -1,3 +1,36 @@
+---
+title: 策略即代码（Policy as Code）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- harbor
+- opa
+- ingress
+- networkpolicy
+- webhook
+- agent
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 策略即代码（Policy as Code） 是什么
+- 如何 策略即代码（Policy as Code）
+trigger_keywords:
+- 策略即代码
+- Policy
+- as
+- Code
+- dictionary
+title_en: Policy As Code
+---
+
+
 # 策略即代码（Policy as Code）
 
 ## 概述

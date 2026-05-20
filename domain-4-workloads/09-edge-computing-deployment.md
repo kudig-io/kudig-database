@@ -1,3 +1,54 @@
+---
+title: 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
+description: '# 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- cilium
+- flannel
+- docker
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns) 是什么
+- 如何 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- 边缘计算工作负载部署模式
+- Edge
+- Computing
+- Workload
+- Deployment
+- Patterns
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [KubeEdge](https://kubeedge.io/), [OpenYurt](https://openyurt.io/)
@@ -654,6 +705,11 @@ spec:
 ```yaml
 # 边缘节点安全策略
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 kind: PodSecurityPolicy
 metadata:
   name: edge-node-psp

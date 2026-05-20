@@ -1,3 +1,30 @@
+---
+title: Swap 内存管理
+description: '# Swap 内存管理'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- prometheus
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Swap 内存管理 是什么
+- 如何 Swap 内存管理
+trigger_keywords:
+- Swap
+- 内存管理
+- dictionary
+title_en: Swap Memory Management
+---
+
+
 # Swap 内存管理
 
 ## 概述

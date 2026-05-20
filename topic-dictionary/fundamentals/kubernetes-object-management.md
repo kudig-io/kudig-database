@@ -1,3 +1,28 @@
+---
+title: Kubernetes 对象管理
+description: '# Kubernetes 对象管理'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 对象管理 是什么
+- 如何 Kubernetes 对象管理
+trigger_keywords:
+- Kubernetes
+- 对象管理
+- dictionary
+title_en: Kubernetes Object Management
+---
+
+
 # Kubernetes 对象管理
 
 ## 概述

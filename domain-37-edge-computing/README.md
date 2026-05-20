@@ -1,3 +1,37 @@
+---
+title: 'Domain 37: 边缘计算 (Edge Computing)'
+description: 边缘计算 (Edge Computing) 将计算和数据存储带到更接近数据生成源的位置，以提高响应速度并节省带宽。本领域深入探讨 Kubernetes 在边缘场景的应用，涵盖 KubeEdge、OpenYurt、SuperEdge
+  等云原生边缘框架，以及边缘 AI 推理、离线自治、边缘安全等核心技术。
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- minio
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 37: 边缘计算 (Edge Computing) 是什么'
+- '如何 Domain 37: 边缘计算 (Edge Computing)'
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- Domain
+- '37:'
+- 边缘计算
+- Edge
+- Computing
+- edge
+- computing
+---
+
 # Domain 37: 边缘计算 (Edge Computing)
 
 > **适用范围**: 边缘 Kubernetes、IoT、边缘 AI | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-04

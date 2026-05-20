@@ -1,3 +1,40 @@
+---
+title: 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
+description: '# 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- FlowSchema / PriorityLevelConfiguration YAML 配置参考 是什么
+- 如何 FlowSchema / PriorityLevelConfiguration YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- FlowSchema
+- PriorityLevelConfiguration
+- YAML
+- 配置参考
+- yaml
+- manifests
+---
+
+
 # 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
 
 > **适用版本**: Kubernetes v1.29 GA (Beta 从 v1.20, Alpha 从 v1.18) | **最后更新**: 2026-02

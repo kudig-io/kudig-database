@@ -1,3 +1,32 @@
+---
+title: 第十六章：团队能力建设
+description: '**所属部分**: 第四部分 - FTA 系统工程实践'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- llm
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第十六章：团队能力建设 是什么
+- 如何 第十六章：团队能力建设
+- 第十六章：团队能力建设 根因分析
+- 第十六章：团队能力建设 故障树
+trigger_keywords:
+- 第十六章：团队能力建设
+- fta
+---
+
 # 第十六章：团队能力建设
 
 > **所属部分**: 第四部分 - FTA 系统工程实践  

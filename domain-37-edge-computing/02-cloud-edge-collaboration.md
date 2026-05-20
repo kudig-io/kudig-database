@@ -1,3 +1,41 @@
+---
+title: 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+description: '# 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns) 是什么
+- 如何 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 云边协同设计模式
+- Cloud-Edge
+- Collaboration
+- Design
+- Patterns
+- edge
+- computing
+---
+
+
 # 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 
 ## 目录 (Table of Contents)

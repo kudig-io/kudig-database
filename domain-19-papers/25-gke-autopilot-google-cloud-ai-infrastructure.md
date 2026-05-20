@@ -1,3 +1,42 @@
+---
+title: GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
+description: '作者: Google Cloud架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- kubelet
+- scheduler
+- prometheus
+- containerd
+- docker
+- redis
+- hpa
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure) 是什么
+- 如何 GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- GKE
+- Autopilot
+- Google
+- Cloud
+- AI
+- 基础设施
+- GKE
+- Autopilot
+---
+
+
 # GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
 
 > 作者: Google Cloud架构专家 | 版本: v1.0 | 更新时间: 2026-03-03

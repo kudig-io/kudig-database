@@ -1,3 +1,46 @@
+---
+title: Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
+description: '# Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- envoy
+- helm
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving) 是什么
+- 如何 Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- AI
+- ML
+- GPU调度与LLM推理服务
+- AI
+- ML
+- GPU
+- Scheduling
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/gpu-fta.md
+  label: '故障树: gpu'
+---
+
+
 # Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)
 
 > **作者**: AI基础设施架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03

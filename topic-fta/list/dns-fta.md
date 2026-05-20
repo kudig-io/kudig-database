@@ -1,22 +1,75 @@
 ---
-fta_id: "FTA-DNS-012"
-title: "DNS 异常故障树分析"
-component: "dns"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-DNS-001"
-last_updated: "2026-05"
+title: DNS 异常故障树分析
+description: '- **目标**：覆盖 DNS 解析失败、延迟升高与解析不一致的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- dns
+- coredns
+- kube-dns
+- resolv
+- kubelet
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- DNS 异常故障树分析 是什么
+- 如何 DNS 异常故障树分析
+- DNS 异常故障树分析 根因分析
+- DNS 异常故障树分析 故障树
+trigger_keywords:
+- DNS
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, dns, coredns, kube-dns, resolv]
-related_skills:
-  - "../topic-skills/22-networking.md"
-knowledge_refs:
-  - "../domain-5-networking/01-network-architecture-overview.md"
-  - "../domain-12-troubleshooting/03-networking-cni-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: skill
+  path: ../topic-skills/04-dns-resolution-failure.md
+  label: '运维技能: 04-dns-resolution-failure'
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md
+  label: '结构化排障: 02-dns-troubleshooting'
+fta_metadata:
+  fta_id: FTA-DNS-001
+  top_event: DNS 异常 (解析失败/延迟升高/解析不一致)
+  top_event_id: TE-DNS-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "Pod 内 nslookup kubernetes.default 失败"
+    - "应用日志显示 connection refused 或 NXDOMAIN"
+    - "CoreDNS Pod 显示非 Running 或重启频繁"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system -l k8s-app=kube-dns 检查 CoreDNS 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide"
+    - "kubectl exec -it <pod> -n <ns> -- nslookup kubernetes.default"
+    - "kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100"
+    - "kubectl exec -it <pod> -n <ns> -- cat /etc/resolv.conf"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l k8s-app=kube-dns --force"
+      risk: "强制删除会导致 CoreDNS 重启，该节点上 Pod 的 DNS 解析可能中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[?(@.status.phase!=\"Running\")]} {.metadata.name}{\"\n\"}{end}' 显示 CoreDNS 异常 -->
 
 # DNS 异常 FTA 树
 

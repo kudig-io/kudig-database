@@ -1,3 +1,63 @@
+---
+title: kubelet 深度解析 (kubelet Deep Dive)
+description: '# kubelet 深度解析 (kubelet Deep Dive)'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- kubelet
+- prometheus
+- containerd
+- cri-o
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 15min
+intent_queries:
+- kubelet 深度解析 (kubelet Deep Dive) 是什么
+- 如何 kubelet 深度解析 (kubelet Deep Dive)
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- kubelet
+- 深度解析
+- kubelet
+- Deep
+- Dive
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # kubelet 深度解析 (kubelet Deep Dive)
 
 > kubelet 是 Kubernetes 中运行在每个节点上的核心代理，负责管理节点上的 Pod 和容器生命周期

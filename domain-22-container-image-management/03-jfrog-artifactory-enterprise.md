@@ -1,3 +1,42 @@
+---
+title: JFrog Artifactory Enterprise Container Registry Platform
+description: '## 概述 (Overview)'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- prometheus
+- helm
+- argocd
+- docker
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- JFrog Artifactory Enterprise Container Registry Platform 是什么
+- 如何 JFrog Artifactory Enterprise Container Registry Platform
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- JFrog
+- Artifactory
+- Enterprise
+- Container
+- Registry
+- Platform
+- container
+- image
+---
+
+
 # JFrog Artifactory Enterprise Container Registry Platform
 
 ## 概述 (Overview)

@@ -1,3 +1,44 @@
+---
+title: 'Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'
+description: '# Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- grafana
+- jaeger
+- falco
+- elasticsearch
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting) 是什么'
+- '如何 Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)'
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Domain
+- '20:'
+- 企业级监控与告警
+- Enterprise
+- Monitoring
+- Alerting
+- enterprise
+- monitoring
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
 # Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)
 
 > **领域定位**: 企业级监控平台架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07

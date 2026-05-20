@@ -1,3 +1,76 @@
+---
+title: containerd
+description: '## 项目概述
+
+containerd 是 CNCF 毕业的高层容器运行时，支持 Kubernetes CRI、容器生命周期管理、镜像存储和快照管理。
+
+## 配套文档
+
+- [02-containerd-v2-features.md](02-containerd-v2-features.md) - containerd 2.0 新特性详解
+- [03-containerd-security-hardening.md](03-containerd-security-hardening.md) - 生产安全加固指南
+- [04-containerd-upgrade-migration.md](04-containerd-upgrade-migration.md) - 升级迁移指南
+- [05-containerd-windows-support.md](05-containerd-windows-support.md) - Windows 容器支持
+- [06-containerd-observability.md](06-containerd-observability.md) - 分布式追踪与可观测性
+- [07-containerd-disaster-recovery.md](07-containerd-disaster-recovery.md) - 灾难恢复与业务连续性
+- [08-containerd-multi-tenant.md](08-containerd-multi-tenant.md) - 多租户与共享集群配置'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- kubelet
+- containerd
+- containerd-2.0
+- cri-o
+- docker
+- harbor
+- security
+- upgrade
+- windows
+- observability
+- tracing
+- disaster-recovery
+- multi-tenant
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- containerd 是什么
+- 如何 containerd
+- containerd 2.0 新特性 是什么
+- containerd 如何升级到 2.0
+- containerd 安全加固 如何配置
+- containerd 故障排查 步骤
+- containerd 架构 原理
+- containerd 配置 CRI 多运行时
+- containerd 迁移 如何迁移
+- containerd 性能调优 生产环境
+- containerd Windows 容器 支持
+- containerd 分布式追踪 配置
+- containerd 灾难恢复 如何恢复
+- containerd 多租户 配置
+trigger_keywords:
+- containerd
+- containerd 2.0
+- cncf
+- landscape
+- containerd 升级
+- containerd 安全
+- containerd 故障排查
+- containerd 配置
+- containerd 架构
+- containerd Windows
+- containerd 分布式追踪
+- containerd 灾难恢复
+- containerd 多租户
+---
+
 # containerd
 
 > **成熟度**: Graduated | **加入时间**: 2017-03 | **最后更新**: 2026-03

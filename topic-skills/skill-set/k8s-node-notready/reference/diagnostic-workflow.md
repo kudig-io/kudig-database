@@ -1,3 +1,37 @@
+---
+title: 诊断工作流 / Diagnostic Workflow
+description: '- [Phase 2: 深度检查（只读，零风险，需 SSH）](#phase-2-深度检查只读零风险需-ssh)'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- cilium
+- calico
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 诊断工作流 / Diagnostic Workflow 是什么
+- 如何 诊断工作流 / Diagnostic Workflow
+trigger_keywords:
+- 诊断工作流
+- Diagnostic
+- Workflow
+- skills
+---
+
+
 # 诊断工作流 / Diagnostic Workflow
 
 > **来源**: SKILL-NODE-001 v1.0 — 节点 NotReady 诊断与修复

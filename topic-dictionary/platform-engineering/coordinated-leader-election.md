@@ -1,3 +1,35 @@
+---
+title: 协调领导者选举（Coordinated Leader Election）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 协调领导者选举（Coordinated Leader Election） 是什么
+- 如何 协调领导者选举（Coordinated Leader Election）
+trigger_keywords:
+- 协调领导者选举
+- Coordinated
+- Leader
+- Election
+- dictionary
+title_en: Coordinated Leader Election
+---
+
+
 # 协调领导者选举（Coordinated Leader Election）
 
 ## 概述

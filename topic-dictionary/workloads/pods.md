@@ -1,3 +1,33 @@
+---
+title: Pods
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- prometheus
+- pdb
+- statefulset
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pods 是什么
+- 如何 Pods
+trigger_keywords:
+- Pods
+- dictionary
+title_en: Pods
+---
+
+
+
 # Pods
 
 ## 概述

@@ -1,3 +1,25 @@
+---
+title: Windows 环境下生成 GitBook 离线静态版本指南
+description: '# Windows 环境下生成 GitBook 离线静态版本指南'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Windows 环境下生成 GitBook 离线静态版本指南 是什么
+- 如何 Windows 环境下生成 GitBook 离线静态版本指南
+trigger_keywords:
+- Windows
+- 环境下生成
+- GitBook
+- 离线静态版本指南
+---
+
 # Windows 环境下生成 GitBook 离线静态版本指南
 
 ## 第一步：安装必要工具

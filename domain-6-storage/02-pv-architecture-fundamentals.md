@@ -1,25 +1,66 @@
 ---
-title: "PV/PVC 核心概念与企业级实践"
-description: "深入解析 PV/PVC 的核心概念、绑定机制、回收策略、扩缩容、跨命名空间共享、以及企业级生产环境配置与故障排查"
-category: "domain-6-storage"
-tags: [k8s, pv, pvc, storage, volume, persistent, reclaim-policy]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: PV/PVC 核心概念与企业级实践
+description: 深入解析 PV/PVC 的核心概念、绑定机制、回收策略、扩缩容、跨命名空间共享、以及企业级生产环境配置与故障排查
+category: domain-6-storage
+tags:
+- k8s
+- pv
+- pvc
+- storage
+- volume
+- persistent
+- reclaim-policy
+- kubelet
+- prometheus
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- PV/PVC 核心概念与企业级实践 是什么
+- 如何 PV/PVC 核心概念与企业级实践
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- PV
+- PVC
+- 核心概念与企业级实践
+- storage
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-storage-architecture-overview.md"
-    type: "depth"
-    desc: "存储架构概览"
-  - path: "04-storageclass-dynamic-provisioning.md"
-    type: "depth"
-    desc: "StorageClass 动态供给"
-  - path: "../topic-fta/list/persistentvolume-fta.md"
-    type: "fta"
-    desc: "持久化存储故障树"
+- path: 01-storage-architecture-overview.md
+  type: depth
+  desc: 存储架构概览
+- path: 04-storageclass-dynamic-provisioning.md
+  type: depth
+  desc: StorageClass 动态供给
+- path: ../topic-fta/list/persistentvolume-fta.md
+  type: fta
+  desc: 持久化存储故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
 ---
+
 
 # 02 - PV/PVC核心概念与企业级实践
 

@@ -1,25 +1,63 @@
 ---
-title: "CI/CD 管道"
-description: "深入解析 K8s CI/CD 工具链：ArgoCD/Flux GitOps、Tekton JenkinsX、GitHub Actions、CI/CD 流水线设计、Blue-Green/Canary 部署与自动化测试"
-category: "domain-10-extensions"
-tags: [k8s, cicd, gitops, argocd, flux, tekton, jenkins, github-actions, deployment]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: CI/CD 管道
+description: 深入解析 K8s CI/CD 工具链：ArgoCD/Flux GitOps、Tekton JenkinsX、GitHub Actions、CI/CD 流水线设计、Blue-Green/Canary 部署与自动化测试
+category: domain-10-extensions
+tags:
+- k8s
+- cicd
+- gitops
+- argocd
+- flux
+- tekton
+- jenkins
+- github-actions
+- deployment
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- CI/CD 管道 是什么
+- 如何 CI/CD 管道
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- CI
+- CD
+- 管道
+- extensions
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "05-package-management-tools.md"
-    type: "depth"
-    desc: "包管理与应用分发"
-  - path: "01-crd-development-guide.md"
-    type: "depth"
-    desc: "CRD 开发指南"
-  - path: "../domain-9-platform-ops/07-gitops-configuration-management.md"
-    type: "depth"
-    desc: "GitOps 配置管理"
+- path: 05-package-management-tools.md
+  type: depth
+  desc: 包管理与应用分发
+- path: 01-crd-development-guide.md
+  type: depth
+  desc: CRD 开发指南
+- path: ../domain-9-platform-ops/07-gitops-configuration-management.md
+  type: depth
+  desc: GitOps 配置管理
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
 ---
+
 
 # 21 - CI/CD管道表
 

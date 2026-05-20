@@ -1,3 +1,50 @@
+---
+title: 成本优化与FinOps实践 (Cost Optimization & FinOps)
+description: '# 成本优化与FinOps实践 (Cost Optimization & FinOps)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- prometheus
+- istio
+- hpa
+- vpa
+- daemonset
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 成本优化与FinOps实践 (Cost Optimization & FinOps) 是什么
+- 如何 成本优化与FinOps实践 (Cost Optimization & FinOps)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 成本优化与FinOps实践
+- Cost
+- Optimization
+- FinOps
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 成本优化与FinOps实践 (Cost Optimization & FinOps)
 
 ## 概述

@@ -1,3 +1,49 @@
+---
+title: JVM GC 容器调优深度指南
+description: '# JVM GC 容器调优深度指南'
+category: troubleshooting
+tags:
+- k8s
+- troubleshooting
+- debugging
+- fault-analysis
+- prometheus
+- docker
+- rook
+- job
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- JVM GC 容器调优深度指南 是什么
+- 如何 JVM GC 容器调优深度指南
+- Kubernetes 12 troubleshooting 最佳实践
+- JVM GC 容器调优深度指南 故障排查
+- JVM GC 容器调优深度指南 排障步骤
+trigger_keywords:
+- JVM
+- GC
+- 容器调优深度指南
+- troubleshooting
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
+
+
 # JVM GC 容器调优深度指南
 
 > **适用版本**: JDK 21 (LTS) / JDK 17 (LTS) / OpenJDK HotSpot  

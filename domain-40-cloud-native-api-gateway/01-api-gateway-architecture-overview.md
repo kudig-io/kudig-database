@@ -1,3 +1,41 @@
+---
+title: 01 - 云原生 API 网关架构总览
+description: '# 01 - 云原生 API 网关架构总览'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- prometheus
+- istio
+- opa
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 云原生 API 网关架构总览 是什么
+- 如何 云原生 API 网关架构总览
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- 云原生
+- API
+- 网关架构总览
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 01 - 云原生 API 网关架构总览
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: API Gateway, Ingress Controller, Gateway API, 控制平面, 数据平面

@@ -1,3 +1,50 @@
+---
+title: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+description: '# 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- hpa
+- vpa
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 工作负载架构概览 (Workload Architecture Overview) 是什么
+- 如何 Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Kubernetes
+- 工作负载架构概览
+- Workload
+- Architecture
+- Overview
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Workloads Concepts](https://kubernetes.io/docs/concepts/workloads/)

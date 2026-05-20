@@ -1,3 +1,54 @@
+---
+title: Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册
+description: '**用途**: 全部 Feature Gate 状态速查与配置参考'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- apiserver
+- kubelet
+- scheduler
+- redis
+- statefulset
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册 是什么
+- 如何 Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Kubernetes
+- v1.29
+- v1.33
+- 完整
+- Feature
+- Gate
+- 与特性参考手册
+- architecture
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

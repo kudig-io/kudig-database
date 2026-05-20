@@ -1,3 +1,33 @@
+---
+title: Kubernetes Scheduler
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- job
+- rbac
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Scheduler 是什么
+- 如何 Kubernetes Scheduler
+trigger_keywords:
+- Kubernetes
+- Scheduler
+- dictionary
+title_en: Kubernetes Scheduler
+---
+
+
 # Kubernetes Scheduler
 
 ## 概述

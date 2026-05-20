@@ -1,3 +1,32 @@
+---
+title: 模型与 Provider 生态
+description: '**文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Models, Providers, Model API, Pricing, Variants, Multimodal,
+  Embeddings'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 模型与 Provider 生态 是什么
+- 如何 模型与 Provider 生态
+trigger_keywords:
+- 模型与
+- Provider
+- 生态
+- ai
+- coding
+---
+
 # 模型与 Provider 生态
 
 > **文档类型**: 功能详解 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Models, Providers, Model API, Pricing, Variants, Multimodal, Embeddings

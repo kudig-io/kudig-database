@@ -1,3 +1,36 @@
+---
+title: 03 - Kubernetes 性能调优专家指南
+description: '# 03 - Kubernetes 性能调优专家指南'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- istio
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Kubernetes 性能调优专家指南 是什么
+- 如何 Kubernetes 性能调优专家指南
+trigger_keywords:
+- Kubernetes
+- 性能调优专家指南
+- dictionary
+title_en: Performance Tuning Expert
+---
+
+
+
 # 03 - Kubernetes 性能调优专家指南
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

@@ -1,3 +1,53 @@
+---
+title: 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+description: '# 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- kubelet
+- scheduler
+- prometheus
+- opa
+- redis
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- StatefulSet 高级运维指南 (StatefulSet Advanced Operations) 是什么
+- 如何 StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- StatefulSet
+- 高级运维指南
+- StatefulSet
+- Advanced
+- Operations
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/statefulset-fta.md
+  label: '故障树: statefulset'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)

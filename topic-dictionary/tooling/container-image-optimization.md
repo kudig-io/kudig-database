@@ -1,3 +1,31 @@
+---
+title: 容器镜像优化
+description: '# 容器镜像优化'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- helm
+- docker
+- harbor
+- wasm
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 容器镜像优化 是什么
+- 如何 容器镜像优化
+trigger_keywords:
+- 容器镜像优化
+- dictionary
+title_en: Containers
+---
+
+
 # 容器镜像优化
 
 ## 概述

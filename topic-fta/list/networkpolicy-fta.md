@@ -1,21 +1,75 @@
 ---
-fta_id: "FTA-NETPOL-022"
-title: "NetworkPolicy 异常故障树分析"
-component: "networkpolicy"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-NETPOL-001"
-last_updated: "2026-05"
+title: NetworkPolicy 异常故障树分析
+description: '- **范围**：策略配置、命名空间隔离、CNI 实现、服务发现与 DNS、审计与回滚。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- networkpolicy
+- cni
+- isolation
+- firewall
+- apiserver
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- NetworkPolicy 异常故障树分析 是什么
+- 如何 NetworkPolicy 异常故障树分析
+- NetworkPolicy 异常故障树分析 根因分析
+- NetworkPolicy 异常故障树分析 故障树
+trigger_keywords:
+- NetworkPolicy
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, networkpolicy, cni, isolation, firewall]
-related_skills:
-  - "../topic-skills/22-networking.md"
-knowledge_refs:
-  - "../domain-5-networking/01-network-architecture-overview.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-7-security/
+  label: '知识域: domain-7-security'
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md
+  label: '结构化排障: 04-networkpolicy-troubleshooting'
+fta_metadata:
+  fta_id: FTA-NETPOL-001
+  top_event: NetworkPolicy 异常 (误拦截/策略冲突/生效异常)
+  top_event_id: TE-NETPOL-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "Pod 之间网络不通但安全组/安全策略看起来正常"
+    - "kubectl get networkpolicy -A 显示有策略但未生效"
+    - "应用日志显示 connection timeout 但 Service 正常"
+agent_notes:
+  decision_tree_entry: "kubectl get networkpolicy -A 检查网络策略配置; 检查策略顺序和选择器范围"
+  critical_commands:
+    - "kubectl get networkpolicy -A -o wide"
+    - "kubectl describe networkpolicy <name> -n <ns>"
+    - "kubectl exec -it <pod> -n <ns> -- wget --timeout=5 <target-ip> -O - 2>&1"
+    - "kubectl get pods -n kube-system -l k8s-app=calico-node -o wide"
+  danger_operations:
+    - action: "kubectl delete networkpolicy <name> -n <ns>"
+      risk: "删除网络策略可能导致流量开放，需要确认无安全风险"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get networkpolicy -A -o jsonpath='{range .items[?(@.spec.policyTypes!=null)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有策略但存在网络不通问题 -->
 
 # NetworkPolicy 异常 FTA 树
 

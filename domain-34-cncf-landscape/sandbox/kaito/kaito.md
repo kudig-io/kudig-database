@@ -1,3 +1,40 @@
+---
+title: KAITO (Kubernetes AI Toolchain Operator)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- falco
+- crd
+- operator
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- KAITO (Kubernetes AI Toolchain Operator) 是什么
+- 如何 KAITO (Kubernetes AI Toolchain Operator)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- KAITO
+- Kubernetes
+- AI
+- Toolchain
+- Operator
+- cncf
+- landscape
+---
+
 # KAITO (Kubernetes AI Toolchain Operator)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

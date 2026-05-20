@@ -1,3 +1,34 @@
+---
+title: v1.22.17
+description: v1.22.17 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 360min
+intent_queries:
+- v1.22.17 是什么
+- 如何 v1.22.17
+trigger_keywords:
+- v1.22.17
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.22.17](#v12217)

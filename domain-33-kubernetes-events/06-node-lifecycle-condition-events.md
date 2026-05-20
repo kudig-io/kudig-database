@@ -1,3 +1,41 @@
+---
+title: 06 - 节点生命周期与状态事件
+description: '- [概述](#概述)'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- 节点生命周期与状态事件 是什么
+- 如何 节点生命周期与状态事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- 节点生命周期与状态事件
+- kubernetes
+- events
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/node-fta.md
+  label: '故障树: node'
+---
+
+
 # 06 - 节点生命周期与状态事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

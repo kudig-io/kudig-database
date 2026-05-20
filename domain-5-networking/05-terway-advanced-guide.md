@@ -1,3 +1,56 @@
+---
+title: 143 - Terway 高级指南 (Terway Advanced Guide)
+description: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- cilium
+- mysql
+- statefulset
+- networkpolicy
+- ebpf
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Terway 高级指南 (Terway Advanced Guide) 是什么
+- 如何 Terway 高级指南 (Terway Advanced Guide)
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Terway
+- 高级指南
+- Terway
+- Advanced
+- Guide
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/terway-fta.md
+  label: '故障树: terway'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 143 - Terway 高级指南 (Terway Advanced Guide)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-01

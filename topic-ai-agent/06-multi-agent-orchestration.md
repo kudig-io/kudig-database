@@ -1,3 +1,37 @@
+---
+title: 多 Agent 编排与协作架构
+description: '# 多 Agent 编排与协作架构'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- scheduler
+- prometheus
+- grafana
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 多 Agent 编排与协作架构 是什么
+- 如何 多 Agent 编排与协作架构
+trigger_keywords:
+- Agent
+- 编排与协作架构
+- ai
+- agent
+---
+
+
 # 多 Agent 编排与协作架构
 
 > **文档类型**: 架构设计专题 | **最后更新**: 2026-03 | **关键词**: 多 Agent, Supervisor-Worker, 事件驱动, Agent 编排, LangGraph, AutoGen, 分布式 Agent, 冲突解决, Agent 通信协议

@@ -1,3 +1,43 @@
+---
+title: Elastic Stack企业级可观测性平台深度实践
+description: '# Elastic Stack企业级可观测性平台深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- docker
+- redis
+- mysql
+- kafka
+- elasticsearch
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Elastic Stack企业级可观测性平台深度实践 是什么
+- 如何 Elastic Stack企业级可观测性平台深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- Elastic
+- Stack企业级可观测性平台深度实践
+- enterprise
+- monitoring
+- alerting
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Elastic Stack企业级可观测性平台深度实践
 
 > **文档定位**: 企业级Elasticsearch、Logstash、Kibana、Beats完整可观测性解决方案 | **更新时间**: 2026-02-07

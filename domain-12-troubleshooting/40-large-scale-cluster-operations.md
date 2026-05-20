@@ -1,6 +1,57 @@
-# 40 - 大规模集群运维 (Large Scale Cluster Operations)
+---
+title: 大规模集群运维
+description: '# 40 - 大规模集群运维 (Large Scale Cluster Operations)'
+category: troubleshooting
+tags:
+- large-scale
+- capacity
+- performance
+- federation
+- multi-cluster
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 万级节点
+- 容量规划
+- 大规模集群
+- 性能优化
+trigger_keywords:
+- 大规模集群运维
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Kubernetes大规模集群最佳实践](https://kubernetes.io/docs/setup/best-practices/cluster-large/), [Google Borg论文](https://research.google/pubs/pub43438/)
+
+# 40 - 大规模集群运维 (Large Scale Cluster Operations)
 
 ---
 

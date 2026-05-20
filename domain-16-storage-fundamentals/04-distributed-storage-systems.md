@@ -1,3 +1,36 @@
+---
+title: 04 - 分布式存储系统
+description: '# 04 - 分布式存储系统'
+category: storage-fundamentals
+tags:
+- storage
+- filesystem
+- block
+- prometheus
+- docker
+- rook
+- ceph
+- minio
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 存储工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 分布式存储系统 是什么
+- 如何 分布式存储系统
+- Kubernetes 16 storage fundamentals 最佳实践
+trigger_keywords:
+- 分布式存储系统
+- storage
+- fundamentals
+---
+
+
 # 04 - 分布式存储系统
 
 > **适用版本**: 通用 | **最后更新**: 2026-01

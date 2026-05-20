@@ -1,3 +1,36 @@
+---
+title: AgentScope 概述与安装入门
+description: '# AgentScope 概述与安装入门'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- docker
+- redis
+- postgresql
+- serverless
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- AgentScope 概述与安装入门 是什么
+- 如何 AgentScope 概述与安装入门
+trigger_keywords:
+- AgentScope
+- 概述与安装入门
+- ai
+- agent
+---
+
+
 # AgentScope 概述与安装入门
 
 > **文档类型**: 框架入门专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 安装, 入门, ReAct Agent, 多 Agent 框架, 阿里巴巴, ModelScope, DashScope, 异步架构

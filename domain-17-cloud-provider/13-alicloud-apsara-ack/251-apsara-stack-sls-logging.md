@@ -1,3 +1,38 @@
+---
+title: 专有云 (Apsara Stack) - SLS 日志服务
+description: '# 专有云 (Apsara Stack) - SLS 日志服务'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- docker
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 专有云 (Apsara Stack) - SLS 日志服务 是什么
+- 如何 专有云 (Apsara Stack) - SLS 日志服务
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- 专有云
+- Apsara
+- Stack
+- SLS
+- 日志服务
+- cloud
+- provider
+---
+
 # 专有云 (Apsara Stack) - SLS 日志服务
 
 > **环境**: Apsara Stack 企业版/精简版 | **最后更新**: 2026-01

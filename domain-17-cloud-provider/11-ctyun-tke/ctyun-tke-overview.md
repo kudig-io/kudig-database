@@ -1,3 +1,42 @@
+---
+title: 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述
+description: '# 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- etcd
+- apiserver
+- statefulset
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述 是什么
+- 如何 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- 天翼云
+- TKE
+- Tianyi
+- Cloud
+- Kubernetes
+- Engine
+- 概述
+- cloud
+---
+
+
 # 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述
 
 ## 产品简介

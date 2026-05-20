@@ -1,3 +1,31 @@
+---
+title: 'Domain-16: 存储基础'
+description: '# Domain-16: 存储基础'
+category: storage-fundamentals
+tags:
+- storage
+- filesystem
+- block
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 存储工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-16: 存储基础 是什么'
+- '如何 Domain-16: 存储基础'
+- Kubernetes 16 storage fundamentals 最佳实践
+trigger_keywords:
+- 'Domain-16:'
+- 存储基础
+- storage
+- fundamentals
+---
+
 # Domain-16: 存储基础
 
 > **文档数量**: 6 篇 | **最后更新**: 2026-02 | **适用版本**: 存储技术通用

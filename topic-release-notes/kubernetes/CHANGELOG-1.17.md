@@ -1,3 +1,34 @@
+---
+title: v1.17.17
+description: v1.17.17 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 270min
+intent_queries:
+- v1.17.17 是什么
+- 如何 v1.17.17
+trigger_keywords:
+- v1.17.17
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.17.17](#v11717)

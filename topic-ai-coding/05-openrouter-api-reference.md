@@ -1,3 +1,32 @@
+---
+title: API 参考与请求/响应规范
+description: '## 概述'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- gateway
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- API 参考与请求/响应规范 是什么
+- 如何 API 参考与请求/响应规范
+trigger_keywords:
+- API
+- 参考与请求
+- 响应规范
+- ai
+- coding
+---
+
+
 # API 参考与请求/响应规范
 
 > **文档类型**: API 参考 | **最后更新**: 2026-03 | **关键词**: OpenRouter, API Reference, Chat Completions, Request Schema, Response, Parameters, Error Handling, OpenAPI

@@ -1,3 +1,41 @@
+---
+title: 07 - Envoy Gateway 企业级实践
+description: '# 07 - Envoy Gateway 企业级实践'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- scheduler
+- prometheus
+- grafana
+- jaeger
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Envoy Gateway 企业级实践 是什么
+- 如何 Envoy Gateway 企业级实践
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Envoy
+- Gateway
+- 企业级实践
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 07 - Envoy Gateway 企业级实践
 
 > **文档版本**: v1.0 | **适用版本**: Envoy Gateway 1.x, Kubernetes 1.26+ | **更新日期**: 2026-03-04 | **关键词**: Envoy Gateway, Gateway API, xDS, EnvoyPatchPolicy, ExtensionPolicy

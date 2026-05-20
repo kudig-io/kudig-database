@@ -1,3 +1,37 @@
+---
+title: 安全护栏、提示注入防护与合规
+description: '# 安全护栏、提示注入防护与合规'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- helm
+- postgresql
+- rbac
+- networkpolicy
+- operator
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 安全护栏、提示注入防护与合规 是什么
+- 如何 安全护栏、提示注入防护与合规
+trigger_keywords:
+- 安全护栏
+- 提示注入防护与合规
+- ai
+- agent
+---
+
+
 # 安全护栏、提示注入防护与合规
 
 > **文档类型**: 安全工程专题 | **最后更新**: 2026-03 | **关键词**: OWASP LLM Top 10, 提示注入, Guardrails AI, NeMo Guardrails, Llama Guard, PII, 合规, LLM 安全, Jailbreak 防护

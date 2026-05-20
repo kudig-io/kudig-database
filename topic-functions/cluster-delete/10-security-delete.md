@@ -1,16 +1,181 @@
-# 删除时的安全清理
-
-## 概述
-
-`cluster-create/16-security.md` 分析了集群创建过程中的安全机制（SA Token、Audit、加密存储、NodeRestriction）。集群删除时，这些安全资产同样需要完整清理，否则可能造成凭证泄露、权限残留或审计盲区。本文档分析删除过程中的安全清理要点。
-
+---
+title: 删除时的安全清理
+category: cluster-delete
+tags:
+- security
+- certificate
+- pki
+- shred
+- etcd-data
+- kubeconfig
+- systemd
+- cleanup
+last_updated: 2026-05-18
+description: 深入分析 Kubernetes 集群删除时的安全清理机制，涵盖证书/密钥完整删除、etcd 数据安全擦除、RBAC 残留清理、systemd 配置移除以及 CI/CD kubeconfig 清理等关键安全考量。
+difficulty: advanced
+intent_queries:
+- kubernetes cluster deletion security cleanup
+- kubeadm reset certificate cleanup security
+- etcd data secure wipe kubernetes
+- kubernetes security cleanup before cluster delete
+- shred etcd data kubernetes cluster
+trigger_keywords:
+- security cleanup
+- certificate deletion
+- shred -vfz
+- etcd data wipe
+- kubeconfig cleanup
+- systemd cleanup
+- RBAC cleanup
+- admin.conf
+- super-admin.conf
+- bootstrap-token
+reading_level: advanced
+audience:
+- platform-engineer
+- security-engineer
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-2-installation
+- domain-3-control-plane
+related_topics:
+- cluster-delete
+- cleanup
+- etcd-cleanup
+- network-cleanup
+- reset-phase-commands
+domain_link: '[Installation](../domain-2-installation/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
 ---
 
-## 1. 证书与密钥清理
 
-### 1.1 kubeadm reset 自动清理的证书
+# 删除时的安全清理
 
-`cleanup-node` 阶段通过 `CleanDir` 清理 `/etc/kubernetes/pki/` 目录**内容**：
+## 函数签名
+
+```go
+func runCleanupNode(c workflow.RunData) error
+func CleanDir(targetPath string) error
+func RemoveStackedEtcdMember(client clientset.Interface, cfg *kubeadmapi.InitConfiguration, timeout time.Duration) error
+func CleanupTmpDir(tmpDir string) error
+
+// 安全擦除（外部工具）
+// shred -vfz -n 3 <file>
+// dd if=/dev/urandom of=/dev/sdX bs=1M
+```
+
+## 源码位置
+
+| 组件 | 源码路径 | 说明 |
+|------|---------|------|
+| 节点清理 | `cmd/kubeadm/app/cmd/phases/reset/cleanupnode.go` | 清理证书/容器/目录 |
+| etcd 移除 | `cmd/kubeadm/app/phases/etcd/local.go` | RemoveStackedEtcdMember |
+| 垃圾回收 | `pkg/controller/garbagecollector/` | 级联删除 |
+| Secret 控制器 | `pkg/controller/secret/` | SA Token 管理 |
+| RBAC 注册 | `cmd/kubeadm/app/phases/markcontrolplane/` | kubeadm RBAC 资源 |
+
+## 参数说明
+
+### 自动清理的证书文件
+
+| 路径 | 清理方式 | 说明 |
+|------|---------|------|
+| `/etc/kubernetes/pki/*.crt` | CleanDir 内容 | 所有证书 |
+| `/etc/kubernetes/pki/*.key` | CleanDir 内容 | 所有私钥 |
+| `/etc/kubernetes/pki/etcd/` | CleanDir 内容 | etcd 证书子目录 |
+| `/var/lib/kubelet/pki/` | CleanDir | kubelet 证书 |
+| `/var/lib/etcd/member/` | CleanDir | etcd 数据（含 WAL） |
+
+### 自动清理的 kubeconfig 文件
+
+| 文件 | 说明 |
+|------|------|
+| `/etc/kubernetes/admin.conf` | 管理员 kubeconfig |
+| `/etc/kubernetes/super-admin.conf` | 超级管理员 kubeconfig (v1.29+) |
+| `/etc/kubernetes/kubelet.conf` | kubelet kubeconfig |
+| `/etc/kubernetes/bootstrap-kubelet.conf` | Bootstrap kubeconfig |
+| `/etc/kubernetes/controller-manager.conf` | CM kubeconfig |
+| `/etc/kubernetes/scheduler.conf` | Scheduler kubeconfig |
+
+### 需要手动清理的内容
+
+| 内容 | 路径/命令 | 安全风险 |
+|------|---------|---------|
+| CNI 配置 | `/etc/cni/net.d/` | 低 |
+| iptables 规则 | `iptables -F && iptables -t nat -F` | 中 |
+| IPVS 规则 | `ipvsadm -C` | 中 |
+| 用户 kubeconfig | `$HOME/.kube/config` | 高（含管理员凭证） |
+| CI/CD kubeconfig | GitLab/Jenkins Secret Store | 高 |
+| etcd 快照 | `snapshot*.db` | 高（含所有 Secret） |
+| 加密配置 | `encryption-config.yaml` | 高 |
+| 审计日志 | `/var/log/kubernetes/audit.log` | 中 |
+
+### 安全清理检查清单
+
+```
+□ /etc/kubernetes/pki/ 内容已清除
+□ /var/lib/kubelet/pki/ 已清除
+□ /var/lib/etcd/ 已安全擦除
+□ /etc/kubernetes/*.conf 已删除
+□ $HOME/.kube/config 已删除
+□ etcd 快照备份已安全擦除
+□ 加密配置文件已安全擦除
+□ 审计日志已安全擦除
+□ systemd 服务配置已清理
+□ CI/CD 中的 kubeconfig 已轮换/删除
+□ Bootstrap Token 已过期/删除
+□ RBAC 绑定已清理
+□ cloud IAM Role/Policy 已分离
+```
+
+## 返回值
+
+| 函数 | 返回值 | 说明 |
+|------|--------|------|
+| `runCleanupNode` | `error` | 清理成功或失败 |
+| `CleanDir` | `error` | 目录清理成功或失败 |
+| `RemoveStackedEtcdMember` | `error` | etcd 移除成功或失败 |
+
+## 调用链
+
+```mermaid
+graph TD
+    A[kubeadm reset] --> B[Phase: cleanup-node]
+    B --> C[停止 kubelet 服务]
+    C --> D[卸载挂载点]
+    D --> E[移除容器]
+    E --> F[CleanDir /etc/kubernetes/pki/]
+    F --> F1[删除 ca.crt/ca.key]
+    F --> F2[删除 apiserver.crt/apiserver.key]
+    F --> F3[删除 front-proxy-ca.*]
+    F --> F4[删除 sa.pub/sa.key]
+    F --> F5[删除 etcd/ca.* + server.* + peer.*]
+    E --> G[CleanDir /etc/kubernetes/manifests/]
+    E --> H[删除 kubeconfig 文件]
+    H --> H1[admin.conf]
+    H --> H2[super-admin.conf]
+    H --> H3[kubelet.conf]
+    H --> H4[controller-manager.conf]
+    H --> H5[scheduler.conf]
+    E --> I[CleanDir /var/lib/kubelet/]
+    E --> J[CleanDir /var/lib/etcd/]
+
+    K[手动安全清理] --> L[shred -vfz -n 3 etcd 数据]
+    K --> M[rm -rf /etc/cni/net.d]
+    K --> N[iptables -F && iptables -t nat -F]
+    K --> O[rm -rf $HOME/.kube]
+    K --> P[清理 systemd unit]
+    K --> Q[清理 CI/CD kubeconfig]
+```
+
+## 源码分析
+
+### 概述
+
+集群删除时的安全清理涵盖证书/密钥/凭证的完整删除、etcd 数据的安全擦除、RBAC 残留清理和 systemd 配置移除。`kubeadm reset` 的 `cleanup-node` 阶段自动清理标准路径下的证书和配置文件，但管理员 kubeconfig、CNI 配置、iptables 规则等需要手动处理。
+
+### 证书清理详情
 
 ```
 /etc/kubernetes/pki/                    ← 目录保留，内容清除
@@ -37,63 +202,7 @@
     └── healthcheck-client.key          ✅ 已清理
 ```
 
-### 1.2 不在 /etc/kubernetes/pki/ 中的密钥
-
-| 密钥文件 | 路径 | 是否自动清理 |
-|----------|------|-------------|
-| kubelet 服务端证书 | `/var/lib/kubelet/pki/kubelet.crt` | ✅ CleanDir `/var/lib/kubelet` |
-| kubelet 客户端证书 | `/var/lib/kubelet/pki/kubelet-client-*.pem` | ✅ CleanDir `/var/lib/kubelet` |
-| etcd 数据（含 WAL） | `/var/lib/etcd/member/` | ✅ remove-etcd-member 阶段 |
-
-### 1.3 安全隐患：非标准路径的密钥
-
-```bash
-# 检查是否有散落在非标准路径的证书/密钥
-find / -name "*.key" -o -name "*.pem" 2>/dev/null | grep -i kube
-
-# 常见遗漏位置
-ls -la /etc/kubernetes/pki/          # 标准位置
-ls -la /var/lib/kubelet/pki/         # kubelet 证书
-ls -la /etc/etcd/pki/                # 外部 etcd 证书
-ls -la /etc/kubernetes/encryption*   # 加密配置
-```
-
----
-
-## 2. kubeconfig 凭证清理
-
-### 2.1 自动清理的 kubeconfig
-
-`cleanup-node` 阶段通过 `os.RemoveAll` 删除以下文件：
-
-```
-/etc/kubernetes/admin.conf              ✅ 已清理
-/etc/kubernetes/super-admin.conf        ✅ 已清理 (v1.29+)
-/etc/kubernetes/kubelet.conf            ✅ 已清理
-/etc/kubernetes/bootstrap-kubelet.conf  ✅ 已清理
-/etc/kubernetes/controller-manager.conf ✅ 已清理
-/etc/kubernetes/scheduler.conf          ✅ 已清理
-```
-
-### 2.2 需要手动清理的 kubeconfig
-
-| 文件 | 路径 | 风险 |
-|------|------|------|
-| 用户 kubeconfig | `$HOME/.kube/config` | ⚠️ 包含集群管理员凭证 |
-| 备份 kubeconfig | `$HOME/.kube/config.bak` | ⚠️ 同上 |
-| CI/CD kubeconfig | GitLab/GitHub/Jenkins secret store | ⚠️ 泄露后可远程操作集群 |
-| 跳板机 kubeconfig | `/home/<user>/.kube/config` | ⚠️ 多用户环境 |
-
-```bash
-# 手动清理
-rm -rf $HOME/.kube/config
-rm -rf $HOME/.kube/
-
-# 如果 kubeconfig 被复制到了其他位置
-find / -name "admin.conf" -o -name "kubeconfig" 2>/dev/null
-```
-
-### 2.3 super-admin.conf vs admin.conf
+### admin.conf vs super-admin.conf
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -111,34 +220,9 @@ find / -name "admin.conf" -o -name "kubeconfig" 2>/dev/null
 └──────────────────────────────────────────────────────────────┘
 ```
 
----
+### etcd 数据安全
 
-## 3. ServiceAccount Token 清理
-
-### 3.1 静态 Token（K8s < 1.24 遗留）
-
-```bash
-# 查看是否有静态 SA Token Secret
-kubectl get secrets -A -kubernetes.io/service-account-token
-
-# 删除（在集群仍可用时）
-kubectl delete secrets -A -l kubernetes.io/service-account-token
-```
-
-### 3.2 TokenRequest 签发的动态 Token
-
-动态 Token 有过期时间（默认 3600s），删除集群后自动失效。但**已签发但未过期的 Token** 仍可用于访问 API Server（如果集群仍然存在）。
-
-```bash
-# 在删除集群前，撤销所有 ServiceAccount Token
-kubectl delete secrets -A --all --field-selector type=kubernetes.io/service-account-token
-```
-
----
-
-## 4. etcd 数据安全
-
-### 4.1 etcd 中存储的敏感数据
+etcd 中包含的敏感信息：
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -149,21 +233,13 @@ kubectl delete secrets -A --all --field-selector type=kubernetes.io/service-acco
 │  ├─ 数据库密码                                                │
 │  ├─ API Token                                                 │
 │  └─ SSH 私钥                                                  │
-│                                                                │
-│  ConfigMap                                                    │
-│  ├─ kubeadm-config（含集群配置）                               │
-│  └─ kube-proxy-config（含网络配置）                            │
-│                                                                │
-│  RBAC 对象                                                    │
-│  ├─ ClusterRole / ClusterRoleBinding                          │
-│  └─ 用户权限定义                                              │
-│                                                                │
+│  ConfigMap (kubeadm-config 含集群配置)                         │
+│  RBAC 对象 (ClusterRole/ClusterRoleBinding)                    │
 │  Audit 策略                                                   │
-│  └─ 审计日志配置                                               │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 安全删除 etcd 数据
+### 安全删除 etcd 数据
 
 ```bash
 # 普通删除（数据可能被恢复）
@@ -176,73 +252,35 @@ rm -rf /var/lib/etcd
 
 # 或使用 dd 覆写整个分区
 dd if=/dev/urandom of=/dev/sdX bs=1M
+
+# 安全检查：确认目录已清空
+ls -la /var/lib/etcd  # 应为空或不存在
 ```
 
-### 4.3 etcd 快照备份清理
+### 云厂商残留资源清理
 
 ```bash
-# 查找 etcd 快照文件
-find / -name "snapshot*.db" -o -name "etcd-snapshot*" 2>/dev/null
+# AWS: 检查并清理 EBS 卷
+aws ec2 describe-volumes --filters "Name=tag:KubernetesCluster,Values=<cluster-name>" --query 'Volumes[*].VolumeId'
+aws ec2 delete-volume --volume-id <volume-id>
 
-# 安全删除快照
-shred -vfz -n 3 /path/to/etcd-snapshot.db
-rm /path/to/etcd-snapshot.db
+# Azure: 检查并清理托管磁盘
+az disk list --resource-group <rg> --query '[].id'
+az disk delete --ids <disk-id>
+
+# GCP: 检查并清理持久磁盘
+gcloud compute disks list --filter="labels.k8s-cluster=<cluster-name>"
+gcloud compute disks delete <disk-name> --zone=<zone>
+
+# 阿里云: 检查并清理云盘
+aliyun ecs DescribeDisks --RegionId <region> --Tag "kubernetes.io/cluster/<cluster-id>"
+aliyun ecs DeleteDisk --DiskId <disk-id>
 ```
 
----
-
-## 5. 加密配置清理
-
-### 5.1 EncryptionConfiguration
-
-如果集群启用了静态加密（Encryption at Rest），加密密钥需要清理：
-
-```bash
-# 查找加密配置
-find / -name "encryption-config.yaml" -o -name "encryption*.yaml" 2>/dev/null
-
-# 安全删除
-shred -vfz -n 3 /etc/kubernetes/encryption-config.yaml
-rm /etc/kubernetes/encryption-config.yaml
-```
-
-### 5.2 audit 策略清理
-
-```bash
-# 查找审计配置
-find / -name "audit-policy.yaml" -o -name "audit*.yaml" 2>/dev/null
-
-# 审计日志包含敏感操作记录，需要清理
-shred -vfz -n 3 /var/log/kubernetes/audit.log
-rm /var/log/kubernetes/audit.log
-```
-
----
-
-## 6. RBAC 残留清理
-
-### 6.1 集群级 RBAC 对象
-
-Node 对象删除后，关联的 RBAC 绑定**不会自动清理**：
-
-```bash
-# 查看残留的 ClusterRoleBinding（在集群仍可用时）
-kubectl get clusterrolebinding -o wide | grep <deleted-node>
-
-# 清理与已删除节点相关的绑定
-kubectl delete clusterrolebinding <binding-name>
-
-# 清理 Bootstrap Token 相关的 RBAC
-kubectl delete clusterrolebinding kubeadm:node-bootstrapper
-kubectl delete clusterrolebinding kubeadm:bootstrap-signer
-```
-
-### 6.2 kubeadm 创建的 RBAC 资源
+### kubeadm 创建的 RBAC 资源
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  kubeadm 创建的 RBAC 资源                                    │
-├──────────────────────────────────────────────────────────────┤
 │  ClusterRole:                                                 │
 │  ├─ kubeadm:get-nodes                                         │
 │  ├─ system:node-bootstrapper                                  │
@@ -259,23 +297,7 @@ kubectl delete clusterrolebinding kubeadm:bootstrap-signer
 └──────────────────────────────────────────────────────────────┘
 ```
 
----
-
-## 7. systemd 服务清理
-
-### 7.1 kubelet systemd drop-in
-
-```bash
-# kubeadm 创建的 systemd 配置
-ls -la /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-
-# 清理
-rm -f /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-systemctl daemon-reload
-systemctl disable kubelet
-```
-
-### 7.2 完整 systemd 清理
+### systemd 清理
 
 ```bash
 systemctl stop kubelet 2>/dev/null || true
@@ -285,30 +307,114 @@ rm -rf /etc/systemd/system/kubelet.service.d/
 systemctl daemon-reload
 ```
 
----
+## 执行流程
 
-## 8. 安全清理检查清单
+```mermaid
+sequenceDiagram
+    participant User
+    participant reset as kubeadm reset
+    participant Node as 节点
+    participant Manual as 手动清理
 
+    User->>reset: kubeadm reset --force
+    reset->>Node: 停止 kubelet
+    reset->>Node: 卸载挂载点
+    reset->>Node: 移除容器
+    reset->>Node: CleanDir pki (证书/密钥)
+    reset->>Node: CleanDir manifests
+    reset->>Node: 删除 kubeconfig 文件
+    reset->>Node: CleanDir /var/lib/kubelet
+    reset->>Node: CleanDir /var/lib/etcd
+    reset-->>User: 手动清理提示
+
+    User->>Manual: shred etcd 数据
+    User->>Manual: rm -rf /etc/cni/net.d
+    User->>Manual: iptables -F
+    User->>Manual: rm $HOME/.kube/config
+    User->>Manual: 清理 systemd
+    User->>Manual: 清理 CI/CD kubeconfig
 ```
-□ /etc/kubernetes/pki/ 内容已清除
-□ /var/lib/kubelet/pki/ 已清除
-□ /var/lib/etcd/ 已安全擦除
-□ /etc/kubernetes/*.conf 已删除
-□ $HOME/.kube/config 已删除
-□ etcd 快照备份已安全擦除
-□ 加密配置文件已安全擦除
-□ 审计日志已安全擦除
-□ systemd 服务配置已清理
-□ CI/CD 中的 kubeconfig 已轮换/删除
-□ Bootstrap Token 已过期/删除
-□ RBAC 绑定已清理
-□ cloud IAM Role/Policy 已分离（云环境）
+
+## 使用场景
+
+1. **生产节点退役**：完整安全清理防止凭证泄露
+2. **开发环境重置**：快速清理后重新部署
+3. **合规审计**：确保敏感数据完全擦除
+4. **多租户环境**：彻底清理防止跨租户数据泄露
+5. **etcd 数据保护**：安全擦除 etcd 快照和 WAL
+
+## 配置示例
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ResetConfiguration
+certificatesDir: /etc/kubernetes/pki
+cleanupTmpDir: true
+force: true
+skipPhases: []
 ```
 
----
+## 实战示例
 
-## 参考
+### 完整安全清理脚本
 
-- [kubeadm reset 安全考量](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/)
-- [etcd 安全运维](https://etcd.io/docs/latest/op-guide/security/)
-- [Kubernetes Secret 安全](https://kubernetes.io/docs/concepts/security/secrets-good-practices/)
+```bash
+#!/bin/bash
+set -euo pipefail
+
+echo "=== Step 1: kubeadm reset ==="
+kubeadm reset --force --cleanup-tmp-dir
+
+echo "=== Step 2: 安全擦除 etcd ==="
+if [ -d /var/lib/etcd ]; then
+    find /var/lib/etcd -type f -exec shred -vfz -n 3 {} \;
+    rm -rf /var/lib/etcd
+fi
+
+echo "=== Step 3: 清理 CNI ==="
+rm -rf /etc/cni/net.d
+
+echo "=== Step 4: 清理 iptables ==="
+iptables -F
+iptables -t nat -F
+iptables -t mangle -F
+iptables -X
+ipvsadm -C 2>/dev/null || true
+
+echo "=== Step 5: 清理 kubeconfig ==="
+rm -rf $HOME/.kube
+
+echo "=== Step 6: 清理 systemd ==="
+systemctl stop kubelet 2>/dev/null || true
+systemctl disable kubelet 2>/dev/null || true
+rm -f /etc/systemd/system/kubelet.service
+rm -rf /etc/systemd/system/kubelet.service.d/
+systemctl daemon-reload
+
+echo "=== Step 7: 清理 etcd 快照 ==="
+find / -name "snapshot*.db" -o -name "etcd-snapshot*" 2>/dev/null | while read f; do
+    shred -vfz -n 3 "$f"
+    rm -f "$f"
+done
+
+echo "=== 安全清理完成 ==="
+```
+
+## 常见错误
+
+| 错误 | 现象 | 原因 | 解决方案 |
+|------|------|------|----------|
+| etcd 数据残留 | 重部署时 etcd 数据冲突 | reset 未完全清理 etcd | 手动 `rm -rf /var/lib/etcd` |
+| kubeconfig 泄露 | 旧凭证仍可访问集群 | `$HOME/.kube/config` 未删除 | `rm -rf $HOME/.kube` |
+| iptables 残留 | 新集群网络异常 | reset 不清理 iptables | `iptables -F && iptables -t nat -F` |
+| systemd 残留 | kubelet 被自动拉起 | unit 文件未删除 | `rm -rf /etc/systemd/system/kubelet.service.d/` |
+| CI/CD 凭证泄露 | 旧集群 kubeconfig 在 Git 中 | 未轮换 Secret | 在 CI/CD 平台删除并重新生成 |
+| etcd 快照泄露 | 快照包含所有 Secret | 快照文件未安全删除 | `shred -vfz -n 3` 安全擦除 |
+
+## 相关函数
+
+- [`runCleanupNode`](04-cleanup.md) — 节点清理阶段
+- [`CleanDir`](04-cleanup.md) — 目录清理工具
+- [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — etcd 成员移除
+- [`网络清理`](11-network-cleanup.md) — CNI/iptables 清理
+- [`证书生成`](../cluster-cert/02-ca-generation.md) — 理解证书文件结构

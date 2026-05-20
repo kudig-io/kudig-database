@@ -1,3 +1,34 @@
+---
+title: Network Policies
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- cilium
+- flannel
+- calico
+- ingress
+- networkpolicy
+- ebpf
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Network Policies 是什么
+- 如何 Network Policies
+trigger_keywords:
+- Network
+- Policies
+- dictionary
+title_en: Network Policies
+---
+
+
 # Network Policies
 
 ## 概述

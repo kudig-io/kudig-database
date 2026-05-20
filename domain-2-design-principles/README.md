@@ -1,3 +1,44 @@
+---
+title: 'Domain-2: Kubernetes 设计原则与核心机制'
+description: '# Domain-2: Kubernetes 设计原则与核心机制'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- crd
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-2: Kubernetes 设计原则与核心机制 是什么'
+- '如何 Domain-2: Kubernetes 设计原则与核心机制'
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 'Domain-2:'
+- Kubernetes
+- 设计原则与核心机制
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
 # Domain-2: Kubernetes 设计原则与核心机制
 
 > **文档数量**: 19 篇 | **最后更新**: 2026-04 | **适用版本**: Kubernetes 1.25 - 1.33+

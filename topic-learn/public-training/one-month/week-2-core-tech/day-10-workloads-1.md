@@ -1,4 +1,84 @@
+---
+title: 'Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet'
+description: '- "Deployment 滚动更新怎么配置"'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- hpa
+- vpa
+- statefulset
+- daemonset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet 是什么'
+- '如何 Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet'
+trigger_keywords:
+- Day
+- '10:'
+- 工作负载
+- Deployment
+- StatefulSet
+- DaemonSet
+- learn
+---
+
 # Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY10
+title: Day 10 - 工作负载 - Deployment + StatefulSet + DaemonSet
+topic: kubernetes
+type: hands-on-guide
+tags: [deployment, statefulset, daemonset, replicaset, rolling-update, rollback, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: beginner
+intent_queries:
+  - "Deployment 滚动更新怎么配置"
+  - "StatefulSet 和 Deployment 区别"
+  - "DaemonSet 什么场景用"
+  - "maxSurge/maxUnavailable 怎么设置"
+trigger_keywords:
+  - Deployment
+  - StatefulSet
+  - DaemonSet
+  - ReplicaSet
+  - RollingUpdate
+  - maxSurge
+  - maxUnavailable
+  - Rollback
+  - revisionHistoryLimit
+  - Headless Service
+  - volumeClaimTemplate
+  - topologyKey
+  - nodeSelector
+reading_level: beginner
+audience:
+  - sre
+  - ops-engineer
+  - developer
+estimated_read_time: 45min
+related_domains:
+  - domain-4-workloads
+  - domain-12-troubleshooting
+related_topics:
+  - workloads
+  - deployment
+  - statefulset
+  - daemonset
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-11-workloads-2.md
+  - domain-4-workloads/02-deployment-production-patterns.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: K8s 核心工作负载类型
 

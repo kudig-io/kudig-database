@@ -1,3 +1,41 @@
+---
+title: FTA 故障树分析方法论与 AI Agent 智能运维实践
+description: '# FTA 故障树分析方法论与 AI Agent 智能运维实践'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- FTA 故障树分析方法论与 AI Agent 智能运维实践 是什么
+- 如何 FTA 故障树分析方法论与 AI Agent 智能运维实践
+- FTA 故障树分析方法论与 AI Agent 智能运维实践 根因分析
+- FTA 故障树分析方法论与 AI Agent 智能运维实践 故障树
+trigger_keywords:
+- FTA
+- 故障树分析方法论与
+- AI
+- Agent
+- 智能运维实践
+- fta
+---
+
+
 # FTA 故障树分析方法论与 AI Agent 智能运维实践
 
 > **文档版本**: v1.0  
@@ -3946,6 +3984,10 @@ fta.evidence: "container_memory_usage > limit"
   - CronJob 从 `batch/v1beta1` 向 `batch/v1` 迁移期，需关注 API 版本与字段差异。
 - **1.24–1.27**：
   - Dockershim 已移除，运行时以 `containerd/CRI-O` 为主，诊断与日志路径需适配。
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
   - PodSecurityPolicy 在 1.25 移除，安全策略需映射到 Pod Security Admission / OPA Gatekeeper。
   - Ingress/CronJob 等已完成 API 迁移，排查时默认以 `v1` 为准。
 - **1.28–1.30**：

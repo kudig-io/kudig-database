@@ -1,3 +1,30 @@
+---
+title: runc v1.0 Release Notes
+description: runc v1.0 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- helm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- runc v1.0 Release Notes 是什么
+- 如何 runc v1.0 Release Notes
+trigger_keywords:
+- runc
+- v1.0
+- Release
+- Notes
+- release
+- notes
+---
+
 # runc v1.0 Release Notes
 
 Source: [v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)

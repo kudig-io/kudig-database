@@ -1,3 +1,41 @@
+---
+title: eBPF 性能优化实践 (eBPF Performance Optimization Practice)
+description: '# eBPF 性能优化实践 (eBPF Performance Optimization Practice)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- prometheus
+- daemonset
+- ingress
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- eBPF 性能优化实践 (eBPF Performance Optimization Practice) 是什么
+- 如何 eBPF 性能优化实践 (eBPF Performance Optimization Practice)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- eBPF
+- 性能优化实践
+- eBPF
+- Performance
+- Optimization
+- Practice
+- ebpf
+- technology
+---
+
+
 # eBPF 性能优化实践 (eBPF Performance Optimization Practice)
 
 > **作者**: kudig.io 技术团队  

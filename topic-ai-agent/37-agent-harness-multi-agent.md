@@ -1,3 +1,37 @@
+---
+title: Agent Harness 多 Agent 编排
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent, 编排, Orchestrator, 分层 Harness, Agent 通信,
+  任务分解, 冲突解决, 隔离原则, DAG, 工作流'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness 多 Agent 编排 是什么
+- 如何 Agent Harness 多 Agent 编排
+trigger_keywords:
+- Agent
+- Harness
+- Agent
+- 编排
+- ai
+- agent
+---
+
+
 # Agent Harness 多 Agent 编排
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent, 编排, Orchestrator, 分层 Harness, Agent 通信, 任务分解, 冲突解决, 隔离原则, DAG, 工作流

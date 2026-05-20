@@ -1,3 +1,45 @@
+---
+title: Platform Ops Domain (平台运维领域)
+description: '# Platform Ops Domain (平台运维领域)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- crd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Platform Ops Domain (平台运维领域) 是什么
+- 如何 Platform Ops Domain (平台运维领域)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- Platform
+- Ops
+- Domain
+- 平台运维领域
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
 # Platform Ops Domain (平台运维领域)
 
 > **文档数量**: 26 篇 | **最后更新**: 2026-04 | **版本**: v2.2 | **专业级别**: 企业级生产环境 ⭐⭐⭐⭐⭐ | **适用版本**: Kubernetes 1.25 - 1.33+

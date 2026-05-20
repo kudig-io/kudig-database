@@ -1,3 +1,41 @@
+---
+title: 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南
+description: '# 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- scheduler
+- prometheus
+- minio
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南 是什么
+- 如何 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- 火山引擎
+- VEK
+- Volcengine
+- Kubernetes
+- 字节级深度实战指南
+- cloud
+- provider
+---
+
+
 # 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南
 
 ## 产品概述与战略定位

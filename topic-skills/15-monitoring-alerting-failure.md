@@ -1,75 +1,79 @@
 ---
-skill_id: "SKILL-MONITOR-001"
-skill_name: "监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation"
-version: "1.0"
-category: "observability"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Metrics Server v0.7+ compatible, Prometheus Operator v0.70+"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: No monitoring API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+description: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
+category: observability
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- prometheus
+- grafana
+- helm
+- statefulset
+- job
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 是什么
+- 如何 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 trigger_keywords:
-  - "prometheus down"
-  - "alertmanager not firing"
-  - "grafana dashboard empty"
-  - "metrics missing"
-  - "target down"
-  - "scrape failed"
-  - "alert storm"
-  - "notification failed"
-  - "thanos query error"
-  - "servicemonitor not working"
-  - "pushgateway stale"
-  - "recording rule error"
-  - "监控不可用"
-  - "告警不发送"
-  - "指标丢失"
-  - "仪表盘无数据"
-  - "告警风暴"
-  - "通知失败"
-trigger_events:
-  - "PrometheusNotReady"
-  - "AlertmanagerNotReady"
-  - "TargetDown"
-  - "PrometheusConfigReloadFailed"
-  - "AlertmanagerConfigReloadFailed"
-  - "PrometheusTSDBReloadsFailing"
-trigger_metrics:
-  - 'up == 0'
-  - 'prometheus_tsdb_head_series'
-  - 'alertmanager_alerts{state="active"}'
-  - 'prometheus_target_scrape_pool_sync_total'
-  - 'prometheus_config_last_reload_successful == 0'
-  - 'alertmanager_config_last_reload_successful == 0'
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-NET-001"
-  - "SKILL-STORE-001"
-fta_refs:
-  - "topic-fta/list/monitoring-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/30-monitoring-alerting-troubleshooting.md"
-  - "domain-20-enterprise-monitoring-alerting/"
-  - "domain-8-observability/"
+- prometheus down
+- alertmanager not firing
+- grafana dashboard empty
+- metrics missing
+- target down
+- scrape failed
+- alert storm
+- notification failed
+- thanos query error
+- servicemonitor not working
+- pushgateway stale
+- recording rule error
+- 监控不可用
+- 告警不发送
+- 指标丢失
+- 仪表盘无数据
+- 告警风暴
+- 通知失败
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-15
+  category: observability
+  subcategory: monitoring
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 25
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n monitoring -o wide 检查监控组件状态"
+  critical_commands:
+    - "kubectl get pods -n monitoring -o wide"
+    - "kubectl logs -n monitoring -l app=prometheus --tail=100"
+    - "kubectl get servicemonitor -A"
+    - "kubectl get prometheus -A -o wide"
+    - "kubectl exec -it prometheus-<pod> -n monitoring -- promtool tsdb analyze"
+  danger_operations:
+    - action: "kubectl delete pod -n monitoring -l app=prometheus --force"
+      risk: "强制删除 Prometheus 会导致监控数据丢失，可能影响告警触发"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示监控组件异常 -->
 
 # 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 

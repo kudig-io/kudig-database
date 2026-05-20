@@ -1,3 +1,37 @@
+---
+title: Koordinator
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- scheduler
+- helm
+- daemonset
+- job
+- gpu
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Koordinator 是什么
+- 如何 Koordinator
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Koordinator
+- cncf
+- landscape
+---
+
+
 # Koordinator
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03
@@ -346,3 +380,74 @@ spec:
 ---
 
 **维护者**: Kudig Team | **许可证**: MIT
+
+## 生产实战与调优
+
+### 典型生产场景
+
+1. **在线/离线混部 (Co-location)** — 在同一集群中运行在线服务（延迟敏感型）和离线任务（吞吐型），通过 Koordinator 的资源画像和干扰检测，将离线任务调度到在线服务的空闲资源上，集群整体利用率从 30% 提升至 60%+。
+2. **GPU 共享与拓扑感知调度** — AI 训练/推理场景下，多个小模型推理服务共享同一张 GPU，Koordinator 通过 `GPUShare` 和 NUMA Topology 感知调度，避免 GPU 显存碎片化。
+3. **QoS 混合部署** — 将 Pod 分为 LSE (Latency Sensitive Explicit)、LS (Latency Sensitive)、BE (Best Effort) 三级 QoS，在资源紧张时优先驱逐 BE 保障 LS/LSE。
+4. **资源画像与动态超卖** — 基于历史实际用量自动调整 Pod 的 request/limit，实现安全超卖。
+
+### 配置调优参数
+
+```yaml
+# Koordinator Scheduler 配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: koord-scheduler-config
+data:
+  koord-scheduler.yaml: |
+    profiles:
+      - schedulerName: koord-scheduler
+        plugins:
+          coscheduling:
+            enabled: true
+          loadAwareScheduling:
+            enabled: true
+            args:
+              estimatedScalingFactors:
+                cpu: 85        # CPU 实际用量预估系数（%）
+                memory: 70     # Memory 实际用量预估系数（%）
+              utilizationThresholds:
+                cpu: 65        # 节点 CPU 利用率阈值，超过则不调度新 Pod
+                memory: 75     # 节点 Memory 利用率阈值
+
+# 资源超卖配置
+apiVersion: config.koordinator.sh/v1alpha1
+kind: ResourceQOS
+metadata:
+  name: be-qos
+spec:
+  resourceQOS:
+    - qosClass: BE
+      cpuPolicy:
+        cpuset: "4-31"         # BE 任务绑定到指定 CPU 核
+      memoryPolicy:
+        oomPriority: -999      # BE OOM 优先级最低
+```
+
+关键调优点：
+- `estimatedScalingFactors`：根据实际业务画像调整，CPU 密集型可设 90%，IO 密集型可设 60%
+- `utilizationThresholdes`：生产环境 CPU 建议 60-70%，Memory 建议 70-80%
+- `ResourceInterpreter`：自定义 CRD 的资源解读器，支持 Gang Scheduling
+
+### 性能基准数据（参考值）
+
+| 场景 | 集群规模 | 混部前利用率 | 混部后利用率 | 在线延迟影响 |
+|------|----------|-------------|-------------|-------------|
+| 在线+离线 CPU 混部 | 200 节点 | 25-35% | 55-65% | P99 增加 < 5% |
+| GPU 共享推理 | 50 GPU | 40% (独占) | 75% (共享) | 吞吐提升 1.5x |
+| 大规模混部 | 1000 节点 | 30% | 60% | P99 增加 < 10% |
+
+> 注：实际效果取决于在线服务的延迟敏感程度和资源波动模式，建议先在非核心业务验证。
+
+### 常见坑和注意事项
+
+1. **干扰检测延迟** — Koordinator 的干扰检测默认基于 1 分钟滑动窗口，突发流量场景下反应不够快。建议配合 CPU CFS bandwidth throttling 监控。
+2. **GPU 共享需配合 Device Plugin** — 必须安装 Koordinator 提供的 GPU Device Plugin，原生 NVIDIA Device Plugin 不支持显存级别的共享。
+3. **BE 任务饥饿** — 如果在线服务长期高负载，BE 任务可能被完全驱逐，导致离线任务永远无法完成。建议设置 BE 最小资源保障。
+4. **cgroup v2 兼容性** — Koordinator 依赖 cgroup v2 的 PSI (Pressure Stall Information) 做干扰检测，需确认节点内核版本 >= 5.10 且启用了 cgroup v2。
+5. **Gang Scheduling 死锁** — coscheduling 插件配置不当可能导致 Pod 组永远无法全部调度，注意设置合理的 `minMember` 和 `timeout`。

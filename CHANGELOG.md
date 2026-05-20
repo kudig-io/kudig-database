@@ -1,3 +1,32 @@
+---
+title: 变更历史
+description: '### 2026-04-24 应用层架构设计专题 — 第九批 10 大行业场景 (v16)'
+category: general
+tags:
+- k8s
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- jaeger
+- istio
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 40min
+intent_queries:
+- 变更历史 是什么
+- 如何 变更历史
+trigger_keywords:
+- 变更历史
+---
+
+
 # 变更历史
 
 ### 2026-04-24 应用层架构设计专题 — 第九批 10 大行业场景 (v16)

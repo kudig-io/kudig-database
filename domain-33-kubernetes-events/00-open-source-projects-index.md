@@ -1,3 +1,35 @@
+---
+title: Domain-33 K8s 事件 — 开源项目索引
+description: '| **EventRouter** | 事件路由到日志系统 | Heptio/VMware | v1.0.0 | 1k+ | Apache-2.0 |'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- prometheus
+- opa
+- falco
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Domain-33 K8s 事件 — 开源项目索引 是什么
+- 如何 Domain-33 K8s 事件 — 开源项目索引
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- Domain-33
+- K8s
+- 事件
+- 开源项目索引
+- kubernetes
+- events
+---
+
 # Domain-33 K8s 事件 — 开源项目索引
 
 > **最后更新**: 2026-04-24

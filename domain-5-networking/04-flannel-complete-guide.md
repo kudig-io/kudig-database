@@ -1,3 +1,68 @@
+---
+title: 142 - Flannel 完整指南 (Flannel Complete Guide)
+description: '# 142 - Flannel 完整指南 (Flannel Complete Guide)'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- etcd
+- flannel
+- calico
+- docker
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Flannel 完整指南 (Flannel Complete Guide) 是什么
+- 如何 Flannel 完整指南 (Flannel Complete Guide)
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Flannel
+- 完整指南
+- Flannel
+- Complete
+- Guide
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+- type: doc
+  path: ./04a-flannel-wireguard-backend.md
+  label: 'WireGuard 加密后端'
+- type: doc
+  path: ./04b-flannel-ipv6-dual-stack.md
+  label: 'IPv6 Dual Stack'
+- type: doc
+  path: ./04c-flannel-windows-support.md
+  label: 'Windows 节点支持'
+- type: doc
+  path: ./04d-flannel-multi-cluster.md
+  label: '多集群场景'
+- type: doc
+  path: ./04e-flannel-command-reference.md
+  label: 'flanneld 参数详解'
+---
+
+
 # 142 - Flannel 完整指南 (Flannel Complete Guide)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **Flannel 版本**: v0.24+ | **最后更新**: 2026-01
@@ -69,7 +134,7 @@
 | **host-gw** | 0 | 高 | L2 互通 | 裸金属、同网段 |
 | **UDP** | 较大 | 低 | 无特殊要求 | 调试、不推荐生产 |
 | **IPIP** | 20 bytes | 中高 | 无特殊要求 | 跨网段、低开销 |
-| **WireGuard** | 80 bytes | 中 | WireGuard 支持 | 需要加密 |
+| **WireGuard** | 80 bytes | 中 | WireGuard 支持 | 需要加密 → [详见 WireGuard 后端配置](./04a-flannel-wireguard-backend.md) |
 
 ---
 
@@ -424,6 +489,16 @@ Flannel 本身不支持 NetworkPolicy，需配合 Calico:
 # 安装 Canal (Flannel + Calico NetworkPolicy)
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/canal.yaml
 ```
+
+---
+
+## 9. 进阶专题
+
+- [WireGuard 加密后端配置](./04a-flannel-wireguard-backend.md)
+- [IPv6 Dual Stack 支持](./04b-flannel-ipv6-dual-stack.md)
+- [Windows 节点支持](./04c-flannel-windows-support.md)
+- [多集群场景与子网冲突处理](./04d-flannel-multi-cluster.md)
+- [flanneld 启动参数详解](./04e-flannel-command-reference.md)
 
 ---
 

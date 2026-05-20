@@ -1,20 +1,38 @@
 ---
-title: "SQL 速查卡"
-description: "关系型数据库查询与运维快速参考，覆盖 MySQL 8.0 / PostgreSQL 14 / SQLite 3"
+title: SQL 速查卡
+description: 关系型数据库查询与运维快速参考，覆盖 MySQL 8.0 / PostgreSQL 14 / SQLite 3
 category: cheatsheet
-tags: [sql, mysql, postgresql, database, cheatsheet, quick-reference]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- sql
+- mysql
+- postgresql
+- database
+- cheatsheet
+- quick-reference
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- SQL 速查卡 是什么
+- 如何 SQL 速查卡
+trigger_keywords:
+- SQL
+- 速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-28-database-middleware/"
-    desc: "数据库与中间件专题"
-  - path: "../topic-cheat-sheet/linux.md"
-    desc: "Linux 速查卡"
+- path: ../domain-28-database-middleware/
+  desc: 数据库与中间件专题
+- path: ../topic-cheat-sheet/linux.md
+  desc: Linux 速查卡
 ---
+
 
 # SQL 速查表
 

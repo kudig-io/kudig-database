@@ -1,22 +1,82 @@
 ---
-fta_id: "FTA-NODE-023"
-title: "Node 异常故障树分析"
-component: "node"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-NODE-001"
-last_updated: "2026-05"
+title: Node 异常故障树分析
+description: '- **范围**：节点状态、kubelet、运行时、系统资源、内核与网络、存储、证书与时间、控制面依赖等。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- node
+- kubelet
+- runtime
+- kernel
+- resources
+- etcd
+- apiserver
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Node 异常故障树分析 是什么
+- 如何 Node 异常故障树分析
+- Node 异常故障树分析 根因分析
+- Node 异常故障树分析 故障树
+trigger_keywords:
+- Node
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, node, kubelet, runtime, kernel, resources]
-related_skills:
-  - "../topic-skills/35-node-component-troubleshooting.md"
-knowledge_refs:
-  - "../domain-4-workloads/35-node-component-troubleshooting.md"
-  - "../domain-12-troubleshooting/35-node-component-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '知识域: domain-3-control-plane'
+- type: skill
+  path: ../topic-skills/01-node-notready.md
+  label: '运维技能: 01-node-notready'
+- type: structural
+  path: ../topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md
+  label: '结构化排障: 04-node-troubleshooting'
+fta_metadata:
+  fta_id: FTA-NODE-001
+  top_event: Node 异常 (NotReady/不可达/性能劣化)
+  top_event_id: TE-NODE-001
+  bottom_events_count: 28
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get nodes 显示 NotReady 或 Unknown 状态节点"
+    - "kubectl get pods -A --field-selector=spec.nodeName=<node> 显示节点上 Pod 异常"
+    - "Prometheus 显示 node_exporter 指标异常"
+agent_notes:
+  decision_tree_entry: "kubectl get nodes 检查节点状态; kubectl describe node <node> 查看详细信息"
+  critical_commands:
+    - "kubectl get nodes -o wide"
+    - "kubectl describe node <node-name>"
+    - "kubectl top node <node-name>"
+    - "ssh <node> 'journalctl -u kubelet --since \"1 hour ago\" | tail -100'"
+    - "ssh <node> 'crictl ps | grep -E \"exited|error\"'"
+  danger_operations:
+    - action: "kubectl delete node <node-name> --dry-run=server"
+      risk: "模拟删除节点，实际上不会删除节点"
+      requires_confirmation: false
+    - action: "kubectl cordon <node-name>"
+      risk: "标记节点为不可调度，新 Pod 不会调度到该节点"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type==\"Ready\" && @.status!=\"True\")].nodeName]' 显示有 NotReady 节点 -->
 
 # Node 异常 FTA 树
 

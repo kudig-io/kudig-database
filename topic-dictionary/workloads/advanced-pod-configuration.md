@@ -1,3 +1,33 @@
+---
+title: Advanced Pod Configuration
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- coredns
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Advanced Pod Configuration 是什么
+- 如何 Advanced Pod Configuration
+trigger_keywords:
+- Advanced
+- Pod
+- Configuration
+- dictionary
+title_en: Pods
+---
+
+
 # Advanced Pod Configuration
 
 ## 概述

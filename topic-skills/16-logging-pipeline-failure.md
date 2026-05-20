@@ -1,76 +1,82 @@
 ---
-skill_id: "SKILL-LOG-001"
-skill_name: "日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation"
-version: "1.0"
-category: "observability"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Audit logging v1 stable, Native Sidecar Containers (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "10-60min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+description: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
+category: observability
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- helm
+- kafka
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 是什么
+- 如何 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 trigger_keywords:
-  - "log missing"
-  - "日志丢失"
-  - "fluentd error"
-  - "fluent-bit crash"
-  - "log pipeline blocked"
-  - "日志管道阻塞"
-  - "elasticsearch full"
-  - "ES 磁盘满"
-  - "loki ingestion error"
-  - "log parsing failed"
-  - "日志解析失败"
-  - "log rotation"
-  - "日志轮转"
-  - "audit log"
-  - "审计日志"
-  - "log delay"
-  - "日志延迟"
-  - "vector error"
-  - "log buffer overflow"
-  - "缓冲区溢出"
-  - "log collection stopped"
-  - "日志采集停止"
-trigger_events:
-  - "DaemonSetMisScheduled"
-  - "OOMKilled"
-  - "BackOff"
-  - "FailedMount"
-trigger_metrics:
-  - 'fluentd_output_status_buffer_total_bytes'
-  - 'elasticsearch_cluster_health_status'
-  - 'loki_ingester_chunks_flushed_total'
-  - 'fluent_bit_output_retries_total'
-  - 'vector_buffer_events'
-  - 'fluentd_output_status_retry_count'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-STORE-001"
-fta_refs:
-  - "topic-fta/list/observability-fta.md"
-knowledge_refs:
-  - "domain-21-logging-management-analytics/"
-  - "domain-12-troubleshooting/39-enterprise-monitoring-alerting-system.md"
-  - "domain-8-observability/"
+- log missing
+- 日志丢失
+- fluentd error
+- fluent-bit crash
+- log pipeline blocked
+- 日志管道阻塞
+- elasticsearch full
+- ES 磁盘满
+- loki ingestion error
+- log parsing failed
+- 日志解析失败
+- log rotation
+- 日志轮转
+- audit log
+- 审计日志
+- log delay
+- 日志延迟
+- vector error
+- log buffer overflow
+- 缓冲区溢出
+- log collection stopped
+- 日志采集停止
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-16
+  category: observability
+  subcategory: logging
+  severity: P2
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n logging -o wide 检查日志组件状态"
+  critical_commands:
+    - "kubectl get pods -n logging -o wide"
+    - "kubectl logs -n logging -l app=fluent-bit --tail=100"
+    - "kubectl exec -n logging <elasticsearch-pod> -- curl -s localhost:9200/_cluster/health"
+    - "kubectl get events -n logging --sort-by='.lastTimestamp'"
+  danger_operations:
+    - action: "kubectl delete pod -n logging -l app=fluent-bit --force"
+      risk: "强制删除日志采集组件会导致日志丢失，无法恢复"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n logging -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示日志组件异常 -->
 
 # 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 

@@ -1,3 +1,29 @@
+---
+title: 标签和选择器
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 标签和选择器 是什么
+- 如何 标签和选择器
+trigger_keywords:
+- 标签和选择器
+- dictionary
+title_en: Labels
+---
+
+
 # 标签和选择器
 
 ## 概述

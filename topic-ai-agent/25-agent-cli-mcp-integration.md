@@ -1,3 +1,37 @@
+---
+title: Agent CLI 与 MCP 协议深度集成
+description: '# Agent CLI 与 MCP 协议深度集成'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- postgresql
+- gateway
+- rbac
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent CLI 与 MCP 协议深度集成 是什么
+- 如何 Agent CLI 与 MCP 协议深度集成
+trigger_keywords:
+- Agent
+- CLI
+- MCP
+- 协议深度集成
+- ai
+- agent
+---
+
+
 # Agent CLI 与 MCP 协议深度集成
 
 > **文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: MCP, Model Context Protocol, MCP Server, MCP Client, Tool Registry, Remote MCP, OAuth 2.1

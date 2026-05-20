@@ -1,3 +1,40 @@
+---
+title: AI/ML 推理服务 Kubernetes 生产架构设计
+description: '# AI/ML 推理服务 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- scheduler
+- prometheus
+- harbor
+- job
+- gateway
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 技术决策者
+estimated_read_time: 5min
+intent_queries:
+- AI/ML 推理服务 Kubernetes 生产架构设计 是什么
+- 如何 AI/ML 推理服务 Kubernetes 生产架构设计
+trigger_keywords:
+- AI
+- ML
+- 推理服务
+- Kubernetes
+- 生产架构设计
+- application
+- architecture
+---
+
+
 # AI/ML 推理服务 Kubernetes 生产架构设计
 
 > **适用场景**: LLM 大模型推理 / 图像识别 / 语音合成 / 推荐系统 / 智能客服 / 自动驾驶感知  
@@ -623,3 +660,51 @@ spec:
 - [NVIDIA Triton Inference Server](https://docs.nvidia.com/deeplearning/triton-inference-server/)
 - [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM)
 - [Kubernetes DRA](https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/)
+
+---
+
+## 多云部署方案对照
+
+### 云服务 → 多云映射表
+
+| 能力域 | AWS | GCP | Azure | 说明 |
+|:---|:---|:---|:---|:---|
+| K8s 容器编排 | **EKS** | **GKE** | **AKS** | 本文档基于原生 K8s，各云均可部署 |
+| GPU 实例 (A100) | **p4d.24xlarge** | **a2-ultragpu-8g** | **ND A100 v4** | GPU 型号和规格有差异 |
+| GPU 实例 (H100) | **p5.48xlarge** | **a3-highgpu-8g** | **ND H100 v5** | H100 可用性受供应影响 |
+| GPU 实例 (T4 推理) | **g4dn.xlarge** | **n1-standard + T4** | **NC T4 v3** | 推理专用，性价比高 |
+| 对象存储 (模型) | **S3** | **GCS** | **Blob Storage** | 模型文件存储，使用 S3 兼容 API |
+| 镜像仓库 | **ECR** | **Artifact Registry** | **ACR** | 模型容器镜像存储 |
+| 节点自动伸缩 | **Karpenter** | **GKE Autopilot** | **Karpenter / Virtual Nodes** | GPU 节点弹性扩缩 |
+| ML 平台 | **SageMaker** | **Vertex AI** | **Azure ML** | 可选，也可用 KServe 替代 |
+| 推理服务 | **SageMaker Endpoints** | **Vertex AI Endpoints** | **Azure ML Endpoints** | 本文档使用 KServe，不绑定云 |
+| 日志/监控 | **CloudWatch** | **Cloud Monitoring** | **Monitor** | 本文档使用 Prometheus + Grafana |
+| Spot/抢占实例 | **Spot Instances** | **Preemptible VMs** | **Spot VMs** | GPU Spot 实例可降本 60-90% |
+| 网络加速 (RDMA) | **EFA** | **gVNIC** | **InfiniBand** | 多卡/多节点通信加速 |
+
+### 多云部署注意事项
+
+1. **GPU 可用性**: 各云 GPU 实例型号、显存规格和供应情况不同。H100/A100 在部分云 Region 可能缺货，需提前评估目标 Region 的 GPU 库存。
+2. **Karpenter 兼容性**: 本文档中 KarpenterNodePool 使用了 `karpenter.k8s.aws` 的 EC2NodeClass，这是 AWS 特有的。GCP 使用 GKE Autopilot 或 Karpenter GCP Provider，Azure 使用 Karpenter Azure Provider 或 Karpenter AKS Provider。需根据目标云修改 NodeClass CRD。
+3. **模型存储**: 模型文件建议存储在 S3 兼容的对象存储中（各云原生 S3 API 或 MinIO）。KServe 的 storageUri 支持 s3://、gs://、azblob:// 等协议，但配置方式不同，需适配。
+4. **GPU 通信**: 多卡推理（Tensor Parallelism）依赖 NVLink / NVSwitch。跨云多节点推理需 RDMA 网络，跨云通常无法实现，建议单云内完成。
+5. **量化与优化**: vLLM / TensorRT-LLM 的量化模型（AWQ/GPTQ）与 GPU 架构绑定。A100 (Ampere) 和 H100 (Hopper) 的量化支持不同，迁移时需重新量化。
+6. **成本管理**: GPU 实例费用差异大。AWS p4d.24xlarge (~$32/h) vs GCP a2-ultragpu (~$35/h) vs Azure ND A100 (~$30/h)，需评估 TCO。Spot/抢占实例是降本关键，但需处理中断。
+
+### 云中立方案（开源替代）
+
+| 能力域 | 开源方案 | 说明 |
+|:---|:---|:---|
+| 容器编排 | **Kubernetes** + **Karpenter** (多云) | Karpenter 已支持 AWS/GCP/Azure |
+| 推理服务 | **KServe** / **vLLM** / **TGI** | 本文档已使用，完全云中立 |
+| 模型格式 | **ONNX** / **SafeTensors** | 跨框架、跨硬件通用格式 |
+| 模型注册 | **MLflow** (Model Registry) | 本文档已提及 |
+| 模型镜像 | **Harbor** (OCI 制品) | 支持 OCI Artifact 存储模型 |
+| 对象存储 | **MinIO** | S3 兼容，自建集群存储模型文件 |
+| GPU 调度 | **Volcano** / **Kueue** | Gang Scheduling，多卡并行 |
+| 自动扩缩 | **KEDA** | 本文档已使用，基于指标自动扩缩 |
+| 监控 | **Prometheus** + **Grafana** | 本文档已使用 |
+| GPU 监控 | **DCGM Exporter** | NVIDIA GPU 指标导出到 Prometheus |
+| 向量数据库 | **Milvus** / **Qdrant** / **Weaviate** | RAG 场景，不绑定云 |
+| 可观测性 | **OpenTelemetry** | 统一 trace/metric/log 采集 |
+| GPU 共享 | **NVIDIA MIG** / **vGPU** / **Time-slicing** | 单卡多模型共享 |

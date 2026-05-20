@@ -1,3 +1,32 @@
+---
+title: 第一章：FTA 起源与发展史
+description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第一章：FTA 起源与发展史 是什么
+- 如何 第一章：FTA 起源与发展史
+- 第一章：FTA 起源与发展史 根因分析
+- 第一章：FTA 起源与发展史 故障树
+trigger_keywords:
+- 第一章：FTA
+- 起源与发展史
+- fta
+---
+
 # 第一章：FTA 起源与发展史
 
 > **所属部分**: 第一部分 - FTA 方法论理论基础  

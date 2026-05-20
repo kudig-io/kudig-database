@@ -1,3 +1,43 @@
+---
+title: 07 - Deployment 与 ReplicaSet 控制器事件
+description: '## 📋 文档概述'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+- helm
+- argocd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- Deployment 与 ReplicaSet 控制器事件 是什么
+- 如何 Deployment 与 ReplicaSet 控制器事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- Deployment
+- ReplicaSet
+- 控制器事件
+- kubernetes
+- events
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
+
+
 # 07 - Deployment 与 ReplicaSet 控制器事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
@@ -1364,6 +1404,11 @@ Error creating: pods "myapp-7d4f8c9b5d-x8k2l" is forbidden: admission webhook "v
 
 # 4. RBAC 权限不足
 Error creating: pods "myapp-7d4f8c9b5d-x8k2l" is forbidden: User "system:serviceaccount:default:default" cannot create resource "pods" in API group "" in the namespace "production"
+
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 # 5. PodSecurityPolicy 违规（v1.21-v1.25）
 Error creating: pods "myapp-7d4f8c9b5d-x8k2l" is forbidden: unable to validate against any pod security policy: [spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed]

@@ -1,3 +1,32 @@
+---
+title: 框架集成与生态系统
+description: '**文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Frameworks, OpenAI SDK, LangChain, Vercel AI, LlamaIndex,
+  Mastra, PydanticAI, Aider, Cline'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 框架集成与生态系统 是什么
+- 如何 框架集成与生态系统
+trigger_keywords:
+- 框架集成与生态系统
+- ai
+- coding
+---
+
 # 框架集成与生态系统
 
 > **文档类型**: 集成指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Frameworks, OpenAI SDK, LangChain, Vercel AI, LlamaIndex, Mastra, PydanticAI, Aider, Cline

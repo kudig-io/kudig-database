@@ -1,61 +1,72 @@
 ---
-skill_id: "SKILL-NET-001"
-skill_name: "DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation"
-version: "1.0"
-category: "network"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: CoreDNS 1.10+ default, NodeLocal DNSCache stable"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: CoreDNS 1.11+ with updated plugin config"
-  - "v1.31+: AdminNetworkPolicy / BaselineAdminNetworkPolicy (alpha)"
-  - "v1.32+: nftables kube-proxy mode (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-20min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
+description: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
+category: network
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- istio
+- coredns
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 40min
+intent_queries:
+- DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 是什么
+- 如何 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 trigger_keywords:
-  - "DNS"
-  - "NXDOMAIN"
-  - "dns resolution"
-  - "DNS解析失败"
-  - "域名解析"
-  - "CoreDNS"
-  - "name resolution"
-  - "DNS超时"
-  - "DNS timeout"
-  - "could not resolve"
-  - "no such host"
-trigger_events:
-  - "DNSConfigForming"
-  - "NetworkNotReady"
-trigger_metrics:
-  - 'coredns_dns_responses_total{rcode="SERVFAIL"}'
-  - 'coredns_dns_responses_total{rcode="NXDOMAIN"}'
-  - 'coredns_dns_request_duration_seconds'
-  - 'coredns_panics_total'
-related_skills:
-  - "SKILL-NET-002"
-  - "SKILL-NODE-001"
-fta_refs:
-  - "topic-fta/list/dns-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-5-networking/"
-  - "domain-12-troubleshooting/"
+- DNS
+- NXDOMAIN
+- dns resolution
+- DNS解析失败
+- 域名解析
+- CoreDNS
+- name resolution
+- DNS超时
+- DNS timeout
+- could not resolve
+- no such host
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-04
+  category: network
+  subcategory: dns
+  severity: P1
+  time_to_diagnosis_minutes: 20
+  time_to_remediation_minutes: 30
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl exec -it <pod> -n <ns> -- nslookup kubernetes.default 检查 DNS 解析"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide"
+    - "kubectl exec -it <pod> -n <ns> -- nslookup kubernetes.default"
+    - "kubectl exec -it <pod> -n <ns> -- cat /etc/resolv.conf"
+    - "kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100"
+    - "kubectl exec -n kube-system -it <coredns-pod> -- cat /etc/coredns/Corefile"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l k8s-app=kube-dns --force"
+      risk: "强制删除 CoreDNS Pod 会导致 DNS 解析中断，该节点上所有 Pod 会受影响"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl exec -it <pod> -n <ns> -- nslookup kubernetes.default 2>&1 | grep -E 'server can\'t find|NXDOMAIN' 显示 DNS 解析失败 -->
 
 # DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 

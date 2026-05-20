@@ -1,3 +1,37 @@
+---
+title: AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
+description: '# AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- gateway
+- llm
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南 是什么
+- 如何 AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
+trigger_keywords:
+- AI
+- 编程与
+- LLM
+- 网关专题
+- OpenRouter
+- OpenCode
+- 全量指南
+- ai
+---
+
+
 # AI 编程与 LLM 网关专题 — OpenRouter & OpenCode 全量指南
 
 > **文档类型**: 专题索引 | **最后更新**: 2026-04 | **关键词**: OpenRouter, OpenCode, Unified LLM API, AI Coding, AI Gateway, Provider Routing, Model Fallback, Prompt Caching, MCP, Agent CLI, BYOK, Enterprise

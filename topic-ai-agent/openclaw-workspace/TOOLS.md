@@ -1,8 +1,33 @@
 ---
-name: k8s-ops-toolkit
+title: 工具授权注册表
 description: K8S 运维诊断 Agent 的工具授权注册表、调用参数规范与安全约束
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 工具授权注册表 是什么
+- 如何 工具授权注册表
+trigger_keywords:
+- 工具授权注册表
+- ai
+- agent
 ---
 
 # 工具授权注册表

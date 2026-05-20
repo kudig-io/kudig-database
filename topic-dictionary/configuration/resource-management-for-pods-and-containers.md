@@ -1,3 +1,37 @@
+---
+title: Resource Management for Pods and Containers
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+- vpa
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Resource Management for Pods and Containers 是什么
+- 如何 Resource Management for Pods and Containers
+trigger_keywords:
+- Resource
+- Management
+- for
+- Pods
+- and
+- Containers
+- dictionary
+title_en: Pods
+---
+
+
 # Resource Management for Pods and Containers
 
 ## 概述

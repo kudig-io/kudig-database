@@ -1,3 +1,38 @@
+---
+title: Domain-24 基础设施即代码 — 开源项目索引
+description: '- [五、Ansible 与配置管理](#五ansible-与配置管理)'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- helm
+- flux
+- mysql
+- crd
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-24 基础设施即代码 — 开源项目索引 是什么
+- 如何 Domain-24 基础设施即代码 — 开源项目索引
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Domain-24
+- 基础设施即代码
+- 开源项目索引
+- infrastructure
+- as
+- code
+---
+
 # Domain-24 基础设施即代码 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

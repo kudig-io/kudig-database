@@ -1,3 +1,42 @@
+---
+title: 30 - APIService YAML 配置参考
+description: '# 30 - APIService YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- etcd
+- apiserver
+- kubelet
+- rbac
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- APIService YAML 配置参考 是什么
+- 如何 APIService YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- APIService
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+---
+
+
 # 30 - APIService YAML 配置参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02

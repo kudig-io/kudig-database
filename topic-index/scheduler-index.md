@@ -1,377 +1,133 @@
-# Scheduler 调度与弹性伸缩全局索引
+---
+title: Scheduler 调度与弹性伸缩知识图谱索引
+description: '## 知识图谱'
+category: index
+tags:
+- k8s
+- index
+- catalog
+- scheduler
+- autoscaling
+- hpa
+- vpa
+- karpenter
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 20min
+intent_queries:
+- Scheduler 调度与弹性伸缩知识图谱 是什么
+- 如何 Scheduler 调度与弹性伸缩知识图谱
+trigger_keywords:
+- Scheduler
+- 调度
+- 弹性伸缩
+- 知识图谱
+- hpa
+- vpa
+- karpenter
+---
 
-> 全局索引：按关键字 **scheduler** 聚合项目内所有相关内容。
+# Scheduler 调度与弹性伸缩知识图谱索引
 
-## 设计原理
+> 知识图谱：按主题 **Scheduler & 弹性伸缩** 聚合相关文档，按关联度分层级组织。
 
-- [01 - Kubernetes 设计原则与哲学 (Foundations)](./domain-2-design-principles/01-design-principles-foundations.md)
-- [02 - 声明式 API 与面向终态设计 (Declarative API)](./domain-2-design-principles/02-declarative-api-pattern.md)
-- [05 - Informer 架构与工作队列 (Informer & Workqueue)](./domain-2-design-principles/05-informer-workqueue.md)
-- [07 - 分布式共识与 etcd 原理 (etcd & Raft)](./domain-2-design-principles/07-distributed-consensus-etcd.md)
-- [08 - 高可用架构模式 (HA Patterns)](./domain-2-design-principles/08-high-availability-patterns.md)
-- [09 - Kubernetes 源码结构与阅读指南 (Source Code)](./domain-2-design-principles/09-source-code-walkthrough.md)
-- [10 - CAP 定理与分布式系统基础 (CAP Theorem)](./domain-2-design-principles/10-cap-theorem-distributed-systems.md)
-- [11 - 扩展性设计模式 (Extensibility)](./domain-2-design-principles/11-extensibility-design-patterns.md)
-- [12 - Operator 模式与控制器开发 (Operator Guide)](./domain-2-design-principles/12-operator-development-guide.md)
-- [13 - 准入控制与 Webhook 机制深度解析](./domain-2-design-principles/13-admission-control-webhooks.md)
-- [14 - 服务网格与微服务架构设计](./domain-2-design-principles/14-service-mesh-architecture.md)
-- [15 - 混沌工程与故障注入设计](./domain-2-design-principles/15-chaos-engineering.md)
-- [16 - 可观测性设计原则](./domain-2-design-principles/16-observability-design-principles.md)
-- [17 - 安全设计模式](./domain-2-design-principles/17-security-design-patterns.md)
+---
 
-## 控制平面
+## 一、核心文档 (直接相关)
+
+> 这些文档以 Scheduler 或弹性伸缩为主题或直接面向调度运维场景。
+
+### 深度技术
 
 - [Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)](./domain-3-control-plane/20-kube-scheduler-deep-dive.md)
-- [30 - 动态资源分配 (Dynamic Resource Allocation)](./domain-3-control-plane/30-dynamic-resource-allocation.md)
-
-## 工作负载
-
-- [28 - 调度器配置与优化](./domain-4-workloads/19-scheduler-configuration.md)
+- [调度器配置与优化](./domain-4-workloads/19-scheduler-configuration.md)
+- [动态资源分配 (Dynamic Resource Allocation)](./domain-3-control-plane/30-dynamic-resource-allocation.md)
 - [HPA/VPA 自动伸缩配置](./domain-4-workloads/21-hpa-vpa-autoscaling.md)
 - [集群容量规划](./domain-4-workloads/22-cluster-capacity-planning.md)
-- [16 - 资源管理表](./domain-4-workloads/23-resource-management.md)
+- [资源管理表](./domain-4-workloads/23-resource-management.md)
 
-## 平台运维
+### 故障排查
 
-- [容量规划与资源评估 (Capacity Planning & Resource Assessment)](./domain-9-platform-ops/03-capacity-planning-resource-assessment.md)
-
-## 故障排查域
-
-- [17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)](./domain-12-troubleshooting/17-hpa-vpa-troubleshooting.md)
-- [24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)](./domain-12-troubleshooting/24-quota-limitrange-troubleshooting.md)
-- [28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)](./domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.md)
-- [33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)](./domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.md)
-
-## 结构化故障排查 - 网络
-
-- [CNI 网络插件故障排查指南](./topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md)
-- [CoreDNS/DNS 故障排查指南](./topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md)
-- [Service 与 Ingress 故障排查指南](./topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md)
-- [NetworkPolicy 深度排查与零信任安全治理指南](./topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md)
-- [Service Mesh (Istio) 深度排查与性能调优指南](./topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md)
-- [Terway（阿里云 CNI）网络故障排查指南](./topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md)
-
-## 结构化故障排查 - 安全
-
-- [RBAC 与认证故障排查指南](./topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md)
-- [Kubernetes 证书故障排查指南](./topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md)
-- [Pod 安全与 SecurityContext 故障排查指南](./topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md)
-- [审计日志故障排查指南](./topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md)
-
-## 结构化故障排查 - 调度资源
-
-- [资源与调度故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md)
+- [Scheduler 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md)
+- [HPA/VPA 故障排查 (HPA/VPA Troubleshooting)](./domain-12-troubleshooting/17-hpa-vpa-troubleshooting.md)
+- [Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)](./domain-12-troubleshooting/24-quota-limitrange-troubleshooting.md)
+- [集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)](./domain-12-troubleshooting/28-cluster-autoscaler-troubleshooting.md)
+- [性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)](./domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.md)
 - [HPA 与 VPA 自动扩缩容故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md)
 - [Cluster Autoscaler 节点自动扩缩容故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md)
-- [PodDisruptionBudget (PDB) 故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md)
 
-## 结构化故障排查 - 可观测性
-
-- [可观测性故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md)
-- [OpenTelemetry Collector 故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md)
-- [eBPF 可观测性故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md)
-- [FinOps 成本优化与云费用故障排查指南](./topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md)
-
-## 结构化故障排查
-
-- [API Server 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md)
-- [Scheduler 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md)
-- [Controller Manager 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md)
-- [Webhook 与准入控制故障排查指南](./topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md)
-- [API 优先级与公平性 (APF) 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md)
-- [控制平面安全加固故障排查指南](./topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md)
-- [控制平面性能瓶颈分析与优化指南](./topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md)
-- [控制平面高可用故障处理指南](./topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md)
-- [控制平面升级迁移问题处理指南](./topic-structural-trouble-shooting/01-control-plane/10-control-plane-upgrade-troubleshooting.md)
-- [kubelet 故障排查指南](./topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md)
-- [kube-proxy 故障排查指南](./topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md)
-- [节点故障专项排查指南](./topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md)
-- [镜像与镜像仓库故障排查指南](./topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md)
-- [GPU 与设备插件故障排查指南](./topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md)
-- [PV/PVC 存储深度排查与持久化治理指南](./topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md)
-- [CSI 存储驱动深度排查与架构优化指南](./topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md)
-- [存储 I/O 性能故障排查指南](./topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md)
-- [StorageClass 配置与动态供给故障排查指南](./topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md)
-- [Pod 故障排查与运行机制深度指南](./topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)
-- [Deployment 故障排查指南](./topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md)
-- [StatefulSet 故障排查指南](./topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md)
-- [DaemonSet 故障排查指南](./topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md)
-- [Job 与 CronJob 故障排查指南](./topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md)
-- [ConfigMap 与 Secret 故障排查指南](./topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md)
-- [集群运维与升级故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md)
-- [日志与监控故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md)
-- [集群高可用与灾备故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md)
-- [CRD 与 Operator 故障排查指南](./topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md)
-- [云厂商集成故障排查指南](./topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md)
-- [云资源配额与 API 限流故障排查指南](./topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md)
-- [AI/ML 工作负载故障排查指南](./topic-structural-trouble-shooting/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md)
-- [Kubeflow 平台故障排查指南](./topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md)
-- [MPI Operator 与分布式训练故障排查指南](./topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md)
-- [GitOps/DevOps 故障排查指南](./topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md)
-- [Tekton CI/CD 流水线故障排查指南](./topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md)
-
-## 技能卡片
+### 技能卡片
 
 - [HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation](./topic-skills/12-autoscaling-failure.md)
-- [诊断工作流 / Diagnostic Workflow](./topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow.md)
-- [修复操作手册 / Remediation Playbook](./topic-skills/skill-set/k8s-node-notready/reference/remediation-playbook.md)
-- [根因分类 / Root Cause Catalog](./topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md)
-- [版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution](./topic-skills/skill-set/k8s-node-notready/reference/version-matrix.md)
-- [K8s Node NotReady 诊断与修复](./topic-skills/skill-set/k8s-node-notready/SKILL.md)
-- [Skills + FTA 使用指南 — k8s-node-notready & node-fta](./topic-skills/skill-set/k8s-node-notready/USAGE-GUIDE.md)
 
-## K8s 事件
+### YAML 配置
 
-- [05 - 调度与抢占事件](./domain-33-kubernetes-events/05-scheduling-preemption-events.md)
-- [12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)](./domain-33-kubernetes-events/12-autoscaling-events.md)
+- [Namespace / ResourceQuota / LimitRange YAML 配置参考](./domain-32-yaml-manifests/02-namespace-resourcequota-limitrange.md)
+- [PriorityClass / RuntimeClass YAML 配置参考](./domain-32-yaml-manifests/26-priorityclass-runtimeclass.md)
+- [HorizontalPodAutoscaler v2 YAML 配置参考](./domain-32-yaml-manifests/27-hpa-autoscaling-v2.md)
 
-## YAML 清单参考
+### K8s 事件
 
-- [02 - Namespace / ResourceQuota / LimitRange YAML 配置参考](./domain-32-yaml-manifests/02-namespace-resourcequota-limitrange.md)
-- [20 - Role / RoleBinding YAML 配置参考](./domain-32-yaml-manifests/20-rbac-role-rolebinding.md)
-- [21 - ClusterRole / ClusterRoleBinding YAML 配置参考](./domain-32-yaml-manifests/21-rbac-clusterrole-clusterrolebinding.md)
-- [26 - PriorityClass / RuntimeClass YAML 配置参考](./domain-32-yaml-manifests/26-priorityclass-runtimeclass.md)
-- [27 - HorizontalPodAutoscaler v2 YAML 配置参考](./domain-32-yaml-manifests/27-hpa-autoscaling-v2.md)
+- [调度与抢占事件](./domain-33-kubernetes-events/05-scheduling-preemption-events.md)
+- [自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)](./domain-33-kubernetes-events/12-autoscaling-events.md)
 
-## 术语词典
+### 技术论文
 
-- [Resource Management for Pods and Containers](./topic-dictionary/configuration/resource-management-for-pods-and-containers.md)
-- [Resource Management for Windows nodes](./topic-dictionary/configuration/resource-management-for-windows-nodes.md)
-- [字段选择器](./topic-dictionary/fundamentals/field-selectors.md)
-- [Kubernetes 组件](./topic-dictionary/fundamentals/kubernetes-components.md)
-- [知识地图](./topic-dictionary/fundamentals/kubernetes-concepts-reference.md)
-- [Kubernetes Self-Healing（Kubernetes 自愈能力）](./topic-dictionary/fundamentals/kubernetes-self-healing.md)
-- [Leases（租约）](./topic-dictionary/fundamentals/leases.md)
-- [Mixed Version Proxy（混合版本代理）](./topic-dictionary/fundamentals/mixed-version-proxy.md)
-- [命名空间](./topic-dictionary/fundamentals/namespaces.md)
-- [存储版本](./topic-dictionary/fundamentals/storage-versions.md)
-- [kubectl 命令行工具](./topic-dictionary/fundamentals/the-kubectl-command-line-tool.md)
-- [协调领导者选举（Coordinated Leader Election）](./topic-dictionary/platform-engineering/coordinated-leader-election.md)
-- [设备插件](./topic-dictionary/platform-engineering/device-plugins.md)
-- [动态资源分配（DRA）集群管理员最佳实践](./topic-dictionary/platform-engineering/dynamic-resource-allocation-good-practices.md)
-- [GitOps 与持续交付](./topic-dictionary/platform-engineering/gitops-and-continuous-delivery.md)
-- [KubeVirt：在 Kubernetes 上运行虚拟机](./topic-dictionary/platform-engineering/kubevirt-virtual-machines.md)
-- [WebAssembly（Wasm）工作负载](./topic-dictionary/platform-engineering/webassembly-wasm-workloads.md)
-- [API-initiated Eviction](./topic-dictionary/scheduling/api-initiated-eviction.md)
-- [Assigning Pods to Nodes](./topic-dictionary/scheduling/assigning-pods-to-nodes.md)
-- [Dynamic Resource Allocation](./topic-dictionary/scheduling/dynamic-resource-allocation.md)
+- [Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md)
+
+---
+
+## 二、关联文档 (K8s 集成)
+
+> 这些文档涉及调度与弹性伸缩但以其他 K8s 组件为主题。
+
+### 调度相关
+
+- [API 优先级与公平性 (APF) 故障排查指南](./topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md)
+- [PodDisruptionBudget (PDB) 故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md)
+
+### 资源管理
+
+- [容量规划与资源评估 (Capacity Planning & Resource Assessment)](./domain-9-platform-ops/03-capacity-planning-resource-assessment.md)
+- [资源与调度故障排查指南](./topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md)
+
+### Pod调度
+
+- [Pod 故障排查与运行机制深度指南](./topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)
+- [Pod Pending 调度失败诊断与修复](./topic-skills/03-pod-pending.md)
+
+### 节点调度
+
+- [kubelet 故障排查指南](./topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md)
+- [GPU 与设备插件故障排查指南](./topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md)
+
+---
+
+## 三、扩展参考
+
+> 以下为 K8s 全域参考，调度与弹性伸缩可参考相关章节。
+
+### 术语词典
+
+- [Kubernetes Scheduler](./topic-dictionary/scheduling/kubernetes-scheduler.md)
+- [Pod Priority and Preemption](./topic-dictionary/scheduling/pod-priority-and-preemption.md)
+- [Taints and Tolerations](./topic-dictionary/scheduling/taints-and-tolerations.md)
+- [Pod Topology Spread Constraints](./topic-dictionary/scheduling/pod-topology-spread-constraints.md)
+- [Scheduling Framework](./topic-dictionary/scheduling/scheduling-framework.md)
+- [Scheduler Performance Tuning](./topic-dictionary/scheduling/scheduler-performance-tuning.md)
 - [Gang Scheduling](./topic-dictionary/scheduling/gang-scheduling.md)
 - [Karpenter 自动扩缩容](./topic-dictionary/scheduling/karpenter-autoscaling.md)
-- [Kubernetes Scheduler](./topic-dictionary/scheduling/kubernetes-scheduler.md)
-- [Node Declared Features](./topic-dictionary/scheduling/node-declared-features.md)
-- [Node-pressure Eviction](./topic-dictionary/scheduling/node-pressure-eviction.md)
-- [Pod Overhead](./topic-dictionary/scheduling/pod-overhead.md)
-- [Pod Priority and Preemption](./topic-dictionary/scheduling/pod-priority-and-preemption.md)
+- [Assigning Pods to Nodes](./topic-dictionary/scheduling/assigning-pods-to-nodes.md)
 - [Pod Scheduling Readiness](./topic-dictionary/scheduling/pod-scheduling-readiness.md)
-- [Pod Topology Spread Constraints](./topic-dictionary/scheduling/pod-topology-spread-constraints.md)
 - [Resource Bin Packing](./topic-dictionary/scheduling/resource-bin-packing.md)
-- [Scheduler Performance Tuning](./topic-dictionary/scheduling/scheduler-performance-tuning.md)
-- [Scheduling Framework](./topic-dictionary/scheduling/scheduling-framework.md)
-- [Taints and Tolerations](./topic-dictionary/scheduling/taints-and-tolerations.md)
-- [09 - 云原生安全专家指南](./topic-dictionary/security/cloud-native-security-practices.md)
-- [云原生安全](./topic-dictionary/security/cloud-native-security.md)
-- [加固指南 - 调度器配置](./topic-dictionary/security/hardening-guide---scheduler-configuration.md)
-- [Limit Ranges（限制范围）](./topic-dictionary/security/limit-ranges.md)
-- [多租户](./topic-dictionary/security/multi-tenancy.md)
-- [Pod 安全准入](./topic-dictionary/security/pod-security-admission.md)
-- [Process ID Limits And Reservations（进程 ID 限制与预留）](./topic-dictionary/security/process-id-limits-and-reservations.md)
-- [Resource Quotas（资源配额）](./topic-dictionary/security/resource-quotas.md)
-- [基于角色的访问控制（RBAC）最佳实践](./topic-dictionary/security/role-based-access-control-good-practices.md)
-- [服务账号](./topic-dictionary/security/service-accounts.md)
-- [知识地图](./topic-dictionary/tooling/cli-commands.md)
-- [Kusheet 工具与开源项目 URL 汇总](./topic-dictionary/tooling/tool-ecosystem.md)
-
-## Docker
-
-- [Docker 架构概述与核心概念](./domain-13-docker/01-docker-architecture-overview.md)
-- [Docker 镜像管理详解](./domain-13-docker/02-docker-images-management.md)
-- [Docker 容器生命周期管理](./domain-13-docker/03-docker-container-lifecycle.md)
-- [Docker 网络深度解析](./domain-13-docker/04-docker-networking-deep-dive.md)
-- [Docker 存储与数据卷](./domain-13-docker/05-docker-storage-volumes.md)
-- [Docker Compose 编排](./domain-13-docker/06-docker-compose-orchestration.md)
-- [Docker 安全最佳实践](./domain-13-docker/07-docker-security-best-practices.md)
-- [Docker 性能监控与调优](./domain-13-docker/09-docker-performance-monitoring.md)
-- [Docker 日志管理与分析](./domain-13-docker/10-docker-logging-management.md)
-- [Docker 自动化运维与CI/CD集成](./domain-13-docker/11-docker-automation-devops.md)
-- [Java 应用容器化最佳实践指南](./domain-13-docker/12-java-containerization-guide.md)
-
-## Linux 基础
-
-- [01 - Linux 系统架构与内核深度解析：生产环境运维专家指南](./domain-14-linux/01-linux-system-architecture.md)
-- [05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南](./domain-14-linux/05-linux-storage-management.md)
-- [06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南](./domain-14-linux/06-linux-performance-tuning.md)
-- [07 - Linux 安全加固与合规管理：生产环境安全运维专家指南](./domain-14-linux/07-linux-security-hardening.md)
-- [08 - Linux 容器技术深度解析：生产环境容器运维专家指南](./domain-14-linux/08-linux-container-fundamentals.md)
-- [09 - Linux 运维基础与应急响应：生产环境运维专家实践指南](./domain-14-linux/09-linux-operations-basics.md)
-
-## 网络基础
-
-- [网络协议栈详解](./domain-15-network-fundamentals/01-network-protocols-stack.md)
-- [DNS 原理与配置](./domain-15-network-fundamentals/03-dns-principles-configuration.md)
-- [负载均衡技术](./domain-15-network-fundamentals/04-load-balancing-technologies.md)
-- [网络安全基础](./domain-15-network-fundamentals/05-network-security-fundamentals.md)
-- [SDN 与网络虚拟化](./domain-15-network-fundamentals/06-sdn-network-virtualization.md)
-
-## 云服务商
-
-- [Domain-17 云厂商 — 开源项目索引](./domain-17-cloud-provider/00-open-source-projects-index.md)
-- [AWS EKS (Elastic Kubernetes Service) 概述](./domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md)
-- [Google Cloud GKE (Google Kubernetes Engine) 概述](./domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md)
-- [Azure AKS (Azure Kubernetes Service) 概述](./domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md)
-- [ACK 关联产品 - ECS 计算资源](./domain-17-cloud-provider/04-alicloud-ack/240-ack-ecs-compute.md)
-- [ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)](./domain-17-cloud-provider/04-alicloud-ack/241-ack-slb-nlb-alb.md)
-- [ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)](./domain-17-cloud-provider/04-alicloud-ack/243-ack-ram-authorization.md)
-- [ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)](./domain-17-cloud-provider/04-alicloud-ack/245-ack-ebs-storage.md)
-- [阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述](./domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md)
-- [Kubernetes Service ACK 实战指南](./domain-17-cloud-provider/04-alicloud-ack/service-ack-practical-guide.md)
-- [腾讯云 TKE (Tencent Kubernetes Engine) 概述](./domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md)
-- [华为云 CCE (Cloud Container Engine) 企业级深度实战指南](./domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md)
-- [UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南](./domain-17-cloud-provider/07-ucloud-uk8s/ucloud-uk8s-overview.md)
-- [IBM IKS (IBM Cloud Kubernetes Service) 概述](./domain-17-cloud-provider/08-ibm-iks/ibm-iks-overview.md)
-- [Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析](./domain-17-cloud-provider/09-oracle-oke/oracle-oke-overview.md)
-- [火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南](./domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.md)
-- [天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述](./domain-17-cloud-provider/11-ctyun-tke/ctyun-tke-overview.md)
-- [移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南](./domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.md)
-- [专有云 (Apsara Stack) - ESS 弹性伸缩](./domain-17-cloud-provider/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md)
-- [阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析](./domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md)
-
-## 生产运维
-
-- [Domain-18 生产运维 — 开源项目索引](./domain-18-production-operations/00-open-source-projects-index.md)
-- [01-生产架构设计原则](./domain-18-production-operations/01-production-architecture-design-principles.md)
-- [02-多云混合部署策略](./domain-18-production-operations/02-multi-cloud-hybrid-deployment-strategy.md)
-- [03-边缘计算生产部署](./domain-18-production-operations/03-edge-computing-production-deployment.md)
-- [05-日志收集分析平台](./domain-18-production-operations/05-logging-collection-analysis-platform.md)
-- [07-零信任安全架构](./domain-18-production-operations/07-zero-trust-security-architecture.md)
-- [08-CIS基准合规检查](./domain-18-production-operations/08-cis-benchmark-compliance-audit.md)
-- [10-GitOps流水线实践](./domain-18-production-operations/10-gitops-pipeline-practices.md)
-- [11-基础设施即代码](./domain-18-production-operations/11-infrastructure-as-code.md)
-- [12-自动化运维工具链](./domain-18-production-operations/12-automated-operations-toolchain.md)
-- [13-Kubernetes成本治理](./domain-18-production-operations/13-kubernetes-cost-governance.md)
-- [14-资源配额管理](./domain-18-production-operations/14-resource-quota-management.md)
-- [15-绿色计算可持续发展](./domain-18-production-operations/15-green-computing-sustainability.md)
-- [16-企业级备份策略](./domain-18-production-operations/16-enterprise-backup-strategy.md)
-- [17-灾难恢复演练](./domain-18-production-operations/17-disaster-recovery-drills.md)
-- [18-跨区域容灾部署](./domain-18-production-operations/18-cross-region-disaster-recovery.md)
-- [19-集群性能调优](./domain-18-production-operations/19-cluster-performance-tuning.md)
-- [20-网络性能优化](./domain-18-production-operations/20-network-performance-optimization.md)
-- [21-存储性能优化](./domain-18-production-operations/21-storage-performance-optimization.md)
-- [22-变更管理流程](./domain-18-production-operations/22-change-management-process.md)
-- [23. 事件响应处理 (Incident Response Handling)](./domain-18-production-operations/23-incident-response-handling.md)
-- [24. 容量规划与预测 (Capacity Planning & Forecasting)](./domain-18-production-operations/24-capacity-planning-forecasting.md)
-- [K8s FinOps 成本优化实践指南](./domain-18-production-operations/99-finops-cost-optimization-guide.md)
-- [GreenOps 可持续计算与碳足迹优化指南](./domain-18-production-operations/99-greenops-sustainable-computing-guide.md)
-- [Karpenter 节点自动扩展实践指南](./domain-18-production-operations/99-karpenter-node-autoscaling-guide.md)
-- [KEDA 事件驱动自动缩放实践指南](./domain-18-production-operations/99-keda-event-driven-autoscaling-guide.md)
-- [Kubernetes 生产环境部署模式架构详解](./domain-18-production-operations/99-kubernetes-deployment-patterns-architecture.md)
-- [Kubernetes 多租户与资源隔离生产架构](./domain-18-production-operations/99-kubernetes-multi-tenant-architecture.md)
-- [Kubernetes 生产环境完整架构蓝图](./domain-18-production-operations/99-kubernetes-production-architecture-blueprint.md)
-
-## 技术论文
-
-- [Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)](./domain-19-papers/01-kubernetes-production-readiness-assessment.md)
-- [Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)](./domain-19-papers/02-kubernetes-large-scale-performance-optimization.md)
-- [Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)](./domain-19-papers/03-kubernetes-zero-trust-security-architecture.md)
-- [Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)](./domain-19-papers/04-kubernetes-multi-cloud-hybrid-deployment.md)
-- [Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)](./domain-19-papers/05-kubernetes-gitops-complete-practice-guide.md)
-- [Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)](./domain-19-papers/06-kubernetes-cost-governance-finops-practice.md)
-- [Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)](./domain-19-papers/07-kubernetes-csi-storage-deep-practice.md)
-- [Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)](./domain-19-papers/09-kubernetes-service-mesh-istio-integration.md)
-- [Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)](./domain-19-papers/10-kubernetes-automation-sre-practices.md)
-- [Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)](./domain-19-papers/11-kubernetes-api-server-deep-optimization-extension.md)
-- [Kubernetes 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)](./domain-19-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md)
-- [Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)](./domain-19-papers/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md)
-- [Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)](./domain-19-papers/14-kubernetes-event-driven-architecture-asynchronous-processing.md)
-- [Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)](./domain-19-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md)
-- [Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)](./domain-19-papers/16-kubernetes-edge-computing-kubeedge-practice.md)
-- [Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)](./domain-19-papers/17-kubernetes-aiml-gpu-scheduling-llm-inference.md)
-- [Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)](./domain-19-papers/18-kubernetes-ebpf-cilium-deep-practice.md)
-- [Kubernetes Gateway API 与现代流量管理实践](./domain-19-papers/19-kubernetes-gateway-api-modern-traffic-management.md)
-- [Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)](./domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)
-- [Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform)](./domain-19-papers/21-kubernetes-platform-engineering-internal-developer-platform.md)
-- [Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)](./domain-19-papers/22-kubernetes-webassembly-wasm-workloads.md)
-- [Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)](./domain-19-papers/23-kubernetes-opentelemetry-native-observability.md)
-- [Kubernetes 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)](./domain-19-papers/24-kubernetes-policy-as-code-governance-automation.md)
-- [GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)](./domain-19-papers/25-gke-autopilot-google-cloud-ai-infrastructure.md)
-- [Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)](./domain-19-papers/26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)
-
-## CNCF 生态
-
-- [CloudEvents](./domain-34-cncf-landscape/graduated/cloudevents/cloudevents.md)
-- [Dapr](./domain-34-cncf-landscape/graduated/dapr/dapr.md)
-- [Dragonfly](./domain-34-cncf-landscape/graduated/dragonfly/dragonfly.md)
-- [Falco](./domain-34-cncf-landscape/graduated/falco/falco.md)
-- [Fluentd](./domain-34-cncf-landscape/graduated/fluentd/fluentd.md)
-- [KEDA](./domain-34-cncf-landscape/graduated/keda/keda.md)
-- [Knative](./domain-34-cncf-landscape/graduated/knative/knative.md)
-- [KubeEdge](./domain-34-cncf-landscape/graduated/kubeedge/kubeedge.md)
-- [Kubernetes](./domain-34-cncf-landscape/graduated/kubernetes/kubernetes.md)
-- [Rook](./domain-34-cncf-landscape/graduated/rook/rook.md)
-- [SPIRE](./domain-34-cncf-landscape/graduated/spire/spire.md)
-- [TiKV](./domain-34-cncf-landscape/graduated/tikv/tikv.md)
-- [Chaos Mesh](./domain-34-cncf-landscape/incubating/chaos-mesh/chaos-mesh.md)
-- [Cloud Custodian](./domain-34-cncf-landscape/incubating/cloud-custodian/cloud-custodian.md)
-- [CNI (Container Network Interface)](./domain-34-cncf-landscape/incubating/cni/cni.md)
-- [Emissary-Ingress](./domain-34-cncf-landscape/incubating/emissary-ingress/emissary-ingress.md)
-- [Fluid](./domain-34-cncf-landscape/incubating/fluid/fluid.md)
-- [Karmada](./domain-34-cncf-landscape/incubating/karmada/karmada.md)
-- [KServe](./domain-34-cncf-landscape/incubating/kserve/kserve.md)
-- [Kubescape](./domain-34-cncf-landscape/incubating/kubescape/kubescape.md)
-- [KubeVela](./domain-34-cncf-landscape/incubating/kubevela/kubevela.md)
-- [OpenCost](./domain-34-cncf-landscape/incubating/opencost/opencost.md)
-- [OpenYurt](./domain-34-cncf-landscape/incubating/openyurt/openyurt.md)
-- [Strimzi](./domain-34-cncf-landscape/incubating/strimzi/strimzi.md)
-- [Volcano](./domain-34-cncf-landscape/incubating/volcano/volcano.md)
-- [wasmCloud](./domain-34-cncf-landscape/incubating/wasmcloud/wasmcloud.md)
-- [Akri](./domain-34-cncf-landscape/sandbox/akri/akri.md)
-- [Armada](./domain-34-cncf-landscape/sandbox/armada/armada.md)
-- [Cadence](./domain-34-cncf-landscape/sandbox/cadence/cadence.md)
-- [Capsule](./domain-34-cncf-landscape/sandbox/capsule/capsule.md)
-- [Carina](./domain-34-cncf-landscape/sandbox/carina/carina.md)
-- [Cartography](./domain-34-cncf-landscape/sandbox/cartography/cartography.md)
-- [CloudNativePG](./domain-34-cncf-landscape/sandbox/cloudnativepg/cloudnativepg.md)
-- [Clusternet](./domain-34-cncf-landscape/sandbox/clusternet/clusternet.md)
-- [CoHDI (Composable Hyperconverged Disaggregated Infrastructure)](./domain-34-cncf-landscape/sandbox/cohdi/cohdi.md)
-- [Copa (Copacetic)](./domain-34-cncf-landscape/sandbox/copa/copa.md)
-- [Cozystack](./domain-34-cncf-landscape/sandbox/cozystack/cozystack.md)
-- [Dex](./domain-34-cncf-landscape/sandbox/dex/dex.md)
-- [Eraser](./domain-34-cncf-landscape/sandbox/eraser/eraser.md)
-- [HAMi (Heterogeneous AI Computing Virtualization Middleware)](./domain-34-cncf-landscape/sandbox/hami/hami.md)
-- [Headlamp](./domain-34-cncf-landscape/sandbox/headlamp/headlamp.md)
-- [HolmesGPT](./domain-34-cncf-landscape/sandbox/holmesgpt/holmesgpt.md)
-- [HwameiStor](./domain-34-cncf-landscape/sandbox/hwameistor/hwameistor.md)
-- [Inspektor Gadget](./domain-34-cncf-landscape/sandbox/inspektor-gadget/inspektor-gadget.md)
-- [K0s](./domain-34-cncf-landscape/sandbox/k0s/k0s.md)
-- [k3s](./domain-34-cncf-landscape/sandbox/k3s/k3s.md)
-- [K8up](./domain-34-cncf-landscape/sandbox/k8up/k8up.md)
-- [KAITO (Kubernetes AI Toolchain Operator)](./domain-34-cncf-landscape/sandbox/kaito/kaito.md)
-- [kcp (Kubernetes-like Control Plane)](./domain-34-cncf-landscape/sandbox/kcp/kcp.md)
-- [Koordinator](./domain-34-cncf-landscape/sandbox/koordinator/koordinator.md)
-- [Kube-burner](./domain-34-cncf-landscape/sandbox/kube-burner/kube-burner.md)
-- [Kube-OVN](./domain-34-cncf-landscape/sandbox/kube-ovn/kube-ovn.md)
-- [kube-vip](./domain-34-cncf-landscape/sandbox/kube-vip/kube-vip.md)
-- [KubeElastic](./domain-34-cncf-landscape/sandbox/kubeelasti/kubeelasti.md)
-- [KubeFleet](./domain-34-cncf-landscape/sandbox/kubefleet/kubefleet.md)
-- [KubeStellar](./domain-34-cncf-landscape/sandbox/kubestellar/kubestellar.md)
-- [KUDO (Kubernetes Universal Declarative Operator)](./domain-34-cncf-landscape/sandbox/kudo/kudo.md)
-- [Kured](./domain-34-cncf-landscape/sandbox/kured/kured.md)
-- [Logging Operator](./domain-34-cncf-landscape/sandbox/logging-operator/logging-operator.md)
-- [Meshery](./domain-34-cncf-landscape/sandbox/meshery/meshery.md)
-- [Open Cluster Management (OCM)](./domain-34-cncf-landscape/sandbox/open-cluster-management/open-cluster-management.md)
-- [OpenEBS](./domain-34-cncf-landscape/sandbox/openebs/openebs.md)
-- [OpenFunction](./domain-34-cncf-landscape/sandbox/openfunction/openfunction.md)
-- [openGemini](./domain-34-cncf-landscape/sandbox/opengemini/opengemini.md)
-- [Paralus](./domain-34-cncf-landscape/sandbox/paralus/paralus.md)
-- [Piraeus Datastore](./domain-34-cncf-landscape/sandbox/piraeus-datastore/piraeus-datastore.md)
-- [Serverless Devs](./domain-34-cncf-landscape/sandbox/serverless-devs/serverless-devs.md)
-- [Spiderpool](./domain-34-cncf-landscape/sandbox/spiderpool/spiderpool.md)
-- [SpinKube](./domain-34-cncf-landscape/sandbox/spinkube/spinkube.md)
-- [Tokenetes](./domain-34-cncf-landscape/sandbox/tokenetes/tokenetes.md)
-- [Virtual Kubelet](./domain-34-cncf-landscape/sandbox/virtual-kubelet/virtual-kubelet.md)
-- [VS Code Kubernetes Tools](./domain-34-cncf-landscape/sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md)
-- [WasmEdge](./domain-34-cncf-landscape/sandbox/wasmedge/wasmedge.md)
-
-## 演示文稿
-
-- [Kubernetes 调度与编排策略全栈培训](./topic-presentations/kubernetes-scheduling-presentation.md)
+- [Node Declared Features](./topic-dictionary/scheduling/node-declared-features.md)
+- [Pod Overhead](./topic-dictionary/scheduling/pod-overhead.md)
+- [Node-pressure Eviction](./topic-dictionary/scheduling/node-pressure-eviction.md)
+- [API-initiated Eviction](./topic-dictionary/scheduling/api-initiated-eviction.md)
+- [Device Plugins](./topic-dictionary/platform-engineering/device-plugins.md)
+- [Dynamic Resource Allocation](./topic-dictionary/scheduling/dynamic-resource-allocation.md)
+- [Resource Quotas](./topic-dictionary/security/resource-quotas.md)
+- [Limit Ranges](./topic-dictionary/security/limit-ranges.md)

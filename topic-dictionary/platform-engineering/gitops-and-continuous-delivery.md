@@ -1,3 +1,35 @@
+---
+title: GitOps 与持续交付
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- helm
+- argocd
+- flux
+- pdb
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitOps 与持续交付 是什么
+- 如何 GitOps 与持续交付
+trigger_keywords:
+- GitOps
+- 与持续交付
+- dictionary
+title_en: GitOps
+---
+
+
 # GitOps 与持续交付
 
 ## 概述

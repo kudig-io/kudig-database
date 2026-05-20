@@ -1,3 +1,45 @@
+---
+title: 'Domain-11: AI基础设施'
+description: '## 概述'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- llm
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-11: AI基础设施 是什么'
+- '如何 Domain-11: AI基础设施'
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 'Domain-11:'
+- AI基础设施
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
 # Domain-11: AI基础设施
 
 > **文档数量**: 36 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25-v1.32 + AI/ML Stack | **质量等级**: 专家级

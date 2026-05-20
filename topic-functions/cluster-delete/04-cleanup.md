@@ -1,3 +1,57 @@
+---
+title: 节点清理机制 — cleanup-node 源码分析
+category: cluster-delete
+tags:
+- cleanup-node
+- cleanup
+- kubelet
+- unmount
+- container
+- cri
+- pki
+- kubeconfig
+last_updated: 2026-05-18
+description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除 kubeconfig
+  文件以及 Rootless 模式清理等完整流程。
+difficulty: advanced
+intent_queries:
+- kubeadm cleanup-node phase source code
+- cleanup-node cleanup kubernetes kubelet
+- unmountKubeletDirectory kubernetes
+- removeContainers kubernetes CRI
+- CleanDir kubernetes kubeadm
+trigger_keywords:
+- cleanup-node
+- stopKubelet
+- unmountKubeletDirectory
+- removeContainers
+- CleanDir
+- MNT_FORCE
+- MNT_DETACH
+- ListKubeContainers
+- RemoveContainers
+- RemoveUsersAndGroups
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
+related_domains:
+- domain-2-installation
+- domain-3-control-plane
+related_topics:
+- cluster-delete
+- reset
+- etcd-cleanup
+- force-delete
+- security-delete
+- network-cleanup
+domain_link: '[Installation](../domain-2-installation/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+---
+
+
 # 节点清理机制 — cleanup-node 源码分析
 
 ## 概述

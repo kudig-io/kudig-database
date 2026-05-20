@@ -1,3 +1,36 @@
+---
+title: Cluster API 与集群舰队管理
+description: '# Cluster API 与集群舰队管理'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- istio
+- cilium
+- flux
+- pdb
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Cluster API 与集群舰队管理 是什么
+- 如何 Cluster API 与集群舰队管理
+trigger_keywords:
+- Cluster
+- API
+- 与集群舰队管理
+- dictionary
+title_en: Clusters
+---
+
+
 # Cluster API 与集群舰队管理
 
 ## 概述

@@ -1,25 +1,69 @@
 ---
-title: "分布式训练框架"
-description: "深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI 作业调度与 NCCL 调优"
-category: "domain-11-ai-infra"
-tags: [k8s, ai, distributed-training, pytorch, tensorflow, deepspeed, horovod, nccl, mpi]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 分布式训练框架
+description: 深入解析 AI 分布式训练框架在 K8s 上的部署：PyTorch DDP/FSDP、TensorFlow MultiWorkerMirroredStrategy、DeepSpeed、Horovod、MPI 作业调度与
+  NCCL 调优
+category: domain-11-ai-infra
+tags:
+- k8s
+- ai
+- distributed-training
+- pytorch
+- tensorflow
+- deepspeed
+- horovod
+- nccl
+- mpi
+- scheduler
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 分布式训练框架 是什么
+- 如何 分布式训练框架
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 分布式训练框架
+- ai
+- infra
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-ai-infrastructure-overview.md"
-    type: "depth"
-    desc: "AI 基础设施架构"
-  - path: "03-gpu-scheduling-management.md"
-    type: "depth"
-    desc: "GPU 调度与管理"
-  - path: "../topic-ai-agent/"
-    type: "ai-agent"
-    desc: "AI Agent 工程"
+- path: 01-ai-infrastructure-overview.md
+  type: depth
+  desc: AI 基础设施架构
+- path: 03-gpu-scheduling-management.md
+  type: depth
+  desc: GPU 调度与管理
+- path: ../topic-ai-agent/
+  type: ai-agent
+  desc: AI Agent 工程
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
 ---
+
 
 # 分布式训练框架
 

@@ -1,3 +1,42 @@
+---
+title: Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform)
+description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务 | **复杂度:** ⭐⭐⭐⭐⭐'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- grafana
+- jaeger
+- cilium
+- helm
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 20min
+intent_queries:
+- Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform) 是什么
+- 如何 Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 平台工程与内部开发者平台
+- Platform
+- Engineering
+- and
+- Internal
+- Developer
+- Platform
+---
+
+
 # Kubernetes 平台工程与内部开发者平台 (Platform Engineering and Internal Developer Platform)
 
 **作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务 | **复杂度:** ⭐⭐⭐⭐⭐

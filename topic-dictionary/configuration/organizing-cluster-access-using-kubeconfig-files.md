@@ -1,3 +1,33 @@
+---
+title: Organizing Cluster Access Using kubeconfig Files
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Organizing Cluster Access Using kubeconfig Files 是什么
+- 如何 Organizing Cluster Access Using kubeconfig Files
+trigger_keywords:
+- Organizing
+- Cluster
+- Access
+- Using
+- kubeconfig
+- Files
+- dictionary
+title_en: Organizing Cluster Access Using Kubeconfig Files
+---
+
+
 # Organizing Cluster Access Using kubeconfig Files
 
 ## 概述

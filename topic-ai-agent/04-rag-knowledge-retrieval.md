@@ -1,3 +1,37 @@
+---
+title: RAG 检索增强生成深度指南
+description: '# RAG 检索增强生成深度指南'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- helm
+- redis
+- postgresql
+- hpa
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- RAG 检索增强生成深度指南 是什么
+- 如何 RAG 检索增强生成深度指南
+trigger_keywords:
+- RAG
+- 检索增强生成深度指南
+- ai
+- agent
+---
+
+
 # RAG 检索增强生成深度指南
 
 > **文档类型**: 核心技术专题 | **最后更新**: 2026-03 | **关键词**: RAG, 检索增强生成, Embedding, 向量数据库, 混合检索, Re-ranking, 分块策略, Chunking, Weaviate, Milvus, pgvector

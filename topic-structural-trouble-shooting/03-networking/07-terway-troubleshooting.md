@@ -1,3 +1,42 @@
+---
+title: Terway（阿里云 CNI）网络故障排查指南
+description: '# Terway（阿里云 CNI）网络故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- prometheus
+- calico
+- coredns
+- statefulset
+- daemonset
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Terway（阿里云 CNI）网络故障排查指南 是什么
+- 如何 Terway（阿里云 CNI）网络故障排查指南
+- Terway（阿里云 CNI）网络故障排查指南 故障排查
+- Terway（阿里云 CNI）网络故障排查指南 排障步骤
+trigger_keywords:
+- Terway
+- 阿里云
+- CNI
+- 网络故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # Terway（阿里云 CNI）网络故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | Terway v1.2+ | **最后更新**: 2026-04 | **难度**: 高级

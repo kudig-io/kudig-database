@@ -1,3 +1,31 @@
+---
+title: 难度分级索引 (Difficulty Index)
+description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
+category: general
+tags:
+- k8s
+- docker
+- ingress
+- gateway
+- operator
+- ebpf
+- llm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 难度分级索引 (Difficulty Index) 是什么
+- 如何 难度分级索引 (Difficulty Index)
+trigger_keywords:
+- 难度分级索引
+- Difficulty
+- Index
+---
+
 # 难度分级索引 (Difficulty Index)
 
 > 按难度分级的文档索引，帮助读者选择合适的学习内容

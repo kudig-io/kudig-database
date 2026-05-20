@@ -1,3 +1,42 @@
+---
+title: Domain-10 扩展与自定义 — 开源项目索引
+description: '| **Helm** | K8s 包管理器 | Graduated | v3.17.0 | 27k+ | Apache-2.0 |'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- helm
+- containerd
+- harbor
+- statefulset
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Domain-10 扩展与自定义 — 开源项目索引 是什么
+- 如何 Domain-10 扩展与自定义 — 开源项目索引
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- Domain-10
+- 扩展与自定义
+- 开源项目索引
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # Domain-10 扩展与自定义 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

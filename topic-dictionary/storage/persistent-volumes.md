@@ -1,3 +1,34 @@
+---
+title: Persistent Volumes（持久卷）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- mysql
+- postgresql
+- kafka
+- statefulset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Persistent Volumes（持久卷） 是什么
+- 如何 Persistent Volumes（持久卷）
+trigger_keywords:
+- Persistent
+- Volumes
+- 持久卷
+- dictionary
+title_en: Persistent Volumes
+---
+
+
 # Persistent Volumes（持久卷）
 
 ## 概述

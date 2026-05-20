@@ -1,3 +1,45 @@
+---
+title: 70 - RuntimeClass配置
+description: '# 70 - RuntimeClass配置'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- containerd
+- gpu
+- cuda
+- nvidia
+- wasm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- RuntimeClass配置 是什么
+- 如何 RuntimeClass配置
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- RuntimeClass配置
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
 # 70 - RuntimeClass配置
 
 ## RuntimeClass概述

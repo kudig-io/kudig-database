@@ -1,3 +1,40 @@
+---
+title: 06 - 存储基础概念详解
+description: '# 06 - 存储基础概念详解'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- ceph
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储基础概念详解 是什么
+- 如何 存储基础概念详解
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储基础概念详解
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 06 - 存储基础概念详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 存储抽象、生命周期、访问模式

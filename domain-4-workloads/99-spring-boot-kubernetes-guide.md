@@ -1,3 +1,50 @@
+---
+title: Spring Boot on Kubernetes 生产实践指南
+description: '# Spring Boot on Kubernetes 生产实践指南'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- docker
+- redis
+- postgresql
+- hpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Spring Boot on Kubernetes 生产实践指南 是什么
+- 如何 Spring Boot on Kubernetes 生产实践指南
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Spring
+- Boot
+- 'on'
+- Kubernetes
+- 生产实践指南
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # Spring Boot on Kubernetes 生产实践指南
 
 > **适用版本**: Spring Boot 3.4+ / Kubernetes v1.29-v1.33  

@@ -1,4 +1,73 @@
+---
+title: 'Day 24: Terway 网络'
+description: '# Day 24: Terway 网络'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- flannel
+- ingress
+- networkpolicy
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 24: Terway 网络 是什么'
+- '如何 Day 24: Terway 网络'
+trigger_keywords:
+- Day
+- '24:'
+- Terway
+- 网络
+- learn
+---
+
 # Day 24: Terway 网络
+
+```yaml
+---
+title: Day 24: Terway 网络
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Terway CNI"
+  - "阿里云网络插件"
+  - "Terway ENIIP模式"
+  - "Kubernetes CNI"
+  - "Pod网络配置"
+trigger_keywords:
+  - "Terway"
+  - "Terway CNI"
+  - "ENIIP"
+  - "ENI模式"
+  - "弹性网卡"
+  - "VPC网络"
+  - "NetworkPolicy"
+  - "CNI插件"
+reading_level: intermediate
+audience:
+  - sre工程师
+  - ops工程师
+  - 运维工程师
+estimated_read_time: 45min
+related_domains:
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - domain-5-networking/02-cni-architecture-fundamentals
+id: WEEK4-DAY24
+topic: training
+type: hands-on
+tags: [week-4, day-24, terway, cni, networking, k8s, k8s-1.28-1.33]
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: Terway CNI 架构与配置
 

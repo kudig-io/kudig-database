@@ -1,6 +1,63 @@
-# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
+---
+title: 监控告警故障排查
+description: '# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)'
+category: troubleshooting
+tags:
+- prometheus
+- grafana
+- alertmanager
+- metrics
+- monitoring
+- alerting
+- jaeger
+- daemonset
+- job
+- cronjob
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Prometheus 不工作
+- 监控指标缺失
+- 告警没触发
+- Grafana Dashboard
+trigger_keywords:
+- 监控告警故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: skill
+  path: ../topic-skills/15-monitoring-alerting-failure.md
+  label: '运维技能: 15-monitoring-alerting-failure'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐ | **参考**: [Prometheus Monitoring](https://prometheus.io/docs/), [Kubernetes Monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/), [SRE Workbook](https://sre.google/workbook/)
+
+# 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
 
 ---
 

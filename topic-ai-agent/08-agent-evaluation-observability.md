@@ -1,3 +1,38 @@
+---
+title: Agent 评测体系与可观测性
+description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge, RAGAS, Langfuse, LangSmith, Phoenix,
+  轨迹评估, OpenTelemetry, 可观测性, Agent 指标'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- grafana
+- helm
+- postgresql
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent 评测体系与可观测性 是什么
+- 如何 Agent 评测体系与可观测性
+trigger_keywords:
+- Agent
+- 评测体系与可观测性
+- ai
+- agent
+---
+
+
 # Agent 评测体系与可观测性
 
 > **文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge, RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, OpenTelemetry, 可观测性, Agent 指标

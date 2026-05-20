@@ -1,3 +1,30 @@
+---
+title: 工具体系与权限模型
+description: '**文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions, Custom Tools, bash, edit, read,
+  grep, Security, TypeScript'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 工具体系与权限模型 是什么
+- 如何 工具体系与权限模型
+trigger_keywords:
+- 工具体系与权限模型
+- ai
+- coding
+---
+
 # 工具体系与权限模型
 
 > **文档类型**: 核心能力专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Tools, Permissions, Custom Tools, bash, edit, read, grep, Security, TypeScript

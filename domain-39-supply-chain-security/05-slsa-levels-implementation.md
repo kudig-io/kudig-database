@@ -1,3 +1,42 @@
+---
+title: SLSA 级别与实施 (SLSA Levels and Implementation)
+description: 1. [SLSA 框架概述](#1-slsa-框架概述)
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- docker
+- opa
+- job
+- networkpolicy
+- operator
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- SLSA 级别与实施 (SLSA Levels and Implementation) 是什么
+- 如何 SLSA 级别与实施 (SLSA Levels and Implementation)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- SLSA
+- 级别与实施
+- SLSA
+- Levels
+- and
+- Implementation
+- supply
+- chain
+---
+
+
 # SLSA 级别与实施 (SLSA Levels and Implementation)
 
 > SLSA（Supply chain Levels for Software Artifacts）是系统化保护软件供应链的行业框架，通过渐进式级别要求帮助组织防范构建过程篡改和制品完整性攻击。

@@ -1,3 +1,59 @@
+---
+title: 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)
+description: '# 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- grafana
+- helm
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response) 是什么
+- 如何 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 监控运维手册与应急响应
+- Monitoring
+- Playbooks
+- Incident
+- Response
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Google SRE Workbook](https://sre.google/workbook/table-of-contents/)

@@ -1,3 +1,38 @@
+---
+title: OpenKruise
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- statefulset
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- OpenKruise 是什么
+- 如何 OpenKruise
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- OpenKruise
+- cncf
+- landscape
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/openkruise-fta.md
+  label: '故障树: openkruise'
+---
+
 # OpenKruise
 
 > **成熟度**: Incubating | **加入时间**: 2021-05 | **最后更新**: 2026-03

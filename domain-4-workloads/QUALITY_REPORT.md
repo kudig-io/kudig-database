@@ -1,3 +1,46 @@
+---
+title: Domain-4 工作负载管理质量报告
+description: '# Domain-4 工作负载管理质量报告'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- kubelet
+- hpa
+- vpa
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-4 工作负载管理质量报告 是什么
+- 如何 Domain-4 工作负载管理质量报告
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Domain-4
+- 工作负载管理质量报告
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
 # Domain-4 工作负载管理质量报告
 
 **报告时间**: 2026年2月5日  

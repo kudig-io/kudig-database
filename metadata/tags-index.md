@@ -1,3 +1,33 @@
+---
+title: 标签索引 (Tags Index)
+description: '- domain-1: 架构概览、核心组件、性能调优'
+category: general
+tags:
+- k8s
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- ingress
+- gateway
+- rbac
+- networkpolicy
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 标签索引 (Tags Index) 是什么
+- 如何 标签索引 (Tags Index)
+trigger_keywords:
+- 标签索引
+- Tags
+- Index
+---
+
 # 标签索引 (Tags Index)
 
 > 按技术标签聚合的文档索引，便于按主题快速检索

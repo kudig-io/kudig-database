@@ -1,3 +1,52 @@
+---
+title: kube-proxy 与 Service 负载均衡
+description: '## kube-proxy 部署'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- kubelet
+- scheduler
+- daemonset
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- DevOps工程师
+- Kubernetes管理员
+- 网络工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes kube-proxy iptables ipvs mode comparison
+- kube-proxy service负载均衡 ClusterIP NodePort LoadBalancer
+- Kubernetes Service networking kube-proxy conntrack
+- iptables vs ipvs vs nftables kube-proxy performance
+- Kubernetes headless service external traffic policy
+trigger_keywords:
+- kube-proxy
+- iptables
+- ipvs
+- nftables
+- Service
+- ClusterIP
+- NodePort
+- LoadBalancer
+- conntrack
+- DNAT
+- kube-svc
+- load balancing
+related_domains:
+- domain-5-networking
+- domain-12-troubleshooting
+related_topics:
+- Service
+- CNI networking
+- CoreDNS
+- Ingress
+---
+
+
 # kube-proxy 与 Service 负载均衡
 
 ## 源码路径

@@ -1,3 +1,37 @@
+---
+title: 02 - 单节点部署 (Single Node All-in-One)
+description: '# 02 - 单节点部署 (Single Node All-in-One)'
+category: deployment
+tags:
+- k8s
+- deployment
+- rolling-update
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 单节点部署 (Single Node All-in-One) 是什么
+- 如何 单节点部署 (Single Node All-in-One)
+trigger_keywords:
+- 单节点部署
+- Single
+- Node
+- All-in-One
+- deployment
+---
+
+
 # 02 - 单节点部署 (Single Node All-in-One)
 
 > **适用场景**: 个人开发者、小团队、边缘节点 | **预计时间**: 1-2 小时 | **复杂度**: ⭐⭐  

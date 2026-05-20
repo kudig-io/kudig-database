@@ -1,3 +1,31 @@
+---
+title: Kubernetes API 聚合层
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- crd
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes API 聚合层 是什么
+- 如何 Kubernetes API 聚合层
+trigger_keywords:
+- Kubernetes
+- API
+- 聚合层
+- dictionary
+title_en: Kubernetes Api Aggregation Layer
+---
+
+
 # Kubernetes API 聚合层
 
 ## 概述

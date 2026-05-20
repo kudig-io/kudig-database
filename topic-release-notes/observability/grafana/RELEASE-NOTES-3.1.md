@@ -1,3 +1,31 @@
+---
+title: grafana v3.1 Release Notes
+description: grafana v3.1 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- grafana
+- elasticsearch
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- grafana v3.1 Release Notes 是什么
+- 如何 grafana v3.1 Release Notes
+trigger_keywords:
+- grafana
+- v3.1
+- Release
+- Notes
+- release
+- notes
+---
+
 # grafana v3.1 Release Notes
 
 Source: [v3.1.1](https://github.com/grafana/grafana/releases/tag/v3.1.1)

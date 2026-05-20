@@ -1,97 +1,153 @@
-# HashiCorp Vault Enterprise Secrets Management 深度实践
+---
+title: HashiCorp Vault 企业级密钥管理深度实践
+description: '# HashiCorp Vault 企业级密钥管理深度实践'
+category: cloud-native-security
+tags:
+- k8s
+- security
+- cloud-native
+- falco
+- opa
+- prometheus
+- postgresql
+- job
+- cronjob
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- HashiCorp Vault 企业级密钥管理深度实践 是什么
+- 如何 HashiCorp Vault 企业级密钥管理深度实践
+- Kubernetes 25 cloud native security 最佳实践
+trigger_keywords:
+- HashiCorp
+- Vault
+- 企业级密钥管理深度实践
+- cloud
+- native
+- security
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
 
-> **Author**: Enterprise Security Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
+
+# HashiCorp Vault 企业级密钥管理深度实践
+
+> **Author**: Enterprise Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
 > **Scenario**: Enterprise-grade secrets management and cryptographic operations | **Complexity**: ⭐⭐⭐⭐⭐
 
-## 🎯 Abstract
+## 概述
 
-This document provides comprehensive exploration of HashiCorp Vault enterprise deployment architecture, secrets management practices, and cryptographic operations. Based on large-scale production environment experience, it offers complete technical guidance from high availability setup to dynamic secrets generation, helping enterprises build secure, scalable secrets management platforms with integrated authentication, encryption, and compliance capabilities.
+HashiCorp Vault 是企业级密钥管理和加密服务平台，提供集中式的密钥存储、动态凭证生成、加密即服务和完整的审计追踪能力。在云原生环境中，应用程序需要管理数据库凭证、API 密钥、TLS 证书、加密密钥等多种敏感数据，Vault 通过统一的 API 和策略引擎为这些需求提供安全、可审计的解决方案。本文详细探讨 Vault 企业级部署架构、多认证方式集成、密钥引擎使用、加密服务和运维管理，帮助企业在生产环境中构建安全、高可用的密钥管理平台。
 
-## 1. Vault Enterprise Architecture
+### 威胁模型分析
 
-### 1.1 Core Component Architecture
+**密钥泄露**：开发人员将数据库密码、API Key 等硬编码在代码或配置文件中，通过代码仓库泄露。更常见的是将密钥以明文形式存储在环境变量或 ConfigMap 中，集群内的任何 Pod 都可能读取。Vault 通过动态凭证和 Agent Sidecar 注入模式，确保密钥仅在内存中存在，不落盘不暴露。
+
+**密钥轮换缺失**：长期使用同一组密钥增加了被破解的风险。当密钥泄露时，需要手动更新所有使用该密钥的服务。Vault 的动态密钥引擎可以自动生成短期凭证，并设置 TTL（Time To Live）和自动回收机制。
+
+**缺乏审计追踪**：没有统一的密钥管理系统时，无法追踪谁在何时访问了哪些密钥。Vault 的审计日志记录所有 API 调用，包括认证、授权和密钥访问，为合规审计提供完整证据链。
+
+**数据加密需求**：应用程序需要对用户敏感数据（如 SSN、信用卡号）进行加密存储。Vault 的 Transit 引擎提供加密即服务，应用无需自行管理加密密钥。
+
+## 架构设计
+
+### Vault 企业级组件架构
 
 ```mermaid
 graph TB
-    subgraph "Vault Core Components"
-        A[Vault Server]
-        B[Storage Backend]
-        C[Seal/Unseal Mechanism]
-        D[Token Authentication]
-        E[Policy Engine]
+    subgraph "Vault Core"
+        SERVER[Vault Server]
+        STORAGE[Storage Backend<br/>Raft Consensus]
+        SEAL[Seal / Unseal<br/>Auto Unseal KMS]
+        TOKEN[Token Manager]
+        POLICY[Policy Engine]
     end
-    
+
     subgraph "Enterprise Features"
-        F[Namespaces]
-        G[MFA Authentication]
-        H[Replication]
-        I[HSM Integration]
-        J[Audit Logging]
+        NS[Namespaces]
+        MFA[MFA Authentication]
+        PREF[Performance Replication]
+        DR[DR Replication]
+        HSM[HSM Integration]
     end
-    
-    subgraph "Authentication Methods"
-        K[LDAP/AD]
-        L[OIDC/OAuth]
-        M[AWS IAM]
-        N[Kubernetes Auth]
-        O[AppRole]
+
+    subgraph "Auth Methods"
+        LDAP[LDAP / Active Directory]
+        OIDC[OIDC / OAuth2]
+        AWS[AWS IAM Auth]
+        K8S[Kubernetes Auth]
+        APPROLE[AppRole]
+        USERPASS[Username / Password]
+        JWT[JWT Auth]
     end
-    
+
     subgraph "Secrets Engines"
-        P[Key/Value v2]
-        Q[Dynamic Secrets]
-        R[Encryption as a Service]
-        S[PKI/Certificates]
-        T[Transit]
+        KV[KV v2 Static Secrets]
+        DYNDB[Dynamic Database]
+        TRANSIT[Transit Encryption]
+        PKI[PKI Certificates]
+        SSH[SSH OTP]
+        TOTP[TOTP MFA]
+        AWSSEC[AWS Credentials]
+        GCPSEC[GCP Credentials]
     end
-    
-    subgraph "Infrastructure Layer"
-        U[Load Balancer]
-        V[Auto Unseal]
-        W[Performance Replication]
-        X[DR Replication]
-        Y[Monitoring]
+
+    subgraph "Infrastructure"
+        LB[Load Balancer]
+        AUDIT[Audit Logging]
+        MON[Monitoring]
+        BACKUP[Backup / Snapshot]
     end
-    
-    A --> B
-    A --> C
-    A --> D
-    D --> E
-    
-    F --> G
-    G --> H
-    H --> I
-    I --> J
-    
-    K --> L
-    L --> M
-    M --> N
-    N --> O
-    
-    P --> Q
-    Q --> R
-    R --> S
-    S --> T
-    
-    U --> V
-    V --> W
-    W --> X
-    X --> Y
+
+    SERVER --> STORAGE
+    SERVER --> SEAL
+    SERVER --> TOKEN
+    TOKEN --> POLICY
+    POLICY --> NS
+    SERVER --> MFA
+    SERVER --> PREF
+    SERVER --> DR
+    SERVER --> HSM
+
+    LDAP --> SERVER
+    OIDC --> SERVER
+    AWS --> SERVER
+    K8S --> SERVER
+    APPROLE --> SERVER
+
+    KV --> SERVER
+    DYNDB --> SERVER
+    TRANSIT --> SERVER
+    PKI --> SERVER
+
+    LB --> SERVER
+    SERVER --> AUDIT
+    SERVER --> MON
+    STORAGE --> BACKUP
 ```
 
-### 1.2 Enterprise Deployment Architecture
+### 企业级部署架构
 
 ```yaml
-vault_enterprise_deployment:
+vault_enterprise_architecture:
   cluster:
     node_count: 5
+    regions: 2
     server_config:
       api_addr: "https://vault.company.com:8200"
-      cluster_addr: "https://vault-node-{index}.company.internal:8201"
+      cluster_addr: "https://vault-node-{index}.internal.company.com:8201"
       ui: true
-      raw_storage_endpoint: true
       disable_mlock: false
-      
+
     listener:
       - tcp:
           address: "0.0.0.0:8200"
@@ -99,93 +155,63 @@ vault_enterprise_deployment:
           tls_cert_file: "/etc/vault/tls/vault.crt"
           tls_key_file: "/etc/vault/tls/vault.key"
           tls_client_ca_file: "/etc/vault/tls/ca.crt"
-          tls_disable_client_certs: true
           telemetry:
             unauthenticated_metrics_access: true
-    
+
     storage:
       raft:
         path: "/opt/vault/data"
-        node_id: "vault-node-{index}"
         performance_multiplier: 8
         trailing_logs: 10000
         snapshot_threshold: 8192
-        auto_pilot: true
-        
+
     seal:
       awskms:
         region: "us-west-2"
-        kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd1234-a123-456a-a12b-a123b4cd56ef"
-    
-    service_registration:
-      kubernetes:
-        pod_name: "vault-{index}"
-        namespace: "vault"
-    
+        kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd1234"
+
     telemetry:
       statsd_address: "statsd.monitoring.svc.cluster.local:8125"
+      prometheus_retention_time: "30s"
       disable_hostname: true
-  
+
   high_availability:
     load_balancer:
       type: "aws_network_load_balancer"
-      ssl_termination: true
       health_check:
         path: "/v1/sys/health"
-        port: 8200
-        protocol: "HTTPS"
         healthy_threshold: 2
         unhealthy_threshold: 3
-        timeout: 5
-        interval: 30
-    
+
     auto_unseal:
       provider: "awskms"
       region: "us-west-2"
-      kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd1234-a123-456a-a12b-a123b4cd56ef"
-    
+
     replication:
       performance:
-        primary_cluster_addr: "https://vault.company.com:8201"
-        secondary_cluster_addrs:
-          - "https://vault-dr.company.com:8201"
+        primary: "https://vault.company.com:8201"
+        secondary: "https://vault-dr.company.com:8201"
       disaster_recovery:
-        primary_cluster_addr: "https://vault.company.com:8201"
-        secondary_cluster_addrs:
-          - "https://vault-backup.company.com:8201"
+        primary: "https://vault.company.com:8201"
+        secondary: "https://vault-backup.company.com:8201"
 ```
 
-## 2. Advanced Authentication Configuration
+## 核心配置
 
-### 2.1 LDAP/AD Integration
-
-```hcl
-# ldap_auth_config.hcl
-path "auth/ldap/config" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-path "auth/ldap/groups/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-path "auth/ldap/users/*" {
-  capabilities = ["create", "read", "update", "delete", "list"]
-}
-```
+### LDAP / Active Directory 认证
 
 ```bash
 #!/bin/bash
 # vault_ldap_setup.sh
 
-# 1. 启用LDAP认证
+# Enable LDAP auth method
 vault auth enable ldap
 
-# 2. 配置LDAP设置
+# Configure LDAP connection
 vault write auth/ldap/config \
     url="ldaps://ldap.company.com:636" \
     binddn="cn=vault,ou=service accounts,dc=company,dc=com" \
-    bindpass="your-bind-password" \
+    bindpass="${LDAP_BIND_PASSWORD}" \
     userdn="ou=users,dc=company,dc=com" \
     userattr="sAMAccountName" \
     groupdn="ou=groups,dc=company,dc=com" \
@@ -193,38 +219,41 @@ vault write auth/ldap/config \
     groupattr="cn" \
     insecure_tls=false \
     starttls=true \
-    certificate=@/etc/vault/ssl/ldap-ca.crt
+    certificate=@/etc/vault/ssl/ldap-ca.crt \
+    token_type="default" \
+    max_page_size="1000"
 
-# 3. 创建LDAP组映射
+# Create LDAP group to policy mappings
 vault write auth/ldap/groups/platform-engineering \
-    policies="platform-admin,kubernetes-admin"
+    policies="platform-admin,kubernetes-admin,secret-reader"
 
 vault write auth/ldap/groups/security-team \
-    policies="security-admin,audit-reader"
+    policies="security-admin,audit-reader,pki-admin"
 
-# 4. 配置用户特定策略
+vault write auth/ldap/groups/development-team \
+    policies="developer,secret-reader"
+
+vault write auth/ldap/groups/dba-team \
+    policies="database-admin,secret-reader"
+
+# Configure user-specific overrides
 vault write auth/ldap/users/john.doe \
-    policies="developer,project-alpha"
+    policies="developer,project-alpha" \
+    groups="development-team"
+
+vault write auth/ldap/users/admin.user \
+    policies="admin,security-admin" \
+    groups="security-team"
 ```
 
-### 2.2 Kubernetes Authentication
+### Kubernetes 认证
 
 ```yaml
-# kubernetes_auth_config.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: vault-auth
   namespace: vault
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: vault-auth-secret
-  namespace: vault
-  annotations:
-    kubernetes.io/service-account.name: vault-auth
-type: kubernetes.io/service-account-token
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -235,457 +264,649 @@ roleRef:
   kind: ClusterRole
   name: system:auth-delegator
 subjects:
-- kind: ServiceAccount
-  name: vault-auth
-  namespace: vault
+  - kind: ServiceAccount
+    name: vault-auth
+    namespace: vault
 ```
 
 ```bash
 #!/bin/bash
-# kubernetes_vault_auth.sh
+# vault_k8s_auth.sh
 
-# 1. 启用Kubernetes认证
+# Enable Kubernetes auth method
 vault auth enable kubernetes
 
-# 2. 配置Kubernetes认证
+# Configure Kubernetes auth
 vault write auth/kubernetes/config \
     kubernetes_host="https://kubernetes.default.svc.cluster.local" \
     kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
-    token_reviewer_jwt=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+    token_reviewer_jwt=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
+    issuer="https://kubernetes.default.svc.cluster.local"
 
-# 3. 创建角色绑定
-vault write auth/kubernetes/role/app-role \
-    bound_service_account_names="app-sa" \
+# Create roles for different service accounts
+vault write auth/kubernetes/role/frontend-app \
+    bound_service_account_names="frontend-sa" \
     bound_service_account_namespaces="production" \
-    policies="app-policy" \
+    policies="frontend-policy" \
     ttl="1h" \
     max_ttl="24h"
 
-# 4. 应用端获取Vault令牌
-cat > /opt/scripts/get_vault_token.sh << 'EOF'
-#!/bin/bash
-VAULT_ADDR="https://vault.company.com:8200"
-KUBE_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+vault write auth/kubernetes/role/backend-app \
+    bound_service_account_names="backend-sa" \
+    bound_service_account_namespaces="production" \
+    policies="backend-policy,database-reader" \
+    ttl="1h" \
+    max_ttl="24h"
 
-# 获取Vault令牌
-VAULT_TOKEN=$(curl -s --request POST \
-    --data '{"jwt": "'"$KUBE_TOKEN"'", "role": "app-role"}' \
-    $VAULT_ADDR/v1/auth/kubernetes/login | jq -r '.auth.client_token')
+vault write auth/kubernetes/role/cronjob-app \
+    bound_service_account_names="cronjob-sa" \
+    bound_service_account_namespaces="production" \
+    policies="database-reader,secret-reader" \
+    ttl="30m" \
+    max_ttl="1h"
 
-echo $VAULT_TOKEN
+# Create policies for K8s workloads
+cat > frontend-policy.hcl << 'EOF'
+path "secret/data/production/frontend" {
+    capabilities = ["read"]
+}
+path "pki/issue/frontend" {
+    capabilities = ["update"]
+}
 EOF
+
+cat > backend-policy.hcl << 'EOF'
+path "secret/data/production/backend" {
+    capabilities = ["read"]
+}
+path "database/creds/backend-role" {
+    capabilities = ["read"]
+}
+path "transit/encrypt/backend-key" {
+    capabilities = ["update"]
+}
+path "transit/decrypt/backend-key" {
+    capabilities = ["update"]
+}
+path "pki/issue/backend" {
+    capabilities = ["update"]
+}
+EOF
+
+cat > database-reader.hcl << 'EOF'
+path "database/creds/read-only" {
+    capabilities = ["read"]
+}
+path "database/creds/app-role" {
+    capabilities = ["read"]
+}
+EOF
+
+vault policy write frontend-policy frontend-policy.hcl
+vault policy write backend-policy backend-policy.hcl
+vault policy write database-reader database-reader.hcl
 ```
 
-## 3. Secrets Engines and Management
+### AppRole 认证（机器对机器）
 
-### 3.1 Key/Value Secrets Engine
+```bash
+#!/bin/bash
+# vault_approle_setup.sh
+
+# Enable AppRole auth
+vault auth enable approle
+
+# Create policy for CI/CD pipeline
+cat > cicd-policy.hcl << 'EOF'
+path "secret/data/cicd/*" {
+    capabilities = ["read"]
+}
+path "database/creds/cicd-role" {
+    capabilities = ["read"]
+}
+path "pki/issue/cicd" {
+    capabilities = ["update"]
+}
+path "transit/encrypt/cicd-key" {
+    capabilities = ["update"]
+}
+EOF
+
+vault policy write cicd-policy cicd-policy.hcl
+
+# Create AppRole
+vault write auth/approle/role/cicd-pipeline \
+    token_policies="cicd-policy" \
+    token_ttl="1h" \
+    token_max_ttl="4h" \
+    secret_id_bound_cidrs="10.0.0.0/8,172.16.0.0/12" \
+    token_bound_cidrs="10.0.0.0/8,172.16.0.0/12" \
+    secret_id_num_uses=100
+
+# Get Role ID
+ROLE_ID=$(vault read -field=role_id auth/approle/role/cicd-pipeline/role-id)
+echo "Role ID: $ROLE_ID"
+
+# Generate Secret ID
+SECRET_ID=$(vault write -field=secret_id -f auth/approle/role/cicd-pipeline/secret-id)
+echo "Secret ID: $SECRET_ID"
+
+# Login with AppRole
+vault write auth/approle/login \
+    role_id="$ROLE_ID" \
+    secret_id="$SECRET_ID"
+```
+
+### KV Secrets Engine
 
 ```bash
 #!/bin/bash
 # kv_secrets_management.sh
 
-# 1. 启用KV v2引擎
+# Enable KV v2 engine
 vault secrets enable -path=secret kv-v2
 
-# 2. 创建应用密钥
+# Configure versioning and max versions
+vault kv tune -max-versions=20 secret/
+
+# Create application secrets
 vault kv put secret/production/database \
-    username="dbuser" \
-    password="secure-password-123" \
-    host="db.company.com" \
-    port="5432"
+    username="appuser" \
+    password="$(openssl rand -base64 24)" \
+    host="postgres.production.svc.cluster.local" \
+    port="5432" \
+    database="myapp"
 
-# 3. 创建版本化密钥
 vault kv put secret/production/api-keys \
-    api_key_v1="abc123" \
-    api_key_v2="def456"
+    stripe_key="sk_live_abc123" \
+    sendgrid_key="SG.def456" \
+    google_maps_key="AIza ghi789"
 
-# 4. 安全配置策略
-cat > app_policy.hcl << 'EOF'
-# 应用数据库访问策略
-path "secret/data/production/database" {
-    capabilities = ["read"]
-}
+vault kv put secret/production/jwt \
+    secret_key="$(openssl rand -hex 64)" \
+    issuer="myapp.company.com" \
+    access_token_ttl="15m" \
+    refresh_token_ttl="7d"
 
-# 仅允许读取最新版本的API密钥
-path "secret/data/production/api-keys" {
-    capabilities = ["read"]
-}
+# Read secrets
+vault kv get -format=json secret/production/database
+vault kv get -field=password secret/production/database
 
-# 不允许列出密钥
-path "secret/metadata/production/*" {
-    capabilities = ["deny"]
-}
-EOF
+# Version management
+vault kv metadata get secret/production/database
+vault kv rollback -version=2 secret/production/database
 
-vault policy write app-policy app_policy.hcl
+# Delete and undelete
+vault kv delete secret/production/api-keys
+vault kv undelete -versions=1 secret/production/api-keys
 
-# 5. 启用密钥版本控制
-vault kv enable-versioning secret/
-
-# 6. 配置自动删除
-vault kv tune -max-versions=10 secret/
+# Permanently destroy
+vault kv destroy -versions=3 secret/production/api-keys
 ```
 
-### 3.2 Dynamic Database Credentials
+### Dynamic Database Credentials
 
 ```bash
 #!/bin/bash
 # dynamic_database_secrets.sh
 
-# 1. 启用数据库引擎
+# Enable database engine
 vault secrets enable database
 
-# 2. 配置PostgreSQL连接
+# Configure PostgreSQL connection
 vault write database/config/production-postgres \
     plugin_name="postgresql-database-plugin" \
-    allowed_roles="app-role,admin-role" \
-    connection_url="postgresql://{{username}}:{{password}}@postgres.company.com:5432/myapp?sslmode=require" \
+    allowed_roles="app-role,read-only,admin-role" \
+    connection_url="postgresql://{{username}}:{{password}}@postgres.production.svc.cluster.local:5432/myapp?sslmode=require" \
     username="vault_admin" \
-    password="vault_admin_password"
+    password="${VAULT_DB_ADMIN_PASSWORD}" \
+    max_open_connections=10 \
+    max_idle_connections=5 \
+    max_connection_lifetime="0"
 
-# 3. 创建应用角色
+# Rotate the admin password (one-time operation)
+vault write -force database/rotate-root/production-postgres
+
+# Create application role (read/write)
 vault write database/roles/app-role \
     db_name="production-postgres" \
-    creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; \
-                        GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+    creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO \"{{name}}\"; GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO \"{{name}}\";" \
+    revocation_statements="DROP ROLE IF EXISTS \"{{name}}\";" \
+    renew_statements="ALTER ROLE \"{{name}}\" VALID UNTIL '{{expiration}}';" \
+    rollback_statements="DROP ROLE IF EXISTS \"{{name}}\";" \
     default_ttl="1h" \
     max_ttl="24h"
 
-# 4. 创建管理员角色
+# Create read-only role
+vault write database/roles/read-only \
+    db_name="production-postgres" \
+    creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+    default_ttl="1h" \
+    max_ttl="24h"
+
+# Create admin role (short TTL)
 vault write database/roles/admin-role \
     db_name="production-postgres" \
     creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' SUPERUSER VALID UNTIL '{{expiration}}';" \
     default_ttl="30m" \
     max_ttl="1h"
 
-# 5. 应用获取动态凭证
-cat > get_db_credentials.sh << 'EOF'
-#!/bin/bash
-# 获取动态数据库凭证
-DB_CREDS=$(vault read -format=json database/creds/app-role)
-USERNAME=$(echo $DB_CREDS | jq -r '.data.username')
-PASSWORD=$(echo $DB_CREDS | jq -r '.data.password')
-
-# 使用凭证连接数据库
-export PGUSER=$USERNAME
-export PGPASSWORD=$PASSWORD
-psql -h postgres.company.com -d myapp -c "SELECT version();"
-EOF
+# Test dynamic credential generation
+vault read database/creds/app-role
+vault read database/creds/read-only
 ```
 
-## 4. Encryption and Transit Operations
+## 安全策略实战
 
-### 4.1 Transit Secrets Engine
+### Transit 加密即服务
+
+Transit 引擎提供加密即服务（Encryption as a Service），应用程序无需自行管理加密密钥。密钥存储在 Vault 中，永远不暴露给应用。适合加密用户敏感数据如 SSN、信用卡号、健康记录等。
 
 ```bash
 #!/bin/bash
 # transit_encryption.sh
 
-# 1. 启用Transit引擎
+# Enable Transit engine
 vault secrets enable transit
 
-# 2. 创建加密密钥
-vault write -f transit/keys/customer-data
-vault write -f transit/keys/payment-tokens
+# Create encryption keys for different data types
+vault write -f transit/keys/customer-pii
+vault write -f transit/keys/payment-data
+vault write -f transit/keys/health-records
+vault write -f transit/keys/session-tokens
 
-# 3. 配置密钥策略
-vault write transit/keys/customer-data/config \
+# Configure key policies
+vault write transit/keys/customer-pii/config \
     exportable=false \
     allow_plaintext_backup=false \
-    deletion_allowed=false
+    deletion_allowed=false \
+    min_decryption_version=1 \
+    min_encryption_version=1 \
+    auto_rotate_period="720h"
 
-# 4. 数据加密示例
-cat > encrypt_data.sh << 'EOF'
-#!/bin/bash
+vault write transit/keys/payment-data/config \
+    exportable=false \
+    allow_plaintext_backup=false \
+    deletion_allowed=false \
+    auto_rotate_period="168h"
 
-# 加密敏感数据
-SENSITIVE_DATA="Customer SSN: 123-45-6789"
-ENCRYPTED_DATA=$(echo -n "$SENSITIVE_DATA" | base64)
-
-# 发送到Vault进行加密
-RESPONSE=$(curl -s \
-    --header "X-Vault-Token: $VAULT_TOKEN" \
-    --request POST \
-    --data '{"plaintext": "'"$ENCRYPTED_DATA"'"}' \
-    $VAULT_ADDR/v1/transit/encrypt/customer-data)
-
-CIPHERTEXT=$(echo $RESPONSE | jq -r '.data.ciphertext')
-echo "Encrypted data: $CIPHERTEXT"
-
-# 解密数据
-DECRYPT_RESPONSE=$(curl -s \
-    --header "X-Vault-Token: $VAULT_TOKEN" \
-    --request POST \
-    --data '{"ciphertext": "'"$CIPHERTEXT"'"}' \
-    $VAULT_ADDR/v1/transit/decrypt/customer-data)
-
-PLAINTEXT=$(echo $DECRYPT_RESPONSE | jq -r '.data.plaintext' | base64 -d)
-echo "Decrypted data: $PLAINTEXT"
+# Create encryption policy
+cat > transit-encrypt-policy.hcl << 'EOF'
+path "transit/encrypt/customer-pii" {
+    capabilities = ["update"]
+}
+path "transit/decrypt/customer-pii" {
+    capabilities = ["update"]
+}
+path "transit/encrypt/payment-data" {
+    capabilities = ["update"]
+}
+path "transit/decrypt/payment-data" {
+    capabilities = ["update"]
+}
+path "transit/rewrap/*" {
+    capabilities = ["update"]
+}
 EOF
+
+vault policy write transit-app transit-encrypt-policy.hcl
+
+# Rotate encryption key
+vault write -f transit/keys/customer-pii/rotate
+
+# Rewrap existing ciphertext with new key version
+vault write transit/rewrap/customer-pii \
+    ciphertext="vault:v1:abc123..."
 ```
 
-### 4.2 PKI Certificate Management
+### PKI 证书管理
 
 ```bash
 #!/bin/bash
-# pki_certificate_management.sh
+# pki_management.sh
 
-# 1. 启用PKI引擎
-vault secrets enable pki
+# === Root CA Setup ===
+vault secrets enable -path=pki-root pki
+vault secrets tune -max-lease-ttl=87600h pki-root
 
-# 2. 配置CA证书
-vault write pki/root/generate/internal \
-    common_name="Company Internal CA" \
+vault write pki-root/root/generate/internal \
+    common_name="Company Root CA" \
     ttl=87600h \
     key_type="rsa" \
-    key_bits=4096
+    key_bits=4096 \
+    exclude_cn_from_sans=true \
+    issuer_name="root-2026"
 
-# 3. 配置CRL和OCSP
-vault write pki/config/urls \
-    issuing_certificates="https://vault.company.com:8200/v1/pki/ca" \
-    crl_distribution_points="https://vault.company.com:8200/v1/pki/crl"
+vault write pki-root/config/urls \
+    issuing_certificates="https://vault.company.com:8200/v1/pki-root/ca" \
+    crl_distribution_points="https://vault.company.com:8200/v1/pki-root/crl" \
+    ocsp_servers="https://vault.company.com:8200/v1/pki-root/ocsp"
 
-# 4. 创建角色
-vault write pki/roles/server-certs \
-    allowed_domains="company.com,internal.company.com" \
+# === Intermediate CA Setup ===
+vault secrets enable -path=pki-intermediate pki
+vault secrets tune -max-lease-ttl=43800h pki-intermediate
+
+vault write pki-intermediate/intermediate/generate/internal \
+    common_name="Company Intermediate CA" \
+    ttl=43800h \
+    key_type="ec" \
+    key_bits=256 \
+    issuer_name="intermediate-2026"
+
+CSR=$(vault write -field=csr pki-intermediate/intermediate/generate/internal)
+
+vault write pki-root/root/sign-intermediate \
+    csr=@<(echo "$CSR") \
+    format=pem_bundle \
+    ttl=43800h
+
+vault write pki-intermediate/intermediate/set-signed \
+    certificate=@signed_intermediate.crt
+
+# === Issue Server Certificates ===
+vault write pki-intermediate/roles/server-certs \
+    allowed_domains="company.com,internal.company.com,svc.cluster.local" \
     allow_subdomains=true \
-    max_ttl="720h"
+    allow_bare_domains=false \
+    max_ttl="720h" \
+    key_type="ec" \
+    key_bits=256 \
+    server_flag=true \
+    client_flag=false \
+    no_store=false
 
-vault write pki/roles/client-certs \
+vault write pki-intermediate/roles/client-certs \
     allowed_domains="company.com" \
     allow_bare_domains=true \
+    allow_subdomains=true \
+    max_ttl="168h" \
     client_flag=true \
-    max_ttl="168h"
+    server_flag=false
 
-# 5. 签发证书
-vault write pki/issue/server-certs \
+# Issue a certificate
+vault write pki-intermediate/issue/server-certs \
     common_name="webapp.company.com" \
-    ttl="24h"
+    ttl="24h" \
+    alt_names="webapp.production.svc.cluster.local" \
+    ip_sans="10.0.1.100"
 
-# 6. 自动证书轮换脚本
-cat > certificate_renewal.sh << 'EOF'
-#!/bin/bash
+# === Certificate Revocation ===
+vault write pki-intermediate/revoke \
+    serial_number="12:34:56:78:90:ab:cd:ef"
 
-# 检查证书是否需要更新
-check_cert_expiry() {
-    local cert_file=$1
-    local days_threshold=${2:-30}
-    
-    local expiry_date=$(openssl x509 -in $cert_file -noout -enddate | cut -d= -f2)
-    local expiry_timestamp=$(date -d "$expiry_date" +%s)
-    local threshold_timestamp=$(date -d "+$days_threshold days" +%s)
-    
-    if [ $expiry_timestamp -lt $threshold_timestamp ]; then
-        return 0  # 需要更新
-    else
-        return 1  # 不需要更新
-    fi
-}
-
-# 续订证书
-renew_certificate() {
-    local cert_name=$1
-    local common_name=$2
-    
-    # 获取新证书
-    RESPONSE=$(vault write -format=json pki/issue/server-certs common_name=$common_name ttl="24h")
-    
-    # 提取证书和私钥
-    echo $RESPONSE | jq -r '.data.certificate' > "/etc/ssl/certs/${cert_name}.crt"
-    echo $RESPONSE | jq -r '.data.private_key' > "/etc/ssl/private/${cert_name}.key"
-    echo $RESPONSE | jq -r '.data.issuing_ca' > "/etc/ssl/certs/ca.crt"
-    
-    # 重启服务
-    systemctl restart nginx
-}
-
-# 主循环
-while true; do
-    if check_cert_expiry "/etc/ssl/certs/webapp.company.com.crt" 30; then
-        echo "Renewing certificate for webapp.company.com"
-        renew_certificate "webapp.company.com" "webapp.company.com"
-    fi
-    sleep 86400  # 每天检查一次
-done
-EOF
+# === Tidy / Cleanup ===
+vault write pki-intermediate/tidy \
+    tidy_cert_store=true \
+    tidy_revoked_certs=true \
+    safety_buffer="72h"
 ```
 
-## 5. Enterprise Security Features
-
-### 5.1 Namespace Configuration
-
-```hcl
-# namespace_policies.hcl
-# 生产命名空间策略
-path "prod/*" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# 开发命名空间策略
-path "dev/*" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
-
-# 只读访问策略
-path "secret/data/+/*" {
-    capabilities = ["read", "list"]
-}
-```
+### 命名空间隔离
 
 ```bash
 #!/bin/bash
-# vault_namespaces.sh
+# namespace_setup.sh
 
-# 1. 启用命名空间
+# Create namespaces for different environments
 vault namespace create production
+vault namespace create staging
 vault namespace create development
 vault namespace create security
 
-# 2. 在命名空间中配置引擎
+# Configure secrets engines in each namespace
 vault secrets enable -namespace=production -path=secret kv-v2
+vault secrets enable -namespace=production -path=database database
+vault secrets enable -namespace=production -path=transit transit
+
+vault secrets enable -namespace=staging -path=secret kv-v2
+vault secrets enable -namespace=staging -path=database database
+
 vault secrets enable -namespace=development -path=secret kv-v2
 
-# 3. 创建命名空间特定策略
-vault policy write -namespace=production prod-admin prod_admin_policy.hcl
-vault policy write -namespace=development dev-admin dev_admin_policy.hcl
+# Create namespace-specific policies
+cat > prod-admin-policy.hcl << 'EOF'
+path "secret/data/*" {
+    capabilities = ["create", "read", "update", "delete", "list"]
+}
+path "database/creds/*" {
+    capabilities = ["read"]
+}
+path "transit/*" {
+    capabilities = ["update"]
+}
+path "pki/issue/*" {
+    capabilities = ["update"]
+}
+EOF
 
-# 4. 命名空间用户管理
+vault policy write -namespace=production prod-admin prod-admin-policy.hcl
+
+cat > dev-admin-policy.hcl << 'EOF'
+path "secret/data/*" {
+    capabilities = ["create", "read", "update", "delete", "list"]
+}
+path "database/creds/*" {
+    capabilities = ["read"]
+}
+EOF
+
+vault policy write -namespace=development dev-admin dev-admin-policy.hcl
+
+# Configure auth per namespace
 vault auth enable -namespace=production userpass
-vault auth enable -namespace=development userpass
+vault auth enable -namespace=production kubernetes
 
 vault write -namespace=production auth/userpass/users/prod-admin \
-    password="secure-password" \
+    password="${PROD_ADMIN_PASSWORD}" \
     policies="prod-admin"
 
+vault auth enable -namespace=development userpass
 vault write -namespace=development auth/userpass/users/dev-admin \
-    password="secure-password" \
+    password="${DEV_ADMIN_PASSWORD}" \
     policies="dev-admin"
 ```
 
-### 5.2 MFA and Advanced Authentication
+## 合规与审计
+
+### 审计日志配置
 
 ```bash
-#!/bin/bash
-# mfa_configuration.sh
+# Enable file audit
+vault audit enable file file_path=/vault/logs/audit.log log_raw=false
 
-# 1. 启用用户密码认证
-vault auth enable userpass
+# Enable syslog audit
+vault audit enable syslog \
+    facility="AUTH" \
+    tag="vault" \
+    address="syslog.monitoring.svc.cluster.local:514"
 
-# 2. 启用TOTP引擎
-vault secrets enable totp
-
-# 3. 创建用户并配置MFA
-vault write auth/userpass/users/john.doe \
-    password="user-password" \
-    policies="default"
-
-# 4. 为用户生成TOTP密钥
-TOTP_KEY=$(vault write -f totp/keys/john.doe \
-    issuer="Company Vault" \
-    account_name="john.doe@company.com" \
-    period=30 \
-    algorithm="SHA1" \
-    digits=6 \
-    skew=1 \
-    -format=json | jq -r '.data.url')
-
-echo "TOTP Setup URL: $TOTP_KEY"
-
-# 5. 验证TOTP代码
-verify_totp() {
-    local user=$1
-    local code=$2
-    
-    local response=$(vault write totp/code/$user code=$code -format=json)
-    local valid=$(echo $response | jq -r '.data.valid')
-    
-    if [ "$valid" = "true" ]; then
-        echo "TOTP verification successful"
-        return 0
-    else
-        echo "TOTP verification failed"
-        return 1
-    fi
-}
+# Enable socket audit (for external SIEM)
+vault audit enable socket \
+    address="siem.company.com:9000" \
+    socket_type="tcp" \
+    format="json"
 ```
 
-## 6. Monitoring and Operations
-
-### 6.1 Health Checks and Monitoring
+### 审计日志分析
 
 ```bash
 #!/bin/bash
-# vault_monitoring.sh
+# vault_audit_analysis.sh
 
-# 1. 基本健康检查
-vault_health_check() {
-    local vault_addr=${1:-"https://vault.company.com:8200"}
-    
-    local response=$(curl -s -k "$vault_addr/v1/sys/health")
-    local status_code=$(curl -s -k -o /dev/null -w "%{http_code}" "$vault_addr/v1/sys/health")
-    
-    case $status_code in
-        200)
-            echo "Vault is initialized, unsealed, and active"
-            ;;
-        429)
-            echo "Vault is unsealed and standby"
-            ;;
-        501)
-            echo "Vault is not initialized"
-            ;;
-        503)
-            echo "Vault is sealed"
-            ;;
-        *)
-            echo "Unknown status: $status_code"
-            ;;
-    esac
-}
+AUDIT_LOG="/var/log/vault/audit.log"
 
-# 2. 性能监控
-vault_performance_metrics() {
-    curl -s -k \
-        --header "X-Vault-Token: $VAULT_TOKEN" \
-        "https://vault.company.com:8200/v1/sys/metrics?format=prometheus"
-}
+echo "=== Vault Audit Analysis Report ==="
+echo "Date: $(date)"
+echo ""
 
-# 3. 审计日志分析
-analyze_audit_logs() {
-    local log_file=${1:-"/var/log/vault/audit.log"}
-    
-    # 统计API调用次数
-    grep -c "request" $log_file
-    
-    # 查找失败的请求
-    grep "error" $log_file | head -10
-    
-    # 分析请求类型分布
-    jq -r '.request.operation' $log_file | sort | uniq -c | sort -nr
-}
+echo "1. Top 10 Most Active Users"
+jq -r '.auth.accessor // "anonymous"' "$AUDIT_LOG" | sort | uniq -c | sort -rn | head -10
+echo ""
+
+echo "2. Failed Authentication Attempts"
+jq 'select(.type == "request" and .request.path | test("login")) |
+    select(.response.auth == null or .response.auth.lease_duration == 0)' \
+  "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.request.path) | \(.request.data | keys)"'
+echo ""
+
+echo "3. Secret Access by Path"
+jq -r 'select(.type == "request") | .request.path' "$AUDIT_LOG" | \
+  grep -E "^secret/" | sort | uniq -c | sort -rn | head -20
+echo ""
+
+echo "4. Database Dynamic Credentials Generated"
+jq 'select(.request.path | startswith("database/creds/"))' "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.auth.accessor) | \(.request.path)"' | sort | uniq -c | sort -rn
+echo ""
+
+echo "5. Policy Changes"
+jq 'select(.request.path | test("sys/policies"))' "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.request.operation) | \(.request.path)"'
+echo ""
+
+echo "6. Root Token Usage (should be minimal)"
+jq 'select(.auth.policies | contains(["root"]))' "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.request.operation) | \(.request.path)"' | head -20
+echo ""
+
+echo "7. PKI Certificate Issuance"
+jq 'select(.request.path | test("pki.*issue"))' "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.auth.accessor) | \(.request.data.common_name // "N/A")"'
+echo ""
+
+echo "8. Encryption/Decryption Operations"
+jq 'select(.request.path | test("transit/(encrypt|decrypt)"))' "$AUDIT_LOG" | \
+  jq -r '"\(.time) | \(.request.path) | \(.auth.accessor)"' | sort | uniq -c | sort -rn
 ```
 
-### 6.2 Backup and Recovery
+## 监控与告警
+
+### Prometheus 监控
+
+```bash
+# Configure Vault telemetry in server config
+# listener "tcp" {
+#   telemetry { unauthenticated_metrics_access = true }
+# }
+# telemetry {
+#   prometheus_retention_time = "30s"
+#   disable_hostname = true
+# }
+```
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vault-metrics
+  namespace: vault
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: vault
+  endpoints:
+    - port: http
+      path: /v1/sys/metrics
+      params:
+        format:
+          - prometheus
+      interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: vault-alerts
+  namespace: vault
+spec:
+  groups:
+    - name: vault.rules
+      rules:
+        - alert: VaultSealed
+          expr: vault_core_unsealed == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Vault instance {{ $labels.instance }} is sealed"
+
+        - alert: VaultRaftQuorumLost
+          expr: vault.raft.state == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Vault Raft cluster lost quorum"
+
+        - alert: VaultHighTokenCreation
+          expr: rate(vault.token.creation[5m]) > 100
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High token creation rate: {{ $value }}/s"
+
+        - alert: VaultLeaseCreationError
+          expr: rate(vault.core.lease.creation_error[5m]) > 0
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Lease creation errors detected"
+
+        - alert: VaultAuditLoggingFailed
+          expr: rate(vault.audit.log.request.failure[5m]) > 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Audit logging failure detected"
+
+        - alert: VaultAutoUnsealFailed
+          expr: vault.core.unsealed == 0 and vault.core.sealed == 1
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Auto-unseal failed for {{ $labels.instance }}"
+
+        - alert: VaultReplicationIngressWALHung
+          expr: vault.replication.performance.ingress_wal != 0
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Performance replication WAL is hung"
+```
+
+## 最佳实践
+
+### 最小权限原则
+
+为每个应用创建独立的 Vault 策略，仅授予必要的路径和操作权限。使用命名空间隔离不同环境的密钥。定期审查策略和角色配置，删除不再使用的权限。
+
+### 密钥自动轮换
+
+使用动态密钥引擎为数据库和云服务生成短期凭证。对于静态密钥，使用 External Secrets Operator 定期同步。加密密钥通过 Transit 引擎的 `auto_rotate_period` 自动轮换。
+
+### 备份与灾难恢复
 
 ```bash
 #!/bin/bash
-# vault_backup_restore.sh
+# vault_backup.sh
 
 BACKUP_DIR="/backup/vault"
 DATE=$(date +%Y%m%d_%H%M%S)
+mkdir -p "$BACKUP_DIR/$DATE"
 
-# 1. 数据快照
-create_snapshot() {
-    mkdir -p "$BACKUP_DIR/$DATE"
-    
-    # 获取当前时间的快照
-    vault operator raft snapshot save "$BACKUP_DIR/$DATE/vault-snapshot.snap"
-    
-    # 备份配置
-    cp -r /etc/vault "$BACKUP_DIR/$DATE/config"
-    
-    # 创建备份清单
-    cat > "$BACKUP_DIR/$DATE/manifest.json" << EOF
+# Create Raft snapshot
+vault operator raft snapshot save "$BACKUP_DIR/$DATE/vault-snapshot.snap"
+
+# Backup configuration
+cp -r /etc/vault "$BACKUP_DIR/$DATE/config"
+
+# Create manifest
+cat > "$BACKUP_DIR/$DATE/manifest.json" << EOF
 {
     "backup_id": "$DATE",
     "timestamp": "$(date -Iseconds)",
@@ -696,38 +917,72 @@ create_snapshot() {
     }
 }
 EOF
-}
 
-# 2. 灾难恢复
-restore_from_backup() {
-    local backup_date=$1
-    local backup_path="$BACKUP_DIR/$backup_date"
-    
-    if [ ! -d "$backup_path" ]; then
-        echo "Backup not found: $backup_path"
-        return 1
-    fi
-    
-    # 恢复快照
-    vault operator raft snapshot restore "$backup_path/vault-snapshot.snap"
-    
-    # 恢复配置
-    cp -r "$backup_path/config" /etc/vault
-    
-    echo "Vault restored from backup: $backup_date"
-}
+# Compress and upload to S3
+tar czf "$BACKUP_DIR/$DATE.tar.gz" -C "$BACKUP_DIR" "$DATE"
+aws s3 cp "$BACKUP_DIR/$DATE.tar.gz" s3://company-vault-backups/
 
-# 3. 自动化备份任务
-setup_backup_cron() {
-    cat > /etc/cron.d/vault-backup << 'EOF'
-# 每天凌晨2点执行备份
-0 2 * * * root /opt/scripts/vault_backup.sh create > /var/log/vault-backup.log 2>&1
+# Cleanup local backups older than 30 days
+find "$BACKUP_DIR" -type d -mtime +30 -exec rm -rf {} \;
+```
 
-# 清理30天前的备份
-0 3 * * 0 root find /backup/vault -type d -mtime +30 -exec rm -rf {} \;
-EOF
-}
+## 故障排查
+
+### 常见问题
+
+**Vault Sealed**：检查 Auto Unseal KMS 配置。确认 KMS 密钥存在且有权限。查看 Vault 日志中的 unseal 错误信息。手动使用 unseal key 解封。
+
+**Raft 集群不一致**：使用 `vault operator raft list-peers` 检查集群成员。检查网络连接和 TLS 证书。使用 `vault operator raft remove-peer` 移除故障节点后重新加入。
+
+**认证失败**：检查 LDAP/K8s 配置是否正确。验证 ServiceAccount Token 是否有效。确认角色绑定的策略存在。
+
+**性能问题**：增大 `performance_multiplier` 参数。检查存储后端 I/O 性能。使用 Prometheus 监控 `vault.core.handle_request` 延迟指标。
+
+```bash
+#!/bin/bash
+# vault_diagnostics.sh
+
+echo "=== Vault Status ==="
+vault status
+echo ""
+
+echo "=== Raft Cluster Peers ==="
+vault operator raft list-peers
+echo ""
+
+echo "=== Raft Cluster Configuration ==="
+vault operator raft configuration
+echo ""
+
+echo "=== Auth Methods ==="
+vault auth list
+echo ""
+
+echo "=== Secrets Engines ==="
+vault secrets list
+echo ""
+
+echo "=== Active Tokens Count ==="
+vault list auth/token/accessors | wc -l
+echo ""
+
+echo "=== Lease Count ==="
+vault list sys/leases | head -20
+echo ""
+
+echo "=== Namespace List ==="
+vault namespace list
+echo ""
+
+echo "=== Replication Status ==="
+vault read -format=json sys/replication/performance/status
+vault read -format=json sys/replication/dr/status
+echo ""
+
+echo "=== Audit Devices ==="
+vault audit list -detailed
 ```
 
 ---
-*This document is based on enterprise-level HashiCorp Vault practice experience and continuously updated with the latest technologies and best practices.*
+
+*本文档基于企业级 HashiCorp Vault 密钥管理实践经验编写，持续更新最新技术和最佳实践。*

@@ -1,3 +1,42 @@
+---
+title: Envoy Gateway 企业级 API Gateway 实践指南
+description: '# Envoy Gateway 企业级 API Gateway 实践指南'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- prometheus
+- istio
+- cilium
+- helm
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Envoy Gateway 企业级 API Gateway 实践指南 是什么
+- 如何 Envoy Gateway 企业级 API Gateway 实践指南
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Envoy
+- Gateway
+- 企业级
+- API
+- Gateway
+- 实践指南
+- cloud
+- native
+---
+
+
 # Envoy Gateway 企业级 API Gateway 实践指南
 
 > **适用版本**: Envoy Gateway v1.3 / Gateway API v1.2  

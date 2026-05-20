@@ -1,66 +1,74 @@
 ---
-skill_id: "SKILL-SEC-002"
-skill_name: "RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting"
-version: "1.0"
-category: "security"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: RBAC v1 stable since v1.8"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA (alternative to OPA/Gatekeeper/Kyverno)"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: No RBAC API changes"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-60min"
-risk_level: "medium"
-agent_execution_mode: "L1-advisory"
+title: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
+description: '## 1. 概述'
+category: security
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- controller-manager
+- prometheus
+- istio
+- argocd
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 是什么
+- 如何 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 trigger_keywords:
-  - "403 Forbidden"
-  - "RBAC denied"
-  - "unauthorized"
-  - "ResourceQuota exceeded"
-  - "LimitRange conflict"
-  - "permission denied"
-  - "cannot list"
-  - "cannot create"
-  - "cannot delete"
-  - "quota exceeded"
-  - "权限不足"
-  - "配额超限"
-  - "禁止访问"
-trigger_events:
-  - "Forbidden"
-  - "FailedCreate"
-  - "TooManyRequests"
-  - "FailedScheduling"
-trigger_metrics:
-  - 'apiserver_request_total{code="403"}'
-  - 'kube_resourcequota'
-  - 'kube_limitrange'
-  - 'apiserver_admission_controller_admission_duration_seconds'
-related_skills:
-  - "SKILL-SEC-001"
-  - "SKILL-POD-002"
-  - "SKILL-POD-001"
-fta_refs:
-  - "topic-fta/list/rbac-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/12-rbac-quota-troubleshooting.md"
-  - "domain-7-security/"
-  - "domain-3-control-plane/"
+- 403 Forbidden
+- RBAC denied
+- unauthorized
+- ResourceQuota exceeded
+- LimitRange conflict
+- permission denied
+- cannot list
+- cannot create
+- cannot delete
+- quota exceeded
+- 权限不足
+- 配额超限
+- 禁止访问
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-09
+  category: security
+  subcategory: rbac-quota
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa> 检查权限"
+  critical_commands:
+    - "kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>"
+    - "kubectl get role,clusterrole,rolebinding,clusterrolebinding -A"
+    - "kubectl describe role <name> -n <ns>"
+    - "kubectl get events -A | grep -E 'Forbidden|Denied|Unauthorized'"
+  danger_operations:
+    - action: "kubectl delete clusterrolebinding <name>"
+      risk: "删除集群角色绑定可能影响集群级别的权限，导致服务账户失去必要权限"
+      requires_confirmation: true
 ---
+---
+
+
 
 # RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 

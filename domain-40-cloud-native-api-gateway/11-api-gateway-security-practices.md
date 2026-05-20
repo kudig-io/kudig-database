@@ -1,3 +1,42 @@
+---
+title: 11 - API 网关安全体系：认证、鉴权与 WAF
+description: '# 11 - API 网关安全体系：认证、鉴权与 WAF'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- istio
+- opa
+- redis
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API 网关安全体系：认证、鉴权与 WAF 是什么
+- 如何 API 网关安全体系：认证、鉴权与 WAF
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- API
+- 网关安全体系：认证
+- 鉴权与
+- WAF
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 11 - API 网关安全体系：认证、鉴权与 WAF
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: JWT, OIDC, mTLS, API Key, OPA, WAF, 限流, 零信任, HMAC, Bot 防护

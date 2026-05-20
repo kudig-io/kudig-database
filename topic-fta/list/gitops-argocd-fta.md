@@ -1,20 +1,73 @@
 ---
-fta_id: "FTA-GITOPS-015"
-title: "GitOps(ArgoCD) 异常故障树分析"
-component: "gitops-argocd"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-GITOPS-001"
-last_updated: "2026-05"
+title: GitOps(ArgoCD) 异常故障树分析
+description: '- **范围**：Git 仓库访问、Helm/Kustomize/Jsonnet 清单渲染、Application/ApplicationSet 同步、目标集群连接、RBAC 与准入控制、Diff/Drift 检测、回滚与版本管理。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- argocd
+- gitops
+- application
+- sync
+- helm
+- docker
+- redis
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- GitOps(ArgoCD) 异常故障树分析 是什么
+- 如何 GitOps(ArgoCD) 异常故障树分析
+- GitOps(ArgoCD) 异常故障树分析 根因分析
+- GitOps(ArgoCD) 异常故障树分析 故障树
+trigger_keywords:
+- GitOps
+- ArgoCD
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, argocd, gitops, application, sync]
-related_skills: []
-knowledge_refs:
-  - "../domain-9-platform-ops/06-cd-argocd.md"
+- name: KUDIG Team
+  role: contributor
+fta_metadata:
+  fta_id: FTA-ARGOCD-001
+  top_event: ArgoCD 异常 (同步失败/状态漂移/清单渲染异常/集群连接故障)
+  top_event_id: TE-ARGOCD-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "argocd app get <app-name> 显示 OutOfSync 或 Error"
+    - "kubectl get applications -n argocd 显示异常"
+    - "argocd app list 显示有应用程序处于 degraded 状态"
+agent_notes:
+  decision_tree_entry: "argocd app list -n argocd; kubectl get applications -n argocd 检查 ArgoCD 应用状态"
+  critical_commands:
+    - "argocd app list -n argocd"
+    - "argocd app get <app-name>"
+    - "argocd app sync <app-name> --force"
+    - "kubectl get applications -n argocd -o wide"
+    - "kubectl logs -n argocd -l app.kubernetes.io/name=argocd-server --tail=100"
+  danger_operations:
+    - action: "argocd app delete <app-name> --force"
+      risk: "删除应用会删除所有关联的 Kubernetes 资源，无法恢复"
+      requires_confirmation: true
+    - action: "argocd app sync <app-name> --force --strategy=rollback"
+      risk: "强制同步可能触发大规模资源变更，导致服务中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: argocd app list 2>/dev/null | grep -E 'OutOfSync|Error|Degraded' 显示 ArgoCD 应用异常 -->
 
 # GitOps（ArgoCD）异常 FTA 树
 

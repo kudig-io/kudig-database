@@ -1,3 +1,40 @@
+---
+title: CSI 存储驱动深度排查与架构优化指南
+description: '# CSI 存储驱动深度排查与架构优化指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- scheduler
+- prometheus
+- helm
+- opa
+- ceph
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- CSI 存储驱动深度排查与架构优化指南 是什么
+- 如何 CSI 存储驱动深度排查与架构优化指南
+- CSI 存储驱动深度排查与架构优化指南 故障排查
+- CSI 存储驱动深度排查与架构优化指南 排障步骤
+trigger_keywords:
+- CSI
+- 存储驱动深度排查与架构优化指南
+- structural
+- trouble
+- shooting
+---
+
+
 # CSI 存储驱动深度排查与架构优化指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, CSI Spec v1.8+ | **最后更新**: 2026-02 | **难度**: 资深专家级

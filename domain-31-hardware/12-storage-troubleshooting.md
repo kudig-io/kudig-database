@@ -1,3 +1,38 @@
+---
+title: 存储设备故障排查
+description: '# 存储设备故障排查'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- scheduler
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储设备故障排查 是什么
+- 如何 存储设备故障排查
+- Kubernetes 31 hardware 最佳实践
+- 存储设备故障排查 故障排查
+- 存储设备故障排查 排障步骤
+trigger_keywords:
+- 存储设备故障排查
+- hardware
+cross_refs:
+- type: skill
+  path: ../topic-skills/07-pvc-storage-failure.md
+  label: '运维技能: 07-pvc-storage-failure'
+---
+
+
 # 存储设备故障排查
 
 ## 概述

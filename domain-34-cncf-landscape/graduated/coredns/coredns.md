@@ -1,3 +1,37 @@
+---
+title: CoreDNS
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- prometheus
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- CoreDNS 是什么
+- 如何 CoreDNS
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- CoreDNS
+- cncf
+- landscape
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/dns-fta.md
+  label: '故障树: dns'
+---
+
 # CoreDNS
 
 > **成熟度**: Graduated | **加入时间**: 2017-02 | **最后更新**: 2026-03

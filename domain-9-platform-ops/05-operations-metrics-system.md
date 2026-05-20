@@ -1,3 +1,48 @@
+---
+title: 运维指标体系建设 (Operations Metrics System)
+description: '# 运维指标体系建设 (Operations Metrics System)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- apiserver
+- prometheus
+- grafana
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 运维指标体系建设 (Operations Metrics System) 是什么
+- 如何 运维指标体系建设 (Operations Metrics System)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 运维指标体系建设
+- Operations
+- Metrics
+- System
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 运维指标体系建设 (Operations Metrics System)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v1.0 | **最后更新**: 2026-02

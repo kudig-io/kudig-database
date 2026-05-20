@@ -1,3 +1,37 @@
+---
+title: Capsule
+description: '| **适用场景** | Kubernetes 多租户管理 |'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- scheduler
+- helm
+- docker
+- ingress
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Capsule 是什么
+- 如何 Capsule
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Capsule
+- cncf
+- landscape
+---
+
+
 # Capsule
 
 > **成熟度**: Sandbox | **加入时间**: 2022-04 | **最后更新**: 2026-03

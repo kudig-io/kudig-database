@@ -1,3 +1,53 @@
+---
+title: 证书轮换机制源码分析
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 集群运维人员
+- 安全工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 证书轮换 kubeadm certs renew 机制
+- CA 证书轮换高风险操作 完整指南
+- kubelet 自动轮换阈值 20% 72小时
+- kubeadm upgrade 证书行为 过期中断
+- 证书过期应急恢复 时间回拨
+trigger_keywords:
+- kubeadm certs renew
+- 证书轮换
+- CA 轮换
+- 过期恢复
+- check-expiration
+- kubelet rotation
+- kubeadm upgrade
+- 证书过期
+- 应急恢复
+- 时间回拨
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/ca-generation
+- cluster-cert/kubelet-cert
+- cluster-cert/openssl-cookbook
+---
+
+
 # 证书轮换机制源码分析
 
 ## 概述

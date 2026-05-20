@@ -1,13 +1,58 @@
 ---
-title: "CNI 网络插件故障排查"
-description: "系统化故障排查 K8s CNI 网络故障：Pod IP 分配失败、跨节点网络不通、DNS 解析异常、NetworkPolicy 不生效、流量被错误路由、CNI 插件崩溃与网络分区"
-category: "domain-12-troubleshooting"
-tags: [k8s, troubleshooting, network, cni, calico, cilium, flannel, dns, debugging]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
-authors:
-  - name: "KUDIG Team"
-    role: "contributor"
+title: CNI 网络插件故障排查
+description: '# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)'
+category: troubleshooting
+tags:
+- cni
+- calico
+- cilium
+- flannel
+- network
+- pod-cidr
+- ipam
+- kubelet
+- prometheus
+- istio
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- CNI 不工作
+- Pod 没有 IP
+- 跨节点网络不通
+- 网络插件崩溃
+trigger_keywords:
+- CNI
+- 网络插件故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
+
+
+# 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
 difficulty: "advanced"
 related_docs:
   - path: "../domain-5-networking/02-cni-architecture-fundamentals.md"

@@ -1,3 +1,45 @@
+---
+title: Domain-1 架构基础 — 开源项目索引
+description: '# Domain-1 架构基础 — 开源项目索引'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-1 架构基础 — 开源项目索引 是什么
+- 如何 Domain-1 架构基础 — 开源项目索引
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Domain-1
+- 架构基础
+- 开源项目索引
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # Domain-1 架构基础 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

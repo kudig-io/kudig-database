@@ -1,3 +1,36 @@
+---
+title: 服务网格（Service Mesh）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- jaeger
+- istio
+- envoy
+- cilium
+- gateway
+- networkpolicy
+- ebpf
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 服务网格（Service Mesh） 是什么
+- 如何 服务网格（Service Mesh）
+trigger_keywords:
+- 服务网格
+- Service
+- Mesh
+- dictionary
+title_en: Services
+---
+
+
 # 服务网格（Service Mesh）
 
 ## 概述

@@ -1,21 +1,71 @@
 ---
-fta_id: "FTA-VPA-035"
-title: "VPA 异常故障树分析"
-component: "vpa"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-VPA-001"
-last_updated: "2026-05"
+title: VPA 异常故障树分析
+description: COMP_UPD_OR --> COMP_UPD2[Updater 配置错误]
+category: fta
+tags:
+- fta
+- troubleshooting
+- vpa
+- vertical-pod-autoscaler
+- resource-recommendation
+- kubelet
+- prometheus
+- hpa
+- pdb
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- VPA 异常故障树分析 是什么
+- 如何 VPA 异常故障树分析
+- VPA 异常故障树分析 根因分析
+- VPA 异常故障树分析 故障树
+trigger_keywords:
+- VPA
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, vpa, vertical-pod-autoscaler, resource-recommendation]
-related_skills:
-  - "../topic-skills/19-scaling.md"
-knowledge_refs:
-  - "../domain-4-workloads/19-auto-scaling.md"
+- name: KUDIG Team
+  role: contributor
+fta_metadata:
+  fta_id: FTA-VPA-001
+  top_event: VPA 异常 (推荐异常/驱逐误操作/指标缺失)
+  top_event_id: TE-VPA-001
+  bottom_events_count: 14
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get vpa -A -o wide 显示 VPA 状态为 Error 或 NoRecommendation"
+    - "VPA 推荐的 resources 与实际需求差距巨大"
+    - "kubectl describe vpa <name> -n <ns> 显示异常信息"
+agent_notes:
+  decision_tree_entry: "kubectl get vpa -A 检查 VPA 状态和推荐值"
+  critical_commands:
+    - "kubectl get vpa -A -o wide"
+    - "kubectl describe vpa <name> -n <ns>"
+    - "kubectl logs -n kube-system -l app=vpa-admission-controller --tail=50"
+    - "kubectl top pods -n <ns>"
+  danger_operations:
+    - action: "kubectl delete vpa <name> -n <ns>"
+      risk: "删除 VPA 会停止垂直扩缩容监控，推荐值可能丢失"
+      requires_confirmation: true
+    - action: "kubectl patch vpa <name> -n <ns> -p '{\"spec\":{\"updatePolicy\":{\"updateMode\":\"Off\"}}}'"
+      risk: "关闭更新模式会导致 VPA 不再自动调整 Pod 资源"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get vpa -A -o jsonpath='{range .items[?(@.status.condition.Type!=\"Ready\")]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示 VPA 异常 -->
 
 # VPA 异常 FTA 树
 

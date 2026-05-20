@@ -1,24 +1,69 @@
 ---
-title: "Pod 生命周期事件表"
-description: "深入解析 Pod 生命周期状态转换、Phase 与 Condition 机制、Init Container、Sidecar、容器重启策略与事件体系"
-category: "domain-4-workloads"
-tags: [k8s, pod, lifecycle, phase, condition, init-container, sidecar, container]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Pod 生命周期事件表
+description: 深入解析 Pod 生命周期状态转换、Phase 与 Condition 机制、Init Container、Sidecar、容器重启策略与事件体系
+category: domain-4-workloads
+tags:
+- k8s
+- pod
+- lifecycle
+- phase
+- condition
+- init-container
+- sidecar
+- container
+- pdb
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod 生命周期事件表 是什么
+- 如何 Pod 生命周期事件表
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- Pod
+- 生命周期事件表
+- workloads
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "10-workload-controllers-overview.md"
-    type: "depth"
-    desc: "工作负载控制器详解"
-  - path: "../domain-4-workloads/21-hpa-vpa-autoscaling.md"
-    type: "depth"
-    desc: "HPA/VPA 自动扩缩容"
-  - path: "../topic-fta/list/pod-fta.md"
-    type: "fta"
-    desc: "Pod 故障树"
+- path: 10-workload-controllers-overview.md
+  type: depth
+  desc: 工作负载控制器详解
+- path: ../domain-4-workloads/21-hpa-vpa-autoscaling.md
+  type: depth
+  desc: HPA/VPA 自动扩缩容
+- path: ../topic-fta/list/pod-fta.md
+  type: fta
+  desc: Pod 故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
 ---
 
 # 37 - Pod生命周期事件表

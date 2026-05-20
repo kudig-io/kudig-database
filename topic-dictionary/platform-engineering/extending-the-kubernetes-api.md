@@ -1,3 +1,34 @@
+---
+title: 扩展 Kubernetes API
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- rbac
+- crd
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 扩展 Kubernetes API 是什么
+- 如何 扩展 Kubernetes API
+trigger_keywords:
+- 扩展
+- Kubernetes
+- API
+- dictionary
+title_en: Extending The Kubernetes Api
+---
+
+
 # 扩展 Kubernetes API
 
 ## 概述

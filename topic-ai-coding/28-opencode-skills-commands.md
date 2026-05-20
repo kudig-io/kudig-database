@@ -1,3 +1,33 @@
+---
+title: Agent Skill 与自定义命令
+description: '**文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md, Custom Command, Template, Arguments,
+  Shell Output, File Reference'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Agent Skill 与自定义命令 是什么
+- 如何 Agent Skill 与自定义命令
+trigger_keywords:
+- Agent
+- Skill
+- 与自定义命令
+- ai
+- coding
+---
+
 # Agent Skill 与自定义命令
 
 > **文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md, Custom Command, Template, Arguments, Shell Output, File Reference

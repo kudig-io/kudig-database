@@ -1,3 +1,45 @@
+---
+title: 11 - Gateway API 核心资源 YAML 配置参考
+description: '# 11 - Gateway API 核心资源 YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- prometheus
+- istio
+- envoy
+- ingress
+- gateway
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Gateway API 核心资源 YAML 配置参考 是什么
+- 如何 Gateway API 核心资源 YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- Gateway
+- API
+- 核心资源
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/gateway-api-fta.md
+  label: '故障树: gateway-api'
+---
+
+
 # 11 - Gateway API 核心资源 YAML 配置参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  

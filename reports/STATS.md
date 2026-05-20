@@ -1,3 +1,23 @@
+---
+title: KUDIG-DATABASE 项目统计报告
+description: KUDIG-DATABASE 项目统计报告 — Kubernetes 生产运维知识库
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- KUDIG-DATABASE 项目统计报告 是什么
+- 如何 KUDIG-DATABASE 项目统计报告
+trigger_keywords:
+- KUDIG-DATABASE
+- 项目统计报告
+---
+
 # KUDIG-DATABASE 项目统计报告
 
 > 统计时间: 2026-03-03

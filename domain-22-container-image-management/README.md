@@ -1,3 +1,38 @@
+---
+title: 'Domain 22: 容器镜像管理 (Container Image Management)'
+description: '# Domain 22: 容器镜像管理 (Container Image Management)'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 22: 容器镜像管理 (Container Image Management) 是什么'
+- '如何 Domain 22: 容器镜像管理 (Container Image Management)'
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- Domain
+- '22:'
+- 容器镜像管理
+- Container
+- Image
+- Management
+- container
+- image
+---
+
 # Domain 22: 容器镜像管理 (Container Image Management)
 
 > **领域定位**: 企业级容器镜像仓库架构与实践 | **文档数量**: 6篇 | **更新时间**: 2026-02-07

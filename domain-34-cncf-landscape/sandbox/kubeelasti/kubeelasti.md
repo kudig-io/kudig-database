@@ -1,3 +1,36 @@
+---
+title: KubeElastic
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- helm
+- hpa
+- vpa
+- job
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- KubeElastic 是什么
+- 如何 KubeElastic
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- KubeElastic
+- cncf
+- landscape
+---
+
 # KubeElastic
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

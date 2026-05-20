@@ -1,3 +1,40 @@
+---
+title: etcd 故障排查指南
+description: '# etcd 故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- etcd
+- kubelet
+- scheduler
+- prometheus
+- job
+- cronjob
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- etcd 故障排查指南 是什么
+- 如何 etcd 故障排查指南
+- etcd 故障排查指南 故障排查
+- etcd 故障排查指南 排障步骤
+trigger_keywords:
+- etcd
+- 故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # etcd 故障排查指南
 
 > **适用版本**: etcd v3.4 - v3.5 (Kubernetes v1.25 - v1.32) | **最后更新**: 2026-01 | **难度**: 高级

@@ -1,25 +1,72 @@
 ---
-title: "Kubernetes 核心组件深度剖析"
-description: "深入剖析 Kubernetes 各核心组件（API Server、etcd、Controller Manager、Scheduler、Kubelet、Kube-proxy、CNI）的架构设计与工作原理"
-category: "domain-1-architecture"
-tags: [k8s, components, api-server, etcd, scheduler, kubelet, kube-proxy, cni]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Kubernetes 核心组件深度剖析
+description: 深入剖析 Kubernetes 各核心组件（API Server、etcd、Controller Manager、Scheduler、Kubelet、Kube-proxy、CNI）的架构设计与工作原理
+category: domain-1-architecture
+tags:
+- k8s
+- components
+- api-server
+- etcd
+- scheduler
+- kubelet
+- kube-proxy
+- cni
+- apiserver
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes 核心组件深度剖析 是什么
+- 如何 Kubernetes 核心组件深度剖析
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Kubernetes
+- 核心组件深度剖析
+- architecture
+- fundamentals
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-kubernetes-architecture-overview.md"
-    type: "depth"
-    desc: "架构全景图"
-  - path: "../domain-3-control-plane/01-plane-architecture-overview.md"
-    type: "depth"
-    desc: "控制平面架构"
-  - path: "../domain-3-control-plane/11-etcd-deep-dive.md"
-    type: "depth"
-    desc: "etcd 深度解析"
+- path: 01-kubernetes-architecture-overview.md
+  type: depth
+  desc: 架构全景图
+- path: ../domain-3-control-plane/01-plane-architecture-overview.md
+  type: depth
+  desc: 控制平面架构
+- path: ../domain-3-control-plane/11-etcd-deep-dive.md
+  type: depth
+  desc: etcd 深度解析
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
 ---
+
 
 # Kubernetes 核心组件深度剖析 (Core Components Deep Dive)
 

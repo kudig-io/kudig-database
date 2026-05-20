@@ -1,3 +1,41 @@
+---
+title: Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
+description: '# Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization) 是什么
+- 如何 Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 大规模集群性能优化深度实践
+- Large-Scale
+- Cluster
+- Performance
+- Optimization
+- papers
+---
+
+
 # Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 
 > **作者**: Kubernetes性能优化专家 | **版本**: v2.2 | **更新时间**: 2026-03-03

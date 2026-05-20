@@ -1,3 +1,32 @@
+---
+title: Skill Schema (历史参考)
+description: Skill Schema (历史参考) — Kubernetes 生产运维知识库
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Skill Schema (历史参考) 是什么
+- 如何 Skill Schema (历史参考)
+trigger_keywords:
+- Skill
+- Schema
+- 历史参考
+- skills
+agent_execution_mode: L1
+---
+
+
 # Skill Schema (历史参考)
 
 > **⚠️ 已废弃**: 本文件内容已合并至 `templates/skill-template.md`

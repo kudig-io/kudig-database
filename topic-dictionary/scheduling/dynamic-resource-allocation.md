@@ -1,3 +1,33 @@
+---
+title: Dynamic Resource Allocation
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- scheduler
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Dynamic Resource Allocation 是什么
+- 如何 Dynamic Resource Allocation
+trigger_keywords:
+- Dynamic
+- Resource
+- Allocation
+- dictionary
+title_en: Dynamic Resource Allocation
+---
+
+
 # Dynamic Resource Allocation
 
 ## 概述

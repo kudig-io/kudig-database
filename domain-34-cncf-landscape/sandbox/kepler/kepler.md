@@ -1,3 +1,36 @@
+---
+title: Kepler
+description: '| **适用场景** | Kubernetes 能耗监控 |'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- grafana
+- helm
+- daemonset
+- gpu
+- ebpf
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kepler 是什么
+- 如何 Kepler
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Kepler
+- cncf
+- landscape
+---
+
 # Kepler
 
 > **成熟度**: Sandbox | **加入时间**: 2023-06 | **最后更新**: 2026-03

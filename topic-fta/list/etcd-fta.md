@@ -1,22 +1,79 @@
 ---
-fta_id: "FTA-ETCD-013"
-title: "etcd 异常故障树分析"
-component: "etcd"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-ETCD-001"
-last_updated: "2026-05"
+title: etcd 异常故障树分析
+description: '- **范围**：成员可用性、读写性能、磁盘与 IO、网络与时钟、证书与访问控制、碎片与压缩。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- etcd
+- storage
+- consensus
+- disk-io
+- apiserver
+- job
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- etcd 异常故障树分析 是什么
+- 如何 etcd 异常故障树分析
+- etcd 异常故障树分析 根因分析
+- etcd 异常故障树分析 故障树
+trigger_keywords:
+- etcd
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, etcd, storage, consensus, disk-io]
-related_skills:
-  - "../topic-skills/11-control-plane-failure.md"
-knowledge_refs:
-  - "../domain-3-control-plane/11-etcd-deep-dive.md"
-  - "../domain-12-troubleshooting/02-control-plane-etcd-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/11-etcd-deep-dive.md
+  label: '深度文档: 11-etcd-deep-dive'
+- type: structural
+  path: ../topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md
+  label: '结构化排障: 02-etcd-troubleshooting'
+fta_metadata:
+  fta_id: FTA-ETCD-001
+  top_event: etcd 异常 (不可用/写入失败/一致性风险)
+  top_event_id: TE-ETCD-001
+  bottom_events_count: 22
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get --raw /healthz/etcd 返回非 200"
+    - "etcdctl endpoint health 显示异常"
+    - "API Server 日志显示 etcd 读写超时"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system -l component=etcd 检查 etcd Pod 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l component=etcd -o wide"
+    - "kubectl get --raw /healthz/etcd"
+    - "etcdctl endpoint health --cluster"
+    - "etcdctl endpoint status --cluster"
+    - "kubectl get events -n kube-system --field-selector involvedObject.kind=Pod,reason=NodeNotReady"
+  danger_operations:
+    - action: "kubectl exec -n kube-system etcd-<node> -- etcdctl compact <revision>"
+      risk: "压缩操作会阻塞写入，可能导致 API Server 暂时不可用"
+      requires_confirmation: true
+    - action: "kubectl exec -n kube-system etcd-<node> -- etcdctl defrag"
+      risk: "碎片整理会占用大量磁盘 IO，可能影响集群性能"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get --raw /healthz/etcd 返回非 200 或 etcdctl endpoint health 显示异常 -->
 
 # etcd 异常 FTA 树
 

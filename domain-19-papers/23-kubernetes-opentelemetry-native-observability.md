@@ -1,3 +1,41 @@
+---
+title: Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
+description: '作者: 可观测性架构专家 | 版本: v1.0 | 更新时间: 2026-03-03'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- grafana
+- jaeger
+- cilium
+- helm
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability) 是什么
+- 如何 Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- OpenTelemetry
+- 原生可观测性
+- OpenTelemetry
+- Native
+- Observability
+- papers
+---
+
+
 # Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
 
 > 作者: 可观测性架构专家 | 版本: v1.0 | 更新时间: 2026-03-03

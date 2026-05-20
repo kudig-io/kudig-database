@@ -1,3 +1,45 @@
+---
+title: Cilium eBPF 网络与安全实践指南
+description: '# Cilium eBPF 网络与安全实践指南'
+category: network-fundamentals
+tags:
+- network
+- tcp
+- ip
+- dns
+- etcd
+- prometheus
+- envoy
+- cilium
+- helm
+- hpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 网络工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Cilium eBPF 网络与安全实践指南 是什么
+- 如何 Cilium eBPF 网络与安全实践指南
+- Kubernetes 15 network fundamentals 最佳实践
+trigger_keywords:
+- Cilium
+- eBPF
+- 网络与安全实践指南
+- network
+- fundamentals
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/cilium-fta.md
+  label: '故障树: cilium'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # Cilium eBPF 网络与安全实践指南
 
 > **适用版本**: Cilium v1.17.0  

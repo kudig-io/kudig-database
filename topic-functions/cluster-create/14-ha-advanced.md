@@ -1,3 +1,59 @@
+---
+title: '高可用进阶: 负载均衡与证书分发'
+description: // 1. CA 公钥/私钥 (加密存储)
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- daemonset
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- Kubernetes开发者
+- DevOps工程师
+- SRE
+- 云架构师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes HA kube-vip load balancer configuration
+- kubeadm certificate upload download AES-256-GCM encryption
+- etcd HA stacked vs external topology comparison
+- Kubernetes API server endpoint load balancing health check
+- kubeadm join control-plane certificate key generation
+trigger_keywords:
+- kube-vip
+- HA
+- certificate-key
+- upload-certs
+- stacked etcd
+- external etcd
+- load balancer
+- TLS passthrough
+- leader election
+- API Server endpoint
+- certificate
+- AES-256-GCM
+related_domains:
+- domain-1-cluster-architecture
+- domain-3-control-plane
+- domain-12-troubleshooting
+related_topics:
+- kubeadm init
+- kubeadm join
+- etcd
+- API Server
+- certificate management
+- HA cluster
+---
+
+
 # 高可用进阶: 负载均衡与证书分发
 
 ## 源码路径

@@ -1,5 +1,20 @@
 ---
 title: 可视化中心
+description: 雷达图自我评估工具，支持本地存储。
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 可视化中心 是什么
+- 如何 可视化中心
+trigger_keywords:
+- 可视化中心
 ---
 
 # 可视化中心

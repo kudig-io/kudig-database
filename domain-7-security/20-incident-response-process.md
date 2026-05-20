@@ -1,3 +1,46 @@
+---
+title: 20 - 安全事件响应与应急处理流程
+description: '# 20 - 安全事件响应与应急处理流程'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 安全事件响应与应急处理流程 是什么
+- 如何 安全事件响应与应急处理流程
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 安全事件响应与应急处理流程
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 20 - 安全事件响应与应急处理流程
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) | [SANS Incident Handling Process](https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901)

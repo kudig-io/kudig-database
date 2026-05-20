@@ -1,3 +1,32 @@
+---
+title: longhorn v0.7 Release Notes
+description: longhorn v0.7 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- docker
+- crd
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- longhorn v0.7 Release Notes 是什么
+- 如何 longhorn v0.7 Release Notes
+trigger_keywords:
+- longhorn
+- v0.7
+- Release
+- Notes
+- release
+- notes
+---
+
 # longhorn v0.7 Release Notes
 
 Source: [v0.7.0](https://github.com/longhorn/longhorn/releases/tag/v0.7.0)

@@ -1,3 +1,36 @@
+---
+title: Horizontal Pod Autoscaling
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- controller-manager
+- prometheus
+- hpa
+- vpa
+- pdb
+- statefulset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Horizontal Pod Autoscaling 是什么
+- 如何 Horizontal Pod Autoscaling
+trigger_keywords:
+- Horizontal
+- Pod
+- Autoscaling
+- dictionary
+title_en: Pods
+---
+
+
 # Horizontal Pod Autoscaling
 
 ## 概述

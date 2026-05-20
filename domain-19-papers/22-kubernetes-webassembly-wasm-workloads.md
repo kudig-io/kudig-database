@@ -1,3 +1,42 @@
+---
+title: Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
+description: '# Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- kubelet
+- scheduler
+- prometheus
+- cilium
+- helm
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes) 是什么
+- 如何 Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- WebAssembly
+- Wasm
+- 工作负载实践
+- WebAssembly
+- Workloads
+- 'on'
+- Kubernetes
+---
+
+
 # Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 
 > 作者: 云原生运行时架构专家 | 版本: v1.0 | 更新时间: 2026-03-03

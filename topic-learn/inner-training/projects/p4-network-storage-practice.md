@@ -1,3 +1,74 @@
+---
+title: 'P4: 网络与存储综合实践'
+description: 'title: P4: 网络与存储综合实践'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- redis
+- mysql
+- pdb
+- statefulset
+- ingress
+- networkpolicy
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'P4: 网络与存储综合实践 是什么'
+- '如何 P4: 网络与存储综合实践'
+trigger_keywords:
+- 'P4:'
+- 网络与存储综合实践
+- learn
+---
+
+
+---
+title: P4: 网络与存储综合实践
+last_updated: 2026-05-18
+difficulty: advanced
+intent_queries:
+  - ACK microservice deployment network storage
+  - Kubernetes Ingress DNS service discovery
+  - StatefulSet PVC persistent storage
+  - CNI network policy verification
+  - ACK storage CSI integration
+trigger_keywords:
+  - microservice
+  - network
+  - storage
+  - Ingress
+  - StatefulSet
+  - PVC
+  - DNS
+  - service discovery
+  - CNI
+  - NetworkPolicy
+reading_level: advanced
+audience:
+  - ACK operators
+  - Platform engineers
+  - DevOps engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-6-networking
+  - domain-7-storage
+  - domain-17-cloud-provider
+  - domain-12-troubleshooting
+related_topics:
+  - service-networking
+  - ingress
+  - cni
+  - storage
+  - pvc
+---
+
 # P4: 网络与存储综合实践
 
 > **对应周次**: Week 4 | **预计时间**: 3-4 小时 | **难度**: ⭐⭐⭐

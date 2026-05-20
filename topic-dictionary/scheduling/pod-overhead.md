@@ -1,3 +1,30 @@
+---
+title: Pod Overhead
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Overhead 是什么
+- 如何 Pod Overhead
+trigger_keywords:
+- Pod
+- Overhead
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Overhead
 
 ## 概述

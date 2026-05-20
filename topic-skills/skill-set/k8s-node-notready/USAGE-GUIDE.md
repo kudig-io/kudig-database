@@ -1,3 +1,39 @@
+---
+title: Skills + FTA 使用指南 — k8s-node-notready & node-fta
+description: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- prometheus
+- containerd
+- docker
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Skills + FTA 使用指南 — k8s-node-notready & node-fta 是什么
+- 如何 Skills + FTA 使用指南 — k8s-node-notready & node-fta
+trigger_keywords:
+- Skills
+- FTA
+- 使用指南
+- k8s-node-notready
+- node-fta
+- skills
+---
+
+
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
 
 > **范围**：`topic-skills/skill-set/k8s-node-notready/` ↔ `topic-fta/list/node-fta.md`  

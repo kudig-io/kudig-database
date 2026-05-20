@@ -1,3 +1,42 @@
+---
+title: 02 - Pod 与容器生命周期事件
+description: '**本文档全面覆盖 kubelet 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- kubelet
+- scheduler
+- prometheus
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- Pod 与容器生命周期事件 是什么
+- 如何 Pod 与容器生命周期事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- Pod
+- 与容器生命周期事件
+- kubernetes
+- events
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+---
+
+
 # 02 - Pod 与容器生命周期事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
@@ -654,6 +693,11 @@ kubectl get pod my-app -o jsonpath='{.spec.containers[*].ports}'
 1. **容器运行时错误** - 容器引擎无法创建容器
 2. **容器配置错误** - spec 配置不合法
 3. **资源限制** - 无法分配所需资源
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 4. **安全策略限制** - SecurityContext 或 PodSecurityPolicy 阻止
 5. **PostStart 钩子失败** - 生命周期钩子执行失败
 

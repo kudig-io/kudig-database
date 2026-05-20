@@ -1,3 +1,35 @@
+---
+title: cri-o v1.14 Release Notes
+description: cri-o v1.14 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- apiserver
+- prometheus
+- containerd
+- cri-o
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- cri-o v1.14 Release Notes 是什么
+- 如何 cri-o v1.14 Release Notes
+trigger_keywords:
+- cri-o
+- v1.14
+- Release
+- Notes
+- release
+- notes
+---
+
 # cri-o v1.14 Release Notes
 
 Source: [v1.14.12](https://github.com/cri-o/cri-o/releases/tag/v1.14.12)

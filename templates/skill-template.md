@@ -43,6 +43,15 @@ trigger_events:                        # Kubernetes Event Reason
 trigger_metrics:                       # Prometheus 指标模式
   - 'kube_node_status_condition{condition="Ready",status="false"}'
 
+# === 阅读体验增强字段 ===
+difficulty: "intermediate"             # beginner | intermediate | advanced | expert
+reading_level: "intermediate"          # beginner | intermediate | advanced | expert (同 difficulty)
+audience: ["SRE", "Ops Engineer"]      # 目标读者: SRE / DevOps / Developer
+estimated_read_time: "10min"            # 预计阅读时间
+prerequisites:                         # 前置知识依赖
+  - "domain-12-troubleshooting"
+  - "kubectl-basics"
+
 # === 关联引用 ===
 related_skills:                        # 关联的其他 Skill ID
   - "SKILL-POD-001"
@@ -51,6 +60,15 @@ fta_refs:                              # 对应的 FTA 文件
 knowledge_refs:                        # 深度知识参考
   - "topic-structural-trouble-shooting/node-*.md"
   - "domain-12-troubleshooting/"
+
+# === 统一 cross_refs ===
+cross_refs:
+  - type: "fta"
+    path: "../topic-fta/list/node-fta.md"
+    label: "Node 故障树分析"
+  - type: "domain"
+    path: "../domain-12-troubleshooting/02-node-notready-troubleshooting.md"
+    label: "Node NotReady 深度诊断"
 ---
 ```
 

@@ -1,3 +1,29 @@
+---
+title: 安全、隐私与数据治理
+description: '# 安全、隐私与数据治理'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 安全、隐私与数据治理 是什么
+- 如何 安全、隐私与数据治理
+trigger_keywords:
+- 安全
+- 隐私与数据治理
+- ai
+- coding
+---
+
 # 安全、隐私与数据治理
 
 > **文档类型**: 安全指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, Security, Privacy, Data Collection, Zero Data Retention, ZDR, EU Residency, BYOK, API Key, OAuth PKCE

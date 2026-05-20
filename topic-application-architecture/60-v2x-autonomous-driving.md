@@ -1,3 +1,53 @@
+---
+title: 车路协同自动驾驶V2X架构设计
+description: '# 车路协同自动驾驶架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- daemonset
+- gpu
+- nvidia
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- 自动驾驶架构师
+- V2X系统开发者
+- 边缘计算工程师
+- 阿里云解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 车路协同V2X系统架构设计
+- 自动驾驶感知融合K8s部署
+- RSU路侧单元边缘计算
+- 高精地图数据闭环
+- V2X功能安全ASIL-D
+trigger_keywords:
+- V2X
+- 车路协同
+- 自动驾驶
+- 边缘计算
+- 感知融合
+- 高精地图
+- RSU
+- OBU
+- 5G
+- ASIL-D
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-9-ai-ml
+- domain-5-iot-edge-computing
+- domain-26-service-mesh-microservices
+related_topics:
+- topic-application-architecture/80-tsn-network
+- topic-application-architecture/51-smart-manufacturing-mes
+- topic-application-architecture/47-smart-mining
+- topic-functions/05-iot-edge-computing
+---
+
+
 # 车路协同自动驾驶架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

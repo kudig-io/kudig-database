@@ -1,3 +1,34 @@
+---
+title: Agent Harness 上下文与记忆工程
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering, Memory Systems, RAG, 上下文窗口, 信息压缩,
+  持久化, 向量检索, 短期记忆, 长期记忆, 情景记忆'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent Harness 上下文与记忆工程 是什么
+- 如何 Agent Harness 上下文与记忆工程
+trigger_keywords:
+- Agent
+- Harness
+- 上下文与记忆工程
+- ai
+- agent
+---
+
+
 # Agent Harness 上下文与记忆工程
 
 > **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering, Memory Systems, RAG, 上下文窗口, 信息压缩, 持久化, 向量检索, 短期记忆, 长期记忆, 情景记忆

@@ -1,3 +1,41 @@
+---
+title: 云资源配额与 API 限流故障排查指南
+description: '# 云资源配额与 API 限流故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- controller-manager
+- prometheus
+- grafana
+- hpa
+- job
+- cronjob
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 云资源配额与 API 限流故障排查指南 是什么
+- 如何 云资源配额与 API 限流故障排查指南
+- 云资源配额与 API 限流故障排查指南 故障排查
+- 云资源配额与 API 限流故障排查指南 排障步骤
+trigger_keywords:
+- 云资源配额与
+- API
+- 限流故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # 云资源配额与 API 限流故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 中级

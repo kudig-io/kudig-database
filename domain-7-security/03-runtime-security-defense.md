@@ -1,25 +1,67 @@
 ---
-title: "运行时安全防护与威胁检测"
-description: "深入解析 K8s 运行时安全：Seccomp、AppArmor、SELinux、Falco 规则、容器逃逸检测、供应链安全与安全上下文配置"
-category: "domain-7-security"
-tags: [k8s, runtime, security, seccomp, apparmor, falco, container, security-context]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 运行时安全防护与威胁检测
+description: 深入解析 K8s 运行时安全：Seccomp、AppArmor、SELinux、Falco 规则、容器逃逸检测、供应链安全与安全上下文配置
+category: domain-7-security
+tags:
+- k8s
+- runtime
+- security
+- seccomp
+- apparmor
+- falco
+- container
+- security-context
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 运行时安全防护与威胁检测 是什么
+- 如何 运行时安全防护与威胁检测
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 运行时安全防护与威胁检测
+- security
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-authentication-authorization-system.md"
-    type: "depth"
-    desc: "认证授权体系"
-  - path: "02-network-security-policies.md"
-    type: "depth"
-    desc: "网络安全策略"
-  - path: "../domain-25-cloud-native-security/"
-    type: "depth"
-    desc: "云原生安全"
+- path: 01-authentication-authorization-system.md
+  type: depth
+  desc: 认证授权体系
+- path: 02-network-security-policies.md
+  type: depth
+  desc: 网络安全策略
+- path: ../domain-25-cloud-native-security/
+  type: depth
+  desc: 云原生安全
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
 ---
+
 
 # 03 - 运行时安全防护与威胁检测
 

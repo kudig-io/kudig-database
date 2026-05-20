@@ -1,3 +1,46 @@
+---
+title: Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)
+description: '# Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- prometheus
+- grafana
+- jaeger
+- istio
+- envoy
+- cilium
+- coredns
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration) 是什么
+- 如何 Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 服务网格深度实践与Istio集成
+- Service
+- Mesh
+- Deep
+- Practice
+- and
+- Istio
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/service-mesh-istio-fta.md
+  label: '故障树: service-mesh-istio'
+---
+
+
 # Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and Istio Integration)
 
 > **作者**: 服务网格架构专家 | **版本**: v3.0 | **更新时间**: 2026-03-03

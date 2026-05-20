@@ -1,3 +1,46 @@
+---
+title: KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+description: '# KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment) 是什么
+- 如何 KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- KubeEdge
+- 架构与部署
+- KubeEdge
+- Architecture
+- and
+- Deployment
+- edge
+- computing
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
+
+
 # KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
 
 ## 目录 (Table of Contents)

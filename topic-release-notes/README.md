@@ -1,3 +1,37 @@
+---
+title: Cloud Native Release Notes Archive
+description: Cloud Native Release Notes Archive — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- prometheus
+- grafana
+- istio
+- envoy
+- cilium
+- calico
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Cloud Native Release Notes Archive 是什么
+- 如何 Cloud Native Release Notes Archive
+trigger_keywords:
+- Cloud
+- Native
+- Release
+- Notes
+- Archive
+- release
+- notes
+---
+
 # Cloud Native Release Notes Archive
 
 Comprehensive archive of release notes for Kubernetes and its ecosystem.

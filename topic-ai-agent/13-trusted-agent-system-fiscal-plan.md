@@ -1,3 +1,37 @@
+---
+title: 可信智能体体系 — 运维智能体财年规划
+description: '# 可信智能体体系 — 运维智能体财年规划'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- scheduler
+- envoy
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 可信智能体体系 — 运维智能体财年规划 是什么
+- 如何 可信智能体体系 — 运维智能体财年规划
+trigger_keywords:
+- 可信智能体体系
+- 运维智能体财年规划
+- ai
+- agent
+---
+
+
 # 可信智能体体系 — 运维智能体财年规划
 
 > **文档类型**: 战略规划 | **最后更新**: 2026-03 | **关键词**: 可信智能体, 运维智能体, 4K 语料, QA 语料, Skills, Workflow, 评测体系, IaaS, PaaS, 数据库, 容器, AI 产品线, 强参考, 强质检, 窄口径

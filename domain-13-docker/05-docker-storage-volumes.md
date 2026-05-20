@@ -1,3 +1,36 @@
+---
+title: Docker 存储与数据卷
+description: '# Docker 存储与数据卷'
+category: docker
+tags:
+- docker
+- container
+- image
+- opa
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Docker 存储与数据卷 是什么
+- 如何 Docker 存储与数据卷
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Docker
+- 存储与数据卷
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
+
 # Docker 存储与数据卷
 
 > **适用版本**: Docker 20.10+ / Docker 24.0+ / Docker 25.0+ | **最后更新**: 2026-01

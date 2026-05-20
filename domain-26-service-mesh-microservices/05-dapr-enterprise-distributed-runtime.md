@@ -1,613 +1,206 @@
+---
+title: Dapr (Distributed Application Runtime) Enterprise 深度实践
+description: '# Dapr (Distributed Application Runtime) Enterprise 深度实践'
+category: service-mesh-microservices
+tags:
+- k8s
+- service-mesh
+- istio
+- envoy
+- microservices
+- prometheus
+- grafana
+- jaeger
+- helm
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Dapr (Distributed Application Runtime) Enterprise 深度实践 是什么
+- 如何 Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Kubernetes 26 service mesh microservices 最佳实践
+trigger_keywords:
+- Dapr
+- Distributed
+- Application
+- Runtime
+- Enterprise
+- 深度实践
+- service
+- mesh
+cross_refs:
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+---
+
+
 # Dapr (Distributed Application Runtime) Enterprise 深度实践
 
-> **Author**: Microservices Platform Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
-> **Scenario**: Enterprise-grade distributed application runtime and microservices platform | **Complexity**: ⭐⭐⭐⭐
+> **最后更新**: 2026-04-24 | **适用版本**: Dapr v1.15+ | **难度**: 高级
 
-## 🎯 Abstract
+---
 
-This document provides comprehensive exploration of Dapr enterprise deployment architecture, microservices patterns implementation, and distributed system management. Based on large-scale production environment experience, it offers complete technical guidance from runtime setup to service mesh integration, helping enterprises build portable, cloud-native microservices applications with unified APIs and runtime capabilities across hybrid environments.
+## 概述
 
-## 1. Dapr Enterprise Architecture
+Dapr (Distributed Application Runtime) 是微软于2019年发起、2023年从 CNCF 毕业的分布式应用运行时项目。与传统的服务网格在网络层提供透明代理不同，Dapr 在应用层通过标准化的 HTTP/gRPC API 提供分布式系统的核心构建块（Building Blocks）——服务调用、状态管理、发布订阅、Actor 模型、绑定、密钥管理等。Dapr 通过 Sidecar 模式与业务应用同 Pod 部署，应用通过 HTTP/gRPC 调用 Dapr Sidecar 的标准 API 获得这些能力，无需引入特定的 SDK 或框架依赖。
 
-### 1.1 Core Component Architecture
+Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同的业务代码可以运行在 Kubernetes、虚拟机、边缘设备上，只需更换底层的组件配置（State Store、Pub/Sub Broker 等），即可适配不同的基础设施。这使得 Dapr 特别适合多云混合部署和供应商锁定规避的场景。2026年 Dapr 已经发展到 v1.15 版本，支持 Actor 状态 TTL、Pub/Sub 消息过滤、直接流式传输等高级特性，社区贡献的组件后端超过 100 种。
+
+本文档从企业级生产环境角度，全面覆盖 Dapr 的架构设计、核心构建块配置、弹性模式、可观测性、安全策略、性能调优和故障排查。每个章节包含完整的 YAML 配置和可直接运行的代码示例。
+
+### Dapr 企业架构全景
 
 ```mermaid
 graph TB
-    subgraph "Application Layer"
-        A[Business Applications]
-        B[Microservices]
-        C[Functions/FaaS]
-        D[Legacy Applications]
+    subgraph "应用层 (Polyglot)"
+        APP_JAVA[Java Spring Boot]
+        APP_PYTHON[Python FastAPI]
+        APP_GO[Go Micro Service]
+        APP_DOTNET[.NET Core]
+        APP_NODE[Node.js Express]
     end
-    
-    subgraph "Dapr Sidecar Architecture"
-        E[Dapr Sidecar]
-        F[Dapr Runtime]
-        G[Service Invocation]
-        H[State Management]
-        I[Publish/Subscribe]
+
+    subgraph "Dapr Sidecar 层 (daprd)"
+        DAPR_S1[Dapr Sidecar<br/>HTTP:3500 / gRPC:50001]
+        DAPR_S2[Dapr Sidecar<br/>HTTP:3500 / gRPC:50001]
+        DAPR_S3[Dapr Sidecar<br/>HTTP:3500 / gRPC:50001]
     end
-    
-    subgraph "Building Blocks"
-        J[Service-to-Service]
-        K[State Management]
-        L[Pub/Sub Messaging]
-        M[Bindings]
-        N[Actors]
-        O[Secrets]
-        P[Configuration]
+
+    subgraph "构建块 API (Building Blocks)"
+        SI[服务调用<br/>mTLS + 负载均衡 + 弹性]
+        SM[状态管理<br/>CRUD + 事务 + TTL]
+        PS[发布订阅<br/>At-least-once + 过滤]
+        AC[Actor<br/>虚拟 Actor + 定时器 + 提醒]
+        BD[绑定<br/>输入/输出触发器]
+        SC[密钥管理<br/>统一接口 + 多后端]
+        CF[配置<br/>热更新 + 订阅]
+        DL[分布式锁<br/>互斥 + 过期]
+        WF[Workflow<br/>编排 + 持久化]
     end
-    
-    subgraph "Component Ecosystem"
-        Q[State Stores]
-        R[Message Brokers]
-        S[Secret Stores]
-        T[Configuration Stores]
-        U[Binding Targets]
+
+    subgraph "Dapr 控制平面"
+        OPERATOR[Dapr Operator<br/>CRD 管理 + Sidecar 注入]
+        INJECTOR[Sidecar Injector<br/>Mutating Webhook]
+        PLACEMENT[Placement<br/>Actor 位置路由]
+        SENTRY[Sentry<br/>mTLS 证书签发]
     end
-    
-    subgraph "Integration Layer"
-        V[Service Mesh Integration]
-        W[Monitoring & Tracing]
-        X[Security]
-        Y[API Gateway]
-        Z[DevOps Tools]
+
+    subgraph "组件后端 (Pluggable)"
+        REDIS[Redis<br/>状态/PubSub/锁]
+        KAFKA[Kafka<br/>Pub/Sub]
+        MONGO[MongoDB<br/>状态]
+        VAULT_D[Vault<br/>密钥管理]
+        POSTGRES[PostgreSQL<br/>状态/配置/Workflow]
+        RABBIT[RabbitMQ<br/>Pub/Sub/绑定]
+        AZUREKV[Azure Key Vault<br/>密钥]
+        S3[AWS S3<br/>绑定]
     end
-    
-    A --> E
-    B --> E
-    C --> E
-    D --> E
-    
-    E --> F
-    F --> G
-    F --> H
-    F --> I
-    
-    G --> J
-    H --> K
-    I --> L
-    F --> M
-    F --> N
-    F --> O
-    F --> P
-    
-    K --> Q
-    L --> R
-    O --> S
-    P --> T
-    M --> U
-    
-    V --> W
-    W --> X
-    X --> Y
-    Y --> Z
+
+    subgraph "可观测性"
+        OTEL[OpenTelemetry Collector]
+        PROM_D[Prometheus]
+        ZIPKIN_D[Zipkin/Jaeger/Tempo]
+        GRAFANA_D[Grafana Dashboard]
+    end
+
+    APP_JAVA & APP_PYTHON & APP_GO --> DAPR_S1 & DAPR_S2 & DAPR_S3
+    DAPR_S1 --> SI & SM & PS & AC & BD & SC & CF & DL & WF
+    SM --> REDIS & MONGO & POSTGRES
+    PS --> KAFKA & RABBIT
+    SC --> VAULT_D & AZUREKV
+    BD --> S3 & RABBIT
+    DL --> REDIS
+    WF --> POSTGRES
+    DAPR_S1 --> OTEL --> PROM_D & ZIPKIN_D & GRAFANA_D
+    OPERATOR --> INJECTOR --> DAPR_S1
+    SENTRY --> DAPR_S1
+    PLACEMENT --> AC
 ```
 
-### 1.2 Enterprise Deployment Architecture
+---
 
-```yaml
-dapr_enterprise_deployment:
-  kubernetes_mode:
-    namespace_isolation:
-      - name: "production-apps"
-        dapr_enabled: true
-        sidecar_limits:
-          cpu: "100m"
-          memory: "256Mi"
-        placement_service:
-          replicas: 3
-          resources:
-            requests:
-              cpu: "50m"
-              memory: "128Mi"
-            
-      - name: "development-apps"
-        dapr_enabled: true
-        sidecar_limits:
-          cpu: "50m"
-          memory: "128Mi"
-        placement_service:
-          replicas: 1
-          resources:
-            requests:
-              cpu: "25m"
-              memory: "64Mi"
-    
-    control_plane:
-      operator:
-        replicas: 2
-        resources:
-          requests:
-            cpu: "50m"
-            memory: "128Mi"
-          limits:
-            cpu: "200m"
-            memory: "512Mi"
-      
-      injector:
-        replicas: 2
-        resources:
-          requests:
-            cpu: "50m"
-            memory: "128Mi"
-          limits:
-            cpu: "200m"
-            memory: "512Mi"
-      
-      placement:
-        replicas: 3
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "300m"
-            memory: "1Gi"
-      
-      sentry:
-        replicas: 2
-        resources:
-          requests:
-            cpu: "50m"
-            memory: "128Mi"
-          limits:
-            cpu: "200m"
-            memory: "512Mi"
-  
-  security_configuration:
-    mtls:
-      enabled: true
-      workload_cert_ttl: "24h"
-      allowed_clock_skew: "15m"
-    
-    authentication:
-      token_audience: "dapr-api"
-      jwt_issuer: "https://auth.company.com"
-    
-    authorization:
-      rbac_enabled: true
-      policy_engine: "opa"
+## 核心配置 — 控制平面高可用部署
+
+### 生产级 Helm 安装
+
+```bash
+# 添加 Dapr Helm 仓库
+helm repo add dapr https://dapr.github.io/helm-charts/
+helm repo update
+
+# HA 模式安装
+helm install dapr dapr/dapr \
+  --namespace dapr-system \
+  --create-namespace \
+  --set global.ha.enabled=true \
+  --set global.mtls.enabled=true \
+  --set global.logLevel=info \
+  --set dapr_operator.replicaCount=3 \
+  --set dapr_placement.replicaCount=3 \
+  --set dapr_placement.maxActorAPILevel=20 \
+  --set dapr_sentry.replicaCount=2 \
+  --set dapr_sidecar_injector.replicaCount=2 \
+  --set dapr_operator.resources.requests.cpu=200m \
+  --set dapr_operator.resources.requests.memory=256Mi \
+  --set dapr_operator.resources.limits.cpu=1000m \
+  --set dapr_operator.resources.limits.memory=1Gi \
+  --wait
 ```
 
-## 2. Advanced Service Invocation Patterns
+### Dapr CLI 安装
 
-### 2.1 Service-to-Service Communication
+```bash
+# 安装 Dapr CLI
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+
+# 初始化 Dapr (Kubernetes)
+dapr init -k --wait --timeout 600 \
+  --set dapr_operator.replicaCount=3 \
+  --set dapr_placement.replicaCount=3 \
+  --set dapr_sentry.replicaCount=2 \
+  --set dapr_sidecar_injector.replicaCount=2 \
+  --set global.ha.enabled=true \
+  --set global.mtls.enabled=true \
+  --set global.logLevel=info
+
+# 验证安装
+dapr status -k
+# NAME                   NAMESPACE    HEALTHY  STATUS   REPLICAS
+# dapr-operator          dapr-system  True     Running  3
+# dapr-placement         dapr-system  True     Running  3
+# dapr-sentry            dapr-system  True     Running  2
+# dapr-sidecar-injector  dapr-system  True     Running  2
+```
+
+### 生产环境配置
 
 ```yaml
-# service_invocation_config.yaml
 apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
-  name: service-invocation-config
+  name: production-config
   namespace: production
 spec:
-  tracing:
-    samplingRate: "1"
-    zipkin:
-      endpointAddress: "http://zipkin.default.svc.cluster.local:9411/api/v2/spans"
   mtls:
     enabled: true
-  accessControl:
-    defaultAction: allow
-    trustDomain: "company.com"
-    policies:
-      - appId: order-service
-        defaultAction: deny
-        trustDomain: '*'
-        namespace: "production"
-        operations:
-          - name: "/checkout"
-            httpVerb: ["POST"]
-            action: allow
-          - name: "/cancel"
-            httpVerb: ["POST"]
-            action: allow
-```
-
-```go
-// Go service invocation example
-package main
-
-import (
-    "context"
-    "log"
-    "net/http"
-    "github.com/dapr/go-sdk/service/common"
-    daprd "github.com/dapr/go-sdk/service/http"
-)
-
-func main() {
-    s := daprd.NewService(":8080")
-    
-    // 服务调用处理函数
-    if err := s.AddServiceInvocationHandler("/process-order", processOrderHandler); err != nil {
-        log.Fatalf("error adding invocation handler: %v", err)
-    }
-    
-    // 启动服务
-    if err := s.Start(); err != nil && err != http.ErrServerClosed {
-        log.Fatalf("error listening: %v", err)
-    }
-}
-
-func processOrderHandler(ctx context.Context, in *common.InvocationEvent) (*common.Content, error) {
-    // 处理订单逻辑
-    log.Printf("Processing order: %s", string(in.Data))
-    
-    // 调用库存服务
-    resp, err := http.Get("http://localhost:3500/v1.0/invoke/inventory-service/method/check-stock")
-    if err != nil {
-        return nil, err
-    }
-    defer resp.Body.Close()
-    
-    // 返回处理结果
-    return &common.Content{
-        Data:        []byte("Order processed successfully"),
-        ContentType: "text/plain",
-    }, nil
-}
-```
-
-### 2.2 Resiliency Configuration
-
-```yaml
-# resiliency_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Resiliency
-metadata:
-  name: app-resiliency
-  namespace: production
-spec:
-  policies:
-    timeouts:
-      general: 5s
-      critical: 30s
-    
-    retries:
-      general:
-        policy: constant
-        duration: 5s
-        maxRetries: 3
-      
-      exponential:
-        policy: exponential
-        maxInterval: 60s
-        maxRetries: 3
-    
-    circuitBreakers:
-      simpleCB:
-        maxRequests: 1
-        timeout: 60s
-        trip: consecutiveFailures >= 5
-    
-  targets:
-    apps:
-      inventory-service:
-        timeout: general
-        retry: exponential
-        circuitBreaker: simpleCB
-      
-      payment-service:
-        timeout: critical
-        retry: general
-        circuitBreaker: simpleCB
-    
-    components:
-      redis-statestore:
-        outbound:
-          timeout: general
-          retry: exponential
-        inbound:
-          timeout: general
-          retry: general
-```
-
-## 3. State Management and Data Patterns
-
-### 3.1 Multi-State Store Configuration
-
-```yaml
-# state_store_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: production-statestore
-  namespace: production
-spec:
-  type: state.redis
-  version: v1
-  metadata:
-    - name: redisHost
-      value: "redis-master.production.svc.cluster.local:6379"
-    - name: redisPassword
-      secretKeyRef:
-        name: redis-secret
-        key: password
-    - name: actorStateStore
-      value: "true"
-    - name: redisType
-      value: "cluster"
-    - name: enableTLS
-      value: "true"
-    - name: failover
-      value: "true"
-
----
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: user-session-store
-  namespace: production
-spec:
-  type: state.mongodb
-  version: v1
-  metadata:
-    - name: host
-      value: "mongodb.production.svc.cluster.local:27017"
-    - name: username
-      secretKeyRef:
-        name: mongodb-secret
-        key: username
-    - name: password
-      secretKeyRef:
-        name: mongodb-secret
-        key: password
-    - name: databaseName
-      value: "user_sessions"
-    - name: collectionName
-      value: "sessions"
-```
-
-### 3.2 Actor Pattern Implementation
-
-```csharp
-// C# Actor implementation
-using Dapr.Actors;
-using Dapr.Actors.Runtime;
-using System.Threading.Tasks;
-
-[Actor(TypeName = "OrderActor")]
-public class OrderActor : Actor, IOrderActor
-{
-    public OrderActor(ActorHost host) : base(host)
-    {
-    }
-
-    public async Task<Order> GetOrderAsync(string orderId)
-    {
-        // 从状态存储获取订单
-        return await this.StateManager.GetStateAsync<Order>("order");
-    }
-
-    public async Task UpdateOrderStatusAsync(string status)
-    {
-        var order = await this.StateManager.GetStateAsync<Order>("order");
-        order.Status = status;
-        
-        // 更新状态
-        await this.StateManager.SetStateAsync("order", order);
-        
-        // 发布状态变更事件
-        await this.ActorProxyFactory.CreateActorProxy<IEventPublisherActor>(
-            new ActorId(order.Id), "EventPublisherActor")
-            .PublishEventAsync("order-status-changed", new { OrderId = order.Id, Status = status });
-    }
-
-    public async Task<decimal> CalculateTotalAsync()
-    {
-        var order = await this.StateManager.GetStateAsync<Order>("order");
-        return order.Items.Sum(item => item.Price * item.Quantity);
-    }
-}
-
-public interface IOrderActor : IActor
-{
-    Task<Order> GetOrderAsync(string orderId);
-    Task UpdateOrderStatusAsync(string status);
-    Task<decimal> CalculateTotalAsync();
-}
-```
-
-## 4. Pub/Sub Messaging Patterns
-
-### 4.1 Advanced Pub/Sub Configuration
-
-```yaml
-# pubsub_component.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: production-pubsub
-  namespace: production
-spec:
-  type: pubsub.rabbitmq
-  version: v1
-  metadata:
-    - name: host
-      value: "amqp://rabbitmq.production.svc.cluster.local:5672"
-    - name: username
-      secretKeyRef:
-        name: rabbitmq-secret
-        key: username
-    - name: password
-      secretKeyRef:
-        name: rabbitmq-secret
-        key: password
-    - name: durable
-      value: "true"
-    - name: deletedWhenUnused
-      value: "false"
-    - name: autoAck
-      value: "false"
-    - name: requeueInFailure
-      value: "true"
-    - name: prefetchCount
-      value: "1"
-    - name: reconnectWait
-      value: "5s"
-
----
-apiVersion: dapr.io/v1alpha1
-kind: Subscription
-metadata:
-  name: order-processing-subscription
-  namespace: production
-spec:
-  topic: orders
-  route: /orders/process
-  pubsubname: production-pubsub
-  metadata:
-    - name: deadLetterTopic
-      value: orders-deadletter
-    - name: maxDeliveryCount
-      value: "3"
-    - name: ackWaitTime
-      value: "30s"
-```
-
-### 4.2 Event-Driven Architecture Implementation
-
-```python
-# Python event-driven service
-import flask
-from dapr.clients import DaprClient
-import json
-import logging
-
-app = flask.Flask(__name__)
-logging.basicConfig(level=logging.INFO)
-
-@app.route('/orders/process', methods=['POST'])
-def process_order():
-    try:
-        # 获取订单数据
-        order_data = flask.request.get_json()
-        logging.info(f"Processing order: {order_data['orderId']}")
-        
-        # 验证库存
-        with DaprClient() as client:
-            # 调用库存服务
-            inventory_response = client.invoke_method(
-                'inventory-service',
-                'check-stock',
-                json.dumps({"productId": order_data['productId'], "quantity": order_data['quantity']})
-            )
-            
-            inventory_result = json.loads(inventory_response.data)
-            
-            if not inventory_result['available']:
-                # 发布库存不足事件
-                client.publish_event(
-                    pubsub_name='production-pubsub',
-                    topic_name='inventory-shortage',
-                    data=json.dumps({
-                        'orderId': order_data['orderId'],
-                        'productId': order_data['productId'],
-                        'required': order_data['quantity'],
-                        'available': inventory_result['availableQuantity']
-                    })
-                )
-                return {'status': 'inventory_shortage'}, 400
-            
-            # 处理支付
-            payment_response = client.invoke_method(
-                'payment-service',
-                'process-payment',
-                json.dumps({
-                    'orderId': order_data['orderId'],
-                    'amount': order_data['totalAmount'],
-                    'paymentMethod': order_data['paymentMethod']
-                })
-            )
-            
-            payment_result = json.loads(payment_response.data)
-            
-            if payment_result['status'] == 'success':
-                # 更新订单状态
-                client.invoke_method(
-                    'order-service',
-                    'update-status',
-                    json.dumps({
-                        'orderId': order_data['orderId'],
-                        'status': 'confirmed'
-                    })
-                )
-                
-                # 发布订单确认事件
-                client.publish_event(
-                    pubsub_name='production-pubsub',
-                    topic_name='order-confirmed',
-                    data=json.dumps({
-                        'orderId': order_data['orderId'],
-                        'customerId': order_data['customerId']
-                    })
-                )
-                
-                return {'status': 'order_confirmed'}, 200
-            else:
-                return {'status': 'payment_failed'}, 400
-                
-    except Exception as e:
-        logging.error(f"Error processing order: {str(e)}")
-        return {'error': str(e)}, 500
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
-```
-
-## 5. Observability and Monitoring
-
-### 5.1 Distributed Tracing Configuration
-
-```yaml
-# tracing_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
-metadata:
-  name: tracing-config
-  namespace: production
-spec:
+    workloadCertTTL: "24h"
+    allowedClockSkew: "15m"
   tracing:
     samplingRate: "1"
     otel:
-      endpointAddress: "http://otel-collector.monitoring.svc.cluster.local:4317"
+      endpointAddress: "otel-collector.monitoring:4317"
       isSecure: false
       protocol: "grpc"
-    zipkin:
-      endpointAddress: "http://zipkin.monitoring.svc.cluster.local:9411/api/v2/spans"
-    stdout:
-      enabled: true
-
----
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: tracing-exporter
-  namespace: production
-spec:
-  type: exporters.tracing.otlp
-  version: v1
-  metadata:
-    - name: endpoint
-      value: "otel-collector.monitoring.svc.cluster.local:4317"
-    - name: insecure
-      value: "true"
-    - name: protocol
-      value: "grpc"
-```
-
-### 5.2 Metrics and Health Monitoring
-
-```yaml
-# metrics_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
-metadata:
-  name: metrics-config
-  namespace: production
-spec:
   metric:
     enabled: true
     rules:
@@ -617,59 +210,17 @@ spec:
         enabled: true
       - name: "dapr_actor_.*"
         enabled: true
-  health:
-    probeInterval: "5s"
-    probeTimeout: "3s"
-    probeThreshold: 3
-```
-
-```python
-# Custom metrics collection
-from prometheus_client import Counter, Histogram, generate_latest
-from flask import Flask, Response
-import time
-
-app = Flask(__name__)
-
-# 自定义指标
-order_processing_duration = Histogram('order_processing_duration_seconds', 'Time spent processing orders')
-orders_processed_total = Counter('orders_processed_total', 'Total orders processed', ['status'])
-
-@app.route('/metrics')
-def metrics():
-    return Response(generate_latest(), mimetype='text/plain')
-
-@app.route('/process-order', methods=['POST'])
-@order_processing_duration.time()
-def process_order():
-    start_time = time.time()
-    try:
-        # 订单处理逻辑
-        # ...
-        orders_processed_total.labels(status='success').inc()
-        return {'status': 'success'}, 200
-    except Exception as e:
-        orders_processed_total.labels(status='failure').inc()
-        return {'error': str(e)}, 500
-```
-
-## 6. Security and Compliance
-
-### 6.1 Advanced Security Configuration
-
-```yaml
-# security_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
-metadata:
-  name: security-config
-  namespace: production
-spec:
-  mtls:
-    enabled: true
-    workloadCertTTL: "24h"
-    allowedClockSkew: "15m"
-  
+  features:
+    - name: "ActorStateTTL"
+      enabled: true
+    - name: "PubSubFiltering"
+      enabled: true
+    - name: "DirectStreaming"
+      enabled: true
+    - name: "Workflow"
+      enabled: true
+    - name: "ServiceInvocationStreaming"
+      enabled: true
   accessControl:
     defaultAction: deny
     trustDomain: "company.com"
@@ -685,7 +236,479 @@ spec:
           - name: "/cancel"
             httpVerb: ["POST"]
             action: allow
-          
+          - name: "/status"
+            httpVerb: ["GET"]
+            action: allow
+      - appId: payment-service
+        defaultAction: deny
+        trustDomain: "company.com"
+        namespace: "production"
+        operations:
+          - name: "/process"
+            httpVerb: ["POST"]
+            action: allow
+          - name: "/refund"
+            httpVerb: ["POST"]
+            action: allow
+  httpPipeline:
+    handlers:
+      - name: ratelimit
+        type: middleware.http.ratelimit
+  appHttpPipeline:
+    handlers:
+      - name: uppercase
+        type: middleware.http.uppercase
+```
+
+---
+
+## 核心构建块配置
+
+### 状态管理 — 多后端配置
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: redis-statestore
+  namespace: production
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+    - name: redisHost
+      value: "redis-master.production:6379"
+    - name: redisPassword
+      secretKeyRef:
+        name: redis-secret
+        key: password
+    - name: enableTLS
+      value: "true"
+    - name: failover
+      value: "true"
+    - name: sentinelMasterName
+      value: "mymaster"
+    - name: maxRetries
+      value: "3"
+    - name: maxRetryBackoff
+      value: "5s"
+    - name: ttlInSeconds
+      value: "86400"
+    - name: actorStateStore
+      value: "true"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: postgres-statestore
+  namespace: production
+spec:
+  type: state.postgresql
+  version: v1
+  metadata:
+    - name: connectionString
+      secretKeyRef:
+        name: postgres-secret
+        key: connection-string
+    - name: tableName
+      value: "dapr_state"
+    - name: metadataTableName
+      value: "dapr_metadata"
+    - name: cleanupIntervalInSeconds
+      value: "3600"
+    - name: actorStateStore
+      value: "false"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: mongodb-statestore
+  namespace: production
+spec:
+  type: state.mongodb
+  version: v1
+  metadata:
+    - name: host
+      value: "mongodb-rs.production:27017"
+    - name: username
+      secretKeyRef:
+        name: mongodb-secret
+        key: username
+    - name: password
+      secretKeyRef:
+        name: mongodb-secret
+        key: password
+    - name: databaseName
+      value: "dapr_state_db"
+    - name: collectionName
+      value: "state_collection"
+```
+
+### 发布订阅 — Kafka 配置
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: kafka-pubsub
+  namespace: production
+spec:
+  type: pubsub.kafka
+  version: v1
+  metadata:
+    - name: brokers
+      value: "kafka-0.kafka.production:9092,kafka-1.kafka.production:9092,kafka-2.kafka.production:9092"
+    - name: authType
+      value: "sasl"
+    - name: saslUsername
+      secretKeyRef:
+        name: kafka-secret
+        key: username
+    - name: saslPassword
+      secretKeyRef:
+        name: kafka-secret
+        key: password
+    - name: saslMechanism
+      value: "SCRAM-SHA-512"
+    - name: consumeRetryInterval
+      value: "3s"
+    - name: initialOffset
+      value: "oldest"
+    - name: maxMessageBytes
+      value: "1048576"
+    - name: clientID
+      value: "dapr-consumer"
+    - name: disableTls
+      value: "false"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: order-created-sub
+  namespace: production
+spec:
+  topic: order-created
+  routes:
+    default: /orders/process
+    rules:
+      - match: event.type == "priority"
+        path: /orders/process-priority
+  pubsubname: kafka-pubsub
+  scopes:
+    - order-service
+    - inventory-service
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: payment-completed-sub
+  namespace: production
+spec:
+  topic: payment-completed
+  routes:
+    default: /notifications/send
+  pubsubname: kafka-pubsub
+  scopes:
+    - notification-service
+```
+
+### 绑定 — 输入/输出触发器
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: s3-binding
+  namespace: production
+spec:
+  type: bindings.aws.s3
+  version: v1
+  metadata:
+    - name: bucket
+      value: "my-production-bucket"
+    - name: region
+      value: "us-west-2"
+    - name: accessKey
+      secretKeyRef:
+        name: aws-secret
+        key: access-key
+    - name: secretKey
+      secretKeyRef:
+        name: aws-secret
+        key: secret-key
+    - name: decodeBase64
+      value: "false"
+    - name: encodeBase64
+      value: "false"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: rabbitmq-binding
+  namespace: production
+spec:
+  type: bindings.rabbitmq
+  version: v1
+  metadata:
+    - name: queueName
+      value: "task-queue"
+    - name: host
+      value: "amqp://rabbitmq.production:5672"
+    - name: durable
+      value: "true"
+    - name: deleteWhenUnused
+      value: "false"
+    - name: ttlInSeconds
+      value: "3600"
+    - name: prefetchCount
+      value: "10"
+```
+
+---
+
+## 流量管理实战 — 服务调用与弹性
+
+### 弹性配置
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Resiliency
+metadata:
+  name: app-resiliency
+  namespace: production
+spec:
+  policies:
+    timeouts:
+      general: 5s
+      critical: 30s
+      database: 10s
+      quick: 2s
+    retries:
+      general:
+        policy: constant
+        duration: 1s
+        maxRetries: 3
+      exponential:
+        policy: exponential
+        maxInterval: 30s
+        maxRetries: 5
+        initialInterval: 1s
+      aggressive:
+        policy: exponential
+        maxInterval: 60s
+        maxRetries: 10
+        initialInterval: 2s
+    circuitBreakers:
+      simpleCB:
+        maxRequests: 1
+        timeout: 60s
+        trip: consecutiveFailures >= 5
+      aggressiveCB:
+        maxRequests: 3
+        timeout: 30s
+        trip: consecutiveFailures >= 3
+      dataCB:
+        maxRequests: 5
+        timeout: 120s
+        trip: consecutiveFailures >= 10
+  targets:
+    apps:
+      inventory-service:
+        timeout: general
+        retry: exponential
+        circuitBreaker: simpleCB
+      payment-service:
+        timeout: critical
+        retry: general
+        circuitBreaker: aggressiveCB
+      notification-service:
+        timeout: quick
+        retry: general
+      user-service:
+        timeout: general
+        retry: general
+        circuitBreaker: simpleCB
+      recommendation-service:
+        timeout: general
+        retry: general
+    components:
+      redis-statestore:
+        outbound:
+          timeout: database
+          retry: exponential
+          circuitBreaker: dataCB
+      kafka-pubsub:
+        outbound:
+          timeout: general
+          retry: general
+      postgres-statestore:
+        outbound:
+          timeout: database
+          retry: exponential
+          circuitBreaker: dataCB
+```
+
+### 服务调用代码示例
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "log"
+    "net/http"
+    daprd "github.com/dapr/go-sdk/service/http"
+    "github.com/dapr/go-sdk/client"
+)
+
+type Order struct {
+    ID     string  `json:"id"`
+    UserID string  `json:"userId"`
+    Amount float64 `json:"amount"`
+    Status string  `json:"status"`
+}
+
+type InventoryResponse struct {
+    Available bool `json:"available"`
+    Quantity  int  `json:"quantity"`
+}
+
+func main() {
+    s := daprd.NewService(":8080")
+    c, _ := client.NewClient()
+
+    s.AddServiceInvocationHandler("/process-order", func(ctx context.Context, in *client.InvocationEvent) (*client.Content, error) {
+        var order Order
+        json.Unmarshal(in.Data, &order)
+
+        inventoryReq, _ := json.Marshal(map[string]string{"productId": order.ID})
+        resp, err := c.InvokeMethod(ctx, "inventory-service", "check-stock", "post",
+            client.WithContent(&client.Content{
+                ContentType: "application/json",
+                Data:        inventoryReq,
+            }),
+        )
+        if err != nil {
+            log.Printf("Inventory check failed: %v", err)
+            return &client.Content{
+                Data:        []byte(`{"error": "inventory check failed"}`),
+                ContentType: "application/json",
+            }, err
+        }
+
+        var inventory InventoryResponse
+        json.Unmarshal(resp, &inventory)
+
+        if !inventory.Available {
+            return &client.Content{
+                Data:        []byte(`{"status": "rejected", "reason": "out of stock"}`),
+                ContentType: "application/json",
+            }, nil
+        }
+
+        paymentReq, _ := json.Marshal(map[string]interface{}{"orderId": order.ID, "amount": order.Amount})
+        _, err = c.InvokeMethod(ctx, "payment-service", "charge", "post",
+            client.WithContent(&client.Content{
+                ContentType: "application/json",
+                Data:        paymentReq,
+            }),
+        )
+        if err != nil {
+            log.Printf("Payment failed: %v", err)
+            return &client.Content{
+                Data:        []byte(`{"error": "payment failed"}`),
+                ContentType: "application/json",
+            }, err
+        }
+
+        order.Status = "confirmed"
+        result, _ := json.Marshal(order)
+        return &client.Content{
+            Data:        result,
+            ContentType: "application/json",
+        }, nil
+    })
+
+    log.Fatal(s.Start())
+}
+```
+
+### 状态管理代码示例
+
+```go
+func saveOrderState(ctx context.Context, c client.Client, order Order) error {
+    err := c.SaveState(ctx, "redis-statestore", order.ID, []byte(order.Status),
+        map[string]string{
+            "ttlInSeconds": "86400",
+            "contentType":  "application/json",
+        },
+        nil,
+    )
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+func getOrderState(ctx context.Context, c client.Client, orderID string) (string, error) {
+    item, err := c.GetState(ctx, "redis-statestore", orderID, nil)
+    if err != nil {
+        return "", err
+    }
+    return string(item.Value), nil
+}
+
+func transactionalSave(ctx context.Context, c client.Client, orders []Order) error {
+    ops := make([]*client.StateOperation, 0, len(orders))
+    for _, order := range orders {
+        data, _ := json.Marshal(order)
+        ops = append(ops, client.StateOperation{
+            OperationType: client.OperationUpsert,
+            Key:           order.ID,
+            Value:         data,
+            Metadata:      map[string]string{"ttlInSeconds": "86400"},
+        })
+    }
+    return c.ExecuteStateTransaction(ctx, "redis-statestore", nil, ops)
+}
+```
+
+---
+
+## 安全策略 — mTLS 与访问控制
+
+### mTLS 配置
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: security-config
+  namespace: production
+spec:
+  mtls:
+    enabled: true
+    workloadCertTTL: "24h"
+    allowedClockSkew: "15m"
+  accessControl:
+    defaultAction: deny
+    trustDomain: "company.com"
+    policies:
+      - appId: order-service
+        defaultAction: allow
+        trustDomain: "company.com"
+        namespace: "production"
+        operations:
+          - name: "/checkout"
+            httpVerb: ["POST"]
+            action: allow
+          - name: "/cancel"
+            httpVerb: ["POST"]
+            action: allow
+          - name: "/status"
+            httpVerb: ["GET"]
+            action: allow
       - appId: payment-service
         defaultAction: deny
         trustDomain: "company.com"
@@ -695,286 +718,519 @@ spec:
             httpVerb: ["POST"]
             action: allow
             principals: ["order-service"]
+          - name: "/refund"
+            httpVerb: ["POST"]
+            action: allow
+            principals: ["order-service", "admin-service"]
+      - appId: notification-service
+        defaultAction: deny
+        trustDomain: "company.com"
+        namespace: "production"
+        operations:
+          - name: "/send"
+            httpVerb: ["POST"]
+            action: allow
+            principals: ["*"]
 ```
 
-### 6.2 Secret Management Integration
+### 密钥管理
 
 ```yaml
-# secret_store.yaml
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: production-secrets
   namespace: production
 spec:
+  type: secretstores.kubernetes
+  version: v1
+  metadata:
+    - name: namespace
+      value: "production"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: vault-secrets
+  namespace: production
+spec:
+  type: secretstores.hashicorp.vault
+  version: v1
+  metadata:
+    - name: vaultAddr
+      value: "https://vault.company.com:8200"
+    - name: skipVerify
+      value: "false"
+    - name: vaultToken
+      secretKeyRef:
+        name: vault-token
+        key: token
+    - name: vaultKVPrefix
+      value: "dapr"
+    - name: vaultKVUsePrefix
+      value: "true"
+    - name: skipTLS
+      value: "false"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: azure-keyvault
+  namespace: production
+spec:
   type: secretstores.azure.keyvault
   version: v1
   metadata:
     - name: vaultName
-      value: "company-dapr-vault"
-    - name: spnTenantId
-      value: "your-tenant-id"
-    - name: spnClientId
-      value: "your-client-id"
-    - name: spnClientSecret
+      value: "mycompany-dapr-kv"
+    - name: azureTenantId
+      value: "tenant-id"
+    - name: azureClientId
+      value: "client-id"
+    - name: azureClientSecret
       secretKeyRef:
-        name: azure-spn-secret
+        name: azure-sp-secret
         key: client-secret
-
----
-# 应用中使用密钥
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: order-service
-  namespace: production
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: order-service
-  template:
-    metadata:
-      labels:
-        app: order-service
-      annotations:
-        dapr.io/enabled: "true"
-        dapr.io/app-id: "order-service"
-        dapr.io/config: "security-config"
-    spec:
-      containers:
-        - name: order-service
-          image: company/order-service:latest
-          env:
-            - name: DATABASE_CONNECTION_STRING
-              valueFrom:
-                secretKeyRef:
-                  name: production-secrets
-                  key: database-connection-string
 ```
 
-## 7. Multi-Environment Deployment
+---
 
-### 7.1 Environment-Specific Configuration
+## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
+
+### 分布式追踪
 
 ```yaml
-# development_config.yaml
 apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
-  name: dev-config
-  namespace: development
-spec:
-  tracing:
-    samplingRate: "0.1"  # 10% 采样率
-  mtls:
-    enabled: false  # 开发环境禁用mTLS
-  metric:
-    enabled: true
-
----
-# production_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
-metadata:
-  name: prod-config
+  name: tracing-config
   namespace: production
 spec:
   tracing:
-    samplingRate: "1"  # 100% 采样率
-  mtls:
-    enabled: true
+    samplingRate: "1"
+    otel:
+      endpointAddress: "otel-collector.monitoring:4317"
+      isSecure: false
+      protocol: "grpc"
+    stdout:
+      enabled: true
+```
+
+### OpenTelemetry Collector 配置
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: monitoring
+data:
+  otel-collector-config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    processors:
+      batch:
+        timeout: 5s
+        send_batch_size: 1024
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 512
+    exporters:
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        namespace: "dapr"
+      jaeger:
+        endpoint: "jaeger-collector.monitoring:14250"
+        tls:
+          insecure: true
+      elasticsearch:
+        endpoints:
+          - "http://elasticsearch.monitoring:9200"
+        logs_index: "dapr-logs"
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [prometheus]
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [jaeger]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [elasticsearch]
+```
+
+### 自定义指标与 ServiceMonitor
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: metrics-config
+  namespace: production
+spec:
   metric:
     enabled: true
     rules:
       - name: "dapr_runtime_.*"
         enabled: true
-```
-
-### 7.2 CI/CD Integration
-
-```yaml
-# github_actions_dapr.yml
-name: Dapr Application Deployment
-
-on:
-  push:
-    branches: [ main, develop ]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        
-      - name: Login to Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ github.repository }}/order-service:${{ github.sha }}
-      
-      - name: Deploy to Kubernetes
-        run: |
-          # 设置kubectl上下文
-          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          export KUBECONFIG=./kubeconfig
-          
-          # 部署应用
-          kubectl set image deployment/order-service \
-            order-service=ghcr.io/${{ github.repository }}/order-service:${{ github.sha }} \
-            -n production
-          
-          # 等待部署完成
-          kubectl rollout status deployment/order-service -n production --timeout=300s
-          
-          # 验证Dapr sidecar健康状态
-          kubectl wait --for=condition=ready pod -l app=order-service -n production --timeout=300s
-```
-
-## 8. Performance Optimization
-
-### 8.1 Sidecar Resource Optimization
-
-```yaml
-# optimized_sidecar_config.yaml
-apiVersion: dapr.io/v1alpha1
-kind: Configuration
+      - name: "dapr_component_.*"
+        enabled: true
+      - name: "dapr_actor_.*"
+        enabled: true
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
 metadata:
-  name: performance-config
+  name: dapr-sidecar
   namespace: production
 spec:
-  features:
-    - name: "ActorStateTTL"
-      enabled: true
-    - name: "PubSubFiltering"
-      enabled: true
-    - name: "DirectStreaming"
-      enabled: true
-  
-  metric:
-    enabled: true
-    rules:
-      - name: "dapr_runtime_actor_.*"
-        enabled: false  # 禁用Actor指标以提高性能
-      - name: "dapr_runtime_component_.*"
-        enabled: true
+  selector:
+    matchLabels:
+      dapr.io/sidecar: "true"
+  namespaceSelector:
+    any: true
+  endpoints:
+    - port: dapr-http
+      path: /metrics
+      interval: 15s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: dapr-control-plane
+  namespace: dapr-system
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: dapr
+  namespaceSelector:
+    matchNames:
+      - dapr-system
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+```
+
+### 关键 PromQL 查询
+
+```promql
+# Dapr Sidecar 运行时操作延迟
+histogram_quantile(0.99, rate(dapr_runtime_latency_bucket[5m]))
+
+# 状态操作成功率
+sum(rate(dapr_runtime_state_operation_total{status="success"}[5m])) by (app_id, operation) /
+sum(rate(dapr_runtime_state_operation_total[5m])) by (app_id, operation)
+
+# Pub/Sub 消息处理延迟
+histogram_quantile(0.99, rate(dapr_runtime_pubsub_latency_bucket[5m]))
+
+# Actor 激活/停用次数
+rate(dapr_runtime_actor_activated_total[5m])
+rate(dapr_runtime_actor_deactivated_total[5m])
+
+# 服务调用延迟
+histogram_quantile(0.99, rate(dapr_runtime_service_invocation_latency_bucket[5m]))
+
+# 组件初始化失败
+dapr_runtime_component_init_total{status="error"}
+```
+
+### Prometheus 告警规则
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: dapr-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: dapr.rules
+      rules:
+        - alert: DaprSidecarDown
+          expr: up{job="dapr-sidecar"} == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Dapr sidecar {{ $labels.instance }} is down"
+
+        - alert: DaprHighStateOperationErrorRate
+          expr: |
+            sum(rate(dapr_runtime_state_operation_total{status="error"}[5m])) by (app_id) /
+            sum(rate(dapr_runtime_state_operation_total[5m])) by (app_id) > 0.05
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Dapr state operation error rate above 5% for {{ $labels.app_id }}"
+
+        - alert: DaprComponentInitFailed
+          expr: dapr_runtime_component_init_total{status="error"} > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Dapr component {{ $labels.component_name }} init failed for {{ $labels.app_id }}"
+
+        - alert: DaprHighPubSubLatency
+          expr: |
+            histogram_quantile(0.99, rate(dapr_runtime_pubsub_latency_bucket[5m])) > 5000
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Dapr Pub/Sub P99 latency above 5s for {{ $labels.app_id }}"
+```
 
 ---
+
+## 性能调优
+
+### Sidecar 资源优化
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: optimized-service
   namespace: production
 spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: optimized-service
   template:
     metadata:
+      labels:
+        app: optimized-service
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "optimized-service"
         dapr.io/config: "performance-config"
+        dapr.io/app-port: "8080"
+        dapr.io/app-protocol: "http"
         dapr.io/sidecar-cpu-limit: "200m"
-        dapr.io/sidecar-memory-limit: "512Mi"
+        dapr.io/sidecar-memory-limit: "256Mi"
         dapr.io/sidecar-cpu-request: "50m"
-        dapr.io/sidecar-memory-request: "128Mi"
+        dapr.io/sidecar-memory-request: "64Mi"
         dapr.io/sidecar-readiness-probe-delay-seconds: "3"
-        dapr.io/sidecar-readiness-probe-timeout-seconds: "3"
         dapr.io/sidecar-readiness-probe-period-seconds: "5"
-        dapr.io/sidecar-readiness-probe-threshold: "3"
+        dapr.io/sidecar-liveness-probe-delay-seconds: "10"
+        dapr.io/sidecar-liveness-probe-period-seconds: "10"
+        dapr.io/log-level: "info"
+        dapr.io/graceful-shutdown-seconds: "30"
+        dapr.io/block-shutdown-duration: "5s"
+    spec:
+      containers:
+        - name: optimized-service
+          image: optimized-service:v1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
 ```
 
-### 8.2 Caching and State Optimization
+### Dapr 控制平面调优
 
-```python
-# Python caching implementation
-import redis
-import json
-from functools import lru_cache
-import time
-
-class DaprCache:
-    def __init__(self):
-        self.redis_client = redis.Redis(
-            host='localhost',
-            port=6379,
-            db=0,
-            decode_responses=True
-        )
-        self.dapr_client = DaprClient()
-    
-    @lru_cache(maxsize=1000)
-    def get_cached_data(self, key, ttl=300):
-        """获取缓存数据，支持LRU和Redis双重缓存"""
-        # 首先检查内存缓存
-        try:
-            cached_value = self.redis_client.get(f"cache:{key}")
-            if cached_value:
-                return json.loads(cached_value)
-        except Exception as e:
-            print(f"Redis cache error: {e}")
-        
-        # 从Dapr状态存储获取
-        try:
-            state_response = self.dapr_client.get_state(
-                store_name='production-statestore',
-                key=key
-            )
-            data = json.loads(state_response.data)
-            
-            # 更新缓存
-            self.redis_client.setex(
-                f"cache:{key}",
-                ttl,
-                json.dumps(data)
-            )
-            
-            return data
-        except Exception as e:
-            print(f"Dapr state error: {e}")
-            return None
-    
-    def set_cached_data(self, key, value, ttl=300):
-        """设置缓存数据"""
-        try:
-            # 更新Dapr状态存储
-            self.dapr_client.save_state(
-                store_name='production-statestore',
-                key=key,
-                value=json.dumps(value)
-            )
-            
-            # 更新Redis缓存
-            self.redis_client.setex(
-                f"cache:{key}",
-                ttl,
-                json.dumps(value)
-            )
-            
-            # 清除LRU缓存
-            self.get_cached_data.cache_clear()
-            
-        except Exception as e:
-            print(f"Cache set error: {e}")
-
-# 使用示例
-cache = DaprCache()
-
-# 获取用户信息（自动缓存）
-user_data = cache.get_cached_data(f"user:{user_id}")
-
-# 更新用户信息（自动更新缓存）
-cache.set_cached_data(f"user:{user_id}", updated_user_data)
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dapr-operator
+  namespace: dapr-system
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: dapr-operator
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          env:
+            - name: OPERATOR_WATCH_NAMESPACE
+              value: ""
+            - name: OPERATOR_MAX_WORKLOADS
+              value: "10000"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dapr-placement
+  namespace: dapr-system
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: dapr-placement
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          env:
+            - name: PLACEMENT_MAX_ACTORS
+              value: "1000000"
+            - name: PLACEMENT_RAFT_LOG_STORE
+              value: "boltdb"
 ```
 
 ---
-*This document is based on enterprise-level Dapr platform practice experience and continuously updated with the latest technologies and best practices.*
+
+## 故障排查
+
+### 完整诊断脚本
+
+```bash
+#!/bin/bash
+
+echo "=== 1. Dapr 控制平面状态 ==="
+kubectl get pods -n dapr-system -o wide
+dapr status -k
+
+echo "=== 2. Sidecar 状态 ==="
+kubectl get pods -n production -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].name}{"\n"}{end}'
+
+echo "=== 3. Dapr Dashboard ==="
+echo "启动 Dashboard: dapr dashboard -k -n production -p 8080"
+
+echo "=== 4. 组件状态 ==="
+kubectl get components -n production -o wide
+kubectl get components -n production -o yaml | grep -A5 "type:"
+
+echo "=== 5. 健康检查 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/healthz
+echo ""
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/healthz/outbound
+
+echo "=== 6. 弹性配置 ==="
+kubectl get resiliency -n production -o yaml
+
+echo "=== 7. 配置检查 ==="
+kubectl get configuration -n production -o yaml
+
+echo "=== 8. Sidecar 日志 ==="
+kubectl logs -n production deploy/order-service -c daprd --tail=100 | grep -iE "error|warn|fatal"
+
+echo "=== 9. 指标 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/metrics | head -50
+
+echo "=== 10. 服务发现 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/metadata
+
+echo "=== 11. 状态存储测试 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s -X POST http://localhost:3500/v1.0/state/redis-statestore \
+  -H "Content-Type: application/json" \
+  -d '[{"key":"test-key","value":"test-value"}]'
+echo ""
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/state/redis-statestore/test-key
+
+echo "=== 12. Pub/Sub 测试 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s -X POST http://localhost:3500/v1.0/publish/kafka-pubsub/order-events \
+  -H "Content-Type: application/json" \
+  -d '{"orderId":"test-123","status":"created"}'
+
+echo "=== 13. 密钥访问测试 ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/secrets/production-secrets/db-password
+
+echo "=== 14. Actor 状态 (如适用) ==="
+kubectl exec -n production deploy/order-service -c daprd -- \
+  curl -s http://localhost:3500/v1.0/actors/order-actor/123/state
+```
+
+---
+
+## 最佳实践
+
+### 部署最佳实践
+
+```yaml
+部署最佳实践清单:
+  1. HA 模式: Operator 3副本, Placement 3副本 (Raft共识)
+  2. 命名空间隔离: 每个环境独立配置和组件
+  3. 组件密钥: 必须使用 secretKeyRef, 绝不使用明文
+  4. 渐进式启用: 先启用服务调用, 再逐步启用其他构建块
+  5. 资源限制: Sidecar 设置合理的 CPU/Memory 请求和限制
+  6. 健康检查: 配置 readiness 和 liveness 探针
+  7. 优雅关闭: 设置 grace-period 和 block-shutdown-duration
+  8. 版本管理: 使用 Helm 管理控制平面, GitOps 管理组件配置
+```
+
+### 安全最佳实践
+
+```yaml
+安全最佳实践清单:
+  1. mTLS 启用: 生产环境必须启用 mTLS
+  2. 访问控制: 配置 accessControl defaultAction: deny
+  3. 密钥后端: 生产环境使用 Vault 或云厂商 KMS
+  4. 组件认证: 所有组件连接使用 TLS 加密
+  5. 命名空间隔离: 不同环境的组件部署在不同命名空间
+  6. 审计日志: 记录所有 API 调用和组件操作
+  7. 证书轮换: 定期轮换 workload 证书
+  8. 最小权限: ServiceAccount 仅授予必要的 RBAC 权限
+```
+
+### 性能最佳实践
+
+```yaml
+性能最佳实践清单:
+  1. Sidecar 资源: CPU 50-200m, Memory 64-256Mi
+  2. Resiliency: 避免过度重试, 合理设置超时
+  3. Actor 状态存储: 使用高性能后端 (Redis)
+  4. 采样率: 生产 10%, 测试 100%
+  5. 连接池: 配置组件后端的连接池参数
+  6. 批量操作: 使用事务批量写入状态
+  7. 流式传输: 启用 DirectStreaming 减少跳数
+  8. 组件选择: 根据场景选择最佳后端 (状态:Redis, PubSub:Kafka)
+```
+
+### 运维最佳实践
+
+```yaml
+运维最佳实践清单:
+  1. Dapr Dashboard: 日常监控组件和 Sidecar 状态
+  2. 关键告警: sidecar 状态, 组件初始化失败, 证书过期
+  3. 组件后端: 监控后端服务健康 (Redis/Kafka/PostgreSQL)
+  4. 版本升级: 先升级控制平面, 再逐命名空间重启 Sidecar
+  5. 备份: 定期备份状态存储数据
+  6. 压测: 上线前进行性能基准测试
+  7. 日志: Sidecar 日志收集到集中式日志系统
+  8. 文档: 维护组件依赖关系和配置文档
+```
+
+---
+
+**文档版本**: v2.0
+**最后更新**: 2026-04-24
+**适用版本**: Dapr v1.15+

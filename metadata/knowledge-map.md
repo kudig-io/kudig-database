@@ -1,3 +1,26 @@
+---
+title: 知识图谱 (Knowledge Map)
+description: NET_FUND[domain-15 网络基础] --> K8S_NET[domain-5 K8s 网络]
+category: general
+tags:
+- k8s
+- docker
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 知识图谱 (Knowledge Map) 是什么
+- 如何 知识图谱 (Knowledge Map)
+trigger_keywords:
+- 知识图谱
+- Knowledge
+- Map
+---
+
 # 知识图谱 (Knowledge Map)
 
 > 知识模块间的依赖关系和学习路径

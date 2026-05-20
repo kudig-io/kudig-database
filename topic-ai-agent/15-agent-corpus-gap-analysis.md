@@ -1,3 +1,41 @@
+---
+title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+description: '# Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 15min
+intent_queries:
+- Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ 是什么
+- 如何 Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+trigger_keywords:
+- Agent
+- 语料库差距分析：kudig-database
+- 作为
+- K8s
+- 运维
+- Agent
+- 语料还缺什么？
+- ai
+---
+
+
 # Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
 
 > **文档类型**: 深度差距分析 | **最后更新**: 2026-03 | **关键词**: Agent 语料, 语料库差距, 结构化知识, K8s 运维 Agent, 知识补全, RAG, SOP, 症状映射, 安全护栏
@@ -659,6 +697,11 @@ version_diff_matrix:
       - version: "1.25"
         status: "GA"
         breaking: true
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
         note: "PodSecurityPolicy 移除，PSS 成为默认"
         migration: "从 PSP 迁移到 PSS"
         ref: "domain-7/06-pod-security-standards.md"

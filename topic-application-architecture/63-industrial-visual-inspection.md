@@ -1,3 +1,46 @@
+---
+title: 工业视觉检测架构设计
+description: '# 工业视觉检测架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- gpu
+- nvidia
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 视觉算法工程师
+- 工业自动化架构师
+- 后端开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 工业视觉检测 AOI Kubernetes 部署方案
+- YOLOv8 缺陷检测模型训练与部署
+- 边缘推理 GPU 集群架构设计
+- PCB/半导体/锂电池视觉检测方案
+- 机器视觉与 PLC/MES 系统集成
+trigger_keywords:
+- 工业视觉
+- AOI自动光学检测
+- 缺陷检测
+- YOLOv8
+- 边缘推理
+- GPU训练
+- 产线集成
+- 模型部署
+- 阿里云PAI
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-ai-algorithm
+- topic-iot-platform-architecture
+---
+
+
 # 工业视觉检测架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

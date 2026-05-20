@@ -1,3 +1,34 @@
+---
+title: 密钥管理深度指南
+description: '# 密钥管理深度指南'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- falco
+- ingress
+- gateway
+- rbac
+- networkpolicy
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 密钥管理深度指南 是什么
+- 如何 密钥管理深度指南
+trigger_keywords:
+- 密钥管理深度指南
+- dictionary
+title_en: Secrets
+---
+
+
 # 密钥管理深度指南
 
 ## 概述

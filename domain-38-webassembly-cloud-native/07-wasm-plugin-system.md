@@ -1,3 +1,42 @@
+---
+title: Wasm 插件系统 (Wasm Plugin System)
+description: 基于 WebAssembly 的插件系统通过沙箱安全隔离与高性能执行，实现网络代理、API 网关和服务网格的可编程扩展。
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- prometheus
+- istio
+- envoy
+- docker
+- opa
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Wasm 插件系统 (Wasm Plugin System) 是什么
+- 如何 Wasm 插件系统 (Wasm Plugin System)
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Wasm
+- 插件系统
+- Wasm
+- Plugin
+- System
+- webassembly
+- cloud
+- native
+---
+
+
 # Wasm 插件系统 (Wasm Plugin System)
 
 > 基于 WebAssembly 的插件系统通过沙箱安全隔离与高性能执行，实现网络代理、API 网关和服务网格的可编程扩展。

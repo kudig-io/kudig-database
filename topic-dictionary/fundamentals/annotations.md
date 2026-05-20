@@ -1,3 +1,29 @@
+---
+title: 注解
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- helm
+- ingress
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 注解 是什么
+- 如何 注解
+trigger_keywords:
+- 注解
+- dictionary
+title_en: Annotations
+---
+
+
 # 注解
 
 ## 概述

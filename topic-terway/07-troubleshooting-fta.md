@@ -1,3 +1,41 @@
+---
+title: 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
+description: OR0 --> NET[节点网络异常]
+category: terway
+tags:
+- k8s
+- terway
+- networking
+- alicloud
+- kubelet
+- calico
+- daemonset
+- ingress
+- networkpolicy
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+estimated_read_time: 20min
+intent_queries:
+- Terway 故障树速查 (FTA Troubleshooting Quick Reference) 是什么
+- 如何 Terway 故障树速查 (FTA Troubleshooting Quick Reference)
+- Terway 故障树速查 (FTA Troubleshooting Quick Reference) 故障排查
+- Terway 故障树速查 (FTA Troubleshooting Quick Reference) 排障步骤
+trigger_keywords:
+- Terway
+- 故障树速查
+- FTA
+- Troubleshooting
+- Quick
+- Reference
+- terway
+---
+
+
 # 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32+ | **Terway 版本**: v1.5+ | **最后更新**: 2026-05
@@ -502,7 +540,273 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
 
 ---
 
-## 13. 交叉引用
+## 13. IPVLAN 模式故障诊断（Terway v1.4+）
+
+> **适用场景**: Terway IPVLAN 模式（ENIIP 模式）下的故障排查
+
+### 13.1 决策树
+
+```
+Pod 网络不可用，且 Terway 运行在 IPVLAN 模式下
+    |
+    +-- 检查 IPVLAN 网络策略是否生效
+    |       |
+    |       +-- 策略不生效 --> IPVLAN 网络策略不生效 (evt_ipvlan_policy)
+    |       |       原因: 内核版本 < 5.10 不支持
+    |       |
+    |       +-- 连接泄漏 --> IPVLAN 连接泄漏 (evt_ipvlan_leak)
+    |       |       原因: netlink socket fd 耗尽
+    |       |
+    |       +-- MTU 问题 --> IPVLAN MTU 问题 (evt_ipvlan_mtu)
+    |               原因: 巨型帧 (9000) 导致分片
+```
+
+### 13.2 诊断命令
+
+| 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
+|---------|------|---------|----------|------|
+| `cat_ipvlan` | IPVLAN 异常分类 | `kubectl get pod <pod> -o jsonpath='{.metadata.annotations.aliyun.com/network-mode}'` | 显示 "ipvlan" | 进入 IPVLAN 子树 |
+| `evt_ipvlan_policy` | IPVLAN 网络策略不生效 | `uname -r` | 内核版本 < 5.10 | 确认根因（内核不兼容） |
+| | | `cat /sys/module/ipvlan/parameters/mtu` | MTU 值异常 | 进一步检查 |
+| `evt_ipvlan_leak` | IPVLAN 连接泄漏 | `ss -tlnp \| grep -c ipvlan` | 连接数远超预期 | 确认根因（资源耗尽） |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "netlink\|socket"` | 含 netlink 错误 | 确认根因 |
+| `evt_ipvlan_mtu` | IPVLAN MTU 问题 | `ip link show \| grep mtu` | MTU 不一致（1500 vs 9000） | 确认根因 |
+| | | `ping -s 1400 -M do <target-ip>` | "message too long" | 确认根因 |
+
+### 13.3 解决方案
+
+| 子事件 | 处置 |
+|--------|------|
+| IPVLAN 网络策略不生效 | 1) 升级内核到 5.10+ 2) 或回退到 ENI 模式 3) 确认 Calico 版本 >= 3.24 |
+| IPVLAN 连接泄漏 | 1) 检查 netlink socket fd 使用率 `ss -s` 2) 重启 Terway Daemon 释放资源 3) 添加 netlink 限制配置 |
+| IPVLAN MTU 问题 | 1) `ip link set dev ipvlan0 mtu 1500` 临时修复 2) 检查 Pod 和 ENI 的 MTU 配置 3) 统一为 1500 或 9000 |
+
+---
+
+## 14. BGP 模式故障诊断（Terway v1.5+）
+
+> **适用场景**: Terway BGP 模式的动态路由故障
+
+### 14.1 决策树
+
+```
+Terway BGP 会话中断或路由黑洞
+    |
+    +-- 检查 BGP 会话状态
+    |       |
+    |       +-- BGP 会话中断 --> BGP 会话中断 (evt_bgp_session_down)
+    |       |       原因: Terway BGP 进程崩溃
+    |       |
+    |       +-- 路由黑洞 --> BGP 路由黑洞 (evt_bgp_route_blackhole)
+    |       |       原因: 路由优先级冲突
+    |       |
+    |       +-- AS 号冲突 --> BGP AS 号冲突 (evt_bgp_as_conflict)
+    |               原因: 多集群使用相同 AS 号
+```
+
+### 14.2 诊断命令
+
+| 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
+|---------|------|---------|----------|------|
+| `cat_bgp` | BGP 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bgp\|bird"` | 含 BGP 错误 | 进入 BGP 子树 |
+| `evt_bgp_session_down` | BGP 会话中断 | `kubectl exec -n kube-system <terway-pod> -- ip bgp show` | 无 BGP 邻居或状态 down | 确认根因 |
+| | | `ps aux \| grep bird \| grep -v grep` | Bird 进程不存在 | 确认根因 |
+| `evt_bgp_route_blackhole` | BGP 路由黑洞 | `ip route show \| grep -E "bird\|bgp"` | 无 BGP 路由 | 确认根因 |
+| | | `ip route get <target-ip>` | 路由指向错误 | 进一步检查 |
+| `evt_bgp_as_conflict` | BGP AS 号冲突 | `kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "AS.*conflict\|asn"` | 含 AS 号冲突日志 | 确认根因 |
+| | | `ip bgp peers` | 多个节点使用相同 AS | 确认根因 |
+
+### 14.3 解决方案
+
+| 子事件 | 处置 |
+|--------|------|
+| BGP 会话中断 | 1) 检查 Terway BGP 进程状态 2) 重启 Terway DaemonSet 3) 检查 Bird 配置 |
+| BGP 路由黑洞 | 1) 检查 VPC 路由表是否有冲突 2) 验证 BGP 路由优先级 3) 添加静态路由覆盖 |
+| BGP AS 号冲突 | 1) 检查多集群 Terway 配置 2) 为每个集群分配唯一 AS 号 3) 更新 Bird 配置 |
+
+---
+
+## 15. Service/Ingress 流量异常诊断
+
+### 15.1 决策树
+
+```
+Service/Ingress 流量异常（Terway 模式下）
+    |
+    +-- kube-proxy 与 Terway 冲突
+    |       |
+    |       +-- iptables 规则冲突 --> kube-proxy 与 Terway 冲突 (evt_kube_proxy_conflict)
+    |       |       原因: 双协议栈导致规则重叠
+    |       |
+    |       +-- NodePort 端口冲突 --> NodePort 端口冲突 (evt_nodeport_conflict)
+    |               原因: 多组件占用同一端口
+    |
+    +-- LoadBalancer 注解失效
+            |
+            +-- Terway CLB 注解配置错误 --> LoadBalancer 注解失效 (evt_clb_annot_error)
+                    原因: 注解 key/value 不符合 Terway 预期
+```
+
+### 15.2 诊断命令
+
+| 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
+|---------|------|---------|----------|------|
+| `cat_service` | Service 异常分类 | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "kube-proxy\|iptables\|nodeport"` | 含冲突日志 | 进入 Service 子树 |
+| `evt_kube_proxy_conflict` | kube-proxy 与 Terway 冲突 | `iptables -L -n -t nat \| grep -c "TERWAY"` | 规则数异常多 | 确认根因 |
+| | | `iptables -L -n -t nat \| grep -E "KUBE\|TERWAY" \| wc -l` | 两套规则并存 | 确认根因 |
+| `evt_nodeport_conflict` | NodePort 端口冲突 | `ss -tlnp \| grep :<nodeport>` | 多个进程监听同一端口 | 确认根因 |
+| | | `netstat -tlnp \| grep <nodeport>` | 显示冲突进程 | 确认根因 |
+| `evt_clb_annot_error` | CLB 注解配置错误 | `kubectl describe svc <name> \| grep -E "annotations\|alb"` | 注解格式错误 | 确认根因 |
+| | | `kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "clb\|loadbalancer\|annotation"` | 含注解错误 | 确认根因 |
+
+### 15.3 解决方案
+
+| 子事件 | 处置 |
+|--------|------|
+| kube-proxy 与 Terway 冲突 | 1) 禁用 kube-proxy（Terway 已接管网络）2) 检查 iptables 规则清理 3) 确认 `--cleanup-iptables` 启动参数 |
+| NodePort 端口冲突 | 1) 检查占用端口的进程 `ss -tlnp \| grep :<port>` 2) 修改 Terway NodePort 范围 3) 协调多组件端口分配 |
+| CLB 注解配置错误 | 1) 检查 Service 注解格式 2) 确认使用 Terway 预期的注解 key 3) 参考 Terway 文档的注解示例 |
+
+---
+
+## 16. Terway 故障树完整速查（TE-9 全部底事件）
+
+```
+TE-9: Terway 网络故障 [OR门] 🟠 P1
+│
+├── IE-9.1 ENI 模式故障 [OR门]
+│   ├── BE-9.1 ENI 多队列压力
+│   │   ├── BE-9.1.1 单 Pod ENI 带宽瓶颈
+│   │   │   └── BE-9.1.1.1 高并发 Pod 导致 VSwitch 带宽饱和
+│   │   └── BE-9.1.2 ENI 绑定数超限
+│   │       └── BE-9.1.2.1 ecs.g5 实例最大 3 个 ENI，实际需求 5 个
+│   │
+│   ├── BE-9.2 Pod IP 分配失败
+│   │   ├── BE-9.2.1 VPC CIDR 子网容量耗尽
+│   │   │   └── BE-9.2.1.1 集群节点数 > 200 导致 Pod IP 不够
+│   │   └── BE-9.2.2 IPAM 锁竞争导致分配超时
+│   │
+│   └── BE-9.3 ENI 安全组冲突
+│       └── BE-9.3.1 安全组规则被覆盖导致 Pod 无法通信
+│
+├── IE-9.2 IPVLAN 模式故障 [OR门]
+│   ├── BE-9.4 IPVLAN 网络策略不生效
+│   │   └── BE-9.4.1 内核版本 < 5.10 不支持 ipvlan network policy
+│   │
+│   ├── BE-9.5 IPVLAN 连接泄漏
+│   │   └── BE-9.5.1 netlink socket fd 耗尽
+│   │
+│   └── BE-9.6 IPVLAN MTU 问题
+│       └── BE-9.6.1 巨型帧 (9000) 导致分片
+│
+├── IE-9.3 BGP 模式故障 [OR门]
+│   ├── BE-9.7 BGP 会话中断
+│   │   └── BE-9.7.1 Terway BGP 进程崩溃
+│   │
+│   ├── BE-9.8 BGP 路由黑洞
+│   │   └── BE-9.8.1 路由优先级冲突
+│   │
+│   └── BE-9.9 BGP AS 号冲突
+│       └── BE-9.9.1 多集群使用相同 AS 号导致路由混乱
+│
+└── IE-9.4 Service/Ingress 流量异常 [OR门]
+    ├── BE-9.10 kube-proxy 与 Terway 冲突
+    │   └── BE-9.10.1 双协议栈导致 iptables 规则冲突
+    │
+    └── BE-9.11 LoadBalancer 注解失效
+        └── BE-9.11.1 Terway CLB 注解配置错误
+```
+
+**快速索引**:
+
+| BE 编号 | 故障现象 | 诊断命令 | 快速修复 |
+|:---|:---|:---|:---|
+| BE-9.1.1.1 | VSwitch 带宽饱和 | `aliyun vpc DescribeVSwitches` | 扩展 vSwitch 或增加节点 |
+| BE-9.1.2.1 | ENI 绑定数超限 | `kubectl describe node \| grep aliyun.com/eni-max` | 升级实例规格 |
+| BE-9.2.1.1 | VPC CIDR 耗尽 | `aliyun vpc DescribeVpcs` | 扩展 VPC CIDR |
+| BE-9.4.1 | 内核版本不兼容 | `uname -r` | 升级内核到 5.10+ |
+| BE-9.5.1 | netlink 资源耗尽 | `ss -s` | 重启 Terway Daemon |
+| BE-9.9.1 | AS 号冲突 | `ip bgp peers` | 重新分配唯一 AS 号 |
+
+---
+
+## 17. 与症状快速映射层集成
+
+```yaml
+# symptom-mapping-layer.md 引用
+symptom: "Terway 网络故障"
+category: "network"
+cluster_type: "ACK"
+aliases:
+  - "Pod 无 IP"
+  - "ENI 分配失败"
+  - "Terway 异常"
+
+related_docs:
+  - path: "07-troubleshooting-fta.md"
+    type: "fta"
+    relevance: 0.98
+  - path: "03-usage.md"
+    type: "structural"
+    relevance: 0.95
+  - path: "../topic-fta/kubernetes-fta-full-analysis-v2.md"
+    type: "fta"
+    relevance: 0.95
+
+auto_heal_actions:
+  - action_id: "HA-9.2.1.1"
+    description: "扩展 VPC CIDR 或添加 vSwitch"
+    risk_level: "high"
+    requires_approval: true
+    command: |
+      aliyun vpc CreateVSwitch --CidrBlock <new-cidr> --VpcId <vpc-id> --ZoneId <zone>
+```
+
+---
+
+## 18. 错误信息速查目录（扩展版）
+
+| 错误信息 | 来源 | 根因 | 快速修复 |
+|---------|------|------|---------|
+| `failed to allocate pod IP: no available IP` | terway Pod | vSwitch IP 池耗尽 | 扩展 vSwitch CIDR / 添加 vSwitch |
+| `exceeded eni quota` | terway Pod | 实例 ENI 数量达上限 | 升级实例规格 / 切换 eniip 模式 |
+| `fixed IP already in use` | terway Pod | 固定 IP 被其他 Pod 占用 | 检查 Pod Annotation / 重启冲突 Pod |
+| `pool is empty` | terway IPAM | IP 资源池耗尽 | 检查 vSwitch / 清理孤儿 IP |
+| `instance type eni limit exceeded` | terway | 实例规格 ENI 限制 | 升级实例规格 |
+| `Destination Host Unreachable` | Pod 内 ping | 跨节点路由缺失/VPC 不通 | 检查 VPC 路由表 / 安全组 |
+| `no route to host` | Pod 内命令 | VPC 路由缺失 | 检查 VPC 路由表 |
+| `route conflict detected` | terway Pod | 自定义路由与 Pod CIDR 冲突 | 清理冲突路由 |
+| `Throttling.User` | 阿里云 API | API 调用频率超限 | 降低 Pod 创建速率 / 申请限流放宽 |
+| `InvalidVSwitchId.NotFound` | 阿里云 API | vSwitch 不存在或已删除 | 更新 eni-config 中 vSwitch ID |
+| `InvalidSecurityGroupId.NotFound` | 阿里云 API | 安全组 ID 不存在 | 更新 eni-config 中安全组 ID |
+| `AttachNetworkInterface failed` | terway Pod | ENI 绑定 ECS 失败 | 检查 ECS 状态 / RAM 权限 / 可用区 |
+| `bindquota exceeded` | terway Pod | 节点 ENI 绑定配额超限 | 升级实例规格 / 释放未使用 ENI |
+| `no available ENI slot` | terway Pod | 无可用 ENI 槽位 | 升级实例规格 / 切换 eniip 模式 |
+| `ENI status mismatch` | terway Pod | ENI 状态不一致 | 重启 Terway / 手动清理残留 ENI |
+| `stale ENI` / `orphan ENI` | terway Pod | 残留 ENI 未清理 | `terway-cli show` 比对 / 手动清理 |
+| `IP conflict` | terway Pod | IP 被多个资源使用 | 检查 VPC IP 使用 / 重启冲突 Pod |
+| `duplicate IP` | terway Pod | 重复 IP 分配 | 重启 Terway Daemon / 检查 IP 分配逻辑 |
+| `IP not released` / `stale IP` | terway Pod | IP 泄漏/未回收 | `terway-cli garbage-collect` |
+| `invalid CNI configuration` | terway Pod | CNI 配置文件错误 | 检查 `/etc/cni/net.d/` |
+| `error loading CNI config` | terway Pod | CNI 配置加载失败 | 检查 ConfigMap / CNI 版本兼容性 |
+| `terway daemon not ready` | terway Pod | Terway Daemon 未就绪 | 检查 DaemonSet / Pod 日志 |
+| `CNI plugin not found` | terway Pod | CNI 二进制缺失 | `ls /opt/cni/bin/terway` |
+| `failed to add route` | terway Pod | 路由下发失败 | `ip route show` / 重启 Terway |
+| `iptables error` | terway Pod | iptables 规则配置失败 | `iptables -L -n -t nat` / 重启 Terway |
+| `connection refused` | 应用/Pod | 服务端未监听或安全组阻断 | 检查服务状态 / 安全组 |
+| `connection timed out` | 应用/Pod | 安全组阻断或网络不可达 | 检查安全组 / VPC 路由 |
+| `no route to host` | Pod 内命令 | 路由缺失 | 检查 VPC 路由表 |
+| `ServiceUnavailable` | 阿里云 API | 云服务暂时不可用 | 等待恢复 / 配置重试策略 |
+| `dial tcp: i/o timeout` | 应用日志 | 跨节点连接超时 | 检查 VPC 路由 / 安全组 |
+| `message too long` / `Frag needed` | ping 输出 | MTU 不一致 | 统一 MTU 配置 |
+| `soft lockup` / `watchdog timeout` | 内核日志 | 节点网络栈异常 | 检查内核版本 / 升级内核 |
+| **新增 IPVLAN 相关** | | | |
+| `ipvlan: policy not supported` | terway Pod | 内核不支持 IPVLAN 网络策略 | 升级内核或回退 ENI 模式 |
+| `netlink: too many open files` | terway Pod | netlink socket fd 耗尽 | 重启 Terway / 增加 ulimit |
+| `bgp: session down` | terway Pod | BGP 会话中断 | 重启 Terway BGP 组件 |
+| `bgp: route blackhole` | terway Pod | BGP 路由黑洞 | 检查 AS 号配置 / VPC 路由表 |
+| `kube-proxy conflict` | terway Pod | kube-proxy 与 Terway 规则冲突 | 禁用 kube-proxy 或清理 iptables |
+| `clb annotation error` | terway Pod | CLB 注解格式错误 | 检查 Service annotations 格式 |
 
 | 文档 | 路径 | 内容 |
 |------|------|------|

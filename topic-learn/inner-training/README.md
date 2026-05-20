@@ -1,19 +1,105 @@
+---
+title: ACK/ACR/K8S 内部培训 1 个月学习计划
+description: '- "集群管理"'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- flannel
+- docker
+- ingress
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- ACK/ACR/K8S 内部培训 1 个月学习计划 是什么
+- 如何 ACK/ACR/K8S 内部培训 1 个月学习计划
+trigger_keywords:
+- ACK
+- ACR
+- K8S
+- 内部培训
+- 个月学习计划
+- learn
+---
+
 # ACK/ACR/K8S 内部培训 1 个月学习计划
+
+```yaml
+---
+title: ACK/ACR/K8S 内部培训一个月学习计划
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "ACK ACR培训内容"
+  - "阿里云Kubernetes培训"
+  - "一个月学习计划"
+  - "内部培训体系"
+  - "SRE工程师培训"
+trigger_keywords:
+  - "ACK培训"
+  - "ACR培训"
+  - "阿里云容器"
+  - "Kubernetes培训"
+  - "一个月计划"
+  - "内部培训"
+  - "集群管理"
+  - "安全认证"
+reading_level: intermediate
+audience:
+  - 内部运维工程师
+  - 技术支持人员
+  - SRE工程师
+estimated_read_time: 25min
+related_domains:
+  - domain-1-architecture-fundamentals
+  - domain-3-control-plane
+  - domain-4-workloads
+  - domain-7-security
+  - domain-12-troubleshooting
+related_topics:
+  - topic-learn/inner-training/README
+  - topic-learn/inner-training/week-1-ack-acr-lifecycle
+  - topic-learn/inner-training/week-2-security-monitoring
+  - topic-learn/inner-training/week-3-node-workload
+  - topic-learn/inner-training/week-4-network-storage
+id: INNER-TRAINING-001
+topic: training
+type: training-plan
+tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
+---
+```
 
 > **目标人群**: 内部运维工程师、技术支持人员 | **投入**: 4+ 小时/天 | **知识库**: kudig-database (668+ 篇)
 
 ---
 
+## 概述
+
+本学习计划为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 Kubernetes 三大技术栈。通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
+
+课程设计遵循知识依赖关系，从 ACK/ACR 服务基础开始，经过安全认证和节点管理，最终掌握网络和存储的核心技能。每个学习阶段有明确的产出目标和评估标准，通过每周的自测检验和实践项目确保学习效果。
+
+**培训目标**: 完成培训后能够独立处理 ACK/ACR/K8S 日常运维工单，具备集群管理、安全配置、故障排查的基本能力。
+
+---
+
 ## 快速导航
 
-| 周次 | 主题 | 目录 |
-|------|------|------|
-| Week 1 | ACK/ACR 基础与集群生命周期 | [week-1-ack-acr-lifecycle/](./week-1-ack-acr-lifecycle/) |
-| Week 2 | 安全认证与监控运维 | [week-2-security-monitoring/](./week-2-security-monitoring/) |
-| Week 3 | 节点与工作负载管理 | [week-3-node-workload/](./week-3-node-workload/) |
-| Week 4 | 网络与存储 | [week-4-network-storage/](./week-4-network-storage/) |
-| - | 实践项目 | [projects/](./projects/) |
-| - | 补充资源 | [resources/](./resources/) |
+| 周次 | 主题 | 核心产出 | 目录 |
+|------|------|---------|------|
+| Week 1 | ACK/ACR 基础与集群生命周期 | 集群全生命周期操作能力 | [week-1-ack-acr-lifecycle/](./week-1-ack-acr-lifecycle/) |
+| Week 2 | 安全认证与监控运维 | 安全体系 + 监控基础 | [week-2-security-monitoring/](./week-2-security-monitoring/) |
+| Week 3 | 节点与工作负载管理 | 节点池 + Pod 运维能力 | [week-3-node-workload/](./week-3-node-workload/) |
+| Week 4 | 网络与存储 | 网络 + 存储实操能力 | [week-4-network-storage/](./week-4-network-storage/) |
+| - | 实践项目 | 5 个递进式项目 | [projects/](./projects/) |
+| - | 补充资源 | 知识图谱模板 | [resources/](./resources/) |
 
 ---
 
@@ -31,6 +117,16 @@ Week 1: ACK/ACR 基础       Week 2: 安全认证与监控    Week 3: 节点与�
     v                         v                         v                         v
  产出: 集群全生命周期      产出: 安全体系+监控基础   产出: 节点池+Pod运维能力  产出: 网络+存储实操能力
 ```
+
+### 每周学习内容
+
+**Week 1 (Day 1-7)**: ACK/ACR 服务架构理解 → SDK/API 操作 → 控制台使用 → 集群创建 → 集群删除 → 集群升级 → 证书管理
+
+**Week 2 (Day 8-14)**: RBAC 权限配置 → RAM 集成 → 漏洞管理 → 安全最佳实践 → 审计日志 → 集群监控 → 配额管理
+
+**Week 3 (Day 15-21)**: 节点基础 → 节点进阶(标签/污点) → 节点池基础 → 节点池进阶(扩缩容) → Pod 基础 → Pod 进阶 → 组件运维
+
+**Week 4 (Day 22-28)**: Service → Ingress → Terway → Flannel → 存储卷创建/删除 → 存储卷挂载 → 综合复习
 
 ---
 
@@ -52,6 +148,17 @@ ACK/ACR 管控层 ──> ACK SDK/API ──> 控制台操作
 网络 (Service + Ingress + CNI) ──> 存储 (PV/PVC)
 ```
 
+### 关键依赖说明
+
+| 学习阶段 | 依赖的前置知识 | 为什么依赖 |
+|----------|--------------|-----------|
+| 集群创建 | ACK 架构理解 | 需要理解参数含义才能正确配置 |
+| RBAC 配置 | RAM 集成 | ACK 使用两层权限模型 |
+| 审计日志 | 监控基础 | 审计日志存储在 SLS 中 |
+| 节点池管理 | 节点基础 | 节点池是节点的集合管理 |
+| Service/Ingress | 网络基础 | 需要理解 K8s 网络模型 |
+| 存储管理 | CSI 插件 | 存储通过 CSI 插件实现 |
+
 ---
 
 ## 学习方法论
@@ -71,6 +178,9 @@ ACK/ACR 管控层 ──> ACK SDK/API ──> 控制台操作
 
 ### 5. 结构化记录
 每个主题学完后，产出一张思维导图或笔记摘要，形成个人知识图谱。
+
+### 6. SR 驱动学习
+结合实际处理的 SR（Service Request）巩固所学知识，从实践中学习效果最佳。
 
 ---
 
@@ -119,6 +229,17 @@ ACK/ACR 管控层 ──> ACK SDK/API ──> 控制台操作
 
 ---
 
+## 每日时间分配建议
+
+| 环节 | 时间 | 内容 |
+|------|------|------|
+| **理论阅读** | 1.5h | 阅读必读文档，记录关键概念 |
+| **实践操作** | 2-2.5h | 完成 day 文件中的实践任务 |
+| **费曼复述** | 0.5h | 用自己的语言复述核心概念 |
+| **记录总结** | 0.5h | 更新个人知识图谱 |
+
+---
+
 ## 如何使用本学习计划
 
 1. **按周顺序学习**: 从 Week 1 开始，按 Day 1 -> Day 7 顺序推进
@@ -126,5 +247,26 @@ ACK/ACR 管控层 ──> ACK SDK/API ──> 控制台操作
 3. **周末检验**: 每周末完成 `checkpoint.md` 中的自测题
 4. **项目驱动**: 每周末完成一个实践项目，巩固所学知识
 5. **记录成长**: 在 `resources/knowledge-map.md` 中记录个人知识图谱
+6. **结合 SR**: 在实际工作中处理 SR 时，对照学习内容加深理解
+
+---
+
+## 要点总结
+
+- **4 周路径**: ACK/ACR 基础 → 安全监控 → 节点工作负载 → 网络存储
+- **每天 4-5 小时**: 理论 <= 1.5h，实践 >= 2.5h，费曼复述 0.5h
+- **5 个项目**: 每周末一个递进式实践项目
+- **668+ 篇知识库**: 按需深入，结合 day 文件中的必读文档
+- **SR 驱动**: 在实际工单处理中巩固所学知识
+- **两层权限**: RAM (云平台) + RBAC (集群内) 是 ACK 安全的基础
+
+---
+
+## 延伸阅读
+
+- [ACK 产品文档](https://help.aliyun.com/product/85222.html)
+- [ACR 产品文档](https://help.aliyun.com/product/60716.html)
+- [Kubernetes 官方文档](https://kubernetes.io/docs/home/)
+- [阿里云容器服务最佳实践](https://help.aliyun.com/document_detail/2627792.html)
 
 开始你的 ACK/ACR/K8S 内部培训之旅吧!

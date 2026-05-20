@@ -1,3 +1,51 @@
+---
+title: 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
+description: '# 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- prometheus
+- docker
+- statefulset
+- daemonset
+- job
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 是什么
+- 如何 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 多租户管理与资源隔离
+- Multi-Tenant
+- Management
+- Resource
+- Isolation
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v1.0 | **最后更新**: 2026-02
@@ -332,6 +380,11 @@ roleRef:
 ```yaml
 # 租户Pod安全标准
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 kind: PodSecurityPolicy
 metadata:
   name: tenant-restricted-psp

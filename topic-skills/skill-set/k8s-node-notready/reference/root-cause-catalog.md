@@ -1,3 +1,37 @@
+---
+title: 根因分类 / Root Cause Catalog
+description: '- [RC-006 节点与 apiserver 网络不通](#rc-006-节点与-apiserver-网络不通)'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- kubelet
+- containerd
+- cri-o
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 根因分类 / Root Cause Catalog 是什么
+- 如何 根因分类 / Root Cause Catalog
+trigger_keywords:
+- 根因分类
+- Root
+- Cause
+- Catalog
+- skills
+---
+
+
 # 根因分类 / Root Cause Catalog
 
 > **来源**: SKILL-NODE-001 v1.0 — 节点 NotReady 诊断与修复

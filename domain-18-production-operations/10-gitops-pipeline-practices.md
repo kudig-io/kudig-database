@@ -1,3 +1,37 @@
+---
+title: 10-GitOps流水线实践
+description: '# 10-GitOps流水线实践'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- prometheus
+- grafana
+- helm
+- argocd
+- flux
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- GitOps流水线实践 是什么
+- 如何 GitOps流水线实践
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- GitOps流水线实践
+- production
+- operations
+---
+
+
 # 10-GitOps流水线实践
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

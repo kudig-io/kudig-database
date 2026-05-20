@@ -1,3 +1,48 @@
+---
+title: Domain-8 可观测性领域查漏补缺质量报告
+description: 1. **22-monitoring-playbooks.md** - 监控运维手册与应急响应 (775行)
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- ebpf
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-8 可观测性领域查漏补缺质量报告 是什么
+- 如何 Domain-8 可观测性领域查漏补缺质量报告
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- Domain-8
+- 可观测性领域查漏补缺质量报告
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
 # Domain-8 可观测性领域查漏补缺质量报告
 
 ## 📋 项目概况

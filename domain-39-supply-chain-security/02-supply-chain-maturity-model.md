@@ -1,3 +1,42 @@
+---
+title: 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
+description: '# 供应链安全成熟度模型 (Supply Chain Security Maturity Model)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- apiserver
+- prometheus
+- grafana
+- helm
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 是什么
+- 如何 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- 供应链安全成熟度模型
+- Supply
+- Chain
+- Security
+- Maturity
+- Model
+- supply
+- chain
+---
+
+
 # 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 
 > 建立系统化的供应链安全成熟度评估和改进框架，帮助组织科学地规划和推进安全能力建设。

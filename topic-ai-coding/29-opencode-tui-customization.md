@@ -1,3 +1,32 @@
+---
+title: TUI 定制：快捷键、主题与界面
+description: '**文档类型**: 定制指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, TUI, Keybinds, Themes, Leader Key, Bubble Tea, tui.json,
+  Custom Theme'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- TUI 定制：快捷键、主题与界面 是什么
+- 如何 TUI 定制：快捷键、主题与界面
+trigger_keywords:
+- TUI
+- 定制：快捷键
+- 主题与界面
+- ai
+- coding
+---
+
 # TUI 定制：快捷键、主题与界面
 
 > **文档类型**: 定制指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, TUI, Keybinds, Themes, Leader Key, Bubble Tea, tui.json, Custom Theme

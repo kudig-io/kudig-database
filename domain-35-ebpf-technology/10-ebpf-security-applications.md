@@ -1,3 +1,42 @@
+---
+title: eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
+description: '# eBPF 安全应用案例 (eBPF Security Applications and Use Cases)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- prometheus
+- grafana
+- istio
+- helm
+- containerd
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 30min
+intent_queries:
+- eBPF 安全应用案例 (eBPF Security Applications and Use Cases) 是什么
+- 如何 eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- eBPF
+- 安全应用案例
+- eBPF
+- Security
+- Applications
+- and
+- Use
+- Cases
+---
+
+
 # eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 
 > **文档版本**: v1.0 | **适用版本**: Linux Kernel 5.15+ | **更新日期**: 2026-03-04  

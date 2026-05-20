@@ -1,3 +1,30 @@
+---
+title: Pod 安全标准
+description: '# Pod 安全标准'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- opa
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod 安全标准 是什么
+- 如何 Pod 安全标准
+trigger_keywords:
+- Pod
+- 安全标准
+- dictionary
+title_en: Pods
+---
+
+
 # Pod 安全标准
 
 ## 概述

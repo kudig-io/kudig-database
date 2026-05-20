@@ -1,3 +1,29 @@
+---
+title: Ingress
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Ingress 是什么
+- 如何 Ingress
+trigger_keywords:
+- Ingress
+- dictionary
+title_en: Ingress
+---
+
+
 # Ingress
 
 ## 概述

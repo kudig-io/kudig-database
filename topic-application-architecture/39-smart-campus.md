@@ -1,3 +1,50 @@
+---
+title: 智慧园区架构设计
+description: '# 智慧园区架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- job
+- cronjob
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 智慧园区架构师
+- 楼宇智能化工程师
+- 园区IT负责人
+- 智慧城市开发者
+estimated_read_time: 5min
+intent_queries:
+- smart campus kubernetes architecture
+- 智慧园区K8s部署方案
+- 智慧楼宇IoT平台
+- 智慧园区数字孪生
+- 智慧安防AI系统
+trigger_keywords:
+- 智慧园区
+- 智能楼宇
+- 园区管理
+- 智慧通行
+- 智慧停车
+- 能耗管理
+- 智慧安防
+- 智慧园区架构
+- 智慧楼宇K8s
+- 园区IoT
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-12-troubleshooting
+- domain-26-service-mesh-microservices
+related_topics:
+- digital-twin-city
+- energy-power-architecture
+- smart-water
+---
+
+
 # 智慧园区架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

@@ -1,3 +1,56 @@
+---
+title: 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools)
+description: 本文档从资深性能工程师视角，深入解析Kubernetes环境下各类性能分析工具的技术原理、部署实践和调优策略，涵盖应用层剖析、内核级探测、持续性能监控等核心技术，结合大规模生产环境优化经验，为企业构建全方位性能洞察和智能调优能力提供专业指导。
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- etcd
+- apiserver
+- scheduler
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 性能分析与调优工具 (Performance Profiling & Optimization Tools) 是什么
+- 如何 性能分析与调优工具 (Performance Profiling & Optimization Tools)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 性能分析与调优工具
+- Performance
+- Profiling
+- Optimization
+- Tools
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级

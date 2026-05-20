@@ -1,3 +1,36 @@
+---
+title: 02 - Kubernetes 故障模式与根因分析字典
+description: '**本文定位**: 这是一份 Kubernetes 故障分析的完整指南，涵盖故障分类、根因分析方法论、FMEA 分析、MTTR 优化、复盘流程和预防体系，帮助团队系统性地处理和预防故障。'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- jaeger
+- coredns
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes 故障模式与根因分析字典 是什么
+- 如何 Kubernetes 故障模式与根因分析字典
+trigger_keywords:
+- Kubernetes
+- 故障模式与根因分析字典
+- dictionary
+title_en: Failure Patterns Analysis
+---
+
+
+
 # 02 - Kubernetes 故障模式与根因分析字典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

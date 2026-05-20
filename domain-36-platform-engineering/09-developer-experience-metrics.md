@@ -1,3 +1,40 @@
+---
+title: 开发者体验度量 (Developer Experience Metrics)
+description: '## 概述 (Overview)'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- docker
+- postgresql
+- job
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 开发者体验度量 (Developer Experience Metrics) 是什么
+- 如何 开发者体验度量 (Developer Experience Metrics)
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- 开发者体验度量
+- Developer
+- Experience
+- Metrics
+- platform
+- engineering
+---
+
+
 # 开发者体验度量 (Developer Experience Metrics)
 
 ## 概述 (Overview)

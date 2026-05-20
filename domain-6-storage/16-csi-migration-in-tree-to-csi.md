@@ -1,3 +1,50 @@
+---
+title: 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
+description: '# 16 - CSI 迁移：从 In-Tree 存储插件到 CSI'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CSI 迁移：从 In-Tree 存储插件到 CSI 是什么
+- 如何 CSI 迁移：从 In-Tree 存储插件到 CSI
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- CSI
+- 迁移：从
+- In-Tree
+- 存储插件到
+- CSI
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+- type: fta
+  path: ../topic-fta/list/csi-fta.md
+  label: '故障树: csi'
+---
+
+
 # 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
 
 > **适用版本**: Kubernetes v1.23 - v1.32 | **运维重点**: In-Tree 插件迁移、CSI 兼容性、升级风险控制

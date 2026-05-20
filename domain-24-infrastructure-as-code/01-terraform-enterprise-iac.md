@@ -1,3 +1,38 @@
+---
+title: Terraform企业级基础设施即代码实践
+description: '# Terraform企业级基础设施即代码实践'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- opa
+- job
+- ingress
+- gateway
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Terraform企业级基础设施即代码实践 是什么
+- 如何 Terraform企业级基础设施即代码实践
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Terraform企业级基础设施即代码实践
+- infrastructure
+- as
+- code
+---
+
+
 # Terraform企业级基础设施即代码实践
 
 > **作者**: Infrastructure as Code专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

@@ -1,3 +1,46 @@
+---
+title: 23 - Pod Security Standards (PSS/PSA) YAML 配置参考
+description: '# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- docker
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- Pod Security Standards (PSS/PSA) YAML 配置参考 是什么
+- 如何 Pod Security Standards (PSS/PSA) YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- Pod
+- Security
+- Standards
+- PSS
+- PSA
+- YAML
+- 配置参考
+- yaml
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+---
+
+
 # 23 - Pod Security Standards (PSS/PSA) YAML 配置参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
@@ -422,6 +465,10 @@ securityContext:
 ```yaml
 # legacy-psp.yaml (已废弃)
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
 kind: PodSecurityPolicy
 metadata:
   name: restricted-psp

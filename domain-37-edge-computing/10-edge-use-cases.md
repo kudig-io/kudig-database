@@ -1,3 +1,41 @@
+---
+title: 边缘场景案例 (Edge Computing Use Cases)
+description: '## 概述 (Overview)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- flux
+- harbor
+- opa
+- redis
+- postgresql
+- kafka
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘场景案例 (Edge Computing Use Cases) 是什么
+- 如何 边缘场景案例 (Edge Computing Use Cases)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 边缘场景案例
+- Edge
+- Computing
+- Use
+- Cases
+- edge
+- computing
+---
+
+
 # 边缘场景案例 (Edge Computing Use Cases)
 
 ## 概述 (Overview)

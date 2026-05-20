@@ -1,7 +1,7 @@
 site_name: KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 site_description: 面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库
 site_author: KUDIG Team
-site_url: http://localhost:8000
+site_url: https://kudig-io.github.io/kudig-database
 
 repo_name: kudig-io/kudig-database
 repo_url: https://github.com/kudig-io/kudig-database
@@ -14,6 +14,7 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.breadcrumbs
     - search.suggest
     - search.highlight
     - content.tabs.link
@@ -62,6 +63,9 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
   - admonition
   - tables
   - toc:

@@ -1,3 +1,37 @@
+---
+title: 第三章：FTA 符号体系与标准规范
+description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- etcd
+- apiserver
+- coredns
+- ingress
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 第三章：FTA 符号体系与标准规范 是什么
+- 如何 第三章：FTA 符号体系与标准规范
+- 第三章：FTA 符号体系与标准规范 根因分析
+- 第三章：FTA 符号体系与标准规范 故障树
+trigger_keywords:
+- 第三章：FTA
+- 符号体系与标准规范
+- fta
+---
+
+
 # 第三章：FTA 符号体系与标准规范
 
 > **所属部分**: 第一部分 - FTA 方法论理论基础  

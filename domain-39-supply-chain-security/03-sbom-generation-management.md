@@ -1,3 +1,42 @@
+---
+title: SBOM 生成与管理 (SBOM Generation and Management)
+description: '# SBOM 生成与管理 (SBOM Generation and Management)'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- apiserver
+- docker
+- harbor
+- postgresql
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- SBOM 生成与管理 (SBOM Generation and Management) 是什么
+- 如何 SBOM 生成与管理 (SBOM Generation and Management)
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- SBOM
+- 生成与管理
+- SBOM
+- Generation
+- and
+- Management
+- supply
+- chain
+---
+
+
 # SBOM 生成与管理 (SBOM Generation and Management)
 
 > 软件物料清单（SBOM）是现代供应链安全的基础，提供软件组成的完整透明度，实现快速漏洞响应和合规性证明。

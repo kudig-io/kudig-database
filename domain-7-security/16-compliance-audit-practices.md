@@ -1,3 +1,47 @@
+---
+title: Kubernetes 合规与审计
+description: '| CIS Kubernetes Benchmark | 容器平台 | 配置安全基线 |'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- etcd
+- apiserver
+- elasticsearch
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 合规与审计 是什么
+- 如何 Kubernetes 合规与审计
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- Kubernetes
+- 合规与审计
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # Kubernetes 合规与审计
 
 > Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群

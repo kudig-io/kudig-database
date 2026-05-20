@@ -1,3 +1,40 @@
+---
+title: 17 - StorageClass / VolumeSnapshot YAML 配置参考
+description: '# 17 - StorageClass / VolumeSnapshot YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- prometheus
+- calico
+- rook
+- ceph
+- mysql
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- StorageClass / VolumeSnapshot YAML 配置参考 是什么
+- 如何 StorageClass / VolumeSnapshot YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- StorageClass
+- VolumeSnapshot
+- YAML
+- 配置参考
+- yaml
+- manifests
+---
+
+
 # 17 - StorageClass / VolumeSnapshot YAML 配置参考
 
 > **文档版本**: 2026-02  

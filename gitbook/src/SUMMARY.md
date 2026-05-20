@@ -1,3 +1,32 @@
+---
+title: Summary
+description: '- [Domain-1: Kubernetes架构基础](domain-1-architecture-fundamentals/README.md)'
+category: general
+tags:
+- k8s
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- istio
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 90min
+intent_queries:
+- Summary 是什么
+- 如何 Summary
+trigger_keywords:
+- Summary
+---
+
+
 # Summary
 
 [首页](README.md)

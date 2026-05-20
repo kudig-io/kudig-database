@@ -1,3 +1,39 @@
+---
+title: SLSA 软件供应链安全实践指南
+description: '# SLSA 软件供应链安全实践指南'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+- harbor
+- opa
+- falco
+- crd
+- operator
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- SLSA 软件供应链安全实践指南 是什么
+- 如何 SLSA 软件供应链安全实践指南
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- SLSA
+- 软件供应链安全实践指南
+- supply
+- chain
+- security
+---
+
+
 # SLSA 软件供应链安全实践指南
 
 > **适用版本**: SLSA v1.0 / Sigstore / Tekton Chains v0.24  

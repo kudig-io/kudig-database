@@ -1,3 +1,35 @@
+---
+title: 09 - 迁移工具链参考
+description: 2. [Velero 完整指南](#2-velero-完整指南)
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- helm
+- docker
+- harbor
+- redis
+- mysql
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 迁移工具链参考 是什么
+- 如何 迁移工具链参考
+trigger_keywords:
+- 迁移工具链参考
+- migration
+---
+
+
 # 09 - 迁移工具链参考
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: Velero, skopeo, kubectl-neat, yq, jq, pluto, 自动化脚本

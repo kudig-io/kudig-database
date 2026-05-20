@@ -1,3 +1,30 @@
+---
+title: Pod 安全策略
+description: '# Pod 安全策略'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- opa
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod 安全策略 是什么
+- 如何 Pod 安全策略
+trigger_keywords:
+- Pod
+- 安全策略
+- dictionary
+title_en: Pods
+---
+
+
 # Pod 安全策略
 
 ## 概述

@@ -1,3 +1,42 @@
+---
+title: 07 - 存储日常运维操作手册
+description: '# 07 - 存储日常运维操作手册'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- helm
+- daemonset
+- job
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储日常运维操作手册 是什么
+- 如何 存储日常运维操作手册
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储日常运维操作手册
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 07 - 存储日常运维操作手册
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 日常操作、故障处理、性能监控

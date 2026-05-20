@@ -1,3 +1,49 @@
+---
+title: 07 - RBAC权限矩阵表
+description: '| **cluster-admin** | 全部资源，全部操作 | 超级管理员 | 集群管理 | 极高 | 节点删除/etcd访问/RBAC修改 |'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- RBAC权限矩阵表 是什么
+- 如何 RBAC权限矩阵表
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- RBAC权限矩阵表
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/rbac-fta.md
+  label: '故障树: rbac'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 07 - RBAC权限矩阵表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
@@ -735,6 +781,11 @@ roleRef:
 | 版本 | 变更内容 |
 |-----|---------|
 | v1.24 | 不再自动创建Secret for SA, 使用TokenRequest API |
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 | v1.25 | PodSecurityPolicy彻底移除 |
 | v1.27 | `kubectl auth whoami`命令添加 |
 | v1.28 | ValidatingAdmissionPolicy GA |

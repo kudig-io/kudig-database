@@ -1,3 +1,35 @@
+---
+title: Kube-burner
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- apiserver
+- prometheus
+- elasticsearch
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kube-burner 是什么
+- 如何 Kube-burner
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Kube-burner
+- cncf
+- landscape
+---
+
 # Kube-burner
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03
@@ -254,3 +286,70 @@ jobs:
 ---
 
 **维护者**: Kudig Team | **许可证**: MIT
+
+## 生产实战与调优
+
+### 典型生产场景
+
+1. **Kubernetes 版本升级前的容量评估** — 在升级前使用 kube-burner 模拟目标负载，验证新版本 API Server 和 etcd 的吞吐量是否满足 SLO。
+2. **大规模集群压测 (2000+ 节点)** — 云厂商在交付大客户集群前，用 kube-burner 创建数万 Pod/Service 验证控制面极限。
+3. **CI/CD 性能回归检测** — 在 nightly pipeline 中运行 kube-burner benchmark，自动对比 P99 API 延迟，发现性能退化时阻断发布。
+4. **etcd 磁盘 I/O 基准** — 配合 `etcd-perf` job 类型，测量 etcd 在高写入吞吐下的 WAL fsync 延迟。
+
+### 配置调优参数
+
+```yaml
+# job.yml 关键参数
+global:
+  measurements:
+    - name: latency
+      thresholds:
+        - conditionType: P99
+          metric: "podLatency"
+          threshold: 5000ms    # P99 Pod 启动延迟上限
+    - name: etcdLeader
+      thresholds:
+        - conditionType: Absent
+          metric: "etcdLeaderChanges"
+          threshold: 1
+
+jobs:
+  - name: create-pods
+    jobType: create
+    qps: 25                    # API Server QPS 限制，建议不超过 50
+    burst: 50                  # 突发并发数
+    namespace: kube-burner
+    namespacedIterations: true
+    podWaitPeriod: 30s         # 等待 Pod Ready 的超时
+    maxWaitTimeout: 10m        # 全局最大等待
+    iterationsPerNamespace: 1000
+    objects:
+      - objectTemplate: pod.yml
+        replicas: 10
+        inputVars:
+          containerImage: registry.k8s.io/pause:3.9
+```
+
+关键调优点：
+- `qps` 和 `burst`：API Server 默认限流 50 qps/client，大集群可适当提高至 100
+- `podWaitPeriod`：控制面压力大时需增大，避免误报超时
+- `gc` (garbage collection)：默认 true，测试后自动清理资源
+
+### 性能基准数据（参考值）
+
+| 集群规模 | 测试场景 | P99 Pod 启动延迟 | API Server P99 | etcd WAL Fsync |
+|----------|----------|-------------------|----------------|----------------|
+| 100 节点 | 创建 1000 Pod | < 2s | < 200ms | < 10ms |
+| 500 节点 | 创建 10000 Pod | < 5s | < 500ms | < 15ms |
+| 1000 节点 | 创建 30000 Pod | < 10s | < 800ms | < 20ms |
+| 2000 节点 | 创建 50000 Pod | < 30s | < 1500ms | < 30ms |
+
+> 注：数据基于 2024 年主流 K8s 1.28-1.30 版本，3 master HA 配置（8C32G/etcd NVMe SSD）。实际值受网络、存储、CNI 插件等因素影响。
+
+### 常见坑和注意事项
+
+1. **etcd 磁盘是最大瓶颈** — 90% 的性能问题源于 etcd 磁盘 I/O。务必使用 NVMe SSD，并监控 `etcd_disk_wal_fsync_duration_seconds`。
+2. **Rate Limiter 误报** — kube-burner 的 QPS 超过 API Server 限流时会返回 429 错误，但不一定代表集群有问题，需区分客户端限流和服务端限流。
+3. **GC 清理失败** — 大规模测试后 garbage collection 可能因 etcd 压力超时，建议设置 `gcMetrics` 或手动 `kubectl delete ns kube-burner`。
+4. **CNI IPAM 耗尽** — 大量 Pod 创建会快速耗尽 Calico/Flannel 的 IP 池，测试前确认子网 CIDR 足够。
+5. **Prometheus 内存爆炸** — 长时间压测产生的指标量极大，建议限制 `measurements` 的采样间隔，或配置 Prometheus 的 `--storage.tsdb.retention.size`。

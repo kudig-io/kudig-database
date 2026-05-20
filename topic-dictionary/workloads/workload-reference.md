@@ -1,3 +1,33 @@
+---
+title: Workload Reference
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- job
+- gpu
+- cuda
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Workload Reference 是什么
+- 如何 Workload Reference
+trigger_keywords:
+- Workload
+- Reference
+- dictionary
+title_en: Workload Reference
+---
+
+
 # Workload Reference
 
 ## 概述

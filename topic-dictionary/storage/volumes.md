@@ -1,3 +1,30 @@
+---
+title: Volumes（卷）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- opa
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Volumes（卷） 是什么
+- 如何 Volumes（卷）
+trigger_keywords:
+- Volumes
+- dictionary
+title_en: Volumes
+---
+
+
 # Volumes（卷）
 
 ## 概述

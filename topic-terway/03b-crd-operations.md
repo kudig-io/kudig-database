@@ -1,3 +1,40 @@
+---
+title: 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
+description: '# 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)'
+category: terway
+tags:
+- k8s
+- terway
+- networking
+- alicloud
+- cilium
+- mysql
+- statefulset
+- job
+- networkpolicy
+- crd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+estimated_read_time: 5min
+intent_queries:
+- 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive) 是什么
+- 如何 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
+trigger_keywords:
+- 03b
+- Terway
+- CRD
+- 深度操作指南
+- CRD
+- Operations
+- Deep
+- Dive
+---
+
+
 # 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32+ | **Terway 版本**: v1.5+ | **最后更新**: 2026-05

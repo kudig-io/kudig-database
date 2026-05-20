@@ -1,3 +1,37 @@
+---
+title: Kubewarden
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- docker
+- opa
+- statefulset
+- ingress
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Kubewarden 是什么
+- 如何 Kubewarden
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Kubewarden
+- cncf
+- landscape
+---
+
+
 # Kubewarden
 
 > **成熟度**: Sandbox | **加入时间**: 2022-06 | **最后更新**: 2026-03

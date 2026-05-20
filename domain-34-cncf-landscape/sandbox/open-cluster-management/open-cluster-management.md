@@ -1,3 +1,38 @@
+---
+title: Open Cluster Management (OCM)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- apiserver
+- prometheus
+- operator
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Open Cluster Management (OCM) 是什么
+- 如何 Open Cluster Management (OCM)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Open
+- Cluster
+- Management
+- OCM
+- cncf
+- landscape
+---
+
+
 # Open Cluster Management (OCM)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

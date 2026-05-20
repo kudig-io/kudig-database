@@ -1,3 +1,33 @@
+---
+title: 记忆管理与上下文窗口工程
+description: '# 记忆管理与上下文窗口工程'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 记忆管理与上下文窗口工程 是什么
+- 如何 记忆管理与上下文窗口工程
+trigger_keywords:
+- 记忆管理与上下文窗口工程
+- ai
+- agent
+---
+
+
 # 记忆管理与上下文窗口工程
 
 > **文档类型**: 核心技术专题 | **最后更新**: 2026-03 | **关键词**: 记忆管理, 上下文窗口, 短期记忆, 长期记忆, 情节记忆, 语义记忆, 上下文压缩, Token 管理, 会话记忆, 向量记忆

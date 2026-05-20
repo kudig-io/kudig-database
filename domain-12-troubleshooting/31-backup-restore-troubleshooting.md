@@ -1,6 +1,60 @@
-# 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)
+---
+title: 备份恢复故障排查
+description: '# 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)'
+category: troubleshooting
+tags:
+- backup
+- restore
+- velero
+- etcd
+- disaster-recovery
+- snapshot
+- minio
+- daemonset
+- job
+- cronjob
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Velero 备份失败
+- etcd 快照
+- 数据恢复
+- 灾难恢复
+trigger_keywords:
+- 备份恢复故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/backup-restore-fta.md
+  label: '故障树: backup-restore'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Velero Backup](https://velero.io/docs/), [etcd Backup](https://etcd.io/docs/)
+
+# 31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)
 
 ---
 

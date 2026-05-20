@@ -1,3 +1,52 @@
+---
+title: 人力资源 SaaS 架构设计
+description: '# 人力资源 SaaS 架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- hpa
+- job
+- cronjob
+- ingress
+- networkpolicy
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- HR SaaS架构师
+- 多租户平台工程师
+- 企业数字化转型负责人
+estimated_read_time: 5min
+intent_queries:
+- HR SaaS 多租户 Kubernetes 隔离架构
+- 薪资计算 CronJob 定时任务
+- 多租户数据安全与脱敏
+- 工作流引擎审批流程
+- 阿里云 ACK vCluster
+trigger_keywords:
+- HRTech
+- 人力资源SaaS
+- 多租户隔离
+- 薪资计算
+- 考勤管理
+- 招聘管理
+- 绩效考核
+- vCluster
+- 薪资保密
+- 数据脱敏
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-saas-architecture
+- topic-platform-architecture
+---
+
+
 # 人力资源 SaaS 架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

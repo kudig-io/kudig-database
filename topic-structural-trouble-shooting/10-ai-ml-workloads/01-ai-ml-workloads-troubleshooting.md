@@ -1,3 +1,41 @@
+---
+title: AI/ML 工作负载故障排查指南
+description: '# AI/ML 工作负载故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- prometheus
+- hpa
+- daemonset
+- job
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- AI/ML 工作负载故障排查指南 是什么
+- 如何 AI/ML 工作负载故障排查指南
+- AI/ML 工作负载故障排查指南 故障排查
+- AI/ML 工作负载故障排查指南 排障步骤
+trigger_keywords:
+- AI
+- ML
+- 工作负载故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # AI/ML 工作负载故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: AI基础设施运维保障
@@ -967,3 +1005,559 @@ echo "成本优化报告已生成: $COST_REPORT"
 - Kubernetes AI/ML SIG: https://github.com/kubernetes/community/tree/master/sig-ai
 - Kubeflow 社区: https://www.kubeflow.org/
 - NVIDIA 开发者论坛: https://forums.developer.nvidia.com/
+
+**相关文档**：
+| 文档类型 | 路径 | 说明 |
+|----------|------|------|
+| FTA | `topic-fta/list/gpu-fta.md` | GPU 工作负载故障树 |
+| Structural | `topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md` | Kubeflow 故障排查 |
+| Structural | `topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md` | MPI Operator 故障排查 |
+
+---
+
+## 7. 多租户 GPU 调度
+
+### 7.1 GPU 资源共享策略
+
+```yaml
+gpu_sharing_strategy:
+  # Time-slicing (粗粒度共享)
+  time_slicing:
+    enabled: true
+    replicas: 4  # 每个 GPU 被 4 个容器共享
+    method: "时间片轮转"
+    use_case: "开发/测试环境"
+
+  # MPS (多进程服务)
+  mps:
+    enabled: false
+    compute_percentage: 50
+    use_case: "需要低延迟的生产服务"
+
+  # GPU 隔离 (独占)
+  isolation:
+    enabled: true
+    exclusive_mode: "production"
+    shared_mode: "non-production"
+
+  # 选择策略
+  node_selector:
+    gpu_type: "nvidia-tesla-v100"  # 可选 GPU 型号
+    min_memory_free: "8Gi"
+    min_memory_free: "8Gi"
+```
+
+### 7.2 多租户配额管理
+
+```yaml
+multi_tenant_gpu_quota:
+  # 租户配额配置
+  quotas:
+    - tenant: "team-ml"
+      namespace: "ml-team"
+      gpu_limit: 16
+      gpu_request: 8
+      priority: "high"
+
+    - tenant: "team-data"
+      namespace: "data-team"
+      gpu_limit: 8
+      gpu_request: 4
+      priority: "medium"
+
+    - tenant: "team-dev"
+      namespace: "dev-team"
+      gpu_limit: 4
+      gpu_request: 2
+      priority: "low"
+
+  # 配额实施
+  enforcement:
+    method: "LimitRange + ResourceQuota"
+    over_quota_action: "Reject Pod creation"
+    grace_period: 10m  # 超配额宽限期
+```
+
+### 7.3 GPU 拓扑感知调度
+
+```yaml
+gpu_topology_aware:
+  # NVLink/NVSwitch 拓扑感知
+  enabled: true
+  topology_hints:
+    - topology: "full"
+      description: "所有 GPU 在同一 NVSwitch"
+      latency: "< 1us"
+    - topology: "partial"
+      description: "部分 GPU 通过 NVLink 连接"
+      latency: "< 5us"
+    - topology: "socket"
+      description: "GPU 跨 socket"
+      latency: "< 10us"
+
+  # 调度器配置
+  scheduler:
+    plugin: "gpu-topology-aware-scheduler"
+    prioritize_topology: "full > partial > socket"
+    fallback_enabled: true
+```
+
+---
+
+## 8. 成本归因与优化
+
+### 8.1 GPU 成本归因模型
+
+```yaml
+gpu_cost_attribution:
+  # 成本计算公式
+  calculation:
+    cost_per_gpu_hour: 3.50  # USD/GPU/小时 (示例价格)
+    cost_per_gb_hour: 0.02   # USD/GB/小时
+    cost_per_core_hour: 0.05 # USD/vCPU/小时
+
+  # 归因维度
+  attribution_dimensions:
+    - dimension: "team"
+      aggregation: "sum(cost_by_gpu * days)"
+    - dimension: "project"
+      aggregation: "sum(cost_by_gpu * project_tag)"
+    - dimension: "pipeline"
+      aggregation: "sum(cost_by_gpu * pipeline_tag)"
+    - dimension: "workload_type"
+      values: ["training", "inference", "experiment"]
+
+  # 报告生成
+  reports:
+    daily:
+      output: "gs://ml-cost-reports/daily/{date}.csv"
+      recipients: ["#ml-platform", "ml-lead"]
+    monthly:
+      output: "gs://ml-cost-reports/monthly/{YYYY-MM}.csv"
+      recipients: ["#finance", "ml-lead"]
+```
+
+### 8.2 成本优化策略
+
+```yaml
+cost_optimization:
+  # Spot/Preemptible 实例使用
+  spot_instances:
+    enabled: true
+    acceptable_interruption_rate: 0.05
+    fallback_to_on_demand: true
+    workloads:
+      - type: "distributed-training"
+        checkpoint_frequency: 5m
+      - type: "batch-inference"
+        restartable: true
+
+  # 训练成本优化
+  training_optimization:
+    # 早停策略
+    early_stopping:
+      enabled: true
+      monitor: "validation_loss"
+      patience: 5
+      min_delta: 0.01
+
+    # 检查点策略
+    checkpointing:
+      frequency: "5m"
+      storage: "persistent storage"
+      resume_on_interruption: true
+
+    # 混合精度训练
+    mixed_precision:
+      enabled: true
+      backend: "apex"  # 或 "torch.cuda.amp"
+      loss_scale: "dynamic"
+
+  # 推理成本优化
+  inference_optimization:
+    # 自动扩缩容
+    autoscaling:
+      min_replicas: 1
+      max_replicas: 10
+      target_gpu_utilization: 70
+
+    # 模型量化
+    quantization:
+      enabled: true
+      method: "int8"
+      accuracy_threshold: 0.99
+```
+
+### 8.3 成本监控与告警
+
+```yaml
+cost_monitoring:
+  # 每日成本阈值
+  daily_budgets:
+    team-ml: 500  # USD/天
+    team-data: 200
+    team-dev: 50
+
+  # 告警规则
+  alerts:
+    - name: "Daily Budget Exceeded"
+      severity: P2
+      condition: "daily_cost > team_budget * 1.1"
+      channels: ["slack-ml-cost", "pagerduty:oncall"]
+
+    - name: "Anomalous GPU Usage"
+      severity: P3
+      condition: "gpu_hours_today > avg_daily_gpu_hours * 2"
+      channels: ["slack-ml-cost"]
+
+    - name: "Idle GPU Waste"
+      severity: P3
+      condition: "gpu_idle_hours > 10"
+      channels: ["slack-ml-platform"]
+```
+
+---
+
+## 9. 生产 ML Pipeline 可靠性
+
+### 9.1 Pipeline 容错设计
+
+```yaml
+pipeline_reliability:
+  # 幂等设计
+  idempotency:
+    enabled: true
+    deduplication:
+      method: "exactly-once delivery"
+      window: 24h
+      key: "pipeline_run_id + step_id"
+
+  # 重试策略
+  retry:
+    max_attempts: 3
+    backoff: "exponential"
+    initial_interval: 10s
+    max_interval: 10m
+    retry_on:
+      - "transient_error"
+      - "network_timeout"
+      - "resource_busy"
+
+  # 检查点与恢复
+  checkpoint:
+    frequency: "every_step"
+    storage: "distributed filesystem"
+    resume_from: "last_checkpoint"
+```
+
+### 9.2 数据质量保障
+
+```yaml
+data_quality:
+  # 输入验证
+  input_validation:
+    - check: "data_schema"
+      method: "pandera / Great Expectations"
+      fail_on_error: true
+
+    - check: "data_range"
+      method: "min/max/NaN detection"
+      fail_on_error: false
+      warn_on_anomaly: true
+
+    - check: "data_lineage"
+      method: "追踪数据血缘"
+      audit_trail: true
+
+  # 输出验证
+  output_validation:
+    - check: "model_evaluation_metrics"
+      thresholds:
+        accuracy: "> 0.85"
+        latency_p99: "< 100ms"
+      fail_on_error: true
+
+    - check: "model_format"
+      format: "ONNX / TensorRT"
+      validation: "model loading test"
+      fail_on_error: true
+```
+
+### 9.3 监控与告警
+
+```yaml
+pipeline_monitoring:
+  # 训练指标
+  training_metrics:
+    - metric: "train_loss"
+      type: "gauge"
+      alert_on_stagnation: true
+      alert_on_increase: true
+
+    - metric: "validation_accuracy"
+      type: "gauge"
+      alert_on_decrease: true
+
+    - metric: "gpu_utilization"
+      type: "gauge"
+      alert_if_below: 50
+
+  # 推理指标
+  inference_metrics:
+    - metric: "inference_latency_p99"
+      type: "histogram"
+      slo: "< 100ms"
+
+    - metric: "request_success_rate"
+      type: "gauge"
+      slo: "> 99.9%"
+
+    - metric: "model_version_mismatch"
+      type: "counter"
+      alert_threshold: "> 0"
+
+  # 告警规则
+  alert_rules:
+    - name: "Training Diverged"
+      severity: P1
+      condition: "train_loss > previous_loss * 10"
+      channels: ["pagerduty:ml-oncall", "slack-ml-alerts"]
+
+    - name: "Inference Latency High"
+      severity: P1
+      condition: "histogram_quantile(0.99, inference_latency) > 0.1"
+      channels: ["pagerduty:ml-oncall", "slack-ml-alerts"]
+
+    - name: "GPU Utilization Low"
+      severity: P3
+      condition: "avg(gpu_utilization) < 30 for 1h"
+      channels: ["slack-ml-platform"]
+```
+
+---
+
+## 10. ML Infrastructure 安全
+
+### 10.1 访问控制
+
+```yaml
+access_control:
+  # RBAC 配置
+  rbac:
+    roles:
+      - name: "ml-developer"
+        permissions:
+          - "create/read/update training jobs in own namespace"
+          - "read models in shared model registry"
+      - name: "ml-admin"
+        permissions:
+          - "* on all ml resources"
+          - "manage quota"
+
+  # 服务账户管理
+  service_accounts:
+    training:
+      name: "ml-training"
+      image_pull_secrets: "ml-registry-secret"
+      env_vars_protected:
+        - "AWS_SECRET_ACCESS_KEY"
+        - "MLFLOW_TRACKING_URI"
+
+    inference:
+      name: "ml-inference"
+      readonly_rootfs: true
+      capabilities_drop:
+        - "ALL"
+```
+
+### 10.2 数据安全
+
+```yaml
+data_security:
+  # 训练数据保护
+  training_data:
+    encryption:
+      at_rest: "AES-256"
+      in_transit: "TLS 1.3"
+    access_control:
+      model: "RBAC"
+      audit_logging: true
+
+  # 模型保护
+  model:
+    storage:
+      encryption: true
+      replication: 3
+    access_control:
+      model: "RBAC + MAC"
+    export_control:
+      restricted: ["model_weights", "training_data"]
+```
+
+### 10.3 审计日志
+
+```yaml
+audit_logging:
+  # 记录的操作
+  operations:
+    - "training_job_created"
+    - "training_job_completed"
+    - "model_uploaded"
+    - "model_downloaded"
+    - "inference_request"
+    - "quota_changed"
+
+  # 日志格式
+  log_format:
+    timestamp: ISO8601
+    operation: string
+    actor: string
+    resource: string
+    result: string
+    metadata: object
+
+  # 告警规则
+  security_alerts:
+    - name: "Unauthorized Model Access"
+      severity: P1
+      condition: "model_downloaded_by_unauthorized_user"
+      channels: ["slack-security"]
+```
+
+---
+
+## 11. 容量规划与扩展
+
+### 11.1 容量规划模型
+
+```yaml
+capacity_planning:
+  # 当前容量
+  current_capacity:
+    total_gpu: 64
+    gpu_type: "nvidia-tesla-v100"
+    total_memory_tb: 0.5
+    max_concurrent_training_jobs: 32
+
+  # 增长预测
+  growth_prediction:
+    model: "linear_regression"
+    monthly_growth_rate: 0.15
+    prediction_horizon: 6m
+
+  # 容量需求计算
+  demand_calculation:
+    training:
+      avg_gpu_per_job: 8
+      max_concurrent_jobs: 8
+      total_demand: 64
+    inference:
+      avg_gpu_per_instance: 1
+      max_instances: 32
+      total_demand: 32
+    total_demand: 96
+    headroom: 1.2  # 20% 缓冲
+    recommended_capacity: 115
+```
+
+### 11.2 扩展策略
+
+```yaml
+scaling_strategy:
+  # 水平扩展
+  horizontal:
+    gpu_nodes:
+      min: 4
+      max: 32
+      scale_up_threshold: 80
+      scale_down_threshold: 30
+      stabilization_window: 5m
+
+  # 垂直扩展
+  vertical:
+    gpu_upgrade_path:
+      - from: "v100"
+        to: "a100"
+        trigger: "utilization > 90% for 7d"
+      - from: "a100"
+        to: "h100"
+        trigger: "utilization > 90% for 7d"
+
+  # 多集群扩展
+  multi_cluster:
+    enabled: true
+    clusters:
+      - name: "ml-prod-us"
+        region: "us-west-2"
+        priority: 1
+      - name: "ml-prod-eu"
+        region: "eu-west-1"
+        priority: 2
+    failover:
+      enabled: true
+      rto: 30m
+```
+
+---
+
+## 12. 生产问题案例库
+
+### 12.1 高频问题速查
+
+| 问题 | 快速诊断 | 解决方案 |
+|------|----------|----------|
+| GPU OOM | nvidia-smi 显示 memory > 95% | 减少 batch size 或启用梯度累积 |
+| NCCL 超时 | Pod 日志显示 NCCL timeout | 检查网络策略和节点亲和性 |
+| 训练loss发散 | 监控显示 loss > 10x 上一步 | 检查学习率、数据归一化 |
+| 推理超时 | 服务日志显示 timeout | 增加副本数或优化模型 |
+| GPU利用率低 | nvidia-smi 显示 < 30% | 增加 batch size 或 worker 数 |
+
+### 12.2 疑难问题深度分析
+
+```yaml
+# 问题: 分布式训练 GPU 利用率不均匀
+symptom: "部分 GPU 利用率 100%，其他仅 30%"
+root_cause: |
+  数据加载器预取不均匀，或 NCCL 通信原语等待导致。
+  常见于数据倾斜或批处理大小配置不当。
+diagnosis:
+  - "kubectl exec 进入每个训练 Pod，执行 nvidia-smi"
+  - "检查每个 Pod 的数据加载日志"
+  - "查看 NCCL 通信时间统计"
+solution: |
+  1. 启用分布式数据加载 (DistributedSampler)
+  2. 调整 world_size 与 GPU 数量匹配
+  3. 增加 num_workers 和预取因子
+  4. 使用 GPU 拓扑感知调度
+verification: |
+  所有 GPU 利用率差异 < 10%
+
+# 问题: Spot 实例中断导致训练失败
+symptom: "训练作业不定期失败，日志显示执行节点被回收"
+root_cause: |
+  使用 Spot 实例但未配置检查点或中断处理。
+  AWS/GCP/Azure 会随时回收 Spot 实例。
+diagnosis:
+  - "检查 Pod 事件: kubectl describe pod | grep -i 'spot\|preempted'"
+  - "查看云厂商中断通知"
+solution: |
+  1. 配置训练框架检查点 (every 5 min)
+  2. 使用 training-operator 的 fault-tolerance 功能
+  3. 配置中断信号处理器
+  4. 考虑使用保活实例 + Spot 的混合策略
+verification: |
+  Spot 中断后训练可自动恢复，无需人工介入
+```
+
+---
+
+> **版本**: v2.0
+> **维护团队**: ML Platform Team / SRE Team
+> **更新日期**: 2026-05-19
+> **新增章节**:
+> - [x] 多租户 GPU 调度 (资源共享策略、配额管理、拓扑感知)
+> - [x] 成本归因与优化 (成本模型、Spot 实例、监控告警)
+> - [x] 生产 ML Pipeline 可靠性 (容错、数据质量、监控)
+> - [x] ML Infrastructure 安全 (RBAC、数据安全、审计)
+> - [x] 容量规划与扩展 (规划模型、扩展策略)
+> - [x] 生产问题案例库 (高频问题、疑难问题)

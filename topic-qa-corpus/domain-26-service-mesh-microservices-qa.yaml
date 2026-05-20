@@ -1,0 +1,275 @@
+domain: domain-26-service-mesh-microservices
+total_questions: 58
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Domain-26 服务网格与微服务 — 开源项目索引 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/00-open-source-projects-index.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/00-open-source-projects-index.md
+  section: 概述
+- type: concept
+  question: 在 Domain-26 服务网格与微服务 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/00-open-source-projects-index.md 的「核心项目总览」章节。
+  source: domain-26-service-mesh-microservices/00-open-source-projects-index.md
+  section: 核心项目总览
+- type: concept
+  question: 在 Domain-26 服务网格与微服务 — 开源项目索引 中, Istio (CNCF Graduated) 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/00-open-source-projects-index.md 的「Istio (CNCF Graduated)」章节。
+  source: domain-26-service-mesh-microservices/00-open-source-projects-index.md
+  section: Istio (CNCF Graduated)
+- type: comparison
+  question: Domain-26 服务网格与微服务 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/00-open-source-projects-index.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/00-open-source-projects-index.md
+- type: concept
+  question: 在 Istio 企业级服务网格架构与实践 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md
+  section: 概述
+- type: concept
+  question: 在 Istio 企业级服务网格架构与实践 中, 核心配置 — 企业级部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md 的「核心配置 — 企业级部署」章节。
+  source: domain-26-service-mesh-microservices/01-istio-enterprise-service-mesh.md
+  section: 核心配置 — 企业级部署
+- type: concept
+  question: 在 Linkerd 企业级服务网格深度实践 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+  section: 概述
+- type: concept
+  question: 在 Linkerd 企业级服务网格深度实践 中, 核心配置 — 高可用部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md 的「核心配置 — 高可用部署」章节。
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+  section: 核心配置 — 高可用部署
+- type: operation
+  question: '如何执行与 Linkerd 企业级服务网格深度实践 相关的操作: linkerd install \?'
+  answer: 参见 domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+  command: linkerd install \
+- type: operation
+  question: '如何执行与 Linkerd 企业级服务网格深度实践 相关的操作: $ linkerd check?'
+  answer: 参见 domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+  command: $ linkerd check
+- type: best_practice
+  question: 关于 Linkerd 企业级服务网格深度实践, 有什么最佳实践?
+  answer: 1. 使用 HA 模式 (3 副本控制平面)
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+- type: best_practice
+  question: 关于 Linkerd 企业级服务网格深度实践, 有什么最佳实践?
+  answer: 1. MeshTLS STRICT 模式
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+- type: best_practice
+  question: 关于 Linkerd 企业级服务网格深度实践, 有什么最佳实践?
+  answer: 1. 黄金指标监控 (成功率、延迟、吞吐)
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+- type: best_practice
+  question: 关于 Linkerd 企业级服务网格深度实践, 有什么最佳实践?
+  answer: '1. 代理资源: CPU 50-500m, Memory 32-128Mi'
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+- type: comparison
+  question: Linkerd 企业级服务网格深度实践 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/02-linkerd-enterprise-service-mesh.md
+- type: concept
+  question: 在 Consul Connect 企业级服务网格管理 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/03-consul-connect-enterprise.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/03-consul-connect-enterprise.md
+  section: 概述
+- type: concept
+  question: 在 Consul Connect 企业级服务网格管理 中, 核心配置 — Helm 企业级部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/03-consul-connect-enterprise.md 的「核心配置 — Helm 企业级部署」章节。
+  source: domain-26-service-mesh-microservices/03-consul-connect-enterprise.md
+  section: 核心配置 — Helm 企业级部署
+- type: concept
+  question: 在 Consul Connect 企业级服务网格管理 中, 流量管理实战 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/03-consul-connect-enterprise.md 的「流量管理实战」章节。
+  source: domain-26-service-mesh-microservices/03-consul-connect-enterprise.md
+  section: 流量管理实战
+- type: best_practice
+  question: 关于 Consul Connect 企业级服务网格管理, 有什么最佳实践?
+  answer: 1. Server 3-5 副本, 启用 PDB
+  source: domain-26-service-mesh-microservices/03-consul-connect-enterprise.md
+- type: best_practice
+  question: 关于 Consul Connect 企业级服务网格管理, 有什么最佳实践?
+  answer: 1. Prometheus + Grafana 监控
+  source: domain-26-service-mesh-microservices/03-consul-connect-enterprise.md
+- type: concept
+  question: 在 Envoy Proxy 企业级服务网格数据平面深度实践 中, 核心配置 — 生产级 Envoy 部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md 的「核心配置 — 生产级 Envoy 部署」章节。
+  source: domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md
+  section: 核心配置 — 生产级 Envoy 部署
+- type: concept
+  question: 在 Envoy Proxy 企业级服务网格数据平面深度实践 中, 流量管理实战 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md 的「流量管理实战」章节。
+  source: domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md
+  section: 流量管理实战
+- type: best_practice
+  question: 关于 Envoy Proxy 企业级服务网格数据平面深度实践, 有什么最佳实践?
+  answer: '1. 资源: requests 500m/512Mi, limits 2core/2Gi'
+  source: domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md
+- type: best_practice
+  question: 关于 Envoy Proxy 企业级服务网格数据平面深度实践, 有什么最佳实践?
+  answer: 1. 连接池复用 (maxRequestsPerConnection)
+  source: domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md
+- type: best_practice
+  question: 关于 Envoy Proxy 企业级服务网格数据平面深度实践, 有什么最佳实践?
+  answer: '| 参数 | 低流量场景 | 中流量场景 | 高流量场景 | 调优说明 |'
+  source: domain-26-service-mesh-microservices/04-envoy-proxy-enterprise.md
+- type: concept
+  question: 在 Dapr (Distributed Application Runtime) Enterprise 深度实践 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md
+  section: 概述
+- type: concept
+  question: 在 Dapr (Distributed Application Runtime) Enterprise 深度实践 中, 核心配置 — 控制平面高可用部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md 的「核心配置 — 控制平面高可用部署」章节。
+  source: domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md
+  section: 核心配置 — 控制平面高可用部署
+- type: operation
+  question: '如何执行与 Dapr (Distributed Application Runtime) Enterprise 深度实践 相关的操作: helm repo add dapr https://dapr.github.io/helm-charts/?'
+  answer: 参见 domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md
+  command: helm repo add dapr https://dapr.github.io/helm-charts/
+- type: operation
+  question: '如何执行与 Dapr (Distributed Application Runtime) Enterprise 深度实践 相关的操作: wget -q https://raw.githubusercontent.com/dapr/cli/master/in?'
+  answer: 参见 domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/05-dapr-enterprise-distributed-runtime.md
+  command: wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+- type: concept
+  question: 在 Traefik Mesh Enterprise Service Mesh 深度实践 中, 核心配置 — 企业级部署 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md 的「核心配置 — 企业级部署」章节。
+  source: domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md
+  section: 核心配置 — 企业级部署
+- type: operation
+  question: '如何执行与 Traefik Mesh Enterprise Service Mesh 深度实践 相关的操作: helm repo add traefik-mesh https://helm.traefik.io/mesh?'
+  answer: 参见 domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md
+  command: helm repo add traefik-mesh https://helm.traefik.io/mesh
+- type: comparison
+  question: Traefik Mesh Enterprise Service Mesh 深度实践 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/06-traefik-mesh-enterprise.md
+- type: concept
+  question: 在 服务网格对比与选型决策指南 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md
+  section: 概述
+- type: concept
+  question: 在 服务网格对比与选型决策指南 中, 架构哲学对比 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md 的「架构哲学对比」章节。
+  source: domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md
+  section: 架构哲学对比
+- type: best_practice
+  question: 关于 服务网格对比与选型决策指南, 有什么最佳实践?
+  answer: '步骤1: 启用全局 STRICT mTLS'
+  source: domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md
+- type: best_practice
+  question: 关于 服务网格对比与选型决策指南, 有什么最佳实践?
+  answer: 从 Linkerd 开始，按需迁移到 Istio
+  source: domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md
+- type: comparison
+  question: 服务网格对比与选型决策指南 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/07-service-mesh-comparison-selection.md
+- type: concept
+  question: 在 Istio Ambient Mesh 与 L7 策略深度实践 中, Ambient Mesh 核心组件 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md 的「Ambient Mesh 核心组件」章节。
+  source: domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md
+  section: Ambient Mesh 核心组件
+- type: operation
+  question: '如何执行与 Istio Ambient Mesh 与 L7 策略深度实践 相关的操作: istioctl install --set profile=ambient \?'
+  answer: 参见 domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md
+  command: istioctl install --set profile=ambient \
+- type: comparison
+  question: Istio Ambient Mesh 与 L7 策略深度实践 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/08-ambient-mesh-l7-policy.md
+- type: concept
+  question: 在 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/09-microservice-resilience-patterns.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/09-microservice-resilience-patterns.md
+  section: 概述
+- type: concept
+  question: 在 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting 中, 熔断器 (Circuit Breaker) 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/09-microservice-resilience-patterns.md 的「熔断器 (Circuit Breaker)」章节。
+  source: domain-26-service-mesh-microservices/09-microservice-resilience-patterns.md
+  section: 熔断器 (Circuit Breaker)
+- type: concept
+  question: 在 API 网关与服务网格集成深度实践 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/10-api-gateway-service-mesh-integration.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/10-api-gateway-service-mesh-integration.md
+  section: 概述
+- type: concept
+  question: 在 API 网关与服务网格集成深度实践 中, 集成架构模式 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/10-api-gateway-service-mesh-integration.md 的「集成架构模式」章节。
+  source: domain-26-service-mesh-microservices/10-api-gateway-service-mesh-integration.md
+  section: 集成架构模式
+- type: concept
+  question: 在 Istio 企业级服务网格入门指南 中, 架构模式选择 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md 的「架构模式选择」章节。
+  source: domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md
+  section: 架构模式选择
+- type: operation
+  question: '如何执行与 Istio 企业级服务网格入门指南 相关的操作: curl -L https://istio.io/downloadIstio | sh -?'
+  answer: 参见 domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md
+  command: curl -L https://istio.io/downloadIstio | sh -
+- type: operation
+  question: '如何执行与 Istio 企业级服务网格入门指南 相关的操作: helm repo add istio https://istio-release.storage.googleapis?'
+  answer: 参见 domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md
+  command: helm repo add istio https://istio-release.storage.googleapis.com/charts
+- type: operation
+  question: '如何执行与 Istio 企业级服务网格入门指南 相关的操作: kubectl label namespace default istio-injection=enabled?'
+  answer: 参见 domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md
+  command: kubectl label namespace default istio-injection=enabled
+- type: comparison
+  question: Istio 企业级服务网格入门指南 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/99-istio-service-mesh-guide.md
+- type: concept
+  question: 在 Linkerd 轻量级服务网格实践指南 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+  section: 概述
+- type: concept
+  question: 在 Linkerd 轻量级服务网格实践指南 中, 架构与设计理念 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 的「架构与设计理念」章节。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+  section: 架构与设计理念
+- type: operation
+  question: '如何执行与 Linkerd 轻量级服务网格实践指南 相关的操作: brew install linkerd?'
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+  command: brew install linkerd
+- type: operation
+  question: '如何执行与 Linkerd 轻量级服务网格实践指南 相关的操作: linkerd install | kubectl apply -f -?'
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+  command: linkerd install | kubectl apply -f -
+- type: operation
+  question: '如何执行与 Linkerd 轻量级服务网格实践指南 相关的操作: helm repo add linkerd https://helm.linkerd.io/stable?'
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 中的操作步骤。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+  command: helm repo add linkerd https://helm.linkerd.io/stable
+- type: comparison
+  question: Linkerd 轻量级服务网格实践指南 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/99-linkerd-service-mesh-guide.md
+- type: concept
+  question: 在 Spring Cloud Kubernetes 与服务网格集成指南 中, 概述 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md 的「概述」章节。
+  source: domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md
+  section: 概述
+- type: concept
+  question: 在 Spring Cloud Kubernetes 与服务网格集成指南 中, Spring Cloud 与 K8s 原生能力映射 是什么?
+  answer: 参见 domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md 的「Spring Cloud 与 K8s 原生能力映射」章节。
+  source: domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md
+  section: Spring Cloud 与 K8s 原生能力映射
+- type: comparison
+  question: Spring Cloud Kubernetes 与服务网格集成指南 中有哪些技术对比?
+  answer: 参见 domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md 中的对比分析。
+  source: domain-26-service-mesh-microservices/99-spring-cloud-kubernetes-service-mesh-guide.md

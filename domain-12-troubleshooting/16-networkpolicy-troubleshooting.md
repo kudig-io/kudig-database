@@ -1,6 +1,61 @@
-# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)
+---
+title: NetworkPolicy 故障排查
+description: '# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)'
+category: troubleshooting
+tags:
+- networkpolicy
+- calico
+- cilium
+- cni
+- network
+- firewall
+- apiserver
+- prometheus
+- flannel
+- job
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- NetworkPolicy 不生效
+- 网络策略阻断
+- calico policy
+- pod 无法通信
+trigger_keywords:
+- NetworkPolicy
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/networkpolicy-fta.md
+  label: '故障树: networkpolicy'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)
 
 ---
 

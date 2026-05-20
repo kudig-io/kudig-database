@@ -1,25 +1,71 @@
 ---
-title: "CNI 架构与核心原理"
-description: "深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM 与网络策略"
-category: "domain-5-networking"
-tags: [k8s, cni, network, flannel, calico, cilium, weave, ipam, network-policy]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: CNI 架构与核心原理
+description: 深入解析 Container Network Interface (CNI) 的架构设计、规范接口、主流插件对比（Flannel/Calico/Cilium/Weave）、IPAM 与网络策略
+category: domain-5-networking
+tags:
+- k8s
+- cni
+- network
+- flannel
+- calico
+- cilium
+- weave
+- ipam
+- network-policy
+- kubelet
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CNI 架构与核心原理 是什么
+- 如何 CNI 架构与核心原理
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- CNI
+- 架构与核心原理
+- networking
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "06-service-concepts-types.md"
-    type: "depth"
-    desc: "Service 核心概念与类型"
-  - path: "../topic-fta/list/network-policy-fta.md"
-    type: "fta"
-    desc: "网络策略故障树"
-  - path: "../topic-fta/list/csi-fta.md"
-    type: "fta"
-    desc: "CSI 故障树"
+- path: 06-service-concepts-types.md
+  type: depth
+  desc: Service 核心概念与类型
+- path: ../topic-fta/list/network-policy-fta.md
+  type: fta
+  desc: 网络策略故障树
+- path: ../topic-fta/list/csi-fta.md
+  type: fta
+  desc: CSI 故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
 ---
+
 
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
 

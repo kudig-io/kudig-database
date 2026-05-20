@@ -1,3 +1,42 @@
+---
+title: Docker 自动化运维与CI/CD集成
+description: '# Docker 自动化运维与CI/CD集成'
+category: docker
+tags:
+- docker
+- container
+- image
+- prometheus
+- containerd
+- redis
+- postgresql
+- job
+- ingress
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Docker 自动化运维与CI/CD集成 是什么
+- 如何 Docker 自动化运维与CI/CD集成
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Docker
+- 自动化运维与CI
+- CD集成
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
+
 # Docker 自动化运维与CI/CD集成
 
 > **适用版本**: Docker 20.10+ / Docker 24.0+ / Docker 25.0+ | **最后更新**: 2026-01

@@ -1,4 +1,85 @@
+---
+title: 'Day 13: 网络栈 - Ingress + NetworkPolicy'
+description: '# Day 13: 网络栈 - Ingress + NetworkPolicy'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- helm
+- ingress
+- networkpolicy
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 13: 网络栈 - Ingress + NetworkPolicy 是什么'
+- '如何 Day 13: 网络栈 - Ingress + NetworkPolicy'
+trigger_keywords:
+- Day
+- '13:'
+- 网络栈
+- Ingress
+- NetworkPolicy
+- learn
+---
+
+
 # Day 13: 网络栈 - Ingress + NetworkPolicy
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY13
+title: Day 13 - 网络栈 - Ingress + NetworkPolicy
+topic: kubernetes
+type: hands-on-guide
+tags: [ingress, networkpolicy, nginx-ingress, tls, hostname, path, routing, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Ingress 怎么配置"
+  - "Ingress Controller 怎么选"
+  - "TLS 证书怎么配"
+  - "NetworkPolicy 怎么写"
+  - "L7 路由怎么实现"
+trigger_keywords:
+  - Ingress
+  - Ingress Controller
+  - Nginx Ingress
+  - TLS
+  - hostname
+  - path
+  - rewrite
+  - canary
+  - NetworkPolicy
+  - egress
+  - ingress
+  - podSelector
+  - namespaceSelector
+  - ipBlock
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+  - developer
+estimated_read_time: 45min
+related_domains:
+  - domain-5-networking
+  - domain-12-troubleshooting
+related_topics:
+  - networking
+  - ingress
+  - networkpolicy
+  - tls
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-14-storage-practice.md
+  - domain-5-networking/19-ingress-fundamentals.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: HTTP 路由与网络隔离
 

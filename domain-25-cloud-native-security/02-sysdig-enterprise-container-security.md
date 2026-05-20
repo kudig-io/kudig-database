@@ -1,3 +1,42 @@
+---
+title: Sysdig企业级容器安全深度实践
+description: '# Sysdig企业级容器安全深度实践'
+category: cloud-native-security
+tags:
+- k8s
+- security
+- cloud-native
+- falco
+- opa
+- kubelet
+- prometheus
+- calico
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Sysdig企业级容器安全深度实践 是什么
+- 如何 Sysdig企业级容器安全深度实践
+- Kubernetes 25 cloud native security 最佳实践
+trigger_keywords:
+- Sysdig企业级容器安全深度实践
+- cloud
+- native
+- security
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # Sysdig企业级容器安全深度实践
 
 > **Author**: Container Security Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

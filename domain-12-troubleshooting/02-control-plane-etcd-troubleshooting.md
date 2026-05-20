@@ -1,13 +1,62 @@
 ---
-title: "etcd 故障排查"
-description: "系统化故障排查 etcd 故障：Leader 选举失败、WAL 写入延迟、snapshot 阻塞、磁盘 IO 瓶颈、空间配额耗尽、证书过期、MVRR 读延迟与集群 quorum 丢失的诊断与修复"
-category: "domain-12-troubleshooting"
-tags: [k8s, troubleshooting, etcd, raft, leader-election, snapshot, disk-io, debugging]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
-authors:
-  - name: "KUDIG Team"
-    role: "contributor"
+title: etcd 故障排查
+description: '# 02 - etcd 故障排查 (etcd Troubleshooting)'
+category: troubleshooting
+tags:
+- etcd
+- raft
+- leader-election
+- snapshot
+- disk-io
+- quota
+- certificate
+- apiserver
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- etcd 不工作
+- Leader 选举失败
+- etcd 空间耗尽
+- snapshot 失败
+- 磁盘 IO 瓶颈
+trigger_keywords:
+- etcd
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/etcd-fta.md
+  label: '故障树: etcd'
+---
+
+
+# 02 - etcd 故障排查 (etcd Troubleshooting)
 difficulty: "advanced"
 related_docs:
   - path: "01-control-plane-apiserver-troubleshooting.md"

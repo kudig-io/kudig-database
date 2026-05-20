@@ -1,3 +1,37 @@
+---
+title: 03 - 研发环境部署 (Development Environment Deployment)
+description: '# 03 - 研发环境部署 (Development Environment Deployment)'
+category: deployment
+tags:
+- k8s
+- deployment
+- rolling-update
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- cilium
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 研发环境部署 (Development Environment Deployment) 是什么
+- 如何 研发环境部署 (Development Environment Deployment)
+trigger_keywords:
+- 研发环境部署
+- Development
+- Environment
+- Deployment
+- deployment
+---
+
+
 # 03 - 研发环境部署 (Development Environment Deployment)
 
 > **适用场景**: 开发团队、测试环境、CI/CD 集成 | **预计时间**: 2-4 小时 | **复杂度**: ⭐⭐⭐  

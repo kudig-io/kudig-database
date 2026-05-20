@@ -1,3 +1,37 @@
+---
+title: 06 - Terway 性能调优 (Performance Tuning)
+description: '## 1. 网络模式性能对比'
+category: terway
+tags:
+- k8s
+- terway
+- networking
+- alicloud
+- kubelet
+- prometheus
+- cilium
+- daemonset
+- networkpolicy
+- crd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+estimated_read_time: 10min
+intent_queries:
+- Terway 性能调优 (Performance Tuning) 是什么
+- 如何 Terway 性能调优 (Performance Tuning)
+trigger_keywords:
+- Terway
+- 性能调优
+- Performance
+- Tuning
+- terway
+---
+
+
 # 06 - Terway 性能调优 (Performance Tuning)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32+ | **Terway 版本**: v1.5+ | **最后更新**: 2026-05

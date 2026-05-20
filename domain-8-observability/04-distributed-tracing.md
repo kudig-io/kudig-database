@@ -1,25 +1,73 @@
 ---
-title: "分布式追踪体系"
-description: "深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在 K8s 中的集成实践"
-category: "domain-8-observability"
-tags: [k8s, tracing, opentelemetry, jaeger, span, distributed-tracing, observability]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 分布式追踪体系
+description: 深入解析分布式追踪：OpenTelemetry 架构、Jaeger/Knative 追踪、Span/Trace 模型、Baggage、采样策略与在 K8s 中的集成实践
+category: domain-8-observability
+tags:
+- k8s
+- tracing
+- opentelemetry
+- jaeger
+- span
+- distributed-tracing
+- observability
+- prometheus
+- grafana
+- helm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 分布式追踪体系 是什么
+- 如何 分布式追踪体系
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 分布式追踪体系
+- observability
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-observability-architecture-overview.md"
-    type: "depth"
-    desc: "可观测性架构体系"
-  - path: "02-monitoring-metrics-system.md"
-    type: "depth"
-    desc: "指标监控体系"
-  - path: "../domain-26-service-mesh/"
-    type: "depth"
-    desc: "服务网格"
+- path: 01-observability-architecture-overview.md
+  type: depth
+  desc: 可观测性架构体系
+- path: 02-monitoring-metrics-system.md
+  type: depth
+  desc: 指标监控体系
+- path: ../domain-26-service-mesh/
+  type: depth
+  desc: 服务网格
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
 ---
+
 
 # 04 - 分布式追踪体系 (Distributed Tracing)
 

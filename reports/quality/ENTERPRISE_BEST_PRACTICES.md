@@ -1,3 +1,32 @@
+---
+title: Kubernetes扩展生态企业级最佳实践
+description: '# Kubernetes扩展生态企业级最佳实践'
+category: general
+tags:
+- k8s
+- apiserver
+- prometheus
+- grafana
+- helm
+- argocd
+- docker
+- mysql
+- statefulset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes扩展生态企业级最佳实践 是什么
+- 如何 Kubernetes扩展生态企业级最佳实践
+trigger_keywords:
+- Kubernetes扩展生态企业级最佳实践
+---
+
+
 # Kubernetes扩展生态企业级最佳实践
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **维护者**: Kusheet Extensions Team

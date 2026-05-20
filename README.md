@@ -1,3 +1,52 @@
+---
+title: KUDIG Database
+title_en: Kubernetes Production Operations Knowledge Base
+description: 面向生产环境的 Kubernetes + AI Infrastructure 全域知识库，支持 NotebookLM / IMA / RAG / Agent 训练语料
+category: general
+tags:
+- kubernetes
+- devops
+- sre
+- ai-infrastructure
+- knowledge-base
+- fault-tree-analysis
+- agent-corpus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE/运维工程师
+- AI 工程师
+- 平台工程师
+- 云原生开发者
+- 技术学习者
+estimated_read_time: 30min
+corpus_stats:
+  total_md_files: 3337
+  domains: 40
+  topics: 21
+  fta_trees: 81
+  febm_docs: 11
+  skills: 34
+  ai_agent_docs: 58
+  cncf_projects: 219
+  k8s_versions: "v1.25-v1.32"
+intent_queries:
+- KUDIG 知识库是什么
+- 如何使用 KUDIG 构建 K8s 运维 Agent
+- K8s 故障排查知识库
+- Kubernetes AI 语料库
+- FTA 故障树分析方法论
+- 如何导入 NotebookLM / RAG
+trigger_keywords:
+- kudig
+- kubernetes knowledge base
+- k8s troubleshooting
+- fault tree analysis
+- ai agent corpus
+- devops knowledge base
+---
+
 <div align="center">
 
 <!-- ==================================================================
@@ -16,7 +65,7 @@
 ║              KUBERNETES  PRODUCTION  OPERATIONS  KNOWLEDGE BASE          ║
 ║                                                                          ║
 ║  ┌──────────────────────────────────────────────────────────────────┐   ║
-║  │  📚 3200+ Docs  │  🌐 40 Domains  │  🤖 AI-Ready  │  ⚡ Production  │   ║
+║  │  📚 3300+ Docs  │  🌐 40 Domains  │  🤖 AI-Ready  │  ⚡ Production  │   ║
 ║  └──────────────────────────────────────────────────────────────────┘   ║
 ║                                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════╝
@@ -33,7 +82,7 @@
 
 <!-- Badges Row -->
 <p>
-  <img src="https://img.shields.io/badge/文档-3200%2B-blue?style=flat-square&logo=readthedocs" alt="文档数量"/>
+  <img src="https://img.shields.io/badge/文档-3300%2B-blue?style=flat-square&logo=readthedocs" alt="文档数量"/>
   <img src="https://img.shields.io/badge/知识域-40%2B-green?style=flat-square&logo=bookstack" alt="知识领域"/>
   <img src="https://img.shields.io/badge/总字数-5500万%2B-orange?style=flat-square&logo=markdown" alt="总字数"/>
   <img src="https://img.shields.io/badge/CNCF项目-219-purple?style=flat-square&logo=cncf" alt="CNCF项目"/>
@@ -95,7 +144,7 @@
 ### 📚 内容全面性
 - **5500万+** 字符（约1800万中文字）
 - **3200+** 篇技术文档
-- **40** 个核心知识域 + **19** 个专题目录
+- **40** 个核心知识域 + **21** 个专题目录
 - **219** 个 CNCF 开源项目
 - **67** 个 FTA 故障树
 - **58** 篇 AI Agent 工程
@@ -187,6 +236,120 @@ skill:
     - topic-fta/list/*.md    # 故障树分析
     - topic-febm/*.md        # 取证方法论
   agent_type: diagnostic    # 诊断型 Agent
+```
+
+### 方式四：导出智能体语料（完整指南）
+
+> 本节面向 AI 工程团队，说明如何将本知识库导出为结构化语料，用于训练或微调智能 Agent。
+
+#### 导出格式与结构
+
+| 导出格式 | 适用场景 | 文件类型 |
+|:---|:---|:---|
+| **Markdown 原始** | 直接导入 RAG 系统（如 LangChain/LlamaIndex） | `.md` |
+| **JSON 分块** | 结构化检索、Embedding 训练 | `.json` |
+| **Q&A 对话集** | SFT 微调、监督学习 | `.jsonl` |
+| **工具调用轨迹** | Agent 行为克隆、RLHF | `.jsonl` |
+
+#### 快速导出命令
+
+```bash
+# ============================================
+# 智能体语料导出脚本
+# ============================================
+
+# 方式 A: 完整导出（默认）
+./scripts/export-corpus.sh
+
+# 方式 B: 仅导出 Agent 核心语料（FTA + FEBM + Skills）
+./scripts/export-corpus.sh -f agent
+
+# 方式 C: 轻量导出（仅 FTA + Skills）
+./scripts/export-corpus.sh -f lite
+
+# 方式 D: 指定输出目录 + 压缩
+./scripts/export-corpus.sh -f full -o my-corpus -c
+```
+
+**脚本功能：**
+- ✅ 自动创建输出目录结构
+- ✅ 按格式（full/agent/lite）选择性导出
+- ✅ 生成元数据（corpus-info.json）
+- ✅ 生成分块策略（chunking-strategy.json）
+- ✅ 生成 QA 对话模板（qa-template.json）
+- ✅ 生成工具调用轨迹模板（tool-trace-template.json）
+- ✅ 可选压缩（.tar.gz）
+
+#### 导出文档清单与规模
+
+| 目录 | 文档数 | 主要内容 | 适用场景 |
+|:---|:---:|:---|:---|
+| **topic-fta/** | 81 篇 | FTA 故障树完整体系（TE-1~TE-16、向量匹配、执行引擎） | Agent 诊断推理 |
+| **topic-febm/** | 11 篇 | FEBM 取证方法论、联合诊断案例 | Agent 取证分析 |
+| **topic-skills/** | 34 篇 | 可执行自动修复技能（OOM、调度、网络等） | Agent 工具调用 |
+| **topic-structural-trouble-shooting/** | 72 篇 | 结构化详细排查步骤（按组件/现象分） | Agent + 人工排查 |
+| **domain-12-troubleshooting/** | 50 篇 | 生产级故障排查知识（原理+案例） | 人工学习参考 |
+
+#### 双用途导出方案（Agent + 人工阅读）
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    双用途导出方案                                    │
+├─────────────────────────────────────────────────────────────────────┤
+│  方案 A: 合并导出（推荐）                                            │
+│  导出一个完整包，同时包含：                                          │
+│    • 原始 .md 文件（人工阅读）                                       │
+│    • 结构化 JSON 分块（Agent 使用）                                  │
+│    • 元数据 + 分块策略（AI 工程用）                                  │
+│                                                                     │
+│  方案 B: 分层导出                                                    │
+│  分为两个独立包：                                                    │
+│    • kudig-corpus-agent.tar.gz    → Agent 专用（优化后）             │
+│    • kudig-corpus-human.tar.gz    → 人工阅读专用（原始 + 索引）      │
+│                                                                     │
+│  方案 C: 渐进式导出                                                  │
+│  按使用场景分批导出：                                                │
+│    • 第 1 批：问题排查核心（FTA + Skills + Structural）               │
+│    • 第 2 批：深度学习（Domain + FEBM）                              │
+│    • 第 3 批：扩展知识（CNCF 生态 + 云厂商）                         │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+#### Q&A 语料示例
+
+```json
+{
+  "question": "Pod 处于 CrashLoopBackOff 状态，如何排查？",
+  "answer": "1. kubectl describe pod <name> 查看 Events\n2. kubectl logs <name> --previous 查看上次崩溃日志\n3. 检查 OOMKilled: kubectl get pod <name> -o jsonpath='{.status.containerStatuses[0].lastState}'\n4. 检查资源限制: kubectl get pod <name> -o jsonpath='{.spec.containers[0].resources}'\n5. 参考 FTA: topic-fta/list/pod-fta.md BE-2.3 路径",
+  "source": "topic-skills/02-pod-crashloop-oomkilled.md",
+  "type": "troubleshooting",
+  "tags": ["pod", "crashloop", "oom", "debugging"]
+}
+```
+
+#### 工具调用轨迹示例
+
+```json
+{
+  "chunk_id": "fta-te2-ie21-be23-001",
+  "document": {
+    "title": "TE-2 应用服务不可用 - OOMKilled 路径",
+    "path": "topic-fta/kubernetes-fta-full-analysis-v2.md",
+    "section": "三、TE-2 应用服务不可用 (P0)"
+  },
+  "metadata": {
+    "type": "fta_bottom_event",
+    "fta_code": "BE-2.3",
+    "severity": "P0",
+    "cloud_provider": "generic",
+    "kubernetes_version": "v1.25+"
+  },
+  "tags": ["OOMKilled", "内存", "JVM", "CrashLoopBackOff"],
+  "references": [
+    "topic-structural-trouble-shooting/07-oom-memory-diagnosis.md",
+    "topic-skills/oom-healing-skill.md"
+  ]
+}
 ```
 
 ---
@@ -344,7 +507,58 @@ flowchart TD
     style E fill:#22c55e,stroke:#166534,color:#fff
 ```
 
----
+### 场景四：生产问题排查完整工作流（SRE 深度指南）
+
+> 本指南面向 SRE/运维工程师，提供从**问题现象**到**根因定位**再到**自动修复**的完整闭环路径。
+
+#### 问题排查知识体系全景
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    Kudig-DB 问题排查知识体系                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐                │
+│  │  症状快速    │────►│   FTA       │────►│ Structural  │                │
+│  │  映射层      │     │  故障树     │     │  详细排查   │                │
+│  │  入口诊断    │     │  根因方向    │     │  详细步骤    │                │
+│  └─────────────┘     └─────────────┘     └─────────────┘                │
+│        │                   │                   │                           │
+│        ▼                   ▼                   ▼                           │
+│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐                │
+│  │  向量匹配    │     │  动态概率   │     │  证据置信度 │                │
+│  │  (增强)     │     │  (增强)     │     │  (增强)     │                │
+│  └─────────────┘     └─────────────┘     └─────────────┘                │
+│        │                   │                   │                           │
+│        ▼                   ▼                   ▼                           │
+│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐             │
+│  │  Skills     │◄────│  FEBM       │◄────│  Domain     │             │
+│  │  自动修复   │     │  取证分析   │     │  深度 Dive  │             │
+│  └─────────────┘     └─────────────┘     └─────────────┘             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 方法论选择指南
+
+| 场景 | FTA | FEBM | FTA+FEBM |
+|:---|:---:|:---:|:---:|
+| 已知故障模式 | ✅ 最佳 | ⚠️ 不推荐 | ⚠️ 不需要 |
+| 未知故障 | ⚠️ 可用 | ✅ 最佳 | ✅ 联合 |
+| 需要快速恢复 | ✅ 最佳 | ⚠️ 较慢 | ⚠️ 可用 |
+| 事后复盘 | ⚠️ 可用 | ✅ 最佳 | ✅ 最佳 |
+| 多因素复杂故障 | ⚠️ 可用 | ⚠️ 可用 | ✅ 最佳 |
+| 安全事件取证 | ⚠️ 可用 | ✅ 最佳 | ✅ 联合 |
+
+#### 问题域 → 文档映射表
+
+| 问题域 | FTA 路径 | 详细排查 | 深度文档 |
+|:---|:---|:---|:---|
+| **控制平面 (TE-1)** | [TE-1 集群不可用](./topic-fta/kubernetes-fta-full-analysis.md) | [API Server](./topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md) · [etcd](./topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md) · [Scheduler](./topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md) | [domain-3](./domain-3-control-plane/) |
+| **工作负载 (TE-2/3)** | [TE-2 应用不可用](./topic-fta/kubernetes-fta-full-analysis.md) · [TE-3 Pod启动失败](./topic-fta/kubernetes-fta-full-analysis.md) | [Pod](./topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md) · [Deployment](./topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md) · [StatefulSet](./topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md) | [domain-4](./domain-4-workloads/) |
+| **网络 (TE-4)** | [TE-4 网络异常](./topic-fta/kubernetes-fta-full-analysis.md) | [CNI](./topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) · [DNS](./topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md) · [Service](./topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md) | [domain-5](./domain-5-networking/) |
+| **存储 (TE-5)** | [TE-5 存储失败](./topic-fta/kubernetes-fta-full-analysis.md) | [PV/PVC](./topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md) · [CSI](./topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) | [domain-6](./domain-6-storage/) |
+| **安全 (TE-7)** | [TE-7 认证失败](./topic-fta/kubernetes-fta-full-analysis.md) | [RBAC](./topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md) · [证书](./topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md) | [domain-7](./domain-7-security/) |
+| **可观测性 (TE-8)** | [TE-8 监控异常](./topic-fta/kubernetes-fta-full-analysis.md) | [监控概览](./topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md) · [OTel](./topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md) · [eBPF可观测](./topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md) | [domain-8](./domain-8-observability/) |
+| **服务网格 (TE-10)** | [TE-10 ASM故障](./topic-fta/kubernetes-fta-full-analysis.md) | [Istio](./topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md) | [domain-26](./domain-26-service-mesh-microservices/) |
 
 ## 📊 内容统计
 
@@ -356,10 +570,10 @@ flowchart TD
 | 指标 | 数值 |
 |------|------|
 | 文件总数 | 12,700+ |
-| Markdown 文档 | 3,200+ |
+| Markdown 文档 | 3,337 |
 | 总字符数 | 5500万+ |
 | 核心知识域 | 40 |
-| 专题目录 | 19 |
+| 专题目录 | 21 |
 
 </td>
 <td width="33%">
@@ -368,8 +582,8 @@ flowchart TD
 | 指标 | 数值 |
 |------|------|
 | AI Agent 文档 | 58 篇 |
-| FTA 故障树 | 67 篇 |
-| FEBM 取证 | 10 篇 |
+| FTA 故障树 | 81 篇 |
+| FEBM 取证 | 11 篇 |
 | 学习课程 | 92 篇 |
 | CNCF 项目 | 219 个 |
 
@@ -379,8 +593,8 @@ flowchart TD
 ### 🔧 运维专题
 | 指标 | 数值 |
 |------|------|
-| 故障排查文档 | 48+ |
-| 技能库 (Skills) | 30 篇 |
+| 故障排查文档 | 72+ |
+| 技能库 (Skills) | 34 篇 |
 | 速查卡 | 9 张 |
 | 演示文档 | 13 篇 |
 | 运维词典 | 207 篇 |
@@ -821,7 +1035,7 @@ man prometheus
 
 | 文件/目录 | 说明 |
 |:---|:---|
-| [INDEX.md](./INDEX.md) | 全局知识库索引，按逻辑分组组织所有 domain/topic 目录 |
+| [INDEX.md](./docs/indexes/INDEX.md) | 全局知识库索引，按逻辑分组组织所有 domain/topic 目录 |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | 贡献指南：命名规范、文档结构、质量标准、提交约定 |
 | [CHANGELOG.md](./CHANGELOG.md) | 版本变更日志 |
 | [templates/](./templates/) | 文档模板（域文章、FTA 故障树、速查卡、Skill 工单） |
@@ -829,10 +1043,55 @@ man prometheus
 | [corpus-config/](./corpus-config/) | AI 语料配置：RAG 分块策略、NotebookLM/IMA/RAG Profile |
 | [reports/](./reports/) | 质量报告、统计数据（STATS、QUALITY_REPORT 系列） |
 | [visualizations/](./visualizations/) | 知识库可视化图表与架构图 |
-| [OPEN-SOURCE-ECOSYSTEM.md](./OPEN-SOURCE-ECOSYSTEM.md) | 开源生态全景分析 |
-| [OPEN-SOURCE-SELECTION-GUIDE.md](./OPEN-SOURCE-SELECTION-GUIDE.md) | 开源产品选型指南 |
-| [STORAGE-INDEX.md](./STORAGE-INDEX.md) | 存储知识域全局索引 |
+| [OPEN-SOURCE-ECOSYSTEM.md](./docs/ecosystem/OPEN-SOURCE-ECOSYSTEM.md) | 开源生态全景分析 |
+| [OPEN-SOURCE-SELECTION-GUIDE.md](./docs/ecosystem/OPEN-SOURCE-SELECTION-GUIDE.md) | 开源产品选型指南 |
+| [STORAGE-INDEX.md](./docs/indexes/STORAGE-INDEX.md) | 存储知识域全局索引 |
 | [.editorconfig](./.editorconfig) | 跨编辑器格式一致性配置 |
+| [docs/agent-specs/](./docs/agent-specs/) | AI Agent 规格文档（P0-P3 工单分类、协调协议、决策树等） |
+| [docs/ecosystem/](./docs/ecosystem/) | 开源生态评估与选型指南 |
+| [docs/indexes/](./docs/indexes/) | 全局索引文档 |
+| [docs/assessments/](./docs/assessments/) | 质量评估与改进报告 |
+| [scripts/](./scripts/) | 工具脚本（27个：语料导出、质量检查、Front matter 校验等） |
+
+### 工具脚本速查
+
+| 脚本 | 用途 |
+|:---|:---|
+| `scripts/export-corpus.sh` | 语料导出（full/agent/lite） |
+| `scripts/validate-frontmatter.py` | Front matter 校验 |
+| `scripts/generate-qa-corpus.py` | QA 语料生成 |
+| `scripts/enhance-cross-refs.py` | 交叉引用批量生成 |
+| `scripts/gen-doc-stats.py` | 文档统计 |
+| `scripts/check-broken-links.sh` | 死链检测 |
+| `scripts/batch-fix-quality.py` | 批量质量修复 |
+| `scripts/comprehensive-quality-check.sh` | 综合质量检查 |
+| `scripts/format-intent-queries.py` | 意图查询格式化 |
+| `scripts/build-index-vector.py` | 索引向量构建 |
+
+### AI Agent 规格文档
+
+本知识库包含完整的 AI Agent 工程规格，位于 `docs/agent-specs/`：
+
+| 编号 | 文档 | 说明 |
+|:---|:---|:---|
+| P0-1 | Ticket 分类与意图识别 | 工单自动分类模型 |
+| P0-1 | Intent Corpus (JSONL) | 意图识别语料 |
+| P0-2 | 多技能协调协议 | Agent 间协作规范 |
+| P0-3 | 会话上下文管理 | 多轮对话状态管理 |
+| P0 | Knowledge Graph RDF 模型 | 知识图谱本体定义 |
+| P0 | Tool Schema 定义 | 工具调用接口规范 |
+| P1-4 | 决策树可视化 (Mermaid) | 诊断决策流程 |
+| P1-4 | 决策树 Mermaid 规格 | 详细可视化规格 |
+| P1-5 | OnCall 速查卡 | 值班快速参考 |
+| P1-6 | 告警→工单闭环 | 自动化响应链路 |
+| P1-7 | 反思机制 | Agent 自我纠错 |
+| P1-8 | 诊断基准测试 | Agent 能力评估 |
+| P2-7 | AI/ML 工作负载排障 | GPU/训练/推理故障 |
+| P2-8 | 数据库中间件排障 | MySQL/Redis/Kafka 故障 |
+| P2-9 | 非 K8s 基础设施排障 | 服务器/网络/存储硬件 |
+| P3-10 | 云厂商特定排障 | AWS/GCP/Azure/阿里云 |
+| P3-11 | 安全事件 SOP | 安全合规检查清单 |
+| P3-12 | 多集群联邦排障 | 跨集群故障诊断 |
 
 ---
 
@@ -846,6 +1105,8 @@ man prometheus
 
 | 日期 | 更新内容 |
 |:---|:---|
+| 2026-05 | **根目录结构优化** - 33个散落文件归位，新增 docs/agent-specs、docs/ecosystem、docs/indexes、docs/assessments |
+| 2026-05 | **README 全面增强** - 新增 YAML front matter、语料导出指南、问题排查工作流、Agent 规格文档、工具脚本速查 |
 | 2026-05 | **README 全面审核修复** - 修复 21 个断链、刷新统计数据、补充 7 个遗漏专题、云厂商表格扩充至 13 家 |
 | 2026-04 | **目录结构优化** - 统一命名规范(FTA/FEBM)、新增 metadata/corpus-config/templates/reports/ 基础设施、domain-98→domain-40 重编号 |
 | 2026-04 | **速查表全面补齐** - 新增 Docker、PromQL、网络诊断、Git、SQL 速查表，总数达 9 张 |
@@ -858,6 +1119,104 @@ man prometheus
 | 2026-02 | **YAML配置清单手册** - 36篇K8s全资源YAML参考 |
 | 2026-02 | **Domain 18-30 企业级专题** - 生产运维、监控日志、GitOps、安全合规等 |
 | 2026-02 | **Agent Harness 工程** - 12篇2026最新范式 |
+
+---
+
+## 🤖 AI Agent 集成指南
+
+> 本节面向 AI Agent 和自动化系统，提供结构化的知识库接入方式。
+
+### Front Matter 元数据
+
+每篇文档均包含结构化 YAML front matter，Agent 可直接解析：
+
+```yaml
+---
+title: 文档标题
+title_en: English Title
+description: 一句话描述
+category: domain-3-control-plane
+tags: [etcd, apiserver, ha]
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience: [SRE, 平台工程师]
+estimated_read_time: 15min
+intent_queries:
+- etcd 集群如何扩容
+- etcd 备份恢复步骤
+trigger_keywords:
+- etcd
+- backup
+- restore
+cross_refs:
+  - type: "fta"
+    path: "../topic-fta/list/etcd-fta.md"
+    label: "故障树: etcd"
+---
+```
+
+### 推荐 Agent 架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    K8sOpsAgent 架构                          │
+├─────────────────────────────────────────────────────────────┤
+│  输入层: 用户问题 / 告警 / 工单                              │
+│    ↓                                                         │
+│  意图识别: intent_queries + trigger_keywords 匹配            │
+│    ↓                                                         │
+│  知识检索:                                                   │
+│    • FTA 故障树 (topic-fta/) → 根因方向                      │
+│    • Structural 排障 (topic-structural-trouble-shooting/)    │
+│    • Domain 深度 (domain-*/ → cross_refs 关联)               │
+│    ↓                                                         │
+│  推理引擎: FTA 演绎 + FEBM 归纳 + 贝叶斯概率                 │
+│    ↓                                                         │
+│  执行层: Skills (topic-skills/) → 自动修复                   │
+│    ↓                                                         │
+│  反馈: 验证 → 更新置信度 → 学习闭环                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 语料加载示例
+
+```python
+import yaml, glob, json
+from pathlib import Path
+
+def load_corpus(base_path, corpus_type="full"):
+    """加载 KUDIG 知识库语料"""
+    patterns = {
+        "full": ["domain-*/*.md", "topic-*/*.md"],
+        "agent": ["topic-fta/*.md", "topic-skills/*.md", "topic-febm/*.md"],
+        "troubleshooting": [
+            "topic-fta/list/*.md",
+            "topic-structural-trouble-shooting/**/*.md",
+            "domain-12-troubleshooting/*.md",
+        ],
+    }
+    docs = []
+    for pattern in patterns.get(corpus_type, patterns["full"]):
+        for filepath in glob.glob(str(Path(base_path) / pattern)):
+            content = Path(filepath).read_text(encoding="utf-8")
+            # 解析 front matter
+            if content.startswith("---"):
+                end = content.find("---", 3)
+                if end > 0:
+                    fm = yaml.safe_load(content[3:end])
+                    body = content[end + 3:].strip()
+                    docs.append({
+                        "metadata": fm,
+                        "content": body,
+                        "path": str(filepath),
+                    })
+    return docs
+
+# 使用示例
+corpus = load_corpus("./", "agent")
+print(f"Loaded {len(corpus)} agent corpus documents")
+```
 
 ---
 

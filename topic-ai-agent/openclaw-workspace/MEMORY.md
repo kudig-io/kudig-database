@@ -1,8 +1,33 @@
 ---
-name: k8s-doctor-memory
+title: 记忆系统
 description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- prometheus
+- grafana
+- coredns
+- hpa
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 记忆系统 是什么
+- 如何 记忆系统
+trigger_keywords:
+- 记忆系统
+- ai
+- agent
 ---
 
 # 记忆系统

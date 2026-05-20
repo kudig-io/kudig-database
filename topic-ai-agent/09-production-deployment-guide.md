@@ -1,3 +1,39 @@
+---
+title: 生产部署指南：K8s 上运行 Agent 服务
+description: '# 生产部署指南：K8s 上运行 Agent 服务'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- prometheus
+- istio
+- redis
+- postgresql
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 生产部署指南：K8s 上运行 Agent 服务 是什么
+- 如何 生产部署指南：K8s 上运行 Agent 服务
+trigger_keywords:
+- 生产部署指南：K8s
+- 上运行
+- Agent
+- 服务
+- ai
+- agent
+---
+
+
 # 生产部署指南：K8s 上运行 Agent 服务
 
 > **文档类型**: 生产运维专题 | **最后更新**: 2026-03 | **关键词**: Agent 部署, K8s 生产, GPU 调度, HPA, 限流, 灰度发布, FastAPI, vLLM, Ray Serve, ServiceMesh

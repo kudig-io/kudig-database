@@ -1,3 +1,44 @@
+---
+title: 20 - Role / RoleBinding YAML 配置参考
+description: '# 20 - Role / RoleBinding YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- etcd
+- apiserver
+- harbor
+- hpa
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Role / RoleBinding YAML 配置参考 是什么
+- 如何 Role / RoleBinding YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- Role
+- RoleBinding
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/rbac-fta.md
+  label: '故障树: rbac'
+---
+
+
 # 20 - Role / RoleBinding YAML 配置参考
 
 ## 概述
@@ -911,6 +952,11 @@ rules:
 - apiGroups: ["autoscaling"]
   resources: ["*"]
   verbs: ["*"]
+
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 # 规则 6: policy API 组 (PodDisruptionBudget, PodSecurityPolicy)
 - apiGroups: ["policy"]

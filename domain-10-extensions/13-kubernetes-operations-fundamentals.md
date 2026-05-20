@@ -1,3 +1,43 @@
+---
+title: 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优
+description: '# 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优 是什么
+- 如何 Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- Kubernetes
+- 运维基础技能：日志管理
+- 备份恢复
+- 安全加固与性能调优
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # 130 - Kubernetes 运维基础技能：日志管理、备份恢复、安全加固与性能调优
 
 ## 日志管理与分析

@@ -1,3 +1,64 @@
+---
+title: 'Day 20: 故障排查实战'
+description: 'title: Day 20: 故障排查实战'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- docker
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 20: 故障排查实战 是什么'
+- '如何 Day 20: 故障排查实战'
+- 'Day 20: 故障排查实战 故障排查'
+- 'Day 20: 故障排查实战 排障步骤'
+trigger_keywords:
+- Day
+- '20:'
+- 故障排查实战
+- learn
+---
+
+---
+title: Day 20: 故障排查实战
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - kubernetes 故障排查实战练习
+  - k8s 常见故障注入和排除
+  - kubectl 故障排查命令练习
+  - ImagePullBackOff CrashLoopBackOff OOMKilled 排查
+trigger_keywords:
+  - 故障排查
+  - 实战
+  - ImagePullBackOff
+  - CrashLoopBackOff
+  - OOMKilled
+  - PVC Pending
+  - 故障注入
+  - 故障演练
+reading_level: intermediate
+audience:
+  - sre-engineer
+  - devops-engineer
+  - platform-engineer
+estimated_read_time: 240min
+related_domains:
+  - domain-12-troubleshooting
+  - topic-fta
+  - topic-febm
+related_topics:
+  - topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+---
+
 # Day 20: 故障排查实战
 
 > **学习时间**: 4-5 小时 | **主题**: 构造并排查常见故障

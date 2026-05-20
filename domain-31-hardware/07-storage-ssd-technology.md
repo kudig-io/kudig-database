@@ -1,3 +1,34 @@
+---
+title: SSD固态硬盘技术
+description: '## 概述'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- scheduler
+- opa
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- SSD固态硬盘技术 是什么
+- 如何 SSD固态硬盘技术
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- SSD固态硬盘技术
+- hardware
+---
+
+
 # SSD固态硬盘技术
 
 ## 概述

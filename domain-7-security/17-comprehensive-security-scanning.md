@@ -1,3 +1,46 @@
+---
+title: 17 - 安全扫描与漏洞检测工具
+description: '# 17 - 安全扫描与漏洞检测工具'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- prometheus
+- helm
+- containerd
+- docker
+- harbor
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 安全扫描与漏洞检测工具 是什么
+- 如何 安全扫描与漏洞检测工具
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 安全扫描与漏洞检测工具
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 17 - 安全扫描与漏洞检测工具
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 中高级 | **参考**: [Trivy](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [Falco](https://falco.org/)

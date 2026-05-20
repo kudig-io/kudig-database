@@ -1,3 +1,57 @@
+---
+title: 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+description: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- grafana
+- gateway
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 监控仪表板设计与最佳实践 (Monitoring Dashboards) 是什么
+- 如何 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 监控仪表板设计与最佳实践
+- Monitoring
+- Dashboards
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [grafana.com/docs](https://grafana.com/docs/)

@@ -21,3 +21,15 @@ index.html
 
 # macOS
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.ruff_cache/
+.venv/
+
+# MkDocs 生成产物
+site/
+
+# 视频生成产物
+video-output/

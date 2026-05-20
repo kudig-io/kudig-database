@@ -1,3 +1,31 @@
+---
+title: Kubernetes Secrets 最佳实践
+description: '# Kubernetes Secrets 最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Secrets 最佳实践 是什么
+- 如何 Kubernetes Secrets 最佳实践
+trigger_keywords:
+- Kubernetes
+- Secrets
+- 最佳实践
+- dictionary
+title_en: Good Practices For Kubernetes Secrets
+---
+
+
 # Kubernetes Secrets 最佳实践
 
 ## 概述

@@ -1,3 +1,37 @@
+---
+title: 04 - Terway 运维手册 (Operations Manual)
+description: '# 04 - Terway 运维手册 (Operations Manual)'
+category: terway
+tags:
+- k8s
+- terway
+- networking
+- alicloud
+- kubelet
+- prometheus
+- grafana
+- cilium
+- calico
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+estimated_read_time: 15min
+intent_queries:
+- Terway 运维手册 (Operations Manual) 是什么
+- 如何 Terway 运维手册 (Operations Manual)
+trigger_keywords:
+- Terway
+- 运维手册
+- Operations
+- Manual
+- terway
+---
+
+
 # 04 - Terway 运维手册 (Operations Manual)
 
 > **适用版本**: 阿里云 ACK v1.25 - v1.32+ | **Terway 版本**: v1.5+ | **最后更新**: 2026-05

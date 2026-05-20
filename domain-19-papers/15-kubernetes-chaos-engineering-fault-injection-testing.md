@@ -1,3 +1,42 @@
+---
+title: Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
+description: 本文档深入探讨了Kubernetes环境下的混沌工程实践和故障注入测试方法，基于大型互联网公司的混沌工程实践经验，提供从理论基础到实践操作的完整技术指南，帮助企业构建高韧性、高可靠性的云原生系统。
+category: papers
+tags:
+- k8s
+- papers
+- research
+- etcd
+- scheduler
+- controller-manager
+- prometheus
+- docker
+- mysql
+- statefulset
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing) 是什么
+- 如何 Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 混沌工程与故障注入测试
+- Chaos
+- Engineering
+- and
+- Fault
+- Injection
+- Testing
+---
+
+
 # Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
 
 > **作者**: 混沌工程专家 | **版本**: v1.5 | **更新时间**: 2026-03-03

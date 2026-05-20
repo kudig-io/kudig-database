@@ -1,23 +1,76 @@
 ---
-fta_id: "FTA-APISERVER-001"
-title: "API Server 异常故障树分析"
-component: "apiserver"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-APISERVER-001"
-last_updated: "2026-05"
+title: API Server 异常故障树分析
+description: '- **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- apiserver
+- etcd
+- authentication
+- authorization
+- kubelet
+- coredns
+- opa
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- API Server 异常故障树分析 是什么
+- 如何 API Server 异常故障树分析
+- API Server 异常故障树分析 根因分析
+- API Server 异常故障树分析 故障树
+trigger_keywords:
+- API
+- Server
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, apiserver, etcd, authentication, authorization]
-related_skills:
-  - "../topic-skills/11-control-plane-failure.md"
-knowledge_refs:
-  - "../domain-3-control-plane/12-apiserver-deep-dive.md"
-  - "../domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md"
-  - "../topic-structural-trouble-shooting/"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/17-apiserver-tuning.md
+  label: '深度文档: 17-apiserver-tuning'
+- type: structural
+  path: ../topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md
+  label: '结构化排障: 01-apiserver-troubleshooting'
+fta_metadata:
+  fta_id: FTA-APISERVER-001
+  top_event: API Server 异常 (不可用/性能劣化)
+  top_event_id: TE-APISERVER-001
+  bottom_events_count: 25
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get --raw /healthz 返回非 200"
+    - "kubectl get pods -n kube-system -l component=kube-apiserver 显示异常"
+    - "kubectl get --raw /metrics | grep etcd_request_errors 数值异常"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system -l component=kube-apiserver 检查 API Server Pod 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l component=kube-apiserver -o wide"
+    - "kubectl get --raw /healthz"
+    - "kubectl get --raw /healthz/etcd"
+    - "kubectl top nodes"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l component=kube-apiserver --force"
+      risk: "强制删除会导致 API Server 重启，集群所有操作中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get pods -n kube-system -l component=kube-apiserver 显示非 Running -->
 
 # API Server 异常 FTA 树
 

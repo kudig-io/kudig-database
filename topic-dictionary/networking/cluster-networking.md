@@ -1,3 +1,36 @@
+---
+title: 集群网络（Cluster Networking）
+description: '# 集群网络（Cluster Networking）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- kubelet
+- controller-manager
+- cilium
+- flannel
+- calico
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 集群网络（Cluster Networking） 是什么
+- 如何 集群网络（Cluster Networking）
+trigger_keywords:
+- 集群网络
+- Cluster
+- Networking
+- dictionary
+title_en: Clusters
+---
+
+
 # 集群网络（Cluster Networking）
 
 ## 概述

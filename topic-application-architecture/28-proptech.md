@@ -1,3 +1,47 @@
+---
+title: 房地产科技架构设计
+description: '# 房地产科技架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- mysql
+- gpu
+- nvidia
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 房地产科技架构师
+- 智慧社区技术负责人
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 房地产科技 Kubernetes PropTech
+- 智慧社区 IoT 阿里云架构
+- VR看房 Kubernetes GPU渲染
+- 房产交易平台 K8s 微服务
+- BIM数字化 房地产 Kubernetes
+trigger_keywords:
+- 房地产科技
+- PropTech
+- 智慧社区
+- VR看房
+- IoT
+- BIM
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-7-observability
+related_topics:
+- 39-smart-campus
+- 72-digital-twin-city
+- 52-smart-water
+---
+
+
 # 房地产科技架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

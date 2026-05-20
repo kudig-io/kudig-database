@@ -1,3 +1,36 @@
+---
+title: 15 - SLI/SLO/SLA工程实践
+description: '# 15 - SLI/SLO/SLA工程实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- grafana
+- redis
+- postgresql
+- job
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- SLI/SLO/SLA工程实践 是什么
+- 如何 SLI/SLO/SLA工程实践
+trigger_keywords:
+- SLI
+- SLO
+- SLA工程实践
+- dictionary
+title_en: Sli Slo Sla Engineering
+---
+
+
+
 # 15 - SLI/SLO/SLA工程实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级

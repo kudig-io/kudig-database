@@ -1,3 +1,37 @@
+---
+title: Podman Desktop
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Podman Desktop 是什么
+- 如何 Podman Desktop
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Podman
+- Desktop
+- cncf
+- landscape
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+---
+
 # Podman Desktop
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

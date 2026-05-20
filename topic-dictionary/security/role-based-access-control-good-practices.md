@@ -1,3 +1,35 @@
+---
+title: 基于角色的访问控制（RBAC）最佳实践
+description: '# 基于角色的访问控制（RBAC）最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- daemonset
+- rbac
+- networkpolicy
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 基于角色的访问控制（RBAC）最佳实践 是什么
+- 如何 基于角色的访问控制（RBAC）最佳实践
+trigger_keywords:
+- 基于角色的访问控制
+- RBAC
+- 最佳实践
+- dictionary
+title_en: Role-Based Access Control
+---
+
+
 # 基于角色的访问控制（RBAC）最佳实践
 
 ## 概述

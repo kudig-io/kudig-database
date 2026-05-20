@@ -1,3 +1,53 @@
+---
+title: Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
+description: '# Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- scheduler
+- prometheus
+- grafana
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance) 是什么
+- 如何 Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Kube-proxy
+- 实现模式与性能优化
+- Kube-proxy
+- Modes
+- Performance
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  

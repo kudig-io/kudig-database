@@ -1,3 +1,50 @@
+---
+title: 35 - 模型漂移监控与预警
+description: '# 35 - 模型漂移监控与预警'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- redis
+- kafka
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 模型漂移监控与预警 是什么
+- 如何 模型漂移监控与预警
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 模型漂移监控与预警
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 35 - 模型漂移监控与预警
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [Evidently AI](https://www.evidentlyai.com/) | [WhyLabs](https://whylabs.ai/) | [Arize AI](https://arize.com/)

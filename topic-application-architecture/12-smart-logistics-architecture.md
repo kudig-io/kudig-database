@@ -1,3 +1,52 @@
+---
+title: 智慧物流与供应链Kubernetes生产架构设计
+description: '# 智慧物流与供应链 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- operator
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 物流行业架构师
+- 供应链技术负责人
+- 阿里云解决方案架构师
+- WMS/TMS开发者
+estimated_read_time: 5min
+intent_queries:
+- 智慧物流系统K8s架构设计
+- OMS订单履约全链路架构
+- 仓储管理WMS边缘部署
+- TMS运输路径优化
+- 物流跟踪大数据可视化
+trigger_keywords:
+- 智慧物流
+- 供应链
+- WMS
+- TMS
+- OMS
+- 仓储管理
+- 运输优化
+- 物流跟踪
+- 跨境物流
+- 即时配送
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-26-service-mesh-microservices
+- domain-7-observability
+- domain-5-iot-edge-computing
+related_topics:
+- topic-application-architecture/26-aviation-travel
+- topic-application-architecture/11-smart-retail-architecture
+- topic-application-architecture/29-agritech-iot
+- topic-functions/04-high-concurrency-system
+---
+
+
 # 智慧物流与供应链 Kubernetes 生产架构设计
 
 > **适用场景**: 快递快运 / 仓配一体 / 冷链物流 / 跨境物流 / 即时配送 / 供应链协同  

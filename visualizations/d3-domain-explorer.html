@@ -16,6 +16,9 @@ body{background:var(--bg);font-family:var(--fb);color:var(--t1);overflow:hidden;
 .topbar h1{font-size:.88rem;font-weight:700;flex:1}
 .topbar .legend{display:flex;gap:.8rem;font-size:.68rem;color:var(--t3)}
 .topbar .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+.dark-toggle{background:none;border:1px solid var(--bdr);border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.8rem;transition:all .2s;color:var(--t2)}
+.dark-toggle:hover{background:var(--bg3)}
+:root.dark-mode{--bg:#0f172a;--bg2:#1e293b;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--bdr:#334155}
 /* Controls */
 .controls{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:10}
 .controls button{padding:.3rem .7rem;font-size:.68rem;border:1px solid var(--bdr);background:rgba(255,255,255,.9);color:var(--t2);border-radius:6px;cursor:pointer;font-family:var(--fb);backdrop-filter:blur(8px);transition:all .15s;box-shadow:var(--shadow)}
@@ -41,6 +44,7 @@ svg{background:#f7f8fb}
 <div class="topbar">
   <a href="index.html">← 首页</a>
   <h1>D3 领域知识地图</h1>
+  <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">◐</button>
   <div class="legend">
     <span><i style="background:#0e7490"></i>K8s</span>
     <span><i style="background:#7c3aed"></i>AI Infra</span>
@@ -202,6 +206,8 @@ window.toggleLinks=function(){showLinks=!showLinks;linkEls.attr('display',showLi
 window.addEventListener('resize',function(){W=document.getElementById('canvas').clientWidth;H=document.getElementById('canvas').clientHeight;
   sim.force('center',d3.forceCenter(W/2,H/2));sim.alpha(0.3).restart()});
 })();
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){var t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if(document.activeElement.isContentEditable)return;e.preventDefault()}});
 </script>
+<script>function toggleDarkMode(){const d=document.documentElement;d.classList.toggle('dark-mode');const isDark=d.classList.contains('dark-mode');localStorage.setItem('kd-dark',isDark?'1':'0')}function initDarkMode(){const saved=localStorage.getItem('kd-dark');if(saved==='1'){document.documentElement.classList.add('dark-mode')}else if(saved===null&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark-mode')}}initDarkMode();</script>
 </body>
 </html>

@@ -1,3 +1,38 @@
+---
+title: DNS for Services and Pods
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- coredns
+- containerd
+- cri-o
+- redis
+- statefulset
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- DNS for Services and Pods 是什么
+- 如何 DNS for Services and Pods
+trigger_keywords:
+- DNS
+- for
+- Services
+- and
+- Pods
+- dictionary
+title_en: Pods
+---
+
+
 # DNS for Services and Pods
 
 ## 概述

@@ -1,3 +1,28 @@
+---
+title: 对象名称和 ID
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 对象名称和 ID 是什么
+- 如何 对象名称和 ID
+trigger_keywords:
+- 对象名称和
+- ID
+- dictionary
+title_en: Object Names And Ids
+---
+
+
 # 对象名称和 ID
 
 ## 概述

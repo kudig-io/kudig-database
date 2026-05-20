@@ -1,3 +1,33 @@
+---
+title: Dynamic Volume Provisioning（动态卷供给）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- statefulset
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Dynamic Volume Provisioning（动态卷供给） 是什么
+- 如何 Dynamic Volume Provisioning（动态卷供给）
+trigger_keywords:
+- Dynamic
+- Volume
+- Provisioning
+- 动态卷供给
+- dictionary
+title_en: Dynamic Volume Provisioning
+---
+
+
 # Dynamic Volume Provisioning（动态卷供给）
 
 ## 概述

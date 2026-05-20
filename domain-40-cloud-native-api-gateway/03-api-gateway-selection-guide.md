@@ -1,3 +1,40 @@
+---
+title: 03 - API 网关选型指南与对比矩阵
+description: '# 03 - API 网关选型指南与对比矩阵'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- istio
+- helm
+- redis
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- API 网关选型指南与对比矩阵 是什么
+- 如何 API 网关选型指南与对比矩阵
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- API
+- 网关选型指南与对比矩阵
+- cloud
+- native
+- api
+- gateway
+---
+
+
 # 03 - API 网关选型指南与对比矩阵
 
 > **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: 选型, 对比, Higress, APISIX, Kong, Envoy Gateway, Traefik

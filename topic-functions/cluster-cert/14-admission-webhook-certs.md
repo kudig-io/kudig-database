@@ -1,3 +1,53 @@
+---
+title: Admission Webhook 证书体系
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- apiserver
+- kubelet
+- istio
+- opa
+- operator
+- webhook
+- kserve
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 安全工程师
+- 应用开发者
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Admission Webhook 证书 caBundle 配置
+- Webhook 证书体系 cert-manager cainjector 自动更新
+- ValidatingWebhookConfiguration caBundle
+- Webhook 证书故障排查 x509 unknown authority
+- ValidatingAdmissionPolicy 无证书优势
+trigger_keywords:
+- Webhook
+- caBundle
+- cert-manager
+- cainjector
+- ValidatingWebhook
+- MutatingWebhook
+- failurePolicy
+- certificate
+- webhook-server-cert
+- 证书轮换
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/ca-generation
+- cluster-cert/apiserver-cert-flags
+---
+
+
 # Admission Webhook 证书体系
 
 ## 概述

@@ -1,3 +1,42 @@
+---
+title: Kratix 平台即代码 (Kratix Platform as Code)
+description: '## 概述 (Overview)'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- controller-manager
+- prometheus
+- grafana
+- helm
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Kratix 平台即代码 (Kratix Platform as Code) 是什么
+- 如何 Kratix 平台即代码 (Kratix Platform as Code)
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Kratix
+- 平台即代码
+- Kratix
+- Platform
+- as
+- Code
+- platform
+- engineering
+---
+
+
 # Kratix 平台即代码 (Kratix Platform as Code)
 
 ## 概述 (Overview)

@@ -1,20 +1,74 @@
 ---
-fta_id: "FTA-GATEWAY-014"
-title: "Gateway API 异常故障树分析"
-component: "gateway-api"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-GATEWAY-001"
-last_updated: "2026-05"
+title: Gateway API 异常故障树分析
+description: '| evt_config_error | 配置参数错误 | `kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=50 \| grep -i error`
+  | Controller 日志 | 配置错误信息 |'
+category: fta
+tags:
+- fta
+- troubleshooting
+- gateway-api
+- ingress
+- route
+- gateway-controller
+- istio
+- envoy
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- Gateway API 异常故障树分析 是什么
+- 如何 Gateway API 异常故障树分析
+- Gateway API 异常故障树分析 根因分析
+- Gateway API 异常故障树分析 故障树
+trigger_keywords:
+- Gateway
+- API
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, gateway-api, ingress, route, gateway-controller]
-related_skills: []
-knowledge_refs:
-  - "../domain-5-networking/06-ingress-load-balancer.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md
+  label: '结构化排障: 06-gateway-api-troubleshooting'
+fta_metadata:
+  fta_id: FTA-GATEWAY-001
+  top_event: Gateway API 异常 (路由失效/策略冲突/流量异常)
+  top_event_id: TE-GATEWAY-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get gateway,httproute,grpcroute -A 显示异常"
+    - "外部请求返回 404/503/Nothing matches"
+    - "kubectl describe gateway <name> -n <ns> 显示监听器错误"
+agent_notes:
+  decision_tree_entry: "kubectl get gateway,httproute -A 检查 Gateway API 资源状态"
+  critical_commands:
+    - "kubectl get gateway,httproute,grpcroute -A -o wide"
+    - "kubectl describe gateway <name> -n <ns>"
+    - "kubectl logs -n gateway-api-system -l app=gateway-api-controller --tail=100"
+    - "kubectl get events -A --field-selector involvedObject.kind=Gateway"
+  danger_operations:
+    - action: "kubectl delete gateway <name> -n <ns>"
+      risk: "删除 Gateway 会断开所有通过该网关的流量"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get gateway,httproute -A -o jsonpath='{range .items[?(@.status.conditions[?(@.type!=\"Ready\" && @.status!=\"Accepted\")])]} {.kind}/{.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示 Gateway API 资源异常 -->
 
 # Gateway API 异常 FTA 树
 

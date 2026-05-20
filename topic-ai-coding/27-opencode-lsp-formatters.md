@@ -1,3 +1,33 @@
+---
+title: LSP 代码智能与 Formatter
+description: '**文档类型**: 技术深度专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, LSP, Language Server Protocol, Formatter, Code Intelligence,
+  Diagnostics, ripgrep'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- llm
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- LSP 代码智能与 Formatter 是什么
+- 如何 LSP 代码智能与 Formatter
+trigger_keywords:
+- LSP
+- 代码智能与
+- Formatter
+- ai
+- coding
+---
+
 # LSP 代码智能与 Formatter
 
 > **文档类型**: 技术深度专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, LSP, Language Server Protocol, Formatter, Code Intelligence, Diagnostics, ripgrep

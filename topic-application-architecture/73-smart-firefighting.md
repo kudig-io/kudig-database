@@ -1,3 +1,52 @@
+---
+title: 智慧消防架构设计
+description: '# 智慧消防架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- gpu
+- nvidia
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 消防信息化架构师
+- IoT平台工程师
+- 视频AI开发者
+- 应急系统开发者
+estimated_read_time: 5min
+intent_queries:
+- 智慧消防系统架构设计
+- AI火眼视频分析K8s部署
+- 消防物联网IoT设备接入
+- 火灾预警应急指挥系统
+- 消防设施远程监控
+trigger_keywords:
+- 智慧消防
+- 消防物联网
+- AI火眼
+- 火灾预警
+- 应急指挥
+- 烟感探测
+- 视频分析
+- 消防联动
+- 等保三级
+- 消防监控
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-9-ai-ml
+- domain-5-iot-edge-computing
+- domain-7-observability
+related_topics:
+- topic-application-architecture/14-smart-healthcare-architecture
+- topic-application-architecture/47-smart-mining
+- topic-application-architecture/29-agritech-iot
+- topic-functions/05-iot-edge-computing
+---
+
+
 # 智慧消防架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

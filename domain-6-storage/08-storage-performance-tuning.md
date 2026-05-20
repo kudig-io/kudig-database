@@ -1,3 +1,43 @@
+---
+title: 08 - 存储性能调优与优化策略
+description: '# 08 - 存储性能调优与优化策略'
+category: storage
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- mysql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 存储工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储性能调优与优化策略 是什么
+- 如何 存储性能调优与优化策略
+- Kubernetes 6 storage 最佳实践
+trigger_keywords:
+- 存储性能调优与优化策略
+- storage
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-16-storage-fundamentals/
+  label: '相关知识域: domain-16-storage-fundamentals'
+---
+
+
 # 08 - 存储性能调优与优化策略
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 性能优化、调优参数、监控分析 | **最后更新**: 2026-02

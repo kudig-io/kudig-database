@@ -1,3 +1,41 @@
+---
+title: 边缘计算架构概述 (Edge Computing Architecture Overview)
+description: '# 边缘计算架构概述 (Edge Computing Architecture Overview)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- 边缘计算架构概述 (Edge Computing Architecture Overview) 是什么
+- 如何 边缘计算架构概述 (Edge Computing Architecture Overview)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- 边缘计算架构概述
+- Edge
+- Computing
+- Architecture
+- Overview
+- edge
+- computing
+---
+
+
 # 边缘计算架构概述 (Edge Computing Architecture Overview)
 
 ## 目录 (Table of Contents)

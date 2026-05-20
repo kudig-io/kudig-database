@@ -1,4 +1,89 @@
+---
+title: 'Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
+description: '# Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- hpa
+- vpa
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA 是什么'
+- '如何 Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA'
+trigger_keywords:
+- Day
+- '11:'
+- 工作负载
+- Pod
+- 生命周期
+- 资源管理
+- HPA
+- learn
+---
+
+
 # Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY11
+title: Day 11 - 工作负载 - Pod 生命周期 + 资源管理 + HPA
+topic: kubernetes
+type: hands-on-guide
+tags: [pod, lifecycle, probe, resources, qos, hpa, vpa, autoscaling, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "Pod 生命周期怎么理解"
+  - "Liveness/Readiness 探针怎么配"
+  - "resources requests/limits 怎么设置"
+  - "QoS 等级是什么"
+  - "HPA 怎么配置"
+trigger_keywords:
+  - Pod Lifecycle
+  - Init Container
+  - PostStart
+  - PreStop
+  - LivenessProbe
+  - ReadinessProbe
+  - StartupProbe
+  - resources
+  - requests
+  - limits
+  - QoS
+  - Guaranteed
+  - Burstable
+  - BestEffort
+  - HPA
+  - HorizontalPodAutoscaler
+  - autoscaling
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+  - developer
+estimated_read_time: 45min
+related_domains:
+  - domain-4-workloads
+  - domain-12-troubleshooting
+related_topics:
+  - workloads
+  - pod
+  - hpa
+  - resources
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-10-workloads-1.md
+  - domain-4-workloads/11-pod-lifecycle-events.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: Pod 高级配置与自动扩缩容
 

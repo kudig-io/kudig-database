@@ -1,3 +1,42 @@
+---
+title: AWS EKS (Elastic Kubernetes Service) 概述
+description: '# AWS EKS (Elastic Kubernetes Service) 概述'
+category: cloud-provider
+tags:
+- k8s
+- cloud
+- eks
+- gke
+- aks
+- ack
+- etcd
+- apiserver
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 云架构师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- AWS EKS (Elastic Kubernetes Service) 概述 是什么
+- 如何 AWS EKS (Elastic Kubernetes Service) 概述
+- Kubernetes 17 cloud provider 最佳实践
+trigger_keywords:
+- AWS
+- EKS
+- Elastic
+- Kubernetes
+- Service
+- 概述
+- cloud
+- provider
+---
+
+
 # AWS EKS (Elastic Kubernetes Service) 概述
 
 ## 产品简介

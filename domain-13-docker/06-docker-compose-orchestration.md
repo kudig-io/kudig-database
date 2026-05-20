@@ -1,3 +1,42 @@
+---
+title: Docker Compose 编排
+description: '> **生产环境运维专家注**: 包含多环境配置管理、服务依赖控制、资源编排优化、健康检查集成、自动化部署流水线等企业级编排最佳实践。'
+category: docker
+tags:
+- docker
+- container
+- image
+- argocd
+- opa
+- redis
+- postgresql
+- gateway
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Docker Compose 编排 是什么
+- 如何 Docker Compose 编排
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Docker
+- Compose
+- 编排
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
+
 # Docker Compose 编排
 
 > **适用版本**: Docker Compose v2.x (Compose Spec) | **最后更新**: 2026-01

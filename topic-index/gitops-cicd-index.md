@@ -1,3 +1,34 @@
+---
+title: GitOps / CI-CD 全局索引
+description: '## 架构基础'
+category: index
+tags:
+- k8s
+- index
+- catalog
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- jaeger
+- istio
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- GitOps / CI-CD 全局索引 是什么
+- 如何 GitOps / CI-CD 全局索引
+trigger_keywords:
+- GitOps
+- CI-CD
+- 全局索引
+- index
+---
+
 # GitOps / CI-CD 全局索引
 
 > 全局索引：按关键字 **gitops-cicd** 聚合项目内所有相关内容。

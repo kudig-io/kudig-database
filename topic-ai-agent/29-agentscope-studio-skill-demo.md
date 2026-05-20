@@ -1,3 +1,40 @@
+---
+title: AgentScope Studio 与 Agent Skill 实战指南
+description: '# AgentScope Studio 与 Agent Skill 实战指南'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- kubelet
+- coredns
+- docker
+- hpa
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- AgentScope Studio 与 Agent Skill 实战指南 是什么
+- 如何 AgentScope Studio 与 Agent Skill 实战指南
+trigger_keywords:
+- AgentScope
+- Studio
+- Agent
+- Skill
+- 实战指南
+- ai
+- agent
+---
+
+
 # AgentScope Studio 与 Agent Skill 实战指南
 
 > **文档类型**: 实战 Demo 专题 | **最后更新**: 2026-03 | **关键词**: AgentScope Studio, Agent Skill, ReAct Agent, 可视化追踪, K8s 诊断, SKILL.md, Toolkit, 项目管理, Trace, WebUI, 本地开发

@@ -1,3 +1,37 @@
+---
+title: helm v2.10 Release Notes
+description: helm v2.10 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- helm
+- docker
+- opa
+- job
+- ingress
+- rbac
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 20min
+intent_queries:
+- helm v2.10 Release Notes 是什么
+- 如何 helm v2.10 Release Notes
+trigger_keywords:
+- helm
+- v2.10
+- Release
+- Notes
+- release
+- notes
+---
+
+
 # helm v2.10 Release Notes
 
 Source: [v2.10.0](https://github.com/helm/helm/releases/tag/v2.10.0)
@@ -192,6 +226,11 @@ The [Quickstart Guide](https://docs.helm.sh/using_helm/#quickstart-guide) will g
 - Add App Version to the helm ls command. 0209ac32ddb8da3fb70e82855970146eec4031f9 (Derek Bassett)
 - Typo fix in functions_and_pipelines.md f291fdbb43730dbb266d7aeb146c40aa978a0c66 (AdamDang)
 - feat(helm): support removing multiple repositories with repo remove command 223c89e6aac873a8fe9b0228d39364f566881831 (Arash Deshmeh)
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 - Create PodSecurityPolicy before Pods and ServiceAccounts 7631b8a926d1cc533a94951b6a96c948081e78e7 (Sergii Manannikov)
 - fix(helm): resolve linter's warning on template command unit tests 75682ed5844400e5dcd24ec7532c0fa454defd4d (Arash Deshmeh)
 - Document apiVersion field 4ce35363d40fa6e8d8789121384d397748571e57 (Jesse Weinstein)

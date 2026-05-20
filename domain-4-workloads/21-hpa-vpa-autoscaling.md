@@ -1,3 +1,51 @@
+---
+title: HPA/VPA 自动伸缩配置
+description: '# HPA/VPA 自动伸缩配置'
+category: workloads
+tags:
+- k8s
+- workload
+- pod
+- deployment
+- statefulset
+- prometheus
+- kafka
+- hpa
+- vpa
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- HPA/VPA 自动伸缩配置 是什么
+- 如何 HPA/VPA 自动伸缩配置
+- Kubernetes 4 workloads 最佳实践
+trigger_keywords:
+- HPA
+- VPA
+- 自动伸缩配置
+- workloads
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/hpa-fta.md
+  label: '故障树: hpa'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+---
+
+
 # HPA/VPA 自动伸缩配置
 
 > Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群

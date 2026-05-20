@@ -1,20 +1,72 @@
 ---
-fta_id: "FTA-TERWAY-034"
-title: "Terway 异常故障树分析"
-component: "terway"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-TERWAY-001"
-last_updated: "2026-05"
+title: Terway 异常故障树分析
+description: '- **范围**：ENI 分配、IP 地址池、CNI 插件、节点网络、策略/安全组、控制面依赖。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- terway
+- cni
+- eni
+- ipool
+- aliyun
+- apiserver
+- kubelet
+- containerd
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Terway 异常故障树分析 是什么
+- 如何 Terway 异常故障树分析
+- Terway 异常故障树分析 根因分析
+- Terway 异常故障树分析 故障树
+trigger_keywords:
+- Terway
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, terway, cni, eni, ipool, aliyun]
-related_skills: []
-knowledge_refs:
-  - "../domain-5-networking/02-cni-architecture-fundamentals.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md
+  label: '结构化排障: 07-terway-troubleshooting'
+fta_metadata:
+  fta_id: FTA-TERWAY-001
+  top_event: Terway 异常 (ENI 分配失败/IP 地址池耗尽/CNI 配置错误)
+  top_event_id: TE-TERWAY-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl describe node <node> | grep -E 'terway|aliyun.network' 显示网络配置异常"
+    - "kubectl get events -A | grep -E 'Terway|ENI|IPPool' 显示 Terway 相关错误"
+    - "Pod 无法获取 IP 地址或 IP 地址耗尽"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system | grep terway 检查 Terway Pod 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l app=terway -o wide"
+    - "kubectl describe node <node> | grep -E 'terway|eni|aliyun'"
+    - "kubectl logs -n kube-system -l app=terway --tail=100"
+    - "kubectl get ipam -n kube-system"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l app=terway --force"
+      risk: "强制删除会导致 Terway 重启，该节点 Pod 网络会中断"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n kube-system -l app=terway -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示 Terway 异常 -->
 
 # Terway 异常 FTA 树
 

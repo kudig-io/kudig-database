@@ -1,3 +1,38 @@
+---
+title: Graylog 企业级日志管理平台深度实践
+description: '# Graylog 企业级日志管理平台深度实践'
+category: logging-management-analytics
+tags:
+- k8s
+- logging
+- efk
+- loki
+- kafka
+- elasticsearch
+- webhook
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 数据工程师
+estimated_read_time: 5min
+intent_queries:
+- Graylog 企业级日志管理平台深度实践 是什么
+- 如何 Graylog 企业级日志管理平台深度实践
+- Kubernetes 21 logging management analytics 最佳实践
+trigger_keywords:
+- Graylog
+- 企业级日志管理平台深度实践
+- logging
+- management
+- analytics
+---
+
+
 # Graylog 企业级日志管理平台深度实践
 
 ## 概述 (Overview)

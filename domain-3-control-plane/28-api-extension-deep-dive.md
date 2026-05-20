@@ -1,3 +1,64 @@
+---
+title: Kubernetes API扩展深度解析 (API Extensions Deep Dive)
+description: '# Kubernetes API扩展深度解析 (API Extensions Deep Dive)'
+category: control-plane
+tags:
+- k8s
+- control-plane
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- helm
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes API扩展深度解析 (API Extensions Deep Dive) 是什么
+- 如何 Kubernetes API扩展深度解析 (API Extensions Deep Dive)
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- Kubernetes
+- API扩展深度解析
+- API
+- Extensions
+- Deep
+- Dive
+- control
+- plane
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # Kubernetes API扩展深度解析 (API Extensions Deep Dive)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: API扩展文档

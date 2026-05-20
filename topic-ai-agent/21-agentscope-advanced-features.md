@@ -1,3 +1,35 @@
+---
+title: AgentScope 高级特性与扩展开发
+description: '**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Hooks, Middleware, RAG, A2A, Agent-to-Agent, 实时语音,
+  Realtime Steering, 结构化输出, Agentic RL, 强化学习微调, 评测, ACEBench, Embedding'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- kubelet
+- jaeger
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AgentScope 高级特性与扩展开发 是什么
+- 如何 AgentScope 高级特性与扩展开发
+trigger_keywords:
+- AgentScope
+- 高级特性与扩展开发
+- ai
+- agent
+---
+
+
 # AgentScope 高级特性与扩展开发
 
 > **文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Hooks, Middleware, RAG, A2A, Agent-to-Agent, 实时语音, Realtime Steering, 结构化输出, Agentic RL, 强化学习微调, 评测, ACEBench, Embedding

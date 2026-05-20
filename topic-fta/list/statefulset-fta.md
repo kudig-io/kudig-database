@@ -1,22 +1,75 @@
 ---
-fta_id: "FTA-STS-033"
-title: "StatefulSet 异常故障树分析"
-component: "statefulset"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-STS-001"
-last_updated: "2026-05"
+title: StatefulSet 异常故障树分析
+description: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- statefulset
+- pvc
+- ordinal
+- volume
+- storage
+- etcd
+- apiserver
+- kubelet
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- StatefulSet 异常故障树分析 是什么
+- 如何 StatefulSet 异常故障树分析
+- StatefulSet 异常故障树分析 根因分析
+- StatefulSet 异常故障树分析 故障树
+trigger_keywords:
+- StatefulSet
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, statefulset, pvc, ordinal, volume, storage]
-related_skills:
-  - "../topic-skills/18-storage.md"
-knowledge_refs:
-  - "../domain-6-storage/01-persistent-volume.md"
-  - "../domain-12-troubleshooting/10-storage-pvc-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/03-statefulset-advanced-operations.md
+  label: '深度文档: 03-statefulset-advanced-operations'
+- type: structural
+  path: ../topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md
+  label: '结构化排障: 03-statefulset-troubleshooting'
+fta_metadata:
+  fta_id: FTA-STATEFULSET-001
+  top_event: StatefulSet 异常 (启动失败/序号错乱/持久化异常)
+  top_event_id: TE-STATEFULSET-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get pods -n <ns> -l app=<name> 显示非 Running 状态"
+    - "StatefulSet Pod 一直处于 Pending 或 CrashLoopBackOff"
+    - "PVC 一直处于 Pending 状态"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n <ns> -l app=<name> -o wide 检查 Pod 状态和所属节点"
+  critical_commands:
+    - "kubectl get pods -n <ns> -l app=<name> -o wide"
+    - "kubectl describe statefulset <name> -n <ns>"
+    - "kubectl get pvc -n <ns> -l app=<name>"
+    - "kubectl describe pod <pod-name> -n <ns>"
+  danger_operations:
+    - action: "kubectl delete pod <pod-name> -n <ns> --force"
+      risk: "强制删除 StatefulSet Pod 会触发重建，PVC 数据可能受影响"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\"Running\")]} {.metadata.name}{\"\n\"}{end}' 显示 StatefulSet Pod 非 Running -->
 
 # StatefulSet 异常 FTA 树
 

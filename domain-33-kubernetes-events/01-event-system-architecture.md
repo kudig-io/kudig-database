@@ -1,3 +1,40 @@
+---
+title: 01 - Kubernetes 事件系统架构与 API 参考
+description: '# 01 - Kubernetes 事件系统架构与 API 参考'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- falco
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Kubernetes 事件系统架构与 API 参考 是什么
+- 如何 Kubernetes 事件系统架构与 API 参考
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- Kubernetes
+- 事件系统架构与
+- API
+- 参考
+- kubernetes
+- events
+---
+
+
 # 01 - Kubernetes 事件系统架构与 API 参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

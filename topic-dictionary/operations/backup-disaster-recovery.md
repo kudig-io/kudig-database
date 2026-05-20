@@ -1,3 +1,37 @@
+---
+title: 备份与灾难恢复（Backup & Disaster Recovery）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- helm
+- flux
+- harbor
+- mysql
+- postgresql
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 备份与灾难恢复（Backup & Disaster Recovery） 是什么
+- 如何 备份与灾难恢复（Backup & Disaster Recovery）
+trigger_keywords:
+- 备份与灾难恢复
+- Backup
+- Disaster
+- Recovery
+- dictionary
+title_en: Backup Disaster Recovery
+---
+
+
 # 备份与灾难恢复（Backup & Disaster Recovery）
 
 ## 概述

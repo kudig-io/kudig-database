@@ -1,6 +1,83 @@
+---
+title: 'Day 6: K8S 集群升级'
+description: '## 概述'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- etcd
+- kubelet
+- scheduler
+- daemonset
+- rbac
+- operator
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 6: K8S 集群升级 是什么'
+- '如何 Day 6: K8S 集群升级'
+trigger_keywords:
+- Day
+- '6:'
+- K8S
+- 集群升级
+- learn
+---
+
+
+---
+title: Day 6: K8S 集群升级
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - ACK cluster upgrade strategy in-place replacement
+  - Kubernetes version upgrade path compatibility
+  - kubent API deprecation check upgrade
+  - Cluster upgrade verification rollback
+  - ACK managed cluster upgrade process
+trigger_keywords:
+  - cluster upgrade
+  - version upgrade
+  - upgrade path
+  - kubent
+  - replacement upgrade
+  - in-place upgrade
+  - API deprecation
+  - control plane
+  - node upgrade
+reading_level: intermediate
+audience:
+  - ACK operators
+  - SRE engineers
+  - Platform engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-1-architecture-fundamentals
+  - domain-9-platform-ops
+  - domain-17-cloud-provider
+  - domain-12-troubleshooting
+related_topics:
+  - cluster-lifecycle-management
+  - upgrade-paths-strategy
+  - upgrade-migration-strategy
+  - cluster-certificate
+---
+
 # Day 6: K8S 集群升级
 
 > **学习时间**: 4-5 小时 | **主题**: 掌握集群版本升级策略与操作步骤
+
+---
+
+## 概述
+
+集群升级是生产环境中最关键也最危险的运维操作之一。K8s 社区每年发布 3 个小版本，每个版本的维护周期约 14 个月。为了获得安全补丁和新特性，生产集群需要定期升级。今天你将学习 ACK 集群升级的两个阶段、升级前的兼容性检查方法、替换升级的完整操作流程，以及升级后验证和回滚策略。
 
 ---
 
@@ -10,6 +87,41 @@
 - [ ] 掌握升级前的兼容性检查方法
 - [ ] 能通过控制台和 API 完成集群升级
 - [ ] 了解升级回滚策略和风险控制
+
+---
+
+## 核心概念
+
+### 1. K8s 版本策略
+
+| 版本类型 | 格式 | 示例 | 升级规则 |
+|----------|------|------|---------|
+| 大版本 | v1.x | v1.28 | 不跨大版本升级 |
+| 小版本 | v1.x.y | v1.28.9 | 逐小版本升级 |
+| 补丁版本 | v1.x.y-z | v1.28.9-aliyun.1 | 可跳跃升级 |
+
+ACK 版本升级路径:
+
+```
+1.26.x → 1.27.x → 1.28.x → 1.29.x → 1.30.x → 1.31.x → 1.32.x → 1.33.x
+  ↑                                                                 ↑
+  不支持跨版本: 不能从 1.26 直接升级到 1.28                           当前最新
+  必须逐版本升级: 1.26 → 1.27 → 1.28
+```
+
+### 2. 升级阶段
+
+| 阶段 | 操作方 | 影响范围 | 耗时 |
+|------|--------|---------|------|
+| 管控面升级 | 阿里云 (托管版) | API Server 短暂不可用 | 5-10 分钟 |
+| 节点升级 | 用户操作 | 节点逐个重启 | 取决于节点数 |
+
+### 3. 节点升级方式对比
+
+| 方式 | 流程 | 优点 | 缺点 | 推荐度 |
+|------|------|------|------|--------|
+| 原地升级 | 在原节点上升级 kubelet | 操作简单 | 风险高，节点不可回退 | 仅测试环境 |
+| 替换升级 | 新建节点 → 迁移 Pod → 删除旧节点 | 风险可控 | 需要额外资源 | 生产推荐 |
 
 ---
 
@@ -29,118 +141,252 @@
    - 文件: `../../../domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md`
    - 重点: ACK 特有的升级流程和注意事项
 
-### 阅读要点
-
-- ACK 集群升级分两个阶段: 管控面升级 + 节点升级
-- 管控面升级由阿里云自动完成 (托管版)，对业务无感知
-- 节点升级支持两种方式: 原地升级、替换升级 (推荐)
-- 版本跨度限制: 只能逐版本升级 (如 1.26 -> 1.28 需先升到 1.27)
-- 升级前必须检查: API 废弃、组件兼容性、自定义配置
-
 ---
 
-## 实践任务 (2.5h)
+## 实战演练 (2.5h)
 
 ### 任务 1: 升级前检查 (45min)
 
+#### 1.1 版本检查
+
 ```bash
-# 1. 查看当前集群版本
-kubectl version
-aliyun cs GET /clusters/<cluster_id> | jq '.current_version'
+# 查看当前集群版本
+kubectl version --short
+# Client Version: v1.28.9
+# Server Version: v1.28.9-aliyun.1
 
-# 2. 查看可升级的目标版本
-aliyun cs GET /upgrade/cluster/<cluster_id>
+# 查看各节点版本
+kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'
+# NAME           VERSION
+# node-01        v1.28.9-aliyun.1
+# node-02        v1.28.9-aliyun.1
+# node-03        v1.28.9-aliyun.1
 
-# 3. 检查 API 废弃情况
-# 使用 kubent (Kube No Trouble) 工具检查废弃 API
-# 安装: brew install kubent (macOS) 或从 GitHub 下载
+# 查看 API 版本信息
+kubectl api-versions | sort
+```
+
+#### 1.2 查看可升级目标版本
+
+```bash
+aliyun cs GET /upgrade/cluster/<cluster_id> | jq '.'
+# {
+#   "current_version": "1.28.9-aliyun.1",
+#   "next_versions": [
+#     "1.28.13-aliyun.1",
+#     "1.29.8-aliyun.1"
+#   ],
+#   "can_upgrade": true
+# }
+```
+
+#### 1.3 API 废弃检查 (关键步骤)
+
+```bash
+# 安装 kubent (Kube No Trouble)
+# macOS: brew install kubent
+# Linux: curl -L https://github.com/doitintl/kube-no-trouble/releases/latest/download/kubent_linux_amd64.tar.gz | tar xz
+
 kubent
+# 示例输出:
+# ---
+# >> Deprecated APIs removed in 1.29 <<
+# KIND         NAME             NAMESPACE
+# FlowSchema   eks-privileged   kube-system
+# ---
+# >> Deprecated APIs removed in 1.30 <<
+# (none found)
+```
 
-# 4. 检查集群组件兼容性
+#### 1.4 组件兼容性检查
+
+```bash
+# 检查核心组件状态
 kubectl get pods -n kube-system -o wide
-aliyun cs GET /clusters/<cluster_id>/components/upgradestatus
+# 所有 Pod 应为 Running 状态
 
-# 5. 检查自定义 webhook 和 admission
+# 检查组件升级状态
+aliyun cs GET /clusters/<cluster_id>/components/upgradestatus | jq '.[].name'
+
+# 检查 webhook 配置
 kubectl get validatingwebhookconfigurations
 kubectl get mutatingwebhookconfigurations
-
-# 6. 备份关键资源
-kubectl get all -A -o yaml > cluster-backup.yaml
-kubectl get configmaps -A -o yaml > configmaps-backup.yaml
-kubectl get secrets -A -o yaml > secrets-backup.yaml
+# 记录所有 webhook，升级后验证其正常工作
 ```
+
+#### 1.5 备份关键资源
+
+```bash
+mkdir -p /tmp/cluster-backup
+
+kubectl get all -A -o yaml > /tmp/cluster-backup/all-resources.yaml
+kubectl get configmaps -A -o yaml > /tmp/cluster-backup/configmaps.yaml
+kubectl get secrets -A -o yaml > /tmp/cluster-backup/secrets.yaml
+kubectl get pvc -A -o yaml > /tmp/cluster-backup/pvc.yaml
+kubectl get networkpolicies -A -o yaml > /tmp/cluster-backup/networkpolicies.yaml
+kubectl get roles,rolebindings,clusterroles,clusterrolebindings -A -o yaml > /tmp/cluster-backup/rbac.yaml
+
+echo "备份完成: /tmp/cluster-backup/"
+ls -la /tmp/cluster-backup/
+```
+
+---
 
 ### 任务 2: 管控面升级 (30min)
 
 ```bash
-# 通过 API 触发管控面升级 (托管版)
+# 触发管控面升级 (托管版)
 aliyun cs POST /api/v2/clusters/<cluster_id>/upgrade \
   --body '{
-    "next_version": "1.28.9-aliyun.1"
+    "next_version": "1.29.8-aliyun.1"
   }'
 
-# 查看升级进度
-aliyun cs GET /clusters/<cluster_id>/logs
+# 返回:
+# {"task_id":"t-xxxxxxxxx"}
+
+# 持续查看升级进度
+watch -n 10 "aliyun cs GET /clusters/<cluster_id>/logs | jq -r '.[-5:] | .[] | \"\(.created) \(.log)\"'"
+
+# 示例日志:
+# 2026-05-18T10:00:00 开始升级管控面
+# 2026-05-18T10:02:00 升级 API Server
+# 2026-05-18T10:04:00 升级 Controller Manager
+# 2026-05-18T10:06:00 升级 Scheduler
+# 2026-05-18T10:08:00 升级 etcd
+# 2026-05-18T10:10:00 管控面升级完成
 
 # 验证管控面升级完成
 kubectl version --short
-# Server Version 应该更新为目标版本
+# Server Version: v1.29.8-aliyun.1  ← 已更新
 
 # 检查管控组件状态
-kubectl get pods -n kube-system
-kubectl get cs  # 检查组件状态 (如果适用)
+kubectl get pods -n kube-system | grep -v Running
+# 应该没有非 Running 的 Pod
 ```
+
+---
 
 ### 任务 3: 节点升级 - 替换升级方式 (45min)
 
+#### 3.1 替换升级完整流程
+
 ```bash
-# 替换升级 (推荐): 创建新节点 -> 排水旧节点 -> 移除旧节点
+CLUSTER_ID="<cluster_id>"
+NODEPOOL_ID="<nodepool_id>"
 
-# 1. 在节点池中扩容新节点
-aliyun cs POST /clusters/<cluster_id>/nodepools/<nodepool_id> \
-  --body '{"count": 1}'
-
-# 2. 等待新节点 Ready
-kubectl get nodes -w
-
-# 3. 对旧节点执行排水 (cordon + drain)
-kubectl cordon <old-node-name>
-kubectl drain <old-node-name> --ignore-daemonsets --delete-emptydir-data
-
-# 4. 确认业务 Pod 已迁移到新节点
-kubectl get pods -A -o wide | grep <old-node-name>
-
-# 5. 移除旧节点
-aliyun cs POST /clusters/<cluster_id>/nodes \
-  --body '{"nodes":["<old-node-id>"],"release_node":true}'
-
-# 6. 验证集群状态
+echo "=== Step 1: 查看当前节点 ==="
 kubectl get nodes -o wide
-kubectl get pods -A | grep -v Running
+
+echo "=== Step 2: 扩容新节点 ==="
+aliyun cs POST /clusters/$CLUSTER_ID/nodepools/$NODEPOOL_ID \
+  --body '{"scaling_group":{"desired_size":4}}'
+
+echo "=== Step 3: 等待新节点 Ready ==="
+kubectl get nodes -w
+# 等待新节点状态变为 Ready
+
+echo "=== Step 4: 确认所有节点 Ready ==="
+kubectl get nodes
+# NAME           STATUS   VERSION
+# old-node-01    Ready    v1.28.9-aliyun.1  ← 旧版本
+# old-node-02    Ready    v1.28.9-aliyun.1  ← 旧版本
+# old-node-03    Ready    v1.28.9-aliyun.1  ← 旧版本
+# new-node-04    Ready    v1.29.8-aliyun.1  ← 新版本
 ```
+
+#### 3.2 逐个迁移旧节点
+
+```bash
+OLD_NODE="old-node-01"
+
+echo "=== Step 5: Cordon 旧节点 $OLD_NODE ==="
+kubectl cordon $OLD_NODE
+# node/old-node-01 cordoned
+
+echo "=== Step 6: Drain 旧节点 $OLD_NODE ==="
+kubectl drain $OLD_NODE \
+  --ignore-daemonsets \
+  --delete-emptydir-data \
+  --grace-period=60 \
+  --timeout=300s
+
+# 示例输出:
+# node/old-node-01 already cordoned
+# evicting pod default/nginx-xxx-xxx
+# evicting pod default/api-xxx-xxx
+# pod/nginx-xxx-xxx evicted
+# pod/api-xxx-xxx evicted
+# node/old-node-01 drained
+
+echo "=== Step 7: 确认 Pod 已迁移 ==="
+kubectl get pods -A -o wide | grep $OLD_NODE
+# 应该没有 Pod 在旧节点上 (除 DaemonSet)
+
+echo "=== Step 8: 移除旧节点 ==="
+# 获取节点实例 ID
+NODE_ID=$(aliyun cs GET /clusters/$CLUSTER_ID/nodes | jq -r ".nodes[] | select(.node_name==\"$OLD_NODE\") | .instance_id")
+
+aliyun cs POST /clusters/$CLUSTER_ID/nodes \
+  --body "{\"nodes\":[\"$NODE_ID\"],\"release_node\":true}"
+
+echo "=== Step 9: 验证节点已移除 ==="
+kubectl get nodes -o wide
+```
+
+#### 3.3 重复迁移其余旧节点
+
+```bash
+# 对每个旧节点重复 Step 5-9
+# 建议每次只迁移一个节点，确认业务正常后继续
+
+# 最终验证: 所有节点版本一致
+kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'
+# NAME           VERSION
+# new-node-04    v1.29.8-aliyun.1
+# new-node-05    v1.29.8-aliyun.1
+# new-node-06    v1.29.8-aliyun.1
+```
+
+---
 
 ### 任务 4: 升级后验证 (30min)
 
 ```bash
-# 1. 验证集群版本
-kubectl version
+echo "========== 升级后验证 =========="
 
-# 2. 验证所有节点版本一致
+echo "--- 1. 验证集群版本 ---"
+kubectl version --short
+
+echo "--- 2. 验证所有节点版本一致 ---"
 kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'
 
-# 3. 验证核心组件状态
+echo "--- 3. 验证核心组件状态 ---"
 kubectl get pods -n kube-system | grep -v Running
+kubectl get cs 2>/dev/null || echo "cs 命令在 1.29+ 可能已弃用"
 
-# 4. 验证业务 Pod 状态
+echo "--- 4. 验证业务 Pod 状态 ---"
 kubectl get pods -A | grep -v 'Running\|Completed'
 
-# 5. 验证 Service 可用性
+echo "--- 5. 验证 Service 可用性 ---"
 kubectl get svc -A | grep LoadBalancer
 # 测试 SLB 可达性
+# curl -s http://<slb-ip>/healthz
 
-# 6. 验证存储
+echo "--- 6. 验证存储 ---"
 kubectl get pvc -A
 kubectl get pv
+
+echo "--- 7. 验证 API 资源 ---"
+kubectl api-resources | head -20
+
+echo "--- 8. 验证 webhook ---"
+kubectl get validatingwebhookconfigurations
+kubectl get mutatingwebhookconfigurations
+
+echo "--- 9. 检查事件 ---"
+kubectl get events -A --sort-by='.lastTimestamp' | tail -20
+
+echo "========== 验证完毕 =========="
 ```
 
 ---
@@ -158,6 +404,9 @@ kubectl get pv
 3. **升级前使用 kubent 工具检查什么？为什么重要？**
    - 提示: 检查已废弃的 API 版本，避免升级后资源无法管理
 
+4. **升级过程中如何确保业务零中断？**
+   - 提示: 多副本 + readinessProbe + maxUnavailable=0
+
 ---
 
 ## 今日检验
@@ -169,7 +418,66 @@ kubectl get pv
 
 ---
 
-## 核心概念总结
+## 配置参考
+
+### 升级检查脚本
+
+```bash
+cat > pre-upgrade-check.sh << 'SCRIPT'
+#!/bin/bash
+echo "========== 升级前检查 =========="
+
+echo "[1] 当前版本:"
+kubectl version --short 2>/dev/null || kubectl version
+
+echo ""
+echo "[2] 节点版本一致性:"
+kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'
+
+echo ""
+echo "[3] 核心组件状态:"
+kubectl get pods -n kube-system | grep -v Running | grep -v Completed
+
+echo ""
+echo "[4] Webhook 配置:"
+kubectl get validatingwebhookconfigurations --no-headers
+kubectl get mutatingwebhookconfigurations --no-headers
+
+echo ""
+echo "[5] 业务 Pod 状态:"
+kubectl get pods -A | grep -v Running | grep -v Completed | grep -v kube-system
+
+echo ""
+echo "[6] 资源使用:"
+kubectl top nodes 2>/dev/null || echo "metrics-server 未安装"
+
+echo ""
+echo "========== 检查完毕 =========="
+SCRIPT
+
+chmod +x pre-upgrade-check.sh
+```
+
+---
+
+## 常见问题
+
+### Q1: 管控面升级失败怎么办？
+
+管控面升级由阿里云管理，极少失败。如果失败，集群会回滚到升级前状态。查看日志: `aliyun cs GET /clusters/<cluster_id>/logs`
+
+### Q2: 节点升级后 Pod 无法启动？
+
+检查: 1) API 版本是否兼容; 2) 镜像是否可拉取; 3) 节点标签和污点是否正确; 4) 存储卷是否正常挂载。
+
+### Q3: 升级过程中如何回滚？
+
+- 管控面: 托管版不支持回滚，需联系阿里云支持
+- 节点: 替换升级方式下，旧节点尚未删除前可 cordon 新节点、uncordon 旧节点恢复
+
+---
+
+## 要点总结
 
 | 升级方式 | 优点 | 缺点 | 适用场景 |
 |----------|------|------|---------|
@@ -182,3 +490,11 @@ kubectl get pv
 ## 明日预告
 
 Day 7 将学习集群证书管理，理解证书类型、过期处理和轮换机制。
+
+---
+
+## 延伸阅读
+
+- [K8s 版本升级策略](../../domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md)
+- [升级与迁移策略](../../domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md)
+- [ACK 集群管理](../../domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md)

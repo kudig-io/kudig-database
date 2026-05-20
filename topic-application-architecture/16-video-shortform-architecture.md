@@ -1,3 +1,50 @@
+---
+title: 音视频与短视频平台架构设计
+description: '# 音视频与短视频平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- docker
+- redis
+- hpa
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 音视频架构师
+- CDN专家
+- 推荐系统工程师
+estimated_read_time: 5min
+intent_queries:
+- 短视频平台 Kubernetes 高可用架构
+- 视频推荐系统召回排序
+- 直播推拉流 CDN 分发架构
+- 视频转码处理流水线
+- 阿里云视频点播 VOD
+trigger_keywords:
+- 短视频平台
+- 视频推荐
+- 直播推流
+- CDN分发
+- 视频转码
+- 内容审核
+- 实时互动
+- 连麦架构
+- WebRTC
+- DRM版权保护
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-video-streaming-architecture
+- topic-content-platform-architecture
+---
+
+
 # 音视频与短视频平台 Kubernetes 生产架构设计
 
 > **适用场景**: 短视频平台 / 长视频点播 / 直播互动 / 音视频通话 / 云剪辑 / 数字人  

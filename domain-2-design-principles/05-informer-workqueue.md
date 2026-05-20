@@ -1,3 +1,42 @@
+---
+title: 05 - Informer 架构与工作队列 (Informer & Workqueue)
+description: '# 05 - Informer 架构与工作队列 (Informer & Workqueue)'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- controller-manager
+- prometheus
+- operator
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Informer 架构与工作队列 (Informer & Workqueue) 是什么
+- 如何 Informer 架构与工作队列 (Informer & Workqueue)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- Informer
+- 架构与工作队列
+- Informer
+- Workqueue
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 05 - Informer 架构与工作队列 (Informer & Workqueue)
 
 ## 架构师洞察：SharedInformerFactory 的并发陷阱

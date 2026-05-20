@@ -1,25 +1,75 @@
 ---
-title: "Kubernetes Service 核心概念与类型深度解析"
-description: "深入解析 Service 的核心概念与类型：ClusterIP、NodePort、LoadBalancer、ExternalName、Headless Service、无头部署与 Endpoint 切片"
-category: "domain-5-networking"
-tags: [k8s, service, clusterip, nodeport, loadbalancer, endpoints, service-discovery]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Kubernetes Service 核心概念与类型深度解析
+description: 深入解析 Service 的核心概念与类型：ClusterIP、NodePort、LoadBalancer、ExternalName、Headless Service、无头部署与 Endpoint 切片
+category: domain-5-networking
+tags:
+- k8s
+- service
+- clusterip
+- nodeport
+- loadbalancer
+- endpoints
+- service-discovery
+- etcd
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- Kubernetes Service 核心概念与类型深度解析 是什么
+- 如何 Kubernetes Service 核心概念与类型深度解析
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Kubernetes
+- Service
+- 核心概念与类型深度解析
+- networking
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "03-cni-architecture-fundamentals.md"
-    type: "depth"
-    desc: "网络核心组件"
-  - path: "../topic-fta/list/service-fta.md"
-    type: "fta"
-    desc: "Service 故障树"
-  - path: "../topic-cheat-sheet/k8s.md"
-    type: "cheatsheet"
-    desc: "K8s 速查卡"
+- path: 03-cni-architecture-fundamentals.md
+  type: depth
+  desc: 网络核心组件
+- path: ../topic-fta/list/service-fta.md
+  type: fta
+  desc: Service 故障树
+- path: ../topic-cheat-sheet/k8s.md
+  type: cheatsheet
+  desc: K8s 速查卡
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/service-fta.md
+  label: '故障树: service'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
 ---
+
 
 # Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 

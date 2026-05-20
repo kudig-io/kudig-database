@@ -1,3 +1,50 @@
+---
+title: ACK/ACR/K8S 命令速查表
+description: '**适用场景**: 日常运维快速参考 | **更新日期**: 2024'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- statefulset
+- daemonset
+- ingress
+- rbac
+- rag
+last_updated: 2026-05-18
+difficulty: beginner
+reading_level: beginner
+audience:
+- All kudig-database users
+- ACK operators
+- DevOps engineers
+estimated_read_time: 5min
+intent_queries:
+- kubectl commands reference cheat sheet
+- aliyun cs CLI commands quick reference
+- Kubernetes日常运维命令
+- ACK API commands cheat sheet
+- kubectl node pod service management
+trigger_keywords:
+- kubectl
+- aliyun
+- commands
+- cheat sheet
+- quick reference
+- CLI
+- API
+- node
+- pod
+- service
+related_domains:
+- domain-17-cloud-provider
+- domain-1-architecture-fundamentals
+related_topics:
+- knowledge-map
+- reading-sequence
+---
+
+
 # ACK/ACR/K8S 命令速查表
 
 > **适用场景**: 日常运维快速参考 | **更新日期**: 2024

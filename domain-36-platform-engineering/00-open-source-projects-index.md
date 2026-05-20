@@ -1,3 +1,32 @@
+---
+title: Domain-36 平台工程 — 开源项目索引
+description: '| **WingetUI / UniGetUI** | Windows 包管理 UI | 社区 | v3.1.0 | 15k+ | MIT |'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Domain-36 平台工程 — 开源项目索引 是什么
+- 如何 Domain-36 平台工程 — 开源项目索引
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Domain-36
+- 平台工程
+- 开源项目索引
+- platform
+- engineering
+---
+
 # Domain-36 平台工程 — 开源项目索引
 
 > **最后更新**: 2026-04-24

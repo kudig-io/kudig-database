@@ -1,3 +1,32 @@
+---
+title: calico v3.28 Release Notes
+description: calico v3.28 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- calico
+- helm
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- calico v3.28 Release Notes 是什么
+- 如何 calico v3.28 Release Notes
+trigger_keywords:
+- calico
+- v3.28
+- Release
+- Notes
+- release
+- notes
+---
+
 # calico v3.28 Release Notes
 
 Source: [v3.28.5](https://github.com/projectcalico/calico/releases/tag/v3.28.5)

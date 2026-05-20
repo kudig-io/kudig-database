@@ -1,3 +1,46 @@
+---
+title: Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+description: '# Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- envoy
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7) 是什么
+- 如何 Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Cilium
+- 网络策略
+- L3
+- L4
+- L7
+- Cilium
+- Network
+- Policy
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/cilium-fta.md
+  label: '故障树: cilium'
+---
+
+
 # Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 
 > **文档版本**: v1.0 | **适用版本**: Cilium 1.15/1.16/1.17 | **更新时间**: 2026-03  

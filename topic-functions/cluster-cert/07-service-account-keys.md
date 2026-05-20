@@ -1,3 +1,49 @@
+---
+title: ServiceAccount 密钥对源码分析
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- apiserver
+- kubelet
+- controller-manager
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 安全工程师
+- 应用开发者
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes ServiceAccount 密钥对 sa.key sa.pub JWT 签名
+- ServiceAccount Token 签发与验证原理
+- API Server Controller Manager 密钥共享配置
+- SA 密钥轮换挑战 全部 Token 失效
+- ServiceAccount TokenRequest API 短期 Token
+trigger_keywords:
+- ServiceAccount
+- sa.key
+- sa.pub
+- JWT
+- Token
+- service-account-key-file
+- service-account-private-key-file
+- TokenRequest
+- 短期 Token
+- Bound Object
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/apiserver-cert-flags
+- cluster-cert/cert-rotation
+---
+
+
 # ServiceAccount 密钥对源码分析
 
 ## 概述
@@ -417,3 +463,42 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 | 所有 ServiceAccount Token 失效 | SA 密钥被替换但未同步 | 回滚密钥或重新签发所有 Token |
 | Token 验证性能下降 | API Server 公钥缓存失效 | 检查 `service-account-key-file` 配置 |
 | Legacy Token 安全风险 | 永不过期 Token 泄露 | 升级到短期 Token，删除 Legacy Secret |
+
+---
+
+## 进阶：多集群 SA 密钥管理
+
+### 场景：多集群环境下的 SA 密钥一致性
+
+在多集群环境中，如果使用相同的镜像和配置，需要确保各集群的 SA 密钥不同：
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              多集群 SA 密钥隔离设计                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  问题：同一镜像在不同集群部署时使用相同的 ServiceAccount     │
+│        如果 SA 密钥相同，一个集群的 Pod Token 可用于         │
+│        其他集群的 API Server 验证                           │
+│                                                              │
+│  解决：                                                      │
+│  1. 每个集群使用独立的 SA 密钥对                             │
+│  2. 通过 Secret 注入而非镜像内置                            │
+│  3. 集群级别使用云 KMS 加密存储                              │
+│                                                              │
+│  配置示例：                                                   │
+│  apiVersion: v1                                              │
+│  kind: Pod                                                  │
+│  spec:                                                       │
+│    serviceAccountName: my-sa                                 │
+│    volumes:                                                  │
+│    - name: sa-token                                          │
+│      projected:                                             │
+│        sources:                                              │
+│        - serviceAccountToken:                                │
+│            path: token                                       │
+│            expirationSeconds: 3600                           │
+│            audience: kubernetes.default.svc.cluster.local    │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```

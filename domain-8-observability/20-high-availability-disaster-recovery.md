@@ -1,3 +1,58 @@
+---
+title: 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
+description: '# 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- grafana
+- jaeger
+- argocd
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery) 是什么
+- 如何 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 监控平台高可用与灾备
+- Monitoring
+- Platform
+- High
+- Availability
+- Disaster
+- Recovery
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Google SRE可靠性工程](https://sre.google/sre-book/table-of-contents/)

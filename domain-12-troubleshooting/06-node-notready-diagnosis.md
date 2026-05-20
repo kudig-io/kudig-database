@@ -1,6 +1,68 @@
-# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
+---
+title: Node NotReady 状态深度诊断
+description: '# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)'
+category: troubleshooting
+tags:
+- node
+- notready
+- kubelet
+- controller-manager
+- memory-pressure
+- disk-pressure
+- PIDPressure
+- eviction
+- etcd
+- apiserver
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Node NotReady 怎么排查
+- 节点失联怎么办
+- kubelet 不工作
+- node status Unknown
+- 节点被驱逐
+- MemoryPressure DiskPressure
+- 节点资源耗尽
+trigger_keywords:
+- Node
+- NotReady
+- 状态深度诊断
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/node-fta.md
+  label: '故障树: node'
+- type: skill
+  path: ../topic-skills/01-node-notready.md
+  label: '运维技能: 01-node-notready'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **难度**: 中级-高级 | **参考**: [kubernetes.io/docs/concepts/architecture/nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
+
+# 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
 
 ---
 

@@ -1,0 +1,279 @@
+domain: domain-3-control-plane
+total_questions: 58
+generated_at: '2026-05-19'
+qa_pairs:
+- type: comparison
+  question: Kubernetes 控制平面架构总览 (Control Plane Architecture Overview) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/01-plane-architecture-overview.md 中的对比分析。
+  source: domain-3-control-plane/01-plane-architecture-overview.md
+- type: operation
+  question: '如何执行与 控制平面安全加固指南 (Control Plane Security Hardening Guide) 相关的操作: generate_client_cert() {?'
+  answer: 参见 domain-3-control-plane/04-plane-security-hardening.md 中的操作步骤。
+  source: domain-3-control-plane/04-plane-security-hardening.md
+  command: generate_client_cert() {
+- type: operation
+  question: '如何执行与 控制平面故障排查手册 (Control Plane Troubleshooting Handbook) 相关的操作: echo "=== Kubernetes Control Plane Quick Diagnosis
+    ==="?'
+  answer: 参见 domain-3-control-plane/06-plane-troubleshooting.md 中的操作步骤。
+  source: domain-3-control-plane/06-plane-troubleshooting.md
+  command: echo "=== Kubernetes Control Plane Quick Diagnosis ==="
+- type: operation
+  question: '如何执行与 控制平面故障排查手册 (Control Plane Troubleshooting Handbook) 相关的操作: kubectl get pods -n kube-system -l component=kube-apiserver
+    ?'
+  answer: 参见 domain-3-control-plane/06-plane-troubleshooting.md 中的操作步骤。
+  source: domain-3-control-plane/06-plane-troubleshooting.md
+  command: kubectl get pods -n kube-system -l component=kube-apiserver -o wide
+- type: operation
+  question: '如何执行与 控制平面故障排查手册 (Control Plane Troubleshooting Handbook) 相关的操作: curl -k https://localhost:6443/healthz?'
+  answer: 参见 domain-3-control-plane/06-plane-troubleshooting.md 中的操作步骤。
+  source: domain-3-control-plane/06-plane-troubleshooting.md
+  command: curl -k https://localhost:6443/healthz
+- type: operation
+  question: '如何执行与 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy) 相关的操作: echo "=== Pre-Upgrade Checklist ==="?'
+  answer: 参见 domain-3-control-plane/07-plane-upgrade-migration.md 中的操作步骤。
+  source: domain-3-control-plane/07-plane-upgrade-migration.md
+  command: echo "=== Pre-Upgrade Checklist ==="
+- type: operation
+  question: '如何执行与 控制平面性能基准测试 (Control Plane Performance Benchmarking) 相关的操作: TEST_DURATION=300  # 5分钟测试?'
+  answer: 参见 domain-3-control-plane/08-plane-performance-benchmarking.md 中的操作步骤。
+  source: domain-3-control-plane/08-plane-performance-benchmarking.md
+  command: 'TEST_DURATION=300  # 5分钟测试'
+- type: operation
+  question: '如何执行与 控制平面性能基准测试 (Control Plane Performance Benchmarking) 相关的操作: ETCD_ENDPOINTS="https://etcd-0.etcd:2379,https://etcd-1.etcd?'
+  answer: 参见 domain-3-control-plane/08-plane-performance-benchmarking.md 中的操作步骤。
+  source: domain-3-control-plane/08-plane-performance-benchmarking.md
+  command: ETCD_ENDPOINTS="https://etcd-0.etcd:2379,https://etcd-1.etcd:2379,https://etcd-2.etcd:2379"
+- type: comparison
+  question: 控制平面性能基准测试 (Control Plane Performance Benchmarking) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/08-plane-performance-benchmarking.md 中的对比分析。
+  source: domain-3-control-plane/08-plane-performance-benchmarking.md
+- type: operation
+  question: '如何执行与 控制平面扩缩容指南 (Control Plane Scalability Guide) 相关的操作: optimize_system() {?'
+  answer: 参见 domain-3-control-plane/09-plane-scalability-guide.md 中的操作步骤。
+  source: domain-3-control-plane/09-plane-scalability-guide.md
+  command: optimize_system() {
+- type: comparison
+  question: 控制平面扩缩容指南 (Control Plane Scalability Guide) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/09-plane-scalability-guide.md 中的对比分析。
+  source: domain-3-control-plane/09-plane-scalability-guide.md
+- type: operation
+  question: '如何执行与 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery) 相关的操作: log() {?'
+  answer: 参见 domain-3-control-plane/10-plane-backup-disaster-recovery.md 中的操作步骤。
+  source: domain-3-control-plane/10-plane-backup-disaster-recovery.md
+  command: log() {
+- type: operation
+  question: '如何执行与 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery) 相关的操作: BACKUP_DIR="/backup/etcd"?'
+  answer: 参见 domain-3-control-plane/10-plane-backup-disaster-recovery.md 中的操作步骤。
+  source: domain-3-control-plane/10-plane-backup-disaster-recovery.md
+  command: BACKUP_DIR="/backup/etcd"
+- type: concept
+  question: 在 etcd 深度解析 中, etcd 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/11-etcd-deep-dive.md 的「etcd 架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/11-etcd-deep-dive.md
+  section: etcd 架构概述 (Architecture Overview)
+- type: concept
+  question: 在 etcd 深度解析 中, 关键配置参数 (Configuration Parameters) 是什么?
+  answer: 参见 domain-3-control-plane/11-etcd-deep-dive.md 的「关键配置参数 (Configuration Parameters)」章节。
+  source: domain-3-control-plane/11-etcd-deep-dive.md
+  section: 关键配置参数 (Configuration Parameters)
+- type: concept
+  question: 在 kube-apiserver 深度解析 中, 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/12-apiserver-deep-dive.md 的「架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/12-apiserver-deep-dive.md
+  section: 架构概述 (Architecture Overview)
+- type: best_practice
+  question: 关于 kube-apiserver 深度解析, 有什么最佳实践?
+  answer: '#### 3.6.1 通用生产集群（推荐基线）'
+  source: domain-3-control-plane/12-apiserver-deep-dive.md
+- type: concept
+  question: 在 kube-controller-manager 深度解析 中, 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/13-kube-controller-manager-deep-dive.md 的「架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/13-kube-controller-manager-deep-dive.md
+  section: 架构概述 (Architecture Overview)
+- type: concept
+  question: 在 kube-controller-manager 深度解析 中, 内置控制器分类总览 (Built-in Controllers Overview) 是什么?
+  answer: 参见 domain-3-control-plane/13-kube-controller-manager-deep-dive.md 的「内置控制器分类总览 (Built-in Controllers Overview)」章节。
+  source: domain-3-control-plane/13-kube-controller-manager-deep-dive.md
+  section: 内置控制器分类总览 (Built-in Controllers Overview)
+- type: operation
+  question: '如何执行与 kube-controller-manager 深度解析 相关的操作: kubectl get lease -n kube-system kube-controller-manager -o ?'
+  answer: 参见 domain-3-control-plane/13-kube-controller-manager-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/13-kube-controller-manager-deep-dive.md
+  command: kubectl get lease -n kube-system kube-controller-manager -o yaml
+- type: concept
+  question: 在 cloud-controller-manager 深度解析 (CCM Deep Dive) 中, 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/14-cloud-controller-manager-deep-dive.md 的「架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/14-cloud-controller-manager-deep-dive.md
+  section: 架构概述 (Architecture Overview)
+- type: comparison
+  question: cloud-controller-manager 深度解析 (CCM Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/14-cloud-controller-manager-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/14-cloud-controller-manager-deep-dive.md
+- type: concept
+  question: 在 kubelet 深度解析 (kubelet Deep Dive) 中, 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/15-kubelet-deep-dive.md 的「架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/15-kubelet-deep-dive.md
+  section: 架构概述 (Architecture Overview)
+- type: concept
+  question: 在 kubelet 深度解析 (kubelet Deep Dive) 中, Pod 生命周期管理 (Pod Lifecycle) 是什么?
+  answer: 参见 domain-3-control-plane/15-kubelet-deep-dive.md 的「Pod 生命周期管理 (Pod Lifecycle)」章节。
+  source: domain-3-control-plane/15-kubelet-deep-dive.md
+  section: Pod 生命周期管理 (Pod Lifecycle)
+- type: concept
+  question: 在 kube-proxy 深度解析 (kube-proxy Deep Dive) 中, 架构概述 (Architecture Overview) 是什么?
+  answer: 参见 domain-3-control-plane/16-kube-proxy-deep-dive.md 的「架构概述 (Architecture Overview)」章节。
+  source: domain-3-control-plane/16-kube-proxy-deep-dive.md
+  section: 架构概述 (Architecture Overview)
+- type: operation
+  question: '如何执行与 kube-proxy 深度解析 (kube-proxy Deep Dive) 相关的操作: iptables -t nat -L KUBE-SERVICES -n --line-numbers?'
+  answer: 参见 domain-3-control-plane/16-kube-proxy-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/16-kube-proxy-deep-dive.md
+  command: iptables -t nat -L KUBE-SERVICES -n --line-numbers
+- type: operation
+  question: '如何执行与 kube-proxy 深度解析 (kube-proxy Deep Dive) 相关的操作: --ipvs-scheduler=rr?'
+  answer: 参见 domain-3-control-plane/16-kube-proxy-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/16-kube-proxy-deep-dive.md
+  command: --ipvs-scheduler=rr
+- type: operation
+  question: '如何执行与 kube-proxy 深度解析 (kube-proxy Deep Dive) 相关的操作: ipvsadm -Ln?'
+  answer: 参见 domain-3-control-plane/16-kube-proxy-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/16-kube-proxy-deep-dive.md
+  command: ipvsadm -Ln
+- type: comparison
+  question: kube-proxy 深度解析 (kube-proxy Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/16-kube-proxy-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/16-kube-proxy-deep-dive.md
+- type: concept
+  question: 在 68 - API 优先级与公平性 (API Priority and Fairness) 中, PriorityLevelConfiguration 配置 是什么?
+  answer: 参见 domain-3-control-plane/18-api-priority-fairness.md 的「PriorityLevelConfiguration 配置」章节。
+  source: domain-3-control-plane/18-api-priority-fairness.md
+  section: PriorityLevelConfiguration 配置
+- type: comparison
+  question: Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/20-kube-scheduler-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/20-kube-scheduler-deep-dive.md
+- type: operation
+  question: '如何执行与 容器运行时深度解析 (Container Runtime Interface Deep Dive) 相关的操作: ctr plugins ls | grep snapshotter?'
+  answer: 参见 domain-3-control-plane/21-container-runtime-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/21-container-runtime-deep-dive.md
+  command: ctr plugins ls | grep snapshotter
+- type: comparison
+  question: 容器运行时深度解析 (Container Runtime Interface Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/21-container-runtime-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/21-container-runtime-deep-dive.md
+- type: comparison
+  question: CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/22-container-storage-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/22-container-storage-deep-dive.md
+- type: comparison
+  question: CNI 容器网络接口深度解析 (Container Network Interface Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/23-container-network-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/23-container-network-deep-dive.md
+- type: concept
+  question: 在 生产环境部署最佳实践 (Production Deployment Best Practices) 中, 企业级架构设计 是什么?
+  answer: 参见 domain-3-control-plane/24-production-deployment-best-practices.md 的「企业级架构设计」章节。
+  source: domain-3-control-plane/24-production-deployment-best-practices.md
+  section: 企业级架构设计
+- type: operation
+  question: '如何执行与 生产环境部署最佳实践 (Production Deployment Best Practices) 相关的操作: check_cpu_health() {?'
+  answer: 参见 domain-3-control-plane/24-production-deployment-best-practices.md 中的操作步骤。
+  source: domain-3-control-plane/24-production-deployment-best-practices.md
+  command: check_cpu_health() {
+- type: comparison
+  question: 生产环境部署最佳实践 (Production Deployment Best Practices) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/24-production-deployment-best-practices.md 中的对比分析。
+  source: domain-3-control-plane/24-production-deployment-best-practices.md
+- type: best_practice
+  question: 关于 多云混合部署架构 (Multi-Cloud Hybrid Deployment Architecture), 有什么最佳实践?
+  answer: '{rec[''recommendation'']}")'
+  source: domain-3-control-plane/25-multi-cloud-hybrid-deployment.md
+- type: operation
+  question: '如何执行与 Kubernetes 认证授权深度解析 (Authentication & Authorization Deep Dive) 相关的操作: CA_CERT="/etc/kubernetes/pki/ca.crt"?'
+  answer: 参见 domain-3-control-plane/27-authz-authn-deep-dive.md 中的操作步骤。
+  source: domain-3-control-plane/27-authz-authn-deep-dive.md
+  command: CA_CERT="/etc/kubernetes/pki/ca.crt"
+- type: concept
+  question: 在 Kubernetes API扩展深度解析 (API Extensions Deep Dive) 中, Custom Resource Definitions (CRD) 是什么?
+  answer: 参见 domain-3-control-plane/28-api-extension-deep-dive.md 的「Custom Resource Definitions (CRD)」章节。
+  source: domain-3-control-plane/28-api-extension-deep-dive.md
+  section: Custom Resource Definitions (CRD)
+- type: comparison
+  question: Kubernetes API扩展深度解析 (API Extensions Deep Dive) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/28-api-extension-deep-dive.md 中的对比分析。
+  source: domain-3-control-plane/28-api-extension-deep-dive.md
+- type: concept
+  question: 在 30 - 动态资源分配 (Dynamic Resource Allocation) 中, DRA 与 Device Plugin 对比 是什么?
+  answer: 参见 domain-3-control-plane/30-dynamic-resource-allocation.md 的「DRA 与 Device Plugin 对比」章节。
+  source: domain-3-control-plane/30-dynamic-resource-allocation.md
+  section: DRA 与 Device Plugin 对比
+- type: comparison
+  question: 30 - 动态资源分配 (Dynamic Resource Allocation) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/30-dynamic-resource-allocation.md 中的对比分析。
+  source: domain-3-control-plane/30-dynamic-resource-allocation.md
+- type: operation
+  question: '如何执行与 31 - kubectl 完全命令参考 (kubectl Complete Reference) 相关的操作: kubectl get pods -o custom-columns=NAME:.metadata.name,STATU?'
+  answer: 参见 domain-3-control-plane/31-kubectl-complete-reference.md 中的操作步骤。
+  source: domain-3-control-plane/31-kubectl-complete-reference.md
+  command: kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,REST
+- type: operation
+  question: '如何执行与 31 - kubectl 完全命令参考 (kubectl Complete Reference) 相关的操作: kubectl create -f <filename|url> [options]?'
+  answer: 参见 domain-3-control-plane/31-kubectl-complete-reference.md 中的操作步骤。
+  source: domain-3-control-plane/31-kubectl-complete-reference.md
+  command: kubectl create -f <filename|url> [options]
+- type: operation
+  question: '如何执行与 31 - kubectl 完全命令参考 (kubectl Complete Reference) 相关的操作: kubectl create -f namespace.yaml?'
+  answer: 参见 domain-3-control-plane/31-kubectl-complete-reference.md 中的操作步骤。
+  source: domain-3-control-plane/31-kubectl-complete-reference.md
+  command: kubectl create -f namespace.yaml
+- type: comparison
+  question: 31 - kubectl 完全命令参考 (kubectl Complete Reference) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/31-kubectl-complete-reference.md 中的对比分析。
+  source: domain-3-control-plane/31-kubectl-complete-reference.md
+- type: operation
+  question: '如何执行与 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm) 相关的操作: set -euo pipefail?'
+  answer: 参见 domain-3-control-plane/32-kubeadm-cluster-lifecycle.md 中的操作步骤。
+  source: domain-3-control-plane/32-kubeadm-cluster-lifecycle.md
+  command: set -euo pipefail
+- type: comparison
+  question: 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm) 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/32-kubeadm-cluster-lifecycle.md 中的对比分析。
+  source: domain-3-control-plane/32-kubeadm-cluster-lifecycle.md
+- type: concept
+  question: 在 kubeadm 升级完整路径指南（含 rollback） 中, 升级路径规则与前置条件 是什么?
+  answer: 参见 domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md 的「升级路径规则与前置条件」章节。
+  source: domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md
+  section: 升级路径规则与前置条件
+- type: operation
+  question: '如何执行与 kubeadm 升级完整路径指南（含 rollback） 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md 中的操作步骤。
+  source: domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md
+  command: kubectl get nodes -o wide
+- type: operation
+  question: '如何执行与 kubeadm 升级完整路径指南（含 rollback） 相关的操作: kubeadm upgrade plan?'
+  answer: 参见 domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md 中的操作步骤。
+  source: domain-3-control-plane/32-kubeadm-upgrade-complete-guide.md
+  command: kubeadm upgrade plan
+- type: concept
+  question: 在 Kubelet 驱逐阈值量化完整文档 中, Eviction Signal 完整列表 是什么?
+  answer: 参见 domain-3-control-plane/33-kubelet-eviction-thresholds.md 的「Eviction Signal 完整列表」章节。
+  source: domain-3-control-plane/33-kubelet-eviction-thresholds.md
+  section: Eviction Signal 完整列表
+- type: concept
+  question: 在 Kubelet 驱逐阈值量化完整文档 中, Hard Eviction vs Soft Eviction 是什么?
+  answer: 参见 domain-3-control-plane/33-kubelet-eviction-thresholds.md 的「Hard Eviction vs Soft Eviction」章节。
+  source: domain-3-control-plane/33-kubelet-eviction-thresholds.md
+  section: Hard Eviction vs Soft Eviction
+- type: operation
+  question: '如何执行与 Kubelet 驱逐阈值量化完整文档 相关的操作: memory.available = node.capacity.memory - node.allocatable.m?'
+  answer: 参见 domain-3-control-plane/33-kubelet-eviction-thresholds.md 中的操作步骤。
+  source: domain-3-control-plane/33-kubelet-eviction-thresholds.md
+  command: memory.available = node.capacity.memory - node.allocatable.memory - 系统基础预留 - kubelet 预留 - 现有 Pod 使用量
+- type: operation
+  question: '如何执行与 Kubelet 驱逐阈值量化完整文档 相关的操作: nodefs.available = (nodefs.capacity - nodefs.used) / nodefs.?'
+  answer: 参见 domain-3-control-plane/33-kubelet-eviction-thresholds.md 中的操作步骤。
+  source: domain-3-control-plane/33-kubelet-eviction-thresholds.md
+  command: nodefs.available = (nodefs.capacity - nodefs.used) / nodefs.capacity
+- type: comparison
+  question: Kubelet 驱逐阈值量化完整文档 中有哪些技术对比?
+  answer: 参见 domain-3-control-plane/33-kubelet-eviction-thresholds.md 中的对比分析。
+  source: domain-3-control-plane/33-kubelet-eviction-thresholds.md

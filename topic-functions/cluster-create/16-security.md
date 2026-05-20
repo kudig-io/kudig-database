@@ -1,3 +1,57 @@
+---
+title: '安全机制: ServiceAccount Token 与 Audit'
+description: '# 安全机制: ServiceAccount Token 与 Audit'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- rbac
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- DevOps工程师
+- 安全工程师
+- Kubernetes管理员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes ServiceAccount token TokenRequest volumeProjection
+- Kubernetes BoundServiceAccountTokenVolumeProjection
+- Kubernetes API server audit log configuration
+- Kubernetes encryption at rest secrets provider
+- Kubernetes NodeRestriction admission plugin
+trigger_keywords:
+- ServiceAccount
+- token
+- TokenRequest
+- BoundServiceAccountTokenVolume
+- audit
+- encryption
+- NodeRestriction
+- RBAC
+- RBAC
+- sa.key
+- sa.pub
+- api server
+- admission
+related_domains:
+- domain-2-security
+- domain-12-troubleshooting
+related_topics:
+- ServiceAccount
+- RBAC
+- API Server
+- audit
+- encryption
+- admission
+---
+
+
 # 安全机制: ServiceAccount Token 与 Audit
 
 ## 源码路径
@@ -229,6 +283,11 @@ NodeRestriction 限制 kubelet 的操作:
 ```bash
 # API Server 启动参数控制访问:
 --anonymous-auth=false       # 禁用匿名访问
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 --enable-admission-plugins=NodeRestriction,PodSecurityPolicy
 --encryption-provider-config # 加密存储
 --audit-policy-file          # 审计日志

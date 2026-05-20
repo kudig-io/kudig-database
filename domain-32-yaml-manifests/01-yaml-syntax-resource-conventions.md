@@ -1,3 +1,40 @@
+---
+title: 01 - YAML 语法基础与 Kubernetes 资源通用规范
+description: 1. [概述](#1-概述)
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- istio
+- envoy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 15min
+intent_queries:
+- YAML 语法基础与 Kubernetes 资源通用规范 是什么
+- 如何 YAML 语法基础与 Kubernetes 资源通用规范
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- YAML
+- 语法基础与
+- Kubernetes
+- 资源通用规范
+- yaml
+- manifests
+---
+
+
 # 01 - YAML 语法基础与 Kubernetes 资源通用规范
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖

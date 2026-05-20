@@ -1,22 +1,78 @@
 ---
-fta_id: "FTA-RBAC-028"
-title: "RBAC 异常故障树分析"
-component: "rbac"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-RBAC-001"
-last_updated: "2026-05"
+title: RBAC 异常故障树分析
+description: ROLE_OR --> ROLE3[Role 配置错误]
+category: fta
+tags:
+- fta
+- troubleshooting
+- rbac
+- role
+- clusterrole
+- authorization
+- serviceaccount
+- apiserver
+- opa
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- RBAC 异常故障树分析 是什么
+- 如何 RBAC 异常故障树分析
+- RBAC 异常故障树分析 根因分析
+- RBAC 异常故障树分析 故障树
+trigger_keywords:
+- RBAC
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, rbac, role, clusterrole, authorization, serviceaccount]
-related_skills:
-  - "../topic-skills/09-security-certificates.md"
-knowledge_refs:
-  - "../domain-7-security/02-rbac.md"
-  - "../domain-12-troubleshooting/12-rbac-quota-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-7-security/07-rbac-matrix-configuration.md
+  label: '深度文档: 07-rbac-matrix-configuration'
+- type: skill
+  path: ../topic-skills/09-rbac-quota-failure.md
+  label: '运维技能: 09-rbac-quota-failure'
+- type: structural
+  path: ../topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md
+  label: '结构化排障: 01-rbac-troubleshooting'
+fta_metadata:
+  fta_id: FTA-RBAC-001
+  top_event: RBAC 异常 (权限不足/角色配置错误/策略冲突)
+  top_event_id: TE-RBAC-001
+  bottom_events_count: 16
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl auth can-i get pods --as=system:serviceaccount:<ns>:<sa> 返回 no"
+    - "kubectl get events -A | grep -E 'Forbidden|Denied|Unauthorized' 显示 RBAC 拒绝"
+    - "ServiceAccount 无法创建/更新资源"
+agent_notes:
+  decision_tree_entry: "kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa> 检查权限"
+  critical_commands:
+    - "kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>"
+    - "kubectl get role,clusterrole,rolebinding,clusterrolebinding -A"
+    - "kubectl describe role <name> -n <ns>"
+    - "kubectl get events -A | grep -E 'Forbidden|Denied'"
+  danger_operations:
+    - action: "kubectl delete clusterrolebinding <name>"
+      risk: "删除集群角色绑定可能影响集群级别的权限，导致服务账户失去必要权限"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'Forbidden|Denied|Unauthorized' 显示 RBAC 相关拒绝事件 -->
 
 # RBAC 异常 FTA 树
 

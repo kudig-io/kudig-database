@@ -1,3 +1,44 @@
+---
+title: 07 - Job / CronJob YAML 配置参考
+description: '# 07 - Job / CronJob YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- controller-manager
+- prometheus
+- redis
+- mysql
+- postgresql
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- Job / CronJob YAML 配置参考 是什么
+- 如何 Job / CronJob YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- Job
+- CronJob
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/job-cronjob-fta.md
+  label: '故障树: job-cronjob'
+---
+
+
 # 07 - Job / CronJob YAML 配置参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖

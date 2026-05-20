@@ -1,74 +1,79 @@
 ---
-skill_id: "SKILL-PERF-001"
-skill_name: "性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning"
-version: "1.0"
-category: "performance"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: CPU Manager GA, Memory Manager GA, Topology Manager GA"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA, Node swap support (beta)"
-  - "v1.31+: EventedPLEG GA"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "15-120min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+description: '## 1. 概述'
+category: performance
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 是什么
+- 如何 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 trigger_keywords:
-  - "high latency"
-  - "slow response"
-  - "cpu throttling"
-  - "memory pressure"
-  - "network bottleneck"
-  - "disk io slow"
-  - "api server slow"
-  - "etcd slow query"
-  - "connection timeout"
-  - "pod startup slow"
-  - "scheduling delay"
-  - "high p99 latency"
-  - "性能瓶颈"
-  - "延迟高"
-  - "响应慢"
-  - "CPU 限流"
-  - "内存压力"
-  - "磁盘 IO 慢"
-trigger_events:
-  - "TopOOMKill"
-  - "SystemOOM"
-  - "EvictionThresholdMet"
-  - "CPUThrottling"
-  - "HighLatency"
-trigger_metrics:
-  - 'container_cpu_cfs_throttled_seconds_total'
-  - 'node_memory_MemAvailable_bytes'
-  - 'node_disk_io_time_seconds_total'
-  - 'apiserver_request_duration_seconds_bucket{verb!="WATCH"}'
-  - 'etcd_disk_wal_fsync_duration_seconds'
-  - 'scheduler_scheduling_algorithm_duration_seconds'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-  - "SKILL-NET-001"
-fta_refs:
-  - "topic-fta/list/performance-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/33-performance-bottleneck-troubleshooting.md"
-  - "domain-1-architecture-fundamentals/13-performance-tuning-guide.md"
-  - "domain-8-observability/"
+- high latency
+- slow response
+- cpu throttling
+- memory pressure
+- network bottleneck
+- disk io slow
+- api server slow
+- etcd slow query
+- connection timeout
+- pod startup slow
+- scheduling delay
+- high p99 latency
+- 性能瓶颈
+- 延迟高
+- 响应慢
+- CPU 限流
+- 内存压力
+- 磁盘 IO 慢
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-17
+  category: performance
+  subcategory: bottleneck
+  severity: P1
+  time_to_diagnosis_minutes: 20
+  time_to_remediation_minutes: 30
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl top nodes 检查节点资源使用; kubectl top pods -A 检查 Pod 资源使用"
+  critical_commands:
+    - "kubectl top nodes"
+    - "kubectl top pods -A --sort-by=memory"
+    - "kubectl describe node <node-name>"
+    - "kubectl get events --sort-by='.lastTimestamp' | tail -50"
+    - "kubectl logs -n <ns> <pod> --tail=100 | grep -E 'timeout|slow|delay'"
+  danger_operations:
+    - action: "kubectl exec -n <ns> <pod> -- sysctl -w net.core.somaxconn=1024"
+      risk: "修改内核参数可能影响节点稳定性，需要谨慎操作"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl top nodes -o jsonpath='{range .items[?(@.usage.cpu!="<none>" && @.usage.memory!="<none>")]} {.metadata.name}{"\n"}{end}' 显示节点资源使用率超过 80% -->
 
 # 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 

@@ -1,3 +1,40 @@
+---
+title: Backstage 内部开发者平台 (IDP) 构建指南
+description: '# Backstage 内部开发者平台 (IDP) 构建指南'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- grafana
+- helm
+- docker
+- opa
+- redis
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Backstage 内部开发者平台 (IDP) 构建指南 是什么
+- 如何 Backstage 内部开发者平台 (IDP) 构建指南
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Backstage
+- 内部开发者平台
+- IDP
+- 构建指南
+- platform
+- engineering
+---
+
+
 # Backstage 内部开发者平台 (IDP) 构建指南
 
 > **适用版本**: Backstage v1.36.0  

@@ -1,3 +1,37 @@
+---
+title: 01-生产架构设计原则
+description: '# 01-生产架构设计原则'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- helm
+- hpa
+- ingress
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 生产架构设计原则 是什么
+- 如何 生产架构设计原则
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- 生产架构设计原则
+- production
+- operations
+---
+
+
 # 01-生产架构设计原则
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐
@@ -130,6 +164,11 @@ spec:
 #### 2. Pod安全策略
 ```yaml
 apiVersion: policy/v1beta1
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 kind: PodSecurityPolicy
 metadata:
   name: restricted

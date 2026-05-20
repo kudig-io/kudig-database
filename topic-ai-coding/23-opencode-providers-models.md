@@ -1,3 +1,33 @@
+---
+title: Provider 与模型管理
+description: '# Provider 与模型管理'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- gateway
+- vllm
+- llm
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- Provider 与模型管理 是什么
+- 如何 Provider 与模型管理
+trigger_keywords:
+- Provider
+- 与模型管理
+- ai
+- coding
+---
+
 # Provider 与模型管理
 
 > **文档类型**: 配置指南 | **最后更新**: 2026-03 | **关键词**: OpenCode, Provider, LLM Model, OpenCode Zen, AWS Bedrock, Azure OpenAI, GitHub Copilot, Groq, VertexAI

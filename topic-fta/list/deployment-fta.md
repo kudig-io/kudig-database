@@ -1,22 +1,81 @@
 ---
-fta_id: "FTA-DEPLOY-011"
-title: "Deployment 异常故障树分析"
-component: "deployment"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-DEPLOY-001"
-last_updated: "2026-05"
+title: Deployment 异常故障树分析
+description: OR0 --> SEC[安全与准入异常]
+category: fta
+tags:
+- fta
+- troubleshooting
+- deployment
+- rolling-update
+- replicaset
+- kubelet
+- scheduler
+- controller-manager
+- opa
+- pdb
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Deployment 异常故障树分析 是什么
+- 如何 Deployment 异常故障树分析
+- Deployment 异常故障树分析 根因分析
+- Deployment 异常故障树分析 故障树
+trigger_keywords:
+- Deployment
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, deployment, rolling-update, replicaset]
-related_skills:
-  - "../topic-skills/06-deployment.md"
-knowledge_refs:
-  - "../domain-4-workloads/11-deployment.md"
-  - "../domain-12-troubleshooting/04-workload-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/02-deployment-production-patterns.md
+  label: '深度文档: 02-deployment-production-patterns'
+- type: skill
+  path: ../topic-skills/08-deployment-rollout-failure.md
+  label: '运维技能: 08-deployment-rollout-failure'
+- type: structural
+  path: ../topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md
+  label: '结构化排障: 02-deployment-troubleshooting'
+fta_metadata:
+  fta_id: FTA-DEPLOY-001
+  top_event: Deployment 异常 (滚动更新失败/副本数不符/Pod 异常)
+  top_event_id: TE-DEPLOY-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get rs -n <ns> --show-labels 显示副本数异常"
+    - "kubectl rollout status deployment/<name> -n <ns> 显示卡住或失败"
+    - "kubectl get events -A --field-selector reason=FailedCreate 显示创建失败"
+agent_notes:
+  decision_tree_entry: "kubectl get deployment -n <ns> -o wide 检查 Deployment 状态和可用副本数"
+  critical_commands:
+    - "kubectl get deployment -n <ns> -o wide"
+    - "kubectl rollout status deployment/<name> -n <ns>"
+    - "kubectl describe deployment <name> -n <ns>"
+    - "kubectl get rs -n <ns> -o wide"
+  danger_operations:
+    - action: "kubectl rollout undo deployment/<name> -n <ns>"
+      risk: "回滚会恢复到上一个版本，可能丢失近期配置变更"
+      requires_confirmation: true
+    - action: "kubectl scale deployment <name> -n <ns> --replicas=0"
+      risk: "缩容到 0 会导致服务中断，确认无流量后再操作"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get rs -n <ns> -o jsonpath='{range .items[?(@.spec.replicas != @.status.readyReplicas)]} {.metadata.name}{\"\n\"}{end}' 显示副本数不匹配 -->
 
 # Deployment 异常 FTA 树
 

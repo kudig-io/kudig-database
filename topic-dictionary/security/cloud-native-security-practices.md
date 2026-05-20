@@ -1,3 +1,35 @@
+---
+title: 09 - 云原生安全专家指南
+description: '# 09 - 云原生安全专家指南'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- istio
+- cilium
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 云原生安全专家指南 是什么
+- 如何 云原生安全专家指南
+trigger_keywords:
+- 云原生安全专家指南
+- dictionary
+title_en: Cloud Native Security Practices
+---
+
+
+
 # 09 - 云原生安全专家指南
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
@@ -2381,6 +2413,11 @@ data:
           timing: "< 5 minutes"
           command: "crontab -l | grep attacker.com"
         
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
         - action: "应用PodSecurityPolicy/PodSecurity"
           timing: "< 10 minutes"
           command: "kubectl label ns default pod-security.kubernetes.io/enforce=restricted"

@@ -1,3 +1,42 @@
+---
+title: Amazon ECR (Elastic Container Registry) Enterprise 深度实践
+description: '# Amazon ECR (Elastic Container Registry) Enterprise 深度实践'
+category: container-image-management
+tags:
+- k8s
+- container
+- image
+- registry
+- harbor
+- containerd
+- docker
+- job
+- gateway
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- Amazon ECR (Elastic Container Registry) Enterprise 深度实践 是什么
+- 如何 Amazon ECR (Elastic Container Registry) Enterprise 深度实践
+- Kubernetes 22 container image management 最佳实践
+trigger_keywords:
+- Amazon
+- ECR
+- Elastic
+- Container
+- Registry
+- Enterprise
+- 深度实践
+- container
+---
+
+
 # Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 
 > **Author**: Cloud Container Platform Architect | **Version**: v1.0 | **Update Time**: 2026-02-07

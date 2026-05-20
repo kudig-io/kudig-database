@@ -1,3 +1,33 @@
+---
+title: 计算、存储与网络扩展
+description: '# 计算、存储与网络扩展'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- daemonset
+- operator
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 计算、存储与网络扩展 是什么
+- 如何 计算、存储与网络扩展
+trigger_keywords:
+- 计算
+- 存储与网络扩展
+- dictionary
+title_en: Compute Storage And Networking Extensions
+---
+
+
 # 计算、存储与网络扩展
 
 ## 概述

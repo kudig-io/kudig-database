@@ -1,3 +1,53 @@
+---
+title: Kubernetes 网络基础 Network in a Nutshell
+description: '# Kubernetes 网络基础 Network in a Nutshell'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- etcd
+- apiserver
+- istio
+- cilium
+- flannel
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes 网络基础 Network in a Nutshell 是什么
+- 如何 Kubernetes 网络基础 Network in a Nutshell
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Kubernetes
+- 网络基础
+- Network
+- in
+- Nutshell
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # Kubernetes 网络基础 Network in a Nutshell
 
 > 目标：**用一套 Mermaid 图看懂 K8s 网络**，再配合 **kind 本地集群**全部动手验证一遍。

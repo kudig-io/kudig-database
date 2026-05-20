@@ -1,3 +1,54 @@
+---
+title: 17 - 生产环境运维最佳实践 (Production Operations Best Practices)
+description: '# 17 - 生产环境运维最佳实践 (Production Operations Best Practices)'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- 生产环境运维最佳实践 (Production Operations Best Practices) 是什么
+- 如何 生产环境运维最佳实践 (Production Operations Best Practices)
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- 生产环境运维最佳实践
+- Production
+- Operations
+- Best
+- Practices
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # 17 - 生产环境运维最佳实践 (Production Operations Best Practices)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Kubernetes Production Guide](https://kubernetes.io/docs/setup/production-environment/), CNCF Production Readiness
@@ -113,6 +164,11 @@ EOF
 
 #### Pod安全策略配置
 ```yaml
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 # PodSecurityPolicy示例 (已废弃，推荐使用Pod Security Admission)
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy

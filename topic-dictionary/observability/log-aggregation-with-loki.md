@@ -1,3 +1,35 @@
+---
+title: 日志聚合与 Loki
+description: '# 日志聚合与 Loki'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- grafana
+- ceph
+- minio
+- kafka
+- elasticsearch
+- daemonset
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 日志聚合与 Loki 是什么
+- 如何 日志聚合与 Loki
+trigger_keywords:
+- 日志聚合与
+- Loki
+- dictionary
+title_en: Logging
+---
+
+
 # 日志聚合与 Loki
 
 ## 概述

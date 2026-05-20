@@ -1,71 +1,77 @@
 ---
-skill_id: "SKILL-IMAGE-001"
-skill_name: "镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting"
-version: "1.0"
-category: "pod"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: ImagePullSecrets stable, Native Sidecar Containers (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: BoundServiceAccountTokenVolume GA"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+description: '## 1. 概述'
+category: pod
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- coredns
+- helm
+- containerd
+- cri-o
+- docker
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 是什么
+- 如何 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 trigger_keywords:
-  - "ImagePullBackOff"
-  - "ErrImagePull"
-  - "image pull failed"
-  - "registry authentication"
-  - "pull rate limit"
-  - "image not found"
-  - "manifest unknown"
-  - "unauthorized access"
-  - "imagePullSecrets"
-  - "air-gap registry"
-  - "镜像拉取失败"
-  - "镜像拉不下来"
-  - "仓库认证失败"
-  - "镜像找不到"
-  - "私有仓库配置"
-  - "离线镜像"
-trigger_events:
-  - "Failed to pull image"
-  - "Back-off pulling image"
-  - "ErrImagePull"
-  - "ImagePullBackOff"
-  - "Failed"
-  - "FailedToRetrieveImagePullSecret"
-trigger_metrics:
-  - 'kubelet_docker_operations_errors_total{operation_type="pull_image"}'
-  - 'container_runtime_pull_duration_seconds'
-  - 'kubelet_image_pull_operations_failed_total'
-  - 'kubelet_cgroup_manager_duration_seconds{operation_type="create"}'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-NET-001"
-  - "SKILL-SEC-001"
-fta_refs:
-  - "topic-fta/list/pod-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/27-image-registry-troubleshooting.md"
-  - "domain-22-container-image-management/"
-  - "domain-13-docker/"
+- ImagePullBackOff
+- ErrImagePull
+- image pull failed
+- registry authentication
+- pull rate limit
+- image not found
+- manifest unknown
+- unauthorized access
+- imagePullSecrets
+- air-gap registry
+- 镜像拉取失败
+- 镜像拉不下来
+- 仓库认证失败
+- 镜像找不到
+- 私有仓库配置
+- 离线镜像
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-10
+  category: pod
+  subcategory: image
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl describe pod <name> -n <ns> | grep -E 'ImagePullBackOff|ErrImagePull|Failed to pull' 检查镜像拉取错误"
+  critical_commands:
+    - "kubectl describe pod <name> -n <ns> | grep -A 5 'Failed to pull'"
+    - "kubectl get pod <name> -n <ns> -o jsonpath='{.spec.imagePullSecrets}'"
+    - "kubectl get secret -n <ns> | grep docker-registry"
+    - "crictl images | grep <image-name>"
+  danger_operations:
+    - action: "kubectl delete pod <name> -n <ns> --force"
+      risk: "强制删除会导致 Pod 重建，如果镜像问题未解决会持续失败"
+      requires_confirmation: true
 ---
+---
+
+
 
 # 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 

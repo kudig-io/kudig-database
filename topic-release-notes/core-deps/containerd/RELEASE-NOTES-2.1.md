@@ -1,3 +1,31 @@
+---
+title: containerd v2.1 Release Notes
+description: containerd v2.1 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- containerd v2.1 Release Notes 是什么
+- 如何 containerd v2.1 Release Notes
+trigger_keywords:
+- containerd
+- v2.1
+- Release
+- Notes
+- release
+- notes
+---
+
 # containerd v2.1 Release Notes
 
 Source: [v2.1.6](https://github.com/containerd/containerd/releases/tag/v2.1.6)

@@ -1,3 +1,39 @@
+---
+title: 'Domain-32: Kubernetes YAML 配置完整参考手册'
+description: '# Domain-32: Kubernetes YAML 配置完整参考手册'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- kubelet
+- scheduler
+- helm
+- argocd
+- hpa
+- pdb
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain-32: Kubernetes YAML 配置完整参考手册 是什么'
+- '如何 Domain-32: Kubernetes YAML 配置完整参考手册'
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- 'Domain-32:'
+- Kubernetes
+- YAML
+- 配置完整参考手册
+- yaml
+- manifests
+---
+
 # Domain-32: Kubernetes YAML 配置完整参考手册
 
 > **文档数量**: 36 篇 | **最后更新**: 2026-02 | **适用版本**: Kubernetes v1.25 - v1.32

@@ -1,3 +1,47 @@
+---
+title: 147 - 向量数据库与RAG架构
+description: '# 147 - 向量数据库与RAG架构'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- etcd
+- prometheus
+- helm
+- opa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 向量数据库与RAG架构 是什么
+- 如何 向量数据库与RAG架构
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 向量数据库与RAG架构
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 147 - 向量数据库与RAG架构
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [Milvus](https://milvus.io/docs) | [Weaviate](https://weaviate.io/developers/weaviate) | [LangChain](https://python.langchain.com/)

@@ -1,3 +1,35 @@
+---
+title: Taints and Tolerations
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- daemonset
+- operator
+- webhook
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Taints and Tolerations 是什么
+- 如何 Taints and Tolerations
+trigger_keywords:
+- Taints
+- and
+- Tolerations
+- dictionary
+title_en: Taints And Tolerations
+---
+
+
 # Taints and Tolerations
 
 ## 概述

@@ -1,20 +1,78 @@
 ---
-fta_id: "FTA-CRD-008"
-title: "CRD/Operator 异常故障树分析"
-component: "crd-operator"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CRD-001"
-last_updated: "2026-05"
+title: CRD/Operator 异常故障树分析
+description: '- **范围**：CRD 定义/注册、Operator 控制器生命周期、Reconcile 循环、转换/验证 Webhook、RBAC/SA 认证、依赖组件（API Server / etcd / informer
+  cache）。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- crd
+- operator
+- controller
+- webhook
+- etcd
+- apiserver
+- kubelet
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- CRD/Operator 异常故障树分析 是什么
+- 如何 CRD/Operator 异常故障树分析
+- CRD/Operator 异常故障树分析 根因分析
+- CRD/Operator 异常故障树分析 故障树
+trigger_keywords:
+- CRD
+- Operator
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, crd, operator, controller, webhook]
-related_skills: []
-knowledge_refs:
-  - "../domain-10-extensions/05-operator-pattern.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md
+  label: '结构化排障: 05-crd-operator-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CRD-001
+  top_event: CRD/Operator 异常 (Reconcile 失效/版本不兼容/资源漂移/Webhook 失败)
+  top_event_id: TE-CRD-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get crd -A 显示 CRD 异常或版本冲突"
+    - "Operator Pod 日志显示 Reconcile 错误"
+    - "Custom Resource 创建/更新失败或状态异常"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n <operator-ns> -l control-plane=controller-manager 检查 Operator 状态"
+  critical_commands:
+    - "kubectl get crd -A -o wide"
+    - "kubectl get pods -n <operator-ns> -o wide"
+    - "kubectl logs -n <operator-ns> <operator-pod> --tail=100"
+    - "kubectl describe crd <name>"
+    - "kubectl get <resource> -A -o wide"
+  danger_operations:
+    - action: "kubectl delete crd <name> --force"
+      risk: "删除 CRD 会删除所有该类型的自定义资源，可能导致业务中断"
+      requires_confirmation: true
+    - action: "kubectl exec -n <operator-ns> <pod> -- operator-tools prune --all"
+      risk: "清理操作可能删除大量自定义资源，无法恢复"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get crd -A -o jsonpath='{range .items[?(@.status.conditions[?(@.type!=\"Established\")].type)]} {.metadata.name}{\"\n\"}{end}' 显示 CRD 异常 -->
 
 # CRD/Operator 异常 FTA 树
 
@@ -735,6 +793,10 @@ flowchart TD
 | **1.19–1.21** | CRD `apiextensions.k8s.io/v1beta1` 仍可用但已 deprecated；Webhook matchPolicy 默认 `Exact` |
 | **1.22** | **CRD v1beta1 移除**，必须使用 `apiextensions.k8s.io/v1`；Webhook `admissionregistration.k8s.io/v1beta1` 移除 |
 | **1.23–1.24** | CEL validation 引入（alpha）；ServiceAccount Token 不再自动创建 Secret（1.24） |
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
 | **1.25** | CEL validation beta；PodSecurityPolicy 移除，Operator 部署需迁移到 PodSecurity admission |
 | **1.26–1.27** | CRD validation ratcheting（alpha 1.26, beta 1.28）；WatchList（alpha 1.27） |
 | **1.28–1.30** | CRD SelectableFields（1.30 beta）；ValidatingAdmissionPolicy GA（1.30）可替代部分 Webhook |

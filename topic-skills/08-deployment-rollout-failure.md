@@ -1,80 +1,83 @@
 ---
-skill_id: "SKILL-WORK-001"
-skill_name: "Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis"
-version: "1.0"
-category: "workload"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: MaxSurge/MaxUnavailable percentage stable, Native Sidecar Containers (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: ValidatingAdmissionPolicy GA"
-  - "v1.31+: No deployment API changes"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
+description: '## 1. 概述'
+category: workload
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- controller-manager
+- prometheus
+- grafana
+- istio
+- helm
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 是什么
+- 如何 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 trigger_keywords:
-  - "rollout stuck"
-  - "deployment failed"
-  - "rollback failed"
-  - "revision history"
-  - "maxUnavailable"
-  - "maxSurge"
-  - "progressDeadlineSeconds"
-  - "rollout restart"
-  - "canary deployment failed"
-  - "blue-green switch failed"
-  - "滚动更新卡住"
-  - "部署失败"
-  - "回滚失败"
-  - "版本回退失败"
-  - "新版本无法启动"
-  - "Pod 更新失败"
-  - "StatefulSet 更新卡住"
-  - "DaemonSet 更新失败"
-trigger_events:
-  - "ProgressDeadlineExceeded"
-  - "ReplicaSetUpdated"
-  - "ScalingReplicaSet"
-  - "FailedCreate"
-  - "MinimumReplicasUnavailable"
-  - "FailedRollback"
-  - "DeploymentRollback"
-  - "SuccessfulDelete"
-  - "SuccessfulCreate"
-trigger_metrics:
-  - 'kube_deployment_status_observed_generation != kube_deployment_metadata_generation'
-  - 'kube_deployment_status_replicas_unavailable > 0'
-  - 'kube_deployment_spec_replicas != kube_deployment_status_replicas_available'
-  - 'kube_deployment_status_condition{condition="Available",status="false"}'
-  - 'kube_deployment_status_condition{condition="Progressing",status="false"}'
-  - 'kube_statefulset_status_replicas_ready != kube_statefulset_status_replicas'
-  - 'kube_daemonset_status_number_unavailable > 0'
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-STORE-001"
-  - "SKILL-NET-001"
-fta_refs:
-  - "topic-fta/list/workload-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/11-deployment-comprehensive-troubleshooting.md"
-  - "domain-4-workloads/"
-  - "domain-9-platform-ops/"
+- rollout stuck
+- deployment failed
+- rollback failed
+- revision history
+- maxUnavailable
+- maxSurge
+- progressDeadlineSeconds
+- rollout restart
+- canary deployment failed
+- blue-green switch failed
+- 滚动更新卡住
+- 部署失败
+- 回滚失败
+- 版本回退失败
+- 新版本无法启动
+- Pod 更新失败
+- StatefulSet 更新卡住
+- DaemonSet 更新失败
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-08
+  category: workload
+  subcategory: deployment
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 25
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl rollout status deployment/<name> -n <ns> 检查滚动更新状态"
+  critical_commands:
+    - "kubectl get deployment -n <ns> -o wide"
+    - "kubectl rollout status deployment/<name> -n <ns>"
+    - "kubectl describe deployment <name> -n <ns>"
+    - "kubectl get rs -n <ns> -o wide"
+    - "kubectl logs -n <ns> -l app=<name> --tail=50"
+  danger_operations:
+    - action: "kubectl rollout undo deployment/<name> -n <ns>"
+      risk: "回滚会恢复到上一个版本，可能丢失近期配置变更"
+      requires_confirmation: true
+    - action: "kubectl scale deployment <name> -n <ns> --replicas=0"
+      risk: "缩容到 0 会导致服务中断，确认无流量后再操作"
+      requires_confirmation: true
 ---
+---
+
+
 
 # Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 

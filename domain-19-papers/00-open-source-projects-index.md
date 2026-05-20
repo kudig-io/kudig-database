@@ -1,3 +1,37 @@
+---
+title: Domain-19 论文与参考 — 开源项目索引
+description: 本域为学术与最佳实践文档，主要关联的开源项目分布在其他 Domain。
+category: papers
+tags:
+- k8s
+- papers
+- research
+- etcd
+- prometheus
+- istio
+- cilium
+- falco
+- ebpf
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Domain-19 论文与参考 — 开源项目索引 是什么
+- 如何 Domain-19 论文与参考 — 开源项目索引
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Domain-19
+- 论文与参考
+- 开源项目索引
+- papers
+---
+
 # Domain-19 论文与参考 — 开源项目索引
 
 > **最后更新**: 2026-04-24

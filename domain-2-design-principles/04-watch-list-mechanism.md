@@ -1,3 +1,43 @@
+---
+title: 04 - List-Watch 机制深度解析 (List-Watch)
+description: '# 04 - List-Watch 机制深度解析 (List-Watch)'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- apiserver
+- controller-manager
+- prometheus
+- job
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- List-Watch 机制深度解析 (List-Watch) 是什么
+- 如何 List-Watch 机制深度解析 (List-Watch)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- List-Watch
+- 机制深度解析
+- List-Watch
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 04 - List-Watch 机制深度解析 (List-Watch)
 
 ## 资深视点：Streaming List-Watch (K8s 1.27+)

@@ -1,3 +1,45 @@
+---
+title: 110 - CLI 增强与效率工具 (CLI Enhancement)
+description: '| **Stern** | 多 Pod 日志聚合 | 85% | brew/apt |'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- mysql
+- statefulset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CLI 增强与效率工具 (CLI Enhancement) 是什么
+- 如何 CLI 增强与效率工具 (CLI Enhancement)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- CLI
+- 增强与效率工具
+- CLI
+- Enhancement
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
 # 110 - CLI 增强与效率工具 (CLI Enhancement)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01

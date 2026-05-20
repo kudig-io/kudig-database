@@ -1,3 +1,51 @@
+---
+title: 'Domain 5: Networking 网络'
+description: '# Domain 5: Networking 网络'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- prometheus
+- grafana
+- istio
+- envoy
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 5: Networking 网络 是什么'
+- '如何 Domain 5: Networking 网络'
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- Domain
+- '5:'
+- Networking
+- 网络
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
 # Domain 5: Networking 网络
 
 > **文档数量**: 38 篇 | **最后更新**: 2026-04 | **状态**: 生产环境就绪 (专家级审查完成) | **适用版本**: Kubernetes 1.25 - 1.33+

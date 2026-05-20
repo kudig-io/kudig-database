@@ -1,3 +1,34 @@
+---
+title: Submariner
+description: '| **适用场景** | 多集群网络互通 |'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- daemonset
+- gateway
+- crd
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Submariner 是什么
+- 如何 Submariner
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Submariner
+- cncf
+- landscape
+---
+
 # Submariner
 
 > **成熟度**: Sandbox | **加入时间**: 2021-03 | **最后更新**: 2026-03

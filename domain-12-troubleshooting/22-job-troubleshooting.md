@@ -1,6 +1,58 @@
-# 22 - Job 故障排查 (Job Troubleshooting)
+---
+title: Job 故障排查
+description: '# 22 - Job 故障排查 (Job Troubleshooting)'
+category: troubleshooting
+tags:
+- job
+- batch
+- parallel
+- ttl-seconds
+- backoff
+- controller-manager
+- prometheus
+- rag
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Job 执行失败
+- 批处理任务不完成
+- Pod 退出码非零
+trigger_keywords:
+- Job
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/job-cronjob-fta.md
+  label: '故障树: job-cronjob'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+
+# 22 - Job 故障排查 (Job Troubleshooting)
 
 ---
 

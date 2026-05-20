@@ -1,8 +1,60 @@
+---
+title: 社交媒体平台Kubernetes生产架构设计
+description: '# 社交媒体平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- kafka
+- gateway
+- operator
+- gpu
+- nvidia
+- llm
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 社交产品架构师
+- 社交平台开发者
+- 内容平台技术负责人
+- 社交SRE
+estimated_read_time: 5min
+intent_queries:
+- social media platform kubernetes architecture
+- 社交媒体K8s高并发架构
+- Feed流系统K8s部署
+- 社交图谱图数据库
+- 社交媒体内容审核
+trigger_keywords:
+- 社交媒体
+- 短视频
+- Feed流
+- 社交图谱
+- 内容审核
+- 推荐系统
+- 社交媒体架构
+- 社交K8s
+- 实时消息
+- 用户推荐
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-12-troubleshooting
+- domain-26-service-mesh-microservices
+related_topics:
+- livestream-ecommerce
+- martech-adtech
+- digital-government-architecture
+---
+
+
 # 社交媒体平台 Kubernetes 生产架构设计
 
-> **适用场景**: 社区论坛 / 短视频 / 直播社交 / 兴趣社交 / 职场社交 / 匿名社交  
-> **适用版本**: Kubernetes v1.29 - v1.33  
-> **最后更新**: 2026-04-24  
+> **适用场景**: 社区论坛 / 短视频 / 直播社交 / 兴趣社交 / 职场社交 / 匿名社交
+> **适用版本**: Kubernetes v1.29 - v1.33
+> **最后更新**: 2026-04-24
 > **目标读者**: 社交产品架构师、技术负责人、SRE
 
 ---

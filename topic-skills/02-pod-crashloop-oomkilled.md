@@ -1,62 +1,74 @@
 ---
-skill_id: "SKILL-POD-001"
-skill_name: "Pod CrashLoopBackOff & OOMKilled 诊断与修复 / Pod CrashLoop & OOM Diagnosis"
-version: "1.0"
-category: "pod"
-severity_range: "P1-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Ephemeral Containers GA, Native Sidecar Containers (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: Node swap support (beta), cgroup v2 memory stats stable"
-  - "v1.31+: EventedPLEG GA"
-  - "v1.32+: Sidecar Containers (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-20min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+description: '## 1. 概述'
+category: pod
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- prometheus
+- grafana
+- istio
+- envoy
+- coredns
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 25min
+intent_queries:
+- Pod CrashLoopBackOff & OOMKilled 诊断与修复 是什么
+- 如何 Pod CrashLoopBackOff & OOMKilled 诊断与修复
 trigger_keywords:
-  - "CrashLoopBackOff"
-  - "OOMKilled"
-  - "容器崩溃"
-  - "容器重启"
-  - "Pod重启"
-  - "exit code 137"
-  - "exit code 1"
-  - "container killed"
-  - "内存溢出"
-  - "频繁重启"
-trigger_events:
-  - "BackOff"
-  - "Killing"
-  - "Unhealthy"
-  - "Failed"
-trigger_metrics:
-  - 'kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}'
-  - 'kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}'
-  - 'kube_pod_container_status_restarts_total'
-  - 'container_memory_working_set_bytes'
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-POD-002"
-fta_refs:
-  - "topic-fta/list/pod-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-4-workloads-scheduling/"
-  - "domain-12-troubleshooting/"
+- CrashLoopBackOff
+- OOMKilled
+- 容器崩溃
+- 容器重启
+- Pod重启
+- exit code 137
+- exit code 1
+- container killed
+- 内存溢出
+- 频繁重启
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-02
+  category: pod
+  subcategory: container-restart
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n <ns> -o wide 检查 Pod 状态; kubectl logs <pod> -n <ns> --previous 查看重启前日志"
+  critical_commands:
+    - "kubectl get pods -n <ns> -o wide"
+    - "kubectl describe pod <pod-name> -n <ns>"
+    - "kubectl logs <pod-name> -n <ns> --previous --tail=100"
+    - "kubectl top pod <pod-name> -n <ns>"
+    - "kubectl get events -n <ns> --field-selector involvedObject.name=<pod-name>"
+  danger_operations:
+    - action: "kubectl delete pod <pod-name> -n <ns> --force"
+      risk: "强制删除会导致 Pod 重建，可能丢失重要日志信息"
+      requires_confirmation: true
+    - action: "kubectl exec -n <ns> <pod-name> -- rm -rf /var/log/*"
+      risk: "删除日志文件会导致无法追溯历史问题"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
 
 # Pod CrashLoopBackOff & OOMKilled 诊断与修复
 

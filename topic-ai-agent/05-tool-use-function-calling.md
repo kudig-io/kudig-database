@@ -1,3 +1,37 @@
+---
+title: Tool Use & Function Calling 设计规范
+description: '# Tool Use & Function Calling 设计规范'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- statefulset
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Tool Use & Function Calling 设计规范 是什么
+- 如何 Tool Use & Function Calling 设计规范
+trigger_keywords:
+- Tool
+- Use
+- Function
+- Calling
+- 设计规范
+- ai
+- agent
+---
+
+
 # Tool Use & Function Calling 设计规范
 
 > **文档类型**: 工程规范专题 | **最后更新**: 2026-03 | **关键词**: Function Calling, Tool Use, 工具调用, 并行调用, 错误恢复, 工具链设计, OpenAI Tools, Anthropic Tool Use, 工具定义规范

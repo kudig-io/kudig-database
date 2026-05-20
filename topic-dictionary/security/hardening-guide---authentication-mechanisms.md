@@ -1,3 +1,31 @@
+---
+title: 加固指南 - 认证机制
+description: '# 加固指南 - 认证机制'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 加固指南 - 认证机制 是什么
+- 如何 加固指南 - 认证机制
+trigger_keywords:
+- 加固指南
+- 认证机制
+- dictionary
+title_en: Hardening Guide   Authentication Mechanisms
+---
+
+
 # 加固指南 - 认证机制
 
 ## 概述

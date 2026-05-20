@@ -1,3 +1,33 @@
+---
+title: 企业级AI测试与质量保障深度实践
+description: '# 企业级AI测试与质量保障深度实践'
+category: automated-testing-quality
+tags:
+- k8s
+- testing
+- quality
+- automation
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- QA 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- 企业级AI测试与质量保障深度实践 是什么
+- 如何 企业级AI测试与质量保障深度实践
+- Kubernetes 29 automated testing quality 最佳实践
+trigger_keywords:
+- 企业级AI测试与质量保障深度实践
+- automated
+- testing
+- quality
+---
+
+
 # 企业级AI测试与质量保障深度实践
 
 > **作者**: 企业级测试架构专家 | **版本**: v1.0 | **更新时间**: 2026-02-07

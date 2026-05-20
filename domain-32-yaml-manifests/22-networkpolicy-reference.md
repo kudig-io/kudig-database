@@ -1,3 +1,43 @@
+---
+title: 22 - NetworkPolicy YAML 配置参考
+description: '# 22 - NetworkPolicy YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- prometheus
+- istio
+- cilium
+- flannel
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- NetworkPolicy YAML 配置参考 是什么
+- 如何 NetworkPolicy YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- NetworkPolicy
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/networkpolicy-fta.md
+  label: '故障树: networkpolicy'
+---
+
+
 # 22 - NetworkPolicy YAML 配置参考
 
 ## 概述

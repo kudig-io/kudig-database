@@ -1,3 +1,32 @@
+---
+title: Sidecar Containers
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- istio
+- envoy
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Sidecar Containers 是什么
+- 如何 Sidecar Containers
+trigger_keywords:
+- Sidecar
+- Containers
+- dictionary
+title_en: Sidecar Containers
+---
+
+
 # Sidecar Containers
 
 ## 概述

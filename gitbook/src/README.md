@@ -1,3 +1,34 @@
+---
+title: KUDIG-DATABASE - Kubernetes 生产运维全域知识库
+description: '# KUDIG-DATABASE - Kubernetes 生产运维全域知识库'
+category: general
+tags:
+- k8s
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- jaeger
+- istio
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 1.5h
+intent_queries:
+- KUDIG-DATABASE - Kubernetes 生产运维全域知识库 是什么
+- 如何 KUDIG-DATABASE - Kubernetes 生产运维全域知识库
+trigger_keywords:
+- KUDIG-DATABASE
+- Kubernetes
+- 生产运维全域知识库
+---
+
+
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档总数**: 658 | **领域数量**: 33

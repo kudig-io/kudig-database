@@ -1,3 +1,32 @@
+---
+title: zot
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- zot 是什么
+- 如何 zot
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- zot
+- cncf
+- landscape
+---
+
 # zot
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

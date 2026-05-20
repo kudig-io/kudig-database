@@ -1,3 +1,37 @@
+---
+title: 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
+description: '- [深度知识引用](#102-深度知识引用)'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- containerd
+- cri-o
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution 是什么
+- 如何 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
+trigger_keywords:
+- 版本兼容矩阵与知识进化
+- Version
+- Matrix
+- Knowledge
+- Evolution
+- skills
+---
+
 # 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
 
 > **来源**: SKILL-NODE-001 v1.0 — 节点 NotReady 诊断与修复

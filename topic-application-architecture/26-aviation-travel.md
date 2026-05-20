@@ -1,3 +1,54 @@
+---
+title: 航空出行架构设计
+description: '# 航空出行架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- statefulset
+- operator
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 航空行业架构师
+- 票务系统开发者
+- 云原生工程师
+- 解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 航空出行系统高并发查询架构设计
+- GDS全球分销系统K8s部署方案
+- 航班运价引擎动态定价实现
+- 航空超售控制与库存一致性
+- 机票订单出票流程微服务架构
+trigger_keywords:
+- 航空出行
+- GDS
+- 机票预订
+- 运价引擎
+- 航班搜索
+- NDC
+- 收益管理
+- 超售控制
+- 电子客票
+- 退改签
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-7-observability
+- domain-8-storage
+- domain-26-service-mesh-microservices
+related_topics:
+- topic-application-architecture/12-smart-logistics-architecture
+- topic-application-architecture/17-saas-multitenant-architecture
+- topic-functions/04-high-concurrency-system
+- topic-functions/07-distributed-transaction
+---
+
+
 # 航空出行架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

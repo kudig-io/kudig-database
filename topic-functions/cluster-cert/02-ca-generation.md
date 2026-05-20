@@ -1,40 +1,199 @@
+---
+title: CA 证书生成源码分析
+description: '| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 集群运维人员
+- 安全工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes CA 证书生成源码 kubeadm NewCertificateAuthority
+- kubeadm CA 自签名流程 NewSelfSignedCACert 源码
+- Kubernetes 三组 CA kubernetes-ca etcd-ca front-proxy-ca 生成
+- CA 证书密钥文件权限 0644 0600 设计
+- kubeadm 外部 CA 模式 UsingExternalCA
+trigger_keywords:
+- NewCertificateAuthority
+- NewSelfSignedCACert
+- kubernetes-ca
+- etcd-ca
+- front-proxy-ca
+- CA 自签名
+- 证书权限
+- 外部 CA
+- UsingExternalCA
+- CreatePKIAssets
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/apiserver-cert
+- cluster-cert/etcd-cert
+---
+
+
 # CA 证书生成源码分析
 
-## 概述
+## 函数签名
 
-Kubernetes 集群部署时，kubeadm 首先生成三组 CA 证书。本文档基于官方源码，深入分析 CA 证书的生成逻辑、参数配置及密钥算法选择。
+```go
+func CreatePKIAssets(cfg *kubeadmapi.InitConfiguration) error
 
----
+func NewCertificateAuthority(config *certutil.Config) (*x509.Certificate, crypto.Signer, error)
 
-## 源码路径
+func NewSelfSignedCACert(cfg Config, key crypto.Signer) (*x509.Certificate, error)
 
-- **CA 生成主控**: `cmd/kubeadm/app/phases/certs/certs.go`
-- **PKI 工具函数**: `cmd/kubeadm/app/util/pkiutil/pki_helpers.go`
-- **通用证书库**: `staging/src/k8s.io/client-go/util/cert/cert.go`
+func NewSignedCert(cfg certutil.Config, key crypto.Signer, caCert *x509.Certificate, caKey crypto.Signer) (*x509.Certificate, error)
 
----
+func WriteCertAndKey(pkiPath string, name string, cert *x509.Certificate, key crypto.Signer) error
 
-## CA 生成主控流程
+func CertOrKeyExist(pkiPath string, name string) bool
 
-### 1. kubeadm 证书阶段入口
+func UsingExternalCA(cfg *kubeadmapi.InitConfiguration) (bool, error)
+```
+
+## 源码位置
+
+| 组件 | 源码路径 | 说明 |
+|------|---------|------|
+| CA 生成主控 | `cmd/kubeadm/app/phases/certs/certs.go` | CreatePKIAssets、KubeadmCerts 列表 |
+| PKI 工具函数 | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | NewCertificateAuthority、WriteCertAndKey |
+| 通用证书库 | `staging/src/k8s.io/client-go/util/cert/cert.go` | NewSelfSignedCACert、NewSignedCert |
+| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |
+| 证书验证 | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 证书已存在检查 |
+
+## 参数说明
+
+### KubeadmCerts 完整列表
+
+| 证书名 | CA 来源 | CN | 类型 |
+|--------|--------|-----|------|
+| `ca` | 自签名 | `kubernetes-ca` | 根 CA |
+| `etcd/ca` | 自签名 | `etcd-ca` | etcd CA |
+| `front-proxy-ca` | 自签名 | `front-proxy-ca` | Front Proxy CA |
+| `apiserver` | kubernetes-ca | `kube-apiserver` | 服务端证书 |
+| `apiserver-kubelet-client` | kubernetes-ca | `kube-apiserver-kubelet-client` | 客户端证书 |
+| `admin` | kubernetes-ca | `kubernetes-admin` | 客户端证书 |
+| `controller-manager` | kubernetes-ca | `system:kube-controller-manager` | 客户端证书 |
+| `scheduler` | kubernetes-ca | `system:kube-scheduler` | 客户端证书 |
+| `etcd/server` | etcd-ca | `etcd-server` | 服务端证书 |
+| `etcd/peer` | etcd-ca | `etcd-peer` | 服务端+客户端证书 |
+| `etcd/healthcheck-client` | etcd-ca | `kube-etcd-healthcheck-client` | 客户端证书 |
+| `apiserver-etcd-client` | etcd-ca | `kube-apiserver-etcd-client` | 客户端证书 |
+| `front-proxy-client` | front-proxy-ca | `front-proxy-client` | 客户端证书 |
+| `sa` | 无 (密钥对) | 无 | 公钥/私钥 |
+
+### CA 证书关键属性
+
+| 属性 | CA 证书 | 终端实体证书 |
+|------|--------|-------------|
+| `SerialNumber` | `0` (固定) | 随机 `big.Int` |
+| `IsCA` | `true` | `false` |
+| `KeyUsage` | `CertSign \| KeyEncipherment \| DigitalSignature` | `KeyEncipherment \| DigitalSignature` |
+| `BasicConstraintsValid` | `true` | `true` |
+| `ValidityPeriod` | 10 年 | 1 年 |
+| 密钥算法 | RSA 2048 | RSA 2048 |
+
+### 文件权限设计
+
+| 文件类型 | 权限 | 说明 |
+|---------|------|------|
+| `.crt` (证书) | `0644` | 所有人可读 |
+| `.key` (私钥) | `0600` | 仅 root 可读写 |
+
+## 返回值
+
+| 函数 | 返回值 | 说明 |
+|------|--------|------|
+| `CreatePKIAssets` | `error` | 所有证书生成成功或失败 |
+| `NewCertificateAuthority` | `(*x509.Certificate, crypto.Signer, error)` | CA 证书和私钥 |
+| `NewSelfSignedCACert` | `(*x509.Certificate, error)` | 自签名 CA 证书 |
+| `NewSignedCert` | `(*x509.Certificate, error)` | CA 签发的终端证书 |
+| `WriteCertAndKey` | `error` | 写入成功或失败 |
+| `CertOrKeyExist` | `bool` | 证书/密钥是否已存在 |
+
+## 调用链
+
+```mermaid
+graph TD
+    A[kubeadm init phase certs] --> B[CreatePKIAssets]
+    B --> C[遍历 KubeadmCerts 列表]
+    C --> D{CAName 为空?}
+    D -->|是| E[根 CA 生成路径]
+    E --> F[CertOrKeyExist 检查幂等]
+    F --> G{已存在?}
+    G -->|是| H[跳过]
+    G -->|否| I[NewCertificateAuthority]
+    I --> I1[rsa.GenerateKey 2048]
+    I1 --> I2[NewSelfSignedCACert]
+    I2 --> J[SerialNumber=0, IsCA=true]
+    J --> K[x509.CreateCertificate 自签名]
+    K --> L[WriteCertAndKey .crt 0644 + .key 0600]
+
+    D -->|否| M[终端证书生成路径]
+    M --> N[CertOrKeyExist 检查幂等]
+    N --> O{已存在?}
+    O -->|是| P[跳过]
+    O -->|否| Q[加载 CA 证书和私钥]
+    Q --> R[收集 SAN: GetAPIServerAltNames / GetEtcdAltNames]
+    R --> S[NewSignedCert]
+    S --> S1[SerialNumber=rand, IsCA=false]
+    S1 --> T[x509.CreateCertificate CA 签发]
+    T --> U[WriteCertAndKey]
+```
+
+## 源码分析
+
+### 概述
+
+Kubernetes 集群部署时，kubeadm 首先生成三组 CA 证书：kubernetes-ca、etcd-ca、front-proxy-ca。每个 CA 形成独立的信任域，签发各自的终端实体证书。CA 生成过程是幂等的——已存在的证书不会被覆盖，防止意外替换。
+
+### CreatePKIAssets — 主控函数
 
 ```go
 // cmd/kubeadm/app/phases/certs/certs.go
+var KubeadmCerts = []*KubeadmCert{
+    KubeadmCertRootCA,
+    KubeadmCertEtcdCA,
+    KubeadmCertFrontProxyCA,
+    KubeadmCertApiserver,
+    KubeadmCertApiserverKubeletClient,
+    KubeadmCertAdmin,
+    KubeadmCertControllerManager,
+    KubeadmCertScheduler,
+    KubeadmCertEtcdServer,
+    KubeadmCertEtcdPeer,
+    KubeadmCertEtcdHealthcheck,
+    KubeadmCertApiserverEtcdClient,
+    KubeadmCertFrontProxyClient,
+    KubeadmCertServiceAccount,
+}
+
 func CreatePKIAssets(cfg *kubeadmapi.InitConfiguration) error {
     certificatesDir := cfg.CertificatesDir
-
-    // 定义所有需要生成的证书
     certList := KubeadmCerts
 
     for _, cert := range certList {
-        // 如果 CA 不存在，先生成 CA
         if cert.CAName == "" {
-            // 这是根 CA
             if err := cert.CreateFromCA(cfg, nil); err != nil {
                 return err
             }
         } else {
-            // 这是由 CA 签发的证书
             caCert := GetCert(cert.CAName)
             if err := cert.CreateFromCA(cfg, caCert); err != nil {
                 return err
@@ -45,49 +204,13 @@ func CreatePKIAssets(cfg *kubeadmapi.InitConfiguration) error {
 }
 ```
 
-### 2. CA 证书定义列表
-
-```go
-// cmd/kubeadm/app/phases/certs/certs.go
-var KubeadmCerts = []*KubeadmCert{
-    // 根 CA 证书
-    KubeadmCertRootCA,      // kubernetes-ca
-    KubeadmCertEtcdCA,      // etcd-ca
-    KubeadmCertFrontProxyCA, // front-proxy-ca
-
-    // 由 kubernetes-ca 签发的证书
-    KubeadmCertApiserver,
-    KubeadmCertApiserverKubeletClient,
-    KubeadmCertAdmin,
-    KubeadmCertControllerManager,
-    KubeadmCertScheduler,
-
-    // 由 etcd-ca 签发的证书
-    KubeadmCertEtcdServer,
-    KubeadmCertEtcdPeer,
-    KubeadmCertEtcdHealthcheck,
-    KubeadmCertApiserverEtcdClient,
-
-    // 由 front-proxy-ca 签发的证书
-    KubeadmCertFrontProxyClient,
-
-    // ServiceAccount 密钥对 (非证书)
-    KubeadmCertServiceAccount,
-}
-```
-
----
-
-## CA 证书生成源码深度分析
-
-### 1. NewSelfSignedCACert — 核心 CA 生成函数
+### NewSelfSignedCACert — CA 生成核心
 
 ```go
 // staging/src/k8s.io/client-go/util/cert/cert.go
 func NewSelfSignedCACert(cfg Config, key crypto.Signer) (*x509.Certificate, error) {
     now := time.Now()
 
-    // 构造 x509 证书模板
     templ := x509.Certificate{
         SerialNumber: new(big.Int).SetInt64(0),
         Subject: pkix.Name{
@@ -101,13 +224,12 @@ func NewSelfSignedCACert(cfg Config, key crypto.Signer) (*x509.Certificate, erro
         IsCA:                  true,
     }
 
-    // 自签名：使用自己的私钥签名
     certDERBytes, err := x509.CreateCertificate(
         rand.Reader,
-        &templ,       // 证书模板
-        &templ,       // 父证书 (自签即自己)
-        key.Public(), // 公钥
-        key,          // 签名私钥
+        &templ,
+        &templ,
+        key.Public(),
+        key,
     )
     if err != nil {
         return nil, err
@@ -117,159 +239,65 @@ func NewSelfSignedCACert(cfg Config, key crypto.Signer) (*x509.Certificate, erro
 }
 ```
 
-**关键属性分析**：
-
-| 属性 | 值 | 说明 |
-|-----|---|------|
-| `SerialNumber` | `0` | CA 证书通常每个信任域只有一个，固定序列号可接受 |
-| `KeyUsage` | `KeyEncipherment \| DigitalSignature \| CertSign` | CA 必须具有 CertSign 权限 |
-| `BasicConstraintsValid` | `true` | 启用基本约束扩展 |
-| `IsCA` | `true` | 标记为 CA 证书 |
-| `ValidityPeriod` | 10 年 (默认) | 通过 `cfg.ValidityPeriod` 传入 |
-
-**CA 与终端实体证书的序列号策略差异**：
-- **CA 证书**：`SerialNumber = 0`，因为每个信任域通常只有一个 CA 证书，不存在冲突
-- **服务端/客户端证书**：`NewSignedCert` 使用 `rand.Int(rand.Reader, MaxInt64)` 生成随机序列号，防止同一 CA 签发的多个证书指纹冲突
-
-### 2. kubeadm 对 CA 生成的封装
+### NewCertificateAuthority — kubeadm 封装
 
 ```go
 // cmd/kubeadm/app/util/pkiutil/pki_helpers.go
 func NewCertificateAuthority(config *certutil.Config) (*x509.Certificate, crypto.Signer, error) {
-    // 1. 生成 RSA 2048 私钥
-    key, err := rsa.GenerateKey(cryptorand.Reader, rsaKeySize)
+    key, err := rsa.GenerateKey(cryptorand.Reader, 2048)
     if err != nil {
-        return nil, nil, err
+        return nil, nil, fmt.Errorf("failed to generate RSA key: %v", err)
     }
 
-    // 2. 生成自签名 CA 证书
     cert, err := certutil.NewSelfSignedCACert(*config, key)
     if err != nil {
-        return nil, nil, err
+        return nil, nil, fmt.Errorf("failed to create self-signed CA certificate: %v", err)
     }
 
     return cert, key, nil
 }
 ```
 
-**密钥算法**：
-- 默认使用 **RSA 2048**（`rsaKeySize = 2048`）
-- 不采用 ECDSA 的原因：保持与旧版本 openssl 客户端的最大兼容性
-
-### 3. CA 生成时的 Subject 配置
+### 证书写入磁盘
 
 ```go
-// cmd/kubeadm/app/phases/certs/certs.go
-// kubernetes-ca 配置
-&KubeadmCert{
-    Name:     "ca",
-    BaseName: "ca",
-    Config: certutil.Config{
-        CommonName: "kubernetes-ca",
-    },
-}
-
-// etcd-ca 配置
-&KubeadmCert{
-    Name:     "etcd-ca",
-    BaseName: "ca",
-    Config: certutil.Config{
-        CommonName: "etcd-ca",
-    },
-}
-
-// front-proxy-ca 配置
-&KubeadmCert{
-    Name:     "front-proxy-ca",
-    BaseName: "front-proxy-ca",
-    Config: certutil.Config{
-        CommonName: "front-proxy-ca",
-    },
-}
-```
-
----
-
-## 证书文件读写逻辑
-
-### 1. 写证书到磁盘
-
-```go
-// cmd/kubeadm/app/util/pkiutil/pki_helpers.go
 func WriteCertAndKey(pkiPath string, name string, cert *x509.Certificate, key crypto.Signer) error {
-    // 写入证书: <name>.crt
     if err := WriteCert(pkiPath, name, cert); err != nil {
         return err
     }
-    // 写入私钥: <name>.key
-    if err := WriteKey(pkiPath, name, key); err != nil {
-        return err
-    }
-    return nil
+    return WriteKey(pkiPath, name, key)
 }
 
 func WriteCert(pkiPath string, name string, cert *x509.Certificate) error {
     certificatePath := pathForCert(pkiPath, name)
-    // 证书使用 0644 权限 (只读，所有人可读)
-    if err := certutil.WriteCert(certificatePath, certToPem(cert)); err != nil {
-        return errors.Wrapf(err, "unable to write certificate to file %s", certificatePath)
-    }
-    return nil
+    return certutil.WriteCert(certificatePath, certToPem(cert))
 }
 
 func WriteKey(pkiPath string, name string, key crypto.Signer) error {
     privateKeyPath := pathForKey(pkiPath, name)
-    // 私钥使用 0600 权限 (仅所有者可读写)
-    if err := keyutil.WriteKey(privateKeyPath, keyToPem(key)); err != nil {
-        return errors.Wrapf(err, "unable to write private key to file %s", privateKeyPath)
-    }
-    return nil
+    return keyutil.WriteKey(privateKeyPath, keyToPem(key))
 }
 ```
 
-**文件权限设计**：
-
-| 文件类型 | 权限 | 说明 |
-|---------|------|------|
-| `.crt` (证书) | `0644` | 所有人可读，用于组件验证 |
-| `.key` (私钥) | `0600` | 仅 root 可读写，保护密钥安全 |
-
-### 2. 证书已存在时的处理
+### 幂等性设计
 
 ```go
-// cmd/kubeadm/app/phases/certs/certs.go
 func (k *KubeadmCert) CreateFromCA(cfg *kubeadmapi.InitConfiguration, caCert *KubeadmCert) error {
-    // 检查证书是否已存在
+    pkiDir := cfg.CertificatesDir
     if certutil.CertOrKeyExist(pkiDir, k.BaseName) {
-        // 证书已存在，跳过生成
-        // 这是幂等性设计：重复执行 kubeadm init 不会覆盖已有证书
-        return nil
+        return nil  // 已存在，跳过
     }
     // ... 生成证书
 }
 ```
 
-**设计要点**：
-- kubeadm 证书生成是**幂等**的
-- 已存在的证书不会被覆盖，防止意外替换有效证书
-- 如需重新生成，需手动删除旧证书
-
----
-
-## 外部 CA 支持
-
-kubeadm 支持使用外部 CA，即由外部 PKI 系统预先提供 CA 证书和密钥。
-
-### 外部 CA 模式检测
+### 外部 CA 支持
 
 ```go
-// cmd/kubeadm/app/phases/certs/certs.go
 func UsingExternalCA(cfg *kubeadmapi.InitConfiguration) (bool, error) {
-    // 检查 CA 证书和密钥是否存在
     caCertExists := certutil.CertOrKeyExist(cfg.CertificatesDir, "ca")
-    caKeyExists := certutil.CertOrKeyExist(cfg.CertificatesDir, "ca")
+    caKeyExists := keyutil.KeyExists(filepath.Join(cfg.CertificatesDir, "ca.key"))
 
-    // 如果证书存在但密钥不存在，说明使用外部 CA
     if caCertExists && !caKeyExists {
         return true, nil
     }
@@ -277,42 +305,112 @@ func UsingExternalCA(cfg *kubeadmapi.InitConfiguration) (bool, error) {
 }
 ```
 
-### 外部 CA 时的证书生成行为
+## 执行流程
 
-```go
-// 使用外部 CA 时，kubeadm 只生成需要私钥的证书
-// 如果外部 CA 未提供密钥，kubeadm 无法签发新证书
-// 此时需要外部 PKI 系统预先签发所有组件证书
+```mermaid
+sequenceDiagram
+    participant kubeadm
+    participant PKI as PKI 工具
+    participant Disk as 文件系统
+
+    kubeadm->>PKI: CreatePKIAssets
+    loop 遍历 14 个证书/密钥对
+        PKI->>Disk: CertOrKeyExist?
+        alt 已存在
+            Disk-->>PKI: 跳过（幂等）
+        else 不存在
+            alt CA 证书
+                PKI->>PKI: rsa.GenerateKey(2048)
+                PKI->>PKI: NewSelfSignedCACert
+                PKI->>Disk: .crt (0644) + .key (0600)
+            else 终端证书
+                PKI->>PKI: 收集 SAN
+                PKI->>PKI: NewSignedCert(CA签发)
+                PKI->>Disk: .crt (0644) + .key (0600)
+            end
+        end
+    end
 ```
 
-**外部 CA 要求提供的文件**：
-- `ca.crt` — 必须
-- `ca.key` — 可选（如不提供，kubeadm 无法自动签发新证书）
-- `etcd/ca.crt` / `etcd/ca.key` — 如果使用外部 etcd CA
-- `front-proxy-ca.crt` / `front-proxy-ca.key` — 如果使用外部 Front Proxy CA
+## 使用场景
 
+1. **首次部署**：kubeadm init 生成完整 PKI
+2. **证书续期**：`kubeadm certs renew` 利用已有 CA 签发新证书
+3. **外部 CA**：预先放置 CA 证书（不含私钥），kubeadm 跳过签发
+4. **证书检查**：`kubeadm certs check-expiration` 检查有效期
+5. **证书轮换**：`kubeadm certs renew all` 批量续期
+
+## 配置示例
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+certificatesDir: /etc/kubernetes/pki
 ---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+apiServer:
+  certSANs:
+    - "192.168.1.10"
+    - "lb.example.com"
+etcd:
+  local:
+    serverCertSANs:
+      - "etcd.example.com"
+    peerCertSANs:
+      - "etcd-peer.example.com"
+```
 
-## CA 证书的关键属性验证
+## 实战示例
+
+### 证书检查
 
 ```bash
-# 查看 kubernetes-ca 证书详情
-openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text
+# 检查所有证书有效期
+kubeadm certs check-expiration
+# [certs] Checking expiration for certificate: ca
+# CERTIFICATE                EXPIRES
+# ca                         Jan 01, 2035 00:00 UTC   10y      no
+# apiserver                  Jan 01, 2025 00:00 UTC   364d     yes
+# apiserver-kubelet-client   Jan 01, 2025 00:00 UTC   364d     yes
+# etcd/ca                    Jan 01, 2035 00:00 UTC   10y      no
+# etcd/server                Jan 01, 2025 00:00 UTC   364d     yes
+# ...
 
-# 关键输出示例:
+# 查看 CA 证书详情
+openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text
 # Subject: CN = kubernetes-ca
 # Issuer: CN = kubernetes-ca
-#          (自签名: Subject == Issuer)
-# 
 # X509v3 Basic Constraints: critical
 #     CA:TRUE
-# 
 # X509v3 Key Usage: critical
-#     Certificate Sign
+#     Certificate Sign, Key Encipherment, Digital Signature
+
+# 续期所有证书
+kubeadm certs renew all
+# [certs] Renewed certificate: apiserver
+# [certs] Renewed certificate: apiserver-kubelet-client
+# [certs] Renewed certificate: etcd/server
+# ...
+
+# 重启组件使证书生效
+systemctl restart kubelet
 ```
 
-**必须验证的属性**：
-1. `CA:TRUE` — 确认是 CA 证书
-2. `Certificate Sign` — 确认具有签发证书的权限
-3. `Subject == Issuer` — 确认是自签名根证书
-4. `Not After` — 确认有效期
+## 常见错误
+
+| 错误 | 现象 | 原因 | 解决方案 |
+|------|------|------|----------|
+| CA 私钥丢失 | `unable to sign certificate: private key not found` | 外部 CA 模式下 ca.key 缺失 | 使用外部 PKI 签发所有证书 |
+| RSA 密钥生成失败 | `failed to generate RSA key` | 系统熵不足 | 安装 `haveged` 或使用硬件 RNG |
+| 证书已存在 | kubeadm init 跳过证书 | 幂等性设计 | 手动删除旧证书后重新生成 |
+| SAN 缺失 | 外部访问 TLS 失败 | certSANs 未配置 | 添加 SAN 后 `kubeadm init phase certs apiserver` |
+| 证书链不完整 | `certificate signed by unknown authority` | CA 证书文件损坏 | `kubeadm init phase certs ca` 重新生成 |
+
+## 相关函数
+
+- [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 收集
+- [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
+- [`buildKubeConfigFromSpec`](12-kubeconfig-certs.md) — kubeconfig 证书嵌入
+- [`X509 Authenticator`](08-rbac-mapping.md) — 证书身份提取
+- [`kubeadm certs renew`](README.md) — 证书续期命令

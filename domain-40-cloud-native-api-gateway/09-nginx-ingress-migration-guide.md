@@ -1,3 +1,47 @@
+---
+title: 09 - 传统 Ingress 控制器向云原生 API 网关迁移
+description: '**文档版本**: v1.0 | **适用版本**: nginx-ingress 1.x → Higress/APISIX/Kong/Envoy Gateway | **更新日期**: 2026-03-04 | **关键词**:
+  迁移, nginx-ingress, 注解映射, 零停机, 并行部署'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- prometheus
+- istio
+- helm
+- redis
+- hpa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 10min
+intent_queries:
+- 传统 Ingress 控制器向云原生 API 网关迁移 是什么
+- 如何 传统 Ingress 控制器向云原生 API 网关迁移
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- 传统
+- Ingress
+- 控制器向云原生
+- API
+- 网关迁移
+- cloud
+- native
+- api
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/ingress-fta.md
+  label: '故障树: ingress'
+---
+
+
 # 09 - 传统 Ingress 控制器向云原生 API 网关迁移
 
 > **文档版本**: v1.0 | **适用版本**: nginx-ingress 1.x → Higress/APISIX/Kong/Envoy Gateway | **更新日期**: 2026-03-04 | **关键词**: 迁移, nginx-ingress, 注解映射, 零停机, 并行部署

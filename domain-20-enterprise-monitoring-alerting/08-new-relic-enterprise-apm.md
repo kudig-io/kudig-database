@@ -1,3 +1,46 @@
+---
+title: New Relic Enterprise APM Platform 深度实践
+description: '# New Relic Enterprise APM Platform 深度实践'
+category: enterprise-monitoring-alerting
+tags:
+- k8s
+- monitoring
+- alerting
+- prometheus
+- docker
+- job
+- gateway
+- operator
+- webhook
+- serverless
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 监控工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- New Relic Enterprise APM Platform 深度实践 是什么
+- 如何 New Relic Enterprise APM Platform 深度实践
+- Kubernetes 20 enterprise monitoring alerting 最佳实践
+trigger_keywords:
+- New
+- Relic
+- Enterprise
+- APM
+- Platform
+- 深度实践
+- enterprise
+- monitoring
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # New Relic Enterprise APM Platform 深度实践
 
 > **Author**: Application Performance Monitoring Specialist | **Version**: v1.0 | **Update Time**: 2026-02-07

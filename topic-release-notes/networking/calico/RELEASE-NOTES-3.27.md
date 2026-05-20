@@ -1,3 +1,33 @@
+---
+title: calico v3.27 Release Notes
+description: calico v3.27 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- controller-manager
+- calico
+- helm
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- calico v3.27 Release Notes 是什么
+- 如何 calico v3.27 Release Notes
+trigger_keywords:
+- calico
+- v3.27
+- Release
+- Notes
+- release
+- notes
+---
+
 # calico v3.27 Release Notes
 
 Source: [v3.27.5](https://github.com/projectcalico/calico/releases/tag/v3.27.5)

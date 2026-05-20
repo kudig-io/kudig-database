@@ -1,3 +1,32 @@
+---
+title: prometheus v3.1 Release Notes
+description: prometheus v3.1 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- prometheus
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- prometheus v3.1 Release Notes 是什么
+- 如何 prometheus v3.1 Release Notes
+trigger_keywords:
+- prometheus
+- v3.1
+- Release
+- Notes
+- release
+- notes
+---
+
 # prometheus v3.1 Release Notes
 
 Source: [v3.1.0](https://github.com/prometheus/prometheus/releases/tag/v3.1.0)

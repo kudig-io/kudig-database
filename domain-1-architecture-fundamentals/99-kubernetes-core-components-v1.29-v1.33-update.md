@@ -1,3 +1,54 @@
+---
+title: Kubernetes 核心组件 v1.29 - v1.33 新特性速查
+description: '# 替代大部分 ValidatingWebhook 的零延迟方案'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- istio
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 核心组件 v1.29 - v1.33 新特性速查 是什么
+- 如何 Kubernetes 核心组件 v1.29 - v1.33 新特性速查
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Kubernetes
+- 核心组件
+- v1.29
+- v1.33
+- 新特性速查
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
+
 # Kubernetes 核心组件 v1.29 - v1.33 新特性速查
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

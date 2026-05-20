@@ -1,3 +1,50 @@
+---
+title: 'init 阶段详解: mark-control-plane 与 upload-config'
+description: '# init 阶段详解: mark-control-plane 与 upload-config'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- containerd
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- DevOps工程师
+- Kubernetes管理员
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- kubeadm init phases workflow mark-control-plane upload-config
+- kubeadm init phase list skip-phases
+- kubeadm ClusterConfiguration vs InitConfiguration
+- kubeadm-config ConfigMap kubernetes
+- kubeadm alpha certs renew all
+trigger_keywords:
+- kubeadm init phase
+- mark-control-plane
+- upload-config
+- bootstrap-token
+- kubeadm-config
+- ClusterConfiguration
+- InitConfiguration
+- skip-phases
+- certs renew
+- token
+related_domains:
+- domain-1-cluster-architecture
+- domain-12-troubleshooting
+related_topics:
+- kubeadm init
+- certificate management
+- node join
+---
+
+
 # init 阶段详解: mark-control-plane 与 upload-config
 
 ## 源码路径

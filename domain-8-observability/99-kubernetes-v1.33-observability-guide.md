@@ -1,3 +1,54 @@
+---
+title: Kubernetes v1.29-v1.33 可观测性新特性指南
+description: '# Kubernetes v1.29-v1.33 可观测性新特性指南'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes v1.29-v1.33 可观测性新特性指南 是什么
+- 如何 Kubernetes v1.29-v1.33 可观测性新特性指南
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- Kubernetes
+- v1.29-v1.33
+- 可观测性新特性指南
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # Kubernetes v1.29-v1.33 可观测性新特性指南
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

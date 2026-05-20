@@ -1,3 +1,38 @@
+---
+title: Backstage 脚手架与模板系统
+description: 1. [Scaffolder 架构深度解析](#1-scaffolder-架构深度解析)
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- prometheus
+- argocd
+- docker
+- opa
+- redis
+- mysql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Backstage 脚手架与模板系统 是什么
+- 如何 Backstage 脚手架与模板系统
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Backstage
+- 脚手架与模板系统
+- platform
+- engineering
+---
+
+
 # Backstage 脚手架与模板系统
 # Backstage Scaffolder and Template System
 

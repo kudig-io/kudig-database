@@ -1,3 +1,33 @@
+---
+title: Secrets
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- kubelet
+- docker
+- opa
+- ingress
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Secrets 是什么
+- 如何 Secrets
+trigger_keywords:
+- Secrets
+- dictionary
+title_en: Secrets
+---
+
+
 # Secrets
 
 ## 概述

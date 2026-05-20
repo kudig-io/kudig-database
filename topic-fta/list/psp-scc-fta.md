@@ -1,20 +1,72 @@
 ---
-fta_id: "FTA-PSP-027"
-title: "PSP/SCC 异常故障树分析"
-component: "psp-scc"
-severity: "P2-P3"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-PSP-001"
-last_updated: "2026-05"
+title: PSP/SCC 异常故障树分析
+description: OR0 --> POL[策略配置异常]
+category: fta
+tags:
+- fta
+- troubleshooting
+- psp
+- scc
+- pod-security
+- psa
+- admission
+- apiserver
+- opa
+- rbac
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- PSP/SCC 异常故障树分析 是什么
+- 如何 PSP/SCC 异常故障树分析
+- PSP/SCC 异常故障树分析 根因分析
+- PSP/SCC 异常故障树分析 故障树
+trigger_keywords:
+- PSP
+- SCC
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, psp, scc, pod-security, psa, admission]
-related_skills: []
-knowledge_refs:
-  - "../domain-7-security/05-pod-security.md"
+- name: KUDIG Team
+  role: contributor
+fta_metadata:
+  fta_id: FTA-PSP-001
+  top_event: PSP/SCC 异常 (策略阻断/误放行/迁移冲突)
+  top_event_id: TE-PSP-001
+  bottom_events_count: 14
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get events -A | grep -E 'Forbidden|violates PodSecurity|PSPSecurityPolicy' 显示安全策略拒绝"
+    - "kubectl describe pod <name> -n <ns> | grep -E 'admission.*denied|security policy' 显示拒绝原因"
+    - "Pod 创建失败显示 PSP/SCC 策略阻断"
+agent_notes:
+  decision_tree_entry: "kubectl get events -A | grep -E 'Forbidden|violates PodSecurity' 检查安全策略拒绝事件"
+  critical_commands:
+    - "kubectl get events -A | grep -E 'Forbidden|violates PodSecurity'"
+    - "kubectl get podsecuritypolicy -o wide"
+    - "kubectl describe pod <name> -n <ns> | grep -A 5 'admission'"
+    - "kubectl get psp,PSA,PSAEnforce -A"
+  danger_operations:
+    - action: "kubectl delete podsecuritypolicy <name>"
+      risk: "删除 PSP 会开放所有 Pod 的安全限制，可能导致安全风险"
+      requires_confirmation: true
+    - action: "kubectl label namespace <ns> pod-security.kubernetes.io/enforce=baseline"
+      risk: "修改命名空间标签会影响该命名空间下所有 Pod 的安全策略"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A | grep -E 'Forbidden|violates PodSecurity' 显示安全策略拒绝 -->
 
 # PSP/SCC 异常 FTA 树
 

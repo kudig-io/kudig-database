@@ -1,3 +1,33 @@
+---
+title: Pod Quality of Service Classes
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- vpa
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Quality of Service Classes 是什么
+- 如何 Pod Quality of Service Classes
+trigger_keywords:
+- Pod
+- Quality
+- of
+- Service
+- Classes
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Quality of Service Classes
 
 ## 概述

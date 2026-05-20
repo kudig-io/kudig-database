@@ -1,3 +1,54 @@
+---
+title: 游戏后端 Kubernetes 生产架构设计
+description: '# 游戏后端 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- kafka
+- hpa
+- statefulset
+- gateway
+- operator
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 游戏后端架构师
+- 游戏技术总监
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 游戏后端 Kubernetes StatefulSet UDP
+- 游戏服务器 帧同步 状态同步 K8s
+- 游戏匹配 ELO Kubernetes 部署
+- 游戏排行榜 Redis Sorted Set K8s
+- 游戏区服架构 TiDB Kubernetes
+trigger_keywords:
+- 游戏后端
+- Kubernetes
+- StatefulSet
+- UDP
+- 帧同步
+- 状态同步
+- 匹配系统
+- 排行榜
+- TiDB
+- SRE
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-26-service-mesh-microservices
+related_topics:
+- 40-cloud-gaming
+- 54-social-gaming-metaverse
+- 58-web3-gamefi
+---
+
+
 # 游戏后端 Kubernetes 生产架构设计
 
 > **适用场景**: MMO / MOBA / FPS / 棋牌 / 休闲社交 / 云游戏 / 元宇宙  

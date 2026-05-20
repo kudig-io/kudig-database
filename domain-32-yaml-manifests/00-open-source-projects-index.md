@@ -1,3 +1,36 @@
+---
+title: Domain-32 YAML 清单 — 开源项目索引
+description: '| **kustomize** | K8s 原生配置定制 | K8s SIG | v5.6.0 | 11k+ | Apache-2.0 |'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- grafana
+- helm
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-32 YAML 清单 — 开源项目索引 是什么
+- 如何 Domain-32 YAML 清单 — 开源项目索引
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- Domain-32
+- YAML
+- 清单
+- 开源项目索引
+- yaml
+- manifests
+---
+
 # Domain-32 YAML 清单 — 开源项目索引
 
 > **最后更新**: 2026-04-24

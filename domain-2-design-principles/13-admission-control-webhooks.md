@@ -1,3 +1,45 @@
+---
+title: 13 - 准入控制与 Webhook 机制深度解析
+description: '# 13 - 准入控制与 Webhook 机制深度解析'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- apiserver
+- prometheus
+- docker
+- opa
+- statefulset
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 准入控制与 Webhook 机制深度解析 是什么
+- 如何 准入控制与 Webhook 机制深度解析
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- 准入控制与
+- Webhook
+- 机制深度解析
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 13 - 准入控制与 Webhook 机制深度解析
 
 ## 资深视点：从 Webhook 到 CEL 的范式演进
@@ -74,6 +116,10 @@ admission_controller_classification:
     examples:
       - ValidatingAdmissionWebhook
       - ResourceQuota
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
       - PodSecurity  # 替代已移除的 PodSecurityPolicy (v1.25+)
       - NamespaceLifecycle
       

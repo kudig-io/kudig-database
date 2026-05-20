@@ -1,3 +1,45 @@
+---
+title: 08 - 安全最佳实践表
+description: '# 08 - 安全最佳实践表'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- etcd
+- apiserver
+- istio
+- cilium
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 安全最佳实践表 是什么
+- 如何 安全最佳实践表
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 安全最佳实践表
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
 # 08 - 安全最佳实践表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)

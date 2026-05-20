@@ -1,3 +1,55 @@
+---
+title: 节点存储
+description: '# 14 - 节点存储'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- kubelet
+- opa
+- redis
+- daemonset
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- Kubernetes 运维工程师
+- 存储工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes node storage management
+- emptyDir hostPath local PV
+- CSI node plugin NodeStageVolume NodePublishVolume
+- volume mount propagation
+- storage topology node selector
+trigger_keywords:
+- storage
+- emptyDir
+- hostPath
+- local PV
+- CSI
+- NodeStageVolume
+- NodePublishVolume
+- volume
+- mount
+- propagation
+- storageClass
+- volumeBindingMode
+- WaitForFirstConsumer
+- CSIDriver
+- CSINode
+related_domains:
+- domain-6-storage
+related_topics:
+- domain-6-storage/06-storage-fundamental-concepts
+- domain-6-storage/09-pv-pvc-troubleshooting
+- domain-3-control-plane/22-container-storage-deep-dive
+---
+
+
 # 14 - 节点存储
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 节点存储管理、CSI Node 插件、卷挂载机制

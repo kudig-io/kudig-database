@@ -1,3 +1,42 @@
+---
+title: Vercel 前端部署平台深度指南
+description: '# Vercel 前端部署平台深度指南'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- hpa
+- ingress
+- webhook
+- gpu
+- serverless
+- llm
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Vercel 前端部署平台深度指南 是什么
+- 如何 Vercel 前端部署平台深度指南
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Vercel
+- 前端部署平台深度指南
+- platform
+- engineering
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/deployment-fta.md
+  label: '故障树: deployment'
+---
+
+
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide
 

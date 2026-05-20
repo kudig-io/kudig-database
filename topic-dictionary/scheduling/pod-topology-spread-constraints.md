@@ -1,3 +1,32 @@
+---
+title: Pod Topology Spread Constraints
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Topology Spread Constraints 是什么
+- 如何 Pod Topology Spread Constraints
+trigger_keywords:
+- Pod
+- Topology
+- Spread
+- Constraints
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Topology Spread Constraints
 
 ## 概述

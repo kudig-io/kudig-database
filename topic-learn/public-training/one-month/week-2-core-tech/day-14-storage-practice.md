@@ -1,4 +1,81 @@
+---
+title: 'Day 14: 存储体系 + 综合实践'
+description: '# Day 14: 存储体系 + 综合实践'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- etcd
+- scheduler
+- hpa
+- statefulset
+- ingress
+- networkpolicy
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 14: 存储体系 + 综合实践 是什么'
+- '如何 Day 14: 存储体系 + 综合实践'
+trigger_keywords:
+- Day
+- '14:'
+- 存储体系
+- 综合实践
+- learn
+---
+
+
 # Day 14: 存储体系 + 综合实践
+
+```yaml
+---
+id: LEARN-ONE-MONTH-W2-DAY14
+title: Day 14 - 存储体系 + 综合实践
+topic: kubernetes
+type: hands-on-guide
+tags: [pv, pvc, storageclass, dynamic-provisioning, statefulset, csi, hands-on, week-2]
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - "PV/PVC 静态供应怎么配置"
+  - "StorageClass 动态供应怎么用"
+  - "NFS 存储怎么配置"
+  - "StatefulSet 存储怎么管理"
+trigger_keywords:
+  - PersistentVolume
+  - PersistentVolumeClaim
+  - StorageClass
+  - Dynamic Provisioning
+  - CSI
+  - NFS
+  - volumeClaimTemplate
+  - reclaimPolicy
+  - accessModes
+  - WaitForFirstConsumer
+reading_level: intermediate
+audience:
+  - sre
+  - ops-engineer
+estimated_read_time: 45min
+related_domains:
+  - domain-6-storage
+  - domain-12-troubleshooting
+related_topics:
+  - storage
+  - pv
+  - pvc
+  - statefulset
+related:
+  - topic-learn/public-training/one-month/week-2-core-tech/day-12-networking-1.md
+  - domain-6-storage/04-storageclass-dynamic-provisioning.md
+---
+```
 
 > **学习时间**: 4-5 小时 | **主题**: K8s 存储与 Week 2 总结
 

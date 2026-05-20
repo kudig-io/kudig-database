@@ -1,20 +1,73 @@
 ---
-fta_id: "FTA-CLUSTER-AUTO-005"
-title: "Cluster Autoscaler 异常故障树分析"
-component: "cluster-autoscaler"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CLUSTER-AUTO-001"
-last_updated: "2026-05"
+title: Cluster Autoscaler 异常故障树分析
+description: '- **范围**：CA 控制器、云平台 API、节点池/伸缩组、调度与配额。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- cluster-autoscaler
+- autoscaling
+- node-pool
+- kubelet
+- containerd
+- docker
+- job
+- webhook
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Cluster Autoscaler 异常故障树分析 是什么
+- 如何 Cluster Autoscaler 异常故障树分析
+- Cluster Autoscaler 异常故障树分析 根因分析
+- Cluster Autoscaler 异常故障树分析 故障树
+trigger_keywords:
+- Cluster
+- Autoscaler
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, cluster-autoscaler, autoscaling, node-pool]
-related_skills: []
-knowledge_refs:
-  - "../domain-4-workloads/19-auto-scaling.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md
+  label: '结构化排障: 03-cluster-autoscaler-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CA-001
+  top_event: Cluster Autoscaler 异常 (扩容失效/延迟/误缩容)
+  top_event_id: TE-CA-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "Pending Pod 存在超过 5 分钟但 Cluster Autoscaler 未扩容"
+    - "kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100 显示异常"
+    - "kubectl get events -A --field-selector reason=ScaleUpError 显示扩容失败"
+agent_notes:
+  decision_tree_entry: "kubectl logs -n kube-system -l app=cluster-autoscaler --tail=50 检查 CA 日志"
+  critical_commands:
+    - "kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100"
+    - "kubectl describe configmap cluster-autoscaler -n kube-system"
+    - "kubectl get pods -n kube-system -l app=cluster-autoscaler -o wide"
+    - "kubectl get nodes -o wide | grep -E ' Scheduling|Ready'"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l app=cluster-autoscaler --force"
+      risk: "强制删除会导致 CA 重启，可能中断自动扩容功能"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有未调度的 Pending Pod -->
 
 # Cluster Autoscaler 异常 FTA 树
 

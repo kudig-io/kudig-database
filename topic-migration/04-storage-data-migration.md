@@ -1,3 +1,34 @@
+---
+title: 04 - 存储与数据迁移
+description: '# 04 - 存储与数据迁移'
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- ceph
+- mysql
+- job
+- ingress
+- rag
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储与数据迁移 是什么
+- 如何 存储与数据迁移
+trigger_keywords:
+- 存储与数据迁移
+- migration
+---
+
+
 # 04 - 存储与数据迁移
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: PV, PVC, CSI, 云盘, NAS, OSS, Velero, 数据同步, StorageClass

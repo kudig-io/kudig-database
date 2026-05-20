@@ -1,3 +1,48 @@
+---
+title: 成本管理与 FinOps
+description: '# 成本管理与 FinOps'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- helm
+- vpa
+- daemonset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 成本管理与 FinOps 是什么
+- 如何 成本管理与 FinOps
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- 成本管理与
+- FinOps
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 成本管理与 FinOps
 
 ## 概述

@@ -1,3 +1,30 @@
+---
+title: 容器环境（Container Environment）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 容器环境（Container Environment） 是什么
+- 如何 容器环境（Container Environment）
+trigger_keywords:
+- 容器环境
+- Container
+- Environment
+- dictionary
+title_en: Containers
+---
+
+
 # 容器环境（Container Environment）
 
 ## 概述

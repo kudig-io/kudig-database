@@ -1,3 +1,41 @@
+---
+title: Crossplane 平台组合 (Crossplane Platform Composition)
+description: '## 概述 (Overview)'
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- etcd
+- prometheus
+- helm
+- argocd
+- flux
+- postgresql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Crossplane 平台组合 (Crossplane Platform Composition) 是什么
+- 如何 Crossplane 平台组合 (Crossplane Platform Composition)
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Crossplane
+- 平台组合
+- Crossplane
+- Platform
+- Composition
+- platform
+- engineering
+---
+
+
 # Crossplane 平台组合 (Crossplane Platform Composition)
 
 ## 概述 (Overview)

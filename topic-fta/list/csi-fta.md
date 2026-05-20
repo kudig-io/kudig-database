@@ -1,22 +1,72 @@
 ---
-fta_id: "FTA-CSI-009"
-title: "CSI 存储异常故障树分析"
-component: "csi"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CSI-001"
-last_updated: "2026-05"
+title: CSI 存储异常故障树分析
+description: '# CSI 存储异常 FTA 树'
+category: fta
+tags:
+- fta
+- troubleshooting
+- csi
+- storage
+- volume
+- snapshot
+- kubelet
+- scheduler
+- ceph
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- CSI 存储异常故障树分析 是什么
+- 如何 CSI 存储异常故障树分析
+- CSI 存储异常故障树分析 根因分析
+- CSI 存储异常故障树分析 故障树
+trigger_keywords:
+- CSI
+- 存储异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, csi, storage, volume, snapshot]
-related_skills:
-  - "../topic-skills/18-storage.md"
-knowledge_refs:
-  - "../domain-6-storage/01-persistent-volume.md"
-  - "../domain-12-troubleshooting/10-storage-pvc-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md
+  label: '结构化排障: 02-csi-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CSI-001
+  top_event: CSI 存储异常 (挂载失败/性能劣化/可用性风险)
+  top_event_id: TE-CSI-001
+  bottom_events_count: 18
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl describe pod <pod> 显示 FailedMount 或 FailedAttachVolume"
+    - "kubectl get pvc -A 显示 Pending 或 Lost 状态"
+    - "VolumeAttachment 对象显示 AttachError"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system | grep csi 检查 CSI Driver 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system | grep -E 'csi|storage'"
+    - "kubectl describe csidriver"
+    - "kubectl get volumeattachment -o wide"
+    - "kubectl describe pvc <name> -n <ns>"
+  danger_operations:
+    - action: "kubectl delete pvc <name> -n <ns> --force"
+      risk: "强制删除 PVC 可能导致数据丢失，PVC 绑定的 PV 也会被删除"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl describe pod <pod> -n <ns> | grep -E 'FailedMount|FailedAttachVolume' 显示存储挂载错误 -->
 
 # CSI 存储异常 FTA 树
 

@@ -1,3 +1,52 @@
+---
+title: 在线教育平台 Kubernetes 生产架构设计
+description: '# 在线教育平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- kafka
+- hpa
+- crd
+- operator
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 教育平台架构师
+- 产品技术负责人
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 在线教育 Kubernetes 直播课堂
+- 教育平台 RTC Kubernetes 部署
+- 在线考试 防作弊 Kubernetes
+- 互动白板 Kubernetes 实时同步
+- 学习数据 推荐系统 K8s
+trigger_keywords:
+- 在线教育
+- Kubernetes
+- 直播课堂
+- RTC
+- 防作弊
+- 互动白板
+- 学习推荐
+- Tekton
+- HPA
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+related_topics:
+- 02-mini-program-architecture
+- 04-im-rtc-architecture
+- 48-vocational-edtech
+---
+
+
 # 在线教育平台 Kubernetes 生产架构设计
 
 > **适用场景**: K12 教育 / 职业教育 / 企业培训 / 直播课堂 / 在线考试  

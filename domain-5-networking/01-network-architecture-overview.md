@@ -1,3 +1,49 @@
+---
+title: 网络核心组件
+description: '# 网络核心组件'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- scheduler
+- prometheus
+- istio
+- envoy
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 网络核心组件 是什么
+- 如何 网络核心组件
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- 网络核心组件
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 网络核心组件
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [Kubernetes Networking](https://kubernetes.io/docs/concepts/services-networking/)

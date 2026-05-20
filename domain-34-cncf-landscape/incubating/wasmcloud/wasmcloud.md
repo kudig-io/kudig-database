@@ -1,3 +1,35 @@
+---
+title: wasmCloud
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- redis
+- postgresql
+- wasm
+- serverless
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- wasmCloud 是什么
+- 如何 wasmCloud
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- wasmCloud
+- cncf
+- landscape
+---
+
+
 # wasmCloud
 
 > **成熟度**: Incubating | **加入时间**: 2021-07 | **最后更新**: 2026-03
@@ -329,3 +361,76 @@ func main() {}
 ---
 
 **维护者**: Kudig Team | **许可证**: MIT
+
+## 生产实战与调优
+
+### 典型生产场景
+
+1. **边缘计算轻量运行时** — wasmCloud 的 Wasm 模块仅数 MB（对比 Docker 镜像数百 MB），适合资源受限的边缘设备（IoT 网关、CDN 节点）部署微服务。
+2. **多语言统一编排** — 团队用 Rust/Go/Python/JavaScript 编写业务逻辑，编译为 Wasm 后在 wasmCloud 上统一运行，消除语言栈碎片化。
+3. **安全隔离的多租户** — Wasm 的沙箱模型天然提供内存隔离和能力沙箱（capability-based security），适合 PaaS/SaaS 平台隔离租户代码。
+4. **插件化扩展平台** — 通过 Wasm 组件动态加载/卸载插件（如 API Gateway 的 Filter、数据处理 Pipeline），无需重启宿主进程。
+5. **跨云可移植工作负载** — Wasm 组件可以在任何支持 WASI 的运行时执行，实现 "build once, run anywhere" 的云原生版本。
+
+### 配置调优参数
+
+```yaml
+# wasmCloud host 配置
+apiVersion: core.wasmcloud.dev/v1beta1
+kind: HostConfig
+spec:
+  # Wasm 运行时配置
+  wasmRuntime:
+    engine: wasmtime         # 可选: wasmtime, wasmer, wamr
+    config:
+      fuel: 1000000000       # 执行指令数限制（防无限循环）
+      maxMemorySize: 256Mi   # 单个 Wasm 模块最大内存
+      epochDeadline: 30      # 执行超时（秒）
+  
+  # 资源管理
+  resources:
+    limits:
+      cpu: "2"
+      memory: 2Gi
+    reservations:
+      cpu: 500m
+      memory: 512Mi
+
+  # Capability Provider 配置
+  capabilities:
+    - name: httpserver
+      config:
+        maxConnections: 1000
+        requestTimeout: 30s
+    - name: sqldb-postgres
+      config:
+        poolSize: 10
+        connectionTimeout: 5s
+```
+
+关键调优点：
+- `fuel` (指令数限制)：控制 Wasm 执行的计算量，防止恶意或死循环代码消耗 CPU
+- `maxMemorySize`：单个组件的内存上限，默认 256Mi 足够大多数微服务
+- Capability Provider 的连接池大小：根据后端服务容量调整，避免连接风暴
+- 运行时选择：wasmtime 性能最佳但编译慢，wasmer 启动更快适合冷启动场景
+
+### 性能基准数据（参考值）
+
+| 指标 | Wasm (wasmCloud) | 容器 (Docker) | 备注 |
+|------|-------------------|---------------|------|
+| 冷启动时间 | 1-5ms | 200-500ms | Wasm 无需拉取镜像和启动 OS |
+| 内存占用 (基础) | 5-15 Mi | 50-200 Mi | Wasm 沙箱基础开销极小 |
+| HTTP 请求吞吐 | ~80% native | ~95% native | Wasm 有沙箱开销但接近 native |
+| 组件包大小 | 0.5-5 MB | 50-500 MB | Wasm 组件仅含编译后的代码 |
+| 并发组件密度 | 1000+/节点 | 100-200/节点 | 同等资源下 Wasm 可运行更多实例 |
+
+> 注：性能数据基于 wasmtime 14+ 和 Rust 编译的 Wasm 组件。Go/Python 等编译的 Wasm 性能约为 Rust 的 60-80%。
+
+### 常见坑和注意事项
+
+1. **WASI Preview 2 兼容性** — wasmCloud 0.82+ 基于 WASI Preview 2 (Component Model)，部分语言的 WASI 支持仍不完善（如 Python 的 socket 操作受限），需提前验证。
+2. **Capability Provider 版本管理** — Capability Provider 是独立的进程，版本需与 host 匹配。升级 host 时务必同步升级 provider，否则可能出现接口不兼容。
+3. **调试困难** — Wasm 沙箱内的调试工具链尚不成熟，`console.log` (JavaScript) 或 `tracing` (Rust) 是主要调试手段。复杂问题需使用 `wasm-tools dump` 分析组件结构。
+4. **Native FFI 受限** — Wasm 沙箱内无法直接调用 native 库（如 OpenSSL、CUDA），需要通过 Capability Provider 桥接或使用 Wasm 原生的密码学实现。
+5. **分布式调度成熟度** — wasmCloud 的分布式调度（基于 NATS）在大规模部署（> 100 节点）时需关注 NATS 集群的性能和消息可靠性，建议配置 JetStream 持久化。
+6. **生态碎片化** — Wasm 组件生态仍在早期，很多 Capability Provider 需自行开发或维护，评估时需考虑长期投入。

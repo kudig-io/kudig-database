@@ -1,22 +1,42 @@
 ---
-title: "PromQL 速查卡"
-description: "Prometheus Query Language 快速参考，覆盖 Prometheus v2.40+ 常用查询"
+title: PromQL 速查卡
+description: Prometheus Query Language 快速参考，覆盖 Prometheus v2.40+ 常用查询
 category: cheatsheet
-tags: [prometheus, promql, monitoring, cheatsheet, quick-reference, observability]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- prometheus
+- promql
+- monitoring
+- cheatsheet
+- quick-reference
+- observability
+- statefulset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- PromQL 速查卡 是什么
+- 如何 PromQL 速查卡
+trigger_keywords:
+- PromQL
+- 速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-8-observability/02-monitoring-metrics-system.md"
-    desc: "监控指标系统深度文档"
-  - path: "../topic-cheat-sheet/k8s.md"
-    desc: "Kubernetes 速查卡"
-  - path: "../domain-20-monitoring-alerting/"
-    desc: "监控告警专题"
+- path: ../domain-8-observability/02-monitoring-metrics-system.md
+  desc: 监控指标系统深度文档
+- path: ../topic-cheat-sheet/k8s.md
+  desc: Kubernetes 速查卡
+- path: ../domain-20-monitoring-alerting/
+  desc: 监控告警专题
 ---
+
 
 # PromQL 速查表
 

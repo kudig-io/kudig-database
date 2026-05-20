@@ -1,3 +1,34 @@
+---
+title: Domain-39 供应链安全 — 开源项目索引
+description: '# Domain-39 供应链安全 — 开源项目索引'
+category: supply-chain-security
+tags:
+- k8s
+- supply-chain
+- security
+- sbom
+- slsa
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Domain-39 供应链安全 — 开源项目索引 是什么
+- 如何 Domain-39 供应链安全 — 开源项目索引
+- Kubernetes 39 supply chain security 最佳实践
+trigger_keywords:
+- Domain-39
+- 供应链安全
+- 开源项目索引
+- supply
+- chain
+- security
+---
+
 # Domain-39 供应链安全 — 开源项目索引
 
 > **最后更新**: 2026-04-24

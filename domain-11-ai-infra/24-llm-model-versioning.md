@@ -1,3 +1,47 @@
+---
+title: 24 - LLM模型版本管理与治理
+description: '# 24 - LLM模型版本管理与治理'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- prometheus
+- postgresql
+- statefulset
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM模型版本管理与治理 是什么
+- 如何 LLM模型版本管理与治理
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- LLM模型版本管理与治理
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 24 - LLM模型版本管理与治理
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [MLflow](https://mlflow.org/) | [DVC](https://dvc.org/) | [HuggingFace Hub](https://huggingface.co/) | CNCF Model Registry

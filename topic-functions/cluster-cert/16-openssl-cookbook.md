@@ -1,3 +1,48 @@
+---
+title: OpenSSL 证书操作速查手册
+description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+last_updated: '2026-05-18'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- Kubernetes 管理员
+- 集群运维人员
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 证书 OpenSSL 操作命令速查
+- OpenSSL 查看验证生成转换证书
+- openssl x509 verify certificate chain
+- OpenSSL CSR 操作 Kubernetes CSR
+- TLS 握手调试 s_client
+trigger_keywords:
+- openssl
+- x509
+- verify
+- certificate
+- CSR
+- TLS
+- s_client
+- 证书验证
+- 证书生成
+- 格式转换
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/cert-format-encoding
+- cluster-cert/apiserver-cert
+---
+
+
 # OpenSSL 证书操作速查手册
 
 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。

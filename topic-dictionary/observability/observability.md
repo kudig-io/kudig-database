@@ -1,3 +1,35 @@
+---
+title: 可观测性（Observability）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- jaeger
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 可观测性（Observability） 是什么
+- 如何 可观测性（Observability）
+trigger_keywords:
+- 可观测性
+- Observability
+- dictionary
+title_en: Observability
+---
+
+
 # 可观测性（Observability）
 
 ## 概述

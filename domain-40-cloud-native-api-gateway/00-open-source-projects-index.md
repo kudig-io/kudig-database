@@ -1,3 +1,41 @@
+---
+title: Domain-40 云原生 API 网关 — 开源项目索引
+description: '| **Gateway API** | K8s 流量管理新标准 | K8s SIG | v1.2.0 | - | Apache-2.0 |'
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- istio
+- cilium
+- ingress
+- gateway
+- ebpf
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-40 云原生 API 网关 — 开源项目索引 是什么
+- 如何 Domain-40 云原生 API 网关 — 开源项目索引
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Domain-40
+- 云原生
+- API
+- 网关
+- 开源项目索引
+- cloud
+- native
+- api
+---
+
 # Domain-40 云原生 API 网关 — 开源项目索引
 
 > **最后更新**: 2026-04-24

@@ -1,3 +1,40 @@
+---
+title: GPU 与设备插件故障排查指南
+description: '# GPU 与设备插件故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- containerd
+- docker
+- daemonset
+- operator
+- gpu
+- cuda
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- GPU 与设备插件故障排查指南 是什么
+- 如何 GPU 与设备插件故障排查指南
+- GPU 与设备插件故障排查指南 故障排查
+- GPU 与设备插件故障排查指南 排障步骤
+trigger_keywords:
+- GPU
+- 与设备插件故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # GPU 与设备插件故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, NVIDIA Driver 470+, Device Plugin v0.13+ | **最后更新**: 2026-01 | **难度**: 高级

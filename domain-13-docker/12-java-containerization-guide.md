@@ -1,3 +1,38 @@
+---
+title: Java 应用容器化最佳实践指南
+description: '# Java 应用容器化最佳实践指南'
+category: docker
+tags:
+- docker
+- container
+- image
+- job
+- serverless
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Java 应用容器化最佳实践指南 是什么
+- 如何 Java 应用容器化最佳实践指南
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Java
+- 应用容器化最佳实践指南
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
+
 # Java 应用容器化最佳实践指南
 
 > **适用版本**: Docker 24+ / Podman 5+ / Buildah 1.35+  

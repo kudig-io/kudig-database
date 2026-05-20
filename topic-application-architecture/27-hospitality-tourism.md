@@ -1,3 +1,48 @@
+---
+title: 酒店旅游架构设计
+description: '# 酒店旅游架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- redis
+- mysql
+- elasticsearch
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 旅游科技架构师
+- 酒店技术负责人
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 酒店旅游 Kubernetes 收益管理
+- OTA平台 Kubernetes 大促弹性
+- 酒店PMS GDS 阿里云架构
+- 动态定价收益管理 K8s
+- 打包产品订单 K8s 分布式事务
+trigger_keywords:
+- 酒店
+- 旅游
+- OTA
+- 收益管理
+- 动态定价
+- 打包产品
+- PMS
+- GDS
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+related_topics:
+- 26-aviation-travel
+- 32-smart-restaurant
+- 01-ecommerce-architecture
+---
+
+
 # 酒店旅游架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

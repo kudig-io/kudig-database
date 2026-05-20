@@ -1,24 +1,66 @@
 ---
-title: "平台运维概述"
-description: "全面介绍 Kubernetes 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径"
-category: "domain-9-platform-ops"
-tags: [k8s, platform, platform-engineering, idp, sre, devops, operations]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 平台运维概述
+description: 全面介绍 Kubernetes 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径
+category: domain-9-platform-ops
+tags:
+- k8s
+- platform
+- platform-engineering
+- idp
+- sre
+- devops
+- operations
+- etcd
+- kubelet
+- scheduler
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 平台运维概述 是什么
+- 如何 平台运维概述
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 平台运维概述
+- platform
+- ops
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "02-cluster-lifecycle-management.md"
-    type: "depth"
-    desc: "集群生命周期管理"
-  - path: "06-monitoring-alerting-system.md"
-    type: "depth"
-    desc: "监控告警体系"
-  - path: "../domain-36-platform-engineering/"
-    type: "depth"
-    desc: "平台工程专题"
+- path: 02-cluster-lifecycle-management.md
+  type: depth
+  desc: 集群生命周期管理
+- path: 06-monitoring-alerting-system.md
+  type: depth
+  desc: 监控告警体系
+- path: ../domain-36-platform-engineering/
+  type: depth
+  desc: 平台工程专题
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
 ---
 
 # 平台运维概述 (Platform Operations Overview)

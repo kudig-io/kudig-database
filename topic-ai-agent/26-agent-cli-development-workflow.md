@@ -1,3 +1,37 @@
+---
+title: Agent CLI 开发工作流与最佳实践
+description: '# Agent CLI 开发工作流与最佳实践'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- argocd
+- hpa
+- gateway
+- rbac
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent CLI 开发工作流与最佳实践 是什么
+- 如何 Agent CLI 开发工作流与最佳实践
+trigger_keywords:
+- Agent
+- CLI
+- 开发工作流与最佳实践
+- ai
+- agent
+---
+
+
 # Agent CLI 开发工作流与最佳实践
 
 > **文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Workflow, Prompt Engineering, Custom Instructions, Context Management, Git Integration, 开发最佳实践

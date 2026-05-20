@@ -1,3 +1,46 @@
+---
+title: Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
+description: '# Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)'
+category: papers
+tags:
+- k8s
+- papers
+- research
+- kubelet
+- controller-manager
+- prometheus
+- statefulset
+- job
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- 架构师
+- 技术决策者
+- 研究员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide) 是什么
+- 如何 Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
+- Kubernetes 19 papers 最佳实践
+trigger_keywords:
+- Kubernetes
+- 容器存储接口
+- CSI
+- 深度实践指南
+- Container
+- Storage
+- Interface
+- Deep
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/csi-fta.md
+  label: '故障树: csi'
+---
+
+
 # Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
 
 > **作者**: 存储架构专家 | **版本**: v1.5 | **更新时间**: 2026-03-03

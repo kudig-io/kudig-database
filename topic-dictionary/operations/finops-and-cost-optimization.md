@@ -1,3 +1,34 @@
+---
+title: FinOps 与成本优化
+description: '# FinOps 与成本优化'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- hpa
+- vpa
+- job
+- cronjob
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- FinOps 与成本优化 是什么
+- 如何 FinOps 与成本优化
+trigger_keywords:
+- FinOps
+- 与成本优化
+- dictionary
+title_en: Cost Optimization
+---
+
+
 # FinOps 与成本优化
 
 ## 概述

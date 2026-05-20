@@ -1,3 +1,35 @@
+---
+title: 容器运行时接口（Container Runtime Interface, CRI）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- containerd
+- cri-o
+- docker
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 容器运行时接口（Container Runtime Interface, CRI） 是什么
+- 如何 容器运行时接口（Container Runtime Interface, CRI）
+trigger_keywords:
+- 容器运行时接口
+- Container
+- Runtime
+- Interface
+- CRI
+- dictionary
+title_en: Containers
+---
+
+
 # 容器运行时接口（Container Runtime Interface, CRI）
 
 ## 概述

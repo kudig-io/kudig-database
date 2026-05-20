@@ -1,3 +1,38 @@
+---
+title: 主流 Agent 框架深度对比
+description: '# 主流 Agent 框架深度对比'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- docker
+- redis
+- postgresql
+- hpa
+- ingress
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 主流 Agent 框架深度对比 是什么
+- 如何 主流 Agent 框架深度对比
+trigger_keywords:
+- 主流
+- Agent
+- 框架深度对比
+- ai
+- agent
+---
+
+
 # 主流 Agent 框架深度对比
 
 > **文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LangChain, LlamaIndex, AutoGen, CrewAI, Dify, Semantic Kernel, Agent 框架, 框架选型, 多 Agent 框架

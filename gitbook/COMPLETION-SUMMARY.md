@@ -1,3 +1,27 @@
+---
+title: GitBook 三级目录构建完成总结
+description: ✅ **侧边栏持久化已优化**
+category: general
+tags:
+- k8s
+- etcd
+- apiserver
+- kubelet
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitBook 三级目录构建完成总结 是什么
+- 如何 GitBook 三级目录构建完成总结
+trigger_keywords:
+- GitBook
+- 三级目录构建完成总结
+---
+
 # GitBook 三级目录构建完成总结
 
 ## 🎉 完成状态

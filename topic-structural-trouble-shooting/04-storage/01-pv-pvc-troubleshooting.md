@@ -1,3 +1,41 @@
+---
+title: PV/PVC 存储深度排查与持久化治理指南
+description: '# PV/PVC 存储深度排查与持久化治理指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- controller-manager
+- prometheus
+- docker
+- opa
+- ceph
+- mysql
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- PV/PVC 存储深度排查与持久化治理指南 是什么
+- 如何 PV/PVC 存储深度排查与持久化治理指南
+- PV/PVC 存储深度排查与持久化治理指南 故障排查
+- PV/PVC 存储深度排查与持久化治理指南 排障步骤
+trigger_keywords:
+- PV
+- PVC
+- 存储深度排查与持久化治理指南
+- structural
+- trouble
+- shooting
+---
+
+
 # PV/PVC 存储深度排查与持久化治理指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 资深专家级

@@ -1,3 +1,31 @@
+---
+title: 在 Kubernetes 中运行 Windows 容器指南
+description: '# 在 Kubernetes 中运行 Windows 容器指南'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 在 Kubernetes 中运行 Windows 容器指南 是什么
+- 如何 在 Kubernetes 中运行 Windows 容器指南
+trigger_keywords:
+- Kubernetes
+- 中运行
+- Windows
+- 容器指南
+- dictionary
+title_en: Containers
+---
+
+
 # 在 Kubernetes 中运行 Windows 容器指南
 
 ## 概述

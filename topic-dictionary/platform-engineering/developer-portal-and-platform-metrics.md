@@ -1,3 +1,34 @@
+---
+title: 开发者门户与平台工程度量
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- prometheus
+- flux
+- redis
+- postgresql
+- pdb
+- networkpolicy
+- crd
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 开发者门户与平台工程度量 是什么
+- 如何 开发者门户与平台工程度量
+trigger_keywords:
+- 开发者门户与平台工程度量
+- dictionary
+title_en: Platform Engineering
+---
+
+
 # 开发者门户与平台工程度量
 
 ## 概述

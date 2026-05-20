@@ -1,3 +1,47 @@
+---
+title: 144 - LLM推理服务部署
+description: '# 144 - LLM推理服务部署'
+category: ai-infra
+tags:
+- k8s
+- ai
+- gpu
+- ml
+- training
+- inference
+- scheduler
+- prometheus
+- grafana
+- jaeger
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- MLOps 工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- LLM推理服务部署 是什么
+- 如何 LLM推理服务部署
+- Kubernetes 11 ai infra 最佳实践
+trigger_keywords:
+- LLM推理服务部署
+- ai
+- infra
+cross_refs:
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/go.md
+  label: '速查卡: go'
+---
+
+
 # 144 - LLM推理服务部署
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [vLLM](https://docs.vllm.ai/) | [TGI](https://huggingface.co/docs/text-generation-inference) | [TensorRT-LLM](https://nvidia.github.io/TensorRT-LLM/)

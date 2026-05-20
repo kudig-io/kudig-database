@@ -1,3 +1,59 @@
+---
+title: 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)
+description: '# 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)'
+category: observability
+tags:
+- k8s
+- observability
+- monitoring
+- logging
+- tracing
+- prometheus
+- grafana
+- elasticsearch
+- hpa
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 监控工程师
+estimated_read_time: 5min
+intent_queries:
+- 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 是什么
+- 如何 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)
+- Kubernetes 8 observability 最佳实践
+trigger_keywords:
+- 多集群统一监控治理
+- Multi-Cluster
+- Unified
+- Monitoring
+- Governance
+- observability
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: fta
+  path: ../topic-fta/list/monitoring-fta.md
+  label: '故障树: monitoring'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/promql.md
+  label: '速查卡: promql'
+---
+
+
 # 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes多集群管理最佳实践](https://kubernetes.io/docs/concepts/cluster-administration/)

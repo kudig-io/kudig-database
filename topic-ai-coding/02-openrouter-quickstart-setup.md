@@ -1,3 +1,28 @@
+---
+title: 快速接入与环境配置
+description: '# 快速接入与环境配置'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- 快速接入与环境配置 是什么
+- 如何 快速接入与环境配置
+trigger_keywords:
+- 快速接入与环境配置
+- ai
+- coding
+---
+
 # 快速接入与环境配置
 
 > **文档类型**: 部署指南 | **最后更新**: 2026-03 | **关键词**: OpenRouter, QuickStart, SDK, API Key, OpenAI Compatible, Installation, Configuration

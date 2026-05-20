@@ -1,8 +1,34 @@
 ---
-name: k8s-operations-skill
+title: K8S 运维诊断技能库
 description: Kubernetes 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化 SOP
-version: v1.0
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- coredns
 last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- K8S 运维诊断技能库 是什么
+- 如何 K8S 运维诊断技能库
+trigger_keywords:
+- K8S
+- 运维诊断技能库
+- ai
+- agent
 ---
 
 # K8S 运维诊断技能库

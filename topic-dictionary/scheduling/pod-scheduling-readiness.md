@@ -1,3 +1,35 @@
+---
+title: Pod Scheduling Readiness
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- job
+- rbac
+- webhook
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Pod Scheduling Readiness 是什么
+- 如何 Pod Scheduling Readiness
+trigger_keywords:
+- Pod
+- Scheduling
+- Readiness
+- dictionary
+title_en: Pods
+---
+
+
 # Pod Scheduling Readiness
 
 ## 概述

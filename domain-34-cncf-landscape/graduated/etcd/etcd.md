@@ -1,3 +1,40 @@
+---
+title: etcd
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- prometheus
+- grafana
+- coredns
+- docker
+- rook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- etcd 是什么
+- 如何 etcd
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- etcd
+- cncf
+- landscape
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/etcd-fta.md
+  label: '故障树: etcd'
+---
+
 # etcd
 
 > **成熟度**: Graduated | **加入时间**: 2018-12 | **最后更新**: 2026-03

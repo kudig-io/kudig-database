@@ -1,20 +1,42 @@
 ---
-title: "Go 生产环境速查卡"
-description: "涵盖 Go 1.20-1.22 生产环境 90% 以上常用语法和工具，支持快速开发和故障排查"
+title: Go 生产环境速查卡
+description: 涵盖 Go 1.20-1.22 生产环境 90% 以上常用语法和工具，支持快速开发和故障排查
 category: cheatsheet
-tags: [go, golang, programming, cheatsheet, quick-reference]
-k8s_versions: []
-last_updated: "2026-05"
+tags:
+- go
+- golang
+- programming
+- cheatsheet
+- quick-reference
+- docker
+- opa
+- redis
+- mysql
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Go 生产环境速查卡 是什么
+- 如何 Go 生产环境速查卡
+trigger_keywords:
+- Go
+- 生产环境速查卡
+- cheat
+- sheet
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "../domain-11-ai-infra/"
-    desc: "AI 基础设施文档"
-  - path: "../topic-cheat-sheet/linux.md"
-    desc: "Linux 速查卡"
+- path: ../domain-11-ai-infra/
+  desc: AI 基础设施文档
+- path: ../topic-cheat-sheet/linux.md
+  desc: Linux 速查卡
 ---
+
 
 # Go 生产环境速查卡
 

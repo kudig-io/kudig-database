@@ -1,3 +1,42 @@
+---
+title: 03 - 准入控制器(Webhook)配置与实现
+description: '# 03 - 准入控制器(Webhook)配置与实现'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- etcd
+- controller-manager
+- prometheus
+- grafana
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 准入控制器(Webhook)配置与实现 是什么
+- 如何 准入控制器(Webhook)配置与实现
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- 准入控制器
+- Webhook
+- 配置与实现
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # 03 - 准入控制器(Webhook)配置与实现
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/reference/access-authn-authz/admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)

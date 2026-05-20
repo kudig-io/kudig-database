@@ -1,64 +1,73 @@
 ---
-skill_id: "SKILL-NET-002"
-skill_name: "Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis"
-version: "1.0"
-category: "network"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: EndpointSlice v1 API stable, Native Sidecar Containers (beta)"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: AdminNetworkPolicy / BaselineAdminNetworkPolicy (alpha)"
-  - "v1.31+: nftables kube-proxy backend (beta)"
-  - "v1.32+: nftables kube-proxy mode (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-30min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+description: '## 1. 概述'
+category: network
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- apiserver
+- controller-manager
+- prometheus
+- istio
+- envoy
+- cilium
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 40min
+intent_queries:
+- Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 是什么
+- 如何 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 trigger_keywords:
-  - "Service不通"
-  - "Service unreachable"
-  - "connection refused"
-  - "connection timed out"
-  - "no endpoints"
-  - "Endpoint异常"
-  - "ClusterIP不通"
-  - "NodePort不通"
-  - "LoadBalancer pending"
-  - "服务不可达"
-  - "service discovery failure"
-  - "kube-proxy"
-trigger_events:
-  - "FailedToUpdateEndpoint"
-  - "FailedToUpdateEndpointSlices"
-trigger_metrics:
-  - 'kube_endpoint_address_available'
-  - 'kube_endpoint_address_not_ready'
-  - 'kube_service_info'
-  - 'kube_endpointslice_endpoints'
-related_skills:
-  - "SKILL-NET-001"
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-fta_refs:
-  - "topic-fta/list/service-fta.md"
-  - "topic-fta/list/ingress-fta.md"
-knowledge_refs:
-  - "topic-structural-trouble-shooting/"
-  - "domain-5-networking/"
-  - "domain-12-troubleshooting/"
+- Service不通
+- Service unreachable
+- connection refused
+- connection timed out
+- no endpoints
+- Endpoint异常
+- ClusterIP不通
+- NodePort不通
+- LoadBalancer pending
+- 服务不可达
+- service discovery failure
+- kube-proxy
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L1
+skill_metadata:
+  skill_id: SKILL-05
+  category: network
+  subcategory: service
+  severity: P1
+  time_to_diagnosis_minutes: 20
+  time_to_remediation_minutes: 30
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get endpoints <service-name> -n <ns> 检查 Endpoint 状态"
+  critical_commands:
+    - "kubectl get svc <service-name> -n <ns> -o wide"
+    - "kubectl get endpoints <service-name> -n <ns>"
+    - "kubectl describe service <name> -n <ns>"
+    - "kubectl get pod -n <ns> -l app=<selector> -o wide"
+    - "kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50"
+  danger_operations:
+    - action: "kubectl delete service <name> -n <ns> --force"
+      risk: "强制删除 Service 会断开所有依赖该 Service 的流量"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get endpoints <service-name> -n <ns> -o jsonpath='{.subsets}' | jq 'length == 0 or . == null' 显示 Endpoint 为空 -->
 
 # Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 

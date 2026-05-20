@@ -1,0 +1,51 @@
+domain: domain-7-security
+total_questions: 10
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, Pod Security Standards (PSS) 级别 是什么?
+  answer: 参见 domain-7-security/06-pod-security-standards.md 的「Pod Security Standards (PSS) 级别」章节。
+  source: domain-7-security/06-pod-security-standards.md
+  section: Pod Security Standards (PSS) 级别
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, Pod安全标准(Pod Security Standards) 是什么?
+  answer: 参见 domain-7-security/08-security-best-practices.md 的「Pod安全标准(Pod Security Standards)」章节。
+  source: domain-7-security/08-security-best-practices.md
+  section: Pod安全标准(Pod Security Standards)
+- type: concept
+  question: 在 11 - 密钥与敏感信息管理工具 中, External Secrets Operator 是什么?
+  answer: 参见 domain-7-security/11-secret-management-tools.md 的「External Secrets Operator」章节。
+  source: domain-7-security/11-secret-management-tools.md
+  section: External Secrets Operator
+- type: concept
+  question: 在 12 - 合规与认证表 中, CIS Kubernetes Benchmark 是什么?
+  answer: 参见 domain-7-security/12-compliance-certification.md 的「CIS Kubernetes Benchmark」章节。
+  source: domain-7-security/12-compliance-certification.md
+  section: CIS Kubernetes Benchmark
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, Gatekeeper ConstraintTemplate 是什么?
+  answer: 参见 domain-7-security/14-policy-engines-opa-kyverno.md 的「Gatekeeper ConstraintTemplate」章节。
+  source: domain-7-security/14-policy-engines-opa-kyverno.md
+  section: Gatekeeper ConstraintTemplate
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, Gatekeeper Constraint 是什么?
+  answer: 参见 domain-7-security/14-policy-engines-opa-kyverno.md 的「Gatekeeper Constraint」章节。
+  source: domain-7-security/14-policy-engines-opa-kyverno.md
+  section: Gatekeeper Constraint
+- type: comparison
+  question: 14 - 策略引擎与合规 中有哪些技术对比?
+  answer: 参见 domain-7-security/14-policy-engines-opa-kyverno.md 中的对比分析。
+  source: domain-7-security/14-policy-engines-opa-kyverno.md
+- type: comparison
+  question: 15 - 安全扫描与检测工具 中有哪些技术对比?
+  answer: 参见 domain-7-security/15-runtime-security-detection.md 中的对比分析。
+  source: domain-7-security/15-runtime-security-detection.md
+- type: operation
+  question: '如何执行与 17 - 安全扫描与漏洞检测工具 相关的操作: export TRIVY_DB_REPOSITORY="ghcr.io/aquasecurity/trivy-db"?'
+  answer: 参见 domain-7-security/17-comprehensive-security-scanning.md 中的操作步骤。
+  source: domain-7-security/17-comprehensive-security-scanning.md
+  command: export TRIVY_DB_REPOSITORY="ghcr.io/aquasecurity/trivy-db"
+- type: comparison
+  question: 17 - 安全扫描与漏洞检测工具 中有哪些技术对比?
+  answer: 参见 domain-7-security/17-comprehensive-security-scanning.md 中的对比分析。
+  source: domain-7-security/17-comprehensive-security-scanning.md

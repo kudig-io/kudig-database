@@ -1,3 +1,36 @@
+---
+title: GitHub 集成与 CI/CD 自动化
+description: '**文档类型**: 自动化集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, GitHub, GitHub Actions, CI/CD, Issue Triage, PR Review,
+  Automation, Headless'
+category: ai-coding
+tags:
+- ai
+- coding
+- copilot
+- code-generation
+- job
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- AI 工程师
+estimated_read_time: 5min
+intent_queries:
+- GitHub 集成与 CI/CD 自动化 是什么
+- 如何 GitHub 集成与 CI/CD 自动化
+trigger_keywords:
+- GitHub
+- 集成与
+- CI
+- CD
+- 自动化
+- ai
+- coding
+---
+
 # GitHub 集成与 CI/CD 自动化
 
 > **文档类型**: 自动化集成专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, GitHub, GitHub Actions, CI/CD, Issue Triage, PR Review, Automation, Headless

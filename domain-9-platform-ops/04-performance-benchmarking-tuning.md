@@ -1,3 +1,50 @@
+---
+title: 性能基准测试与调优 (Performance Benchmarking & Tuning)
+description: '**目标读者**: 性能工程师、SRE团队、平台架构师'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- cilium
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 性能基准测试与调优 (Performance Benchmarking & Tuning) 是什么
+- 如何 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 性能基准测试与调优
+- Performance
+- Benchmarking
+- Tuning
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
+
 # 性能基准测试与调优 (Performance Benchmarking & Tuning)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v1.0 | **最后更新**: 2026-02

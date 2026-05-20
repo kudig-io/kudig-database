@@ -1,3 +1,51 @@
+---
+title: 职业教育培训架构设计
+description: '# 职业教育培训架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- statefulset
+- gpu
+- nvidia
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 教育科技架构师
+- 职业培训机构IT
+- 在线教育开发者
+- 虚拟实训工程师
+estimated_read_time: 5min
+intent_queries:
+- vocational education kubernetes architecture
+- 职业教育K8s部署方案
+- 在线考试防作弊系统
+- 虚拟实训云桌面
+- 区块链证书存证
+trigger_keywords:
+- 职业教育
+- 技能培训
+- 在线教育
+- 虚拟实训
+- AI监考
+- 区块链证书
+- 职业教育架构
+- 考证培训
+- 云桌面
+- 培训平台K8s
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-12-troubleshooting
+- domain-26-service-mesh-microservices
+related_topics:
+- smart-elderly-care
+- smart-restaurant
+- digital-government-architecture
+---
+
+
 # 职业教育培训架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

@@ -1,3 +1,37 @@
+---
+title: 'Domain 24: 基础设施即代码 (Infrastructure as Code)'
+description: '**领域定位**: 企业级基础设施自动化架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07'
+category: infrastructure-as-code
+tags:
+- k8s
+- iac
+- terraform
+- pulumi
+- opa
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 24: 基础设施即代码 (Infrastructure as Code) 是什么'
+- '如何 Domain 24: 基础设施即代码 (Infrastructure as Code)'
+- Kubernetes 24 infrastructure as code 最佳实践
+trigger_keywords:
+- Domain
+- '24:'
+- 基础设施即代码
+- Infrastructure
+- as
+- Code
+- infrastructure
+- as
+---
+
 # Domain 24: 基础设施即代码 (Infrastructure as Code)
 
 > **领域定位**: 企业级基础设施自动化架构与实践 | **文档数量**: 5篇 | **更新时间**: 2026-02-07

@@ -1,3 +1,32 @@
+---
+title: longhorn v1.6 Release Notes
+description: longhorn v1.6 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- helm
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- longhorn v1.6 Release Notes 是什么
+- 如何 longhorn v1.6 Release Notes
+trigger_keywords:
+- longhorn
+- v1.6
+- Release
+- Notes
+- release
+- notes
+---
+
+
 # longhorn v1.6 Release Notes
 
 Source: [v1.6.4](https://github.com/longhorn/longhorn/releases/tag/v1.6.4)

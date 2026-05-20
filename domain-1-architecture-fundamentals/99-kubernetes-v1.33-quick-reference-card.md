@@ -1,3 +1,51 @@
+---
+title: Kubernetes v1.33 速查卡
+description: '| **Scheduler Queueing Hints** | **Beta** | 调度器队列提示，性能提升 10-30% | ✅ 默认启用 |'
+category: architecture-fundamentals
+tags:
+- k8s
+- architecture
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- istio
+- containerd
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes v1.33 速查卡 是什么
+- 如何 Kubernetes v1.33 速查卡
+- Kubernetes 1 architecture fundamentals 最佳实践
+trigger_keywords:
+- Kubernetes
+- v1.33
+- 速查卡
+- architecture
+- fundamentals
+cross_refs:
+- type: domain
+  path: ../domain-13-docker/
+  label: '相关知识域: domain-13-docker'
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
+---
+
 # Kubernetes v1.33 速查卡
 
 > **一页纸速查**: v1.29 → v1.33 所有关键变更  

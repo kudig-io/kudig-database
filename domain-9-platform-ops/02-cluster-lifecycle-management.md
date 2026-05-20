@@ -1,24 +1,66 @@
 ---
-title: "集群生命周期管理"
-description: "深入解析 K8s 集群生命周期管理：集群创建（kubeadm/ACK/EKS/GKE）、证书管理、升级策略、扩缩容、节点池管理与集群退役"
-category: "domain-9-platform-ops"
-tags: [k8s, cluster, lifecycle, upgrade, kubeadm, certificate, node-pool, operations]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: 集群生命周期管理
+description: 深入解析 K8s 集群生命周期管理：集群创建（kubeadm/ACK/EKS/GKE）、证书管理、升级策略、扩缩容、节点池管理与集群退役
+category: domain-9-platform-ops
+tags:
+- k8s
+- cluster
+- lifecycle
+- upgrade
+- kubeadm
+- certificate
+- node-pool
+- operations
+- etcd
+- kubelet
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 集群生命周期管理 是什么
+- 如何 集群生命周期管理
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 集群生命周期管理
+- platform
+- ops
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "01-platform-ops-overview.md"
-    type: "depth"
-    desc: "平台运维概述"
-  - path: "06-monitoring-alerting-system.md"
-    type: "depth"
-    desc: "监控告警体系"
-  - path: "../topic-fta/list/cluster-upgrade-fta.md"
-    type: "fta"
-    desc: "集群升级故障树"
+- path: 01-platform-ops-overview.md
+  type: depth
+  desc: 平台运维概述
+- path: 06-monitoring-alerting-system.md
+  type: depth
+  desc: 监控告警体系
+- path: ../topic-fta/list/cluster-upgrade-fta.md
+  type: fta
+  desc: 集群升级故障树
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
 ---
 
 # 集群生命周期管理 (Cluster Lifecycle Management)
@@ -112,6 +154,11 @@ subjects:
 - 网络策略(NetworkPolicy)定义
 - 资源配额(ResourceQuota)设置
 - 限制范围(LimitRange)配置
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
+
 - Pod安全策略(PodSecurityPolicy)实施
 
 #### 监控告警配置

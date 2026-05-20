@@ -1,3 +1,34 @@
+---
+title: 硬件故障排查方法论
+description: '# 硬件故障排查方法论'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 硬件故障排查方法论 是什么
+- 如何 硬件故障排查方法论
+- Kubernetes 31 hardware 最佳实践
+- 硬件故障排查方法论 故障排查
+- 硬件故障排查方法论 排障步骤
+trigger_keywords:
+- 硬件故障排查方法论
+- hardware
+---
+
+
 # 硬件故障排查方法论
 
 ## 概述

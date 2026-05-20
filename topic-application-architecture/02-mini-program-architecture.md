@@ -1,3 +1,52 @@
+---
+title: 小程序平台架构设计
+description: '# 小程序平台 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- docker
+- minio
+- kafka
+- gateway
+- serverless
+- rag
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 小程序平台架构师
+- 前端开发工程师
+- Serverless工程师
+estimated_read_time: 5min
+intent_queries:
+- 小程序平台 Kubernetes 高并发架构
+- 微信支付宝抖音小程序运行时
+- Serverless 云函数 Knative
+- 小程序安全沙箱隔离
+- 阿里云 ACK 小程序云
+trigger_keywords:
+- 小程序平台
+- 微信小程序
+- 支付宝小程序
+- Serverless
+- Knative
+- 云函数
+- 沙箱隔离
+- 热更新
+- 灰度发布
+- 审核系统
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-mini-program-architecture
+- topic-serverless-architecture
+---
+
+
 # 小程序平台 Kubernetes 生产架构设计
 
 > **适用场景**: 微信小程序 / 支付宝小程序 / 抖音小程序 / 快手小程序 / 自建小程序  

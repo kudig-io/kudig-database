@@ -1,3 +1,35 @@
+---
+title: 向量数据库与 RAG 基础设施
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- postgresql
+- statefulset
+- job
+- cronjob
+- llm
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 向量数据库与 RAG 基础设施 是什么
+- 如何 向量数据库与 RAG 基础设施
+trigger_keywords:
+- 向量数据库与
+- RAG
+- 基础设施
+- dictionary
+title_en: Retrieval Augmented Generation
+---
+
+
 # 向量数据库与 RAG 基础设施
 
 ## 概述

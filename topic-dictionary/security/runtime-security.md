@@ -1,3 +1,34 @@
+---
+title: 运行时安全
+description: '# 运行时安全'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- falco
+- rbac
+- networkpolicy
+- operator
+- webhook
+- ebpf
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 运行时安全 是什么
+- 如何 运行时安全
+trigger_keywords:
+- 运行时安全
+- dictionary
+title_en: Runtime Security
+---
+
+
 # 运行时安全
 
 ## 概述

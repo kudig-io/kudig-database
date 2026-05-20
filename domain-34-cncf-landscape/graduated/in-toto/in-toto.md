@@ -1,3 +1,31 @@
+---
+title: in-toto
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- in-toto 是什么
+- 如何 in-toto
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- in-toto
+- cncf
+- landscape
+---
+
 # in-toto
 
 > **成熟度**: Graduated | **加入时间**: 2019-08 | **最后更新**: 2026-03

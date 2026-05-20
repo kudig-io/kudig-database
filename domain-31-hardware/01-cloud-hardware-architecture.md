@@ -1,3 +1,36 @@
+---
+title: 云平台硬件基础架构
+description: '# 云平台硬件基础架构'
+category: hardware
+tags:
+- k8s
+- hardware
+- server
+- gpu
+- network
+- scheduler
+- containerd
+- cri-o
+- docker
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 基础设施工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 云平台硬件基础架构 是什么
+- 如何 云平台硬件基础架构
+- Kubernetes 31 hardware 最佳实践
+trigger_keywords:
+- 云平台硬件基础架构
+- hardware
+---
+
+
 # 云平台硬件基础架构
 
 ## 概述

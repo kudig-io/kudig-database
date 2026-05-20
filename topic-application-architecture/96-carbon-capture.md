@@ -1,3 +1,51 @@
+---
+title: 碳捕集利用与封存CCUS架构设计
+description: '# 碳捕集利用与封存（CCUS）架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- rag
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- 能源行业架构师
+- 碳中和解决方案工程师
+- 工业互联网开发者
+- 阿里云解决方案架构师
+estimated_read_time: 5min
+intent_queries:
+- 碳捕集CCUS系统架构设计
+- CCUS区块链MRV碳核算
+- CO2封存泄漏监测系统
+- AI优化碳捕集工艺
+- 碳交易对接架构
+trigger_keywords:
+- CCUS
+- 碳捕集
+- 碳封存
+- 碳利用
+- MRV
+- 碳核算
+- 区块链存证
+- 碳交易
+- 地质封存
+- DAC
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-9-ai-ml
+- domain-26-service-mesh-microservices
+- domain-7-observability
+related_topics:
+- topic-application-architecture/61-smart-grid
+- topic-application-architecture/47-smart-mining
+- topic-application-architecture/51-smart-manufacturing-mes
+- topic-functions/05-iot-edge-computing
+---
+
+
 # 碳捕集利用与封存（CCUS）架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
@@ -7,44 +55,62 @@
 
 ## 目录
 
-1. [行业背景](#1-行业背景)
-2. [业务架构](#2-业务架构)
-3. [技术架构](#3-技术架构)
-4. [核心数据流](#4-核心数据流)
-5. [安全与合规](#5-安全与合规)
-6. [可观测性](#6-可观测性)
-7. [阿里云组件映射](#7-阿里云组件映射)
-8. [生产检查清单](#8-生产检查清单)
+1. [概述](#1-概述)
+2. [设计原则](#2-设计原则)
+3. [架构模式](#3-架构模式)
+4. [实现示例](#4-实现示例)
+5. [在 Kubernetes 上的部署](#5-在-kubernetes-上的部署)
+6. [最佳实践](#6-最佳实践)
+7. [反模式](#7-反模式)
+8. [参考资源](#8-参考资源)
 
 ---
 
-## 1. 行业背景
+## 1. 概述
 
-### 1.1 业务特点
+碳捕集利用与封存（Carbon Capture, Utilization and Storage，CCUS）是实现碳中和目标不可或缺的关键技术路径。CCUS 将工业排放源（燃煤电厂、水泥厂、钢铁厂、化工厂等）产生的 CO₂ 捕集、运输，要么用于工业利用（化工原料、矿化、强化采油 EOR），要么封存在深层地质构造中（咸水层、废弃油气田），实现 CO₂ 与大气的长期隔离。
 
-CCUS 是实现碳中和的关键技术路径，涵盖捕集、运输、利用、封存全链条：
+CCUS 信息化平台的核心价值在于：**安全监控**（地质封存 CO₂ 泄漏监测、管道安全监控）、**碳核算**（MRV 监测报告核查体系，确保碳减排量可测量、可报告、可核查）、**工艺优化**（AI 优化捕集能耗，降低运行成本）、**碳交易对接**（将核证的碳减排量对接碳交易市场）。
+
+### 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
-| 高能耗 | 捕集过程能耗高 | AI 优化控制 |
-| 地质封存 | CO₂ 长期安全封存 | 实时监测网络 |
-| 泄漏风险 | 地下封存泄漏 | 传感器网格 |
-| 碳核算 | MRV（监测报告核查） | 区块链存证 |
-| 经济性 | 高成本制约推广 | 碳交易对接 |
+| 高能耗 | 捕集过程能耗高（占发电量 15-30%） | AI 优化控制 + 实时调节 |
+| 地质封存 | CO₂ 长期安全封存 1000 年+ | 实时监测网络 + 地质模型 |
+| 泄漏风险 | 地下封存 CO₂ 泄漏到地表 | 传感器网格 + 异常检测 |
+| 碳核算 | MRV 合规审计 | 区块链存证 + 数据溯源 |
+| 经济性 | 高成本制约推广 | 碳交易对接 + 收益优化 |
 
 ### 1.2 核心场景
 
-- **燃烧后捕集**: 烟气 CO₂ 分离/吸收/再生
-- **燃烧前捕集**: IGCC 煤气化分离
-- **富氧燃烧**: O₂/CO₂ 循环燃烧
-- **直接空气捕集 DAC**: 空气中 CO₂ 直接提取
-- **CO₂ 利用**: 化工原料/矿化/强化采油 EOR
+- **燃烧后捕集**: 烟气 CO₂ 化学吸收/膜分离/固体吸附
+- **直接空气捕集 DAC**: 从大气中直接提取 CO₂
+- **CO₂ 运输**: 管道/槽车/船舶运输监控
+- **地质封存**: 咸水层/废弃油气田注入封存与长期监测
+- **CO₂ 利用**: 化工原料/矿化/EOR/生物利用
 
 ---
 
-## 2. 业务架构
+## 2. 设计原则
 
-### 2.1 CCUS 全景架构
+### 2.1 安全第一原则
+
+地质封存的 CO₂ 泄漏可能导致地下水污染、土壤酸化、地表变形等环境风险。监测系统需要 24/7 运行，传感器网络全覆盖，异常检测秒级告警。
+
+### 2.2 数据可信原则
+
+碳减排量的核算需要可审计、不可篡改的数据。采用区块链技术将关键数据（捕集量、运输量、封存量）上链存证，确保 MRV 数据的公信力。
+
+### 2.3 全链条追溯原则
+
+CCUS 涵盖捕集-运输-利用/封存全链条，每吨 CO₂ 从排放源到最终归宿需要全程追溯。建立统一的碳追踪 ID，关联全链条数据。
+
+---
+
+## 3. 架构模式
+
+### 3.1 CCUS 平台全景架构
 
 ```mermaid
 graph TB
@@ -52,67 +118,107 @@ graph TB
         E1[燃煤电厂]
         E2[水泥厂]
         E3[钢铁厂]
-        E4[化工厂]
     end
 
-    subgraph 捕集层
-        C1[吸收塔]
-        C2[再生塔]
-        C3[压缩液化]
-        C4[纯化]
+    subgraph 捕集监控
+        C1[吸收塔监控]
+        C2[再生塔监控]
+        C3[压缩液化监控]
     end
 
-    subgraph 运输层
-        T1[管道运输]
-        T2[槽车运输]
-        T3[船舶运输]
+    subgraph 运输监控
+        T1[管道监控]
+        T2[泄漏检测]
+        T3[流量计量]
     end
 
-    subgraph 利用封存
-        U1[EOR 强化采油]
-        U2[化工利用]
-        U3[地质封存]
-        U4[矿化封存]
+    subgraph 封存监控
+        S1[注入压力监测]
+        S2[地震监测]
+        S3[地下水监测]
+        S4[地表变形监测]
     end
 
-    E1 & E2 & E3 & E4 --> C1 & C2 & C3 & C4
-    C1 & C2 & C3 & C4 --> T1 & T2 & T3
-    T1 & T2 & T3 --> U1 & U2 & U3 & U4
+    subgraph 平台层
+        P1[实时监控]
+        P2[MRV 碳核算]
+        P3[区块链存证]
+        P4[碳交易对接]
+    end
+
+    E1 & E2 & E3 --> C1 & C2 & C3
+    C1 & C2 & C3 --> T1 & T2 & T3
+    T1 & T2 & T3 --> S1 & S2 & S3 & S4
+    S1 & S2 & S3 & S4 --> P1 & P2 & P3 & P4
 ```
 
 ---
 
-## 3. 技术架构
+## 4. 实现示例
 
-### 3.1 K8s 部署
+### 4.1 封存泄漏监测
+
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class SensorReading:
+    sensor_id: str
+    co2_concentration_ppm: float
+    pressure_mpa: float
+    temperature_c: float
+    timestamp: float
+
+class LeakageDetector:
+    BASELINE_PPM = 400
+
+    def detect(self, readings: List[SensorReading]) -> dict:
+        alerts = []
+        for r in readings:
+            if r.co2_concentration_ppm > self.BASELINE_PPM * 1.5:
+                alerts.append({
+                    'sensor': r.sensor_id,
+                    'concentration': r.co2_concentration_ppm,
+                    'severity': 'high' if r.co2_concentration_ppm > 1000 else 'medium',
+                })
+
+        return {
+            'leak_detected': len(alerts) > 0,
+            'alerts': alerts,
+            'total_sensors': len(readings),
+            'anomalous_sensors': len(alerts),
+        }
+```
+
+---
+
+## 5. 在 Kubernetes 上的部署
 
 ```yaml
-# CCUS 工艺优化 AI Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ccus-optimization
+  name: ccus-monitoring
   namespace: carbon-capture
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: ccus-optimization
+      app: ccus-monitoring
   template:
     metadata:
       labels:
-        app: ccus-optimization
+        app: ccus-monitoring
     spec:
       containers:
-        - name: optimizer
-          image: registry.cn-hangzhou.aliyuncs.com/ccus/optimizer:v1.0.0
-          ports:
-            - containerPort: 8080
+        - name: monitor
+          image: registry.cn-hangzhou.aliyuncs.com/ccus/monitoring:v2.0.0
           env:
-            - name: OPTIMIZATION_TARGET
-              value: "energy_min"
-            - name: CAPTURE_RATE_TARGET
-              value: "0.90"
+            - name: BLOCKCHAIN_ENDPOINT
+              value: "http://baas:8080"
+            - name: TSDB_ENDPOINT
+              value: "lindorm-proxy:8080"
           resources:
             requests:
               memory: "4Gi"
@@ -124,41 +230,24 @@ spec:
 
 ---
 
-## 4. 核心数据流
+## 6. 最佳实践
 
-### 4.1 碳封存监测
+- **传感器冗余**: 关键监测点部署多个传感器交叉验证
+- **区块链存证**: 捕集量/封存量数据定期上链
+- **地质模型更新**: 根据监测数据持续更新地下地质模型
+- **AI 工艺优化**: 使用强化学习优化捕集过程能耗
 
-```mermaid
-flowchart LR
-    A[地下传感器] --> B[压力监测]
-    B --> C[数据分析]
-    C --> D{异常?}
-    D -->|是| E[泄漏预警]
-    E --> F[应急响应]
-    D -->|否| G[正常封存]
-```
+## 7. 反模式
 
----
-
-## 5. 安全与合规
-
-- **地质安全**: 封存层完整性
-- **泄漏监测**: 实时传感器网络
-- **碳核算**: MRV 合规审计
-- **环境安全**: 地下水/大气影响评估
+- **忽视长期监测**: 封存后停止监测。应建立 30 年以上的长期监测机制
+- **单点传感器**: 关键位置只部署一个传感器。应冗余部署
+- **数据不上链**: 碳核算数据存储在中心化数据库，公信力不足。应区块链存证
 
 ---
 
-## 6. 可观测性
+## 8. 参考资源
 
-- **捕集效率**: > 90%
-- **能耗降低**: AI 优化 10%+
-- **泄漏检测**: < 0.1%
-- **碳核算精度**: > 95%
-
----
-
-## 7. 阿里云组件映射
+### 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -169,13 +258,11 @@ flowchart LR
 | 数据库 | **PolarDB** |
 | 可观测性 | **ARMS + SLS** |
 
----
-
-## 8. 生产检查清单
+### 8.2 生产检查清单
 
 - [ ] 捕集效率 > 90%
-- [ ] 封存泄漏监测网络覆盖
-- [ ] MRV 碳核算数据上链
+- [ ] 封存泄漏监测全覆盖
+- [ ] MRV 数据上链存证
 - [ ] 应急响应预案演练
 - [ ] 环境影响评估合规
 

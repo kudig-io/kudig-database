@@ -18,18 +18,31 @@
   --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
   --shadow-lg:0 4px 16px rgba(0,0,0,.08);
 }
+:root.dark-mode{
+  --bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--bg4:#475569;
+  --t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;
+  --bdr:#334155;
+  --shadow:0 1px 3px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.2);
+  --shadow-lg:0 4px 16px rgba(0,0,0,.4);
+}
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:var(--fb);color:var(--t1);background:var(--bg);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:rgba(45,94,168,.18);color:#1a1f36}
+/* Reading progress */
+.reading-progress{position:fixed;top:0;left:0;height:3px;background:var(--cyan);z-index:200;transition:width .1s;opacity:.8}
+
+<div class="reading-progress" id="reading-progress"></div>
 
 /* Nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);transition:border-color .3s}
 .nav-logo{font-family:var(--fm);font-size:.8rem;color:var(--cyan);letter-spacing:3px;font-weight:700}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:var(--t2);text-decoration:none;font-size:.78rem;letter-spacing:.5px;transition:color .2s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--cyan);transition:width .3s}
 .nav-links a:hover{color:var(--t1)}.nav-links a:hover::after{width:100%}
 @media(max-width:768px){.nav-links{display:none}}
+/* Dark mode toggle */
+.dark-toggle{background:none;border:1px solid var(--bdr);border-radius:6px;padding:.4rem .6rem;cursor:pointer;font-size:.9rem;transition:all .2s}
+.dark-toggle:hover{background:var(--bg3)}
 
 /* Sections */
 section{padding:6rem 2rem;max-width:1140px;margin:0 auto}
@@ -161,7 +174,7 @@ footer{border-top:1px solid var(--bdr);padding:2.5rem 2rem;text-align:center}
 
 <!-- Navigation -->
 <nav class="nav">
-  <div class="nav-logo">KUDIG::LEARN</div>
+  <div class="nav-logo">KUDIG::LEARN</div><button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">◐</button>
   <ul class="nav-links">
     <li><a href="#engine">循环引擎</a></li>
     <li><a href="#ecosystem">知识生态</a></li>
@@ -510,6 +523,15 @@ footer{border-top:1px solid var(--bdr);padding:2.5rem 2rem;text-align:center}
     });
   });
 })();
+</script>
+<script>
+function toggleDarkMode(){const d=document.documentElement;d.classList.toggle('dark-mode');const isDark=d.classList.contains('dark-mode');localStorage.setItem('kd-dark',isDark?'1':'0')}function initDarkMode(){const saved=localStorage.getItem('kd-dark');if(saved==='1'){document.documentElement.classList.add('dark-mode')}else if(saved===null&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark-mode')}}initDarkMode();
+(function(){
+  var bar=document.getElementById('reading-progress');
+  function update(){var t=window.scrollY,s=document.documentElement.scrollHeight-h.innerHeight,p=s>0?(t/s)*100:0;bar.style.width=Math.min(100,p)+'%'}
+  window.addEventListener('scroll',update,{passive:true});update();
+})();
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){var t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if(document.activeElement.isContentEditable)return;e.preventDefault();document.querySelector('input[type=text],input[type=search]')&&document.querySelector('input[type=text],input[type=search]').focus()}});
 </script>
 </body>
 </html>

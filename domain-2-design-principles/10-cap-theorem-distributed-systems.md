@@ -1,3 +1,46 @@
+---
+title: 10 - CAP 定理与分布式系统基础 (CAP Theorem)
+description: '## 架构师解析：etcd 的 CP 属性如何影响 K8s？'
+category: design-principles
+tags:
+- k8s
+- design
+- principles
+- etcd
+- kubelet
+- scheduler
+- istio
+- mysql
+- hpa
+- operator
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- CAP 定理与分布式系统基础 (CAP Theorem) 是什么
+- 如何 CAP 定理与分布式系统基础 (CAP Theorem)
+- Kubernetes 2 design principles 最佳实践
+trigger_keywords:
+- CAP
+- 定理与分布式系统基础
+- CAP
+- Theorem
+- design
+- principles
+cross_refs:
+- type: domain
+  path: ../domain-1-architecture-fundamentals/
+  label: '相关知识域: domain-1-architecture-fundamentals'
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+---
+
+
 # 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## 架构师解析：etcd 的 CP 属性如何影响 K8s？

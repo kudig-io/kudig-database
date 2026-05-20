@@ -1,3 +1,34 @@
+---
+title: SOPS
+description: '| **适用场景** | 秘密信息加密管理 |'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- helm
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- SOPS 是什么
+- 如何 SOPS
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- SOPS
+- cncf
+- landscape
+---
+
+
 # SOPS
 
 > **成熟度**: Sandbox | **加入时间**: 2023-04 | **最后更新**: 2026-03

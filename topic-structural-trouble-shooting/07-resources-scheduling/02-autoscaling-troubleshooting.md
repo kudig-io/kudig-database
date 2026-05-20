@@ -1,3 +1,41 @@
+---
+title: HPA 与 VPA 自动扩缩容故障排查指南
+description: '# HPA 与 VPA 自动扩缩容故障排查指南'
+category: structural-troubleshooting
+tags:
+- k8s
+- troubleshooting
+- decision-tree
+- kubelet
+- controller-manager
+- prometheus
+- hpa
+- vpa
+- pdb
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- HPA 与 VPA 自动扩缩容故障排查指南 是什么
+- 如何 HPA 与 VPA 自动扩缩容故障排查指南
+- HPA 与 VPA 自动扩缩容故障排查指南 故障排查
+- HPA 与 VPA 自动扩缩容故障排查指南 排障步骤
+trigger_keywords:
+- HPA
+- VPA
+- 自动扩缩容故障排查指南
+- structural
+- trouble
+- shooting
+---
+
+
 # HPA 与 VPA 自动扩缩容故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, metrics-server v0.6+ | **最后更新**: 2026-01 | **难度**: 中级-高级

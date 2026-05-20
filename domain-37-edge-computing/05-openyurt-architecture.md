@@ -1,3 +1,41 @@
+---
+title: OpenYurt 边缘方案 (OpenYurt Edge Solution)
+description: '# OpenYurt 边缘方案 (OpenYurt Edge Solution)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- etcd
+- apiserver
+- kubelet
+- grafana
+- flannel
+- coredns
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- OpenYurt 边缘方案 (OpenYurt Edge Solution) 是什么
+- 如何 OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- OpenYurt
+- 边缘方案
+- OpenYurt
+- Edge
+- Solution
+- edge
+- computing
+---
+
+
 # OpenYurt 边缘方案 (OpenYurt Edge Solution)
 
 ## 目录 (Table of Contents)

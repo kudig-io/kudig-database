@@ -10,12 +10,17 @@
 html{scroll-behavior:smooth;font-size:14px}
 body{font-family:var(--fb);color:var(--t1);background:var(--bg);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
 ::selection{background:rgba(45,94,168,.18)}
+/* Reading progress */
+.reading-progress{position:fixed;top:0;left:0;height:3px;background:var(--cyan);z-index:200;opacity:.8}
 /* Topbar */
 .topbar{position:sticky;top:0;z-index:50;height:48px;display:flex;align-items:center;gap:1rem;padding:0 1.5rem;border-bottom:1px solid var(--bdr);background:rgba(255,255,255,.95);backdrop-filter:blur(14px)}
 .topbar a{font-family:var(--fm);font-size:.72rem;color:var(--t3);text-decoration:none;transition:color .2s}.topbar a:hover{color:var(--t1)}
 .topbar h1{font-size:.88rem;font-weight:700;flex:1}
 .topbar .saved{font-size:.68rem;color:var(--emerald);font-family:var(--fm);opacity:0;transition:opacity .3s}
 .topbar .saved.show{opacity:1}
+.dark-toggle{background:none;border:1px solid var(--bdr);border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.8rem;transition:all .2s}
+.dark-toggle:hover{background:var(--bg3)}
+:root.dark-mode{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--bdr:#334155}
 /* Layout */
 .wrap{max-width:1100px;margin:0 auto;padding:1.5rem}
 .top-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
@@ -68,10 +73,12 @@ body{font-family:var(--fb);color:var(--t1);background:var(--bg);line-height:1.6;
 </style>
 </head>
 <body>
+<div class="reading-progress" id="reading-progress"></div>
 <div class="topbar">
   <a href="index.html">← 首页</a>
   <h1>自主学习评估</h1>
   <span class="saved" id="saved">✓ 已保存</span>
+  <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">◐</button>
 </div>
 <div class="wrap">
   <!-- Top: Radar + Sliders -->
@@ -225,5 +232,8 @@ window.resetAll=function(){
 drawRadar();buildSliders();updateSummary();buildDomains();
 })();
 </script>
+<script>function toggleDarkMode(){const d=document.documentElement;d.classList.toggle('dark-mode');const isDark=d.classList.contains('dark-mode');localStorage.setItem('kd-dark',isDark?'1':'0')}function initDarkMode(){const saved=localStorage.getItem('kd-dark');if(saved==='1'){document.documentElement.classList.add('dark-mode')}else if(saved===null&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark-mode')}}initDarkMode();
+(function(){var bar=document.getElementById('reading-progress');function update(){var t=window.scrollY,s=document.documentElement.scrollHeight-h.innerHeight,p=s>0?(t/s)*100:0;bar.style.width=Math.min(100,p)+'%'}window.addEventListener('scroll',update,{passive:true});update();})();
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){var t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if(document.activeElement.isContentEditable)return;e.preventDefault();document.querySelector('input[type=text],input[type=search]')&&document.querySelector('input[type=text],input[type=search]').focus()}});</script>
 </body>
 </html>

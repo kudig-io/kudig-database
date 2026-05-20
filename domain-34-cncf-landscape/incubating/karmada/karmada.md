@@ -1,3 +1,37 @@
+---
+title: Karmada
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- apiserver
+- scheduler
+- helm
+- opa
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Karmada 是什么
+- 如何 Karmada
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Karmada
+- cncf
+- landscape
+---
+
+
 # Karmada
 
 > **成熟度**: Incubating | **加入时间**: 2022-09 | **最后更新**: 2026-03
@@ -354,3 +388,85 @@ kubectl describe propagationpolicy nginx-propagation
 ---
 
 **维护者**: Kudig Team | **许可证**: MIT
+
+## 生产实战与调优
+
+### 典型生产场景
+
+1. **多云/混合云统一管理** — 将 AWS EKS、阿里云 ACK、自建 IDC K8s 通过 Karmada 统一编排，使用 PropagationPolicy 将应用按地域/成本策略分发到不同云。
+2. **跨集群故障转移 (Failover)** — 配合 `FailoverBehavior`，当某集群不可用时自动将工作负载迁移到备用集群，实现跨区域 HA。
+3. **灰度发布与流量调配** — 使用 OverridePolicy 对不同集群设置不同的镜像版本或副本数，实现跨集群灰度。
+4. **多租户隔离管理** — 不同业务团队通过 Karmada 的 namespace 级别 PropagationPolicy 管理各自的应用部署范围。
+5. **边缘计算分发** — 将边缘节点注册为独立的 Karmada member cluster，通过 Karmada 统一分发配置和工作负载。
+
+### 配置调优参数
+
+```yaml
+# PropagationPolicy - 跨集群调度核心配置
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  name: multi-cluster-app
+spec:
+  resourceSelectors:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: my-app
+  placement:
+    clusterAffinity:
+      clusterNames:
+        - cluster-beijing
+        - cluster-shanghai
+        - cluster-guangzhou
+    replicaScheduling:
+      replicaDivisionPreference: Weighted
+      replicaSchedulingPreference: Aggregated  # 或 Weighted
+      weightPreference:
+        staticWeightList:
+          - targetCluster:
+              clusterNames: [cluster-beijing]
+            weight: 50
+          - targetCluster:
+              clusterNames: [cluster-shanghai]
+            weight: 30
+          - targetCluster:
+              clusterNames: [cluster-guangzhou]
+            weight: 20
+    failover:
+      application:
+        decisionConditions:
+          tolerationSeconds: 300   # 集群不可用 300s 后触发迁移
+        gracePeriodSeconds: 600    # 优雅迁移等待时间
+        purgeMode: Graciously      # 优雅删除旧副本
+
+# Karmada 控制面资源限制
+# karmada-controller-manager
+#   --concurrent-work-syncs=5        # 默认 5，大集群可增至 10-20
+#   --concurrent-resource-syncs=5    # 资源同步并发数
+#   --concurrent-cluster-syncs=2     # 集群状态同步并发数
+```
+
+关键调优点：
+- `concurrent-work-syncs`：Work 对象同步并发数，集群数量 > 50 时建议提高到 10-20
+- `tolerationSeconds`：故障转移容忍时间，太短会因网络抖动误触发，建议 300-600s
+- `resync` 间隔：资源同步默认 0（event-driven），大规模场景可设置定时 resync 作为兜底
+
+### 性能基准数据（参考值）
+
+| 管理集群规模 | 工作负载数量 | Propagation 延迟 | 控制面 CPU | 控制面内存 |
+|-------------|------------|-----------------|-----------|-----------|
+| 5 集群 | 1000 Deployment | < 2s | 2 core | 4Gi |
+| 20 集群 | 5000 Deployment | < 5s | 4 core | 8Gi |
+| 50 集群 | 10000 Deployment | < 10s | 8 core | 16Gi |
+| 100 集群 | 20000 Deployment | < 30s | 16 core | 32Gi |
+
+> 注：Propagation 延迟指从 PropagationPolicy 创建到目标集群上资源就绪的时间，包含 API 调用和网络延迟。
+
+### 常见坑和注意事项
+
+1. **RBAC 配置复杂** — Karmada 需要通过 ServiceAccount 或 Token 访问每个 member cluster，生产环境建议使用 ServiceAccount Token（非 kubeconfig 文件），并定期轮转。
+2. **资源冲突** — 如果 member cluster 上已有同名资源（手动创建的），Propagation 会失败。建议通过 Karmada 统一管理，避免手动干预 member cluster。
+3. **etcd 压力集中** — Karmada 控制面的 etcd 存储所有集群的资源模板，当管理集群数 > 50 时 etcd 需要专用 NVMe SSD 和充足的内存。
+4. **网络分区处理** — Karmada 依赖 kube-apiserver 的健康检查判断集群可用性，跨云场景下网络抖动可能导致误判。建议配置合理的 `Cluster.HealthyThreshold`。
+5. **OverridePolicy 优先级** — 多个 OverridePolicy 可能冲突，按创建时间排序，后创建的覆盖先创建的。建议使用 `ResourceSelector` 精确匹配，避免全量 Override。
+6. **控制面单点** — Karmada 控制面自身需要 HA 部署（多副本 + etcd 集群），否则控制面故障会导致全局调度失灵。

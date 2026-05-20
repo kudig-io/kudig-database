@@ -1,3 +1,50 @@
+---
+title: kubelet 证书与 CSR 机制源码分析
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- apiserver
+- kubelet
+- rbac
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 节点运维人员
+- 集群运维人员
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes kubelet 引导证书 Bootstrap Token CSR 自动签发
+- kubelet 客户端证书轮换 rotation 机制源码
+- kubelet 服务端证书 serverTLSBootstrap metrics API
+- CSR CertificateSigningRequest kubelet 证书管理器
+- kubelet 双证书管理器 ClientCertificateManager ServerCertificateManager
+trigger_keywords:
+- kubelet
+- Bootstrap Token
+- CSR
+- CertificateSigningRequest
+- 证书轮换
+- rotateCertificates
+- serverTLSBootstrap
+- kubelet-client-current.pem
+- kubelet-server-current.pem
+- 自动签发
+related_domains:
+- domain-3-control-plane
+- domain-4-nodes
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/join-cert-flow
+- cluster-cert/cert-rotation
+- cluster-cert/apiserver-cert-flags
+---
+
+
 # kubelet 证书与 CSR 机制源码分析
 
 ## 概述

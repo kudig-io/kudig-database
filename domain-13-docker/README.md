@@ -1,3 +1,40 @@
+---
+title: Docker 容器技术深度解析
+description: '# Docker 容器技术深度解析'
+category: docker
+tags:
+- docker
+- container
+- image
+- prometheus
+- grafana
+- cilium
+- flannel
+- calico
+- containerd
+- harbor
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 开发工程师
+- 运维工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Docker 容器技术深度解析 是什么
+- 如何 Docker 容器技术深度解析
+- Kubernetes 13 docker 最佳实践
+trigger_keywords:
+- Docker
+- 容器技术深度解析
+- docker
+cross_refs:
+- type: cheatsheet
+  path: ../topic-cheat-sheet/docker.md
+  label: '速查卡: docker'
+---
+
 # Docker 容器技术深度解析
 
 > **版本**: v1.0 | **最后更新**: 2026-01 | **作者**: K8s 运维专家团队

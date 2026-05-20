@@ -1,6 +1,67 @@
-# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)
+---
+title: RBAC 与 ResourceQuota 故障排查
+description: '# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)'
+category: troubleshooting
+tags:
+- rbac
+- quota
+- limitrange
+- authorization
+- forbidden
+- denied
+- admission
+- job
+- ingress
+- crd
+last_updated: 2026-01
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 权限不够
+- Forbidden
+- 配额超限
+- exceeded quota
+- LimitRange
+- ServiceAccount
+trigger_keywords:
+- RBAC
+- ResourceQuota
+- 故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/rbac-fta.md
+  label: '故障树: rbac'
+- type: skill
+  path: ../topic-skills/09-rbac-quota-failure.md
+  label: '运维技能: 09-rbac-quota-failure'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+
+# 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)
 
 ---
 

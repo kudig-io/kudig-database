@@ -1,3 +1,23 @@
+---
+title: Gitbook - 本地文档浏览系统
+description: '- 📖 详细说明：[全量导出指南](documentation/全量导出指南.md)'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Gitbook - 本地文档浏览系统 是什么
+- 如何 Gitbook - 本地文档浏览系统
+trigger_keywords:
+- Gitbook
+- 本地文档浏览系统
+---
+
 # Gitbook - 本地文档浏览系统
 
 基于 [mdBook](https://rust-lang.github.io/mdBook/) 构建的本地知识库浏览系统，支持全文搜索、目录折叠导航。

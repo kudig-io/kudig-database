@@ -1,3 +1,37 @@
+---
+title: Kubernetes 基础设施即代码（IaC）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- helm
+- argocd
+- flux
+- opa
+- rbac
+- crd
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 基础设施即代码（IaC） 是什么
+- 如何 Kubernetes 基础设施即代码（IaC）
+trigger_keywords:
+- Kubernetes
+- 基础设施即代码
+- IaC
+- dictionary
+title_en: Infrastructure as Code
+---
+
+
+
 # Kubernetes 基础设施即代码（IaC）
 
 ## 概述

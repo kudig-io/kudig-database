@@ -1,3 +1,46 @@
+---
+title: 19 - 零信任安全架构实施指南
+description: '# 19 - 零信任安全架构实施指南'
+category: security
+tags:
+- k8s
+- security
+- rbac
+- authentication
+- authorization
+- kubelet
+- prometheus
+- istio
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- 零信任安全架构实施指南 是什么
+- 如何 零信任安全架构实施指南
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- 零信任安全架构实施指南
+- security
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
+---
+
+
 # 19 - 零信任安全架构实施指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST SP 800-207 Zero Trust Architecture](https://csrc.nist.gov/publications/detail/sp/800-207/final) | [Google BeyondCorp](https://cloud.google.com/beyondcorp) | [Microsoft Zero Trust](https://learn.microsoft.com/en-us/security/zero-trust/)

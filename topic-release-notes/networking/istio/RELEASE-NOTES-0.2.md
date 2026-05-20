@@ -1,3 +1,32 @@
+---
+title: istio v0.2 Release Notes
+description: istio v0.2 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- istio
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- istio v0.2 Release Notes 是什么
+- 如何 istio v0.2 Release Notes
+trigger_keywords:
+- istio
+- v0.2
+- Release
+- Notes
+- release
+- notes
+---
+
 # istio v0.2 Release Notes
 
 Source: [0.2.12](https://github.com/istio/istio/releases/tag/0.2.12)

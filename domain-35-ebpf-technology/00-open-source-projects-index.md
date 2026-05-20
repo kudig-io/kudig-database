@@ -1,3 +1,38 @@
+---
+title: Domain-35 eBPF 技术 — 开源项目索引
+description: '| **Cilium** | eBPF 网络、安全、可观测性 | CNCF Graduated | v1.17.0 | 21k+ | Apache-2.0 |'
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- prometheus
+- grafana
+- falco
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-35 eBPF 技术 — 开源项目索引 是什么
+- 如何 Domain-35 eBPF 技术 — 开源项目索引
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- Domain-35
+- eBPF
+- 技术
+- 开源项目索引
+- ebpf
+- technology
+---
+
 # Domain-35 eBPF 技术 — 开源项目索引
 
 > **最后更新**: 2026-04-24

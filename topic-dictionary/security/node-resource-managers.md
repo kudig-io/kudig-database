@@ -1,3 +1,32 @@
+---
+title: Node Resource Managers（节点资源管理器）
+description: '# Node Resource Managers（节点资源管理器）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- gpu
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Node Resource Managers（节点资源管理器） 是什么
+- 如何 Node Resource Managers（节点资源管理器）
+trigger_keywords:
+- Node
+- Resource
+- Managers
+- 节点资源管理器
+- dictionary
+title_en: Nodes
+---
+
+
 # Node Resource Managers（节点资源管理器）
 
 ## 概述

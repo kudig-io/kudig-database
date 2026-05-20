@@ -1,20 +1,71 @@
 ---
-fta_id: "FTA-CLOUD-004"
-title: "云平台集成异常故障树分析"
-component: "cloud-provider"
-severity: "P1-P2"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-CLOUD-001"
-last_updated: "2026-05"
+title: 云平台集成异常故障树分析
+description: '- **目标**：覆盖云平台 API 失败、负载均衡操作失败、云盘/存储集成异常、网络资源耗尽与配额限制的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- cloud-provider
+- ccm
+- aws
+- gcp
+- azure
+- aliyun
+- kubelet
+- controller-manager
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 云平台集成异常故障树分析 是什么
+- 如何 云平台集成异常故障树分析
+- 云平台集成异常故障树分析 根因分析
+- 云平台集成异常故障树分析 故障树
+trigger_keywords:
+- 云平台集成异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, cloud-provider, ccm, aws, gcp, azure, aliyun]
-related_skills: []
-knowledge_refs:
-  - "../domain-10-extensions/01-cloud-controller-manager.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: structural
+  path: ../topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md
+  label: '结构化排障: 01-cloud-provider-integration-troubleshooting'
+fta_metadata:
+  fta_id: FTA-CLOUD-001
+  top_event: 云平台集成异常 (API失败/SLB异常/云盘异常/配额耗尽)
+  top_event_id: TE-CLOUD-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get nodes -o wide 显示云节点状态异常"
+    - "kubectl describe node <node> 显示云服务 API 错误"
+    - "kubectl get events -A | grep -E 'CloudProvider|CCM|LoadBalancer' 显示云平台错误"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system | grep -E 'cloud|ccm' 检查 CCM Pod 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system | grep -E 'cloud|ccm'"
+    - "kubectl logs -n kube-system -l k8s-app=cloud-controller-manager --tail=100"
+    - "kubectl describe node <node-name>"
+    - "kubectl get events -A --field-selector reason=CloudProviderError"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l k8s-app=cloud-controller-manager --force"
+      risk: "强制删除 CCM 会导致云平台集成中断，可能影响 LoadBalancer 和云盘"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get events -A --field-selector reason=CloudProviderError 显示云平台 API 错误 -->
 
 # 云平台集成异常 FTA 树
 

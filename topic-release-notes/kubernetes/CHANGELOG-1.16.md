@@ -1,3 +1,34 @@
+---
+title: v1.16.15
+description: v1.16.15 — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 270min
+intent_queries:
+- v1.16.15 是什么
+- 如何 v1.16.15
+trigger_keywords:
+- v1.16.15
+- release
+- notes
+---
+
+
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
 - [v1.16.15](#v11615)

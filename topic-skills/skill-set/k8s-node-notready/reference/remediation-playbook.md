@@ -1,3 +1,37 @@
+---
+title: 修复操作手册 / Remediation Playbook
+description: '- [REM-002 清理磁盘空间（容器镜像和日志）](#rem-002-清理磁盘空间容器镜像和日志)'
+category: skills
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- kubelet
+- containerd
+- pdb
+- statefulset
+- daemonset
+- rag
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- 修复操作手册 / Remediation Playbook 是什么
+- 如何 修复操作手册 / Remediation Playbook
+trigger_keywords:
+- 修复操作手册
+- Remediation
+- Playbook
+- skills
+---
+
+
 # 修复操作手册 / Remediation Playbook
 
 > **来源**: SKILL-NODE-001 v1.0 — 节点 NotReady 诊断与修复

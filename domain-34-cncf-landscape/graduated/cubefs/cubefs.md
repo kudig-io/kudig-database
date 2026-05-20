@@ -1,3 +1,35 @@
+---
+title: CubeFS
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- prometheus
+- helm
+- docker
+- gateway
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- CubeFS 是什么
+- 如何 CubeFS
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- CubeFS
+- cncf
+- landscape
+---
+
 # CubeFS
 
 > **成熟度**: Graduated | **加入时间**: 2022-07 | **最后更新**: 2026-03

@@ -1,79 +1,78 @@
 ---
-skill_id: "SKILL-NET-003"
-skill_name: "Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation"
-version: "1.0"
-category: "network"
-severity_range: "P0-P3"
-k8s_versions:
-  - "1.28.x"
-  - "1.29.x"
-  - "1.30.x"
-  - "1.31.x"
-  - "1.32.x"
-tested_on:
-  - "1.28.15"
-  - "1.29.12"
-  - "1.30.8"
-  - "1.31.4"
-  - "1.32.0"
-k8s_version_notes:
-  - "v1.28+: Ingress v1 stable since v1.19, Gateway API v1beta1"
-  - "v1.29+: PodDisruptionConditions GA"
-  - "v1.30+: Gateway API v1 for Gateway/HTTPRoute/GRPCRoute"
-  - "v1.31+: AdminNetworkPolicy / BaselineAdminNetworkPolicy (alpha)"
-  - "v1.32+: nftables kube-proxy mode (GA)"
-last_updated: "2026-04-26"
-estimated_resolution_time: "5-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
+title: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
+description: '## 1. 概述'
+category: network
+tags:
+- k8s
+- skills
+- sop
+- runbook
+- prometheus
+- istio
+- envoy
+- helm
+- ingress
+- gateway
+last_updated: '2026-04-26'
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 20min
+intent_queries:
+- Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 是什么
+- 如何 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 trigger_keywords:
-  - "ingress 404"
-  - "ingress 502"
-  - "ingress 503"
-  - "gateway not ready"
-  - "httproute not accepted"
-  - "tls termination failed"
-  - "ingress controller crash"
-  - "nginx reload failed"
-  - "upstream timeout"
-  - "backend unhealthy"
-  - "certificate mismatch"
-  - "cross-namespace route denied"
-  - "路由失败"
-  - "网关故障"
-  - "证书不匹配"
-  - "后端不可达"
-  - "Ingress 无法访问"
-  - "Gateway 不工作"
-trigger_events:
-  - "Sync"
-  - "SyncFailed"
-  - "AddedOrUpdated"
-  - "Rejected"
-  - "BackendNotFound"
-  - "InvalidBackend"
-  - "NoMatchingParent"
-  - "RefNotPermitted"
-  - "ReconcileError"
-trigger_metrics:
-  - 'nginx_ingress_controller_requests{status=~"5.."}'
-  - 'nginx_ingress_controller_upstream_latency_seconds'
-  - 'gateway_api_route_status{status="not_accepted"}'
-  - 'nginx_ingress_controller_config_last_reload_successful'
-  - 'traefik_entrypoint_requests_total{code=~"5.."}'
-  - 'envoy_cluster_upstream_cx_connect_fail'
-related_skills:
-  - "SKILL-NET-001"
-  - "SKILL-NET-002"
-  - "SKILL-SEC-001"
-  - "SKILL-POD-001"
-fta_refs:
-  - "topic-fta/list/ingress-fta.md"
-knowledge_refs:
-  - "domain-12-troubleshooting/15-ingress-troubleshooting.md"
-  - "domain-5-networking/"
-  - "domain-40-cloud-native-api-gateway/"
+- ingress 404
+- ingress 502
+- ingress 503
+- gateway not ready
+- httproute not accepted
+- tls termination failed
+- ingress controller crash
+- nginx reload failed
+- upstream timeout
+- backend unhealthy
+- certificate mismatch
+- cross-namespace route denied
+- 路由失败
+- 网关故障
+- 证书不匹配
+- 后端不可达
+- Ingress 无法访问
+- Gateway 不工作
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+agent_execution_mode: L2
+skill_metadata:
+  skill_id: SKILL-13
+  category: network
+  subcategory: ingress-gateway
+  severity: P1
+  time_to_diagnosis_minutes: 15
+  time_to_remediation_minutes: 20
+  escalation_required: false
+  control_plane_impact: false
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n ingress-nginx -o wide 检查 Ingress Controller 状态"
+  critical_commands:
+    - "kubectl get pods -n ingress-nginx -l app=ingress-nginx -o wide"
+    - "kubectl describe ingress <name> -n <ns>"
+    - "kubectl logs -n ingress-nginx -l app=ingress-nginx --tail=100"
+    - "kubectl get events -A --field-selector involvedObject.kind=Ingress --sort-by='.lastTimestamp'"
+  danger_operations:
+    - action: "kubectl delete pod -n ingress-nginx -l app=ingress-nginx --force"
+      risk: "强制删除会导致 Ingress Controller 重启，可能短暂中断入口流量"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -n ingress-nginx -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示 Ingress Controller 异常 -->
 
 # Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 

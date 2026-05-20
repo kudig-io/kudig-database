@@ -1,3 +1,25 @@
+---
+title: RAG 分块策略指南
+description: '# RAG 分块策略指南'
+category: general
+tags:
+- k8s
+- etcd
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- RAG 分块策略指南 是什么
+- 如何 RAG 分块策略指南
+trigger_keywords:
+- RAG
+- 分块策略指南
+---
+
 # RAG 分块策略指南
 
 > 基于 KUDIG-DATABASE 文档结构的最佳 RAG 分块策略

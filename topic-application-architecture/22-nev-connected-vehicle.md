@@ -1,3 +1,55 @@
+---
+title: 新能源车联网架构设计
+description: '# 新能源车联网架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- flux
+- falco
+- ceph
+- redis
+- mysql
+- kafka
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 车联网架构师
+- 汽车软件工程师
+- 边缘计算工程师
+estimated_read_time: 5min
+intent_queries:
+- 新能源车联网 Kubernetes MQTT
+- T-Box 接入 K8s 百万级并发
+- 电池BMS 时序数据库 Kubernetes
+- OTA升级 Kubernetes 差分升级
+- V2X 车路协同 K8s 边缘
+trigger_keywords:
+- 车联网
+- 新能源
+- 边缘计算
+- V2X
+- T-Box
+- BMS
+- OTA
+- MQTT
+- KubeEdge
+- 阿里云
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-11-ai-infra
+- domain-7-observability
+related_topics:
+- 60-v2x-autonomous-driving
+- 59-industrial-internet-platform
+- 07-iot-platform-architecture
+---
+
+
 # 新能源车联网架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

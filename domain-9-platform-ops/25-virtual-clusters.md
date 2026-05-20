@@ -1,3 +1,46 @@
+---
+title: 55 - 虚拟集群与多租户
+description: '| 模式 | 隔离级别 | 资源效率 | 管理复杂度 | 适用场景 |'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- etcd
+- apiserver
+- scheduler
+- controller-manager
+- helm
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 虚拟集群与多租户 是什么
+- 如何 虚拟集群与多租户
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- 虚拟集群与多租户
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: domain
+  path: ../domain-10-extensions/
+  label: '相关知识域: domain-10-extensions'
+- type: domain
+  path: ../domain-12-troubleshooting/
+  label: '相关知识域: domain-12-troubleshooting'
+---
+
 # 55 - 虚拟集群与多租户
 
 ## 多租户隔离模式

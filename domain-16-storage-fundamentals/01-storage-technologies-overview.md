@@ -1,3 +1,36 @@
+---
+title: 01 - 存储技术概述
+description: '# 01 - 存储技术概述'
+category: storage-fundamentals
+tags:
+- storage
+- filesystem
+- block
+- scheduler
+- prometheus
+- ceph
+- minio
+- job
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 存储工程师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储技术概述 是什么
+- 如何 存储技术概述
+- Kubernetes 16 storage fundamentals 最佳实践
+trigger_keywords:
+- 存储技术概述
+- storage
+- fundamentals
+---
+
+
 # 01 - 存储技术概述
 
 > **适用版本**: 通用 | **最后更新**: 2026-01

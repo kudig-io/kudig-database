@@ -1,3 +1,41 @@
+---
+title: 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'
+description: '- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置'
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- istio
+- envoy
+- containerd
+- docker
+- operator
+- serverless
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native) 是什么'
+- '如何 Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- Domain
+- '38:'
+- WebAssembly
+- 云原生
+- WebAssembly
+- Cloud
+- Native
+- webassembly
+---
+
 # Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)
 
 > **适用范围**: Wasm 运行时、Serverless、边缘计算 | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-04

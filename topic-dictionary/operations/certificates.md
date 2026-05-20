@@ -1,3 +1,35 @@
+---
+title: Certificates（PKI 证书与要求）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Certificates（PKI 证书与要求） 是什么
+- 如何 Certificates（PKI 证书与要求）
+trigger_keywords:
+- Certificates
+- PKI
+- 证书与要求
+- dictionary
+title_en: Certificates
+---
+
+
 # Certificates（PKI 证书与要求）
 
 ## 概述

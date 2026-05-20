@@ -1,3 +1,34 @@
+---
+title: 容器生命周期钩子（Container Lifecycle Hooks）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- pdb
+- agent
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 容器生命周期钩子（Container Lifecycle Hooks） 是什么
+- 如何 容器生命周期钩子（Container Lifecycle Hooks）
+trigger_keywords:
+- 容器生命周期钩子
+- Container
+- Lifecycle
+- Hooks
+- dictionary
+title_en: Containers
+---
+
+
+
 # 容器生命周期钩子（Container Lifecycle Hooks）
 
 ## 概述

@@ -1,6 +1,69 @@
-# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
+---
+title: Pod Pending 状态深度诊断
+description: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
+category: troubleshooting
+tags:
+- pod
+- pending
+- 调度
+- scheduler
+- Insufficient
+- taint
+- affinity
+- pvc
+- quota
+- topology
+last_updated: 2026-02
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 10min
+intent_queries:
+- Pod 一直 Pending 怎么办
+- Pod stuck in Pending state
+- 调度失败怎么排查
+- Insufficient cpu memory
+- no nodes available to schedule
+- node had taint that pod didn't tolerate
+- 调度器不工作
+- Pending 时间太长
+trigger_keywords:
+- Pod
+- Pending
+- 状态深度诊断
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: fta
+  path: ../topic-fta/list/pod-fta.md
+  label: '故障树: pod'
+- type: skill
+  path: ../topic-skills/03-pod-pending.md
+  label: '运维技能: 03-pod-pending'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **难度**: 中级-高级 | **参考**: [Kubernetes Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+
+# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
 
 ---
 
@@ -141,6 +204,8 @@ Pod 处于 Pending 状态表示 Pod 已被 Kubernetes API Server 接受，但尚
 
 ### 2.1 快速诊断流程图
 
+<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        Pod Pending 快速诊断决策树                                    │
@@ -228,6 +293,10 @@ Pod 处于 Pending 状态表示 Pod 已被 Kubernetes API Server 接受，但尚
 ---
 
 ## 3. 资源类问题深度诊断
+
+<!-- condition: Events 含 "Insufficient cpu" 或 "Insufficient memory" 或 "Insufficient nvidia.com/gpu" -->
+<!-- branch: 资源不足 → 本章 -->
+<!-- agent_action: 执行 cluster-resource-analysis.sh 或手动 kubectl describe nodes -->
 
 ### 3.1 资源不足原因分类
 

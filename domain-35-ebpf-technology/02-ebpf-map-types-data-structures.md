@@ -1,3 +1,39 @@
+---
+title: eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
+description: 1. [eBPF Map 概述与作用](#1-ebpf-map-概述与作用)
+category: ebpf-technology
+tags:
+- k8s
+- ebpf
+- cilium
+- networking
+- observability
+- daemonset
+- rag
+last_updated: 2026-05
+difficulty: expert
+reading_level: expert
+audience:
+- SRE
+- 网络工程师
+- 内核工程师
+estimated_read_time: 5min
+intent_queries:
+- eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures) 是什么
+- 如何 eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
+- Kubernetes 35 ebpf technology 最佳实践
+trigger_keywords:
+- eBPF
+- Map
+- 类型与数据结构
+- eBPF
+- Map
+- Types
+- and
+- Data
+---
+
+
 # eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
 
 > **适用范围**: eBPF 程序开发、内核/用户态通信 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-03

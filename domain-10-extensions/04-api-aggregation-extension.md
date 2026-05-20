@@ -1,3 +1,42 @@
+---
+title: Kubernetes API 聚合扩展机制详解
+description: '# Kubernetes API 聚合扩展机制详解'
+category: extensions
+tags:
+- k8s
+- extensions
+- crd
+- operator
+- webhook
+- apiserver
+- prometheus
+- ingress
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 开发工程师
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes API 聚合扩展机制详解 是什么
+- 如何 Kubernetes API 聚合扩展机制详解
+- Kubernetes 10 extensions 最佳实践
+trigger_keywords:
+- Kubernetes
+- API
+- 聚合扩展机制详解
+- extensions
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+---
+
+
 # Kubernetes API 聚合扩展机制详解
 
 作为Kubernetes扩展生态系统的重要组成部分，API聚合机制允许开发者扩展Kubernetes原生API，提供自定义资源和服务。本文档深入解析API聚合的架构设计、实现原理和最佳实践。

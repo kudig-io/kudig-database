@@ -1,3 +1,38 @@
+---
+title: Kubernetes 生产环境完整架构蓝图
+description: '# Kubernetes 生产环境完整架构蓝图'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 生产环境完整架构蓝图 是什么
+- 如何 Kubernetes 生产环境完整架构蓝图
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- Kubernetes
+- 生产环境完整架构蓝图
+- production
+- operations
+---
+
+
 # Kubernetes 生产环境完整架构蓝图
 
 > **适用版本**: Kubernetes v1.29 - v1.33  

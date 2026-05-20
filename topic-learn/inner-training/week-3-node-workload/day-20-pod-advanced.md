@@ -1,3 +1,69 @@
+---
+title: 'Day 20: Pod 容器组进阶'
+description: '**学习时间**: 4-5 小时 | **主题**: Pod 调度、探针与资源配置'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Day 20: Pod 容器组进阶 是什么'
+- '如何 Day 20: Pod 容器组进阶'
+trigger_keywords:
+- Day
+- '20:'
+- Pod
+- 容器组进阶
+- learn
+---
+
+---
+title: Day 20: Pod 容器组进阶
+last_updated: 2026-05-18
+difficulty: intermediate
+intent_queries:
+  - Kubernetes Pod scheduling affinity anti-affinity
+  - Pod liveness readiness startup probes
+  - Pod resources requests limits
+  - Kubernetes nodeSelector nodeAffinity
+  - Pod tolerations taint
+trigger_keywords:
+  - Pod scheduling
+  - affinity
+  - anti-affinity
+  - nodeAffinity
+  - nodeSelector
+  - tolerations
+  - taint
+  - livenessProbe
+  - readinessProbe
+  - startupProbe
+  - resources
+  - requests
+  - limits
+reading_level: intermediate
+audience:
+  - ACK operators
+  - Developers
+  - SRE engineers
+estimated_read_time: 45min
+related_domains:
+  - domain-9-workload
+  - domain-12-troubleshooting
+  - domain-17-cloud-provider
+related_topics:
+  - pod-scheduling-strategies
+  - pod-probes
+  - pod-lifecycle
+---
+
 # Day 20: Pod 容器组进阶
 
 > **学习时间**: 4-5 小时 | **主题**: Pod 调度、探针与资源配置

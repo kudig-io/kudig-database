@@ -1,3 +1,31 @@
+---
+title: Kubernetes API
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- rbac
+- operator
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes API 是什么
+- 如何 Kubernetes API
+trigger_keywords:
+- Kubernetes
+- API
+- dictionary
+title_en: The Kubernetes Api
+---
+
+
 # Kubernetes API
 
 ## 概述

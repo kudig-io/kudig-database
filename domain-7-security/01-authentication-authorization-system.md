@@ -1,25 +1,68 @@
 ---
-title: "Kubernetes 认证授权体系详解"
-description: "深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、Service Account Token Volume Projection 与最小权限原则"
-category: "domain-7-security"
-tags: [k8s, rbac, authentication, authorization, serviceaccount, oidc, security, access-control]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: Kubernetes 认证授权体系详解
+description: 深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、Service Account Token Volume Projection 与最小权限原则
+category: domain-7-security
+tags:
+- k8s
+- rbac
+- authentication
+- authorization
+- serviceaccount
+- oidc
+- security
+- access-control
+- apiserver
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 安全工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes 认证授权体系详解 是什么
+- 如何 Kubernetes 认证授权体系详解
+- Kubernetes 7 security 最佳实践
+trigger_keywords:
+- Kubernetes
+- 认证授权体系详解
+- security
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "intermediate"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "02-network-security-policies.md"
-    type: "depth"
-    desc: "网络安全策略与零信任"
-  - path: "03-runtime-security-defense.md"
-    type: "depth"
-    desc: "运行时安全防护"
-  - path: "../topic-fta/list/certificate-fta.md"
-    type: "fta"
-    desc: "证书与 TLS 故障树"
+- path: 02-network-security-policies.md
+  type: depth
+  desc: 网络安全策略与零信任
+- path: 03-runtime-security-defense.md
+  type: depth
+  desc: 运行时安全防护
+- path: ../topic-fta/list/certificate-fta.md
+  type: fta
+  desc: 证书与 TLS 故障树
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/tls-pki.md
+  label: '速查卡: tls-pki'
 ---
+
 
 # 01 - Kubernetes认证授权体系详解
 

@@ -1,3 +1,42 @@
+---
+title: 'Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)'
+description: 本领域专注于云原生 API 网关技术栈的深度实践，涵盖 Higress、Apache APISIX、Kong、Envoy Gateway、Traefik 等主流开源 API 网关产品。领域范围聚焦于南北向（Ingress）流量治理，包括
+  Kubernetes Gateway API 标准、Wasm 插件生态、API 安全体系、可观测性集成以及生产环境最佳实践。东西向（服务网格）流量治理请参考 [D
+category: cloud-native-api-gateway
+tags:
+- k8s
+- api-gateway
+- envoy
+- apisix
+- higress
+- etcd
+- prometheus
+- grafana
+- jaeger
+- istio
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 架构师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 'Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack) 是什么'
+- '如何 Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)'
+- Kubernetes 40 cloud native api gateway 最佳实践
+trigger_keywords:
+- Domain
+- '98:'
+- 云原生
+- API
+- 网关技术体系
+- Cloud-Native
+- API
+- Gateway
+---
+
 # Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)
 
 > **适用范围**: 云原生 API 网关、Ingress 控制器、Gateway API | **维护状态**: 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐ | **更新时间**: 2026-03-04

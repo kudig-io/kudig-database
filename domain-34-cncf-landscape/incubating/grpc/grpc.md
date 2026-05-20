@@ -1,3 +1,37 @@
+---
+title: gRPC
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- etcd
+- istio
+- envoy
+- hpa
+- gateway
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- gRPC 是什么
+- 如何 gRPC
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- gRPC
+- cncf
+- landscape
+---
+
+
 # gRPC
 
 > **成熟度**: Incubating | **加入时间**: 2017-02 | **最后更新**: 2026-03

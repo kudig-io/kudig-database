@@ -1,22 +1,75 @@
 ---
-fta_id: "FTA-SCHED-030"
-title: "Scheduler 异常故障树分析"
-component: "scheduler"
-severity: "P0-P1"
-k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
-top_event_id: "TE-SCHED-001"
-last_updated: "2026-05"
+title: Scheduler 异常故障树分析
+description: '- **目标**：覆盖调度失败、调度延迟与调度决策异常的关键成因与路径。'
+category: fta
+tags:
+- fta
+- troubleshooting
+- scheduler
+- scheduling
+- predicates
+- priorities
+- binding
+- etcd
+- apiserver
+- kubelet
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- Scheduler 异常故障树分析 是什么
+- 如何 Scheduler 异常故障树分析
+- Scheduler 异常故障树分析 根因分析
+- Scheduler 异常故障树分析 故障树
+trigger_keywords:
+- Scheduler
+- 异常故障树分析
+- fta
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-reviewers: []
-tags: [fta, troubleshooting, scheduler, scheduling, predicates, priorities, binding]
-related_skills:
-  - "../topic-skills/11-control-plane-failure.md"
-knowledge_refs:
-  - "../domain-3-control-plane/13-scheduler-deep-dive.md"
-  - "../domain-12-troubleshooting/01-control-plane-apiserver-troubleshooting.md"
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/20-kube-scheduler-deep-dive.md
+  label: '深度文档: 20-kube-scheduler-deep-dive'
+- type: structural
+  path: ../topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md
+  label: '结构化排障: 03-scheduler-troubleshooting'
+fta_metadata:
+  fta_id: FTA-SCHEDULER-001
+  top_event: Scheduler 异常 (调度失败/调度延迟/调度决策异常)
+  top_event_id: TE-SCHEDULER-001
+  bottom_events_count: 20
+  gate_types: [OR, AND]
+  entry_conditions:
+    - "kubectl get pods -A --field-selector=status.phase=Pending 显示大量 Pending Pod"
+    - "kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败"
+    - "scheduler 日志显示 schedule 延迟超过 10s"
+agent_notes:
+  decision_tree_entry: "kubectl get pods -n kube-system -l component=kube-scheduler 检查 Scheduler Pod 状态"
+  critical_commands:
+    - "kubectl get pods -n kube-system -l component=kube-scheduler -o wide"
+    - "kubectl get events -A --field-selector reason=FailedScheduling --sort-by='.lastTimestamp'"
+    - "kubectl describe pod <pending-pod> -n <ns> | grep -A 10 Events"
+    - "kubectl logs -n kube-system -l component=kube-scheduler --tail=100"
+  danger_operations:
+    - action: "kubectl delete pod -n kube-system -l component=kube-scheduler --force"
+      risk: "强制删除会导致调度器重启，Pending Pod 需重新调度"
+      requires_confirmation: true
 ---
+
+<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败 -->
 
 # Scheduler 异常 FTA 树
 

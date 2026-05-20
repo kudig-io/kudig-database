@@ -1,3 +1,38 @@
+---
+title: AI Agent 基础与核心架构
+description: '# AI Agent 基础与核心架构'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- coredns
+- hpa
+- statefulset
+- daemonset
+- rbac
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- AI Agent 基础与核心架构 是什么
+- 如何 AI Agent 基础与核心架构
+trigger_keywords:
+- AI
+- Agent
+- 基础与核心架构
+- ai
+- agent
+---
+
+
 # AI Agent 基础与核心架构
 
 > **文档类型**: 基础概念专题 | **最后更新**: 2026-03 | **关键词**: AI Agent, ReAct, CoT, ToT, Agent Loop, 自主决策, 工具调用, 多步推理, Agentic AI

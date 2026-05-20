@@ -1,3 +1,38 @@
+---
+title: JUnit 5 企业级单元测试框架深度实践
+description: '# JUnit 5 企业级单元测试框架深度实践'
+category: automated-testing-quality
+tags:
+- k8s
+- testing
+- quality
+- automation
+- redis
+- postgresql
+- hpa
+- job
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- QA 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- JUnit 5 企业级单元测试框架深度实践 是什么
+- 如何 JUnit 5 企业级单元测试框架深度实践
+- Kubernetes 29 automated testing quality 最佳实践
+trigger_keywords:
+- JUnit
+- 企业级单元测试框架深度实践
+- automated
+- testing
+- quality
+---
+
+
 # JUnit 5 企业级单元测试框架深度实践
 
 ## 概述 (Overview)

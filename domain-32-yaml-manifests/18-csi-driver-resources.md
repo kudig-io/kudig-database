@@ -1,3 +1,44 @@
+---
+title: 18 - CSI 驱动资源 YAML 配置参考
+description: '# 18 - CSI 驱动资源 YAML 配置参考'
+category: yaml-manifests
+tags:
+- k8s
+- yaml
+- manifest
+- template
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- helm
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 开发工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- CSI 驱动资源 YAML 配置参考 是什么
+- 如何 CSI 驱动资源 YAML 配置参考
+- Kubernetes 32 yaml manifests 最佳实践
+trigger_keywords:
+- CSI
+- 驱动资源
+- YAML
+- 配置参考
+- yaml
+- manifests
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/csi-fta.md
+  label: '故障树: csi'
+---
+
+
 # 18 - CSI 驱动资源 YAML 配置参考
 
 > **文档版本**: 2026-02  

@@ -1,134 +1,170 @@
-# GitLab CI/CD Enterprise Pipeline Automation Platform
-
-## 概述 (Overview)
-
-GitLab CI/CD 是一体化的 DevOps 平台，提供从代码管理到持续交付的完整解决方案。本文档详细介绍 GitLab 企业级 CI/CD 架构设计、流水线优化和大规模部署实践。
-
-GitLab CI/CD is an integrated DevOps platform that provides a complete solution from code management to continuous delivery. This document details GitLab enterprise CI/CD architecture design, pipeline optimization, and large-scale deployment practices.
-
-## 架构设计 (Architecture Design)
-
-### 企业级架构 (Enterprise Architecture)
-
-```yaml
-# GitLab 企业级部署架构
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: gitlab-system
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gitlab-config
-  namespace: gitlab-system
-data:
-  gitlab.yml: |
-    production: &base
-      gitlab:
-        host: gitlab.example.com
-        port: 443
-        https: true
-        ssh_port: 22
-        max_request_duration_seconds: 55
-        impersonation_enabled: true
-        usage_ping_enabled: false
-        
-      gitlab_ci:
-        builds_enabled: true
-        registry.enabled: true
-        shared_runners_enabled: true
-        max_number_of_builds: 100
-        
-      runners:
-        registration_token: ${RUNNER_REGISTRATION_TOKEN}
-        concurrent: 20
-        check_interval: 0
-        log_level: info
-        
-      prometheus:
-        enabled: true
-        server: http://prometheus-operated:9090
-        
-      redis:
-        host: redis-master.gitlab-system.svc.cluster.local
-        port: 6379
-        password: ${REDIS_PASSWORD}
-        database: 0
-        
-      postgresql:
-        host: postgresql-primary.gitlab-system.svc.cluster.local
-        port: 5432
-        username: gitlab
-        password: ${POSTGRESQL_PASSWORD}
-        database: gitlabhq_production
-        prepared_statements: false
-        
-      gitaly:
-        client_path: "/home/git/gitaly/bin"
-        token: ${GITALY_TOKEN}
-        
-      monitoring:
-        ip_whitelist:
-          - 127.0.0.0/8
-          - ::1/128
-        web_listen_address: localhost:8080
-```
+title: GitLab CI/CD 企业级流水线自动化平台
+description: '- [一、概述](#一概述)'
+category: gitops-ci-cd
+tags:
+- k8s
+- gitops
+- ci-cd
+- argocd
+- flux
+- scheduler
+- prometheus
+- grafana
+- helm
+- docker
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- DevOps 工程师
+- SRE
+- 开发工程师
+estimated_read_time: 5min
+intent_queries:
+- GitLab CI/CD 企业级流水线自动化平台 是什么
+- 如何 GitLab CI/CD 企业级流水线自动化平台
+- Kubernetes 23 gitops ci cd 最佳实践
+trigger_keywords:
+- GitLab
+- CI
+- CD
+- 企业级流水线自动化平台
+- gitops
+- ci
+- cd
+cross_refs:
+- type: domain
+  path: ../domain-9-platform-ops/
+  label: '相关知识域: domain-9-platform-ops'
+- type: domain
+  path: ../domain-24-infrastructure-as-code/
+  label: '相关知识域: domain-24-infrastructure-as-code'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/git.md
+  label: '速查卡: git'
+---
 
-### 微服务架构 (Microservices Architecture)
+
+# GitLab CI/CD 企业级流水线自动化平台
+
+> **适用版本**: GitLab CE/EE v17.10+ / Runner v17.x
+> **最后更新**: 2026-04-24
+> **难度**: 中级 → 高级
+
+---
+
+## 📋 目录
+
+- [一、概述](#一概述)
+- [二、架构设计](#二架构设计)
+- [三、核心配置](#三核心配置)
+- [四、安全与合规](#四安全与合规)
+- [五、多环境管理策略](#五多环境管理策略)
+- [六、监控与回滚](#六监控与回滚)
+- [七、最佳实践](#七最佳实践)
+- [八、故障排查](#八故障排查)
+
+---
+
+## 一、概述
+
+GitLab CI/CD 是一体化 DevOps 平台 GitLab 的核心功能模块，提供从代码管理到持续交付的完整解决方案。与 Jenkins、GitHub Actions 等独立 CI/CD 工具不同，GitLab CI/CD 与 GitLab 的代码管理、容器注册表、安全扫描、制品管理等模块深度集成，形成了一个"开箱即用"的 DevOps 工作流。
+
+GitLab CI/CD 的核心设计理念是"配置即代码"——通过项目根目录下的 `.gitlab-ci.yml` 文件定义完整的构建、测试和部署流程。这种设计使得 CI/CD 配置与代码一同版本管理，任何配置变更都可以通过 Merge Request 进行审查和讨论。
+
+在企业级场景中，GitLab CI/CD 的优势在于其内置的安全扫描能力（SAST、DAST、依赖扫描、容器扫描、许可证合规）、Environment 保护机制（手动审批、访问限制）、以及 Kubernetes Executor（直接在 K8s 集群中调度构建任务）。本文档将深入探讨这些企业级特性的配置和最佳实践。
+
+GitLab 提供 CE（Community Edition）和 EE（Enterprise Edition）两个版本。企业级功能（如高级安全扫描、合规框架、价值流分析）仅在 EE 版本中可用。GitLab 还提供了 SaaS 托管服务（gitlab.com）和自托管部署（Omnibus/Helm Chart）两种部署模式。
+
+---
+
+## 二、架构设计
+
+### 2.1 GitLab 企业级架构
 
 ```mermaid
 graph TB
-    subgraph "Ingress Layer"
+    subgraph "用户接入层"
         LB[Load Balancer<br/>NGINX/HAProxy]
     end
-    
-    subgraph "GitLab Core Services"
-        WE[Workhorse]
-        RA[Rails App]
-        GI[Gitaly]
-        SI[Sidekiq]
+
+    subgraph "GitLab 核心服务"
+        WE[Workhorse<br/>请求路由]
+        RA[Rails App<br/>核心应用]
+        GI[Gitaly<br/>Git 存储]
+        SI[Sidekiq<br/>后台任务]
     end
-    
-    subgraph "CI/CD Services"
-        RU[GitLab Runner]
-        DO[Docker Engine]
-        KA[Kubernetes Agent]
+
+    subgraph "CI/CD 服务"
+        RU[GitLab Runner<br/>构建执行器]
+        KA[Kubernetes Agent<br/>集群连接]
+        REG[Container Registry<br/>镜像仓库]
     end
-    
-    subgraph "Storage Layer"
-        DB[PostgreSQL]
-        RD[Redis]
+
+    subgraph "存储层"
+        DB[(PostgreSQL<br/>数据库)]
+        RD[(Redis<br/>缓存/队列)]
         OS[Object Storage<br/>S3/MinIO]
-        FS[File Storage]
     end
-    
-    subgraph "Infrastructure"
-        K8S[Kubernetes Cluster]
-        REG[Container Registry]
-        MON[Monitoring Stack]
+
+    subgraph "监控层"
+        PROM[Prometheus]
+        GRAF[Grafana]
+        ALERT[Alertmanager]
     end
-    
+
     LB --> WE
     WE --> RA
     RA --> GI
     RA --> SI
     RA --> DB
     RA --> RD
-    RU --> DO
-    RU --> KA
-    GI --> FS
     SI --> RD
-    K8S --> REG
-    MON --> RA
+    RU --> RA
+    RU --> DOCKER[Docker Engine]
+    RU --> K8S[Kubernetes Cluster]
+    KA --> K8S
+    RA --> OS
+    RA --> REG
+    PROM --> RA
+    PROM --> RU
+    GRAF --> PROM
+    ALERT --> PROM
 ```
 
-## 部署配置 (Deployment Configuration)
+### 2.2 Runner 架构
 
-### Kubernetes 部署 (Kubernetes Deployment)
+```mermaid
+graph LR
+    subgraph "GitLab Server"
+        API[GitLab API]
+        QUEUE[Job Queue]
+    end
+
+    subgraph "Runner Manager"
+        CONFIG[config.toml]
+        SCHEDULER[Job Scheduler]
+    end
+
+    subgraph "Executor 类型"
+        DOCKER_EXEC[Docker Executor<br/>容器隔离]
+        K8S_EXEC[Kubernetes Executor<br/>Pod 调度]
+        SHELL_EXEC[Shell Executor<br/>直接执行]
+        SSH_EXEC[SSH Executor<br/>远程执行]
+    end
+
+    API --> SCHEDULER
+    QUEUE --> SCHEDULER
+    SCHEDULER --> DOCKER_EXEC
+    SCHEDULER --> K8S_EXEC
+    SCHEDULER --> SHELL_EXEC
+    SCHEDULER --> SSH_EXEC
+```
+
+### 2.3 Kubernetes 部署
 
 ```yaml
-# GitLab 主服务部署
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -136,7 +172,7 @@ metadata:
   namespace: gitlab-system
 spec:
   serviceName: gitlab
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: gitlab
@@ -148,14 +184,13 @@ spec:
       initContainers:
       - name: configure
         image: busybox:1.35
-        command: ['sh', '-c', 'chown -R 1000:1000 /var/opt/gitlab']
+        command: ['sh', '-c', 'chown -R 998:998 /var/opt/gitlab']
         volumeMounts:
         - name: gitlab-data
           mountPath: /var/opt/gitlab
-          
       containers:
       - name: gitlab
-        image: gitlab/gitlab-ce:16.7.0-ce.0
+        image: gitlab/gitlab-ce:17.10.0-ce.0
         env:
         - name: GITLAB_OMNIBUS_CONFIG
           valueFrom:
@@ -200,14 +235,12 @@ spec:
           limits:
             cpu: "4"
             memory: "8Gi"
-          
       volumes:
       - name: gitlab-config
         configMap:
           name: gitlab-config
       - name: gitlab-logs
         emptyDir: {}
-          
   volumeClaimTemplates:
   - metadata:
       name: gitlab-data
@@ -219,12 +252,17 @@ spec:
           storage: 200Gi
 ```
 
-### Runner 配置 (Runner Configuration)
+---
+
+## 三、核心配置
+
+### 3.1 Runner 配置
 
 ```toml
-# GitLab Runner 配置文件
+# config.toml - GitLab Runner 配置
 concurrent = 20
 check_interval = 0
+log_level = "info"
 
 [session_server]
   session_timeout = 1800
@@ -235,22 +273,25 @@ check_interval = 0
   token = "${RUNNER_TOKEN}"
   executor = "kubernetes"
   [runners.kubernetes]
-    host = ""
-    bearer_token_overwrite_allowed = true
+    host = "https://kubernetes.default"
     image = "ubuntu:22.04"
     namespace = "gitlab-runner"
     privileged = true
     poll_timeout = 180
     service_account = "gitlab-runner"
-    [runners.kubernetes.pod_annotations]
-      prometheus.io/scrape = "true"
-      prometheus.io/port = "9102"
     [runners.kubernetes.node_selector]
       gitlab-runner = "true"
     [[runners.kubernetes.volumes.empty_dir]]
       name = "docker-certs"
       mount_path = "/certs/client"
       medium = "Memory"
+    [runners.kubernetes.resources]
+      [runners.kubernetes.resources.requests]
+        cpu = "500m"
+        memory = "1Gi"
+      [runners.kubernetes.resources.limits]
+        cpu = "2"
+        memory = "4Gi"
 
 [[runners]]
   name = "docker-runner"
@@ -259,26 +300,21 @@ check_interval = 0
   executor = "docker"
   [runners.docker]
     tls_verify = false
-    image = "docker:24.0.5"
+    image = "docker:24-dind"
     privileged = true
-    disable_entrypoint_overwrite = false
-    oom_kill_disable = false
     disable_cache = false
     volumes = [
       "/cache",
       "/var/run/docker.sock:/var/run/docker.sock",
       "/certs/client"
     ]
-    shm_size = 0
     pull_policy = "if-not-present"
 ```
 
-## 流水线设计 (Pipeline Design)
-
-### 高级流水线配置 (Advanced Pipeline Configuration)
+### 3.2 企业级 CI/CD 流水线
 
 ```yaml
-# .gitlab-ci.yml - 企业级流水线配置
+# .gitlab-ci.yml
 stages:
   - security-scan
   - build
@@ -294,13 +330,31 @@ variables:
   KUBE_NAMESPACE: ${CI_PROJECT_PATH_SLUG}-${CI_COMMIT_REF_SLUG}
   HELM_RELEASE: ${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}
 
-# 模板定义
-.docker-build-template: &docker-build-template
-  image: docker:24.0.5
-  services:
-    - docker:24.0.5-dind
+.docker-login: &docker-login
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+# 安全扫描阶段
+security-scan:
+  stage: security-scan
+  image: aquasec/trivy:latest
+  script:
+    - trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+    - trivy fs --format sarif -o trivy-results.sarif .
+  artifacts:
+    reports:
+      sast: trivy-results.sarif
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# 构建阶段
+build-app:
+  stage: build
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  <<: *docker-login
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
@@ -309,37 +363,13 @@ variables:
         docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
         docker push $CI_REGISTRY_IMAGE:latest
       fi
-
-.security-scan-template: &security-scan-template
-  image: aquasec/trivy:latest
-  script:
-    - trivy fs --exit-code 1 --severity HIGH,CRITICAL .
-
-# 安全扫描阶段
-security-scan:
-  stage: security-scan
-  <<: *security-scan-template
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-# 构建阶段
-build-app:
-  stage: build
-  <<: *docker-build-template
-  artifacts:
-    paths:
-      - build/
-    expire_in: 1 week
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "web"
-    - if: $CI_PIPELINE_SOURCE == "schedule"
 
-# 单元测试阶段
+# 单元测试
 unit-test:
   stage: test
-  image: node:18-alpine
+  image: node:20-alpine
   script:
     - npm ci
     - npm run test:coverage
@@ -353,12 +383,12 @@ unit-test:
       - coverage/
     expire_in: 1 week
 
-# 集成测试阶段
+# 集成测试
 integration-test:
   stage: test
-  image: python:3.11-slim
+  image: python:3.12-slim
   services:
-    - postgres:15-alpine
+    - postgres:16-alpine
     - redis:7-alpine
   variables:
     POSTGRES_DB: test_db
@@ -427,239 +457,98 @@ deploy-production:
   when: manual
   allow_failure: false
 
-# 清理阶段
-cleanup:
-  stage: cleanup
-  image: docker:24.0.5
-  services:
-    - docker:24.0.5-dind
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - |
-      # 清理旧的镜像标签
-      OLD_TAGS=$(curl -s -u $CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD \
-        "$CI_REGISTRY_API/v2/$CI_PROJECT_PATH/tags/list" | \
-        jq -r '.tags[]' | \
-        grep -v latest | \
-        head -n -10)
-      
-      for tag in $OLD_TAGS; do
-        curl -s -u $CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD \
-          -X DELETE "$CI_REGISTRY_API/v2/$CI_PROJECT_PATH/manifests/$tag"
-      done
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-```
-
-## 性能优化 (Performance Optimization)
-
-### 流水线优化 (Pipeline Optimization)
-
-```yaml
-# 流水线性能优化配置
-include:
-  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
-  - template: Jobs/Secret-Detection.gitlab-ci.yml
-  - template: Jobs/SAST.gitlab-ci.yml
-
-# 并行构建配置
-.parallel-build-template: &parallel-build-template
-  parallel:
-    matrix:
-      - NODE_VERSION: ["18", "20"]
-        OS: ["alpine", "slim"]
-  script:
-    - docker build 
-      --build-arg NODE_VERSION=$NODE_VERSION 
-      --build-arg BASE_IMAGE=node:$NODE_VERSION-$OS 
-      -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-node$NODE_VERSION-$OS .
-
-# 缓存优化
+# 缓存配置
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
     - .m2/repository/
     - .gradle/
-    - vendor/
   policy: pull-push
-
-# 工件优化
-artifacts:
-  paths:
-    - dist/
-    - build/
-  expire_in: 2 weeks
-  when: on_success
 ```
 
-### 资源管理 (Resource Management)
+### 3.3 流水线模板与复用
 
 ```yaml
-# Runner 资源限制配置
-[[runners]]
-  [runners.kubernetes]
-    [runners.kubernetes.resources]
-      limits:
-        cpu: "2"
-        memory: "4Gi"
-      requests:
-        cpu: "500m"
-        memory: "1Gi"
-        
-    [runners.kubernetes.resources.requests]
-      ephemeral_storage: "2Gi"
-      
-    [runners.kubernetes.resources.limits]
-      ephemeral_storage: "10Gi"
+# 流水线复用 - include 模板
+include:
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
 
-# 不同阶段的资源配置
-build-resources:
+# 矩阵构建
+parallel-build:
+  stage: build
+  parallel:
+    matrix:
+      - NODE_VERSION: ["18", "20", "22"]
+        OS: ["alpine", "slim"]
+  script:
+    - docker build
+        --build-arg NODE_VERSION=$NODE_VERSION
+        -t $CI_REGISTRY_IMAGE:node${NODE_VERSION}-${OS} .
+
+# extends 继承
+.deploy-template:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  script:
+    - helm upgrade --install ${HELM_RELEASE} ./helm/chart
+        --namespace ${KUBE_NAMESPACE}
+        --set image.tag=${CI_COMMIT_SHA}
+        --atomic
+        --timeout 10m
+  when: manual
+
+deploy-staging:
+  extends: .deploy-template
+  environment:
+    name: staging
   variables:
-    KUBERNETES_CPU_REQUEST: "1"
-    KUBERNETES_CPU_LIMIT: "2"
-    KUBERNETES_MEMORY_REQUEST: "2Gi"
-    KUBERNETES_MEMORY_LIMIT: "4Gi"
-
-test-resources:
-  variables:
-    KUBERNETES_CPU_REQUEST: "500m"
-    KUBERNETES_CPU_LIMIT: "1"
-    KUBERNETES_MEMORY_REQUEST: "1Gi"
-    KUBERNETES_MEMORY_LIMIT: "2Gi"
-```
-
-## 监控告警 (Monitoring and Alerting)
-
-### 关键指标监控 (Key Metrics Monitoring)
-
-```yaml
-# Prometheus 监控规则
-groups:
-- name: gitlab-ci.rules
+    KUBE_NAMESPACE: staging
   rules:
-  # 流水线成功率监控
-  - alert: GitLabPipelineFailureRateHigh
-    expr: rate(gitlab_ci_pipeline_duration_seconds_count{status="failed"}[5m]) / rate(gitlab_ci_pipeline_duration_seconds_count[5m]) * 100 > 10
-    for: 10m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High pipeline failure rate"
-      description: "Pipeline failure rate is above 10% in the last 5 minutes."
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-  # Runner 健康监控
-  - alert: GitLabRunnerOffline
-    expr: gitlab_runner_up == 0
-    for: 5m
-    labels:
-      severity: critical
-    annotations:
-      summary: "GitLab Runner is offline"
-      description: "Runner {{ $labels.instance }} has been offline for more than 5 minutes."
-
-  # 构建队列监控
-  - alert: GitLabBuildQueueBacklog
-    expr: gitlab_ci_pending_jobs > 50
-    for: 15m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High build queue backlog"
-      description: "There are more than 50 pending jobs in the build queue."
-
-  # 存储使用监控
-  - alert: GitLabStorageUsageHigh
-    expr: (node_filesystem_size_bytes{mountpoint="/var/opt/gitlab"} - node_filesystem_free_bytes{mountpoint="/var/opt/gitlab"}) / node_filesystem_size_bytes{mountpoint="/var/opt/gitlab"} * 100 > 85
-    for: 10m
-    labels:
-      severity: critical
-    annotations:
-      summary: "High storage usage in GitLab"
-      description: "Storage usage is above 85% on {{ $labels.instance }}."
-
-  # API 响应时间监控
-  - alert: GitLabAPIHighLatency
-    expr: histogram_quantile(0.99, rate(gitlab_http_request_duration_seconds_bucket[5m])) > 2
-    for: 10m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High API latency in GitLab"
-      description: "99th percentile API response time is above 2 seconds."
+deploy-production:
+  extends: .deploy-template
+  environment:
+    name: production
+  variables:
+    KUBE_NAMESPACE: production
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
 ```
 
-### 可视化仪表板 (Visualization Dashboard)
+---
 
-```json
-{
-  "dashboard": {
-    "title": "GitLab CI/CD Enterprise Monitoring",
-    "panels": [
-      {
-        "title": "Pipeline Success Rate",
-        "type": "gauge",
-        "targets": [
-          {
-            "expr": "sum(rate(gitlab_ci_pipeline_duration_seconds_count{status=\"success\"}[1h])) / sum(rate(gitlab_ci_pipeline_duration_seconds_count[1h])) * 100",
-            "legendFormat": "Success Rate %"
-          }
-        ]
-      },
-      {
-        "title": "Build Queue Length",
-        "type": "graph",
-        "targets": [
-          {
-            "expr": "gitlab_ci_pending_jobs",
-            "legendFormat": "Pending Jobs"
-          }
-        ]
-      },
-      {
-        "title": "Runner Utilization",
-        "type": "heatmap",
-        "targets": [
-          {
-            "expr": "avg(gitlab_runner_concurrent) by (runner)",
-            "legendFormat": "{{runner}}"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
+## 四、安全与合规
 
-## 安全配置 (Security Configuration)
-
-### 安全扫描集成 (Security Scanning Integration)
+### 4.1 安全扫描集成
 
 ```yaml
-# 安全扫描配置
+# 安全扫描完整配置
 security-sast:
   stage: security-scan
-  image: 
-    name: gitlab/gitlab-runner-helper:x86_64-latest
+  image:
+    name: registry.gitlab.com/security-products/sast:latest
     entrypoint: [""]
   variables:
-    SECURE_ANALYZERS_PREFIX: "registry.gitlab.com/security-products"
     SAST_EXCLUDED_PATHS: "spec, test, tests, tmp"
+    SAST_ANALYZER_IMAGE_PREFIX: "registry.gitlab.com/security-products"
   script:
     - /analyze -t sast
   artifacts:
     reports:
       sast: gl-sast-report.json
-    paths:
-      - gl-sast-report.json
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 security-dependency-scanning:
   stage: security-scan
-  image: 
-    name: gitlab/gitlab-runner-helper:x86_64-latest
+  image:
+    name: registry.gitlab.com/security-products/dependency-scanning:latest
     entrypoint: [""]
   variables:
     DS_EXCLUDED_PATHS: "vendor, node_modules"
@@ -674,176 +563,529 @@ security-dependency-scanning:
 
 security-container-scanning:
   stage: security-scan
-  image: 
-    name: gitlab/gitlab-runner-helper:x86_64-latest
+  image:
+    name: registry.gitlab.com/security-products/container-scanning:latest
     entrypoint: [""]
   variables:
     CS_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    CS_REGISTRY_USER: $CI_REGISTRY_USER
-    CS_REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
   script:
     - /analyze -t container_scanning
   artifacts:
     reports:
       container_scanning: gl-container-scanning-report.json
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+security-license-scanning:
+  stage: security-scan
+  image:
+    name: registry.gitlab.com/security-products/license-scanning:latest
+    entrypoint: [""]
+  script:
+    - /analyze -t license_scanning
+  artifacts:
+    reports:
+      license_scanning: gl-license-scanning-report.json
 ```
 
-### 访问控制 (Access Control)
+### 4.2 访问控制与环境保护
 
 ```yaml
-# 项目权限配置
-project_settings:
-  visibility: private
-  merge_requests_access_level: enabled
-  issues_access_level: enabled
-  repository_access_level: enabled
-  wiki_access_level: disabled
-  snippets_access_level: disabled
-  
-  # 分支保护规则
-  protected_branches:
-    - name: main
-      push_access_levels:
-        - user: maintainers
-      merge_access_levels:
-        - user: developers
-      unprotect_access_levels:
-        - user: owners
-        
-    - name: release/*
-      push_access_levels:
-        - user: maintainers
-      merge_access_levels:
-        - user: developers
-      
-  # 部署密钥管理
-  deploy_keys:
-    - title: production-deploy-key
-      key: ${PRODUCTION_DEPLOY_KEY_PUBLIC}
-      can_push: false
-      
-    - title: staging-deploy-key
-      key: ${STAGING_DEPLOY_KEY_PUBLIC}
-      can_push: true
+# 分支保护规则
+protected_branches:
+  - name: main
+    push_access_levels:
+      - user: maintainers
+    merge_access_levels:
+      - user: developers
+    unprotect_access_levels:
+      - user: owners
+    code_owner_approval_required: true
+
+  - name: release/*
+    push_access_levels:
+      - user: maintainers
+    merge_access_levels:
+      - user: maintainers
+
+# 环境保护规则
+environments:
+  production:
+    deployment_tier: production
+    state: available
+    protected: true
+    approval_rules:
+      - name: "Production Approval"
+        required_approvals: 2
+        user_ids: [production-approvers-group]
+
+  staging:
+    deployment_tier: staging
+    state: available
+    approval_rules:
+      - name: "Staging Approval"
+        required_approvals: 1
+
+# 合规流水线
+compliance-pipeline:
+  description: "企业合规流水线框架"
+  pipeline:
+    source: "project/compliance/ci-config@main"
+    include:
+      - template: Jobs/SAST.gitlab-ci.yml
+      - template: Jobs/Secret-Detection.gitlab-ci.yml
+      - template: Jobs/Dependency-Scanning.gitlab-ci.yml
 ```
-
-## 故障排除 (Troubleshooting)
-
-### 常见问题诊断 (Common Issue Diagnosis)
-
-```bash
-#!/bin/bash
-# GitLab CI/CD 故障排除工具
-
-# 流水线状态检查
-check_pipeline_status() {
-    echo "=== Pipeline Status Check ==="
-    
-    # 检查最近的流水线
-    curl -s -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-      "https://gitlab.example.com/api/v4/projects/$PROJECT_ID/pipelines?per_page=10" | \
-      jq '.[] | {id: .id, status: .status, ref: .ref, created_at: .created_at}'
-    echo ""
-    
-    # 检查运行中的作业
-    curl -s -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-      "https://gitlab.example.com/api/v4/projects/$PROJECT_ID/jobs?scope=running" | \
-      jq '.[] | {id: .id, name: .name, stage: .stage, started_at: .started_at}'
-}
-
-# Runner 健康检查
-check_runner_health() {
-    echo "=== Runner Health Check ==="
-    
-    # 检查 Runner 状态
-    curl -s -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-      "https://gitlab.example.com/api/v4/runners?scope=active" | \
-      jq '.[] | {id: .id, name: .name, status: .status, active: .active}'
-    echo ""
-    
-    # 检查 Runner 资源使用
-    kubectl top pods -n gitlab-runner
-}
-
-# 性能诊断
-performance_diagnostics() {
-    echo "=== Performance Diagnostics ==="
-    
-    # 检查 GitLab 服务状态
-    kubectl exec -n gitlab-system sts/gitlab -c gitlab -- \
-      gitlab-ctl status
-    echo ""
-    
-    # 检查数据库性能
-    kubectl exec -n gitlab-system sts/postgresql -c postgresql -- \
-      pg_isready -h localhost -p 5432
-    echo ""
-    
-    # 检查 Redis 连接
-    kubectl exec -n gitlab-system sts/redis -c redis -- \
-      redis-cli ping
-}
-```
-
-## 最佳实践 (Best Practices)
-
-### 流水线最佳实践 (Pipeline Best Practices)
-
-1. **阶段划分**
-   ```yaml
-   stages:
-     - security-scan    # 安全扫描
-     - build            # 构建
-     - test             # 测试
-     - deploy-staging   # 预发布部署
-     - e2e-test         # 端到端测试
-     - deploy-production # 生产部署
-   ```
-
-2. **缓存策略**
-   ```yaml
-   cache:
-     key: ${CI_COMMIT_REF_SLUG}
-     paths:
-       - node_modules/
-       - .m2/repository/
-     policy: pull-push
-   ```
-
-3. **工件管理**
-   ```yaml
-   artifacts:
-     paths:
-       - dist/
-     expire_in: 2 weeks
-     when: on_success
-   ```
-
-### 运维最佳实践 (Operations Best Practices)
-
-1. **监控覆盖**
-   - 流水线成功率监控
-   - Runner 健康检查
-   - 资源使用率监控
-   - 安全扫描结果跟踪
-
-2. **安全加固**
-   - 启用所有安全扫描
-   - 配置分支保护规则
-   - 定期轮换访问令牌
-   - 实施最小权限原则
-
-3. **性能优化**
-   - 合理配置 Runner 资源
-   - 使用并行构建
-   - 优化缓存策略
-   - 定期清理历史数据
 
 ---
 
-**文档版本**: v1.0  
-**最后更新**: 2024年  
-**适用版本**: GitLab 16.7+
+## 五、多环境管理策略
+
+### 5.1 环境晋升流程
+
+```yaml
+# 多环境晋升策略
+stages:
+  - build
+  - test
+  - deploy-dev
+  - deploy-staging
+  - deploy-production
+
+deploy-dev:
+  stage: deploy-dev
+  environment:
+    name: dev/${CI_COMMIT_REF_NAME}
+    url: https://dev-${CI_COMMIT_REF_SLUG}.example.com
+    on_stop: stop-dev
+  script:
+    - helm upgrade --install ${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG} ./helm
+        --set image.tag=${CI_COMMIT_SHA}
+        --set environment=dev
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+
+deploy-staging:
+  stage: deploy-staging
+  environment:
+    name: staging
+    url: https://staging.example.com
+  script:
+    - helm upgrade --install ${CI_PROJECT_NAME} ./helm
+        --set image.tag=${CI_COMMIT_SHA}
+        --set environment=staging
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+deploy-production:
+  stage: deploy-production
+  environment:
+    name: production
+    url: https://app.example.com
+  script:
+    - helm upgrade --install ${CI_PROJECT_NAME} ./helm
+        --set image.tag=${CI_COMMIT_SHA}
+        --set environment=production
+        --atomic
+        --timeout 15m
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+  when: manual
+
+stop-dev:
+  stage: deploy-dev
+  environment:
+    name: dev/${CI_COMMIT_REF_NAME}
+    action: stop
+  script:
+    - helm uninstall ${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+```
+
+### 5.2 Review Apps
+
+```yaml
+# 动态环境 - Review Apps
+deploy-review:
+  stage: deploy
+  environment:
+    name: review/${CI_MERGE_REQUEST_IID}
+    url: https://review-${CI_MERGE_REQUEST_IID}.example.com
+    on_stop: stop-review
+  script:
+    - helm upgrade --install review-${CI_MERGE_REQUEST_IID} ./helm
+        --set image.tag=${CI_COMMIT_SHA}
+        --set ingress.host=review-${CI_MERGE_REQUEST_IID}.example.com
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+stop-review:
+  stage: deploy
+  environment:
+    name: review/${CI_MERGE_REQUEST_IID}
+    action: stop
+  script:
+    - helm uninstall review-${CI_MERGE_REQUEST_IID}
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+```
+
+---
+
+## 六、监控与回滚
+
+### 6.1 关键指标监控
+
+```yaml
+groups:
+- name: gitlab-ci.rules
+  rules:
+  - alert: GitLabPipelineFailureRateHigh
+    expr: |
+      rate(gitlab_ci_pipeline_duration_seconds_count{status="failed"}[5m]) /
+      rate(gitlab_ci_pipeline_duration_seconds_count[5m]) * 100 > 10
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "流水线失败率过高"
+      description: "最近5分钟内流水线失败率超过10%"
+
+  - alert: GitLabRunnerOffline
+    expr: gitlab_runner_up == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "GitLab Runner 离线"
+      description: "Runner {{ $labels.instance }} 已离线超过5分钟"
+
+  - alert: GitLabBuildQueueBacklog
+    expr: gitlab_ci_pending_jobs > 50
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "构建队列积压"
+
+  - alert: GitLabStorageUsageHigh
+    expr: |
+      (node_filesystem_size_bytes{mountpoint="/var/opt/gitlab"} -
+       node_filesystem_free_bytes{mountpoint="/var/opt/gitlab"}) /
+      node_filesystem_size_bytes{mountpoint="/var/opt/gitlab"} * 100 > 85
+    for: 10m
+    labels:
+      severity: critical
+    annotations:
+      summary: "GitLab 存储空间不足"
+```
+
+### 6.2 回滚策略
+
+```bash
+# GitLab 环境回滚
+# 方式一: 重新部署旧版本
+helm rollback ${HELM_RELEASE} <revision> -n production
+
+# 方式二: 重新运行旧的 Pipeline Job
+# GitLab UI → CI/CD → Pipelines → 选择成功的 Pipeline → Retry
+
+# 方式三: 通过 API 触发回滚
+curl --request POST \
+  --form token=${TRIGGER_TOKEN} \
+  --form ref=main \
+  --form variables[DEPLOY_ACTION]=rollback \
+  --form variables[DEPLOY_VERSION]=v1.2.3 \
+  "https://gitlab.example.com/api/v4/projects/${PROJECT_ID}/trigger/pipeline"
+```
+
+---
+
+## 七、最佳实践
+
+### 7.1 流水线优化
+
+```yaml
+1. 缓存策略:
+   - 使用 cache 指令缓存依赖
+   - 配置 pull-push 策略
+   - 按 branch 设置不同的 cache key
+
+2. 并行化:
+   - 独立测试阶段使用 parallel
+   - 使用 matrix 构建多版本
+   - 避免不必要的串行依赖
+
+3. 工件管理:
+   - 设置合理的 expire_in
+   - 使用 when: on_success 减少存储
+   - 定期清理旧工件
+
+4. Runner 资源:
+   - 按阶段配置不同资源
+   - 使用 node_selector 调度到专用节点
+   - 监控 Runner 利用率
+
+5. 安全扫描:
+   - 所有 MR 触发安全扫描
+   - 配置扫描失败阻断合并
+   - 定期审查扫描报告
+```
+
+### 7.2 GitOps 集成
+
+```yaml
+# GitLab CI + Argo CD 集成
+update-gitops:
+  stage: deploy
+  image: alpine/git:latest
+  script:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/org/gitops-manifests.git
+    - cd gitops-manifests
+    - kustomize edit set image app=${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+    - git config user.name "GitLab CI"
+    - git config user.email "ci@example.com"
+    - git add .
+    - git commit -m "Update ${CI_PROJECT_NAME} to ${CI_COMMIT_SHA}"
+    - git push origin main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+```
+
+---
+
+## 八、故障排查
+
+### 8.1 常见问题诊断
+
+```bash
+#!/bin/bash
+# GitLab CI/CD 故障排查工具
+
+check_pipeline_status() {
+    echo "=== Pipeline Status ==="
+    curl -s -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      "https://gitlab.example.com/api/v4/projects/$PROJECT_ID/pipelines?per_page=10" | \
+      jq '.[] | {id, status, ref, created_at}'
+}
+
+check_runner_health() {
+    echo "=== Runner Health ==="
+    curl -s -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      "https://gitlab.example.com/api/v4/runners?scope=active" | \
+      jq '.[] | {id, name, status, active}'
+    kubectl top pods -n gitlab-runner
+}
+
+check_service_health() {
+    echo "=== Service Health ==="
+    kubectl exec -n gitlab-system sts/gitlab -- gitlab-ctl status
+    kubectl exec -n gitlab-system sts/postgresql -- pg_isready
+    kubectl exec -n gitlab-system sts/redis -- redis-cli ping
+}
+
+# Job 日志查看
+# GitLab UI → CI/CD → Jobs → 选择失败的 Job → 查看日志
+
+# Runner 调试
+# 在 Job 中添加 before_script: - env (查看环境变量)
+# 在 Job 中添加 before_script: - kubectl get pods (查看 Agent Pod)
+```
+
+```yaml
+常见问题及解决方案:
+  Job 超时:
+    原因: 资源不足、网络问题、测试卡住
+    解决: 增加 timeout、检查资源限制、添加测试超时
+
+  Runner 不可用:
+    原因: Runner 注册失败、K8s 资源不足
+    解决: 检查 Runner 注册状态、检查 K8s 节点资源
+
+  镜像拉取失败:
+    原因: Registry 认证问题、网络不通
+    解决: 检查 DOCKER_AUTH_CONFIG、验证 Registry 连通性
+
+  缓存不生效:
+    原因: cache key 不匹配、Runner 不支持分布式缓存
+    解决: 检查 cache key 配置、配置 S3 缓存后端
+```
+
+---
+
+## 九、GitLab CI/CD 高级特性
+
+### 9.1 并行矩阵构建
+
+GitLab CI/CD 的 `parallel: matrix` 功能允许在单个 Job 定义中生成多个并行构建实例。这对于需要在不同运行时版本、不同操作系统或不同配置组合下测试的项目尤其有用。矩阵构建的每个实例都会获得独立的运行环境和变量，构建结果在 Merge Request 中以可折叠的形式展示。
+
+```yaml
+# 多版本、多平台并行构建
+build-matrix:
+  stage: build
+  parallel:
+    matrix:
+      - NODE_VERSION: ["18", "20", "22"]
+        OS: ["alpine", "slim"]
+  image: node:${NODE_VERSION}-${OS}
+  script:
+    - npm ci
+    - npm run build
+    - npm run test
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+```
+
+### 9.2 流水线缓存策略
+
+缓存是加速 GitLab CI/CD 流水线的关键手段。GitLab 提供了分支级别的缓存隔离机制——默认情况下，每个分支只能访问自己的缓存和 main 分支的缓存。通过 `policy: pull-push` 配置，可以在首次运行时创建缓存，后续运行时优先拉取缓存。
+
+```yaml
+# 分级缓存策略
+.cache-template: &cache-template
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+      - .cache/
+      - dist/
+    policy: pull-push
+    fallback_keys:
+      - npm-default
+      - npm-main
+
+# 仅拉取缓存（用于MR流水线，避免写入）
+.cache-pull: &cache-pull
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+    policy: pull
+
+build-with-cache:
+  stage: build
+  <<: [*cache-template]
+  script:
+    - npm ci
+    - npm run build
+
+test-mr:
+  stage: test
+  <<: [*cache-pull]
+  script:
+    - npm run test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+```
+
+### 9.3 环境保护与审批流程
+
+GitLab 的 Environment Protection 机制是生产部署安全的核心保障。通过配置环境保护规则，可以强制要求特定环境的部署必须经过指定审批人的确认，同时可以设置等待计时器防止误操作。结合 GitLab 的合规框架（Compliance Framework），可以实现跨项目的统一审批策略。
+
+```yaml
+# 多层级审批配置
+deploy-production:
+  stage: deploy-production
+  environment:
+    name: production/${CI_PROJECT_NAME}
+    url: https://${CI_PROJECT_NAME}.example.com
+    deployment_tier: production
+    action: start
+  before_script:
+    - echo "Deploying to production requires approval from ${APPROVER_TEAM}"
+  script:
+    - helm upgrade --install ${CI_PROJECT_NAME} ./helm
+        --set image.tag=${CI_COMMIT_SHA}
+        --atomic
+        --timeout 15m
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+      when: manual
+      allow_failure: false
+  needs:
+    - job: e2e-test
+      artifacts: false
+  resource_group: production-deploy
+
+# 资源组 - 确保同一环境同时只有一个部署
+resource_groups:
+  - key: production-deploy
+    process_mode: unordered
+```
+
+### 9.4 GitLab 与 Argo CD 深度集成
+
+GitLab CI/CD 与 Argo CD 的集成是企业级 GitOps 的标准模式。在这种模式下，GitLab CI 负责构建镜像和运行测试，Argo CD 负责将镜像部署到 Kubernetes 集群。集成点在于 GitLab CI 在流水线成功后将镜像标签更新到 GitOps 清单仓库，Argo CD 自动检测到变更并同步部署。
+
+```yaml
+# GitLab CI → GitOps 集成
+update-gitops:
+  stage: deploy
+  image: alpine/git:latest
+  variables:
+    GITOPS_REPO: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/org/gitops-manifests.git"
+  script:
+    - git clone --depth 1 ${GITOPS_REPO} gitops
+    - cd gitops/apps/${CI_PROJECT_NAME}/overlays/production
+    - kustomize edit set image app=${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+    - cd -
+    - git config user.name "GitLab CI"
+    - git config user.email "ci@gitlab.example.com"
+    - git add .
+    - git commit -m "Update ${CI_PROJECT_NAME} to ${CI_COMMIT_SHA}"
+    - git push origin main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+```
+
+### 9.5 GitLab Runner 运维管理
+
+GitLab Runner 的运维管理包括注册注销、版本升级、资源监控和弹性伸缩。在 Kubernetes 环境中，推荐使用 Helm Chart 部署 Runner，通过 `values.yaml` 管理配置，实现声明式的 Runner 管理。
+
+```yaml
+# GitLab Runner Helm Values
+replicas: 3
+runnerRegistrationToken: "${RUNNER_REGISTRATION_TOKEN}"
+rbac:
+  create: true
+  resources:
+    - pods
+    - pods/exec
+    - pods/attach
+    - secrets
+    - configmaps
+runners:
+  config: |
+    [[runners]]
+      executor = "kubernetes"
+      [runners.kubernetes]
+        namespace = "gitlab-runner"
+        image = "ubuntu:22.04"
+        privileged = true
+        [runners.kubernetes.node_selector]
+          gitlab-runner = "true"
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+```
+
+---
+
+**文档版本**: v2.0
+**最后更新**: 2026-04-24
+**适用版本**: GitLab 17.10+

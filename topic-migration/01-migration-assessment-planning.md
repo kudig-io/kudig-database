@@ -1,3 +1,35 @@
+---
+title: 01 - 迁移评估与规划
+description: echo "=== 3. 存储资源 ==="
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- etcd
+- kubelet
+- prometheus
+- grafana
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- SRE
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 迁移评估与规划 是什么
+- 如何 迁移评估与规划
+trigger_keywords:
+- 迁移评估与规划
+- migration
+---
+
+
 # 01 - 迁移评估与规划
 
 > **文档版本**: v1.0 | **适用场景**: 自建 K8s → 阿里云 ACK | **更新日期**: 2026-03 | **关键词**: 迁移评估, 兼容性分析, 风险矩阵, 项目计划

@@ -1,3 +1,39 @@
+---
+title: Domain-18 生产运维 — 开源项目索引
+description: '# Domain-18 生产运维 — 开源项目索引'
+category: production-operations
+tags:
+- k8s
+- production
+- operations
+- best-practices
+- scheduler
+- prometheus
+- grafana
+- docker
+- opa
+- kafka
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- Domain-18 生产运维 — 开源项目索引 是什么
+- 如何 Domain-18 生产运维 — 开源项目索引
+- Kubernetes 18 production operations 最佳实践
+trigger_keywords:
+- Domain-18
+- 生产运维
+- 开源项目索引
+- production
+- operations
+---
+
+
 # Domain-18 生产运维 — 开源项目索引
 
 > **最后更新**: 2026-04-24  

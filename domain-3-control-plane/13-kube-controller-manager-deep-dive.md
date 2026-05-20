@@ -1,25 +1,84 @@
 ---
-title: "kube-controller-manager 深度解析"
-description: "深入解析 kube-controller-manager 的架构设计、40+ 内置控制器、Leader 选举机制、控制器协同工作原理与生产级运维"
-category: "domain-3-control-plane"
-tags: [k8s, controller-manager, controllers, leader-election, reconcile, kubernetes]
-k8s_versions: ["1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32"]
-last_updated: "2026-05"
+title: kube-controller-manager 深度解析
+description: 深入解析 kube-controller-manager 的架构设计、40+ 内置控制器、Leader 选举机制、控制器协同工作原理与生产级运维
+category: domain-3-control-plane
+tags:
+- k8s
+- controller-manager
+- controllers
+- leader-election
+- reconcile
+- kubernetes
+- etcd
+- apiserver
+- kubelet
+- prometheus
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 25min
+intent_queries:
+- kube-controller-manager 深度解析 是什么
+- 如何 kube-controller-manager 深度解析
+- Kubernetes 3 control plane 最佳实践
+trigger_keywords:
+- kube-controller-manager
+- 深度解析
+- control
+- plane
+k8s_versions:
+- '1.25'
+- '1.26'
+- '1.27'
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 authors:
-  - name: "KUDIG Team"
-    role: "contributor"
-difficulty: "advanced"
+- name: KUDIG Team
+  role: contributor
 related_docs:
-  - path: "11-etcd-deep-dive.md"
-    type: "depth"
-    desc: "etcd 深度解析"
-  - path: "12-apiserver-deep-dive.md"
-    type: "depth"
-    desc: "API Server 深度解析"
-  - path: "../topic-fta/list/controller-manager-fta.md"
-    type: "fta"
-    desc: "Controller Manager 故障树"
+- path: 11-etcd-deep-dive.md
+  type: depth
+  desc: etcd 深度解析
+- path: 12-apiserver-deep-dive.md
+  type: depth
+  desc: API Server 深度解析
+- path: ../topic-fta/list/controller-manager-fta.md
+  type: fta
+  desc: Controller Manager 故障树
+cross_refs:
+- type: domain
+  path: ../domain-2-design-principles/
+  label: '相关知识域: domain-2-design-principles'
+- type: domain
+  path: ../domain-4-workloads/
+  label: '相关知识域: domain-4-workloads'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-6-storage/
+  label: '相关知识域: domain-6-storage'
+- type: domain
+  path: ../domain-7-security/
+  label: '相关知识域: domain-7-security'
+- type: fta
+  path: ../topic-fta/list/controller-manager-fta.md
+  label: '故障树: controller-manager'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/k8s.md
+  label: '速查卡: k8s'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/kubectl-scene-cheatsheet.md
+  label: '速查卡: kubectl-scene-cheatsheet'
 ---
+
 
 # kube-controller-manager 深度解析 (KCM Deep Dive)
 

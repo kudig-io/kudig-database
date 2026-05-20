@@ -1,3 +1,31 @@
+---
+title: Garbage Collection（垃圾回收）
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- kubelet
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Garbage Collection（垃圾回收） 是什么
+- 如何 Garbage Collection（垃圾回收）
+trigger_keywords:
+- Garbage
+- Collection
+- 垃圾回收
+- dictionary
+title_en: Garbage Collection
+---
+
+
 # Garbage Collection（垃圾回收）
 
 ## 概述

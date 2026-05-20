@@ -1,3 +1,32 @@
+---
+title: Cloud Controller Manager（云控制器管理器）
+description: '# Cloud Controller Manager（云控制器管理器）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Cloud Controller Manager（云控制器管理器） 是什么
+- 如何 Cloud Controller Manager（云控制器管理器）
+trigger_keywords:
+- Cloud
+- Controller
+- Manager
+- 云控制器管理器
+- dictionary
+title_en: Controller Manager
+---
+
+
 # Cloud Controller Manager（云控制器管理器）
 
 ## 概述

@@ -1,3 +1,42 @@
+---
+title: KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
+description: '# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)'
+category: edge-computing
+tags:
+- k8s
+- edge
+- iot
+- kubeedge
+- flux
+- minio
+- kafka
+- job
+- cronjob
+- networkpolicy
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 边缘计算工程师
+- SRE
+- IoT 工程师
+estimated_read_time: 5min
+intent_queries:
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications) 是什么
+- 如何 KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
+- Kubernetes 37 edge computing 最佳实践
+trigger_keywords:
+- KubeEdge
+- 设备管理与边缘应用
+- KubeEdge
+- Device
+- Management
+- and
+- Edge
+- Applications
+---
+
+
 # KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 
 ## 目录 (Table of Contents)

@@ -1,3 +1,32 @@
+---
+title: Kueue 作业队列与准入控制
+description: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- scheduler
+- job
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Kueue 作业队列与准入控制 是什么
+- 如何 Kueue 作业队列与准入控制
+trigger_keywords:
+- Kueue
+- 作业队列与准入控制
+- dictionary
+title_en: Admission Controllers
+---
+
+
 # Kueue 作业队列与准入控制
 
 ## 概述

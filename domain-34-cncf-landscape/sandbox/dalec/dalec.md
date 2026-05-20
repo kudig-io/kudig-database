@@ -1,3 +1,37 @@
+---
+title: Dalec (Declarative Application Linux Environment Creator)
+description: '## 项目概述'
+category: cncf-landscape
+tags:
+- k8s
+- cncf
+- cloud-native
+- ecosystem
+- docker
+- gateway
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 架构师
+- 技术决策者
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Dalec (Declarative Application Linux Environment Creator) 是什么
+- 如何 Dalec (Declarative Application Linux Environment Creator)
+- Kubernetes 34 cncf landscape 最佳实践
+trigger_keywords:
+- Dalec
+- Declarative
+- Application
+- Linux
+- Environment
+- Creator
+- cncf
+- landscape
+---
+
 # Dalec (Declarative Application Linux Environment Creator)
 
 > **成熟度**: Sandbox | **最后更新**: 2026-03

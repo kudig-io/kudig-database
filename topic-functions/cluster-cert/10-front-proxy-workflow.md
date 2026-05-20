@@ -1,3 +1,48 @@
+---
+title: Front Proxy 聚合层证书工作流
+description: '## 概述'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- apiserver
+- kubelet
+last_updated: '2026-05-18'
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 管理员
+- 安全工程师
+- 应用开发者
+estimated_read_time: 5min
+intent_queries:
+- Kubernetes Front Proxy 聚合层证书工作流程
+- metrics-server API Server 证书验证 X-Remote-User
+- Front Proxy CA 独立信任域 front-proxy-ca
+- APIService caBundle 配置
+- RequestHeader 认证请求头传递
+trigger_keywords:
+- front-proxy-ca
+- front-proxy-client
+- metrics-server
+- APIService
+- caBundle
+- RequestHeader
+- X-Remote-User
+- 聚合层
+- Aggregation Layer
+- requestheader-allowed-names
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-cert/pki-architecture
+- cluster-cert/apiserver-cert-flags
+- cluster-cert/rbac-mapping
+---
+
+
 # Front Proxy 聚合层证书工作流
 
 ## 概述

@@ -1,3 +1,57 @@
+---
+title: 智能制造MES架构设计
+description: '# 智能制造 MES 架构设计 — 阿里云视角'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- grafana
+- flux
+- minio
+- mysql
+- kafka
+- daemonset
+last_updated: '2026-05-18'
+difficulty: expert
+reading_level: expert
+audience:
+- 制造业架构师
+- 工控系统工程师
+- 阿里云解决方案架构师
+- OT/IT融合专家
+estimated_read_time: 5min
+intent_queries:
+- 智能制造MES系统架构设计
+- 工业4.0 OPC UA协议K8s部署
+- 设备预测性维护AI
+- OEE设备综合效率计算
+- MES质量追溯区块链
+trigger_keywords:
+- 智能制造
+- MES
+- 工业4.0
+- OPC UA
+- 预测性维护
+- OEE
+- 数字孪生
+- 工控安全
+- 边缘计算
+- 质量追溯
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-9-ai-ml
+- domain-5-iot-edge-computing
+- domain-26-service-mesh-microservices
+related_topics:
+- topic-application-architecture/47-smart-mining
+- topic-application-architecture/80-tsn-network
+- topic-application-architecture/61-smart-grid
+- topic-functions/05-iot-edge-computing
+---
+
+
 # 智能制造 MES 架构设计 — 阿里云视角
 
 > **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24

@@ -1,3 +1,43 @@
+---
+title: 08 - StatefulSet 与 DaemonSet 控制器事件
+description: '- [最佳实践](#最佳实践)'
+category: kubernetes-events
+tags:
+- k8s
+- events
+- troubleshooting
+- kubelet
+- scheduler
+- controller-manager
+- docker
+- mysql
+- pdb
+- statefulset
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- StatefulSet 与 DaemonSet 控制器事件 是什么
+- 如何 StatefulSet 与 DaemonSet 控制器事件
+- Kubernetes 33 kubernetes events 最佳实践
+trigger_keywords:
+- StatefulSet
+- DaemonSet
+- 控制器事件
+- kubernetes
+- events
+cross_refs:
+- type: fta
+  path: ../topic-fta/list/statefulset-fta.md
+  label: '故障树: statefulset'
+---
+
+
 # 08 - StatefulSet 与 DaemonSet 控制器事件
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler

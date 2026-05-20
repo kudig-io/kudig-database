@@ -1,3 +1,49 @@
+---
+title: 03 - 多集群网络联邦与跨集群通信
+description: '# 03 - 多集群网络联邦与跨集群通信'
+category: networking
+tags:
+- k8s
+- networking
+- service
+- ingress
+- cni
+- apiserver
+- prometheus
+- istio
+- envoy
+- cilium
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 网络工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- 多集群网络联邦与跨集群通信 是什么
+- 如何 多集群网络联邦与跨集群通信
+- Kubernetes 5 networking 最佳实践
+trigger_keywords:
+- 多集群网络联邦与跨集群通信
+- networking
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-15-network-fundamentals/
+  label: '相关知识域: domain-15-network-fundamentals'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+- type: cheatsheet
+  path: ../topic-cheat-sheet/networking.md
+  label: '速查卡: networking'
+---
+
+
 # 03 - 多集群网络联邦与跨集群通信
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 专家级

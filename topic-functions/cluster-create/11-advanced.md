@@ -1,3 +1,55 @@
+---
+title: 集群新建进阶关键机制详解
+description: '# 集群新建进阶: 关键机制详解'
+category: functions
+tags:
+- k8s
+- operations
+- cluster-management
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- calico
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- Kubernetes 运维工程师
+- 平台工程师
+estimated_read_time: 5min
+intent_queries:
+- kubeadm init configuration advance
+- InitConfiguration NodeRegistration complete
+- kubelet-start phase bootstrap-kubelet.conf
+- NodeRestriction admission plugin
+- CoreDNS deployment kubeadm
+trigger_keywords:
+- init
+- configuration
+- InitConfiguration
+- NodeRegistration
+- kubelet-start
+- bootstrap-kubelet.conf
+- kubelet.conf
+- NodeRestriction
+- CoreDNS
+- FeatureGates
+- wait-control-plane
+- criSocket
+related_domains:
+- domain-3-control-plane
+- domain-7-security
+related_topics:
+- cluster-create/01-overview
+- cluster-create/03-certs
+- cluster-create/06-join
+- cluster-create/09-upgrade
+---
+
+
 # 集群新建进阶: 关键机制详解
 
 ## 源码路径

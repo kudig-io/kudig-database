@@ -1,3 +1,52 @@
+---
+title: 内容管理系统 CMS 架构设计
+description: '# 内容管理系统 (CMS) Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- scheduler
+- redis
+- postgresql
+- elasticsearch
+- hpa
+- statefulset
+- job
+last_updated: 2026-05-18
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- CMS架构师
+- 全栈工程师
+- 内容运营专家
+estimated_read_time: 5min
+intent_queries:
+- Headless CMS Kubernetes 部署架构
+- 内容协同编辑 OT 算法
+- 多语言多站点管理
+- 静态站点生成 SSG ISR
+- 阿里云 OSS CDN 内容分发
+trigger_keywords:
+- CMS内容管理
+- Headless CMS
+- 协同编辑
+- 多语言
+- 多站点
+- SSG静态生成
+- ISR增量再生成
+- GraphQL
+- 内容工作流
+- 审批发布
+related_domains:
+- domain-26-service-mesh-microservices
+- domain-12-troubleshooting
+related_topics:
+- topic-cms-architecture
+- topic-content-platform-architecture
+---
+
+
 # 内容管理系统 (CMS) Kubernetes 生产架构设计
 
 > **适用场景**: 企业官网 / 新闻门户 / 知识库 / 文档中心 / 营销落地页 / 多站点管理  

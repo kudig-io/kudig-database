@@ -1,3 +1,39 @@
+---
+title: Backstage 软件目录与 TechDocs
+description: 2. [catalog-info.yaml 完整指南](#2-catalog-infoyaml-完整指南)
+category: platform-engineering
+tags:
+- k8s
+- platform-engineering
+- developer-experience
+- idp
+- scheduler
+- prometheus
+- grafana
+- argocd
+- docker
+- harbor
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 平台工程师
+- SRE
+- 架构师
+estimated_read_time: 5min
+intent_queries:
+- Backstage 软件目录与 TechDocs 是什么
+- 如何 Backstage 软件目录与 TechDocs
+- Kubernetes 36 platform engineering 最佳实践
+trigger_keywords:
+- Backstage
+- 软件目录与
+- TechDocs
+- platform
+- engineering
+---
+
+
 # Backstage 软件目录与 TechDocs
 # Backstage Software Catalog and TechDocs
 

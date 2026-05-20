@@ -1,3 +1,34 @@
+---
+title: Agent CLI 安全治理与权限模型
+description: '# Agent CLI 安全治理与权限模型'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- gateway
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- Agent CLI 安全治理与权限模型 是什么
+- 如何 Agent CLI 安全治理与权限模型
+trigger_keywords:
+- Agent
+- CLI
+- 安全治理与权限模型
+- ai
+- agent
+---
+
+
 # Agent CLI 安全治理与权限模型
 
 > **文档类型**: 安全治理专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Security, Sandbox, Permission Model, Audit, Supply Chain, Data Leakage Prevention, 权限沙箱

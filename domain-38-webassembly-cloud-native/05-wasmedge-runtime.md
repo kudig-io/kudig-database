@@ -1,3 +1,39 @@
+---
+title: WasmEdge 运行时
+description: 1. [WasmEdge 概述](#1-wasmedge-概述)
+category: webassembly-cloud-native
+tags:
+- k8s
+- wasm
+- webassembly
+- cloud-native
+- prometheus
+- containerd
+- docker
+- job
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- 架构师
+- 开发工程师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- WasmEdge 运行时 是什么
+- 如何 WasmEdge 运行时
+- Kubernetes 38 webassembly cloud native 最佳实践
+trigger_keywords:
+- WasmEdge
+- 运行时
+- webassembly
+- cloud
+- native
+---
+
+
 # WasmEdge 运行时
 # WasmEdge Runtime
 

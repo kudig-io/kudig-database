@@ -1,3 +1,33 @@
+---
+title: Windows Storage（Windows 存储）
+description: '# Windows Storage（Windows 存储）'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- containerd
+- docker
+- rag
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Windows Storage（Windows 存储） 是什么
+- 如何 Windows Storage（Windows 存储）
+trigger_keywords:
+- Windows
+- Storage
+- Windows
+- 存储
+- dictionary
+title_en: Windows Storage
+---
+
+
 # Windows Storage（Windows 存储）
 
 ## 概述

@@ -1,3 +1,55 @@
+---
+title: 电商系统 Kubernetes 生产架构设计
+description: '# 电商系统 Kubernetes 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- prometheus
+- grafana
+- jaeger
+- istio
+- envoy
+- minio
+- redis
+last_updated: 2026-05-18
+difficulty: advanced
+reading_level: advanced
+audience:
+- 电商架构师
+- 后端开发 TL
+- SRE
+- 云原生工程师
+estimated_read_time: 5min
+intent_queries:
+- 电商系统 K8s生产架构 微服务拆分
+- 电商订单链路 Kubernetes StatefulSet
+- 秒杀系统 Redis Lua 库存扣减 K8s
+- 电商搜索 Elasticsearch K8s部署
+- 电商支付 PCI-DSS Kubernetes 安全
+trigger_keywords:
+- 电商架构
+- 微服务
+- 订单系统
+- 库存扣减
+- 秒杀
+- Redis Cluster
+- Elasticsearch
+- StatefulSet
+- HPA
+- Karpenter
+related_domains:
+- domain-1-architecture-fundamentals
+- domain-18-production-operations
+- domain-26-service-mesh-microservices
+related_topics:
+- 41-beauty-ecommerce
+- 31-instant-retail
+- 49-livestream-ecommerce
+---
+
+
 # 电商系统 Kubernetes 生产架构设计
 
 > **适用场景**: B2C / B2B / O2O / 直播电商 / 跨境电商  
@@ -1002,3 +1054,57 @@ flowchart TB
 - [阿里巴巴电商系统架构演进](https://developer.aliyun.com/ebook/read/7556)
 - [美团外卖系统架构](https://tech.meituan.com/)
 - [Kubernetes 有状态应用管理](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+
+---
+
+## 多云部署方案对照
+
+### 阿里云服务 → 多云映射表
+
+| 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
+|:---|:---|:---|:---|:---|
+| 容器编排 | **ACK** (容器服务) | **EKS** | **GKE** | **AKS** |
+| 对象存储 | **OSS** | **S3** | **GCS** | **Blob Storage** |
+| CDN | **CDN / DCDN** | **CloudFront** | **Cloud CDN** | **Azure CDN** |
+| Web 防火墙 | **WAF** | **AWS WAF** | **Cloud Armor** | **Azure WAF (Front Door)** |
+| DDoS 防护 | **DDoS 防护** | **Shield** | **Cloud Armor** | **Azure DDoS Protection** |
+| 密钥管理 | **KMS** | **KMS** | **Cloud KMS** | **Key Vault** |
+| 负载均衡 | **ALB / SLB** | **ALB / NLB** | **Cloud Load Balancing** | **Azure Load Balancer / App GW** |
+| 消息队列 | **RocketMQ** | **SQS / SNS** | **Pub/Sub** | **Service Bus** |
+| 数据库 | **RDS MySQL / PolarDB** | **RDS MySQL / Aurora** | **Cloud SQL / AlloyDB** | **Azure MySQL / Cosmos DB** |
+| 缓存 | **Redis 云版** | **ElastiCache** | **Memorystore** | **Azure Cache for Redis** |
+| 搜索 | **Elasticsearch 云版** | **OpenSearch** | **Elastic Cloud on GCP** | **Azure Cognitive Search** |
+| 容器镜像 | **ACR** | **ECR** | **Artifact Registry** | **ACR (Azure)** |
+| 节点自动伸缩 | **ASK / Karpenter** | **Karpenter** | **GKE Autopilot** | **AKS Karpenter / Virtual Nodes** |
+| DNS | **云解析 DNS** | **Route 53** | **Cloud DNS** | **Azure DNS** |
+| 日志 | **SLS (日志服务)** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
+| 链路追踪 | **ARMS / 链路追踪** | **X-Ray** | **Cloud Trace** | **Application Insights** |
+
+### 多云部署注意事项
+
+1. **数据主权与合规**: 电商涉及支付数据需关注 PCI-DSS，不同云厂商的 PCI-DSS 认证范围不同，需确认目标 Region 的合规状态。
+2. **网络互通**: 多云部署时需通过 VPN / 专线打通 VPC，注意跨云通信延迟对订单链路的影响（建议同城双活优先）。
+3. **对象存储兼容**: 应用层使用 S3 兼容 API（如 MinIO / AWS SDK），可降低迁移成本；避免直接依赖 OSS SDK 的私有 API。
+4. **K8s 版本对齐**: 各云 K8s 发行版（ACK / EKS / GKE / AKS）版本发布节奏不同，需统一升级窗口，避免 API 兼容性问题。
+5. **节点池策略**: AWS 用 Karpenter、GCP 用 Autopilot、Azure 用 Virtual Nodes，HPA/VPA 行为有差异，需分别压测。
+6. **支付通道隔离**: 支付 PCI-DSS 区域建议与业务区域在同一云内，避免跨云传输敏感数据。
+
+### 云中立方案（开源替代）
+
+| 能力域 | 开源方案 | 说明 |
+|:---|:---|:---|
+| 容器编排 | **Kubernetes** (原生) | 使用 kubeadm / Cluster API 自建，或 RKE2 / k3s |
+| 对象存储 | **MinIO** | S3 兼容，可部署在任意 K8s 集群 |
+| CDN / 边缘加速 | **Cloudflare** / **Fastly** | 独立 CDN 服务商，不绑定云 |
+| WAF | **ModSecurity** + **OWASP CRS** | 开源 WAF，配合 Ingress Controller |
+| 密钥管理 | **HashiCorp Vault** | 已在支付架构中使用，可替代云 KMS |
+| 负载均衡 | **HAProxy** / **MetalLB** | K8s 原生 Service + MetalLB |
+| 消息队列 | **Apache Kafka** / **RocketMQ** (开源版) | K8s Operator 部署 |
+| 数据库 | **MySQL** (Operator) / **TiDB** | Vitess / TiDB Operator 分布式方案 |
+| 缓存 | **Redis Cluster** | K8s StatefulSet 或 Redis Operator |
+| 搜索 | **Elasticsearch** (ECK) / **OpenSearch** | Elastic Cloud on K8s Operator |
+| 镜像仓库 | **Harbor** | 企业级开源镜像仓库 |
+| 节点伸缩 | **Karpenter** (开源版) / **Cluster Autoscaler** | Karpenter 已支持多云 |
+| 日志 | **Loki** + **Promtail** | 轻量级，已在架构图中使用 |
+| 链路追踪 | **Jaeger** / **OpenTelemetry** | 已在架构图中使用 |
+| DNS | **CoreDNS** + **ExternalDNS** | K8s 原生 DNS 管理 |

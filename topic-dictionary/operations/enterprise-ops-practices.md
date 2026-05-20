@@ -1,3 +1,35 @@
+---
+title: 企业级运维最佳实践
+description: '# 企业级运维最佳实践'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- jaeger
+- istio
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- 企业级运维最佳实践 是什么
+- 如何 企业级运维最佳实践
+trigger_keywords:
+- 企业级运维最佳实践
+- dictionary
+title_en: Enterprise Ops Practices
+---
+
+
+
 # 企业级运维最佳实践
 
 > **目标**: 构建万级节点规模的企业级Kubernetes运维体系，实现高可用、高性能、高安全的生产环境运维

@@ -1,6 +1,57 @@
-# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)
+---
+title: 升级迁移故障排查
+description: '# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)'
+category: troubleshooting
+tags:
+- upgrade
+- migration
+- rollback
+- kubeadm
+- version
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+last_updated: 2026-02
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- K8s 升级失败
+- 版本不兼容
+- 回滚
+- 迁移
+trigger_keywords:
+- 升级迁移故障排查
+- troubleshooting
+k8s_versions:
+- 1.25
+- 1.26
+- 1.27
+- 1.28
+- 1.29
+- 1.3
+- 1.31
+- 1.32
+cross_refs:
+- type: domain
+  path: ../domain-3-control-plane/
+  label: '相关知识域: domain-3-control-plane'
+- type: domain
+  path: ../domain-5-networking/
+  label: '相关知识域: domain-5-networking'
+- type: domain
+  path: ../domain-8-observability/
+  label: '相关知识域: domain-8-observability'
+---
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Upgrade](https://kubernetes.io/docs/tasks/administer-cluster/cluster-upgrade/)
+
+# 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)
 
 ---
 
