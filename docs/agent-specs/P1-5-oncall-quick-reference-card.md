@@ -25,8 +25,12 @@ intent_queries:
 trigger_keywords:
 - On-Call
 - 快速参考卡
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- etcd-basics
+- logging-basics
 ---
-
 
 # On-Call 快速参考卡
 
@@ -199,7 +203,7 @@ trigger_keywords:
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
 | 日志缺失 | `kubectl get pods -n logging` | `kubectl rollout restart daemonset -n logging fluent-bit` (低风险) |
-| Fluentd 不发送 | `kubectl logs -n logging fluentd-* --tail=100` | 检查 output 配置 (Elasticsearch 连接) |
+| [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]] 不发送 | `kubectl logs -n logging fluentd-* --tail=100` | 检查 output 配置 (Elasticsearch 连接) |
 
 > **升级条件**: 所有日志不可用、审计日志缺失
 
@@ -289,6 +293,6 @@ kubectl rollout restart daemonset <name> -n <ns>
 ---
 
 **关联文档**:
-- [topic-skills/README.md](../topic-skills/README.md) — 完整 Skill 文档
+- [domain-10-troubleshooting-diagnostics/topic-skills/README.md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md) — 完整 Skill 文档
 - [P1-4: 决策树 Mermaid 可视化](./P1-4-decision-tree-mermaid-visualization.md)
-- [domain-12-troubleshooting/](../domain-12-troubleshooting/) — 详细故障排查文档
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — 详细故障排查文档

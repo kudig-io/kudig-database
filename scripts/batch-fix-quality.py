@@ -199,6 +199,77 @@ def generate_trigger_keywords(title: str, filepath: Path, content: str) -> list:
     return [k for k in keywords if len(k) >= 2][:8]
 
 
+def generate_prerequisites(filepath: Path, content: str) -> list:
+    """生成 prerequisites 前置知识列表"""
+    prereqs = []
+    path_str = str(filepath).lower()
+    content_lower = content.lower()
+
+    # 通用基础
+    prereqs.append("kubectl-basics")
+
+    # 根据 domain 路径推断
+    domain_mappings = [
+        ("domain-01", "kubernetes-concepts"),
+        ("cluster-fundamentals", "kubernetes-concepts"),
+        ("domain-02", "pod-lifecycle"),
+        ("workloads", "pod-lifecycle"),
+        ("domain-03", "networking-basics"),
+        ("domain-04", "storage-basics"),
+        ("domain-05", "rbac-basics"),
+        ("domain-06", "observability-basics"),
+        ("domain-07", "platform-engineering-basics"),
+        ("domain-08", "gitops-basics"),
+        ("domain-09", "sre-practices"),
+        ("domain-10", "troubleshooting-methodology"),
+        ("domain-11", "gpu-ml-basics"),
+        ("domain-12", "troubleshooting-methodology"),
+        ("domain-17", "cloud-provider-basics"),
+        ("domain-19", "cncf-ecosystem"),
+        ("domain-20", "prometheus-basics"),
+        ("domain-23", "gitops-basics"),
+        ("domain-25", "security-fundamentals"),
+        ("domain-26", "service-mesh-basics"),
+        ("domain-35", "ebpf-basics"),
+        ("domain-36", "platform-engineering-basics"),
+    ]
+    for pattern, prereq in domain_mappings:
+        if pattern in path_str:
+            prereqs.append(prereq)
+
+    # 根据内容关键词推断
+    content_mappings = [
+        ("helm", "helm-basics"),
+        ("istio", "service-mesh-basics"),
+        ("prometheus", "prometheus-basics"),
+        ("grafana", "monitoring-basics"),
+        ("argocd", "gitops-basics"),
+        ("terraform", "iac-basics"),
+        ("ebpf", "ebpf-basics"),
+        ("cilium", "cilium-basics"),
+        ("calico", "cni-basics"),
+        ("etcd", "etcd-basics"),
+        ("kafka", "kafka-basics"),
+        ("redis", "redis-basics"),
+        ("mysql", "mysql-basics"),
+        ("gpu", "gpu-scheduling-basics"),
+        ("cert-manager", "tls-basics"),
+        ("opa", "policy-basics"),
+        ("kyverno", "policy-basics"),
+        ("velero", "backup-basics"),
+        ("fluentd", "logging-basics"),
+        ("loki", "logging-basics"),
+        ("jaeger", "tracing-basics"),
+        ("opentelemetry", "observability-basics"),
+    ]
+    for keyword, prereq in content_mappings:
+        if keyword in content_lower:
+            prereqs.append(prereq)
+
+    # 去重并保持顺序
+    return list(dict.fromkeys(prereqs))
+
+
 def has_yaml_frontmatter(content: str) -> bool:
     """检查是否已有 YAML front matter"""
     return content.lstrip().startswith('---\n') or content.lstrip().startswith('---\r\n')
@@ -284,6 +355,47 @@ def build_frontmatter(filepath: Path, content: str, existing_fm: dict) -> str:
     else:
         fm['trigger_keywords'] = existing_fm['trigger_keywords']
 
+    # prerequisites
+    if not existing_fm.get('prerequisites'):
+        fm['prerequisites'] = generate_prerequisites(filepath, content)
+    else:
+        fm['prerequisites'] = existing_fm['prerequisites']
+
+    # FTA 专用字段
+    relpath = str(filepath)
+    is_fta = 'topic-fta/' in relpath or relpath.endswith('-fta.md')
+    is_skill = 'topic-skills/' in relpath or relpath.endswith('-skill.md')
+
+    if is_fta:
+        if not existing_fm.get('fta_id'):
+            # 从文件名生成 FTA ID, 如 kubeadm-fta.md -> FTA-KUBEADM-001
+            stem = filepath.stem.replace('-fta', '').replace('-', '_').upper()
+            fm['fta_id'] = f"FTA-{stem}-001"
+        if not existing_fm.get('component'):
+            fm['component'] = filepath.stem.replace('-fta', '').replace('-', ' ').title()
+        if not existing_fm.get('severity'):
+            # 基于内容推断严重程度
+            content_lower = content.lower()
+            if any(k in content_lower for k in ['critical', 'p0', '生产事故', '集群不可用', '数据丢失', 'crashloopbackoff']):
+                fm['severity'] = 'critical'
+            elif any(k in content_lower for k in ['high', 'p1', '服务降级', '性能问题', '内存泄漏']):
+                fm['severity'] = 'high'
+            elif any(k in content_lower for k in ['medium', 'p2', '配置错误', '连接超时']):
+                fm['severity'] = 'medium'
+            else:
+                fm['severity'] = 'high'  # 默认 high
+
+    # SKILL 专用字段
+    if is_skill:
+        if not existing_fm.get('skill_id'):
+            # 从文件名生成 SKILL ID
+            stem = filepath.stem.replace('-skill', '').replace('-', '_').upper()
+            fm['skill_id'] = f"SKILL-{stem}-001"
+        if not existing_fm.get('skill_name'):
+            fm['skill_name'] = title
+        if not existing_fm.get('version'):
+            fm['version'] = '1.0.0'
+
     # 保留已有的其他字段
     for key in ['k8s_versions', 'authors', 'cross_refs', 'related_docs', 'prerequisites', 'related_domains', 'related_topics']:
         if key in existing_fm and existing_fm[key]:
@@ -315,9 +427,25 @@ def process_file(filepath: Path, dry_run: bool = False) -> dict:
         existing_fm, body = parse_existing_frontmatter(content)
         # 检查是否有缺失字段
         missing = []
-        for field in ['title', 'description', 'category', 'tags', 'last_updated', 'difficulty', 'reading_level', 'audience', 'estimated_read_time', 'intent_queries', 'trigger_keywords']:
+        base_fields = ['title', 'description', 'category', 'tags', 'last_updated', 'difficulty', 'reading_level', 'audience', 'estimated_read_time', 'intent_queries', 'trigger_keywords', 'prerequisites']
+        for field in base_fields:
             if field not in existing_fm or not existing_fm[field]:
                 missing.append(field)
+
+        # FTA 文件额外字段
+        relpath = str(filepath)
+        is_fta = 'topic-fta/' in relpath or relpath.endswith('-fta.md')
+        is_skill = 'topic-skills/' in relpath or relpath.endswith('-skill.md')
+
+        if is_fta:
+            for field in ['fta_id', 'component', 'severity']:
+                if field not in existing_fm or not existing_fm[field]:
+                    missing.append(field)
+        if is_skill:
+            for field in ['skill_id', 'skill_name', 'version']:
+                if field not in existing_fm or not existing_fm[field]:
+                    missing.append(field)
+
         if not missing:
             return {"file": str(filepath), "status": "skipped", "reason": "complete"}
 

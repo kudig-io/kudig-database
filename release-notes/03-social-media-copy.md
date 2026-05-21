@@ -1,3 +1,28 @@
+---
+title: 发布会社交媒体文案
+description: '**kudig-database v1.0 发布: 3,346 篇 K8s 生产运维知识, 让智能体拥有专家级大脑**'
+category: general
+tags:
+- k8s
+- etcd
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 发布会社交媒体文案 是什么
+- 如何 发布会社交媒体文案
+trigger_keywords:
+- 发布会社交媒体文案
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 发布会社交媒体文案
 
 > 各平台发布文案, 可直接复制使用
@@ -43,7 +68,7 @@ kudig-database v1.0 正式发布 🚀
 
 ### 正文
 
-大家好, 我们做了一件事: 把 Kubernetes 生产运维的完整知识体系, 结构化成了 AI 智能体可以直接使用的语料库。
+大家好, 我们做了一件事: 把 [[entities/kubernetes|kubernetes]] 生产运维的完整知识体系, 结构化成了 AI 智能体可以直接使用的语料库。
 
 **它是什么?**
 

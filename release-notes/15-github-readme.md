@@ -1,3 +1,28 @@
+---
+title: GitHub README 重写方案
+description: '# GitHub README 重写方案'
+category: general
+tags:
+- k8s
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- GitHub README 重写方案 是什么
+- 如何 GitHub README 重写方案
+trigger_keywords:
+- GitHub
+- README
+- 重写方案
+prerequisites:
+- kubectl-basics
+---
+
 # GitHub README 重写方案
 
 > 按 LangChain / Argo CD 级别的顶级开源项目标准重写
@@ -13,7 +38,7 @@
 
 # kudig-database
 
-**The open-source Kubernetes knowledge base built for AI agents.**
+**The open-source [[entities/kubernetes|kubernetes]] knowledge base built for AI agents.**
 **为 AI 智能体打造的开源 Kubernetes 生产运维知识库。**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

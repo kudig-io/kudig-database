@@ -1,6 +1,6 @@
 硬件是云原生基础设施的物理基石——无论 Kubernetes 集群编排多么精妙，一次 CPU MCE 错误、一片内存 ECC 故障或一块 NVMe SSD 的静默失效，都能让整个节点从 Ready 跌入 NotReady。本页是 **domain-31-hardware** 知识域的导览总纲，覆盖从数据中心架构到组件技术原理、再到生产级故障排查的完整知识链路，帮助中阶开发者在"看到 K8s 告警"与"定位到物理硬件根因"之间建立清晰的技术通路。
 
-Sources: [README.md](domain-31-hardware/README.md#L1-L115)
+Sources: [README.md](domain-17-system-foundation/README.md#L1-L115)
 
 ## 知识域全景架构
 
@@ -42,7 +42,7 @@ graph TD
     C7 --> C8
 ```
 
-Sources: [README.md](domain-31-hardware/README.md#L9-L40)
+Sources: [README.md](domain-17-system-foundation/README.md#L9-L40)
 
 ## 硬件基础架构：从数据中心到服务器内部
 
@@ -57,7 +57,7 @@ Sources: [README.md](domain-31-hardware/README.md#L9-L40)
 | Tier III | 99.982% | 1.6 小时 | N+1 冗余 | 大型企业、关键业务 |
 | Tier IV | 99.995% | 0.8 小时 | 2N+1 冗余 | 金融、医疗、政府核心 |
 
-Sources: [01-cloud-hardware-architecture.md](domain-31-hardware/01-cloud-hardware-architecture.md#L9-L35)
+Sources: [01-cloud-hardware-architecture.md](domain-17-system-foundation/01-cloud-hardware-architecture.md#L9-L35)
 
 ### 服务器内部架构与 NUMA 拓扑
 
@@ -65,7 +65,7 @@ Sources: [01-cloud-hardware-architecture.md](domain-31-hardware/01-cloud-hardwar
 
 服务器按物理形态分为**机架式**（1U/2U/4U，平衡密度与扩展性）、**刀片式**（极高密度、共享电源散热）和**塔式**（小规模独立部署）。按应用类型则分为通用计算、HPC/AI 训练（多 GPU）、存储服务器（大容量硬盘位）等。
 
-Sources: [02-server-architecture-principles.md](domain-31-hardware/02-server-architecture-principles.md#L1-L73), [01-cloud-hardware-architecture.md](domain-31-hardware/01-cloud-hardware-architecture.md#L76-L175)
+Sources: [02-server-architecture-principles.md](domain-17-system-foundation/02-server-architecture-principles.md#L1-L73), [01-cloud-hardware-architecture.md](domain-17-system-foundation/01-cloud-hardware-architecture.md#L76-L175)
 
 ## CPU 技术原理：三大架构阵营与微架构深度
 
@@ -85,13 +85,13 @@ Sources: [02-server-architecture-principles.md](domain-31-hardware/02-server-arc
 
 AMD EPYC 的 **Chiplet 设计** 是其核心架构创新：将计算单元（CCD，每 CCD 8 个 Zen 4 核心）与 I/O 单元（IOD）分离制造，通过 Infinity Fabric 高速互联，最多 12 个 CCD 提供 96 核。Intel 则走 **Monolithic + 加速器** 路线，在单芯片内集成 AMX（AI 矩阵加速）、QAT（加密压缩）等专用加速引擎。ARM 阵营以极致能效比和核心密度取胜，AWS Graviton3 比 Graviton2 性能提升 25% 的同时能效提升 60%。
 
-Sources: [03-cpu-technology-deep-dive.md](domain-31-hardware/03-cpu-technology-deep-dive.md#L1-L138)
+Sources: [03-cpu-technology-deep-dive.md](domain-17-system-foundation/03-cpu-technology-deep-dive.md#L1-L138)
 
 ### CPU 微架构与缓存层次
 
 无论哪个厂商，现代 CPU 微架构都遵循**前端（取指/解码）→ 执行引擎（乱序调度/寄存器重命名）→ 后端（加载/存储/重排序/提交）**的三段式流水线。缓存层次呈金字塔结构：L1 I-Cache（32KB/核心，4 周期延迟）→ L1 D-Cache（48KB/核心）→ L2（1.25MB/核心，12 周期）→ L3（30–60MB 共享，40–50 周期）→ 主存 DRAM（80–120ns）。多核间通过 **MESI/MESIF 缓存一致性协议**维护数据一致性，假共享（False Sharing）是常见的性能陷阱。
 
-Sources: [02-server-architecture-principles.md](domain-31-hardware/02-server-architecture-principles.md#L76-L198), [03-cpu-technology-deep-dive.md](domain-31-hardware/03-cpu-technology-deep-dive.md#L140-L200)
+Sources: [02-server-architecture-principles.md](domain-17-system-foundation/02-server-architecture-principles.md#L76-L198), [03-cpu-technology-deep-dive.md](domain-17-system-foundation/03-cpu-technology-deep-dive.md#L140-L200)
 
 ## 内存技术：从 DDR 标准到 ECC 保护
 
@@ -108,7 +108,7 @@ DDR5 相比 DDR4 实现了四项关键架构突破：**双通道架构**（每 D
 
 服务器内存按缓冲方式分为 **UDIMM**（无缓冲，入门级）、**RDIMM**（寄存器缓冲地址/命令，主流服务器，最大 128GB/条）、**LRDIMM**（数据缓冲，高密度，最大 256GB/条）三类。**ECC（Error Correcting Code）** 是服务器内存的标配，SEC-DED（单错纠正双错检测）能纠正 1-bit 错误并检测 2-bit 错误；更高级的 Chipkill/ADDDC 技术可容忍整个 DRAM 芯片失效。DDR5 新增的 On-Die ECC 与系统级 ECC 形成双层保护。
 
-Sources: [05-memory-technology-deep-dive.md](domain-31-hardware/05-memory-technology-deep-dive.md#L1-L200)
+Sources: [05-memory-technology-deep-dive.md](domain-17-system-foundation/05-memory-technology-deep-dive.md#L1-L200)
 
 ## 存储技术：从 HDD 到 NVMe SSD 的介质光谱
 
@@ -128,13 +128,13 @@ Sources: [05-memory-technology-deep-dive.md](domain-31-hardware/05-memory-techno
 
 NAND 闪存按每单元存储位数分为 SLC（1-bit，100K P/E）、MLC（2-bit，10K）、TLC（3-bit，3K）、QLC（4-bit，1K），密度递增但耐久性递减。3D NAND 通过垂直堆叠（当前 232 层，未来 300+ 层）在保持耐久性的同时提升密度。NVMe 协议是闪存存储的里程碑——65535 个队列 × 65535 条命令的并行度（对比 AHCI 仅 1 队列 × 32 命令）、精简的 13 条命令集、MSI-X 每队列独立中断，将存储子系统从 SATA 的 6Gbps 串行瓶颈彻底解放。SSD 控制器内部的 FTL（Flash Translation Layer）负责逻辑到物理地址映射、磨损均衡、垃圾回收和 ECC 纠错。
 
-Sources: [06-storage-hdd-technology.md](domain-31-hardware/06-storage-hdd-technology.md#L1-L100), [07-storage-ssd-technology.md](domain-31-hardware/07-storage-ssd-technology.md#L1-L200)
+Sources: [06-storage-hdd-technology.md](domain-17-system-foundation/06-storage-hdd-technology.md#L1-L100), [07-storage-ssd-technology.md](domain-17-system-foundation/07-storage-ssd-technology.md#L1-L200)
 
 ## 网络硬件：从 25GbE 到 DPU 的技术演进
 
 服务器网络接口已从 1GbE 时代的"基础收发"演进为 SmartNIC/DPU 时代的"可编程卸载"——NVIDIA BlueField-3 DPU 集成 ARM 核心和 400G 带宽，能卸载 TCP/IP、加密、OVS、NVMe-oF 等全部网络/存储/安全处理，将主机 CPU 完全释放给业务负载。**RDMA（Remote Direct Memory Access）** 是高性能网络的核心技术，通过零拷贝和内核旁路实现亚微秒延迟，主流实现包括 InfiniBand（专用网络，<1μs）、RoCE v2（以太网封装 UDP/IP，可路由）和 iWARP（TCP/IP 封装，兼容性好）。在 AI 训练、分布式存储（Ceph/Bluestore）、数据库（Oracle RAC）等场景中，RDMA 已成为标配。数据中心交换机采用 **Spine-Leaf** 架构取代传统三层树，实现任意两点等距、无阻塞、水平扩展。
 
-Sources: [08-network-hardware-technology.md](domain-31-hardware/08-network-hardware-technology.md#L1-L200)
+Sources: [08-network-hardware-technology.md](domain-17-system-foundation/08-network-hardware-technology.md#L1-L200)
 
 ## 硬件故障排查：从方法论到 K8s 场景映射
 
@@ -142,7 +142,7 @@ Sources: [08-network-hardware-technology.md](domain-31-hardware/08-network-hardw
 
 硬件故障排查遵循**信息收集 → 现象分析 → 假设验证 → 故障定位 → 故障修复 → 复盘总结**的六步闭环。故障按影响程度分为 Critical（系统无法启动/完全宕机）、Major（性能严重下降/部分功能丧失）、Minor（冗余组件失效/可降级运行）；按表现分为硬性故障（完全失效、可复现）、软性故障（间歇性、难复现）和降级故障（功能可用但性能下降）。诊断决策树从"能否上电 → 能否 POST → 能否启动 OS → 系统是否稳定"逐层缩小故障范围。
 
-Sources: [10-hardware-troubleshooting-methodology.md](domain-31-hardware/10-hardware-troubleshooting-methodology.md#L1-L200)
+Sources: [10-hardware-troubleshooting-methodology.md](domain-17-system-foundation/10-hardware-troubleshooting-methodology.md#L1-L200)
 
 ### 关键诊断命令速查
 
@@ -172,7 +172,7 @@ ipmitool sensor                   # 全部传感器（温度/电压/风扇/功�
 ipmitool sel elist                # 系统事件日志
 ```
 
-Sources: [README.md](domain-31-hardware/README.md#L78-L102)
+Sources: [README.md](domain-17-system-foundation/README.md#L78-L102)
 
 ### 硬件故障 → Kubernetes 症状映射
 
@@ -189,7 +189,7 @@ Sources: [README.md](domain-31-hardware/README.md#L78-L102)
 | 电源故障 | Node 突然消失、etcd 集群选举 | 无日志（直接断电） |
 | 散热故障 | CPU throttling、调度延迟增加 | `thermal_zone: critical` |
 
-Sources: [16-kubernetes-hardware-troubleshooting.md](domain-31-hardware/16-kubernetes-hardware-troubleshooting.md#L1-L91)
+Sources: [16-kubernetes-hardware-troubleshooting.md](domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md#L1-L91)
 
 ### CPU 与内存故障排查要点
 
@@ -197,7 +197,7 @@ Sources: [16-kubernetes-hardware-troubleshooting.md](domain-31-hardware/16-kuber
 
 **内存故障** 通过 `edac-util` 和 `dmidecode -t memory` 定位到具体 DIMM 槽位。ECC 可纠正错误（CE）频繁出现是 DIMM 老化预警，不可纠正错误（UCE）则通常导致 kernel panic。内存诊断脚本可自动化 CE/UCE 计数、定位故障 DIMM、关联 NUMA 节点。
 
-Sources: [11-cpu-memory-troubleshooting.md](domain-31-hardware/11-cpu-memory-troubleshooting.md#L1-L200)
+Sources: [11-cpu-memory-troubleshooting.md](domain-17-system-foundation/11-cpu-memory-troubleshooting.md#L1-L200)
 
 ### 存储设备故障排查要点
 
@@ -205,42 +205,42 @@ Sources: [11-cpu-memory-troubleshooting.md](domain-31-hardware/11-cpu-memory-tro
 
 **SSD/NVMe 故障** 侧重于写入寿命（`Percentage Used` / `TBW`）、备用空间（`Available_Spare`）和温度。NVMe 设备通过 `nvme smart-log` 获取健康状态，关注 `critical_warning` 位、`media_and_data_integrity_errors`、`available_spare_threshold` 等字段。RAID 控制器故障则通过 `storcli64` 检查阵列状态、电池/电容健康度和重建进度。
 
-Sources: [12-storage-troubleshooting.md](domain-31-hardware/12-storage-troubleshooting.md#L1-L200)
+Sources: [12-storage-troubleshooting.md](domain-17-system-foundation/12-storage-troubleshooting.md#L1-L200)
 
 ### PLEG 故障与硬件关联
 
 **PLEG（Pod Lifecycle Event Generator）** 是 kubelet 的核心组件，其 "not healthy" 状态与硬件强相关——PLEG 依赖容器运行时（containerd）的及时响应，而磁盘 I/O 延迟（`await > 50ms`）、内存压力（使用率 > 90% + swap 活动）、CPU throttling 或 ECC 错误累积都会导致 PLEG 超时。诊断脚本需同时检查 `journalctl -u kubelet` 中的 PLEG 日志、`iostat -x` 磁盘延迟、`vmstat` 内存压力和 CPU 热节流计数器。
 
-Sources: [16-kubernetes-hardware-troubleshooting.md](domain-31-hardware/16-kubernetes-hardware-troubleshooting.md#L92-L199)
+Sources: [16-kubernetes-hardware-troubleshooting.md](domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md#L92-L199)
 
 ### 实战案例：CPU MCE 导致 Node 随机 NotReady
 
 案例库收录了 11 个生产环境真实故障。以 CASE-001 为例：生产集群 `node-worker-07` 在 Ready/NotReady 间反复切换，kubelet 心跳超时。排查路径为 `kubectl describe node` → SSH 检查 kubelet → `dmesg` 发现 `mce: CPU 12 BANK 4` → `mcelog --client` 解析为内存控制器不可纠正错误 → `ipmitool sel elist` 确认 CPU Machine Check 事件 → 交叉测试（DIMM 互换）确认故障跟随 CPU 而非 DIMM → 更换 CPU 2。复盘结论：部署 `mcelog` 监控 + Prometheus `node_edac` 指标采集 + MCE 错误数 > 0 即告警。
 
-Sources: [18-hardware-failure-case-studies.md](domain-31-hardware/18-hardware-failure-case-studies.md#L1-L200)
+Sources: [18-hardware-failure-case-studies.md](domain-17-system-foundation/18-hardware-failure-case-studies.md#L1-L200)
 
 ## 硬件厂商生态与选型参考
 
 服务器整机市场由 Dell（~18% 份额）、HPE（~15%）、联想（~8%）、浪潮（~10%，AI 服务器领先）、华为（~5%，鲲鹏生态）等主导。CPU 方面 Intel 仍占约 70% 份额，AMD EPYC 凭借核心数优势快速追赶至 ~20%，ARM 阵营在云服务商自研芯片（AWS Graviton、阿里倚天）中增长迅猛。内存市场由三星（~45%）、SK 海力士（~30%）、美光（~25%）三分天下。国产 CPU 生态包括龙芯（自主架构）、兆芯（x86 兼容）、飞腾（ARM）、海光（x86 兼容），在政企和自主可控场景中占有一席之地。
 
-Sources: [09-hardware-vendors-ecosystem.md](domain-31-hardware/09-hardware-vendors-ecosystem.md#L1-L100)
+Sources: [09-hardware-vendors-ecosystem.md](domain-17-system-foundation/09-hardware-vendors-ecosystem.md#L1-L100)
 
 ## 推荐阅读路径
 
 本知识域的 18 篇文档可按以下路径渐进阅读，每条路径针对不同的学习目标：
 
 **路径一：K8s 运维工程师（硬件故障速查优先）**
-1. [10 硬件故障排查方法论](domain-31-hardware/10-hardware-troubleshooting-methodology.md) → 建立系统化诊断思维
-2. [16 K8s 硬件故障专题](domain-31-hardware/16-kubernetes-hardware-troubleshooting.md) → 掌握硬件→K8s 症状映射
-3. [17 硬件错误码速查大全](domain-31-hardware/17-hardware-error-codes-reference.md) → 快速解码 MCE/SMART/IPMI 错误
-4. [18 硬件故障实战案例库](domain-31-hardware/18-hardware-failure-case-studies.md) → 通过真实案例积累经验
+1. [10 硬件故障排查方法论](domain-17-system-foundation/10-hardware-troubleshooting-methodology.md) → 建立系统化诊断思维
+2. [16 K8s 硬件故障专题](domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md) → 掌握硬件→K8s 症状映射
+3. [17 硬件错误码速查大全](domain-17-system-foundation/17-hardware-error-codes-reference.md) → 快速解码 MCE/SMART/IPMI 错误
+4. [18 硬件故障实战案例库](domain-17-system-foundation/18-hardware-failure-case-studies.md) → 通过真实案例积累经验
 
 **路径二：系统架构师（硬件选型与性能优化）**
-1. [01 云平台硬件基础架构](domain-31-hardware/01-cloud-hardware-architecture.md) → 数据中心 Tier 等级与电力散热设计
-2. [02 服务器架构原理](domain-31-hardware/02-server-architecture-principles.md) → NUMA 拓扑与 PCIe 总线
-3. [03 CPU 技术深度解析](domain-31-hardware/03-cpu-technology-deep-dive.md) + [05 内存技术深度解析](domain-31-hardware/05-memory-technology-deep-dive.md) → CPU/内存选型
-4. [07 SSD 固态硬盘技术](domain-31-hardware/07-storage-ssd-technology.md) + [08 网络硬件技术](domain-31-hardware/08-network-hardware-technology.md) → 存储/网络硬件选型
-5. [09 硬件厂商生态](domain-31-hardware/09-hardware-vendors-ecosystem.md) → 厂商对比与供应链决策
+1. [01 云平台硬件基础架构](domain-17-system-foundation/01-cloud-hardware-architecture.md) → 数据中心 Tier 等级与电力散热设计
+2. [02 服务器架构原理](domain-17-system-foundation/02-server-architecture-principles.md) → NUMA 拓扑与 PCIe 总线
+3. [03 CPU 技术深度解析](domain-17-system-foundation/03-cpu-technology-deep-dive.md) + [05 内存技术深度解析](domain-17-system-foundation/05-memory-technology-deep-dive.md) → CPU/内存选型
+4. [07 SSD 固态硬盘技术](domain-17-system-foundation/07-storage-ssd-technology.md) + [08 网络硬件技术](domain-17-system-foundation/08-network-hardware-technology.md) → 存储/网络硬件选型
+5. [09 硬件厂商生态](domain-17-system-foundation/09-hardware-vendors-ecosystem.md) → 厂商对比与供应链决策
 
 **路径三：全面深入学习（自顶向下完整覆盖）**
 按编号 01→18 顺序阅读，每篇约 30–60 分钟，总计约 15 小时完成全部知识域。

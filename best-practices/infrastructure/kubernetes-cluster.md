@@ -7,6 +7,12 @@ tags:
 - cluster
 - configuration
 - production
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- calico
+- containerd
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -24,13 +30,17 @@ trigger_keywords:
 - 集群配置
 - 生产环境
 - 高可用
+prerequisites:
+- kubectl-basics
+- cni-basics
+- etcd-basics
 cross_refs:
 - type: domain
-  path: ../../domain-9-platform-ops/
-  label: '平台运维知识域'
+  path: ../../domain-07-platform-engineering/
+  label: 平台运维知识域
 - type: domain
-  path: ../../domain-3-control-plane/
-  label: '控制平面知识域'
+  path: ../../domain-01-cluster-fundamentals/
+  label: 控制平面知识域
 ---
 
 # Kubernetes 集群配置最佳实践

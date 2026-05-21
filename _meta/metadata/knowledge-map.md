@@ -1,0 +1,153 @@
+---
+title: 知识图谱 (Knowledge Map)
+description: 'description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]'
+category: general
+tags:
+- meta
+- docker
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 知识图谱 (Knowledge Map) 是什么
+- 如何 知识图谱 (Knowledge Map)
+trigger_keywords:
+- 知识图谱
+- Knowledge
+- Map
+prerequisites:
+- kubectl-basics
+---
+
+title: 知识图谱 (Knowledge Map)
+description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
+category: general
+tags:
+- k8s
+- docker
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 知识图谱 (Knowledge Map) 是什么
+- 如何 知识图谱 (Knowledge Map)
+trigger_keywords:
+- 知识图谱
+- Knowledge
+- Map
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+sources: []
+created: '2026-05-21'
+updated: '2026-05-21'
+---
+# 知识图谱 (Knowledge Map)
+
+> 知识模块间的依赖关系和学习路径
+
+---
+
+## 核心知识图谱
+
+```mermaid
+graph TD
+    LINUX[domain-17-system-foundation Linux] --> DOCKER[domain-13-container-runtime Docker]
+    NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
+    STORE_FUND[domain-04-storage-data 存储基础] --> K8S_STORE[domain-04-storage-data K8s 存储]
+    
+    DOCKER --> ARCH[domain-01-cluster-fundamentals 架构基础]
+    ARCH --> DESIGN[domain-01-cluster-fundamentals 设计原理]
+    DESIGN --> CTRL[domain-01-cluster-fundamentals 控制平面]
+    
+    CTRL --> WORKLOAD[domain-02-workloads-applications 工作负载]
+    CTRL --> K8S_NET
+    CTRL --> K8S_STORE
+    CTRL --> SEC[domain-05-security-compliance 安全合规]
+    
+    WORKLOAD --> OBS[domain-06-observability 可观测性]
+    K8S_NET --> OBS
+    SEC --> OBS
+    
+    OBS --> PLAT[domain-07-platform-engineering 平台运维]
+    PLAT --> EXT[domain-15-specialized-tech 扩展生态]
+    
+    PLAT --> TS[domain-10-troubleshooting-diagnostics 故障排查]
+    OBS --> TS
+    
+    EXT --> AI[domain-14-ai-ml-infra AI 基础设施]
+```
+
+---
+
+## 方法论关系
+
+```mermaid
+graph LR
+    FTA[topic-fta FTA 故障树] --> |推理骨架| SKILLS[topic-skills 运维技能]
+    FEBM[topic-febm FEBM 取证] --> |证据方法| SKILLS
+    FTA --> |演绎法| TS[故障排查]
+    FEBM --> |归纳法| TS
+    TS12[domain-10-troubleshooting-diagnostics] --> TS
+    STS[topic-structural] --> TS
+    SKILLS --> |自动化| AGENT[topic-ai-agent]
+```
+
+---
+
+## 学习路径
+
+```mermaid
+graph LR
+    W1[Week 1 基础] --> W2[Week 2 核心]
+    W2 --> W3[Week 3 运维]
+    W3 --> W4[Week 4 进阶]
+    
+    W1 --- L1[Linux + Docker + 架构]
+    W2 --- L2[控制平面 + 网络 + 存储]
+    W3 --- L3[安全 + 可观测 + 排障]
+    W4 --- L4[GitOps + FTA + 最佳实践]
+```
+
+---
+
+## 模块间依赖矩阵
+
+| 模块 | 前置依赖 | 推荐后续 |
+|:---|:---|:---|
+| domain-01-cluster-fundamentals 架构 | domain-13-container-runtime Docker | domain-01-cluster-fundamentals 设计原理 |
+| domain-01-cluster-fundamentals 设计 | domain-01-cluster-fundamentals 架构 | domain-01-cluster-fundamentals 控制平面 |
+| domain-01-cluster-fundamentals 控制平面 | domain-01-cluster-fundamentals 设计 | domain-02-workloads-applications/5/6/7 |
+| domain-03-networking-traffic 网络 | domain-03-networking-traffic 网络基础 | domain-10-troubleshooting-diagnostics 排障 |
+| domain-04-storage-data 存储 | domain-04-storage-data 存储基础 | domain-10-troubleshooting-diagnostics 排障 |
+| domain-06-observability 可观测 | domain-01-cluster-fundamentals/4/5 | domain-07-platform-engineering 平台运维 |
+| domain-14-ai-ml-infra AI | domain-02-workloads-applications 工作负载 | topic-ai-agent |
+| domain-10-troubleshooting-diagnostics 排障 | domain-1~8 任一 | domain-10-troubleshooting-diagnostics/topic-fta/skills |
+| topic-fta | domain-10-troubleshooting-diagnostics 排障基础 | topic-skills |
+| topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | topic-ai-agent |
+
+---
+
+## Obsidian 相关文档
+
+- [[metadata/difficulty-index.md|难度分级索引 (Difficulty Index)]]
+- [[metadata/README.md|元数据索引 (Metadata)]]
+- [[metadata/tags-index.md|标签索引 (Tags Index)]]
+
+## Related
+
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

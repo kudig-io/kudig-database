@@ -26,15 +26,18 @@ trigger_keywords:
 - 安全事件
 - SOP
 - 与合规检查清单
+prerequisites:
+- kubectl-basics
+- policy-basics
+- backup-basics
 ---
-
 
 # 安全事件 SOP 与合规检查清单
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: 容器逃逸检测、密钥轮换自动化、合规审计检查清单
-> **关联**: SKILL-SECURITY-001, domain-25-cloud-native-security
+> **关联**: SKILL-SECURITY-001, domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]
 
 ---
 
@@ -409,6 +412,6 @@ spec:
 ---
 
 **关联文档**:
-- [topic-skills/18-security-incident-response.md](../topic-skills/18-security-incident-response.md) — 安全事件 Skill
-- [domain-25-cloud-native-security/](../domain-25-cloud-native-security/) — 云原生安全
+- [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](../domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md) — 安全事件 Skill
+- [domain-05-security-compliance/](../domain-05-security-compliance/) — 云原生安全
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)

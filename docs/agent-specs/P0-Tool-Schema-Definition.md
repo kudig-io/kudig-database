@@ -27,8 +27,12 @@ trigger_keywords:
 - Tool
 - Schema
 - 定义文档
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- tls-basics
+- policy-basics
 ---
-
 
 # Agent Tool Schema 定义文档
 
@@ -1243,7 +1247,7 @@ tool:
 ```yaml
 tool:
   name: kubectl_get_certificate
-  description: 获取 Certificate 状态（cert-manager）
+  description: 获取 Certificate 状态（[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]）
   category: CONFIGURATION
   
   parameters:

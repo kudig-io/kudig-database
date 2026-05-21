@@ -1,3 +1,28 @@
+---
+title: 观众互动设计
+description: '# 观众互动设计'
+category: general
+tags:
+- k8s
+- etcd
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 观众互动设计 是什么
+- 如何 观众互动设计
+trigger_keywords:
+- 观众互动设计
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 观众互动设计
 
 > **目标**: 让观众从「听」变为「参与」, 提升发布会记忆点和后续转化
@@ -84,7 +109,7 @@
 
 | 奖品 | 数量 | 获取方式 | 成本/份 |
 |------|------|----------|---------|
-| 《Kubernetes in Action》(第二版) | 5 本 | 投票参与者抽奖 | ¥120 |
+| 《[[entities/kubernetes|kubernetes]] in Action》(第二版) | 5 本 | 投票参与者抽奖 | ¥120 |
 | kudig 定制贴纸套装 | 50 份 | 现场扫码体验者 | ¥15 |
 | kudig 定制 T 恤 | 10 件 | 提问互动者 | ¥80 |
 | Agent Pro 3 个月试用额度 | 20 份 | 问卷填写者 | ¥0 (虚拟) |

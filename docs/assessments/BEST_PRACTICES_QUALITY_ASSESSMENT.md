@@ -1,3 +1,27 @@
+---
+title: 最佳实践内容质量评估总结报告
+description: '# 最佳实践内容质量评估总结报告'
+category: general
+tags:
+- k8s
+- ebpf
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 最佳实践内容质量评估总结报告 是什么
+- 如何 最佳实践内容质量评估总结报告
+trigger_keywords:
+- 最佳实践内容质量评估总结报告
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+---
+
 # 最佳实践内容质量评估总结报告
 
 ## 评估概述
@@ -43,9 +67,9 @@
 10. domain-33-kubernetes-events: 17文件, 83次
 
 **出现频率最高的文件**：
-1. topic-dictionary/operations/operations-best-practices.md (52次, 96KB)
-2. topic-dictionary/operations/sre-maturity-model.md (29次, 84KB)
-3. topic-dictionary/operations/performance-tuning-expert.md (27次, 86KB)
+1. domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md (52次, 96KB)
+2. domain-17-system-foundation/topic-dictionary/operations/sre-maturity-model.md (29次, 84KB)
+3. domain-17-system-foundation/topic-dictionary/operations/performance-tuning-expert.md (27次, 86KB)
 
 ## 质量优势
 
@@ -89,7 +113,7 @@
 
 ### 4. 部分内容较浅
 - **问题**：部分领域的最佳实践内容较浅，缺乏具体实施步骤
-- **示例**：domain-9-platform-ops/01-platform-ops-overview.md 最佳实践原则过于简短
+- **示例**：domain-07-platform-engineering/01-platform-ops-overview.md 最佳实践原则过于简短
 - **影响**：可操作性不足，用户难以实施
 - **建议**：深化内容，提供具体实施步骤和示例
 
@@ -113,7 +137,7 @@
 
 ### 2. 创建最佳实践索引
 
-**已创建索引**：`best-practices/README.md`
+**已创建索引**：`best-practices/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md`
 
 **索引内容**：
 - 分类清晰的最佳实践列表

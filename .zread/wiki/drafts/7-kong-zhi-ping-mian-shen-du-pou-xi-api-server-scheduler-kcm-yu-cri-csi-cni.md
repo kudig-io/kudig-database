@@ -1,6 +1,6 @@
 Kubernetes 控制平面是整个集群的"大脑"——它不仅承载着所有状态决策、资源编排与策略执行的逻辑，还通过标准化的接口（CRI/CSI/CNI）将容器运行时、存储后端与网络插件优雅地解耦。本文将从**架构第一性原理**出发，逐层拆解控制平面四大核心组件（kube-apiserver、kube-scheduler、kube-controller-manager、cloud-controller-manager）以及三大扩展接口（CRI、CSI、CNI）的内部工作机制、请求处理流水线、性能调优参数与生产级故障排查策略。无论你是在优化大规模集群的调度延迟，还是在开发自定义 CSI 驱动或 Admission Webhook，这篇文章都为你提供可直接落地的技术参照。
 
-Sources: [02-plane-components-interaction.md](domain-3-control-plane/02-plane-components-interaction.md#L1-L16), [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L1-L20), [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L1-L16)
+Sources: [02-plane-components-interaction.md](domain-01-cluster-fundamentals/02-plane-components-interaction.md#L1-L16), [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L1-L20), [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L1-L16)
 
 ## 架构总览：控制平面的分层协作模型
 
@@ -55,7 +55,7 @@ graph TB
 
 **关键设计原则**：控制平面组件遵循**水平触发（Level-Triggered）**而非边缘触发——即基于当前状态与期望状态的差异持续协调，而非依赖单次事件。这意味着即使 Watch 事件丢失，Informer 的 Resync 机制也能确保控制器最终观察到正确的状态。
 
-Sources: [02-plane-components-interaction.md](domain-3-control-plane/02-plane-components-interaction.md#L20-L73), [01-plane-architecture-overview.md](domain-3-control-plane/01-plane-architecture-overview.md#L1-L5)
+Sources: [02-plane-components-interaction.md](domain-01-cluster-fundamentals/02-plane-components-interaction.md#L20-L73), [01-plane-architecture-overview.md](domain-01-cluster-fundamentals/01-plane-architecture-overview.md#L1-L5)
 
 ### 组件间通信协议栈
 
@@ -68,7 +68,7 @@ Sources: [02-plane-components-interaction.md](domain-3-control-plane/02-plane-co
 | Kubelet → CSI Driver | gRPC (Unix Socket) | 存储卷操作 | CSI 规范 |
 | Container Runtime → CNI | 可执行文件调用 | 网络配置 | 环境变量 + stdin JSON |
 
-Sources: [02-plane-components-interaction.md](domain-3-control-plane/02-plane-components-interaction.md#L64-L73)
+Sources: [02-plane-components-interaction.md](domain-01-cluster-fundamentals/02-plane-components-interaction.md#L64-L73)
 
 ## kube-apiserver：集群的 API 网关与状态仲裁者
 
@@ -102,7 +102,7 @@ flowchart TD
 
 **第四层（准入控制）**是请求修改和验证的最后一道关卡，分为 Mutating（先执行，可修改对象）和 Validating（后执行，只能接受或拒绝）两个阶段。`MutatingAdmissionWebhook` 和 `ValidatingAdmissionWebhook` 允许你通过外部 HTTP 服务扩展准入逻辑。
 
-Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L21-L53), [02-plane-components-interaction.md](domain-3-control-plane/02-plane-components-interaction.md#L98-L248)
+Sources: [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L21-L53), [02-plane-components-interaction.md](domain-01-cluster-fundamentals/02-plane-components-interaction.md#L98-L248)
 
 ### 认证方式对比与选型
 
@@ -116,7 +116,7 @@ Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-di
 
 生产环境的认证选型建议：**人类用户统一走 OIDC**（如 Okta、Azure AD、阿里云 RAM），**组件间通信使用 X509 证书**，**Pod 内应用使用 ServiceAccount Token**。避免使用 Static Bearer Token，因为它无法动态轮换。
 
-Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L72-L168)
+Sources: [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L72-L168)
 
 ### API Priority and Fairness（APF）：请求限流的精细控制
 
@@ -135,7 +135,7 @@ APF 由两个核心资源组成：**FlowSchema**（将请求分类到优先级�
 
 当 APF 判定请求超限时，请求不会被直接丢弃，而是进入**排队等待**（Queue 模式）或被**立即拒绝**（Reject 模式）。你可以通过 `kubectl get --raw /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations` 查看当前配置。
 
-Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L361-L427), [18-api-priority-fairness.md](domain-3-control-plane/18-api-priority-fairness.md#L1-L5)
+Sources: [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L361-L427), [18-api-priority-fairness.md](domain-01-cluster-fundamentals/18-api-priority-fairness.md#L1-L5)
 
 ### API Server 关键配置参数
 
@@ -151,7 +151,7 @@ Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-di
 
 **生产环境必做**：禁用匿名访问（`--anonymous-auth=false`）、启用审计日志、配置 `NodeRestriction` 准入控制器限制 kubelet 权限范围。
 
-Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L431-L473)
+Sources: [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L431-L473)
 
 ## kube-scheduler：Pod 的智能调度决策引擎
 
@@ -187,7 +187,7 @@ flowchart TD
 
 **三队列模型**是调度器管理待调度 Pod 的核心机制：**ActiveQ**（优先级堆，待调度的活跃 Pod）、**BackoffQ**（退避队列，调度失败后指数退避重试）、**UnschedulablePods**（不可调度 Pod 映射，当集群状态变化时重新入队 ActiveQ）。
 
-Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L31-L103), [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L107-L225)
+Sources: [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L31-L103), [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L107-L225)
 
 ### Filter 与 Score 插件矩阵
 
@@ -201,7 +201,7 @@ Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-schedul
 | **ImageLocality** | Score | 节点已有镜像 → 得分更高 | 减少镜像拉取时间 |
 | **InterPodAffinity** | Filter + Score | Pod 间亲和/反亲和 | 复杂度 O(N×M)，大规模集群需关注 |
 
-Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L342-L421)
+Sources: [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L342-L421)
 
 ### 资源分配评分策略对比
 
@@ -216,7 +216,7 @@ Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-schedul
 
 实际生产中，**LeastAllocated 是最安全的默认选择**。如果你在公有云上追求极致成本优化，可以切换到 MostAllocated，但需要配合 Cluster Autoscaler 来缩容空闲节点。
 
-Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L532-L591)
+Sources: [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L532-L591)
 
 ### 优先级与抢占机制
 
@@ -235,7 +235,7 @@ description: "关键在线服务，可抢占批处理任务"
 
 **PDB（PodDisruptionBudget）与抢占的交互**是生产环境必须理解的关键点：抢占会尊重 PDB 约束——如果驱逐某个 Pod 会违反 PDB，调度器会尝试其他候选。只有当所有候选方案都违反 PDB 时，抢占才会失败。
 
-Sources: [20-kube-scheduler-deep-dive.md](domain-3-control-plane/20-kube-scheduler-deep-dive.md#L628-L752)
+Sources: [20-kube-scheduler-deep-dive.md](domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md#L628-L752)
 
 ## kube-controller-manager（KCM）：声明式协调的执行引擎
 
@@ -261,7 +261,7 @@ KCM 是 40+ 内置控制器的集合体，每个控制器遵循统一的**控制
 | | ResourceQuotaController | ResourceQuota | 配额使用量统计 |
 | | GarbageCollectorController | 所有资源 | 级联删除（Owner References） |
 
-Sources: [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L91-L151)
+Sources: [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L91-L151)
 
 ### Informer + WorkQueue：控制器的核心运行时
 
@@ -301,7 +301,7 @@ flowchart LR
     worker -->|Update Status| watch
 ```
 
-Sources: [02-plane-components-interaction.md](domain-3-control-plane/02-plane-components-interaction.md#L313-L398), [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L60-L87)
+Sources: [02-plane-components-interaction.md](domain-01-cluster-fundamentals/02-plane-components-interaction.md#L313-L398), [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L60-L87)
 
 ### Leader Election：多实例高可用的协同机制
 
@@ -316,7 +316,7 @@ KCM 的多实例部署依赖 **Lease API** 实现 Leader 选举。同一时刻�
 
 Leader 在 `renew-deadline` 内周期性续约 Lease。如果续约失败（如网络分区），Lease 在 `lease-duration` 后过期，其他实例开始竞选。这个时间窗口意味着在最坏情况下，控制平面可能有长达 15 秒的不可用窗口——对于 Node 心跳超时（40s）来说在可接受范围内。
 
-Sources: [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L363-L421)
+Sources: [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L363-L421)
 
 ### KCM 性能调优参数
 
@@ -327,7 +327,7 @@ Sources: [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kub
 | 500-1000 节点 | 2-4 核 | 2-4GB | 100-200 | 200-400 | `concurrent-gc-syncs=30` |
 | >1000 节点 | 4-8 核 | 4-8GB | 200-500 | 400-1000 | 全面调高并发参数 |
 
-Sources: [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L289-L359)
+Sources: [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L289-L359)
 
 ## cloud-controller-manager（CCM）：Kubernetes 与云平台的桥梁
 
@@ -343,7 +343,7 @@ CCM 将原本耦合在 KCM 中的云特定逻辑抽取为独立组件，实现�
 
 CCM 的 Node Controller 在新节点注册时会自动添加 `node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule` 污点，阻止 Pod 调度到尚未完成云初始化的节点上。初始化完成后移除该污点，并注入 `topology.kubernetes.io/zone`、`topology.kubernetes.io/region` 等拓扑标签。
 
-Sources: [14-cloud-controller-manager-deep-dive.md](domain-3-control-plane/14-cloud-controller-manager-deep-dive.md#L26-L150)
+Sources: [14-cloud-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/14-cloud-controller-manager-deep-dive.md#L26-L150)
 
 ## CRI：容器运行时接口——从 kubelet 到 OCI 的标准化桥梁
 
@@ -401,7 +401,7 @@ CRI 定义了两大 gRPC 服务：**RuntimeService**（Sandbox + 容器生命周
 
 **Pod 创建的完整调用链**：kubelet Watch 到 Pod → `RunPodSandbox()`（创建 pause 容器 + 调用 CNI 配置网络） → `PullImage()`（如需拉取） → `CreateContainer()`（生成 OCI spec） → `StartContainer()`（调用 runc 创建进程）。
 
-Sources: [21-container-runtime-deep-dive.md](domain-3-control-plane/21-container-runtime-deep-dive.md#L19-L300)
+Sources: [21-container-runtime-deep-dive.md](domain-01-cluster-fundamentals/21-container-runtime-deep-dive.md#L19-L300)
 
 ### containerd vs CRI-O：运行时选型
 
@@ -416,7 +416,7 @@ Sources: [21-container-runtime-deep-dive.md](domain-3-control-plane/21-container
 
 **dockershim 废弃**是 Kubernetes 运行时演进的重要里程碑：v1.20（2020.12）发布废弃警告 → v1.24（2022.05）完全移除 → v1.27+ 仅支持 CRI 兼容运行时。**Docker 构建的镜像仍然完全兼容**，因为 OCI 镜像格式是通用的——变化的是运行时（不再经过 dockerd），而不是镜像格式。
 
-Sources: [21-container-runtime-deep-dive.md](domain-3-control-plane/21-container-runtime-deep-dive.md#L179-L191)
+Sources: [21-container-runtime-deep-dive.md](domain-01-cluster-fundamentals/21-container-runtime-deep-dive.md#L179-L191)
 
 ## CSI：容器存储接口——解耦存储后端的 gRPC 规范
 
@@ -475,7 +475,7 @@ flowchart TB
 
 **卷挂载的两阶段设计**（Stage + Publish）是为了支持**多 Pod 共享同一个卷**的场景：Stage 将卷挂载到节点的全局路径（只执行一次），Publish 将全局路径 bind-mount 到 Pod 的目录（每个 Pod 各一次）。
 
-Sources: [22-container-storage-deep-dive.md](domain-3-control-plane/22-container-storage-deep-dive.md#L18-L237)
+Sources: [22-container-storage-deep-dive.md](domain-01-cluster-fundamentals/22-container-storage-deep-dive.md#L18-L237)
 
 ### CSI 访问模式与卷模式
 
@@ -488,7 +488,7 @@ Sources: [22-container-storage-deep-dive.md](domain-3-control-plane/22-container
 
 卷模式（`volumeMode`）决定存储以**文件系统**（Filesystem，默认）还是**原始块设备**（Block）方式暴露给 Pod。数据库等高性能场景常使用 Block 模式，跳过文件系统层直接操作块设备。
 
-Sources: [22-container-storage-deep-dive.md](domain-3-control-plane/22-container-storage-deep-dive.md#L239-L300)
+Sources: [22-container-storage-deep-dive.md](domain-01-cluster-fundamentals/22-container-storage-deep-dive.md#L239-L300)
 
 ## CNI：容器网络接口——Pod 网络的标准化配置
 
@@ -530,7 +530,7 @@ sequenceDiagram
 
 **Cilium 已成为 CNCF 毕业项目**，其 eBPF 数据平面在性能、可观测性和安全性方面全面超越 iptables 方案。新项目建议直接选择 Cilium。
 
-Sources: [23-container-network-deep-dive.md](domain-3-control-plane/23-container-network-deep-dive.md#L1-L110), [23-container-network-deep-dive.md](domain-3-control-plane/23-container-network-deep-dive.md#L284-L333)
+Sources: [23-container-network-deep-dive.md](domain-01-cluster-fundamentals/23-container-network-deep-dive.md#L1-L110), [23-container-network-deep-dive.md](domain-01-cluster-fundamentals/23-container-network-deep-dive.md#L284-L333)
 
 ## 生产级监控与故障排查
 
@@ -583,7 +583,7 @@ kubectl exec <pod> -- ip addr show eth0
 kubectl exec <pod> -- ip route
 ```
 
-Sources: [12-apiserver-deep-dive.md](domain-3-control-plane/12-apiserver-deep-dive.md#L574-L647), [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L425-L497), [13-kube-controller-manager-deep-dive.md](domain-3-control-plane/13-kube-controller-manager-deep-dive.md#L501-L564)
+Sources: [12-apiserver-deep-dive.md](domain-01-cluster-fundamentals/12-apiserver-deep-dive.md#L574-L647), [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L425-L497), [13-kube-controller-manager-deep-dive.md](domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md#L501-L564)
 
 ## 延伸阅读
 

@@ -1,3 +1,34 @@
+---
+title: kudig-database 60 秒预告片脚本
+description: '| 画面 | 分屏画面: 左侧是凌晨亮着的电脑屏幕 (运维工位), 右侧是密密麻麻的浏览器标签页 (搜索 K8s 文档) |'
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- istio
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 60 秒预告片脚本 是什么
+- 如何 kudig-database 60 秒预告片脚本
+trigger_keywords:
+- kudig-database
+- '60'
+- 秒预告片脚本
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- prometheus-basics
+- etcd-basics
+---
+
 # kudig-database 60 秒预告片脚本
 
 > **总时长**: 60 秒
@@ -28,7 +59,7 @@
 | 旁白 | "凌晨三点, 线上告警。翻遍文档, 找不到答案。" |
 | 字幕 | 凌晨三点 · 线上告警 |
 | 音效 | 键盘敲击声, 低沉的电子氛围音 |
-| AI 提示词 | Split screen: left side shows a dimly lit desk with laptop showing red alerts at 3AM, right side shows dozens of browser tabs with Kubernetes documentation, dark cinematic lighting, photorealistic |
+| AI 提示词 | Split screen: left side shows a dimly lit desk with laptop showing red alerts at 3AM, right side shows dozens of browser tabs with [[entities/kubernetes|kubernetes]] documentation, dark cinematic lighting, photorealistic |
 
 ---
 

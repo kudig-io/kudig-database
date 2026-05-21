@@ -18,8 +18,9 @@ trigger_keywords:
 - 知识图谱
 - RDF
 - 模型定义
+prerequisites:
+- kubectl-basics
 ---
-
 
 # 知识图谱 RDF 模型定义
 
@@ -52,7 +53,7 @@ trigger_keywords:
 | Symptom | 症状 | SYMP-001 |
 | DiagnosticStep | 诊断步骤 | DS-001 |
 | Remediation | 修复方案 | REM-001 |
-| Domain | 知识域 | domain-12 |
+| Domain | 知识域 | domain-10-troubleshooting-diagnostics |
 | Tool | 工具 | kubectl_get_pods |
 
 ---
@@ -129,7 +130,7 @@ kudig:REM-001 rdf:type kudig:Remediation ;
 # 技能属于知识域
 kudig:SKILL-NODE-001 kudig:belongsTo kudig:DOMAIN-12 .
 kudig:DOMAIN-12 rdf:type kudig:Domain ;
-    kudig:domainId "domain-12" ;
+    kudig:domainId "domain-10-troubleshooting-diagnostics" ;
     kudig:title "故障排查" ;
     kudig:hasDocument kudig:DOC-01, kudig:DOC-02 .
 
@@ -156,7 +157,7 @@ kudig:TC-INFRA rdf:type kudig:TicketCategory ;
 
 kudig:TC-APP rdf:type kudig:TicketCategory ;
     skos:prefLabel "应用层" ;
-    skos:scopeNote "Pod、Deployment、Service 等应用运行时故障" .
+    skos:scopeNote "[[concepts/pod-lifecycle|pod]]、Deployment、Service 等应用运行时故障" .
 
 kudig:TC-SEC rdf:type kudig:TicketCategory ;
     skos:prefLabel "安全合规" ;

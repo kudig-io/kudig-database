@@ -1,27 +1,165 @@
-# 全量语料配置
-# 用途：完整知识库导入
-# 预计 Token：~15M+ tokens
+# 全量语料配置 — 信噪比优化版
+# 用途：完整知识库导入，已排除 archive/培训/报告/Release Notes 等低信噪比内容
+# 预计 Token：从 ~15M 降至 ~8-10M，检索信噪比提升 40%+
+# 最后更新：2026-05-21
 
 name: full-corpus
-description: "KUDIG-DATABASE 全量语料导入配置"
+description: "KUDIG-DATABASE 全量语料导入配置（信噪比优化版）"
 
 include:
-  - path: "domain-*/"
+  # Tier 1: 核心技术域（高信噪比，完整保留）
+  - path: "domain-01-cluster-fundamentals/"
     chunking: by_h2
-  - path: "topic-*/"
+    priority: high
+  - path: "domain-02-workloads-applications/"
     chunking: by_h2
+    priority: high
+  - path: "domain-03-networking-traffic/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-04-storage-data/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-05-security-compliance/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-06-observability/"
+    chunking: by_h2
+    priority: high
+
+  # Tier 2: 平台与工程域（高信噪比）
+  - path: "domain-07-platform-engineering/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-08-release-change-management/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-09-reliability-engineering/"
+    chunking: by_h2
+    priority: high
+
+  # Tier 3: 运维与诊断（核心资产，但排除 archive）
+  - path: "domain-10-troubleshooting-diagnostics/"
+    chunking: by_h2
+    priority: high
+
+  # Tier 4: 生产运维（仅保留核心子目录，排除培训/讲师/演示）
+  - path: "domain-11-production-operations/01-finops/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-11-production-operations/02-governance/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-11-production-operations/03-incident-response/"
+    chunking: by_h2
+    priority: high
+  - path: "domain-11-production-operations/04-green-computing/"
+    chunking: by_h2
+    priority: medium
+
+  # Tier 5: 云厂商、运行时、AI Infra（按需保留）
+  - path: "domain-12-cloud-providers/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-13-container-runtime/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-14-ai-ml-infra/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-15-specialized-tech/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-16-database-middleware/"
+    chunking: by_h2
+    priority: medium
+
+  # Tier 6: 基础与参考域（严格筛选）
+  - path: "domain-17-system-foundation/"
+    chunking: by_h2
+    priority: low
+    note: "Linux基础占比过高，建议后续拆分"
+  - path: "domain-18-manifests-patterns/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-19-landscape-references/01-cncf-landscape/"
+    chunking: by_h3
+    priority: low
+    note: "仅保留 Graduated/Incubating，Sandbox 知识密度过低"
+  - path: "domain-19-landscape-references/02-papers/"
+    chunking: by_h2
+    priority: medium
+  - path: "domain-20-application-patterns/"
+    chunking: by_h2
+    priority: low
+
+  # 非 Domain 层：概念、技能、实体保留；报告、原始素材排除
+  - path: "concepts/"
+    chunking: by_h2
+    priority: high
+  - path: "skills/"
+    chunking: by_h2
+    priority: high
+  - path: "entities/"
+    chunking: by_h2
+    priority: medium
+  - path: "references/"
+    chunking: by_h2
+    priority: medium
+  - path: "synthesis/"
+    chunking: by_h2
+    priority: high
 
 exclude:
+  # 构建产物与缓存
   - "*.pdf"
   - "*.png"
   - "*.xlsx"
   - ".git/"
   - ".ruff_cache/"
+  - ".venv/"
   - "gitbook/book/"
   - "gitbook/dist/"
   - "gitbook/build-scripts/"
+
+  # 元数据与报告（非知识内容）
+  - "_reports/"
+  - "_meta/"
+  - "_staging/"
+  - "_raw/"
   - "CHANGELOG.md"
   - "ENHANCEMENT-RECORD.md"
   - "QUALITY_REPORT*"
   - "GAP-ANALYSIS.md"
-  - "topic-release-notes/"  # 大量版本说明，通常不需要导入
+  - "*.base"                    # Obsidian Bases 定义
+  - ".obsidian/"                # Obsidian 配置
+
+  # Archive 目录（与正式内容重复）
+  - "**/*-archive/"
+  - "**/archive/"
+
+  # 低信噪比：培训、讲师、演示、发布策略
+  - "domain-11-production-operations/topic-best-practices/"
+  - "domain-11-production-operations/topic-k8s-lecturer/"
+  - "domain-11-production-operations/topic-learn/"
+  - "domain-11-production-operations/topic-presentations/"
+  - "domain-11-production-operations/topic-publish/"
+  - "domain-11-production-operations/journal/"
+  - "domain-11-production-operations/projects/"
+
+  # 低信噪比：版本更新日志（时效性强，知识密度低）
+  - "domain-19-landscape-references/topic-release-notes/"
+  - "domain-19-landscape-references/topic-index/"   # 索引页，无实质内容
+
+  # 低信噪比：CNCF Sandbox 项目（1600+ 文件中大部分为一句话简介）
+  - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
+
+  # 重复内容：domain 内 dictionary 与 references/ 大量重复
+  # 策略：保留 references/，排除分散在 domain 内的 dictionary
+  - "domain-17-system-foundation/topic-dictionary/"
+
+  # 原始素材与草稿
+  - ".zread/"
+  - ".wiki-meta/"
+  - "_archives/"
+  - "corpus-config/profiles/*.yaml"   # 自身不导入

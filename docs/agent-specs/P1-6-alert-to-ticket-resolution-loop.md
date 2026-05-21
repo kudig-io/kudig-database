@@ -25,8 +25,11 @@ intent_queries:
 trigger_keywords:
 - 告警→工单→解决
 - 完整闭环文档
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
 ---
-
 
 # 告警→工单→解决 完整闭环文档
 
@@ -687,5 +690,5 @@ storm_handling:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [topic-skills/README.md](../topic-skills/README.md)
-- [domain-20-enterprise-monitoring-alerting/](../domain-20-enterprise-monitoring-alerting/) — 监控告警详细文档
+- [domain-10-troubleshooting-diagnostics/topic-skills/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-06-observability/](../domain-06-observability/) — 监控告警详细文档

@@ -1,3 +1,30 @@
+---
+title: 台词补充本 — 完整台词 + 缺口补齐
+description: 在座有多少人是 SRE 或运维工程师?
+category: general
+tags:
+- k8s
+- etcd
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 台词补充本 — 完整台词 + 缺口补齐 是什么
+- 如何 台词补充本 — 完整台词 + 缺口补齐
+trigger_keywords:
+- 台词补充本
+- 完整台词
+- 缺口补齐
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 台词补充本 — 完整台词 + 缺口补齐
 
 > 本文件补齐 11-keynote-speech.md 未覆盖的台词场景
@@ -18,7 +45,7 @@
 
 [停顿]
 
-今天我们要发布一个产品, 它和在座每一位 K8s 用户都有关。
+今天我们要发布一个产品, 它和在座每一位 [[entities/kubernetes|k8s]] 用户都有关。
 
 [停顿]
 

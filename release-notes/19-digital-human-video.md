@@ -1,3 +1,30 @@
+---
+title: 数字人发布会视频 — 制作方案与提示词
+description: '# 数字人发布会视频 — 制作方案与提示词'
+category: general
+tags:
+- k8s
+- etcd
+- job
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 数字人发布会视频 — 制作方案与提示词 是什么
+- 如何 数字人发布会视频 — 制作方案与提示词
+trigger_keywords:
+- 数字人发布会视频
+- 制作方案与提示词
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 数字人发布会视频 — 制作方案与提示词
 
 > **总时长**: 15 分钟
@@ -147,7 +174,7 @@ kudig-database 是什么?
 
 [停顿, 展示 Agent 输出]
 
-Agent 命中了 domain-3-control-plane 的 etcd 深度文档。
+Agent 命中了 domain-01-cluster-fundamentals 的 etcd 深度文档。
 1,042 行。从 Raft 协议到 MVCC 数据模型, 从 Watch 机制到备份恢复。
 30 分钟的系统性知识, 30 秒输出。
 
@@ -193,7 +220,7 @@ Agent 直接调用了诊断脚本。
 
 问 Agent:
 
-"帮我设计一套金融支付系统的 Kubernetes 生产架构, 要满足 PCI-DSS 合规要求。"
+"帮我设计一套金融支付系统的 [[entities/kubernetes|kubernetes]] 生产架构, 要满足 PCI-DSS 合规要求。"
 
 [停顿, 展示 Agent 输出]
 

@@ -1,3 +1,36 @@
+---
+title: kudig-database 发布会主题演讲逐字稿
+description: 让我们具体看看, K8s 运维工程师每天面对的是什么。
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- istio
+- envoy
+- argocd
+- networkpolicy
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 发布会主题演讲逐字稿 是什么
+- 如何 kudig-database 发布会主题演讲逐字稿
+trigger_keywords:
+- kudig-database
+- 发布会主题演讲逐字稿
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
+- etcd-basics
+---
+
 # kudig-database 发布会主题演讲逐字稿
 
 > **时长**: 15 分钟
@@ -176,7 +209,7 @@ Kubernetes 的学习曲线是出了名的陡峭。一个新人从零到能独立
 
 [情绪: 边看输出边讲解]
 
-大家看, Agent 命中了 domain-3 的 etcd 深度文档, 1,042 行。它给出了 Raft 共识协议的完整解析, MVCC 数据模型, Watch 机制, 备份恢复的完整流程, 还有性能调优的参数表。
+大家看, Agent 命中了 domain-01-cluster-fundamentals 的 etcd 深度文档, 1,042 行。它给出了 Raft 共识协议的完整解析, MVCC 数据模型, Watch 机制, 备份恢复的完整流程, 还有性能调优的参数表。
 
 [停顿]
 
@@ -281,7 +314,7 @@ Exit Code 137 等于 128 加 9, 就是被 SIGKILL 信号终止。OOMKilled 表�
 
 [情绪: 自信]
 
-kudig-database 的知识覆盖了 218 个 CNCF 项目。从 Kubernetes 核心, 到 etcd、Prometheus、Envoy、Istio、ArgoCD, 到各种云厂商的托管服务, 都有覆盖。
+kudig-database 的知识覆盖了 218 个 CNCF 项目。从 Kubernetes 核心, 到 etcd、Prometheus、[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]]、Istio、ArgoCD, 到各种云厂商的托管服务, 都有覆盖。
 
 [停顿]
 

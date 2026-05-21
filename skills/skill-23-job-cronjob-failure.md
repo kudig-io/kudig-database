@@ -1,0 +1,158 @@
+---
+title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+description: '| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |'
+category: skills
+tags:
+- k8s
+- troubleshooting
+- skill
+- job
+- cronjob
+- job failed
+- cronjob not running
+- 定时任务
+- statefulset
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 是什么
+- 如何 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+trigger_keywords:
+- Job
+- CronJob
+- 故障诊断与修复
+- Job
+- CronJob
+- Failure
+- Diagnosis
+- Remediation
+prerequisites:
+- kubectl-basics
+---
+
+# Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+
+### 症状识别
+
+
+
+### 2.1 症状模式表
+
+| # | 症状描述 | 检测方法 | 置信度 | 排除条件 |
+|---|---------|---------|--------|---------|
+| S1 | Job 状态 Failed | `kubectl get job` | 0.95 | 无 |
+| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |
+| S3 | Job Pod 退出码非零 | `kubectl get pods --selector=job-name` | 0.90 | 应用自身 bug |
+| S4 | 历史 Job 大量堆积 | `kubectl get jobs | wc -l` | 0.85 | 无 |
+| S5 | Job 长时间 Running | `kubectl get job` active 时间 | 0.85 | 任务本身耗时 |
+| S6 | CronJob 错过调度 | `kubectl describe cronjob` Events | 0.90 | 时区差异 |
+| S7 | Job 重试次数耗尽 | `kubectl describe job` Events | 0.90 | 无 |
+| S8 | 并行 Job 数量异常 | `kubectl get pods --selector=job-name` | 0.80 | 无 |
+
+### 诊断工作流
+
+
+
+### Phase 1: 快速检查（只读，零风险）
+
+**Step D1.1**: 获取 Job/CronJob 概览
+- **命令**:
+  ```bash
+  # Job
+  kubectl get job <name> -n <namespace> -o wide
+  kubectl describe job <name> -n <namespace> | head -40
+  # CronJob
+  kubectl get cronjob <name> -n <namespace> -o wide
+  kubectl describe cronjob <name> -n <namespace> | head -40
+  ```
+- **超时**: 10s
+- **判断规则**:
+  - Job: succeeded < completions → RC-001/005/006/008
+  - Job: active > 0 且持续时间 > activeDeadlineSeconds → RC-007（超时）
+  - CronJob: lastScheduleTime 为空或很久之前 → RC-002/003
+  - CronJob: active Jobs 数量 > 1 且 concurrencyPolicy=Forbid → RC-004
+
+**Step D1.2**: 检查 Job 关联 Pod 状态
+- **命令**:
+  ```bash
+  kubectl get pods -n <namespace> --selector=job-name=<job-name> \
+    -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,READY:.status.containerStatuses[*].ready,RESTARTS:.status.containerStatuses[*].restartCount,EXIT:.status.containerStatuses[*].state.terminated.exitCode
+  ```
+- **超时**: 10s
+- **判断规则**:
+  - Pod 状态 Error + exitCode != 0 → RC-005（应用执行失败）
+  - Pod 状态 CrashLoopBackOff → RC-001（启动失败）
+  - Pod 状态 Running 但长时间不结束 → RC-007（执行超时）
+
+**Step D1.3**: 检查 Job 配置参数
+- **命令**:
+  ```bash
+  kubectl get job <name> -n <namespace> -o jsonpath='{
+    "completions": .spec.completions,
+    "parallelism": .spec.parallelism,
+    "backoffLimit": .spec.backoffLimit,
+    "ttlSecondsAfterFinished": .spec.ttlSecondsAfterFinished,
+    "activeDeadlineSeconds": .spec.activeDeadlineSeconds
+  }' | jq .
+  ```
+- **超时**: 10s
+- **判断规则**:
+  - backoffLimit 过低（如 0 或 1）→ RC-006（重试不足）
+  - activeDeadlineSeconds 过短 → RC-007（超时阈值不合理）
+  - completions > 1 但 parallelism = 1 → 执行慢（可能正常）
+  - ttlSecondsAfterFinished 未设置 → RC-009（无自动清理）
+
+**Step D1.4**: 检查 CronJob 调度配置
+- **命令**:
+  ```bash
+  kubectl get cronjob <name> -n <namespace> -o jsonpath='{
+    "schedule": .spec.schedule,
+    "timezone": .spec.timeZone,
+    "concurrencyPolicy": .spec.concurrencyPolicy,
+    "startingDeadlineSeconds": .spec.startingDeadlineSeconds,
+    "successfulJobsHistoryLimit": .spec.successfulJobsHistoryLimit,
+    "failedJobsH
+...(截断)
+
+### Phase 2: 深度检查（只读，零风险）
+
+**Step D2.1**: 分析 Job Pod 退出原因
+- **命令**:
+  ```bash
+  kubectl logs -n <namespace> <job-pod> --tail=50
+  kubectl get pod <job-pod> -n <namespace> -o jsonpath='{.status.containerStatuses[0].state.terminated}' | jq .
+  kubectl get pod <job-pod> -n <namespace> -o jsonpath='{.status.containerStatuses[0].lastState.terminated}' | jq .
+  ```
+- **超时**: 15s
+- **判断规则**:
+  - 日志显示应用错误 → RC-005（应用逻辑错误）
+  - exitCode 137 → 被 OOMKilled 或手动终止
+  - exitCode 143 → SIGTERM 优雅终止
+  - exitCode 1/2 → 应用自身错误
+  - 无日志但 exitCode != 0 → 启动即崩溃
+
+**Step D2.2**: 检查 Job 事件历史
+- **命令**:
+  ```bash
+  kubectl get events -n <namespace> --field-s
+
+--- (内容截断，完整内容见源文件) ---
+
+## 相关链接
+
+- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[skills/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
+
+## Related
+
+- [[rbac-fta]] — RBAC 异常故障树分析
+- [[skills/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
+- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] — FTA Diagnostic Execution Engine
+- [[kubernetes]] — Kubernetes (CNCF Graduated)

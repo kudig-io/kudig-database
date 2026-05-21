@@ -1,4 +1,8 @@
-# Skill 运维技能文档模板
+---
+
+## YAML Front Matter 规范
+
+每个 Skill 文档以 YAML front matter 开头，用 `---# Skill 运维技能文档模板
 
 > **模板版本**: 2.0
 > **最后更新**: 2026-05
@@ -21,7 +25,7 @@ version: "1.0"                         # 文档版本，语义化版本
 category: "node"                       # 分类枚举: node | pod | network | storage |
                                        #          control-plane | security | workload | scaling
 severity_range: "P0-P2"               # 此 Skill 覆盖的严重性范围
-k8s_versions:                          # 兼容的 Kubernetes 版本
+k8s_versions:                          # 兼容的 [[entities/kubernetes|kubernetes]] 版本
   - "1.28"
   - "1.29"
   - "1.30"
@@ -49,25 +53,25 @@ reading_level: "intermediate"          # beginner | intermediate | advanced | ex
 audience: ["SRE", "Ops Engineer"]      # 目标读者: SRE / DevOps / Developer
 estimated_read_time: "10min"            # 预计阅读时间
 prerequisites:                         # 前置知识依赖
-  - "domain-12-troubleshooting"
+  - "domain-10-troubleshooting-diagnostics"
   - "kubectl-basics"
 
 # === 关联引用 ===
 related_skills:                        # 关联的其他 Skill ID
   - "SKILL-POD-001"
 fta_refs:                              # 对应的 FTA 文件
-  - "topic-fta/list/node-fta.md"
+  - "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
 knowledge_refs:                        # 深度知识参考
-  - "topic-structural-trouble-shooting/node-*.md"
-  - "domain-12-troubleshooting/"
+  - "domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/node-*.md"
+  - "domain-10-troubleshooting-diagnostics/"
 
 # === 统一 cross_refs ===
 cross_refs:
   - type: "fta"
-    path: "../topic-fta/list/node-fta.md"
+    path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
     label: "Node 故障树分析"
   - type: "domain"
-    path: "../domain-12-troubleshooting/02-node-notready-troubleshooting.md"
+    path: "../domain-10-troubleshooting-diagnostics/02-node-notready-troubleshooting.md"
     label: "Node NotReady 深度诊断"
 ---
 ```
@@ -231,7 +235,7 @@ kubectl ...
 - 至少覆盖 8 个根因
 - 概率分三级：高（>30% 工单为此根因）、中（10-30%）、低（<10%）
 - 诊断证据引用诊断工作流中的 Step ID
-- FTA 映射引用 topic-fta/list/ 中对应的底事件
+- FTA 映射引用 domain-10-troubleshooting-diagnostics/topic-fta/list/ 中对应的底事件
 
 ---
 
@@ -534,4 +538,4 @@ receivers:
 
 ---
 
-> **关联文档**: [topic-skills/skill-schema.md](../topic-skills/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
+> **关联文档**: [domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md](../domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）

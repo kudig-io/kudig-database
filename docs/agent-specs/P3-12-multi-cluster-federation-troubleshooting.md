@@ -26,6 +26,10 @@ intent_queries:
 trigger_keywords:
 - 多集群
 - 联邦场景故障排查
+prerequisites:
+- kubectl-basics
+- gitops-basics
+- cilium-basics
 ---
 
 # 多集群/联邦场景故障排查
@@ -33,7 +37,7 @@ trigger_keywords:
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: 集群联邦 (Kubefed)、GitOps 多集群冲突、多集群网络打通的故障排查
-> **关联**: domain-37-edge-computing, domain-23-gitops-ci-cd
+> **关联**: domain-37-edge-computing, domain-08-release-change-management
 
 ---
 
@@ -114,7 +118,7 @@ argocd app sync <app> --force
 argocd repo get <repo> --details | grep webhook
 ```
 
-### 2.2 Flux 多集群配置问题
+### 2.2 [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 多集群配置问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -273,7 +277,7 @@ kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubef
 ---
 
 **关联文档**:
-- [domain-23-gitops-ci-cd/](../domain-23-gitops-ci-cd/) — GitOps CI/CD
-- [domain-37-edge-computing/](../domain-37-edge-computing/) — 边缘计算
-- [topic-skills/](../topic-skills/) — 运维 Skill
+- [domain-08-release-change-management/](../domain-08-release-change-management/) — GitOps CI/CD
+- [domain-15-specialized-tech/](../domain-15-specialized-tech/) — 边缘计算
+- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 运维 Skill
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)

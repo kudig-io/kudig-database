@@ -25,6 +25,27 @@ intent_queries:
 trigger_keywords:
 - Kubernetes
 - 开源项目全景生态图谱
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- iac-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+- gpu-scheduling-basics
+- tls-basics
+- policy-basics
+- backup-basics
+- logging-basics
+- tracing-basics
+- observability-basics
 ---
 
 # Kubernetes 开源项目全景生态图谱
@@ -85,7 +106,7 @@ trigger_keywords:
 | **CubeFS** | 云原生存储 | 2019.12 | v3.5.0 | 4k+ |
 | **Dragonfly** | 镜像分发 | 2018.11 | v2.2.0 | 2k+ |
 | **Knative** |  Serverless | 2022.03 | v1.18.0 | 4k+ |
-| **cert-manager** | 安全 | 2020.11 | v1.17.0 | 12k+ |
+| **[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]** | 安全 | 2020.11 | v1.17.0 | 12k+ |
 | **Kyverno** | 安全 | 2020.11 | v1.14.0 | 5k+ |
 
 ### 1.2 Incubating 项目 (40+)

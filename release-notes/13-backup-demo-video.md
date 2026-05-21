@@ -1,3 +1,29 @@
+---
+title: 备用 Demo 录屏脚本
+description: '**用途**: 发布会现场演示的备用录像, 以防现场演示出现网络/环境问题'
+category: general
+tags:
+- k8s
+- etcd
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 备用 Demo 录屏脚本 是什么
+- 如何 备用 Demo 录屏脚本
+trigger_keywords:
+- 备用
+- Demo
+- 录屏脚本
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 备用 Demo 录屏脚本
 
 > **用途**: 发布会现场演示的备用录像, 以防现场演示出现网络/环境问题
@@ -50,7 +76,7 @@
 
 ### 旁白
 
-> "这是 K8s 运维最常见的问题之一。传统做法是 Google 搜半天, 翻阅十几篇博客。现在, Agent 会按照 23 个问题诊断场景的标准排查流程, 从日志分析到根因定位, 最后直接给你可执行的修复命令。"
+> "这是 [[entities/kubernetes|k8s]] 运维最常见的问题之一。传统做法是 Google 搜半天, 翻阅十几篇博客。现在, Agent 会按照 23 个问题诊断场景的标准排查流程, 从日志分析到根因定位, 最后直接给你可执行的修复命令。"
 
 ### 预期画面
 

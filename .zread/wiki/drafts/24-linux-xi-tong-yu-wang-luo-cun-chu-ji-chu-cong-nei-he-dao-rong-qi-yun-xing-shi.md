@@ -54,7 +54,7 @@ graph TB
 
 上图蓝色高亮部分即为本页覆盖的 Linux 内核核心子系统。这些子系统共同构成了容器技术的**三大支柱**：**隔离**（Namespaces）、**限制**（Cgroups）、**安全**（Seccomp/Capabilities/SELinux），外加**分层存储**（OverlayFS）和**网络通信**（TCP/IP 栈）两大支撑能力。
 
-Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L36-L80), [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container-fundamentals.md#L33-L52)
+Sources: [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L36-L80), [08-linux-container-fundamentals.md](domain-17-system-foundation/08-linux-container-fundamentals.md#L33-L52)
 
 ---
 
@@ -73,7 +73,7 @@ Linux 系统分为**用户空间**和**内核空间**两个隔离的执行域。
 | **设备驱动** | 块设备、字符设备、网络设备 | CSI 驱动通过块设备接口操作存储 |
 | **安全模块** | SELinux、AppArmor | Pod Security Standards 的底层实现 |
 
-Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L40-L68), [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L70-L79)
+Sources: [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L40-L68), [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L70-L79)
 
 ### 1.2 系统启动过程：从 BIOS 到 systemd
 
@@ -81,7 +81,7 @@ Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-archi
 
 **关键调优点**：在 Kubernetes 生产环境中，`/etc/default/grub` 中的内核启动参数直接影响节点行为。例如 `cgroup_enable=memory` 和 `swapaccount=1` 是 Kubelet 正常运行的前提条件，`processor.max_cstate=1` 可在低延迟场景下禁用 CPU 深度节能。systemd 的 Unit 文件中，`Restart=on-failure` 和 `RestartSec=5` 配置确保了 Kubelet 和容器运行时等关键服务的自愈能力。
 
-Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L93-L130), [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L148-L200)
+Sources: [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L93-L130), [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L148-L200)
 
 ### 1.3 内核参数调优：生产环境必备配置
 
@@ -104,7 +104,7 @@ Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-archi
 | `vm.max_map_count` | mmap 限制 | 262144 | Elasticsearch 等应用 |
 | `fs.inotify.max_user_watches` | 文件监控数 | 524288 | ConfigMap/Secret 挂载 |
 
-Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L231-L292), [09-linux-operations-basics.md](domain-14-linux/09-linux-operations-basics.md#L70-L98)
+Sources: [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L231-L292), [09-linux-operations-basics.md](domain-17-system-foundation/09-linux-operations-basics.md#L70-L98)
 
 ### 1.4 容器相关的内核模块
 
@@ -119,7 +119,7 @@ Kubernetes 节点需要加载以下关键内核模块才能正常工作：
 
 这些模块通常通过 `/etc/modules-load.d/` 配置文件在启动时自动加载。
 
-Sources: [01-linux-system-architecture.md](domain-14-linux/01-linux-system-architecture.md#L296-L327)
+Sources: [01-linux-system-architecture.md](domain-17-system-foundation/01-linux-system-architecture.md#L296-L327)
 
 ---
 
@@ -137,13 +137,13 @@ Linux 进程在生命周期中经历 **就绪(R) → 运行(R) → 睡眠(S/D) �
 | **Z** | Zombie | 僵尸进程 | 容器主进程未正确回收子进程 |
 | **T** | Stopped | 已停止 | 被信号暂停（如 strace 调试） |
 
-Sources: [02-linux-process-management.md](domain-14-linux/02-linux-process-management.md#L57-L94)
+Sources: [02-linux-process-management.md](domain-17-system-foundation/02-linux-process-management.md#L57-L94)
 
 ### 2.2 信号与进程控制
 
 容器中 PID 1 进程的信号处理是一个常见的故障源。Linux 信号（Signal）是进程间异步通信的基本机制，容器主进程必须正确注册 SIGTERM 处理器以实现**优雅终止（Graceful Shutdown）**——这正是 Kubernetes `terminationGracePeriodSeconds` 的工作原理。Kubelet 先发送 SIGTERM，等待超时后发送 SIGKILL 强制终止。如果容器镜像使用 shell 脚本作为 entrypoint（`/bin/sh -c`），shell 进程作为 PID 1 **不会将信号转发给子进程**，这是 Pod 终止卡住的常见原因。
 
-Sources: [02-linux-process-management.md](domain-14-linux/02-linux-process-management.md#L1-L16)
+Sources: [02-linux-process-management.md](domain-17-system-foundation/02-linux-process-management.md#L1-L16)
 
 ### 2.3 性能分析方法论：USE 方法
 
@@ -160,7 +160,7 @@ Sources: [02-linux-process-management.md](domain-14-linux/02-linux-process-manag
 
 关键性能指标的警戒阈值：**%us < 70%**（用户态 CPU）、**%sy < 30%**（内核态 CPU）、**%wa < 5%**（I/O 等待）、**load avg < CPU 核数**。当 `%wa` 持续超过 5% 时，通常意味着存储性能成为瓶颈，这在 CSI 卷场景中尤为常见。
 
-Sources: [06-linux-performance-tuning.md](domain-14-linux/06-linux-performance-tuning.md#L30-L52), [06-linux-performance-tuning.md](domain-14-linux/06-linux-performance-tuning.md#L78-L104)
+Sources: [06-linux-performance-tuning.md](domain-17-system-foundation/06-linux-performance-tuning.md#L30-L52), [06-linux-performance-tuning.md](domain-17-system-foundation/06-linux-performance-tuning.md#L78-L104)
 
 ---
 
@@ -177,7 +177,7 @@ Linux 的 VFS（Virtual File System）是所有文件系统的统一抽象层，
 | **dentry** | 目录项 | 文件名到 inode 的映射缓存 |
 | **file** | 打开文件 | 进程与文件描述符的关联 |
 
-Sources: [03-linux-filesystem-deep-dive.md](domain-14-linux/03-linux-filesystem-deep-dive.md#L31-L62)
+Sources: [03-linux-filesystem-deep-dive.md](domain-17-system-foundation/03-linux-filesystem-deep-dive.md#L31-L62)
 
 ### 3.2 文件系统选型对比
 
@@ -192,7 +192,7 @@ Kubernetes 节点的根文件系统和工作负载存储选择直接影响集群
 
 特殊文件系统对容器运行时的意义：`/proc`（进程信息）和 `/sys`（设备信息）是容器中 `limits` 和 `requests` 配置生效的接口路径；`/sys/fs/cgroup` 是 Cgroups v2 的挂载点，Kubelet 通过读写该目录控制 Pod 资源限制；`tmpfs` 常用于 Kubernetes 的 emptyDir 卷（`medium: Memory`）。
 
-Sources: [03-linux-filesystem-deep-dive.md](domain-14-linux/03-linux-filesystem-deep-dive.md#L65-L85)
+Sources: [03-linux-filesystem-deep-dive.md](domain-17-system-foundation/03-linux-filesystem-deep-dive.md#L65-L85)
 
 ### 3.3 LVM 逻辑卷管理
 
@@ -213,7 +213,7 @@ LVM 在 PV（Physical Volume）、VG（Volume Group）、LV（Logical Volume）�
 
 LVM 的在线扩容能力（`lvextend --resizefs`）对 Kubernetes PVC 扩容场景至关重要——用户可以在线扩展 PVC 容量而无需卸载卷。
 
-Sources: [05-linux-storage-management.md](domain-14-linux/05-linux-storage-management.md#L72-L100)
+Sources: [05-linux-storage-management.md](domain-17-system-foundation/05-linux-storage-management.md#L72-L100)
 
 ### 3.4 I/O 调度器
 
@@ -228,7 +228,7 @@ I/O 调度器决定了块设备请求的排序和合并策略。在 Kubernetes �
 
 对于 NVMe SSD，现代内核默认使用 `none` 调度器（即不排队直接提交），因为 NVMe 设备本身支持硬件级队列管理。查看当前调度器：`cat /sys/block/sdX/queue/scheduler`。
 
-Sources: [05-linux-storage-management.md](domain-14-linux/05-linux-storage-management.md#L1-L28)
+Sources: [05-linux-storage-management.md](domain-17-system-foundation/05-linux-storage-management.md#L1-L28)
 
 ---
 
@@ -258,7 +258,7 @@ network:
         addresses: [8.8.8.8, 8.8.4.4]
 ```
 
-Sources: [04-linux-networking-configuration.md](domain-14-linux/04-linux-networking-configuration.md#L30-L87)
+Sources: [04-linux-networking-configuration.md](domain-17-system-foundation/04-linux-networking-configuration.md#L30-L87)
 
 ### 4.2 OSI 与 TCP/IP 网络模型
 
@@ -274,7 +274,7 @@ Kubernetes 网络的底层是 TCP/IP 协议栈。理解 OSI 七层与 TCP/IP 四
 
 **数据封装过程**的直观理解：当一个 Pod 发送 HTTP 请求时，数据从应用层逐层封装——添加 TCP 头（端口号）、IP 头（Pod IP）、以太网帧头（MAC 地址），最终通过物理链路传输。CNI 插件（如 Calico IPIP 模式或 Flannel VXLAN 模式）在网络层额外添加封装头以实现跨节点 Pod 通信。
 
-Sources: [01-network-protocols-stack.md](domain-15-network-fundamentals/01-network-protocols-stack.md#L18-L58), [01-network-protocols-stack.md](domain-15-network-fundamentals/01-network-protocols-stack.md#L100-L118)
+Sources: [01-network-protocols-stack.md](domain-03-networking-traffic/01-network-protocols-stack.md#L18-L58), [01-network-protocols-stack.md](domain-03-networking-traffic/01-network-protocols-stack.md#L100-L118)
 
 ### 4.3 TCP 连接管理：握手、挥手与 Kubernetes
 
@@ -290,7 +290,7 @@ TCP 的**三次握手**和**四次挥手**直接影响 Kubernetes 的连接管�
 
 TCP 拥塞控制算法的选择也值得关注：现代内核默认使用 **BBR**（Bottleneck Bandwidth and RTT）替代传统的 Cubic，在高延迟、有丢包的网络环境（如跨云通信）中可显著提升吞吐量。
 
-Sources: [02-tcp-udp-deep-dive.md](domain-15-network-fundamentals/02-tcp-udp-deep-dive.md#L18-L100)
+Sources: [02-tcp-udp-deep-dive.md](domain-03-networking-traffic/02-tcp-udp-deep-dive.md#L18-L100)
 
 ### 4.4 DNS 解析原理
 
@@ -305,7 +305,7 @@ DNS 是 Kubernetes 服务发现的核心机制。CoreDNS 作为集群内 DNS 服
 
 Kubernetes 内部 DNS 命名规则：`<service-name>.<namespace>.svc.cluster.local`，CoreDNS 通过 Kubernetes 插件监听 API Server 的 Service/Endpoint 变化动态生成 DNS 记录。
 
-Sources: [03-dns-principles-configuration.md](domain-15-network-fundamentals/03-dns-principles-configuration.md#L18-L100)
+Sources: [03-dns-principles-configuration.md](domain-03-networking-traffic/03-dns-principles-configuration.md#L18-L100)
 
 ### 4.5 负载均衡技术：从 LVS 到 Ingress
 
@@ -318,7 +318,7 @@ Sources: [03-dns-principles-configuration.md](domain-15-network-fundamentals/03-
 
 kube-proxy 的 **IPVS 模式**相比 iptables 模式具有更优的大规模 Service 性能，因为它使用内核的 IPVS 模块（基于哈希表查找 O(1)）替代 iptables 的线性规则匹配 O(n)。常用的负载均衡算法：轮询（RR）、加权轮询（WRR）、最少连接（LC）、一致性哈希——分别适用于无状态服务、异构后端、长连接、缓存亲和等不同场景。
 
-Sources: [04-load-balancing-technologies.md](domain-15-network-fundamentals/04-load-balancing-technologies.md#L18-L100)
+Sources: [04-load-balancing-technologies.md](domain-03-networking-traffic/04-load-balancing-technologies.md#L18-L100)
 
 ### 4.6 SDN 与网络虚拟化
 
@@ -333,7 +333,7 @@ Sources: [04-load-balancing-technologies.md](domain-15-network-fundamentals/04-l
 
 Open vSwitch（OVS）和 Linux Bridge 是容器网络的两种基础桥接技术。Kubernetes 的 veth pair（虚拟以太网设备对）将 Pod 网络命名空间与宿主网络命名空间连接起来，一端在 Pod 内（eth0），另一端在宿主机的网桥上。
 
-Sources: [06-sdn-network-virtualization.md](domain-15-network-fundamentals/06-sdn-network-virtualization.md#L18-L100)
+Sources: [06-sdn-network-virtualization.md](domain-03-networking-traffic/06-sdn-network-virtualization.md#L18-L100)
 
 ### 4.7 网络安全基础
 
@@ -347,7 +347,7 @@ Sources: [06-sdn-network-virtualization.md](domain-15-network-fundamentals/06-sd
 
 Linux `iptables`/`nftables` 是 Kubernetes NetworkPolicy 的底层实现机制。Calico 和 Cilium 等 CNI 插件通过编程 iptables 规则或 eBPF 程序来实现 Pod 间的网络隔离策略。
 
-Sources: [05-network-security-fundamentals.md](domain-15-network-fundamentals/05-network-security-fundamentals.md#L18-L100)
+Sources: [05-network-security-fundamentals.md](domain-03-networking-traffic/05-network-security-fundamentals.md#L18-L100)
 
 ---
 
@@ -368,7 +368,7 @@ Sources: [05-network-security-fundamentals.md](domain-15-network-fundamentals/05
 
 **架构演进**：从 DAS（直连存储）→ SAN（存储区域网络）→ NAS（网络附加存储）→ 对象存储，体现了从本地化到网络化、从高性能到海量扩展的演进方向。Kubernetes 的 PV/PVC 机制本质上是对这三种存储类型的统一抽象。
 
-Sources: [01-storage-technologies-overview.md](domain-16-storage-fundamentals/01-storage-technologies-overview.md#L18-L53), [02-block-file-object-storage.md](domain-16-storage-fundamentals/02-block-file-object-storage.md#L17-L62)
+Sources: [01-storage-technologies-overview.md](domain-04-storage-data/01-storage-technologies-overview.md#L18-L53), [02-block-file-object-storage.md](domain-04-storage-data/02-block-file-object-storage.md#L17-L62)
 
 ### 5.2 RAID 级别与企业级选型
 
@@ -384,7 +384,7 @@ RAID（Redundant Array of Independent Disks）是数据冗余和性能提升的�
 
 **企业级 RAID 选型指南**：数据库主库推荐 RAID 10（兼顾性能与冗余），虚拟化存储推荐 RAID 10（高 IOPS + 高可靠性），备份存储推荐 RAID 6（最大容量利用）。etcd 作为 Kubernetes 的核心存储组件，其数据目录通常部署在 SSD 的 RAID 1 阵列上以保证数据安全和低延迟。
 
-Sources: [03-raid-storage-redundancy.md](domain-16-storage-fundamentals/03-raid-storage-redundancy.md#L17-L100)
+Sources: [03-raid-storage-redundancy.md](domain-04-storage-data/03-raid-storage-redundancy.md#L17-L100)
 
 ### 5.3 分布式存储系统：Ceph 与 MinIO
 
@@ -410,7 +410,7 @@ Kubernetes 持久化存储的终极方案往往指向分布式存储。**Ceph** 
 
 数据保护策略对比：**多副本**（3 副本，简单快速恢复，空间效率 33%）vs **纠删码**（如 8+3，空间效率 73%，计算开销大）。在 Kubernetes 环境中，Rook 项目提供了 Ceph 的 Kubernetes 原生部署和管理能力。
 
-Sources: [04-distributed-storage-systems.md](domain-16-storage-fundamentals/04-distributed-storage-systems.md#L17-L100)
+Sources: [04-distributed-storage-systems.md](domain-04-storage-data/04-distributed-storage-systems.md#L17-L100)
 
 ### 5.4 存储性能指标：IOPS、吞吐量与延迟
 
@@ -427,7 +427,7 @@ Sources: [04-distributed-storage-systems.md](domain-16-storage-fundamentals/04-d
 
 **应用场景与存储性能需求**：OLTP 数据库需要 10K-100K IOPS 和 <5ms 延迟（推荐 NVMe SSD），Web 应用需要 1K-5K IOPS（SATA SSD 即可），备份归档以吞吐优先（SATA HDD）。使用 `fio` 工具进行基准测试是验证 StorageClass 性能等级（如 AWS gp3 vs io2）的标准方法。
 
-Sources: [06-storage-performance-iops.md](domain-16-storage-fundamentals/06-storage-performance-iops.md#L17-L78)
+Sources: [06-storage-performance-iops.md](domain-04-storage-data/06-storage-performance-iops.md#L17-L78)
 
 ---
 
@@ -450,7 +450,7 @@ Linux Namespaces 是容器隔离的核心内核机制。每个 Namespace 类型�
 
 Kubernetes Pod 模型的关键设计：同一 Pod 内的所有容器**共享 Network、UTS 和 IPC Namespace**（所以它们可以通过 localhost 通信），但各自拥有独立的 PID、Mount 和 User Namespace。`nsenter` 命令是排查容器网络问题的关键工具——它允许你"进入"目标进程的 Namespace 执行诊断命令。
 
-Sources: [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container-fundamentals.md#L55-L111)
+Sources: [08-linux-container-fundamentals.md](domain-17-system-foundation/08-linux-container-fundamentals.md#L55-L111)
 
 ### 6.2 Cgroups v2：资源限制的统一管理
 
@@ -465,7 +465,7 @@ Cgroups（Control Groups）是 Linux 内核提供的资源限制机制。**Cgrou
 
 Cgroups 的实际配置路径：Kubelet 在 `/sys/fs/cgroup/kubepods/` 下为每个 Pod 和容器创建 cgroup 目录，通过写入 `cpu.max` 和 `memory.max` 文件实现资源限制。当容器内存使用超过 `memory.max` 时，内核触发 OOM Killer 终止进程——这正是 Kubernetes Pod OOMKilled 事件的底层原因。
 
-Sources: [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container-fundamentals.md#L115-L171)
+Sources: [08-linux-container-fundamentals.md](domain-17-system-foundation/08-linux-container-fundamentals.md#L115-L171)
 
 ### 6.3 OverlayFS：镜像分层的技术基础
 
@@ -486,7 +486,7 @@ OverlayFS 是容器镜像**分层存储**的核心实现。它将多个目录（
 
 OverlayFS 的 **CoW（Copy-on-Write）** 机制：当容器修改 lowerdir 中的文件时，内核先将该文件复制到 upperdir 再修改，确保只读层不被污染。这解释了为什么容器镜像可以被多个容器共享——每个容器有自己的 upperdir，但共享相同的 lowerdir 镜像层。
 
-Sources: [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container-fundamentals.md#L174-L219)
+Sources: [08-linux-container-fundamentals.md](domain-17-system-foundation/08-linux-container-fundamentals.md#L174-L219)
 
 ### 6.4 容器安全：Capabilities、Seccomp 与安全模块
 
@@ -500,7 +500,7 @@ Sources: [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container
 
 Linux Capabilities 将传统的 root 权限拆分为数十个独立能力（如 `CAP_NET_BIND_SERVICE` 允许绑定低端口、`CAP_NET_ADMIN` 允许网络管理）。Kubernetes Pod Security Standards 的 Restricted 级别要求丢弃所有 Capabilities，只保留必需的少数几个。
 
-Sources: [08-linux-container-fundamentals.md](domain-14-linux/08-linux-container-fundamentals.md#L223-L250)
+Sources: [08-linux-container-fundamentals.md](domain-17-system-foundation/08-linux-container-fundamentals.md#L223-L250)
 
 ---
 
@@ -520,7 +520,7 @@ MaxAuthTries 3                        # 最大认证尝试次数
 ClientAliveInterval 300               # 空闲超时检测
 ```
 
-Sources: [07-linux-security-hardening.md](domain-14-linux/07-linux-security-hardening.md#L30-L120)
+Sources: [07-linux-security-hardening.md](domain-17-system-foundation/07-linux-security-hardening.md#L30-L120)
 
 ### 7.2 存储运维管理体系
 
@@ -533,7 +533,7 @@ Sources: [07-linux-security-hardening.md](domain-14-linux/07-linux-security-hard
 4. **I/O 性能状态**：`iostat -xz 1 5` 检查 await 和 %util
 5. **错误日志**：`dmesg | grep -i error` 检查磁盘/控制器错误
 
-Sources: [05-storage-management-operations.md](domain-16-storage-fundamentals/05-storage-management-operations.md#L22-L100)
+Sources: [05-storage-management-operations.md](domain-04-storage-data/05-storage-management-operations.md#L22-L100)
 
 ---
 
@@ -577,7 +577,7 @@ Sources: [05-storage-management-operations.md](domain-16-storage-fundamentals/05
 | 05 | 存储管理运维 | 巡检、监控、容量规划、备份 | PV 运维管理 |
 | 06 | 存储性能 IOPS | 性能指标、fio 测试、优化 | StorageClass 性能等级 |
 
-Sources: [domain-14-linux/README.md](domain-14-linux/README.md#L19-L54), [domain-15-network-fundamentals/README.md](domain-15-network-fundamentals/README.md#L20-L29), [domain-16-storage-fundamentals/README.md](domain-16-storage-fundamentals/README.md#L20-L28)
+Sources: [domain-17-system-foundation/README.md](domain-17-system-foundation/README.md#L19-L54), [domain-03-networking-traffic/README.md](domain-03-networking-traffic/README.md#L20-L29), [domain-04-storage-data/README.md](domain-04-storage-data/README.md#L20-L28)
 
 ---
 

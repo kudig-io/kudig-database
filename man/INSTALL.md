@@ -23,6 +23,16 @@ intent_queries:
 trigger_keywords:
 - Manpage
 - 安装指南
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
+- cilium-basics
+- etcd-basics
+- tls-basics
+- backup-basics
 ---
 
 # Manpage 安装指南
@@ -170,7 +180,7 @@ kudig-man kubernetes
 ```bash
 # Linux
 sudo rm -f /usr/local/share/man/man1/kudig-*.1
-sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cilium,helm,argocd,istio,velero,cert-manager}.8
+sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cilium,helm,argocd,istio,velero,[[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]}.8
 sudo mandb
 
 # macOS

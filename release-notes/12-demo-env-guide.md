@@ -1,3 +1,37 @@
+---
+title: kudig-database Demo 环境搭建指南
+description: '# kudig-database Demo 环境搭建指南'
+category: general
+tags:
+- k8s
+- etcd
+- coredns
+- helm
+- docker
+- ceph
+- minio
+- ingress
+- llm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kudig-database Demo 环境搭建指南 是什么
+- 如何 kudig-database Demo 环境搭建指南
+trigger_keywords:
+- kudig-database
+- Demo
+- 环境搭建指南
+prerequisites:
+- kubectl-basics
+- helm-basics
+- etcd-basics
+---
+
 # kudig-database Demo 环境搭建指南
 
 > **用途**: 发布会现场演示环境搭建
@@ -21,7 +55,7 @@
 
 | 组件 | 版本要求 | 说明 |
 |------|---------|------|
-| Kubernetes | 1.28+ | 用于部署 Agent 和 RAG 系统 |
+| [[entities/kubernetes|kubernetes]] | 1.28+ | 用于部署 Agent 和 RAG 系统 |
 | kubectl | 与集群版本匹配 | 集群管理 |
 | Helm | 3.12+ | 应用部署 |
 | Python | 3.10+ | RAG 系统运行环境 |
@@ -181,10 +215,10 @@ kubectl apply -f deploy/ingress.yaml
 
 | 优先级 | 文档 | 用途 | 对应演示场景 |
 |--------|------|------|------------|
-| P0 | domain-3 etcd 深度文档 | 深度研究演示 | 场景 1 |
+| P0 | domain-01-cluster-fundamentals etcd 深度文档 | 深度研究演示 | 场景 1 |
 | P0 | topic-skills SOP (全部 18 个) | 问题排查演示 | 场景 2 |
 | P0 | topic-fta 故障树 | 问题排查演示 | 场景 2 |
-| P0 | topic-application-architecture/06-fintech | 架构设计演示 | 场景 3 |
+| P0 | domain-20-application-patterns/topic-application-architecture/06-fintech | 架构设计演示 | 场景 3 |
 | P0 | command-output-diagnosis.md | 命令解读演示 | 场景 4 |
 | P1 | diagnose-pod-crashloop.sh | 问题排查演示 | 场景 2 |
 | P1 | topic-cheat-sheet (全部 13 张) | 速查演示 (备用) | - |
@@ -197,7 +231,7 @@ kubectl apply -f deploy/ingress.yaml
 python scripts/verify.py --check-p0
 
 # 预期输出:
-# ✅ domain-3 etcd deep doc: FOUND (1,042 lines)
+# ✅ domain-01-cluster-fundamentals etcd deep doc: FOUND (1,042 lines)
 # ✅ topic-skills sop: FOUND (18 documents)
 # ✅ topic-fta fault-tree: FOUND
 # ✅ fintech-architecture: FOUND

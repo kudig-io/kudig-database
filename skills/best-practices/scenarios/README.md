@@ -1,0 +1,100 @@
+---
+title: 生产场景导航
+description: '## 概述'
+category: general
+tags:
+- k8s
+- rag
+- daemonset
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 生产场景导航 是什么
+- 如何 生产场景导航
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 生产场景导航
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- gpu-scheduling-basics
+---
+
+# 生产场景导航
+
+> 领域: topic-scenarios
+> 创建时间: 2026-05-20
+
+## 概述
+
+本主题将 Kubernetes 运维知识按实际生产场景组织，覆盖 20 个常见运维场景。每个场景包含决策树、关联文档、FTA 故障树和快速操作手册。
+
+## 场景分类
+
+### 日常运维
+- [[daily-ops]] - 日常运维操作
+- [[capacity-planning]] - 容量规划
+- [[monitoring-alerting]] - 监控与告警
+- [[cost-optimization]] - 成本优化
+
+### 部署与发布
+- [[cluster-deployment]] - 集群部署
+- [[app-deployment]] - 应用部署
+- [[gitops-workflow]] - GitOps 工作流
+- [[edge-ops]] - 边缘运维
+
+### 故障排查
+- [[troubleshooting]] - 通用故障排查
+- [[network-diagnosis]] - 网络诊断
+- [[storage-issues]] - 存储问题
+- [[performance-tuning]] - 性能调优
+
+### 安全与合规
+- [[security-hardening]] - 安全加固
+- [[security-incident]] - 安全事件响应
+- [[compliance-audit]] - 合规审计
+
+### 专项运维
+- [[backup-restore]] - 备份与恢复
+- [[multi-cluster]] - 多集群管理
+- [[mesh-ops]] - 服务网格运维
+- [[ai-infra-ops]] - AI 基础设施运维
+
+## 使用方式
+
+1. 选择对应场景
+2. 阅读场景决策树
+3. 查看关联文档和 FTA
+4. 执行推荐操作
+
+## Related
+
+- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]

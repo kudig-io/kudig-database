@@ -17,8 +17,9 @@ intent_queries:
 - 如何 深度研究最佳实践指南
 trigger_keywords:
 - 深度研究最佳实践指南
+prerequisites:
+- kubectl-basics
 ---
-
 
 # 深度研究最佳实践指南
 
@@ -635,7 +636,7 @@ add_case_to_febm(...)
 | P0-1-intent-corpus-expanded | 扩充意图语料库（320条） | ./P0-1-intent-corpus-expanded.jsonl |
 | P0-Tool-Schema-Definition | Agent工具Schema定义 | ./P0-Tool-Schema-Definition.md |
 | P0-Knowledge-Graph-RDF-Model | 知识图谱RDF模型 | ./P0-Knowledge-Graph-RDF-Model.md |
-| P1-4-Decision-Tree-Mermaid-Spec | 决策树Mermaid可视化规范 | ./P1-4-Decision-Tree-Mermaid-Spec.md |
+| P1-4-[[domain-11-production-operations/topic-k8s-lecturer/12-decision-tree/decision-tree-mermaid|Decision-Tree-Mermaid]]-Spec | 决策树Mermaid可视化规范 | ./P1-4-Decision-Tree-Mermaid-Spec.md |
 | P1-7-Reflection-Mechanism | 反思机制设计 | ./P1-7-Reflection-Mechanism.md |
 | P1-8-Agent-Diagnostic-Benchmark | Agent诊断能力评估基准 | ./P1-8-Agent-Diagnostic-Benchmark.md |
 

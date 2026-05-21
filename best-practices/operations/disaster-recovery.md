@@ -8,6 +8,8 @@ tags:
 - backup
 - velero
 - business-continuity
+- etcd
+- rag
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +27,20 @@ trigger_keywords:
 - 灾难恢复
 - 备份
 - Velero
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- backup-basics
 cross_refs:
 - type: domain
-  path: ../../domain-30-disaster-recovery-business-continuity/
-  label: '灾难恢复知识域'
+  path: ../../domain-09-reliability-engineering/
+  label: 灾难恢复知识域
 - type: domain
-  path: ../../domain-9-platform-ops/
-  label: '平台运维知识域'
+  path: ../../domain-07-platform-engineering/
+  label: 平台运维知识域
 - type: best-practice
   path: ./deployment.md
-  label: '部署策略最佳实践'
+  label: 部署策略最佳实践
 ---
 
 # Kubernetes 灾难恢复最佳实践

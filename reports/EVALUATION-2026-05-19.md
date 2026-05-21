@@ -21,6 +21,9 @@ intent_queries:
 trigger_keywords:
 - kudig-database
 - 双维度评估报告
+prerequisites:
+- kubectl-basics
+- etcd-basics
 ---
 
 # kudig-database 双维度评估报告
@@ -54,7 +57,7 @@ trigger_keywords:
 
 **优势:**
 - [✓] 1,524,170 行、40 个知识域、97 个行业场景 — 远超同领域知识库
-- [✓] 已有自我差距分析 (`topic-ai-agent/15-agent-corpus-gap-analysis.md`)，精准识别了 10 大类缺失，方法论 (Agent Readiness 三层模型) 专业
+- [✓] 已有自我差距分析 (`domain-14-ai-ml-infra/topic-ai-agent/15-agent-corpus-gap-analysis.md`)，精准识别了 10 大类缺失，方法论 (Agent Readiness 三层模型) 专业
 - [✓] 多粒度文档: domain 深度文档 + topic-fta 推理骨架 + topic-skills 诊断技能 + topic-cheat-sheet 速查卡 + topic-dictionary 术语词典
 - [✓] FTA 故障树 77 篇、排障文档 50 篇、运维技能 34 篇 — 排障推理链完整
 - [✓] topic-ai-agent 专题 58 篇，覆盖 Agent 全栈: 基础→框架→RAG→多 Agent→AgentScope→CLI Agent→Harness 工程→OpenClaw 架构
@@ -73,7 +76,7 @@ trigger_keywords:
 - [✓] export-corpus.sh 支持 full/agent/lite 三种导出格式
 
 **差距:**
-- [×] front matter 格式不统一 — 部分用 YAML (`---`), 部分用 blockquote (`>`), 部分无 front matter。采样 domain-3 中 10 篇, 仅 ~40% 使用标准 YAML front matter
+- [×] front matter 格式不统一 — 部分用 YAML (`---`), 部分用 blockquote (`>`), 部分无 front matter。采样 domain-01-cluster-fundamentals 中 10 篇, 仅 ~40% 使用标准 YAML front matter
 - [×] intent_queries 覆盖不完整 — validate-frontmatter.py 存在但并非所有文档已补充
 - [×] cross_refs 字段覆盖率低 — enhance-cross-refs.py 脚本存在但未大规模执行
 - [×] 缺少 structured QA pairs — 顶级 Agent 语料需要 question-answer 对作为 fine-tuning 或 RAG 评测数据
@@ -107,7 +110,7 @@ trigger_keywords:
 
 ## 维度二：专业技术专家知识库 (Expert Knowledge Base)
 
-**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 Kubernetes 生产运维知识库之一
+**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 [[entities/kubernetes|kubernetes]] 生产运维知识库之一
 
 ### 1. 技术深度与专业性 — 评分: 9.5/10
 
@@ -125,15 +128,15 @@ trigger_keywords:
 
 ### 3. 学习体系完整性 — 评分: 9.0/10
 
-- [✓] topic-learn/ 两套完整培训体系: public-training + one-month
+- [✓] domain-11-production-operations/topic-learn/ 两套完整培训体系: public-training + one-month
 - [✓] 知识图谱定义模块间依赖关系和学习路径
 - [✓] 难度梯度清晰: beginner → intermediate → advanced → expert
 
 ### 4. 生产运维实用性 — 评分: 9.0/10
 
-- [✓] topic-functions/: 80 篇功能文档 (集群创建/删除/证书管理/部署管理)
-- [✓] topic-structural-trouble-shooting/: 70 篇结构化排障, 12 个维度
-- [✓] topic-skills/: 34 篇运维技能文档 — Agent 可直接调用的 SOP
+- [✓] domain-02-workloads-applications/topic-functions/: 80 篇功能文档 (集群创建/删除/证书管理/部署管理)
+- [✓] domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/: 70 篇结构化排障, 12 个维度
+- [✓] domain-10-troubleshooting-diagnostics/topic-skills/: 34 篇运维技能文档 — Agent 可直接调用的 SOP
 
 ---
 

@@ -18,6 +18,8 @@ trigger_keywords:
 - 环境下生成
 - GitBook
 - 离线静态版本指南
+prerequisites:
+- kubectl-basics
 ---
 
 # Windows 环境下生成 GitBook 离线静态版本指南

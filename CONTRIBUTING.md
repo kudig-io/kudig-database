@@ -16,6 +16,8 @@ intent_queries:
 - 如何 贡献指南
 trigger_keywords:
 - 贡献指南
+prerequisites:
+- kubectl-basics
 ---
 
 # 贡献指南
@@ -50,8 +52,8 @@ git push origin feature/your-feature-name
 
 | 前缀 | 用途 | 示例 |
 |:---|:---|:---|
-| `domain-{N}-` | 知识域目录，按序号递增 | `domain-1-architecture-fundamentals/` |
-| `topic-` | 专题目录，横切多个知识域 | `topic-fta/`, `topic-skills/` |
+| `domain-{N}-` | 知识域目录，按序号递增 | `domain-01-cluster-fundamentals/` |
+| `topic-` | 专题目录，横切多个知识域 | `domain-10-troubleshooting-diagnostics/topic-fta/`, `domain-10-troubleshooting-diagnostics/topic-skills/` |
 | 无前缀 | 工具/基础设施目录 | `scripts/`, `man/`, `gitbook/`, `reports/` |
 
 ### 文件命名规则
@@ -60,7 +62,7 @@ git push origin feature/your-feature-name
 ✅ 正确格式：
   01-kubernetes-architecture-overview.md    （连字符 + 双位数编号）
   fta-methodology-and-agentic-practices.md （非编号文件用连字符）
-  README.md                                 （目录索引文件，大写）
+  [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md                                 （目录索引文件，大写）
 
 ❌ 错误格式：
   1_fta_origin_and_evolution.md             （不使用下划线）
@@ -161,10 +163,10 @@ metadata:
 [文档名](./02-filename.md)
 
 # 跨目录引用
-[文档名](../domain-5-networking/11-service-concepts-types.md)
+[文档名](../domain-03-networking-traffic/11-service-concepts-types.md)
 
 # 不使用绝对路径
-❌ [文档名](/Users/xxx/kudig-database/domain-5/xxx.md)
+❌ [文档名](/Users/xxx/kudig-database/domain-03-networking-traffic/xxx.md)
 ```
 
 ### 推荐的文档关联
@@ -193,11 +195,11 @@ metadata:
 | 模板文件 | 用途 | 适用目录 |
 |:---|:---|:---|
 | `domain-article-template.md` | 知识域深度文档 | `domain-*/` |
-| `fta-template.md` | FTA 故障树分析（含评审检查表） | `topic-fta/list/` |
-| `skill-template.md` | Skill 工单技能（完整 12 节结构） | `topic-skills/` |
-| `febm-template.md` | FEBM 法医取证分析 | `topic-febm/` |
-| `cheat-sheet-template.md` | 技术速查卡 | `topic-cheat-sheet/` |
-| `presentation-template.md` | 培训课程/演讲稿 | `topic-presentations/` |
+| `fta-template.md` | FTA 故障树分析（含评审检查表） | `domain-10-troubleshooting-diagnostics/topic-fta/list/` |
+| `skill-template.md` | Skill 工单技能（完整 12 节结构） | `domain-10-troubleshooting-diagnostics/topic-skills/` |
+| `febm-template.md` | FEBM 法医取证分析 | `domain-10-troubleshooting-diagnostics/topic-febm/` |
+| `cheat-sheet-template.md` | 技术速查卡 | `domain-17-system-foundation/topic-cheat-sheet/` |
+| `presentation-template.md` | 培训课程/演讲稿 | `domain-11-production-operations/topic-presentations/` |
 
 详细说明见 [`templates/README.md`](./templates/README.md)。
 
@@ -205,7 +207,7 @@ metadata:
 
 ```bash
 # 1. 选择对应模板
-cp templates/fta-template.md topic-fta/list/12-new-component-fta.md
+cp templates/fta-template.md domain-10-troubleshooting-diagnostics/topic-fta/list/12-new-component-fta.md
 
 # 2. 全局替换占位符
 # {{组件名称}} → 实际内容
@@ -220,7 +222,7 @@ cp templates/fta-template.md topic-fta/list/12-new-component-fta.md
 
 ### YAML Front Matter 要求
 
-所有 `domain-*`、`topic-*`、`topic-fta/list/*.md` 文档**强烈建议**在文件开头包含 YAML front matter：
+所有 `domain-*`、`topic-*`、`domain-10-troubleshooting-diagnostics/topic-fta/list/*.md` 文档**强烈建议**在文件开头包含 YAML front matter：
 
 ```yaml
 ---

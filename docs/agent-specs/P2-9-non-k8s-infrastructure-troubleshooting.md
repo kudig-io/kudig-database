@@ -20,15 +20,16 @@ intent_queries:
 trigger_keywords:
 - Kubernetes
 - 基础设施故障排查
+prerequisites:
+- kubectl-basics
 ---
-
 
 # 非 Kubernetes 基础设施故障排查
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 K8s 基础设施的故障排查
-> **关联**: domain-14-linux, domain-15-network-fundamentals
+> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes|k8s]] 基础设施的故障排查
+> **关联**: domain-14-linux, domain-03-networking-traffic
 
 ---
 
@@ -378,6 +379,6 @@ echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -d
 ---
 
 **关联文档**:
-- [domain-14-linux/](../domain-14-linux/) — Linux 系统基础
-- [domain-15-network-fundamentals/](../domain-15-network-fundamentals/) — 网络基础
-- [domain-5-networking/](../domain-5-networking/) — Kubernetes 网络
+- [domain-17-system-foundation/](../domain-17-system-foundation/) — Linux 系统基础
+- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — 网络基础
+- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — Kubernetes 网络

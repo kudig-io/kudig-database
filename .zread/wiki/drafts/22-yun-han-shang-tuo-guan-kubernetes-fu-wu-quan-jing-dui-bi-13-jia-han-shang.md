@@ -1,6 +1,6 @@
 本文对 **13 家云厂商的托管 Kubernetes 服务**进行系统性横向对比，覆盖国际三大云（AWS EKS、Google GKE、Azure AKS）、国内头部云（阿里云 ACK、腾讯云 TKE、华为云 CCE）、以及 UCloud UK8s、IBM IKS、Oracle OKE、火山引擎 VEK、天翼云 TKE、移动云 CKE 和阿里云专有云 Apsara Stack ACK。每家厂商的产品定位、架构特色、SLA 承诺、计费模式、网络/存储方案均源自本库中的深度实战文档，旨在为架构决策者提供**从技术参数到选型逻辑**的全景视图。
 
-Sources: [README.md](domain-17-cloud-provider/README.md#L1-L218)
+Sources: [README.md](domain-12-cloud-providers/README.md#L1-L218)
 
 ---
 
@@ -40,7 +40,7 @@ graph TD
 
 **架构解读**：国际三强以**生态广度**和**全球部署能力**为核心壁垒；国内头部云以**本地化合规**和**特定行业深度适配**为差异化方向；运营商云则依赖其**物理网络基础设施**优势构建不可替代性。选型时应首先确定自身所属的业务梯队，再在同一梯队内做精细化对比。
 
-Sources: [README.md](domain-17-cloud-provider/README.md#L20-L64)
+Sources: [README.md](domain-12-cloud-providers/README.md#L20-L64)
 
 ---
 
@@ -68,7 +68,7 @@ Sources: [README.md](domain-17-cloud-provider/README.md#L20-L64)
 
 **关键发现**：Google GKE（2015 年首发）是**最早商用的托管 K8s 服务**，在版本跟进和功能成熟度上始终保持领先。Azure AKS 的**免费控制平面**是其独特差异化策略。火山引擎 VEK 虽为新入局者，但在**集群规模上限**和**调度延迟**指标上达到业界领先水平。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L1-L10), [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L1-L10), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L1-L10), [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L1-L10), [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L1-L10), [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L1-L10), [ucloud-uk8s-overview.md](domain-17-cloud-provider/07-ucloud-uk8s/ucloud-uk8s-overview.md#L1-L10), [ibm-iks-overview.md](domain-17-cloud-provider/08-ibm-iks/ibm-iks-overview.md#L1-L10), [oracle-oke-overview.md](domain-17-cloud-provider/09-oracle-oke/oracle-oke-overview.md#L1-L10), [volcengine-vek-overview.md](domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.md#L1-L10), [ctyun-tke-overview.md](domain-17-cloud-provider/11-ctyun-tke/ctyun-tke-overview.md#L1-L10), [ecloud-cke-overview.md](domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.md#L1-L10), [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L1-L10)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L1-L10), [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L1-L10), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L1-L10), [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L1-L10), [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L1-L10), [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L1-L10), [ucloud-uk8s-overview.md](domain-12-cloud-providers/07-ucloud-uk8s/ucloud-uk8s-overview.md#L1-L10), [ibm-iks-overview.md](domain-12-cloud-providers/08-ibm-iks/ibm-iks-overview.md#L1-L10), [oracle-oke-overview.md](domain-12-cloud-providers/09-oracle-oke/oracle-oke-overview.md#L1-L10), [volcengine-vek-overview.md](domain-12-cloud-providers/10-volcengine-vek/volcengine-vek-overview.md#L1-L10), [ctyun-tke-overview.md](domain-12-cloud-providers/11-ctyun-tke/ctyun-tke-overview.md#L1-L10), [ecloud-cke-overview.md](domain-12-cloud-providers/12-ecloud-cke/ecloud-cke-overview.md#L1-L10), [alicloud-apsara-ack-overview.md](domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L1-L10)
 
 ### SLA 承诺与集群规模上限对比
 
@@ -90,7 +90,7 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 
 **关键发现**：在集群规模维度，火山引擎 VEK 的**10 万节点**单集群支持能力远超同行，这源于字节跳动内部超大规模容器平台的实战积累。在 SLA 维度，阿里云专有云和天翼云承诺的 **99.99%** 金融/电信级 SLA 是行业最高标准，代价是更高的部署成本和更受限的灵活性。华为云 CCE 的 2000 节点上限虽低于头部厂商，但在**信创环境**下仍是最成熟的选择。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L555-L643), [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L10-L23), [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L10-L10), [volcengine-vek-overview.md](domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.md#L10-L17), [ecloud-cke-overview.md](domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.md#L10-L19), [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L18-L21)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L555-L643), [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L10-L23), [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L10-L10), [volcengine-vek-overview.md](domain-12-cloud-providers/10-volcengine-vek/volcengine-vek-overview.md#L10-L17), [ecloud-cke-overview.md](domain-12-cloud-providers/12-ecloud-cke/ecloud-cke-overview.md#L10-L19), [alicloud-apsara-ack-overview.md](domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L18-L21)
 
 ### 网络与存储方案对比
 
@@ -106,7 +106,7 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 
 **关键发现**：Google GKE 的 **Dataplane V2 基于 eBPF** 实现，代表了云厂商 CNI 技术的最前沿——将网络策略执行、负载均衡和可观测性统一在内核层完成。阿里云 ACK 的 **Terway** 基于 ENI 弹性网卡，在 VPC 直连场景下性能优于传统 Overlay 方案。腾讯云 TKE 的 VPC-CNI 可实现**亚毫秒级网络延迟**，这对在线游戏和实时通信场景至关重要。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L53-L68), [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L45-L61), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L31-L46), [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L37-L47), [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L46-L57), [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L14-L21)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L53-L68), [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L45-L61), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L31-L46), [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L37-L47), [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L46-L57), [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L14-L21)
 
 ---
 
@@ -126,7 +126,7 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 
 **成本选型建议**：若控制平面费用是关键考量，Azure AKS 的**免费控制平面**策略使其在低负载场景下总拥有成本最低。对于需要极致弹性的场景，Google GKE Autopilot 和 AWS Fargate 的**按 Pod 资源消耗计费**模式可避免为空闲节点付费。在国内市场，UCloud UK8s 凭借**比传统方案低 40-60% 的成本**成为中小企业和创业公司的性价比之选。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L759-L767), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L851-L859), [ucloud-uk8s-overview.md](domain-17-cloud-provider/07-ucloud-uk8s/ucloud-uk8s-overview.md#L14-L20), [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L33-L42)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L759-L767), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L851-L859), [ucloud-uk8s-overview.md](domain-12-cloud-providers/07-ucloud-uk8s/ucloud-uk8s-overview.md#L14-L20), [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L33-L42)
 
 ---
 
@@ -136,59 +136,59 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 
 **AWS EKS** 的核心竞争力在于**企业级生态集成**——从 IAM 身份管理到 CloudWatch 可观测性，从 ALB 负载均衡到 RDS 数据库，EKS 几乎与 AWS 全部 200+ 服务实现原生集成。其 EKS Anywhere 方案允许在本地数据中心和边缘位置运行与云端一致的 Kubernetes 集群，统一了混合云管理平面。EKS 控制平面跨三个可用区部署，提供 99.95% SLA，单集群支持最大 5000 节点。VPC CNI 插件使每个 Pod 直接获得 VPC IP 地址，无需 NAT 即可与 VPC 内其他资源通信。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L1-L68), [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L551-L596)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L1-L68), [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L551-L596)
 
 **Google GKE** 是 Kubernetes 的**原生发源地**（Google 内部 Borg/Omega 系统的技术延续），在版本更新速度和功能成熟度上始终领先。GKE 提供两种截然不同的运行模式：Standard 模式用户管理节点，Autopilot 模式由 Google 完全托管整个集群——包括节点配置优化、自动扩缩容和安全补丁。其 Dataplane V2 基于 **eBPF** 技术构建，将网络策略、负载均衡和可观测性下沉到内核层，性能远超传统 iptables 方案。Anthos 平台提供跨多云和本地环境的统一管理能力。
 
-Sources: [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L1-L61), [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L842-L853)
+Sources: [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L1-L61), [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L842-L853)
 
 **Azure AKS** 的差异化策略体现在两个维度：一是**免费的控制平面**（其他主流厂商均对控制平面收费），显著降低了入门成本；二是通过 **Azure Arc** 实现业界最成熟的混合云管理方案，可将非 Azure 环境（包括其他公有云和本地数据中心）的 Kubernetes 集群纳入统一管理平面。AKS 深度集成 Azure Active Directory 和 Microsoft 生态，对企业级合规场景天然友好。
 
-Sources: [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L1-L46), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L648-L673)
+Sources: [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L1-L46), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L648-L673)
 
 ### 国内头部云：合规适配 vs. 场景深耕
 
 **阿里云 ACK** 在中国市场份额第一，提供**托管版**和**专有版**两种架构。托管版控制平面由阿里云运维，部署在专用 VPC 中与用户网络隔离；专有版用户自管控制平面，支持离线环境和私有化部署，适用于金融、政府等对数据安全要求极高的行业。网络方面，Terway 插件基于阿里云 ENI 实现高性能 VPC 直连，支持 IPv4/IPv6 双栈。存储方面，ESSD 云盘单盘最高可达 100 万 IOPS，NAS 文件存储支持万级并发共享访问。ACK Serverless（ECI）按弹性容器实例计费，秒级启动，适合突发性工作负载。
 
-Sources: [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L1-L47), [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L357-L386)
+Sources: [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L1-L47), [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L357-L386)
 
 **腾讯云 TKE** 承载了微信、QQ、王者荣耀等超大规模业务，具备**万级节点、十万级 Pod** 的集群管理能力。TKE 提供三种集群模式：托管集群（99.95% SLA）、独立集群（更高安全隔离）和超级节点集群（无服务器模式）。其 VPC-CNI 网络插件使每个 Pod 获得独立 VPC IP，网络延迟低于 1ms，非常适合在线游戏和实时通信场景。Spot 实例支持最高节省 80% 成本，GPU 节点池专门优化 AI/ML 工作负载。
 
-Sources: [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L1-L57), [tencent-tke-overview.md](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md#L1168-L1169)
+Sources: [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L1-L57), [tencent-tke-overview.md](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md#L1168-L1169)
 
 **华为云 CCE** 的核心竞争力在于**信创全栈支持**和**鲲鹏 ARM 架构优化**。控制平面支持鲲鹏 ARM 原生部署，采用国密算法加密通信，国产化 etcd 存储引擎经过专门优化。单集群支持 2000 节点，调度延迟 <50ms，资源利用率 >80%。CCE 深度融合了华为在通信、云计算和 AI 领域的技术积累，特别适合政企客户、信创改造和边缘计算场景。
 
-Sources: [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L1-L10), [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L14-L21)
+Sources: [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L1-L10), [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L14-L21)
 
 ### 企业级与特殊定位厂商
 
 **IBM IKS** 专为金融、医疗、政府等高安全行业设计，提供经典集群、VPC 集群和 **OpenShift 集群**三种模式。OpenShift 集成提供企业级 CI/CD、监控和日志等开箱即用的工具链。IBM Cloud Direct Link 专线连接和 VPN 隧道使其在混合云网络连通性方面具有独特优势。99.95% 企业级 SLA，配合 Watson AI 智能调度算法，在大规模企业部署中表现出色。
 
-Sources: [ibm-iks-overview.md](domain-17-cloud-provider/08-ibm-iks/ibm-iks-overview.md#L1-L63)
+Sources: [ibm-iks-overview.md](domain-12-cloud-providers/08-ibm-iks/ibm-iks-overview.md#L1-L63)
 
 **Oracle OKE** 的独特价值在于**裸金属节点**和**数据库深度集成**。Oracle 自主研发的网络虚拟化技术支持高达 100Gbps 的网络吞吐量和微秒级延迟优化。OKE 与 Oracle Autonomous Database、Exadata 等企业级数据库原生集成，适合对数据库性能和安全性有极致要求的关键业务场景。企业级 SLA 保证 99.95% 可用性。
 
-Sources: [oracle-oke-overview.md](domain-17-cloud-provider/09-oracle-oke/oracle-oke-overview.md#L1-L55)
+Sources: [oracle-oke-overview.md](domain-12-cloud-providers/09-oracle-oke/oracle-oke-overview.md#L1-L55)
 
 **火山引擎 VEK** 继承字节跳动内部超大规模容器平台（Bytedance Container Platform）的技术积累，在**集群规模**和**调度性能**上达到业界顶级水平：单集群支持 **10 万节点**，调度延迟 **<10ms**，资源利用率 **>85%**，支持千万级 QPS。VEK 自研 ByteScheduler 分布式调度算法，采用机器学习调度策略，支持 NVIDIA A100/H100/V100 全系列 GPU 和字节跳动自研 AI 芯片。特别适合推荐系统、短视频处理、实时搜索等高并发 AI 场景。
 
-Sources: [volcengine-vek-overview.md](domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.md#L1-L22), [volcengine-vek-overview.md](domain-17-cloud-provider/10-volcengine-vek/volcengine-vek-overview.md#L86-L124)
+Sources: [volcengine-vek-overview.md](domain-12-cloud-providers/10-volcengine-vek/volcengine-vek-overview.md#L1-L22), [volcengine-vek-overview.md](domain-12-cloud-providers/10-volcengine-vek/volcengine-vek-overview.md#L86-L124)
 
 ### 运营商云：网络基础设施的不可替代性
 
 **天翼云 TKE** 基于中国电信的骨干网络基础设施，深度融合 **5G 网络切片技术**。控制平面跨三个物理机房部署，99.99% 电信级 SLA 保障。特色包括边缘计算节点就近接入（部署在 5G 基站附近）、安全增强节点（国产化硬件平台）和电信级网络 QoS 保障。特别适合对网络延迟敏感和对数据主权有严格要求的政企客户。
 
-Sources: [ctyun-tke-overview.md](domain-17-cloud-provider/11-ctyun-tke/ctyun-tke-overview.md#L1-L38), [ctyun-tke-overview.md](domain-17-cloud-provider/11-ctyun-tke/ctyun-tke-overview.md#L1343-L1343)
+Sources: [ctyun-tke-overview.md](domain-12-cloud-providers/11-ctyun-tke/ctyun-tke-overview.md#L1-L38), [ctyun-tke-overview.md](domain-12-cloud-providers/11-ctyun-tke/ctyun-tke-overview.md#L1343-L1343)
 
 **移动云 CKE** 发挥中国移动在 **CDN 网络**和 5G 技术方面的独特优势。控制平面跨三大运营商网络区域部署，与中国移动骨干网深度融合，网络延迟优化 50%。CDN 加速可提升访问速度 **300%**，专属宿主机架构提供物理级隔离。单集群支持 3000 节点，数据持久性达 99.999%。特别适合内容分发、视频直播、大型政企应用场景。
 
-Sources: [ecloud-cke-overview.md](domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.md#L1-L19), [ecloud-cke-overview.md](domain-17-cloud-provider/12-ecloud-cke/ecloud-cke-overview.md#L78-L80)
+Sources: [ecloud-cke-overview.md](domain-12-cloud-providers/12-ecloud-cke/ecloud-cke-overview.md#L1-L19), [ecloud-cke-overview.md](domain-12-cloud-providers/12-ecloud-cke/ecloud-cke-overview.md#L78-L80)
 
 ### 专有云方案
 
 **阿里云 Apsara Stack ACK** 是面向政企客户的**金融级容器平台**，基于阿里云飞天操作系统构建。控制平面三副本跨机房部署，金融级 etcd 集群采用 5 节点 Raft 协议，支持同城双活和异地容灾。99.99% 金融级 SLA 保障，支持国密 SM4 加密和等保四级认证。完全独立部署、自主可控，支持离线运行，适用于政府、金融、电信等对数据安全和合规性要求极高的行业。
 
-Sources: [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L1-L21), [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L14-L21)
+Sources: [alicloud-apsara-ack-overview.md](domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L1-L21), [alicloud-apsara-ack-overview.md](domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L14-L21)
 
 ---
 
@@ -211,7 +211,7 @@ Sources: [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-
 | 混合多云统一管理 | Azure AKS (Arc) | Google GKE (Anthos) | Arc 跨云管理成熟度最高 |
 | 5G 边缘计算 | 天翼云 TKE | 移动云 CKE | 5G 切片 + 基站级边缘节点 |
 
-Sources: [README.md](domain-17-cloud-provider/README.md#L69-L84)
+Sources: [README.md](domain-12-cloud-providers/README.md#L69-L84)
 
 ---
 
@@ -231,7 +231,7 @@ Sources: [README.md](domain-17-cloud-provider/README.md#L69-L84)
 
 **安全选型要点**：阿里云专有云是唯一达到**等保四级**认证的方案（其他国内厂商多为三级），其完全物理隔离和国密 SM4 加密能力使其成为金融、国防等最高安全等级场景的唯一选择。在国际厂商中，三家均通过了 SOC、ISO 27001、PCI DSS 和 HIPAA 认证，但 Google GKE 的 Binary Authorization（二进制授权）在供应链安全方面更为领先。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L104-L120), [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L97-L115), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L82-L105), [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L18-L28), [huawei-cce-overview.md](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md#L14-L21), [alicloud-apsara-ack-overview.md](domain-17-cloud-provider/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L14-L60), [oracle-oke-overview.md](domain-17-cloud-provider/09-oracle-oke/oracle-oke-overview.md#L7-L10)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L104-L120), [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L97-L115), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L82-L105), [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L18-L28), [huawei-cce-overview.md](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md#L14-L21), [alicloud-apsara-ack-overview.md](domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md#L14-L60), [oracle-oke-overview.md](domain-12-cloud-providers/09-oracle-oke/oracle-oke-overview.md#L7-L10)
 
 ---
 
@@ -248,7 +248,7 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 
 **注意**：阿里云 ACK 推荐规格整体偏高，反映了其面向中大型企业客户的定位策略。实际选型时应根据具体业务负载进行压测验证。
 
-Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md#L93-L103), [google-cloud-gke-overview.md](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md#L86-L96), [azure-aks-overview.md](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md#L72-L81), [alicloud-ack-overview.md](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md#L74-L80)
+Sources: [aws-eks-overview.md](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md#L93-L103), [google-cloud-gke-overview.md](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md#L86-L96), [azure-aks-overview.md](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md#L72-L81), [alicloud-ack-overview.md](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md#L74-L80)
 
 ---
 
@@ -257,14 +257,14 @@ Sources: [aws-eks-overview.md](domain-17-cloud-provider/01-aws-eks/aws-eks-overv
 本文覆盖的 13 家厂商各有独立的深度实战文档，建议按需深入阅读：
 
 **国际厂商深度解析**：
-- [AWS EKS 企业级实战](domain-17-cloud-provider/01-aws-eks/aws-eks-overview.md) — Fargate 无服务器、Node Groups 管理、混合云部署
-- [Google GKE 企业级实战](domain-17-cloud-provider/02-google-cloud-gke/google-cloud-gke-overview.md) — Autopilot 全托管、Anthos 混合多云
-- [Azure AKS 企业级实战](domain-17-cloud-provider/03-azure-aks/azure-aks-overview.md) — 免费控制平面、Azure Arc 混合云管理
+- [AWS EKS 企业级实战](domain-12-cloud-providers/01-aws-eks/aws-eks-overview.md) — Fargate 无服务器、Node Groups 管理、混合云部署
+- [Google GKE 企业级实战](domain-12-cloud-providers/02-google-cloud-gke/google-cloud-gke-overview.md) — Autopilot 全托管、Anthos 混合多云
+- [Azure AKS 企业级实战](domain-12-cloud-providers/03-azure-aks/azure-aks-overview.md) — 免费控制平面、Azure Arc 混合云管理
 
 **国内厂商深度解析**：
-- [阿里云 ACK 实战指南](domain-17-cloud-provider/04-alicloud-ack/alicloud-ack-overview.md) — 托管版/专有版架构、Terway 网络深度解析
-- [腾讯云 TKE 实战指南](domain-17-cloud-provider/05-tencent-tke/tencent-tke-overview.md) — 超级节点、万级节点集群管理
-- [华为云 CCE 实战指南](domain-17-cloud-provider/06-huawei-cce/huawei-cce-overview.md) — 鲲鹏 ARM 优化、信创全栈支持
+- [阿里云 ACK 实战指南](domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md) — 托管版/专有版架构、Terway 网络深度解析
+- [腾讯云 TKE 实战指南](domain-12-cloud-providers/05-tencent-tke/tencent-tke-overview.md) — 超级节点、万级节点集群管理
+- [华为云 CCE 实战指南](domain-12-cloud-providers/06-huawei-cce/huawei-cce-overview.md) — 鲲鹏 ARM 优化、信创全栈支持
 
 **关联知识域**：
 - [多云混合部署策略](20-sheng-chan-yun-wei-gitops-finops-zai-bei-hui-fu-yu-bian-geng-guan-li) — 生产运维中的多云架构设计

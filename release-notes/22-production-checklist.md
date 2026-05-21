@@ -1,3 +1,25 @@
+---
+title: 发布会制作 — 立即执行清单
+description: '| D+2 | 主视频段落 1-2 录制 | 开场 + 产品介绍 | 数字人平台 |'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 发布会制作 — 立即执行清单 是什么
+- 如何 发布会制作 — 立即执行清单
+trigger_keywords:
+- 发布会制作
+- 立即执行清单
+prerequisites:
+- kubectl-basics
+---
+
 # 发布会制作 — 立即执行清单
 
 > **目标**: 从今天开始, 14 天内完成全部制作
@@ -37,7 +59,7 @@
 |----|------|------|------|
 | D+8 | 短视频切片 1-3 | 3 个短视频 | 剪映数字人 |
 | D+9 | 短视频切片 4-6 | 3 个短视频 | 剪映数字人 |
-| D+10 | GitHub README 更新 | 新版 README | Git |
+| D+10 | GitHub [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]] 更新 | 新版 README | Git |
 | D+11 | 快速上手指南验证 | 可用的指南 | 终端 |
 | D+12 | 社交媒体文案定稿 | 各平台文案 | 文档 |
 | D+13 | 内部评审 + 修改 | 终版全部素材 | 会议 |

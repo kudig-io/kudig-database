@@ -1,3 +1,30 @@
+---
+title: 发布会演示脚本 (完整版)
+description: '"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 Kubernetes 生产运维知识库。'
+category: general
+tags:
+- k8s
+- etcd
+- networkpolicy
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 发布会演示脚本 (完整版) 是什么
+- 如何 发布会演示脚本 (完整版)
+trigger_keywords:
+- 发布会演示脚本
+- 完整版
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 发布会演示脚本 (完整版)
 
 > **总时长**: 15 分钟
@@ -9,7 +36,7 @@
 
 **主持人**:
 
-"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 Kubernetes 生产运维知识库。
+"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 [[entities/kubernetes|kubernetes]] 生产运维知识库。
 
 它不是一份文档, 不是一个 Wiki, 而是 3,346 篇经过结构化处理的专家级知识, 可以直接被智能体检索和使用。
 
@@ -29,7 +56,7 @@
 
 **Agent 输出要点** (主持人边展示边讲解):
 
-1. "Agent 命中了 domain-3-control-plane 的 etcd 深度文档, 1,042 行"
+1. "Agent 命中了 domain-01-cluster-fundamentals 的 etcd 深度文档, 1,042 行"
 2. "它给出了 Raft 共识协议的完整解析, 包括 Leader 选举和日志复制"
 3. "MVCC 数据模型, 解释了多版本并发控制的原理"
 4. "备份恢复的完整操作流程, 含 etcdctl 命令"
@@ -73,7 +100,7 @@
 
 **Agent 输出要点**:
 
-1. "Agent 命中了 topic-application-architecture/06-fintech-architecture.md"
+1. "Agent 命中了 domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md"
 2. "给出了完整的微服务拆分: 支付网关/风控引擎/账务系统/清算系统"
 3. "安全架构: HSM 密钥管理 + KMS + TDE 加密 + 审计日志"
 4. "多可用区部署方案, 含 Mermaid 架构图"

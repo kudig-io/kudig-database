@@ -18,6 +18,8 @@ intent_queries:
 - 如何 深度研究能力评估报告
 trigger_keywords:
 - 深度研究能力评估报告
+prerequisites:
+- kubectl-basics
 ---
 
 # 深度研究能力评估报告
@@ -67,7 +69,7 @@ trigger_keywords:
 | Category | 当前语料条数 | 建议目标 | 差距 |
 |----------|-------------|---------|------|
 | TC-INFRA-NODE | ~15条 | 500+ | -485 |
-| TC-APP-POD | ~12条 | 500+ | -488 |
+| TC-APP-[[concepts/pod-lifecycle|pod]] | ~12条 | 500+ | -488 |
 | TC-INFRA-NET | ~10条 | 500+ | -490 |
 | TC-SEC | ~8条 | 500+ | -492 |
 | TC-DATA | 0条 | 500+ | -500 |
@@ -178,7 +180,7 @@ tool_schema:
 kudig:FTA-001 rdf:type kudig:FaultTree .
 kudig:FTA-001 kudig:hasRootCause kudig:RC-001 .
 kudig:RC-001 kudig:relatedTo kudig:SKILL-NODE-001 .
-kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-12-troubleshooting .
+kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-10-troubleshooting-diagnostics .
 ```
 
 ---

@@ -22,8 +22,12 @@ intent_queries:
 - 数据库中间件故障排查指南 排障步骤
 trigger_keywords:
 - 数据库中间件故障排查指南
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- redis-basics
+- mysql-basics
 ---
-
 
 # 数据库中间件故障排查指南
 
@@ -86,7 +90,7 @@ mysql -e "SHOW ENGINE INNODB STATUS\G"
 # → 长事务需尽早提交
 ```
 
-### 1.4 MySQL Operator 问题 (K8s)
+### 1.4 MySQL Operator 问题 ([[entities/kubernetes|k8s]])
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -406,6 +410,6 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 ---
 
 **关联文档**:
-- [domain-28-enterprise-database-middleware/](../domain-28-enterprise-database-middleware/) — 数据库中间件完整文档
-- [domain-12-troubleshooting/](../domain-12-troubleshooting/) — K8s 通用故障排查
-- [topic-skills/](../topic-skills/) — 通用运维 Skill
+- [domain-16-database-middleware/](../domain-16-database-middleware/) — 数据库中间件完整文档
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用故障排查
+- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill

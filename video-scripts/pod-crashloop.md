@@ -20,6 +20,8 @@ trigger_keywords:
 - OOMKilled
 - 诊断与修复
 - 数字人播报脚本
+prerequisites:
+- kubectl-basics
 ---
 
 # Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
@@ -82,7 +84,7 @@ trigger_keywords:
 - **命令**:
   ```bash
   # 查看当前容器日志（如果容器正在运行）
-  kubectl logs <pod> -n <namespace> -c <container>
+  kubectl logs <pod> -n <namespace> -c <[[entities/docker|container]]>
   
   # 查看上一次崩溃的容器日志（CrashLoop 场景必用）
   kubectl logs <pod> -n <namespace> -c <container> --previous
@@ -183,6 +185,6 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 ## 关联知识库
 
-- Skill 源文档：topic-skills/02-pod-crashloop-oomkilled.md
-- 相关 FTA：参考 topic-fta/
-- 深度排查：参考 topic-structural-trouble-shooting/
+- Skill 源文档：domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md
+- 相关 FTA：参考 domain-10-troubleshooting-diagnostics/topic-fta/
+- 深度排查：参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/

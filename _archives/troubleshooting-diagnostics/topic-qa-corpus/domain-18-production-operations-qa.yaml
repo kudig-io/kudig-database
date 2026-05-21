@@ -1,0 +1,518 @@
+domain: domain-18-production-operations
+total_questions: 105
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Domain-18 生产运维 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-18-production-operations/00-open-source-projects-index.md 的「核心项目总览」章节。
+  source: domain-18-production-operations/00-open-source-projects-index.md
+  section: 核心项目总览
+- type: comparison
+  question: Domain-18 生产运维 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/00-open-source-projects-index.md 中的对比分析。
+  source: domain-18-production-operations/00-open-source-projects-index.md
+- type: concept
+  question: 在 01-生产架构设计原则 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md 的「概述」章节。
+  source: domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md
+  section: 概述
+- type: concept
+  question: 在 01-生产架构设计原则 中, ️ 高可用架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md 的「️ 高可用架构设计」章节。
+  source: domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md
+  section: ️ 高可用架构设计
+- type: concept
+  question: 在 01-生产架构设计原则 中, 安全架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md 的「安全架构设计」章节。
+  source: domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md
+  section: 安全架构设计
+- type: operation
+  question: '如何执行与 01-生产架构设计原则 相关的操作: frontend k8s-api?'
+  answer: 参见 domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md 中的操作步骤。
+  source: domain-18-production-operations/topic-production-architecture/01-production-architecture-design-principles.md
+  command: frontend k8s-api
+- type: concept
+  question: 在 02-多云混合部署策略 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md 的「概述」章节。
+  source: domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md
+  section: 概述
+- type: concept
+  question: 在 02-多云混合部署策略 中, ☁️ 多云架构模式 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md 的「☁️ 多云架构模式」章节。
+  source: domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md
+  section: ☁️ 多云架构模式
+- type: concept
+  question: 在 02-多云混合部署策略 中, 数据同步策略 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md 的「数据同步策略」章节。
+  source: domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md
+  section: 数据同步策略
+- type: operation
+  question: '如何执行与 02-多云混合部署策略 相关的操作: aws ec2 create-vpn-connection \?'
+  answer: 参见 domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md 中的操作步骤。
+  source: domain-18-production-operations/topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md
+  command: aws ec2 create-vpn-connection \
+- type: concept
+  question: 在 03-边缘计算生产部署 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md 的「概述」章节。
+  source: domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md
+  section: 概述
+- type: concept
+  question: 在 03-边缘计算生产部署 中, 边缘计算架构 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md 的「边缘计算架构」章节。
+  source: domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md
+  section: 边缘计算架构
+- type: concept
+  question: 在 03-边缘计算生产部署 中, 镜像管理策略 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md 的「镜像管理策略」章节。
+  source: domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md
+  section: 镜像管理策略
+- type: comparison
+  question: 03-边缘计算生产部署 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md 中的对比分析。
+  source: domain-18-production-operations/topic-production-architecture/03-edge-computing-production-deployment.md
+- type: concept
+  question: 在 04-企业级监控体系 中, ️ 监控架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/04-enterprise-monitoring-system.md 的「️ 监控架构设计」章节。
+  source: domain-18-production-operations/topic-observability-performance/04-enterprise-monitoring-system.md
+  section: ️ 监控架构设计
+- type: concept
+  question: 在 04-企业级监控体系 中, Prometheus监控栈 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/04-enterprise-monitoring-system.md 的「Prometheus监控栈」章节。
+  source: domain-18-production-operations/topic-observability-performance/04-enterprise-monitoring-system.md
+  section: Prometheus监控栈
+- type: concept
+  question: 在 05-日志收集分析平台 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md 的「概述」章节。
+  source: domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md
+  section: 概述
+- type: concept
+  question: 在 05-日志收集分析平台 中, ️ 日志架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md 的「️ 日志架构设计」章节。
+  source: domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md
+  section: ️ 日志架构设计
+- type: concept
+  question: 在 05-日志收集分析平台 中, 日志分析平台 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md 的「日志分析平台」章节。
+  source: domain-18-production-operations/topic-observability-performance/05-logging-collection-analysis-platform.md
+  section: 日志分析平台
+- type: concept
+  question: 在 06-APM应用性能监控 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md 的「概述」章节。
+  source: domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md
+  section: 概述
+- type: concept
+  question: 在 06-APM应用性能监控 中, APM架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md 的「APM架构设计」章节。
+  source: domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md
+  section: APM架构设计
+- type: concept
+  question: 在 06-APM应用性能监控 中, 分布式追踪 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md 的「分布式追踪」章节。
+  source: domain-18-production-operations/topic-observability-performance/06-apm-application-performance-monitoring.md
+  section: 分布式追踪
+- type: concept
+  question: 在 07-零信任安全架构 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md 的「概述」章节。
+  source: domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md
+  section: 概述
+- type: concept
+  question: 在 07-零信任安全架构 中, 零信任核心原则 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md 的「零信任核心原则」章节。
+  source: domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md
+  section: 零信任核心原则
+- type: concept
+  question: 在 07-零信任安全架构 中, ️ 网络安全防护 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md 的「️ 网络安全防护」章节。
+  source: domain-18-production-operations/topic-security-compliance/07-zero-trust-security-architecture.md
+  section: ️ 网络安全防护
+- type: concept
+  question: 在 08-CIS基准合规检查 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md 的「概述」章节。
+  source: domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md
+  section: 概述
+- type: concept
+  question: 在 08-CIS基准合规检查 中, CIS基准概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md 的「CIS基准概述」章节。
+  source: domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md
+  section: CIS基准概述
+- type: operation
+  question: '如何执行与 08-CIS基准合规检查 相关的操作: echo "=== CIS Master Node Checks ==="?'
+  answer: 参见 domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md 中的操作步骤。
+  source: domain-18-production-operations/topic-security-compliance/08-cis-benchmark-compliance-audit.md
+  command: echo "=== CIS Master Node Checks ==="
+- type: concept
+  question: 在 09-软件物料清单 中, SBOM基础概念 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/09-software-bill-of-materials.md 的「SBOM基础概念」章节。
+  source: domain-18-production-operations/topic-security-compliance/09-software-bill-of-materials.md
+  section: SBOM基础概念
+- type: concept
+  question: 在 09-软件物料清单 中, ️ SBOM生成工具 是什么?
+  answer: 参见 domain-18-production-operations/topic-security-compliance/09-software-bill-of-materials.md 的「️ SBOM生成工具」章节。
+  source: domain-18-production-operations/topic-security-compliance/09-software-bill-of-materials.md
+  section: ️ SBOM生成工具
+- type: concept
+  question: 在 10-GitOps流水线实践 中, ️ GitOps架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/10-gitops-pipeline-practices.md 的「️ GitOps架构设计」章节。
+  source: domain-18-production-operations/topic-automation-platform/10-gitops-pipeline-practices.md
+  section: ️ GitOps架构设计
+- type: concept
+  question: 在 11-基础设施即代码 中, ️ Terraform核心实践 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/11-infrastructure-as-code.md 的「️ Terraform核心实践」章节。
+  source: domain-18-production-operations/topic-automation-platform/11-infrastructure-as-code.md
+  section: ️ Terraform核心实践
+- type: concept
+  question: 在 11-基础设施即代码 中, ️ Crossplane实践 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/11-infrastructure-as-code.md 的「️ Crossplane实践」章节。
+  source: domain-18-production-operations/topic-automation-platform/11-infrastructure-as-code.md
+  section: ️ Crossplane实践
+- type: concept
+  question: 在 12-自动化运维工具链 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md 的「概述」章节。
+  source: domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md
+  section: 概述
+- type: concept
+  question: 在 12-自动化运维工具链 中, ️ 核心工具组件 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md 的「️ 核心工具组件」章节。
+  source: domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md
+  section: ️ 核心工具组件
+- type: concept
+  question: 在 12-自动化运维工具链 中, 智能运维工具 是什么?
+  answer: 参见 domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md 的「智能运维工具」章节。
+  source: domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md
+  section: 智能运维工具
+- type: operation
+  question: '如何执行与 12-自动化运维工具链 相关的操作: NODE_NAME=$(hostname)?'
+  answer: 参见 domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md 中的操作步骤。
+  source: domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md
+  command: NODE_NAME=$(hostname)
+- type: operation
+  question: '如何执行与 12-自动化运维工具链 相关的操作: set -e?'
+  answer: 参见 domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md 中的操作步骤。
+  source: domain-18-production-operations/topic-automation-platform/12-automated-operations-toolchain.md
+  command: set -e
+- type: concept
+  question: 在 13-Kubernetes成本治理 中, 成本分析框架 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/13-kubernetes-cost-governance.md 的「成本分析框架」章节。
+  source: domain-18-production-operations/topic-cost-governance/13-kubernetes-cost-governance.md
+  section: 成本分析框架
+- type: concept
+  question: 在 13-Kubernetes成本治理 中, 成本优化策略 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/13-kubernetes-cost-governance.md 的「成本优化策略」章节。
+  source: domain-18-production-operations/topic-cost-governance/13-kubernetes-cost-governance.md
+  section: 成本优化策略
+- type: concept
+  question: 在 14-资源配额管理 中, ️ 配额管理架构 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/14-resource-quota-management.md 的「️ 配额管理架构」章节。
+  source: domain-18-production-operations/topic-cost-governance/14-resource-quota-management.md
+  section: ️ 配额管理架构
+- type: concept
+  question: 在 14-资源配额管理 中, 配额监控和报告 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/14-resource-quota-management.md 的「配额监控和报告」章节。
+  source: domain-18-production-operations/topic-cost-governance/14-resource-quota-management.md
+  section: 配额监控和报告
+- type: concept
+  question: 在 15-绿色计算可持续发展 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md 的「概述」章节。
+  source: domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md
+  section: 概述
+- type: concept
+  question: 在 15-绿色计算可持续发展 中, 碳足迹管理 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md 的「碳足迹管理」章节。
+  source: domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md
+  section: 碳足迹管理
+- type: concept
+  question: 在 15-绿色计算可持续发展 中, ♻️ 节能优化策略 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md 的「♻️ 节能优化策略」章节。
+  source: domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md
+  section: ♻️ 节能优化策略
+- type: comparison
+  question: 15-绿色计算可持续发展 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md 中的对比分析。
+  source: domain-18-production-operations/topic-cost-governance/15-green-computing-sustainability.md
+- type: concept
+  question: 在 16-企业级备份策略 中, ️ 备份架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/16-enterprise-backup-strategy.md 的「️ 备份架构设计」章节。
+  source: domain-18-production-operations/topic-reliability-operations/16-enterprise-backup-strategy.md
+  section: ️ 备份架构设计
+- type: concept
+  question: 在 16-企业级备份策略 中, 备份验证和测试 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/16-enterprise-backup-strategy.md 的「备份验证和测试」章节。
+  source: domain-18-production-operations/topic-reliability-operations/16-enterprise-backup-strategy.md
+  section: 备份验证和测试
+- type: concept
+  question: 在 18-跨区域容灾部署 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md 的「概述」章节。
+  source: domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md
+  section: 概述
+- type: concept
+  question: 在 18-跨区域容灾部署 中, 多活架构设计 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md 的「多活架构设计」章节。
+  source: domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md
+  section: 多活架构设计
+- type: concept
+  question: 在 18-跨区域容灾部署 中, 故障检测与切换 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md 的「故障检测与切换」章节。
+  source: domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md
+  section: 故障检测与切换
+- type: comparison
+  question: 18-跨区域容灾部署 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md 中的对比分析。
+  source: domain-18-production-operations/topic-reliability-operations/18-cross-region-disaster-recovery.md
+- type: concept
+  question: 在 19-集群性能调优 中, ⚡ 内核参数优化 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md 的「⚡ 内核参数优化」章节。
+  source: domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md
+  section: ⚡ 内核参数优化
+- type: concept
+  question: 在 19-集群性能调优 中, Kubernetes组件调优 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md 的「Kubernetes组件调优」章节。
+  source: domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md
+  section: Kubernetes组件调优
+- type: operation
+  question: '如何执行与 19-集群性能调优 相关的操作: cat > /etc/sysctl.d/99-k8s-network.conf << EOF?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md
+  command: cat > /etc/sysctl.d/99-k8s-network.conf << EOF
+- type: operation
+  question: '如何执行与 19-集群性能调优 相关的操作: tune2fs -o journal_data_writeback /dev/sda1?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md
+  command: tune2fs -o journal_data_writeback /dev/sda1
+- type: operation
+  question: '如何执行与 19-集群性能调优 相关的操作: cat > /etc/sysctl.d/99-k8s-memory.conf << EOF?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/19-cluster-performance-tuning.md
+  command: cat > /etc/sysctl.d/99-k8s-memory.conf << EOF
+- type: concept
+  question: 在 20-网络性能优化 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md 的「概述」章节。
+  source: domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md
+  section: 概述
+- type: concept
+  question: 在 20-网络性能优化 中, CNI插件性能优化 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md 的「CNI插件性能优化」章节。
+  source: domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md
+  section: CNI插件性能优化
+- type: concept
+  question: 在 20-网络性能优化 中, 网络策略优化 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md 的「网络策略优化」章节。
+  source: domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md
+  section: 网络策略优化
+- type: comparison
+  question: 20-网络性能优化 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md 中的对比分析。
+  source: domain-18-production-operations/topic-observability-performance/20-network-performance-optimization.md
+- type: concept
+  question: 在 21-存储性能优化 中, 概述 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md 的「概述」章节。
+  source: domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md
+  section: 概述
+- type: concept
+  question: 在 21-存储性能优化 中, CSI驱动性能优化 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md 的「CSI驱动性能优化」章节。
+  source: domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md
+  section: CSI驱动性能优化
+- type: concept
+  question: 在 21-存储性能优化 中, 存储性能监控 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md 的「存储性能监控」章节。
+  source: domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md
+  section: 存储性能监控
+- type: operation
+  question: '如何执行与 21-存储性能优化 相关的操作: optimize_local_storage() {?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/21-storage-performance-optimization.md
+  command: optimize_local_storage() {
+- type: comparison
+  question: 22-变更管理流程 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/22-change-management-process.md 中的对比分析。
+  source: domain-18-production-operations/topic-reliability-operations/22-change-management-process.md
+- type: concept
+  question: 在 23. 事件响应处理 (Incident Response Handling) 中, SRE理念与事件管理 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md 的「SRE理念与事件管理」章节。
+  source: domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md
+  section: SRE理念与事件管理
+- type: concept
+  question: 在 23. 事件响应处理 (Incident Response Handling) 中, 事件响应流程 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md 的「事件响应流程」章节。
+  source: domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md
+  section: 事件响应流程
+- type: operation
+  question: '如何执行与 23. 事件响应处理 (Incident Response Handling) 相关的操作: kubectl get events --all-namespaces --field-selector type!=N?'
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md 中的操作步骤。
+  source: domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md
+  command: kubectl get events --all-namespaces --field-selector type!=Normal
+- type: comparison
+  question: 23. 事件响应处理 (Incident Response Handling) 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md 中的对比分析。
+  source: domain-18-production-operations/topic-reliability-operations/23-incident-response-handling.md
+- type: concept
+  question: 在 24. 容量规划与预测 (Capacity Planning & Forecasting) 中, 章节概览 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md 的「章节概览」章节。
+  source: domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md
+  section: 章节概览
+- type: concept
+  question: 在 24. 容量规划与预测 (Capacity Planning & Forecasting) 中, 容量规划基础理论 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md 的「容量规划基础理论」章节。
+  source: domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md
+  section: 容量规划基础理论
+- type: concept
+  question: 在 24. 容量规划与预测 (Capacity Planning & Forecasting) 中, 现状评估与数据分析 是什么?
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md 的「现状评估与数据分析」章节。
+  source: domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md
+  section: 现状评估与数据分析
+- type: operation
+  question: '如何执行与 24. 容量规划与预测 (Capacity Planning & Forecasting) 相关的操作: 1 Core = 1000 milli cores (m)?'
+  answer: 参见 domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md 中的操作步骤。
+  source: domain-18-production-operations/topic-reliability-operations/24-capacity-planning-forecasting.md
+  command: 1 Core = 1000 milli cores (m)
+- type: concept
+  question: 在 K8s FinOps 成本优化实践指南 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 的「目录」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+  section: 目录
+- type: concept
+  question: 在 K8s FinOps 成本优化实践指南 中, FinOps 核心框架 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 的「FinOps 核心框架」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+  section: FinOps 核心框架
+- type: concept
+  question: 在 K8s FinOps 成本优化实践指南 中, OpenCost 部署 (CNCF 项目) 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 的「OpenCost 部署 (CNCF 项目)」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+  section: OpenCost 部署 (CNCF 项目)
+- type: operation
+  question: '如何执行与 K8s FinOps 成本优化实践指南 相关的操作: helm repo add opencost https://opencost.github.io/opencost-h?'
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+  command: helm repo add opencost https://opencost.github.io/opencost-helm-chart
+- type: operation
+  question: '如何执行与 K8s FinOps 成本优化实践指南 相关的操作: helm repo add kubecost https://kubecost.github.io/cost-analy?'
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+  command: helm repo add kubecost https://kubecost.github.io/cost-analyzer/
+- type: comparison
+  question: K8s FinOps 成本优化实践指南 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md 中的对比分析。
+  source: domain-18-production-operations/topic-cost-governance/99-finops-cost-optimization-guide.md
+- type: concept
+  question: 在 GreenOps 可持续计算与碳足迹优化指南 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md 的「目录」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md
+  section: 目录
+- type: concept
+  question: 在 GreenOps 可持续计算与碳足迹优化指南 中, GreenOps 核心概念 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md 的「GreenOps 核心概念」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md
+  section: GreenOps 核心概念
+- type: concept
+  question: 在 GreenOps 可持续计算与碳足迹优化指南 中, Kepler 功耗监控部署 是什么?
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md 的「Kepler 功耗监控部署」章节。
+  source: domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md
+  section: Kepler 功耗监控部署
+- type: operation
+  question: '如何执行与 GreenOps 可持续计算与碳足迹优化指南 相关的操作: helm repo add kepler https://sustainable-computing-io.github?'
+  answer: 参见 domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-cost-governance/99-greenops-sustainable-computing-guide.md
+  command: helm repo add kepler https://sustainable-computing-io.github.io/kepler-helm-chart
+- type: concept
+  question: 在 Karpenter 节点自动扩展实践指南 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 的「目录」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  section: 目录
+- type: concept
+  question: 在 Karpenter 节点自动扩展实践指南 中, Karpenter vs Cluster Autoscaler 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 的「Karpenter vs Cluster Autoscaler」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  section: Karpenter vs Cluster Autoscaler
+- type: concept
+  question: 在 Karpenter 节点自动扩展实践指南 中, 安装部署 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 的「安装部署」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  section: 安装部署
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: export CLUSTER_NAME=production?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  command: export CLUSTER_NAME=production
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: helm repo add karpenter https://charts.karpenter.sh?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  command: helm repo add karpenter https://charts.karpenter.sh
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: kubectl get pods -n karpenter?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+  command: kubectl get pods -n karpenter
+- type: comparison
+  question: Karpenter 节点自动扩展实践指南 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md 中的对比分析。
+  source: domain-18-production-operations/topic-observability-performance/99-karpenter-node-autoscaling-guide.md
+- type: concept
+  question: 在 KEDA 事件驱动自动缩放实践指南 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 的「目录」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+  section: 目录
+- type: concept
+  question: 在 KEDA 事件驱动自动缩放实践指南 中, KEDA 架构 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 的「KEDA 架构」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+  section: KEDA 架构
+- type: concept
+  question: 在 KEDA 事件驱动自动缩放实践指南 中, 安装部署 是什么?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 的「安装部署」章节。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+  section: 安装部署
+- type: operation
+  question: '如何执行与 KEDA 事件驱动自动缩放实践指南 相关的操作: helm repo add kedacore https://kedacore.github.io/charts?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+  command: helm repo add kedacore https://kedacore.github.io/charts
+- type: operation
+  question: '如何执行与 KEDA 事件驱动自动缩放实践指南 相关的操作: kubectl get pods -n keda?'
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 中的操作步骤。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+  command: kubectl get pods -n keda
+- type: comparison
+  question: KEDA 事件驱动自动缩放实践指南 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md 中的对比分析。
+  source: domain-18-production-operations/topic-observability-performance/99-keda-event-driven-autoscaling-guide.md
+- type: concept
+  question: 在 Kubernetes 生产环境部署模式架构详解 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md 的「目录」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 生产环境部署模式架构详解 中, 滚动更新 (Rolling Update) 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md 的「滚动更新 (Rolling Update)」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md
+  section: 滚动更新 (Rolling Update)
+- type: comparison
+  question: Kubernetes 生产环境部署模式架构详解 中有哪些技术对比?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md 中的对比分析。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md
+- type: concept
+  question: 在 Kubernetes 多租户与资源隔离生产架构 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md 的「目录」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 多租户与资源隔离生产架构 中, 多租户隔离模型 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md 的「多租户隔离模型」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md
+  section: 多租户隔离模型
+- type: operation
+  question: '如何执行与 Kubernetes 多租户与资源隔离生产架构 相关的操作: curl -L -o vcluster "https://github.com/loft-sh/vcluster/rel?'
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md 中的操作步骤。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-multi-tenant-architecture.md
+  command: curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd
+- type: concept
+  question: 在 Kubernetes 生产环境完整架构蓝图 中, 目录 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-production-architecture-blueprint.md 的「目录」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-production-architecture-blueprint.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 生产环境完整架构蓝图 中, 生产环境整体架构 是什么?
+  answer: 参见 domain-18-production-operations/topic-production-architecture/99-kubernetes-production-architecture-blueprint.md 的「生产环境整体架构」章节。
+  source: domain-18-production-operations/topic-production-architecture/99-kubernetes-production-architecture-blueprint.md
+  section: 生产环境整体架构

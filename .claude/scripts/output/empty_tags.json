@@ -1,0 +1,3227 @@
+[
+  {
+    "path": "_reports/STATS.md",
+    "title": "STATS",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/EVALUATION-2026-05-19.md",
+    "title": "EVALUATION-2026-05-19",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/execution-plan.md",
+    "title": "execution-plan",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/CONTENT-GAP-ANALYSIS.md",
+    "title": "CONTENT-GAP-ANALYSIS",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/quality/ENTERPRISE_BEST_PRACTICES.md",
+    "title": "ENTERPRISE_BEST_PRACTICES",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/quality/QUALITY_REPORT_v3.0.md",
+    "title": "QUALITY_REPORT_v3.0",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/quality/QUALITY_REPORT.md",
+    "title": "QUALITY_REPORT",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/quality/QUALITY_REPORT_v2.0.md",
+    "title": "QUALITY_REPORT_v2.0",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_reports/quality/QUALITY_REPORT_v4.0.md",
+    "title": "QUALITY_REPORT_v4.0",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/queue-microtask/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vitefu/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-plain-obj/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-docker/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tinyglobby/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@alloc/quick-lru/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-inside-container/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-format/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-heading-rank/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-extendable/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/recma-jsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zod/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/reusify/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/reusify/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zwitch/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/xxhash-wasm/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/xxhash-wasm/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-mdx-jsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/pirates/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-contour/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/mdx/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/ms/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/hast/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/d3-scale/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/d3-scale-chromatic/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/d3-time/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/trusted-types/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/nlcst/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/mdast/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/estree/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/unist/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/debug/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@types/estree-jsx/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-shape/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-core-commonmark/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/browserslist/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-sanitize-uri/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/thenify/History.md",
+    "title": "History",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/thenify/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/prismjs/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/prismjs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/http-cache-semantics/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-wsl/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/jiti/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm-autolink-literal/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/extend/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/extend/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-is-element/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/stylis/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-autolink-literal/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/strip-ansi/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/character-reference-invalid/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-autolink-headings/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cookie-es/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-stringify-position/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/es-errors/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/es-errors/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sucrase/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sucrase/node_modules/commander/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sucrase/node_modules/commander/Readme.md",
+    "title": "Readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/recma-parse/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-visit-parents/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-normalize-identifier/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/bail/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ms/license.md",
+    "title": "license",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ms/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/gray-matter/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/gray-matter/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/gray-matter/node_modules/argparse/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/gray-matter/node_modules/argparse/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/gray-matter/node_modules/js-yaml/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/base-64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/html-void-elements/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dagre-d3-es/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dagre-d3-es/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/lodash-es/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/node-mock-http/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/node-releases/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/escape-string-regexp/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mz/HISTORY.md",
+    "title": "HISTORY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mz/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/lru-cache/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/lru-cache/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/stringify-entities/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-array/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm-footnote/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-mdx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/type-fest/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/commander/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/commander/Readme.md",
+    "title": "Readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/shiki/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/regex-recursion/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-walker/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ci-info/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ci-info/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/autoprefixer/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/property-information/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/escalade/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-load-config/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/detect-libc/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-polygon/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-position/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/resolve/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/resolve/.github/THREAT_MODEL.md",
+    "title": "THREAT_MODEL",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/resolve/.github/INCIDENT_RESPONSE_PROCESS.md",
+    "title": "INCIDENT_RESPONSE_PROCESS",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/piccolore/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/package-manager-detector/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-label/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/esast-util-from-js/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/css-tree/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/aria-query/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/nanoid/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/inline-style-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/acorn/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/acorn/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-types/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-whitespace/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ts-interface-checker/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sax/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sax/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-scale/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-scale-chromatic/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@nodelib/fs.walk/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@nodelib/fs.stat/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@nodelib/fs.scandir/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-parse/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-alphabetical/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/h3/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-js/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zod-to-ts/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/wrap-ansi/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-html-tag-name/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-axis/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/collapse-white-space/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-color/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fontkitten/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-is/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-whitespace/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/extend-shallow/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sisteransi/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-smartypants/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-dispatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-from-parse5/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-decode-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@tailwindcss/typography/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/magic-string/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-gfm/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/argparse/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/argparse/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/picomatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-geo/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-timer/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/function-bind/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/function-bind/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/function-bind/.github/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-raw/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-glob/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/esast-util-from-estree/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-mdxjs-esm/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-fullwidth-code-point/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tiny-inflate/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/typescript/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/typescript/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yargs-parser/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yargs-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/baseline-browser-mapping/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-time-format/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/CODE_OF_CONDUCT.md",
+    "title": "CODE_OF_CONDUCT",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/PULL_REQUEST_TEMPLATE.md",
+    "title": "PULL_REQUEST_TEMPLATE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/workflows/md/blog-issue-template.md",
+    "title": "blog-issue-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/workflows/md/Manual_Release.md",
+    "title": "Manual_Release",
+    "inferred_tag": "man"
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/workflows/md/repo-setup.md",
+    "title": "repo-setup",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/workflows/md/Feature_Release.md",
+    "title": "Feature_Release",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/workflows/md/Patch_Backport_Release.md",
+    "title": "Patch_Backport_Release",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/ISSUE_TEMPLATE/feature_request.md",
+    "title": "feature_request",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape/.github/ISSUE_TEMPLATE/bug_report.md",
+    "title": "bug_report",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/elkjs/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/elkjs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/iconv-lite/Changelog.md",
+    "title": "Changelog",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/iconv-lite/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/anymatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/anymatch/node_modules/picomatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/pagefind/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/smol-toml/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-modify-children/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ufo/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cytoscape-cose-bilkent/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-interpolate/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-definitions/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/chokidar/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/chokidar/node_modules/glob-parent/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/chokidar/node_modules/glob-parent/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ohash/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dom-serializer/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dom-serializer/node_modules/entities/readme.md",
+    "title": "readme",
+    "inferred_tag": "entities"
+  },
+  {
+    "path": "web/node_modules/d3-zoom/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@rollup/rollup-darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@rollup/pluginutils/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@rollup/pluginutils/node_modules/estree-walker/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@rollup/pluginutils/node_modules/estree-walker/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/arg/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/arg/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/common-ancestor-path/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unified/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-random/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zod-to-json-schema/changelog.md",
+    "title": "changelog",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zod-to-json-schema/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/zod-to-json-schema/contributing.md",
+    "title": "contributing",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/oniguruma-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@ungap/structured-clone/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/js-yaml/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/dist/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/node_modules/commander/Readme.md",
+    "title": "Readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/contrib/mathtex-script-type/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/contrib/auto-render/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/contrib/mhchem/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/contrib/copy-tex/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/katex/src/metrics/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/csso/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/csso/node_modules/css-tree/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/csso/node_modules/mdn-data/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/csso/node_modules/mdn-data/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/csso/node_modules/mdn-data/css/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/node-fetch-native/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yocto-spinner/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/pify/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/destr/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/import-meta-resolve/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-strikethrough/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-stringify/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/css-select/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cli-boxes/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-build-jsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-binary-path/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/style-to-object/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-time/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-html/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hasown/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hasown/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/safer-buffer/Porting-Buffer.md",
+    "title": "Porting-Buffer",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/safer-buffer/Readme.md",
+    "title": "Readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-selection/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ccount/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/run-parallel/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/p-limit/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/diff/release-notes.md",
+    "title": "release-notes",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/diff/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/diff/CONTRIBUTING.md",
+    "title": "CONTRIBUTING",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-title/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/markdown-table/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/decode-named-character-reference/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-find-and-replace/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/radix3/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fraction.js/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fraction.js/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hastscript/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@pagefind/darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/chalk/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/style-to-js/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/regex/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-classify-character/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-events-to-acorn/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-decode-numeric-character-reference/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-regex/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astring/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astring/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-mdxjs-esm/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-visit/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/esprima/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-remove-position/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-scope/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/html-escaper/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-chunked/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fdir/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/delaunator/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/supports-preserve-symlinks-flag/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/supports-preserve-symlinks-flag/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/eventemitter3/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/readdirp/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/readdirp/node_modules/picomatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/longest-streak/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-resolve-all/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fill-range/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-mdx-expression/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/css-what/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/binary-extensions/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/svgo/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/svgo/node_modules/commander/Readme.md",
+    "title": "Readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/util-deprecate/History.md",
+    "title": "History",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/util-deprecate/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-space/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/path-parse/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-rehype/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-find-after/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-to-markdown/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm-table/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-to-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/clsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/kind-of/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/kind-of/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vfile-location/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/picocolors/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/devlop/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-from-markdown/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/web-namespaces/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-position-from-estree/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/engine-javascript/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/types/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/core/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/langs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/vscode-textmate/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/vscode-textmate/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/themes/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@shikijs/engine-oniguruma/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-drag/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/lines-and-columns/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/semver/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@oslojs/encoding/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-sankey/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-sankey/node_modules/d3-shape/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-sankey/node_modules/d3-array/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-sankey/node_modules/d3-path/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-sankey/node_modules/internmap/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vite/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vite/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vite/node_modules/esbuild/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vite/node_modules/esbuild/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vite/node_modules/@esbuild/darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/strip-bom-string/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/flattie/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-delaunay/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-to-js/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/robust-predicates/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-hierarchy/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-value-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-fetch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-html/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/trough/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ultrahtml/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ultrahtml/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/widest-line/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/regex-utilities/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-destination/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-task-list-item/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/boolbase/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-combine-extensions/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-styles/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-core-module/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-core-module/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uvu/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uvu/node_modules/diff/release-notes.md",
+    "title": "release-notes",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uvu/node_modules/diff/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uvu/node_modules/diff/CONTRIBUTING.md",
+    "title": "CONTRIBUTING",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uvu/node_modules/kleur/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/node_modules/strip-ansi/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/node_modules/ansi-regex/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/node_modules/string-width/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ansi-align/node_modules/emoji-regex/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-from-html/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unifont/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dlv/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/parse-entities/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/parse-entities/node_modules/@types/unist/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/acorn-jsx/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-jsx-runtime/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@babel/helper-string-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@babel/types/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@babel/parser/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@babel/parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@babel/helper-validator-identifier/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-recma/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-table/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-number/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/nlcst-to-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@capsizecss/unpack/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@img/sharp-libvips-darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@img/sharp-darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@img/colour/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@img/colour/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-import/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/get-east-asian-width/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yocto-queue/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/remark-mdx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-selector-parser/API.md",
+    "title": "API",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-selector-parser/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-selector-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rollup/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rollup/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rollup/node_modules/@types/estree/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/retext-smartypants/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/space-separated-tokens/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-nested/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-nested/node_modules/postcss-selector-parser/API.md",
+    "title": "API",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-nested/node_modules/postcss-selector-parser/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/postcss-nested/node_modules/postcss-selector-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdn-data/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/axobject-query/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/recma-build-jsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/khroma/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/recma-stringify/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ofetch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/mdx/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/internal-helpers/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/prism/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/tailwind/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/telemetry/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/shiki/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/engine-javascript/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/types/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/core/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/langs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/themes/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/markdown-remark/node_modules/@shikijs/engine-oniguruma/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@astrojs/compiler/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yoctocolors/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vfile/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/update-browserslist-db/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sprintf-js/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/es-module-lexer/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-mdx-jsx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cose-base/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/thenify-all/History.md",
+    "title": "History",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/thenify-all/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/lilconfig/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-is-identifier-name/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-phrasing/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/prompts/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/github-slugger/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/any-promise/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/camelcase-css/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-character/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-hexadecimal/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm-task-list-item/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/object-assign/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-path/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/yaml/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-transition/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-mdx-md/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-encode/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/domelementtype/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-symbol/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-mdxjs/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/section-matter/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-visit-children/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-slug/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-force/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/comma-separated-tokens/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/README.zh-CN.md",
+    "title": "README.zh-CN",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/@types/mdast/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/@types/unist/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-core-commonmark/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-sanitize-uri/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/unist-util-stringify-position/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-normalize-identifier/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-factory-label/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-types/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-html-tag-name/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-factory-whitespace/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-decode-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-factory-title/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-classify-character/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-decode-numeric-character-reference/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-chunked/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-resolve-all/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-factory-space/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/mdast-util-to-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/mdast-util-from-markdown/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-factory-destination/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-combine-extensions/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-character/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-encode/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-symbol/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mermaid/node_modules/micromark-util-subtokenize/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/vfile-message/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cookie/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/to-regex-range/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@mdx-js/mdx/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dayjs/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dayjs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/source-map/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/didyoumean/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unstorage/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unstorage/node_modules/chokidar/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unstorage/node_modules/readdirp/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-text/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-sanitize/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/retext-stringify/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-parse5/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-chord/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/retext-latin/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mri/license.md",
+    "title": "license",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mri/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/oniguruma-to-es/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/shiki/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/engine-javascript/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/types/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/core/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/langs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/themes/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/astro/node_modules/@shikijs/engine-oniguruma/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-tagfilter/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-brush/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dset/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/iron-webcrypto/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/iron-webcrypto/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/string-width/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-raw/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/esbuild/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/esbuild/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/trim-lines/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/unist-util-visit/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-parse-selector/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-to-hast/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@jridgewell/sourcemap-codec/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@jridgewell/trace-mapping/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@jridgewell/gen-mapping/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@jridgewell/resolve-uri/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-decimal/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/retext/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/cssesc/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@braintree/sanitize-url/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@braintree/sanitize-url/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/camelcase/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tsconfck/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/magicast/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromatch/node_modules/picomatch/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-gfm-strikethrough/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fast-glob/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fast-glob/node_modules/glob-parent/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fast-glob/node_modules/glob-parent/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/layout-base/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uncrypto/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-util-subtokenize/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-dsv/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/markdown-extensions/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/node_modules/postcss-selector-parser/API.md",
+    "title": "API",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/node_modules/postcss-selector-parser/CHANGELOG.md",
+    "title": "CHANGELOG",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/node_modules/postcss-selector-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/lib/postcss-plugins/nesting/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/lib/value-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/src/postcss-plugins/nesting/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tailwindcss/src/value-parser/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-parse/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-extglob/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uuid/LICENSE.md",
+    "title": "LICENSE",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/uuid/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/tinyexec/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fastq/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fastq/SECURITY.md",
+    "title": "SECURITY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dompurify/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/boxen/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/defu/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/estree-util-attach-comments/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/parse5/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mrmime/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sade/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/caniuse-lite/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/read-cache/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/merge2/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/parse-latin/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/domutils/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/kleur/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/crossws/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/dequal/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/neotraverse/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-ease/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/array-iterate/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/d3-quadtree/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-extension-gfm-footnote/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/character-entities-html4/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/braces/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/which-pm-runs/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rehype-stringify/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/p-queue/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-string/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/devalue/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/emoji-regex/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/sharp/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/nth-check/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/web-worker/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ts-dedent/HISTORY.md",
+    "title": "HISTORY",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/ts-dedent/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/is-alphanumerical/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/character-entities/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/entities/readme.md",
+    "title": "readme",
+    "inferred_tag": "entities"
+  },
+  {
+    "path": "web/node_modules/fontace/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/normalize-path/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/fsevents/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/p-timeout/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/non-layered-tidy-tree-layout/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/hast-util-to-estree/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/electron-to-chromium/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/rw/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/debug/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/glob-parent/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/domhandler/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/internmap/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/source-map-js/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/micromark-factory-mdx-expression/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/@esbuild/darwin-arm64/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/character-entities-legacy/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/mdast-util-mdx-expression/readme.md",
+    "title": "readme",
+    "inferred_tag": ""
+  },
+  {
+    "path": "web/node_modules/deterministic-object-hash/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_meta/metadata/knowledge-map.md",
+    "title": "knowledge-map",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_meta/metadata/tags-index.md",
+    "title": "tags-index",
+    "inferred_tag": ""
+  },
+  {
+    "path": "_meta/metadata/difficulty-index.md",
+    "title": "difficulty-index",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/domain-article-template.md",
+    "title": "domain-article-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/fta-template.md",
+    "title": "fta-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/skill-template.md",
+    "title": "skill-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/README.md",
+    "title": "README",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/febm-template.md",
+    "title": "febm-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/cheat-sheet-template.md",
+    "title": "cheat-sheet-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "templates/presentation-template.md",
+    "title": "presentation-template",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/security/secrets-management.md",
+    "title": "secrets-management",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/observability/logging.md",
+    "title": "logging",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/observability/tracing.md",
+    "title": "tracing",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/operations/scaling.md",
+    "title": "scaling",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/operations/disaster-recovery.md",
+    "title": "disaster-recovery",
+    "inferred_tag": ""
+  },
+  {
+    "path": "domain-11-production-operations/topic-best-practices/infrastructure/kubernetes-cluster.md",
+    "title": "kubernetes-cluster",
+    "inferred_tag": ""
+  }
+]

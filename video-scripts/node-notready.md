@@ -23,6 +23,8 @@ trigger_keywords:
 - Diagnosis
 - Remediation
 - 数字人播报脚本
+prerequisites:
+- kubectl-basics
 ---
 
 # 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — 数字人播报脚本
@@ -117,7 +119,7 @@ echo "Total nodes:" && kubectl get nodes --no-headers | wc -l
 kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master"
 ```
 ```bash
-# 查看 NotReady 节点上运行的 Pod 数量和关键 namespace
+# 查看 NotReady 节点上运行的 [[concepts/pod-lifecycle|pod]] 数量和关键 namespace
 NODE_NAME="<notready-node>"
 kubectl get pods --all-namespaces --field-selector spec.nodeName=${NODE_NAME} --no-headers | \
   awk '{print $1}' | sort | uniq -c | sort -rn
@@ -165,6 +167,6 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ## 关联知识库
 
-- Skill 源文档：topic-skills/01-node-notready.md
-- 相关 FTA：参考 topic-fta/
-- 深度排查：参考 topic-structural-trouble-shooting/
+- Skill 源文档：domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md
+- 相关 FTA：参考 domain-10-troubleshooting-diagnostics/topic-fta/
+- 深度排查：参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/

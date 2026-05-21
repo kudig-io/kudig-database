@@ -1,3 +1,25 @@
+---
+title: 数字人视频制作 — 平台选型与立即开工指南
+description: '# 数字人视频制作 — 平台选型与立即开工指南'
+category: general
+tags:
+- k8s
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 数字人视频制作 — 平台选型与立即开工指南 是什么
+- 如何 数字人视频制作 — 平台选型与立即开工指南
+trigger_keywords:
+- 数字人视频制作
+- 平台选型与立即开工指南
+prerequisites:
+- kubectl-basics
+---
+
 # 数字人视频制作 — 平台选型与立即开工指南
 
 > **目标**: 帮你在今天内选定平台、完成配置、开始制作
@@ -198,7 +220,7 @@
 将 19-digital-human-video.md 中的逐字稿逐段粘贴:
 
 段落 1 (开场 Hook):
-  粘贴 "你是一个 K8s 运维工程师..." 全文
+  粘贴 "你是一个 [[entities/kubernetes|k8s]] 运维工程师..." 全文
   点击 "Generate Preview"
 
 段落 2 (产品介绍):

@@ -1,6 +1,6 @@
-Kubernetes 网络是该系统中最复杂、最核心的子系统之一。本文从 CNI 容器网络接口出发，逐层向上剖析 **Service 四层负载均衡**、**Ingress 七层路由**、**Gateway API 新一代流量管理标准**，直至 **多集群网络互联** 与 **Service Mesh 服务网格**，为高级开发者提供一套完整的网络知识图谱与生产级实践参考。本页覆盖 `domain-5-networking/` 目录下 38 篇文档的精华要点，结合 `domain-3-control-plane/23-container-network-deep-dive.md` 的 CNI 规范解析与 `domain-35-ebpf-technology/03-cilium-cni-architecture.md` 的 eBPF 数据面深度，构建从内核到应用层的全栈网络认知。
+Kubernetes 网络是该系统中最复杂、最核心的子系统之一。本文从 CNI 容器网络接口出发，逐层向上剖析 **Service 四层负载均衡**、**Ingress 七层路由**、**Gateway API 新一代流量管理标准**，直至 **多集群网络互联** 与 **Service Mesh 服务网格**，为高级开发者提供一套完整的网络知识图谱与生产级实践参考。本页覆盖 `domain-03-networking-traffic/` 目录下 38 篇文档的精华要点，结合 `domain-01-cluster-fundamentals/23-container-network-deep-dive.md` 的 CNI 规范解析与 `domain-03-networking-traffic/03-cilium-cni-architecture.md` 的 eBPF 数据面深度，构建从内核到应用层的全栈网络认知。
 
-Sources: [README.md](domain-5-networking/README.md#L1-L139), [01-network-architecture-overview.md](domain-5-networking/01-network-architecture-overview.md#L1-L58)
+Sources: [README.md](domain-03-networking-traffic/README.md#L1-L139), [01-network-architecture-overview.md](domain-03-networking-traffic/01-network-architecture-overview.md#L1-L58)
 
 ## 一、Kubernetes 网络架构全景
 
@@ -60,7 +60,7 @@ graph TB
 | **kube-proxy 层** | DNAT 规则同步、连接追踪、负载均衡算法 | iptables / IPVS / nftables / eBPF | 数据面转发效率 |
 | **CNI 层** | Pod IP 分配、跨节点隧道、网络策略执行 | Calico / Cilium / Flannel / Terway | Pod 网络连通性 |
 
-Sources: [02-cni-architecture-fundamentals.md](domain-5-networking/02-cni-architecture-fundamentals.md#L7-L57), [01-network-architecture-overview.md](domain-5-networking/01-network-architecture-overview.md#L1-L58)
+Sources: [02-cni-architecture-fundamentals.md](domain-03-networking-traffic/02-cni-architecture-fundamentals.md#L7-L57), [01-network-architecture-overview.md](domain-03-networking-traffic/01-network-architecture-overview.md#L1-L58)
 
 ## 二、CNI 容器网络接口
 
@@ -70,7 +70,7 @@ CNI（Container Network Interface）是 Kubernetes 与网络插件之间的标�
 
 Pod 网络初始化的完整链路为：API Server 调度 Pod → kubelet 创建 sandbox → 调用 CNI ADD → IPAM 分配 IP → 创建 veth pair → 配置路由规则 → 返回 IP 配置 → 启动业务容器。CNI 配置中的环境变量（`CNI_COMMAND`、`CNI_CONTAINERID`、`CNI_NETNS`、`CNI_IFNAME`）由容器运行时传入，插件根据这些参数完成网络配置。
 
-Sources: [02-cni-architecture-fundamentals.md](domain-5-networking/02-cni-architecture-fundamentals.md#L59-L165), [23-container-network-deep-dive.md](domain-3-control-plane/23-container-network-deep-dive.md#L44-L100)
+Sources: [02-cni-architecture-fundamentals.md](domain-03-networking-traffic/02-cni-architecture-fundamentals.md#L59-L165), [23-container-network-deep-dive.md](domain-01-cluster-fundamentals/23-container-network-deep-dive.md#L44-L100)
 
 ### 2.2 CNI 插件全景对比
 
@@ -89,13 +89,13 @@ Sources: [02-cni-architecture-fundamentals.md](domain-5-networking/02-cni-archit
 
 **生产环境选型建议**：通用生产首选 **Calico**（成熟稳定、BGP 原生支持）；高性能与安全并重选 **Cilium**（eBPF 原生、L7 策略、kube-proxy 替代）；阿里云环境选 **Terway**（VPC 原生性能最优）；简单测试场景选 **Flannel**（配置极简）。Cilium 作为 CNCF 毕业项目，已拥有 5000+ 生产集群部署，其 eBPF 数据面以 O(1) hash map 查找取代传统 iptables 的 O(n) 链遍历，在大规模集群（>5000 Service）中性能优势显著。
 
-Sources: [03-cni-plugins-comparison.md](domain-5-networking/03-cni-plugins-comparison.md#L1-L200), [03-cilium-cni-architecture.md](domain-35-ebpf-technology/03-cilium-cni-architecture.md#L25-L58)
+Sources: [03-cni-plugins-comparison.md](domain-03-networking-traffic/03-cni-plugins-comparison.md#L1-L200), [03-cilium-cni-architecture.md](domain-03-networking-traffic/03-cilium-cni-architecture.md#L25-L58)
 
 ### 2.3 Overlay 与 Native 网络模式
 
 CNI 的网络连通性实现分为两大类：**Overlay 网络**通过封装（VXLAN / IPIP / Geneve）在现有物理网络之上构建虚拟二层网络，配置简单但对性能有一定损耗；**Native 网络**（BGP 直连 / VPC ENI）直接利用底层网络路由，性能最优但要求网络基础设施支持。以 Flannel VXLAN 为例，跨节点 Pod 通信时，原始数据包（Pod Eth + Pod IP + TCP + Payload）被封装为 VXLAN 包（Outer Eth + Outer IP + UDP:4789 + VXLAN Header + 原始数据包），在物理网络中传输，对底层网络完全透明。Calico BGP 模式则通过 BGP 协议在节点间传播 Pod CIDR 路由，数据包无需封装，吞吐量更高、延迟更低。
 
-Sources: [02-cni-architecture-fundamentals.md](domain-5-networking/02-cni-architecture-fundamentals.md#L185-L230)
+Sources: [02-cni-architecture-fundamentals.md](domain-03-networking-traffic/02-cni-architecture-fundamentals.md#L185-L230)
 
 ## 三、Service 四层负载均衡
 
@@ -113,7 +113,7 @@ Service 是 Kubernetes 中最核心的网络抽象，为一组 Pod 提供稳定�
 
 Service 的工作流程为四步：① `kubectl apply` 提交 Service 定义到 API Server → ② EndpointSlice Controller Watch Pod 变化、更新端点信息 → ③ kube-proxy Watch Service 和 EndpointSlice、同步转发规则到内核 → ④ 客户端请求 Service IP 被 DNAT 为 Pod IP。其中 EndpointSlice（v1.21+ GA）取代了早期的 Endpoints 对象，通过分片存储（每 slice 最多 100 个 endpoint）解决了大规模集群的性能瓶颈。
 
-Sources: [06-service-concepts-types.md](domain-5-networking/06-service-concepts-types.md#L1-L200), [01-network-architecture-overview.md](domain-5-networking/01-network-architecture-overview.md#L62-L200)
+Sources: [06-service-concepts-types.md](domain-03-networking-traffic/06-service-concepts-types.md#L1-L200), [01-network-architecture-overview.md](domain-03-networking-traffic/01-network-architecture-overview.md#L62-L200)
 
 ### 3.2 kube-proxy 模式与性能
 
@@ -129,7 +129,7 @@ kube-proxy 是 Service 数据面的实现组件，运行在每个节点上，有
 
 **iptables 模式**的规则链结构为 `PREROUTING → KUBE-SERVICES → KUBE-SVC-xxx → KUBE-SEP-xxx`，每条 Service 对应一条 SVC 链，每个 Endpoint 对应一条 SEP 链（DNAT 规则）。当 Service 数量超过 5000 时，规则链遍历的 O(n) 开销会导致显著延迟。**IPVS 模式**利用内核 ip_vs 模块的哈希表实现 O(1) 查找，支持 rr（轮询）、wrr（加权轮询）、lc（最少连接）、sh（源哈希）等 10 种调度算法，是大规模集群的推荐选择。**eBPF 模式**（Cilium kube-proxy replacement）在 socket 层直接完成路由决策，完全绕过 iptables/netfilter 栈，配合 DSR（Direct Server Return）可实现请求路径最优化。
 
-Sources: [09-kube-proxy-modes-performance.md](domain-5-networking/09-kube-proxy-modes-performance.md#L1-L150)
+Sources: [09-kube-proxy-modes-performance.md](domain-03-networking-traffic/09-kube-proxy-modes-performance.md#L1-L150)
 
 ### 3.3 流量策略与拓扑感知
 
@@ -137,7 +137,7 @@ Sources: [09-kube-proxy-modes-performance.md](domain-5-networking/09-kube-proxy-
 
 **拓扑感知路由（Topology Aware Hints）**（v1.27+ GA）是一项重要的成本优化特性。通过在 Service 上设置注解 `service.kubernetes.io/topology-aware-hints: "auto"`，kube-proxy 自动优先将流量路由到同一可用区的 Endpoint，减少跨 AZ 流量。生产实测数据显示延迟降低 40-60%，跨 AZ 流量成本降低 70%，特别适用于跨多可用区部署的缓存、数据库等延迟敏感型服务。
 
-Sources: [10-service-advanced-features.md](domain-5-networking/10-service-advanced-features.md#L1-L100), [01-network-architecture-overview.md](domain-5-networking/01-network-architecture-overview.md#L136-L160)
+Sources: [10-service-advanced-features.md](domain-03-networking-traffic/10-service-advanced-features.md#L1-L100), [01-network-architecture-overview.md](domain-03-networking-traffic/01-network-architecture-overview.md#L136-L160)
 
 ## 四、Ingress 七层流量管理
 
@@ -155,7 +155,7 @@ Ingress 是 Kubernetes 管理集群外部 HTTP/HTTPS 访问的 API 对象（v1.1
 | 成本 | 无 | 无 | 每服务一个 LB | **共享控制器** | **共享网关** |
 | 适用场景 | 内部通信 | 测试 | 单服务暴露 | **多服务 HTTP 路由** | **复杂多协议** |
 
-Sources: [19-ingress-fundamentals.md](domain-5-networking/19-ingress-fundamentals.md#L1-L200)
+Sources: [19-ingress-fundamentals.md](domain-03-networking-traffic/19-ingress-fundamentals.md#L1-L200)
 
 ### 4.2 Ingress Controller 选型与生产实践
 
@@ -173,7 +173,7 @@ Nginx Ingress 通过注解实现高级功能——`canary: "true"` + `canary-wei
 
 生产环境最佳实践包括：IngressClass 指定控制器类型、独立命名空间部署 Controller、配置 DefaultBackend 处理 404、启用 Prometheus 指标采集、配置 access-log 集中分析、使用 cert-manager 自动化证书管理。
 
-Sources: [36-api-gateway-patterns.md](domain-5-networking/36-api-gateway-patterns.md#L1-L138), [19-ingress-fundamentals.md](domain-5-networking/19-ingress-fundamentals.md#L124-L161)
+Sources: [36-api-gateway-patterns.md](domain-03-networking-traffic/36-api-gateway-patterns.md#L1-L138), [19-ingress-fundamentals.md](domain-03-networking-traffic/19-ingress-fundamentals.md#L124-L161)
 
 ## 五、Gateway API：新一代流量管理标准
 
@@ -191,7 +191,7 @@ Gateway API 从 v1.0（2023-10 GA）到 v1.4（2025-11），经历了系统性�
 | **集群/平台管理员** | Gateway | 定义流量入口（IP、端口、TLS 证书、允许路由的命名空间） | 运维团队 |
 | **应用开发者** | HTTPRoute / GRPCRoute 等 | 定义具体路由规则、流量分割、请求过滤 | 业务开发 |
 
-Sources: [19-kubernetes-gateway-api-modern-traffic-management.md](domain-19-papers/19-kubernetes-gateway-api-modern-traffic-management.md#L1-L100), [35-gateway-api-overview.md](domain-5-networking/35-gateway-api-overview.md#L1-L75)
+Sources: [19-kubernetes-gateway-api-modern-traffic-management.md](domain-19-landscape-references/19-kubernetes-gateway-api-modern-traffic-management.md#L1-L100), [35-gateway-api-overview.md](domain-03-networking-traffic/35-gateway-api-overview.md#L1-L75)
 
 ### 5.2 Gateway API CRD 体系与核心配置
 
@@ -210,7 +210,7 @@ Gateway API 相比 Ingress 的关键能力跃升：
 
 GAMMA 是 Gateway API 的一个重要扩展方向——将 HTTPRoute 直接绑定到 Service（而非 Gateway），实现服务网格内部 East-West 流量的标准化治理。例如通过 `parentRefs: [{kind: Service, name: users-service}]` 将 `/v2` 路径路由到 `users-v2` 服务，无需任何 Sidecar 注入。
 
-Sources: [35-gateway-api-overview.md](domain-5-networking/35-gateway-api-overview.md#L1-L200)
+Sources: [35-gateway-api-overview.md](domain-03-networking-traffic/35-gateway-api-overview.md#L1-L200)
 
 ## 六、NetworkPolicy 与网络安全
 
@@ -242,13 +242,13 @@ graph LR
 
 NetworkPolicy 选择器的组合逻辑需特别注意：同一 `from` 条目内的 `namespaceSelector` 和 `podSelector` 是 **AND 关系**（必须同时满足）；多个 `from` 条目之间是 **OR 关系**（满足任一即可）。生产环境常见错误是将不同命名空间的 Pod 选择器写在同一 `from` 条目内，导致策略永远无法匹配。
 
-Sources: [16-networkpolicy-deep-practice.md](domain-5-networking/16-networkpolicy-deep-practice.md#L1-L120)
+Sources: [16-networkpolicy-deep-practice.md](domain-03-networking-traffic/16-networkpolicy-deep-practice.md#L1-L120)
 
 ### 6.2 Egress 出站流量管理
 
 Egress 流量管理是网络安全中容易被忽视的环节。出站控制方案从 L3 到 L7 形成完整的防御纵深：**NetworkPolicy**（L3/L4 IP+端口级）→ **Egress Gateway**（统一出口 IP，用于 IP 白名单场景）→ **NAT Gateway**（云原生 NAT，VPC 级控制）→ **Service Mesh**（L7 URL/Header 级精细控制）→ **Cilium eBPF**（L3-L7 全栈高性能控制）。对于需要固定出口 IP 的合规场景（如第三方 API 白名单），Istio Egress Gateway 或 Cilium Egress Gateway 是推荐方案。
 
-Sources: [29-egress-traffic-management.md](domain-5-networking/29-egress-traffic-management.md#L1-L122)
+Sources: [29-egress-traffic-management.md](domain-03-networking-traffic/29-egress-traffic-management.md#L1-L122)
 
 ## 七、Service Mesh 服务网格
 
@@ -256,7 +256,7 @@ Service Mesh 在 Service 之上提供了更精细的流量治理能力——mTLS
 
 Istio 的流量拦截机制通过 `istio-init` 容器设置 iptables 规则，将所有入站流量重定向到 15006 端口（Envoy）、出站流量重定向到 15001 端口。Cilium Service Mesh 则采用完全不同的路径——利用 eBPF 在内核 socket 层完成路由决策，无需 iptables 规则注入，也无需 Sidecar 容器，实现了"无 Sidecar 的内核级服务网格"。
 
-Sources: [30-service-mesh-deep-dive.md](domain-5-networking/30-service-mesh-deep-dive.md#L1-L150)
+Sources: [30-service-mesh-deep-dive.md](domain-03-networking-traffic/30-service-mesh-deep-dive.md#L1-L150)
 
 ## 八、多集群网络互联
 
@@ -273,7 +273,7 @@ Sources: [30-service-mesh-deep-dive.md](domain-5-networking/30-service-mesh-deep
 
 CIDR 规划是多集群网络的基础——每个集群必须分配不重叠的 Pod CIDR 和 Service CIDR。例如三集群方案：cluster1 使用 `10.244.0.0/18` + `10.96.0.0/14`，cluster2 使用 `10.244.64.0/18` + `10.100.0.0/14`，cluster3 使用 `10.244.128.0/18` + `10.104.0.0/14`。
 
-Sources: [31-multi-cluster-federation.md](domain-5-networking/31-multi-cluster-federation.md#L1-L100)
+Sources: [31-multi-cluster-federation.md](domain-03-networking-traffic/31-multi-cluster-federation.md#L1-L100)
 
 ### 8.2 跨集群服务发现与流量治理
 
@@ -289,7 +289,7 @@ Sources: [31-multi-cluster-federation.md](domain-5-networking/31-multi-cluster-f
 | Skupper | 应用层 | 服务暴露 | 简单互联 |
 | Karmada | 控制面联邦 | PropagationPolicy | 多集群编排 |
 
-Sources: [32-multi-cluster-networking.md](domain-5-networking/32-multi-cluster-networking.md#L1-L150), [31-multi-cluster-federation.md](domain-5-networking/31-multi-cluster-federation.md#L104-L170)
+Sources: [32-multi-cluster-networking.md](domain-03-networking-traffic/32-multi-cluster-networking.md#L1-L150), [31-multi-cluster-federation.md](domain-03-networking-traffic/31-multi-cluster-federation.md#L104-L170)
 
 ## 九、网络排障与性能调优
 
@@ -305,7 +305,7 @@ Sources: [32-multi-cluster-networking.md](domain-5-networking/32-multi-cluster-n
 | Service 不可达 | Endpoint/kube-proxy | `kubectl get endpoints` / `iptables -t nat -L` |
 | Ingress 502/503 | 后端健康检查 | Controller 日志 + `kubectl describe ingress` |
 
-Sources: [27-cni-troubleshooting-optimization.md](domain-5-networking/27-cni-troubleshooting-optimization.md#L1), [33-network-troubleshooting.md](domain-5-networking/33-network-troubleshooting.md#L1)
+Sources: [27-cni-troubleshooting-optimization.md](domain-03-networking-traffic/27-cni-troubleshooting-optimization.md#L1), [33-network-troubleshooting.md](domain-03-networking-traffic/33-network-troubleshooting.md#L1)
 
 ### 9.2 生产环境最佳实践总结
 
@@ -321,7 +321,7 @@ Sources: [27-cni-troubleshooting-optimization.md](domain-5-networking/27-cni-tro
 | **多集群** | CIDR 提前规划 + Karmada 编排 + Cilium ClusterMesh |
 | **证书** | cert-manager 自动化 + Gateway API BackendTLSPolicy |
 
-Sources: [README.md](domain-5-networking/README.md#L81-L100), [34-network-performance-tuning.md](domain-5-networking/34-network-performance-tuning.md#L1)
+Sources: [README.md](domain-03-networking-traffic/README.md#L81-L100), [34-network-performance-tuning.md](domain-03-networking-traffic/34-network-performance-tuning.md#L1)
 
 ## 十、知识域导航与学习路径
 
@@ -331,10 +331,10 @@ Sources: [README.md](domain-5-networking/README.md#L81-L100), [34-network-perfor
 
 | 阶段 | 聚焦领域 | 推荐阅读顺序 |
 |------|---------|------------|
-| **入门（网络基础）** | 网络架构全景 + CNI 基础 | [01-network-architecture-overview](domain-5-networking/01-network-architecture-overview.md) → [02-cni-architecture-fundamentals](domain-5-networking/02-cni-architecture-fundamentals.md) → [04-flannel-complete-guide](domain-5-networking/04-flannel-complete-guide.md) |
-| **进阶（Service 与 DNS）** | Service 类型 + kube-proxy + CoreDNS | [06-service-concepts-types](domain-5-networking/06-service-concepts-types.md) → [09-kube-proxy-modes-performance](domain-5-networking/09-kube-proxy-modes-performance.md) → [11-dns-service-discovery-coredns](domain-5-networking/11-dns-service-discovery-coredns.md) |
-| **高级（Ingress 与 Gateway）** | L7 路由 + Gateway API | [19-ingress-fundamentals](domain-5-networking/19-ingress-fundamentals.md) → [35-gateway-api-overview](domain-5-networking/35-gateway-api-overview.md) → [19-kubernetes-gateway-api-modern-traffic-management](domain-19-papers/19-kubernetes-gateway-api-modern-traffic-management.md) |
-| **专家（安全与多集群）** | NetworkPolicy + 多集群 + Service Mesh | [16-networkpolicy-deep-practice](domain-5-networking/16-networkpolicy-deep-practice.md) → [31-multi-cluster-federation](domain-5-networking/31-multi-cluster-federation.md) → [30-service-mesh-deep-dive](domain-5-networking/30-service-mesh-deep-dive.md) |
+| **入门（网络基础）** | 网络架构全景 + CNI 基础 | [01-network-architecture-overview](domain-03-networking-traffic/01-network-architecture-overview.md) → [02-cni-architecture-fundamentals](domain-03-networking-traffic/02-cni-architecture-fundamentals.md) → [04-flannel-complete-guide](domain-03-networking-traffic/04-flannel-complete-guide.md) |
+| **进阶（Service 与 DNS）** | Service 类型 + kube-proxy + CoreDNS | [06-service-concepts-types](domain-03-networking-traffic/06-service-concepts-types.md) → [09-kube-proxy-modes-performance](domain-03-networking-traffic/09-kube-proxy-modes-performance.md) → [11-dns-service-discovery-coredns](domain-03-networking-traffic/11-dns-service-discovery-coredns.md) |
+| **高级（Ingress 与 Gateway）** | L7 路由 + Gateway API | [19-ingress-fundamentals](domain-03-networking-traffic/19-ingress-fundamentals.md) → [35-gateway-api-overview](domain-03-networking-traffic/35-gateway-api-overview.md) → [19-kubernetes-gateway-api-modern-traffic-management](domain-19-landscape-references/19-kubernetes-gateway-api-modern-traffic-management.md) |
+| **专家（安全与多集群）** | NetworkPolicy + 多集群 + Service Mesh | [16-networkpolicy-deep-practice](domain-03-networking-traffic/16-networkpolicy-deep-practice.md) → [31-multi-cluster-federation](domain-03-networking-traffic/31-multi-cluster-federation.md) → [30-service-mesh-deep-dive](domain-03-networking-traffic/30-service-mesh-deep-dive.md) |
 
 **关联知识域跳转**：
 

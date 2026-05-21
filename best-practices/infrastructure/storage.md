@@ -8,6 +8,8 @@ tags:
 - persistent-volume
 - storage-class
 - backup
+- helm
+- rag
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,13 +27,17 @@ trigger_keywords:
 - 存储配置
 - 持久卷
 - 存储类
+prerequisites:
+- kubectl-basics
+- helm-basics
+- backup-basics
 cross_refs:
 - type: domain
-  path: ../../domain-6-storage/
-  label: '存储知识域'
+  path: ../../domain-04-storage-data/
+  label: 存储知识域
 - type: best-practice
   path: ./kubernetes-cluster.md
-  label: '集群配置最佳实践'
+  label: 集群配置最佳实践
 ---
 
 # Kubernetes 存储配置最佳实践

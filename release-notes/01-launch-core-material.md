@@ -1,7 +1,41 @@
+---
+title: kudig-database 发布会 — 核心材料
+description: '**定位**: 企业级 Kubernetes 生产运维知识库 + AI 智能体语料'
+category: general
+tags:
+- k8s
+- etcd
+- istio
+- helm
+- ingress
+- gateway
+- gpu
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 发布会 — 核心材料 是什么
+- 如何 kudig-database 发布会 — 核心材料
+trigger_keywords:
+- kudig-database
+- 发布会
+- 核心材料
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- etcd-basics
+- gpu-scheduling-basics
+---
+
 # kudig-database 发布会 — 核心材料
 
 > **版本**: v1.0 | **发布日期**: 2026-05
-> **定位**: 企业级 Kubernetes 生产运维知识库 + AI 智能体语料
+> **定位**: 企业级 [[entities/kubernetes|kubernetes]] 生产运维知识库 + AI 智能体语料
 
 ---
 
@@ -156,7 +190,7 @@
 
 **提问**: "我要深度研究 etcd 的生产运维, 包括备份恢复和性能调优"
 
-**预期输出**: Agent 从 domain-3 命中 etcd 深度文档 (1,042 行), 输出:
+**预期输出**: Agent 从 domain-01-cluster-fundamentals 命中 etcd 深度文档 (1,042 行), 输出:
 - Raft 共识协议原理
 - MVCC 数据模型
 - Watch 机制

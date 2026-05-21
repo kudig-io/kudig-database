@@ -8,6 +8,11 @@ tags:
 - calico
 - cilium
 - network-policy
+- istio
+- flannel
+- coredns
+- helm
+- ingress
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,13 +30,20 @@ trigger_keywords:
 - 网络配置
 - 网络策略
 - CNI
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
 cross_refs:
 - type: domain
-  path: ../../domain-5-networking/
-  label: '网络知识域'
+  path: ../../domain-03-networking-traffic/
+  label: 网络知识域
 - type: best-practice
   path: ./kubernetes-cluster.md
-  label: '集群配置最佳实践'
+  label: 集群配置最佳实践
 ---
 
 # Kubernetes 网络配置最佳实践
@@ -565,3 +577,8 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubern
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和CNI插件版本保持同步
+
+## Related
+
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]

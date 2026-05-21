@@ -14,25 +14,30 @@ from pathlib import Path
 from collections import defaultdict
 
 BASE_DIR = Path("/Users/allengaller/Documents/GitHub/kudig-io/kudig-database")
-OUTPUT_DIR = BASE_DIR / "topic-qa-corpus"
+OUTPUT_DIR = BASE_DIR / "domain-10-troubleshooting-diagnostics" / "topic-qa-corpus"
 
 # 核心 domain 列表 (优先生成 QA 对)
 CORE_DOMAINS = [
-    "domain-1-architecture-fundamentals",
-    "domain-3-control-plane",
-    "domain-4-workloads",
-    "domain-5-networking",
-    "domain-6-storage",
-    "domain-7-security",
-    "domain-8-observability",
-    "domain-9-platform-ops",
-    "domain-11-ai-infra",
-    "domain-12-troubleshooting",
-    "domain-13-docker",
-    "domain-18-production-operations",
-    "domain-23-gitops-ci-cd",
-    "domain-25-cloud-native-security",
-    "domain-26-service-mesh-microservices",
+    "domain-01-cluster-fundamentals",
+    "domain-02-workloads-applications",
+    "domain-03-networking-traffic",
+    "domain-04-storage-data",
+    "domain-05-security-compliance",
+    "domain-06-observability",
+    "domain-07-platform-engineering",
+    "domain-08-release-change-management",
+    "domain-09-reliability-engineering",
+    "domain-10-troubleshooting-diagnostics",
+    "domain-11-production-operations",
+    "domain-12-cloud-providers",
+    "domain-13-container-runtime",
+    "domain-14-ai-ml-infra",
+    "domain-15-specialized-tech",
+    "domain-16-database-middleware",
+    "domain-17-system-foundation",
+    "domain-18-manifests-patterns",
+    "domain-19-landscape-references",
+    "domain-20-application-patterns",
 ]
 
 # 排除目录
@@ -223,7 +228,7 @@ def main():
             continue
 
         qa_pairs = []
-        for md_file in sorted(domain_dir.glob('*.md')):
+        for md_file in sorted(domain_dir.rglob('*.md')):
             if md_file.name == 'README.md':
                 continue
             try:
@@ -248,7 +253,7 @@ def main():
             print(f"  {domain_name}: {len(qa_pairs)} QA pairs")
 
     # 处理 FTA 故障树
-    fta_dir = BASE_DIR / 'topic-fta' / 'list'
+    fta_dir = BASE_DIR / 'domain-10-troubleshooting-diagnostics' / 'topic-fta' / 'list'
     if fta_dir.exists():
         qa_pairs = []
         for md_file in sorted(fta_dir.glob('*.md')):
@@ -275,7 +280,7 @@ def main():
             print(f"  topic-fta: {len(qa_pairs)} QA pairs")
 
     # 处理 topic-skills
-    skills_dir = BASE_DIR / 'topic-skills'
+    skills_dir = BASE_DIR / 'domain-10-troubleshooting-diagnostics' / 'topic-skills'
     if skills_dir.exists():
         qa_pairs = []
         for md_file in sorted(skills_dir.glob('*.md')):
@@ -302,7 +307,7 @@ def main():
             print(f"  topic-skills: {len(qa_pairs)} QA pairs")
 
     # 处理 application-architecture
-    app_dir = BASE_DIR / 'topic-application-architecture'
+    app_dir = BASE_DIR / 'domain-20-application-patterns' / 'topic-application-architecture'
     if app_dir.exists():
         qa_pairs = []
         for md_file in sorted(app_dir.glob('*.md')):

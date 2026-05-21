@@ -1,3 +1,30 @@
+---
+title: kudig-database 预热倒计时文案
+description: 做了一件可能改变 K8s 运维方式的事。
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 预热倒计时文案 是什么
+- 如何 kudig-database 预热倒计时文案
+trigger_keywords:
+- kudig-database
+- 预热倒计时文案
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- etcd-basics
+---
+
 # kudig-database 预热倒计时文案
 
 > **发布日**: D-Day
@@ -19,7 +46,7 @@
 不是文档, 不是 Wiki, 不是博客合集。
 是什么? 7 天后揭晓。
 
-#Kubernetes #AI #运维
+#[[entities/kubernetes|kubernetes]] #AI #运维
 ```
 
 ### 社群文案

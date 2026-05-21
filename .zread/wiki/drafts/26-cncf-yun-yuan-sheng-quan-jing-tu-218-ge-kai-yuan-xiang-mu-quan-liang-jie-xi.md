@@ -1,6 +1,6 @@
 CNCF（Cloud Native Computing Foundation）云原生全景图是当今云计算领域最具影响力的开源技术生态图谱。本域收录了 CNCF 托管的全部 **218 个开源项目**，按成熟度分为 Graduated（毕业）、Incubating（孵化）、Sandbox（沙箱）三个层级，覆盖容器编排、服务网格、可观测性、安全合规、存储、AI/ML 等云原生技术全栈。本文将从架构视角出发，对这 218 个项目进行系统化的分类解析，帮助高级开发者建立全景认知框架并快速定位关键技术选型。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L1-L26)
+Sources: [README.md](domain-19-landscape-references/README.md#L1-L26)
 
 ## CNCF 项目成熟度模型：三级孵化体系
 
@@ -14,7 +14,7 @@ CNCF 采用严格的三级成熟度模型管理旗下项目，每个层级的晋
 
 三级模型的核心逻辑是：Sandbox 验证创新方向 → Incubating 确认生产可行性 → Graduated 标志行业标准化。一个项目从 Sandbox 到 Graduated 通常需要 3-5 年的迭代周期，例如 Kubernetes 在 2016 年作为首个托管项目进入 CNCF，2018 年成为首个毕业项目；Cilium 在 2021 年进入孵化，2023 年即毕业——这反映了 eBPF 网络技术的快速成熟。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L19-L26)
+Sources: [README.md](domain-19-landscape-references/README.md#L19-L26)
 
 ## 生态全景架构：云原生技术栈分层视图
 
@@ -74,7 +74,7 @@ graph TB
 
 这张分层架构图揭示了云原生生态的核心设计哲学：每一层都遵循**可替换接口 + 多实现竞争**的模式。例如在网络层，CNI 规范定义了标准接口，Cilium、Antrea、Kube-OVN 等项目在相同接口下提供不同实现策略；在可观测性层，OpenTelemetry 定义了统一采集标准，Prometheus、Jaeger、Loki 等分别在指标、追踪、日志维度提供最佳方案。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L30-L69), [kubernetes.md](domain-34-cncf-landscape/graduated/kubernetes/kubernetes.md#L46-L67), [prometheus.md](domain-34-cncf-landscape/graduated/prometheus/prometheus.md#L46-L63)
+Sources: [README.md](domain-19-landscape-references/README.md#L30-L69), [kubernetes.md](domain-19-landscape-references/graduated/kubernetes/kubernetes.md#L46-L67), [prometheus.md](domain-19-landscape-references/graduated/prometheus/prometheus.md#L46-L63)
 
 ## Graduated 毕业项目（34 个）：生产级技术基石
 
@@ -90,7 +90,7 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L30-L69), [kubernetes.md
 
 Kubernetes 作为云原生生态的基石，其声明式 API 和控制器模式定义了整个生态的编程范式。containerd 和 CRI-O 在运行时层面竞争：前者由 Docker 演进而来，生态更丰富；后者由 Red Hat 主导，更轻量安全。
 
-Sources: [kubernetes.md](domain-34-cncf-landscape/graduated/kubernetes/kubernetes.md#L1-L32), [containerd.md](domain-34-cncf-landscape/graduated/containerd/containerd.md#L1-L15), [cri-o.md](domain-34-cncf-landscape/graduated/cri-o/cri-o.md#L1-L15)
+Sources: [kubernetes.md](domain-19-landscape-references/graduated/kubernetes/kubernetes.md#L1-L32), [containerd.md](domain-19-landscape-references/graduated/containerd/containerd.md#L1-L15), [cri-o.md](domain-19-landscape-references/graduated/cri-o/cri-o.md#L1-L15)
 
 ### 服务网格与网络
 
@@ -104,7 +104,7 @@ Sources: [kubernetes.md](domain-34-cncf-landscape/graduated/kubernetes/kubernete
 
 服务网格领域存在三条技术路线的竞争：Istio 代表的 **Sidecar 模式**（功能最完整）、Linkerd 代表的 **极简 Sidecar 模式**（资源占用最低）、Cilium 代表的 **eBPF Sidecar-less 模式**（性能最优）。Cilium 的快速毕业标志着 eBPF 技术正在从创新走向主流。
 
-Sources: [istio.md](domain-34-cncf-landscape/graduated/istio/istio.md#L1-L32), [cilium.md](domain-34-cncf-landscape/graduated/cilium/cilium.md#L1-L32), [envoy.md](domain-34-cncf-landscape/graduated/envoy/envoy.md#L1-L15), [linkerd.md](domain-34-cncf-landscape/graduated/linkerd/linkerd.md#L1-L15), [coredns.md](domain-34-cncf-landscape/graduated/coredns/coredns.md#L1-L15)
+Sources: [istio.md](domain-19-landscape-references/graduated/istio/istio.md#L1-L32), [cilium.md](domain-19-landscape-references/graduated/cilium/cilium.md#L1-L32), [envoy.md](domain-19-landscape-references/graduated/envoy/envoy.md#L1-L15), [linkerd.md](domain-19-landscape-references/graduated/linkerd/linkerd.md#L1-L15), [coredns.md](domain-19-landscape-references/graduated/coredns/coredns.md#L1-L15)
 
 ### 可观测性
 
@@ -116,7 +116,7 @@ Sources: [istio.md](domain-34-cncf-landscape/graduated/istio/istio.md#L1-L32), [
 
 Prometheus 定义了云原生监控的标准范式：基于拉取模式的数据采集、多维标签数据模型、PromQL 查询语言。其局限性（单机存储、不支持长期历史）催生了 Thanos 和 Cortex 两个孵化项目作为补充。Jaeger 和 Fluentd 分别在追踪和日志维度提供标准方案，三者共同构成可观测性的三大支柱。
 
-Sources: [prometheus.md](domain-34-cncf-landscape/graduated/prometheus/prometheus.md#L1-L32), [jaeger.md](domain-34-cncf-landscape/graduated/jaeger/jaeger.md#L1-L15), [fluentd.md](domain-34-cncf-landscape/graduated/fluentd/fluentd.md#L1-L15)
+Sources: [prometheus.md](domain-19-landscape-references/graduated/prometheus/prometheus.md#L1-L32), [jaeger.md](domain-19-landscape-references/graduated/jaeger/jaeger.md#L1-L15), [fluentd.md](domain-19-landscape-references/graduated/fluentd/fluentd.md#L1-L15)
 
 ### 安全与合规
 
@@ -131,7 +131,7 @@ Sources: [prometheus.md](domain-34-cncf-landscape/graduated/prometheus/prometheu
 
 安全领域呈现**纵深防御**的架构趋势：Falco 在运行时层面监控异常行为、OPA/Kyverno 在准入层面执行策略、cert-manager 在传输层面保障加密、SPIFFE/SPIRE 在身份层面建立信任、in-toto/TUF 在供应链层面保障完整性。这一链条覆盖了从代码构建到运行时全生命周期。
 
-Sources: [falco.md](domain-34-cncf-landscape/graduated/falco/falco.md#L1-L32), [opa.md](domain-34-cncf-landscape/graduated/opa/opa.md#L1-L15), [cert-manager.md](domain-34-cncf-landscape/graduated/cert-manager/cert-manager.md#L1-L15), [spiffe.md](domain-34-cncf-landscape/graduated/spiffe/spiffe.md#L1-L15), [spire.md](domain-34-cncf-landscape/graduated/spire/spire.md#L1-L15)
+Sources: [falco.md](domain-19-landscape-references/graduated/falco/falco.md#L1-L32), [opa.md](domain-19-landscape-references/graduated/opa/opa.md#L1-L15), [cert-manager.md](domain-19-landscape-references/graduated/cert-manager/cert-manager.md#L1-L15), [spiffe.md](domain-19-landscape-references/graduated/spiffe/spiffe.md#L1-L15), [spire.md](domain-19-landscape-references/graduated/spire/spire.md#L1-L15)
 
 ### 应用交付与供应
 
@@ -145,7 +145,7 @@ Sources: [falco.md](domain-34-cncf-landscape/graduated/falco/falco.md#L1-L32), [
 
 GitOps 已成为云原生交付的事实标准，Argo 和 Flux 分别代表了两种设计哲学：Argo 提供完整的 UI 和工作流引擎，适合需要可视化编排的团队；Flux 更轻量，遵循 Kubernetes 原生设计，适合偏好极简工具链的团队。Crossplane 则将 Kubernetes 的声明式 API 模式延伸到云资源管理，实现了基础设施即 Kubernetes 资源。
 
-Sources: [argo.md](domain-34-cncf-landscape/graduated/argo/argo.md#L1-L15), [flux.md](domain-34-cncf-landscape/graduated/flux/flux.md#L1-L15), [crossplane.md](domain-34-cncf-landscape/graduated/crossplane/crossplane.md#L1-L15), [harbor.md](domain-34-cncf-landscape/graduated/harbor/harbor.md#L1-L15), [helm.md](domain-34-cncf-landscape/graduated/helm/helm.md#L1-L15)
+Sources: [argo.md](domain-19-landscape-references/graduated/argo/argo.md#L1-L15), [flux.md](domain-19-landscape-references/graduated/flux/flux.md#L1-L15), [crossplane.md](domain-19-landscape-references/graduated/crossplane/crossplane.md#L1-L15), [harbor.md](domain-19-landscape-references/graduated/harbor/harbor.md#L1-L15), [helm.md](domain-19-landscape-references/graduated/helm/helm.md#L1-L15)
 
 ### 存储与数据库
 
@@ -165,7 +165,7 @@ Sources: [argo.md](domain-34-cncf-landscape/graduated/argo/argo.md#L1-L15), [flu
 | **KEDA** | 事件驱动伸缩 | 云端 | 0→N 事件驱动自动扩缩容 |
 | **Dapr** | 分布式运行时 | 通用 | 多语言 SDK + 标准化 API |
 
-Sources: [rook.md](domain-34-cncf-landscape/graduated/rook/rook.md#L1-L15), [cubefs.md](domain-34-cncf-landscape/graduated/cubefs/cubefs.md#L1-L15), [tikv.md](domain-34-cncf-landscape/graduated/tikv/tikv.md#L1-L15), [vitess.md](domain-34-cncf-landscape/graduated/vitess/vitess.md#L1-L15), [kubeedge.md](domain-34-cncf-landscape/graduated/kubeedge/kubeedge.md#L1-L15), [knative.md](domain-34-cncf-landscape/graduated/knative/knative.md#L1-L15), [keda.md](domain-34-cncf-landscape/graduated/keda/keda.md#L1-L15), [dapr.md](domain-34-cncf-landscape/graduated/dapr/dapr.md#L1-L15)
+Sources: [rook.md](domain-19-landscape-references/graduated/rook/rook.md#L1-L15), [cubefs.md](domain-19-landscape-references/graduated/cubefs/cubefs.md#L1-L15), [tikv.md](domain-19-landscape-references/graduated/tikv/tikv.md#L1-L15), [vitess.md](domain-19-landscape-references/graduated/vitess/vitess.md#L1-L15), [kubeedge.md](domain-19-landscape-references/graduated/kubeedge/kubeedge.md#L1-L15), [knative.md](domain-19-landscape-references/graduated/knative/knative.md#L1-L15), [keda.md](domain-19-landscape-references/graduated/keda/keda.md#L1-L15), [dapr.md](domain-19-landscape-references/graduated/dapr/dapr.md#L1-L15)
 
 ## Incubating 孵化项目（37 个）：快速成长的技术力量
 
@@ -202,19 +202,19 @@ graph LR
 
 OpenTelemetry 是近年来 CNCF 最具战略意义的孵化项目。它合并了 OpenTracing 和 OpenCensus 两个项目，定义了 Traces、Metrics、Logs 三大信号的统一 API 和 SDK 标准，从根本上解决了遥测数据采集的碎片化问题。其架构由三层组成：**API 层**定义接口规范（厂商无关）、**SDK 层**提供实现和处理管道（采样、批处理、导出）、**Collector 层**提供供应商中立的数据收集和路由能力。
 
-Sources: [opentelemetry.md](domain-34-cncf-landscape/incubating/opentelemetry/opentelemetry.md#L1-L43)
+Sources: [opentelemetry.md](domain-19-landscape-references/incubating/opentelemetry/opentelemetry.md#L1-L43)
 
 #### Karmada：多云多集群编排
 
 Karmada 提供了 Kubernetes 风格的多集群管理 API，其核心创新是 PropagationPolicy（传播策略）和 OverridePolicy（覆盖策略）两个 CRD，前者定义资源如何分发到成员集群，后者定义不同集群的差异化配置。这种设计让运维团队可以用单一的声明式配置管理跨地域、跨云的多集群工作负载。
 
-Sources: [karmada.md](domain-34-cncf-landscape/incubating/karmada/karmada.md#L1-L29)
+Sources: [karmada.md](domain-19-landscape-references/incubating/karmada/karmada.md#L1-L29)
 
 #### KServe：标准化模型推理
 
 KServe 定义了 InferenceService CRD，将模型推理标准化为 Predictor（推理）、Transformer（预处理）、Explainer（解释）三个组件，支持 TensorFlow、PyTorch、Triton 等主流框架，基于 Knative 实现自动扩缩容至零。这使得 ML 工程师可以用统一的声明式 API 部署任何框架的模型。
 
-Sources: [kserve.md](domain-34-cncf-landscape/incubating/kserve/kserve.md#L1-L29)
+Sources: [kserve.md](domain-19-landscape-references/incubating/kserve/kserve.md#L1-L29)
 
 ### 孵化项目全量分类
 
@@ -233,7 +233,7 @@ Sources: [kserve.md](domain-34-cncf-landscape/incubating/kserve/kserve.md#L1-L29
 | **Serverless** | wasmCloud | WebAssembly 应用平台 |
 | **其他** | Artifact Hub, Cloud Custodian, gRPC, OpenFeature | 制品发现、云治理、RPC 框架、特性标志 |
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L73-L116)
+Sources: [README.md](domain-19-landscape-references/README.md#L73-L116)
 
 ## Sandbox 沙箱项目（147 个）：前沿技术风向标
 
@@ -251,7 +251,7 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L73-L116)
 
 k3s 由 Rancher/SUSE 维护，将 Kubernetes 全部组件打包到一个小于 100MB 的二进制文件中，默认使用 SQLite 作为数据存储，30 秒内完成安装。这一设计使得在 ARM 设备和资源受限的边缘节点上运行 Kubernetes 成为现实。
 
-Sources: [k3s.md](domain-34-cncf-landscape/sandbox/k3s/k3s.md#L1-L34), [k0s.md](domain-34-cncf-landscape/sandbox/k0s/k0s.md#L1-L15)
+Sources: [k3s.md](domain-19-landscape-references/sandbox/k3s/k3s.md#L1-L34), [k0s.md](domain-19-landscape-references/sandbox/k0s/k0s.md#L1-L15)
 
 ### AI/ML 与 GPU 管理（10 个）
 
@@ -268,7 +268,7 @@ AI 基础设施是当前沙箱中最活跃的技术方向，项目覆盖从 GPU 
 
 KAITO 代表了一种新的 Kubernetes 原生 AI 部署范式：用户只需声明 `preset.name: "llama-2-7b-chat"` 即可完成 LLM 推理服务的部署，Operator 自动处理 GPU 节点配置、模型下载和服务暴露。这种声明式体验将 AI 部署的复杂度从基础设施层面完全屏蔽。
 
-Sources: [kaito.md](domain-34-cncf-landscape/sandbox/kaito/kaito.md#L1-L29), [k8sgpt.md](domain-34-cncf-landscape/sandbox/k8sgpt/k8sgpt.md#L1-L33), [hami.md](domain-34-cncf-landscape/sandbox/hami/hami.md#L1-L15), [koordinator.md](domain-34-cncf-landscape/sandbox/koordinator/koordinator.md#L1-L15)
+Sources: [kaito.md](domain-19-landscape-references/sandbox/kaito/kaito.md#L1-L29), [k8sgpt.md](domain-19-landscape-references/sandbox/k8sgpt/k8sgpt.md#L1-L33), [hami.md](domain-19-landscape-references/sandbox/hami/hami.md#L1-L15), [koordinator.md](domain-19-landscape-references/sandbox/koordinator/koordinator.md#L1-L15)
 
 ### 服务网格与网络（15 个）
 
@@ -294,7 +294,7 @@ Sources: [kaito.md](domain-34-cncf-landscape/sandbox/kaito/kaito.md#L1-L29), [k8
 | **SOPS** | 密钥管理 | 加密文件中的结构化数据 |
 | **Ratify** | 制品验证 | 供应链验证策略引擎 |
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L158-L181)
+Sources: [README.md](domain-19-landscape-references/README.md#L158-L181)
 
 ### 应用定义与交付（25 个）
 
@@ -318,7 +318,7 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L158-L181)
 | **Perses** | 仪表盘即代码 | GitOps 管理监控仪表盘 |
 | **HolmesGPT** | AI 故障诊断 | AI 驱动的 SRE 诊断助手 |
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L243-L261)
+Sources: [README.md](domain-19-landscape-references/README.md#L243-L261)
 
 ### 存储（10 个）
 
@@ -337,7 +337,7 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L243-L261)
 | **Tinkerbell** | 裸金属服务器自动化配置 |
 | **WasmEdge** | 适用于边缘的轻量 WASM 运行时 |
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L278-L296)
+Sources: [README.md](domain-19-landscape-references/README.md#L278-L296)
 
 ## 技术趋势与架构洞察
 
@@ -345,13 +345,13 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L278-L296)
 
 从 Cilium（毕业）到 Kmesh、bpfman、Inspektor Gadget、Kepler（沙箱），eBPF 技术正在从网络层渗透到安全、可观测性、能耗监控等所有基础设施领域。其核心优势在于**无需修改内核或应用代码**即可在内核态注入逻辑，提供接近零开销的可编程能力。
 
-Sources: [cilium.md](domain-34-cncf-landscape/graduated/cilium/cilium.md#L35-L46)
+Sources: [cilium.md](domain-19-landscape-references/graduated/cilium/cilium.md#L35-L46)
 
 ### 趋势二：AI 原生 Kubernetes 正在成型
 
 KAITO、K8sGPT、kagent、hami、Koordinator 等项目构成了一个完整的 AI 原生 Kubernetes 技术栈：底层 GPU 虚拟化→中层 AI 工作负载调度→上层 AI 模型部署→AI 驱动运维诊断。这一趋势预示着 Kubernetes 正在从通用容器编排平台演化为 AI 基础设施的核心操作系统。
 
-Sources: [kaito.md](domain-34-cncf-landscape/sandbox/kaito/kaito.md#L1-L29), [k8sgpt.md](domain-34-cncf-landscape/sandbox/k8sgpt/k8sgpt.md#L1-L33)
+Sources: [kaito.md](domain-19-landscape-references/sandbox/kaito/kaito.md#L1-L29), [k8sgpt.md](domain-19-landscape-references/sandbox/k8sgpt/k8sgpt.md#L1-L33)
 
 ### 趋势三：平台工程重塑开发者体验
 
@@ -361,13 +361,13 @@ Backstage（孵化）、KubeVela（孵化）、Radius、Score、KusionStack 等�
 
 WasmEdge、Spin、SpinKube、container2wasm、wasmCloud 等项目正在构建一个与容器并行的 WebAssembly 运行时生态。WASM 的优势在于极快的冷启动（毫秒级）、极小的攻击面、跨平台可移植性——这使得它特别适合 Serverless 和边缘计算场景。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L213-L241)
+Sources: [README.md](domain-19-landscape-references/README.md#L213-L241)
 
 ### 趋势五：供应链安全从理念走向工程实践
 
 in-toto（毕业）、Notary Project（孵化）、Ratify、Copa、Keylime 等项目共同构建了从构建完整性验证到制品签名、运行时验证的完整供应链安全链路。结合 SLSA 安全等级框架，这些工具使企业能够实现端到端的软件供应链安全。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L158-L181)
+Sources: [README.md](domain-19-landscape-references/README.md#L158-L181)
 
 ## 学习路径与推荐阅读顺序
 
@@ -403,7 +403,7 @@ Flux → Argo → Helm → Crossplane → Backstage
 ```
 从轻量 GitOps 到完整工作流，再到多云计算和开发者门户的渐进式平台构建。
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L327-L353)
+Sources: [README.md](domain-19-landscape-references/README.md#L327-L353)
 
 ## 跨域知识关联
 
@@ -417,7 +417,7 @@ Sources: [README.md](domain-34-cncf-landscape/README.md#L327-L353)
 - [AI 基础设施：GPU 调度、分布式训练、LLM 推理与成本优化](17-ai-ji-chu-she-shi-gpu-diao-du-fen-bu-shi-xun-lian-llm-tui-li-yu-cheng-ben-you-hua) — KAITO、hami、KServe 的 AI 基础设施实践
 - [生产运维：GitOps、FinOps、灾备恢复与变更管理](20-sheng-chan-yun-wei-gitops-finops-zai-bei-hui-fu-yu-bian-geng-guan-li) — Argo、Flux、Harbor 的生产运维实践
 
-Sources: [README.md](domain-34-cncf-landscape/README.md#L356-L362)
+Sources: [README.md](domain-19-landscape-references/README.md#L356-L362)
 
 ---
 

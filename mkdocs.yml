@@ -95,7 +95,7 @@ nav:
     - domain-16-storage-fundamentals/01-storage-fundamentals.md
     - domain-17-cloud-provider/01-cloud-provider-overview.md
   - 企业级运维专题 (Domain 18+):
-    - domain-18-production-operations/01-production-ops-overview.md
+    - domain-18-production-operations/topic-production-architecture/01-production-ops-overview.md
     - domain-19-papers/01-papers-overview.md
     - domain-20-enterprise-monitoring-alerting/01-monitoring-overview.md
     - domain-21-logging-management-analytics/01-logging-overview.md
@@ -119,25 +119,25 @@ nav:
     - domain-39-supply-chain-security/01-supply-chain-overview.md
     - domain-40-cloud-native-api-gateway/01-api-gateway-overview.md
   - 专题资源:
-    - topic-ai-agent/01-ai-agent-fundamentals.md
-    - topic-ai-coding/01-ai-coding-overview.md
-    - topic-application-architecture/01-app-arch-overview.md
-    - topic-cheat-sheet/01-cheat-sheet-overview.md
-    - topic-deployment/01-deployment-overview.md
-    - topic-dictionary/01-dictionary-overview.md
-    - topic-febm/01-febm-overview.md
-    - topic-fta/01-fta-methodology.md
-    - topic-functions/01-functions-overview.md
-    - topic-index/01-index-overview.md
-    - topic-java-kubernetes/01-java-k8s-overview.md
-    - topic-learn/01-learn-overview.md
-    - topic-migration/01-migration-overview.md
-    - topic-presentations/01-presentations-overview.md
-    - topic-publish/01-publish-overview.md
-    - topic-release-notes/01-release-notes.md
-    - topic-skills/01-skills-overview.md
-    - topic-structural-trouble-shooting/01-structural-ts-overview.md
-    - topic-terway/01-terway-overview.md
+    - domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md
+    - domain-14-ai-ml-infra/topic-ai-coding/01-ai-coding-overview.md
+    - domain-20-application-patterns/topic-application-architecture/01-app-arch-overview.md
+    - domain-17-system-foundation/topic-cheat-sheet/01-cheat-sheet-overview.md
+    - domain-08-release-change-management/topic-deployment/01-deployment-overview.md
+    - domain-17-system-foundation/topic-dictionary/01-dictionary-overview.md
+    - domain-10-troubleshooting-diagnostics/topic-febm/01-febm-overview.md
+    - domain-10-troubleshooting-diagnostics/topic-fta/01-fta-methodology.md
+    - domain-02-workloads-applications/topic-functions/01-functions-overview.md
+    - domain-19-landscape-references/topic-index/01-index-overview.md
+    - domain-02-workloads-applications/topic-java-kubernetes/01-java-k8s-overview.md
+    - domain-11-production-operations/topic-learn/01-learn-overview.md
+    - domain-08-release-change-management/topic-migration/01-migration-overview.md
+    - domain-11-production-operations/topic-presentations/01-presentations-overview.md
+    - domain-11-production-operations/topic-publish/01-publish-overview.md
+    - domain-19-landscape-references/topic-release-notes/01-release-notes.md
+    - domain-10-troubleshooting-diagnostics/topic-skills/01-skills-overview.md
+    - domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-structural-ts-overview.md
+    - domain-03-networking-traffic/topic-terway/01-terway-overview.md
   - 可视化:
     - visualizations/index.md
 

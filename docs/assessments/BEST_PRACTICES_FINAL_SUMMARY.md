@@ -1,3 +1,25 @@
+---
+title: 最佳实践内容质量评估与修复项目总结
+description: '# 最佳实践内容质量评估与修复项目总结'
+category: general
+tags:
+- k8s
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 最佳实践内容质量评估与修复项目总结 是什么
+- 如何 最佳实践内容质量评估与修复项目总结
+trigger_keywords:
+- 最佳实践内容质量评估与修复项目总结
+prerequisites:
+- kubectl-basics
+---
+
 # 最佳实践内容质量评估与修复项目总结
 
 ## 项目概述
@@ -46,7 +68,7 @@
 - `templates/best-practice-template.md` - 最佳实践内容模板
 
 **最佳实践文档**：
-- `best-practices/README.md` - 最佳实践索引页面
+- `best-practices/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` - 最佳实践索引页面
 - `best-practices/common-best-practices.md` - 通用最佳实践参考
 
 **基础设施最佳实践**：

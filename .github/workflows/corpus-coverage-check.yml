@@ -1,0 +1,89 @@
+name: Corpus Coverage Check
+
+on:
+  push:
+    paths:
+      - 'domain-10-troubleshooting-diagnostics/topic-skills/**'
+      - 'domain-10-troubleshooting-diagnostics/topic-fta/**'
+      - 'domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/**'
+      - 'scripts/corpus-generator/**'
+      - '.github/workflows/corpus-coverage-check.yml'
+  pull_request:
+    paths:
+      - 'domain-10-troubleshooting-diagnostics/topic-skills/**'
+      - 'domain-10-troubleshooting-diagnostics/topic-fta/**'
+      - 'domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/**'
+      - 'scripts/corpus-generator/**'
+  workflow_dispatch:
+
+jobs:
+  generate-and-validate:
+    runs-on: ubuntu-latest
+    name: Generate I-O Corpus & Validate Coverage
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Generate command-output diagnosis corpus
+        run: |
+          cd scripts/corpus-generator
+          python3 generate.py --priority all \
+            --output domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/
+
+      - name: Validate corpus coverage
+        run: |
+          cd scripts/corpus-generator
+          python3 validators/coverage_checker.py \
+            --skills-dir domain-10-troubleshooting-diagnostics/topic-skills \
+            --fta-dir domain-10-troubleshooting-diagnostics/topic-fta/list \
+            --corpus-dir domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated \
+            --output corpus-coverage-report.json
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: corpus-coverage-report
+          path: scripts/corpus-generator/corpus-coverage-report.json
+
+      - name: Check for coverage failures
+        run: |
+          cd scripts/corpus-generator
+          python3 -c "
+          import json
+          with open('corpus-coverage-report.json') as f:
+              report = json.load(f)
+          passed = report['summary']['checks_passed']
+          total = report['summary']['checks_total']
+          print(f'Coverage checks: {passed}/{total} passed')
+          if passed < total:
+              print('Coverage gaps detected:')
+              for rec in report['recommendations']:
+                  print(f'  - {rec}')
+              # 不阻断构建，仅警告
+              print('::warning::Corpus coverage below target')
+          "
+
+      - name: Report corpus stats
+        run: |
+          cd scripts/corpus-generator
+          python3 -c "
+          import json
+          with open('corpus-coverage-report.json') as f:
+              report = json.load(f)
+          summary = report['summary']
+          print('=== Corpus Generation Summary ===')
+          print(f\"Total I-O pairs: {summary['total_io_pairs']}\")
+          print(f\"Checks passed: {summary['checks_passed']}/{summary['checks_total']}\")
+          print(f\"All passed: {summary['all_passed']}\")
+          "

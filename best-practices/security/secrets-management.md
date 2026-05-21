@@ -8,6 +8,11 @@ tags:
 - secrets
 - vault
 - encryption
+- etcd
+- apiserver
+- kubelet
+- helm
+- job
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +30,20 @@ trigger_keywords:
 - 密钥管理
 - Secrets
 - Vault
+prerequisites:
+- kubectl-basics
+- helm-basics
+- etcd-basics
 cross_refs:
 - type: domain
-  path: ../../domain-7-security/
-  label: '安全知识域'
+  path: ../../domain-05-security-compliance/
+  label: 安全知识域
 - type: domain
-  path: ../../domain-25-cloud-native-security/
-  label: '云原生安全知识域'
+  path: ../../domain-05-security-compliance/
+  label: 云原生安全知识域
 - type: best-practice
   path: ./pod-security.md
-  label: 'Pod安全最佳实践'
+  label: Pod安全最佳实践
 ---
 
 # Kubernetes 密钥管理最佳实践
@@ -569,3 +578,10 @@ roleRef:
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和密钥管理工具版本保持同步
+
+## Related
+
+- [[synthesis/CI-CD 流水线 × Secret 管理|CI-CD 流水线 × Secret 管理]] — Cross-reference
+- [[synthesis/Secret 管理 × 存储模型|Secret 管理 × 存储模型]] — Cross-reference
+- [[synthesis/Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]] — Cross-reference
+- [[entities/metal3-io|Metal3]] — Cross-reference

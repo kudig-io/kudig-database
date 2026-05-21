@@ -1,6 +1,6 @@
 软件供应链安全是云原生时代安全体系中最关键的攻防前沿。SolarWinds 构建系统被植入 SUNBURST 后门（2020）、Log4Shell 漏洞席卷全球数亿 Java 应用（2021）、XZ Utils 通过社会工程学渗透开源维护者账户植入后门（2024）——这些事件揭示了一个共同的结构性缺陷：**从代码提交到生产部署的完整链条中，缺乏可验证的完整性证明与自动化的信任传递机制**。本文档系统梳理供应链安全的四大技术支柱——**SBOM（软件物料清单）**、**SLSA（供应链完整性级别）**、**Sigstore（无密钥签名基础设施）** 与 **合规自动化**——的架构原理、工具链实现与 Kubernetes 生产环境集成方案，帮助高级开发者构建从源码到运行时的端到端供应链安全体系。
 
-Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/01-supply-chain-security-overview.md#L1-L53), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L1-L53)
+Sources: [01-supply-chain-security-overview.md](domain-05-security-compliance/01-supply-chain-security-overview.md#L1-L53), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L1-L53)
 
 ## 供应链威胁全景与攻击模型
 
@@ -47,7 +47,7 @@ graph LR
 
 重大事件的教训形成了清晰的防御映射：SolarWinds 暴露了**构建来源证明（Provenance）缺失**的致命风险；Log4Shell 凸显了**缺乏 SBOM 导致漏洞影响面评估从数分钟膨胀到数周**的运营灾难；XZ Utils 则证明 SLSA Level 3+ 要求的**密封构建（Hermetic Build）** 是防御社会工程学攻击的关键控制手段。
 
-Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/01-supply-chain-security-overview.md#L96-L268), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L10-L98)
+Sources: [01-supply-chain-security-overview.md](domain-05-security-compliance/01-supply-chain-security-overview.md#L96-L268), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L10-L98)
 
 ### OWASP 十大供应链风险与 STRIDE 威胁建模
 
@@ -66,7 +66,7 @@ Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/
 
 对供应链环境应用 **STRIDE 威胁模型**可进一步明确防御方向：**欺骗**对应包命名抢注和 Git 提交伪造，防御手段是 Gitsign 提交签名；**篡改**对应 SolarWinds/Codecov 式的构建产物修改，防御手段是 SLSA Provenance + Cosign 签名；**抵赖**对应无审计日志的恶意变更，防御手段是 Rekor 透明日志的不可否认记录。这三种威胁恰好分别由 Sigstore 生态的三个核心组件（Gitsign、Cosign、Rekor）覆盖。
 
-Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/01-supply-chain-security-overview.md#L402-L516)
+Sources: [01-supply-chain-security-overview.md](domain-05-security-compliance/01-supply-chain-security-overview.md#L402-L516)
 
 ## 端到端供应链安全架构
 
@@ -119,7 +119,7 @@ graph TB
 
 这五层防御通过 **NIST SSDF（Secure Software Development Framework）v1.1** 实现合规映射：**PO（组织准备）** 覆盖工具链选型和安全策略定义；**PS（软件保护）** 覆盖代码保护、构建环境隔离和发布管道签名；**PW（安全开发）** 覆盖安全组件重用和构建选项配置；**RV（漏洞响应）** 覆盖基于 SBOM 的漏洞识别和 VEX 声明。
 
-Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/01-supply-chain-security-overview.md#L519-L563), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L100-L141)
+Sources: [01-supply-chain-security-overview.md](domain-05-security-compliance/01-supply-chain-security-overview.md#L519-L563), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L100-L141)
 
 ### 技术栈全景与工具选型矩阵
 
@@ -134,7 +134,7 @@ Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/
 | 策略执行 | Kyverno, OPA Gatekeeper | ClusterPolicy / Constraint | Kubernetes 准入控制 |
 | 合规自动化 | OpenSSF Scorecard, VEX | SOC 2 / PCI-DSS / FedRAMP | 持续合规证据收集 |
 
-Sources: [README.md](domain-39-supply-chain-security/README.md#L63-L86), [09-policy-controller-verification.md](domain-39-supply-chain-security/09-policy-controller-verification.md#L1-L70)
+Sources: [README.md](domain-05-security-compliance/README.md#L63-L86), [09-policy-controller-verification.md](domain-05-security-compliance/09-policy-controller-verification.md#L1-L70)
 
 ## SBOM：软件物料清单——供应链透明度的基础
 
@@ -144,7 +144,7 @@ Sources: [README.md](domain-39-supply-chain-security/README.md#L63-L86), [09-pol
 
 SBOM 的核心价值在 Log4Shell 事件中得到了最直观的验证：**拥有完整 SBOM 的组织平均响应时间 < 2 小时，而没有 SBOM 的组织平均响应时间 > 5 天**。通过将 SBOM 与 NVD/OSV/GitHub Advisory 等漏洞数据库进行自动化匹配，组织可以在新漏洞披露后数分钟内精确定位受影响组件，而非耗费数周进行人工清查。
 
-Sources: [03-sbom-generation-management.md](domain-39-supply-chain-security/03-sbom-generation-management.md#L24-L134)
+Sources: [03-sbom-generation-management.md](domain-05-security-compliance/03-sbom-generation-management.md#L24-L134)
 
 ### SPDX vs CycloneDX：两大标准的选型决策
 
@@ -162,7 +162,7 @@ SBOM 领域存在两大主流格式标准，各自的适用场景和优势领域
 
 **选型建议**：面向政府/国防合规场景优选 SPDX（ISO 国际标准），面向安全运营和漏洞管理场景优选 CycloneDX（VEX 集成优势）。企业最佳实践是**双格式输出**——Syft 同时支持两种格式生成，在 CI/CD 中同时输出 SPDX 和 CycloneDX 格式以覆盖两类合规需求。
 
-Sources: [03-sbom-generation-management.md](domain-39-supply-chain-security/03-sbom-generation-management.md#L139-L200), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L143-L195)
+Sources: [03-sbom-generation-management.md](domain-05-security-compliance/03-sbom-generation-management.md#L139-L200), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L143-L195)
 
 ### Syft 与 Trivy：SBOM 生成实践
 
@@ -185,7 +185,7 @@ trivy sbom --severity HIGH,CRITICAL sbom.spdx.json
 
 **Trivy（Aqua Security）** 则提供 SBOM 生成与漏洞扫描的一体化能力，适合 CI/CD 管道中的单工具集成方案。两种工具的关键差异在于：Syft 专注于精确的依赖发现和包解析，SBOM 质量更高；Trivy 则在 SBOM 生成后直接集成了漏洞匹配引擎，提供了更流畅的扫描体验。
 
-Sources: [03-sbom-generation-management.md](domain-39-supply-chain-security/03-sbom-generation-management.md#L96-L134), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-papers/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L197-L234)
+Sources: [03-sbom-generation-management.md](domain-05-security-compliance/03-sbom-generation-management.md#L96-L134), [20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md](domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md#L197-L234)
 
 ### SBOM 驱动的漏洞治理：Grype 与 VEX
 
@@ -204,7 +204,7 @@ grype sbom:./sbom.cdx.json -o sarif > grype-results.sarif
 
 **VEX（Vulnerability Exploitability eXchange）** 是漏洞治理的重要补充，允许组织声明某个漏洞在特定上下文中"不可利用"或"已缓解"，从而避免无意义的告警噪音。CycloneDX 原生支持 VEX 格式，企业可以在 SBOM 中直接关联 VEX 文档，实现漏洞影响声明的自动化传播。漏洞治理的四种响应路径为：**修复**（升级依赖）、**缓解**（WAF/配置变更）、**接受**（记录接受理由）、**误报标注**（VEX 标记）。
 
-Sources: [04-sbom-vulnerability-analysis.md](domain-39-supply-chain-security/04-sbom-vulnerability-analysis.md#L24-L100)
+Sources: [04-sbom-vulnerability-analysis.md](domain-05-security-compliance/04-sbom-vulnerability-analysis.md#L24-L100)
 
 ## SLSA：供应链完整性级别——构建来源的可验证信任
 
@@ -226,7 +226,7 @@ graph LR
 
 SLSA 防御矩阵清晰地定义了各级别对不同威胁的覆盖范围。核心防御能力从 L1 到 L4 递增：L1 防止制品替换和欺骗（威胁 F, H）；L2 在此基础上增加对构建注入的防御（威胁 C, D）；L3 通过强化构建平台实现防篡改出处（威胁 C, D, F, H）；L4 通过两人审查和密封/可重现构建防御所有主要威胁。
 
-Sources: [05-slsa-levels-implementation.md](domain-39-supply-chain-security/05-slsa-levels-implementation.md#L24-L89)
+Sources: [05-slsa-levels-implementation.md](domain-05-security-compliance/05-slsa-levels-implementation.md#L24-L89)
 
 ### SLSA Build L1-L4：渐进式完整性保证
 
@@ -256,7 +256,7 @@ graph TB
 
 **SLSA L1** 是组织启动供应链安全旅程的起点——仅需在 CI/CD 中生成 JSON 格式的构建出处文档，记录构建器标识（`builder.id`）、源码引用（`configSource`）和构建时间戳。**SLSA L2** 要求使用受信任的托管构建服务（如 GitHub Actions）并通过 Sigstore 对 Provenance 进行签名。**SLSA L3** 是目前 GitHub 生态中可达到的最高级别，要求使用 SLSA GitHub Generator 的可复用工作流，该工作流在隔离的构建作业中运行，确保构建参数不可被外部注入篡改。
 
-Sources: [05-slsa-levels-implementation.md](domain-39-supply-chain-security/05-slsa-levels-implementation.md#L93-L200), [06-github-actions-slsa-build.md](domain-39-supply-chain-security/06-github-actions-slsa-build.md#L11-L183)
+Sources: [05-slsa-levels-implementation.md](domain-05-security-compliance/05-slsa-levels-implementation.md#L93-L200), [06-github-actions-slsa-build.md](domain-05-security-compliance/06-github-actions-slsa-build.md#L11-L183)
 
 ### GitHub Actions SLSA 构建：从理论到实践
 
@@ -310,7 +310,7 @@ jobs:
 
 生成的 Provenance 遵循 **in-toto Attestation Framework** 格式（`_type: https://in-toto.io/Statement/v0.1`），包含构建器标识（`builder.id`）、构建类型（`buildType`）、配置源（`configSource` 包含仓库 URI 和 commit digest）以及构建元数据（调用 ID、时间戳、完整性标记）。这份 Provenance 通过 Sigstore 签名后，可被下游消费者通过 `slsa-verifier` 工具独立验证。
 
-Sources: [06-github-actions-slsa-build.md](domain-39-supply-chain-security/06-github-actions-slsa-build.md#L136-L200), [05-slsa-levels-implementation.md](domain-39-supply-chain-security/05-slsa-levels-implementation.md#L145-L200)
+Sources: [06-github-actions-slsa-build.md](domain-05-security-compliance/06-github-actions-slsa-build.md#L136-L200), [05-slsa-levels-implementation.md](domain-05-security-compliance/05-slsa-levels-implementation.md#L145-L200)
 
 ## Sigstore：无密钥签名基础设施
 
@@ -356,7 +356,7 @@ graph TB
 
 Sigstore 的核心创新是 **Keyless（无密钥）签名模式**：开发者不需要生成、存储或管理任何密钥对。签名流程为：客户端生成临时 EC P-256 密钥对 → 通过 OIDC 认证获取身份令牌 → 向 Fulcio 提交 CSR（证书签名请求）+ OIDC 令牌 → Fulcio 颁发仅 10 分钟有效期的 X.509 证书 → 客户端使用私钥签名制品后立即销毁私钥 → 签名记录提交到 Rekor 透明日志。这种设计消除了密钥泄露、证书过期管理和私钥保管等传统痛點。
 
-Sources: [07-sigstore-cosign-signing.md](domain-39-supply-chain-security/07-sigstore-cosign-signing.md#L1-L90), [08-fulcio-rekor-transparency.md](domain-39-supply-chain-security/08-fulcio-rekor-transparency.md#L1-L65)
+Sources: [07-sigstore-cosign-signing.md](domain-05-security-compliance/07-sigstore-cosign-signing.md#L1-L90), [08-fulcio-rekor-transparency.md](domain-05-security-compliance/08-fulcio-rekor-transparency.md#L1-L65)
 
 ### Cosign 容器镜像签名实践
 
@@ -397,7 +397,7 @@ cosign verify-attestation \
 
 Cosign 的 `attest` 命令支持附加任意类型的证明材料（SBOM、SLSA Provenance、自定义 Attestation），每种证明以独立的 OCI Artifact 存储，通过 `cosign verify-attestation --type` 指定要验证的证明类型。这使得单次签名操作可以同时提供**完整性签名 + SBOM + 构建出处**三重保证。
 
-Sources: [07-sigstore-cosign-signing.md](domain-39-supply-chain-security/07-sigstore-cosign-signing.md#L174-L200)
+Sources: [07-sigstore-cosign-signing.md](domain-05-security-compliance/07-sigstore-cosign-signing.md#L174-L200)
 
 ### Fulcio 证书与 Rekor 透明日志：信任的不可篡改基础
 
@@ -405,7 +405,7 @@ Sources: [07-sigstore-cosign-signing.md](domain-39-supply-chain-security/07-sigs
 
 **Rekor** 透明日志基于 Merkle Tree 数据结构，提供不可篡改的签名事件记录。每次签名操作都会在 Rekor 中记录一个条目（包含签名值、证书、制品哈希和时间戳），任何人都可以通过 Rekor API 查询特定制品的完整签名历史。这种透明性实现了**不可否认性**（Non-Repudiation）——签名者无法否认其签名行为，审计者可以验证签名的完整时间线。
 
-Sources: [08-fulcio-rekor-transparency.md](domain-39-supply-chain-security/08-fulcio-rekor-transparency.md#L65-L177)
+Sources: [08-fulcio-rekor-transparency.md](domain-05-security-compliance/08-fulcio-rekor-transparency.md#L65-L177)
 
 ## 策略执行：Kubernetes 准入控制层的供应链守卫
 
@@ -451,7 +451,7 @@ spec:
 
 Kyverno 的 `verifyImages` 规则支持三种验证模式：**Keyless 验证**（推荐，通过 Fulcio 证书中的 OIDC Issuer 和 Subject 匹配身份）、**公钥验证**（使用预先分发的公钥）和 **Key 链验证**（多级签名链）。`mutateDigest: true` 选项会将 Pod 中的镜像引用从 tag（如 `v1.0.0`）自动替换为 digest（如 `sha256:abc123...`），防止 tag 被重新指向恶意镜像的"标签漂移"攻击。
 
-Sources: [09-policy-controller-verification.md](domain-39-supply-chain-security/09-policy-controller-verification.md#L1-L200)
+Sources: [09-policy-controller-verification.md](domain-05-security-compliance/09-policy-controller-verification.md#L1-L200)
 
 ### 策略引擎对比：Kyverno vs Sigstore Policy Controller vs OPA Gatekeeper
 
@@ -468,7 +468,7 @@ Sources: [09-policy-controller-verification.md](domain-39-supply-chain-security/
 
 **推荐选型**：对于 Kubernetes 原生环境，Kyverno 是首选方案——YAML 定义策略降低学习成本，`verifyImages` 原生支持 Sigstore Keyless 验证，`mutateDigest` 自动将 tag 替换为 digest 提供额外安全保障。对于已有 OPA Gatekeeper 投资的组织，可通过外部数据提供者（如 Ratify）实现签名验证。
 
-Sources: [09-policy-controller-verification.md](domain-39-supply-chain-security/09-policy-controller-verification.md#L58-L69)
+Sources: [09-policy-controller-verification.md](domain-05-security-compliance/09-policy-controller-verification.md#L58-L69)
 
 ## 合规自动化：从手动审计到持续合规
 
@@ -485,7 +485,7 @@ Sources: [09-policy-controller-verification.md](domain-39-supply-chain-security/
 | 审计日志 | SOC 2 CC7.2, PCI 10 | 日志聚合 | Rekor, Falco, CloudTrail |
 | 部署验证 | FedRAMP CM-14 | 策略执行 | Kyverno, OPA |
 
-Sources: [10-compliance-automation-audit.md](domain-39-supply-chain-security/10-compliance-automation-audit.md#L11-L61)
+Sources: [10-compliance-automation-audit.md](domain-05-security-compliance/10-compliance-automation-audit.md#L11-L61)
 
 ### SOC 2 变更管理自动化工作流
 
@@ -509,7 +509,7 @@ Sources: [10-compliance-automation-audit.md](domain-39-supply-chain-security/10-
 
 企业级合规自动化的最终目标是实现**持续合规**——不再依赖周期性的人工审计，而是通过自动化管道在每次代码变更时即时收集合规证据，确保组织在任何时间点都处于合规状态。
 
-Sources: [10-compliance-automation-audit.md](domain-39-supply-chain-security/10-compliance-automation-audit.md#L64-L200)
+Sources: [10-compliance-automation-audit.md](domain-05-security-compliance/10-compliance-automation-audit.md#L64-L200)
 
 ## 供应链安全成熟度模型：从 L1 到 L5 的进阶路径
 
@@ -525,7 +525,7 @@ Sources: [10-compliance-automation-audit.md](domain-39-supply-chain-security/10-
 
 **推荐的实施顺序**：对于大多数组织，从 L2 开始是性价比最高的路径——先建立依赖锁定（Dependabot/Renovate）、基础 SBOM 生成（Syft）和容器镜像扫描（Trivy/Grype），这三个能力的实施成本相对较低但防御价值极高。达到 L2 后，再逐步推进 L3 的 SLSA 出处证明和 Cosign Keyless 签名，最后通过 Kyverno 准入策略将所有安全信号汇聚为部署前的强制验证。
 
-Sources: [02-supply-chain-maturity-model.md](domain-39-supply-chain-security/02-supply-chain-maturity-model.md#L1-L154)
+Sources: [02-supply-chain-maturity-model.md](domain-05-security-compliance/02-supply-chain-maturity-model.md#L1-L154)
 
 ## 端到端工作流集成：从代码提交到安全部署
 
@@ -556,7 +556,7 @@ graph TB
 
 这个端到端工作流在 **预防** 层面通过 SLSA L3 保证构建不可被篡改，在 **检测** 层面通过 SBOM + Grype 实现漏洞的自动化发现和匹配，在 **响应** 层面通过 Rekor 透明日志提供完整的签名审计追踪，在 **恢复** 层面通过 SBOM 支持快速定位受影响组件并重建安全镜像。四个层面形成闭环，确保供应链安全能力的持续运营。
 
-Sources: [01-supply-chain-security-overview.md](domain-39-supply-chain-security/01-supply-chain-security-overview.md#L1700-L1744), [09-software-bill-of-materials.md](domain-18-production-operations/09-software-bill-of-materials.md#L1-L10)
+Sources: [01-supply-chain-security-overview.md](domain-05-security-compliance/01-supply-chain-security-overview.md#L1700-L1744), [09-software-bill-of-materials.md](domain-11-production-operations/09-software-bill-of-materials.md#L1-L10)
 
 ## 延伸阅读与关联知识域
 

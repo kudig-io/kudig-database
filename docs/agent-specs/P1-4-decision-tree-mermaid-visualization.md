@@ -26,8 +26,12 @@ trigger_keywords:
 - 故障排查决策树
 - Mermaid
 - 可视化集
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- etcd-basics
+- logging-basics
 ---
-
 
 # 故障排查决策树 Mermaid 可视化集
 
@@ -527,7 +531,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     START(["日志缺失/收集中断"]) --> T1{检查日志收集状态}
-    T1 -->|Fluentd/Fluent Bit Pod| T2{Pod 状态?}
+    T1 -->|[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit Pod| T2{Pod 状态?}
     T2 -->|Pod 未运行| R1["RC-001: 日志收集 Pod 未运行"]
     T2 -->|Pod 运行但不发送| T3{检查配置}
     T3 -->|Input 配置错误| R2["RC-002: 日志输入配置错误"]
@@ -634,7 +638,7 @@ flowchart TD
 ---
 
 **关联文档**:
-- [topic-skills/](../topic-skills/) — 18 个 GA Skill
-- [topic-structural-trouble-shooting/](../topic-structural-trouble-shooting/) — 63 篇故障排查文档
+- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA Skill
+- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) — 63 篇故障排查文档
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)

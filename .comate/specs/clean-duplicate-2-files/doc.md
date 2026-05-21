@@ -55,9 +55,9 @@
 
 ### 目录（" 2/" 模式）
 
-- domain-12-troubleshooting/tools 2/
-- domain-17-cloud-provider/ 下 13 个 "2/" 子目录
-- domain-34-cncf-landscape/ 下 3 个 "2/" 子目录（graduated 2/, incubating 2/, sandbox 2/）
+- domain-10-troubleshooting-diagnostics/tools 2/
+- domain-12-cloud-providers/ 下 13 个 "2/" 子目录
+- domain-19-landscape-references/ 下 3 个 "2/" 子目录（graduated 2/, incubating 2/, sandbox 2/）
 - gitbook/ 下 6 个 "2/" 子目录
 - man/ 下 2 个 "2/" 子目录
 - reports/quality 2/

@@ -8,10 +8,10 @@ use_case: "自动化故障诊断、根因分析、修复建议"
 
 # 核心语料（必须导入）
 core:
-  - path: topic-fta/list/           # 36 个组件故障树（推理骨架）
+  - path: domain-10-troubleshooting-diagnostics/topic-fta/list/           # 36 个组件故障树（推理骨架）
     priority: critical
     chunking: by_h3
-  - path: topic-skills/             # 18 个诊断-修复 Skill
+  - path: domain-10-troubleshooting-diagnostics/topic-skills/             # 18 个诊断-修复 Skill
     priority: critical
     chunking: by_section
   - path: domain-12-troubleshooting/ # 42+ 篇故障排查
@@ -20,22 +20,22 @@ core:
 
 # 方法论语料（推荐导入）
 methodology:
-  - path: topic-fta/01-23*.md       # FTA 方法论
+  - path: domain-10-troubleshooting-diagnostics/topic-fta/01-23*.md       # FTA 方法论
     priority: high
     chunking: by_h2
-  - path: topic-febm/               # FEBM 取证方法
+  - path: domain-10-troubleshooting-diagnostics/topic-febm/               # FEBM 取证方法
     priority: high
     chunking: by_h2
 
 # 参考语料（可选导入）
 reference:
-  - path: topic-cheat-sheet/k8s.md  # K8s 速查卡
+  - path: domain-17-system-foundation/topic-cheat-sheet/k8s.md  # K8s 速查卡
     priority: medium
     chunking: full_doc
-  - path: topic-cheat-sheet/linux.md
+  - path: domain-17-system-foundation/topic-cheat-sheet/linux.md
     priority: medium
     chunking: full_doc
-  - path: topic-structural-trouble-shooting/
+  - path: domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
     priority: medium
     chunking: by_h2
 

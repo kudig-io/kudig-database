@@ -1,3 +1,35 @@
+---
+title: kudig-database 内容深度评估报告
+description: '# kudig-database 内容深度评估报告'
+category: general
+tags:
+- k8s
+- etcd
+- helm
+- docker
+- gateway
+- ebpf
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 内容深度评估报告 是什么
+- 如何 kudig-database 内容深度评估报告
+trigger_keywords:
+- kudig-database
+- 内容深度评估报告
+prerequisites:
+- kubectl-basics
+- helm-basics
+- ebpf-basics
+- etcd-basics
+---
+
 # kudig-database 内容深度评估报告
 
 > **评估日期**: 2026-05-19
@@ -13,7 +45,7 @@
 | 内容深度 | 8.7 | 优秀, 大多数文档达到生产级专业水准 |
 | 代码/配置示例 | 8.5 | 大量可执行 YAML/bash/Python 示例 |
 | 架构图 | 9.0 | ASCII 图 + Mermaid 图覆盖全面 |
-| 版本适配说明 | 8.0 | 多数标注 K8s 版本范围 (1.25-1.33) |
+| 版本适配说明 | 8.0 | 多数标注 [[entities/kubernetes|k8s]] 版本范围 (1.25-1.33) |
 | 最佳实践/注意事项 | 8.5 | 表格化最佳实践, 对比分析清晰 |
 | 推理链完整性 (FTA) | 9.5 | 数学→算法→工程→反馈, 全链路闭环 |
 | 培训阶梯设计 | 8.5 | Week→Day 递进, 有 checkpoint 和前置条件 |
@@ -33,11 +65,11 @@
 
 | 文档 | 深度 | 代码 | 架构图 | 版本 | 最佳实践 |
 |------|------|------|--------|------|----------|
-| domain-18 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-12 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-6 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-34 kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
-| domain-34 koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
+| domain-11-production-operations 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-10-troubleshooting-diagnostics 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-04-storage-data 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-19-landscape-references kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
+| domain-19-landscape-references koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
 
 **发现**: Sandbox CNCF 项目文档偏概述性, 缺少生产案例和性能基准数据。
 

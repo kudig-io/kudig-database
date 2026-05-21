@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>自主学习评估 | kudig-database</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f8fb;--bg2:#ffffff;--bg3:#eef1f6;--t1:#1a1f36;--t2:#525f7f;--t3:#8898aa;--pri:#2d5ea8;--cyan:#0e7490;--violet:#7c3aed;--emerald:#059669;--amber:#d97706;--red:#dc2626;--bdr:#e3e8ee;--r:10px;--fm:'SF Mono','Fira Code',monospace;--fb:'Helvetica Neue','PingFang SC',sans-serif;--fd:'Georgia','Noto Serif SC',serif;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
+html{scroll-behavior:smooth;font-size:14px}
+body{font-family:var(--fb);color:var(--t1);background:var(--bg);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(45,94,168,.18)}
+/* Reading progress */
+.reading-progress{position:fixed;top:0;left:0;height:3px;background:var(--cyan);z-index:200;opacity:.8}
+/* Topbar */
+.topbar{position:sticky;top:0;z-index:50;height:48px;display:flex;align-items:center;gap:1rem;padding:0 1.5rem;border-bottom:1px solid var(--bdr);background:rgba(255,255,255,.95);backdrop-filter:blur(14px)}
+.topbar a{font-family:var(--fm);font-size:.72rem;color:var(--t3);text-decoration:none;transition:color .2s}.topbar a:hover{color:var(--t1)}
+.topbar h1{font-size:.88rem;font-weight:700;flex:1}
+.topbar .saved{font-size:.68rem;color:var(--emerald);font-family:var(--fm);opacity:0;transition:opacity .3s}
+.topbar .saved.show{opacity:1}
+.dark-toggle{background:none;border:1px solid var(--bdr);border-radius:6px;padding:.3rem .5rem;cursor:pointer;font-size:.8rem;transition:all .2s}
+.dark-toggle:hover{background:var(--bg3)}
+:root.dark-mode{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--bdr:#334155}
+/* Layout */
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem}
+.top-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
+@media(max-width:768px){.top-grid{grid-template-columns:1fr}}
+.panel{border:1px solid var(--bdr);border-radius:12px;background:var(--bg2);padding:1.3rem;overflow:hidden;box-shadow:var(--shadow)}
+.panel h2{font-size:.88rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+/* Radar */
+.radar-wrap{display:flex;justify-content:center;padding:.5rem 0}
+.radar-wrap svg{max-width:320px;width:100%}
+/* Sliders */
+.slider-group{display:flex;flex-direction:column;gap:.6rem}
+.slider-row{display:flex;align-items:center;gap:.6rem}
+.slider-row .s-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.slider-row .s-name{font-size:.78rem;width:90px;flex-shrink:0}
+.slider-row input[type=range]{flex:1;height:4px;-webkit-appearance:none;background:var(--bdr);border-radius:2px;outline:none;cursor:pointer}
+.slider-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--pri);border:2px solid var(--bg2);cursor:pointer;transition:transform .15s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.slider-row input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.slider-row .s-val{font-family:var(--fm);font-size:.75rem;width:32px;text-align:right;color:var(--t2)}
+/* Summary */
+.summary{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.sum-card{flex:1;min-width:140px;border:1px solid var(--bdr);border-radius:var(--r);background:var(--bg2);padding:.8rem 1rem;text-align:center;box-shadow:var(--shadow)}
+.sum-card .sn{font-family:var(--fm);font-size:1.4rem;font-weight:700;display:block}
+.sum-card .sl{font-size:.68rem;color:var(--t3);margin-top:.15rem}
+/* Domain Sections */
+.domain-section{border:1px solid var(--bdr);border-radius:12px;background:var(--bg2);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow)}
+.domain-hd{display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;cursor:pointer;user-select:none;transition:background .15s}
+.domain-hd:hover{background:rgba(0,0,0,.015)}
+.domain-hd .d-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.domain-hd .d-name{font-weight:700;font-size:.88rem;flex:1}
+.domain-hd .d-prog{font-family:var(--fm);font-size:.72rem;color:var(--t2)}
+.domain-hd .d-bar{width:80px;height:4px;background:var(--bdr);border-radius:2px;overflow:hidden}
+.domain-hd .d-bar span{display:block;height:100%;border-radius:2px;transition:width .3s}
+.domain-hd .chv{font-size:.6rem;color:var(--t3);transition:transform .2s}
+.domain-body{display:none;padding:0 1.2rem 1rem;border-top:1px solid var(--bdr)}
+.domain-section.open .domain-body{display:block}
+.domain-section.open .chv{transform:rotate(180deg)}
+/* Topic Checklist */
+.topic-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.4rem;margin-top:.6rem}
+.topic-item{display:flex;align-items:center;gap:.5rem;padding:.35rem .5rem;border-radius:6px;cursor:pointer;transition:background .15s;user-select:none}
+.topic-item:hover{background:rgba(0,0,0,.02)}
+.topic-item input[type=checkbox]{display:none}
+.topic-item .ck{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:.6rem;color:transparent;background:var(--bg2)}
+.topic-item input:checked+.ck{background:var(--pri);border-color:var(--pri);color:#fff}
+.topic-item .tn{font-size:.78rem;color:var(--t2);transition:color .15s}
+.topic-item input:checked~.tn{color:var(--t1);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.15)}
+/* Reset */
+.reset-wrap{text-align:center;padding:1rem 0 2rem}
+.reset-btn{padding:.4rem 1.2rem;font-size:.75rem;border:1px solid rgba(220,38,38,.2);background:transparent;color:var(--red);border-radius:var(--r);cursor:pointer;font-family:var(--fb);transition:all .15s}
+.reset-btn:hover{background:rgba(220,38,38,.06);border-color:rgba(220,38,38,.35)}
+</style>
+</head>
+<body>
+<div class="reading-progress" id="reading-progress"></div>
+<div class="topbar">
+  <a href="index.html">← 首页</a>
+  <h1>自主学习评估</h1>
+  <span class="saved" id="saved">✓ 已保存</span>
+  <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">◐</button>
+</div>
+<div class="wrap">
+  <!-- Top: Radar + Sliders -->
+  <div class="top-grid">
+    <div class="panel">
+      <h2>📊 能力雷达图</h2>
+      <div class="radar-wrap"><svg id="radar" viewBox="0 0 340 340"></svg></div>
+    </div>
+    <div class="panel">
+      <h2>🎚 领域自评打分</h2>
+      <p style="font-size:.72rem;color:var(--t3);margin-bottom:.8rem">拖动滑块评估各领域掌握程度（0-100）</p>
+      <div class="slider-group" id="sliders"></div>
+    </div>
+  </div>
+  <!-- Summary -->
+  <div class="summary" id="summary"></div>
+  <!-- Domain Checklists -->
+  <div id="domains"></div>
+  <!-- Reset -->
+  <div class="reset-wrap"><button class="reset-btn" onclick="resetAll()">重置所有数据</button></div>
+</div>
+
+<script>
+(function(){
+var DOMAINS=[
+  {id:'k8s',name:'K8s 架构基础',color:'#0e7490',topics:['API Server 架构','etcd 集群管理','调度器原理','控制器模式','集群网络 CNI','存储系统 CSI','多租户隔离','集群升级策略','边缘计算 KubeEdge','源码结构导读','部署模式选型','性能调优实战','安全架构设计','可观测体系','故障排查框架','生产运维最佳实践','升级迁移策略','Helm Charts 管理']},
+  {id:'ai',name:'AI 基础设施',color:'#7c3aed',topics:['GPU 调度管理','GPU 监控 DCGM','分布式训练框架','AI 数据管线','模型注册中心','模型部署管理','LLM 推理服务','LLM 量化技术','向量数据库 RAG','MLOps 流水线','AI 成本优化','AI 可观测性','LLM 微调技术','多模态模型','模型版本管理','联邦学习','模型漂移监控']},
+  {id:'linux',name:'Linux 基础',color:'#059669',topics:['系统架构原理','进程管理','文件系统深度','网络配置','存储管理','性能调优','安全加固','容器基础原理','运维基础操作']},
+  {id:'hw',name:'硬件基础设施',color:'#d97706',topics:['CPU 架构与 NUMA','GPU 架构 CUDA','NVMe 存储技术','RDMA 网络','散热与电源','服务器诊断','内存子系统','PCIe 总线','硬件选型指南','BMC/IPMI 管理','RAID 与存储阵列','网络交换架构','机架与布线','硬件故障诊断','ECC 内存纠错','固件更新管理','硬件安全模块','数据中心规划']},
+  {id:'sec',name:'云安全与合规',color:'#dc2626',topics:['容器镜像安全','Kubernetes RBAC','NetworkPolicy','供应链安全 SBOM','合规审计 CIS','零信任架构','运行时安全 Falco','OPA/Kyverno 策略','证书管理','Secret 管理','安全扫描 Trivy','威胁建模 STRIDE','DevSecOps 流程','安全事件响应','Pod 安全标准','准入控制 Webhook']}
+];
+
+var KEY='kudig-self-learn';
+var state=loadState();
+
+function loadState(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.scores)return s}catch(e){}
+  var sc={},ch={};DOMAINS.forEach(function(d){sc[d.id]=30;ch[d.id]={}});return{scores:sc,checked:ch}}
+function saveState(){localStorage.setItem(KEY,JSON.stringify(state));
+  var el=document.getElementById('saved');el.classList.add('show');setTimeout(function(){el.classList.remove('show')},1500)}
+
+// ═══ RADAR CHART ═══
+function drawRadar(){
+  var svg=document.getElementById('radar');
+  var cx=170,cy=170,R=130,n=DOMAINS.length;
+  var angles=DOMAINS.map(function(_,i){return -Math.PI/2+2*Math.PI*i/n});
+  var html='';
+  // Grid rings
+  [0.25,0.5,0.75,1].forEach(function(f){
+    var pts=angles.map(function(a){return (cx+R*f*Math.cos(a))+','+(cy+R*f*Math.sin(a))}).join(' ');
+    html+='<polygon points="'+pts+'" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="1"/>';
+  });
+  // Axes
+  angles.forEach(function(a,i){
+    html+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.cos(a))+'" y2="'+(cy+R*Math.sin(a))+'" stroke="rgba(0,0,0,.06)"/>';
+    var lx=cx+(R+18)*Math.cos(a),ly=cy+(R+18)*Math.sin(a);
+    html+='<text x="'+lx+'" y="'+ly+'" text-anchor="middle" dominant-baseline="middle" fill="'+DOMAINS[i].color+'" font-size="10" font-weight="600">'+DOMAINS[i].name.split(' ')[0]+'</text>';
+  });
+  // Data polygon
+  var pts=DOMAINS.map(function(d,i){var v=state.scores[d.id]/100;return (cx+R*v*Math.cos(angles[i]))+','+(cy+R*v*Math.sin(angles[i]))}).join(' ');
+  html+='<polygon points="'+pts+'" fill="rgba(45,94,168,.1)" stroke="rgba(45,94,168,.5)" stroke-width="1.5"/>';
+  // Data dots
+  DOMAINS.forEach(function(d,i){var v=state.scores[d.id]/100;var x=cx+R*v*Math.cos(angles[i]),y=cy+R*v*Math.sin(angles[i]);
+    html+='<circle cx="'+x+'" cy="'+y+'" r="4" fill="'+d.color+'" stroke="'+d.color+'" stroke-width="1" stroke-opacity=".3"/>';
+    html+='<text x="'+x+'" y="'+(y-10)+'" text-anchor="middle" fill="'+d.color+'" font-size="9" font-family="SF Mono,monospace" font-weight="600">'+state.scores[d.id]+'</text>';
+  });
+  svg.innerHTML=html;
+}
+
+// ═══ SLIDERS ═══
+function buildSliders(){
+  var wrap=document.getElementById('sliders');
+  wrap.innerHTML=DOMAINS.map(function(d){
+    return '<div class="slider-row"><span class="s-dot" style="background:'+d.color+'"></span>'
+      +'<span class="s-name">'+d.name.split(' ')[0]+'</span>'
+      +'<input type="range" min="0" max="100" value="'+state.scores[d.id]+'" data-id="'+d.id+'">'
+      +'<span class="s-val" id="sv-'+d.id+'">'+state.scores[d.id]+'</span></div>';
+  }).join('');
+  wrap.querySelectorAll('input[type=range]').forEach(function(inp){
+    inp.style.setProperty('--c',colorMap[inp.dataset.id]||'#6366f1');
+    inp.addEventListener('input',function(){
+      state.scores[this.dataset.id]=parseInt(this.value);
+      document.getElementById('sv-'+this.dataset.id).textContent=this.value;
+      drawRadar();updateSummary();saveState();
+    });
+  });
+}
+var colorMap={};DOMAINS.forEach(function(d){colorMap[d.id]=d.color});
+
+// ═══ SUMMARY ═══
+function updateSummary(){
+  var total=0,checked=0;DOMAINS.forEach(function(d){total+=d.topics.length;
+    if(state.checked[d.id])Object.keys(state.checked[d.id]).forEach(function(k){if(state.checked[d.id][k])checked++})});
+  var avg=Math.round(DOMAINS.reduce(function(s,d){return s+state.scores[d.id]},0)/DOMAINS.length);
+  var pct=total?Math.round(checked/total*100):0;
+  document.getElementById('summary').innerHTML=
+    '<div class="sum-card"><span class="sn" style="color:var(--pri)">'+avg+'</span><span class="sl">平均能力评分</span></div>'
+    +'<div class="sum-card"><span class="sn" style="color:var(--emerald)">'+checked+' / '+total+'</span><span class="sl">已掌握知识点</span></div>'
+    +'<div class="sum-card"><span class="sn" style="color:var(--cyan)">'+pct+'%</span><span class="sl">知识覆盖率</span></div>'
+    +'<div class="sum-card"><span class="sn" style="color:var(--amber)">'+DOMAINS.length+'</span><span class="sl">学习领域</span></div>';
+}
+
+// ═══ DOMAIN CHECKLISTS ═══
+function buildDomains(){
+  var wrap=document.getElementById('domains');
+  wrap.innerHTML=DOMAINS.map(function(d){
+    if(!state.checked[d.id])state.checked[d.id]={};
+    var done=0;d.topics.forEach(function(t){if(state.checked[d.id][t])done++});
+    var pct=d.topics.length?Math.round(done/d.topics.length*100):0;
+    var topics=d.topics.map(function(t){
+      var ch=state.checked[d.id][t]?'checked':'';
+      return '<label class="topic-item"><input type="checkbox" '+ch+' data-domain="'+d.id+'" data-topic="'+t+'">'
+        +'<span class="ck">✓</span><span class="tn">'+t+'</span></label>';
+    }).join('');
+    return '<div class="domain-section" data-domain="'+d.id+'">'
+      +'<div class="domain-hd" onclick="togDomain(this)">'
+      +'<span class="d-dot" style="background:'+d.color+'"></span>'
+      +'<span class="d-name">'+d.name+'</span>'
+      +'<span class="d-prog">'+done+'/'+d.topics.length+'</span>'
+      +'<div class="d-bar"><span style="width:'+pct+'%;background:'+d.color+'"></span></div>'
+      +'<span class="chv">▾</span></div>'
+      +'<div class="domain-body"><div class="topic-list">'+topics+'</div></div></div>';
+  }).join('');
+  // Checkbox events
+  wrap.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change',function(){
+      var did=this.dataset.domain,t=this.dataset.topic;
+      if(!state.checked[did])state.checked[did]={};
+      state.checked[did][t]=this.checked;
+      updateDomainProgress(did);updateSummary();saveState();
+    });
+  });
+}
+
+function updateDomainProgress(did){
+  var d=DOMAINS.find(function(x){return x.id===did});if(!d)return;
+  var done=0;d.topics.forEach(function(t){if(state.checked[did]&&state.checked[did][t])done++});
+  var pct=d.topics.length?Math.round(done/d.topics.length*100):0;
+  var sec=document.querySelector('.domain-section[data-domain="'+did+'"]');
+  if(sec){sec.querySelector('.d-prog').textContent=done+'/'+d.topics.length;
+    sec.querySelector('.d-bar span').style.width=pct+'%';}
+}
+
+window.togDomain=function(el){el.parentElement.classList.toggle('open')};
+window.resetAll=function(){
+  if(!confirm('确定重置所有学习数据？'))return;
+  localStorage.removeItem(KEY);state=loadState();
+  drawRadar();buildSliders();updateSummary();buildDomains();
+};
+
+// Init
+drawRadar();buildSliders();updateSummary();buildDomains();
+})();
+</script>
+<script>function toggleDarkMode(){const d=document.documentElement;d.classList.toggle('dark-mode');const isDark=d.classList.contains('dark-mode');localStorage.setItem('kd-dark',isDark?'1':'0')}function initDarkMode(){const saved=localStorage.getItem('kd-dark');if(saved==='1'){document.documentElement.classList.add('dark-mode')}else if(saved===null&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark-mode')}}initDarkMode();
+(function(){var bar=document.getElementById('reading-progress');function update(){var t=window.scrollY,s=document.documentElement.scrollHeight-h.innerHeight,p=s>0?(t/s)*100:0;bar.style.width=Math.min(100,p)+'%'}window.addEventListener('scroll',update,{passive:true});update();})();
+document.addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){var t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if(document.activeElement.isContentEditable)return;e.preventDefault();document.querySelector('input[type=text],input[type=search]')&&document.querySelector('input[type=text],input[type=search]').focus()}});</script>
+</body>
+</html>

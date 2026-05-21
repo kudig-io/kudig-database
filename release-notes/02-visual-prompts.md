@@ -1,3 +1,29 @@
+---
+title: 发布会视觉素材 — AI 图片生成提示词
+description: 科技感深蓝色背景, 中央悬浮一个发光的六边形知识网络结构,
+category: general
+tags:
+- k8s
+- etcd
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 发布会视觉素材 — AI 图片生成提示词 是什么
+- 如何 发布会视觉素材 — AI 图片生成提示词
+trigger_keywords:
+- 发布会视觉素材
+- AI
+- 图片生成提示词
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 发布会视觉素材 — AI 图片生成提示词
 
 > 用于生成发布会海报、社交媒体配图、PPT 背景等视觉素材
@@ -13,7 +39,7 @@
 每个节点是一个发光的圆球代表不同技术域 (标注 etcd/networking/security/AI),
 节点间有光线连接形成知识图谱, 网络下方有流动的数据粒子流,
 整体风格: 未来科技、数据可视化、深蓝+青色渐变,
-右下角有 Kubernetes 风轮 logo 的抽象化呈现,
+右下角有 [[entities/kubernetes|kubernetes]] 风轮 logo 的抽象化呈现,
 16:9 宽幅, 4K 高清, 适合发布会主视觉
 ```
 

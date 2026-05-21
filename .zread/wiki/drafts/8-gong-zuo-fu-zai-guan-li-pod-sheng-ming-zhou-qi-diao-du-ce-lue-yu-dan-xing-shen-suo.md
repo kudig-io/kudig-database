@@ -1,6 +1,6 @@
 工作负载管理是 Kubernetes 运维实践中最核心的技术领域之一，它回答了三个关键的生产问题：**容器如何从创建到销毁？**（Pod 生命周期）、**容器应该运行在哪个节点上？**（调度策略）、**如何根据负载自动增减副本数？**（弹性伸缩）。本文档将这三个维度整合为一个连贯的技术体系——生命周期定义了 Pod 的存在形式，调度决定了 Pod 的物理位置，而弹性伸缩则在工作负载层面实现了资源供给与业务需求的动态平衡。对于中级开发者而言，理解这三者之间的耦合关系，是从"能用 Kubernetes"迈向"用好 Kubernetes"的关键跨越。
 
-Sources: [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L1-L28), [README.md](domain-4-workloads/README.md#L1-L16)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L1-L28), [README.md](domain-02-workloads-applications/README.md#L1-L16)
 
 ## 整体架构：三大子系统的协作关系
 
@@ -50,7 +50,7 @@ graph TD
 
 这个架构揭示了一个重要的设计原则：**生命周期是纵向的**（单 Pod 从生到灭），**调度是横向的**（Pod 在集群节点间的分布），**弹性伸缩是闭环的**（基于指标反馈自动调节副本数）。三者通过 API Server 这一中心枢纽松耦合协作。
 
-Sources: [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L42-L62), [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L5-L11)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L42-L62), [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L5-L11)
 
 ---
 
@@ -70,7 +70,7 @@ Pod 的生命周期由五个 **Phase** 组成，它们描述了 Pod 在宏观层
 
 容器的 `Waiting` 状态尤其值得关注——它包含 `ContainerCreating`（正常）、`ImagePullBackOff`（镜像问题）、`CrashLoopBackOff`（应用反复崩溃）等子状态。其中 **CrashLoopBackOff** 是生产环境最常见的问题之一，kubelet 对此采用指数退避策略（10s → 20s → 40s → … → 300s 上限），防止无效重启消耗节点资源。
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L5-L29), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L6-L18)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L5-L29), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L6-L18)
 
 ### Pod Conditions：就绪状态的精细化判定
 
@@ -86,7 +86,7 @@ Phase 仅提供粗粒度状态，而 **Pod Conditions** 提供了细粒度的健
 
 此外，**Readiness Gates**（v1.14+）允许应用向 Pod Status 注入自定义就绪条件（如"配置已加载完毕"），Pod 只有在所有自定义条件均为 `True` 时才被视为 Ready。这对于需要等待外部依赖就绪的应用（如数据库连接池预热完成）非常有价值。
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L30-L38), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L20-L23)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L30-L38), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L20-L23)
 
 ### 三种探针的协作模型
 
@@ -121,7 +121,7 @@ graph LR
 
 一个常见的生产级配置模式是：`startupProbe` 给予 150s 启动窗口（`failureThreshold: 30, periodSeconds: 5`），`livenessProbe` 以 10s 间隔检测核心健康端点，`readinessProbe` 以 5s 间隔检测业务就绪状态。这种"宽松启动 + 严格运行"的策略，既保护了启动期，又保证了运行时的快速故障检测。
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L90-L128), [12-advanced-pod-patterns.md](domain-4-workloads/12-advanced-pod-patterns.md#L5-L11), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L86-L135)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L90-L128), [12-advanced-pod-patterns.md](domain-02-workloads-applications/12-advanced-pod-patterns.md#L5-L11), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L86-L135)
 
 ### 优雅终止：从 SIGTERM 到 SIGKILL 的时间窗口
 
@@ -158,7 +158,7 @@ lifecycle:
       seconds: 10  # v1.29+ GA，替代 exec + sleep 的方式
 ```
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L130-L151), [13-container-lifecycle-hooks.md](domain-4-workloads/13-container-lifecycle-hooks.md#L296-L345), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L23-L31)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L130-L151), [13-container-lifecycle-hooks.md](domain-02-workloads-applications/13-container-lifecycle-hooks.md#L296-L345), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L23-L31)
 
 ### 生命周期 Hook 的执行方式
 
@@ -178,7 +178,7 @@ Kubernetes 提供了两种生命周期钩子（PostStart 和 PreStop）和四种
 
 PostStart 常用于服务注册（如注册到 Consul/Nacos），PreStop 用于服务注销和连接排空。需要特别注意：PostStart 的执行时机是容器创建后、ENTRYPOINT 启动后，但它**不保证在 ENTRYPOINT 之前执行**——如果需要严格的初始化顺序，应使用 Init 容器。
 
-Sources: [13-container-lifecycle-hooks.md](domain-4-workloads/13-container-lifecycle-hooks.md#L76-L91), [12-advanced-pod-patterns.md](domain-4-workloads/12-advanced-pod-patterns.md#L39-L44)
+Sources: [13-container-lifecycle-hooks.md](domain-02-workloads-applications/13-container-lifecycle-hooks.md#L76-L91), [12-advanced-pod-patterns.md](domain-02-workloads-applications/12-advanced-pod-patterns.md#L39-L44)
 
 ---
 
@@ -213,7 +213,7 @@ graph LR
 
 调度器的两阶段决策模型是：先通过 **Filter** 找到所有可行节点，再通过 **Score** 对可行节点打分选最优。如果 Filter 结果为空，则进入 PostFilter 触发抢占（Preemption）——驱逐低优先级 Pod 为高优先级 Pod 腾出空间。
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L5-L11), [kubernetes-scheduler.md](topic-dictionary/scheduling/kubernetes-scheduler.md#L8-L14)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L5-L11), [kubernetes-scheduler.md](topic-dictionary/scheduling/kubernetes-scheduler.md#L8-L14)
 
 ### 调度策略全景：从节点选择到拓扑分布
 
@@ -249,7 +249,7 @@ spec:
         topologyKey: "kubernetes.io/hostname"
 ```
 
-Sources: [12-advanced-pod-patterns.md](domain-4-workloads/12-advanced-pod-patterns.md#L13-L31), [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L165-L171)
+Sources: [12-advanced-pod-patterns.md](domain-02-workloads-applications/12-advanced-pod-patterns.md#L13-L31), [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L165-L171)
 
 ### PodTopologySpread：跨域均匀分布的生产实践
 
@@ -282,7 +282,7 @@ topologySpreadConstraints:
       app: web
 ```
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L173-L227)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L173-L227)
 
 ### 优先级与抢占：当资源不足时谁优先
 
@@ -297,7 +297,7 @@ Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configu
 
 生产建议为核心业务分配高优先级（`value: 1000000`），为批处理任务分配低优先级（`value: -1000, preemptionPolicy: Never`），这样在资源紧张时，批处理任务会被自动让位给核心业务，而不会反过来抢占。
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L229-L277)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L229-L277)
 
 ### 调度门控：延迟调度的精确控制
 
@@ -320,7 +320,7 @@ kubectl patch pod gated-pod --type=json \
   -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
 ```
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L279-L300)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L279-L300)
 
 ### 调度器性能调优
 
@@ -333,7 +333,7 @@ Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configu
 | API 压力大 | `clientConnection.qps` | 100-200 | 提高调度器与 API Server 的通信速率 |
 | 调度延迟高 | `podInitialBackoffSeconds` | 0.5 | 减少调度失败后的退避等待 |
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L369-L377)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L369-L377)
 
 ---
 
@@ -357,7 +357,7 @@ desiredReplicas = ceil(currentReplicas × currentMetricValue / desiredMetricValu
 | **External** | External Metrics API | 消息队列长度、云监控 | autoscaling/v2 GA |
 | **ContainerResource** | Metrics Server | 多容器 Pod 中单个容器的资源 | v1.27+ GA |
 
-Sources: [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L5-L21), [horizontal-pod-autoscaling.md](topic-dictionary/workloads/horizontal-pod-autoscaling.md#L6-L12)
+Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L5-L21), [horizontal-pod-autoscaling.md](topic-dictionary/workloads/horizontal-pod-autoscaling.md#L6-L12)
 
 ### HPA 行为策略：控制伸缩的速率与节奏
 
@@ -393,7 +393,7 @@ behavior:
     selectPolicy: Min                     # 选最保守的策略
 ```
 
-Sources: [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L96-L104)
+Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L96-L104)
 
 ### VPA：垂直维度的资源优化
 
@@ -435,7 +435,7 @@ spec:
       controlledResources: ["memory"]  # 仅调整 memory
 ```
 
-Sources: [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L106-L225)
+Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L106-L225)
 
 ### KEDA：事件驱动的进阶伸缩
 
@@ -468,7 +468,7 @@ spec:
 
 KEDA 的 **Fallback** 机制也值得关注：当指标源不可达时，Fallback 策略会将副本数设为预设的安全值（如 6），避免因监控系统故障导致的伸缩失效。
 
-Sources: [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L146-L186)
+Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L146-L186)
 
 ### Cluster Autoscaler 与节点级弹性
 
@@ -494,7 +494,7 @@ graph TD
 
 节点管理的核心最佳实践是：为不同业务建立**独立的节点池**，Spot（抢占式）实例与按量付费实例混用，并通过 `expander: least-waste` 策略优化成本。
 
-Sources: [18-node-management-operations.md](domain-4-workloads/18-node-management-operations.md#L5-L15), [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L283-L291)
+Sources: [18-node-management-operations.md](domain-02-workloads-applications/18-node-management-operations.md#L5-L15), [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L283-L291)
 
 ---
 
@@ -547,7 +547,7 @@ spec:
 
 如果在此期间负载上升，**HPA** 可能同时触发扩容，将 replicas 从 6 提升到 8。Deployment 控制器会正确协调滚动更新和扩容两个并行操作。
 
-Sources: [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L42-L162), [10-workload-controllers-overview.md](domain-4-workloads/10-workload-controllers-overview.md#L15-L83)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L42-L162), [10-workload-controllers-overview.md](domain-02-workloads-applications/10-workload-controllers-overview.md#L15-L83)
 
 ### QoS 等级与资源管理的全局视角
 
@@ -561,7 +561,7 @@ Pod 的资源配额设置直接影响调度决策和驱逐优先级。Kubernetes
 
 生产建议：关键服务（Guaranteed）确保资源独占和最低驱逐优先级，弹性服务（Burstable）在资源充足时能超额使用，批处理任务（BestEffort）在集群空闲时利用闲置资源。这种分层策略与 **PriorityClass** 结合，形成了完整的资源保障体系。
 
-Sources: [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L346-L355), [23-resource-management.md](domain-4-workloads/23-resource-management.md#L1-L15)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L346-L355), [23-resource-management.md](domain-02-workloads-applications/23-resource-management.md#L1-L15)
 
 ### PodDisruptionBudget：保护服务的最后一道防线
 
@@ -581,7 +581,7 @@ spec:
 
 PDB 与 HPA 的协同需要注意：`minAvailable` 的值应考虑 HPA 的 `minReplicas`，确保 PDB 不会阻止 HPA 缩容到合理水平。
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L162-L187)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L162-L187)
 
 ---
 
@@ -599,7 +599,7 @@ Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events
 | Pod 被抢占 | `kubectl get events --field-selector=reason=Preempted` | 优先级设置不合理 | 调度策略 |
 | 节点 NotReady 导致 Pod Unknown | `kubectl get nodes` | 节点网络 / kubelet 故障 | 生命周期 |
 
-Sources: [11-pod-lifecycle-events.md](domain-4-workloads/11-pod-lifecycle-events.md#L58-L78), [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L258-L291), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L137-L210)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L58-L78), [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L258-L291), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L137-L210)
 
 ### 关键监控指标
 
@@ -617,7 +617,7 @@ scheduler_pending_pods > 100
 kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
 ```
 
-Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configuration.md#L380-L400), [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L403-L458), [21-hpa-vpa-autoscaling.md](domain-4-workloads/21-hpa-vpa-autoscaling.md#L293-L327)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L380-L400), [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L403-L458), [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L293-L327)
 
 ### 生产就绪检查清单
 
@@ -639,7 +639,7 @@ Sources: [19-scheduler-configuration.md](domain-4-workloads/19-scheduler-configu
 - [ ] VPA 处于 Off 模式观察 24h+ 后再开启 Auto
 - [ ] 配置 PodDisruptionBudget 保护最小可用副本数
 
-Sources: [01-workload-overview-architecture.md](domain-4-workloads/01-workload-overview-architecture.md#L461-L483), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L183-L190)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L461-L483), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L183-L190)
 
 ---
 

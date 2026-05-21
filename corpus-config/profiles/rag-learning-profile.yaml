@@ -7,10 +7,10 @@ description: "面向 K8s 学习者的问答助手语料配置"
 use_case: "概念解释、学习引导、命令查询"
 
 core:
-  - path: topic-learn/                    # 学习计划
+  - path: domain-11-production-operations/topic-learn/                    # 学习计划
     priority: critical
     chunking: by_h2
-  - path: topic-cheat-sheet/              # 全部速查卡
+  - path: domain-17-system-foundation/topic-cheat-sheet/              # 全部速查卡
     priority: critical
     chunking: full_doc
   - path: domain-1-architecture-fundamentals/
@@ -44,7 +44,7 @@ reference:
   - path: domain-32-yaml-manifests/      # YAML 参考
     priority: medium
     chunking: by_h2
-  - path: topic-dictionary/              # 运维词典
+  - path: domain-17-system-foundation/topic-dictionary/              # 运维词典
     priority: medium
     chunking: by_entry
 

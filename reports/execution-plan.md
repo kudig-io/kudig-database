@@ -25,6 +25,12 @@ intent_queries:
 trigger_keywords:
 - KUDIG
 - 内容补齐执行计划
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
 ---
 
 # KUDIG 内容补齐执行计划
@@ -55,7 +61,7 @@ wc -l templates/*.md
 
 ### Task-01: 为速查卡补充 YAML Front Matter（9 张）
 
-**操作范围**: `topic-cheat-sheet/` 下所有 .md 文件（不含 README.md）
+**操作范围**: `domain-17-system-foundation/topic-cheat-sheet/` 下所有 .md 文件（不含 README.md）
 
 **补齐格式**:
 ```yaml
@@ -73,7 +79,7 @@ difficulty: "beginner"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     desc: "深度文档"
-  - path: "../topic-fta/list/{{component}}-fta.md"
+  - path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
     desc: "FTA 故障树"
 ---
 ```
@@ -93,11 +99,11 @@ related_docs:
 
 ---
 
-### Task-02: 为 Domain 核心文档补充 YAML Front Matter（domain-1 ~ domain-12 先行）
+### Task-02: 为 Domain 核心文档补充 YAML Front Matter（domain-01-cluster-fundamentals ~ domain-10-troubleshooting-diagnostics 先行）
 
 **原则**: 每篇文档逐一检查，补充 front matter 不改内容
 
-**操作范围**: `domain-1-architecture-fundamentals/` ~ `domain-12-troubleshooting/` 每目录前 3 篇文档
+**操作范围**: `domain-01-cluster-fundamentals/` ~ `domain-10-troubleshooting-diagnostics/` 每目录前 3 篇文档
 
 **补齐格式**:
 ```yaml
@@ -120,18 +126,18 @@ related_docs:
 ```
 
 **文件列表**（每目录取前 3 篇）:
-- `domain-1-architecture-fundamentals/`: 01, 02, 05（3 篇）
-- `domain-2-design-principles/`: 01, 02, 03（3 篇）
-- `domain-3-control-plane/`: 11, 12, 13（3 篇）
-- `domain-4-workloads/`: 10, 11, 19（3 篇）
-- `domain-5-networking/`: 01, 03, 06（3 篇）
-- `domain-6-storage/`: 01, 02, 04（3 篇）
-- `domain-7-security/`: 01, 02, 03（3 篇）
-- `domain-8-observability/`: 01, 02, 04（3 篇）
-- `domain-9-platform-ops/`: 01, 02, 06（3 篇）
-- `domain-10-extensions/`: 01, 05, 08（3 篇）
-- `domain-11-ai-infra/`: 01, 03, 05（3 篇）
-- `domain-12-troubleshooting/`: 前 3 篇（3 篇）
+- `domain-01-cluster-fundamentals/`: 01, 02, 05（3 篇）
+- `domain-01-cluster-fundamentals/`: 01, 02, 03（3 篇）
+- `domain-01-cluster-fundamentals/`: 11, 12, 13（3 篇）
+- `domain-02-workloads-applications/`: 10, 11, 19（3 篇）
+- `domain-03-networking-traffic/`: 01, 03, 06（3 篇）
+- `domain-04-storage-data/`: 01, 02, 04（3 篇）
+- `domain-05-security-compliance/`: 01, 02, 03（3 篇）
+- `domain-06-observability/`: 01, 02, 04（3 篇）
+- `domain-07-platform-engineering/`: 01, 02, 06（3 篇）
+- `domain-15-specialized-tech/`: 01, 05, 08（3 篇）
+- `domain-14-ai-ml-infra/`: 01, 03, 05（3 篇）
+- `domain-10-troubleshooting-diagnostics/`: 前 3 篇（3 篇）
 
 **总计**: 36 篇
 
@@ -141,7 +147,7 @@ related_docs:
 
 ### Task-03: 为 FTA 文档补充 YAML 顶事件定义
 
-**目标**: 为 `topic-fta/list/` 下每篇 FTA 文档补充 YAML front matter（顶事件定义）
+**目标**: 为 `domain-10-troubleshooting-diagnostics/topic-fta/list/` 下每篇 FTA 文档补充 YAML front matter（顶事件定义）
 
 **补齐格式**:
 ```yaml
@@ -159,10 +165,10 @@ authors:
 reviewers: []
 tags: [fta, troubleshooting, {{component}}]
 related_skills:
-  - "../topic-skills/{{NN}}-{{scenario}}.md"
+  - "../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md"
 knowledge_refs:
   - "../domain-{{N}}-{{name}}/{{doc}}.md"
-  - "../topic-structural-trouble-shooting/{{component}}-*.md"
+  - "../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/{{component}}-*.md"
 ---
 ```
 
@@ -178,25 +184,25 @@ controller-manager-fta.md
 crd-operator-fta.md
 csi-fta.md
 dns-fta.md
-gateway-fta.md
-hpa-vpa-fta.md
+gateway-api-fta.md
+hpa-fta.md
 helm-fta.md
-ingress-fta.md
-kube-proxy-fta.md
-metrics-server-fta.md
-network-policy-fta.md
+[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md
+service-fta.md
+monitoring-fta.md
+networkpolicy-fta.md
 node-fta.md
 nodelifecycle-fta.md
-persistentvolume-fta.md
+csi-fta.md
 pod-fta.md
 scheduler-fta.md
-secret-fta.md
+rbac-fta.md
 service-fta.md
 statefulset-fta.md
-storageclass-fta.md
+csi-fta.md
 terway-fta.md
 webhook-admission-fta.md
-...（共 37 篇，见 topic-fta/list/ 目录）
+...（共 37 篇，见 domain-10-troubleshooting-diagnostics/topic-fta/list/ 目录）
 ```
 
 ---
@@ -245,22 +251,22 @@ webhook-admission-fta.md
 
 ## 阶段 3：P2 — Domain 文档监控/版本章节补齐
 
-### Task-05: 为 domain-1 ~ domain-5 补充监控告警章节
+### Task-05: 为 domain-01-cluster-fundamentals ~ domain-03-networking-traffic 补充监控告警章节
 
-**目标**: 在 domain-1 到 domain-5 每目录选 1 篇核心文档，补充 Section 6（监控与告警）
+**目标**: 在 domain-01-cluster-fundamentals 到 domain-03-networking-traffic 每目录选 1 篇核心文档，补充 Section 6（监控与告警）
 
 **文档选择**:
-- `domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md` → 补充监控章节
-- `domain-3-control-plane/11-etcd-deep-dive.md` → 补充监控章节
-- `domain-5-networking/01-network-architecture-overview.md` → 补充监控章节
+- `domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md` → 补充监控章节
+- `domain-01-cluster-fundamentals/11-etcd-deep-dive.md` → 补充监控章节
+- `domain-03-networking-traffic/01-network-architecture-overview.md` → 补充监控章节
 
 **补齐格式**: 参考 `templates/domain-article-template.md` Section 6（关键指标体系 + Prometheus 告警规则 + Grafana 仪表盘）
 
 ---
 
-### Task-06: 为 domain-1 ~ domain-5 补充版本差异章节
+### Task-06: 为 domain-01-cluster-fundamentals ~ domain-03-networking-traffic 补充版本差异章节
 
-**目标**: 在 domain-1 到 domain-5 每目录选 1 篇核心文档，补充 Section 10（版本差异）
+**目标**: 在 domain-01-cluster-fundamentals 到 domain-03-networking-traffic 每目录选 1 篇核心文档，补充 Section 10（版本差异）
 
 **补齐格式**: 参考 `templates/domain-article-template.md` Section 10（功能差异表 + API 版本差异）
 
@@ -270,7 +276,7 @@ webhook-admission-fta.md
 
 ### Task-07: 为 k8s.md 和 linux.md 补充云厂商命令章节
 
-**目标**: 在 `topic-cheat-sheet/k8s.md` 和 `topic-cheat-sheet/linux.md` 末尾补充云厂商特有命令章节
+**目标**: 在 `domain-17-system-foundation/topic-cheat-sheet/k8s.md` 和 `domain-17-system-foundation/topic-cheat-sheet/linux.md` 末尾补充云厂商特有命令章节
 
 **补齐格式**:
 ```markdown

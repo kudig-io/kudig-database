@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  docs: any[];
+  currentSlug: string;
+  domain: string;
+  html: string;
+}
+
+const { title, description, docs, currentSlug, domain, html } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <div class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex gap-8">
+      <Sidebar docs={docs} currentSlug={currentSlug} domain={domain} />
+      
+      <main class="flex-1 min-w-0">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-kudig-muted mb-6">
+          <a href="/kudig-database/" class="hover:text-kudig-text transition-colors">首页</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          {currentSlug.split('/').map((part, i, arr) => {
+            const path = arr.slice(0, i + 1).join('/');
+            const isLast = i === arr.length - 1;
+            return (
+              <>
+                {isLast ? (
+                  <span class="text-kudig-text">{part.replace(/-/g, ' ')}</span>
+                ) : (
+                  <a href={`/kudig-database/${path}/`} class="hover:text-kudig-text transition-colors">
+                    {part.replace(/-/g, ' ')}
+                  </a>
+                )}
+                {!isLast && (
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                )}
+              </>
+            );
+          })}
+        </nav>
+
+        <!-- Content -->
+        <article class="prose prose-invert max-w-none">
+          <h1>{title}</h1>
+          <Fragment set:html={html} />
+        </article>
+
+        <!-- Footer Nav -->
+        <div class="mt-12 pt-8 border-t border-kudig-border flex justify-between">
+          <div>
+            <!-- Previous link would go here -->
+          </div>
+          <div>
+            <!-- Next link would go here -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>

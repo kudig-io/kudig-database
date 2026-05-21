@@ -1,0 +1,1069 @@
+domain: domain-06-observability
+total_questions: 221
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Observability Open Source Projects Index 中, 指标与监控 是什么?
+  answer: 参见 domain-06-observability/00-open-source-projects-index.md 的「指标与监控」章节。
+  source: domain-06-observability/00-open-source-projects-index.md
+  section: 指标与监控
+- type: concept
+  question: 在 Observability Open Source Projects Index 中, 日志管理 是什么?
+  answer: 参见 domain-06-observability/00-open-source-projects-index.md 的「日志管理」章节。
+  source: domain-06-observability/00-open-source-projects-index.md
+  section: 日志管理
+- type: concept
+  question: 在 Observability Open Source Projects Index 中, 分布式追踪 是什么?
+  answer: 参见 domain-06-observability/00-open-source-projects-index.md 的「分布式追踪」章节。
+  source: domain-06-observability/00-open-source-projects-index.md
+  section: 分布式追踪
+- type: concept
+  question: 在 Observability Open Source Projects Index 中, 原始索引保留 是什么?
+  answer: 参见 domain-06-observability/00-open-source-projects-index.md 的「原始索引保留」章节。
+  source: domain-06-observability/00-open-source-projects-index.md
+  section: 原始索引保留
+- type: concept
+  question: 在 Observability Open Source Projects Index 中, See Also 是什么?
+  answer: 参见 domain-06-observability/00-open-source-projects-index.md 的「See Also」章节。
+  source: domain-06-observability/00-open-source-projects-index.md
+  section: See Also
+- type: concept
+  question: 在 Kubernetes 可观测性架构体系 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/01-observability-architecture-overview.md 的「概述」章节。
+  source: domain-06-observability/01-overview/01-observability-architecture-overview.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 可观测性架构体系 中, 可观测性架构设计原则 是什么?
+  answer: 参见 domain-06-observability/01-overview/01-observability-architecture-overview.md 的「可观测性架构设计原则」章节。
+  source: domain-06-observability/01-overview/01-observability-architecture-overview.md
+  section: 可观测性架构设计原则
+- type: concept
+  question: 在 Kubernetes 可观测性架构体系 中, 指标监控体系架构 是什么?
+  answer: 参见 domain-06-observability/01-overview/01-observability-architecture-overview.md 的「指标监控体系架构」章节。
+  source: domain-06-observability/01-overview/01-observability-architecture-overview.md
+  section: 指标监控体系架构
+- type: troubleshooting
+  question: 如何排查 Kubernetes 可观测性架构体系 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/01-observability-architecture-overview.md 的故障排查章节。
+  source: domain-06-observability/01-overview/01-observability-architecture-overview.md
+- type: comparison
+  question: Kubernetes 可观测性架构体系 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/01-observability-architecture-overview.md 中的对比分析。
+  source: domain-06-observability/01-overview/01-observability-architecture-overview.md
+- type: concept
+  question: 在 04-企业级监控体系 中, See Also 是什么?
+  answer: 参见 domain-06-observability/01-overview/04-enterprise-monitoring-system.md 的「See Also」章节。
+  source: domain-06-observability/01-overview/04-enterprise-monitoring-system.md
+  section: See Also
+- type: concept
+  question: 在 06-APM应用性能监控 中, See Also 是什么?
+  answer: 参见 domain-06-observability/01-overview/06-apm-application-performance-monitoring.md 的「See Also」章节。
+  source: domain-06-observability/01-overview/06-apm-application-performance-monitoring.md
+  section: See Also
+- type: concept
+  question: 在 Elastic Stack企业级可观测性平台深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/01-overview/06-elastic-stack-enterprise-observability.md 的「See Also」章节。
+  source: domain-06-observability/01-overview/06-elastic-stack-enterprise-observability.md
+  section: See Also
+- type: concept
+  question: 在 13 - 集群健康检查指南 (Cluster Health Check Guide) 中, 集群健康检查架构 是什么?
+  answer: 参见 domain-06-observability/01-overview/13-cluster-health-check.md 的「集群健康检查架构」章节。
+  source: domain-06-observability/01-overview/13-cluster-health-check.md
+  section: 集群健康检查架构
+- type: concept
+  question: 在 13 - 集群健康检查指南 (Cluster Health Check Guide) 中, 控制平面健康检查 是什么?
+  answer: 参见 domain-06-observability/01-overview/13-cluster-health-check.md 的「控制平面健康检查」章节。
+  source: domain-06-observability/01-overview/13-cluster-health-check.md
+  section: 控制平面健康检查
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== 控制平面健康检查 ======"?'
+  answer: 参见 domain-06-observability/01-overview/13-cluster-health-check.md 中的操作步骤。
+  source: domain-06-observability/01-overview/13-cluster-health-check.md
+  command: echo "====== 控制平面健康检查 ======"
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== etcd深度健康检查 ======"?'
+  answer: 参见 domain-06-observability/01-overview/13-cluster-health-check.md 中的操作步骤。
+  source: domain-06-observability/01-overview/13-cluster-health-check.md
+  command: echo "====== etcd深度健康检查 ======"
+- type: operation
+  question: '如何执行与 13 - 集群健康检查指南 (Cluster Health Check Guide) 相关的操作: echo "====== 节点健康检查 ======"?'
+  answer: 参见 domain-06-observability/01-overview/13-cluster-health-check.md 中的操作步骤。
+  source: domain-06-observability/01-overview/13-cluster-health-check.md
+  command: echo "====== 节点健康检查 ======"
+- type: concept
+  question: 在 52 - 混沌工程实践 中, 混沌工程架构 是什么?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 的「混沌工程架构」章节。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  section: 混沌工程架构
+- type: concept
+  question: 在 52 - 混沌工程实践 中, 混沌工程原则 是什么?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 的「混沌工程原则」章节。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  section: 混沌工程原则
+- type: concept
+  question: 在 52 - 混沌工程实践 中, 混沌工程工具对比 是什么?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 的「混沌工程工具对比」章节。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  section: 混沌工程工具对比
+- type: concept
+  question: 在 52 - 混沌工程实践 中, Chaos Mesh故障类型详解 是什么?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 的「Chaos Mesh故障类型详解」章节。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  section: Chaos Mesh故障类型详解
+- type: concept
+  question: 在 52 - 混沌工程实践 中, Chaos Mesh安装部署 是什么?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 的「Chaos Mesh安装部署」章节。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  section: Chaos Mesh安装部署
+- type: operation
+  question: '如何执行与 52 - 混沌工程实践 相关的操作: helm repo add chaos-mesh https://charts.chaos-mesh.org?'
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 中的操作步骤。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+  command: helm repo add chaos-mesh https://charts.chaos-mesh.org
+- type: comparison
+  question: 52 - 混沌工程实践 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/14-chaos-engineering.md 中的对比分析。
+  source: domain-06-observability/01-overview/14-chaos-engineering.md
+- type: concept
+  question: 在 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/19-security-compliance-governance.md 的「概述」章节。
+  source: domain-06-observability/01-overview/19-security-compliance-governance.md
+  section: 概述
+- type: concept
+  question: 在 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance) 中, 监控安全威胁分析 是什么?
+  answer: 参见 domain-06-observability/01-overview/19-security-compliance-governance.md 的「监控安全威胁分析」章节。
+  source: domain-06-observability/01-overview/19-security-compliance-governance.md
+  section: 监控安全威胁分析
+- type: concept
+  question: 在 23 - 监控安全与合规治理 (Monitoring Security & Compliance Governance) 中, 安全防护体系架构 是什么?
+  answer: 参见 domain-06-observability/01-overview/19-security-compliance-governance.md 的「安全防护体系架构」章节。
+  source: domain-06-observability/01-overview/19-security-compliance-governance.md
+  section: 安全防护体系架构
+- type: concept
+  question: 在 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/20-high-availability-disaster-recovery.md 的「概述」章节。
+  source: domain-06-observability/01-overview/20-high-availability-disaster-recovery.md
+  section: 概述
+- type: concept
+  question: 在 24 - 监控平台高可用与灾备 (Monitoring Platform High Availability & Disaster Recovery) 中, 高可用架构设计 是什么?
+  answer: 参见 domain-06-observability/01-overview/20-high-availability-disaster-recovery.md 的「高可用架构设计」章节。
+  source: domain-06-observability/01-overview/20-high-availability-disaster-recovery.md
+  section: 高可用架构设计
+- type: concept
+  question: 在 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/22-best-practices-case-studies.md 的「概述」章节。
+  source: domain-06-observability/01-overview/22-best-practices-case-studies.md
+  section: 概述
+- type: concept
+  question: 在 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 中, 可观测性平台架构模式 是什么?
+  answer: 参见 domain-06-observability/01-overview/22-best-practices-case-studies.md 的「可观测性平台架构模式」章节。
+  source: domain-06-observability/01-overview/22-best-practices-case-studies.md
+  section: 可观测性平台架构模式
+- type: concept
+  question: 在 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 中, 行业最佳实践案例 是什么?
+  answer: 参见 domain-06-observability/01-overview/22-best-practices-case-studies.md 的「行业最佳实践案例」章节。
+  source: domain-06-observability/01-overview/22-best-practices-case-studies.md
+  section: 行业最佳实践案例
+- type: troubleshooting
+  question: 如何排查 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/22-best-practices-case-studies.md 的故障排查章节。
+  source: domain-06-observability/01-overview/22-best-practices-case-studies.md
+- type: comparison
+  question: 25 - 可观测性平台最佳实践与案例 (Observability Platform Best Practices & Case Studies) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/22-best-practices-case-studies.md 中的对比分析。
+  source: domain-06-observability/01-overview/22-best-practices-case-studies.md
+- type: concept
+  question: 在 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md 的「概述」章节。
+  source: domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md
+  section: 概述
+- type: concept
+  question: 在 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中, 企业现状评估与成熟度诊断 是什么?
+  answer: 参见 domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md 的「企业现状评估与成熟度诊断」章节。
+  source: domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md
+  section: 企业现状评估与成熟度诊断
+- type: concept
+  question: 在 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中, 分阶段实施路线图 是什么?
+  answer: 参见 domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md 的「分阶段实施路线图」章节。
+  source: domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md
+  section: 分阶段实施路线图
+- type: troubleshooting
+  question: 如何排查 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md 的故障排查章节。
+  source: domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md
+- type: comparison
+  question: 24 - 企业可观测性实施路线图 (Enterprise Observability Implementation Roadmap) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md 中的对比分析。
+  source: domain-06-observability/01-overview/23-enterprise-implementation-roadmap.md
+- type: concept
+  question: 在 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/01-overview/24-observability-tool-ecosystem.md 的「概述」章节。
+  source: domain-06-observability/01-overview/24-observability-tool-ecosystem.md
+  section: 概述
+- type: concept
+  question: 在 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 中, 可观测性工具全景图 是什么?
+  answer: 参见 domain-06-observability/01-overview/24-observability-tool-ecosystem.md 的「可观测性工具全景图」章节。
+  source: domain-06-observability/01-overview/24-observability-tool-ecosystem.md
+  section: 可观测性工具全景图
+- type: concept
+  question: 在 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 中, 监控工具深度对比 是什么?
+  answer: 参见 domain-06-observability/01-overview/24-observability-tool-ecosystem.md 的「监控工具深度对比」章节。
+  source: domain-06-observability/01-overview/24-observability-tool-ecosystem.md
+  section: 监控工具深度对比
+- type: troubleshooting
+  question: 如何排查 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/24-observability-tool-ecosystem.md 的故障排查章节。
+  source: domain-06-observability/01-overview/24-observability-tool-ecosystem.md
+- type: comparison
+  question: 25 - 可观测性工具生态系统 (Observability Tool Ecosystem) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/24-observability-tool-ecosystem.md 中的对比分析。
+  source: domain-06-observability/01-overview/24-observability-tool-ecosystem.md
+- type: concept
+  question: 在 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 中, 目录 是什么?
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 的「目录」章节。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+  section: 目录
+- type: concept
+  question: 在 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 中, 故障排查方法论 是什么?
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 的「故障排查方法论」章节。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+  section: 故障排查方法论
+- type: concept
+  question: 在 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 中, Pod故障排查 是什么?
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 的「Pod故障排查」章节。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+  section: Pod故障排查
+- type: operation
+  question: '如何执行与 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 相关的操作: POD_NAME=$1?'
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 中的操作步骤。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+  command: POD_NAME=$1
+- type: operation
+  question: '如何执行与 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 相关的操作: POD_NAME=$1?'
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 中的操作步骤。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+  command: POD_NAME=$1
+- type: troubleshooting
+  question: 如何排查 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 的故障排查章节。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+- type: comparison
+  question: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/25-troubleshooting-overview.md 中的对比分析。
+  source: domain-06-observability/01-overview/25-troubleshooting-overview.md
+- type: concept
+  question: 在 Java 应用 Kubernetes 可观测性整合指南 中, 目录 是什么?
+  answer: 参见 domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md 的「目录」章节。
+  source: domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md
+  section: 目录
+- type: concept
+  question: 在 Java 应用 Kubernetes 可观测性整合指南 中, Java 可观测性架构全景 是什么?
+  answer: 参见 domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md 的「Java 可观测性架构全景」章节。
+  source: domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md
+  section: Java 可观测性架构全景
+- type: concept
+  question: 在 Java 应用 Kubernetes 可观测性整合指南 中, Micrometer + Prometheus 指标体系 是什么?
+  answer: 参见 domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md 的「Micrometer + Prometheus 指标体系」章节。
+  source: domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md
+  section: Micrometer + Prometheus 指标体系
+- type: troubleshooting
+  question: 如何排查 Java 应用 Kubernetes 可观测性整合指南 相关的故障?
+  answer: 参见 domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md 的故障排查章节。
+  source: domain-06-observability/01-overview/99-java-observability-kubernetes-guide.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 可观测性新特性指南 中, 目录 是什么?
+  answer: 参见 domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md 的「目录」章节。
+  source: domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 可观测性新特性指南 中, Kubelet OpenTelemetry Tracing (v1.31 GA) 是什么?
+  answer: 参见 domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md 的「Kubelet OpenTelemetry Tracing
+    (v1.31 GA)」章节。
+  source: domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md
+  section: Kubelet OpenTelemetry Tracing (v1.31 GA)
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 可观测性新特性指南 相关的操作: curl -s http://localhost:10248/healthz?verbose | grep tracin?'
+  answer: 参见 domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md 中的操作步骤。
+  source: domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md
+  command: curl -s http://localhost:10248/healthz?verbose | grep tracing
+- type: comparison
+  question: Kubernetes v1.29-v1.33 可观测性新特性指南 中有哪些技术对比?
+  answer: 参见 domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md 中的对比分析。
+  source: domain-06-observability/01-overview/99-kubernetes-v1.33-observability-guide.md
+- type: concept
+  question: 在 Prometheus企业级监控系统深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md 的「See Also」章节。
+  source: domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md
+  section: See Also
+- type: concept
+  question: 在 指标监控体系详解 中, 概述 是什么?
+  answer: 参见 domain-06-observability/02-metrics/02-monitoring-metrics-system.md 的「概述」章节。
+  source: domain-06-observability/02-metrics/02-monitoring-metrics-system.md
+  section: 概述
+- type: concept
+  question: 在 指标监控体系详解 中, Prometheus 监控架构 是什么?
+  answer: 参见 domain-06-observability/02-metrics/02-monitoring-metrics-system.md 的「Prometheus 监控架构」章节。
+  source: domain-06-observability/02-metrics/02-monitoring-metrics-system.md
+  section: Prometheus 监控架构
+- type: concept
+  question: 在 指标监控体系详解 中, 核心组件监控指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/02-monitoring-metrics-system.md 的「核心组件监控指标」章节。
+  source: domain-06-observability/02-metrics/02-monitoring-metrics-system.md
+  section: 核心组件监控指标
+- type: concept
+  question: 在 Thanos Enterprise Metrics Federation and Long-term Storage 中, See Also 是什么?
+  answer: 参见 domain-06-observability/02-metrics/04-thanos-enterprise-metrics-federation.md 的「See Also」章节。
+  source: domain-06-observability/02-metrics/04-thanos-enterprise-metrics-federation.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Thanos Enterprise Metrics Federation and Long-term Storage 相关的故障?
+  answer: 参见 domain-06-observability/02-metrics/04-thanos-enterprise-metrics-federation.md 的故障排查章节。
+  source: domain-06-observability/02-metrics/04-thanos-enterprise-metrics-federation.md
+- type: concept
+  question: 在 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/02-metrics/07-monitoring-dashboards.md 的「概述」章节。
+  source: domain-06-observability/02-metrics/07-monitoring-dashboards.md
+  section: 概述
+- type: concept
+  question: 在 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards) 中, 仪表板设计原则 是什么?
+  answer: 参见 domain-06-observability/02-metrics/07-monitoring-dashboards.md 的「仪表板设计原则」章节。
+  source: domain-06-observability/02-metrics/07-monitoring-dashboards.md
+  section: 仪表板设计原则
+- type: concept
+  question: 在 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards) 中, Grafana 配置最佳实践 是什么?
+  answer: 参见 domain-06-observability/02-metrics/07-monitoring-dashboards.md 的「Grafana 配置最佳实践」章节。
+  source: domain-06-observability/02-metrics/07-monitoring-dashboards.md
+  section: Grafana 配置最佳实践
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-apiserver 关键指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的「kube-apiserver 关键指标」章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  section: kube-apiserver 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, etcd 关键指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的「etcd 关键指标」章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  section: etcd 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-scheduler 关键指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的「kube-scheduler 关键指标」章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  section: kube-scheduler 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kube-controller-manager 关键指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的「kube-controller-manager 关键指标」章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  section: kube-controller-manager 关键指标
+- type: concept
+  question: 在 07 - 监控和指标表 中, kubelet 关键指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的「kubelet 关键指标」章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  section: kubelet 关键指标
+- type: operation
+  question: '如何执行与 07 - 监控和指标表 相关的操作: kubectl get --raw /metrics?'
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 中的操作步骤。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+  command: kubectl get --raw /metrics
+- type: troubleshooting
+  question: 如何排查 07 - 监控和指标表 相关的故障?
+  answer: 参见 domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md 的故障排查章节。
+  source: domain-06-observability/02-metrics/10-monitoring-metrics-prometheus.md
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, Metrics Server 是什么?
+  answer: 参见 domain-06-observability/02-metrics/11-custom-metrics-adapter.md 的「Metrics Server」章节。
+  source: domain-06-observability/02-metrics/11-custom-metrics-adapter.md
+  section: Metrics Server
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, Prometheus Adapter 是什么?
+  answer: 参见 domain-06-observability/02-metrics/11-custom-metrics-adapter.md 的「Prometheus Adapter」章节。
+  source: domain-06-observability/02-metrics/11-custom-metrics-adapter.md
+  section: Prometheus Adapter
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, Custom Metrics HPA 是什么?
+  answer: 参见 domain-06-observability/02-metrics/11-custom-metrics-adapter.md 的「Custom Metrics HPA」章节。
+  source: domain-06-observability/02-metrics/11-custom-metrics-adapter.md
+  section: Custom Metrics HPA
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, KEDA(Kubernetes Event-driven Autoscaling) 是什么?
+  answer: 参见 domain-06-observability/02-metrics/11-custom-metrics-adapter.md 的「KEDA(Kubernetes Event-driven Autoscaling)」章节。
+  source: domain-06-observability/02-metrics/11-custom-metrics-adapter.md
+  section: KEDA(Kubernetes Event-driven Autoscaling)
+- type: concept
+  question: 在 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension) 中, 应用暴露自定义指标 是什么?
+  answer: 参见 domain-06-observability/02-metrics/11-custom-metrics-adapter.md 的「应用暴露自定义指标」章节。
+  source: domain-06-observability/02-metrics/11-custom-metrics-adapter.md
+  section: 应用暴露自定义指标
+- type: concept
+  question: 在 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md 的「概述」章节。
+  source: domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md
+  section: 概述
+- type: concept
+  question: 在 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices) 中, 大规模监控挑战分析 是什么?
+  answer: 参见 domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md 的「大规模监控挑战分析」章节。
+  source: domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md
+  section: 大规模监控挑战分析
+- type: concept
+  question: 在 16 - 大规模集群监控最佳实践 (Enterprise Scale Monitoring Best Practices) 中, 企业级监控架构设计 是什么?
+  answer: 参见 domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md 的「企业级监控架构设计」章节。
+  source: domain-06-observability/02-metrics/15-enterprise-scale-monitoring.md
+  section: 企业级监控架构设计
+- type: concept
+  question: 在 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md 的「概述」章节。
+  source: domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md
+  section: 概述
+- type: concept
+  question: 在 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中, 多集群监控治理挑战 是什么?
+  answer: 参见 domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md 的「多集群监控治理挑战」章节。
+  source: domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md
+  section: 多集群监控治理挑战
+- type: concept
+  question: 在 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中, 统一监控架构设计 是什么?
+  answer: 参见 domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md 的「统一监控架构设计」章节。
+  source: domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md
+  section: 统一监控架构设计
+- type: troubleshooting
+  question: 如何排查 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 相关的故障?
+  answer: 参见 domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md 的故障排查章节。
+  source: domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md
+- type: comparison
+  question: 20 - 多集群统一监控治理 (Multi-Cluster Unified Monitoring Governance) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md 中的对比分析。
+  source: domain-06-observability/02-metrics/16-multi-cluster-monitoring-governance.md
+- type: concept
+  question: 在 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/02-metrics/17-monitoring-cost-optimization.md 的「概述」章节。
+  source: domain-06-observability/02-metrics/17-monitoring-cost-optimization.md
+  section: 概述
+- type: concept
+  question: 在 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance) 中, 监控成本现状分析 是什么?
+  answer: 参见 domain-06-observability/02-metrics/17-monitoring-cost-optimization.md 的「监控成本现状分析」章节。
+  source: domain-06-observability/02-metrics/17-monitoring-cost-optimization.md
+  section: 监控成本现状分析
+- type: concept
+  question: 在 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance) 中, 成本优化策略框架 是什么?
+  answer: 参见 domain-06-observability/02-metrics/17-monitoring-cost-optimization.md 的「成本优化策略框架」章节。
+  source: domain-06-observability/02-metrics/17-monitoring-cost-optimization.md
+  section: 成本优化策略框架
+- type: comparison
+  question: 21 - 监控成本优化与治理 (Monitoring Cost Optimization & Governance) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/02-metrics/17-monitoring-cost-optimization.md 中的对比分析。
+  source: domain-06-observability/02-metrics/17-monitoring-cost-optimization.md
+- type: concept
+  question: 在 Prometheus 企业级监控部署指南 中, 目录 是什么?
+  answer: 参见 domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md 的「目录」章节。
+  source: domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md
+  section: 目录
+- type: concept
+  question: 在 Prometheus 企业级监控部署指南 中, 架构设计 是什么?
+  answer: 参见 domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md 的「架构设计」章节。
+  source: domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md
+  section: 架构设计
+- type: concept
+  question: 在 Prometheus 企业级监控部署指南 中, Helm 部署 是什么?
+  answer: 参见 domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md 的「Helm 部署」章节。
+  source: domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md
+  section: Helm 部署
+- type: operation
+  question: '如何执行与 Prometheus 企业级监控部署指南 相关的操作: helm repo add prometheus-community https://prometheus-commun?'
+  answer: 参见 domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md 中的操作步骤。
+  source: domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md
+  command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+- type: concept
+  question: 在 ELK Stack企业级日志管理系统深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/01-elk-stack-enterprise-logging.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/01-elk-stack-enterprise-logging.md
+  section: See Also
+- type: concept
+  question: 在 Fluentd企业级日志收集与处理深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/02-fluentd-enterprise-log-processing.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/02-fluentd-enterprise-log-processing.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Fluentd企业级日志收集与处理深度实践 相关的故障?
+  answer: 参见 domain-06-observability/03-logging/02-fluentd-enterprise-log-processing.md 的故障排查章节。
+  source: domain-06-observability/03-logging/02-fluentd-enterprise-log-processing.md
+- type: concept
+  question: 在 03 - 日志收集架构详解 (Logging Architecture) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/03-logging/03-logging-architecture.md 的「概述」章节。
+  source: domain-06-observability/03-logging/03-logging-architecture.md
+  section: 概述
+- type: concept
+  question: 在 03 - 日志收集架构详解 (Logging Architecture) 中, 日志架构设计 是什么?
+  answer: 参见 domain-06-observability/03-logging/03-logging-architecture.md 的「日志架构设计」章节。
+  source: domain-06-observability/03-logging/03-logging-architecture.md
+  section: 日志架构设计
+- type: concept
+  question: 在 03 - 日志收集架构详解 (Logging Architecture) 中, 日志组件选型 是什么?
+  answer: 参见 domain-06-observability/03-logging/03-logging-architecture.md 的「日志组件选型」章节。
+  source: domain-06-observability/03-logging/03-logging-architecture.md
+  section: 日志组件选型
+- type: comparison
+  question: 03 - 日志收集架构详解 (Logging Architecture) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/03-logging/03-logging-architecture.md 中的对比分析。
+  source: domain-06-observability/03-logging/03-logging-architecture.md
+- type: concept
+  question: 在 Loki Enterprise Log Aggregation and Analytics Platform 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/03-loki-enterprise-log-aggregation.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/03-loki-enterprise-log-aggregation.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Loki Enterprise Log Aggregation and Analytics Platform 相关的故障?
+  answer: 参见 domain-06-observability/03-logging/03-loki-enterprise-log-aggregation.md 的故障排查章节。
+  source: domain-06-observability/03-logging/03-loki-enterprise-log-aggregation.md
+- type: concept
+  question: 在 企业级日志治理与合规审计深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/04-enterprise-log-governance-compliance.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/04-enterprise-log-governance-compliance.md
+  section: See Also
+- type: concept
+  question: 在 Graylog 企业级日志管理平台深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/04-graylog-enterprise-logging.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/04-graylog-enterprise-logging.md
+  section: See Also
+- type: concept
+  question: 在 Splunk企业级日志分析与安全智能平台深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/04-splunk-enterprise-siem.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/04-splunk-enterprise-siem.md
+  section: See Also
+- type: comparison
+  question: Splunk企业级日志分析与安全智能平台深度实践 中有哪些技术对比?
+  answer: 参见 domain-06-observability/03-logging/04-splunk-enterprise-siem.md 中的对比分析。
+  source: domain-06-observability/03-logging/04-splunk-enterprise-siem.md
+- type: concept
+  question: 在 05-日志收集分析平台 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/05-logging-collection-analysis-platform.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/05-logging-collection-analysis-platform.md
+  section: See Also
+- type: concept
+  question: 在 企业级实时日志分析与业务洞察深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/05-real-time-analytics-business-insights.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/05-real-time-analytics-business-insights.md
+  section: See Also
+- type: concept
+  question: 在 Splunk Enterprise Log Analytics Platform 深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Splunk Enterprise Log Analytics Platform 深度实践 相关的操作: wget -O splunkforwarder.rpm "https://download.splunk.com/pro?'
+  answer: 参见 domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md 中的操作步骤。
+  source: domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md
+  command: wget -O splunkforwarder.rpm "https://download.splunk.com/products/universalforwarder/releases/9.0.4/
+- type: operation
+  question: '如何执行与 Splunk Enterprise Log Analytics Platform 深度实践 相关的操作: curl -k -u admin:password https://splunk-indexer:8089/servic?'
+  answer: 参见 domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md 中的操作步骤。
+  source: domain-06-observability/03-logging/05-splunk-enterprise-log-analytics.md
+  command: curl -k -u admin:password https://splunk-indexer:8089/servicesNS/nobody/search/data/inputs/http \
+- type: concept
+  question: 在 Elastic Stack企业级日志分析深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/06-elastic-stack-enterprise-logging.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/06-elastic-stack-enterprise-logging.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Elastic Stack企业级日志分析深度实践 相关的故障?
+  answer: 参见 domain-06-observability/03-logging/06-elastic-stack-enterprise-logging.md 的故障排查章节。
+  source: domain-06-observability/03-logging/06-elastic-stack-enterprise-logging.md
+- type: concept
+  question: 在 Loggly Cloud Log Management Platform 深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/03-logging/06-loggly-cloud-log-management.md 的「See Also」章节。
+  source: domain-06-observability/03-logging/06-loggly-cloud-log-management.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Loggly Cloud Log Management Platform 深度实践 相关的操作: sudo yum install -y rsyslog rsyslog-gnutls?'
+  answer: 参见 domain-06-observability/03-logging/06-loggly-cloud-log-management.md 中的操作步骤。
+  source: domain-06-observability/03-logging/06-loggly-cloud-log-management.md
+  command: sudo yum install -y rsyslog rsyslog-gnutls
+- type: concept
+  question: 在 08 - 日志审计与合规管理 (Logging Auditing & Compliance) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/03-logging/08-logging-audit-compliance.md 的「概述」章节。
+  source: domain-06-observability/03-logging/08-logging-audit-compliance.md
+  section: 概述
+- type: concept
+  question: 在 08 - 日志审计与合规管理 (Logging Auditing & Compliance) 中, 日志审计架构设计 是什么?
+  answer: 参见 domain-06-observability/03-logging/08-logging-audit-compliance.md 的「日志审计架构设计」章节。
+  source: domain-06-observability/03-logging/08-logging-audit-compliance.md
+  section: 日志审计架构设计
+- type: concept
+  question: 在 08 - 日志审计与合规管理 (Logging Auditing & Compliance) 中, 合规性框架映射 是什么?
+  answer: 参见 domain-06-observability/03-logging/08-logging-audit-compliance.md 的「合规性框架映射」章节。
+  source: domain-06-observability/03-logging/08-logging-audit-compliance.md
+  section: 合规性框架映射
+- type: concept
+  question: 在 05 - 事件与审计日志管理 (Events & Audit Logs) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/03-logging/09-events-audit-logs.md 的「概述」章节。
+  source: domain-06-observability/03-logging/09-events-audit-logs.md
+  section: 概述
+- type: concept
+  question: 在 05 - 事件与审计日志管理 (Events & Audit Logs) 中, Kubernetes 事件体系 是什么?
+  answer: 参见 domain-06-observability/03-logging/09-events-audit-logs.md 的「Kubernetes 事件体系」章节。
+  source: domain-06-observability/03-logging/09-events-audit-logs.md
+  section: Kubernetes 事件体系
+- type: concept
+  question: 在 05 - 事件与审计日志管理 (Events & Audit Logs) 中, 审计日志体系 是什么?
+  answer: 参见 domain-06-observability/03-logging/09-events-audit-logs.md 的「审计日志体系」章节。
+  source: domain-06-observability/03-logging/09-events-audit-logs.md
+  section: 审计日志体系
+- type: troubleshooting
+  question: 如何排查 05 - 事件与审计日志管理 (Events & Audit Logs) 相关的故障?
+  answer: 参见 domain-06-observability/03-logging/09-events-audit-logs.md 的故障排查章节。
+  source: domain-06-observability/03-logging/09-events-audit-logs.md
+- type: concept
+  question: 在 17 - 日志和审计表 中, 日志架构模式 是什么?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 的「日志架构模式」章节。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  section: 日志架构模式
+- type: concept
+  question: 在 17 - 日志和审计表 中, 日志组件对比 是什么?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 的「日志组件对比」章节。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  section: 日志组件对比
+- type: concept
+  question: 在 17 - 日志和审计表 中, 容器日志配置 是什么?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 的「容器日志配置」章节。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  section: 容器日志配置
+- type: concept
+  question: 在 17 - 日志和审计表 中, Kubernetes审计日志 是什么?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 的「Kubernetes审计日志」章节。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  section: Kubernetes审计日志
+- type: concept
+  question: 在 17 - 日志和审计表 中, 审计策略配置 是什么?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 的「审计策略配置」章节。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  section: 审计策略配置
+- type: operation
+  question: '如何执行与 17 - 日志和审计表 相关的操作: --audit-log-path=/var/log/kubernetes/audit.log?'
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 中的操作步骤。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+  command: --audit-log-path=/var/log/kubernetes/audit.log
+- type: comparison
+  question: 17 - 日志和审计表 中有哪些技术对比?
+  answer: 参见 domain-06-observability/03-logging/12-logging-auditing.md 中的对比分析。
+  source: domain-06-observability/03-logging/12-logging-auditing.md
+- type: concept
+  question: 在 OpenTelemetry分布式追踪与可观测性深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/04-tracing/03-opentelemetry-distributed-tracing.md 的「See Also」章节。
+  source: domain-06-observability/04-tracing/03-opentelemetry-distributed-tracing.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 OpenTelemetry分布式追踪与可观测性深度实践 相关的故障?
+  answer: 参见 domain-06-observability/04-tracing/03-opentelemetry-distributed-tracing.md 的故障排查章节。
+  source: domain-06-observability/04-tracing/03-opentelemetry-distributed-tracing.md
+- type: concept
+  question: 在 分布式追踪体系 中, 概述 是什么?
+  answer: 参见 domain-06-observability/04-tracing/04-distributed-tracing.md 的「概述」章节。
+  source: domain-06-observability/04-tracing/04-distributed-tracing.md
+  section: 概述
+- type: concept
+  question: 在 分布式追踪体系 中, 分布式追踪基础概念 是什么?
+  answer: 参见 domain-06-observability/04-tracing/04-distributed-tracing.md 的「分布式追踪基础概念」章节。
+  source: domain-06-observability/04-tracing/04-distributed-tracing.md
+  section: 分布式追踪基础概念
+- type: concept
+  question: 在 分布式追踪体系 中, OpenTelemetry 标准体系 是什么?
+  answer: 参见 domain-06-observability/04-tracing/04-distributed-tracing.md 的「OpenTelemetry 标准体系」章节。
+  source: domain-06-observability/04-tracing/04-distributed-tracing.md
+  section: OpenTelemetry 标准体系
+- type: comparison
+  question: 分布式追踪体系 中有哪些技术对比?
+  answer: 参见 domain-06-observability/04-tracing/04-distributed-tracing.md 中的对比分析。
+  source: domain-06-observability/04-tracing/04-distributed-tracing.md
+- type: concept
+  question: 在 K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) 中, See Also 是什么?
+  answer: 参见 domain-06-observability/04-tracing/99-distributed-tracing-guide.md 的「See Also」章节。
+  source: domain-06-observability/04-tracing/99-distributed-tracing-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) 相关的操作: helm repo add open-telemetry https://open-telemetry.github.i?'
+  answer: 参见 domain-06-observability/04-tracing/99-distributed-tracing-guide.md 中的操作步骤。
+  source: domain-06-observability/04-tracing/99-distributed-tracing-guide.md
+  command: helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+- type: operation
+  question: '如何执行与 K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) 相关的操作: helm repo add jaegertracing https://jaegertracing.github.io/?'
+  answer: 参见 domain-06-observability/04-tracing/99-distributed-tracing-guide.md 中的操作步骤。
+  source: domain-06-observability/04-tracing/99-distributed-tracing-guide.md
+  command: helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+- type: comparison
+  question: K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/04-tracing/99-distributed-tracing-guide.md 中的对比分析。
+  source: domain-06-observability/04-tracing/99-distributed-tracing-guide.md
+- type: concept
+  question: 在 05 - 告警管理策略 (Alerting Management) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/05-alerting/05-alerting-management.md 的「概述」章节。
+  source: domain-06-observability/05-alerting/05-alerting-management.md
+  section: 概述
+- type: concept
+  question: 在 05 - 告警管理策略 (Alerting Management) 中, 告警策略设计原则 是什么?
+  answer: 参见 domain-06-observability/05-alerting/05-alerting-management.md 的「告警策略设计原则」章节。
+  source: domain-06-observability/05-alerting/05-alerting-management.md
+  section: 告警策略设计原则
+- type: concept
+  question: 在 05 - 告警管理策略 (Alerting Management) 中, Prometheus告警规则 是什么?
+  answer: 参见 domain-06-observability/05-alerting/05-alerting-management.md 的「Prometheus告警规则」章节。
+  source: domain-06-observability/05-alerting/05-alerting-management.md
+  section: Prometheus告警规则
+- type: concept
+  question: 在 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/05-alerting/06-monitoring-alerting-practice.md 的「概述」章节。
+  source: domain-06-observability/05-alerting/06-monitoring-alerting-practice.md
+  section: 概述
+- type: concept
+  question: 在 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice) 中, 告警规则设计实战 是什么?
+  answer: 参见 domain-06-observability/05-alerting/06-monitoring-alerting-practice.md 的「告警规则设计实战」章节。
+  source: domain-06-observability/05-alerting/06-monitoring-alerting-practice.md
+  section: 告警规则设计实战
+- type: concept
+  question: 在 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice) 中, 多租户告警管理 是什么?
+  answer: 参见 domain-06-observability/05-alerting/06-monitoring-alerting-practice.md 的「多租户告警管理」章节。
+  source: domain-06-observability/05-alerting/06-monitoring-alerting-practice.md
+  section: 多租户告警管理
+- type: concept
+  question: 在 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/05-alerting/21-monitoring-playbooks.md 的「概述」章节。
+  source: domain-06-observability/05-alerting/21-monitoring-playbooks.md
+  section: 概述
+- type: concept
+  question: 在 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response) 中, 监控系统日常运维手册 是什么?
+  answer: 参见 domain-06-observability/05-alerting/21-monitoring-playbooks.md 的「监控系统日常运维手册」章节。
+  source: domain-06-observability/05-alerting/21-monitoring-playbooks.md
+  section: 监控系统日常运维手册
+- type: concept
+  question: 在 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response) 中, 常见故障应急响应 是什么?
+  answer: 参见 domain-06-observability/05-alerting/21-monitoring-playbooks.md 的「常见故障应急响应」章节。
+  source: domain-06-observability/05-alerting/21-monitoring-playbooks.md
+  section: 常见故障应急响应
+- type: troubleshooting
+  question: 如何排查 24 - 监控运维手册与应急响应 (Monitoring Playbooks & Incident Response) 相关的故障?
+  answer: 参见 domain-06-observability/05-alerting/21-monitoring-playbooks.md 的故障排查章节。
+  source: domain-06-observability/05-alerting/21-monitoring-playbooks.md
+- type: concept
+  question: 在 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management) 中, 概述 是什么?
+  answer: 参见 domain-06-observability/06-slo-sli/18-slo-sli-system.md 的「概述」章节。
+  source: domain-06-observability/06-slo-sli/18-slo-sli-system.md
+  section: 概述
+- type: concept
+  question: 在 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management) 中, SLO/SLI基础理论 是什么?
+  answer: 参见 domain-06-observability/06-slo-sli/18-slo-sli-system.md 的「SLO/SLI基础理论」章节。
+  source: domain-06-observability/06-slo-sli/18-slo-sli-system.md
+  section: SLO/SLI基础理论
+- type: concept
+  question: 在 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management) 中, SLO/SLI体系设计 是什么?
+  answer: 参见 domain-06-observability/06-slo-sli/18-slo-sli-system.md 的「SLO/SLI体系设计」章节。
+  source: domain-06-observability/06-slo-sli/18-slo-sli-system.md
+  section: SLO/SLI体系设计
+- type: comparison
+  question: 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/06-slo-sli/18-slo-sli-system.md 中的对比分析。
+  source: domain-06-observability/06-slo-sli/18-slo-sli-system.md
+- type: concept
+  question: 在 Grafana Enterprise Observability Platform 深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/07-tools/02-grafana-enterprise-observability.md 的「See Also」章节。
+  source: domain-06-observability/07-tools/02-grafana-enterprise-observability.md
+  section: See Also
+- type: concept
+  question: 在 Datadog企业级APM深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/07-tools/05-datadog-enterprise-apm.md 的「See Also」章节。
+  source: domain-06-observability/07-tools/05-datadog-enterprise-apm.md
+  section: See Also
+- type: concept
+  question: 在 Datadog 企业级监控平台深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/07-tools/05-datadog-enterprise-monitoring.md 的「See Also」章节。
+  source: domain-06-observability/07-tools/05-datadog-enterprise-monitoring.md
+  section: See Also
+- type: concept
+  question: 在 Zabbix Enterprise Monitoring Platform 深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md 的「See Also」章节。
+  source: domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Zabbix Enterprise Monitoring Platform 深度实践 相关的操作: yum install -y zabbix-proxy-mysql zabbix-sql-scripts?'
+  answer: 参见 domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md 中的操作步骤。
+  source: domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md
+  command: yum install -y zabbix-proxy-mysql zabbix-sql-scripts
+- type: troubleshooting
+  question: 如何排查 Zabbix Enterprise Monitoring Platform 深度实践 相关的故障?
+  answer: 参见 domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md 的故障排查章节。
+  source: domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md
+- type: concept
+  question: 在 New Relic Enterprise APM Platform 深度实践 中, See Also 是什么?
+  answer: 参见 domain-06-observability/07-tools/08-new-relic-enterprise-apm.md 的「See Also」章节。
+  source: domain-06-observability/07-tools/08-new-relic-enterprise-apm.md
+  section: See Also
+- type: concept
+  question: 在 100 - 故障排查增强工具 中, 故障排查工具体系 是什么?
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 的「故障排查工具体系」章节。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+  section: 故障排查工具体系
+- type: concept
+  question: 在 100 - 故障排查增强工具 中, K9s高效运维 是什么?
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 的「K9s高效运维」章节。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+  section: K9s高效运维
+- type: operation
+  question: '如何执行与 100 - 故障排查增强工具 相关的操作: brew install derailed/k9s/k9s?'
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 中的操作步骤。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+  command: brew install derailed/k9s/k9s
+- type: operation
+  question: '如何执行与 100 - 故障排查增强工具 相关的操作: kubectl run netshoot --rm -it \?'
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 中的操作步骤。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+  command: kubectl run netshoot --rm -it \
+- type: troubleshooting
+  question: 如何排查 100 - 故障排查增强工具 相关的故障?
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 的故障排查章节。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+- type: comparison
+  question: 100 - 故障排查增强工具 中有哪些技术对比?
+  answer: 参见 domain-06-observability/07-tools/26-troubleshooting-tools.md 中的对比分析。
+  source: domain-06-observability/07-tools/26-troubleshooting-tools.md
+- type: concept
+  question: 在 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中, 性能分析工具生态架构 是什么?
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 的「性能分析工具生态架构」章节。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+  section: 性能分析工具生态架构
+- type: concept
+  question: 在 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中, 性能分析工具全景对比矩阵 是什么?
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 的「性能分析工具全景对比矩阵」章节。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+  section: 性能分析工具全景对比矩阵
+- type: concept
+  question: 在 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中, Inspektor Gadget eBPF 分析平台 是什么?
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 的「Inspektor Gadget eBPF 分析平台」章节。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+  section: Inspektor Gadget eBPF 分析平台
+- type: operation
+  question: '如何执行与 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 相关的操作: kubectl krew install gadget?'
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 中的操作步骤。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+  command: kubectl krew install gadget
+- type: best_practice
+  question: 关于 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools), 有什么最佳实践?
+  answer: 1) 检查 pprof CPU profile 2) 考虑水平扩容"
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+- type: best_practice
+  question: 关于 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools), 有什么最佳实践?
+  answer: 1) 检查 pprof heap profile 2) 检查是否存在内存泄漏"
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+- type: troubleshooting
+  question: 如何排查 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 相关的故障?
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 的故障排查章节。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+- type: comparison
+  question: 12 - 性能分析与调优工具 (Performance Profiling & Optimization Tools) 中有哪些技术对比?
+  answer: 参见 domain-06-observability/07-tools/27-performance-profiling-tools.md 中的对比分析。
+  source: domain-06-observability/07-tools/27-performance-profiling-tools.md
+- type: concept
+  question: 在 Domain-20 企业监控与告警 — 开源项目索引 中, 目录 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md 的「目录」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md
+  section: 目录
+- type: concept
+  question: 在 Domain-20 企业监控与告警 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md 的「核心项目总览」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md
+  section: 核心项目总览
+- type: concept
+  question: 在 Domain-20 企业监控与告警 — 开源项目索引 中, Prometheus 生态详解 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md 的「Prometheus 生态详解」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md
+  section: Prometheus 生态详解
+- type: troubleshooting
+  question: 如何排查 Domain-20 企业监控与告警 — 开源项目索引 相关的故障?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md 的故障排查章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md
+- type: concept
+  question: 在 Domain-21 日志管理与分析 — 开源项目索引 中, 目录 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md 的「目录」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md
+  section: 目录
+- type: concept
+  question: 在 Domain-21 日志管理与分析 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md 的「核心项目总览」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md
+  section: 核心项目总览
+- type: concept
+  question: '在 Domain-21 日志管理与分析 — 开源项目索引 中, CNCF Graduated: Fluentd 是什么?'
+  answer: '参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md 的「CNCF Graduated:
+    Fluentd」章节。'
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md
+  section: 'CNCF Graduated: Fluentd'
+- type: concept
+  question: 在 Domain-8 可观测性 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md 的「核心项目」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-8 可观测性 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md 的「参考链接」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-8 可观测性 — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md 的「Obsidian 相关文档」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 Domain-8 可观测性 — 开源项目索引 中, See Also 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md 的「See Also」章节。
+  source: domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md
+  section: See Also
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量评估报告 中, 项目概况 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md 的「项目概况」章节。
+  source: domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md
+  section: 项目概况
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量评估报告 中, 增强成果总览 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md 的「增强成果总览」章节。
+  source: domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md
+  section: 增强成果总览
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量评估报告 中, 新增高质量文档详情 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md 的「新增高质量文档详情」章节。
+  source: domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md
+  section: 新增高质量文档详情
+- type: comparison
+  question: Domain-8 可观测性领域最终质量评估报告 中有哪些技术对比?
+  answer: 参见 domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md 中的对比分析。
+  source: domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md
+- type: concept
+  question: 在 domain-20-enterprise-monitoring-alerting MOC 中, 领域概述 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-20.md 的「领域概述」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-20.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-20-enterprise-monitoring-alerting MOC 中, 文档清单 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-20.md 的「文档清单」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-20.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-20-enterprise-monitoring-alerting MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-20.md 的「知识图谱」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-20.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-20-enterprise-monitoring-alerting MOC 中, 关联入口 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-20.md 的「关联入口」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-20.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-20-enterprise-monitoring-alerting MOC 相关的故障?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-20.md 的故障排查章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-20.md
+- type: concept
+  question: 在 domain-21-logging-management-analytics MOC 中, 领域概述 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-21.md 的「领域概述」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-21.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-21-logging-management-analytics MOC 中, 文档清单 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-21.md 的「文档清单」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-21.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-21-logging-management-analytics MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-21.md 的「知识图谱」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-21.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-21-logging-management-analytics MOC 中, 关联入口 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-21.md 的「关联入口」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-21.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-21-logging-management-analytics MOC 相关的故障?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-21.md 的故障排查章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-21.md
+- type: concept
+  question: 在 domain-8-observability MOC 中, 领域概述 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-8.md 的「领域概述」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-8.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-8-observability MOC 中, 文档清单 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-8.md 的「文档清单」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-8.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-8-observability MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-8.md 的「知识图谱」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-8.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-8-observability MOC 中, 关联入口 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-8.md 的「关联入口」章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-8.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-8-observability MOC 相关的故障?
+  answer: 参见 domain-06-observability/98-merged-indexes/MOC-from-domain-8.md 的故障排查章节。
+  source: domain-06-observability/98-merged-indexes/MOC-from-domain-8.md
+- type: concept
+  question: 在 Domain-8 可观测性领域查漏补缺质量报告 中, 项目概况 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/QUALITY-REPORT.md 的「项目概况」章节。
+  source: domain-06-observability/98-merged-indexes/QUALITY-REPORT.md
+  section: 项目概况
+- type: concept
+  question: 在 Domain-8 可观测性领域查漏补缺质量报告 中, 主要增强内容 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/QUALITY-REPORT.md 的「主要增强内容」章节。
+  source: domain-06-observability/98-merged-indexes/QUALITY-REPORT.md
+  section: 主要增强内容
+- type: concept
+  question: 在 Domain-8 可观测性领域查漏补缺质量报告 中, ✅ 质量验证结果 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/QUALITY-REPORT.md 的「✅ 质量验证结果」章节。
+  source: domain-06-observability/98-merged-indexes/QUALITY-REPORT.md
+  section: ✅ 质量验证结果
+- type: concept
+  question: '在 Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting) 中, 领域概述 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-20.md 的「领域概述」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-20.md
+  section: 领域概述
+- type: concept
+  question: '在 Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting) 中, 文档目录 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-20.md 的「文档目录」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-20.md
+  section: 文档目录
+- type: concept
+  question: '在 Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting) 中, 学习路径建议 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-20.md 的「学习路径建议」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-20.md
+  section: 学习路径建议
+- type: concept
+  question: '在 Domain 21: 日志管理与分析 (Logging Management & Analytics) 中, 领域概述 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-21.md 的「领域概述」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-21.md
+  section: 领域概述
+- type: concept
+  question: '在 Domain 21: 日志管理与分析 (Logging Management & Analytics) 中, 文档目录 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-21.md 的「文档目录」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-21.md
+  section: 文档目录
+- type: concept
+  question: '在 Domain 21: 日志管理与分析 (Logging Management & Analytics) 中, 学习路径建议 是什么?'
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-21.md 的「学习路径建议」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-21.md
+  section: 学习路径建议
+- type: concept
+  question: 在 Observability Domain (可观测性领域) 中, 文档结构概览 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/README-from-domain-8.md 的「文档结构概览」章节。
+  source: domain-06-observability/98-merged-indexes/README-from-domain-8.md
+  section: 文档结构概览
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量报告 (2026年2月更新版) 中, 项目概况 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md 的「项目概况」章节。
+  source: domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md
+  section: 项目概况
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量报告 (2026年2月更新版) 中, 最新增强成果 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md 的「最新增强成果」章节。
+  source: domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md
+  section: 最新增强成果
+- type: concept
+  question: 在 Domain-8 可观测性领域最终质量报告 (2026年2月更新版) 中, 核心文档质量提升 是什么?
+  answer: 参见 domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md 的「核心文档质量提升」章节。
+  source: domain-06-observability/98-merged-indexes/UPDATED-QUALITY-REPORT.md
+  section: 核心文档质量提升

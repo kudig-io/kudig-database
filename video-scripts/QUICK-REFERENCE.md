@@ -19,6 +19,8 @@ intent_queries:
 - 如何 数字人视频快速参考
 trigger_keywords:
 - 数字人视频快速参考
+prerequisites:
+- kubectl-basics
 ---
 
 # 数字人视频快速参考
@@ -33,7 +35,7 @@ python3 scripts/video-content-generator.py --type skill --list
 python3 scripts/video-content-generator.py --type fta --list
 
 # 生成视频脚本
-python3 scripts/video-content-generator.py --type skill --topic pod-crashloop -o video-scripts/pod-crashloop.md
+python3 scripts/video-content-generator.py --type skill --topic [[concepts/pod-lifecycle|pod]]-crashloop -o video-scripts/pod-crashloop.md
 python3 scripts/video-content-generator.py --type fta --topic pod-fta -o video-scripts/pod-fta.md
 
 # ===== 生成视频 =====

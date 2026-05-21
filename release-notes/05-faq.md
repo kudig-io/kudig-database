@@ -1,10 +1,37 @@
+---
+title: 发布会 FAQ
+description: '**A**: K8s 官方文档是 API 参考和功能说明。kudig-database 是**生产运维实战知识**, 包含:'
+category: general
+tags:
+- k8s
+- etcd
+- ingress
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 发布会 FAQ 是什么
+- 如何 发布会 FAQ
+trigger_keywords:
+- 发布会
+- FAQ
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # 发布会 FAQ
 
 > 常见问题与标准回答
 
 ---
 
-## Q1: kudig-database 和 K8s 官方文档有什么区别?
+## Q1: kudig-database 和 [[entities/kubernetes|k8s]] 官方文档有什么区别?
 
 **A**: K8s 官方文档是 API 参考和功能说明。kudig-database 是**生产运维实战知识**, 包含:
 - 97 个行业架构方案 (官方文档没有)

@@ -28,14 +28,17 @@ trigger_keywords:
 - AI
 - ML
 - 工作负载故障排查指南
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- gpu-scheduling-basics
 ---
-
 
 # AI/ML 工作负载故障排查指南
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: AI/ML 工作负载在 Kubernetes 上的故障排查指南
+> **用途**: AI/ML 工作负载在 [[entities/kubernetes|kubernetes]] 上的故障排查指南
 > **覆盖**: 分布式训练 (MPI/NCCL)、模型服务 (KServe/Triton)、数据处理 (Spark/Flink)
 
 ---
@@ -311,6 +314,6 @@ kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded\|err
 ---
 
 **关联文档**:
-- [domain-11-ai-infra/](../domain-11-ai-infra/) — AI 基础设施完整文档
-- [domain-12-troubleshooting/](../domain-12-troubleshooting/) — K8s 通用故障排查
-- [topic-skills/](../topic-skills/) — 通用运维 Skill
+- [domain-14-ai-ml-infra/](../domain-14-ai-ml-infra/) — AI 基础设施完整文档
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用故障排查
+- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill

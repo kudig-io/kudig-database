@@ -18,6 +18,8 @@ trigger_keywords:
 - Gitbook
 - ZIP
 - 解压问题诊断与解决方案
+prerequisites:
+- kubectl-basics
 ---
 
 # KUDIG Gitbook ZIP 解压问题诊断与解决方案
@@ -41,7 +43,7 @@ warning: kudig-gitbook-xxx.zip appears to use backslashes as path separators
 
 **原因**：
 - ZIP 文件在 Windows 系统上创建，使用了反斜杠 `\` 作为路径分隔符
-- macOS/Linux 系统期望使用正斜杠 `/`
+- macOS/[[entities/linux|linux]] 系统期望使用正斜杠 `/`
 
 **影响**：
 - ⚠️ 这只是警告，**不影响解压成功**

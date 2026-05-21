@@ -26,8 +26,11 @@ trigger_keywords:
 - 决策树
 - Mermaid
 - 可视化规范与实例
+prerequisites:
+- kubectl-basics
+- cni-basics
+- etcd-basics
 ---
-
 
 # P1-4 决策树 Mermaid 可视化规范与实例
 
@@ -335,7 +338,7 @@ flowchart TD
     IE2 --> IE2_B["iptables/ipvs 规则错误"]
     IE2 --> IE2_C["网络命名空间问题"]
     
-    DS3["📋 执行: kubectl exec ${POD} -- nslookup kubernetes.default<br/>测试集群 DNS 解析"]
+    DS3["📋 执行: kubectl exec ${POD} -- nslookup [[entities/kubernetes|kubernetes]].default<br/>测试集群 DNS 解析"]
     IE2 --> DS3
     
     DS4["📋 执行: kubectl exec ${POD} -- ping ${TARGET_POD_IP}<br/>测试 Pod 间直接通信"]
@@ -497,4 +500,4 @@ markdown_extensions:
 
 ---
 
-**下一步行动**: 在 domain-12-troubleshooting 目录下所有文档中应用此规范，将现有故障排查流程转换为 Mermaid 决策树格式。
+**下一步行动**: 在 domain-10-troubleshooting-diagnostics 目录下所有文档中应用此规范，将现有故障排查流程转换为 Mermaid 决策树格式。

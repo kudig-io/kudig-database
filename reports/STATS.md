@@ -16,6 +16,8 @@ intent_queries:
 trigger_keywords:
 - KUDIG-DATABASE
 - 项目统计报告
+prerequisites:
+- kubectl-basics
 ---
 
 # KUDIG-DATABASE 项目统计报告
@@ -36,7 +38,7 @@ trigger_keywords:
 
 - **文件总数**: 项目中所有 `.md` 文件数量
 - **总字数**: 所有 Markdown 文件的字符总数
-- **产品总数**: 涉及的开源产品/组件数量，来源于 `topic-fta/list/` 目录下的组件级故障树文件
+- **产品总数**: 涉及的开源产品/组件数量，来源于 `domain-10-troubleshooting-diagnostics/topic-fta/list/` 目录下的组件级故障树文件
 - **知识领域数**: `domain-*` + `topic-*` 目录的总数
 - **知识点总数**: 各知识领域目录下的 `.md` 文件数量
 

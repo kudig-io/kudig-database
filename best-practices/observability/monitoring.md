@@ -8,6 +8,11 @@ tags:
 - prometheus
 - grafana
 - alerting
+- etcd
+- kubelet
+- helm
+- ingress
+- operator
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,13 +30,19 @@ trigger_keywords:
 - 监控
 - Prometheus
 - 告警
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
 cross_refs:
 - type: domain
-  path: ../../domain-8-observability/
-  label: '可观测性知识域'
+  path: ../../domain-06-observability/
+  label: 可观测性知识域
 - type: domain
-  path: ../../domain-20-enterprise-monitoring-alerting/
-  label: '企业监控知识域'
+  path: ../../domain-06-observability/
+  label: 企业监控知识域
 ---
 
 # Kubernetes 监控最佳实践

@@ -20,6 +20,9 @@ intent_queries:
 trigger_keywords:
 - GitBook
 - 三级目录构建完成总结
+prerequisites:
+- kubectl-basics
+- etcd-basics
 ---
 
 # GitBook 三级目录构建完成总结
@@ -126,7 +129,7 @@ function Process-DirectoryRecursive {
     }
     
     # 处理当前目录
-    # - README.md (一级标题)
+    # - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md (一级标题)
     # - *.md 文件 (二级标题)
     # - 子目录 (递归处理,三级标题)
 }

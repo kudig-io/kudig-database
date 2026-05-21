@@ -1,6 +1,6 @@
 Kubernetes 的架构并非"一堆组件拼凑在一起"——它是一个基于**声明式 API 驱动的闭环控制系统**，以 API Server 为唯一状态入口、以 etcd 为唯一持久化后端、以控制器模式为核心调谐逻辑，将控制平面与数据平面严格分离。本文将从宏观架构到组件内部机制，系统性地拆解 Kubernetes 的核心设计，帮助中级开发者建立准确的架构心智模型，避免在排障和二次开发时"只见树木不见森林"。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L1-L17), [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L1-L22)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L1-L17), [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L1-L22)
 
 ---
 
@@ -20,7 +20,7 @@ Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamen
 
 这个分层模型的一个重要推论是：**任何请求都必须从 Layer 2 进入**。无论是 kubectl 命令、控制器调谐、还是 kubelet 状态上报，所有组件间的交互都以 API Server 为中枢——Scheduler 不直接与 kubelet 通信，Controller Manager 也不直接读写 etcd。这种"星型拓扑"让每个组件只依赖 API Server 一个接口，实现了真正的松耦合。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L162-L173)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L162-L173)
 
 ---
 
@@ -88,7 +88,7 @@ graph TB
 
 一个关键的生产实践是：当集群整体不可用时，**首先检查 etcd 健康**（`etcdctl endpoint health`），然后检查 API Server（`curl -k https://localhost:6443/healthz`），沿着依赖链逐级排查。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L76-L88), [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L20-L80)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L76-L88), [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L20-L80)
 
 ---
 
@@ -124,7 +124,7 @@ API Server 支持多种认证方式，生产环境通常组合使用：
 
 生产环境**必须避免**使用静态 Token 文件（`--token-auth-file`），因其凭据明文存储且无法轮转。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L153-L163)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L153-L163)
 
 ### 授权（AuthZ）：你能做什么？
 
@@ -137,7 +137,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 
 生产环境推荐配置 `--authorization-mode=Node,RBAC`。Node 授权器确保 kubelet 只能访问绑定到自己节点的资源，是安全纵深防御的关键一环。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L188-L196)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L188-L196)
 
 ### 准入控制（Admission）：请求的最后一道关卡
 
@@ -153,7 +153,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 
 `ValidatingAdmissionPolicy` 是一个值得关注的演进方向：它用 CEL（Common Expression Language）表达式在 API Server 内部执行验证，**无需部署外部 Webhook 服务**，大幅降低了策略执行的延迟和运维复杂度。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L227-L238)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L227-L238)
 
 ### API 优先级与公平性（APF）
 
@@ -164,7 +164,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 
 关键配置 `--enable-priority-and-fairness=true`（默认开启）在高并发场景下至关重要，确保系统组件的请求不会被业务流量"饿死"。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L272-L312)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L272-L312)
 
 ### 关键监控指标
 
@@ -177,7 +177,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 | `apiserver_request_total` | 请求总数（按 code） | 5xx > 1% |
 | `etcd_request_duration_seconds` | etcd 请求延迟 | P99 > 500ms |
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L373-L382)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L373-L382)
 
 ---
 
@@ -198,7 +198,7 @@ etcd 使用 Raft 协议保证分布式一致性。Raft 的核心规则是：**�
 
 **生产实践中最常见的错误**：将 etcd 部署为 2 节点或 4 节点（偶数）。偶数节点并不增加容错能力（3 节点和 4 节点都只能容忍 1 节点故障），反而增加了写延迟（需要更多节点确认）。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L268-L320), [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L385-L428)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L268-L320), [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L385-L428)
 
 ### MVCC 与 Watch：资源版本控制的基石
 
@@ -210,7 +210,7 @@ etcd 的 MVCC（Multi-Version Concurrency Control）机制是 Kubernetes 实时�
 
 这就是为什么 Kubernetes 对象有 `resourceVersion` 字段——它本质上就是 etcd 的 Revision，用于乐观并发控制（OCC）：当两个请求同时修改同一对象时，`resourceVersion` 不匹配的那个会被拒绝。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L293-L319), [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L430-L439)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L293-L319), [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L430-L439)
 
 ### etcd 生产运维关键参数
 
@@ -224,7 +224,7 @@ Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamen
 
 etcd 的**磁盘性能是集群稳定性的决定性因素**。WAL（预写日志）的 fsync 延迟直接决定写请求延迟——必须使用 SSD，且 P99 fsync 延迟应 < 10ms。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L452-L529)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L452-L529)
 
 ### etcd 关键监控指标
 
@@ -235,7 +235,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 | `etcd_mvcc_db_total_size_in_bytes` | 数据库大小 | < quota×0.8 | > quota×0.9 |
 | `etcd_disk_wal_fsync_duration_seconds` | WAL 同步延迟 | P99 < 10ms | P99 > 25ms |
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L596-L605)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L596-L605)
 
 ---
 
@@ -282,7 +282,7 @@ flowchart TD
 
 **权重设计的原则**：TaintToleration 权重最高（3），因为污点通常表示节点有特殊属性（如 GPU 节点、专用节点），应该优先尊重。
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L608-L688), [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L355-L439)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L608-L688), [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L355-L439)
 
 ### 抢占调度：优先级驱动的 Pod 驱逐
 
@@ -296,7 +296,7 @@ Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02
 | default | 0 | 默认 |
 | batch-low | -100 | 批处理任务（可被抢占） |
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L810-L841)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L810-L841)
 
 ---
 
@@ -350,7 +350,7 @@ flowchart LR
 3. **限速重试**：WorkQueue 的指数退避机制（5ms → 10ms → 20ms → ... → 1000s）避免错误状态下的雪崩
 4. **去重**：同一对象的多次事件合并为一次处理
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L855-L948), [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L440-L459)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L855-L948), [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L440-L459)
 
 ### Leader 选举：多副本只运行一个活跃实例
 
@@ -365,7 +365,7 @@ Scheduler 和 Controller Manager 都通过 Leader 选举机制实现 HA：多个
 
 如果活跃实例在 `lease-duration` 内未续约，其他实例将发起新一轮选举。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L461-L488)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L461-L488)
 
 ---
 
@@ -394,7 +394,7 @@ kubelet 的关键配置参数直接影响节点稳定性：
 | `--max-pods` | 单节点最大 Pod 数 | 110 |
 | `--cluster-dns` | CoreDNS IP | 10.96.0.10 |
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L513-L624)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L513-L624)
 
 ### kube-proxy：Service 负载均衡的三种模式
 
@@ -418,7 +418,7 @@ ipvs:
   syncPeriod: 30s
 ```
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L625-L694)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L625-L694)
 
 ### 容器运行时：从 Docker 到 containerd 的演进
 
@@ -434,7 +434,7 @@ kubelet ──CRI gRPC──► containerd/CRI-O ──OCI──► runc/crun/gV
 | **CRI-O** | 极简、Kubernetes 原生 | Kubernetes 专用 |
 | **Docker + cri-dockerd** | 生态最好、调试方便 | 开发环境 |
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L696-L717)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L696-L717)
 
 ---
 
@@ -455,7 +455,7 @@ Kubernetes 的架构决策并非随意选择，而是基于一组明确的设计
 
 其中最核心的是**声明式 API + 控制器模式**的组合。这个模式意味着：你永远不需要告诉 Kubernetes"怎么做"，只需要告诉它"我要什么"。Controller 会持续观察、比较、调谐，直到当前状态与期望状态一致。
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L149-L161), [01-design-principles-foundations.md](domain-2-design-principles/01-design-principles-foundations.md#L1-L11)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L149-L161), [01-design-principles-foundations.md](domain-01-cluster-fundamentals/01-design-principles-foundations.md#L1-L11)
 
 ---
 
@@ -499,7 +499,7 @@ Watch 机制的四个关键参数：
 | `timeoutSeconds` | 超时时间 | `?timeoutSeconds=600` |
 | `allowWatchBookmarks` | 允许 Bookmark（保持连接活跃） | `?allowWatchBookmarks=true` |
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L911-L1018)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L911-L1018)
 
 ---
 
@@ -532,7 +532,7 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
 ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-20260120.db --write-out=table
 ```
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L1021-L1135), [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L531-L579)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L1021-L1135), [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L531-L579)
 
 ---
 
@@ -555,7 +555,7 @@ Kubernetes 的可扩展性是其成为"平台之平台"的根本原因。四大�
 | **Operator** | CRD + 自定义控制器 | 高 |
 | **Admission Webhook** | 拦截和修改 API 请求 | 中 |
 
-Sources: [01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L1139-L1170)
+Sources: [01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L1139-L1170)
 
 ---
 
@@ -581,7 +581,7 @@ Kubernetes 严格遵循 API 版本演进规则：`Alpha → Beta → GA → Stab
 | User Namespaces | GA | 容器内用户空间隔离 |
 | Dynamic Resource Allocation | Beta | GPU 等设备动态分配 |
 
-Sources: [03-api-versions-features.md](domain-1-architecture-fundamentals/03-api-versions-features.md#L1-L100)
+Sources: [03-api-versions-features.md](domain-01-cluster-fundamentals/03-api-versions-features.md#L1-L100)
 
 ---
 
@@ -606,7 +606,7 @@ Sources: [03-api-versions-features.md](domain-1-architecture-fundamentals/03-api
 | Scheduler | `cmd/kube-scheduler/` | `app/server.go` |
 | Kubelet | `cmd/kubelet/` | `app/server.go` |
 
-Sources: [04-source-code-structure.md](domain-1-architecture-fundamentals/04-source-code-structure.md#L1-L82)
+Sources: [04-source-code-structure.md](domain-01-cluster-fundamentals/04-source-code-structure.md#L1-L82)
 
 ---
 
@@ -621,7 +621,7 @@ Sources: [04-source-code-structure.md](domain-1-architecture-fundamentals/04-sou
 | **CoreDNS** | 1.11+ | 1.11+ | 1.11+ | 1.11+ |
 | **Cilium** | 1.15+ | 1.15+ | 1.16+ | 1.16+ |
 
-Sources: [02-core-components-deep-dive.md](domain-1-architecture-fundamentals/02-core-components-deep-dive.md#L89-L99)
+Sources: [02-core-components-deep-dive.md](domain-01-cluster-fundamentals/02-core-components-deep-dive.md#L89-L99)
 
 ---
 

@@ -1,0 +1,689 @@
+# K8s Node NotReady 根因决策图
+# Root cause decision map for Agent diagnosis
+# 数据来源: domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md Section 5 + Section 4
+
+root_causes:
+  # RC-001: kubelet 进程崩溃或未运行
+  - id: RC-001
+    name:
+      cn: "kubelet 进程崩溃或未运行"
+      en: "kubelet process crashed or not running"
+    description:
+      cn: "kubelet 进程因 panic、OOM、配置错误等原因停止运行或反复崩溃重启，无法向 apiserver 发送心跳"
+      en: "kubelet process stopped or crash-looping due to panic, OOM, misconfiguration, etc., unable to send heartbeat to apiserver"
+    probability: high
+    diagnostic_evidence:
+      primary: [D2.1, D2.2]
+      secondary: [D1.5]
+    diagnostic_rules:
+      - step: D2.1
+        description:
+          cn: "systemctl status kubelet 显示 inactive/failed/activating"
+          en: "systemctl status kubelet shows inactive/failed/activating"
+        condition: "kubelet service not active/running"
+        confidence: 0.9
+      - step: D2.2
+        description:
+          cn: "kubelet 日志包含 panic/fatal/OOM"
+          en: "kubelet logs contain panic/fatal/OOM"
+        condition: "logs contain panic/fatal/OOM"
+        confidence: 0.85
+      - step: D1.5
+        description:
+          cn: "Lease renewTime 距当前时间 > 40s"
+          en: "Lease renewTime exceeds 40s from current time"
+        condition: "Lease not renewed beyond node-monitor-grace-period"
+        confidence: 0.8
+    remediation:
+      primary: REM-003
+      alternatives: [REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_kubelet_down", "evt_heartbeat_fail"]
+    related_causes: [RC-008]
+
+  # RC-002: 容器运行时（containerd）异常
+  - id: RC-002
+    name:
+      cn: "容器运行时（containerd）异常"
+      en: "Container runtime (containerd) abnormal"
+    description:
+      cn: "containerd 或 CRI-O 守护进程停止、崩溃或响应超时，kubelet 无法执行容器操作导致 PLEG 不健康"
+      en: "containerd or CRI-O daemon stopped, crashed, or timed out, kubelet cannot perform container operations causing PLEG unhealthy"
+    probability: high
+    diagnostic_evidence:
+      primary: [D2.3, D2.4]
+      secondary: [D2.6, D1.2]
+    diagnostic_rules:
+      - step: D2.3
+        description:
+          cn: "systemctl status containerd 显示未运行/失败"
+          en: "systemctl status containerd shows not running/failed"
+        condition: "containerd service not active/running"
+        confidence: 0.9
+      - step: D2.4
+        description:
+          cn: "containerd 日志有错误"
+          en: "containerd logs contain errors"
+        condition: "containerd logs show errors (shim failures, timeout, etc.)"
+        confidence: 0.85
+      - step: D2.6
+        description:
+          cn: "PLEG 不健康"
+          en: "PLEG unhealthy"
+        condition: "PLEG is not healthy in kubelet logs"
+        confidence: 0.8
+      - step: D1.2
+        description:
+          cn: "Message 包含 container runtime"
+          en: "Message contains container runtime"
+        condition: "Node condition message contains 'container runtime is down'"
+        confidence: 0.85
+    remediation:
+      primary: REM-004
+      alternatives: [REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_rt_down", "evt_cri_sock", "evt_rt_hang"]
+    related_causes: [RC-008]
+
+  # RC-003: 节点磁盘空间耗尽（DiskPressure）
+  - id: RC-003
+    name:
+      cn: "节点磁盘空间耗尽（DiskPressure）"
+      en: "Node disk space exhausted (DiskPressure)"
+    description:
+      cn: "根分区、/var/lib/kubelet、/var/lib/containerd 或 /var/log 分区磁盘使用率超过驱逐阈值（默认 85%），或 inode 耗尽"
+      en: "Root partition, /var/lib/kubelet, /var/lib/containerd, or /var/log partition disk usage exceeds eviction threshold (default 85%), or inode exhaustion"
+    probability: high
+    diagnostic_evidence:
+      primary: [D1.2, D2.5]
+      secondary: [D1.3]
+    diagnostic_rules:
+      - step: D1.2
+        description:
+          cn: "DiskPressure=True"
+          en: "DiskPressure=True"
+        condition: "DiskPressure condition is True"
+        confidence: 0.9
+      - step: D2.5
+        description:
+          cn: "磁盘使用率 > 85% 或 inode 使用率 > 90%"
+          en: "Disk usage > 85% or inode usage > 90%"
+        condition: "disk usage >85% or inode usage >90%"
+        confidence: 0.9
+      - step: D1.3
+        description:
+          cn: "事件包含 NodeHasDiskPressure 或 InvalidDiskCapacity"
+          en: "Events contain NodeHasDiskPressure or InvalidDiskCapacity"
+        condition: "events contain NodeHasDiskPressure or InvalidDiskCapacity"
+        confidence: 0.85
+    remediation:
+      primary: REM-002
+      alternatives: [REM-005, REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_disk_pressure", "evt_image_gc_fail"]
+    related_causes: []
+
+  # RC-004: 节点内存耗尽（MemoryPressure）
+  - id: RC-004
+    name:
+      cn: "节点内存耗尽（MemoryPressure）"
+      en: "Node memory exhausted (MemoryPressure)"
+    description:
+      cn: "节点可用内存低于 kubelet 驱逐阈值（默认 100Mi），触发内存压力条件"
+      en: "Node available memory below kubelet eviction threshold (default 100Mi), triggering memory pressure condition"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D1.2, D2.5]
+      secondary: [D2.9]
+    diagnostic_rules:
+      - step: D1.2
+        description:
+          cn: "MemoryPressure=True"
+          en: "MemoryPressure=True"
+        condition: "MemoryPressure condition is True"
+        confidence: 0.9
+      - step: D2.5
+        description:
+          cn: "可用内存 < 100Mi"
+          en: "Available memory < 100Mi"
+        condition: "available memory <100Mi"
+        confidence: 0.9
+      - step: D2.9
+        description:
+          cn: "dmesg 中有 OOM Killer 日志"
+          en: "dmesg contains OOM Killer logs"
+        condition: "dmesg shows Out of memory: Killed process"
+        confidence: 0.85
+    remediation:
+      primary: REM-005
+      alternatives: [REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_mem_pressure", "evt_and_mem_low", "evt_and_mem_nolimit"]
+    related_causes: []
+    version_notes:
+      - version: "1.30+"
+        note:
+          cn: "若启用了 Node swap support (beta)，MemoryPressure 计算可能包含 swap 使用量"
+          en: "With Node swap support (beta), MemoryPressure calculation may include swap usage"
+
+  # RC-005: 节点 PID 耗尽（PIDPressure）
+  - id: RC-005
+    name:
+      cn: "节点 PID 耗尽（PIDPressure）"
+      en: "Node PID exhausted (PIDPressure)"
+    description:
+      cn: "节点上进程数量接近或达到 pid_max 限制，kubelet 报告 PID 压力"
+      en: "Process count on node approaching or reaching pid_max limit, kubelet reports PID pressure"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D1.2, D2.5]
+      secondary: [D2.2]
+    diagnostic_rules:
+      - step: D1.2
+        description:
+          cn: "PIDPressure=True"
+          en: "PIDPressure=True"
+        condition: "PIDPressure condition is True"
+        confidence: 0.85
+      - step: D2.5
+        description:
+          cn: "PID 数量接近 pid_max"
+          en: "PID count approaching pid_max"
+        condition: "PID count near pid_max (default 32768 or 4194304)"
+        confidence: 0.9
+      - step: D2.2
+        description:
+          cn: "kubelet 日志包含 PID 相关错误"
+          en: "kubelet logs contain PID-related errors"
+        condition: "kubelet logs contain PID-related errors or 'too many open files'"
+        confidence: 0.8
+    remediation:
+      primary: REM-005
+      alternatives: [REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_pid_exhaust"]
+    related_causes: []
+
+  # RC-006: 节点与 apiserver 网络不通
+  - id: RC-006
+    name:
+      cn: "节点与 apiserver 网络不通"
+      en: "Node to apiserver network unreachable"
+    description:
+      cn: "防火墙规则变更、安全组配置、路由故障、物理网络问题导致节点无法与 apiserver 通信"
+      en: "Firewall rule changes, security group configuration, routing failure, or physical network issues preventing node-apiserver communication"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D2.7]
+      secondary: [D2.2, D1.2]
+    diagnostic_rules:
+      - step: D2.7
+        description:
+          cn: "TCP 连接到 apiserver:6443 失败"
+          en: "TCP connection to apiserver:6443 fails"
+        condition: "TCP connection failed to apiserver"
+        confidence: 0.9
+      - step: D2.2
+        description:
+          cn: "kubelet 日志包含 connection refused"
+          en: "kubelet logs contain connection refused"
+        condition: "kubelet logs contain 'connection refused' or 'dial tcp'"
+        confidence: 0.85
+      - step: D1.2
+        description:
+          cn: "Ready=Unknown"
+          en: "Ready=Unknown"
+        condition: "Ready condition is Unknown"
+        confidence: 0.8
+    remediation:
+      primary: null
+      alternatives: []
+      manual_action:
+        cn: "检查防火墙、路由、交换机"
+        en: "Check firewall, routing, switches"
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_api_unreachable", "evt_policy_block", "evt_route_fail"]
+    related_causes: [RC-007]
+
+  # RC-007: kubelet 客户端证书过期
+  - id: RC-007
+    name:
+      cn: "kubelet 客户端证书过期"
+      en: "kubelet client certificate expired"
+    description:
+      cn: "kubelet 用于与 apiserver 通信的客户端证书过期或被吊销，TLS 握手失败"
+      en: "kubelet client certificate used for apiserver communication expired or revoked, TLS handshake failure"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D2.8]
+      secondary: [D2.2, D2.7]
+    diagnostic_rules:
+      - step: D2.8
+        description:
+          cn: "证书 notAfter 早于当前时间"
+          en: "Certificate notAfter is earlier than current time"
+        condition: "certificate has expired (notAfter < now)"
+        confidence: 0.95
+      - step: D2.2
+        description:
+          cn: "kubelet 日志包含 x509 或 certificate"
+          en: "kubelet logs contain x509 or certificate"
+        condition: "kubelet logs contain 'x509: certificate has expired' or 'certificate signed by unknown authority'"
+        confidence: 0.9
+      - step: D2.7
+        description:
+          cn: "TCP 成功但 TLS 握手失败"
+          en: "TCP succeeds but TLS handshake fails"
+        condition: "TCP connection succeeds but TLS handshake fails"
+        confidence: 0.85
+    remediation:
+      primary: REM-008
+      alternatives: []
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_kubelet_cert", "evt_node_cert_expire"]
+    related_causes: [RC-010, RC-006]
+    cross_skill: SKILL-SEC-001
+    version_notes:
+      - version: "1.28+"
+        note:
+          cn: "kubelet 证书自动轮转（RotateKubeletClientCertificate）默认启用（GA）"
+          en: "kubelet certificate auto-rotation (RotateKubeletClientCertificate) enabled by default (GA)"
+      - version: "1.29+"
+        note:
+          cn: "改进的证书轮转日志，便于审计"
+          en: "Improved certificate rotation logs for auditing"
+
+  # RC-008: PLEG 不健康导致 NotReady
+  - id: RC-008
+    name:
+      cn: "PLEG 不健康导致 NotReady"
+      en: "PLEG unhealthy causing NotReady"
+    description:
+      cn: "Pod Lifecycle Event Generator 的 relist 操作超时（>3min），通常由 container runtime 响应慢引起"
+      en: "Pod Lifecycle Event Generator relist operation timeout (>3min), usually caused by slow container runtime response"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D2.6]
+      secondary: [D1.2, D2.3]
+    diagnostic_rules:
+      - step: D2.6
+        description:
+          cn: "kubelet 日志频繁出现 PLEG is not healthy"
+          en: "kubelet logs frequently show PLEG is not healthy"
+        condition: "kubelet logs contain 'PLEG is not healthy'"
+        confidence: 0.9
+      - step: D1.2
+        description:
+          cn: "Message 包含 PLEG"
+          en: "Message contains PLEG"
+        condition: "Node condition message contains 'PLEG is not healthy'"
+        confidence: 0.85
+      - step: D2.3
+        description:
+          cn: "containerd 延迟高"
+          en: "containerd latency high"
+        condition: "containerd shows high latency or slow response"
+        confidence: 0.8
+    remediation:
+      primary: REM-003
+      alternatives: [REM-004, REM-006]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_pleg", "evt_and_pleg_timeout", "evt_and_pleg_overload"]
+    related_causes: [RC-002, RC-001]
+    version_notes:
+      - version: "1.28+"
+        note:
+          cn: "EventedPLEG 作为 beta feature 可用（需手动启用），可减少 PLEG 不健康的误报"
+          en: "EventedPLEG available as beta feature (manual enable), reduces PLEG unhealthy false positives"
+      - version: "1.31+"
+        note:
+          cn: "PLEG 性能改进，relist 超时处理更优雅"
+          en: "PLEG performance improvements, more graceful relist timeout handling"
+
+  # RC-009: 内核故障/硬件异常
+  - id: RC-009
+    name:
+      cn: "内核故障/硬件异常"
+      en: "Kernel failure / hardware abnormality"
+    description:
+      cn: "服务器硬件故障（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏"
+      en: "Server hardware failure (bad disk sectors, memory ECC errors, CPU MCE), kernel panic, filesystem corruption"
+    probability: low
+    diagnostic_evidence:
+      primary: [D2.9]
+      secondary: []
+    diagnostic_rules:
+      - step: D2.9
+        description:
+          cn: "dmesg 包含 Hardware Error / MCE / I/O error / soft lockup / EXT4-fs error"
+          en: "dmesg contains Hardware Error / MCE / I/O error / soft lockup / EXT4-fs error"
+        condition: "dmesg contains hardware/kernel error signatures"
+        confidence: 0.9
+        patterns:
+          - "Hardware Error"
+          - "MCE"
+          - "I/O error"
+          - "device not responding"
+          - "NMI watchdog: BUG: soft lockup"
+          - "nf_conntrack: table full"
+          - "EXT4-fs error"
+          - "XFS error"
+    remediation:
+      primary: REM-006
+      alternatives: [REM-009, REM-010]
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_kernel_panic", "evt_driver_issue"]
+    related_causes: []
+    note:
+      cn: "节点可能完全无法 SSH"
+      en: "Node may be completely unreachable via SSH"
+
+  # RC-010: NTP 时间不同步
+  - id: RC-010
+    name:
+      cn: "NTP 时间不同步"
+      en: "NTP time not synchronized"
+    description:
+      cn: "节点时钟偏差过大，导致 TLS 证书验证失败和 Lease 续租异常"
+      en: "Node clock skew too large, causing TLS certificate verification failure and Lease renewal anomalies"
+    probability: low
+    diagnostic_evidence:
+      primary: [D2.10]
+      secondary: [D2.8]
+    diagnostic_rules:
+      - step: D2.10
+        description:
+          cn: "系统时钟未同步或偏差 > 5s"
+          en: "System clock not synchronized or skew > 5s"
+        condition: "System clock synchronized: no, or time skew > 5s"
+        confidence: 0.85
+      - step: D2.8
+        description:
+          cn: "证书看似有效但 TLS 仍失败"
+          en: "Certificate appears valid but TLS still fails"
+        condition: "certificate appears valid but TLS handshake still fails"
+        confidence: 0.8
+    thresholds:
+      warning: "> 5 seconds skew"
+      critical: "> 1 minute skew (almost certainly causes TLS handshake failure)"
+    remediation:
+      primary: null
+      manual_action:
+        cn: "修复 NTP 同步（chrony/ntpd 配置）"
+        en: "Fix NTP synchronization (chrony/ntpd configuration)"
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_time_skew_tls"]
+    related_causes: [RC-007]
+
+  # RC-011: CNI 插件异常
+  - id: RC-011
+    name:
+      cn: "CNI 插件异常"
+      en: "CNI plugin abnormal"
+    description:
+      cn: "CNI 配置文件缺失、CNI 二进制文件损坏、CNI DaemonSet Pod 异常，导致节点网络不可用，kubelet 报告 NetworkUnavailable"
+      en: "CNI config file missing, CNI binary corrupted, CNI DaemonSet Pod abnormal, causing node network unavailable, kubelet reports NetworkUnavailable"
+    probability: medium
+    diagnostic_evidence:
+      primary: [D3.2]
+      secondary: [D1.2]
+    diagnostic_rules:
+      - step: D3.2
+        description:
+          cn: "CNI 配置缺失或 DaemonSet Pod 未运行"
+          en: "CNI config missing or DaemonSet Pod not running"
+        condition: "/etc/cni/net.d/ empty, CNI binaries missing, or calico-node/cilium container not running"
+        confidence: 0.85
+      - step: D1.2
+        description:
+          cn: "NetworkUnavailable=True"
+          en: "NetworkUnavailable=True"
+        condition: "NetworkUnavailable condition is True"
+        confidence: 0.9
+    remediation:
+      primary: null
+      manual_action:
+        cn: "重新部署 CNI 插件或修复 DaemonSet"
+        en: "Redeploy CNI plugin or fix DaemonSet"
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_cni_fail"]
+    related_causes: []
+
+  # RC-012: 节点被手动 cordon/drain
+  - id: RC-012
+    name:
+      cn: "节点被手动 cordon/drain"
+      en: "Node manually cordoned/drained"
+    description:
+      cn: "运维人员手动执行了 kubectl cordon 或 kubectl drain，节点被标记为 SchedulingDisabled，不属于故障"
+      en: "Operator manually executed kubectl cordon or kubectl drain, node marked SchedulingDisabled, not a fault"
+    probability: low
+    is_fault: false
+    diagnostic_evidence:
+      primary: [D1.4, D1.1]
+      secondary: []
+    diagnostic_rules:
+      - step: D1.4
+        description:
+          cn: "存在 node.kubernetes.io/unschedulable:NoSchedule taint"
+          en: "node.kubernetes.io/unschedulable:NoSchedule taint exists"
+        condition: "unschedulable taint present"
+        confidence: 0.95
+      - step: D1.1
+        description:
+          cn: "STATUS 包含 SchedulingDisabled"
+          en: "STATUS contains SchedulingDisabled"
+        condition: "STATUS column shows Ready,SchedulingDisabled"
+        confidence: 0.95
+    remediation:
+      primary: REM-001
+      alternatives: []
+    fta_mapping:
+      file: "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+      step_ids: ["evt_cordon"]
+      note: "non-fault — scheduled operation"
+    related_causes: []
+
+# 决策树 / Decision tree
+# Agent 按此树从 D1.2 开始，根据条件分支定位根因
+decision_tree:
+  entry: D1.2
+  description:
+    cn: "从节点 Conditions 信息开始分支判断"
+    en: "Start branching from node Conditions information"
+  branches:
+    # 分支 1: DiskPressure
+    - condition: "DiskPressure=True"
+      root_cause: RC-003
+      confidence: 0.9
+      next_verification: D2.5
+      description:
+        cn: "磁盘压力导致 NotReady"
+        en: "DiskPressure causing NotReady"
+
+    # 分支 2: MemoryPressure
+    - condition: "MemoryPressure=True"
+      root_cause: RC-004
+      confidence: 0.85
+      next_verification: D2.5
+      description:
+        cn: "内存压力导致 NotReady"
+        en: "MemoryPressure causing NotReady"
+
+    # 分支 3: PIDPressure
+    - condition: "PIDPressure=True"
+      root_cause: RC-005
+      confidence: 0.85
+      next_verification: D2.5
+      description:
+        cn: "PID 压力导致 NotReady"
+        en: "PIDPressure causing NotReady"
+
+    # 分支 4: Ready=Unknown（网络或证书问题）
+    - condition: "Ready=Unknown"
+      description:
+        cn: "apiserver 长时间未收到心跳，可能是网络或证书问题"
+        en: "apiserver has not received heartbeat for a long time, possible network or certificate issue"
+      next: D2.7
+      branches:
+        - condition: "TCP connection failed (network unreachable)"
+          root_cause: RC-006
+          confidence: 0.9
+          description:
+            cn: "网络分区 — TCP 连接失败"
+            en: "Network partition — TCP connection failed"
+        - condition: "TCP ok but TLS handshake failure"
+          root_cause: RC-007
+          confidence: 0.85
+          next_verification: D2.8
+          description:
+            cn: "证书问题 — TLS 握手失败"
+            en: "Certificate issue — TLS handshake failed"
+
+    # 分支 5: PLEG 不健康
+    - condition: "Ready=False, message contains PLEG"
+      root_cause: RC-008
+      confidence: 0.85
+      next_verification: D2.6
+      description:
+        cn: "PLEG 不健康导致 NotReady"
+        en: "PLEG unhealthy causing NotReady"
+
+    # 分支 6: 容器运行时故障
+    - condition: "Ready=False, message contains 'container runtime'"
+      root_cause: RC-002
+      confidence: 0.9
+      next_verification: D2.3
+      description:
+        cn: "容器运行时故障"
+        en: "Container runtime failure"
+
+    # 分支 7: SchedulingDisabled（手动 cordon）
+    - condition: "SchedulingDisabled in STATUS (from D1.1)"
+      root_cause: RC-012
+      confidence: 0.95
+      description:
+        cn: "节点被手动 cordon，非故障"
+        en: "Node manually cordoned, not a fault"
+
+    # 默认分支: 进入深度 kubelet 检查
+    - condition: default
+      description:
+        cn: "无明确 Condition 指示，进入深度 kubelet 检查"
+        en: "No clear Condition indicator, proceed to deep kubelet check"
+      next: D2.1
+      branches:
+        - condition: "kubelet not running (inactive/failed)"
+          root_cause: RC-001
+          confidence: 0.9
+          next_verification: D2.2
+        - condition: "kubelet running but logs contain errors"
+          next: D2.2
+          branches:
+            - condition: "logs contain 'connection refused' or 'dial tcp'"
+              root_cause: RC-006
+              confidence: 0.85
+            - condition: "logs contain 'x509' or 'certificate'"
+              root_cause: RC-007
+              confidence: 0.85
+            - condition: "logs contain 'container runtime is not running'"
+              root_cause: RC-002
+              confidence: 0.85
+            - condition: "logs contain 'PLEG is not healthy'"
+              root_cause: RC-008
+              confidence: 0.85
+            - condition: "logs contain 'OOM' or 'oom_kill'"
+              root_cause: RC-004
+              confidence: 0.8
+            - condition: "logs contain 'no space left on device'"
+              root_cause: RC-003
+              confidence: 0.85
+            - condition: "logs contain 'too many open files'"
+              root_cause: RC-005
+              confidence: 0.8
+        - condition: "kubelet running, no log errors, check dmesg"
+          next: D2.9
+          branches:
+            - condition: "dmesg contains hardware/kernel errors"
+              root_cause: RC-009
+              confidence: 0.85
+            - condition: "dmesg clean, check NTP"
+              next: D2.10
+              branches:
+                - condition: "clock not synchronized or skew > 5s"
+                  root_cause: RC-010
+                  confidence: 0.8
+                - condition: "time synchronized, check CNI"
+                  next: D3.2
+                  branches:
+                    - condition: "CNI config missing or Pod not running"
+                      root_cause: RC-011
+                      confidence: 0.85
+                    - condition: "all checks pass, unknown root cause"
+                      root_cause: null
+                      action: escalate
+                      description:
+                        cn: "所有诊断步骤均无明确异常，需升级至人工处理"
+                        en: "All diagnostic steps show no clear abnormality, escalate to human"
+
+# 根因 → 修复操作映射 / Root cause to remediation mapping
+remediation_map:
+  RC-001:
+    primary: REM-003
+    alternatives: [REM-006]
+    risk: medium
+  RC-002:
+    primary: REM-004
+    alternatives: [REM-006]
+    risk: medium
+  RC-003:
+    primary: REM-002
+    alternatives: [REM-005, REM-006]
+    risk: low
+  RC-004:
+    primary: REM-005
+    alternatives: [REM-006]
+    risk: medium
+  RC-005:
+    primary: REM-005
+    alternatives: [REM-006]
+    risk: medium
+  RC-006:
+    primary: null
+    manual_action: "检查防火墙、路由、交换机 / Check firewall, routing, switches"
+    risk: varies
+  RC-007:
+    primary: REM-008
+    alternatives: []
+    risk: high
+  RC-008:
+    primary: REM-003
+    alternatives: [REM-004, REM-006]
+    risk: medium
+  RC-009:
+    primary: REM-006
+    alternatives: [REM-009, REM-010]
+    risk: critical
+  RC-010:
+    primary: null
+    manual_action: "修复 NTP 同步 / Fix NTP synchronization"
+    risk: low
+  RC-011:
+    primary: null
+    manual_action: "重新部署 CNI 插件 / Redeploy CNI plugin"
+    risk: medium
+  RC-012:
+    primary: REM-001
+    alternatives: []
+    risk: low

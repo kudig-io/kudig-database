@@ -12,6 +12,7 @@ tags:
 - argocd
 - containerd
 - ebpf
+- daemonset
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -24,6 +25,18 @@ intent_queries:
 trigger_keywords:
 - KUDIG-DATABASE
 - Manpages
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
+- ebpf-basics
+- cilium-basics
+- etcd-basics
+- gpu-scheduling-basics
+- tls-basics
+- backup-basics
 ---
 
 # KUDIG-DATABASE Manpages
@@ -122,16 +135,16 @@ echo 'export MANPATH="$MANPATH:/path/to/kudig-database/man"' >> ~/.bashrc
 
 | 产品 | 描述 | 文档位置 |
 |:---|:---|:---|
-| `kubernetes` | 容器编排平台 | `domain-1-architecture-fundamentals/` |
-| `prometheus` | 监控和告警系统 | `domain-8-observability/` |
-| `etcd` | 分布式键值存储 | `domain-3-control-plane/` |
-| `containerd` | 容器运行时 | `domain-3-control-plane/` |
-| `cilium` | eBPF 网络和安全 | `domain-5-networking/` |
-| `helm` | Kubernetes 包管理器 | `domain-10-extensions/` |
-| `argocd` | GitOps 持续交付 | `domain-9-platform-ops/` |
-| `istio` | 服务网格平台 | `domain-26-service-mesh-microservices/` |
-| `velero` | 备份和灾难恢复 | `domain-30-disaster-recovery-business-continuity/` |
-| `cert-manager` | 证书管理自动化 | `domain-9-platform-ops/` |
+| `kubernetes` | 容器编排平台 | `domain-01-cluster-fundamentals/` |
+| `prometheus` | 监控和告警系统 | `domain-06-observability/` |
+| `etcd` | 分布式键值存储 | `domain-01-cluster-fundamentals/` |
+| `containerd` | 容器运行时 | `domain-01-cluster-fundamentals/` |
+| `cilium` | eBPF 网络和安全 | `domain-03-networking-traffic/` |
+| `helm` | Kubernetes 包管理器 | `domain-15-specialized-tech/` |
+| `argocd` | GitOps 持续交付 | `domain-07-platform-engineering/` |
+| `istio` | 服务网格平台 | `domain-03-networking-traffic/` |
+| `velero` | 备份和灾难恢复 | `domain-09-reliability-engineering/` |
+| `cert-manager` | 证书管理自动化 | `domain-07-platform-engineering/` |
 
 ## 文档标准
 
@@ -189,4 +202,27 @@ man ./man/man1/kudig-stats.1
 
 - [KUDIG-DATABASE 主文档](../README.md)
 - [项目脚本](../scripts/README.md)
-- [CNCF 项目库](../domain-34-cncf-landscape/)
+- [CNCF 项目库](../domain-19-landscape-references/)
+
+## Related
+
+- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]

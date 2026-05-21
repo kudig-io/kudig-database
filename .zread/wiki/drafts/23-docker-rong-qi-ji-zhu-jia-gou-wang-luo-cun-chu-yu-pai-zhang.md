@@ -1,6 +1,6 @@
 Docker 是容器技术的核心引擎，也是理解 Kubernetes 和云原生生态的**第一块基石**。本页面对 `domain-13-docker` 目录下 12 篇深度文档进行全景式导读，从架构原理、网络模型、存储机制到故障排查方法论，帮你建立对 Docker 技术栈的系统认知。无论你是刚接触容器的开发者，还是准备向 Kubernetes 迈进的运维工程师，这里就是你的起点。
 
-Sources: [README.md](domain-13-docker/README.md#L1-L49)
+Sources: [README.md](domain-13-container-runtime/README.md#L1-L49)
 
 ---
 
@@ -10,7 +10,7 @@ Sources: [README.md](domain-13-docker/README.md#L1-L49)
 
 用一句话概括：**镜像是集装箱，容器是正在运输的货物，Docker Engine 是港口吊车**。你只需关心"装什么"（Dockerfile）和"运到哪"（部署目标），底层运输细节由 Docker 引擎透明处理。
 
-Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L22-L48)
+Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L22-L48)
 
 ---
 
@@ -42,7 +42,7 @@ graph TD
 
 一个关键的设计细节：**runc 在容器启动后立即退出**，由 `containerd-shim` 接管后续的 IO 转发和生命周期管理。这意味着即使 containerd 重启，运行中的容器也不会受到影响——这就是 Docker 生产环境中 `live-restore` 特性的底层基础。
 
-Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L52-L111), [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L115-L141)
+Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L52-L111), [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L115-L141)
 
 ### 容器运行时层级：高/中/低三级架构
 
@@ -56,7 +56,7 @@ Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-archite
 
 **对初学者的意义**：当你在 Kubernetes 环境中看到 "containerd" 而非 "Docker" 时，不必困惑——Kubernetes 只是从 2022 年起跳过了 Docker Daemon 这一层，直接使用 containerd 作为容器运行时。你用 Docker 构建的镜像在 Kubernetes 中依然完全兼容，因为它们都遵循 **OCI（Open Container Initiative）标准**。
 
-Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L190-L199), [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L258-L267)
+Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L190-L199), [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L258-L267)
 
 ### OCI 标准规范：容器世界的"通用语言"
 
@@ -68,7 +68,7 @@ OCI 定义了三份核心规范，确保任何符合标准的镜像可以在任�
 | **Image Spec** | 镜像应该长什么样（层级结构、manifest、config blob） | v1.1.0 |
 | **Distribution Spec** | 镜像如何分发（Registry 推拉 API、认证流程） | v1.1.0 |
 
-Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L258-L330)
+Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L258-L330)
 
 ---
 
@@ -92,7 +92,7 @@ Docker 镜像不是一个大文件，而是由多个**只读层**堆叠而成，
 
 **这种设计的巨大优势**：如果你有 10 个基于 `ubuntu:22.04` 的容器，基础镜像层在磁盘上只存储一份，内存中也只需加载一份。这是容器比虚拟机轻量得多的根本原因。
 
-Sources: [02-docker-images-management.md](domain-13-docker/02-docker-images-management.md#L22-L52)
+Sources: [02-docker-images-management.md](domain-13-container-runtime/02-docker-images-management.md#L22-L52)
 
 ### 容器生命周期：六种状态与退出码
 
@@ -117,7 +117,7 @@ Sources: [02-docker-images-management.md](domain-13-docker/02-docker-images-mana
 | **139** | 段错误 | 内存访问违规 |
 | **143** | 被 SIGTERM 终止 | `docker stop` 正常停止 |
 
-Sources: [03-docker-container-lifecycle.md](domain-13-docker/03-docker-container-lifecycle.md#L22-L79)
+Sources: [03-docker-container-lifecycle.md](domain-13-container-runtime/03-docker-container-lifecycle.md#L22-L79)
 
 ### Dockerfile 核心指令一览
 
@@ -151,7 +151,7 @@ USER 1000:1000
 ENTRYPOINT ["/app/server"]
 ```
 
-Sources: [02-docker-images-management.md](domain-13-docker/02-docker-images-management.md#L78-L101), [02-docker-images-management.md](domain-13-docker/02-docker-images-management.md#L152-L180)
+Sources: [02-docker-images-management.md](domain-13-container-runtime/02-docker-images-management.md#L78-L101), [02-docker-images-management.md](domain-13-container-runtime/02-docker-images-management.md#L152-L180)
 
 ---
 
@@ -191,7 +191,7 @@ graph LR
 
 关键机制：每个容器通过一对 **veth pair**（虚拟网卡对）连接到 `docker0` 网桥。容器访问外网时，iptables 通过 **MASQUERADE（SNAT）** 将容器 IP 转换为主机 IP；外部访问容器端口时，通过 **DNAT** 将流量转发到容器 IP。
 
-Sources: [04-docker-networking-deep-dive.md](domain-13-docker/04-docker-networking-deep-dive.md#L21-L67), [04-docker-networking-deep-dive.md](domain-13-docker/04-docker-networking-deep-dive.md#L70-L82)
+Sources: [04-docker-networking-deep-dive.md](domain-13-container-runtime/04-docker-networking-deep-dive.md#L21-L67), [04-docker-networking-deep-dive.md](domain-13-container-runtime/04-docker-networking-deep-dive.md#L70-L82)
 
 ### DNS 服务发现
 
@@ -211,7 +211,7 @@ docker run -d --network mynet --name webapp myapp
 
 **注意**：默认的 `docker0` 网桥不支持自动 DNS 解析——这也是为什么生产环境推荐始终使用自定义 bridge 网络的原因之一。
 
-Sources: [04-docker-networking-deep-dive.md](domain-13-docker/04-docker-networking-deep-dive.md#L280-L341)
+Sources: [04-docker-networking-deep-dive.md](domain-13-container-runtime/04-docker-networking-deep-dive.md#L280-L341)
 
 ---
 
@@ -242,7 +242,7 @@ docker run -d --tmpfs /app/temp:size=100m myapp
 
 `overlay2` 是 Docker 默认且推荐的生产级存储驱动，它基于 Linux 内核的 OverlayFS 实现**写时复制**机制。当容器修改文件时，修改写入 upperdir（可写层），不触碰 lowerdir（只读的镜像层）。这意味着同一镜像可以被数百个容器共享，只有各自的增量修改占用额外磁盘空间。
 
-Sources: [05-docker-storage-volumes.md](domain-13-docker/05-docker-storage-volumes.md#L22-L69), [05-docker-storage-volumes.md](domain-13-docker/05-docker-storage-volumes.md#L73-L101)
+Sources: [05-docker-storage-volumes.md](domain-13-container-runtime/05-docker-storage-volumes.md#L22-L69), [05-docker-storage-volumes.md](domain-13-container-runtime/05-docker-storage-volumes.md#L73-L101)
 
 ---
 
@@ -291,7 +291,7 @@ docker events --since 1h              # 最近一小时事件流
 docker network inspect bridge         # 网络配置详情
 ```
 
-Sources: [08-docker-troubleshooting-guide.md](domain-13-docker/08-docker-troubleshooting-guide.md#L22-L52), [08-docker-troubleshooting-guide.md](domain-13-docker/08-docker-troubleshooting-guide.md#L54-L91), [08-docker-troubleshooting-guide.md](domain-13-docker/08-docker-troubleshooting-guide.md#L252-L305)
+Sources: [08-docker-troubleshooting-guide.md](domain-13-container-runtime/08-docker-troubleshooting-guide.md#L22-L52), [08-docker-troubleshooting-guide.md](domain-13-container-runtime/08-docker-troubleshooting-guide.md#L54-L91), [08-docker-troubleshooting-guide.md](domain-13-container-runtime/08-docker-troubleshooting-guide.md#L252-L305)
 
 ---
 
@@ -319,7 +319,7 @@ docker run -d \
   myapp:v1.0
 ```
 
-Sources: [07-docker-security-best-practices.md](domain-13-docker/07-docker-security-best-practices.md#L20-L39), [07-docker-security-best-practices.md](domain-13-docker/07-docker-security-best-practices.md#L42-L76)
+Sources: [07-docker-security-best-practices.md](domain-13-container-runtime/07-docker-security-best-practices.md#L20-L39), [07-docker-security-best-practices.md](domain-13-container-runtime/07-docker-security-best-practices.md#L42-L76)
 
 ---
 
@@ -341,7 +341,7 @@ Docker 和 Kubernetes 并非替代关系，而是**分层协作**：
 | **镜像构建** | Docker + BuildKit | 工具链成熟、缓存高效 |
 | **本地开发测试** | Docker / Podman | 易用性好 |
 
-Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-architecture-overview.md#L501-L527)
+Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-docker-architecture-overview.md#L501-L527)
 
 ---
 
@@ -351,22 +351,22 @@ Sources: [01-docker-architecture-overview.md](domain-13-docker/01-docker-archite
 
 | 编号 | 文档 | 核心主题 |
 |:---|:---|:---|
-| 01 | [Docker 架构概述与核心概念](domain-13-docker/01-docker-architecture-overview.md) | 架构全景、OCI 标准、运行时层级、与 K8s 关系 |
-| 02 | [Docker 镜像管理详解](domain-13-docker/02-docker-images-management.md) | 分层原理、Dockerfile 参考、多阶段构建、安全扫描 |
-| 03 | [Docker 容器生命周期管理](domain-13-docker/03-docker-container-lifecycle.md) | 状态机、资源限制、健康检查、信号处理 |
-| 04 | [Docker 网络深度解析](domain-13-docker/04-docker-networking-deep-dive.md) | 六种网络驱动、DNS 服务发现、端口映射原理 |
-| 05 | [Docker 存储与数据卷](domain-13-docker/05-docker-storage-volumes.md) | overlay2 驱动、Volume/BindMount/tmpfs、备份恢复 |
-| 06 | [Docker Compose 编排](domain-13-docker/06-docker-compose-orchestration.md) | 多容器编排、服务依赖、多环境配置 |
-| 07 | [Docker 安全最佳实践](domain-13-docker/07-docker-security-best-practices.md) | 安全加固、漏洞扫描、权限管控 |
-| 08 | [Docker 故障排查指南](domain-13-docker/08-docker-troubleshooting-guide.md) | 五步诊断法、高频故障速查、常用诊断命令 |
-| 09 | [Docker 性能监控与调优](domain-13-docker/09-docker-performance-monitoring.md) | 指标体系、监控工具、资源优化 |
-| 10 | [Docker 日志管理与分析](domain-13-docker/10-docker-logging-management.md) | 日志驱动、集中式日志架构、ELK/Loki 集成 |
-| 11 | [Docker 自动化运维与 CI/CD 集成](domain-13-docker/11-docker-automation-devops.md) | IaC 实践、流水线设计、灾备回滚 |
-| 99 | [Docker 命令大全参考](domain-13-docker/99-docker-commands-reference.md) | 全量命令速查（含安全风险提示） |
+| 01 | [Docker 架构概述与核心概念](domain-13-container-runtime/01-docker-architecture-overview.md) | 架构全景、OCI 标准、运行时层级、与 K8s 关系 |
+| 02 | [Docker 镜像管理详解](domain-13-container-runtime/02-docker-images-management.md) | 分层原理、Dockerfile 参考、多阶段构建、安全扫描 |
+| 03 | [Docker 容器生命周期管理](domain-13-container-runtime/03-docker-container-lifecycle.md) | 状态机、资源限制、健康检查、信号处理 |
+| 04 | [Docker 网络深度解析](domain-13-container-runtime/04-docker-networking-deep-dive.md) | 六种网络驱动、DNS 服务发现、端口映射原理 |
+| 05 | [Docker 存储与数据卷](domain-13-container-runtime/05-docker-storage-volumes.md) | overlay2 驱动、Volume/BindMount/tmpfs、备份恢复 |
+| 06 | [Docker Compose 编排](domain-13-container-runtime/06-docker-compose-orchestration.md) | 多容器编排、服务依赖、多环境配置 |
+| 07 | [Docker 安全最佳实践](domain-13-container-runtime/07-docker-security-best-practices.md) | 安全加固、漏洞扫描、权限管控 |
+| 08 | [Docker 故障排查指南](domain-13-container-runtime/08-docker-troubleshooting-guide.md) | 五步诊断法、高频故障速查、常用诊断命令 |
+| 09 | [Docker 性能监控与调优](domain-13-container-runtime/09-docker-performance-monitoring.md) | 指标体系、监控工具、资源优化 |
+| 10 | [Docker 日志管理与分析](domain-13-container-runtime/10-docker-logging-management.md) | 日志驱动、集中式日志架构、ELK/Loki 集成 |
+| 11 | [Docker 自动化运维与 CI/CD 集成](domain-13-container-runtime/11-docker-automation-devops.md) | IaC 实践、流水线设计、灾备回滚 |
+| 99 | [Docker 命令大全参考](domain-13-container-runtime/99-docker-commands-reference.md) | 全量命令速查（含安全风险提示） |
 
 另可参考速查卡：[Docker & Containerd 速查表](topic-cheat-sheet/docker.md)
 
-Sources: [README.md](domain-13-docker/README.md#L9-L47)
+Sources: [README.md](domain-13-container-runtime/README.md#L9-L47)
 
 ---
 

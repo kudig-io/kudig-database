@@ -39,7 +39,7 @@ Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L27-L35), [templates/README.md](templ
 
 | 前缀模式 | 用途 | 典型目录 | 贡献门槛 |
 |:---|:---|:---|:---:|
-| `domain-{N}-` | 知识域，按序号递增 | `domain-1-architecture-fundamentals/` | ⭐⭐⭐ |
+| `domain-{N}-` | 知识域，按序号递增 | `domain-01-cluster-fundamentals/` | ⭐⭐⭐ |
 | `topic-` | 专题，横切多个知识域 | `topic-fta/`、`topic-skills/` | ⭐⭐ |
 | `corpus-config/` | AI 语料库配置与 RAG 分块策略 | `corpus-config/profiles/` | ⭐⭐⭐ |
 | `scripts/` | 自动化脚本（质量检查、构建等） | `scripts/comprehensive-quality-check.sh` | ⭐⭐ |
@@ -83,10 +83,10 @@ Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L37-L56)
 
 ```bash
 # 示例：在 domain-5-networking 中新增一篇关于 eBPF 的文档
-ls domain-5-networking/*.md | sort | tail -1
-# 输出: domain-5-networking/38-terway-gc-mechanism.md
+ls domain-03-networking-traffic/*.md | sort | tail -1
+# 输出: domain-03-networking-traffic/38-terway-gc-mechanism.md
 # → 新文件编号为 39
-cp templates/domain-article-template.md domain-5-networking/39-ebpf-cilium-deep-dive.md
+cp templates/domain-article-template.md domain-03-networking-traffic/39-ebpf-cilium-deep-dive.md
 ```
 
 Sources: [templates/README.md](templates/README.md#L16-L22), [CONTRIBUTING.md](CONTRIBUTING.md#L37-L49)
@@ -125,7 +125,7 @@ flowchart LR
 
 ```bash
 # Step 1-2: 复制模板到目标目录
-cp templates/domain-article-template.md domain-5-networking/39-ebpf-cilium-deep-dive.md
+cp templates/domain-article-template.md domain-03-networking-traffic/39-ebpf-cilium-deep-dive.md
 
 # Step 3: 搜索所有占位符并替换
 # 在编辑器中全局搜索 {{ ，逐个替换为实际内容
@@ -179,7 +179,7 @@ Sources: [templates/README.md](templates/README.md#L16-L22)
 ...
 ```
 
-Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L60-L81), [domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md](domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md#L1-L16)
+Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L60-L81), [domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md](domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md#L1-L16)
 
 ### 目录索引文件 README.md
 
@@ -193,7 +193,7 @@ Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L60-L81), [domain-1-architecture-fund
 | 学习路径建议 | 新手/进阶/专家三条路径 | 用 `→` 串联编号路径 |
 | 相关领域链接 | 跨 domain/topic 的关联引用 | 使用相对路径链接 |
 
-Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L83-L89), [domain-1-architecture-fundamentals/README.md](domain-1-architecture-fundamentals/README.md#L1-L82)
+Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L83-L89), [domain-01-cluster-fundamentals/README.md](domain-01-cluster-fundamentals/README.md#L1-L82)
 
 ---
 
@@ -255,7 +255,7 @@ Sources: [CONTRIBUTING.md](CONTRIBUTING.md#L96-L131), [.editorconfig](.editorcon
 [核心组件深挖](./02-core-components-deep-dive.md)
 
 # ✅ 原则二：跨目录引用用 ../ 回溯
-[Service 概念与类型](../domain-5-networking/06-service-concepts-types.md)
+[Service 概念与类型](../domain-03-networking-traffic/06-service-concepts-types.md)
 
 # ❌ 原则三：禁止绝对路径
 [文档名](/Users/xxx/kudig-database/domain-5/xxx.md)   ← 禁止
@@ -430,6 +430,6 @@ Sources: [.editorconfig](.editorconfig#L1-L39)
 
 - **了解知识库全景** → [项目总览：KUDIG-DATABASE 全域知识库](1-xiang-mu-zong-lan-kudig-database-quan-yu-zhi-shi-ku)
 - **选择学习方向** → [知识地图与学习路径规划](3-zhi-shi-di-tu-yu-xue-xi-lu-jing-gui-hua)
-- **深入 Domain 文档写法** → 参考 [domain-1-architecture-fundamentals/README.md](domain-1-architecture-fundamentals/README.md) 作为目录索引的标杆范例
+- **深入 Domain 文档写法** → 参考 [domain-01-cluster-fundamentals/README.md](domain-01-cluster-fundamentals/README.md) 作为目录索引的标杆范例
 - **了解 Skill 文档规范** → 参考 [topic-skills/skill-schema.md](topic-skills/skill-schema.md) 中定义的 12 Section 完整规范
 - **理解 AI 语料库接入** → [快速开始：克隆、GitBook 浏览与 AI 语料库接入](2-kuai-su-kai-shi-ke-long-gitbook-liu-lan-yu-ai-yu-liao-ku-jie-ru)

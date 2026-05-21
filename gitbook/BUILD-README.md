@@ -17,6 +17,8 @@ intent_queries:
 trigger_keywords:
 - GitBook
 - 三级目录构建脚本使用说明
+prerequisites:
+- kubectl-basics
 ---
 
 # GitBook 三级目录构建脚本使用说明
@@ -45,7 +47,7 @@ trigger_keywords:
 
 - **`build-scripts/generate-summary-three-level.ps1`** - PowerShell脚本，生成三级目录SUMMARY.md
   - 支持 Domain 1-33 的完整结构
-  - 支持子目录嵌套（如 `domain-17-cloud-provider/01-aws-eks/`）
+  - 支持子目录嵌套（如 `domain-12-cloud-providers/01-aws-eks/`）
   - 使用 Unicode 字符避免编码问题
   - 自动统计文件链接数量
 
@@ -70,7 +72,7 @@ BUILD-SIMPLIFIED.cmd
 
 ```
 Domain-17: 云厂商Kubernetes服务
-├── README.md
+├── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md
 ├── 01-aws-eks/
 │   └── aws-eks-overview.md
 ├── 02-google-cloud-gke/
@@ -183,7 +185,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "build-scripts\generate-summ
 
 **检查**:
 ```cmd
-dir domain-17-cloud-provider /s /b | findstr \.md$
+dir domain-12-cloud-providers /s /b | findstr \.md$
 ```
 
 ## 技术细节

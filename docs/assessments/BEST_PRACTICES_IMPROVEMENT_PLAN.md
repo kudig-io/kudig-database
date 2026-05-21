@@ -1,3 +1,25 @@
+---
+title: 最佳实践内容质量改进计划
+description: '# 最佳实践内容质量改进计划'
+category: general
+tags:
+- k8s
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 最佳实践内容质量改进计划 是什么
+- 如何 最佳实践内容质量改进计划
+trigger_keywords:
+- 最佳实践内容质量改进计划
+prerequisites:
+- kubectl-basics
+---
+
 # 最佳实践内容质量改进计划
 
 ## 概述
@@ -61,7 +83,7 @@
 **内容结构**：
 ```
 best-practices/
-├── README.md                    # 总体介绍和导航
+├── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md                    # 总体介绍和导航
 ├── infrastructure/              # 基础设施最佳实践
 │   ├── kubernetes-cluster.md
 │   ├── networking.md

@@ -30,26 +30,26 @@ reading_level: "intermediate"          # beginner | intermediate | advanced | ex
 audience: ["SRE", "Ops Engineer"]      # 目标读者
 estimated_read_time: "20min"             # 预计阅读时间
 prerequisites:                         # 前置知识依赖
-  - "domain-3-control-plane"
+  - "domain-01-cluster-fundamentals"
   - "basic-kubectl"
 
 # ---- 统一 cross_refs ----
 cross_refs:
   - type: "skill"
-    path: "../topic-skills/{{NN}}-{{scenario}}.md"
+    path: "../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md"
     label: "{{技能名称}}"
   - type: "domain"
     path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     label: "{{文档名称}}"
   - type: "structural"
-    path: "../topic-structural-trouble-shooting/{{component}}-*.md"
+    path: "../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/{{component}}-*.md"
     label: "结构化故障排查"
 
 related_skills:
-  - "../topic-skills/{{NN}}-{{scenario}}.md"
+  - "../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md"
 knowledge_refs:
   - "../domain-{{N}}-{{name}}/{{doc}}.md"
-  - "../topic-structural-trouble-shooting/{{component}}-*.md"
+  - "../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/{{component}}-*.md"
 ---
 ```
 
@@ -329,10 +329,10 @@ pie title 底事件频率分布
 | 类型 | 文档 | 说明 |
 |:---|:---|:---|
 | 深度排查 | [../domain-{{N}}-{{name}}/{{doc}}.md](../domain-{{N}}-{{name}}/{{doc}}.md) | 完整故障排查指南 |
-| Skill | [../topic-skills/{{NN}}-{{scenario}}.md](../topic-skills/{{NN}}-{{scenario}}.md) | 自动化修复技能 |
-| FEBM | [../topic-febm/{{NN}}-{{scenario}}.md](../topic-febm/{{NN}}-{{scenario}}.md) | 取证分析方法 |
-| 速查卡 | [../topic-cheat-sheet/k8s.md](../topic-cheat-sheet/k8s.md) | 命令速查 |
-| 学习计划 | [../topic-learn/{{path}}/README.md](../topic-learn/{{path}}/README.md) | 相关学习路径 |
+| Skill | [../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md) | 自动化修复技能 |
+| FEBM | [../domain-10-troubleshooting-diagnostics/topic-febm/{{NN}}-{{scenario}}.md](../domain-10-troubleshooting-diagnostics/topic-febm/{{NN}}-{{scenario}}.md) | 取证分析方法 |
+| 速查卡 | [../domain-17-system-foundation/topic-cheat-sheet/k8s.md](../domain-17-system-foundation/topic-cheat-sheet/k8s.md) | 命令速查 |
+| 学习计划 | [../domain-11-production-operations/topic-learn/{{path}}/README.md](../domain-11-production-operations/topic-learn/{{path}}/README.md) | 相关学习路径 |
 
 ---
 
@@ -345,4 +345,8 @@ pie title 底事件频率分布
 
 ---
 
-> **关联文档**: [topic-fta/fta-methodology-and-agentic-practices.md](../topic-fta/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
+> **关联文档**: [domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md](../domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
+
+## Related
+
+- [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference

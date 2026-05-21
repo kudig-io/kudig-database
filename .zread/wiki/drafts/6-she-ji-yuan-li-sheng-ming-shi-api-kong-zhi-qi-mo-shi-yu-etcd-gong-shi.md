@@ -1,6 +1,6 @@
 Kubernetes 的设计哲学并非"容器编排"四个字可以概括。它真正的工程核心是一个 **声明式面向终态的闭环控制系统**——用户提交意图（Spec），系统持续调谐（Reconcile）直至实际状态（Status）收敛于期望值，而这一过程的所有持久化数据都锚定在基于 Raft 共识的 etcd 集群之上。本文将深入解析这三大支柱——声明式 API、控制器模式与 etcd 分布式共识——的设计原理、交互机制与生产级实践要点，揭示它们如何协同构成 Kubernetes 的自愈引擎。
 
-Sources: [01-design-principles-foundations.md](domain-2-design-principles/01-design-principles-foundations.md#L1-L11)
+Sources: [01-design-principles-foundations.md](domain-01-cluster-fundamentals/01-design-principles-foundations.md#L1-L11)
 
 ---
 
@@ -18,7 +18,7 @@ Kubernetes 的每一个资源对象都严格遵循 **Spec / Status 双轨模式*
 | 验证策略 | 严格 Schema 校验 | 宽松校验（控制器自治） |
 | 典型字段 | `replicas: 3` | `readyReplicas: 3` |
 
-Sources: [02-declarative-api-pattern.md](domain-2-design-principles/02-declarative-api-pattern.md#L14-L106)
+Sources: [02-declarative-api-pattern.md](domain-01-cluster-fundamentals/02-declarative-api-pattern.md#L14-L106)
 
 ### API Group 与版本演进：可扩展性的基石
 
@@ -36,7 +36,7 @@ Kubernetes 的 API 并非一个单一平面，而是按 **API Group** 组织的�
 
 每个 API 资源遵循 **Alpha → Beta → Stable** 的三级成熟度阶梯：Alpha 版本无任何兼容性承诺，功能可能被随时删除；Beta 版本向後兼容但语义可能微调；Stable 版本则提供长期支持保证，适用于生产环境。
 
-Sources: [02-declarative-api-pattern.md](domain-2-design-principles/02-declarative-api-pattern.md#L24-L52)
+Sources: [02-declarative-api-pattern.md](domain-01-cluster-fundamentals/02-declarative-api-pattern.md#L24-L52)
 
 ### 乐观并发控制：无锁世界中的冲突仲裁
 
@@ -51,7 +51,7 @@ func needsReconcile(deploy *appsv1.Deployment) bool {
 }
 ```
 
-Sources: [06-resource-version-control.md](domain-2-design-principles/06-resource-version-control.md#L115-L132)
+Sources: [06-resource-version-control.md](domain-01-cluster-fundamentals/06-resource-version-control.md#L115-L132)
 
 ### Server-Side Apply (SSA)：多管理器协同的未来
 
@@ -59,7 +59,7 @@ Sources: [06-resource-version-control.md](domain-2-design-principles/06-resource
 
 这一演进对 Operator 开发者至关重要：在编写现代 Operator 时，应优先使用 SSA 接口进行资源更新，避免因隐式覆盖导致的状态漂移。
 
-Sources: [02-declarative-api-pattern.md](domain-2-design-principles/02-declarative-api-pattern.md#L1-L12), [06-resource-version-control.md](domain-2-design-principles/06-resource-version-control.md#L134-L159)
+Sources: [02-declarative-api-pattern.md](domain-01-cluster-fundamentals/02-declarative-api-pattern.md#L1-L12), [06-resource-version-control.md](domain-01-cluster-fundamentals/06-resource-version-control.md#L134-L159)
 
 ---
 
@@ -73,7 +73,7 @@ Kubernetes 控制器采用 **水平触发** 语义而非边缘触发。二者的
 
 > **工程铁律**：在实现 `Reconcile` 函数时，务必保持其**幂等性**。不要假设上一次操作成功，每一次循环都应该是一个完整且独立的检查过程。
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L1-L11)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L1-L11)
 
 ### Informer / WorkQueue 架构：事件驱动的精密齿轮
 
@@ -108,7 +108,7 @@ flowchart TD
 
 **Reflector** 启动时执行一次全量 List 获取所有对象，随后通过长连接 Watch 持续接收增量事件。数据流入 **Store** 维护的本地缓存，经由 **Indexer** 建立索引加速查询。EventHandler 将变化对象的 key（`namespace/name` 格式）投入 **WorkQueue**，Worker 协程从队列取出 key 执行调谐逻辑。
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L312-L356)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L312-L356)
 
 ### WorkQueue 的四大工程特性
 
@@ -123,7 +123,7 @@ WorkQueue 并非简单的 FIFO 队列，它是 Kubernetes 控制器可靠性工�
 
 Kubernetes 提供三种队列类型递进抽象：基础 FIFO Queue、支持延迟入队的 Delaying Queue、以及集成了指数退避限速器的 Rate Limiting Queue。生产环境控制器应始终使用 Rate Limiting Queue。
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L357-L373)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L357-L373)
 
 ### 调谐循环的生产级实现模式
 
@@ -161,7 +161,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 }
 ```
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L182-L228)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L182-L228)
 
 ### 内置控制器的层次化协作
 
@@ -177,7 +177,7 @@ Kubernetes 的内置控制器并非平铺直叙的独立实体，而是通过 **
 | Endpoints | Service + Pod | Endpoints | 维护后端端点列表 |
 | GC | 所有资源 | — | 孤儿资源回收 |
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L470-L484)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L470-L484)
 
 ---
 
@@ -209,7 +209,7 @@ sequenceDiagram
 
 集群规模与容错能力遵循公式 **容忍故障节点数 = (N-1)/2**：3 节点集群容忍 1 个故障，5 节点容忍 2 个，7 节点容忍 3 个。生产环境推荐 3 节点起步，关键场景使用 5 节点。
 
-Sources: [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L516-L568)
+Sources: [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L516-L568)
 
 ### MVCC 存储模型与版本化查询
 
@@ -224,7 +224,7 @@ etcd 采用 **MVCC（多版本并发控制）** 存储引擎，每次修改都�
 
 Kubernetes 中的 `resourceVersion` 字段直接映射到 etcd 的 ModRevision，这解释了为什么 Watch 断线重连时能通过携带上次已知的 resourceVersion 实现断点续传。
 
-Sources: [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L526-L535)
+Sources: [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L526-L535)
 
 ### etcd 在 Kubernetes 中的存储拓扑
 
@@ -243,7 +243,7 @@ Kubernetes 的所有 API 对象在 etcd 中以 **扁平化前缀树** 结构存�
 
 API Server 与 etcd 的操作映射关系：创建资源对应 `Put key`，读取对应 `Get key`，更新使用 `Txn (compare+put)` 事务保证原子性，删除对应 `Delete key`，Watch 则映射为 `Watch prefix`。
 
-Sources: [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L536-L611)
+Sources: [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L536-L611)
 
 ### Compaction 与 Defrag：etcd 运维的必修课
 
@@ -259,7 +259,7 @@ MVCC 的多版本机制意味着如果不做清理，etcd 的数据库会无限�
 | `election-timeout` | 1000ms | 1000ms | Follower 选举超时 |
 | `auto-compaction-retention` | 0 (禁用) | 1h | 自动压缩保留窗口 |
 
-Sources: [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L1-L10), [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L612-L621)
+Sources: [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L1-L10), [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L612-L621)
 
 ---
 
@@ -306,7 +306,7 @@ flowchart LR
 
 这一流程揭示了 Kubernetes 架构的精髓：**没有任何组件直接操作其他组件的内存或调用其他组件的 API**。所有组件之间的通信都通过 API Server 间接完成，API Server 通过 etcd Watch 机制将变更事件推送给下游。这种 **松耦合** 设计使得每个组件可以独立开发、部署、升级和扩展。
 
-Sources: [01-design-principles-foundations.md](domain-2-design-principles/01-design-principles-foundations.md#L1-L11), [09-source-code-walkthrough.md](domain-2-design-principles/09-source-code-walkthrough.md#L63-L79)
+Sources: [01-design-principles-foundations.md](domain-01-cluster-fundamentals/01-design-principles-foundations.md#L1-L11), [09-source-code-walkthrough.md](domain-01-cluster-fundamentals/09-source-code-walkthrough.md#L63-L79)
 
 ---
 
@@ -318,7 +318,7 @@ Sources: [01-design-principles-foundations.md](domain-2-design-principles/01-des
 
 **治理方案**需要从三个层面入手：在 etcd 层，合理设置 `auto-compaction-retention` 为业务可接受的窗口（如 1 小时）；在 Informer 层，启用 **Bookmarks** 机制（`AllowWatchBookmarks`），即使在无事件发生时也能保持 ResourceVersion 新鲜；在 WorkQueue 层，优化 Handler 吞吐，使用并发 Worker 避免处理延迟导致 ResourceVersion 老化。
 
-Sources: [06-resource-version-control.md](domain-2-design-principles/06-resource-version-control.md#L1-L15)
+Sources: [06-resource-version-control.md](domain-01-cluster-fundamentals/06-resource-version-control.md#L1-L15)
 
 ---
 
@@ -333,7 +333,7 @@ Sources: [06-resource-version-control.md](domain-2-design-principles/06-resource
 | etcd 运维 | 定期自动备份；SSD 存储；逐个 Follower Defrag | 对 Leader 直接执行 Defrag |
 | 高可用 | 控制平面 3 节点起步；Scheduler/KCM 使用 Lease 选举 | 2 节点 etcd（无法容忍任何故障） |
 
-Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pattern.md#L509-L518), [07-distributed-consensus-etcd.md](domain-2-design-principles/07-distributed-consensus-etcd.md#L481-L497), [08-high-availability-patterns.md](domain-2-design-principles/08-high-availability-patterns.md#L31-L39)
+Sources: [03-controller-pattern.md](domain-01-cluster-fundamentals/03-controller-pattern.md#L509-L518), [07-distributed-consensus-etcd.md](domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md#L481-L497), [08-high-availability-patterns.md](domain-01-cluster-fundamentals/08-high-availability-patterns.md#L31-L39)
 
 ---
 
@@ -342,6 +342,6 @@ Sources: [03-controller-pattern.md](domain-2-design-principles/03-controller-pat
 本文聚焦于三大设计支柱的核心原理。若要进一步深入：
 
 - **控制器内部机制的完整实现细节**，包括 Informer 缓存同步、WorkQueue 限速算法与 SharedInformerFactory 的并发陷阱，参见 [控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI](7-kong-zhi-ping-mian-shen-du-pou-xi-api-server-scheduler-kcm-yu-cri-csi-cni)。
-- **List-Watch 机制的演进与 Streaming Watch 优化**，参见 `domain-2-design-principles/04-watch-list-mechanism.md` 中的 Streaming List-Watch（K8s 1.27+）解析。
-- **高可用架构中的 Leader 选举与 Lease API 演进**，参见 `domain-2-design-principles/08-high-availability-patterns.md`。
+- **List-Watch 机制的演进与 Streaming Watch 优化**，参见 `domain-01-cluster-fundamentals/04-watch-list-mechanism.md` 中的 Streaming List-Watch（K8s 1.27+）解析。
+- **高可用架构中的 Leader 选举与 Lease API 演进**，参见 `domain-01-cluster-fundamentals/08-high-availability-patterns.md`。
 - **Operator 开发的端到端实践**，参见 [平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格](21-ping-tai-yun-wei-yu-kuo-zhan-sheng-tai-helm-ci-cd-operator-kai-fa-yu-fu-wu-wang-ge)。

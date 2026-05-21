@@ -24,8 +24,14 @@ intent_queries:
 - 如何 工单分类体系与意图识别语料库
 trigger_keywords:
 - 工单分类体系与意图识别语料库
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+- backup-basics
 ---
-
 
 # 工单分类体系与意图识别语料库
 
@@ -370,5 +376,5 @@ trigger_keywords:
 **关联文档**:
 - [P0-2: 多技能协同协议设计](./P0-2-multi-skill-coordination-protocol.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [topic-skills/README.md](../topic-skills/README.md)
-- [topic-fta/list/](../topic-fta/list/) — FTA 故障树参考
+- [domain-10-troubleshooting-diagnostics/topic-skills/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) — FTA 故障树参考

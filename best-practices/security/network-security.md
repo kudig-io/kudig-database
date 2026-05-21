@@ -8,6 +8,11 @@ tags:
 - network-policy
 - mtls
 - service-mesh
+- istio
+- cilium
+- calico
+- ingress
+- networkpolicy
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +30,22 @@ trigger_keywords:
 - 网络安全
 - 网络策略
 - 服务网格
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
 cross_refs:
 - type: domain
-  path: ../../domain-5-networking/
-  label: '网络知识域'
+  path: ../../domain-03-networking-traffic/
+  label: 网络知识域
 - type: domain
-  path: ../../domain-26-service-mesh-microservices/
-  label: '服务网格知识域'
+  path: ../../domain-03-networking-traffic/
+  label: 服务网格知识域
 - type: best-practice
   path: ./pod-security.md
-  label: 'Pod安全最佳实践'
+  label: Pod安全最佳实践
 ---
 
 # Kubernetes 网络安全最佳实践

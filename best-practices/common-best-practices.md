@@ -7,6 +7,12 @@ tags:
 - best-practices
 - common
 - reference
+- etcd
+- prometheus
+- helm
+- docker
+- hpa
+- vpa
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,16 +28,22 @@ trigger_keywords:
 - 通用最佳实践
 - 最佳实践原则
 - 生产环境
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- etcd-basics
+- backup-basics
 cross_refs:
 - type: best-practice
   path: ./infrastructure/kubernetes-cluster.md
-  label: '集群配置最佳实践'
+  label: 集群配置最佳实践
 - type: best-practice
   path: ./security/pod-security.md
-  label: 'Pod安全最佳实践'
+  label: Pod安全最佳实践
 - type: best-practice
   path: ./observability/monitoring.md
-  label: '监控最佳实践'
+  label: 监控最佳实践
 ---
 
 # Kubernetes 通用最佳实践参考

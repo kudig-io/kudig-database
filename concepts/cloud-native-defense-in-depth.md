@@ -1,0 +1,109 @@
+---
+title: Cloud Native Defense in Depth
+description: '- [[Deployment × Secret 管理]]'
+category: concepts
+tags:
+- k8s
+- security
+- zero-trust
+- defense-in-depth
+- rbac
+- network-policy
+- etcd
+- istio
+- cilium
+- calico
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Cloud Native Defense in Depth 是什么
+- 如何 Cloud Native Defense in Depth
+trigger_keywords:
+- Cloud
+- Native
+- Defense
+- in
+- Depth
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- tls-basics
+- policy-basics
+---
+
+# Cloud Native Defense in Depth
+
+## Security Layer Model
+
+Cloud native security follows defense-in-depth principles, implementing controls across eight distinct layers:
+
+| Layer | Protection Target | Core Technology | Key Tools |
+|-------|-----------------|----------------|-----------|
+| 1. Boundary | External attack entry | WAF, DDoS, CDN, TLS | Cloud WAF, cert-manager |
+| 2. Identity | User and service auth | OIDC/SAML, RBAC, IRSA | Keycloak, Okta |
+| 3. Network | Micro-segmentation | NetworkPolicy, mTLS, Egress | Calico, Cilium, Istio |
+| 4. Workload | Pod security and permissions | PSS, SecurityContext, image verify | Kyverno, OPA |
+| 5. Runtime | Real-time threat detection | eBPF, syscall monitoring, anomaly | Falco, Sysdig, Tetragon |
+| 6. Supply Chain | Image and dependency integrity | SBOM, vuln scan, signature verify | Trivy, Cosign, Syft |
+| 7. Secrets | Credential and certificate lifecycle | Dynamic credentials, PKI | Vault, cert-manager |
+| 8. Compliance | Security baseline and continuous compliance | CIS Benchmark, policy-as-code | kube-bench, Kyverno |
+
+## Zero Trust Architecture
+
+Zero trust principles: never trust, always verify; least privilege access; assume breach; explicit verification; micro-segmentation. In K8s, this means:
+- All Pod-to-Pod communication requires mTLS (via [[concepts/service-mesh-architecture.md|service mesh]] or Cilium)
+- Default-deny NetworkPolicy blocks all traffic unless explicitly allowed
+- RBAC enforces least privilege for API access
+- Image signature verification ensures only trusted artifacts deploy
+- Runtime security monitors for anomalous behavior
+
+## Threat Model and Defenses
+
+| Attack Vector | Defense |
+|--------------|---------|
+| Supply chain attack | Image signing/verification (Cosign/Sigstore) |
+| Container escape | Pod Security Standards (Restricted profile) |
+| Lateral movement | NetworkPolicy default-deny + mTLS |
+| Secret theft | Vault dynamic credentials + etcd encryption |
+| Privilege escalation | RBAC + OPA/Kyverno policies |
+| Denial of service | Resource limits + rate limiting |
+
+## Compliance Framework Mapping
+
+Security controls map to regulatory requirements:
+- **SOC 2 Type II**: RBAC + mTLS + audit logging + vulnerability management
+- **ISO 27001**: Asset classification + access control + encryption + vulnerability management
+- **GDPR**: Data protection + privacy by design + encryption + access control
+- **PCI-DSS v4.0**: Secure development + strong authentication + SBOM + signing
+- **NIST CSF**: Risk assessment + access control + continuous monitoring
+
+## Key Security Baselines
+
+- **CIS Kubernetes Benchmark**: Automated security configuration baseline checked by kube-bench
+- **Pod Security Standards**: Three pre-defined levels (Privileged, Baseline, Restricted) enforced via namespace labels
+- **Minimum Pod Security**: runAsNonRoot=true, readOnlyRootFilesystem=true, capabilities drop ALL, allowPrivilegeEscalation=false, seccompProfile=RuntimeDefault
+
+## Related
+
+- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/vault.md|vault]] — HashiCorp Vault
+- [[cert-manager]] — cert-manager
+- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
+- [[concepts/linux-security-modules.md|linux-security-modules]] — Linux Security Modules for Containers
+- [[concepts/linux-security-modules.md|Linux Security Modules]]
+- [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
+- [[supply-chain-security|Supply Chain Security]]
+- [[concepts/secrets-management.md|Secrets Management]]
+- [[falco|Falco]]
+- [[kyverno|Kyverno]]
+- [[entities/vault.md|HashiCorp Vault]]
+
+- [[Deployment × Secret 管理]]

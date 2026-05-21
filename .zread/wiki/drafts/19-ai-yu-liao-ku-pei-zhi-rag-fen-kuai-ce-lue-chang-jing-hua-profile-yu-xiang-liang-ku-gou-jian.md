@@ -125,7 +125,7 @@ Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L45-L
 ```python
 metadata = {
     # --- 必选字段 ---
-    'source': 'domain-3-control-plane/11-etcd-deep-dive.md',  # 源文件路径
+    'source': 'domain-01-cluster-fundamentals/11-etcd-deep-dive.md',  # 源文件路径
     'domain': 'control-plane',       # 知识域（从路径提取）
     'difficulty': 'advanced',        # 难度：beginner/intermediate/advanced/expert
 
@@ -148,7 +148,7 @@ metadata = {
 ```mermaid
 flowchart LR
     subgraph "来源一：文件路径"
-        PATH["domain-3-control-plane/<br/>11-etcd-deep-dive.md"]
+        PATH["domain-01-cluster-fundamentals/<br/>11-etcd-deep-dive.md"]
     end
     subgraph "来源二：文档结构"
         STRUCT["H1/H2 标题<br/>YAML 前置元数据<br/>内联标签"]
@@ -221,7 +221,7 @@ core:
   - path: topic-skills/             # 18 个诊断-修复 Skill → 自动化修复步骤
     priority: critical
     chunking: by_section
-  - path: domain-12-troubleshooting/ # 42+ 篇故障排查 → 知识支撑
+  - path: domain-10-troubleshooting-diagnostics/ # 42+ 篇故障排查 → 知识支撑
     priority: critical
     chunking: by_h2
 
@@ -235,13 +235,13 @@ methodology:
     chunking: by_h2
 ```
 
-值得注意的是 `core` 层的三组语料形成了完整的推理链：`topic-fta/list/` 的故障树提供了**从顶事件到底事件的演绎推理路径**，`topic-skills/` 的 Skill 文档提供了**从诊断到修复的可执行步骤**，而 `domain-12-troubleshooting/` 则提供了**详细的技术解释和案例**。Agent 在实际运行中可以先用故障树定位故障分支，再调用对应的 Skill 获取修复命令，最后参考 troubleshooting 文档验证操作风险。
+值得注意的是 `core` 层的三组语料形成了完整的推理链：`topic-fta/list/` 的故障树提供了**从顶事件到底事件的演绎推理路径**，`topic-skills/` 的 Skill 文档提供了**从诊断到修复的可执行步骤**，而 `domain-10-troubleshooting-diagnostics/` 则提供了**详细的技术解释和案例**。Agent 在实际运行中可以先用故障树定位故障分支，再调用对应的 Skill 获取修复命令，最后参考 troubleshooting 文档验证操作风险。
 
 Sources: [rag-sre-profile.yaml](corpus-config/profiles/rag-sre-profile.yaml#L1-L47)
 
 ### Profile 3：K8s 学习助手语料配置
 
-**设计哲学**：学习场景的需求是**循序渐进的概念解释与命令查询**，因此语料覆盖从入门到中级的完整知识链条。与 SRE Profile 相比，学习助手不包含故障树和 Skill 文档（这些属于高级/专家级内容），但增加了 `topic-dictionary/`（运维词典）和 `domain-32-yaml-manifests/`（YAML 配置参考）等学习高频使用的参考材料。
+**设计哲学**：学习场景的需求是**循序渐进的概念解释与命令查询**，因此语料覆盖从入门到中级的完整知识链条。与 SRE Profile 相比，学习助手不包含故障树和 Skill 文档（这些属于高级/专家级内容），但增加了 `topic-dictionary/`（运维词典）和 `domain-18-manifests-patterns/`（YAML 配置参考）等学习高频使用的参考材料。
 
 该 Profile 的语料规模约 **3M tokens**，`core` 层覆盖学习计划 + 速查卡 + 架构基础，`knowledge` 层覆盖设计原理/控制平面/工作负载/网络/存储五大核心域，`reference` 层则提供 Docker、Linux、YAML 参考等基础支撑。
 

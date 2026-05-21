@@ -24,8 +24,10 @@ trigger_keywords:
 - Agent
 - Diagnostic
 - Benchmark
+prerequisites:
+- kubectl-basics
+- etcd-basics
 ---
-
 
 # Agent 诊断能力评估基准 (Agent Diagnostic Benchmark)
 
@@ -705,7 +707,7 @@ test_case_003:
     diagnosis: |
       - kubectl get nodes: Ready (但 unschedulable)
       - kubectl describe node: 无异常事件
-      - kubectl exec test-pod -- curl -k https://kubernetes.default: 无法连接
+      - kubectl exec test-pod -- curl -k https://[[entities/kubernetes|kubernetes]].default: 无法连接
   
   expected:
     category: "TC-INFRA-NET"

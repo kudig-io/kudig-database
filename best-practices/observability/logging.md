@@ -8,6 +8,11 @@ tags:
 - elasticsearch
 - fluentd
 - loki
+- apiserver
+- grafana
+- helm
+- docker
+- daemonset
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +30,21 @@ trigger_keywords:
 - 日志管理
 - EFK
 - 日志收集
+prerequisites:
+- kubectl-basics
+- helm-basics
+- monitoring-basics
+- logging-basics
 cross_refs:
 - type: domain
-  path: ../../domain-21-logging-management-analytics/
-  label: '日志管理知识域'
+  path: ../../domain-06-observability/
+  label: 日志管理知识域
 - type: domain
-  path: ../../domain-8-observability/
-  label: '可观测性知识域'
+  path: ../../domain-06-observability/
+  label: 可观测性知识域
 - type: best-practice
   path: ./monitoring.md
-  label: '监控最佳实践'
+  label: 监控最佳实践
 ---
 
 # Kubernetes 日志管理最佳实践

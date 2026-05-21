@@ -1,3 +1,26 @@
+---
+title: kudig-database 全面质量修复完成报告
+description: '- 覆盖: 15 个核心 domain + FTA + Skills + 应用架构'
+category: general
+tags:
+- k8s
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 全面质量修复完成报告 是什么
+- 如何 kudig-database 全面质量修复完成报告
+trigger_keywords:
+- kudig-database
+- 全面质量修复完成报告
+prerequisites:
+- kubectl-basics
+---
+
 # kudig-database 全面质量修复完成报告
 
 > **修复日期**: 2026-05-19
@@ -27,7 +50,7 @@
 ### 评估报告
 - `reports/EVALUATION-2026-05-19.md`
 
-### Agent QA 对语料库 (`topic-qa-corpus/`)
+### Agent QA 对语料库 (`domain-10-troubleshooting-diagnostics/topic-qa-corpus/`)
 - 18 个 YAML 文件, 2,336 个 QA 对
 - 覆盖: 15 个核心 domain + FTA + Skills + 应用架构
 - 命令输出诊断语料: 23 个常见故障场景 (command → output → diagnosis → action)
@@ -85,5 +108,5 @@ python3 scripts/enhance-cross-refs.py
 ### generate-qa-corpus.py
 ```bash
 python3 scripts/generate-qa-corpus.py
-# 输出: topic-qa-corpus/ 目录
+# 输出: domain-10-troubleshooting-diagnostics/topic-qa-corpus/ 目录
 ```

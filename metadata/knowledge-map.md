@@ -1,6 +1,6 @@
 ---
 title: 知识图谱 (Knowledge Map)
-description: NET_FUND[domain-15 网络基础] --> K8S_NET[domain-5 K8s 网络]
+description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
 category: general
 tags:
 - k8s
@@ -19,6 +19,8 @@ trigger_keywords:
 - 知识图谱
 - Knowledge
 - Map
+prerequisites:
+- kubectl-basics
 ---
 
 # 知识图谱 (Knowledge Map)
@@ -31,30 +33,30 @@ trigger_keywords:
 
 ```mermaid
 graph TD
-    LINUX[domain-14 Linux] --> DOCKER[domain-13 Docker]
-    NET_FUND[domain-15 网络基础] --> K8S_NET[domain-5 K8s 网络]
-    STORE_FUND[domain-16 存储基础] --> K8S_STORE[domain-6 K8s 存储]
+    LINUX[domain-17-system-foundation Linux] --> DOCKER[domain-13-container-runtime Docker]
+    NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
+    STORE_FUND[domain-04-storage-data 存储基础] --> K8S_STORE[domain-04-storage-data K8s 存储]
     
-    DOCKER --> ARCH[domain-1 架构基础]
-    ARCH --> DESIGN[domain-2 设计原理]
-    DESIGN --> CTRL[domain-3 控制平面]
+    DOCKER --> ARCH[domain-01-cluster-fundamentals 架构基础]
+    ARCH --> DESIGN[domain-01-cluster-fundamentals 设计原理]
+    DESIGN --> CTRL[domain-01-cluster-fundamentals 控制平面]
     
-    CTRL --> WORKLOAD[domain-4 工作负载]
+    CTRL --> WORKLOAD[domain-02-workloads-applications 工作负载]
     CTRL --> K8S_NET
     CTRL --> K8S_STORE
-    CTRL --> SEC[domain-7 安全合规]
+    CTRL --> SEC[domain-05-security-compliance 安全合规]
     
-    WORKLOAD --> OBS[domain-8 可观测性]
+    WORKLOAD --> OBS[domain-06-observability 可观测性]
     K8S_NET --> OBS
     SEC --> OBS
     
-    OBS --> PLAT[domain-9 平台运维]
-    PLAT --> EXT[domain-10 扩展生态]
+    OBS --> PLAT[domain-07-platform-engineering 平台运维]
+    PLAT --> EXT[domain-15-specialized-tech 扩展生态]
     
-    PLAT --> TS[domain-12 故障排查]
+    PLAT --> TS[domain-10-troubleshooting-diagnostics 故障排查]
     OBS --> TS
     
-    EXT --> AI[domain-11 AI 基础设施]
+    EXT --> AI[domain-14-ai-ml-infra AI 基础设施]
 ```
 
 ---
@@ -67,7 +69,7 @@ graph LR
     FEBM[topic-febm FEBM 取证] --> |证据方法| SKILLS
     FTA --> |演绎法| TS[故障排查]
     FEBM --> |归纳法| TS
-    TS12[domain-12] --> TS
+    TS12[domain-10-troubleshooting-diagnostics] --> TS
     STS[topic-structural] --> TS
     SKILLS --> |自动化| AGENT[topic-ai-agent]
 ```
@@ -94,13 +96,17 @@ graph LR
 
 | 模块 | 前置依赖 | 推荐后续 |
 |:---|:---|:---|
-| domain-1 架构 | domain-13 Docker | domain-2 设计原理 |
-| domain-2 设计 | domain-1 架构 | domain-3 控制平面 |
-| domain-3 控制平面 | domain-2 设计 | domain-4/5/6/7 |
-| domain-5 网络 | domain-15 网络基础 | domain-12 排障 |
-| domain-6 存储 | domain-16 存储基础 | domain-12 排障 |
-| domain-8 可观测 | domain-3/4/5 | domain-9 平台运维 |
-| domain-11 AI | domain-4 工作负载 | topic-ai-agent |
-| domain-12 排障 | domain-1~8 任一 | topic-fta/skills |
-| topic-fta | domain-12 排障基础 | topic-skills |
-| topic-skills | topic-fta + domain-12 | topic-ai-agent |
+| domain-01-cluster-fundamentals 架构 | domain-13-container-runtime Docker | domain-01-cluster-fundamentals 设计原理 |
+| domain-01-cluster-fundamentals 设计 | domain-01-cluster-fundamentals 架构 | domain-01-cluster-fundamentals 控制平面 |
+| domain-01-cluster-fundamentals 控制平面 | domain-01-cluster-fundamentals 设计 | domain-02-workloads-applications/5/6/7 |
+| domain-03-networking-traffic 网络 | domain-03-networking-traffic 网络基础 | domain-10-troubleshooting-diagnostics 排障 |
+| domain-04-storage-data 存储 | domain-04-storage-data 存储基础 | domain-10-troubleshooting-diagnostics 排障 |
+| domain-06-observability 可观测 | domain-01-cluster-fundamentals/4/5 | domain-07-platform-engineering 平台运维 |
+| domain-14-ai-ml-infra AI | domain-02-workloads-applications 工作负载 | topic-ai-agent |
+| domain-10-troubleshooting-diagnostics 排障 | domain-1~8 任一 | domain-10-troubleshooting-diagnostics/topic-fta/skills |
+| topic-fta | domain-10-troubleshooting-diagnostics 排障基础 | topic-skills |
+| topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | topic-ai-agent |
+
+## Related
+
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

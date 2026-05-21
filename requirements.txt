@@ -1,0 +1,9 @@
+# KUDIG-DATABASE 工具脚本依赖
+# 由 pyproject.toml 生成，手动编辑时请同步更新
+
+pyyaml>=6.0
+matplotlib>=3.8
+numpy>=1.26
+mkdocs>=1.5
+mkdocs-material>=9.5
+pymdown-extensions>=10.0

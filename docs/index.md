@@ -18,6 +18,8 @@ intent_queries:
 trigger_keywords:
 - KUDIG-DATABASE
 - 首页
+prerequisites:
+- kubectl-basics
 ---
 
 # Kubernetes 生产运维全域知识库
@@ -39,3 +41,11 @@ Docker、Linux、网络、存储、云provider等底层技术基础。
 
 ### 专题资源
 AI Agent、AI Coding、技能手册、故障排查等专题资源。
+
+## Related
+
+- [[references/k8s-glossary-index|K8s 术语表索引]] — Cross-reference
+- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
+- [[references/KUDIG Templates and Agent Prompts|KUDIG Templates and Agent Prompts]] — Cross-reference
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference

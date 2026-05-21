@@ -8,6 +8,11 @@ tags:
 - pod-security
 - rbac
 - pss
+- containerd
+- cri-o
+- docker
+- falco
+- webhook
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,13 +30,15 @@ trigger_keywords:
 - Pod安全
 - 安全上下文
 - 容器安全
+prerequisites:
+- kubectl-basics
 cross_refs:
 - type: domain
-  path: ../../domain-7-security/
-  label: '安全知识域'
+  path: ../../domain-05-security-compliance/
+  label: 安全知识域
 - type: domain
-  path: ../../domain-25-cloud-native-security/
-  label: '云原生安全知识域'
+  path: ../../domain-05-security-compliance/
+  label: 云原生安全知识域
 ---
 
 # Kubernetes Pod安全最佳实践

@@ -1,3 +1,32 @@
+---
+title: kudig-database v1.0 — 一页纸概览
+description: ║  🔍 深度研究    "我要深度研究 etcd 的生产运维"                   ║
+category: general
+tags:
+- k8s
+- etcd
+- ebpf
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database v1.0 — 一页纸概览 是什么
+- 如何 kudig-database v1.0 — 一页纸概览
+trigger_keywords:
+- kudig-database
+- v1.0
+- 一页纸概览
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+- etcd-basics
+---
+
 # kudig-database v1.0 — 一页纸概览
 
 > 打印/分享用, 单页 A4
@@ -8,7 +37,7 @@
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
 ║                    kudig-database v1.0                           ║
-║          企业级 Kubernetes 知识库 · AI 智能体语料                 ║
+║          企业级 [[entities/kubernetes|kubernetes]] 知识库 · AI 智能体语料                 ║
 ║                                                                  ║
 ║  让每一个 K8s 问题都有答案, 让每一个智能体都拥有专家级知识        ║
 ║                                                                  ║

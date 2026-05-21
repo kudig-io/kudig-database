@@ -1,6 +1,6 @@
 Kubernetes 可观测性是云原生运维的核心能力域——它回答的不是"系统出了什么问题"，而是"系统正在发生什么、为什么会发生、以及未来可能发生什么"。本页从四大支柱（Metrics 指标监控、Logs 日志审计、Traces 分布式追踪、Chaos 混沌工程）出发，系统梳理知识库中 27 篇域文档与多域交叉资料的核心架构、关键技术选型与生产实践要点，为中级开发者构建"从监控到韧性"的全栈认知提供一张高密度知识地图。
 
-Sources: [01-observability-architecture-overview.md](domain-8-observability/01-observability-architecture-overview.md#L1-L8), [README.md](domain-8-observability/README.md#L1-L7)
+Sources: [01-observability-architecture-overview.md](domain-06-observability/01-observability-architecture-overview.md#L1-L8), [README.md](domain-06-observability/README.md#L1-L7)
 
 ---
 
@@ -42,7 +42,7 @@ graph TD
     F --> H["混沌工程验证"]
 ```
 
-Sources: [15-observability-architecture.md](domain-1-architecture-fundamentals/15-observability-architecture.md#L11-L26), [16-observability-design-principles.md](domain-2-design-principles/16-observability-design-principles.md#L1-L9)
+Sources: [15-observability-architecture.md](domain-01-cluster-fundamentals/15-observability-architecture.md#L11-L26), [16-observability-design-principles.md](domain-01-cluster-fundamentals/16-observability-design-principles.md#L1-L9)
 
 ### 1.2 数据特征对比——理解每种信号的边界
 
@@ -55,7 +55,7 @@ Sources: [15-observability-architecture.md](domain-1-architecture-fundamentals/1
 | **核心用途** | 容量规划、告警 | 故障排查、审计 | 性能瓶颈定位 | 静默性能损耗发现 |
 | **成熟工具** | Prometheus / Thanos | Loki / Elasticsearch | Jaeger / Tempo | Parca / Pyroscope |
 
-Sources: [01-observability-architecture-overview.md](domain-8-observability/01-observability-architecture-overview.md#L36-L67), [24-observability-tool-ecosystem.md](domain-8-observability/24-observability-tool-ecosystem.md#L93-L142)
+Sources: [01-observability-architecture-overview.md](domain-06-observability/01-observability-architecture-overview.md#L36-L67), [24-observability-tool-ecosystem.md](domain-06-observability/24-observability-tool-ecosystem.md#L93-L142)
 
 ### 1.3 设计原则矩阵
 
@@ -69,7 +69,7 @@ Sources: [01-observability-architecture-overview.md](domain-8-observability/01-o
 | **RED 方法** | RED | Rate / Errors / Duration（请求导向） | 适用于 API / 微服务监控 |
 | **USE 方法** | USE | Utilization / Saturation / Errors（资源导向） | 适用于 CPU / 磁盘 / 网络监控 |
 
-Sources: [16-observability-design-principles.md](domain-2-design-principles/16-observability-design-principles.md#L52-L61)
+Sources: [16-observability-design-principles.md](domain-01-cluster-fundamentals/16-observability-design-principles.md#L52-L61)
 
 ---
 
@@ -79,7 +79,7 @@ Sources: [16-observability-design-principles.md](domain-2-design-principles/16-o
 
 Prometheus 是 Kubernetes 可观测性的事实标准，其生态由五个核心组件构成闭环：**Prometheus Server**（采集 + 存储 + 查询）、**Alertmanager**（告警路由 + 去重 + 抑制）、**Pushgateway**（短生命周期作业指标）、**Prometheus Operator**（CRD 管理生命周期）、**Kube-Prometheus-Stack**（一站式部署）。数据流遵循 Pull 模型——Prometheus 主动从 `/metrics` 端点拉取时序数据，通过 PromQL 查询引擎提供灵活聚合能力。
 
-Sources: [02-monitoring-metrics-system.md](domain-8-observability/02-monitoring-metrics-system.md#L13-L61)
+Sources: [02-monitoring-metrics-system.md](domain-06-observability/02-monitoring-metrics-system.md#L13-L61)
 
 ### 2.2 核心组件关键指标速查表
 
@@ -107,7 +107,7 @@ Sources: [02-monitoring-metrics-system.md](domain-8-observability/02-monitoring-
 | **CoreDNS** | `coredns_dns_request_duration_seconds` | Histogram | P99 > 100ms | DNS 解析性能 |
 | **容器 (cAdvisor)** | `container_memory_working_set_bytes` | Gauge | > limits | OOM 风险 |
 
-Sources: [10-monitoring-metrics-prometheus.md](domain-8-observability/10-monitoring-metrics-prometheus.md#L6-L136), [02-monitoring-metrics-system.md](domain-8-observability/02-monitoring-metrics-system.md#L112-L169)
+Sources: [10-monitoring-metrics-prometheus.md](domain-06-observability/10-monitoring-metrics-prometheus.md#L6-L136), [02-monitoring-metrics-system.md](domain-06-observability/02-monitoring-metrics-system.md#L112-L169)
 
 ### 2.3 高可用与企业级架构
 
@@ -120,7 +120,7 @@ Sources: [10-monitoring-metrics-prometheus.md](domain-8-observability/10-monitor
 | **Victoria Metrics** | 单二进制 + 高性能存储 | 部署简单、资源占用低 | 资源受限环境 |
 | **联邦架构** | Leaf Prometheus → Global Prometheus | 实现简单、无额外依赖 | 中小规模多集群 |
 
-Sources: [15-enterprise-scale-monitoring.md](domain-8-observability/15-enterprise-scale-monitoring.md#L73-L107), [02-monitoring-metrics-system.md](domain-8-observability/02-monitoring-metrics-system.md#L63-L106)
+Sources: [15-enterprise-scale-monitoring.md](domain-06-observability/15-enterprise-scale-monitoring.md#L73-L107), [02-monitoring-metrics-system.md](domain-06-observability/02-monitoring-metrics-system.md#L63-L106)
 
 ---
 
@@ -130,7 +130,7 @@ Sources: [15-enterprise-scale-monitoring.md](domain-8-observability/15-enterpris
 
 Kubernetes 日志遵循清晰的三层模型：**应用层**（业务日志 stdout/stderr + 访问日志 + 错误日志）→ **容器运行时层**（Docker/Containerd 日志驱动，输出到 `/var/log/containers/*.log`）→ **基础设施层**（DaemonSet 部署采集器、Sidecar 或应用直推）。理解这个层次是选对日志收集模式的前提。
 
-Sources: [03-logging-architecture.md](domain-8-observability/03-logging-architecture.md#L14-L53)
+Sources: [03-logging-architecture.md](domain-06-observability/03-logging-architecture.md#L14-L53)
 
 ### 3.2 日志收集模式与工具选型
 
@@ -153,7 +153,7 @@ Sources: [03-logging-architecture.md](domain-8-observability/03-logging-architec
 | 存储（全功能） | **Elasticsearch / OpenSearch** | 全文索引、Lucene 生态 | 大型集群 |
 | 存储（云原生） | **SLS (阿里云)** | 免运维、SQL 查询 | ACK 环境 |
 
-Sources: [03-logging-architecture.md](domain-8-observability/03-logging-architecture.md#L46-L104)
+Sources: [03-logging-architecture.md](domain-06-observability/03-logging-architecture.md#L46-L104)
 
 ### 3.3 审计日志：合规性的最后一道防线
 
@@ -168,7 +168,7 @@ Kubernetes 审计日志（Audit Log）是企业安全合规的核心数据源，
 
 合规框架映射方面，知识库覆盖了 **GDPR**（个人数据保护，72 小时违规报告）、**SOX**（萨班斯法案，财务数据完整性）、**PCI-DSS**（支付卡安全）、**等保 2.0** 等主流法规的日志审计要求，并按四级数据敏感度（公开 → 内部 → 敏感 → 机密）制定了保留策略和加密标准。
 
-Sources: [08-logging-audit-compliance.md](domain-8-observability/08-logging-audit-compliance.md#L54-L157), [09-events-audit-logs.md](domain-8-observability/09-events-audit-logs.md#L86-L124)
+Sources: [08-logging-audit-compliance.md](domain-06-observability/08-logging-audit-compliance.md#L54-L157), [09-events-audit-logs.md](domain-06-observability/09-events-audit-logs.md#L86-L124)
 
 ---
 
@@ -193,7 +193,7 @@ OpenTelemetry（OTel）已成为 CNCF 可观测性领域的统治性标准，其
 └─────────────────────────────────────────────────────────────┘
 ```
 
-Sources: [04-distributed-tracing.md](domain-8-observability/04-distributed-tracing.md#L78-L136), [03-opentelemetry-distributed-tracing.md](domain-20-enterprise-monitoring-alerting/03-opentelemetry-distributed-tracing.md#L10-L58)
+Sources: [04-distributed-tracing.md](domain-06-observability/04-distributed-tracing.md#L78-L136), [03-opentelemetry-distributed-tracing.md](domain-06-observability/03-opentelemetry-distributed-tracing.md#L10-L58)
 
 ### 4.2 追踪核心概念与数据模型
 
@@ -207,13 +207,13 @@ Sources: [04-distributed-tracing.md](domain-8-observability/04-distributed-traci
 | **属性标注** | 用户 ID、订单号等业务字段 | 为 Span 添加 `k8s.namespace` 等环境属性 |
 | **错误标记** | `StatusCode: ERROR` + 事件 | 记录异常堆栈和 DB 语句 |
 
-Sources: [04-distributed-tracing.md](domain-8-observability/04-distributed-tracing.md#L16-L74), [16-observability-design-principles.md](domain-2-design-principles/16-observability-design-principles.md#L222-L282)
+Sources: [04-distributed-tracing.md](domain-06-observability/04-distributed-tracing.md#L16-L74), [16-observability-design-principles.md](domain-01-cluster-fundamentals/16-observability-design-principles.md#L222-L282)
 
 ### 4.3 追踪与 Metrics / Logs 的关联
 
 现代可观测性的关键突破在于**三大信号的关联**：Trace 中的 `trace_id` 可以关联到对应的 Log 条目和 Metric 时间点，实现"从告警 → 日志 → 链路"的一键下钻。OpenTelemetry Collector 的 `spanmetrics` 处理器可自动从 Span 数据生成指标（如请求速率、错误率、延迟分布），实现无需额外埋点的 RED 指标。
 
-Sources: [04-distributed-tracing.md](domain-8-observability/04-distributed-tracing.md#L179-L184)
+Sources: [04-distributed-tracing.md](domain-06-observability/04-distributed-tracing.md#L179-L184)
 
 ---
 
@@ -223,7 +223,7 @@ Sources: [04-distributed-tracing.md](domain-8-observability/04-distributed-traci
 
 传统告警基于"CPU > 80%"等中间指标，这种方式容易产生告警风暴和假阳性。Google SRE 方法论推动的范式转移是：**告警应基于对用户有意义的 SLI（服务水平指标）**，通过**错误预算（Error Budget）**机制平衡质量与交付速度。例如，99.9% 可用性 SLO 意味着每月允许 43.2 分钟不可用——只要错误预算未耗尽，即使 CPU 100% 也不应触发紧急电话告警。
 
-Sources: [18-slo-sli-system.md](domain-8-observability/18-slo-sli-system.md#L87-L123), [05-alerting-management.md](domain-8-observability/05-alerting-management.md#L11-L38)
+Sources: [18-slo-sli-system.md](domain-06-observability/18-slo-sli-system.md#L87-L123), [05-alerting-management.md](domain-06-observability/05-alerting-management.md#L11-L38)
 
 ### 5.2 告警成熟度模型
 
@@ -239,7 +239,7 @@ Level 5 自主运维 → 完全自动处理、预防性维护、持续自我改�
 
 有效的告警必须同时满足三个属性：**Meaningful**（有意义的——影响用户或业务）、**Actionable**（可操作的——有明确处理步骤）、**Contextual**（上下文丰富的——包含 Pod 名称、节点信息、历史趋势）。避免的三种反模式：告警风暴（过多告警导致疲劳）、假阳性（频繁误报降低信任）、告警静默（重要问题被淹没）。
 
-Sources: [05-alerting-management.md](domain-8-observability/05-alerting-management.md#L78-L171), [16-observability-design-principles.md](domain-2-design-principles/16-observability-design-principles.md#L129-L157)
+Sources: [05-alerting-management.md](domain-06-observability/05-alerting-management.md#L78-L171), [16-observability-design-principles.md](domain-01-cluster-fundamentals/16-observability-design-principles.md#L129-L157)
 
 ---
 
@@ -249,7 +249,7 @@ Sources: [05-alerting-management.md](domain-8-observability/05-alerting-manageme
 
 混沌工程不是"随手杀进程"的随意破坏，而是**对分布式系统假设的严谨科学验证**。它遵循四项核心原则：**假设驱动**（明确实验假设和稳态指标）→ **真实世界条件**（在生产或类生产环境中模拟真实故障）→ **自动化执行**（CI/CD 集成、定期运行）→ **最小爆炸半径**（渐进式扩大、毫秒级熔断）。其终局不是偶尔的"演习"，而是集成到每次发布的自动化验证流水线。
 
-Sources: [15-chaos-engineering.md](domain-2-design-principles/15-chaos-engineering.md#L1-L9), [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.md#L67-L76)
+Sources: [15-chaos-engineering.md](domain-01-cluster-fundamentals/15-chaos-engineering.md#L1-L9), [14-chaos-engineering.md](domain-06-observability/14-chaos-engineering.md#L67-L76)
 
 ### 6.2 工具选型对比
 
@@ -261,7 +261,7 @@ Sources: [15-chaos-engineering.md](domain-2-design-principles/15-chaos-engineeri
 | **Gremlin** | SaaS | ✅ | 全场景 | 低 | ⭐⭐⭐⭐ | 企业级托管 |
 | **AWS FIS** | 托管 | ❌ | AWS 资源 | 低 | ⭐⭐⭐⭐ | AWS 环境 |
 
-Sources: [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.md#L78-L104)
+Sources: [14-chaos-engineering.md](domain-06-observability/14-chaos-engineering.md#L78-L104)
 
 ### 6.3 故障注入层次模型
 
@@ -274,7 +274,7 @@ Sources: [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.m
 | **服务层** | DNS 解析失败、网络分区、Pod 杀死 | DNSChaos / NetworkChaos / PodChaos | tc / iptables / API | 服务降级、自愈能力 |
 | **应用层** | HTTP 错误、JVM 异常、gRPC 故障 | HTTPChaos / JVMChaos | eBPF / Byteman | API 容错、应用弹性 |
 
-Sources: [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.md#L91-L104)
+Sources: [14-chaos-engineering.md](domain-06-observability/14-chaos-engineering.md#L91-L104)
 
 ### 6.4 混沌实验生命周期
 
@@ -291,7 +291,7 @@ graph TD
     D -->|"爆炸半径超标"| G
 ```
 
-Sources: [15-chaos-engineering.md](domain-2-design-principles/15-chaos-engineering.md#L86-L118), [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.md#L6-L22)
+Sources: [15-chaos-engineering.md](domain-01-cluster-fundamentals/15-chaos-engineering.md#L86-L118), [14-chaos-engineering.md](domain-06-observability/14-chaos-engineering.md#L6-L22)
 
 ---
 
@@ -310,7 +310,7 @@ Phase 5 韧性验证 (Weeks 9-10) →  部署 Chaos Mesh + 编排故障实验 + 
 Phase 6 持续优化 (持续)       →  告警调优 + 仪表盘优化 + 成本控制 + AIOps 探索
 ```
 
-Sources: [01-observability-architecture-overview.md](domain-8-observability/01-observability-architecture-overview.md#L396-L433)
+Sources: [01-observability-architecture-overview.md](domain-06-observability/01-observability-architecture-overview.md#L396-L433)
 
 ### 7.2 成本优化核心策略
 
@@ -321,7 +321,7 @@ Sources: [01-observability-architecture-overview.md](domain-8-observability/01-o
 | **日志分层保留** | Debug 24h / Info 7d / Error 90d / Audit 1y+ | 降低 70% 存储成本 |
 | **冷热分层存储** | 热 SSD 7d → 温 SATA 90d → 冷 S3 3y+ | 降低 80% 存储成本 |
 
-Sources: [01-observability-architecture-overview.md](domain-8-observability/01-observability-architecture-overview.md#L361-L392)
+Sources: [01-observability-architecture-overview.md](domain-06-observability/01-observability-architecture-overview.md#L361-L392)
 
 ### 7.3 深度学习路径
 
@@ -331,24 +331,24 @@ Sources: [01-observability-architecture-overview.md](domain-8-observability/01-o
 
 | 学习方向 | 推荐文档 | 核心内容 |
 |---------|---------|---------|
-| 指标监控深度 | [02-monitoring-metrics-system.md](domain-8-observability/02-monitoring-metrics-system.md) | Prometheus HA 架构、核心组件指标详解 |
-| Prometheus 实战 | [10-monitoring-metrics-prometheus.md](domain-8-observability/10-monitoring-metrics-prometheus.md) | 全组件关键指标速查表 |
-| 日志架构设计 | [03-logging-architecture.md](domain-8-observability/03-logging-architecture.md) | Fluent Bit 生产配置、三种收集模式 |
-| 审计与合规 | [08-logging-audit-compliance.md](domain-8-observability/08-logging-audit-compliance.md) | GDPR/SOX/PCI-DSS 合规映射 |
-| 分布式追踪 | [04-distributed-tracing.md](domain-8-observability/04-distributed-tracing.md) | OTel Collector 生产配置、Span 数据模型 |
-| 告警管理 | [05-alerting-management.md](domain-8-observability/05-alerting-management.md) | PrometheusRule 编写、告警成熟度模型 |
-| SLO/SLI 体系 | [18-slo-sli-system.md](domain-8-observability/18-slo-sli-system.md) | 错误预算机制、用户旅程映射 |
-| 混沌工程实践 | [14-chaos-engineering.md](domain-8-observability/14-chaos-engineering.md) | Chaos Mesh 全故障类型配置、NetworkChaos 实验 |
-| 大规模监控 | [15-enterprise-scale-monitoring.md](domain-8-observability/15-enterprise-scale-monitoring.md) | Thanos 企业部署、联邦架构 |
-| 工具生态全景 | [24-observability-tool-ecosystem.md](domain-8-observability/24-observability-tool-ecosystem.md) | CNCF 项目成熟度评估、商业 APM 对比 |
+| 指标监控深度 | [02-monitoring-metrics-system.md](domain-06-observability/02-monitoring-metrics-system.md) | Prometheus HA 架构、核心组件指标详解 |
+| Prometheus 实战 | [10-monitoring-metrics-prometheus.md](domain-06-observability/10-monitoring-metrics-prometheus.md) | 全组件关键指标速查表 |
+| 日志架构设计 | [03-logging-architecture.md](domain-06-observability/03-logging-architecture.md) | Fluent Bit 生产配置、三种收集模式 |
+| 审计与合规 | [08-logging-audit-compliance.md](domain-06-observability/08-logging-audit-compliance.md) | GDPR/SOX/PCI-DSS 合规映射 |
+| 分布式追踪 | [04-distributed-tracing.md](domain-06-observability/04-distributed-tracing.md) | OTel Collector 生产配置、Span 数据模型 |
+| 告警管理 | [05-alerting-management.md](domain-06-observability/05-alerting-management.md) | PrometheusRule 编写、告警成熟度模型 |
+| SLO/SLI 体系 | [18-slo-sli-system.md](domain-06-observability/18-slo-sli-system.md) | 错误预算机制、用户旅程映射 |
+| 混沌工程实践 | [14-chaos-engineering.md](domain-06-observability/14-chaos-engineering.md) | Chaos Mesh 全故障类型配置、NetworkChaos 实验 |
+| 大规模监控 | [15-enterprise-scale-monitoring.md](domain-06-observability/15-enterprise-scale-monitoring.md) | Thanos 企业部署、联邦架构 |
+| 工具生态全景 | [24-observability-tool-ecosystem.md](domain-06-observability/24-observability-tool-ecosystem.md) | CNCF 项目成熟度评估、商业 APM 对比 |
 
 **跨域关联阅读**
 
 | 关联主题 | 文档位置 | 关联原因 |
 |---------|---------|---------|
-| 可观测性设计原则 | [16-observability-design-principles.md](domain-2-design-principles/16-observability-design-principles.md) | 白盒 / 黑盒监控、USE / RED / Golden Signals 方法论 |
-| 混沌工程设计 | [15-chaos-engineering.md](domain-2-design-principles/15-chaos-engineering.md) | 故障注入四原则、实验生命周期 Go 代码实现 |
-| 架构层可观测性 | [15-observability-architecture.md](domain-1-architecture-fundamentals/15-observability-architecture.md) | 四大支柱理论、持续剖析第四支柱 |
-| OTel 深度实践 | [03-opentelemetry-distributed-tracing.md](domain-20-enterprise-monitoring-alerting/03-opentelemetry-distributed-tracing.md) | 企业级 Collector 部署、数据模型深度解析 |
+| 可观测性设计原则 | [16-observability-design-principles.md](domain-01-cluster-fundamentals/16-observability-design-principles.md) | 白盒 / 黑盒监控、USE / RED / Golden Signals 方法论 |
+| 混沌工程设计 | [15-chaos-engineering.md](domain-01-cluster-fundamentals/15-chaos-engineering.md) | 故障注入四原则、实验生命周期 Go 代码实现 |
+| 架构层可观测性 | [15-observability-architecture.md](domain-01-cluster-fundamentals/15-observability-architecture.md) | 四大支柱理论、持续剖析第四支柱 |
+| OTel 深度实践 | [03-opentelemetry-distributed-tracing.md](domain-06-observability/03-opentelemetry-distributed-tracing.md) | 企业级 Collector 部署、数据模型深度解析 |
 
 **下一步建议阅读**：根据目录结构，建议按顺序阅读 [故障排查方法论：FTA 故障树分析](13-fta-gu-zhang-shu-fen-xi-cong-yan-yi-tui-li-dao-ai-agent-zhi-shi-gu-jia) 了解如何将可观测性数据转化为结构化排障能力，以及 [安全合规：RBAC 与零信任架构](11-an-quan-he-gui-rbac-wang-luo-an-quan-ce-lue-yun-xing-shi-an-quan-yu-ling-xin-ren-jia-gou) 理解审计日志在安全体系中的定位。

@@ -1,3 +1,32 @@
+---
+title: kudig-database 全面修复进展总览
+description: '### 第三轮: 内容深度 + 多云 + 培训'
+category: general
+tags:
+- k8s
+- helm
+- ingress
+- gateway
+- rbac
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 全面修复进展总览 是什么
+- 如何 kudig-database 全面修复进展总览
+trigger_keywords:
+- kudig-database
+- 全面修复进展总览
+prerequisites:
+- kubectl-basics
+- helm-basics
+---
+
 # kudig-database 全面修复进展总览
 
 > **修复日期**: 2026-05-19
@@ -40,12 +69,12 @@
 
 ## 新增文件清单
 
-### topic-qa-corpus/ (20 个文件)
+### domain-10-troubleshooting-diagnostics/topic-qa-corpus/ (20 个文件)
 - 18 个 domain QA YAML 文件 (2,336 QA 对)
 - 1 个命令输出诊断语料 (23 场景)
-- 1 个 README 索引
+- 1 个 [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]] 索引
 
-### topic-skills/scripts/ (17 个脚本)
+### domain-10-troubleshooting-diagnostics/topic-skills/scripts/ (17 个脚本)
 - diagnose-pod-crashloop.sh
 - diagnose-pod-pending.sh
 - diagnose-dns-failure.sh
@@ -64,7 +93,7 @@
 - diagnose-performance-bottleneck.sh
 - diagnose-security-incident.sh
 
-### topic-cheat-sheet/ (3 个新文件)
+### domain-17-system-foundation/topic-cheat-sheet/ (3 个新文件)
 - helm.md
 - gitops.md
 - gateway-api.md

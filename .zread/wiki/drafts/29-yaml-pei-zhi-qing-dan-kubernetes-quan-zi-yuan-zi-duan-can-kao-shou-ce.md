@@ -1,12 +1,12 @@
 在 Kubernetes 的世界里，**YAML 清单文件是声明式配置的基石**——你用 YAML 告诉集群"我想要什么状态"，控制器负责将实际状态收敛到你的期望。本手册覆盖 Kubernetes v1.25 至 v1.32 全部 60+ 种原生 API 资源及常用生态工具的完整 YAML 配置规范，按 36 篇专题文档组织，从零基础的最小可用示例到专家级完整字段规格，每一行配置都附带中文注释与版本兼容标注。无论你是在写第一个 Deployment 还是在设计企业级 CRD Schema，都可以在这里找到即查即用的参考。
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L1-L167)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L1-L167)
 
 ## 为什么 YAML 清单如此重要？
 
 Kubernetes 采用**声明式 API**设计范式：用户提交 YAML 描述期望状态，API Server 存储到 etcd，各控制器持续驱动实际状态向期望状态收敛。这意味着 YAML 不仅仅是一种配置格式，它是你与集群之间的**唯一契约**。掌握 YAML 清单等于掌握了 Kubernetes 的核心交互语言。这一设计理念带来了四个关键优势：纯文本格式天然适配 Git 版本控制与 GitOps 工作流；相比 JSON 更简洁直观且支持注释；Helm、Kustomize、ArgoCD 等工具链都以 YAML 作为输入；`kubectl apply -f` 的声明式操作天然幂等、可审计。
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L46-L62)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L46-L62)
 
 ## 手册全景结构：36 篇文档的领域地图
 
@@ -92,7 +92,7 @@ graph TD
     style AF fill:#E67E22,color:#fff,stroke:#BF6516
 ```
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L19-L94)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L19-L94)
 
 ## 快速入门：YAML 清单的四大顶层字段
 
@@ -129,7 +129,7 @@ spec:                        # ④ 期望状态 —— 用户定义的资源具�
 | `spec` | 用户定义的期望状态 | ✅（大多数资源） | ✅ |
 | `status` | 系统维护的实际状态 | 自动生成 | ❌（只读） |
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L539-L555), [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L711-L757)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L539-L555), [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L711-L757)
 
 ## API 组与版本速查表：你该用哪个 apiVersion？
 
@@ -151,7 +151,7 @@ Kubernetes 将资源按功能域划分为多个 **API 组**，每组有独立的
 
 **版本选择原则**：生产环境**必须使用 stable 版本**（不带 alpha/beta 标识），测试环境可尝试 beta 版本，**绝不在生产环境使用 alpha 版本**。当 Kubernetes 升级导致某个 API 版本被弃用时，可使用 `kubectl api-resources` 检查当前可用版本，或用 Pluto 等工具批量检测。
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L575-L594), [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L2124-L2172)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L575-L594), [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L2124-L2172)
 
 ## 初学者最常用的五种 YAML 清单
 
@@ -183,7 +183,7 @@ spec:
         memory: "512Mi"
 ```
 
-Sources: [03-pod-specification-complete.md](domain-32-yaml-manifests/03-pod-specification-complete.md#L29-L83)
+Sources: [03-pod-specification-complete.md](domain-18-manifests-patterns/03-pod-specification-complete.md#L29-L83)
 
 ### 2. Deployment — 无状态应用部署
 
@@ -215,7 +215,7 @@ spec:
             memory: "128Mi"
 ```
 
-Sources: [04-deployment-replicaset.md](domain-32-yaml-manifests/04-deployment-replicaset.md#L46-L80)
+Sources: [04-deployment-replicaset.md](domain-18-manifests-patterns/04-deployment-replicaset.md#L46-L80)
 
 ### 3. Service — 服务发现与负载均衡
 
@@ -244,7 +244,7 @@ spec:
 | **ExternalName** | 返回 CNAME 记录的 DNS 别名 | 集群内引用外部服务 |
 | **Headless** (clusterIP: None) | 不分配 VIP，直接返回 Pod IP | StatefulSet 服务发现 |
 
-Sources: [08-service-all-types.md](domain-32-yaml-manifests/08-service-all-types.md#L1-L80)
+Sources: [08-service-all-types.md](domain-18-manifests-patterns/08-service-all-types.md#L1-L80)
 
 ### 4. ConfigMap — 非敏感配置管理
 
@@ -277,7 +277,7 @@ data:
 | 大小限制 | 1 MiB | 1 MiB |
 | 不可变标记 | v1.21+ 支持 | v1.21+ 支持 |
 
-Sources: [13-configmap-reference.md](domain-32-yaml-manifests/13-configmap-reference.md#L23-L80)
+Sources: [13-configmap-reference.md](domain-18-manifests-patterns/13-configmap-reference.md#L23-L80)
 
 ### 5. Ingress — HTTP 路由与 TLS 终结
 
@@ -304,7 +304,7 @@ spec:
               number: 80
 ```
 
-Sources: [10-ingress-ingressclass.md](domain-32-yaml-manifests/10-ingress-ingressclass.md#L1-L80)
+Sources: [10-ingress-ingressclass.md](domain-18-manifests-patterns/10-ingress-ingressclass.md#L1-L80)
 
 ## 全资源分类索引：36 篇文档导航
 
@@ -314,64 +314,64 @@ Sources: [10-ingress-ingressclass.md](domain-32-yaml-manifests/10-ingress-ingres
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 03 | [Pod 完整规格](domain-32-yaml-manifests/03-pod-specification-complete.md) | 容器规格、卷挂载、安全上下文、调度、探针 | ⭐⭐⭐⭐⭐ |
-| 04 | [Deployment / ReplicaSet](domain-32-yaml-manifests/04-deployment-replicaset.md) | 无状态部署、滚动更新策略、回滚操作 | ⭐⭐⭐⭐⭐ |
-| 05 | [StatefulSet](domain-32-yaml-manifests/05-statefulset-reference.md) | 有状态应用、稳定网络标识、有序部署/终止 | ⭐⭐⭐⭐ |
-| 06 | [DaemonSet](domain-32-yaml-manifests/06-daemonset-reference.md) | 节点守护进程、日志/监控 Agent 部署 | ⭐⭐⭐⭐ |
-| 07 | [Job / CronJob](domain-32-yaml-manifests/07-job-cronjob-reference.md) | 批处理任务、定时调度、失败重试策略 | ⭐⭐⭐⭐ |
+| 03 | [Pod 完整规格](domain-18-manifests-patterns/03-pod-specification-complete.md) | 容器规格、卷挂载、安全上下文、调度、探针 | ⭐⭐⭐⭐⭐ |
+| 04 | [Deployment / ReplicaSet](domain-18-manifests-patterns/04-deployment-replicaset.md) | 无状态部署、滚动更新策略、回滚操作 | ⭐⭐⭐⭐⭐ |
+| 05 | [StatefulSet](domain-18-manifests-patterns/05-statefulset-reference.md) | 有状态应用、稳定网络标识、有序部署/终止 | ⭐⭐⭐⭐ |
+| 06 | [DaemonSet](domain-18-manifests-patterns/06-daemonset-reference.md) | 节点守护进程、日志/监控 Agent 部署 | ⭐⭐⭐⭐ |
+| 07 | [Job / CronJob](domain-18-manifests-patterns/07-job-cronjob-reference.md) | 批处理任务、定时调度、失败重试策略 | ⭐⭐⭐⭐ |
 
 ### 服务发现与流量管理
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 08 | [Service 全类型](domain-32-yaml-manifests/08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless | ⭐⭐⭐⭐⭐ |
-| 09 | [Endpoints / EndpointSlice](domain-32-yaml-manifests/09-endpoints-endpointslice.md) | 端点管理、分片机制、外部服务集成 | ⭐⭐⭐ |
-| 10 | [Ingress / IngressClass](domain-32-yaml-manifests/10-ingress-ingressclass.md) | HTTP 路由、TLS 终结、控制器配置 | ⭐⭐⭐⭐⭐ |
-| 11 | [Gateway API 核心](domain-32-yaml-manifests/11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute | ⭐⭐⭐⭐ |
-| 12 | [Gateway API 高级路由](domain-32-yaml-manifests/12-gateway-api-advanced-routes.md) | gRPC/TCP/TLS/UDP Route、ReferenceGrant | ⭐⭐⭐ |
+| 08 | [Service 全类型](domain-18-manifests-patterns/08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless | ⭐⭐⭐⭐⭐ |
+| 09 | [Endpoints / EndpointSlice](domain-18-manifests-patterns/09-endpoints-endpointslice.md) | 端点管理、分片机制、外部服务集成 | ⭐⭐⭐ |
+| 10 | [Ingress / IngressClass](domain-18-manifests-patterns/10-ingress-ingressclass.md) | HTTP 路由、TLS 终结、控制器配置 | ⭐⭐⭐⭐⭐ |
+| 11 | [Gateway API 核心](domain-18-manifests-patterns/11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute | ⭐⭐⭐⭐ |
+| 12 | [Gateway API 高级路由](domain-18-manifests-patterns/12-gateway-api-advanced-routes.md) | gRPC/TCP/TLS/UDP Route、ReferenceGrant | ⭐⭐⭐ |
 
 ### 配置与存储管理
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 13 | [ConfigMap](domain-32-yaml-manifests/13-configmap-reference.md) | 配置管理、环境变量注入、Volume 挂载、热更新 | ⭐⭐⭐⭐⭐ |
-| 14 | [Secret 全类型](domain-32-yaml-manifests/14-secret-all-types.md) | 8 种 Secret 类型、加密存储、安全实践 | ⭐⭐⭐⭐⭐ |
-| 15 | [PersistentVolume](domain-32-yaml-manifests/15-persistentvolume-reference.md) | 持久卷、所有卷源类型、生命周期管理 | ⭐⭐⭐⭐ |
-| 16 | [PersistentVolumeClaim](domain-32-yaml-manifests/16-persistentvolumeclaim-reference.md) | 卷声明、动态供给、扩容、克隆 | ⭐⭐⭐⭐ |
-| 17 | [StorageClass / VolumeSnapshot](domain-32-yaml-manifests/17-storageclass-volumesnapshot.md) | 存储类、卷快照、快照恢复 | ⭐⭐⭐⭐ |
-| 18 | [CSI 驱动资源](domain-32-yaml-manifests/18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity | ⭐⭐⭐ |
+| 13 | [ConfigMap](domain-18-manifests-patterns/13-configmap-reference.md) | 配置管理、环境变量注入、Volume 挂载、热更新 | ⭐⭐⭐⭐⭐ |
+| 14 | [Secret 全类型](domain-18-manifests-patterns/14-secret-all-types.md) | 8 种 Secret 类型、加密存储、安全实践 | ⭐⭐⭐⭐⭐ |
+| 15 | [PersistentVolume](domain-18-manifests-patterns/15-persistentvolume-reference.md) | 持久卷、所有卷源类型、生命周期管理 | ⭐⭐⭐⭐ |
+| 16 | [PersistentVolumeClaim](domain-18-manifests-patterns/16-persistentvolumeclaim-reference.md) | 卷声明、动态供给、扩容、克隆 | ⭐⭐⭐⭐ |
+| 17 | [StorageClass / VolumeSnapshot](domain-18-manifests-patterns/17-storageclass-volumesnapshot.md) | 存储类、卷快照、快照恢复 | ⭐⭐⭐⭐ |
+| 18 | [CSI 驱动资源](domain-18-manifests-patterns/18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity | ⭐⭐⭐ |
 
 ### 安全与访问控制
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 19 | [ServiceAccount / Token](domain-32-yaml-manifests/19-serviceaccount-token.md) | 服务账户、Token 管理、证书签发 | ⭐⭐⭐⭐ |
-| 20 | [Role / RoleBinding](domain-32-yaml-manifests/20-rbac-role-rolebinding.md) | 命名空间级 RBAC 权限定义与绑定 | ⭐⭐⭐⭐⭐ |
-| 21 | [ClusterRole / ClusterRoleBinding](domain-32-yaml-manifests/21-rbac-clusterrole-clusterrolebinding.md) | 集群级 RBAC、访问审查 | ⭐⭐⭐⭐ |
-| 22 | [NetworkPolicy](domain-32-yaml-manifests/22-networkpolicy-reference.md) | 网络策略、微分段、零信任网络 | ⭐⭐⭐⭐⭐ |
-| 23 | [Pod Security Standards](domain-32-yaml-manifests/23-pod-security-standards.md) | PSS 三级别（Privileged/Baseline/Restricted）、PSA 配置 | ⭐⭐⭐⭐ |
-| 24 | [Admission Webhook](domain-32-yaml-manifests/24-admission-webhook-configuration.md) | Validating/Mutating Webhook 配置 | ⭐⭐⭐ |
-| 25 | [ValidatingAdmissionPolicy](domain-32-yaml-manifests/25-validatingadmissionpolicy.md) | 原生准入策略、CEL 表达式 (v1.30+) | ⭐⭐⭐ |
+| 19 | [ServiceAccount / Token](domain-18-manifests-patterns/19-serviceaccount-token.md) | 服务账户、Token 管理、证书签发 | ⭐⭐⭐⭐ |
+| 20 | [Role / RoleBinding](domain-18-manifests-patterns/20-rbac-role-rolebinding.md) | 命名空间级 RBAC 权限定义与绑定 | ⭐⭐⭐⭐⭐ |
+| 21 | [ClusterRole / ClusterRoleBinding](domain-18-manifests-patterns/21-rbac-clusterrole-clusterrolebinding.md) | 集群级 RBAC、访问审查 | ⭐⭐⭐⭐ |
+| 22 | [NetworkPolicy](domain-18-manifests-patterns/22-networkpolicy-reference.md) | 网络策略、微分段、零信任网络 | ⭐⭐⭐⭐⭐ |
+| 23 | [Pod Security Standards](domain-18-manifests-patterns/23-pod-security-standards.md) | PSS 三级别（Privileged/Baseline/Restricted）、PSA 配置 | ⭐⭐⭐⭐ |
+| 24 | [Admission Webhook](domain-18-manifests-patterns/24-admission-webhook-configuration.md) | Validating/Mutating Webhook 配置 | ⭐⭐⭐ |
+| 25 | [ValidatingAdmissionPolicy](domain-18-manifests-patterns/25-validatingadmissionpolicy.md) | 原生准入策略、CEL 表达式 (v1.30+) | ⭐⭐⭐ |
 
 ### 调度、扩缩容与集群管理
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 26 | [PriorityClass / RuntimeClass](domain-32-yaml-manifests/26-priorityclass-runtimeclass.md) | 优先级抢占、运行时类、DRA | ⭐⭐⭐⭐ |
-| 27 | [HPA v2](domain-32-yaml-manifests/27-hpa-autoscaling-v2.md) | 水平扩缩容、自定义指标、行为策略 | ⭐⭐⭐⭐⭐ |
-| 28 | [PodDisruptionBudget](domain-32-yaml-manifests/28-poddisruptionbudget-reference.md) | Pod 中断预算、滚动更新保护 | ⭐⭐⭐⭐ |
-| 29 | [CRD](domain-32-yaml-manifests/29-customresourcedefinition.md) | 自定义资源定义、Schema 验证、CEL 规则 | ⭐⭐⭐⭐ |
-| 33 | [kubeadm 集群引导](domain-32-yaml-manifests/33-kubeadm-cluster-bootstrap.md) | ClusterConfiguration、init/join 配置 | ⭐⭐⭐⭐ |
-| 34 | [组件配置](domain-32-yaml-manifests/34-component-configuration.md) | Kubelet/KubeProxy/Scheduler 配置文件 | ⭐⭐⭐⭐ |
+| 26 | [PriorityClass / RuntimeClass](domain-18-manifests-patterns/26-priorityclass-runtimeclass.md) | 优先级抢占、运行时类、DRA | ⭐⭐⭐⭐ |
+| 27 | [HPA v2](domain-18-manifests-patterns/27-hpa-autoscaling-v2.md) | 水平扩缩容、自定义指标、行为策略 | ⭐⭐⭐⭐⭐ |
+| 28 | [PodDisruptionBudget](domain-18-manifests-patterns/28-poddisruptionbudget-reference.md) | Pod 中断预算、滚动更新保护 | ⭐⭐⭐⭐ |
+| 29 | [CRD](domain-18-manifests-patterns/29-customresourcedefinition.md) | 自定义资源定义、Schema 验证、CEL 规则 | ⭐⭐⭐⭐ |
+| 33 | [kubeadm 集群引导](domain-18-manifests-patterns/33-kubeadm-cluster-bootstrap.md) | ClusterConfiguration、init/join 配置 | ⭐⭐⭐⭐ |
+| 34 | [组件配置](domain-18-manifests-patterns/34-component-configuration.md) | Kubelet/KubeProxy/Scheduler 配置文件 | ⭐⭐⭐⭐ |
 
 ### 高级模式与生态工具
 
 | 编号 | 文档 | 关键内容 | 使用频率 |
 |:----:|:-----|:---------|:---------|
-| 35 | [高级 Pod 模式](domain-32-yaml-manifests/35-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
-| 36 | [Kustomize / Helm / ArgoCD](domain-32-yaml-manifests/36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置、模板引擎、GitOps | ⭐⭐⭐⭐ |
+| 35 | [高级 Pod 模式](domain-18-manifests-patterns/35-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
+| 36 | [Kustomize / Helm / ArgoCD](domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置、模板引擎、GitOps | ⭐⭐⭐⭐ |
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L19-L94)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L19-L94)
 
 ## YAML 语法核心要点与常见陷阱
 
@@ -425,7 +425,7 @@ spec:
     image: log-collector:v1.0
 ```
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L65-L155), [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L389-L536), [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L157-L260), [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L262-L387)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L65-L155), [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L389-L536), [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L157-L260), [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L262-L387)
 
 ## 标签与注解：组织资源的双引擎
 
@@ -442,7 +442,7 @@ Kubernetes 使用 **Labels（标签）** 和 **Annotations（注解）** 两种�
 | `app.kubernetes.io/part-of` | 所属应用系统 | `ecommerce` |
 | `app.kubernetes.io/managed-by` | 管理工具 | `helm`、`kustomize`、`argocd` |
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L788-L799)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L788-L799)
 
 ## kubectl apply vs create：声明式与命令式的本质区别
 
@@ -456,7 +456,7 @@ Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-ya
 
 **最佳实践**：日常开发和运维始终使用 `kubectl apply`，仅在首次初始化或临时测试时使用 `kubectl create`。
 
-Sources: [01-yaml-syntax-resource-conventions.md](domain-32-yaml-manifests/01-yaml-syntax-resource-conventions.md#L2173-L2191)
+Sources: [01-yaml-syntax-resource-conventions.md](domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md#L2173-L2191)
 
 ## 学习路径推荐
 
@@ -501,7 +501,7 @@ graph LR
 
 **入门路径**（`01 → 03 → 04 → 08 → 13 → 14`）：掌握 YAML 语法和五大核心资源，能独立编写应用部署清单。**进阶路径**（`02 → 05 → 10 → 15 → 16 → 20 → 22 → 27`）：深入有状态应用、外部访问、持久存储和安全策略，具备生产环境运维能力。**专家路径**（`11/12 → 25 → 29 → 31 → 34 → 35 → 36`）：精通 Gateway API、CRD 开发、组件调优和生态工具，能设计企业级 Kubernetes 平台。
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L97-L109)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L97-L109)
 
 ## 按使用频率的快速检索
 
@@ -512,7 +512,7 @@ Sources: [README.md](domain-32-yaml-manifests/README.md#L97-L109)
 | **低频（高级场景）** | 09, 11, 12, 18, 24, 25, 29, 30, 31, 32 | 特定架构需求或平台工程 |
 | **专家（平台工程）** | 33, 34, 35, 36 | 集群管理、组件调优、生态工具集成 |
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L127-L134)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L127-L134)
 
 ## 与其他知识域的互补关系
 
@@ -526,7 +526,7 @@ Sources: [README.md](domain-32-yaml-manifests/README.md#L127-L134)
 | [安全合规：RBAC、网络安全策略、运行时安全与零信任架构](11-an-quan-he-gui-rbac-wang-luo-an-quan-ce-lue-yun-xing-shi-an-quan-yu-ling-xin-ren-jia-gou) | 那里讲安全体系设计，这里讲 RBAC/NetworkPolicy/PSS 的 YAML 规格 |
 | [速查卡合集：K8s、Linux、Docker、PromQL、Git、SQL](30-su-cha-qia-he-ji-k8s-linux-docker-promql-git-sql) | 速查卡聚焦 kubectl 命令操作，本手册聚焦 YAML 字段配置 |
 
-Sources: [README.md](domain-32-yaml-manifests/README.md#L152-L163)
+Sources: [README.md](domain-18-manifests-patterns/README.md#L152-L163)
 
 ## 延伸阅读与下一步
 

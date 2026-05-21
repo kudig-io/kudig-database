@@ -219,7 +219,7 @@ from langchain.vectorstores import Chroma
 
 # 1. 加载核心语料
 loader = DirectoryLoader(
-    './domain-12-troubleshooting/',
+    './domain-10-troubleshooting-diagnostics/',
     glob='**/*.md',
     show_progress=True
 )

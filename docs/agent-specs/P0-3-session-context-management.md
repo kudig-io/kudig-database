@@ -25,8 +25,11 @@ trigger_keywords:
 - Session
 - Context
 - Management
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
 ---
-
 
 # 会话上下文管理机制 (Session Context Management)
 
@@ -629,5 +632,5 @@ Integration_Monitoring:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)
-- [topic-skills/README.md](../topic-skills/README.md)
-- [topic-fta/list/](../topic-fta/list/) — FTA 故障树参考
+- [domain-10-troubleshooting-diagnostics/topic-skills/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) — FTA 故障树参考

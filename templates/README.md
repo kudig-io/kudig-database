@@ -13,11 +13,11 @@
 | 模板文件 | 用途 | 适用目录 | 复杂度 |
 |:---|:---|:---|:---:|
 | `domain-article-template.md` | 知识域深度文档 | `domain-*/` | ⭐⭐⭐ |
-| `fta-template.md` | FTA 故障树分析（融合附录模板） | `topic-fta/list/` | ⭐⭐⭐ |
-| `skill-template.md` | Skill 工单技能（融合 Schema 完整规范） | `topic-skills/` | ⭐⭐⭐⭐ |
-| `febm-template.md` | FEBM 法医取证分析 | `topic-febm/` | ⭐⭐⭐ |
-| `cheat-sheet-template.md` | 技术速查卡 | `topic-cheat-sheet/` | ⭐ |
-| `presentation-template.md` | 培训课程/演讲稿 | `topic-presentations/` | ⭐⭐⭐ |
+| `fta-template.md` | FTA 故障树分析（融合附录模板） | `domain-10-troubleshooting-diagnostics/topic-fta/list/` | ⭐⭐⭐ |
+| `skill-template.md` | Skill 工单技能（融合 Schema 完整规范） | `domain-10-troubleshooting-diagnostics/topic-skills/` | ⭐⭐⭐⭐ |
+| `febm-template.md` | FEBM 法医取证分析 | `domain-10-troubleshooting-diagnostics/topic-febm/` | ⭐⭐⭐ |
+| `cheat-sheet-template.md` | 技术速查卡 | `domain-17-system-foundation/topic-cheat-sheet/` | ⭐ |
+| `presentation-template.md` | 培训课程/演讲稿 | `domain-11-production-operations/topic-presentations/` | ⭐⭐⭐ |
 
 ---
 
@@ -59,7 +59,7 @@ related_docs:
 
 ```bash
 # 1. 选择对应模板
-cp templates/fta-template.md topic-fta/list/12-new-component-fta.md
+cp templates/fta-template.md domain-10-troubleshooting-diagnostics/topic-fta/list/12-new-component-fta.md
 
 # 2. 全局替换占位符
 # {{组件名称}} → 实际内容
@@ -80,3 +80,26 @@ cp templates/fta-template.md topic-fta/list/12-new-component-fta.md
 |:---:|:---:|:---|
 | 1.0 | 2026-03 | 初始版本，5套模板独立存在 |
 | 2.0 | 2026-05 | 合并 skill-schema + skill-template 为完整 Skill 模板；融合 appendix-d-templates 到 FTA 模板；新增 FEBM 模板；presentation-template 纳入体系 |
+
+## Related
+
+- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
+- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
+- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]

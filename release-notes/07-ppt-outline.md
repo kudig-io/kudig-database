@@ -1,3 +1,40 @@
+---
+title: kudig-database 发布会 PPT 大纲 (20 页)
+description: '**设计风格**: 深蓝 (#0A1628) + 青色 (#00E5FF) 科技风'
+category: general
+tags:
+- k8s
+- etcd
+- prometheus
+- istio
+- envoy
+- argocd
+- ebpf
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 发布会 PPT 大纲 (20 页) 是什么
+- 如何 kudig-database 发布会 PPT 大纲 (20 页)
+trigger_keywords:
+- kudig-database
+- 发布会
+- PPT
+- 大纲
+- '20'
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
+- ebpf-basics
+- etcd-basics
+---
+
 # kudig-database 发布会 PPT 大纲 (20 页)
 
 > **设计风格**: 深蓝 (#0A1628) + 青色 (#00E5FF) 科技风
@@ -312,7 +349,7 @@
 **标题**: 覆盖 218 个 CNCF 项目
 **核心内容**:
 - CNCF 项目云图 / 关系图
-- 核心项目高亮: Kubernetes, etcd, Prometheus, Envoy, Istio, ArgoCD, ...
+- 核心项目高亮: Kubernetes, etcd, Prometheus, [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]], Istio, ArgoCD, ...
 - 数据: 218 个项目 · 40 个知识域 · 97 个行业场景
 - 底部: "从核心项目到生态工具, 全面覆盖"
 

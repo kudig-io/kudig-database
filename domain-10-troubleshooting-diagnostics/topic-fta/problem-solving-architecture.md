@@ -1,0 +1,489 @@
+---
+title: 问题排查体系架构文档
+description: 'title: 问题排查体系架构文档'
+category: fta
+tags:
+- fta
+- troubleshooting
+- architecture
+- prometheus
+- grafana
+- gpu
+- rag
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 15min
+intent_queries:
+- 问题排查体系架构文档 是什么
+- 如何 问题排查体系架构文档
+- Kubernetes 10 troubleshooting diagnostics 最佳实践
+- 问题排查体系架构文档 故障排查
+- 问题排查体系架构文档 排障步骤
+- 问题排查体系架构文档 根因分析
+trigger_keywords:
+- 问题排查体系架构文档
+- troubleshooting
+- diagnostics
+- fta
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- monitoring-basics
+- gpu-scheduling-basics
+fta_id: FTA-PROBLEM_SOLVING_ARCHITECTURE-001
+component: Problem Solving Architecture
+severity: critical
+---
+
+title: 问题排查体系架构文档
+description: '# 问题排查体系架构文档'
+category: fta
+tags:
+- k8s
+- fault-tree
+- root-cause
+- troubleshooting
+- prometheus
+- grafana
+- gpu
+- rag
+- agent
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+estimated_read_time: 5min
+intent_queries:
+- 问题排查体系架构文档 是什么
+- 如何 问题排查体系架构文档
+- 问题排查体系架构文档 根因分析
+- 问题排查体系架构文档 故障树
+trigger_keywords:
+- 问题排查体系架构文档
+- fta
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+---
+
+# 问题排查体系架构文档
+
+> **版本**: v1.0
+> **定位**: Kudig-DB 问题排查体系的整体架构说明与模块集成手册
+> **更新日期**: 2026-05-18
+
+---
+
+## 一、体系架构总览
+
+### 1.1 问题排查体系全景
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         Kudig-DB 问题排查体系架构                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ╔═══════════════════════════════════════════════════════════════════════╗ │
+│  ║                        输入层 (Symptom Input)                         ║ │
+│  ║                                                                       ║ │
+│  ║   问题现象 ──→ 语义扩展 ──→ 向量化 ──→ 候选模式排序                   ║ │
+│  ║                                                                       ║ │
+│  ║   文档: symptom-vector-matcher.md                                     ║ │
+│  ║   能力: 32维特征向量 + 余弦相似度 + Top-K 候选                         ║ │
+│  ╚═══════════════════════════════════════════════════════════════════════╝ │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ╔═══════════════════════════════════════════════════════════════════════╗ │
+│  ║                        诊断引擎 (FTA Engine)                          ║ │
+│  ║                                                                       ║ │
+│  ║   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ ║ │
+│  ║   │  动态概率   │  │  智能剪枝   │  │  时序约束   │  │  贝叶斯推理 │ ║ │
+│  ║   │  调整       │  │  策略       │  │  验证       │  │  不确定性   │ ║ │
+│  ║   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ ║ │
+│  ║                                                                       ║ │
+│  ║   文档: fta-diagnosis-improvement.md + fta-execution-engine.md        ║ │
+│  ║   能力: 时间/负载/趋势因子 + 置信度剪枝 + 多维度置信评估               ║ │
+│  ╚═══════════════════════════════════════════════════════════════════════╝ │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ╔═══════════════════════════════════════════════════════════════════════╗ │
+│  ║                        决策输出 (Decision)                             ║ │
+│  ║                                                                       ║ │
+│  ║   根因确认 ──→ 修复方案生成 ──→ 前置条件检查 ──→ 执行控制             ║ │
+│  ║                                                                       ║ │
+│  ║   文档: fta-execution-engine.md (修复执行控制器)                        ║ │
+│  ║   能力: 前置检查 + 风险评估 + 回退机制                                 ║ │
+│  ╚═══════════════════════════════════════════════════════════════════════╝ │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ╔═══════════════════════════════════════════════════════════════════════╗ │
+│  ║                        学习闭环 (Learning)                            ║ │
+│  ║                                                                       ║ │
+│  ║   FTA 学习引擎 ──→ 概率动态更新 ──→ 新模式发现 ──→ 置信度调整           ║ │
+│  ║                                                                       ║ │
+│  ║   文档: fta-execution-engine.md (学习反馈闭环)                        ║ │
+│  ║   能力: 诊断成功/失败反馈 + 新路径提案 + PROPOSED 状态管理              ║ │
+│  ╚═══════════════════════════════════════════════════════════════════════╝ │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 1.2 核心模块索引
+
+| 模块 | 文档位置 | 核心能力 |
+|:---|:---|:---|
+| **症状向量匹配** | `domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
+| **FTA 诊断引擎** | `domain-10-troubleshooting-diagnostics/topic-fta/fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
+| **FTA 改进建议** | `domain-10-troubleshooting-diagnostics/topic-fta/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
+| **症状快速映射** | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
+| **FTA 完整索引** | `domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md` | TE-1~TE-16 完整路径索引 |
+| **FTA-FEBM 联合** | `domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
+
+---
+
+## 二、模块详解
+
+### 2.1 症状向量匹配 (Symptom Vector Matcher)
+
+**文件**: `domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md`
+
+**核心能力**:
+- 将问题现象转化为 32 维特征向量
+- 基于余弦相似度计算与已知模式的匹配程度
+- 支持语义扩展（"Pod 挂了" → "CrashLoopBackOff"）
+- 未知症状检测与升级建议
+
+**向量维度**:
+
+```
+索引 0-7:   基础症状特征 (pod_restart, pod_pending, pod_evicted, oom_killed, not_ready, connection_fail, timeout, error_log)
+索引 8-13:  资源特征 (memory_high, cpu_high, disk_full, network_latency, storage_io_high, gpu_memory_high)
+索引 14-17: 错误码特征 (exit_137, exit_1, exit_143, exit_125)
+索引 18-21: 云厂商特征 (ack_specific, aws_specific, gcp_specific, on_premise)
+索引 22-25: 时间特征 (startup_phase, runtime_phase, scale_phase, drain_phase)
+索引 26-31: 严重程度 (p0_critical, p1_major, p2_minor, user_impact_high, service_down, degraded)
+```
+
+**使用示例**:
+
+```python
+# 输入
+symptom = "Pod 反复重启，OOMKilled，exit code 137"
+
+# 向量化 + 匹配
+pipeline = SymptomMatchingPipeline()
+result = pipeline.match(symptom, context={"cloud_provider": "ACK"})
+
+# 输出
+{
+    "best_match": {
+        "pattern": "OOMKilled 经典模式",
+        "fta_path": "TE-2 → IE-2.1 → BE-2.3",
+        "final_score": 0.92
+    }
+}
+```
+
+---
+
+### 2.2 FTA 执行引擎 (FTA Execution Engine)
+
+**文件**: `domain-10-troubleshooting-diagnostics/topic-fta/fta-execution-engine.md`
+
+**核心组件**:
+
+| 组件 | 职责 |
+|:---|:---|
+| **FTATraversalEngine** | FTA 树遍历 + 路径选择 + 智能剪枝 |
+| **EvidenceCollector** | 多源证据收集 + 时序验证 + 交叉验证 |
+| **ConfidenceEvaluator** | 多维度置信度计算 + 贝叶斯后验概率 |
+| **HealingExecutor** | 修复执行 + 前置检查 + 回退机制 |
+| **FTALearningEngine** | 学习反馈 + 概率更新 + 新模式发现 |
+
+**动态概率计算**:
+
+```python
+# 动态概率 = 静态概率 × 时间因子 × 负载因子 × 趋势因子 × 季节因子
+# 示例: OOMKilled 在高内存负载时的概率调整
+base_prob = 0.05  # 静态概率
+time_factor = 1.5  # 非工作时间
+load_factor = 2.0  # 内存使用率 > 85%
+trend_factor = 1.5  # 30天内超过3次
+
+current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
+```
+
+---
+
+### 2.3 FTA 诊断改进 (FTA Diagnosis Improvement)
+
+**文件**: `domain-10-troubleshooting-diagnostics/topic-fta/fta-diagnosis-improvement.md`
+
+**改进项**:
+
+| 改进项 | 描述 | 价值 |
+|:---|:---|:---:|
+| 动态概率调整 | 基于时间/负载/趋势/季节因子动态调整 | 诊断优先级准确性 |
+| 证据置信度评估 | 多源验证 + 时间一致性 + 加权综合 | 诊断可靠性 |
+| 时序约束机制 | 持续时间窗口 + 级联延迟传播 | 复杂故障覆盖 |
+| 修复前置条件 | metric_threshold + quota_check + feature_flag | 自动修复成功率 |
+| 反馈学习机制 | 诊断成功/失败 → 概率更新 + 新模式发现 | 体系自优化 |
+| 智能剪枝策略 | 置信度/代价/重叠度阈值剪枝 | 诊断效率 |
+| 贝叶斯推理 | 后验概率计算 + 不确定性区间 | 边缘场景覆盖 |
+
+---
+
+## 三、集成工作流
+
+### 3.1 完整诊断流程
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         问题排查完整工作流                                    │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 0: 症状输入                                                      │  │
+│  │   输入: "Pod CrashLoopBackOff + OOMKilled + Exit 137"                 │  │
+│  │   处理: symptom-vector-matcher.py                                     │  │
+│  │   输出: {pattern: "OOMKilled", similarity: 0.92, fta_path: "..."}   │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 1: FTA 遍历                                                       │  │
+│  │   输入: fta_path + evidence_bundle                                    │  │
+│  │   处理: fta-execution-engine.py → FTATraversalEngine                 │  │
+│  │   输出: ranked_paths [                                              │  │
+│  │     {path: "TE-2→IE-2.1→BE-2.3", dynamic_prob: 0.72, confidence: 0.85}│  │
+│  │   ]                                                                   │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 2: 证据收集与验证                                                  │  │
+│  │   输入: target BE (BE-2.3)                                           │  │
+│  │   处理: EvidenceCollector.collect()                                   │  │
+│  │   输出: evidence_bundle {                                            │  │
+│  │     direct: [OOMKilled Event (0.95), Exit 137 (0.90)],               │  │
+│  │     indirect: [Memory 92% (0.70)],                                   │  │
+│  │     combined_confidence: 0.83                                         │  │
+│  │   }                                                                   │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 3: 根因确认与决策                                                  │  │
+│  │   规则: confidence >= 0.85 → 确认根因                                │  │
+│  │        0.5 <= confidence < 0.85 → 进一步验证                           │  │
+│  │        confidence < 0.5 → 探索其他路径                                │  │
+│  │   输出: confirmed_root_cause {                                       │  │
+│  │     event_id: "BE-2.3",                                               │  │
+│  │     name: "OOMKilled",                                                │  │
+│  │     probability: 0.72,                                               │  │
+│  │     confidence: 0.83,                                                 │  │
+│  │     evidence_chain: [...]                                             │  │
+│  │   }                                                                   │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 4: 修复执行与验证                                                  │  │
+│  │   前置检查: HealingPreconditionChecker.can_execute()                 │  │
+│  │   执行: HealingExecutor.execute()                                     │  │
+│  │   验证: verify_after_execution()                                       │  │
+│  │   回退: rollback_on_failure()                                         │  │
+│  │   输出: healing_result {status: "success", verified: true}             │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                      │                                     │
+│                                      ▼                                     │
+│  ┌────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 5: 学习反馈                                                        │  │
+│  │   FTALearningEngine.learn_from_incident()                             │  │
+│  │   - 诊断成功: 置信度 +5%                                               │  │
+│  │   - 诊断失败: 置信度 -10% + 新路径提案                                 │  │
+│  │   - 新模式: PROPOSED 状态 → 待评审                                     │  │
+│  └────────────────────────────────────────────────────────────────────────┘  │
+│                                                                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 四、决策矩阵
+
+### 4.1 方法论选择
+
+| 场景 | 推荐方法 | 原因 |
+|:---|:---:|:---|
+| 已知故障模式 | FTA | 快速匹配，效率高 |
+| 新故障/未知故障 | FEBM | 从证据推理，不依赖预设 |
+| 多因素复杂故障 | FTA + FEBM 联合 | FTA 提供假设，FEBM 验证证据 |
+| 安全事件/取证 | FEBM | 强调证据链完整性 |
+| 快速恢复优先 | FTA | 直接匹配已知路径 |
+| 深度分析优先 | FEBM | 探索未知，挖掘根因 |
+| 事后复盘 | FEBM | 时间线重建，因果追溯 |
+| 架构评审/风险评估 | FTA | 演绎分析，覆盖已知场景 |
+
+### 4.2 置信度决策阈值
+
+```
+综合置信度决策:
+
+  ≥ 0.85  ┬─ 确认根因
+          │   执行修复动作
+          │   记录诊断成功
+          │
+  0.5~0.85 ┼─ 候选根因
+          │   需要进一步验证
+          │   执行验证性排查命令
+          │   重新评估置信度
+          │
+  < 0.5   ┼─ 低置信根因
+          │   探索其他路径
+          │   触发 FTA 剪枝
+          │   考虑 FEBM 取证流程
+```
+
+---
+
+## 五、文档索引
+
+### 5.1 按使用场景索引
+
+| 场景 | 入口文档 | 深度文档 |
+|:---|:---|:---|
+| **快速定位问题** | `symptom-mapping-layer.md` | `symptom-vector-matcher.md` |
+| **FTA 路径选择** | `fta-index.md` | `kubernetes-fta-full-analysis-v2.md` |
+| **详细排查执行** | `structural-trouble-shooting/README.md` | 各组件排查文档 |
+| **修复动作执行** | `fta-execution-engine.md#修复执行控制器` | `domain-10-troubleshooting-diagnostics/topic-skills/` |
+| **复盘与学习** | `fta-febm-joint-diagnosis.md` | `febm/` 目录 |
+
+### 5.2 核心文档关联图
+
+```
+问题现象输入
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  symptom-mapping-layer.md (快速映射)                        │
+│  - 15+ 症状快速映射表                                       │
+│  - 决策树入口                                               │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  symptom-vector-matcher.md (向量匹配) ← NEW                 │
+│  - 32维特征向量                                             │
+│  - 余弦相似度匹配                                          │
+│  - 语义扩展                                                 │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  kubernetes-fta-full-analysis-v2.md (FTA树)                │
+│  - TE-1~TE-16 完整覆盖                                     │
+│  - 80+ 中间事件, 300+ 底事件                                │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  fta-diagnosis-improvement.md (改进建议) ← NEW             │
+│  - 动态概率调整                                            │
+│  - 时序约束机制                                            │
+│  - 贝叶斯推理                                              │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  fta-execution-engine.md (执行引擎) ← NEW                 │
+│  - 遍历引擎 + 证据收集                                      │
+│  - 置信度评估                                              │
+│  - 修复控制器 + 学习闭环                                    │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/ (详细排查)            │
+│  - 63篇 结构化排查文档                                      │
+│  - 按组件/按现象                                           │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  domain-10-troubleshooting-diagnostics/topic-skills/ (自动修复)                                  │
+│  - 30篇 自动化技能                                         │
+│  - 可执行修复动作                                           │
+└─────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────────────────────┐
+│  fta-febm-joint-diagnosis.md (联合诊断)                    │
+│  - FTA+FEBM 联合架构                                       │
+│  - 3个实战案例                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 六、版本与更新
+
+| 版本 | 日期 | 更新内容 |
+|:---:|:---:|:---|
+| v1.0 | 2026-05-18 | 初始版本，包含 8 项核心改进的完整集成 |
+
+---
+
+## 七、后续工作
+
+| 优先级 | 任务 | 负责团队 |
+|:---:|:---|:---|
+| P0 | 将本架构集成到 K8sOpsAgent 实现 | AI Team |
+| P1 | 模式库扩充 (目标: 100+ 症状模式) | SRE Team |
+| P2 | 向量数据库落地 (Milvus/Qdrant) | Platform Team |
+| P2 | 实时指标接入 (Prometheus/Grafana) | SRE Team |
+
+---
+
+> **维护团队**: Platform Team / SRE Team / AI Team
+> **问题反馈**: GitHub Issues
+
+---
+
+## Obsidian 相关文档
+
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+
+## See Also
+
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md|symptom-vector-matcher]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]

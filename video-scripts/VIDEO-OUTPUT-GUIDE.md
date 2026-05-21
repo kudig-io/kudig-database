@@ -21,6 +21,9 @@ intent_queries:
 - 如何 数字人视频输出建议
 trigger_keywords:
 - 数字人视频输出建议
+prerequisites:
+- kubectl-basics
+- etcd-basics
 ---
 
 # 数字人视频输出建议
@@ -121,7 +124,7 @@ trigger_keywords:
 |:---|:---|:---|
 | 动画 | 故障树 Mermaid | 展示 TE→IE→BE 层级关系 |
 | 截图 | kubectl 输出 | 真实命令输出，非模拟 |
-| 界面 | K8s Dashboard | 监控面板、事件日志 |
+| 界面 | [[entities/kubernetes|k8s]] Dashboard | 监控面板、事件日志 |
 | 图示 | 架构图 | 网络拓扑、组件交互 |
 
 ### 背景音乐

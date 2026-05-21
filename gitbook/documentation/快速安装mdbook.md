@@ -17,6 +17,8 @@ trigger_keywords:
 - 快速安装
 - mdbook
 - Windows
+prerequisites:
+- kubectl-basics
 ---
 
 # 快速安装 mdbook（Windows）

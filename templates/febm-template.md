@@ -1,9 +1,14 @@
-# {{主题名称}} FEBM 法医取证分析
+---
+
+## YAML Front Matter
+
+```yaml
+---# {{主题名称}} FEBM 法医取证分析
 
 > **文档类型**: FEBM 取证分析
 > **适用版本**: Kubernetes v1.28 - v1.32
 > **最后更新**: {{日期}}
-> **关联主文档**: [FEBM 方法论深度剖析](../topic-febm/febm-methodology-deep-dive.md)
+> **关联主文档**: [FEBM 方法论深度剖析](../domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md)
 
 ---
 
@@ -24,8 +29,8 @@ authors:
 reviewers: []
 tags: [febm, forensics, k8s, {{component}}]
 related_docs:
-  fta_ref: "../topic-fta/list/{{component}}-fta.md"
-  skill_ref: "../topic-skills/{{NN}}-{{scenario}}.md"
+  fta_ref: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
+  skill_ref: "../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md"
 ---
 ```
 
@@ -427,9 +432,9 @@ FEBM-OODA 循环:
 
 | 类型 | 文档 | 说明 |
 |:---|:---|:---|
-| FTA 故障树 | [../topic-fta/list/{{component}}-fta.md](../topic-fta/list/{{component}}-fta.md) | {{说明}} |
-| Skill 技能 | [../topic-skills/{{NN}}-{{scenario}}.md](../topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
-| 速查卡 | [../topic-cheat-sheet/k8s.md](../topic-cheat-sheet/k8s.md) | {{说明}} |
+| FTA 故障树 | [../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | {{说明}} |
+| Skill 技能 | [../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
+| 速查卡 | [../domain-17-system-foundation/topic-cheat-sheet/k8s.md](../domain-17-system-foundation/topic-cheat-sheet/k8s.md) | {{说明}} |
 | 深度学习 | [../domain-{{N}}-{{name}}/{{doc}}.md](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
 
 ---
@@ -443,4 +448,4 @@ FEBM-OODA 循环:
 
 ---
 
-> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../topic-febm/README.md)
+> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../domain-10-troubleshooting-diagnostics/topic-febm/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md)

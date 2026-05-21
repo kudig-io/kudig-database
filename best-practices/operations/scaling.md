@@ -8,6 +8,10 @@ tags:
 - hpa
 - vpa
 - cluster-autoscaler
+- kubelet
+- prometheus
+- helm
+- rag
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +29,20 @@ trigger_keywords:
 - 扩缩容
 - HPA
 - 自动扩缩容
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
 cross_refs:
 - type: domain
-  path: ../../domain-4-workloads/
-  label: '工作负载知识域'
+  path: ../../domain-02-workloads-applications/
+  label: 工作负载知识域
 - type: domain
-  path: ../../domain-9-platform-ops/
-  label: '平台运维知识域'
+  path: ../../domain-07-platform-engineering/
+  label: 平台运维知识域
 - type: best-practice
   path: ./deployment.md
-  label: '部署策略最佳实践'
+  label: 部署策略最佳实践
 ---
 
 # Kubernetes 扩缩容最佳实践

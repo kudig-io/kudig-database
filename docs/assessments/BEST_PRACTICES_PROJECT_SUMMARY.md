@@ -1,3 +1,28 @@
+---
+title: 最佳实践内容质量评估与改进项目总结
+description: '# 最佳实践内容质量评估与改进项目总结'
+category: general
+tags:
+- k8s
+- ebpf
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 最佳实践内容质量评估与改进项目总结 是什么
+- 如何 最佳实践内容质量评估与改进项目总结
+trigger_keywords:
+- 最佳实践内容质量评估与改进项目总结
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+---
+
 # 最佳实践内容质量评估与改进项目总结
 
 ## 项目概述
@@ -43,7 +68,7 @@
 
 **模板和标准**：
 - `templates/best-practice-template.md` - 最佳实践内容模板
-- `best-practices/README.md` - 最佳实践索引页面
+- `best-practices/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` - 最佳实践索引页面
 - `best-practices/infrastructure/kubernetes-cluster.md` - 示例最佳实践文档
 
 **评估和计划**：
@@ -74,13 +99,13 @@
 ### 具体示例
 
 **优秀示例**：
-- `topic-dictionary/operations/operations-best-practices.md`：3035行，65个代码块，渐进式示例
-- `domain-35-ebpf-technology/10-ebpf-security-applications.md`：4174行，架构图+部署清单
-- `domain-28-enterprise-database-middleware/04-database-middleware-kubernetes.md`：决策树+故障排查
+- `domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md`：3035行，65个代码块，渐进式示例
+- `domain-03-networking-traffic/10-ebpf-security-applications.md`：4174行，架构图+部署清单
+- `domain-16-database-middleware/04-database-middleware-kubernetes.md`：决策树+故障排查
 
 **待改进示例**：
-- `domain-9-platform-ops/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
-- `topic-ai-agent/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
+- `domain-07-platform-engineering/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
+- `domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
 
 ## 改进措施
 

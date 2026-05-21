@@ -25,7 +25,7 @@ difficulty: "beginner"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     desc: "深度文档"
-  - path: "../topic-fta/list/{{component}}-fta.md"
+  - path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
     desc: "FTA 故障树"
 ---
 ```
@@ -211,8 +211,8 @@ fi
 
 - [官方文档]({{URL}})
 - [深度文档](../domain-{{N}}-{{name}}/{{doc}}.md)
-- [FTA 故障树](../topic-fta/list/{{component}}-fta.md)
-- [相关 Skill](../topic-skills/{{NN}}-{{scenario}}.md)
+- [FTA 故障树](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md)
+- [相关 Skill](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md)
 
 ---
 
@@ -231,3 +231,7 @@ fi
 ║ 最后更新: {{YYYY-MM}} | 版本: v1.28-v1.32                              ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
+
+## Related
+
+- [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference

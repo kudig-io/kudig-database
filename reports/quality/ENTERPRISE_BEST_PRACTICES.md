@@ -24,8 +24,14 @@ intent_queries:
 - 如何 Kubernetes扩展生态企业级最佳实践
 trigger_keywords:
 - Kubernetes扩展生态企业级最佳实践
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+- mysql-basics
 ---
-
 
 # Kubernetes扩展生态企业级最佳实践
 
@@ -179,7 +185,7 @@ func SetupConversionWebhook(mgr ctrl.Manager) error {
 ### 1.3 安全加固与访问控制
 
 ```yaml
-# crd-security-hardening.yaml
+# crd-[[domain-11-production-operations/topic-best-practices/scenarios/security-hardening|security-hardening]].yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:

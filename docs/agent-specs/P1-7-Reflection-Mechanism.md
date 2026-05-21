@@ -21,8 +21,10 @@ trigger_keywords:
 - P1-反思机制设计文档
 - Agent
 - Self-Reflection
+prerequisites:
+- kubectl-basics
+- redis-basics
 ---
-
 
 # P1-反思机制设计文档 (Agent Self-Reflection)
 
@@ -87,7 +89,7 @@ reflection_triggers:
   # 类型 4: 矛盾结果
   contradictory_result:
     patterns:
-      - "node is Ready but pod cannot schedule"
+      - "node is Ready but [[concepts/pod-lifecycle|pod]] cannot schedule"
       - "service exists but no endpoints"
     action: "深入检查资源关联关系"
 ```

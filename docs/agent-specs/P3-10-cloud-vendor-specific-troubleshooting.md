@@ -25,19 +25,21 @@ intent_queries:
 - 云厂商差异化故障场景 排障步骤
 trigger_keywords:
 - 云厂商差异化故障场景
+prerequisites:
+- kubectl-basics
+- gpu-scheduling-basics
 ---
-
 
 # 云厂商差异化故障场景
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: ACK/EKS/GKE/AKS 特有故障场景的诊断与修复
-> **关联**: domain-17-cloud-provider, domain-12-troubleshooting
+> **关联**: domain-17-cloud-provider, domain-10-troubleshooting-diagnostics
 
 ---
 
-## 1. 阿里云 ACK / ACK (Alibaba Cloud Kubernetes)
+## 1. 阿里云 ACK / ACK (Alibaba Cloud [[entities/kubernetes|kubernetes]])
 
 ### 1.1 控制平面故障 (CCE 控制台异常)
 
@@ -366,6 +368,6 @@ az vm list --resource-group <rg>
 ---
 
 **关联文档**:
-- [domain-17-cloud-provider/](../domain-17-cloud-provider/) — 云厂商选型对比
-- [domain-5-networking/](../domain-5-networking/) — Kubernetes 网络
+- [domain-12-cloud-providers/](../domain-12-cloud-providers/) — 云厂商选型对比
+- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — Kubernetes 网络
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)

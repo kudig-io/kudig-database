@@ -17,6 +17,7 @@ import os
 import sys
 import re
 import argparse
+import yaml
 from pathlib import Path
 
 # Required front matter fields per document type
@@ -34,19 +35,25 @@ READING_FIELDS = ['reading_level', 'audience', 'estimated_read_time', 'prerequis
 ALL_REQUIRED = DOMAIN_FIELDS + AI_FIELDS + READING_FIELDS
 
 def parse_frontmatter(content):
-    """Extract front matter key-value pairs from markdown."""
+    """Extract front matter key-value pairs from markdown using PyYAML."""
     fm = {}
     if not content.startswith('---'):
         return fm
 
     lines = content.split('\n')[1:]
+    yaml_lines = []
     for line in lines:
         if line == '---':
             break
-        match = re.match(r'^(\w+):\s*(.*)$', line)
-        if match:
-            key, val = match.groups()
-            fm[key] = val.strip().strip('"\'')
+        yaml_lines.append(line)
+
+    if yaml_lines:
+        try:
+            parsed = yaml.safe_load('\n'.join(yaml_lines))
+            if isinstance(parsed, dict):
+                fm = parsed
+        except yaml.YAMLError:
+            pass
     return fm
 
 def check_document(filepath):
@@ -79,8 +86,8 @@ def check_document(filepath):
     # Check intent_queries format
     if 'intent_queries' in fm:
         iq = fm['intent_queries']
-        if not ('[' in iq or '-' in iq):
-            warnings.append('intent_queries may not be a list')
+        if not isinstance(iq, list):
+            warnings.append('intent_queries must be a list')
 
     return missing, warnings
 

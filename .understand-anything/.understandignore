@@ -1,0 +1,32 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+
+# --- From .gitignore ---
+
+gitbook/book/
+gitbook/dist/
+gitbook/*.zip
+domain-*/**/*.html
+domain-*/*.html
+.gitbook/src/domain-*
+.gitbook/src/topic-*
+.gitbook/src/tables
+.web-server.pid
+.web-server.log
+index.html
+.DS_Store
+*.pyc
+.ruff_cache/
+site/
+video-output/
+
+# --- Detected directories ---
+
+.venv/
+.ruff_cache/
+
+# --- Test file patterns ---
+
+# *.test.*
+# *.spec.*
+# *.snap

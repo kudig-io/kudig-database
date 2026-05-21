@@ -1,6 +1,31 @@
+---
+title: 5 分钟快速上手指南
+description: '# 5 分钟快速上手指南'
+category: general
+tags:
+- k8s
+- docker
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 5 分钟快速上手指南 是什么
+- 如何 5 分钟快速上手指南
+trigger_keywords:
+- 分钟快速上手指南
+prerequisites:
+- kubectl-basics
+---
+
 # 5 分钟快速上手指南
 
-> **目标**: 让开发者在 5 分钟内完成接入, 并验证 Agent 能正常回答 K8s 问题
+> **目标**: 让开发者在 5 分钟内完成接入, 并验证 Agent 能正常回答 [[entities/kubernetes|k8s]] 问题
 
 ---
 

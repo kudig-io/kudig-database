@@ -1,5 +1,5 @@
 本页是 Kubernetes 平台运维与扩展生态的全景指南，聚焦于 **四大核心支柱**：Helm 包管理与应用分发、CI/CD 流水线与 GitOps 自动化、Operator/CRD 扩展开发模式、以及服务网格（Istio/Linkerd/Cilium）的流量治理与安全。这些技术共同构成了企业级 Kubernetes 平台从"可用"迈向"可扩展、可治理、可自动化"的关键跃迁路径。无论你是正在构建内部开发者平台（IDP）的平台工程师，还是负责应用交付流水线的 DevOps 工程师，抑或是需要封装领域知识为 Operator 的后端开发者，本文档都将为你提供从架构决策到生产实践的系统性参考。
-Sources: [README.md](domain-10-extensions/README.md#L1-L106), [README.md](domain-9-platform-ops/README.md#L1-L44)
+Sources: [README.md](domain-15-specialized-tech/README.md#L1-L106), [README.md](domain-07-platform-engineering/README.md#L1-L44)
 
 ---
 
@@ -35,7 +35,7 @@ graph TD
 ```
 
 **扩展开发展**定义自定义资源和控制器逻辑，将领域运维知识编码为可复用的自动化代码。**包管理与分发层**将应用及其配置打包为版本化制品，通过 OCI Registry 进行安全分发。**CI/CD 与 GitOps 层**实现从代码提交到集群部署的全链路自动化，确保部署过程的可审计性和可回滚性。**服务网格层**在应用层之上提供流量治理、安全加密和全链路可观测，是微服务架构治理的核心基础设施。
-Sources: [01-crd-development-guide.md](domain-10-extensions/01-crd-development-guide.md#L1-L25), [05-package-management-tools.md](domain-10-extensions/05-package-management-tools.md#L7-L73), [11-service-mesh-overview.md](domain-10-extensions/11-service-mesh-overview.md#L5-L18)
+Sources: [01-crd-development-guide.md](domain-15-specialized-tech/01-crd-development-guide.md#L1-L25), [05-package-management-tools.md](domain-15-specialized-tech/05-package-management-tools.md#L7-L73), [11-service-mesh-overview.md](domain-15-specialized-tech/11-service-mesh-overview.md#L5-L18)
 
 ---
 
@@ -124,7 +124,7 @@ spec:
 ```
 
 注意 v1.25+ 引入的 **CEL 验证规则**（`x-kubernetes-validations`）允许在 Schema 层面定义跨字段约束，例如 `"self.replicas <= 10 || has(self.highAvailability)"`，这大幅减少了 Webhook 层面的验证负担。
-Sources: [01-crd-development-guide.md](domain-10-extensions/01-crd-development-guide.md#L28-L149), [20-crd-operator-development.md](domain-9-platform-ops/20-crd-operator-development.md#L5-L150)
+Sources: [01-crd-development-guide.md](domain-15-specialized-tech/01-crd-development-guide.md#L28-L149), [20-crd-operator-development.md](domain-07-platform-engineering/20-crd-operator-development.md#L5-L150)
 
 ### 1.2 Operator 开发模式与控制器实现
 
@@ -176,19 +176,19 @@ func (r *MySQLClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request
 ```
 
 控制器通过 `ctrl.SetControllerReference` 建立 OwnerReference 关系，确保子资源的垃圾回收随 CR 实例自动级联。
-Sources: [02-operator-development-patterns.md](domain-10-extensions/02-operator-development-patterns.md#L1-L100), [02-operator-development-patterns.md](domain-10-extensions/02-operator-development-patterns.md#L222-L445)
+Sources: [02-operator-development-patterns.md](domain-15-specialized-tech/02-operator-development-patterns.md#L1-L100), [02-operator-development-patterns.md](domain-15-specialized-tech/02-operator-development-patterns.md#L222-L445)
 
 ### 1.3 准入控制器（Admission Webhook）
 
 准入控制器拦截 Kubernetes API Server 的写入请求，在持久化到 etcd 之前执行变更或验证。**Mutating Webhook** 可以修改请求对象（如注入 sidecar 容器、设置默认值），**Validating Webhook** 只做策略验证（如拒绝不符合安全规范的 Pod）。两者组合形成完整的"先变更、后验证"拦截链。
 
 生产级 Webhook 部署必须关注：**高可用性**（至少 3 副本 + Pod 反亲和）、**安全加固**（最小权限 RBAC、只读根文件系统、非 root 运行）、以及 **证书管理**（推荐 cert-manager 自动轮换）。Webhook 的 `failurePolicy` 设置需要谨慎：`Fail` 模式在 Webhook 不可用时会拒绝所有请求，适合安全关键场景；`Ignore` 模式则允许请求绕过，适合非关键验证。
-Sources: [03-admission-webhook-configuration.md](domain-10-extensions/03-admission-webhook-configuration.md#L1-L186)
+Sources: [03-admission-webhook-configuration.md](domain-15-specialized-tech/03-admission-webhook-configuration.md#L1-L186)
 
 ### 1.4 API 聚合扩展
 
 API 聚合（API Aggregation）是 CRD 之外的高级扩展机制，适用于需要自定义存储后端、复杂业务逻辑或非 etcd 数据的场景。它通过 `APIService` 资源将自定义 API Server 注册为 Kubernetes API 的一部分，API Server Aggregator 层负责路由转发。典型用例包括 `metrics-server`（`metrics.k8s.io`）和自定义监控 API。开发 Extension API Server 需要实现 REST 存储接口和 Kubernetes 认证授权集成，复杂度显著高于 CRD。
-Sources: [04-api-aggregation-extension.md](domain-10-extensions/04-api-aggregation-extension.md#L1-L161)
+Sources: [04-api-aggregation-extension.md](domain-15-specialized-tech/04-api-aggregation-extension.md#L1-L161)
 
 ---
 
@@ -207,7 +207,7 @@ Kubernetes 应用包管理生态包含多种工具，它们在抽象层级和适
 | **Timoni** | CUE 模块分发 | 高 | 强类型、模块化、OCI 原生 |
 
 **Helm** 是 CNCF 毕业项目，以其庞大的 Chart 生态、完善的版本管理和成熟的 CI/CD 集成成为企业首选。**Kustomize** 作为 kubectl 内置的配置管理工具，以"无模板叠加"的理念适配 GitOps 工作流。
-Sources: [05-package-management-tools.md](domain-10-extensions/05-package-management-tools.md#L76-L87)
+Sources: [05-package-management-tools.md](domain-15-specialized-tech/05-package-management-tools.md#L76-L87)
 
 ### 2.2 Helm Chart 开发核心要素
 
@@ -250,7 +250,7 @@ dependencies:
 ```
 
 **模板助手函数**（`_helpers.tpl`）通过 `define`/`include` 机制实现标签、命名等公共逻辑的复用，`include` 相比 `template` 支持 pipeline 操作，是推荐写法。
-Sources: [06-helm-charts-management.md](domain-10-extensions/06-helm-charts-management.md#L1-L120)
+Sources: [06-helm-charts-management.md](domain-15-specialized-tech/06-helm-charts-management.md#L1-L120)
 
 ### 2.3 多环境配置与 CI/CD 集成
 
@@ -276,7 +276,7 @@ Helm 与 CI/CD 的集成覆盖三大主流平台：
 helm push mychart-1.0.0.tgz oci://registry.cn-hangzhou.aliyuncs.com/mycharts
 helm pull oci://registry.cn-hangzhou.aliyuncs.com/mycharts/mychart --version 1.0.0
 ```
-Sources: [05-package-management-tools.md](domain-10-extensions/05-package-management-tools.md#L200-L400), [07-helm-advanced-operations.md](domain-10-extensions/07-helm-advanced-operations.md#L1-L225), [07-helm-advanced-operations.md](domain-10-extensions/07-helm-advanced-operations.md#L725-L854)
+Sources: [05-package-management-tools.md](domain-15-specialized-tech/05-package-management-tools.md#L200-L400), [07-helm-advanced-operations.md](domain-15-specialized-tech/07-helm-advanced-operations.md#L1-L225), [07-helm-advanced-operations.md](domain-15-specialized-tech/07-helm-advanced-operations.md#L725-L854)
 
 ---
 
@@ -308,7 +308,7 @@ Sources: [05-package-management-tools.md](domain-10-extensions/05-package-manage
     ├─ GitLab → GitLab CI + kubectl
     └─ Jenkins → Jenkins + Kubernetes Plugin
 ```
-Sources: [08-cicd-pipelines.md](domain-10-extensions/08-cicd-pipelines.md#L1-L33)
+Sources: [08-cicd-pipelines.md](domain-15-specialized-tech/08-cicd-pipelines.md#L1-L33)
 
 ### 3.2 ArgoCD 生产级配置
 
@@ -358,12 +358,12 @@ spec:
 ```
 
 **RBAC 策略**通过 `argocd-rbac-cm` ConfigMap 实现细粒度权限控制：平台管理员拥有全部权限，项目管理员限定项目范围，开发者拥有同步和查看权限，只读用户仅可查看。
-Sources: [08-cicd-pipelines.md](domain-10-extensions/08-cicd-pipelines.md#L34-L200), [09-gitops-workflow-argocd.md](domain-10-extensions/09-gitops-workflow-argocd.md#L1-L109)
+Sources: [08-cicd-pipelines.md](domain-15-specialized-tech/08-cicd-pipelines.md#L34-L200), [09-gitops-workflow-argocd.md](domain-15-specialized-tech/09-gitops-workflow-argocd.md#L1-L109)
 
 ### 3.3 FluxCD 轻量级 GitOps
 
 FluxCD v2 采用模块化架构，每个控制器（source-controller、kustomize-controller、helm-controller、image-automation-controller）独立运行，支持增量采用。其 `HelmRelease` CRD 直接将 Helm Chart 与 GitOps 工作流融合，`valuesFrom` 支持从 ConfigMap/Secret 动态注入配置，`image-automation-controller` 实现基于镜像标签策略的自动更新。
-Sources: [09-gitops-workflow-argocd.md](domain-10-extensions/09-gitops-workflow-argocd.md#L111-L189)
+Sources: [09-gitops-workflow-argocd.md](domain-15-specialized-tech/09-gitops-workflow-argocd.md#L111-L189)
 
 ### 3.4 容器镜像构建工具
 
@@ -378,7 +378,7 @@ CI/CD 流水线中的镜像构建环节对安全性要求极高。**Kaniko** 是
 | **Jib** | Maven/Gradle | 无需 Dockerfile | 高 |
 
 Kaniko 在 Pod 内通过 `executor` 二进制解析 Dockerfile、提取基础镜像层、在用户空间执行 `RUN` 指令，最终推送镜像到 Registry。生产配置需关注 `--cache=true --cache-repo`（远程缓存加速）、`--snapshot-mode=redo`（增量构建）和安全上下文（`runAsUser: 0`，但无需 `privileged: true`）。
-Sources: [10-image-build-tools.md](domain-10-extensions/10-image-build-tools.md#L1-L200)
+Sources: [10-image-build-tools.md](domain-15-specialized-tech/10-image-build-tools.md#L1-L200)
 
 ---
 
@@ -400,7 +400,7 @@ Sources: [10-image-build-tools.md](domain-10-extensions/10-image-build-tools.md#
 | **ACK 集成** | ASM 托管 | 手动 | 手动 |
 
 **Istio** 适合需要精细化流量控制和丰富功能的大型企业；**Linkerd** 适合追求轻量、稳定的核心服务网格能力；**Cilium Service Mesh** 基于 eBPF 实现**无 Sidecar 架构**，性能开销极低，是下一代服务网格的代表方向。
-Sources: [11-service-mesh-overview.md](domain-10-extensions/11-service-mesh-overview.md#L5-L18), [12-service-mesh-advanced.md](domain-10-extensions/12-service-mesh-advanced.md#L192-L200)
+Sources: [11-service-mesh-overview.md](domain-15-specialized-tech/11-service-mesh-overview.md#L5-L18), [12-service-mesh-advanced.md](domain-15-specialized-tech/12-service-mesh-advanced.md#L192-L200)
 
 ### 4.2 Istio 流量管理核心 CRD
 
@@ -454,7 +454,7 @@ spec:
   - name: v2
     labels: { version: v2 }
 ```
-Sources: [12-service-mesh-advanced.md](domain-10-extensions/12-service-mesh-advanced.md#L1-L103), [11-service-mesh-overview.md](domain-10-extensions/11-service-mesh-overview.md#L70-L129)
+Sources: [12-service-mesh-advanced.md](domain-15-specialized-tech/12-service-mesh-advanced.md#L1-L103), [11-service-mesh-overview.md](domain-15-specialized-tech/11-service-mesh-overview.md#L70-L129)
 
 ### 4.3 服务网格安全：零信任 mTLS
 
@@ -488,12 +488,12 @@ spec:
         methods: ["GET", "POST"]
         paths: ["/api/*"]
 ```
-Sources: [11-service-mesh-overview.md](domain-10-extensions/11-service-mesh-overview.md#L131-L163)
+Sources: [11-service-mesh-overview.md](domain-15-specialized-tech/11-service-mesh-overview.md#L131-L163)
 
 ### 4.4 可观测性集成
 
 Istio 通过 `Telemetry` CRD（v1.12+）统一配置访问日志、分布式追踪和 Prometheus 指标采集。`randomSamplingPercentage` 控制追踪采样率（生产推荐 1-10%），避免存储和性能开销：
-Sources: [12-service-mesh-advanced.md](domain-10-extensions/12-service-mesh-advanced.md#L170-L190)
+Sources: [12-service-mesh-advanced.md](domain-15-specialized-tech/12-service-mesh-advanced.md#L170-L190)
 
 ---
 
@@ -533,7 +533,7 @@ flowchart LR
 - **Operator**：RBAC 遵循最小权限原则（`+kubebuilder:rbac` 注解精确声明）；Finalizer 确保资源清理；Status 子资源使用 `status: {}` subresource 避免全对象更新
 - **ArgoCD**：`policy.default: role:readonly` 作为默认策略；SSO 集成企业身份提供商；`ServerSideApply` 避免字段冲突
 - **服务网格**：`STRICT` mTLS 模式；`AuthorizationPolicy` 默认拒绝（`action: DENY` 全局规则 + `action: ALLOW` 白名单）
-Sources: [07-helm-advanced-operations.md](domain-10-extensions/07-helm-advanced-operations.md#L391-L460), [03-admission-webhook-configuration.md](domain-10-extensions/03-admission-webhook-configuration.md#L119-L186)
+Sources: [07-helm-advanced-operations.md](domain-15-specialized-tech/07-helm-advanced-operations.md#L391-L460), [03-admission-webhook-configuration.md](domain-15-specialized-tech/03-admission-webhook-configuration.md#L119-L186)
 
 ---
 

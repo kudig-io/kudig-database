@@ -4,6 +4,7 @@ description: 雷达图自我评估工具，支持本地存储。
 category: general
 tags:
 - k8s
+- agent
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -15,6 +16,8 @@ intent_queries:
 - 如何 可视化中心
 trigger_keywords:
 - 可视化中心
+prerequisites:
+- kubectl-basics
 ---
 
 # 可视化中心
@@ -51,3 +54,11 @@ SVG 动画展示 Write/Read/Ask/Iterate 循环学习法。
   margin: 2rem 0;
 }
 </style>
+
+## Related
+
+- [[references/k8s-glossary-index|K8s 术语表索引]] — Cross-reference
+- [[references/k8s-knowledge-map|Kubernetes Knowledge Map]] — Cross-reference
+- [[references/KUDIG Templates and Agent Prompts|KUDIG Templates and Agent Prompts]] — Cross-reference
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference

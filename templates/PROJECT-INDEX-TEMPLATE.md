@@ -81,7 +81,7 @@ trigger_keywords:
 
 ## 四、版本兼容矩阵
 
-| 组件 | K8s v1.31 | v1.32 | v1.33 | 备注 |
+| 组件 | [[entities/kubernetes|k8s]] v1.31 | v1.32 | v1.33 | 备注 |
 |:---|:---|:---|:---|:---|
 | Project-A vX.Y | ✅ | ✅ | ✅ | 说明 |
 | Project-B vX.Y | ✅ | ✅ | ✅ | 说明 |
@@ -118,20 +118,20 @@ trigger_keywords:
 
 | Domain | 文件 |
 |:---|:---|
-| domain-1 架构基础 | `domain-1/00-open-source-projects-index.md` |
-| domain-10 扩展 | `domain-10/00-open-source-projects-index.md` |
-| domain-11 AI 基础设施 | `domain-11/00-open-source-projects-index.md` |
-| domain-12 故障排查 | `domain-12/00-open-source-projects-index.md` |
-| domain-13 Docker | `domain-13/00-open-source-projects-index.md` |
-| domain-15 网络基础 | `domain-15/00-open-source-projects-index.md` |
-| domain-16 存储基础 | `domain-16/00-open-source-projects-index.md` |
-| domain-17 云厂商 | `domain-17/00-open-source-projects-index.md` |
-| domain-18 生产运维 | `domain-18/00-open-source-projects-index.md` |
-| domain-20 监控告警 | `domain-20/00-open-source-projects-index.md` |
-| domain-21 日志管理 | `domain-21/00-open-source-projects-index.md` |
-| domain-22 镜像管理 | `domain-22/00-open-source-projects-index.md` |
-| domain-23 GitOps CI/CD | `domain-23/00-open-source-projects-index.md` |
-| domain-24 IaC | `domain-24/00-open-source-projects-index.md` |
-| domain-25 云原生安全 | `domain-25/00-open-source-projects-index.md` |
-| domain-26 服务网格 | `domain-26/00-open-source-projects-index.md` |
-| domain-27 多云混合 | `domain-27/00-open-source-projects-index.md` |
+| domain-01-cluster-fundamentals 架构基础 | `domain-01-cluster-fundamentals/00-open-source-projects-index.md` |
+| domain-15-specialized-tech 扩展 | `domain-15-specialized-tech/00-open-source-projects-index.md` |
+| domain-14-ai-ml-infra AI 基础设施 | `domain-14-ai-ml-infra/00-open-source-projects-index.md` |
+| domain-10-troubleshooting-diagnostics 故障排查 | `domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md` |
+| domain-13-container-runtime Docker | `domain-13-container-runtime/00-open-source-projects-index.md` |
+| domain-03-networking-traffic 网络基础 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
+| domain-04-storage-data 存储基础 | `domain-04-storage-data/00-open-source-projects-index.md` |
+| domain-12-cloud-providers 云厂商 | `domain-12-cloud-providers/00-open-source-projects-index.md` |
+| domain-11-production-operations 生产运维 | `domain-11-production-operations/00-open-source-projects-index.md` |
+| domain-06-observability 监控告警 | `domain-06-observability/00-open-source-projects-index.md` |
+| domain-06-observability 日志管理 | `domain-06-observability/00-open-source-projects-index.md` |
+| domain-03-networking-traffic 镜像管理 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
+| domain-08-release-change-management GitOps CI/CD | `domain-08-release-change-management/00-open-source-projects-index.md` |
+| domain-08-release-change-management IaC | `domain-08-release-change-management/00-open-source-projects-index.md` |
+| domain-05-security-compliance 云原生安全 | `domain-05-security-compliance/00-open-source-projects-index.md` |
+| domain-03-networking-traffic 服务网格 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
+| domain-12-cloud-providers 多云混合 | `domain-12-cloud-providers/00-open-source-projects-index.md` |

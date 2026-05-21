@@ -1,0 +1,109 @@
+---
+title: '场景: 升级迁移'
+description: Kubernetes 版本升级、集群迁移、数据迁移
+category: scenario
+tags:
+- k8s
+- scenario
+- migration
+- rag
+last_updated: '2026-05-20'
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- '场景: 升级迁移 是什么'
+- '如何 场景: 升级迁移'
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- '场景:'
+- 升级迁移
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+---
+
+# 场景: 升级迁移
+
+> **场景 ID**: SC-08
+> **英文**: Upgrade & Migration
+> **最后更新**: 2026-05-20
+
+---
+
+## 场景概述
+
+升级迁移需要精心规划和执行。
+
+---
+
+## 快速决策树
+
+```mermaid
+graph TD
+    A["升级迁移"] --> B{"问题确认"}
+    B -->|"已知问题"| C["参考相关文档"]
+    B -->|"未知问题"| D{"组件定位"}
+    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
+    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
+    D -->|"网络"| G["参考 domain-03-networking-traffic"]
+    D -->|"存储"| H["参考 domain-04-storage-data"]
+    D -->|"安全"| I["参考 domain-05-security-compliance"]
+
+    C --> J["执行修复"]
+    E --> J
+    F --> J
+    G --> J
+    H --> J
+    I --> J
+
+    J --> K{"验证"}
+    K -->|"已解决"| L["记录关闭"]
+    K -->|"未解决"| M["升级到专家"]
+
+    style A fill:#ef4444,stroke:#b91c1c,color:#fff
+    style L fill:#22c55e,stroke:#166534,color:#fff
+    style M fill:#f59e0b,stroke:#b45309,color:#fff
+```
+
+---
+
+## 相关文档
+
+- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md]]
+- [[domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md]]
+- [[domain-08-release-change-management/topic-migration/README.md]]
+
+
+---
+
+## FTA 故障树
+
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md]]
+
+
+---
+
+## 操作技能
+
+暂无专项技能卡片
+
+
+---
+
+## 关联场景
+
+| 关联场景 | 说明 |
+|---|---|
+
+## Related
+
+- [[README.md|README]]
+- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
+- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07-upgrade-paths-strategy]]

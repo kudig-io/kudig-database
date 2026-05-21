@@ -384,9 +384,9 @@ Sources: [README.md](topic-structural-trouble-shooting/README.md#L236-L248)
 - **数据留存规范**：操作前后收集 `kubectl get/describe/logs`，关键组件日志与指标快照，必要时保留 pprof/heapdump
 - **安全提示**：涉及证书/密钥/审计日志时注意脱敏；对 Webhook、PSA、NetworkPolicy、PDB 等变更先在灰度/测试环境验证
 
-此外，`domain-12-troubleshooting/tools/` 目录下提供了一个完整的 Shell 诊断工具套件 `domain12_troubleshooting_toolkit.sh`，可自动执行集群健康检查、节点诊断、Pod 状态分析等任务，适合作为排查流程中的辅助自动化工具。
+此外，`domain-10-troubleshooting-diagnostics/tools/` 目录下提供了一个完整的 Shell 诊断工具套件 `domain12_troubleshooting_toolkit.sh`，可自动执行集群健康检查、节点诊断、Pod 状态分析等任务，适合作为排查流程中的辅助自动化工具。
 
-Sources: [README.md](topic-structural-trouble-shooting/README.md#L108-L114), [domain12_troubleshooting_toolkit.sh](domain-12-troubleshooting/tools/domain12_troubleshooting_toolkit.sh#L1-L58)
+Sources: [README.md](topic-structural-trouble-shooting/README.md#L108-L114), [domain12_troubleshooting_toolkit.sh](domain-10-troubleshooting-diagnostics/tools/domain12_troubleshooting_toolkit.sh#L1-L58)
 
 ## 配置优先排查 Checklist（可直接打印使用）
 

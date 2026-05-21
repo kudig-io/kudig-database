@@ -8,6 +8,11 @@ tags:
 - jaeger
 - opentelemetry
 - zipkin
+- helm
+- opa
+- elasticsearch
+- rbac
+- operator
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -25,16 +30,22 @@ trigger_keywords:
 - 分布式追踪
 - Jaeger
 - OpenTelemetry
+prerequisites:
+- kubectl-basics
+- helm-basics
+- policy-basics
+- tracing-basics
+- observability-basics
 cross_refs:
 - type: domain
-  path: ../../domain-8-observability/
-  label: '可观测性知识域'
+  path: ../../domain-06-observability/
+  label: 可观测性知识域
 - type: best-practice
   path: ./monitoring.md
-  label: '监控最佳实践'
+  label: 监控最佳实践
 - type: best-practice
   path: ./logging.md
-  label: '日志管理最佳实践'
+  label: 日志管理最佳实践
 ---
 
 # Kubernetes 分布式追踪最佳实践

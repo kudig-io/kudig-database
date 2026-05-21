@@ -1,3 +1,31 @@
+---
+title: kudig-database 媒体资料包 (Press Kit)
+description: 本文档供媒体、博主、KOL 报道使用, 包含产品介绍、核心数据、截图素材等。
+category: general
+tags:
+- k8s
+- etcd
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kudig-database 媒体资料包 (Press Kit) 是什么
+- 如何 kudig-database 媒体资料包 (Press Kit)
+trigger_keywords:
+- kudig-database
+- 媒体资料包
+- Press
+- Kit
+prerequisites:
+- kubectl-basics
+- etcd-basics
+---
+
 # kudig-database 媒体资料包 (Press Kit)
 
 > 本文档供媒体、博主、KOL 报道使用, 包含产品介绍、核心数据、截图素材等。
@@ -13,7 +41,7 @@
 
 ## 二、产品简介 (300 字)
 
-kudig-database 是一个面向 Kubernetes 生产运维场景的企业级知识库, 同时也是专为 AI 智能体 (Agent) 设计的高质量语料库。
+kudig-database 是一个面向 [[entities/kubernetes|kubernetes]] 生产运维场景的企业级知识库, 同时也是专为 AI 智能体 (Agent) 设计的高质量语料库。
 
 在 Kubernetes 生态中, 运维工程师面临知识分散、文档过时、排查效率低等痛点。当 AI Agent 被引入运维场景时, 缺少结构化的专业知识导致回答质量低下, 无法满足生产环境的需求。
 

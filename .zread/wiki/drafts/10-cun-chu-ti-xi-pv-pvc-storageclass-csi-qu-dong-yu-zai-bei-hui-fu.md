@@ -1,6 +1,6 @@
 Kubernetes 存储体系是一套从声明到供给、从挂载到灾备的完整抽象栈——开发者通过 PVC 声明需求，平台工程师通过 StorageClass 定义策略，CSI 驱动将一切落地为存储后端操作。本文页站在高级开发者的视角，以**架构分层模型**为骨架，将知识库中 15 篇存储专题、17 篇存储字典条目、4 篇 YAML 清单、3 篇故障排查指南以及 CSI 深度实践论文串联为一幅完整的存储全景图。
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L1-L4), [README.md](domain-6-storage/README.md#L1-L10)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L1-L4), [README.md](domain-04-storage-data/README.md#L1-L10)
 
 ---
 
@@ -45,7 +45,7 @@ flowchart TB
 
 **关键抽象层级**中每一层都有明确的职责边界：**Volume** 是 Pod 内容器间共享存储的基础单元，生命周期与 Pod 绑定；**PVC** 作为命名空间级的声明式资源，将开发者的存储需求（容量、访问模式、性能等级）与底层实现完全隔离；**PV** 是集群级存储实例，承载实际的存储后端连接信息；**StorageClass** 作为动态供给的模板引擎，定义了 provisioner、回收策略、绑定模式和参数映射；**CSI Driver** 则是 Kubernetes 与存储后端之间的标准 gRPC 接口，所有 in-tree 插件已在 v1.26+ 废弃、v1.31+ 移除。
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L38-L54), [06-storage-fundamental-concepts.md](domain-6-storage/06-storage-fundamental-concepts.md#L18-L46), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L1-L12)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L38-L54), [06-storage-fundamental-concepts.md](domain-04-storage-data/06-storage-fundamental-concepts.md#L18-L46), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L1-L12)
 
 ---
 
@@ -66,7 +66,7 @@ PV 是集群管理员预置或动态供给创建的存储资源实例，其**生
 | `nodeAffinity` | NodeAffinity | 否 | 拓扑约束（Local PV 必须设置） |
 | `csi` | CSIPersistentVolumeSource | 否 | CSI 卷配置 |
 
-Sources: [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architecture-fundamentals.md#L59-L71), [15-persistentvolume-reference.md](domain-32-yaml-manifests/15-persistentvolume-reference.md#L1-L10)
+Sources: [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L59-L71), [15-persistentvolume-reference.md](domain-18-manifests-patterns/15-persistentvolume-reference.md#L1-L10)
 
 ### PV 生命周期状态机
 
@@ -93,7 +93,7 @@ stateDiagram-v2
 | **Released** | 已释放 | PVC 已删除，PV 等待回收处理 |
 | **Failed** | 失败 | 自动回收失败或后端存储错误 |
 
-Sources: [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architecture-fundamentals.md#L74-L106), [09-pv-pvc-troubleshooting.md](domain-6-storage/09-pv-pvc-troubleshooting.md#L18-L78)
+Sources: [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L74-L106), [09-pv-pvc-troubleshooting.md](domain-04-storage-data/09-pv-pvc-troubleshooting.md#L18-L78)
 
 ### PVC 使用模式三分类
 
@@ -119,7 +119,7 @@ spec:
 
 **模式三：标签选择器绑定（Selector Binding）——精细调度**。PVC 通过 `matchLabels` / `matchExpressions` 从多个候选 PV 中筛选，常用于 Local PV 按节点精确分配。
 
-Sources: [03-pvc-patterns-practices.md](domain-6-storage/03-pvc-patterns-practices.md#L63-L162), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L14-L22)
+Sources: [03-pvc-patterns-practices.md](domain-04-storage-data/03-pvc-patterns-practices.md#L63-L162), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L14-L22)
 
 ### PVC 规格字段速查
 
@@ -134,13 +134,13 @@ Sources: [03-pvc-patterns-practices.md](domain-6-storage/03-pvc-patterns-practic
 | `dataSource` | TypedLocalObjectReference | 否 | 克隆/恢复数据源 |
 | `dataSourceRef` | TypedObjectReference | 否 | 跨命名空间数据源（v1.26+） |
 
-Sources: [03-pvc-patterns-practices.md](domain-6-storage/03-pvc-patterns-practices.md#L47-L59), [16-persistentvolumeclaim-reference.md](domain-32-yaml-manifests/16-persistentvolumeclaim-reference.md#L1-L10)
+Sources: [03-pvc-patterns-practices.md](domain-04-storage-data/03-pvc-patterns-practices.md#L47-L59), [16-persistentvolumeclaim-reference.md](domain-18-manifests-patterns/16-persistentvolumeclaim-reference.md#L1-L10)
 
 ### PV-PVC 绑定算法
 
 PV Controller 在处理绑定时执行严格的多维匹配检查，优先级排序为**精确容量匹配 > 最小满足容量 > 先创建的 PV 优先**。绑定条件包括：StorageClass 名称一致、AccessModes 包含关系（PV ⊇ PVC）、容量满足（PV ≥ PVC）、Selector 标签匹配、VolumeMode 一致，以及 WaitForFirstConsumer 模式下的 NodeAffinity 拓扑匹配。
 
-Sources: [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architecture-fundamentals.md#L170-L198)
+Sources: [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L170-L198)
 
 ---
 
@@ -181,7 +181,7 @@ Sources: [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architectur
 
 **生产环境铁律**：关键数据的 StorageClass 必须设置 `reclaimPolicy: Retain`，并在 PVC 创建后立即验证 PV 的回收策略。可通过 `kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'` 动态修改。
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L171-L220), [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architecture-fundamentals.md#L109-L143), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L25-L33)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L171-L220), [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L109-L143), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L25-L33)
 
 ---
 
@@ -199,7 +199,7 @@ Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-archi
 | `allowedTopologies` | []TopologySelectorTerm | 否 | 拓扑约束（可用区限制） |
 | `mountOptions` | []string | 否 | 挂载选项 |
 
-Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storageclass-dynamic-provisioning.md#L58-L69), [17-storageclass-volumesnapshot.md](domain-32-yaml-manifests/17-storageclass-volumesnapshot.md#L35-L52)
+Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L58-L69), [17-storageclass-volumesnapshot.md](domain-18-manifests-patterns/17-storageclass-volumesnapshot.md#L35-L52)
 
 ### VolumeBindingMode：拓扑感知的关键
 
@@ -215,7 +215,7 @@ Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storagecl
 
 **生产环境强烈推荐** `WaitForFirstConsumer`。使用此模式时**不要在 Pod 规格中使用 `nodeName`** 直接指定节点，否则调度器被绕过、PVC 将永远 Pending。
 
-Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storageclass-dynamic-provisioning.md#L72-L101), [storage-classes.md](topic-dictionary/storage/storage-classes.md#L34-L38)
+Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L72-L101), [storage-classes.md](topic-dictionary/storage/storage-classes.md#L34-L38)
 
 ### 动态供给全流程
 
@@ -242,7 +242,7 @@ sequenceDiagram
     Note over API: PVC.status.phase = Bound
 ```
 
-Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storageclass-dynamic-provisioning.md#L18-L54)
+Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L18-L54)
 
 ### 多云 StorageClass 配置对照
 
@@ -255,7 +255,7 @@ Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storagecl
 | **Azure** | `ultra-ssd` | `disk.csi.azure.com` | `skuName: UltraSSD_LRS` | 160,000 |
 | **GCP** | `pd-ssd` | `pd.csi.storage.gke.io` | `type: pd-ssd` | 100,000 |
 
-Sources: [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storageclass-dynamic-provisioning.md#L104-L200), [17-storageclass-volumesnapshot.md](domain-32-yaml-manifests/17-storageclass-volumesnapshot.md#L83-L149)
+Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L104-L200), [17-storageclass-volumesnapshot.md](domain-18-manifests-patterns/17-storageclass-volumesnapshot.md#L83-L149)
 
 ---
 
@@ -277,7 +277,7 @@ Kubernetes 存储插件经历了三个阶段：v1.0-v1.8 的 **In-Tree 插件**�
 | v1.8 | 1.27 | GA | SELinux Context |
 | v1.9 | 1.29 | GA | VolumeAttributesClass |
 
-Sources: [22-container-storage-deep-dive.md](domain-3-control-plane/22-container-storage-deep-dive.md#L20-L64)
+Sources: [22-container-storage-deep-dive.md](domain-01-cluster-fundamentals/22-container-storage-deep-dive.md#L20-L64)
 
 ### CSI 架构组件
 
@@ -293,7 +293,7 @@ CSI 驱动由**控制器组件**（以 Deployment 方式运行）和**节点组�
 | **livenessprobe** | Sidecar | CSI 驱动健康检查 |
 | **CSI Driver** | 自定义 | 实现存储后端全部 gRPC 接口 |
 
-Sources: [05-csi-drivers-integration.md](domain-6-storage/05-csi-drivers-integration.md#L19-L83), [18-csi-driver-resources.md](domain-32-yaml-manifests/18-csi-driver-resources.md#L14-L50)
+Sources: [05-csi-drivers-integration.md](domain-04-storage-data/05-csi-drivers-integration.md#L19-L83), [18-csi-driver-resources.md](domain-18-manifests-patterns/18-csi-driver-resources.md#L14-L50)
 
 ### CSI 三阶段挂载流程
 
@@ -325,7 +325,7 @@ sequenceDiagram
 
 **卸载流程**严格反向执行：NodeUnpublishVolume → NodeUnstageVolume → ControllerUnpublishVolume。
 
-Sources: [18-csi-driver-resources.md](domain-32-yaml-manifests/18-csi-driver-resources.md#L52-L80), [22-container-storage-deep-dive.md](domain-3-control-plane/22-container-storage-deep-dive.md#L65-L100)
+Sources: [18-csi-driver-resources.md](domain-18-manifests-patterns/18-csi-driver-resources.md#L52-L80), [22-container-storage-deep-dive.md](domain-01-cluster-fundamentals/22-container-storage-deep-dive.md#L65-L100)
 
 ### CSI gRPC 接口一览
 
@@ -356,7 +356,7 @@ CSI 规范定义了三大 Service 接口，每个接口对应一组 RPC 调用�
 | `NodeGetVolumeStats` | 获取卷统计 | kubelet 监控 |
 | `NodeExpandVolume` | 节点侧文件系统扩展 | 在线扩容 |
 
-Sources: [05-csi-drivers-integration.md](domain-6-storage/05-csi-drivers-integration.md#L86-L124), [07-kubernetes-csi-storage-deep-practice.md](domain-19-papers/07-kubernetes-csi-storage-deep-practice.md#L29-L63)
+Sources: [05-csi-drivers-integration.md](domain-04-storage-data/05-csi-drivers-integration.md#L86-L124), [07-kubernetes-csi-storage-deep-practice.md](domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md#L29-L63)
 
 ### CSIDriver 与 CSINode 资源
 
@@ -380,7 +380,7 @@ spec:
 
 **CSINode** 由 node-driver-registrar 自动创建，记录每个节点上可用的 CSI 驱动及其拓扑信息。`CSIStorageCapacity`（v1.24+ GA）则让调度器能感知存储容量约束，避免将 Pod 调度到存储不足的拓扑域。
 
-Sources: [18-csi-driver-resources.md](domain-32-yaml-manifests/18-csi-driver-resources.md#L89-L150), [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L310-L346)
+Sources: [18-csi-driver-resources.md](domain-18-manifests-patterns/18-csi-driver-resources.md#L89-L150), [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L310-L346)
 
 ---
 
@@ -431,7 +431,7 @@ spec:
       storage: 100Gi
 ```
 
-Sources: [11-storage-advanced-features.md](domain-6-storage/11-storage-advanced-features.md#L18-L42), [volume-snapshots.md](topic-dictionary/storage/volume-snapshots.md#L1-L46), [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L387-L436)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L18-L42), [volume-snapshots.md](topic-dictionary/storage/volume-snapshots.md#L1-L46), [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L387-L436)
 
 ### 卷克隆（Volume Cloning）
 
@@ -454,7 +454,7 @@ spec:
     name: db-data          # 源 PVC（同命名空间）
 ```
 
-Sources: [11-storage-advanced-features.md](domain-6-storage/11-storage-advanced-features.md#L94-L113), [csi-volume-cloning.md](topic-dictionary/storage/csi-volume-cloning.md#L1-L22)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L94-L113), [csi-volume-cloning.md](topic-dictionary/storage/csi-volume-cloning.md#L1-L22)
 
 ### 在线扩容（Volume Expansion）
 
@@ -462,7 +462,7 @@ Sources: [11-storage-advanced-features.md](domain-6-storage/11-storage-advanced-
 
 **关键约束**：Kubernetes **不支持 PVC 缩容**；云盘每次扩容最少增加 10GB；扩容期间可能有短暂 I/O 抖动。
 
-Sources: [11-storage-advanced-features.md](domain-6-storage/11-storage-advanced-features.md#L157-L180), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L44-L48)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L157-L180), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L44-L48)
 
 ### 临时卷（Ephemeral Volumes）
 
@@ -503,7 +503,7 @@ flowchart TB
 
 **Layer 1 集群级备份**（Velero/Kasten/Trilio）覆盖 Kubernetes 资源清单 + PV 数据，适合集群迁移和整体恢复。**Layer 2 应用级备份**（mysqldump/pg_dump）在应用层保证数据一致性，适合逻辑恢复。**Layer 3 存储级备份**（VolumeSnapshot/云盘快照/跨区域复制）在存储后端层面操作，速度最快但粒度最粗。
 
-Sources: [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-backup-disaster-recovery.md#L18-L50)
+Sources: [10-storage-backup-disaster-recovery.md](domain-04-storage-data/10-storage-backup-disaster-recovery.md#L18-L50)
 
 ### RPO/RTO 指标与备份策略对照
 
@@ -514,7 +514,7 @@ Sources: [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-ba
 | **每小时快照** | 1 小时 | 小时级 | 中 | 一般生产系统 |
 | **每日备份** | 24 小时 | 天级 | 低 | 开发测试环境 |
 
-Sources: [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-backup-disaster-recovery.md#L54-L69)
+Sources: [10-storage-backup-disaster-recovery.md](domain-04-storage-data/10-storage-backup-disaster-recovery.md#L54-L69)
 
 ### Velero 企业备份方案
 
@@ -535,7 +535,7 @@ velero install \
 
 生产环境建议的定时备份策略：**每日全量备份**（凌晨 2 点，保留 30 天）+ **每小时增量备份**（关键命名空间，保留 7 天）+ **每周归档**（长期保留，加密压缩）。
 
-Sources: [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-backup-disaster-recovery.md#L72-L200)
+Sources: [10-storage-backup-disaster-recovery.md](domain-04-storage-data/10-storage-backup-disaster-recovery.md#L72-L200)
 
 ### 灾备架构三等级
 
@@ -547,7 +547,7 @@ Sources: [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-ba
   RTO: 2m                 RTO: 15m                 RTO: 2h
 ```
 
-Sources: [15-storage-disaster-recovery.md](domain-6-storage/15-storage-disaster-recovery.md#L18-L64)
+Sources: [15-storage-disaster-recovery.md](domain-04-storage-data/15-storage-disaster-recovery.md#L18-L64)
 
 ---
 
@@ -565,7 +565,7 @@ Kubernetes 存储系统的可观测性主要通过事件（Events）体现，关
 | 卷无法删除 | `VolumeFailedDelete` | persistentvolume-controller |
 | CSI 驱动异常 | `FailedMapVolume`, CSI Pod CrashLoop | kubelet |
 
-Sources: [11-storage-volume-events.md](domain-33-kubernetes-events/11-storage-volume-events.md#L23-L71)
+Sources: [11-storage-volume-events.md](domain-17-system-foundation/11-storage-volume-events.md#L23-L71)
 
 ### 诊断命令速查
 
@@ -591,7 +591,7 @@ kubectl logs -n kube-system csi-diskplugin-xxxx -c disk-plugin
 kubectl logs -n kube-system csi-diskplugin-xxxx -c disk-provisioner
 ```
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L602-L637), [07-storage-daily-operations.md](domain-6-storage/07-storage-daily-operations.md#L18-L51)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L602-L637), [07-storage-daily-operations.md](domain-04-storage-data/07-storage-daily-operations.md#L18-L51)
 
 ### 常见错误与解决方案
 
@@ -603,7 +603,7 @@ Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-archi
 | `Multi-Attach error` | RWO 卷被多节点同时挂载 | 等待旧 Pod 终止或手动清理 VolumeAttachment |
 | `Volume is already attached` | 云盘未正确卸载 | 手动 detach 云盘或清理残留 VolumeAttachment |
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L639-L668), [09-pv-pvc-troubleshooting.md](domain-6-storage/09-pv-pvc-troubleshooting.md#L1-L15)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L639-L668), [09-pv-pvc-troubleshooting.md](domain-04-storage-data/09-pv-pvc-troubleshooting.md#L1-L15)
 
 ---
 
@@ -625,7 +625,7 @@ flowchart TD
     DB -->|否| STD["ESSD PL1<br/>IOPS 50K"]
 ```
 
-Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md#L771-L793)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L771-L793)
 
 ---
 
@@ -637,41 +637,41 @@ Sources: [01-storage-architecture-overview.md](domain-6-storage/01-storage-archi
 
 | 文档 | 核心内容 | 路径 |
 |:---|:---|:---|
-| 存储架构概览 | PV/PVC/SC 完整配置、性能优化、故障排查 | [01-storage-architecture-overview.md](domain-6-storage/01-storage-architecture-overview.md) |
-| PV 核心概念 | PV 分层模型、绑定算法、状态机 | [02-pv-architecture-fundamentals.md](domain-6-storage/02-pv-architecture-fundamentals.md) |
-| PVC 使用模式 | 三种绑定模式、StatefulSet volumeClaimTemplates | [03-pvc-patterns-practices.md](domain-6-storage/03-pvc-patterns-practices.md) |
-| 存储基础概念 | 抽象层次、供给方式、生命周期 | [06-storage-fundamental-concepts.md](domain-6-storage/06-storage-fundamental-concepts.md) |
+| 存储架构概览 | PV/PVC/SC 完整配置、性能优化、故障排查 | [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md) |
+| PV 核心概念 | PV 分层模型、绑定算法、状态机 | [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md) |
+| PVC 使用模式 | 三种绑定模式、StatefulSet volumeClaimTemplates | [03-pvc-patterns-practices.md](domain-04-storage-data/03-pvc-patterns-practices.md) |
+| 存储基础概念 | 抽象层次、供给方式、生命周期 | [06-storage-fundamental-concepts.md](domain-04-storage-data/06-storage-fundamental-concepts.md) |
 
 ### StorageClass 与动态供给
 
 | 文档 | 核心内容 | 路径 |
 |:---|:---|:---|
-| StorageClass 动态供给 | VolumeBindingMode、多云配置、多租户策略 | [04-storageclass-dynamic-provisioning.md](domain-6-storage/04-storageclass-dynamic-provisioning.md) |
-| StorageClass YAML 参考 | 全字段解析、主流云厂商参数 | [17-storageclass-volumesnapshot.md](domain-32-yaml-manifests/17-storageclass-volumesnapshot.md) |
+| StorageClass 动态供给 | VolumeBindingMode、多云配置、多租户策略 | [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md) |
+| StorageClass YAML 参考 | 全字段解析、主流云厂商参数 | [17-storageclass-volumesnapshot.md](domain-18-manifests-patterns/17-storageclass-volumesnapshot.md) |
 
 ### CSI 驱动
 
 | 文档 | 核心内容 | 路径 |
 |:---|:---|:---|
-| CSI 驱动集成 | 架构组件、gRPC 接口、部署配置 | [05-csi-drivers-integration.md](domain-6-storage/05-csi-drivers-integration.md) |
-| CSI 深度解析 | 接口规范、三阶段挂载、驱动开发 | [22-container-storage-deep-dive.md](domain-3-control-plane/22-container-storage-deep-dive.md) |
-| CSI YAML 参考 | CSIDriver/CSINode/CSIStorageCapacity | [18-csi-driver-resources.md](domain-32-yaml-manifests/18-csi-driver-resources.md) |
-| CSI 深度实践论文 | 驱动开发、生产案例、高级特性 | [07-kubernetes-csi-storage-deep-practice.md](domain-19-papers/07-kubernetes-csi-storage-deep-practice.md) |
+| CSI 驱动集成 | 架构组件、gRPC 接口、部署配置 | [05-csi-drivers-integration.md](domain-04-storage-data/05-csi-drivers-integration.md) |
+| CSI 深度解析 | 接口规范、三阶段挂载、驱动开发 | [22-container-storage-deep-dive.md](domain-01-cluster-fundamentals/22-container-storage-deep-dive.md) |
+| CSI YAML 参考 | CSIDriver/CSINode/CSIStorageCapacity | [18-csi-driver-resources.md](domain-18-manifests-patterns/18-csi-driver-resources.md) |
+| CSI 深度实践论文 | 驱动开发、生产案例、高级特性 | [07-kubernetes-csi-storage-deep-practice.md](domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md) |
 
 ### 高级特性与灾备
 
 | 文档 | 核心内容 | 路径 |
 |:---|:---|:---|
-| 存储高级特性 | 快照、克隆、扩容、加密 | [11-storage-advanced-features.md](domain-6-storage/11-storage-advanced-features.md) |
-| 存储备份与灾难恢复 | Velero 方案、RPO/RTO、备份策略 | [10-storage-backup-disaster-recovery.md](domain-6-storage/10-storage-backup-disaster-recovery.md) |
-| 存储灾备与迁移 | 三级灾备、数据同步、业务连续性 | [15-storage-disaster-recovery.md](domain-6-storage/15-storage-disaster-recovery.md) |
+| 存储高级特性 | 快照、克隆、扩容、加密 | [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md) |
+| 存储备份与灾难恢复 | Velero 方案、RPO/RTO、备份策略 | [10-storage-backup-disaster-recovery.md](domain-04-storage-data/10-storage-backup-disaster-recovery.md) |
+| 存储灾备与迁移 | 三级灾备、数据同步、业务连续性 | [15-storage-disaster-recovery.md](domain-04-storage-data/15-storage-disaster-recovery.md) |
 
 ### 故障排查
 
 | 文档 | 核心内容 | 路径 |
 |:---|:---|:---|
-| PV/PVC 故障排查 | 状态机分析、常见错误、解决方案 | [09-pv-pvc-troubleshooting.md](domain-6-storage/09-pv-pvc-troubleshooting.md) |
-| 存储卷事件 | 完整事件索引、排查路径 | [11-storage-volume-events.md](domain-33-kubernetes-events/11-storage-volume-events.md) |
+| PV/PVC 故障排查 | 状态机分析、常见错误、解决方案 | [09-pv-pvc-troubleshooting.md](domain-04-storage-data/09-pv-pvc-troubleshooting.md) |
+| 存储卷事件 | 完整事件索引、排查路径 | [11-storage-volume-events.md](domain-17-system-foundation/11-storage-volume-events.md) |
 | CSI FTA 故障树 | 演绎式故障分析树 | [csi-fta.md](topic-fta/list/csi-fta.md) |
 | CSI 故障排查 | 配置优先方法论 | [02-csi-troubleshooting.md](topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) |
 

@@ -25,6 +25,11 @@ trigger_keywords:
 - Domain-10
 - 扩展生态质量报告
 - v3.0
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
 ---
 
 # Domain-10 扩展生态质量报告 (v3.0)
@@ -57,7 +62,7 @@ trigger_keywords:
 │                           技术领域覆盖图                                    │
 ├─────────────────────────────────────────────────────────────────────────┤
 │  开发层    │  管理层    │  部署层    │  治理层    │  运维层    │  企业层      │
-│  CRD/      │  HELM/     │  CI/CD/    │  SERVICE   │  BASIC     │  ENTERPRISE  │
+│  CRD/      │  HELM/     │  CI/CD/    │  [[entities/service|service]]   │  BASIC     │  ENTERPRISE  │
 │  OPERATOR  │  KUSTOMIZE │  GITOPS    │  MESH      │  OPS       │  MANAGEMENT  │
 │ (01-04)   │ (05-07)   │ (08-09)   │ (11-12)   │ (13)      │ (14-17)     │
 └─────────────────────────────────────────────────────────────────────────┘
