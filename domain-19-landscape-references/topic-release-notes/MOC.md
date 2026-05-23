@@ -101,7 +101,7 @@ created: "2026-05-23"
 | 38 | [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1|argo-cd v3.1 Release Notes]] |  | release-notes |  |
 | 39 | [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2|argo-cd v3.2 Release Notes]] |  | release-notes |  |
 | 40 | [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3|argo-cd v3.3 Release Notes]] |  | release-notes |  |
-| 41 | [[web/node_modules/uvu/node_modules/diff/release-notes|flux v0.0 Release Notes]]]] |  | release-notes |  |
+| 41 | [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-0.0|flux v0.0 Release Notes]] |  | release-notes |  |
 | 42 | flux v0.1 Release Notes |  | release-notes |  |
 | 43 | flux v0.10 Release Notes |  | release-notes |  |
 | 44 | flux v0.11 Release Notes |  | release-notes |  |
