@@ -1,6 +1,6 @@
 ---
 title: 服务网格演进
-description: 本文档综合了 `domain-19-landscape-references/topic-release-notes/networking/` 目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]]
+description: 本文档综合了 `domain-19-landscape-references/_archived-release-notes/networking/` 目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]]
   和 Calico 五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
 category: concepts
 tags:
@@ -36,7 +36,7 @@ created: "2026-05-23"
 
 # 服务网格演进
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/networking/` 目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]] 和 Calico 五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/networking/` 目录下 [[istio|Istio]]、[[envoy|Envoy]]、[[cilium|Cilium]]、[[linkerd|Linkerd]] 和 Calico 五大网络/服务网格组件的 157 个版本发布说明 ^[inferred]
 
 ## 组件概览
 
@@ -161,12 +161,12 @@ Calico 提供网络策略和 CNI 实现。
 
 ## 来源文档
 
-- domain-19-landscape-references/topic-release-notes/networking/istio/（38 个文件）
-- domain-19-landscape-references/topic-release-notes/networking/envoy/（38 个文件）
-- domain-19-landscape-references/topic-release-notes/networking/cilium/（24 个文件）
-- domain-19-landscape-references/topic-release-notes/networking/linkerd/（8 个文件）
-- domain-19-landscape-references/topic-release-notes/networking/calico/（35 个文件）
-- domain-19-landscape-references/topic-release-notes/networking/cni-plugins/（14 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/istio/（38 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/envoy/（38 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/cilium/（24 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/linkerd/（8 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/calico/（35 个文件）
+- domain-19-landscape-references/_archived-release-notes/networking/cni-plugins/（14 个文件）
 
 ## Related
 

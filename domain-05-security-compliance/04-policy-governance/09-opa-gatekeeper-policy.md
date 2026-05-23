@@ -1082,5 +1082,5 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 
 ## Related
 
-- [[domain-19-landscape-references/topic-release-notes/security/gatekeeper/RELEASE-NOTES-3.22|gatekeeper v3.22 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/security/gatekeeper/RELEASE-NOTES-3.21|gatekeeper v3.21 Release Notes]]
+- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.22|gatekeeper v3.22 Release Notes]]
+- [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.21|gatekeeper v3.21 Release Notes]]

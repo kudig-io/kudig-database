@@ -31,7 +31,7 @@ created: "2026-05-23"
 
 # 核心依赖版本矩阵
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/core-deps/` 目录下 5 个核心依赖项目的 83 个版本发布说明 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/core-deps/` 目录下 5 个核心依赖项目的 83 个版本发布说明 ^[inferred]
 
 ## etcd 版本演进
 
@@ -131,11 +131,11 @@ runc 是 OCI 容器运行时的参考实现，被 containerd 和 CRI-O 底层使
 
 ## 来源文档
 
-- domain-19-landscape-references/topic-release-notes/core-deps/etcd/（15 个文件）
-- domain-19-landscape-references/topic-release-notes/core-deps/containerd/（13 个文件）
-- domain-19-landscape-references/topic-release-notes/core-deps/cri-o/（32 个文件）
-- domain-19-landscape-references/topic-release-notes/core-deps/coredns/（16 个文件）
-- domain-19-landscape-references/topic-release-notes/core-deps/runc/（7 个文件）
+- domain-19-landscape-references/_archived-release-notes/core-deps/etcd/（15 个文件）
+- domain-19-landscape-references/_archived-release-notes/core-deps/containerd/（13 个文件）
+- domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/（32 个文件）
+- domain-19-landscape-references/_archived-release-notes/core-deps/coredns/（16 个文件）
+- domain-19-landscape-references/_archived-release-notes/core-deps/runc/（7 个文件）
 
 ## Related
 

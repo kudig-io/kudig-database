@@ -89,7 +89,7 @@ description: '## 项目概述'
 - [[entities/hwameistor|HwameiStor]]
 - [[entities/carina|Carina]]
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
-- [[references/release-notes-reading-guide|发布说明阅读指南]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]] — Cross-reference
 - [[concepts/storage-tool-evolution|存储工具演进]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

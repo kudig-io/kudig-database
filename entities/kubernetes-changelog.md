@@ -32,7 +32,7 @@ created: "2026-05-23"
 
 # Kubernetes 变更日志索引
 
-> 本文档是 `domain-19-landscape-references/topic-release-notes/kubernetes/` 目录下 Kubernetes 变更日志的索引和摘要 ^[inferred]
+> 本文档是 `domain-19-landscape-references/_archived-release-notes/kubernetes/` 目录下 Kubernetes 变更日志的索引和摘要 ^[inferred]
 
 ## CHANGELOG 文件索引
 
@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 ## 来源文档
 
-domain-19-landscape-references/topic-release-notes/kubernetes/ 目录下全部 54 个文件。
+domain-19-landscape-references/_archived-release-notes/kubernetes/ 目录下全部 54 个文件。
 
 ## Related
 

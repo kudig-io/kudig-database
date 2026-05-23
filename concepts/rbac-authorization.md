@@ -76,7 +76,7 @@ Kubernetes 预定义了四个高频使用的 ClusterRole，平台团队可直接
 4. **审计日志定位**：若用户具备查看审计日志的权限，通过搜索 `responseStatus.code=403` 并关联 `user.username` 与 `requestURI`，可精确定位是哪条规则缺失或 verbs 不匹配。审计日志是追溯权限问题的最终手段。
 5. **CRD 权限遗漏**：若用户报告无法操作自定义资源（CRD），检查是否为其角色添加了相应 CRD 的 `apiGroups`、`resources` 和 `verbs`。聚合角色或 Operator 可能未自动扩展新版本的 CRD 权限。
 
-更多排查细节可参考 [[rbac-troubleshooting]] 与技能页面 [[k8s-rbac-quota]]。
+更多排查细节可参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|rbac-troubleshooting]] 与技能页面 [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-rbac-quota/README|k8s-rbac-quota]]。
 
 ## 相关概念
 

@@ -100,12 +100,12 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-0.0
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7|RELEASE-NOTES-2.7]]
+- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7|RELEASE-NOTES-2.7]]
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-2.3
 - RELEASE-NOTES-0.5
 - RELEASE-NOTES-0.20
-- [[domain-19-landscape-references/topic-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8|RELEASE-NOTES-2.8]]
+- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8|RELEASE-NOTES-2.8]]
 - RELEASE-NOTES-0.14
 - RELEASE-NOTES-0.30
 - RELEASE-NOTES-0.10

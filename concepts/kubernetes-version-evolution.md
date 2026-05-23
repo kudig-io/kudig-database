@@ -33,7 +33,7 @@ created: "2026-05-23"
 
 # Kubernetes 版本演进
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/kubernetes/` 目录下 55 个版本发布说明，提炼 Kubernetes 从早期版本到 v1.36 的核心演进轨迹 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/kubernetes/` 目录下 55 个版本发布说明，提炼 Kubernetes 从早期版本到 v1.36 的核心演进轨迹 ^[inferred]
 
 ## 版本概览
 
@@ -251,8 +251,8 @@ Kubernetes 第一个正式生产版本，确立了核心 API 对象模型：
 
 本文档基于以下源文件综合编写：
 
-- domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.2.md ~ CHANGELOG-1.36.md（35 个 CHANGELOG 文件）
-- domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.4.md ~ RELEASE-NOTES-1.1.md（19 个 RELEASE-NOTES 文件）
+- domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.2.md ~ CHANGELOG-1.36.md（35 个 CHANGELOG 文件）
+- domain-19-landscape-references/_archived-release-notes/kubernetes/RELEASE-NOTES-0.4.md ~ RELEASE-NOTES-1.1.md（19 个 RELEASE-NOTES 文件）
 
 ## Related
 

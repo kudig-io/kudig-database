@@ -1,6 +1,6 @@
 ---
 title: Audit RBAC Configurations
-description: '- [[references/release-notes-security|release-notes-security]] — 发布说明索引 — 安全'
+description: '- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-security]] — 发布说明索引 — 安全'
 category: skills
 tags:
 - k8s
@@ -83,7 +83,7 @@ Use tools like `rbac-lookup` or `kubectl-view-allocations` to audit RBAC at scal
 
 ## Related
 
-- [[references/release-notes-security|release-notes-security]] — 发布说明索引 — 安全
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-security]] — 发布说明索引 — 安全
 - [[skills/k8s-pod-security-guide|k8s-pod-security-guide]] — Kubernetes Pod 安全最佳实践
 - [[skills/configure-health-probes|configure-health-probes]] — Configure Health Probes
 - [[concepts/multi-tenancy-isolation|multi-tenancy-isolation]] — Multi-Tenancy Isolation

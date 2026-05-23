@@ -152,7 +152,7 @@ kubectl api-resources --verbs=list --namespaced -o name \
 
 ## 来源文档
 
-domain-19-landscape-references/topic-release-notes/ 目录下全部 1321 个发布说明文件。
+domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个发布说明文件。
 
 ## Related
 

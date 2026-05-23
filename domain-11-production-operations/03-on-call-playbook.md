@@ -101,7 +101,7 @@ status: reviewed
 
 ## 相关链接
 
-- [[production-sre-daily-ops]] — 日常巡检与值班手册
-- [[incident-response-template]] — 事故响应模板
-- [[change-management-guide]] — 变更管理指南
+- [[domain-11-production-operations/01-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[domain-11-production-operations/04-incident-response-template|incident-response-template]] — 事故响应模板
+- [[domain-11-production-operations/02-change-management-guide|change-management-guide]] — 变更管理指南
 - [[node-notready]] — 节点异常排查

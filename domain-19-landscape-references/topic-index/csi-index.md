@@ -128,7 +128,7 @@ created: "2026-05-23"
 - 灾难恢复演练
 
 ### Kubernetes 版本相关
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.25|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
+- [[domain-19-landscape-references/_archived-release-notes/kubernetes/CHANGELOG-1.25|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
 - CHANGELOG-1.23 - CSI Volume Mount Group
 - CHANGELOG-1.21 - CSI Health Monitoring
 - CHANGELOG-1.19 - CSI Health Monitoring Alpha

@@ -212,7 +212,7 @@ kudig-database/
 │
 ├── domain-19-landscape-references/
 │   ├── ...核心域文档...
-│   ├── domain-19-landscape-references/topic-release-notes/          # ← 迁入（1,323 个文件）
+│   ├── domain-19-landscape-references/_archived-release-notes/          # ← 迁入（1,323 个文件）
 │   └── domain-19-landscape-references/topic-index/                  # ← 迁入（25 个文件）
 │
 └── domain-20-application-patterns/

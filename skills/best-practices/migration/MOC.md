@@ -90,7 +90,7 @@ created: "2026-05-23"
 - storage
 - 05-network-migration-traffic-cutover
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
-- [[references/release-notes-storage|[[发布说明索引 — 存储|发布说明索引 — 存储]]]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index|[[发布说明索引 — 存储|发布说明索引 — 存储]]]] — Cross-reference
 - [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[references/release-notes-kubernetes|发布说明索引 — Kubernetes]] — Cross-reference

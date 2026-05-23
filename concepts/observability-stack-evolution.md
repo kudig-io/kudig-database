@@ -36,7 +36,7 @@ created: "2026-05-23"
 
 # 可观测性栈演进
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/observability/` 目录下 5 个可观测性组件的 374 个版本发布说明 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/observability/` 目录下 5 个可观测性组件的 374 个版本发布说明 ^[inferred]
 
 ## 组件概览
 
@@ -170,11 +170,11 @@ OTel Collector (统一采集) -> Prometheus/Loki/Jaeger/其他后端
 
 ## 来源文档
 
-- domain-19-landscape-references/topic-release-notes/observability/prometheus/（87 个文件）
-- domain-19-landscape-references/topic-release-notes/observability/grafana/（71 个文件）
-- domain-19-landscape-references/topic-release-notes/observability/loki/（29 个文件）
-- domain-19-landscape-references/topic-release-notes/observability/thanos/（41 个文件）
-- domain-19-landscape-references/topic-release-notes/observability/opentelemetry-collector/（146 个文件）
+- domain-19-landscape-references/_archived-release-notes/observability/prometheus/（87 个文件）
+- domain-19-landscape-references/_archived-release-notes/observability/grafana/（71 个文件）
+- domain-19-landscape-references/_archived-release-notes/observability/loki/（29 个文件）
+- domain-19-landscape-references/_archived-release-notes/observability/thanos/（41 个文件）
+- domain-19-landscape-references/_archived-release-notes/observability/opentelemetry-collector/（146 个文件）
 
 ## Related
 

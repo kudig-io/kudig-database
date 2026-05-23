@@ -52,7 +52,7 @@ created: "2026-05-23"
 ### Argo CD
 
 - **最新版本**: v3.3
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/`
 - **版本覆盖**: v0.1 → v3.3（40 个版本）
 - **Breaking Changes 提醒**:
   - v2.4: ApplicationSet 控制器合并与 API 变更
@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[flux|Flux]]
 - **最新版本**: v2.8
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cicd-gitops/flux/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/`
 - **版本覆盖**: v0.1 → v2.8（51 个版本）
 - **Breaking Changes 提醒**:
   - v2.5: Source API 和 Kustomization 控制器行为变更
@@ -72,7 +72,7 @@ created: "2026-05-23"
 ### Tekton
 
 - **最新版本**: v1.11
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cicd-gitops/tekton/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cicd-gitops/tekton/`
 - **版本覆盖**: v0.1 → v1.11（80 个版本）
 - **Breaking Changes 提醒**:
   - v1.11: Task 和 Pipeline API 字段变更
@@ -94,12 +94,12 @@ created: "2026-05-23"
 ## 相关导航
 
 - [[concepts/gitops-tool-evolution|GitOps 工具演进]]
-- [[references/release-notes-reading-guide|发布说明阅读指南]]
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-cli-tools|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
 - [[references/k8s-production-operations|k8s-production-operations]] — 生产运维：GitOps、FinOps、灾备恢复与变更管理
 - [[flux]] — Flux
 - [[helm]] — Helm

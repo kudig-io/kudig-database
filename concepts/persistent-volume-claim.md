@@ -76,4 +76,4 @@ PVC 一直停留在 `Pending` 状态是存储类问题的典型表现，诊断�
 - **检查资源配额**：确认命名空间的 `ResourceQuota` 是否限制了 PVC 或存储类的使用
 - **查看事件**：`kubectl describe pvc <name>` 中的 Events 通常会给出具体失败原因
 
-更多存储排错方法请参考 [[pvc-storage-troubleshooting]]。
+更多存储排错方法请参考 [[domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting|pvc-storage-troubleshooting]]。

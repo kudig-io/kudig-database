@@ -56,7 +56,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[cert-manager|cert-manager]]
 - **最新版本**: v1.20
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/cert-manager/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/security/cert-manager/`
 - **版本覆盖**: v0.1 → v1.20（37 个版本）
 - **Breaking Changes 提醒**:
   - v1.5: CRD API 版本从 v1alpha2/v1alpha3 升级到 v1
@@ -66,7 +66,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[falco|Falco]]
 - **最新版本**: v0.43
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/falco/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/security/falco/`
 - **版本覆盖**: v0.1 → v0.43（43 个版本）
 - **Breaking Changes 提醒**:
   - v0.43: 规则语法和驱动模型变更
@@ -76,7 +76,7 @@ created: "2026-05-23"
 
 - **实体页面**: Gatekeeper
 - **最新版本**: v3.22
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/gatekeeper/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/security/gatekeeper/`
 - **版本覆盖**: v0.1 → v3.22（24 个版本）
 - **Breaking Changes 提醒**:
   - v3.22: 策略模板评估行为变更
@@ -86,7 +86,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[opa|OPA]]
 - **最新版本**: v1.15
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/opa/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/security/opa/`
 - **版本覆盖**: v0.1 → v1.15（86 个版本）
 - **Breaking Changes 提醒**:
   - v1.8: Rego 语言特性变更
@@ -96,7 +96,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[entities/trivy|Trivy]]
 - **最新版本**: v0.69
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/security/trivy/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/security/trivy/`
 - **版本覆盖**: v0.1 → v0.69（28 个版本）
 - **Breaking Changes 提醒**:
   - v0.23: 扫描输出格式变更
@@ -119,7 +119,7 @@ created: "2026-05-23"
 ## 相关导航
 
 - [[concepts/security-tool-evolution|安全工具演进]]
-- [[references/release-notes-reading-guide|发布说明阅读指南]]
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

@@ -35,7 +35,7 @@ created: "2026-05-23"
 
 # 安全工具演进
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/security/` 目录下 5 个安全工具的 218 个版本发布说明 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/security/` 目录下 5 个安全工具的 218 个版本发布说明 ^[inferred]
 
 ## 组件概览
 
@@ -153,11 +153,11 @@ cert-manager 自动化 Kubernetes 中的 TLS 证书管理。
 
 ## 来源文档
 
-- domain-19-landscape-references/topic-release-notes/security/falco/（43 个文件）
-- domain-19-landscape-references/topic-release-notes/security/opa/（86 个文件）
-- domain-19-landscape-references/topic-release-notes/security/gatekeeper/（24 个文件）
-- domain-19-landscape-references/topic-release-notes/security/trivy/（28 个文件）
-- domain-19-landscape-references/topic-release-notes/security/cert-manager/（37 个文件）
+- domain-19-landscape-references/_archived-release-notes/security/falco/（43 个文件）
+- domain-19-landscape-references/_archived-release-notes/security/opa/（86 个文件）
+- domain-19-landscape-references/_archived-release-notes/security/gatekeeper/（24 个文件）
+- domain-19-landscape-references/_archived-release-notes/security/trivy/（28 个文件）
+- domain-19-landscape-references/_archived-release-notes/security/cert-manager/（37 个文件）
 
 ## Related
 

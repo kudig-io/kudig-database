@@ -37,7 +37,7 @@ created: "2026-05-23"
 
 # 版本升级指南
 
-> 本文档基于 `domain-19-landscape-references/topic-release-notes/` 目录下全部 1321 个发布说明文件提炼而成，为 K8s 集群运维人员提供版本升级的参考指南 ^[inferred]
+> 本文档基于 `domain-19-landscape-references/_archived-release-notes/` 目录下全部 1321 个发布说明文件提炼而成，为 K8s 集群运维人员提供版本升级的参考指南 ^[inferred]
 
 ## Kubernetes 升级策略
 
@@ -142,7 +142,7 @@ kubectl uncordon <node-name>
 
 ## 来源文档
 
-domain-19-landscape-references/topic-release-notes/ 目录下全部 1321 个文件。
+domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个文件。
 
 ## Related
 

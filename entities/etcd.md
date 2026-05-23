@@ -90,20 +90,20 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta|etcd 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
 - [[journal/digest-2026-05-21|Wiki Digest — Daily (2026-05-21)]] — Cross-reference
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
 - [[references/specialized-workloads-terms|K8s 专用工作负载术语参考]] — Cross-reference
@@ -112,7 +112,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[references/fundamentals-terms|K8s 基础概念术语参考]] — Cross-reference
 - [[references/k8s-architecture-fundamentals|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[references/release-notes-reading-guide|发布说明阅读指南]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]] — Cross-reference
 - [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[references/kubectl-quick-reference|Kubectl Quick Reference]] — Cross-reference
@@ -132,7 +132,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
 - [[synthesis/etcd x 高可用模式|etcd × 高可用模式]] — Cross-reference
 - [[synthesis/Production Troubleshooting Playbook|Production Troubleshooting Playbook]] — Cross-reference
-- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]] — Cross-reference
+- [[concepts/k8s-mttr-benchmark|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
 - [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
 - [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference

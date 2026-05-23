@@ -170,7 +170,7 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 
 - [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]]
 
-- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]]
+- [[concepts/k8s-mttr-benchmark|K8s 问题分布与 MTTR 基准]]
 
 - etcd x 高可用模式.md|etcd x 高可用模式]]
 

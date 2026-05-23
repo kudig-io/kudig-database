@@ -93,7 +93,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[references/k8s-ai-corpus-configuration|k8s-ai-corpus-configuration]]
 
-- [[references/release-notes-kubernetes|release-notes-kubernetes]]
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-kubernetes]]
 
 - [[references/k8s-glossary-index|k8s-glossary-index]]
 

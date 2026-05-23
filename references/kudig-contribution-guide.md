@@ -63,8 +63,8 @@ created: "2026-05-23"
 
 ## Related
 
-- [[references/release-notes-cli-tools|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
-- [[references/release-notes-cicd-gitops|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
-- [[references/release-notes-reading-guide|release-notes-reading-guide]] — 发布说明阅读指南
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-reading-guide]] — 发布说明阅读指南
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

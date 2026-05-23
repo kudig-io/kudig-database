@@ -75,7 +75,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[references/release-notes-observability|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[entities/cncf-observability|cncf-observability]] — CNCF 可观测性项目全景
 - [[chaos-mesh]] — [[Chaos Mesh|Chaos Mesh]]
 - [[kubean]] — Kubean

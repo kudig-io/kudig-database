@@ -190,4 +190,4 @@ curl -s http://<svc-ip>/health
 ## 相关概念
 
 - [[concepts/blue-green-deployment|蓝绿部署]]
-- [[concepts/deployment-controller|Deployment 控制器]]
+- [[concepts/deployment-controller-architecture|Deployment 控制器]]

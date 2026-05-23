@@ -89,4 +89,4 @@ Service Mesh 支持基于 HTTP 头、Cookie、用户身份等维度的路由，�
 - **准备一键回滚**：金丝雀版本出现异常时，能够快速将流量比例归零或切回稳定版本
 - **渐进推广节奏**：建议按 5% → 10% → 25% → 50% → 100% 的节奏推进，每个阶段充分验证
 
-更多部署排错方法请参考 [[deployment-troubleshooting]]。
+更多部署排错方法请参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|deployment-troubleshooting]]。

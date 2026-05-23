@@ -36,7 +36,7 @@ updated: 2026-05-24
 
 **问题**: 本次新增的 16 个文件全部包含指向不存在页面的 wikilink。
 
-**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
+**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/README|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
 
 **涉及文件和 broken link 分布**:
 
@@ -52,7 +52,7 @@ updated: 2026-05-24
 **修复策略**:
 - **方案 A**（推荐）: 将不存在的 wikilink 替换为纯文本描述，或创建对应的 stub 页面
 - **方案 B**: 创建缺失的 troubleshooting/skill 页面（工作量大，但最完整）
-- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[ingress-gateway-troubleshooting]]` → `[[domain-10-troubleshooting-diagnostics]]`）
+- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/README|ingress-gateway-troubleshooting]]` → `[[domain-10-troubleshooting-diagnostics/98-merged-indexes/index|domain-10-troubleshooting-diagnostics]]`）
 
 **建议**: 先执行方案 A（纯文本化）确保生产可用，后续再按需创建 stub。
 
@@ -114,7 +114,7 @@ updated: 2026-05-24
 
 **问题**: 当前 concepts/ 有 67 个文件（原有 62 + 新增 5），但 skills 目录中的技能很少直接引用 concept 文件。概念和诊断之间是单向连接（concept → troubleshooting），缺少 troubleshooting → concept 的回链。
 
-**建议**: 在主要 skill 文件中添加 `相关概念：[[concept-name]]` 章节，建立双向链路。
+**建议**: 在主要 skill 文件中添加 `相关概念：概念名` 章节，建立双向链路。
 
 ### P1-4: 处理 1,704 个"无入站但有出站"页面
 

@@ -56,7 +56,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[helm|Helm]]
 - **最新版本**: v4.1
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cli-tools/helm/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cli-tools/helm/`
 - **版本覆盖**: v0.1 → v4.1（42 个版本）
 - **Breaking Changes 提醒**:
   - v4.1: Chart API 版本和依赖管理行为变更
@@ -66,7 +66,7 @@ created: "2026-05-23"
 ### Kind
 
 - **最新版本**: v0.31
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cli-tools/kind/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cli-tools/kind/`
 - **版本覆盖**: v0.0 → v0.31（32 个版本）
 - **Breaking Changes 提醒**:
   - v0.31: 默认 CNI 和容器运行时配置变更
@@ -75,7 +75,7 @@ created: "2026-05-23"
 ### Kops
 
 - **最新版本**: v1.35
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cli-tools/kops/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cli-tools/kops/`
 - **版本覆盖**: v0.1 → v1.35（32 个版本）
 - **Breaking Changes 提醒**:
   - v1.31: 云提供商配置格式变更
@@ -84,14 +84,14 @@ created: "2026-05-23"
 ### Kustomize
 
 - **最新版本**: v3.3
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cli-tools/kustomize/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cli-tools/kustomize/`
 - **版本覆盖**: v0.1 → v3.3（7 个版本）
 - **升级要点**: 已内置到 kubectl，独立版本更新较少
 
 ### Minikube
 
 - **最新版本**: v1.38
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/cli-tools/minikube/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/cli-tools/minikube/`
 - **版本覆盖**: v0.1 → v1.38（74 个版本）
 - **Breaking Changes 提醒**:
   - v1.37: 驱动程序默认配置变更
@@ -112,13 +112,13 @@ created: "2026-05-23"
 
 ## 相关导航
 
-- [[references/release-notes-reading-guide|发布说明阅读指南]]
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
 - [[references/k8s-platform-extensions|k8s-platform-extensions]] — 平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格
-- [[references/release-notes-core-deps|release-notes-core-deps]] — 发布说明索引 — 核心依赖
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-core-deps]] — 发布说明索引 — 核心依赖
 - [[helm]] — Helm
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

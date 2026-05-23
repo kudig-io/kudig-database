@@ -93,17 +93,17 @@ Run full cluster restore drills quarterly. A backup that hasn't been tested for 
 - [[skills/monitor-kubernetes-metrics|Monitor Kubernetes Metrics]]
 
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5|RELEASE-NOTES-3.5]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0|RELEASE-NOTES-2.0]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1|RELEASE-NOTES-2.1]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4|RELEASE-NOTES-3.4]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2|RELEASE-NOTES-2.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6|RELEASE-NOTES-3.6]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3|RELEASE-NOTES-2.3]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2|RELEASE-NOTES-3.2]]

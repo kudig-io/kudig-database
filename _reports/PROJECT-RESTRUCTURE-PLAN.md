@@ -100,7 +100,7 @@ created: "2026-05-23"
 | 18 | `domain-14-ai-ml-infra/topic-ai-coding/` | 25 | `domain-14-ai-ml-infra/` | AI 编码辅助 |
 | 19 | `domain-07-platform-engineering/topic-code-analysis/` | 89 | `domain-07-platform-engineering/` | 代码分析属于平台工程 |
 | 20 | `domain-20-application-patterns/topic-application-architecture/` | 97 | `domain-20-application-patterns/` | 应用架构模式 |
-| 21 | `domain-19-landscape-references/topic-release-notes/` | 1,323 | `domain-19-landscape-references/` | 发布说明属于生态全景 |
+| 21 | `domain-19-landscape-references/_archived-release-notes/` | 1,323 | `domain-19-landscape-references/` | 发布说明属于生态全景 |
 | 22 | `domain-19-landscape-references/topic-index/` | 25 | `domain-19-landscape-references/` | 索引属于生态参考 |
 | 23 | `domain-03-networking-traffic/topic-terway/` | 10 | `domain-03-networking-traffic/` | Terway 网络插件 |
 
@@ -242,7 +242,7 @@ mv domain-02-workloads-applications/topic-java-kubernetes/ domain-02-workloads-a
 **目标**: release-notes + index → domain-19
 **操作**:
 ```bash
-mv domain-19-landscape-references/topic-release-notes/ domain-19-landscape-references/
+mv domain-19-landscape-references/_archived-release-notes/ domain-19-landscape-references/
 mv domain-19-landscape-references/topic-index/ domain-19-landscape-references/
 ```
 **文件数**: 1,348 个
@@ -404,7 +404,7 @@ kudig-database/
 ├── domain-18-manifests-patterns/
 ├── domain-19-landscape-references/
 │   ├── ...原有文件...
-│   ├── domain-19-landscape-references/topic-release-notes/      # ← 迁入
+│   ├── domain-19-landscape-references/_archived-release-notes/      # ← 迁入
 │   └── domain-19-landscape-references/topic-index/              # ← 迁入
 └── domain-20-application-patterns/
     ├── ...原有文件...

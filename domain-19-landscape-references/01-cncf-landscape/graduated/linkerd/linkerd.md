@@ -80,9 +80,9 @@ description: '## 项目概述'
 - 99-linkerd-service-mesh-guide
 - 02-linkerd-enterprise-service-mesh
 - linkerd
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.9|RELEASE-NOTES-18.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.8|RELEASE-NOTES-18.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.7|RELEASE-NOTES-18.7]]
+- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.9|RELEASE-NOTES-18.9]]
+- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.8|RELEASE-NOTES-18.8]]
+- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.7|RELEASE-NOTES-18.7]]
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-0.4

@@ -34,7 +34,7 @@ created: "2026-05-23"
 
 # GitOps 工具演进
 
-> 本文档综合了 `domain-19-landscape-references/topic-release-notes/cicd-gitops/` 目录下 Argo CD、[[flux|flux]] 和 Tekton 三大工具的 171 个版本发布说明 ^[inferred]
+> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/cicd-gitops/` 目录下 Argo CD、[[flux|flux]] 和 Tekton 三大工具的 171 个版本发布说明 ^[inferred]
 
 ## 工具概览
 
@@ -166,9 +166,9 @@ Tekton 是云原生 CI/CD Pipeline 框架，基于 Kubernetes CRD 构建。
 
 ## 来源文档
 
-- domain-19-landscape-references/topic-release-notes/cicd-gitops/argo-cd/（40 个文件）
-- domain-19-landscape-references/topic-release-notes/cicd-gitops/flux/（51 个文件）
-- domain-19-landscape-references/topic-release-notes/cicd-gitops/tekton/（80 个文件）
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/（40 个文件）
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/flux/（51 个文件）
+- domain-19-landscape-references/_archived-release-notes/cicd-gitops/tekton/（80 个文件）
 
 ## Related
 

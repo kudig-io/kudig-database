@@ -104,7 +104,7 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.25
 - RELEASE-NOTES-1.11
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35|RELEASE-NOTES-1.35]]
+- [[domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35|RELEASE-NOTES-1.35]]
 - troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference

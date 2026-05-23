@@ -425,7 +425,7 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|[[发布说明索引 — 网络|发布说明索引 — 网络]]]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index|[[发布说明索引 — 网络|发布说明索引 — 网络]]]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference

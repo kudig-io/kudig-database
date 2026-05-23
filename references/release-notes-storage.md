@@ -52,7 +52,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[longhorn|Longhorn]]
 - **最新版本**: v1.11
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/storage/longhorn/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/storage/longhorn/`
 - **版本覆盖**: v0.1 → v1.11（19 个版本）
 - **Breaking Changes 提醒**:
   - v1.7: 存储引擎和快照格式变更
@@ -62,7 +62,7 @@ created: "2026-05-23"
 
 - **实体页面**: [[rook|Rook]]
 - **最新版本**: v1.19
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/storage/rook/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/storage/rook/`
 - **版本覆盖**: v0.1 → v1.19（29 个版本）
 - **Breaking Changes 提醒**:
   - v1.4: CRD API 版本升级和集群配置格式变更
@@ -72,7 +72,7 @@ created: "2026-05-23"
 
 - **实体页面**: Velero
 - **最新版本**: v1.18
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/storage/velero/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/storage/velero/`
 - **版本覆盖**: v0.1 → v1.18（28 个版本）
 - **Breaking Changes 提醒**:
   - v1.18: 备份存储位置 API 和插件接口变更
@@ -93,13 +93,13 @@ created: "2026-05-23"
 ## 相关导航
 
 - [[concepts/storage-tool-evolution|存储工具演进]]
-- [[references/release-notes-reading-guide|发布说明阅读指南]]
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-networking|release-notes-networking]] — 发布说明索引 — 网络
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-networking]] — 发布说明索引 — 网络
 - [[references/k8s-storage-ecosystem|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
-- [[references/release-notes-observability|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn

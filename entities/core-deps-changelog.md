@@ -29,7 +29,7 @@ created: "2026-05-23"
 
 # 核心依赖变更日志索引
 
-> 本文档是 `domain-19-landscape-references/topic-release-notes/core-deps/` 目录下核心依赖组件变更日志的索引 ^[inferred]
+> 本文档是 `domain-19-landscape-references/_archived-release-notes/core-deps/` 目录下核心依赖组件变更日志的索引 ^[inferred]
 
 ## 组件版本文件统计
 
@@ -71,7 +71,7 @@ created: "2026-05-23"
 
 ## 来源文档
 
-domain-19-landscape-references/topic-release-notes/core-deps/ 目录下全部 83 个文件。
+domain-19-landscape-references/_archived-release-notes/core-deps/ 目录下全部 83 个文件。
 
 ## Related
 

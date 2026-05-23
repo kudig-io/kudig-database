@@ -48,7 +48,7 @@ created: "2026-05-23"
 ## 最新版本
 
 - **最新版本**: v1.1 (RELEASE-NOTES) / v1.36 (CHANGELOG)
-- **发布说明目录**: `domain-19-landscape-references/topic-release-notes/kubernetes/`
+- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/kubernetes/`
 
 ---
 
@@ -90,13 +90,13 @@ created: "2026-05-23"
 - [[entities/kubernetes-changelog|Kubernetes 变更日志索引]]
 - [[concepts/kubernetes-version-evolution|Kubernetes 版本演进]]
 - [[references/version-upgrade-guide|版本升级指南]]
-- [[references/release-notes-reading-guide|发布说明阅读指南]]
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[references/release-notes-reading-guide|release-notes-reading-guide]] — 发布说明阅读指南
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-reading-guide]] — 发布说明阅读指南
 - [[references/kudig-contribution-guide|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
-- [[references/release-notes-security|release-notes-security]] — 发布说明索引 — 安全
+- [[domain-19-landscape-references/98-merged-indexes/index|release-notes-security]] — 发布说明索引 — 安全
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -348,7 +348,7 @@ FTA 问题树、FEBM 取证、Skills 技能库等独创方法论。
 | [学习计划](./domain-11-production-operations/topic-learn/) | 46 | 1 个月系统化学习路径 |
 | [部署方案](./domain-08-release-change-management/topic-deployment/) | 4 | 从 Demo 到生产的渐进式部署 |
 | [集群迁移](./domain-08-release-change-management/topic-migration/) | 10 | 10 步完整迁移指南 |
-| [Release Notes](./domain-19-landscape-references/topic-release-notes/) | 1300+ | K8s 及生态组件版本说明 |
+| [Release Notes](./domain-19-landscape-references/_archived-release-notes/) | 1300+ | K8s 及生态组件版本说明 |
 | [Manpage](./man/) | 14 | Unix manpage 参考手册 |
 
 ---

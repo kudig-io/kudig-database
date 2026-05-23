@@ -201,7 +201,7 @@ description: '## 项目概述'
 - [[references/root-terms|K8s Root术语参考]] — Cross-reference
 - [[references/scheduling-terms|K8s 调度术语参考]] — Cross-reference
 - [[references/kudig-contribution-guide|贡献指南、项目概览与版本发布说明]] — Cross-reference
-- [[references/release-notes-reading-guide|发布说明阅读指南]] — Cross-reference
+- [[domain-19-landscape-references/98-merged-indexes/index|发布说明阅读指南]] — Cross-reference
 - [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[references/storage-terms|K8s 存储术语参考]] — Cross-reference
 - [[references/observability-terms|K8s 可观测性术语参考]] — Cross-reference
@@ -229,7 +229,7 @@ description: '## 项目概述'
 - [[references/kubernetes-api-versions-reference|Kubernetes API Versions Reference]] — Cross-reference
 - [[synthesis/kubeadm-cluster-operations|kubeadm 集群运维全景]] — Cross-reference
 - [[synthesis/etcd x 高可用模式|etcd × 高可用模式]] — Cross-reference
-- [[synthesis/K8s 问题分布与 MTTR 基准|K8s 问题分布与 MTTR 基准]] — Cross-reference
+- [[concepts/k8s-mttr-benchmark|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[synthesis/Structural Troubleshooting Framework|Structural Troubleshooting Framework]] — Cross-reference
 - [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
 - [[synthesis/eBPF x 运行时安全|eBPF x 运行时安全]] — Cross-reference
