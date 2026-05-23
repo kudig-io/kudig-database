@@ -55,9 +55,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
-# CloudNativePG 企业级 PostgreSQL 运维指南
+# [[CloudNativePG|CloudNativePG]] 企业级 PostgreSQL 运维指南
 
 > **适用版本**: CloudNativePG v1.25  
 > **最后更新**: 2026-04-26  
@@ -67,7 +68,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL Kubernetes Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。与 Zalando Postgres Operator 和 Crunchy PGO 并列为 K8s 上 PostgreSQL 运维的三大主流方案。
+CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[Kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。与 Zalando Postgres Operator 和 Crunchy PGO 并列为 K8s 上 PostgreSQL 运维的三大主流方案。
 
 CloudNativePG 的核心设计理念是"原生 K8s 集成、零外部依赖"。它不依赖 PgPool 或 Patroni 等外部组件，而是通过 Pod 内的 instance manager 进程实现复制管理、故障检测和 WAL 归档。这使得 CNPG 的架构简洁、运维门槛低，适合从中小规模到企业级的各种场景。
 
@@ -79,7 +80,7 @@ CloudNativePG 的架构设计充分考虑了 Kubernetes 的特性，将 PostgreS
 
 **Instance Manager** 是 CNPG 的核心组件，它作为一个 sidecar 容器运行在每个 PostgreSQL Pod 中。Instance Manager 负责管理 PostgreSQL 实例的生命周期：启动和停止 PostgreSQL、执行主从复制配置、管理 WAL 归档、收集监控指标、以及执行故障检测和自动恢复。Instance Manager 通过 PostgreSQL 的 streaming replication 协议管理主从关系，通过查询 `pg_stat_replication` 监控复制状态。
 
-**故障检测和自动故障转移**机制是 CNPG 高可用能力的核心。CNPG 使用 K8s 的 Pod readiness probe 来检测 PostgreSQL 实例的健康状态。当 Primary Pod 的 readiness probe 连续失败（默认 30 秒）时，CNPG 会触发故障转移流程：选择 LSN（Log Sequence Number）最大的 Replica 作为新的 Primary，执行 `pg_ctl promote` 提升它，然后更新 Service 的 endpoints 将流量指向新的 Primary。整个故障转移过程通常在 30-60 秒内完成。
+**故障检测和自动故障转移**机制是 CNPG 高可用能力的核心。CNPG 使用 K8s 的 Pod readiness probe 来检测 PostgreSQL 实例的健康状态。当 Primary Pod 的 readiness probe 连续失败（默认 30 秒）时，CNPG 会触发故障转移流程：选择 LSN（Log Sequence Number）最大的 Replica 作为新的 Primary，执行 `pg_ctl promote` 提升它，然后更新 [[Service|Service]] 的 endpoints 将流量指向新的 Primary。整个故障转移过程通常在 30-60 秒内完成。
 
 **WAL 归档和备份**是 CNPG 数据安全的重要保障。CNPG 使用 Barman Cloud 作为备份引擎，支持 S3、GCS 和 Azure Blob 作为备份存储。WAL 归档是连续的（每产生一个 WAL 文件就上传），确保可以恢复到任意时间点（PITR）。基础备份（Base Backup）可以通过 `ScheduledBackup` CRD 定时执行，也可以通过 `Backup` CRD 按需执行。备份数据使用 gzip 或 zstd 压缩，支持并行上传以加速大型数据库的备份。
 
@@ -860,7 +861,7 @@ list_backups() {
 
 switchover() {
     local target="${1:-}"
-    if [[ -n "$target" ]]; then
+    if -n "$target"; then
         kubectl cnpg promote "$CLUSTER" "$target" -n "$NS"
     else
         kubectl cnpg promote "$CLUSTER" -n "$NS"
@@ -869,7 +870,7 @@ switchover() {
 
 logs() {
     local pod="${1:-}"
-    if [[ -n "$pod" ]]; then
+    if -n "$pod"; then
         kubectl logs -n "$NS" "$pod" -c postgres --tail=200
     else
         kubectl logs -n "$NS" -l "cnpg.io/cluster=$CLUSTER" -c postgres --tail=100
@@ -954,21 +955,21 @@ CloudNativePG (PostgreSQL)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
 
 ## See Also
 
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|07-redis-kubernetes-operator]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|01-mysql-enterprise-database]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|02-postgresql-enterprise-database]]
+- 07-redis-kubernetes-operator
+- 08-kafka-kubernetes-strimzi
+- 01-mysql-enterprise-database
+- 02-postgresql-enterprise-database

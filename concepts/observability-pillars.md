@@ -34,6 +34,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Observability Pillars
@@ -52,9 +53,9 @@ Numeric time-series data sampled at regular intervals.
 
 **Key Kubernetes metrics to monitor**:
 - API Server: `apiserver_request_duration_seconds`, `apiserver_request_total`
-- etcd: `etcd_disk_backend_commit_duration_seconds`, `etcd_mvcc_db_total_size_in_bytes`
+- [[etcd|etcd]]: `etcd_disk_backend_commit_duration_seconds`, `etcd_mvcc_db_total_size_in_bytes`
 - Scheduler: `scheduler_scheduling_attempt_duration_seconds`, `scheduler_pending_pods`
-- kubelet: `kubelet_pod_start_duration_seconds`, `kubelet_running_pods`
+- [[kubelet|kubelet]]: `kubelet_pod_start_duration_seconds`, `kubelet_running_pods`
 
 **Prometheus** is the de facto metrics collector, with Grafana for visualization.
 

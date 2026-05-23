@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 安全事件响应
@@ -79,7 +80,7 @@ graph TD
 
 - [[domain-05-security-compliance/README.md]]
 - [[domain-05-security-compliance/README.md]]
-- [[domain-39-[[concepts/supply-chain-security.md|supply-chain-security]]/README.md]]
+- supply-chain-security/README.md]]
 
 
 ---
@@ -106,6 +107,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[skills/certificate-fta.md|certificate-fta]]
 - [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]

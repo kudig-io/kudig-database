@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry Collector 故障排查指南
+title: OpenTelemetry Collector 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: OpenTelemetry Collector 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -45,17 +45,18 @@ prerequisites:
 - tls-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: OpenTelemetry Collector 故障排查指南
+title: [[OpenTelemetry|OpenTelemetry]] Collector 故障排查指南
 description: '# OpenTelemetry Collector 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
-- jaeger
+- [[Prometheus|prometheus]]
+- [[Jaeger|jaeger]]
 - kafka
 - elasticsearch
 - hpa
@@ -818,8 +819,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

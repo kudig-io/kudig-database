@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster deletion resource cleanup
-  - [[entities/kubernetes|kubernetes]] cluster removal retain resources
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster removal retain resources
   - SLB ENI security group cleanup
   - aliyun cs DELETE cluster API
   - Cluster deletion failure troubleshooting

@@ -1,5 +1,5 @@
 ---
-title: Lima
+title: Lima (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Lima
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Lima
@@ -72,6 +73,6 @@ Lima（Linux virtual Machine）是 macOS 和 Linux 上的轻量级 Linux VM 管�
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/lima/lima.md|lima]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- lima
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

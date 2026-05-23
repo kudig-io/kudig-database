@@ -27,13 +27,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Scheduling Framework
 
 ## 概述
 
-调度框架（Scheduling Framework）是 Kubernetes 调度器的可插拔架构。它由一组直接编译到调度器中的"插件"API 组成。这些 API 允许将大多数调度功能实现为插件，同时保持调度核心轻量且可维护。该功能在 Kubernetes v1.19 中达到 stable 状态。
+调度框架（Scheduling Framework）是 [[Kubernetes|Kubernetes]] 调度器的可插拔架构。它由一组直接编译到调度器中的"插件"API 组成。这些 API 允许将大多数调度功能实现为插件，同时保持调度核心轻量且可维护。该功能在 Kubernetes v1.19 中达到 stable 状态。
 
 ## 核心概念/原理
 
@@ -55,7 +56,7 @@ prerequisites:
 5. **PreFilter**：用于预处理 Pod 信息或检查集群/Pod 必须满足的某些条件。
 6. **Filter**：用于过滤掉无法运行 Pod 的节点。如果某个 Filter 插件将节点标记为不可行，则不会为该节点调用剩余的 Filter 插件。
 7. **PostFilter**：仅在未找到可行节点时调用。典型的实现是抢占（preemption），尝试通过驱逐其他 Pod 使当前 Pod 可调度。
-8. **PreScore**：执行"预评分"工作，生成 Score 插件可共享的状态。
+8. **PreScore**：执行"预评分"工作，生成 [[Score|Score]] 插件可共享的状态。
 9. **Score**：对通过过滤阶段的节点进行排名。调度器会调用每个评分插件为每个节点打分。
 10. **NormalizeScore**：在计算最终节点排名之前修改分数。
 11. **Reserve**：在调度器实际绑定 Pod 之前执行，防止竞争条件。包含 `Reserve` 和 `Unreserve` 两个方法。
@@ -66,7 +67,7 @@ prerequisites:
 
 ### 容量评分（Capacity Scoring）
 
-v1.33+ alpha（`StorageCapacityScoring` 特性门控）：扩展 VolumeBinding 插件，根据节点上的存储容量对节点进行评分，适用于支持 Storage Capacity 的 CSI 卷。
+v1.33+ alpha（`StorageCapacityScoring` 特性门控）：扩展 VolumeBinding 插件，根据节点上的存储容量对节点进行评分，适用于支持 Storagege Capacity（存储容量）|Storage Capacity]] 的 CSI 卷。
 
 ## 使用场景
 
@@ -220,4 +221,4 @@ kubectl get pods --all-namespaces -o custom-columns='NAME:.metadata.name,SCHEDUL
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+title: Kubernetes 可观测性全栈培训 (监控、日志、追踪) [presentations]
 description: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
 category: presentations
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 可观测性全栈培训 (监控、日志、追踪)

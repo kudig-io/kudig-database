@@ -1,4 +1,40 @@
 ---
+title: 证书管理 (PKI Infrastructure)
+description: 'title: 证书管理 PKI Infrastructure'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 证书管理 (PKI Infrastructure) 是什么
+- 如何 证书管理 (PKI Infrastructure)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 证书管理
+- PKI
+- Infrastructure
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 证书管理 PKI Infrastructure
 description: '# 证书管理 (PKI Infrastructure)'
 category: functions
@@ -43,10 +79,6 @@ trigger_keywords:
 - kubelet
 - ServiceAccount
 - sa.key
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -55,6 +87,15 @@ related_topics:
 - cluster-create/07-etcd
 - cluster-create/16-security
 - cluster-create/09-upgrade
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 证书管理 (PKI Infrastructure)
@@ -784,6 +825,14 @@ done
 - [预检流程](02-preflight.md) — 预检中检查证书有效期
 - [控制面组件](05-control-plane.md) — static Pod 挂载证书
 - [etcd 管理](07-etcd.md) — etcd 使用证书进行 TLS 通信
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — ServiceAccount 密钥和审计
+- [安全机制](16-security.md) — ServiceAccount 密钥和审计
 - [集群升级](09-upgrade.md) — 升级时自动续签证书
 - [高可用进阶](14-ha-advanced.md) — upload-certs 分发证书
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]

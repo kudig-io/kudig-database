@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Workload 全栈进阶培训 (从入门到专家)
+title: Kubernetes Workload 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
@@ -45,9 +45,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes Workload 全栈进阶培训 (从入门到专家)
+# [[Kubernetes|Kubernetes]] Workload 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 掌握声明式编排、实现应用高可用稳定性防护
@@ -68,7 +69,7 @@ authors:
 |------|------|------|
 | 第一阶段 | 工作负载基础概念 | 30 分钟 |
 | 第二阶段 | Deployment 深度解析 | 35 分钟 |
-| 第三阶段 | StatefulSet 与有状态应用 | 30 分钟 |
+| 第三阶段 | [[StatefulSet|StatefulSet]] 与有状态应用 | 30 分钟 |
 | 第四阶段 | 实战演示 | 30 分钟 |
 | 第五阶段 | 监控告警与弹性伸缩 | 25 分钟 |
 | Q&A | 互动问答 | 15 分钟 |
@@ -76,8 +77,8 @@ authors:
 
 #<!-- chunk: 核心要点 -->## 核心要点
 
-1. 四种工作负载类型：Deployment、StatefulSet、DaemonSet、Job/CronJob
-2. Deployment 通过 ReplicaSet 实现滚动更新和回滚
+1. 四种工作负载类型：Deployment、StatefulSet、[[DaemonSet|DaemonSet]]、Job/CronJob
+2. Deployment 通过 [[ReplicaSet|ReplicaSet]] 实现滚动更新和回滚
 3. 资源 QoS（Guaranteed/Burstable/BestEffort）决定 Pod 稳定性
 4. 探针（Liveness/Readiness/Startup）保障应用可用性
 5. HPA（水平自动扩缩）应对流量波动
@@ -796,22 +797,22 @@ Workload
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|kubernetes-terway-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|kubernetes-troubleshooting-methodology-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/presentation-template.md|presentation-template]]
-- [[domain-11-production-operations/topic-learn/troubleshooting/decision-tree-mermaid.md|decision-tree-mermaid]]
+- kubernetes-terway-presentation
+- kubernetes-troubleshooting-methodology-presentation
+- presentation-template
+- decision-tree-mermaid

@@ -1,5 +1,5 @@
 ---
-title: 第一章：FTA 起源与发展史
+title: 第一章：FTA 起源与发展史 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 fta_id: FTA-01_ORIGIN_AND_EVOLUTION-001
 component: 01 Origin And Evolution
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第一章：FTA 起源与发展史
@@ -76,7 +77,7 @@ k8s_versions:
 > **所属部分**: 第一部分 - FTA 方法论理论基础  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
 > **上一章**: 无  
-> **下一章**: [第二章：FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md)
+> **下一章**: 第二章：FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md)
 
 ---
 

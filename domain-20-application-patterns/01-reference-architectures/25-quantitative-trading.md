@@ -36,6 +36,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 证券量化交易架构设计
@@ -45,13 +46,13 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - redis
 - mysql
 - kafka
-- statefulset
-- daemonset
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert
@@ -582,7 +583,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -597,7 +598,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/23-xinchuang-it-innovation.md|23-xinchuang-it-innovation]]
-- [[domain-20-application-patterns/24-insurtech.md|24-insurtech]]
-- [[domain-20-application-patterns/26-aviation-travel.md|26-aviation-travel]]
-- [[domain-20-application-patterns/27-hospitality-tourism.md|27-hospitality-tourism]]
+- 23-xinchuang-it-innovation
+- 24-insurtech
+- 26-aviation-travel
+- 27-hospitality-tourism

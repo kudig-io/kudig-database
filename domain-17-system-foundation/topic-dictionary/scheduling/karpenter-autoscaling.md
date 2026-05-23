@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Karpenter 自动扩缩容
 
 ## 概述
 
-**Karpenter** 是 AWS 开源的 Kubernetes 节点自动扩缩容项目，已成为 2026 年替代传统 **Cluster Autoscaler** 的主流方案。与 Cluster Autoscaler 相比，Karpenter 不再依赖预配置的节点组（Node Group/Auto Scaling Group），而是直接观察 Pending Pod 的资源需求，实时选择最优的实例类型和购买选项（On-Demand / Spot），并在秒级内启动新节点。这种"**直接调度到云**"的架构显著提升了资源利用率、降低了成本和启动延迟。
+**Karpenter** 是 AWS 开源的 [[Kubernetes|Kubernetes]] 节点自动扩缩容项目，已成为 2026 年替代传统 **Cluster Autoscaler** 的主流方案。与 Cluster Autoscaler 相比，Karpenter 不再依赖预配置的节点组（Node Group/Auto Scaling Group），而是直接观察 Pending Pod 的资源需求，实时选择最优的实例类型和购买选项（On-Demand / Spot），并在秒级内启动新节点。这种"**直接调度到云**"的架构显著提升了资源利用率、降低了成本和启动延迟。
 
 ## 核心概念/原理
 
@@ -135,7 +136,7 @@ Karpenter 直接调用 AWS EC2 RunInstances API，无需等待 Auto Scaling Grou
 2. **Web 服务波峰波谷应对**：电商大促期间流量激增 10 倍，Karpenter 自动扩展 Spot 实例应对峰值，活动结束后缩容至基线
 3. **ARM 迁移成本优化**：Karpenter 自动将无状态工作负载调度到 AWS Graviton 实例，降低 40% 计算成本
 4. **批处理队列驱动扩缩**：Kueue 队列中积累了大量待处理作业，Karpenter 自动启动 cheapest available 实例消化队列
-5. **节点配置自动更新**：当发布新的 hardened AMI 或 kubelet 版本时，Karpenter 的 Drift 机制自动滚动替换旧节点
+5. **节点配置自动更新**：当发布新的 hardened AMI 或 [[kubelet|kubelet]] 版本时，Karpenter 的 Drift 机制自动滚动替换旧节点
 
 ## 最佳实践/注意事项
 

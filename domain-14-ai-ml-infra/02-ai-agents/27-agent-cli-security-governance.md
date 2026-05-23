@@ -1,5 +1,5 @@
 ---
-title: Agent CLI 安全治理与权限模型
+title: Agent CLI 安全治理与权限模型 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 安全治理与权限模型'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: Agent CLI 安全治理与权限模型
@@ -473,8 +474,8 @@ Agent CLI 安全治理的核心原则：
 5. **供应链安全**：MCP Server 等扩展需经过安全审核
 
 **后续阅读**：
-- [28 - Agent CLI 企业级自动化与 CI/CD](./[[domain-14-ai-ml-infra/28-agent-cli-enterprise-automation.md|28-agent-cli-enterprise-automation]].md)：自动化安全考量
-- [10 - 安全护栏、提示注入防护与合规](./[[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md)：通用 Agent 安全
+- [28 - Agent CLI 企业级自动化与 CI/CD](./28-agent-cli-enterprise-automation.md)：自动化安全考量
+- [10 - 安全护栏、提示注入防护与合规](./10-security-guardrails.md)：通用 Agent 安全
 - [25 - Agent CLI 与 MCP 协议深度集成](./25-agent-cli-mcp-integration.md)：MCP 安全配置
 - [23 - Agent CLI 基础概念与架构](./23-agent-cli-fundamentals.md)：架构安全基础
 
@@ -486,7 +487,7 @@ Agent CLI 安全治理的核心原则：
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -501,7 +502,7 @@ Agent CLI 安全治理的核心原则：
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/28-agent-cli-enterprise-automation.md|28-agent-cli-enterprise-automation]]
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 28-agent-cli-enterprise-automation
+- 29-agentscope-studio-skill-demo

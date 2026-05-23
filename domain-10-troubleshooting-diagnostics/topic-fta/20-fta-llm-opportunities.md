@@ -1,5 +1,5 @@
 ---
-title: 第二十章：FTA + 大语言模型的新机遇
+title: 第二十章：FTA + 大语言模型的新机遇 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 fta_id: FTA-20_LLM_OPPORTUNITIES-001
 component: 20 Llm Opportunities
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第二十章：FTA + 大语言模型的新机遇
@@ -46,7 +47,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- ingress
+- [[Ingress|ingress]]
 - gateway
 - llm
 - agent
@@ -81,8 +82,8 @@ k8s_versions:
 
 > **所属部分**: 第六部分 - 未来展望  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)  
-> **下一章**: [第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)
+> **上一章**: 第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)  
+> **下一章**: 第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)
 
 ---
 

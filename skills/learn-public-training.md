@@ -38,9 +38,10 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-### K8s 运维实战培训（四周体系）
+### K8s8s 运维实战培训（四周体系）|K8s 运维实战培训（四周体系）]]
 
 # K8s 运维实战培训（四周体系）
 

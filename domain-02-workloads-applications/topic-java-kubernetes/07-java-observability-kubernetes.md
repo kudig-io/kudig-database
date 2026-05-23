@@ -1,5 +1,5 @@
 ---
-title: Java 可观测性 on Kubernetes 实践指南
+title: Java 可观测性 on Kubernetes 实践指南 (domain-02-workloads-applications)
 description: '# Java 可观测性 on Kubernetes 实践指南'
 category: java-kubernetes
 tags:
@@ -42,11 +42,12 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Java 可观测性 on Kubernetes 实践指南
+# Java 可观测性 on [[Kubernetes|Kubernetes]] 实践指南
 
-> **适用版本**: JDK 17+ / Spring Boot 3.x / OpenTelemetry 2.x / Prometheus 2.x / Grafana 10.x / Kubernetes v1.28+
+> **适用版本**: JDK 17+ / Spring Boot 3.x / [[OpenTelemetry|OpenTelemetry]] 2.x / [[Prometheus|Prometheus]] 2.x / Grafana 10.x / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
 
 ---

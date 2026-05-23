@@ -32,13 +32,14 @@ prerequisites:
 - cloud-provider-basics
 - kafka-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Spot 与可抢占工作负载
 
 ## 概述
 
-在云原生环境中，**Spot 实例（AWS）、Preemptible VM（GCP）和 Low-priority VM（Azure）** 是云厂商以大幅折扣出售的闲置计算容量。2026 年的最佳实践表明，通过将**容错型工作负载**（如 AI 训练、批处理、CI/CD）部署到 Spot 实例上，企业可将计算成本降低 **50%–90%**。Kubernetes 结合 Kueue、Cluster Autoscaler 和 checkpoint 机制，已能安全、自动化地管理可抢占工作负载的生命周期。
+在云原生环境中，**Spot 实例（AWS）、Preemptible VM（GCP）和 Low-priority VM（Azure）** 是云厂商以大幅折扣出售的闲置计算容量。2026 年的最佳实践表明，通过将**容错型工作负载**（如 AI 训练、批处理、CI/CD）部署到 Spot 实例上，企业可将计算成本降低 **50%–90%**。[[Kubernetes|Kubernetes]] 结合 Kueue、Cluster Autoscaler 和 checkpoint 机制，已能安全、自动化地管理可抢占工作负载的生命周期。
 
 ## 核心概念/原理
 
@@ -55,7 +56,7 @@ Kubernetes 中的 Pod 会收到 `SIGTERM` 信号，随后进入优雅终止期�
 
 Kubernetes 提供了多个机制配合 Spot 实例：
 - **Pod Disruption Budget（PDB）**：控制同时中断的 Pod 数量，保护有状态服务
-- **Node Termination Handler**：部署为 DaemonSet，监听 IMDS（Instance Metadata Service）获取中断通知，提前将节点标记为 `NoSchedule` 并驱逐 Pod
+- **Node Termination Handler**：部署为 [[DaemonSet|DaemonSet]]，监听 IMDS（Instance Metadata [[Service|Service]]）获取中断通知，提前将节点标记为 `NoSchedule` 并驱逐 Pod
 - **Cluster Autoscaler / Karpenter**：在 Spot 实例被回收后，自动在其他可用区或实例类型上补充新节点
 
 ### 3. Checkpoint 与容错设计

@@ -1,5 +1,5 @@
 ---
-title: Pod Lifecycle
+title: Pod Lifecycle (concepts)
 description: '- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
 category: concepts
 tags:
@@ -25,13 +25,14 @@ trigger_keywords:
 - Lifecycle
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Pod Lifecycle
 
 ## State Machine
 
-Pods transition through these phases:
+[[Pods|Pods]] transition through these phases:
 
 | Phase | Meaning |
 |-------|---------|
@@ -45,7 +46,7 @@ Pods transition through these phases:
 
 Each Pod has four condition types that describe its internal state:
 - **PodScheduled**: Pod assigned to a node
-- **Initialized**: All init containers completed
+- **Initialized**: All [[Init Containers|init containers]] completed
 - **ContainersReady**: All containers passed readiness
 - **Ready**: Pod can accept traffic (subset of ContainersReady + network ready)
 
@@ -53,7 +54,7 @@ Each Pod has four condition types that describe its internal state:
 
 1. **Init Containers** run sequentially (each must succeed before next starts)
 2. **Main Containers** start in parallel after all init containers complete
-3. **Sidecar Containers** (v1.28+) can run alongside init containers in parallel
+3. **[[Sidecar Containers|Sidecar Containers]]** (v1.28+) can run alongside init containers in parallel
 
 ## Health Probes
 
@@ -61,7 +62,7 @@ Each Pod has four condition types that describe its internal state:
 |-------|---------|---------|--------|
 | **startupProbe** | Allow slow startup | Runs until first success | Disables other probes during startup |
 | **livenessProbe** | Detect deadlocked/stuck processes | Periodic check | Container restart |
-| **readinessProbe** | Determine if container can accept traffic | Periodic check | Remove from Service endpoints |
+| **readinessProbe** | Determine if container can accept traffic | Periodic check | Remove from [[Service|Service]] endpoints |
 
 Each probe can use HTTP GET, TCP Socket, or Exec commands.
 
@@ -72,7 +73,7 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 3. **SIGTERM** sent to all containers
 4. Wait for `terminationGracePeriodSeconds` (default 30s)
 5. **SIGKILL** sent if still running
-6. Resources cleaned up by kubelet
+6. Resources cleaned up by [[kubelet|kubelet]]
 
 ## Related
 - [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
@@ -90,7 +91,7 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [[skills/configure-health-probes.md|Configure Health Probes]]
 - [[entities/kubelet.md|kubelet]]
 
-- [[domain-02-workloads-applications/11-pod-lifecycle-events.md|Pod 生命周期事件表]]
+- Pod 生命周期事件表
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/k8s-workloads-domain-guide|Kubernetes Workloads Domain Guide]] — Cross-reference

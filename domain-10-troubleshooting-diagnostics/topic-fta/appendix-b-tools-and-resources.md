@@ -1,5 +1,5 @@
 ---
-title: 附录 B：工具与资源清单
+title: 附录 B：工具与资源清单 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 fta_id: FTA-APPENDIX_B_TOOLS_AND_RESOURCES-001
 component: Appendix B Tools And Resources
 severity: high
+created: "2026-05-23"
 ---
 
 title: 附录 B：工具与资源清单
@@ -76,8 +77,8 @@ k8s_versions:
 # 附录 B：工具与资源清单
 
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一附录**: [附录 A：FTA 术语表](./appendix-a-glossary.md)  
-> **下一附录**: [附录 C：参考文献](./appendix-c-references.md)
+> **上一附录**: 附录 A：FTA 术语表](./appendix-a-glossary.md)  
+> **下一附录**: 附录 C：参考文献](./appendix-c-references.md)
 
 ---
 
@@ -113,7 +114,7 @@ k8s_versions:
 
 | 工具 | 平台 | 特点 |
 |------|------|------|
-| Chaos Mesh | Kubernetes | CNCF 项目，K8s 原生 |
+| [[Chaos Mesh|Chaos Mesh]] | Kubernetes | CNCF 项目，K8s 原生 |
 | Litmus | Kubernetes | CNCF 项目，ChaosHub |
 | Gremlin | 多平台 | SaaS，企业级 |
 | AWS FIS | AWS | AWS 原生故障注入 |

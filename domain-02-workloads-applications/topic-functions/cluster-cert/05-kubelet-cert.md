@@ -1,4 +1,37 @@
 ---
+title: kubelet 证书与 CSR 机制源码分析 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubelet 证书与 CSR 机制源码分析 是什么
+- 如何 kubelet 证书与 CSR 机制源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubelet
+- 证书与
+- CSR
+- 机制源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: kubelet 证书与 CSR 机制源码分析
 description: '## 概述'
 category: functions
@@ -34,9 +67,6 @@ trigger_keywords:
 - kubelet-client-current.pem
 - kubelet-server-current.pem
 - 自动签发
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-4-nodes
@@ -45,13 +75,22 @@ related_topics:
 - cluster-cert/join-cert-flow
 - cluster-cert/cert-rotation
 - cluster-cert/apiserver-cert-flags
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubelet 证书与 CSR 机制源码分析
 
 ## 概述
 
-kubelet 证书管理是 [[entities/kubernetes|kubernetes]] 集群证书体系中最复杂的部分。与其他控制面组件不同，kubelet 采用 **引导证书（Bootstrap Token）+ CSR（Certificate Signing Request）自动签发** 机制，使节点能够自动加入集群并管理自身证书。
+kubelet 证书管理是 Kubernetes 集群证书体系中最复杂的部分。与其他控制面组件不同，kubelet 采用 **引导证书（Bootstrap Token）+ CSR（Certificate Signing Request）自动签发** 机制，使节点能够自动加入集群并管理自身证书。
 
 ---
 
@@ -456,3 +495,11 @@ journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
 # 检查 kubelet 轮换配置
 ps aux | grep kubelet | grep -E "rotate-certificates|rotate-server-certificates"
 ```
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

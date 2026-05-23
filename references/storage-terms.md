@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # K8s 存储术语参考

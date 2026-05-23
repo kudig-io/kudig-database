@@ -54,11 +54,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
   label: '故障树: gateway-api'
+created: "2026-05-23"
 ---
 
 # 12 - Gateway API 高级路由 YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
 > **相关领域**: [域5-网络](../domain-03-networking-traffic/) | **前置知识**: Gateway API 核心资源  
 > **关联配置**: [11-核心资源](./11-gateway-api-core.md) | [Service参考](./02-service-all-types.md)
 
@@ -85,7 +86,7 @@ cross_refs:
 | 路由类型 | API 版本 | 成熟度 | 协议支持 | 用途 |
 |----------|----------|--------|----------|------|
 | **HTTPRoute** | v1 | Standard (GA) | HTTP, HTTPS | Web应用、REST API |
-| **GRPCRoute** | v1alpha2 | Experimental | gRPC (HTTP/2) | 微服务RPC通信 |
+| **GRPCRoute** | v1alpha2 | Experimental | [[gRPC|gRPC]] (HTTP/2) | 微服务RPC通信 |
 | **TCPRoute** | v1alpha2 | Experimental | TCP | 数据库、消息队列 |
 | **TLSRoute** | v1alpha2 | Experimental | TLS (SNI) | TLS 透传 |
 | **UDPRoute** | v1alpha2 | Experimental | UDP | DNS、视频流 |
@@ -112,8 +113,8 @@ kubectl get crd | grep gateway
 
 | 控制器实现 | HTTPRoute | GRPCRoute | TCPRoute | TLSRoute | UDPRoute |
 |------------|-----------|-----------|----------|----------|----------|
-| **Istio** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ❌ |
-| **Envoy Gateway** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
+| **[[Istio|Istio]]** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ❌ |
+| **[[Envoy|Envoy]] Gateway** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
 | **Nginx Gateway Fabric** | ✅ GA | 🚧 Planned | ❌ | ❌ | ❌ |
 | **Traefik** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
 
@@ -1750,22 +1751,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10-ingress-ingressclass]]
-- [[domain-18-manifests-patterns/11-gateway-api-core.md|11-gateway-api-core]]
-- [[domain-18-manifests-patterns/13-configmap-reference.md|13-configmap-reference]]
-- [[domain-18-manifests-patterns/14-secret-all-types.md|14-secret-all-types]]
+- 10-ingress-ingressclass
+- 11-gateway-api-core
+- 13-configmap-reference
+- 14-secret-all-types

@@ -1,6 +1,43 @@
 ---
+title: 证书身份到 RBAC 的映射关系 (topic-code-analysis)
+description: 'description: ''| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`'
+category: general
+tags:
+- reference
+- rbac
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 证书身份到 RBAC 的映射关系 是什么
+- 如何 证书身份到 RBAC 的映射关系
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 证书身份到
+- RBAC
+- 的映射关系
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 证书身份到 RBAC 的映射关系
-description: '| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go` | 证书身份提取 |'
+description: '| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`
+  | 证书身份提取 |'
 category: functions
 tags:
 - k8s
@@ -37,10 +74,6 @@ trigger_keywords:
 - RBAC
 - X-Remote-User
 - Impersonation
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -50,6 +83,15 @@ related_topics:
 - cluster-cert/ca-generation
 - cluster-cert/apiserver-cert-flags
 - cluster-cert/front-proxy-workflow
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 证书身份到 RBAC 的映射关系
@@ -497,7 +539,7 @@ kubectl get clusterrolebinding -o wide
 | [`buildKubeConfigFromSpec`](12-kubeconfig-certs.md) | `cmd/kubeadm/app/phases/kubeconfig/kubeconfig.go` | kubeconfig 中证书嵌入 |
 | [`GetAPIServerAltNames`](13-cert-config.md) | `cmd/kubeadm/app/phases/certs/certs.go` | API Server 证书 SAN 生成 |
 | [`NewCertificateAuthority`](02-ca-generation.md) | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | CA 证书生成 |
-| [`kubeadm certs renew`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) | `cmd/kubeadm/app/cmd/phases/certs/renew.go` | 证书续期与 RBAC 身份保持 |
+| [`kubeadm certs renew`](README.md) | `cmd/kubeadm/app/cmd/phases/certs/renew.go` | 证书续期与 RBAC 身份保持 |
 | [`X509 Authenticator`](11-apiserver-cert-flags.md) | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go` | X509 认证插件 |
 
 ---
@@ -570,3 +612,11 @@ subjects:
   kind: Group
   name: ci-cd
 ```
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- USER

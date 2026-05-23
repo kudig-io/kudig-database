@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # FTA Diagnostic Execution Engine

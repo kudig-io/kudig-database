@@ -34,6 +34,7 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 合成生物学架构设计
@@ -99,7 +100,7 @@ k8s_versions:
 
 # 合成生物学架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#合成生物学` `#基因设计` `#生物制造` `#阿里云`
 
 ---
@@ -676,7 +677,7 @@ class CodonOptimizer:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -691,11 +692,11 @@ class CodonOptimizer:
 
 ## See Also
 
-- [[domain-20-application-patterns/74-immersive-xr.md|74-immersive-xr]]
-- [[domain-20-application-patterns/75-affective-computing.md|75-affective-computing]]
-- [[domain-20-application-patterns/77-fusion-energy-monitoring.md|77-fusion-energy-monitoring]]
-- [[domain-20-application-patterns/78-deep-sea-exploration.md|78-deep-sea-exploration]]
+- 74-immersive-xr
+- 75-affective-computing
+- 77-fusion-energy-monitoring
+- 78-deep-sea-exploration
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

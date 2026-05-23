@@ -27,18 +27,19 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # About cgroup v2（关于 cgroup v2）
 
 ## 概述
 
-在 Linux 上，控制组（control groups，简称 cgroups）用于限制分配给进程的资源。kubelet 和底层容器运行时需要通过 cgroups 来强制执行 Pod 和容器的资源管理，包括 CPU/内存的请求（requests）和限制（limits）。Linux 上有两个版本的 cgroups：cgroup v1 和 cgroup v2。cgroup v2 是新一代的 cgroup API。
+在 Linux 上，控制组（control groups，简称 cgroups）用于限制分配给进程的资源。[[kubelet|kubelet]] 和底层容器运行时需要通过 cgroups 来强制执行 Pod 和容器的资源管理，包括 CPU/内存的请求（requests）和限制（limits）。Linux 上有两个版本的 cgroups：cgroup v1 和 cgroup v2。cgroup v2 是新一代的 cgroup API。
 
 ## 核心概念/原理
 
 - **cgroup v2**：Linux cgroup API 的下一个版本，提供了一个统一的控制系统，具有增强的资源管理能力。
-- **与 [[entities/kubernetes|kubernetes]] 的集成**：自 v1.25 起，cgroup v2 在 Kubernetes 中达到 Stable 状态。kubelet 能够自动检测操作系统是否运行在 cgroup v2 上，并自动适配，无需额外配置。
+- **与 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的集成**：自 v1.25 起，cgroup v2 在 Kubernetes 中达到 Stable 状态。kubelet 能够自动检测操作系统是否运行在 cgroup v2 上，并自动适配，无需额外配置。
 - **Kubernetes v1.35 弃用 cgroup v1**：cgroup v1 已被弃用，kubelet 默认不再在 cgroup v1 节点上启动。如需禁用该检查，集群管理员需在 kubelet 配置文件中设置 `failCgroupV1: false`。
 
 ## 关键机制或特性

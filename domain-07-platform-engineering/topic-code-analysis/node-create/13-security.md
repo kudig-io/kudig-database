@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点安全机制
@@ -81,7 +82,7 @@ related_domains:
 - domain-05-security-compliance
 - domain-01-cluster-fundamentals
 related_topics:
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/16-security.md|16-security]]
+- 16-security
 - cluster-create/03-certs
 - node-create/06-certificate
 authors:
@@ -297,7 +298,7 @@ iptables -A INPUT -p tcp --dport 10250 -j DROP
 
 
 > ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/[[domain-17-system-foundation/topic-dictionary/security/pod-security-admission.md|pod-security-admission]]/) 替代。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/[[domain-17-system-foundation/topic-dictionary/security/pod-security-admission|pod-security-admission]]/) 替代。
 > PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 Kubernetes v1.25 移除了 PodSecurityPolicy (PSP)，替换为 Pod Security Standards (PSS)。PSS 通过 Namespace 标签来强制执行 Pod 安全策略，无需创建额外的 API 对象。

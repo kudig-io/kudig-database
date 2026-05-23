@@ -1,5 +1,5 @@
 ---
-title: NATS
+title: NATS (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # NATS
@@ -60,11 +61,11 @@ description: '## 项目概述'
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[03-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
 - [[copa]] — Copa (Copacetic)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/nats/nats.md|nats]]
+- nats
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

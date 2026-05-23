@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # 场景: 监控告警
@@ -78,7 +79,7 @@ graph TD
 
 ## 相关文档
 
-- [[domain-06-observability/README.md]]
+- observability/README.md]]
 - [[domain-06-observability/README.md]]
 - [[domain-06-observability/README.md]]
 
@@ -106,7 +107,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
-- [[log.md|log]]
-- [[domain-11-production-operations/topic-best-practices/observability/monitoring.md|monitoring]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- prometheus.md|10-monitoring-metrics-prometheus]]
+- log.md|log]]
+- monitoring

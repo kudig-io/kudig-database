@@ -1,5 +1,5 @@
 ---
-title: KUDIG Man Pages Index
+title: KUDIG Man Pages Index (references)
 description: '| `kubernetes(8)` | Kubernetes 核心组件与架构参考 |'
 category: reference
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Man Pages Index

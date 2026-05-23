@@ -1,6 +1,6 @@
 ---
-title: 非 Kubernetes 基础设施故障排查
-description: '# 非 Kubernetes 基础设施故障排查'
+title: 非 Kubernetes 基础设施问题排查
+description: '# 非 Kubernetes 基础设施问题排查'
 category: general
 tags:
 - k8s
@@ -13,29 +13,30 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- 非 Kubernetes 基础设施故障排查 是什么
-- 如何 非 Kubernetes 基础设施故障排查
-- 非 Kubernetes 基础设施故障排查 故障排查
-- 非 Kubernetes 基础设施故障排查 排障步骤
+- 非 Kubernetes 基础设施问题排查 是什么
+- 如何 非 Kubernetes 基础设施问题排查
+- 非 Kubernetes 基础设施问题排查 问题排查
+- 非 Kubernetes 基础设施问题排查 排障步骤
 trigger_keywords:
 - Kubernetes
-- 基础设施故障排查
+- 基础设施问题排查
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# 非 Kubernetes 基础设施故障排查
+# 非 Kubernetes 基础设施问题排查
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes|k8s]] 基础设施的故障排查
+> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes|k8s]] 基础设施的问题排查
 > **关联**: domain-14-linux, domain-03-networking-traffic
 
 ---
 
-## 1. DNS 服务故障排查
+## 1. DNS 服务问题排查
 
-### 1.1 BIND/named 故障排查
+### 1.1 BIND/named 问题排查
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -62,7 +63,7 @@ rndc reload
 rndc flush  # 清除缓存
 ```
 
-### 1.2 Dnsmasq 故障排查
+### 1.2 Dnsmasq 问题排查
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -104,9 +105,9 @@ dig @<dns-server> <domain> SOA +short
 
 ---
 
-## 2. Load Balancer 故障排查
+## 2. Load Balancer 问题排查
 
-### 2.1 F5 BIG-IP 故障排查
+### 2.1 F5 BIG-IP 问题排查
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -133,7 +134,7 @@ tmsh modify ltm virtual <name> enabled
 # 连接限制 → tmsh modify ltm virtual <name> connection-limit <num>
 ```
 
-### 2.2 云负载均衡器故障
+### 2.2 云负载均衡器问题
 
 | 云厂商 | 诊断命令 | 说明 |
 |--------|---------|------|
@@ -183,9 +184,9 @@ curl -s http://localhost:9000/stats
 
 ---
 
-## 3. VPN 与隧道故障排查
+## 3. VPN 与隧道问题排查
 
-### 3.1 WireGuard VPN 故障
+### 3.1 WireGuard VPN 问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -212,7 +213,7 @@ wg set wg0 peer <public-key> endpoint <ip>:<port> allowed-ips <cidr>
 journalctl -u wg-quick@wg0 --since "10m"
 ```
 
-### 3.2 IPSec VPN 故障
+### 3.2 IPSec VPN 问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -263,7 +264,7 @@ ip -s tunnel show
 
 ---
 
-## 4. 网络基础故障排查
+## 4. 网络基础问题排查
 
 ### 4.1 网络连通性
 
@@ -371,7 +372,7 @@ echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -d
 
 | 条件 | 操作 |
 |------|------|
-| 核心路由器/交换机故障 | 立即升级网络团队 |
+| 核心路由器/交换机问题 | 立即升级网络团队 |
 | VPN 隧道无法建立且无法临时解决 | 升级网络团队 |
 | 负载均衡器完全不可用 | 立即升级网络团队 |
 | 多站点网络中断 | 立即升级网络团队 + 管理层 |

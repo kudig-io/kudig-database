@@ -1,5 +1,5 @@
 ---
-title: K8sGPT
+title: K8sGPT (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # K8sGPT
@@ -41,7 +42,7 @@ K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (L
 ## 核心能力
 
 - **多 LLM 支持**: OpenAI、Azure OpenAI、Anthropic、LocalAI、Ollama
-- **问题扫描**: 自动检测 Pod、Service、Ingress 等资源问题
+- **问题扫描**: 自动检测 Pod、[[Service|Service]]、[[Ingress|Ingress]] 等资源问题
 - **AI 解释**: 使用 LLM 生成问题原因和解决方案
 - **多语言输出**: 支持中文、英文等多种语言
 - **Operator 模式**: 作为 Kubernetes Operator 持续监控
@@ -80,6 +81,6 @@ K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (L
 - [[confidential-containers]] — Confidential Containers (CoCo)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/k8sgpt/k8sgpt.md|k8sgpt]]
+- k8sgpt
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

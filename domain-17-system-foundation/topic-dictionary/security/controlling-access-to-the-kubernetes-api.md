@@ -28,9 +28,10 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# 控制对 Kubernetes API 的访问
+# 控制对 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的访问
 
 ## 概述
 
@@ -82,7 +83,7 @@ Kubernetes 支持多种授权模块：
 
 ### API 验证与持久化
 
-通过所有准入控制器后，请求会经过对应 API 对象的验证例程，然后写入对象存储（etcd）。
+通过所有准入控制器后，请求会经过对应 API 对象的验证例程，然后写入对象存储（[[etcd|etcd]]）。
 
 ### 审计
 

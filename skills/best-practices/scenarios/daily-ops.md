@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 日常运维
@@ -77,7 +78,7 @@ graph TD
 ## 相关文档
 
 - [[domain-07-platform-engineering/README.md]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md]]
+- domain-01-cluster-fundamentals/05-kubectl-commands-reference.md
 - [[domain-10-troubleshooting-diagnostics/topic-skills/README.md]]
 
 
@@ -104,6 +105,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
-- [[MOC.md|MOC]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|05-kubectl-commands-reference]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- MOC.md|MOC]]
+- 05-kubectl-commands-reference

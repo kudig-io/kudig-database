@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: 专有云 (Apsara Stack) - ESS 弹性伸缩
@@ -49,7 +50,7 @@ estimated_read_time: 5min
 intent_queries:
 - 专有云 (Apsara Stack) - ESS 弹性伸缩 是什么
 - 如何 专有云 (Apsara Stack) - ESS 弹性伸缩
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - 专有云
 - Apsara
@@ -151,7 +152,7 @@ k8s_versions:
 ### 场景 2: 实例心跳超时
 
 - **现象**: 实例创建成功但无法加入伸缩组。
-- **排查**: 检查镜像中的 `aliyun-service` 守护进程是否启动，专有云网络连接是否正常。
+- **排查**: 检查镜像中的 `aliyun-[[Service|service]]` 守护进程是否启动，专有云网络连接是否正常。
 
 ---
 
@@ -162,7 +163,7 @@ k8s_versions:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[references/240-ack-ecs-compute.md|240-ack-ecs-compute]]
 - [[references/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]

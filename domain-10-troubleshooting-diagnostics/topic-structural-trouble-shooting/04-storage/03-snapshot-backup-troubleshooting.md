@@ -1,5 +1,5 @@
 ---
-title: CSI 快照与卷备份故障排查指南
+title: CSI 快照与卷备份故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CSI 快照与卷备份故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: CSI 快照与卷备份故障排查指南
@@ -49,10 +50,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
+- [[Prometheus|prometheus]]
 - postgresql
 - job
-- cronjob
+- [[CronJob|cronjob]]
 - crd
 - webhook
 - rag
@@ -88,7 +89,7 @@ k8s_versions:
 
 # CSI 快照与卷备份故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
 
 ---
 
@@ -769,8 +770,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]

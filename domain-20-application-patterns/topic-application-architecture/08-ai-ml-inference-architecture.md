@@ -1,5 +1,46 @@
 ---
-title: AI/ML 推理服务 Kubernetes 生产架构设计
+title: AI/ML 推理服务 Kubernetes 生产架构设计 (domain-20-application-patterns)
+description: 'title: AI/ML 推理服务 Kubernetes 生产架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- scheduler
+- prometheus
+- grafana
+- harbor
+- minio
+- job
+- gateway
+- crd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- AI/ML 推理服务 Kubernetes 生产架构设计 是什么
+- 如何 AI/ML 推理服务 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- AI
+- ML
+- 推理服务
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- gpu-scheduling-basics
+- observability-basics
+created: "2026-05-23"
+---
+
+title: AI/ML 推理服务 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# AI/ML 推理服务 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
@@ -7,8 +48,8 @@ tags:
 - architecture
 - industry
 - scheduler
-- prometheus
-- harbor
+- [[Prometheus|prometheus]]
+- [[Harbor|harbor]]
 - job
 - gateway
 - operator
@@ -32,12 +73,15 @@ trigger_keywords:
 - 生产架构设计
 - application
 - architecture
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- gpu-scheduling-basics
-- observability-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # AI/ML 推理服务 Kubernetes 生产架构设计
@@ -49,7 +93,7 @@ prerequisites:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、模型服务化架构](#二模型服务化架构)
@@ -58,11 +102,11 @@ prerequisites:
 - [五、多模态服务编排架构](#五多模态服务编排架构)
 - [六、A/B 测试与模型迭代架构](#六ab-测试与模型迭代架构)
 - [七、推理性能优化架构](#七推理性能优化架构)
-- [八、[[entities/kubernetes|k8s]] 部署架构](#八k8s-部署架构)
+- [八、K8s 部署架构](#八k8s-部署架构)
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -110,7 +154,7 @@ flowchart TB
 
 ---
 
-## 二、模型服务化架构
+<!-- chunk: 二、模型服务化架构 -->## 二、模型服务化架构
 
 ```mermaid
 flowchart TB
@@ -140,7 +184,7 @@ flowchart TB
     style Serving fill:#e8f5e9
 ```
 
-### KServe 模型服务配置
+#<!-- chunk: [[KServe|KServe]] 模型服务配置 -->## KServe 模型服务配置
 
 ```yaml
 apiVersion: serving.kserve.io/v1beta1
@@ -199,7 +243,7 @@ spec:
 
 ---
 
-## 三、GPU 集群调度架构
+<!-- chunk: 三、GPU 集群调度架构 -->## 三、GPU 集群调度架构
 
 ```mermaid
 flowchart TB
@@ -229,7 +273,7 @@ flowchart TB
     style NodePool fill:#fff8e1
 ```
 
-### DRA GPU 资源分配
+#<!-- chunk: DRA GPU 资源分配 -->## DRA GPU 资源分配
 
 ```yaml
 apiVersion: resource.k8s.io/v1beta1
@@ -301,9 +345,9 @@ spec:
 
 ---
 
-## 四、LLM 大模型推理架构
+<!-- chunk: 四、LLM 大模型推理架构 -->## 四、LLM 大模型推理架构
 
-### vLLM 推理服务架构
+#<!-- chunk: vLLM 推理服务架构 -->## vLLM 推理服务架构
 
 ```mermaid
 flowchart TB
@@ -328,7 +372,7 @@ flowchart TB
     style GPU_Mem fill:#fff8e1
 ```
 
-### vLLM K8s 部署
+#<!-- chunk: vLLM K8s 部署 -->## vLLM K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -446,7 +490,7 @@ spec:
 
 ---
 
-## 五、多模态服务编排架构
+<!-- chunk: 五、多模态服务编排架构 -->## 五、多模态服务编排架构
 
 ```mermaid
 flowchart TB
@@ -485,7 +529,7 @@ flowchart TB
 
 ---
 
-## 六、A/B 测试与模型迭代架构
+<!-- chunk: 六、A/B 测试与模型迭代架构 -->## 六、A/B 测试与模型迭代架构
 
 ```mermaid
 flowchart TB
@@ -516,7 +560,7 @@ flowchart TB
 
 ---
 
-## 七、推理性能优化架构
+<!-- chunk: 七、推理性能优化架构 -->## 七、推理性能优化架构
 
 ```mermaid
 flowchart TB
@@ -549,9 +593,9 @@ flowchart TB
 
 ---
 
-## 八、K8s 部署架构
+<!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-### GPU 节点池与自动扩缩容
+#<!-- chunk: GPU 节点池与自动扩缩容 -->## GPU 节点池与自动扩缩容
 
 ```yaml
 apiVersion: karpenter.sh/v1
@@ -614,7 +658,7 @@ spec:
           )
 ```
 
-### 推理服务监控告警
+#<!-- chunk: 推理服务监控告警 -->## 推理服务监控告警
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -658,7 +702,7 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [vLLM 文档](https://docs.vllm.ai/)
 - [KServe 文档](https://kserve.github.io/website/)
@@ -668,9 +712,9 @@ spec:
 
 ---
 
-## 多云部署方案对照
+<!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-### 云服务 → 多云映射表
+#<!-- chunk: 云服务 → 多云映射表 -->## 云服务 → 多云映射表
 
 | 能力域 | AWS | GCP | Azure | 说明 |
 |:---|:---|:---|:---|:---|
@@ -687,7 +731,7 @@ spec:
 | Spot/抢占实例 | **Spot Instances** | **Preemptible VMs** | **Spot VMs** | GPU Spot 实例可降本 60-90% |
 | 网络加速 (RDMA) | **EFA** | **gVNIC** | **InfiniBand** | 多卡/多节点通信加速 |
 
-### 多云部署注意事项
+#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
 
 1. **GPU 可用性**: 各云 GPU 实例型号、显存规格和供应情况不同。H100/A100 在部分云 Region 可能缺货，需提前评估目标 Region 的 GPU 库存。
 2. **Karpenter 兼容性**: 本文档中 KarpenterNodePool 使用了 `karpenter.k8s.aws` 的 EC2NodeClass，这是 AWS 特有的。GCP 使用 GKE Autopilot 或 Karpenter GCP Provider，Azure 使用 Karpenter Azure Provider 或 Karpenter AKS Provider。需根据目标云修改 NodeClass CRD。
@@ -696,7 +740,7 @@ spec:
 5. **量化与优化**: vLLM / TensorRT-LLM 的量化模型（AWQ/GPTQ）与 GPU 架构绑定。A100 (Ampere) 和 H100 (Hopper) 的量化支持不同，迁移时需重新量化。
 6. **成本管理**: GPU 实例费用差异大。AWS p4d.24xlarge (~$32/h) vs GCP a2-ultragpu (~$35/h) vs Azure ND A100 (~$30/h)，需评估 TCO。Spot/抢占实例是降本关键，但需处理中断。
 
-### 云中立方案（开源替代）
+#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -713,3 +757,27 @@ spec:
 | 向量数据库 | **Milvus** / **Qdrant** / **Weaviate** | RAG 场景，不绑定云 |
 | 可观测性 | **OpenTelemetry** | 统一 trace/metric/log 采集 |
 | GPU 共享 | **NVIDIA MIG** / **vGPU** / **Time-slicing** | 单卡多模型共享 |
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 06-fintech-architecture
+- 07-iot-platform-architecture
+- 09-gaming-backend-architecture
+- 10-social-media-architecture

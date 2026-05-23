@@ -1,7 +1,40 @@
 ---
+title: kubeadm reset 源码分析 (topic-code-analysis)
+description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | ResetConfiguration 加载 |'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeadm reset 源码分析 是什么
+- 如何 kubeadm reset 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeadm
+- reset
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: kubeadm reset 源码分析
-description: 深入分析 kubeadm reset 命令的源码实现，涵盖 resetData 构建流程、三个 Phase（preflight/remove-etcd-member/cleanup-node）的执行逻辑、DryRun
-  模式、--skip-phases 跳过机制以及 best-effort 容错策略。
 category: cluster-delete
 tags:
 - kubeadm
@@ -11,17 +44,10 @@ tags:
 - preflight
 - remove-etcd-member
 - cleanup-node
-- etcd
-- kubelet
-- scheduler
 last_updated: 2026-05-18
+description: 深入分析 kubeadm reset 命令的源码实现，涵盖 resetData 构建流程、三个 Phase（preflight/remove-etcd-member/cleanup-node）的执行逻辑、DryRun
+  模式、--skip-phases 跳过机制以及 best-effort 容错策略。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- sre
-- kubernetes-administrator
-estimated_read_time: 5min
 intent_queries:
 - kubeadm reset source code analysis
 - kubeadm resetData resetOptions kubernetes
@@ -39,10 +65,12 @@ trigger_keywords:
 - SkipPhases
 - ForceReset
 - workflow.Runner
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- sre
+- kubernetes-administrator
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -53,6 +81,17 @@ related_topics:
 - force-delete
 - ha-delete
 - reset-phase-commands
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeadm reset 源码分析
@@ -91,7 +130,7 @@ func LoadOrDefaultResetConfiguration(configPath string, defaultCfg *kubeadmapiv1
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
-| `kubeconfigPath` | `string` | kubeconfig 路径，默认 `/etc/[[entities/kubernetes|kubernetes]]/admin.conf` |
+| `kubeconfigPath` | `string` | kubeconfig 路径，默认 `/etc/kubernetes/admin.conf` |
 | `cfgPath` | `string` | `--config` 指定的配置文件路径 |
 | `ignorePreflightErrors` | `[]string` | 忽略的预检错误 |
 | `externalcfg` | `*kubeadmapiv1.ResetConfiguration` | 命令行标志构建的默认配置 |
@@ -493,3 +532,11 @@ systemctl daemon-reload
 - [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除本地 stacked etcd
 - [`CleanDir`](04-cleanup.md) — 目录清理工具函数
 - [`InteractivelyConfirmAction`](01-overview.md) — 交互式确认
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

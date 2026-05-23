@@ -29,13 +29,14 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # 消息队列选型对比
 
 ## 综合对比
 
-| 维度 | Kafka | Pulsar | NATS (JetStream) | RabbitMQ |
+| 维度 | Kafka | Pulsar | [[NATS|NATS]] (JetStream) | RabbitMQ |
 |------|-------|--------|------------------|----------|
 | **吞吐量** | 极高 | 极高 | 高 | 中 |
 | **延迟** | 低(ms) | 低(ms) | 极低(µs) | 低(ms) |
@@ -43,7 +44,7 @@ prerequisites:
 | **多租户** | ❌ | ✅ | ❌ | ✅ |
 | **Geo-Repl** | MirrorMaker | 原生 | ❌ | Shovel/Federation |
 | **分层存储** | 有限 | ✅ | ❌ | ❌ |
-| **K8s 适配** | Operator | Operator | Helm | Operator |
+| **K8s 适配** | Operator | Operator | [[Helm|Helm]] | Operator |
 | **运维复杂度** | 高 | 中 | 低 | 中 |
 | **社区** | 极大 | 大 | 中 | 大 |
 

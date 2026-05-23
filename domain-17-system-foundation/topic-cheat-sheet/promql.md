@@ -39,11 +39,12 @@ related_docs:
   desc: Kubernetes 速查卡
 - path: ../domain-06-observability/
   desc: 监控告警专题
+created: "2026-05-23"
 ---
 
 # PromQL 速查表
 
-> Prometheus Query Language 快速参考 | Prometheus v2.40+ | **最后更新**: 2026-05
+> [[Prometheus|Prometheus]] Query Language 快速参考 | Prometheus v2.40+ | **最后更新**: 2026-05
 
 ---
 
@@ -55,7 +56,7 @@ related_docs:
 - [聚合操作](#聚合操作)
 - [函数大全](#函数大全)
 - [常用查询模式](#常用查询模式)
-- [Kubernetes 监控](#kubernetes-监控)
+- [[entities/kubernetes.md|Kubernetes]] 监控](#kubernetes-监控)
 - [告警规则模板](#告警规则模板)
 
 ---
@@ -551,4 +552,4 @@ histogram_quantile(0.99, metric_bucket)   # 确保 bucket 粒度合适
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- index/observability-index|Observability 可观测性知识图谱索引]]

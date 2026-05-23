@@ -1,17 +1,58 @@
 ---
+title: 第二课：Pod - K8s 的最小调度单元 [fundamentals]
+description: 'title: 第二课：Pod - K8s 的最小调度单元'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- docker
+- job
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 第二课：Pod - K8s 的最小调度单元 是什么
+- 如何 第二课：Pod - K8s 的最小调度单元
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 第二课：Pod
+- K8s
+- 的最小调度单元
+- production
+- operations
+- learn
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+created: "2026-05-23"
+---
+
+---
 title: 第二课：Pod - K8s 的最小调度单元
 description: '# 第二课：Pod - K8s 的最小调度单元'
-category: k8s-lecturer
+category: learning
 tags:
+- tutorial
+- Pod
+- 容器组
 - k8s
 - training
 - lecturer
 - docker
 - job
+aliases:
+- Pod
+- 容器组
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: beginner
+reading_level: beginner
 audience:
+- 初学者
+- 运维工程师
 - 培训师
 - 技术经理
 estimated_read_time: 5min
@@ -23,12 +64,18 @@ trigger_keywords:
 - K8s
 - 的最小调度单元
 - k8s
-- lecturer
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
----
+- learning
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 
+tier: peripheral---
 # 第二课：Pod - K8s 的最小调度单元
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
@@ -49,7 +96,7 @@ prerequisites:
 ### 1.1 开场白
 
 ```
-"上节课我们说了 [[entities/kubernetes|kubernetes]] 是什么。
+"上节课我们说了 Kubernetes 是什么。
 简单回顾一下：K8s 是一个容器编排系统，让你可以管理大量容器。
 那今天我们来聊聊 K8s 里最重要的概念 —— Pod。
 
@@ -368,5 +415,12 @@ kubectl logs <pod-name> --previous
 
 **关联文档**:
 - [../02-getting-started/](../02-getting-started/) — 快速入门
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
+
+## See Also
+
+- decision-tree-mermaid
+- 01-what-is-kubernetes
+- 03-deployment-basics
+- 04-service-basics

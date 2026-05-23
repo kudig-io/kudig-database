@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 发布说明索引 — 存储

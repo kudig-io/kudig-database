@@ -57,11 +57,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
-# 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+# 09 - 边缘计算集成架构 ([[KubeEdge|KubeEdge]]/OpenYurt)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [openyurt.io](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[entities/openyurt.md|openyurt]].io](https://openyurt.io/)
 
 <!-- chunk: 边缘计算框架对比 -->
 ## 边缘计算框架对比
@@ -70,10 +71,10 @@ cross_refs:
 |-----|-------|------|---------|---------|---------|
 | **KubeEdge** | CNCF | 云边协同，设备管理 | v1.25+ | 强 | 支持 |
 | **OpenYurt** | CNCF/阿里 | 无侵入，原生兼容 | v1.25+ | 强 | 原生 |
-| **K3s** | Rancher | 轻量级K8S | 独立发行版 | 强 | - |
+| **[[k3s|K3s]]** | Rancher | 轻量级K8S | 独立发行版 | 强 | - |
 | **MicroK8s** | Canonical | 单节点K8S | 独立发行版 | 中 | - |
 | **SuperEdge** | 腾讯 | 边缘自治 | v1.25+ | 强 | - |
-| **Akri** | Microsoft | 设备发现 | v1.25+ | 中 | - |
+| **[[Akri|Akri]]** | Microsoft | 设备发现 | v1.25+ | 中 | - |
 
 <!-- chunk: KubeEdge架构 -->
 ## KubeEdge架构
@@ -326,22 +327,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- Kubernetes 核心组件深度剖析
+- 03 - 功能和API表
+- 04 - Kubernetes 源码结构深度解析
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 10 - Windows 容器支持与集成指南
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07-upgrade-paths-strategy]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08-multi-tenancy-architecture]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10-windows-containers-support]]
-- [[domain-01-cluster-fundamentals/11-kubernetes-source-code-architecture.md|11-kubernetes-source-code-architecture]]
+- 07-upgrade-paths-strategy
+- 08-multi-tenancy-architecture
+- 10-windows-containers-support
+- 11-kubernetes-source-code-architecture

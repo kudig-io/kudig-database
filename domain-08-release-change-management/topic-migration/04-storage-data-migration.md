@@ -1,4 +1,41 @@
 ---
+title: 04 - 存储与数据迁移 [migration]
+description: 'title: 04 - 存储与数据迁移'
+category: general
+tags:
+- migration
+- upgrade
+- storage
+- ceph
+- mysql
+- job
+- ingress
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 存储与数据迁移 是什么
+- 如何 存储与数据迁移
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 存储与数据迁移
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- mysql-basics
+- backup-basics
+created: "2026-05-23"
+---
+
 title: 04 - 存储与数据迁移
 description: '# 04 - 存储与数据迁移'
 category: migration
@@ -9,7 +46,7 @@ tags:
 - ceph
 - mysql
 - job
-- ingress
+- [[Ingress|ingress]]
 - rag
 - agent
 last_updated: 2026-05
@@ -26,11 +63,15 @@ intent_queries:
 trigger_keywords:
 - 存储与数据迁移
 - migration
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- mysql-basics
-- backup-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 04 - 存储与数据迁移
@@ -39,7 +80,7 @@ prerequisites:
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [存储架构差异分析](#1-存储架构差异分析)
 2. [ACK 存储体系](#2-ack-存储体系)
@@ -52,9 +93,9 @@ prerequisites:
 
 ---
 
-## 1. 存储架构差异分析
+<!-- chunk: 1. 存储架构差异分析 -->## 1. 存储架构差异分析
 
-### 1.1 存储方案映射
+#<!-- chunk: 1.1 存储方案映射 -->## 1.1 存储方案映射
 
 | 自建存储 | 访问模式 | ACK 推荐方案 | 迁移策略 |
 |---------|---------|------------|---------|
@@ -64,10 +105,10 @@ prerequisites:
 | **GlusterFS** | ReadWriteMany | 阿里云 NAS (CSI) | rsync 数据同步 |
 | **Local PV** | ReadWriteOnce | 阿里云 ESSD 云盘 (CSI) | tar + 传输 + 解压 |
 | **hostPath** | ReadWriteOnce | 阿里云 ESSD / NAS | 手动数据复制 |
-| **OpenEBS Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
-| **Longhorn** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
+| **[[OpenEBS|OpenEBS]] Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
+| **[[Longhorn|Longhorn]]** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
 
-### 1.2 存储容量规划
+#<!-- chunk: 1.2 存储容量规划 -->## 1.2 存储容量规划
 
 ```bash
 # 采集自建集群存储使用情况
@@ -96,9 +137,9 @@ done
 
 ---
 
-## 2. ACK 存储体系
+<!-- chunk: 2. ACK 存储体系 -->## 2. ACK 存储体系
 
-### 2.1 预置 StorageClass
+#<!-- chunk: 2.1 预置 StorageClass -->## 2.1 预置 StorageClass
 
 | StorageClass | 存储类型 | 性能 | 访问模式 | 适用场景 |
 |-------------|---------|------|---------|---------|
@@ -111,7 +152,7 @@ done
 | 自定义 NAS SC | NAS 文件存储 | 吞吐型/极速型 | RWX | 共享文件 |
 | 自定义 OSS SC | OSS 对象存储 | - | ROX/RWX | 静态资源/日志 |
 
-### 2.2 创建 NAS StorageClass
+#<!-- chunk: 2.2 创建 NAS StorageClass -->## 2.2 创建 NAS StorageClass
 
 ```yaml
 # 先创建 NAS 文件系统（通过控制台或 API）
@@ -141,9 +182,9 @@ mountOptions:
 
 ---
 
-## 3. StorageClass 迁移
+<!-- chunk: 3. StorageClass 迁移 -->## 3. StorageClass 迁移
 
-### 3.1 StorageClass 映射
+#<!-- chunk: 3.1 StorageClass 映射 -->## 3.1 StorageClass 映射
 
 ```bash
 #!/bin/bash
@@ -175,7 +216,7 @@ done
 echo "StorageClass 映射完成"
 ```
 
-### 3.2 PVC 迁移注意事项
+#<!-- chunk: 3.2 PVC 迁移注意事项 -->## 3.2 PVC 迁移注意事项
 
 ```yaml
 # 自建集群 PVC（Ceph RBD）
@@ -208,9 +249,9 @@ spec:
 
 ---
 
-## 4. NFS → 阿里云 NAS 迁移
+<!-- chunk: 4. NFS → 阿里云 NAS 迁移 -->## 4. NFS → 阿里云 NAS 迁移
 
-### 4.1 迁移方案
+#<!-- chunk: 4.1 迁移方案 -->## 4.1 迁移方案
 
 ```
 自建 NFS Server                    阿里云 NAS
@@ -222,7 +263,7 @@ spec:
 └────────────────┘                └────────────────┘
 ```
 
-### 4.2 rsync 同步操作
+#<!-- chunk: 4.2 rsync 同步操作 -->## 4.2 rsync 同步操作
 
 ```bash
 # 1. 创建 NAS 文件系统
@@ -266,7 +307,7 @@ diff <(find /path/to/nfs/data/ -type f -exec md5sum {} + | sort) \
      <(find /mnt/ack-nas/k8s/ -type f -exec md5sum {} + | sort)
 ```
 
-### 4.3 通过 K8s Job 进行数据同步
+#<!-- chunk: 4.3 通过 K8s Job 进行数据同步 -->## 4.3 通过 K8s Job 进行数据同步
 
 ```yaml
 # 在 ACK 集群中运行 rsync Job
@@ -300,9 +341,9 @@ spec:
 
 ---
 
-## 5. Ceph → 阿里云云盘迁移
+<!-- chunk: 5. Ceph → 阿里云云盘迁移 -->## 5. Ceph → 阿里云云盘迁移
 
-### 5.1 迁移方案
+#<!-- chunk: 5.1 迁移方案 -->## 5.1 迁移方案
 
 ```
 方案 A: rbd export + 传输 + 云盘导入
@@ -321,7 +362,7 @@ spec:
   ③ 在 ACK 恢复（自动创建 PVC）
 ```
 
-### 5.2 应用层数据复制（方案 B）
+#<!-- chunk: 5.2 应用层数据复制（方案 B） -->## 5.2 应用层数据复制（方案 B）
 
 ```yaml
 # 在 ACK 集群部署数据复制 Pod
@@ -382,7 +423,7 @@ kubectl --context=source-cluster exec -n production data-exporter -- \
 
 ---
 
-## 6. Local PV → 云盘迁移
+<!-- chunk: 6. Local PV → 云盘迁移 -->## 6. Local PV → 云盘迁移
 
 ```bash
 # 1. 识别 Local PV 数据
@@ -429,9 +470,9 @@ kubectl --context=ack-cluster run restore-job --rm -it \
 
 ---
 
-## 7. Velero 备份恢复方案
+<!-- chunk: 7. Velero 备份恢复方案 -->## 7. Velero 备份恢复方案
 
-### 7.1 安装 Velero（双集群）
+#<!-- chunk: 7.1 安装 Velero（双集群） -->## 7.1 安装 Velero（双集群）
 
 ```bash
 # 创建 OSS Bucket 用于存储备份
@@ -473,7 +514,7 @@ velero install \
   --kubecontext ack-cluster
 ```
 
-### 7.2 执行备份与恢复
+#<!-- chunk: 7.2 执行备份与恢复 -->## 7.2 执行备份与恢复
 
 ```bash
 # 在源集群执行备份（按 Namespace 备份）
@@ -503,7 +544,7 @@ velero restore describe migration-restore-prod --kubecontext ack-cluster
 # 3. Ingress 的 external IP 会变化
 ```
 
-### 7.3 Velero StorageClass 映射
+#<!-- chunk: 7.3 Velero StorageClass 映射 -->## 7.3 Velero StorageClass 映射
 
 ```yaml
 # 创建 StorageClass 映射 ConfigMap
@@ -524,9 +565,9 @@ data:
 
 ---
 
-## 8. 数据校验
+<!-- chunk: 8. 数据校验 -->## 8. 数据校验
 
-### 8.1 文件级校验
+#<!-- chunk: 8.1 文件级校验 -->## 8.1 文件级校验
 
 ```bash
 #!/bin/bash
@@ -569,7 +610,7 @@ for pvc in $(kubectl --context=$ACK_CONTEXT get pvc -n $NS --no-headers -o custo
 done
 ```
 
-### 8.2 检查清单
+#<!-- chunk: 8.2 检查清单 -->## 8.2 检查清单
 
 - [ ] 所有 PVC 在 ACK 已创建并绑定
 - [ ] NFS → NAS 数据 rsync 完成，md5 校验通过
@@ -584,6 +625,29 @@ done
 
 **上一步**: ← [03-应用工作负载迁移](./03-application-workload-migration.md)
 **下一步**: → [05-网络迁移与流量切换](./05-network-migration-traffic-cutover.md)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-migration KUDIG Database — Global MOC
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+
+## See Also
+
+- 02-ack-target-cluster-design
+- 03-application-workload-migration
+- 05-network-migration-traffic-cutover
+- 06-stateful-services-migration
 
 ## Related
 

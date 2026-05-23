@@ -1,5 +1,5 @@
 ---
-title: KServe
+title: KServe (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # KServe
@@ -81,7 +82,7 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 - [[knative]] — Knative
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/kserve/kserve.md|kserve]]
+- kserve
 - [[references/specialized-workloads-terms|K8s 专用工作负载术语参考]] — Cross-reference
 - [[references/root-terms|K8s Root术语参考]] — Cross-reference
 - [[skills/ts-ai-ml-workloads|AI/ML 工作负载排查]] — Cross-reference

@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,8 +41,8 @@ title: Day 13: K8S 集群监控
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK ARMS Prometheus monitoring configuration
-  - [[entities/kubernetes|kubernetes]] PrometheusQuery PromQL queries
+  - ACK ARMS [[Prometheus|Prometheus]] monitoring configuration
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
   - Grafana dashboard Kubernetes monitoring
   - PrometheusRule alerting rules configuration
   - kube-state-metrics cluster monitoring

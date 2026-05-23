@@ -68,11 +68,12 @@ related_docs:
 - path: ../domain-14-ai-ml-infra/topic-ai-agent/
   type: ai-agent
   desc: AI Agent 工程
+created: "2026-05-23"
 ---
 
 # AI基础设施架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [Kubeflow](https://www.kubeflow.org/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [[entities/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/)
 
 <!-- chunk: AI Infra 全景架构 -->
 ## AI Infra 全景架构
@@ -883,9 +884,9 @@ spec:
 | **实验跟踪** | MLflow | 参数/指标/模型版本 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **实验跟踪** | Weights & Biases | 可视化/协作 | ⭐ | ⭐⭐⭐⭐ |
 | **特征存储** | Feast | 特征管理 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **模型服务** | KServe | 推理服务 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **模型服务** | [[KServe|KServe]] | 推理服务 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **工作流** | Kubeflow Pipelines | DAG编排 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **工作流** | Argo Workflows | 通用工作流 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **工作流** | [[Argo|Argo]]go Workflows|Argo Workflows]] | 通用工作流 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **AutoML** | Katib | 超参数调优 | ⭐⭐⭐ | ⭐⭐⭐ |
 
 ---
@@ -1151,18 +1152,18 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|AI模型部署与生命周期管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
+- AI模型部署与生命周期管理
 
 ## Related
 
@@ -1171,16 +1172,16 @@ spec:
 - [[README]]
 - [[MOC]]
 
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
+- GPU 调度与管理
+- 分布式训练框架
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/37-agent-sandbox-security.md|37-agent-sandbox-security]]
-- [[domain-14-ai-ml-infra/99-kubeflow-ai-platform-guide.md|99-kubeflow-ai-platform-guide]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|02-ai-ml-workloads]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|03-gpu-scheduling-management]]
+- 37-agent-sandbox-security
+- 99-kubeflow-ai-platform-guide
+- 02-ai-ml-workloads
+- 03-gpu-scheduling-management

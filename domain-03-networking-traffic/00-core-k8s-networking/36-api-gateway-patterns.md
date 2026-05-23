@@ -55,19 +55,20 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 38 - Ingress和API Gateway对比表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
 <!-- chunk: Ingress控制器对比 -->
 ## Ingress控制器对比
 
 | 控制器 | 代理类型 | 关键特性 | K8S版本 | 性能(QPS) | 学习曲线 | ACK支持 |
 |-------|---------|---------|--------|-----------|---------|---------|
-| **Nginx Ingress** | Nginx | 成熟稳定，功能全面 | v1.25+ | 高 | 中 | 支持 |
-| **Envoy Gateway** | Envoy | **官方 Gateway API 实现** | v1.25+ | 很高 | 中 | - |
+| **Nginx [[Ingress|Ingress]]** | Nginx | 成熟稳定，功能全面 | v1.25+ | 高 | 中 | 支持 |
+| **[[Envoy|Envoy]] Gateway** | Envoy | **官方 Gateway API 实现** | v1.25+ | 很高 | 中 | - |
 | **Traefik** | Traefik | 动态配置，中间件 | v1.25+ | 中-高 | 低 | - |
 | **Kong** | Nginx/Kong | API网关功能 | v1.25+ | 高 | 中-高 | - |
 | **HAProxy** | HAProxy | 高性能，企业级 | v1.25+ | 很高 | 中 | - |
@@ -334,22 +335,22 @@ kubectl exec -n ingress-nginx <pod> -- cat /etc/nginx/nginx.conf  # 检查配置
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/34-network-performance-tuning.md|34-network-performance-tuning]]
-- [[domain-03-networking-traffic/35-gateway-api-overview.md|35-gateway-api-overview]]
-- [[domain-03-networking-traffic/37-terway-resources-crud-operations.md|37-terway-resources-crud-operations]]
-- [[domain-03-networking-traffic/38-terway-gc-mechanism.md|38-terway-gc-mechanism]]
+- 34-network-performance-tuning
+- 35-gateway-api-overview
+- 37-terway-resources-crud-operations
+- 38-terway-gc-mechanism

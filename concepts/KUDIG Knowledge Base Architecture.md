@@ -32,13 +32,14 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Knowledge Base Architecture
 
 ## Overview
 
-The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for both human operators and AI Agents. It spans 40+ knowledge domains from architecture fundamentals to cutting-edge topics like AI infrastructure, eBPF, and platform engineering.
+The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for both human operators and AI Agents. It spans 40+ knowledge domains from architecture fundamentals to cutting-edge topics like AI infrastructure, eBPF, and [[synthesis/platform-engineering-sre.md|platform engineering]].
 
 ## Knowledge Layers
 

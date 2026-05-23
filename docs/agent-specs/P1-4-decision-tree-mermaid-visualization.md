@@ -1,6 +1,6 @@
 ---
-title: 故障排查决策树 Mermaid 可视化集
-description: '# 故障排查决策树 Mermaid 可视化集'
+title: 问题排查决策树 Mermaid 可视化集
+description: '# 问题排查决策树 Mermaid 可视化集'
 category: general
 tags:
 - k8s
@@ -20,10 +20,10 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- 故障排查决策树 Mermaid 可视化集 是什么
-- 如何 故障排查决策树 Mermaid 可视化集
+- 问题排查决策树 Mermaid 可视化集 是什么
+- 如何 问题排查决策树 Mermaid 可视化集
 trigger_keywords:
-- 故障排查决策树
+- 问题排查决策树
 - Mermaid
 - 可视化集
 prerequisites:
@@ -31,13 +31,14 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-# 故障排查决策树 Mermaid 可视化集
+# 问题排查决策树 Mermaid 可视化集
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: 将 63 篇故障排查文档的决策树转换为 Mermaid 图形化格式，便于 on-call 快速扫描
+> **用途**: 将 63 篇问题排查文档的决策树转换为 Mermaid 图形化格式，便于 on-call 快速扫描
 > **覆盖**: 18 个核心 Skill 对应的决策树
 
 ---
@@ -61,7 +62,7 @@ flowchart TD
     T4 -->|no error, just timeout| P8["RC-008: 网络分区"]
     T5{检查 Events} -->|NodeNotReady 事件| T6{持续时间?}
     T5 -->|无 Events| T7{检查 Lease}
-    T6 -->|>5min| P9["RC-009: 持续性节点故障"]
+    T6 -->|>5min| P9["RC-009: 持续性节点问题"]
     T6 -->|<5min| P10["RC-010: 瞬时抖动"]
     T7 -->|Lease 未更新| P5
     T7 -->|Lease 正常| P11["RC-011: 时钟偏差"]
@@ -112,7 +113,7 @@ flowchart TD
     T6 -->|memory limit 接近限制| R1
     T6 -->|CPU throttle 高| R9["RC-009: CPU 节流"]
     T6 -->|资源正常| T7{检查依赖}
-    T7 -->|依赖服务不可达| R10["RC-010: 依赖服务故障"]
+    T7 -->|依赖服务不可达| R10["RC-010: 依赖服务问题"]
 
     R1 --> VERIFY["验证: kubectl top pod"]
     R2 --> VERIFY
@@ -142,7 +143,7 @@ flowchart TD
     T2 -->|pvc pending| R5["RC-005: PVC 绑定中"]
     T2 -->|no nodes available| T4{检查节点状态}
     T2 -->|max pending pods reached| R6["RC-006: 调度队列满"]
-    T3 -->|scheduler 不工作| R7["RC-007: 调度器故障"]
+    T3 -->|scheduler 不工作| R7["RC-007: 调度器问题"]
     T4 -->|存在 NotReady 节点| R8["RC-008: 节点不可用"]
     T4 -->|存在 Ready 但无足够资源| R1
     T4 -->|所有节点 Ready 但有 Taint| R2
@@ -159,7 +160,7 @@ flowchart TD
 
 ---
 
-## 4. DNS 解析故障决策树
+## 4. DNS 解析问题决策树
 
 ```mermaid
 flowchart TD
@@ -173,7 +174,7 @@ flowchart TD
     T3 -->|CoreDNS Pod Ready 但不响应| T5{检查 CoreDNS 日志}
     T4 -->|集群内 DNS 失败| T6{检查 Service/Endpoints}
     T4 -->|集群内 DNS 正常| T7{测试外部 DNS}
-    T5 -->|forward 失败| R4["RC-004: upstream DNS 故障"]
+    T5 -->|forward 失败| R4["RC-004: upstream DNS 问题"]
     T5 -->|health check 失败| R5["RC-005: CoreDNS 健康检查失败"]
     T5 -->|no response from cache| R6["RC-006: CoreDNS 缓存问题"]
     T6 -->|Service 存在但无 Endpoints| R7["RC-007: Service selector 不匹配"]
@@ -263,7 +264,7 @@ flowchart TD
 
 ---
 
-## 7. PVC 存储故障决策树
+## 7. PVC 存储问题决策树
 
 ```mermaid
 flowchart TD
@@ -317,7 +318,7 @@ flowchart TD
 
 ---
 
-## 9. RBAC/Quota 故障决策树
+## 9. RBAC/Quota 问题决策树
 
 ```mermaid
 flowchart TD
@@ -341,7 +342,7 @@ flowchart TD
 
 ---
 
-## 10. HPA/VPA 弹性伸缩故障决策树
+## 10. HPA/VPA 弹性伸缩问题决策树
 
 ```mermaid
 flowchart TD
@@ -370,7 +371,7 @@ flowchart TD
 
 ---
 
-## 11. Ingress/Gateway 故障决策树
+## 11. Ingress/Gateway 问题决策树
 
 ```mermaid
 flowchart TD
@@ -435,7 +436,7 @@ flowchart TD
 
 ---
 
-## 13. 控制平面故障决策树
+## 13. 控制平面问题决策树
 
 ```mermaid
 flowchart TD
@@ -503,7 +504,7 @@ flowchart TD
 
 ---
 
-## 15. 配置管理故障决策树
+## 15. 配置管理问题决策树
 
 ```mermaid
 flowchart TD
@@ -526,7 +527,7 @@ flowchart TD
 
 ---
 
-## 16. 日志收集故障决策树
+## 16. 日志收集问题决策树
 
 ```mermaid
 flowchart TD
@@ -549,7 +550,7 @@ flowchart TD
 
 ---
 
-## 17. 监控告警故障决策树
+## 17. 监控告警问题决策树
 
 ```mermaid
 flowchart TD
@@ -619,16 +620,16 @@ flowchart TD
 | Node NotReady | SKILL-NODE-001 | SKILL-CP-001, SKILL-SEC-001 |
 | Pod CrashLoop | SKILL-POD-001 | SKILL-SEC-001 |
 | Pod Pending | SKILL-POD-002 | SKILL-NET-001, SKILL-STORE-001 |
-| DNS 解析故障 | SKILL-NET-001 | SKILL-NET-002 |
+| DNS 解析问题 | SKILL-NET-001 | SKILL-NET-002 |
 | Service 无 Endpoints | SKILL-NET-002 | SKILL-NET-001 |
 | 证书过期 | SKILL-SEC-001 | SKILL-NODE-001 |
-| PVC 存储故障 | SKILL-STORE-001 | SKILL-CP-001 |
+| PVC 存储问题 | SKILL-STORE-001 | SKILL-CP-001 |
 | Deployment 卡住 | SKILL-WORK-001 | SKILL-POD-001 |
 | RBAC/Quota | SKILL-SEC-002 | SKILL-POD-002 |
 | HPA/VPA | SKILL-SCALE-001 | SKILL-POD-001 |
 | Ingress/Gateway | SKILL-NET-003 | SKILL-SEC-001 |
 | 镜像拉取失败 | SKILL-IMAGE-001 | SKILL-POD-002 |
-| 控制平面故障 | SKILL-CP-001 | SKILL-SEC-001 |
+| 控制平面问题 | SKILL-CP-001 | SKILL-SEC-001 |
 | 性能瓶颈 | SKILL-PERF-001 | - |
 | 配置管理 | SKILL-CONFIG-001 | SKILL-POD-001 |
 | 日志收集 | SKILL-LOG-001 | SKILL-MONITOR-001 |
@@ -639,6 +640,6 @@ flowchart TD
 
 **关联文档**:
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA Skill
-- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) — 63 篇故障排查文档
+- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) — 63 篇问题排查文档
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)

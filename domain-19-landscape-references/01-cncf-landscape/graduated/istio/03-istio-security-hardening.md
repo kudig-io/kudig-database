@@ -1,17 +1,17 @@
 ---
-title: Istio 安全加固
-description: 'title: Istio 安全加固'
-category: general
+title: Istio 安全加固 (entities)
+description: '# Istio 安全加固'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
-- security
+- service-mesh
+- 03-istio-security-hardening
 - prometheus
+- grafana
 - istio
-- opa
-- ingress
-- gateway
-- agent
+- crd
+- operator
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,355 +21,94 @@ estimated_read_time: 5min
 intent_queries:
 - Istio 安全加固 是什么
 - 如何 Istio 安全加固
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Istio
 - 安全加固
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
 - service-mesh-basics
 - prometheus-basics
-- policy-basics
+- monitoring-basics
+created: "2026-05-23"
 ---
 
-title: Istio 安全加固
-description: Istio 安全配置指南，涵盖 mTLS、认证授权、证书管理、安全策略和合规配置
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- istio
-- security
-- mtls
-- authorization
-- certificates
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- 安全工程师
-- SRE
-- 架构师
-estimated_reading_time: 10min
-intent_queries:
-- Istio mTLS 配置
-- Istio 授权策略
-- Istio 安全加固
-trigger_keywords:
-- Istio
-- 安全
-- mTLS
-- Authorization
-estimated_read_time: 10min
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Istio 安全加固
 
-> **适用版本**: Istio 1.20+ | **最后更新**: 2026-05
+> **CNCF 状态**: Graduated | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
 
----
+## 概述
 
-## 1. mTLS 双向认证
+description: Istio 安全配置指南，涵盖 mTLS、认证授权、证书管理、安全策略和合规配置
 
-### 1.1 PeerAuthentication 配置
+## 核心能力
 
-```yaml
-# 全局 STRICT 模式（推荐生产环境）
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  mtls:
-    mode: STRICT
-```
+- 详见源文档获取完整信息 ^[inferred]
 
-```yaml
-# 命名空间级别配置
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: production
-spec:
-  mtls:
-    mode: STRICT
-```
+## K8s 集成
 
-```yaml
-# Pod 级别配置
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: frontend-mtls
-spec:
-  selector:
-    matchLabels:
-      app: frontend
-  mtls:
-    mode: STRICT
-```
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-### 1.2 mTLS 模式对比
+## 生产部署要点
 
-| 模式 | 说明 | 适用场景 |
-|:-----|:-----|:---------|
-| **STRICT** | 强制 mTLS，不允许明文 | 生产环境 |
-| **PERMISSIVE** | 允许 mTLS 和明文 | 迁移期间 |
-| **DISABLE** | 禁用 mTLS | 测试环境 |
-| **UNSET** | 继承父级配置 | 默认行为 |
+- 建议参考官方文档获取最新部署指南 ^[inferred]
 
-### 1.3 mTLS 迁移策略
+## 架构定位
 
-```yaml
-# 阶段 1: PERMISSIVE
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  mtls:
-    mode: PERMISSIVE
+在 CNCF 生态中，03-istio-security-hardening 属于 **Service Mesh** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
----
-# 阶段 2: 监控日志，确认所有服务使用 mTLS
-# istioctl ps
+## 参考链接
 
----
-# 阶段 3: 切换到 STRICT
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: default
-  namespace: istio-system
-spec:
-  mtls:
-    mode: STRICT
-```
-
----
-
-## 2. 授权策略 (AuthorizationPolicy)
-
-### 2.1 默认拒绝策略
-
-```yaml
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: deny-all
-  namespace: production
-spec:
-  {}
-```
-
-### 2.2 命名空间级别授权
-
-```yaml
-# 允许同一命名空间内访问
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: allow-namespace
-  namespace: production
-spec:
-  action: ALLOW
-  rules:
-  - from:
-    - source:
-        principals: []
-        namespaces: ["production"]
-    to:
-    - operation:
-        methods: ["GET"]
-```
-
-### 2.3 服务级别授权
-
-```yaml
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: frontend-ingress
-  namespace: production
-spec:
-  selector:
-    matchLabels:
-      app: frontend
-  action: ALLOW
-  rules:
-  - from:
-    - source:
-        principals: ["cluster.local/ns/production/sa/frontend"]
-    to:
-    - operation:
-        methods: ["GET", "POST"]
-        paths: ["/api/*"]
-  - from:
-    - source:
-        namespaces: ["istio-system"]
-    to:
-    - operation:
-        methods: ["GET"]
-        paths: ["/health", "/ready"]
-```
-
-### 2.4 基于 JWT 的授权
-
-```yaml
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: require-jwt
-  namespace: production
-spec:
-  selector:
-    matchLabels:
-      app: api
-  action: ALLOW
-  rules:
-  - from:
-    - source:
-        requestPrincipals: ["*"]
-    when:
-    - key: request.auth.claims[iss]
-      values: ["https://auth.example.com"]
-    - key: request.auth.claims[aud]
-      values: ["api-service"]
-```
-
-### 2.5 条件授权
-
-```yaml
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: conditional-access
-  namespace: production
-spec:
-  selector:
-    matchLabels:
-      app: api
-  action: ALLOW
-  rules:
-  - from:
-    - source:
-        principals: ["cluster.local/ns/production/sa/gateway"]
-    when:
-    - key: source.ip
-      values: ["10.0.0.0/8"]
-  - from:
-    - source:
-        principals: ["cluster.local/ns/production/sa/internal"]
-    when:
-    - key: connection.src_ip
-      notValues: ["10.0.0.1"]
-```
-
----
-
-## 3. 证书管理
-
-### 3.1 证书自动轮换
-
-```yaml
-# 检查当前证书过期时间
-istioctl pc secret <pod-name> -o json | jq '.[].Secret.days_to_expire'
-
-# 强制轮换证书
-istioctl x pane rotate-cert
-
-# 查看 Citadel 证书状态
-istioctl cs check
-```
-
-### 3.2 自定义 CA
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: istio-system
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cacerts
-  namespace: istio-system
-type: Opaque
-data:
-  ca-cert.pem: <base64-encoded-cert>
-  ca-key.pem: <base64-encoded-key>
-  cert-chain.pem: <base64-encoded-chain>
-  root-cert.pem: <base64-encoded-root>
-```
-
-### 3.3 外部 CA (Vault) 集成
-
-```yaml
-# 安装 Istio + Vault integration
-istioctl install --set values.global.externalCaPem=VaultCA.pem
-
-# 配置 Vault Agent Injector
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: istio
-  namespace: istio-system
-data:
-  vault_addr: "https://vault.example.com:8200"
-  vault_role: "istio-ca"
-  vault_auth_method: "kubernetes"
-```
-
-### 3.4 证书监控
-
-```yaml
-# PrometheusRule for Istio certificate expiration
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
-metadata:
-  name: istio-cert-expiry
-  namespace: istio-system
-spec:
-  groups:
-    - name: istio.certificate
-      rules:
-        - alert: IstioCertificateExpiring
-          expr: |
-            avg(istiod_cert_chain_expire_time_seconds) - time() < 604800
-          for: 1m
-          labels:
-            severity: warning
-          annotations:
-            summary: "Istio certificate expiring in 7 days"
-```
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[istio]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
+- [[concepts/secrets-management.md|secrets-management]]
+- [[pod-lifecycle]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/vault.md|vault]]
-- [[entities/istio.md|Istio]]
-- [[entities/03-istio-security-hardening.md|Istio 安全加固]]
+- [[dalec]] — Dalec
+- [[vineyard]] — Vineyard
+- [[distribution]] — Distribution
+- [[istio]] — Istio
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-1.28
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.18
+- RELEASE-NOTES-1.19
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-1.29
+- RELEASE-NOTES-1.16
+- RELEASE-NOTES-1.22
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.26
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.27
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-1.17
+- RELEASE-NOTES-1.23
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.24
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.20
+- RELEASE-NOTES-1.15
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.21
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.25
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-0.5
+- 03-istio-security-hardening
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
-
-## See Also
-
-- [[domain-19-landscape-references/graduated/istio/istio.md|istio]]
-- [[domain-19-landscape-references/graduated/istio/02-istio-advanced-traffic-management.md|02-istio-advanced-traffic-management]]
-- [[domain-19-landscape-references/graduated/istio/istio.md|istio]]
-- [[domain-19-landscape-references/graduated/istio/02-istio-advanced-traffic-management.md|02-istio-advanced-traffic-management]]

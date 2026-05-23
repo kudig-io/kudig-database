@@ -191,7 +191,7 @@ kubectl describe resourceclaim <claim-name>
 kubectl get configmap kube-scheduler -n kube-system -o yaml
 
 # 2. 检查调度器是否启用了 DRA
-grep -i dra /etc/[[entities/kubernetes|kubernetes]]/manifests/kube-scheduler.yaml
+grep -i dra /[[entities/kubernetes|kubernetes]]/manifests/kube-scheduler.yaml
 
 # 3. 查看调度器日志
 kubectl logs -n kube-system kube-scheduler-<node-name> --tail=100 | grep -i dra

@@ -1,5 +1,5 @@
 ---
-title: K0s
+title: K0s (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # K0s
@@ -55,7 +56,7 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 - **生产环境部署**: 使用至少 3 个 Controller 节点实现 HA，使用 k0sctl 进行自动化部署
 - **网络选择**: 大规模集群推荐使用 Calico 的 BGP 模式，小型集群使用默认 kube-router
 - **存储后端**: 大规模集群（100+ 节点）考虑使用外部 etcd 或 PostgreSQL
-- **安全加固**: 启用 Pod Security Standards，配置审计日志，定期轮转证书
+- **安全加固**: 启用 Pod Securityod Security Standards]]，配置审计日志，定期轮转证书
 - **升级策略**: 使用 Autopilot 实现无中断滚动升级，先升级 Controller 再升级 Worker
 - **备份恢复**: 定期执行 `k0s backup`，存储到外部安全位置
 
@@ -68,7 +69,7 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 - [[etcd]]
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[containerd]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[entities/cni-plugins.md|cni-plugins]]
 
 ## Related
@@ -79,7 +80,7 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/k0s/k0s.md|k0s]]
+- k0s
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]

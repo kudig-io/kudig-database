@@ -27,6 +27,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 宠物经济架构设计
@@ -48,7 +49,7 @@ audience:
 - 阿里云新零售解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 宠物经济平台 Kubernetes 部署架构
+- 宠物经济平台 [[Kubernetes|Kubernetes]] 部署架构
 - 宠物电商服务预约调度系统
 - 宠物智能硬件 IoT 设备管理
 - 宠物保险理赔自动化
@@ -473,8 +474,8 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -488,7 +489,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/35-metaverse-digital-twin.md|35-metaverse-digital-twin]]
-- [[domain-20-application-patterns/36-carbon-esg-management.md|36-carbon-esg-management]]
-- [[domain-20-application-patterns/38-supply-chain-finance.md|38-supply-chain-finance]]
-- [[domain-20-application-patterns/39-smart-campus.md|39-smart-campus]]
+- 35-metaverse-digital-twin
+- 36-carbon-esg-management
+- 38-supply-chain-finance
+- 39-smart-campus

@@ -1,5 +1,5 @@
 ---
-title: 行为规范与工作流
+title: 行为规范与工作流 (02-ai-agents)
 description: 'description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流'
 category: general
 tags:
@@ -81,7 +81,7 @@ Step 2: 确认用户
   → 确认黑名单表达已屏蔽
 
 Step 3: 恢复记忆
-  → 读取 [[domain-14-ai-ml-infra/openclaw-workspace/MEMORY.md|MEMORY]].md → 加载长期记忆
+  → 读取 MEMORY.md → 加载长期记忆
   → 读取 memory/ 最近 3 天 → 加载短期上下文
   → 检查是否有上次未完成的诊断任务
 
@@ -304,12 +304,12 @@ Phase 5: 输出与闭环
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/TOOLS.md|TOOLS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/IDENTITY.md|IDENTITY]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/MEMORY.md|MEMORY]]
+- 工具授权注册表
+- USER
+- IDENTITY
+- MEMORY

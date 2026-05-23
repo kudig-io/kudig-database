@@ -1,5 +1,5 @@
 ---
-title: Athenz
+title: Athenz (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Athenz
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Athenz
@@ -61,12 +62,12 @@ Athenz 是由 Yahoo (Verizon Media) 开发的开源平台，提供基于 X.509 �
 
 ## Related
 
-- [[05-containerd-windows-support]] — containerd Windows 支持
+- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kubestellar]] — KubeStellar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/athenz/athenz.md|athenz]]
+- athenz
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

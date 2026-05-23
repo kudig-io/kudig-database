@@ -1,5 +1,5 @@
 ---
-title: 'Day 2: 第一个工单处理指南'
+title: Day 2: 第一个工单处理指南 [quick-start]
 description: '# Day 2: 第一个工单处理指南'
 category: learning
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 2: 第一个工单处理指南
@@ -51,7 +52,7 @@ prerequisites:
 
 | 工单类型 | 典型描述 | SLA | 处理优先级 | 示例场景 |
 |---------|---------|-----|----------|---------|
-| P0 | 集群不可用、大规模 Pod 故障 | 15min | 立即处理 | etcd 宕机、全部节点 NotReady |
+| P0 | 集群不可用、大规模 Pod 故障 | 15min | 立即处理 | [[etcd|etcd]] 宕机、全部节点 NotReady |
 | P1 | 单个服务故障、Pod 异常 | 30min | 快速处理 | 服务 503、Pod CrashLoopBackOff |
 | P2 | 配置问题、非关键功能异常 | 2h | 计划处理 | ConfigMap 更新、HPA 未生效 |
 | P3 | 咨询、文档建议 | 24h | 日常处理 | 最佳实践咨询、资源规划建议 |
@@ -174,7 +175,7 @@ kubectl scale deployment <name> -n <namespace> --replicas=5
 
 ---
 
-## 3. 场景二：Service 无法访问
+## 3. 场景二：[[Service|Service]] 无法访问
 
 ### 场景描述
 > "前端 Pod 无法调用后端 API，返回 503"

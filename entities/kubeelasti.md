@@ -1,5 +1,5 @@
 ---
-title: KubeElastic
+title: KubeElastic (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # KubeElastic
@@ -56,7 +57,7 @@ KubeElastic 是一个 Kubernetes 原生的弹性伸缩和资源优化平台，�
 
 ## 架构定位
 
-在 CNCF 生态中，kubeelasti 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，[[entities/kubeelasti.md|kubeelasti]] 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
 ## 参考链接
 
@@ -74,5 +75,5 @@ KubeElastic 是一个 Kubernetes 原生的弹性伸缩和资源优化平台，�
 - [[spiffe]] — SPIFFE
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubeelasti/kubeelasti.md|kubeelasti]]
+- kubeelasti
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

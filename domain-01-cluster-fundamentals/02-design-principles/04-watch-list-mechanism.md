@@ -49,6 +49,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 04 - List-Watch 机制深度解析 (List-Watch)
@@ -56,11 +57,11 @@ cross_refs:
 <!-- chunk: 资深视点：Streaming List-Watch (K8s 1.27+) -->
 ## 资深视点：Streaming List-Watch (K8s 1.27+)
 
-在大规模集群中，传统的 `List` 操作会瞬间消耗 API Server 大量内存。为了解决这个问题，Kubernetes 引入了 **Streaming List-Watch**。
+在大规模集群中，传统的 `List` 操作会瞬间消耗 API Server 大量内存。为了解决这个问题，[[Kubernetes|Kubernetes]] 引入了 **Streaming List-Watch**。
 
 ### 核心演进
 1. **持久连接**: 通过单个持久 HTTP 连接传输数据，避免了全量 List 的内存峰值。
-2. **渐进式同步**: 数据流式传输，减少了 API Server 和 etcd 的瞬时负载。
+2. **渐进式同步**: 数据流式传输，减少了 API Server 和 [[etcd|etcd]] 的瞬时负载。
 3. **书签 (Bookmarks)**: 配合 `AllowWatchBookmarks`，显著降低了在网络波动后重新 List 的概率。
 
 <!-- chunk: 生产环境 Watch/List 机制优化 -->
@@ -639,25 +640,25 @@ watchOptions := metav1.ListOptions{
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- index.md|Domain-2 设计原则 — 开源项目索引]]
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|02-declarative-api-pattern]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|03-controller-pattern]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05-informer-workqueue]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06-resource-version-control]]
+- 02-declarative-api-pattern
+- 03-controller-pattern
+- 05-informer-workqueue
+- 06-resource-version-control
 
 ## Related
 

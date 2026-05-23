@@ -23,9 +23,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 控制平面组件的兼容版本
+# [[Kubernetes|Kubernetes]] 控制平面组件的兼容版本
 
 ## 概述
 
@@ -92,4 +93,4 @@ kubectl get pod -n kube-system kube-apiserver-* -o yaml | grep emulation-version
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|[[etcd|etcd]]cd 知识图谱索引|etcd 知识图谱索引]]]]

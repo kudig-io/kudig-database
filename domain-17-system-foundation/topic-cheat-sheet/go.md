@@ -41,6 +41,7 @@ related_docs:
   desc: AI 基础设施文档
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
+created: "2026-05-23"
 ---
 
 # Go 生产环境速查卡

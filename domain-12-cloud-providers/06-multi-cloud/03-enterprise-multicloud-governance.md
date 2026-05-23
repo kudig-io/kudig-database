@@ -48,6 +48,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 企业级多云治理与成本优化深度实践
@@ -452,7 +453,7 @@ module "gcp_networking" {
 }
 ```
 
-#<!-- chunk: Kyverno 多云策略引擎 -->## Kyverno 多云策略引擎
+#<!-- chunk: [[Kyverno|Kyverno]] 多云策略引擎 -->## Kyverno 多云策略引擎
 
 ```yaml
 apiVersion: kyverno.io/v1
@@ -939,7 +940,7 @@ check_s3_tags() {
         tags=$(aws s3api get-bucket-tagging --bucket "$bucket" --query 'TagSet[*].Key' --output text 2>/dev/null || echo "")
 
         for tag in "${REQUIRED_TAGS[@]}"; do
-            if [[ "$tags" != *"$tag"* ]]; then
+            if "$tags" != *"$tag"*; then
                 echo "NON-COMPLIANT: S3 $bucket 缺少标签: $tag"
             fi
         done
@@ -955,7 +956,7 @@ check_rds_tags() {
           --query 'TagList[*].Key' --output text 2>/dev/null || echo "")
 
         for tag in "${REQUIRED_TAGS[@]}"; do
-            if [[ "$tags" != *"$tag"* ]]; then
+            if "$tags" != *"$tag"*; then
                 echo "NON-COMPLIANT: RDS $instance 缺少标签: $tag"
             fi
         done
@@ -976,7 +977,7 @@ echo -e "\n=== 标签合规检查完成 ==="
 1. **标签标准化**: 建立企业级标签策略，所有资源必须包含 Environment、Team、CostCenter、Application、Owner 标签
 2. **最小权限原则**: 所有云平台采用最小权限 IAM 策略，启用 JIT 即时访问
 3. **基础设施即代码**: 所有资源通过 Terraform 管理，禁止手动创建资源
-4. **GitOps 工作流**: 通过 Argo CD / Flux 实现声明式资源管理，审计所有变更
+4. **GitOps 工作流**: 通过 Argo CD / [[Flux|Flux]] 实现声明式资源管理，审计所有变更
 5. **合规自动化**: 使用 OPA/Kyverno 策略引擎自动执行合规检查
 
 #<!-- chunk: 成本优化最佳实践 -->## 成本优化最佳实践
@@ -1017,22 +1018,22 @@ echo -e "\n=== 标签合规检查完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
-- [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- domain-27-multi-cloud-hybrid KUDIG Database — Global MOC
+- [[domain-12-cloud-providers/README.md|[[Domain 27: 多云与混合云架构管理|Domain 27: 多云与混合云架构管理]]]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|01-aws-eks-enterprise-multicloud]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|02-azure-aks-enterprise-multicloud]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|04-google-gke-enterprise-multicloud]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|05-ibm-cloud-kubernetes-service-enterprise]]
+- 01-aws-eks-enterprise-multicloud
+- 02-azure-aks-enterprise-multicloud
+- 04-google-gke-enterprise-multicloud
+- 05-ibm-cloud-kubernetes-service-enterprise

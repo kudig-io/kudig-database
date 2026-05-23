@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 故障排查
@@ -80,7 +81,7 @@ graph TD
 
 - [[domain-10-troubleshooting-diagnostics/README.md]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md]]
+- domain-01-cluster-fundamentals/16-troubleshooting-guide.md
 
 
 ---
@@ -106,6 +107,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
-- [[MOC.md|MOC]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- MOC.md|MOC]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]

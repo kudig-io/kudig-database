@@ -1,5 +1,5 @@
 ---
-title: Keylime
+title: Keylime (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Keylime
@@ -58,15 +59,15 @@ Keylime 是一个基于 TPM (Trusted Platform Module) 的远程引导完整性�
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[operator-pattern]]
 
 ## Related
 
-- [[02-containerd-v2-features]] — containerd 2.0 新特性
+- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
 - [[karmada]] — Karmada
 - [[rook]] — Rook
 - [[microcks]] — Microcks
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/keylime/keylime.md|keylime]]
+- keylime

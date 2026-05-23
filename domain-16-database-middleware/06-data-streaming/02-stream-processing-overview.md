@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # 流处理技术概述

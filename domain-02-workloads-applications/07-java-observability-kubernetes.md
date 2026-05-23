@@ -1,51 +1,5 @@
 ---
-title: Java 可观测性 on Kubernetes 实践指南
-description: 'title: Java 可观测性 on Kubernetes 实践指南'
-category: general
-tags:
-- java
-- k8s
-- observability
-- prometheus
-- grafana
-- jaeger
-- argocd
-- opa
-- redis
-- kafka
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 45min
-intent_queries:
-- Java 可观测性 on Kubernetes 实践指南 是什么
-- 如何 Java 可观测性 on Kubernetes 实践指南
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Java
-- 可观测性
-- 'on'
-- Kubernetes
-- 实践指南
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- monitoring-basics
-- gitops-basics
-- kafka-basics
-- redis-basics
-- policy-basics
-- logging-basics
-- tracing-basics
-- observability-basics
----
-
-title: Java 可观测性 on Kubernetes 实践指南
+title: Java 可观测性 on Kubernetes 实践指南 (domain-02-workloads-applications)
 description: '# Java 可观测性 on Kubernetes 实践指南'
 category: java-kubernetes
 tags:
@@ -77,29 +31,32 @@ trigger_keywords:
 - 实践指南
 - java
 - kubernetes
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- prometheus-basics
+- monitoring-basics
+- kafka-basics
+- redis-basics
+- policy-basics
+- logging-basics
+- tracing-basics
+- observability-basics
+created: "2026-05-23"
 ---
 
-# Java 可观测性 on Kubernetes 实践指南
+# Java 可观测性 on [[Kubernetes|Kubernetes]] 实践指南
 
-> **适用版本**: JDK 17+ / Spring Boot 3.x / OpenTelemetry 2.x / Prometheus 2.x / Grafana 10.x / Kubernetes v1.28+
+> **适用版本**: JDK 17+ / Spring Boot 3.x / [[OpenTelemetry|OpenTelemetry]] 2.x / [[Prometheus|Prometheus]] 2.x / Grafana 10.x / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 可观测性（Observability）是生产环境 Java 应用的生命线。在 Kubernetes 中，一个 Java 应用的可观测性由三大支柱构成：**Metrics（指标）**、**Traces（追踪）** 和 **Logs（日志）**。本指南提供在 Kubernetes 上为 Java 应用构建完整可观测性体系的实战方案，覆盖 OpenTelemetry Java Agent 自动注入、Micrometer + Prometheus 指标采集、结构化 JSON 日志、分布式追踪（W3C Trace Context）、JVM 运行时监控以及慢查询检测。
 
-#<!-- chunk: 1.1 为什么 Java 应用需要专门的可观测性方案 -->## 1.1 为什么 Java 应用需要专门的可观测性方案
+### 1.1 为什么 Java 应用需要专门的可观测性方案
 
 | 维度 | Java 特殊性 | 影响 |
 |------|-----------|------|
@@ -132,9 +89,9 @@ graph TB
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 三大支柱集成架构 -->## 2.1 三大支柱集成架构
+### 2.1 三大支柱集成架构
 
 ```mermaid
 graph LR
@@ -147,7 +104,7 @@ graph LR
 
     subgraph "集群服务"
         PROM_SCRAPE --> PROM_SERVER[Prometheus Server]
-        STDOUT --> FLUENTD[Fluentd DaemonSet]
+        STDOUT --> [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|FLUENTD]][Fluentd DaemonSet]
         OTEL_SIDE --> OTEL_COLLECTOR[OTel Collector Deployment]
     end
 
@@ -165,7 +122,7 @@ graph LR
     style GRAFANA fill:#f59e0b,color:#000
 ```
 
-#<!-- chunk: 2.2 信号关联模型 -->## 2.2 信号关联模型
+### 2.2 信号关联模型
 
 三大支柱通过 **Trace ID** 互相关联，实现从指标到日志到追踪的完整排查链路：
 
@@ -178,7 +135,7 @@ graph LR
   → Metrics (Prometheus) 查看 DB 连接池指标
 ```
 
-#<!-- chunk: 2.3 JVM 指标分类 -->## 2.3 JVM 指标分类
+### 2.3 JVM 指标分类
 
 | 类别 | 指标前缀 | 关键指标 | 采集方式 |
 |------|---------|---------|---------|
@@ -194,9 +151,9 @@ graph LR
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 Spring Boot 可观测性依赖配置 -->## 3.1 Spring Boot 可观测性依赖配置
+### 3.1 Spring Boot 可观测性依赖配置
 
 ```xml
 <dependencies>
@@ -236,9 +193,9 @@ graph LR
 </dependencies>
 ```
 
-#<!-- chunk: 3.2 OpenTelemetry Java Agent 注入 -->## 3.2 OpenTelemetry Java Agent 注入
+### 3.2 OpenTelemetry Java Agent 注入
 
-##<!-- chunk: 方式一：Init Container 自动注入（推荐，无需修改应用代码） -->## 方式一：Init Container 自动注入（推荐，无需修改应用代码）
+#### 方式一：Init Container 自动注入（推荐，无需修改应用代码）
 
 ```yaml
 apiVersion: apps/v1
@@ -329,7 +286,7 @@ spec:
           emptyDir: {}
 ```
 
-##<!-- chunk: 方式二：OpenTelemetry Operator 自动注入（最推荐） -->## 方式二：OpenTelemetry Operator 自动注入（最推荐）
+#### 方式二：OpenTelemetry Operator 自动注入（最推荐）
 
 ```yaml
 apiVersion: opentelemetry.io/v1alpha1
@@ -367,7 +324,7 @@ metadata:
     instrumentation.opentelemetry.io/inject-java: "observability/java-instrumentation"
 ```
 
-#<!-- chunk: 3.3 application.yml 完整可观测性配置 -->## 3.3 application.yml 完整可观测性配置
+### 3.3 application.yml 完整可观测性配置
 
 ```yaml
 spring:
@@ -462,7 +419,7 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 ```
 
-#<!-- chunk: 3.4 自定义业务指标配置类 -->## 3.4 自定义业务指标配置类
+### 3.4 自定义业务指标配置类
 
 ```java
 package com.example.config;
@@ -522,7 +479,7 @@ public class ObservabilityConfig {
 }
 ```
 
-#<!-- chunk: 3.5 完整业务指标服务类 -->## 3.5 完整业务指标服务类
+### 3.5 完整业务指标服务类
 
 ```java
 package com.example.service;
@@ -648,7 +605,7 @@ public class OrderService {
 }
 ```
 
-#<!-- chunk: 3.6 Prometheus ServiceMonitor -->## 3.6 Prometheus ServiceMonitor
+### 3.6 Prometheus ServiceMonitor
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -680,7 +637,7 @@ spec:
       targetLimit: 100
 ```
 
-#<!-- chunk: 3.7 结构化日志（Logback JSON） -->## 3.7 结构化日志（Logback JSON）
+### 3.7 结构化日志（Logback JSON）
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -756,7 +713,7 @@ spec:
 </configuration>
 ```
 
-##<!-- chunk: 日志注入 Trace ID 的 Controller -->## 日志注入 Trace ID 的 Controller
+#### 日志注入 Trace ID 的 Controller
 
 ```java
 package com.example.controller;
@@ -850,7 +807,7 @@ JSON 日志输出示例:
 }
 ```
 
-#<!-- chunk: 3.8 OpenTelemetry Collector 完整配置 -->## 3.8 OpenTelemetry Collector 完整配置
+### 3.8 OpenTelemetry Collector 完整配置
 
 ```yaml
 apiVersion: opentelemetry.io/v1beta1
@@ -946,7 +903,7 @@ spec:
           exporters: [loki]
 ```
 
-#<!-- chunk: 3.9 慢查询监控完整实现 -->## 3.9 慢查询监控完整实现
+### 3.9 慢查询监控完整实现
 
 ```java
 package com.example.config;
@@ -1042,7 +999,7 @@ public class SlowQueryListener {
 }
 ```
 
-#<!-- chunk: 3.10 JMX Exporter 集成（可选，用于第三方库指标） -->## 3.10 JMX Exporter 集成（可选，用于第三方库指标）
+### 3.10 JMX Exporter 集成（可选，用于第三方库指标）
 
 ```yaml
 lowercaseOutputName: true
@@ -1069,9 +1026,9 @@ rules:
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 Grafana Dashboard 关键面板 -->## 4.1 Grafana Dashboard 关键面板
+### 4.1 Grafana Dashboard 关键面板
 
 | 面板名称 | 指标 | PromQL |
 |---------|------|--------|
@@ -1088,7 +1045,7 @@ rules:
 | **慢查询次数** | `db_slow_query_total` | `rate(db_slow_query_total[5m])` |
 | **日志速率** | `logback_events_total` | `sum by (level) (rate(logback_events_total[5m]))` |
 
-#<!-- chunk: 4.2 采样策略 -->## 4.2 采样策略
+### 4.2 采样策略
 
 | 环境 | 采样率 | 说明 |
 |------|--------|------|
@@ -1117,7 +1074,7 @@ tail_sampling:
         sampling_percentage: 10
 ```
 
-#<!-- chunk: 4.3 资源消耗优化 -->## 4.3 资源消耗优化
+### 4.3 资源消耗优化
 
 ```yaml
 resources:
@@ -1136,7 +1093,7 @@ resources:
 #   cpu limit 增加 50m
 ```
 
-#<!-- chunk: 4.4 指标命名最佳实践 -->## 4.4 指标命名最佳实践
+### 4.4 指标命名最佳实践
 
 | 规则 | 示例 | 说明 |
 |------|------|------|
@@ -1148,9 +1105,9 @@ resources:
 
 ---
 
-<!-- chunk: 五、性能调优 -->## 五、性能调优
+## 五、性能调优
 
-#<!-- chunk: 5.1 OTel Agent 性能优化 -->## 5.1 OTel Agent 性能优化
+### 5.1 OTel Agent 性能优化
 
 ```bash
 # 减少 OTel Agent 开销的 JVM 参数
@@ -1165,7 +1122,7 @@ JAVA_OPTS="$JAVA_OPTS \
   -Dotel.instrumentation.annotations.enabled=false"
 ```
 
-#<!-- chunk: 5.2 Micrometer 性能优化 -->## 5.2 Micrometer 性能优化
+### 5.2 Micrometer 性能优化
 
 ```yaml
 management:
@@ -1182,7 +1139,7 @@ management:
         http.server.requests: 100ms,500ms,1000ms
 ```
 
-#<!-- chunk: 5.3 内存开销预估 -->## 5.3 内存开销预估
+### 5.3 内存开销预估
 
 | 组件 | 额外 RSS | 额外 CPU | 说明 |
 |------|---------|---------|------|
@@ -1194,9 +1151,9 @@ management:
 
 ---
 
-<!-- chunk: 六、故障排查 -->## 六、故障排查
+## 六、故障排查
 
-#<!-- chunk: 6.1 常见问题速查表 -->## 6.1 常见问题速查表
+### 6.1 常见问题速查表
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |------|---------|---------|---------|
@@ -1213,7 +1170,7 @@ management:
 | OTel Agent 冲突 | 与 New Relic/DataDog 冲突 | 查看 `-javaagent` 参数顺序 | 只保留一个 agent |
 | 指标标签不一致 | commonTags 未配置 | 查看 `/actuator/prometheus` 输出 | 配置 `MeterRegistryCustomizer` |
 
-#<!-- chunk: 6.2 Prometheus 告警规则 -->## 6.2 Prometheus 告警规则
+### 6.2 Prometheus 告警规则
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1335,7 +1292,7 @@ spec:
             summary: "容器内存使用接近 limit（>85%）"
 ```
 
-#<!-- chunk: 6.3 端到端可观测性验证脚本 -->## 6.3 端到端可观测性验证脚本
+### 6.3 端到端可观测性验证脚本
 
 ```bash
 #!/bin/bash
@@ -1398,7 +1355,7 @@ echo -e "\n=== 所有检查完成 ==="
 
 ---
 
-<!-- chunk: 七、参考资源 -->## 七、参考资源
+## 七、参考资源
 
 - [OpenTelemetry Java Instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation)
 - [Micrometer 文档](https://docs.micrometer.io/micrometer/reference/)
@@ -1412,28 +1369,3 @@ echo -e "\n=== 所有检查完成 ==="
 - [Grafana Tempo 文档](https://grafana.com/docs/tempo/latest/)
 - [Grafana Loki 文档](https://grafana.com/docs/loki/latest/)
 - [Micrometer Tracing 文档](https://docs.micrometer.io/tracing/reference/)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[domain-java-kubernetes/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]]
-- [[domain-java-kubernetes/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]]
-- [[domain-java-kubernetes/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]]
-- [[domain-java-kubernetes/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]]
-
-## Related
-
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-
-## See Also
-
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]

@@ -37,6 +37,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Cloud Native Defense in Depth
@@ -48,7 +49,7 @@ Cloud native security follows defense-in-depth principles, implementing controls
 | Layer | Protection Target | Core Technology | Key Tools |
 |-------|-----------------|----------------|-----------|
 | 1. Boundary | External attack entry | WAF, DDoS, CDN, TLS | Cloud WAF, cert-manager |
-| 2. Identity | User and service auth | OIDC/SAML, RBAC, IRSA | Keycloak, Okta |
+| 2. Identity | User and [[Service|service]] auth | OIDC/SAML, RBAC, IRSA | Keycloak, Okta |
 | 3. Network | Micro-segmentation | NetworkPolicy, mTLS, Egress | Calico, Cilium, Istio |
 | 4. Workload | Pod security and permissions | PSS, SecurityContext, image verify | Kyverno, OPA |
 | 5. Runtime | Real-time threat detection | eBPF, syscall monitoring, anomaly | Falco, Sysdig, Tetragon |

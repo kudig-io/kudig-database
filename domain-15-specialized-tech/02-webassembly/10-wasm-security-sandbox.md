@@ -48,6 +48,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Wasm 安全与沙箱 (Wasm Security and Sandbox)
@@ -2891,22 +2892,22 @@ Layer 7: 机密计算（可选）  → SGX/SEV/TrustZone
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
+- domain-38-webassembly-cloud-native KUDIG Database — Global MOC
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
 
 ## See Also
 
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|08-wasm-ai-inference]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|09-wasm-serverless]]
-- [[domain-15-specialized-tech/99-wasmedge-cloud-native-guide.md|99-wasmedge-cloud-native-guide]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|01-wasm-fundamentals-cloud-native]]
+- 08-wasm-ai-inference
+- 09-wasm-serverless
+- 99-wasmedge-cloud-native-guide
+- 01-wasm-fundamentals-cloud-native

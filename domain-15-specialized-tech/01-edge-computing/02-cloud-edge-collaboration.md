@@ -53,6 +53,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
@@ -703,7 +704,7 @@ func (r *LWWRegister) Merge(other *LWWRegister) *LWWRegister {
 
 #<!-- chunk: 4.1 期望状态 vs 实际状态 (Desired State vs Actual State) -->## 4.1 期望状态 vs 实际状态 (Desired State vs Actual State)
 
-Kubernetes/KubeEdge 使用声明式 API 和控制器模式来管理边缘状态，这是云边协同的核心设计理念。
+[[Kubernetes|Kubernetes]]/KubeEdge 使用声明式 API 和控制器模式来管理边缘状态，这是云边协同的核心设计理念。
 
 ```mermaid
 graph LR
@@ -890,7 +891,7 @@ func (s *LocalStateStore) GetConfigMap(namespace, name string) (*v1.ConfigMap, e
 
 #<!-- chunk: 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache) -->## 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache)
 
-OpenYurt 的 YurtHub 实现了边缘节点离线时的本地 API 代理：
+[[OpenYurt|OpenYurt]] 的 YurtHub 实现了边缘节点离线时的本地 API 代理：
 
 ```mermaid
 graph LR
@@ -1472,7 +1473,7 @@ spec:
     - "*"                           # 最后全局
 ```
 
-#<!-- chunk: 8.3 边缘 Ingress 配置 (Edge Ingress Configuration) -->## 8.3 边缘 Ingress 配置 (Edge Ingress Configuration)
+#<!-- chunk: 8.3 边缘 [[Ingress|Ingress]] 配置 (Edge Ingress Configuration) -->## 8.3 边缘 Ingress 配置 (Edge Ingress Configuration)
 
 ```yaml
 # 边缘节点本地 Nginx Ingress
@@ -2140,22 +2141,22 @@ reference_architecture:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
+- domain-37-edge-computing MOC
 - [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/99-kubernetes-developer-toolchain-guide.md|99-kubernetes-developer-toolchain-guide]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|01-edge-computing-architecture]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|03-kubeedge-architecture-deployment]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|04-kubeedge-device-edge-apps]]
+- 99-kubernetes-developer-toolchain-guide
+- 01-edge-computing-architecture
+- 03-kubeedge-architecture-deployment
+- 04-kubeedge-device-edge-apps

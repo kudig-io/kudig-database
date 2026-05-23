@@ -1,12 +1,17 @@
 ---
-title: Chaos Mesh
-description: 'description: ''## 项目概述'''
-category: general
+title: Chaos Mesh [entities]
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- orchestration
+- chaos-mesh
 - scheduler
-- helm
+- crd
+- operator
+- ebpf
+- agent
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -16,219 +21,53 @@ estimated_read_time: 5min
 intent_queries:
 - Chaos Mesh 是什么
 - 如何 Chaos Mesh
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Chaos
 - Mesh
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
-- helm-basics
+- ebpf-basics
+created: "2026-05-23"
 ---
 
-title: Chaos Mesh
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- scheduler
-- helm
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Chaos Mesh 是什么
-- 如何 Chaos Mesh
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Chaos
-- Mesh
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Chaos Mesh
 
-> **成熟度**: Incubating | **加入时间**: 2020-07 | **最后更新**: 2026-03
+> **CNCF 状态**: Incubating | **类别**: Orchestration | **主要语言**: Go
 
-## 基本信息
+## 概述
 
-| 属性 | 值 |
-|:---|:---|
-| **官方网站** | https://chaos-mesh.org |
-| **GitHub** | https://github.com/chaos-mesh/chaos-mesh |
-| **文档** | https://chaos-mesh.org/docs |
-| **许可证** | Apache-2.0 |
-| **主要语言** | Go |
-| **CNCF 分类** | Observability |
+description: '## 项目概述'
 
----
+## 核心能力
 
-## 项目概述
+- 详见源文档获取完整信息 ^[inferred]
 
-### 简介
-Chaos Mesh 是 Kubernetes 云原生混沌工程平台，由 PingCAP 开源。它提供丰富的故障注入能力，帮助在生产环境问题发生前发现系统潜在弱点。
+## K8s 集成
 
-### 发展历程
-| 时间 | 里程碑 |
-|:---|:---|
-| 2019-12 | PingCAP 开源 |
-| 2020-07 | 加入 CNCF Sandbox |
-| 2022-02 | 晋升为 CNCF Incubating |
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-### 核心定位
-Chaos Mesh 是 Kubernetes 生态最完整的混沌工程平台，支持多种故障类型和复杂的实验编排。
+## 生产部署要点
 
----
+- 建议参考官方文档获取最新部署指南 ^[inferred]
 
-## 故障类型
+## 架构定位
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                   Chaos Mesh 故障类型                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  Pod 故障                         网络故障                       │
-│  ┌─────────────────┐             ┌─────────────────┐            │
-│  │ • Pod Kill      │             │ • Network Delay │            │
-│  │ • Pod Failure   │             │ • Packet Loss   │            │
-│  │ • Container Kill│             │ • Partition     │            │
-│  └─────────────────┘             │ • Bandwidth     │            │
-│                                  └─────────────────┘            │
-│                                                                  │
-│  IO 故障                          时间故障                       │
-│  ┌─────────────────┐             ┌─────────────────┐            │
-│  │ • IO Delay      │             │ • Time Skew     │            │
-│  │ • IO Error      │             │ • Time Stop     │            │
-│  │ • IO Attr       │             └─────────────────┘            │
-│  └─────────────────┘                                            │
-│                                                                  │
-│  压力故障                         内核故障                       │
-│  ┌─────────────────┐             ┌─────────────────┐            │
-│  │ • CPU Stress    │             │ • Kernel Fault  │            │
-│  │ • Memory Stress │             └─────────────────┘            │
-│  └─────────────────┘                                            │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
+在 CNCF 生态中，chaos-mesh 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
----
+## 参考链接
 
-## 使用示例
-
-### 网络延迟
-
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: NetworkChaos
-metadata:
-  name: network-delay
-spec:
-  action: delay
-  mode: all
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      app: web
-  delay:
-    latency: "100ms"
-    jitter: "10ms"
-  duration: "5m"
-```
-
-### Pod 故障
-
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: pod-kill
-spec:
-  action: pod-kill
-  mode: one
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      app: backend
-  scheduler:
-    cron: "@every 5m"
-```
-
-### 工作流编排
-
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: Workflow
-metadata:
-  name: chaos-workflow
-spec:
-  entry: serial-chaos
-  templates:
-    - name: serial-chaos
-      templateType: Serial
-      children:
-        - network-delay
-        - pod-kill
-    - name: network-delay
-      templateType: NetworkChaos
-      networkChaos:
-        action: delay
-        delay:
-          latency: "50ms"
-    - name: pod-kill
-      templateType: PodChaos
-      podChaos:
-        action: pod-kill
-```
-
----
-
-## 安装
-
-```bash
-helm repo add chaos-mesh https://charts.chaos-mesh.org
-helm install chaos-mesh chaos-mesh/chaos-mesh \
-  -n chaos-mesh --create-namespace
-```
-
----
-
-## 参考资源
-
-- [官方文档](https://chaos-mesh.org/docs)
-- [GitHub Repo](https://github.com/chaos-mesh/chaos-mesh)
-- [CNCF 项目页面](https://www.cncf.io/projects/chaos-mesh/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[concepts/observability-pillars.md|observability-pillars]]
+- [[pod-lifecycle]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[journal/digest-2026-05-21.md|digest-2026-05-21]] — Wiki 全量知识库摘要 — 2026-05-21
+- [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
+- [[skills/Agent Orchestration Patterns.md|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
+- observability.md|cncf-observability]] — CNCF 可观测性项目全景
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- chaos-mesh
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

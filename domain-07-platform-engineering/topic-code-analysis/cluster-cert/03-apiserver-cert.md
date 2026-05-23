@@ -1,5 +1,5 @@
 ---
-title: API Server 证书生成源码分析
+title: API Server 证书生成源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: API Server 证书生成源码分析

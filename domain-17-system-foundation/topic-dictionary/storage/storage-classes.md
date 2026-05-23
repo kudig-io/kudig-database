@@ -24,13 +24,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Storage Classes（存储类）
 
 ## 概述
 
-StorageClass 是 Kubernetes 中用于描述管理员所提供的存储“类别”的 API 资源。不同的 StorageClass 可以映射到不同的服务质量（QoS）级别、备份策略或任意由集群管理员定义的策略。它使得用户无需了解底层存储的实现细节，即可按需请求不同特性的持久存储。
+StorageClass 是 [[Kubernetes|Kubernetes]] 中用于描述管理员所提供的存储“类别”的 API 资源。不同的 StorageClass 可以映射到不同的服务质量（QoS）级别、备份策略或任意由集群管理员定义的策略。它使得用户无需了解底层存储的实现细节，即可按需请求不同特性的持久存储。
 
 ## 核心概念/原理
 
@@ -138,7 +139,7 @@ volumeBindingMode: WaitForFirstConsumer
 | PVC Pending 无 Events | 无默认 StorageClass 且 PVC 未指定 storageClassName | `kubectl get sc` 确认是否有默认 SC |
 | PVC 绑定了错误可用区的 PV | 使用 Immediate 绑定模式 | 改用 `WaitForFirstConsumer` |
 | 卷扩展失败 | StorageClass 未设置 allowVolumeExpansion | 修改 SC 添加 `allowVolumeExpansion: true` |
-| provisioner 创建卷超时 | CSI 驱动 Pod 异常 | `kubectl get pods -n kube-system -l app=ebs-csi-controller` |
+| provisioner 创建卷超时 | CSI 驱动 Pod 异常 | `kubectl get [[Pods|pods]] -n kube-system -l app=ebs-csi-controller` |
 
 ## 生产检查清单
 
@@ -175,6 +176,6 @@ kubectl annotate sc gp3-encrypted storageclass.kubernetes.io/is-default-class=tr
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

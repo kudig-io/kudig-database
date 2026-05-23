@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Tetragon
@@ -65,4 +66,4 @@ Custom security policies defined as K8s CRDs. Each policy specifies which kernel
 - [[falco|Falco]]
 - [[cilium|Cilium]]
 
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|06-tetragon-runtime-security]]
+- 06-tetragon-runtime-security

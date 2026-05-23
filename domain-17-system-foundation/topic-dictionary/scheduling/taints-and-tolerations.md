@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Taints and Tolerations
@@ -83,7 +84,7 @@ tolerations:
 
 ### 多污点/多容忍度处理
 
-Kubernetes 处理多个污点和容忍度的方式类似于过滤器：从节点的所有污点开始，忽略 Pod 有匹配容忍度的污点；剩余的未忽略污点会对 Pod 产生相应效果。
+[[Kubernetes|Kubernetes]] 处理多个污点和容忍度的方式类似于过滤器：从节点的所有污点开始，忽略 Pod 有匹配容忍度的污点；剩余的未忽略污点会对 Pod 产生相应效果。
 
 ## 关键机制或特性
 
@@ -97,7 +98,7 @@ Kubernetes 处理多个污点和容忍度的方式类似于过滤器：从节点
   - `node.kubernetes.io/unschedulable`
   - `node.cloudprovider.kubernetes.io/uninitialized`
 - **自动容忍度**：Kubernetes 自动为 Pod 添加 `node.kubernetes.io/not-ready` 和 `node.kubernetes.io/unreachable` 的容忍度，`tolerationSeconds=300`（5分钟）。
-- **DaemonSet 容忍度**：DaemonSet Pod 对上述两个污点的 NoExecute 容忍度没有 `tolerationSeconds`，确保它们永远不会因此被驱逐。
+- **[[DaemonSet|DaemonSet]] 容忍度**：DaemonSet Pod 对上述两个污点的 NoExecute 容忍度没有 `tolerationSeconds`，确保它们永远不会因此被驱逐。
 - **数值比较操作符**（v1.35+ alpha）：除了 `Equal` 和 `Exists`，还支持 `Gt` 和 `Lt` 用于匹配整数值的污点，适用于基于阈值的调度。
 - **设备污点和容忍度**：在使用动态资源分配（DRA）管理特殊硬件时，管理员可以针对单个设备（而非整个节点）设置污点和容忍度。
 
@@ -109,7 +110,7 @@ Kubernetes 处理多个污点和容忍度的方式类似于过滤器：从节点
 
 ## 最佳实践/注意事项
 
-- 如果手动指定 `.spec.nodeName`，会绕过调度器，即使节点有 `NoSchedule` 污点也会绑定。但如果节点还有 `NoExecute` 污点，kubelet 仍会驱逐该 Pod（除非有匹配的容忍度）。
+- 如果手动指定 `.spec.nodeName`，会绕过调度器，即使节点有 `NoSchedule` 污点也会绑定。但如果节点还有 `NoExecute` 污点，[[kubelet|kubelet]] 仍会驱逐该 Pod（除非有匹配的容忍度）。
 - 控制平面限制了向节点添加新污点的速率，以管理大量节点同时不可达时触发的驱逐数量。
 - 从 v1.29 开始，基于污点的驱逐实现已从节点控制器移到了独立的 `taint-eviction-controller` 组件中。可以通过 `--controllers=-taint-eviction-controller` 禁用基于污点的驱逐。
 - 当使用 `Gt`/`Lt` 操作符时，容忍度和污点的值都必须是有效的有符号 64 位整数。

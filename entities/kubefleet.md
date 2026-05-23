@@ -1,5 +1,5 @@
 ---
-title: KubeFleet
+title: KubeFleet [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - KubeFleet
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KubeFleet
@@ -31,7 +32,7 @@ prerequisites:
 
 ## 概述
 
-KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、Service、ConfigMap 等）自动分发到多个成员集群，并支持基于集群属性、资源可用性和自定义策略的智能调度。
+KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、[[Service|Service]]、ConfigMap 等）自动分发到多个成员集群，并支持基于集群属性、资源可用性和自定义策略的智能调度。
 
 ## 核心能力
 
@@ -67,6 +68,6 @@ KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的�
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubefleet/kubefleet.md|kubefleet]]
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
+- kubefleet
+- [[entities/cncf-orchestration|[[CNCF 编排与应用管理项目全景|CNCF 编排与应用管理项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -22,6 +22,10 @@ trigger_keywords:
 - 的协作模式
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
 ---
 
 # 平台工程与 SRE 的协作模式
@@ -30,7 +34,7 @@ prerequisites:
 
 | 职责 | 平台工程 | SRE |
 |------|---------|-----|
-| **基础设施** | 提供标准化的 K8s 平台 | 确保平台可靠性 |
+| **基础设施** | 提供标准化的 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 平台 | 确保平台可靠性 |
 | **开发者体验** | 构建 IDP、模板、文档 | 定义 SLO、发布规范 |
 | **工具链** | 选择、集成、维护 | 监控、告警、On-call |
 | **安全** | 平台级安全基线 | 运行时安全监控 |
@@ -60,5 +64,8 @@ SRE 定义:
 
 ## 相关 Domain
 
-- [[domain-07-platform-engineering/01-idp/01-internal-developer-platform]]
+- domain-07-platform-engineering/01-idp/01-internal-developer-platform
 - [[domain-09-reliability-engineering/07-sre-practices/04-toil-reduction-automation]]
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/security/runtime-security|运行时安全]]

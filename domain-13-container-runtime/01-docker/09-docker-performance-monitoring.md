@@ -50,6 +50,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 性能监控与调优
@@ -159,7 +160,7 @@ docker events --filter container=web-server
 
 #<!-- chunk: 第三方监控解决方案 -->## 第三方监控解决方案
 
-##<!-- chunk: Prometheus + Grafana -->## Prometheus + Grafana
+##<!-- chunk: [[Prometheus|Prometheus]] + Grafana -->## Prometheus + Grafana
 ```yaml
 # prometheus.yml 配置示例
 scrape_configs:
@@ -447,7 +448,7 @@ model = LinearRegression()
 X = np.array(range(len(cpu_trend))).reshape(-1, 1)
 y = cpu_trend.values
 model.fit(X, y)
-future_cpu = model.predict([[len(cpu_trend) + 30]])  # 预测30天后
+future_cpu = model.predict(len(cpu_trend) + 30)  # 预测30天后
 ```
 
 ##<!-- chunk: 压力测试方法 -->## 压力测试方法
@@ -497,7 +498,7 @@ docker run --rm -i loadimpact/k6 run - <script.js
 
 #<!-- chunk: 动态资源调度 -->## 动态资源调度
 
-##<!-- chunk: Kubernetes Horizontal Pod Autoscaler -->## Kubernetes Horizontal Pod Autoscaler
+##<!-- chunk: [[Kubernetes|Kubernetes]] Horizontal Pod Autoscaler -->## Kubernetes Horizontal Pod Autoscaler
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -695,22 +696,22 @@ docker system prune -a -f --volumes
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-13-container-runtime/MOC.md|domain-13-container-runtime MOC]]
+- domain-13-container-runtime KUDIG Database — Global MOC
 - [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|Domain-13 Docker — 开源项目索引]]
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|Docker 架构概述与核心概念]]
-- [[domain-13-container-runtime/02-docker-images-management.md|Docker 镜像管理详解]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|Docker 容器生命周期管理]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|Docker 网络深度解析]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|Docker 存储与数据卷]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|Docker Compose 编排]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|Docker 安全最佳实践]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|Docker 故障排查指南]]
-- [[domain-13-container-runtime/10-docker-logging-management.md|Docker 日志管理与分析]]
+- Domain-13 Docker — 开源项目索引
+- Docker 架构概述与核心概念
+- Docker 镜像管理详解
+- Docker 容器生命周期管理
+- Docker 网络深度解析
+- Docker 存储与数据卷
+- Docker Compose 编排
+- Docker 安全最佳实践
+- Docker 故障排查指南
+- Docker 日志管理与分析
 
 ## See Also
 
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|07-docker-security-best-practices]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-13-container-runtime/10-docker-logging-management.md|10-docker-logging-management]]
-- [[domain-13-container-runtime/11-docker-automation-devops.md|11-docker-automation-devops]]
+- 07-docker-security-best-practices
+- 08-docker-troubleshooting-guide
+- 10-docker-logging-management
+- 11-docker-automation-devops

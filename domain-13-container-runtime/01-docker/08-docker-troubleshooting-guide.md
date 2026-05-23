@@ -40,6 +40,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 故障排查指南
@@ -357,7 +358,7 @@ docker port <container>
 
 ## See Also
 
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|06-docker-compose-orchestration]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|07-docker-security-best-practices]]
-- [[domain-13-container-runtime/09-docker-performance-monitoring.md|09-docker-performance-monitoring]]
-- [[domain-13-container-runtime/10-docker-logging-management.md|10-docker-logging-management]]
+- 06-docker-compose-orchestration
+- 07-docker-security-best-practices
+- monitoring.md|09-docker-performance-monitoring]]
+- 10-docker-logging-management

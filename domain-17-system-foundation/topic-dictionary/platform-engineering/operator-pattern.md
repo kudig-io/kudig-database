@@ -1,130 +1,121 @@
 ---
-title: Operator 模式
-description: '## 概述'
-category: dictionary
+title: Operator Pattern (CRD + Controller)
+description: Operator Pattern (CRD + Controller) — Kubernetes 生产运维知识库
+category: concepts
 tags:
 - k8s
-- glossary
-- terminology
-- helm
-- statefulset
-- rbac
-- crd
 - operator
+- crd
 - webhook
+- extension
+- controller
 - etcd
+- apiserver
+- prometheus
+- istio
 last_updated: 2026-05
-difficulty: beginner
-reading_level: beginner
+difficulty: intermediate
+reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- Operator 模式 是什么
-- 如何 Operator 模式
+- Operator Pattern (CRD + Controller) 是什么
+- 如何 Operator Pattern (CRD + Controller)
 trigger_keywords:
 - Operator
-- 模式
-- dictionary
+- Pattern
+- CRD
+- Controller
 prerequisites:
 - kubectl-basics
-- cloud-provider-basics
-- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
 - etcd-basics
+- mysql-basics
+- policy-basics
+created: "2026-05-23"
 ---
 
-# Operator 模式
+# Operator Pattern (CRD + Controller)
 
-## 概述
+## Custom Resource Definition (CRD)
 
-Operator 是 Kubernetes 的软件扩展，它利用自定义资源（Custom Resources）来管理应用程序及其组件。Operator 遵循 Kubernetes 的设计原则，尤其是控制循环（Control Loop）模式。其核心目标是捕获人类运维专家管理服务的知识和行为，并通过代码实现自动化。
+CRDs extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with custom resource types without modifying API Server code:
 
-## 核心概念/原理
-
-- **Operator 定义**：Operator 是 Kubernetes API 的客户端，充当自定义资源的控制器。它将一个或多个自定义资源与控制器关联起来，从而扩展集群的行为，而无需修改 Kubernetes 本身的代码。
-- **控制循环**：Operator 持续观察自定义资源的实际状态，并通过调谐（reconcile）使其向期望状态靠拢。
-- **声明式 API**：用户声明期望状态（如数据库副本数、版本），Operator 负责执行复杂的运维操作来实现该状态。
-
-## 关键机制或特性
-
-- **自定义资源 + 控制器**：Operator 通常由两部分组成：
-  1. **CustomResourceDefinition（CRD）**：定义新的资源类型（如 `SampleDB`）。
-  2. **控制器（Controller）**：运行在 Deployment 中的 Pod 内，持续监听 CR 的变化并执行相应的运维逻辑。
-- **典型自动化能力**：
-  - 按需部署应用
-  - 执行应用状态的备份与恢复
-  - 处理应用升级及关联变更（如数据库 schema 迁移、配置更新）
-  - 为不支持 Kubernetes API 的应用发布 Service 以供发现
-  - 模拟集群故障以测试弹性
-  - 为分布式应用选举领导者
-- **部署方式**：最常见的方式是将 CRD 和对应的控制器一起部署到集群中。控制器通常作为 Deployment 运行在控制平面之外。
-
-## 使用场景
-
-- 管理有状态应用（如数据库、消息队列、缓存集群），需要复杂的生命周期管理（部署、扩容、备份、恢复、升级）。
-- 需要将人类运维专家的经验（如故障处理、配置优化）编码为自动化逻辑。
-- 希望在 Kubernetes 中通过声明式方式管理第三方中间件或自定义应用。
-
-## 最佳实践/注意事项
-
-- 在生态中寻找已有的 Operator（如 OperatorHub.io），避免重复造轮子。
-- 如果没有现成的 Operator，可以使用多种语言和框架自行开发，如 Go（kubebuilder、Operator SDK）、Python（Kopf）、Java（Java Operator SDK）、Rust（kube-rs）、.NET（KubeOps）等。
-- Operator 控制器通常以 Deployment 形式运行，需要为其配置适当的 RBAC 权限。
-- 设计 Operator 时，应充分考虑故障恢复、幂等性、升级兼容性以及与现有 Kubernetes 原生资源（如 StatefulSet、PersistentVolumeClaim）的协作。
-
-## 故障排查
-
-| 症状 | 可能原因 | 排查步骤 |
-|------|----------|----------|
-| CR 创建后无响应 | Operator Pod 未运行或未 watch 该 namespace | `kubectl get pods -n <operator-ns>`；检查 Operator 日志 |
-| Operator 频繁重启 | RBAC 权限不足或代码 panic | 查看 Operator Pod 日志和事件 |
-| 调协循环不收敛 | Reconcile 逻辑有 bug 导致无限更新 | 检查 Operator 日志中的 reconcile 频率 |
-| CRD 升级后 Operator 不兼容 | API 版本不匹配 | 确认 Operator 版本与 CRD 版本匹配 |
-
-## 生产检查清单
-
-- [ ] Operator 使用 leader election 确保单实例运行
-- [ ] 配置最小 RBAC 权限
-- [ ] 实现 Reconcile 幂等逻辑
-- [ ] 设置合理的 Reconcile requeue 间隔
-- [ ] 使用 OLM 或 Helm 管理 Operator 生命周期
-- [ ] 监控 Operator 自身的健康和性能
-
-## 命令快速参考
-
-```bash
-# 查看 Operator Pod
-kubectl get pods -n <operator-namespace> -l app=<operator>
-
-# 查看 Operator 日志
-kubectl logs -n <operator-namespace> -l app=<operator> --tail=100
-
-# 查看 Operator 管理的 CR
-kubectl get <cr-type> -A
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+spec:
+  group: example.com
+  names:
+    kind: Database
+    plural: databases
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:  # Validation schema
 ```
 
-## 交叉引用
+CRD features:
+- **Schema validation**: OpenAPI v3 JSON schema validation
+- **Subresources**: `/status` and `/scale` endpoints
+- **Additional printer columns**: Custom `kubectl get` columns
+- **Multiple versions**: With conversion webhooks for cross-version migration
 
-- [Custom Resources](./custom-resources.md) — CRD 定义
-- [扩展 Kubernetes API](./extending-the-kubernetes-api.md) — API 扩展方式对比
-- [Admission Webhook](./admission-webhook-good-practices.md) — Webhook 作为 Operator 辅助
+## Operator Controller
 
-## 参考链接
+An Operator is a custom controller that manages CRD instances:
 
-- https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+1. **Watch** CRD changes via Informer
+2. **Reconcile**: Compare desired spec vs actual cluster state
+3. **Create/Update** dependent Kubernetes resources ([[Deployments|Deployments]], Services, PVCs, etc.)
+4. **Update Status** on the CRD instance
+
+Popular operators: [[Prometheus|Prometheus]] Operator, Elasticsearch Operator, MySQL Operator, [[ArgoCD|ArgoCD]].
+
+## Admission Webhooks
+
+Webhooks intercept API requests in two phases:
+
+| Type | Phase | Purpose | Example |
+|------|-------|---------|---------|
+| **Mutating** | Before validation | Modify requests | Istio sidecar injection, default values |
+| **Validating** | After validation | Reject non-compliant requests | OPA/Gatekeeper policies, Kyverno |
+
+Webhooks run as external HTTPS services registered with API Server. They must respond within the configured timeout or requests are rejected (or ignored for `failurePolicy: Ignore`).
+
+## API Aggregation
+
+The API aggregation layer allows running independent API Servers alongside the main kube-apiserver. Examples include metrics-server and custom metrics adapter. Requests are proxied through the main API Server.
 
 ## Related
+- [[synthesis/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[synthesis/CRD × 可观测性.md|CRD × 可观测性]] — 综合
 
+- [[synthesis/Operator 模式 × 可观测性]]
+
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[entities/argocd.md|argocd]] — ArgoCD
+- [[skills/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
+- [[entities/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
+- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[concepts/controller-pattern.md|Controller Pattern]]
+- [[concepts/declarative-api.md|Declarative API]]
+- [[entities/crd-custom-resources.md|CRD Custom Resources]]
+- Admission Webhooks
+- [[skills/develop-crd-operator.md|Develop CRD Operator]]
 - [[journal/digest-2026-05-21|Wiki Digest — Daily (2026-05-21)]] — Cross-reference
 - [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]] — Cross-reference
 - [[references/platform-engineering-terms|K8s 平台工程术语参考]] — Cross-reference
-- [[synthesis/Operator 模式 × Pod 生命周期|Operator 模式 × Pod 生命周期]] — Cross-reference
-- [[synthesis/etcd × Operator 模式|etcd × Operator 模式]] — Cross-reference
 - [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference
 - [[synthesis/声明式 API × 控制器模式|声明式 API × 控制器模式]] — Cross-reference
-- [[synthesis/CRD × 可观测性|CRD × 可观测性]] — Cross-reference
 - [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
-- [[skills/develop-crd-operator|Develop CRD Operator]] — Cross-reference
 - [[entities/kube-apiserver|kube-apiserver]] — Cross-reference
 - [[entities/metal3-io|Metal3]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

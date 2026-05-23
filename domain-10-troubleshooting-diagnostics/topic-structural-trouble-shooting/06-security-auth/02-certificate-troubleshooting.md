@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 证书故障排查指南
+title: Kubernetes 证书故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kubernetes 证书故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,18 +40,19 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes 证书故障排查指南
+title: [[Kubernetes|Kubernetes]] 证书故障排查指南
 description: '# Kubernetes 证书故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - gateway
@@ -822,13 +823,13 @@ kubectl certificate deny <csr>
 ### 相关文档
 
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]].md)
-- [kubelet 故障排查](../02-node-components/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
+- [etcd 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]].md)
 - [RBAC 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 

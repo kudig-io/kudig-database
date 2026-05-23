@@ -53,18 +53,19 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+# 混沌工程平台实践：LitmusChaos 与 [[Chaos Mesh|Chaos Mesh]]
 
 > **作者**: SRE 架构师 | **版本**: v1.0 | **更新时间**: 2026-05-18
-> **适用场景**: Kubernetes 混沌工程平台部署与演练 | **复杂度**: ⭐⭐⭐⭐⭐
+> **适用场景**: [[Kubernetes|Kubernetes]] 混沌工程平台部署与演练 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-混沌工程（Chaos Engineering）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入故障，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
+混沌工程（[[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]]）是在分布式系统上进行实验的学科，目的是建立对系统抵御生产环境中失控条件能力的信心。与传统的被动式灾备不同，混沌工程主动向系统注入故障，在受控条件下发现系统的潜在弱点，从而在真实灾难发生之前修复问题。本文档深入探讨两大主流混沌工程平台——LitmusChaos（CNCF Incubating）和 Chaos Mesh（CNCF Incubating）——的部署、配置、实验设计和企业级实践，以及如何通过稳态假设（Steady State Hypothesis）和 Game Day 活动构建持续韧性验证体系。
 
 #<!-- chunk: RPO 与 RTO 的混沌验证 -->## RPO 与 RTO 的混沌验证
 
@@ -733,7 +734,7 @@ kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 | 实验未生效 | namespace 未打标签 | 检查 `chaos-mesh.org/inject` 标签 | 给目标 namespace 打标签 |
 | 网络故障不生效 | containerd 配置问题 | 检查 Chaos Daemon 日志 | 确认 runtime 和 socket 路径 |
 | Pod Kill 不执行 | RBAC 权限不足 | 检查 ServiceAccount 权限 | 添加必要的 ClusterRole |
-| Dashboard 不可访问 | Service 未暴露 | 检查 Service 和 Ingress | 配置 port-forward 或 Ingress |
+| Dashboard 不可访问 | Service 未暴露 | 检查 Service 和 [[Ingress|Ingress]] | 配置 port-forward 或 Ingress |
 | 实验卡住不结束 | duration 配置错误 | 检查实验 spec | 手动删除 CR 资源 |
 | 稳态检查失败 | 指标采集延迟 | 检查 Prometheus 采集间隔 | 调整查询时间窗口 |
 
@@ -988,21 +989,21 @@ experiment_safety_policy:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
+- domain-30-disaster-recovery-business-continuity MOC
 - [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
+- Domain-30 灾备与业务连续性 — 开源项目索引
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- Kubernetes 备份与恢复深度实践
+- 应用级灾备架构：多区域部署与故障转移
+- Velero 企业级备份恢复实践指南
 
 ## See Also
 
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|06-rubrik-enterprise-disaster-recovery]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|07-kubernetes-backup-restore-deep-dive]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|09-application-level-disaster-recovery]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|99-velero-backup-recovery-guide]]
+- 06-rubrik-enterprise-disaster-recovery
+- 07-kubernetes-backup-restore-deep-dive
+- 09-application-level-disaster-recovery
+- 99-velero-backup-recovery-guide

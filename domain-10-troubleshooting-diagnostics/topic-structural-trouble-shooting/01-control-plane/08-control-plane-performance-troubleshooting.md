@@ -1,5 +1,5 @@
 ---
-title: 控制平面性能瓶颈分析与优化指南
+title: 控制平面性能瓶颈分析与优化指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面性能瓶颈分析与优化指南'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 控制平面性能瓶颈分析与优化指南
@@ -48,12 +49,12 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - job
 last_updated: 2026-05
 difficulty: advanced
@@ -661,8 +662,8 @@ mkdir -p "$LOG_DIR"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

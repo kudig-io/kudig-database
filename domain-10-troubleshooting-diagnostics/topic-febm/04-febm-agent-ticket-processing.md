@@ -1,5 +1,5 @@
 ---
-title: 第四章：FEBM 对云平台工单智能体托管的意义
+title: 第四章：FEBM 对云平台工单智能体托管的意义 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 第四章：FEBM 对云平台工单智能体托管的意义
@@ -53,11 +54,11 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- envoy
+- [[Jaeger|jaeger]]
+- [[Envoy|envoy]]
 - cilium
 last_updated: 2026-05
 difficulty: expert

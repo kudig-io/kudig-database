@@ -46,6 +46,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # GitLab Container Registry Enterprise 深度实践
@@ -946,20 +947,20 @@ cdn_configuration:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-13-container-runtime/MOC.md|domain-22-container-image-management MOC]]
+- domain-22-container-image-management KUDIG Database — Global MOC
 - [[domain-13-container-runtime/README.md|Domain 22: 容器镜像管理 (Container Image Management)]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|Domain-22 容器镜像管理 — 开源项目索引]]
-- [[domain-13-container-runtime/01-harbor-enterprise-image-registry.md|Harbor企业级容器镜像仓库深度实践]]
-- [[domain-13-container-runtime/02-docker-registry-enterprise-distribution.md|Docker Registry企业级镜像分发深度实践]]
-- [[domain-13-container-runtime/03-jfrog-artifactory-enterprise.md|JFrog Artifactory Enterprise Container Registry Platform]]
-- [[domain-13-container-runtime/04-harbor-enterprise-security-scanning.md|Harbor企业级镜像安全扫描深度实践]]
-- [[domain-13-container-runtime/04-quay-enterprise-registry.md|Quay Container Registry 企业级镜像管理深度实践]]
-- [[domain-13-container-runtime/06-amazon-ecr-enterprise.md|Amazon ECR (Elastic Container Registry) Enterprise 深度实践]]
-- [[domain-13-container-runtime/99-harbor-enterprise-guide.md|Harbor 企业级镜像仓库部署指南]]
+- Domain-22 容器镜像管理 — 开源项目索引
+- Harbor企业级容器镜像仓库深度实践
+- Docker Registry企业级镜像分发深度实践
+- JFrog Artifactory Enterprise Container Registry Platform
+- Harbor企业级镜像安全扫描深度实践
+- Quay Container Registry 企业级镜像管理深度实践
+- Amazon ECR (Elastic Container Registry) Enterprise 深度实践
+- Harbor 企业级镜像仓库部署指南
 
 ## See Also
 
-- [[domain-13-container-runtime/04-harbor-enterprise-security-scanning.md|04-harbor-enterprise-security-scanning]]
-- [[domain-13-container-runtime/04-quay-enterprise-registry.md|04-quay-enterprise-registry]]
-- [[domain-13-container-runtime/06-amazon-ecr-enterprise.md|06-amazon-ecr-enterprise]]
-- [[domain-13-container-runtime/99-harbor-enterprise-guide.md|99-harbor-enterprise-guide]]
+- 04-harbor-enterprise-security-scanning
+- 04-quay-enterprise-registry
+- 06-amazon-ecr-enterprise
+- 99-harbor-enterprise-guide

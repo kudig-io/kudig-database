@@ -57,9 +57,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
-# Kubeflow AI 平台部署与实践指南
+# [[Kubeflow|Kubeflow]] AI 平台部署与实践指南
 
 > **适用版本**: Kubeflow v1.10.0  
 > **最后更新**: 2026-04-24  
@@ -76,7 +77,7 @@ cross_refs:
 - [四、Pipelines 工作流编排](#四pipelines-工作流编排)
 - [五、Katib 超参数调优](#五katib-超参数调优)
 - [六、Training Operator 分布式训练](#六training-operator-分布式训练)
-- [七、KServe 模型服务集成](#七kserve-模型服务集成)
+- [七、[[KServe|KServe]] 模型服务集成](#七kserve-模型服务集成)
 - [八、多租户与隔离](#八多租户与隔离)
 - [九、生产环境 checklist](#九生产环境-checklist)
 
@@ -138,7 +139,7 @@ kustomize build apps/training-operator/upstream | kubectl apply -f -
 |:---|:---|
 | K8s 版本 | v1.29+ |
 | Storage | 默认 StorageClass (PVC) |
-| Ingress | Istio / NGINX / 云厂商 LB |
+| [[Ingress|Ingress]] | Istio / NGINX / 云厂商 LB |
 | GPU (可选) | NVIDIA GPU Operator 预装 |
 | 资源 | 至少 8C16G 控制平面节点 |
 
@@ -416,25 +417,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/36-ai-platform-observability-enhanced.md|36-ai-platform-observability-enhanced]]
-- [[domain-14-ai-ml-infra/37-agent-sandbox-security.md|37-agent-sandbox-security]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|01-ai-infrastructure-overview]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|02-ai-ml-workloads]]
+- 36-ai-platform-observability-enhanced
+- 37-agent-sandbox-security
+- 01-ai-infrastructure-overview
+- 02-ai-ml-workloads
 
 ## Related
 

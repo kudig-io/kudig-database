@@ -41,6 +41,7 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -52,10 +53,10 @@ tags:
 - troubleshooting
 - debugging
 - fault-analysis
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
 - coredns
 last_updated: 2026-05
@@ -226,6 +227,6 @@ tier: peripheral---
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-06-observability

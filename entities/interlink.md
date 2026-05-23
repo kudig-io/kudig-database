@@ -1,5 +1,5 @@
 ---
-title: InterLink
+title: InterLink (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # InterLink
@@ -33,7 +34,7 @@ prerequisites:
 
 ## 概述
 
-InterLink 是一个 Virtual Kubelet 提供者实现，允许将 Kubernetes Pod 调度到远程 HPC（高性能计算）和云计算基础设施上执行。它通过标准的 Kubernetes API 将传统 HPC 集群（Slurm、HTCondor）和云计算平台作为 Kubernetes 的扩展计算资源，使科研人员和工程师能够使用熟悉的 Kubernetes 工作流提交和管理 H...
+InterLink 是一个 [[Virtual Kubelet|Virtual Kubelet]]et|Kubelet]] 提供者实现，允许将 Kubernetes Pod 调度到远程 HPC（高性能计算）和云计算基础设施上执行。它通过标准的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 将传统 HPC 集群（Slurm、HTCondor）和云计算平台作为 Kubernetes 的扩展计算资源，使科研人员和工程师能够使用熟悉的 Kubernetes 工作流提交和管理 H...
 
 ## 核心能力
 
@@ -69,7 +70,7 @@ InterLink 是一个 Virtual Kubelet 提供者实现，允许将 Kubernetes Pod �
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[virtual-kubelet]] — Virtual Kubelet
 
-- [[domain-19-landscape-references/sandbox/interlink/interlink.md|interlink]]
+- interlink
 - [[entities/akri.md|Akri]]
 - [[entities/openyurt.md|OpenYurt]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

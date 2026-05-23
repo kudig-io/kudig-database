@@ -33,6 +33,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # 可观测性体系

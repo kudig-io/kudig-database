@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Terway 产品概览
@@ -67,13 +68,13 @@ Terway 深度依赖以下阿里云基础设施和服务：
 
 ## 与 K8s 网络模型的关系
 
-Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 [[concepts/cilium-ebpf-networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
+Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
 
 ## 生产部署建议
 
 - 建议在生产环境中使用 ENI 多 IP 模式以提高 IP 利用率 ^[inferred]
 - 密切监控 ENI 资源使用情况，避免 IP 耗尽 ^[inferred]
-- 配合 NetworkPolicy 实现 Pod 间访问控制 ^[inferred]
+- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制 ^[inferred]
 
 ## 参考链接
 
@@ -84,7 +85,7 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 
 ## Related
 
-- [[connect-rpc]] — Connect RPC
+- [[connect-rpc]] — [[Connect RPC|Connect RPC]]
 - [[antrea]] — Antrea
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
@@ -97,4 +98,4 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[46-terway-performance-tuning]]
 - [[45-terway-testing-validation]]
 - [[47-terway-troubleshooting-fta]]
-- [[domain-03-networking-traffic/40-terway-product-overview.md|40-terway-product-overview]]
+- 40-terway-product-overview

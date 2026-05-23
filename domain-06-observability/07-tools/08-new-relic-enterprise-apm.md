@@ -53,6 +53,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
 # New Relic Enterprise APM Platform 深度实践
@@ -1000,25 +1001,25 @@ const optimizedDashboard = {
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
+- observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
 - [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[domain-06-observability/01-prometheus-enterprise-monitoring.md|Prometheus企业级监控系统深度实践]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|Grafana Enterprise Observability Platform 深度实践]]
-- [[domain-06-observability/03-opentelemetry-distributed-tracing.md|OpenTelemetry分布式追踪与可观测性深度实践]]
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation and Long-term Storage]]
-- [[domain-06-observability/05-datadog-enterprise-apm.md|Datadog企业级APM深度实践]]
-- [[domain-06-observability/05-datadog-enterprise-monitoring.md|Datadog 企业级监控平台深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-logging.md|Elastic Stack企业级日志分析深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-observability.md|Elastic Stack企业级可观测性平台深度实践]]
-- [[domain-06-observability/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring Platform 深度实践]]
+- Prometheus企业级监控系统深度实践
+- Grafana Enterprise Observability Platform 深度实践
+- OpenTelemetry分布式追踪与可观测性深度实践
+- Thanos Enterprise Metrics Federation and Long-term Storage
+- Datadog企业级APM深度实践
+- Datadog 企业级监控平台深度实践
+- Elastic Stack企业级日志分析深度实践
+- Elastic Stack企业级可观测性平台深度实践
+- Zabbix Enterprise Monitoring Platform 深度实践
 
 ## See Also
 
-- [[domain-06-observability/06-elastic-stack-enterprise-observability.md|06-elastic-stack-enterprise-observability]]
-- [[domain-06-observability/07-zabbix-enterprise-monitoring.md|07-zabbix-enterprise-monitoring]]
-- [[domain-06-observability/99-distributed-tracing-guide.md|99-distributed-tracing-guide]]
-- [[domain-06-observability/99-prometheus-enterprise-guide.md|99-prometheus-enterprise-guide]]
+- 06-elastic-stack-enterprise-observability
+- 07-zabbix-enterprise-monitoring
+- 99-distributed-tracing-guide
+- 99-prometheus-enterprise-guide
 
 - [[domain-06-observability/README.md|返回目录]]
 

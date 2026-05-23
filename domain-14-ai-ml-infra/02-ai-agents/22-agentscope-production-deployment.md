@@ -1,5 +1,5 @@
 ---
-title: AgentScope 生产部署与可观测性
+title: AgentScope 生产部署与可观测性 (domain-14-ai-ml-infra)
 description: 'title: AgentScope 生产部署与可观测性'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 生产部署与可观测性
@@ -48,9 +49,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
+- [[Jaeger|jaeger]]
 - docker
 - opa
 last_updated: 2026-05
@@ -82,7 +83,7 @@ k8s_versions:
 
 # AgentScope 生产部署与可观测性
 
-> **文档类型**: 生产部署专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Runtime, AgentApp, 生产部署, Docker, Kubernetes, Serverless, Sandbox, AgentScope Studio, OpenTelemetry, Tracing, 可观测性, AaaS, Agent-as-a-Service
+> **文档类型**: 生产部署专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Runtime, AgentApp, 生产部署, Docker, [[Kubernetes|Kubernetes]], Serverless, Sandbox, AgentScope Studio, OpenTelemetry, Tracing, 可观测性, AaaS, Agent-as-a-Service
 
 ---
 
@@ -951,9 +952,9 @@ kubectl get hpa -n agent-system
 
 | 文档 | 关联内容 |
 |------|---------|
-| [16 - 概述与安装](./[[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]].md) | AgentScope 基础安装 |
-| [19 - 记忆管理](./[[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]].md) | Session 持久化详解 |
-| [21 - 高级特性](./[[domain-14-ai-ml-infra/21-agentscope-advanced-features.md|21-agentscope-advanced-features]].md) | 评测、Hooks、A2A |
+| [16 - 概述与安装](./16-agentscope-overview-installation.md) | AgentScope 基础安装 |
+| [19 - 记忆管理](./19-agentscope-memory-context.md) | Session 持久化详解 |
+| [21 - 高级特性](./21-agentscope-advanced-features.md) | 评测、Hooks、A2A |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | K8s Agent 服务通用部署 |
 | [domain-20-enterprise-monitoring-alerting](../domain-06-observability/) | 监控告警体系 |
 
@@ -965,7 +966,7 @@ kubectl get hpa -n agent-system
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -980,11 +981,11 @@ kubectl get hpa -n agent-system
 
 ## Related
 
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
+- 40-agent-harness-production-maturity
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/21-agentscope-advanced-features.md|21-agentscope-advanced-features]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/24-agent-cli-tools-comparison.md|24-agent-cli-tools-comparison]]
+- 20-agentscope-multi-agent-orchestration
+- 21-agentscope-advanced-features
+- 23-agent-cli-fundamentals
+- 24-agent-cli-tools-comparison

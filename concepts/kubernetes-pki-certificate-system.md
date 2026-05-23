@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes PKI 证书体系
@@ -47,7 +48,7 @@ Kubernetes 集群的认证与授权体系高度依赖 PKI（公钥基础设施�
 | 证书 | 用途 |
 |------|------|
 | `apiserver.crt` | API Server 服务端证书 |
-| `apiserver-kubelet-client.crt` | API Server 连接 kubelet 的客户端证书 |
+| `apiserver-kubelet-client.crt` | API Server 连接 [[kubelet|kubelet]] 的客户端证书 |
 | `admin.conf` | 管理员 kubeconfig（嵌入 client certificate） |
 | `controller-manager.conf` | Controller Manager kubeconfig |
 | `scheduler.conf` | Scheduler kubeconfig |
@@ -192,15 +193,15 @@ sudo ntpdate -u pool.ntp.org
 
 ## 相关概念
 
-- [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
+- [[skills/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
 - [[concepts/security-defense-depth.md|安全纵深防御]]
 - [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
 - [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 
 ## Related
 
-- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
+- [[concepts/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

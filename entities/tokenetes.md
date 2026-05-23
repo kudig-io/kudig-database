@@ -1,5 +1,5 @@
 ---
-title: Tokenetes
+title: Tokenetes (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Tokenetes
@@ -34,7 +35,7 @@ prerequisites:
 
 ## 概述
 
-Tokenetes（也称为 Vault CRD Operator）是一个 Kubernetes Operator，用于将 HashiCorp Vault 中的密钥自动同步到 Kubernetes Secrets。它通过自定义资源 (CRD) 简化了 Vault 与 Kubernetes 的集成，支持多种认证方式和密钥类型，让开发者能够以声明式方式管理敏感数据。
+Tokenetes（也称为 Vault CRD Operator）是一个 Kubernetes Operator，用于将 HashiCorp Vault 中的密钥自动同步到 Kubernetes [[Secrets|Secrets]]。它通过自定义资源 (CRD) 简化了 Vault 与 Kubernetes 的集成，支持多种认证方式和密钥类型，让开发者能够以声明式方式管理敏感数据。
 
 ## 核心能力
 
@@ -64,11 +65,11 @@ Tokenetes（也称为 Vault CRD Operator）是一个 Kubernetes Operator，用�
 
 - [[kuma]] — Kuma
 - [[kuberhealthy]] — Kuberhealthy
-- [[entities/trivy.md|trivy]] — Trivy
+- [[entities/trivy.md|[[Trivy|trivy]]]] — Trivy
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/tokenetes/tokenetes.md|tokenetes]]
+- tokenetes
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

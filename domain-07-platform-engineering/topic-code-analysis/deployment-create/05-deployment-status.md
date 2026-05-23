@@ -1,5 +1,5 @@
 ---
-title: Deployment Status 计算逻辑
+title: Deployment Status 计算逻辑 (topic-code-analysis)
 description: '## 概述'
 category: general
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 title: Deployment Status 计算逻辑

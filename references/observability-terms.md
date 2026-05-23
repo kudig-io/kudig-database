@@ -30,6 +30,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # K8s 可观测性术语参考

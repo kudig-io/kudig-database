@@ -1,5 +1,5 @@
 ---
-title: Scheduler 故障排查指南
+title: Scheduler 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Scheduler 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Scheduler 故障排查指南
@@ -51,10 +52,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - hpa
 - vpa
@@ -1355,8 +1356,8 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

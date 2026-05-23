@@ -1,5 +1,5 @@
 ---
-title: Spin
+title: Spin (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # Spin
@@ -61,7 +62,7 @@ Spin 是由 Fermyon 开发的 WebAssembly (Wasm) 微服务框架，用于构建�
 ## 参考链接
 
 - [[containerd]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[operator-pattern]]
 
 ## Related
@@ -72,5 +73,5 @@ Spin 是由 Fermyon 开发的 WebAssembly (Wasm) 微服务框架，用于构建�
 - [[04-containerd-upgrade-migration]] — containerd 升级迁移
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-15-specialized-tech/03-spinkube-framework.md|03-spinkube-framework]]
+- 03-spinkube-framework
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

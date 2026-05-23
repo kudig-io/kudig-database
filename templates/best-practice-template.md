@@ -19,6 +19,7 @@ trigger_keywords:
 - 最佳实践
 - 模板
 - 标准
+created: "2026-05-23"
 ---
 
 # 最佳实践模板
@@ -122,7 +123,7 @@ else
 fi
 
 # 检查2: 服务验证
-if systemctl is-active --quiet [[entities/service|service]]-name; then
+if systemctl is-active --quiet service-name; then
     echo "✓ 服务运行正常"
 else
     echo "✗ 服务未运行"

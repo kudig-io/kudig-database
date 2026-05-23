@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 升级迁移
@@ -76,8 +77,8 @@ graph TD
 
 ## 相关文档
 
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md]]
-- [[domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md]]
+- domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
+- domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md
 - [[domain-08-release-change-management/topic-migration/README.md]]
 
 
@@ -104,6 +105,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07-upgrade-paths-strategy]]
+- 07-upgrade-paths-strategy

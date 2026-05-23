@@ -1,4 +1,33 @@
 ---
+title: 智慧水务架构设计 — 阿里云视角
+description: 'title: 智慧水务架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 智慧水务架构设计 — 阿里云视角 是什么
+- 如何 智慧水务架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧水务架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: 智慧水务架构设计
 description: '# 智慧水务架构设计 — 阿里云视角'
 category: application-architecture
@@ -7,7 +36,7 @@ tags:
 - architecture
 - industry
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-05-18
 difficulty: intermediate
 reading_level: intermediate
@@ -18,7 +47,7 @@ audience:
 - 阿里云 IoT 解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 智慧水务 Kubernetes 部署架构
+- 智慧水务 [[Kubernetes|Kubernetes]] 部署架构
 - 水务管网监测 IoT 数据处理
 - 爆管预警水力模型计算
 - DMA 分区漏损监测
@@ -34,9 +63,6 @@ trigger_keywords:
 - 水质监测
 - DMA分区
 - 智慧水务平台
-prerequisites:
-- kubectl-basics
-- prometheus-basics
 related_domains:
 - domain-5-edge-computing
 - domain-12-observability-comprehensive
@@ -45,6 +71,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/15-energy-power-architecture
 - domain-20-application-patterns/topic-application-architecture/72-digital-twin-city
 - domain-20-application-patterns/topic-application-architecture/39-smart-campus
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧水务架构设计 — 阿里云视角
@@ -296,6 +331,30 @@ flowchart LR
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 50-unmanned-retail
+- 51-smart-manufacturing-mes
+- 53-new-retail-dtc
+- 54-social-gaming-metaverse
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

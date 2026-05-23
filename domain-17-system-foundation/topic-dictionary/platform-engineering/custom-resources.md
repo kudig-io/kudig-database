@@ -29,17 +29,18 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 自定义资源
 
 ## 概述
 
-自定义资源（Custom Resources）是 Kubernetes API 的扩展，允许用户在不修改 Kubernetes 核心代码的情况下，为集群添加新的资源类型。自定义资源可以通过动态注册在运行的集群中出现或消失，安装后用户可以像操作内置资源（如 Pod）一样使用 `kubectl` 来创建和访问它们。
+自定义资源（Custom Resources）是 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的扩展，允许用户在不修改 Kubernetes 核心代码的情况下，为集群添加新的资源类型。自定义资源可以通过动态注册在运行的集群中出现或消失，安装后用户可以像操作内置资源（如 Pod）一样使用 `kubectl` 来创建和访问它们。
 
 ## 核心概念/原理
 
-- **资源（Resource）**：Kubernetes API 中的一个端点，存储特定类型的 API 对象集合（例如内置的 pods 资源存储 Pod 对象集合）。
+- **资源（Resource）**：Kubernetes API 中的一个端点，存储特定类型的 API 对象集合（例如内置的 [[Pods|pods]] 资源存储 Pod 对象集合）。
 - **自定义资源（Custom Resource）**：默认 Kubernetes 安装中不一定可用的 API 扩展，代表对特定 Kubernetes 安装的定制。如今，许多核心 Kubernetes 功能也是基于自定义资源构建的，使 Kubernetes 更加模块化。
 - **自定义控制器（Custom Controller）**：单独使用自定义资源只能存储和检索结构化数据；当与自定义控制器结合时，自定义资源提供了真正的声明式 API。控制器负责将当前状态与声明的期望状态保持同步。
 - **Operator 模式**：将自定义资源与自定义控制器相结合，用于将特定应用的领域知识编码到 Kubernetes API 扩展中。

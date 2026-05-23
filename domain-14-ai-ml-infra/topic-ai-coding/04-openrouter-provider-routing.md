@@ -26,6 +26,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 智能路由与 Provider 选择

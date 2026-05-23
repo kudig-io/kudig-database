@@ -1,5 +1,5 @@
 ---
-title: 证书格式与编码详解
+title: 证书格式与编码详解 (topic-code-analysis)
 description: 'title: 证书格式与编码详解'
 category: general
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 证书格式与编码详解

@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 项目报告 (Reports)
@@ -108,8 +109,8 @@ reports/
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-23|domain-23-gitops-ci-cd MOC]] — Cross-reference
-- [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/learn-decision-tree-mermaid|问题排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/skill-22-daemonset-failure|DaemonSet 问题诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-30|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference

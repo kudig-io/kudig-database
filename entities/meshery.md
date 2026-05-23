@@ -1,5 +1,5 @@
 ---
-title: Meshery
+title: Meshery (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Meshery
@@ -78,6 +79,6 @@ Meshery 是云原生管理平面，提供服务网格和云原生基础设施的
 - [[linkerd]] — Linkerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/meshery/meshery.md|meshery]]
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- meshery
+- [[entities/cncf-networking|[[CNCF 网络与服务网格项目全景|CNCF 网络与服务网格项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,5 +1,5 @@
 ---
-title: Dragonfly
+title: Dragonfly (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Dragonfly
@@ -63,12 +64,12 @@ description: '## 项目概述'
 
 ## Related
 
-- [[serverless-workflow]] — Serverless Workflow
+- [[serverless-workflow]] — [[Serverless Workflow|Serverless Workflow]]
 - [[cloudnativepg]] — CloudNativePG
 - [[strimzi]] — Strimzi
 - [[hwameistor]] — HwameiStor
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/dragonfly/dragonfly.md|dragonfly]]
+- dragonfly
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

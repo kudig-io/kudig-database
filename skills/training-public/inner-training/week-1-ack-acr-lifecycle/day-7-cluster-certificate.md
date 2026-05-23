@@ -35,6 +35,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,10 +43,10 @@ title: Day 7: K8S 集群证书
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - Kubernetes certificate system CA API Server etcd
+  - [[Kubernetes|Kubernetes]] certificate system CA API Server [[etcd|etcd]]
   - ACK kubeconfig certificate renewal
   - Kubernetes certificate expiration troubleshooting
-  - kubelet TLS Bootstrap
+  - [[kubelet|kubelet]] TLS Bootstrap
   - Certificate renewal certrenew API
 trigger_keywords:
   - certificate

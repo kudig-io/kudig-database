@@ -57,19 +57,20 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 76 - CNI插件深度对比
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
 <!-- chunk: CNI插件功能对比 -->
 ## CNI插件功能对比
 
-| 功能 | Calico | Cilium | Flannel | Terway(ACK) | Antrea |
+| 功能 | Calico | [[Cilium|Cilium]] | Flannel | Terway(ACK) | [[Antrea|Antrea]] |
 |-----|--------|--------|---------|-------------|--------|
 | **网络模式** | VXLAN/IPIP/BGP | VXLAN/Native | VXLAN/host-gw | VPC/ENIIP | VXLAN/Geneve |
-| **NetworkPolicy** | ✅ 完整 | ✅ 完整+L7 | ❌ | ✅ 完整 | ✅ 完整 |
+| **[[NetworkPolicy|NetworkPolicy]]** | ✅ 完整 | ✅ 完整+L7 | ❌ | ✅ 完整 | ✅ 完整 |
 | **eBPF数据面** | ✅ (可选) | ✅ (原生) | ❌ | ✅ | ❌ |
 | **服务网格** | ❌ | ✅ (Cilium Mesh) | ❌ | ASM集成 | ❌ |
 | **带宽限制** | ✅ | ✅ | ❌ | ✅ | ✅ |
@@ -290,25 +291,25 @@ iptables -t filter -L -n -v
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|Flannel 多集群场景与子网冲突处理]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|01-network-architecture-overview]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|02-cni-architecture-fundamentals]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|04-flannel-complete-guide]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|04a-flannel-wireguard-backend]]
+- 01-network-architecture-overview
+- 02-cni-architecture-fundamentals
+- 04-flannel-complete-guide
+- 04a-flannel-wireguard-backend
 
 ## Related
 

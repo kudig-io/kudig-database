@@ -41,11 +41,12 @@ prerequisites:
 - policy-basics
 - backup-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # 09 - 云原生安全专家指南
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 ---
 
@@ -64,7 +65,7 @@ prerequisites:
 |------|------|------|
 | **L1 身份与访问** | 认证、授权、RBAC、ServiceAccount | §1 零信任 |
 | **L2 镜像与容器** | 镜像扫描、运行时安全、securityContext | §2 容器安全 |
-| **L3 网络** | NetworkPolicy、mTLS、Service Mesh | §1 + §5 |
+| **L3 网络** | [[NetworkPolicy|NetworkPolicy]]、mTLS、Service Mesh | §1 + §5 |
 | **L4 数据** | Secret加密、etcd加密、备份安全 | §4 + §5 |
 | **L5 合规** | CIS Benchmark、PCI DSS、SOC2 | §3 合规自动化 |
 | **L6 检测响应** | 审计日志、异常检测、事件响应 | §4 威胁检测 |

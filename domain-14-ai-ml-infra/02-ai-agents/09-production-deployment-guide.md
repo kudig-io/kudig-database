@@ -1,5 +1,5 @@
 ---
-title: 生产部署指南：K8s 上运行 Agent 服务
+title: 生产部署指南：K8s 上运行 Agent 服务 (domain-14-ai-ml-infra)
 description: 'title: 生产部署指南：K8s 上运行 Agent 服务'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 生产部署指南：K8s 上运行 Agent 服务
@@ -48,8 +49,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- istio
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - redis
 - postgresql
 - hpa
@@ -90,7 +91,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-将 Agent 服务部署到 Kubernetes 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
+将 Agent 服务部署到 [[Kubernetes|Kubernetes]] 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
 
 ---
 
@@ -1008,7 +1009,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 | 文档 | 关联内容 |
 |------|---------|
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 多 Worker Pod 的协同 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | Prometheus 指标和 Langfuse |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | Prometheus 指标和 Langfuse |
 | [11 - 成本优化](./11-cost-latency-optimization.md) | 资源配额和成本控制 |
 | [domain-14-ai-ml-infra/17-llm-inference-serving.md](../domain-14-ai-ml-infra/17-llm-inference-serving.md) | vLLM/TGI 推理服务详情 |
 | [domain-02-workloads-applications](../domain-02-workloads-applications/) | K8s Deployment 最佳实践 |
@@ -1022,7 +1023,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1037,12 +1038,12 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 
 ## Related
 
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]]
-- [[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
+- 07-memory-context-management
+- 08-agent-evaluation-observability
+- 10-security-guardrails
+- 11-cost-latency-optimization

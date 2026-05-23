@@ -22,9 +22,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 对象管理
+# [[Kubernetes|Kubernetes]] 对象管理
 
 ## 概述
 
@@ -55,7 +56,7 @@ Kubernetes 对象管理主要有三种技术：
 
 `kubectl` 指定操作（create、replace 等）、可选标志和至少一个文件名。文件必须包含 YAML 或 JSON 格式的完整对象定义。
 
-**警告**：`kubectl replace` 会用新提供的规范替换现有规范，丢弃配置文件中缺失的所有更改。不适用于其规范独立于配置文件更新的资源类型（如 `LoadBalancer` 类型的 Service）。
+**警告**：`kubectl replace` 会用新提供的规范替换现有规范，丢弃配置文件中缺失的所有更改。不适用于其规范独立于配置文件更新的资源类型（如 `LoadBalancer` 类型的 [[Service|Service]]）。
 
 - **优点**：可存储在版本控制系统中，可与变更审查和审计集成，提供创建新对象的模板。
 - **缺点**：需要对对象模式有基本了解，需要额外编写 YAML 文件的步骤。
@@ -87,4 +88,4 @@ Kubernetes 对象管理主要有三种技术：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

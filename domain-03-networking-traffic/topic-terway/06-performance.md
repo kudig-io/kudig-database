@@ -35,6 +35,7 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # 06 - Terway 性能调优 (Performance Tuning)
@@ -64,7 +65,7 @@ prerequisites:
 | Pod 密度 | 最高 | 最低 | 高 | 高 |
 | 配置复杂度 | 低 | 低 | 低 | 中 |
 | 内核要求 | 任意 | 任意 | 任意 | 4.19+ |
-| NetworkPolicy | iptables | eBPF/iptables | eBPF/iptables | eBPF |
+| [[NetworkPolicy|NetworkPolicy]] | iptables | eBPF/iptables | eBPF/iptables | eBPF |
 | 网络开销 | veth + 路由 | 无 | veth | 无 |
 | 推荐度 | 兼容场景 | 极致性能 | **首选** | 高性能 |
 
@@ -131,7 +132,7 @@ ethtool -L eth0 combined 8
 
 ### 3.2 内核网络参数
 
-通过 init container 或 DaemonSet 在节点上持久化以下参数:
+通过 init container 或 [[DaemonSet|DaemonSet]] 在节点上持久化以下参数:
 
 ```bash
 sysctl -w net.core.somaxconn=65535
@@ -237,7 +238,7 @@ systemctl enable irqbalance
 systemctl start irqbalance
 ```
 
-Kubernetes NUMA 感知调度 (需要开启 Topology Manager):
+[[Kubernetes|Kubernetes]] NUMA 感知调度 (需要开启 Topology Manager):
 
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1

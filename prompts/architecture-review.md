@@ -21,6 +21,7 @@ trigger_keywords:
 - 模板
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 架构咨询 Prompt 模板

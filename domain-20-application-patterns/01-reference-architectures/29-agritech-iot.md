@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 农业物联网架构设计
@@ -39,7 +40,7 @@ tags:
 - architecture
 - industry
 - mysql
-- daemonset
+- [[DaemonSet|daemonset]]
 - gateway
 - operator
 - agent
@@ -66,7 +67,7 @@ trigger_keywords:
 - 边缘网关
 - 精准灌溉
 - 溯源
-- KubeEdge
+- [[KubeEdge|KubeEdge]]
 - 无人机植保
 - 农业大数据
 related_domains:
@@ -335,7 +336,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -350,7 +351,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/27-hospitality-tourism.md|27-hospitality-tourism]]
-- [[domain-20-application-patterns/28-proptech.md|28-proptech]]
-- [[domain-20-application-patterns/30-hrtech-saas.md|30-hrtech-saas]]
-- [[domain-20-application-patterns/31-instant-retail.md|31-instant-retail]]
+- 27-hospitality-tourism
+- 28-proptech
+- 30-hrtech-saas
+- 31-instant-retail

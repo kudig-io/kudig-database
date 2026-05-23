@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # BFE
@@ -35,7 +36,7 @@ prerequisites:
 
 ## 概述
 
-BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百度内部每天数万亿级别的请求。它提供高级流量路由、安全防护、可观测性等能力，支持 HTTP/HTTPS/HTTP2/QUIC 等协议，适合作为 Kubernetes Ingress Controller 或独立的流量网关。
+BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百度内部每天数万亿级别的请求。它提供高级流量路由、安全防护、可观测性等能力，支持 HTTP/HTTPS/HTTP2/QUIC 等协议，适合作为 Kubernetes [[Ingress|Ingress]] Controller 或独立的流量网关。
 
 ## 核心能力
 
@@ -70,5 +71,5 @@ BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/bfe/bfe.md|bfe]]
+- bfe
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference

@@ -1,420 +1,349 @@
 ---
-title: K8s 命令速查表
-description: 'kubectl config view                           # 查看 kubeconfig 配置'
+title: ACK/ACR/K8S 命令速查表
+description: '**适用场景**: 日常运维快速参考 | **更新日期**: 2024'
 category: learning
 tags:
 - k8s
 - training
 - hands-on
-- kubelet
-- docker
-- hpa
 - statefulset
 - daemonset
-- job
-- cronjob
+- ingress
+- rbac
+- rag
 last_updated: 2026-05-18
 difficulty: beginner
 reading_level: beginner
 audience:
-- beginner-devops
-- developer
-- platform-engineer
+- All kudig-database users
+- ACK operators
+- DevOps engineers
 estimated_read_time: 5min
 intent_queries:
-- kubectl 常用命令速查
-- kubernetes 命令大全
-- kubectl cheatsheet 常用操作
-- k8s 日常运维命令
+- kubectl commands reference cheat sheet
+- aliyun cs CLI commands quick reference
+- Kubernetes日常运维命令
+- ACK API commands cheat sheet
+- kubectl node pod service management
 trigger_keywords:
 - kubectl
-- 命令速查
-- cheatsheet
-- 常用命令
-- 运维
-- Pod操作
-- Deployment
-- Service
-- Namespace
-- 资源管理
+- aliyun
+- commands
+- cheat sheet
+- quick reference
+- CLI
+- API
+- node
+- pod
+- service
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 related_domains:
+- domain-12-cloud-providers
 - domain-01-cluster-fundamentals
-- domain-10-troubleshooting-diagnostics
 related_topics:
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/knowledge-map
+- knowledge-map
+- reading-sequence
+created: "2026-05-23"
 ---
 
-# K8s 命令速查表
+# ACK/ACR/K8S 命令速查表
 
-常用 kubectl 命令快速参考，按使用场景分类整理。
+> **适用场景**: 日常运维快速参考 | **更新日期**: 2024
 
 ---
 
-## 集群信息
+## 一、aliyun CLI — ACK 集群管理
+
+### 集群操作
 
 ```bash
-# 集群基本信息
-kubectl cluster-info                          # 显示集群 API 地址
-kubectl version                               # 客户端和服务端版本
-kubectl config view                           # 查看 kubeconfig 配置
-kubectl config current-context                # 当前上下文
-kubectl config get-contexts                   # 所有上下文列表
+# 查看集群列表
+aliyun cs GET /clusters
 
-# 切换集群/上下文
-kubectl config use-context <context-name>     # 切换上下文
-kubectl config set-context --current --namespace=<ns>  # 切换默认 namespace
+# 查看集群详情
+aliyun cs GET /clusters/<cluster_id>
 
-# 节点信息
-kubectl get nodes                             # 节点列表
-kubectl get nodes -o wide                     # 节点详情 (IP/OS/内核)
-kubectl describe node <node-name>             # 节点完整信息
-kubectl top nodes                             # 节点资源使用率
+# 创建集群
+aliyun cs POST /clusters --body '{ ... }'
 
-# 节点标签和污点
-kubectl get nodes --show-labels               # 查看所有标签
-kubectl label node <name> key=value           # 添加标签
-kubectl label node <name> key-                # 删除标签
-kubectl describe node <name> | grep Taints    # 查看污点
-kubectl taint node <name> key=value:NoSchedule  # 添加污点
-kubectl taint node <name> key:NoSchedule-     # 删除污点
+# 删除集群
+aliyun cs DELETE /clusters/<cluster_id>
+
+# 获取 kubeconfig
+aliyun cs GET /k8s/<cluster_id>/user_config
+
+# 查看集群升级状态
+aliyun cs GET /clusters/<cluster_id>/upgradestatus
+
+# 升级集群
+aliyun cs POST /clusters/<cluster_id>/upgrade --body '{"version": "<ver>"}'
+```
+
+### 节点池操作
+
+```bash
+# 查看节点池列表
+aliyun cs GET /clusters/<cluster_id>/nodepools
+
+# 查看节点池详情
+aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id>
+
+# 创建节点池
+aliyun cs POST /clusters/<cluster_id>/nodepools --body '{ ... }'
+
+# 更新节点池
+aliyun cs PUT /clusters/<cluster_id>/nodepools/<nodepool_id> --body '{ ... }'
+
+# 删除节点池
+aliyun cs DELETE /clusters/<cluster_id>/nodepools/<nodepool_id>
+
+# 扩容节点池
+aliyun cs POST /clusters/<cluster_id>/nodepools/<nodepool_id> --body '{"count": N}'
+
+# 移除节点
+aliyun cs DELETE /clusters/<cluster_id>/nodepools/<nodepool_id>/nodes \
+  --body '{"nodes":["<node-id>"],"release_node":true,"drain_node":true}'
+```
+
+### 权限管理
+
+```bash
+# 授权 RAM 用户
+aliyun cs POST /clusters/<cluster_id>/grant_permissions --body '{ ... }'
+
+# 查看用户权限
+aliyun cs GET /clusters/<cluster_id>/grant_permissions
+```
+
+### 组件管理
+
+```bash
+# 查看集群组件
+aliyun cs GET /clusters/<cluster_id>/components
+
+# 升级组件
+aliyun cs POST /clusters/<cluster_id>/components/<name>/upgrade
 ```
 
 ---
 
-## Pod 操作
+## 二、aliyun CLI — ACR 镜像管理
+
+```bash
+# 查看实例列表
+aliyun cr GetInstanceList
+
+# 查看命名空间
+aliyun cr GetNamespaceList --InstanceId <instance_id>
+
+# 查看镜像仓库列表
+aliyun cr GetRepoList --InstanceId <instance_id>
+
+# 查看镜像 Tag 列表
+aliyun cr GetRepoTagList --InstanceId <instance_id> --RepoId <repo_id>
+```
+
+---
+
+## 三、kubectl — 集群信息
+
+```bash
+# 集群信息
+kubectl cluster-info
+kubectl version
+kubectl get nodes -o wide
+
+# API 健康检查
+kubectl get --raw /healthz
+kubectl get --raw /readyz
+
+# 资源概览
+kubectl api-resources          # 支持的资源类型
+kubectl api-versions           # 支持的 API 版本
+```
+
+---
+
+## 四、kubectl — 节点管理
+
+```bash
+# 查看节点
+kubectl get nodes -o wide
+kubectl describe node <node>
+kubectl top node
+
+# 标签管理
+kubectl label nodes <node> key=value
+kubectl label nodes <node> key-              # 删除标签
+kubectl get nodes --show-labels
+kubectl get nodes -l key=value
+
+# 污点管理
+kubectl taint nodes <node> key=value:NoSchedule
+kubectl taint nodes <node> key=value:NoSchedule-   # 删除
+
+# 维护操作
+kubectl cordon <node>                        # 标记不可调度
+kubectl uncordon <node>                      # 恢复调度
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+```
+
+---
+
+## 五、kubectl — Pod 操作
 
 ```bash
 # 查看 Pod
-kubectl get pods                              # 当前 namespace Pod 列表
-kubectl get pods -o wide                      # 详细信息 (IP/节点)
-kubectl get pods -A                           # 所有 namespace
-kubectl get pods -l app=nginx                 # 按标签筛选
-kubectl get pods --show-labels                # 显示标签
-kubectl get pods --sort-by='.metadata.creationTimestamp'  # 按时间排序
+kubectl get pods -o wide
+kubectl get pods -A                          # 所有 Namespace
+kubectl get pods -l app=<name>               # 按标签
+kubectl get pods --sort-by='.status.phase'
+kubectl describe pod <pod>
+kubectl get pod <pod> -o yaml
 
-# Pod 详情
-kubectl describe pod <pod-name>               # 完整详情和事件
-kubectl get pod <name> -o yaml                # YAML 格式输出
-kubectl get pod <name> -o json                # JSON 格式输出
+# 日志
+kubectl logs <pod>
+kubectl logs <pod> -c <container>            # 多容器
+kubectl logs <pod> --previous                # 上次退出
+kubectl logs <pod> -f                        # 实时
+kubectl logs -l app=<name> --tail=20
 
-# Pod 日志
-kubectl logs <pod-name>                       # 当前日志
-kubectl logs <pod-name> -c <container>        # 指定容器日志
-kubectl logs <pod-name> --previous            # 上次崩溃日志
-kubectl logs -f <pod-name>                    # 实时跟踪日志
-kubectl logs <pod-name> --since=1h            # 最近 1 小时
-kubectl logs <pod-name> --tail=100            # 最后 100 行
-kubectl logs -l app=nginx --all-containers    # 所有容器日志
+# 调试
+kubectl exec -it <pod> -- /bin/sh
+kubectl exec -it <pod> -c <container> -- /bin/sh
+kubectl port-forward pod/<pod> 8080:80
+kubectl cp <pod>:/path/file ./local-file
 
-# 进入 Pod
-kubectl exec -it <pod-name> -- /bin/sh        # 交互式终端
-kubectl exec -it <pod-name> -c <container> -- /bin/sh  # 指定容器
-kubectl exec <pod-name> -- <command>          # 执行单条命令
-
-# 端口转发
-kubectl port-forward <pod-name> 8080:80       # 转发 Pod 端口
-kubectl port-forward svc/<service> 8080:80    # 转发 Service 端口
-kubectl port-forward deploy/<name> 8080:80    # 转发 Deployment 端口
-kubectl port-forward <pod> 8080:80 9090:9090  # 多端口转发
-
-# 创建调试 Pod
-kubectl run debug --image=busybox -it --rm -- sh          # busybox 调试
-kubectl run curl --image=curlimages/curl -it --rm -- sh   # curl 调试
-kubectl run netshoot --image=nicolaka/netshoot -it --rm -- bash  # 网络调试
+# 生命周期
+kubectl run <name> --image=<image>
+kubectl delete pod <pod>
+kubectl delete pod <pod> --force --grace-period=0
 ```
 
 ---
 
-## Deployment 操作
+## 六、kubectl — Deployment / [[StatefulSet|StatefulSet]]
 
 ```bash
-# 创建
-kubectl create deployment nginx --image=nginx:alpine           # 命令行创建
-kubectl apply -f deployment.yaml                                # YAML 文件创建
+# Deployment
+kubectl get deploy
+kubectl describe deploy <name>
+kubectl scale deploy <name> --replicas=5
+kubectl rollout status deploy <name>
+kubectl rollout history deploy <name>
+kubectl rollout undo deploy <name>
+kubectl rollout restart deploy <name>
 
-# 查看
-kubectl get deployments                                         # Deployment 列表
-kubectl get deployments -o wide                                 # 详细信息
-kubectl describe deployment <name>                              # 完整详情
-
-# 扩缩容
-kubectl scale deployment <name> --replicas=3                    # 手动扩缩容
-kubectl autoscale deployment <name> --min=2 --max=10 --cpu-percent=70  # 创建 HPA
-
-# 滚动更新
-kubectl set image deployment/<name> <container>=<image>         # 更新镜像
-kubectl rollout status deployment/<name>                        # 查看更新状态
-kubectl rollout history deployment/<name>                       # 查看更新历史
-kubectl rollout history deployment/<name> --revision=2          # 查看指定版本
-
-# 回滚
-kubectl rollout undo deployment/<name>                          # 回滚到上一版本
-kubectl rollout undo deployment/<name> --to-revision=2          # 回滚到指定版本
-
-# 暂停和恢复
-kubectl rollout pause deployment/<name>                         # 暂停滚动更新
-kubectl rollout resume deployment/<name>                        # 恢复滚动更新
+# StatefulSet
+kubectl get sts
+kubectl scale sts <name> --replicas=3
 ```
 
 ---
 
-## Service 操作
+## 七、kubectl — [[Service|Service]] / [[Ingress|Ingress]]
 
 ```bash
-# 创建
-kubectl expose deployment <name> --port=80 --target-port=80     # 命令行创建
-kubectl expose deployment <name> --type=LoadBalancer --port=80   # LoadBalancer 类型
-kubectl apply -f service.yaml                                    # YAML 文件创建
+# Service
+kubectl get svc
+kubectl describe svc <name>
+kubectl get endpoints <name>
 
-# 查看
-kubectl get svc                                                  # Service 列表
-kubectl get svc -o wide                                          # 详细信息
-kubectl describe svc <name>                                      # 完整详情
-
-# Endpoints
-kubectl get endpoints <name>                                     # 查看后端 Pod IP
-kubectl get endpointslices -l kubernetes.io/service-name=<name>  # EndpointSlice
-
-# DNS 测试
-kubectl run dns-test --image=busybox --rm -it -- nslookup <service>
-kubectl run dns-test --image=busybox --rm -it -- nslookup <svc>.<ns>.svc.cluster.local
+# Ingress
+kubectl get ingress
+kubectl describe ingress <name>
 ```
 
 ---
 
-## Namespace 操作
-
-```bash
-# 创建和查看
-kubectl create namespace <name>                                  # 创建
-kubectl get namespaces                                           # 列表
-kubectl describe namespace <name>                                # 详情
-
-# 切换默认 namespace
-kubectl config set-context --current --namespace=<name>
-
-# 删除 (包含所有资源)
-kubectl delete namespace <name>
-```
-
----
-
-## 资源管理
-
-```bash
-# 查看所有资源
-kubectl get all                                                  # 当前 namespace
-kubectl get all -n <namespace>                                   # 指定 namespace
-
-# 删除资源
-kubectl delete pod <name>                                        # 删除 Pod
-kubectl delete deployment <name>                                 # 删除 Deployment
-kubectl delete -f <file.yaml>                                    # 删除 YAML 定义的所有资源
-kubectl delete all --all -n <namespace>                          # 删除 namespace 所有资源
-
-# 资源使用
-kubectl top pods                                                 # Pod 资源使用
-kubectl top pods -A --sort-by=cpu                                # 按 CPU 排序
-kubectl top pods -A --sort-by=memory                             # 按内存排序
-kubectl top nodes                                                # 节点资源使用
-```
-
----
-
-## 调试排查
-
-```bash
-# 事件
-kubectl get events                                               # 当前 namespace 事件
-kubectl get events -A                                            # 所有 namespace 事件
-kubectl get events --sort-by='.lastTimestamp'                    # 按时间排序
-kubectl get events --field-selector type=Warning                 # 仅警告事件
-kubectl get events --field-selector involvedObject.name=<name>   # 指定资源事件
-
-# 权限检查
-kubectl auth can-i <verb> <resource>                             # 检查当前用户权限
-kubectl auth can-i <verb> <resource> --as=<user>                 # 模拟用户权限
-kubectl auth can-i --list                                        # 列出所有权限
-kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>   # SA 权限
-
-# API 资源
-kubectl api-resources                                            # 所有资源类型
-kubectl api-resources --namespaced=false                         # 集群级资源
-kubectl api-versions                                             # 所有 API 版本
-kubectl explain <resource>                                       # 资源字段说明
-kubectl explain pod.spec.containers                              # 嵌套字段说明
-
-# 调试 Pod
-kubectl run debug --image=busybox -it --rm -- sh
-kubectl run curl --image=curlimages/curl -it --rm -- sh
-kubectl run netshoot --image=nicolaka/netshoot -it --rm -- bash
-
-# 节点调试
-kubectl debug node/<name> -it --image=busybox                    # 调试节点 (1.18+)
-```
-
----
-
-## YAML 生成
-
-```bash
-# dry-run 生成 YAML
-kubectl create deployment nginx --image=nginx --dry-run=client -o yaml
-kubectl expose deployment nginx --port=80 --dry-run=client -o yaml
-kubectl create job test --image=busybox --dry-run=client -o yaml -- echo hello
-
-# 导出现有资源
-kubectl get deployment <name> -o yaml > deployment.yaml
-kubectl get svc <name> -o yaml > service.yaml
-kubectl get all -o yaml > all-resources.yaml
-
-# diff (1.13+)
-kubectl diff -f deployment.yaml                                  # 预览变更
-```
-
----
-
-## 标签和选择器
-
-```bash
-# 添加标签
-kubectl label pod <name> app=web                                 # 添加标签
-kubectl label pod <name> app=web --overwrite                     # 覆盖标签
-kubectl label pod <name> app-                                    # 删除标签
-kubectl label pods -l app=old env=staging --all                  # 批量添加
-
-# 按标签筛选
-kubectl get pods -l app=web                                      # 等于
-kubectl get pods -l 'app in (web, api)'                          # 集合
-kubectl get pods -l 'app notin (debug)'                          # 不在集合
-kubectl get pods -l env!=prod                                    # 不等于
-kubectl get pods -l 'version>1.0'                                # 大于
-```
-
----
-
-## ConfigMap 和 Secret
-
-```bash
-# ConfigMap
-kubectl create configmap <name> --from-literal=key=value         # 键值对
-kubectl create configmap <name> --from-file=config.txt           # 文件
-kubectl create configmap <name> --from-env-file=.env             # 环境变量文件
-kubectl get configmap <name> -o yaml                             # 查看
-
-# Secret
-kubectl create secret generic <name> --from-literal=password=secret  # 键值对
-kubectl create secret generic <name> --from-file=ssh-key=~/.ssh/id_rsa  # 文件
-kubectl create secret docker-registry regcred \
-  --docker-server=registry.cn-hangzhou.aliyuncs.com \
-  --docker-username=<user> \
-  --docker-password=<pass>                                       # 镜像仓库凭证
-kubectl get secret <name> -o jsonpath='{.data.password}' | base64 -d  # 解码查看
-```
-
----
-
-## 存储操作
+## 八、kubectl — 存储
 
 ```bash
 # StorageClass
-kubectl get storageclass                                         # 列表
-kubectl describe storageclass <name>                             # 详情
+kubectl get sc
+kubectl describe sc <name>
 
-# PV
-kubectl get pv                                                   # 列表
-kubectl describe pv <name>                                       # 详情
+# PV / PVC
+kubectl get pv
+kubectl get pvc
+kubectl describe pvc <name>
 
-# PVC
-kubectl get pvc                                                  # 列表
-kubectl get pvc -A                                               # 所有 namespace
-kubectl describe pvc <name>                                      # 详情
+# 扩容 PVC
+kubectl patch pvc <name> -p '{"spec":{"resources":{"requests":{"storage":"40Gi"}}}}'
 ```
 
 ---
 
-## 常用缩写
-
-| 全称 | 缩写 | 全称 | 缩写 |
-|------|------|------|------|
-| pods | po | services | svc |
-| deployments | deploy | replicasets | rs |
-| configmaps | cm | namespaces | ns |
-| nodes | no | persistentvolumes | pv |
-| persistentvolumeclaims | pvc | statefulsets | sts |
-| daemonsets | ds | ingresses | ing |
-| networkpolicies | netpol | serviceaccounts | sa |
-| clusterroles | cr | clusterrolebindings | crb |
-| roles | ro | rolebindings | rb |
-| horizontalpodautoscalers | hpa | cronjobs | cj |
-| storageclass | sc | endpoints | ep |
-
----
-
-## 输出格式
+## 九、kubectl — RBAC
 
 ```bash
--o wide                              # 列表模式，显示更多信息
--o yaml                              # YAML 格式输出
--o json                              # JSON 格式输出
--o name                              # 仅资源名称
--o custom-columns='NAME:.metadata.name,STATUS:.status.phase'  # 自定义列
--o jsonpath='{.items[*].metadata.name}'                        # JSONPath 提取
--o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'    # JSONPath 循环
+# 查看权限
+kubectl auth can-i <verb> <resource>
+kubectl auth can-i create pods --as=<user>
+kubectl auth can-i --list
+
+# 角色
+kubectl get role,rolebinding -n <ns>
+kubectl get clusterrole,clusterrolebinding
+kubectl describe role <name> -n <ns>
 ```
 
-### 常用 JSONPath 示例
+---
+
+## 十、kubectl — 配额与限制
+
+```bash
+# ResourceQuota
+kubectl get quota -n <ns>
+kubectl describe quota <name> -n <ns>
+
+# LimitRange
+kubectl get limitrange -n <ns>
+kubectl describe limitrange <name> -n <ns>
+```
+
+---
+
+## 十一、kubectl — 故障排查
+
+```bash
+# 事件
+kubectl get events --sort-by='.lastTimestamp'
+kubectl get events -n <ns> --field-selector reason=Failed
+
+# DNS 测试
+kubectl run dns-test --rm -it --restart=Never \
+  --image=busybox:1.36 -- nslookup kubernetes.default
+
+# 网络测试
+kubectl run net-test --rm -it --restart=Never \
+  --image=busybox:1.36 -- wget -qO- http://<svc-name>
+
+# 组件检查
+kubectl get pods -n kube-system
+kubectl logs -n kube-system <component-pod> --tail=30
+```
+
+---
+
+## 十二、常用 JSON Path
 
 ```bash
 # 获取所有 Pod IP
-kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.podIP}{"\n"}{end}'
+kubectl get pods -o jsonpath='{.items[*].status.podIP}'
 
-# 获取节点容量
-kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.cpu}{"\t"}{.status.capacity.memory}{"\n"}{end}'
+# 获取节点 Pod CIDR
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
 
-# 获取 Pod 的镜像
-kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].image}{"\n"}{end}'
+# 获取 Service External IP
+kubectl get svc <name> -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
-# 获取 Service 的 ClusterIP
-kubectl get svc -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.clusterIP}{"\n"}{end}'
+# 获取 PVC 绑定的 PV
+kubectl get pvc <name> -o jsonpath='{.spec.volumeName}'
 ```
-
----
-
-## 高级操作
-
-```bash
-# 批量操作
-kubectl get pods -l app=old -o name | xargs -I {} kubectl delete {}
-
-# 等待条件
-kubectl wait --for=condition=ready pod/<name> --timeout=60s
-kubectl wait --for=condition=available deployment/<name> --timeout=120s
-
-# 资源使用分析
-kubectl get pods -A -o json | jq '.items[] | {name: .metadata.name, ns: .metadata.namespace, cpu: .spec.containers[].resources.requests.cpu}'
-
-# 集群资源汇总
-kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, cpu: .status.capacity.cpu, memory: .status.capacity.memory, pods: .status.capacity.pods}'
-```
-
----
-
-## 常用组合命令
-
-| 场景 | 命令 |
-|------|------|
-| 查看 Pod 重启次数 Top 10 | `kubectl get pods -A --sort-by='.status.containerStatuses[0].restartCount' \| head -11` |
-| 查看所有节点版本 | `kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion'` |
-| 查看 Pod QoS 等级 | `kubectl get pods -o custom-columns='NAME:.metadata.name,QOS:.status.qosClass'` |
-| 查看 PVC 绑定状态 | `kubectl get pvc -A -o custom-columns='NAME:.metadata.name,STATUS:.status.phase,VOLUME:.spec.volumeName,CAPACITY:.status.capacity.storage'` |
-| 统计每个 NS 的 Pod 数 | `kubectl get pods -A --no-headers \| awk '{print $1}' \| sort \| uniq -c \| sort -rn` |
-| 查看所有镜像版本 | `kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}: {.spec.containers[*].image}{"\n"}{end}'` |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

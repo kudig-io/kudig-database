@@ -1,4 +1,44 @@
 ---
+title: Agent 作为技术赋能新方式：设计思路与落地路径 (domain-14-ai-ml-infra)
+description: 'title: Agent 作为技术赋能新方式：设计思路与落地路径'
+category: general
+tags:
+- ai
+- ai-agent
+- helm
+- argocd
+- redis
+- hpa
+- ingress
+- networkpolicy
+- ebpf
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Agent 作为技术赋能新方式：设计思路与落地路径 是什么
+- 如何 Agent 作为技术赋能新方式：设计思路与落地路径
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- 作为技术赋能新方式：设计思路与落地路径
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- gitops-basics
+- iac-basics
+- ebpf-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: Agent 作为技术赋能新方式：设计思路与落地路径
 description: '# Agent 作为技术赋能新方式：设计思路与落地路径'
 category: ai-agent
@@ -8,11 +48,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- helm
-- argocd
+- [[Helm|helm]]
+- [[ArgoCD|argocd]]
 - redis
 - hpa
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -29,15 +69,16 @@ trigger_keywords:
 - 作为技术赋能新方式：设计思路与落地路径
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- gitops-basics
-- iac-basics
-- ebpf-basics
-- redis-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # Agent 作为技术赋能新方式：设计思路与落地路径
 
 > **文档类型**: 战略设计专题 | **最后更新**: 2026-03 | **关键词**: Agent, 技术赋能, RAG, K8s 运维, 知识驱动, 自动化, 平台工程
@@ -46,7 +87,7 @@ prerequisites:
 
 ## 概述
 
-本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 Kubernetes 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
+本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 [[Kubernetes|Kubernetes]] 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
 
 ---
 
@@ -256,3 +297,27 @@ Agent:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题的设计总纲，原 topic-agent 专题已整合至此。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 12-enterprise-case-studies
+- 13-trusted-agent-system-fiscal-plan
+- 15-agent-corpus-gap-analysis
+- 16-agentscope-overview-installation

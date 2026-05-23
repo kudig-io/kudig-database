@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -41,7 +42,7 @@ title: Day 19: 故障排查方法论 (关键日)
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes 故障排查方法论 FTA
+  - [[Kubernetes|kubernetes]] 故障排查方法论 FTA
   - FEBM 取证循证方法
   - k8s 故障树分析
   - 结构化排障流程
@@ -119,10 +120,10 @@ FEBM: 解决"怎么判断"的问题 (方法)
 | 故障层级 | 典型故障 | 排查入口 |
 |----------|---------|---------|
 | Pod 级 | Pending/CrashLoop/ImagePull | kubectl describe pod |
-| Service 级 | 无 Endpoints/DNS 失败 | kubectl get endpoints |
+| [[Service|Service]] 级 | 无 Endpoints/DNS 失败 | kubectl get endpoints |
 | 节点级 | NotReady/DiskPressure | kubectl describe node |
 | 控制面级 | API 不可用/调度失败 | kubectl get componentstatuses |
-| 网络级 | Pod 间不通/外网不可达 | NetworkPolicy/iptables |
+| 网络级 | Pod 间不通/外网不可达 | [[NetworkPolicy|NetworkPolicy]]/iptables |
 
 ---
 
@@ -131,7 +132,7 @@ FEBM: 解决"怎么判断"的问题 (方法)
 ### 必读文档
 
 1. **结构化故障排查框架**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md`
+   - 文件: `../../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|[[KUDIG Database]]]].md`
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**

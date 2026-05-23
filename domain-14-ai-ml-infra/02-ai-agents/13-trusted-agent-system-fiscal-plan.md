@@ -1,5 +1,5 @@
 ---
-title: 可信智能体体系 — 运维智能体财年规划
+title: 可信智能体体系 — 运维智能体财年规划 (domain-14-ai-ml-infra)
 description: 'title: 可信智能体体系 — 运维智能体财年规划'
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 可信智能体体系 — 运维智能体财年规划
@@ -47,10 +48,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
-- envoy
+- [[Envoy|envoy]]
 - redis
 last_updated: 2026-05
 difficulty: advanced
@@ -499,7 +500,7 @@ graph LR
 |------|------|------|------|
 | **L1 - 基础** | 常见问题、标准配置查询 | 40% | "如何配置 ECS 安全组规则" |
 | **L2 - 中等** | 典型故障诊断、需多步推理 | 35% | "Pod 处于 CrashLoopBackOff 且日志显示 OOM" |
-| **L3 - 高难** | 复杂关联故障、跨组件排查 | 20% | "Service Mesh 下 gRPC 间歇性超时" |
+| **L3 - 高难** | 复杂关联故障、跨组件排查 | 20% | "[[Service|Service]]Service Mesh）|Service Mesh]] 下 [[gRPC|gRPC]] 间歇性超时" |
 | **L4 - 边界** | 超范围/模糊/对抗性问题 | 5% | "帮我写一个黑客工具" |
 
 ---
@@ -829,12 +830,12 @@ graph TB
 
 | 文档 | 关系 |
 |------|------|
-| [08 - Agent 评测体系与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | 评测方法论基础 |
-| [04 - RAG 检索增强生成深度指南](./[[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]].md) | 语料检索技术方案 |
-| [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | Skills 技术实现基础 |
-| [06 - 多 Agent 编排与协作架构](./[[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]].md) | Workflow 编排方案参考 |
-| [09 - 生产部署指南](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | 智能体部署方案 |
-| [10 - 安全护栏与合规](./[[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md) | 安全质检标准参考 |
+| [08 - Agent 评测体系与可观测性](./08-agent-evaluation-observability.md) | 评测方法论基础 |
+| [04 - RAG 检索增强生成深度指南](./04-rag-knowledge-retrieval.md) | 语料检索技术方案 |
+| [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | Skills 技术实现基础 |
+| [06 - 多 Agent 编排与协作架构](./06-multi-agent-orchestration.md) | Workflow 编排方案参考 |
+| [09 - 生产部署指南](./09-production-deployment-guide.md) | 智能体部署方案 |
+| [10 - 安全护栏与合规](./10-security-guardrails.md) | 安全质检标准参考 |
 | [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障树分析（FTA）方法论 |
 | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 容器故障排障知识源 |
 
@@ -846,7 +847,7 @@ graph TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -861,30 +862,30 @@ graph TB
 
 ## Related
 
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 06-multi-agent-orchestration
+- 41-react-harness-identification-guide
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]]
-- [[domain-14-ai-ml-infra/15-agent-corpus-gap-analysis.md|15-agent-corpus-gap-analysis]]
+- 11-cost-latency-optimization
+- 12-enterprise-case-studies
+- 14-agent-kudig-design-strategy
+- 15-agent-corpus-gap-analysis

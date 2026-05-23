@@ -1,6 +1,44 @@
 ---
+title: 内容管理系统 (CMS) Kubernetes 生产架构设计
+description: 'title: 内容管理系统 CMS 架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- scheduler
+- redis
+- postgresql
+- elasticsearch
+- hpa
+- statefulset
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 内容管理系统 (CMS) Kubernetes 生产架构设计 是什么
+- 如何 内容管理系统 (CMS) Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 内容管理系统
+- CMS
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 内容管理系统 CMS 架构设计
-description: '# 内容管理系统 (CMS) Kubernetes 生产架构设计'
+description: '# 内容管理系统 (CMS) [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -11,7 +49,7 @@ tags:
 - postgresql
 - elasticsearch
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
 last_updated: 2026-05-18
 difficulty: intermediate
@@ -38,19 +76,24 @@ trigger_keywords:
 - GraphQL
 - 内容工作流
 - 审批发布
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- redis-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-cms-architecture
 - topic-content-platform-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
-# 内容管理系统 (CMS) [[entities/kubernetes|kubernetes]] 生产架构设计
+# 内容管理系统 (CMS) Kubernetes 生产架构设计
 
 > **适用场景**: 企业官网 / 新闻门户 / 知识库 / 文档中心 / 营销落地页 / 多站点管理  
 > **适用版本**: Kubernetes v1.29 - v1.33  
@@ -59,7 +102,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、Headless CMS 架构](#二headless-cms-架构)
@@ -72,7 +115,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -123,7 +166,7 @@ flowchart TB
 
 ---
 
-## 二、Headless CMS 架构
+<!-- chunk: 二、Headless CMS 架构 -->## 二、Headless CMS 架构
 
 ```mermaid
 flowchart TB
@@ -158,7 +201,7 @@ flowchart TB
     style Frontend fill:#e8f5e9
 ```
 
-### Headless CMS 数据流
+#<!-- chunk: Headless CMS 数据流 -->## Headless CMS 数据流
 
 ```mermaid
 sequenceDiagram
@@ -187,7 +230,7 @@ sequenceDiagram
 
 ---
 
-## 三、内容生产与编辑架构
+<!-- chunk: 三、内容生产与编辑架构 -->## 三、内容生产与编辑架构
 
 ```mermaid
 flowchart TB
@@ -219,7 +262,7 @@ flowchart TB
     style AI fill:#e8f5e9
 ```
 
-### 协同编辑 OT 算法
+#<!-- chunk: 协同编辑 OT 算法 -->## 协同编辑 OT 算法
 
 ```mermaid
 flowchart LR
@@ -247,7 +290,7 @@ flowchart LR
 
 ---
 
-## 四、内容分发与渲染架构
+<!-- chunk: 四、内容分发与渲染架构 -->## 四、内容分发与渲染架构
 
 ```mermaid
 flowchart TB
@@ -281,7 +324,7 @@ flowchart TB
     style Delivery fill:#e8f5e9
 ```
 
-### Next.js SSG/ISR K8s 部署
+#<!-- chunk: Next.js SSG/ISR K8s 部署 -->## Next.js SSG/ISR K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -351,7 +394,7 @@ spec:
 
 ---
 
-## 五、多站点与多语言架构
+<!-- chunk: 五、多站点与多语言架构 -->## 五、多站点与多语言架构
 
 ```mermaid
 flowchart TB
@@ -387,7 +430,7 @@ flowchart TB
     style Shared fill:#e8f5e9
 ```
 
-### 多语言内容模型
+#<!-- chunk: 多语言内容模型 -->## 多语言内容模型
 
 ```yaml
 # Strapi / Contentful 风格的多语言内容模型
@@ -433,7 +476,7 @@ spec:
 
 ---
 
-## 六、工作流与审批架构
+<!-- chunk: 六、工作流与审批架构 -->## 六、工作流与审批架构
 
 ```mermaid
 flowchart TB
@@ -468,7 +511,7 @@ flowchart TB
     style ARCHIVED fill:#ffebee
 ```
 
-### K8s CronJob 定时发布
+#<!-- chunk: K8s [[CronJob|CronJob]] 定时发布 -->## K8s CronJob 定时发布
 
 ```yaml
 apiVersion: batch/v1
@@ -530,7 +573,7 @@ spec:
 
 ---
 
-## 七、搜索与推荐架构
+<!-- chunk: 七、搜索与推荐架构 -->## 七、搜索与推荐架构
 
 ```mermaid
 flowchart TB
@@ -566,9 +609,9 @@ flowchart TB
 
 ---
 
-## 八、K8s 部署架构
+<!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-### Namespace 组织
+#<!-- chunk: Namespace 组织 -->## Namespace 组织
 
 ```mermaid
 flowchart TB
@@ -603,7 +646,7 @@ flowchart TB
     style Frontend fill:#e8f5e9
 ```
 
-### 高可用架构
+#<!-- chunk: 高可用架构 -->## 高可用架构
 
 ```yaml
 apiVersion: apps/v1
@@ -694,8 +737,32 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [Strapi 架构文档](https://docs.strapi.io/dev-docs/deployment)
 - [Contentful 架构](https://www.contentful.com/developers/docs/)
 - [Next.js ISR 文档](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 01-ecommerce-architecture
+- 02-mini-program-architecture
+- 04-im-rtc-architecture
+- 05-online-education-architecture

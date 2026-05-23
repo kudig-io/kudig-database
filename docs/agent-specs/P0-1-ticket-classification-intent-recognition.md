@@ -31,6 +31,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 工单分类体系与意图识别语料库
@@ -48,10 +49,10 @@ prerequisites:
 
 | 大类 ID | 大类名称 | 说明 | 爆炸半径 | 典型 SLA |
 |---------|---------|------|---------|----------|
-| TC-INFRA | 基础设施 | 节点、网络、存储、控制平面等底层组件故障 | 全集群/多业务 | P0: 15min |
-| TC-APP | 应用层 | Pod、Deployment、Service、ConfigMap 等应用运行时故障 | 单业务/多租户 | P1: 30min |
+| TC-INFRA | 基础设施 | 节点、网络、存储、控制平面等底层组件问题 | 全集群/多业务 | P0: 15min |
+| TC-APP | 应用层 | Pod、Deployment、Service、ConfigMap 等应用运行时问题 | 单业务/多租户 | P1: 30min |
 | TC-SEC | 安全合规 | 认证、授权、证书、审计、合规等安全事件 | 集群/审计影响 | P0: 立即 |
-| TC-DATA | 数据层 | 数据库、缓存、消息队列、数据备份等数据相关故障 | 数据丢失风险 | P0: 立即 |
+| TC-DATA | 数据层 | 数据库、缓存、消息队列、数据备份等数据相关问题 | 数据丢失风险 | P0: 立即 |
 
 ### 1.2 工单子类 (Ticket Subcategory)
 
@@ -59,11 +60,11 @@ prerequisites:
 
 | 子类 ID | 子类名称 | 覆盖范围 | 典型 Skill |
 |---------|---------|---------|-----------|
-| TC-INFRA-NODE | 节点故障 | 节点 NotReady/Unknown/压力, kubelet 异常, 容器运行时异常 | SKILL-NODE-001 |
-| TC-INFRA-NET | 网络故障 | CNI 异常, DNS 解析失败, 网络策略冲突, 网段冲突 | SKILL-NET-001/002/003 |
-| TC-INFRA-STORE | 存储故障 | PVC Pending, CSI 驱动异常, 存储类配置错误, 卷挂载失败 | SKILL-STORE-001 |
-| TC-INFRA-CP | 控制平面故障 | etcd 异常, API Server 不可用, Scheduler 调度失败, Controller Manager 异常 | SKILL-CP-001 |
-| TC-INFRA-SCALE | 弹性伸缩故障 | HPA/VPA 不触发, Cluster Autoscaler 异常, 节点池问题 | SKILL-SCALE-001 |
+| TC-INFRA-NODE | 节点问题 | 节点 NotReady/Unknown/压力, kubelet 异常, 容器运行时异常 | SKILL-NODE-001 |
+| TC-INFRA-NET | 网络问题 | CNI 异常, DNS 解析失败, 网络策略冲突, 网段冲突 | SKILL-NET-001/002/003 |
+| TC-INFRA-STORE | 存储问题 | PVC Pending, CSI 驱动异常, 存储类配置错误, 卷挂载失败 | SKILL-STORE-001 |
+| TC-INFRA-CP | 控制平面问题 | etcd 异常, API Server 不可用, Scheduler 调度失败, Controller Manager 异常 | SKILL-CP-001 |
+| TC-INFRA-SCALE | 弹性伸缩问题 | HPA/VPA 不触发, Cluster Autoscaler 异常, 节点池问题 | SKILL-SCALE-001 |
 | TC-INFRA-UPGRADE | 升级迁移 | 集群升级失败, 节点升级卡住, 版本兼容性问题 | 暂无对应 Skill |
 
 #### TC-APP 应用层子类
@@ -89,9 +90,9 @@ prerequisites:
 
 | 子类 ID | 子类名称 | 覆盖范围 | 典型 Skill |
 |---------|---------|---------|-----------|
-| TC-DATA-DB | 数据库故障 | MySQL/PostgreSQL 连接异常, 读写失败, 主从复制中断 | 暂无对应 Skill |
-| TC-DATA-CACHE | 缓存故障 | Redis 集群异常, 缓存穿透/雪崩, 内存耗尽 | 暂无对应 Skill |
-| TC-DATA-MQ | 消息队列故障 | Kafka/RabbitMQ 连接异常, 消费积压, 分区不可用 | 暂无对应 Skill |
+| TC-DATA-DB | 数据库问题 | MySQL/PostgreSQL 连接异常, 读写失败, 主从复制中断 | 暂无对应 Skill |
+| TC-DATA-CACHE | 缓存问题 | Redis 集群异常, 缓存穿透/雪崩, 内存耗尽 | 暂无对应 Skill |
+| TC-DATA-MQ | 消息队列问题 | Kafka/RabbitMQ 连接异常, 消费积压, 分区不可用 | 暂无对应 Skill |
 | TC-DATA-BACKUP | 数据备份 | 备份失败, 快照损坏, 恢复超时, RPO 超标 | 暂无对应 Skill |
 
 ---
@@ -235,18 +236,18 @@ prerequisites:
 
 | 优先级 | 关键词 | 映射 Category | 覆盖场景 |
 |--------|--------|-------------|---------|
-| P0 | "NotReady", "Unknown", "节点不可用" | TC-INFRA-NODE | 节点级故障 |
-| P0 | "OOMKilled", "exit code 137", "内存溢出" | TC-APP-POD | Pod 内存故障 |
+| P0 | "NotReady", "Unknown", "节点不可用" | TC-INFRA-NODE | 节点级问题 |
+| P0 | "OOMKilled", "exit code 137", "内存溢出" | TC-APP-POD | Pod 内存问题 |
 | P0 | "certificate expired", "TLS handshake" | TC-SEC-CERT | 证书过期 |
 | P1 | "CrashLoopBackOff" | TC-APP-POD | Pod 崩溃重启 |
-| P1 | "Pending", "调度失败", "FailedScheduling" | TC-APP-POD | Pod 调度故障 |
-| P1 | "DNS", "NXDOMAIN", "解析失败" | TC-INFRA-NET | DNS 故障 |
-| P1 | "Ingress", "404", "502", "503" | TC-APP-INGRESS | 入口流量故障 |
+| P1 | "Pending", "调度失败", "FailedScheduling" | TC-APP-POD | Pod 调度问题 |
+| P1 | "DNS", "NXDOMAIN", "解析失败" | TC-INFRA-NET | DNS 问题 |
+| P1 | "Ingress", "404", "502", "503" | TC-APP-INGRESS | 入口流量问题 |
 | P2 | "Forbidden", "RBAC", "权限" | TC-SEC-RBAC | 权限问题 |
-| P2 | "PVC", "Pending", "存储" | TC-INFRA-STORE | 存储故障 |
+| P2 | "PVC", "Pending", "存储" | TC-INFRA-STORE | 存储问题 |
 | P2 | "ResourceQuota", "exceeded" | TC-SEC-RBAC | 配额超限 |
-| P2 | "HPA", "不触发", "扩容" | TC-INFRA-SCALE | 弹性伸缩故障 |
-| P2 | "Deployment", "滚动更新", "卡住" | TC-APP-WORKLOAD | 部署故障 |
+| P2 | "HPA", "不触发", "扩容" | TC-INFRA-SCALE | 弹性伸缩问题 |
+| P2 | "Deployment", "滚动更新", "卡住" | TC-APP-WORKLOAD | 部署问题 |
 | P3 | "CoreDNS", "coredns" | TC-INFRA-NET | DNS 服务问题 |
 | P3 | "Secret", "ConfigMap", "配置" | TC-APP-CONFIG | 配置问题 |
 
@@ -376,5 +377,5 @@ prerequisites:
 **关联文档**:
 - [P0-2: 多技能协同协议设计](./P0-2-multi-skill-coordination-protocol.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [domain-10-troubleshooting-diagnostics/topic-skills/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
-- [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) — FTA 故障树参考
+- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) — FTA 问题树参考

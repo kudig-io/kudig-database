@@ -1,5 +1,5 @@
 ---
-title: 节点加入流程 (kubeadm join)
+title: 节点加入流程 (kubeadm join) [cluster-create]
 description: 'description: ''| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点加入流程 (kubeadm join)

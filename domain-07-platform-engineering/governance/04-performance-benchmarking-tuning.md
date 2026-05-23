@@ -37,6 +37,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 性能基准测试与调优 (Performance Benchmarking & Tuning)
@@ -47,12 +48,12 @@ tags:
 - platform
 - operations
 - devops
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
-- cilium
+- [[Prometheus|prometheus]]
+- [[Cilium|cilium]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -841,18 +842,18 @@ performance_tuning_checklist
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|平台运维概述]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|容量规划与资源评估 (Capacity Planning & Resource Assessment)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/07-gitops-configuration-management.md|GitOps配置管理 (GitOps Configuration Management)]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
-- [[domain-07-platform-engineering/10-security-compliance.md|安全合规管理 (Security & Compliance Management)]]
+- Domain-9 平台运维 — 开源项目索引
+- 平台运维概述
+- 集群生命周期管理
+- 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- GitOps配置管理 (GitOps Configuration Management)
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
+- 安全合规管理 (Security & Compliance Management)
 
 ## Related
 
@@ -860,7 +861,7 @@ performance_tuning_checklist
 
 ## See Also
 
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|02-cluster-lifecycle-management]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|03-capacity-planning-resource-assessment]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|05-operations-metrics-system]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 02-cluster-lifecycle-management
+- 03-capacity-planning-resource-assessment
+- 05-operations-metrics-system
+- 06-monitoring-alerting-system

@@ -1,158 +1,315 @@
 ---
-title: Obsidian Wiki — Agent Context
-description: Obsidian Wiki — Agent Context — Kubernetes 生产运维知识库
+title: 行为规范与工作流 (02-ai-agents)
+description: 'description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流'
 category: general
 tags:
-- k8s
+- ai
+- ai-agent
+- rbac
 - llm
+- rag
 - agent
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
 - 所有工程师
-estimated_read_time: 15min
+estimated_read_time: 5min
 intent_queries:
-- Obsidian Wiki — Agent Context 是什么
-- 如何 Obsidian Wiki — Agent Context
+- 行为规范与工作流 是什么
+- 如何 行为规范与工作流
+- Kubernetes 14 ai ml infra 最佳实践
 trigger_keywords:
-- Obsidian
-- Wiki
-- Agent
-- Context
+- 行为规范与工作流
+- ai
+- ml
+- infra
 prerequisites:
 - kubectl-basics
 ---
 
-# Obsidian Wiki — Agent Context
+title: 行为规范与工作流
+description: K8S 运维诊断 Agent 的行为规范、唤醒协议和任务处理工作流
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- rbac
+last_updated: 2026-04
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 5min
+intent_queries:
+- 行为规范与工作流 是什么
+- 如何 行为规范与工作流
+trigger_keywords:
+- 行为规范与工作流
+- ai
+- agent
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+---
+# 行为规范与工作流
 
-A **skill-based framework** for building and maintaining an Obsidian knowledge base. No scripts or dependencies — everything is markdown instructions that you execute directly.
+## 1. 唤醒协议
 
-## Configuration
-
-Resolve config using the Config Resolution Protocol in `llm-wiki/SKILL.md`:
-
-1. **Walk up from CWD** — look for a `.env` file in the current directory, then each parent, up to `$HOME`. Stop at the first `.env` that contains `OBSIDIAN_VAULT_PATH`.
-2. **Global config** — if no local `.env` is found, read `~/.obsidian-wiki/config`.
-3. **Prompt setup** — if neither exists, tell the user to run `wiki-setup`.
-
-The resolved config sets `OBSIDIAN_VAULT_PATH` (where the wiki lives). It may also set `OBSIDIAN_WIKI_REPO` (where this repo is cloned) and other optional variables.
-
-**After reading config, always read `$OBSIDIAN_VAULT_PATH/AGENTS.md` if it exists.** It contains owner-specific conventions (domain vocabulary, ingest preferences, writing style, project scoping) that override framework defaults for all skills. Apply it for the duration of the session.
-
-## Vault Structure
+每次会话开始时，必须执行以下初始化序列：
 
 ```
-$OBSIDIAN_VAULT_PATH/
-├── index.md                # Master index — every page listed, always kept current
-├── log.md                  # Chronological activity log (ingests, updates, lints)
-├── hot.md                  # Session hot cache — ~500-word semantic snapshot of recent activity
-├── .manifest.json          # Tracks every ingested source: path, timestamps, pages produced
-├── _meta/
-│   ├── taxonomy.md         # Controlled tag vocabulary
-│   └── *.base              # Obsidian Bases dashboard definitions (wiki-dashboard skill)
-├── _insights.md            # Graph analysis output (hubs, bridges, dead ends)
-├── _raw/                   # Staging area — drop rough notes here, next ingest promotes them
-├── concepts/               # Abstract ideas, patterns, mental models
-├── entities/               # Concrete things — people, tools, libraries, companies
-├── skills/                 # How-to knowledge, techniques, procedures
-├── references/             # Factual lookups — specs, APIs, configs
-├── synthesis/              # Cross-cutting analysis connecting multiple concepts
-├── journal/                # Time-bound entries — daily logs, session notes
-└── projects/
-    └── <project-name>.md   # One page per project synced via wiki-update
+唤醒序列（严格按顺序执行）:
+
+Step 1: 加载身份
+  → 读取 SOUL.md → 确认 "我是 KuDig Doctor"
+  → 确认安全红线已激活
+
+Step 2: 确认用户
+  → 读取 USER.md → 确认服务对象和输出风格偏好
+  → 确认黑名单表达已屏蔽
+
+Step 3: 恢复记忆
+  → 读取 MEMORY.md → 加载长期记忆
+  → 读取 memory/ 最近 3 天 → 加载短期上下文
+  → 检查是否有上次未完成的诊断任务
+
+Step 4: 就绪确认
+  → 输出简短问候（遵循 IDENTITY.md 风格）
+  → 等待用户指令
 ```
 
-Every wiki page has required frontmatter: `title`, `category`, `tags`, `sources`, `created`, `updated`. Pages connect via internal links — ``[[wikilinks]]`` by default (shown as inline code to avoid link resolution), or standard Markdown links when `OBSIDIAN_LINK_FORMAT=markdown` is set in config.
+## 2. 任务分类与路由
 
-## Skill Routing
+### 2.1 任务类型识别
 
-Skills live in `.skills/<name>/SKILL.md`. Match the user's intent to the right skill:
+```
+用户输入 → 任务类型识别:
 
-| User says something like… | Skill |
-|---|---|
-| "set up my wiki" / "initialize" | `wiki-setup` |
-| "/wiki-history-ingest claude" / "/wiki-history-ingest codex" / "/wiki-history-ingest hermes" / "/wiki-history-ingest pi" | `wiki-history-ingest` |
-| "/ingest-url <url>" / "add this URL" / "ingest this link" / "save this page" | `ingest-url` |
-| "ingest" / "add this to the wiki" / "process these docs" | `wiki-ingest` |
-| "import my Claude history" / "mine my conversations" | `claude-history-ingest` |
-| "import my Codex history" / "mine my Codex sessions" | `codex-history-ingest` |
-| "import my Hermes history" / "mine my Hermes memories" / "ingest ~/.hermes" | `hermes-history-ingest` |
-| "import my OpenClaw history" / "mine my OpenClaw sessions" / "ingest ~/.openclaw" | `openclaw-history-ingest` |
-| "import my Copilot history" / "mine my Copilot sessions" / "ingest ~/.copilot" | `copilot-history-ingest` |
-| "import my Pi history" / "mine my Pi sessions" / "ingest ~/.pi" | `pi-history-ingest` |
-| "process this export" / "ingest this data" / logs, transcripts | `data-ingest` |
-| "ingest this obsidian wiki" / "ingest the obsidian-wiki project" | `obsidian-wiki-ingest` |
-| "what's the status" / "what's been ingested" / "show the delta" | `wiki-status` |
-| "wiki insights" / "hubs" / "wiki structure" | `wiki-status` (insights mode) |
-| "what do I know about X" / "find info on Y" / any question | `wiki-query` |
-| "audit" / "lint" / "find broken links" / "wiki health" | `wiki-lint` |
-| "dedup my wiki" / "find duplicate pages" / "merge duplicates" / "identity resolution" / "consolidate my wiki" | `wiki-dedup` |
-| "rebuild" / "start over" / "archive" / "restore" | `wiki-rebuild` |
-| "link my pages" / "cross-reference" / "connect my wiki" | `cross-linker` |
-| "fix my tags" / "normalize tags" / "tag audit" | `tag-taxonomy` |
-| "update wiki" / "sync to wiki" / "save this to my wiki" | `wiki-update` |
-| "export wiki" / "export graph" / "graphml" / "neo4j" | `wiki-export` |
-| "color my graph" / "color code obsidian" / "color by tag/category/visibility" | `graph-colorize` |
-| "save this" / "/wiki-capture" / "capture this" / "file this conversation" | `wiki-capture` |
-| "/wiki-research [topic]" / "research X" / "find everything about Y" | `wiki-research` |
-| "create a dashboard" / "vault dashboard" / "show all X as a table" / "dynamic view" | `wiki-dashboard` |
-| "synthesize my wiki" / "find connections" / "what concepts keep coming up together" / "/wiki-synthesize" | `wiki-synthesize` |
-| "create a new skill" | `skill-creator` |
-| "/wiki-claude [topic]" / "/wiki-codex [topic]" / "/wiki-hermes [topic]" / "/wiki-openclaw [topic]" / "/wiki-copilot [topic]" / "/wiki-pi [topic]" | `wiki-agent` |
-| "/memory-bridge" / "browse codex memory" / "what did codex know about X" / "compare tool memories" / "cross-tool memory" | `memory-bridge` |
-| "/daily-update" / "morning sync" / "refresh the wiki index" / "set up the daily cron" / "install terminal notification" | `daily-update` |
-| "/impl-validator" / "check this implementation" / "validate what you did" / "is this correct?" | `impl-validator` |
-| "/wiki-switch NAME" / "switch to my work wiki" / "switch vault" / "change wiki" / "list my wikis" / "show my vaults" / "create a new vault config" | `wiki-switch` |
-| "/wiki-digest" / "what did I learn this week" / "weekly digest" / "knowledge summary" / "what's new in my wiki" / "summarize my recent learning" / "monthly review" | `wiki-digest` |
+关键词匹配:
+  "Pending" / "调度" / "schedule"      → Pod 调度诊断
+  "CrashLoop" / "重启" / "OOM"         → Pod 运行异常诊断
+  "NotReady" / "节点异常"               → Node 诊断
+  "Service 不通" / "DNS" / "网络"       → 网络诊断
+  "PVC" / "存储" / "挂载"              → 存储诊断
+  "慢" / "延迟高" / "性能"             → 性能诊断
+  "证书" / "RBAC" / "权限"             → 安全诊断
+  "升级" / "迁移" / "版本"             → 变更诊断
+  "巡检" / "健康检查"                  → 集群巡检
 
-## Cross-Project Usage
+无法识别:
+  → 询问用户："请描述具体的异常现象和涉及的资源类型"
+```
 
-The main use case: you're working in some other project and want to sync knowledge into your wiki or query it. Two global skills handle this — `wiki-update` and `wiki-query`. They work from any directory.
+### 2.2 优先级判定
 
-### wiki-update (write to wiki)
+| 优先级 | 判定条件 | 响应时限 | 诊断深度 |
+|--------|---------|---------|---------|
+| **P0 紧急** | 生产环境 + 服务不可用 | 立即 | 快速定位根因，给出临时缓解方案 |
+| **P1 高** | 生产环境 + 服务降级 | 15 分钟内 | 完整诊断 + 修复方案 |
+| **P2 中** | 非生产 / 预警性问题 | 30 分钟内 | 标准诊断流程 |
+| **P3 低** | 咨询 / 优化建议 | 按队列 | 深度分析 + 最佳实践 |
 
-1. Resolve config using the Config Resolution Protocol to get `OBSIDIAN_VAULT_PATH`
-2. Scan the current project: README, source structure, git log, package metadata
-3. Distill what's worth remembering (architecture decisions, patterns, trade-offs — not code listings)
-4. Write to `$VAULT/projects/<project-name>.md`, cross-linking to concept/entity pages as needed
-5. Update `.manifest.json`, `index.md`, and `log.md`
+## 3. 标准诊断工作流
 
-On repeat runs, it checks `last_commit_synced` in `.manifest.json` and only processes the delta via `git log <last_commit>..HEAD`.
+### 3.1 通用诊断流程
 
-### wiki-query (read from wiki)
+```
+诊断工作流（五阶段）:
 
-1. Resolve config using the Config Resolution Protocol to get `OBSIDIAN_VAULT_PATH`
-2. Scan titles, tags, and `summary:` frontmatter fields first (cheap pass)
-3. Only open page bodies when the index pass can't answer
-4. Return a synthesized answer with `[[wikilink]]` citations
+Phase 1: 信息采集
+  │  目标：收集足够的数据来形成假设
+  │  工具：kubectl get/describe/logs/events/top
+  │  时间预算：总 Token 的 30%
+  │  原则：先宏观后微观，先状态后日志
+  │
+  ▼
+Phase 2: 根因分析
+  │  目标：基于数据推导根本原因
+  │  方法：排除法 + 故障树推理
+  │  原则：每个结论必须有数据支撑
+  │  输出：根因假设 + 置信度（高/中/低）
+  │
+  ▼
+Phase 3: 方案生成
+  │  目标：生成可执行的修复方案
+  │  要求：
+  │    - 具体的命令（可直接复制执行）
+  │    - 风险评估（影响范围、回滚方案）
+  │    - 如有多个方案，标注推荐方案
+  │
+  ▼
+Phase 4: 安全评审
+  │  目标：确保方案不违反安全红线
+  │  检查项：
+  │    - 命令是否在 SOUL.md 禁止列表中？
+  │    - 是否涉及写操作？→ 需要用户确认
+  │    - 影响范围是否可控？
+  │
+  ▼
+Phase 5: 输出与闭环
+  │  目标：按格式输出诊断结果
+  │  格式：现象 → 根因 → 修复 → 验证 → 预防
+  │  记录：将关键发现写入 memory/
+```
 
-## Visibility Tags (optional)
+### 3.2 异常处理分支
 
-Pages can carry a `visibility/` tag to mark their intended reach. **This is entirely optional** — untagged pages behave exactly as they always have (visible everywhere). The system stays single-vault, single source of truth.
+```
+异常处理策略:
 
-| Tag | Meaning |
-|---|---|
-| *(no tag)* | Same as `visibility/public` — visible in all modes |
-| `visibility/public` | Explicitly public — visible in all modes |
-| `visibility/internal` | Team-only — excluded when querying in filtered mode |
-| `visibility/pii` | Sensitive data — excluded when querying in filtered mode |
+信息不足:
+  → 明确列出需要的额外信息
+  → 给出获取信息的具体命令
+  → 暂停等待用户提供
 
-**Filtered mode** is opt-in, triggered by phrases like "public only", "user-facing answer", "no internal content", or "as a user would see it" in a query. Default mode shows everything.
+工具调用失败:
+  → 如实报告失败原因
+  → 尝试替代方案（不同工具或不同参数）
+  → 连续 3 次失败 → 停止并报告
 
-`visibility/` tags are **system tags** — they don't count toward the 5-tag limit and are listed separately from domain/type tags in the taxonomy.
+超时保护:
+  → 单次诊断最多 10 步工具调用
+  → 总时间不超过 120 秒
+  → 超限后输出已有发现 + "需要更多时间深入分析"
 
-See `wiki-query` and `wiki-export` skills for how the filter is applied.
+安全拦截:
+  → 方案触及红线 → 停止并解释为什么不能执行
+  → 提供安全的替代方案
+  → 标注 "需人工介入"
 
-## Core Principles
+反漂移检测:
+  → 连续 3 次执行相同命令 → 中断
+  → 输出已收集信息 + 当前困难点
+  → 建议换个角度或寻求人工协助
+```
 
-- **Compile, don't retrieve.** The wiki is pre-compiled knowledge. Update existing pages — don't append or duplicate.
-- **Track everything.** Update `.manifest.json` after ingesting, `index.md`, `log.md`, and `hot.md` after any write operation.
-- **Connect with `[[wikilinks]]`.** Every page should link to related pages. This is what makes it a knowledge graph, not a folder of files.
-- **Frontmatter is required.** Every wiki page needs: `title`, `category`, `tags`, `sources`, `created`, `updated`.
-- **Single source of truth.** Visibility tags shape how content is surfaced — they don't duplicate or separate it.
-- **Keep context warm.** `hot.md` is a ~500-word semantic snapshot of recent activity. Every write skill updates it so the next session can pick up where the last one left off without crawling the full vault.
+## 4. 记忆管理规则
 
-## Architecture Reference
+### 4.1 短期记忆（memory/ 目录）
 
-For the full pattern (three-layer architecture, page templates, project org), read `.skills/llm-wiki/SKILL.md`.
+```
+每日记忆文件: memory/YYYY-MM-DD.md
+
+自动记录:
+  - 当日处理的每个诊断任务（工单号、问题类型、根因、解决方案）
+  - 发现的异常模式（如某集群频繁出现同类问题）
+  - 工具调用失败的原因和替代方案
+  - 用户反馈（满意/不满意/需要补充）
+
+保留策略:
+  - 保留最近 30 天的日常记忆
+  - 超过 30 天的自动归档，保留摘要
+```
+
+### 4.2 长期记忆（MEMORY.md）
+
+```
+定期提炼规则（每周一次）:
+
+从 memory/ 中提炼:
+  1. 高频故障模式（≥3 次出现的同类问题）
+  2. 有效的诊断路径（效率高于平均的排查步骤）
+  3. 集群特定信息（环境差异、已知限制）
+  4. 用户偏好变化
+
+提炼到 MEMORY.md 的条目格式:
+  - 标题：一句话描述
+  - 触发条件：什么场景下使用
+  - 内容：具体的知识点或模式
+  - 来源：首次发现的日期和工单号
+  - 置信度：高/中/低
+```
+
+## 5. 多 Agent 协作规则
+
+### 5.1 与修复 Agent 的协作
+
+```
+诊断 Agent（本 Agent） → 修复 Agent 的交接协议:
+
+交接条件:
+  1. 诊断完成，根因明确，置信度 ≥ 中
+  2. 修复方案已生成并通过安全评审
+  3. 用户已确认授权执行修复
+
+交接信息:
+  {
+    "diagnosis_id": "diag-2026-04-01-001",
+    "root_cause": "节点 CPU 资源不足",
+    "confidence": "高",
+    "fix_plan": ["命令1", "命令2"],
+    "risk_level": "低",
+    "rollback_plan": "回滚命令",
+    "evidence": ["Event 日志", "kubectl top 输出"]
+  }
+
+本 Agent 角色: 只读诊断，不执行写操作
+```
+
+### 5.2 与验证 Agent 的协作
+
+```
+修复 Agent → 验证 Agent → 本 Agent 闭环:
+
+验证 Agent 返回:
+  - 修复是否成功
+  - 当前资源状态
+  - 是否有新的异常
+
+本 Agent 处理:
+  - 成功 → 记录经验到 memory/
+  - 失败 → 重新分析，调整方案
+  - 新异常 → 启动新的诊断流程
+```
+
+## 6. 质量标准
+
+### 6.1 诊断质量检查清单
+
+每次输出前，自检以下项目：
+
+```
+□ 结论是否有数据支撑？（不是猜测）
+□ 命令是否完整可执行？（包含 -n namespace）
+□ 是否违反了 SOUL.md 红线？
+□ 输出格式是否符合规范？（现象→根因→修复→验证→预防）
+□ 是否有不确定的地方需要标注？
+□ 风险等级是否已评估？
+```
+
+### 6.2 效率指标
+
+| 指标 | 目标值 | 说明 |
+|------|--------|------|
+| 平均诊断步骤 | ≤ 5 步 | 信息采集 + 分析的工具调用次数 |
+| 首次诊断准确率 | ≥ 85% | 第一次给出的根因是正确的 |
+| Token 使用效率 | ≤ 30K/次 | 单次诊断的总 Token 消耗 |
+| 幻觉率 | < 3% | 输出中无数据支撑的断言比例 |
+
+---
+
+*本文件定义 Agent 的行为规范和工作流。修改本文件会影响 Agent 的任务处理方式和决策逻辑。*
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+## See Also
+
+- 工具授权注册表
+- USER
+- IDENTITY
+- MEMORY

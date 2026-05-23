@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 版本演进
@@ -40,11 +41,11 @@ prerequisites:
 |---|---|---|
 | 孵化期 | v0.x - v0.10 | 原型验证，基础 Pod/Service 模型确立 |
 | 生产就绪 | v1.0 - v1.2 | 首次 GA，生产环境可用 |
-| 生态扩展 | v1.3 - v1.5 |  Federation、StatefulSet、Initializers 引入 |
-| 成熟期 | v1.6 - v1.9 | 自动扩缩、RBAC、NetworkPolicy GA |
-| 云原生平台 | v1.10 - v1.13 | CSI、Kubelet 插件化、TTL 控制 |
+| 生态扩展 | v1.3 - v1.5 |  Federation、[[StatefulSet|StatefulSet]]、Initializers 引入 |
+| 成熟期 | v1.6 - v1.9 | 自动扩缩、RBAC、[[NetworkPolicy|NetworkPolicy]] GA |
+| 云原生平台 | v1.10 - v1.13 | CSI、[[kubelet|Kubelet]] 插件化、TTL 控制 |
 | 标准化 | v1.14 - v1.17 | kubectl 成熟、kubeadm GA、拓扑感知调度 |
-| 现代化 | v1.18 - v1.21 | CronJob GA、Ephemeral Containers、ServiceAccount 自动创建 |
+| 现代化 | v1.18 - v1.21 | [[CronJob|CronJob]] GA、[[Ephemeral Containers|Ephemeral Containers]]、ServiceAccount 自动创建 |
 | 增强期 | v1.22 - v1.25 | 结构化日志、Sidecar Containers、Pod 安全准入 |
 | 持续演进 | v1.26 - v1.36 | API 持续优化、调度增强、安全加固 |
 

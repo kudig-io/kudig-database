@@ -1,5 +1,5 @@
 ---
-title: Agent Harness Loop 与执行引擎深度设计
+title: Agent Harness Loop 与执行引擎深度设计 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness Loop 与执行引擎深度设计'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness Loop 与执行引擎深度设计
@@ -42,7 +43,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -1101,9 +1102,9 @@ class IncidentExecutionEngine:
 | 文档 | 关联内容 |
 |------|--------|
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | Harness 六层架构总览，Loop 层基本定义 |
-| [32 - Harness 工具工程](./[[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]].md) | Loop 层驱动的工具调用设计 |
-| [33 - 上下文与记忆工程](./[[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]].md) | Loop 中的上下文管理和持久化 |
-| [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | Loop 结束后的验证层 |
+| [32 - Harness 工具工程](./32-agent-harness-tool-engineering.md) | Loop 层驱动的工具调用设计 |
+| [33 - 上下文与记忆工程](./33-agent-harness-context-memory.md) | Loop 中的上下文管理和持久化 |
+| [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | Loop 结束后的验证层 |
 | [01 - AI Agent 基础](./01-ai-agent-fundamentals.md) | Agent Loop、ReAct 推理模式的理论基础 |
 
 ---
@@ -1125,7 +1126,7 @@ class IncidentExecutionEngine:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1140,7 +1141,7 @@ class IncidentExecutionEngine:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
-- [[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]]
-- [[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]]
-- [[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]]
+- 29-agentscope-studio-skill-demo
+- 30-agent-harness-engineering
+- 32-agent-harness-tool-engineering
+- 33-agent-harness-context-memory

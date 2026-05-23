@@ -32,6 +32,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 智慧餐饮架构设计
@@ -41,7 +42,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -57,7 +58,7 @@ audience:
 - 餐饮信息化负责人
 estimated_read_time: 5min
 intent_queries:
-- smart restaurant kubernetes architecture
+- smart restaurant [[Kubernetes|kubernetes]] architecture
 - 智慧餐饮K8s部署方案
 - 餐饮点餐KDS系统
 - 餐饮供应链预测
@@ -550,7 +551,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -565,7 +566,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/30-hrtech-saas.md|30-hrtech-saas]]
-- [[domain-20-application-patterns/31-instant-retail.md|31-instant-retail]]
-- [[domain-20-application-patterns/33-crossborder-warehouse.md|33-crossborder-warehouse]]
-- [[domain-20-application-patterns/34-sportstech.md|34-sportstech]]
+- 30-hrtech-saas
+- 31-instant-retail
+- 33-crossborder-warehouse
+- 34-sportstech

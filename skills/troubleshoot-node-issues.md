@@ -30,6 +30,7 @@ trigger_keywords:
 - Issues
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Troubleshoot Node Issues
@@ -45,8 +46,8 @@ kubectl get node <node-name> -o jsonpath='{.status.conditions}'
 ```
 
 Key conditions:
-- **Ready**: Node is healthy and accepting Pods
-- **MemoryPressure**: kubelet will evict Pods
+- **Ready**: Node is healthy and accepting [[Pods|Pods]]
+- **MemoryPressure**: [[kubelet|kubelet]] will evict Pods
 - **DiskPressure**: kubelet will evict Pods
 - **PIDPressure**: Too many processes
 
@@ -61,7 +62,7 @@ Common kubelet issues:
 - Certificate expiration (check `--tls-cert-file`)
 - API Server connectivity failure
 - CRI socket not responding
-- cgroup driver mismatch with container runtime
+- cgroup driver mismatch with [[Container Runtime|container runtime]]
 
 ### Step 3: Check Container Runtime
 

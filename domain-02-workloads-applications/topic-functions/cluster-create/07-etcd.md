@@ -1,4 +1,41 @@
 ---
+title: etcd 静态 Pod 管理 (topic-code-analysis)
+description: 'title: etcd 静态 Pod 管理'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- etcd 静态 Pod 管理 是什么
+- 如何 etcd 静态 Pod 管理
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- etcd
+- 静态
+- Pod
+- 管理
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: etcd 静态 Pod 管理
 description: '# etcd 静态 Pod 管理'
 category: functions
@@ -39,10 +76,6 @@ trigger_keywords:
 - server
 - WAL
 - snap
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -52,6 +85,15 @@ related_topics:
 - etcd advanced
 - certificate management
 - HA cluster
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # etcd 静态 Pod 管理
@@ -741,11 +783,16 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 - [集群概览](01-overview.md) — init 流程中 etcd phase
 - [证书管理](03-certs.md) — etcd TLS 证书
 - [控制面组件](05-control-plane.md) — API Server 连接 etcd
-- [etcd 进阶]([[domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced|13-etcd-advanced]].md) — HA etcd 管理和调优
+- [etcd 进阶](13-etcd-advanced.md) — HA etcd 管理和调优
 - [集群升级](09-upgrade.md) — 升级 etcd 版本
 - [高可用进阶](14-ha-advanced.md) — 多节点 etcd 集群
 
 ## Related
 
+- [[hot.md|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

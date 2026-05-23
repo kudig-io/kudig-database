@@ -1,5 +1,5 @@
 ---
-title: ChaosBlade
+title: ChaosBlade [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # ChaosBlade
@@ -77,7 +78,7 @@ ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/chaosblade/chaosblade.md|chaosblade]]
+- chaosblade
 - [[entities/krkn.md|Krkn]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

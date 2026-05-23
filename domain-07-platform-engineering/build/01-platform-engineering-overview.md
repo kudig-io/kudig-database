@@ -51,10 +51,11 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 平台工程概述与成熟度模型
-# Platform Engineering Overview and Maturity Model
+# [[synthesis/platform-engineering-sre.md|Platform Engineering]] Overview and Maturity Model
 
 > **领域**: 平台工程 | Platform Engineering  
 > **难度**: 入门到中级 | Beginner to Intermediate  
@@ -88,7 +89,7 @@ authors:
 **平台工程 (Platform Engineering)** 是一门工程学科，专注于设计、构建和维护自助式内部开发者平台 (Internal Developer Platform, IDP)，以加速软件交付、降低认知负载，并在整个组织中标准化最佳实践。
 
 > **官方定义** (Gartner, 2023):  
-> "Platform engineering is the discipline of designing and building toolchains and workflows that enable self-service capabilities for software engineering organizations in the cloud-native era."
+> "Platform engineering is the discipline of designing and building toolchains and workflows that enable self-[[Service|service]] capabilities for software engineering organizations in the cloud-native era."
 
 ```
 传统模式 (Traditional Mode)
@@ -118,7 +119,7 @@ authors:
 - CI/CD 工具链爆发（Jenkins、GitLab CI、GitHub Actions）
 - 容器化技术兴起（Docker, 2013）
 
-**阶段三：云原生与 Kubernetes (2015-2020)**
+**阶段三：云原生与 [[Kubernetes|Kubernetes]] (2015-2020)**
 - Kubernetes 成为容器编排标准
 - 微服务架构大规模落地
 - 基础设施即代码 (IaC) 普及
@@ -384,7 +385,7 @@ graph TB
 |--------|----------|----------|-----------|
 | **应用脚手架** | 新服务/项目模板生成 | Backstage Scaffolder | 100% 自助 |
 | **CI/CD 流水线** | 构建、测试、部署自动化 | GitHub Actions, Tekton | 80% 自助 |
-| **环境管理** | Dev/Staging/Prod 环境配置 | Crossplane, Terraform | 70% 自助 |
+| **环境管理** | Dev/Staging/Prod 环境配置 | [[Crossplane|Crossplane]], Terraform | 70% 自助 |
 | **服务目录** | 服务注册、发现、文档 | Backstage Catalog | 100% 自助 |
 | **监控告警** | 指标、日志、追踪 | Prometheus, Grafana | 90% 自助 |
 | **密钥管理** | 证书、密码、API Key | Vault, External Secrets | 85% 自助 |
@@ -1551,22 +1552,22 @@ Engineering Manager / Director (管理路径)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-36 平台工程 — 开源项目索引]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|内部开发者平台设计原则]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|Backstage 部署与配置]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|Backstage 软件目录与 TechDocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|Backstage 脚手架与模板系统]]
-- [[domain-07-platform-engineering/06-kratix-platform-as-code.md|Kratix 平台即代码 (Kratix Platform as Code)]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|Crossplane 平台组合 (Crossplane Platform Composition)]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|Golden Paths 黄金路径设计 (Golden Paths Design Patterns)]]
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|开发者体验度量 (Developer Experience Metrics)]]
-- [[domain-07-platform-engineering/10-platform-team-topology.md|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- Domain-36 平台工程 — 开源项目索引
+- 内部开发者平台设计原则
+- Backstage 部署与配置
+- Backstage 软件目录与 TechDocs
+- Backstage 脚手架与模板系统
+- Kratix 平台即代码 (Kratix Platform as Code)
+- Crossplane 平台组合 (Crossplane Platform Composition)
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- 开发者体验度量 (Developer Experience Metrics)
+- 平台团队拓扑与运营 (Platform Team Topology and Operations)
 
 ## See Also
 
-- [[domain-07-platform-engineering/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]]
-- [[domain-07-platform-engineering/99-backstage-idp-guide.md|99-backstage-idp-guide]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|02-idp-design-principles]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|03-backstage-deployment]]
+- 11-vercel-frontend-deployment-platform
+- 99-backstage-idp-guide
+- 02-idp-design-principles
+- 03-backstage-deployment

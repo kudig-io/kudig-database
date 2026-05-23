@@ -1,4 +1,41 @@
 ---
+title: 预检流程 (kubeadm preflight) [cluster-create]
+description: 'description: ''| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查 |'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 预检流程 (kubeadm preflight) 是什么
+- 如何 预检流程 (kubeadm preflight)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 预检流程
+- kubeadm
+- preflight
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 预检流程 (kubeadm preflight)
 description: '| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查 |'
 category: functions
@@ -39,10 +76,6 @@ trigger_keywords:
 - ignore-preflight-errors
 - firewalld
 - kernel
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -51,6 +84,15 @@ related_topics:
 - kubeadm join
 - system requirements
 - CRI
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 预检流程 (kubeadm preflight)
@@ -101,7 +143,7 @@ type Checker interface { Name() string; Check() error }
 | `IsPrivilegedUser` | 权限 | root 权限 | 非 root 用户 |
 | `KubernetesVersion` | 版本 | K8s 版本兼容性 | kubeadm 和 kubelet 版本不匹配 |
 | `Firewalld` | 网络 | 防火墙状态 | firewalld 运行中 |
-| `DirAvailable--etc-[[entities/kubernetes|kubernetes]]-manifests` | 文件 | manifest 目录 | 目录已存在且非空 |
+| `DirAvailable--etc-kubernetes-manifests` | 文件 | manifest 目录 | 目录已存在且非空 |
 | `DirAvailable--var-lib-etcd` | 文件 | etcd 数据目录 | 目录已存在且非空 |
 
 ## 调用链
@@ -612,3 +654,11 @@ func (c DirAvailableCheck) Check() error {
     return nil
 }
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]

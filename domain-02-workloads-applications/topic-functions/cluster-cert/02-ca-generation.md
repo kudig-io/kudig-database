@@ -1,4 +1,39 @@
 ---
+title: CA 证书生成源码分析 (topic-code-analysis)
+description: 'description: ''| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- CA 证书生成源码分析 是什么
+- 如何 CA 证书生成源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- CA
+- 证书生成源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: CA 证书生成源码分析
 description: '| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'
 category: functions
@@ -37,10 +72,6 @@ trigger_keywords:
 - 外部 CA
 - UsingExternalCA
 - CreatePKIAssets
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -48,6 +79,15 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/apiserver-cert
 - cluster-cert/etcd-cert
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # CA 证书生成源码分析
@@ -416,4 +456,12 @@ systemctl restart kubelet
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
 - [`buildKubeConfigFromSpec`](12-kubeconfig-certs.md) — kubeconfig 证书嵌入
 - [`X509 Authenticator`](08-rbac-mapping.md) — 证书身份提取
-- [`kubeadm certs renew`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — 证书续期命令
+- [`kubeadm certs renew`](README.md) — 证书续期命令
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/04-etcd-cert.md|04-etcd-cert]]

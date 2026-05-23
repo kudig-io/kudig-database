@@ -29,6 +29,16 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[concepts/etcd Operational Reference]]"
+    type: uses
+  - target: "[[skills/Kubernetes FTA Top Events Index]]"
+    type: uses
+  - target: "[[skills/FTA Methodology and Core Principles]]"
+    type: related_to
+  - target: "[[docs/indexes/INDEX]]"
+    type: related_to
 ---
 
 # K8s 故障分布与 MTTR 基准
@@ -100,9 +110,9 @@ prerequisites:
 
 ## 相关
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论与核心原则]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA 顶事件索引]]
-- [[concepts/etcd Operational Reference.md|etcd 运维参考]]
+- FTA Methodology and Core Principles.md|FTA 方法论与核心原则]]
+- [[docs/indexes/INDEX|Index]]|Kubernetes FTA Top Events Index]].md|Kubernetes FTA 顶事件索引]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]].md|etcd 运维参考]]
 - [[synthesis/Production Troubleshooting Playbook.md|生产排障手册]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
@@ -114,3 +124,4 @@ prerequisites:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[entities/dex|Dex (entities)]]

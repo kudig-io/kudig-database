@@ -1,5 +1,5 @@
 ---
-title: Service Mesh(Istio) 异常故障树分析
+title: Service Mesh(Istio) 异常故障树分析 (skills)
 description: '- **目标**：覆盖 Istio 控制面不可用、Sidecar 注入失败、xDS 配置推送异常、mTLS 证书问题、数据面流量异常与多集群联邦故障的关键成因与路径。'
 category: general
 tags:
@@ -28,17 +28,18 @@ prerequisites:
 fta_id: FTA-SERVICE_MESH_ISTIO-001
 component: Service Mesh Istio
 severity: medium
+created: "2026-05-23"
 ---
 
 ---
-title: "Service Mesh(Istio) 异常故障树分析"
+title: "[[Service|Service]]Service Mesh）|Service Mesh]](Istio) 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n istio-system -o jsonpath='{range .items[?(@.status.phase!='Running')]}{.metadata.name}{\'\n\'}{end}' 显示 Istio 控制面异常 --> - **目标**：覆盖 Istio 控制面..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n istio-system -o jsonpath='{range .items[?(@.status.phase!='Running')]}{.metadata.name}{\'\n\'}{end}' 显示 Istio 控制面异常 --> - **目标**：覆盖 Istio 控制面..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

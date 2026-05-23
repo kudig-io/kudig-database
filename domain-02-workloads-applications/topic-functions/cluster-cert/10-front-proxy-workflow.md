@@ -1,4 +1,37 @@
 ---
+title: Front Proxy 聚合层证书工作流 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Front Proxy 聚合层证书工作流 是什么
+- 如何 Front Proxy 聚合层证书工作流
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Front
+- Proxy
+- 聚合层证书工作流
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- tls-basics
+created: "2026-05-23"
+---
+
 title: Front Proxy 聚合层证书工作流
 description: '## 概述'
 category: functions
@@ -33,10 +66,6 @@ trigger_keywords:
 - 聚合层
 - Aggregation Layer
 - requestheader-allowed-names
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- tls-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -44,6 +73,15 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/apiserver-cert-flags
 - cluster-cert/rbac-mapping
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Front Proxy 聚合层证书工作流
@@ -243,7 +281,7 @@ spec:
 
 **metrics-server 服务端证书**：
 - metrics-server 自动生成服务端证书（存储在 `--cert-dir`）
-- 或者通过 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 签发正式证书
+- 或者通过 cert-manager 签发正式证书
 - 主 API Server 通过 `Service` 的 DNS 名连接 metrics-server
 
 ---
@@ -410,3 +448,11 @@ openssl x509 -req \
   -out front-proxy-client.crt \
   -days 365
 ```
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cert-manager.md|cert-manager]]

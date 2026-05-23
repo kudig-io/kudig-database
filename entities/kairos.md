@@ -1,5 +1,5 @@
 ---
-title: Kairos
+title: Kairos (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Kairos
@@ -68,7 +69,7 @@ Kairos 是一个不可变 Linux 元发行版框架，专注于将任何 Linux �
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[k3s]] — k3s 轻量级 Kubernetes
 
-- [[domain-19-landscape-references/sandbox/kairos/kairos.md|kairos]]
+- kairos
 - [[entities/interlink.md|InterLink]]
 - [[entities/akri.md|Akri]]
 - [[entities/openyurt.md|OpenYurt]]

@@ -1,5 +1,5 @@
 ---
-title: 02 - 单节点部署 (Single Node All-in-One)
+title: 02 - 单节点部署 (Single Node All-in-One) [deployment]
 description: 'title: 02 - 单节点部署 (Single Node All-in-One)'
 category: general
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 02 - 单节点部署 (Single Node All-in-One)
@@ -49,9 +50,9 @@ tags:
 - k8s
 - deployment
 - rolling-update
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - flannel
@@ -1033,7 +1034,7 @@ sudo snap remove microk8s
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-deployment/MOC.md|topic-deployment MOC]]
+- topic-deployment MOC
 - [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
 - [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
 - [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]

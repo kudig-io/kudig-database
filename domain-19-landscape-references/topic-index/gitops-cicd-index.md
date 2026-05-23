@@ -42,6 +42,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # GitOps / CI-CD 全局索引
@@ -50,32 +51,32 @@ prerequisites:
 
 ## 架构基础
 
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview|Kubernetes 架构全景图 (Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive|Kubernetes 核心组件深度剖析 (Core Components Deep Dive)]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference|kubectl 命令完整参考 (kubectl Commands Complete Reference)]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/12-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]
-- [[domain-01-cluster-fundamentals/14-security-architecture|14 - Kubernetes 安全架构深度分析]]
-- [[domain-01-cluster-fundamentals/15-observability-architecture|15 - Kubernetes 可观测性架构体系]]
-- [[domain-01-cluster-fundamentals/17-production-operations-best-practices|17 - 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-01-cluster-fundamentals/18-upgrade-migration-strategy|18 - Kubernetes 升级和迁移策略指南]]
-- [[domain-01-cluster-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide|Kubectl v1.29 - v1.33 新命令与用法速查]]
+- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]]]
+- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive.md]]
+- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference.md]]
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 12 - Kubernetes 集群部署架构模式指南
+- 14 - Kubernetes 安全架构深度分析
+- 15 - Kubernetes 可观测性架构体系
+- 17 - 生产环境运维最佳实践 (Production Operations Best Practices)
+- 18 - Kubernetes 升级和迁移策略指南
+- Kubectl v1.29 - v1.33 新命令与用法速查
 
 ## 控制平面
 
-- [[domain-01-cluster-fundamentals/26-gitops-automation-operations|GitOps自动化运维实践 (GitOps Automation Operations Practice)]]
+- GitOps自动化运维实践 (GitOps Automation Operations Practice)
 
 ## 平台运维
 
-- [[domain-07-platform-engineering/07-gitops-configuration-management|GitOps配置管理 (GitOps Configuration Management)]]
+- GitOps配置管理 (GitOps Configuration Management)
 
 ## 扩展生态
 
-- [[domain-15-specialized-tech/06-helm-charts-management|47 - Helm Chart开发与管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations|129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践]]
-- [[domain-15-specialized-tech/08-cicd-pipelines|21 - CI/CD管道表]]
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd|48 - GitOps工作流]]
+- 47 - Helm Chart开发与管理
+- 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- 21 - CI/CD管道表
+- 48 - GitOps工作流
 
 ## 结构化故障排查 - 控制平面
 
@@ -142,12 +143,12 @@ prerequisites:
 
 ## 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure|[[Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]]
 
 ## YAML 清单参考
 
-- [[domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd|36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考]]
+- 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考
 
 ## 术语词典
 
@@ -225,199 +226,199 @@ prerequisites:
 
 ## 生产运维
 
-- [[domain-11-production-operations/10-gitops-pipeline-practices|10-GitOps流水线实践]]
+- 10-GitOps流水线实践
 
 ## 技术论文
 
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]
+- [[domain-19-landscape-references/02-papers/05-kubernetes-gitops-complete-practice-guide.md]]
 
 ## GitOps / CI-CD
 
-- [[domain-08-release-change-management/00-open-source-projects-index|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd|GitLab CI/CD Enterprise Pipeline Automation Platform]]
-- [[domain-08-release-change-management/04-github-actions-enterprise|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide|Flux GitOps 实践指南]]
-- [[domain-08-release-change-management/99-tekton-cicd-guide|Tekton 云原生 CI/CD 实践指南]]
-- [[domain-08-release-change-management/99-tekton-java-cicd-guide|Tekton Java CI/CD 流水线实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD Enterprise Pipeline Automation Platform
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
+- Tekton 云原生 CI/CD 实践指南
+- Tekton Java CI/CD 流水线实践指南
 
 ## CNCF 生态
 
-- [[domain-19-landscape-references/graduated/argo/argo|Argo]]
-- [[domain-19-landscape-references/graduated/cert-manager/cert-manager|cert-manager]]
-- [[domain-19-landscape-references/graduated/cilium/cilium|Cilium]]
-- [[domain-19-landscape-references/graduated/cri-o/cri-o|CRI-O]]
-- [[domain-19-landscape-references/graduated/crossplane/crossplane|Crossplane]]
-- [[domain-19-landscape-references/graduated/cubefs/cubefs|CubeFS]]
-- [[domain-19-landscape-references/graduated/dapr/dapr|Dapr]]
-- [[domain-19-landscape-references/graduated/dragonfly/dragonfly|Dragonfly]]
-- [[domain-19-landscape-references/graduated/falco/falco|Falco]]
-- [[domain-19-landscape-references/graduated/flux/flux|Flux]]
-- [[domain-19-landscape-references/graduated/harbor/harbor|Harbor]]
-- [[domain-19-landscape-references/graduated/helm/helm|Helm]]
-- [[domain-19-landscape-references/graduated/in-toto/in-toto|in-toto]]
-- [[domain-19-landscape-references/graduated/jaeger/jaeger|Jaeger]]
-- [[domain-19-landscape-references/graduated/keda/keda|KEDA]]
-- [[domain-19-landscape-references/graduated/knative/knative|Knative]]
-- [[domain-19-landscape-references/graduated/kubeedge/kubeedge|KubeEdge]]
-- [[domain-19-landscape-references/graduated/kubernetes/kubernetes|Kubernetes]]
-- [[domain-19-landscape-references/graduated/linkerd/linkerd|Linkerd]]
-- [[domain-19-landscape-references/graduated/prometheus/prometheus|Prometheus]]
-- [[domain-19-landscape-references/graduated/spire/spire|SPIRE]]
-- [[domain-19-landscape-references/incubating/artifact-hub/artifact-hub|Artifact Hub]]
-- [[domain-19-landscape-references/incubating/backstage/backstage|Backstage]]
-- [[domain-19-landscape-references/incubating/buildpacks/buildpacks|Buildpacks]]
-- [[domain-19-landscape-references/incubating/chaos-mesh/chaos-mesh|Chaos Mesh]]
-- [[domain-19-landscape-references/incubating/contour/contour|Contour]]
-- [[domain-19-landscape-references/incubating/cortex/cortex|Cortex]]
-- [[domain-19-landscape-references/incubating/emissary-ingress/emissary-ingress|Emissary-Ingress]]
-- [[domain-19-landscape-references/incubating/fluid/fluid|Fluid]]
-- [[domain-19-landscape-references/incubating/karmada/karmada|Karmada]]
-- [[domain-19-landscape-references/incubating/kserve/kserve|KServe]]
-- [[domain-19-landscape-references/incubating/kubeflow/kubeflow|Kubeflow]]
-- [[domain-19-landscape-references/incubating/kubescape/kubescape|Kubescape]]
-- [[domain-19-landscape-references/incubating/kubevela/kubevela|KubeVela]]
-- [[domain-19-landscape-references/incubating/kyverno/kyverno|Kyverno]]
-- [[domain-19-landscape-references/incubating/litmus/litmus|Litmus]]
-- [[domain-19-landscape-references/incubating/longhorn/longhorn|Longhorn]]
-- [[domain-19-landscape-references/incubating/metal3-io/metal3-io|Metal3-io]]
-- [[domain-19-landscape-references/incubating/nats/nats|NATS]]
-- [[domain-19-landscape-references/incubating/notary-project/notary-project|Notary Project]]
-- [[domain-19-landscape-references/incubating/opencost/opencost|OpenCost]]
-- [[domain-19-landscape-references/incubating/openfga/openfga|OpenFGA]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise|OpenKruise]]
-- [[domain-19-landscape-references/incubating/opentelemetry/opentelemetry|OpenTelemetry]]
-- [[domain-19-landscape-references/incubating/openyurt/openyurt|OpenYurt]]
-- [[domain-19-landscape-references/incubating/operator-framework/operator-framework|Operator Framework]]
-- [[domain-19-landscape-references/incubating/strimzi/strimzi|Strimzi]]
-- [[domain-19-landscape-references/incubating/volcano/volcano|Volcano]]
-- [[domain-19-landscape-references/sandbox/aeraki-mesh/aeraki-mesh|Aeraki Mesh]]
-- [[domain-19-landscape-references/sandbox/akri/akri|Akri]]
-- [[domain-19-landscape-references/sandbox/antrea/antrea|Antrea]]
-- [[domain-19-landscape-references/sandbox/armada/armada|Armada]]
-- [[domain-19-landscape-references/sandbox/athenz/athenz|Athenz]]
-- [[domain-19-landscape-references/sandbox/atlantis/atlantis|Atlantis]]
-- [[domain-19-landscape-references/sandbox/bank-vaults/bank-vaults|Bank-Vaults]]
-- [[domain-19-landscape-references/sandbox/capsule/capsule|Capsule]]
-- [[domain-19-landscape-references/sandbox/carina/carina|Carina]]
-- [[domain-19-landscape-references/sandbox/cartography/cartography|Cartography]]
-- [[domain-19-landscape-references/sandbox/carvel/carvel|Carvel]]
-- [[domain-19-landscape-references/sandbox/cdk8s/cdk8s|cdk8s]]
-- [[domain-19-landscape-references/sandbox/chaosblade/chaosblade|ChaosBlade]]
-- [[domain-19-landscape-references/sandbox/cloudnativepg/cloudnativepg|CloudNativePG]]
-- [[domain-19-landscape-references/sandbox/clusternet/clusternet|Clusternet]]
-- [[domain-19-landscape-references/sandbox/clusterpedia/clusterpedia|Clusterpedia]]
-- [[domain-19-landscape-references/sandbox/cohdi/cohdi|CoHDI (Composable Hyperconverged Disaggregated Infrastructure)]]
-- [[domain-19-landscape-references/sandbox/copa/copa|Copa (Copacetic)]]
-- [[domain-19-landscape-references/sandbox/cozystack/cozystack|Cozystack]]
-- [[domain-19-landscape-references/sandbox/dalec/dalec|Dalec (Declarative Application Linux Environment Creator)]]
-- [[domain-19-landscape-references/sandbox/devspace/devspace|DevSpace]]
-- [[domain-19-landscape-references/sandbox/dex/dex|Dex]]
-- [[domain-19-landscape-references/sandbox/easegress/easegress|Easegress]]
-- [[domain-19-landscape-references/sandbox/eraser/eraser|Eraser]]
-- [[domain-19-landscape-references/sandbox/external-secrets/external-secrets|External Secrets Operator]]
-- [[domain-19-landscape-references/sandbox/hami/hami|HAMi (Heterogeneous AI Computing Virtualization Middleware)]]
-- [[domain-19-landscape-references/sandbox/headlamp/headlamp|Headlamp]]
-- [[domain-19-landscape-references/sandbox/holmesgpt/holmesgpt|HolmesGPT]]
-- [[domain-19-landscape-references/sandbox/hwameistor/hwameistor|HwameiStor]]
-- [[domain-19-landscape-references/sandbox/interlink/interlink|InterLink]]
-- [[domain-19-landscape-references/sandbox/k0s/k0s|K0s]]
-- [[domain-19-landscape-references/sandbox/k3s/k3s|k3s]]
-- [[domain-19-landscape-references/sandbox/k8gb/k8gb|K8GB (Kubernetes Global Balancer)]]
-- [[domain-19-landscape-references/sandbox/k8sgpt/k8sgpt|K8sGPT]]
-- [[domain-19-landscape-references/sandbox/k8up/k8up|K8up]]
-- [[domain-19-landscape-references/sandbox/kagent/kagent|Kagent (Kubernetes AI Agent)]]
-- [[domain-19-landscape-references/sandbox/kaito/kaito|KAITO (Kubernetes AI Toolchain Operator)]]
-- [[domain-19-landscape-references/sandbox/kanister/kanister|Kanister]]
-- [[domain-19-landscape-references/sandbox/kcl/kcl|KCL (KusionStack Configuration Language)]]
-- [[domain-19-landscape-references/sandbox/kepler/kepler|Kepler]]
-- [[domain-19-landscape-references/sandbox/kgateway/kgateway|K Gateway (formerly Gloo Gateway)]]
-- [[domain-19-landscape-references/sandbox/kitops/kitops|KitOps]]
-- [[domain-19-landscape-references/sandbox/kmesh/kmesh|Kmesh]]
-- [[domain-19-landscape-references/sandbox/ko/ko|ko]]
-- [[domain-19-landscape-references/sandbox/koordinator/koordinator|Koordinator]]
-- [[domain-19-landscape-references/sandbox/kpt/kpt|kpt]]
-- [[domain-19-landscape-references/sandbox/kube-ovn/kube-ovn|Kube-OVN]]
-- [[domain-19-landscape-references/sandbox/kubean/kubean|Kubean]]
-- [[domain-19-landscape-references/sandbox/kubearmor/kubearmor|KubeArmor]]
-- [[domain-19-landscape-references/sandbox/kubeclipper/kubeclipper|KubeClipper]]
-- [[domain-19-landscape-references/sandbox/kubeelasti/kubeelasti|KubeElastic]]
-- [[domain-19-landscape-references/sandbox/kubefleet/kubefleet|KubeFleet]]
-- [[domain-19-landscape-references/sandbox/kuberhealthy/kuberhealthy|Kuberhealthy]]
-- [[domain-19-landscape-references/sandbox/kubeslice/kubeslice|KubeSlice]]
-- [[domain-19-landscape-references/sandbox/kubestellar/kubestellar|KubeStellar]]
-- [[domain-19-landscape-references/sandbox/kubewarden/kubewarden|Kubewarden]]
-- [[domain-19-landscape-references/sandbox/kudo/kudo|KUDO (Kubernetes Universal Declarative Operator)]]
-- [[domain-19-landscape-references/sandbox/kuma/kuma|Kuma]]
-- [[domain-19-landscape-references/sandbox/kured/kured|Kured]]
-- [[domain-19-landscape-references/sandbox/kusionstack/kusionstack|KusionStack]]
-- [[domain-19-landscape-references/sandbox/logging-operator/logging-operator|Logging Operator]]
-- [[domain-19-landscape-references/sandbox/meshery/meshery|Meshery]]
-- [[domain-19-landscape-references/sandbox/metallb/metallb|MetalLB]]
-- [[domain-19-landscape-references/sandbox/microcks/microcks|Microcks]]
-- [[domain-19-landscape-references/sandbox/modelpack/modelpack|ModelPack]]
-- [[domain-19-landscape-references/sandbox/network-service-mesh/network-service-mesh|Network Service Mesh (NSM)]]
-- [[domain-19-landscape-references/sandbox/open-policy-containers/open-policy-containers|Open Policy Containers (OPCR)]]
-- [[domain-19-landscape-references/sandbox/openchoreo/openchoreo|OpenChoreo]]
-- [[domain-19-landscape-references/sandbox/openebs/openebs|OpenEBS]]
-- [[domain-19-landscape-references/sandbox/openfunction/openfunction|OpenFunction]]
-- [[domain-19-landscape-references/sandbox/opengemini/opengemini|openGemini]]
-- [[domain-19-landscape-references/sandbox/opengitops/opengitops|OpenGitOps]]
-- [[domain-19-landscape-references/sandbox/opentofu/opentofu|OpenTofu]]
-- [[domain-19-landscape-references/sandbox/oras/oras|ORAS]]
-- [[domain-19-landscape-references/sandbox/oscal-compass/oscal-compass|OSCAL Compass]]
-- [[domain-19-landscape-references/sandbox/ovn-kubernetes/ovn-kubernetes|OVN-Kubernetes]]
-- [[domain-19-landscape-references/sandbox/oxia/oxia|Oxia]]
-- [[domain-19-landscape-references/sandbox/paralus/paralus|Paralus]]
-- [[domain-19-landscape-references/sandbox/perses/perses|Perses]]
-- [[domain-19-landscape-references/sandbox/pipecd/pipecd|PipeCD]]
-- [[domain-19-landscape-references/sandbox/piraeus-datastore/piraeus-datastore|Piraeus Datastore]]
-- [[domain-19-landscape-references/sandbox/pixie/pixie|Pixie]]
-- [[domain-19-landscape-references/sandbox/porter/porter|Porter]]
-- [[domain-19-landscape-references/sandbox/radius/radius|Radius]]
-- [[domain-19-landscape-references/sandbox/ratify/ratify|Ratify]]
-- [[domain-19-landscape-references/sandbox/runme-notebooks/runme-notebooks|Runme]]
-- [[domain-19-landscape-references/sandbox/schemahero/schemahero|SchemaHero]]
-- [[domain-19-landscape-references/sandbox/serverless-devs/serverless-devs|Serverless Devs]]
-- [[domain-19-landscape-references/sandbox/shipwright/shipwright|Shipwright]]
-- [[domain-19-landscape-references/sandbox/slimfaas/slimfaas|SlimFaas]]
-- [[domain-19-landscape-references/sandbox/slimtoolkit/slimtoolkit|SlimToolkit]]
-- [[domain-19-landscape-references/sandbox/sops/sops|SOPS]]
-- [[domain-19-landscape-references/sandbox/spiderpool/spiderpool|Spiderpool]]
-- [[domain-19-landscape-references/sandbox/spinkube/spinkube|SpinKube]]
-- [[domain-19-landscape-references/sandbox/stacker/stacker|Stacker]]
-- [[domain-19-landscape-references/sandbox/telepresence/telepresence|Telepresence]]
-- [[domain-19-landscape-references/sandbox/tinkerbell/tinkerbell|Tinkerbell]]
-- [[domain-19-landscape-references/sandbox/tokenetes/tokenetes|Tokenetes]]
-- [[domain-19-landscape-references/sandbox/tremor/tremor|Tremor]]
-- [[domain-19-landscape-references/sandbox/trickster/trickster|Trickster]]
-- [[domain-19-landscape-references/sandbox/vineyard/vineyard|Vineyard (v6d)]]
-- [[domain-19-landscape-references/sandbox/virtual-kubelet/virtual-kubelet|Virtual Kubelet]]
-- [[domain-19-landscape-references/sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools|VS Code Kubernetes Tools]]
-- [[domain-19-landscape-references/sandbox/werf/werf|werf]]
-- [[domain-19-landscape-references/sandbox/xregistry/xregistry|xRegistry]]
+- Argo
+- cert-manager
+- Cilium
+- CRI-O
+- Crossplane
+- CubeFS
+- Dapr
+- Dragonfly
+- Falco
+- Flux
+- Harbor
+- Helm
+- in-toto
+- Jaeger
+- KEDA
+- Knative
+- KubeEdge
+- Kubernetes
+- Linkerd
+- Prometheus
+- SPIRE
+- Artifact Hub
+- Backstage
+- Buildpacks
+- Chaos Mesh
+- Contour
+- Cortex
+- Emissary-Ingress
+- Fluid
+- Karmada
+- KServe
+- Kubeflow
+- Kubescape
+- KubeVela
+- Kyverno
+- Litmus
+- Longhorn
+- Metal3-io
+- NATS
+- Notary Project
+- OpenCost
+- OpenFGA
+- OpenKruise
+- OpenTelemetry
+- OpenYurt
+- Operator Framework
+- Strimzi
+- Volcano
+- Aeraki Mesh
+- Akri
+- Antrea
+- Armada
+- Athenz
+- Atlantis
+- Bank-Vaults
+- Capsule
+- Carina
+- Cartography
+- Carvel
+- cdk8s
+- ChaosBlade
+- CloudNativePG
+- Clusternet
+- Clusterpedia
+- CoHDI (Composable Hyperconverged Disaggregated Infrastructure)
+- Copa (Copacetic)
+- Cozystack
+- Dalec (Declarative Application Linux Environment Creator)
+- DevSpace
+- Dex
+- Easegress
+- Eraser
+- External Secrets Operator
+- HAMi (Heterogeneous AI Computing Virtualization Middleware)
+- Headlamp
+- HolmesGPT
+- HwameiStor
+- InterLink
+- K0s
+- k3s
+- K8GB (Kubernetes Global Balancer)
+- K8sGPT
+- K8up
+- Kagent (Kubernetes AI Agent)
+- KAITO (Kubernetes AI Toolchain Operator)
+- Kanister
+- KCL (KusionStack Configuration Language)
+- Kepler
+- K Gateway (formerly Gloo Gateway)
+- KitOps
+- Kmesh
+- ko
+- Koordinator
+- kpt
+- Kube-OVN
+- Kubean
+- KubeArmor
+- KubeClipper
+- KubeElastic
+- KubeFleet
+- Kuberhealthy
+- KubeSlice
+- KubeStellar
+- Kubewarden
+- KUDO (Kubernetes Universal Declarative Operator)
+- Kuma
+- Kured
+- KusionStack
+- Logging Operator
+- Meshery
+- MetalLB
+- Microcks
+- ModelPack
+- Network Service Mesh (NSM)
+- Open Policy Containers (OPCR)
+- OpenChoreo
+- OpenEBS
+- OpenFunction
+- openGemini
+- OpenGitOps
+- OpenTofu
+- ORAS
+- OSCAL Compass
+- OVN-Kubernetes
+- Oxia
+- Paralus
+- Perses
+- PipeCD
+- Piraeus Datastore
+- Pixie
+- Porter
+- Radius
+- Ratify
+- Runme
+- SchemaHero
+- Serverless Devs
+- Shipwright
+- SlimFaas
+- SlimToolkit
+- SOPS
+- Spiderpool
+- SpinKube
+- Stacker
+- Telepresence
+- Tinkerbell
+- Tokenetes
+- Tremor
+- Trickster
+- Vineyard (v6d)
+- Virtual Kubelet
+- VS Code Kubernetes Tools
+- werf
+- xRegistry
 
 ## 培训学习
 
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup|项目 P1: 从零搭建 K8s 集群]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration|项目 P2: 生产级应用全栈编排]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline|项目 P4: GitOps 流水线]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project|项目 P5: 毕业综合实践项目]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/public-one-month-training|🔥 Kubernetes 生产运维实战训练营 🔥]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet|K8s 命令速查表]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/resources/knowledge-map|知识图谱模板]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence|文档阅读顺序索引]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/checkpoint|Week 1 Checkpoint: 自测检验]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-5-k8s-architecture|Day 5: Kubernetes 架构全貌]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster|Day 6: K8s 架构深化 + 集群配置]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-7-review-practice|Day 7: 周复习 + 综合实践]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/checkpoint|Week 2 Checkpoint: 自测检验]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-10-workloads-1|Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2|Day 13: 网络栈 - Ingress + NetworkPolicy]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1|Day 17: 可观测性 - 监控 + Prometheus]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2|Day 18: 可观测性 - 日志 + 分布式追踪]]
+- 项目 P1: 从零搭建 K8s 集群
+- 项目 P2: 生产级应用全栈编排
+- 项目 P4: GitOps 流水线
+- 项目 P5: 毕业综合实践项目
+- 🔥 Kubernetes 生产运维实战训练营 🔥
+- K8s 命令速查表
+- 知识图谱模板
+- 文档阅读顺序索引
+- Week 1 Checkpoint: 自测检验
+- Day 5: Kubernetes 架构全貌
+- Day 6: K8s 架构深化 + 集群配置
+- Day 7: 周复习 + 综合实践
+- Week 2 Checkpoint: 自测检验
+- Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet
+- Day 13: 网络栈 - Ingress + NetworkPolicy
+- Day 17: 可观测性 - 监控 + Prometheus
+- Day 18: 可观测性 - 日志 + 分布式追踪
 
 ## 迁移专题
 

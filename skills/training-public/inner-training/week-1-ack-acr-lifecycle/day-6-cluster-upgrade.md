@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,7 +41,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster upgrade strategy in-place replacement
-  - [[entities/kubernetes|kubernetes]] version upgrade path compatibility
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] version upgrade path compatibility
   - kubent API deprecation check upgrade
   - Cluster upgrade verification rollback
   - ACK managed cluster upgrade process
@@ -123,7 +124,7 @@ ACK 版本升级路径:
 
 | 方式 | 流程 | 优点 | 缺点 | 推荐度 |
 |------|------|------|------|--------|
-| 原地升级 | 在原节点上升级 kubelet | 操作简单 | 风险高，节点不可回退 | 仅测试环境 |
+| 原地升级 | 在原节点上升级 [[kubelet|kubelet]] | 操作简单 | 风险高，节点不可回退 | 仅测试环境 |
 | 替换升级 | 新建节点 → 迁移 Pod → 删除旧节点 | 风险可控 | 需要额外资源 | 生产推荐 |
 
 ---

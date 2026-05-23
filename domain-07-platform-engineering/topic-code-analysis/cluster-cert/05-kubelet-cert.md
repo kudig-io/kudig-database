@@ -1,5 +1,5 @@
 ---
-title: kubelet 证书与 CSR 机制源码分析
+title: kubelet 证书与 CSR 机制源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: kubelet 证书与 CSR 机制源码分析

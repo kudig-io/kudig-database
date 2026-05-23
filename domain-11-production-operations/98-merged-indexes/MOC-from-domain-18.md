@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # domain-11-production-operations MOC
@@ -71,7 +72,7 @@ prerequisites:
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 
-> **关联领域**：[[../domain-06-observability/MOC|domain-06-observability 企业级监控与告警]]（工具实现层）、[[../domain-06-observability/MOC|domain-06-observability 日志管理与分析]]（工具实现层）
+> **关联领域**：domain-06-observability 企业级监控与告警（工具实现层）、domain-06-observability 日志管理与分析（工具实现层）
 
 ---
 
@@ -82,7 +83,7 @@ prerequisites:
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 
-> **关联领域**：[[../domain-05-security-compliance/MOC|domain-05-security-compliance 云原生安全]]（工具实现层）
+> **关联领域**：domain-05-security-compliance 云原生安全（工具实现层）
 
 ---
 
@@ -93,7 +94,7 @@ GitOps 流水线实践、基础设施即代码、自动化运维工具链。
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 
-> **关联领域**：[[../domain-08-release-change-management/MOC|domain-08-release-change-management GitOps CI-CD]]、[[../domain-08-release-change-management/MOC|domain-08-release-change-management 基础设施即代码]]（工具实现层）
+> **关联领域**：domain-08-release-change-management GitOps CI-CD、domain-08-release-change-management 基础设施即代码（工具实现层）
 
 ---
 
@@ -113,7 +114,7 @@ Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/Gree
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 
-> **关联领域**：[[../domain-09-reliability-engineering/MOC|domain-09-reliability-engineering 灾备与业务连续性]]（工具实现层）、[[../domain-10-troubleshooting-diagnostics/topic-skills/MOC|topic-skills 运维技能卡片]]（横向操作切片）
+> **关联领域**：domain-09-reliability-engineering 灾备与业务连续性（工具实现层）、topic-skills 运维技能卡片（横向操作切片）
 
 ---
 

@@ -37,6 +37,7 @@ prerequisites:
 skill_id: SKILL-VERSION_MATRIX-001
 skill_name: 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution
@@ -56,7 +57,7 @@ version: 1.0.0
 - [知识进化](#知识进化)
   - [常见误诊模式](#101-常见误诊模式)
   - [深度知识引用](#102-深度知识引用)
-  - [Skill 改进记录](#103-skill-改进记录)
+  - [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 改进记录](#103-skill-改进记录)
   - [待补充的知识空白](#104-待补充的知识空白)
 
 ---
@@ -69,13 +70,13 @@ version: 1.0.0
 |----------|-------|-------|-------|-------|-------|
 | GracefulNodeShutdown | GA（默认启用） | GA | GA | GA | GA |
 | Node swap support | alpha | alpha | beta（默认关闭） | beta | beta |
-| kubelet 证书自动轮转 (RotateKubeletClientCertificate) | GA（默认启用） | GA | GA | GA | GA |
+| [[kubelet|kubelet]] 证书自动轮转 (RotateKubeletClientCertificate) | GA（默认启用） | GA | GA | GA | GA |
 | kubelet 证书自动轮转 (RotateKubeletServerCertificate) | beta（默认启用） | beta | GA | GA | GA |
 | EventedPLEG | beta（默认关闭） | beta（默认关闭） | beta（默认关闭） | beta（默认启用） | GA |
 | `kubectl debug node/` | GA | GA | GA | GA | GA |
 | Custom Debug Profiles | beta | beta | GA | GA | GA |
 | NodeStatus 上报改进 | 基础 | 优化心跳频率 | 改进 Lease 上报 | 增强状态报告详细度 | 稳定 |
-| Sidecar Containers | alpha | beta | beta | GA | GA |
+| [[Sidecar Containers|Sidecar Containers]] | alpha | beta | beta | GA | GA |
 | Node Resource Fit Scoring | 基础 | 基础 | 改进 | 改进 | 增强 |
 | PodDisruptionConditions | beta | GA | GA | GA | GA |
 
@@ -113,7 +114,7 @@ version: 1.0.0
 当节点正在关机时，kubelet 会尝试优雅终止 Pod。在诊断时需注意区分计划关机和异常关机：
 
 - 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置
-- 日志中出现 `shutting down gracefully` 不一定是故障
+- 日志中出现 `shutting down gracefully` 不一定是问题
 - **诊断影响**: D2.2 中看到 `shutting down gracefully` 日志时，需确认是否为计划内操作
 
 #### [v1.30+]: Node swap support (beta)
@@ -128,7 +129,7 @@ version: 1.0.0
 #### [v1.31+]: EventedPLEG 默认启用
 
 - 传统 GenericPLEG 的 relist 操作频率降低，`PLEG is not healthy` 误报减少
-- 但如果 EventedPLEG 本身异常，可能出现新的故障模式
+- 但如果 EventedPLEG 本身异常，可能出现新的问题模式
 - 诊断时需检查 `--feature-gates=EventedPLEG=true` 是否生效
 - **诊断影响**: D2.6 中 PLEG 相关日志的解读需考虑 EventedPLEG 的行为差异；RC-008 的诊断逻辑需更新
 
@@ -158,10 +159,10 @@ version: 1.0.0
 |---------|---------|---------|---------|
 | **网络抖动误判为 kubelet 崩溃** | Node Condition 中 Ready=Unknown，看似 kubelet 停止发送心跳 | 网络链路不稳定（交换机端口 flapping、MTU 问题、云网络限流），kubelet 实际在运行但心跳包被丢弃 | 先 SSH 到节点确认 kubelet 进程状态（D2.1），再测试网络连通性（D2.7）。如果 kubelet 运行正常且本地 healthz 正常，优先排查网络 |
 | **DiskPressure 归因于镜像过多，实则是日志轮转失败** | DiskPressure=True，磁盘使用率高 | 容器日志（stdout/stderr）未正确配置轮转（logMaxSize/logMaxFiles），单个 Pod 的日志占用几十 GB | 在 D2.5 中不仅检查整体磁盘使用率，还要检查 `/var/log/pods/` 或 `/var/log/containers/` 下的大文件：`du -sh /var/log/pods/* | sort -rh | head -10` |
-| **PLEG 不健康误判为容器运行时故障** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux | awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
-| **证书过期误判为网络故障** | kubelet 日志出现 "connection refused" 或 TLS 错误 | kubelet 客户端证书已过期，TLS 握手失败被解读为网络问题 | 在排查网络问题（D2.7）前先检查证书有效期（D2.8）。TLS 握手失败和 TCP 连接失败有本质区别 |
-| **cordon 操作误判为节点故障** | 用户报告 Pod 无法调度到某节点，误认为节点 NotReady | 运维人员之前执行了 `kubectl cordon` 但未记录，节点状态为 `Ready,SchedulingDisabled` | D1.1 中仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`；D1.4 检查 taints 中的 `unschedulable` 标记 |
-| **时间偏差导致的间歇性故障** | 节点状态不稳定，时好时坏，难以找到明确根因 | 节点 NTP 未同步，时钟偏差导致 TLS 证书间歇性验证失败和 Lease 续租异常 | 在诊断早期（D2.10）就检查时间同步。时间偏差是最容易被忽视但影响广泛的根因 |
+| **PLEG 不健康误判为容器运行时问题** | kubelet 日志出现 `PLEG is not healthy`，初步判断为 containerd 异常 | 实际是某个 Pod 的 container 处于 D 状态（不可中断的 I/O 等待），阻塞了 CRI 调用，containerd 本身正常 | 在 D2.6 之后检查是否有 D 状态进程：`ps aux | awk '$8=="D"'`。如果有，定位到具体容器和 Pod，问题在应用层而非运行时 |
+| **证书过期误判为网络问题** | kubelet 日志出现 "connection refused" 或 TLS 错误 | kubelet 客户端证书已过期，TLS 握手失败被解读为网络问题 | 在排查网络问题（D2.7）前先检查证书有效期（D2.8）。TLS 握手失败和 TCP 连接失败有本质区别 |
+| **cordon 操作误判为节点问题** | 用户报告 Pod 无法调度到某节点，误认为节点 NotReady | 运维人员之前执行了 `kubectl cordon` 但未记录，节点状态为 `Ready,SchedulingDisabled` | D1.1 中仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`；D1.4 检查 taints 中的 `unschedulable` 标记 |
+| **时间偏差导致的间歇性问题** | 节点状态不稳定，时好时坏，难以找到明确根因 | 节点 NTP 未同步，时钟偏差导致 TLS 证书间歇性验证失败和 Lease 续租异常 | 在诊断早期（D2.10）就检查时间同步。时间偏差是最容易被忽视但影响广泛的根因 |
 
 ---
 
@@ -172,9 +173,9 @@ version: 1.0.0
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | kubelet 架构与内部机制 | `domain-01-cluster-fundamentals/` | 理解 kubelet 心跳机制、node-lifecycle-controller 的驱逐逻辑 |
-| Node 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
-| 节点级故障排查深度指南 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度排查方法 |
-| Kubernetes 故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法论 |
+| Node 问题树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
+| 节点级问题排查深度指南 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度排查方法 |
+| Kubernetes 问题排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化问题排查的理论基础和方法论 |
 | 证书管理与 TLS | `SKILL-SEC-001` (06-certificate-expiry.md) | kubelet 证书过期的详细诊断与修复（本 Skill 的 RC-007 关联） |
 | Pod 驱逐与调度 | `SKILL-POD-002` (03-pod-pending.md) | 节点恢复后 Pod 重新调度的相关问题 |
 | 容器运行时排障 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | containerd/CRI-O 深度排查 |
@@ -196,7 +197,7 @@ version: 1.0.0
 
 1. **GPU 节点 NotReady**: GPU 驱动异常导致的节点 NotReady 场景（NVIDIA device plugin crash, GPU memory error）
 2. **Windows 节点**: Windows 容器节点的 NotReady 诊断差异（kubelet on Windows, containerd on Windows）
-3. **ARM 架构节点**: ARM 节点的特定故障模式
+3. **ARM 架构节点**: ARM 节点的特定问题模式
 4. **边缘节点**: 使用 KubeEdge / OpenYurt 等边缘方案的节点 NotReady 诊断差异（弱网环境、离线容忍）
 5. **虚拟节点**: Virtual Kubelet 实现的虚拟节点 NotReady 诊断
 

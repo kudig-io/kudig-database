@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # CNCF 基础设施与混沌工程项目全景
@@ -38,11 +39,11 @@ CNCF 基础设施项目覆盖 **混沌工程**、**消息中间件**、**API 与
 
 ---
 
-## 混沌工程（Chaos Engineering）
+## [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|混沌工程（Chaos Engineering）]]
 
 ### [[chaos-mesh]] — 孵化项目
 
-Chaos Mesh 是 K8s 原生的混沌工程平台。
+[[Chaos Mesh|Chaos Mesh]] 是 K8s 原生的混沌工程平台。
 
 - Pod 故障注入（kill、failure、延迟）
 - 网络故障（延迟、丢包、分区）
@@ -127,9 +128,9 @@ Microcks 提供 API 模拟和测试。
 
 Headlamp 是 K8s 的 Web 管理界面。
 
-### [[vscode-kubernetes-tools]] — 沙箱项目
+### tools]] — 沙箱项目
 
-VS Code Kubernetes 扩展。
+VS Code [[Kubernetes|Kubernetes]] 扩展。
 
 ### [[cloud-custodian]] — 孵化项目
 
@@ -155,9 +156,9 @@ xRegistry 定义跨注册表的统一 API 规范。
 
 ## 其他基础设施
 
-### [[domain-19-landscape-references/sandbox/porter/porter.md|porter]] — 沙箱项目
+### porter — 沙箱项目
 
-[[domain-19-landscape-references/sandbox/porter/porter.md|porter]] 使用 CNAB 打包和分发云应用。
+porter 使用 CNAB 打包和分发云应用。
 
 ### [[hexa]] — 沙箱项目
 

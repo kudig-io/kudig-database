@@ -55,6 +55,7 @@ related_topics:
 - node-create
 - registration
 - cloud-node
+created: "2026-05-23"
 ---
 
 # ARM 节点与多架构混合集群

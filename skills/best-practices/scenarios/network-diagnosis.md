@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 网络诊断
@@ -80,7 +81,7 @@ graph TD
 
 - [[domain-03-networking-traffic/README.md]]
 - [[domain-03-networking-traffic/README.md]]
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking — Terway 专题]]
+- [[domain-03-networking-traffic/README.md|Domain 5: [[网络诊断速查卡|Networking]] — Terway 专题]]
 
 
 ---
@@ -110,7 +111,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[skills/service-fta.md|service-fta]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns-fta]]

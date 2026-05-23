@@ -1,5 +1,5 @@
 ---
-title: Webhook 与准入控制故障排查指南
+title: Webhook 与准入控制故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Webhook 与准入控制故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Webhook 与准入控制故障排查指南
@@ -51,9 +52,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- istio
+- [[Istio|istio]]
 - opa
 - hpa
 - rbac
@@ -800,13 +801,13 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 ### 相关文档
 
 - [API Server 故障排查](./01-apiserver-troubleshooting.md)
-- [证书故障排查](../06-security-auth/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
-- [RBAC 故障排查](../06-security-auth/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
+- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]].md)
+- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also

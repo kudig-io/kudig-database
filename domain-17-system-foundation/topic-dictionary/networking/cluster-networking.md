@@ -33,13 +33,14 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 集群网络（Cluster Networking）
 
 ## 概述
 
-网络是 [[entities/kubernetes|kubernetes]] 的核心组成部分，理解其预期工作方式对于集群管理员至关重要。Kubernetes 需要解决四种不同的网络通信问题：容器到容器通信、Pod 到 Pod 通信、Pod 到 Service 通信、外部到 Service 通信。本文档重点讨论 Pod 到 Pod 的通信以及集群网络的实现方式。
+网络是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的核心组成部分，理解其预期工作方式对于集群管理员至关重要。Kubernetes 需要解决四种不同的网络通信问题：容器到容器通信、Pod 到 Pod 通信、Pod 到 [[Service|Service]] 通信、外部到 Service 通信。本文档重点讨论 Pod 到 Pod 的通信以及集群网络的实现方式。
 
 ## 核心概念/原理
 

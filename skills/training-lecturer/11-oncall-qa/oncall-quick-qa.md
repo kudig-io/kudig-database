@@ -1,11 +1,11 @@
 ---
-title: 工单数字人快速问答 - On-Call 速查
-description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。
-category: k8s-lecturer
+title: 工单数字人快速问答 - On-Call 速查 [oncall-qa]
+description: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
+category: learning
 tags:
 - k8s
 - training
-- lecturer
+- hands-on
 - etcd
 - apiserver
 - kubelet
@@ -14,11 +14,55 @@ tags:
 - docker
 - opa
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: beginner
+reading_level: beginner
 audience:
-- 培训师
-- 技术经理
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 工单数字人快速问答 - On-Call 速查 是什么
+- 如何 工单数字人快速问答 - On-Call 速查
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 工单数字人快速问答
+- On-Call
+- 速查
+- production
+- operations
+- learn
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- etcd-basics
+- redis-basics
+- mysql-basics
+- policy-basics
+created: "2026-05-23"
+---
+
+---
+title: 工单数字人快速问答 - On-Call 速查
+description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。
+category: learning
+tags:
+- tutorial
+- k8s
+- training
+- lecturer
+- [[etcd|etcd]]
+- apiserver
+- [[kubelet|kubelet]]
+- scheduler
+- [[CoreDNS|coredns]]
+- docker
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE 工程师
+- 运维工程师
+- 值班工程师
 estimated_read_time: 5min
 intent_queries:
 - 工单数字人快速问答 - On-Call 速查 是什么
@@ -28,15 +72,18 @@ trigger_keywords:
 - On-Call
 - 速查
 - k8s
-- lecturer
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- etcd-basics
-- redis-basics
-- mysql-basics
-- policy-basics
----
+- learning
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+
+tier: peripheral---
 
 # 工单数字人快速问答 - On-Call 速查
 
@@ -1192,7 +1239,14 @@ kubectl rollout restart deployment/coredns -n kube-system
 ---
 
 **关联文档**:
-- [../[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../README.md) — 讲师完整台词设计
-- [../12-decision-tree/decision-tree-mermaid.md](../12-decision-tree/decision-tree-mermaid.md) — Mermaid 决策树
+- [../README.md](../README.md) — 讲师完整台词设计
+- [../troubleshooting/decision-tree-mermaid.md](../troubleshooting/decision-tree-mermaid.md) — Mermaid 决策树
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/](../../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA Skill
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
+
+## See Also
+
+- day-27-storage-mount
+- day-28-comprehensive-review
+- p1-k8s-cluster-setup
+- p2-production-app-orchestration

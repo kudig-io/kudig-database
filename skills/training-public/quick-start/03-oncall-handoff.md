@@ -1,5 +1,5 @@
 ---
-title: 'Day 3: 值班交接 SOP'
+title: Day 3: 值班交接 SOP [quick-start]
 description: '## 概述'
 category: learning
 tags:
@@ -29,11 +29,12 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Day 3: 值班交接 SOP
 
-> **适用对象**: oncall 值班工程师 | **版本**: [[entities/kubernetes|k8s]] 1.28-1.33
+> **适用对象**: oncall 值班工程师 | **版本**: [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
 
 ---
 

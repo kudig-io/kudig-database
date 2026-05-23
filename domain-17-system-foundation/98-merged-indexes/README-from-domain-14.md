@@ -36,6 +36,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 ---

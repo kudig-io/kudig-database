@@ -1,5 +1,5 @@
 ---
-title: kubelet 故障排查指南
+title: kubelet 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: kubelet 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,19 +41,20 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: kubelet 故障排查指南
+title: [[kubelet|kubelet]] 故障排查指南
 description: '# kubelet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - kubelet
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - containerd
 - cri-o
 - docker
@@ -1724,8 +1725,8 @@ systemReserved:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[CHANGELOG.md|CHANGELOG]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]

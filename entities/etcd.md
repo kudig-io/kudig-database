@@ -1,6 +1,6 @@
 ---
-title: etcd
-description: '- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|etcd 深度解析]]'
+title: etcd (entities)
+description: '- etcd 深度解析'
 category: entities
 tags:
 - k8s
@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # etcd
 
 ## Overview
 
-etcd is the backing datastore for Kubernetes. All cluster state (Pods, Services, ConfigMaps, Secrets, etc.) is persisted to etcd. It uses Raft consensus for fault-tolerant replication and MVCC (Multi-Version Concurrency Control) for watchable history.
+etcd is the backing datastore for Kubernetes. All cluster state ([[Pods|Pods]], Services, [[ConfigMaps|ConfigMaps]], [[Secrets|Secrets]], etc.) is persisted to etcd. It uses Raft consensus for fault-tolerant replication and MVCC (Multi-Version Concurrency Control) for watchable history.
 
 ## Key Properties
 
@@ -81,25 +82,25 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[entities/kube-apiserver.md|kube-apiserver]]
 - [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
 
-- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[domain-01-cluster-fundamentals/19-etcd-operations.md|19-etcd-operations]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07-distributed-consensus-etcd]]
+- etcd 深度解析
+- 19-etcd-operations
+- 07-distributed-consensus-etcd
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
+- RELEASE-NOTES-0.2
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
+- RELEASE-NOTES-0.3
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-0.1
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
@@ -170,7 +171,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[skills/skill-assets-escalation-template|Escalation Template]] — Cross-reference
 - [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive|etcd 深度解析]] — Cross-reference
 - [[domain-01-cluster-fundamentals/03-control-plane/12-apiserver-deep-dive|kube-apiserver 深度解析]] — Cross-reference
-- [[domain-01-cluster-fundamentals/98-merged-indexes/README-from-domain-01-cluster-fundamentals|Domain-3: Kubernetes控制平面]] — Cross-reference
+- Domain-3: Kubernetes控制平面 — Cross-reference
 - [[entities/core-deps-changelog|核心依赖变更日志索引]] — Cross-reference
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]

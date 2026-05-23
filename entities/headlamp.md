@@ -1,5 +1,5 @@
 ---
-title: Headlamp
+title: Headlamp (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Headlamp
@@ -57,7 +58,7 @@ Headlamp 是一个现代化的 Kubernetes Web UI，提供直观的集群管理�
 - **RBAC 配置**: 为不同用户创建适当权限的 ServiceAccount
 - **OIDC 集成**: 生产环境使用 OIDC 而非 Token 认证
 - **插件管理**: 只安装必要的插件，定期更新
-- **Ingress 安全**: 启用 TLS，配置访问控制
+- **[[Ingress|Ingress]] 安全**: 启用 TLS，配置访问控制
 - **资源限制**: 为 Headlamp Pod 设置资源限制
 - **审计日志**: 启用 Kubernetes 审计日志跟踪操作
 
@@ -81,7 +82,7 @@ Headlamp 是一个现代化的 Kubernetes Web UI，提供直观的集群管理�
 - [[openfga]] — OpenFGA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/headlamp/headlamp.md|headlamp]]
+- headlamp
 - [[entities/opengitops.md|OpenGitOps]]
 - [[entities/kubeclipper.md|KubeClipper]]
 - [[entities/cozystack.md|Cozystack]]

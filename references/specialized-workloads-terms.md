@@ -34,6 +34,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # K8s 专用工作负载术语参考

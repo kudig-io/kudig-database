@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 8: K8s RBAC 权限配置实操
@@ -137,7 +138,7 @@ kubectl describe rolebinding app-team-readonly-binding -n app-team
 
 ## 3. 场景二：跨 namespace 读取权限（ClusterRole + RoleBinding）
 
-**场景**: `monitoring` 服务账号需要读取所有 namespace 的 Pod 和 Service。
+**场景**: `monitoring` 服务账号需要读取所有 namespace 的 Pod 和 [[Service|Service]]。
 
 ### 3.1 创建 ClusterRole（集群范围只读）
 
@@ -219,7 +220,7 @@ kubectl create rolebinding dev-lead-deploy \
 
 ## 5. 场景四：节点管理员权限（NodeRestriction）
 
-**场景**: 授予 kubelet 正确的节点管理权限（遵循最小权限原则）。
+**场景**: 授予 [[kubelet|kubelet]] 正确的节点管理权限（遵循最小权限原则）。
 
 ### 5.1 使用内置 ClusterRole
 

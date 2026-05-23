@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 3: Linux 核心基础
@@ -90,7 +91,7 @@ related:
 
 ## 概述
 
-本文是 Kubernetes 学习路径中 Linux 基础模块的第一部分，聚焦于 Linux 系统架构、进程管理和容器隔离原理（namespace + cgroup）。理解这些概念是掌握 K8s 的前提——K8s 节点运行在 Linux 上，容器的本质就是 Linux 内核提供的隔离能力，而 K8s 的 resources.limits 最终通过 cgroup 实现。本文将帮助你建立从 Linux 内核到容器到 K8s 的完整认知链条。
+本文是 [[Kubernetes|Kubernetes]] 学习路径中 Linux 基础模块的第一部分，聚焦于 Linux 系统架构、进程管理和容器隔离原理（namespace + cgroup）。理解这些概念是掌握 K8s 的前提——K8s 节点运行在 Linux 上，容器的本质就是 Linux 内核提供的隔离能力，而 K8s 的 resources.limits 最终通过 cgroup 实现。本文将帮助你建立从 Linux 内核到容器到 K8s 的完整认知链条。
 
 ### 学习目标
 
@@ -117,7 +118,7 @@ Linux 操作系统分为两个空间：**内核空间（Kernel Space）** 和 **
 - `socket()` / `bind()` / `listen()`: 网络操作
 - `mount()` / `umount()`: 文件系统挂载
 
-在 K8s 环境中，容器运行时（containerd）通过系统调用创建 namespace 和 cgroup 来实现容器隔离。kubelet 通过系统调用管理容器进程。
+在 K8s 环境中，容器运行时（[[containerd|containerd]]）通过系统调用创建 namespace 和 cgroup 来实现容器隔离。kubelet 通过系统调用管理容器进程。
 
 ### 进程管理基础
 
@@ -579,6 +580,6 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 ## 延伸阅读
 
 - [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../domain-17-system-foundation/[[domain-17-system-foundation/01-linux/02-linux-process-management|02-linux-process-management]].md)
+- [Linux 进程管理](../../[[domain-17-system-foundation/01-linux/02-linux-process-management|02-linux-process-management]].md)
 - [Linux 容器基础原理](../../domain-17-system-foundation/08-linux-container-fundamentals.md)
 - [Linux 命令参考](../../domain-17-system-foundation/99-linux-commands-reference.md)

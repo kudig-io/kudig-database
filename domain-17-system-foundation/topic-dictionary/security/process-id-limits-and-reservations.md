@@ -28,13 +28,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Process ID Limits And Reservations（进程 ID 限制与预留）
 
 ## 概述
 
-进程 ID（PIDs）是节点上的基本资源。[[entities/kubernetes|kubernetes]] 允许限制单个 Pod 可使用的 PID 数量，同时也可为节点预留一定数量的可分配 PID，供操作系统和 Kubernetes 守护进程使用。PID 耗尽很容易在未触及其他资源限制的情况下发生，进而导致主机守护进程（如 kubelet、kube-proxy、容器运行时）无法运行，引发节点不稳定。
+进程 ID（PIDs）是节点上的基本资源。[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 允许限制单个 Pod 可使用的 PID 数量，同时也可为节点预留一定数量的可分配 PID，供操作系统和 Kubernetes 守护进程使用。PID 耗尽很容易在未触及其他资源限制的情况下发生，进而导致主机守护进程（如 [[kubelet|kubelet]]、kube-proxy、容器运行时）无法运行，引发节点不稳定。
 
 ## 核心概念/原理
 

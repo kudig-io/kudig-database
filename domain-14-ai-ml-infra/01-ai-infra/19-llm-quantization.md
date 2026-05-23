@@ -52,11 +52,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # 146 - LLM模型量化技术
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [GPTQ](https://github.com/IST-DASLab/gptq) | [AWQ](https://github.com/mit-han-lab/llm-awq) | [bitsandbytes](https://github.com/TimDettmers/bitsandbytes)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [GPTQ](https://github.com/IST-DASLab/gptq) | [AWQ](https://github.com/mit-han-lab/llm-awq) | [bitsandbytes](https://github.com/TimDettmers/bitsandbytes)
 
 <!-- chunk: 一、量化技术全景 -->
 ## 一、量化技术全景
@@ -1918,25 +1919,25 @@ print(f"Llama3-70B INT4: {estimate_memory(70, 4):.0f} GB")
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- index.md|Domain-11 AI 基础设施 — 开源项目索引]]
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/17-llm-inference-serving.md|17-llm-inference-serving]]
-- [[domain-14-ai-ml-infra/18-llm-serving-architecture.md|18-llm-serving-architecture]]
-- [[domain-14-ai-ml-infra/20-vector-database-rag.md|20-vector-database-rag]]
-- [[domain-14-ai-ml-infra/21-multimodal-models.md|21-multimodal-models]]
+- 17-llm-inference-serving
+- 18-llm-serving-architecture
+- 20-vector-database-rag
+- 21-multimodal-models
 
 ## Related
 

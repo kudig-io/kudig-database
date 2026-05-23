@@ -33,13 +33,14 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 有状态服务运维
 
 ## 概述
 
-虽然 Kubernetes 最初为无状态应用设计，但近年来**有状态工作负载（Stateful Workloads）** 在 K8s 上的运行已日趋成熟。数据库（MySQL、PostgreSQL、MongoDB）、消息队列（Kafka、RabbitMQ）、缓存（Redis）和搜索引擎（Elasticsearch）等关键基础设施组件，越来越多地通过 **StatefulSet** 和 **Operator** 模式部署在 Kubernetes 中。2026 年的最佳实践要求 SRE 掌握有状态服务的高可用、备份恢复、存储性能和滚动升级策略。
+虽然 [[Kubernetes|Kubernetes]] 最初为无状态应用设计，但近年来**有状态工作负载（Stateful Workloads）** 在 K8s 上的运行已日趋成熟。数据库（MySQL、PostgreSQL、MongoDB）、消息队列（Kafka、RabbitMQ）、缓存（Redis）和搜索引擎（Elasticsearch）等关键基础设施组件，越来越多地通过 **[[StatefulSet|StatefulSet]]** 和 **Operator** 模式部署在 Kubernetes 中。2026 年的最佳实践要求 SRE 掌握有状态服务的高可用、备份恢复、存储性能和滚动升级策略。
 
 ## 核心概念/原理
 
@@ -49,7 +50,7 @@ prerequisites:
 - **稳定的网络标识**：Pod 名称按序编号（如 `mysql-0`, `mysql-1`），重建后保持不变
 - **稳定的存储绑定**：每个 Pod 拥有独立的 PVC，即使 Pod 被重建也能挂载到原来的数据卷
 - **有序的部署和扩缩容**：按顺序启动、停止和升级 Pod，避免数据不一致
-- **Headless Service**：为每个 Pod 提供可直接访问的 DNS 记录（如 `mysql-0.mysql.default.svc.cluster.local`）
+- **Headless [[Service|Service]]**：为每个 Pod 提供可直接访问的 DNS 记录（如 `mysql-0.mysql.default.svc.cluster.local`）
 
 ### 2. 持久化存储与数据一致性
 

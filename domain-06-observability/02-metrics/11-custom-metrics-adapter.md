@@ -63,13 +63,14 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
 # 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
-本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 Prometheus Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
+本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 [[Prometheus|Prometheus]] Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
 
 | API | 路径 | 提供者 | 用途 | 版本支持 |
 |-----|------|-------|------|---------|
@@ -207,7 +208,7 @@ spec:
         averageValue: "30"
 ```
 
-<!-- chunk: KEDA(Kubernetes Event-driven Autoscaling) -->
+<!-- chunk: [[KEDA|KEDA]](Kubernetes Event-driven Autoscaling) -->
 ## KEDA(Kubernetes Event-driven Autoscaling)
 
 ```yaml
@@ -434,25 +435,25 @@ kubectl get hpa -w
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
+- observability/MOC.md|domain-06-observability MOC]]
 - [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系详解]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/09-events-audit-logs.md|05 - 事件与审计日志管理 (Events & Audit Logs)]]
+- Kubernetes 可观测性架构体系
+- 指标监控体系详解
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 05 - 事件与审计日志管理 (Events & Audit Logs)
 
 ## See Also
 
-- [[domain-06-observability/09-events-audit-logs.md|09-events-audit-logs]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
-- [[domain-06-observability/12-logging-auditing.md|12-logging-auditing]]
-- [[domain-06-observability/13-cluster-health-check.md|13-cluster-health-check]]
+- 09-events-audit-logs
+- 10-monitoring-metrics-prometheus
+- 12-logging-auditing
+- 13-cluster-health-check
 
 - [[domain-06-observability/README.md|返回目录]]
 

@@ -41,9 +41,10 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-﻿# Kubernetes & AI/ML 命令行清单 (Complete CLI Commands Reference)
+﻿# [[Kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -106,7 +107,7 @@ prerequisites:
 > **📋 新手速查 — 最常用的 5 个命令**:
 > | 场景 | 命令 | 危险等级 |
 > |------|------|----------|
-> | 查看所有 Pod 状态 | `kubectl get pods -A` | 🟢 安全 |
+> | 查看所有 Pod 状态 | `kubectl get [[Pods|pods]] -A` | 🟢 安全 |
 > | 查看 Pod 详细信息 | `kubectl describe pod <名称>` | 🟢 安全 |
 > | 查看 Pod 日志 | `kubectl logs <pod名> -f` | 🟢 安全 |
 > | 进入 Pod 排查 | `kubectl exec -it <pod名> -- /bin/sh` | 🟡 注意 |
@@ -889,7 +890,7 @@ RuntimeClass
 --audit-policy-file=/etc/kubernetes/audit-policy.yaml
 ```
 
-### 5.2 kubelet 参数
+### 5.2 [[kubelet|kubelet]] 参数
 
 ```bash
 # 基础配置参数
@@ -1077,7 +1078,7 @@ kubectl label node gpu-node-01 nvidia.com/mig.config="all-1g.10gb"
 
 ## 7. AI/ML 工作负载命令
 
-### 7.1 Kubeflow 训练任务
+### 7.1 [[Kubeflow|Kubeflow]] 训练任务
 
 ```bash
 # 提交 PyTorchJob
@@ -1118,7 +1119,7 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -H "Host: <service-name>.<namespace>.example.com" \
   http://<ingress-gateway-ip>/v1/models/<model-name>:predict \
-  -d '{"instances": [[1.0, 2.0, 5.0]]}'
+  -d '{"instances": 1.0, 2.0, 5.0}'
 ```
 
 ### 7.3 Spark 数据处理

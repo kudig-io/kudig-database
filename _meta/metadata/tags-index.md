@@ -1,9 +1,9 @@
 ---
-title: 标签索引 (Tags Index)
-description: 'description: ''- domain-1: 架构概览、核心组件、性能调优'''
+title: 标签索引 (Tags Index) [metadata]
+description: '- domain-1: 架构概览、核心组件、性能调优'
 category: general
 tags:
-- meta
+- k8s
 - etcd
 - apiserver
 - scheduler
@@ -31,48 +31,9 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 标签索引 (Tags Index)
-description: '- domain-1: 架构概览、核心组件、性能调优'
-category: general
-tags:
-- k8s
-- etcd
-- apiserver
-- scheduler
-- prometheus
-- ingress
-- gateway
-- rbac
-- networkpolicy
-- gpu
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- 标签索引 (Tags Index) 是什么
-- 如何 标签索引 (Tags Index)
-trigger_keywords:
-- 标签索引
-- Tags
-- Index
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
----
 # 标签索引 (Tags Index)
 
 > 按技术标签聚合的文档索引，便于按主题快速检索
@@ -124,7 +85,7 @@ updated: '2026-05-21'
 ### ingress
 - domain-03-networking-traffic/27: Ingress 基础
 - domain-10-troubleshooting-diagnostics/15: Ingress 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md
+- domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md
 
 ### gateway-api
 - domain-03-networking-traffic/35: Gateway API 概览
@@ -209,11 +170,3 @@ updated: '2026-05-21'
 ---
 
 > 本索引将随文档 Frontmatter 的逐步添加而自动化生成
-
----
-
-## Obsidian 相关文档
-
-- [[metadata/difficulty-index.md|难度分级索引 (Difficulty Index)]]
-- [[metadata/README.md|元数据索引 (Metadata)]]
-- [[metadata/knowledge-map.md|知识图谱 (Knowledge Map)]]

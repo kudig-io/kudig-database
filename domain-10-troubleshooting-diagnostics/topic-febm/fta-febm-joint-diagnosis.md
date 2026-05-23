@@ -1,5 +1,5 @@
 ---
-title: FTA-FEBM 联合诊断最佳实践
+title: FTA-FEBM 联合诊断最佳实践 (topic-febm)
 description: 'title: FTA-FEBM 联合诊断最佳实践'
 category: febm
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 title: FTA-FEBM 联合诊断最佳实践
@@ -44,9 +45,9 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- kubelet
-- istio
-- envoy
+- [[kubelet|kubelet]]
+- [[Istio|istio]]
+- [[Envoy|envoy]]
 - hpa
 last_updated: 2026-05
 difficulty: expert
@@ -701,7 +702,7 @@ FTA + FEBM 联合:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|topic-febm [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]

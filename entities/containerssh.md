@@ -1,5 +1,5 @@
 ---
-title: ContainerSSH
+title: ContainerSSH (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - ContainerSSH
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # ContainerSSH
@@ -68,6 +69,6 @@ ContainerSSH 是一个 SSH 服务器，它为每个 SSH 连接动态启动一个
 - [[drasi]] — Drasi
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/containerssh/containerssh.md|containerssh]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- containerssh
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- index/etcd-index|etcd 知识图谱索引]]

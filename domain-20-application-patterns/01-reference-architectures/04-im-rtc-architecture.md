@@ -38,21 +38,22 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 实时通信 IM/RTC 架构设计
-description: '# 实时通信 (IM / RTC) Kubernetes 生产架构设计'
+description: '# 实时通信 (IM / RTC) [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
 - mysql
 - kafka
 - elasticsearch
-- statefulset
+- [[StatefulSet|statefulset]]
 - gateway
 last_updated: 2026-05-18
 difficulty: expert
@@ -726,7 +727,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -741,11 +742,11 @@ spec:
 
 ## Related
 
-- [[domain-20-application-patterns/20-microservice-governance-architecture.md|20-microservice-governance-architecture]]
+- 20-microservice-governance-architecture
 
 ## See Also
 
-- [[domain-20-application-patterns/02-mini-program-architecture.md|02-mini-program-architecture]]
-- [[domain-20-application-patterns/03-cms-architecture.md|03-cms-architecture]]
-- [[domain-20-application-patterns/05-online-education-architecture.md|05-online-education-architecture]]
-- [[domain-20-application-patterns/06-fintech-architecture.md|06-fintech-architecture]]
+- 02-mini-program-architecture
+- 03-cms-architecture
+- 05-online-education-architecture
+- 06-fintech-architecture

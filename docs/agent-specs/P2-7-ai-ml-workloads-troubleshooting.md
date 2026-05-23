@@ -1,6 +1,6 @@
 ---
-title: AI/ML 工作负载故障排查指南
-description: '# AI/ML 工作负载故障排查指南'
+title: AI/ML 工作负载问题排查指南 [docs]
+description: '# AI/ML 工作负载问题排查指南'
 category: general
 tags:
 - k8s
@@ -20,30 +20,31 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- AI/ML 工作负载故障排查指南 是什么
-- 如何 AI/ML 工作负载故障排查指南
-- AI/ML 工作负载故障排查指南 故障排查
-- AI/ML 工作负载故障排查指南 排障步骤
+- AI/ML 工作负载问题排查指南 是什么
+- 如何 AI/ML 工作负载问题排查指南
+- AI/ML 工作负载问题排查指南 问题排查
+- AI/ML 工作负载问题排查指南 排障步骤
 trigger_keywords:
 - AI
 - ML
-- 工作负载故障排查指南
+- 工作负载问题排查指南
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# AI/ML 工作负载故障排查指南
+# AI/ML 工作负载问题排查指南
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: AI/ML 工作负载在 [[entities/kubernetes|kubernetes]] 上的故障排查指南
+> **用途**: AI/ML 工作负载在 [[entities/kubernetes|kubernetes]] 上的问题排查指南
 > **覆盖**: 分布式训练 (MPI/NCCL)、模型服务 (KServe/Triton)、数据处理 (Spark/Flink)
 
 ---
 
-## 1. 分布式训练故障排查
+## 1. 分布式训练问题排查
 
 ### 1.1 MPIJob 启动失败
 
@@ -54,7 +55,7 @@ prerequisites:
 | 启动脚本失败 | `kubectl logs -f mpi-worker-0` | 镜像拉取失败 | 检查镜像配置 |
 | Rendezvous 失败 | `kubectl logs mpi-worker-0 \| grep -i " rendezvous"` | 网络不通 | 检查 Pod 网络策略 |
 
-### 1.2 NCCL 通信故障
+### 1.2 NCCL 通信问题
 
 ```bash
 # 检查 NCCL 通信测试
@@ -86,7 +87,7 @@ kubectl exec -it mpi-worker-0 -- bash -c "NCCL_DEBUG=INFO NCCL_TOPO_DUMP=1 ./ncc
 | OOM during training | `kubectl describe pod` 查看 OOMKilled | 减小 batch size 或启用 gradient checkpointing |
 | 训练卡在某个 epoch | 检查 dmesg 是否有 GPU Xid 错误 | 重启 GPU driver 或回滚训练脚本 |
 
-### 1.4 DeepSpeed 故障
+### 1.4 DeepSpeed 问题
 
 ```bash
 # DeepSpeed 日志检查
@@ -102,7 +103,7 @@ kubectl logs -f deployment/<name> | grep -i "deepspeed\|ZeRO"
 
 ---
 
-## 2. KServe/Triton 模型服务故障
+## 2. KServe/Triton 模型服务问题
 
 ### 2.1 KServe InferenceService 无法启动
 
@@ -175,9 +176,9 @@ kubectl exec -it <triton-pod> -- tritonserver --model-repository=/models --metri
 
 ---
 
-## 3. 数据处理故障 (Spark/Flink)
+## 3. 数据处理问题 (Spark/Flink)
 
-### 3.1 Spark on K8s 故障
+### 3.1 Spark on K8s 问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -200,7 +201,7 @@ kubectl exec -it spark-driver -- spark-submit \
 kubectl port-forward spark-driver-ui 4040:4040
 ```
 
-### 3.2 Flink 作业故障
+### 3.2 Flink 作业问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -246,7 +247,7 @@ docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi dmon -s u
 
 ---
 
-## 5. Kubeflow Pipeline 故障
+## 5. Kubeflow Pipeline 问题
 
 ### 5.1 Pipeline 运行失败
 
@@ -306,14 +307,14 @@ kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded\|err
 
 | 条件 | 操作 |
 |------|------|
-| 多节点 GPU 通信故障 | 升级网络团队 |
+| 多节点 GPU 通信问题 | 升级网络团队 |
 | 模型服务无法启动且无日志 | 升级 K8s 团队 |
 | 训练数据丢失/损坏 | 升级数据团队 |
-| Kubeflow 控制平面故障 | 升级 SRE |
+| Kubeflow 控制平面问题 | 升级 SRE |
 
 ---
 
 **关联文档**:
 - [domain-14-ai-ml-infra/](../domain-14-ai-ml-infra/) — AI 基础设施完整文档
-- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用故障排查
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用问题排查
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill

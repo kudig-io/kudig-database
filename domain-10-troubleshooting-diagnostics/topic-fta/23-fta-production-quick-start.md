@@ -1,5 +1,5 @@
 ---
-title: 第23章：FTA 生产环境快速启动与 SRE 集成指南
+title: 第23章：FTA 生产环境快速启动与 SRE 集成指南 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第23章：FTA 生产环境快速启动与 SRE 集成指南'
 category: fta
 tags:
@@ -45,6 +45,7 @@ prerequisites:
 fta_id: FTA-23_PRODUCTION_QUICK_START-001
 component: 23 Production Quick Start
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第23章：FTA 生产环境快速启动与 SRE 集成指南
@@ -55,9 +56,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - docker
 - hpa

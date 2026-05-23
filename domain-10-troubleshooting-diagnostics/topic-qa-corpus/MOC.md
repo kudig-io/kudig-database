@@ -33,6 +33,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 # topic-qa-corpus MOC
@@ -65,13 +66,13 @@ prerequisites:
 
 | # | 文档 | 类型 | I-O 对数 | 说明 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-all.md\|命令输出诊断语料 — 全量合并版]] | 自动生成 | 469 | 全量 I-O 对，按 Domain 分组 |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.md\|P0 核心场景手工种子 I-O 对]] | 手工精调 | 22 | 高质量参考模板，覆盖 10 Domain |
-| 3 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md\|命令输出解读语料 — 原始基准]] | 原始基准 | 23 | 遗留基准数据 |
-| 4 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README.md\|Agent QA 对语料库 README]] | 说明文档 | - | 语料结构、使用方式、生成流水线 |
-| 5 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-all.json\|命令输出诊断语料 — JSON 版]] | 程序消费 | 469 | JSON 格式，供 Agent 直接加载 |
-| 6 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-all.yaml\|命令输出诊断语料 — YAML 版]] | 程序消费 | 469 | YAML 格式，供 Agent 直接加载 |
-| 7 | [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/coverage-report-p0.json\|覆盖率验证报告]] | 验证报告 | - | 覆盖率检查输出 |
+| 1 | 命令输出诊断语料 — 全量合并版 | 自动生成 | 469 | 全量 I-O 对，按 Domain 分组 |
+| 2 | P0 核心场景手工种子 I-O 对 | 手工精调 | 22 | 高质量参考模板，覆盖 10 Domain |
+| 3 | 命令输出解读语料 — 原始基准 | 原始基准 | 23 | 遗留基准数据 |
+| 4 | [[concepts/ai-agent-README.md]] | 说明文档 | - | 语料结构、使用方式、生成流水线 |
+| 5 | 命令输出诊断语料 — JSON 版 | 程序消费 | 469 | JSON 格式，供 Agent 直接加载 |
+| 6 | 命令输出诊断语料 — YAML 版 | 程序消费 | 469 | YAML 格式，供 Agent 直接加载 |
+| 7 | 覆盖率验证报告 | 验证报告 | - | 覆盖率检查输出 |
 
 ---
 
@@ -80,7 +81,7 @@ prerequisites:
 | Domain | I-O 对数 | 对应故障场景 | 文件 |
 |--------|----------|-------------|------|
 | POD | 81 | Pod CrashLoop、Pending、OOM | `generated/command-output-diagnosis-all.md` |
-| NET | 72 | Service、Ingress、网络连通性 | 同上 |
+| NET | 72 | [[Service|Service]]、Ingress、网络连通性 | 同上 |
 | INGRESS | 54 | Ingress Controller、Gateway API | 同上 |
 | SEC | 38 | RBAC、Quota、NetworkPolicy | 同上 |
 | WORK | 33 | Deployment、StatefulSet、DaemonSet | 同上 |

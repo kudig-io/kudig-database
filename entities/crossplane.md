@@ -1,5 +1,5 @@
 ---
-title: Crossplane
+title: Crossplane (entities)
 description: Crossplane — Kubernetes 生产运维知识库
 category: entities
 tags:
@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Crossplane
@@ -47,7 +48,7 @@ Crossplane extends Kubernetes with custom resources for cloud infrastructure, en
 | XRD (Composite Resource Definition) | Define a new resource type that composes multiple underlying resources |
 | Claim | Namespace-scoped request for a composite resource |
 
-## Platform Engineering Role
+## [[synthesis/platform-engineering-sre.md|Platform Engineering]] Role
 
 Crossplane enables platform teams to create self-service infrastructure abstractions. Developers request a "Database" claim, and Crossplane provisions RDS, creates K8s Secrets, and configures networking -- all declaratively.
 
@@ -62,10 +63,10 @@ Crossplane enables platform teams to create self-service infrastructure abstract
 - [[concepts/platform-engineering-idp.md|Platform Engineering and IDP]]
 - [[concepts/gitops-principles.md|GitOps Principles]]
 
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|07-crossplane-platform-composition]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|05-crossplane-enterprise-orchestration]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|99-crossplane-platform-guide]]
-- [[domain-19-landscape-references/graduated/crossplane/crossplane.md|crossplane]]
+- 07-crossplane-platform-composition
+- 05-crossplane-enterprise-orchestration
+- 99-crossplane-platform-guide
+- crossplane
 - [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference

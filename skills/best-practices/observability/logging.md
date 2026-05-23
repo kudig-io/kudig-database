@@ -1,52 +1,18 @@
 ---
-title: Kubernetes 日志管理最佳实践
-description: 'title: Kubernetes 日志管理最佳实践'
-category: general
-tags:
-- logging
-- apiserver
-- grafana
-- helm
-- docker
-- elasticsearch
-- daemonset
-- crd
-- operator
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Kubernetes 日志管理最佳实践 是什么
-- 如何 Kubernetes 日志管理最佳实践
-- Kubernetes 11 production operations 最佳实践
-trigger_keywords:
-- Kubernetes
-- 日志管理最佳实践
-- production
-- operations
-- best
-- practices
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- helm-basics
-- monitoring-basics
-- logging-basics
----
-
-title: Kubernetes 日志管理最佳实践
+title: Kubernetes 日志管理最佳实践 [observability]
 description: 生产环境 Kubernetes 日志管理配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/observability
+category: best-practices/observability
 tags:
 - kubernetes
 - logging
 - elasticsearch
 - fluentd
 - loki
+- apiserver
+- grafana
+- helm
+- docker
+- daemonset
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,6 +30,11 @@ trigger_keywords:
 - 日志管理
 - EFK
 - 日志收集
+prerequisites:
+- kubectl-basics
+- helm-basics
+- monitoring-basics
+- logging-basics
 cross_refs:
 - type: domain
   path: ../../domain-06-observability/
@@ -74,16 +45,9 @@ cross_refs:
 - type: best-practice
   path: ./monitoring.md
   label: 监控最佳实践
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+created: "2026-05-23"
 ---
+
 # Kubernetes 日志管理最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
@@ -659,10 +623,3 @@ data:
 ---
 
 **文档维护**：定期审查和更新，确保与Elasticsearch和Kubernetes版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/migration/09-migration-toolchain.md|09-migration-toolchain]]
-- [[domain-11-production-operations/topic-best-practices/migration/10-real-world-case-study.md|10-real-world-case-study]]
-- [[domain-11-production-operations/topic-best-practices/observability/monitoring.md|monitoring]]
-- [[domain-11-production-operations/topic-best-practices/observability/tracing.md|tracing]]

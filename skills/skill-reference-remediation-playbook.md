@@ -21,6 +21,7 @@ trigger_keywords:
 - Playbook
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Remediation Playbook
@@ -38,7 +39,7 @@ prerequisites:
 ## Related
 
 - [[skills/ts-workloads.md|ts-workloads]] — 工作负载故障排查
-- [[pdb-fta]] — [[skills/pdb-fta.md|PDB 异常故障树分析]]
+- [[pdb-fta]] — [[skills/pdb-fta.md|[[PDB 异常故障树分析|PDB 异常故障树分析]]]]
 - [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

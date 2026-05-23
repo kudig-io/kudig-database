@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 调度与编排策略全栈培训
+title: Kubernetes 调度与编排策略全栈培训 (training-public)
 description: '# Kubernetes 调度与编排策略全栈培训'
 category: presentations
 tags:
@@ -42,9 +42,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 调度与编排策略全栈培训
+# [[Kubernetes|Kubernetes]] 调度与编排策略全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 性能与稳定性专项
 > **核心原则**: 资源利用率最大化、业务高可用分布、调度公平性
@@ -149,7 +150,7 @@ Kubernetes 调度器（kube-scheduler）的核心任务是将待调度的 Pod �
 
 **阶段三：绑定（Binding）**
 
-将 Pod 绑定到得分最高的 Node，写入 etcd。如果多个 Node 得分相同，则随机选择。
+将 Pod 绑定到得分最高的 Node，写入 [[etcd|etcd]]。如果多个 Node 得分相同，则随机选择。
 
 #<!-- chunk: 基础调度约束 -->## 基础调度约束
 
@@ -1109,7 +1110,7 @@ kubectl delete pod pvc-pod --force --grace-period=0
 
 #<!-- chunk: Q4: 如何实现跨可用区高可用部署？ -->## Q4: 如何实现跨可用区高可用部署？
 
-**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 Service 流量路由（Topology Aware Routing）。
+**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 [[Service|Service]] 流量路由（[[Topology Aware Routing|Topology Aware Routing]]）。
 
 #<!-- chunk: Q5: Descheduler 是什么？什么时候需要？ -->## Q5: Descheduler 是什么？什么时候需要？
 
@@ -1217,22 +1218,22 @@ affinity:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|kubernetes-ingress-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|kubernetes-observability-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|kubernetes-security-rbac-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|kubernetes-service-presentation]]
+- kubernetes-ingress-presentation
+- kubernetes-observability-presentation
+- kubernetes-security-rbac-presentation
+- kubernetes-service-presentation

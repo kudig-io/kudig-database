@@ -21,6 +21,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # 最佳实践内容质量评估与改进项目总结
@@ -68,7 +69,7 @@ prerequisites:
 
 **模板和标准**：
 - `templates/best-practice-template.md` - 最佳实践内容模板
-- `best-practices/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` - 最佳实践索引页面
+- `[[domain-04-storage-data/README|README]].md` - 最佳实践索引页面
 - `best-practices/infrastructure/kubernetes-cluster.md` - 示例最佳实践文档
 
 **评估和计划**：
@@ -85,7 +86,7 @@ prerequisites:
 1. **覆盖面广**：1495个文件涉及最佳实践，涵盖40+个技术领域
 2. **内容深度**：专业领域（如eBPF、Vault）有详细的架构图、代码示例和部署清单
 3. **结构化良好**：许多文件采用渐进式示例（Level 1/2/3）和决策树格式
-4. **实用性强**：包含大量可执行的脚本、配置示例和故障排查指南
+4. **实用性强**：包含大量可执行的脚本、配置示例和问题排查指南
 5. **版本意识**：多数内容标注适用版本范围（如v1.25-v1.32）
 
 ### 发现的问题
@@ -101,7 +102,7 @@ prerequisites:
 **优秀示例**：
 - `domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md`：3035行，65个代码块，渐进式示例
 - `domain-03-networking-traffic/10-ebpf-security-applications.md`：4174行，架构图+部署清单
-- `domain-16-database-middleware/04-database-middleware-kubernetes.md`：决策树+故障排查
+- `domain-16-database-middleware/04-database-middleware-kubernetes.md`：决策树+问题排查
 
 **待改进示例**：
 - `domain-07-platform-engineering/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
@@ -115,7 +116,7 @@ prerequisites:
 - 标准化结构：问题描述、解决方案、实施步骤、验证方法
 - 渐进式示例：从基础到高级的配置示例
 - 检查清单：可验证的检查项
-- 故障排查：常见问题和解决方案
+- 问题排查：常见问题和解决方案
 
 **使用方式**：
 1. 新增最佳实践内容必须使用模板
@@ -157,13 +158,13 @@ best-practices/
 **优先级排序**：
 1. **P0**：核心基础设施最佳实践（Kubernetes集群、网络、存储）
 2. **P1**：安全相关最佳实践（Pod安全、网络安全、密钥管理）
-3. **P2**：运维相关最佳实践（部署、监控、故障排查）
+3. **P2**：运维相关最佳实践（部署、监控、问题排查）
 
 **优化内容**：
 - 统一格式到模板标准
 - 增加具体实施步骤
 - 添加验证方法和检查清单
-- 补充故障排查指南
+- 补充问题排查指南
 
 ### 4. 减少重复内容
 
@@ -246,7 +247,7 @@ best-practices/
 **实用性**：
 - [ ] 解决方案可实施
 - [ ] 提供实际示例
-- [ ] 包含故障排查
+- [ ] 包含问题排查
 - [ ] 有相关资源链接
 - [ ] 适合目标读者
 

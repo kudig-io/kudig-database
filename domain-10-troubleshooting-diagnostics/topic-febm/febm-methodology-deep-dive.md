@@ -1,5 +1,5 @@
 ---
-title: 法医鉴定循证方法论（FEBM）深度解析
+title: 法医鉴定循证方法论（FEBM）深度解析 [domain-10-troubleshooting-diagnostics]
 description: 'title: 法医鉴定循证方法论（FEBM）深度解析'
 category: febm
 tags:
@@ -48,6 +48,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 法医鉴定循证方法论（FEBM）深度解析
@@ -58,12 +59,12 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- cilium
+- [[Jaeger|jaeger]]
+- [[Cilium|cilium]]
 - calico
-- argocd
+- [[ArgoCD|argocd]]
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert

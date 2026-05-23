@@ -31,9 +31,10 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-# Network Service Mesh (NSM)
+# [[entities/network-service-mesh.md|Network Service Mesh]]rvice]]Service Mesh）|Service Mesh]] (NSM)
 
 > **CNCF 状态**: Sandbox | **类别**: Networking | **主要语言**: Go
 
@@ -78,7 +79,7 @@ Network Service Mesh (NSM) 是一个混合/多云的 IP 服务网格，提供 L2
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[spire]] — SPIRE
 
-- [[domain-19-landscape-references/sandbox/network-service-mesh/network-service-mesh.md|network-service-mesh]]
+- network-service-mesh
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,5 +1,5 @@
 ---
-title: DNS 异常故障树分析
+title: DNS 异常故障树分析 (skills)
 description: '### 2. 上游解析诊断'
 category: general
 tags:
@@ -22,17 +22,18 @@ prerequisites:
 fta_id: FTA-DNS-001
 component: Dns
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
 title: "DNS 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 CoreDNS 异常 --> ..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 CoreDNS 异常 --> ..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

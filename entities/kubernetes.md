@@ -39,9 +39,10 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes (CNCF Graduated)
+# [[Kubernetes|Kubernetes]] (CNCF Graduated)
 
 > **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
 
@@ -92,97 +93,97 @@ description: '## 项目概述'
 - [[etcd]] — etcd
 
 - [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-19-landscape-references/sandbox/ovn-kubernetes/ovn-kubernetes.md|ovn-kubernetes]]
-- [[domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md|99-spring-cloud-kubernetes-service-mesh-guide]]
-- [[domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md|08-kubernetes-network-policies-security-micro-segmentation]]
-- [[domain-19-landscape-references/19-kubernetes-gateway-api-modern-traffic-management.md|19-kubernetes-gateway-api-modern-traffic-management]]
-- [[domain-19-landscape-references/18-kubernetes-ebpf-cilium-deep-practice.md|18-kubernetes-ebpf-cilium-deep-practice]]
-- [[domain-19-landscape-references/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md|13-kubernetes-multi-tenancy-security-isolation-resource-quota]]
-- [[domain-19-landscape-references/16-kubernetes-edge-computing-kubeedge-practice.md|16-kubernetes-edge-computing-kubeedge-practice]]
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md|09-kubernetes-service-mesh-istio-integration]]
-- [[domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md|20-kubernetes-supply-chain-security-sbom-slsa-sigstore]]
-- [[domain-19-landscape-references/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12-kubernetes-scheduler-deep-optimization-custom-scheduling]]
-- [[domain-19-landscape-references/23-kubernetes-opentelemetry-native-observability.md|23-kubernetes-opentelemetry-native-observability]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|02-kubernetes-large-scale-performance-optimization]]
-- [[domain-19-landscape-references/03-kubernetes-zero-trust-security-architecture.md|03-kubernetes-zero-trust-security-architecture]]
-- [[domain-19-landscape-references/11-kubernetes-api-server-deep-optimization-extension.md|11-kubernetes-api-server-deep-optimization-extension]]
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide.md|05-kubernetes-gitops-complete-practice-guide]]
-- [[domain-19-landscape-references/15-kubernetes-chaos-engineering-fault-injection-testing.md|15-kubernetes-chaos-engineering-fault-injection-testing]]
-- [[domain-19-landscape-references/22-kubernetes-webassembly-wasm-workloads.md|22-kubernetes-webassembly-wasm-workloads]]
-- [[domain-19-landscape-references/10-kubernetes-automation-sre-practices.md|10-kubernetes-automation-sre-practices]]
-- [[domain-19-landscape-references/17-kubernetes-aiml-gpu-scheduling-llm-inference.md|17-kubernetes-aiml-gpu-scheduling-llm-inference]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|01-kubernetes-production-readiness-assessment]]
-- [[domain-19-landscape-references/26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md|26-kubernetes-vcluster-virtual-cluster-multi-tenancy]]
-- [[domain-19-landscape-references/06-kubernetes-cost-governance-finops-practice.md|06-kubernetes-cost-governance-finops-practice]]
-- [[domain-19-landscape-references/21-kubernetes-platform-engineering-internal-developer-platform.md|21-kubernetes-platform-engineering-internal-developer-platform]]
-- [[domain-19-landscape-references/14-kubernetes-event-driven-architecture-asynchronous-processing.md|14-kubernetes-event-driven-architecture-asynchronous-processing]]
-- [[domain-19-landscape-references/24-kubernetes-policy-as-code-governance-automation.md|24-kubernetes-policy-as-code-governance-automation]]
-- [[domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md|07-kubernetes-csi-storage-deep-practice]]
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|04-kubernetes-multi-cloud-hybrid-deployment]]
-- [[domain-06-observability/99-kubernetes-v1.33-observability-guide.md|99-kubernetes-v1.33-observability-guide]]
-- [[domain-06-observability/99-java-observability-kubernetes-guide.md|99-java-observability-kubernetes-guide]]
-- [[domain-07-platform-engineering/99-kubernetes-v1.33-platform-ops-guide.md|99-kubernetes-v1.33-platform-ops-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-deployment-patterns-architecture.md|99-kubernetes-deployment-patterns-architecture]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-multi-tenant-architecture.md|99-kubernetes-multi-tenant-architecture]]
+- ovn-kubernetes
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 08-kubernetes-network-policies-security-micro-segmentation
+- 19-kubernetes-gateway-api-modern-traffic-management
+- 18-kubernetes-ebpf-cilium-deep-practice
+- 13-kubernetes-multi-tenancy-security-isolation-resource-quota
+- 16-kubernetes-edge-computing-kubeedge-practice
+- 09-kubernetes-service-mesh-istio-integration
+- 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
+- 12-kubernetes-scheduler-deep-optimization-custom-scheduling
+- 23-kubernetes-opentelemetry-native-observability
+- 02-kubernetes-large-scale-performance-optimization
+- 03-kubernetes-zero-trust-security-architecture
+- 11-kubernetes-api-server-deep-optimization-extension
+- 05-kubernetes-gitops-complete-practice-guide
+- 15-kubernetes-chaos-engineering-fault-injection-testing
+- 22-kubernetes-webassembly-wasm-workloads
+- 10-kubernetes-automation-sre-practices
+- 17-kubernetes-aiml-gpu-scheduling-llm-inference
+- 01-kubernetes-production-readiness-assessment
+- 26-kubernetes-vcluster-virtual-cluster-multi-tenancy
+- 06-kubernetes-cost-governance-finops-practice
+- 21-kubernetes-platform-engineering-internal-developer-platform
+- 14-kubernetes-event-driven-architecture-asynchronous-processing
+- 24-kubernetes-policy-as-code-governance-automation
+- 07-kubernetes-csi-storage-deep-practice
+- 04-kubernetes-multi-cloud-hybrid-deployment
+- 99-kubernetes-v1.33-observability-guide
+- 99-java-observability-kubernetes-guide
+- 99-kubernetes-v1.33-platform-ops-guide
+- 99-kubernetes-deployment-patterns-architecture
+- 99-kubernetes-multi-tenant-architecture
 - [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
-- [[domain-11-production-operations/13-kubernetes-cost-governance.md|13-kubernetes-cost-governance]]
-- [[domain-02-workloads-applications/99-kubernetes-v1.33-workloads-guide.md|99-kubernetes-v1.33-workloads-guide]]
-- [[domain-02-workloads-applications/99-spring-boot-kubernetes-guide.md|99-spring-boot-kubernetes-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-design-principles-evolution.md|99-kubernetes-v1.33-design-principles-evolution]]
-- [[domain-15-specialized-tech/99-kubernetes-developer-toolchain-guide.md|99-kubernetes-developer-toolchain-guide]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09-job-cronjob-batch-events]]
-- [[domain-17-system-foundation/11-storage-volume-events.md|11-storage-volume-events]]
-- [[domain-17-system-foundation/12-autoscaling-events.md|12-autoscaling-events]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03-image-pull-events]]
-- [[domain-17-system-foundation/15-ecosystem-addon-events.md|15-ecosystem-addon-events]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
+- 13-kubernetes-cost-governance
+- 99-kubernetes-v1.33-workloads-guide
+- 99-spring-boot-kubernetes-guide
+- 99-kubernetes-v1.33-design-principles-evolution
+- 99-kubernetes-developer-toolchain-guide
+- 09-job-cronjob-batch-events
+- 11-storage-volume-events
+- 12-autoscaling-events
+- 03-image-pull-events
+- 15-ecosystem-addon-events
+- 08-statefulset-daemonset-events
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02-pod-container-lifecycle-events]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04-probe-health-check-events]]
-- [[domain-17-system-foundation/13-security-admission-rbac-events.md|13-security-admission-rbac-events]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05-scheduling-preemption-events]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01-event-system-architecture]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06-node-lifecycle-condition-events]]
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
-- [[domain-17-system-foundation/14-namespace-resource-gc-events.md|14-namespace-resource-gc-events]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10-service-networking-events]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|07-kubernetes-backup-restore-deep-dive]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|07-redis-kubernetes-operator]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|04-database-middleware-kubernetes]]
-- [[domain-01-cluster-fundamentals/11-kubernetes-source-code-architecture.md|11-kubernetes-source-code-architecture]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md|99-kubernetes-core-components-v1.29-v1.33-update]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md|99-kubernetes-v1.25-v1.33-feature-comparison-table]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-version-lifecycle-support-policy.md|99-kubernetes-version-lifecycle-support-policy]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md|99-kubernetes-v1.33-deprecation-migration-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md|99-kubernetes-core-features-mermaid-diagrams]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-practical-cookbook.md|99-kubernetes-v1.33-practical-cookbook]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md|99-kubernetes-v1.29-v1.33-features-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-api-version-matrix.md|99-kubernetes-api-version-matrix]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md|99-kubernetes-v1.33-ecosystem-compatibility-matrix]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-quick-reference-card.md|99-kubernetes-v1.33-quick-reference-card]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-upgrade-guide.md|99-kubernetes-v1.33-upgrade-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-production-best-practices.md|99-kubernetes-v1.33-production-best-practices]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md|99-kubernetes-v1.29-v1.33-complete-feature-gates-reference]]
-- [[domain-15-specialized-tech/13-kubernetes-operations-fundamentals.md|13-kubernetes-operations-fundamentals]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|11-kubernetes-security-hardening]]
-- [[domain-05-security-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|05-ibm-cloud-kubernetes-service-enterprise]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02-kubernetes-gateway-api-deep-dive]]
+- 02-pod-container-lifecycle-events
+- 00-open-source-projects-index
+- 04-probe-health-check-events
+- 13-security-admission-rbac-events
+- 05-scheduling-preemption-events
+- 01-event-system-architecture
+- 07-deployment-replicaset-events
+- 06-node-lifecycle-condition-events
+- domain-33-kubernetes-events MOC
+- 14-namespace-resource-gc-events
+- 10-service-networking-events
+- 07-kubernetes-backup-restore-deep-dive
+- 07-redis-kubernetes-operator
+- 08-kafka-kubernetes-strimzi
+- 04-database-middleware-kubernetes
+- 11-kubernetes-source-code-architecture
+- 99-kubernetes-core-components-v1.29-v1.33-update
+- 99-kubernetes-v1.25-v1.33-feature-comparison-table
+- 99-kubernetes-version-lifecycle-support-policy
+- 99-kubernetes-v1.33-deprecation-migration-guide
+- 99-kubernetes-core-features-mermaid-diagrams
+- 99-kubernetes-v1.33-practical-cookbook
+- 99-kubernetes-v1.29-v1.33-features-guide
+- 99-kubernetes-api-version-matrix
+- 99-kubernetes-v1.33-ecosystem-compatibility-matrix
+- 99-kubernetes-v1.33-quick-reference-card
+- 99-kubernetes-v1.33-upgrade-guide
+- 99-kubernetes-v1.33-production-best-practices
+- Kubernetes 架构全景图
+- 99-kubernetes-v1.29-v1.33-complete-feature-gates-reference
+- 13-kubernetes-operations-fundamentals
+- 11-kubernetes-security-hardening
+- 99-java-security-kubernetes-guide
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 02-kubernetes-gateway-api-deep-dive
 - [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
 - [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
 - [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 - [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 - [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
 - [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-02-workloads-applications/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md|16-kubernetes-hardware-troubleshooting]]
+- domain-java-kubernetes MOC
+- 16-kubernetes-hardware-troubleshooting
 - [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
-- [[domain-19-landscape-references/sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md|vscode-kubernetes-tools]]
+- vscode-kubernetes-tools
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
@@ -338,5 +339,5 @@ description: '## 项目概述'
 - [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.2|CHANGELOG-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.3|CHANGELOG-1.3]]
+- CHANGELOG-1.2
+- CHANGELOG-1.3

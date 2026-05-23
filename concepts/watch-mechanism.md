@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Watch Mechanism (List-Watch)
@@ -63,7 +64,7 @@ When a Watch connection breaks, the client reconnects using its last known `reso
 ## Why It Matters
 
 Watch enables:
-- Real-time reconciliation in [[concepts/controller-pattern.md|Controller Pattern]]
+- Real-time reconciliation in [[concepts/controller-pattern.md|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]
 - Efficient state synchronization without polling
 - Event-driven architecture where components react to state changes
 - Horizontal scalability (each controller independently watches what it needs)
@@ -73,10 +74,10 @@ Watch enables:
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]
 - [[concepts/controller-pattern.md|Controller Pattern]]
 - [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[etcd|etcd]]
 - [[entities/kube-apiserver.md|kube-apiserver]]
 
-- [[log.md|log]]
+- log.md|log]]

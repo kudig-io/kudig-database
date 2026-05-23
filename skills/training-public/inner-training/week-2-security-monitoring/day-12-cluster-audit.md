@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 12: K8S 集群审计
@@ -79,7 +80,7 @@ tags: [week-2, day-12, audit, security, logging, k8s, k8s-1.28-1.33]
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 审计（Audit）是集群安全体系中的重要组成部分，它记录了集群中发生的所有 API 操作，包括谁在什么时候对什么资源执行了什么操作。审计日志是安全合规、故障追溯和操作审计的基础，在安全事件响应中发挥着关键作用。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 审计（Audit）是集群安全体系中的重要组成部分，它记录了集群中发生的所有 API 操作，包括谁在什么时候对什么资源执行了什么操作。审计日志是安全合规、故障追溯和操作审计的基础，在安全事件响应中发挥着关键作用。
 
 在 ACK（阿里云容器服务）环境中，审计日志默认集成到阿里云 SLS（日志服务），提供了强大的查询和分析能力。本课程将深入讲解 K8S 审计日志的工作机制、ACK 与 SLS 的集成配置、审计日志的查询分析方法，以及审计告警规则的配置。
 
@@ -150,7 +151,7 @@ K8S 定义了四个审计级别，从低到高记录的信息详细程度递增�
 | `user.username` | 操作用户 | ram-user@1234567890 |
 | `user.groups` | 用户组 | [system:authenticated, dev-team] |
 | `sourceIPs` | 来源 IP | ["192.168.1.100"] |
-| `objectRef.resource` | 资源类型 | pods, deployments, secrets |
+| `objectRef.resource` | 资源类型 | [[Pods|pods]], [[Deployments|deployments]], secrets |
 | `objectRef.namespace` | 命名空间 | default, kube-system |
 | `objectRef.name` | 资源名称 | my-app-xxx |
 | `responseStatus.code` | 响应状态码 | 200, 201, 403, 404 |

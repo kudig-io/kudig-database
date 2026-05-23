@@ -1,5 +1,5 @@
 ---
-title: kube-rs
+title: kube-rs (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # kube-rs
@@ -37,7 +38,7 @@ prerequisites:
 
 ## 概述
 
-kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 Kubernetes API 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
+kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
 
 ## 核心能力
 
@@ -63,7 +64,7 @@ kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 Kuber
 ## 参考链接
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 - [[concepts/controller-pattern.md|controller-pattern]]
@@ -76,6 +77,6 @@ kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 Kuber
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kube-rs/kube-rs.md|kube-rs]]
+- kube-rs
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

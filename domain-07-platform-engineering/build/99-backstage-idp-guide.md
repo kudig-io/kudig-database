@@ -50,9 +50,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Backstage 内部开发者平台 (IDP) 构建指南
+# [[Backstage|Backstage]] 内部开发者平台 (IDP) 构建指南
 
 > **适用版本**: Backstage v1.36.0  
 > **最后更新**: 2026-04-24  
@@ -398,9 +399,9 @@ docs/
 
 | 插件 | 作用 | 安装 |
 |:---|:---|:---|
-| `@backstage/plugin-kubernetes` | K8s 资源可视化 | `yarn add` + 后端配置 |
-| `@backstage/plugin-argo-cd` | Argo CD 应用状态 | `yarn add` |
-| `@backstage/plugin-prometheus` | Prometheus 指标 | `yarn add` |
+| `@backstage/plugin-[[Kubernetes|kubernetes]]` | K8s 资源可视化 | `yarn add` + 后端配置 |
+| `@backstage/plugin-argo-cd` | [[Argo|Argo]] CD 应用状态 | `yarn add` |
+| `@backstage/plugin-[[Prometheus|prometheus]]` | Prometheus 指标 | `yarn add` |
 | `@backstage/plugin-grafana` | Grafana 仪表盘 | `yarn add` |
 | `@backstage/plugin-sonarqube` | 代码质量看板 | `yarn add` |
 | `@backstage/plugin-jira` | Jira 集成 | `yarn add` |
@@ -556,22 +557,22 @@ helm install backstage backstage/backstage \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-36 平台工程 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|平台工程概述与成熟度模型]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|内部开发者平台设计原则]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|Backstage 部署与配置]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|Backstage 软件目录与 TechDocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|Backstage 脚手架与模板系统]]
-- [[domain-07-platform-engineering/06-kratix-platform-as-code.md|Kratix 平台即代码 (Kratix Platform as Code)]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|Crossplane 平台组合 (Crossplane Platform Composition)]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|Golden Paths 黄金路径设计 (Golden Paths Design Patterns)]]
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|开发者体验度量 (Developer Experience Metrics)]]
+- Domain-36 平台工程 — 开源项目索引
+- 平台工程概述与成熟度模型
+- 内部开发者平台设计原则
+- Backstage 部署与配置
+- Backstage 软件目录与 TechDocs
+- Backstage 脚手架与模板系统
+- Kratix 平台即代码 (Kratix Platform as Code)
+- Crossplane 平台组合 (Crossplane Platform Composition)
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- 开发者体验度量 (Developer Experience Metrics)
 
 ## See Also
 
-- [[domain-07-platform-engineering/10-platform-team-topology.md|10-platform-team-topology]]
-- [[domain-07-platform-engineering/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|01-platform-engineering-overview]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|02-idp-design-principles]]
+- 10-platform-team-topology
+- 11-vercel-frontend-deployment-platform
+- 01-platform-engineering-overview
+- 02-idp-design-principles

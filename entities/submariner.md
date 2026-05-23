@@ -1,5 +1,5 @@
 ---
-title: Submariner
+title: Submariner (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Submariner
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Submariner
@@ -32,7 +33,7 @@ prerequisites:
 
 ## 概述
 
-Submariner 实现 Kubernetes 多集群之间的 Pod 和 Service 网络直连。它在集群之间建立加密隧道 (IPsec/WireGuard)，允许跨集群的 Pod 直接通信和 Service 发现，解决了多集群环境下的网络连通性问题。
+Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[Service|Service]] 网络直连。它在集群之间建立加密隧道 (IPsec/WireGuard)，允许跨集群的 Pod 直接通信和 Service 发现，解决了多集群环境下的网络连通性问题。
 
 ## 核心能力
 
@@ -68,10 +69,10 @@ Submariner 实现 Kubernetes 多集群之间的 Pod 和 Service 网络直连。�
 
 - [[hwameistor]] — HwameiStor
 - [[dragonfly]] — Dragonfly
-- [[aeraki-mesh]] — Aeraki Mesh
+- [[aeraki-mesh]] — [[Aeraki Mesh|Aeraki Mesh]]
 - [[atlantis]] — Atlantis
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/submariner/submariner.md|submariner]]
+- submariner
 - [[skills/ts-cloud-provider|云服务商集成排查]] — Cross-reference
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference

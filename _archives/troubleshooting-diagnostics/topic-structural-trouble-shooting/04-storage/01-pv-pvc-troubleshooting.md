@@ -928,7 +928,7 @@ spec:
                 node=$(kubectl get volumeattachment $va -o jsonpath='{.spec.nodeName}')
                 node_status=$(kubectl get node $node -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null || echo "NotFound")
                 
-                if [[ "$node_status" != "True" ]]; then
+                if "$node_status" != "True"; then
                   echo "Deleting stale VolumeAttachment: $va (node: $node, status: $node_status)"
                   kubectl delete volumeattachment $va --timeout=30s || true
                 fi
@@ -1188,10 +1188,10 @@ spec:
                 capacity=$(kubectl get pvc -n $ns $pvc -o jsonpath='{.status.capacity.storage}' | \
                            numfmt --from=iec 2>/dev/null || echo "0")
                 
-                if [[ $capacity -gt 0 ]]; then
+                if $capacity -gt 0; then
                   usage=$((100 * used / capacity))
                   
-                  if [[ $usage -gt 80 ]]; then
+                  if $usage -gt 80; then
                     echo "[$(date)] PVC $ns/$pvc usage: ${usage}%, expanding..."
                     
                     # 扩容 20%

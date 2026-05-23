@@ -19,6 +19,7 @@ trigger_keywords:
 - 产品对比表
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 产品对比表

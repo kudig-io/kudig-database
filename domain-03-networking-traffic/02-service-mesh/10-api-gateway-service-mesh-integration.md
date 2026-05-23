@@ -61,12 +61,13 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
 # API 网关与服务网格集成深度实践
 
 > **最后更新**: 2026-04-24
-> **适用版本**: APISIX 3.x / Kong 3.x / Istio v1.29 / Gateway API v1.2
+> **适用版本**: APISIX 3.x / Kong 3.x / [[Istio|Istio]] v1.29 / Gateway API v1.2
 > **难度**: 高级
 
 ---
@@ -1091,7 +1092,7 @@ spec:
                 - "Server"
 ```
 
-#<!-- chunk: 9.2 gRPC 协议转码 -->## 9.2 gRPC 协议转码
+#<!-- chunk: 9.2 [[gRPC|gRPC]] 协议转码 -->## 9.2 gRPC 协议转码
 
 APISIX 支持通过 grpc-transcode 插件将 RESTful JSON 请求转码为 gRPC 调用，使得后端 gRPC 服务可以同时为 Web 和移动端提供服务。以下配置展示了如何将 REST API 路径映射到 gRPC 方法，并自动进行 JSON ↔ Protobuf 的转换。
 
@@ -1126,7 +1127,7 @@ spec:
 
 #<!-- chunk: 10.1 追踪链路完整性测试 -->## 10.1 追踪链路完整性测试
 
-确保从客户端到 API 网关、经过 Istio Sidecar、再到后端微服务的完整追踪链路不中断是端到端可观测性的关键。以下脚本通过发送测试请求并检查 Jaeger/Tempo 中的追踪数据，验证各层的 trace context 传播是否正确。
+确保从客户端到 API 网关、经过 Istio Sidecar、再到后端微服务的完整追踪链路不中断是端到端可观测性的关键。以下脚本通过发送测试请求并检查 [[Jaeger|Jaeger]]/Tempo 中的追踪数据，验证各层的 trace context 传播是否正确。
 
 ```bash
 #!/bin/bash
@@ -1309,22 +1310,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
 
 ## See Also
 
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|08-ambient-mesh-l7-policy]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|09-microservice-resilience-patterns]]
-- [[domain-03-networking-traffic/99-istio-service-mesh-guide.md|99-istio-service-mesh-guide]]
-- [[domain-03-networking-traffic/99-linkerd-service-mesh-guide.md|99-linkerd-service-mesh-guide]]
+- 08-ambient-mesh-l7-policy
+- 09-microservice-resilience-patterns
+- 99-istio-service-mesh-guide
+- 99-linkerd-service-mesh-guide

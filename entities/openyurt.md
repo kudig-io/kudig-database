@@ -1,5 +1,5 @@
 ---
-title: OpenYurt
+title: OpenYurt (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # OpenYurt
@@ -64,22 +65,22 @@ OpenYurt 是阿里云开源的边缘计算平台，将原生 Kubernetes 能力�
 
 ## 参考链接
 
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[deployment]]
 - [[concepts/controller-pattern.md|controller-pattern]]
 - [[pod-lifecycle]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/kubelet.md|[[kubelet|kubelet]]]]
 
 ## Related
 
 - [[paralus]] — Paralus
 - [[hexa]] — Hexa
 - [[openchoreo]] — OpenChoreo
-- [[podman-desktop]] — Podman Desktop
+- [[podman-desktop]] — [[Podman Desktop|Podman Desktop]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|05-openyurt-architecture]]
-- [[domain-19-landscape-references/incubating/openyurt/openyurt.md|openyurt]]
+- 05-openyurt-architecture
+- openyurt
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

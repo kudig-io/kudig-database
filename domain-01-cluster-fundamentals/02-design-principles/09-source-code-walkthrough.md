@@ -51,9 +51,10 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
-# 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+# 09 - [[Kubernetes|Kubernetes]] 源码结构与阅读指南 (Source Code)
 
 > **交叉引用**：Domain-1 中有更详细的 Kubernetes 源码架构分析，请参考 [Domain-1: 源码结构](../domain-01-cluster-fundamentals/04-source-code-structure.md) 和 [Domain-1: 源码架构](../domain-01-cluster-fundamentals/11-kubernetes-source-code-architecture.md)。
 
@@ -92,7 +93,7 @@ cross_refs:
 | /cmd/kube-apiserver | API Server | API服务入口 |
 | /cmd/kube-controller-manager | Controller Manager | 控制器管理器 |
 | /cmd/kube-scheduler | Scheduler | 调度器 |
-| /cmd/kubelet | Kubelet | 节点代理 |
+| /cmd/kubelet | [[kubelet|Kubelet]] | 节点代理 |
 | /cmd/kube-proxy | Kube-proxy | 网络代理 |
 | /cmd/kubectl | Kubectl | CLI工具 |
 | /cmd/kubeadm | Kubeadm | 集群引导工具 |
@@ -295,25 +296,25 @@ hack/local-up-cluster.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07-distributed-consensus-etcd]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08-high-availability-patterns]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10-cap-theorem-distributed-systems]]
-- [[domain-01-cluster-fundamentals/11-extensibility-design-patterns.md|11-extensibility-design-patterns]]
+- 07-distributed-consensus-etcd
+- 08-high-availability-patterns
+- 10-cap-theorem-distributed-systems
+- 11-extensibility-design-patterns
 
 ## Related
 

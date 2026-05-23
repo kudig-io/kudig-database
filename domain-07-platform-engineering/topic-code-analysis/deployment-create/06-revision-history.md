@@ -1,5 +1,5 @@
 ---
-title: 版本历史与回滚机制
+title: 版本历史与回滚机制 (topic-code-analysis)
 description: 'description: 深入分析 Kubernetes Deployment 的版本历史管理机制和回滚实现，包括 revision annotation、rollbackToRevision'
 category: general
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: 版本历史与回滚机制

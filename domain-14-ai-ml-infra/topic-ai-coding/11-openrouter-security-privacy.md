@@ -24,6 +24,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 安全、隐私与数据治理

@@ -37,14 +37,15 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
-title: Day 17: 可观测性 - 监控 + Prometheus
+title: Day 17: 可观测性 - 监控 + [[Prometheus|Prometheus]]
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes Prometheus 监控
+  - [[Kubernetes|kubernetes]] Prometheus 监控
   - K8s 可观测性架构
   - Prometheus 查询语言 PromQL
   - Grafana Dashboard 配置

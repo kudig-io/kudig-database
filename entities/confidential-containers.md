@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-# Confidential Containers (CoCo)
+# [[Confidential Containers|Confidential Containers]] (CoCo)
 
 > **CNCF 状态**: Sandbox | **类别**: Security | **主要语言**: Rust, Go
 
@@ -75,7 +76,7 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/confidential-containers/confidential-containers.md|confidential-containers]]
+- confidential-containers
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[entities/tetragon|Tetragon]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

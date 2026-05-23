@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Organizing Cluster Access Using kubeconfig Files
@@ -44,7 +45,7 @@ kubeconfig 文件用于组织关于集群、用户、命名空间和认证机制
 
 ### kubeconfig 的三大组成部分
 
-1. **Clusters（集群）**：定义一个或多个 [[entities/kubernetes|kubernetes]] 集群的 API Server 地址和证书信息。
+1. **Clusters（集群）**：定义一个或多个 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群的 API Server 地址和证书信息。
 2. **Users（用户）**：定义访问集群所需的身份认证信息（如客户端证书、用户名密码、Token 等）。
 3. **Contexts（上下文）**：将 cluster、namespace 和 user 组合在一起，形成一个便于切换的访问环境。
 
@@ -255,7 +256,7 @@ kubectl --kubeconfig=/path/to/config get pods
 
 ## 交叉引用
 
-- [Secrets](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
 - [ConfigMaps](./configmaps.md) — 集群配置管理的另一种方式
 
 ## 参考链接

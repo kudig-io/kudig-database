@@ -34,6 +34,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # FTA Methodology and Core Principles

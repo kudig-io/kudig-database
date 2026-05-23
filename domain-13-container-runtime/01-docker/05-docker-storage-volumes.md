@@ -40,6 +40,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 存储与数据卷
@@ -641,12 +642,12 @@ docker volume create --driver rexray/ebs --opt size=100 ebs-volume
 - [Docker 架构](./01-docker-architecture-overview.md) - Docker 架构概览
 - [容器生命周期](./03-docker-container-lifecycle.md) - 容器生命周期管理
 - [Docker 网络](./04-docker-networking-deep-dive.md) - Docker 网络深度解析
-- [Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理
+- Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理
 - [存储技术概览](../domain-04-storage-data/01-storage-technologies-overview.md) - 存储技术全景
 
 ## See Also
 
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|03-docker-container-lifecycle]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|04-docker-networking-deep-dive]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|06-docker-compose-orchestration]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|07-docker-security-best-practices]]
+- 03-docker-container-lifecycle
+- 04-docker-networking-deep-dive
+- 06-docker-compose-orchestration
+- 07-docker-security-best-practices

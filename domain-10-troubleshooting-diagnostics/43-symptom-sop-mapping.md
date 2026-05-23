@@ -60,6 +60,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 症状 → SOP 映射手册
@@ -276,7 +277,7 @@ cross_refs:
 
 **诊断路径**：
 
-**路径 1: Finalizers 阻塞删除**
+**路径 1: [[Finalizers|Finalizers]] 阻塞删除**
 ```
 检查命令: kubectl get pod <pod-name> -o yaml | grep -i finalizers
 判断逻辑:
@@ -403,7 +404,7 @@ cross_refs:
   3. 如集群网络插件异常 → 重启网络插件
 ```
 
-**路径 3: etcd 心跳超时（控制平面节点）**
+**路径 3: [[etcd|etcd]] 心跳超时（控制平面节点）**
 ```
 检查命令: kubectl get nodes -o wide | grep <node-name>
 判断逻辑:
@@ -502,7 +503,7 @@ cross_refs:
   3. 重启 kube-proxy: kubectl delete pod -n kube-system -l k8s-app=kube-proxy
 ```
 
-**路径 3: 网络策略（NetworkPolicy）阻止**
+**路径 3: 网络策略（[[NetworkPolicy|NetworkPolicy]]）阻止**
 ```
 检查命令: kubectl get networkpolicy -n <namespace>
 判断逻辑:
@@ -1524,9 +1525,9 @@ related:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

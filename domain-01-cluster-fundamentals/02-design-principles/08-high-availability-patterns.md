@@ -53,6 +53,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 08 - 高可用架构模式 (HA Patterns)
@@ -63,7 +64,7 @@ cross_refs:
 在早期的 K8s 版本中，控制面组件（如 Scheduler）使用 `Endpoints` 或 `ConfigMap` 实现分布式锁。
 
 ### Lease API 的优势
-1. **性能**: `Lease` 对象非常小，更新时对 API Server 和 etcd 的负载极低。
+1. **性能**: `Lease` 对象非常小，更新时对 API Server 和 [[etcd|etcd]] 的负载极低。
 2. **解耦**: 避免了频繁更新 Endpoints 导致的大规模 Watch 通知（Endpoints 的变更会通知到所有节点的 kube-proxy）。
 3. **节点心跳**: 现代 K8s 使用 Lease 承载节点心跳，极大地减轻了集群规模扩大时 API Server 的压力。
 
@@ -210,7 +211,7 @@ spec:
 | livenessProbe | 应用健康 | 重启容器 |
 | readinessProbe | 应用就绪 | 移除Endpoints |
 | Node Controller | 节点心跳 | 驱逐Pod |
-| ReplicaSet | Pod数量 | 创建新Pod |
+| [[ReplicaSet|ReplicaSet]] | Pod数量 | 创建新Pod |
 
 <!-- chunk: 节点故障处理 -->
 ## 节点故障处理
@@ -396,7 +397,7 @@ scheduler_ha:
 | 数据库 (MySQL) | 主从复制 + 自动故障转移 | Operator (Orchestrator/Vitess) | MySQL Operator |
 | 数据库 (PostgreSQL) | 流复制 + Patroni | Patroni + etcd | PGO Operator |
 | 缓存 (Redis) | Sentinel / Cluster 模式 | Redis Operator | Redis Sentinel |
-| 消息队列 (Kafka) | 多副本 + ISR | Kafka Operator (Strimzi) | Strimzi |
+| 消息队列 (Kafka) | 多副本 + ISR | Kafka Operator ([[Strimzi|Strimzi]]) | Strimzi |
 | 对象存储 (MinIO) | 纠删码 + 多节点 | MinIO Operator | MinIO Tenant |
 
 #### PodDisruptionBudget 最佳实践矩阵
@@ -443,22 +444,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06-resource-version-control]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07-distributed-consensus-etcd]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09-source-code-walkthrough]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10-cap-theorem-distributed-systems]]
+- 06-resource-version-control
+- 07-distributed-consensus-etcd
+- 09-source-code-walkthrough
+- 10-cap-theorem-distributed-systems

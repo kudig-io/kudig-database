@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # P1-反思机制设计文档 (Agent Self-Reflection)
@@ -38,7 +39,7 @@ prerequisites:
 
 ### 1.1 背景
 
-在故障诊断过程中，Agent 的初始假设可能不正确。当验证步骤返回与预期不符的结果时，Agent 需要具备反思能力：
+在问题诊断过程中，Agent 的初始假设可能不正确。当验证步骤返回与预期不符的结果时，Agent 需要具备反思能力：
 - 识别假设失败
 - 回溯诊断路径
 - 调整假设方向
@@ -282,7 +283,7 @@ L3_reflection_actions:
       - "重新提取症状关键词"
       - "分析日志中的其他异常信号"
       - "检查相关组件是否也受影响"
-      - "考虑复合故障的可能"
+      - "考虑复合问题的可能"
     
   evidence_accumulation:
     trigger: "无法确定根因"
@@ -422,7 +423,7 @@ interface_with_multi_skill:
     
   # 请求协同
   coordination_request:
-    reason: "单一 Skill 无法覆盖复杂故障"
+    reason: "单一 Skill 无法覆盖复杂问题"
     request: "启动跨 Skill 诊断"
     suggested_skills: ["SKILL-NET-001", "SKILL-STORE-001"]
 ```

@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # CLI 工具演进

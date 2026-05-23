@@ -1,5 +1,5 @@
 ---
-title: 第十七章：行业标杆案例分析
+title: 第十七章：行业标杆案例分析 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第五部分 - 实战案例与最佳实践'''
 category: fta
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 fta_id: FTA-17_INDUSTRY_BENCHMARKS-001
 component: 17 Industry Benchmarks
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第十七章：行业标杆案例分析
@@ -45,7 +46,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- prometheus
+- [[Prometheus|prometheus]]
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -77,8 +78,8 @@ k8s_versions:
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十六章：团队能力建设](./16-team-capability-building.md)  
-> **下一章**: [第十八章：典型场景完整方案](./18-typical-scenarios.md)
+> **上一章**: 第十六章：团队能力建设](./16-team-capability-building.md)  
+> **下一章**: 第十八章：典型场景完整方案](./18-typical-scenarios.md)
 
 ---
 

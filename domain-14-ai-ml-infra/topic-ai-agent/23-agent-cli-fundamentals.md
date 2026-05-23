@@ -1,4 +1,36 @@
 ---
+title: Agent CLI 基础概念与架构模式 (domain-14-ai-ml-infra)
+description: 'title: Agent CLI 基础概念与架构模式'
+category: general
+tags:
+- ai
+- ai-agent
+- docker
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Agent CLI 基础概念与架构模式 是什么
+- 如何 Agent CLI 基础概念与架构模式
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- CLI
+- 基础概念与架构模式
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
+---
+
 title: Agent CLI 基础概念与架构模式
 description: '# Agent CLI 基础概念与架构模式'
 category: ai-agent
@@ -26,8 +58,15 @@ trigger_keywords:
 - 基础概念与架构模式
 - ai
 - agent
-prerequisites:
-- kubectl-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent CLI 基础概念与架构模式
@@ -169,7 +208,7 @@ Agent CLI 面临的核心挑战之一是**有限的上下文窗口**与**海量�
 | 层级 | 内容 | 生命周期 | 管理策略 |
 |------|------|---------|---------|
 | **L0 — 系统提示** | 角色定义、安全规则、工具描述 | 永久 | 固定前缀 |
-| **L1 — 项目上下文** | 项目结构、[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]]、配置文件 | 会话级 | 启动时加载 |
+| **L1 — 项目上下文** | 项目结构、README、配置文件 | 会话级 | 启动时加载 |
 | **L2 — 任务上下文** | 当前任务相关文件、代码片段 | 任务级 | 按需检索（语义搜索） |
 | **L3 — 对话上下文** | 历史对话、工具调用结果 | 对话级 | 滑动窗口 + 摘要 |
 | **L4 — 持久记忆** | 用户偏好、项目约定、过往决策 | 跨会话 | 向量存储 + 关键词索引 |
@@ -380,3 +419,27 @@ Agent CLI 是 LLM 能力与开发者工作流深度融合的产物。其核心�
 ---
 
 *本文档为 kudig-database 项目原创内容，基于 2026 年 Q1 最新生态整理。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 21-agentscope-advanced-features
+- 22-agentscope-production-deployment
+- 24-agent-cli-tools-comparison
+- 25-agent-cli-mcp-integration

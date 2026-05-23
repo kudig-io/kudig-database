@@ -1,5 +1,5 @@
 ---
-title: containerd
+title: containerd (entities)
 description: containerd — Kubernetes 生产运维知识库
 category: entities
 tags:
@@ -26,11 +26,12 @@ trigger_keywords:
 - containerd
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # containerd
 
-containerd is an industry-standard container runtime that manages the complete container lifecycle on a host system. It was donated to CNCF by Docker in 2017 and became the default K8s runtime after dockershim removal in v1.24.
+containerd is an industry-standard [[Container Runtime|container runtime]] that manages the complete container lifecycle on a host system. It was donated to CNCF by Docker in 2017 and became the default K8s runtime after dockershim removal in v1.24.
 
 ## Key Facts
 
@@ -38,7 +39,7 @@ containerd is an industry-standard container runtime that manages the complete c
 - **Architecture**: Monolithic daemon with plugin system
 - **Memory Footprint**: ~100MB RAM
 - **Default OCI Runtime**: runc (also supports crun, kata)
-- **CRI Plugin**: io.containerd.grpc.v1.cri
+- **CRI Plugin**: io.containerd.[[gRPC|grpc]].v1.cri
 - **Configuration**: /etc/containerd/config.toml
 
 ## Core Components
@@ -80,28 +81,28 @@ journalctl -u containerd -f
 - [[concepts/container-runtime-comparison.md|Container Runtime Comparison]]
 - [[concepts/linux-container-foundation.md|Linux Container Foundation]]
 
-- [[domain-19-landscape-references/graduated/containerd/07-containerd-disaster-recovery.md|07-containerd-disaster-recovery]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
+- 07-containerd-disaster-recovery
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.7
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
+- RELEASE-NOTES-1.6
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.0.md|RELEASE-NOTES-0.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/graduated/containerd/04-containerd-upgrade-migration.md|04-containerd-upgrade-migration]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|02-containerd-wasm-shim]]
-- [[domain-19-landscape-references/graduated/containerd/containerd.md|containerd]]
-- [[domain-19-landscape-references/graduated/containerd/05-containerd-windows-support.md|05-containerd-windows-support]]
-- [[domain-19-landscape-references/graduated/containerd/02-containerd-v2-features.md|02-containerd-v2-features]]
-- [[domain-19-landscape-references/graduated/containerd/08-containerd-multi-tenant.md|08-containerd-multi-tenant]]
-- [[domain-19-landscape-references/graduated/containerd/03-containerd-security-hardening.md|03-containerd-security-hardening]]
-- [[domain-19-landscape-references/graduated/containerd/06-containerd-observability.md|06-containerd-observability]]
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-0.0
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- 04-containerd-upgrade-migration
+- 02-containerd-wasm-shim
+- containerd
+- 05-containerd-windows-support
+- 02-containerd-v2-features
+- 08-containerd-multi-tenant
+- 03-containerd-security-hardening
+- 06-containerd-observability
 - [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference

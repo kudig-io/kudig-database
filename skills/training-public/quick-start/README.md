@@ -1,5 +1,5 @@
 ---
-title: 新人上手快速路径（Quick Start）
+title: 新人上手快速路径（Quick Start） [quick-start]
 description: '## 概述'
 category: learning
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 新人上手快速路径（Quick Start）
@@ -43,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-本目录提供新人入职第一周的系统性上手路径，旨在帮助刚加入团队的 SRE 和运维工程师在最短时间内建立 Kubernetes 生产运维的基本能力。新人培训是团队战斗力建设的关键环节，一个结构化的上手路径能够显著缩短新人从"第一天入职"到"能独立处理工单"的时间周期。本指南基于阿里云 ACK（Container Service for Kubernetes）生产环境实际运维经验编写，涵盖了从环境搭建到独立值班的完整流程。
+本目录提供新人入职第一周的系统性上手路径，旨在帮助刚加入团队的 SRE 和运维工程师在最短时间内建立 [[Kubernetes|Kubernetes]] 生产运维的基本能力。新人培训是团队战斗力建设的关键环节，一个结构化的上手路径能够显著缩短新人从"第一天入职"到"能独立处理工单"的时间周期。本指南基于阿里云 ACK（Container [[Service|Service]] for Kubernetes）生产环境实际运维经验编写，涵盖了从环境搭建到独立值班的完整流程。
 
 四天的内容按照由浅入深的顺序排列：第一天完成所有工具安装和集群访问验证，确保基本工作环境就绪；第二天学习工单处理流程，掌握最常见的故障类型和处理方法；第三天理解值班交接的标准化流程，确保业务连续性；第四天安装和配置效率工具，提升日常运维效率。每天的学习目标清晰明确，产出可量化验证。
 
@@ -65,7 +66,7 @@ prerequisites:
 
 ### Day 1: 环境准备
 
-第一天是所有后续工作的基础。新人需要完成开发/运维工具的安装配置，验证对 Kubernetes 集群的访问权限，并确认监控告警系统的可达性。这一天的核心产出是能够成功执行 `kubectl get pods -A` 并看到集群中所有命名空间的 Pod 列表。
+第一天是所有后续工作的基础。新人需要完成开发/运维工具的安装配置，验证对 Kubernetes 集群的访问权限，并确认监控告警系统的可达性。这一天的核心产出是能够成功执行 `kubectl get [[Pods|pods]] -A` 并看到集群中所有命名空间的 Pod 列表。
 
 关键活动包括：
 - 安装 kubectl 命令行工具并配置 kubeconfig 文件
@@ -599,20 +600,20 @@ tags: [onboarding, quick-start, day-1-4, new-engineer, k8s-1.28-1.33]
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

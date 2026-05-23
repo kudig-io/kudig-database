@@ -28,11 +28,12 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 存储故障排查
 
-### 01 Pv Pvc Troubleshooting
+### 01 Pv Pvc Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 
@@ -52,7 +53,7 @@ prerequisites:
 
 1. **确认 PVC/PV/StorageClass 状态**：核对绑定关系与 `volumeBindingMode`。
 2. **检查 VolumeAttachment**：确认卷是否仍附着在旧节点。
-3. **节点侧挂载排查**：查看设备、挂载点与 kubelet 日志。
+3. **节点侧挂载排查**：查看设备、挂载点与 [[kubelet|kubelet]] 日志。
 4. **区分控制面与数据面**：判断是 Provision/Attach 还是 Mount 阶段故障。
 5. **验证修复结果**：Pod 启动、挂载点可读写、监控指标恢复。
 
@@ -68,7 +69,7 @@ prerequisites:
 
 #### 0. 10 分钟快速诊断
 
-1. **CSI 组件就绪**：`kubectl get pods -n kube-system | grep -E "csi|storage"`，确认 controller/node 插件均 Running。
+1. **CSI 组件就绪**：`kubectl get [[Pods|pods]] -n kube-system | grep -E "csi|storage"`，确认 controller/node 插件均 Running。
 2. **驱动注册**：`kubectl get csinode <node> -o yaml`，确认驱动条目存在；节点上检查 `/var/lib/kubelet/plugins/` Socket。
 3. **控制面日志**：`kubectl logs -n kube-system <csi-controller> -c csi-provisioner|csi-attacher`，定位 Create/Attach 失败原因。
 4. **Node 侧日志**：`kubectl logs -n kube-system <csi-node-pod> -c <driver>`，查看 NodePublish/NodeStage 错误。

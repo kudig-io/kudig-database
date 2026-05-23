@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 日志管理最佳实践
+title: Kubernetes 日志管理最佳实践 [observability]
 description: 生产环境 Kubernetes 日志管理配置的最佳实践指南
 category: best-practices/observability
 tags:
@@ -45,6 +45,7 @@ cross_refs:
 - type: best-practice
   path: ./monitoring.md
   label: 监控最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 日志管理最佳实践

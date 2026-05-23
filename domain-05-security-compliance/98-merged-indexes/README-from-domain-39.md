@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - rbac-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---

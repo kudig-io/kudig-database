@@ -1,5 +1,5 @@
 ---
-title: ResourceQuota 异常故障树分析
+title: ResourceQuota 异常故障树分析 (skills)
 description: OR0 --> CONF[配置错误]
 category: skills
 tags:
@@ -31,13 +31,14 @@ prerequisites:
 fta_id: FTA-RESOURCE_QUOTA-001
 component: Resource Quota
 severity: medium
+created: "2026-05-23"
 ---
 
 # ResourceQuota 异常故障树分析
 
 <!-- condition: kubectl get events -A | grep -E 'exceeded quota|forbidden.*quota' 显示配额超限 -->
 
-# ResourceQuota 异常 FTA 树
+# [[skills/resource-quota-fta.md|ResourceQuota 异常 FTA 树]]
 
 ## 适用范围与说明
 - **目标**：覆盖资源配额耗尽、配额计算异常与误拦截的关键成因与路径。

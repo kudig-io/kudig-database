@@ -40,6 +40,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Domain-34 CNCF Landscape — 开源项目索引
@@ -104,9 +105,9 @@ authors:
 
 ## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-landscape-references MOC]]
+- domain-19-landscape-references MOC
 - [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|CNCF 集成实践指南]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|CNCF 学习路径]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|CNCF 项目选型指南]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|CNCF 项目 FTA 索引]]
+- CNCF 集成实践指南
+- CNCF 学习路径
+- CNCF 项目选型指南
+- CNCF 项目 FTA 索引

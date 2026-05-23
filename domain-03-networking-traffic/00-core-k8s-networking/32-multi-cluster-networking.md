@@ -57,6 +57,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 80 - 多集群网络互联
@@ -66,8 +67,8 @@ cross_refs:
 
 | 方案 | 架构 | 延迟 | 复杂度 | 适用场景 |
 |-----|------|------|-------|---------|
-| Submariner | 隧道 | 中 | 中 | 混合云 |
-| Cilium Cluster Mesh | eBPF隧道 | 低 | 中 | 同质集群 |
+| [[Submariner|Submariner]] | 隧道 | 中 | 中 | 混合云 |
+| [[Cilium|Cilium]] Cluster Mesh | eBPF隧道 | 低 | 中 | 同质集群 |
 | Istio多集群 | 服务网格 | 中 | 高 | 服务治理 |
 | Skupper | 应用层 | 中 | 低 | 简单互联 |
 | VPN/专线 | 网络层 | 低 | 高 | 企业网络 |
@@ -305,22 +306,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/30-service-mesh-deep-dive.md|30-service-mesh-deep-dive]]
-- [[domain-03-networking-traffic/31-multi-cluster-federation.md|31-multi-cluster-federation]]
-- [[domain-03-networking-traffic/33-network-troubleshooting.md|33-network-troubleshooting]]
-- [[domain-03-networking-traffic/34-network-performance-tuning.md|34-network-performance-tuning]]
+- 30-service-mesh-deep-dive
+- 31-multi-cluster-federation
+- 33-network-troubleshooting
+- 34-network-performance-tuning

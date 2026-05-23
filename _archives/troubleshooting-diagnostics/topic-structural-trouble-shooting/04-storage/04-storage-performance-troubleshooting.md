@@ -480,7 +480,7 @@ fi
 # 2. I/O 调度器优化
 echo ""
 echo "2. I/O 调度器优化:"
-if [[ "$DISK" == nvme* ]]; then
+if "$DISK" == nvme*; then
   # NVMe 设备使用 'none' 调度器（多队列原生优化）
   echo none > /sys/block/$DISK/queue/scheduler
   echo "  ✓ $DISK 调度器已设置为 none (NVMe 优化)"

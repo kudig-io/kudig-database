@@ -23,13 +23,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 应用安全清单
 
 ## 概述
 
-本清单旨在从应用开发者的视角，提供在 [[entities/kubernetes|kubernetes]] 上运行应用的安全基线指南。该列表并非详尽无遗，而是随着时间不断发展。清单中的项目顺序不反映优先级，某些项目在各小节下的段落中有更详细的说明。本文档假设“开发者”是指与命名空间范围对象交互的 Kubernetes 集群用户。
+本清单旨在从应用开发者的视角，提供在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 上运行应用的安全基线指南。该列表并非详尽无遗，而是随着时间不断发展。清单中的项目顺序不反映优先级，某些项目在各小节下的段落中有更详细的说明。本文档假设“开发者”是指与命名空间范围对象交互的 Kubernetes 集群用户。
 
 ## 核心概念/原理
 
@@ -50,7 +51,7 @@ prerequisites:
 ### ServiceAccount
 
 - **避免使用 `default` ServiceAccount**。为每个工作负载或微服务创建独立的 ServiceAccount。
-- 除非 Pod 明确需要访问 Kubernetes API 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
+- 除非 Pod 明确需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
 
 ### Pod 级 `securityContext` 建议
 
@@ -82,7 +83,7 @@ prerequisites:
 ### 网络策略
 
 - 配置 NetworkPolicies，仅允许来自 Pod 的预期入站和出站流量。
-- 确保集群提供并强制执行 NetworkPolicy。如果编写的应用将部署到不同的集群，请考虑是否可以假设 NetworkPolicy 可用且已强制执行。
+- 确保集群提供并强制执行 [[NetworkPolicy|NetworkPolicy]]。如果编写的应用将部署到不同的集群，请考虑是否可以假设 NetworkPolicy 可用且已强制执行。
 
 ### Linux 容器安全
 

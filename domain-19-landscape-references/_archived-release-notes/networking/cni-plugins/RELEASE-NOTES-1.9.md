@@ -1,0 +1,47 @@
+---
+title: cni-plugins v1.9 Release Notes
+description: cni-plugins v1.9 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- cni-plugins v1.9 Release Notes 是什么
+- 如何 cni-plugins v1.9 Release Notes
+trigger_keywords:
+- cni-plugins
+- v1.9
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+created: "2026-05-23"
+---
+
+# cni-plugins v1.9 Release Notes
+
+Source: [v1.9.1](https://github.com/containernetworking/plugins/releases/tag/v1.9.1)
+
+This is a patch release with dependency updates and some minor fixes.
+
+## Minor fixes
+* bandwidth: handle nil bandwidth in CHECK by @squeed in https://github.com/containernetworking/plugins/pull/1222
+* vrf: fix route filtering to preserve IPAM-configured routes by @mlguerrero12 in https://github.com/containernetworking/plugins/pull/1227
+* CVE-2025-52881: Bump selinux to 1.13.0 by @sbiradar10 in https://github.com/containernetworking/plugins/pull/1231
+* bridge: include attempted IP address in AddrAdd error message by @Amulyam24 in https://github.com/containernetworking/plugins/pull/1225
+
+## New Contributors
+* @sbiradar10 made their first contribution in https://github.com/containernetworking/plugins/pull/1231
+* @Amulyam24 made their first contribution in https://github.com/containernetworking/plugins/pull/1225
+
+**Full Changelog**: https://github.com/containernetworking/plugins/compare/v1.9.0...v1.9.1

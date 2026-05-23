@@ -44,6 +44,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 05 - 企业级存储管理与运维实践
@@ -56,7 +57,7 @@ authors:
 
 - [存储运维体系架构](#存储运维体系架构)
 - [日常运维操作](#日常运维操作)
-- [监控告警体系](#监控告警体系)
+- 监控告警体系](#监控告警体系)
 - [容量规划管理](#容量规划管理)
 - [备份恢复策略](#备份恢复策略)
 - [故障处理流程](#故障处理流程)
@@ -1666,18 +1667,18 @@ Level 5 - 自主化 (Autonomous)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
+- domain-04-storage-data KUDIG Database — Global MOC
 - [[domain-04-storage-data/README.md|Domain-16: 存储基础]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-16 存储基础 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01 - 存储技术概述]]
-- [[domain-04-storage-data/02-block-file-object-storage.md|02 - 块存储、文件存储、对象存储]]
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03 - RAID 与存储冗余]]
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04 - 分布式存储系统]]
-- [[domain-04-storage-data/06-storage-performance-iops.md|06 - 存储性能与 IOPS]]
+- Domain-16 存储基础 — 开源项目索引
+- 01 - 存储技术概述
+- 02 - 块存储、文件存储、对象存储
+- 03 - RAID 与存储冗余
+- 04 - 分布式存储系统
+- 06 - 存储性能与 IOPS
 
 ## See Also
 
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03-raid-storage-redundancy]]
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04-distributed-storage-systems]]
-- [[domain-04-storage-data/06-storage-performance-iops.md|06-storage-performance-iops]]
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01-storage-technologies-overview]]
+- 03-raid-storage-redundancy
+- 04-distributed-storage-systems
+- 06-storage-performance-iops
+- 01-storage-technologies-overview

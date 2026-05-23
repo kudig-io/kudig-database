@@ -1,5 +1,5 @@
 ---
-title: 附录 D：FTA 模板参考 (历史参考)
+title: 附录 D：FTA 模板参考 (历史参考) [topic-fta]
 description: — FTA 方法论与 AI Agent 实践'
 category: fta
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 fta_id: FTA-APPENDIX_D_TEMPLATES-001
 component: Appendix D Templates
 severity: high
+created: "2026-05-23"
 ---
 
 title: 附录 D：FTA 模板参考 (历史参考)
@@ -48,7 +49,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- prometheus
+- [[Prometheus|prometheus]]
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -125,9 +126,9 @@ k8s_versions:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|[[第一章：FTA 起源与发展史|第一章：FTA 起源与发展史]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]

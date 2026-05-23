@@ -55,6 +55,7 @@ cross_refs:
 - type: domain
   path: ../domain-10-troubleshooting-diagnostics/
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
+created: "2026-05-23"
 ---
 
 # GitOps配置管理 (GitOps Configuration Management)
@@ -549,25 +550,25 @@ argocd_app_sync_status{namespace="argocd", status="Synced"}
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
-- [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|平台运维概述]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|容量规划与资源评估 (Capacity Planning & Resource Assessment)]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
-- [[domain-07-platform-engineering/10-security-compliance.md|安全合规管理 (Security & Compliance Management)]]
+- domain-07-platform-engineering KUDIG Database — Global MOC
+- [[domain-07-platform-engineering/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- index.md|Domain-9 平台运维 — 开源项目索引]]
+- 平台运维概述
+- 集群生命周期管理
+- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md]]
+- 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
+- 安全合规管理 (Security & Compliance Management)
 
 ## See Also
 
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|05-operations-metrics-system]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|08-automation-toolchain]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|09-cost-optimization-finops]]
+- 05-operations-metrics-system
+- 06-monitoring-alerting-system
+- 08-automation-toolchain
+- 09-cost-optimization-finops
 
 ## Related
 

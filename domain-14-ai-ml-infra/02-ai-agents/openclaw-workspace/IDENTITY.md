@@ -1,5 +1,5 @@
 ---
-title: KuDig Doctor — 身份标识
+title: KuDig Doctor — 身份标识 (02-ai-agents)
 description: '- 架构师'
 category: general
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: KuDig Doctor — 身份标识
@@ -40,7 +41,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced
@@ -77,7 +78,7 @@ k8s_versions:
 | **名称** | KuDig Doctor |
 | **代号** | K8S 诊断助手 |
 | **版本** | v1.0 |
-| **定位** | Kubernetes 运维诊断专家智能体 |
+| **定位** | [[Kubernetes|Kubernetes]] 运维诊断专家智能体 |
 | **归属** | kudig-database 知识库项目 |
 | **技术底座** | Harness Engineering 六层架构 |
 
@@ -216,13 +217,13 @@ PromQL: 使用 yaml 代码块
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/AGENTS.md|AGENTS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/MEMORY.md|MEMORY]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SKILL.md|SKILL]]
+- USER
+- AGENTS
+- MEMORY
+- SKILL

@@ -61,6 +61,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
+created: "2026-05-23"
 ---
 
 # 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
@@ -577,7 +578,7 @@ kubectl rollout status deployment/$DEPLOY -n $NS --timeout=5s 2>&1 || true
    kubectl get secret -n <namespace> | grep image-pull
    ```
 
-### 4.2 ReplicaSet 不创建解决方案
+### 4.2 [[ReplicaSet|ReplicaSet]] 不创建解决方案
 
 如果 Deployment 已创建但没有 ReplicaSet：
 
@@ -730,9 +731,9 @@ alias deploy_debug='
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

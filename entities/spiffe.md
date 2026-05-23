@@ -1,5 +1,5 @@
 ---
-title: SPIFFE
+title: SPIFFE (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # SPIFFE
@@ -54,7 +55,7 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[istio]]
-- [[entities/vault.md|vault]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[entities/csi-drivers.md|csi-drivers]]
 - [[concepts/security-defense-depth.md|security-defense-depth]]
 
@@ -66,8 +67,8 @@ description: '## 项目概述'
 - [[kubeflow]] — Kubeflow
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/spiffe/spiffe.md|spiffe]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- spiffe
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]

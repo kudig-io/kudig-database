@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 服务网格演进
@@ -98,7 +99,7 @@ Envoy 是高性能服务代理，被 Istio 和其他服务网格用作数据面�
 
 ### 关键演进
 
-- HTTP/2 和 gRPC 支持
+- HTTP/2 和 [[gRPC|gRPC]] 支持
 - xDS API 协议成熟
 - 过滤器链扩展
 - 负载均衡改进
@@ -112,7 +113,7 @@ Cilium 基于 eBPF 提供网络、安全和可观测性。
 
 - 基础 eBPF 网络功能
 - L3/L4 网络策略
-- Envoy 集成（Ingress/Egress 代理）
+- Envoy 集成（[[Ingress|Ingress]]/Egress 代理）
 - BPF endpoint map 管理
 - cilium-health 健康检查
 
@@ -120,7 +121,7 @@ Cilium 基于 eBPF 提供网络、安全和可观测性。
 
 - L7 网络策略
 - DNS 过滤
-- 服务网格模式（Cilium Service Mesh）
+- 服务网格模式（Cilium [[Service|Service]]Service Mesh）|Service Mesh]]）
 - Hubble 可观测性
 - eBPF 加速的网络性能 ^[inferred]
 

@@ -1,4 +1,35 @@
 ---
+title: OpenSSL 证书操作速查手册 (topic-code-analysis)
+description: 'description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenSSL 证书操作速查手册 是什么
+- 如何 OpenSSL 证书操作速查手册
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- OpenSSL
+- 证书操作速查手册
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: OpenSSL 证书操作速查手册
 description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。
 category: functions
@@ -33,10 +64,6 @@ trigger_keywords:
 - 证书验证
 - 证书生成
 - 格式转换
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -44,11 +71,20 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/cert-format-encoding
 - cluster-cert/apiserver-cert
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenSSL 证书操作速查手册
 
-本文档汇总 [[entities/kubernetes|kubernetes]] 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。
+本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。
 
 ---
 
@@ -375,3 +411,9 @@ done
 | `tls: private key does not match public key` | `openssl x509 -noout -modulus` vs `openssl rsa -noout -modulus` | 证书与私钥不配对 |
 | `x509: cannot validate certificate for IP` | 检查 SAN 中的 IP 列表 | 访问 IP 不在 SAN 中 |
 | `PEM routines:get_name:no start line` | 检查文件格式 | 文件是 DER 而非 PEM |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

@@ -32,6 +32,7 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -152,7 +153,7 @@ Drain 节点上的 Pod
 
 - **cool-down period**: 扩容后等待一段时间（默认 10 分钟）再考虑缩容，避免频繁抖动
 - **scale-down-utilization-threshold**: 节点资源利用率低于此值时考虑缩容，默认 0.5（50%）
-- **skip-nodes-with-system-pods**: 不要缩容运行 kube-system Pod 的节点，默认 true
+- **skip-nodes-with-system-[[Pods|pods]]**: 不要缩容运行 kube-system Pod 的节点，默认 true
 - **balance-similar-node-groups**: 保持相似节点组的节点数均衡，推荐开启
 
 ### Spot 实例混合策略

@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 跨境电商独立站架构设计
@@ -46,7 +47,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 跨境电商独立站 Kubernetes 全球部署
+- 跨境电商独立站 [[Kubernetes|Kubernetes]] 全球部署
 - DTC品牌出海 Shopify 阿里云架构
 - 跨境支付路由 多币种 K8s
 - GDPR合规 跨境电商 数据本地化
@@ -67,7 +68,7 @@ related_domains:
 related_topics:
 - 33-crossborder-warehouse
 - 01-ecommerce-architecture
-- [[domain-20-application-patterns/53-new-retail-dtc.md|53-new-retail-dtc]]
+- 53-new-retail-dtc
 authors:
 - name: KUDIG Team
   role: contributor
@@ -308,8 +309,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -323,11 +324,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/53-new-retail-dtc.md|53-new-retail-dtc]]
-- [[domain-20-application-patterns/54-social-gaming-metaverse.md|54-social-gaming-metaverse]]
-- [[domain-20-application-patterns/56-smart-elderly-care.md|56-smart-elderly-care]]
-- [[domain-20-application-patterns/57-digital-therapeutics.md|57-digital-therapeutics]]
+- 53-new-retail-dtc
+- 54-social-gaming-metaverse
+- 56-smart-elderly-care
+- 57-digital-therapeutics
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

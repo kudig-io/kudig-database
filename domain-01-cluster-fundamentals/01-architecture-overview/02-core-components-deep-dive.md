@@ -73,9 +73,10 @@ related_docs:
 - path: ../domain-01-cluster-fundamentals/11-etcd-deep-dive.md
   type: depth
   desc: etcd 深度解析
+created: "2026-05-23"
 ---
 
-# Kubernetes 核心组件深度剖析 (Core Components Deep Dive)
+# [[Kubernetes|Kubernetes]] 核心组件深度剖析 (Core Components Deep Dive)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-05 | **参考**: [kubernetes.io/docs/concepts/overview/components](https://kubernetes.io/docs/concepts/overview/components/)
 
@@ -86,7 +87,7 @@ related_docs:
 
 1. [控制平面组件概览](#1-控制平面组件概览)
 2. [kube-apiserver 深度剖析](#2-kube-apiserver-深度剖析)
-3. [etcd 生产实践](#3-etcd-生产实践)
+3. [[entities/etcd.md|etcd]] 生产实践](#3-etcd-生产实践)
 4. [kube-scheduler 调度优化](#4-kube-scheduler-调度优化)
 5. [kube-controller-manager 控制器详解](#5-kube-controller-manager-控制器详解)
 6. [cloud-controller-manager 云集成](#6-cloud-controller-manager-云集成)
@@ -162,7 +163,7 @@ related_docs:
 | 4 | **kube-scheduler** | apiserver可用 | 30s | `/healthz` 端点 | 新Pod无法调度 |
 | 5 | **kubelet** | apiserver可用 | 30s | `curl http://localhost:10248/healthz` | 节点NotReady |
 | 6 | **kube-proxy** | apiserver, kubelet | 30s | `/healthz` 端点 | Service网络故障 |
-| 7 | **CoreDNS** | kube-proxy, CNI | 60s | DNS查询测试 | 服务发现失败 |
+| 7 | **[[CoreDNS|CoreDNS]]** | kube-proxy, CNI | 60s | DNS查询测试 | 服务发现失败 |
 | 8 | **CNI** | kubelet | 60s | Pod网络测试 | Pod网络不通 |
 
 ### 1.4 组件版本兼容性矩阵
@@ -1677,28 +1678,28 @@ resources:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- 03 - 功能和API表
+- 04 - Kubernetes 源码结构深度解析
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## Related
 
 - [[MOC]]
 
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|架构全景图]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|控制平面架构]]
-- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[domain-13-container-runtime/MOC.md|相关知识域: domain-13-container-runtime]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
+- 架构全景图
+- 控制平面架构
+- etcd 深度解析
+- 相关知识域: domain-13-container-runtime
+- 相关知识域: domain-01-cluster-fundamentals
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
@@ -1706,7 +1707,7 @@ resources:
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/99-kubernetes-version-lifecycle-support-policy.md|99-kubernetes-version-lifecycle-support-policy]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|01-kubernetes-architecture-overview]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03-api-versions-features]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04-source-code-structure]]
+- 99-kubernetes-version-lifecycle-support-policy
+- 01-kubernetes-architecture-overview
+- 03-api-versions-features
+- 04-source-code-structure

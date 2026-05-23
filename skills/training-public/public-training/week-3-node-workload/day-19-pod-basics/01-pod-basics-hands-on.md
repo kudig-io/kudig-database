@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -34,7 +35,7 @@ title: Day 19: Pod 容器组基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] Pod 生命周期
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod 生命周期
   - Pod 探针配置
   - CrashLoopBackOff 排查
   - Pod QoS 等级

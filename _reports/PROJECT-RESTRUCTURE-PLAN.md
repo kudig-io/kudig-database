@@ -23,6 +23,7 @@ trigger_keywords:
 - 项目整体重组行动计划
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 项目整体重组行动计划
@@ -79,8 +80,8 @@ prerequisites:
 
 | # | Topic 目录 | 文件数 | 目标 Domain | 归属理由 |
 |---|-----------|--------|-------------|----------|
-| 1 | `domain-10-troubleshooting-diagnostics/topic-fta/` | 81 | `domain-10-troubleshooting-diagnostics/` | 故障树分析是排障核心方法论 |
-| 2 | `domain-10-troubleshooting-diagnostics/topic-febm/` | 11 | `domain-10-troubleshooting-diagnostics/` | 故障排查工程方法论 |
+| 1 | `domain-10-troubleshooting-diagnostics/topic-fta/` | 81 | `domain-10-troubleshooting-diagnostics/` | 问题树分析是排障核心方法论 |
+| 2 | `domain-10-troubleshooting-diagnostics/topic-febm/` | 11 | `domain-10-troubleshooting-diagnostics/` | 问题排查工程方法论 |
 | 3 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 72 | `domain-10-troubleshooting-diagnostics/` | 结构化排查体系 |
 | 4 | `domain-10-troubleshooting-diagnostics/topic-skills/` | 42 | `domain-10-troubleshooting-diagnostics/` | 运维技能卡片（排障导向） |
 | 5 | `domain-10-troubleshooting-diagnostics/topic-qa-corpus/` | 4 | `domain-10-troubleshooting-diagnostics/` | QA 语料（排障能力评估） |

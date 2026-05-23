@@ -75,11 +75,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 安全配置手册
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 安全配置手册
 
 ---
 
@@ -512,7 +513,7 @@ webhooks:
 
 
 > ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> 请使用 Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 PodSecurityPolicy (PSP) 在 v1.25 中已移除。替代方案是 **Pod Security Admission (PSA)**，它通过 Namespace 标签实现安全标准强制执行。
 
@@ -1103,7 +1104,7 @@ check_1_1_1() {
 # 检查1.2.1: 确保etcd数据目录权限正确
 check_1_2_1() {
     local etcd_dir=$(grep -oP 'data-dir=\K[^ ]+' /etc/kubernetes/manifests/etcd.yaml)
-    if [[ $(stat -c "%a" $etcd_dir) == "700" ]] && [[ $(stat -c "%U" $etcd_dir) == "etcd" ]]; then
+    if $(stat -c "%a" $etcd_dir) == "700" && $(stat -c "%U" $etcd_dir) == "etcd"; then
         echo "✓ 1.2.1 PASS: etcd data directory permissions correct"
     else
         echo "✗ 1.2.1 FAIL: etcd data directory permissions incorrect"
@@ -1271,25 +1272,25 @@ verify_security_hardening() {
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
+- 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|02-plane-components-interaction]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|03-plane-high-availability]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|05-plane-monitoring-observability]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|06-plane-troubleshooting]]
+- 02-plane-components-interaction
+- 03-plane-high-availability
+- 05-plane-monitoring-observability
+- 06-plane-troubleshooting
 
 ## Related
 

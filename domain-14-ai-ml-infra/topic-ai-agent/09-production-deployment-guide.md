@@ -1,4 +1,45 @@
 ---
+title: 生产部署指南：K8s 上运行 Agent 服务 (domain-14-ai-ml-infra)
+description: 'title: 生产部署指南：K8s 上运行 Agent 服务'
+category: general
+tags:
+- ai
+- ai-agent
+- deployment
+- production
+- guide
+- prometheus
+- istio
+- redis
+- postgresql
+- hpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 生产部署指南：K8s 上运行 Agent 服务 是什么
+- 如何 生产部署指南：K8s 上运行 Agent 服务
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 生产部署指南：K8s
+- 上运行
+- Agent
+- 服务
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- prometheus-basics
+- redis-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 生产部署指南：K8s 上运行 Agent 服务
 description: '# 生产部署指南：K8s 上运行 Agent 服务'
 category: ai-agent
@@ -8,8 +49,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- istio
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - redis
 - postgresql
 - hpa
@@ -31,12 +72,15 @@ trigger_keywords:
 - 服务
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- service-mesh-basics
-- prometheus-basics
-- redis-basics
-- gpu-scheduling-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 生产部署指南：K8s 上运行 Agent 服务
@@ -45,15 +89,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
-将 Agent 服务部署到 Kubernetes 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
+将 Agent 服务部署到 [[Kubernetes|Kubernetes]] 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
 
 ---
 
-## 1. Agent 服务架构设计
+<!-- chunk: 1. Agent 服务架构设计 -->## 1. Agent 服务架构设计
 
-### 1.1 生产架构全景
+#<!-- chunk: 1.1 生产架构全景 -->## 1.1 生产架构全景
 
 ```
                     外部流量
@@ -98,7 +142,7 @@ prerequisites:
        └─────────────────────────┘
 ```
 
-### 1.2 同步 vs 异步模式选择
+#<!-- chunk: 1.2 同步 vs 异步模式选择 -->## 1.2 同步 vs 异步模式选择
 
 | 模式 | 适用场景 | 最大超时 | 实现复杂度 |
 |------|---------|---------|-----------|
@@ -108,9 +152,9 @@ prerequisites:
 
 ---
 
-## 2. Agent API 服务
+<!-- chunk: 2. Agent API 服务 -->## 2. Agent API 服务
 
-### 2.1 FastAPI Agent 服务
+#<!-- chunk: 2.1 FastAPI Agent 服务 -->## 2.1 FastAPI Agent 服务
 
 ```python
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
@@ -283,9 +327,9 @@ async def readiness_check():
 
 ---
 
-## 3. K8s 生产部署清单
+<!-- chunk: 3. K8s 生产部署清单 -->## 3. K8s 生产部署清单
 
-### 3.1 Agent 服务 Deployment
+#<!-- chunk: 3.1 Agent 服务 Deployment -->## 3.1 Agent 服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -412,7 +456,7 @@ spec:
             app: k8s-agent-api
 ```
 
-### 3.2 HPA（基于自定义指标）
+#<!-- chunk: 3.2 HPA（基于自定义指标） -->## 3.2 HPA（基于自定义指标）
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -472,7 +516,7 @@ spec:
         periodSeconds: 120
 ```
 
-### 3.3 Service 和 Ingress
+#<!-- chunk: 3.3 Service 和 Ingress -->## 3.3 Service 和 Ingress
 
 ```yaml
 apiVersion: v1
@@ -533,9 +577,9 @@ spec:
 
 ---
 
-## 4. LLM 推理服务部署（vLLM）
+<!-- chunk: 4. LLM 推理服务部署（vLLM） -->## 4. LLM 推理服务部署（vLLM）
 
-### 4.1 vLLM 生产配置
+#<!-- chunk: 4.1 vLLM 生产配置 -->## 4.1 vLLM 生产配置
 
 ```yaml
 apiVersion: apps/v1
@@ -624,7 +668,7 @@ spec:
       priorityClassName: gpu-high-priority
 ```
 
-### 4.2 LLM 服务的多副本路由
+#<!-- chunk: 4.2 LLM 服务的多副本路由 -->## 4.2 LLM 服务的多副本路由
 
 ```yaml
 # 多模型服务统一入口（通过 Label 区分）
@@ -663,9 +707,9 @@ spec:
 
 ---
 
-## 5. 灰度发布策略
+<!-- chunk: 5. 灰度发布策略 -->## 5. 灰度发布策略
 
-### 5.1 Canary 发布
+#<!-- chunk: 5.1 Canary 发布 -->## 5.1 Canary 发布
 
 ```yaml
 # 稳定版（90% 流量）
@@ -725,7 +769,7 @@ spec:
     targetPort: 8080
 ```
 
-### 5.2 基于 Argo Rollouts 的智能灰度
+#<!-- chunk: 5.2 基于 Argo Rollouts 的智能灰度 -->## 5.2 基于 Argo Rollouts 的智能灰度
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -774,9 +818,9 @@ spec:
 
 ---
 
-## 6. 限流与配额管理
+<!-- chunk: 6. 限流与配额管理 -->## 6. 限流与配额管理
 
-### 6.1 用户级别限流
+#<!-- chunk: 6.1 用户级别限流 -->## 6.1 用户级别限流
 
 ```python
 import redis.asyncio as aioredis
@@ -851,9 +895,9 @@ async def rate_limit_middleware(request: Request, call_next):
 
 ---
 
-## 7. 生产运维 Runbook
+<!-- chunk: 7. 生产运维 Runbook -->## 7. 生产运维 Runbook
 
-### 7.1 常见故障处理
+#<!-- chunk: 7.1 常见故障处理 -->## 7.1 常见故障处理
 
 ```
 故障1: Agent API 响应时间突增（>10s P95）
@@ -901,7 +945,7 @@ async def rate_limit_middleware(request: Request, call_next):
   4. 重启 Pod: kubectl rollout restart deployment/vllm-xxx
 ```
 
-### 7.2 关键监控检查清单
+#<!-- chunk: 7.2 关键监控检查清单 -->## 7.2 关键监控检查清单
 
 ```bash
 # Agent 系统健康巡检脚本
@@ -941,9 +985,9 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 
 ---
 
-## 8. 最佳实践与反模式
+<!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **零停机部署**：`maxUnavailable: 0` + `preStop sleep` + 就绪探针的组合确保无缝滚动更新
 - **流式输出优先**：对话场景必须支持 SSE 流式输出，显著提升用户体验
@@ -951,7 +995,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 - **LLM 服务独立部署**：vLLM 和 Agent 服务分开部署，避免相互影响并利于独立扩缩容
 - **灰度发布必须携带质量分析**：纯按比例的 Canary 不够，要加自动回滚的成功率检测
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **Agent 和 LLM 共用 Pod**：两者资源需求差异极大，合并导致资源浪费或 OOM
 - **无限流请求体大小**：不设置 `proxy-body-size`，大型 Prompt 攻击会打垮服务
@@ -960,7 +1004,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -974,3 +1018,32 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## Related
+
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide
+
+## See Also
+
+- 07-memory-context-management
+- 08-agent-evaluation-observability
+- 10-security-guardrails
+- 11-cost-latency-optimization

@@ -53,6 +53,7 @@ related_topics:
 - cluster setup
 - certificate
 - node join
+created: "2026-05-23"
 ---
 
 # kubeadm init 集群初始化概览
@@ -86,7 +87,7 @@ func getVariantVersion(kubernetesVersion string, imageRepository string) (string
 | 参数名 | 类型 | 说明 | 验证规则 |
 |--------|------|------|---------|
 | `cfgPath` | `string` | 配置文件路径 | 可选，与 CLI 参数互斥 |
-| `kubernetesVersion` | `string` | [[entities/kubernetes|kubernetes]] 版本 | 必须是有效 semver (如 v1.28.0) |
+| `kubernetesVersion` | `string` | [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 版本 | 必须是有效 semver (如 v1.28.0) |
 | `controlPlaneEndpoint` | `string` | API Server 负载均衡地址 | 格式: host:port |
 | `apiserverAdvertiseAddress` | `string` | API Server 广播地址 | 有效 IPv4/IPv6 地址 |
 | `apiserverBindPort` | `int32` | API Server 监听端口 | 范围 1-65535，默认 6443 |
@@ -98,7 +99,7 @@ func getVariantVersion(kubernetesVersion string, imageRepository string) (string
 | `imageRepository` | `string` | 镜像仓库地址 | 默认 registry.k8s.io |
 | `nodeName` | `string` | 节点名称 | 默认使用 hostname |
 | `podNetworkCidr` | `string` | Pod 网络 CIDR | 有效 CIDR (如 10.244.0.0/16) |
-| `serviceCidr` | `string` | Service 网络 CIDR | 有效 CIDR (默认 10.96.0.0/12) |
+| `serviceCidr` | `string` | [[Service|Service]] 网络 CIDR | 有效 CIDR (默认 10.96.0.0/12) |
 | `serviceDnsDomain` | `string` | 集群 DNS 域名 | 默认 cluster.local |
 | `skipPhases` | `[]string` | 跳过的阶段列表 | 已知的 phase 名称 |
 | `skipCertificateKeyPrint` | `bool` | 不打印证书密钥 | 默认 false |
@@ -739,7 +740,7 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 |------|------|---------|
 | `[ERROR Swap]: running with swap on is not supported` | 开启了 swap | `swapoff -a` 并注释 `/etc/fstab` 中的 swap 行 |
 | `[ERROR Port-6443]: Port 6443 is in use` | API Server 端口被占用 | 释放端口: `lsof -i :6443` 或更换端口 |
-| `[ERROR CRI]: container runtime is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
+| `[ERROR CRI]: [[Container Runtime|container runtime]] is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
 | `[ERROR FileContent--proc-sys-net-ipv4-ip_forward]` | 未开启 IP 转发 | `sysctl -w net.ipv4.ip_forward=1` |
 | `[ERROR DirAvailable--var-lib-etcd]: /var/lib/etcd is not empty` | etcd 数据目录不为空 | 清理: `rm -rf /var/lib/etcd/*` |
 | `[ERROR Service-Docker]: docker service is not enabled` | Docker 服务问题 | 改用 containerd 作为 CRI |

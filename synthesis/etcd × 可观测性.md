@@ -31,13 +31,25 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/kubelet]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
+  - target: "[[entities/cortex]]"
+    type: related_to
 ---
 
-# etcd × 可观测性
+# [[entities/etcd|etcd]] × 可观测性
 
 ## 连接点
 
-[[entities/etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus-grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 Kubernetes 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在故障前往往是静默的：它不会主动告警磁盘空间不足、不会预警性能退化、不会报告网络分区导致的仲裁风险。直到 API Server 开始超时、调度器停止工作、Pod 无法创建时，运维人员才意识到 etcd 出了问题。Prometheus 对 etcd 的监控不是可选项，而是集群运维的底线要求。
+[[entities/etcd]] 是 K8s 控制平面的状态存储，[[entities/prometheus|prometheus]]-grafana]] 是监控栈。wiki 将 etcd 作为架构组件、将监控作为运维工具分别介绍，但两者的关系是生死相依：etcd 是 [[entities/kubernetes|Kubernetes]] 的心脏——所有资源定义、状态更新、事件流都通过 etcd 持久化。但 etcd 在故障前往往是静默的：它不会主动告警磁盘空间不足、不会预警性能退化、不会报告网络分区导致的仲裁风险。直到 API Server 开始超时、调度器停止工作、Pod 无法创建时，运维人员才意识到 etcd 出了问题。Prometheus 对 etcd 的监控不是可选项，而是集群运维的底线要求。
 
 etcd 的可观测性与应用监控有本质区别：
 - 应用监控：关注吞吐量、延迟、错误率——目标是优化用户体验
@@ -82,7 +94,7 @@ Prometheus 监控 etcd，但如果 Prometheus 本身存储在依赖 etcd 的集�
 
 etcd 的写入负载与 K8s 集群规模呈非线性关系：
 - 每个 Pod 的创建/更新/删除都会写入 etcd
-- 每个 Node 的心跳（kubelet 每 10s 更新一次 Node status）都会写入 etcd
+- 每个 Node 的心跳（[[entities/kubelet|kubelet]] 每 10s 更新一次 Node status）都会写入 etcd
 - 每个 EndpointSlice 的变更都会写入 etcd
 - 在 5000+ 节点的集群中，etcd 的写入 QPS 可能达到数千，远超默认配置的承受能力
 
@@ -95,7 +107,7 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 | **指标采集开销** | etcd 的 /metrics 端点在高负载下可能响应缓慢。Prometheus 的 scrape 操作本身会增加 etcd 的 CPU 和内存压力。在 etcd 已经处于压力边缘时，监控采集可能成为压垮骆驼的最后一根稻草 |
 | **告警噪音** | etcd 的许多指标在正常波动时也会触发短暂告警（如 leader 选举期间的 has_leader=0）。过于敏感的告警导致运维疲劳，过于宽松的告警则错过真正的故障 |
 | **网络分区下的监控盲区** | 当网络分区导致 etcd 节点隔离时，被隔离的节点可能仍然存活并响应 /metrics，但已不属于集群多数派。Prometheus 仍然采集到健康的指标，但实际上该节点已无法参与共识 |
-| **历史数据的价值** | etcd 的性能退化通常是渐进的（如磁盘 I/O 随时间劣化）。短期监控（7 天）可能无法发现趋势，长期存储（Thanos/Cortex）增加了运维复杂度 |
+| **历史数据的价值** | etcd 的性能退化通常是渐进的（如磁盘 I/O 随时间劣化）。短期监控（7 天）可能无法发现趋势，长期存储（[[entities/cortex|Cortex]]）增加了运维复杂度 |
 | **安全与可观测性的冲突** | etcd 的 /metrics 端点默认不认证。在生产环境中，metrics 可能暴露集群内部状态（如 key 数量、watch 数量），成为信息泄露渠道。启用 etcd 客户端证书认证后，Prometheus 的配置复杂度增加 |
 
 ## 开放问题

@@ -30,19 +30,20 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # CNI Plugins
 
 ## What is CNI
 
-CNI (Container Network Interface) is the standard plugin interface Kubernetes uses to configure Pod networking. CNI plugins are invoked by kubelet during Pod creation to set up network namespaces, assign IP addresses, and configure routes.
+CNI (Container Network Interface) is the standard plugin interface Kubernetes uses to configure Pod networking. CNI plugins are invoked by [[kubelet|kubelet]] during Pod creation to set up network namespaces, assign IP addresses, and configure routes.
 
 ## Major CNI Plugins
 
 | Plugin | Type | Features | Best For |
 |--------|------|----------|----------|
-| **Calico** | BGP routing | NetworkPolicy enforcement, BGP peering, IPIP/VXLAN overlay | Enterprise, NetworkPolicy-heavy |
+| **Calico** | BGP routing | [[NetworkPolicy|NetworkPolicy]] enforcement, BGP peering, IPIP/VXLAN overlay | Enterprise, NetworkPolicy-heavy |
 | **Cilium** | eBPF-based | L7 policy, identity-aware security, observability, service mesh replacement | High-performance, security-focused |
 | **Flannel** | Overlay (VXLAN/UDP/WireGuard) | Simple, minimal overhead, dual-stack, WireGuard encryption | Small clusters, simplicity |
 | **Terway** | Alibaba Cloud ENI | Direct ENI IP allocation, high throughput, VPC-native | Alibaba Cloud environments |
@@ -83,18 +84,18 @@ Choose based on:
 - [[entities/networkpolicy.md|NetworkPolicy]]
 - Kubernetes Network Model
 
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|03-cni-plugins-comparison]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
+- 03-cni-plugins-comparison
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4

@@ -1,7 +1,38 @@
 ---
+title: 强制删除与异常场景处理 (topic-code-analysis)
+description: reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖 --force 标志、错误处理、跳过阶段、异常场景与处理方案。
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- flannel
+- containerd
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 强制删除与异常场景处理 是什么
+- 如何 强制删除与异常场景处理
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 强制删除与异常场景处理
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 强制删除与异常场景处理
-description: 生产环境中集群删除常遇到各种异常场景：节点不可达、etcd 仲裁丢失、kubelet 无法停止、容器运行时异常等。本文档分析 kubeadm reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖
-  --force 标志、错误处理、跳过阶段、异常场景与处理方案。
 category: cluster-delete
 tags:
 - force
@@ -13,15 +44,10 @@ tags:
 - etcd
 - container
 - unmount
-- kubelet
 last_updated: 2026-05-18
+description: 生产环境中集群删除常遇到各种异常场景：节点不可达、etcd 仲裁丢失、kubelet 无法停止、容器运行时异常等。本文档分析 kubeadm
+  reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖 --force 标志、错误处理、跳过阶段、异常场景与处理方案。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-administrator
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubeadm reset force flag error handling
 - kubernetes cluster deletion exception handling
@@ -40,10 +66,12 @@ trigger_keywords:
 - device busy
 - unmount failed
 - NFS mount stuck
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -54,6 +82,17 @@ related_topics:
 - etcd-cleanup
 - ha-delete
 - troubleshooting
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 强制删除与异常场景处理
@@ -283,7 +322,7 @@ crictl stop $(crictl ps --name etcd -q)
 
 # 使用 --force-unhealthy 恢复
 etcdctl --endpoints=https://127.0.0.1:2379 \
-  --cacert=/etc/[[entities/kubernetes|kubernetes]]/pki/etcd/ca.crt \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/peer.crt \
   --key=/etc/kubernetes/pki/etcd/peer.key \
   member list
@@ -423,3 +462,11 @@ echo "=== Node ${NODE_NAME} has been fully reset ==="
 - [reset.go 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/reset.go)
 - [cleanupnode.go 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/phases/reset/cleanupnode.go)
 - [官方文档: kubeadm reset](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/)
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

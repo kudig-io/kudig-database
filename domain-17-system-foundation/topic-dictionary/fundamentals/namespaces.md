@@ -24,13 +24,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 命名空间
 
 ## 概述
 
-在 Kubernetes 中，命名空间（Namespaces）提供了一种在单个集群内隔离资源组的机制。资源名称需要在命名空间内唯一，但不必跨命名空间唯一。命名空间作用域仅适用于命名空间资源（如 Deployment、Service），不适用于集群范围资源（如 StorageClass、Node、PersistentVolume）。
+在 [[Kubernetes|Kubernetes]] 中，命名空间（Namespaces）提供了一种在单个集群内隔离资源组的机制。资源名称需要在命名空间内唯一，但不必跨命名空间唯一。命名空间作用域仅适用于命名空间资源（如 Deployment、[[Service|Service]]），不适用于集群范围资源（如 StorageClass、Node、PersistentVolume）。
 
 ## 核心概念/原理
 
@@ -47,7 +48,7 @@ prerequisites:
 Kubernetes 启动时包含四个初始命名空间：
 
 - `default`：默认命名空间，方便用户立即开始使用集群。
-- `kube-node-lease`：包含与每个节点关联的 Lease 对象，用于 kubelet 发送心跳，使控制平面能够检测节点故障。
+- `kube-node-lease`：包含与每个节点关联的 Lease 对象，用于 [[kubelet|kubelet]] 发送心跳，使控制平面能够检测节点故障。
 - `kube-public`：所有客户端（包括未认证的）都可读取，主要用于集群范围内的公共资源。
 - `kube-system`：Kubernetes 系统创建的对象所在的命名空间。
 
@@ -74,4 +75,4 @@ Kubernetes 启动时包含四个初始命名空间：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

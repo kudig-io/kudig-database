@@ -42,6 +42,7 @@ prerequisites:
 - tls-basics
 - backup-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -824,14 +825,14 @@ graph LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
+- domain-30-disaster-recovery-business-continuity MOC
 - [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- Kubernetes 备份与恢复深度实践
+- 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+- 应用级灾备架构：多区域部署与故障转移
+- Velero 企业级备份恢复实践指南

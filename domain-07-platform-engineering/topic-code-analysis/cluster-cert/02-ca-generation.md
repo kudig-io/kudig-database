@@ -1,5 +1,5 @@
 ---
-title: CA 证书生成源码分析
+title: CA 证书生成源码分析 (topic-code-analysis)
 description: 'description: ''| 配置定义 | `cmd/kubeadm/app/phases/certs/certs.go` | KubeadmCert 结构体 |'''
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: CA 证书生成源码分析

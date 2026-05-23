@@ -33,6 +33,7 @@ prerequisites:
 - cncf-ecosystem
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Certificate / TLS 证书知识图谱索引
@@ -47,29 +48,29 @@ prerequisites:
 
 ### 深度技术
 
-- [[domain-05-security-compliance/10-certificate-management|证书管理与 TLS 配置]]
-- [[domain-01-cluster-fundamentals/14-security-architecture|Kubernetes 安全架构深度分析]]
+- 证书管理与 TLS 配置
+- [[entities/kubernetes.md]]
 
 ### 证书工具
 
-- [[domain-05-security-compliance/99-cert-manager-tls-guide|cert-manager 自动证书管理实践指南]]
+- cert-manager 自动证书管理实践指南
 - [[domain-17-system-foundation/topic-cheat-sheet/tls-pki|TLS/SSL 与 PKI 速查表]]
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/13-certificate-troubleshooting|证书故障排查 (Certificate Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|Kubernetes 证书故障排查指南]]
+- troubleshooting|证书故障排查 (Certificate Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|[[Kubernetes 证书故障排查指南|Kubernetes 证书故障排查指南]]]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry|[[证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]]]
 
 ### 集群证书
 
 - [[domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation|证书轮换机制源码分析]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys|ServiceAccount 密钥对源码分析]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys|[[ServiceAccount 密钥对源码分析|ServiceAccount 密钥对源码分析]]]]
 - [[domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config|kubeadm 配置对证书生成的影响]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices|Kubernetes PKI 安全最佳实践]]
+- [[domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices|[[Kubernetes PKI 安全最佳实践|Kubernetes PKI 安全最佳实践]]]]
 
 ---
 
@@ -79,8 +80,8 @@ prerequisites:
 
 ### 网络安全
 
-- [[domain-03-networking-traffic/18-network-encryption-mtls|网络加密与mTLS]]
-- [[domain-03-networking-traffic/22-ingress-tls-certificate|Ingress TLS 与证书管理]]
+- 网络加密与mTLS
+- Ingress TLS 与证书管理
 
 ### 控制平面
 
@@ -94,9 +95,9 @@ prerequisites:
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates|Certificates（PKI 证书与要求）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates|[[Certificates（PKI 证书与要求）|Certificates（PKI 证书与要求）]]]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane|Communication between Nodes and the Control Plane]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane|[[Communication between Nodes and the Control Plane（节点与控制平面之间的通信）|Communication between Nodes and the Control Plane]]]]
 
 ---
 
@@ -106,10 +107,10 @@ prerequisites:
 
 ### CNCF 生态
 
-- [[domain-19-landscape-references/graduated/cert-manager/cert-manager|cert-manager]]
-- [[domain-19-landscape-references/graduated/spiffe/spiffe|SPIFFE]]
-- [[domain-19-landscape-references/graduated/spire/spire|SPIRE]]
+- cert-manager
+- SPIFFE
+- SPIRE
 
 ### 相关工具
 
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management|HashiCorp Vault Enterprise Secrets Management]]
+- HashiCorp Vault Enterprise Secrets Management

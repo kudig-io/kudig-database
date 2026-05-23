@@ -38,6 +38,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 03 - RAID 与存储冗余
@@ -304,7 +305,7 @@ RAID_HEALTH_CHECK() {
     
     # 1. 检查RAID状态
     local mdstat_status=$(cat /proc/mdstat | grep $(basename $raid_device))
-    if [[ $mdstat_status == *"UU"* ]]; then
+    if $mdstat_status == *"UU"*; then
         echo "✓ RAID状态正常: $mdstat_status"
     else
         echo "✗ RAID状态异常: $mdstat_status"
@@ -321,13 +322,13 @@ RAID_HEALTH_CHECK() {
     done
     
     # 3. 检查重建进度
-    if [[ $mdstat_status == *"recovery"* ]] || [[ $mdstat_status == *"resync"* ]]; then
+    if $mdstat_status == *"recovery"* || $mdstat_status == *"resync"*; then
         local progress=$(echo $mdstat_status | grep -o '[0-9]*\.[0-9]*%')
         echo -e "\n⚠ 重建进行中: $progress"
         
         # 如果重建速度过慢，发送警告
         local speed=$(echo $mdstat_status | grep -o '[0-9]*K/sec')
-        if [[ $(echo $speed | tr -d 'K/sec') -lt 1000 ]]; then
+        if  tr -d 'K/sec') -lt 1000 ; then
             echo "⚠ 重建速度较慢: $speed"
         fi
     fi
@@ -487,12 +488,12 @@ done
 ## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- [Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 - [04-distributed-storage-systems](./04-distributed-storage-systems.md) - 分布式存储
 
 ## See Also
 
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01-storage-technologies-overview]]
-- [[domain-04-storage-data/02-block-file-object-storage.md|02-block-file-object-storage]]
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04-distributed-storage-systems]]
-- [[domain-04-storage-data/05-storage-management-operations.md|05-storage-management-operations]]
+- 01-storage-technologies-overview
+- storage.md|02-block-file-object-storage]]
+- 04-distributed-storage-systems
+- 05-storage-management-operations

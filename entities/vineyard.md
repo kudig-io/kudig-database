@@ -23,6 +23,7 @@ trigger_keywords:
 - Vineyard
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Vineyard
@@ -60,12 +61,12 @@ Vineyard 是一个内存中的不可变数据管理器，为大数据和 AI/ML �
 ## Related
 
 - [[hami]] — HAMI
-- [[open-policy-containers]] — Open Policy Containers (OPCR)
+- [[open-policy-containers]] — [[entities/open-policy-containers.md|Open Policy Containers (OPCR)]]
 - [[werf]] — werf
 - [[dalec]] — Dalec
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/vineyard/vineyard.md|vineyard]]
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
+- vineyard
+- storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

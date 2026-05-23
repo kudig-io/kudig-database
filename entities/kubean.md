@@ -1,5 +1,5 @@
 ---
-title: Kubean
+title: Kubean (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubean
@@ -68,12 +69,12 @@ Kubean 是一个基于 Kubespray 的 Kubernetes 集群生命周期管理 Operato
 ## Related
 
 - [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
-- [[entities/cncf-observability.md|cncf-observability]] — CNCF 可观测性项目全景
+- observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[chaos-mesh]] — Chaos Mesh
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubean/kubean.md|kubean]]
+- kubean
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

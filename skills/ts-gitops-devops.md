@@ -32,15 +32,16 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # GitOps/DevOps 排查
 
-### 01 Gitops Devops Troubleshooting
+### 01 Gitops Devops Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 
-1. **控制器存活**：检查 ArgoCD/Flux 控制器 Pod 状态与日志。
+1. **控制器存活**：检查 [[ArgoCD|ArgoCD]]/Flux 控制器 Pod 状态与日志。
 2. **同步状态**：`kubectl get applications/helmreleases/kustomizations -A`，定位 OutOfSync/Failed。
 3. **仓库连接**：验证 repo secret/SSH key/Token，确认仓库可访问。
 4. **渲染检查**：确认 Helm/Kustomize 渲染是否失败或资源冲突。

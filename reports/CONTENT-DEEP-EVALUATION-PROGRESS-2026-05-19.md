@@ -1,5 +1,5 @@
 ---
-title: kudig-database 内容深度评估 + 修复进展
+title: kudig-database 内容深度评估 + 修复进展 (reports)
 description: '# kudig-database 内容深度评估 + 修复进展'
 category: general
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 内容深度评估 + 修复进展

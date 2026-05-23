@@ -21,6 +21,7 @@ trigger_keywords:
 - 配置管理术语参考
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8s 配置管理术语参考

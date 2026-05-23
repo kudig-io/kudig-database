@@ -49,10 +49,11 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
-title: Kubernetes 架构全景图
+title: [[Kubernetes|Kubernetes]] 架构全景图
 description: 全面介绍 Kubernetes 架构总览、控制平面、节点组件、核心对象模型、高可用架构、扩展机制、安全架构和可观测性
 category: domain-1-architecture
 tags:
@@ -64,7 +65,7 @@ tags:
 - ha
 - security
 - observability
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - deep-dive
 last_updated: 2026-05
@@ -249,7 +250,7 @@ graph TB
 | **控制器模式** | 持续调谐当前状态到期望状态 | Controller Manager 包含40+控制器 |
 | **松耦合设计** | 组件通过 API Server 交互 | 组件可独立升级和扩展 |
 | **可扩展性** | 插件化架构 | CRI/CNI/CSI/Device Plugin/Admission |
-| **自愈能力** | 自动故障检测与恢复 | ReplicaSet/DaemonSet 自动重启 |
+| **自愈能力** | 自动故障检测与恢复 | [[ReplicaSet|ReplicaSet]]/DaemonSet 自动重启 |
 | **水平扩展** | 通过副本实现扩展 | HPA/VPA/Cluster Autoscaler |
 | **不可变基础设施** | 容器镜像不可变 | 配置变更通过滚动更新 |
 | **最终一致性** | 分布式系统一致性模型 | 基于 etcd 的最终一致性 |
@@ -2234,33 +2235,33 @@ echo "🎯 故障监控已启动 (PID: $!)"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 核心组件深度剖析
+- 03 - 功能和API表
+- 04 - Kubernetes 源码结构深度解析
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|设计原则——理解 K8s 的设计哲学]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|控制平面架构深度解析]]
+- 设计原则——理解 K8s 的设计哲学
+- 控制平面架构深度解析
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 命令速查卡]]
-- [[domain-13-container-runtime/MOC.md|相关知识域: domain-13-container-runtime]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
+- 相关知识域: domain-13-container-runtime
+- 相关知识域: domain-01-cluster-fundamentals
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-upgrade-guide.md|99-kubernetes-v1.33-upgrade-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-version-lifecycle-support-policy.md|99-kubernetes-version-lifecycle-support-policy]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|02-core-components-deep-dive]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03-api-versions-features]]
+- 99-kubernetes-v1.33-upgrade-guide
+- 99-kubernetes-version-lifecycle-support-policy
+- 02-core-components-deep-dive
+- 03-api-versions-features

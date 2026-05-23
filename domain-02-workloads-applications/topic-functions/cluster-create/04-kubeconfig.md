@@ -1,4 +1,42 @@
 ---
+title: kubeconfig 阶段 — Kubeconfig Generation 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- configuration
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- helm
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeconfig 阶段 — Kubeconfig Generation 源码分析 是什么
+- 如何 kubeconfig 阶段 — Kubeconfig Generation 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeconfig
+- 阶段
+- Kubeconfig
+- Generation
+- 源码分析
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- helm-basics
+created: "2026-05-23"
+---
+
 title: Kubeconfig Generation 源码分析
 description: '## 概述'
 category: functions
@@ -40,10 +78,6 @@ trigger_keywords:
 - RBAC
 - system:masters
 - system:nodes
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- helm-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-2-security
@@ -53,13 +87,22 @@ related_topics:
 - RBAC
 - TLS bootstrap
 - node join
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeconfig 阶段 — Kubeconfig Generation 源码分析
 
 ## 概述
 
-kubeconfig 是 [[entities/kubernetes|kubernetes]] 客户端工具（kubectl、helm、控制器等）连接 API Server 的配置文件。它包含了集群的访问地址、CA 证书、用户身份证书等关键信息。在 `kubeadm init` 过程中，kubeconfig 阶段负责为集群管理员、kubelet、Controller Manager 和 Scheduler 四个身份生成各自的 kubeconfig 文件。
+kubeconfig 是 Kubernetes 客户端工具（kubectl、helm、控制器等）连接 API Server 的配置文件。它包含了集群的访问地址、CA 证书、用户身份证书等关键信息。在 `kubeadm init` 过程中，kubeconfig 阶段负责为集群管理员、kubelet、Controller Manager 和 Scheduler 四个身份生成各自的 kubeconfig 文件。
 
 每个 kubeconfig 文件对应一个特定的身份（Identity），这个身份由证书中的 Common Name（CN）和 Organization（O）字段决定。API Server 的 RBAC 授权系统根据这些身份信息来决定该客户端可以执行哪些操作。
 
@@ -454,3 +497,11 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 | `LoadFromFile` | `staging/src/k8s.io/client-go/tools/clientcmd/` | 从文件加载 |
 | `CreateValidCertificate` | `cmd/kubeadm/app/util/pkiutil/` | 创建有效证书 |
 | `CertOrKeyExist` | `cmd/kubeadm/app/util/pkiutil/` | 检查证书是否存在 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

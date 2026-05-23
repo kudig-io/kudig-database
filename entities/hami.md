@@ -30,6 +30,7 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # HAMI
@@ -72,10 +73,10 @@ HAMi（原 vGPU_4k8s）是一个异构计算设备虚拟化中间件，为 Kuber
 
 - [[fluentd]] — Fluentd
 - [[cubefs]] — CubeFS
-- [[artifact-hub]] — Artifact Hub
+- [[artifact-hub]] — [[Artifact Hub|Artifact Hub]]
 - [[pipecd]] — PipeCD
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/hami/hami.md|hami]]
+- hami
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

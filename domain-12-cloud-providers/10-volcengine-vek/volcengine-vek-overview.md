@@ -38,9 +38,10 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南
+title: 火山引擎 VEK (Volcengine [[Kubernetes|Kubernetes]]) 字节级深度实战指南
 description: '# 火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南'
 category: cloud-provider
 tags:
@@ -51,7 +52,7 @@ tags:
 - aks
 - ack
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - minio
 - redis
 last_updated: 2026-05
@@ -790,10 +791,10 @@ EOF
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
-- [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
+- [[references/k8s-cloud-provider-comparison|[[云厂商托管 Kubernetes 服务全景对比（13 家）|云厂商托管 Kubernetes 服务全景对比（13 家）]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

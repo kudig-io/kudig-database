@@ -35,6 +35,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 人力资源 SaaS 架构设计
@@ -48,9 +49,9 @@ tags:
 - mysql
 - hpa
 - job
-- cronjob
-- ingress
-- networkpolicy
+- [[CronJob|cronjob]]
+- [[Ingress|ingress]]
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -516,7 +517,7 @@ data:
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -531,7 +532,7 @@ data:
 
 ## See Also
 
-- [[domain-20-application-patterns/28-proptech.md|28-proptech]]
-- [[domain-20-application-patterns/29-agritech-iot.md|29-agritech-iot]]
-- [[domain-20-application-patterns/31-instant-retail.md|31-instant-retail]]
-- [[domain-20-application-patterns/32-smart-restaurant.md|32-smart-restaurant]]
+- 28-proptech
+- 29-agritech-iot
+- 31-instant-retail
+- 32-smart-restaurant

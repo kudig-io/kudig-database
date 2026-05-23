@@ -55,6 +55,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 18 - 性能优化原理
@@ -65,13 +66,13 @@ cross_refs:
 > **架构师洞察**：
 > 性能优化不应是盲目的“跑分”，而应针对瓶颈进行精确打击。
 > 1. **原地垂直伸缩 (In-place Pod Resizing)**：K8s 1.30 趋于稳定的原地资源调整功能彻底改变了 VPA 的运维模式。现在你可以动态修改 Pod 的 CPU/Memory `Requests` 而无需重启 Pod。这对于长连接服务或大型数据库来说，是解决资源碎片和性能抖动的核心利器。
-> 2. **eBPF 与加速数据面**：在大规模集群中，iptables 的线性查表开销是性能杀手。采用 Cilium 等基于 eBPF 的 CNI 可以实现 O(1) 复杂度的服务路由。对于极高性能场景，应考虑 DPDK 或 SR-IOV 绕过内核协议栈。
+> 2. **eBPF 与加速数据面**：在大规模集群中，iptables 的线性查表开销是性能杀手。采用 [[Cilium|Cilium]] 等基于 eBPF 的 CNI 可以实现 O(1) 复杂度的服务路由。对于极高性能场景，应考虑 DPDK 或 SR-IOV 绕过内核协议栈。
 > 3. **冷启动优化**：Serverless 场景下，容器镜像的拉取通常占启动时间的 80%。采用“镜像流 (Image Streaming)”技术（如 Stargz 或 Nydus），让容器在镜像完整下载前就启动并按需加载数据，是提升极致扩展性的关键。
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨 Kubernetes 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。
+本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。
 
 ---
 
@@ -464,7 +465,7 @@ data:
 
 ### 4.2 服务网格性能优化
 
-#### Istio 性能调优配置
+#### [[Istio|Istio]] 性能调优配置
 ```yaml
 # Istio 高性能部署配置
 apiVersion: install.istio.io/v1alpha1
@@ -1052,22 +1053,22 @@ class CapacityPredictor:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/16-observability-design-principles.md|16-observability-design-principles]]
-- [[domain-01-cluster-fundamentals/17-security-design-patterns.md|17-security-design-patterns]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-design-principles-evolution.md|99-kubernetes-v1.33-design-principles-evolution]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|01-design-principles-foundations]]
+- 16-observability-design-principles
+- 17-security-design-patterns
+- 99-kubernetes-v1.33-design-principles-evolution
+- 01-design-principles-foundations

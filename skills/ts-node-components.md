@@ -1,5 +1,5 @@
 ---
-title: 节点组件故障排查
+title: 节点组件故障排查 (skills)
 description: '# 节点组件故障排查'
 category: skills
 tags:
@@ -28,11 +28,12 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 节点组件故障排查
 
-### 01 Kubelet Troubleshooting
+### 01 Kubelet TroubleshootingUDIG 故障排查 Prompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断与止血
 

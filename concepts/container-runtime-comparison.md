@@ -25,16 +25,17 @@ trigger_keywords:
 - Comparison
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Container Runtime Comparison
+# [[Container Runtime|Container Runtime]] Comparison
 
 ## Runtime Layering
 
 | Layer | Name | Examples | Responsibility |
 |-------|------|---------|----------------|
 | High-level | Container Engine | Docker, Podman | Image management, CLI, networking |
-| Mid-level | CRI Manager | containerd, CRI-O | Container lifecycle, image distribution |
+| Mid-level | CRI Manager | containerd, CRI-O | Container lifecycle, image [[Distribution|distribution]] |
 | Low-level | OCI Runtime | runc, crun, youki | Actual container process creation |
 
 ## Production Runtime Comparison

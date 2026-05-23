@@ -31,6 +31,7 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,7 +40,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK microservice deployment network storage
-  - Kubernetes Ingress DNS service discovery
+  - [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] DNS [[Service|service]] discovery
   - StatefulSet PVC persistent storage
   - CNI network policy verification
   - ACK storage CSI integration

@@ -43,18 +43,19 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 云原生 DevOps 平台架构设计
-description: '# 云原生 DevOps 平台 Kubernetes 生产架构设计'
+description: '# 云原生 DevOps 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - argocd
 - flux
 - docker
@@ -622,7 +623,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -637,7 +638,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/17-saas-multitenant-architecture.md|17-saas-multitenant-architecture]]
-- [[domain-20-application-patterns/18-data-midplatform-architecture.md|18-data-midplatform-architecture]]
-- [[domain-20-application-patterns/20-microservice-governance-architecture.md|20-microservice-governance-architecture]]
-- [[domain-20-application-patterns/21-cross-border-ecommerce.md|21-cross-border-ecommerce]]
+- 17-saas-multitenant-architecture
+- 18-data-midplatform-architecture
+- 20-microservice-governance-architecture
+- 21-cross-border-ecommerce

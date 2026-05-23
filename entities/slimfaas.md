@@ -1,5 +1,5 @@
 ---
-title: SlimFaas
+title: SlimFaas (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - SlimFaas
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # SlimFaas
@@ -30,7 +31,7 @@ prerequisites:
 
 ## 概述
 
-SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-Service (FaaS) 平台，专注于简单性和低资源占用。它可以将普通的 Kubernetes Deployment 作为函数运行，支持 Scale-to-Zero（缩容到零）和按需自动扩容，无需复杂的 FaaS 框架。SlimFaas 通过简单的 HTTP 代理机制转发请求到目标函数，并管理函数的...
+SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[Service|Service]] (FaaS) 平台，专注于简单性和低资源占用。它可以将普通的 Kubernetes Deployment 作为函数运行，支持 Scale-to-Zero（缩容到零）和按需自动扩容，无需复杂的 FaaS 框架。SlimFaas 通过简单的 HTTP 代理机制转发请求到目标函数，并管理函数的...
 
 ## 核心能力
 
@@ -65,6 +66,6 @@ SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-Service (FaaS) �
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/slimfaas/slimfaas.md|slimfaas]]
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- slimfaas
+- [[entities/cncf-edge-ai|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

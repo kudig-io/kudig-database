@@ -1,5 +1,5 @@
 ---
-title: CNI 网络插件故障排查指南
+title: CNI 网络插件故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CNI 网络插件故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -45,6 +45,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 title: CNI 网络插件故障排查指南
@@ -54,9 +55,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - prometheus
 - cilium
 - flannel
@@ -1667,8 +1668,8 @@ sysctl -p /etc/sysctl.d/99-kubernetes.conf
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]

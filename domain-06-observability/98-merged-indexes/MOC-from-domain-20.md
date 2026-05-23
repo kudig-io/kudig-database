@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # domain-20-enterprise-monitoring-alerting MOC
@@ -61,18 +62,18 @@ prerequisites:
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 | 1 | [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]] |  | observability, monitoring, alerting |  |
-| 2 | [[domain-06-observability/01-prometheus-enterprise-monitoring.md|Prometheus企业级监控系统深度实践]] |  | observability, monitoring, alerting |  |
-| 3 | [[domain-06-observability/02-grafana-enterprise-observability.md|Grafana Enterprise Observability Platform 深度实践]] |  | observability, monitoring, alerting |  |
-| 4 | [[domain-06-observability/03-opentelemetry-distributed-tracing.md|OpenTelemetry分布式追踪与可观测性深度实践]] |  | observability, monitoring, alerting |  |
-| 5 | [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation and Long-term Storage]] |  | observability, monitoring, alerting |  |
-| 6 | [[domain-06-observability/05-datadog-enterprise-apm.md|Datadog企业级APM深度实践]] |  | observability, monitoring, alerting |  |
-| 7 | [[domain-06-observability/05-datadog-enterprise-monitoring.md|Datadog 企业级监控平台深度实践]] |  | observability, monitoring, alerting |  |
-| 8 | [[domain-06-observability/06-elastic-stack-enterprise-logging.md|Elastic Stack企业级日志分析深度实践]] |  | observability, monitoring, alerting |  |
-| 9 | [[domain-06-observability/06-elastic-stack-enterprise-observability.md|Elastic Stack企业级可观测性平台深度实践]] |  | observability, monitoring, alerting |  |
-| 10 | [[domain-06-observability/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring Platform 深度实践]] |  | observability, monitoring, alerting |  |
-| 11 | [[domain-06-observability/08-new-relic-enterprise-apm.md|New Relic Enterprise APM Platform 深度实践]] |  | observability, monitoring, alerting |  |
-| 12 | [[domain-06-observability/99-distributed-tracing-guide.md|K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry)]] |  | observability, monitoring, alerting |  |
-| 13 | [[domain-06-observability/99-prometheus-enterprise-guide.md|Prometheus 企业级监控部署指南]] |  | observability, monitoring, alerting |  |
+| 2 | Prometheus企业级监控系统深度实践 |  | observability, monitoring, alerting |  |
+| 3 | Grafana Enterprise Observability Platform 深度实践 |  | observability, monitoring, alerting |  |
+| 4 | OpenTelemetry分布式追踪与可观测性深度实践 |  | observability, monitoring, alerting |  |
+| 5 | Thanos Enterprise Metrics Federation and Long-term Storage |  | observability, monitoring, alerting |  |
+| 6 | Datadog企业级APM深度实践 |  | observability, monitoring, alerting |  |
+| 7 | Datadog 企业级监控平台深度实践 |  | observability, monitoring, alerting |  |
+| 8 | Elastic Stack企业级日志分析深度实践 |  | observability, monitoring, alerting |  |
+| 9 | Elastic Stack企业级可观测性平台深度实践 |  | observability, monitoring, alerting |  |
+| 10 | Zabbix Enterprise Monitoring Platform 深度实践 |  | observability, monitoring, alerting |  |
+| 11 | New Relic Enterprise APM Platform 深度实践 |  | observability, monitoring, alerting |  |
+| 12 | K8s 分布式追踪实践指南 (Jaeger / Tempo / OpenTelemetry) |  | observability, monitoring, alerting |  |
+| 13 | Prometheus 企业级监控部署指南 |  | observability, monitoring, alerting |  |
 
 ---
 
@@ -105,9 +106,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-20-enterprise-monitoring-alerting 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-20-enterprise-monitoring-alerting 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-20-enterprise-monitoring-alerting 相关故障树分析 |
+| Skills 技能 | domain-20-enterprise-monitoring-alerting 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

@@ -60,6 +60,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)
@@ -842,7 +843,7 @@ for ns in $NAMESPACES; do
         echo "  Quota: $quota"
         
         # 分析Pod使用率
-        if [[ $pods =~ ^([0-9]+)/([0-9]+)$ ]]; then
+        if $pods =~ ^([0-9]+)/([0-9]+)$; then
             USED=${BASH_REMATCH[1]}
             TOTAL=${BASH_REMATCH[2]}
             if [ $TOTAL -gt 0 ]; then
@@ -862,7 +863,7 @@ for ns in $NAMESPACES; do
         fi
         
         # 分析CPU使用率
-        if [[ $cpu =~ ^([0-9.]+[m]?)/([0-9.]+[m]?)$ ]]; then
+        if $cpu =~ ^([0-9.]+[m]?)/([0-9.]+[m]?)$; then
             USED_CPU=${BASH_REMATCH[1]}
             TOTAL_CPU=${BASH_REMATCH[2]}
             # 转换为毫核进行比较
@@ -1075,7 +1076,7 @@ echo "  Memory: ${RECOMMENDED_MEM}Gi"
 # 确认调整
 read -p "Apply these quota adjustments? (y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
     echo "Adjusting resource quota..."
     
     kubectl patch resourcequota $CURRENT_QUOTA -n $NAMESPACE -p "{
@@ -1297,10 +1298,10 @@ chmod +x quota-report-generator.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|[[API Server 故障排查|API Server 故障排查]]]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]

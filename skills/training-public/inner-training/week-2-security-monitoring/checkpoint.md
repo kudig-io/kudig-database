@@ -1,5 +1,5 @@
 ---
-title: 'Week 2 Checkpoint: 自测检验'
+title: Week 2 Checkpoint: 自测检验 [week-2-security-monitoring]
 description: 'title: Week 2 自测: 安全认证与监控运维'
 category: learning
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Week 2 Checkpoint: 自测检验
@@ -229,7 +230,7 @@ spec:
 
 ---
 
-### 5. Pod Security Standards (PSS) 的三个级别分别是什么？
+### 5. Pod Securityod Security Standards]] (PSS) 的三个级别分别是什么？
 
 **你的回答:**
 ```

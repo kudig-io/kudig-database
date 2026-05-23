@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 容量规划
@@ -106,6 +107,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]]

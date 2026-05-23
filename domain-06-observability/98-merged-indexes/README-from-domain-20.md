@@ -35,6 +35,7 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 ---

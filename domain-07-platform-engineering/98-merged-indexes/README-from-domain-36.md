@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 ---

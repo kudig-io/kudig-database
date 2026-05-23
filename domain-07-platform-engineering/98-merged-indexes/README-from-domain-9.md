@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -242,6 +243,6 @@ Platform Ops Domain 提供完整的Kubernetes平台运维知识体系，涵盖�
 
 ## Related
 
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
-- [[domain-15-specialized-tech/MOC.md|相关知识域: domain-15-specialized-tech]]
-- [[domain-10-troubleshooting-diagnostics/MOC.md|相关知识域: domain-10-troubleshooting-diagnostics]]
+- 相关知识域: domain-06-observability
+- 相关知识域: domain-15-specialized-tech
+- 相关知识域: domain-10-troubleshooting-diagnostics

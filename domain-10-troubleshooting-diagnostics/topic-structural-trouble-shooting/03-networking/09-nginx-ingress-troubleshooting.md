@@ -1,5 +1,5 @@
 ---
-title: nginx-ingress-controller 故障排查指南
+title: nginx-ingress-controller 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: nginx-ingress-controller 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,10 +39,11 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: nginx-ingress-controller 故障排查指南
-description: nginx-ingress-controller 故障排查指南，覆盖 Ingress 配置、502/503 错误、TLS 证书、upstream
+description: nginx-ingress-controller 故障排查指南，覆盖 [[Ingress|Ingress]] 配置、502/503 错误、TLS 证书、upstream
   超时等故障场景
 category: structural-troubleshooting
 tags:
@@ -500,8 +501,8 @@ data:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[index.md|index]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]

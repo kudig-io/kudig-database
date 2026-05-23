@@ -48,6 +48,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # TCP/UDP 协议深度解析
@@ -1034,7 +1035,7 @@ detect_udp_anomalies() {
 
 ## See Also
 
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|99-cilium-ebpf-network-guide]]
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|01-network-protocols-stack]]
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|03-dns-principles-configuration]]
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|04-load-balancing-technologies]]
+- 99-cilium-ebpf-network-guide
+- 01-network-protocols-stack
+- 03-dns-principles-configuration
+- 04-load-balancing-technologies

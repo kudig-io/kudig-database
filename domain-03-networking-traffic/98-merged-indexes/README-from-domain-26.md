@@ -58,6 +58,7 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
 # Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)
@@ -651,5 +652,5 @@ API 网关处理"南北向"流量（从外部客户端到集群内部），负�
 - [[README]]
 - [[README]]
 
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-05-security-compliance/MOC.md|相关知识域: domain-05-security-compliance]]
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-05-security-compliance

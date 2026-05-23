@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 存储工具演进
@@ -70,7 +71,7 @@ Longhorn 是 Rancher 开发的轻量级、高可用的 Kubernetes 分布式块�
 - 基于微服务的存储架构
 - 每卷独立副本
 - 增量快照
-- 自动故障恢复
+- 自动问题恢复
 - CSI 兼容 ^[inferred]
 
 ## Velero 版本演进

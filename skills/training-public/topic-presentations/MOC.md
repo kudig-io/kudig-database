@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # topic-presentations MOC
@@ -62,18 +63,18 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]] |  | presentation, architecture |  |
-| 2 | [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
-| 3 | [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
-| 4 | [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]] |  | presentation, observability |  |
-| 5 | [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]] |  | presentation |  |
-| 6 | [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]] |  | presentation, security, rbac |  |
-| 7 | [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
-| 8 | [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]] |  | presentation, storage |  |
-| 9 | [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
-| 10 | [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]] |  | presentation, troubleshooting |  |
-| 11 | [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
-| 12 | [[domain-11-production-operations/topic-presentations/presentation-template.md|Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家)]] |  | presentation |  |
+| 1 | Kubernetes 架构与基础概念全栈培训]] |  | presentation, architecture |  |
+| 2 | Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)阶培训 (从入门到专家) |  | presentation |  |
+| 3 | Kubernetes Ingress 全栈进阶培训 (从入门到专家) |  | presentation |  |
+| 4 | Kubernetes 可观测性全栈培训 (监控、日志、追踪) |  | presentation, observability |  |
+| 5 | Kubernetes 调度与编排策略全栈培训 |  | presentation |  |
+| 6 | Kubernetes 安全与 RBAC 权限管理全栈培训 |  | presentation, security, rbac |  |
+| 7 | Kubernetes Service 全栈进阶培训 (从入门到专家) |  | presentation |  |
+| 8 | Kubernetes 存储体系全栈进阶培训 (从入门到专家) |  | presentation, storage |  |
+| 9 | Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) |  | presentation |  |
+| 10 | Kubernetes 故障排查方法论全栈培训 |  | presentation, troubleshooting |  |
+| 11 | Kubernetes Workload 全栈进阶培训 (从入门到专家) |  | presentation |  |
+| 12 | Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) |  | presentation |  |
 
 ---
 
@@ -100,12 +101,12 @@ prerequisites:
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

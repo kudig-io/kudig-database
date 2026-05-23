@@ -21,9 +21,17 @@ trigger_keywords:
 - 与平台目录的整合
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+    type: uses
+  - target: "[[entities/backstage]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
 ---
 
-# Backstage 与平台目录的整合
+# [[entities/backstage|Backstage]] 与平台目录的整合
 
 ## Backstage 核心插件
 
@@ -37,7 +45,7 @@ prerequisites:
 └── PagerDuty/OpsGenie: On-call 信息
 ```
 
-## 与 K8s 集成
+## 与 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 集成
 
 ```
 Backstage 读取 K8s:
@@ -58,5 +66,5 @@ Backstage 读取 K8s:
 
 ## 相关 Domain
 
-- [[domain-07-platform-engineering/01-idp/01-internal-developer-platform]]
-- [[domain-20-application-patterns/01-microservices/01-service-mesh-patterns]]
+- domain-07-platform-engineering/01-idp/01-internal-developer-platform
+- domain-20-application-patterns/01-microservices/01-[[domain-17-system-foundation/topic-dictionary/networking/service|service]]-mesh-patterns

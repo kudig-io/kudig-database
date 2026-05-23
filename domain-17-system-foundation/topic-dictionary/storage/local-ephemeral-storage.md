@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Local ephemeral storage（本地临时存储）
 
 ## 概述
 
-节点的本地临时存储由本地可写设备（如磁盘）或 RAM 支持。“临时”意味着 [[entities/kubernetes|kubernetes]] 不提供长期的持久性保证。Pod 使用本地临时存储作为临时工作区、缓存和日志存放位置。kubelet 也使用此类存储来保存容器镜像、运行中容器的可写层以及节点级容器日志。
+节点的本地临时存储由本地可写设备（如磁盘）或 RAM 支持。“临时”意味着 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 不提供长期的持久性保证。Pod 使用本地临时存储作为临时工作区、缓存和日志存放位置。[[kubelet|kubelet]] 也使用此类存储来保存容器镜像、运行中容器的可写层以及节点级容器日志。
 
 ## 核心概念/原理
 

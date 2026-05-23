@@ -27,6 +27,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 60 秒预告片脚本

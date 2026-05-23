@@ -39,11 +39,12 @@ prerequisites:
 - gitops-basics
 - policy-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # GitOps 生产环境速查卡
 
-> **适用版本**: Argo CD 2.10+ / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 2.2+ | **最后更新**: 2026-05
+> **适用版本**: [[Argo|Argo]] CD 2.10+ / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|[[Flux|Flux]]]] 2.2+ | **最后更新**: 2026-05
 
 ---
 
@@ -275,7 +276,7 @@ flux trace my-app -n production
 | 分环境分仓 | dev/staging/production 使用不同分支或 overlay |
 | PR 审批 | 生产变更必须 PR + Code Review |
 | 渐进式发布 | Argo Rollouts / Flagger 实现金丝雀/蓝绿 |
-| Sealed Secrets | 使用 sealed-secrets 或 external-secrets 管理敏感值 |
+| Sealed [[Secrets|Secrets]] | 使用 sealed-secrets 或 external-secrets 管理敏感值 |
 | 通知集成 | Argo CD Notifications / Flux Alert 发送 Slack/钉钉 |
 | 多集群 | Argo CD ApplicationSet / Flux Kustomization 管理多集群 |
 | RBAC | Argo CD RBAC 精细化到 project/app 级别 |

@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # CI/CD Pipeline Patterns
@@ -45,9 +46,9 @@ Code Push -> Build Image -> Run Tests -> Security Scan -> Push to Registry -> Up
 |-------|--------|-------|
 | Build | Compile code, build container image | Docker BuildKit, Kaniko |
 | Test | Unit, integration, E2E tests | pytest, Jest, Cypress |
-| Scan | Vulnerability scan, SBOM generation | Trivy, Syft |
+| Scan | Vulnerability scan, SBOM generation | [[Trivy|Trivy]], Syft |
 | Sign | Image signature verification | Cosign/Sigstore |
-| Push | Push to container registry | Harbor, ECR, GCR |
+| Push | Push to container registry | [[Harbor|Harbor]], ECR, GCR |
 | Update Manifest | Update K8s manifests with new image tag | kustomize edit set image |
 | Deploy | GitOps controller syncs to cluster | ArgoCD, Flux |
 

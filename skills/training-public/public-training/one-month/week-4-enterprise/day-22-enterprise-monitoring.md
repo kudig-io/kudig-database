@@ -34,15 +34,16 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 ---
-title: Day 22: 企业监控 - Prometheus 企业级 + Grafana
+title: Day 22: 企业监控 - [[Prometheus|Prometheus]] 企业级 + Grafana
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - Prometheus 企业级监控架构
-  - Thanos 跨集群监控
+  - [[Thanos|Thanos]] 跨集群监控
   - Grafana 企业级配置
   - SLO/SLI 体系设计
 trigger_keywords:
@@ -65,7 +66,7 @@ related_domains:
   - domain-06-observability
 related_topics:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/[[domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1|day-17-observability-1]]
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
   - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 

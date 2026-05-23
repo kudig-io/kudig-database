@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 灾备场景目录
@@ -38,8 +39,8 @@ prerequisites:
 |------|---------|---------|---------|
 | 单可用区故障 | 1 个 AZ | 5 分钟 | 0 |
 | 区域级网络中断 | 整个 Region | 30 分钟 | 0 |
-| Kubernetes 控制面故障 | 集群管理 | 15 分钟 | 0 |
-|  etcd 数据损坏 | 集群状态 | 30 分钟 | 5 分钟 |
+| [[Kubernetes|Kubernetes]] 控制面故障 | 集群管理 | 15 分钟 | 0 |
+|  [[etcd|etcd]] 数据损坏 | 集群状态 | 30 分钟 | 5 分钟 |
 
 ### 应用层
 
@@ -61,4 +62,4 @@ prerequisites:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/02-disaster-recovery/README.md]]
+- domain-09-reliability-engineering/02-disaster-recovery/README.md

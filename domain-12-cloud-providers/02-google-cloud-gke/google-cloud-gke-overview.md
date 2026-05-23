@@ -46,9 +46,10 @@ prerequisites:
 - gpu-scheduling-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: Google Cloud GKE (Google Kubernetes Engine) 概述
+title: Google Cloud GKE (Google [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# Google Cloud GKE (Google Kubernetes Engine) 概述'
 category: cloud-provider
 tags:
@@ -58,7 +59,7 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
 - controller-manager
@@ -606,7 +607,7 @@ echo "Target version: $TARGET_VERSION"
 
 # 检查版本兼容性
 AVAILABLE_UPGRADES=$(gcloud container get-server-config --project=$PROJECT_ID --format="value(validMasterVersions)")
-if [[ $AVAILABLE_UPGRADES == *"$TARGET_VERSION"* ]]; then
+if $AVAILABLE_UPGRADES == *"$TARGET_VERSION"*; then
     echo "✓ Target version is available"
 else
     echo "✗ Target version is not available"

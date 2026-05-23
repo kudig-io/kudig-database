@@ -33,6 +33,7 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -44,7 +45,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.29.14](#changelog-since-v12914)
+  - Changelog since v1.29.14](#changelog-since-v12914)
   - [Changes by Kind](#changes-by-kind)
     - [Other (Cleanup or Flake)](#other-cleanup-or-flake)
   - [Dependencies](#dependencies)
@@ -214,7 +215,7 @@ prerequisites:
     - [Container Images](#container-images-11)
   - [Changelog since v1.29.3](#changelog-since-v1293)
   - [Important Security Information](#important-security-information-2)
-    - [CVE-2024-3177: Bypassing mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2024-3177: Bypassing mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-11)
     - [Feature](#feature-7)
     - [Bug or Regression](#bug-or-regression-8)
@@ -408,7 +409,7 @@ prerequisites:
 
 filename | sha512 hash
 -------- | -----------
-[kubernetes.tar.gz](https://dl.k8s.io/v1.29.15/kubernetes.tar.gz) | 608b9588b28c9bc104c9085fbc20fe9cf59f410c69b15ac33ccca917175504ef2104e0fdbd0eb6b5b6ea32c55f69aa64961f1092f762a4703f055e3ec6ea421a
+[[entities/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.29.15/kubernetes.tar.gz) | 608b9588b28c9bc104c9085fbc20fe9cf59f410c69b15ac33ccca917175504ef2104e0fdbd0eb6b5b6ea32c55f69aa64961f1092f762a4703f055e3ec6ea421a
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.29.15/kubernetes-src.tar.gz) | 5affffebd6881b9f0f70f2e259470fddabfcbc97436d509de5685cb4c4354d7c45d2705ed8d174b79c9b531b44a9a4c2e88c96536bb7d010ac0b4dad7d2fa25a
 
 ### Client Binaries

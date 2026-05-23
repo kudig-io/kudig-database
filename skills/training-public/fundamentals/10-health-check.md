@@ -1,5 +1,5 @@
 ---
-title: 第八课：健康检查 - Probe 详解
+title: 第八课：健康检查 - Probe 详解 [fundamentals]
 description: 'title: 第八课：健康检查 - Probe 详解'
 category: learning
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -47,7 +48,7 @@ tags:
 - redis
 - mysql
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -825,12 +826,12 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 
 **关联文档**:
 - [../10-workloads/10-job-cronjob.md](../10-workloads/10-job-cronjob.md) — Job 和 CronJob
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) — Pod 崩溃故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) — Pod 崩溃故障 [[SKILL|Skill]]
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/08-pv-pvc-basics.md|08-pv-pvc-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/09-hpa-basics.md|09-hpa-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/11-job-cronjob.md|11-job-cronjob]]
-- [[domain-11-production-operations/topic-learn/fundamentals/12-common-problems.md|12-common-problems]]
+- 08-pv-pvc-basics
+- 09-hpa-basics
+- 11-job-cronjob
+- 12-common-problems

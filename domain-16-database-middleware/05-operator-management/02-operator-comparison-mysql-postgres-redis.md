@@ -31,13 +31,14 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # MySQL PostgreSQL Redis Operator 对比
 
 ## 功能对比
 
-| 功能 | MySQL Operator | PostgreSQL (CloudNativePG) | Redis Operator |
+| 功能 | MySQL Operator | PostgreSQL ([[CloudNativePG|CloudNativePG]]) | Redis Operator |
 |------|---------------|---------------------------|----------------|
 | **高可用** | Group Replication | Streaming Replication | Sentinel / Cluster |
 | **故障转移** | 自动 | 自动 | 自动 |

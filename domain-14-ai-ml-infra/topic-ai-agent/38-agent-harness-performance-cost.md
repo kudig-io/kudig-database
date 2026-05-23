@@ -1,4 +1,42 @@
 ---
+title: Agent Harness 性能与成本优化 (domain-14-ai-ml-infra)
+description: 'title: Agent Harness 性能与成本优化'
+category: general
+tags:
+- ai
+- ai-agent
+- performance
+- cost-optimization
+- prometheus
+- redis
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent Harness 性能与成本优化 是什么
+- 如何 Agent Harness 性能与成本优化
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 性能与成本优化
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- redis-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 性能与成本优化
 description: '# Agent Harness 性能与成本优化'
 category: ai-agent
@@ -8,7 +46,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
 last_updated: 2026-05
 difficulty: advanced
@@ -27,11 +65,15 @@ trigger_keywords:
 - 性能与成本优化
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- redis-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 性能与成本优化
@@ -40,7 +82,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Agent Harness 的性能和成本优化是生产化的核心挑战。一个未优化的 Agent 可能每个任务消耗 $2-5 的 Token 费用、30 秒以上的端到端延迟。通过系统性的 Harness 优化——推理预算分配、上下文压缩、模型路由、缓存策略——可以在不牺牲质量的前提下将成本降低 60%+、延迟降低 50%+。
 
@@ -48,9 +90,9 @@ Agent Harness 的性能和成本优化是生产化的核心挑战。一个未优
 
 ---
 
-## 1. Agent 成本结构分析
+<!-- chunk: 1. Agent 成本结构分析 -->## 1. Agent 成本结构分析
 
-### 1.1 成本组成
+#<!-- chunk: 1.1 成本组成 -->## 1.1 成本组成
 
 ```
 Agent 任务成本分解:
@@ -81,7 +123,7 @@ Agent 任务成本分解:
   优化上下文长度的收益是乘数级的。
 ```
 
-### 1.2 成本-质量权衡矩阵
+#<!-- chunk: 1.2 成本-质量权衡矩阵 -->## 1.2 成本-质量权衡矩阵
 
 | 优化策略 | 成本节省 | 质量影响 | 风险 | 优先级 |
 |---------|---------|---------|------|--------|
@@ -95,9 +137,9 @@ Agent 任务成本分解:
 
 ---
 
-## 2. Token 优化策略
+<!-- chunk: 2. Token 优化策略 -->## 2. Token 优化策略
 
-### 2.1 上下文压缩
+#<!-- chunk: 2.1 上下文压缩 -->## 2.1 上下文压缩
 
 ```python
 class ContextCompressor:
@@ -150,7 +192,7 @@ class ContextCompressor:
         """将详细的历史步骤替换为摘要"""
         # 保留最近 3 步的详细信息，其余摘要化
         import re
-        steps = re.split(r'### Step \d+', text)
+        steps = re.split(r'#<!-- chunk: Step \d+', text) -->## Step \d+', text)
         if len(steps) <= 4:
             return text
 
@@ -199,7 +241,7 @@ class ContextCompressor:
         return len(text.split()) * 1.3  # 粗略估算
 ```
 
-### 2.2 推理预算分配
+#<!-- chunk: 2.2 推理预算分配 -->## 2.2 推理预算分配
 
 ```python
 class ReasoningBudgetAllocator:
@@ -245,9 +287,9 @@ class ReasoningBudgetAllocator:
 
 ---
 
-## 3. 模型路由
+<!-- chunk: 3. 模型路由 -->## 3. 模型路由
 
-### 3.1 智能模型路由器
+#<!-- chunk: 3.1 智能模型路由器 -->## 3.1 智能模型路由器
 
 ```python
 class ModelRouter:
@@ -336,9 +378,9 @@ class ModelRouter:
 
 ---
 
-## 4. 缓存策略
+<!-- chunk: 4. 缓存策略 -->## 4. 缓存策略
 
-### 4.1 多级缓存架构
+#<!-- chunk: 4.1 多级缓存架构 -->## 4.1 多级缓存架构
 
 ```python
 import hashlib
@@ -441,7 +483,7 @@ class SemanticCache:
         )
 ```
 
-### 4.2 工具结果缓存
+#<!-- chunk: 4.2 工具结果缓存 -->## 4.2 工具结果缓存
 
 ```python
 class ToolResultCache:
@@ -482,9 +524,9 @@ class ToolResultCache:
 
 ---
 
-## 5. 延迟优化
+<!-- chunk: 5. 延迟优化 -->## 5. 延迟优化
 
-### 5.1 并行化策略
+#<!-- chunk: 5.1 并行化策略 -->## 5.1 并行化策略
 
 ```python
 class LatencyOptimizer:
@@ -530,7 +572,7 @@ class LatencyOptimizer:
         return full_response
 ```
 
-### 5.2 Prompt Caching
+#<!-- chunk: 5.2 Prompt Caching -->## 5.2 Prompt Caching
 
 ```python
 class PromptCacheOptimizer:
@@ -566,9 +608,9 @@ class PromptCacheOptimizer:
 
 ---
 
-## 6. Agent FinOps
+<!-- chunk: 6. Agent FinOps -->## 6. Agent FinOps
 
-### 6.1 成本监控 Dashboard
+#<!-- chunk: 6.1 成本监控 Dashboard -->## 6.1 成本监控 Dashboard
 
 ```python
 class AgentFinOps:
@@ -624,7 +666,7 @@ class AgentFinOps:
         return opportunities
 ```
 
-### 6.2 成本预警与限流
+#<!-- chunk: 6.2 成本预警与限流 -->## 6.2 成本预警与限流
 
 ```python
 class CostThrottler:
@@ -666,9 +708,9 @@ class CostThrottler:
 
 ---
 
-## 7. 最佳实践
+<!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-### 7.1 性能优化核心原则
+#<!-- chunk: 7.1 性能优化核心原则 -->## 7.1 性能优化核心原则
 
 | 原则 | 说明 | 预期收益 |
 |------|------|---------|
@@ -680,7 +722,7 @@ class CostThrottler:
 | **Prompt 缓存** | 利用 Provider 前缀缓存 | 成本 -80% 前缀 |
 | **语义缓存** | 相似问题复用答案 | 成本 -20% |
 
-### 7.2 反模式
+#<!-- chunk: 7.2 反模式 -->## 7.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -693,18 +735,18 @@ class CostThrottler:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 推理预算分配基础概念 |
-| [33 - 上下文与记忆](./33-agent-harness-context-memory.md) | 上下文压缩的详细实现 |
+| [33 - 上下文与记忆](./memory.md|33-agent-harness-context-memory]].md) | 上下文压缩的详细实现 |
 | [35 - 安全与约束](./35-agent-harness-security-constraints.md) | 成本约束实现 |
 | [11 - 成本延迟优化](./11-cost-latency-optimization.md) | Agent 成本优化基础理论 |
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -716,3 +758,54 @@ class CostThrottler:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 性能与成本优化。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## Related
+
+- 48-openclaw-skill-mechanism
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 40-agent-harness-production-maturity
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 27-agent-cli-security-governance
+- 06-multi-agent-orchestration
+- 41-react-harness-identification-guide
+
+## See Also
+
+- 36-agent-harness-observability
+- 37-agent-harness-multi-agent
+- 39-agent-harness-testing-benchmark
+- 40-agent-harness-production-maturity

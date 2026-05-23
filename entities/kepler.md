@@ -1,5 +1,5 @@
 ---
-title: Kepler
+title: Kepler [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Kepler
@@ -72,17 +73,17 @@ Kepler (Kubernetes-based Efficient Power Level Exporter) 使用 eBPF 探测器�
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[deployment]]
 - [[concepts/observability-pillars.md|observability-pillars]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[openebs]] — OpenEBS
-- [[05-containerd-windows-support]] — containerd Windows 支持
+- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kepler/kepler.md|kepler]]
+- kepler
 - [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

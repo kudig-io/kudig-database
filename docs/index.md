@@ -40,7 +40,7 @@ Docker、Linux、网络、存储、云provider等底层技术基础。
 生产运维、监控告警、日志管理、GitOps IaC、安全、服务网格等企业级专题。
 
 ### 专题资源
-AI Agent、AI Coding、技能手册、故障排查等专题资源。
+AI Agent、AI Coding、技能手册、问题排查等专题资源。
 
 ## Related
 

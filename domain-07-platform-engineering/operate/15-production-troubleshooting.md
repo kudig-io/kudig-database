@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 title: 生产环境故障诊断 (Production Troubleshooting)
@@ -43,7 +44,7 @@ tags:
 - operations
 - devops
 - scheduler
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -55,7 +56,7 @@ estimated_read_time: 5min
 intent_queries:
 - 生产环境故障诊断 (Production Troubleshooting) 是什么
 - 如何 生产环境故障诊断 (Production Troubleshooting)
-- Kubernetes 9 platform ops 最佳实践
+- [[Kubernetes|Kubernetes]] 9 platform ops 最佳实践
 - 生产环境故障诊断 (Production Troubleshooting) 故障排查
 - 生产环境故障诊断 (Production Troubleshooting) 排障步骤
 trigger_keywords:
@@ -262,18 +263,18 @@ diagnose_pending_pods "production"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|平台运维概述]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|容量规划与资源评估 (Capacity Planning & Resource Assessment)]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/07-gitops-configuration-management.md|GitOps配置管理 (GitOps Configuration Management)]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
+- Domain-9 平台运维 — 开源项目索引
+- 平台运维概述
+- 集群生命周期管理
+- 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+- 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- GitOps配置管理 (GitOps Configuration Management)
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
@@ -286,7 +287,7 @@ diagnose_pending_pods "production"
 
 ## See Also
 
-- [[domain-07-platform-engineering/13-multi-cluster-management.md|13-multi-cluster-management]]
-- [[domain-07-platform-engineering/14-large-scale-cluster-optimization.md|14-large-scale-cluster-optimization]]
-- [[domain-07-platform-engineering/16-platform-upgrade-migration.md|16-platform-upgrade-migration]]
-- [[domain-07-platform-engineering/17-multi-tenant-management.md|17-multi-tenant-management]]
+- 13-multi-cluster-management
+- 14-large-scale-cluster-optimization
+- 16-platform-upgrade-migration
+- 17-multi-tenant-management

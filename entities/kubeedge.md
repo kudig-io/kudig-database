@@ -1,5 +1,5 @@
 ---
-title: KubeEdge
+title: KubeEdge (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - KubeEdge
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KubeEdge
@@ -66,15 +67,15 @@ description: '## 项目概述'
 
 - [[bank-vaults]] — Bank-Vaults
 - [[thanos]] — Thanos
-- [[03-containerd-security-hardening]] — containerd 安全加固
+- [[03-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
 - [[k0s]] — K0s
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/16-kubernetes-edge-computing-kubeedge-practice.md|16-kubernetes-edge-computing-kubeedge-practice]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|03-kubeedge-architecture-deployment]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|04-kubeedge-device-edge-apps]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09-edge-computing-kubeedge]]
-- [[domain-19-landscape-references/graduated/kubeedge/kubeedge.md|kubeedge]]
+- 16-kubernetes-edge-computing-kubeedge-practice
+- 03-kubeedge-architecture-deployment
+- 04-kubeedge-device-edge-apps
+- 09-edge-computing-kubeedge
+- kubeedge
 - [[entities/interlink.md|InterLink]]
 - [[entities/kairos.md|Kairos]]
 - [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference

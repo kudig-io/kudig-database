@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 企业即时通讯架构设计
@@ -38,7 +39,7 @@ tags:
 - architecture
 - industry
 - redis
-- statefulset
+- [[StatefulSet|statefulset]]
 - gateway
 - rag
 last_updated: '2026-05-18'
@@ -366,7 +367,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -381,7 +382,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/41-beauty-ecommerce.md|41-beauty-ecommerce]]
-- [[domain-20-application-patterns/42-secondhand-circular.md|42-secondhand-circular]]
-- [[domain-20-application-patterns/44-martech-adtech.md|44-martech-adtech]]
-- [[domain-20-application-patterns/45-smart-port-shipping.md|45-smart-port-shipping]]
+- 41-beauty-ecommerce
+- 42-secondhand-circular
+- 44-martech-adtech
+- 45-smart-port-shipping

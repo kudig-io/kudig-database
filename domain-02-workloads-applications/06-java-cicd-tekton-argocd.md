@@ -1,48 +1,5 @@
 ---
-title: 'Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
-description: 'title: ''Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'''
-category: general
-tags:
-- java
-- k8s
-- prometheus
-- istio
-- helm
-- argocd
-- docker
-- opa
-- operator
-- webhook
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 25min
-intent_queries:
-- 'Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 是什么'
-- '如何 Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Java
-- CI
-- CD
-- 'on'
-- 'Kubernetes:'
-- Tekton
-- ArgoCD
-- 实践指南
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- helm-basics
-- service-mesh-basics
-- prometheus-basics
-- gitops-basics
-- policy-basics
----
-
-title: 'Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
+title: Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]
 description: '# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南'
 category: java-kubernetes
 tags:
@@ -75,29 +32,29 @@ trigger_keywords:
 - Tekton
 - ArgoCD
 - 实践指南
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- gitops-basics
+- policy-basics
+created: "2026-05-23"
 ---
 
-# Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南
+# Java CI/CD on [[Kubernetes|Kubernetes]]: Tekton + [[ArgoCD|ArgoCD]] 实践指南
 
 > **适用版本**: Tekton Pipelines v0.60+ / ArgoCD v2.12+ / JDK 17+ / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 在 Kubernetes 上为 Java 应用构建 CI/CD 流水线，需要解决一系列特定挑战：Maven/Gradle 依赖缓存管理、容器镜像构建优化、安全扫描集成、质量门禁、多架构构建以及 GitOps 部署策略。Tekton 提供声明式的流水线能力，ArgoCD 实现 GitOps 持续交付，两者结合为 Java 应用提供完整的云原生 CI/CD 方案。
 
-本指南覆盖从代码提交到生产部署的完整流水线，包括 Tekton Task/Pipeline 定义、Jib 容器构建、Trivy 安全扫描、SonarQube 质量门禁、ArgoCD GitOps 部署以及 Canary/Blue-Green 发布策略。
+本指南覆盖从代码提交到生产部署的完整流水线，包括 Tekton Task/Pipeline 定义、Jib 容器构建、[[Trivy|Trivy]] 安全扫描、SonarQube 质量门禁、ArgoCD GitOps 部署以及 Canary/Blue-Green 发布策略。
 
 ```mermaid
 graph LR
@@ -127,9 +84,9 @@ graph LR
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 流水线整体架构 -->## 2.1 流水线整体架构
+### 2.1 流水线整体架构
 
 ```mermaid
 graph TB
@@ -168,11 +125,11 @@ graph TB
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 Tekton 基础资源定义 -->## 3.1 Tekton 基础资源定义
+### 3.1 Tekton 基础资源定义
 
-##<!-- chunk: Workspace 和 PVC -->## Workspace 和 PVC
+#### Workspace 和 PVC
 
 ```yaml
 apiVersion: v1
@@ -202,7 +159,7 @@ spec:
   storageClassName: standard
 ```
 
-##<!-- chunk: Maven Settings ConfigMap -->## Maven Settings ConfigMap
+#### Maven Settings ConfigMap
 
 ```yaml
 apiVersion: v1
@@ -238,9 +195,9 @@ data:
     </settings>
 ```
 
-#<!-- chunk: 3.2 Tekton Task 定义 -->## 3.2 Tekton Task 定义
+### 3.2 Tekton Task 定义
 
-##<!-- chunk: Task: Maven 构建 + 测试 -->## Task: Maven 构建 + 测试
+#### Task: Maven 构建 + 测试
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -312,7 +269,7 @@ spec:
           cpu: "2000m"
 ```
 
-##<!-- chunk: Task: Jib 容器镜像构建 -->## Task: Jib 容器镜像构建
+#### Task: Jib 容器镜像构建
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -321,7 +278,7 @@ metadata:
   name: jib-build
   namespace: ci-cd
 spec:
-  description: "使用 Jib 构建容器镜像（无需 Docker daemon）"
+  description: "使用 Jib 构建容器镜像（无需 [[entities/docker|docker]] daemon）"
   workspaces:
     - name: source
   params:
@@ -378,7 +335,7 @@ spec:
           cpu: "2000m"
 ```
 
-##<!-- chunk: Task: Trivy 安全扫描 -->## Task: Trivy 安全扫描
+#### Task: Trivy 安全扫描
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -425,7 +382,7 @@ spec:
           cpu: "1000m"
 ```
 
-##<!-- chunk: Task: SonarQube 质量门禁 -->## Task: SonarQube 质量门禁
+#### Task: SonarQube 质量门禁
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -476,7 +433,7 @@ spec:
         fi
 ```
 
-##<!-- chunk: Task: 更新 GitOps Manifest -->## Task: 更新 GitOps Manifest
+#### Task: 更新 GitOps Manifest
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -536,7 +493,7 @@ spec:
         git push origin $(params.GITOPS_BRANCH)
 ```
 
-#<!-- chunk: 3.3 Tekton Pipeline 组装 -->## 3.3 Tekton Pipeline 组装
+### 3.3 Tekton Pipeline 组装
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -660,7 +617,7 @@ spec:
           value: $(params.DEPLOY_ENV)
 ```
 
-#<!-- chunk: 3.4 PipelineRun 触发 -->## 3.4 PipelineRun 触发
+### 3.4 PipelineRun 触发
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -705,9 +662,9 @@ spec:
       value: "staging"
 ```
 
-#<!-- chunk: 3.5 ArgoCD Application 定义 -->## 3.5 ArgoCD Application 定义
+### 3.5 ArgoCD Application 定义
 
-##<!-- chunk: Staging 环境 -->## Staging 环境
+#### Staging 环境
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -748,7 +705,7 @@ spec:
         maxDuration: 3m
 ```
 
-##<!-- chunk: Production 环境（手动审批） -->## Production 环境（手动审批）
+#### Production 环境（手动审批）
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -778,9 +735,9 @@ spec:
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 Canary 发布策略 (Argo Rollouts) -->## 4.1 Canary 发布策略 (Argo Rollouts)
+### 4.1 Canary 发布策略 (Argo Rollouts)
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -856,7 +813,7 @@ spec:
             periodSeconds: 5
 ```
 
-AnalysisTemplate（基于 Prometheus 指标自动判断是否继续发布）:
+AnalysisTemplate（基于 [[Prometheus|Prometheus]] 指标自动判断是否继续发布）:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -900,7 +857,7 @@ spec:
             sum(rate(http_server_requests_seconds_count{app="myapp"}[1m]))
 ```
 
-#<!-- chunk: 4.2 Blue-Green 发布策略 -->## 4.2 Blue-Green 发布策略
+### 4.2 Blue-Green 发布策略
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -938,7 +895,7 @@ spec:
             - containerPort: 8080
 ```
 
-#<!-- chunk: 4.3 多架构构建 -->## 4.3 多架构构建
+### 4.3 多架构构建
 
 ```yaml
 apiVersion: tekton.dev/v1
@@ -998,7 +955,7 @@ spec:
 
 ---
 
-<!-- chunk: 五、故障排查 -->## 五、故障排查
+## 五、故障排查
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |------|---------|---------|---------|
@@ -1053,7 +1010,7 @@ kubectl argo rollouts promote myapp -n production --full
 
 ---
 
-<!-- chunk: 六、参考资源 -->## 六、参考资源
+## 六、参考资源
 
 - [Tekton 官方文档](https://tekton.dev/docs/)
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
@@ -1063,22 +1020,3 @@ kubectl argo rollouts promote myapp -n production --full
 - [SonarQube 文档](https://docs.sonarqube.org/)
 - [Kustomize 文档](https://kustomize.io/)
 - [Docker Buildx 多架构](https://docs.docker.com/build/building/multi-platform/)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[domain-java-kubernetes/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]]
-- [[domain-java-kubernetes/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]]
-- [[domain-java-kubernetes/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]]
-- [[domain-java-kubernetes/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]]
-
-## See Also
-
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]

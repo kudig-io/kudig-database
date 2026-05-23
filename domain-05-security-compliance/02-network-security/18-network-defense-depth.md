@@ -35,6 +35,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 title: 18 - 网络安全纵深防御体系
@@ -46,10 +47,10 @@ tags:
 - rbac
 - authentication
 - authorization
-- kubelet
-- prometheus
-- istio
-- envoy
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
+- [[Envoy|envoy]]
 - cilium
 last_updated: 2026-05
 difficulty: advanced
@@ -823,25 +824,25 @@ echo "Network security hardening completed!"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/16-compliance-audit-practices.md|16-compliance-audit-practices]]
-- [[domain-05-security-compliance/17-comprehensive-security-scanning.md|17-comprehensive-security-scanning]]
-- [[domain-05-security-compliance/19-zero-trust-architecture.md|19-zero-trust-architecture]]
-- [[domain-05-security-compliance/20-incident-response-process.md|20-incident-response-process]]
+- 16-compliance-audit-practices
+- 17-comprehensive-security-scanning
+- 19-zero-trust-architecture
+- 20-incident-response-process
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

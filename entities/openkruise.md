@@ -1,5 +1,5 @@
 ---
-title: OpenKruise
+title: OpenKruise [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - OpenKruise
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OpenKruise
@@ -37,7 +38,7 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 
 ## 核心能力
 
-- **高级工作负载**: CloneSet、Advanced StatefulSet、Advanced DaemonSet
+- **高级工作负载**: CloneSet、Advanced [[StatefulSet|StatefulSet]]、Advanced [[DaemonSet|DaemonSet]]
 - **原地升级**: 更新镜像无需重建 Pod
 - **Sidecar 管理**: 声明式 Sidecar 注入和独立升级
 - **镜像预热**: 提前拉取镜像加速部署
@@ -75,7 +76,7 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise.md|openkruise]]
+- openkruise
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

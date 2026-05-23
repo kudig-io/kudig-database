@@ -34,6 +34,7 @@ prerequisites:
 - ebpf-basics
 - etcd-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -169,5 +170,5 @@ tier: peripheral---
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-01-cluster-fundamentals

@@ -1,5 +1,5 @@
 ---
-title: 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南
+title: 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南 [migration]
 description: '# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南'
 category: migration
 tags:
@@ -41,11 +41,12 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
-# 自建 Kubernetes 迁移至阿里云 ACK 生产实践指南
+# 自建 [[Kubernetes|Kubernetes]] 迁移至阿里云 ACK 生产实践指南
 
-> **适用版本**: Kubernetes v1.24 - v1.32 → 阿里云 ACK | **文档类型**: 端到端迁移专题 | **最后更新**: 2026-03 | **关键词**: 自建 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]], kubeadm, ACK, 迁移, Velero, Terway, 零停机, 灰度切流
+> **适用版本**: Kubernetes v1.24 - v1.32 → 阿里云 ACK | **文档类型**: 端到端迁移专题 | **最后更新**: 2026-03 | **关键词**: 自建 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]], kubeadm, ACK, 迁移, Velero, Terway, 零停机, 灰度切流
 
 ---
 
@@ -110,9 +111,9 @@ Phase 0          Phase 1          Phase 2          Phase 3          Phase 4
 | 02 | [ACK 目标集群设计](./02-ack-target-cluster-design.md) | 集群类型选择、VPC/CIDR 规划、节点池设计、Addon 配置 | 架构师、运维工程师 | 40min |
 | 03 | [应用工作负载迁移](./03-application-workload-migration.md) | Deployment/Service/Ingress/ConfigMap 导出适配、ACK 注解映射 | 运维工程师、开发 | 45min |
 | 04 | [存储与数据迁移](./04-storage-data-migration.md) | PV/PVC 迁移、CSI 适配、数据同步（Velero/rsync）、阿里云存储对接 | 运维工程师、DBA | 40min |
-| 05 | [网络迁移与流量切换](./05-network-migration-traffic-cutover.md) | CNI 差异处理、Ingress/Gateway 迁移、DNS 灰度切流、SLB/NLB/ALB 适配 | 运维工程师、网络工程师 | 45min |
+| 05 | [网络迁移与流量切换](./05-network-migration-traffic-cutover.md) | CNI 差异处理、[[Ingress|Ingress]]/Gateway 迁移、DNS 灰度切流、SLB/NLB/ALB 适配 | 运维工程师、网络工程师 | 45min |
 | 06 | [有状态服务迁移](./06-stateful-services-migration.md) | MySQL/Redis/ES/Kafka/etcd 迁移策略、数据一致性校验 | DBA、运维工程师 | 50min |
-| 07 | [可观测性与安全迁移](./07-[[domain-06-observability/01-observability-architecture-overview.md|01-observability-architecture-overview]]-security-migration.md) | 监控/日志/链路追踪迁移、RBAC/证书/NetworkPolicy 重建 | SRE、安全工程师 | 35min |
+| 07 | [可观测性与安全迁移](./07-01-observability-architecture-overview-security-migration.md) | 监控/日志/链路追踪迁移、RBAC/证书/NetworkPolicy 重建 | SRE、安全工程师 | 35min |
 | 08 | [验收、切换与旧集群退役](./08-validation-cutover-decommission.md) | 功能/性能验证清单、全量切换 SOP、旧集群安全退役流程 | 全团队 | 30min |
 | 09 | [迁移工具链参考](./09-migration-toolchain.md) | Velero、kubectl-neat、yq、迁移脚本集、自动化流水线 | 运维工程师 | 25min |
 | 10 | [生产迁移实战案例](./10-real-world-case-study.md) | 完整案例复盘：50+ 微服务、3 套有状态中间件、零停机迁移全记录 | 全团队 | 40min |
@@ -195,20 +196,20 @@ aliyun ecs DescribeZones --RegionId cn-hangzhou --output cols=ZoneId,LocalName
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cni.md|cni]]
 - [[entities/networkpolicy.md|networkpolicy]]
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

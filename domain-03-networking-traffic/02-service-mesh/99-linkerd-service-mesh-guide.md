@@ -58,9 +58,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# Linkerd 轻量级服务网格实践指南
+# [[Linkerd|Linkerd]] 轻量级服务网格实践指南
 
 > **适用版本**: Linkerd v2.18 (stable) / Linkerd v2.19 (edge)
 > **最后更新**: 2026-04-24
@@ -125,11 +126,11 @@ graph TB
 
 #<!-- chunk: 核心设计原则 -->## 核心设计原则
 
-| 原则 | 说明 | 与 Istio 对比 |
+| 原则 | 说明 | 与 [[Istio|Istio]] 对比 |
 |:---|:---|:---|
 | 极简主义 | 最小配置集，核心功能开箱即用 | Istio ~50 CRD vs Linkerd ~15 |
 | 零配置安全 | mTLS 默认启用，无需任何配置 | Istio 需要显式配置 PeerAuthentication |
-| 性能优先 | Rust 代理，亚毫秒延迟 | Istio Envoy C++ 1-3ms P99 |
+| 性能优先 | Rust 代理，亚毫秒延迟 | Istio [[Envoy|Envoy]] C++ 1-3ms P99 |
 | 渐进式采用 | 按命名空间逐步接入，无侵入 | 与 Istio 相同 |
 | 可组合性 | 独立组件（Viz, Multicluster）可按需安装 | Istio 扩展较重 |
 | 安全默认 | 最小权限、自动证书轮换、默认加密 | Istio 需要额外配置 |
@@ -203,7 +204,7 @@ linkerd check
 # linkerd-api: control plane pods are ready ................................ [ok]
 ```
 
-#<!-- chunk: 2.3 生产级 Helm 安装 -->## 2.3 生产级 Helm 安装
+#<!-- chunk: 2.3 生产级 [[Helm|Helm]] 安装 -->## 2.3 生产级 Helm 安装
 
 ```bash
 helm repo add linkerd https://helm.linkerd.io/stable
@@ -1117,25 +1118,25 @@ Istio Ambient (L4 only):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
 
 ## See Also
 
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|10-api-gateway-service-mesh-integration]]
-- [[domain-03-networking-traffic/99-istio-service-mesh-guide.md|99-istio-service-mesh-guide]]
-- [[domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md|99-spring-cloud-kubernetes-service-mesh-guide]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|01-istio-enterprise-service-mesh]]
+- 10-api-gateway-service-mesh-integration
+- 99-istio-service-mesh-guide
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 01-istio-enterprise-service-mesh
 
 ## Related
 

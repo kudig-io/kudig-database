@@ -1,5 +1,5 @@
 ---
-title: 第二章:FEBM 技术实现体系
+title: 第二章:FEBM 技术实现体系 (topic-febm)
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -47,6 +47,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 第二章:FEBM 技术实现体系
@@ -57,12 +58,12 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
+- [[Jaeger|jaeger]]
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert

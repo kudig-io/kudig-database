@@ -37,6 +37,7 @@ prerequisites:
 - monitoring-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -44,7 +45,7 @@ title: Day 18: 可观测性 - 日志 + 分布式追踪
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes 日志聚合方案
+  - [[Kubernetes|kubernetes]] 日志聚合方案
   - Loki 日志系统
   - ELK 企业日志
   - 分布式链路追踪
@@ -67,7 +68,7 @@ estimated_read_time: 240min
 related_domains:
   - domain-06-observability
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/[[domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1|day-17-observability-1]]
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
   - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
   - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
@@ -91,7 +92,7 @@ related_topics:
 - 配置 Alertmanager 告警路由规则
 
 **前置条件**：
-- 已完成 Day 17 的 Prometheus + Grafana 监控部署
+- 已完成 Day 17 的 [[Prometheus|Prometheus]] + Grafana 监控部署
 - 有 Helm 基本操作能力
 - 了解 Kubernetes 存储和网络基础
 

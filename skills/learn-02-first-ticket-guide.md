@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 trigger_keywords:
@@ -178,7 +179,7 @@ kubectl scale deployment <name> -n <namespace> --replicas=5
 
 ---
 
-## 3. 场景二：Service 无法访问
+## 3. 场景二：[[Service|Service]] 无法访问
 
 ### 场景描述
 > "前端 Pod 无法调用后端 API，返回 503"

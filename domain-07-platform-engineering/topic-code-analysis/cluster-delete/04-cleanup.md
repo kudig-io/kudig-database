@@ -1,5 +1,5 @@
 ---
-title: 节点清理机制 — cleanup-node 源码分析
+title: 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis)
 description: 'description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点清理机制 — cleanup-node 源码分析

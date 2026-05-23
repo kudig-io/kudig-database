@@ -29,6 +29,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Server 模式与 HTTP API

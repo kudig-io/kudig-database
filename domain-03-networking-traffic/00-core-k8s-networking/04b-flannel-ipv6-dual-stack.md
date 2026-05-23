@@ -60,11 +60,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # Flannel IPv6 Dual Stack 支持
 
-> **适用版本**: Kubernetes v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
 
 ---
 
@@ -78,7 +79,7 @@ Flannel v0.20+ 支持 IPv6 Dual Stack，允许集群同时使用 IPv4 和 IPv6 �
 | 功能 | 支持情况 |
 |:-----|:-------:|
 | 单 IPv6 集群 | ✓ 支持 |
-| IPv4/IPv6 Dual Stack | ✓ v0.20+ |
+| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
 | IPv6 only 后端 (VXLAN) | ✓ v0.21+ |
 | Windows 节点 IPv6 | ✗ 暂不支持 |
 
@@ -335,7 +336,7 @@ ip -6 neigh show dev flannel.1
 
 ---
 
-<!-- chunk: 9. 与 Cilium/Calico 对比 -->
+<!-- chunk: 9. 与 [[Cilium|Cilium]]/Calico 对比 -->
 ## 9. 与 Cilium/Calico 对比
 
 | 特性 | Flannel | Cilium | Calico |
@@ -343,7 +344,7 @@ ip -6 neigh show dev flannel.1
 | IPv6 单栈 | ✓ | ✓ | ✓ |
 | IPv6 Dual Stack | ✓ | ✓ | ✓ |
 | eBPF-based | ✗ | ✓ | ✗ |
-| NetworkPolicy | 需 Canal | 原生 | 原生 |
+| [[NetworkPolicy|NetworkPolicy]] | 需 Canal | 原生 | 原生 |
 | 生产推荐度 | 中 | 高 | 高 |
 
 ---
@@ -376,25 +377,25 @@ net-conf.json: |
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|Flannel 多集群场景与子网冲突处理]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
 
 ## See Also
 
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|04-flannel-complete-guide]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|04a-flannel-wireguard-backend]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|04c-flannel-windows-support]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|04d-flannel-multi-cluster]]
+- 04-flannel-complete-guide
+- 04a-flannel-wireguard-backend
+- 04c-flannel-windows-support
+- 04d-flannel-multi-cluster
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: Gateway API 异常故障树分析
+title: Gateway API 异常故障树分析 (skills)
 description: '| evt_config_error | 配置参数错误 | `kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=50 \| grep -i error`
   | Controller 日志 | 配置错误信息 |'
 category: general
@@ -32,6 +32,7 @@ prerequisites:
 fta_id: FTA-GATEWAY_API-001
 component: Gateway Api
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
@@ -42,7 +43,7 @@ tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

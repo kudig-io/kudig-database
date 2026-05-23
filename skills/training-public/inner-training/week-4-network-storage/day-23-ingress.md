@@ -25,9 +25,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# Day 23: Ingress
+# Day 23: [[Ingress|Ingress]]
 
 ```yaml
 ---
@@ -96,7 +97,7 @@ tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
 
 ### 阅读要点
 
-- **Ingress**: L7 层流量路由，基于域名/路径分发到不同 Service
+- **Ingress**: L7 层流量路由，基于域名/路径分发到不同 [[Service|Service]]
 - **IngressClass**: 指定使用哪个 Ingress Controller 处理
 - **ALB Ingress Controller**: 阿里云 ALB (应用型负载均衡) 原生集成，推荐生产使用
 - **Nginx Ingress Controller**: 社区方案，ACK 默认组件，灵活度高
@@ -337,4 +338,4 @@ Day 24 将深入学习 Terway CNI 架构与配置。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]

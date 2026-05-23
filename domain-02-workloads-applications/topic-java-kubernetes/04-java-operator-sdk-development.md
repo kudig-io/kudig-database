@@ -1,5 +1,5 @@
 ---
-title: Java Operator SDK 开发指南
+title: Java Operator SDK 开发指南 (domain-02-workloads-applications)
 description: '# Java Operator SDK 开发指南'
 category: java-kubernetes
 tags:
@@ -33,11 +33,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
+created: "2026-05-23"
 ---
 
 # Java Operator SDK 开发指南
 
-> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes|kubernetes]] v1.28+
+> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---
@@ -1229,7 +1230,7 @@ spec:
 | CRD 未注册 | CRD YAML 未应用 | `kubectl get crd webapps.apps.example.com` | `kubectl apply -f k8s/crds/` |
 | Reconciler 不触发 | RBAC 权限不足 | `kubectl logs <operator-pod> \| grep "Forbidden"` | 检查 ClusterRole/Binding |
 | 资源未创建 | OwnerReference 错误 | `kubectl describe <cr>` 查看 events | 确认 apiVersion/kind/uid 正确 |
-| Finalizer 阻塞删除 | cleanup 逻辑异常 | `kubectl describe <cr>` 查看 finalizers | 修复 cleanup 逻辑或手动移除 finalizer |
+| Finalizer 阻塞删除 | cleanup 逻辑异常 | `kubectl describe <cr>` 查看 [[Finalizers|finalizers]] | 修复 cleanup 逻辑或手动移除 finalizer |
 | Leader Election 失败 | Lease 权限不足 | `kubectl get lease -n production` | 添加 coordination.k8s.io 权限 |
 | 内存持续增长 | Informer 缓存泄漏 | `jcmd 1 GC.heap_histogram` | 检查 EventSource 生命周期 |
 | 事件丢失 | Watch 重连问题 | `kubectl logs <operator-pod> \| grep "watch"` | 增大 resync period |

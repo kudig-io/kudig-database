@@ -56,9 +56,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# 34. Kubernetes 组件配置（Component Configuration）
+# 34. [[Kubernetes|Kubernetes]] 组件配置（Component Configuration）
 
 > **适用版本**：Kubernetes v1.25 – v1.32 | **文档日期**：2026-02
 
@@ -71,7 +72,7 @@ authors:
 从 Kubernetes v1.10 开始，控制平面和节点组件逐步支持通过**类型化配置文件**（Typed Configuration Files）进行配置，而不是仅依赖命令行标志（CLI flags）。这种方式提供了以下优势:
 
 - **结构化和类型安全**：配置文件有明确的 API schema，可验证字段类型和约束
-- **版本化**：配置 API 遵循 Kubernetes API 版本控制原则，支持平滑升级
+- **版本化**：配置 API 遵循 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本控制原则，支持平滑升级
 - **易于管理**：配置文件可以纳入版本控制，便于审计和自动化部署
 - **减少命令行复杂度**：避免冗长的启动参数
 
@@ -81,7 +82,7 @@ Kubernetes 目前提供以下稳定或 beta 的组件配置 API:
 
 | 组件 | API Kind | API Group | 稳定版本 |
 |------|----------|-----------|----------|
-| **Kubelet** | KubeletConfiguration | kubelet.config.k8s.io | v1beta1 (v1.10+) |
+| **[[kubelet|Kubelet]]** | KubeletConfiguration | kubelet.config.k8s.io | v1beta1 (v1.10+) |
 | **Kube-Proxy** | KubeProxyConfiguration | kubeproxy.config.k8s.io | v1alpha1 (v1.10+) |
 | **Kube-Scheduler** | KubeSchedulerConfiguration | kubescheduler.config.k8s.io | v1 (v1.25+) |
 | **Kube-Controller-Manager** | - | - | ❌ 暂无稳定 API |
@@ -3314,25 +3315,25 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/32-lease-event-node.md|32-lease-event-node]]
-- [[domain-18-manifests-patterns/33-kubeadm-cluster-bootstrap.md|33-kubeadm-cluster-bootstrap]]
-- [[domain-18-manifests-patterns/35-advanced-pod-patterns.md|35-advanced-pod-patterns]]
-- [[domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd.md|36-ecosystem-kustomize-helm-argocd]]
+- 32-lease-event-node
+- 33-kubeadm-cluster-bootstrap
+- 35-advanced-pod-patterns
+- 36-ecosystem-kustomize-helm-argocd
 
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]

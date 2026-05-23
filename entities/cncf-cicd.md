@@ -33,6 +33,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # CNCF CI/CD 与发布管理项目全景
@@ -130,14 +131,14 @@ Kubean 是 K8s 集群生命周期管理工具。
 
 Backstage 是开源开发者门户。
 
-- 软件目录（Service Catalog）
+- 软件目录（[[Service|Service]] Catalog）
 - 技术文档（TechDocs）
 - 插件生态丰富
 - Spotify 开源并广泛采用
 
 ### [[artifact-hub]] — 孵化项目
 
-Artifact Hub 是 CNCF 项目和 Helm Chart 的发现平台。
+[[Artifact Hub|Artifact Hub]] 是 CNCF 项目和 Helm Chart 的发现平台。
 
 ### [[score]] — 沙箱项目
 

@@ -22,6 +22,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 备用 Demo 录屏脚本

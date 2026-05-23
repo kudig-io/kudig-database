@@ -25,13 +25,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Volumes（卷）
 
 ## 概述
 
-Kubernetes Volumes 为 Pod 中的容器提供了一种通过文件系统访问和共享数据的机制。容器内的磁盘文件默认是临时的，容器崩溃或停止后数据会丢失。Volume 解决了数据持久化和容器间共享存储的问题。
+[[Kubernetes|Kubernetes]] Volumes 为 Pod 中的容器提供了一种通过文件系统访问和共享数据的机制。容器内的磁盘文件默认是临时的，容器崩溃或停止后数据会丢失。Volume 解决了数据持久化和容器间共享存储的问题。
 
 ## 核心概念/原理
 
@@ -60,7 +61,7 @@ Kubernetes Volumes 为 Pod 中的容器提供了一种通过文件系统访问�
 ### 子路径（subPath / subPathExpr）
 
 - `subPath`：指定卷内的子路径进行挂载，使同一个卷可在同一 Pod 中被多个容器以不同子目录挂载。
-- `subPathExpr`：支持使用 downward API 环境变量动态构建子路径名。
+- `subPathExpr`：支持使用 [[Downward API|downward API]] 环境变量动态构建子路径名。
 
 ### 挂载传播（Mount Propagation）
 
@@ -82,7 +83,7 @@ Kubernetes Volumes 为 Pod 中的容器提供了一种通过文件系统访问�
 ## 最佳实践/注意事项
 
 - 尽量避免使用 `hostPath` 卷，以防止安全风险和节点差异导致的问题；如需本地存储，优先使用 `local` PersistentVolume。
-- `emptyDir` 的默认存储介质取决于节点的 kubelet 根目录所在磁盘，可通过 `medium: Memory` 使用内存加速访问。
+- `emptyDir` 的默认存储介质取决于节点的 [[kubelet|kubelet]] 根目录所在磁盘，可通过 `medium: Memory` 使用内存加速访问。
 - 使用 `subPath` 挂载的容器不会自动接收到 ConfigMap/Secret 的更新。
 - 尽量使用 CSI 驱动替代已弃用的 in-tree 存储插件。
 

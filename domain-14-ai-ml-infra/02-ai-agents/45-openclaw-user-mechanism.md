@@ -1,5 +1,5 @@
 ---
-title: OpenClaw USER.md 机制深度解析
+title: OpenClaw USER.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw USER.md 机制深度解析'
 category: general
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw USER.md 机制深度解析
@@ -42,9 +43,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- prometheus
-- coredns
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -439,8 +440,8 @@ USER.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | USER.md 在 7 文件体系中的定位 |
-| [33 - Harness 上下文与记忆工程](./[[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]].md) | 四层上下文模型中的用户上下文 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | USER.md 在 7 文件体系中的定位 |
+| [33 - Harness 上下文与记忆工程](./33-agent-harness-context-memory.md) | 四层上下文模型中的用户上下文 |
 | [openclaw-workspace/USER.md](./openclaw-workspace/USER.md) | ACK 运维工程师用户画像完整配置 |
 | [44 - SOUL.md 机制解析](./44-openclaw-soul-mechanism.md) | SOUL.md 与 USER.md 的互补关系 |
 | [50 - IDENTITY.md 机制解析](./50-openclaw-identity-mechanism.md) | USER.md 偏好对 IDENTITY.md 输出风格的约束 |
@@ -453,7 +454,7 @@ USER.md 配置验证:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -468,7 +469,7 @@ USER.md 配置验证:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
+- 43-openclaw-framework-integration
+- 44-openclaw-soul-mechanism
+- 46-openclaw-agents-mechanism
+- 47-openclaw-tools-mechanism

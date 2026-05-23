@@ -41,6 +41,7 @@ prerequisites:
 - iac-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -64,10 +65,10 @@ tags:
 - sbom
 - slsa
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
-- argocd
+- [[Helm|helm]]
+- [[ArgoCD|argocd]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -79,7 +80,7 @@ estimated_read_time: 5min
 intent_queries:
 - 合规自动化与审计 (Compliance Automation and Audit) 是什么
 - 如何 合规自动化与审计 (Compliance Automation and Audit)
-- Kubernetes 39 supply chain security 最佳实践
+- [[Kubernetes|Kubernetes]] 39 supply chain security 最佳实践
 trigger_keywords:
 - 合规自动化与审计
 - Compliance
@@ -2631,24 +2632,24 @@ graph LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-supply-chain-security-overview.md|供应链安全概述 (Supply Chain Security Overview)]]
-- [[domain-05-security-compliance/02-supply-chain-maturity-model.md|供应链安全成熟度模型 (Supply Chain Security Maturity Model)]]
-- [[domain-05-security-compliance/03-sbom-generation-management.md|SBOM 生成与管理 (SBOM Generation and Management)]]
-- [[domain-05-security-compliance/04-sbom-vulnerability-analysis.md|SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)]]
-- [[domain-05-security-compliance/05-slsa-levels-implementation.md|SLSA 级别与实施 (SLSA Levels and Implementation)]]
-- [[domain-05-security-compliance/06-github-actions-slsa-build.md|GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)]]
-- [[domain-05-security-compliance/07-sigstore-cosign-signing.md|Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)]]
-- [[domain-05-security-compliance/08-fulcio-rekor-transparency.md|Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)]]
-- [[domain-05-security-compliance/09-policy-controller-verification.md|Policy Controller 镜像验证 (Policy Controller Image Verification...]]
+- 供应链安全概述 (Supply Chain Security Overview)
+- 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
+- SBOM 生成与管理 (SBOM Generation and Management)
+- SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
+- SLSA 级别与实施 (SLSA Levels and Implementation)
+- GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
+- Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
+- Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
+- Policy Controller 镜像验证 (Policy Controller Image Verification...
 
 ## See Also
 
-- [[domain-05-security-compliance/08-fulcio-rekor-transparency.md|08-fulcio-rekor-transparency]]
-- [[domain-05-security-compliance/09-policy-controller-verification.md|09-policy-controller-verification]]
-- [[domain-05-security-compliance/99-slsa-supply-chain-security-guide.md|99-slsa-supply-chain-security-guide]]
-- [[domain-05-security-compliance/01-supply-chain-security-overview.md|01-supply-chain-security-overview]]
+- 08-fulcio-rekor-transparency
+- 09-policy-controller-verification
+- 99-slsa-supply-chain-security-guide
+- 01-supply-chain-security-overview
 
 - [[domain-05-security-compliance/README.md|返回目录]]

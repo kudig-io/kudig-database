@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # FTA-Driven Runbook Automation
@@ -62,8 +63,8 @@ healing_action:
 | Risk Level | Execution Mode | Approval | Examples |
 |-----------|---------------|----------|----------|
 | **Low** | Auto-executable | None | Restart Pod, increase resource limits, uncordon node |
-| **Medium** | Auto + notify | Post-execution review | Scale deployment, modify ConfigMap, restart DaemonSet |
-| **High** | Human approval required | Pre-execution sign-off | Drain node, modify NetworkPolicy, change RBAC |
+| **Medium** | Auto + notify | Post-execution review | Scale deployment, modify ConfigMap, restart [[DaemonSet|DaemonSet]] |
+| **High** | Human approval required | Pre-execution sign-off | Drain node, modify [[NetworkPolicy|NetworkPolicy]], change RBAC |
 | **Critical** | Human approval + backup | Pre-execution + data backup | etcd restore, cluster upgrade, certificate rotation |
 
 ## Automation Pipeline
@@ -150,7 +151,7 @@ Runbooks evolve through the learning feedback loop:
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[skills/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]]
 - [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
 - [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]

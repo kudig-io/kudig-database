@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Backup and Restore etcd
@@ -91,18 +92,18 @@ Run full cluster restore drills quarterly. A backup that hasn't been tested for 
 - [[concepts/high-availability-patterns.md|High Availability Patterns]]
 - [[skills/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
 
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
+- RELEASE-NOTES-0.2
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
+- RELEASE-NOTES-0.3
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-0.1
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
 - [[domain-19-landscape-references/topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]

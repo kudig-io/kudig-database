@@ -1,5 +1,5 @@
 ---
-title: 工具授权注册表
+title: 工具授权注册表 (02-ai-agents)
 description: 'title: 工具授权注册表'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 工具授权注册表
@@ -48,10 +49,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
 last_updated: 2026-04
 difficulty: advanced
@@ -339,7 +340,7 @@ mcp_servers:
       - loki_search
 ```
 
-### 6.2 [[domain-14-ai-ml-infra/openclaw-workspace/AGENTS.md|AGENTS]]cope Toolkit 注册示例
+### 6.2 AGENTScope Toolkit 注册示例
 
 ```python
 from agentscope.tool import Toolkit, execute_shell_command, view_text_file
@@ -364,14 +365,14 @@ toolkit.register_agent_skill("openclaw-workspace")
 
 ## Related
 
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
+- 29-agentscope-studio-skill-demo
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/SKILL.md|SKILL]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SOUL.md|SOUL]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/AGENTS.md|AGENTS]]
+- SKILL
+- SOUL
+- USER
+- AGENTS

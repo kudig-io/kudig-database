@@ -25,9 +25,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
-# linkerd v18.7 Release Notes
+# [[Linkerd|linkerd]] v18.7 Release Notes
 
 Source: [v18.7.3](https://github.com/linkerd/linkerd2/releases/tag/v18.7.3)
 

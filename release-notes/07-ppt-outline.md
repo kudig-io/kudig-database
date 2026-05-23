@@ -33,6 +33,7 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 发布会 PPT 大纲 (20 页)

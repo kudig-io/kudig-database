@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Parsec
@@ -57,19 +58,19 @@ Parsec 是一个平台安全抽象层，为应用程序提供统一的 API 来�
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
-- [[entities/vault.md|vault]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[concepts/secrets-management.md|secrets-management]]
 - [[concepts/security-defense-depth.md|security-defense-depth]]
 
 ## Related
 
-- [[emissary-ingress]] — Emissary-Ingress
+- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
-- [[piraeus-datastore]] — Piraeus Datastore
+- [[piraeus-datastore]] — [[Piraeus Datastore|Piraeus Datastore]]
 - [[k8up]] — K8up
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/parsec/parsec.md|parsec]]
+- parsec
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

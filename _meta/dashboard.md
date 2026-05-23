@@ -20,6 +20,7 @@ trigger_keywords:
 - Dashboard
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Wiki Dashboard
@@ -170,7 +171,7 @@ SORT file.name ASC
 ### 在 Obsidian 中
 1. 安装并启用 **Dataview** 社区插件
 2. 打开本页面，所有查询块将自动渲染为动态表格
-3. 点击任意单元格中的 `[[链接]]` 可直接跳转对应页面
+3. 点击任意单元格中的 `链接` 可直接跳转对应页面
 
 ### 纯 Markdown 环境
 - 上述代码块显示为 `dataview` 语法的查询源码

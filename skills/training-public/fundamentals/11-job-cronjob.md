@@ -1,5 +1,5 @@
 ---
-title: 第九课：Job 和 CronJob - 任务调度
+title: 第九课：Job 和 CronJob - 任务调度 [fundamentals]
 description: 'title: 第九课：Job 和 CronJob - 任务调度'
 category: learning
 tags:
@@ -33,10 +33,11 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 第九课：Job 和 CronJob - 任务调度
+title: 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
 description: '# 第九课：Job 和 CronJob - 任务调度'
 category: learning
 tags:
@@ -586,12 +587,12 @@ kubectl delete cronjob <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-health-check.md](../09-troubleshooting/09-health-check.md) — 健康检查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/09-hpa-basics.md|09-hpa-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/10-health-check.md|10-health-check]]
-- [[domain-11-production-operations/topic-learn/fundamentals/12-common-problems.md|12-common-problems]]
-- [[domain-11-production-operations/topic-learn/fundamentals/13-daemonset-basics.md|13-daemonset-basics]]
+- 09-hpa-basics
+- 10-health-check
+- 12-common-problems
+- 13-daemonset-basics

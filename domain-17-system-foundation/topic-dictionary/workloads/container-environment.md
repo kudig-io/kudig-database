@@ -25,13 +25,14 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 容器环境（Container Environment）
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
 
 ## 核心概念/原理
 
@@ -44,12 +45,12 @@ prerequisites:
 ### 容器自身信息
 
 - **主机名（Hostname）**：容器的主机名即其所在 Pod 的名称。可通过 `hostname` 命令或 libc 的 `gethostname` 函数调用获取
-- **Pod 名称和命名空间**：通过 Downward API 以环境变量的形式注入到容器中
+- **Pod 名称和命名空间**：通过 [[Downward API|Downward API]] 以环境变量的形式注入到容器中
 - **用户定义的环境变量**：在 Pod 定义中通过 `env` 或 `envFrom` 指定的环境变量，以及容器镜像构建时静态设置的环境变量，均对容器可见
 
 ### 集群信息
 
-当容器创建时，Kubernetes 会将同一命名空间内所有正在运行的 Service 信息以环境变量的形式注入到该容器中。对于名为 `foo` 的 Service，会设置如下环境变量：
+当容器创建时，Kubernetes 会将同一命名空间内所有正在运行的 [[Service|Service]] 信息以环境变量的形式注入到该容器中。对于名为 `foo` 的 Service，会设置如下环境变量：
 
 ```
 FOO_SERVICE_HOST=<服务所在的主机地址>

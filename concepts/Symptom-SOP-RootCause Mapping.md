@@ -27,6 +27,7 @@ trigger_keywords:
 - Mapping
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Symptom-SOP-RootCause Mapping
@@ -114,7 +115,7 @@ Step 3: kubectl logs <name> --previous (if crashed)
   -> Application-level error identification
 ```
 
-### Example: Service Not Reachable
+### Example: [[Service|Service]] Not Reachable
 
 ```
 Step 1: kubectl get service <name>

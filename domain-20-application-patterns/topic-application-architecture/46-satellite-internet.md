@@ -1,4 +1,43 @@
 ---
+title: 卫星互联网架构设计 — 阿里云视角
+description: 'title: 卫星互联网架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- grafana
+- opa
+- postgresql
+- kafka
+- operator
+- gpu
+- nvidia
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 卫星互联网架构设计 — 阿里云视角 是什么
+- 如何 卫星互联网架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 卫星互联网架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- kafka-basics
+- gpu-scheduling-basics
+- policy-basics
+created: "2026-05-23"
+---
+
 title: 卫星互联网架构设计
 description: '# 卫星互联网架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,7 +45,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - postgresql
@@ -23,7 +62,7 @@ audience:
 - 阿里云大数据解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 低轨卫星 LEO 星座 Kubernetes 部署
+- 低轨卫星 LEO 星座 [[Kubernetes|Kubernetes]] 部署
 - 卫星遥感数据处理 GPU 集群架构
 - 卫星物联网 IoT 数据采集架构
 - TLE 轨道预测数据处理
@@ -39,13 +78,6 @@ trigger_keywords:
 - 星间链路
 - 卫星通信
 - 天地一体
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- kafka-basics
-- gpu-scheduling-basics
-- policy-basics
 related_domains:
 - domain-7-ai-ml-platform
 - domain-03-networking-traffic
@@ -54,16 +86,25 @@ related_domains:
 related_topics:
 - domain-20-application-patterns/topic-application-architecture/66-space-internet
 - domain-20-application-patterns/topic-application-architecture/72-digital-twin-city
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 卫星互联网架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-05-18
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-05-18
 > **作者**: 阿里云解决方案架构师 | **标签**: `#卫星互联网` `#低轨卫星` `#天地一体` `#阿里云`
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [行业概述](#1-行业概述)
 2. [业务场景](#2-业务场景)
@@ -79,9 +120,9 @@ related_topics:
 
 ---
 
-## 1. 行业概述
+<!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-### 1.1 市场规模与趋势
+#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
 
 卫星互联网通过低轨（LEO）卫星星座提供全球覆盖的宽带通信服务，是 6G 天地一体化网络的核心组成部分。全球市场规模预计从 2024 年的 180 亿美元增长到 2030 年的 650 亿美元。Starlink 已部署超过 6000 颗卫星，中国星网（GW）计划部署约 13000 颗卫星，OneWeb、Amazon Kuiper 等也在加速布局。
 
@@ -93,7 +134,7 @@ related_topics:
 | 端到端延迟 | 40-60 ms | 20-40 ms | 10-20 ms |
 | 用户终端成本 | $500-1000 | $200-500 | $100-200 |
 
-### 1.2 行业痛点
+#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -104,39 +145,39 @@ related_topics:
 | 地面站分布 | 全球地面站网络运维复杂 | 云原生地面站管理平台 |
 | 频谱管理 | 国际电联频谱协调复杂 | 数字化频谱管理平台 |
 
-### 1.3 数字化转型架构影响
+#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
 
 卫星互联网系统涉及空间段（卫星星座）、地面段（信关站/测控站/核心网）、用户段（终端设备）和运营支撑（计费/客服/网络管理）。架构需要支持全球分布式部署、高动态网络拓扑、海量遥测数据处理和实时业务编排。
 
 ---
 
-## 2. 业务场景
+<!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-### 2.1 宽带接入服务
+#<!-- chunk: 2.1 宽带接入服务 -->## 2.1 宽带接入服务
 
 为偏远地区、海洋、航空提供高速互联网接入。用户终端通过卫星链路接入信关站，再经地面核心网连接互联网。系统需支持数千用户共享单星带宽，通过动态带宽分配和 QoS 策略保障服务质量。典型场景包括远洋航运、沙漠油田、偏远村落和航空机载 WiFi。
 
-### 2.2 全球物联网数据采集
+#<!-- chunk: 2.2 全球物联网数据采集 -->## 2.2 全球物联网数据采集
 
 通过卫星窄带 IoT（NB-IoT over Satellite）采集全球范围内的传感器数据，应用于气象监测、海洋浮标、野生动物追踪、远洋渔业、管道监控等场景。终端功耗低，支持单次充电运行数月。
 
-### 2.3 应急通信保障
+#<!-- chunk: 2.3 应急通信保障 -->## 2.3 应急通信保障
 
 在地震、洪水、战争等地面通信基础设施损毁的灾害场景下，通过卫星互联网提供应急通信能力。系统需支持快速部署便携式信关站和终端，提供语音、数据和视频通信服务。
 
-### 2.4 导航增强与高精度定位
+#<!-- chunk: 2.4 导航增强与高精度定位 -->## 2.4 导航增强与高精度定位
 
 通过 LEO 卫星广播增强信号，提升 GNSS 定位精度至厘米级。应用于自动驾驶、精准农业、测绘工程、智能交通等领域。系统需要毫秒级时间同步和全球覆盖能力。
 
-### 2.5 遥感数据传输与处理
+#<!-- chunk: 2.5 遥感数据传输与处理 -->## 2.5 遥感数据传输与处理
 
 卫星遥感图像从卫星下传至地面站后，需要进行辐射校正、几何校正、目标识别等处理。单颗遥感卫星每日产生 TB 级数据，需要高性能并行处理流水线和 AI 目标检测能力。
 
 ---
 
-## 3. 架构设计
+<!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-### 3.1 卫星互联网全景架构
+#<!-- chunk: 3.1 卫星互联网全景架构 -->## 3.1 卫星互联网全景架构
 
 ```mermaid
 graph TB
@@ -193,7 +234,7 @@ graph TB
     AILayer --> AL1 & AL2 & AL3 & AL4 & AL5
 ```
 
-### 3.2 卫星数据传输时序
+#<!-- chunk: 3.2 卫星数据传输时序 -->## 3.2 卫星数据传输时序
 
 ```mermaid
 sequenceDiagram
@@ -221,7 +262,7 @@ sequenceDiagram
 
 ---
 
-## 4. 核心技术栈
+<!-- chunk: 4. 核心技术栈 -->## 4. 核心技术栈
 
 | Component | Purpose | Technology | License |
 |:---|:---|:---|:---|
@@ -241,9 +282,9 @@ sequenceDiagram
 
 ---
 
-## 5. Kubernetes 部署方案
+<!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-### 5.1 卫星数据处理 Deployment
+#<!-- chunk: 5.1 卫星数据处理 Deployment -->## 5.1 卫星数据处理 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -347,7 +388,7 @@ spec:
             sizeLimit: "8Gi"
 ```
 
-### 5.2 遥感图像处理 GPU Deployment
+#<!-- chunk: 5.2 遥感图像处理 GPU Deployment -->## 5.2 遥感图像处理 GPU Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -391,7 +432,7 @@ spec:
               cpu: "16000m"
 ```
 
-### 5.3 ConfigMap 与 Service
+#<!-- chunk: 5.3 ConfigMap 与 Service -->## 5.3 ConfigMap 与 Service
 
 ```yaml
 apiVersion: v1
@@ -449,9 +490,9 @@ stringData:
 
 ---
 
-## 6. 数据架构
+<!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-### 6.1 数据流全景
+#<!-- chunk: 6.1 数据流全景 -->## 6.1 数据流全景
 
 ```mermaid
 flowchart TB
@@ -491,7 +532,7 @@ flowchart TB
     ST1 & ST2 & ST3 --> ST4
 ```
 
-### 6.2 数据流说明
+#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
 
 - **遥测数据**: 卫星以 1Hz 频率上报轨道参数、温度、功率等遥测数据，经地面站接收后实时写入 Lindorm 时序库
 - **业务数据**: 用户上网流量经 5G 核心网 UPF 转发，元数据用于计费和 QoS 分析
@@ -500,9 +541,9 @@ flowchart TB
 
 ---
 
-## 7. AI/ML 组件
+<!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-### 7.1 核心模型
+#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -513,7 +554,7 @@ flowchart TB
 | 手over 预测 | 卫星切换时机预测 | 轨道参数 / 信号强度 | 切换时间 + 目标卫星 | GNN |
 | 轨道预测 | 卫星轨道精确预测 | TLE / 遥测数据 | 轨道预报 | Kalman Filter + NN |
 
-### 7.2 模型训练与推理
+#<!-- chunk: 7.2 模型训练与推理 -->## 7.2 模型训练与推理
 
 ```mermaid
 flowchart LR
@@ -528,9 +569,9 @@ flowchart LR
 
 ---
 
-## 8. 安全与合规
+<!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-### 8.1 行业法规与标准
+#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -542,7 +583,7 @@ flowchart LR
 | WRC 决议 | 世界无线电通信大会决议 | 频段合规管理 |
 | 空间碎片减缓 | 轨道安全 | 碰撞预警系统 |
 
-### 8.2 安全架构要点
+#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
 
 - **通信加密**: 星地链路采用 AES-256 加密，防止信号拦截和伪造
 - **指令认证**: 卫星遥控指令需要数字签名验证，防止恶意操控
@@ -552,7 +593,7 @@ flowchart LR
 
 ---
 
-## 9. 最佳实践
+<!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
 
 1. **多信关站负载均衡**: 全球部署多个信关站，根据卫星位置和信关站负载智能选择最优下行站，避免单站拥塞
 2. **边缘缓存**: 在信关站侧缓存热门内容（视频/网页），减少回传带宽需求
@@ -567,7 +608,7 @@ flowchart LR
 
 ---
 
-## 10. 反模式
+<!-- chunk: 10. 反模式 -->## 10. 反模式
 
 1. **单地面站依赖**: 所有业务流量通过单一地面站处理，该站故障即导致大面积断网。应采用多站冗余 + 自动切换
 2. **忽略雨衰影响**: Ka/Ku 波段信号在暴雨时严重衰减，未实现 ACM 导致业务中断。应部署链路质量监测和自适应调制
@@ -577,7 +618,7 @@ flowchart LR
 
 ---
 
-## 11. 参考资源
+<!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
 - [3GPP NTN (Non-Terrestrial Networks) Standards](https://www.3gpp.org/)
 - [ITU Radio Regulations](https://www.itu.int/pub/R-REG-RR)
@@ -591,3 +632,27 @@ flowchart LR
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 44-martech-adtech
+- 45-smart-port-shipping
+- 47-smart-mining
+- 48-vocational-edtech

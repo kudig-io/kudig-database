@@ -38,6 +38,7 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 沉浸式XR架构设计
@@ -47,7 +48,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -609,7 +610,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -624,11 +625,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/72-digital-twin-city.md|72-digital-twin-city]]
-- [[domain-20-application-patterns/73-smart-firefighting.md|73-smart-firefighting]]
-- [[domain-20-application-patterns/75-affective-computing.md|75-affective-computing]]
-- [[domain-20-application-patterns/76-synthetic-biology.md|76-synthetic-biology]]
+- 72-digital-twin-city
+- 73-smart-firefighting
+- 75-affective-computing
+- 76-synthetic-biology
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

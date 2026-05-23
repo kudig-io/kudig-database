@@ -24,6 +24,7 @@ trigger_keywords:
 - Probes
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Configure Health Probes
@@ -34,7 +35,7 @@ prerequisites:
 |-------|----------|-------------------|
 | **startupProbe** | Application has slow or variable startup time | Disables liveness/readiness until first success |
 | **livenessProbe** | Application can deadlock or become unresponsive | Container is restarted |
-| **readinessProbe** | Application needs warmup time or can become temporarily unavailable | Removed from Service endpoints |
+| **readinessProbe** | Application needs warmup time or can become temporarily unavailable | Removed from [[Service|Service]] endpoints |
 
 ## Probe Types
 
@@ -70,7 +71,7 @@ For a typical web application with 30s startup time:
 
 ## Related
 
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
-- [[pod-lifecycle|Pod Lifecycle]]
+- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
+- [[pod-lifecycle|[[Pod Lifecycle|Pod Lifecycle]]]]
 - [[deployment|Deployment]]
 - [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]

@@ -45,6 +45,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
@@ -2761,7 +2762,7 @@ data:
 - **bpftool**: `man bpftool-map`
 - **BCC Map 文档**: [github.com/iovisor/bcc/blob/master/docs/reference_guide.md](https://github.com/iovisor/bcc/blob/master/docs/reference_guide.md)
 - **eBPF 示例程序**: [github.com/torvalds/linux/tree/master/samples/bpf](https://github.com/torvalds/linux/tree/master/samples/bpf)
-- **Cilium eBPF Go 库**: [github.com/cilium/ebpf](https://github.com/cilium/ebpf)
+- **[[Cilium|Cilium]] eBPF Go 库**: [github.com/cilium/ebpf](https://github.com/cilium/ebpf)
 
 ---
 
@@ -2779,22 +2780,22 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-35-ebpf-technology MOC]]
+- domain-35-ebpf-technology MOC
 - [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-35 eBPF 技术 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...]]
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|Tetragon 运行时安全 (Tetragon Runtime Security)]]
-- [[domain-03-networking-traffic/07-hubble-network-observability.md|Hubble 网络可观测性 (Hubble Network Observability)]]
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|eBPF 性能优化实践 (eBPF Performance Optimization Practice)]]
-- [[domain-03-networking-traffic/10-ebpf-security-applications.md|eBPF 安全应用案例 (eBPF Security Applications and Use Cases)]]
+- Domain-35 eBPF 技术 — 开源项目索引
+- eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
+- Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+- Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...
+- Tetragon 运行时安全 (Tetragon Runtime Security)
+- Hubble 网络可观测性 (Hubble Network Observability)
+- bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+- eBPF 性能优化实践 (eBPF Performance Optimization Practice)
+- eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 
 ## See Also
 
-- [[domain-03-networking-traffic/10-ebpf-security-applications.md|10-ebpf-security-applications]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|01-ebpf-architecture-fundamentals]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|03-cilium-cni-architecture]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|04-cilium-network-policy]]
+- 10-ebpf-security-applications
+- 01-ebpf-architecture-fundamentals
+- 03-cilium-cni-architecture
+- 04-cilium-network-policy

@@ -28,6 +28,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 酒店旅游架构设计
@@ -49,7 +50,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 酒店旅游 Kubernetes 收益管理
+- 酒店旅游 [[Kubernetes|Kubernetes]] 收益管理
 - OTA平台 Kubernetes 大促弹性
 - 酒店PMS GDS 阿里云架构
 - 动态定价收益管理 K8s
@@ -70,7 +71,7 @@ related_domains:
 related_topics:
 - 26-aviation-travel
 - 32-smart-restaurant
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
+- 01-ecommerce-architecture
 authors:
 - name: KUDIG Team
   role: contributor
@@ -304,8 +305,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -319,7 +320,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/25-quantitative-trading.md|25-quantitative-trading]]
-- [[domain-20-application-patterns/26-aviation-travel.md|26-aviation-travel]]
-- [[domain-20-application-patterns/28-proptech.md|28-proptech]]
-- [[domain-20-application-patterns/29-agritech-iot.md|29-agritech-iot]]
+- 25-quantitative-trading
+- 26-aviation-travel
+- 28-proptech
+- 29-agritech-iot

@@ -52,13 +52,14 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Azure AKS 企业级多云管理平台
 
 <!-- chunk: 概述 -->## 概述
 
-Azure Kubernetes Service (AKS) 是微软 Azure 提供的托管 Kubernetes 服务，提供企业级的安全性、可扩展性和管理功能。AKS 在全球 60 多个 Azure 区域可用，深度集成 Azure Active Directory、Key Vault、Monitor 等企业服务，是金融、政府、制造等行业上云的首选 Kubernetes 平台。
+Azure Kubernetes Service (AKS)] [[Service|Service]] (AKS) 是微软 Azure 提供的托管 Kubernetes 服务，提供企业级的安全性、可扩展性和管理功能。AKS 在全球 60 多个 Azure 区域可用，深度集成 Azure Active Directory、Key Vault、Monitor 等企业服务，是金融、政府、制造等行业上云的首选 Kubernetes 平台。
 
 在多云架构中，AKS 通常作为合规性要求较高的工作负载承载平台，与 AWS EKS、Google GKE 协同构建跨云高可用架构。通过 Azure Arc、ExpressRoute、Azure Front Door 等服务，AKS 可以实现与本地数据中心和其他云平台的无缝连接。本文档从生产环境运维专家角度，深入探讨 AKS 的企业级部署架构、多云集成策略和运维管理最佳实践。
 
@@ -904,7 +905,7 @@ set -euo pipefail
 RESOURCE_GROUP="${1:-}"
 CLUSTER_NAME="${2:-}"
 
-if [[ -z "$RESOURCE_GROUP" || -z "$CLUSTER_NAME" ]]; then
+if -z "$RESOURCE_GROUP"; then
     echo "Usage: $0 <resource-group> <cluster-name>"
     exit 1
 fi
@@ -1016,7 +1017,7 @@ echo "等待控制平面升级..."
 while true; do
     STATUS=$(az aks show --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME \
       --query provisioningState -o tsv)
-    if [[ "$STATUS" == "Succeeded" ]]; then
+    if "$STATUS" == "Succeeded"; then
         echo "控制平面升级完成"
         break
     fi
@@ -1170,22 +1171,22 @@ kubectl get nodes -o wide
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|10-multicloud-disaster-recovery]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|01-aws-eks-enterprise-multicloud]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|03-enterprise-multicloud-governance]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|04-google-gke-enterprise-multicloud]]
+- 10-multicloud-disaster-recovery
+- 01-aws-eks-enterprise-multicloud
+- 03-enterprise-multicloud-governance
+- 04-google-gke-enterprise-multicloud

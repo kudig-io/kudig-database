@@ -34,6 +34,7 @@ prerequisites:
 - cni-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # DaemonSet
@@ -50,7 +51,7 @@ DaemonSet 确保所有（或部分）节点上都运行一个 Pod 副本。当�
 ## 关键机制或特性
 - **调度方式**：DaemonSet 控制器会为每个目标节点设置 `spec.affinity.nodeAffinity`，将 Pod 绑定到特定节点。默认调度器随后会处理实际的节点绑定，必要时可基于 Pod 优先级抢占现有 Pod。
 - **自动容忍（Tolerations）**：DaemonSet 控制器会自动为 Pod 添加一组容忍，使其能在不健康的节点上运行：
-  - `node.kubernetes.io/not-ready`（NoExecute）
+  - `node.[[Kubernetes|kubernetes]].io/not-ready`（NoExecute）
   - `node.kubernetes.io/unreachable`（NoExecute）
   - `node.kubernetes.io/disk-pressure`（NoSchedule）
   - `node.kubernetes.io/memory-pressure`（NoSchedule）
@@ -61,9 +62,9 @@ DaemonSet 确保所有（或部分）节点上都运行一个 Pod 副本。当�
 - **高优先级**：建议为关键 DaemonSet 设置较高的 PriorityClass，以确保在资源竞争时能成功调度。
 
 ## 使用场景
-- 集群网络插件（如 Calico、Flannel、Cilium）。
-- 节点监控代理（如 Prometheus Node Exporter）。
-- 日志收集代理（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]、Fluent Bit）。
+- 集群网络插件（如 Calico、Flannel、[[Cilium|Cilium]]）。
+- 节点监控代理（如 [[Prometheus|Prometheus]] Node Exporter）。
+- 日志收集代理（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]、Fluent Bit）。
 - 存储驱动或设备插件（如 CSI 节点插件）。
 
 ## 最佳实践/注意事项

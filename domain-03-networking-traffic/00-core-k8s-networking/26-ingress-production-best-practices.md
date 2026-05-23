@@ -61,11 +61,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 134 - Ingress 生产最佳实践
+# 134 - [[Ingress|Ingress]] 生产最佳实践
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -86,14 +87,14 @@ cross_refs:
 | **限流配置** | 安全 | ☐ | 配置请求限流 |
 | **安全响应头** | 安全 | ☐ | 配置所有安全响应头 |
 | **日志配置** | 运维 | ☐ | JSON 格式，请求 ID |
-| **监控告警** | 运维 | ☐ | Prometheus 指标 + Grafana |
-| **网络策略** | 安全 | ☐ | NetworkPolicy 隔离 |
+| **监控告警** | 运维 | ☐ | [[Prometheus|Prometheus]] 指标 + Grafana |
+| **网络策略** | 安全 | ☐ | [[NetworkPolicy|NetworkPolicy]] 隔离 |
 
 ### 1.2 运行时检查清单
 
 | 检查项 | 检查命令 | 预期结果 |
 |-------|---------|---------|
-| 控制器运行状态 | `kubectl get pods -n ingress-nginx` | 所有 Pod Running |
+| 控制器运行状态 | `kubectl get [[Pods|pods]] -n ingress-nginx` | 所有 Pod Running |
 | 配置重载状态 | 检查 `config_last_reload_successful` 指标 | 值为 1 |
 | 证书有效期 | 检查 `ssl_expire_time_seconds` 指标 | > 30 天 |
 | 错误率 | 检查 5xx 错误率 | < 0.1% |
@@ -1105,22 +1106,22 @@ kubectl apply -f ingress-backup.yaml
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/24-ingress-security-hardening.md|24-ingress-security-hardening]]
-- [[domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md|25-ingress-monitoring-troubleshooting]]
-- [[domain-03-networking-traffic/27-cni-troubleshooting-optimization.md|27-cni-troubleshooting-optimization]]
-- [[domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md|28-coredns-troubleshooting-optimization]]
+- 24-ingress-security-hardening
+- 25-ingress-monitoring-troubleshooting
+- 27-cni-troubleshooting-optimization
+- 28-coredns-troubleshooting-optimization

@@ -35,6 +35,7 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,15 +43,15 @@ title: Day 24: 云原生安全 + 合规
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - Kubernetes 安全加固
-  - Kyverno 策略引擎
+  - [[Kubernetes|Kubernetes]]es 安全加固|Kubernetes 安全加固]]
+  - [[Kyverno|Kyverno]] 策略引擎
   - 零信任安全架构
   - Secret 管理工具
 trigger_keywords:
   - 云原生安全
   - Kyverno
   - 零信任
-  - Sealed Secrets
+  - Sealed [[Secrets|Secrets]]
   - Vault
   - 安全审计
   - 合规

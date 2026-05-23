@@ -33,13 +33,14 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 电信云与 5G 多接入边缘计算（MEC）
 
 ## 概述
 
-**电信云（Telco Cloud）** 和 **5G 多接入边缘计算（MEC, Multi-access Edge Computing）** 是通信行业数字化转型的核心技术。Kubernetes 正在成为电信网络功能（CNF, Cloud-Native Network Functions）的主流承载平台，替代传统的专用硬件（如 EPC、IMS、RAN）。2026 年，全球主要运营商（如 Verizon、中国移动、德国电信）已将 5G 核心网和边缘节点全面云原生化，Kubernetes 在其中扮演着编排容器化网络功能、管理边缘计算资源的关键角色。
+**电信云（Telco Cloud）** 和 **5G 多接入边缘计算（MEC, Multi-access Edge Computing）** 是通信行业数字化转型的核心技术。[[Kubernetes|Kubernetes]] 正在成为电信网络功能（CNF, Cloud-Native Network Functions）的主流承载平台，替代传统的专用硬件（如 EPC、IMS、RAN）。2026 年，全球主要运营商（如 Verizon、中国移动、德国电信）已将 5G 核心网和边缘节点全面云原生化，Kubernetes 在其中扮演着编排容器化网络功能、管理边缘计算资源的关键角色。
 
 ## 核心概念/原理
 
@@ -108,7 +109,7 @@ spec:
 - **mMTC（海量机器类通信）**：面向 IoT 传感器，支持每平方公里百万级设备连接
 
 Kubernetes 上的网络切片通常通过：
-- **Namespace + NetworkPolicy** 实现逻辑隔离
+- **Namespace + [[NetworkPolicy|NetworkPolicy]]** 实现逻辑隔离
 - **SR-IOV + VLAN/VXLAN** 实现物理网络隔离
 - **QoS 策略** 确保不同切片的带宽和延迟 SLA
 
@@ -140,12 +141,12 @@ MEC 边缘节点 (K8s 集群)
 
 - **实时内核是必须的**：电信级 CNF 必须使用 RT-PREEMPT 补丁的 Linux 内核，以消除调度抖动
 - **HugePages 配置**：为 DPDK 和数据库分配大页内存（1GB HugePages），减少 TLB Miss
-- **CPU 隔离**：使用 `cpuset` 将 CNF 的 vCPU 与系统进程、Kubelet 完全隔离
+- **CPU 隔离**：使用 `cpuset` 将 CNF 的 vCPU 与系统进程、[[kubelet|Kubelet]] 完全隔离
 - **NUMA 对齐**：调度器必须将 Pod 的 CPU 和内存分配到同一 NUMA 节点
 - **PTP 同步**：在边缘节点部署 PTP Grandmaster 和 Slave，确保基站和 UPF 之间的时间同步精度 < 1μs
 - **硬件加速优先**：对于 UPF、vRAN 等数据面网元，优先使用 SmartNIC 和 FPGA 加速
 - **严格的变更控制**：电信网络不允许频繁变更，CI/CD Pipeline 必须包含详尽的回归测试和金丝雀发布
-- **多层冗余**：控制平面采用多主 etcd 和跨区域备份；数据平面采用主备 UPF 和热切换机制
+- **多层冗余**：控制平面采用多主 [[etcd|etcd]] 和跨区域备份；数据平面采用主备 UPF 和热切换机制
 - **监控电信级 KPI**：不仅监控 Pod CPU/内存，还要监控吞吐量（Gbps）、包转发率（Mpps）、连接建立成功率
 
 ## 生产 YAML 示例

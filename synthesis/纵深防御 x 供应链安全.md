@@ -29,19 +29,29 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - policy-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards]]"
+    type: uses
+  - target: "[[entities/networkpolicy]]"
+    type: related_to
+  - target: "[[entities/tetragon]]"
+    type: related_to
+  - target: "[[entities/trivy]]"
+    type: related_to
 ---
 
 # 纵深防御 x 供应链安全
 
 ## 连接点
 
-在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、NetworkPolicy、Pod 安全标准），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
+在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy|NetworkPolicy]]、[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|Pod 安全标准]]），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
 
 两者在以下场景中交叉共现：
 
 - **准入控制**（纵深防御第 1 层）在允许 Pod 启动前验证镜像签名和 SBOM（供应链）
 - **Kyverno** 在同一个准入 webhook 中同时强制执行 Pod 安全标准（纵深防御第 3 层）和供应链策略（阻止未签名镜像、要求 SBOM）
-- **镜像扫描**（Trivy）在构建时（供应链）和运行时（检测已部署镜像中的新 CVE）双运行，桥接两个域
+- **镜像扫描**（[[entities/trivy|Trivy]]）在构建时（供应链）和运行时（检测已部署镜像中的新 CVE）双运行，桥接两个域
 - **Secret 管理**（Vault）同时保护构建时凭据（供应链）和运行时凭据（纵深防御第 4 层）
 
 ## 交叉洞察
@@ -58,7 +68,7 @@ prerequisites:
 | 供应链控制 | 运行时防御 | 两者都失效时的后果 |
 |-----------|-----------|------------------|
 | 镜像签名（Cosign） | Pod 安全标准（受限级） | 未签名的恶意镜像以完整权限运行 |
-| SBOM 生成（Syft） | 运行时监控（Falco/Tetragon） | 未知的易损依赖执行且未被检测 |
+| SBOM 生成（Syft） | 运行时监控（[[entities/tetragon|Tetragon]]） | 未知的易损依赖执行且未被检测 |
 | SLSA 硬化构建 | NetworkPolicy 隔离 | 被攻破的构建产出后门，可自由外泄数据 |
 | 准入验证（Kyverno） | RBAC 最小权限 | 未签名镜像以 cluster-admin 身份运行 |
 | 依赖扫描（Trivy） | 审计日志 + 告警 | 已知 CVE 被利用，且无法取证 |
@@ -108,4 +118,4 @@ prerequisites:
 - [[entities/trivy.md|trivy]] — Trivy
 - [[entities/vault.md|vault]] — HashiCorp Vault
 
-- [[Deployment × Secret 管理]]
+- [[Deployment × Secret 管理]]- [[domain-17-system-foundation/topic-dictionary/security/runtime-security|运行时安全]]

@@ -1,5 +1,5 @@
 ---
-title: 'Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
+title: Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices) [98-merged-indexes]
 description: '# Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)'
 category: production-operations
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)

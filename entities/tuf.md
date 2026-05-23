@@ -23,6 +23,7 @@ trigger_keywords:
 - TUF
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # TUF
@@ -62,6 +63,6 @@ title: The Update Framework (TUF)
 - [[slimfaas]] — SlimFaas
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/tuf/tuf.md|tuf]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
+- tuf
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

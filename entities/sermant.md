@@ -1,5 +1,5 @@
 ---
-title: Sermant
+title: Sermant (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -32,11 +32,12 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Sermant
 
-> **CNCF 状态**: Sandbox | **类别**: Service Mesh | **主要语言**: Java
+> **CNCF 状态**: Sandbox | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Java
 
 ## 概述
 
@@ -67,7 +68,7 @@ Sermant 是华为开源的基于 Java Agent 的无代理服务网格方案，通
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[istio]]
 - [[deployment]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 
 ## Related
 
@@ -77,6 +78,6 @@ Sermant 是华为开源的基于 Java Agent 的无代理服务网格方案，通
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/sermant/sermant.md|sermant]]
+- sermant
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

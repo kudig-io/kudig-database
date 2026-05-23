@@ -1,5 +1,5 @@
 ---
-title: 模型 × Harness 兼容性矩阵（2025-2026）
+title: 模型 × Harness 兼容性矩阵（2025-2026） [02-ai-agents]
 description: 'description: ''**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,'
 category: general
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 模型 × Harness 兼容性矩阵（2025-2026）
@@ -453,10 +454,10 @@ agent = ReActAgent(
 |------|---------|
 | [02 - LLM 基座模型选型与评估](./02-llm-foundation-models.md) | 模型全维度性能对比、成本分析、部署指南 |
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | Harness 六层架构定义、对模型的能力要求 |
-| [32 - Harness 工具工程](./[[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]].md) | 工具层 Schema 标准、Function Calling 最佳实践 |
-| [38 - Harness 性能与成本优化](./[[domain-14-ai-ml-infra/38-agent-harness-performance-cost.md|38-agent-harness-performance-cost]].md) | 多模型路由、成本控制策略 |
+| [32 - Harness 工具工程](./32-agent-harness-tool-engineering.md) | 工具层 Schema 标准、Function Calling 最佳实践 |
+| [38 - Harness 性能与成本优化](./38-agent-harness-performance-cost.md) | 多模型路由、成本控制策略 |
 | [41 - ReAct Agent 与 Harness 识别指南](./41-react-harness-identification-guide.md) | Harness 判断标准和成熟度模型 |
-| [17 - AgentScope 核心概念](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | AgentScope 中模型与 Formatter 的匹配 |
+| [17 - AgentScope 核心概念](./17-agentscope-core-concepts.md) | AgentScope 中模型与 Formatter 的匹配 |
 
 ---
 
@@ -481,7 +482,7 @@ agent = ReActAgent(
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -496,7 +497,7 @@ agent = ReActAgent(
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
-- [[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide
+- 43-openclaw-framework-integration
+- 44-openclaw-soul-mechanism

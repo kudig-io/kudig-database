@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - etcd-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -41,7 +42,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.30.13](#changelog-since-v13013)
+  - Changelog since v1.30.13](#changelog-since-v13013)
   - [Changes by Kind](#changes-by-kind)
     - [Feature](#feature)
     - [Bug or Regression](#bug-or-regression)
@@ -101,7 +102,7 @@ prerequisites:
     - [Container Images](#container-images-4)
   - [Changelog since v1.30.9](#changelog-since-v1309)
   - [Important Security Information](#important-security-information)
-    - [CVE-2025-0426: Node Denial of Service via Kubelet Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
+    - [CVE-2025-0426: Node Denial of [[Service|Service]] via [[kubelet|Kubelet]] Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
   - [Changes by Kind](#changes-by-kind-4)
     - [Feature](#feature-2)
     - [Bug or Regression](#bug-or-regression-3)

@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 碳资产管理与 ESG 架构设计
@@ -45,7 +46,7 @@ audience:
 - 区块链开发工程师
 estimated_read_time: 5min
 intent_queries:
-- 企业碳中和 Kubernetes 碳核算引擎
+- 企业碳中和 [[Kubernetes|Kubernetes]] 碳核算引擎
 - 区块链碳排放存证溯源方案
 - ESG报告自动化生成系统
 - 碳交易与碳资产管理平台
@@ -293,8 +294,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -308,7 +309,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/34-sportstech.md|34-sportstech]]
-- [[domain-20-application-patterns/35-metaverse-digital-twin.md|35-metaverse-digital-twin]]
-- [[domain-20-application-patterns/37-pet-economy.md|37-pet-economy]]
-- [[domain-20-application-patterns/38-supply-chain-finance.md|38-supply-chain-finance]]
+- 34-sportstech
+- 35-metaverse-digital-twin
+- 37-pet-economy
+- 38-supply-chain-finance

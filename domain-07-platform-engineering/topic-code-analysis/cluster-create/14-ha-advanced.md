@@ -1,5 +1,5 @@
 ---
-title: '高可用进阶: 负载均衡与证书分发'
+title: 高可用进阶: 负载均衡与证书分发 [cluster-create]
 description: 'description: // 1. CA 公钥/私钥 (加密存储)'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: '高可用进阶: 负载均衡与证书分发'

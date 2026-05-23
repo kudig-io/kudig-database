@@ -42,6 +42,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---

@@ -48,6 +48,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 多云网络互联深度实践
@@ -56,9 +57,9 @@ authors:
 
 多云网络互联是构建多云混合云架构的基础。跨云网络的质量直接影响分布式应用的延迟、吞吐量和可靠性。不同云平台的网络模型（VPC、安全组、负载均衡）存在显著差异，需要在 L2/L3 网络层和应用层分别设计互联方案。网络设计的好坏直接决定了应用的响应时间、数据同步延迟和故障恢复速度，是多云架构成功的关键因素。
 
-本文档深入探讨多云网络互联的核心技术：Submariner 提供 L3 层跨集群 Pod/Service IP 直通路由，Skupper 提供应用层安全网络互联，Cilium Cluster Mesh 提供基于 eBPF 的高性能跨集群通信，AWS Transit Gateway / Azure ExpressRoute / Google Cloud Interconnect 提供云间专线连接，混合 DNS 实现跨云服务发现。每个方案都有其适用场景，企业需要根据延迟要求、安全策略和成本预算选择合适的组合。
+本文档深入探讨多云网络互联的核心技术：[[Submariner|Submariner]] 提供 L3 层跨集群 Pod/Service IP 直通路由，Skupper 提供应用层安全网络互联，[[Cilium|Cilium]] Cluster Mesh 提供基于 eBPF 的高性能跨集群通信，AWS Transit Gateway / Azure ExpressRoute / Google Cloud Interconnect 提供云间专线连接，混合 DNS 实现跨云服务发现。每个方案都有其适用场景，企业需要根据延迟要求、安全策略和成本预算选择合适的组合。
 
-在实际生产环境中，通常需要组合多种网络方案：专线用于云间骨干连接、Submariner 或 Cilium 用于 K8s 集群内 Pod 直通、Skupper 用于跨云微服务应用层互联、VPN 作为专线的备份链路。混合 DNS 是多云网络的关键支撑组件，通过 CoreDNS 转发和 External DNS 自动注册，实现跨云服务的自动发现和解析。
+在实际生产环境中，通常需要组合多种网络方案：专线用于云间骨干连接、Submariner 或 Cilium 用于 K8s 集群内 Pod 直通、Skupper 用于跨云微服务应用层互联、VPN 作为专线的备份链路。混合 DNS 是多云网络的关键支撑组件，通过 [[CoreDNS|CoreDNS]] 转发和 External DNS 自动注册，实现跨云服务的自动发现和解析。
 
 #<!-- chunk: 多云网络互联方案对比 -->## 多云网络互联方案对比
 
@@ -851,22 +852,22 @@ echo "=== 网络诊断完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|07-huawei-cce-enterprise]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|08-multicloud-federation-karmada]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|10-multicloud-disaster-recovery]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|01-aws-eks-enterprise-multicloud]]
+- 07-huawei-cce-enterprise
+- 08-multicloud-federation-karmada
+- 10-multicloud-disaster-recovery
+- 01-aws-eks-enterprise-multicloud

@@ -52,11 +52,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
 # 32 - Lease / Event / Node YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 **本文档全面覆盖 Lease(租约)、Event(事件)、Node(节点)的 YAML 配置**,包括完整字段说明、Lease 在 Leader Election 中的应用、Event 事件类型、Node 节点管理、生产实践案例等。
 
@@ -78,7 +79,7 @@ cross_refs:
 
 Lease(租约)是 Kubernetes 中的**分布式锁机制**,主要用于:
 
-- **节点心跳**: Kubelet 通过更新 Lease 向控制平面报告节点存活状态(取代 Node Status 更新,减少 etcd 压力)
+- **节点心跳**: [[kubelet|Kubelet]] 通过更新 Lease 向控制平面报告节点存活状态(取代 Node Status 更新,减少 [[etcd|etcd]] 压力)
 - **Leader Election**: 控制器通过竞争 Lease 实现 Leader 选举(确保同一时间只有一个实例运行)
 - **API Server Identity**: API Server 实例通过 Lease 标识身份(v1.26+)
 
@@ -1271,25 +1272,25 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/30-apiservice-aggregation.md|30-apiservice-aggregation]]
-- [[domain-18-manifests-patterns/31-api-priority-fairness.md|31-api-priority-fairness]]
-- [[domain-18-manifests-patterns/33-kubeadm-cluster-bootstrap.md|33-kubeadm-cluster-bootstrap]]
-- [[domain-18-manifests-patterns/34-component-configuration.md|34-component-configuration]]
+- 30-apiservice-aggregation
+- 31-api-priority-fairness
+- 33-kubeadm-cluster-bootstrap
+- 34-component-configuration
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Service 全栈进阶培训 (从入门到专家)
+title: Kubernetes Service 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
@@ -42,9 +42,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes Service 全栈进阶培训 (从入门到专家)
+# [[Kubernetes|Kubernetes]] [[Service|Service]] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 理解服务发现本质、掌握内核转发逻辑、解决大规模网络瓶颈
@@ -78,7 +79,7 @@ authors:
 
 1. 解释 Service 解决的核心问题和四种类型的适用场景
 2. 描述 kube-proxy iptables 和 IPVS 模式的转发流程和性能差异
-3. 配置 Headless Service + StatefulSet 实现精确的 Pod 寻址
+3. 配置 Headless Service + [[StatefulSet|StatefulSet]] 实现精确的 Pod 寻址
 4. 使用 EndpointSlice 解决大规模 Service 的性能问题
 5. 排查 Service 访问不通的常见故障
 6. 选择合适的 ExternalTrafficPolicy 策略
@@ -122,8 +123,8 @@ authors:
 |------|------------------|---------|
 | Pod IP 动态变化 | 提供固定的 ClusterIP（虚拟 IP） | kube-proxy 维护 DNAT 规则 |
 | 多个 Pod 副本如何负载均衡 | 自动分发流量到后端 Pod | iptables 随机/IPVS 调度算法 |
-| 客户端如何找到 Pod | 通过 DNS 名称访问（CoreDNS） | CoreDNS 解析 Service 名称 |
-| 外部如何访问集群内服务 | 通过 NodePort / LoadBalancer / Ingress | 节点端口映射/云商 LB |
+| 客户端如何找到 Pod | 通过 DNS 名称访问（[[CoreDNS|CoreDNS]]） | CoreDNS 解析 Service 名称 |
+| 外部如何访问集群内服务 | 通过 NodePort / LoadBalancer / [[Ingress|Ingress]] | 节点端口映射/云商 LB |
 
 **工作原理：**
 
@@ -922,22 +923,22 @@ Service
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|kubernetes-scheduling-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|kubernetes-security-rbac-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|kubernetes-storage-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|kubernetes-terway-presentation]]
+- kubernetes-scheduling-presentation
+- kubernetes-security-rbac-presentation
+- kubernetes-storage-presentation
+- kubernetes-terway-presentation

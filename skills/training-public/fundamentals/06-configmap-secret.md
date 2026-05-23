@@ -1,5 +1,5 @@
 ---
-title: 第六课：ConfigMap 和 Secret - 配置管理
+title: 第六课：ConfigMap 和 Secret - 配置管理 [fundamentals]
 description: 'title: 第六课：ConfigMap 和 Secret - 配置管理'
 category: learning
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -405,12 +406,12 @@ kubectl describe secret <name>
 
 **关联文档**:
 - [../06-configuration/06-namespace-resource-quota.md](../06-configuration/06-namespace-resource-quota.md) — 命名空间与资源配额
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理故障 [[SKILL|Skill]]
 - [../../domain-05-security-compliance/](../../domain-05-security-compliance/) — K8s 安全文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/04-service-basics.md|04-service-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/05-ingress-basics.md|05-ingress-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/07-namespace-resource-quota.md|07-namespace-resource-quota]]
-- [[domain-11-production-operations/topic-learn/fundamentals/08-pv-pvc-basics.md|08-pv-pvc-basics]]
+- 04-service-basics
+- 05-ingress-basics
+- 07-namespace-resource-quota
+- 08-pv-pvc-basics

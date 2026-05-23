@@ -59,6 +59,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 77 - Service实现机制
@@ -72,7 +73,7 @@ cross_refs:
 | NodePort | 节点端口 | kube-proxy | ✅ | 开发测试 |
 | LoadBalancer | 云LB | 云厂商 | ✅ | 生产入口 |
 | ExternalName | DNS别名 | ❌ | ✅ | 外部服务 |
-| Headless | 无ClusterIP | ❌ | ❌ | StatefulSet |
+| Headless | 无ClusterIP | ❌ | ❌ | [[StatefulSet|StatefulSet]] |
 
 <!-- chunk: kube-proxy模式对比 -->
 ## kube-proxy模式对比
@@ -142,7 +143,7 @@ spec:
 
 | 注解 | 值 | 说明 |
 |-----|---|------|
-| `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type` | internet/intranet | 公网/内网 |
+| `service.beta.[[Kubernetes|kubernetes]].io/alibaba-cloud-loadbalancer-address-type` | internet/intranet | 公网/内网 |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec` | slb.s1.small等 | SLB规格 |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-id` | lb-xxx | 复用已有SLB |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-health-check-flag` | on/off | 健康检查 |
@@ -255,25 +256,25 @@ kubectl run test --image=busybox --rm -it -- wget -qO- <service-ip>
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/05-terway-advanced-guide.md|05-terway-advanced-guide]]
-- [[domain-03-networking-traffic/06-service-concepts-types.md|06-service-concepts-types]]
-- [[domain-03-networking-traffic/08-service-topology-aware.md|08-service-topology-aware]]
-- [[domain-03-networking-traffic/09-kube-proxy-modes-performance.md|09-kube-proxy-modes-performance]]
+- 05-terway-advanced-guide
+- 06-service-concepts-types
+- 08-service-topology-aware
+- 09-kube-proxy-modes-performance
 
 ## Related
 

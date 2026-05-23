@@ -23,6 +23,7 @@ trigger_keywords:
 - KUDO
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDO
@@ -64,12 +65,12 @@ KUDO 是一个构建 Kubernetes Operator 的声明式工具包，允许开发者
 ## Related
 
 - [[openfeature]] — OpenFeature
-- [[podman-container-tools]] — Podman Desktop
+- tools]] — [[Podman Desktop|Podman Desktop]]
 - [[k3s]] — k3s 轻量级 Kubernetes
 - [[virtual-kubelet]] — Virtual Kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kudo/kudo.md|kudo]]
+- kudo
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

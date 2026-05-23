@@ -42,6 +42,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 02 - 块存储、文件存储、对象存储
@@ -605,7 +606,7 @@ chmod +x s3-benchmark_linux_amd64
 
 | 组件 | 功能 |
 |:---|:---|
-| **RBD** | 块设备 (Kubernetes PV) |
+| **RBD** | 块设备 ([[Kubernetes|Kubernetes]] PV) |
 | **CephFS** | POSIX 文件系统 |
 | **RGW** | S3 兼容对象存储 |
 
@@ -660,16 +661,16 @@ chmod +x s3-benchmark_linux_amd64
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
 - [03-raid-storage-redundancy](./03-raid-storage-redundancy.md) - RAID 配置
-- [K8s 存储架构](../domain-04-storage-data/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件
+- K8s 存储架构](../domain-04-storage-data/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件
 
 ## See Also
 
-- [[domain-04-storage-data/06-storage-performance-iops.md|06-storage-performance-iops]]
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01-storage-technologies-overview]]
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03-raid-storage-redundancy]]
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04-distributed-storage-systems]]
+- 06-storage-performance-iops
+- 01-storage-technologies-overview
+- 03-raid-storage-redundancy
+- 04-distributed-storage-systems
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

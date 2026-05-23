@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 存储问题排查
@@ -105,6 +106,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[skills/csi-fta.md|csi-fta]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|storage]]
+- storage

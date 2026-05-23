@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - iac-basics
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - ROS 资源编排 (IaC)
@@ -41,7 +42,7 @@ tags:
 - gke
 - aks
 - ack
-- containerd
+- [[containerd|containerd]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,7 +54,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - ROS 资源编排 (IaC) 是什么
 - 如何 ACK 关联产品 - ROS 资源编排 (IaC)
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品
@@ -192,11 +193,11 @@ graph LR
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06-cluster-configuration-parameters]]
+- 06-cluster-configuration-parameters
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also

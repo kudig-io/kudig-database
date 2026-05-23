@@ -38,6 +38,7 @@ prerequisites:
 skill_id: SKILL-DIAGNOSTIC_WORKFLOW-001
 skill_name: 诊断工作流 / Diagnostic Workflow
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 诊断工作流 / Diagnostic Workflow
@@ -56,9 +57,9 @@ version: 1.0.0
   - [D1.4 检查节点 Taints](#step-d14-检查节点-taints)
   - [D1.5 检查节点 Lease 对象](#step-d15-检查节点-lease-对象)
 - [Phase 2: 深度检查（只读，零风险，需 SSH）](#phase-2-深度检查只读零风险需-ssh)
-  - [D2.1 检查 kubelet 服务状态](#step-d21-检查-kubelet-服务状态)
+  - [D2.1 检查 [[kubelet|kubelet]] 服务状态](#step-d21-检查-kubelet-服务状态)
   - [D2.2 检查 kubelet 日志](#step-d22-检查-kubelet-日志)
-  - [D2.3 检查容器运行时（containerd）服务状态](#step-d23-检查容器运行时containerd服务状态)
+  - [D2.3 检查容器运行时（[[containerd|containerd]]）服务状态](#step-d23-检查容器运行时containerd服务状态)
   - [D2.4 检查容器运行时日志](#step-d24-检查容器运行时日志)
   - [D2.5 检查系统资源压力](#step-d25-检查系统资源压力)
   - [D2.6 检查 PLEG 健康状态](#step-d26-检查-plegpod-lifecycle-event-generator健康状态)
@@ -117,7 +118,7 @@ version: 1.0.0
   - `MemoryPressure` 为 `True` → 记录，可能根因为 RC-004
   - `DiskPressure` 为 `True` → 记录，可能根因为 RC-003
   - `PIDPressure` 为 `True` → 记录，可能根因为 RC-005
-  - Message 字段包含 `container runtime is down` → RC-002（容器运行时故障）
+  - Message 字段包含 `[[Container Runtime|container runtime]] is down` → RC-002（容器运行时问题）
   - Message 字段包含 `PLEG is not healthy` → RC-008（PLEG 不健康）
   - Message 字段包含 `certificate` 或 `x509` → RC-007（证书问题），关联 SKILL-SEC-001
 - **版本差异**:
@@ -158,7 +159,7 @@ version: 1.0.0
 - **超时**: 5s
 - **预期输出模式**: Taint 列表
 - **判断规则**:
-  - 存在 `node.kubernetes.io/not-ready:NoSchedule` → Kubernetes 自动添加的 taint，确认 NotReady 状态
+  - 存在 `node.[[Kubernetes|kubernetes]].io/not-ready:NoSchedule` → Kubernetes 自动添加的 taint，确认 NotReady 状态
   - 存在 `node.kubernetes.io/not-ready:NoExecute` → Pod 驱逐已触发
   - 存在 `node.kubernetes.io/unreachable:NoExecute` → 节点不可达
   - 存在 `node.kubernetes.io/unschedulable:NoSchedule` → 节点已被 cordon（RC-012）
@@ -186,8 +187,8 @@ version: 1.0.0
 
 ## Phase 2: 深度检查（只读，零风险，需 SSH）
 
-> **目标**: SSH 登录故障节点，检查系统级组件状态。所有命令均为只读操作。
-> **前提**: 需要对故障节点的 SSH 访问权限
+> **目标**: SSH 登录问题节点，检查系统级组件状态。所有命令均为只读操作。
+> **前提**: 需要对问题节点的 SSH 访问权限
 > **预计耗时**: 5-10 分钟
 
 ### Step D2.1: 检查 kubelet 服务状态
@@ -220,7 +221,7 @@ version: 1.0.0
   - 日志包含 `connection refused` 或 `dial tcp <apiserver-ip>:6443: connect: connection refused` → 网络不通或 apiserver 不可达（RC-006）
   - 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority` → 证书问题（RC-007），关联 SKILL-SEC-001
   - 日志包含 `PLEG is not healthy` → PLEG 不健康（RC-008），继续 D2.6
-  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时故障（RC-002）
+  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时问题（RC-002）
   - 日志包含 `failed to garbage collect` + 磁盘相关错误 → 磁盘空间不足（RC-003）
   - 日志包含 `OOM` 或 `oom_kill` → 内存压力（RC-004）
   - 日志包含 `too many open files` 或 `no space left on device` → 资源耗尽（RC-003 或 RC-005）
@@ -228,7 +229,7 @@ version: 1.0.0
   - 日志包含 `failed to renew lease` → Lease 续租失败，检查网络和 apiserver
   - 日志包含 `use of closed network connection` → 网络连接异常（RC-006）
 - **版本差异**:
-  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是故障
+  - **[v1.28+]**: GracefulNodeShutdown 默认启用。如果日志中出现 `shutting down gracefully`，可能节点正在优雅关机，不一定是问题
   - **[v1.30+]**: swap 相关日志 `swap is enabled` 在启用 NodeSwap feature gate 时属于正常信息
 
 ---
@@ -261,7 +262,7 @@ version: 1.0.0
 - **判断规则**:
   - 日志包含 `failed to create shim` → shim 进程创建失败，可能磁盘满或 PID 耗尽
   - 日志包含 `context deadline exceeded` → containerd 内部操作超时，可能是磁盘 I/O 过慢
-  - 日志包含 `plugin` + `error` → 特定 containerd 插件故障
+  - 日志包含 `plugin` + `error` → 特定 containerd 插件问题
   - 日志包含 `no space left on device` → 磁盘空间不足（RC-003）
   - 无异常日志 → containerd 正常，问题可能在 kubelet 或网络层
 - **版本差异**: 无
@@ -378,8 +379,8 @@ version: 1.0.0
 - **预期输出模式**: 内核日志条目
 - **判断规则**:
   - 出现 `Out of memory: Killed process` → OOM Killer 触发（RC-004），记录被杀的进程（如果是 kubelet/containerd 被杀，直接定位根因）
-  - 出现 `Hardware Error` 或 `MCE` (Machine Check Exception) → 硬件故障（RC-009）
-  - 出现 `I/O error` 或 `device not responding` → 磁盘硬件故障（RC-009）
+  - 出现 `Hardware Error` 或 `MCE` (Machine Check Exception) → 硬件问题（RC-009）
+  - 出现 `I/O error` 或 `device not responding` → 磁盘硬件问题（RC-009）
   - 出现 `NMI watchdog: BUG: soft lockup` → CPU 软锁死（RC-009）
   - 出现 `nf_conntrack: table full` → conntrack 表满，可能影响网络（RC-006 变种）
   - 出现 `EXT4-fs error` 或 `XFS error` → 文件系统错误（RC-009）

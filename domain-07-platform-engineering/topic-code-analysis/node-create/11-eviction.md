@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 节点资源压力与 Eviction 源码分析

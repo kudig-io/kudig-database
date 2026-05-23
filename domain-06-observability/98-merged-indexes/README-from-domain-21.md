@@ -31,6 +31,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 ---

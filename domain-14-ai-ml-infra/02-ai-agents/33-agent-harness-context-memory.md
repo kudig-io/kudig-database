@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 上下文与记忆工程
+title: Agent Harness 上下文与记忆工程 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering,'
 category: general
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 上下文与记忆工程
@@ -1033,7 +1034,7 @@ class DiagnosisContextTemplate:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 六层架构中的 Context 层和 Persistence 层定义 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 六层架构中的 Context 层和 Persistence 层定义 |
 | [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) | 上下文在 Loop 中的使用流程 |
 | [04 - RAG 知识检索](./04-rag-knowledge-retrieval.md) | RAG 基础理论和实现 |
 | [07 - 记忆管理](./07-memory-context-management.md) | Agent 记忆系统基础概念 |
@@ -1057,9 +1058,9 @@ class DiagnosisContextTemplate:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
@@ -1072,7 +1073,7 @@ class DiagnosisContextTemplate:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]]
-- [[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]]
-- [[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]]
+- 31-agent-harness-loop-execution
+- 32-agent-harness-tool-engineering
+- 34-agent-harness-verification-quality
+- 35-agent-harness-security-constraints

@@ -57,11 +57,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
 # HPA/VPA 自动伸缩配置
 
-> Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
+> [[Kubernetes|Kubernetes]] 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 <!-- chunk: HPA 版本演进 -->
 ## HPA 版本演进
@@ -78,8 +79,8 @@ cross_refs:
 | 指标类型 | 说明 | 使用场景 |
 |----------|------|----------|
 | Resource | CPU/Memory 使用率 | 基础伸缩 |
-| Pods | Pod 自定义指标 | 应用级指标 |
-| Object | K8s 对象指标 | Ingress QPS 等 |
+| [[Pods|Pods]] | Pod 自定义指标 | 应用级指标 |
+| Object | K8s 对象指标 | [[Ingress|Ingress]] QPS 等 |
 | External | 外部系统指标 | 消息队列长度 |
 | ContainerResource | 容器级资源 | 多容器 Pod |
 
@@ -210,7 +211,7 @@ spec:
       mode: "Off"  # 不调整 sidecar
 ```
 
-<!-- chunk: KEDA 事件驱动伸缩 -->
+<!-- chunk: [[KEDA|KEDA]] 事件驱动伸缩 -->
 ## KEDA 事件驱动伸缩
 
 ```yaml
@@ -408,25 +409,25 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- Domain-4 工作负载 — 开源项目索引
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## See Also
 
-- [[domain-02-workloads-applications/19-scheduler-configuration.md|19-scheduler-configuration]]
-- [[domain-02-workloads-applications/20-kubelet-configuration.md|20-kubelet-configuration]]
-- [[domain-02-workloads-applications/22-cluster-capacity-planning.md|22-cluster-capacity-planning]]
-- [[domain-02-workloads-applications/23-resource-management.md|23-resource-management]]
+- 19-scheduler-configuration
+- 20-kubelet-configuration
+- 22-cluster-capacity-planning
+- 23-resource-management
 
 ## Related
 

@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -44,7 +45,7 @@ intent_queries:
 - pulumi-enterprise-iac的最佳实践
 
 tier: peripheral---
-title: Pulumi Enterprise Infrastructure as Code Platform
+title: Pulumi Enterprise [[Infrastructure as Code|Infrastructure as Code]] Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: infrastructure-as-code
 tags:
@@ -52,7 +53,7 @@ tags:
 - iac
 - terraform
 - pulumi
-- ingress
+- [[Ingress|ingress]]
 - gateway
 - operator
 - rag
@@ -68,7 +69,7 @@ estimated_read_time: 5min
 intent_queries:
 - Pulumi Enterprise Infrastructure as Code Platform 是什么
 - 如何 Pulumi Enterprise Infrastructure as Code Platform
-- Kubernetes 24 infrastructure as code 最佳实践
+- [[Kubernetes|Kubernetes]] 24 infrastructure as code 最佳实践
 trigger_keywords:
 - Pulumi
 - Enterprise
@@ -1025,18 +1026,18 @@ pulumi.export("debug_report", debug_report)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
+- domain-24-infrastructure-as-code MOC
 - [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|Terraform企业级基础设施即代码实践]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|Ansible企业级自动化运维深度实践]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Infrastructure Orchestration 深度实践]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|Crossplane 平台工程实践指南]]
+- Domain-24 基础设施即代码 — 开源项目索引
+- Terraform企业级基础设施即代码实践
+- Ansible企业级自动化运维深度实践
+- Azure Resource Manager (ARM) Enterprise 深度实践
+- Crossplane Enterprise Infrastructure Orchestration 深度实践
+- Crossplane 平台工程实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|01-terraform-enterprise-iac]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|02-ansible-enterprise-automation]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|04-azure-resource-manager-enterprise]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|05-crossplane-enterprise-orchestration]]
+- 01-terraform-enterprise-iac
+- 02-ansible-enterprise-automation
+- 04-azure-resource-manager-enterprise
+- 05-crossplane-enterprise-orchestration

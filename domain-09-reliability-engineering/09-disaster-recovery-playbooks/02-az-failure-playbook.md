@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # 可用区故障恢复手册

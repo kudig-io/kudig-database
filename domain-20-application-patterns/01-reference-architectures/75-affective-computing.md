@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 情感计算 AI 架构设计
@@ -50,7 +51,7 @@ audience:
 - 人机交互设计师
 estimated_read_time: 5min
 intent_queries:
-- 情感计算 AI Kubernetes GPU部署
+- 情感计算 AI [[Kubernetes|Kubernetes]] GPU部署
 - 多模态情绪识别 Kubernetes
 - 智能客服 情绪分析 K8s
 - 隐私保护 边缘计算 AI
@@ -534,7 +535,7 @@ spec:
 
 #<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
 
-- [ ] 多模态识别准确率 > 85%（F1-Score）
+- [ ] 多模态识别准确率 > 85%（F1-[[Score|Score]]）
 - [ ] 端到端推理延迟 P99 < 200ms
 - [ ] 情绪数据端到端加密
 - [ ] 伦理审查委员会审批通过
@@ -549,7 +550,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -564,11 +565,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/73-smart-firefighting.md|73-smart-firefighting]]
-- [[domain-20-application-patterns/74-immersive-xr.md|74-immersive-xr]]
-- [[domain-20-application-patterns/76-synthetic-biology.md|76-synthetic-biology]]
-- [[domain-20-application-patterns/77-fusion-energy-monitoring.md|77-fusion-energy-monitoring]]
+- 73-smart-firefighting
+- 74-immersive-xr
+- 76-synthetic-biology
+- 77-fusion-energy-monitoring
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

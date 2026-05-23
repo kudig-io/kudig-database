@@ -1,5 +1,5 @@
 ---
-title: Agent CLI 与 MCP 协议深度集成
+title: Agent CLI 与 MCP 协议深度集成 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 与 MCP 协议深度集成'
 category: general
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: Agent CLI 与 MCP 协议深度集成
@@ -601,8 +602,8 @@ MCP 协议为 Agent CLI 提供了一个**可扩展、安全、标准化**的工�
 **后续阅读**：
 - [23 - Agent CLI 基础概念与架构](./23-agent-cli-fundamentals.md)：Agent CLI 底层架构
 - [26 - Agent CLI 开发工作流最佳实践](./26-agent-cli-development-workflow.md)：日常开发实战
-- [18 - AgentScope 工具系统与 MCP 集成](./[[domain-14-ai-ml-infra/18-agentscope-tool-system.md|18-agentscope-tool-system]].md)：AgentScope 中的 MCP
-- [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md)：通用工具调用设计
+- [18 - AgentScope 工具系统与 MCP 集成](./18-agentscope-tool-system.md)：AgentScope 中的 MCP
+- [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md)：通用工具调用设计
 
 ---
 
@@ -612,7 +613,7 @@ MCP 协议为 Agent CLI 提供了一个**可扩展、安全、标准化**的工�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -627,7 +628,7 @@ MCP 协议为 Agent CLI 提供了一个**可扩展、安全、标准化**的工�
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/24-agent-cli-tools-comparison.md|24-agent-cli-tools-comparison]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
+- 23-agent-cli-fundamentals
+- 24-agent-cli-tools-comparison
+- 26-agent-cli-development-workflow
+- 27-agent-cli-security-governance

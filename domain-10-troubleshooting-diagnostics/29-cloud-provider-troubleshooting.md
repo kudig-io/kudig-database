@@ -60,6 +60,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md
   label: '故障树: cloud-provider'
+created: "2026-05-23"
 ---
 
 # 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)
@@ -947,9 +948,9 @@ chmod +x resource-optimization-recommender.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

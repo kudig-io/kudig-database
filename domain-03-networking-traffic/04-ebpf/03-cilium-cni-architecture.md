@@ -59,9 +59,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md
   label: '故障树: cilium'
+created: "2026-05-23"
 ---
 
-# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+# [[Cilium|Cilium]] CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 
 > **文档版本**: v1.0 | **适用版本**: Cilium 1.15/1.16 | **更新时间**: 2026-03  
 > **CNCF 状态**: Graduated (2023年10月) | **许可证**: Apache 2.0
@@ -77,7 +78,7 @@ cross_refs:
 5. [Cilium 部署方式](#5-cilium-部署方式)
 6. [从传统 CNI 迁移到 Cilium](#6-从传统-cni-迁移到-cilium)
 7. [多集群 Cluster Mesh 配置](#7-多集群-cluster-mesh-配置)
-8. [Cilium 与 Kubernetes 网络模型](#8-cilium-与-kubernetes-网络模型)
+8. [Cilium 与 [[Kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)
 9. [故障排查与诊断](#9-故障排查与诊断)
 10. [2026 最新特性](#10-2026-最新特性)
 
@@ -2292,22 +2293,22 @@ cilium debuginfo                       # 调试信息
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-35-ebpf-technology MOC]]
+- domain-35-ebpf-technology MOC
 - [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-35 eBPF 技术 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...]]
-- [[domain-03-networking-traffic/02-ebpf-map-types-data-structures.md|eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...]]
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|Tetragon 运行时安全 (Tetragon Runtime Security)]]
-- [[domain-03-networking-traffic/07-hubble-network-observability.md|Hubble 网络可观测性 (Hubble Network Observability)]]
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|eBPF 性能优化实践 (eBPF Performance Optimization Practice)]]
-- [[domain-03-networking-traffic/10-ebpf-security-applications.md|eBPF 安全应用案例 (eBPF Security Applications and Use Cases)]]
+- Domain-35 eBPF 技术 — 开源项目索引
+- eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
+- eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
+- Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...
+- Tetragon 运行时安全 (Tetragon Runtime Security)
+- Hubble 网络可观测性 (Hubble Network Observability)
+- bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+- eBPF 性能优化实践 (eBPF Performance Optimization Practice)
+- eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|01-ebpf-architecture-fundamentals]]
-- [[domain-03-networking-traffic/02-ebpf-map-types-data-structures.md|02-ebpf-map-types-data-structures]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|04-cilium-network-policy]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|05-cilium-service-mesh]]
+- 01-ebpf-architecture-fundamentals
+- 02-ebpf-map-types-data-structures
+- 04-cilium-network-policy
+- 05-cilium-service-mesh

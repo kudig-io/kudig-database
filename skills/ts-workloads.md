@@ -27,11 +27,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
+created: "2026-05-23"
 ---
 
 # 工作负载故障排查
 
-### 01 Pod Troubleshooting
+### 01 Pod Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

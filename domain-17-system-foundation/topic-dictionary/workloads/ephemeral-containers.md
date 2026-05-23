@@ -24,6 +24,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Ephemeral Containers
@@ -39,7 +40,7 @@ Ephemeral（临时）容器是一种在现有 Pod 中临时运行的特殊容器
   - 不允许设置 `ports`、`livenessProbe`、`readinessProbe`。
   - 不允许设置 `resources`（Pod 资源分配不可变）。
   - 创建后不可修改或移除。
-- **不支持 Static Pods**。
+- **不支持 Static [[Pods|Pods]]**。
 
 ## 关键机制或特性
 - **调试利器**：当 `kubectl exec` 不足以排查问题时（如容器已崩溃或镜像未包含调试工具），可注入临时容器。

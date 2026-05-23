@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # containerd 可观测性
@@ -72,5 +73,5 @@ title: containerd 分布式追踪与可观测性
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/containerd/06-containerd-observability.md|06-containerd-observability]]
+- 06-containerd-observability
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

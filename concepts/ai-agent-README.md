@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # AI Agent 工程专题
@@ -52,12 +53,12 @@ prerequisites:
 
 | 序号 | 文档 | 内容概要 | 适用角色 | 阅读耗时 |
 |:---:|------|---------|---------|---------|
-| 01 | [AI Agent 基础与核心架构](./01-ai-agent-fundamentals.md) | Agent 定义、分类、ReAct/CoT/ToT 推理模式、Agent Loop 解析 | 所有工程师 | 30min |
-| 02 | [LLM 基座模型选型与评估](./02-llm-foundation-models.md) | 主流模型全矩阵对比、场景选型决策、微调 vs RAG 判断树 | 架构师、AI 工程师 | 25min |
+| 01 | AI Agent 基础与核心架构](./01-ai-agent-fundamentals.md) | Agent 定义、分类、ReAct/CoT/ToT 推理模式、Agent Loop 解析 | 所有工程师 | 30min |
+| 02 | LLM 基座模型选型与评估](./02-llm-foundation-models.md) | 主流模型全矩阵对比、场景选型决策、微调 vs RAG 判断树 | 架构师、AI 工程师 | 25min |
 | 03 | [主流 Agent 框架对比](./03-agent-frameworks-comparison.md) | LangChain/LlamaIndex/AutoGen/CrewAI/Dify 深度对比 | 研发工程师 | 30min |
-| 04 | [RAG 检索增强生成深度指南](./04-rag-knowledge-retrieval.md) | 分块策略、Embedding 选型、向量库对比、混合检索、Re-ranking | AI 工程师 | 40min |
-| 05 | [Tool Use & Function Calling 设计规范](./05-tool-use-function-calling.md) | 工具定义规范、并行调用、错误恢复、工具链设计 | 研发工程师 | 25min |
-| 06 | [多 Agent 编排与协作架构](./06-multi-agent-orchestration.md) | Supervisor/Worker 模式、事件驱动编排、冲突解决策略 | 架构师 | 35min |
+| 04 | RAG 检索增强生成深度指南](./04-rag-knowledge-retrieval.md) | 分块策略、Embedding 选型、向量库对比、混合检索、Re-ranking | AI 工程师 | 40min |
+| 05 | Tool Use & Function Calling 设计规范](./05-tool-use-function-calling.md) | 工具定义规范、并行调用、错误恢复、工具链设计 | 研发工程师 | 25min |
+| 06 | 多 Agent 编排与协作架构](./06-multi-agent-orchestration.md) | Supervisor/Worker 模式、事件驱动编排、冲突解决策略 | 架构师 | 35min |
 | 07 | [记忆管理与上下文窗口工程](./07-memory-context-management.md) | 短期/长期记忆、情节记忆 vs 语义记忆、上下文压缩技术 | AI 工程师 | 25min |
 | 08 | [Agent 评测体系与可观测性](./08-agent-evaluation-observability.md) | LLM-as-Judge、轨迹评估、RAGAS 指标、LangSmith/Langfuse | AI 工程师、SRE | 30min |
 | 09 | [生产部署指南：K8s 上的 Agent 服务](./09-production-deployment-guide.md) | K8s Deployment、HPA、GPU 调度、限流、灰度发布 | SRE、平台工程师 | 35min |
@@ -94,7 +95,7 @@ prerequisites:
 | 37 | [Harness 多 Agent 编排](./37-agent-harness-multi-agent.md) | 4 种编排模式、Orchestrator、通信协议、Harness 隔离、冲突解决 | 架构师 | 40min |
 | 38 | [Harness 性能与成本优化](./38-agent-harness-performance-cost.md) | 上下文压缩、模型路由、多级缓存、Prompt Caching、Agent FinOps | SRE、AI 工程师 | 35min |
 | 39 | [Harness 测试与基准评测](./39-agent-harness-testing-benchmark.md) | 测试金字塔、K8S 自定义基准、红队测试、回归测试框架 | QA 工程师、AI 工程师 | 40min |
-| 40 | [Harness 生产运维与成熟度模型](./40-agent-harness-production-maturity.md) | 灰度发布、配置热更新、SLA 监控、故障恢复、五级成熟度模型 | SRE、架构师 | 45min |
+| 40 | [Harness 生产运维与成熟度模型](./40-agent-harness-production-maturity.md) | 灰度发布、配置热更新、SLA 监控、问题恢复、五级成熟度模型 | SRE、架构师 | 45min |
 | **实践参考指南** | | | | |
 | 41 | [ReAct Agent 与 Harness 识别指南](./41-react-harness-identification-guide.md) | ReAct 三要素判断法、Harness 六层检查、五级成熟度清单、代码级识别方法 | 所有工程师 | 20min |
 | 42 | [模型 × Harness 兼容性矩阵](./42-model-harness-compatibility-matrix.md) | GPT/Claude/Gemini/Qwen/DeepSeek/Llama 全系列 Harness 就绪度、场景选型、多模型路由 | 架构师、AI 工程师 | 25min |
@@ -321,7 +322,7 @@ graph TB
 | [domain-05-security-compliance](../domain-05-security-compliance/) | 安全最佳实践在 Agent 安全中的应用 |
 | [domain-07-platform-engineering](../domain-07-platform-engineering/) | 平台工程视角的 Agent 服务运维 |
 | [domain-32-yaml-manifests](../domain-18-manifests-patterns/) | Agent 生产部署 YAML 模板参考 |
-| [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障树分析作为 Agent 推理骨架 |
+| [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 问题树分析作为 Agent 推理骨架 |
 
 ---
 

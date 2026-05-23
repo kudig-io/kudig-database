@@ -25,9 +25,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes API
+# [[Kubernetes|Kubernetes]] API
 
 ## 概述
 

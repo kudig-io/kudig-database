@@ -1,4 +1,47 @@
 ---
+title: 节点监控 — metrics-server / node-exporter / kubelet metrics
+description: 'title: 节点监控 metrics-server node-exporter kubelet metrics'
+category: general
+tags:
+- reference
+- monitoring
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- coredns
+- docker
+- opa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点监控 — metrics-server / node-exporter / kubelet metrics 是什么
+- 如何 节点监控 — metrics-server / node-exporter / kubelet metrics
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点监控
+- metrics-server
+- node-exporter
+- kubelet
+- metrics
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
+- policy-basics
+created: "2026-05-23"
+---
+
 title: 节点监控 metrics-server node-exporter kubelet metrics
 description: '# 节点监控 — metrics-server / node-exporter / kubelet metrics'
 category: functions
@@ -42,26 +85,28 @@ trigger_keywords:
 - node_memory
 - kubelet_pod_worker_duration
 - eviction
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- monitoring-basics
-- etcd-basics
-- policy-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-observability
 related_topics:
 - node-create/11-eviction
 - node-create/08-troubleshooting
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点监控 — metrics-server / node-exporter / kubelet metrics
 
 ## 概述
 
-节点监控是 [[entities/kubernetes|kubernetes]] 集群可观测性的核心组成部分。有效的节点监控能够帮助运维团队及时发现资源瓶颈、预测容量需求、定位性能问题，从而保障集群的稳定运行。
+节点监控是 Kubernetes 集群可观测性的核心组成部分。有效的节点监控能够帮助运维团队及时发现资源瓶颈、预测容量需求、定位性能问题，从而保障集群的稳定运行。
 
 Kubernetes 节点监控主要依赖三个层面的数据源：kubelet 内置的 cAdvisor 指标、metrics-server 提供的资源使用聚合、以及 node-exporter 采集的主机级指标。这三者各有侧重，互补配合，构成了完整的节点监控体系。
 
@@ -574,3 +619,11 @@ curl -k https://localhost:10250/stats/summary
 | `PLEG` | `pkg/kubelet/pleg/` | Pod 生命周期事件 |
 | `metrics-server` | `kubernetes-sigs/metrics-server` | 指标聚合器 |
 | `node-exporter` | `prometheus/node_exporter` | 主机指标采集 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]

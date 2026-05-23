@@ -35,6 +35,7 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -46,7 +47,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.24.16](#changelog-since-v12416)
+  - Changelog since v1.24.16](#changelog-since-v12416)
   - [Important Security Information](#important-security-information)
     - [CVE-2023-3676: Insufficient input sanitization on Windows nodes leads to privilege escalation](#cve-2023-3676-insufficient-input-sanitization-on-windows-nodes-leads-to-privilege-escalation)
     - [CVE-2023-3955: Insufficient input sanitization on Windows nodes leads to privilege escalation](#cve-2023-3955-insufficient-input-sanitization-on-windows-nodes-leads-to-privilege-escalation)
@@ -81,7 +82,7 @@ prerequisites:
     - [Container Images](#container-images-2)
   - [Changelog since v1.24.14](#changelog-since-v12414)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2023-2728: Bypassing enforce mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2023-2728: Bypassing enforce mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-2)
     - [Feature](#feature-2)
     - [Bug or Regression](#bug-or-regression-2)

@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -37,10 +38,10 @@ title: Day 11: 风险点识别与防范
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK [[entities/kubernetes|kubernetes]] security risk assessment checklist
-  - Pod Security Standards PSS configuration
+  - ACK [[entities/kubernetes|[[Kubernetes|kubernetes]]]] security risk assessment checklist
+  - Pod Securityod Security Standards]] PSS configuration
   - Kubernetes security baseline hardening
-  - NetworkPolicy zero trust security
+  - [[NetworkPolicy|NetworkPolicy]] zero trust security
   - SecurityContext container hardening
 trigger_keywords:
   - security risk

@@ -35,11 +35,12 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # 监控可观测性排查
 
-### 01 Monitoring Observability Troubleshooting
+### 01 Monitoring Observability TroubleshootingObservability）|Observability]] Troubleshooting
 
 #### 可观测性核心组件故障现象
 

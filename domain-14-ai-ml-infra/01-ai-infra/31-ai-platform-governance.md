@@ -54,11 +54,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # 31 - AI平台治理框架
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
 
 <!-- chunk: 一、AI平台治理全景架构 -->
 ## 一、AI平台治理全景架构
@@ -102,7 +103,7 @@ cross_refs:
 
 | 维度 | 子维度 | 治理目标 | 技术实现 | 运维要点 |
 |------|--------|----------|----------|----------|
-| **访问控制** | 身份认证 | 统一身份管理 | Dex + LDAP | 密钥轮换、多因子认证 |
+| **访问控制** | 身份认证 | 统一身份管理 | [[Dex|Dex]] + LDAP | 密钥轮换、多因子认证 |
 | | 权限管理 | 最小权限原则 | RBAC + OPA | 定期权限审计 |
 | | 审计追踪 | 行为可追溯 | Falco + Audit | 日志保留策略 |
 | **资源配置** | 配额管理 | 资源合理分配 | ResourceQuota | 动态调整机制 |
@@ -684,22 +685,22 @@ A: 建立治理委员会，定期review和协调各团队需求
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/29-alibaba-cloud-integration.md|29-alibaba-cloud-integration]]
-- [[domain-14-ai-ml-infra/30-ai-security-compliance.md|30-ai-security-compliance]]
-- [[domain-14-ai-ml-infra/32-mlops-pipeline.md|32-mlops-pipeline]]
-- [[domain-14-ai-ml-infra/33-model-explainability.md|33-model-explainability]]
+- 29-alibaba-cloud-integration
+- 30-ai-security-compliance
+- 32-mlops-pipeline
+- 33-model-explainability

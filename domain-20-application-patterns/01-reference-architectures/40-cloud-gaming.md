@@ -35,6 +35,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 云游戏架构设计
@@ -44,7 +45,7 @@ tags:
 - k8s
 - architecture
 - industry
-- containerd
+- [[containerd|containerd]]
 - docker
 - redis
 - mysql
@@ -60,7 +61,7 @@ audience:
 - GPU计算工程师
 estimated_read_time: 5min
 intent_queries:
-- 云游戏 Kubernetes GPU渲染集群
+- 云游戏 [[Kubernetes|Kubernetes]] GPU渲染集群
 - WebRTC云游戏 低延迟串流 K8s
 - NVIDIA MIG GPU虚拟化 云游戏
 - 游戏存档同步 OSS 加密 K8s
@@ -556,7 +557,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -571,7 +572,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/38-supply-chain-finance.md|38-supply-chain-finance]]
-- [[domain-20-application-patterns/39-smart-campus.md|39-smart-campus]]
-- [[domain-20-application-patterns/41-beauty-ecommerce.md|41-beauty-ecommerce]]
-- [[domain-20-application-patterns/42-secondhand-circular.md|42-secondhand-circular]]
+- 38-supply-chain-finance
+- 39-smart-campus
+- 41-beauty-ecommerce
+- 42-secondhand-circular

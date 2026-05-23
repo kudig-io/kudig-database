@@ -56,11 +56,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
+created: "2026-05-23"
 ---
 
-# 23 - Pod Security Standards (PSS/PSA) YAML 配置参考
+# 23 - Pod Securityod Security Standards]] (PSS/PSA) YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->## 目录
 
@@ -589,7 +590,7 @@ kubectl get psp
 echo -e "\n=== 添加 PSS 审计标签 ==="
 for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}'); do
   # 跳过系统命名空间
-  if [[ "$ns" =~ ^(kube-|default).*$ ]]; then
+  if default).*$ ; then
     echo "跳过系统命名空间: $ns"
     continue
   fi
@@ -2578,10 +2579,10 @@ spec:
 
 ## See Also
 
-- [[domain-18-manifests-patterns/21-rbac-clusterrole-clusterrolebinding.md|21-rbac-clusterrole-clusterrolebinding]]
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
-- [[domain-18-manifests-patterns/24-admission-webhook-configuration.md|24-admission-webhook-configuration]]
-- [[domain-18-manifests-patterns/25-validatingadmissionpolicy.md|25-validatingadmissionpolicy]]
+- 21-rbac-clusterrole-clusterrolebinding
+- 22-networkpolicy-reference
+- 24-admission-webhook-configuration
+- 25-validatingadmissionpolicy
 
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/13-security.md|13-security]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/10-security-delete.md|10-security-delete]]

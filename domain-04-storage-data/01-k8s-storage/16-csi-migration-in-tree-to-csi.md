@@ -56,11 +56,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
+created: "2026-05-23"
 ---
 
 # 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
 
-> **适用版本**: Kubernetes v1.23 - v1.32 | **运维重点**: In-Tree 插件迁移、CSI 兼容性、升级风险控制
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.23 - v1.32 | **运维重点**: In-Tree 插件迁移、CSI 兼容性、升级风险控制
 > **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
@@ -571,7 +572,7 @@ echo "=========================================="
 |------|------|---------|
 | PVC Pending（迁移后） | CSI 驱动未安装 | 安装对应 CSI 驱动 |
 | VolumeAttachment 失败 | CSI Controller 未运行 | 检查 CSI Controller Pod |
-| 已有 PVC 无法挂载 | CSI Node 插件缺失 | 确保 DaemonSet 部署到所有节点 |
+| 已有 PVC 无法挂载 | CSI Node 插件缺失 | 确保 [[DaemonSet|DaemonSet]] 部署到所有节点 |
 | ProvisioningFailed | CSI 驱动无云商权限 | 配置 ServiceAccount/RBAC |
 | 卷扩容失败 | CSI 驱动不支持 | 检查 CSIDriver spec |
 | Multi-Attach | 已有卷仍被 In-Tree 管理 | 等待卷 Detach 后由 CSI 接管 |
@@ -616,10 +617,10 @@ echo "=========================================="
 
 ## See Also
 
-- [[domain-04-storage-data/14-cloud-native-storage.md|14-cloud-native-storage]]
-- [[domain-04-storage-data/15-storage-disaster-recovery.md|15-storage-disaster-recovery]]
-- [[domain-04-storage-data/completion-summary.md|completion-summary]]
-- [[domain-04-storage-data/quality-check-report.md|quality-check-report]]
+- 14-cloud-native-storage
+- 15-storage-disaster-recovery
+- completion-summary
+- quality-check-report
 
 ## Related
 

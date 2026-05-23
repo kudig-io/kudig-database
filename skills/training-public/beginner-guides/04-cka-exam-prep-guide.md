@@ -39,11 +39,12 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # CKA 认证备考完全指南
 
-> **考试全称**: Certified Kubernetes Administrator (CKA)  
+> **考试全称**: Certified [[Kubernetes|Kubernetes]] Administrator (CKA)  
 > **主办方**: Linux Foundation + CNCF  
 > **考试费用**: $395（约 ¥2800，偶有促销）  
 > **考试形式**: 线上远程监考，2 小时，17 道实操题  
@@ -83,7 +84,7 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 
 | 考纲领域 | 权重 | 核心考点 | 本库对应文档 |
 |---------|------|---------|-------------|
-| 集群架构、安装与配置 | 25% | kubeadm 安装、升级、高可用、etcd 备份恢复 | [domain-01/06-upgrade-paths](../../domain-01-cluster-fundamentals/06-upgrade-paths/) |
+| 集群架构、安装与配置 | 25% | kubeadm 安装、升级、高可用、[[etcd|etcd]] 备份恢复 | [domain-01/06-upgrade-paths](../../domain-01-cluster-fundamentals/06-upgrade-paths/) |
 | 工作负载与调度 | 15% | Pod、Deployment、DaemonSet、Job、调度规则 | [fundamentals/02-15](../fundamentals/) |
 | 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../domain-03-networking-traffic/00-core-k8s-networking/) |
 | 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
@@ -597,6 +598,6 @@ kubectl get nodes
 ---
 
 **关联文档**:
-- [[../00-beginner-learning-roadmap.md]] — 完整学习路线图
-- [[../../domain-10-troubleshooting-diagnostics/]] — 故障排查深度文档
+- [[skills/training-public/00-beginner-learning-roadmap.md]] — 完整学习路线图
+- ../../domain-10-troubleshooting-diagnostics/ — 故障排查深度文档
 - [[02-local-lab-environment.md]] — 本地实验环境搭建

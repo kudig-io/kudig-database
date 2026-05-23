@@ -1,5 +1,5 @@
 ---
-title: 网络清理详解 — CNI / iptables / ipvs / 路由
+title: 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis)
 description: 'title: 网络清理详解 — CNI / iptables / ipvs / 路由'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 title: 网络清理详解 — CNI / iptables / ipvs / 路由
@@ -509,7 +510,7 @@ echo "=== 网络清理完成 ==="
 
 ## Related
 
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
+- 22-networkpolicy-reference
 - [[README.md|README]]
 - [[man/INSTALL.md|INSTALL]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

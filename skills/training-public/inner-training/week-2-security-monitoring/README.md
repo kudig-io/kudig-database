@@ -37,6 +37,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Week 2: 安全认证与监控运维 (Days 8-14)
@@ -108,7 +109,7 @@ tags: [week-2, security, monitoring, rbac, audit, k8s, k8s-1.28-1.33]
 
 ### RBAC 权限模型详解
 
-RBAC（Role-Based Access Control）是 Kubernetes 的核心授权机制。理解 RBAC 的关键在于掌握四个核心资源之间的关系：
+RBAC（Role-Based Access Control）是 [[Kubernetes|Kubernetes]] 的核心授权机制。理解 RBAC 的关键在于掌握四个核心资源之间的关系：
 
 **Role 和 ClusterRole** 定义了"什么操作可以在什么资源上执行"。Role 是命名空间级别的，只能授权该命名空间内的资源操作。ClusterRole 是集群级别的，可以授权跨命名空间的资源操作或集群级资源（如 Node、PersistentVolume、Namespace）的操作。ClusterRole 还有一个特殊用途：可以通过 RoleBinding 在特定命名空间内引用，实现"定义一次，多处使用"的效果。
 
@@ -150,7 +151,7 @@ RBAC 规则中的 verbs（操作动词）对应 K8s API 的操作类型：
 
 **RAM（Resource Access Management）** 控制的是阿里云资源层面的访问权限，包括：是否可以查看集群列表、是否可以创建/删除集群、是否可以查看节点信息等。RAM 通过策略（Policy）来定义权限，策略可以附加到 RAM 用户、RAM 角色或 RAM 用户组。
 
-**K8s RBAC** 控制的是集群内部的 API 访问权限，包括：是否可以查看/创建/删除 Pod、Service、Deployment 等资源。ACK 提供了预定义的 RBAC 角色（cluster-admin、admin、operator、readonly、dev）以简化权限配置。
+**K8s RBAC** 控制的是集群内部的 API 访问权限，包括：是否可以查看/创建/删除 Pod、[[Service|Service]]、Deployment 等资源。ACK 提供了预定义的 RBAC 角色（cluster-admin、admin、operator、readonly、dev）以简化权限配置。
 
 ACK 预定义 RBAC 角色:
 
@@ -299,20 +300,20 @@ Prometheus 数据丢失的常见原因：1) Prometheus Pod 重启导致本地存
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

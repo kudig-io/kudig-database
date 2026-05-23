@@ -1,5 +1,5 @@
 ---
-title: AgentScope Studio 与 Agent Skill 实战指南
+title: AgentScope Studio 与 Agent Skill 实战指南 (domain-14-ai-ml-infra)
 description: 'title: AgentScope Studio 与 Agent Skill 实战指南'
 category: general
 tags:
@@ -35,9 +35,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: AgentScope Studio 与 Agent Skill 实战指南
+title: AgentScope Studio 与 Agent [[SKILL|Skill]] 实战指南
 description: '# AgentScope Studio 与 Agent Skill 实战指南'
 category: ai-agent
 tags:
@@ -46,11 +47,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- coredns
+- [[kubelet|kubelet]]
+- [[CoreDNS|coredns]]
 - docker
 - hpa
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -97,8 +98,8 @@ k8s_versions:
 通过完整的 Demo 代码和运行示例，帮助读者在 30 分钟内完成：从启动 Studio → 创建 Agent → 注册 Skill → 在 Studio 中观测全链路追踪的完整闭环。
 
 > **前置条件**：
-> - 已安装 `agentscope[full]`（参见 [16 - 概述与安装](./[[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]].md)）
-> - 已启动 AgentScope Studio（参见 [22 - 生产部署](./[[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]].md)）
+> - 已安装 `agentscope[full]`（参见 [16 - 概述与安装](./16-agentscope-overview-installation.md)）
+> - 已启动 AgentScope Studio（参见 [22 - 生产部署](./22-agentscope-production-deployment.md)）
 > - 已配置 LLM API Key（DashScope / OpenAI / Ollama 任选其一）
 
 ---
@@ -1155,7 +1156,7 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 | 文档 | 与本文关系 |
 |------|-----------|
 | [16 - AgentScope 概述与安装](./16-agentscope-overview-installation.md) | 环境搭建与 Hello World 基础 |
-| [17 - 核心概念与基础操作](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | State/Message/Agent 等核心抽象 |
+| [17 - 核心概念与基础操作](./17-agentscope-core-concepts.md) | State/Message/Agent 等核心抽象 |
 | [18 - 工具系统与 MCP 集成](./18-agentscope-tool-system.md) | Toolkit 注册、MCP 集成、自定义工具 |
 | [22 - 生产部署与可观测性](./22-agentscope-production-deployment.md) | Studio 部署、Runtime、OTel Tracing |
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | SOUL.md/SKILL.md 分层设计——Harness 架构中的 Skill 层定位 |
@@ -1169,7 +1170,7 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1184,11 +1185,11 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 
 ## Related
 
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
+- 48-openclaw-skill-mechanism
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
-- [[domain-14-ai-ml-infra/28-agent-cli-enterprise-automation.md|28-agent-cli-enterprise-automation]]
-- [[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
+- 27-agent-cli-security-governance
+- 28-agent-cli-enterprise-automation
+- 30-agent-harness-engineering
+- 31-agent-harness-loop-execution

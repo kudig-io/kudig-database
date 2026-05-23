@@ -1,4 +1,52 @@
 ---
+title: kubeadm 不安装的组件 (What kubeadm Does Not Install) [cluster-create]
+description: 'description: ''// 以下组件需要用户自行安装和管理:'''
+category: general
+tags:
+- reference
+- configuration
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+- cilium
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeadm 不安装的组件 (What kubeadm Does Not Install) 是什么
+- 如何 kubeadm 不安装的组件 (What kubeadm Does Not Install)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeadm
+- 不安装的组件
+- What
+- kubeadm
+- Does
+- Not
+- Install
+- platform
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- tls-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: kubeadm 不安装的组件 (What kubeadm Does Not Install)
 description: '// 以下组件需要用户自行安装和管理:'
 category: functions
@@ -40,18 +88,6 @@ trigger_keywords:
 - logging
 - post-install
 - addon
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- ebpf-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
-- tls-basics
-- logging-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -63,6 +99,15 @@ related_topics:
 - Storage
 - monitoring
 - logging
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeadm 不安装的组件 (What kubeadm Does Not Install)
@@ -646,4 +691,12 @@ kubectl get pods -A -o wide
 - [kube-proxy](21-kube-proxy.md) — kubeadm 安装的 kube-proxy
 - [存储与卷](22-storage-volumes.md) — CSI 和 StorageClass
 - [CRI 运行时](18-cri-runtime.md) — CNI 与 CRI 的关系
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — Ingress TLS 和 cert-manager
+- [安全机制](16-security.md) — Ingress TLS 和 cert-manager
+
+## Related
+
+- [[log.md|log]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 架构与基础概念全栈培训
+title: Kubernetes 架构与基础概念全栈培训 (assets)
 description: '# Kubernetes 架构与基础概念全栈培训'
 category: presentations
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 架构与基础概念全栈培训

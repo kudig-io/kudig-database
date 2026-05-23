@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 24: Terway 网络
@@ -273,4 +274,4 @@ Day 25 将学习 Flannel CNI 方案，与 Terway 进行对比。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- index/terway-index|Terway 知识图谱索引]]

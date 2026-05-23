@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 集群创建操作指南

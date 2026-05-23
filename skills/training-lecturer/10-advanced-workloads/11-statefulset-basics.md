@@ -1,5 +1,5 @@
 ---
-title: 第14课：StatefulSet - 有状态应用管理
+title: 第14课：StatefulSet - 有状态应用管理 [10-advanced-workloads]
 description: '# 第14课：StatefulSet - 有状态应用管理'
 category: k8s-lecturer
 tags:
@@ -35,9 +35,10 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-# 第14课：StatefulSet - 有状态应用管理
+# 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟
 
@@ -585,6 +586,6 @@ kubectl delete statefulset <name>
 ---
 
 **关联文档**:
-- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — DaemonSet
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md) — StatefulSet 故障 Skill
+- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md) — StatefulSet 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档

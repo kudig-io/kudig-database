@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 合规审计
@@ -105,7 +106,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[concepts/supply-chain-security.md|supply-chain-security]]
 - [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]

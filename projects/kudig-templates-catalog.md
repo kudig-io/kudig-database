@@ -24,6 +24,7 @@ trigger_keywords:
 - Catalog
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Templates Catalog

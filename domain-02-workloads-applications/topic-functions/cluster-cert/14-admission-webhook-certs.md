@@ -1,4 +1,43 @@
 ---
+title: Admission Webhook 证书体系 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- istio
+- opa
+- operator
+- webhook
+- kserve
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Admission Webhook 证书体系 是什么
+- 如何 Admission Webhook 证书体系
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Admission
+- Webhook
+- 证书体系
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- service-mesh-basics
+- tls-basics
+- policy-basics
+created: "2026-05-23"
+---
+
 title: Admission Webhook 证书体系
 description: '## 概述'
 category: functions
@@ -38,12 +77,6 @@ trigger_keywords:
 - certificate
 - webhook-server-cert
 - 证书轮换
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- service-mesh-basics
-- tls-basics
-- policy-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -51,13 +84,22 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/ca-generation
 - cluster-cert/apiserver-cert-flags
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Admission Webhook 证书体系
 
 ## 概述
 
-Admission Webhook 是 Kubernetes 扩展准入控制的核心机制。与集群内部组件（如 API Server、kubelet）的证书由 kubeadm 统一管理不同，Webhook 服务端的证书通常由外部系统（如 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]、自签脚本）管理，并通过 Webhook 配置的 `caBundle` 字段告知 API Server 如何验证。本文档分析 Webhook 证书的完整生命周期。
+Admission Webhook 是 Kubernetes 扩展准入控制的核心机制。与集群内部组件（如 API Server、kubelet）的证书由 kubeadm 统一管理不同，Webhook 服务端的证书通常由外部系统（如 cert-manager、自签脚本）管理，并通过 Webhook 配置的 `caBundle` 字段告知 API Server 如何验证。本文档分析 Webhook 证书的完整生命周期。
 
 ---
 
@@ -382,3 +424,11 @@ Kubernetes v1.30+ 引入 **ValidatingAdmissionPolicy**（内置 CEL 表达式验
 2. **OPA/Gatekeeper** — 作为 ValidatingWebhook 部署，其证书完全独立于集群证书
 3. **Istio / Service Mesh** — Sidecar 可能会 mTLS 终止 Webhook 流量，需要额外配置
 4. **自定义 CA 与集群 CA 的关系** — 强烈建议 Webhook 使用独立的 CA，不要用 kubernetes-ca 签发 Webhook 证书（避免 CA 轮换影响 Webhook）
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cert-manager.md|cert-manager]]
+- [[entities/kserve.md|kserve]]

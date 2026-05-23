@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 网络配置最佳实践
@@ -41,7 +42,7 @@ prerequisites:
 
 ## CNI 插件选型
 
-| 特性 | Calico | Cilium | Flannel | Weave |
+| 特性 | Calico | [[Cilium|Cilium]] | Flannel | Weave |
 |------|--------|--------|---------|-------|
 | 网络模式 | BGP/VXLAN | eBPF | VXLAN | VXLAN |
 | 网络策略 | 完整 | 增强（eBPF） | 无 | 基础 |
@@ -56,11 +57,11 @@ prerequisites:
 
 ## 网络架构设计
 
-生产环境网络应分层设计：CDN/WAF -> 负载均衡器 -> Ingress Controller -> 服务网格（可选）-> CNI 插件 -> Pod 网络 ^[inferred]。
+生产环境网络应分层设计：CDN/WAF -> 负载均衡器 -> [[Ingress|Ingress]] Controller -> 服务网格（可选）-> CNI 插件 -> Pod 网络 ^[inferred]。
 
 ### 关键配置
 
-- **Pod CIDR** 与 **Service CIDR** 不可重叠 ^[inferred]
+- **Pod CIDR** 与 **[[Service|Service]] CIDR** 不可重叠 ^[inferred]
 - VXLAN 封装需考虑 MTU 开销（50 字节）^[inferred]
 - 内核版本要求：Cilium 需要 >= 5.4 ^[inferred]
 
@@ -81,7 +82,7 @@ prerequisites:
 ## 实施步骤
 
 1. **网络规划**：确定 Pod CIDR（如 10.244.0.0/16）、Service CIDR（如 10.96.0.0/12），验证不重叠
-2. **安装 CNI 插件**：通过 Helm 安装 Calico 或 Cilium
+2. **安装 CNI 插件**：通过 [[Helm|Helm]] 安装 Calico 或 Cilium
 3. **配置网络策略**：默认拒绝 + DNS 允许 + 应用级策略
 4. **配置 Ingress**：安装 Nginx Ingress Controller，配置 TLS
 
@@ -101,7 +102,7 @@ CoreDNS 配置不当会导致 Service 发现失败。应检查 CoreDNS Pod 状�
 
 ## 验证方法
 
-- 检查 CNI 插件状态：`kubectl get pods -n kube-system | grep -E "calico|cilium"`
+- 检查 CNI 插件状态：`kubectl get [[Pods|pods]] -n kube-system | grep -E "calico|cilium"`
 - 检查网络策略：`kubectl get networkpolicy --all-namespaces`
 - 测试 Pod 网络连通性和 DNS 解析 ^[inferred]
 

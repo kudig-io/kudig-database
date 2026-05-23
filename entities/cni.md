@@ -32,6 +32,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # CNI (Container Network Interface)
@@ -82,28 +83,28 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
 
-- [[domain-03-networking-traffic/39-csi-cni-version-matrix.md|39-csi-cni-version-matrix]]
-- [[domain-03-networking-traffic/27-cni-troubleshooting-optimization.md|27-cni-troubleshooting-optimization]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|03-cni-plugins-comparison]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
+- 39-csi-cni-version-matrix
+- 27-cni-troubleshooting-optimization
+- 03-cni-plugins-comparison
+- CNI 架构与核心原理
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|03-cilium-cni-architecture]]
+- 03-cilium-cni-architecture
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[domain-19-landscape-references/incubating/cni/cni.md|cni]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cni-plugins/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
+- cni
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[references/linux-sysctl-reference|Linux Sysctl Reference for Kubernetes]] — Cross-reference
 - [[references/networking-terms|K8s 网络术语参考]] — Cross-reference

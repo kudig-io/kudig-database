@@ -1,5 +1,5 @@
 ---
-title: Stacker
+title: Stacker (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - Stacker
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Stacker
@@ -63,11 +64,11 @@ Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用�
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[06-containerd-observability]] — containerd 可观测性
+- [[entities/06-containerd-observability.md|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/stacker/stacker.md|stacker]]
+- stacker
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

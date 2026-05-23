@@ -1,7 +1,38 @@
 ---
+title: Agent Harness 上下文与记忆工程 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering,'
+category: general
+tags:
+- ai
+- ai-agent
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 35min
+intent_queries:
+- Agent Harness 上下文与记忆工程 是什么
+- 如何 Agent Harness 上下文与记忆工程
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 上下文与记忆工程
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 上下文与记忆工程
-description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering, Memory Systems, RAG, 上下文窗口, 信息压缩,
-  持久化, 向量检索, 短期记忆, 长期记忆, 情景记忆'
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Context Engineering,
+  Memory Systems, RAG, 上下文窗口, 信息压缩, 持久化, 向量检索, 短期记忆, 长期记忆, 情景记忆'
 category: ai-agent
 tags:
 - ai
@@ -26,8 +57,15 @@ trigger_keywords:
 - 上下文与记忆工程
 - ai
 - agent
-prerequisites:
-- kubectl-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 上下文与记忆工程
@@ -36,7 +74,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六层架构的第三和第四层。上下文层决定 Agent 的"视野"——看到什么信息直接决定推理质量；持久化层让 Agent 拥有"记忆"——跨会话保持状态和经验。
 
@@ -46,9 +84,9 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
 
 ---
 
-## 1. 上下文工程核心理论
+<!-- chunk: 1. 上下文工程核心理论 -->## 1. 上下文工程核心理论
 
-### 1.1 上下文即决策依据
+#<!-- chunk: 1.1 上下文即决策依据 -->## 1.1 上下文即决策依据
 
 ```
 上下文对 Agent 输出的影响（实证数据）:
@@ -67,7 +105,7 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
   4. 上下文构建是工程问题，不是提示词问题
 ```
 
-### 1.2 信噪比原则
+#<!-- chunk: 1.2 信噪比原则 -->## 1.2 信噪比原则
 
 ```
 上下文信噪比（SNR）优化:
@@ -93,9 +131,9 @@ Context（上下文层）和 Persistence（持久化层）是 Agent Harness 六�
 
 ---
 
-## 2. 上下文分层构建架构
+<!-- chunk: 2. 上下文分层构建架构 -->## 2. 上下文分层构建架构
 
-### 2.1 四层上下文模型
+#<!-- chunk: 2.1 四层上下文模型 -->## 2.1 四层上下文模型
 
 ```
 上下文四层模型:
@@ -124,7 +162,7 @@ Token 预算分配（以 128K 窗口为例）:
   Reserved:    ~43K tokens (34%, 留给模型输出和推理)
 ```
 
-### 2.2 上下文管理器完整实现
+#<!-- chunk: 2.2 上下文管理器完整实现 -->## 2.2 上下文管理器完整实现
 
 ```python
 from dataclasses import dataclass, field
@@ -210,11 +248,11 @@ class ContextManager:
 
     def _format_system(self, system_prompt: str) -> str:
         """格式化系统上下文"""
-        return f"## 系统指令\n\n{system_prompt}"
+        return f"<!-- chunk: 系统指令\n\n{system_prompt}" -->## 系统指令\n\n{system_prompt}"
 
     def _format_environment(self, environment: dict) -> str:
         """格式化环境上下文"""
-        parts = ["## 当前环境"]
+        parts = ["<!-- chunk: 当前环境"] -->## 当前环境"]
         if "cluster" in environment:
             parts.append(f"集群: {environment['cluster']}")
         if "kubernetes_version" in environment:
@@ -231,18 +269,18 @@ class ContextManager:
         """RAG 知识检索"""
         documents = self.rag.retrieve(task, top_k=10)
 
-        parts = ["## 相关知识"]
-        current_tokens = self.count_tokens("## 相关知识\n")
+        parts = ["<!-- chunk: 相关知识"] -->## 相关知识"]
+        current_tokens = self.count_tokens("<!-- chunk: 相关知识\n") -->## 相关知识\n")
 
         for doc in documents:
-            doc_text = f"\n### {doc['title']}\n{doc['content']}\n"
+            doc_text = f"\n#<!-- chunk: {doc['title']}\n{doc['content']}\n" -->## {doc['title']}\n{doc['content']}\n"
             doc_tokens = self.count_tokens(doc_text)
             if current_tokens + doc_tokens > budget:
                 # 尝试截断文档
                 available = budget - current_tokens - 50
                 if available > 200:
                     truncated = self._truncate_to_tokens(doc['content'], available)
-                    parts.append(f"\n### {doc['title']}\n{truncated}\n...")
+                    parts.append(f"\n#<!-- chunk: {doc['title']}\n{truncated}\n...") -->## {doc['title']}\n{truncated}\n...")
                 break
             parts.append(doc_text)
             current_tokens += doc_tokens
@@ -251,8 +289,8 @@ class ContextManager:
 
     def _compress_history(self, history: list, budget: int) -> str:
         """智能历史压缩"""
-        parts = ["## 执行历史"]
-        current_tokens = self.count_tokens("## 执行历史\n")
+        parts = ["<!-- chunk: 执行历史"] -->## 执行历史"]
+        current_tokens = self.count_tokens("<!-- chunk: 执行历史\n") -->## 执行历史\n")
 
         # 策略 1: 关键步骤始终保留
         key_steps = [h for h in history if h.get("is_key_step")]
@@ -286,7 +324,7 @@ class ContextManager:
 
     def _format_step(self, step: dict) -> str:
         """格式化单步记录"""
-        parts = [f"\n### Step {step.get('iteration', '?')}"]
+        parts = [f"\n#<!-- chunk: Step {step.get('iteration', '?')}"] -->## Step {step.get('iteration', '?')}"]
         if step.get("thought"):
             parts.append(f"思考: {step['thought'][:200]}")
         if step.get("action"):
@@ -315,9 +353,9 @@ class ContextManager:
 
 ---
 
-## 3. RAG 集成深度设计
+<!-- chunk: 3. RAG 集成深度设计 -->## 3. RAG 集成深度设计
 
-### 3.1 知识库索引架构
+#<!-- chunk: 3.1 知识库索引架构 -->## 3.1 知识库索引架构
 
 ```
 K8S 运维知识库索引架构:
@@ -333,7 +371,7 @@ K8S 运维知识库索引架构:
   文档 → 分块（Chunking）→ 嵌入（Embedding）→ 向量存储（Vector Store）
 
 分块策略:
-  ├── 文档级分块: 按 ## 标题分割，保持逻辑完整性
+  ├── 文档级分块: 按 <!-- chunk: 标题分割，保持逻辑完整性 -->## 标题分割，保持逻辑完整性
   ├── 段落级分块: 500-1000 tokens/chunk，重叠 100 tokens
   ├── 代码块分块: 完整代码块作为独立 chunk
   └── 表格分块: 表格 + 上下文说明作为独立 chunk
@@ -345,7 +383,7 @@ K8S 运维知识库索引架构:
   └── 重排序: Cross-encoder 精排
 ```
 
-### 3.2 RAG 检索器实现
+#<!-- chunk: 3.2 RAG 检索器实现 -->## 3.2 RAG 检索器实现
 
 ```python
 from dataclasses import dataclass
@@ -479,9 +517,9 @@ class ContextAwareRetriever:
 
 ---
 
-## 4. 记忆系统架构
+<!-- chunk: 4. 记忆系统架构 -->## 4. 记忆系统架构
 
-### 4.1 三层记忆模型
+#<!-- chunk: 4.1 三层记忆模型 -->## 4.1 三层记忆模型
 
 ```
 Agent 记忆三层模型:
@@ -510,7 +548,7 @@ Agent 记忆三层模型:
   语义记忆 ──(检索注入)──→ 短期记忆
 ```
 
-### 4.2 记忆系统完整实现
+#<!-- chunk: 4.2 记忆系统完整实现 -->## 4.2 记忆系统完整实现
 
 ```python
 from dataclasses import dataclass, field
@@ -706,9 +744,9 @@ class MemorySystem:
 
 ---
 
-## 5. 上下文窗口管理
+<!-- chunk: 5. 上下文窗口管理 -->## 5. 上下文窗口管理
 
-### 5.1 动态窗口策略
+#<!-- chunk: 5.1 动态窗口策略 -->## 5.1 动态窗口策略
 
 ```python
 class DynamicWindowManager:
@@ -767,7 +805,7 @@ class DynamicWindowManager:
             )
 ```
 
-### 5.2 增量上下文更新
+#<!-- chunk: 5.2 增量上下文更新 -->## 5.2 增量上下文更新
 
 ```python
 class IncrementalContextUpdater:
@@ -826,9 +864,9 @@ class IncrementalContextUpdater:
 
 ---
 
-## 6. K8S 运维上下文模板
+<!-- chunk: 6. K8S 运维上下文模板 -->## 6. K8S 运维上下文模板
 
-### 6.1 集群环境扫描器
+#<!-- chunk: 6.1 集群环境扫描器 -->## 6.1 集群环境扫描器
 
 ```python
 class K8sEnvironmentScanner:
@@ -890,7 +928,7 @@ class K8sEnvironmentScanner:
     def format_for_context(self, env: dict) -> str:
         """将环境信息格式化为上下文文本"""
         parts = [
-            "## 集群环境信息",
+            "<!-- chunk: 集群环境信息", -->## 集群环境信息",
             f"K8S 版本: {env.get('kubernetes_version', 'Unknown')}",
             f"节点数量: {len(env.get('nodes', []))}",
         ]
@@ -901,14 +939,14 @@ class K8sEnvironmentScanner:
         parts.append(f"节点状态: {ready_count}/{len(nodes)} Ready")
 
         if env.get("recent_warnings"):
-            parts.append("\n### 近期告警事件")
+            parts.append("\n#<!-- chunk: 近期告警事件") -->## 近期告警事件")
             for w in env["recent_warnings"][:10]:
                 parts.append(f"  - {w}")
 
         return "\n".join(parts)
 ```
 
-### 6.2 诊断任务上下文模板
+#<!-- chunk: 6.2 诊断任务上下文模板 -->## 6.2 诊断任务上下文模板
 
 ```python
 class DiagnosisContextTemplate:
@@ -918,13 +956,13 @@ class DiagnosisContextTemplate:
 你是 K8S 运维诊断专家 Agent。你的任务是根据提供的集群环境信息和工具输出，
 诊断 Kubernetes 集群中的问题。
 
-## 工作原则
+<!-- chunk: 工作原则 -->## 工作原则
 1. 每个诊断结论必须有具体的 Event 或日志证据支撑
 2. 优先使用只读命令收集信息
 3. 不确定的结论标注"需人工确认"
 4. 输出的 YAML/命令必须语法正确
 
-## 输出格式
+<!-- chunk: 输出格式 -->## 输出格式
 - 根因分析: [具体原因]
 - 证据: [Event/日志引用]
 - 建议操作: [操作步骤]
@@ -942,17 +980,17 @@ class DiagnosisContextTemplate:
         """构建诊断任务的完整上下文"""
         parts = [
             self.SYSTEM_PROMPT_TEMPLATE,
-            f"\n## 当前诊断任务\n{task}",
+            f"\n<!-- chunk: 当前诊断任务\n{task}", -->## 当前诊断任务\n{task}",
             self._format_env(env_scan),
         ]
 
         if knowledge:
-            parts.append("\n## 相关知识\n")
+            parts.append("\n<!-- chunk: 相关知识\n") -->## 相关知识\n")
             for doc in knowledge[:5]:
-                parts.append(f"### {doc['title']}\n{doc['content'][:500]}\n")
+                parts.append(f"#<!-- chunk: {doc['title']}\n{doc['content'][:500]}\n") -->## {doc['title']}\n{doc['content'][:500]}\n")
 
         if history:
-            parts.append("\n## 已执行步骤\n")
+            parts.append("\n<!-- chunk: 已执行步骤\n") -->## 已执行步骤\n")
             for step in history[-5:]:
                 parts.append(f"Step {step.get('iteration')}: "
                            f"{step.get('thought', '')[:150]}")
@@ -967,9 +1005,9 @@ class DiagnosisContextTemplate:
 
 ---
 
-## 7. 最佳实践
+<!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-### 7.1 上下文工程核心原则
+#<!-- chunk: 7.1 上下文工程核心原则 -->## 7.1 上下文工程核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -980,7 +1018,7 @@ class DiagnosisContextTemplate:
 | **智能压缩** | 历史信息保留关键步骤 | 错误步骤 + 关键发现 + 最近 N 步 |
 | **环境预扫描** | 任务开始前收集环境信息 | 使用 EnvironmentScanner |
 
-### 7.2 记忆系统核心原则
+#<!-- chunk: 7.2 记忆系统核心原则 -->## 7.2 记忆系统核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -992,7 +1030,7 @@ class DiagnosisContextTemplate:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -1003,7 +1041,7 @@ class DiagnosisContextTemplate:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -1015,3 +1053,27 @@ class DiagnosisContextTemplate:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 上下文与记忆工程。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 31-agent-harness-loop-execution
+- 32-agent-harness-tool-engineering
+- 34-agent-harness-verification-quality
+- 35-agent-harness-security-constraints

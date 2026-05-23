@@ -54,11 +54,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
+created: "2026-05-23"
 ---
 
 # 05 - CSI驱动集成与运维管理
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 故障处理、性能调优、监控告警 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 故障处理、性能调优、监控告警 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -147,7 +148,7 @@ cross_refs:
 <!-- chunk: 3. CSI 服务接口规范 -->
 ## 3. CSI 服务接口规范
 
-### 3.1 Identity Service
+### 3.1 Identity [[Service|Service]]
 
 | RPC | 说明 |
 |:---|:---|
@@ -434,7 +435,7 @@ spec:
     persistentVolumeClaimName: mysql-data
 ```
 
-### 6.3 定时快照 (CronJob)
+### 6.3 定时快照 ([[CronJob|CronJob]])
 
 ```yaml
 apiVersion: batch/v1
@@ -1399,25 +1400,25 @@ platform.run_continuous_monitoring()
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
+- domain-04-storage-data MOC
 - [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09 - PV/PVC故障排查与解决方案]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10 - 存储备份与灾难恢复]]
+- Domain-6 存储 — 开源项目索引
+- 存储架构概览与核心组件
+- PV/PVC 核心概念与企业级实践
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 09 - PV/PVC故障排查与解决方案
+- 10 - 存储备份与灾难恢复
 
 ## See Also
 
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03-pvc-patterns-practices]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|04-storageclass-dynamic-provisioning]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06-storage-fundamental-concepts]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07-storage-daily-operations]]
+- 03-pvc-patterns-practices
+- 04-storageclass-dynamic-provisioning
+- 06-storage-fundamental-concepts
+- 07-storage-daily-operations
 
 ## Related
 

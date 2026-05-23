@@ -20,6 +20,7 @@ trigger_keywords:
 - 深度研究能力评估报告
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 深度研究能力评估报告

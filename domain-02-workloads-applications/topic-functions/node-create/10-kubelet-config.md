@@ -1,4 +1,40 @@
 ---
+title: kubelet 进阶配置 — cgroup / 资源管理 / 日志
+description: 'title: kubelet 进阶配置'
+category: general
+tags:
+- reference
+- configuration
+- kubelet
+- coredns
+- containerd
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubelet 进阶配置 — cgroup / 资源管理 / 日志 是什么
+- 如何 kubelet 进阶配置 — cgroup / 资源管理 / 日志
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubelet
+- 进阶配置
+- cgroup
+- 资源管理
+- 日志
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: kubelet 进阶配置
 description: '# kubelet 进阶配置 — cgroup / 资源管理 / 日志'
 category: functions
@@ -41,9 +77,6 @@ trigger_keywords:
 - serverTLSBootstrap
 - logging
 - v=2
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -51,13 +84,22 @@ related_topics:
 - node-create/06-certificate
 - node-create/11-eviction
 - node-create/02-registration
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubelet 进阶配置 — cgroup / 资源管理 / 日志
 
 ## 概述
 
-kubelet 是每个 [[entities/kubernetes|kubernetes]] 节点上最核心的组件，它的配置直接影响节点的稳定性、性能和安全性。kubelet 的配置通过 `KubeletConfiguration` API 定义，以 YAML 文件形式存储在 `/var/lib/kubelet/config.yaml`。
+kubelet 是每个 Kubernetes 节点上最核心的组件，它的配置直接影响节点的稳定性、性能和安全性。kubelet 的配置通过 `KubeletConfiguration` API 定义，以 YAML 文件形式存储在 `/var/lib/kubelet/config.yaml`。
 
 在生产环境中，合理的 kubelet 配置至关重要：
 
@@ -405,3 +447,11 @@ cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 | `setupNodeActiveDeadlineHandler` | `pkg/kubelet/kubelet.go` | 节点状态管理 |
 | `evictionManager` | `pkg/kubelet/eviction/` | 驱逐管理 |
 | `podManager` | `pkg/kubelet/pod/` | Pod 管理 |
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]

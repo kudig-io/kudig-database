@@ -24,20 +24,21 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 服务账号
 
 ## 概述
 
-ServiceAccount（服务账号）是 Kubernetes 中的一种非人类账户，用于在集群内提供独立的安全身份。应用 Pod、系统组件以及集群内外的实体都可以使用特定 ServiceAccount 的凭据来标识自己。该身份在多种场景下非常有用，例如向 API server 认证或实施基于身份的安全策略。
+ServiceAccount（服务账号）是 [[Kubernetes|Kubernetes]] 中的一种非人类账户，用于在集群内提供独立的安全身份。应用 Pod、系统组件以及集群内外的实体都可以使用特定 ServiceAccount 的凭据来标识自己。该身份在多种场景下非常有用，例如向 API server 认证或实施基于身份的安全策略。
 
 ## 核心概念/原理
 
 ServiceAccount 具有以下关键属性：
 
 - **命名空间范围（Namespaced）**：每个 ServiceAccount 都绑定到一个 Kubernetes 命名空间。每个命名空间在创建时会自动获得一个名为 `default` 的 ServiceAccount。
-- **轻量级（Lightweight）**：ServiceAccount 存在于集群中，通过 Kubernetes API 定义，可快速创建以支持特定任务。
+- **轻量级（Lightweight）**：ServiceAccount 存在于集群中，通过 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 定义，可快速创建以支持特定任务。
 - **可移植（Portable）**：复杂的容器化工作负载配置可以包含系统组件的 ServiceAccount 定义，其轻量级和命名空间特性使配置易于移植。
 
 与用户账户（User account）不同：
@@ -76,7 +77,7 @@ automountServiceAccountToken: false
 ### 凭据获取方式
 
 - **TokenRequest API（推荐）**：从应用代码内请求短期 ServiceAccount 令牌，令牌到期自动失效并支持轮换。可为外部应用使用 sidecar 容器获取令牌。
-- **Token Volume Projection（推荐）**：在 Pod 规范中配置 projected volume，kubelet 会自动将 ServiceAccount 令牌作为 projected volume 挂载，并在过期前自动轮换。
+- **Token Volume Projection（推荐）**：在 Pod 规范中配置 projected volume，[[kubelet|kubelet]] 会自动将 ServiceAccount 令牌作为 projected volume 挂载，并在过期前自动轮换。
 - **ServiceAccount Token Secrets（不推荐）**：将 ServiceAccount 令牌作为 Kubernetes Secret 挂载。这些令牌不会过期也不会轮换。自 v1.24 起默认不再自动生成此类 Secret。
 
 ### 认证流程

@@ -21,17 +21,18 @@ trigger_keywords:
 - MOC
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 ---
 title: "topic-ai-agent MOC"
 category: concepts
 summary: "AI Agent — AI 智能体架构、工具调用、Agent 工作流"topic-ai-agent MOC""
-tags: [k8s, ai-agent]
+tags: k8s, ai-agent]
 sources: ["domain-14-ai-ml-infra/topic-ai-agent/MOC.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7
@@ -139,3 +140,7 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 - [[skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
 - [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Cross-reference
+
+## 相关合成分析
+
+- [[synthesis/gpu-scheduling-ai-workloads.md|gpu-scheduling-ai-workloads]]

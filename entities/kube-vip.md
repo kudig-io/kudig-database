@@ -1,5 +1,5 @@
 ---
-title: kube-vip
+title: kube-vip (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - kube-vip
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kube-vip
@@ -30,11 +31,11 @@ prerequisites:
 
 ## 概述
 
-kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它可以作为控制平面的高可用解决方案，提供浮动 VIP 确保 API Server 始终可访问。同时也可以作为 LoadBalancer 类型 Service 的实现，为裸金属环境提供服务负载均衡。
+kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它可以作为控制平面的高可用解决方案，提供浮动 VIP 确保 API Server 始终可访问。同时也可以作为 LoadBalancer 类型 [[Service|Service]] 的实现，为裸金属环境提供服务负载均衡。
 
 ## 核心能力
 
-- **控制平面 HA**: 为 Kubernetes API Server 提供 VIP
+- **控制平面 HA**: 为 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 提供 VIP
 - **Service LoadBalancer**: 裸金属 LoadBalancer 实现
 - **ARP/BGP**: 支持 Layer 2 (ARP) 和 Layer 3 (BGP) 模式
 - **Leader 选举**: 基于 Raft 或 Kubernetes Lease 的选举
@@ -74,7 +75,7 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 - [[kcl]] — KCL (Kusion Configuration Language)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kube-vip/kube-vip.md|kube-vip]]
+- kube-vip
 - [[references/k8s-cluster-delete|Kubernetes 集群删除操作指南]] — Cross-reference
 - [[skills/kubeadm-ha-cluster-setup|kubeadm 高可用集群搭建]] — Cross-reference
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference

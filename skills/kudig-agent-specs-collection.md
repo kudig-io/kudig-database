@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Agent 规范集
@@ -47,7 +48,7 @@ prerequisites:
 
 ### 知识图谱 RDF 模型
 - 命名空间：`kudig:` (`https://kudig.io/ontology/`)
-- 核心类：Domain, Topic, Document, Skill, FTA, Entity
+- 核心类：Domain, Topic, Document, [[SKILL|Skill]], FTA, Entity
 - 属性：depends_on, related_to, uses, implements
 - 支持 SPARQL 查询跨域推理
 

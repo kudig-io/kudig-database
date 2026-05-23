@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 网络配置最佳实践
+title: Kubernetes 网络配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 网络配置的最佳实践指南
 category: domain-11-production-operations/topic-best-practices/infrastructure
 tags:
@@ -54,9 +54,10 @@ cross_refs:
 - type: best-practice
   path: ./kubernetes-cluster.md
   label: 集群配置最佳实践
+created: "2026-05-23"
 ---
 
-# Kubernetes 网络配置最佳实践
+# [[Kubernetes|Kubernetes]] 网络配置最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -76,7 +77,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Service、Ingress）
+- Kubernetes 核心概念（Pod、[[Service|Service]]、[[Ingress|Ingress]]）
 - Linux 网络基础（iptables、ipvs、vxlan）
 - 网络安全基础（防火墙、ACL）
 
@@ -590,10 +591,10 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubern
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/deployment/04-production-environment-deployment.md|04-production-environment-deployment]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/kubernetes-cluster.md|kubernetes-cluster]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|storage]]
-- [[domain-11-production-operations/topic-best-practices/migration/01-migration-assessment-planning.md|01-migration-assessment-planning]]
+- 04-production-environment-deployment
+- kubernetes-cluster
+- storage
+- 01-migration-assessment-planning
 
 ## Related
 

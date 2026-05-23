@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Day 9: 控制平面 - Scheduler + Controller Manager
@@ -354,4 +355,4 @@ kubectl delete deployment controller-test
 
 ## 明日预告
 
-Day 10 将学习工作负载资源: Deployment、StatefulSet、DaemonSet，理解不同应用类型的管理方式。
+Day 10 将学习工作负载资源: Deployment、[[StatefulSet|StatefulSet]]、[[DaemonSet|DaemonSet]]，理解不同应用类型的管理方式。

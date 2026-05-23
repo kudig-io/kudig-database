@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 文化数字化架构设计
@@ -81,7 +82,7 @@ k8s_versions:
 
 # 文化数字化架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#文化数字化` `#数字博物馆` `#非遗` `#文物` `#阿里云`
 
 ---
@@ -308,8 +309,8 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -323,11 +324,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/81-smart-customs.md|81-smart-customs]]
-- [[domain-20-application-patterns/82-legaltech.md|82-legaltech]]
-- [[domain-20-application-patterns/84-national-park.md|84-national-park]]
-- [[domain-20-application-patterns/85-hydrogen-energy.md|85-hydrogen-energy]]
+- 81-smart-customs
+- 82-legaltech
+- 84-national-park
+- 85-hydrogen-energy
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

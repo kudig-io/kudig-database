@@ -29,12 +29,13 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Workload Reference
 
 ## 概述
-Workload Reference 是 [[entities/kubernetes|kubernetes]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控）。它允许将 Pod 链接到一个 Workload 对象，使调度器能够按组进行协同调度决策，而不是将 Pod 视为独立个体。
+Workload Reference 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控）。它允许将 Pod 链接到一个 Workload 对象，使调度器能够按组进行协同调度决策，而不是将 Pod 视为独立个体。
 
 ## 核心概念/原理
 - **Workload 引用**：在 Pod 的 `spec.workloadRef` 字段中指定同一命名空间下的 Workload 对象名称和 Pod 组名称。
@@ -180,9 +181,9 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i gan
 
 ## 交叉引用
 
-- [Workload API](workload-api.md) — Workload 资源的 API 定义和结构
-- [Pod Group Policies](pod-group-policies.md) — basic 和 gang 策略详解
-- [Jobs](jobs.md) — Job 控制器与 Workload 配合使用
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-api.md|Workload API]]](workload-api.md) — Workload 资源的 API 定义和结构
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略详解
+- [[domain-17-system-foundation/topic-dictionary/workloads/jobs.md|Jobs]]](jobs.md) — Job 控制器与 Workload 配合使用
 - [调度与驱逐](../scheduling/) — 调度器行为和 Pod 放置决策
 
 ## 参考链接

@@ -31,6 +31,7 @@ trigger_keywords:
 - StorageClass
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Persistent Storage Model (PV/PVC/StorageClass)
@@ -56,10 +57,10 @@ Kubernetes decouples storage from workloads through three objects:
 ## CSI (Container Storage Interface)
 
 CSI is the standard plugin interface for storage vendors. It provides:
-- **Controller Service**: Create/Delete/Attach/Detach volumes
+- **Controller [[Service|Service]]**: Create/Delete/Attach/Detach volumes
 - **Node Service**: Stage/Unstage/Publish/Unpublish volumes on nodes
 
-Popular CSI drivers include AWS EBS CSI, Azure Disk CSI, Ceph CSI, and cloud provider-specific drivers.
+Popular [[CSI Drivers|CSI drivers]] include AWS EBS CSI, Azure Disk CSI, Ceph CSI, and cloud provider-specific drivers.
 
 ## Reclaim Policies
 

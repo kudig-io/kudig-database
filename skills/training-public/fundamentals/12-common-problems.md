@@ -1,5 +1,5 @@
 ---
-title: 第十课：常见问题排查
+title: 第十课：常见问题排查 [fundamentals]
 description: 'title: 第十课：常见问题排查'
 category: learning
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,12 +43,12 @@ tags:
 - k8s
 - training
 - lecturer
-- coredns
+- [[CoreDNS|coredns]]
 - docker
 - hpa
 - job
-- ingress
-- networkpolicy
+- [[Ingress|ingress]]
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -559,7 +560,7 @@ kubectl top pods -n <namespace>
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/10-health-check.md|10-health-check]]
-- [[domain-11-production-operations/topic-learn/fundamentals/11-job-cronjob.md|11-job-cronjob]]
-- [[domain-11-production-operations/topic-learn/fundamentals/13-daemonset-basics.md|13-daemonset-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/14-statefulset-basics.md|14-statefulset-basics]]
+- 10-health-check
+- 11-job-cronjob
+- 13-daemonset-basics
+- 14-statefulset-basics

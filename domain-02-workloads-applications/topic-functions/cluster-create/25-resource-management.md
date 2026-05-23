@@ -1,4 +1,42 @@
 ---
+title: 资源管理与配额控制 (Resource Management) [cluster-create]
+description: 'title: 资源管理与配额控制 (Resource Management)'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- scheduler
+- hpa
+- job
+- rbac
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 资源管理与配额控制 (Resource Management) 是什么
+- 如何 资源管理与配额控制 (Resource Management)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 资源管理与配额控制
+- Resource
+- Management
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 资源管理与配额控制 (Resource Management)
 description: '# 资源管理与配额控制 (Resource Management)'
 category: functions
@@ -41,10 +79,6 @@ trigger_keywords:
 - request
 - allocatable
 - system reserved
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-4-workload-management
 - domain-10-troubleshooting-diagnostics
@@ -55,6 +89,15 @@ related_topics:
 - limit
 - scheduler
 - HPA
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 资源管理与配额控制 (Resource Management)
@@ -748,7 +791,15 @@ kubectl get priorityclasses
 ## 相关函数
 
 - [集群概览](01-overview.md) — kubeadm init 不创建 ResourceQuota
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — RBAC 和准入控制
+- [安全机制](16-security.md) — RBAC 和准入控制
 - [存储与卷](22-storage-volumes.md) — PVC 存储配额
 - [kube-proxy](21-kube-proxy.md) — Service 数量配额
 - [初始化阶段](17-init-phases.md) — API Server 启用准入插件
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volumes.md|volumes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]]

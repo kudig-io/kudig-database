@@ -23,6 +23,7 @@ trigger_keywords:
 - 难度指数与标签索引
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 元数据索引

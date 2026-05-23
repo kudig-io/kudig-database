@@ -22,6 +22,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 本页汇总了 **Security** 领域的 Kubernetes 最佳实践。
@@ -54,11 +55,11 @@ prerequisites:
 
 - **安全工程师**: 了解Kubernetes网络安全架构和策略配置
 - **网络工程师**: 掌握网络策略和服务网格配置
-- **SRE**: 学习网络安全故障排查和监控
+- **SRE**: 学习网络安全问题排查和监控
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Service、Namespace）
+- Kubernetes 核心概念（Pod、[[Service|Service]]、Namespace）
 - 网络安全基础（防火墙、ACL、加密）
 - 服务网格基础（Istio、Linkerd）
 
@@ -117,7 +118,7 @@ prerequisites:
 ### 目标读者
 
 - **安全工程师**: 了解Kubernetes安全架构和Pod安全标准
-- **SRE**: 掌握安全配置和故障排查
+- **SRE**: 掌握安全配置和问题排查
 - **DevOps 工程师**: 学习安全上下文和RBAC配置
 
 ### 前置知识
@@ -193,7 +194,7 @@ cross_refs:
 ### 目标读者
 
 - **安全工程师**: 了解Kubernetes密钥管理架构和安全配置
-- **SRE**: 掌握密钥轮换和故障排查
+- **SRE**: 掌握密钥轮换和问题排查
 - **DevOps 工程师**: 学习Secrets配置和外部密钥管理
 
 ### 前置知识

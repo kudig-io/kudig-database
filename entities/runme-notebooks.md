@@ -1,5 +1,5 @@
 ---
-title: Runme
+title: Runme (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - Runme
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Runme
@@ -61,11 +62,11 @@ Runme 是一个交互式 Markdown 运行时，可以将 Markdown 文档中的代
 ## Related
 
 - [[kpt]] — kpt
-- [[logging-operator]] — Logging Operator
+- [[logging-operator]] — Loggingng Operator|Logging Operator]]
 - [[kubeclipper]] — KubeClipper
 - [[README]] — FTA 故障树清单索引
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/runme-notebooks/runme-notebooks.md|runme-notebooks]]
+- runme-notebooks
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

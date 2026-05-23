@@ -1,4 +1,39 @@
 ---
+title: Agent Harness Loop 与执行引擎深度设计 (domain-14-ai-ml-infra)
+description: 'title: Agent Harness Loop 与执行引擎深度设计'
+category: general
+tags:
+- ai
+- ai-agent
+- prometheus
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 35min
+intent_queries:
+- Agent Harness Loop 与执行引擎深度设计 是什么
+- 如何 Agent Harness Loop 与执行引擎深度设计
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- Loop
+- 与执行引擎深度设计
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness Loop 与执行引擎深度设计
 description: '# Agent Harness Loop 与执行引擎深度设计'
 category: ai-agent
@@ -8,7 +43,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -27,10 +62,15 @@ trigger_keywords:
 - 与执行引擎深度设计
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness Loop 与执行引擎深度设计
@@ -39,7 +79,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Loop（循环层）是 Agent Harness 六层架构的第一层，也是整个 Harness 的**执行心脏**。它决定了 Agent 如何观察、思考、行动，以及何时终止。一个设计良好的 Loop 层不仅驱动 Agent 完成任务，还负责异常处理、漂移检测、资源管控和执行轨迹记录。
 
@@ -47,9 +87,9 @@ Loop（循环层）是 Agent Harness 六层架构的第一层，也是整个 Har
 
 ---
 
-## 1. Loop 层核心模型
+<!-- chunk: 1. Loop 层核心模型 -->## 1. Loop 层核心模型
 
-### 1.1 有限状态机（FSM）模型
+#<!-- chunk: 1.1 有限状态机（FSM）模型 -->## 1.1 有限状态机（FSM）模型
 
 Agent Loop 的本质是一个有限状态机。每个循环迭代在以下状态间转移：
 
@@ -84,7 +124,7 @@ INIT ──→ OBSERVE ──→ THINK ──→ DECIDE
   - 异常中断（unrecoverable error）
 ```
 
-### 1.2 状态定义与转移规则
+#<!-- chunk: 1.2 状态定义与转移规则 -->## 1.2 状态定义与转移规则
 
 ```python
 from enum import Enum, auto
@@ -133,9 +173,9 @@ class TerminationReason(Enum):
 
 ---
 
-## 2. 执行引擎架构
+<!-- chunk: 2. 执行引擎架构 -->## 2. 执行引擎架构
 
-### 2.1 核心执行引擎实现
+#<!-- chunk: 2.1 核心执行引擎实现 -->## 2.1 核心执行引擎实现
 
 ```python
 import asyncio
@@ -299,7 +339,7 @@ class ExecutionEngine:
         return result
 ```
 
-### 2.2 异步执行引擎
+#<!-- chunk: 2.2 异步执行引擎 -->## 2.2 异步执行引擎
 
 生产环境中，Agent 通常需要并发处理多个任务或并行调用多个工具：
 
@@ -370,9 +410,9 @@ class AsyncExecutionEngine:
 
 ---
 
-## 3. 反漂移检测算法
+<!-- chunk: 3. 反漂移检测算法 -->## 3. 反漂移检测算法
 
-### 3.1 漂移类型分类
+#<!-- chunk: 3.1 漂移类型分类 -->## 3.1 漂移类型分类
 
 Agent 在执行过程中可能陷入多种漂移模式：
 
@@ -405,7 +445,7 @@ Agent 漂移类型分类:
    检测: 动作与目标的语义距离增加
 ```
 
-### 3.2 多维度漂移检测器
+#<!-- chunk: 3.2 多维度漂移检测器 -->## 3.2 多维度漂移检测器
 
 ```python
 from collections import Counter
@@ -550,7 +590,7 @@ class DriftDetector:
         return len(intersection) / len(union)
 ```
 
-### 3.3 漂移恢复策略
+#<!-- chunk: 3.3 漂移恢复策略 -->## 3.3 漂移恢复策略
 
 ```python
 class DriftRecoveryStrategy:
@@ -623,9 +663,9 @@ class DriftRecoveryStrategy:
 
 ---
 
-## 4. 执行策略模式
+<!-- chunk: 4. 执行策略模式 -->## 4. 执行策略模式
 
-### 4.1 策略模式分类
+#<!-- chunk: 4.1 策略模式分类 -->## 4.1 策略模式分类
 
 ```
 Agent 执行策略分类:
@@ -656,7 +696,7 @@ Agent 执行策略分类:
    示例: 跨集群升级
 ```
 
-### 4.2 分阶段执行引擎
+#<!-- chunk: 4.2 分阶段执行引擎 -->## 4.2 分阶段执行引擎
 
 ```python
 class PhasedExecutionEngine:
@@ -723,9 +763,9 @@ class PhasedExecutionEngine:
 
 ---
 
-## 5. 执行轨迹管理
+<!-- chunk: 5. 执行轨迹管理 -->## 5. 执行轨迹管理
 
-### 5.1 Trajectory 数据模型
+#<!-- chunk: 5.1 Trajectory 数据模型 -->## 5.1 Trajectory 数据模型
 
 ```python
 from dataclasses import dataclass, field
@@ -805,7 +845,7 @@ class ExecutionTrajectory:
         }, indent=2, ensure_ascii=False)
 ```
 
-### 5.2 轨迹分析与优化
+#<!-- chunk: 5.2 轨迹分析与优化 -->## 5.2 轨迹分析与优化
 
 ```python
 class TrajectoryAnalyzer:
@@ -909,9 +949,9 @@ class TrajectoryAnalyzer:
 
 ---
 
-## 6. K8S 运维场景 Loop 实战
+<!-- chunk: 6. K8S 运维场景 Loop 实战 -->## 6. K8S 运维场景 Loop 实战
 
-### 6.1 Pod Pending 诊断 Loop
+#<!-- chunk: 6.1 Pod Pending 诊断 Loop -->## 6.1 Pod Pending 诊断 Loop
 
 ```python
 class PodPendingDiagnosisLoop:
@@ -973,7 +1013,7 @@ class PodPendingDiagnosisLoop:
         return self._synthesize_diagnosis(findings)
 ```
 
-### 6.2 故障处置执行引擎
+#<!-- chunk: 6.2 故障处置执行引擎 -->## 6.2 故障处置执行引擎
 
 ```python
 class IncidentExecutionEngine:
@@ -1032,9 +1072,9 @@ class IncidentExecutionEngine:
 
 ---
 
-## 7. 最佳实践
+<!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-### 7.1 Loop 层设计核心原则
+#<!-- chunk: 7.1 Loop 层设计核心原则 -->## 7.1 Loop 层设计核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1045,7 +1085,7 @@ class IncidentExecutionEngine:
 | **分阶段** | 复杂任务分阶段执行 | 信息收集→分析→行动三阶段 |
 | **快速路径** | 已知场景提前终止 | SOP 匹配时跳过探索阶段 |
 
-### 7.2 反模式
+#<!-- chunk: 7.2 反模式 -->## 7.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -1057,7 +1097,7 @@ class IncidentExecutionEngine:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -1069,7 +1109,7 @@ class IncidentExecutionEngine:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -1081,3 +1121,27 @@ class IncidentExecutionEngine:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness Loop 层设计。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 29-agentscope-studio-skill-demo
+- 30-agent-harness-engineering
+- 32-agent-harness-tool-engineering
+- 33-agent-harness-context-memory

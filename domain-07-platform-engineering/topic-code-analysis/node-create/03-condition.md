@@ -38,6 +38,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 节点状态与健康检查 Node Conditions 源码分析

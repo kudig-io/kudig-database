@@ -52,11 +52,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# 07 - Envoy Gateway 企业级实践
+# 07 - [[Envoy|Envoy]] Gateway 企业级实践
 
-> **文档版本**: v1.0 | **适用版本**: Envoy Gateway 1.x, Kubernetes 1.26+ | **更新日期**: 2026-03-04 | **关键词**: Envoy Gateway, Gateway API, xDS, EnvoyPatchPolicy, ExtensionPolicy
+> **文档版本**: v1.0 | **适用版本**: Envoy Gateway 1.x, [[Kubernetes|Kubernetes]] 1.26+ | **更新日期**: 2026-03-04 | **关键词**: Envoy Gateway, Gateway API, xDS, EnvoyPatchPolicy, ExtensionPolicy
 
 <!-- chunk: 目录 -->## 目录
 
@@ -75,14 +76,14 @@ authors:
 
 <!-- chunk: 1. 项目概述 -->## 1. 项目概述
 
-Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 Kubernetes API 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
+Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
 
 #<!-- chunk: 核心定位 -->## 核心定位
 
 - **CNCF 官方项目**：与 Envoy Proxy 同属 CNCF 生态，2023 年加入沙箱，2024 年晋升孵化级
 - **Gateway API First**：100% 以 Kubernetes Gateway API 为主接口，不引入自有私有 CRD 作为核心路由对象
 - **官方背书**：由 Envoy 核心维护者主导，矩阵涵盖 Tetrate、Microsoft、VMware 等主要贡献者
-- **轻量控制面**：相比 Istio/Contour 等，控制面极为精简，仅运行单个 `envoy-gateway` 控制器 Pod
+- **轻量控制面**：相比 [[Istio|Istio]]/Contour 等，控制面极为精简，仅运行单个 `envoy-gateway` 控制器 Pod
 
 #<!-- chunk: 适用场景 -->## 适用场景
 
@@ -1073,22 +1074,22 @@ curl http://localhost:19000/ready
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
-- [[domain-03-networking-traffic/10-wasm-plugin-ecosystem.md|10 - Wasm 插件生态与开发实践]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 03 - API 网关选型指南与对比矩阵
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
+- 10 - Wasm 插件生态与开发实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05-apisix-enterprise-gateway]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06-kong-enterprise-gateway]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08-traefik-enterprise-gateway]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09-nginx-ingress-migration-guide]]
+- 05-apisix-enterprise-gateway
+- 06-kong-enterprise-gateway
+- 08-traefik-enterprise-gateway
+- 09-nginx-ingress-migration-guide

@@ -58,11 +58,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [FinOps Foundation](https://www.finops.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [FinOps Foundation](https://www.finops.org/)
 
 ---
 
@@ -708,7 +709,7 @@ spec:
 | 工具 | 类型 | 云支持 | K8s原生 | GPU成本 | 开源 | 价格 |
 |-----|------|-------|--------|--------|------|------|
 | **Kubecost** | 成本分析 | AWS/GCP/Azure | 是 | 是 | 是 | 免费/企业版 |
-| **OpenCost** | 成本分析 | 多云 | 是 | 是 | 是 | 免费 |
+| **[[OpenCost|OpenCost]]** | 成本分析 | 多云 | 是 | 是 | 是 | 免费 |
 | **Vantage** | FinOps平台 | 多云 | 是 | 是 | 否 | 付费 |
 | **CloudHealth** | FinOps平台 | 多云 | 部分 | 否 | 否 | 付费 |
 | **Spot.io** | 优化 | AWS/GCP/Azure | 是 | 是 | 否 | 付费 |
@@ -843,25 +844,25 @@ kubectl get pods -A -o json | jq '[.items[] | select(.metadata.labels["cost-cent
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|10-model-deployment-management]]
-- [[domain-14-ai-ml-infra/11-ai-security-model-protection.md|11-ai-security-model-protection]]
-- [[domain-14-ai-ml-infra/13-ai-platform-observability.md|13-ai-platform-observability]]
-- [[domain-14-ai-ml-infra/14-troubleshooting-performance.md|14-troubleshooting-performance]]
+- 10-model-deployment-management
+- 11-ai-security-model-protection
+- 13-ai-platform-observability
+- 14-troubleshooting-performance
 
 ## Related
 

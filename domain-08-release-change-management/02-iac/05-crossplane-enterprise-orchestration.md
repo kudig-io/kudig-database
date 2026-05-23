@@ -52,16 +52,17 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Crossplane Enterprise Infrastructure Orchestration 深度实践
+# [[Crossplane|Crossplane]] Enterprise Infrastructure Orchestration 深度实践
 
 > **Author**: Multi-Cloud Platform Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
 > **Scenario**: Enterprise-grade multi-cloud infrastructure orchestration | **Complexity**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other cloud providers.
+This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider.md|cloud providers]].
 
 <!-- chunk: 1. Crossplane Enterprise Architecture -->## 1. Crossplane Enterprise Architecture
 
@@ -372,7 +373,7 @@ spec:
 
 <!-- chunk: 3. GitOps Integration and Automation -->## 3. GitOps Integration and Automation
 
-#<!-- chunk: 3.1 Argo CD Integration -->## 3.1 Argo CD Integration
+#<!-- chunk: 3.1 [[Argo|Argo]] CD Integration -->## 3.1 Argo CD Integration
 
 ```yaml
 # argo_application.yaml
@@ -406,7 +407,7 @@ spec:
         - /status
 ```
 
-#<!-- chunk: 3.2 Flux CD Integration -->## 3.2 Flux CD Integration
+#<!-- chunk: 3.2 [[Flux|Flux]] CD Integration -->## 3.2 Flux CD Integration
 
 ```yaml
 # flux_kustomization.yaml
@@ -902,18 +903,18 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
+- domain-24-infrastructure-as-code MOC
 - [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|Terraform企业级基础设施即代码实践]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|Ansible企业级自动化运维深度实践]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|Pulumi Enterprise Infrastructure as Code Platform]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|Crossplane 平台工程实践指南]]
+- Domain-24 基础设施即代码 — 开源项目索引
+- Terraform企业级基础设施即代码实践
+- Ansible企业级自动化运维深度实践
+- Pulumi Enterprise Infrastructure as Code Platform
+- Azure Resource Manager (ARM) Enterprise 深度实践
+- Crossplane 平台工程实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|03-pulumi-enterprise-iac]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|04-azure-resource-manager-enterprise]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|99-crossplane-platform-guide]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|01-terraform-enterprise-iac]]
+- 03-pulumi-enterprise-iac
+- 04-azure-resource-manager-enterprise
+- 99-crossplane-platform-guide
+- 01-terraform-enterprise-iac

@@ -44,6 +44,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 06 - 存储性能与 IOPS
@@ -637,12 +638,12 @@ chmod +x /usr/local/bin/storage-analyzer.sh
 <!-- chunk: 相关文档 -->## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- [K8s 存储性能调优](../domain-04-storage-data/08-storage-performance-tuning.md) - Kubernetes 存储性能优化
-- [Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- K8s 存储性能调优](../domain-04-storage-data/08-storage-performance-tuning.md) - [[Kubernetes|Kubernetes]] 存储性能优化
+- Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 
 ## See Also
 
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04-distributed-storage-systems]]
-- [[domain-04-storage-data/05-storage-management-operations.md|05-storage-management-operations]]
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01-storage-technologies-overview]]
-- [[domain-04-storage-data/02-block-file-object-storage.md|02-block-file-object-storage]]
+- 04-distributed-storage-systems
+- 05-storage-management-operations
+- 01-storage-technologies-overview
+- storage.md|02-block-file-object-storage]]

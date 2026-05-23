@@ -1,5 +1,5 @@
 ---
-title: kubectl watch 输出解析语料
+title: kubectl watch 输出解析语料 [topic-structural-trouble-shooting]
 description: 'title: kubectl watch 输出解析语料'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: kubectl watch 输出解析语料
@@ -48,11 +49,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - hpa
 - job
-- ingress
+- [[Ingress|ingress]]
 - rbac
 - agent
 last_updated: 2026-05
@@ -447,8 +448,8 @@ related:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/ko.md|ko]]

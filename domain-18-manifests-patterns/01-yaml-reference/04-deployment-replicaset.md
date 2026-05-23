@@ -42,9 +42,10 @@ prerequisites:
 - mysql-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
-title: 04 - Deployment / ReplicaSet YAML 配置参考
+title: 04 - Deployment / [[ReplicaSet|ReplicaSet]] YAML 配置参考
 description: '# 04 - Deployment / ReplicaSet YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -52,9 +53,9 @@ tags:
 - yaml
 - manifest
 - template
-- etcd
+- [[etcd|etcd]]
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - jaeger
 - istio
 - helm
@@ -2808,22 +2809,22 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10 - Ingress / IngressClass YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02-namespace-resourcequota-limitrange]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03-pod-specification-complete]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05-statefulset-reference]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06-daemonset-reference]]
+- 02-namespace-resourcequota-limitrange
+- 03-pod-specification-complete
+- 05-statefulset-reference
+- 06-daemonset-reference

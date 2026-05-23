@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Cloud Providers
@@ -56,23 +57,37 @@ prerequisites:
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
-- [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
+- networking|发布说明索引 — 网络]] — Cross-reference
+- domain-03-networking-traffic KUDIG Database — Global MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
+- [[concepts/bp-common-best-practices|[[Kubernetes 通用最佳实践参考|Kubernetes 通用最佳实践参考]]]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+
+## 阿里云专有云与ACK (新增)
+
+| 文档 | 说明 |
+|:---|:---|
+| 专有云架构概述 | 阿里云专有云产品矩阵、部署模式、与公有云差异 |
+| ACK集群运维 | ACK专有版/托管版集群管理、日志监控、安全 |
+| Terway-CNI网络 | Terway模式详解、IPAM管理、网络问题排查 |
+| 阿里云存储集成 | ESSD/NAS/OSS存储CSI集成与问题排查 |
+| 阿里云SLB与Ingress | SLB/ALB/NLB负载均衡与Ingress配置 |
+| 专有云远程顾问指南 | 远程诊断方法论与受限场景替代方案 |
+| 阿里云文档索引 | 全部阿里云文档的快速入口 |
+

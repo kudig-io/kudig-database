@@ -44,11 +44,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 11 - 存储与卷事件
 
-> **适用版本**: Kubernetes v1.25 - v1.33 | **最后更新**: 2026-05 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.33 | **最后更新**: 2026-05 | **作者**: Allen Galler
 
 > **本文档详细记录所有存储相关事件,包括卷挂载、卷附加、PV/PVC 管理和 CSI 驱动事件。**
 
@@ -59,7 +60,7 @@ authors:
 - [一、事件总览](#一事件总览)
 - [二、卷生命周期状态与事件关系](#二卷生命周期状态与事件关系)
 - [三、CSI 驱动架构与事件流](#三csi-驱动架构与事件流)
-- [四、kubelet 卷挂载事件](#四kubelet-卷挂载事件)
+- [四、[[kubelet|kubelet]] 卷挂载事件](#四kubelet-卷挂载事件)
 - [五、PV Controller 动态供应事件](#五pv-controller-动态供应事件)
 - [六、卷扩容事件](#六卷扩容事件)
 - [七、卷回收与删除事件](#七卷回收与删除事件)
@@ -712,7 +713,7 @@ file -s /dev/xvdba
 - 事件: `MountVolume.SetUp failed for volume "config": configmap "app-config" not found`
 
 **根因**:
-Helm Chart 定义了 ConfigMap 挂载,但未实际创建 ConfigMap
+[[Helm|Helm]] Chart 定义了 ConfigMap 挂载,但未实际创建 ConfigMap
 
 **解决方案**:
 ```bash
@@ -2011,7 +2012,7 @@ spec:
       storage: 20Gi
 ```
 
-##<!-- chunk: **定时备份 CronJob** -->## **定时备份 CronJob**
+##<!-- chunk: **定时备份 [[CronJob|CronJob]]** -->## **定时备份 CronJob**
 
 ```yaml
 apiVersion: batch/v1
@@ -2177,25 +2178,25 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
 
 ## See Also
 
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09-job-cronjob-batch-events]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10-service-networking-events]]
-- [[domain-17-system-foundation/12-autoscaling-events.md|12-autoscaling-events]]
-- [[domain-17-system-foundation/13-security-admission-rbac-events.md|13-security-admission-rbac-events]]
+- 09-job-cronjob-batch-events
+- 10-service-networking-events
+- 12-autoscaling-events
+- 13-security-admission-rbac-events
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: 第十一章：FTA 驱动的 Runbook 自动化
+title: 第十一章：FTA 驱动的 Runbook 自动化 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 fta_id: FTA-11_DRIVEN_RUNBOOK_AUTOMATION-001
 component: 11 Driven Runbook Automation
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第十一章：FTA 驱动的 Runbook 自动化
@@ -48,7 +49,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - rag
 - agent
 last_updated: 2026-05
@@ -84,8 +85,8 @@ k8s_versions:
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十章：Agent 编排模式与 FTA 逻辑门映射](./10-agent-orchestration-patterns.md)  
-> **下一章**: [第十二章：FTA 与 AIOps 平台集成架构](./12-fta-aiops-integration.md)
+> **上一章**: 第十章：Agent 编排模式与 FTA 逻辑门映射](./10-agent-orchestration-patterns.md)  
+> **下一章**: 第十二章：FTA 与 AIOps 平台集成架构](./12-fta-aiops-integration.md)
 
 ---
 

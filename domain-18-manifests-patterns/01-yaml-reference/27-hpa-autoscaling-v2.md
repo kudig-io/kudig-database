@@ -52,11 +52,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md
   label: '故障树: hpa'
+created: "2026-05-23"
 ---
 
 # 27 - HorizontalPodAutoscaler v2 YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **主题**: HPA v2 水平自动扩缩容、多指标支持、扩缩容行为控制
 
 <!-- chunk: 目录 -->## 目录
@@ -265,7 +266,7 @@ spec:
 **使用场景**:
 - **Service Mesh**: 避免 Sidecar CPU 影响扩缩容决策
 - **多容器 Pod**: 仅基于主容器指标扩缩容
-- **Daemonset + Sidecar**: 精确监控业务容器
+- **[[DaemonSet|Daemonset]] + Sidecar**: 精确监控业务容器
 
 #<!-- chunk: 3. Pods 自定义指标 -->## 3. Pods 自定义指标
 
@@ -298,7 +299,7 @@ spec:
 ```
 
 **指标来源**:
-- **Prometheus Adapter**: 从 Prometheus 查询指标
+- **[[Prometheus|Prometheus]] Adapter**: 从 Prometheus 查询指标
 - **Datadog/Custom Metrics API**: 第三方监控系统
 
 **配置示例** (Prometheus Adapter):
@@ -1497,25 +1498,25 @@ kubectl get events --field-selector reason=TriggeredScaleUp
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/25-validatingadmissionpolicy.md|25-validatingadmissionpolicy]]
-- [[domain-18-manifests-patterns/26-priorityclass-runtimeclass.md|26-priorityclass-runtimeclass]]
-- [[domain-18-manifests-patterns/28-poddisruptionbudget-reference.md|28-poddisruptionbudget-reference]]
-- [[domain-18-manifests-patterns/29-customresourcedefinition.md|29-customresourcedefinition]]
+- 25-validatingadmissionpolicy
+- 26-priorityclass-runtimeclass
+- 28-poddisruptionbudget-reference
+- 29-customresourcedefinition
 
 ## Related
 

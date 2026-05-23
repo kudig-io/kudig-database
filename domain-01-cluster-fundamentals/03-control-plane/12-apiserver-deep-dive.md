@@ -85,11 +85,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md
   type: fta
   desc: API Server 故障树
+created: "2026-05-23"
 ---
 
 # kube-apiserver 深度解析 (kube-apiserver Deep Dive)
 
-> kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API 接口，是所有组件通信的唯一入口
+> kube-apiserver 是 [[Kubernetes|Kubernetes]] 控制平面的核心组件，提供 RESTful API 接口，是所有组件通信的唯一入口
 
 ---
 
@@ -147,7 +148,7 @@ related_docs:
 
 | API组 | 路径前缀 | 包含资源 | 说明 |
 |:---|:---|:---|:---|
-| **Core (Legacy)** | /api/v1 | pods, services, configmaps, secrets, nodes | 核心资源 |
+| **Core (Legacy)** | /api/v1 | [[Pods|pods]], services, configmaps, secrets, nodes | 核心资源 |
 | **apps** | /apis/apps/v1 | deployments, statefulsets, daemonsets, replicasets | 应用工作负载 |
 | **batch** | /apis/batch/v1 | jobs, cronjobs | 批处理任务 |
 | **networking.k8s.io** | /apis/networking.k8s.io/v1 | ingresses, networkpolicies | 网络资源 |
@@ -1739,37 +1740,37 @@ systemctl restart kube-apiserver
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
 
 - [[etcd]]
 
-- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md|KCM 深度解析]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-04-storage-data/MOC.md|相关知识域: domain-04-storage-data]]
-- [[domain-05-security-compliance/MOC.md|相关知识域: domain-05-security-compliance]]
+- etcd 深度解析
+- KCM 深度解析
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-04-storage-data
+- 相关知识域: domain-05-security-compliance
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery.md|10-plane-backup-disaster-recovery]]
-- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|11-etcd-deep-dive]]
-- [[domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md|13-kube-controller-manager-deep-dive]]
-- [[domain-01-cluster-fundamentals/14-cloud-controller-manager-deep-dive.md|14-cloud-controller-manager-deep-dive]]
+- 10-plane-backup-disaster-recovery
+- 11-etcd-deep-dive
+- 13-kube-controller-manager-deep-dive
+- 14-cloud-controller-manager-deep-dive

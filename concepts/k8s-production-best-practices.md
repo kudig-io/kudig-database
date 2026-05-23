@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 生产环境最佳实践
@@ -44,7 +45,7 @@ prerequisites:
 
 ### 纵深防御原则
 
-多层安全防护，避免单点故障。实施网络策略、[[skills/k8s-pod-security-guide.md|Pod 安全]]、[[concepts/secrets-management.md|密钥管理]]，进行安全扫描和渗透测试。
+多层安全防护，避免单点问题。实施网络策略、[[skills/k8s-pod-security-guide.md|Pod 安全]]、[[concepts/secrets-management.md|密钥管理]]，进行安全扫描和渗透测试。
 
 ### 零信任原则
 
@@ -54,15 +55,15 @@ prerequisites:
 
 ### 高可用原则
 
-避免单点故障，确保服务连续性。[[skills/k8s-cluster-configuration-guide.md|多副本部署]]、跨可用区分布，进行故障演练和恢复测试。
+避免单点问题，确保服务连续性。[[skills/k8s-cluster-configuration-guide.md|多副本部署]]、跨可用区分布，进行问题演练和恢复测试。
 
 ### 容错性原则
 
-系统能够处理故障并继续运行。配置健康检查、自动重启、断路器，进行故障注入和混沌工程。
+系统能够处理问题并继续运行。配置健康检查、自动重启、断路器，进行问题注入和混沌工程。
 
 ### 可恢复性原则
 
-系统能够从故障中快速恢复。建立 [[skills/k8s-disaster-recovery-guide.md|备份策略]]、恢复流程、[[skills/k8s-disaster-recovery-guide.md|灾难恢复]]，进行恢复演练和 RTO/RPO 测试。
+系统能够从问题中快速恢复。建立 [[skills/k8s-disaster-recovery-guide.md|备份策略]]、恢复流程、[[skills/k8s-disaster-recovery-guide.md|灾难恢复]]，进行恢复演练和 RTO/RPO 测试。
 
 ## 可观测性原则
 
@@ -82,7 +83,7 @@ prerequisites:
 
 ### 自动化原则
 
-尽可能自动化重复性工作。实施 CI/CD、[[concepts/gitops-principles.md|GitOps]]、[[skills/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
+尽可能自动化重复性工作。实施 CI/CD、[[concepts/gitops-principles.md|[[GitOps 速查卡|GitOps]]]]、[[skills/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
 
 ### 标准化原则
 
@@ -127,7 +128,7 @@ prerequisites:
 
 ### 监控覆盖不全
 
-未监控所有关键组件和指标会导致故障发现延迟和问题定位困难。应监控所有关键指标，配置合理的告警策略，定期审查监控覆盖率 ^[inferred]。
+未监控所有关键组件和指标会导致问题发现延迟和问题定位困难。应监控所有关键指标，配置合理的告警策略，定期审查监控覆盖率 ^[inferred]。
 
 ### 备份验证缺失
 
@@ -135,10 +136,10 @@ prerequisites:
 
 ## 相关资源
 
-- [[skills/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]]
-- [[skills/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
-- [[skills/k8s-storage-configuration-guide.md|Kubernetes 存储配置最佳实践]]
-- [[skills/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
+- [[skills/k8s-cluster-configuration-guide.md|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]]
+- [[skills/k8s-network-configuration-guide.md|[[Kubernetes 网络配置最佳实践|Kubernetes 网络配置最佳实践]]]]
+- [[skills/k8s-storage-configuration-guide.md|[[Kubernetes 存储配置最佳实践|Kubernetes 存储配置最佳实践]]]]
+- [[skills/k8s-logging-management-guide.md|[[Kubernetes 日志管理最佳实践|Kubernetes 日志管理最佳实践]]]]
 - [[skills/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[skills/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
 - [[skills/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]]

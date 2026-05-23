@@ -1,5 +1,5 @@
 ---
-title: Domain-10 扩展生态质量报告 (v3.0)
+title: Domain-10 扩展生态质量报告 (v3.0) [quality]
 description: '- **总文档数量**: 17 篇 (新增1篇企业级最佳实践)'
 category: general
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Domain-10 扩展生态质量报告 (v3.0)
@@ -62,7 +63,7 @@ prerequisites:
 │                           技术领域覆盖图                                    │
 ├─────────────────────────────────────────────────────────────────────────┤
 │  开发层    │  管理层    │  部署层    │  治理层    │  运维层    │  企业层      │
-│  CRD/      │  HELM/     │  CI/CD/    │  [[entities/service|service]]   │  BASIC     │  ENTERPRISE  │
+│  CRD/      │  HELM/     │  CI/CD/    │  service   │  BASIC     │  ENTERPRISE  │
 │  OPERATOR  │  KUSTOMIZE │  GITOPS    │  MESH      │  OPS       │  MANAGEMENT  │
 │ (01-04)   │ (05-07)   │ (08-09)   │ (11-12)   │ (13)      │ (14-17)     │
 └─────────────────────────────────────────────────────────────────────────┘

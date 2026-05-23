@@ -1,5 +1,5 @@
 ---
-title: ModelPack
+title: ModelPack (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - ModelPack
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # ModelPack
@@ -68,9 +69,9 @@ ModelPack 是一个 ML/AI 模型打包和分发标准，将机器学习模型、
 - [[docker]] — Docker
 - [[harbor]] — Harbor
 
-- [[domain-19-landscape-references/sandbox/modelpack/modelpack.md|modelpack]]
-- [[entities/eraser.md|Eraser]]
-- [[entities/slimtoolkit.md|SlimToolkit]]
+- modelpack
+- [[entities/eraser.md|[[Eraser|Eraser]]]]
+- [[entities/slimtoolkit.md|[[SlimToolkit|SlimToolkit]]]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,5 +1,41 @@
 ---
-title: OpenClaw SKILL.md 机制深度解析
+title: OpenClaw SKILL.md 机制深度解析 (domain-14-ai-ml-infra)
+description: 'title: OpenClaw SKILL.md 机制深度解析'
+category: general
+tags:
+- ai
+- ai-agent
+- daily-ops
+- etcd
+- gpu
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenClaw SKILL.md 机制深度解析 是什么
+- 如何 OpenClaw SKILL.md 机制深度解析
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- OpenClaw
+- SKILL.md
+- 机制深度解析
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
+title: OpenClaw [[SKILL|SKILL]].md 机制深度解析
 description: '# OpenClaw SKILL.md 机制深度解析'
 category: ai-agent
 tags:
@@ -8,7 +44,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - gpu
 last_updated: 2026-05
 difficulty: advanced
@@ -27,10 +63,15 @@ trigger_keywords:
 - 机制深度解析
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- etcd-basics
-- gpu-scheduling-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenClaw SKILL.md 机制深度解析
@@ -39,7 +80,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 SKILL.md 是 OpenClaw File-First 架构中定义 **Agent 领域知识和标准操作流程（SOP）** 的配置文件。它告诉 Agent "会什么"——覆盖哪些故障域、每个故障类型的标准诊断步骤、决策树和知识库关联。在 Harness Engineering 中映射到 **Context 层（知识上下文）+ Loop 层（SOP 驱动执行）**。
 
@@ -47,16 +88,16 @@ SKILL.md 与 Anthropic Agent Skill 规范完全兼容，是连接"知识库"与"
 
 ---
 
-## 1. 设计原理
+<!-- chunk: 1. 设计原理 -->## 1. 设计原理
 
-### 1.1 渐进式披露（Progressive Disclosure）
+#<!-- chunk: 1.1 渐进式披露（Progressive Disclosure） -->## 1.1 渐进式披露（Progressive Disclosure）
 
 ```
 Anthropic Agent Skill 规范的核心原则:
 
 Level 1: 元数据（~100 tokens）
   │  name: k8s-operations-skill
-  │  description: "[[entities/kubernetes|kubernetes]] 运维诊断全栈技能库"
+  │  description: "Kubernetes 运维诊断全栈技能库"
   │  Agent 通过元数据判断"这个 Skill 是否与当前任务相关"
   │
 Level 2: 指令（< 5000 tokens）
@@ -73,7 +114,7 @@ Level 3: 资源（按需加载）
   Token 节省: 70%
 ```
 
-### 1.2 三种知识结构化范式
+#<!-- chunk: 1.2 三种知识结构化范式 -->## 1.2 三种知识结构化范式
 
 | 范式 | 说明 | 适用场景 | SKILL.md 对应 |
 |------|------|---------|--------------|
@@ -105,7 +146,7 @@ Level 3: 资源（按需加载）
   ▼ 输出结论
 ```
 
-### 1.3 TOOLS.md vs SKILL.md 的边界
+#<!-- chunk: 1.3 TOOLS.md vs SKILL.md 的边界 -->## 1.3 TOOLS.md vs SKILL.md 的边界
 
 ```
 清晰的职责分离:
@@ -128,9 +169,9 @@ SKILL.md = "知识"（Agent 怎么做）
 
 ---
 
-## 2. Harness Engineering 映射
+<!-- chunk: 2. Harness Engineering 映射 -->## 2. Harness Engineering 映射
 
-### 2.1 映射关系
+#<!-- chunk: 2.1 映射关系 -->## 2.1 映射关系
 
 ```
 SKILL.md × Harness 六层映射:
@@ -143,7 +184,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 ◐ = 次要映射（Loop 层 — SOP 驱动的执行逻辑）
 ```
 
-### 2.2 Context 层映射
+#<!-- chunk: 2.2 Context 层映射 -->## 2.2 Context 层映射
 
 | SKILL.md 内容 | Harness Context 实现 | 注入方式 |
 |--------------|---------------------|---------|
@@ -152,7 +193,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 | 知识库关联（8） | `KnowledgeLinker` — 关联外部文档 | Agent 需要深度参考时加载 |
 | 输出格式模板（7） | `OutputTemplate` — 格式化模板 | 输出阶段注入 |
 
-### 2.3 Loop 层映射
+#<!-- chunk: 2.3 Loop 层映射 -->## 2.3 Loop 层映射
 
 ```
 SOP 驱动的执行逻辑:
@@ -175,9 +216,9 @@ Agent 识别故障类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
 
 ---
 
-## 3. K8S 运维实战案例
+<!-- chunk: 3. K8S 运维实战案例 -->## 3. K8S 运维实战案例
 
-### 3.1 案例：SOP 驱动的 Pod Pending 诊断
+#<!-- chunk: 3.1 案例：SOP 驱动的 Pod Pending 诊断 -->## 3.1 案例：SOP 驱动的 Pod Pending 诊断
 
 ```
 用户输入: "Pod nginx-xxx 一直 Pending"
@@ -209,7 +250,7 @@ Step 5: 输出诊断结论
   修复: 扩容 worker 节点 或 调整 Pod 的 resource requests
 ```
 
-### 3.2 案例：kudig-database 知识注入
+#<!-- chunk: 3.2 案例：kudig-database 知识注入 -->## 3.2 案例：kudig-database 知识注入
 
 ```
 SKILL.md 知识库关联的实际使用:
@@ -222,16 +263,16 @@ SKILL.md 第 8 章定义:
   故障树 → domain-10-troubleshooting-diagnostics/topic-fta/ 完整故障树分析模型
 
 Agent 输出:
-  "## 诊断结果
+  "<!-- chunk: 诊断结果 -->## 诊断结果
    根因: 节点 CPU 不足
    ...
-   ## 深度参考
+   <!-- chunk: 深度参考 -->## 深度参考
    - [Pod Pending 完整诊断指南](domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
    - [故障树: Pod 调度失败](domain-10-troubleshooting-diagnostics/topic-fta/pod-scheduling-failure.md)
    这些文档包含更详细的排查步骤和历史案例。"
 ```
 
-### 3.3 案例：多 Skill 按域拆分
+#<!-- chunk: 3.3 案例：多 Skill 按域拆分 -->## 3.3 案例：多 Skill 按域拆分
 
 ```
 推荐的 Skill 拆分方式:
@@ -261,9 +302,9 @@ Agent 按需加载匹配的 Skill
 
 ---
 
-## 4. 配置协作机制
+<!-- chunk: 4. 配置协作机制 -->## 4. 配置协作机制
 
-### 4.1 SKILL.md 与其他文件的协作
+#<!-- chunk: 4.1 SKILL.md 与其他文件的协作 -->## 4.1 SKILL.md 与其他文件的协作
 
 ```
 SKILL.md 在配置体系中的知识角色:
@@ -285,7 +326,7 @@ SKILL.md ──→ MEMORY.md
               丰富 SKILL.md 的经验模式
 ```
 
-### 4.2 知识更新流程
+#<!-- chunk: 4.2 知识更新流程 -->## 4.2 知识更新流程
 
 ```
 SKILL.md 知识更新闭环:
@@ -311,9 +352,9 @@ SKILL.md 知识更新闭环:
 
 ---
 
-## 5. AgentScope 集成代码
+<!-- chunk: 5. AgentScope 集成代码 -->## 5. AgentScope 集成代码
 
-### 5.1 SkillLoader 实现
+#<!-- chunk: 5.1 SkillLoader 实现 -->## 5.1 SkillLoader 实现
 
 ```python
 import os
@@ -389,10 +430,10 @@ class SkillLoader:
         """从 SKILL.md 提取特定故障类型的 SOP 章节"""
         content = self.main_skill["full_content"]
         # 简化提取逻辑：匹配章节标题
-        sections = content.split("\n## ")
+        sections = content.split("\n<!-- chunk: ") -->## ")
         for section in sections:
             if keyword.lower() in section.lower():
-                return f"## {section}"
+                return f"<!-- chunk: {section}" -->## {section}"
         # 尝试从子 Skill 加载
         sub_skill_name = f"k8s-{domain}-diagnosis"
         if sub_skill_name in self.sub_skills:
@@ -442,9 +483,9 @@ refs = loader.get_knowledge_references("pod")
 
 ---
 
-## 6. 故障排除
+<!-- chunk: 6. 故障排除 -->## 6. 故障排除
 
-### 6.1 常见问题
+#<!-- chunk: 6.1 常见问题 -->## 6.1 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
@@ -454,7 +495,7 @@ refs = loader.get_knowledge_references("pod")
 | Agent 无法匹配故障类型 | SKILL.md 覆盖范围的关键词不全 | 扩充技能覆盖范围的关键词列表 |
 | 知识库链接失效 | kudig-database 文档路径变更 | 定期检查并更新第 8 章关联表 |
 
-### 6.2 调试检查清单
+#<!-- chunk: 6.2 调试检查清单 -->## 6.2 调试检查清单
 
 ```
 SKILL.md 配置验证:
@@ -471,7 +512,7 @@ SKILL.md 配置验证:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -484,3 +525,27 @@ SKILL.md 配置验证:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，深度解析 OpenClaw SKILL.md 的设计机制与工程实现。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 46-openclaw-agents-mechanism
+- 47-openclaw-tools-mechanism
+- 49-openclaw-memory-mechanism
+- 50-openclaw-identity-mechanism

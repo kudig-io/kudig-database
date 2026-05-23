@@ -33,13 +33,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
-# DNS for Services and Pods
+# DNS for Services and [[Pods|Pods]]
 
 ## 概述
 
-Kubernetes 通过集群 DNS（通常由 CoreDNS 实现）为 Service 和 Pod 创建 DNS 记录，使工作负载能够通过一致的域名而非易变的 IP 地址进行相互发现。kubelet 会为每个 Pod 配置 DNS 解析设置（`/etc/resolv.conf`），默认搜索域包括 Pod 所在命名空间和集群域。
+[[Kubernetes|Kubernetes]] 通过集群 DNS（通常由 [[CoreDNS|CoreDNS]] 实现）为 [[Service|Service]] 和 Pod 创建 DNS 记录，使工作负载能够通过一致的域名而非易变的 IP 地址进行相互发现。[[kubelet|kubelet]] 会为每个 Pod 配置 DNS 解析设置（`/etc/resolv.conf`），默认搜索域包括 Pod 所在命名空间和集群域。
 
 ## 核心概念/原理
 

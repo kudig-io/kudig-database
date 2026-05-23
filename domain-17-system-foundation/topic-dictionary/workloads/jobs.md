@@ -26,6 +26,7 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Jobs
@@ -70,7 +71,7 @@ Job 用于表示一次性任务，运行到完成即停止。Job 会创建一个
 - 使用 `restartPolicy: Never` 调试 Job 更方便查看失败日志。
 - 应用代码需具备幂等性，以应对 Pod 重启或重新调度。
 - 使用 `podFailurePolicy` 忽略由集群中断（如抢占、驱逐）导致的失败，避免不必要的重试。
-- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 etcd 中堆积过多历史对象。
+- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 [[etcd|etcd]] 中堆积过多历史对象。
 - 使用 Indexed Job 时，确保应用能正确读取 `JOB_COMPLETION_INDEX` 或主机名来分配任务。
 
 ## 实战 YAML 示例
@@ -195,7 +196,7 @@ spec:
   kubectl get jobs -n prod --no-headers | wc -l
   kubectl get jobs -n prod --field-selector=status.successful=1 --no-headers | wc -l
   ```
-- **解决方案**: 为 Job 设置 `ttlSecondsAfterFinished`，使用 CronJob 的 `successfulJobsHistoryLimit`/`failedJobsHistoryLimit`。
+- **解决方案**: 为 Job 设置 `ttlSecondsAfterFinished`，使用 [[CronJob|CronJob]] 的 `successfulJobsHistoryLimit`/`failedJobsHistoryLimit`。
 
 ## 生产就绪检查清单
 

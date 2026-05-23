@@ -25,13 +25,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 云原生安全
 
 ## 概述
 
-Kubernetes 基于云原生架构，借鉴了 CNCF（云原生计算基金会）关于云原生信息安全的最佳实践建议。其设计目标之一是帮助用户部署安全的云原生平台。CNCF 云原生安全白皮书将安全控制和实践按照不同的生命周期阶段进行划分，从而在每个阶段实施适当的安全措施。
+[[Kubernetes|Kubernetes]] 基于云原生架构，借鉴了 CNCF（云原生计算基金会）关于云原生信息安全的最佳实践建议。其设计目标之一是帮助用户部署安全的云原生平台。CNCF 云原生安全白皮书将安全控制和实践按照不同的生命周期阶段进行划分，从而在每个阶段实施适当的安全措施。
 
 ## 核心概念/原理
 
@@ -41,7 +42,7 @@ Kubernetes 基于云原生架构，借鉴了 CNCF（云原生计算基金会）�
 - **分发（Distribute）**：确保容器镜像及集群组件供应链安全。包括扫描镜像漏洞、使用加密传输与可信链、及时更新依赖、使用数字证书验证、将镜像存放在私有仓库等。
 - **部署（Deploy）**：限制可部署的内容、部署人员及部署位置。通过命名空间进行应用和组件隔离，容器和命名空间均提供与信息安全相关的隔离机制。
 - **运行时（Runtime）**：分为以下关键领域：
-  - **访问（Access）**：保护 Kubernetes API，实施有效的认证与授权，使用 ServiceAccount 管理工作负载身份，启用 TLS 保护 API 流量。
+  - **访问（Access）**：保护 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]，实施有效的认证与授权，使用 ServiceAccount 管理工作负载身份，启用 TLS 保护 API 流量。
   - **计算（Compute）**：强制执行 Pod 安全标准，使用专为容器化工作负载设计的操作系统（不可变镜像），定义 ResourceQuota 和 LimitRanges，实施节点隔离，使用提供安全限制的容器运行时，在 Linux 节点上使用 AppArmor 或 seccomp 等 Linux 安全模块。
   - **存储（Storage）**：集成支持静态加密的外部存储插件，为 API 对象启用静态加密，定期备份并验证恢复，对网络存储连接进行认证，在应用层实现数据加密，使用硬件安全模块（HSM）保护密钥。
   - **网络（Networking）**：使用 NetworkPolicy 或服务网格保护网络，部分网络插件可通过 VPN 覆盖层提供集群网络加密。
@@ -75,7 +76,7 @@ Kubernetes 基于云原生架构，借鉴了 CNCF（云原生计算基金会）�
 
 ## 参考链接
 
-- https://kubernetes.io/docs/concepts/security/[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]/
+- https://kubernetes.io/docs/concepts/[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]]/
 
 ## Related
 

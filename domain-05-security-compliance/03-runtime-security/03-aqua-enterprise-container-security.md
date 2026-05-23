@@ -55,6 +55,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # Aqua Security 企业级容器安全平台深度实践
@@ -76,7 +77,7 @@ Aqua Security 是企业级容器和云原生安全平台，提供从镜像构建
 
 **容器漂移**：攻击者在运行中的容器内安装新软件或修改二进制文件（容器漂移），用于持久化后门或执行恶意操作。Aqua 的容器漂移检测监控容器文件系统的变化，在发现未授权的二进制执行时触发告警或阻断。
 
-**配置违规**：特权容器、主机命名空间共享、不安全的 capabilities 等配置为攻击者提供了容器逃逸的途径。Aqua KubeEnforcer 通过 Kubernetes 准入控制在部署阶段拦截不安全配置。
+**配置违规**：特权容器、主机命名空间共享、不安全的 capabilities 等配置为攻击者提供了容器逃逸的途径。Aqua KubeEnforcer 通过 [[Kubernetes|Kubernetes]] 准入控制在部署阶段拦截不安全配置。
 
 <!-- chunk: 架构设计 -->## 架构设计
 
@@ -335,7 +336,7 @@ spec:
             storage: 50Gi
 ```
 
-#<!-- chunk: Enforcer DaemonSet -->## Enforcer DaemonSet
+#<!-- chunk: Enforcer [[DaemonSet|DaemonSet]] -->## Enforcer DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -1074,7 +1075,7 @@ pipeline {
 
 #<!-- chunk: 安全部署最佳实践 -->## 安全部署最佳实践
 
-**网络隔离**：将 Aqua 组件部署在独立的命名空间中，使用 NetworkPolicy 限制访问。Console 仅允许管理员网络访问，Gateway 仅允许 Enforcer 和 KubeEnforcer 连接，PostgreSQL 仅允许 Console 和 Gateway 访问。
+**网络隔离**：将 Aqua 组件部署在独立的命名空间中，使用 [[NetworkPolicy|NetworkPolicy]] 限制访问。Console 仅允许管理员网络访问，Gateway 仅允许 Enforcer 和 KubeEnforcer 连接，PostgreSQL 仅允许 Console 和 Gateway 访问。
 
 **资源管理**：为每个 Aqua 组件设置合理的资源请求和限制。Console 和 Scanner 是资源密集型组件，需要充足的 CPU 和内存。Enforcer 以 DaemonSet 运行在每个节点上，需要限制其资源使用以避免影响工作负载。
 
@@ -1135,24 +1136,24 @@ kubectl top pods -n aqua-system
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance KUDIG Database — Global MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|cert-manager 自动证书管理深度实践]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
+- cert-manager 自动证书管理深度实践
 
 ## See Also
 
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|01-falco-cloud-native-security]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|02-sysdig-enterprise-container-security]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|04-kyverno-enterprise-policy-management]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|05-vault-enterprise-secrets-management]]
+- 01-falco-cloud-native-security
+- 02-sysdig-enterprise-container-security
+- 04-kyverno-enterprise-policy-management
+- 05-vault-enterprise-secrets-management
 
 - [[domain-05-security-compliance/README.md|返回目录]]

@@ -67,9 +67,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)
+# [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] 基础概念与核心原理 (Ingress Fundamentals)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  
 > **文档版本**: v3.0 | 生产级 Ingress 配置参考  
@@ -186,7 +187,7 @@ cross_refs:
 
 | 概念 | 英文术语 | 定义 | 作用 | 版本要求 |
 |-----|---------|------|------|---------|
-| **Ingress** | Ingress | Kubernetes API 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
+| **Ingress** | Ingress | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
 | **Ingress Controller** | Ingress Controller | 负责实现 Ingress 规则的控制器组件，通常是反向代理服务器 | 监听 Ingress 资源变化，配置代理规则，实际处理流量转发 | - |
 | **IngressClass** | IngressClass | 定义 Ingress 控制器类型的 API 对象 | 支持多控制器共存，指定 Ingress 由哪个控制器处理 | v1.19+ GA |
 | **Backend** | Backend | Ingress 路由到的后端 Service | 接收转发的流量，负载均衡到 Pod | v1.19+ |
@@ -2201,25 +2202,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/17-network-policy-advanced.md|17-network-policy-advanced]]
-- [[domain-03-networking-traffic/18-network-encryption-mtls.md|18-network-encryption-mtls]]
-- [[domain-03-networking-traffic/20-ingress-controller-deep-dive.md|20-ingress-controller-deep-dive]]
-- [[domain-03-networking-traffic/21-nginx-ingress-complete-guide.md|21-nginx-ingress-complete-guide]]
+- 17-network-policy-advanced
+- 18-network-encryption-mtls
+- 20-ingress-controller-deep-dive
+- 21-nginx-ingress-complete-guide
 
 ## Related
 

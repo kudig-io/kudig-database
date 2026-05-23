@@ -37,6 +37,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 备份恢复故障排查
@@ -46,13 +47,13 @@ tags:
 - backup
 - restore
 - velero
-- etcd
+- [[etcd|etcd]]
 - disaster-recovery
 - snapshot
 - minio
-- daemonset
+- [[DaemonSet|daemonset]]
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced
@@ -716,7 +717,7 @@ echo "Total recovery time: ${RECOVERY_TIME} seconds"
 echo "7. Cleanup Phase"
 read -p "Clean up test namespace $TARGET_NAMESPACE? (y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
     kubectl delete namespace $TARGET_NAMESPACE
     echo "Test namespace cleaned up"
 else
@@ -1177,9 +1178,9 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

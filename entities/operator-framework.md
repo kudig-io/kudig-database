@@ -1,5 +1,5 @@
 ---
-title: Operator Framework
+title: Operator Framework [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Operator Framework
@@ -55,7 +56,7 @@ Operator Framework 是一个开源工具包，用于以高效、自动化和可�
 
 ## 生产部署要点
 
-- **Finalizers**: 使用 Finalizers 处理资源清理
+- **[[Finalizers|Finalizers]]**: 使用 Finalizers 处理资源清理
 - **Status Conditions**: 遵循 Kubernetes 条件约定
 - **Owner References**: 设置正确的所有者引用
 - **幂等性**: Reconcile 函数必须幂等
@@ -82,7 +83,7 @@ Operator Framework 是一个开源工具包，用于以高效、自动化和可�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[domain-19-landscape-references/incubating/operator-framework/operator-framework.md|operator-framework]]
+- operator-framework
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

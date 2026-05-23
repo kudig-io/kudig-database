@@ -51,9 +51,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
-# Prometheus 企业级监控部署指南
+# [[Prometheus|Prometheus]] 企业级监控部署指南
 
 > **适用版本**: Prometheus v3.3.0 / kube-state-metrics v2.15 / Alertmanager v0.28  
 > **最后更新**: 2026-04-24  
@@ -64,7 +65,7 @@ cross_refs:
 ## 📋 目录
 
 - [一、架构设计](#一架构设计)
-- [二、Helm 部署](#二helm-部署)
+- [二、[[Helm|Helm]] 部署](#二helm-部署)
 - [三、高可用配置](#三高可用配置)
 - [四、告警规则最佳实践](#四告警规则最佳实践)
 - [五、服务发现配置](#五服务发现配置)
@@ -447,7 +448,7 @@ prometheus:
 | Prometheus OOMKilled | 抓取目标过多 / 高基数标签 | 增加内存限制、添加 relabel 过滤、减少 target |
 | 磁盘快速增长 | retention 过长 / 高 cardinality | 缩短 retention、启用压缩、过滤无用指标 |
 | 查询超时 | 复杂查询 / 数据量大 | 增加 query.timeout、使用 recording rules |
-| Target 显示 down | 网络不通 / 指标路径错误 | 检查 Service/Pod 注解、网络策略 |
+| Target 显示 down | 网络不通 / 指标路径错误 | 检查 [[Service|Service]]/Pod 注解、网络策略 |
 | Alertmanager 未触发 | 路由规则不匹配 / inhibit | 检查 alertmanager 配置、路由树 |
 
 ---
@@ -463,25 +464,25 @@ prometheus:
 
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
+- observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
 - [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[domain-06-observability/01-prometheus-enterprise-monitoring.md|Prometheus企业级监控系统深度实践]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|Grafana Enterprise Observability Platform 深度实践]]
-- [[domain-06-observability/03-opentelemetry-distributed-tracing.md|OpenTelemetry分布式追踪与可观测性深度实践]]
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation and Long-term Storage]]
-- [[domain-06-observability/05-datadog-enterprise-apm.md|Datadog企业级APM深度实践]]
-- [[domain-06-observability/05-datadog-enterprise-monitoring.md|Datadog 企业级监控平台深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-logging.md|Elastic Stack企业级日志分析深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-observability.md|Elastic Stack企业级可观测性平台深度实践]]
-- [[domain-06-observability/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring Platform 深度实践]]
+- Prometheus企业级监控系统深度实践
+- Grafana Enterprise Observability Platform 深度实践
+- OpenTelemetry分布式追踪与可观测性深度实践
+- Thanos Enterprise Metrics Federation and Long-term Storage
+- Datadog企业级APM深度实践
+- Datadog 企业级监控平台深度实践
+- Elastic Stack企业级日志分析深度实践
+- Elastic Stack企业级可观测性平台深度实践
+- Zabbix Enterprise Monitoring Platform 深度实践
 
 ## See Also
 
-- [[domain-06-observability/08-new-relic-enterprise-apm.md|08-new-relic-enterprise-apm]]
-- [[domain-06-observability/99-distributed-tracing-guide.md|99-distributed-tracing-guide]]
-- [[domain-06-observability/01-prometheus-enterprise-monitoring.md|01-prometheus-enterprise-monitoring]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|02-grafana-enterprise-observability]]
+- 08-new-relic-enterprise-apm
+- 99-distributed-tracing-guide
+- 01-prometheus-enterprise-monitoring
+- 02-grafana-enterprise-observability
 
 - [[domain-06-observability/README.md|返回目录]]
 

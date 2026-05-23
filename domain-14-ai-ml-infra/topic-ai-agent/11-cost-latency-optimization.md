@@ -1,4 +1,45 @@
 ---
+title: 成本与延迟优化策略 (domain-14-ai-ml-infra)
+description: 'title: 成本与延迟优化策略'
+category: general
+tags:
+- ai
+- ai-agent
+- cost-optimization
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+- grafana
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 成本与延迟优化策略 是什么
+- 如何 成本与延迟优化策略
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 成本与延迟优化策略
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- redis-basics
+- tracing-basics
+created: "2026-05-23"
+---
+
 title: 成本与延迟优化策略
 description: '# 成本与延迟优化策略'
 category: ai-agent
@@ -8,9 +49,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 last_updated: 2026-05
@@ -28,15 +69,15 @@ trigger_keywords:
 - 成本与延迟优化策略
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
-- redis-basics
-- tracing-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 成本与延迟优化策略
@@ -45,15 +86,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 LLM API 调用成本和响应延迟是 Agent 系统商业化落地的核心挑战。在实际生产环境中，无优化的 Agent 每次对话成本可高达 $0.5-2，而经过系统优化后可降低至 $0.02-0.1，即 **10-100x 的成本压缩空间**。本文覆盖从 Token 预算、语义缓存、模型路由到批处理策略的全套优化技术。
 
 ---
 
-## 1. 成本结构分析
+<!-- chunk: 1. 成本结构分析 -->## 1. 成本结构分析
 
-### 1.1 Agent 成本分解
+#<!-- chunk: 1.1 Agent 成本分解 -->## 1.1 Agent 成本分解
 
 ```
 典型 K8s 诊断 Agent 单次任务成本分解（无优化）:
@@ -77,7 +118,7 @@ LLM API 调用成本和响应延迟是 Agent 系统商业化落地的核心挑�
   总成本: ~$0.03 (-90%)
 ```
 
-### 1.2 成本监控仪表板
+#<!-- chunk: 1.2 成本监控仪表板 -->## 1.2 成本监控仪表板
 
 ```python
 from dataclasses import dataclass, field
@@ -147,15 +188,15 @@ cost_tracker = LLMCostTracker()
 
 ---
 
-## 2. Token 预算优化
+<!-- chunk: 2. Token 预算优化 -->## 2. Token 预算优化
 
-### 2.1 系统提示压缩
+#<!-- chunk: 2.1 系统提示压缩 -->## 2.1 系统提示压缩
 
 ```python
 # 对比：未优化 vs 优化后的系统提示
 
 UNOPTIMIZED_SYSTEM_PROMPT = """
-你是一个非常专业的 [[entities/kubernetes|kubernetes]] 运维专家助手。你在 Kubernetes 领域有超过十年的丰富经验，
+你是一个非常专业的 Kubernetes 运维专家助手。你在 Kubernetes 领域有超过十年的丰富经验，
 熟悉所有版本的 Kubernetes，包括 1.18、1.19、1.20、1.21、1.22、1.23、1.24、1.25、1.26、
 1.27、1.28、1.29、1.30 等版本。你深入了解 Kubernetes 的各种组件，包括 kube-apiserver、
 kube-controller-manager、kube-scheduler、kubelet、kube-proxy、etcd 等。你精通各种 CNI 插件，
@@ -184,7 +225,7 @@ def build_contextual_system_prompt(task_type: str) -> str:
     return BASE + TASK_ADDONS.get(task_type, "")
 ```
 
-### 2.2 工具描述精简
+#<!-- chunk: 2.2 工具描述精简 -->## 2.2 工具描述精简
 
 ```python
 # 工具描述优化（减少每次调用携带的 Token 数）
@@ -210,7 +251,7 @@ CONCISE_TOOL = {
 # 对 20 个工具每次调用节省: (150-30) × 20 = 2400 tokens ≈ $0.006
 ```
 
-### 2.3 对话历史压缩
+#<!-- chunk: 2.3 对话历史压缩 -->## 2.3 对话历史压缩
 
 ```python
 class AdaptiveContextCompressor:
@@ -256,11 +297,11 @@ class AdaptiveContextCompressor:
 
 ---
 
-## 3. 语义缓存（Semantic Cache）
+<!-- chunk: 3. 语义缓存（Semantic Cache） -->## 3. 语义缓存（Semantic Cache）
 
 语义缓存是成本优化中投入产出比最高的手段：对于相似（而非完全相同）的问题，直接返回缓存结果。
 
-### 3.1 基于向量相似度的缓存
+#<!-- chunk: 3.1 基于向量相似度的缓存 -->## 3.1 基于向量相似度的缓存
 
 ```python
 import hashlib
@@ -401,9 +442,9 @@ class CachedAgentService:
 
 ---
 
-## 4. 模型路由优化
+<!-- chunk: 4. 模型路由优化 -->## 4. 模型路由优化
 
-### 4.1 智能路由策略
+#<!-- chunk: 4.1 智能路由策略 -->## 4.1 智能路由策略
 
 ```python
 from dataclasses import dataclass
@@ -513,9 +554,9 @@ def calculate_routing_savings(daily_requests: int = 1000) -> dict:
 
 ---
 
-## 5. KV Cache 与 Prompt Caching
+<!-- chunk: 5. KV Cache 与 Prompt Caching -->## 5. KV Cache 与 Prompt Caching
 
-### 5.1 OpenAI Prompt Caching（固定前缀复用）
+#<!-- chunk: 5.1 OpenAI Prompt Caching（固定前缀复用） -->## 5.1 OpenAI Prompt Caching（固定前缀复用）
 
 ```python
 # Prompt Caching 利用技巧：将系统提示和工具定义放在最前面（最稳定部分）
@@ -574,7 +615,7 @@ print(f"缓存写入 tokens: {usage.cache_creation_input_tokens}")  # 1.25x 价�
 print(f"普通输入 tokens: {usage.input_tokens}")
 ```
 
-### 5.2 vLLM KV Cache 优化
+#<!-- chunk: 5.2 vLLM KV Cache 优化 -->## 5.2 vLLM KV Cache 优化
 
 ```python
 # vLLM 的 Prefix Caching（同一系统提示的多个请求复用 KV Cache）
@@ -596,9 +637,9 @@ def get_vllm_cache_metrics(vllm_url: str) -> dict:
 
 ---
 
-## 6. 批处理与并发优化
+<!-- chunk: 6. 批处理与并发优化 -->## 6. 批处理与并发优化
 
-### 6.1 异步批处理
+#<!-- chunk: 6.1 异步批处理 -->## 6.1 异步批处理
 
 ```python
 import asyncio
@@ -683,9 +724,9 @@ async def batch_evaluate_agent(
 
 ---
 
-## 7. 综合优化效果对比
+<!-- chunk: 7. 综合优化效果对比 -->## 7. 综合优化效果对比
 
-### 7.1 各策略成本节省汇总
+#<!-- chunk: 7.1 各策略成本节省汇总 -->## 7.1 各策略成本节省汇总
 
 | 优化策略 | 适用场景 | 成本节省 | 实施复杂度 | 推荐优先级 |
 |---------|---------|---------|-----------|----------|
@@ -698,7 +739,7 @@ async def batch_evaluate_agent(
 | **KV Cache (vLLM)** | 自部署 LLM | 20-50% | 低 | P2 中 |
 | **批处理** | 离线任务 | 10-20% | 高 | P3 低 |
 
-### 7.2 生产环境成本优化路线图
+#<!-- chunk: 7.2 生产环境成本优化路线图 -->## 7.2 生产环境成本优化路线图
 
 ```
 第一阶段（立即执行，低风险）:
@@ -720,9 +761,9 @@ async def batch_evaluate_agent(
 
 ---
 
-## 8. 延迟优化
+<!-- chunk: 8. 延迟优化 -->## 8. 延迟优化
 
-### 8.1 关键路径延迟分析
+#<!-- chunk: 8.1 关键路径延迟分析 -->## 8.1 关键路径延迟分析
 
 ```
 Agent 任务端到端延迟分解（典型 5 步任务）:
@@ -742,7 +783,7 @@ Agent 任务端到端延迟分解（典型 5 步任务）:
 优化后目标: ~3500ms (节省 59%)
 ```
 
-### 8.2 流式输出降低感知延迟
+#<!-- chunk: 8.2 流式输出降低感知延迟 -->## 8.2 流式输出降低感知延迟
 
 ```python
 # 流式输出将 TTFT 从 8s（等待完整响应）降至 0.5s（第一个 Token）
@@ -774,7 +815,7 @@ async def stream_with_early_ux(query: str) -> AsyncGenerator:
                 }
 ```
 
-### 8.3 预取（Prefetch）策略
+#<!-- chunk: 8.3 预取（Prefetch）策略 -->## 8.3 预取（Prefetch）策略
 
 ```python
 class PrefetchAgent:
@@ -809,9 +850,9 @@ class PrefetchAgent:
 
 ---
 
-## 9. 最佳实践与反模式
+<!-- chunk: 9. 最佳实践与反模式 -->## 9. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **成本预算告警**：设置日成本和月成本上限告警，防止成本失控
 - **按用户计费追踪**：精确到每个 session/user 的 Token 消耗，支持成本分摊
@@ -819,7 +860,7 @@ class PrefetchAgent:
 - **生产监控成本**：将成本数据接入 Grafana，让工程师直观看到成本变化
 - **定期审查热门查询**：发现可以预缓存或用规则替代的高频查询
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **所有任务用最贵的模型**：GPT-4o 处理简单问候或格式转换是极大浪费
 - **不限制 Token 输出**：没有 max_tokens 限制，少数恶意请求可产生极高成本
@@ -828,13 +869,13 @@ class PrefetchAgent:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
 | [02 - LLM 模型选型](./02-llm-foundation-models.md) | 模型路由的定价基准 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 上下文压缩对成本的影响 |
-| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | 成本 Prometheus 指标 |
+| [08 - 评测与可观测性](./observability.md|08-agent-evaluation-observability]].md) | 成本 Prometheus 指标 |
 | [09 - 生产部署](./09-production-deployment-guide.md) | vLLM 部署与 KV Cache |
 | [domain-14-ai-ml-infra/26-cost-optimization-overview.md](../domain-14-ai-ml-infra/26-cost-optimization-overview.md) | AI 基础设施成本优化 |
 | [domain-14-ai-ml-infra/23-llm-cost-monitoring.md](../domain-14-ai-ml-infra/23-llm-cost-monitoring.md) | LLM 成本监控体系 |
@@ -842,3 +883,27 @@ class PrefetchAgent:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 09-production-deployment-guide
+- 10-security-guardrails
+- 12-enterprise-case-studies
+- 13-trusted-agent-system-fiscal-plan

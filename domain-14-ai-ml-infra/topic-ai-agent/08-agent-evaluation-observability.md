@@ -1,7 +1,46 @@
 ---
+title: Agent 评测体系与可观测性 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,'
+category: general
+tags:
+- ai
+- ai-agent
+- observability
+- prometheus
+- grafana
+- helm
+- postgresql
+- job
+- ingress
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent 评测体系与可观测性 是什么
+- 如何 Agent 评测体系与可观测性
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- 评测体系与可观测性
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- observability-basics
+created: "2026-05-23"
+---
+
 title: Agent 评测体系与可观测性
-description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge, RAGAS, Langfuse, LangSmith, Phoenix,
-  轨迹评估, OpenTelemetry, 可观测性, Agent 指标'
+description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,
+  RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, [[OpenTelemetry|OpenTelemetry]], 可观测性, Agent 指标'
 category: ai-agent
 tags:
 - ai
@@ -9,9 +48,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - postgresql
 - job
 last_updated: 2026-05
@@ -30,12 +69,15 @@ trigger_keywords:
 - 评测体系与可观测性
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- observability-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent 评测体系与可观测性
@@ -44,15 +86,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 没有评测的 Agent 是黑盒。评测体系解决"Agent 质量是否达标"的问题，可观测性解决"Agent 为什么这么做"的问题。本文覆盖从单轮问答到多步轨迹的全面评测框架、RAGAS/LLM-as-Judge 实施方法、LangSmith/Langfuse/Phoenix 的配置与使用，以及生产 Agent 的关键监控指标体系。
 
 ---
 
-## 1. Agent 评测体系全景
+<!-- chunk: 1. Agent 评测体系全景 -->## 1. Agent 评测体系全景
 
-### 1.1 评测维度
+#<!-- chunk: 1.1 评测维度 -->## 1.1 评测维度
 
 ```
 Agent 评测四维度
@@ -74,7 +116,7 @@ Agent 评测四维度
        指标: 安全拦截率、PII 泄露率
 ```
 
-### 1.2 评测粒度层次
+#<!-- chunk: 1.2 评测粒度层次 -->## 1.2 评测粒度层次
 
 | 层次 | 评测对象 | 方法 | 工具 |
 |------|---------|------|------|
@@ -85,9 +127,9 @@ Agent 评测四维度
 
 ---
 
-## 2. RAGAS 评估框架
+<!-- chunk: 2. RAGAS 评估框架 -->## 2. RAGAS 评估框架
 
-### 2.1 核心指标详解
+#<!-- chunk: 2.1 核心指标详解 -->## 2.1 核心指标详解
 
 ```python
 from ragas import evaluate
@@ -125,7 +167,7 @@ METRIC_EXPLANATIONS = {
 }
 ```
 
-### 2.2 完整 RAGAS 评估 Pipeline
+#<!-- chunk: 2.2 完整 RAGAS 评估 Pipeline -->## 2.2 完整 RAGAS 评估 Pipeline
 
 ```python
 from datasets import Dataset
@@ -199,16 +241,16 @@ class RAGASEvaluator:
         poor_cases = df[df["faithfulness"] < 0.7]
         if len(poor_cases) > 0:
             print(f"\n警告：{len(poor_cases)} 个用例 faithfulness < 0.7，需要重点检查：")
-            print(poor_cases[["question", "faithfulness"]].to_string())
+            print(poor_cases"question", "faithfulness".to_string())
         
         return df
 ```
 
 ---
 
-## 3. LLM-as-Judge：自动化评测
+<!-- chunk: 3. LLM-as-Judge：自动化评测 -->## 3. LLM-as-Judge：自动化评测
 
-### 3.1 基本原理
+#<!-- chunk: 3.1 基本原理 -->## 3.1 基本原理
 
 使用 LLM 作为评估者（Judge），对 Agent 的输出质量进行打分：
 
@@ -314,7 +356,7 @@ class LLMJudge:
         return df
 ```
 
-### 3.2 轨迹评估（Trajectory Evaluation）
+#<!-- chunk: 3.2 轨迹评估（Trajectory Evaluation） -->## 3.2 轨迹评估（Trajectory Evaluation）
 
 评估 Agent 的**执行路径**，而非仅最终答案：
 
@@ -397,9 +439,9 @@ class TrajectoryEvaluator:
 
 ---
 
-## 4. 可观测性平台
+<!-- chunk: 4. 可观测性平台 -->## 4. 可观测性平台
 
-### 4.1 Langfuse（推荐：开源可自托管）
+#<!-- chunk: 4.1 Langfuse（推荐：开源可自托管） -->## 4.1 Langfuse（推荐：开源可自托管）
 
 ```python
 from langfuse import Langfuse
@@ -456,7 +498,7 @@ def traced_tool_call(tool_name: str, args: dict, trace_id: str) -> str:
         raise
 ```
 
-### 4.2 Langfuse K8s 自托管部署
+#<!-- chunk: 4.2 Langfuse K8s 自托管部署 -->## 4.2 Langfuse K8s 自托管部署
 
 ```yaml
 # Langfuse Helm 部署
@@ -497,7 +539,7 @@ resources:
     cpu: "1"
 ```
 
-### 4.3 LangSmith（OpenAI 生态最完整）
+#<!-- chunk: 4.3 LangSmith（OpenAI 生态最完整） -->## 4.3 LangSmith（OpenAI 生态最完整）
 
 ```python
 from langchain.callbacks.tracers import LangChainTracer
@@ -525,7 +567,7 @@ def submit_evaluation(run_id: str, score: float, comment: str):
     )
 ```
 
-### 4.4 Phoenix（Arize）：本地可观测性
+#<!-- chunk: 4.4 Phoenix（Arize）：本地可观测性 -->## 4.4 Phoenix（Arize）：本地可观测性
 
 ```python
 import phoenix as px
@@ -543,9 +585,9 @@ result = agent_executor.invoke({"input": "问题描述"})
 
 ---
 
-## 5. 生产监控指标体系
+<!-- chunk: 5. 生产监控指标体系 -->## 5. 生产监控指标体系
 
-### 5.1 Prometheus 指标定义
+#<!-- chunk: 5.1 Prometheus 指标定义 -->## 5.1 Prometheus 指标定义
 
 ```python
 from prometheus_client import Counter, Histogram, Gauge, Summary
@@ -622,7 +664,7 @@ class InstrumentedAgent:
         return result
 ```
 
-### 5.2 关键告警规则
+#<!-- chunk: 5.2 关键告警规则 -->## 5.2 关键告警规则
 
 ```yaml
 # Prometheus AlertManager 规则
@@ -676,7 +718,7 @@ groups:
         summary: "工具调用失败率超过 30%"
 ```
 
-### 5.3 Grafana Dashboard 关键面板
+#<!-- chunk: 5.3 Grafana Dashboard 关键面板 -->## 5.3 Grafana Dashboard 关键面板
 
 ```
 Agent 监控 Dashboard 推荐面板:
@@ -702,7 +744,7 @@ Agent 监控 Dashboard 推荐面板:
 
 ---
 
-## 6. 自动化评估 CI/CD 集成
+<!-- chunk: 6. 自动化评估 CI/CD 集成 -->## 6. 自动化评估 CI/CD 集成
 
 ```yaml
 # GitHub Actions：Agent 质量门禁
@@ -793,9 +835,9 @@ if __name__ == "__main__":
 
 ---
 
-## 7. 最佳实践与反模式
+<!-- chunk: 7. 最佳实践与反模式 -->## 7. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **评测集要真实**：从生产日志中采样真实问题，而非人工构造理想化用例
 - **持续评估**：每次代码/提示词变更后自动运行评估，防止质量回退
@@ -803,7 +845,7 @@ if __name__ == "__main__":
 - **可观测性从第一天开始**：生产上线时就接入追踪，而非出问题后再补
 - **用 LLM-as-Judge 节省人力**：人工评分 10% 作为标定集，其余用 LLM Judge
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **只评估 Happy Path**：测试集全是简单问题，上线后遇到边缘情况崩溃
 - **Faithfulness 忽略**：只看最终准确率，不检查是否有幻觉——在 K8s 运维场景幻觉会造成真实故障
@@ -812,7 +854,7 @@ if __name__ == "__main__":
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -824,3 +866,54 @@ if __name__ == "__main__":
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## Related
+
+- 48-openclaw-skill-mechanism
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 40-agent-harness-production-maturity
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 27-agent-cli-security-governance
+- 06-multi-agent-orchestration
+- 41-react-harness-identification-guide
+
+## See Also
+
+- 06-multi-agent-orchestration
+- 07-memory-context-management
+- 09-production-deployment-guide
+- 10-security-guardrails

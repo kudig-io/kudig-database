@@ -68,11 +68,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md
   type: fta
   desc: Scheduler 故障树
+created: "2026-05-23"
 ---
 
 # 28 - 调度器配置与优化
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 <!-- chunk: 调度流程 -->
 ## 调度流程
@@ -389,7 +390,7 @@ kubectl patch pod gated-pod --type=json \
 | **GPU调度** | ack-ai-scheduler | GPU拓扑感知调度 | AI/ML训练 |
 | **Gang调度** | ack-scheduler-plugins | 原子批量调度 | 分布式训练 |
 | **容量调度** | ack-scheduler-plugins | 弹性配额 | 多租户 |
-| **协同调度** | Koordinator | 混部调度 | 在线+离线混部 |
+| **协同调度** | [[Koordinator|Koordinator]] | 混部调度 | 在线+离线混部 |
 | **负载感知** | Koordinator | 基于真实负载调度 | 提高资源利用率 |
 
 ```yaml
@@ -547,33 +548,33 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications KUDIG Database — Global MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- index.md|Domain-4 工作负载 — 开源项目索引]]
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## Related
 
 - [[deployment]]
 
-- [[domain-02-workloads-applications/10-workload-controllers-overview.md|工作负载控制器详解]]
-- [[domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md|Scheduler 深度解析]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 工作负载控制器详解
+- Scheduler 深度解析
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-02-workloads-applications/17-container-images-registry.md|17-container-images-registry]]
-- [[domain-02-workloads-applications/18-node-management-operations.md|18-node-management-operations]]
-- [[domain-02-workloads-applications/20-kubelet-configuration.md|20-kubelet-configuration]]
-- [[domain-02-workloads-applications/21-hpa-vpa-autoscaling.md|21-hpa-vpa-autoscaling]]
+- 17-container-images-registry
+- 18-node-management-operations
+- 20-kubelet-configuration
+- 21-hpa-vpa-autoscaling

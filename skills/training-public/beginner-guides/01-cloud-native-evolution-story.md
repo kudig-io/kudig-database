@@ -42,9 +42,10 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# 云原生演进故事——从物理机到 Kubernetes
+# 云原生演进故事——从物理机到 [[Kubernetes|Kubernetes]]
 
 > **阅读建议**: 本文是 K8s 学习的第一课。不要急着学概念，先听故事。故事听懂了，后面每个技术点都会水到渠成。  
 > **目标**: 读完能向朋友讲清楚"为什么需要 K8s"，并能画出技术演进时间线。
@@ -408,7 +409,7 @@ spec:
 | 2000s | 虚拟机 | 物理机资源浪费、环境不一致 | 一台机器切多份 |
 | 2013 | Docker | VM 太重、启动慢 | 共享操作系统内核 |
 | 2015 | Kubernetes | 容器多了怎么管 | 自动调度、自愈、服务发现 |
-| 2018 | Service Mesh | 微服务间通信复杂 | Sidecar 代理（Istio） |
+| 2018 | Service Mesh | 微服务间通信复杂 | Sidecar 代理（[[Istio|Istio]]） |
 | 2020 | GitOps | 部署流程不规范 | Git 作为单一事实来源 |
 | 2024 | AI + K8s | AI 训练任务调度 | KubeFlow、Kueue |
 
@@ -464,5 +465,5 @@ K8s 中，一切都是可以用 YAML 描述的资源对象：
 
 **关联文档**:
 - [[02-local-lab-environment.md]] — 下一步：本地搭建实验环境
-- [[../fundamentals/01-what-is-kubernetes.md]] — 系统学习 K8s 概念
-- [[../../domain-01-cluster-fundamentals/01-architecture-overview/01-kubernetes-architecture-overview.md]] — 架构深度解析
+- ../fundamentals/01-what-is-kubernetes.md — 系统学习 K8s 概念
+- ../../domain-01-cluster-fundamentals/01-architecture-overview/01-kubernetes-architecture-overview.md — 架构深度解析

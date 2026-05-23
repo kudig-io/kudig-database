@@ -1,4 +1,32 @@
 ---
+title: 智慧港口与航运架构设计 — 阿里云视角
+description: 'title: 智慧港口与航运架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 智慧港口与航运架构设计 — 阿里云视角 是什么
+- 如何 智慧港口与航运架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧港口与航运架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: 智慧港口与航运架构设计
 description: '# 智慧港口与航运架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,7 +34,7 @@ tags:
 - k8s
 - architecture
 - industry
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -16,7 +44,7 @@ audience:
 - 云原生开发工程师
 estimated_read_time: 5min
 intent_queries:
-- 智慧港口 TOS 系统 Kubernetes 部署
+- 智慧港口 TOS 系统 [[Kubernetes|Kubernetes]] 部署
 - 集装箱码头自动化管理架构
 - 无人集卡 AGV 调度系统
 - 海关 EDI 电子数据交换
@@ -30,20 +58,26 @@ trigger_keywords:
 - EDI数据交换
 - 边缘计算
 - 阿里云IoT
-prerequisites:
-- kubectl-basics
-- prometheus-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-iot-platform-architecture
 - topic-edge-computing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧港口与航运架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#智慧港口` `#航运` `#集装箱` `#阿里云`
 
 ---
@@ -277,3 +311,27 @@ flowchart LR
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 43-enterprise-im
+- 44-martech-adtech
+- 46-satellite-internet
+- 47-smart-mining

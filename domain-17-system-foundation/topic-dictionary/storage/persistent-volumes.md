@@ -30,13 +30,14 @@ prerequisites:
 - cloud-provider-basics
 - kafka-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Persistent Volumes（持久卷）
 
 ## 概述
 
-PersistentVolume（PV）和 PersistentVolumeClaim（PVC）是 Kubernetes 中用于抽象存储供给与消费的 API 资源。PV 代表集群中的一块存储，由管理员预先创建或通过 StorageClass 动态供给；PVC 是用户对存储的请求，类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。
+PersistentVolume（PV）和 PersistentVolumeClaim（PVC）是 [[Kubernetes|Kubernetes]] 中用于抽象存储供给与消费的 API 资源。PV 代表集群中的一块存储，由管理员预先创建或通过 StorageClass 动态供给；PVC 是用户对存储的请求，类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。
 
 ## 核心概念/原理
 
@@ -222,7 +223,7 @@ kubectl patch pv <pv-name> -p '{"spec":{"claimRef":null}}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

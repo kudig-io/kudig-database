@@ -34,6 +34,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 新能源车联网架构设计
@@ -43,9 +44,9 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
-- flux
-- falco
+- [[Prometheus|prometheus]]
+- [[Flux|flux]]
+- [[Falco|falco]]
 - ceph
 - redis
 - mysql
@@ -83,7 +84,7 @@ related_domains:
 related_topics:
 - 60-v2x-autonomous-driving
 - 59-industrial-internet-platform
-- [[domain-20-application-patterns/07-iot-platform-architecture.md|07-iot-platform-architecture]]
+- 07-iot-platform-architecture
 authors:
 - name: KUDIG Team
   role: contributor
@@ -595,7 +596,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -610,7 +611,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/20-microservice-governance-architecture.md|20-microservice-governance-architecture]]
-- [[domain-20-application-patterns/21-cross-border-ecommerce.md|21-cross-border-ecommerce]]
-- [[domain-20-application-patterns/23-xinchuang-it-innovation.md|23-xinchuang-it-innovation]]
-- [[domain-20-application-patterns/24-insurtech.md|24-insurtech]]
+- 20-microservice-governance-architecture
+- 21-cross-border-ecommerce
+- 23-xinchuang-it-innovation
+- 24-insurtech

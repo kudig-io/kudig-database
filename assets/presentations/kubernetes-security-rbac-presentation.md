@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 安全与 RBAC 权限管理全栈培训
+title: Kubernetes 安全与 RBAC 权限管理全栈培训 [assets]
 description: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
 category: presentations
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 安全与 RBAC 权限管理全栈培训

@@ -1,5 +1,5 @@
 ---
-title: zot
+title: zot (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # zot
@@ -51,7 +52,7 @@ zot 是一个生产就绪的、OCI 原生的容器镜像注册表，完全基于
 - **垃圾回收**: 启用 GC 定期清理未引用的镜像层
 - **访问控制**: 配置细粒度的仓库级别访问策略
 - **镜像同步**: 使用 onDemand 模式减少不必要的镜像拉取
-- **漏洞扫描**: 启用 Trivy 集成，定期扫描镜像漏洞
+- **漏洞扫描**: 启用 [[Trivy|Trivy]] 集成，定期扫描镜像漏洞
 - **高可用**: 使用 S3 等共享存储后端实现多副本部署
 
 ## 架构定位
@@ -73,8 +74,8 @@ zot 是一个生产就绪的、OCI 原生的容器镜像注册表，完全基于
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[distribution]] — Distribution
 
-- [[domain-19-landscape-references/sandbox/zot/zot.md|zot]]
-- [[entities/modelpack.md|ModelPack]]
+- zot
+- [[entities/modelpack.md|[[ModelPack|ModelPack]]]]
 - [[entities/kitops.md|KitOps]]
 - [[entities/copa.md|Copa (Copacetic)]]
 - [[entities/stacker.md|Stacker]]

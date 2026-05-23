@@ -21,7 +21,9 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+created: "2026-05-23"
+---
 
 ---
 title: "{{DOMAIN_NAME}} MOC - {{TITLE}}"
@@ -105,9 +107,9 @@ graph TD
 
 | 关联类型 | 知识域 | MOC | 说明 |
 |---|---|---|---|
-| 上游依赖 | {{UPSTREAM_DOMAIN}} | [[../{{UPSTREAM_DIR}}/MOC.md|{{UPSTREAM_NAME}} MOC]] | {{说明}} |
-| 下游应用 | {{DOWNSTREAM_DOMAIN}} | [[../{{DOWNSTREAM_DIR}}/MOC.md|{{DOWNSTREAM_NAME}} MOC]] | {{说明}} |
-| 横向关联 | {{PEER_DOMAIN}} | [[../{{PEER_DIR}}/MOC.md|{{PEER_NAME}} MOC]] | {{说明}} |
+| 上游依赖 | {{UPSTREAM_DOMAIN}} | {{UPSTREAM_NAME}} MOC | {{说明}} |
+| 下游应用 | {{DOWNSTREAM_DOMAIN}} | {{DOWNSTREAM_NAME}} MOC | {{说明}} |
+| 横向关联 | {{PEER_DOMAIN}} | {{PEER_NAME}} MOC | {{说明}} |
 
 ---
 
@@ -115,9 +117,9 @@ graph TD
 
 | 场景 | 入口文档 | 说明 |
 |---|---|---|
-| 故障排查 | [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | {{DOMAIN}} 相关故障树 |
-| 操作技能 | [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | {{DOMAIN}} 相关操作技能 |
-| 速查参考 | [[../domain-17-system-foundation/topic-cheat-sheet/MOC.md|Cheat Sheet]] | 相关速查卡 |
+| 故障排查 | FTA 故障树 | {{DOMAIN}} 相关故障树 |
+| 操作技能 | Skills 技能 | {{DOMAIN}} 相关操作技能 |
+| 速查参考 | Cheat Sheet | 相关速查卡 |
 
 ---
 

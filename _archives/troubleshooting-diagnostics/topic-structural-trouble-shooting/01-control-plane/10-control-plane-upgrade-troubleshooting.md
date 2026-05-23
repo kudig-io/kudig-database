@@ -348,7 +348,7 @@ upgrade_to_version() {
 
 # 3. 执行逐版本升级
 for version in "${VERSION_PATH[@]}"; do
-  if [[ "$version" > "$CURRENT_VERSION" ]]; then
+  if "$version" > "$CURRENT_VERSION"; then
     upgrade_to_version $version
   fi
 done
@@ -398,7 +398,7 @@ migrate_deprecated_resources() {
 # 询问是否执行迁移
 read -p "是否执行废弃资源迁移？(y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
   migrate_deprecated_resources
 fi
 ```
@@ -613,7 +613,7 @@ EOF
 # 执行续期
 read -p "是否执行证书续期？这将重启控制平面组件 (y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
   renew_certificates
 fi
 ```

@@ -27,6 +27,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Prompt Caching 与成本优化

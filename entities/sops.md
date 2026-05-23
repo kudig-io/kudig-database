@@ -29,9 +29,10 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
-# SOPS (Secrets OPerationS)
+# [[SOPS|SOPS]] ([[Secrets|Secrets]] OPerationS)
 
 > **CNCF 状态**: Sandbox | **类别**: Supply Chain | **主要语言**: Go
 
@@ -81,7 +82,7 @@ SOPS (Secrets OPerationS) 是一个加密文件编辑器，支持 YAML、JSON、
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/sops/sops.md|sops]]
+- sops
 - [[entities/ratify.md|Ratify]]
 - [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference

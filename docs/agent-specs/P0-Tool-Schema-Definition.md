@@ -32,6 +32,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Agent Tool Schema 定义文档
@@ -44,7 +45,7 @@ prerequisites:
 
 ## 1. 概述
 
-本文档定义 Agent 在故障诊断和修复过程中可调用的工具 Schema。每个工具包含：
+本文档定义 Agent 在问题诊断和修复过程中可调用的工具 Schema。每个工具包含：
 - 名称和描述
 - 输入参数规范
 - 输出格式定义
@@ -221,7 +222,7 @@ tool:
 ```yaml
 tool:
   name: kubectl_get_events
-  description: 获取集群事件，用于故障诊断
+  description: 获取集群事件，用于问题诊断
   category: DIAGNOSTIC
   
   parameters:
@@ -1535,7 +1536,7 @@ tool:
 
   use_cases:
     - "节点维护完成后恢复调度"
-    - "故障节点恢复后重新启用"
+    - "问题节点恢复后重新启用"
 
   error_codes:
     "NotFound": "节点不存在"
@@ -1603,7 +1604,7 @@ tool:
 
   use_cases:
     - "节点下线前驱逐所有 Pod"
-    - "节点故障时转移负载"
+    - "节点问题时转移负载"
 
   prerequisites:
     - "节点已被 cordon（建议）"

@@ -1,325 +1,189 @@
 ---
-title: Kubernetes
-description: 'description: ''## 项目概述'''
-category: general
+title: Kubernetes (CNCF Graduated)
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- observability
+- kubernetes
 - etcd
-- kubelet
 - scheduler
 - prometheus
 - grafana
 - istio
-- envoy
-- helm
+- cilium
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
 - 所有工程师
-estimated_read_time: 5min
+estimated_read_time: 15min
 intent_queries:
-- Kubernetes 是什么
-- 如何 Kubernetes
-- Kubernetes 19 landscape references 最佳实践
+- Kubernetes (CNCF Graduated) 是什么
+- 如何 Kubernetes (CNCF Graduated)
 trigger_keywords:
 - Kubernetes
-- landscape
-- references
+- CNCF
+- Graduated
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
-- helm-basics
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
 - ebpf-basics
+- cilium-basics
 - etcd-basics
-- tls-basics
+- kafka-basics
+- redis-basics
+- gpu-scheduling-basics
+- observability-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes
+# [[Kubernetes|Kubernetes]] (CNCF Graduated)
+
+> **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
+
+## 概述
+
 description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- etcd
-- kubelet
-- scheduler
-- prometheus
-- grafana
-- istio
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Kubernetes 是什么
-- 如何 Kubernetes
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Kubernetes
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-# Kubernetes
 
-> **成熟度**: Graduated | **加入时间**: 2016-03 | **最后更新**: 2026-03
+## 核心能力
 
-## 基本信息
-
-| 属性 | 值 |
-|:---|:---|
-| **官方网站** | https://kubernetes.io |
-| **GitHub** | https://github.com/kubernetes/kubernetes |
-| **文档** | https://kubernetes.io/docs |
-| **许可证** | Apache-2.0 |
-| **主要语言** | Go |
-| **CNCF 分类** | Orchestration & Management |
-
----
-
-## 项目概述
-
-### 简介
-Kubernetes（K8s）是一个开源的容器编排平台，用于自动化容器化应用的部署、扩展和管理。
-
-### 核心定位
-Kubernetes 解决了大规模容器化应用的编排、调度、服务发现、负载均衡、存储编排、自动恢复等核心问题，是云原生生态系统的基石。
-
-### 发展历程
-- **2014-06**: Google 开源 Kubernetes 项目
-- **2015-07**: Kubernetes v1.0 发布，CNCF 成立
-- **2016-03**: 成为 CNCF 首个托管项目
-- **2018-03**: 成为 CNCF 首个毕业项目
-- **2024-04**: Kubernetes v1.30 发布
-
----
-
-## 核心功能
-
-### 主要特性
 - **容器编排**: 自动化容器的部署、扩展和运维
 - **服务发现**: 内置 DNS 和负载均衡
 - **自动恢复**: 自动重启失败容器、替换节点
 - **滚动更新**: 零停机部署和回滚
 - **配置管理**: ConfigMap 和 Secret 管理
 - **存储编排**: 自动挂载存储系统
-- **批处理**: Job 和 CronJob 支持
 
-### 功能架构
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Control Plane                          │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────────┐│
-│  │  API Server  │ │   Scheduler  │ │ Controller Manager   ││
-│  └──────────────┘ └──────────────┘ └──────────────────────┘│
-│  ┌──────────────────────────────────────────────────────── ┐│
-│  │                         etcd                            ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────┐
-│                       Worker Nodes                          │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────────┐│
-│  │    kubelet   │ │  kube-proxy  │ │  Container Runtime   ││
-│  └──────────────┘ └──────────────┘ └──────────────────────┘│
-│  ┌──────────────────────────────────────────────────────── ┐│
-│  │                        Pods                             ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-```
+## K8s 集成
 
----
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-## 技术架构
+## 生产部署要点
 
-### 整体架构
-Kubernetes 采用主从架构，由控制平面（Control Plane）和工作节点（Worker Nodes）组成。控制平面负责集群的全局决策，工作节点运行实际的应用负载。
-
-### 核心组件
-| 组件 | 功能 | 说明 |
-|:---|:---|:---|
-| API Server | 集群入口 | 所有操作的统一入口，RESTful API |
-| etcd | 状态存储 | 分布式键值存储，保存集群状态 |
-| Scheduler | 调度器 | 为 Pod 选择合适的节点 |
-| Controller Manager | 控制器 | 运行各种控制器，维护期望状态 |
-| kubelet | 节点代理 | 管理节点上的容器生命周期 |
-| kube-proxy | 网络代理 | 维护节点网络规则，实现 Service |
-
-### 工作原理
-1. 用户通过 kubectl 或 API 提交期望状态
-2. API Server 将状态存储到 etcd
-3. Controller 监听状态变化，执行调谐逻辑
-4. Scheduler 为新 Pod 分配节点
-5. kubelet 在节点上创建和管理容器
-6. kube-proxy 配置网络规则实现服务访问
-
----
-
-## 使用场景
-
-### 典型应用
-- **微服务架构**: 部署和管理微服务应用
-- **CI/CD 平台**: 构建云原生持续交付流水线
-- **大数据处理**: 运行 Spark、Flink 等数据处理任务
-- **机器学习**: 部署 ML 训练和推理工作负载
-- **边缘计算**: 管理边缘节点上的应用
-
-### 适用条件
-- 需要自动化容器编排和管理
-- 需要高可用和自动恢复能力
-- 需要灵活的扩展和升级策略
-- 有专业的运维团队支持
-
-### 不适用场景
-- 简单的单机应用部署
-- 资源极度受限的环境
-- 不需要容器化的传统应用
-
----
-
-## 快速开始
-
-### 安装部署
-```bash
-# 使用 kind 创建本地集群
-kind create cluster --name my-cluster
-
-# 使用 minikube 创建本地集群
-minikube start
-
-# 使用 kubeadm 初始化生产集群
-kubeadm init --pod-network-cidr=10.244.0.0/16
-```
-
-### 基础配置
-```yaml
-# deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.25
-        ports:
-        - containerPort: 80
-```
-
-### 验证测试
-```bash
-# 查看集群状态
-kubectl cluster-info
-kubectl get nodes
-
-# 部署应用
-kubectl apply -f deployment.yaml
-
-# 查看 Pod 状态
-kubectl get pods -w
-```
-
----
-
-## 最佳实践
-
-### 生产环境建议
 - 使用高可用控制平面（3+ 节点）
 - 配置资源限制（requests/limits）
 - 启用 RBAC 和 Pod Security Standards
 - 定期备份 etcd 数据
 - 使用节点亲和性和反亲和性
-
-### 性能优化
 - 合理配置 API Server 限流参数
-- 使用 Pod Disruption Budget
-- 优化容器镜像大小
-- 配置合适的探针参数
 
-### 安全加固
-- 启用审计日志
-- 使用 NetworkPolicy 隔离网络
-- 定期更新 Kubernetes 版本
-- 加密 etcd 数据和 Secret
+## 架构定位
 
----
+在 CNCF 生态中，kubernetes 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
-## 生态集成
+## 参考链接
 
-### 相关 CNCF 项目
-- **Helm**: Kubernetes 包管理器
-- **Prometheus**: 监控和告警
-- **Envoy/Istio**: 服务网格
-- **Argo**: GitOps 和工作流
-- **containerd**: 容器运行时
-
-### 常见集成方案
-- Prometheus + Grafana 监控栈
-- Istio 服务网格
-- ArgoCD GitOps 部署
-- Cert-manager 证书管理
-
----
-
-## 社区与支持
-
-### 社区资源
-- Slack: https://slack.k8s.io
-- 论坛: https://discuss.kubernetes.io
-- Stack Overflow: kubernetes 标签
-
-### 贡献指南
-访问 https://www.kubernetes.dev/docs/guide/ 了解如何参与贡献
-
----
-
-## 参考资源
-
-- [官方文档](https://kubernetes.io/docs)
-- [GitHub Repo](https://github.com/kubernetes/kubernetes)
-- [CNCF 项目页面](https://www.cncf.io/projects/kubernetes/)
-- [Kubernetes Blog](https://kubernetes.io/blog/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[etcd]]
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[istio]]
+- [[containerd]]
+- [[entities/argocd.md|argocd]]
 
 ## Related
 
-- [[log.md|log]]
-- [[CONTRIBUTING.md|CONTRIBUTING]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/cncf-orchestration.md|cncf-orchestration]] — CNCF 编排与应用管理项目全景
+- [[prometheus]] — Prometheus
+- [[interlink]] — InterLink
+- [[entities/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
+- [[etcd]] — etcd
+
+- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- ovn-kubernetes
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 08-kubernetes-network-policies-security-micro-segmentation
+- 19-kubernetes-gateway-api-modern-traffic-management
+- 18-kubernetes-ebpf-cilium-deep-practice
+- 13-kubernetes-multi-tenancy-security-isolation-resource-quota
+- 16-kubernetes-edge-computing-kubeedge-practice
+- 09-kubernetes-service-mesh-istio-integration
+- 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
+- 12-kubernetes-scheduler-deep-optimization-custom-scheduling
+- 23-kubernetes-opentelemetry-native-observability
+- 02-kubernetes-large-scale-performance-optimization
+- 03-kubernetes-zero-trust-security-architecture
+- 11-kubernetes-api-server-deep-optimization-extension
+- 05-kubernetes-gitops-complete-practice-guide
+- 15-kubernetes-chaos-engineering-fault-injection-testing
+- 22-kubernetes-webassembly-wasm-workloads
+- 10-kubernetes-automation-sre-practices
+- 17-kubernetes-aiml-gpu-scheduling-llm-inference
+- 01-kubernetes-production-readiness-assessment
+- 26-kubernetes-vcluster-virtual-cluster-multi-tenancy
+- 06-kubernetes-cost-governance-finops-practice
+- 21-kubernetes-platform-engineering-internal-developer-platform
+- 14-kubernetes-event-driven-architecture-asynchronous-processing
+- 24-kubernetes-policy-as-code-governance-automation
+- 07-kubernetes-csi-storage-deep-practice
+- 04-kubernetes-multi-cloud-hybrid-deployment
+- 99-kubernetes-v1.33-observability-guide
+- 99-java-observability-kubernetes-guide
+- 99-kubernetes-v1.33-platform-ops-guide
+- 99-kubernetes-deployment-patterns-architecture
+- 99-kubernetes-multi-tenant-architecture
+- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- 13-kubernetes-cost-governance
+- 99-kubernetes-v1.33-workloads-guide
+- 99-spring-boot-kubernetes-guide
+- 99-kubernetes-v1.33-design-principles-evolution
+- 99-kubernetes-developer-toolchain-guide
+- 09-job-cronjob-batch-events
+- 11-storage-volume-events
+- 12-autoscaling-events
+- 03-image-pull-events
+- 15-ecosystem-addon-events
+- 08-statefulset-daemonset-events
+- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- 02-pod-container-lifecycle-events
+- 00-open-source-projects-index
+- 04-probe-health-check-events
+- 13-security-admission-rbac-events
+- 05-scheduling-preemption-events
+- 01-event-system-architecture
+- 07-deployment-replicaset-events
+- 06-node-lifecycle-condition-events
+- domain-33-kubernetes-events MOC
+- 14-namespace-resource-gc-events
+- 10-service-networking-events
+- 07-kubernetes-backup-restore-deep-dive
+- 07-redis-kubernetes-operator
+- 08-kafka-kubernetes-strimzi
+- 04-database-middleware-kubernetes
+- 11-kubernetes-source-code-architecture
+- 99-kubernetes-core-components-v1.29-v1.33-update
+- 99-kubernetes-v1.25-v1.33-feature-comparison-table
+- 99-kubernetes-version-lifecycle-support-policy
+- 99-kubernetes-v1.33-deprecation-migration-guide
+- 99-kubernetes-core-features-mermaid-diagrams
+- 99-kubernetes-v1.33-practical-cookbook
+- 99-kubernetes-v1.29-v1.33-features-guide
+- 99-kubernetes-api-version-matrix
+- 99-kubernetes-v1.33-ecosystem-compatibility-matrix
+- 99-kubernetes-v1.33-quick-reference-card
+- 99-kubernetes-v1.33-upgrade-guide
+- 99-kubernetes-v1.33-production-best-practices
+- Kubernetes 架构全景图
+- 99-kubernetes-v1.29-v1.33-complete-feature-gates-reference
+- 13-kubernetes-operations-fundamentals
+- 11-kubernetes-security-hardening
+- 99-java-security-kubernetes-guide
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 02-kubernetes-gateway-api-deep-dive
+- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
+- domain-java-kubernetes MOC
+- 16-kubernetes-hardware-troubleshooting
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- vscode-kubernetes-tools
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
@@ -462,8 +326,6 @@ kubectl get pods -w
 - [[skills/ts-cluster-operations|集群运维故障排查]] — Cross-reference
 - [[skills/skill-assets-escalation-template|Escalation Template]] — Cross-reference
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[entities/argocd|ArgoCD]] — Cross-reference
-- [[entities/kubernetes-changelog|Kubernetes 变更日志索引]] — Cross-reference
 - [[entities/kube-apiserver|kube-apiserver]] — Cross-reference
 - [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference
 - [[entities/metal3-io|Metal3]] — Cross-reference
@@ -477,53 +339,5 @@ kubectl get pods -w
 - [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.12|Kubernetes v0.12 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.8|Kubernetes v0.8 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.16|Kubernetes v0.16 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.17|Kubernetes v0.17 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.13|Kubernetes v0.13 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.9|Kubernetes v0.9 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.18|Kubernetes v0.18 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.6|Kubernetes v0.6 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.7|Kubernetes v0.7 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.19|Kubernetes v0.19 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.4|Kubernetes v0.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-1.1|Kubernetes v1.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-1.0|Kubernetes v1.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.5|Kubernetes v0.5 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.20|Kubernetes v0.20 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.14|Kubernetes v0.14 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.10|Kubernetes v0.10 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.11|Kubernetes v0.11 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.21|Kubernetes v0.21 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/RELEASE-NOTES-0.15|Kubernetes v0.15 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/minikube/RELEASE-NOTES-1.38|RELEASE-NOTES-1.38]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.8|CHANGELOG-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.9|CHANGELOG-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.6|CHANGELOG-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.10|CHANGELOG-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.24|CHANGELOG-1.24]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.34|CHANGELOG-1.34]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.20|CHANGELOG-1.20]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.14|CHANGELOG-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.30|CHANGELOG-1.30]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.15|CHANGELOG-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.31|CHANGELOG-1.31]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.7|CHANGELOG-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.11|CHANGELOG-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.35|CHANGELOG-1.35]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.22|CHANGELOG-1.22]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.16|CHANGELOG-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.32|CHANGELOG-1.32]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.4|CHANGELOG-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.12|CHANGELOG-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.26|CHANGELOG-1.26]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.36|CHANGELOG-1.36]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.5|CHANGELOG-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.13|CHANGELOG-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.27|CHANGELOG-1.27]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.17|CHANGELOG-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.33|CHANGELOG-1.33]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.28|CHANGELOG-1.28]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.18|CHANGELOG-1.18]]
-- [[domain-19-landscape-references/topic-release-notes/kubernetes/CHANGELOG-1.29|CHANGELOG-1.29]]
+- CHANGELOG-1.2
+- CHANGELOG-1.3

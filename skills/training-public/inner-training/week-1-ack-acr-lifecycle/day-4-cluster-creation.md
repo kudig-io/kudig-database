@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -36,7 +37,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster creation process VPC vSwitch
-  - [[entities/kubernetes|kubernetes]] cluster network CIDR planning
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster network CIDR planning
   - aliyun cs POST clusters API
   - ACK console cluster creation wizard
   - Terway Flannel CNI selection
@@ -46,7 +47,7 @@ trigger_keywords:
   - vSwitch
   - CIDR
   - Pod CIDR
-  - Service CIDR
+  - [[Service|Service]] CIDR
   - CNI
   - Terway
   - Flannel

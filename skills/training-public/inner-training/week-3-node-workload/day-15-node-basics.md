@@ -35,6 +35,7 @@ prerequisites:
 - monitoring-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,7 +43,7 @@ title: Day 15: Node 节点基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] Node architecture kubelet kube-proxy
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
   - Node status conditions Ready NotReady
   - Node capacity allocatable resource management
   - Kubernetes node monitoring troubleshooting

@@ -1,5 +1,5 @@
 ---
-title: DevSpace
+title: DevSpace (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - DevSpace
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # DevSpace
@@ -73,7 +74,7 @@ DevSpace 是一款开源的 Kubernetes 开发工具，旨在简化云原生应�
 - [[kagent]] — Kagent
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/devspace/devspace.md|devspace]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- devspace
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

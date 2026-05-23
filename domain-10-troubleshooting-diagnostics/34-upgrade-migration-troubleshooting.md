@@ -60,6 +60,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)
@@ -212,7 +213,7 @@ CURRENT_VERSION=$(kubectl version --short | grep Server | awk '{print $3}')
 echo "Current version: $CURRENT_VERSION"
 
 # 检查是否有跳版本升级的风险
-if [[ $CURRENT_VERSION == *"v1.22"* ]] && [[ $TARGET_VERSION == *"v1.24"* ]]; then
+if $CURRENT_VERSION == *"v1.22"* && $TARGET_VERSION == *"v1.24"*; then
     echo "⚠️  Risk of skipping versions detected"
 fi
 ```
@@ -1365,7 +1366,7 @@ CURRENT_VERSION=$(kubectl version --short | grep Server | awk '{print $3}')
 echo "Current version: $CURRENT_VERSION"
 
 # 检查升级路径
-if [[ "$CURRENT_VERSION" != *"$TARGET_VERSION"* ]]; then
+if "$CURRENT_VERSION" != *"$TARGET_VERSION"*; then
     echo "✓ Version upgrade path valid"
 else
     echo "⚠️  Same version detected"
@@ -1503,11 +1504,11 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|[[API Server 故障排查|API Server 故障排查]]]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|[[etcd 故障排查|etcd 故障排查]]]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
 - [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]

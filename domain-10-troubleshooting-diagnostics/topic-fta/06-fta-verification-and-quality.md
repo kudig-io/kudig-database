@@ -1,5 +1,5 @@
 ---
-title: 第六章：FTA 验证与质量保证
+title: 第六章：FTA 验证与质量保证 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
 category: fta
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 fta_id: FTA-06_VERIFICATION_AND_QUALITY-001
 component: 06 Verification And Quality
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第六章：FTA 验证与质量保证
@@ -47,7 +48,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - job
 - agent
@@ -82,8 +83,8 @@ k8s_versions:
 
 > **所属部分**: 第二部分 - FTA 构建实践指南  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第五章：FTA 构建完整流程](./05-fta-construction-process.md)  
-> **下一章**: [第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)
+> **上一章**: 第五章：FTA 构建完整流程](./05-fta-construction-process.md)  
+> **下一章**: 第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)
 
 ---
 

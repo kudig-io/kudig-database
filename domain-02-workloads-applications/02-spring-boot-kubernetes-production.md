@@ -1,48 +1,5 @@
 ---
-title: Spring Boot on Kubernetes 生产实践指南
-description: 'title: Spring Boot on Kubernetes 生产实践指南'
-category: general
-tags:
-- java
-- k8s
-- production
-- prometheus
-- argocd
-- docker
-- opa
-- redis
-- postgresql
-- kafka
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 35min
-intent_queries:
-- Spring Boot on Kubernetes 生产实践指南 是什么
-- 如何 Spring Boot on Kubernetes 生产实践指南
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Spring
-- Boot
-- 'on'
-- Kubernetes
-- 生产实践指南
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- gitops-basics
-- kafka-basics
-- redis-basics
-- policy-basics
-- observability-basics
----
-
-title: Spring Boot on Kubernetes 生产实践指南
+title: Spring Boot on Kubernetes 生产实践指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# Spring Boot on Kubernetes 生产实践指南'
 category: java-kubernetes
 tags:
@@ -74,25 +31,25 @@ trigger_keywords:
 - 生产实践指南
 - java
 - kubernetes
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- prometheus-basics
+- kafka-basics
+- redis-basics
+- policy-basics
+- observability-basics
+created: "2026-05-23"
 ---
 
-# Spring Boot on Kubernetes 生产实践指南
+# Spring Boot on [[Kubernetes|Kubernetes]] 生产实践指南
 
 > **适用版本**: JDK 17+ / Spring Boot 3.x / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 Spring Boot 是目前 Java 微服务领域使用最广泛的框架，而 Kubernetes 已成为事实上的容器编排标准。将 Spring Boot 应用**生产级别**地运行在 Kubernetes 上，远不止写一个 Dockerfile 那么简单——它涉及容器镜像构建优化、健康探针精确配置、优雅停机保障、配置与密钥管理、弹性伸缩策略、连接池调优以及分布式追踪集成等多个维度。
 
@@ -100,7 +57,7 @@ Spring Boot 是目前 Java 微服务领域使用最广泛的框架，而 Kuberne
 
 ```mermaid
 graph TB
-    subgraph "Spring Boot on K8s 生产架构"
+    subgraph "Spring Boot on [[entities/kubernetes|k8s]] 生产架构"
         SRC[源代码] --> BUILD[镜像构建]
         BUILD --> |Jib/Buildpacks<br/>Multi-stage| IMG[容器镜像]
         IMG --> REG[镜像仓库]
@@ -128,13 +85,13 @@ graph TB
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 容器镜像构建策略 -->## 2.1 容器镜像构建策略
+### 2.1 容器镜像构建策略
 
 生产环境中，镜像构建是整个流水线的起点。Spring Boot 应用有三种主流构建方式：
 
-##<!-- chunk: Multi-Stage Dockerfile（推荐通用场景） -->## Multi-Stage Dockerfile（推荐通用场景）
+#### Multi-Stage Dockerfile（推荐通用场景）
 
 ```dockerfile
 # ===== 构建阶段 =====
@@ -191,7 +148,7 @@ ENV JAVA_OPTS="-XX:+UseContainerSupport \
 ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} org.springframework.boot.loader.launch.JarLauncher"]
 ```
 
-##<!-- chunk: Jib Maven 插件（推荐 CI/CD 自动化场景） -->## Jib Maven 插件（推荐 CI/CD 自动化场景）
+#### Jib Maven 插件（推荐 CI/CD 自动化场景）
 
 ```xml
 <plugin>
@@ -253,7 +210,7 @@ mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.passwo
 mvn compile jib:dockerBuild
 ```
 
-##<!-- chunk: Buildpacks（Spring Boot 官方推荐） -->## Buildpacks（Spring Boot 官方推荐）
+#### [[Buildpacks|Buildpacks]]（Spring Boot 官方推荐）
 
 ```bash
 # Spring Boot 3.x 内置 Buildpacks 支持
@@ -280,7 +237,7 @@ mvn compile jib:dockerBuild
 | 安全漏洞修复 | 需更新基础镜像 | 騱更新基础镜像 | 自动 rebasing |
 | CI/CD 友好度 | 中等 | 最高 | 高 |
 
-#<!-- chunk: 2.2 健康探针架构 -->## 2.2 健康探针架构
+### 2.2 健康探针架构
 
 Spring Boot Actuator 在 3.x 版本中提供了精细化的健康端点，配合 Kubernetes 的三种探针实现全生命周期管理：
 
@@ -308,9 +265,9 @@ stateDiagram-v2
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 Actuator 探针配置 -->## 3.1 Actuator 探针配置
+### 3.1 Actuator 探针配置
 
 Spring Boot 3.x 的 `application.yml` 配置：
 
@@ -491,7 +448,7 @@ readinessProbe 恢复检测时间 = periodSeconds
   例: 5s（每 5s 检查一次，流量恢复速度）
 ```
 
-#<!-- chunk: 3.2 优雅停机配置 -->## 3.2 优雅停机配置
+### 3.2 优雅停机配置
 
 Spring Boot 3.x 优雅停机需要多个组件协同配合：
 
@@ -543,9 +500,9 @@ public class GracefulShutdownConfig {
 时间 60s   : terminationGracePeriodSeconds 到期，若进程仍存在则 SIGKILL
 ```
 
-#<!-- chunk: 3.3 ConfigMap 和 Secret 注入 -->## 3.3 ConfigMap 和 Secret 注入
+### 3.3 ConfigMap 和 Secret 注入
 
-##<!-- chunk: 方式一：环境变量注入 -->## 方式一：环境变量注入
+#### 方式一：环境变量注入
 
 ```yaml
 apiVersion: v1
@@ -602,7 +559,7 @@ spec:
                   fieldPath: spec.nodeName
 ```
 
-##<!-- chunk: 方式二：Volume 挂载（推荐配置文件热更新场景） -->## 方式二：Volume 挂载（推荐配置文件热更新场景）
+#### 方式二：Volume 挂载（推荐配置文件热更新场景）
 
 ```yaml
 apiVersion: v1
@@ -653,7 +610,7 @@ spec:
                 path: application.yml
 ```
 
-##<!-- chunk: 方式三：Spring Cloud Kubernetes Config（适合多 ConfigMap 合并场景） -->## 方式三：Spring Cloud Kubernetes Config（适合多 ConfigMap 合并场景）
+#### 方式三：Spring Cloud Kubernetes Config（适合多 ConfigMap 合并场景）
 
 ```xml
 <dependency>
@@ -686,9 +643,9 @@ spring:
         enable-api: true
 ```
 
-#<!-- chunk: 3.4 HPA / VPA 弹性伸缩 -->## 3.4 HPA / VPA 弹性伸缩
+### 3.4 HPA / VPA 弹性伸缩
 
-##<!-- chunk: HPA（Horizontal Pod Autoscaler）配置 -->## HPA（Horizontal Pod Autoscaler）配置
+#### HPA（Horizontal Pod Autoscaler）配置
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -743,7 +700,7 @@ spec:
           averageValue: "100"
 ```
 
-##<!-- chunk: HPA sizing 计算 -->## HPA sizing 计算
+#### HPA sizing 计算
 
 ```
 HPA 触发条件:
@@ -758,7 +715,7 @@ HPA 触发条件:
   例: CPU 使用率 87% / 70% 目标 = ceil(1.24) = 2 倍 → 从 3 扩到 6
 ```
 
-##<!-- chunk: VPA（Vertical Pod Autoscaler）辅助建议 -->## VPA（Vertical Pod Autoscaler）辅助建议
+#### VPA（Vertical Pod Autoscaler）辅助建议
 
 ```yaml
 apiVersion: autoscaling.k8s.io/v1
@@ -789,7 +746,7 @@ spec:
 
 > **注意**: VPA 设置为 `Off` 模式仅提供建议，不自动调整。生产环境建议先观察 VPA 建议值，再手动调整 requests/limits。
 
-#<!-- chunk: 3.5 PodDisruptionBudget 配置 -->## 3.5 PodDisruptionBudget 配置
+### 3.5 PodDisruptionBudget 配置
 
 ```yaml
 apiVersion: policy/v1
@@ -816,7 +773,7 @@ spec:
       app: myapp
 ```
 
-#<!-- chunk: 3.6 HikariCP 连接池调优 -->## 3.6 HikariCP 连接池调优
+### 3.6 HikariCP 连接池调优
 
 ```java
 @Configuration
@@ -890,9 +847,9 @@ minimum-idle 建议 = maximum-pool-size × 25% ~ 50%
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 分布式追踪集成（Micrometer Tracing + OpenTelemetry） -->## 4.1 分布式追踪集成（Micrometer Tracing + OpenTelemetry）
+### 4.1 分布式追踪集成（Micrometer Tracing + [[OpenTelemetry|OpenTelemetry]]）
 
 ```xml
 <dependencyManagement>
@@ -940,7 +897,7 @@ management:
       endpoint: http://otel-collector.observability:4318/v1/traces
 ```
 
-#<!-- chunk: 4.2 生产级 Deployment 完整模板 -->## 4.2 生产级 Deployment 完整模板
+### 4.2 生产级 Deployment 完整模板
 
 ```yaml
 apiVersion: apps/v1
@@ -1134,7 +1091,7 @@ metadata:
 automountServiceAccountToken: false
 ```
 
-#<!-- chunk: 4.3 资源 Sizing 经验值 -->## 4.3 资源 Sizing 经验值
+### 4.3 资源 Sizing 经验值
 
 | 应用类型 | CPU Request | CPU Limit | Memory Request | Memory Limit | HikariCP Pool |
 |---------|-------------|-----------|----------------|-------------|---------------|
@@ -1145,9 +1102,9 @@ automountServiceAccountToken: false
 
 ---
 
-<!-- chunk: 五、故障排查 -->## 五、故障排查
+## 五、故障排查
 
-#<!-- chunk: 5.1 常见问题诊断表 -->## 5.1 常见问题诊断表
+### 5.1 常见问题诊断表
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
 |------|---------|---------|---------|
@@ -1162,7 +1119,7 @@ automountServiceAccountToken: false
 | 滚动更新卡住 | PDB 限制过严 | `kubectl get pdb` | 调整 minAvailable 或 maxUnavailable |
 | GC 暂停过长 | 内存不足/GC 选择不当 | 查看 Prometheus GC 指标 | 切换 ZGC 或增大内存 |
 
-#<!-- chunk: 5.2 诊断脚本 -->## 5.2 诊断脚本
+### 5.2 诊断脚本
 
 ```bash
 #!/bin/bash
@@ -1191,7 +1148,7 @@ echo -e "\n=== 健康检查 ==="
 kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuator/health 2>/dev/null || echo "健康检查失败"
 ```
 
-#<!-- chunk: 5.3 优雅停机问题排查 -->## 5.3 优雅停机问题排查
+### 5.3 优雅停机问题排查
 
 ```
 问题: Pod 收到 SIGTERM 后仍有请求失败
@@ -1214,7 +1171,7 @@ kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuat
 
 ---
 
-<!-- chunk: 六、参考资源 -->## 六、参考资源
+## 六、参考资源
 
 - [Spring Boot 3.x Deployment Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html)
 - [Spring Boot Actuator API](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
@@ -1224,28 +1181,3 @@ kubectl exec "$POD_NAME" -n "$NAMESPACE" -- curl -s http://localhost:8081/actuat
 - [Spring Cloud Kubernetes](https://spring.io/projects/spring-cloud-kubernetes)
 - [Micrometer Tracing Documentation](https://docs.micrometer.io/tracing/reference/)
 - [Kubernetes HPA Documentation](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]]
-- [[domain-java-kubernetes/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]]
-- [[domain-java-kubernetes/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]]
-- [[domain-java-kubernetes/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]]
-- [[domain-java-kubernetes/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]]
-
-## Related
-
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-
-## See Also
-
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]

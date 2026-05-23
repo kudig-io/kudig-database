@@ -1,11 +1,9 @@
 ---
-title: kudig-database 全面修复进展总览
-description: kudig-database 全面修复进展总览
-category: reports
+title: kudig-database 全面修复进展总览 (reports)
+description: '### 第三轮: 内容深度 + 多云 + 培训'
+category: general
 tags:
 - k8s
-- fix-progress
-- quality
 - helm
 - ingress
 - gateway
@@ -16,9 +14,8 @@ last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
-- SRE
-- DevOps
-estimated_read_time: 10min
+- 所有工程师
+estimated_read_time: 5min
 intent_queries:
 - kudig-database 全面修复进展总览 是什么
 - 如何 kudig-database 全面修复进展总览
@@ -28,15 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
+created: "2026-05-23"
 ---
 
 # kudig-database 全面修复进展总览
@@ -84,7 +73,7 @@ authors:
 ### domain-10-troubleshooting-diagnostics/topic-qa-corpus/ (20 个文件)
 - 18 个 domain QA YAML 文件 (2,336 QA 对)
 - 1 个命令输出诊断语料 (23 场景)
-- 1 个 README 索引
+- 1 个 [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]] 索引
 
 ### domain-10-troubleshooting-diagnostics/topic-skills/scripts/ (17 个脚本)
 - diagnose-pod-crashloop.sh
@@ -139,64 +128,3 @@ authors:
 | Skill 可执行性 | 6.5/10 | 8.5/10 | +2.0 |
 | 多云中立性 | 6.0/10 | 7.5/10 | +1.5 |
 | 中英双语索引 | 6.0/10 | 8.0/10 | +2.0 |
-
----
-
-## Obsidian Wiki 模式改进 (2026-05-20)
-
-### 第一轮: 架构改造
-| 指标 | 改造前 | 改造后 | 变化 |
-|------|--------|--------|------|
-| MOC 导航页 | 0 | 63 | +63 |
-| Frontmatter 完整率 | 2.2% | 100% | +97.8% |
-| 双向链接文档 | ~0 | 1,066 | +1,066 |
-| Wikilinks 总数 | ~0 | ~2,000 | +2,000 |
-| Aliases 覆盖 | 0 | 1,669 | +1,669 |
-| Intent Queries | 0 | 343 | +343 |
-| 决策树章节 | 0 | 43 | +43 |
-| 场景导航页 | 0 | 20 | +20 |
-| Chunk 标记 | 0 | 375 | +375 |
-
-### 第二轮: 覆盖扩展
-| 指标 | 改进前 | 改进后 | 变化 |
-|------|--------|--------|------|
-| Intent Queries 覆盖 | 343 (domain-1~12) | 715 (全部 domain) | +372 |
-| Chunk 标记覆盖 | 375 (domain-1~12) | 893 (全域) | +518 |
-| Wikilinks 总数 | ~2,000 | 12,134 | +10,134 |
-| 缺失 README 目录 | 3 | 0 | -3 |
-| Markdown 文档总数 | ~3,337 | 3,532 | +195 |
-
-### 质量检查指标 (最终)
-- MOC 覆盖率: 100% (62/62) ✅
-- Frontmatter 缺失: 0 ✅
-- Wikilinks 覆盖: 1,041 文件 > 500 阈值 ✅
-- 全部 3 项质量阈值通过 ✅
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|kudig-database 质量盲区深度扫描报告]]
-
----
-
-## Related
-
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式改进计划]]
-
-- [[README.md|README]]
-- [[MOC.md|MOC]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/monitoring-alerting.md|monitoring-alerting]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/security-incident.md|security-incident]]
-- [[log.md|log]]

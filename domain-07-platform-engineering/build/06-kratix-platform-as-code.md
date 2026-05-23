@@ -44,6 +44,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Kratix 平台即代码 (Kratix Platform as Code)
@@ -55,11 +56,11 @@ tags:
 - developer-experience
 - idp
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
-- argocd
-- flux
+- [[Helm|helm]]
+- [[ArgoCD|argocd]]
+- [[Flux|flux]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -762,7 +763,7 @@ if [ -z "$TEAM_NAME" ] || [ "$TEAM_NAME" == "null" ]; then
 fi
 
 # 验证团队名称格式
-if ! [[ "$TEAM_NAME" =~ ^[a-z0-9-]+$ ]]; then
+if ! "$TEAM_NAME" =~ ^[a-z0-9-]+$; then
   echo "ERROR: teamName must be lowercase alphanumeric with hyphens"
   exit 1
 fi
@@ -1785,22 +1786,22 @@ gantt
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-36 平台工程 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|平台工程概述与成熟度模型]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|内部开发者平台设计原则]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|Backstage 部署与配置]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|Backstage 软件目录与 TechDocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|Backstage 脚手架与模板系统]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|Crossplane 平台组合 (Crossplane Platform Composition)]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|Golden Paths 黄金路径设计 (Golden Paths Design Patterns)]]
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|开发者体验度量 (Developer Experience Metrics)]]
-- [[domain-07-platform-engineering/10-platform-team-topology.md|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- Domain-36 平台工程 — 开源项目索引
+- 平台工程概述与成熟度模型
+- 内部开发者平台设计原则
+- Backstage 部署与配置
+- Backstage 软件目录与 TechDocs
+- Backstage 脚手架与模板系统
+- Crossplane 平台组合 (Crossplane Platform Composition)
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- 开发者体验度量 (Developer Experience Metrics)
+- 平台团队拓扑与运营 (Platform Team Topology and Operations)
 
 ## See Also
 
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|04-backstage-catalog-techdocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|05-backstage-scaffolder-templates]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|07-crossplane-platform-composition]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|08-golden-paths-design]]
+- 04-backstage-catalog-techdocs
+- 05-backstage-scaffolder-templates
+- 07-crossplane-platform-composition
+- 08-golden-paths-design

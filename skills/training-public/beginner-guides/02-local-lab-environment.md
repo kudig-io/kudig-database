@@ -39,6 +39,7 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 本地零成本 K8s 实验环境搭建手册
@@ -257,7 +258,7 @@ kind load docker-image my-app:v1 --name k8s-lab
 docker exec -it k8s-lab-control-plane bash
 ```
 
-### kind 的 Ingress（本地访问服务）
+### kind 的 [[Ingress|Ingress]]（本地访问服务）
 
 kind 集群默认无法从宿主机直接访问 NodePort。需要额外配置：
 
@@ -375,7 +376,7 @@ minikube addons list
 
 ## 方案 C：k3d（轻量之选）
 
-k3d 在 Docker 里跑 [k3s](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
+k3d 在 Docker 里跑 [[entities/k3s.md|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
 
 ### 安装 k3d
 
@@ -588,5 +589,5 @@ newgrp docker
 
 **关联文档**:
 - [[01-cloud-native-evolution-story.md]] — 上一课：为什么需要 K8s
-- [[../fundamentals/02-pod-basics.md]] — 下一课：跑第一个 Pod
-- [[../public-training/one-month/resources/commands-cheatsheet.md]] — kubectl 命令速查表
+- ../fundamentals/02-pod-basics.md — 下一课：跑第一个 Pod
+- ../public-training/one-month/resources/commands-cheatsheet.md — kubectl 命令速查表

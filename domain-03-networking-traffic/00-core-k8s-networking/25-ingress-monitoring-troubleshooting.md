@@ -63,11 +63,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 133 - Ingress 监控与故障排查
+# 133 - [[Ingress|Ingress]] 监控与故障排查
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -89,7 +90,7 @@ cross_refs:
 | **健康** | 上游健康状态 | 后端服务健康 | 有不健康后端 |
 | **配置** | 配置重载次数 | 配置变更频率 | 异常频繁 |
 
-### 1.2 NGINX Ingress Prometheus 指标
+### 1.2 NGINX Ingress [[Prometheus|Prometheus]] 指标
 
 | 指标名称 | 类型 | 标签 | 说明 |
 |---------|------|------|------|
@@ -931,28 +932,28 @@ data:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-03-networking-traffic/23-ingress-advanced-routing.md|23-ingress-advanced-routing]]
-- [[domain-03-networking-traffic/24-ingress-security-hardening.md|24-ingress-security-hardening]]
-- [[domain-03-networking-traffic/26-ingress-production-best-practices.md|26-ingress-production-best-practices]]
-- [[domain-03-networking-traffic/27-cni-troubleshooting-optimization.md|27-cni-troubleshooting-optimization]]
+- 23-ingress-advanced-routing
+- 24-ingress-security-hardening
+- 26-ingress-production-best-practices
+- 27-cni-troubleshooting-optimization
 
 ## Related
 

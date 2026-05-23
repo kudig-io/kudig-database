@@ -49,6 +49,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker Compose 编排
@@ -136,7 +137,7 @@ networks:
 | `networks` | 网络定义 | 见下方 |
 | `volumes` | 卷定义 | 见下方 |
 | `configs` | 配置定义 | Swarm/configs |
-| `secrets` | 密钥定义 | Swarm/secrets |
+| `[[Secrets|secrets]]` | 密钥定义 | Swarm/secrets |
 | `x-*` | 扩展字段 | YAML 锚点复用 |
 
 #<!-- chunk: 扩展字段 (YAML 锚点) -->## 扩展字段 (YAML 锚点)
@@ -989,11 +990,11 @@ docker compose build --pull
 - [202-docker-container-lifecycle](./202-docker-container-lifecycle.md) - 容器生命周期
 - [203-docker-networking-deep-dive](./203-docker-networking-deep-dive.md) - Docker 网络
 - [204-docker-storage-volumes](./204-docker-storage-volumes.md) - Docker 存储
-- [125-gitops-workflow-argocd](./125-gitops-workflow-argocd.md) - GitOps 工作流
+- [125-gitops-workflow-[[ArgoCD|argocd]]](./125-gitops-workflow-argocd.md) - GitOps 工作流
 
 ## See Also
 
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|04-docker-networking-deep-dive]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|05-docker-storage-volumes]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|07-docker-security-best-practices]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 04-docker-networking-deep-dive
+- 05-docker-storage-volumes
+- 07-docker-security-best-practices
+- 08-docker-troubleshooting-guide

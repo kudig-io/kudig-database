@@ -1,5 +1,5 @@
 ---
-title: Controller Manager 异常故障树分析
+title: Controller Manager 异常故障树分析 (skills)
 description: OR0 --> DEP[依赖与存储异常]
 category: general
 tags:
@@ -28,17 +28,18 @@ prerequisites:
 fta_id: FTA-CONTROLLER_MANAGER-001
 component: Controller Manager
 severity: high
+created: "2026-05-23"
 ---
 
 ---
 title: "Controller Manager 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n kube-system -l component=kube-controller-manager -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 ..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l component=kube-controller-manager -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 ..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

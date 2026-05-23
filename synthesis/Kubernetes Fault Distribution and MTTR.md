@@ -32,6 +32,16 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[concepts/etcd Operational Reference]]"
+    type: uses
+  - target: "[[skills/Kubernetes FTA Top Events Index]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods]]"
+    type: uses
+  - target: "[[skills/best-practices/scenarios/capacity-planning]]"
+    type: related_to
 ---
 
 # Kubernetes Fault Distribution and MTTR Benchmarks
@@ -93,11 +103,11 @@ Based on production data across the industry:
 | TE-5: Storage failure | P1 | Uncommon | Data access blocked |
 | TE-15: DR failure | P0 | Rare | Business continuity risk |
 
-## Capacity Planning Benchmarks
+## [[skills/best-practices/scenarios/capacity-planning|Capacity Planning]] Benchmarks
 
 - etcd: 10,000+ writes/second on SSD
 - API Server: Handles 1,000+ req/sec per instance
-- kube-scheduler: Schedules 100+ pods/sec
+- kube-scheduler: Schedules 100+ [[domain-17-system-foundation/topic-dictionary/workloads/pods|pods]]/sec
 - Typical cluster: 500-5,000 pods per cluster
 - Typical node: 50-110 pods per node (varies by instance type)
 
@@ -109,8 +119,9 @@ Based on production data across the industry:
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
+- Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[concepts/etcd Operational Reference|etcd Operational Reference]].md|etcd Operational Reference]]
 - [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
+- [[entities/dex|Dex (entities)]]

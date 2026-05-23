@@ -1,5 +1,5 @@
 ---
-title: KusionStack
+title: KusionStack (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - iac-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # KusionStack
@@ -72,6 +73,6 @@ KusionStack 是一个云原生可编程技术栈，提供以应用为中心的�
 - [[kcl]] — KCL (Kusion Configuration Language)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kusionstack/kusionstack.md|kusionstack]]
+- kusionstack
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

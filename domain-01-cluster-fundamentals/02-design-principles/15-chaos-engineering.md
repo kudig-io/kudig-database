@@ -53,6 +53,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 15 - 混沌工程与故障注入设计
@@ -62,14 +63,14 @@ cross_refs:
 
 > **架构师洞察**：
 > 混沌工程不只是简单的“随手杀进程”，它是对分布式系统假设的严谨验证。
-> 1. **爆炸半径 (Blast Radius) 是红线**：在生产环境进行实验时，必须具备完善的“自动熔断”机制。当业务指标（如下单成功率）出现非预期下跌时，混沌系统应能在毫秒级停止故障注入并触发恢复逻辑。
-> 2. **eBPF 驱动的无侵入混沌**：现代混沌工具（如 Chaos Mesh）正向 eBPF 演进，通过在内核态拦截系统调用来模拟 I/O 延迟或 DNS 错误。这种方式相比传统的 Sidecar 拦截或 iptables 更加透明，且能模拟更底层的硬件/内核异常。
+> 1. **爆炸半径 (Blast [[Radius|Radius]]) 是红线**：在生产环境进行实验时，必须具备完善的“自动熔断”机制。当业务指标（如下单成功率）出现非预期下跌时，混沌系统应能在毫秒级停止故障注入并触发恢复逻辑。
+> 2. **eBPF 驱动的无侵入混沌**：现代混沌工具（如 [[Chaos Mesh|Chaos Mesh]]）正向 eBPF 演进，通过在内核态拦截系统调用来模拟 I/O 延迟或 DNS 错误。这种方式相比传统的 Sidecar 拦截或 iptables 更加透明，且能模拟更底层的硬件/内核异常。
 > 3. **混沌工程的终局是自动化**：实验不应是偶尔的“演习”，而应集成到 CI/CD 流水线中。每上线一个新服务，都应自动通过一套基础的故障集验证，确保系统的稳态（Steady State）是可维持的。
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨混沌工程在 Kubernetes 环境中的实践方法，涵盖故障注入技术、实验设计原则和系统韧性验证，为企业构建高可用分布式系统提供科学的工程方法论。
+本文档深入探讨混沌工程在 [[Kubernetes|Kubernetes]] 环境中的实践方法，涵盖故障注入技术、实验设计原则和系统韧性验证，为企业构建高可用分布式系统提供科学的工程方法论。
 
 ---
 
@@ -1360,22 +1361,22 @@ class AdaptiveChaosController:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- index.md|Domain-2 设计原则 — 开源项目索引]]
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/13-admission-control-webhooks.md|13-admission-control-webhooks]]
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture.md|14-service-mesh-architecture]]
-- [[domain-01-cluster-fundamentals/16-observability-design-principles.md|16-observability-design-principles]]
-- [[domain-01-cluster-fundamentals/17-security-design-patterns.md|17-security-design-patterns]]
+- 13-admission-control-webhooks
+- 14-service-mesh-architecture
+- 16-observability-design-principles
+- 17-security-design-patterns

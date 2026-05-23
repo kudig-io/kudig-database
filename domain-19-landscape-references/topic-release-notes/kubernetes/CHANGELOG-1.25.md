@@ -33,6 +33,7 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -44,7 +45,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.25.15](#changelog-since-v12515)
+  - Changelog since v1.25.15](#changelog-since-v12515)
   - [Important Security Information](#important-security-information)
     - [CVE-2023-5528: Insufficient input sanitization in in-tree storage plugin leads to privilege escalation on Windows nodes](#cve-2023-5528-insufficient-input-sanitization-in-in-tree-storage-plugin-leads-to-privilege-escalation-on-windows-nodes)
   - [Dependencies](#dependencies)
@@ -126,7 +127,7 @@ prerequisites:
     - [Container Images](#container-images-5)
   - [Changelog since v1.25.10](#changelog-since-v12510)
   - [Important Security Information](#important-security-information-2)
-    - [CVE-2023-2728: Bypassing enforce mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2023-2728: Bypassing enforce mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-4)
     - [Feature](#feature-4)
     - [Bug or Regression](#bug-or-regression-4)

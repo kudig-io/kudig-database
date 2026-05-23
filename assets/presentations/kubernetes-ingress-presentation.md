@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+title: Kubernetes Ingress 全栈进阶培训 (从入门到专家) [presentations]
 description: '**适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南'
 category: presentations
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - monitoring-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Ingress 全栈进阶培训 (从入门到专家)

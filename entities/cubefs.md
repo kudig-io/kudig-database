@@ -1,5 +1,5 @@
 ---
-title: CubeFS
+title: CubeFS (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # CubeFS
@@ -79,7 +80,7 @@ description: '## 项目概述'
 - [[fluentd]] — Fluentd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/cubefs/cubefs.md|cubefs]]
+- cubefs
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

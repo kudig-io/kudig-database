@@ -36,10 +36,11 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 数据中台架构设计
-description: '# 数据中台 Kubernetes 生产架构设计'
+description: '# 数据中台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -150,7 +151,7 @@ k8s_versions:
 
 #<!-- chunk: 2.1 数据采集与接入 -->## 2.1 数据采集与接入
 
-数据采集是数据中台的起点，需要覆盖多种数据源和多种接入模式。批量采集（DataX/Sqoop）用于历史数据迁移和定期全量同步；实时采集（Flink CDC/Canal）用于数据库变更数据的实时捕获；日志采集（Fluentd/Logstash/Beats）用于应用日志和服务器日志的实时采集；消息接入（Kafka/RocketMQ）用于业务事件的流式接入。数据接入层需要提供统一的 schema 管理和数据格式标准化。
+数据采集是数据中台的起点，需要覆盖多种数据源和多种接入模式。批量采集（DataX/Sqoop）用于历史数据迁移和定期全量同步；实时采集（Flink CDC/Canal）用于数据库变更数据的实时捕获；日志采集（[[Fluentd|Fluentd]]/Logstash/Beats）用于应用日志和服务器日志的实时采集；消息接入（Kafka/RocketMQ）用于业务事件的流式接入。数据接入层需要提供统一的 schema 管理和数据格式标准化。
 
 #<!-- chunk: 2.2 数据存储与计算 -->## 2.2 数据存储与计算
 
@@ -557,7 +558,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -572,7 +573,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/16-video-shortform-architecture.md|16-video-shortform-architecture]]
-- [[domain-20-application-patterns/17-saas-multitenant-architecture.md|17-saas-multitenant-architecture]]
-- [[domain-20-application-patterns/19-cloudnative-devops-architecture.md|19-cloudnative-devops-architecture]]
-- [[domain-20-application-patterns/20-microservice-governance-architecture.md|20-microservice-governance-architecture]]
+- 16-video-shortform-architecture
+- 17-saas-multitenant-architecture
+- 19-cloudnative-devops-architecture
+- 20-microservice-governance-architecture

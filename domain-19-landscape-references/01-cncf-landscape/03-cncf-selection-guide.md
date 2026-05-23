@@ -53,6 +53,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # CNCF 项目选型指南
@@ -98,7 +99,7 @@ authors:
 
 ### 1.2 CNI 功能对比
 
-| 特性 | Cilium | Calico | Flannel | Antrea | OVN-Kubernetes |
+| 特性 | Cilium | Calico | Flannel | [[Antrea|Antrea]] | OVN-[[Kubernetes|Kubernetes]] |
 |:-----|:------:|:------:|:-------:|:------:|:---------------:|
 | **成熟度** | Graduated | Graduated | Graduated | Sandbox | Sandbox |
 | **eBPF 加速** | ✓ | ✗ | ✗ | ✗ | ✗ |
@@ -125,7 +126,7 @@ authors:
 
 ---
 
-## 2. Service Mesh 选型
+## 2. [[Service|Service]]Service Mesh）|Service Mesh]] 选型
 
 ### 2.1 选型决策树
 
@@ -237,7 +238,7 @@ authors:
 
 ### 4.1 监控方案对比
 
-| 特性 | Prometheus | Thanos | Cortex | Mimir |
+| 特性 | [[Prometheus|Prometheus]] | Thanos | Cortex | Mimir |
 |:-----|:----------:|:------:|:------:|:-----:|
 | **成熟度** | Graduated | Incubating | Incubating | Sandbox |
 | **多租户** | ✗ | ✗ | ✓ | ✓ |
@@ -336,7 +337,7 @@ authors:
 
 ### 7.1 混沌工具对比
 
-| 特性 | Chaos Mesh | Litmus | Kraken | Pumba |
+| 特性 | [[Chaos Mesh|Chaos Mesh]] | Litmus | Kraken | Pumba |
 |:-----|:----------:|:------:|:------:|:-----:|
 | **成熟度** | Incubating | Incubating | Sandbox | Sandbox |
 | **K8s 原生** | ✓ | ✓ | ✓ | ✓ |
@@ -434,16 +435,16 @@ authors:
 
 ## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-landscape-references MOC]]
+- domain-19-landscape-references MOC
 - [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-34 CNCF Landscape — 开源项目索引]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|CNCF 集成实践指南]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|CNCF 学习路径]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|CNCF 项目 FTA 索引]]
+- Domain-34 CNCF Landscape — 开源项目索引
+- CNCF 集成实践指南
+- CNCF 学习路径
+- CNCF 项目 FTA 索引
 
 ## See Also
 
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|01-cncf-integration-guide]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|02-cncf-learning-paths]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|04-cncf-fta-index]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|01-cncf-integration-guide]]
+- 01-cncf-integration-guide
+- 02-cncf-learning-paths
+- 04-cncf-fta-index
+- 01-cncf-integration-guide

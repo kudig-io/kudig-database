@@ -59,7 +59,7 @@ prerequisites:
 
 ## 快速导航
 
-- [templates/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../../templates/README.md) — 模板体系索引
+- [[domain-04-storage-data/README|README]].md](../../templates/README.md) — 模板体系索引
 - [templates/fta-template.md](../../templates/fta-template.md) — FTA 文档标准模板（现行版本）
 - [../fta-methodology-and-agentic-practices.md](../fta-methodology-and-agentic-practices.md) — FTA 方法论与 AI Agent 实践
 - [../README.md](../README.md) — FTA 专题总览

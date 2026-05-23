@@ -1,5 +1,5 @@
 ---
-title: 第三章：FEBM 最佳实践
+title: 第三章：FEBM 最佳实践 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第三章：FEBM 最佳实践'
 category: febm
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 第三章：FEBM 最佳实践
@@ -53,10 +54,10 @@ tags:
 - evidence-based
 - methodology
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- containerd
+- [[Jaeger|jaeger]]
+- [[containerd|containerd]]
 - cri-o
 last_updated: 2026-05
 difficulty: expert
@@ -89,7 +90,7 @@ k8s_versions:
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
 > **上一章**: [第二章：FEBM 技术实现体系](./[[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]].md)  
-> **下一章**: [第四章：FEBM 对云平台工单智能体托管的意义](./[[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]].md)
+> **下一章**: 第四章：FEBM 对云平台工单智能体托管的意义](./[[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]].md)
 
 ---
 

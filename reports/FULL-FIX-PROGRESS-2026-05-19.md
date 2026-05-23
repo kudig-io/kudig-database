@@ -1,5 +1,5 @@
 ---
-title: kudig-database 全面修复进展总览
+title: kudig-database 全面修复进展总览 (reports)
 description: '### 第三轮: 内容深度 + 多云 + 培训'
 category: general
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 全面修复进展总览

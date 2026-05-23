@@ -1,36 +1,4 @@
 ---
-title: Troubleshooting Completeness Assessment
-description: 'title: Kudig-DB 故障排查体系完整性评估报告'
-category: references
-tags:
-- troubleshooting
-- apiserver
-- istio
-- envoy
-- calico
-- hpa
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Troubleshooting Completeness Assessment 是什么
-- 如何 Troubleshooting Completeness Assessment
-- Troubleshooting Completeness Assessment 故障排查
-- Troubleshooting Completeness Assessment 排障步骤
-trigger_keywords:
-- Troubleshooting
-- Completeness
-- Assessment
-prerequisites:
-- kubectl-basics
-- service-mesh-basics
-- cni-basics
----
-
 title: Kudig-DB 故障排查体系完整性评估报告
 description: '# Kudig-DB 故障排查体系完整性评估报告'
 category: general
@@ -54,15 +22,10 @@ intent_queries:
 trigger_keywords:
 - Kudig-DB
 - 故障排查体系完整性评估报告
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+created: "2026-05-23"
 ---
 
 # Kudig-DB 故障排查体系完整性评估报告
@@ -83,7 +46,7 @@ k8s_versions:
 | **topic-febm** | 法医鉴定循证（归纳法） | 10篇 | 证据链构建，取证分析 |
 | **topic-structural** | 结构化故障排查 | 63篇 | 详细排查步骤，决策树 |
 | **domain-12** | 组件级故障排查 | 42篇 | 按组件的深度排查指南 |
-| **domain-3 (control-plane)** | 控制平面深度 dive | 32篇 | 原理与架构深度解析 |
+| **domain-01-cluster-fundamentals (control-plane)** | 控制平面深度 dive | 32篇 | 原理与架构深度解析 |
 | **topic-skills** | 诊断-修复闭环技能 | 18个 | Agent 可执行的自动化技能 |
 | **topic-terway** | 阿里云 CNI 专项 | 12篇 | Terway/ENI/IPVLAN 故障排查 |
 
@@ -237,7 +200,7 @@ bottom_event:
         description: "OOM 内存诊断完整步骤"
         relevance: 0.95
     domain_12:
-      - path: "domain-12/07-oom-memory-diagnosis.md"
+      - path: "domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md"
         description: "Domain 级 OOM 诊断"
         relevance: 0.90
     skills:
@@ -287,12 +250,12 @@ ACK-One 特有故障:
   - 统一监控/日志失败 (BE-11.7, BE-11.8)
 
 现状:
-  - domain-37 有多集群管理故障排查
+  - domain-15-specialized-tech 有多集群管理故障排查
   - 但 ACK-One 特有的故障模式覆盖不足
   - 缺乏 Federation DNS、跨集群服务发现的具体排查步骤
 ```
 
-**改进方案**: 在 domain-37 或 topic-structural 中增加 ACK-One 专项故障排查
+**改进方案**: 在 domain-15-specialized-tech 或 topic-structural 中增加 ACK-One 专项故障排查
 
 ---
 
@@ -399,7 +362,7 @@ ASM/Istio 特有故障:
 
 2. **完善 FTA 底事件的 related_docs**
    - 在 kubernetes-fta-full-analysis-v2.md 中补充 related_docs 字段
-   - 每个 BE 指向对应的 structural 和 domain-12 文档
+   - 每个 BE 指向对应的 structural 和 domain-10-troubleshooting-diagnostics 文档
 
 ### 5.2 第二阶段（短期执行）
 
@@ -408,7 +371,7 @@ ASM/Istio 特有故障:
    - 补充 TE-9 所有底事件的详细排查步骤
 
 4. **扩展多集群/ASM 故障覆盖**
-   - 在 domain-37 中增加 ACK-One 专项
+   - 在 domain-15-specialized-tech 中增加 ACK-One 专项
    - 在 topic-structural 中扩展 Istio/ASM 故障排查
 
 ### 5.3 第三阶段（中长期）
@@ -465,31 +428,3 @@ ASM/Istio 特有故障:
 ---
 
 > **评估结论**: Kudig-DB 故障排查体系覆盖完整，方法论全面，已达到专家级水准。主要改进空间在于症状快速映射和文档间交叉引用，以及 ACK 特有场景的深度覆盖。
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
-
-## Related
-
-- [[README.md|README]]
-- [[index.md|index]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

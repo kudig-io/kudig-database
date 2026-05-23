@@ -24,9 +24,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 中的对象
+# [[Kubernetes|Kubernetes]] 中的对象
 
 ## 概述
 
@@ -49,13 +50,13 @@ Kubernetes 对象是"意图记录"（record of intent）。一旦创建对象，
 - **spec（规范）**：描述对象的期望状态，由用户在创建对象时设置。
 - **status（状态）**：描述对象的当前状态，由 Kubernetes 系统及其组件提供和更新。
 
-Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与期望状态匹配。例如，[[entities/deployment|deployment]] 的 `spec` 指定了 3 个副本，如果某个实例失败，Kubernetes 会自动启动替代实例。
+Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与期望状态匹配。例如，[[entities/deployment|[[Kubernetes 部署策略最佳实践|deployment]]]] 的 `spec` 指定了 3 个副本，如果某个实例失败，Kubernetes 会自动启动替代实例。
 
 ### 描述对象的必需字段
 
 在对象的 manifest（YAML 或 JSON）中，必须设置以下字段：
 
-- `apiVersion`：创建对象时使用的 Kubernetes API 版本
+- `apiVersion`：创建对象时使用的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本
 - `kind`：要创建的对象类型
 - `metadata`：帮助唯一标识对象的数据，包括 `name`、可选的 `namespace` 等
 - `spec`：对象的期望状态
@@ -67,8 +68,8 @@ Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与
 
 ## 使用场景
 
-- 使用 Deployment、StatefulSet 等工作负载对象部署应用。
-- 使用 Service、Ingress 等网络对象暴露应用。
+- 使用 Deployment、[[StatefulSet|StatefulSet]] 等工作负载对象部署应用。
+- 使用 [[Service|Service]]、Ingress 等网络对象暴露应用。
 - 使用 ConfigMap、Secret 等配置对象管理应用配置。
 
 ## 最佳实践/注意事项

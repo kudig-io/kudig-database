@@ -1,5 +1,5 @@
 ---
-title: KubeStellar
+title: KubeStellar [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - KubeStellar
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KubeStellar
@@ -62,13 +63,13 @@ KubeStellar 是一个多集群配置管理和工作负载分发平台，专注�
 
 ## Related
 
-- [[05-containerd-windows-support]] — containerd Windows 支持
+- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kcp]] — kcp
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubestellar/kubestellar.md|kubestellar]]
+- kubestellar
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

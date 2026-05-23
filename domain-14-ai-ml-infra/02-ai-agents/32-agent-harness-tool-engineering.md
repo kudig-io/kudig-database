@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 工具工程：从设计到精简的完整实践
+title: Agent Harness 工具工程：从设计到精简的完整实践 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 工具工程：从设计到精简的完整实践'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 工具工程：从设计到精简的完整实践
@@ -43,9 +44,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- helm
-- ingress
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -1090,10 +1091,10 @@ class MCPToolAdapter:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | Harness 六层架构总览，工具精简原则 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | Harness 六层架构总览，工具精简原则 |
 | [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) | 工具调用在 Loop 中的执行流程 |
-| [35 - 安全与约束](./[[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]].md) | 工具安全沙箱和权限控制 |
-| [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | 工具调用的基础理论和规范 |
+| [35 - 安全与约束](./35-agent-harness-security-constraints.md) | 工具安全沙箱和权限控制 |
+| [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | 工具调用的基础理论和规范 |
 | [25 - MCP 集成](./25-agent-cli-mcp-integration.md) | MCP 协议工具集成详解 |
 
 ---
@@ -1115,7 +1116,7 @@ class MCPToolAdapter:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1130,7 +1131,7 @@ class MCPToolAdapter:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]]
-- [[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]]
+- 30-agent-harness-engineering
+- 31-agent-harness-loop-execution
+- 33-agent-harness-context-memory
+- 34-agent-harness-verification-quality

@@ -39,6 +39,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Domain 结构生产环境维度评估报告
@@ -56,7 +57,7 @@ prerequisites:
 
 当前结构按「技术组件 + 工具品牌 + 内容载体 + 生命周期阶段 + 部署场景」五维混杂分类，导致：
 - 同一生产场景的知识分散在 3-5 个 Domain
-- 排查故障时需跨 7+ 个目录检索
+- 排查问题时需跨 7+ 个目录检索
 - 内容重复率估计达 25-30%
 
 ---
@@ -103,7 +104,7 @@ prerequisites:
 - `domain-26-service-mesh-microservices` (16 文件)：Istio, Linkerd, Envoy
 - `domain-40-cloud-native-api-gateway` (18 文件)：Gateway API, Higress
 
-**生产影响**：网络故障排查时，ServiceMesh 和 API Gateway 到底算不算 networking？Cilium 是网络还是 eBPF？
+**生产影响**：网络问题排查时，ServiceMesh 和 API Gateway 到底算不算 networking？Cilium 是网络还是 eBPF？
 
 #### 🟡 重叠区 5：存储 — 2 个 Domain 共 30 文件
 - `domain-6-storage` (21 文件)：K8s 存储、PV/PVC、CSI
@@ -146,7 +147,7 @@ prerequisites:
 ### 3.1 整合原则
 
 1. **单一维度**：全部按「运维职能领域」分类，不再混用工具品牌/内容载体/生命周期等维度
-2. **故障域优先**：以「什么出问题、怎么定位、怎么恢复」为首要组织逻辑
+2. **问题域优先**：以「什么出问题、怎么定位、怎么恢复」为首要组织逻辑
 3. **消除重复**：同一知识点只存在于一个 Domain
 4. **规模均衡**：目标每个 Domain 20-50 个文件
 
@@ -317,7 +318,7 @@ platform-engineering/
 
 ## 四、生产环境收益分析
 
-### 4.1 故障排查路径优化
+### 4.1 问题排查路径优化
 
 **当前**（以 "Pod 无法访问 Service" 为例）：
 ```

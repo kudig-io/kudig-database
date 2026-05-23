@@ -23,6 +23,7 @@ trigger_keywords:
 - 扩缩容最佳实践
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 扩缩容最佳实践
@@ -90,7 +91,7 @@ spec:
 
 - `--expander=least-waste` — 选择浪费最少的节点组 ^[inferred]
 - `--balance-similar-node-groups` — 平衡相似节点组 ^[inferred]
-- `--skip-nodes-with-system-pods=false` — 允许缩容有系统 Pod 的节点 ^[inferred]
+- `--skip-nodes-with-system-[[Pods|pods]]=false` — 允许缩容有系统 Pod 的节点 ^[inferred]
 
 ## 常见陷阱
 
@@ -114,10 +115,10 @@ VPA 和 HPA 同时配置到同一 Deployment 会导致扩缩容行为异常。�
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
-- [[concepts/resource-management.md|Resource Management]]
-- [[skills/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/autoscaling-strategies.md|[[Autoscaling Strategies|Autoscaling Strategies]]]]
+- [[concepts/resource-management.md|[[Resource Management (Requests, Limits, QoS)|Resource Management]]]]
+- [[skills/k8s-deployment-strategies-guide.md|[[Kubernetes 部署策略最佳实践|Kubernetes 部署策略最佳实践]]]]
 
 ## Related
 

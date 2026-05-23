@@ -1,5 +1,5 @@
 ---
-title: OpenChoreo
+title: OpenChoreo (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # OpenChoreo
@@ -38,7 +39,7 @@ prerequisites:
 
 ## 概述
 
-OpenChoreo 是一个云原生的内部开发者平台 (IDP) 框架，提供开箱即用的开发者自助服务门户。它基于 Kubernetes 构建，为开发团队提供应用创建、部署、监控的统一界面，同时让平台团队可以通过声明式配置定义黄金路径 (Golden Path) 和治理策略。OpenChoreo 旨在简化 Platform Engineering 的实施复杂度。
+OpenChoreo 是一个云原生的内部开发者平台 (IDP) 框架，提供开箱即用的开发者自助服务门户。它基于 Kubernetes 构建，为开发团队提供应用创建、部署、监控的统一界面，同时让平台团队可以通过声明式配置定义黄金路径 (Golden Path) 和治理策略。OpenChoreo 旨在简化 [[synthesis/platform-engineering-sre.md|Platform Engineering]] 的实施复杂度。
 
 ## 核心能力
 
@@ -64,7 +65,7 @@ OpenChoreo 是一个云原生的内部开发者平台 (IDP) 框架，提供开�
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[flux]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/controller-pattern.md|controller-pattern]]
 
@@ -76,6 +77,6 @@ OpenChoreo 是一个云原生的内部开发者平台 (IDP) 框架，提供开�
 - [[hexa]] — Hexa
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/openchoreo/openchoreo.md|openchoreo]]
+- openchoreo
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

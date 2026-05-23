@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # GitOps 工具演进
@@ -58,7 +59,7 @@ Argo CD 是声明式 GitOps 持续交付工具，支持 Kubernetes 资源同步�
 - 生产就绪版本
 - 集群注册安全改进（修复 client-cert 凭证持久化问题 #1742）
 - 支持 HA 部署模式
-- 快速安装命令：`kubectl apply -n [[entities/argocd.md|argocd]] -f install.yaml`
+- 快速安装命令：`kubectl apply -n [[entities/argocd.md|[[ArgoCD|argocd]]]] -f install.yaml`
 
 ### v1.x 系列
 

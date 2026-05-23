@@ -40,6 +40,7 @@ prerequisites:
 - kafka-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Domain-18 生产运维 — 开源项目索引

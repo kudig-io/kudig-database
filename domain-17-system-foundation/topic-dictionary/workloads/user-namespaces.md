@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # User Namespaces
@@ -35,7 +36,7 @@ prerequisites:
 
 ## 核心概念/原理
 - **启用方式**：Pod 通过设置 `pod.spec.hostUsers: false` 来启用用户命名空间（默认 `true`，即与主机共享用户命名空间）。
-- **UID/GID 映射**：kubelet 会为每个 Pod 分配唯一的主机 UID/GID 映射范围，确保同一节点上不同 Pod 的映射不重叠。
+- **UID/GID 映射**：[[kubelet|kubelet]] 会为每个 Pod 分配唯一的主机 UID/GID 映射范围，确保同一节点上不同 Pod 的映射不重叠。
 - **Capabilities 隔离**：授予 Pod 的 capabilities 仅在 Pod 的用户命名空间内有效，在宿主机上基本无效。例如：
   - `CAP_SYS_MODULE` 无法加载内核模块。
   - `CAP_SYS_ADMIN` 仅限 Pod 内部使用。
@@ -47,7 +48,7 @@ prerequisites:
   - Linux 6.3+（tmpfs 支持 idmap 挂载）。
   - 文件系统（如 ext4、xfs、btrfs、overlayfs、tmpfs）支持 idmap 挂载。
   - OCI 运行时：crun ≥1.9（推荐 ≥1.13）或 runc ≥1.2。
-  - CRI 运行时：containerd ≥2.0 或 CRI-O ≥1.25。
+  - CRI 运行时：[[containerd|containerd]] ≥2.0 或 CRI-O ≥1.25。
 - **kubelet 子 ID 配置**：
   - 系统需存在 `kubelet` 用户。
   - 需安装 `getsubids`（shadow-utils）。

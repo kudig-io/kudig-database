@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - policy-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 安全事件 SOP 与合规检查清单

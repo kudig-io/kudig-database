@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 架构与基础概念全栈培训
+title: Kubernetes 架构与基础概念全栈培训 (training-public)
 description: '# Kubernetes 架构与基础概念全栈培训'
 category: presentations
 tags:
@@ -40,9 +40,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 架构与基础概念全栈培训
+# [[Kubernetes|Kubernetes]] 架构与基础概念全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 基础架构通识
 > **核心原则**: 理解分布式系统设计哲学、掌握集群核心组件、构建云原生思维
@@ -66,7 +67,7 @@ authors:
 | 第二阶段 | 控制平面架构深度解析 | 45 分钟 |
 | 第三阶段 | 声明式 API 与控制器模式 | 30 分钟 |
 | 第四阶段 | 请求完整生命周期追踪 | 30 分钟 |
-| 第五阶段 | 生产环境高可用与 etcd 运维 | 30 分钟 |
+| 第五阶段 | 生产环境高可用与 [[etcd|etcd]] 运维 | 30 分钟 |
 | 第六阶段 | 实战演示与动手实验 | 40 分钟 |
 | Q&A | 互动问答 | 15 分钟 |
 | **合计** | | **约 3.5 小时** |
@@ -101,7 +102,7 @@ authors:
 | 3 | 声明式 API vs 命令式 API | 对比分析、GitOps 思维 | 演示 2 |
 | 4 | 控制器模式 | Watch-Diff-Reconcile 循环 | 演示 3 |
 | 5 | 控制平面组件 | API Server/etcd/Scheduler/Controller Manager | 演示 4 |
-| 6 | 数据平面组件 | kubelet/kube-proxy/containerd | 演示 4 |
+| 6 | 数据平面组件 | [[kubelet|kubelet]]/kube-proxy/containerd | 演示 4 |
 | 7 | 请求完整生命周期 | 从 apply 到 Pod Running 的每一步 | 演示 2 |
 | 8 | etcd 深度解析 | Raft 共识、性能要求、备份恢复 | 演示 5 |
 | 9 | 资源隔离与配额 | Namespace/ResourceQuota/LimitRange | 演示 6 |
@@ -1052,22 +1053,22 @@ Kubernetes Architecture
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/resources/analogy-dictionary.md|analogy-dictionary]]
-- [[domain-11-production-operations/topic-learn/resources/lecturer-persona.md|lecturer-persona]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|kubernetes-coredns-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|kubernetes-ingress-presentation]]
+- analogy-dictionary
+- lecturer-persona
+- kubernetes-coredns-presentation
+- kubernetes-ingress-presentation

@@ -1,5 +1,5 @@
 ---
-title: ReplicaSet 控制器源码分析
+title: ReplicaSet 控制器源码分析 (topic-code-analysis)
 description: '## 概述'
 category: general
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析

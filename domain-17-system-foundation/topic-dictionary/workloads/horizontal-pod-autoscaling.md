@@ -32,16 +32,17 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Horizontal Pod Autoscaling
 
 ## 概述
-HorizontalPodAutoscaler（HPA）是 [[entities/kubernetes|kubernetes]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、StatefulSet 等）的副本数量。
+HorizontalPodAutoscaler（HPA）是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、[[StatefulSet|StatefulSet]] 等）的副本数量。
 
 ## 核心概念/原理
 - **控制循环**：HPA 控制器在 kube-controller-manager 中以固定周期运行（默认 15 秒），查询指标并调整目标副本数。
-- **缩放目标**：通过 `scaleTargetRef` 指向支持 `scale` 子资源的工作负载（如 Deployment、StatefulSet、ReplicaSet）。
+- **缩放目标**：通过 `scaleTargetRef` 指向支持 `scale` 子资源的工作负载（如 Deployment、StatefulSet、[[ReplicaSet|ReplicaSet]]）。
 - **副本数计算**：
   ```
   desiredReplicas = ceil(currentReplicas * currentMetricValue / desiredMetricValue)

@@ -1,5 +1,5 @@
 ---
-title: Kube-burner
+title: Kube-burner (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kube-burner
@@ -66,7 +67,7 @@ Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群�
 
 - [[etcd]]
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[entities/cni-plugins.md|cni-plugins]]
 - [[deployment]]
 
@@ -78,5 +79,5 @@ Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群�
 - [[external-secrets]] — External Secrets Operator
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kube-burner/kube-burner.md|kube-burner]]
+- kube-burner
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

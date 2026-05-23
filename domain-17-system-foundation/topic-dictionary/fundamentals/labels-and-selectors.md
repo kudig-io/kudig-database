@@ -23,13 +23,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 标签和选择器
 
 ## 概述
 
-标签（Labels）是附加到对象（如 Pod）上的键/值对，用于指定对用户有意义的相关标识属性。与注解不同，标签可用于组织和选择对象的子集。标签选择器（Label Selectors）是 Kubernetes 中核心的分组原语。
+标签（Labels）是附加到对象（如 Pod）上的键/值对，用于指定对用户有意义的相关标识属性。与注解不同，标签可用于组织和选择对象的子集。标签选择器（Label Selectors）是 [[Kubernetes|Kubernetes]] 中核心的分组原语。
 
 ## 核心概念/原理
 
@@ -67,7 +68,7 @@ prerequisites:
 
 ## 关键机制或特性
 
-- **API 对象中的集合引用**：Service 和 ReplicationController 使用基于相等性的选择器；Deployment、ReplicaSet、DaemonSet、Job 等较新的资源同时支持 `matchLabels` 和 `matchExpressions`（支持集合-based 要求）。
+- **API 对象中的集合引用**：[[Service|Service]] 和 [[ReplicationController|ReplicationController]] 使用基于相等性的选择器；Deployment、ReplicaSet、DaemonSet、Job 等较新的资源同时支持 `matchLabels` 和 `matchExpressions`（支持集合-based 要求）。
 - **节点选择**：Pod 可以通过 `nodeSelector` 使用标签选择器约束可调度到的节点集合。
 - **列表和监听过滤**：`kubectl get pods -l environment=production,tier=frontend`
 

@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -37,7 +38,7 @@ difficulty: intermediate
 intent_queries:
   - ACK cluster lifecycle management full流程
   - aliyun cs cluster creation deletion upgrade
-  - [[entities/kubernetes|kubernetes]] cluster VPC vSwitch network planning
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
   - ACK cluster certificate renewal
   - Cluster upgrade replacement strategy
 trigger_keywords:
@@ -112,7 +113,7 @@ related_topics:
 |------|---------|------|
 | VPC CIDR | 172.16.0.0/12 | 底层网络基础，需包含所有 vSwitch |
 | Pod CIDR | 10.0.0.0/16 (Flannel) | Flannel 模式专用，决定 Pod IP 范围 |
-| Service CIDR | 192.168.0.0/16 | ClusterIP 范围，创建后不可修改 |
+| [[Service|Service]] CIDR | 192.168.0.0/16 | ClusterIP 范围，创建后不可修改 |
 | vSwitch CIDR | 172.16.0.0/24 | 每个可用区一个，需预留足够 IP |
 
 ---
@@ -520,5 +521,5 @@ aliyun slb DeleteLoadBalancer --LoadBalancerId <slb-id>
 ## 延伸阅读
 
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
+- K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
 - [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)

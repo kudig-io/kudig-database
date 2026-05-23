@@ -1,5 +1,5 @@
 ---
-title: OpenFunction
+title: OpenFunction (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - OpenFunction
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OpenFunction
@@ -30,7 +31,7 @@ prerequisites:
 
 ## 概述
 
-OpenFunction 是一个云原生 FaaS (Function as a Service) 平台，使开发者能够专注于业务逻辑。它集成了 Knative、KEDA、Dapr、Shipwright 等云原生项目，提供从源码构建到函数运行的完整生命周期管理，支持同步和异步函数运行时。
+OpenFunction 是一个云原生 FaaS (Function as a [[Service|Service]]) 平台，使开发者能够专注于业务逻辑。它集成了 Knative、KEDA、Dapr、Shipwright 等云原生项目，提供从源码构建到函数运行的完整生命周期管理，支持同步和异步函数运行时。
 
 ## 核心能力
 
@@ -43,7 +44,7 @@ OpenFunction 是一个云原生 FaaS (Function as a Service) 平台，使开发�
 ## 生产部署要点
 
 - **运行时选择**: HTTP API 使用同步函数 (Knative)，消息处理使用异步函数 (KEDA+Dapr)
-- **构建缓存**: 配置 BuildPacks 缓存加速重复构建
+- **构建缓存**: 配置 [[Buildpacks|BuildPacks]] 缓存加速重复构建
 - **资源限制**: 为函数设置合理的 CPU/内存限制，避免资源争抢
 - **冷启动优化**: 对延迟敏感的函数设置 `minReplicas: 1` 避免冷启动
 - **事件去重**: 异步函数实现幂等处理，应对消息重复投递
@@ -69,7 +70,7 @@ OpenFunction 是一个云原生 FaaS (Function as a Service) 平台，使开发�
 - [[dapr]] — Dapr
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/openfunction/openfunction.md|openfunction]]
+- openfunction
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

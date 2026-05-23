@@ -1,5 +1,5 @@
 ---
-title: OpenClaw IDENTITY.md 机制深度解析
+title: OpenClaw IDENTITY.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw IDENTITY.md 机制深度解析'
 category: general
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw IDENTITY.md 机制深度解析
@@ -39,7 +40,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- coredns
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -473,11 +474,11 @@ IDENTITY.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | IDENTITY.md 在 7 文件体系中的定位 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | IDENTITY.md 在 7 文件体系中的定位 |
 | [openclaw-workspace/IDENTITY.md](./openclaw-workspace/IDENTITY.md) | KuDig Doctor 品牌标识完整配置 |
 | [44 - SOUL.md 机制解析](./44-openclaw-soul-mechanism.md) | SOUL.md 内在人格 vs IDENTITY.md 外在形象 |
 | [45 - USER.md 机制解析](./45-openclaw-user-mechanism.md) | USER.md 偏好对 IDENTITY.md 输出风格的约束 |
-| [46 - AGENTS.md 机制解析](./[[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]].md) | 唤醒协议 Step 4 按 IDENTITY.md 输出问候 |
+| [46 - AGENTS.md 机制解析](./46-openclaw-agents-mechanism.md) | 唤醒协议 Step 4 按 IDENTITY.md 输出问候 |
 
 ---
 
@@ -487,8 +488,8 @@ IDENTITY.md 配置验证:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -502,7 +503,7 @@ IDENTITY.md 配置验证:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
-- [[domain-14-ai-ml-infra/49-openclaw-memory-mechanism.md|49-openclaw-memory-mechanism]]
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
+- 48-openclaw-skill-mechanism
+- 49-openclaw-memory-mechanism
+- 01-ai-agent-fundamentals
+- 02-llm-foundation-models

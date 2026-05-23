@@ -1,5 +1,5 @@
 ---
-title: 命令输出解读语料 — Agent 诊断推理核心数据
+title: 命令输出解读语料 — Agent 诊断推理核心数据 [domain-10-troubleshooting-diagnostics]
 description: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于故障推理
 category: agent-corpus
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 命令输出解读语料 — Agent 诊断推理核心数据
@@ -218,7 +219,7 @@ severity: high
 
 ---
 
-## 3. etcd 诊断
+## 3. [[etcd|etcd]] 诊断
 
 ### 3.1 etcd 健康检查失败
 
@@ -284,7 +285,7 @@ severity: critical
 
 ## 4. 网络诊断
 
-### 4.1 Service 无法访问
+### 4.1 [[Service|Service]] 无法访问
 
 ```yaml
 command: "kubectl get svc myapp"
@@ -304,7 +305,7 @@ action:
 severity: high
 ```
 
-### 4.2 CoreDNS 解析失败
+### 4.2 [[CoreDNS|CoreDNS]] 解析失败
 
 ```yaml
 command: "kubectl get pods -n kube-system -l k8s-app=kube-dns"
@@ -322,7 +323,7 @@ action:
 severity: critical
 ```
 
-### 4.3 Ingress 502 Bad Gateway
+### 4.3 [[Ingress|Ingress]] 502 Bad Gateway
 
 ```yaml
 command: "curl -I https://myapp.example.com"

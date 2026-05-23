@@ -30,6 +30,7 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # calico v3.25 Release Notes
@@ -41,7 +42,7 @@ Release notes can be found [on GitHub](https://github.com/projectcalico/calico/b
 
 Attached to this release are the following artifacts:
 
-- `release-v3.25.2.tgz`: container images, binaries, and kubernetes manifests.
+- `release-v3.25.2.tgz`: container images, binaries, and [[Kubernetes|kubernetes]] manifests.
 - `calico-windows-v3.25.2.zip`: Calico for Windows.
-- `tigera-operator-v3.25.2.tgz`: Calico Helm v3 chart.
+- `tigera-operator-v3.25.2.tgz`: Calico [[Helm|Helm]] v3 chart.
 - ocp.tgz: Manifest bundle for OpenShift.

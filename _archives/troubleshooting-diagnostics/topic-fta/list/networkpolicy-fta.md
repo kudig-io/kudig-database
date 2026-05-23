@@ -2197,7 +2197,7 @@ flowchart TD
           {
             "id": "identify_blocking_policy",
             "description": "识别阻断流量的策略",
-            "exec": "for np in $(kubectl get networkpolicy -n ${NAMESPACE} -o name); do PTYPES=$(kubectl get $np -n ${NAMESPACE} -o jsonpath='{.spec.policyTypes}'); EGRESS=$(kubectl get $np -n ${NAMESPACE} -o jsonpath='{.spec.egress}'); if [[ \"$PTYPES\" == *\"Egress\"* && (\"$EGRESS\" == \"\" || \"$EGRESS\" == \"null\" || \"$EGRESS\" == \"[]\") ]]; then echo \"Blocking policy: $np\"; fi; done",
+            "exec": "for np in $(kubectl get networkpolicy -n ${NAMESPACE} -o name); do PTYPES=$(kubectl get $np -n ${NAMESPACE} -o jsonpath='{.spec.policyTypes}'); EGRESS=$(kubectl get $np -n ${NAMESPACE} -o jsonpath='{.spec.egress}'); if \"$PTYPES\" == *\"Egress\"* && (\"$EGRESS\" == \"\"; then echo \"Blocking policy: $np\"; fi; done",
             "timeout": "15s"
           }
         ]

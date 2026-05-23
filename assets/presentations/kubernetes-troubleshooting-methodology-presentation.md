@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 故障排查方法论全栈培训
+title: Kubernetes 故障排查方法论全栈培训 (assets)
 description: '# Kubernetes 故障排查方法论全栈培训'
 category: presentations
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 故障排查方法论全栈培训

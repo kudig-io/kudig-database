@@ -1,5 +1,5 @@
 ---
-title: Kubewarden
+title: Kubewarden [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Kubewarden
@@ -63,7 +64,7 @@ Kubewarden 是一个 Kubernetes 策略引擎，使用 WebAssembly (Wasm) 运行�
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[deployment]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/controller-pattern.md|controller-pattern]]
@@ -72,12 +73,12 @@ Kubewarden 是一个 Kubernetes 策略引擎，使用 WebAssembly (Wasm) 运行�
 ## Related
 
 - [[entities/cncf-infrastructure.md|cncf-infrastructure]] — CNCF 基础设施与混沌工程项目全景
-- [[external-secrets]] — External Secrets Operator
+- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
 - [[eraser]] — Eraser
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubewarden/kubewarden.md|kubewarden]]
+- kubewarden
 - [[entities/capsule.md|Capsule]]
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

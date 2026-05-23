@@ -1,5 +1,5 @@
 ---
-title: Telepresence
+title: Telepresence (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Telepresence
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Telepresence
@@ -68,13 +69,13 @@ Telepresence 是一个 Kubernetes 本地开发工具，它在本地开发环境�
 
 ## Related
 
-- [[03-containerd-security-hardening]] — containerd 安全加固
+- [[03-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
 - [[k0s]] — K0s
 - [[kubeedge]] — KubeEdge
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/telepresence/telepresence.md|telepresence]]
+- telepresence
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

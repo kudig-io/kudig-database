@@ -54,18 +54,19 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
 # 20 - 服务网格集成表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [istio.io/latest/docs](https://istio.io/latest/docs/) | [linkerd.io/docs](https://linkerd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/istio.md|istio]].io/latest/docs](https://istio.io/latest/docs/) | [[entities/linkerd.md|linkerd]].io/docs](https://linkerd.io/docs/)
 
 <!-- chunk: 服务网格对比 -->
 ## 服务网格对比
 
-| 特性 | Istio | Linkerd | Cilium SM | Consul Connect |
+| 特性 | Istio | Linkerd | [[Cilium|Cilium]] SM | Consul Connect |
 |-----|-------|---------|-----------|---------------|
-| **架构** | Envoy Sidecar | Rust Sidecar | eBPF无Sidecar | Envoy Sidecar |
+| **架构** | [[Envoy|Envoy]] Sidecar | Rust Sidecar | eBPF无Sidecar | Envoy Sidecar |
 | **资源开销** | 高 | 低 | 很低 | 中 |
 | **学习曲线** | 陡峭 | 平缓 | 中等 | 中等 |
 | **功能丰富度** | 最全面 | 核心功能 | 核心功能 | 全面 |
@@ -524,25 +525,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-15-specialized-tech MOC]]
+- domain-15-specialized-tech MOC
 - [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-10 扩展与自定义 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-crd-development-guide.md|CRD 自定义资源定义开发指南]]
-- [[domain-15-specialized-tech/02-operator-development-patterns.md|02 - Operator开发模式与控制器实现]]
-- [[domain-15-specialized-tech/03-admission-webhook-configuration.md|03 - 准入控制器(Webhook)配置与实现]]
-- [[domain-15-specialized-tech/04-api-aggregation-extension.md|Kubernetes API 聚合扩展机制详解]]
-- [[domain-15-specialized-tech/05-package-management-tools.md|包管理与应用分发工具]]
-- [[domain-15-specialized-tech/06-helm-charts-management.md|47 - Helm Chart开发与管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践]]
-- [[domain-15-specialized-tech/08-cicd-pipelines.md|CI/CD 管道]]
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd.md|48 - GitOps工作流]]
+- Domain-10 扩展与自定义 — 开源项目索引
+- CRD 自定义资源定义开发指南
+- 02 - Operator开发模式与控制器实现
+- 03 - 准入控制器(Webhook)配置与实现
+- Kubernetes API 聚合扩展机制详解
+- 包管理与应用分发工具
+- 47 - Helm Chart开发与管理
+- 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- CI/CD 管道
+- 48 - GitOps工作流
 
 ## See Also
 
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd.md|09-gitops-workflow-argocd]]
-- [[domain-15-specialized-tech/10-image-build-tools.md|10-image-build-tools]]
-- [[domain-15-specialized-tech/12-service-mesh-advanced.md|12-service-mesh-advanced]]
-- [[domain-15-specialized-tech/13-kubernetes-operations-fundamentals.md|13-kubernetes-operations-fundamentals]]
+- 09-gitops-workflow-argocd
+- 10-image-build-tools
+- 12-service-mesh-advanced
+- 13-kubernetes-operations-fundamentals
 
 ## Related
 

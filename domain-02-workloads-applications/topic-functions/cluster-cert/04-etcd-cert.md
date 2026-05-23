@@ -1,4 +1,36 @@
 ---
+title: etcd 证书体系源码分析 (topic-code-analysis)
+description: 'description: ''| 用户自定义 | `listen-client-urls` 中解析的地址 |'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- etcd 证书体系源码分析 是什么
+- 如何 etcd 证书体系源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- etcd
+- 证书体系源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: etcd 证书体系源码分析
 description: '| 用户自定义 | `listen-client-urls` 中解析的地址 |'
 category: functions
@@ -34,10 +66,6 @@ trigger_keywords:
 - Peer 通信
 - Raft
 - 外部 etcd
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -45,6 +73,15 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/ca-generation
 - cluster-cert/cert-config
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # etcd 证书体系源码分析
@@ -454,9 +491,14 @@ systemctl restart kubelet
 - [`CreatePKIAssets`](02-ca-generation.md) — PKI 生成主入口
 - [`NewCertificateAuthority`](02-ca-generation.md) — CA 证书生成
 - [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 计算
-- [`kubeadm certs renew`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — 证书续期命令
+- [`kubeadm certs renew`](README.md) — 证书续期命令
 - [`CreateLocalEtcdStaticPodManifest`](07-etcd.md) — etcd 静态 Pod 生成
 
 ## Related
 
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kcl.md|kcl]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

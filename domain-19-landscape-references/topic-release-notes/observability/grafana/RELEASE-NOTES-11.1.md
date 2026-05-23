@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # grafana v11.1 Release Notes
@@ -44,4 +45,4 @@ Source: [v11.1.13](https://github.com/grafana/grafana/releases/tag/v11.1.13)
 ### Bug fixes
 
 - **Alerting:** Update slack image upload to use new API [#101485](https://github.com/grafana/grafana/pull/101485), [@moustafab](https://github.com/moustafab)
-- **Service Accounts:** Do not show error pop-ups for Service Account and Renderer UI flows [#101796](https://github.com/grafana/grafana/pull/101796), [@IevaVasiljeva](https://github.com/IevaVasiljeva)
+- **[[Service|Service]]Service Accounts]]:** Do not show error pop-ups for Service Account and Renderer UI flows [#101796](https://github.com/grafana/grafana/pull/101796), [@IevaVasiljeva](https://github.com/IevaVasiljeva)

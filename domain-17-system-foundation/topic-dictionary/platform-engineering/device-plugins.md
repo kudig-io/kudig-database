@@ -27,18 +27,19 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 设备插件
 
 ## 概述
 
-设备插件（Device Plugins）是 Kubernetes 提供的一种扩展机制，允许集群支持需要厂商特定设置的设备或资源，例如 GPU、高性能网卡（NIC）、FPGA 或非易失性主内存。该特性自 Kubernetes v1.26 起进入稳定（Stable）状态。
+设备插件（Device Plugins）是 [[Kubernetes|Kubernetes]] 提供的一种扩展机制，允许集群支持需要厂商特定设置的设备或资源，例如 GPU、高性能网卡（NIC）、FPGA 或非易失性主内存。该特性自 Kubernetes v1.26 起进入稳定（Stable）状态。
 
 ## 核心概念/原理
 
-- **设备插件框架**：Kubernetes 提供统一的设备插件框架，供硬件厂商向 kubelet 发布系统硬件资源，而无需修改 Kubernetes 核心代码。
-- **gRPC 注册**：设备插件通过 Unix socket 向 kubelet 的 `Registration` gRPC 服务注册，提供资源名称（遵循 `vendor-domain/resourcetype` 扩展资源命名规范，如 `nvidia.com/gpu`）。
+- **设备插件框架**：Kubernetes 提供统一的设备插件框架，供硬件厂商向 [[kubelet|kubelet]] 发布系统硬件资源，而无需修改 Kubernetes 核心代码。
+- **[[gRPC|gRPC]] 注册**：设备插件通过 Unix socket 向 kubelet 的 `Registration` gRPC 服务注册，提供资源名称（遵循 `vendor-domain/resourcetype` 扩展资源命名规范，如 `nvidia.com/gpu`）。
 - **资源上报**：注册成功后，设备插件将其管理的设备列表发送给 kubelet，kubelet 在节点状态更新中将这些资源通告给 API server。
 
 ## 关键机制或特性

@@ -3,6 +3,8 @@
 ## YAML Front Matter
 
 ```yaml
+created: "2026-05-23"
+updated: "2026-05-23"
 ---# {{主题名称}} FEBM 法医取证分析
 
 > **文档类型**: FEBM 取证分析
@@ -17,7 +19,7 @@
 ```yaml
 ---
 febm_id: "FEBM-{SEQ}"
-title: "{{主题名称}}"
+title: {{主题名称}} [templates]
 component: "{{组件名称}}"
 severity: "P{0-3}"
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
@@ -448,4 +450,4 @@ FEBM-OODA 循环:
 
 ---
 
-> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../domain-10-troubleshooting-diagnostics/topic-febm/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md)
+> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|README]].md)

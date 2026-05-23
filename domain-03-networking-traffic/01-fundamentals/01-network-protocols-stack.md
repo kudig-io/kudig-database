@@ -49,6 +49,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 网络协议栈详解
@@ -64,7 +65,7 @@ cross_refs:
 - [TCP/IP 四层模型](#tcpip-四层模型)
 - [数据封装过程](#数据封装过程)
 - [常用协议概览](#常用协议概览)
-- [Linux 网络栈](#linux-网络栈)
+- Linux 网络栈](#linux-网络栈)
 
 ---
 
@@ -288,7 +289,7 @@ nstat
 
 <!-- chunk: Netfilter/iptables 链路全景 -->## Netfilter/iptables 链路全景
 
-Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间工具。Kubernetes 的 Service、NetworkPolicy 均依赖此机制。
+Netfilter 是 Linux 内核的数据包过滤框架，iptables 是其用户空间工具。[[Kubernetes|Kubernetes]] 的 [[Service|Service]]、[[NetworkPolicy|NetworkPolicy]] 均依赖此机制。
 
 #<!-- chunk: 数据包经过 Netfilter 的完整路径 -->## 数据包经过 Netfilter 的完整路径
 
@@ -1014,7 +1015,7 @@ EOF
 
 ## See Also
 
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|06-sdn-network-virtualization]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|99-cilium-ebpf-network-guide]]
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|02-tcp-udp-deep-dive]]
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|03-dns-principles-configuration]]
+- 06-sdn-network-virtualization
+- 99-cilium-ebpf-network-guide
+- 02-tcp-udp-deep-dive
+- 03-dns-principles-configuration

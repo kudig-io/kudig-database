@@ -24,6 +24,7 @@ trigger_keywords:
 - Map
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Knowledge Map

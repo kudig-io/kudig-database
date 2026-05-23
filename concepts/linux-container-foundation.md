@@ -28,6 +28,7 @@ trigger_keywords:
 - Foundation
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Linux Container Foundation
@@ -43,7 +44,7 @@ Namespaces provide isolation by giving processes their own view of system resour
 | PID | Process IDs | Per-Pod process tree | /proc/<pid>/ns/pid |
 | Network | Network stack, interfaces, routes | Pod network isolation | /proc/<pid>/ns/net |
 | Mount | Filesystem mount points | Container filesystem | /proc/<pid>/ns/mnt |
-| UTS | Hostname and domain | Pod hostname | /proc/<pid>/ns/uts |
+| UTS | Hostname and domain | [[Pod Hostname|Pod hostname]] | /proc/<pid>/ns/uts |
 | IPC | Inter-process communication | Shared memory isolation | /proc/<pid>/ns/ipc |
 | User | User/group ID mapping | Rootless containers | /proc/<pid>/ns/user |
 | Cgroup | Cgroup root view | Per-container cgroup view | /proc/<pid>/ns/cgroup |

@@ -36,6 +36,16 @@ prerequisites:
 - cilium-basics
 - kafka-basics
 - observability-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/deployment]]"
+    type: uses
+  - target: "[[entities/istio]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
+  - target: "[[entities/cni]]"
+    type: related_to
 ---
 
 # Cilium eBPF × 可观测性
@@ -43,7 +53,7 @@ prerequisites:
 
 ## 连接点
 
-[[concepts/cilium-ebpf-networking]] 描述 eBPF 在网络中的应用，[[entities/prometheus-grafana]] 是监控栈。两者的交汇点是 **Hubble**：Cilium 的可观测性子系统，它使用与网络策略相同的 eBPF 挂载点来收集流数据，无需额外的 sidecar 或代理。wiki 分别讨论了 eBPF 网络和 Prometheus 监控，但没有指出 **eBPF 正在将网络可观测性从"采样推断"转变为"全量捕获"**。
+[[concepts/cilium-ebpf-networking]] 描述 eBPF 在网络中的应用，[[entities/prometheus|prometheus]]-grafana]] 是监控栈。两者的交汇点是 **Hubble**：Cilium 的可观测性子系统，它使用与网络策略相同的 eBPF 挂载点来收集流数据，无需额外的 sidecar 或代理。wiki 分别讨论了 eBPF 网络和 Prometheus 监控，但没有指出 **eBPF 正在将网络可观测性从"采样推断"转变为"全量捕获"**。
 
 ## 共现场景
 
@@ -57,7 +67,7 @@ prerequisites:
 **核心洞察：eBPF 使网络可观测性从"尽力而为的采样"升级为"内核级全量捕获"，且成本趋近于零。**
 
 传统网络监控的困境：
-- **Sidecar 模式**：Istio Envoy 提供丰富的 L7 指标，但每个 Pod 增加 ~100MB 内存和 ~5% CPU
+- **Sidecar 模式**：[[entities/istio|Istio]] Envoy 提供丰富的 L7 指标，但每个 Pod 增加 ~100MB 内存和 ~5% CPU
 - **Node Agent 模式**：Prometheus node-exporter 采集节点级指标，但无法感知 Pod 级网络流
 - **Flow 采样**：NetFlow/sFlow 采样率通常为 1:1000 或更低，丢失大量短连接信息
 
@@ -86,7 +96,7 @@ eBPF 的突破性在于：**它在处理网络数据包的同一个 eBPF 程序�
 
 ## 开放问题
 
-- **eBPF 可观测性的标准化**：Hubble 的指标格式是 Cilium 特有的。是否应该有一个跨 CNI 的 eBPF 网络可观测性标准（如 OpenTelemetry 的网络语义约定）？
+- **eBPF 可观测性的标准化**：Hubble 的指标格式是 Cilium 特有的。是否应该有一个跨 [[entities/cni|CNI]] 的 eBPF 网络可观测性标准（如 OpenTelemetry 的网络语义约定）？
 - **加密流量的 eBPF 可观测性**：TLS 1.3 的加密使得 eBPF 无法解析应用层内容。Cilium 的 L7 可观测性在 mTLS 环境下是否失效？是否需要结合 SPIFFE 身份来替代内容解析？
 
 
@@ -102,5 +112,8 @@ eBPF 的突破性在于：**它在处理网络数据包的同一个 eBPF 程序�
 
 - [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 - [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
-- [[synthesis/Deployment × Secret 管理.md|Deployment × Secret 管理]]
+- [[entities/deployment|Deployment]] × Secret 管理.md|Deployment × Secret 管理]]
 - [[synthesis/GitOps x 平台工程.md|GitOps x 平台工程]]
+## Related
+
+- [[synthesis/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

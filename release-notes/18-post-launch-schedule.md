@@ -21,6 +21,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # 发布后传播节奏表

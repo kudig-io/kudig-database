@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Dynamic Resource Allocation
 
 ## 概述
 
-动态资源分配（Dynamic Resource Allocation，DRA）是 Kubernetes v1.35 中达到 stable 的特性。它允许用户在 Pod 之间请求和共享资源，这些资源通常是附加设备，如硬件加速器。DRA 提供了比 Device Plugin 更灵活的设备分类、请求和使用方式。
+动态资源分配（Dynamic Resource Allocation，DRA）是 [[Kubernetes|Kubernetes]] v1.35 中达到 stable 的特性。它允许用户在 Pod 之间请求和共享资源，这些资源通常是附加设备，如硬件加速器。DRA 提供了比 Device Plugin 更灵活的设备分类、请求和使用方式。
 
 ## 核心概念/原理
 
@@ -217,9 +218,9 @@ kubectl get resourceclaimtemplates -n ml-platform
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 ResourceClaim
 - [调度框架](./scheduling-framework.md) — Reserve / PreBind 阶段与 DRA 的交互
-- [Gang Scheduling](./gang-scheduling.md) — 分布式 GPU 训练需要 DRA + gang 调度
-- [Pod Overhead](./pod-overhead.md) — DRA 设备的额外资源开销
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 DRA 设备需求自动扩展 GPU 节点
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 分布式 GPU 训练需要 DRA + gang 调度
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]](./pod-overhead.md) — DRA 设备的额外资源开销
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 DRA 设备需求自动扩展 GPU 节点
 
 ## 参考链接
 
@@ -227,5 +228,5 @@ kubectl get resourceclaimtemplates -n ml-platform
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

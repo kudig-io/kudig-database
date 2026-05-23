@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # grafana v10.4 Release Notes

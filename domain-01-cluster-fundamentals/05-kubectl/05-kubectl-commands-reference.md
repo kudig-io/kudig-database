@@ -73,11 +73,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/
   type: troubleshooting
   desc: 故障排查专题
+created: "2026-05-23"
 ---
 
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-05 | **文档类型**: 生产运维参考
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-05 | **文档类型**: 生产运维参考
 
 ---
 
@@ -2070,7 +2071,7 @@ echo -e "\n[2] 备份命名空间级资源..."
 
 for ns in $NAMESPACES; do
     # 跳过系统命名空间
-    if [[ "$ns" == "kube-system" || "$ns" == "kube-public" || "$ns" == "kube-node-lease" ]]; then
+    if "$ns" == "kube-system"; then
         continue
     fi
     
@@ -2329,27 +2330,27 @@ kubectl get --raw='/healthz/etcd'
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- Kubernetes 核心组件深度剖析
+- 03 - 功能和API表
+- 04 - Kubernetes 源码结构深度解析
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## Related
 
 - [[MOC]]
 
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|架构全景图]]
+- 架构全景图
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
-- [[domain-13-container-runtime/MOC.md|相关知识域: domain-13-container-runtime]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
+- 相关知识域: domain-13-container-runtime
+- 相关知识域: domain-01-cluster-fundamentals
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
@@ -2359,7 +2360,7 @@ kubectl get --raw='/healthz/etcd'
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03-api-versions-features]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04-source-code-structure]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06-cluster-configuration-parameters]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07-upgrade-paths-strategy]]
+- 03-api-versions-features
+- 04-source-code-structure
+- 06-cluster-configuration-parameters
+- 07-upgrade-paths-strategy

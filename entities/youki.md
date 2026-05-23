@@ -1,5 +1,5 @@
 ---
-title: youki
+title: youki [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 - youki
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # youki
@@ -69,8 +70,8 @@ youki 是一个用 Rust 实现的 OCI 容器运行时，作为 runc 的替代品
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
-- [[domain-19-landscape-references/sandbox/youki/youki.md|youki]]
-- [[concepts/container-runtime-comparison|Container Runtime Comparison]] — Cross-reference
-- [[concepts/docker-architecture|Docker Architecture and Container Runtime]] — Cross-reference
+- youki
+- [[concepts/container-runtime-comparison|[[Container Runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
+- [[concepts/docker-architecture|[[Docker Architecture and Container Runtime|Docker Architecture and Container Runtime]]]] — Cross-reference
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

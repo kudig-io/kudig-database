@@ -1,5 +1,5 @@
 ---
-title: PipeCD
+title: PipeCD [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # PipeCD
@@ -51,7 +52,7 @@ PipeCD 是一个统一的持续交付平台，为 Kubernetes、Terraform、Cloud
 - **自动分析**: 配置 Prometheus 指标分析，在金丝雀阶段自动检测异常
 - **审批门控**: 关键阶段设置 WAIT_APPROVAL，确保人工确认
 - **Piped 隔离**: 每个环境/集群部署独立的 Piped，缩小爆炸半径
-- **Secret 管理**: 使用 Sealed Secrets 或 SOPS 加密 Git 中的敏感配置
+- **Secret 管理**: 使用 Sealed [[Secrets|Secrets]] 或 SOPS 加密 Git 中的敏感配置
 - **多集群**: 通过 Piped 代理实现多集群部署，无需直连集群 API
 
 ## 架构定位
@@ -72,6 +73,6 @@ PipeCD 是一个统一的持续交付平台，为 Kubernetes、Terraform、Cloud
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[sops]] — SOPS (Secrets OPerationS)
 
-- [[domain-19-landscape-references/sandbox/pipecd/pipecd.md|pipecd]]
+- pipecd
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

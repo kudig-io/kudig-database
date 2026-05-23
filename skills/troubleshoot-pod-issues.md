@@ -27,6 +27,7 @@ trigger_keywords:
 - Issues
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Troubleshoot Pod Issues
@@ -76,7 +77,7 @@ kubectl logs <pod-name> -c <container-name> # Specific container
 | **OOMKilled** | Memory limit too low, memory leak | Increase limits, fix leak, configure JVM -XX:MaxRAMPercentage |
 | **Init:Error** | Init container failure | Check init container logs, fix init logic |
 
-### Step 5: Debug with Ephemeral Containers
+### Step 5: Debug with [[Ephemeral Containers|Ephemeral Containers]]
 
 ```bash
 kubectl debug -it <pod-name> --image=busybox --target=<container-name>
@@ -91,8 +92,8 @@ For Java applications in containers:
 
 ## Related
 
-- [[skills/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — Monitor Kubernetes Metrics
-- [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[skills/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — [[Monitor Kubernetes Metrics|Monitor Kubernetes Metrics]]
+- [[skills/configure-health-probes.md|configure-health-probes]] — [[Configure Health Probes|Configure Health Probes]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[skills/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow

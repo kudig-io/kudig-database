@@ -1,5 +1,5 @@
 ---
-title: Pixie
+title: Pixie [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Pixie
@@ -49,7 +50,7 @@ Pixie 是一个 Kubernetes 原生的可观测性平台，使用 eBPF 自动采�
 - **协议解析**: 自动解析 HTTP、gRPC、MySQL、PostgreSQL、Redis、DNS、Kafka
 - **PxL 查询语言**: Python 风格的数据查询和分析
 - **边缘计算**: 数据在集群内处理，不外传
-- **即时可见性**: 安装即可获得 Service Map、请求追踪
+- **即时可见性**: 安装即可获得 [[Service|Service]] Map、请求追踪
 - **Flamegraph**: CPU 性能分析火焰图
 
 ## K8s 集成
@@ -85,6 +86,6 @@ Pixie 是一个 Kubernetes 原生的可观测性平台，使用 eBPF 自动采�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[grpc]] — gRPC
 
-- [[domain-19-landscape-references/sandbox/pixie/pixie.md|pixie]]
+- pixie
 - [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

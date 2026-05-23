@@ -56,6 +56,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # flanneld 启动参数详解
@@ -186,7 +187,7 @@ flanneld --backend=wireguard \
 
 | 参数 | 环境变量 | 默认值 | 说明 |
 |:-----|:---------|:------:|:-----|
-| `--kube-subnet-mgr` | - | false | 使用 Kubernetes API 管理子网（推荐） |
+| `--kube-subnet-mgr` | - | false | 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 管理子网（推荐） |
 | `--kube-api-url` | `FLANNEL_KUBE_API_URL` | - | Kubernetes API Server URL |
 | `--kubeconfig` | `FLANNEL_KUBECONFIG` | ~/.kube/config | kubeconfig 文件路径 |
 | `--kubeconfig-file` | `FLANNEL_KUBECONFIG_FILE` | - | kubeconfig 文件路径（备选） |
@@ -209,7 +210,7 @@ flanneld --backend=wireguard \
 
 ---
 
-<!-- chunk: 5. etcd 配置参数 -->
+<!-- chunk: 5. [[etcd|etcd]] 配置参数 -->
 ## 5. etcd 配置参数
 
 ### 5.1 etcd 连接参数
@@ -452,25 +453,25 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
-- [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
+- [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|04c-flannel-windows-support]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|04d-flannel-multi-cluster]]
-- [[domain-03-networking-traffic/05-terway-advanced-guide.md|05-terway-advanced-guide]]
-- [[domain-03-networking-traffic/06-service-concepts-types.md|06-service-concepts-types]]
+- 04c-flannel-windows-support
+- 04d-flannel-multi-cluster
+- 05-terway-advanced-guide
+- 06-service-concepts-types
 
 ## Related
 

@@ -47,11 +47,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
 # 06 - 节点生命周期与状态事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 ---
 
@@ -60,7 +61,7 @@ cross_refs:
 - [概述](#概述)
 - [节点生命周期状态机](#节点生命周期状态机)
 - [节点状态类型详解](#节点状态类型详解)
-- [Kubelet 节点状态事件](#kubelet-节点状态事件)
+- [[entities/kubelet.md|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
 - [Node Controller 事件](#node-controller-事件)
 - [节点驱逐机制](#节点驱逐机制)
 - [生产环境监控建议](#生产环境监控建议)
@@ -208,7 +209,7 @@ ps aux | grep kubelet
 |:---|:---|
 | 正常启动 | 无需处理，等待节点变为 Ready |
 | 反复重启 | 检查 kubelet 日志，可能是配置错误或依赖服务未启动 |
-| 启动失败 | 检查容器运行时(containerd/docker)是否正常运行 |
+| 启动失败 | 检查容器运行时([[containerd|containerd]]/docker)是否正常运行 |
 | 启动缓慢 | 检查网络连通性和 API Server 可达性 |
 
 ---
@@ -331,7 +332,7 @@ Source:  node-controller
 - **现有 Pod**：
   - 立即影响：Pod 状态变为 Unknown
   - 5 分钟后（默认 pod-eviction-timeout）：Pod 被驱逐，在其他节点重建
-- **服务影响**：如果节点上有 Service 的 endpoints，会被标记为 NotReady
+- **服务影响**：如果节点上有 [[Service|Service]] 的 endpoints，会被标记为 NotReady
 
 ##<!-- chunk: 排查建议 -->## 排查建议
 
@@ -2535,25 +2536,25 @@ groups:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04-probe-health-check-events]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05-scheduling-preemption-events]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
+- 04-probe-health-check-events
+- 05-scheduling-preemption-events
+- 07-deployment-replicaset-events
+- 08-statefulset-daemonset-events
 
 ## Related
 

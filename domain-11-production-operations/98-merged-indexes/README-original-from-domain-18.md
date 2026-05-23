@@ -44,6 +44,7 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Domain 18: 生产环境运维最佳实践 (Production Operations Best Practices)

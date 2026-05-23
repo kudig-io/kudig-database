@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)
@@ -42,7 +43,7 @@ tags:
 - aks
 - ack
 - scheduler
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -54,7 +55,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - 负载均衡 (SLB/NLB/ALB) 是什么
 - 如何 ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品
@@ -83,7 +84,7 @@ k8s_versions:
 ## 目录
 
 - [负载均衡选型指南](#负载均衡选型指南)
-- [Service (NLB/CLB) 详解](#service-nlbclb-详解)
+- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
 - [ALB Ingress 高级配置](#alb-ingress-高级配置)
 - [生产级注解 (Annotations) 速查表](#生产级注解-annotations-速查表)
 - [故障排查与性能调优](#故障排查与性能调优)

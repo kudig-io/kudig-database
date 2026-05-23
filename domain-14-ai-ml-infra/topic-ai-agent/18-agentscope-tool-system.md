@@ -1,7 +1,43 @@
 ---
+title: AgentScope 工具系统与 MCP 集成 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,'
+category: general
+tags:
+- ai
+- ai-agent
+- prometheus
+- postgresql
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- AgentScope 工具系统与 MCP 集成 是什么
+- 如何 AgentScope 工具系统与 MCP 集成
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- AgentScope
+- 工具系统与
+- MCP
+- 集成
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: AgentScope 工具系统与 MCP 集成
-description: '**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit, 工具注册, MCP, Model Context Protocol, Function
-  Calling, 并行工具调用, Agent Skill, Meta Tool, 自定义工具'
+description: '**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,
+  工具注册, MCP, Model Context Protocol, Function Calling, 并行工具调用, Agent [[SKILL|Skill]], Meta Tool,
+  自定义工具'
 category: ai-agent
 tags:
 - ai
@@ -9,7 +45,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - postgresql
 last_updated: 2026-05
 difficulty: advanced
@@ -29,9 +65,15 @@ trigger_keywords:
 - 集成
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # AgentScope 工具系统与 MCP 集成
@@ -40,7 +82,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 工具系统是 Agent 从"对话助手"升级为"自主执行者"的关键。AgentScope 的工具系统设计极其灵活——**任何 Python 可调用对象都可以作为工具**，无需特定装饰器或 Schema 定义。同时原生支持 MCP（Model Context Protocol）协议，可无缝接入外部工具服务。
 
@@ -48,9 +90,9 @@ prerequisites:
 
 ---
 
-## 1. 工具系统设计哲学
+<!-- chunk: 1. 工具系统设计哲学 -->## 1. 工具系统设计哲学
 
-### 1.1 "一切可调用对象皆工具"
+#<!-- chunk: 1.1 "一切可调用对象皆工具" -->## 1.1 "一切可调用对象皆工具"
 
 AgentScope 中的"工具"定义非常宽泛：
 
@@ -74,7 +116,7 @@ AgentScope 支持的工具类型
 └── 有状态 或 无状态
 ```
 
-### 1.2 与其他框架的工具定义对比
+#<!-- chunk: 1.2 与其他框架的工具定义对比 -->## 1.2 与其他框架的工具定义对比
 
 | 框架 | 工具定义方式 | 复杂度 |
 |------|------------|--------|
@@ -85,9 +127,9 @@ AgentScope 支持的工具类型
 
 ---
 
-## 2. Toolkit — 工具注册中心
+<!-- chunk: 2. Toolkit — 工具注册中心 -->## 2. Toolkit — 工具注册中心
 
-### 2.1 基础使用
+#<!-- chunk: 2.1 基础使用 -->## 2.1 基础使用
 
 ```python
 from agentscope.tool import Toolkit, ToolResponse
@@ -148,7 +190,7 @@ agent = ReActAgent(
 > - 工具函数推荐返回 `ToolResponse` 而非 `str`。`ToolResponse` 支持 `text`、`image_url` 等多种内容类型。
 > - 使用 `preset_kwargs` 可将 API Key 等敏感参数预设进工具，不暴露给 LLM 的 JSON Schema。
 
-### 2.2 异步工具
+#<!-- chunk: 2.2 异步工具 -->## 2.2 异步工具
 
 ```python
 import aiohttp
@@ -172,7 +214,7 @@ toolkit = Toolkit()
 toolkit.register_tool_function(async_fetch_url)
 ```
 
-### 2.3 流式工具
+#<!-- chunk: 2.3 流式工具 -->## 2.3 流式工具
 
 ```python
 from typing import AsyncGenerator
@@ -207,7 +249,7 @@ toolkit = Toolkit()
 toolkit.register_tool_function(stream_log_tail)
 ```
 
-### 2.4 偏函数与可调用对象
+#<!-- chunk: 2.4 偏函数与可调用对象 -->## 2.4 偏函数与可调用对象
 
 ```python
 from functools import partial
@@ -258,7 +300,7 @@ toolkit.register_tool_function(db_query)
 
 ---
 
-## 3. 内置工具
+<!-- chunk: 3. 内置工具 -->## 3. 内置工具
 
 AgentScope 提供多类内置工具函数，开箱即用：
 
@@ -272,7 +314,7 @@ AgentScope 提供多类内置工具函数，开箱即用：
 | `dashscope_text_to_image` | 通义万相文生图 | 需 DashScope API Key |
 | `openai_text_to_image` | DALL-E 文生图 | 需 OpenAI API Key |
 
-### 3.1 代码执行
+#<!-- chunk: 3.1 代码执行 -->## 3.1 代码执行
 
 ```python
 from agentscope.tool import (
@@ -306,11 +348,11 @@ toolkit.register_tool_function(write_text_file)
 # Output: 命令执行结果
 ```
 
-> **安全警告**：在生产环境中，代码执行工具应在**沙箱**中运行。AgentScope Runtime 提供了安全沙箱环境，详见 [22 - 生产部署](./22-agentscope-production-deployment.md)。
+> **安全警告**：在生产环境中，代码执行工具应在**沙箱**中运行。AgentScope Runtime 提供了安全沙箱环境，详见 [22 - 生产部署](./deployment.md|22-agentscope-production-deployment]].md)。
 
 ---
 
-## 4. 动态 JSON Schema 扩展
+<!-- chunk: 4. 动态 JSON Schema 扩展 -->## 4. 动态 JSON Schema 扩展
 
 AgentScope 支持通过 Pydantic 模型动态扩展工具的 JSON Schema，典型用例是在工具调用中添加 **Chain-of-Thought 思考字段**：
 
@@ -349,7 +391,7 @@ toolkit.set_extended_model(CoTThinking)
 
 ---
 
-## 5. 工具中断支持
+<!-- chunk: 5. 工具中断支持 -->## 5. 工具中断支持
 
 当用户发送实时中断时，正在执行的工具会收到 `asyncio.CancelledError`。工具可以优雅地处理中断：
 
@@ -395,9 +437,9 @@ async def long_running_analysis(
 
 ---
 
-## 6. 并行工具调用
+<!-- chunk: 6. 并行工具调用 -->## 6. 并行工具调用
 
-### 4.1 启用并行调用
+#<!-- chunk: 4.1 启用并行调用 -->## 4.1 启用并行调用
 
 ```python
 agent = ReActAgent(
@@ -422,7 +464,7 @@ agent = ReActAgent(
   总耗时: max(t1, t2, t3)
 ```
 
-### 4.2 适用场景
+#<!-- chunk: 4.2 适用场景 -->## 4.2 适用场景
 
 | 场景 | 是否适合并行 | 原因 |
 |------|------------|------|
@@ -433,9 +475,9 @@ agent = ReActAgent(
 
 ---
 
-## 7. MCP 集成
+<!-- chunk: 7. MCP 集成 -->## 7. MCP 集成
 
-### 7.1 什么是 MCP
+#<!-- chunk: 7.1 什么是 MCP -->## 7.1 什么是 MCP
 
 MCP（Model Context Protocol）是由 Anthropic 提出的标准化工具协议，允许 Agent 通过统一接口调用外部工具服务。AgentScope 原生支持 MCP。
 
@@ -452,7 +494,7 @@ MCP 架构
     └── StdIOStatefulClient  → 本地进程通信（stdio）
 ```
 
-### 7.2 MCP 客户端类型
+#<!-- chunk: 7.2 MCP 客户端类型 -->## 7.2 MCP 客户端类型
 
 | 客户端类型 | 传输方式 | 适用场景 |
 |-----------|---------|--------|
@@ -460,7 +502,7 @@ MCP 架构
 | `HttpStatefulClient` | `streamable_http` | 远程 MCP Server（有状态，持久会话） |
 | `StdIOStatefulClient` | `stdio` | 本地进程 MCP Server（通过 stdin/stdout） |
 
-### 7.3 使用 MCP 工具
+#<!-- chunk: 7.3 使用 MCP 工具 -->## 7.3 使用 MCP 工具
 
 **方式一：获取单个 MCP 工具作为本地函数**
 
@@ -561,9 +603,9 @@ async def composite_toolkit():
 
 ---
 
-## 8. Meta Tool — 智能体自主管理工具
+<!-- chunk: 8. Meta Tool — 智能体自主管理工具 -->## 8. Meta Tool — 智能体自主管理工具
 
-### 6.1 概念
+#<!-- chunk: 6.1 概念 -->## 6.1 概念
 
 启用 Meta Tool 后，智能体可以在运行时**动态管理自己的工具集**——添加、移除、查询可用工具。
 
@@ -576,7 +618,7 @@ agent = ReActAgent(
 )
 ```
 
-### 6.2 适用场景
+#<!-- chunk: 6.2 适用场景 -->## 6.2 适用场景
 
 ```
 Meta Tool 适用场景
@@ -589,11 +631,11 @@ Meta Tool 适用场景
 
 ---
 
-## 9. Toolkit 中间件（Middleware）
+<!-- chunk: 9. Toolkit 中间件（Middleware） -->## 9. Toolkit 中间件（Middleware）
 
 AgentScope 的中间件机制注册在 **Toolkit**（而非 Agent）上，采用洋葱模型（Onion Model），可在工具执行前后插入自定义逻辑。
 
-### 9.1 洋葱模型
+#<!-- chunk: 9.1 洋葱模型 -->## 9.1 洋葱模型
 
 ```
 Toolkit 中间件执行顺序（洋葱模型）
@@ -605,7 +647,7 @@ Toolkit 中间件执行顺序（洋葱模型）
 │  ← AuthorizationMiddleware.post （最外层）
 ```
 
-### 9.2 中间件签名
+#<!-- chunk: 9.2 中间件签名 -->## 9.2 中间件签名
 
 ```python
 from typing import AsyncGenerator
@@ -625,7 +667,7 @@ async def my_middleware(
         yield response
 ```
 
-### 9.3 实践示例
+#<!-- chunk: 9.3 实践示例 -->## 9.3 实践示例
 
 **权限控制中间件**：
 
@@ -677,9 +719,9 @@ toolkit.register_middleware(output_transform_middleware)
 
 ---
 
-## 10. K8s 运维工具集成实践
+<!-- chunk: 10. K8s 运维工具集成实践 -->## 10. K8s 运维工具集成实践
 
-### 7.1 kubectl 工具集
+#<!-- chunk: 7.1 kubectl 工具集 -->## 7.1 kubectl 工具集
 
 ```python
 import subprocess
@@ -690,7 +732,7 @@ def kubectl_get_pods(namespace: str = "default", label_selector: str = "") -> st
     """获取指定命名空间的 Pod 列表。
 
     Args:
-        namespace: [[entities/kubernetes|kubernetes]] 命名空间
+        namespace: Kubernetes 命名空间
         label_selector: 标签选择器，如 "app=nginx"
 
     Returns:
@@ -796,7 +838,7 @@ def create_k8s_toolkit() -> Toolkit:
     return toolkit
 ```
 
-### 7.2 完整 K8s 诊断 Agent
+#<!-- chunk: 7.2 完整 K8s 诊断 Agent -->## 7.2 完整 K8s 诊断 Agent
 
 ```python
 import asyncio
@@ -853,9 +895,9 @@ asyncio.run(k8s_diagnosis_agent())
 
 ---
 
-## 11. 工具开发最佳实践
+<!-- chunk: 11. 工具开发最佳实践 -->## 11. 工具开发最佳实践
 
-### 8.1 编写高质量工具函数
+#<!-- chunk: 8.1 编写高质量工具函数 -->## 8.1 编写高质量工具函数
 
 ```python
 # 最佳实践: 清晰的 docstring + type hints + 错误处理
@@ -913,7 +955,7 @@ def query_prometheus_metric(
         return f"Error: {type(e).__name__}: {e}"
 ```
 
-### 8.2 工具设计原则
+#<!-- chunk: 8.2 工具设计原则 -->## 8.2 工具设计原则
 
 | 原则 | 说明 | 反模式 |
 |------|------|--------|
@@ -927,9 +969,9 @@ def query_prometheus_metric(
 
 ---
 
-## 12. 最佳实践与反模式
+<!-- chunk: 12. 最佳实践与反模式 -->## 12. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **返回 `ToolResponse`**：统一使用 `ToolResponse(text=...)` 而非纯字符串，支持多模态返回
 - **`preset_kwargs` 隐藏敏感参数**：API Key、数据库密码等通过 `preset_kwargs` 传入，不暴露给 LLM
@@ -940,7 +982,7 @@ def query_prometheus_metric(
 - **Middleware 实现横切关注点**：权限控制、输出截断、日志记录用中间件而非写在工具内部
 - **并行调用加速诊断**：独立的信息收集任务开启 `parallel_tool_calls=True`
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **无 docstring 的工具**：LLM 无法理解工具用途，随机调用
 - **工具返回过大数据**：返回完整 YAML（10000+行）会占满上下文窗口——用 Middleware 截断
@@ -951,7 +993,7 @@ def query_prometheus_metric(
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -963,3 +1005,27 @@ def query_prometheus_metric(
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 16-agentscope-overview-installation
+- 17-agentscope-core-concepts
+- 19-agentscope-memory-context
+- 20-agentscope-multi-agent-orchestration

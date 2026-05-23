@@ -58,19 +58,20 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
 # 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 
 > **最后更新**: 2026-04-24
-> **适用版本**: Resilience4j 2.x / Istio v1.29 / Spring Boot 3.4+
+> **适用版本**: Resilience4j 2.x / [[Istio|Istio]] v1.29 / Spring Boot 3.4+
 > **难度**: 高级
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-在分布式微服务系统中，故障是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联故障等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的故障不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 Kubernetes 环境下微服务弹性模式的实现，包括应用层的 Resilience4j 配置和服务网格层的 Istio 弹性策略，以及两者的协同与冲突避免策略。
+在分布式微服务系统中，故障是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联故障等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的故障不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[Kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，包括应用层的 Resilience4j 配置和服务网格层的 Istio 弹性策略，以及两者的协同与冲突避免策略。
 
 弹性模式的核心目标不是消除故障，而是控制故障的影响范围和恢复时间。一个设计良好的弹性系统应当能够优雅降级而非完全失效，并在故障条件消除后快速恢复到正常状态。本文档覆盖五种核心弹性模式：熔断器（Circuit Breaker）、重试（Retry）、超时（Timeout）、舱壁隔离（Bulkhead）和限流（Rate Limiting），以及它们在 Kubernetes + Istio 环境下的生产级配置实践。
 
@@ -734,7 +735,7 @@ resilience4j:
 
 <!-- chunk: 八、监控与告警 -->## 八、监控与告警
 
-#<!-- chunk: 8.1 Resilience4j Prometheus 指标 -->## 8.1 Resilience4j Prometheus 指标
+#<!-- chunk: 8.1 Resilience4j [[Prometheus|Prometheus]] 指标 -->## 8.1 Resilience4j Prometheus 指标
 
 ```yaml
 management:
@@ -1207,22 +1208,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|07-service-mesh-comparison-selection]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|08-ambient-mesh-l7-policy]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|10-api-gateway-service-mesh-integration]]
-- [[domain-03-networking-traffic/99-istio-service-mesh-guide.md|99-istio-service-mesh-guide]]
+- 07-service-mesh-comparison-selection
+- 08-ambient-mesh-l7-policy
+- 10-api-gateway-service-mesh-integration
+- 99-istio-service-mesh-guide

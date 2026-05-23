@@ -28,6 +28,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Provider 与模型管理

@@ -1,5 +1,5 @@
 ---
-title: K8S 讲师角色设定与场景规范
+title: K8S 讲师角色设定与场景规范 [resources]
 description: '- 课程设计者'
 category: learning
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -65,7 +66,7 @@ tier: peripheral---
 > **创建日期**: 2026-05-18
 > **更新日期**: 2026-05-21
 > **用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库
-> **定位**: Kubernetes 入门讲解 + 常见问题答疑的数字人教练
+> **定位**: [[Kubernetes|Kubernetes]] 入门讲解 + 常见问题答疑的数字人教练
 > **场景**: 新人培训、工单托管客服、On-Call 速查、智能客服机器人
 
 ---
@@ -231,7 +232,7 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/quick-start/04-debug-tools-setup.md|04-debug-tools-setup]]
-- [[domain-11-production-operations/topic-learn/resources/analogy-dictionary.md|analogy-dictionary]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|kubernetes-architecture-fundamentals-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|kubernetes-coredns-presentation]]
+- 04-debug-tools-setup
+- analogy-dictionary
+- kubernetes-architecture-fundamentals-presentation
+- kubernetes-coredns-presentation

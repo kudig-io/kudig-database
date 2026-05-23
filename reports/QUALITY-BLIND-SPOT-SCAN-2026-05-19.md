@@ -1,5 +1,5 @@
 ---
-title: kudig-database 质量盲区深度扫描报告
+title: kudig-database 质量盲区深度扫描报告 (reports)
 description: '# kudig-database 质量盲区深度扫描报告'
 category: general
 tags:
@@ -20,6 +20,7 @@ trigger_keywords:
 - 质量盲区深度扫描报告
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 质量盲区深度扫描报告
@@ -55,7 +56,7 @@ PSP 在 K8s v1.25 已正式移除, 替代方案为 Pod Security Admission (PSA)�
 典型文件:
 - `domain-01-cluster-fundamentals/17-apiserver-tuning.md`
 - `domain-07-platform-engineering/02-cluster-lifecycle-management.md`
-- `domain-17-system-foundation/07-linux-[[domain-11-production-operations/topic-best-practices/scenarios/security-hardening|security-hardening]].md`
+- `domain-17-system-foundation/07-linux-security-hardening.md`
 - `domain-17-system-foundation/topic-dictionary/security/pod-security-admission.md`
 
 修复方案: 在每个提及 PSP 的段落添加弃用警告:

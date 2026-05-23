@@ -48,15 +48,16 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Karmada 多集群联邦深度实践
+# [[Karmada|Karmada]] 多集群联邦深度实践
 
 <!-- chunk: 概述 -->## 概述
 
-Karmada（Kubernetes Armada）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
+Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
 
-Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server 扩展 Kubernetes API，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。故障自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
+Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。故障自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
 
 本文档深入探讨 Karmada 的架构设计、资源传播机制、故障转移策略和生产级部署实践。内容涵盖完整的控制平面部署、成员集群注册、策略配置、监控告警和运维自动化脚本，为企业构建基于 Karmada 的多云管理平台提供全面参考。
 
@@ -924,7 +925,7 @@ done
 echo -e "\n[7] 不健康集群检查"
 UNHEALTHY=$(kubectl --kubeconfig $KARMADA_KUBECONFIG get clusters -o json | \
     jq -r '.items[] | select(.status.conditions[] | select(.type=="Ready" and .status=="False")) | .metadata.name')
-if [[ -n "$UNHEALTHY" ]]; then
+if -n "$UNHEALTHY"; then
     echo "不健康集群: $UNHEALTHY"
 else
     echo "所有集群健康"
@@ -1092,22 +1093,22 @@ kubectl --kubeconfig $KARMADA_KUBECONFIG get overridepolicies -A -o yaml
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|06-alibaba-ack-enterprise-hybrid]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|07-huawei-cce-enterprise]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|09-multicloud-network-interconnect]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|10-multicloud-disaster-recovery]]
+- 06-alibaba-ack-enterprise-hybrid
+- 07-huawei-cce-enterprise
+- 09-multicloud-network-interconnect
+- 10-multicloud-disaster-recovery

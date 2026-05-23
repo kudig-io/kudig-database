@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 核心依赖版本矩阵
@@ -36,11 +37,11 @@ prerequisites:
 
 etcd 是 Kubernetes 的唯一状态存储，版本选择直接影响集群的稳定性和性能。
 
-| etcd 版本 | 关键特性 | 兼容 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] 版本 |
+| etcd 版本 | 关键特性 | 兼容 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]] 版本 |
 |---|---|---|
 | v3.0 | v3 API 引入、lease 机制、watch 改进 | v1.3 - v1.6 |
 | v3.1 | 快照恢复改进、etcdctl v3 完善 | v1.6 - v1.8 |
-| v3.2 | gRPC proxy、etcd operator 支持、性能优化 | v1.8 - v1.12 |
+| v3.2 | [[gRPC|gRPC]] proxy、etcd operator 支持、性能优化 | v1.8 - v1.12 |
 | v3.3 | 改进的压缩机制、更好的监控指标 | v1.12 - v1.15 |
 | v3.4 | 压缩优化、WAL 预写日志改进、etcd 嵌入 etcd | v1.15 - v1.18 |
 | v3.5 | 多版本并发控制、改进的 leader 选举、更好的集群恢复 | v1.20+ |

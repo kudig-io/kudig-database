@@ -1,4 +1,47 @@
 ---
+title: 云厂商方案与 kubeadm 对比 (topic-code-analysis)
+description: 'title: 云厂商方案与 kubeadm 对比'
+category: general
+tags:
+- reference
+- etcd
+- cilium
+- flannel
+- calico
+- helm
+- gateway
+- gpu
+- serverless
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 云厂商方案与 kubeadm 对比 是什么
+- 如何 云厂商方案与 kubeadm 对比
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 云厂商方案与
+- kubeadm
+- 对比
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- helm-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 云厂商方案与 kubeadm 对比
 description: '# 云厂商方案与 kubeadm 对比'
 category: functions
@@ -41,14 +84,6 @@ trigger_keywords:
 - Terway
 - CNI comparison
 - cloud provider comparison
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- helm-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -57,11 +92,20 @@ related_topics:
 - HA cluster setup
 - CNI networking
 - cloud integration
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 云厂商方案与 kubeadm 对比
 
-## 主要云厂商托管 [[entities/kubernetes|k8s]] 方案
+## 主要云厂商托管 K8s 方案
 
 | 厂商 | 方案名称 | 底层 | 管理方式 |
 |------|---------|------|---------|
@@ -332,3 +376,11 @@ kubeadm token create --print-join-command
 - **kubeadm**: 通用、底层、标准化，适合私有化/定制场景
 - **云厂商托管**: 开箱即用，免运维，适合大多数生产场景
 - **混合**: 利用各自优势，托管 control-plane + 自管理特殊节点
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

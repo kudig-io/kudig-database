@@ -1,5 +1,5 @@
 ---
-title: 03 - 应用工作负载迁移
+title: 03 - 应用工作负载迁移 [migration]
 description: 'description: ③ 配置适配 ──────────┘    ⑤ 验证'
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - gpu-ml-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 03 - 应用工作负载迁移
@@ -44,9 +45,9 @@ tags:
 - migration
 - modernization
 - docker
-- harbor
+- [[Harbor|harbor]]
 - opa
-- statefulset
+- [[StatefulSet|statefulset]]
 - daemonset
 - job
 - cronjob
@@ -724,14 +725,14 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 
 ---
 
-**上一步**: ← [02-ACK 目标集群设计](./[[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]].md)
-**下一步**: → [04-存储与数据迁移](./[[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]].md)
+**上一步**: ← [02-ACK 目标集群设计](./02-ack-target-cluster-design.md)
+**下一步**: → [04-存储与数据迁移](./04-storage-data-migration.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -745,7 +746,7 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/01-migration-assessment-planning.md|01-migration-assessment-planning]]
-- [[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]]
-- [[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]]
+- 01-migration-assessment-planning
+- 02-ack-target-cluster-design
+- 04-storage-data-migration
+- 05-network-migration-traffic-cutover

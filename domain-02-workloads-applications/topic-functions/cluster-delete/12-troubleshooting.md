@@ -1,7 +1,43 @@
 ---
+title: 集群删除故障排查手册 (topic-code-analysis)
+description: 'title: 集群删除故障排查手册'
+category: general
+tags:
+- reference
+- troubleshooting
+- etcd
+- apiserver
+- kubelet
+- containerd
+- docker
+- pdb
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 集群删除故障排查手册 是什么
+- 如何 集群删除故障排查手册
+- Kubernetes 07 platform engineering 最佳实践
+- 集群删除故障排查手册 故障排查
+- 集群删除故障排查手册 排障步骤
+trigger_keywords:
+- 集群删除故障排查手册
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 集群删除故障排查手册
-description: 集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见故障场景，提供系统化的排查方法和解决方案，涵盖 kubeadm reset、etcd、容器删除、卸载、kubectl
-  delete node 以及重新初始化失败等场景。
 category: cluster-delete
 tags:
 - troubleshooting
@@ -13,15 +49,10 @@ tags:
 - container
 - unmount
 - kubernetes
-- apiserver
 last_updated: 2026-05-18
+description: 集群删除过程中常遇到各种异常：reset 卡住、etcd 移除失败、容器无法删除、网络规则残留等。本文档汇总常见故障场景，提供系统化的排查方法和解决方案，涵盖
+  kubeadm reset、etcd、容器删除、卸载、kubectl delete node 以及重新初始化失败等场景。
 difficulty: intermediate
-reading_level: intermediate
-audience:
-- platform-engineer
-- kubernetes-administrator
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubeadm reset troubleshooting common errors
 - kubernetes cluster deletion failure recovery
@@ -39,10 +70,12 @@ trigger_keywords:
 - ProgressDeadlineExceeded equivalent
 - container runtime error
 - NFS mount stuck
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: intermediate
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -53,6 +86,17 @@ related_topics:
 - etcd-cleanup
 - force-delete
 - ha-delete
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 集群删除故障排查手册
@@ -114,7 +158,7 @@ reset 只检查 root 权限（`RunRootCheckOnly`），不检查其他系统条�
 
 **症状**:
 ```
-[reset] Could not obtain a client set from the kubeconfig file: /etc/[[entities/kubernetes|kubernetes]]/admin.conf
+[reset] Could not obtain a client set from the kubeconfig file: /etc/kubernetes/admin.conf
 ```
 
 **分析**: 这是 **Warning**，不是 Error。API Server 已不可用（控制面组件已停止），但 reset 仍可继续。
@@ -451,3 +495,11 @@ strace -f -e trace=umount kubeadm reset -f
 - [kubeadm reset 故障排查](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/)
 - [kubectl drain 故障](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
 - [etcd 故障恢复](https://etcd.io/docs/latest/op-guide/recovery/)
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

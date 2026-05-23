@@ -64,9 +64,11 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
-<!-- condition: kubectl get pods -n logging -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示日志组件异常 -->
+<!-- condition: kubectl get [[Pods|pods]] -n logging -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示日志组件异常 -->
 
 # 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
@@ -74,7 +76,7 @@ k8s_versions:
 
 ## 1. 概述
 
-日志管道故障是 Kubernetes 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现故障时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的故障都可能导致日志数据丢失。
+日志管道故障是 [[Kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现故障时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，日志管道通常由采集层（[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|Fluentd]]]]/Fluent Bit/Vector）、传输层（Kafka/直接推送）和存储层（Elasticsearch/Loki/ClickHouse）组成，任一环节的故障都可能导致日志数据丢失。
 
 ### 典型触发场景
 

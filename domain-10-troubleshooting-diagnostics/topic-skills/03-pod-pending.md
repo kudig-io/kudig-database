@@ -50,15 +50,17 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
-<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有 Pending Pod -->
+<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示有 Pending Pod -->
 
 # Pod Pending 调度失败诊断与修复
 
-> **Skill ID**: SKILL-POD-002  
+> **[[SKILL|Skill]] ID**: SKILL-POD-002  
 > **Agent 模式**: L2-semi-auto — 低风险操作自动执行，中/高风险需人工审批  
-> **适用版本**: Kubernetes v1.28 – v1.32  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 – v1.32  
 > **预计修复时间**: 5–30 分钟
 
 ---

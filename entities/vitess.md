@@ -1,5 +1,5 @@
 ---
-title: Vitess
+title: Vitess (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Vitess
@@ -78,11 +79,11 @@ description: '## 项目概述'
 ## Related
 
 - [[tinkerbell]] — Tinkerbell
-- [[sops]] — SOPS (Secrets OPerationS)
+- [[sops]] — SOPS (Secrets OPerationS) OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
 - [[ovn-kubernetes]] — OVN-Kubernetes
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/vitess/vitess.md|vitess]]
+- vitess
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

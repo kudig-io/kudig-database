@@ -34,6 +34,7 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: Veeam Backup & Replication 企业级备份恢复解决方案
@@ -44,7 +45,7 @@ tags:
 - disaster-recovery
 - backup
 - ha
-- prometheus
+- [[Prometheus|prometheus]]
 - job
 - gateway
 - rbac
@@ -61,7 +62,7 @@ estimated_read_time: 5min
 intent_queries:
 - Veeam Backup & Replication 企业级备份恢复解决方案 是什么
 - 如何 Veeam Backup & Replication 企业级备份恢复解决方案
-- Kubernetes 30 disaster recovery business continuity 最佳实践
+- [[Kubernetes|Kubernetes]] 30 disaster recovery business continuity 最佳实践
 trigger_keywords:
 - Veeam
 - Backup
@@ -1205,24 +1206,24 @@ performance_optimization:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
+- domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
 - [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
+- Domain-30 灾备与业务连续性 — 开源项目索引
+- VMware vSphere 企业级灾备与业务连续性
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- Kubernetes 备份与恢复深度实践
+- 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+- 应用级灾备架构：多区域部署与故障转移
+- Velero 企业级备份恢复实践指南
 
 ## See Also
 
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|99-velero-backup-recovery-guide]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|01-vmware-vsphere-enterprise-dr]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|03-enterprise-disaster-recovery-chaos-engineering]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|05-commvault-enterprise-disaster-recovery]]
+- 99-velero-backup-recovery-guide
+- 01-vmware-vsphere-enterprise-dr
+- 03-enterprise-disaster-recovery-chaos-engineering
+- 05-commvault-enterprise-disaster-recovery
 
 ## Related
 

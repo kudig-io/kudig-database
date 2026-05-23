@@ -1,4 +1,38 @@
 ---
+title: kube-proxy 与 Service 负载均衡 (topic-code-analysis)
+description: 'description: ''## kube-proxy 部署'''
+category: general
+tags:
+- reference
+- kubelet
+- scheduler
+- coredns
+- daemonset
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kube-proxy 与 Service 负载均衡 是什么
+- 如何 kube-proxy 与 Service 负载均衡
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kube-proxy
+- Service
+- 负载均衡
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: kube-proxy 与 Service 负载均衡
 description: '## kube-proxy 部署'
 category: functions
@@ -36,9 +70,6 @@ trigger_keywords:
 - DNAT
 - kube-svc
 - load balancing
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
@@ -47,6 +78,15 @@ related_topics:
 - CNI networking
 - CoreDNS
 - Ingress
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kube-proxy 与 Service 负载均衡
@@ -69,7 +109,7 @@ related_topics:
 
 ```bash
 # 验证
-kubectl get ds -n kube-system -l [[entities/kubernetes|k8s]]-app=kube-proxy
+kubectl get ds -n kube-system -l k8s-app=kube-proxy
 
 # 查看 kube-proxy 配置
 kubectl get configmap kube-proxy -n kube-system -o yaml
@@ -295,3 +335,11 @@ cat /proc/sys/net/netfilter/nf_conntrack_count
 | 源 IP 丢失 | ExternalTrafficPolicy=Cluster | 改为 Local |
 | NodePort 无法访问 | 防火墙阻止 30000-32767 | 开放端口 |
 | 连接超时 | conntrack 表满 | 增加 nf_conntrack_max |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[concepts/service-networking.md|service-networking]]
+- [[entities/kubernetes.md|kubernetes]]

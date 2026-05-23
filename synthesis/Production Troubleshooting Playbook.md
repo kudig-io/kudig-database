@@ -29,13 +29,23 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[skills/Kubernetes Diagnostic Skills Overview]]"
+    type: uses
+  - target: "[[skills/Kubernetes FTA Top Events Index]]"
+    type: uses
 ---
 
 # Production Troubleshooting Playbook
 
 ## Symptom-to-Diagnosis Mapping
 
-This playbook synthesizes information from the [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]], and [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
+This playbook synthesizes information from the [[entities/kubernetes|Kubernetes]] Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]], and Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
 
 ### Tier 1: Immediate Assessment (First 2 Minutes)
 
@@ -69,7 +79,7 @@ This playbook synthesizes information from the [[skills/Kubernetes Diagnostic Sk
 | DNS resolution failure | TE-4 -> IE-4.1 | `kubectl get ep kube-dns -n kube-system` | CoreDNS pods down, endpoint missing |
 | Pod-to-Pod connectivity | TE-4 -> IE-4.2 | `kubectl exec -it <pod> -- curl <target>` | NetworkPolicy blocking, CNI issue |
 | Service unreachable | TE-2 -> IE-2.2 | `kubectl get ep <service>` | Endpoint not populated, selector wrong |
-| External access failure | TE-2 -> IE-2.3 | `kubectl get ingress` | Ingress config error, cert expiry |
+| External access failure | TE-2 -> IE-2.3 | `kubectl get [[domain-17-system-foundation/topic-dictionary/networking/ingress|ingress]]` | Ingress config error, cert expiry |
 
 ### Tier 4: Storage Diagnosis (15-30 Minutes)
 
@@ -128,8 +138,9 @@ After every P0/P1 incident:
 - [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[synthesis/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
 - [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
 - [[references/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
+- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]

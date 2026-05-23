@@ -1,5 +1,5 @@
 ---
-title: 第十九章：避坑指南与常见误区
+title: 第十九章：避坑指南与常见误区 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十九章：避坑指南与常见误区'
 category: fta
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 fta_id: FTA-19_PITFALLS_AND_BEST_PRACTICES-001
 component: 19 Pitfalls And Best Practices
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第十九章：避坑指南与常见误区
@@ -47,8 +48,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - llm
 - agent
 last_updated: 2026-05
@@ -81,7 +82,7 @@ k8s_versions:
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十八章：典型场景完整方案](./18-typical-scenarios.md)  
+> **上一章**: 第十八章：典型场景完整方案](./18-typical-scenarios.md)  
 > **下一章**: [第二十章：FTA + 大语言模型的新机遇](./20-fta-llm-opportunities.md)
 
 ---

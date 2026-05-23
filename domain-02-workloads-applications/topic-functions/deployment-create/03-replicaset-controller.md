@@ -1,7 +1,38 @@
 ---
-title: ReplicaSet 控制器源码分析
-description: 深入分析 Kubernetes ReplicaSet 控制器的源码实现，涵盖 syncReplicaSet 核心同步函数、manageReplicas 期望状态对齐、Pod 创建流程、Status 更新以及与 Deployment
-  的数据流关系。
+title: ReplicaSet 控制器源码分析 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+- case-study
+- etcd
+- kubelet
+- pdb
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- ReplicaSet 控制器源码分析 是什么
+- 如何 ReplicaSet 控制器源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- ReplicaSet
+- 控制器源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
+title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析
 category: deployment
 tags:
 - replicaset
@@ -10,17 +41,10 @@ tags:
 - syncReplicaset
 - manageReplicas
 - workload
-- etcd
-- kubelet
-- pdb
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes ReplicaSet 控制器的源码实现，涵盖 syncReplicaSet 核心同步函数、manageReplicas
+  期望状态对齐、Pod 创建流程、Status 更新以及与 Deployment 的数据流关系。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-developer
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes replicaset controller source code analysis
 - syncReplicaSet manageReplicas kubernetes
@@ -38,10 +62,12 @@ trigger_keywords:
 - PodTemplateHash
 - replicaset status
 - FullyLabeledReplicas
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-02-workloads-applications
 - domain-01-cluster-fundamentals
@@ -49,13 +75,24 @@ related_topics:
 - deployment-controller
 - rolling-update
 - deployment-status
+domain_link: '[Workloads](../domain-02-workloads-applications/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # ReplicaSet 控制器源码分析
 
 ## 概述
 
-ReplicaSet（RS）是 Deployment 的底层执行器，负责维护指定数量的 [[concepts/pod-lifecycle|pod]] 副本。Deployment 控制器决定"要哪个版本、要多少个"，ReplicaSet 控制器则负责"实际创建和删除 Pod"。
+ReplicaSet（RS）是 Deployment 的底层执行器，负责维护指定数量的 Pod 副本。Deployment 控制器决定"要哪个版本、要多少个"，ReplicaSet 控制器则负责"实际创建和删除 Pod"。
 
 ---
 
@@ -395,3 +432,10 @@ kubelet: 在节点上创建容器
 | Pod 创建/删除工具 | `pkg/controller/replicaset/replica_set_utils.go` |
 | 通用控制器工具 | `pkg/controller/controller_utils.go` |
 | Pod 状态判断 | `pkg/api/v1/pod/util.go` |
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

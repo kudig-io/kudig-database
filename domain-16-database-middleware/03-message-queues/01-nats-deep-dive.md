@@ -26,9 +26,10 @@ trigger_keywords:
 - middleware
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# NATS 深度解析
+# [[NATS|NATS]] 深度解析
 
 ## 架构演进
 
@@ -50,7 +51,7 @@ NATS Server:
 | KV Store | ❌ | ✅ |
 | 性能 | 极高（10M+/sec） | 高（1M+/sec） |
 
-## Kubernetes 部署
+## [[Kubernetes|Kubernetes]] 部署
 
 ```yaml
 apiVersion: apps/v1

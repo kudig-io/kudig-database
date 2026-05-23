@@ -45,6 +45,7 @@ prerequisites:
 - tls-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -657,15 +658,15 @@ graph TD
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践

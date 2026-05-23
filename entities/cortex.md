@@ -1,5 +1,5 @@
 ---
-title: Cortex
+title: Cortex (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Cortex
@@ -78,7 +79,7 @@ Cortex 是多租户、水平可扩展的 Prometheus 即服务解决方案。它�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/cortex/cortex.md|cortex]]
+- cortex
 - [[references/observability-terms|K8s 可观测性术语参考]] — Cross-reference
 - [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

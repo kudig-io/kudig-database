@@ -1,7 +1,7 @@
 ---
-title: kudig-database 内容深度评估报告
-description: kudig-database 内容深度评估报告
-category: reports
+title: kudig-database 内容深度评估报告 (reports)
+description: '# kudig-database 内容深度评估报告'
+category: general
 tags:
 - k8s
 - etcd
@@ -15,9 +15,8 @@ last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
-- SRE
-- DevOps
-estimated_read_time: 10min
+- 所有工程师
+estimated_read_time: 5min
 intent_queries:
 - kudig-database 内容深度评估报告 是什么
 - 如何 kudig-database 内容深度评估报告
@@ -29,15 +28,7 @@ prerequisites:
 - helm-basics
 - ebpf-basics
 - etcd-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
+created: "2026-05-23"
 ---
 
 # kudig-database 内容深度评估报告
@@ -55,7 +46,7 @@ authors:
 | 内容深度 | 8.7 | 优秀, 大多数文档达到生产级专业水准 |
 | 代码/配置示例 | 8.5 | 大量可执行 YAML/bash/Python 示例 |
 | 架构图 | 9.0 | ASCII 图 + Mermaid 图覆盖全面 |
-| 版本适配说明 | 8.0 | 多数标注 K8s 版本范围 (1.25-1.33) |
+| 版本适配说明 | 8.0 | 多数标注 [[entities/kubernetes|k8s]] 版本范围 (1.25-1.33) |
 | 最佳实践/注意事项 | 8.5 | 表格化最佳实践, 对比分析清晰 |
 | 推理链完整性 (FTA) | 9.5 | 数学→算法→工程→反馈, 全链路闭环 |
 | 培训阶梯设计 | 8.5 | Week→Day 递进, 有 checkpoint 和前置条件 |
@@ -75,11 +66,11 @@ authors:
 
 | 文档 | 深度 | 代码 | 架构图 | 版本 | 最佳实践 |
 |------|------|------|--------|------|----------|
-| domain-18 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-12 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-6 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-34 kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
-| domain-34 koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
+| domain-11-production-operations 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-10-troubleshooting-diagnostics 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-04-storage-data 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| domain-19-landscape-references kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
+| domain-19-landscape-references koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
 
 **发现**: Sandbox CNCF 项目文档偏概述性, 缺少生产案例和性能基准数据。
 
@@ -207,27 +198,3 @@ authors:
 3. **补充 Helm/GitOps/Gateway API 速查卡** — 3 张新速查卡
 4. **术语词典增加 title_en** — 批量补充英文标题字段
 5. **SOP 添加 Agent 执行模式标注** — L0/L1/L2/L3 分级
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|kudig-database 质量盲区深度扫描报告]]
-
-## Related
-
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[entities/koordinator.md|koordinator]]
-- [[entities/kube-burner.md|kube-burner]]
-- [[entities/ko.md|ko]]

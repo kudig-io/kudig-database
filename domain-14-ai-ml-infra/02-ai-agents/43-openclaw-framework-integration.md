@@ -1,5 +1,5 @@
 ---
-title: OpenClaw File-First 架构与 Agent Harness 集成指南
+title: OpenClaw File-First 架构与 Agent Harness 集成指南 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw File-First 架构与 Agent Harness 集成指南'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw File-First 架构与 Agent Harness 集成指南
@@ -43,7 +44,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -546,9 +547,9 @@ agent = ReActAgent(
 | SOUL.md 红线设计 | [35 - 安全与约束工程](./35-agent-harness-security-constraints.md) | 四层约束模型 |
 | AGENTS.md 工作流 | [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) | FSM 状态机、反漂移 |
 | TOOLS.md 工具授权 | [32 - 工具工程](./32-agent-harness-tool-engineering.md) | Schema 标准、安全沙箱 |
-| SKILL.md 知识注入 | [33 - 上下文与记忆工程](./[[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]].md) | 四层上下文、RAG |
+| SKILL.md 知识注入 | [33 - 上下文与记忆工程](./33-agent-harness-context-memory.md) | 四层上下文、RAG |
 | MEMORY.md 记忆系统 | [33 - 上下文与记忆工程](./33-agent-harness-context-memory.md) | 三层记忆模型 |
-| 整体验证 | [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | 自检循环 |
+| 整体验证 | [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | 自检循环 |
 | 可观测性 | [36 - 可观测性体系](./36-agent-harness-observability.md) | OTel 追踪 |
 
 ---
@@ -613,7 +614,7 @@ agent = ReActAgent(
 |:---:|------|---------|:-------:|
 | 44 | [SOUL.md 机制深度解析](./44-openclaw-soul-mechanism.md) | 三层结构模型、约束精确性原则、SoulConstraintEnforcer 代码、红线拦截案例 | 25min |
 | 45 | [USER.md 机制深度解析](./45-openclaw-user-mechanism.md) | 四象限模型、去 AI 味三策略、UserContextBuilder 代码、技术水平校准 | 25min |
-| 46 | [AGENTS.md 机制深度解析](./[[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]].md) | FSM 状态机、五阶段工作流、反漂移检测、AgentWorkflowEngine 代码 | 30min |
+| 46 | [AGENTS.md 机制深度解析](./46-openclaw-agents-mechanism.md) | FSM 状态机、五阶段工作流、反漂移检测、AgentWorkflowEngine 代码 | 30min |
 | 47 | [TOOLS.md 机制深度解析](./47-openclaw-tools-mechanism.md) | 四级权限模型、最小权限原则、ToolsManager 双重安全检查代码 | 25min |
 | 48 | [SKILL.md 机制深度解析](./48-openclaw-skill-mechanism.md) | 渐进式披露、三种知识结构化范式、SkillLoader 按需加载代码 | 25min |
 | 49 | [MEMORY.md 机制深度解析](./49-openclaw-memory-mechanism.md) | 三层记忆模型、新陈代谢机制、MemoryManager 代码、已知问题命中 | 25min |
@@ -648,7 +649,7 @@ agent = ReActAgent(
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -663,7 +664,7 @@ agent = ReActAgent(
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
+- 41-react-harness-identification-guide
+- 42-model-harness-compatibility-matrix
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism

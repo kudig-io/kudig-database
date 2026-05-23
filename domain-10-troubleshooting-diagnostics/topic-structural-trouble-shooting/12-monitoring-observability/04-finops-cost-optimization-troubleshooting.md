@@ -1,5 +1,5 @@
 ---
-title: FinOps 成本优化与云费用故障排查指南
+title: FinOps 成本优化与云费用故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: FinOps 成本优化与云费用故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - ebpf-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: FinOps 成本优化与云费用故障排查指南
@@ -52,11 +53,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 - vpa
 - job
-- cronjob
+- [[CronJob|cronjob]]
 - ingress
 - gateway
 last_updated: 2026-05
@@ -726,8 +727,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

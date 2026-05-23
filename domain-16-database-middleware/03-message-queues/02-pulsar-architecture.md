@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Apache Pulsar 架构解析
@@ -83,5 +84,5 @@ Tenant → Namespace → Topic
 
 ## 相关
 
-- [[domain-16-database-middleware/03-message-queues/01-nats-deep-dive]]
-- [[domain-16-database-middleware/02-middleware/01-kafka-deep-dive]]
+- nats-deep-dive]]
+- domain-16-database-middleware/02-middleware/01-kafka-deep-dive

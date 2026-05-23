@@ -1,5 +1,5 @@
 ---
-title: AgentScope 多 Agent 编排与工作流
+title: AgentScope 多 Agent 编排与工作流 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub,'
 category: general
 tags:
@@ -33,6 +33,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 多 Agent 编排与工作流
@@ -50,7 +51,7 @@ tags:
 - redis
 - hpa
 - vpa
-- statefulset
+- [[StatefulSet|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -813,9 +814,9 @@ asyncio.run(supervisor_worker_system())
 
 | 文档 | 关联内容 |
 |------|---------|
-| [17 - 核心概念](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | Agent 基础与消息系统 |
-| [19 - 记忆管理](./[[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]].md) | 多 Agent 场景的记忆共享 |
-| [21 - 高级特性](./[[domain-14-ai-ml-infra/21-agentscope-advanced-features.md|21-agentscope-advanced-features]].md) | A2A 协议、Hooks、中间件 |
+| [17 - 核心概念](./17-agentscope-core-concepts.md) | Agent 基础与消息系统 |
+| [19 - 记忆管理](./19-agentscope-memory-context.md) | 多 Agent 场景的记忆共享 |
+| [21 - 高级特性](./21-agentscope-advanced-features.md) | A2A 协议、Hooks、中间件 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 通用多 Agent 架构模式 |
 
 ---
@@ -826,9 +827,9 @@ asyncio.run(supervisor_worker_system())
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
@@ -841,7 +842,7 @@ asyncio.run(supervisor_worker_system())
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/18-agentscope-tool-system.md|18-agentscope-tool-system]]
-- [[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]]
-- [[domain-14-ai-ml-infra/21-agentscope-advanced-features.md|21-agentscope-advanced-features]]
-- [[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]]
+- 18-agentscope-tool-system
+- 19-agentscope-memory-context
+- 21-agentscope-advanced-features
+- 22-agentscope-production-deployment

@@ -1,0 +1,56 @@
+---
+title: kops v1.29 Release Notes
+description: kops v1.29 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- controller-manager
+- cilium
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kops v1.29 Release Notes 是什么
+- 如何 kops v1.29 Release Notes
+trigger_keywords:
+- kops
+- v1.29
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+- cilium-basics
+created: "2026-05-23"
+---
+
+# kops v1.29 Release Notes
+
+Source: [v1.29.2](https://github.com/kubernetes/kops/releases/tag/v1.29.2)
+
+(Note that v1.29.1 was not released, due to an problem in the release process)
+
+## What's Changed (since v1.29.0)
+
+* Upgrade node-termination-handler to 1.22.0 by @jim-barber-he in https://github.com/kubernetes/kops/pull/16595
+* Make ASG Warmpool depend on ASG Lifecycle hook by @jim-barber-he in https://github.com/kubernetes/kops/pull/16603
+* Support kube-controller-manager component by @chubchubsancho in https://github.com/kubernetes/kops/pull/16608
+* Update aws-iam-authenticator image by @rifelpet in https://github.com/kubernetes/kops/pull/16616
+* Update Go to v1.21.4 by @hakman in https://github.com/kubernetes/kops/pull/16619
+* Upgrade [[Cilium|cilium]] to v1.15.6 by @rifelpet in https://github.com/kubernetes/kops/pull/16628
+* Update golang to 1.22.5 by @justinsb in https://github.com/kubernetes/kops/pull/16653
+* Fix cluster-autoscaler priority expander config by @rifelpet in https://github.com/kubernetes/kops/pull/16672
+* Bump cloudbuild to go 1.22.5 by @justinsb in https://github.com/kubernetes/kops/pull/16684
+* Add the hubble-metrics [[Service|service]] for cilium by @rifelpet in https://github.com/kubernetes/kops/pull/16687
+* Add new API field for VPC CNI's network policy agent by @rifelpet in https://github.com/kubernetes/kops/pull/16689
+
+
+**Full Changelog**: https://github.com/kubernetes/kops/compare/v1.29.0...v1.29.2

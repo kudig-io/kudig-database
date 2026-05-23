@@ -1,5 +1,5 @@
 ---
-title: DRA（动态资源分配）故障排查指南
+title: DRA（动态资源分配）故障排查指南 [domain-10-troubleshooting-diagnostics]
 description: 'title: DRA（动态资源分配）故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: DRA（动态资源分配）故障排查指南
@@ -53,9 +54,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- containerd
+- [[containerd|containerd]]
 - operator
 - gpu
 - cuda
@@ -102,7 +103,7 @@ k8s_versions:
 
 ### 1.1 DRA vs 传统 Volume 的区别
 
-| 维度 | 传统 Volume | DRA (Dynamic Resource Allocation) |
+| 维度 | 传统 Volume | DRA ([[Dynamic Resource Allocation|Dynamic Resource Allocation]]) |
 |------|------------|--------------------------------|
 | 资源类型 | 存储（块/文件） | 硬件设备（GPU/FPGA/智能网卡） |
 | 调度时机 | Pod 创建后 | Pod 创建前（调度时即分配） |
@@ -481,8 +482,8 @@ related:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 
 ## See Also
 

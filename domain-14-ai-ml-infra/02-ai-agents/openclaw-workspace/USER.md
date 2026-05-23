@@ -1,5 +1,5 @@
 ---
-title: 用户画像 — ACK 运维工程师
+title: 用户画像 — ACK 运维工程师 (02-ai-agents)
 description: 'title: 用户画像 — ACK 运维工程师'
 category: general
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - iac-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 用户画像 — ACK 运维工程师
@@ -49,8 +50,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - grafana
 - flannel
 - calico
@@ -88,7 +89,7 @@ k8s_versions:
 | 属性 | 值 |
 |------|-----|
 | **角色** | ACK（阿里云容器服务）工单负责人 |
-| **技术栈** | Kubernetes、Docker、Prometheus、Grafana、Terraform |
+| **技术栈** | [[Kubernetes|Kubernetes]]、Docker、Prometheus、Grafana、Terraform |
 | **时区** | Asia/Shanghai (UTC+8) |
 | **工作时间** | 工作日 09:00-18:00，但工单可能在任何时段提交 |
 | **K8S 经验** | 高级：熟悉核心组件、能读源码、能做集群级调优 |
@@ -213,7 +214,7 @@ Kubernetes 的调度器会根据节点的资源情况来决定...（省略 200 �
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/SOUL.md|SOUL]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/TOOLS.md|TOOLS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/AGENTS.md|AGENTS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/IDENTITY.md|IDENTITY]]
+- SOUL
+- TOOLS
+- AGENTS
+- IDENTITY

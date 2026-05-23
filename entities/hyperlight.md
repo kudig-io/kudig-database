@@ -1,5 +1,5 @@
 ---
-title: Hyperlight
+title: Hyperlight (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Hyperlight
@@ -59,18 +60,18 @@ Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 
 ## Related
 
 - [[falco]] — Falco
-- [[operator-framework]] — Operator Framework
+- [[operator-framework]] — [[Operator Framework|Operator Framework]]
 - [[clusternet]] — Clusternet
 - [[kubeslice]] — KubeSlice
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/hyperlight/hyperlight.md|hyperlight]]
-- [[entities/urunc.md|urunc]]
+- hyperlight
+- [[entities/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
 - [[entities/flatcar.md|Flatcar Container Linux]]
 - [[entities/composefs.md|composefs]]
 - [[entities/04-containerd-upgrade-migration.md|containerd 升级迁移]]

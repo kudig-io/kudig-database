@@ -61,9 +61,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md
   label: '故障树: statefulset'
+created: "2026-05-23"
 ---
 
-# 21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)
+# 21 - [[StatefulSet|StatefulSet]] 故障排查 (StatefulSet Troubleshooting)
 
 ---
 
@@ -211,7 +212,7 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns
 
 ---
 
-<!-- chunk: 3. 存储相关问题排查 (Storage Issues Troubleshooting) -->
+<!-- chunk: 3. 存储相关问题排查 (Storage储问题排查|Storage Issues]] Troubleshooting) -->
 ## 3. 存储相关问题排查 (Storage Issues Troubleshooting)
 
 ### 3.1 PVC绑定失败问题
@@ -623,9 +624,9 @@ chmod +x data-consistency-check.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

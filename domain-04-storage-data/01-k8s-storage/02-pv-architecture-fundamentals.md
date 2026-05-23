@@ -65,11 +65,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: 持久化存储故障树
+created: "2026-05-23"
 ---
 
 # 02 - PV/PVC核心概念与企业级实践
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 企业级配置、生产环境最佳实践、故障预防 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 企业级配置、生产环境最佳实践、故障预防 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -426,7 +427,7 @@ spec:
 <!-- chunk: 8. PV 监控与告警 -->
 ## 8. PV 监控与告警
 
-### Prometheus 监控指标
+### [[Prometheus|Prometheus]] 监控指标
 
 | 指标 | 说明 | 告警阈值建议 |
 |:---|:---|:---|
@@ -1169,34 +1170,34 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05 - CSI驱动集成与运维管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09 - PV/PVC故障排查与解决方案]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10 - 存储备份与灾难恢复]]
+- domain-04-storage-data KUDIG Database — Global MOC
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- index.md|Domain-6 存储 — 开源项目索引]]
+- 存储架构概览与核心组件
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 05 - CSI驱动集成与运维管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 09 - PV/PVC故障排查与解决方案
+- 10 - 存储备份与灾难恢复
 
 ## Related
 
 - [[MOC]]
 
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-04-storage-data/MOC.md|相关知识域: domain-04-storage-data]]
+- 存储架构概览
+- StorageClass 动态供给
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-04-storage-data
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[domain-04-storage-data/quality-check-report.md|quality-check-report]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|01-storage-architecture-overview]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03-pvc-patterns-practices]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|04-storageclass-dynamic-provisioning]]
+- quality-check-report
+- 01-storage-architecture-overview
+- 03-pvc-patterns-practices
+- 04-storageclass-dynamic-provisioning

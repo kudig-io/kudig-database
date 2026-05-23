@@ -51,13 +51,14 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Alibaba Cloud ACK 企业级混合云深度实践
 
 <!-- chunk: 概述 -->## 概述
 
-阿里云容器服务 Kubernetes 版（Alibaba Container Service for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。ACK Pro 版提供企业级 SLA 保障、Terway 高性能网络、云原生 AI 基础设施、以及与本地数据中心的深度混合云集成能力。阿里云是中国最大的云服务商，在金融、政务、电商、制造等行业拥有大量企业客户。
+阿里云容器服务 [[Kubernetes|Kubernetes]] 版（Alibaba Container [[Service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。ACK Pro 版提供企业级 SLA 保障、Terway 高性能网络、云原生 AI 基础设施、以及与本地数据中心的深度混合云集成能力。阿里云是中国最大的云服务商，在金融、政务、电商、制造等行业拥有大量企业客户。
 
 在多云混合云架构中，ACK 通常作为中国区域工作负载的核心承载平台，通过云企业网（CEN）、SAG 智能接入网关和 VPN 网关与本地数据中心及其他云平台互联。ACK 的 Terway 网络插件基于 eBPF 技术，提供接近原生性能的网络吞吐，支持 IPVlan 和 ENI 弹性网卡两种模式。云原生 AI 套件（Arena、Arena Deployment）为 GPU 密集型工作负载提供极致调度能力，支持 GPU 共享、显存隔离和拓扑感知调度。ECI 弹性容器实例提供 Serverless Pod 能力，按秒计费，无需管理节点。
 
@@ -68,7 +69,7 @@ authors:
 | 特性 | 说明 | 适用场景 |
 |:---|:---|:---|
 | ACK Pro | 企业级托管集群，99.95% SLA，托管节点池 | 生产环境 |
-| Terway 网络 | 基于 eBPF 的高性能 CNI，支持 NetworkPolicy 和 IPVlan | 高性能网络 |
+| Terway 网络 | 基于 eBPF 的高性能 CNI，支持 [[NetworkPolicy|NetworkPolicy]] 和 IPVlan | 高性能网络 |
 | 托管节点池 | 阿里云管理节点生命周期（修复、升级、替换） | 减少运维负担 |
 | ECI 弹性容器实例 | Serverless Pod，按秒计费，无需管理节点 | 突发流量、CI/CD |
 | 云原生 AI 套件 | Arena 训练/推理框架、GPU 共享与隔离 | AI 训练、推理 |
@@ -1189,7 +1190,7 @@ echo "[4] 等待注册完成"
 while true; do
     STATE=$(aliyun cs GET /k8s/$CLUSTER_ID --query 'state')
     echo "注册状态: $STATE"
-    if [[ "$STATE" == "running" ]]; then
+    if "$STATE" == "running"; then
         break
     fi
     sleep 30
@@ -1325,22 +1326,22 @@ echo "=== 故障排查完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|04-google-gke-enterprise-multicloud]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|05-ibm-cloud-kubernetes-service-enterprise]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|07-huawei-cce-enterprise]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|08-multicloud-federation-karmada]]
+- 04-google-gke-enterprise-multicloud
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 07-huawei-cce-enterprise
+- 08-multicloud-federation-karmada

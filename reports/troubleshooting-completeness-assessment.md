@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # Kudig-DB 故障排查体系完整性评估报告
@@ -360,7 +361,7 @@ ASM/Istio 特有故障:
    - 但增加 AI Agent 可直接使用的决策树格式
 
 2. **完善 FTA 底事件的 related_docs**
-   - 在 [[domain-10-troubleshooting-diagnostics/topic-fta-archive/kubernetes-fta-full-analysis-v2|kubernetes-fta-full-analysis-v2]].md 中补充 related_docs 字段
+   - 在 kubernetes-fta-full-analysis-v2.md 中补充 related_docs 字段
    - 每个 BE 指向对应的 structural 和 domain-10-troubleshooting-diagnostics 文档
 
 ### 5.2 第二阶段（短期执行）

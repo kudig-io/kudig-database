@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 4: Linux 网络 + 性能调优
@@ -256,7 +257,7 @@ ss -ant | awk '{print $1}' | sort | uniq -c | sort -rn
 1. **网络命名空间是什么？K8s 中 Pod 的网络是如何隔离的？**
 
 2. **iptables 的 NAT 表在 K8s 中有什么作用？**
-   - 提示: Service 的 ClusterIP 实现
+   - 提示: [[Service|Service]] 的 ClusterIP 实现
 
 3. **为什么 K8s 节点需要开启 ip_forward？**
 
@@ -286,4 +287,4 @@ ss -ant | awk '{print $1}' | sort | uniq -c | sort -rn
 
 ## 明日预告
 
-Day 5 将正式进入 [[entities/kubernetes|kubernetes]] 架构学习，理解 Master/Node 组件及其交互。
+Day 5 将正式进入 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。

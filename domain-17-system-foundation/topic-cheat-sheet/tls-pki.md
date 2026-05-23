@@ -45,6 +45,7 @@ related_docs:
   desc: 认证授权系统
 - path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   desc: 网络诊断速查卡
+created: "2026-05-23"
 ---
 
 # TLS/SSL 与 PKI 速查表
@@ -236,7 +237,7 @@ awk '/BEGIN CERTIFICATE/{n++}{print > "cert" n ".pem"}' chain.pem
 
 ---
 
-## Kubernetes 证书操作
+## [[Kubernetes|Kubernetes]] 证书操作
 
 ### 查看集群证书
 
@@ -478,5 +479,5 @@ kubectl logs -n cert-manager deployment/cert-manager-cainjector
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- index/observability-index|Observabilityty 可观测性知识图谱索引|Observability 可观测性知识图谱索引]]]]
+- [[domain-19-landscape-references/topic-index/cert-index|[[Certificate / TLS 证书知识图谱索引|Certificate / TLS 证书知识图谱索引]]]]

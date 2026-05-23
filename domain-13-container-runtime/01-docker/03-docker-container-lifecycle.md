@@ -44,6 +44,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 容器生命周期管理
@@ -408,7 +409,7 @@ docker events --filter 'event=health_status'
 | **journald** | 集成 systemd | journald | ✓ |
 | **syslog** | syslog 协议 | syslog 服务器 | ✗ |
 | **gelf** | Graylog 格式 | GELF 服务器 | ✗ |
-| **fluentd** | Fluentd 转发 | Fluentd | ✗ |
+| **[[Fluentd|fluentd]]** | Fluentd 转发 | Fluentd | ✗ |
 | **awslogs** | AWS CloudWatch | AWS | ✗ |
 | **splunk** | Splunk HEC | Splunk | ✗ |
 | **gcplogs** | GCP Logging | GCP | ✗ |
@@ -774,10 +775,10 @@ docker diff container_name
 
 ## See Also
 
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|01-docker-architecture-overview]]
-- [[domain-13-container-runtime/02-docker-images-management.md|02-docker-images-management]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|04-docker-networking-deep-dive]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|05-docker-storage-volumes]]
+- 01-docker-architecture-overview
+- 02-docker-images-management
+- 04-docker-networking-deep-dive
+- 05-docker-storage-volumes
 
 ## Related
 

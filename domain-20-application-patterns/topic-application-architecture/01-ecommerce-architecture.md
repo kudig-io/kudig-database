@@ -1,15 +1,59 @@
 ---
-title: 电商系统 Kubernetes 生产架构设计
+title: 电商系统 Kubernetes 生产架构设计 (domain-20-application-patterns)
+description: 'title: 电商系统 Kubernetes 生产架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- grafana
+- jaeger
+- istio
+- envoy
+- coredns
+- harbor
+- minio
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 电商系统 Kubernetes 生产架构设计 是什么
+- 如何 电商系统 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 电商系统
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- service-mesh-basics
+- monitoring-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+- logging-basics
+- tracing-basics
+- observability-basics
+created: "2026-05-23"
+---
+
+title: 电商系统 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 电商系统 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- istio
+- [[Jaeger|jaeger]]
+- [[Istio|istio]]
 - envoy
 - minio
 - redis
@@ -39,17 +83,6 @@ trigger_keywords:
 - StatefulSet
 - HPA
 - Karpenter
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- service-mesh-basics
-- monitoring-basics
-- kafka-basics
-- redis-basics
-- mysql-basics
-- logging-basics
-- tracing-basics
-- observability-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
@@ -58,6 +91,15 @@ related_topics:
 - 41-beauty-ecommerce
 - 31-instant-retail
 - 49-livestream-ecommerce
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 电商系统 Kubernetes 生产架构设计
@@ -69,7 +111,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、微服务拆分架构](#二微服务拆分架构)
@@ -85,7 +127,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -98,7 +140,7 @@ flowchart TB
     subgraph Gateway["网关接入层"]
         DNS["智能 DNS / GSLB"]
         LB["L4/L7 负载均衡"]
-        API_GW["API Gateway<br/>[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] / APISIX / Higress"]
+        API_GW["API Gateway<br/>Envoy / APISIX / Higress"]
         BFF["BFF 层<br/>聚合/适配/鉴权"]
     end
 
@@ -156,7 +198,7 @@ flowchart TB
 
 ---
 
-## 二、微服务拆分架构
+<!-- chunk: 二、微服务拆分架构 -->## 二、微服务拆分架构
 
 ```mermaid
 flowchart LR
@@ -205,7 +247,7 @@ flowchart LR
     style Platform fill:#e8f5e9
 ```
 
-### 领域驱动设计 (DDD) 映射
+#<!-- chunk: 领域驱动设计 (DDD) 映射 -->## 领域驱动设计 (DDD) 映射
 
 | 领域 | 服务 | K8s 工作负载 | 数据库 | 关键特性 |
 |:---|:---|:---|:---|:---|
@@ -216,7 +258,7 @@ flowchart LR
 
 ---
 
-## 三、流量入口与网关架构
+<!-- chunk: 三、流量入口与网关架构 -->## 三、流量入口与网关架构
 
 ```mermaid
 flowchart TB
@@ -259,7 +301,7 @@ flowchart TB
     style BFF fill:#e3f2fd
 ```
 
-### Gateway 生产配置
+#<!-- chunk: Gateway 生产配置 -->## Gateway 生产配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -324,9 +366,9 @@ spec:
 
 ---
 
-## 四、订单核心链路架构
+<!-- chunk: 四、订单核心链路架构 -->## 四、订单核心链路架构
 
-### 下单链路时序
+#<!-- chunk: 下单链路时序 -->## 下单链路时序
 
 ```mermaid
 sequenceDiagram
@@ -363,7 +405,7 @@ sequenceDiagram
     MQ->>Logistics: 创建物流单
 ```
 
-### 订单服务 K8s 部署
+#<!-- chunk: 订单服务 K8s 部署 -->## 订单服务 K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -496,7 +538,7 @@ spec:
 
 ---
 
-## 五、商品与搜索架构
+<!-- chunk: 五、商品与搜索架构 -->## 五、商品与搜索架构
 
 ```mermaid
 flowchart TB
@@ -537,7 +579,7 @@ flowchart TB
     style Pipeline fill:#e8f5e9
 ```
 
-### Elasticsearch K8s 部署
+#<!-- chunk: Elasticsearch K8s 部署 -->## Elasticsearch K8s 部署
 
 ```yaml
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -596,7 +638,7 @@ spec:
 
 ---
 
-## 六、支付与财务架构
+<!-- chunk: 六、支付与财务架构 -->## 六、支付与财务架构
 
 ```mermaid
 flowchart TB
@@ -634,7 +676,7 @@ flowchart TB
     style Security fill:#fff3e0
 ```
 
-### 支付服务安全部署
+#<!-- chunk: 支付服务安全部署 -->## 支付服务安全部署
 
 ```yaml
 apiVersion: apps/v1
@@ -709,7 +751,7 @@ spec:
 
 ---
 
-## 七、库存与供应链架构
+<!-- chunk: 七、库存与供应链架构 -->## 七、库存与供应链架构
 
 ```mermaid
 flowchart TB
@@ -744,7 +786,7 @@ flowchart TB
     style Warehouse fill:#e8f5e9
 ```
 
-### 库存扣减策略
+#<!-- chunk: 库存扣减策略 -->## 库存扣减策略
 
 ```mermaid
 stateDiagram-v2
@@ -760,9 +802,9 @@ stateDiagram-v2
 
 ---
 
-## 八、营销与秒杀架构
+<!-- chunk: 八、营销与秒杀架构 -->## 八、营销与秒杀架构
 
-### 秒杀系统架构
+#<!-- chunk: 秒杀系统架构 -->## 秒杀系统架构
 
 ```mermaid
 flowchart TB
@@ -797,7 +839,7 @@ flowchart TB
     style Fallback fill:#ffebee
 ```
 
-### 秒杀核心代码
+#<!-- chunk: 秒杀核心代码 -->## 秒杀核心代码
 
 ```yaml
 # Redis Lua 脚本：原子扣减库存
@@ -873,7 +915,7 @@ spec:
 
 ---
 
-## 九、数据层架构
+<!-- chunk: 九、数据层架构 -->## 九、数据层架构
 
 ```mermaid
 flowchart TB
@@ -921,9 +963,9 @@ flowchart TB
 
 ---
 
-## 十、K8s 部署架构
+<!-- chunk: 十、K8s 部署架构 -->## 十、K8s 部署架构
 
-### Namespace 组织
+#<!-- chunk: Namespace 组织 -->## Namespace 组织
 
 ```mermaid
 flowchart TB
@@ -957,7 +999,7 @@ flowchart TB
     style Data fill:#e8f5e9
 ```
 
-### 节点池规划
+#<!-- chunk: 节点池规划 -->## 节点池规划
 
 ```yaml
 apiVersion: karpenter.sh/v1
@@ -1009,7 +1051,7 @@ spec:
 
 ---
 
-## 十一、高可用与灾备
+<!-- chunk: 十一、高可用与灾备 -->## 十一、高可用与灾备
 
 ```mermaid
 flowchart TB
@@ -1045,7 +1087,7 @@ flowchart TB
     style DR fill:#fff8e1
 ```
 
-### 电商系统 SLA 矩阵
+#<!-- chunk: 电商系统 SLA 矩阵 -->## 电商系统 SLA 矩阵
 
 | 服务 | 可用性目标 | RTO | RPO | 策略 |
 |:---|:---:|:---:|:---:|:---|
@@ -1059,7 +1101,7 @@ flowchart TB
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里巴巴电商系统架构演进](https://developer.aliyun.com/ebook/read/7556)
 - [美团外卖系统架构](https://tech.meituan.com/)
@@ -1067,9 +1109,9 @@ flowchart TB
 
 ---
 
-## 多云部署方案对照
+<!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-### 阿里云服务 → 多云映射表
+#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -1090,7 +1132,7 @@ flowchart TB
 | 日志 | **SLS (日志服务)** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
 | 链路追踪 | **ARMS / 链路追踪** | **X-Ray** | **Cloud Trace** | **Application Insights** |
 
-### 多云部署注意事项
+#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
 
 1. **数据主权与合规**: 电商涉及支付数据需关注 PCI-DSS，不同云厂商的 PCI-DSS 认证范围不同，需确认目标 Region 的合规状态。
 2. **网络互通**: 多云部署时需通过 VPN / 专线打通 VPC，注意跨云通信延迟对订单链路的影响（建议同城双活优先）。
@@ -1099,7 +1141,7 @@ flowchart TB
 5. **节点池策略**: AWS 用 Karpenter、GCP 用 Autopilot、Azure 用 Virtual Nodes，HPA/VPA 行为有差异，需分别压测。
 6. **支付通道隔离**: 支付 PCI-DSS 区域建议与业务区域在同一云内，避免跨云传输敏感数据。
 
-### 云中立方案（开源替代）
+#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -1118,3 +1160,27 @@ flowchart TB
 | 日志 | **Loki** + **Promtail** | 轻量级，已在架构图中使用 |
 | 链路追踪 | **Jaeger** / **OpenTelemetry** | 已在架构图中使用 |
 | DNS | **CoreDNS** + **ExternalDNS** | K8s 原生 DNS 管理 |
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 95-industrial-metaverse
+- 96-carbon-capture
+- 02-mini-program-architecture
+- 03-cms-architecture

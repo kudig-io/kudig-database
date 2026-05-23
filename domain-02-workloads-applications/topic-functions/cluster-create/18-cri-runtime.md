@@ -1,4 +1,46 @@
 ---
+title: CRI 运行时管理 (Container Runtime Interface) [cluster-create]
+description: 'title: CRI 运行时管理 (Container Runtime Interface)'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- flannel
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- CRI 运行时管理 (Container Runtime Interface) 是什么
+- 如何 CRI 运行时管理 (Container Runtime Interface)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- CRI
+- 运行时管理
+- Container
+- Runtime
+- Interface
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: CRI 运行时管理 (Container Runtime Interface)
 description: '# CRI 运行时管理 (Container Runtime Interface)'
 category: functions
@@ -40,12 +82,6 @@ trigger_keywords:
 - OCI runtime
 - runc
 - pause container
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cilium-basics
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -55,6 +91,15 @@ related_topics:
 - containerd
 - CNI networking
 - security
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # CRI 运行时管理 (Container Runtime Interface)
@@ -882,7 +927,7 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 - [集群升级](09-upgrade.md) — 升级时 CRI 兼容性检查
 - [存储与卷](22-storage-volumes.md) — CRI volume 挂载实现
 - [kube-proxy](21-kube-proxy.md) — kube-proxy 依赖 CRI 运行
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — CRI 运行时安全配置
+- [安全机制](16-security.md) — CRI 运行时安全配置
 
 ## CRI API 版本兼容性
 
@@ -932,3 +977,11 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 │  └──────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]

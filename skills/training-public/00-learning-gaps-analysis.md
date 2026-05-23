@@ -42,6 +42,7 @@ prerequisites:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # K8s 小白学习体系缺口分析

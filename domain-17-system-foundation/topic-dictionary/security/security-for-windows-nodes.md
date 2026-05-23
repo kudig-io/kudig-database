@@ -22,13 +22,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Windows 节点安全
 
 ## 概述
 
-本页面描述了针对 Windows 操作系统的安全考虑和最佳实践。Windows 节点在 [[entities/kubernetes|kubernetes]] 集群中的行为与 Linux 节点存在显著差异，特别是在 Secret 保护、容器用户和 Pod 安全隔离方面。
+本页面描述了针对 Windows 操作系统的安全考虑和最佳实践。Windows 节点在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 集群中的行为与 Linux 节点存在显著差异，特别是在 Secret 保护、容器用户和 Pod 安全隔离方面。
 
 ## 核心概念/原理
 
@@ -40,7 +41,7 @@ prerequisites:
 
 - Windows 容器提供两个默认用户账户：**ContainerUser** 和 **ContainerAdministrator**。
 - 可以使用 `RunAsUsername` 为 Windows Pod 或容器指定以特定用户身份执行容器进程，这大致相当于 Linux 的 `RunAsUser`。
-- 也可以在容器构建过程中向镜像添加本地用户，或者利用 **Group Managed Service Accounts（gMSA）** 以 Active Directory 身份运行容器。
+- 也可以在容器构建过程中向镜像添加本地用户，或者利用 **Group Managed [[Service|Service]]Service Accounts]]（gMSA）** 以 Active Directory 身份运行容器。
 
 ### Pod 级安全隔离
 
@@ -49,7 +50,7 @@ prerequisites:
 
 ## 关键机制或特性
 
-- **文件 ACL（访问控制列表）**：用于保护 Windows 节点上 Secrets 的文件位置。
+- **文件 ACL（访问控制列表）**：用于保护 Windows 节点上 [[Secrets|Secrets]] 的文件位置。
 - **BitLocker**：提供卷级加密，保护节点本地存储上的数据。
 - **HostProcess 容器**：允许在 Windows 主机上以特权方式运行进程，是 Windows 上特权操作的替代方案。
 - **RunAsUsername / gMSA**：支持以特定用户或 Active Directory 身份运行容器。

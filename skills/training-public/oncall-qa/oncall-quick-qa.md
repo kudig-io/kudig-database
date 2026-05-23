@@ -1,5 +1,5 @@
 ---
-title: 工单数字人快速问答 - On-Call 速查
+title: 工单数字人快速问答 - On-Call 速查 [oncall-qa]
 description: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
 category: learning
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -48,11 +49,11 @@ tags:
 - k8s
 - training
 - lecturer
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- coredns
+- [[CoreDNS|coredns]]
 - docker
 - opa
 last_updated: 2026-05
@@ -1245,7 +1246,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount.md|day-27-storage-mount]]
-- [[domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-28-comprehensive-review.md|day-28-comprehensive-review]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md|p1-k8s-cluster-setup]]
-- [[domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration.md|p2-production-app-orchestration]]
+- day-27-storage-mount
+- day-28-comprehensive-review
+- p1-k8s-cluster-setup
+- p2-production-app-orchestration

@@ -1,4 +1,38 @@
 ---
+title: kubeadm 配置对证书生成的影响 (topic-code-analysis)
+description: 'title: kubeadm 配置对证书生成的影响'
+category: general
+tags:
+- reference
+- configuration
+- etcd
+- apiserver
+- kubelet
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeadm 配置对证书生成的影响 是什么
+- 如何 kubeadm 配置对证书生成的影响
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeadm
+- 配置对证书生成的影响
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: kubeadm 配置对证书生成的影响
 description: '# kubeadm 配置对证书生成的影响'
 category: functions
@@ -34,10 +68,6 @@ trigger_keywords:
 - SAN
 - external etcd
 - kubeadm 配置
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 related_topics:
@@ -45,6 +75,15 @@ related_topics:
 - cluster-cert/ca-generation
 - cluster-cert/apiserver-cert
 - cluster-cert/etcd-cert
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeadm 配置对证书生成的影响
@@ -436,10 +475,14 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`](12-kubeconfig-certs.md) — kubeconfig 生成
-- [`kubeadm certs renew`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — 证书续期
+- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
 ## Related
 
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

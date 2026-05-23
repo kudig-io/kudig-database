@@ -23,6 +23,7 @@ trigger_keywords:
 - Skill
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Skill
@@ -31,7 +32,7 @@ prerequisites:
 
 | RC ID | 根因 | 概率 | 首选修复 | 风险 |
 |-------|------|------|---------|------|
-| RC-001 | kubelet 进程崩溃或未运行 | 高 | REM-003 重启 kubelet | MEDIUM |
+| RC-001 | [[kubelet|kubelet]] 进程崩溃或未运行 | 高 | REM-003 重启 kubelet | MEDIUM |
 | RC-002 | 容器运行时(containerd)异常 | 高 | REM-004 重启 containerd | MEDIUM |
 | RC-003 | 磁盘空间耗尽 (DiskPressure) | 高 | REM-002 清理磁盘 | LOW |
 | RC-004 | 内存耗尽 (MemoryPressure) | 中 | REM-006 排空重启 | HIGH |
@@ -55,12 +56,12 @@ prerequisites:
 
 ## Related
 
-- [[skills/ts-monitoring-observability.md|ts-monitoring-observability]] — 监控可观测性排查
+- observability.md|ts-monitoring-observability]] — 监控可观测性排查
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SKILL.md|SKILL]]
+- 29-agentscope-studio-skill-demo
+- 48-openclaw-skill-mechanism
+- SKILL

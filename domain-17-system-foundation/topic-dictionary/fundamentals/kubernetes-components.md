@@ -30,9 +30,10 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 组件
+# [[Kubernetes|Kubernetes]] 组件
 
 ## 概述
 
@@ -45,7 +46,7 @@ Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worke
 控制平面负责管理集群的整体状态，决策全局操作：
 
 - **kube-apiserver**：Kubernetes 的核心组件，暴露 HTTP API，是用户和集群内部组件交互的入口。
-- **etcd**：一致且高可用的键值存储，保存所有 API 服务器的数据，是集群状态的单一事实来源。
+- **[[etcd|etcd]]**：一致且高可用的键值存储，保存所有 API 服务器的数据，是集群状态的单一事实来源。
 - **kube-scheduler**：负责监听未绑定到节点的 Pod，并根据资源需求、策略约束等为每个 Pod 分配合适的节点。
 - **kube-controller-manager**：运行多个控制器（如节点控制器、副本控制器、端点控制器等），将集群状态驱动到期望状态。
 - **cloud-controller-manager**（可选）：与底层云提供商集成，负责节点、路由、负载均衡器等云资源的生命周期管理。
@@ -54,8 +55,8 @@ Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worke
 
 节点组件运行在每个工作节点上，负责维护运行中的 Pod 并提供 Kubernetes 运行时环境：
 
-- **kubelet**：确保 Pod 及其容器按照规范运行，并报告节点和 Pod 的状态。
-- **kube-proxy**（可选）：维护节点上的网络规则，实现 Service 的网络代理和负载均衡。
+- **[[kubelet|kubelet]]**：确保 Pod 及其容器按照规范运行，并报告节点和 Pod 的状态。
+- **kube-proxy**（可选）：维护节点上的网络规则，实现 [[Service|Service]] 的网络代理和负载均衡。
 - **容器运行时（Container Runtime）**：负责运行容器，例如 containerd、CRI-O 等。
 
 ## 关键机制或特性

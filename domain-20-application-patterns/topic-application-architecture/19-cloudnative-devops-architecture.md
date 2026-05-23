@@ -1,14 +1,61 @@
 ---
+title: 云原生 DevOps 平台 Kubernetes 生产架构设计
+description: 'title: 云原生 DevOps 平台架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- daily-ops
+- prometheus
+- grafana
+- jaeger
+- istio
+- helm
+- argocd
+- flux
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 云原生 DevOps 平台 Kubernetes 生产架构设计 是什么
+- 如何 云原生 DevOps 平台 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 云原生
+- DevOps
+- 平台
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- helm-basics
+- service-mesh-basics
+- monitoring-basics
+- gitops-basics
+- gpu-scheduling-basics
+- policy-basics
+- logging-basics
+- tracing-basics
+- observability-basics
+created: "2026-05-23"
+---
+
 title: 云原生 DevOps 平台架构设计
-description: '# 云原生 DevOps 平台 Kubernetes 生产架构设计'
+description: '# 云原生 DevOps 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - argocd
 - flux
 - docker
@@ -42,24 +89,21 @@ trigger_keywords:
 - IDP
 - Backstage
 - FinOps
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- helm-basics
-- service-mesh-basics
-- monitoring-basics
-- gitops-basics
-- gpu-scheduling-basics
-- policy-basics
-- logging-basics
-- tracing-basics
-- observability-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-cloudnative-devops-architecture
 - topic-platform-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 云原生 DevOps 平台 Kubernetes 生产架构设计
@@ -72,7 +116,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、GitOps 交付流水线架构](#二gitops-交付流水线架构)
@@ -85,7 +129,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -136,14 +180,14 @@ flowchart TB
     style ObservabilityDevOps fill:#e8f5e9
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 开源替代 |
 |:---|:---|:---|
 | 代码仓库 | **云效 Codeup** | GitLab / GitHub |
 | CI/CD | **云效流水线** / **ACK + Argo** | Jenkins / Tekton |
 | 镜像仓库 | **ACR 企业版** | Harbor |
-| GitOps | **ACK + Argo CD** | Argo CD / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] |
+| GitOps | **ACK + Argo CD** | Argo CD / Flux |
 | 制品管理 | **云效制品库** | Nexus / Artifactory |
 | 测试 | **云效测试管理** | SonarQube |
 | 可观测性 | **ARMS** + **SLS** | Prometheus + Grafana + Loki |
@@ -151,7 +195,7 @@ flowchart TB
 
 ---
 
-## 二、GitOps 交付流水线架构
+<!-- chunk: 二、GitOps 交付流水线架构 -->## 二、GitOps 交付流水线架构
 
 ```mermaid
 flowchart TB
@@ -189,7 +233,7 @@ flowchart TB
     style Clusters fill:#e8f5e9
 ```
 
-### Argo CD Application 配置
+#<!-- chunk: Argo CD Application 配置 -->## Argo CD Application 配置
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -273,7 +317,7 @@ spec:
 
 ---
 
-## 三、多环境晋升架构
+<!-- chunk: 三、多环境晋升架构 -->## 三、多环境晋升架构
 
 ```mermaid
 flowchart LR
@@ -305,7 +349,7 @@ flowchart LR
 
 ---
 
-## 四、可观测性驱动发布架构
+<!-- chunk: 四、可观测性驱动发布架构 -->## 四、可观测性驱动发布架构
 
 ```mermaid
 flowchart TB
@@ -341,7 +385,7 @@ flowchart TB
 
 ---
 
-## 五、安全供应链 (SLSA) 架构
+<!-- chunk: 五、安全供应链 (SLSA) 架构 -->## 五、安全供应链 (SLSA) 架构
 
 ```mermaid
 flowchart TB
@@ -377,7 +421,7 @@ flowchart TB
 
 ---
 
-## 六、平台工程 (IDP) 架构
+<!-- chunk: 六、平台工程 (IDP) 架构 -->## 六、平台工程 (IDP) 架构
 
 ```mermaid
 flowchart TB
@@ -411,7 +455,7 @@ flowchart TB
 
 ---
 
-## 七、成本治理与 FinOps 架构
+<!-- chunk: 七、成本治理与 FinOps 架构 -->## 七、成本治理与 FinOps 架构
 
 ```mermaid
 flowchart TB
@@ -443,9 +487,9 @@ flowchart TB
 
 ---
 
-## 八、ACK 阿里云部署架构
+<!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-### 多集群 GitOps 管理
+#<!-- chunk: 多集群 GitOps 管理 -->## 多集群 GitOps 管理
 
 ```yaml
 # ACK 多集群 kubeconfig Secret
@@ -511,7 +555,7 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云云效](https://www.aliyun.com/product/yunxiao)
 - [阿里云 ACR](https://www.aliyun.com/product/acr)
@@ -521,9 +565,9 @@ spec:
 
 ---
 
-## 多云部署方案对照
+<!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-### 阿里云服务 → 多云映射表
+#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -542,7 +586,7 @@ spec:
 | 测试管理 | **云效测试管理** | **CodeGuru** | **Cloud Test Lab** | **Azure Test Plans** |
 | GitOps | **ACK + Argo CD** | **EKS + Argo CD** | **GKE + Argo CD** | **AKS + Argo CD** |
 
-### 多云部署注意事项
+#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
 
 1. **GitOps 跨云管理**: Argo CD 天然支持多集群管理。通过注册不同云的 K8s 集群为 Argo CD 的目标集群，可实现一套 Git 仓库管理多云部署。需确保各集群的 kubeconfig 和认证方式统一。
 2. **CI/CD 流水线选择**: 若需多云部署，建议使用云中立的 CI/CD 工具（GitHub Actions / GitLab CI / Tekton），而非各云原生的 CI/CD 服务。这样只需维护一套流水线配置。
@@ -551,7 +595,7 @@ spec:
 5. **网络策略**: 跨云 Pod 通信需通过 Service Mesh（Istio 多集群模式）或 VPN 打通。注意 MTU 差异和跨云延迟对微服务调用链的影响。
 6. **成本分摊**: 各云计费模型不同（AWS 按小时、GCP 按秒、Azure 按分钟），FinOps 工具需支持多云成本聚合。OpenCost 可作为开源多云成本分析工具。
 
-### 云中立方案（开源替代）
+#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -574,3 +618,27 @@ spec:
 | 成本分析 | **OpenCost** / **Kubecost** | 多云 K8s 成本分析 |
 | 渐进发布 | **Flagger** / **Argo Rollouts** | 金丝雀 / 蓝绿 / A/B 发布 |
 | 密钥管理 | **HashiCorp Vault** + **External Secrets** | 本文档已提及 External Secrets |
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 17-saas-multitenant-architecture
+- 18-data-midplatform-architecture
+- 20-microservice-governance-architecture
+- 21-cross-border-ecommerce

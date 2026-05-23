@@ -1,4 +1,44 @@
 ---
+title: 节点升级 — kubeadm upgrade node 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- upgrade
+- etcd
+- kubelet
+- scheduler
+- calico
+- coredns
+- daemonset
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点升级 — kubeadm upgrade node 源码分析 是什么
+- 如何 节点升级 — kubeadm upgrade node 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点升级
+- kubeadm
+- upgrade
+- node
+- 源码分析
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点升级 kubeadm upgrade node 源码分析
 description: '## 概述'
 category: functions
@@ -40,25 +80,29 @@ trigger_keywords:
 - rolling upgrade
 - upgrade node
 - kubectl drain
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
 related_topics:
-- cluster-create/09-upgrade
-- cluster-create/15-upgrade-advanced
+- 09-upgrade
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
 - node-create/04-drain
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点升级 — kubeadm upgrade node 源码分析
 
 ## 概述
 
-节点升级是 [[entities/kubernetes|kubernetes]] 集群版本管理中最重要的运维操作之一。Kubernetes 社区大约每三个月发布一个 minor 版本，每个版本都有约一年的维护支持期。保持集群版本的及时升级对于获取安全补丁、新功能和性能优化至关重要。
+节点升级是 Kubernetes 集群版本管理中最重要的运维操作之一。Kubernetes 社区大约每三个月发布一个 minor 版本，每个版本都有约一年的维护支持期。保持集群版本的及时升级对于获取安全补丁、新功能和性能优化至关重要。
 
 Kubernetes 的升级遵循严格的顺序：先升级控制面节点（API Server、Controller Manager、Scheduler、etcd），再升级工作节点。工作节点的升级包括 kubelet 二进制、kubeadm 配置文件和容器运行时组件的更新。升级过程中需要确保工作负载的连续性——通过 drain/uncordon 机制将 Pod 从待升级节点迁移到其他节点。
 
@@ -456,3 +500,9 @@ sudo apt-get install kubeadm=1.28.0-*
 | `performUpgrade` | `cmd/kubeadm/app/cmd/upgrade/apply.go` | 执行升级 |
 | `WriteKubeletConfig` | `cmd/kubeadm/app/phases/kubelet/` | 写入 kubelet 配置 |
 | `UpdateKubeletConfig` | `cmd/kubeadm/app/phases/kubelet/` | 更新 kubelet 配置 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

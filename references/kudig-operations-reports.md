@@ -25,6 +25,7 @@ trigger_keywords:
 - 操作记录与计划
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 项目运维报告

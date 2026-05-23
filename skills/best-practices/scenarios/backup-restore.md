@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 场景: 备份恢复
@@ -106,7 +107,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[skills/backup-restore-fta.md|backup-restore-fta]]
 - [[skills/etcd-fta.md|etcd-fta]]
 

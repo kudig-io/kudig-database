@@ -1,5 +1,5 @@
 ---
-title: SpinKube
+title: SpinKube [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # SpinKube
@@ -69,13 +70,13 @@ SpinKube 是一个在 Kubernetes 上运行 WebAssembly (Wasm) 微服务和应用
 ## Related
 
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQL 高级查询
+- [[02-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
 - [[capsule]] — Capsule
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-15-specialized-tech/03-spinkube-framework.md|03-spinkube-framework]]
-- [[domain-19-landscape-references/sandbox/spinkube/spinkube.md|spinkube]]
+- 03-spinkube-framework
+- spinkube
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

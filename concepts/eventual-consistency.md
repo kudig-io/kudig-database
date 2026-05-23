@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Eventual Consistency in Kubernetes
@@ -41,7 +42,7 @@ Kubernetes does not guarantee immediate consistency. When you apply a manifest r
 ## CAP Theorem Tradeoff
 
 Kubernetes chooses **CP** (Consistency + Partition Tolerance) at the storage layer (etcd uses Raft for strong consistency) but operates as an **eventually consistent** system at the API level. This is because:
-- Controllers and kubelet operate asynchronously
+- Controllers and [[kubelet|kubelet]] operate asynchronously
 - Network partitions are expected (nodes can disconnect)
 - The system must remain available during component failures
 

@@ -50,6 +50,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Domain-34: CNCF Landscape 开源项目
@@ -88,13 +89,13 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 ### containerd (8 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| [[[entities/02-containerd-v2-features.md|02-containerd-v2-features]].md](./graduated/containerd/02-containerd-v2-features.md) | containerd v2 新特性 |
-| [[[entities/03-containerd-security-hardening.md|03-containerd-security-hardening]].md](./graduated/containerd/03-containerd-security-hardening.md) | 安全加固 |
-| [[[entities/04-containerd-upgrade-migration.md|04-containerd-upgrade-migration]].md](./graduated/containerd/04-containerd-upgrade-migration.md) | 升级迁移 |
-| [[[entities/05-containerd-windows-support.md|05-containerd-windows-support]].md](./graduated/containerd/05-containerd-windows-support.md) | Windows 支持 |
-| [[[entities/06-containerd-observability.md|06-containerd-observability]].md](./graduated/containerd/06-containerd-observability.md) | 可观测性 |
+| 02-containerd-v2-features.md](./graduated/containerd/02-containerd-v2-features.md) | containerd v2 新特性 |
+| 03-containerd-security-hardening.md](./graduated/containerd/03-containerd-security-hardening.md) | 安全加固 |
+| 04-containerd-upgrade-migration.md](./graduated/containerd/04-containerd-upgrade-migration.md) | 升级迁移 |
+| 05-containerd-windows-support.md](./graduated/containerd/05-containerd-windows-support.md) | Windows 支持 |
+| 06-containerd-observability.md](./graduated/containerd/06-containerd-observability.md) | 可观测性 |
 | [07-containerd-disaster-recovery.md](./graduated/containerd/07-containerd-disaster-recovery.md) | 灾难恢复 |
-| [[[entities/08-containerd-multi-tenant.md|08-containerd-multi-tenant]].md](./graduated/containerd/08-containerd-multi-tenant.md) | 多租户 |
+| 08-containerd-multi-tenant.md](./graduated/containerd/08-containerd-multi-tenant.md) | 多租户 |
 
 ### Istio (3 篇)
 | 文档 | 说明 |
@@ -106,7 +107,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | 文档 | 说明 |
 |:-----|:-----|
 | [02-prometheus-promql-advanced.md](./graduated/prometheus/02-prometheus-promql-advanced.md) | 高级 PromQL |
-| [[[entities/03-prometheus-ha-deployment.md|03-prometheus-ha-deployment]].md](./graduated/prometheus/03-prometheus-ha-deployment.md) | 高可用部署 |
+| 03-prometheus-ha-deployment.md](./graduated/prometheus/03-prometheus-ha-deployment.md) | 高可用部署 |
 
 ---
 
@@ -133,7 +134,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Fluentd](./graduated/fluentd/fluentd.md) | Observability | 统一日志层 |
 | [Flux](./graduated/flux/flux.md) | App Definition | GitOps 持续交付 |
 | [Harbor](./graduated/harbor/harbor.md) | Provisioning | 企业级容器镜像仓库 |
-| [Helm](./graduated/[[helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
+| [Helm](./[[entities/helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
 | [in-toto](./graduated/in-toto/in-toto.md) | Security | 软件供应链安全框架 |
 | [Istio](./graduated/istio/istio.md) | Service Mesh | 服务网格平台 |
 | [Jaeger](./graduated/jaeger/jaeger.md) | Observability | 分布式追踪系统 |
@@ -248,12 +249,12 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Copa](./sandbox/copa/copa.md) | 容器镜像修补 |
 | [Dex](./sandbox/dex/dex.md) | OIDC 身份服务 |
 | [Eraser](./sandbox/eraser/eraser.md) | 镜像清理工具 |
-| [[[entities/hexa.md|hexa]]](./sandbox/hexa/hexa.md) | 策略编排 |
+| hexa](./sandbox/hexa/hexa.md) | 策略编排 |
 | [Inclavare Containers](./sandbox/inclavare-containers/inclavare-containers.md) | 机密计算容器 |
-| [[[entities/keylime.md|keylime]]](./sandbox/keylime/keylime.md) | 远程证明 |
+| keylime](./sandbox/keylime/keylime.md) | 远程证明 |
 | [KubeArmor](./sandbox/kubearmor/kubearmor.md) | 运行时安全 |
 | [Kubewarden](./sandbox/kubewarden/kubewarden.md) | 策略引擎 |
-| [OAuth2 Proxy](./sandbox/[[entities/oauth2-proxy.md|oauth2-proxy]]/oauth2-proxy.md) | OAuth2 代理 |
+| [OAuth2 Proxy](./oauth2-proxy/oauth2-proxy.md) | OAuth2 代理 |
 | [Open Policy Containers](./sandbox/open-policy-containers/open-policy-containers.md) | OPA 容器 |
 | [Paralus](./sandbox/paralus/paralus.md) | Kubernetes 访问管理 |
 | [Parsec](./sandbox/parsec/parsec.md) | 安全服务 API |
@@ -269,7 +270,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 |:---|:---|
 | [k0s](./sandbox/k0s/k0s.md) | 零摩擦 Kubernetes |
 | [k3s](./sandbox/k3s/k3s.md) | 轻量级 Kubernetes |
-| [[[entities/kairos.md|kairos]]](./sandbox/kairos/kairos.md) | 不可变 Kubernetes |
+| kairos](./sandbox/kairos/kairos.md) | 不可变 Kubernetes |
 | [Kubean](./sandbox/kubean/kubean.md) | 集群生命周期管理 |
 | [KubeClipper](./sandbox/kubeclipper/kubeclipper.md) | 集群管理平台 |
 | [kcp](./sandbox/kcp/kcp.md) | Kubernetes 控制平面 |
@@ -287,11 +288,11 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [youki](./sandbox/youki/youki.md) | 容器运行时 |
 | [urunc](./sandbox/urunc/urunc.md) | Unikernel 运行时 |
 | [Hyperlight](./sandbox/hyperlight/hyperlight.md) | 微虚拟机 |
-| [[[entities/bootc.md|bootc]]](./sandbox/bootc/bootc.md) | 可启动容器 |
-| [[[entities/composefs.md|composefs]]](./sandbox/composefs/composefs.md) | 组合文件系统 |
+| bootc](./sandbox/bootc/bootc.md) | 可启动容器 |
+| composefs](./sandbox/composefs/composefs.md) | 组合文件系统 |
 | [container2wasm](./sandbox/container2wasm/container2wasm.md) | 容器转 WASM |
 | [ContainerSSH](./sandbox/containerssh/containerssh.md) | SSH 容器服务 |
-| [Podman Container Tools](./sandbox/[[entities/podman-container-tools.md|podman-container-tools]]/podman-container-tools.md) | Podman 工具集 |
+| [Podman Container Tools](./[[entities/podman-container-tools|podman-container-tools]]/podman-container-tools.md) | Podman 工具集 |
 
 ### 应用定义与交付 (25个)
 
@@ -335,7 +336,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Kube-burner](./sandbox/kube-burner/kube-burner.md) | 压力测试工具 |
 | [Kuberhealthy](./sandbox/kuberhealthy/kuberhealthy.md) | 健康检查框架 |
 | [Cartography](./sandbox/cartography/cartography.md) | 基础设施图谱 |
-| [[[entities/drasi.md|drasi]]](./sandbox/drasi/drasi.md) | 变更检测 |
+| drasi](./sandbox/drasi/drasi.md) | 变更检测 |
 | [Tremor](./sandbox/tremor/tremor.md) | 事件处理 |
 | [openGemini](./sandbox/opengemini/opengemini.md) | 时序数据库 |
 | [Oxia](./sandbox/oxia/oxia.md) | 元数据存储 |
@@ -356,7 +357,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [KubeElasti](./sandbox/kubeelasti/kubeelasti.md) | AI 弹性扩缩 |
 | [Armada](./sandbox/armada/armada.md) | 多集群批处理 |
 | [Cadence](./sandbox/cadence/cadence.md) | 工作流引擎 |
-| [Serverless Workflow](./sandbox/[[entities/serverless-workflow.md|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
+| [Serverless Workflow](./[[entities/serverless-workflow|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
 
 ### 边缘计算与 IoT (5个)
 
@@ -402,7 +403,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [OpenChoreo](./sandbox/openchoreo/openchoreo.md) | 集成平台 |
 | [OpenFunction](./sandbox/openfunction/openfunction.md) | FaaS 平台 |
 | [OSCAL-COMPASS](./sandbox/oscal-compass/oscal-compass.md) | 合规自动化 |
-| [Podman Desktop](./sandbox/[[entities/podman-desktop.md|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
+| [Podman Desktop](./[[entities/podman-desktop|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
 | [VS Code Kubernetes Tools](./sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md) | VS Code 插件 |
 
 ---

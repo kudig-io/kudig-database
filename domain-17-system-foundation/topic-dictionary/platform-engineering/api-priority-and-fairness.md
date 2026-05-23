@@ -34,13 +34,14 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # API 优先级与公平性（API Priority and Fairness）
 
 ## 概述
 
-FEATURE STATE: `Kubernetes v1.29 [stable]`
+FEATURE STATE: `[[Kubernetes|Kubernetes]] v1.29 [stable]`
 
 在 Kubernetes 集群中，控制 kube-apiserver 在高负载下的行为是集群管理员的关键任务。API 优先级与公平性（API Priority and Fairness，简称 APF）是一种比传统的 `--max-requests-inflight` 和 `--max-mutating-requests-inflight` 更精细的流量控制机制。APF 能够对请求进行分类和隔离，并引入有限的队列机制，使得在短时突发流量下不会被直接拒绝，同时使用公平队列算法防止单个不良控制器饿死其他客户端。
 
@@ -107,7 +108,7 @@ kube-apiserver 维护两类配置对象：
 
 ### 健康检查并发豁免
 
-默认配置未对 kubelet 的无凭证健康检查请求给予特殊处理。可以通过添加自定义 FlowSchema 将这些请求豁免：
+默认配置未对 [[kubelet|kubelet]] 的无凭证健康检查请求给予特殊处理。可以通过添加自定义 FlowSchema 将这些请求豁免：
 
 ```yaml
 apiVersion: flowcontrol.apiserver.k8s.io/v1
@@ -136,7 +137,7 @@ spec:
 
 ### 可观测性指标
 
-APF 暴露了大量 Prometheus 指标，包括：
+APF 暴露了大量 [[Prometheus|Prometheus]] 指标，包括：
 
 - `apiserver_flowcontrol_rejected_requests_total`：被拒绝的请求总数。
 - `apiserver_flowcontrol_dispatched_requests_total`：开始执行的请求总数。

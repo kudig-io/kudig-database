@@ -1,5 +1,5 @@
 ---
-title: Pod 异常故障树分析
+title: Pod 异常故障树分析 (skills)
 description: '### 1. 调度失败/挂起'
 category: general
 tags:
@@ -23,17 +23,18 @@ prerequisites:
 fta_id: FTA-POD-001
 component: Pod
 severity: high
+created: "2026-05-23"
 ---
 
 ---
 title: "Pod 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.namespace}/{.metadata.name}{\'\..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.namespace}/{.metadata.name}{\'\..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

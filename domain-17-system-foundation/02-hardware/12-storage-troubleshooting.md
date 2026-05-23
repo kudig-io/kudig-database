@@ -46,6 +46,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md
   label: '运维技能: 07-pvc-storage-failure'
+created: "2026-05-23"
 ---
 
 # 存储设备故障排查
@@ -589,31 +590,31 @@ done
 - [smartmontools](https://www.smartmontools.org/)
 - [NVMe CLI](https://github.com/linux-nvme/nvme-cli)
 - [Broadcom storcli](https://www.broadcom.com/)
-- [Linux RAID Wiki](https://raid.wiki.kernel.org/)
+- Linux RAID Wiki](https://raid.wiki.kernel.org/)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-31-hardware MOC]]
+- domain-31-hardware KUDIG Database — Global MOC
 - [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-31 硬件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|云平台硬件基础架构]]
-- [[domain-17-system-foundation/02-server-architecture-principles.md|服务器架构原理]]
-- [[domain-17-system-foundation/03-cpu-technology-deep-dive.md|CPU技术深度解析]]
-- [[domain-17-system-foundation/04-motherboard-chipset-technology.md|主板与芯片组技术]]
-- [[domain-17-system-foundation/05-memory-technology-deep-dive.md|内存技术深度解析]]
-- [[domain-17-system-foundation/06-storage-hdd-technology.md|机械硬盘技术]]
-- [[domain-17-system-foundation/07-storage-ssd-technology.md|SSD固态硬盘技术]]
-- [[domain-17-system-foundation/08-network-hardware-technology.md|网络硬件技术]]
-- [[domain-17-system-foundation/09-hardware-vendors-ecosystem.md|硬件厂商生态]]
+- index.md|Domain-31 硬件 — 开源项目索引]]
+- 云平台硬件基础架构
+- 服务器架构原理
+- CPU技术深度解析
+- 主板与芯片组技术
+- 内存技术深度解析
+- 机械硬盘技术
+- SSD固态硬盘技术
+- 网络硬件技术
+- 硬件厂商生态
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-17-system-foundation/10-hardware-troubleshooting-methodology.md|10-hardware-troubleshooting-methodology]]
-- [[domain-17-system-foundation/11-cpu-memory-troubleshooting.md|11-cpu-memory-troubleshooting]]
-- [[domain-17-system-foundation/13-network-hardware-troubleshooting.md|13-network-hardware-troubleshooting]]
-- [[domain-17-system-foundation/14-power-thermal-troubleshooting.md|14-power-thermal-troubleshooting]]
+- 10-hardware-troubleshooting-methodology
+- 11-cpu-memory-troubleshooting
+- 13-network-hardware-troubleshooting
+- 14-power-thermal-troubleshooting

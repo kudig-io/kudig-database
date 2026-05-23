@@ -1,5 +1,5 @@
 ---
-title: 安全护栏、提示注入防护与合规
+title: 安全护栏、提示注入防护与合规 (domain-14-ai-ml-infra)
 description: 'title: 安全护栏、提示注入防护与合规'
 category: general
 tags:
@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 title: 安全护栏、提示注入防护与合规
@@ -43,10 +44,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- helm
+- [[Helm|helm]]
 - postgresql
 - rbac
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 last_updated: 2026-05
 difficulty: advanced
@@ -797,9 +798,9 @@ def ensure_compliant_logging(func):
 
 | 文档 | 关联内容 |
 |------|---------|
-| [05 - 工具调用](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | 工具权限和安全验证 |
+| [05 - 工具调用](./05-tool-use-function-calling.md) | 工具权限和安全验证 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 记忆存储前的 PII 脱敏 |
-| [09 - 生产部署](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | K8s RBAC 和 NetworkPolicy |
+| [09 - 生产部署](./09-production-deployment-guide.md) | K8s RBAC 和 NetworkPolicy |
 | [domain-05-security-compliance](../domain-05-security-compliance/) | K8s 安全最佳实践 |
 | [domain-05-security-compliance](../domain-05-security-compliance/) | 云原生安全标准 |
 
@@ -811,9 +812,9 @@ def ensure_compliant_logging(func):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
@@ -826,11 +827,11 @@ def ensure_compliant_logging(func):
 
 ## Related
 
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
+- 27-agent-cli-security-governance
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]]
-- [[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
+- 08-agent-evaluation-observability
+- 09-production-deployment-guide
+- 11-cost-latency-optimization
+- 12-enterprise-case-studies

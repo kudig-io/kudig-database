@@ -57,6 +57,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
 # 集群容量规划
@@ -64,7 +65,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-容量规划是确保 Kubernetes 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。
+容量规划是确保 [[Kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。
 
 <!-- chunk: 容量规划架构 -->
 ## 容量规划架构
@@ -209,7 +210,7 @@ cross_refs:
 | **Pod 总数** | 150,000 Pod | 单集群最大 Pod 数 | 调度器吞吐量、etcd 存储 |
 | **每节点 Pod 数** | 110 Pod | 单节点默认最大 Pod 数 | kubelet 性能、IP 地址空间 |
 | **每节点容器数** | 300 容器 | 单节点推荐最大容器数 | 运行时性能 |
-| **Service 数量** | 10,000 Service | 单集群最大 Service 数 | kube-proxy 规则数量 |
+| **[[Service|Service]] 数量** | 10,000 Service | 单集群最大 Service 数 | kube-proxy 规则数量 |
 | **Endpoints 每 Service** | 5000 | 单 Service 最大端点数 | iptables/IPVS 性能 |
 | **ConfigMap 大小** | 1 MiB | 单个 ConfigMap 最大大小 | etcd 限制 |
 | **Secret 大小** | 1 MiB | 单个 Secret 最大大小 | etcd 限制 |
@@ -1413,7 +1414,7 @@ data:
 | **v1.31** | 调度器吞吐量优化 | 支持更大规模集群 |
 | | 新增 `NodeResourcesFitArgs` 评分调优 | 更精细的资源匹配 |
 | **v1.30** | etcd 3.5.x 默认版本 | 性能提升 ~50% |
-| | 新增 `DRA` (Dynamic Resource Allocation) | GPU 等资源更灵活分配 |
+| | 新增 `DRA` ([[Dynamic Resource Allocation|Dynamic Resource Allocation]]) | GPU 等资源更灵活分配 |
 | **v1.29** | Cluster Autoscaler 性能优化 | 大规模集群扩缩容更快 |
 | | 新增 `--max-pod-eviction-time` | 更可控的节点缩容 |
 | **v1.28** | 引入 `SchedulerQueueingHints` | 调度性能提升 |
@@ -1454,25 +1455,25 @@ data:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications KUDIG Database — Global MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- index.md|Domain-4 工作负载 — 开源项目索引]]
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## See Also
 
-- [[domain-02-workloads-applications/20-kubelet-configuration.md|20-kubelet-configuration]]
-- [[domain-02-workloads-applications/21-hpa-vpa-autoscaling.md|21-hpa-vpa-autoscaling]]
-- [[domain-02-workloads-applications/23-resource-management.md|23-resource-management]]
-- [[domain-02-workloads-applications/99-kubernetes-v1.33-workloads-guide.md|99-kubernetes-v1.33-workloads-guide]]
+- 20-kubelet-configuration
+- 21-hpa-vpa-autoscaling
+- 23-resource-management
+- 99-kubernetes-v1.33-workloads-guide
 
 ## Related
 

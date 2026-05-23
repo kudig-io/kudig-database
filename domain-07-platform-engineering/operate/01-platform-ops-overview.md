@@ -45,11 +45,12 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
 title: 平台运维概述
-description: 全面介绍 Kubernetes 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径
+description: 全面介绍 [[Kubernetes|Kubernetes]] 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径
 category: domain-07-platform-engineering
 tags:
 - k8s
@@ -59,8 +60,8 @@ tags:
 - sre
 - devops
 - operations
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - scheduler
 - daily-ops
 - deep-dive
@@ -375,30 +376,30 @@ CI/CD → 监控告警 → 日志收集 → 服务网格
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|容量规划与资源评估 (Capacity Planning & Resource Assessment)]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/07-gitops-configuration-management.md|GitOps配置管理 (GitOps Configuration Management)]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
-- [[domain-07-platform-engineering/10-security-compliance.md|安全合规管理 (Security & Compliance Management)]]
+- Domain-9 平台运维 — 开源项目索引
+- 集群生命周期管理
+- 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+- 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- GitOps配置管理 (GitOps Configuration Management)
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
+- 安全合规管理 (Security & Compliance Management)
 
 ## Related
 
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
-- [[domain-15-specialized-tech/MOC.md|相关知识域: domain-15-specialized-tech]]
-- [[domain-10-troubleshooting-diagnostics/MOC.md|相关知识域: domain-10-troubleshooting-diagnostics]]
+- 集群生命周期管理
+- 监控告警体系
+- 相关知识域: domain-06-observability
+- 相关知识域: domain-15-specialized-tech
+- 相关知识域: domain-10-troubleshooting-diagnostics
 
 ## See Also
 
-- [[domain-07-platform-engineering/99-java-k8s-client-operator-guide.md|99-java-k8s-client-operator-guide]]
-- [[domain-07-platform-engineering/99-kubernetes-v1.33-platform-ops-guide.md|99-kubernetes-v1.33-platform-ops-guide]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|02-cluster-lifecycle-management]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|03-capacity-planning-resource-assessment]]
+- 99-java-k8s-client-operator-guide
+- 99-kubernetes-v1.33-platform-ops-guide
+- 02-cluster-lifecycle-management
+- 03-capacity-planning-resource-assessment

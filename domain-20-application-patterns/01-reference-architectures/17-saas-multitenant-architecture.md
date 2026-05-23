@@ -36,20 +36,21 @@ prerequisites:
 - helm-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: SaaS多租户平台Kubernetes生产架构设计
-description: '# SaaS 多租户平台 Kubernetes 生产架构设计'
+description: '# SaaS 多租户平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- helm
+- [[Helm|helm]]
 - redis
 - mysql
 - elasticsearch
-- ingress
+- [[Ingress|ingress]]
 - gateway
 - rbac
 last_updated: '2026-05-18'
@@ -589,7 +590,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -604,7 +605,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/15-energy-power-architecture.md|15-energy-power-architecture]]
-- [[domain-20-application-patterns/16-video-shortform-architecture.md|16-video-shortform-architecture]]
-- [[domain-20-application-patterns/18-data-midplatform-architecture.md|18-data-midplatform-architecture]]
-- [[domain-20-application-patterns/19-cloudnative-devops-architecture.md|19-cloudnative-devops-architecture]]
+- 15-energy-power-architecture
+- 16-video-shortform-architecture
+- 18-data-midplatform-architecture
+- 19-cloudnative-devops-architecture

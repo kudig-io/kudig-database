@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 集群删除逻辑 — 基于官方代码分析
+title: Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis)
 description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: Kubernetes 集群删除逻辑 — 基于官方代码分析

@@ -1,5 +1,5 @@
 ---
-title: Tool Use & Function Calling 设计规范
+title: Tool Use & Function Calling 设计规范 (domain-14-ai-ml-infra)
 description: 'title: Tool Use & Function Calling 设计规范'
 category: general
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: Tool Use & Function Calling 设计规范
@@ -42,8 +43,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- statefulset
-- networkpolicy
+- [[StatefulSet|statefulset]]
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -907,7 +908,7 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | Agent Loop 中工具调用的位置 |
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LangChain/LlamaIndex 工具封装 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 工具在多 Agent 间的共享 |
-| [10 - 安全护栏](./[[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md) | 工具调用的安全策略 |
+| [10 - 安全护栏](./10-security-guardrails.md) | 工具调用的安全策略 |
 | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | K8s 运维工具对应的知识库 |
 
 ---
@@ -918,8 +919,8 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -933,7 +934,7 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
+- 03-agent-frameworks-comparison
+- 04-rag-knowledge-retrieval
+- 06-multi-agent-orchestration
+- 07-memory-context-management

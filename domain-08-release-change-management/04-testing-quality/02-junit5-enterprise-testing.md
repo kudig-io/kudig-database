@@ -43,6 +43,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # JUnit 5 企业级单元测试框架深度实践
@@ -1307,17 +1308,17 @@ test_environment_health() {
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-29-automated-testing-quality MOC]]
+- domain-29-automated-testing-quality KUDIG Database — Global MOC
 - [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-29 自动化测试与质量 — 开源项目索引]]
-- [[domain-08-release-change-management/01-selenium-enterprise-automation.md|Selenium 企业级自动化测试平台]]
-- [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|企业级AI测试与质量保障深度实践]]
-- [[domain-08-release-change-management/05-cypress-enterprise-automation.md|Cypress Enterprise Automation Testing 深度实践]]
-- [[domain-08-release-change-management/06-playwright-enterprise-automation.md|Playwright Enterprise Automation Testing 深度实践]]
+- Domain-29 自动化测试与质量 — 开源项目索引
+- Selenium 企业级自动化测试平台
+- 企业级AI测试与质量保障深度实践
+- Cypress Enterprise Automation Testing 深度实践
+- Playwright Enterprise Automation Testing 深度实践
 
 ## See Also
 
-- [[domain-08-release-change-management/06-playwright-enterprise-automation.md|06-playwright-enterprise-automation]]
-- [[domain-08-release-change-management/01-selenium-enterprise-automation.md|01-selenium-enterprise-automation]]
-- [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|03-ai-testing-quality-assurance]]
-- [[domain-08-release-change-management/05-cypress-enterprise-automation.md|05-cypress-enterprise-automation]]
+- 06-playwright-enterprise-automation
+- 01-selenium-enterprise-automation
+- 03-ai-testing-quality-assurance
+- 05-cypress-enterprise-automation

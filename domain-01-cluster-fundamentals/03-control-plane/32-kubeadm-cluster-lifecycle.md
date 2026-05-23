@@ -77,11 +77,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 
-> **适用版本**: Kubernetes v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 运维操作指南
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 运维操作指南
 
 ---
 
@@ -190,7 +191,7 @@ Phase 5: 附加组件 (addon)
 
 ### 1.3 版本兼容性说明
 
-| kubeadm 版本 | 支持的 Kubernetes 版本 | 最低 etcd 版本 | 最低 containerd 版本 |
+| kubeadm 版本 | 支持的 Kubernetes 版本 | 最低 etcd 版本 | 最低 [[containerd|containerd]] 版本 |
 |-------------|----------------------|---------------|-------------------|
 | v1.25.x | v1.25 | 3.5.4 | 1.6.0 |
 | v1.26.x | v1.26 | 3.5.6 | 1.6.0 |
@@ -226,7 +227,7 @@ Phase 5: 附加组件 (addon)
 
 | 组件 | 端口 | 协议 | 方向 | 说明 |
 |------|------|------|------|------|
-| **API Server** | 6443 | TCP | Inbound | Kubernetes API 入口 |
+| **API Server** | 6443 | TCP | Inbound | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 入口 |
 | **etcd** | 2379-2380 | TCP | Inbound | etcd 客户端/对等通信 |
 | **kubelet** | 10250 | TCP | Inbound | Kubelet API |
 | **Scheduler** | 10259 | TCP | Inbound | 调度器度量端点 |
@@ -2281,25 +2282,25 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/30-dynamic-resource-allocation.md|30-dynamic-resource-allocation]]
-- [[domain-01-cluster-fundamentals/31-kubectl-complete-reference.md|31-kubectl-complete-reference]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-upgrade-complete-guide.md|32-kubeadm-upgrade-complete-guide]]
-- [[domain-01-cluster-fundamentals/33-kubelet-eviction-thresholds.md|33-kubelet-eviction-thresholds]]
+- 30-dynamic-resource-allocation
+- 31-kubectl-complete-reference
+- 32-kubeadm-upgrade-complete-guide
+- 33-kubelet-eviction-thresholds
 
 ## Related
 

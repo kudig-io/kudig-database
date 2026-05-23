@@ -1,50 +1,18 @@
 ---
-title: Kubernetes 集群配置最佳实践
-description: 'title: Kubernetes 集群配置最佳实践'
-category: general
+title: Kubernetes 集群配置最佳实践 [infrastructure]
+description: 生产环境 Kubernetes 集群配置的最佳实践指南
+category: best-practices/infrastructure
 tags:
-- k8s
+- kubernetes
+- cluster
+- configuration
+- production
 - etcd
 - apiserver
 - kubelet
 - scheduler
 - calico
 - containerd
-- cri-o
-- docker
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Kubernetes 集群配置最佳实践 是什么
-- 如何 Kubernetes 集群配置最佳实践
-- Kubernetes 11 production operations 最佳实践
-trigger_keywords:
-- Kubernetes
-- 集群配置最佳实践
-- production
-- operations
-- best
-- practices
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- cni-basics
-- etcd-basics
----
-
-title: Kubernetes 集群配置最佳实践
-description: 生产环境 Kubernetes 集群配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/infrastructure
-tags:
-- kubernetes
-- cluster
-- configuration
-- production
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -62,6 +30,10 @@ trigger_keywords:
 - 集群配置
 - 生产环境
 - 高可用
+prerequisites:
+- kubectl-basics
+- cni-basics
+- etcd-basics
 cross_refs:
 - type: domain
   path: ../../domain-07-platform-engineering/
@@ -69,16 +41,9 @@ cross_refs:
 - type: domain
   path: ../../domain-01-cluster-fundamentals/
   label: 控制平面知识域
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+created: "2026-05-23"
 ---
+
 # Kubernetes 集群配置最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
@@ -564,10 +529,3 @@ sed -i 's|#   value: "192.168.0.0/16"|  value: "10.244.0.0/16"|g' calico.yaml
 ---
 
 **文档维护**：定期审查和更新，确保与 Kubernetes 版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/deployment/03-development-environment-deployment.md|03-development-environment-deployment]]
-- [[domain-11-production-operations/topic-best-practices/deployment/04-production-environment-deployment.md|04-production-environment-deployment]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/networking.md|networking]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|storage]]

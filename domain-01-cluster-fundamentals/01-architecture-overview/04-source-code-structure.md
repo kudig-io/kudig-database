@@ -57,9 +57,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
-# 04 - Kubernetes 源码结构深度解析
+# 04 - [[Kubernetes|Kubernetes]] 源码结构深度解析
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **源码版本**: 以 v1.32.0 为基准 | **参考**: [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)
 
@@ -111,14 +112,14 @@ cross_refs:
 | **cmd/kube-controller-manager/** | 控制器管理器 | `app/controllermanager.go`<br>`app/options/` | v1.27: 控制器插件化<br>v1.30: 增强选举 | **控制器异常排查**、Leader 选举问题、控制器启用/禁用 |
 | **cmd/kube-scheduler/** | 调度器主程序 | `app/server.go`<br>`app/config/` | v1.25: 调度框架 v1<br>v1.28: DRA Alpha | **调度失败调试**、调度器配置加载、插件注册 |
 | **cmd/kubelet/** | 节点代理 | `app/server.go`<br>`app/options/` | v1.24: Dockershim 移除<br>v1.27: 就地重启 | **节点 NotReady**、CRI 初始化失败、cgroup 配置 |
-| **cmd/kube-proxy/** | 网络代理 | `app/server.go`<br>`app/conntrack.go` | v1.26: nftables Beta<br>v1.31: nftables GA | **Service 不通排查**、代理模式切换、conntrack 调优 |
+| **cmd/kube-proxy/** | 网络代理 | `app/server.go`<br>`app/conntrack.go` | v1.26: nftables Beta<br>v1.31: nftables GA | **[[Service|Service]] 不通排查**、代理模式切换、conntrack 调优 |
 
 ### 客户端与工具
 
 | 组件路径 | 用途 | 关键文件/包 | 版本变更 | 开发价值 |
 |---------|------|-------------|---------|----------|
 | **cmd/kubectl/** | 命令行工具 | `cmd/kubectl.go`<br>`pkg/cmd/` | v1.26: apply --prune<br>v1.28: events 改进 | **kubectl 插件开发**、子命令扩展、输出格式定制 |
-| **cmd/kubeadm/** | 集群初始化工具 | `app/cmd/`, `app/phases/` | v1.29: 外部 etcd 增强<br>v1.31: 证书轮换 | **集群部署调试**、证书配置、网络插件集成 |
+| **cmd/kubeadm/** | 集群初始化工具 | `app/cmd/`, `app/phases/` | v1.29: 外部 [[etcd|etcd]] 增强<br>v1.31: 证书轮换 | **集群部署调试**、证书配置、网络插件集成 |
 | **cmd/kube-aggregator/** | API 聚合层 | `pkg/apiserver/` | v1.25 稳定 | **聚合 API 调试**、Metrics Server、自定义 API |
 | **cmd/cloud-controller-manager/** | 云控制器 | `app/cloudcontrollermanager.go` | v1.25: 外部化完成 | **云负载均衡器**、Node IP 管理、云路由 |
 
@@ -811,22 +812,22 @@ type RuntimeServiceClient interface {
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- Kubernetes 核心组件深度剖析
+- 03 - 功能和API表
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|02-core-components-deep-dive]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03-api-versions-features]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|05-kubectl-commands-reference]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06-cluster-configuration-parameters]]
+- 02-core-components-deep-dive
+- 03-api-versions-features
+- 05-kubectl-commands-reference
+- 06-cluster-configuration-parameters

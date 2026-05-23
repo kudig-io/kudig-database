@@ -26,11 +26,12 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # 安全认证故障排查
 
-### 01 Rbac Troubleshooting
+### 01 Rbac Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

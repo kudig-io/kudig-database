@@ -1,6 +1,47 @@
 ---
+title: '集群升级进阶: 滚动升级与回滚策略'
+description: 'description: ''| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120 | 计算配置哈希'
+category: general
+tags:
+- reference
+- upgrade
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- '集群升级进阶: 滚动升级与回滚策略 是什么'
+- '如何 集群升级进阶: 滚动升级与回滚策略'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- '集群升级进阶:'
+- 滚动升级与回滚策略
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 集群升级进阶滚动升级与回滚策略
-description: '| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120 | 计算配置哈希 |'
+description: '| `cmd/kubeadm/app/phases/upgrade/computehash.go` | L30-L120 | 计算配置哈希
+  |'
 category: functions
 tags:
 - k8s
@@ -41,20 +82,23 @@ trigger_keywords:
 - static pod
 - manifest
 - certificate renewal
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cilium-basics
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
 related_topics:
-- cluster-create/09-upgrade
+- 09-upgrade
 - cluster-create/03-certs
 - cluster-create/07-etcd
 - cluster-create/14-ha-advanced
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 集群升级进阶: 滚动升级与回滚策略
@@ -928,5 +972,12 @@ kubeadm upgrade diff v1.29.0
 - [控制面组件](05-control-plane.md) — static Pod 升级机制
 - [etcd 管理](07-etcd.md) — etcd 备份和升级
 - [高可用进阶](14-ha-advanced.md) — HA 集群滚动升级
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — 升级过程中的安全配置
+- [安全机制](16-security.md) — 升级过程中的安全配置
 - [初始化阶段](17-init-phases.md) — init phase 与 upgrade phase 对比
+
+## Related
+
+- [[hot.md|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

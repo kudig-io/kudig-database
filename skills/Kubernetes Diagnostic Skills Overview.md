@@ -34,6 +34,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Diagnostic Skills Overview
@@ -44,12 +45,12 @@ The KUDIG knowledge base defines 19 structured diagnostic skills, each mapping t
 
 ### Core Infrastructure Skills
 
-| # | Skill | FTA Mapping | Est. MTTR | Key Diagnostic Commands |
+| # | [[SKILL|Skill]] | FTA Mapping | Est. MTTR | Key Diagnostic Commands |
 |---|-------|-------------|-----------|------------------------|
-| 1 | Node NotReady | TE-1 -> IE-1.2 -> BE-1.5 | 15-30m | `kubectl get nodes`, `describe node`, `journalctl -u kubelet` |
+| 1 | Node NotReady | TE-1 -> IE-1.2 -> BE-1.5 | 15-30m | `kubectl get nodes`, `describe node`, `journalctl -u [[kubelet|kubelet]]` |
 | 2 | Pod CrashLoopBackOff/OOMKilled | TE-2 -> IE-2.1 -> BE-2.1/2.3 | 10-25m | `describe pod`, `logs --previous`, `kubectl top pod` |
 | 3 | Pod Pending | TE-3 -> IE-3.1 | 15-30m | `describe pod | grep Events`, `describe nodes | grep Allocated` |
-| 4 | DNS Resolution Failure | TE-4 -> IE-4.1 | 20-40m | `nslookup`, `dig`, `coredns logs`, `kubectl get ep kube-dns` |
+| 4 | DNS Resolution Failure | TE-4 -> IE-4.1 | 20-40m | `nslookup`, `dig`, `[[CoreDNS|coredns]] logs`, `kubectl get ep kube-dns` |
 | 5 | Service Connectivity | TE-2 -> IE-2.2 | 20-40m | `kubectl get ep`, `iptables-save`, `kube-proxy logs` |
 
 ### Storage and Configuration Skills

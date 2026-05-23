@@ -37,6 +37,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -301,4 +302,4 @@ CRD开发 → Operator模式 → 准入控制 → API扩展
 
 ## Related
 
-- [[domain-07-platform-engineering/MOC.md|相关知识域: domain-07-platform-engineering]]
+- 相关知识域: domain-07-platform-engineering

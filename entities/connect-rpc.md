@@ -1,5 +1,5 @@
 ---
-title: Connect RPC
+title: Connect RPC [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - RPC
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Connect RPC
@@ -66,5 +67,5 @@ Connect RPC 是一个轻量级、高性能的 RPC 框架，旨在简化 Protobuf
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[grpc]] — gRPC
 
-- [[domain-19-landscape-references/sandbox/connect-rpc/connect-rpc.md|connect-rpc]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- connect-rpc
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference

@@ -30,13 +30,25 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/deployments]]"
+    type: uses
+  - target: "[[skills/Kubernetes Diagnostic Skills Overview]]"
+    type: uses
+  - target: "[[skills/FTA Methodology and Core Principles]]"
+    type: related_to
+  - target: "[[man/INSTALL]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
 ---
 
 # Structural Troubleshooting Framework
 
 ## Overview
 
-The structural troubleshooting framework provides a systematic approach to Kubernetes incident response, from initial onboarding through active incident management. It complements the [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]] with operational procedures.
+The structural troubleshooting framework provides a systematic approach to Kubernetes incident response, from initial onboarding through active incident management. It complements the FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]] with operational procedures.
 
 ## Day-One Checklist
 
@@ -65,7 +77,7 @@ When receiving your first troubleshooting ticket:
 ### Handoff Checklist
 
 - [ ] Active incidents: status, next actions, who is involved
-- [ ] Recent changes: deployments, config changes, infrastructure modifications
+- [ ] Recent changes: [[domain-17-system-foundation/topic-dictionary/workloads/deployments|deployments]], config changes, infrastructure modifications
 - [ ] Known issues: tracked bugs, pending fixes, workaround in place
 - [ ] Upcoming changes: scheduled maintenance, planned deployments
 - [ ] Monitoring anomalies: alerts firing, dashboards showing unusual patterns
@@ -97,12 +109,12 @@ Open Tickets:
 
 ## Debug Tools Setup
 
-Essential tools for K8s troubleshooting:
+Essential tools for [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] troubleshooting:
 
 | Tool | Purpose | Setup |
 |------|---------|-------|
 | `kubectl` | Primary CLI | Configured with correct context, aliases for common commands |
-| `kubectx`/`kubens` | Context switching | Install for multi-cluster environments |
+| `kubectx`/`kubens` | Context switching | [[man/INSTALL|Install]] for multi-cluster environments |
 | `stern` | Multi-Pod log tailing | `stern <pod-pattern> -n <namespace>` |
 | `k9s` | Terminal UI | Interactive cluster navigation |
 | `ksniff` | Packet capture | `kubectl sniff <pod> -p` for network debugging |
@@ -142,7 +154,7 @@ spec:
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[synthesis/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 - [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[skills/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
 - [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

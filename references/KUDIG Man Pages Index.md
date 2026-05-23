@@ -38,6 +38,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # [[references/kudig-man-pages-index.md|kudig-man-pages-index]]

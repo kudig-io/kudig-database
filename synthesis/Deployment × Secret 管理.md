@@ -26,6 +26,18 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/external-secrets]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/ingress]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[best-practices/security/pod-security]]"
+    type: uses
 ---
 
 ---
@@ -52,7 +64,7 @@ provenance:
   inferred: 0.7
   ambiguous: 0.1
 base_confidence: 0.88
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 tier: supporting
 relationships:
@@ -78,9 +90,9 @@ relationships:
 
 - **镜像拉取 Secret**：Deployment 的 imagePullSecrets 引用 Docker registry 凭证，这是 Secret 最基础的用途。私有镜像仓库的认证直接绑定到 Deployment 的 Pod 模板
 - **应用配置 Secret**：Deployment 将数据库连接字符串、API 密钥作为环境变量注入容器。这是最常见的模式，也是最容易泄露的模式（环境变量会出现在进程列表、core dump、应用日志中）
-- **TLS 证书挂载**：Ingress Controller 或 API 服务的 Deployment 通过 Secret 卷挂载 TLS 证书。证书到期后需要滚动更新 Deployment 才能重新加载
+- **TLS 证书挂载**：[[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]] Controller 或 API 服务的 Deployment 通过 Secret 卷挂载 TLS 证书。证书到期后需要滚动更新 Deployment 才能重新加载
 - **Vault Agent Sidecar**：Deployment 的 Pod 模板中注入 Vault Agent Sidecar，将动态凭证以内存卷形式挂载到应用容器。这是生产环境推荐的模式，但增加了 Pod 复杂度和启动延迟
-- **External Secrets Operator**：Deployment 引用由 ESO 自动同步的 K8s Secret，将外部密钥管理（Vault、AWS Secrets Manager）与 Deployment 的声明式配置解耦
+- **[[entities/external-secrets|External Secrets]] Operator**：Deployment 引用由 ESO 自动同步的 K8s Secret，将外部密钥管理（Vault、AWS Secrets Manager）与 Deployment 的声明式配置解耦
 
 ## 交叉洞察
 
@@ -113,7 +125,7 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 | **不可变 Secret 的困境** | K8s v1.21 引入不可变 Secret（immutable: true）可以提升性能和安全性，但意味着 Secret 一旦创建就不能修改——任何变更都需要创建新 Secret 并更新 Deployment 引用 |
 | **镜像拉取 Secret 的命名空间限制** | imagePullSecrets 是 Pod 级别的，每个命名空间需要独立的镜像拉取 Secret。在多租户集群中，这导致 Secret 的重复创建和同步开销 |
 | **RBAC 粒度与运维效率** | 最小权限原则要求每个 Deployment 的 ServiceAccount 只能访问其所需的 Secret。但在微服务架构中，这导致大量的 Role 和 RoleBinding，增加管理复杂度 |
-| **Secret 大小限制** | K8s Secret 大小限制为 1MB（etcd 的 value 大小限制）。大型 TLS 证书链或 CA 捆绑包可能超过此限制，需要拆分为多个 Secret 或使用 ConfigMap |
+| **Secret 大小限制** | K8s Secret 大小限制为 1MB（[[entities/etcd|etcd]] 的 value 大小限制）。大型 TLS 证书链或 CA 捆绑包可能超过此限制，需要拆分为多个 Secret 或使用 ConfigMap |
 
 ## 开放问题
 
@@ -121,7 +133,7 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 - **Secret 的 GitOps 困境**：GitOps 要求所有配置存储在 Git 中，但 Secret 不应该以明文形式提交。Sealed Secrets、SOPS、External Secrets Operator 等方案各有取舍，但没有一个成为事实标准。GitOps 工作流中的 Secret 管理最佳实践是什么？
 - **Deployment 的 Secret 引用审计**：如何审计一个集群中所有 Deployment 引用了哪些 Secret？kubectl get deployments -A 不直接显示 Secret 引用，需要遍历 Pod 模板。生产环境是否应该有自动化的 Secret 引用图谱？
 - **跨命名空间 Secret 引用**：K8s 不支持跨命名空间引用 Secret。ServiceAccount 的 imagePullSecrets 和 Pod 的 envFrom 都只能引用同命名空间的 Secret。跨命名共享 Secret 需要复制或使用 External Secrets Operator，增加了复杂度
-- **Secret 与 Pod 安全标准的冲突**：Pod Security Standards（Restricted）禁止以 root 运行、要求只读根文件系统。但某些旧版应用读取 Secret 文件时需要特定权限，导致安全策略与应用需求的冲突
+- **Secret 与 Pod 安全标准的冲突**：[[best-practices/security/pod-security|Pod Security]] Standards（Restricted）禁止以 root 运行、要求只读根文件系统。但某些旧版应用读取 Secret 文件时需要特定权限，导致安全策略与应用需求的冲突
 
 ## 相关
 
@@ -138,6 +150,6 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 
 - [[deployment]]
 - [[references/k8s-workloads-domain-guide|Kubernetes Workloads Domain Guide]] — Cross-reference
-- [[domain-17-system-foundation/03-kubernetes-events/13-security-admission-rbac-events|13 - 安全、准入控制与 RBAC 事件]] — Cross-reference
+- [[entities/kubernetes|kubernetes]]-events/13-security-admission-rbac-events|13 - 安全、准入控制与 RBAC 事件]] — Cross-reference
 - [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — Cross-reference
 - [[concepts/cloud-native-defense-in-depth|Cloud Native Defense in Depth]] — Cross-reference

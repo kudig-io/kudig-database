@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - backup-basics
+created: "2026-05-23"
 ---
 
 # domain-30-disaster-recovery-business-continuity MOC
@@ -55,16 +56,16 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]] |  | disaster-recovery, backup-restore |  |
-| 2 | [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]] |  | disaster-recovery, backup-restore |  |
-| 3 | [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]] |  | disaster-recovery, backup-restore |  |
-| 4 | [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]] |  | disaster-recovery, backup-restore |  |
-| 5 | [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]] |  | disaster-recovery, backup-restore |  |
-| 6 | [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]] |  | disaster-recovery, backup-restore |  |
-| 7 | [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]] |  | disaster-recovery, backup-restore |  |
-| 8 | [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]] |  | disaster-recovery, backup-restore |  |
-| 9 | [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]] |  | disaster-recovery, backup-restore |  |
-| 10 | [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]] |  | disaster-recovery, backup-restore, guide |  |
+| 1 | Domain-30 灾备与业务连续性 — 开源项目索引 |  | disaster-recovery, backup-restore |  |
+| 2 | VMware vSphere 企业级灾备与业务连续性 |  | disaster-recovery, backup-restore |  |
+| 3 | Veeam Backup & Replication 企业级备份恢复解决方案 |  | disaster-recovery, backup-restore |  |
+| 4 | 企业级容灾架构与混沌工程深度实践 |  | disaster-recovery, backup-restore |  |
+| 5 | Commvault 企业级灾备与业务连续性深度实践 |  | disaster-recovery, backup-restore |  |
+| 6 | Rubrik 企业级灾备与业务连续性深度实践 |  | disaster-recovery, backup-restore |  |
+| 7 | Kubernetes 备份与恢复深度实践 |  | disaster-recovery, backup-restore |  |
+| 8 | 混沌工程平台实践：LitmusChaos 与 Chaos Mesh |  | disaster-recovery, backup-restore |  |
+| 9 | 应用级灾备架构：多区域部署与故障转移 |  | disaster-recovery, backup-restore |  |
+| 10 | Velero 企业级备份恢复实践指南 |  | disaster-recovery, backup-restore, guide |  |
 
 ---
 
@@ -97,9 +98,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-30-disaster-recovery-business-continuity 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-30-disaster-recovery-business-continuity 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-30-disaster-recovery-business-continuity 相关故障树分析 |
+| Skills 技能 | domain-30-disaster-recovery-business-continuity 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 监控最佳实践
+title: Kubernetes 监控最佳实践 [observability]
 description: 生产环境 Kubernetes 监控配置的最佳实践指南
 category: best-practices/observability
 tags:
@@ -43,6 +43,7 @@ cross_refs:
 - type: domain
   path: ../../domain-06-observability/
   label: 企业监控知识域
+created: "2026-05-23"
 ---
 
 # Kubernetes 监控最佳实践

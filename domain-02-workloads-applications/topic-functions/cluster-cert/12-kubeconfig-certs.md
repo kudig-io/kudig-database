@@ -1,6 +1,41 @@
 ---
+title: kubeconfig 中的证书嵌入逻辑 (topic-code-analysis)
+description: 'description: ''| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig'
+category: general
+tags:
+- reference
+- configuration
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeconfig 中的证书嵌入逻辑 是什么
+- 如何 kubeconfig 中的证书嵌入逻辑
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeconfig
+- 中的证书嵌入逻辑
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: kubeconfig 中的证书嵌入逻辑
-description: '| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig 解析库 |'
+description: '| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig
+  解析库 |'
 category: functions
 tags:
 - k8s
@@ -36,15 +71,21 @@ trigger_keywords:
 - kubelet.conf
 - 证书嵌入
 - client-certificate-data
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/ca-generation
 - cluster-cert/cert-rotation
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeconfig 中的证书嵌入逻辑
@@ -394,7 +435,14 @@ kubeadm init phase kubeconfig admin --config kubeadm-config.yaml
 ## 相关函数
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成入口
-- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — kubeconfig 构建核心
+- [`buildKubeConfigFromSpec`](README.md) — kubeconfig 构建核心
 - [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 计算
 - [`kubeadm certs renew`](README.md) — 证书续期命令
 - [`X509 Authenticator`](08-rbac-mapping.md) — 证书身份提取
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

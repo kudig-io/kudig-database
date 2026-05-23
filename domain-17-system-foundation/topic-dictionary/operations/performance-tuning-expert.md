@@ -40,9 +40,10 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-# 03 - Kubernetes 性能调优专家指南
+# 03 - [[Kubernetes|Kubernetes]] 性能调优专家指南
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -59,8 +60,8 @@ prerequisites:
 - **专家**: 负责生产环境性能调优的SRE/运维工程师,需要深入掌握各层面性能优化技术和实战案例
 
 **前置知识要求**:
-- **基础**: Kubernetes架构(API Server、etcd、调度器)、Pod生命周期、资源请求与限制
-- **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系(Prometheus/Grafana)
+- **基础**: Kubernetes架构(API Server、[[etcd|etcd]]、调度器)、Pod生命周期、资源请求与限制
+- **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系([[Prometheus|Prometheus]]/Grafana)
 - **专家**: Linux内核调优、容器运行时原理、网络栈优化、应用性能分析
 
 **关联文件**:

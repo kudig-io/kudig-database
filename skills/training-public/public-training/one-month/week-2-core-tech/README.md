@@ -39,6 +39,7 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Week 2: 核心技术构建期 (Days 8-14)
@@ -108,8 +109,8 @@ related:
 ### 学习目标
 
 - 深入理解控制平面各组件（etcd、API Server、Scheduler、Controller Manager）的工作机制
-- 掌握所有主要工作负载类型（Deployment、StatefulSet、DaemonSet、Job、CronJob）及生产级配置模式
-- 掌握 K8s 网络栈的完整体系（CNI、Service、DNS、Ingress、NetworkPolicy）
+- 掌握所有主要工作负载类型（Deployment、StatefulSet、DaemonSet、Job、[[CronJob|CronJob]]）及生产级配置模式
+- 掌握 K8s 网络栈的完整体系（CNI、Service、DNS、Ingress、[[NetworkPolicy|NetworkPolicy]]）
 - 掌握存储体系的核心机制（PV/PVC、StorageClass、CSI）
 - **产出**: 生产级应用编排方案
 
@@ -149,9 +150,9 @@ API Server 性能调优参数：
 **Scheduler** 的工作分为两个阶段：
 
 - **Filter（过滤）**: 排除不满足 Pod 调度条件的节点。过滤条件包括：节点资源是否充足、节点是否有对应的标签（nodeSelector/nodeAffinity）、Pod 是否能容忍节点的污点（Taint/Toleration）、持久卷是否在节点所在可用区等
-- **Score（打分）**: 对通过过滤的节点进行打分排序。打分策略包括：资源均衡（优先选择资源充裕的节点）、镜像本地性（优先选择已有所需镜像的节点）、亲和性/反亲和性等
+- **[[Score|Score]]（打分）**: 对通过过滤的节点进行打分排序。打分策略包括：资源均衡（优先选择资源充裕的节点）、镜像本地性（优先选择已有所需镜像的节点）、亲和性/反亲和性等
 
-**Controller Manager** 运行着多种控制器。每个控制器遵循 Reconcile（调和）模式：通过 Watch/List 监听资源变化 → 对比期望状态与实际状态 → 执行操作使实际状态趋向期望状态。例如，Deployment Controller 监听 Deployment 的变化，当 Replicas 从 2 变为 4 时，创建两个新的 ReplicaSet。
+**Controller Manager** 运行着多种控制器。每个控制器遵循 Reconcile（调和）模式：通过 Watch/List 监听资源变化 → 对比期望状态与实际状态 → 执行操作使实际状态趋向期望状态。例如，Deployment Controller 监听 Deployment 的变化，当 Replicas 从 2 变为 4 时，创建两个新的 [[ReplicaSet|ReplicaSet]]。
 
 ### 工作负载类型与生产模式
 
@@ -389,20 +390,20 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

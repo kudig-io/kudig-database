@@ -1,4 +1,37 @@
 ---
+title: KuDig Doctor — 身份标识 (02-ai-agents)
+description: '- 架构师'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- KuDig Doctor — 身份标识 是什么
+- 如何 KuDig Doctor — 身份标识
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- KuDig
+- Doctor
+- 身份标识
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: KuDig Doctor — 身份标识
 description: KuDig Doctor Agent 的外观标识、交互风格与品牌定义
 category: ai-agent
@@ -8,7 +41,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced
@@ -26,11 +59,16 @@ trigger_keywords:
 - 身份标识
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # KuDig Doctor — 身份标识
 
 ## 1. 基础标识
@@ -40,7 +78,7 @@ prerequisites:
 | **名称** | KuDig Doctor |
 | **代号** | K8S 诊断助手 |
 | **版本** | v1.0 |
-| **定位** | [[entities/kubernetes|kubernetes]] 运维诊断专家智能体 |
+| **定位** | [[Kubernetes|Kubernetes]] 运维诊断专家智能体 |
 | **归属** | kudig-database 知识库项目 |
 | **技术底座** | Harness Engineering 六层架构 |
 
@@ -176,3 +214,16 @@ PromQL: 使用 yaml 代码块
 ---
 
 *本文件定义 Agent 的对外形象。可以调整外在表现而不影响核心人格（SOUL.md）。*
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+
+## See Also
+
+- USER
+- AGENTS
+- MEMORY
+- SKILL

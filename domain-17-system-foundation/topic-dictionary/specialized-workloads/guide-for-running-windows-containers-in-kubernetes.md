@@ -26,9 +26,10 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# 在 Kubernetes 中运行 Windows 容器指南
+# 在 [[Kubernetes|Kubernetes]] 中运行 Windows 容器指南
 
 ## 概述
 

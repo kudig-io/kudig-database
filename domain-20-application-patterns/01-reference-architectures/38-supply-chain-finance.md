@@ -31,6 +31,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 供应链金融架构设计
@@ -40,7 +41,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -90,7 +91,7 @@ k8s_versions:
 
 # 供应链金融架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#供应链金融` `#区块链` `#保理` `#阿里云`
 
 ---
@@ -562,7 +563,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -577,7 +578,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/36-carbon-esg-management.md|36-carbon-esg-management]]
-- [[domain-20-application-patterns/37-pet-economy.md|37-pet-economy]]
-- [[domain-20-application-patterns/39-smart-campus.md|39-smart-campus]]
-- [[domain-20-application-patterns/40-cloud-gaming.md|40-cloud-gaming]]
+- 36-carbon-esg-management
+- 37-pet-economy
+- 39-smart-campus
+- 40-cloud-gaming

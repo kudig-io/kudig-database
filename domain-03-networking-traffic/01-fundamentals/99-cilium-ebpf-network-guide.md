@@ -55,9 +55,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# Cilium eBPF 网络与安全实践指南
+# [[Cilium|Cilium]] eBPF 网络与安全实践指南
 
 > **适用版本**: Cilium v1.17.0  
 > **最后更新**: 2026-04-24  
@@ -350,22 +351,22 @@ encryption:
 
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain-15: 网络基础]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-15 网络基础 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|网络协议栈详解]]
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|TCP/UDP 协议深度解析]]
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|DNS 原理与配置]]
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|负载均衡技术]]
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|网络安全基础]]
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|SDN 与网络虚拟化]]
+- index.md|Domain-15 网络基础 — 开源项目索引]]
+- 网络协议栈详解
+- TCP/UDP 协议深度解析
+- DNS 原理与配置
+- 负载均衡技术
+- 网络安全基础
+- SDN 与网络虚拟化
 
 ## See Also
 
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|05-network-security-fundamentals]]
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|06-sdn-network-virtualization]]
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|01-network-protocols-stack]]
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|02-tcp-udp-deep-dive]]
+- 05-network-security-fundamentals
+- 06-sdn-network-virtualization
+- 01-network-protocols-stack
+- 02-tcp-udp-deep-dive
 
 ## Related
 

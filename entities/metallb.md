@@ -1,5 +1,5 @@
 ---
-title: MetalLB
+title: MetalLB (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # MetalLB
@@ -34,7 +35,7 @@ prerequisites:
 
 ## 概述
 
-MetalLB 是为裸金属 Kubernetes 集群提供的负载均衡器实现。在云环境中，Kubernetes LoadBalancer 类型的 Service 由云提供商自动配置。MetalLB 填补了裸金属环境的空白，通过 Layer 2 (ARP/NDP) 或 BGP 协议为 Service 分配和公告外部 IP 地址。
+MetalLB 是为裸金属 Kubernetes 集群提供的负载均衡器实现。在云环境中，Kubernetes LoadBalancer 类型的 [[Service|Service]] 由云提供商自动配置。MetalLB 填补了裸金属环境的空白，通过 Layer 2 (ARP/NDP) 或 BGP 协议为 Service 分配和公告外部 IP 地址。
 
 ## 核心能力
 
@@ -78,7 +79,7 @@ MetalLB 是为裸金属 Kubernetes 集群提供的负载均衡器实现。在云
 - [[athenz]] — Athenz
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/metallb/metallb.md|metallb]]
+- metallb
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

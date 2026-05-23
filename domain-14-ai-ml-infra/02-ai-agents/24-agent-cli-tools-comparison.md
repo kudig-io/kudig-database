@@ -1,5 +1,5 @@
 ---
-title: 主流 Agent CLI 工具全景对比
+title: 主流 Agent CLI 工具全景对比 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 选型对比专题 | **最后更新**: 2026-03 | **关键词**: Claude Code, Codex CLI,'
 category: general
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: 主流 Agent CLI 工具全景对比
@@ -458,7 +459,7 @@ Agent CLI 工具仍在快速迭代中，建议每季度重新评估一次选型�
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -473,7 +474,7 @@ Agent CLI 工具仍在快速迭代中，建议每季度重新评估一次选型�
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
+- 22-agentscope-production-deployment
+- 23-agent-cli-fundamentals
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow

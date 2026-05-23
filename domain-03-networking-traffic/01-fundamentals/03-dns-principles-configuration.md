@@ -48,6 +48,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # DNS 原理与配置
@@ -63,7 +64,7 @@ cross_refs:
 - [DNS 记录类型](#dns-记录类型)
 - [DNS 服务器配置](#dns-服务器配置)
 - [DNS 性能优化](#dns-性能优化)
-- [DNS 故障排查](#dns-故障排查)
+- DNS 故障排查](#dns-故障排查)
 
 ---
 
@@ -207,7 +208,7 @@ search example.com
 | 阿里 | 223.5.5.5, 223.6.6.6 | - |
 | 腾讯 | 119.29.29.29 | - |
 
-#<!-- chunk: CoreDNS 配置 -->## CoreDNS 配置
+#<!-- chunk: [[CoreDNS|CoreDNS]] 配置 -->## CoreDNS 配置
 
 ```
 # Corefile
@@ -1283,10 +1284,10 @@ done
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|01-network-protocols-stack]]
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|02-tcp-udp-deep-dive]]
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|04-load-balancing-technologies]]
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|05-network-security-fundamentals]]
+- 01-network-protocols-stack
+- 02-tcp-udp-deep-dive
+- 04-load-balancing-technologies
+- 05-network-security-fundamentals
 
 ## Related
 

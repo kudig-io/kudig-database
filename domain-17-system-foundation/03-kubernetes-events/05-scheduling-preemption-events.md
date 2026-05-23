@@ -42,11 +42,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 05 - 调度与抢占事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 kube-scheduler 和 node-controller 产生的所有调度与抢占相关事件,帮助运维人员快速定位和解决调度问题。**
 
@@ -140,7 +141,7 @@ authors:
 ##<!-- chunk: 事件含义 -->## 事件含义
 表示 Pod 已成功通过调度器的所有过滤和打分阶段,并被绑定到特定的节点上。这是 Pod 生命周期中最关键的事件之一,标志着 Pod 从 Pending 状态进入 Running 状态的转折点。调度器会记录调度决策的节点名称和调度耗时。
 
-此事件产生后,kubelet 将接管 Pod 的后续生命周期管理,包括镜像拉取、容器创建、健康检查等。调度成功并不代表 Pod 一定能成功运行,后续仍可能因镜像拉取失败、资源限制等问题导致启动失败。
+此事件产生后,[[kubelet|kubelet]] 将接管 Pod 的后续生命周期管理,包括镜像拉取、容器创建、健康检查等。调度成功并不代表 Pod 一定能成功运行,后续仍可能因镜像拉取失败、资源限制等问题导致启动失败。
 
 ##<!-- chunk: 典型事件消息 -->## 典型事件消息
 ```yaml
@@ -246,7 +247,7 @@ Message: 0/2 nodes are available: 2 node(s) didn't have free ports for the reque
 |:-------------|:--------|:--------|:--------|:--------|
 | `Insufficient cpu` | CPU 资源不足 | 资源不足 | 高频 | 中 |
 | `Insufficient memory` | 内存资源不足 | 资源不足 | 高频 | 中 |
-| `Insufficient pods` | 节点 Pod 数量超限 | 资源不足 | 中频 | 低 |
+| `Insufficient [[Pods|pods]]` | 节点 Pod 数量超限 | 资源不足 | 中频 | 低 |
 | `Insufficient ephemeral-storage` | 临时存储不足 | 资源不足 | 中频 | 中 |
 | `Insufficient nvidia.com/gpu` | GPU 资源不足 | 扩展资源不足 | 中频 | 高 |
 | `untolerated taint` | 节点污点不容忍 | 污点约束 | 高频 | 低 |
@@ -974,25 +975,25 @@ kubectl get nodes -o json | jq -r '.items[] |
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/03-image-pull-events.md|03-image-pull-events]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04-probe-health-check-events]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06-node-lifecycle-condition-events]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
+- 03-image-pull-events
+- 04-probe-health-check-events
+- 06-node-lifecycle-condition-events
+- 07-deployment-replicaset-events
 
 ## Related
 

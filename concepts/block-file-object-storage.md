@@ -29,6 +29,7 @@ trigger_keywords:
 - Storage
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Block, File, and Object Storage
@@ -62,7 +63,7 @@ File storage provides POSIX-compatible shared access:
 - **SMB/CIFS**: Windows file sharing, used in mixed environments
 - **CephFS**: Distributed POSIX filesystem on Ceph RADOS layer
 
-K8s uses `ReadWriteMany` access mode for file storage, enabling multiple Pods to share data.
+K8s uses `ReadWriteMany` access mode for file storage, enabling multiple [[Pods|Pods]] to share data.
 
 ## Object Storage
 
@@ -85,7 +86,7 @@ Common K8s use cases: backup archives, static assets, data lakes, ML training da
 
 ## K8s Storage Integration
 
-K8s CSI (Container Storage Interface) abstracts storage providers. Block storage: CSI drivers provision RWO volumes. File storage: CSI drivers provision RWX volumes (NFS, CephFS). Object storage: No native CSI; accessed via S3 SDK or s3fs/goofys mount.
+K8s CSI (Container Storage Interface) abstracts storage providers. Block storage: [[CSI Drivers|CSI drivers]] provision RWO volumes. File storage: CSI drivers provision RWX volumes (NFS, CephFS). Object storage: No native CSI; accessed via S3 SDK or s3fs/goofys mount.
 
 ## Related
 
@@ -97,4 +98,4 @@ K8s CSI (Container Storage Interface) abstracts storage providers. Block storage
 - [[concepts/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
 - Container Storage Interface
 
-- [[domain-04-storage-data/02-block-file-object-storage.md|02-block-file-object-storage]]
+- 02-block-file-object-storage

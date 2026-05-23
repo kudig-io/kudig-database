@@ -24,6 +24,10 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/deployment]]"
+    type: uses
 ---
 
 # 安全事件与可观测性的关联分析
@@ -68,5 +72,11 @@ Falco → Alertmanager → Loki (日志) + Prometheus (指标)
 
 ## 相关 Domain
 
-- [[domain-05-security-compliance/04-runtime-security/01-falco-deployment]]
-- [[domain-06-observability/03-logging/01-logging-collection-analysis]]
+- domain-05-security-compliance/04-runtime-security/01-falco-[[entities/deployment|deployment]]
+- domain-06-observability/03-logging/01-logging-collection-analysis
+## Related
+
+- [[entities/falco|Falco (entities)]]
+- [[domain-15-specialized-tech/03-edge-computing-production-deployment|03-边缘计算生产部署]]
+- [[entities/03-prometheus-ha-deployment|Prometheus 高可用部署 (entities)]]
+- [[log|Wiki Log]]

@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # CNCF 存储与数据库项目全景
@@ -78,7 +79,7 @@ Carina 是基于 LVM 的本地存储管理方案。
 
 ### [[piraeus-datastore]] — 沙箱项目
 
-Piraeus Datastore 在 K8s 上部署 LINSTOR SDS。
+[[Piraeus Datastore|Piraeus Datastore]] 在 K8s 上部署 LINSTOR SDS。
 
 ### [[cubefs]] — 毕业项目
 
@@ -154,7 +155,7 @@ Vineyard 是内存中数据共享中间件。
 
 Harbor 是企业级容器镜像仓库。
 
-- 镜像漏洞扫描（Trivy 集成）
+- 镜像漏洞扫描（[[Trivy|Trivy]] 集成）
 - 镜像签名和内容信任
 - RBAC 权限管理
 - 跨仓库复制
@@ -168,9 +169,9 @@ Zot 是 OCI 原生的容器镜像仓库（纯 OCI，无 Docker 特定依赖）�
 
 Distribution 是 OCI 分发规范参考实现（原 Docker Registry）。
 
-### [[domain-19-landscape-references/sandbox/oras/oras.md|oras]] — 沙箱项目
+### [[ORAS]] — 沙箱项目
 
-[[domain-19-landscape-references/sandbox/oras/oras.md|oras]]（OCI Registry As Storage）推送任意 OCI 制品到镜像仓库。
+oras（OCI Registry As Storage）推送任意 OCI 制品到镜像仓库。
 
 ---
 

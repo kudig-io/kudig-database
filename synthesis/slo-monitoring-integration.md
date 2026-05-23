@@ -27,6 +27,14 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[best-practices/observability/monitoring]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops]]"
+    type: related_to
 ---
 
 # SLO 与监控系统的深度集成
@@ -73,5 +81,8 @@ prerequisites:
 ## 相关 Domain
 
 - [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection]]
-- [[domain-06-observability/02-metrics/02-monitoring-metrics-system]]
-- [[domain-08-release-change-management/01-gitops/01-gitops-principles]]
+- [[domain-17-system-foundation/topic-dictionary/observability/observability|observability]]/02-metrics/02-[[best-practices/observability/monitoring|monitoring]]-metrics-system]]
+- domain-08-release-change-management/01-[[domain-17-system-foundation/topic-cheat-sheet/gitops|gitops]]/01-gitops-principles
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/git|Git 速查卡]]

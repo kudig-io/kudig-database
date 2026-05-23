@@ -56,16 +56,17 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
-# Falco 运行时安全监控深度实践
+# [[Falco|Falco]] 运行时安全监控深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
 > **Scenario**: Runtime security monitoring with Falco and Falco Sidekick | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
-Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 Kubernetes 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。
+Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[Kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。
 
 #<!-- chunk: 威胁模型分析 -->## 威胁模型分析
 
@@ -1003,24 +1004,24 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=10
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
 
 ## See Also
 
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|17-gvisor-container-sandbox]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|99-cert-manager-tls-guide]]
-- [[domain-05-security-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/99-kyverno-policy-guide.md|99-kyverno-policy-guide]]
+- 17-gvisor-container-sandbox
+- 99-cert-manager-tls-guide
+- 99-java-security-kubernetes-guide
+- 99-kyverno-policy-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]

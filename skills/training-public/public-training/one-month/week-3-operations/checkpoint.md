@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,7 +41,7 @@ title: Week 3 Checkpoint: 自测检验
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes Week 3 自测
+  - [[Kubernetes|kubernetes]] Week 3 自测
   - K8s 运维能力自测
   - 故障排查知识点检验
   - 安全监控自测题
@@ -50,7 +51,7 @@ trigger_keywords:
   - Week 3
   - 检验
   - RBAC
-  - Prometheus
+  - [[Prometheus|Prometheus]]
   - 故障排查
 reading_level: intermediate
 audience:

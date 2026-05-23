@@ -1,44 +1,15 @@
 ---
-title: Kubernetes 灾难恢复最佳实践
-description: 'title: Kubernetes 灾难恢复最佳实践'
-category: general
-tags:
-- general
-- etcd
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Kubernetes 灾难恢复最佳实践 是什么
-- 如何 Kubernetes 灾难恢复最佳实践
-- Kubernetes 11 production operations 最佳实践
-trigger_keywords:
-- Kubernetes
-- 灾难恢复最佳实践
-- production
-- operations
-- best
-- practices
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- etcd-basics
-- backup-basics
----
-
-title: Kubernetes 灾难恢复最佳实践
+title: Kubernetes 灾难恢复最佳实践 [operations]
 description: 生产环境 Kubernetes 灾难恢复配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/operations
+category: best-practices/operations
 tags:
 - kubernetes
 - disaster-recovery
 - backup
 - velero
 - business-continuity
+- etcd
+- rag
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,6 +27,10 @@ trigger_keywords:
 - 灾难恢复
 - 备份
 - Velero
+prerequisites:
+- kubectl-basics
+- etcd-basics
+- backup-basics
 cross_refs:
 - type: domain
   path: ../../domain-09-reliability-engineering/
@@ -66,16 +41,9 @@ cross_refs:
 - type: best-practice
   path: ./deployment.md
   label: 部署策略最佳实践
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+created: "2026-05-23"
 ---
+
 # Kubernetes 灾难恢复最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
@@ -626,10 +594,3 @@ kubectl get all -n production-restored
 ---
 
 **文档维护**：定期审查和更新，确保与Velero和Kubernetes版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/observability/tracing.md|tracing]]
-- [[domain-11-production-operations/topic-best-practices/operations/deployment.md|deployment]]
-- [[domain-11-production-operations/topic-best-practices/operations/scaling.md|scaling]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/ai-infra-ops.md|ai-infra-ops]]

@@ -1,5 +1,5 @@
 ---
-title: 云平台集成异常故障树分析
+title: 云平台集成异常故障树分析 (skills)
 description: '- **目标**：覆盖云平台 API 失败、负载均衡操作失败、云盘/存储集成异常、网络资源耗尽与配额限制的关键成因与路径。'
 category: skills
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-CLOUD_PROVIDER-001
 component: Cloud Provider
 severity: high
+created: "2026-05-23"
 ---
 
 # 云平台集成异常故障树分析
@@ -126,7 +127,7 @@ flowchart TD
 
 | 类别 | 关键信号 |
 |------|---------|
-| **事件** | Service type=LoadBalancer 的 `SyncLoadBalancerFailed` 事件、PVC `ProvisioningFailed` 事件、Node `RegisteredNode` 失败事件 |
+| **事件** | [[Service|Service]] type=LoadBalancer 的 `SyncLoadBalancerFailed` 事件、PVC `ProvisioningFailed` 事件、Node `RegisteredNode` 失败事件 |
 | **关键指标** | `cloudprovider_<provider>_api_request_duration_seconds`、`cloudprovider_<provider>_api_request_errors_total`、`kube_service_status_load_balancer_ingress`、`kube_persistentvolumeclaim_status_phase`、`kube_node_status_condition` |
 | **关键日志** | cloud-controller-manager 日志（API call errors / throttling）、CSI driver 日志（disk attach/detach）、kube-controller-manager 日志（node lifecycle）、云平台操作审计日志 |
 | **配置核对** | CCM 部署配置（--cloud-provider / cloud-config）、云凭证 Secret、Service annotations（LB 配置）、StorageClass paramete
@@ -134,7 +135,7 @@ flowchart TD
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 

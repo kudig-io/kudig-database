@@ -35,6 +35,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Flannel 知识图谱索引
@@ -43,23 +44,23 @@ prerequisites:
 
 ## 核心文档 (直接相关)
 
-- [[domain-03-networking-traffic/04-flannel-complete-guide|Flannel Complete Guide]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting|Flannel 网络故障排查]]
+- Flannel Complete Guide
+- networking/08-flannel-troubleshooting|Flannel 网络故障排查]]
 
 ### 进阶专题
 
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster|Flannel 多集群场景与子网冲突处理]]
-- [[domain-03-networking-traffic/04e-flannel-command-reference|flanneld 启动参数详解]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]]]
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
+- flanneld 启动参数详解
 
 ## 关联文档 (K8s 集成)
 
 ### 架构基础
 
-- [[domain-01-cluster-fundamentals/23-container-network-deep-dive|CNI 容器网络接口深度解析]]
-- [[domain-03-networking-traffic/01-kubernetes-network-model-deep-dive|Kubernetes 网络模型深度解析]]
+- CNI 容器网络接口深度解析
+- Kubernetes 网络模型深度解析
 
 ### 故障排查
 
@@ -75,11 +76,11 @@ prerequisites:
 
 ### CNI 生态
 
-- [[domain-19-landscape-references/incubating/cni/cni|CNI (Container Network Interface)]]
-- [[domain-19-landscape-references/sandbox/calico/calico|Calico 网络]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide|Cilium eBPF 网络与安全实践指南]]
+- [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md]]
+- Calico 网络
+- Cilium eBPF 网络与安全实践指南
 
 ### 培训学习
 
-- [[domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni|Day 25: Flannel CNI]]
-- [[domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-25-flannel/01-flannel-hands-on|Flannel Hands-on]]
+- Day 25: Flannel CNI
+- Flannel Hands-on

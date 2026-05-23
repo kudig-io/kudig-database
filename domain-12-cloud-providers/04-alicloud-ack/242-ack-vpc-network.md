@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - VPC 网络
@@ -53,7 +54,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - VPC 网络 是什么
 - 如何 ACK 关联产品 - VPC 网络
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品
@@ -95,7 +96,7 @@ k8s_versions:
 |:---|:---|:---|:---|
 | **VPC 网段** | `192.168.0.0/12` | 整个专有网络 | 后续不可修改，需预留充足空间 |
 | **Pod 网段** | `172.20.0.0/16` | 集群 Pod 使用 | 不能与 VPC/Service 网段冲突 |
-| **Service 网段** | `172.21.0.0/20` | 集群内部 Service | 必须是私网地址段 |
+| **[[Service|Service]] 网段** | `172.21.0.0/20` | 集群内部 Service | 必须是私网地址段 |
 
 ### IP 地址分配估算公式
 

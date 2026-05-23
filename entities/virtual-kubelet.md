@@ -1,5 +1,5 @@
 ---
-title: Virtual Kubelet
+title: Virtual Kubelet [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,9 +25,10 @@ trigger_keywords:
 - Kubelet
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Virtual Kubelet
+# Virtual [[kubelet|Kubelet]]
 
 > **CNCF 状态**: Sandbox | **类别**: Runtime | **主要语言**: Go
 
@@ -70,11 +71,11 @@ Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身
 ## Related
 
 - [[openfeature]] — OpenFeature
-- [[podman-container-tools]] — Podman Desktop
+- tools]] — [[Podman Desktop|Podman Desktop]]
 - [[k3s]] — k3s 轻量级 Kubernetes
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/virtual-kubelet/virtual-kubelet.md|virtual-kubelet]]
+- virtual-kubelet
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

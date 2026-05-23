@@ -1,5 +1,5 @@
 ---
-title: KEDA
+title: KEDA (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # KEDA
@@ -72,7 +73,7 @@ description: '## 项目概述'
 - [[cloudevents]] — CloudEvents
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-06-observability/99-keda-event-driven-autoscaling-guide.md|99-keda-event-driven-autoscaling-guide]]
-- [[domain-19-landscape-references/graduated/keda/keda.md|keda]]
-- [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
+- observability/99-keda-event-driven-autoscaling-guide.md|99-keda-event-driven-autoscaling-guide]]
+- keda
+- [[entities/cncf-orchestration|[[CNCF 编排与应用管理项目全景|CNCF 编排与应用管理项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

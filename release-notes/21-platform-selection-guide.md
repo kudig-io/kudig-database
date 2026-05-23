@@ -18,6 +18,7 @@ trigger_keywords:
 - 平台选型与立即开工指南
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 数字人视频制作 — 平台选型与立即开工指南

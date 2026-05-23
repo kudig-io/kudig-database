@@ -1,5 +1,5 @@
 ---
-title: kudig-database 内容深度评估报告
+title: kudig-database 内容深度评估报告 (reports)
 description: '# kudig-database 内容深度评估报告'
 category: general
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - helm-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 内容深度评估报告

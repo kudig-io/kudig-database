@@ -56,6 +56,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # LLM 隐私与安全
@@ -63,7 +64,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-LLM 应用面临独特的安全挑战,包括提示注入、数据泄露、模型窃取等威胁。本文档详细介绍 LLM 安全威胁分析、防御措施实现和 Kubernetes 环境下的安全加固方案。
+LLM 应用面临独特的安全挑战,包括提示注入、数据泄露、模型窃取等威胁。本文档详细介绍 LLM 安全威胁分析、防御措施实现和 [[Kubernetes|Kubernetes]] 环境下的安全加固方案。
 
 <!-- chunk: 安全威胁架构 -->
 ## 安全威胁架构
@@ -1262,22 +1263,22 @@ data:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/20-vector-database-rag.md|20-vector-database-rag]]
-- [[domain-14-ai-ml-infra/21-multimodal-models.md|21-multimodal-models]]
-- [[domain-14-ai-ml-infra/23-llm-cost-monitoring.md|23-llm-cost-monitoring]]
-- [[domain-14-ai-ml-infra/24-llm-model-versioning.md|24-llm-model-versioning]]
+- 20-vector-database-rag
+- 21-multimodal-models
+- 23-llm-cost-monitoring
+- 24-llm-model-versioning

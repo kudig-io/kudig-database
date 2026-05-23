@@ -31,6 +31,7 @@ trigger_keywords:
 - 安全护栏与生产部署
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # AI Agent 工程

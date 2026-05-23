@@ -54,11 +54,12 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
+created: "2026-05-23"
 ---
 
 # 09 - PV/PVC故障排查与解决方案
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **运维重点**: 故障诊断、问题解决、预防措施 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 故障诊断、问题解决、预防措施 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -1000,7 +1001,7 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$SNAPSHOT_
 <!-- chunk: 监控告警 -->
 ## 监控告警
 
-### Prometheus 监控规则
+### [[Prometheus|Prometheus]] 监控规则
 
 ```yaml
 # pv-pvc-monitoring-rules.yaml
@@ -1800,7 +1801,7 @@ main
 **参考资料**:
 - [Kubernetes 持久化存储](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [CSI 规范](https://github.com/container-storage-interface/spec)
-- [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
+- Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 
 ---
 
@@ -1811,28 +1812,28 @@ main
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05 - CSI驱动集成与运维管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10 - 存储备份与灾难恢复]]
+- domain-04-storage-data KUDIG Database — Global MOC
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- Domain-6 存储 — 开源项目索引
+- 存储架构概览与核心组件
+- PV/PVC 核心概念与企业级实践
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 05 - CSI驱动集成与运维管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 10 - 存储备份与灾难恢复
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-04-storage-data/07-storage-daily-operations.md|07-storage-daily-operations]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08-storage-performance-tuning]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10-storage-backup-disaster-recovery]]
-- [[domain-04-storage-data/11-storage-advanced-features.md|11-storage-advanced-features]]
+- 07-storage-daily-operations
+- 08-storage-performance-tuning
+- 10-storage-backup-disaster-recovery
+- 11-storage-advanced-features
 
 ## Related
 

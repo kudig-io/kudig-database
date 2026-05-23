@@ -1,6 +1,43 @@
 ---
+title: API Server 证书相关启动参数汇总 (topic-code-analysis)
+description: 'description: ''| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- rbac
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- API Server 证书相关启动参数汇总 是什么
+- 如何 API Server 证书相关启动参数汇总
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- API
+- Server
+- 证书相关启动参数汇总
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: API Server 证书相关启动参数汇总
-description: '| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go` | TLS 证书和密码套件 |'
+description: '| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`
+  | TLS 证书和密码套件 |'
 category: functions
 tags:
 - k8s
@@ -37,10 +74,6 @@ trigger_keywords:
 - requestheader-client-ca-file
 - 多 CA 信任链
 - TLS 配置
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 related_topics:
@@ -48,6 +81,15 @@ related_topics:
 - cluster-cert/apiserver-cert
 - cluster-cert/rbac-mapping
 - cluster-cert/openssl-cookbook
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # API Server 证书相关启动参数汇总
@@ -251,7 +293,7 @@ check_file() {
         echo "[MISSING] $flag not set"
     elif [ -f "$path" ]; then
         echo "[OK] $flag -> $path"
-        if [[ "$path" == *.crt ]]; then
+        if "$path" == *.crt; then
             expiry=$(openssl x509 -in "$path" -noout -enddate 2>/dev/null | cut -d= -f2)
             echo "       Expires: $expiry"
         fi
@@ -418,3 +460,11 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 - [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 计算
 - [`buildKubeConfigFromSpec`](12-kubeconfig-certs.md) — kubeconfig 证书嵌入
 - [`kubeadm init phase certs apiserver`](02-ca-generation.md) — API Server 证书生成
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]

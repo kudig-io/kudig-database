@@ -1,5 +1,5 @@
 ---
-title: nginx-ingress-controller 异常故障树分析
+title: nginx-ingress-controller 异常故障树分析 (skills)
 description: '### 故障排查命令速查'
 category: skills
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-NGINX_INGRESS-001
 component: Nginx Ingress
 severity: high
+created: "2026-05-23"
 ---
 
 # [[nginx-ingress-fta|nginx-ingress-controller 异常故障树分析]]
@@ -80,13 +81,13 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- networking.md|网络故障排查]]
 
 ## Related
 
 - [[skills/ts-node-components.md|ts-node-components]] — 节点组件故障排查
-- [[apiserver-fta]] — [[apiserver-fta|API Server 异常故障树分析]]
+- [[apiserver-fta]] — [[apiserver-fta|[[API Server 异常故障树分析|API Server 异常故障树分析]]]]
 - [[scheduler-fta]] — Scheduler 异常故障树分析
 - [[skills/assessment-k8s-fundamentals-quiz-answers.md|assessment-k8s-fundamentals-quiz-answers]] — K8S Fundamentals Quiz Answers
 - [[prometheus]] — Prometheus

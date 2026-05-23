@@ -1,4 +1,48 @@
 ---
+title: 02 - 单节点部署 (Single Node All-in-One) [deployment]
+description: 'title: 02 - 单节点部署 (Single Node All-in-One)'
+category: general
+tags:
+- deployment
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- flannel
+- calico
+- coredns
+- helm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 单节点部署 (Single Node All-in-One) 是什么
+- 如何 单节点部署 (Single Node All-in-One)
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 单节点部署
+- Single
+- Node
+- All-in-One
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- helm-basics
+- ebpf-basics
+- cni-basics
+- etcd-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
 title: 02 - 单节点部署 (Single Node All-in-One)
 description: '# 02 - 单节点部署 (Single Node All-in-One)'
 category: deployment
@@ -6,9 +50,9 @@ tags:
 - k8s
 - deployment
 - rolling-update
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - flannel
@@ -29,14 +73,15 @@ trigger_keywords:
 - Node
 - All-in-One
 - deployment
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- helm-basics
-- ebpf-basics
-- cni-basics
-- etcd-basics
-- mysql-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 02 - 单节点部署 (Single Node All-in-One)
@@ -46,9 +91,9 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
-单节点部署将 [[entities/kubernetes|kubernetes]] 控制平面和工作节点合并在一台物理机或虚拟机上运行。与 kind/minikube 不同，本方案**直接在操作系统上部署真实的 K8s 组件**，更接近生产环境的体验。
+单节点部署将 Kubernetes 控制平面和工作节点合并在一台物理机或虚拟机上运行。与 kind/minikube 不同，本方案**直接在操作系统上部署真实的 K8s 组件**，更接近生产环境的体验。
 
 **本文你将学会**:
 - 完整的 Linux 系统准备（内核参数、防火墙、SELinux 等）
@@ -67,9 +112,9 @@ prerequisites:
 
 ---
 
-## 前置条件
+<!-- chunk: 前置条件 -->## 前置条件
 
-### 操作系统支持
+#<!-- chunk: 操作系统支持 -->## 操作系统支持
 
 | 发行版 | 版本 | 说明 |
 |--------|------|------|
@@ -79,7 +124,7 @@ prerequisites:
 | **Debian** | 11 / 12 | 稳定可靠 |
 | **Rocky Linux** | 8.x / 9.x | CentOS 替代品 |
 
-### 硬件要求
+#<!-- chunk: 硬件要求 -->## 硬件要求
 
 | 方案 | CPU (最低/推荐) | 内存 (最低/推荐) | 磁盘 (最低/推荐) | 网络 |
 |------|----------------|-----------------|-----------------|------|
@@ -89,11 +134,11 @@ prerequisites:
 
 ---
 
-## 通用系统准备 (所有方案必做)
+<!-- chunk: 通用系统准备 (所有方案必做) -->## 通用系统准备 (所有方案必做)
 
 > **重要**: 以下步骤适用于所有方案 (k3s / kubeadm / MicroK8s)，请务必完成。
 
-### 1. 设置主机名
+#<!-- chunk: 1. 设置主机名 -->## 1. 设置主机名
 
 ```bash
 # 设置有意义的主机名
@@ -109,7 +154,7 @@ ping -c 1 $(hostname)
 # 预期: 能 ping 通
 ```
 
-### 2. 关闭 Swap
+#<!-- chunk: 2. 关闭 Swap -->## 2. 关闭 Swap
 
 > **为什么要关闭 Swap？** kubelet 默认要求关闭 swap，因为 swap 会导致 Pod 的内存限制失效，影响调度器的决策准确性。
 
@@ -127,7 +172,7 @@ free -h | grep Swap
 # 如果 Swap total 不是 0，说明没关成功
 ```
 
-### 3. 关闭防火墙 (开发/测试环境)
+#<!-- chunk: 3. 关闭防火墙 (开发/测试环境) -->## 3. 关闭防火墙 (开发/测试环境)
 
 > **备注**: 生产环境不建议关闭防火墙，而是配置允许规则。这里为了简化操作先关闭。
 
@@ -159,7 +204,7 @@ sudo systemctl status firewalld
 # sudo firewall-cmd --reload
 ```
 
-### 4. 关闭 SELinux (CentOS/RHEL)
+#<!-- chunk: 4. 关闭 SELinux (CentOS/RHEL) -->## 4. 关闭 SELinux (CentOS/RHEL)
 
 > **为什么？** SELinux 的严格模式会阻止 kubelet 和容器的某些操作。可以设为 permissive (只记录不阻止)。
 
@@ -179,7 +224,7 @@ getenforce
 # 预期输出: Permissive
 ```
 
-### 5. 加载内核模块
+#<!-- chunk: 5. 加载内核模块 -->## 5. 加载内核模块
 
 > **为什么需要这些模块？**  
 > - `overlay`: 容器文件系统 (OverlayFS) 需要  
@@ -203,7 +248,7 @@ lsmod | grep -E "overlay|br_netfilter"
 # overlay                xxxxx  0
 ```
 
-### 6. 配置内核网络参数
+#<!-- chunk: 6. 配置内核网络参数 -->## 6. 配置内核网络参数
 
 > **为什么需要这些参数？**  
 > - `bridge-nf-call-iptables`: 确保 Pod 间的桥接流量能被 iptables/netfilter 处理  
@@ -226,7 +271,7 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 # 预期输出: 三个值都是 1
 ```
 
-### 7. 时间同步
+#<!-- chunk: 7. 时间同步 -->## 7. 时间同步
 
 > **为什么重要？** 证书验证、日志时间戳、etcd 一致性都依赖准确的时间。
 
@@ -248,13 +293,13 @@ timedatectl
 
 ---
 
-## 方案 A: k3s 单节点部署 (推荐)
+<!-- chunk: 方案 A: k3s 单节点部署 (推荐) -->## 方案 A: k3s 单节点部署 (推荐)
 
 > **k3s** 是 Rancher (SUSE) 推出的轻量级 Kubernetes 发行版，CNCF 认证。  
 > **特点**: 单个二进制文件 (~60MB)，内置 Traefik Ingress、CoreDNS、本地存储、ServiceLB。  
 > **最适合**: 个人开发、边缘计算、IoT、资源受限场景。
 
-### A1. 在线安装
+#<!-- chunk: A1. 在线安装 -->## A1. 在线安装
 
 ```bash
 # ===== 最简安装 (一条命令) =====
@@ -280,7 +325,7 @@ sudo k3s kubectl get nodes
 # k8s-single-node   Ready    control-plane,master   1m    v1.28.x+k3s1
 ```
 
-### A2. 配置 kubectl (免 sudo)
+#<!-- chunk: A2. 配置 kubectl (免 sudo) -->## A2. 配置 kubectl (免 sudo)
 
 ```bash
 # 复制 kubeconfig 到用户目录
@@ -308,7 +353,7 @@ kubectl get pods -A
 # kube-system   traefik-xxx                               1/1     Running   0          2m  ← Ingress Controller
 ```
 
-### A3. 自定义安装选项
+#<!-- chunk: A3. 自定义安装选项 -->## A3. 自定义安装选项
 
 ```bash
 # ===== 常用安装参数 =====
@@ -333,7 +378,7 @@ curl -sfL https://get.k3s.io | sh -s - \
   --datastore-endpoint="mysql://user:pass@tcp(db-host:3306)/k3s"
 ```
 
-### A4. k3s 配置文件方式 (推荐)
+#<!-- chunk: A4. k3s 配置文件方式 (推荐) -->## A4. k3s 配置文件方式 (推荐)
 
 > **备注**: 对于复杂配置，使用配置文件比命令行参数更清晰、易维护。
 
@@ -379,7 +424,7 @@ sudo systemctl restart k3s
 sudo k3s check-config
 ```
 
-### A5. k3s 离线安装
+#<!-- chunk: A5. k3s 离线安装 -->## A5. k3s 离线安装
 
 > **场景**: 服务器没有互联网访问，需要提前下载安装包。
 
@@ -413,7 +458,7 @@ INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
 sudo k3s kubectl get nodes
 ```
 
-### A6. k3s 管理命令
+#<!-- chunk: A6. k3s 管理命令 -->## A6. k3s 管理命令
 
 ```bash
 # 查看服务状态
@@ -444,13 +489,13 @@ ps aux | grep k3s  # 查看运行时参数
 
 ---
 
-## 方案 B: kubeadm 单节点部署
+<!-- chunk: 方案 B: kubeadm 单节点部署 -->## 方案 B: kubeadm 单节点部署
 
 > **kubeadm** 是 Kubernetes 官方提供的集群初始化工具。  
 > **特点**: 完全标准的 K8s，与生产环境一致的组件架构，但需要手动安装更多组件。  
 > **最适合**: 想深入理解 K8s 架构、准备向多节点/生产环境过渡的场景。
 
-### B1. 安装容器运行时 (containerd)
+#<!-- chunk: B1. 安装容器运行时 (containerd) -->## B1. 安装容器运行时 (containerd)
 
 > **为什么选 containerd？** 从 K8s 1.24 开始，Docker 不再直接支持作为运行时。containerd 是目前最主流的选择，轻量且稳定。
 
@@ -504,7 +549,7 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
 
-### B2. 安装 kubeadm、kubelet、kubectl
+#<!-- chunk: B2. 安装 kubeadm、kubelet、kubectl -->## B2. 安装 kubeadm、kubelet、kubectl
 
 **Ubuntu/Debian**:
 ```bash
@@ -554,7 +599,7 @@ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 sudo systemctl enable kubelet
 ```
 
-### B3. 初始化集群
+#<!-- chunk: B3. 初始化集群 -->## B3. 初始化集群
 
 ```bash
 # ===== 预检查 (可选但推荐) =====
@@ -601,7 +646,7 @@ kubectl get nodes
 # 备注: NotReady 是正常的! 安装 CNI 后会变为 Ready
 ```
 
-### B4. 允许 Master 节点调度 Pod
+#<!-- chunk: B4. 允许 Master 节点调度 Pod -->## B4. 允许 Master 节点调度 Pod
 
 > **为什么？** 默认情况下，K8s 不允许在控制平面节点上运行用户 Pod (有 taint)。单节点模式必须移除这个限制。
 
@@ -616,7 +661,7 @@ kubectl describe node | grep -A 3 Taints
 # 预期输出: Taints: <none>
 ```
 
-### B5. 安装 CNI 网络插件
+#<!-- chunk: B5. 安装 CNI 网络插件 -->## B5. 安装 CNI 网络插件
 
 > **CNI (Container Network Interface)** 负责为 Pod 分配 IP、实现 Pod 间通信。没有 CNI，Pod 无法联网。
 
@@ -652,7 +697,7 @@ kubectl get nodes
 
 ---
 
-## 方案 C: MicroK8s 单节点部署
+<!-- chunk: 方案 C: MicroK8s 单节点部署 -->## 方案 C: MicroK8s 单节点部署
 
 > **MicroK8s** 是 Canonical (Ubuntu 母公司) 推出的轻量 K8s 发行版，通过 snap 包管理。  
 > **最适合**: Ubuntu 系统用户、想要插件化管理的场景。
@@ -701,11 +746,11 @@ microk8s dashboard-proxy
 
 ---
 
-## 部署后基础配置 (kubeadm 方案适用)
+<!-- chunk: 部署后基础配置 (kubeadm 方案适用) -->## 部署后基础配置 (kubeadm 方案适用)
 
 > **备注**: k3s 已内置以下大部分组件，MicroK8s 通过插件管理。kubeadm 需要手动安装。
 
-### 安装 metrics-server
+#<!-- chunk: 安装 metrics-server -->## 安装 metrics-server
 
 > **作用**: 提供节点和 Pod 的 CPU/内存指标，是 `kubectl top` 和 HPA 的数据来源。
 
@@ -730,7 +775,7 @@ kubectl top pods -A
 # 预期: 显示所有 Pod 的 CPU/内存使用
 ```
 
-### 安装本地存储 (StorageClass)
+#<!-- chunk: 安装本地存储 (StorageClass) -->## 安装本地存储 (StorageClass)
 
 > **作用**: 提供 PVC 动态供给能力，应用可以声明存储需求并自动创建 PV。
 
@@ -767,7 +812,7 @@ kubectl get pvc test-pvc
 kubectl delete pvc test-pvc
 ```
 
-### 安装 Ingress Controller
+#<!-- chunk: 安装 Ingress Controller -->## 安装 Ingress Controller
 
 ```bash
 # 安装 Nginx Ingress Controller (裸金属版本)
@@ -786,7 +831,7 @@ kubectl get svc -n ingress-nginx
 
 ---
 
-## 方案对比
+<!-- chunk: 方案对比 -->## 方案对比
 
 | 特性 | k3s | kubeadm | MicroK8s |
 |------|-----|---------|----------|
@@ -809,7 +854,7 @@ kubectl get svc -n ingress-nginx
 
 ---
 
-## 单节点性能调优
+<!-- chunk: 单节点性能调优 -->## 单节点性能调优
 
 ```bash
 # ===== 1. 系统级优化 =====
@@ -848,7 +893,7 @@ sudo sysctl --system
 
 ---
 
-## 单节点备份策略
+<!-- chunk: 单节点备份策略 -->## 单节点备份策略
 
 ```bash
 # ===== k3s 备份 =====
@@ -878,7 +923,7 @@ ETCDCTL_API=3 sudo etcdctl snapshot status /backup/etcd-$(date +%Y%m%d).db --wri
 
 ---
 
-## 验收清单
+<!-- chunk: 验收清单 -->## 验收清单
 
 - [ ] 系统准备完成 (swap关闭、内核模块加载、网络参数设置、时间同步)
 - [ ] 集群成功部署，节点为 Ready 状态
@@ -891,9 +936,9 @@ ETCDCTL_API=3 sudo etcdctl snapshot status /backup/etcd-$(date +%Y%m%d).db --wri
 
 ---
 
-## 常见问题 (FAQ)
+<!-- chunk: 常见问题 (FAQ) -->## 常见问题 (FAQ)
 
-### Q1: kubeadm init 报错 "container runtime is not running"
+#<!-- chunk: Q1: kubeadm init 报错 "container runtime is not running" -->## Q1: kubeadm init 报错 "container runtime is not running"
 
 ```bash
 # containerd 配置问题，检查并修复
@@ -905,7 +950,7 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 sudo systemctl restart containerd
 ```
 
-### Q2: 节点一直 NotReady
+#<!-- chunk: Q2: 节点一直 NotReady -->## Q2: 节点一直 NotReady
 
 ```bash
 # 通常是 CNI 未安装或安装失败
@@ -915,7 +960,7 @@ sudo journalctl -u kubelet -n 50 --no-pager  # 查看 kubelet 日志
 # 常见原因: CNI 未安装 → 安装 Flannel 或 Calico
 ```
 
-### Q3: k3s 安装后 kubectl 报权限错误
+#<!-- chunk: Q3: k3s 安装后 kubectl 报权限错误 -->## Q3: k3s 安装后 kubectl 报权限错误
 
 ```bash
 # k3s 的 kubeconfig 默认只有 root 可读
@@ -923,14 +968,14 @@ sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 # 或复制到用户目录 (参考 A2 步骤)
 ```
 
-### Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint"
+#<!-- chunk: Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint" -->## Q4: Pod 一直 Pending，提示 "1 node(s) had untolerated taint"
 
 ```bash
 # kubeadm 单节点忘记移除 taint
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 ```
 
-### Q5: 镜像拉取失败 (国内网络)
+#<!-- chunk: Q5: 镜像拉取失败 (国内网络) -->## Q5: 镜像拉取失败 (国内网络)
 
 ```bash
 # k3s: 使用 /etc/rancher/k3s/registries.yaml 配置镜像代理
@@ -950,7 +995,7 @@ sudo systemctl restart k3s
 
 ---
 
-## 清理/卸载
+<!-- chunk: 清理/卸载 -->## 清理/卸载
 
 ```bash
 # ===== k3s 卸载 =====
@@ -984,3 +1029,21 @@ sudo snap remove microk8s
 ---
 
 **来源文档**: `domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md`
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-deployment MOC
+- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+
+## Related
+
+- [[README.md|README]]
+- [[MOC.md|MOC]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

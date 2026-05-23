@@ -20,6 +20,7 @@ trigger_keywords:
 - 混沌工程与灾备演练的结合
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 混沌工程与灾备演练的结合

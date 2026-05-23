@@ -57,9 +57,10 @@ related_docs:
   desc: Service 概念与类型
 - path: ../domain-10-troubleshooting-diagnostics/
   desc: 故障排查专题
+created: "2026-05-23"
 ---
 
-# Kubernetes 生产环境速查卡
+# [[Kubernetes|Kubernetes]] 生产环境速查卡
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-05
 > **目标**: 涵盖生产环境 90% 以上常用命令，支持快速查阅和故障排查
@@ -72,8 +73,8 @@ related_docs:
 - [集群信息与版本](#集群信息与版本)
 - [资源查询与筛选](#资源查询与筛选)
 - [Pod 操作](#pod-操作)
-- [Deployment 管理](#deployment-管理)
-- [Service 与网络](#service-与网络)
+- Deployment 管理](#deployment-管理)
+- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] 与网络](#service-与网络)
 - [ConfigMap & Secret](#configmap--secret)
 - [存储管理](#存储管理)
 - [调度与亲和性](#调度与亲和性)
@@ -81,7 +82,7 @@ related_docs:
 - [故障排查](#故障排查)
 - [资源监控](#资源监控)
 - [高级操作](#高级操作)
-- [etcd 操作](#etcd-操作)
+- [[entities/etcd.md|etcd]] 操作](#etcd-操作)
 - [API Server 管理](#api-server-管理)
 - [集群维护](#集群维护)
 

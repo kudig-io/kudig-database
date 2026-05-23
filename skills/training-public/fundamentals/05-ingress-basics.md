@@ -1,5 +1,5 @@
 ---
-title: 第五课：Ingress - 外部 HTTP/HTTPS 访问
+title: 第五课：Ingress - 外部 HTTP/HTTPS 访问 [fundamentals]
 description: 'description: 2. 掌握 Ingress 的配置方法'
 category: learning
 tags:
@@ -34,10 +34,11 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 第五课：Ingress - 外部 HTTP/HTTPS 访问
+title: 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 description: 2. 掌握 Ingress 的配置方法
 category: learning
 tags:
@@ -47,8 +48,8 @@ tags:
 - k8s
 - training
 - lecturer
-- istio
-- helm
+- [[Istio|istio]]
+- [[Helm|helm]]
 - ingress
 - gateway
 aliases:
@@ -431,12 +432,12 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../05-configuration/05-configmap-secret.md) — 配置管理
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 [[SKILL|Skill]]
 - [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — Kubernetes 网络文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/03-deployment-basics.md|03-deployment-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/04-service-basics.md|04-service-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/06-configmap-secret.md|06-configmap-secret]]
-- [[domain-11-production-operations/topic-learn/fundamentals/07-namespace-resource-quota.md|07-namespace-resource-quota]]
+- 03-deployment-basics
+- 04-service-basics
+- 06-configmap-secret
+- 07-namespace-resource-quota

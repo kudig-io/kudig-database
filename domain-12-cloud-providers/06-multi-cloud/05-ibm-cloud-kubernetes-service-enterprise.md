@@ -57,15 +57,16 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+# IBM Cloud Kubernetes Servicenetes]] [[Service|Service]] (IKS) 企业级深度实践
 
 <!-- chunk: 概述 -->## 概述
 
 IBM Cloud Kubernetes Service (IKS) 是 IBM Cloud 握供的托管 Kubernetes 服务，结合了 IBM 在企业级计算领域的深厚积累与 Red Hat OpenShift 的开源生态优势。IKS 深度集成 IBM Watson AI 服务、Cloud Pak 数据平台和 Satellite 混合云架构，为金融、医疗、制造等受监管行业提供合规、安全的容器化平台。IBM 在 2024 年完成对 HashiCorp 的收购后，进一步强化了多云基础设施管理能力。
 
-在多云架构中，IKS 通过 IBM Cloud Satellite 实现跨本地数据中心和其他云平台的统一管理，通过 Red Hat OpenShift 提供一致的开发者体验。IKS 的 VPC Gen2 基础设施基于 IBM 自研的网络虚拟化技术，提供高性能的软件定义网络。Key Protect 和 Secrets Manager 提供 FIPS 140-2 Level 3 密钥管理，Security and Compliance Center 提供持续合规监控和自动修复能力，满足金融和医疗等高合规行业的严格要求。
+在多云架构中，IKS 通过 IBM Cloud Satellite 实现跨本地数据中心和其他云平台的统一管理，通过 Red Hat OpenShift 提供一致的开发者体验。IKS 的 VPC Gen2 基础设施基于 IBM 自研的网络虚拟化技术，提供高性能的软件定义网络。Key Protect 和 [[Secrets|Secrets]] Manager 提供 FIPS 140-2 Level 3 密钥管理，Security and Compliance Center 提供持续合规监控和自动修复能力，满足金融和医疗等高合规行业的严格要求。
 
 本文档从生产环境运维专家角度，深入探讨 IKS 的企业级部署架构、Watson AI 服务集成、Satellite 混合云和运维管理最佳实践。内容涵盖完整的 VPC 网络配置、存储类定义、安全策略、监控告警规则和运维自动化脚本，为企业构建基于 IBM Cloud 的生产级 Kubernetes 平台提供全面参考。
 
@@ -80,7 +81,7 @@ IBM Cloud Kubernetes Service (IKS) 是 IBM Cloud 握供的托管 Kubernetes 服�
 | Security and Compliance Center | 持续合规监控和自动修复 | 监管合规 |
 | VPC Gen2 基础设施 | 第二代虚拟私有云，SR-IOV 网络加速 | 高性能计算 |
 | Red Hat OpenShift | 企业级 Kubernetes 发行版，含开发者工具链 | 企业 DevOps |
-| Code Engine | 基于 Knative 的 Serverless 容器运行时 | 事件驱动、突发工作负载 |
+| Code Engine | 基于 [[Knative|Knative]] 的 Serverless 容器运行时 | 事件驱动、突发工作负载 |
 
 <!-- chunk: 架构设计 -->## 架构设计
 
@@ -486,7 +487,7 @@ echo "[5] 等待集群就绪..."
 while true; do
     STATE=$(ibmcloud ks cluster get --cluster $CLUSTER_NAME --output json | jq -r '.state')
     echo "集群状态: $STATE"
-    if [[ "$STATE" == "normal" ]]; then
+    if "$STATE" == "normal"; then
         break
     fi
     sleep 60
@@ -1309,7 +1310,7 @@ echo "[2] 等待位置就绪"
 while true; do
     STATE=$(ibmcloud sat location get --location $LOCATION_NAME --output json | jq -r '.state')
     echo "位置状态: $STATE"
-    if [[ "$STATE" == "actionRequired" ]]; then
+    if "$STATE" == "actionRequired"; then
         break
     fi
     sleep 30
@@ -1482,22 +1483,22 @@ echo "=== 故障排查完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|03-enterprise-multicloud-governance]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|04-google-gke-enterprise-multicloud]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|06-alibaba-ack-enterprise-hybrid]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|07-huawei-cce-enterprise]]
+- 03-enterprise-multicloud-governance
+- 04-google-gke-enterprise-multicloud
+- 06-alibaba-ack-enterprise-hybrid
+- 07-huawei-cce-enterprise

@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Escalation Template
@@ -81,8 +82,8 @@ prerequisites:
 
 ## Related
 
-- [[references/k8s-structured-troubleshooting.md|k8s-structured-troubleshooting]] — 结构化排障方法论：配置优先、全组件排障指南
-- [[kudig-prompts-catalog]] — KUDIG Prompts Catalog
-- [[skills/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]] — FTA Methodology and Core Principles
+- troubleshooting.md|k8s-structured-troubleshooting]] — 结构化排障方法论：配置优先、全组件排障指南
+- [[kudig-prompts-catalog]] — [[KUDIG Prompts Catalog|KUDIG Prompts Catalog]]
+- [[skills/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

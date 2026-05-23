@@ -1,5 +1,5 @@
 ---
-title: 第七课：Namespace 与资源隔离
+title: 第七课：Namespace 与资源隔离 [06-configuration]
 description: 2. 掌握 Namespace 的创建和管理
 category: k8s-lecturer
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 第七课：Namespace 与资源隔离
@@ -296,7 +297,7 @@ clusters/
     └── limit-range.yaml
 ```
 
-### 5.2 NetworkPolicy 隔离
+### 5.2 [[NetworkPolicy|NetworkPolicy]] 隔离
 
 ```
 【场景】

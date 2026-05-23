@@ -1,5 +1,5 @@
 ---
-title: CloudNativePG
+title: CloudNativePG (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # CloudNativePG
@@ -75,13 +76,13 @@ CloudNativePG 是 Kubernetes 上的 PostgreSQL Operator，提供完整的数据�
 ## Related
 
 - [[bootc]] — bootc
-- [[serverless-workflow]] — Serverless Workflow
+- [[serverless-workflow]] — [[Serverless Workflow|Serverless Workflow]]
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|99-cloudnativepg-enterprise-guide]]
-- [[domain-19-landscape-references/sandbox/cloudnativepg/cloudnativepg.md|cloudnativepg]]
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
+- 99-cloudnativepg-enterprise-guide
+- cloudnativepg
+- storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -37,6 +37,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -48,7 +49,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.32.12](#changelog-since-v13212)
+  - Changelog since v1.32.12](#changelog-since-v13212)
   - [Changes by Kind](#changes-by-kind)
     - [Feature](#feature)
   - [Dependencies](#dependencies)
@@ -158,7 +159,7 @@ prerequisites:
     - [Container Images](#container-images-7)
   - [Changelog since v1.32.5](#changelog-since-v1325)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2025-4563: Nodes can bypass dynamic resource allocation authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
+    - [CVE-2025-4563: Nodes can bypass [[Dynamic Resource Allocation|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
   - [Changes by Kind](#changes-by-kind-7)
     - [Feature](#feature-6)
     - [Bug or Regression](#bug-or-regression-6)
@@ -220,7 +221,7 @@ prerequisites:
     - [Container Images](#container-images-11)
   - [Changelog since v1.32.1](#changelog-since-v1321)
   - [Important Security Information](#important-security-information-2)
-    - [CVE-2025-0426: Node Denial of Service via Kubelet Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
+    - [CVE-2025-0426: Node Denial of [[Service|Service]] via Kubelet Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
   - [Changes by Kind](#changes-by-kind-11)
     - [Feature](#feature-8)
     - [Bug or Regression](#bug-or-regression-10)

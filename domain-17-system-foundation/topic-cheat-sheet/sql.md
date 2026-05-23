@@ -35,11 +35,12 @@ related_docs:
   desc: 数据库与中间件专题
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
+created: "2026-05-23"
 ---
 
 # SQL 速查表
 
-> 关系型数据库查询与运维快速参考 | MySQL 8.0 / [[entities/postgresql|postgresql]] 14 / SQLite 3 | **最后更新**: 2026-05
+> 关系型数据库查询与运维快速参考 | MySQL 8.0 / postgresql 14 / SQLite 3 | **最后更新**: 2026-05
 
 ---
 

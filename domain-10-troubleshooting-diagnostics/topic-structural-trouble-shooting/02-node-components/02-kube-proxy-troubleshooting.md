@@ -1,5 +1,5 @@
 ---
-title: kube-proxy 故障排查指南
+title: kube-proxy 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: kube-proxy 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: kube-proxy 故障排查指南
@@ -49,9 +50,9 @@ tags:
 - troubleshooting
 - decision-tree
 - scheduler
-- prometheus
-- daemonset
-- networkpolicy
+- [[Prometheus|prometheus]]
+- [[DaemonSet|daemonset]]
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -781,8 +782,8 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

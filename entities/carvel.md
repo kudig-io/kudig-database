@@ -1,5 +1,5 @@
 ---
-title: Carvel
+title: Carvel (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Carvel
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Carvel
@@ -66,11 +67,11 @@ Carvel 是一组专注于 Kubernetes 应用构建、配置和部署的工具集�
 
 - [[kubeflow]] — Kubeflow
 - [[spiffe]] — SPIFFE
-- [[kubeelasti]] — KubeElastic
+- [[kubeelasti]] — [[entities/kubeelasti.md|KubeElastic]]
 - [[xregistry]] — xRegistry
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/carvel/carvel.md|carvel]]
+- carvel
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

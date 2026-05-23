@@ -35,6 +35,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Day 24: Terway 网络实操
@@ -157,7 +158,7 @@ ip route show
 
 ## 4. Terway 网络策略
 
-### 4.1 NetworkPolicy 配置
+### 4.1 [[NetworkPolicy|NetworkPolicy]] 配置
 
 ```yaml
 # 限制 Pod 入站流量

@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 性能调优
@@ -78,7 +79,7 @@ graph TD
 
 ## 相关文档
 
-- [[domain-01-cluster-fundamentals/13-performance-tuning-guide.md]]
+- domain-01-cluster-fundamentals/13-performance-tuning-guide.md
 - [[domain-07-platform-engineering/README.md]]
 - [[domain-11-production-operations/README.md]]
 
@@ -107,7 +108,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-06-observability/19-cluster-performance-tuning.md|19-cluster-performance-tuning]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- observability/19-cluster-performance-tuning.md|19-cluster-performance-tuning]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]

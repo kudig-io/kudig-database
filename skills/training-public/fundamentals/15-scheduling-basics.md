@@ -1,5 +1,5 @@
 ---
-title: 第15课：调度与亲和性
+title: 第15课：调度与亲和性 [fundamentals]
 description: 'title: 第15课：调度与亲和性'
 category: learning
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -45,8 +46,8 @@ tags:
 - lecturer
 - redis
 - pdb
-- statefulset
-- daemonset
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 - operator
 - gpu
 last_updated: 2026-05
@@ -791,12 +792,12 @@ kubectl label nodes <node> key=value
 **关联文档**:
 - [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — DaemonSet
 - [../10-advanced-workloads/11-statefulset-basics.md](../10-advanced-workloads/11-statefulset-basics.md) — StatefulSet
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/13-daemonset-basics.md|13-daemonset-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/14-statefulset-basics.md|14-statefulset-basics]]
-- [[domain-11-production-operations/topic-learn/inner-training/inner-one-month-training.md|inner-one-month-training]]
-- [[domain-11-production-operations/topic-learn/inner-training/projects/p1-ack-cluster-lifecycle.md|p1-ack-cluster-lifecycle]]
+- 13-daemonset-basics
+- 14-statefulset-basics
+- inner-one-month-training
+- p1-ack-cluster-lifecycle

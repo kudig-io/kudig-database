@@ -32,6 +32,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 版本升级指南
@@ -152,4 +153,4 @@ domain-19-landscape-references/topic-release-notes/ 目录下全部 1321 个文�
 - [[argo]] — Argo Workflows
 
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07-upgrade-paths-strategy]]
+- 07-upgrade-paths-strategy

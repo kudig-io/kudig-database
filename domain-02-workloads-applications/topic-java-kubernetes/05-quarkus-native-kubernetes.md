@@ -1,5 +1,5 @@
 ---
-title: Quarkus Native 编译与 Kubernetes 部署指南
+title: Quarkus Native 编译与 Kubernetes 部署指南 (domain-02-workloads-applications)
 description: '# Quarkus Native 编译与 Kubernetes 部署指南'
 category: java-kubernetes
 tags:
@@ -36,9 +36,10 @@ prerequisites:
 - pod-lifecycle
 - prometheus-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
-# Quarkus Native 编译与 Kubernetes 部署指南
+# Quarkus Native 编译与 [[Kubernetes|Kubernetes]] 部署指南
 
 > **适用版本**: JDK 17+ / Quarkus 3.18+ / GraalVM for JDK 21+ / Mandrel 21+ / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
@@ -60,7 +61,7 @@ Quarkus 是 Red Hat 主导的云原生 Java 框架，核心理念是"容器优�
 | 镜像大小 | 300-500MB | 200-350MB | 40-80MB |
 | GC 暂停 P99 | 50-200ms | 20-80ms | 1-5ms |
 
-这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|Knative]]）、微服务和事件驱动架构。
+这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|[[Knative|Knative]]]]）、微服务和事件驱动架构。
 
 ### 1.2 Quarkus 架构核心理念
 
@@ -1195,7 +1196,7 @@ spec:
               cpu: "500m"
 ```
 
-KEDA 自定义伸缩（基于 Kafka 消费延迟）:
+[[KEDA|KEDA]] 自定义伸缩（基于 Kafka 消费延迟）:
 
 ```yaml
 apiVersion: keda.sh/v1alpha1

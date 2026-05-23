@@ -1,4 +1,43 @@
 ---
+title: 多 Agent 编排与协作架构 (domain-14-ai-ml-infra)
+description: 'title: 多 Agent 编排与协作架构'
+category: general
+tags:
+- ai
+- ai-agent
+- scheduler
+- prometheus
+- grafana
+- redis
+- postgresql
+- kafka
+- hpa
+- gateway
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 多 Agent 编排与协作架构 是什么
+- 如何 多 Agent 编排与协作架构
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- 编排与协作架构
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- kafka-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 多 Agent 编排与协作架构
 description: '# 多 Agent 编排与协作架构'
 category: ai-agent
@@ -9,7 +48,7 @@ tags:
 - rag
 - multi-agent
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - redis
 - postgresql
@@ -29,12 +68,15 @@ trigger_keywords:
 - 编排与协作架构
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- kafka-basics
-- redis-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 多 Agent 编排与协作架构
@@ -43,15 +85,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 单 Agent 系统在复杂、需要多领域专业知识的任务中能力受限。多 Agent 系统通过专业分工和协作，能够处理更复杂的任务、提高并行效率并降低单点故障风险。本文覆盖多 Agent 的核心设计模式、LangGraph/AutoGen 实现、通信协议、冲突解决策略，以及生产级多 Agent 平台的架构设计。
 
 ---
 
-## 1. 多 Agent 架构模式
+<!-- chunk: 1. 多 Agent 架构模式 -->## 1. 多 Agent 架构模式
 
-### 1.1 六大核心模式
+#<!-- chunk: 1.1 六大核心模式 -->## 1.1 六大核心模式
 
 ```
 多 Agent 架构模式
@@ -83,9 +125,9 @@ prerequisites:
 
 ---
 
-## 2. Supervisor-Worker 模式（生产最常用）
+<!-- chunk: 2. Supervisor-Worker 模式（生产最常用） -->## 2. Supervisor-Worker 模式（生产最常用）
 
-### 2.1 架构设计
+#<!-- chunk: 2.1 架构设计 -->## 2.1 架构设计
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -110,7 +152,7 @@ prerequisites:
                      └──────────────┘
 ```
 
-### 2.2 LangGraph 实现
+#<!-- chunk: 2.2 LangGraph 实现 -->## 2.2 LangGraph 实现
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -230,7 +272,7 @@ multi_agent_app = workflow.compile()
 
 ---
 
-## 3. Debate（辩论）模式：高风险决策
+<!-- chunk: 3. Debate（辩论）模式：高风险决策 -->## 3. Debate（辩论）模式：高风险决策
 
 适用于生产变更等高风险场景，通过多个 Agent 从不同视角评审方案：
 
@@ -316,7 +358,7 @@ class DebateOrchestrator:
 
 ---
 
-## 4. Blackboard（黑板）模式：异步协作
+<!-- chunk: 4. Blackboard（黑板）模式：异步协作 -->## 4. Blackboard（黑板）模式：异步协作
 
 ```python
 import asyncio
@@ -405,9 +447,9 @@ class BlackboardAgent:
 
 ---
 
-## 5. 多 Agent 通信协议
+<!-- chunk: 5. 多 Agent 通信协议 -->## 5. 多 Agent 通信协议
 
-### 5.1 标准化消息格式
+#<!-- chunk: 5.1 标准化消息格式 -->## 5.1 标准化消息格式
 
 ```python
 from dataclasses import dataclass
@@ -477,12 +519,12 @@ result_message = AgentMessage(
             "修改 NetworkPolicy 允许 frontend → backend:8080",
             "或添加 backend Pod 的 spec.selector 标签",
         ],
-        "fix_yaml": "apiVersion: networking.[[entities/kubernetes|k8s]].io/v1\n...",
+        "fix_yaml": "apiVersion: networking.k8s.io/v1\n...",
     },
 )
 ```
 
-### 5.2 消息队列集成
+#<!-- chunk: 5.2 消息队列集成 -->## 5.2 消息队列集成
 
 ```python
 import asyncio
@@ -536,7 +578,7 @@ class AgentMessageBus:
 
 ---
 
-## 6. 冲突解决策略
+<!-- chunk: 6. 冲突解决策略 -->## 6. 冲突解决策略
 
 当多个 Agent 对同一问题产生不同结论时：
 
@@ -638,7 +680,7 @@ class ConflictResolver:
 
 ---
 
-## 7. 生产级多 Agent 平台架构
+<!-- chunk: 7. 生产级多 Agent 平台架构 -->## 7. 生产级多 Agent 平台架构
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -673,7 +715,7 @@ class ConflictResolver:
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.1 K8s 上的多 Agent 部署
+#<!-- chunk: 7.1 K8s 上的多 Agent 部署 -->## 7.1 K8s 上的多 Agent 部署
 
 ```yaml
 # Agent Worker Deployment 模板
@@ -760,9 +802,9 @@ spec:
 
 ---
 
-## 8. 最佳实践与反模式
+<!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **明确边界**：每个 Agent 的职责范围要清晰，避免越界调用其他 Agent 的工具
 - **异步通信**：Agent 间通过消息队列通信而非直接调用，提高解耦性和弹性
@@ -770,7 +812,7 @@ spec:
 - **强模型当 Orchestrator**：任务分解和质量把控用 GPT-4o/Claude，执行用便宜模型
 - **超时防护**：给每个 Worker 设置最大执行时间，避免一个卡住阻塞整体
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **过度拆分**：3 步任务拆成 5 个 Agent，沟通成本超过了并行收益
 - **Agent 间直接调用**：点对点依赖导致强耦合，改用消息总线
@@ -780,7 +822,7 @@ spec:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -793,3 +835,27 @@ spec:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## See Also
+
+- 04-rag-knowledge-retrieval
+- 05-tool-use-function-calling
+- 07-memory-context-management
+- 08-agent-evaluation-observability

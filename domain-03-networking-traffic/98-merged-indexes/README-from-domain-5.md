@@ -55,6 +55,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # Domain 5: Networking 网络
@@ -218,7 +219,7 @@ cross_refs:
 - [[README]]
 - [[README]]
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]

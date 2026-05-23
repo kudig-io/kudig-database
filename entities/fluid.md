@@ -1,5 +1,5 @@
 ---
-title: Fluid
+title: Fluid (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Fluid
@@ -66,7 +67,7 @@ Fluid 是 Kubernetes 上的数据集编排和加速系统，为数据密集型�
 ## 参考链接
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
 - [[deployment]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
@@ -79,7 +80,7 @@ Fluid 是 Kubernetes 上的数据集编排和加速系统，为数据密集型�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[vineyard]] — Vineyard
 
-- [[domain-19-landscape-references/incubating/fluid/fluid.md|fluid]]
+- fluid
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]

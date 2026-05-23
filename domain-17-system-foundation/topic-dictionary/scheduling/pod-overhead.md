@@ -24,19 +24,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Pod Overhead
 
 ## 概述
 
-Pod Overhead（Pod 开销）是 Kubernetes 中一种用于核算 Pod 基础设施所消耗系统资源的方式。这些资源是容器内部运行所需资源之外的额外开销。Pod 的开销在准入时根据 Pod 的 RuntimeClass 相关联的开销进行设置。
+Pod Overhead（Pod 开销）是 [[Kubernetes|Kubernetes]] 中一种用于核算 Pod 基础设施所消耗系统资源的方式。这些资源是容器内部运行所需资源之外的额外开销。Pod 的开销在准入时根据 Pod 的 RuntimeClass 相关联的开销进行设置。
 
 ## 核心概念/原理
 
 当在节点上运行 Pod 时，Pod 本身会占用一定量的系统资源。在 Kubernetes 中，Pod Overhead 用于在容器请求和限制之外，额外计入 Pod 基础设施消耗的资源。
 
-Pod 的 overhead 在调度 Pod 时会被考虑在内：调度器会将 Pod 的 overhead 与容器资源请求之和一起计算。同样，kubelet 在调整 Pod cgroup 大小以及执行 Pod 驱逐排序时也会包含 Pod overhead。
+Pod 的 overhead 在调度 Pod 时会被考虑在内：调度器会将 Pod 的 overhead 与容器资源请求之和一起计算。同样，[[kubelet|kubelet]] 在调整 Pod cgroup 大小以及执行 Pod 驱逐排序时也会包含 Pod overhead。
 
 ## 关键机制或特性
 
@@ -146,7 +147,7 @@ curl -s http://kube-state-metrics:8080/metrics | grep kube_pod_overhead
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何将 overhead 纳入资源计算
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备的额外资源开销
 - [节点压力驱逐](./node-pressure-eviction.md) — kubelet 驱逐排序如何考虑 overhead
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 节点容量规划需计入 overhead
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 节点容量规划需计入 overhead
 
 ## 参考链接
 
@@ -154,4 +155,4 @@ curl -s http://kube-state-metrics:8080/metrics | grep kube_pod_overhead
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

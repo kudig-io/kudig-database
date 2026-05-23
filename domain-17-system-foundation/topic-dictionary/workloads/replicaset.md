@@ -23,6 +23,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # ReplicaSet
@@ -47,7 +48,7 @@ ReplicaSet 的作用是维护一组稳定运行的 Pod 副本。它通常不直�
   1. 未调度或 Pending 的 Pod
   2. 节点上该控制器 Pod 密度较高的
   3. 创建时间较新的
-  4. `controller.[[entities/kubernetes|kubernetes]].io/pod-deletion-cost` 注解值较低的（Beta，默认启用）
+  4. `controller.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/pod-deletion-cost` 注解值较低的（Beta，默认启用）
   5. 随机选择
 - **终止副本追踪（Beta）**：`DeploymentReplicaSetTerminatingReplicas` 启用后，可通过 `.status.terminatingReplicas` 查看终止中副本数。
 
@@ -167,11 +168,11 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences[0].na
 
 ## 交叉引用
 
-- [Deployments](./deployments.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]]](./deployments.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 - [工作负载管理总览](./workload-management.md)
-- [ReplicationController（旧版）](./replicationcontroller.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicationcontroller.md|ReplicationController]]（旧版）](./replicationcontroller.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/

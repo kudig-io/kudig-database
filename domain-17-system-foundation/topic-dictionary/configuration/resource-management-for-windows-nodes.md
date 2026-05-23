@@ -28,13 +28,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Resource Management for Windows nodes
 
 ## 概述
 
-本文档概述了 Linux 与 Windows 节点在资源管理方面的差异。由于操作系统内核和进程隔离机制的不同，[[entities/kubernetes|kubernetes]] 在 Windows 节点上的资源管理方式与 Linux 存在显著区别。了解这些差异对于在混合操作系统集群中正确配置和调度工作负载至关重要。
+本文档概述了 Linux 与 Windows 节点在资源管理方面的差异。由于操作系统内核和进程隔离机制的不同，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 在 Windows 节点上的资源管理方式与 Linux 存在显著区别。了解这些差异对于在混合操作系统集群中正确配置和调度工作负载至关重要。
 
 ## 核心概念/原理
 
@@ -57,7 +58,7 @@ prerequisites:
 ### CPU 管理差异
 
 - Windows 可以限制进程分配的 CPU 时间量，但**无法保证最小 CPU 时间**。
-- kubelet 支持 `--windows-priorityclass` 命令行标志来设置 kubelet 进程的调度优先级，以确保 kubelet 不会被运行的 Pod 饿死 CPU 周期。建议设置为 `ABOVE_NORMAL_PRIORITY_CLASS` 或更高。
+- [[kubelet|kubelet]] 支持 `--windows-priorityclass` 命令行标志来设置 kubelet 进程的调度优先级，以确保 kubelet 不会被运行的 Pod 饿死 CPU 周期。建议设置为 `ABOVE_NORMAL_PRIORITY_CLASS` 或更高。
 
 ## 关键机制或特性
 

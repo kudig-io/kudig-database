@@ -62,6 +62,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 证书管理与 TLS 配置
@@ -69,7 +70,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-证书管理是 Kubernetes 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、Ingress HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。
+证书管理是 [[Kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[Ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。
 
 <!-- chunk: 证书架构 -->
 ## 证书架构
@@ -409,7 +410,7 @@ echo "=== 证书更新完成 ==="
 <!-- chunk: cert-manager 部署 -->
 ## cert-manager 部署
 
-### Helm 安装
+### [[Helm|Helm]] 安装
 
 ```bash
 #!/bin/bash
@@ -895,7 +896,7 @@ spec:
 <!-- chunk: mTLS 配置 -->
 ## mTLS 配置
 
-### Istio mTLS
+### [[Istio|Istio]] mTLS
 
 ```yaml
 # istio-mtls.yaml
@@ -1253,25 +1254,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/08-security-best-practices.md|08-security-best-practices]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|09-security-hardening-production]]
-- [[domain-05-security-compliance/11-secret-management-tools.md|11-secret-management-tools]]
-- [[domain-05-security-compliance/12-compliance-certification.md|12-compliance-certification]]
+- 08-security-best-practices
+- 09-security-hardening-production
+- 11-secret-management-tools
+- 12-compliance-certification
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

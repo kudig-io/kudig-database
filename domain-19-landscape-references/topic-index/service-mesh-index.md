@@ -36,9 +36,10 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Service Mesh 服务网格知识图谱索引
+# [[Service|Service]]Service Mesh）|Service Mesh]] 服务网格知识图谱索引
 
 > 知识图谱：按主题 **Service Mesh** 聚合相关文档，按关联度分层级组织。
 
@@ -50,35 +51,35 @@ prerequisites:
 
 ### 架构与设计
 
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture|服务网格与微服务架构设计]]
-- [[domain-15-specialized-tech/11-service-mesh-overview|服务网格集成表]]
-- [[domain-15-specialized-tech/12-service-mesh-advanced|服务网格进阶配置]]
+- 服务网格与微服务架构设计
+- 服务网格集成表
+- 服务网格进阶配置
 
 ### 主流方案
 
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise|Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践]]
+- Istio 企业级服务网格架构与实践]]
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- [[domain-16-database-middleware/01-databases/03-distributed-database-enterprise.md]]
+- Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践
 
 ### 入门指南
 
-- [[domain-03-networking-traffic/99-istio-service-mesh-guide|Istio 企业级服务网格入门指南]]
-- [[domain-03-networking-traffic/99-linkerd-service-mesh-guide|Linkerd 轻量级服务网格实践指南]]
-- [[domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide|Spring Cloud Kubernetes 与服务网格集成指南]]
+- Istio 企业级服务网格入门指南
+- Linkerd 轻量级服务网格实践指南
+- [[domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md]]
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting|[[Service Mesh (Istio) 深度排查与性能调优指南|Service Mesh (Istio) 深度排查与性能调优指南]]]]
 
 ### CNCF 生态
 
-- [[domain-19-landscape-references/graduated/istio/istio|Istio]]
-- [[domain-19-landscape-references/graduated/linkerd/linkerd|Linkerd]]
-- [[domain-19-landscape-references/graduated/envoy/envoy|Envoy]]
-- [[domain-19-landscape-references/graduated/cilium/cilium|Cilium]]
+- Istio
+- Linkerd
+- Envoy
+- Cilium
 
 ---
 
@@ -88,18 +89,18 @@ prerequisites:
 
 ### 网络与安全
 
-- [[domain-03-networking-traffic/18-network-encryption-mtls|网络加密与mTLS]]
+- 网络加密与mTLS
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting|Gateway API 深度排查与下一代流量治理指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting|[[NetworkPolicy 深度排查与零信任安全治理指南|NetworkPolicy 深度排查与零信任安全治理指南]]]]
 
 ### 可观测性
 
 - [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry-and-distributed-tracing|OpenTelemetry 与分布式链路追踪]]
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture|服务网格与微服务架构设计]]
+- 服务网格与微服务架构设计
 
 ### 技术论文
 
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration|Kubernetes 服务网格深度实践与Istio集成]]
+- Kubernetes 服务网格深度实践与Istio集成
 
 ---
 

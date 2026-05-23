@@ -1,29 +1,28 @@
 ---
-title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
-description: '# Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
-category: ai-agent
+title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ [02-ai-agents]
+description: 'title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
+category: general
 tags:
 - ai
-- agent
-- llm
-- rag
-- multi-agent
+- ai-agent
 - etcd
 - apiserver
 - kubelet
 - scheduler
 - prometheus
+- cilium
+- flannel
+- calico
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: intermediate
+reading_level: intermediate
 audience:
-- AI 工程师
-- 架构师
-- SRE
-estimated_read_time: 15min
+- 所有工程师
+estimated_read_time: 35min
 intent_queries:
 - Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ 是什么
 - 如何 Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+- Kubernetes 14 ai ml infra 最佳实践
 trigger_keywords:
 - Agent
 - 语料库差距分析：kudig-database
@@ -44,6 +43,52 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - backup-basics
+created: "2026-05-23"
+---
+
+title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+description: '# Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
+category: ai-agent
+tags:
+- ai
+- agent
+- llm
+- rag
+- multi-agent
+- [[etcd|etcd]]
+- apiserver
+- [[kubelet|kubelet]]
+- scheduler
+- [[Prometheus|prometheus]]
+last_updated: 2026-05
+difficulty: advanced
+reading_level: advanced
+audience:
+- AI 工程师
+- 架构师
+- SRE
+estimated_read_time: 15min
+intent_queries:
+- Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ 是什么
+- 如何 Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+trigger_keywords:
+- Agent
+- 语料库差距分析：kudig-database
+- 作为
+- K8s
+- 运维
+- Agent
+- 语料还缺什么？
+- ai
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
@@ -54,7 +99,7 @@ prerequisites:
 
 ## 概述
 
-kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 Kubernetes 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
+kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 [[Kubernetes|Kubernetes]] 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
 
 本文从 **Agent 视角** 系统审视现有内容，识别出 **10 大类缺失**，对每一类给出：
 - 现有资产的逐文件审计
@@ -399,7 +444,7 @@ symptom_cause_map:
             - "kubectl get endpoints <svc> -n <ns>"
             - "kubectl get pods -l <selector> -n <ns>"
           indicators: ["<none>", "ENDPOINTS: "]
-        knowledge_ref: "domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting|10-service-comprehensive-troubleshooting]].md"
+        knowledge_ref: "domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting.md"
       - cause: "Selector 不匹配"
         probability: high
         diagnosis:
@@ -1015,3 +1060,50 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题的差距分析报告，原 topic-agent 专题已整合至此。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## Related
+
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 06-multi-agent-orchestration
+
+## See Also
+
+- 13-trusted-agent-system-fiscal-plan
+- 14-agent-kudig-design-strategy
+- 16-agentscope-overview-installation
+- 17-agentscope-core-concepts

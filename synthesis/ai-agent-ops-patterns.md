@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # AI Agent 运维模式
@@ -77,5 +78,8 @@ prerequisites:
 
 ## 相关 Domain
 
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview]]
-- [[domain-20-application-patterns/05-ai-ml-patterns/01-ml-serving-patterns]]
+- domain-14-ai-ml-infra/01-ai-infrastructure-overview
+- domain-20-application-patterns/05-ai-ml-patterns/01-ml-serving-patterns
+## Related
+
+- [[STRUCTURE|KUDIG-DATABASE 目录结构规范]]

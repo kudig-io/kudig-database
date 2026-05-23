@@ -30,19 +30,20 @@ prerequisites:
 - cloud-provider-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 网络插件
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
 
 ## 核心概念/原理
 
 - **CNI 插件**：Kubernetes 从 1.3 到最新的 1.35 均支持 CNI 插件。必须使用与集群兼容且满足需求的 CNI 插件。
 - **兼容性要求**：CNI 插件需兼容 CNI 规范 v0.4.0 或更高版本。Kubernetes 项目推荐使用兼容 v1.0.0 规范的插件。
-- **容器运行时职责**：容器运行时（如 containerd、CRI-O）负责加载 CNI 插件。自 Kubernetes 1.24 起，kubelet 不再直接管理 CNI（`cni-bin-dir` 和 `network-plugin` 参数已移除）。
+- **容器运行时职责**：容器运行时（如 [[containerd|containerd]]、CRI-O）负责加载 CNI 插件。自 Kubernetes 1.24 起，[[kubelet|kubelet]] 不再直接管理 CNI（`cni-bin-dir` 和 `network-plugin` 参数已移除）。
 
 ## 关键机制或特性
 
@@ -52,7 +53,7 @@ prerequisites:
 
 ## 使用场景
 
-- 集群需要实现 Overlay 网络、Underlay 网络或混合网络拓扑时，部署对应的 CNI 插件（如 Calico、Cilium、Flannel）。
+- 集群需要实现 Overlay 网络、Underlay 网络或混合网络拓扑时，部署对应的 CNI 插件（如 Calico、[[Cilium|Cilium]]、Flannel）。
 - 需要将容器端口暴露到宿主机端口时，启用 `hostPort` 支持。
 - 需要对特定 Pod 的网络流量进行限速时，启用 bandwidth 流量整形插件。
 

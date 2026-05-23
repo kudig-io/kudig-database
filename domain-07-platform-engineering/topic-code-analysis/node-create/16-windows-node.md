@@ -55,6 +55,7 @@ related_topics:
 - node-create
 - registration
 - cni-node
+created: "2026-05-23"
 ---
 
 # Windows 节点接入与管理

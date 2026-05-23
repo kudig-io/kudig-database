@@ -38,6 +38,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 安全最佳实践
@@ -53,7 +54,7 @@ cross_refs:
 - [容器安全基础](#容器安全基础)
 - [镜像安全](#镜像安全)
 - [容器运行时安全](#容器运行时安全)
-- [Linux 安全机制](#linux-安全机制)
+- Linux 安全机制](#linux-安全机制)
 - [Docker Daemon 安全](#docker-daemon-安全)
 - [安全检查清单](#安全检查清单)
 
@@ -243,7 +244,7 @@ docker run --rm --net host --pid host \
 
 ## See Also
 
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|05-docker-storage-volumes]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|06-docker-compose-orchestration]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-13-container-runtime/09-docker-performance-monitoring.md|09-docker-performance-monitoring]]
+- volumes.md|05-docker-storage-volumes]]
+- 06-docker-compose-orchestration
+- 08-docker-troubleshooting-guide
+- 09-docker-performance-monitoring

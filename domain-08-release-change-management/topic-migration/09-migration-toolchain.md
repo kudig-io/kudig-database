@@ -1,4 +1,44 @@
 ---
+title: 09 - 迁移工具链参考 [migration]
+description: 'description: 2. [Velero 完整指南](#2-velero-完整指南)'
+category: general
+tags:
+- migration
+- upgrade
+- helm
+- docker
+- harbor
+- redis
+- mysql
+- statefulset
+- daemonset
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 迁移工具链参考 是什么
+- 如何 迁移工具链参考
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 迁移工具链参考
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- helm-basics
+- redis-basics
+- mysql-basics
+- backup-basics
+created: "2026-05-23"
+---
+
 title: 09 - 迁移工具链参考
 description: 2. [Velero 完整指南](#2-velero-完整指南)
 category: migration
@@ -6,12 +46,12 @@ tags:
 - k8s
 - migration
 - modernization
-- helm
+- [[Helm|helm]]
 - docker
-- harbor
+- [[Harbor|harbor]]
 - redis
 - mysql
-- statefulset
+- [[StatefulSet|statefulset]]
 - daemonset
 last_updated: 2026-05
 difficulty: advanced
@@ -27,13 +67,15 @@ intent_queries:
 trigger_keywords:
 - 迁移工具链参考
 - migration
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- helm-basics
-- redis-basics
-- mysql-basics
-- backup-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 09 - 迁移工具链参考
@@ -475,6 +517,29 @@ kack get pods -A
 
 **上一步**: ← [08-验收、切换与旧集群退役](./08-validation-cutover-decommission.md)
 **下一步**: → [10-生产迁移实战案例](./10-real-world-case-study.md)
+
+---
+
+## Obsidian 相关文档
+
+- topic-migration MOC
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+
+## See Also
+
+- 07-observability-security-migration
+- 08-validation-cutover-decommission
+- 10-real-world-case-study
+- logging
 
 ## Related
 

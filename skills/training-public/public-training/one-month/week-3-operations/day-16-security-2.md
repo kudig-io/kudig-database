@@ -35,6 +35,7 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,9 +43,9 @@ title: Day 16: 安全体系 - Pod 安全 + 密钥管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] Pod Security Standards
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
   - K8s Secret 管理最佳实践
-  - Kyverno 策略引擎
+  - [[Kyverno|Kyverno]] 策略引擎
   - Pod 安全上下文配置
 trigger_keywords:
   - Pod Security

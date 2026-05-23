@@ -1,5 +1,5 @@
 ---
-title: 故障排查决策树 - Mermaid 可视化版
+title: 故障排查决策树 - Mermaid 可视化版 [troubleshooting]
 description: 'title: 故障排查决策树 - Mermaid 可视化版'
 category: learning
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - gpu-ml-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -49,11 +50,11 @@ tags:
 - training
 - lecturer
 - apiserver
-- kubelet
-- cilium
+- [[kubelet|kubelet]]
+- [[Cilium|cilium]]
 - flannel
 - calico
-- coredns
+- [[CoreDNS|coredns]]
 - docker
 last_updated: 2026-05
 difficulty: intermediate
@@ -590,7 +591,7 @@ flowchart TD
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|kubernetes-workload-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/presentation-template.md|presentation-template]]
-- [[domain-11-production-operations/topic-learn/fundamentals/01-what-is-kubernetes.md|01-what-is-kubernetes]]
-- [[domain-11-production-operations/topic-learn/fundamentals/02-pod-basics.md|02-pod-basics]]
+- kubernetes-workload-presentation
+- presentation-template
+- 01-what-is-kubernetes
+- 02-pod-basics

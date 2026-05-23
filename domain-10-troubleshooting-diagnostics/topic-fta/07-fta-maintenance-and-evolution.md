@@ -1,5 +1,5 @@
 ---
-title: 第七章：FTA 维护与演进策略
+title: 第七章：FTA 维护与演进策略 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
 category: fta
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 fta_id: FTA-07_MAINTENANCE_AND_EVOLUTION-001
 component: 07 Maintenance And Evolution
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第七章：FTA 维护与演进策略
@@ -48,7 +49,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- prometheus
+- [[Prometheus|prometheus]]
 - gpu
 - cuda
 - agent
@@ -83,8 +84,8 @@ k8s_versions:
 
 > **所属部分**: 第二部分 - FTA 构建实践指南  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第六章：FTA 验证与质量保证](./06-fta-verification-and-quality.md)  
-> **下一章**: [第八章：AI Agent 时代的运维范式革命](./[[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]].md)
+> **上一章**: 第六章：FTA 验证与质量保证](./06-fta-verification-and-quality.md)  
+> **下一章**: 第八章：AI Agent 时代的运维范式革命](./[[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]].md)
 
 ---
 

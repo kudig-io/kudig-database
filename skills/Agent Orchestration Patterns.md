@@ -35,6 +35,7 @@ prerequisites:
 - iac-basics
 - cni-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Agent Orchestration Patterns for FTA
@@ -166,7 +167,7 @@ Domain Agent -> Meta Agent:
 
 ## Related
 
-- [[gitops-argocd-fta]] — GitOps(ArgoCD) 异常故障树分析
+- [[gitops-argocd-fta]] — GitOpsps(ArgoCD) 异常故障树分析|GitOps(ArgoCD) 异常故障树分析]]]]) 异常故障树分析
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
 - [[calico-fta]] — Calico Fta
 - [[helm]] — Helm

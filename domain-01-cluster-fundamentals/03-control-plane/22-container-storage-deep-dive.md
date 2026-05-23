@@ -72,6 +72,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)
@@ -222,7 +223,7 @@ cross_refs:
 | **代码位置** | Kubernetes 核心 | 外部可执行文件 | 外部容器化驱动 |
 | **发布周期** | 与 K8s 同步 | 独立 | 独立 |
 | **接口类型** | Go 接口 | Shell 脚本 | gRPC |
-| **部署方式** | 内置 | 主机二进制 | DaemonSet + Deployment |
+| **部署方式** | 内置 | 主机二进制 | [[DaemonSet|DaemonSet]] + Deployment |
 | **动态配置** | 有限 | 有限 | 完整支持 |
 | **功能丰富度** | 完整 | 有限 | 完整 |
 | **社区支持** | 逐步废弃 | 已废弃 | 活跃 |
@@ -1763,7 +1764,7 @@ spec:
 #   - type: Resizing                  # 正在扩展
 ```
 
-### 6.5 StatefulSet 存储配置
+### 6.5 [[StatefulSet|StatefulSet]] 存储配置
 
 ```yaml
 apiVersion: apps/v1
@@ -2549,25 +2550,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md|20-kube-scheduler-deep-dive]]
-- [[domain-01-cluster-fundamentals/21-container-runtime-deep-dive.md|21-container-runtime-deep-dive]]
-- [[domain-01-cluster-fundamentals/23-container-network-deep-dive.md|23-container-network-deep-dive]]
-- [[domain-01-cluster-fundamentals/24-production-deployment-best-practices.md|24-production-deployment-best-practices]]
+- 20-kube-scheduler-deep-dive
+- 21-container-runtime-deep-dive
+- 23-container-network-deep-dive
+- 24-production-deployment-best-practices
 
 ## Related
 

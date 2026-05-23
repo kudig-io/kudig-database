@@ -1,5 +1,5 @@
 ---
-title: '安全机制: ServiceAccount Token 与 Audit'
+title: 安全机制: ServiceAccount Token 与 Audit [cluster-create]
 description: 'title: ''安全机制: ServiceAccount Token 与 Audit'''
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: '安全机制: ServiceAccount Token 与 Audit'

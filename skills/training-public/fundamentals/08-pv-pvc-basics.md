@@ -1,5 +1,5 @@
 ---
-title: 第八课：存储 - PV 和 PVC
+title: 第八课：存储 - PV 和 PVC [fundamentals]
 description: 'title: 第八课：存储 - PV 和 PVC'
 category: learning
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -395,12 +396,12 @@ kubectl delete pvc <pvc-name>
 
 **关联文档**:
 - [../08-scaling/08-hpa-basics.md](../08-scaling/08-hpa-basics.md) — HPA 自动伸缩
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md) — 存储故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md) — 存储故障 [[SKILL|Skill]]
 - [../../domain-04-storage-data/](../../domain-04-storage-data/) — K8s 存储文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/06-configmap-secret.md|06-configmap-secret]]
-- [[domain-11-production-operations/topic-learn/fundamentals/07-namespace-resource-quota.md|07-namespace-resource-quota]]
-- [[domain-11-production-operations/topic-learn/fundamentals/09-hpa-basics.md|09-hpa-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/10-health-check.md|10-health-check]]
+- 06-configmap-secret
+- 07-namespace-resource-quota
+- 09-hpa-basics
+- 10-health-check

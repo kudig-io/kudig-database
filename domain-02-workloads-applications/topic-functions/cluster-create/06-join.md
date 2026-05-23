@@ -1,6 +1,44 @@
 ---
+title: 节点加入流程 (kubeadm join) [cluster-create]
+description: 'description: ''| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- containerd
+- daemonset
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点加入流程 (kubeadm join) 是什么
+- 如何 节点加入流程 (kubeadm join)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点加入流程
+- kubeadm
+- join
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点加入流程 (kubeadm join)
-description: '| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入 |'
+description: '| `cmd/kubeadm/app/phases/kubelet/config.go` | L40-L200 | kubelet 配置写入
+  |'
 category: functions
 tags:
 - k8s
@@ -39,10 +77,6 @@ trigger_keywords:
 - control-plane
 - worker node
 - token
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -52,6 +86,15 @@ related_topics:
 - certificate management
 - kubelet
 - HA cluster
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点加入流程 (kubeadm join)
@@ -570,7 +613,7 @@ echo "Node $(hostname) joined successfully!"
 - [节点加入进阶](12-join-advanced.md) — Discovery 和 TLS Bootstrap 详解
 - [证书管理](03-certs.md) — TLS 证书体系
 - [高可用进阶](14-ha-advanced.md) — control-plane join
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — Bootstrap Token 安全
+- [安全机制](16-security.md) — Bootstrap Token 安全
 
 ### 配置文件发现模式
 
@@ -656,3 +699,11 @@ current-context: default
     ├── kubelet-client-2024-01-01.pem
     └── kubelet.crt                  # 服务端证书 (自签名)
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/containerd.md|containerd]]

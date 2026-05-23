@@ -1,4 +1,36 @@
 ---
+title: 记忆管理与上下文窗口工程 (domain-14-ai-ml-infra)
+description: 'title: 记忆管理与上下文窗口工程'
+category: general
+tags:
+- ai
+- ai-agent
+- redis
+- postgresql
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 记忆管理与上下文窗口工程 是什么
+- 如何 记忆管理与上下文窗口工程
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 记忆管理与上下文窗口工程
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 记忆管理与上下文窗口工程
 description: '# 记忆管理与上下文窗口工程'
 category: ai-agent
@@ -25,9 +57,15 @@ trigger_keywords:
 - 记忆管理与上下文窗口工程
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- redis-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 记忆管理与上下文窗口工程
@@ -36,13 +74,13 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 记忆是 Agent 实现跨会话连续性、避免重复询问用户、积累经验的核心能力。上下文窗口管理则决定了 Agent 在单次对话中能有效利用多少信息。本文系统覆盖 Agent 的四类记忆（感知、工作、情节、语义）、上下文压缩技术、长期记忆的存储与检索架构，以及生产环境中的记忆系统实现。
 
 ---
 
-## 1. Agent 记忆分类体系
+<!-- chunk: 1. Agent 记忆分类体系 -->## 1. Agent 记忆分类体系
 
 ```
 Agent 记忆体系
@@ -65,16 +103,16 @@ Agent 记忆体系
 │
 └── 语义记忆（Semantic Memory）
     - 结构化的领域知识和事实
-    - "[[entities/kubernetes|k8s]] 的 Pod 有哪些状态"
+    - "K8s 的 Pod 有哪些状态"
     - 存储形式: 知识库（RAG）/ Fine-tuning
     - 来源: kudig-database 等知识库
 ```
 
 ---
 
-## 2. 工作记忆：上下文窗口管理
+<!-- chunk: 2. 工作记忆：上下文窗口管理 -->## 2. 工作记忆：上下文窗口管理
 
-### 2.1 Token 预算规划
+#<!-- chunk: 2.1 Token 预算规划 -->## 2.1 Token 预算规划
 
 ```python
 # 各模型上下文窗口和推荐配置
@@ -133,7 +171,7 @@ class TokenBudgetManager:
         return self.budget["max_tokens"] - used
 ```
 
-### 2.2 智能上下文截断
+#<!-- chunk: 2.2 智能上下文截断 -->## 2.2 智能上下文截断
 
 ```python
 from enum import Enum
@@ -293,9 +331,9 @@ class ContextWindowManager:
 
 ---
 
-## 3. 情节记忆：跨会话历史
+<!-- chunk: 3. 情节记忆：跨会话历史 -->## 3. 情节记忆：跨会话历史
 
-### 3.1 情节记忆存储设计
+#<!-- chunk: 3.1 情节记忆存储设计 -->## 3.1 情节记忆存储设计
 
 ```python
 from datetime import datetime, UTC
@@ -393,7 +431,7 @@ class EpisodicMemoryStore:
         # 执行查询并返回结果
 ```
 
-### 3.2 情节记忆的自动生成
+#<!-- chunk: 3.2 情节记忆的自动生成 -->## 3.2 情节记忆的自动生成
 
 ```python
 class EpisodeExtractor:
@@ -453,9 +491,9 @@ class EpisodeExtractor:
 
 ---
 
-## 4. 语义记忆：结构化知识库集成
+<!-- chunk: 4. 语义记忆：结构化知识库集成 -->## 4. 语义记忆：结构化知识库集成
 
-### 4.1 语义记忆 vs RAG 的关系
+#<!-- chunk: 4.1 语义记忆 vs RAG 的关系 -->## 4.1 语义记忆 vs RAG 的关系
 
 ```
 语义记忆（Semantic Memory）与 RAG 的区别：
@@ -477,7 +515,7 @@ RAG（检索增强生成）:
   - 语义记忆存储 Agent 自己总结的经验规则
 ```
 
-### 4.2 语义记忆实现
+#<!-- chunk: 4.2 语义记忆实现 -->## 4.2 语义记忆实现
 
 ```python
 class SemanticMemoryStore:
@@ -532,7 +570,7 @@ class SemanticMemoryStore:
 
 ---
 
-## 5. 完整记忆系统集成
+<!-- chunk: 5. 完整记忆系统集成 -->## 5. 完整记忆系统集成
 
 ```python
 class AgentMemorySystem:
@@ -633,7 +671,7 @@ class AgentMemorySystem:
 
 ---
 
-## 6. 记忆系统的隐私与安全
+<!-- chunk: 6. 记忆系统的隐私与安全 -->## 6. 记忆系统的隐私与安全
 
 ```python
 class PrivacyAwareMemorySystem(AgentMemorySystem):
@@ -678,9 +716,9 @@ class PrivacyAwareMemorySystem(AgentMemorySystem):
 
 ---
 
-## 7. 记忆系统性能优化
+<!-- chunk: 7. 记忆系统性能优化 -->## 7. 记忆系统性能优化
 
-### 7.1 Redis 缓存层
+#<!-- chunk: 7.1 Redis 缓存层 -->## 7.1 Redis 缓存层
 
 ```python
 import redis
@@ -721,9 +759,9 @@ class CachedMemorySystem:
 
 ---
 
-## 8. 最佳实践与反模式
+<!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **层次化记忆**：短期用工作记忆（上下文窗口），中期用情节记忆，长期用语义记忆
 - **按需检索历史**：不要把所有历史都塞入上下文，先检索相关的再注入
@@ -731,7 +769,7 @@ class CachedMemorySystem:
 - **脱敏后存储**：情节记忆和语义记忆在存储前必须删除 PII 和密钥信息
 - **情节记忆冷启动**：新部署的 Agent 没有历史，应提前导入典型案例作为种子数据
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **无限累积历史**：不管理上下文窗口，随着对话加长推理质量下降、成本飙升
 - **丢弃所有历史**：每次新会话完全重置，用户需要重复描述上下文
@@ -741,7 +779,7 @@ class CachedMemorySystem:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -754,3 +792,27 @@ class CachedMemorySystem:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|[[主流 Agent 框架深度对比|主流 Agent 框架深度对比]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## See Also
+
+- 05-tool-use-function-calling
+- 06-multi-agent-orchestration
+- 08-agent-evaluation-observability
+- 09-production-deployment-guide

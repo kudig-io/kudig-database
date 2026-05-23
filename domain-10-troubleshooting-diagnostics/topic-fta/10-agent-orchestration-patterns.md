@@ -1,5 +1,5 @@
 ---
-title: 第十章：Agent 编排模式与 FTA 逻辑门映射
+title: 第十章：Agent 编排模式与 FTA 逻辑门映射 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 fta_id: FTA-10_AGENT_ORCHESTRATION_PATTERNS-001
 component: 10 Agent Orchestration Patterns
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第十章：Agent 编排模式与 FTA 逻辑门映射
@@ -51,8 +52,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- helm
-- ingress
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 - rag
 - agent
 last_updated: 2026-05
@@ -88,7 +89,7 @@ k8s_versions:
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第九章：FTA 作为 AI Agent 的知识骨架](./[[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]].md)  
+> **上一章**: 第九章：FTA 作为 AI Agent 的知识骨架](./[[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]].md)  
 > **下一章**: [第十一章：FTA 驱动的 Runbook 自动化](./[[domain-10-troubleshooting-diagnostics/topic-fta/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]].md)
 
 ---

@@ -59,11 +59,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # AI平台故障排查与性能优化
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Troubleshooting](https://kubernetes.io/docs/tasks/debug/) | [NVIDIA DCGM](https://developer.nvidia.com/dcgm)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Troubleshooting](https://kubernetes.io/docs/tasks/debug/) | [NVIDIA DCGM](https://developer.nvidia.com/dcgm)
 
 <!-- chunk: 一、AI平台故障诊断体系 -->
 ## 一、AI平台故障诊断体系
@@ -142,7 +143,7 @@ cross_refs:
 |----------|----------|----------|------|----------|
 | **GPU故障** | CUDA错误、驱动崩溃、温度过高 | 基础设施 | 30min | nvidia-smi, dcgmi |
 | **模型加载失败** | 无法启动、OOM、权重损坏 | 应用层 | 15min | model logs, kubectl describe |
-| **推理延迟高** | P99>500ms、吞吐量下降 | 服务层 | 45min | Prometheus, Jaeger |
+| **推理延迟高** | P99>500ms、吞吐量下降 | 服务层 | 45min | [[Prometheus|Prometheus]], [[Jaeger|Jaeger]] |
 | **训练卡住** | Loss不收敛、梯度消失 | 计算层 | 60min | TensorBoard, profiling |
 | **数据访问异常** | 数据读取慢、文件损坏 | 存储层 | 20min | iostat, storage logs |
 | **网络通信问题** | 连接超时、丢包严重 | 网络层 | 25min | ping, tcpdump, traceroute |
@@ -1437,25 +1438,25 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/12-ai-cost-analysis-finops.md|12-ai-cost-analysis-finops]]
-- [[domain-14-ai-ml-infra/13-ai-platform-observability.md|13-ai-platform-observability]]
-- [[domain-14-ai-ml-infra/15-llm-data-pipeline.md|15-llm-data-pipeline]]
-- [[domain-14-ai-ml-infra/16-llm-finetuning.md|16-llm-finetuning]]
+- 12-ai-cost-analysis-finops
+- 13-ai-platform-observability
+- 15-llm-data-pipeline
+- 16-llm-finetuning

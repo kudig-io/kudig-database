@@ -1,5 +1,5 @@
 ---
-title: Kanister
+title: Kanister (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 - Kanister
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kanister
@@ -47,7 +48,7 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 ## 生产部署要点
 
 - **Blueprint 测试**: 在非生产环境充分测试 Blueprint 的备份和恢复流程
-- **定期备份**: 结合 CronJob 或外部调度器定期创建 ActionSet 执行备份
+- **定期备份**: 结合 [[CronJob|CronJob]] 或外部调度器定期创建 ActionSet 执行备份
 - **恢复演练**: 定期执行恢复演练，确保备份数据可用
 - **清理策略**: 设置备份保留策略，定期清理过期的备份数据
 - **监控告警**: 监控 ActionSet 状态，对失败的备份/恢复操作设置告警
@@ -68,13 +69,13 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 
 - [[47-terway-troubleshooting-fta]]
 
-- [[entities/ecosystem-changelog.md|ecosystem-changelog]]
+- changelog.md|ecosystem-changelog]]
 
 - [[42-terway-usage-guide]]
 
-- [[domain-19-landscape-references/incubating/metal3-io/metal3-io.md|metal3-io]]
+- metal3-io
 
-- [[domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md|inspektor-gadget]]
+- inspektor-gadget
 
 - [[kubearmor]] — KubeArmor
 - [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
@@ -83,7 +84,7 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[journal/digest-2026-05-21-full.md|digest-2026-05-21-full]]
-- [[domain-19-landscape-references/sandbox/kanister/kanister.md|kanister]]
+- kanister
 - [[entities/k8up.md|K8up]]
 - [[entities/openebs.md|OpenEBS]]
 - [[entities/hwameistor.md|HwameiStor]]

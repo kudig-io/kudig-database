@@ -1,4 +1,46 @@
 ---
+title: 节点驱逐与维护 (kubectl drain/cordon/uncordon)
+description: 'description: ''| `force` | `bool` | 继续即使 Pod 管理器不存在 | 默认 false |'''
+category: general
+tags:
+- reference
+- kubelet
+- calico
+- redis
+- mysql
+- pdb
+- statefulset
+- daemonset
+- job
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 节点驱逐与维护 (kubectl drain/cordon/uncordon) 是什么
+- 如何 节点驱逐与维护 (kubectl drain/cordon/uncordon)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点驱逐与维护
+- kubectl
+- drain
+- cordon
+- uncordon
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cni-basics
+- redis-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
 title: 节点驱逐与维护 kubectl drain
 description: '| `force` | `bool` | 继续即使 Pod 管理器不存在 | 默认 false |'
 category: functions
@@ -41,12 +83,6 @@ trigger_keywords:
 - DaemonSet
 - mirror pod
 - static pod
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cni-basics
-- redis-basics
-- mysql-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -55,6 +91,15 @@ related_topics:
 - node-create/05-upgrade
 - cluster-create/09-upgrade
 - cluster-create/16-security
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点驱逐与维护 (kubectl drain/cordon/uncordon)
@@ -780,4 +825,12 @@ kubectl get events --field-selector reason=Evicted -A
 - [集群概览](../cluster-create/01-overview.md) — kubeadm 整体架构
 - [节点加入](../cluster-create/06-join.md) — 节点加入集群
 - [集群升级](../cluster-create/09-upgrade.md) — 升级时 drain 操作
-- [安全机制](../cluster-create/[[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — PodDisruptionBudget 安全策略
+- [安全机制](../cluster-create/16-security.md) — PodDisruptionBudget 安全策略
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
+- [[entities/kubernetes.md|kubernetes]]

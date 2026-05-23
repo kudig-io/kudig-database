@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+title: Kubernetes 可观测性全栈培训 (监控、日志、追踪) [topic-presentations]
 description: '# Kubernetes 可观测性全栈培训 (监控、日志、追踪)'
 category: presentations
 tags:
@@ -50,9 +50,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+# [[Kubernetes|Kubernetes]] 可观测性全栈培训 (监控、日志、追踪)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 运维可观测性专项
 > **核心原则**: 黄金指标驱动、白盒监控、全链路追踪
@@ -66,7 +67,7 @@ authors:
 - SRE 工程师：构建完整的可观测性体系
 - 全栈开发：理解应用的监控与日志最佳实践
 - 监控架构师：设计大规模集群的监控架构
-- 运维工程师：掌握 Prometheus 查询和告警配置
+- 运维工程师：掌握 [[Prometheus|Prometheus]] 查询和告警配置
 
 #<!-- chunk: 预计时长 -->## 预计时长
 
@@ -1005,25 +1006,25 @@ Observability
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|kubernetes-coredns-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|kubernetes-ingress-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|kubernetes-scheduling-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|kubernetes-security-rbac-presentation]]
+- kubernetes-coredns-presentation
+- kubernetes-ingress-presentation
+- kubernetes-scheduling-presentation
+- kubernetes-security-rbac-presentation
 
 ## Related
 

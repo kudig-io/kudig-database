@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)
@@ -57,7 +58,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - RAM 权限与授权 (RAM & RRSA) 是什么
 - 如何 ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品
@@ -191,7 +192,7 @@ metadata:
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
+- USER
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
 
 ## See Also

@@ -45,11 +45,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Harbor 企业级镜像仓库部署指南
+# [[Harbor|Harbor]] 企业级镜像仓库部署指南
 
-> **适用版本**: Harbor v2.13.0 / Helm Chart v1.16.0  
+> **适用版本**: Harbor v2.13.0 / [[Helm|Helm]] Chart v1.16.0  
 > **最后更新**: 2026-04-24  
 > **难度**: 中级
 
@@ -285,20 +286,20 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-13-container-runtime/MOC.md|domain-22-container-image-management MOC]]
-- [[domain-13-container-runtime/README.md|Domain 22: 容器镜像管理 (Container Image Management)]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|Domain-22 容器镜像管理 — 开源项目索引]]
-- [[domain-13-container-runtime/01-harbor-enterprise-image-registry.md|Harbor企业级容器镜像仓库深度实践]]
-- [[domain-13-container-runtime/02-docker-registry-enterprise-distribution.md|Docker Registry企业级镜像分发深度实践]]
-- [[domain-13-container-runtime/03-jfrog-artifactory-enterprise.md|JFrog Artifactory Enterprise Container Registry Platform]]
-- [[domain-13-container-runtime/04-harbor-enterprise-security-scanning.md|Harbor企业级镜像安全扫描深度实践]]
-- [[domain-13-container-runtime/04-quay-enterprise-registry.md|Quay Container Registry 企业级镜像管理深度实践]]
-- [[domain-13-container-runtime/05-gitlab-container-registry-enterprise.md|GitLab Container Registry Enterprise 深度实践]]
-- [[domain-13-container-runtime/06-amazon-ecr-enterprise.md|Amazon ECR (Elastic Container Registry) Enterprise 深度实践]]
+- domain-22-container-image-management KUDIG Database — Global MOC
+- [[domain-13-container-runtime/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- Domain-22 容器镜像管理 — 开源项目索引
+- Harbor企业级容器镜像仓库深度实践
+- Docker Registry企业级镜像分发深度实践
+- JFrog Artifactory Enterprise Container Registry Platform
+- Harbor企业级镜像安全扫描深度实践
+- Quay Container Registry 企业级镜像管理深度实践
+- GitLab Container Registry Enterprise 深度实践
+- Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 
 ## See Also
 
-- [[domain-13-container-runtime/05-gitlab-container-registry-enterprise.md|05-gitlab-container-registry-enterprise]]
-- [[domain-13-container-runtime/06-amazon-ecr-enterprise.md|06-amazon-ecr-enterprise]]
-- [[domain-13-container-runtime/01-harbor-enterprise-image-registry.md|01-harbor-enterprise-image-registry]]
-- [[domain-13-container-runtime/02-docker-registry-enterprise-distribution.md|02-docker-registry-enterprise-distribution]]
+- 05-gitlab-container-registry-enterprise
+- 06-amazon-ecr-enterprise
+- 01-harbor-enterprise-image-registry
+- 02-docker-registry-enterprise-distribution

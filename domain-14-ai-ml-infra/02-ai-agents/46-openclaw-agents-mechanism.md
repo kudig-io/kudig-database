@@ -1,5 +1,5 @@
 ---
-title: OpenClaw AGENTS.md 机制深度解析
+title: OpenClaw AGENTS.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw AGENTS.md 机制深度解析'
 category: general
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw AGENTS.md 机制深度解析
@@ -39,7 +40,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- coredns
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -456,7 +457,7 @@ AGENTS.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | AGENTS.md 在 7 文件体系中的定位 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | AGENTS.md 在 7 文件体系中的定位 |
 | [31 - Harness Loop 与执行引擎](./31-agent-harness-loop-execution.md) | FSM 状态机、异步执行引擎、反漂移检测 |
 | [openclaw-workspace/AGENTS.md](./openclaw-workspace/AGENTS.md) | K8S 运维诊断工作流完整配置 |
 | [44 - SOUL.md 机制解析](./44-openclaw-soul-mechanism.md) | AGENTS.md Phase 4 安全评审引用 SOUL.md |
@@ -470,8 +471,8 @@ AGENTS.md 配置验证:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -485,11 +486,11 @@ AGENTS.md 配置验证:
 
 ## Related
 
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
+- 13-trusted-agent-system-fiscal-plan
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 47-openclaw-tools-mechanism
+- 48-openclaw-skill-mechanism

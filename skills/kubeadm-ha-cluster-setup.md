@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kubeadm 高可用集群搭建
@@ -50,7 +51,7 @@ prerequisites:
 ## Stacked etcd 架构
 
 ```
-负载均衡器 (HAProxy/Nginx/[[kube-vip|kube-vip]]/云厂商 CLB)
+负载均衡器 (HAProxy/[[entities/kube-vip|kube-vip]]/云厂商 CLB)
 control-plane-endpoint:6443
        │              │              │
   ┌────▼────┐   ┌────▼────┐   ┌────▼────┐
@@ -154,9 +155,9 @@ kubectl describe lease kube-scheduler -n kube-system
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 - [[concepts/high-availability-patterns.md|高可用模式]]
-- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
+- [[skills/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
 - [[etcd|etcd]]
 - [[entities/kube-apiserver.md|kube-apiserver]]
 

@@ -26,6 +26,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # MCP 协议集成指南
@@ -282,7 +283,7 @@ opencode mcp auth sentry  # 首次使用需认证
 Show me the latest unresolved issues in my project. use sentry
 ```
 
-### 6.2 [[entities/postgresql|postgresql]]
+### 6.2 postgresql
 
 ```json
 {

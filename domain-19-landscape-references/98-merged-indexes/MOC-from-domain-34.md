@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
 # domain-19-landscape-references MOC
@@ -54,11 +55,11 @@ CNCF 全景 — CNCF 项目生态、成熟度模型
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-34 CNCF Landscape — 开源项目索引]] |  | cncf, ecosystem |  |
-| 2 | [[domain-19-landscape-references/01-cncf-integration-guide.md|CNCF 集成实践指南]] |  | cncf, ecosystem, guide |  |
-| 3 | [[domain-19-landscape-references/02-cncf-learning-paths.md|CNCF 学习路径]] |  | cncf, ecosystem, tutorial |  |
-| 4 | [[domain-19-landscape-references/03-cncf-selection-guide.md|CNCF 项目选型指南]] |  | cncf, ecosystem, guide |  |
-| 5 | [[domain-19-landscape-references/04-cncf-fta-index.md|CNCF 项目 FTA 索引]] |  | cncf, ecosystem |  |
+| 1 | Domain-34 CNCF Landscape — 开源项目索引 |  | cncf, ecosystem |  |
+| 2 | CNCF 集成实践指南 |  | cncf, ecosystem, guide |  |
+| 3 | CNCF 学习路径 |  | cncf, ecosystem, tutorial |  |
+| 4 | CNCF 项目选型指南 |  | cncf, ecosystem, guide |  |
+| 5 | CNCF 项目 FTA 索引 |  | cncf, ecosystem |  |
 
 ---
 
@@ -89,9 +90,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-19-landscape-references 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-19-landscape-references 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-19-landscape-references 相关故障树分析 |
+| Skills 技能 | domain-19-landscape-references 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

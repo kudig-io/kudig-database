@@ -63,11 +63,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# Service 高级特性与应用案例 (Service Advanced Features)
+# [[Service|Service]] 高级特性与应用案例 (Service Advanced Features)
 
-> **适用版本**: Kubernetes v1.25 - v1.32  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32  
 > **文档版本**: v2.0 | 生产级 Service 高级特性参考  
 > **最后更新**: 2026-01
 
@@ -855,7 +856,7 @@ main
 | **健康检查** | Local 策略需要 | 配置 healthCheckNodePort |
 | **Pod 分布** | 配合 Local 策略 | 使用 topologySpreadConstraints |
 | **超时配置** | 会话超时时间 | 根据业务需求调整 |
-| **监控告警** | Service 健康监控 | 配置 Prometheus 规则 |
+| **监控告警** | Service 健康监控 | 配置 [[Prometheus|Prometheus]] 规则 |
 
 ### 监控指标
 
@@ -923,25 +924,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/08-service-topology-aware.md|08-service-topology-aware]]
-- [[domain-03-networking-traffic/09-kube-proxy-modes-performance.md|09-kube-proxy-modes-performance]]
-- [[domain-03-networking-traffic/11-dns-service-discovery-coredns.md|11-dns-service-discovery-coredns]]
-- [[domain-03-networking-traffic/12-dns-service-discovery.md|12-dns-service-discovery]]
+- 08-service-topology-aware
+- 09-kube-proxy-modes-performance
+- 11-dns-service-discovery-coredns
+- 12-dns-service-discovery
 
 ## Related
 

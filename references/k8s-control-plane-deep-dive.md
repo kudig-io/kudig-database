@@ -35,6 +35,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 控制平面深度剖析

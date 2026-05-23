@@ -23,6 +23,7 @@ trigger_keywords:
 - Workflow
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Diagnostic Workflow
@@ -49,7 +50,7 @@ prerequisites:
   - 出现 `NodeHasInsufficientMemory` → 内存不足（RC-004）
   - 出现 `InvalidDiskCapacity` → 磁盘配置异常（RC-003 变种）
   - 出现 `Rebooted` → 节点曾重启（关注 RC-009 内核/硬件问题）
-  - 出现 `Starting` → kubelet 刚重启过（RC-001 的恢复迹象）
+  - 出现 `Starting` → [[kubelet|kubelet]] 刚重启过（RC-001 的恢复迹象）
   - 无近期事件 → 可能是网络分区，apiserver 未收到任何更新（RC-006）
 - **版本差异**: 无
 
@@ -126,7 +127,7 @@ prerequisites:
   - 日志包含 `connection refused` 或 `dial tcp <apiserver-ip>:6443: connect: connection refused` → 网络不通或 apiserver 不可达（RC-006）
   - 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority` → 证书问题（RC-007），关联 SKILL-SEC-001
   - 日志包含 `PLEG is not healthy` → PLEG 不健康（RC-008），继续 D2.6
-  - 日志包含 `container runtime is not running` 或 `runtime connect using default endpoints` → 容器运行时故障（RC-002）
+  - 日志包含 `[[Container Runtime|container runtime]] is not running` 或 `runtime connect using default endpoints` → 容器运行时故障（RC-002）
   - 日志包含 `failed to garbage collect` + 磁盘相关错误 → 磁盘空间不足（RC-003）
   - 日志包含 `OOM` 或 `oom_kill` → 内存压力（RC-004）
   - 日志包含 `too many open files` 或 `no space left on device` → 资源耗尽（RC-003 或 RC-005）
@@ -160,7 +161,7 @@ prerequisites:
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[entities/container-runtime.md|container-runtime]] — Container Runtime
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd

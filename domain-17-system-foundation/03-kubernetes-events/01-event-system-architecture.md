@@ -48,9 +48,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# 01 - Kubernetes 事件系统架构与 API 参考
+# 01 - [[Kubernetes|Kubernetes]] 事件系统架构与 API 参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
@@ -75,7 +76,7 @@ authors:
 
 #<!-- chunk: 1.1 什么是 Kubernetes Event -->## 1.1 什么是 Kubernetes Event
 
-Kubernetes Event 是集群中发生的状态变化或操作的记录对象。每当一个组件（如 kubelet、kube-scheduler、kube-controller-manager）执行了某个动作或检测到异常状况时，都会向 API Server 报告一个 Event 对象。
+Kubernetes Event 是集群中发生的状态变化或操作的记录对象。每当一个组件（如 [[kubelet|kubelet]]、kube-scheduler、kube-controller-manager）执行了某个动作或检测到异常状况时，都会向 API Server 报告一个 Event 对象。
 
 Event 是 Kubernetes 内置的「可观测性」基础设施之一，与 metrics 和 logs 并列构成集群运维的三大信息源。
 
@@ -87,7 +88,7 @@ Event 是 Kubernetes 内置的「可观测性」基础设施之一，与 metrics
 | **时效** | 短期存储，默认 TTL 为 1 小时，由 kube-apiserver 的 `--event-ttl` 参数控制 |
 | **粒度** | 单个资源对象级别，每个事件关联一个 `involvedObject` |
 | **类型** | 仅有两种: `Normal`（正常操作）和 `Warning`（异常/需关注） |
-| **存储** | 存储在 etcd 中，与其他 API 对象共享存储空间 |
+| **存储** | 存储在 [[etcd|etcd]] 中，与其他 API 对象共享存储空间 |
 
 #<!-- chunk: 1.3 初学者快速理解 -->## 1.3 初学者快速理解
 
@@ -296,7 +297,7 @@ type: Normal
 |:---|:---|:---|:---|
 | **kubelet** | `kubelet` | 容器生命周期、镜像拉取、探针、卷挂载、节点状态 | Pod, Node |
 | **kube-scheduler** | `default-scheduler` | 调度成功/失败、抢占 | Pod |
-| **deployment-controller** | `deployment-controller` | 副本集伸缩、滚动更新、回滚 | Deployment, ReplicaSet |
+| **deployment-controller** | `deployment-controller` | 副本集伸缩、滚动更新、回滚 | Deployment, [[ReplicaSet|ReplicaSet]] |
 | **replicaset-controller** | `replicaset-controller` | Pod 创建/删除 | ReplicaSet, Pod |
 | **statefulset-controller** | `statefulset-controller` | Pod 有序创建/删除 | StatefulSet, Pod |
 | **daemonset-controller** | `daemon-set-controller` | DaemonSet Pod 管理 | DaemonSet, Pod |
@@ -588,25 +589,25 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/14-namespace-resource-gc-events.md|14-namespace-resource-gc-events]]
-- [[domain-17-system-foundation/15-ecosystem-addon-events.md|15-ecosystem-addon-events]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02-pod-container-lifecycle-events]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03-image-pull-events]]
+- 14-namespace-resource-gc-events
+- 15-ecosystem-addon-events
+- 02-pod-container-lifecycle-events
+- 03-image-pull-events
 
 ## Related
 

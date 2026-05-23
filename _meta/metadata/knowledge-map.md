@@ -1,29 +1,5 @@
 ---
-title: 知识图谱 (Knowledge Map)
-description: 'description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]'
-category: general
-tags:
-- meta
-- docker
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- 知识图谱 (Knowledge Map) 是什么
-- 如何 知识图谱 (Knowledge Map)
-trigger_keywords:
-- 知识图谱
-- Knowledge
-- Map
-prerequisites:
-- kubectl-basics
----
-
-title: 知识图谱 (Knowledge Map)
+title: 知识图谱 (Knowledge Map) [metadata]
 description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
 category: general
 tags:
@@ -43,19 +19,11 @@ trigger_keywords:
 - 知识图谱
 - Knowledge
 - Map
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
 ---
+
 # 知识图谱 (Knowledge Map)
 
 > 知识模块间的依赖关系和学习路径
@@ -139,14 +107,6 @@ graph LR
 | domain-10-troubleshooting-diagnostics 排障 | domain-1~8 任一 | domain-10-troubleshooting-diagnostics/topic-fta/skills |
 | topic-fta | domain-10-troubleshooting-diagnostics 排障基础 | topic-skills |
 | topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | topic-ai-agent |
-
----
-
-## Obsidian 相关文档
-
-- [[metadata/difficulty-index.md|难度分级索引 (Difficulty Index)]]
-- [[metadata/README.md|元数据索引 (Metadata)]]
-- [[metadata/tags-index.md|标签索引 (Tags Index)]]
 
 ## Related
 

@@ -27,6 +27,7 @@ trigger_keywords:
 - Containers
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Linux Security Modules for Containers
@@ -94,8 +95,8 @@ securityContext:
 
 ## Related
 
-- [[concepts/secrets-management.md|secrets-management]] — Secrets Management
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[concepts/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
+- [[entities/kubelet.md|[[kubelet|kubelet]]]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation
 - [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth

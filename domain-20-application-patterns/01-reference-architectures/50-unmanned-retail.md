@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 无人零售与智能货柜架构设计
@@ -36,7 +37,7 @@ tags:
 - k8s
 - architecture
 - industry
-- daemonset
+- [[DaemonSet|daemonset]]
 - gpu
 - nvidia
 last_updated: 2026-05-18
@@ -48,7 +49,7 @@ audience:
 - 边缘计算专家
 estimated_read_time: 5min
 intent_queries:
-- 无人零售 Kubernetes 边缘计算
+- 无人零售 [[Kubernetes|Kubernetes]] 边缘计算
 - 智能货柜 AI视觉 Kubernetes
 - IoT零售 阿里云 Kubernetes
 - 商品识别 GPU Kubernetes
@@ -334,7 +335,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -349,7 +350,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/48-vocational-edtech.md|48-vocational-edtech]]
-- [[domain-20-application-patterns/49-livestream-ecommerce.md|49-livestream-ecommerce]]
-- [[domain-20-application-patterns/51-smart-manufacturing-mes.md|51-smart-manufacturing-mes]]
-- [[domain-20-application-patterns/52-smart-water.md|52-smart-water]]
+- 48-vocational-edtech
+- 49-livestream-ecommerce
+- 51-smart-manufacturing-mes
+- 52-smart-water

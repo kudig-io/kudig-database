@@ -1,6 +1,40 @@
 ---
+title: 删除时的安全清理 (topic-code-analysis)
+description: 'title: 删除时的安全清理'
+category: general
+tags:
+- reference
+- security
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 删除时的安全清理 是什么
+- 如何 删除时的安全清理
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 删除时的安全清理
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 删除时的安全清理
-description: 深入分析 Kubernetes 集群删除时的安全清理机制，涵盖证书/密钥完整删除、etcd 数据安全擦除、RBAC 残留清理、systemd 配置移除以及 CI/CD kubeconfig 清理等关键安全考量。
 category: cluster-delete
 tags:
 - security
@@ -11,16 +45,10 @@ tags:
 - kubeconfig
 - systemd
 - cleanup
-- etcd
-- apiserver
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes 集群删除时的安全清理机制，涵盖证书/密钥完整删除、etcd 数据安全擦除、RBAC 残留清理、systemd
+  配置移除以及 CI/CD kubeconfig 清理等关键安全考量。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- security-engineer
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes cluster deletion security cleanup
 - kubeadm reset certificate cleanup security
@@ -38,10 +66,12 @@ trigger_keywords:
 - admin.conf
 - super-admin.conf
 - bootstrap-token
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- security-engineer
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -51,6 +81,17 @@ related_topics:
 - etcd-cleanup
 - network-cleanup
 - reset-phase-commands
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 删除时的安全清理
@@ -84,7 +125,7 @@ func CleanupTmpDir(tmpDir string) error
 
 | 路径 | 清理方式 | 说明 |
 |------|---------|------|
-| `/etc/[[entities/kubernetes|kubernetes]]/pki/*.crt` | CleanDir 内容 | 所有证书 |
+| `/etc/kubernetes/pki/*.crt` | CleanDir 内容 | 所有证书 |
 | `/etc/kubernetes/pki/*.key` | CleanDir 内容 | 所有私钥 |
 | `/etc/kubernetes/pki/etcd/` | CleanDir 内容 | etcd 证书子目录 |
 | `/var/lib/kubelet/pki/` | CleanDir | kubelet 证书 |
@@ -421,3 +462,11 @@ echo "=== 安全清理完成 ==="
 - [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — etcd 成员移除
 - [`网络清理`](11-network-cleanup.md) — CNI/iptables 清理
 - [`证书生成`](../cluster-cert/02-ca-generation.md) — 理解证书文件结构
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

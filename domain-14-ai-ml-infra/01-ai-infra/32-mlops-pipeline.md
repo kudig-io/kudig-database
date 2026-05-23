@@ -53,11 +53,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # 32 - MLOps端到端流水线
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [Argo Workflows](https://argoproj.github.io/argo-workflows/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[entities/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
 
 <!-- chunk: 一、MLOps流水线架构 -->
 ## 一、MLOps流水线架构
@@ -106,7 +107,7 @@ cross_refs:
 | **特征工程** | 特征提取、转换、存储 | Feast/TF Transform | 特征漂移、版本管理 |
 | **模型训练** | 分布式训练、超参调优 | Kubeflow/Katib | GPU利用率、训练时间 |
 | **模型评估** | 性能评估、公平性检查 | MLflow/Evidently | 评估准确性、偏差检测 |
-| **模型部署** | 打包、部署、流量切换 | KServe/Seldon | 部署成功率、延迟指标 |
+| **模型部署** | 打包、部署、流量切换 | [[KServe|KServe]]/Seldon | 部署成功率、延迟指标 |
 | **在线服务** | 推理服务、自动扩缩容 | Istio/Knative | QPS、错误率、SLA |
 
 ---
@@ -479,7 +480,7 @@ jobs:
     - name: Wait for pipeline completion
       run: |
         timeout 3600 bash -c \"
-        while [[ \\$(kubectl get workflow -n ml-staging --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1:].status.phase}') != 'Succeeded' ]]; do
+        while \\$(kubectl get workflow -n ml-staging --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1:].status.phase}') != 'Succeeded'; do
           echo 'Waiting for pipeline completion...'
           sleep 30
         done
@@ -751,22 +752,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/30-ai-security-compliance.md|30-ai-security-compliance]]
-- [[domain-14-ai-ml-infra/31-ai-platform-governance.md|31-ai-platform-governance]]
-- [[domain-14-ai-ml-infra/33-model-explainability.md|33-model-explainability]]
-- [[domain-14-ai-ml-infra/34-federated-learning.md|34-federated-learning]]
+- 30-ai-security-compliance
+- 31-ai-platform-governance
+- 33-model-explainability
+- 34-federated-learning

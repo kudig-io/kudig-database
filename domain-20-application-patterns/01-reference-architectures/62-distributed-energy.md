@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 分布式能源架构设计
@@ -38,9 +39,9 @@ tags:
 - architecture
 - industry
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - mysql
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -50,7 +51,7 @@ audience:
 - 电力系统专家
 estimated_read_time: 5min
 intent_queries:
-- 分布式能源 Kubernetes 边缘计算
+- 分布式能源 [[Kubernetes|Kubernetes]] 边缘计算
 - 光伏储能 EMS Kubernetes 部署
 - 虚拟电厂 VPP Kubernetes
 - 能源调度优化 AI Kubernetes
@@ -73,7 +74,7 @@ related_domains:
 related_topics:
 - 61-smart-grid
 - 85-hydrogen-energy
-- [[domain-20-application-patterns/36-carbon-esg-management.md|36-carbon-esg-management]]
+- 36-carbon-esg-management
 authors:
 - name: KUDIG Team
   role: contributor
@@ -767,7 +768,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -782,11 +783,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/60-v2x-autonomous-driving.md|60-v2x-autonomous-driving]]
-- [[domain-20-application-patterns/61-smart-grid.md|61-smart-grid]]
-- [[domain-20-application-patterns/63-industrial-visual-inspection.md|63-industrial-visual-inspection]]
-- [[domain-20-application-patterns/64-ai-drug-discovery.md|64-ai-drug-discovery]]
+- 60-v2x-autonomous-driving
+- 61-smart-grid
+- 63-industrial-visual-inspection
+- 64-ai-drug-discovery
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

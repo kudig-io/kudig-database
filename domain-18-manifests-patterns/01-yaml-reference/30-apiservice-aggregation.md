@@ -47,11 +47,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
 # 30 - APIService YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 **本文档全面覆盖 APIService(API 聚合层)的 YAML 配置**,包括完整字段说明、本地 vs 远程 APIService、内部原理、与 Metrics Server 集成、自定义 API Server 开发等。
 
@@ -75,7 +76,7 @@ cross_refs:
 APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展 API Server 的功能:
 
 - **动态 API 扩展**: 将自定义 API 路由到独立的 API Server(不依赖 kube-apiserver 重启)
-- **灵活存储**: 自定义 API Server 可以使用自己的存储后端(不限于 etcd)
+- **灵活存储**: 自定义 API Server 可以使用自己的存储后端(不限于 [[etcd|etcd]])
 - **复杂业务逻辑**: 支持复杂的计算、聚合、外部系统集成
 - **透明代理**: 客户端无需感知后端 API Server,统一通过 kube-apiserver 访问
 
@@ -1099,7 +1100,7 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
 
 - **官方文档**:
-  - [Extend the Kubernetes API with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+  - [Extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
   - [Configure the aggregation layer](https://kubernetes.io/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
   - [Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
 - **API Server 开发**:
@@ -1126,22 +1127,22 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/28-poddisruptionbudget-reference.md|28-poddisruptionbudget-reference]]
-- [[domain-18-manifests-patterns/29-customresourcedefinition.md|29-customresourcedefinition]]
-- [[domain-18-manifests-patterns/31-api-priority-fairness.md|31-api-priority-fairness]]
-- [[domain-18-manifests-patterns/32-lease-event-node.md|32-lease-event-node]]
+- 28-poddisruptionbudget-reference
+- 29-customresourcedefinition
+- 31-api-priority-fairness
+- 32-lease-event-node

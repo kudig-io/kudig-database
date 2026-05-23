@@ -47,11 +47,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 03 - 镜像拉取事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和 Docker Hub 限流等生产环境高频问题。**
 
@@ -78,7 +79,7 @@ authors:
 
 | Event Reason | 中文名称 | 类型 | 来源组件 | 关联资源 | 适用版本 | 生产频率 |
 |:---|:---|:---|:---|:---|:---|:---|
-| `Pulling` | 开始拉取镜像 | Normal | kubelet | Pod | v1.0+ | 高频 |
+| `Pulling` | 开始拉取镜像 | Normal | [[kubelet|kubelet]] | Pod | v1.0+ | 高频 |
 | `Pulled` | 镜像拉取成功 | Normal | kubelet | Pod | v1.0+ | 高频 |
 | `AlreadyPresent` | 镜像已存在本地 | Normal | kubelet | Pod | v1.0+ | 高频 |
 | `Failed` (ErrImagePull) | 镜像拉取失败 | Warning | kubelet | Pod | v1.0+ | 中频 |
@@ -275,7 +276,7 @@ LAST SEEN   TYPE     REASON    OBJECT                             MESSAGE
 
 - **用户影响**: Pod 启动时间延长,取决于镜像大小和网络速度(通常几秒到几分钟)
 - **服务影响**: 如果是新部署或滚动更新,会影响服务就绪时间和流量切换速度
-- **集群影响**: 大规模拉取(如 DaemonSet 部署到所有节点)会产生显著网络流量和镜像仓库负载
+- **集群影响**: 大规模拉取(如 [[DaemonSet|DaemonSet]] 部署到所有节点)会产生显著网络流量和镜像仓库负载
 - **关联事件链**: `Scheduled` → `Pulling` → `Pulled` → `Created` → `Started`
 
 ##<!-- chunk: 排查建议 -->## 排查建议
@@ -338,7 +339,7 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
 | **镜像体积过大** | 优化 Dockerfile 分层,使用多阶段构建,减小镜像体积 | 高 |
-| **网络带宽不足** | 使用本地镜像仓库或区域性镜像缓存(如 Harbor/Dragonfly) | 高 |
+| **网络带宽不足** | 使用本地镜像仓库或区域性镜像缓存(如 [[Harbor|Harbor]]/Dragonfly) | 高 |
 | **镜像仓库限流** | 配置镜像仓库镜像或使用企业版仓库服务 | 高 |
 | **镜像仓库响应慢** | 更换为地理位置更近的镜像仓库或使用 CDN 加速 | 中 |
 | **多个容器同时拉取** | 调整 kubelet 的 `--serialize-image-pulls=false` 允许并发拉取 | 中 |
@@ -2363,25 +2364,25 @@ echo "=== Audit Complete ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/01-event-system-architecture.md|01-event-system-architecture]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02-pod-container-lifecycle-events]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04-probe-health-check-events]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05-scheduling-preemption-events]]
+- 01-event-system-architecture
+- 02-pod-container-lifecycle-events
+- 04-probe-health-check-events
+- 05-scheduling-preemption-events
 
 ## Related
 

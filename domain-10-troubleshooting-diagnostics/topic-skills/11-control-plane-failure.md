@@ -54,9 +54,11 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
-<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get pods -n kube-system -l component=etcd 显示非 Running -->
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[Pods|pods]] -n kube-system -l component=[[etcd|etcd]] 显示非 Running -->
 
 # etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 
@@ -64,7 +66,7 @@ k8s_versions:
 
 ## 1. 概述
 
-控制平面（Control Plane）是 Kubernetes 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面故障是 Kubernetes 中**最严重的故障类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
+控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面故障是 Kubernetes 中**最严重的故障类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
 
 ### 典型触发场景
 
@@ -1601,7 +1603,7 @@ ETCD_CERT="/etc/kubernetes/pki/etcd/peer.crt"
 ETCD_KEY="/etc/kubernetes/pki/etcd/peer.key"
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --etcd-endpoints) ETCD_ENDPOINTS="$2"; shift 2 ;;
         --etcd-cacert)    ETCD_CACERT="$2"; shift 2 ;;
@@ -1626,21 +1628,21 @@ echo -e "  时间: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
 # --- Step 1: API Server 健康检查 ---
 info "[1/6] 检查 API Server 健康状态..."
 HEALTHZ=$(kubectl get --raw /healthz --request-timeout=10s 2>/dev/null || echo "unreachable")
-if [[ "$HEALTHZ" == "ok" ]]; then
+if "$HEALTHZ" == "ok"; then
     success "API Server /healthz: ok"
 else
     error "API Server /healthz: $HEALTHZ"
 fi
 
 READYZ=$(kubectl get --raw /readyz --request-timeout=10s 2>/dev/null || echo "unreachable")
-if [[ "$READYZ" == "ok" ]]; then
+if "$READYZ" == "ok"; then
     success "API Server /readyz: ok"
 else
     warn "API Server /readyz: $READYZ"
 fi
 
 LIVEZ=$(kubectl get --raw /livez --request-timeout=10s 2>/dev/null || echo "unreachable")
-if [[ "$LIVEZ" == "ok" ]]; then
+if "$LIVEZ" == "ok"; then
     success "API Server /livez: ok"
 else
     warn "API Server /livez: $LIVEZ"
@@ -1648,7 +1650,7 @@ fi
 
 # --- Step 2: etcd 集群健康检查 ---
 info "[2/6] 检查 etcd 集群健康..."
-if command -v etcdctl &>/dev/null && [[ -f "$ETCD_CACERT" ]]; then
+if command -v etcdctl &>/dev/null && -f "$ETCD_CACERT"; then
     ETCD_HEALTH=$(ETCDCTL_API=3 etcdctl \
         --endpoints="$ETCD_ENDPOINTS" \
         --cacert="$ETCD_CACERT" \
@@ -1672,7 +1674,7 @@ if command -v etcdctl &>/dev/null && [[ -f "$ETCD_CACERT" ]]; then
         --key="$ETCD_KEY" \
         alarm list 2>/dev/null || true)
     
-    if [[ -n "$ETCD_ALARM" ]]; then
+    if -n "$ETCD_ALARM"; then
         error "etcd 存在 ALARM:"
         echo "$ETCD_ALARM" | while read line; do echo "    $line"; done
     else
@@ -1685,14 +1687,14 @@ fi
 # --- Step 3: Scheduler/Controller Manager Leader 选举状态 ---
 info "[3/6] 检查 Scheduler/Controller Manager Leader 选举状态..."
 SCHED_LEASE=$(kubectl get lease kube-scheduler -n kube-system -o jsonpath='{.spec.holderIdentity}' 2>/dev/null || true)
-if [[ -n "$SCHED_LEASE" ]]; then
+if -n "$SCHED_LEASE"; then
     success "kube-scheduler leader: $SCHED_LEASE"
 else
     warn "kube-scheduler leader 未找到"
 fi
 
 CM_LEASE=$(kubectl get lease kube-controller-manager -n kube-system -o jsonpath='{.spec.holderIdentity}' 2>/dev/null || true)
-if [[ -n "$CM_LEASE" ]]; then
+if -n "$CM_LEASE"; then
     success "kube-controller-manager leader: $CM_LEASE"
 else
     warn "kube-controller-manager leader 未找到"
@@ -1701,9 +1703,9 @@ fi
 # --- Step 4: 控制平面 Pod 状态 ---
 info "[4/6] 检查控制平面 Pod 状态..."
 CP_PODS=$(kubectl get pods -n kube-system -l tier=control-plane --no-headers 2>/dev/null || true)
-if [[ -n "$CP_PODS" ]]; then
+if -n "$CP_PODS"; then
     NOT_RUNNING=$(echo "$CP_PODS" | grep -v "Running" || true)
-    if [[ -n "$NOT_RUNNING" ]]; then
+    if -n "$NOT_RUNNING"; then
         error "控制平面 Pod 异常:"
         echo "$NOT_RUNNING" | while read line; do echo "    $line"; done
     else
@@ -1717,11 +1719,11 @@ fi
 info "[5/6] 检查证书过期时间..."
 if command -v kubeadm &>/dev/null; then
     CERT_INFO=$(kubeadm certs check-expiration 2>/dev/null || true)
-    if [[ -n "$CERT_INFO" ]]; then
+    if -n "$CERT_INFO"; then
         # 检查是否有6天内过期
         if echo "$CERT_INFO" | grep -qE "[0-9]+d|invalid"; then
             EXPIRING=$(echo "$CERT_INFO" | grep -E "([0-6]d|invalid|expired)" || true)
-            if [[ -n "$EXPIRING" ]]; then
+            if -n "$EXPIRING"; then
                 warn "以下证书即将过期或已过期:"
                 echo "$EXPIRING" | while read line; do echo "    $line"; done
             else
@@ -1808,7 +1810,7 @@ ETCD_KEY="/etc/kubernetes/pki/etcd/peer.key"
 RUN_PERF=false
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --endpoints)  ETCD_ENDPOINTS="$2"; shift 2 ;;
         --cacert)     ETCD_CACERT="$2"; shift 2 ;;
@@ -1826,7 +1828,7 @@ if ! command -v etcdctl &>/dev/null; then
     exit 1
 fi
 
-if [[ ! -f "$ETCD_CACERT" ]]; then
+if ! -f "$ETCD_CACERT"; then
     error "etcd CA 证书不存在: $ETCD_CACERT"
     exit 1
 fi
@@ -1842,7 +1844,7 @@ echo -e "  时间: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
 # --- Step 1: etcd member list ---
 info "[1/5] 检查 etcd 成员列表..."
 MEMBER_LIST=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" member list -w table 2>/dev/null || true)
-if [[ -n "$MEMBER_LIST" ]]; then
+if -n "$MEMBER_LIST"; then
     success "etcd 成员列表:"
     echo "$MEMBER_LIST" | while read line; do echo "    $line"; done
 else
@@ -1852,7 +1854,7 @@ fi
 # --- Step 2: endpoint status ---
 info "[2/5] 检查 etcd 端点状态..."
 ENDPOINT_STATUS=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" endpoint status --cluster -w table 2>/dev/null || true)
-if [[ -n "$ENDPOINT_STATUS" ]]; then
+if -n "$ENDPOINT_STATUS"; then
     success "etcd 端点状态:"
     echo "$ENDPOINT_STATUS" | while read line; do echo "    $line"; done
     
@@ -1860,7 +1862,7 @@ if [[ -n "$ENDPOINT_STATUS" ]]; then
     DB_SIZE=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" endpoint status -w json 2>/dev/null | \
               jq -r '.[0].Status.dbSize' 2>/dev/null || echo "0")
     DB_SIZE_MB=$((DB_SIZE / 1024 / 1024))
-    if [[ $DB_SIZE_MB -gt 2048 ]]; then
+    if $DB_SIZE_MB -gt 2048; then
         warn "etcd DB 大小: ${DB_SIZE_MB}MB (超过默认 quota 2GB)"
     else
         success "etcd DB 大小: ${DB_SIZE_MB}MB"
@@ -1872,7 +1874,7 @@ fi
 # --- Step 3: 检查 alarm 状态 ---
 info "[3/5] 检查 etcd alarm 状态..."
 ALARM_LIST=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" alarm list 2>/dev/null || true)
-if [[ -z "$ALARM_LIST" ]]; then
+if -z "$ALARM_LIST"; then
     success "etcd 无 alarm"
 else
     error "etcd 存在 alarm:"
@@ -1882,13 +1884,13 @@ fi
 # --- Step 4: 检查碎片化比例 ---
 info "[4/5] 检查 etcd 数据库碎片化..."
 DB_INFO=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" endpoint status --cluster -w json 2>/dev/null || echo "[]")
-if [[ "$DB_INFO" != "[]" ]]; then
+if "$DB_INFO" != "[]"; then
     echo "$DB_INFO" | jq -r '.[] | "\(.Endpoint): dbSize=\(.Status.dbSize) dbSizeInUse=\(.Status.dbSizeInUse // .Status.dbSize)"' 2>/dev/null | \
     while read line; do
         ENDPOINT=$(echo "$line" | cut -d: -f1-2)
         DB_SIZE=$(echo "$line" | grep -oP 'dbSize=\K[0-9]+')
         DB_IN_USE=$(echo "$line" | grep -oP 'dbSizeInUse=\K[0-9]+')
-        if [[ -n "$DB_SIZE" && -n "$DB_IN_USE" && "$DB_IN_USE" -gt 0 ]]; then
+        if -n "$DB_SIZE" && -n "$DB_IN_USE" && "$DB_IN_USE" -gt 0; then
             FRAG_RATIO=$(echo "scale=2; $DB_SIZE / $DB_IN_USE" | bc 2>/dev/null || echo "1")
             if (( $(echo "$FRAG_RATIO > 2.0" | bc -l 2>/dev/null || echo 0) )); then
                 warn "$ENDPOINT 碎片化比例: $FRAG_RATIO (建议 defrag)"
@@ -1900,7 +1902,7 @@ if [[ "$DB_INFO" != "[]" ]]; then
 fi
 
 # --- Step 5: 运行性能测试 (可选) ---
-if [[ "$RUN_PERF" == "true" ]]; then
+if "$RUN_PERF" == "true"; then
     info "[5/5] 运行 etcd 性能测试 (60s)..."
     PERF_RESULT=$(ETCDCTL_API=3 etcdctl "${ETCDCTL_OPTS[@]}" check perf 2>&1 || true)
     if echo "$PERF_RESULT" | grep -q "PASS"; then
@@ -1970,7 +1972,7 @@ ETCD_CERT="/etc/kubernetes/pki/etcd/peer.crt"
 ETCD_KEY="/etc/kubernetes/pki/etcd/peer.key"
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --etcd-endpoints) ETCD_ENDPOINTS="$2"; shift 2 ;;
         --etcd-cacert)    ETCD_CACERT="$2"; shift 2 ;;
@@ -1994,9 +1996,9 @@ echo -e "${BLUE}${BOLD}═══════════════════
 # --- V1: 验证控制平面组件 Running ---
 info "[V1] 验证控制平面组件状态..."
 CP_PODS=$(kubectl get pods -n kube-system -l tier=control-plane --no-headers 2>/dev/null || true)
-if [[ -n "$CP_PODS" ]]; then
+if -n "$CP_PODS"; then
     NOT_RUNNING=$(echo "$CP_PODS" | grep -v "Running" || true)
-    if [[ -z "$NOT_RUNNING" ]]; then
+    if -z "$NOT_RUNNING"; then
         success "控制平面组件全部 Running"
     else
         fail "控制平面组件存在异常"
@@ -2007,7 +2009,7 @@ fi
 
 # --- V2: 验证 etcd 集群 healthy ---
 info "[V2] 验证 etcd 集群健康..."
-if command -v etcdctl &>/dev/null && [[ -f "$ETCD_CACERT" ]]; then
+if command -v etcdctl &>/dev/null && -f "$ETCD_CACERT"; then
     ETCD_HEALTH=$(ETCDCTL_API=3 etcdctl \
         --endpoints="$ETCD_ENDPOINTS" \
         --cacert="$ETCD_CACERT" \
@@ -2031,7 +2033,7 @@ kubectl get nodes &>/dev/null
 END_TIME=$(date +%s%3N)
 LATENCY=$((END_TIME - START_TIME))
 
-if [[ $LATENCY -lt 1000 ]]; then
+if $LATENCY -lt 1000; then
     success "API Server 延迟: ${LATENCY}ms (<1s)"
 else
     fail "API Server 延迟: ${LATENCY}ms (超过 1s)"
@@ -2041,10 +2043,10 @@ fi
 info "[V4] 验证证书有效期..."
 if command -v kubeadm &>/dev/null; then
     CERT_INFO=$(kubeadm certs check-expiration 2>/dev/null || true)
-    if [[ -n "$CERT_INFO" ]]; then
+    if -n "$CERT_INFO"; then
         # 检查是否有30天内过期的证书
         EXPIRING_SOON=$(echo "$CERT_INFO" | grep -E "[0-2][0-9]d" | grep -vE "[3-9][0-9]d" || true)
-        if [[ -z "$EXPIRING_SOON" ]]; then
+        if -z "$EXPIRING_SOON"; then
             success "所有证书有效期 > 30 天"
         else
             fail "部分证书将在30天内过期"
@@ -2069,7 +2071,7 @@ fi
 # --- 输出验证结果 ---
 echo -e "\n${BOLD}════════════════════════════════════════════════════════${NC}"
 TOTAL=$((PASS_COUNT + FAIL_COUNT))
-if [[ $FAIL_COUNT -eq 0 ]]; then
+if $FAIL_COUNT -eq 0; then
     echo -e "${GREEN}${BOLD}验证结果: 全部通过 ($PASS_COUNT/$TOTAL)${NC}"
     exit 0
 else

@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # On-Call 快速参考卡
@@ -105,7 +106,7 @@ prerequisites:
 
 ---
 
-### Service 无 Endpoints / 连通性故障
+### Service 无 Endpoints / 连通性问题
 
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
@@ -113,13 +114,13 @@ prerequisites:
 | ClusterIP 不通 | `kubectl run test --image=busybox --restart=Never -- nslookup <svc>` | 重启 kube-proxy: `kubectl rollout restart daemonset kube-proxy - kube-system` |
 | Ingress 502 | `kubectl describe ingress` + `kubectl get pods -n ingress-nginx` | 检查 backend Service + Pod 健康 |
 
-> **升级条件**: 多个 Service 同时不可用、Ingress Controller 故障
+> **升级条件**: 多个 Service 同时不可用、Ingress Controller 问题
 
 ---
 
 ## 三、存储与卷
 
-### PVC Pending / 存储故障
+### PVC Pending / 存储问题
 
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
@@ -128,7 +129,7 @@ prerequisites:
 | 云盘存储异常 | `kubectl get pods -n kube-system \| grep csi` | 重启云盘 CSI driver (需审批) |
 | StorageClass 缺失 | `kubectl get storageclass` | 创建 StorageClass 或指定默认 |
 
-> **升级条件**: 有状态应用 PVC 故障、数据不可用
+> **升级条件**: 有状态应用 PVC 问题、数据不可用
 
 ---
 
@@ -186,7 +187,7 @@ prerequisites:
 
 ## 六、可观测性
 
-### Prometheus/监控故障
+### Prometheus/监控问题
 
 | 告警现象 | 诊断命令 | 修复命令 |
 |---------|---------|---------|
@@ -295,4 +296,4 @@ kubectl rollout restart daemonset <name> -n <ns>
 **关联文档**:
 - [domain-10-troubleshooting-diagnostics/topic-skills/README.md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md) — 完整 Skill 文档
 - [P1-4: 决策树 Mermaid 可视化](./P1-4-decision-tree-mermaid-visualization.md)
-- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — 详细故障排查文档
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — 详细问题排查文档

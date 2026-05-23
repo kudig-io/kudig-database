@@ -49,9 +49,10 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-﻿# Kubernetes 与 AI/ML 概念参考手册（完整恢复版）
+﻿# [[Kubernetes|Kubernetes]] 与 AI/ML 概念参考手册（完整恢复版）
 
 > 本文档包含kusheet项目涉及的300+核心技术概念，涵盖Kubernetes、分布式系统、AI/ML、DevOps等领域的完整知识体系。
 
@@ -81,13 +82,13 @@ prerequisites:
 | 3 | Node | §1 | 集群中的机器，像工厂里的一台"工作台" |
 | 4 | Namespace | §1 | 逻辑隔离分区，像办公楼里的"不同楼层" |
 | 5 | Deployment | §5 | 管理 Pod 副本的控制器，像"车队调度中心" |
-| 6 | Service | §6 | 稳定的网络入口，像"公司前台电话总机" |
+| 6 | [[Service|Service]] | §6 | 稳定的网络入口，像"公司前台电话总机" |
 | 7 | ConfigMap | §5 | 配置数据存储，像"应用的配置文件柜" |
 | 8 | Secret | §5 | 敏感数据存储，像"保险箱" |
 | 9 | Label | §1 | 对象标签，像"行李标签"用于分类和筛选 |
-| 10 | Container Runtime | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
+| 10 | [[Container Runtime|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
 | 11 | kube-apiserver | §3 | API 入口，像"公司前台接待" |
-| 12 | etcd | §3 | 数据存储，像"公司的档案室" |
+| 12 | [[etcd|etcd]] | §3 | 数据存储，像"公司的档案室" |
 | 13 | kubelet | §4 | 节点代理，像"每台机器上的管家" |
 | 14 | Ingress | §6 | 外部流量入口，像"大楼的门卫" |
 | 15 | PersistentVolume | §7 | 持久存储，像"云端硬盘" |
@@ -4767,15 +4768,15 @@ prerequisites:
 > # REST API调用示例:
 > # curl -X POST http://tf-serving:8501/v1/models/my_model:predict \
 > #   -H "Content-Type: application/json" \
-> #   -d '{"instances": [[5.1, 3.5, 1.4, 0.2]]}'
+> #   -d '{"instances": 5.1, 3.5, 1.4, 0.2}'
 > #
-> # 返回: {"predictions": [[0.9, 0.05, 0.05]]}
+> # 返回: {"predictions": 0.9, 0.05, 0.05}
 > 
 > # Python客户端示例:
 > # import requests
 > # response = requests.post(
 > #     'http://tf-serving:8501/v1/models/my_model:predict',
-> #     json={'instances': [[5.1, 3.5, 1.4, 0.2]]}
+> #     json={'instances': 5.1, 3.5, 1.4, 0.2}
 > # )
 > # predictions = response.json()['predictions']
 > ```

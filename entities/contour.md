@@ -1,5 +1,5 @@
 ---
-title: Contour
+title: Contour (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Contour
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Contour
@@ -57,13 +58,13 @@ description: '## 项目概述'
 
 ## Related
 
-- [[cloud-custodian]] — Cloud Custodian
+- [[cloud-custodian]] — [[Cloud Custodian|Cloud Custodian]]
 - [[kuadrant]] — Kuadrant
-- [[notary-project]] — Notary Project
+- [[notary-project]] — [[Notary Project|Notary Project]]
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/contour/contour.md|contour]]
+- contour
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

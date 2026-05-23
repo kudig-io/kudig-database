@@ -498,7 +498,7 @@ target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
   - domain-01-cluster-fundamentals/11-etcd-deep-dive.md
-  - domain-01-cluster-fundamentals/[[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery|10-plane-backup-disaster-recovery]].md
+  - [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery|10-plane-backup-disaster-recovery]].md
   - domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
 ---
 ```

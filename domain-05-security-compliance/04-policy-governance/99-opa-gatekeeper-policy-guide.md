@@ -1,5 +1,5 @@
 ---
-title: OPA Gatekeeper 策略即代码深度实践
+title: OPA Gatekeeper 策略即代码深度实践 [04-policy-governance]
 description: '# OPA Gatekeeper 策略即代码深度实践'
 category: cloud-native-security
 tags:
@@ -56,18 +56,19 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # OPA Gatekeeper 策略即代码深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade Kubernetes policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[Kubernetes|Kubernetes]] policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
 OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语言声明式定义策略，能够与 Kubernetes、API 网关、CI/CD 管道等多种系统集成。Gatekeeper 是 OPA 在 Kubernetes 中的准入控制器实现，通过 CRD 将策略定义为 Kubernetes 原生资源，支持验证（Validate）、变异（Mutate）和审计（Audit）三种模式，为企业提供声明式的安全策略管理能力。
 
-与 Kyverno 的 YAML 原生语法不同，OPA Gatekeeper 使用 Rego 策略语言。Rego 是一种声明式的策略查询语言，具有强大的模式匹配和数据查询能力，适合表达复杂的安全策略逻辑。学习 Rego 需要一定的投入，但一旦掌握，可以实现非常灵活和强大的策略控制，包括跨资源关联查询、复合条件判断、集合运算等高级功能。对于需要在 Kubernetes 之外也统一策略管理的场景（如 API 网关、Kafka 授权、SSH 访问控制等），OPA/Rego 是更好的选择。
+与 [[Kyverno|Kyverno]] 的 YAML 原生语法不同，OPA Gatekeeper 使用 Rego 策略语言。Rego 是一种声明式的策略查询语言，具有强大的模式匹配和数据查询能力，适合表达复杂的安全策略逻辑。学习 Rego 需要一定的投入，但一旦掌握，可以实现非常灵活和强大的策略控制，包括跨资源关联查询、复合条件判断、集合运算等高级功能。对于需要在 Kubernetes 之外也统一策略管理的场景（如 API 网关、Kafka 授权、SSH 访问控制等），OPA/Rego 是更好的选择。
 
 #<!-- chunk: 威胁模型分析 -->## 威胁模型分析
 
@@ -1266,25 +1267,25 @@ done
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
 
 ## See Also
 
-- [[domain-05-security-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/99-kyverno-policy-guide.md|99-kyverno-policy-guide]]
-- [[domain-05-security-compliance/99-vault-k8s-secrets-guide.md|99-vault-k8s-secrets-guide]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|01-falco-cloud-native-security]]
+- 99-java-security-kubernetes-guide
+- 99-kyverno-policy-guide
+- 99-vault-k8s-secrets-guide
+- 01-falco-cloud-native-security
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

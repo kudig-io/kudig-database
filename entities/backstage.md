@@ -1,5 +1,5 @@
 ---
-title: Backstage
+title: Backstage [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Backstage
@@ -58,7 +59,7 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]]
 - [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
@@ -66,15 +67,15 @@ description: '## 项目概述'
 
 - [[wasmedge]] — WasmEdge
 - [[entities/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
-- [[04-containerd-upgrade-migration]] — containerd 升级迁移
+- [[04-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-07-platform-engineering/03-backstage-deployment.md|03-backstage-deployment]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|04-backstage-catalog-techdocs]]
-- [[domain-07-platform-engineering/99-backstage-idp-guide.md|99-backstage-idp-guide]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|05-backstage-scaffolder-templates]]
-- [[domain-19-landscape-references/incubating/backstage/backstage.md|backstage]]
+- 03-backstage-deployment
+- 04-backstage-catalog-techdocs
+- 99-backstage-idp-guide
+- 05-backstage-scaffolder-templates
+- backstage
 - [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
 - [[concepts/platform-engineering-idp|Platform Engineering and Internal Developer Platforms]] — Cross-reference
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

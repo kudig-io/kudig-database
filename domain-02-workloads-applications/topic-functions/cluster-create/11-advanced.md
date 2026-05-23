@@ -1,4 +1,44 @@
 ---
+title: '集群新建进阶: 关键机制详解'
+description: 'title: 集群新建进阶关键机制详解'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- calico
+- coredns
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- '集群新建进阶: 关键机制详解 是什么'
+- '如何 集群新建进阶: 关键机制详解'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- '集群新建进阶:'
+- 关键机制详解
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 集群新建进阶关键机制详解
 description: '# 集群新建进阶: 关键机制详解'
 category: functions
@@ -39,12 +79,6 @@ trigger_keywords:
 - FeatureGates
 - wait-control-plane
 - criSocket
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cilium-basics
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -53,6 +87,15 @@ related_topics:
 - cluster-create/03-certs
 - cluster-create/06-join
 - cluster-create/09-upgrade
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 集群新建进阶: 关键机制详解
@@ -70,7 +113,7 @@ related_topics:
 type InitConfiguration struct {
     APIEndpoint       APIEndpoint          // API Server 暴露地址
     NodeRegistration  NodeRegistrationOptions  // 节点注册选项
-    CertificatesDir   string               // 证书目录 /etc/[[entities/kubernetes|kubernetes]]/pki
+    CertificatesDir   string               // 证书目录 /etc/kubernetes/pki
     DryRun            bool
     FeatureGates      map[string]bool      // 特性门控
     KubernetesVersion string                // K8s 版本
@@ -287,3 +330,11 @@ spec:
 /etc/systemd/system/kubelet.service.d/
 └── 10-kubeadm.conf
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]
+- [[entities/cilium.md|Cilium]]

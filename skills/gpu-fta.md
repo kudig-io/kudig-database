@@ -1,5 +1,5 @@
 ---
-title: GPU 异常故障树分析
+title: GPU 异常故障树分析 (skills)
 description: '<!-- condition: kubectl get nodes -o jsonpath=''{.items[*].status.capacity.nvidia.com/gpu}'' 返回 0 或 Pod 日志显示
   CUDA_ERROR -->'
 category: skills
@@ -31,6 +31,7 @@ prerequisites:
 fta_id: FTA-GPU-001
 component: Gpu
 severity: medium
+created: "2026-05-23"
 ---
 
 # GPU 异常故障树分析
@@ -140,12 +141,12 @@ flowchart TD
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - [[skills/ts-node-components.md|节点组件排查]]
 
 ## Related
 
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
+- [[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
 - [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
 - [[entities/container-runtime.md|container-runtime]] — Container Runtime
 - [[entities/kubelet.md|kubelet]] — kubelet

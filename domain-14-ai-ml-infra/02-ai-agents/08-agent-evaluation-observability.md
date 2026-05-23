@@ -1,5 +1,5 @@
 ---
-title: Agent 评测体系与可观测性
+title: Agent 评测体系与可观测性 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,'
 category: general
 tags:
@@ -35,11 +35,12 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: Agent 评测体系与可观测性
 description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,
-  RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, OpenTelemetry, 可观测性, Agent 指标'
+  RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, [[OpenTelemetry|OpenTelemetry]], 可观测性, Agent 指标'
 category: ai-agent
 tags:
 - ai
@@ -47,9 +48,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - postgresql
 - job
 last_updated: 2026-05
@@ -240,7 +241,7 @@ class RAGASEvaluator:
         poor_cases = df[df["faithfulness"] < 0.7]
         if len(poor_cases) > 0:
             print(f"\n警告：{len(poor_cases)} 个用例 faithfulness < 0.7，需要重点检查：")
-            print(poor_cases[["question", "faithfulness"]].to_string())
+            print(poor_cases"question", "faithfulness".to_string())
         
         return df
 ```
@@ -857,8 +858,8 @@ if __name__ == "__main__":
 
 | 文档 | 关联内容 |
 |------|---------|
-| [04 - RAG 检索](./[[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]].md) | RAGAS 评估 RAG 管道质量 |
-| [09 - 生产部署](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | Prometheus/Grafana 在 K8s 的配置 |
+| [04 - RAG 检索](./04-rag-knowledge-retrieval.md) | RAGAS 评估 RAG 管道质量 |
+| [09 - 生产部署](./09-production-deployment-guide.md) | Prometheus/Grafana 在 K8s 的配置 |
 | [domain-20-enterprise-monitoring-alerting](../domain-06-observability/) | 企业级监控告警系统 |
 | [domain-06-observability](../domain-06-observability/) | 可观测性基础设施 |
 
@@ -870,7 +871,7 @@ if __name__ == "__main__":
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -885,34 +886,34 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
+- 48-openclaw-skill-mechanism
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 40-agent-harness-production-maturity
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 27-agent-cli-security-governance
+- 06-multi-agent-orchestration
+- 41-react-harness-identification-guide
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]]
-- [[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]]
+- 06-multi-agent-orchestration
+- 07-memory-context-management
+- 09-production-deployment-guide
+- 10-security-guardrails

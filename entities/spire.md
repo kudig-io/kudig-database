@@ -1,5 +1,5 @@
 ---
-title: SPIRE
+title: SPIRE (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # SPIRE
@@ -56,18 +57,18 @@ description: '## 项目概述'
 - [[istio]]
 - [[operator-pattern]]
 - [[pod-lifecycle]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/kubelet.md|[[kubelet|kubelet]]]]
 - [[concepts/security-defense-depth.md|security-defense-depth]]
 
 ## Related
 
 - [[openchoreo]] — OpenChoreo
-- [[podman-desktop]] — Podman Desktop
+- [[podman-desktop]] — [[Podman Desktop|Podman Desktop]]
 - [[openyurt]] — OpenYurt
 - [[carina]] — Carina
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/spire/spire.md|spire]]
+- spire
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]

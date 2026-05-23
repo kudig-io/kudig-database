@@ -38,9 +38,10 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 生产运维 1 个月学习计划
+# [[Kubernetes|Kubernetes]] 生产运维 1 个月学习计划
 
 ```yaml
 ---
@@ -135,9 +136,9 @@ Week 1: 地基建设期     Week 2: 核心技术构建期    Week 3: 运维作�
 | | Day 5 | Pod 深入理解 | 生命周期、探针 | Domain 4 |
 | | Day 6 | Deployment 管理 | 滚动更新、回滚 | Domain 4 |
 | | Day 7 | 项目 P1: 集群搭建 | kind/minikube 实操 | 综合 |
-| **W2** | Day 8 | etcd + API Server | Raft、请求链路 | Domain 3 |
+| **W2** | Day 8 | [[etcd|etcd]] + API Server | Raft、请求链路 | Domain 3 |
 | | Day 9 | Scheduler + Controller | 调度算法、控制循环 | Domain 3 |
-| | Day 10 | Service 网络 | 四种类型、Endpoint | Domain 5 |
+| | Day 10 | [[Service|Service]] 网络 | 四种类型、Endpoint | Domain 5 |
 | | Day 11 | Ingress 路由 | Nginx Ingress 配置 | Domain 5 |
 | | Day 12 | 存储基础 | PV/PVC/StorageClass | Domain 6 |
 | | Day 13 | 有状态应用 | StatefulSet 实践 | Domain 4 |
@@ -293,20 +294,20 @@ Domain15(网络基础)┘       │                 │                     │
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

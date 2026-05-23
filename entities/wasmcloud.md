@@ -1,5 +1,5 @@
 ---
-title: wasmCloud
+title: wasmCloud (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - wasmCloud
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # wasmCloud
@@ -60,7 +61,7 @@ wasmCloud 是用于构建分布式 WebAssembly 应用的平台。它提供安全
 
 ## 参考链接
 
-- [[entities/vault.md|vault]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[deployment]]
 - [[concepts/security-defense-depth.md|security-defense-depth]]
 
@@ -72,6 +73,6 @@ wasmCloud 是用于构建分布式 WebAssembly 应用的平台。它提供安全
 - [[nats]] — NATS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|04-wasmcloud-platform]]
-- [[domain-19-landscape-references/incubating/wasmcloud/wasmcloud.md|wasmcloud]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- 04-wasmcloud-platform
+- wasmcloud
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference

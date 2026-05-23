@@ -24,6 +24,10 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - policy-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/opa]]"
+    type: related_to
 ---
 
 # 服务网格与安全治理的融合
@@ -39,7 +43,7 @@ Istio 安全特性:
 └── Telemetry: 安全审计日志
 ```
 
-## 与 OPA 集成
+## 与 [[entities/opa|OPA]] 集成
 
 ```yaml
 # OPA + Istio 实现动态策略
@@ -71,5 +75,11 @@ spec:
 
 ## 相关 Domain
 
-- [[domain-03-networking-traffic/03-service-mesh/01-istio-security-configuration]]
-- [[domain-05-security-compliance/02-policy-engineering/01-opa-gatekeeper]]
+- domain-03-networking-traffic/03-service-mesh/01-istio-security-configuration
+- domain-05-security-compliance/02-policy-engineering/01-opa-gatekeeper
+## Related
+
+- [[entities/istio|Istio (entities)]]
+- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]
+- [[domain-03-networking-traffic/02-service-mesh/01-istio-enterprise-service-mesh|Istio 企业级服务网格架构与实践]]
+- [[entities/02-istio-advanced-traffic-management|Istio 高级流量管理 (entities)]]

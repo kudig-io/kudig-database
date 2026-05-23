@@ -1,5 +1,5 @@
 ---
-title: Inclavare Containers
+title: Inclavare Containers (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Inclavare Containers
@@ -65,10 +66,10 @@ Inclavare Containers 是一个基于硬件可信执行环境 (TEE) 的机密容�
 ## Related
 
 - [[atlantis]] — Atlantis
-- [[entities/tetragon.md|tetragon]] — Tetragon
+- [[entities/tetragon.md|[[Tetragon|tetragon]]]] — Tetragon
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — Prometheus 高可用部署
+- deployment]] — Prometheus 高可用部署
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/inclavare-containers/inclavare-containers.md|inclavare-containers]]
+- inclavare-containers
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

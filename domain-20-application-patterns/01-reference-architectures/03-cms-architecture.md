@@ -34,10 +34,11 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 内容管理系统 CMS 架构设计
-description: '# 内容管理系统 (CMS) Kubernetes 生产架构设计'
+description: '# 内容管理系统 (CMS) [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -48,7 +49,7 @@ tags:
 - postgresql
 - elasticsearch
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
 last_updated: 2026-05-18
 difficulty: intermediate
@@ -510,7 +511,7 @@ flowchart TB
     style ARCHIVED fill:#ffebee
 ```
 
-#<!-- chunk: K8s CronJob 定时发布 -->## K8s CronJob 定时发布
+#<!-- chunk: K8s [[CronJob|CronJob]] 定时发布 -->## K8s CronJob 定时发布
 
 ```yaml
 apiVersion: batch/v1
@@ -746,7 +747,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -761,7 +762,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
-- [[domain-20-application-patterns/02-mini-program-architecture.md|02-mini-program-architecture]]
-- [[domain-20-application-patterns/04-im-rtc-architecture.md|04-im-rtc-architecture]]
-- [[domain-20-application-patterns/05-online-education-architecture.md|05-online-education-architecture]]
+- 01-ecommerce-architecture
+- 02-mini-program-architecture
+- 04-im-rtc-architecture
+- 05-online-education-architecture

@@ -45,6 +45,7 @@ related_docs:
   desc: 网络诊断速查卡
 - path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   desc: TLS/PKI 证书速查卡
+created: "2026-05-23"
 ---
 
 # Linux 生产环境速查卡
@@ -1082,7 +1083,7 @@ sudo systemctl daemon-reload
 - `mysql` / `mariadb` - MySQL/MariaDB 数据库
 - `postgresql` - PostgreSQL 数据库
 - `docker` - Docker 守护进程
-- `kubelet` - Kubernetes 节点代理
+- `[[kubelet|kubelet]]` - [[Kubernetes|Kubernetes]] 节点代理
 
 ### SysVinit (service)
 
@@ -1647,7 +1648,7 @@ fi
 [ ! cond ]              # 非
 
 # 双括号 (推荐)
-if [[ $age -gt 18 && $name == "John" ]]; then
+if $age -gt 18 && $name == "John"; then
     echo "Match"
 fi
 ```
@@ -1767,7 +1768,7 @@ fi
 
 ```bash
 # 参数解析
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case $1 in
         -h|--help)
             echo "Usage: $0 [-h|--help]"

@@ -1,5 +1,5 @@
 ---
-title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation (skills)
 description: '| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |'
 category: skills
 tags:
@@ -33,9 +33,10 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+# Job/CronJob 故障诊断与修复 / Job & [[CronJob|CronJob]] Failure Diagnosis & Remediation
 
 ### 症状识别
 
@@ -46,8 +47,8 @@ prerequisites:
 | # | 症状描述 | 检测方法 | 置信度 | 排除条件 |
 |---|---------|---------|--------|---------|
 | S1 | Job 状态 Failed | `kubectl get job` | 0.95 | 无 |
-| S2 | CronJob 未创建新 Job | `kubectl get jobs` 按时间检查 | 0.90 | 未到调度时间 |
-| S3 | Job Pod 退出码非零 | `kubectl get pods --selector=job-name` | 0.90 | 应用自身 bug |
+| S2 | CronJob 未创建新 Job | `kubectl get [[Jobs|jobs]]` 按时间检查 | 0.90 | 未到调度时间 |
+| S3 | Job Pod 退出码非零 | `kubectl get [[Pods|pods]] --selector=job-name` | 0.90 | 应用自身 bug |
 | S4 | 历史 Job 大量堆积 | `kubectl get jobs | wc -l` | 0.85 | 无 |
 | S5 | Job 长时间 Running | `kubectl get job` active 时间 | 0.85 | 任务本身耗时 |
 | S6 | CronJob 错过调度 | `kubectl describe cronjob` Events | 0.90 | 时区差异 |

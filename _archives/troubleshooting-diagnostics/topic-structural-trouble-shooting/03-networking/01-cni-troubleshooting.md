@@ -66,7 +66,7 @@ prerequisites:
 | **资深专家** | 深入剖析 VXLAN/IPIP 封装原理、BGP 路由分发机制、eBPF（Cilium）对内核协议栈的加速优化，以及在大规模集群下的 IPAM 地址池管理和跨可用区网络延迟调优。 |
 
 > **专项排查文档**：
-> - [Terway（阿里云 CNI）深度排查]([[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting-archive/03-networking/07-terway-troubleshooting|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络故障
+> - [Terway（阿里云 CNI）深度排查](07-terway-troubleshooting.md) — 阿里云 ACK/ASK 集群网络故障
 > - [Flannel 专项排查](08-flannel-troubleshooting.md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
 
 ---

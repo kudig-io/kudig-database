@@ -1,5 +1,5 @@
 ---
-title: KubeVirt
+title: KubeVirt [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - KubeVirt
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KubeVirt
@@ -64,5 +65,5 @@ description: '## 项目概述'
 - [[openfunction]] — OpenFunction
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/kubevirt/kubevirt.md|kubevirt]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- kubevirt
+- index/etcd-index|etcd 知识图谱索引]]

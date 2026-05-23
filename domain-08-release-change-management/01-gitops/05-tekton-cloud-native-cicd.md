@@ -59,6 +59,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # Tekton 云原生 CI/CD 深度实践
@@ -84,9 +85,9 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，它的设计理念是将 CI/CD 流水线分解为完全声明式、Kubernetes 原生的资源对象。每个构建步骤在独立的容器中执行（Step → Container），多个步骤组成一个 Task（Task → Pod），多个 Task 组成有向无环图 Pipeline（Pipeline → DAG），Pipeline 由 PipelineRun 实例化执行。这种分层设计使得 Tekton 具有极高的可组合性和可复用性。
+Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，它的设计理念是将 CI/CD 流水线分解为完全声明式、[[Kubernetes|Kubernetes]] 原生的资源对象。每个构建步骤在独立的容器中执行（Step → Container），多个步骤组成一个 Task（Task → Pod），多个 Task 组成有向无环图 Pipeline（Pipeline → DAG），Pipeline 由 PipelineRun 实例化执行。这种分层设计使得 Tekton 具有极高的可组合性和可复用性。
 
-Tekton 在云原生技术栈中的定位是"CI 层"——负责代码检出、编译构建、测试执行、镜像推送和签名。CD 层（部署和发布）通常由 Argo CD 或 Flux 等 GitOps 工具处理。Tekton + Argo CD 的组合已成为云原生 CI/CD 的标准模式：Tekton 负责将源代码转化为可部署制品（容器镜像），Argo CD 负责将制品部署到 Kubernetes 集群。
+Tekton 在云原生技术栈中的定位是"CI 层"——负责代码检出、编译构建、测试执行、镜像推送和签名。CD 层（部署和发布）通常由 [[Argo|Argo]] CD 或 [[Flux|Flux]] 等 GitOps 工具处理。Tekton + Argo CD 的组合已成为云原生 CI/CD 的标准模式：Tekton 负责将源代码转化为可部署制品（容器镜像），Argo CD 负责将制品部署到 Kubernetes 集群。
 
 Tekton 的技术优势包括：完全 Kubernetes 原生（所有资源都是 CRD，可以通过 kubectl 管理）；不可变执行（每个 TaskRun 创建独立的 Pod，构建环境完全隔离）；声明式配置（YAML 定义，GitOps 友好）；供应链安全（Tekton Chains 支持 SLSA Level 3 证明和 Cosign 签名）；社区生态（Tekton Hub 提供 100+ 预制 Task）。
 
@@ -1121,22 +1122,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|03-gitlab-enterprise-cicd]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|04-github-actions-enterprise]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|06-flux-gitops-continuous-delivery]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|07-gitops-security-compliance]]
+- 03-gitlab-enterprise-cicd
+- 04-github-actions-enterprise
+- 06-flux-gitops-continuous-delivery
+- 07-gitops-security-compliance

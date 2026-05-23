@@ -33,6 +33,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # K8s 工具链术语参考

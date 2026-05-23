@@ -27,6 +27,7 @@ trigger_keywords:
 - Drivers
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # CSI Drivers
@@ -38,7 +39,7 @@ CSI defines a standard gRPC interface between Kubernetes and storage vendors:
 | Component | Runs As | Responsibilities |
 |-----------|---------|-----------------|
 | **CSI Controller** | Centralized Deployment | CreateVolume, DeleteVolume, ControllerPublish/UnpublishVolume, CreateSnapshot |
-| **CSI Node** | DaemonSet on every node | NodeStage/UnstageVolume, NodePublish/UnpublishVolume, NodeGetCapabilities |
+| **CSI Node** | [[DaemonSet|DaemonSet]] on every node | NodeStage/UnstageVolume, NodePublish/UnpublishVolume, NodeGetCapabilities |
 
 ## Popular CSI Drivers
 
@@ -77,4 +78,4 @@ Kubernetes has migrated all in-tree volume plugins to CSI. The migration was gra
 - [[skills/manage-persistent-storage.md|Manage Persistent Storage]]
 - [[entities/statefulset.md|StatefulSet]]
 
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05-csi-drivers-integration]]
+- 05-csi-drivers-integration

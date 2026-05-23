@@ -1,5 +1,5 @@
 ---
-title: 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+title: 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册 (topic-febm)
 description: 'description: ''**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'''
 category: febm
 tags:
@@ -50,9 +50,10 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
-title: 第八章：FEBM 生产环境快速启动与 Kubernetes 故障取证手册
+title: 第八章：FEBM 生产环境快速启动与 [[Kubernetes|Kubernetes]] 故障取证手册
 description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
 category: febm
 tags:
@@ -60,12 +61,12 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -2419,7 +2420,7 @@ for NAME in "${!CERTS[@]}"; do
   fi
   
   # 验证证书链（如果有 CA）
-  if [ -f "$CA" ] && [[ "$NAME" != "Kubelet"* ]]; then
+  if [ -f "$CA" ] && "$NAME" != "Kubelet"*; then
     if openssl verify -CAfile "$CA" "$CERT_PATH" > /dev/null 2>&1; then
       echo "✅ 证书链验证通过"
     else

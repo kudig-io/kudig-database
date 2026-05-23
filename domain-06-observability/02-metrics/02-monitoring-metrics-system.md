@@ -76,16 +76,17 @@ related_docs:
 - path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   type: cheatsheet
   desc: PromQL 速查卡
+created: "2026-05-23"
 ---
 
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [prometheus.io/docs](https://prometheus.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus.md|prometheus]].io/docs](https://prometheus.io/docs/)
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入解析 Kubernetes 指标监控体系，涵盖 Prometheus 生态、核心组件指标、自定义指标扩展、告警规则设计等关键内容，为构建生产级监控系统提供完整指导。
+本文档深入解析 [[Kubernetes|Kubernetes]] 指标监控体系，涵盖 Prometheus 生态、核心组件指标、自定义指标扩展、告警规则设计等关键内容，为构建生产级监控系统提供完整指导。
 
 ---
 
@@ -697,37 +698,37 @@ Level 5 - 自主运维 (Autonomous Operations)
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
+- observability/MOC.md|domain-06-observability MOC]]
 - [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/09-events-audit-logs.md|05 - 事件与审计日志管理 (Events & Audit Logs)]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|07 - 监控和指标表]]
+- Kubernetes 可观测性架构体系
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 05 - 事件与审计日志管理 (Events & Audit Logs)
+- 07 - 监控和指标表
 
 ## Related
 
 - [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
-- [[domain-06-observability/01-observability-architecture-overview.md|可观测性架构体系]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
+- 可观测性架构体系
+- 分布式追踪体系
 - [[domain-17-system-foundation/topic-cheat-sheet/promql.md|PromQL 速查卡]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-07-platform-engineering/MOC.md|相关知识域: domain-07-platform-engineering]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-07-platform-engineering
 - [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
 - [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 
 ## See Also
 
-- [[domain-06-observability/UPDATED-QUALITY-REPORT.md|UPDATED-QUALITY-REPORT]]
-- [[domain-06-observability/01-observability-architecture-overview.md|01-observability-architecture-overview]]
-- [[domain-06-observability/03-logging-architecture.md|03-logging-architecture]]
-- [[domain-06-observability/04-distributed-tracing.md|04-distributed-tracing]]
+- UPDATED-QUALITY-REPORT
+- 01-observability-architecture-overview
+- 03-logging-architecture
+- 04-distributed-tracing

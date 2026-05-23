@@ -48,13 +48,14 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md
   label: '故障树: rbac'
+created: "2026-05-23"
 ---
 
 # 20 - Role / RoleBinding YAML 配置参考
 
 <!-- chunk: 概述 -->## 概述
 
-Role 和 RoleBinding 是 Kubernetes RBAC (Role-Based Access Control) 的核心资源,用于在 **namespace 级别** 定义和授予权限。Role 定义了一组权限规则,RoleBinding 将这些权限授予用户、组或 ServiceAccount。本文档覆盖 Role 和 RoleBinding 的完整 YAML 配置、内部原理和生产案例。
+Role 和 RoleBinding 是 [[Kubernetes|Kubernetes]] RBAC (Role-Based Access Control) 的核心资源,用于在 **namespace 级别** 定义和授予权限。Role 定义了一组权限规则,RoleBinding 将这些权限授予用户、组或 ServiceAccount。本文档覆盖 Role 和 RoleBinding 的完整 YAML 配置、内部原理和生产案例。
 
 **适用版本**: Kubernetes v1.25 - v1.32  
 **更新时间**: 2026-02
@@ -1258,7 +1259,7 @@ kubectl auth can-i create statefulsets -n production --as system:serviceaccount:
 
 #<!-- chunk: 5.4 案例 4: 应用 ServiceAccount 最小权限 -->## 5.4 案例 4: 应用 ServiceAccount 最小权限
 
-**场景**: 应用需要访问 Kubernetes API 获取自己的 Pod 信息和配置。
+**场景**: 应用需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 获取自己的 Pod 信息和配置。
 
 ```yaml
 ---
@@ -1884,25 +1885,25 @@ kubectl apply -f rolebinding.yaml
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests KUDIG Database — Global MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/18-csi-driver-resources.md|18-csi-driver-resources]]
-- [[domain-18-manifests-patterns/19-serviceaccount-token.md|19-serviceaccount-token]]
-- [[domain-18-manifests-patterns/21-rbac-clusterrole-clusterrolebinding.md|21-rbac-clusterrole-clusterrolebinding]]
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
+- 18-csi-driver-resources
+- 19-serviceaccount-token
+- 21-rbac-clusterrole-clusterrolebinding
+- 22-networkpolicy-reference
 
 ## Related
 

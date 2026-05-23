@@ -1,5 +1,5 @@
 ---
-title: Skills Demo — 本地运行工单诊断技能
+title: Skills Demo — 本地运行工单诊断技能 (skills)
 description: '### 故障排查'
 category: skills
 tags:
@@ -21,6 +21,7 @@ trigger_keywords:
 - 本地运行工单诊断技能
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Skills Demo — 本地运行工单诊断技能
@@ -39,6 +40,6 @@ prerequisites:
 
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] — Kubernetes FTA Top Events Index
+- Index.md|[[Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
 - [[backup-restore-fta]] — 备份/恢复异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

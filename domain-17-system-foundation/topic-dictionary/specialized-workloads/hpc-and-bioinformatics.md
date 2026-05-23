@@ -32,13 +32,14 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 高性能计算与生物信息学（HPC & Bioinformatics）
 
 ## 概述
 
-**高性能计算（HPC, High-Performance Computing）** 和 **生物信息学（Bioinformatics）** 是计算密集型工作负载的典型代表。随着基因组测序、蛋白质结构预测（AlphaFold）、药物分子模拟等应用的爆炸式增长，传统 HPC 中心（基于 Slurm、PBS）正在与 Kubernetes 融合。2026 年的最佳实践表明，通过 **Volcano、Kueue、MPI Operator** 等工具，Kubernetes 已能够有效管理 HPC 作业调度、大规模并行计算和 GPU 集群资源，为科学研究提供云原生的弹性算力平台。
+**高性能计算（HPC, High-Performance Computing）** 和 **生物信息学（Bioinformatics）** 是计算密集型工作负载的典型代表。随着基因组测序、蛋白质结构预测（AlphaFold）、药物分子模拟等应用的爆炸式增长，传统 HPC 中心（基于 Slurm、PBS）正在与 [[Kubernetes|Kubernetes]] 融合。2026 年的最佳实践表明，通过 **[[Volcano|Volcano]]、Kueue、MPI Operator** 等工具，Kubernetes 已能够有效管理 HPC 作业调度、大规模并行计算和 GPU 集群资源，为科学研究提供云原生的弹性算力平台。
 
 ## 核心概念/原理
 
@@ -53,7 +54,7 @@ prerequisites:
 ### 2. MPI（Message Passing Interface）
 
 MPI 是分布式内存并行计算的标准协议，广泛应用于气候模拟、流体力学、量子化学等领域。在 Kubernetes 上运行 MPI 作业需要：
-- **MPI Operator**：Kubeflow 项目的一部分，将 MPI 作业抽象为 Kubernetes CRD
+- **MPI Operator**：[[Kubeflow|Kubeflow]] 项目的一部分，将 MPI 作业抽象为 Kubernetes CRD
 - **Horovod**：Uber 开源的分布式深度学习框架，底层基于 MPI/NCCL
 - **AllReduce 通信模式**：多个计算节点之间高效同步梯度或中间结果
 
@@ -110,7 +111,7 @@ spec:
 ### Volcano：HPC 与 AI 的统一调度器
 
 **Volcano** 是 CNCF 沙箱项目，专为批处理、HPC 和 AI 训练设计的 Kubernetes 调度器：
-- **Gang Scheduling**：确保 MPI/TensorFlow 作业的所有 Worker Pod 同时启动，避免资源死锁
+- **[[Gang Scheduling|Gang Scheduling]]**：确保 MPI/TensorFlow 作业的所有 Worker Pod 同时启动，避免资源死锁
 - **队列管理（Queue）**：支持多级队列、优先级、资源预留
 - **异构资源调度**：同时调度 CPU、GPU、FPGA 等加速器
 - **任务依赖（Task Dependency）**：支持复杂工作流中的步骤依赖关系

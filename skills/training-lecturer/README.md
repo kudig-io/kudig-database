@@ -34,9 +34,10 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 金牌讲师 - 工单数字人场景
+# [[Kubernetes|Kubernetes]] 金牌讲师 - 工单数字人场景
 
 > **版本**: v1.4
 > **创建日期**: 2026-05-18
@@ -157,7 +158,7 @@ domain-11-production-operations/topic-k8s-lecturer/
 
 ### 4.1 按问题类型
 
-| 问题类型 | 快速问答 | 决策树 | 深度 Skill |
+| 问题类型 | 快速问答 | 决策树 | 深度 [[SKILL|Skill]] |
 |---------|---------|--------|-----------|
 | Pod Pending | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q1-pod-一直-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#1-pod-处于-pending) | [01-pod-crash-loop](../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) |
 | Pod CrashLoop | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q2-pod-一直-crashloopbackoff-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#2-pod-处于-crashloopbackoff) | [01-pod-crash-loop](../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) |
@@ -182,7 +183,7 @@ domain-11-production-operations/topic-k8s-lecturer/
 | Pod 卡住 | "Pod 一直 Pending" | describe 看 Events |
 | 应用崩了 | "容器一直重启" | logs 看日志 |
 | 服务不通 | "访问不了我的服务" | 检查 Endpoints |
-| 网络慢 | "DNS 解析失败" | 检查 CoreDNS 状态 |
+| 网络慢 | "DNS 解析失败" | 检查 [[CoreDNS|CoreDNS]] 状态 |
 | 资源不足 | "配额超限了" | describe quota 看使用量 |
 | 版本回滚 | "想回滚到上一个版本" | kubectl rollout undo |
 | 扩缩容 | "想增加 Pod 数量" | kubectl scale |
@@ -423,20 +424,20 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
+- [[references/release-notes-networking|[[发布说明索引 — 网络|发布说明索引 — 网络]]]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

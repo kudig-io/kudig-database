@@ -34,6 +34,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -45,7 +46,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.28.14](#changelog-since-v12814)
+  - Changelog since v1.28.14](#changelog-since-v12814)
   - [Changes by Kind](#changes-by-kind)
     - [Feature](#feature)
     - [Bug or Regression](#bug-or-regression)
@@ -141,7 +142,7 @@ prerequisites:
     - [Container Images](#container-images-6)
   - [Changelog since v1.28.8](#changelog-since-v1288)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2024-3177: Bypassing mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2024-3177: Bypassing mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-6)
     - [Feature](#feature-4)
     - [Bug or Regression](#bug-or-regression-6)

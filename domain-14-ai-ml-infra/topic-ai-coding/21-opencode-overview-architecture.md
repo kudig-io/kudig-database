@@ -27,6 +27,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OpenCode 概述与核心架构
@@ -39,7 +40,7 @@ prerequisites:
 
 **OpenCode** 是当前最具影响力的开源 AI 编程智能体（AI Coding Agent），提供 Terminal TUI、Desktop App 和 IDE Extension 三种形态。它将 LLM 的推理能力与终端的执行能力深度融合，使开发者能够在命令行环境中以自然语言驱动代码生成、项目重构、故障排查等复杂任务。
 
-OpenCode 由 **Anomaly**（原 SST / ion 团队）主导开发，采用 **100% 开源** 策略，是 Claude Code 的核心替代方案。它支持 75+ LLM Provider、30+ 内置 LSP Server、20+ 内置 Formatter，具备完整的 MCP 协议支持、Agent Skill 体系和 GitHub CI/CD 集成能力。
+OpenCode 由 **Anomaly**（原 SST / ion 团队）主导开发，采用 **100% 开源** 策略，是 Claude Code 的核心替代方案。它支持 75+ LLM Provider、30+ 内置 LSP Server、20+ 内置 Formatter，具备完整的 MCP 协议支持、Agent [[SKILL|Skill]] 体系和 GitHub CI/CD 集成能力。
 
 ---
 
@@ -121,7 +122,7 @@ OpenCode 采用 **Client/Server 分离架构**，这是其区别于其他 Agent 
 | **TUI Client** | Go + Bubble Tea | 终端用户界面，通过 HTTP/SSE 与 Server 通信 |
 | **AI SDK** | Vercel AI SDK | LLM Provider 抽象层，统一 OpenAI/Anthropic/Gemini 等调用接口 |
 | **Tool Runtime** | Bun 原生 | 执行 bash、file I/O、MCP 调用、LSP 查询等 |
-| **[[domain-04-storage-data/README|storage]]** | SQLite | 持久化会话、消息、文件变更历史 |
+| **[[domain-04-storage-data/README|[[Kubernetes 存储配置最佳实践|storage]]]]** | SQLite | 持久化会话、消息、文件变更历史 |
 | **SDK Generation** | Stainless | 从 OpenAPI Spec 自动生成类型安全的客户端 SDK |
 
 ### 2.2 Agent Loop 原理

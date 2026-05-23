@@ -1,4 +1,37 @@
 ---
+title: 节点证书轮换 — kubelet 证书自动续期源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点证书轮换 — kubelet 证书自动续期源码分析 是什么
+- 如何 节点证书轮换 — kubelet 证书自动续期源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点证书轮换
+- kubelet
+- 证书自动续期源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: 节点证书轮换源码分析
 description: '## 概述'
 category: functions
@@ -37,9 +70,6 @@ trigger_keywords:
 - serverTLSBootstrap
 - kubelet.conf
 - bootstrap-kubelet.conf
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -48,13 +78,22 @@ related_topics:
 - cluster-create/03-certs
 - cluster-create/06-join
 - cluster-create/12-join-advanced
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点证书轮换 — kubelet 证书自动续期源码分析
 
 ## 概述
 
-在 [[entities/kubernetes|kubernetes]] 集群中，每个 kubelet 都需要持有有效的客户端证书才能与 API Server 进行安全通信。证书是有有效期的，过期后 kubelet 将无法连接 API Server，导致节点上的 Pod 无法被管理、日志无法采集、状态无法上报。因此，证书的自动轮换机制对集群稳定性至关重要。
+在 Kubernetes 集群中，每个 kubelet 都需要持有有效的客户端证书才能与 API Server 进行安全通信。证书是有有效期的，过期后 kubelet 将无法连接 API Server，导致节点上的 Pod 无法被管理、日志无法采集、状态无法上报。因此，证书的自动轮换机制对集群稳定性至关重要。
 
 kubelet 的证书管理分为两个阶段：**Bootstrap 阶段**和**正式证书阶段**。在 Bootstrap 阶段，kubelet 使用 Bootstrap Token 向 API Server 发起 CSR（Certificate Signing Request），获取正式的客户端证书。在正式证书阶段，kubelet 会监控证书的有效期，在证书即将过期时自动发起新的 CSR 来续期证书。
 
@@ -407,3 +446,11 @@ kubeadm join ...
 | `certStore` | `pkg/kubelet/certificate/store.go` | 证书存储管理 |
 | `autoApproveNodeClientCSR` | `pkg/controller/certificates/approval/sarapproval.go` | 自动审批逻辑 |
 | `Sign` | `pkg/controller/certificates/signer/signer.go` | 证书签发 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration.md|02-registration]]

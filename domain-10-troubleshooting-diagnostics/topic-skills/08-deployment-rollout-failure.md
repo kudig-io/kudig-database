@@ -60,6 +60,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 ---
@@ -72,9 +74,9 @@ k8s_versions:
 
 ## 1. 概述
 
-Deployment 滚动更新故障是 Kubernetes 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 ReplicaSet 管理 Pod 的创建和删除，任何一个环节的失败都可能导致整个更新流程卡住。
+Deployment 滚动更新故障是 [[Kubernetes|Kubernetes]] 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 [[ReplicaSet|ReplicaSet]] 管理 Pod 的创建和删除，任何一个环节的失败都可能导致整个更新流程卡住。
 
-此 Skill 同时覆盖 **Deployment**、**StatefulSet** 和 **DaemonSet** 三种工作负载类型的滚动更新故障诊断，以及**金丝雀部署**和**蓝绿部署**等高级部署模式的故障排查。
+此 [[SKILL|Skill]] 同时覆盖 **Deployment**、**[[StatefulSet|StatefulSet]]** 和 **DaemonSet** 三种工作负载类型的滚动更新故障诊断，以及**金丝雀部署**和**蓝绿部署**等高级部署模式的故障排查。
 
 ### 典型触发场景
 

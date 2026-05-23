@@ -37,6 +37,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 6G 核心网架构设计
@@ -46,11 +47,11 @@ tags:
 - k8s
 - architecture
 - industry
-- etcd
+- [[etcd|etcd]]
 - grafana
 - redis
 - mysql
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 - gpu
 last_updated: 2026-05-18
@@ -97,7 +98,7 @@ k8s_versions:
 
 # 6G 核心网架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#6G` `#核心网` `#通感一体` `#空天地` `#阿里云`
 
 ---
@@ -867,7 +868,7 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -882,12 +883,12 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 
 ## Related
 
-- [[domain-20-application-patterns/80-tsn-network.md|80-tsn-network]]
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- 80-tsn-network
+- topic-application-architecture MOC — Cross-reference
 
 ## See Also
 
-- [[domain-20-application-patterns/67-brain-computer-interface.md|67-brain-computer-interface]]
-- [[domain-20-application-patterns/68-quantum-computing-cloud.md|68-quantum-computing-cloud]]
-- [[domain-20-application-patterns/70-ecny-cbdc.md|70-ecny-cbdc]]
-- [[domain-20-application-patterns/71-smart-tax.md|71-smart-tax]]
+- 67-brain-computer-interface
+- 68-quantum-computing-cloud
+- 70-ecny-cbdc
+- 71-smart-tax

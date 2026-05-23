@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 生产运维与成熟度模型
+title: Agent Harness 生产运维与成熟度模型 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 生产运维与成熟度模型'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - monitoring-basics
 - redis-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 生产运维与成熟度模型
@@ -48,9 +49,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - redis
 - postgresql
 last_updated: 2026-05
@@ -83,7 +84,7 @@ k8s_versions:
 
 # Agent Harness 生产运维与成熟度模型
 
-> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Production Operations, 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
+> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: [[references/k8s-production-operations.md|Production Operations]], 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
 
 ---
 
@@ -913,9 +914,9 @@ class MaturityAssessment:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 成熟度模型概述 |
-| [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | CI/CD 质量门禁和灰度评估 |
-| [36 - 可观测性](./[[domain-14-ai-ml-infra/36-agent-harness-observability.md|36-agent-harness-observability]].md) | 生产监控和告警体系 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 成熟度模型概述 |
+| [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | CI/CD 质量门禁和灰度评估 |
+| [36 - 可观测性](./observability.md|36-agent-harness-observability]].md) | 生产监控和告警体系 |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | K8S 部署基础设施 |
 
 ---
@@ -937,7 +938,7 @@ class MaturityAssessment:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -952,7 +953,7 @@ class MaturityAssessment:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/38-agent-harness-performance-cost.md|38-agent-harness-performance-cost]]
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
+- 38-agent-harness-performance-cost
+- 39-agent-harness-testing-benchmark
+- 41-react-harness-identification-guide
+- 42-model-harness-compatibility-matrix

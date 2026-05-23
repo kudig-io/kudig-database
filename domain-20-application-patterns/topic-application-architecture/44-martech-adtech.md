@@ -1,4 +1,33 @@
 ---
+title: 数字营销与广告科技架构设计 — 阿里云视角
+description: 'title: 数字营销与广告科技架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- redis
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 数字营销与广告科技架构设计 — 阿里云视角 是什么
+- 如何 数字营销与广告科技架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 数字营销与广告科技架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 数字营销与广告科技架构设计
 description: '# 数字营销与广告科技架构设计 — 阿里云视角'
 category: application-architecture
@@ -17,7 +46,7 @@ audience:
 - 广告平台技术负责人
 estimated_read_time: 5min
 intent_queries:
-- martech adtech kubernetes architecture
+- martech adtech [[Kubernetes|kubernetes]] architecture
 - 程序化广告K8s部署
 - DSP SSP广告平台
 - RTB实时竞价系统
@@ -33,10 +62,6 @@ trigger_keywords:
 - MarTech
 - DMP
 - 广告K8s
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- redis-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -45,11 +70,20 @@ related_topics:
 - social-media-architecture
 - livestream-ecommerce
 - fintech-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 数字营销与广告科技架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#数字营销` `#AdTech` `#程序化广告` `#阿里云`
 
 ---
@@ -260,3 +294,27 @@ flowchart LR
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 42-secondhand-circular
+- 43-enterprise-im
+- 45-smart-port-shipping
+- 46-satellite-internet

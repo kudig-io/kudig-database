@@ -1,5 +1,5 @@
 ---
-title: 数字人视频快速参考
+title: 数字人视频快速参考 (video-scripts)
 description: '| `07-pvc-storage-failure` | PVC 存储 | 12min |'
 category: general
 tags:
@@ -21,6 +21,7 @@ trigger_keywords:
 - 数字人视频快速参考
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 数字人视频快速参考

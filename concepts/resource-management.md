@@ -30,6 +30,7 @@ trigger_keywords:
 - QoS
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Resource Management (Requests, Limits, QoS)
@@ -43,7 +44,7 @@ prerequisites:
 
 ## QoS Classes
 
-The kubelet assigns QoS class based on request/limit configuration:
+The [[kubelet|kubelet]] assigns QoS class based on request/limit configuration:
 
 | QoS Class | Condition | Eviction Priority |
 |-----------|-----------|-------------------|
@@ -53,7 +54,7 @@ The kubelet assigns QoS class based on request/limit configuration:
 
 ## Eviction Thresholds
 
-kubelet monitors node resources and evicts Pods when thresholds are crossed:
+kubelet monitors node resources and evicts [[Pods|Pods]] when thresholds are crossed:
 
 | Threshold Type | Default | Behavior |
 |----------------|---------|----------|
@@ -86,4 +87,4 @@ Eviction follows QoS priority: BestEffort first, then Burstable (proportional to
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[entities/kubelet.md|kubelet]]
 
-- [[domain-02-workloads-applications/23-resource-management.md|23-resource-management]]
+- 23-resource-management

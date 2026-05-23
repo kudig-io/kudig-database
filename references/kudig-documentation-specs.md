@@ -27,6 +27,7 @@ trigger_keywords:
 - 同义词典
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 文档规范体系

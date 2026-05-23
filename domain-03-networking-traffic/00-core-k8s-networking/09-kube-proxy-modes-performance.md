@@ -59,11 +59,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 
-> **适用版本**: Kubernetes v1.25 - v1.32  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32  
 > **文档版本**: v2.0 | 生产级 kube-proxy 配置参考  
 > **最后更新**: 2026-01
 
@@ -847,7 +848,7 @@ main "$@"
 <!-- chunk: 监控与告警 -->
 ## 监控与告警
 
-### Prometheus 监控规则
+### [[Prometheus|Prometheus]] 监控规则
 
 ```yaml
 # kube-proxy-monitoring-rules.yaml
@@ -1073,7 +1074,7 @@ kubectl run test-curl --rm -it --image=curlimages/curl --restart=Never -- curl -
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
-| Service 无法访问 | kube-proxy 未运行 | 检查 DaemonSet 状态 |
+| Service 无法访问 | kube-proxy 未运行 | 检查 [[DaemonSet|DaemonSet]] 状态 |
 | 规则同步慢 | Service 数量过多 | 切换到 IPVS 模式 |
 | IPVS 模式启动失败 | 内核模块未加载 | `modprobe ip_vs ip_vs_rr ip_vs_sh` |
 | conntrack 表满 | 连接数过多 | 增加 `nf_conntrack_max` |
@@ -1113,25 +1114,25 @@ kubectl run test-curl --rm -it --image=curlimages/curl --restart=Never -- curl -
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/07-service-implementation-details.md|07-service-implementation-details]]
-- [[domain-03-networking-traffic/08-service-topology-aware.md|08-service-topology-aware]]
-- [[domain-03-networking-traffic/10-service-advanced-features.md|10-service-advanced-features]]
-- [[domain-03-networking-traffic/11-dns-service-discovery-coredns.md|11-dns-service-discovery-coredns]]
+- 07-service-implementation-details
+- 08-service-topology-aware
+- 10-service-advanced-features
+- 11-dns-service-discovery-coredns
 
 ## Related
 

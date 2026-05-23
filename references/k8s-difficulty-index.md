@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Difficulty Index

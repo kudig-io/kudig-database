@@ -51,6 +51,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # AutoML与超参数调优
@@ -828,7 +829,7 @@ torch.save(subnet.state_dict(), "optimized_subnet.pth")
 **推荐选择：**
 - 深度学习：Ray Tune（大规模并行） + Optuna（精细优化）
 - 传统ML：Auto-sklearn（快速baseline）
-- 生产环境：Ray Tune + Kubernetes（弹性扩缩容）
+- 生产环境：Ray Tune + [[Kubernetes|Kubernetes]]（弹性扩缩容）
 - 学术研究：Optuna（灵活、可扩展）
 
 ---
@@ -1278,25 +1279,25 @@ while True:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|AI模型部署与生命周期管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AI模型注册中心与版本管理
+- AI模型部署与生命周期管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|06-ai-data-pipeline]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|07-ai-experiment-management]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|09-model-registry]]
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|10-model-deployment-management]]
+- 06-ai-data-pipeline
+- 07-ai-experiment-management
+- 09-model-registry
+- 10-model-deployment-management
 
 ## Related
 

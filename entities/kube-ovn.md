@@ -1,5 +1,5 @@
 ---
-title: Kube-OVN
+title: Kube-OVN (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Kube-OVN
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kube-OVN
@@ -46,7 +47,7 @@ Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SD
 
 - **子网规划**: 提前规划子网 CIDR，预留足够的 IP 空间用于扩容
 - **VPC 隔离**: 不同租户使用独立 VPC 实现网络级隔离
-- **固定 IP**: StatefulSet 使用 IP Pool，Pod 使用固定 IP 适配传统应用
+- **固定 IP**: [[StatefulSet|StatefulSet]] 使用 IP Pool，Pod 使用固定 IP 适配传统应用
 - **QoS 管理**: 对流量敏感的应用配置带宽限制，防止资源争抢
 - **监控 OVS**: 关注 OVS flow table 大小和连接数，避免性能瓶颈
 - **高可用**: OVN 数据库部署在多个 Master 节点实现 HA
@@ -58,7 +59,7 @@ Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SD
 ## 参考链接
 
 - [[entities/cni-plugins.md|cni-plugins]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/controller-pattern.md|controller-pattern]]
 - [[pod-lifecycle]]
@@ -71,7 +72,7 @@ Kube-OVN 是一个基于 OVN/OVS 的高级 Kubernetes 网络 CNI 插件，将 SD
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kube-ovn/kube-ovn.md|kube-ovn]]
+- kube-ovn
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]

@@ -1,5 +1,5 @@
 ---
-title: 容器运行时故障排查指南
+title: 容器运行时故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 容器运行时故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -34,6 +34,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: 容器运行时故障排查指南
@@ -43,8 +44,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
-- containerd
+- [[kubelet|kubelet]]
+- [[containerd|containerd]]
 - cri-o
 - docker
 - rag
@@ -828,8 +829,8 @@ systemctl restart containerd
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

@@ -38,6 +38,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
@@ -225,7 +226,7 @@ spec:
     ipv4: "172.16.1.100"
 ```
 
-#### StatefulSet 固定 IP 完整示例
+#### [[StatefulSet|StatefulSet]] 固定 IP 完整示例
 
 ```yaml
 apiVersion: apps/v1

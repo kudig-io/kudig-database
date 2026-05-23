@@ -23,6 +23,7 @@ trigger_keywords:
 - 本地文档浏览系统与构建指南
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Gitbook 本地文档浏览系统

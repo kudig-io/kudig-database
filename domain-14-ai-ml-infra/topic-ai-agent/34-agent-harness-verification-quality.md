@@ -1,7 +1,43 @@
 ---
+title: Agent Harness 验证与质量门禁 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification,'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- helm
+- docker
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 35min
+intent_queries:
+- Agent Harness 验证与质量门禁 是什么
+- 如何 Agent Harness 验证与质量门禁
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 验证与质量门禁
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 验证与质量门禁
-description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification, Quality Gate, 自检循环, LLM-as-Judge, RAGAS,
-  幻觉检测, 事实一致性, CI/CD, 回归测试, 灰度评估'
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Verification,
+  Quality Gate, 自检循环, LLM-as-Judge, RAGAS, 幻觉检测, 事实一致性, CI/CD, 回归测试, 灰度评估'
 category: ai-agent
 tags:
 - ai
@@ -9,8 +45,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- helm
+- [[etcd|etcd]]
+- [[Helm|helm]]
 - docker
 last_updated: 2026-05
 difficulty: advanced
@@ -29,10 +65,15 @@ trigger_keywords:
 - 验证与质量门禁
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 验证与质量门禁
@@ -41,7 +82,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Verification（验证层）是 Agent Harness 六层架构的第五层，也是 Harness 区别于"裸 Agent"的**关键分水岭**。LangChain 的实验表明，仅添加自检循环就将基准分提升了 13.7%——这是所有 Harness 改进中最高效的单一变更。
 
@@ -49,9 +90,9 @@ Verification（验证层）是 Agent Harness 六层架构的第五层，也是 H
 
 ---
 
-## 1. 验证层核心理论
+<!-- chunk: 1. 验证层核心理论 -->## 1. 验证层核心理论
 
-### 1.1 为什么验证是最高 ROI 的 Harness 改进
+#<!-- chunk: 1.1 为什么验证是最高 ROI 的 Harness 改进 -->## 1.1 为什么验证是最高 ROI 的 Harness 改进
 
 ```
 验证层 ROI 实证数据:
@@ -77,7 +118,7 @@ Anthropic 长运行 Agent:
     - 安全风险: 占拦截问题的 15%
 ```
 
-### 1.2 验证分类体系
+#<!-- chunk: 1.2 验证分类体系 -->## 1.2 验证分类体系
 
 ```
 Agent 输出验证分类:
@@ -109,9 +150,9 @@ Agent 输出验证分类:
 
 ---
 
-## 2. 多维度验证器设计
+<!-- chunk: 2. 多维度验证器设计 -->## 2. 多维度验证器设计
 
-### 2.1 验证器框架
+#<!-- chunk: 2.1 验证器框架 -->## 2.1 验证器框架
 
 ```python
 from abc import ABC, abstractmethod
@@ -210,7 +251,7 @@ class VerificationPipeline:
         return VerificationReport.from_results(results)
 ```
 
-### 2.2 事实一致性验证器
+#<!-- chunk: 2.2 事实一致性验证器 -->## 2.2 事实一致性验证器
 
 ```python
 class FactualConsistencyVerifier(BaseVerifier):
@@ -231,22 +272,22 @@ class FactualConsistencyVerifier(BaseVerifier):
         prompt = f"""
 你是一个事实一致性审查员。请严格评估以下回答是否与给定的证据/上下文一致。
 
-## 任务
+<!-- chunk: 任务 -->## 任务
 {task}
 
-## 上下文/证据
+<!-- chunk: 上下文/证据 -->## 上下文/证据
 {sources[:3000]}
 {evidence[:2000]}
 
-## Agent 的回答
+<!-- chunk: Agent 的回答 -->## Agent 的回答
 {output[:3000]}
 
-## 评估要求
+<!-- chunk: 评估要求 -->## 评估要求
 1. 检查回答中的每一个事实性声明
 2. 判断每个声明是否有上下文支撑
 3. 识别任何幻觉（无依据的声明）
 
-## 输出格式（JSON）
+<!-- chunk: 输出格式（JSON） -->## 输出格式（JSON）
 {{
     "consistent": true/false,
     "score": 0.0-1.0,
@@ -284,7 +325,7 @@ class FactualConsistencyVerifier(BaseVerifier):
         return {"consistent": False, "score": 0.0}
 ```
 
-### 2.3 命令安全验证器
+#<!-- chunk: 2.3 命令安全验证器 -->## 2.3 命令安全验证器
 
 ```python
 import re
@@ -383,7 +424,7 @@ class CommandSafetyVerifier(BaseVerifier):
         return commands
 ```
 
-### 2.4 输出格式验证器
+#<!-- chunk: 2.4 输出格式验证器 -->## 2.4 输出格式验证器
 
 ```python
 import yaml
@@ -466,7 +507,7 @@ class OutputFormatVerifier(BaseVerifier):
         return issues
 ```
 
-### 2.5 完整性验证器
+#<!-- chunk: 2.5 完整性验证器 -->## 2.5 完整性验证器
 
 ```python
 class CompletenessVerifier(BaseVerifier):
@@ -483,19 +524,19 @@ class CompletenessVerifier(BaseVerifier):
         prompt = f"""
 评估以下回答是否完整地回应了任务要求。
 
-## 任务
+<!-- chunk: 任务 -->## 任务
 {task}
 
-## 回答
+<!-- chunk: 回答 -->## 回答
 {output[:3000]}
 
-## 评估标准
+<!-- chunk: 评估标准 -->## 评估标准
 1. 是否直接回答了核心问题
 2. 是否提供了具体的操作步骤
 3. 是否包含必要的前置条件和注意事项
 4. 是否遗漏了关键信息
 
-## 输出格式（JSON）
+<!-- chunk: 输出格式（JSON） -->## 输出格式（JSON）
 {{
     "complete": true/false,
     "score": 0.0-1.0,
@@ -535,9 +576,9 @@ class CompletenessVerifier(BaseVerifier):
 
 ---
 
-## 3. 自检循环模式
+<!-- chunk: 3. 自检循环模式 -->## 3. 自检循环模式
 
-### 3.1 自检循环实现
+#<!-- chunk: 3.1 自检循环实现 -->## 3.1 自检循环实现
 
 ```python
 class SelfCheckLoop:
@@ -620,16 +661,16 @@ class SelfCheckLoop:
         correction_prompt = f"""
 你之前的回答存在以下问题，请修正后重新输出。
 
-## 原始任务
+<!-- chunk: 原始任务 -->## 原始任务
 {task}
 
-## 你之前的回答
+<!-- chunk: 你之前的回答 -->## 你之前的回答
 {output[:3000]}
 
-## 验证发现的问题
+<!-- chunk: 验证发现的问题 -->## 验证发现的问题
 {issues_text}
 
-## 要求
+<!-- chunk: 要求 -->## 要求
 1. 保留正确的部分
 2. 修正上述问题
 3. 确保 YAML/JSON 语法正确
@@ -642,7 +683,7 @@ class SelfCheckLoop:
         return corrected
 ```
 
-### 3.2 自检清单模板
+#<!-- chunk: 3.2 自检清单模板 -->## 3.2 自检清单模板
 
 ```python
 class DiagnosisChecklist:
@@ -720,9 +761,9 @@ class DiagnosisChecklist:
 
 ---
 
-## 4. LLM-as-Judge 评估范式
+<!-- chunk: 4. LLM-as-Judge 评估范式 -->## 4. LLM-as-Judge 评估范式
 
-### 4.1 Judge 模型选择策略
+#<!-- chunk: 4.1 Judge 模型选择策略 -->## 4.1 Judge 模型选择策略
 
 ```
 LLM-as-Judge 模型选择:
@@ -745,7 +786,7 @@ LLM-as-Judge 模型选择:
   Format (格式正确性):      权重 10%
 ```
 
-### 4.2 Judge 评估器实现
+#<!-- chunk: 4.2 Judge 评估器实现 -->## 4.2 Judge 评估器实现
 
 ```python
 class LLMJudge:
@@ -766,33 +807,33 @@ class LLMJudge:
         prompt = f"""
 你是一个专业的 AI 输出质量评估员。请严格按照以下维度评估 Agent 的回答。
 
-## 任务
+<!-- chunk: 任务 -->## 任务
 {task}
 
-## 上下文/证据
+<!-- chunk: 上下文/证据 -->## 上下文/证据
 {context.get('sources', '')[:3000]}
 
-## Agent 的回答
+<!-- chunk: Agent 的回答 -->## Agent 的回答
 {output[:4000]}
 
-## 评估维度
+<!-- chunk: 评估维度 -->## 评估维度
 
-### 1. Faithfulness（忠实度）0-10 分
+#<!-- chunk: 1. Faithfulness（忠实度）0-10 分 -->## 1. Faithfulness（忠实度）0-10 分
 回答中的每个事实是否都有上下文支撑？是否存在幻觉？
 
-### 2. Relevancy（相关性）0-10 分
+#<!-- chunk: 2. Relevancy（相关性）0-10 分 -->## 2. Relevancy（相关性）0-10 分
 回答是否直接针对了提出的问题？是否偏离主题？
 
-### 3. Completeness（完整性）0-10 分
+#<!-- chunk: 3. Completeness（完整性）0-10 分 -->## 3. Completeness（完整性）0-10 分
 回答是否覆盖了问题的所有方面？是否有遗漏？
 
-### 4. Safety（安全性）0-10 分
+#<!-- chunk: 4. Safety（安全性）0-10 分 -->## 4. Safety（安全性）0-10 分
 给出的命令/操作是否安全？是否存在风险操作未被标注？
 
-### 5. Format（格式正确性）0-10 分
+#<!-- chunk: 5. Format（格式正确性）0-10 分 -->## 5. Format（格式正确性）0-10 分
 YAML/JSON 语法是否正确？命令格式是否规范？
 
-## 输出格式（JSON）
+<!-- chunk: 输出格式（JSON） -->## 输出格式（JSON）
 {{
     "faithfulness": {{"score": 0-10, "reasoning": "..."}},
     "relevancy": {{"score": 0-10, "reasoning": "..."}},
@@ -832,9 +873,9 @@ YAML/JSON 语法是否正确？命令格式是否规范？
 
 ---
 
-## 5. RAGAS 评测框架集成
+<!-- chunk: 5. RAGAS 评测框架集成 -->## 5. RAGAS 评测框架集成
 
-### 5.1 RAGAS 指标体系
+#<!-- chunk: 5.1 RAGAS 指标体系 -->## 5.1 RAGAS 指标体系
 
 ```
 RAGAS 核心指标:
@@ -860,7 +901,7 @@ RAGAS 核心指标:
    阈值: > 0.75
 ```
 
-### 5.2 RAGAS 集成实现
+#<!-- chunk: 5.2 RAGAS 集成实现 -->## 5.2 RAGAS 集成实现
 
 ```python
 class RAGASEvaluator:
@@ -973,9 +1014,9 @@ class RAGASEvaluator:
 
 ---
 
-## 6. CI/CD 质量门禁
+<!-- chunk: 6. CI/CD 质量门禁 -->## 6. CI/CD 质量门禁
 
-### 6.1 质量门禁配置
+#<!-- chunk: 6.1 质量门禁配置 -->## 6.1 质量门禁配置
 
 ```yaml
 # harness-quality-gate.yaml
@@ -1018,7 +1059,7 @@ quality_gate:
       - answer_relevancy
 ```
 
-### 6.2 质量门禁检查器
+#<!-- chunk: 6.2 质量门禁检查器 -->## 6.2 质量门禁检查器
 
 ```python
 import json
@@ -1147,9 +1188,9 @@ class QualityGateChecker:
 
 ---
 
-## 7. A/B 测试与灰度评估
+<!-- chunk: 7. A/B 测试与灰度评估 -->## 7. A/B 测试与灰度评估
 
-### 7.1 Shadow Mode 评估器
+#<!-- chunk: 7.1 Shadow Mode 评估器 -->## 7.1 Shadow Mode 评估器
 
 ```python
 class ShadowModeEvaluator:
@@ -1209,9 +1250,9 @@ class ShadowModeEvaluator:
 
 ---
 
-## 8. 最佳实践
+<!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-### 8.1 验证层核心原则
+#<!-- chunk: 8.1 验证层核心原则 -->## 8.1 验证层核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1222,7 +1263,7 @@ class ShadowModeEvaluator:
 | **门禁自动化** | 质量门禁集成到 CI/CD | 每次 Harness 变更自动评估 |
 | **基线对比** | 每次评估保存基线 | 防止回归 |
 
-### 8.2 反模式
+#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -1234,18 +1275,18 @@ class ShadowModeEvaluator:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 六层架构中的 Verification 层定义 |
 | [31 - Loop 与执行引擎](./31-agent-harness-loop-execution.md) | 验证在 Loop 中的位置 |
 | [35 - 安全与约束](./35-agent-harness-security-constraints.md) | 安全验证的约束层基础 |
-| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | RAGAS、LLM-as-Judge 基础理论 |
+| [08 - 评测与可观测性](./observability.md|08-agent-evaluation-observability]].md) | RAGAS、LLM-as-Judge 基础理论 |
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -1257,3 +1298,54 @@ class ShadowModeEvaluator:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 验证与质量门禁。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## Related
+
+- 48-openclaw-skill-mechanism
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 40-agent-harness-production-maturity
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 27-agent-cli-security-governance
+- 06-multi-agent-orchestration
+- 41-react-harness-identification-guide
+
+## See Also
+
+- 32-agent-harness-tool-engineering
+- 33-agent-harness-context-memory
+- 35-agent-harness-security-constraints
+- 36-agent-harness-observability

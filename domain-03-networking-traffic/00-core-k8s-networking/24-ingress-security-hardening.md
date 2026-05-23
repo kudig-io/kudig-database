@@ -59,11 +59,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 132 - Ingress 安全加固与防护
+# 132 - [[Ingress|Ingress]] 安全加固与防护
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -74,7 +75,7 @@ cross_refs:
 
 | 攻击类型 | 英文 | 描述 | 风险等级 |
 |---------|------|------|---------|
-| **DDoS 攻击** | Distributed Denial of Service | 大量请求导致服务不可用 | 高 |
+| **DDoS 攻击** | Distributed Denial of [[Service|Service]] | 大量请求导致服务不可用 | 高 |
 | **SQL 注入** | SQL Injection | 通过输入执行恶意 SQL | 高 |
 | **XSS 攻击** | Cross-Site Scripting | 注入恶意脚本 | 高 |
 | **CSRF 攻击** | Cross-Site Request Forgery | 伪造用户请求 | 中 |
@@ -1013,22 +1014,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/22-ingress-tls-certificate.md|22-ingress-tls-certificate]]
-- [[domain-03-networking-traffic/23-ingress-advanced-routing.md|23-ingress-advanced-routing]]
-- [[domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md|25-ingress-monitoring-troubleshooting]]
-- [[domain-03-networking-traffic/26-ingress-production-best-practices.md|26-ingress-production-best-practices]]
+- 22-ingress-tls-certificate
+- 23-ingress-advanced-routing
+- 25-ingress-monitoring-troubleshooting
+- 26-ingress-production-best-practices

@@ -1,4 +1,39 @@
 ---
+title: kubeadm join 证书分发流程 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kubeadm join 证书分发流程 是什么
+- 如何 kubeadm join 证书分发流程
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kubeadm
+- join
+- 证书分发流程
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: kubeadm join 证书分发流程
 description: '## 概述'
 category: functions
@@ -36,10 +71,6 @@ trigger_keywords:
 - HA
 - CSR 自动审批
 - node-autoapprove
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-4-nodes
@@ -47,13 +78,22 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/kubelet-cert
 - cluster-cert/cert-rotation
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kubeadm join 证书分发流程
 
 ## 概述
 
-kubeadm join 是新节点加入 [[entities/kubernetes|kubernetes]] 集群的标准流程。与 `kubeadm init` 生成所有证书不同，`join` 的核心任务是**安全地获取节点运行所需的凭证**，而非自行生成。理解这一流程对排查节点加入失败、证书分发异常至关重要。
+kubeadm join 是新节点加入 Kubernetes 集群的标准流程。与 `kubeadm init` 生成所有证书不同，`join` 的核心任务是**安全地获取节点运行所需的凭证**，而非自行生成。理解这一流程对排查节点加入失败、证书分发异常至关重要。
 
 ---
 
@@ -501,3 +541,10 @@ kubeadm token list
 # 重新生成 join 命令
 kubeadm token create --print-join-command
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

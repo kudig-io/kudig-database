@@ -1,5 +1,5 @@
 ---
-title: 第三课：Deployment - 应用部署管理器
+title: 第三课：Deployment - 应用部署管理器 [fundamentals]
 description: 'title: 第三课：Deployment - 应用部署管理器'
 category: learning
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -415,12 +416,12 @@ kubectl delete deployment my-app
 
 **关联文档**:
 - [../03-networking/03-service-basics.md](../03-networking/03-service-basics.md) — Service 基础
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/01-what-is-kubernetes.md|01-what-is-kubernetes]]
-- [[domain-11-production-operations/topic-learn/fundamentals/02-pod-basics.md|02-pod-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/04-service-basics.md|04-service-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/05-ingress-basics.md|05-ingress-basics]]
+- kubernetes.md|01-what-is-kubernetes]]
+- 02-pod-basics
+- 04-service-basics
+- 05-ingress-basics

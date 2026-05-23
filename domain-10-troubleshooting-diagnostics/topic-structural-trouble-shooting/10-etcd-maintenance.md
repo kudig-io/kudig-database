@@ -1,5 +1,5 @@
 ---
-title: etcd 维护专项文档
+title: etcd 维护专项文档 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'''
 category: structural-troubleshooting
 tags:
@@ -38,9 +38,10 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: etcd 维护专项文档
+title: [[etcd|etcd]] 维护专项文档
 description: '**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'
 category: structural-troubleshooting
 tags:
@@ -48,7 +49,7 @@ tags:
 - troubleshooting
 - decision-tree
 - etcd
-- prometheus
+- [[Prometheus|prometheus]]
 - job
 - rag
 - agent
@@ -552,7 +553,7 @@ related:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
@@ -560,8 +561,8 @@ related:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also

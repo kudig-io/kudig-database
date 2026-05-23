@@ -1,5 +1,5 @@
 ---
-title: 问题排查体系架构文档
+title: 问题排查体系架构文档 [domain-10-troubleshooting-diagnostics]
 description: 'title: 问题排查体系架构文档'
 category: fta
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 fta_id: FTA-PROBLEM_SOLVING_ARCHITECTURE-001
 component: Problem Solving Architecture
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 问题排查体系架构文档
@@ -50,7 +51,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - gpu
 - rag

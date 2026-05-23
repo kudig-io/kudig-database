@@ -19,6 +19,7 @@ trigger_keywords:
 - 三级目录构建脚本使用说明
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # GitBook 三级目录构建脚本使用说明

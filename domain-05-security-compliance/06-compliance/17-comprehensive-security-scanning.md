@@ -55,11 +55,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 17 - 安全扫描与漏洞检测工具
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 中高级 | **参考**: [Trivy](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [Falco](https://falco.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy.md|Trivy]]](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [[entities/falco.md|Falco]]](https://falco.org/)
 
 <!-- chunk: 一、安全扫描体系架构 -->
 ## 一、安全扫描体系架构
@@ -144,7 +145,7 @@ cross_refs:
 | **Snyk** | 全栈 | 商业DB | ✓ | ★★★★★ | ✓ | ★★★★☆ | 部分 | 开发者体验 |
 | **Anchore** | 镜像/SBOM | 多源 | ★★★★★ | ★★★★☆ | ✗ | ★★★★☆ | 企业版 | 企业合规 |
 | **Falco** | 运行时 | 规则 | ✗ | ✗ | ★★★★★ | ★★★★★ | ✓ | 运行时检测 |
-| **Kubescape** | K8s配置 | NSA/MITRE | ✗ | ★★★★☆ | ✓ | ★★★★★ | ✓ | K8s安全 |
+| **[[Kubescape|Kubescape]]** | K8s配置 | NSA/MITRE | ✗ | ★★★★☆ | ✓ | ★★★★★ | ✓ | K8s安全 |
 | **Checkov** | IaC | 策略 | ✗ | ★★★★★ | ✗ | ★★★☆☆ | ✓ | IaC扫描 |
 
 ### 1.3 漏洞严重性与SLA
@@ -572,7 +573,7 @@ scan_deployed_images() {
     
     # 获取所有唯一镜像
     images=$(kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.containers[*].image}' | \
-        tr -s '[[:space:]]' '\n' | sort | uniq)
+        tr -s ':space:' '\n' | sort | uniq)
     
     echo "Found $(echo "$images" | wc -l) unique images"
     
@@ -1852,24 +1853,24 @@ falco -r custom_rules.yaml                        # 使用自定义规则
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/15-runtime-security-detection.md|15-runtime-security-detection]]
-- [[domain-05-security-compliance/16-compliance-audit-practices.md|16-compliance-audit-practices]]
-- [[domain-05-security-compliance/18-network-defense-depth.md|18-network-defense-depth]]
-- [[domain-05-security-compliance/19-zero-trust-architecture.md|19-zero-trust-architecture]]
+- 15-runtime-security-detection
+- 16-compliance-audit-practices
+- 18-network-defense-depth
+- 19-zero-trust-architecture
 
 - [[domain-05-security-compliance/README.md|返回目录]]

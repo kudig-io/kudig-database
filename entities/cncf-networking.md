@@ -30,6 +30,7 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # CNCF 网络与服务网格项目全景
@@ -38,7 +39,7 @@ prerequisites:
 
 ## 概述
 
-CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）**、**DNS/服务发现**、**负载均衡与入口（Ingress）** 四大层次构建。
+CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）vice]] Mesh）**、**DNS/服务发现**、**负载均衡与入口（[[Ingress|Ingress]]）** 四大层次构建。
 
 ---
 
@@ -57,7 +58,7 @@ Cilium 是基于 eBPF 的 CNI 和服务网格。
 
 Antrea 是基于 Open vSwitch（OVS）的 CNI。
 
-### [[ovn-kubernetes]] — 沙箱项目
+### [[entities/ovn-kubernetes.md|kubernetes]]]] — 沙箱项目
 
 OVN-Kubernetes 基于 OVN（Open Virtual Network）的 CNI 实现。
 

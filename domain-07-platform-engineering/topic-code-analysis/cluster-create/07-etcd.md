@@ -1,5 +1,5 @@
 ---
-title: etcd 静态 Pod 管理
+title: etcd 静态 Pod 管理 (topic-code-analysis)
 description: 'title: etcd 静态 Pod 管理'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: etcd 静态 Pod 管理

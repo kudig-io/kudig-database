@@ -31,6 +31,7 @@ prerequisites:
 fta_id: FTA-CALICO-001
 component: Calico
 severity: critical
+created: "2026-05-23"
 ---
 
 # Calico Fta
@@ -43,10 +44,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- kubelet
+- [[kubelet|kubelet]]
 - flannel
 - calico
-- daemonset
+- [[DaemonSet|daemonset]]
 - networkpolicy
 last_updated: 2026-05
 difficulty: advanced
@@ -162,41 +163,41 @@ flowchart TD
 - [[cni]] — CNI (Container Network Interface)
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico-fta]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
+- RELEASE-NOTES-3.18
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-2.4.md|RELEASE-NOTES-2.4]]
+- RELEASE-NOTES-3.19
+- RELEASE-NOTES-2.4
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
+- RELEASE-NOTES-3.12
+- RELEASE-NOTES-3.5
+- RELEASE-NOTES-3.1
+- RELEASE-NOTES-3.16
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.22.md|RELEASE-NOTES-3.22]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
+- RELEASE-NOTES-3.0
+- RELEASE-NOTES-3.17
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-2.5.md|RELEASE-NOTES-2.5]]
+- RELEASE-NOTES-2.5
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
+- RELEASE-NOTES-3.13
+- RELEASE-NOTES-3.4
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- RELEASE-NOTES-3.14
+- RELEASE-NOTES-3.3
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-2.6.md|RELEASE-NOTES-2.6]]
+- RELEASE-NOTES-2.6
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.7.md|RELEASE-NOTES-3.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
+- RELEASE-NOTES-3.7
+- RELEASE-NOTES-3.10
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
+- RELEASE-NOTES-3.6
+- RELEASE-NOTES-3.11
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- RELEASE-NOTES-3.15
+- RELEASE-NOTES-3.2
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
+- RELEASE-NOTES-3.9
+- RELEASE-NOTES-3.8
 - [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.28|RELEASE-NOTES-3.28]]
 - [[domain-19-landscape-references/topic-release-notes/networking/calico/RELEASE-NOTES-3.29|RELEASE-NOTES-3.29]]

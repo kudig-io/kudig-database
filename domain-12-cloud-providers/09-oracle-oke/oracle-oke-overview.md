@@ -36,9 +36,10 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析
+title: Oracle OKE (Oracle Container Engine for [[Kubernetes|Kubernetes]]) 企业级深度解析
 description: '# Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析'
 category: cloud-provider
 tags:
@@ -48,9 +49,9 @@ tags:
 - gke
 - aks
 - ack
-- kubelet
+- [[kubelet|kubelet]]
 - flannel
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
 last_updated: 2026-05
 difficulty: advanced
@@ -1030,7 +1031,7 @@ Oracle OKE凭借其企业级架构设计、金融级安全特性和卓越的性�
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[references/oracle-oke-overview.md|Oracle Container Engine for Kubernetes (OKE)]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

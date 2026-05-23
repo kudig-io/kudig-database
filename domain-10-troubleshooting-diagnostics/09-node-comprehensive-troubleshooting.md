@@ -61,6 +61,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
 # 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
@@ -184,7 +185,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 | `certificate has expired` | 证书过期 | 轮换证书 |
 | `failed to run Kubelet: cannot create certificate` | 证书问题 | 检查CA/重新生成 |
 | `node not found` | 节点未注册 | 检查kubelet配置/重新注册 |
-| `container runtime is down` | 运行时故障 | 重启containerd/docker |
+| `[[Container Runtime|container runtime]] is down` | 运行时故障 | 重启containerd/docker |
 | `PLEG is not healthy` | PLEG超时 | 检查运行时/重启kubelet |
 
 ---
@@ -315,8 +316,8 @@ ss -tlnp | grep -E "6443|10250|10251|10252"
 
 | 端口 | 组件 | 用途 |
 |:---:|:---|:---|
-| 6443 | API Server | Kubernetes API |
-| 2379-2380 | etcd | etcd客户端/对等通信 |
+| 6443 | API Server | [[Kubernetes|Kubernetes]]es API|Kubernetes API]] |
+| 2379-2380 | [[etcd|etcd]] | etcd客户端/对等通信 |
 | 10250 | kubelet | kubelet API |
 | 10251 | kube-scheduler | 调度器 |
 | 10252 | kube-controller-manager | 控制器管理器 |
@@ -568,9 +569,9 @@ kubectl get pods -n kube-system -o wide --field-selector spec.nodeName=$NODE
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

@@ -59,9 +59,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# Linkerd 企业级服务网格深度实践
+# [[Linkerd|Linkerd]] 企业级服务网格深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Linkerd v2.18+ | **难度**: 中高级
 
@@ -69,9 +70,9 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 Kubernetes 提供极致轻量、安全默认、开箱即用的服务网格体验。与 Istio 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，提供生产级的服务网格核心能力：自动 mTLS、负载均衡、重试超时、流量分割和黄金指标可观测性。
+Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[Kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[Istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，提供生产级的服务网格核心能力：自动 mTLS、负载均衡、重试超时、流量分割和黄金指标可观测性。
 
-Linkerd 的核心差异化优势在于其 Rust 编写的 linkerd-proxy 数据平面。相比 Istio 使用的 Envoy（C++，每代理约 100MB+ 内存），Linkerd 的 Rust 代理仅消耗约 20MB 内存，P99 延迟增加低于 1 毫秒。这使得 Linkerd 特别适合资源受限环境（边缘计算、IoT）和快速落地需求的中小型团队。
+Linkerd 的核心差异化优势在于其 Rust 编写的 linkerd-proxy 数据平面。相比 Istio 使用的 [[Envoy|Envoy]]（C++，每代理约 100MB+ 内存），Linkerd 的 Rust 代理仅消耗约 20MB 内存，P99 延迟增加低于 1 毫秒。这使得 Linkerd 特别适合资源受限环境（边缘计算、IoT）和快速落地需求的中小型团队。
 
 本文档从企业级生产环境角度，全面覆盖 Linkerd 的架构设计、高可用部署、流量管理、安全策略、可观测性集成、性能调优和故障排查实践。
 
@@ -128,7 +129,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 高可用部署 -->## 核心配置 — 高可用部署
 
-#<!-- chunk: 生产级 Helm 安装 -->## 生产级 Helm 安装
+#<!-- chunk: 生产级 [[Helm|Helm]] 安装 -->## 生产级 Helm 安装
 
 ```yaml
 apiVersion: v1
@@ -1298,25 +1299,25 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md|99-spring-cloud-kubernetes-service-mesh-guide]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|01-istio-enterprise-service-mesh]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|03-consul-connect-enterprise]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|04-envoy-proxy-enterprise]]
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 01-istio-enterprise-service-mesh
+- 03-consul-connect-enterprise
+- 04-envoy-proxy-enterprise
 
 ## Related
 

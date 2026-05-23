@@ -1,5 +1,5 @@
 ---
-title: 第九课：HPA - 自动伸缩
+title: 第九课：HPA - 自动伸缩 [08-scaling]
 description: 2. 掌握 HPA 的配置方法
 category: k8s-lecturer
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 第九课：HPA - 自动伸缩
@@ -375,5 +376,5 @@ kubectl edit hpa <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../09-troubleshooting/09-common-problems.md) — 常见问题排查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档

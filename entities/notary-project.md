@@ -1,5 +1,5 @@
 ---
-title: Notary Project
+title: Notary Project (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Notary Project
@@ -61,7 +62,7 @@ Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具
 
 ## 参考链接
 
-- [[entities/vault.md|vault]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[kyverno]]
 - [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
@@ -69,13 +70,13 @@ Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具
 
 ## Related
 
-- [[open-cluster-management]] — Open Cluster Management (OCM)
+- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[cloud-custodian]] — Cloud Custodian
 - [[kuadrant]] — Kuadrant
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/notary-project/notary-project.md|notary-project]]
+- notary-project
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

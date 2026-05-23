@@ -32,6 +32,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -43,7 +44,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.35.2](#changelog-since-v1352)
+  - Changelog since v1.35.2](#changelog-since-v1352)
   - [Changes by Kind](#changes-by-kind)
     - [Bug or Regression](#bug-or-regression)
     - [Other (Cleanup or Flake)](#other-cleanup-or-flake)
@@ -219,7 +220,7 @@ prerequisites:
 
 filename | sha512 hash
 -------- | -----------
-[kubernetes.tar.gz](https://dl.k8s.io/v1.35.3/kubernetes.tar.gz) | e88397cb2410015366d86a2f06d300634a43acc8bb6ca27ba5033077f7c55811afb6064ac3cd6f8898240ed5ca859feffb4b807e918e30d07843b2a8fe1d08fa
+[[entities/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.35.3/kubernetes.tar.gz) | e88397cb2410015366d86a2f06d300634a43acc8bb6ca27ba5033077f7c55811afb6064ac3cd6f8898240ed5ca859feffb4b807e918e30d07843b2a8fe1d08fa
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.35.3/kubernetes-src.tar.gz) | a8fbcb16483ce825522533f3ed9c34e0501144443d43ba4fa7a2195e397b6eef86511ca1ef97cd7c61484694e27ff76e69c6dbc62d92e6e439a45199db3b04d4
 
 ### Client Binaries
@@ -278,7 +279,7 @@ name | architectures
 
 ### Bug or Regression
 
-- Kubeadm: do not add learner member to etcd client endpoints ([#137257](https://github.com/kubernetes/kubernetes/pull/137257), [@ahrtr](https://github.com/ahrtr)) [SIG Cluster Lifecycle]
+- Kubeadm: do not add learner member to [[etcd|etcd]] client endpoints ([#137257](https://github.com/kubernetes/kubernetes/pull/137257), [@ahrtr](https://github.com/ahrtr)) [SIG Cluster Lifecycle]
 - Kubeadm: ignore EINVAL when unmounting /var/lib/kubelet peer mounts during reset ([#137569](https://github.com/kubernetes/kubernetes/pull/137569), [@fuweid](https://github.com/fuweid)) [SIG Cluster Lifecycle]
 
 ### Other (Cleanup or Flake)

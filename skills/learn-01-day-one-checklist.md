@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 trigger_keywords:
@@ -115,7 +116,7 @@ kubectl get namespaces
 | Scheduler | `kubectl get pods -n kube-system -l component=kube-scheduler` | Pod 调度器 |
 | Controller Manager | `kubectl get pods -n kube-system -l component=kube-controller-manager` | 控制器循环 |
 | etcd | `kubectl get pods -n kube-system -l component=etcd` | 数据存储 |
-| kubelet | `systemctl status kubelet` | 节点代理 |
+| [[kubelet|kubelet]] | `systemctl status kubelet` | 节点代理 |
 
 ---
 

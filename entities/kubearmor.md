@@ -1,5 +1,5 @@
 ---
-title: KubeArmor
+title: KubeArmor (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # KubeArmor
@@ -71,7 +72,7 @@ KubeArmor 是一个云原生运行时安全引擎，利用 Linux 安全模块 (L
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[concepts/secrets-management.md|secrets-management]]
 
 ## Related
@@ -82,7 +83,7 @@ KubeArmor 是一个云原生运行时安全引擎，利用 Linux 安全模块 (L
 - [[keycloak]] — Keycloak
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubearmor/kubearmor.md|kubearmor]]
+- kubearmor
 - [[entities/tokenetes.md|Tokenetes]]
 - [[entities/containerssh.md|ContainerSSH]]
 - [[entities/parsec.md|Parsec]]

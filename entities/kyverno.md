@@ -1,5 +1,5 @@
 ---
-title: Kyverno
+title: Kyverno [entities]
 description: Kyverno — Kubernetes 生产运维知识库
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Kyverno
@@ -47,7 +48,7 @@ Kyverno is a Kubernetes-native policy engine that uses YAML syntax for policy de
 |------|-------------|---------|
 | Validate | Reject non-compliant resources | Require resource limits, non-root user |
 | Mutate | Auto-fix non-compliant resources | Add default labels, set security context |
-| Generate | Create dependent resources | NetworkPolicy per namespace |
+| Generate | Create dependent resources | [[NetworkPolicy|NetworkPolicy]] per namespace |
 | Cleanup | Delete stale resources | Remove expired test environments |
 | ImageVerify | Verify image signatures | Block unsigned images from deployment |
 
@@ -65,10 +66,10 @@ Kyverno automates compliance checks for SOC 2, ISO 27001, PCI-DSS, and NIST CSF 
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[supply-chain-security|Supply Chain Security]]
 
-- [[domain-05-security-compliance/14-policy-engines-opa-kyverno.md|14-policy-engines-opa-kyverno]]
-- [[domain-05-security-compliance/99-kyverno-policy-guide.md|99-kyverno-policy-guide]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|04-kyverno-enterprise-policy-management]]
-- [[domain-19-landscape-references/incubating/kyverno/kyverno.md|kyverno]]
+- 14-policy-engines-opa-kyverno
+- 99-kyverno-policy-guide
+- 04-kyverno-enterprise-policy-management
+- kyverno
 - [[synthesis/IaC x 多集群管理|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[synthesis/纵深防御 x 供应链安全|纵深防御 x 供应链安全]] — Cross-reference
 - [[synthesis/控制器模式 × Operator 模式|控制器模式 × Operator 模式]] — Cross-reference

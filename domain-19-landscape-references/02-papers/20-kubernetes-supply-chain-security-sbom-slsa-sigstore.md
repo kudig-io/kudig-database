@@ -53,16 +53,17 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
+# [[Kubernetes|Kubernetes]] 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
 
 > **作者**: 云原生安全架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03
 > **适用场景**: 容器供应链安全、合规审计、镜像安全 | **复杂度**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 🎯 摘要 -->## 🎯 摘要
 
-本文档系统梳理Kubernetes容器供应链安全的完整技术体系，覆盖从代码提交到生产部署的全链条安全实践。重点阐述SBOM软件物料清单（SPDX/CycloneDX）、SLSA构建来源证明（Level 1-4）与Sigstore无密钥签名体系（Cosign/Fulcio/Rekor）的企业级落地方案。结合SolarWinds、Log4Shell等真实攻击案例，分析Kubernetes供应链威胁面，并提供in-toto Attestation链路验证、Admission Controller强制检查、Kyverno/OPA策略执行等纵深防御实践，帮助团队构建符合NIST SSDF与SLSA框架要求的云原生供应链安全基线。
+本文档系统梳理Kubernetes容器供应链安全的完整技术体系，覆盖从代码提交到生产部署的全链条安全实践。重点阐述SBOM软件物料清单（SPDX/CycloneDX）、SLSA构建来源证明（Level 1-4）与Sigstore无密钥签名体系（Cosign/Fulcio/Rekor）的企业级落地方案。结合SolarWinds、Log4Shell等真实攻击案例，分析Kubernetes供应链威胁面，并提供in-toto Attestation链路验证、Admission Controller强制检查、[[Kyverno|Kyverno]]/OPA策略执行等纵深防御实践，帮助团队构建符合NIST SSDF与SLSA框架要求的云原生供应链安全基线。
 
 <!-- chunk: 1. 供应链安全威胁全景 -->## 1. 供应链安全威胁全景
 
@@ -371,7 +372,7 @@ jobs:
             ghcr.io/${{ github.repository }}:sbom
 ```
 
-#<!-- chunk: 2.3 Trivy SBOM扫描与集成 -->## 2.3 Trivy SBOM扫描与集成
+#<!-- chunk: 2.3 [[Trivy|Trivy]] SBOM扫描与集成 -->## 2.3 Trivy SBOM扫描与集成
 
 ```yaml
 # ============================================================
@@ -1882,25 +1883,25 @@ K8s原生镜像签名进展:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-papers MOC]]
+- domain-19-papers MOC
 - [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-19 论文与参考 — 开源项目索引]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...]]
-- [[domain-19-landscape-references/03-kubernetes-zero-trust-security-architecture.md|Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...]]
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...]]
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide.md|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]
-- [[domain-19-landscape-references/06-kubernetes-cost-governance-finops-practice.md|Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...]]
-- [[domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md|Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...]]
-- [[domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md|Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...]]
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md|Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...]]
+- Domain-19 论文与参考 — 开源项目索引
+- Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
+- Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
+- Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
+- Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
+- Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
+- Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
+- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
+- Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 
 ## See Also
 
-- [[domain-19-landscape-references/18-kubernetes-ebpf-cilium-deep-practice.md|18-kubernetes-ebpf-cilium-deep-practice]]
-- [[domain-19-landscape-references/19-kubernetes-gateway-api-modern-traffic-management.md|19-kubernetes-gateway-api-modern-traffic-management]]
-- [[domain-19-landscape-references/21-kubernetes-platform-engineering-internal-developer-platform.md|21-kubernetes-platform-engineering-internal-developer-platform]]
-- [[domain-19-landscape-references/22-kubernetes-webassembly-wasm-workloads.md|22-kubernetes-webassembly-wasm-workloads]]
+- 18-kubernetes-ebpf-cilium-deep-practice
+- 19-kubernetes-gateway-api-modern-traffic-management
+- 21-kubernetes-platform-engineering-internal-developer-platform
+- 22-kubernetes-webassembly-wasm-workloads
 
 ## Related
 

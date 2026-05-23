@@ -32,6 +32,18 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[entities/cloudnativepg]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/cronjob]]"
+    type: related_to
+  - target: "[[entities/distribution]]"
+    type: related_to
 ---
 
 # Operator 模式 × Pod 生命周期
@@ -43,9 +55,9 @@ prerequisites:
 
 ## 共现场景
 
-- **数据库初始化**：CloudNativePG 在 Pod 启动前通过 Init 容器恢复备份数据——这扩展了 Pod 的"Pending→Running"过渡阶段
+- **数据库初始化**：[[entities/cloudnativepg|CloudNativePG]] 在 Pod 启动前通过 Init 容器恢复备份数据——这扩展了 Pod 的"Pending→Running"过渡阶段
 - **滚动升级**：数据库 Operator 在主从架构中需要：先升级从节点、切换主从、再升级原主节点——这不是标准的 RollingUpdate，而是领域特定的协调序列
-- **备份 CronJob**：Operator 自动创建 CronJob 执行定时备份，并将备份状态写入 CRD status——备份成为 Pod 生命周期的一部分
+- **备份 [[domain-17-system-foundation/topic-dictionary/workloads/cronjob|CronJob]]**：Operator 自动创建 CronJob 执行定时备份，并将备份状态写入 CRD status——备份成为 Pod 生命周期的一部分
 - **故障转移**：当主节点 Pod 失败时，Operator 不是简单地重新创建 Pod，而是提升从节点为主节点、更新服务端点、触发告警——这是跨 Pod 的协调操作
 
 ## 交叉洞察
@@ -79,7 +91,7 @@ Init (恢复/初始化) → Running (主/从角色) → Backup (定时快照)
 | 张力 | 详情 |
 |------|------|
 | **协调冲突** | Operator 的协调逻辑与 K8s 内置控制器的逻辑可能冲突。例如 Operator 希望在节点维护前执行数据库检查点，但 Node Controller 的驱逐超时可能不允许足够的优雅关闭时间 |
-| **状态外部化** | Operator 的状态（如"当前主节点是 pod-0"）存储在 CRD status 中，但 etcd 的线性一致性保证与数据库的最终一致性需求可能冲突。Operator 重启后重新读取状态，可能与数据库的实际状态不一致 |
+| **状态外部化** | Operator 的状态（如"当前主节点是 pod-0"）存储在 CRD status 中，但 [[entities/etcd|etcd]] 的线性一致性保证与数据库的最终一致性需求可能冲突。Operator 重启后重新读取状态，可能与数据库的实际状态不一致 |
 | **Pod 漂移与数据亲和性** | 当 Pod 因节点故障被重新调度时，Operator 必须确保新 Pod 挂载正确的 PVC。但如果 PVC 的可用区与目标节点不匹配，Operator 无法自行解决——需要人工干预或跨可用区存储 |
 
 ## 开放问题
@@ -99,6 +111,6 @@ Init (恢复/初始化) → Running (主/从角色) → Backup (定时快照)
 ## See Also
 
 - [[synthesis/K8s 故障分布与 MTTR 基准.md|K8s 故障分布与 MTTR 基准]]
-- [[synthesis/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[entities/kubernetes|Kubernetes]] Fault [[entities/distribution|Distribution]] and MTTR.md|Kubernetes Fault Distribution and MTTR]]
 - [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 - [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]

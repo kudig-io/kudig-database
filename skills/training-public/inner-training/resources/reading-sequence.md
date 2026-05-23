@@ -44,6 +44,7 @@ related_domains:
 related_topics:
 - knowledge-map
 - commands-cheatsheet
+created: "2026-05-23"
 ---
 
 # 阅读顺序指南
@@ -71,7 +72,7 @@ related_topics:
 | ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
 | 📖3 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
 
-### Day 2: ACK SDK & API
+### [[skills/training-public/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api.md|Day 2: ACK SDK & API]]
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
@@ -85,7 +86,7 @@ related_topics:
 | ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/200-ack-overview.md` | 控制台功能入口 |
 | ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 控制台与镜像管理 |
 
-### Day 4: K8S 新建集群
+### Day 4: K8S 新建集群etes 生产环境速查卡|K8S]] 新建集群
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|

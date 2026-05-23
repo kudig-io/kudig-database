@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 二手交易与循环经济架构设计
@@ -43,12 +44,12 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
 - mysql
 - hpa
-- statefulset
-- ingress
+- [[StatefulSet|statefulset]]
+- [[Ingress|ingress]]
 - networkpolicy
 last_updated: 2026-05-18
 difficulty: advanced
@@ -79,9 +80,9 @@ related_domains:
 - domain-11-production-operations
 - domain-11-ai-infra
 related_topics:
-- [[domain-20-application-patterns/36-carbon-esg-management.md|36-carbon-esg-management]]
+- 36-carbon-esg-management
 - 01-ecommerce-architecture
-- [[domain-20-application-patterns/53-new-retail-dtc.md|53-new-retail-dtc]]
+- 53-new-retail-dtc
 authors:
 - name: KUDIG Team
   role: contributor
@@ -971,7 +972,7 @@ graph TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -986,7 +987,7 @@ graph TB
 
 ## See Also
 
-- [[domain-20-application-patterns/40-cloud-gaming.md|40-cloud-gaming]]
-- [[domain-20-application-patterns/41-beauty-ecommerce.md|41-beauty-ecommerce]]
-- [[domain-20-application-patterns/43-enterprise-im.md|43-enterprise-im]]
-- [[domain-20-application-patterns/44-martech-adtech.md|44-martech-adtech]]
+- 40-cloud-gaming
+- 41-beauty-ecommerce
+- 43-enterprise-im
+- 44-martech-adtech

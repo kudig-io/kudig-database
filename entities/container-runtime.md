@@ -1,5 +1,5 @@
 ---
-title: Container Runtime
+title: Container Runtime (entities)
 description: Container Runtime — Kubernetes 生产运维知识库
 category: entities
 tags:
@@ -25,13 +25,14 @@ trigger_keywords:
 - Runtime
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Container Runtime
 
 ## CRI (Container Runtime Interface)
 
-CRI is the gRPC API between kubelet and container runtime:
+CRI is the [[gRPC|gRPC]] API between [[kubelet|kubelet]] and container runtime:
 - **RuntimeService**: Pod/container lifecycle (RunPodSandbox, CreateContainer, StartContainer)
 - **ImageService**: Image management (PullImage, ListImages, RemoveImage)
 
@@ -60,12 +61,12 @@ Kubernetes removed the built-in Docker shim (dockershim) in v1.24. Docker images
 - [[containerd]] — containerd
 - [[cri-o]] — CRI-O
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]
 - [[docker]] — Docker
 - [[entities/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 
-- [[domain-01-cluster-fundamentals/21-container-runtime-deep-dive.md|21-container-runtime-deep-dive]]
-- [[domain-02-workloads-applications/15-container-runtime-interfaces.md|15-container-runtime-interfaces]]
+- 21-container-runtime-deep-dive
+- 15-container-runtime-interfaces
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]

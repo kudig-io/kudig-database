@@ -1,5 +1,5 @@
 ---
-title: 在线教育平台 Kubernetes 生产架构设计
+title: 在线教育平台 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 在线教育平台 Kubernetes 生产架构设计'
 category: general
 tags:
@@ -32,9 +32,10 @@ prerequisites:
 - prometheus-basics
 - kafka-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
-title: 在线教育平台 Kubernetes 生产架构设计
+title: 在线教育平台 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 在线教育平台 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
@@ -76,8 +77,8 @@ related_domains:
 - domain-11-production-operations
 - domain-11-ai-infra
 related_topics:
-- [[domain-20-application-patterns/02-mini-program-architecture.md|02-mini-program-architecture]]
-- [[domain-20-application-patterns/04-im-rtc-architecture.md|04-im-rtc-architecture]]
+- 02-mini-program-architecture
+- 04-im-rtc-architecture
 - 48-vocational-edtech
 authors:
 - name: KUDIG Team
@@ -626,9 +627,9 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|[[电商系统 Kubernetes 生产架构设计|电商系统 Kubernetes 生产架构设计]]]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
@@ -641,7 +642,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/03-cms-architecture.md|03-cms-architecture]]
-- [[domain-20-application-patterns/04-im-rtc-architecture.md|04-im-rtc-architecture]]
-- [[domain-20-application-patterns/06-fintech-architecture.md|06-fintech-architecture]]
-- [[domain-20-application-patterns/07-iot-platform-architecture.md|07-iot-platform-architecture]]
+- 03-cms-architecture
+- 04-im-rtc-architecture
+- 06-fintech-architecture
+- 07-iot-platform-architecture

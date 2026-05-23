@@ -55,11 +55,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md
   label: '故障树: higress'
+created: "2026-05-23"
 ---
 
 # 04 - Higress 云原生 API 网关企业级实践
 
-> **文档版本**: v2.0 | **适用版本**: Higress v1.x - v2.x, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Higress, Envoy, Istiod, Wasm, AI Gateway, Gateway API, xDS, 阿里云, McpBridge
+> **文档版本**: v2.0 | **适用版本**: Higress v1.x - v2.x, [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Higress, [[Envoy|Envoy]], Istiod, Wasm, AI Gateway, Gateway API, xDS, 阿里云, McpBridge
 
 <!-- chunk: 目录 -->## 目录
 
@@ -75,7 +76,7 @@ cross_refs:
 10. [Gateway API 集成](#10-gateway-api-集成)
 11. [可观测性](#11-可观测性)
 12. [生产环境调优](#12-生产环境调优)
-13. [与 Istio 协同](#13-与-istio-协同)
+13. [与 [[Istio|Istio]] 协同](#13-与-istio-协同)
 14. [常见故障排查](#14-常见故障排查)
 15. [与竞品横向对比](#15-与竞品横向对比)
 
@@ -83,7 +84,7 @@ cross_refs:
 
 <!-- chunk: 1. Higress 项目概述 -->## 1. Higress 项目概述
 
-Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy 构建，2022 年开源，2023 年进入 CNCF Sandbox。其命名源自 "High" + "Ingress"，寓意高性能的入口网关。
+Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy 构建，2022 年开源，2023 年进入 CNCF Sandbox。其命名源自 "High" + "[[Ingress|Ingress]]"，寓意高性能的入口网关。
 
 #<!-- chunk: 核心定位 -->## 核心定位
 
@@ -1241,25 +1242,25 @@ kubectl logs -n higress-system -l app=higress-controller -f
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
-- [[domain-03-networking-traffic/10-wasm-plugin-ecosystem.md|10 - Wasm 插件生态与开发实践]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 03 - API 网关选型指南与对比矩阵
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
+- 10 - Wasm 插件生态与开发实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02-kubernetes-gateway-api-deep-dive]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03-api-gateway-selection-guide]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05-apisix-enterprise-gateway]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06-kong-enterprise-gateway]]
+- 02-kubernetes-gateway-api-deep-dive
+- 03-api-gateway-selection-guide
+- 05-apisix-enterprise-gateway
+- 06-kong-enterprise-gateway
 
 ## Related
 

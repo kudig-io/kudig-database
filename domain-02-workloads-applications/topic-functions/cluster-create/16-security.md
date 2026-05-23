@@ -1,4 +1,41 @@
 ---
+title: 安全机制: ServiceAccount Token 与 Audit [cluster-create]
+description: 'title: ''安全机制: ServiceAccount Token 与 Audit'''
+category: general
+tags:
+- reference
+- security
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- '安全机制: ServiceAccount Token 与 Audit 是什么'
+- '如何 安全机制: ServiceAccount Token 与 Audit'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- '安全机制:'
+- ServiceAccount
+- Token
+- Audit
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: '安全机制: ServiceAccount Token 与 Audit'
 description: '# 安全机制: ServiceAccount Token 与 Audit'
 category: functions
@@ -39,10 +76,6 @@ trigger_keywords:
 - sa.pub
 - api server
 - admission
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-2-security
 - domain-10-troubleshooting-diagnostics
@@ -53,6 +86,15 @@ related_topics:
 - audit
 - encryption
 - admission
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 安全机制: ServiceAccount Token 与 Audit
@@ -307,3 +349,11 @@ NodeRestriction 限制 kubelet 的操作:
 | `node not found` | kubelet 未完成注册 | 检查 Bootstrap Token 和 CSR 状态 |
 | `service account token is not being mounted` | 未启用 TokenRequest | Pod spec 需显式配置 projected volume |
 | `audit log permission denied` | 审计日志目录无权限 | 确保 /var/log/kubernetes 可写 |
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|secrets]]

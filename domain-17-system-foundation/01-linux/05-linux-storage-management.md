@@ -47,6 +47,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
@@ -690,7 +691,7 @@ multipath -ll
 
 ---
 
-<!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 #<!-- chunk: K8s 持久化存储架构 -->## K8s 持久化存储架构
 
@@ -722,7 +723,7 @@ Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: etcd 存储要求 -->## etcd 存储要求
+#<!-- chunk: [[etcd|etcd]] 存储要求 -->## etcd 存储要求
 
 etcd 是 Kubernetes 的核心数据存储，对磁盘 I/O 延迟极度敏感：
 
@@ -955,13 +956,13 @@ echo "=== 检查完成 ==="
 
 ## See Also
 
-- [[domain-17-system-foundation/03-linux-filesystem-deep-dive.md|03-linux-filesystem-deep-dive]]
-- [[domain-17-system-foundation/04-linux-networking-configuration.md|04-linux-networking-configuration]]
-- [[domain-17-system-foundation/06-linux-performance-tuning.md|06-linux-performance-tuning]]
-- [[domain-17-system-foundation/07-linux-security-hardening.md|07-linux-security-hardening]]
+- 03-linux-filesystem-deep-dive
+- 04-linux-networking-configuration
+- 06-linux-performance-tuning
+- 07-linux-security-hardening
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]

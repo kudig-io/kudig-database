@@ -1,5 +1,5 @@
 ---
-title: API 优先级与公平性 (APF) 故障排查指南
+title: API 优先级与公平性 (APF) 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: API 优先级与公平性 (APF) 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: API 优先级与公平性 (APF) 故障排查指南
@@ -50,7 +51,7 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -85,7 +86,7 @@ k8s_versions:
 
 # API 优先级与公平性 (APF) 故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - APF 自 v1.20 Beta, v1.29+ GA (默认启用)
@@ -751,8 +752,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

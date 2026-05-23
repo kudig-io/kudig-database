@@ -1,5 +1,5 @@
 ---
-title: Prometheus 高可用部署
+title: Prometheus 高可用部署 (entities)
 description: '# Prometheus 高可用部署'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Prometheus 高可用部署
@@ -70,5 +71,5 @@ title: Prometheus 高可用部署
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/prometheus/03-prometheus-ha-deployment.md|03-prometheus-ha-deployment]]
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
+- 03-prometheus-ha-deployment
+- [[entities/cncf-observability|[[CNCF 可观测性项目全景|CNCF 可观测性项目全景]]]] — Cross-reference

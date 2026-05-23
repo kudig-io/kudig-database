@@ -1,5 +1,5 @@
 ---
-title: Kuberhealthy
+title: Kuberhealthy (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Kuberhealthy
@@ -41,7 +42,7 @@ Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它�
 ## 核心能力
 
 - **合成监控**: 通过 Kubernetes Job 执行主动健康检查
-- **丰富检查项**: DNS、Deployment、DaemonSet、Pod 等
+- **丰富检查项**: DNS、Deployment、[[DaemonSet|DaemonSet]]、Pod 等
 - **自定义检查**: 使用任何容器镜像编写自定义检查
 - **Prometheus 集成**: 检查结果直接导出为指标
 - **CRD 配置**: 使用 KuberhealthyCheck CRD 定义检查
@@ -78,6 +79,6 @@ Kuberhealthy 是一个 Kubernetes 综合健康检查和合成监控工具。它�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kuberhealthy/kuberhealthy.md|kuberhealthy]]
+- kuberhealthy
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

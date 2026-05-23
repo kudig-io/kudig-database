@@ -30,6 +30,7 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # calico v3.21 Release Notes
@@ -41,6 +42,6 @@ Release notes can be found at https://projectcalico.docs.tigera.io/archive/v3.21
 
 Attached to this release are the following artifacts:
 
-- `release-v3.21.6.tgz`: container images, binaries, and kubernetes manifests.
+- `release-v3.21.6.tgz`: container images, binaries, and [[Kubernetes|kubernetes]] manifests.
 - `calico-windows-v3.21.6.zip`: Calico for Windows.
-- `tigera-operator-v3.21.6.tgz`: Calico Helm v3 chart.
+- `tigera-operator-v3.21.6.tgz`: Calico [[Helm|Helm]] v3 chart.

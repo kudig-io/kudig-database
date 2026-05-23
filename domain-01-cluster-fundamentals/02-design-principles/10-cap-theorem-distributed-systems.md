@@ -53,14 +53,15 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
-<!-- chunk: 架构师解析：etcd 的 CP 属性如何影响 K8s？ -->
+<!-- chunk: 架构师解析：[[etcd|etcd]] 的 CP 属性如何影响 K8s？ -->
 ## 架构师解析：etcd 的 CP 属性如何影响 K8s？
 
-Kubernetes 将状态存储在 etcd 中，而 etcd 是一个典型的 **CP 系统**（满足一致性与分区容错，牺牲可用性）。
+[[Kubernetes|Kubernetes]] 将状态存储在 etcd 中，而 etcd 是一个典型的 **CP 系统**（满足一致性与分区容错，牺牲可用性）。
 
 ### 生产环境下的表现
 * **脑裂保护**: 当 etcd 集群发生网络分区且无法达成多数派 (Quorum) 时，整个控制面将变为**只读**。
@@ -225,7 +226,7 @@ R = 1 (从Leader读取)
 | API Server | 无状态,可水平扩展 |
 | Scheduler | Leader选举,单活 |
 | Controller Manager | Leader选举,单活 |
-| kubelet | 本地状态,最终一致 |
+| [[kubelet|kubelet]] | 本地状态,最终一致 |
 
 <!-- chunk: CAP 定理在 Kubernetes 中的具体体现 -->
 ## CAP 定理在 Kubernetes 中的具体体现
@@ -399,22 +400,22 @@ K8s 的 Informer 就是观察者模式的分布式实现：
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08-high-availability-patterns]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09-source-code-walkthrough]]
-- [[domain-01-cluster-fundamentals/11-extensibility-design-patterns.md|11-extensibility-design-patterns]]
-- [[domain-01-cluster-fundamentals/12-operator-development-guide.md|12-operator-development-guide]]
+- 08-high-availability-patterns
+- 09-source-code-walkthrough
+- 11-extensibility-design-patterns
+- 12-operator-development-guide

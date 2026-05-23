@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: AI 基础设施运维
@@ -41,7 +42,7 @@ prerequisites:
 
 ## 场景概述
 
-AI 基础设施是 Kubernetes 的新兴场景。
+AI 基础设施是 [[Kubernetes|Kubernetes]] 的新兴场景。
 
 ---
 
@@ -105,5 +106,5 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[entities/kubernetes.md|kubernetes]]

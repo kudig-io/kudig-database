@@ -33,6 +33,7 @@ prerequisites:
 - cilium-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # CNCF 安全与合规项目全景
@@ -60,7 +61,7 @@ TUF（The Update Framework）保护软件更新过程免受中间人攻击。
 
 ### [[notary-project]] — 孵化项目
 
-Notary Project 提供 OCI 镜像签名和验证。
+[[Notary Project|Notary Project]] 提供 OCI 镜像签名和验证。
 
 - 支持 Cosign 兼容的签名方式
 - 与 [[harbor]] 集成实现镜像策略
@@ -71,7 +72,7 @@ Ratify 是可插拔的制品验证引擎，用于 K8s 准入控制。
 
 ### [[eraser]] — 沙箱项目
 
-Eraser 自动清理 Kubernetes 节点上的未使用容器镜像。
+Eraser 自动清理 [[Kubernetes|Kubernetes]] 节点上的未使用容器镜像。
 
 ### [[copa]] — 沙箱项目
 
@@ -110,7 +111,7 @@ Trivy 是全功能安全扫描器。
 
 KubeArmor 利用 LSM（Linux Security Module）进行 K8s 运行时强制访问控制。
 
-### [[domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md|inspektor-gadget]] — 沙箱项目
+### inspektor-gadget — 沙箱项目
 
 Inspektor Gadget 基于 eBPF 的 K8s 调试和安全检查工具。
 

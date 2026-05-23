@@ -1,6 +1,40 @@
 ---
+title: HA 集群删除注意事项 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- HA 集群删除注意事项 是什么
+- 如何 HA 集群删除注意事项
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- HA
+- 集群删除注意事项
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: HA 集群删除注意事项
-description: 深入分析高可用（HA）Kubernetes 集群删除的关键注意事项，涵盖 etcd 仲裁维护、删除顺序要求、负载均衡器处理、控制面组件顺序退出、External etcd HA 集群删除以及部分删除（缩小控制面规模）等场景。
 category: cluster-delete
 tags:
 - ha
@@ -11,16 +45,10 @@ tags:
 - control-plane
 - kubeadm
 - cluster-delete
-- apiserver
-- kubelet
 last_updated: 2026-05-18
+description: 深入分析高可用（HA）Kubernetes 集群删除的关键注意事项，涵盖 etcd 仲裁维护、删除顺序要求、负载均衡器处理、控制面组件顺序退出、External
+  etcd HA 集群删除以及部分删除（缩小控制面规模）等场景。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-administrator
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes HA cluster deletion注意事项
 - etcd quorum maintenance cluster deletion
@@ -38,10 +66,12 @@ trigger_keywords:
 - control plane
 - upload-certs
 - kubeadm-config
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -52,13 +82,24 @@ related_topics:
 - force-delete
 - cleanup
 - cloud-delete
+domain_link: '[Control Plane](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # HA 集群删除注意事项
 
 ## 概述
 
-高可用（HA）[[entities/kubernetes|kubernetes]] 集群的删除比单节点集群复杂得多：需要维护 etcd 仲裁、处理负载均衡器、确保控制面组件正常退出。本文档分析 HA 集群删除的关键注意事项。
+高可用（HA）Kubernetes 集群的删除比单节点集群复杂得多：需要维护 etcd 仲裁、处理负载均衡器、确保控制面组件正常退出。本文档分析 HA 集群删除的关键注意事项。
 
 ---
 
@@ -406,3 +447,11 @@ kubectl delete configmap -n kube-system kubeadm-config
 - [kubeadm HA 文档](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
 - [etcd 运维指南](https://etcd.io/docs/latest/op-guide/)
 - [kubeadm reset 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/reset.go)
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

@@ -36,19 +36,20 @@ prerequisites:
 - helm-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: OpenYurt 边缘方案 (OpenYurt Edge Solution)
+title: [[OpenYurt|OpenYurt]] 边缘方案 (OpenYurt Edge Solution)
 description: '# OpenYurt 边缘方案 (OpenYurt Edge Solution)'
 category: edge-computing
 tags:
 - k8s
 - edge
 - iot
-- kubeedge
-- etcd
+- [[KubeEdge|kubeedge]]
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - grafana
 - flannel
 - coredns
@@ -1904,22 +1905,22 @@ KubeEdge 更适合: IoT 设备管理、工业场景、资源受限设备
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
+- domain-37-edge-computing MOC
 - [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|03-kubeedge-architecture-deployment]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|04-kubeedge-device-edge-apps]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|06-superedge-architecture]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|07-edge-ai-inference-federated-learning]]
+- 03-kubeedge-architecture-deployment
+- 04-kubeedge-device-edge-apps
+- 06-superedge-architecture
+- 07-edge-ai-inference-federated-learning

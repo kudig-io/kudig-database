@@ -34,6 +34,7 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 数字孪生城市架构设计
@@ -43,7 +44,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - postgresql
@@ -60,7 +61,7 @@ audience:
 - CIM平台开发者
 estimated_read_time: 5min
 intent_queries:
-- digital twin city kubernetes architecture
+- digital twin city [[Kubernetes|kubernetes]] architecture
 - 数字孪生城市K8s部署
 - CIM平台架构设计
 - 城市三维渲染GPU
@@ -578,7 +579,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -593,11 +594,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/70-ecny-cbdc.md|70-ecny-cbdc]]
-- [[domain-20-application-patterns/71-smart-tax.md|71-smart-tax]]
-- [[domain-20-application-patterns/73-smart-firefighting.md|73-smart-firefighting]]
-- [[domain-20-application-patterns/74-immersive-xr.md|74-immersive-xr]]
+- 70-ecny-cbdc
+- 71-smart-tax
+- 73-smart-firefighting
+- 74-immersive-xr
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

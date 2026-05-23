@@ -1,5 +1,5 @@
 ---
-title: 08 - 验收、切换与旧集群退役
+title: 08 - 验收、切换与旧集群退役 [migration]
 description: 'description: 5. [旧集群安全退役](#5-旧集群安全退役)'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - monitoring-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 08 - 验收、切换与旧集群退役
@@ -46,13 +47,13 @@ tags:
 - k8s
 - migration
 - modernization
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- coredns
+- [[CoreDNS|coredns]]
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -554,7 +555,7 @@ echo "=============================================="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -568,7 +569,7 @@ echo "=============================================="
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/06-stateful-services-migration.md|06-stateful-services-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/07-observability-security-migration.md|07-observability-security-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/09-migration-toolchain.md|09-migration-toolchain]]
-- [[domain-11-production-operations/topic-best-practices/migration/10-real-world-case-study.md|10-real-world-case-study]]
+- 06-stateful-services-migration
+- 07-observability-security-migration
+- 09-migration-toolchain
+- 10-real-world-case-study

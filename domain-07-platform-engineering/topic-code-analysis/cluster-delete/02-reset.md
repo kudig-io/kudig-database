@@ -1,5 +1,5 @@
 ---
-title: kubeadm reset 源码分析
+title: kubeadm reset 源码分析 (topic-code-analysis)
 description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | ResetConfiguration 加载 |'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: kubeadm reset 源码分析

@@ -33,6 +33,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Day 26: 存储卷创建与删除实操
@@ -652,7 +653,7 @@ kube-proxy 通过 iptables/IPVS 将 ClusterIP DNAT 到后端 PodIP:TargetPort。
 
 </details>
 
-**2. Ingress vs Gateway API?**
+**2. [[Ingress|Ingress]] vs Gateway API?**
 
 <details><summary>答案</summary>
 

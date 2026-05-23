@@ -53,11 +53,12 @@ cross_refs:
 - type: domain
   path: ../domain-14-ai-ml-infra/
   label: AI 基础设施
+created: "2026-05-23"
 ---
 
 # AI Agent 沙箱安全架构
 
-> **适用版本**: Kubernetes v1.28 - v1.33 | **最后更新**: 2026-05
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
 
 ---
 
@@ -419,22 +420,22 @@ agent_approval_pending{risk_level="L3"} 0
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- index.md|Domain-11 AI 基础设施 — 开源项目索引]]
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/35-model-drift-monitoring.md|35-model-drift-monitoring]]
-- [[domain-14-ai-ml-infra/36-ai-platform-observability-enhanced.md|36-ai-platform-observability-enhanced]]
-- [[domain-14-ai-ml-infra/99-kubeflow-ai-platform-guide.md|99-kubeflow-ai-platform-guide]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|01-ai-infrastructure-overview]]
+- 35-model-drift-monitoring
+- 36-ai-platform-observability-enhanced
+- 99-kubeflow-ai-platform-guide
+- 01-ai-infrastructure-overview

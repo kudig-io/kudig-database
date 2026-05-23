@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # CNCF 边缘计算与 AI/ML 项目全景
@@ -128,13 +129,13 @@ SlimFaas 是轻量级 FaaS 框架。
 
 ### [[serverless-devs]] — 沙箱项目
 
-Serverless Devs 是 Serverless 应用开发工具。
+[[Serverless Devs|Serverless Devs]] 是 Serverless 应用开发工具。
 
 ### [[serverless-workflow]] — 沙箱项目
 
-Serverless Workflow 定义无服务器工作流规范。
+[[Serverless Workflow|Serverless Workflow]] 定义无服务器工作流规范。
 
-### [[domain-19-landscape-references/sandbox/radius/radius.md|radius]] — 沙箱项目
+### [[Radius]] — 沙箱项目
 
 Radius 是云原生应用平台。
 
@@ -146,7 +147,7 @@ Radius 是云原生应用平台。
 
 Tinkerbell 提供裸机配置和置备。
 
-### [[domain-19-landscape-references/incubating/metal3-io/metal3-io.md|metal3-io]] — 孵化项目
+### metal3-io — 孵化项目
 
 Metal3 使用 BMO（BareMetal Operator）管理裸机。
 

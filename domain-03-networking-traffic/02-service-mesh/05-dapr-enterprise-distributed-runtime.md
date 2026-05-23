@@ -61,9 +61,10 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
-# Dapr (Distributed Application Runtime) Enterprise 深度实践
+# [[Dapr|Dapr]] (Distributed Application Runtime) Enterprise 深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Dapr v1.15+ | **难度**: 高级
 
@@ -73,7 +74,7 @@ cross_refs:
 
 Dapr (Distributed Application Runtime) 是微软于2019年发起、2023年从 CNCF 毕业的分布式应用运行时项目。与传统的服务网格在网络层提供透明代理不同，Dapr 在应用层通过标准化的 HTTP/gRPC API 提供分布式系统的核心构建块（Building Blocks）——服务调用、状态管理、发布订阅、Actor 模型、绑定、密钥管理等。Dapr 通过 Sidecar 模式与业务应用同 Pod 部署，应用通过 HTTP/gRPC 调用 Dapr Sidecar 的标准 API 获得这些能力，无需引入特定的 SDK 或框架依赖。
 
-Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同的业务代码可以运行在 Kubernetes、虚拟机、边缘设备上，只需更换底层的组件配置（State Store、Pub/Sub Broker 等），即可适配不同的基础设施。这使得 Dapr 特别适合多云混合部署和供应商锁定规避的场景。2026年 Dapr 已经发展到 v1.15 版本，支持 Actor 状态 TTL、Pub/Sub 消息过滤、直接流式传输等高级特性，社区贡献的组件后端超过 100 种。
+Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同的业务代码可以运行在 [[Kubernetes|Kubernetes]]、虚拟机、边缘设备上，只需更换底层的组件配置（State Store、Pub/Sub Broker 等），即可适配不同的基础设施。这使得 Dapr 特别适合多云混合部署和供应商锁定规避的场景。2026年 Dapr 已经发展到 v1.15 版本，支持 Actor 状态 TTL、Pub/Sub 消息过滤、直接流式传输等高级特性，社区贡献的组件后端超过 100 种。
 
 本文档从企业级生产环境角度，全面覆盖 Dapr 的架构设计、核心构建块配置、弹性模式、可观测性、安全策略、性能调优和故障排查。每个章节包含完整的 YAML 配置和可直接运行的代码示例。
 
@@ -150,7 +151,7 @@ graph TB
 
 <!-- chunk: 核心配置 — 控制平面高可用部署 -->## 核心配置 — 控制平面高可用部署
 
-#<!-- chunk: 生产级 Helm 安装 -->## 生产级 Helm 安装
+#<!-- chunk: 生产级 [[Helm|Helm]] 安装 -->## 生产级 Helm 安装
 
 ```bash
 # 添加 Dapr Helm 仓库
@@ -814,7 +815,7 @@ spec:
 
 ---
 
-<!-- chunk: 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成 -->## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
+<!-- chunk: 可观测性 — OpenTelemetry, Prometheus, [[Jaeger|Jaeger]] 集成 -->## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
 
 #<!-- chunk: 分布式追踪 -->## 分布式追踪
 
@@ -1258,25 +1259,25 @@ kubectl exec -n production deploy/order-service -c daprd -- \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|03-consul-connect-enterprise]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|04-envoy-proxy-enterprise]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|06-traefik-mesh-enterprise]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|07-service-mesh-comparison-selection]]
+- 03-consul-connect-enterprise
+- 04-envoy-proxy-enterprise
+- 06-traefik-mesh-enterprise
+- 07-service-mesh-comparison-selection
 
 ## Related
 

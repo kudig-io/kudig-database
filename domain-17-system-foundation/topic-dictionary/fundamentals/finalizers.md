@@ -21,19 +21,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Finalizers
 
 ## 概述
 
-Finalizers 是带有命名空间限制的键，用于告诉 [[entities/kubernetes|kubernetes]] 在完全删除标记为删除的资源之前等待特定条件满足。Finalizers 会通知控制器清理被删除对象所拥有的资源。
+Finalizers 是带有命名空间限制的键，用于告诉 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 在完全删除标记为删除的资源之前等待特定条件满足。Finalizers 会通知控制器清理被删除对象所拥有的资源。
 
 ## 核心概念/原理
 
 ### Finalizers 如何工作
 
-当用户请求删除一个带有 Finalizers 的对象时，Kubernetes API 服务器会：
+当用户请求删除一个带有 Finalizers 的对象时，[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器会：
 
 1. 在对象上添加 `metadata.deletionTimestamp` 字段，标记对象已被请求删除。
 2. 阻止对象被移除，直到其 `metadata.finalizers` 字段中的所有项都被移除。

@@ -53,6 +53,7 @@ related_domains:
 related_topics:
 - domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
 - domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet
+created: "2026-05-23"
 ---
 
 # 知识图谱模板
@@ -66,7 +67,7 @@ related_topics:
 ### Docker
 
 **核心概念:**
-- [ ] Docker Engine 架构（Client-Server 模型、daemon、containerd）
+- [ ] Docker Engine 架构（Client-Server 模型、daemon、[[containerd|containerd]]）
 - [ ] 镜像 vs 容器（镜像 = 只读模板，容器 = 运行实例）
 - [ ] Union Filesystem（分层存储、Copy-on-Write）
 - [ ] 网络模式 (bridge/host/overlay/none)
@@ -129,8 +130,8 @@ cat /proc/<pid>/cgroup               # 查看 cgroup 信息
 ### K8s 架构
 
 **核心概念:**
-- [ ] 控制平面: etcd, API Server, Scheduler, Controller Manager
-- [ ] 数据平面: kubelet, kube-proxy, Container Runtime
+- [ ] 控制平面: [[etcd|etcd]], API Server, Scheduler, Controller Manager
+- [ ] 数据平面: [[kubelet|kubelet]], kube-proxy, Container Runtime
 - [ ] 声明式管理（Desired State vs Actual State）
 - [ ] 控制器模式（Reconcile Loop）
 

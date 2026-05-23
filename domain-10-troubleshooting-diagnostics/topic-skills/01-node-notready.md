@@ -50,6 +50,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
@@ -60,13 +62,13 @@ k8s_versions:
 
 ## 1. 概述
 
-Node NotReady 是 Kubernetes 集群中**爆炸半径最大**的故障类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 DaemonSet Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
+Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的故障类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 [[DaemonSet|DaemonSet]] Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
 
 > **版本差异说明 / Version Notes**:
 > - `pod-eviction-timeout` 默认 5 分钟，自 v1.28+ 可通过 kube-controller-manager 的 `--node-monitor-grace-period` 调整
 > - v1.29+ 引入 **PodDisruptionConditions** (GA)，驱逐的 Pod 会在 `.status.conditions` 中记录 `DisruptionTarget` 原因，便于后续排查
 > - v1.28+ **GracefulNodeShutdown** (GA) 使节点在计划关机时可优雅驱逐 Pod，需检查是否因计划内关机导致 NotReady
-> - v1.31+ **EventedPLEG** (GA) 替代 GenericPLEG，若 kubelet 日志中出现 `EventedPLEG` 相关错误，诊断方式有所不同（见 D2.6）
+> - v1.31+ **EventedPLEG** (GA) 替代 GenericPLEG，若 [[kubelet|kubelet]] 日志中出现 `EventedPLEG` 相关错误，诊断方式有所不同（见 D2.6）
 
 ### 典型触发场景
 
@@ -1432,6 +1434,68 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 3. **ARM 架构节点**: ARM 节点的特定故障模式
 4. **边缘节点**: 使用 KubeEdge / OpenYurt 等边缘方案的节点 NotReady 诊断差异（弱网环境、离线容忍）
 5. **虚拟节点**: Virtual Kubelet 实现的虚拟节点 NotReady 诊断
+
+## 修复动作
+
+> **本章定位**: 基于 Section 6 修复操作的快速决策摘要，供 Agent 在 QA 语料和运行时直接引用。所有命令均保留风险标注。
+
+### 修复动作速查表
+
+| 根因 | 修复动作 | 风险 | 验证命令 |
+|------|---------|------|---------|
+| RC-012 节点被 cordon | `kubectl uncordon <node-name>` | 🟢 低风险 | `kubectl get node <node-name>` |
+| RC-003 磁盘压力 | `ssh <node> "crictl rmi --prune && journalctl --vacuum-time=2d"` | 🟢 低风险（仅清理缓存/日志） | `kubectl get node <node> -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")].status}'` |
+| RC-001 kubelet 异常 | `ssh <node> "systemctl restart kubelet"` | 🟡 中风险（节点短暂不可调度） | `ssh <node> "systemctl status kubelet" && kubectl get node <node>` |
+| RC-002 containerd 异常 | `ssh <node> "systemctl restart containerd && systemctl restart kubelet"` | 🟡 中风险（容器短暂中断 30-60s） | `kubectl get pods --field-selector spec.nodeName=<node> --all-namespaces` |
+| RC-005 资源压力阈值 | 调整 kubelet evictionHard 后重启 kubelet | 🟡 中风险（需重启 kubelet） | `kubectl get node <node> -o jsonpath='{range .status.conditions[*]}{.type}={.status}{"\n"}{end}'` |
+| RC-007 证书过期 | 手动证书轮转或触发 CSR 批准 | 🟡 中风险（涉及 TLS 重建） | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` |
+| RC-001/RC-008 复杂故障 | `kubectl drain <node> --ignore-daemonsets --force` → 修复后 `kubectl uncordon <node>` | 🔴 高风险（驱逐所有 Pod） | `kubectl get pods --field-selector spec.nodeName=<node> --all-namespaces` |
+| RC-009 硬件故障 | 节点替换（云环境终止实例并新建） | 🔴 高风险（数据可能丢失） | `kubectl get nodes` |
+
+### danger_operations 高风险操作标注
+
+以下操作涉及数据丢失或服务中断，**必须人工审批**后方可执行，Agent 仅提供指导：
+
+```yaml
+danger_operations:
+  - operation: "kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --force"
+    risk: "驱逐节点上所有非 DaemonSet Pod，可能导致服务中断；emptyDir 数据丢失"
+    prerequisite:
+      - "确认集群其他节点有足够资源接纳被驱逐的 Pod"
+      - "确认无 local storage 的有状态工作负载"
+      - "检查 PodDisruptionBudget 不会阻止 drain"
+    rollback: "kubectl uncordon <node>（已被驱逐的 Pod 不会自动回到原节点）"
+
+  - operation: "ssh <node> 'reboot'"
+    risk: "节点重启期间所有工作负载中断"
+    prerequisite:
+      - " drain 完成且仅剩 DaemonSet Pod"
+      - "确认节点非 etcd/control-plane 唯一成员"
+
+  - operation: "kubectl delete node <node-name> && aws ec2 terminate-instances --instance-ids <id>"
+    risk: "节点对象和云实例同时删除，local PV 数据永久丢失"
+    prerequisite:
+      - "确认节点上没有 local PV"
+      - "确认数据已通过远程存储或备份保留"
+      - "通知相关团队"
+    rollback: "无法回滚到原实例，需重新 join 新节点"
+```
+
+### 通用验证步骤
+
+```bash
+# 1. 确认节点恢复 Ready
+kubectl get node <node-name>
+
+# 2. 确认所有压力条件为 False
+kubectl get node <node-name> -o jsonpath='{range .status.conditions[*]}{.type}={.status}{"\n"}{end}'
+
+# 3. 确认 Lease 正常续租
+kubectl get lease -n kube-node-lease <node-name> -o jsonpath='{.spec.renewTime}'
+
+# 4. 确认 Pod 恢复正常运行
+kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces
+```
 
 ## Related
 

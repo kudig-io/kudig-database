@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 第15课：调度与亲和性
@@ -741,9 +742,9 @@ kubectl label nodes <node> key=value
 ---
 
 **关联文档**:
-- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — DaemonSet
-- [../10-advanced-workloads/11-statefulset-basics.md](../10-advanced-workloads/11-statefulset-basics.md) — StatefulSet
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 故障 Skill
+- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
+- [../10-advanced-workloads/11-statefulset-basics.md](../10-advanced-workloads/11-statefulset-basics.md) — [[StatefulSet|StatefulSet]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md) — 调度与 PDB 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## Related

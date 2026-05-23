@@ -1,5 +1,5 @@
 ---
-title: OAuth2 Proxy
+title: OAuth2 Proxy [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # OAuth2 Proxy
@@ -75,5 +76,5 @@ OAuth2 Proxy 是一个反向代理，提供基于 OAuth2/OIDC 协议的身份认
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[keycloak]] — Keycloak
 
-- [[domain-19-landscape-references/sandbox/oauth2-proxy/oauth2-proxy.md|oauth2-proxy]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
+- oauth2-proxy
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference

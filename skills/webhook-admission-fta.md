@@ -1,5 +1,5 @@
 ---
-title: Admission Webhook 异常 FTA 树
+title: Admission Webhook 异常 FTA 树 (skills)
 description: 'description: ''- **范围**：Webhook 服务可用性、规则配置、证书与 TLS、回退策略、审计。'''
 category: skills
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 fta_id: FTA-WEBHOOK_ADMISSION-001
 component: Webhook Admission
 severity: critical
+created: "2026-05-23"
 ---
 
 # Admission Webhook 异常 FTA 树

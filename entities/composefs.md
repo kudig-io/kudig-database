@@ -1,5 +1,5 @@
 ---
-title: composefs
+title: composefs (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - composefs
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # composefs
@@ -61,9 +62,9 @@ composefs 是一个 Linux 文件系统，设计用于高效挂载和共享容器
 
 - [[containerssh]] — ContainerSSH
 - [[modelpack]] — ModelPack
-- [[oauth2-proxy]] — OAuth2 Proxy
+- [[oauth2-proxy]] — [[OAuth2 Proxy|OAuth2 Proxy]]
 - [[schemahero]] — SchemaHero
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/composefs/composefs.md|composefs]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- composefs
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference

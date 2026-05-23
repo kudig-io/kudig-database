@@ -57,17 +57,18 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
 # Consul Connect 企业级服务网格管理
 
-> **最后更新**: 2026-04-24 | **适用版本**: Consul v1.20+ / Helm Chart v1.6+ | **难度**: 高级
+> **最后更新**: 2026-04-24 | **适用版本**: Consul v1.20+ / [[Helm|Helm]] Chart v1.6+ | **难度**: 高级
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-Consul Connect 是 HashiCorp Consul 平台的服务网格扩展能力，将服务发现、健康检查、配置管理与服务网格功能统一在一个控制平面中。与 Istio 和 Linkerd 不同，Consul Connect 的核心差异化优势在于 HashiCorp 生态的深度集成——与 Terraform（基础设施即代码）、Vault（密钥管理）、Nomad（工作负载调度器）无缝协作，以及对 Kubernetes 和虚拟机工作负载的统一管理能力。
+Consul Connect 是 HashiCorp Consul 平台的服务网格扩展能力，将服务发现、健康检查、配置管理与服务网格功能统一在一个控制平面中。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 不同，Consul Connect 的核心差异化优势在于 HashiCorp 生态的深度集成——与 Terraform（基础设施即代码）、Vault（密钥管理）、Nomad（工作负载调度器）无缝协作，以及对 [[Kubernetes|Kubernetes]] 和虚拟机工作负载的统一管理能力。
 
 Consul Connect 采用意图（Intentions）驱动的访问控制模型，通过声明式的白名单/黑名单策略管理服务间的通信权限，默认拒绝所有跨服务通信。数据平面基于 Envoy 代理，提供自动 mTLS 加密、L7 流量路由和分割能力。多数据中心（Multi-Datacenter）支持是 Consul 的传统强项，通过 Mesh Gateway 实现跨数据中心的加密通信。
 
@@ -1212,25 +1213,25 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|01-istio-enterprise-service-mesh]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|02-linkerd-enterprise-service-mesh]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|04-envoy-proxy-enterprise]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|05-dapr-enterprise-distributed-runtime]]
+- 01-istio-enterprise-service-mesh
+- 02-linkerd-enterprise-service-mesh
+- 04-envoy-proxy-enterprise
+- 05-dapr-enterprise-distributed-runtime
 
 ## Related
 

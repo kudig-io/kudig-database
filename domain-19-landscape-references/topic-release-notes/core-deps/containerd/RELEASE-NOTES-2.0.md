@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
-# containerd v2.0 Release Notes
+# [[containerd|containerd]] v2.0 Release Notes
 
 Source: [v2.0.7](https://github.com/containerd/containerd/releases/tag/v2.0.7)
 
@@ -51,13 +52,13 @@ The seventh patch release for containerd 2.0 includes various bug fixes and upda
 
 ### Highlights
 
-#### Container Runtime Interface (CRI)
+#### [[Container Runtime|Container Runtime]] Interface (CRI)
 
 * **Disable event subscriber during task cleanup** ([#12406](https://github.com/containerd/containerd/pull/12406))
 * **Add SystemdCgroup to default runtime options** ([#12254](https://github.com/containerd/containerd/pull/12254))
 * **Fix userns with container image VOLUME mounts that need copy** ([#12241](https://github.com/containerd/containerd/pull/12241))
 
-#### Image Distribution
+#### Image [[Distribution|Distribution]]
 
 * **Add dial timeout field to hosts toml configuration** ([#12136](https://github.com/containerd/containerd/pull/12136))
 

@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 数字人发布会视频 — 制作方案与提示词

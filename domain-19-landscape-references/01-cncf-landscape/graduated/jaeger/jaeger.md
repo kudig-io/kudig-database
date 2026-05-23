@@ -1,18 +1,18 @@
 ---
-title: Jaeger
-description: 'description: ''## 项目概述'''
-category: general
+title: Jaeger (entities)
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- observability
 - jaeger
-- helm
-- docker
+- prometheus
+- grafana
 - kafka
 - elasticsearch
-- rag
-- agent
-- prometheus
+- crd
+- operator
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -22,163 +22,63 @@ estimated_read_time: 5min
 intent_queries:
 - Jaeger 是什么
 - 如何 Jaeger
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Jaeger
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
-- helm-basics
 - prometheus-basics
 - monitoring-basics
 - kafka-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
-title: Jaeger
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- jaeger
-- helm
-- docker
-- kafka
-- elasticsearch
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Jaeger 是什么
-- 如何 Jaeger
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Jaeger
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Jaeger
 
-> **成熟度**: Graduated | **加入时间**: 2017-09 | **最后更新**: 2026-03
+> **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
 
-## 基本信息
+## 概述
 
-| 属性 | 值 |
-|:---|:---|
-| **官方网站** | https://www.jaegertracing.io |
-| **GitHub** | https://github.com/jaegertracing/jaeger |
-| **文档** | https://www.jaegertracing.io/docs |
-| **许可证** | Apache-2.0 |
-| **主要语言** | Go |
-| **CNCF 分类** | Observability |
+description: '## 项目概述'
 
----
+## 核心能力
 
-## 项目概述
-
-### 简介
-Jaeger 是一个开源的端到端分布式追踪系统，由 Uber 开发，用于监控和故障排查微服务架构。
-
-### 核心定位
-Jaeger 提供分布式上下文传播、分布式事务监控、根因分析、服务依赖分析和性能优化支持。
-
-### 发展历程
-- **2015**: Uber 内部开发
-- **2017-04**: 开源
-- **2017-09**: 加入 CNCF
-- **2019-10**: 成为 CNCF 毕业项目
-
----
-
-## 核心功能
-
-### 主要特性
 - **分布式追踪**: 跨服务请求追踪
 - **根因分析**: 快速定位故障
 - **服务依赖**: 可视化服务关系图
 - **性能分析**: 延迟分析和优化
 - **多存储后端**: Cassandra、Elasticsearch、Kafka
 
-### 功能架构
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         Jaeger                              │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐│
-│  │   Agent     │ │  Collector  │ │       Query             ││
-│  │ (UDP recv)  │ │  (Storage)  │ │     (UI/API)            ││
-│  └─────────────┘ └─────────────┘ └─────────────────────────┘│
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │              Storage (ES/Cassandra)                     ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-```
+## K8s 集成
 
----
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-## 快速开始
+## 生产部署要点
 
-### 安装部署
-```bash
-# All-in-one (开发测试)
-docker run -d --name jaeger \
-  -p 16686:16686 \
-  -p 6831:6831/udp \
-  jaegertracing/all-in-one:latest
+- 建议参考官方文档获取最新部署指南 ^[inferred]
 
-# Kubernetes (Helm)
-helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
-helm install jaeger jaegertracing/jaeger
-```
+## 架构定位
 
-### 验证测试
-```bash
-# 访问 Jaeger UI
-open http://localhost:16686
-```
+在 CNCF 生态中，jaeger 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
----
+## 参考链接
 
-## 参考资源
-
-- [官方文档](https://www.jaegertracing.io/docs)
-- [GitHub Repo](https://github.com/jaegertracing/jaeger)
-- [CNCF 项目页面](https://www.cncf.io/projects/jaeger/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[concepts/observability-pillars.md|observability-pillars]]
+- [[concepts/storage-model.md|storage-model]]
 
 ## Related
+- [[synthesis/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]] — 综合
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
-- [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
+- [[knative]] — Knative
+- [[konveyor]] — Konveyor
+- [[bfe]] — BFE
+- [[score]] — Score
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- jaeger
+- [[references/k8s-observability-ecosystem|[[可观测性体系：指标、日志、链路追踪与混沌工程|可观测性体系：指标、日志、链路追踪与混沌工程]]]] — Cross-reference
 - [[references/observability-terms|K8s 可观测性术语参考]] — Cross-reference
 - [[references/tooling-terms|K8s 工具链术语参考]] — Cross-reference
-- [[synthesis/可观测性支柱 × Prometheus-Grafana|可观测性支柱 × Prometheus-Grafana]] — Cross-reference
 - [[concepts/bp-observability|最佳实践：Observability]] — Cross-reference
 - [[concepts/observability-stack-evolution|可观测性栈演进]] — Cross-reference
 - [[skills/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]] — Cross-reference

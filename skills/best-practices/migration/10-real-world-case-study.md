@@ -1,5 +1,5 @@
 ---
-title: 10 - 生产迁移实战案例
+title: 10 - 生产迁移实战案例 [migration]
 description: 'description: ''| **团队规模** | 后端 15 人、运维 3 人、DBA 1 人 |'''
 category: general
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - mysql-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 10 - 生产迁移实战案例
@@ -50,12 +51,12 @@ tags:
 - k8s
 - migration
 - modernization
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - calico
-- argocd
+- [[ArgoCD|argocd]]
 - docker
-- harbor
+- [[Harbor|harbor]]
 - ceph
 last_updated: 2026-05
 difficulty: advanced
@@ -478,7 +479,7 @@ Phase 4: 退役
 
 ## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -492,7 +493,7 @@ Phase 4: 退役
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]]
-- [[domain-11-production-operations/topic-best-practices/migration/09-migration-toolchain.md|09-migration-toolchain]]
-- [[domain-11-production-operations/topic-best-practices/observability/logging.md|logging]]
-- [[domain-11-production-operations/topic-best-practices/observability/monitoring.md|monitoring]]
+- 08-validation-cutover-decommission
+- 09-migration-toolchain
+- logging
+- monitoring

@@ -1,5 +1,5 @@
 ---
-title: 第八课：存储 - PV 和 PVC
+title: 第八课：存储 - PV 和 PVC [07-storage]
 description: '# 第八课：存储 - PV 和 PVC'
 category: k8s-lecturer
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 第八课：存储 - PV 和 PVC
@@ -353,5 +354,5 @@ kubectl delete pvc <pvc-name>
 
 **关联文档**:
 - [../08-scaling/08-hpa-basics.md](../08-scaling/08-hpa-basics.md) — HPA 自动伸缩
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md) — 存储故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md) — 存储故障 [[SKILL|Skill]]
 - [../../domain-04-storage-data/](../../domain-04-storage-data/) — K8s 存储文档

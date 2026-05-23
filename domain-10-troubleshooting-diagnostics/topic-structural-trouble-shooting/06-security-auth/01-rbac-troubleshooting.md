@@ -1,5 +1,5 @@
 ---
-title: RBAC 与认证故障排查指南
+title: RBAC 与认证故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: RBAC 与认证故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -35,6 +35,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: RBAC 与认证故障排查指南
@@ -80,7 +81,7 @@ k8s_versions:
 
 # RBAC 与认证故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
 
 ---
 
@@ -125,7 +126,7 @@ k8s_versions:
 |------|----------|----------|----------|
 | 无权限 | `Forbidden` (403) | API Server | kubectl/API 响应 |
 | 资源禁止 | `User cannot <verb> <resource>` | API Server | kubectl |
-| ServiceAccount 无权限 | `pods is forbidden` | Pod 内应用 | 应用日志 |
+| ServiceAccount 无权限 | `[[Pods|pods]] is forbidden` | Pod 内应用 | 应用日志 |
 | 命名空间权限不足 | `forbidden: User cannot...in namespace` | kubectl | kubectl |
 
 #### 1.1.3 ServiceAccount 问题
@@ -497,8 +498,8 @@ EOF
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

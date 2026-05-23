@@ -26,6 +26,7 @@ trigger_keywords:
 - Storage
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OverlayFS Storage
@@ -45,7 +46,7 @@ merged (unified view) <- What the container sees
 | Component | Description | K8s Equivalent |
 |-----------|-------------|----------------|
 | lowerdir | Read-only image layers | Container image layers |
-| upperdir | Writable layer for container changes | Container runtime writable layer |
+| upperdir | Writable layer for container changes | [[Container Runtime|Container runtime]] writable layer |
 | workdir | Intermediate directory for atomic operations | Containerd snapshot workspace |
 | merged | Unified mount point presented to container | Container root filesystem |
 

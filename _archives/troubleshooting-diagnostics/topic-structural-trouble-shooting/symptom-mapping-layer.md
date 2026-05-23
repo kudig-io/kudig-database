@@ -776,7 +776,7 @@ symptom_mappings:
             expected: "Pod IP 配置正确"
 
     related_docs:
-      - path: "domain-03-networking-traffic/topic-terway/[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md"
+      - path: "domain-03-networking-traffic/[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md"
         type: "structural"
         relevance: 0.90
       - path: "domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络故障-p1-新增"

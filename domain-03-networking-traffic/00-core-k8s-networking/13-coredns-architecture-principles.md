@@ -63,11 +63,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
+# 53 - [[CoreDNS|CoreDNS]] 架构与核心原理 (Architecture & Principles)
 
-> **适用版本**: CoreDNS 1.8.0+ / Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -172,7 +173,7 @@ CoreDNS 采用**模块化插件架构**，每个功能以独立插件实现，�
 | 模式 | 说明 | 示例插件 | 行为 |
 |:---|:---|:---|:---|
 | **Authoritative** | 权威响应 | kubernetes, file, hosts | 直接生成响应,终止链 |
-| **Passthrough** | 传递模式 | log, prometheus, errors | 处理后传递给下一个插件 |
+| **Passthrough** | 传递模式 | log, [[Prometheus|prometheus]], errors | 处理后传递给下一个插件 |
 | **Fallthrough** | 回退模式 | kubernetes (配置fallthrough) | 无法处理时传递 |
 | **Terminal** | 终止模式 | forward | 作为最后一环处理 |
 
@@ -244,7 +245,7 @@ CoreDNS 采用**模块化插件架构**，每个功能以独立插件实现，�
 | **Service A记录** | `<svc>.<ns>.svc.<zone>` | nginx.default.svc.cluster.local | ClusterIP |
 | **Service SRV记录** | `_<port>._<proto>.<svc>.<ns>.svc.<zone>` | _http._tcp.nginx.default.svc.cluster.local | 端口+主机名 |
 | **Headless Service** | `<svc>.<ns>.svc.<zone>` | mysql-headless.db.svc.cluster.local | 所有Pod IP列表 |
-| **StatefulSet Pod** | `<pod>.<svc>.<ns>.svc.<zone>` | mysql-0.mysql-headless.db.svc.cluster.local | 特定Pod IP |
+| **[[StatefulSet|StatefulSet]] Pod** | `<pod>.<svc>.<ns>.svc.<zone>` | mysql-0.mysql-headless.db.svc.cluster.local | 特定Pod IP |
 | **Pod A记录** | `<pod-ip-dashed>.<ns>.pod.<zone>` | 10-244-1-5.default.pod.cluster.local | Pod IP |
 | **ExternalName** | `<svc>.<ns>.svc.<zone>` | ext-db.default.svc.cluster.local | CNAME到外部域名 |
 
@@ -731,25 +732,25 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/11-dns-service-discovery-coredns.md|11-dns-service-discovery-coredns]]
-- [[domain-03-networking-traffic/12-dns-service-discovery.md|12-dns-service-discovery]]
-- [[domain-03-networking-traffic/14-coredns-configuration-corefile.md|14-coredns-configuration-corefile]]
-- [[domain-03-networking-traffic/15-coredns-plugins-reference.md|15-coredns-plugins-reference]]
+- 11-dns-service-discovery-coredns
+- 12-dns-service-discovery
+- 14-coredns-configuration-corefile
+- 15-coredns-plugins-reference
 
 ## Related
 

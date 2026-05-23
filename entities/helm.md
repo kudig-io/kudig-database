@@ -1,5 +1,5 @@
 ---
-title: Helm
+title: Helm (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # Helm
@@ -69,8 +70,8 @@ description: '## 项目概述'
 ## 参考链接
 
 - [[flux]]
-- [[entities/argocd.md|argocd]]
-- [[entities/vault.md|vault]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[deployment]]
 - [[concepts/gitops-principles.md|gitops-principles]]
 
@@ -82,56 +83,56 @@ description: '## 项目概述'
 - [[jaeger]] — Jaeger
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd.md|36-ecosystem-kustomize-helm-argocd]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|07-helm-advanced-operations]]
-- [[domain-15-specialized-tech/06-helm-charts-management.md|06-helm-charts-management]]
+- 36-ecosystem-kustomize-helm-argocd
+- 07-helm-advanced-operations
+- 06-helm-charts-management
 - [[domain-10-troubleshooting-diagnostics/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|Helm 发布异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[domain-19-landscape-references/graduated/helm/helm.md|helm]]
+- helm
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.16.md|RELEASE-NOTES-2.16]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.12.md|RELEASE-NOTES-2.12]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.13.md|RELEASE-NOTES-2.13]]
+- RELEASE-NOTES-2.16
+- RELEASE-NOTES-2.12
+- RELEASE-NOTES-2.13
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.17.md|RELEASE-NOTES-2.17]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.4.md|RELEASE-NOTES-2.4]]
+- RELEASE-NOTES-2.17
+- RELEASE-NOTES-2.4
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- RELEASE-NOTES-3.5
+- RELEASE-NOTES-2.0
+- RELEASE-NOTES-3.1
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
+- RELEASE-NOTES-2.1
+- RELEASE-NOTES-3.0
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.5.md|RELEASE-NOTES-2.5]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
+- RELEASE-NOTES-2.5
+- RELEASE-NOTES-1.2
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- RELEASE-NOTES-3.4
+- RELEASE-NOTES-2.2
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- RELEASE-NOTES-3.3
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.6.md|RELEASE-NOTES-2.6]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.7.md|RELEASE-NOTES-3.7]]
+- RELEASE-NOTES-2.6
+- RELEASE-NOTES-3.7
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
+- RELEASE-NOTES-2.7
+- RELEASE-NOTES-3.6
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
+- RELEASE-NOTES-2.3
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.10.md|RELEASE-NOTES-2.10]]
+- RELEASE-NOTES-3.2
+- RELEASE-NOTES-2.8
+- RELEASE-NOTES-2.10
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.14.md|RELEASE-NOTES-2.14]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.15.md|RELEASE-NOTES-2.15]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.9.md|RELEASE-NOTES-2.9]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.11.md|RELEASE-NOTES-2.11]]
+- RELEASE-NOTES-2.14
+- RELEASE-NOTES-2.15
+- RELEASE-NOTES-2.9
+- RELEASE-NOTES-2.11
 - [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[references/release-notes-cicd-gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference

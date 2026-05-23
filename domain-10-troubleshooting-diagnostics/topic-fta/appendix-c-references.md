@@ -1,5 +1,5 @@
 ---
-title: 附录 C：参考文献
+title: 附录 C：参考文献 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 fta_id: FTA-APPENDIX_C_REFERENCES-001
 component: Appendix C References
 severity: high
+created: "2026-05-23"
 ---
 
 title: 附录 C：参考文献
@@ -75,7 +76,7 @@ k8s_versions:
 # 附录 C：参考文献
 
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一附录**: [附录 B：工具与资源清单](./[[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]].md)  
+> **上一附录**: 附录 B：工具与资源清单](./[[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]].md)  
 > **下一附录**: [附录 D：FTA 模板与检查表](./appendix-d-templates.md)
 
 ---

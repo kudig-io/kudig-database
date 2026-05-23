@@ -27,6 +27,7 @@ trigger_keywords:
 - 变更日志索引
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 变更日志索引
@@ -40,8 +41,8 @@ prerequisites:
 | v1.2 | 42 KB | 早期版本，多容器 Pod 支持 |
 | v1.3 | 85 KB | 企业级功能引入 |
 | v1.4 | 137 KB | 自动扩缩增强 |
-| v1.5 | 140 KB | StatefulSet、RBAC alpha |
-| v1.6 | 312 KB | 动态供给、CronJob |
+| v1.5 | 140 KB | [[StatefulSet|StatefulSet]]、RBAC alpha |
+| v1.6 | 312 KB | 动态供给、[[CronJob|CronJob]] |
 | v1.7 | 317 KB | 核心功能扩展 |
 | v1.8 | 320 KB | RBAC/NetworkPolicy GA |
 | v1.9 | 322 KB | Apps API GA |
@@ -53,7 +54,7 @@ prerequisites:
 | v1.15 | 286 KB | CRD Webhooks |
 | v1.16 | 354 KB | 15 个 GA API |
 | v1.17 | 355 KB | 拓扑感知调度 |
-| v1.18 | 383 KB | Ephemeral Containers |
+| v1.18 | 383 KB | [[Ephemeral Containers|Ephemeral Containers]] |
 | v1.19 | 502 KB | 大规模版本 |
 | v1.20 | 420 KB | Docker 弃用警告 |
 | v1.21 | 377 KB | PSP 弃用 |

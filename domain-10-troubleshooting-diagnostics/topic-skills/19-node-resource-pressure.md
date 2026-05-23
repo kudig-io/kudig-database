@@ -45,6 +45,7 @@ prerequisites:
 skill_id: SKILL-19_NODE_RESOURCE_PRESSURE-001
 skill_name: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
@@ -61,7 +62,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "10-60min"
 risk_level: "high"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "MemoryPressure"
   - "DiskPressure"
@@ -119,7 +120,7 @@ cross_refs:
   - type: "domain"
     path: "../domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md"
     label: "Node 全面故障排查"
-  - type: "skill"
+  - type: "[[SKILL|skill]]"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md"
     label: "SKILL-NODE-001 节点 NotReady 诊断"
 authors:
@@ -130,7 +131,7 @@ tier: peripheral---
 
 # 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
-节点资源压力（MemoryPressure / DiskPressure / PIDPressure）是 Kubernetes 集群中最常见但常被忽视的故障类型。与 Node NotReady 不同，处于资源压力状态的节点仍标记为 `Ready`，但 kubelet 会主动驱逐 Pod 以回收资源。若不及时处理，资源压力可能级联扩散，导致大规模 Pod 驱逐、服务降级甚至集群雪崩。
+节点资源压力（MemoryPressure / DiskPressure / PIDPressure）是 [[Kubernetes|Kubernetes]] 集群中最常见但常被忽视的故障类型。与 Node NotReady 不同，处于资源压力状态的节点仍标记为 `Ready`，但 kubelet 会主动驱逐 Pod 以回收资源。若不及时处理，资源压力可能级联扩散，导致大规模 Pod 驱逐、服务降级甚至集群雪崩。
 
 本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。
 

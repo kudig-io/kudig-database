@@ -1,5 +1,5 @@
 ---
-title: AgentScope 核心概念与基础操作
+title: AgentScope 核心概念与基础操作 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 核心概念专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, 核心概念, State,'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 核心概念与基础操作
@@ -764,9 +765,9 @@ agent = ReActAgent(name="bot", ...)
 
 | 文档 | 关联内容 |
 |------|---------|
-| [16 - 概述与安装](./[[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]].md) | 安装配置与 Hello World |
+| [16 - 概述与安装](./16-agentscope-overview-installation.md) | 安装配置与 Hello World |
 | [18 - 工具系统与 MCP](./18-agentscope-tool-system.md) | Tool 详解与 MCP 集成 |
-| [19 - 记忆管理](./[[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]].md) | Memory 深度使用与生产方案 |
+| [19 - 记忆管理](./19-agentscope-memory-context.md) | Memory 深度使用与生产方案 |
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | 通用 Agent 概念与推理框架 |
 
 ---
@@ -777,10 +778,10 @@ agent = ReActAgent(name="bot", ...)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
@@ -792,7 +793,7 @@ agent = ReActAgent(name="bot", ...)
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/15-agent-corpus-gap-analysis.md|15-agent-corpus-gap-analysis]]
-- [[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]]
-- [[domain-14-ai-ml-infra/18-agentscope-tool-system.md|18-agentscope-tool-system]]
-- [[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]]
+- 15-agent-corpus-gap-analysis
+- 16-agentscope-overview-installation
+- 18-agentscope-tool-system
+- 19-agentscope-memory-context

@@ -46,6 +46,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
@@ -57,8 +58,8 @@ cross_refs:
 <!-- chunk: 概述 -->## 概述
 
 
-> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 [[Kubernetes|Kubernetes]] v1.25 中正式移除。
+> 请使用 Pod Securityod Security Admission]] (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 > PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 安全是生产环境 Linux 系统运维的基石。在 Kubernetes 环境中，一个被攻破的节点意味着攻击者可能获取集群中所有工作负载的访问权限。本文档从内核安全机制到应用层防护，全面深入地讲解 Linux 安全加固的各个方面，包括用户权限管理、SSH 安全、PAM 认证、SELinux/AppArmor 强制访问控制、审计日志、容器安全特性（Namespaces、cgroups、Capabilities、Seccomp）以及与 Kubernetes 安全策略（PodSecurityPolicy/PodSecurityStandards、NetworkPolicy）的紧密关联。掌握这些内容是构建安全可靠的容器平台基础设施的必要前提。
@@ -904,7 +905,7 @@ faillock --user username       # 查看锁定状态
 
 ## See Also
 
-- [[domain-17-system-foundation/05-linux-storage-management.md|05-linux-storage-management]]
-- [[domain-17-system-foundation/06-linux-performance-tuning.md|06-linux-performance-tuning]]
-- [[domain-17-system-foundation/08-linux-container-fundamentals.md|08-linux-container-fundamentals]]
-- [[domain-17-system-foundation/09-linux-operations-basics.md|09-linux-operations-basics]]
+- 05-linux-storage-management
+- 06-linux-performance-tuning
+- 08-linux-container-fundamentals
+- 09-linux-operations-basics

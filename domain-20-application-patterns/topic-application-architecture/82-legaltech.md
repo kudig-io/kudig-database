@@ -1,4 +1,31 @@
 ---
+title: 司法科技架构设计 — 阿里云视角
+description: 'title: 司法科技架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 司法科技架构设计 — 阿里云视角 是什么
+- 如何 司法科技架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 司法科技架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: 司法科技架构设计
 description: '# 司法科技架构设计 — 阿里云视角'
 category: application-architecture
@@ -16,7 +43,7 @@ audience:
 - 阿里云政务解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 司法科技智慧法院 Kubernetes 部署
+- 司法科技智慧法院 [[Kubernetes|Kubernetes]] 部署
 - 类案推送 NLP 知识图谱架构
 - 电子卷宗 OCR 结构化抽取
 - 区块链电子证据存证
@@ -32,9 +59,6 @@ trigger_keywords:
 - 法律知识图谱
 - 量刑辅助
 - 在线调解
-prerequisites:
-- kubectl-basics
-- prometheus-basics
 related_domains:
 - domain-9-security-compliance
 - domain-03-networking-traffic
@@ -42,6 +66,15 @@ related_domains:
 related_topics:
 - domain-20-application-patterns/topic-application-architecture/13-digital-government-architecture
 - domain-20-application-patterns/topic-application-architecture/24-insurtech
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 司法科技架构设计 — 阿里云视角
@@ -293,6 +326,30 @@ spec:
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 80-tsn-network
+- 81-smart-customs
+- 83-cultural-digitization
+- 84-national-park
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

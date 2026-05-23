@@ -1,5 +1,5 @@
 ---
-title: 审计日志故障排查指南
+title: 审计日志故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 审计日志故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -37,6 +37,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: 审计日志故障排查指南
@@ -47,7 +48,7 @@ tags:
 - troubleshooting
 - decision-tree
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - elasticsearch
@@ -84,7 +85,7 @@ k8s_versions:
 
 # 审计日志故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - v1.25+ 审计日志支持 omitManagedFields 减少日志体积
@@ -841,8 +842,8 @@ rules:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

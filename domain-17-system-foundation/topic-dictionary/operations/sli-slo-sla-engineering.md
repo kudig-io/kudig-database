@@ -32,11 +32,12 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # 15 - SLI/SLO/SLA工程实践
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **生产环境实战经验总结**: 基于万级节点集群 SLO 管理经验，涵盖从指标定义到告警响应的全方位最佳实践
 
@@ -1968,4 +1969,4 @@ kubectl get prometheusrule -A
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

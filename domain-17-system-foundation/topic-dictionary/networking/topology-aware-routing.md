@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Topology Aware Routing
@@ -33,13 +34,13 @@ prerequisites:
 
 ## 核心概念/原理
 
-- **拓扑提示（Hints）**：EndpointSlice 控制器在计算 Service 的后端端点时，会考虑每个端点所在节点的拓扑信息（region 和 zone），并在 EndpointSlice 的 `hints.forZones` 字段中为端点分配提示。
+- **拓扑提示（Hints）**：EndpointSlice 控制器在计算 [[Service|Service]] 的后端端点时，会考虑每个端点所在节点的拓扑信息（region 和 zone），并在 EndpointSlice 的 `hints.forZones` 字段中为端点分配提示。
 - **kube-proxy 消费提示**：kube-proxy 在转发流量时，会根据自身所在 zone 过滤带有对应 zone 提示的端点，优先选择同 zone 端点。如果某个端点被分配到其他 zone，也会有少量跨区流量用于均衡负载。
 - **按比例分配**：控制器默认根据各 zone 内节点的**可分配 CPU 核心数**比例来分配端点数量。例如，zone A 的可分配 CPU 是 zone B 的两倍，则 zone A 会分配到约两倍的端点提示。
 
 ## 关键机制或特性
 
-- **启用方式**：通过在 Service 上添加注解 `service.[[entities/kubernetes|kubernetes]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
+- **启用方式**：通过在 Service 上添加注解 `service.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
 - **保护机制（Safeguards）**：当以下任一条件不满足时，系统会回退到全集群范围的路由，避免流量不均衡或黑洞：
   1. 端点数量少于集群 zone 数量。
   2. 无法在各区之间实现可接受的均衡分配（预期过载值超过阈值）。
@@ -155,8 +156,8 @@ kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
 
 ## 交叉引用
 
-- [Service Internal Traffic Policy](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
-- [EndpointSlices](endpointslices.md) — hints 字段和 zone 信息
+- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy.md|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
+- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
 - [Service](service.md) — trafficDistribution 字段
 - [Cluster Networking](cluster-networking.md) — 跨可用区流量优化
 

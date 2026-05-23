@@ -27,6 +27,7 @@ prerequisites:
 - observability-basics
 - prometheus-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -194,10 +195,10 @@ tier: peripheral---
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-07-platform-engineering/MOC.md|相关知识域: domain-07-platform-engineering]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-07-platform-engineering
 - [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
 - [[domain-06-observability/README.md|返回目录]]

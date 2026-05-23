@@ -1,5 +1,5 @@
 ---
-title: kpt
+title: kpt (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - kpt
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kpt
@@ -65,7 +66,7 @@ kpt 是一个以 Git 为中心的 Kubernetes 配置包管理工具，由 Google 
 - [[kmesh]] — Kmesh
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kpt/kpt.md|kpt]]
+- kpt
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

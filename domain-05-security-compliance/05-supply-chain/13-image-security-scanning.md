@@ -52,11 +52,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 13 - 镜像安全扫描与漏洞管理
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 中高级 | **参考**: [Trivy Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
 
 <!-- chunk: 一、镜像安全扫描架构 -->
 ## 一、镜像安全扫描架构
@@ -781,24 +782,24 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
-- [[domain-05-security-compliance/README.md|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- domain-05-security-compliance KUDIG Database — Global MOC
+- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
+- index.md|Domain-7 安全 — 开源项目索引]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/11-secret-management-tools.md|11-secret-management-tools]]
-- [[domain-05-security-compliance/12-compliance-certification.md|12-compliance-certification]]
-- [[domain-05-security-compliance/14-policy-engines-opa-kyverno.md|14-policy-engines-opa-kyverno]]
-- [[domain-05-security-compliance/15-runtime-security-detection.md|15-runtime-security-detection]]
+- 11-secret-management-tools
+- 12-compliance-certification
+- 14-policy-engines-opa-kyverno
+- 15-runtime-security-detection
 
 - [[domain-05-security-compliance/README.md|返回目录]]

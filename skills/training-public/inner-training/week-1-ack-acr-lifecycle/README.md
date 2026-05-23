@@ -37,6 +37,7 @@ prerequisites:
 - helm-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -45,7 +46,7 @@ last_updated: 2026-05-18
 difficulty: beginner
 intent_queries:
   - ACK ACR cluster lifecycle week 1 curriculum
-  - Kubernetes cluster lifecycle management
+  - [[Kubernetes|Kubernetes]]es 集群配置最佳实践|Kubernetes cluster]] lifecycle management
   - ACK week 1 learning path guide
   - ACK cluster type selection
   - Kubernetes cluster certificate management
@@ -108,7 +109,7 @@ ACK 是阿里云提供的托管 Kubernetes 服务，它将 K8s 的复杂性封�
 
 阿里云 ACK 提供三种集群类型，适用于不同的业务场景：
 
-**ACK 托管版（Managed Cluster）** 是最常用的集群类型。在这种模式下，Kubernetes 控制平面（包括 kube-apiserver、etcd、kube-scheduler、kube-controller-manager）由阿里云托管，用户只需要管理 Worker 节点。托管版的优势包括：无需维护控制平面组件的高可用、自动进行控制平面升级和安全补丁、控制平面的费用已经包含在集群管理费中。托管版适合绝大多数生产场景，特别是没有特殊控制平面定制需求的团队。
+**ACK 托管版（Managed Cluster）** 是最常用的集群类型。在这种模式下，Kubernetes 控制平面（包括 kube-apiserver、[[etcd|etcd]]、kube-scheduler、kube-controller-manager）由阿里云托管，用户只需要管理 Worker 节点。托管版的优势包括：无需维护控制平面组件的高可用、自动进行控制平面升级和安全补丁、控制平面的费用已经包含在集群管理费中。托管版适合绝大多数生产场景，特别是没有特殊控制平面定制需求的团队。
 
 **ACK 专有版（Dedicated Cluster）** 提供了对控制平面的完全控制。用户需要自己提供和管理 Master 节点的 ECS 实例，自行维护 etcd 的备份和高可用。专有版的优势在于：可以对控制平面进行深度定制、满足特殊的合规要求（如数据不能存储在共享基础设施上）、可以自定义控制平面的网络和存储配置。专有版适合有特殊合规需求或需要对控制平面进行深度定制的大型企业。
 
@@ -311,20 +312,20 @@ aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

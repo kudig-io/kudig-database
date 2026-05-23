@@ -1,5 +1,5 @@
 ---
-title: Oxia
+title: Oxia (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Oxia
@@ -66,7 +67,7 @@ Oxia 是一个可水平扩展的元数据存储和协调系统，旨在作为 Zo
 - [[grpc]] — gRPC
 - [[etcd]] — etcd
 
-- [[domain-19-landscape-references/sandbox/oxia/oxia.md|oxia]]
-- [[entities/schemahero.md|SchemaHero]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- oxia
+- [[entities/schemahero.md|[[SchemaHero|SchemaHero]]]]
+- index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

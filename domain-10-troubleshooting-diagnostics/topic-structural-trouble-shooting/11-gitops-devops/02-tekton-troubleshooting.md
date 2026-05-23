@@ -1,5 +1,5 @@
 ---
-title: Tekton CI/CD 流水线故障排查指南
+title: Tekton CI/CD 流水线故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Tekton CI/CD 流水线故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - prometheus-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: Tekton CI/CD 流水线故障排查指南
@@ -51,8 +52,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - docker
 - opa
 - job
@@ -743,8 +744,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

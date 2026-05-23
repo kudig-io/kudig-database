@@ -1,4 +1,43 @@
 ---
+title: 节点故障排查手册 (topic-code-analysis)
+description: 'title: 节点故障排查手册'
+category: general
+tags:
+- reference
+- troubleshooting
+- etcd
+- kubelet
+- flannel
+- calico
+- coredns
+- containerd
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点故障排查手册 是什么
+- 如何 节点故障排查手册
+- Kubernetes 07 platform engineering 最佳实践
+- 节点故障排查手册 故障排查
+- 节点故障排查手册 排障步骤
+trigger_keywords:
+- 节点故障排查手册
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点故障排查手册
 description: '# 节点故障排查手册'
 category: functions
@@ -41,27 +80,31 @@ trigger_keywords:
 - node not ready
 - kubelet not running
 - certificate expired
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
-- domain-10-troubleshooting-diagnostics
+- domain-[[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 - domain-03-networking-traffic
 related_topics:
 - node-create/03-condition
 - node-create/11-eviction
 - node-create/12-monitoring
 - cluster-create/03-certs
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点故障排查手册
 
 ## 概述
 
-节点故障排查是 [[entities/kubernetes|kubernetes]] 运维中最常见且最关键的任务之一。节点故障可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件故障、系统资源耗尽等多个层面。
+节点故障排查是 Kubernetes 运维中最常见且最关键的任务之一。节点故障可能表现为多种症状：节点 NotReady、Pod 无法启动、网络不通、磁盘满、内存不足等。这些问题的根本原因可能涉及 kubelet 配置错误、证书过期、容器运行时异常、网络插件故障、系统资源耗尽等多个层面。
 
 有效的节点故障排查需要系统化的方法论：
 
@@ -534,3 +577,10 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 | `evictPods` | `pkg/kubelet/eviction/` | Pod 驱逐 |
 | `statusManager` | `pkg/kubelet/status/` | 状态管理 |
 | `probeManager` | `pkg/kubelet/prober/` | 健康检查探针 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

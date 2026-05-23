@@ -47,6 +47,7 @@ prerequisites:
 - mysql-basics
 - backup-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)
@@ -499,7 +500,7 @@ log "INFO" "Database replication lag: $(curl -s 'http://prometheus:9090/api/v1/q
 RPO_START=$(date +%s)
 FAILOVER_START=$(date +%s)
 
-if [[ "$DRILL_TYPE" == "component" ]]; then
+if "$DRILL_TYPE" == "component"; then
     log "INFO" "Phase 2: Component-level failover test"
     log "INFO" "Simulating $TARGET_SYSTEM failure..."
     case "$TARGET_SYSTEM" in
@@ -520,7 +521,7 @@ if [[ "$DRILL_TYPE" == "component" ]]; then
             log "INFO" "Full component test..."
             ;;
     esac
-elif [[ "$DRILL_TYPE" == "full" ]]; then
+elif "$DRILL_TYPE" == "full"; then
     log "INFO" "Phase 2: Full site failover"
     log "INFO" "Redirecting all traffic to DR site..."
     aws route53 change-resource-record-sets \
@@ -535,7 +536,7 @@ log "INFO" "Phase 4: Validate service recovery"
 SERVICE_OK=false
 for i in $(seq 1 20); do
     HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://api.example.com/healthz 2>/dev/null || echo "000")
-    if [[ "$HTTP_CODE" == "200" ]]; then
+    if "$HTTP_CODE" == "200"; then
         SERVICE_OK=true
         FAILOVER_END=$(date +%s)
         log "INFO" "Service recovered (attempt $i/20)"
@@ -548,7 +549,7 @@ done
 FAILOVER_END=${FAILOVER_END:-$(date +%s)}
 RPO_END=$(date +%s)
 
-if [[ "$SERVICE_OK" != "true" ]]; then
+if "$SERVICE_OK" != "true"; then
     DRILL_RESULT="FAIL"
 fi
 
@@ -557,7 +558,7 @@ RTO=$((FAILOVER_END - FAILOVER_START))
 RPO=$((RPO_END - RPO_START))
 
 log "INFO" "Phase 6: Restore original state"
-if [[ "$DRILL_TYPE" == "full" ]]; then
+if "$DRILL_TYPE" == "full"; then
     log "INFO" "Restoring traffic to primary site..."
     aws route53 change-resource-record-sets \
         --hosted-zone-id $ZONE_ID \
@@ -577,7 +578,7 @@ echo "Service OK:      $SERVICE_OK"
 echo "Full Log:        $DRILL_LOG"
 echo "========================================="
 
-if [[ "$DRILL_RESULT" == "FAIL" ]]; then
+if "$DRILL_RESULT" == "FAIL"; then
     exit 1
 fi
 ```

@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - monitoring-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 日志管理最佳实践
@@ -48,7 +49,7 @@ prerequisites:
 
 ### Fluent Bit 配置
 
-- 使用 DaemonSet 部署到每个节点 ^[inferred]
+- 使用 [[DaemonSet|DaemonSet]] 部署到每个节点 ^[inferred]
 - 资源配置：`requests: 128Mi/100m`，`limits: 256Mi/200m` ^[inferred]
 - `Mem_Buf_Limit: 10MB` — 缓冲区大小，过小会导致日志丢失 ^[inferred]
 - 启用 Kubernetes 元数据增强（K8S-Logging.Parser）^[inferred]
@@ -86,7 +87,7 @@ Mem_Buf_Limit 设置过小会导致日志丢失。建议设置为 10MB ^[inferre
 
 ### 日志格式不统一
 
-日志格式不统一会导致解析困难。应强制使用结构化日志格式（JSON），包含 timestamp、level、service、trace_id 等字段 ^[inferred]。
+日志格式不统一会导致解析困难。应强制使用结构化日志格式（JSON），包含 timestamp、level、[[Service|service]]、trace_id 等字段 ^[inferred]。
 
 ## 验证方法
 
@@ -96,7 +97,7 @@ Mem_Buf_Limit 设置过小会导致日志丢失。建议设置为 10MB ^[inferre
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[concepts/observability-pillars.md|Observability Pillars]]
 - [[skills/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[skills/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]

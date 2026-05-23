@@ -22,6 +22,7 @@ trigger_keywords:
 - 质量评估与索引体系
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 质量评估与索引体系

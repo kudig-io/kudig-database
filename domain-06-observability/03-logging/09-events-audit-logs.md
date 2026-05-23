@@ -62,11 +62,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
 # 05 - 事件与审计日志管理 (Events & Audit Logs)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -612,25 +613,25 @@ automated_response:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
-- [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
-- [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系详解]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|07 - 监控和指标表]]
+- observability/MOC.md|domain-06-observability MOC]]
+- [[domain-06-observability/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- index.md|Domain-8 可观测性 — 开源项目索引]]
+- Kubernetes 可观测性架构体系
+- 指标监控体系详解
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 07 - 监控和指标表
 
 ## See Also
 
-- [[domain-06-observability/07-monitoring-dashboards.md|07-monitoring-dashboards]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08-logging-audit-compliance]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
-- [[domain-06-observability/11-custom-metrics-adapter.md|11-custom-metrics-adapter]]
+- 07-monitoring-dashboards
+- 08-logging-audit-compliance
+- 10-monitoring-metrics-prometheus
+- 11-custom-metrics-adapter
 
 - [[domain-06-observability/README.md|返回目录]]
 

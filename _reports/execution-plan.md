@@ -1,39 +1,5 @@
 ---
-title: KUDIG 内容补齐执行计划
-description: 'description: ''desc: "深度文档"'''
-category: general
-tags:
-- reports
-- etcd
-- apiserver
-- scheduler
-- controller-manager
-- prometheus
-- grafana
-- helm
-- docker
-- hpa
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- KUDIG 内容补齐执行计划 是什么
-- 如何 KUDIG 内容补齐执行计划
-trigger_keywords:
-- KUDIG
-- 内容补齐执行计划
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- etcd-basics
----
-
-title: KUDIG 内容补齐执行计划
+title: KUDIG 内容补齐执行计划 (reports)
 description: 'desc: "深度文档"'
 category: general
 tags:
@@ -59,19 +25,15 @@ intent_queries:
 trigger_keywords:
 - KUDIG
 - 内容补齐执行计划
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
+created: "2026-05-23"
 ---
+
 # KUDIG 内容补齐执行计划
 
 > **创建日期**: 2026-05-09
@@ -138,7 +100,7 @@ related_docs:
 
 ---
 
-### Task-02: 为 Domain 核心文档补充 YAML Front Matter（domain-1 ~ domain-12 先行）
+### Task-02: 为 Domain 核心文档补充 YAML Front Matter（domain-01-cluster-fundamentals ~ domain-10-troubleshooting-diagnostics 先行）
 
 **原则**: 每篇文档逐一检查，补充 front matter 不改内容
 
@@ -226,7 +188,7 @@ dns-fta.md
 gateway-api-fta.md
 hpa-fta.md
 helm-fta.md
-ingress-fta.md
+[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md
 service-fta.md
 monitoring-fta.md
 networkpolicy-fta.md
@@ -290,9 +252,9 @@ webhook-admission-fta.md
 
 ## 阶段 3：P2 — Domain 文档监控/版本章节补齐
 
-### Task-05: 为 domain-1 ~ domain-5 补充监控告警章节
+### Task-05: 为 domain-01-cluster-fundamentals ~ domain-03-networking-traffic 补充监控告警章节
 
-**目标**: 在 domain-1 到 domain-5 每目录选 1 篇核心文档，补充 Section 6（监控与告警）
+**目标**: 在 domain-01-cluster-fundamentals 到 domain-03-networking-traffic 每目录选 1 篇核心文档，补充 Section 6（监控与告警）
 
 **文档选择**:
 - `domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md` → 补充监控章节
@@ -303,9 +265,9 @@ webhook-admission-fta.md
 
 ---
 
-### Task-06: 为 domain-1 ~ domain-5 补充版本差异章节
+### Task-06: 为 domain-01-cluster-fundamentals ~ domain-03-networking-traffic 补充版本差异章节
 
-**目标**: 在 domain-1 到 domain-5 每目录选 1 篇核心文档，补充 Section 10（版本差异）
+**目标**: 在 domain-01-cluster-fundamentals 到 domain-03-networking-traffic 每目录选 1 篇核心文档，补充 Section 10（版本差异）
 
 **补齐格式**: 参考 `templates/domain-article-template.md` Section 10（功能差异表 + API 版本差异）
 
@@ -348,19 +310,3 @@ webhook-admission-fta.md
 ---
 
 *最后更新: 2026-05-09*
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]

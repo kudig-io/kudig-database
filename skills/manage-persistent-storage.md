@@ -27,6 +27,7 @@ trigger_keywords:
 - Storage
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Manage Persistent Storage
@@ -88,14 +89,14 @@ kubectl get pv                           # Check PV status and reclaim policy
 | Issue | Cause | Fix |
 |-------|-------|-----|
 | PVC stuck Pending | No matching PV or provisioner failure | Check StorageClass provisioner, describe PVC |
-| Volume stuck in Terminating | Pod still referencing PVC | Check owner references, remove finalizers if orphaned |
+| Volume stuck in Terminating | Pod still referencing PVC | Check owner references, remove [[Finalizers|finalizers]] if orphaned |
 | Expansion failed | CSI driver doesn't support expansion, filesystem needs resize | Use compatible CSI driver, resize filesystem manually |
 
 ## Related
 
 - [[references/release-notes-storage.md|release-notes-storage]] — 发布说明索引 — 存储
 - [[skills/ts-storage.md|ts-storage]] — 存储故障排查
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[Troubleshoot Pod Issues|Troubleshoot Pod Issues]]
 - [[deployment]] — Deployment
 - [[concepts/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
 - [[concepts/storage-model.md|Persistent Storage Model]]

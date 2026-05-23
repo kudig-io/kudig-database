@@ -1,5 +1,5 @@
 ---
-title: 节点故障专项排查指南
+title: 节点故障专项排查指南 [topic-structural-trouble-shooting]
 description: 'title: 节点故障专项排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - troubleshooting-methodology
 - cni-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 节点故障专项排查指南
@@ -49,11 +50,11 @@ tags:
 - troubleshooting
 - decision-tree
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - calico
-- containerd
+- [[containerd|containerd]]
 - docker
 last_updated: 2026-05
 difficulty: advanced
@@ -848,13 +849,13 @@ kubectl get pods --field-selector spec.nodeName=<node>
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [Scheduler 故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
-- [资源配额故障排查](../07-resources-scheduling/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
-- [Pod 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [Scheduler 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
+- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|01-resources-quota-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 

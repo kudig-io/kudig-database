@@ -55,6 +55,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # Domain 23: GitOps与CI/CD (GitOps & CI/CD)
@@ -920,6 +921,6 @@ CNCF项目状态:
 - [[README]]
 - [[README]]
 
-- [[domain-07-platform-engineering/MOC.md|相关知识域: domain-07-platform-engineering]]
-- [[domain-08-release-change-management/MOC.md|相关知识域: domain-24-infrastructure-as-code]]
+- 相关知识域: domain-07-platform-engineering
+- 相关知识域: domain-24-infrastructure-as-code
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|速查卡: git]]

@@ -31,21 +31,22 @@ prerequisites:
 - etcd-basics
 - kafka-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # StatefulSets
 
 ## 概述
-StatefulSet 是用于管理有状态应用的工作负载 API 对象。它管理一组基于相同容器规范运行的 Pod，并保证这些 Pod 的排序和唯一性。与 Deployment 不同，StatefulSet 为每个 Pod 维护一个粘性标识（sticky identity），即使 Pod 被重新调度，该标识也不会改变。
+[[StatefulSet|StatefulSet]] 是用于管理有状态应用的工作负载 API 对象。它管理一组基于相同容器规范运行的 Pod，并保证这些 Pod 的排序和唯一性。与 Deployment 不同，StatefulSet 为每个 Pod 维护一个粘性标识（sticky identity），即使 Pod 被重新调度，该标识也不会改变。
 
 ## 核心概念/原理
-- **稳定网络标识**：每个 Pod 都有一个基于序号的唯一主机名，格式为 `$(statefulset-name)-$(ordinal)`。配合 Headless Service 可提供稳定的 DNS 名称。
+- **稳定网络标识**：每个 Pod 都有一个基于序号的唯一主机名，格式为 `$(statefulset-name)-$(ordinal)`。配合 Headless [[Service|Service]] 可提供稳定的 DNS 名称。
 - **稳定存储**：通过 `volumeClaimTemplates` 为每个 Pod 自动创建 PersistentVolumeClaim。Pod 重新调度后，原有的 PVC 会重新挂载到新 Pod。
 - **有序部署与扩缩容**：默认 `OrderedReady` 策略下，Pod 按序号 0 到 N-1 依次创建；缩容时按 N-1 到 0 依次删除。每个前置 Pod 必须 Running 且 Ready 后，才会继续下一步。
 - **Pod 序号**：
   - 默认从 0 开始。
   - 自 v1.31 起可通过 `spec.ordinals.start` 自定义起始序号。
-  - 控制器会自动添加标签 `apps.kubernetes.io/pod-index`（值为序号）。
+  - 控制器会自动添加标签 `apps.[[Kubernetes|kubernetes]].io/pod-index`（值为序号）。
 
 ## 关键机制或特性
 - **Pod 管理策略**：
@@ -261,7 +262,7 @@ kubectl get pvc -n prod -l app=postgres
 - [StatefulSet 高级运维](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [StatefulSet 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md)
-- [存储 CSI 故障排查](../../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md)
+- [存储 CSI 故障排查](../../[[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting|04-storage-csi-troubleshooting]].md)
 - [Pod Disruptions 中断管理](./disruptions.md)
 
 ## 参考链接

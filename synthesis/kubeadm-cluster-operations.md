@@ -30,13 +30,23 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/kubelet]]"
+    type: uses
+  - target: "[[concepts/kubernetes-pki-certificate-system]]"
+    type: uses
+  - target: "[[entities/deployment]]"
+    type: uses
+  - target: "[[synthesis/etcd x 高可用模式]]"
+    type: uses
 ---
 
 # kubeadm 集群运维全景
 
 ## 概述
 
-本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 domain-02-workloads-applications/topic-functions/ 下的 82 篇源文档，覆盖 5 个子专题：cluster-cert、cluster-create、cluster-delete、deployment-create、node-create。
+本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 domain-02-workloads-applications/topic-functions/ 下的 82 篇源文档，覆盖 5 个子专题：cluster-cert、cluster-create、cluster-delete、[[entities/deployment|deployment]]-create、node-create。
 
 ## 运维全景图
 
@@ -75,7 +85,7 @@ prerequisites:
 - 证书有效期默认 1 年（CA 10 年）
 - 支持外部 CA 模式满足企业安全要求
 - 控制面证书通过 `kubeadm certs renew` 手动轮换
-- kubelet 证书通过 TLS Bootstrap 自动轮换
+- [[entities/kubelet|kubelet]] 证书通过 TLS Bootstrap 自动轮换
 
 ### 3. 高可用部署（cluster-create/08-ha 等）
 
@@ -162,10 +172,11 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 
 - [[synthesis/K8s 故障分布与 MTTR 基准.md|K8s 故障分布与 MTTR 基准]]
 
-- [[synthesis/etcd x 高可用模式.md|etcd x 高可用模式]]
+- etcd x 高可用模式.md|etcd x 高可用模式]]
 
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — [[concepts/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|Nodes（节点）]]

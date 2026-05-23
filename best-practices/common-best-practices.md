@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 通用最佳实践参考
+title: Kubernetes 通用最佳实践参考 (best-practices)
 description: Kubernetes 生产环境通用最佳实践参考文档
 category: best-practices/common
 tags:
@@ -44,6 +44,7 @@ cross_refs:
 - type: best-practice
   path: ./observability/monitoring.md
   label: 监控最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 通用最佳实践参考

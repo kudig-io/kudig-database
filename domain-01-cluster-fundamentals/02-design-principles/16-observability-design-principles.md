@@ -54,6 +54,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 16 - 可观测性设计原则
@@ -63,14 +64,14 @@ cross_refs:
 
 > **架构师洞察**：
 > 现代可观测性已不再是简单的 Metrics/Logs/Traces 堆砌，其核心挑战在于如何建立数据间的关联（Contextualization）。
-> 1. **OpenTelemetry 的统治地位**：停止在应用中集成特定厂商的 SDK（如 Jaeger 或 Prometheus SDK）。统一使用 OpenTelemetry 是目前唯一的架构级建议。OTel 提供了标准化的数据协议（OTLP），使得数据可以在不同后端（Tempo, Mimir, Datadog）间无缝切换。
+> 1. **[[OpenTelemetry|OpenTelemetry]] 的统治地位**：停止在应用中集成特定厂商的 SDK（如 [[Jaeger|Jaeger]] 或 [[Prometheus|Prometheus]] SDK）。统一使用 OpenTelemetry 是目前唯一的架构级建议。OTel 提供了标准化的数据协议（OTLP），使得数据可以在不同后端（Tempo, Mimir, Datadog）间无缝切换。
 > 2. **持续剖析 (Continuous Profiling) —— 第四支柱**：除了传统三支柱，持续剖析正在成为定位“静默性能损耗”（如 GC 频繁、死循环、锁竞争）的杀手锏。通过 eBPF 技术，可以在生产环境以极低的开销获得应用函数级的 CPU/内存消耗图谱。
 > 3. **告警即策略 (SLI/SLO)**：告警不应基于 CPU 使用率等中间指标，而应基于对用户有意义的 SLI（服务水平指标）。如果错误预算（Error Budget）没耗尽，即使 CPU 100% 也不应触发紧急电话告警，这才是 SRE 的真谛。
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨 Kubernetes 系统的可观测性设计原则，涵盖监控、日志、追踪三大支柱的核心设计理念和最佳实践，为企业构建生产级可观测性体系提供理论指导和技术方案。
+本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的可观测性设计原则，涵盖监控、日志、追踪三大支柱的核心设计理念和最佳实践，为企业构建生产级可观测性体系提供理论指导和技术方案。
 
 ---
 
@@ -108,7 +109,7 @@ cross_refs:
 | Level 2 主动 | 异常检测 | 指标监控 | Grafana + Node Exporter |
 | Level 3 洞察 | 趋势分析 | 日志聚合 | Loki + Promtail |
 | Level 4 预测 | 智能预警 | 分布式追踪 | Jaeger + Tempo |
-| Level 5 自主 | 自动修复 | AIOps平台 | Cortex + Thanos |
+| Level 5 自主 | 自动修复 | AIOps平台 | [[Cortex|Cortex]] + Thanos |
 
 ### 1.3 可观测性设计原则矩阵
 
@@ -554,25 +555,25 @@ observability_culture:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture.md|14-service-mesh-architecture]]
-- [[domain-01-cluster-fundamentals/15-chaos-engineering.md|15-chaos-engineering]]
-- [[domain-01-cluster-fundamentals/17-security-design-patterns.md|17-security-design-patterns]]
-- [[domain-01-cluster-fundamentals/18-performance-optimization-principles.md|18-performance-optimization-principles]]
+- 14-service-mesh-architecture
+- 15-chaos-engineering
+- 17-security-design-patterns
+- 18-performance-optimization-principles
 
 ## Related
 

@@ -24,6 +24,7 @@ trigger_keywords:
 - tech
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # domain-37-edge-computing MOC
@@ -54,18 +55,18 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]] |  | edge, kubeedge |  |
-| 2 | [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]] |  | edge, kubeedge, architecture |  |
-| 3 | [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]] |  | edge, kubeedge |  |
-| 4 | [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]] |  | edge, kubeedge, deployment |  |
-| 5 | [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)]] |  | edge, kubeedge |  |
-| 6 | [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]] |  | edge, kubeedge, architecture |  |
-| 7 | [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]] |  | edge, kubeedge, architecture |  |
-| 8 | [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]] |  | edge, kubeedge, tutorial |  |
-| 9 | [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]] |  | edge, kubeedge, networking |  |
-| 10 | [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]] |  | edge, kubeedge, security |  |
-| 11 | [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]] |  | edge, kubeedge, case-study |  |
-| 12 | [[domain-15-specialized-tech/99-kubernetes-developer-toolchain-guide.md|K8s 开发者体验工具链指南]] |  | edge, kubeedge, guide |  |
+| 1 | Domain-37 边缘计算 — 开源项目索引 |  | edge, kubeedge |  |
+| 2 | 边缘计算架构概述 (Edge Computing Architecture Overview) |  | edge, kubeedge, architecture |  |
+| 3 | 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns) |  | edge, kubeedge |  |
+| 4 | KubeEdge 架构与部署 (KubeEdge Architecture and Deployment) |  | edge, kubeedge, deployment |  |
+| 5 | KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications) |  | edge, kubeedge |  |
+| 6 | OpenYurt 边缘方案 (OpenYurt Edge Solution) |  | edge, kubeedge, architecture |  |
+| 7 | SuperEdge 架构实践 (SuperEdge Architecture Practice) |  | edge, kubeedge, architecture |  |
+| 8 | 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning) |  | edge, kubeedge, tutorial |  |
+| 9 | 边缘存储与网络 (Edge Storage and Network) |  | edge, kubeedge, networking |  |
+| 10 | 边缘安全架构 (Edge Security Architecture) |  | edge, kubeedge, security |  |
+| 11 | 边缘场景案例 (Edge Computing Use Cases) |  | edge, kubeedge, case-study |  |
+| 12 | K8s 开发者体验工具链指南 |  | edge, kubeedge, guide |  |
 
 ---
 
@@ -98,9 +99,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-37-edge-computing 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-37-edge-computing 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-37-edge-computing 相关故障树分析 |
+| Skills 技能 | domain-37-edge-computing 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

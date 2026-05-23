@@ -1,5 +1,5 @@
 ---
-title: 难度分级索引 (Difficulty Index)
+title: 难度分级索引 (Difficulty Index) [metadata]
 description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
 category: general
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # 难度分级索引 (Difficulty Index)

@@ -38,6 +38,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 控制平面高可用部署模式 (Control Plane High Availability Deployment Patterns)
@@ -46,11 +47,11 @@ category: control-plane
 tags:
 - k8s
 - control-plane
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - docker
 - daemonset
@@ -762,7 +763,7 @@ TIMEOUT=5
 # 执行健康检查
 response=$(curl -sk --max-time $TIMEOUT $APISERVER_ENDPOINT 2>/dev/null)
 
-if [[ "$response" == "ok" ]]; then
+if "$response" == "ok"; then
     exit 0  # Healthy
 else
     exit 1  # Unhealthy
@@ -1069,22 +1070,22 @@ echo "✓ All tests completed successfully"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
+- 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|01-plane-architecture-overview]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|02-plane-components-interaction]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|04-plane-security-hardening]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|05-plane-monitoring-observability]]
+- 01-plane-architecture-overview
+- 02-plane-components-interaction
+- 04-plane-security-hardening
+- 05-plane-monitoring-observability

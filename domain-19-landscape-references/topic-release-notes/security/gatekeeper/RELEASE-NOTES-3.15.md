@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
 # gatekeeper v3.15 Release Notes

@@ -1,12 +1,48 @@
 ---
+title: 小程序平台 Kubernetes 生产架构设计
+description: 'title: 小程序平台架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- docker
+- minio
+- kafka
+- gateway
+- serverless
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 小程序平台 Kubernetes 生产架构设计 是什么
+- 如何 小程序平台 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 小程序平台
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- kafka-basics
+created: "2026-05-23"
+---
+
 title: 小程序平台架构设计
-description: '# 小程序平台 Kubernetes 生产架构设计'
+description: '# 小程序平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - docker
 - minio
 - kafka
@@ -38,16 +74,21 @@ trigger_keywords:
 - 热更新
 - 灰度发布
 - 审核系统
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- kafka-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-mini-program-architecture
 - topic-serverless-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 小程序平台 Kubernetes 生产架构设计
@@ -59,7 +100,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、小程序运行时架构](#二小程序运行时架构)
@@ -72,7 +113,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -109,7 +150,7 @@ flowchart TB
 
     subgraph Infra["基础设施层"]
         K8S["Kubernetes 集群"]
-        SERVERLESS["Serverless 运行时<br/>[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|Knative]] / OpenFunction"]
+        SERVERLESS["Serverless 运行时<br/>Knative / OpenFunction"]
         DB["数据库集群"]
         CACHE["缓存集群"]
         OSS["对象存储"]
@@ -125,7 +166,7 @@ flowchart TB
 
 ---
 
-## 二、小程序运行时架构
+<!-- chunk: 二、小程序运行时架构 -->## 二、小程序运行时架构
 
 ```mermaid
 flowchart TB
@@ -161,7 +202,7 @@ flowchart TB
     style NativeLayer fill:#e8f5e9
 ```
 
-### 双线程模型通信
+#<!-- chunk: 双线程模型通信 -->## 双线程模型通信
 
 ```mermaid
 sequenceDiagram
@@ -183,7 +224,7 @@ sequenceDiagram
 
 ---
 
-## 三、开发者平台架构
+<!-- chunk: 三、开发者平台架构 -->## 三、开发者平台架构
 
 ```mermaid
 flowchart TB
@@ -218,7 +259,7 @@ flowchart TB
     style RuntimeEnv fill:#e8f5e9
 ```
 
-### 小程序发布状态机
+#<!-- chunk: 小程序发布状态机 -->## 小程序发布状态机
 
 ```mermaid
 stateDiagram-v2
@@ -249,7 +290,7 @@ stateDiagram-v2
 
 ---
 
-## 四、小程序发布与审核架构
+<!-- chunk: 四、小程序发布与审核架构 -->## 四、小程序发布与审核架构
 
 ```mermaid
 flowchart TB
@@ -284,7 +325,7 @@ flowchart TB
     style Store fill:#fff8e1
 ```
 
-### K8s 构建流水线
+#<!-- chunk: K8s 构建流水线 -->## K8s 构建流水线
 
 ```yaml
 apiVersion: tekton.dev/v1beta1
@@ -372,7 +413,7 @@ spec:
 
 ---
 
-## 五、数据隔离与安全架构
+<!-- chunk: 五、数据隔离与安全架构 -->## 五、数据隔离与安全架构
 
 ```mermaid
 flowchart TB
@@ -413,7 +454,7 @@ flowchart TB
     style SecurityLayer fill:#ffebee
 ```
 
-### 小程序沙箱隔离
+#<!-- chunk: 小程序沙箱隔离 -->## 小程序沙箱隔离
 
 ```mermaid
 flowchart LR
@@ -440,7 +481,7 @@ flowchart LR
 
 ---
 
-## 六、Serverless 后端架构
+<!-- chunk: 六、Serverless 后端架构 -->## 六、Serverless 后端架构
 
 ```mermaid
 flowchart TB
@@ -473,7 +514,7 @@ flowchart TB
     style K8sInfra fill:#e8f5e9
 ```
 
-### Knative 云函数配置
+#<!-- chunk: Knative 云函数配置 -->## Knative 云函数配置
 
 ```yaml
 apiVersion: serving.knative.dev/v1
@@ -534,7 +575,7 @@ spec:
 
 ---
 
-## 七、性能优化与 CDN 架构
+<!-- chunk: 七、性能优化与 CDN 架构 -->## 七、性能优化与 CDN 架构
 
 ```mermaid
 flowchart TB
@@ -577,9 +618,9 @@ flowchart TB
 
 ---
 
-## 八、K8s 部署架构
+<!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-### Namespace 组织
+#<!-- chunk: Namespace 组织 -->## Namespace 组织
 
 ```yaml
 # namespace 结构
@@ -616,7 +657,7 @@ metadata:
     tier: serverless
 ```
 
-### 小程序平台监控告警
+#<!-- chunk: 小程序平台监控告警 -->## 小程序平台监控告警
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -664,8 +705,32 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [微信小程序官方文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)
 - [支付宝小程序架构](https://opendocs.alipay.com/mini/introduce)
 - [Knative 文档](https://knative.dev/docs/)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 96-carbon-capture
+- 01-ecommerce-architecture
+- 03-cms-architecture
+- 04-im-rtc-architecture

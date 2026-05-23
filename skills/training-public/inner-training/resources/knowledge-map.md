@@ -48,6 +48,7 @@ related_domains:
 related_topics:
 - reading-sequence
 - commands-cheatsheet
+created: "2026-05-23"
 ---
 
 # ACK/ACR/K8S 内部培训知识图谱
@@ -298,4 +299,4 @@ RAM 账号集成
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

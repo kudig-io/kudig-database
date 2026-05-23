@@ -51,7 +51,7 @@ prerequisites:
 
 | 编号 | 名称 | 严重程度 | 文件位置 | 页码 |
 |:---|:---|:---:|:---|:---:|
-| TE-1 | 集群完全不可用 | 🔴 P0 | [kubernetes-fta-full-analysis-v2.md](./[[domain-10-troubleshooting-diagnostics/topic-fta-archive/kubernetes-fta-full-analysis-v2|kubernetes-fta-full-analysis-v2]].md#二te-1-集群完全不可用-p0) | #2 |
+| TE-1 | 集群完全不可用 | 🔴 P0 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#二te-1-集群完全不可用-p0) | #2 |
 | TE-2 | 应用服务不可用 | 🔴 P0 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0) | #3 |
 | TE-3 | Pod启动失败 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#四te-3-pod启动失败-p1) | #4 |
 | TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1) | #5 |

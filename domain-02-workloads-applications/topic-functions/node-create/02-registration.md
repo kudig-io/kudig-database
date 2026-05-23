@@ -1,4 +1,40 @@
 ---
+title: 节点注册流程 — TLS Bootstrap 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- controller-manager
+- containerd
+- webhook
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点注册流程 — TLS Bootstrap 源码分析 是什么
+- 如何 节点注册流程 — TLS Bootstrap 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点注册流程
+- TLS
+- Bootstrap
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: 节点注册流程 TLS Bootstrap 源码分析
 description: '## 概述'
 category: functions
@@ -40,9 +76,6 @@ trigger_keywords:
 - system:node: null
 - nodeRegistration
 - podCIDR
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -51,13 +84,22 @@ related_topics:
 - cluster-create/03-certs
 - cluster-create/12-join-advanced
 - node-create/06-certificate
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点注册流程 — TLS Bootstrap 源码分析
 
 ## 概述
 
-节点注册是 [[entities/kubernetes|kubernetes]] 节点生命周期的起点。当一台新的机器准备好加入集群时，它需要通过一系列认证和授权步骤才能被集群正式接纳。这个过程称为 TLS Bootstrap（TLS 引导），它允许 kubelet 在没有预先生成证书的情况下，通过 Bootstrap Token 向 API Server 认证，然后发起 CSR（Certificate Signing Request）获取正式的客户端证书。
+节点注册是 Kubernetes 节点生命周期的起点。当一台新的机器准备好加入集群时，它需要通过一系列认证和授权步骤才能被集群正式接纳。这个过程称为 TLS Bootstrap（TLS 引导），它允许 kubelet 在没有预先生成证书的情况下，通过 Bootstrap Token 向 API Server 认证，然后发起 CSR（Certificate Signing Request）获取正式的客户端证书。
 
 TLS Bootstrap 的设计目标是简化节点加入集群的流程。在早期版本中，管理员需要手动为每个节点生成证书和 kubeconfig 文件，这在管理数百个节点的集群时极其繁琐。Bootstrap Token 机制通过一个临时的、有限权限的 Token 来引导节点的初始认证，然后自动完成证书签发，极大地简化了节点管理。
 
@@ -517,3 +559,11 @@ hostname
 | `registerWithAPIServer` | `pkg/kubelet/kubelet.go` | 节点注册 |
 | `setNodeAddress` | `pkg/kubelet/nodestatus/` | 设置节点地址 |
 | `AllocatePodCIDR` | `pkg/controller/node/ipam/` | PodCIDR 分配 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

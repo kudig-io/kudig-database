@@ -57,9 +57,10 @@ related_topics:
 - ha-delete
 - cloud-delete
 - troubleshooting
+created: "2026-05-23"
 ---
 
-# Kubernetes 集群删除逻辑 — 基于官方代码分析
+# [[Kubernetes|Kubernetes]] 集群删除逻辑 — 基于官方代码分析
 
 ## 函数签名
 
@@ -81,7 +82,7 @@ func (r *resetData) ResetCfg() *kubeadmapi.ResetConfiguration
 | 组件 | 源码路径 | 说明 |
 |------|---------|------|
 | reset 入口 | `cmd/kubeadm/app/cmd/reset.go` | 命令注册、resetData 构建 |
-| reset phases | `cmd/kubeadm/app/cmd/phases/reset/` | preflight/remove-etcd/cleanup-node |
+| reset phases | `cmd/kubeadm/app/cmd/phases/reset/` | preflight/remove-[[etcd|etcd]]/cleanup-node |
 | etcd 操作 | `cmd/kubeadm/app/phases/etcd/local.go` | RemoveStackedEtcdMember |
 | workflow 引擎 | `cmd/kubeadm/app/cmd/phases/workflow/runner.go` | Phase 执行框架 |
 | 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |
@@ -120,7 +121,7 @@ func (r *resetData) ResetCfg() *kubeadmapi.ResetConfiguration
 | `newCmdReset` | `*cobra.Command` | 返回配置好的 reset 子命令 |
 | `ForceReset` | `bool` | 是否跳过用户确认 |
 | `DryRun` | `bool` | 是否为干跑模式 |
-| `Client` | `clientset.Interface` | Kubernetes API 客户端（dry-run 时为 FakeClient） |
+| `Client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 客户端（dry-run 时为 FakeClient） |
 | `Cfg` | `*kubeadmapi.InitConfiguration` | 从集群获取的配置，不可达时为 nil |
 
 ## 调用链

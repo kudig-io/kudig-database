@@ -25,6 +25,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[best-practices/observability/monitoring]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability]]"
+    type: related_to
 ---
 
 # AI/ML 工作负载的可观测性
@@ -61,5 +67,5 @@ MLflow / WandB + Kubernetes:
 
 ## 相关 Domain
 
-- [[domain-14-ai-ml-infra/03-gpu-scheduling/01-gpu-scheduling-management]]
-- [[domain-06-observability/02-metrics/02-monitoring-metrics-system]]
+- domain-14-ai-ml-infra/03-gpu-scheduling/01-gpu-scheduling-management
+- [[domain-17-system-foundation/topic-dictionary/observability/observability|observability]]/02-metrics/02-[[best-practices/observability/monitoring|monitoring]]-metrics-system]]

@@ -1,5 +1,5 @@
 ---
-title: Microcks
+title: Microcks (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Microcks
@@ -64,12 +65,12 @@ Microcks 是一个 API Mock 和测试平台，用于将 OpenAPI、AsyncAPI、gRP
 
 ## Related
 
-- [[02-containerd-v2-features]] — containerd 2.0 新特性
+- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
 - [[karmada]] — Karmada
 - [[rook]] — Rook
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[grpc]] — gRPC
 
-- [[domain-19-landscape-references/sandbox/microcks/microcks.md|microcks]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- microcks
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

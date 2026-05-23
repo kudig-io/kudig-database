@@ -27,13 +27,14 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # GPU 资源管理与分区技术
 
 ## 概述
 
-在 Kubernetes 上运行 AI/ML 工作负载时，GPU 是最昂贵且最稀缺的资源。2026 年的行业最佳实践要求平台团队不仅要将 GPU 暴露给 Pod，还需通过**分区（Partitioning）、共享（Sharing）、拓扑感知调度（Topology-Aware Scheduling）**等手段，将 GPU 利用率从传统的 13%–40% 提升至 70% 以上，从而显著降低 AI 基础设施成本。
+在 [[Kubernetes|Kubernetes]] 上运行 AI/ML 工作负载时，GPU 是最昂贵且最稀缺的资源。2026 年的行业最佳实践要求平台团队不仅要将 GPU 暴露给 Pod，还需通过**分区（Partitioning）、共享（Sharing）、拓扑感知调度（Topology-Aware Scheduling）**等手段，将 GPU 利用率从传统的 13%–40% 提升至 70% 以上，从而显著降低 AI 基础设施成本。
 
 ## 核心概念/原理
 
@@ -53,7 +54,7 @@ Kubernetes 通过 **Device Plugin** 框架将 GPU、TPU 等硬件资源以 `nvid
 - 多个 Pod 按时间片轮询使用 GPU，**无硬件隔离**，存在性能抖动
 - 适用于**开发测试、低优先级批处理**等容忍延迟抖动的场景
 
-#### NVIDIA MPS（Multi-Process Service）
+#### NVIDIA MPS（Multi-Process [[Service|Service]]）
 - 允许多个 CUDA 进程共享同一张 GPU 的上下文
 - 比时间切片开销更低，但无显存隔离
 - 适合**同租户内部的多推理服务共享**
@@ -69,7 +70,7 @@ Kubernetes 通过 **Device Plugin** 框架将 GPU、TPU 等硬件资源以 `nvid
 
 ### 4. 动态资源分配（DRA）
 
-Kubernetes 1.26+ 引入的 **Dynamic Resource Allocation (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
+Kubernetes 1.26+ 引入的 **[[Dynamic Resource Allocation|Dynamic Resource Allocation]] (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
 - 定义自定义资源分配语义
 - 多节点 NVLink Domain 抽象
 - 更细粒度的调度决策

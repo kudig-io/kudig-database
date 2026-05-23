@@ -36,6 +36,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 信创替代架构设计
@@ -45,9 +46,9 @@ tags:
 - k8s
 - architecture
 - industry
-- etcd
+- [[etcd|etcd]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - calico
 - docker
@@ -534,7 +535,7 @@ graph TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -549,7 +550,7 @@ graph TB
 
 ## See Also
 
-- [[domain-20-application-patterns/21-cross-border-ecommerce.md|21-cross-border-ecommerce]]
-- [[domain-20-application-patterns/22-nev-connected-vehicle.md|22-nev-connected-vehicle]]
-- [[domain-20-application-patterns/24-insurtech.md|24-insurtech]]
-- [[domain-20-application-patterns/25-quantitative-trading.md|25-quantitative-trading]]
+- 21-cross-border-ecommerce
+- 22-nev-connected-vehicle
+- 24-insurtech
+- 25-quantitative-trading

@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -45,7 +46,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.31.13](#changelog-since-v13113)
+  - Changelog since v1.31.13](#changelog-since-v13113)
   - [Changes by Kind](#changes-by-kind)
     - [Feature](#feature)
     - [Bug or Regression](#bug-or-regression)
@@ -170,7 +171,7 @@ prerequisites:
     - [Container Images](#container-images-8)
   - [Changelog since v1.31.5](#changelog-since-v1315)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2025-0426: Node Denial of Service via Kubelet Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
+    - [CVE-2025-0426: Node Denial of [[Service|Service]] via [[kubelet|Kubelet]] Checkpoint API](#cve-2025-0426-node-denial-of-service-via-kubelet-checkpoint-api)
   - [Changes by Kind](#changes-by-kind-8)
     - [Feature](#feature-5)
     - [Bug or Regression](#bug-or-regression-8)

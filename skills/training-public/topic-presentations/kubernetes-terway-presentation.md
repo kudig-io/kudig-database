@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+title: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [topic-presentations]
 description: '**核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略'
 category: presentations
 tags:
@@ -45,9 +45,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+# [[Kubernetes|Kubernetes]] Terway (Aliyun) 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+
 > **核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略
@@ -78,7 +79,7 @@ authors:
 1. Terway 是阿里云 ACK 自研的 CNI 插件，Pod IP 直通 VPC
 2. 三种核心模式：VPC 路由、ENI 独占、ENIIP（推荐默认）
 3. IPAM 预热池机制减少 OpenAPI 调用延迟
-4. 四层安全模型：节点安全组 → Pod 安全组 → NetworkPolicy → RAM
+4. 四层安全模型：节点安全组 → Pod 安全组 → [[NetworkPolicy|NetworkPolicy]] → RAM
 5. 容量规划是 Terway 生产部署的第一步
 
 ---
@@ -145,7 +146,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 - Pod 级安全组：每个 Pod 可绑定独立安全组，实现精细化访问控制
 
 **SLB/ALB 集成：**
-- LoadBalancer 类型 Service 自动关联阿里云 SLB/ALB
+- LoadBalancer 类型 [[Service|Service]] 自动关联阿里云 SLB/ALB
 - SLB 后端直接挂载 Pod IP (ENIIP 模式)，无需经过 NodePort 转发
 - 流量路径：Client → SLB → Pod IP (直通)，减少一跳
 
@@ -155,7 +156,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 
 | 组件 | 形态 | 职责 |
 |:---|:---|:---|
-| **Terway DaemonSet** | DaemonSet (每 Node 一个 Pod) | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池 |
+| **Terway [[DaemonSet|DaemonSet]]** | DaemonSet (每 Node 一个 Pod) | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池 |
 | **Terway Controller** | Deployment (1 副本, 可选 HA) | Watch CRD 变更, 管理 ENI 生命周期, GC |
 | **eni-config ConfigMap** | ConfigMap | 全局网络配置: VPC ID, vSwitch ID, 安全组, 网络模式 |
 
@@ -669,25 +670,25 @@ Terway
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes 安全与 RBAC 权限管理全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes 安全与 RBAC 权限管理全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|kubernetes-service-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|kubernetes-storage-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|kubernetes-troubleshooting-methodology-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|kubernetes-workload-presentation]]
+- kubernetes-service-presentation
+- kubernetes-storage-presentation
+- kubernetes-troubleshooting-methodology-presentation
+- kubernetes-workload-presentation
 
 ## Related
 

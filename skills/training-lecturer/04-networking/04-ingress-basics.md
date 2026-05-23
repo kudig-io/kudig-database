@@ -1,5 +1,5 @@
 ---
-title: 第五课：Ingress - 外部 HTTP/HTTPS 访问
+title: 第五课：Ingress - 外部 HTTP/HTTPS 访问 [04-networking]
 description: 2. 掌握 Ingress 的配置方法
 category: k8s-lecturer
 tags:
@@ -33,9 +33,10 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
-# 第五课：Ingress - 外部 HTTP/HTTPS 访问
+# 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -381,5 +382,5 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../05-configuration/05-configmap-secret.md) — 配置管理
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 Skill
-- [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — [[entities/kubernetes|kubernetes]] 网络文档
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 [[SKILL|Skill]]
+- [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 网络文档

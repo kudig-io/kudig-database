@@ -46,18 +46,19 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 10 - Wasm 插件生态与开发实践
 
-> **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Wasm, proxy-wasm, TinyGo, Rust, 插件, 沙箱, 热加载, OCI
+> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Wasm, proxy-wasm, TinyGo, Rust, 插件, 沙箱, 热加载, OCI
 
 <!-- chunk: 目录 -->## 目录
 
 1. [为什么选择 Wasm](#1-为什么选择-wasm)
 2. [proxy-wasm ABI 规范](#2-proxy-wasm-abi-规范)
 3. [各产品 Wasm 支持矩阵](#3-各产品-wasm-支持矩阵)
-4. [Go Wasm 插件开发（TinyGo）](#4-go-wasm-插件开发tinygo)
+4. Go Wasm 插件开发（TinyGo）](#4-go-wasm-插件开发tinygo)
 5. [Rust Wasm 插件开发](#5-rust-wasm-插件开发)
 6. [插件生命周期管理](#6-插件生命周期管理)
 7. [性能开销分析](#7-性能开销分析)
@@ -149,7 +150,7 @@ proxy-wasm 是由 Envoy 社区主导、多家厂商共同制定的 WebAssembly �
 | ABI 版本 | 发布时间 | 主要 SDK | 关键变化 |
 |---------|---------|---------|---------|
 | **0.1.0** | 2020-Q1 | envoy-wasm-sdk (C++) | 初始版本，仅 HTTP 过滤器 |
-| **0.2.0** | 2021-Q1 | proxy-wasm-go-sdk, proxy-wasm-rust-sdk | 增加 TCP、gRPC 支持 |
+| **0.2.0** | 2021-Q1 | proxy-wasm-go-sdk, proxy-wasm-rust-sdk | 增加 TCP、[[gRPC|gRPC]] 支持 |
 | **0.2.1** | 2022-Q2 | 同上 | 修复内存模型 Bug，增加 shared_data |
 | **0.3.0（草案）** | 2024-Q1 | 实验性支持 | 支持异步 HTTP 调用、计时器精度提升 |
 
@@ -184,7 +185,7 @@ proxy-wasm 插件运行在独立的线性内存空间中。宿主与插件之间
 | **共享队列** | `proxy_enqueue/dequeue_shared_queue` | 跨 Worker 消息传递 |
 | **计时器** | `proxy_set_tick_period_milliseconds` | 周期性触发（心跳、定时上报） |
 | **日志** | `proxy_log` | 输出结构化日志至宿主日志系统 |
-| **指标** | `proxy_define/increment_metric` | 向宿主注册并更新 Prometheus 指标 |
+| **指标** | `proxy_define/increment_metric` | 向宿主注册并更新 [[Prometheus|Prometheus]] 指标 |
 
 ---
 
@@ -579,7 +580,7 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib"]
 
-[[bin]]
+bin
 name = "plugin"
 path = "src/lib.rs"
 
@@ -802,22 +803,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 03 - API 网关选型指南与对比矩阵
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
 
 ## See Also
 
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08-traefik-enterprise-gateway]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09-nginx-ingress-migration-guide]]
-- [[domain-03-networking-traffic/11-api-gateway-security-practices.md|11-api-gateway-security-practices]]
-- [[domain-03-networking-traffic/12-api-gateway-observability.md|12-api-gateway-observability]]
+- 08-traefik-enterprise-gateway
+- 09-nginx-ingress-migration-guide
+- 11-api-gateway-security-practices
+- 12-api-gateway-observability

@@ -46,6 +46,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 开源项目全景生态图谱
@@ -191,7 +192,7 @@ prerequisites:
 | NCCL / NVIDIA GPU Operator | GPU 调度与管理 | 非 CNCF | v24.9.0 |
 | Dragonfly | 镜像 P2P 分发 | Graduated | v2.2.0 |
 
-### domain-12: 故障排查 (Troubleshooting)
+### domain-12: 问题排查 (Troubleshooting)
 
 | 项目 | 作用 | CNCF 状态 | 版本 |
 |:---|:---|:---|:---|

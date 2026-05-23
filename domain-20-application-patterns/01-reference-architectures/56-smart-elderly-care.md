@@ -32,6 +32,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 智慧养老架构设计
@@ -41,7 +42,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -57,7 +58,7 @@ audience:
 - 适老化产品经理
 estimated_read_time: 5min
 intent_queries:
-- smart elderly care kubernetes architecture
+- smart elderly care [[Kubernetes|kubernetes]] architecture
 - 智慧养老K8s部署方案
 - 养老平台AI跌倒检测
 - 居家养老IoT监测
@@ -562,7 +563,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -577,11 +578,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/54-social-gaming-metaverse.md|54-social-gaming-metaverse]]
-- [[domain-20-application-patterns/55-crossborder-dtc.md|55-crossborder-dtc]]
-- [[domain-20-application-patterns/57-digital-therapeutics.md|57-digital-therapeutics]]
-- [[domain-20-application-patterns/58-web3-gamefi.md|58-web3-gamefi]]
+- 54-social-gaming-metaverse
+- 55-crossborder-dtc
+- 57-digital-therapeutics
+- 58-web3-gamefi
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

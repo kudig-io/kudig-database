@@ -1,7 +1,42 @@
 ---
+title: Agent Harness 测试与基准评测 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark,'
+category: general
+tags:
+- ai
+- ai-agent
+- performance
+- kubelet
+- prometheus
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent Harness 测试与基准评测 是什么
+- 如何 Agent Harness 测试与基准评测
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 测试与基准评测
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 测试与基准评测
-description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark, SWE-bench, GAIA, AgentBench, 评测框架,
-  测试用例, 红队测试, 对抗测试, 回归测试, 自定义基准'
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark,
+  SWE-bench, GAIA, AgentBench, 评测框架, 测试用例, 红队测试, 对抗测试, 回归测试, 自定义基准'
 category: ai-agent
 tags:
 - ai
@@ -9,8 +44,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,9 +63,15 @@ trigger_keywords:
 - 测试与基准评测
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 测试与基准评测
@@ -39,7 +80,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Agent Harness 的测试与评测面临独特挑战：非确定性输出、多步执行路径、质量的多维度性。传统软件测试方法（单元测试、集成测试）需要针对 Agent 特性进行根本性扩展。
 
@@ -47,9 +88,9 @@ Agent Harness 的测试与评测面临独特挑战：非确定性输出、多步
 
 ---
 
-## 1. Agent 测试特殊挑战
+<!-- chunk: 1. Agent 测试特殊挑战 -->## 1. Agent 测试特殊挑战
 
-### 1.1 与传统软件测试的差异
+#<!-- chunk: 1.1 与传统软件测试的差异 -->## 1.1 与传统软件测试的差异
 
 ```
 传统软件测试 vs Agent 测试:
@@ -74,7 +115,7 @@ Agent 测试的新维度:
   5. 成本效率测试（Token 消耗合理）
 ```
 
-### 1.2 测试金字塔
+#<!-- chunk: 1.2 测试金字塔 -->## 1.2 测试金字塔
 
 ```
 Agent 测试金字塔:
@@ -95,9 +136,9 @@ Agent 测试金字塔:
 
 ---
 
-## 2. 组件级测试
+<!-- chunk: 2. 组件级测试 -->## 2. 组件级测试
 
-### 2.1 Harness 组件测试框架
+#<!-- chunk: 2.1 Harness 组件测试框架 -->## 2.1 Harness 组件测试框架
 
 ```python
 import pytest
@@ -148,7 +189,7 @@ class TestCommandSafetyVerifier:
         output = """
         执行以下命令检查 Pod 状态:
         ```bash
-        kubectl get pods -n default
+        kubectl get [[Pods|pods]] -n default
         kubectl describe pod nginx-xxx -n default
         kubectl logs nginx-xxx -n default --tail=100
         ```
@@ -264,9 +305,9 @@ class TestConstraintEnforcer:
 
 ---
 
-## 3. 行业基准测试详解
+<!-- chunk: 3. 行业基准测试详解 -->## 3. 行业基准测试详解
 
-### 3.1 基准测试全景
+#<!-- chunk: 3.1 基准测试全景 -->## 3.1 基准测试全景
 
 | 基准 | 类型 | 规模 | 顶级得分 | Harness 敏感度 | K8S 适用性 |
 |------|------|------|---------|--------------|-----------|
@@ -280,7 +321,7 @@ class TestConstraintEnforcer:
 | **ToolBench** | API 调用链 | 16K+ | 变化中 | 中 | 中 |
 | **AgentHarm** | 安全性 | 安全场景 | 变化中 | 中 | 高 |
 
-### 3.2 SWE-bench 对 Harness 的启示
+#<!-- chunk: 3.2 SWE-bench 对 Harness 的启示 -->## 3.2 SWE-bench 对 Harness 的启示
 
 ```
 SWE-bench 与 Harness 设计的关键教训:
@@ -308,9 +349,9 @@ SWE-bench 与 Harness 设计的关键教训:
 
 ---
 
-## 4. 自定义基准测试设计
+<!-- chunk: 4. 自定义基准测试设计 -->## 4. 自定义基准测试设计
 
-### 4.1 K8S 运维基准测试
+#<!-- chunk: 4.1 K8S 运维基准测试 -->## 4.1 K8S 运维基准测试
 
 ```python
 class K8sHarnessBenchmark:
@@ -553,9 +594,9 @@ class K8sBenchmarkEvaluator:
 
 ---
 
-## 5. 红队测试与对抗评估
+<!-- chunk: 5. 红队测试与对抗评估 -->## 5. 红队测试与对抗评估
 
-### 5.1 红队测试框架
+#<!-- chunk: 5.1 红队测试框架 -->## 5.1 红队测试框架
 
 ```python
 class RedTeamTestSuite:
@@ -668,9 +709,9 @@ class RedTeamTestSuite:
 
 ---
 
-## 6. 回归测试框架
+<!-- chunk: 6. 回归测试框架 -->## 6. 回归测试框架
 
-### 6.1 Harness 回归测试
+#<!-- chunk: 6.1 Harness 回归测试 -->## 6.1 Harness 回归测试
 
 ```python
 class HarnessRegressionTester:
@@ -778,9 +819,9 @@ class HarnessRegressionTester:
 
 ---
 
-## 7. 最佳实践
+<!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-### 7.1 测试核心原则
+#<!-- chunk: 7.1 测试核心原则 -->## 7.1 测试核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -791,7 +832,7 @@ class HarnessRegressionTester:
 | **基线对比** | 每次变更与基线对比 | 保存历史评测结果 |
 | **渐进复杂** | L1→L2→L3 难度递增 | 先验证基础能力 |
 
-### 7.2 反模式
+#<!-- chunk: 7.2 反模式 -->## 7.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -803,7 +844,7 @@ class HarnessRegressionTester:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -814,7 +855,7 @@ class HarnessRegressionTester:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -826,3 +867,27 @@ class HarnessRegressionTester:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 测试与基准评测。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 37-agent-harness-multi-agent
+- 38-agent-harness-performance-cost
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide

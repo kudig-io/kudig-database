@@ -47,11 +47,12 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）
 
-> 本文档系统梳理了 `topic-dictionary` 知识库与 2026 年 Kubernetes / 云原生 / AI 基础设施行业最佳实践之间的差距，并标注了已补齐的内容和仍待补充的方向。
+> 本文档系统梳理了 `topic-dictionary` 知识库与 2026 年 [[Kubernetes|Kubernetes]] / 云原生 / AI 基础设施行业最佳实践之间的差距，并标注了已补齐的内容和仍待补充的方向。
 
 ---
 
@@ -63,14 +64,14 @@ prerequisites:
 |------|--------|------|
 | Kubernetes 核心概念 | ⭐⭐⭐⭐⭐ | 151 个官方 concept 已完整覆盖并中文总结 |
 | 基础运维与 SRE | ⭐⭐⭐⭐☆ | 故障分析、容量规划、变更管理、SLI/SLO 等实战文档齐全 |
-| 容器与工作负载 | ⭐⭐⭐⭐⭐ | Pod、Deployment、StatefulSet、Job、HPA/VPA 等概念完整 |
+| 容器与工作负载 | ⭐⭐⭐⭐⭐ | Pod、Deployment、[[StatefulSet|StatefulSet]]、Job、HPA/VPA 等概念完整 |
 | 存储与配置 | ⭐⭐⭐⭐☆ | Volume、PV、StorageClass、ConfigMap、Secret 覆盖充分 |
 
 ### 主要缺口（已识别）
 
 | 领域 | 缺口严重度 | 状态 |
 |------|------------|------|
-| **AI/ML 基础设施** | 🔴 高 | 已大规模补齐（GPU 分区、KServe、Kueue、LLM 优化、RAG、MLOps） |
+| **AI/ML 基础设施** | 🔴 高 | 已大规模补齐（GPU 分区、[[KServe|KServe]]、Kueue、LLM 优化、RAG、MLOps） |
 | **平台工程与 GitOps** | 🔴 高 | 已补齐（GitOps、Cluster API、KubeVirt、Wasm） |
 | **现代网络（eBPF / Service Mesh）** | 🔴 高 | 已补齐（eBPF + Cilium、Service Mesh） |
 | **供应链安全与运行时安全** | 🟠 中高 | 已补齐（SBOM/Cosign、Policy-as-Code、Falco/KubeArmor） |

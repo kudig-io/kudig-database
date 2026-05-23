@@ -1,5 +1,5 @@
 ---
-title: API Server 证书相关启动参数汇总
+title: API Server 证书相关启动参数汇总 (topic-code-analysis)
 description: 'description: ''| TLS 配置 | `staging/src/k8s.io/apiserver/pkg/server/options/serving.go`'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: API Server 证书相关启动参数汇总
@@ -292,7 +293,7 @@ check_file() {
         echo "[MISSING] $flag not set"
     elif [ -f "$path" ]; then
         echo "[OK] $flag -> $path"
-        if [[ "$path" == *.crt ]]; then
+        if "$path" == *.crt; then
             expiry=$(openssl x509 -in "$path" -noout -enddate 2>/dev/null | cut -d= -f2)
             echo "       Expires: $expiry"
         fi

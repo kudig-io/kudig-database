@@ -1,5 +1,5 @@
 ---
-title: 云厂商集群删除方案对比
+title: 云厂商集群删除方案对比 (topic-code-analysis)
 description: 'title: 云厂商集群删除方案对比'
 category: general
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 云厂商集群删除方案对比

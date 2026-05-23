@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 trigger_keywords:
@@ -448,6 +449,6 @@ tags: [onboarding, oncall, handoff, shift, sre, ops-engineer, k8s-1.28-1.33]
 
 - [[skills/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
 - [[skills/learn-15-scheduling-basics.md|learn-15-scheduling-basics]] — 第15课：调度与亲和性
-- [[skills/learn-inner-training.md|learn-inner-training]] — Kubernetes 培训：Inner Training
+- [[skills/learn-inner-training.md|learn-inner-training]] — [[Kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
 - [[skills/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
 - [[prometheus]] — Prometheus

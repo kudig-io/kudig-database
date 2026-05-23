@@ -1,14 +1,18 @@
 ---
-title: Sermant
-description: 'description: ''## 项目概述'''
-category: general
+title: Sermant (entities)
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- service-mesh
+- sermant
 - prometheus
+- grafana
 - istio
-- ebpf
-- agent
+- cilium
+- opa
+- crd
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -18,259 +22,62 @@ estimated_read_time: 5min
 intent_queries:
 - Sermant 是什么
 - 如何 Sermant
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Sermant
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
 - service-mesh-basics
 - prometheus-basics
+- monitoring-basics
 - ebpf-basics
+- cilium-basics
+- policy-basics
+created: "2026-05-23"
 ---
 
-title: Sermant
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- prometheus
-- istio
-- ebpf
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Sermant 是什么
-- 如何 Sermant
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Sermant
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Sermant
 
-> **成熟度**: Sandbox | **最后更新**: 2026-03
+> **CNCF 状态**: Sandbox | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Java
 
-## 基本信息
-
-| 属性 | 值 |
-|:---|:---|
-| **官网** | https://sermant.io/ |
-| **GitHub** | https://github.com/sermant-io/Sermant |
-| **许可证** | Apache-2.0 |
-| **开发语言** | Java |
-| **CNCF 状态** | Sandbox |
-
----
-
-## 项目概述
+## 概述
 
 Sermant 是华为开源的基于 Java Agent 的无代理服务网格方案，通过 Java Instrumentation 机制（字节码增强）为 Java 微服务提供服务治理能力，无需修改应用代码或部署 Sidecar 代理。它支持流量路由、限流熔断、负载均衡、服务注册发现等功能，特别适合 Java 技术栈的微服务架构。
 
-### 核心特性
+## 核心能力
 
-- **无侵入**: 基于 Java Agent 字节码增强，无需修改业务代码
-- **无 Sidecar**: 不需要额外的代理容器，零网络跳转延迟
-- **流量治理**: 标签路由、灰度发布、流量染色
-- **弹性治理**: 限流、熔断、重试、隔离
-- **注册中心适配**: 支持在不同注册中心间透明迁移（如 Eureka → Nacos）
-- **插件化**: 通过插件机制按需加载治理能力
+- 详见源文档获取完整信息 ^[inferred]
 
----
+## K8s 集成
 
-## 架构设计
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-```
-┌──────────────────────────────────────────────────┐
-│              Sermant Backend                       │
-│  ┌──────────────────────────────────────────┐     │
-│  │  管理控制台 / 配置下发 / 心跳管理         │     │
-│  └──────────────────┬───────────────────────┘     │
-└─────────────────────┼─────────────────────────────┘
-                      │ 配置下发
-┌─────────────────────▼─────────────────────────────┐
-│              Java Application (JVM)                 │
-│                                                     │
-│  ┌──────────────────────────────────────────┐      │
-│  │           Sermant Agent                   │      │
-│  │  (Java Agent / 字节码增强)                │      │
-│  │                                            │      │
-│  │  ┌─────────┐ ┌──────────┐ ┌──────────┐  │      │
-│  │  │流量路由 │ │限流熔断  │ │负载均衡  │  │      │
-│  │  │插件     │ │插件      │ │插件      │  │      │
-│  │  └─────────┘ └──────────┘ └──────────┘  │      │
-│  │  ┌─────────┐ ┌──────────┐ ┌──────────┐  │      │
-│  │  │注册迁移 │ │标签路由  │ │监控上报  │  │      │
-│  │  │插件     │ │插件      │ │插件      │  │      │
-│  │  └─────────┘ └──────────┘ └──────────┘  │      │
-│  └──────────────────────────────────────────┘      │
-│                                                     │
-│  ┌──────────────────────────────────────────┐      │
-│  │        Spring Boot / Dubbo / gRPC         │      │
-│  │        (业务应用 - 无需修改)               │      │
-│  └──────────────────────────────────────────┘      │
-└─────────────────────────────────────────────────────┘
-```
+## 生产部署要点
 
----
+- **插件按需加载**: 只启用需要的插件，减少 Agent 对应用启动时间的影响
+- **灰度验证**: 先在测试环境挂载 Agent，验证字节码增强不影响业务逻辑
+- **版本兼容**: 确认 Sermant 版本与目标框架版本（Spring Boot/Dubbo）兼容
+- **配置热更新**: 利用 Sermant Backend 实现运行时动态调整治理策略
+- **监控集成**: 开启监控插件将治理指标上报到 Prometheus
 
-## 快速开始
+## 架构定位
 
-### 安装
+在 CNCF 生态中，sermant 属于 **Service Mesh** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
-```bash
-# 下载 Sermant
-curl -LO https://github.com/sermant-io/Sermant/releases/latest/download/sermant-agent.tar.gz
-tar xzf sermant-agent.tar.gz
-```
+## 参考链接
 
-### 挂载到 Java 应用
-
-```bash
-# 通过 -javaagent 参数挂载
-java -javaagent:/path/to/sermant-agent/agent/sermant-agent.jar=appName=my-service \
-  -jar my-application.jar
-
-# Kubernetes 中通过 Init Container 注入
-```
-
-### Kubernetes 部署
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-service
-spec:
-  template:
-    spec:
-      initContainers:
-        - name: sermant-init
-          image: sermant/sermant-agent:latest
-          command: ['cp', '-r', '/sermant-agent', '/agent']
-          volumeMounts:
-            - name: agent
-              mountPath: /agent
-      containers:
-        - name: app
-          image: my-service:latest
-          env:
-            - name: JAVA_TOOL_OPTIONS
-              value: "-javaagent:/agent/sermant-agent/agent/sermant-agent.jar=appName=my-service"
-          volumeMounts:
-            - name: agent
-              mountPath: /agent
-      volumes:
-        - name: agent
-          emptyDir: {}
-```
-
-### 配置流量路由
-
-```yaml
-# 标签路由规则
-serviceName: my-service
-matchRules:
-  - headers:
-      x-user-type:
-        exact: vip
-    route:
-      - tags:
-          version: v2
-        weight: 100
-  - route:
-      - tags:
-          version: v1
-        weight: 80
-      - tags:
-          version: v2
-        weight: 20
-```
-
-### 配置限流熔断
-
-```yaml
-# 限流规则
-serviceName: my-service
-rateLimitRules:
-  - apiPath: /api/orders
-    rate: 100        # 每秒 100 次
-  - apiPath: /api/search
-    rate: 500
-
-# 熔断规则
-circuitBreakerRules:
-  - apiPath: /api/payment
-    failureRateThreshold: 50      # 失败率 50% 触发熔断
-    slowCallRateThreshold: 80      # 慢调用率 80% 触发
-    slowCallDurationThreshold: 3000 # 3秒视为慢调用
-    waitDurationInOpenState: 30000  # 熔断 30 秒后半开
-```
-
----
-
-## 与其他方案对比
-
-| 特性 | Sermant | Istio (Sidecar) | Kmesh (eBPF) | Spring Cloud |
-|:---|:---|:---|:---|:---|
-| 实现方式 | Java Agent | Sidecar 代理 | 内核 eBPF | SDK 集成 |
-| 语言限制 | Java 仅 | 任意语言 | 任意语言 | Java 仅 |
-| 额外延迟 | ~0 (进程内) | ~1-3ms | ~0.1ms | ~0 (进程内) |
-| 代码侵入 | 无 | 无 | 无 | 高 |
-| 资源开销 | 低 (JVM 内) | 中 (Sidecar) | 低 (内核) | 无额外开销 |
-| 适用场景 | Java 微服务 | 多语言 | 多语言 | Java 开发 |
-
----
-
-## 最佳实践
-
-1. **插件按需加载**: 只启用需要的插件，减少 Agent 对应用启动时间的影响
-2. **灰度验证**: 先在测试环境挂载 Agent，验证字节码增强不影响业务逻辑
-3. **版本兼容**: 确认 Sermant 版本与目标框架版本（Spring Boot/Dubbo）兼容
-4. **配置热更新**: 利用 Sermant Backend 实现运行时动态调整治理策略
-5. **监控集成**: 开启监控插件将治理指标上报到 Prometheus
-
----
-
-## 参考资源
-
-- [Sermant 官方文档](https://sermant.io/docs/)
-- [Sermant GitHub](https://github.com/sermant-io/Sermant)
-- [Sermant 插件列表](https://sermant.io/docs/plugin/)
-- [CNCF Sandbox Projects](https://www.cncf.io/sandbox-projects/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[entities/prometheus-grafana.md|prometheus-grafana]]
+- [[istio]]
+- [[deployment]]
+- networking.md|cilium-ebpf-networking]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/kmesh.md|kmesh]]
+- [[composefs]] — composefs
+- [[opa]] — OPA (Open Policy Agent)
+- [[serverless-devs]] — Serverless Devs
+- [[prometheus]] — Prometheus
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- sermant
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

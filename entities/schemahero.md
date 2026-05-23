@@ -1,5 +1,5 @@
 ---
-title: SchemaHero
+title: SchemaHero (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # SchemaHero
@@ -74,7 +75,7 @@ SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd.md|argocd]] — ArgoCD
 
-- [[domain-19-landscape-references/sandbox/schemahero/schemahero.md|schemahero]]
+- schemahero
 - [[entities/opengemini.md|openGemini]]
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

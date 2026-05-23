@@ -32,6 +32,7 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 脑机接口架构设计
@@ -43,9 +44,9 @@ tags:
 - industry
 - opa
 - job
-- ingress
+- [[Ingress|ingress]]
 - rbac
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - gpu
 - nvidia
 last_updated: 2026-05-18
@@ -738,7 +739,7 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -753,11 +754,11 @@ data:
 
 ## See Also
 
-- [[domain-20-application-patterns/65-autonomous-driving-sim.md|65-autonomous-driving-sim]]
-- [[domain-20-application-patterns/66-space-internet.md|66-space-internet]]
-- [[domain-20-application-patterns/68-quantum-computing-cloud.md|68-quantum-computing-cloud]]
-- [[domain-20-application-patterns/69-6g-core-network.md|69-6g-core-network]]
+- 65-autonomous-driving-sim
+- 66-space-internet
+- 68-quantum-computing-cloud
+- 69-6g-core-network
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

@@ -39,9 +39,10 @@ prerequisites:
 skill_id: SKILL-K8S_FUNDAMENTALS_QUIZ_ANSWERS-001
 skill_name: K8s 基础知识考核 - 答案解析
 version: 1.0.0
+created: "2026-05-23"
 ---
 
-# K8s 基础知识考核 - 答案解析
+# K8s8s 基础知识考核|K8s 基础知识考核]] - 答案解析
 
 > **版本**: K8s 1.28-1.33 | **仅内部使用**
 
@@ -51,11 +52,11 @@ version: 1.0.0
 
 | 题号 | 答案 | 解析 |
 |------|------|------|
-| 1 | D | Docker 是容器运行时，不是 K8s 核心组件。K8s 支持 containerd/cri-o 等多种运行时。 |
+| 1 | D | Docker 是容器运行时，不是 K8s 核心组件。K8s 支持 [[containerd|containerd]]/cri-o 等多种运行时。 |
 | 2 | D | `Pending` 状态不可能是 "Pod 已经 Running"。Pod 不会在 Running 状态时又回到 Pending。 |
 | 3 | A | Pod 创建后会经过 Pending → ContainerCreating（镜像拉取/容器创建）→ Running。 |
 | 4 | C | ClusterIP 是集群内部的虚拟 IP，仅在集群内可达。 |
-| 5 | C | `kubectl top pods` 查看资源使用，前提是 metrics-server 正常运行。 |
+| 5 | C | `kubectl top [[Pods|pods]]` 查看资源使用，前提是 metrics-server 正常运行。 |
 | 6 | B | PDB（PodDisruptionBudget）可以限制同时不可用的 Pod 数量，实现维护期间的高可用。 |
 | 7 | D | 修改 Deployment 的探针配置会应用到新创建的 Pod，Deployment 是声明式管理的推荐方式。 |
 | 8 | A | `nodeSelector` 用于将 Pod 调度到特定标签的节点。GPU 节点通常有 `nvidia.com/gpu=true` 标签。 |

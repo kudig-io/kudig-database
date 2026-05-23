@@ -29,13 +29,14 @@ prerequisites:
 - gitops-basics
 - redis-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # ArgoCD
 
 ## Overview
 
-ArgoCD is a CNCF graduated project implementing the [[concepts/gitops-principles.md|GitOps]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
+ArgoCD is a CNCF graduated project implementing the [[concepts/gitops-principles.md|[[GitOps 速查卡|GitOps]]]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
 
 ## Architecture
 
@@ -151,8 +152,8 @@ kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller
 - [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[supply-chain-security|Supply Chain Security]]
 
-- [[domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd.md|36-ecosystem-kustomize-helm-argocd]]
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd.md|09-gitops-workflow-argocd]]
+- 36-ecosystem-kustomize-helm-argocd
+- 09-gitops-workflow-argocd
 - [[domain-10-troubleshooting-diagnostics/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
 - [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]

@@ -56,11 +56,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Hubble 网络可观测性 (Hubble Network Observability)
 
-> Hubble 是构建在 Cilium 和 eBPF 之上的完全分布式网络与安全可观测性平台，能够以完全透明的方式深度观测服务通信行为、网络基础设施以及应用层协议。
+> Hubble 是构建在 [[Cilium|Cilium]] 和 eBPF 之上的完全分布式网络与安全可观测性平台，能够以完全透明的方式深度观测服务通信行为、网络基础设施以及应用层协议。
 
 ---
 
@@ -69,10 +70,10 @@ authors:
 1. [Hubble 概述与架构](#1-hubble-概述与架构)
 2. [Hubble 组件详解](#2-hubble-组件详解)
 3. [L3/L4/L7 流量可视化](#3-l3l4l7-流量可视化)
-4. [Service Map 与依赖关系图](#4-service-map-与依赖关系图)
+4. [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
-6. [Prometheus Metrics 导出](#6-prometheus-metrics-导出)
-7. [Hubble 部署与配置 (Helm)](#7-hubble-部署与配置-helm)
+6. [[entities/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
+7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)
 8. [与 Grafana 集成仪表板](#8-与-grafana-集成仪表板)
 9. [故障排查与网络诊断](#9-故障排查与网络诊断)
 10. [企业级可观测性实践](#10-企业级可观测性实践)
@@ -2297,22 +2298,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-35-ebpf-technology MOC]]
+- domain-35-ebpf-technology MOC
 - [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-35 eBPF 技术 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...]]
-- [[domain-03-networking-traffic/02-ebpf-map-types-data-structures.md|eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...]]
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|Tetragon 运行时安全 (Tetragon Runtime Security)]]
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|eBPF 性能优化实践 (eBPF Performance Optimization Practice)]]
-- [[domain-03-networking-traffic/10-ebpf-security-applications.md|eBPF 安全应用案例 (eBPF Security Applications and Use Cases)]]
+- Domain-35 eBPF 技术 — 开源项目索引
+- eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
+- eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
+- Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+- Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...
+- Tetragon 运行时安全 (Tetragon Runtime Security)
+- bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+- eBPF 性能优化实践 (eBPF Performance Optimization Practice)
+- eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
 
 ## See Also
 
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|05-cilium-service-mesh]]
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|06-tetragon-runtime-security]]
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|08-bcc-bpftrace-tools]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|09-ebpf-performance-optimization]]
+- 05-cilium-service-mesh
+- 06-tetragon-runtime-security
+- 08-bcc-bpftrace-tools
+- 09-ebpf-performance-optimization

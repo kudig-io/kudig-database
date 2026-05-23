@@ -46,6 +46,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # KUDIG-DATABASE - Kubernetes 生产运维全域知识库
@@ -602,7 +603,7 @@ Kusheet 是面向**生产环境**的 Kubernetes + AI Infrastructure 运维全域
 | 13 | 运维基础 | [kubernetes-operations-fundamentals](./domain-15-specialized-tech/13-kubernetes-operations-fundamentals.md) | 基础运维命令、集群管理、故障排查 |
 | 14 | 多集群管理 | [multi-cluster-management](./domain-15-specialized-tech/14-multi-cluster-management.md) | Cluster API、注册中心、跨集群部署 |
 | 15 | 监控告警 | [monitoring-alerting-system](./domain-15-specialized-tech/15-monitoring-alerting-system.md) | Prometheus、Grafana、Alertmanager |
-| 16 | 安全合规 | [security-compliance-management](./domain-15-specialized-tech/[[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]]-compliance-management.md) | 零信任架构、RBAC、审计合规 |
+| 16 | 安全合规 | [security-compliance-management](./[[domain-07-platform-engineering/topic-code-analysis/cluster-create/16-security|16-security]]-compliance-management.md) | 零信任架构、RBAC、审计合规 |
 
 ---
 

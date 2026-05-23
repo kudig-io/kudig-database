@@ -54,9 +54,10 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
-# Kubernetes v1.29-v1.33 设计原理演进与影响分析
+# [[Kubernetes|Kubernetes]] v1.29-v1.33 设计原理演进与影响分析
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -103,7 +104,7 @@ API Request → APIServer → CEL 表达式引擎 (内联) → 决策
 | 可扩展 | 通过 CRD 扩展参数类型 |
 | 版本控制 | 与 K8s API 版本同步演进 |
 
-### 1.2 Sidecar Containers：Pod 生命周期语义增强
+### 1.2 [[Sidecar Containers|Sidecar Containers]]：Pod 生命周期语义增强
 
 **设计影响**: 原生 Sidecar (v1.33 GA) 扩展了 Pod 的`initContainers`语义，引入`restartPolicy: Always`。
 
@@ -148,7 +149,7 @@ Terminating
 
 ### 2.1 DRA：控制器模式在硬件资源管理的应用
 
-**设计影响**: Dynamic Resource Allocation (v1.33 GA) 将控制器模式扩展到了**硬件资源分配领域**。
+**设计影响**: [[Dynamic Resource Allocation|Dynamic Resource Allocation]] (v1.33 GA) 将控制器模式扩展到了**硬件资源分配领域**。
 
 ```
 传统 Device Plugin 模式:
@@ -457,22 +458,22 @@ WatchCache 演进:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/17-security-design-patterns.md|17-security-design-patterns]]
-- [[domain-01-cluster-fundamentals/18-performance-optimization-principles.md|18-performance-optimization-principles]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|01-design-principles-foundations]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|02-declarative-api-pattern]]
+- 17-security-design-patterns
+- 18-performance-optimization-principles
+- 01-design-principles-foundations
+- 02-declarative-api-pattern

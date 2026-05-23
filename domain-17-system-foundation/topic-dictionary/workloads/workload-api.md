@@ -30,12 +30,13 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Workload API
 
 ## 概述
-Workload API 是 [[entities/kubernetes|kubernetes]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
+Workload API 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
 
 ## 核心概念/原理
 - **Workload 资源**：属于 `scheduling.k8s.io/v1alpha1` API 组，用于定义一组 Pod 的调度策略和放置约束。
@@ -179,8 +180,8 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload\|gan
 
 ## 交叉引用
 
-- [Workload Reference](workload-reference.md) — Pod 端的 workloadRef 字段说明
-- [Pod Group Policies](pod-group-policies.md) — basic 和 gang 策略的详细行为
+- [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference.md|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
+- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略的详细行为
 - [Jobs](jobs.md) — 批处理 Job 与 Workload API 的集成
 - [CronJob](cronjob.md) — 周期性任务场景下的 Workload 使用
 

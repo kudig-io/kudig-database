@@ -1,5 +1,5 @@
 ---
-title: Java on Kubernetes 综合实践指南
+title: Java on Kubernetes 综合实践指南 (domain-02-workloads-applications)
 description: '# Java on Kubernetes 综合实践指南'
 category: java-kubernetes
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Java on Kubernetes 综合实践指南
@@ -698,7 +699,7 @@ EOF
 
 ## Related
 
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
+- 10-monitoring-metrics-prometheus
 
 - [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
 - [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]

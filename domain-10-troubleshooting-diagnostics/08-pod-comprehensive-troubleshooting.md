@@ -63,6 +63,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
+created: "2026-05-23"
 ---
 
 # 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
@@ -110,7 +111,7 @@ cross_refs:
 | **CrashLoopBackOff** | 反复崩溃 | 应用错误/配置错误/依赖缺失 | `kubectl logs --previous` |
 | **ImagePullBackOff** | 镜像拉取失败 | 镜像不存在/凭证错误/网络问题 | 镜像名/Secret/网络 |
 | **Init:Error** | 初始化失败 | InitContainer错误 | InitContainer日志 |
-| **Terminating** | 删除中 | Finalizer/PV卸载/preStop阻塞 | Finalizers/Events |
+| **Terminating** | 删除中 | Finalizer/PV卸载/preStop阻塞 | [[Finalizers|Finalizers]]/Events |
 | **Unknown** | 状态未知 | 节点失联/kubelet故障 | 节点状态/kubelet |
 | **Evicted** | 被驱逐 | 资源压力/节点维护 | 节点状态/资源 |
 | **OOMKilled** | 内存溢出 | 内存超限 | 容器limits/应用内存 |
@@ -164,7 +165,7 @@ cross_refs:
 | **资源不足** | Insufficient cpu/memory | `kubectl describe nodes \| grep -A5 Allocated` | 扩容/调整requests |
 | **节点选择** | didn't match node selector | `kubectl get nodes --show-labels` | 修改selector/添加标签 |
 | **污点容忍** | had taint...didn't tolerate | `kubectl describe nodes \| grep Taints` | 添加tolerations |
-| **亲和性** | didn't match pod affinity | `kubectl get pods -o wide` | 调整affinity规则 |
+| **亲和性** | didn't match pod affinity | `kubectl get [[Pods|pods]] -o wide` | 调整affinity规则 |
 | **PVC绑定** | unbound PersistentVolumeClaims | `kubectl get pvc` | 创建PV/检查StorageClass |
 | **配额限制** | exceeded quota | `kubectl describe quota -n <ns>` | 调整quota/清理资源 |
 | **调度器** | no nodes available | `kubectl get nodes` | 检查节点状态 |
@@ -583,9 +584,9 @@ kubectl top pod $POD -n $NS 2>/dev/null || echo "Metrics not available"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

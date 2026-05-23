@@ -36,9 +36,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
-title: 05 - StatefulSet YAML 配置参考
+title: 05 - [[StatefulSet|StatefulSet]] YAML 配置参考
 description: '# 05 - StatefulSet YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -46,7 +47,7 @@ tags:
 - yaml
 - manifest
 - template
-- prometheus
+- [[Prometheus|prometheus]]
 - docker
 - ceph
 - redis
@@ -63,7 +64,7 @@ estimated_read_time: 10min
 intent_queries:
 - StatefulSet YAML 配置参考 是什么
 - 如何 StatefulSet YAML 配置参考
-- Kubernetes 32 yaml manifests 最佳实践
+- [[Kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
 trigger_keywords:
 - StatefulSet
 - YAML
@@ -351,13 +352,13 @@ spec:
         - |
           set -ex
           # 根据 Pod 序号判断角色
-          [[ $(hostname) =~ -([0-9]+)$ ]] || exit 1
+          $(hostname) =~ -([0-9]+)$ || exit 1
           ordinal=${BASH_REMATCH[1]}
           echo [mysqld] > /mnt/conf.d/server-id.cnf
           # server-id 必须唯一
           echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
           # mysql-0 为主库,其余为从库
-          if [[ $ordinal -eq 0 ]]; then
+          if $ordinal -eq 0; then
             cp /mnt/config-map/master.cnf /mnt/conf.d/
           else
             cp /mnt/config-map/slave.cnf /mnt/conf.d/
@@ -376,9 +377,9 @@ spec:
         - |
           set -ex
           # 跳过主库的数据克隆
-          [[ $(hostname) =~ -([0-9]+)$ ]] || exit 1
+          $(hostname) =~ -([0-9]+)$ || exit 1
           ordinal=${BASH_REMATCH[1]}
-          [[ $ordinal -eq 0 ]] && exit 0
+          $ordinal -eq 0 && exit 0
           # 从前一个 Pod 克隆数据
           ncat --recv-only mysql-$(($ordinal-1)).mysql-headless 3307 | xbstream -x -C /var/lib/mysql
           xtrabackup --prepare --target-dir=/var/lib/mysql
@@ -463,13 +464,13 @@ spec:
           set -ex
           cd /var/lib/mysql
           # 从库启动 binlog 传输服务
-          if [[ -f xtrabackup_slave_info ]]; then
+          if -f xtrabackup_slave_info; then
             mv xtrabackup_slave_info change_master_to.sql.in
             sed -i "s/MASTER_LOG_FILE/CHANGE MASTER TO MASTER_LOG_FILE/g" change_master_to.sql.in
             rm -f xtrabackup_binlog_info
-          elif [[ -f xtrabackup_binlog_info ]]; then
+          elif -f xtrabackup_binlog_info; then
             # 主库初始化
-            [[ $(cat xtrabackup_binlog_info) =~ ^(.*?)[[:space:]]+(.*?)$ ]] || exit 1
+            $(cat xtrabackup_binlog_info) =~ ^(.*?):space:+(.*?)$ || exit 1
             echo "CHANGE MASTER TO MASTER_LOG_FILE='${BASH_REMATCH[1]}',\
               MASTER_LOG_POS=${BASH_REMATCH[2]}" > change_master_to.sql.in
           fi
@@ -1388,22 +1389,22 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10 - Ingress / IngressClass YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03-pod-specification-complete]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04-deployment-replicaset]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06-daemonset-reference]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07-job-cronjob-reference]]
+- 03-pod-specification-complete
+- 04-deployment-replicaset
+- 06-daemonset-reference
+- 07-job-cronjob-reference

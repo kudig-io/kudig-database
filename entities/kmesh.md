@@ -1,5 +1,5 @@
 ---
-title: Kmesh
+title: Kmesh (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Kmesh
@@ -74,6 +75,6 @@ Kmesh 是一个基于 eBPF 和可编程内核的无 Sidecar 服务网格，在�
 - [[envoy]] — Envoy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kmesh/kmesh.md|kmesh]]
+- kmesh
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

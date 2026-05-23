@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Multi-Tenancy Isolation
@@ -42,7 +43,7 @@ Multiple tenants share one cluster, isolated by:
 | **RBAC** | Access control (Role + RoleBinding per namespace) |
 | **ResourceQuota** | CPU, memory, storage, PVC count limits |
 | **LimitRange** | Default/limits for containers without explicit settings |
-| **NetworkPolicy** | Network traffic between namespaces |
+| **[[NetworkPolicy|NetworkPolicy]]** | Network traffic between namespaces |
 | **Pod Security Standards** | Container security enforcement level |
 
 ## Hard Isolation

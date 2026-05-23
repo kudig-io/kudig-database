@@ -52,12 +52,13 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
   label: '故障树: gateway-api'
+created: "2026-05-23"
 ---
 
 # 11 - Gateway API 核心资源 YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
-> **相关领域**: [域5-网络](../domain-03-networking-traffic/) | **前置知识**: Service, Ingress  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
+> **相关领域**: [域5-网络](../domain-03-networking-traffic/) | **前置知识**: [[Service|Service]], [[Ingress|Ingress]]  
 > **关联配置**: [12-高级路由](./12-gateway-api-advanced-routes.md) | [Ingress参考](./08-ingress-all-classes.md)
 
 ---
@@ -2093,22 +2094,22 @@ kubectl logs -n gateway-system -l app=gateway-controller
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09-endpoints-endpointslice]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10-ingress-ingressclass]]
-- [[domain-18-manifests-patterns/12-gateway-api-advanced-routes.md|12-gateway-api-advanced-routes]]
-- [[domain-18-manifests-patterns/13-configmap-reference.md|13-configmap-reference]]
+- 09-endpoints-endpointslice
+- 10-ingress-ingressclass
+- 12-gateway-api-advanced-routes
+- 13-configmap-reference

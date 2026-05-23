@@ -1,5 +1,5 @@
 ---
-title: KubeVela
+title: KubeVela [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # KubeVela
@@ -69,7 +70,7 @@ KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规�
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[flux]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[deployment]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 
@@ -81,6 +82,6 @@ KubeVela 是现代应用交付平台，实现了开放应用模型（OAM）规�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd.md|argocd]] — ArgoCD
 
-- [[domain-19-landscape-references/incubating/kubevela/kubevela.md|kubevela]]
+- kubevela
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

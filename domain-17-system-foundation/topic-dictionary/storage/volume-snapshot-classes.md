@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Volume Snapshot Classes（卷快照类）
@@ -51,7 +52,7 @@ VolumeSnapshotClass 与 StorageClass 类似，它提供了一种由管理员描�
 
 ### 默认 VolumeSnapshotClass
 
-- 通过注解 `snapshot.storage.kubernetes.io/is-default-class: "true"` 标记默认类。
+- 通过注解 `snapshot.storage.[[Kubernetes|kubernetes]].io/is-default-class: "true"` 标记默认类。
 - 当创建 VolumeSnapshot 未指定 `volumeSnapshotClassName` 时，Kubernetes 会自动选择一个默认 VolumeSnapshotClass。
 - **匹配规则**：系统会根据 PVC 的 StorageClass 所使用的 CSI 驱动，选择具有相同 CSI `driver` 的默认 VolumeSnapshotClass。
 - 每个 CSI 驱动应只配置一个默认 VolumeSnapshotClass；如果同一驱动存在多个默认类，创建快照将失败。
@@ -139,6 +140,6 @@ kubectl describe volumesnapshotclass csi-ebs-snapclass-retain
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

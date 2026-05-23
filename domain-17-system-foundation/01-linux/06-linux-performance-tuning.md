@@ -49,6 +49,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
@@ -59,7 +60,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-性能调优是 Linux 系统运维中最具挑战性的领域之一。在 Kubernetes 环境中，性能问题往往会层层传导——宿主机的 CPU 调度延迟会影响到容器内应用的响应时间，节点的内存压力会触发 OOM Killer 终止 Pod，磁盘 I/O 瓶颈会导致 etcd 读写超时进而影响整个集群的稳定性。本文档系统性地讲解 Linux 性能分析方法论、全栈监控工具链、以及针对 CPU、内存、I/O、网络四大子系统的调优策略，特别关注容器和 Kubernetes 场景下的性能优化实践。
+性能调优是 Linux 系统运维中最具挑战性的领域之一。在 [[Kubernetes|Kubernetes]] 环境中，性能问题往往会层层传导——宿主机的 CPU 调度延迟会影响到容器内应用的响应时间，节点的内存压力会触发 OOM Killer 终止 Pod，磁盘 I/O 瓶颈会导致 [[etcd|etcd]] 读写超时进而影响整个集群的稳定性。本文档系统性地讲解 Linux 性能分析方法论、全栈监控工具链、以及针对 CPU、内存、I/O、网络四大子系统的调优策略，特别关注容器和 Kubernetes 场景下的性能优化实践。
 
 ---
 
@@ -756,7 +757,7 @@ dmesg | grep -i -E "error|oom|hung_task|blocked for" | tail -5
 
 #<!-- chunk: eBPF 高级性能分析 -->## eBPF 高级性能分析
 
-eBPF (extended Berkeley Packet Filter) 是现代 Linux 性能分析的革命性技术，允许在内核中安全地运行沙箱程序，无需修改内核源码。Cilium、Falco 等云原生工具都基于 eBPF 构建。
+eBPF (extended Berkeley Packet Filter) 是现代 Linux 性能分析的革命性技术，允许在内核中安全地运行沙箱程序，无需修改内核源码。Cilium、[[Falco|Falco]] 等云原生工具都基于 eBPF 构建。
 
 ```bash
 # BCC 工具集安装
@@ -846,11 +847,11 @@ bpftrace -e 'profile:hz:99 /pid == <pid>/ { @[ustack] = count(); }'
 
 ## See Also
 
-- [[domain-17-system-foundation/04-linux-networking-configuration.md|04-linux-networking-configuration]]
-- [[domain-17-system-foundation/05-linux-storage-management.md|05-linux-storage-management]]
-- [[domain-17-system-foundation/07-linux-security-hardening.md|07-linux-security-hardening]]
-- [[domain-17-system-foundation/08-linux-container-fundamentals.md|08-linux-container-fundamentals]]
+- 04-linux-networking-configuration
+- 05-linux-storage-management
+- 07-linux-security-hardening
+- 08-linux-container-fundamentals
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

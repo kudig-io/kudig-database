@@ -1,5 +1,5 @@
 ---
-title: Kubernetes扩展生态企业级最佳实践
+title: Kubernetes扩展生态企业级最佳实践 (reports)
 description: '# Kubernetes扩展生态企业级最佳实践'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - monitoring-basics
 - gitops-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes扩展生态企业级最佳实践
@@ -185,7 +186,7 @@ func SetupConversionWebhook(mgr ctrl.Manager) error {
 ### 1.3 安全加固与访问控制
 
 ```yaml
-# crd-[[domain-11-production-operations/topic-best-practices/scenarios/security-hardening|security-hardening]].yaml
+# crd-security-hardening.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:

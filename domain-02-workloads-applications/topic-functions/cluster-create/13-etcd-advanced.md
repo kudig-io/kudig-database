@@ -1,4 +1,45 @@
 ---
+title: etcd 进阶: HA 集群管理与性能调优 [cluster-create]
+description: 'title: ''etcd 进阶: HA 集群管理与性能调优'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- prometheus
+- coredns
+- containerd
+- job
+- cronjob
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 'etcd 进阶: HA 集群管理与性能调优 是什么'
+- '如何 etcd 进阶: HA 集群管理与性能调优'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- etcd
+- '进阶:'
+- HA
+- 集群管理与性能调优
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 'etcd 进阶: HA 集群管理与性能调优'
 description: '# etcd 进阶: HA 集群管理与性能调优'
 category: functions
@@ -43,11 +84,6 @@ trigger_keywords:
 - quorum
 - Prometheus
 - monitoring
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -58,6 +94,15 @@ related_topics:
 - backup
 - disaster recovery
 - monitoring
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # etcd 进阶: HA 集群管理与性能调优
@@ -743,5 +788,10 @@ ETCDCTL_API=3 etcdctl member list -w table \
 
 ## Related
 
+- [[hot.md|hot]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/coredns.md|coredns]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

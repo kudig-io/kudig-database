@@ -27,11 +27,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # 资源调度故障排查
 
-### 01 Resources Quota Troubleshooting
+### 01 Resources Quota Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

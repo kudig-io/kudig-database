@@ -1,5 +1,5 @@
 ---
-title: KubeClipper
+title: KubeClipper [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KubeClipper
@@ -67,16 +68,16 @@ KubeClipper 是一个轻量级的 Kubernetes 集群全生命周期管理平台�
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[cilium]]
 - [[containerd]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 
 ## Related
 
 - [[kmesh]] — Kmesh
 - [[kpt]] — kpt
-- [[logging-operator]] — Logging Operator
+- [[logging-operator]] — Loggingng Operator|Logging Operator]]
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubeclipper/kubeclipper.md|kubeclipper]]
+- kubeclipper
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

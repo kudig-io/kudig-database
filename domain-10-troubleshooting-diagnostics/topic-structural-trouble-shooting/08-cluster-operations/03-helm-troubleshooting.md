@@ -1,5 +1,5 @@
 ---
-title: Helm 部署故障排查指南
+title: Helm 部署故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Helm 部署故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,9 +40,10 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-title: Helm 部署故障排查指南
+title: [[Helm|Helm]] 部署故障排查指南
 description: '# Helm 部署故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -52,7 +53,7 @@ tags:
 - helm
 - mysql
 - job
-- ingress
+- [[Ingress|ingress]]
 - rbac
 last_updated: 2026-05
 difficulty: advanced
@@ -86,7 +87,7 @@ k8s_versions:
 
 # Helm 部署故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32, Helm v3.12+ | **最后更新**: 2026-01 | **难度**: 中级-高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32, Helm v3.12+ | **最后更新**: 2026-01 | **难度**: 中级-高级
 >
 > **版本说明**:
 > - Helm v3.12+ 支持 OCI registry 作为 chart 仓库
@@ -697,13 +698,13 @@ helm install <release> <chart> --dry-run --debug
 ### 相关文档
 
 - [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
-- [Deployment 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]].md)
-- [ConfigMap/Secret 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]].md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [ConfigMap/Secret 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

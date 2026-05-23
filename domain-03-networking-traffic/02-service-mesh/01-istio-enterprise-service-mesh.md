@@ -59,9 +59,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# Istio 企业级服务网格架构与实践
+# [[Istio|Istio]] 企业级服务网格架构与实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Istio v1.29+ | **难度**: 高级
 
@@ -71,7 +72,7 @@ cross_refs:
 
 Istio 是业界领先的开源服务网格平台，由 Google、IBM、Lyft 于2017年联合推出，2023年正式成为 CNCF 毕业项目。作为企业级微服务架构的核心基础设施，Istio 提供了流量管理、安全控制、可观测性和策略执行四大核心能力。通过将通信逻辑从应用代码中剥离到基础设施层（Sidecar 代理或节点级代理），Istio 使得微服务治理变得透明化、声明式和可编程。
 
-Istio 的技术架构在2026年已经非常成熟，支持两种数据平面模式：传统的 Sidecar 模式（每个 Pod 注入一个 Envoy 代理）和新兴的 Ambient 模式（节点级 ztunnel + 按需 Waypoint Proxy）。两种模式可以共存于同一个集群，为企业提供了平滑的迁移路径。Istio 的控制平面 istiod 集成了服务发现（Pilot）、证书管理（Citadel）和配置验证（Galley）三大功能，以单二进制方式运行，大幅简化了部署和运维。
+Istio 的技术架构在2026年已经非常成熟，支持两种数据平面模式：传统的 Sidecar 模式（每个 Pod 注入一个 [[Envoy|Envoy]] 代理）和新兴的 Ambient 模式（节点级 ztunnel + 按需 Waypoint Proxy）。两种模式可以共存于同一个集群，为企业提供了平滑的迁移路径。Istio 的控制平面 istiod 集成了服务发现（Pilot）、证书管理（Citadel）和配置验证（Galley）三大功能，以单二进制方式运行，大幅简化了部署和运维。
 
 本文档从生产环境运维专家角度，深入探讨 Istio 的企业级部署架构、流量管理实战、安全策略配置、可观测性集成、性能调优和故障排查。所有配置均基于 Istio v1.29，涵盖传统 Sidecar 模式和新兴的 Ambient Mesh 模式，并提供可直接用于生产环境的完整 YAML 配置。
 
@@ -1086,7 +1087,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 | PILOT_EVICTION_INTERVAL | 0s | 清理无效代理配置的间隔 | 30s |
 | PILOT_CERT_PROVIDER | istiod | 证书提供者类型 | istiod |
 | ENABLE_DEBUG_ON_HTTP | true | 是否启用 /debug 端点 | false (生产) |
-| KUBE_API_REQUEST_TIMEOUT | 60s | Kubernetes API 请求超时 | 60s |
+| KUBE_API_REQUEST_TIMEOUT | 60s | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 请求超时 | 60s |
 | PILOT_WORKLOAD_ENTRY_GRACE_PERIOD | 30s | WorkloadEntry 注入后的宽限期 | 30s |
 | PILOT_SIDECAR_ENABLE_INBOUND_PASSTHROUGH_PORTS | true | 是否允许入站流量直通 | 按需 |
 
@@ -1145,7 +1146,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 
 ---
 
-<!-- chunk: 多集群部署 — Istio [[domain-11-production-operations/topic-best-practices/scenarios/multi-cluster.md|multi-cluster]] -->## 多集群部署 — Istio Multi-Cluster
+<!-- chunk: 多集群部署 — Istio multi-cluster -->## 多集群部署 — Istio Multi-Cluster
 
 #<!-- chunk: 多集群架构概述 -->## 多集群架构概述
 
@@ -1329,26 +1330,31 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/99-linkerd-service-mesh-guide.md|99-linkerd-service-mesh-guide]]
-- [[domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md|99-spring-cloud-kubernetes-service-mesh-guide]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|02-linkerd-enterprise-service-mesh]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|03-consul-connect-enterprise]]
+- 99-linkerd-service-mesh-guide
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 02-linkerd-enterprise-service-mesh
+- 03-consul-connect-enterprise
 
 ## Related
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+
+## 相关合成分析
+
+- [[synthesis/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
+

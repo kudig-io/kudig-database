@@ -43,9 +43,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 腾讯云 TKE (Tencent Kubernetes Engine) 概述
+title: 腾讯云 TKE (Tencent [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# 腾讯云 TKE (Tencent Kubernetes Engine) 概述'
 category: cloud-provider
 tags:
@@ -56,7 +57,7 @@ tags:
 - aks
 - ack
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 last_updated: 2026-05
@@ -1040,7 +1041,7 @@ main() {
             
             # 验证恢复结果
             local remaining_issues=($(detect_cluster_issues))
-            if [[ ! " ${remaining_issues[*]} " =~ " ${issue} " ]]; then
+            if ! " ${remaining_issues[*]} " =~ " ${issue} "; then
                 echo "✅ 问题 $issue 已解决"
                 break
             elif [ $i -eq $MAX_RETRY ]; then
@@ -1879,11 +1880,11 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

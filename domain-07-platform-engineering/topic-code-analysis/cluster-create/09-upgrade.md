@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 集群升级流程 kubeadm upgrade
@@ -84,7 +85,7 @@ related_topics:
 - cluster-create/01-overview
 - cluster-create/03-certs
 - cluster-create/07-etcd
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
 authors:
 - name: KUDIG Team
   role: contributor

@@ -1,29 +1,4 @@
 ---
-title: Deep Research Assessment
-description: 'title: 深度研究能力评估报告'
-category: references
-tags:
-- paper
-- apiserver
-- rag
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- Deep Research Assessment 是什么
-- 如何 Deep Research Assessment
-trigger_keywords:
-- Deep
-- Research
-- Assessment
-prerequisites:
-- kubectl-basics
----
-
 title: 深度研究能力评估报告
 description: '# 深度研究能力评估报告'
 category: general
@@ -43,16 +18,11 @@ intent_queries:
 - 如何 深度研究能力评估报告
 trigger_keywords:
 - 深度研究能力评估报告
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
 ---
+
 # 深度研究能力评估报告
 
 > **版本**: v1.0
@@ -100,7 +70,7 @@ k8s_versions:
 | Category | 当前语料条数 | 建议目标 | 差距 |
 |----------|-------------|---------|------|
 | TC-INFRA-NODE | ~15条 | 500+ | -485 |
-| TC-APP-POD | ~12条 | 500+ | -488 |
+| TC-APP-[[concepts/pod-lifecycle|pod]] | ~12条 | 500+ | -488 |
 | TC-INFRA-NET | ~10条 | 500+ | -490 |
 | TC-SEC | ~8条 | 500+ | -492 |
 | TC-DATA | 0条 | 500+ | -500 |
@@ -211,7 +181,7 @@ tool_schema:
 kudig:FTA-001 rdf:type kudig:FaultTree .
 kudig:FTA-001 kudig:hasRootCause kudig:RC-001 .
 kudig:RC-001 kudig:relatedTo kudig:SKILL-NODE-001 .
-kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-12-troubleshooting .
+kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-10-troubleshooting-diagnostics .
 ```
 
 ---
@@ -228,27 +198,3 @@ kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-12-troubleshooting .
 ---
 
 **下一步行动**: 开始意图语料扩充，按Category优先级依次执行。
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|kudig-database 质量盲区深度扫描报告]]
-
-## Related
-
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19]]

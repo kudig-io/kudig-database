@@ -59,6 +59,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # 15 - 阿里云特定集成表
@@ -98,7 +99,7 @@ cross_refs:
 | **漏洞扫描** | ACR企业版 | - | 自动扫描CVE |
 | **镜像签名** | ACR企业版 | v1.28+ | 内容信任验证 |
 | **制品同步** | ACR配置 | - | 跨地域镜像同步 |
-| **Helm Chart** | ACR企业版 | - | Helm Chart仓库 |
+| **[[Helm|Helm]] Chart** | ACR企业版 | - | Helm Chart仓库 |
 
 ```yaml
 # ACK免密拉取配置
@@ -154,7 +155,7 @@ volumeBindingMode: WaitForFirstConsumer
 
 | 注解 | 用途 | 示例值 |
 |-----|------|-------|
-| `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec` | SLB规格 | slb.s2.small |
+| `[[Service|service]].beta.[[Kubernetes|kubernetes]].io/alibaba-cloud-loadbalancer-spec` | SLB规格 | slb.s2.small |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type` | 地址类型 | internet/intranet |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-id` | 复用已有SLB | lb-xxx |
 | `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-force-override-listeners` | 覆盖监听 | true |
@@ -1134,25 +1135,25 @@ echo "=== 10. 成本提醒 ==="
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/27-cost-management-kubecost.md|27-cost-management-kubecost]]
-- [[domain-14-ai-ml-infra/28-green-computing-sustainability.md|28-green-computing-sustainability]]
-- [[domain-14-ai-ml-infra/30-ai-security-compliance.md|30-ai-security-compliance]]
-- [[domain-14-ai-ml-infra/31-ai-platform-governance.md|31-ai-platform-governance]]
+- 27-cost-management-kubecost
+- 28-green-computing-sustainability
+- 30-ai-security-compliance
+- 31-ai-platform-governance
 
 ## Related
 

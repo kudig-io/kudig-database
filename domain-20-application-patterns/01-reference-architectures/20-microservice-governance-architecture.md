@@ -40,10 +40,11 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 微服务治理与Service Mesh架构设计
-description: '# 微服务治理与 Service Mesh Kubernetes 生产架构设计'
+description: '# 微服务治理与 [[Service|Service]]Service Mesh）|Service Mesh]] [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -694,7 +695,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -709,7 +710,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/18-data-midplatform-architecture.md|18-data-midplatform-architecture]]
-- [[domain-20-application-patterns/19-cloudnative-devops-architecture.md|19-cloudnative-devops-architecture]]
-- [[domain-20-application-patterns/21-cross-border-ecommerce.md|21-cross-border-ecommerce]]
-- [[domain-20-application-patterns/22-nev-connected-vehicle.md|22-nev-connected-vehicle]]
+- 18-data-midplatform-architecture
+- 19-cloudnative-devops-architecture
+- 21-cross-border-ecommerce
+- 22-nev-connected-vehicle

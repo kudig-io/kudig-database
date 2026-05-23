@@ -54,6 +54,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md
   label: '故障树: monitoring'
+created: "2026-05-23"
 ---
 
 # 12 - 存储监控告警与性能调优
@@ -933,25 +934,25 @@ kubectl get pvc --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namesp
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05 - CSI驱动集成与运维管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09 - PV/PVC故障排查与解决方案]]
+- domain-04-storage-data KUDIG Database — Global MOC
+- [[domain-04-storage-data/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- index.md|Domain-6 存储 — 开源项目索引]]
+- 存储架构概览与核心组件
+- PV/PVC 核心概念与企业级实践
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 05 - CSI驱动集成与运维管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 09 - PV/PVC故障排查与解决方案
 
 ## See Also
 
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10-storage-backup-disaster-recovery]]
-- [[domain-04-storage-data/11-storage-advanced-features.md|11-storage-advanced-features]]
-- [[domain-04-storage-data/13-storage-security-compliance.md|13-storage-security-compliance]]
-- [[domain-04-storage-data/14-cloud-native-storage.md|14-cloud-native-storage]]
+- 10-storage-backup-disaster-recovery
+- 11-storage-advanced-features
+- 13-storage-security-compliance
+- 14-cloud-native-storage
 
 ## Related
 

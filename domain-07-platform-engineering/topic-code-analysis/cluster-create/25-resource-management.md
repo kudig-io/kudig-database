@@ -1,5 +1,5 @@
 ---
-title: 资源管理与配额控制 (Resource Management)
+title: 资源管理与配额控制 (Resource Management) [cluster-create]
 description: 'title: 资源管理与配额控制 (Resource Management)'
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 资源管理与配额控制 (Resource Management)

@@ -1,5 +1,5 @@
 ---
-title: DaemonSet 故障排查指南
+title: DaemonSet 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: DaemonSet 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,18 +42,19 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-title: DaemonSet 故障排查指南
+title: [[DaemonSet|DaemonSet]] 故障排查指南
 description: '# DaemonSet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - controller-manager
-- cilium
+- [[Cilium|cilium]]
 - flannel
 - calico
 - daemonset
@@ -865,13 +866,13 @@ kubectl logs -n kube-system -l k8s-app=kube-dns
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [kubelet 故障排查](../02-node-components/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
-- [CNI 故障排查](../03-networking/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]].md)
-- [kube-proxy 故障排查](../02-node-components/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]].md)
+- [CNI 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|01-cni-troubleshooting]].md)
+- [kube-proxy 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting|02-kube-proxy-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

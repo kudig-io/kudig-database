@@ -49,11 +49,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 03 - API 网关选型指南与对比矩阵
 
-> **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: 选型, 对比, Higress, APISIX, Kong, Envoy Gateway, Traefik
+> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: 选型, 对比, Higress, APISIX, Kong, [[Envoy|Envoy]] Gateway, Traefik
 
 ## 目录
 
@@ -101,7 +102,7 @@ API 网关选型需综合考虑以下维度：
 | Header/Query 匹配 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 域名路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 通配符域名 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| gRPC 路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [[gRPC|gRPC]] 路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | WebSocket | ✅ | ✅ | ✅ | ✅ | ✅ |
 | TCP/UDP 代理 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 流量分割/金丝雀 | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -318,22 +319,22 @@ API 网关选型需综合考虑以下维度：
 
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
-- [[domain-03-networking-traffic/10-wasm-plugin-ecosystem.md|10 - Wasm 插件生态与开发实践]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
+- 10 - Wasm 插件生态与开发实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01-api-gateway-architecture-overview]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02-kubernetes-gateway-api-deep-dive]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04-higress-enterprise-gateway]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05-apisix-enterprise-gateway]]
+- 01-api-gateway-architecture-overview
+- 02-kubernetes-gateway-api-deep-dive
+- 04-higress-enterprise-gateway
+- 05-apisix-enterprise-gateway

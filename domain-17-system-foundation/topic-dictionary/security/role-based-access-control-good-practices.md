@@ -30,13 +30,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 基于角色的访问控制（RBAC）最佳实践
 
 ## 概述
 
-Kubernetes RBAC 是确保集群用户和工作负载仅拥有执行其角色所需资源访问权限的关键安全控制。设计权限时，集群管理员需要理解可能发生权限升级的区域，以降低过度访问导致安全事件的风险。本文档提供的最佳实践应与通用 RBAC 文档结合阅读。
+[[Kubernetes|Kubernetes]] RBAC 是确保集群用户和工作负载仅拥有执行其角色所需资源访问权限的关键安全控制。设计权限时，集群管理员需要理解可能发生权限升级的区域，以降低过度访问导致安全事件的风险。本文档提供的最佳实践应与通用 RBAC 文档结合阅读。
 
 ## 核心概念/原理
 
@@ -54,7 +55,7 @@ RBAC 的核心设计原则是**最小权限（Least Privilege）**。理想情�
 
 - **最小化特权令牌分发**：
   - 避免为 Pod 分配被授予强大权限的服务账号。
-  - 限制运行高权限 Pod 的节点数量，确保 DaemonSet 以最小权限运行。
+  - 限制运行高权限 Pod 的节点数量，确保 [[DaemonSet|DaemonSet]] 以最小权限运行。
   - 避免将高权限 Pod 与不受信任或暴露于公网的 Pod 运行在同一节点上。可以使用 Taints/Tolerations、NodeAffinity 或 PodAntiAffinity 进行隔离。
 
 - **加固默认配置**：
@@ -69,8 +70,8 @@ RBAC 的核心设计原则是**最小权限（Least Privilege）**。理想情�
 
 以下权限如果被不当授予，可能导致用户或服务账号提升权限：
 
-- **列出 Secret（list secrets）**：`list` 和 `watch` 访问权限实际上允许用户获取所有 Secret 的内容（例如 `kubectl get secrets -A -o yaml` 的输出包含所有 Secret 数据）。
-- **创建工作负载（Workload creation）**：在命名空间中创建 Pod 或管理工作负载的权限，隐式授予对该命名空间中 Secrets、ConfigMaps、PersistentVolumes 的访问权，还可以使用命名空间中的任何 ServiceAccount 的 API 访问级别。
+- **列出 Secret（list [[Secrets|secrets]]）**：`list` 和 `watch` 访问权限实际上允许用户获取所有 Secret 的内容（例如 `kubectl get secrets -A -o yaml` 的输出包含所有 Secret 数据）。
+- **创建工作负载（Workload creation）**：在命名空间中创建 Pod 或管理工作负载的权限，隐式授予对该命名空间中 Secrets、[[ConfigMaps|ConfigMaps]]、PersistentVolumes 的访问权，还可以使用命名空间中的任何 ServiceAccount 的 API 访问级别。
 - **创建 PersistentVolume**：允许创建任意 PersistentVolume 意味着可以创建 `hostPath` 卷，从而获得对节点底层文件系统的访问权。
 - **访问 `nodes/proxy` 子资源**：拥有 `nodes/proxy` 的 `get` 权限即可访问 Kubelet API，执行节点上任何容器的命令，且该访问**不是只读权限**。
 - **escalate 动词**：允许用户创建比自己拥有更多权限的 ClusterRole。

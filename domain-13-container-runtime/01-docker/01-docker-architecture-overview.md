@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: Docker 架构概述与核心概念
@@ -40,9 +41,9 @@ tags:
 - docker
 - container
 - image
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- containerd
+- [[containerd|containerd]]
 - cri-o
 - mysql
 - rag
@@ -57,7 +58,7 @@ estimated_read_time: 10min
 intent_queries:
 - Docker 架构概述与核心概念 是什么
 - 如何 Docker 架构概述与核心概念
-- Kubernetes 13 docker 最佳实践
+- [[Kubernetes|Kubernetes]] 13 docker 最佳实践
 trigger_keywords:
 - Docker
 - 架构概述与核心概念
@@ -616,91 +617,91 @@ Image Index (多架构索引)
 
 ## Related
 
-- [[domain-20-application-patterns/45-smart-port-shipping.md|45-smart-port-shipping]]
-- [[domain-20-application-patterns/65-autonomous-driving-sim.md|65-autonomous-driving-sim]]
-- [[domain-20-application-patterns/84-national-park.md|84-national-park]]
-- [[domain-20-application-patterns/83-cultural-digitization.md|83-cultural-digitization]]
-- [[domain-20-application-patterns/94-smart-prison.md|94-smart-prison]]
-- [[domain-20-application-patterns/30-hrtech-saas.md|30-hrtech-saas]]
-- [[domain-20-application-patterns/68-quantum-computing-cloud.md|68-quantum-computing-cloud]]
-- [[domain-20-application-patterns/64-ai-drug-discovery.md|64-ai-drug-discovery]]
-- [[domain-20-application-patterns/91-urban-air-mobility.md|91-urban-air-mobility]]
-- [[domain-20-application-patterns/21-cross-border-ecommerce.md|21-cross-border-ecommerce]]
-- [[domain-20-application-patterns/71-smart-tax.md|71-smart-tax]]
-- [[domain-20-application-patterns/03-cms-architecture.md|03-cms-architecture]]
-- [[domain-20-application-patterns/85-hydrogen-energy.md|85-hydrogen-energy]]
-- [[domain-20-application-patterns/18-data-midplatform-architecture.md|18-data-midplatform-architecture]]
-- [[domain-20-application-patterns/16-video-shortform-architecture.md|16-video-shortform-architecture]]
-- [[domain-20-application-patterns/55-crossborder-dtc.md|55-crossborder-dtc]]
-- [[domain-20-application-patterns/27-hospitality-tourism.md|27-hospitality-tourism]]
-- [[domain-20-application-patterns/40-cloud-gaming.md|40-cloud-gaming]]
-- [[domain-20-application-patterns/87-flexible-manufacturing.md|87-flexible-manufacturing]]
-- [[domain-20-application-patterns/34-sportstech.md|34-sportstech]]
-- [[domain-20-application-patterns/93-digital-twin-factory.md|93-digital-twin-factory]]
-- [[domain-20-application-patterns/28-proptech.md|28-proptech]]
-- [[domain-20-application-patterns/09-gaming-backend-architecture.md|09-gaming-backend-architecture]]
-- [[domain-20-application-patterns/59-industrial-internet-platform.md|59-industrial-internet-platform]]
-- [[domain-20-application-patterns/54-social-gaming-metaverse.md|54-social-gaming-metaverse]]
-- [[domain-20-application-patterns/31-instant-retail.md|31-instant-retail]]
-- [[domain-20-application-patterns/22-nev-connected-vehicle.md|22-nev-connected-vehicle]]
-- [[domain-20-application-patterns/33-crossborder-warehouse.md|33-crossborder-warehouse]]
-- [[domain-20-application-patterns/05-online-education-architecture.md|05-online-education-architecture]]
-- [[domain-20-application-patterns/70-ecny-cbdc.md|70-ecny-cbdc]]
-- [[domain-20-application-patterns/62-distributed-energy.md|62-distributed-energy]]
-- [[domain-20-application-patterns/75-affective-computing.md|75-affective-computing]]
-- [[domain-20-application-patterns/50-unmanned-retail.md|50-unmanned-retail]]
-- [[domain-20-application-patterns/42-secondhand-circular.md|42-secondhand-circular]]
-- [[domain-20-application-patterns/26-aviation-travel.md|26-aviation-travel]]
-- [[domain-20-application-patterns/43-enterprise-im.md|43-enterprise-im]]
-- [[domain-20-application-patterns/73-smart-firefighting.md|73-smart-firefighting]]
-- [[domain-20-application-patterns/14-smart-healthcare-architecture.md|14-smart-healthcare-architecture]]
-- [[domain-20-application-patterns/96-carbon-capture.md|96-carbon-capture]]
-- [[domain-20-application-patterns/60-v2x-autonomous-driving.md|60-v2x-autonomous-driving]]
-- [[domain-20-application-patterns/74-immersive-xr.md|74-immersive-xr]]
-- [[domain-20-application-patterns/78-deep-sea-exploration.md|78-deep-sea-exploration]]
-- [[domain-20-application-patterns/12-smart-logistics-architecture.md|12-smart-logistics-architecture]]
-- [[domain-20-application-patterns/51-smart-manufacturing-mes.md|51-smart-manufacturing-mes]]
-- [[domain-20-application-patterns/08-ai-ml-inference-architecture.md|08-ai-ml-inference-architecture]]
-- [[domain-20-application-patterns/23-xinchuang-it-innovation.md|23-xinchuang-it-innovation]]
-- [[domain-20-application-patterns/47-smart-mining.md|47-smart-mining]]
-- [[domain-20-application-patterns/58-web3-gamefi.md|58-web3-gamefi]]
-- [[domain-20-application-patterns/29-agritech-iot.md|29-agritech-iot]]
-- [[domain-20-application-patterns/57-digital-therapeutics.md|57-digital-therapeutics]]
-- [[domain-20-application-patterns/92-smart-sports-venue.md|92-smart-sports-venue]]
-- [[domain-20-application-patterns/76-synthetic-biology.md|76-synthetic-biology]]
-- [[domain-20-application-patterns/61-smart-grid.md|61-smart-grid]]
-- [[domain-20-application-patterns/17-saas-multitenant-architecture.md|17-saas-multitenant-architecture]]
-- [[domain-20-application-patterns/11-smart-retail-architecture.md|11-smart-retail-architecture]]
-- [[domain-20-application-patterns/25-quantitative-trading.md|25-quantitative-trading]]
-- [[domain-20-application-patterns/81-smart-customs.md|81-smart-customs]]
-- [[domain-20-application-patterns/24-insurtech.md|24-insurtech]]
-- [[domain-20-application-patterns/90-neuromorphic-computing.md|90-neuromorphic-computing]]
-- [[domain-20-application-patterns/46-satellite-internet.md|46-satellite-internet]]
-- [[domain-20-application-patterns/52-smart-water.md|52-smart-water]]
-- [[domain-20-application-patterns/86-solid-state-battery.md|86-solid-state-battery]]
-- [[domain-20-application-patterns/67-brain-computer-interface.md|67-brain-computer-interface]]
-- [[domain-20-application-patterns/82-legaltech.md|82-legaltech]]
-- [[domain-20-application-patterns/15-energy-power-architecture.md|15-energy-power-architecture]]
-- [[domain-20-application-patterns/37-pet-economy.md|37-pet-economy]]
-- [[domain-20-application-patterns/49-livestream-ecommerce.md|49-livestream-ecommerce]]
-- [[domain-20-application-patterns/66-space-internet.md|66-space-internet]]
-- [[domain-20-application-patterns/06-fintech-architecture.md|06-fintech-architecture]]
-- [[domain-20-application-patterns/88-nanomaterials.md|88-nanomaterials]]
-- [[domain-20-application-patterns/10-social-media-architecture.md|10-social-media-architecture]]
-- [[domain-20-application-patterns/39-smart-campus.md|39-smart-campus]]
-- [[domain-20-application-patterns/13-digital-government-architecture.md|13-digital-government-architecture]]
-- [[domain-20-application-patterns/48-vocational-edtech.md|48-vocational-edtech]]
-- [[domain-20-application-patterns/72-digital-twin-city.md|72-digital-twin-city]]
-- [[domain-20-application-patterns/32-smart-restaurant.md|32-smart-restaurant]]
-- [[domain-20-application-patterns/89-crispr-gene-editing.md|89-crispr-gene-editing]]
-- [[domain-20-application-patterns/56-smart-elderly-care.md|56-smart-elderly-care]]
-- [[domain-20-application-patterns/44-martech-adtech.md|44-martech-adtech]]
-- [[domain-20-application-patterns/95-industrial-metaverse.md|95-industrial-metaverse]]
+- 45-smart-port-shipping
+- 65-autonomous-driving-sim
+- 84-national-park
+- 83-cultural-digitization
+- 94-smart-prison
+- 30-hrtech-saas
+- 68-quantum-computing-cloud
+- 64-ai-drug-discovery
+- 91-urban-air-mobility
+- 21-cross-border-ecommerce
+- 71-smart-tax
+- 03-cms-architecture
+- 85-hydrogen-energy
+- 18-data-midplatform-architecture
+- 16-video-shortform-architecture
+- 55-crossborder-dtc
+- 27-hospitality-tourism
+- 40-cloud-gaming
+- 87-flexible-manufacturing
+- 34-sportstech
+- 93-digital-twin-factory
+- 28-proptech
+- 09-gaming-backend-architecture
+- 59-industrial-internet-platform
+- 54-social-gaming-metaverse
+- 31-instant-retail
+- 22-nev-connected-vehicle
+- 33-crossborder-warehouse
+- 05-online-education-architecture
+- 70-ecny-cbdc
+- 62-distributed-energy
+- 75-affective-computing
+- 50-unmanned-retail
+- 42-secondhand-circular
+- 26-aviation-travel
+- 43-enterprise-im
+- 73-smart-firefighting
+- 14-smart-healthcare-architecture
+- 96-carbon-capture
+- 60-v2x-autonomous-driving
+- 74-immersive-xr
+- 78-deep-sea-exploration
+- 12-smart-logistics-architecture
+- 51-smart-manufacturing-mes
+- 08-ai-ml-inference-architecture
+- 23-xinchuang-it-innovation
+- 47-smart-mining
+- 58-web3-gamefi
+- 29-agritech-iot
+- 57-digital-therapeutics
+- 92-smart-sports-venue
+- 76-synthetic-biology
+- 61-smart-grid
+- 17-saas-multitenant-architecture
+- 11-smart-retail-architecture
+- 25-quantitative-trading
+- 81-smart-customs
+- 24-insurtech
+- 90-neuromorphic-computing
+- 46-satellite-internet
+- 52-smart-water
+- 86-solid-state-battery
+- 67-brain-computer-interface
+- 82-legaltech
+- 15-energy-power-architecture
+- 37-pet-economy
+- 49-livestream-ecommerce
+- 66-space-internet
+- 06-fintech-architecture
+- 88-nanomaterials
+- 10-social-media-architecture
+- 39-smart-campus
+- 13-digital-government-architecture
+- 48-vocational-edtech
+- 72-digital-twin-city
+- 32-smart-restaurant
+- 89-crispr-gene-editing
+- 56-smart-elderly-care
+- 44-martech-adtech
+- 95-industrial-metaverse
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-13-container-runtime/12-java-containerization-guide.md|12-java-containerization-guide]]
-- [[domain-13-container-runtime/99-docker-commands-reference.md|99-docker-commands-reference]]
-- [[domain-13-container-runtime/02-docker-images-management.md|02-docker-images-management]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|03-docker-container-lifecycle]]
+- 12-java-containerization-guide
+- 99-docker-commands-reference
+- 02-docker-images-management
+- 03-docker-container-lifecycle

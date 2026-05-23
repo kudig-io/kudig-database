@@ -52,6 +52,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 容器镜像安全扫描深度实践
@@ -63,7 +64,7 @@ cross_refs:
 
 容器镜像是云原生应用交付的基本单元，其安全性直接决定了运行时安全基线。据 Sysdig 2025 容器安全报告统计，生产环境中超过 75% 的镜像包含已知漏洞，其中约 10% 属于严重级别。镜像安全扫描是 DevSecOps 流程中的关键环节，通过在构建、存储和部署阶段持续检测漏洞、恶意代码和配置问题，建立从代码到运行的完整安全屏障。
 
-本文深入探讨镜像安全扫描的完整技术栈，包括 Trivy 和 Grype 漏洞扫描工具、SBOM（软件物料清单）生成与管理、Cosign 镜像签名验证，以及基于准入控制器的自动安全门禁，帮助企业在 CI/CD 管道和 Kubernetes 集群中构建端到端的镜像安全防护体系。
+本文深入探讨镜像安全扫描的完整技术栈，包括 [[Trivy|Trivy]] 和 Grype 漏洞扫描工具、SBOM（软件物料清单）生成与管理、Cosign 镜像签名验证，以及基于准入控制器的自动安全门禁，帮助企业在 CI/CD 管道和 [[Kubernetes|Kubernetes]] 集群中构建端到端的镜像安全防护体系。
 
 #<!-- chunk: 威胁模型分析 -->## 威胁模型分析
 
@@ -686,7 +687,7 @@ kubectl get pods --all-namespaces -o json | \
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Trivy Operator Prometheus 指标 -->## Trivy Operator Prometheus 指标
+#<!-- chunk: Trivy Operator [[Prometheus|Prometheus]] 指标 -->## Trivy Operator Prometheus 指标
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -910,24 +911,24 @@ kubectl get pods --all-namespaces -o json | \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|cert-manager 自动证书管理深度实践]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
+- cert-manager 自动证书管理深度实践
 
 ## See Also
 
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|05-vault-enterprise-secrets-management]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|09-opa-gatekeeper-policy]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|11-kubernetes-security-hardening]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|17-gvisor-container-sandbox]]
+- 05-vault-enterprise-secrets-management
+- 09-opa-gatekeeper-policy
+- 11-kubernetes-security-hardening
+- 17-gvisor-container-sandbox
 
 - [[domain-05-security-compliance/README.md|返回目录]]

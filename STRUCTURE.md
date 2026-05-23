@@ -21,6 +21,7 @@ trigger_keywords:
 - 目录结构规范
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG-DATABASE 目录结构规范

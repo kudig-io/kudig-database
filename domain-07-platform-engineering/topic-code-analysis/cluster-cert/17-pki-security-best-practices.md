@@ -1,5 +1,5 @@
 ---
-title: Kubernetes PKI 安全最佳实践
+title: Kubernetes PKI 安全最佳实践 (topic-code-analysis)
 description: 'title: Kubernetes PKI 安全最佳实践'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 title: Kubernetes PKI 安全最佳实践

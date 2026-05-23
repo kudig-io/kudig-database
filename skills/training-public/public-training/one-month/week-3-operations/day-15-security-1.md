@@ -31,6 +31,7 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ title: Day 15: 安全体系 - RBAC + 认证授权
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes RBAC 配置
+  - [[Kubernetes|kubernetes]] RBAC 配置
   - K8s 认证授权体系
   - ServiceAccount 管理
   - RBAC 权限设计
@@ -95,7 +96,7 @@ K8s 支持多种认证方式，常见的包括：
 
 **OIDC（OpenID Connect）认证**: 通过外部身份提供商（如阿里云 RAM、Okta、Azure AD）进行认证。企业环境通常使用 OIDC 统一管理用户身份，实现与现有账号系统的集成。
 
-**Bootstrap Token**: 用于节点加入集群时的引导认证。kubelet 在首次向 API Server 注册时使用 Bootstrap Token 获取初始凭证。
+**Bootstrap Token**: 用于节点加入集群时的引导认证。[[kubelet|kubelet]] 在首次向 API Server 注册时使用 Bootstrap Token 获取初始凭证。
 
 理解认证的关键点：K8s 本身不管理用户（User），它只验证请求中携带的凭证（证书、Token 等）并提取用户身份。用户的创建和管理由外部系统（如 OIDC 提供商）负责。
 
@@ -123,7 +124,7 @@ rules:
 
 关键字段说明：
 
-- `apiGroups`: 资源所属的 API 组。核心资源（如 Pod、Service）的 apiGroup 为空字符串 `""`
+- `apiGroups`: 资源所属的 API 组。核心资源（如 Pod、[[Service|Service]]）的 apiGroup 为空字符串 `""`
 - `resources`: 资源类型。注意 `pods/log` 表示 Pod 的子资源日志
 - `verbs`: 允许的操作。get（获取单个）、list（列出多个）、watch（监听变化）、create（创建）、update（更新）、patch（部分更新）、delete（删除）
 

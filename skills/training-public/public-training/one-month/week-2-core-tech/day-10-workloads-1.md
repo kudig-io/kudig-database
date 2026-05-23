@@ -33,9 +33,10 @@ prerequisites:
 - pod-lifecycle
 - gpu-ml-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-# Day 10: 工作负载 - Deployment + StatefulSet + DaemonSet
+# Day 10: 工作负载 - Deployment + [[StatefulSet|StatefulSet]] + [[DaemonSet|DaemonSet]]
 
 ```yaml
 ---

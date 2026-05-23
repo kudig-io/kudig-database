@@ -37,6 +37,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Tag Dictionary

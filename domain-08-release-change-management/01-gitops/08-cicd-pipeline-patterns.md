@@ -56,11 +56,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # CI/CD 流水线模式与渐进式交付深度实践
 
-> **适用版本**: Argo Rollouts v1.8 / Argo CD v3.3 / Flagger v1.40
+> **适用版本**: [[Argo|Argo]] Rollouts v1.8 / Argo CD v3.3 / Flagger v1.40
 > **最后更新**: 2026-04-24
 > **难度**: 高级
 
@@ -83,7 +84,7 @@ cross_refs:
 
 CI/CD 流水线模式和部署策略是软件交付过程中的核心决策。不同的分支策略（Trunk-Based、GitFlow、GitHub Flow）直接影响团队协作效率和发布节奏；不同的部署策略（滚动更新、蓝绿部署、金丝雀发布）直接影响用户感知和风险控制。选择合适的模式组合，是构建高效、安全交付流程的基础。
 
-渐进式交付（Progressive Delivery）是 CI/CD 的高级形态，它将部署过程分解为多个渐进阶段，每个阶段都通过自动化指标分析验证服务质量，只有验证通过才推进到下一阶段。Argo Rollouts 和 Flagger 是 Kubernetes 生态中两个主流的渐进式交付工具，它们替代 Kubernetes 原生的 Deployment 资源，提供更精细的发布控制能力。
+渐进式交付（Progressive Delivery）是 CI/CD 的高级形态，它将部署过程分解为多个渐进阶段，每个阶段都通过自动化指标分析验证服务质量，只有验证通过才推进到下一阶段。Argo Rollouts 和 Flagger 是 [[Kubernetes|Kubernetes]] 生态中两个主流的渐进式交付工具，它们替代 Kubernetes 原生的 Deployment 资源，提供更精细的发布控制能力。
 
 本文档深入探讨四种分支策略的优缺点和适用场景、三种部署策略的技术实现、环境晋升（Promotion）的自动化流程，以及 Argo Rollouts 金丝雀/蓝绿发布的完整配置。这些实践帮助企业根据团队规模和应用特点选择最合适的 CI/CD 模式。
 
@@ -716,7 +717,7 @@ jobs:
         run: |
           SOURCE="${{ github.event.inputs.source_environment }}"
           TARGET="${{ github.event.inputs.target_environment }}"
-          if [[ "$SOURCE" == "development" && "$TARGET" == "production" ]]; then
+          if "$SOURCE" == "development" && "$TARGET" == "production"; then
             echo "Direct promotion from dev to production is not allowed"
             echo "valid=false" >> $GITHUB_OUTPUT
             exit 1
@@ -864,7 +865,7 @@ spec:
 
 #<!-- chunk: 10.2 Flagger 自动化分析 -->## 10.2 Flagger 自动化分析
 
-Flagger 是 Flux 生态中的渐进式交付工具，支持 Istio、Linkerd、App Mesh、Contour、NGINX 和 Gloo 等多种服务网格和 Ingress 控制器。Flagger 的 AnalysisTemplate 支持 Prometheus、Datadog、CloudWatch 和 Webhook 等多种指标来源，可以根据业务指标自动决定是否继续发布或回滚。
+Flagger 是 [[Flux|Flux]] 生态中的渐进式交付工具，支持 Istio、[[Linkerd|Linkerd]]、App Mesh、Contour、NGINX 和 Gloo 等多种服务网格和 Ingress 控制器。Flagger 的 AnalysisTemplate 支持 Prometheus、Datadog、CloudWatch 和 Webhook 等多种指标来源，可以根据业务指标自动决定是否继续发布或回滚。
 
 ```yaml
 # Flagger Canary 配置
@@ -1027,22 +1028,22 @@ release_policy:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|06-flux-gitops-continuous-delivery]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|07-gitops-security-compliance]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|99-argo-cd-gitops-guide]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|99-flux-gitops-guide]]
+- 06-flux-gitops-continuous-delivery
+- 07-gitops-security-compliance
+- 99-argo-cd-gitops-guide
+- 99-flux-gitops-guide

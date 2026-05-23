@@ -23,6 +23,7 @@ trigger_keywords:
 - K8GB
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8GB
@@ -60,13 +61,13 @@ K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS �
 
 ## Related
 
-- [[chaos-mesh]] — Chaos Mesh
+- [[chaos-mesh]] — [[Chaos Mesh|Chaos Mesh]]
 - [[kubean]] — Kubean
 - [[tikv]] — TiKV
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/k8gb/k8gb.md|k8gb]]
+- k8gb
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

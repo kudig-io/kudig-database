@@ -650,7 +650,7 @@ helm install <release> <chart> --dry-run --debug
 ### 相关文档
 
 - [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
-- [Deployment 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 - [ConfigMap/Secret 故障排查](../05-workloads/06-configmap-secret-troubleshooting.md)
 
 ## Related

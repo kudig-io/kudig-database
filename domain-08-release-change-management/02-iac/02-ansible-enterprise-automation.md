@@ -46,6 +46,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Ansible企业级自动化运维深度实践
@@ -940,7 +941,7 @@ command_timeout = 30
 
 <!-- chunk: 7. Best Practices and Guidelines -->## 7. Best Practices and Guidelines
 
-#<!-- chunk: 7.1 Infrastructure as Code Principles -->## 7.1 Infrastructure as Code Principles
+#<!-- chunk: 7.1 [[Infrastructure as Code|Infrastructure as Code]] Principles -->## 7.1 Infrastructure as Code Principles
 
 ```markdown
 <!-- chunk: 🏗️ Ansible Best Practices -->## 🏗️ Ansible Best Practices
@@ -1029,18 +1030,18 @@ future_trends:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
-- [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|Terraform企业级基础设施即代码实践]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|Pulumi Enterprise Infrastructure as Code Platform]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Infrastructure Orchestration 深度实践]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|Crossplane 平台工程实践指南]]
+- domain-24-infrastructure-as-code KUDIG Database — Global MOC
+- [[domain-08-release-change-management/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]]]
+- Domain-24 基础设施即代码 — 开源项目索引
+- Terraform企业级基础设施即代码实践
+- Pulumi Enterprise Infrastructure as Code Platform
+- Azure Resource Manager (ARM) Enterprise 深度实践
+- Crossplane Enterprise Infrastructure Orchestration 深度实践
+- Crossplane 平台工程实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|99-crossplane-platform-guide]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|01-terraform-enterprise-iac]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|03-pulumi-enterprise-iac]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|04-azure-resource-manager-enterprise]]
+- 99-crossplane-platform-guide
+- 01-terraform-enterprise-iac
+- 03-pulumi-enterprise-iac
+- 04-azure-resource-manager-enterprise

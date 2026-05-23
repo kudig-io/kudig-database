@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Projected Volumes（投射卷）
@@ -48,7 +49,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 | `secret` | 将 Secret 的键值对作为文件投射到目录中。 |
 | `configMap` | 将 ConfigMap 的键值对作为文件投射到目录中。 |
 | `downwardAPI` | 将 Pod 的元数据或资源信息以文件形式投射。 |
-| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[entities/kubernetes|kubernetes]] API。 |
+| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] API。 |
 | `clusterTrustBundle` | 将 ClusterTrustBundle 对象的内容作为自动更新的 PEM 文件注入（v1.33 beta）。 |
 | `podCertificate` | 为 Pod 安全地提供私钥和 X.509 证书链，并自动轮换（v1.35 beta）。 |
 
@@ -60,7 +61,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 ### ServiceAccountToken 投射
 
 - 可配置 `audience`（受众）、`expirationSeconds`（过期时间，最小 600 秒）和 `path`（相对挂载路径）。
-- 当 Pod 设置了统一的 `runAsUser` 时，kubelet 会将 token 文件权限设为 `0600`，确保只有指定用户可读取。
+- 当 Pod 设置了统一的 `runAsUser` 时，[[kubelet|kubelet]] 会将 token 文件权限设为 `0600`，确保只有指定用户可读取。
 
 ### 安全上下文交互
 
@@ -71,7 +72,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 
 - **统一凭证与配置目录**：将 API Token、CA 证书和应用配置集中投射到一个目录，方便应用统一读取。
 - **安全注入 ServiceAccount Token**：避免将 Token 直接嵌入镜像，通过投射卷动态注入并自动管理过期时间。
-- **Pod 身份认证**：为工作负载提供访问 Kubernetes API 或其他服务所需的证书和信任链。
+- **Pod 身份认证**：为工作负载提供访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 或其他服务所需的证书和信任链。
 
 ## 最佳实践/注意事项
 

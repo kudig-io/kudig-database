@@ -1,6 +1,37 @@
 ---
+title: 智慧物流与供应链 Kubernetes 生产架构设计
+description: 'title: 智慧物流与供应链Kubernetes生产架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- redis
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 智慧物流与供应链 Kubernetes 生产架构设计 是什么
+- 如何 智慧物流与供应链 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧物流与供应链
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 智慧物流与供应链Kubernetes生产架构设计
-description: '# 智慧物流与供应链 Kubernetes 生产架构设计'
+description: '# 智慧物流与供应链 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -34,10 +65,6 @@ trigger_keywords:
 - 物流跟踪
 - 跨境物流
 - 即时配送
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- redis-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -48,6 +75,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture
 - domain-20-application-patterns/topic-application-architecture/29-agritech-iot
 - domain-02-workloads-applications/topic-functions/04-high-concurrency-system
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧物流与供应链 Kubernetes 生产架构设计
@@ -60,7 +96,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、订单履约全链路架构](#二订单履约全链路架构)
@@ -73,7 +109,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -118,7 +154,7 @@ flowchart TB
     style IOT fill:#fff8e1
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 说明 |
 |:---|:---|:---|
@@ -134,7 +170,7 @@ flowchart TB
 
 ---
 
-## 二、订单履约全链路架构
+<!-- chunk: 二、订单履约全链路架构 -->## 二、订单履约全链路架构
 
 ```mermaid
 flowchart LR
@@ -171,7 +207,7 @@ flowchart LR
     style Step4 fill:#ffccbc
 ```
 
-### 履约状态机
+#<!-- chunk: 履约状态机 -->## 履约状态机
 
 ```mermaid
 stateDiagram-v2
@@ -195,7 +231,7 @@ stateDiagram-v2
 
 ---
 
-## 三、仓储管理 (WMS) 架构
+<!-- chunk: 三、仓储管理 (WMS) 架构 -->## 三、仓储管理 (WMS) 架构
 
 ```mermaid
 flowchart TB
@@ -226,7 +262,7 @@ flowchart TB
     style Outbound fill:#e8f5e9
 ```
 
-### 智能仓库 [[entities/kubernetes|k8s]] 边缘部署
+#<!-- chunk: 智能仓库 K8s 边缘部署 -->## 智能仓库 K8s 边缘部署
 
 ```yaml
 apiVersion: apps/v1
@@ -278,7 +314,7 @@ spec:
 
 ---
 
-## 四、运输管理 (TMS) 与路径优化
+<!-- chunk: 四、运输管理 (TMS) 与路径优化 -->## 四、运输管理 (TMS) 与路径优化
 
 ```mermaid
 flowchart TB
@@ -310,7 +346,7 @@ flowchart TB
 
 ---
 
-## 五、末端配送与骑手调度架构
+<!-- chunk: 五、末端配送与骑手调度架构 -->## 五、末端配送与骑手调度架构
 
 ```mermaid
 flowchart TB
@@ -346,7 +382,7 @@ flowchart TB
 
 ---
 
-## 六、物流跟踪与可视化架构
+<!-- chunk: 六、物流跟踪与可视化架构 -->## 六、物流跟踪与可视化架构
 
 ```mermaid
 flowchart TB
@@ -378,7 +414,7 @@ flowchart TB
 
 ---
 
-## 七、供应链协同与预测架构
+<!-- chunk: 七、供应链协同与预测架构 -->## 七、供应链协同与预测架构
 
 ```mermaid
 flowchart TB
@@ -408,9 +444,9 @@ flowchart TB
 
 ---
 
-## 八、ACK 阿里云部署架构
+<!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-### 物流平台 ACK 多集群架构
+#<!-- chunk: 物流平台 ACK 多集群架构 -->## 物流平台 ACK 多集群架构
 
 ```mermaid
 flowchart TB
@@ -445,7 +481,7 @@ flowchart TB
     style EdgeClusters fill:#e8f5e9
 ```
 
-### 物流轨迹数据 Lindorm 配置
+#<!-- chunk: 物流轨迹数据 Lindorm 配置 -->## 物流轨迹数据 Lindorm 配置
 
 ```yaml
 # Lindorm 时序数据表 (物流轨迹)
@@ -511,9 +547,33 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云物流行业解决方案](https://www.aliyun.com/solution/scenario/logistics)
 - [阿里云 IoT 平台](https://www.aliyun.com/product/iot)
 - [阿里云 Lindorm](https://www.aliyun.com/product/lindorm)
 - [阿里云 PolarDB-X](https://www.aliyun.com/product/drds)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 10-social-media-architecture
+- 11-smart-retail-architecture
+- 13-digital-government-architecture
+- 14-smart-healthcare-architecture

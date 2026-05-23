@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database Demo 环境搭建指南

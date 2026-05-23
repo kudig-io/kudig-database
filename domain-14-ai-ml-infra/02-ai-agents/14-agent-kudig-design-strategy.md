@@ -1,5 +1,5 @@
 ---
-title: Agent 作为技术赋能新方式：设计思路与落地路径
+title: Agent 作为技术赋能新方式：设计思路与落地路径 (domain-14-ai-ml-infra)
 description: 'title: Agent 作为技术赋能新方式：设计思路与落地路径'
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - iac-basics
 - ebpf-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: Agent 作为技术赋能新方式：设计思路与落地路径
@@ -47,11 +48,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- helm
-- argocd
+- [[Helm|helm]]
+- [[ArgoCD|argocd]]
 - redis
 - hpa
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -86,7 +87,7 @@ k8s_versions:
 
 ## 概述
 
-本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 Kubernetes 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
+本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 [[Kubernetes|Kubernetes]] 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
 
 ---
 
@@ -301,7 +302,7 @@ Agent:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -316,7 +317,7 @@ Agent:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
-- [[domain-14-ai-ml-infra/15-agent-corpus-gap-analysis.md|15-agent-corpus-gap-analysis]]
-- [[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]]
+- 12-enterprise-case-studies
+- 13-trusted-agent-system-fiscal-plan
+- 15-agent-corpus-gap-analysis
+- 16-agentscope-overview-installation

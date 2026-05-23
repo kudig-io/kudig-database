@@ -5,7 +5,9 @@ category: template
 tags: [template, decision-tree, troubleshooting]
 last_updated: "2026-05"
 
-tier: peripheral---
+tier: peripheral
+created: "2026-05-23"
+---
 
 # {{组件名称}} 决策树
 
@@ -134,9 +136,9 @@ graph TD
 
 | 文档类型 | 路径 | 说明 |
 |---|---|---|
-| FTA 故障树 | [[../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md]] | 完整故障树分析 |
-| 技能卡片 | [[../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md]] | 操作技能 |
-| 域文档 | [[../domain-N-name/{{doc}}.md]] | 深度文档 |
+| FTA 故障树 | ../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md | 完整故障树分析 |
+| 技能卡片 | ../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md | 操作技能 |
+| 域文档 | ../domain-N-name/{{doc}}.md | 深度文档 |
 
 ---
 

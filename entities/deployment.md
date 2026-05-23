@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Deployment
 
 ## Role
 
-Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage Pods.
+Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[Pods|Pods]].
 
 ## Key Features
 
@@ -41,7 +42,7 @@ Deployment is the primary workload controller for stateless applications. It man
 |---------|-------------|
 | **Declarative management** | Define desired replica count, update strategy, Pod template |
 | **Rolling updates** | Replace old Pods with new Pods gradually (maxSurge, maxUnavailable) |
-| **Rollback** | Revert to any previous ReplicaSet via `kubectl rollout undo` |
+| **Rollback** | Revert to any previous [[ReplicaSet|ReplicaSet]] via `kubectl rollout undo` |
 | **Scaling** | Change replica count with `kubectl scale` or HPA |
 | **Revision history** | Track changes via `revisionHistoryLimit` (default 10) |
 
@@ -60,12 +61,12 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 
 ## Conditions
 
-Deployments report these conditions:
+[[Deployments|Deployments]] report these conditions:
 - **Available**: Minimum replicas are ready
 - **Progressing**: Deployment is making progress (new Pods created or old Pods terminated)
 
 ## Related
-- [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
+- [[synthesis/Pod 生命周期 × Secret 管理.md|[[Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]]] — 综合
 - [[synthesis/控制器模式 × Deployment.md|控制器模式 × Deployment]] — 综合
 
 - [[synthesis/Deployment × Secret 管理]]
@@ -80,24 +81,24 @@ Deployments report these conditions:
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
 
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|04-kubernetes-multi-cloud-hybrid-deployment]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-deployment-patterns-architecture.md|99-kubernetes-deployment-patterns-architecture]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
-- [[domain-19-landscape-references/graduated/prometheus/03-prometheus-ha-deployment.md|03-prometheus-ha-deployment]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|03-backstage-deployment]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04-deployment-replicaset]]
-- [[domain-01-cluster-fundamentals/25-multi-cloud-hybrid-deployment.md|25-multi-cloud-hybrid-deployment]]
-- [[domain-01-cluster-fundamentals/24-production-deployment-best-practices.md|24-production-deployment-best-practices]]
-- [[domain-07-platform-engineering/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]]
-- [[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]]
-- [[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-multi-cloud-hybrid-deployment-strategy]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-edge-computing-production-deployment]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02-deployment-production-patterns]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09-edge-computing-deployment]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|03-kubeedge-architecture-deployment]]
-- [[domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md|12-cluster-deployment-patterns]]
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|10-model-deployment-management]]
+- 04-kubernetes-multi-cloud-hybrid-deployment
+- 99-kubernetes-deployment-patterns-architecture
+- 07-deployment-replicaset-events
+- 03-prometheus-ha-deployment
+- 03-backstage-deployment
+- 04-deployment-replicaset
+- 25-multi-cloud-hybrid-deployment
+- 24-production-deployment-best-practices
+- 11-vercel-frontend-deployment-platform
+- 22-agentscope-production-deployment
+- 09-production-deployment-guide
+- 02-multi-cloud-hybrid-deployment-strategy
+- 03-edge-computing-production-deployment
+- 02-deployment-production-patterns
+- 09-edge-computing-deployment
+- 03-kubeedge-architecture-deployment
+- 12-cluster-deployment-patterns
+- 10-model-deployment-management
 - [[domain-10-troubleshooting-diagnostics/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|Deployment 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]

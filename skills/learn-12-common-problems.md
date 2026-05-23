@@ -25,6 +25,7 @@ trigger_keywords:
 - 第十课：常见问题排查
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 第十课：常见问题排查

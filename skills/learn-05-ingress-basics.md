@@ -32,9 +32,10 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
-# 第五课：Ingress - 外部 HTTP/HTTPS 访问
+# 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -380,7 +381,7 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../05-configuration/05-configmap-secret.md) — 配置管理
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 故障 [[SKILL|Skill]]
 - [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — Kubernetes 网络文档
 
 ## Related
@@ -407,7 +408,7 @@ kubectl delete ingress my-ingress
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]
 
-- [[skills/learn-README.md|learn-README]]
+- README.md|learn-README]]
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
 

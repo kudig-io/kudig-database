@@ -1,5 +1,5 @@
 ---
-title: VS Code Kubernetes Tools
+title: VS Code Kubernetes Tools (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # VS Code Kubernetes Tools
@@ -71,10 +72,10 @@ VS Code Kubernetes Tools 是一个功能强大的 Visual Studio Code 扩展，�
 - [[opengitops]] — OpenGitOps
 - [[cadence]] — Cadence
 - [[openkruise]] — OpenKruise
-- [[02-istio-advanced-traffic-management]] — Istio 高级流量管理
+- [[02-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md|vscode-kubernetes-tools]]
+- vscode-kubernetes-tools
 - [[entities/opengitops.md|OpenGitOps]]
 - [[entities/kubeclipper.md|KubeClipper]]
 - [[entities/cozystack.md|Cozystack]]

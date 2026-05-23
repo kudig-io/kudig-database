@@ -31,6 +31,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # domain-28-enterprise-database-middleware MOC
@@ -61,16 +62,16 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]] |  | database, middleware |  |
-| 2 | [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]] |  | database, middleware |  |
-| 3 | [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]] |  | database, middleware |  |
-| 4 | [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]] |  | database, middleware |  |
-| 5 | [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]] |  | database, middleware |  |
-| 6 | [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]] |  | database, middleware |  |
-| 7 | [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]] |  | database, middleware |  |
-| 8 | [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]] |  | database, middleware |  |
-| 9 | [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]] |  | database, middleware |  |
-| 10 | [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]] |  | database, middleware, guide |  |
+| 1 | Domain-28 企业数据库与中间件 — 开源项目索引 |  | database, middleware |  |
+| 2 | MySQL 企业级数据库运维管理 |  | database, middleware |  |
+| 3 | PostgreSQL 企业级数据库高可用架构 |  | database, middleware |  |
+| 4 | 分布式数据库企业级实践深度指南 |  | database, middleware |  |
+| 5 | 数据库中间件 Kubernetes 企业级实践 |  | database, middleware |  |
+| 6 | MongoDB 企业级数据库运维深度实践 |  | database, middleware |  |
+| 7 | Redis 企业级缓存运维深度实践 |  | database, middleware |  |
+| 8 | Redis Kubernetes Operator 企业级实践 |  | database, middleware |  |
+| 9 | Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南 |  | database, middleware |  |
+| 10 | CloudNativePG 企业级 PostgreSQL 运维指南 |  | database, middleware, guide |  |
 
 ---
 
@@ -103,9 +104,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-28-enterprise-database-middleware 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-28-enterprise-database-middleware 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-28-enterprise-database-middleware 相关故障树分析 |
+| Skills 技能 | domain-28-enterprise-database-middleware 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

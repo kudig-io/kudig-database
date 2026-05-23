@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 容器技术、Linux 系统与网络存储基础

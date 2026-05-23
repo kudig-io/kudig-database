@@ -1,5 +1,5 @@
 ---
-title: RAG 检索增强生成深度指南
+title: RAG 检索增强生成深度指南 (domain-14-ai-ml-infra)
 description: 'title: RAG 检索增强生成深度指南'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: RAG 检索增强生成深度指南
@@ -44,11 +45,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- helm
+- [[Helm|helm]]
 - redis
 - postgresql
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -878,9 +879,9 @@ class ProductionRAGPipeline:
 |------|---------|
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LlamaIndex/LangChain RAG 实现 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 长期记忆 vs RAG 的边界 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | RAGAS 评估框架详细配置 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | RAGAS 评估框架详细配置 |
 | [domain-14-ai-ml-infra/20-vector-database-rag.md](../domain-14-ai-ml-infra/20-vector-database-rag.md) | 向量数据库基础设施 |
-| [15 - Agent 语料库差距分析](./[[domain-14-ai-ml-infra/15-agent-corpus-gap-analysis.md|15-agent-corpus-gap-analysis]].md) | kudig-database 作为 RAG 语料的分析 |
+| [15 - Agent 语料库差距分析](./15-agent-corpus-gap-analysis.md) | kudig-database 作为 RAG 语料的分析 |
 
 ---
 
@@ -890,7 +891,7 @@ class ProductionRAGPipeline:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -905,7 +906,7 @@ class ProductionRAGPipeline:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
+- 02-llm-foundation-models
+- 03-agent-frameworks-comparison
+- 05-tool-use-function-calling
+- 06-multi-agent-orchestration

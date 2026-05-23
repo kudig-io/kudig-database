@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # containerd 升级迁移
@@ -61,7 +62,7 @@ title: containerd 升级迁移指南
 - [[containerd]]
 - [[entities/cni-plugins.md|cni-plugins]]
 - [[pod-lifecycle]]
-- [[entities/kubelet.md|kubelet]]
+- [[entities/kubelet.md|[[kubelet|kubelet]]]]
 
 ## Related
 
@@ -71,17 +72,17 @@ title: containerd 升级迁移指南
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.7
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
+- RELEASE-NOTES-1.6
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.0.md|RELEASE-NOTES-0.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/graduated/containerd/04-containerd-upgrade-migration.md|04-containerd-upgrade-migration]]
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-0.0
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- 04-containerd-upgrade-migration

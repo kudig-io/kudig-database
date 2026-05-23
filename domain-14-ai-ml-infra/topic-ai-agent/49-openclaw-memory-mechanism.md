@@ -1,4 +1,39 @@
 ---
+title: OpenClaw MEMORY.md 机制深度解析 (domain-14-ai-ml-infra)
+description: 'title: OpenClaw MEMORY.md 机制深度解析'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- kubelet
+- coredns
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenClaw MEMORY.md 机制深度解析 是什么
+- 如何 OpenClaw MEMORY.md 机制深度解析
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- OpenClaw
+- MEMORY.md
+- 机制深度解析
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: OpenClaw MEMORY.md 机制深度解析
 description: '# OpenClaw MEMORY.md 机制深度解析'
 category: ai-agent
@@ -8,9 +43,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- kubelet
-- coredns
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,9 +63,15 @@ trigger_keywords:
 - 机制深度解析
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenClaw MEMORY.md 机制深度解析
@@ -39,7 +80,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 MEMORY.md 是 OpenClaw File-First 架构中管理 **Agent 长期记忆** 的配置文件。它存储跨会话的经验、模式和确定性规则，让 Agent 具备"学习能力"——每次诊断的经验都能积累下来，逐步提升诊断效率和准确率。在 Harness Engineering 中主要映射到 **Persistence 层**。
 
@@ -47,9 +88,9 @@ MEMORY.md 配合 `memory/` 目录（短期记忆）构成完整的记忆系统�
 
 ---
 
-## 1. 设计原理
+<!-- chunk: 1. 设计原理 -->## 1. 设计原理
 
-### 1.1 三层记忆模型
+#<!-- chunk: 1.1 三层记忆模型 -->## 1.1 三层记忆模型
 
 ```
 MEMORY.md 三层记忆模型:
@@ -73,7 +114,7 @@ Layer 3: 用户偏好（交互学习）
      特点: 个性化定制，随使用而丰富
 ```
 
-### 1.2 记忆流转机制
+#<!-- chunk: 1.2 记忆流转机制 -->## 1.2 记忆流转机制
 
 ```
 记忆生命周期:
@@ -99,7 +140,7 @@ Layer 3: 用户偏好（交互学习）
 下次会话: MEMORY.md + 最近 3 天 memory/ → 注入上下文
 ```
 
-### 1.3 新陈代谢机制
+#<!-- chunk: 1.3 新陈代谢机制 -->## 1.3 新陈代谢机制
 
 ```
 记忆新陈代谢（防止记忆膨胀）:
@@ -126,9 +167,9 @@ Layer 3: 用户偏好（交互学习）
 
 ---
 
-## 2. Harness Engineering 映射
+<!-- chunk: 2. Harness Engineering 映射 -->## 2. Harness Engineering 映射
 
-### 2.1 映射关系
+#<!-- chunk: 2.1 映射关系 -->## 2.1 映射关系
 
 ```
 MEMORY.md × Harness 六层映射:
@@ -141,7 +182,7 @@ MEMORY.md     │      │       │    ◐    │    ●    │        │     
 ◐ = 次要映射（Context 层 — 记忆注入上下文）
 ```
 
-### 2.2 Persistence 层映射详解
+#<!-- chunk: 2.2 Persistence 层映射详解 -->## 2.2 Persistence 层映射详解
 
 | MEMORY.md 内容 | Harness Persistence 实现 | 存储方式 |
 |---------------|------------------------|---------|
@@ -151,7 +192,7 @@ MEMORY.md     │      │       │    ◐    │    ●    │        │     
 | 管理元数据（4） | `MemoryMetadata` — 元数据管理 | 自动统计和维护 |
 | memory/ 目录 | `DailyLog` — 每日诊断日志 | 每天一个 Markdown 文件 |
 
-### 2.3 Context 层映射
+#<!-- chunk: 2.3 Context 层映射 -->## 2.3 Context 层映射
 
 ```
 MEMORY.md 记忆注入 LLM 上下文的策略:
@@ -168,10 +209,10 @@ MEMORY.md 记忆注入 LLM 上下文的策略:
 
 3. 组装记忆上下文
    system_prompt += f"""
-   ## 长期记忆
+   <!-- chunk: 长期记忆 -->## 长期记忆
    {memory_md_summary}
 
-   ## 近期上下文
+   <!-- chunk: 近期上下文 -->## 近期上下文
    {recent_daily_logs}
    """
 
@@ -180,9 +221,9 @@ MEMORY.md 记忆注入 LLM 上下文的策略:
 
 ---
 
-## 3. K8S 运维实战案例
+<!-- chunk: 3. K8S 运维实战案例 -->## 3. K8S 运维实战案例
 
-### 3.1 案例：已知问题命中
+#<!-- chunk: 3.1 案例：已知问题命中 -->## 3.1 案例：已知问题命中
 
 ```
 场景: 用户报告 "Pod 启动很慢，等了 30 多秒"
@@ -198,13 +239,13 @@ Agent 响应（快速命中已知问题）:
    如果确认:
    1. 检查节点 ENI 余量: kubectl get eniconfig
    2. 考虑预热 ENI 池
-   参考: domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md"
+   参考: domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md"
 
 效果: 跳过常规诊断流程，直接给出已知解决方案
   诊断时间: 从 5 分钟缩短到 30 秒
 ```
 
-### 3.2 案例：经验模式学习
+#<!-- chunk: 3.2 案例：经验模式学习 -->## 3.2 案例：经验模式学习
 
 ```
 第 1 次诊断（无经验）:
@@ -229,7 +270,7 @@ Agent 记录到 memory/2026-04-01.md:
     occurrences: 5
 ```
 
-### 3.3 案例：失败教训记录
+#<!-- chunk: 3.3 案例：失败教训记录 -->## 3.3 案例：失败教训记录
 
 ```
 失败案例:
@@ -251,9 +292,9 @@ Agent 记录到 memory/2026-04-01.md:
 
 ---
 
-## 4. 配置协作机制
+<!-- chunk: 4. 配置协作机制 -->## 4. 配置协作机制
 
-### 4.1 MEMORY.md 与其他文件的协作
+#<!-- chunk: 4.1 MEMORY.md 与其他文件的协作 -->## 4.1 MEMORY.md 与其他文件的协作
 
 ```
 MEMORY.md 在配置体系中的记忆角色:
@@ -275,7 +316,7 @@ USER.md ──→ MEMORY.md
              MEMORY.md 从交互中学习更多偏好
 ```
 
-### 4.2 memory/ 目录管理
+#<!-- chunk: 4.2 memory/ 目录管理 -->## 4.2 memory/ 目录管理
 
 ```
 短期记忆目录结构:
@@ -288,13 +329,13 @@ memory/
 
 每日文件格式:
   # 2026-04-03 诊断日志
-  ## Session 1 (09:15)
+  <!-- chunk: Session 1 (09:15) -->## Session 1 (09:15)
   - 问题: Pod coredns-xxx Pending
   - 根因: 节点 taint 不匹配
   - 解决: 添加 tolerations
   - 标记: routine（常规问题）
 
-  ## Session 2 (14:30)
+  <!-- chunk: Session 2 (14:30) -->## Session 2 (14:30)
   - 问题: API Server 响应慢
   - 根因: etcd compaction 未及时执行
   - 解决: 手动执行 etcdctl compact
@@ -308,9 +349,9 @@ memory/
 
 ---
 
-## 5. AgentScope 集成代码
+<!-- chunk: 5. AgentScope 集成代码 -->## 5. AgentScope 集成代码
 
-### 5.1 MemoryManager 实现
+#<!-- chunk: 5.1 MemoryManager 实现 -->## 5.1 MemoryManager 实现
 
 ```python
 import os
@@ -340,11 +381,11 @@ class MemoryManager:
         context_parts = []
 
         # 长期记忆
-        context_parts.append("## 长期记忆\n")
+        context_parts.append("<!-- chunk: 长期记忆\n") -->## 长期记忆\n")
         context_parts.append(self._summarize_long_term())
 
         # 短期记忆
-        context_parts.append("\n## 近期上下文\n")
+        context_parts.append("\n<!-- chunk: 近期上下文\n") -->## 近期上下文\n")
         recent_logs = self._load_recent_daily(days)
         if recent_logs:
             context_parts.append(recent_logs)
@@ -404,7 +445,7 @@ class MemoryManager:
         timestamp = datetime.now().strftime("%H:%M")
         marker = " [key_insight]" if is_key_insight else ""
 
-        entry = f"\n## Session ({timestamp}){marker}\n{session_summary}\n"
+        entry = f"\n<!-- chunk: Session ({timestamp}){marker}\n{session_summary}\n" -->## Session ({timestamp}){marker}\n{session_summary}\n"
 
         with open(filepath, "a") as f:
             f.write(entry)
@@ -443,9 +484,9 @@ memory.record_daily(
 
 ---
 
-## 6. 故障排除
+<!-- chunk: 6. 故障排除 -->## 6. 故障排除
 
-### 6.1 常见问题
+#<!-- chunk: 6.1 常见问题 -->## 6.1 常见问题
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
@@ -456,7 +497,7 @@ memory.record_daily(
 | 经验模式置信度不准 | 样本量不足就标高置信度 | 累计 5+ 次同类事件后才标注高置信 |
 | Agent 记录低质量记忆 | 未经验证的猜测也被记录 | SOUL.md 诚实原则约束：只记录有数据支撑的结论 |
 
-### 6.2 调试检查清单
+#<!-- chunk: 6.2 调试检查清单 -->## 6.2 调试检查清单
 
 ```
 MEMORY.md 配置验证:
@@ -473,7 +514,7 @@ MEMORY.md 配置验证:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -486,3 +527,27 @@ MEMORY.md 配置验证:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，深度解析 OpenClaw MEMORY.md 的设计机制与工程实现。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 47-openclaw-tools-mechanism
+- 48-openclaw-skill-mechanism
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals

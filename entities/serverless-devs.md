@@ -1,5 +1,5 @@
 ---
-title: Serverless Devs
+title: Serverless Devs [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Serverless Devs
@@ -67,14 +68,14 @@ Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具�
 
 ## Related
 
-- [[oauth2-proxy]] — OAuth2 Proxy
+- [[oauth2-proxy]] — [[OAuth2 Proxy|OAuth2 Proxy]]
 - [[schemahero]] — SchemaHero
 - [[composefs]] — composefs
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/serverless-devs/serverless-devs.md|serverless-devs]]
-- [[entities/slimfaas.md|SlimFaas]]
+- serverless-devs
+- [[entities/slimfaas.md|[[SlimFaas|SlimFaas]]]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

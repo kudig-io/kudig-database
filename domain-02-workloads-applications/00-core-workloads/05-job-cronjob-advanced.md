@@ -61,11 +61,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
-# 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+# 05 - Job 与 [[CronJob|CronJob]] 高级用法 (Job & CronJob Advanced Usage)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] [[Jobs|Jobs]]](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 
 <!-- chunk: Job 类型详解与使用场景 -->
 ## Job 类型详解与使用场景
@@ -753,22 +754,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications KUDIG Database — Global MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
-- [[domain-02-workloads-applications/10-workload-controllers-overview.md|工作负载控制器详解]]
+- Domain-4 工作负载 — 开源项目索引
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - [[domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md]]
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
+- 工作负载控制器详解
 
 ## See Also
 
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03-statefulset-advanced-operations]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04-daemonset-management]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06-workload-monitoring-alerting]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07-workload-troubleshooting-handbook]]
+- 03-statefulset-advanced-operations
+- 04-daemonset-management
+- 06-workload-monitoring-alerting
+- 07-workload-troubleshooting-handbook

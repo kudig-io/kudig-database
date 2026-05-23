@@ -1,5 +1,5 @@
 ---
-title: kubeadm init 集群初始化概览
+title: kubeadm init 集群初始化概览 (topic-code-analysis)
 description: 'description: ''| `cmd/kubeadm/app/cmd/init.go` | L351-L500 | 配置验证和默认值填充 |'''
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - platform-engineering-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: kubeadm init 集群初始化概览

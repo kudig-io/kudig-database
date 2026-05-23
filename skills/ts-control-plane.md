@@ -29,11 +29,12 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # 控制平面故障排查
 
-### 01 Apiserver Troubleshooting
+### 01 Apiserver Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

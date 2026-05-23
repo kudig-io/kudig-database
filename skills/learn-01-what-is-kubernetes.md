@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 第一课：Kubernetes 入门
@@ -295,4 +296,4 @@ s  - s
 - [[docker]] — Docker
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[Kubernetes Architecture Overview|Kubernetes Architecture Overview]]

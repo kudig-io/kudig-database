@@ -1,4 +1,45 @@
 ---
+title: Agent Harness 生产运维与成熟度模型 (domain-14-ai-ml-infra)
+description: 'title: Agent Harness 生产运维与成熟度模型'
+category: general
+tags:
+- ai
+- ai-agent
+- production
+- prometheus
+- grafana
+- helm
+- redis
+- postgresql
+- gateway
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent Harness 生产运维与成熟度模型 是什么
+- 如何 Agent Harness 生产运维与成熟度模型
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 生产运维与成熟度模型
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- redis-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 生产运维与成熟度模型
 description: '# Agent Harness 生产运维与成熟度模型'
 category: ai-agent
@@ -8,9 +49,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- helm
+- [[Helm|helm]]
 - redis
 - postgresql
 last_updated: 2026-05
@@ -30,22 +71,24 @@ trigger_keywords:
 - 生产运维与成熟度模型
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- redis-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 生产运维与成熟度模型
 
-> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Production Operations, 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
+> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: [[references/k8s-production-operations.md|Production Operations]], 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 将 Agent Harness 从开发环境部署到生产环境，是一个跨越"能用"到"可靠可控"的质变过程。生产级 Harness 需要应对高可用、灰度发布、版本管理、故障恢复、容量规划等传统运维挑战，同时还需要处理 Agent 特有的非确定性行为管控。
 
@@ -53,9 +96,9 @@ prerequisites:
 
 ---
 
-## 1. 生产部署架构
+<!-- chunk: 1. 生产部署架构 -->## 1. 生产部署架构
 
-### 1.1 部署拓扑
+#<!-- chunk: 1.1 部署拓扑 -->## 1.1 部署拓扑
 
 ```
 Agent Harness 生产部署拓扑:
@@ -84,7 +127,7 @@ Agent Harness 生产部署拓扑:
 └─────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 K8S 部署清单
+#<!-- chunk: 1.2 K8S 部署清单 -->## 1.2 K8S 部署清单
 
 ```yaml
 # harness-deployment.yaml
@@ -215,9 +258,9 @@ data:
 
 ---
 
-## 2. 灰度发布策略
+<!-- chunk: 2. 灰度发布策略 -->## 2. 灰度发布策略
 
-### 2.1 四阶段灰度发布
+#<!-- chunk: 2.1 四阶段灰度发布 -->## 2.1 四阶段灰度发布
 
 ```
 Harness 灰度发布四阶段:
@@ -260,7 +303,7 @@ Stage 4: Full Rollout（全量发布）
   确认: 保留旧版 72h 用于回滚
 ```
 
-### 2.2 灰度控制器
+#<!-- chunk: 2.2 灰度控制器 -->## 2.2 灰度控制器
 
 ```python
 class GrayReleaseController:
@@ -372,9 +415,9 @@ class GrayReleaseController:
 
 ---
 
-## 3. 配置管理与热更新
+<!-- chunk: 3. 配置管理与热更新 -->## 3. 配置管理与热更新
 
-### 3.1 配置热更新机制
+#<!-- chunk: 3.1 配置热更新机制 -->## 3.1 配置热更新机制
 
 ```python
 import yaml
@@ -440,7 +483,7 @@ class ConfigFileHandler(FileSystemEventHandler):
         self.reload_fn()
 ```
 
-### 3.2 Prompt 版本管理
+#<!-- chunk: 3.2 Prompt 版本管理 -->## 3.2 Prompt 版本管理
 
 ```python
 class PromptVersionManager:
@@ -496,9 +539,9 @@ class PromptVersionManager:
 
 ---
 
-## 4. SLA 设计
+<!-- chunk: 4. SLA 设计 -->## 4. SLA 设计
 
-### 4.1 Agent Harness SLA 体系
+#<!-- chunk: 4.1 Agent Harness SLA 体系 -->## 4.1 Agent Harness SLA 体系
 
 ```
 Agent Harness SLA 指标:
@@ -525,7 +568,7 @@ Agent Harness SLA 指标:
   Token 预算执行: 100% 生效
 ```
 
-### 4.2 SLA 监控
+#<!-- chunk: 4.2 SLA 监控 -->## 4.2 SLA 监控
 
 ```python
 class SLAMonitor:
@@ -577,9 +620,9 @@ class SLAMonitor:
 
 ---
 
-## 5. 故障恢复
+<!-- chunk: 5. 故障恢复 -->## 5. 故障恢复
 
-### 5.1 故障恢复策略
+#<!-- chunk: 5.1 故障恢复策略 -->## 5.1 故障恢复策略
 
 ```python
 class HarnessFailoverManager:
@@ -635,7 +678,7 @@ class HarnessFailoverManager:
             logger.info("主 Harness 恢复")
 ```
 
-### 5.2 LLM 提供商容灾
+#<!-- chunk: 5.2 LLM 提供商容灾 -->## 5.2 LLM 提供商容灾
 
 ```python
 class LLMProviderFailover:
@@ -677,9 +720,9 @@ class LLMProviderFailover:
 
 ---
 
-## 6. 成熟度模型实施指南
+<!-- chunk: 6. 成熟度模型实施指南 -->## 6. 成熟度模型实施指南
 
-### 6.1 五级成熟度详细定义
+#<!-- chunk: 6.1 五级成熟度详细定义 -->## 6.1 五级成熟度详细定义
 
 ```
 Agent Harness 成熟度五级:
@@ -753,7 +796,7 @@ L5 - 自进化 Harness（Self-Evolving）
   适用: 下一代自适应 Agent 平台（前沿研究）
 ```
 
-### 6.2 成熟度评估清单
+#<!-- chunk: 6.2 成熟度评估清单 -->## 6.2 成熟度评估清单
 
 ```python
 class MaturityAssessment:
@@ -842,9 +885,9 @@ class MaturityAssessment:
 
 ---
 
-## 7. 最佳实践
+<!-- chunk: 7. 最佳实践 -->## 7. 最佳实践
 
-### 7.1 生产运维核心原则
+#<!-- chunk: 7.1 生产运维核心原则 -->## 7.1 生产运维核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -855,7 +898,7 @@ class MaturityAssessment:
 | **SLA 驱动** | 有明确的质量和性能目标 | SLA 监控 + 告警 |
 | **渐进成熟** | 按成熟度模型逐步提升 | L1→L2→L3 渐进升级 |
 
-### 7.2 反模式
+#<!-- chunk: 7.2 反模式 -->## 7.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -867,18 +910,18 @@ class MaturityAssessment:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 成熟度模型概述 |
 | [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | CI/CD 质量门禁和灰度评估 |
-| [36 - 可观测性](./36-agent-harness-observability.md) | 生产监控和告警体系 |
+| [36 - 可观测性](./observability.md|36-agent-harness-observability]].md) | 生产监控和告警体系 |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | K8S 部署基础设施 |
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -890,3 +933,27 @@ class MaturityAssessment:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 生产运维与成熟度模型。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 38-agent-harness-performance-cost
+- 39-agent-harness-testing-benchmark
+- 41-react-harness-identification-guide
+- 42-model-harness-compatibility-matrix

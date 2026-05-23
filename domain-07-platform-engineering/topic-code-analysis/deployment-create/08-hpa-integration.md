@@ -54,6 +54,7 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - deployment-status
+created: "2026-05-23"
 ---
 
 # Deployment 与 HPA 集成源码分析

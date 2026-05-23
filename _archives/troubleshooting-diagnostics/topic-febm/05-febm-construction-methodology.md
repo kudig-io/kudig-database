@@ -855,7 +855,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
        Train Isolation Forest on historical metrics
        metrics_history: DataFrame with columns [timestamp, cpu, memory, network_rx, network_tx]
        """
-       features = metrics_history[['cpu', 'memory', 'network_rx', 'network_tx']].values
+       features = metrics_history'cpu', 'memory', 'network_rx', 'network_tx'.values
        
        model = IsolationForest(
            contamination=0.01,  # 1% of data is anomaly

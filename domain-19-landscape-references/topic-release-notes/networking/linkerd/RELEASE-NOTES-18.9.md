@@ -29,9 +29,10 @@ prerequisites:
 - cncf-ecosystem
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-# linkerd v18.9 Release Notes
+# [[Linkerd|linkerd]] v18.9 Release Notes
 
 Source: [v18.9.1](https://github.com/linkerd/linkerd2/releases/tag/v18.9.1)
 
@@ -59,4 +60,4 @@ Source: [v18.9.1](https://github.com/linkerd/linkerd2/releases/tag/v18.9.1)
   * **New** `linkerd top` now has a `--hide-sources` flag, to hide the source
     column and collapse top results accordingly
 * Control Plane
-  * Updated Prometheus to v2.4.0, Grafana to 5.2.4
+  * Updated [[Prometheus|Prometheus]] to v2.4.0, Grafana to 5.2.4

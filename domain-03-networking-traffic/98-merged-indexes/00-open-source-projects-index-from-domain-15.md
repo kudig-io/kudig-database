@@ -51,6 +51,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # Domain-15 网络基础 — 开源项目索引
@@ -131,12 +132,12 @@ cross_refs:
 
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain-15: 网络基础]]
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|网络协议栈详解]]
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|TCP/UDP 协议深度解析]]
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|DNS 原理与配置]]
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|负载均衡技术]]
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|网络安全基础]]
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|SDN 与网络虚拟化]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|Cilium eBPF 网络与安全实践指南]]
+- 网络协议栈详解
+- TCP/UDP 协议深度解析
+- DNS 原理与配置
+- 负载均衡技术
+- 网络安全基础
+- SDN 与网络虚拟化
+- Cilium eBPF 网络与安全实践指南

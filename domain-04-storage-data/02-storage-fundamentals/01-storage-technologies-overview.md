@@ -41,6 +41,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 01 - 存储技术概述
@@ -234,13 +235,13 @@ authors:
 | **GCP** | PD | Filestore | GCS |
 | **阿里云** | 云盘 | NAS | OSS |
 
-### Kubernetes 存储
+### [[Kubernetes|Kubernetes]] 存储
 
 | 类型 | CSI 驱动 |
 |:---|:---|
 | **云盘** | AWS EBS CSI, AliDisk CSI |
 | **网络文件** | EFS CSI, NFS CSI |
-| **分布式** | Ceph CSI, Longhorn |
+| **分布式** | Ceph CSI, [[Longhorn|Longhorn]] |
 | **本地** | Local PV |
 
 ---
@@ -390,7 +391,7 @@ STORAGE_HEALTH_CHECK() {
     # 4. SMART状态检查
     echo -e "\n4. 磁盘健康状态:"
     for disk in /dev/sd*; do
-        [[ -b $disk ]] && smartctl -H $disk 2>/dev/null | grep "SMART overall-health"
+        -b $disk && smartctl -H $disk 2>/dev/null | grep "SMART overall-health"
     done
     
     # 5. I/O性能测试
@@ -479,7 +480,7 @@ EOF
 
 ## See Also
 
-- [[domain-04-storage-data/05-storage-management-operations.md|05-storage-management-operations]]
-- [[domain-04-storage-data/06-storage-performance-iops.md|06-storage-performance-iops]]
-- [[domain-04-storage-data/02-block-file-object-storage.md|02-block-file-object-storage]]
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03-raid-storage-redundancy]]
+- 05-storage-management-operations
+- 06-storage-performance-iops
+- 02-block-file-object-storage
+- 03-raid-storage-redundancy

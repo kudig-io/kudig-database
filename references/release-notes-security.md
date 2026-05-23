@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 发布说明索引 — 安全

@@ -1,5 +1,5 @@
 ---
-title: 06 - 有状态服务迁移
+title: 06 - 有状态服务迁移 [migration]
 description: 'description: ''#<!-- chunk: 2.1 方案 A: 迁移到阿里云 RDS（推荐）'' -->## 2.1 方案 A: 迁移到阿里云 RDS（推荐）'''
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 06 - 有状态服务迁移
@@ -45,13 +46,13 @@ tags:
 - k8s
 - migration
 - modernization
-- etcd
+- [[etcd|etcd]]
 - docker
 - redis
 - mysql
 - kafka
 - elasticsearch
-- statefulset
+- [[StatefulSet|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -624,14 +625,14 @@ done
 
 ---
 
-**上一步**: ← [05-网络迁移与流量切换](./[[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]].md)
+**上一步**: ← [05-网络迁移与流量切换](./05-network-migration-traffic-cutover.md)
 **下一步**: → [07-可观测性与安全迁移](./07-observability-security-migration.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration KUDIG Database — Global MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -645,10 +646,10 @@ done
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]]
-- [[domain-11-production-operations/topic-best-practices/migration/07-observability-security-migration.md|07-observability-security-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]]
+- 04-storage-data-migration
+- 05-network-migration-traffic-cutover
+- 07-observability-security-migration
+- 08-validation-cutover-decommission
 
 ## Related
 

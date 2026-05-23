@@ -1,32 +1,5 @@
 ---
-title: kudig-database 双维度评估报告
-description: 'description: ''| 专题 | 19 个 topic-\* 目录 |'''
-category: general
-tags:
-- reports
-- etcd
-- kubelet
-- scheduler
-- rag
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- kudig-database 双维度评估报告 是什么
-- 如何 kudig-database 双维度评估报告
-trigger_keywords:
-- kudig-database
-- 双维度评估报告
-prerequisites:
-- kubectl-basics
-- etcd-basics
----
-
-title: kudig-database 双维度评估报告
+title: kudig-database 双维度评估报告 (reports)
 description: '| 专题 | 19 个 topic-\* 目录 |'
 category: general
 tags:
@@ -48,19 +21,12 @@ intent_queries:
 trigger_keywords:
 - kudig-database
 - 双维度评估报告
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
+prerequisites:
+- kubectl-basics
+- etcd-basics
+created: "2026-05-23"
 ---
+
 # kudig-database 双维度评估报告
 
 > **评估基准**: 顶级行业水准 (Top Industry Standard)
@@ -111,7 +77,7 @@ updated: '2026-05-21'
 - [✓] export-corpus.sh 支持 full/agent/lite 三种导出格式
 
 **差距:**
-- [×] front matter 格式不统一 — 部分用 YAML (`---`), 部分用 blockquote (`>`), 部分无 front matter。采样 domain-3 中 10 篇, 仅 ~40% 使用标准 YAML front matter
+- [×] front matter 格式不统一 — 部分用 YAML (`---`), 部分用 blockquote (`>`), 部分无 front matter。采样 domain-01-cluster-fundamentals 中 10 篇, 仅 ~40% 使用标准 YAML front matter
 - [×] intent_queries 覆盖不完整 — validate-frontmatter.py 存在但并非所有文档已补充
 - [×] cross_refs 字段覆盖率低 — enhance-cross-refs.py 脚本存在但未大规模执行
 - [×] 缺少 structured QA pairs — 顶级 Agent 语料需要 question-answer 对作为 fine-tuning 或 RAG 评测数据
@@ -145,7 +111,7 @@ updated: '2026-05-21'
 
 ## 维度二：专业技术专家知识库 (Expert Knowledge Base)
 
-**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 Kubernetes 生产运维知识库之一
+**总评: ★★★★★ 9.0/10** — 达到顶级行业水准, 是国内最全面的 [[entities/kubernetes|kubernetes]] 生产运维知识库之一
 
 ### 1. 技术深度与专业性 — 评分: 9.5/10
 
@@ -237,19 +203,3 @@ updated: '2026-05-21'
 | 智能体语料库 | 8.2/10 | ⚠️ 接近但未达顶级 |
 
 核心差距在于: 结构化元数据的一致性、Agent 交互语料 (QA pairs)、以及端到端 RAG Pipeline 的可用性。项目已具备完善的工具链和方法论, 补齐差距的路径清晰且工作量可控。
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|kudig-database 质量盲区深度扫描报告]]

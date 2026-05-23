@@ -61,6 +61,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 07 - OOM和内存问题诊断
@@ -1176,7 +1177,7 @@ spec:
 | v1.25 | PodOverhead计入驱逐决策 | 更精确的驱逐计算 |
 | v1.27 | In-place Pod Resources Update (Alpha) | 不重启更新资源 |
 | v1.28 | Memory QoS (Beta) | 更成熟的内存QoS |
-| v1.29 | Sidecar Containers GA | 影响OOM优先级 |
+| v1.29 | [[Sidecar Containers|Sidecar Containers]] GA | 影响OOM优先级 |
 | v1.30 | Node Memory Swap (Beta) | swap支持更成熟 |
 
 ---
@@ -1469,9 +1470,9 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
-- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
+- [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 ([[KUDIG 故障排查 Prompt 模板|Troubleshooting]])]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

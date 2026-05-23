@@ -36,6 +36,7 @@ prerequisites:
 - helm-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # domain-10-troubleshooting-diagnostics MOC
@@ -66,8 +67,8 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]] |  | k8s, troubleshooting, guide |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|01 - API Server 故障排查 (API Server Troubleshooting)]] |  | k8s, troubleshooting, guide |  |
+| 1 | index.md|Domain-12 故障排查 — 开源项目索引]] |  | k8s, troubleshooting, guide |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|01 - [[API Server 故障排查|API Server 故障排查]] (API Server Troubleshooting)]] |  | k8s, troubleshooting, guide |  |
 | 3 | [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|02 - etcd 故障排查 (etcd Troubleshooting)]] |  | k8s, troubleshooting, guide |  |
 | 4 | [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]] |  | k8s, troubleshooting, guide |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]] |  | k8s, troubleshooting, guide |  |
@@ -146,9 +147,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-10-troubleshooting-diagnostics 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-10-troubleshooting-diagnostics 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-10-troubleshooting-diagnostics 相关故障树分析 |
+| Skills 技能 | domain-10-troubleshooting-diagnostics 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

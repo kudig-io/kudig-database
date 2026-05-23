@@ -49,6 +49,7 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - rolling-update
+created: "2026-05-23"
 ---
 
 # Deployment 控制器架构总览
@@ -79,7 +80,7 @@ func startDeploymentController(ctx ControllerContext) (http.Handler, bool, error
 |------|---------|------|
 | 控制器入口 | `pkg/controller/deployment/deployment_controller.go` | NewDeploymentController、Run、事件处理 |
 | 同步逻辑 | `pkg/controller/deployment/sync.go` | syncDeployment 主协调函数 |
-| ReplicaSet 控制器 | `pkg/controller/replicaset/replica_set.go` | RS 核心逻辑、Pod 副本管理 |
+| [[ReplicaSet|ReplicaSet]] 控制器 | `pkg/controller/replicaset/replica_set.go` | RS 核心逻辑、Pod 副本管理 |
 | 工具函数 | `pkg/controller/deployment/util/` | RS 查找、hash 计算、状态比较 |
 | 启动注册 | `cmd/kube-controller-manager/app/apps.go` | startDeploymentController |
 | 滚动更新 | `pkg/controller/deployment/rolling.go` | RollingUpdate 策略 |
@@ -95,7 +96,7 @@ func startDeploymentController(ctx ControllerContext) (http.Handler, bool, error
 | `dInformer` | `appsinformers.DeploymentInformer` | Deployment Informer，提供 Lister 和事件注册 |
 | `rsInformer` | `appsinformers.ReplicaSetInformer` | ReplicaSet Informer，监听 RS 变更 |
 | `podInformer` | `coreinformers.PodInformer` | Pod Informer，监听 Pod 删除事件 |
-| `client` | `clientset.Interface` | Kubernetes API 客户端 |
+| `client` | `clientset.Interface` | [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 客户端 |
 
 ### DeploymentController 内部字段
 
@@ -556,6 +557,6 @@ kubectl get pods -l app=web-frontend -w
 
 - [`syncDeployment`](02-deployment-controller.md) — 主协调函数
 - [`rolloutRolling`](04-rolling-update.md) — RollingUpdate 策略
-- [`rolloutRecreate`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — Recreate 策略
+- [`rolloutRecreate`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|[[KUDIG Database|README]]]].md) — Recreate 策略
 - [`calculateStatus`](05-deployment-status.md) — Status 计算
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚

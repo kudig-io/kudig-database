@@ -1,5 +1,5 @@
 ---
-title: 电商系统 Kubernetes 生产架构设计
+title: 电商系统 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 电商系统 Kubernetes 生产架构设计'
 category: general
 tags:
@@ -40,19 +40,20 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: 电商系统 Kubernetes 生产架构设计
+title: 电商系统 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 电商系统 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- istio
+- [[Jaeger|jaeger]]
+- [[Istio|istio]]
 - envoy
 - minio
 - redis
@@ -87,7 +88,7 @@ related_domains:
 - domain-11-production-operations
 - domain-03-networking-traffic
 related_topics:
-- [[domain-20-application-patterns/41-beauty-ecommerce.md|41-beauty-ecommerce]]
+- 41-beauty-ecommerce
 - 31-instant-retail
 - 49-livestream-ecommerce
 authors:
@@ -1164,7 +1165,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -1179,7 +1180,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/95-industrial-metaverse.md|95-industrial-metaverse]]
-- [[domain-20-application-patterns/96-carbon-capture.md|96-carbon-capture]]
-- [[domain-20-application-patterns/02-mini-program-architecture.md|02-mini-program-architecture]]
-- [[domain-20-application-patterns/03-cms-architecture.md|03-cms-architecture]]
+- 95-industrial-metaverse
+- 96-carbon-capture
+- 02-mini-program-architecture
+- 03-cms-architecture

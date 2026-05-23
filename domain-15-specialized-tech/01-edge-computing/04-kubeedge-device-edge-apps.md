@@ -47,9 +47,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
+# [[KubeEdge|KubeEdge]] 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 
 <!-- chunk: 目录 (Table of Contents) -->## 目录 (Table of Contents)
 
@@ -72,7 +73,7 @@ authors:
 
 #<!-- chunk: 1.1 KubeEdge 设备管理架构 (Device Management Architecture) -->## 1.1 KubeEdge 设备管理架构 (Device Management Architecture)
 
-KubeEdge 通过扩展 Kubernetes CRD 机制，将 IoT 设备作为 Kubernetes 的一等公民进行管理，实现了云端统一管控物理设备的能力。
+KubeEdge 通过扩展 [[Kubernetes|Kubernetes]] CRD 机制，将 IoT 设备作为 Kubernetes 的一等公民进行管理，实现了云端统一管控物理设备的能力。
 
 ```mermaid
 graph TB
@@ -1327,7 +1328,7 @@ spec:
                 image: "registry.company.com/edge/monitor:v1.0"
 ```
 
-#<!-- chunk: 7.3 边缘 Job (Edge Batch Jobs) -->## 7.3 边缘 Job (Edge Batch Jobs)
+#<!-- chunk: 7.3 边缘 Job (Edge Batch [[Jobs|Jobs]]) -->## 7.3 边缘 Job (Edge Batch Jobs)
 
 ```yaml
 # 边缘批量作业 - 定期数据清理
@@ -2474,22 +2475,22 @@ AI 推理:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
+- domain-37-edge-computing MOC
 - [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|02-cloud-edge-collaboration]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|03-kubeedge-architecture-deployment]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|05-openyurt-architecture]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|06-superedge-architecture]]
+- 02-cloud-edge-collaboration
+- 03-kubeedge-architecture-deployment
+- 05-openyurt-architecture
+- 06-superedge-architecture

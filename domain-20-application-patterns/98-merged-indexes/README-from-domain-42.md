@@ -60,6 +60,7 @@ related_topics:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
 - domain-11-ai-infra
+created: "2026-05-23"
 ---
 
 # Topic: 应用层架构设计最佳实践

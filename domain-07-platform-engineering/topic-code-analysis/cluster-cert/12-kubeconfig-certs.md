@@ -1,5 +1,5 @@
 ---
-title: kubeconfig 中的证书嵌入逻辑
+title: kubeconfig 中的证书嵌入逻辑 (topic-code-analysis)
 description: 'description: ''| client-go 配置 | `staging/src/k8s.io/client-go/tools/clientcmd/` | kubeconfig'
 category: general
 tags:
@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: kubeconfig 中的证书嵌入逻辑

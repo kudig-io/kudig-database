@@ -49,6 +49,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # VMware vSphere 企业级灾备与业务连续性
@@ -804,7 +805,7 @@ alert_rules:
     message: "虚拟机快照过大可能影响备份和存储性能"
 ```
 
-#<!-- chunk: Prometheus 集成监控 -->## Prometheus 集成监控
+#<!-- chunk: [[Prometheus|Prometheus]] 集成监控 -->## Prometheus 集成监控
 
 ```yaml
 # Prometheus vSphere Exporter 配置
@@ -1325,24 +1326,24 @@ capacity_management:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
-- [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
+- domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
+- [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
+- Veeam Backup & Replication 企业级备份恢复解决方案
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- Kubernetes 备份与恢复深度实践
+- 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+- 应用级灾备架构：多区域部署与故障转移
+- Velero 企业级备份恢复实践指南
 
 ## See Also
 
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|09-application-level-disaster-recovery]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|99-velero-backup-recovery-guide]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|02-veeam-enterprise-backup]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|03-enterprise-disaster-recovery-chaos-engineering]]
+- 09-application-level-disaster-recovery
+- 99-velero-backup-recovery-guide
+- 02-veeam-enterprise-backup
+- 03-enterprise-disaster-recovery-chaos-engineering
 
 ## Related
 

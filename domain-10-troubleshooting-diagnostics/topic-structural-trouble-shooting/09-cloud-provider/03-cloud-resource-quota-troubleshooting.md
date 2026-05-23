@@ -1,5 +1,5 @@
 ---
-title: 云资源配额与 API 限流故障排查指南
+title: 云资源配额与 API 限流故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 云资源配额与 API 限流故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 云资源配额与 API 限流故障排查指南
@@ -53,12 +54,12 @@ tags:
 - troubleshooting
 - decision-tree
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - hpa
 - job
-- cronjob
-- ingress
+- [[CronJob|cronjob]]
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -681,8 +682,8 @@ echo "✓ 配额检查通过"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

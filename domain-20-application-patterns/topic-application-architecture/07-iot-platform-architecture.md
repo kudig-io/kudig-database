@@ -1,14 +1,51 @@
 ---
+title: 物联网 (IoT) 平台 Kubernetes 生产架构设计
+description: 'title: 物联网 IoT 平台架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- flux
+- kafka
+- statefulset
+- gateway
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 物联网 (IoT) 平台 Kubernetes 生产架构设计 是什么
+- 如何 物联网 (IoT) 平台 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 物联网
+- IoT
+- 平台
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- kafka-basics
+created: "2026-05-23"
+---
+
 title: 物联网 IoT 平台架构设计
-description: '# 物联网 (IoT) 平台 Kubernetes 生产架构设计'
+description: '# 物联网 (IoT) 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- flux
+- [[Flux|flux]]
 - kafka
-- statefulset
+- [[StatefulSet|statefulset]]
 - gateway
 - operator
 - rag
@@ -38,19 +75,24 @@ trigger_keywords:
 - 时序数据库
 - OTA升级
 - 设备影子
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- kafka-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-iot-platform-architecture
 - topic-edge-computing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
-# 物联网 (IoT) 平台 [[entities/kubernetes|kubernetes]] 生产架构设计
+# 物联网 (IoT) 平台 Kubernetes 生产架构设计
 
 > **适用场景**: 智能家居 / 工业物联网 / 车联网 / 智慧城市 / 农业监测 / 能源管理  
 > **适用版本**: Kubernetes v1.29 - v1.33  
@@ -59,7 +101,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、设备接入与认证架构](#二设备接入与认证架构)
@@ -72,7 +114,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -121,7 +163,7 @@ flowchart TB
 
 ---
 
-## 二、设备接入与认证架构
+<!-- chunk: 二、设备接入与认证架构 -->## 二、设备接入与认证架构
 
 ```mermaid
 flowchart TB
@@ -153,7 +195,7 @@ flowchart TB
     style Management fill:#e8f5e9
 ```
 
-### 设备认证流程
+#<!-- chunk: 设备认证流程 -->## 设备认证流程
 
 ```mermaid
 sequenceDiagram
@@ -175,7 +217,7 @@ sequenceDiagram
 
 ---
 
-## 三、消息总线与数据流架构
+<!-- chunk: 三、消息总线与数据流架构 -->## 三、消息总线与数据流架构
 
 ```mermaid
 flowchart TB
@@ -210,7 +252,7 @@ flowchart TB
     style Routing fill:#e8f5e9
 ```
 
-### EMQX MQTT Broker K8s 部署
+#<!-- chunk: EMQX MQTT Broker K8s 部署 -->## EMQX MQTT Broker K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -292,7 +334,7 @@ spec:
 
 ---
 
-## 四、规则引擎与实时处理架构
+<!-- chunk: 四、规则引擎与实时处理架构 -->## 四、规则引擎与实时处理架构
 
 ```mermaid
 flowchart TB
@@ -325,7 +367,7 @@ flowchart TB
 
 ---
 
-## 五、数字孪生与可视化架构
+<!-- chunk: 五、数字孪生与可视化架构 -->## 五、数字孪生与可视化架构
 
 ```mermaid
 flowchart TB
@@ -355,7 +397,7 @@ flowchart TB
 
 ---
 
-## 六、OTA 升级架构
+<!-- chunk: 六、OTA 升级架构 -->## 六、OTA 升级架构
 
 ```mermaid
 flowchart TB
@@ -387,7 +429,7 @@ flowchart TB
 
 ---
 
-## 七、边缘计算架构
+<!-- chunk: 七、边缘计算架构 -->## 七、边缘计算架构
 
 ```mermaid
 flowchart TB
@@ -429,7 +471,7 @@ flowchart TB
     style CloudCenter fill:#fff8e1
 ```
 
-### KubeEdge 边缘节点部署
+#<!-- chunk: KubeEdge 边缘节点部署 -->## KubeEdge 边缘节点部署
 
 ```yaml
 apiVersion: apps/v1
@@ -477,9 +519,9 @@ spec:
 
 ---
 
-## 八、K8s 部署架构
+<!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-### 时序数据库 TDengine 部署
+#<!-- chunk: 时序数据库 TDengine 部署 -->## 时序数据库 TDengine 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -546,9 +588,33 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [EMQX 文档](https://www.emqx.io/docs/)
 - [KubeEdge 文档](https://kubeedge.io/docs/)
 - [TDengine 文档](https://docs.tdengine.com/)
 - [IoT MQTT 协议](https://mqtt.org/)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 05-online-education-architecture
+- 06-fintech-architecture
+- 08-ai-ml-inference-architecture
+- 09-gaming-backend-architecture

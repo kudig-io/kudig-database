@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -52,9 +53,9 @@ tags:
 - k8s
 - events
 - troubleshooting
-- kubelet
-- prometheus
-- containerd
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[containerd|containerd]]
 - cri-o
 - redis
 - mysql
@@ -1494,10 +1495,10 @@ groups:
 
 ## See Also
 
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02-pod-container-lifecycle-events]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03-image-pull-events]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05-scheduling-preemption-events]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06-node-lifecycle-condition-events]]
+- 02-pod-container-lifecycle-events
+- 03-image-pull-events
+- 05-scheduling-preemption-events
+- 06-node-lifecycle-condition-events
 
 ## Related
 

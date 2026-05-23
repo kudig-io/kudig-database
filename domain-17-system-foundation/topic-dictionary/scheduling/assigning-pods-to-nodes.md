@@ -29,13 +29,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
-# Assigning Pods to Nodes
+# Assigning [[Pods|Pods]] to Nodes
 
 ## 概述
 
-Kubernetes 提供了多种方式将 Pod 约束到特定节点运行，或让 Pod 优先在某些节点上运行。推荐的方法都使用标签选择器（label selectors）来促进选择。虽然通常不需要设置此类约束（调度器会自动进行合理放置），但在某些情况下，用户可能需要控制 Pod 部署到哪个节点。
+[[Kubernetes|Kubernetes]] 提供了多种方式将 Pod 约束到特定节点运行，或让 Pod 优先在某些节点上运行。推荐的方法都使用标签选择器（label selectors）来促进选择。虽然通常不需要设置此类约束（调度器会自动进行合理放置），但在某些情况下，用户可能需要控制 Pod 部署到哪个节点。
 
 ## 核心概念/原理
 
@@ -45,8 +46,8 @@ Kubernetes 提供了以下几种节点选择机制：
 2. **亲和性与反亲和性（Affinity and Anti-affinity）**：比 `nodeSelector` 更富有表现力的约束语言。
    - **Node affinity（节点亲和性）**：基于节点标签约束 Pod 可以调度到哪些节点，功能类似 `nodeSelector` 但更灵活，支持软规则（preferred）。
    - **Inter-pod affinity/anti-affinity（Pod 间亲和性/反亲和性）**：基于其他 Pod 的标签来约束 Pod 的放置，支持将相关 Pod 放置在同一个拓扑域或分散放置。
-3. **nodeName**：更直接的节点选择方式，如果 `nodeName` 字段不为空，调度器会忽略该 Pod，直接由指定节点上的 kubelet 尝试放置。这种方式会绕过调度器。
-4. **Pod topology spread constraints（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
+3. **nodeName**：更直接的节点选择方式，如果 `nodeName` 字段不为空，调度器会忽略该 Pod，直接由指定节点上的 [[kubelet|kubelet]] 尝试放置。这种方式会绕过调度器。
+4. **[[Pod Topology Spread Constraints|Pod topology spread constraints]]（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
 
 ## 关键机制或特性
 

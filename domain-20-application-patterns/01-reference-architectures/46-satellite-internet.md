@@ -35,6 +35,7 @@ prerequisites:
 - kafka-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 卫星互联网架构设计
@@ -44,7 +45,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - postgresql
@@ -61,7 +62,7 @@ audience:
 - 阿里云大数据解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 低轨卫星 LEO 星座 Kubernetes 部署
+- 低轨卫星 LEO 星座 [[Kubernetes|Kubernetes]] 部署
 - 卫星遥感数据处理 GPU 集群架构
 - 卫星物联网 IoT 数据采集架构
 - TLE 轨道预测数据处理
@@ -636,7 +637,7 @@ flowchart LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -651,7 +652,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/44-martech-adtech.md|44-martech-adtech]]
-- [[domain-20-application-patterns/45-smart-port-shipping.md|45-smart-port-shipping]]
-- [[domain-20-application-patterns/47-smart-mining.md|47-smart-mining]]
-- [[domain-20-application-patterns/48-vocational-edtech.md|48-vocational-edtech]]
+- 44-martech-adtech
+- 45-smart-port-shipping
+- 47-smart-mining
+- 48-vocational-edtech

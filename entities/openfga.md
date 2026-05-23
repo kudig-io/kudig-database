@@ -1,5 +1,5 @@
 ---
-title: OpenFGA
+title: OpenFGA (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # OpenFGA
@@ -73,8 +74,8 @@ OpenFGA 是细粒度授权（Fine-Grained Authorization）系统，基于 Google
 - [[zot]] — zot
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/openfga/openfga.md|openfga]]
-- [[entities/kubearmor.md|KubeArmor]]
+- openfga
+- [[entities/kubearmor.md|[[KubeArmor|KubeArmor]]]]
 - [[entities/tokenetes.md|Tokenetes]]
 - [[entities/containerssh.md|ContainerSSH]]
 - [[entities/parsec.md|Parsec]]

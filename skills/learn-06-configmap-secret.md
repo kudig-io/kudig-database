@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 第六课：ConfigMap 和 Secret - 配置管理
@@ -357,7 +358,7 @@ kubectl describe secret <name>
 
 **关联文档**:
 - [../06-configuration/06-namespace-resource-quota.md](../06-configuration/06-namespace-resource-quota.md) — 命名空间与资源配额
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理故障 [[SKILL|Skill]]
 - [../../domain-05-security-compliance/](../../domain-05-security-compliance/) — K8s 安全文档
 
 ## Related

@@ -1,5 +1,5 @@
 ---
-title: 企业级实战案例
+title: 企业级实战案例 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 实战案例专题 | **最后更新**: 2026-03 | **关键词**: K8s 运维 Agent, AIOps,'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 企业级实战案例
@@ -45,11 +46,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -664,8 +665,8 @@ Phase 4: Mature（持续）
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | 案例中 ReAct/LangGraph 的应用 |
 | [04 - RAG 检索](./04-rag-knowledge-retrieval.md) | kudig-database 在运维 Agent 中的 RAG 实践 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | Supervisor-Worker 模式的实际案例 |
-| [10 - 安全护栏](./[[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md) | 金融案例中的合规护栏实现 |
-| [14 - Agent 赋能设计与落地路径](./[[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]].md) | K8s Agent 的战略设计 |
+| [10 - 安全护栏](./10-security-guardrails.md) | 金融案例中的合规护栏实现 |
+| [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s Agent 的战略设计 |
 | [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障树分析在 AIOps Agent 中的应用 |
 
 ---
@@ -676,7 +677,7 @@ Phase 4: Mature（持续）
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -691,7 +692,7 @@ Phase 4: Mature（持续）
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
-- [[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]]
+- 10-security-guardrails
+- 11-cost-latency-optimization
+- 13-trusted-agent-system-fiscal-plan
+- 14-agent-kudig-design-strategy

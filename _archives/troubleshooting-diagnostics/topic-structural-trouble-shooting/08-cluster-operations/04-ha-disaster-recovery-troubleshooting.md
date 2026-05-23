@@ -611,7 +611,7 @@ kubeadm certs renew all
 
 ### 相关文档
 
-- [etcd 故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting-archive/01-control-plane/02-etcd-troubleshooting|02-etcd-troubleshooting]].md)
+- [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
 - [证书故障排查](../06-security-auth/02-certificate-troubleshooting.md)
 - [集群维护故障排查](./01-cluster-maintenance-troubleshooting.md)

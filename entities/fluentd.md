@@ -1,5 +1,5 @@
 ---
-title: Fluentd
+title: Fluentd (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Fluentd
@@ -57,14 +58,14 @@ description: '## 项目概述'
 
 ## Related
 
-- [[06-containerd-observability]] — containerd 可观测性
+- [[06-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[stacker]] — Stacker
 - [[opentelemetry]] — OpenTelemetry
 - [[kusionstack]] — KusionStack
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-06-observability/02-fluentd-enterprise-log-processing.md|02-fluentd-enterprise-log-processing]]
-- [[domain-19-landscape-references/graduated/fluentd/fluentd.md|fluentd]]
+- 02-fluentd-enterprise-log-processing
+- fluentd
 - [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
 - [[concepts/bp-observability|最佳实践：Observability]] — Cross-reference
 - [[skills/k8s-logging-management-guide|Kubernetes 日志管理最佳实践]] — Cross-reference

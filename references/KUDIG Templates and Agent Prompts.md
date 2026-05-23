@@ -25,6 +25,7 @@ trigger_keywords:
 - Prompts
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Templates and Agent Prompts

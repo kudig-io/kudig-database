@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Develop CRD Operator
@@ -56,7 +57,7 @@ This generates:
 
 ### Step 3: Implement Reconciliation
 
-The Reconcile() function follows the [[concepts/controller-pattern.md|Controller Pattern]]:
+The Reconcile() function follows the [[concepts/controller-pattern.md|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]:
 
 1. Fetch the CR instance
 2. Determine desired state from spec
@@ -65,7 +66,7 @@ The Reconcile() function follows the [[concepts/controller-pattern.md|Controller
 5. Update CR status
 6. Return (requeue on error, no-requeue on success)
 
-### Step 4: Add Finalizers
+### Step 4: Add [[Finalizers|Finalizers]]
 
 Finalizers prevent CR deletion before cleanup:
 ```go
@@ -84,7 +85,7 @@ if !deletionTimestamp.IsZero() {
 
 Use `envtest` (provided by controller-runtime) for integration testing:
 - Spins up a real API Server and etcd
-- Tests reconciler against real Kubernetes API
+- Tests reconciler against real [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 - Fast, no full cluster needed
 
 ### Step 6: Package and Deploy

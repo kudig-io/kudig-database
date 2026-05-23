@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: 专有云 (Apsara Stack) - SLS 日志服务
@@ -41,7 +42,7 @@ tags:
 - aks
 - ack
 - docker
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -53,7 +54,7 @@ estimated_read_time: 5min
 intent_queries:
 - 专有云 (Apsara Stack) - SLS 日志服务 是什么
 - 如何 专有云 (Apsara Stack) - SLS 日志服务
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - 专有云
 - Apsara
@@ -151,7 +152,7 @@ spec:
 ### 审计日志集成
 
 1. **ASOP 审计**: 记录平台管理员的操作日志。
-2. **ACK 审计**: 记录 Kubernetes API Server 的所有请求。
+2. **ACK 审计**: 记录 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 的所有请求。
 3. **RDS/OSS 审计**: 存储日志需定期同步至 SLS 进行合规性检查。
 
 ### 导出与转发

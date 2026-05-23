@@ -30,6 +30,7 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 网络安全最佳实践
@@ -49,7 +50,7 @@ prerequisites:
 
 ### 默认拒绝策略
 
-每个生产命名空间必须配置默认拒绝 Ingress 和 Egress 的网络策略 ^[inferred]：
+每个生产命名空间必须配置默认拒绝 [[Ingress|Ingress]] 和 Egress 的网络策略 ^[inferred]：
 
 ```yaml
 spec:
@@ -65,7 +66,7 @@ spec:
 
 ### DNS 出口策略
 
-配置默认拒绝策略时，必须允许 Pod 向 kube-system 命名空间的 DNS 查询（UDP/TCP 53），否则 Service 发现会失败 ^[inferred]。
+配置默认拒绝策略时，必须允许 Pod 向 kube-system 命名空间的 DNS 查询（UDP/TCP 53），否则 [[Service|Service]] 发现会失败 ^[inferred]。
 
 ### 应用层策略
 
@@ -87,11 +88,11 @@ spec:
 
 ### 授权策略
 
-使用 Istio AuthorizationPolicy 基于 SPIFFE 身份（principals）进行细粒度访问控制 ^[inferred]。
+使用 Istio AuthorizationPolicy 基于 [[SPIFFE|SPIFFE]] 身份（principals）进行细粒度访问控制 ^[inferred]。
 
 ## 实施步骤
 
-1. **启用网络策略支持**：确认 CNI 插件（Calico/Cilium）支持 NetworkPolicy
+1. **启用网络策略支持**：确认 CNI 插件（Calico/Cilium）支持 [[NetworkPolicy|NetworkPolicy]]
 2. **配置默认拒绝策略**：为生产命名空间配置 Ingress + Egress 默认拒绝
 3. **配置应用网络策略**：按应用间依赖关系配置允许规则
 4. **安装服务网格**：安装 Istio，启用自动注入和 mTLS

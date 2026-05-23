@@ -55,11 +55,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 07 - RBAC权限矩阵表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
 <!-- chunk: 内置ClusterRole -->
 ## 内置ClusterRole
@@ -79,7 +80,7 @@ cross_refs:
 
 | API Group | 常见资源 | 说明 |
 |-----------|---------|------|
-| `""` (core) | pods, services, secrets, configmaps, pvc, nodes, namespaces | 核心API资源 |
+| `""` (core) | [[Pods|pods]], services, [[Secrets|secrets]], [[ConfigMaps|configmaps]], pvc, nodes, namespaces | 核心API资源 |
 | `apps` | deployments, statefulsets, daemonsets, replicasets | 工作负载控制器 |
 | `batch` | jobs, cronjobs | 批处理任务 |
 | `networking.k8s.io` | networkpolicies, ingresses, ingressclasses | 网络资源 |
@@ -838,25 +839,25 @@ roleRef:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
+- 证书管理与 TLS 配置
 
 ## See Also
 
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05-policy-validation-tools]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06-pod-security-standards]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08-security-best-practices]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|09-security-hardening-production]]
+- 05-policy-validation-tools
+- 06-pod-security-standards
+- 08-security-best-practices
+- 09-security-hardening-production
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

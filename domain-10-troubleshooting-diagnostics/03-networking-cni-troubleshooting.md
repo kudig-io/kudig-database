@@ -63,6 +63,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
@@ -81,7 +82,7 @@ related_docs:
 
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-03 | **参考**: [CNI Specification](https://github.com/containernetworking/cni)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-03 | **参考**: [CNI Specification](https://github.com/containernetworking/cni)
 
 ---
 
@@ -900,9 +901,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]

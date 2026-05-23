@@ -45,11 +45,12 @@ prerequisites:
 skill_id: SKILL-20_NETWORKPOLICY_CONNECTIVITY-001
 skill_name: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
 skill_id: "SKILL-NET-004"
-skill_name: "NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting"
+skill_name: "[[NetworkPolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting"
 version: "1.0"
 category: "network"
 severity_range: "P0-P2"
@@ -61,7 +62,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "10-45min"
 risk_level: "medium"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "NetworkPolicy"
   - "网络策略"
@@ -72,7 +73,7 @@ trigger_keywords:
   - "timeout"
   - "CNI policy"
   - "calico policy"
-  - "cilium policy"
+  - "[[Cilium|cilium]] policy"
 trigger_events:
   - "NetworkPolicyViolation"
   - "CalicoPolicyViolation"
@@ -110,7 +111,7 @@ cross_refs:
   - type: "domain"
     path: "../domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting.md"
     label: "NetworkPolicy 深度排查"
-  - type: "skill"
+  - type: "[[SKILL|skill]]"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md"
     label: "SKILL-NET-002 Service 连通性"
 authors:
@@ -221,7 +222,7 @@ NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 Netwo
 
 ### 2.3 排除标准
 
-- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级故障 → domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md
+- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级故障 → [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md
 - DNS 解析失败 → SKILL-NET-001
 - Service 无 Endpoint → SKILL-NET-002
 - 节点状态 NotReady → SKILL-NODE-001

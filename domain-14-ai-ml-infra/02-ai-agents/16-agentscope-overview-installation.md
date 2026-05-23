@@ -1,5 +1,5 @@
 ---
-title: AgentScope 概述与安装入门
+title: AgentScope 概述与安装入门 (domain-14-ai-ml-infra)
 description: 'title: AgentScope 概述与安装入门'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - redis-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 概述与安装入门
@@ -615,11 +616,11 @@ AgentScope 生态
 |-----------|----------------|---------|
 | 16 - 概述与安装 | [03 - 框架对比](./03-agent-frameworks-comparison.md) | AgentScope 在框架对比中的深度展开 |
 | 17 - 核心概念 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | AgentScope 对通用 Agent 概念的具体实现 |
-| 18 - 工具系统 | [05 - Tool Use](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | AgentScope 的工具调用实现与 MCP 集成 |
+| 18 - 工具系统 | [05 - Tool Use](./05-tool-use-function-calling.md) | AgentScope 的工具调用实现与 MCP 集成 |
 | 19 - 记忆管理 | [07 - 记忆管理](./07-memory-context-management.md) | AgentScope 的记忆/上下文具体方案 |
 | 20 - 多 Agent | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | AgentScope MsgHub/Pipeline 编排实践 |
 | 21 - 高级特性 | [04 - RAG](./04-rag-knowledge-retrieval.md) | AgentScope RAG、评测、RL 微调等进阶 |
-| 22 - 生产部署 | [09 - 生产部署](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | AgentScope Runtime 的 K8s 部署实践 |
+| 22 - 生产部署 | [09 - 生产部署](./09-production-deployment-guide.md) | AgentScope Runtime 的 K8s 部署实践 |
 
 ---
 
@@ -719,7 +720,7 @@ python -c "import agentscope; print(agentscope.__version__)"
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -734,7 +735,7 @@ python -c "import agentscope; print(agentscope.__version__)"
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]]
-- [[domain-14-ai-ml-infra/15-agent-corpus-gap-analysis.md|15-agent-corpus-gap-analysis]]
-- [[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]]
-- [[domain-14-ai-ml-infra/18-agentscope-tool-system.md|18-agentscope-tool-system]]
+- 14-agent-kudig-design-strategy
+- 15-agent-corpus-gap-analysis
+- 17-agentscope-core-concepts
+- 18-agentscope-tool-system

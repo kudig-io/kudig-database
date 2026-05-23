@@ -31,6 +31,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # 负载测试方法论
@@ -87,4 +88,4 @@ export default function () {
 
 ## 相关
 
-- [[domain-09-reliability-engineering/03-capacity-planning/01-capacity-planning-guide]]
+- domain-09-reliability-engineering/03-capacity-planning/01-capacity-planning-guide

@@ -35,13 +35,14 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# 边缘计算与轻量级 Kubernetes
+# 边缘计算与轻量级 [[Kubernetes|Kubernetes]]
 
 ## 概述
 
-**边缘计算（Edge Computing）** 将数据处理能力下沉到靠近数据源或终端用户的边缘节点，以降低延迟、减少带宽消耗并满足数据主权要求。Kubernetes 正在从传统数据中心向工厂、零售门店、自动驾驶车辆和卫星等边缘场景扩展。**K3s、MicroK8s、k0s** 等轻量级 Kubernetes 发行版，以及 **WebAssembly** 运行时，正在推动这一趋势。2026 年，已有超过半数的企业在边缘生产环境中运行 Kubernetes 工作负载。
+**边缘计算（Edge Computing）** 将数据处理能力下沉到靠近数据源或终端用户的边缘节点，以降低延迟、减少带宽消耗并满足数据主权要求。Kubernetes 正在从传统数据中心向工厂、零售门店、自动驾驶车辆和卫星等边缘场景扩展。**[[k3s|K3s]]、MicroK8s、[[K0s|k0s]]** 等轻量级 Kubernetes 发行版，以及 **WebAssembly** 运行时，正在推动这一趋势。2026 年，已有超过半数的企业在边缘生产环境中运行 Kubernetes 工作负载。
 
 ## 核心概念/原理
 
@@ -66,8 +67,8 @@ prerequisites:
 
 K3s 是边缘 Kubernetes 的主流选择：
 - **单节点即可运行**：Server 节点自带 controller 和 worker 能力
-- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 etcd
-- **内置组件**：Traefik Ingress、CoreDNS、Flannel CNI、Metrics Server
+- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 [[etcd|etcd]]
+- **内置组件**：Traefik [[Ingress|Ingress]]、CoreDNS、Flannel CNI、Metrics Server
 - **资源占用低**：仅需 512MB 内存即可运行
 - **ARM64 支持**：完美适配 Raspberry Pi、NVIDIA Jetson 等边缘硬件
 

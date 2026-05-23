@@ -41,11 +41,12 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+created: "2026-05-23"
 ---
 
-# Helm Chart 部署与回滚故障诊断
+# [[Helm|Helm]] Chart 部署与回滚故障诊断
 
-> **Skill ID**: `SKILL-HELM-001`  
+> **[[SKILL|Skill]] ID**: `SKILL-HELM-001`  
 > **严重级别**: P2  
 > **执行模式**: L1  
 > **来源**: FTA + Structural 文档派生
@@ -54,7 +55,7 @@ k8s_versions:
 
 ## 1. 概述
 
-Helm Chart 部署与回滚故障诊断 是 Kubernetes 生产环境中 **P2 级故障**。
+Helm Chart 部署与回滚故障诊断 是 [[Kubernetes|Kubernetes]] 生产环境中 **P2 级故障**。
 
 **典型触发条件**:
 - [请补充典型症状]
@@ -132,7 +133,7 @@ Helm Chart 部署与回滚故障诊断 是 Kubernetes 生产环境中 **P2 级�
 # 验证修复结果
 # ```bash
 # ```
-# - [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+# - domain-10-troubleshooting-diagnostics MOC
 ```
 
 **验证标准**:

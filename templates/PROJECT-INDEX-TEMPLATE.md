@@ -16,6 +16,7 @@ intent_queries:
 - 如何 开源项目索引模板
 trigger_keywords:
 - 开源项目索引模板
+created: "2026-05-23"
 ---
 
 # 开源项目索引模板

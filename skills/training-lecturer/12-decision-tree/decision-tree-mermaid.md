@@ -1,11 +1,11 @@
 ---
-title: 故障排查决策树 - Mermaid 可视化版
-description: '# 故障排查决策树 - Mermaid 可视化版'
-category: k8s-lecturer
+title: 故障排查决策树 - Mermaid 可视化版 [troubleshooting]
+description: 'title: 故障排查决策树 - Mermaid 可视化版'
+category: learning
 tags:
 - k8s
 - training
-- lecturer
+- hands-on
 - apiserver
 - kubelet
 - cilium
@@ -14,11 +14,55 @@ tags:
 - coredns
 - docker
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: beginner
+reading_level: beginner
 audience:
-- 培训师
-- 技术经理
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 故障排查决策树 - Mermaid 可视化版 是什么
+- 如何 故障排查决策树 - Mermaid 可视化版
+- Kubernetes 11 production operations 最佳实践
+- 故障排查决策树 - Mermaid 可视化版 故障排查
+- 故障排查决策树 - Mermaid 可视化版 排障步骤
+trigger_keywords:
+- 故障排查决策树
+- Mermaid
+- 可视化版
+- production
+- operations
+- learn
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- cilium-basics
+- cni-basics
+created: "2026-05-23"
+---
+
+---
+title: 故障排查决策树 - Mermaid 可视化版
+description: '# 故障排查决策树 - Mermaid 可视化版'
+category: learning
+tags:
+- tutorial
+- k8s
+- training
+- lecturer
+- apiserver
+- [[kubelet|kubelet]]
+- [[Cilium|cilium]]
+- flannel
+- calico
+- [[CoreDNS|coredns]]
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE 工程师
+- 运维工程师
+- 值班工程师
 estimated_read_time: 5min
 intent_queries:
 - 故障排查决策树 - Mermaid 可视化版 是什么
@@ -28,13 +72,18 @@ trigger_keywords:
 - Mermaid
 - 可视化版
 - k8s
-- lecturer
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- cilium-basics
-- cni-basics
----
+- learning
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+
+tier: peripheral---
 
 # 故障排查决策树 - Mermaid 可视化版
 
@@ -535,7 +584,14 @@ flowchart TD
 ---
 
 **关联文档**:
-- [../[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../README.md) — 讲师完整台词设计
-- [../11-oncall-qa/oncall-quick-qa.md](../11-oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
+- [../README.md](../README.md) — 讲师完整台词设计
+- [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
+
+## See Also
+
+- kubernetes-workload-presentation
+- presentation-template
+- 01-what-is-kubernetes
+- 02-pod-basics

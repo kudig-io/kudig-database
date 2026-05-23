@@ -42,9 +42,10 @@ prerequisites:
 - policy-basics
 - backup-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-# 01 - Kubernetes 生产环境运维最佳实践字典
+# 01 - [[Kubernetes|Kubernetes]] 生产环境运维最佳实践字典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -62,7 +63,7 @@ prerequisites:
 - **资深专家**: 深入架构设计、故障预防和大规模集群管理
 
 **前置知识要求**:
-- 基础: 了解 Kubernetes 核心概念（Pod、Deployment、Service）
+- 基础: 了解 Kubernetes 核心概念（Pod、Deployment、[[Service|Service]]）
 - 进阶: 熟悉 YAML 配置语法和 kubectl 基本操作
 - 专家: 了解分布式系统原理和 Linux 系统管理
 
@@ -104,7 +105,7 @@ prerequisites:
 
 **核心要点**:
 - **API Server 并发控制**: 限制同时处理的请求数量，防止控制平面过载
-- **etcd 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
+- **[[etcd|etcd]] 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
 - **资源请求与限制**: 为每个容器设置 CPU/内存的下限（requests）和上限（limits），这是 K8s 调度和稳定性的基石
 - **健康检查三件套**: livenessProbe（存活探针）、readinessProbe（就绪探针）、startupProbe（启动探针）缺一不可
 - **网络策略**: 默认拒绝所有流量，按需开放，实现「零信任」网络

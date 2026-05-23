@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 25: Flannel 网络
@@ -106,7 +107,7 @@ tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
 - **Pod CIDR**: 每个节点分配一个子网 (如 /25 或 /26)，Pod 从中获取 IP
 - **VxLAN 封装**: Pod 跨节点通信时，数据包会被封装后转发
 - **性能**: 由于封装开销，Flannel 性能略低于 Terway ENIIP
-- **不支持 NetworkPolicy**: Flannel 不原生支持 K8S NetworkPolicy
+- **不支持 [[NetworkPolicy|NetworkPolicy]]**: Flannel 不原生支持 K8S NetworkPolicy
 - **优势**: 部署简单、IP 消耗少 (Pod IP 不占用 VPC 地址段)
 - **限制**: Pod IP 在 VPC 外不可直接路由
 
@@ -274,5 +275,5 @@ Day 26 将学习存储卷 (PV/PVC) 的创建与删除。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]

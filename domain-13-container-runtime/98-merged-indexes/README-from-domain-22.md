@@ -33,6 +33,7 @@ trigger_keywords:
 - image
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Domain 22: 容器镜像管理 (Container Image Management)

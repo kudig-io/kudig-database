@@ -47,6 +47,7 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)

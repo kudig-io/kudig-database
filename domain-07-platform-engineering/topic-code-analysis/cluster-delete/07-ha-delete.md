@@ -1,5 +1,5 @@
 ---
-title: HA 集群删除注意事项
+title: HA 集群删除注意事项 (topic-code-analysis)
 description: '## 概述'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: HA 集群删除注意事项

@@ -1,5 +1,5 @@
 ---
-title: OpenClaw SKILL.md 机制深度解析
+title: OpenClaw SKILL.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw SKILL.md 机制深度解析'
 category: general
 tags:
@@ -32,9 +32,10 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: OpenClaw SKILL.md 机制深度解析
+title: OpenClaw [[SKILL|SKILL]].md 机制深度解析
 description: '# OpenClaw SKILL.md 机制深度解析'
 category: ai-agent
 tags:
@@ -43,7 +44,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - gpu
 last_updated: 2026-05
 difficulty: advanced
@@ -515,11 +516,11 @@ SKILL.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | SKILL.md 在 7 文件体系中的定位 |
-| [33 - Harness 上下文与记忆工程](./[[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]].md) | 四层上下文模型中的知识上下文 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | SKILL.md 在 7 文件体系中的定位 |
+| [33 - Harness 上下文与记忆工程](./33-agent-harness-context-memory.md) | 四层上下文模型中的知识上下文 |
 | [openclaw-workspace/SKILL.md](./openclaw-workspace/SKILL.md) | K8S 运维诊断技能库完整配置 |
 | [47 - TOOLS.md 机制解析](./47-openclaw-tools-mechanism.md) | SKILL.md SOP 与 TOOLS.md 工具的对应关系 |
-| [49 - MEMORY.md 机制解析](./[[domain-14-ai-ml-infra/49-openclaw-memory-mechanism.md|49-openclaw-memory-mechanism]].md) | 诊断经验从 SKILL.md 到 MEMORY.md 的流转 |
+| [49 - MEMORY.md 机制解析](./49-openclaw-memory-mechanism.md) | 诊断经验从 SKILL.md 到 MEMORY.md 的流转 |
 
 ---
 
@@ -529,7 +530,7 @@ SKILL.md 配置验证:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -544,7 +545,7 @@ SKILL.md 配置验证:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
-- [[domain-14-ai-ml-infra/49-openclaw-memory-mechanism.md|49-openclaw-memory-mechanism]]
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
+- 46-openclaw-agents-mechanism
+- 47-openclaw-tools-mechanism
+- 49-openclaw-memory-mechanism
+- 50-openclaw-identity-mechanism

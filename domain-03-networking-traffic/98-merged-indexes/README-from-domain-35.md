@@ -40,6 +40,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Domain 35: eBPF 技术体系 (eBPF Technology Stack)

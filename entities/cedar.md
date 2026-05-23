@@ -1,5 +1,5 @@
 ---
-title: Cedar
+title: Cedar (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Cedar
@@ -56,7 +57,7 @@ Cedar 是一个由 AWS 开发的开源策略语言和评估引擎，用于定义
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 
 ## Related
 
@@ -66,5 +67,5 @@ Cedar 是一个由 AWS 开发的开源策略语言和评估引擎，用于定义
 - [[kubescape]] — Kubescape
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/cedar/cedar.md|cedar]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
+- cedar
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference

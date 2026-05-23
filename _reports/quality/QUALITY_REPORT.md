@@ -1,9 +1,9 @@
 ---
-title: Domain-10 扩展生态质量报告
-description: 'description: ''- **配置模板**: 200+ 个'''
+title: Domain-10 扩展生态质量报告 (reports)
+description: '- **配置模板**: 200+ 个'
 category: general
 tags:
-- reports
+- k8s
 - prometheus
 - grafana
 - helm
@@ -29,46 +29,9 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-title: Domain-10 扩展生态质量报告
-description: '- **配置模板**: 200+ 个'
-category: general
-tags:
-- [[entities/kubernetes|k8s]]
-- prometheus
-- grafana
-- helm
-- hpa
-- vpa
-- rbac
-- crd
-- operator
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- Domain-10 扩展生态质量报告 是什么
-- 如何 Domain-10 扩展生态质量报告
-trigger_keywords:
-- Domain-10
-- 扩展生态质量报告
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
----
 # Domain-10 扩展生态质量报告
 
 > **报告日期**: 2026-02-05 | **版本**: v1.0 | **状态**: ✅ 高质量完成
@@ -99,7 +62,7 @@ updated: '2026-05-21'
 │                    技术领域覆盖图                         │
 ├─────────────────────────────────────────────────────────┤
 │  开发层    │  管理层    │  部署层    │  治理层    │  企业层  │
-│  CRD/      │  HELM/     │  CI/CD/    │  SERVICE   │  ENTERPRISE│
+│  CRD/      │  HELM/     │  CI/CD/    │  service   │  ENTERPRISE│
 │  OPERATOR  │  KUSTOMIZE │  GITOPS    │  MESH      │  MANAGEMENT│
 │ (01-04)   │ (05-07)   │ (08-09)   │ (11-12)   │ (14-16)   │
 └─────────────────────────────────────────────────────────┘

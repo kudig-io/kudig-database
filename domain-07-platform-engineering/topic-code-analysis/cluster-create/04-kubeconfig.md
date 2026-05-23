@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 title: Kubeconfig Generation 源码分析

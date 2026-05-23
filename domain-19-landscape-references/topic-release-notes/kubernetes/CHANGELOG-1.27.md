@@ -33,6 +33,7 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -44,7 +45,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.27.15](#changelog-since-v12715)
+  - Changelog since v1.27.15](#changelog-since-v12715)
   - [Important Security Information](#important-security-information)
     - [CVE-2024-5321: Incorrect permissions on Windows containers logs](#cve-2024-5321-incorrect-permissions-on-windows-containers-logs)
   - [Changes by Kind](#changes-by-kind)
@@ -93,7 +94,7 @@ prerequisites:
     - [Container Images](#container-images-3)
   - [Changelog since v1.27.12](#changelog-since-v12712)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2024-3177: Bypassing mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2024-3177: Bypassing mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2024-3177-bypassing-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-3)
     - [Feature](#feature-2)
     - [Bug or Regression](#bug-or-regression-3)

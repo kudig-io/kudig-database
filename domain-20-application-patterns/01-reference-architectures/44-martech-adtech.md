@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 数字营销与广告科技架构设计
@@ -45,7 +46,7 @@ audience:
 - 广告平台技术负责人
 estimated_read_time: 5min
 intent_queries:
-- martech adtech kubernetes architecture
+- martech adtech [[Kubernetes|kubernetes]] architecture
 - 程序化广告K8s部署
 - DSP SSP广告平台
 - RTB实时竞价系统
@@ -298,8 +299,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -313,7 +314,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/42-secondhand-circular.md|42-secondhand-circular]]
-- [[domain-20-application-patterns/43-enterprise-im.md|43-enterprise-im]]
-- [[domain-20-application-patterns/45-smart-port-shipping.md|45-smart-port-shipping]]
-- [[domain-20-application-patterns/46-satellite-internet.md|46-satellite-internet]]
+- 42-secondhand-circular
+- 43-enterprise-im
+- 45-smart-port-shipping
+- 46-satellite-internet

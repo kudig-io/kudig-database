@@ -1,5 +1,5 @@
 ---
-title: ConfigMap 与 Secret 故障排查指南
+title: ConfigMap 与 Secret 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: ConfigMap 与 Secret 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: ConfigMap 与 Secret 故障排查指南
@@ -53,9 +54,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - docker
 - opa
 - mysql
@@ -742,13 +743,13 @@ kubectl rollout restart deployment <name>
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [RBAC 故障排查](../06-security-auth/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
-- [kubelet 故障排查](../02-node-components/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
+- [RBAC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting|01-rbac-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|01-kubelet-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

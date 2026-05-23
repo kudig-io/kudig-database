@@ -47,6 +47,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Wasm AI 推理 (Wasm AI Inference)
@@ -59,7 +60,7 @@ authors:
 
 1. [Wasm AI 推理架构概述](#1-wasm-ai-推理架构概述)
 2. [WASI-NN 标准接口](#2-wasi-nn-标准接口)
-3. [WasmEdge WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
+3. [[entities/wasmedge.md|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
 4. [ONNX Runtime Wasm](#4-onnx-runtime-wasm)
 5. [llama.cpp Wasm 移植](#5-llamacpp-wasm-移植)
 6. [模型优化与量化](#6-模型优化与量化)
@@ -68,7 +69,7 @@ authors:
 9. [Python/JS AI 推理集成](#9-pythonjs-ai-推理集成)
 10. [多模型服务架构](#10-多模型服务架构)
 11. [性能基准与对比](#11-性能基准与对比)
-12. [Kubernetes AI 推理集成](#12-kubernetes-ai-推理集成)
+12. [[entities/kubernetes.md|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
 13. [实战案例：图像分类服务](#13-实战案例图像分类服务)
 14. [实战案例：LLM 推理服务](#14-实战案例llm-推理服务)
 
@@ -1308,7 +1309,7 @@ Q2_K       2.9 GB    3.2 GB     3.0x      较大
 
 <!-- chunk: 7. 边缘 AI 推理部署 -->## 7. 边缘 AI 推理部署
 
-#<!-- chunk: 7.1 KubeEdge + Wasm AI -->## 7.1 KubeEdge + Wasm AI
+#<!-- chunk: 7.1 [[KubeEdge|KubeEdge]] + Wasm AI -->## 7.1 KubeEdge + Wasm AI
 
 ```yaml
 # kubeEdge-wasm-ai.yaml
@@ -2849,22 +2850,22 @@ Wasm AI 推理通过 **WASI-NN** 标准接口实现了跨平台、安全的 AI �
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- domain-38-webassembly-cloud-native KUDIG Database — Global MOC
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/06-wasm-component-model.md|06-wasm-component-model]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|07-wasm-plugin-system]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|09-wasm-serverless]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|10-wasm-security-sandbox]]
+- 06-wasm-component-model
+- 07-wasm-plugin-system
+- 09-wasm-serverless
+- 10-wasm-security-sandbox

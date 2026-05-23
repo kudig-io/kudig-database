@@ -34,13 +34,14 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # 可观测性（Observability）
 
 ## 概述
 
-在 Kubernetes 中，可观测性是通过收集和分析**指标（Metrics）**、**日志（Logs）**和**链路追踪（Traces）**——即可观测性的三大支柱——来更好地理解集群的内部状态、性能和健康情况的过程。控制平面组件和许多插件都会生成这些信号，通过聚合和关联它们，可以获得跨集群的统一视图。
+在 [[Kubernetes|Kubernetes]] 中，可观测性是通过收集和分析**指标（Metrics）**、**日志（Logs）**和**链路追踪（Traces）**——即可观测性的三大支柱——来更好地理解集群的内部状态、性能和健康情况的过程。控制平面组件和许多插件都会生成这些信号，通过聚合和关联它们，可以获得跨集群的统一视图。
 
 ## 核心概念/原理
 
@@ -53,13 +54,13 @@ prerequisites:
 
 ### 指标（Metrics）
 
-Kubernetes 组件以 Prometheus 格式从 `/metrics` 端点暴露指标，包括：
+Kubernetes 组件以 [[Prometheus|Prometheus]] 格式从 `/metrics` 端点暴露指标，包括：
 
 - kube-controller-manager
 - kube-proxy
 - kube-apiserver
 - kube-scheduler
-- kubelet
+- [[kubelet|kubelet]]
 
 kubelet 还暴露了 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/probes` 端点。插件如 **kube-state-metrics** 可丰富 Kubernetes 对象状态的指标。
 
@@ -69,7 +70,7 @@ kubelet 还暴露了 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/pro
 集群组件 → Prometheus 抓取器 → 时序数据库存储 → 告警/仪表板/自动化操作
 ```
 
-常用工具：Prometheus、Thanos、Cortex、Grafana Mimir。
+常用工具：Prometheus、[[Thanos|Thanos]]、[[Cortex|Cortex]]、Grafana Mimir。
 
 ### 日志（Logs）
 

@@ -23,6 +23,7 @@ trigger_keywords:
 - 的最小调度单元
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 第二课：Pod - K8s 的最小调度单元
@@ -364,7 +365,7 @@ kubectl logs <pod-name> --previous
 
 **关联文档**:
 - [../02-getting-started/](../02-getting-started/) — 快速入门
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## 相关概念
@@ -374,7 +375,7 @@ kubectl logs <pod-name> --previous
 
 ## Related
 
-- [[skills/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：Service - 让应用可以被访问
+- [[skills/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：[[Service|Service]] - 让应用可以被访问
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[docker]] — Docker
 - [[deployment]] — Deployment

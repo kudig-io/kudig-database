@@ -47,11 +47,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 13 - ConfigMap YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **相关领域**: [域3-存储与配置](../domain-3-storage/) | **前置知识**: Pod, Volume  
 > **关联配置**: [14-Secret参考](./14-secret-all-types.md) | [Pod配置](./01-pod-all-fields.md)
 
@@ -100,7 +101,7 @@ authors:
 |------|-----------|--------|
 | **存储内容** | 非敏感配置 | 敏感信息(密码, 证书) |
 | **数据编码** | 明文 | Base64 编码 |
-| **etcd 加密** | 否 | 可选(需 EncryptionConfiguration) |
+| **[[etcd|etcd]] 加密** | 否 | 可选(需 EncryptionConfiguration) |
 | **挂载方式** | tmpfs (内存) | tmpfs (内存) |
 | **大小限制** | 1MB | 1MB |
 | **不可变性** | 支持 (v1.21+) | 支持 (v1.21+) |
@@ -1507,22 +1508,22 @@ kubectl describe pod <pod-name> | grep "ConfigMap.*not found"
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests KUDIG Database — Global MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/11-gateway-api-core.md|11-gateway-api-core]]
-- [[domain-18-manifests-patterns/12-gateway-api-advanced-routes.md|12-gateway-api-advanced-routes]]
-- [[domain-18-manifests-patterns/14-secret-all-types.md|14-secret-all-types]]
-- [[domain-18-manifests-patterns/15-persistentvolume-reference.md|15-persistentvolume-reference]]
+- 11-gateway-api-core
+- 12-gateway-api-advanced-routes
+- 14-secret-all-types
+- 15-persistentvolume-reference

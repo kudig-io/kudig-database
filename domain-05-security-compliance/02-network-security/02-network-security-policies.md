@@ -70,11 +70,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md
   type: fta
   desc: 网络策略故障树
+created: "2026-05-23"
 ---
 
 # 02 - 网络安全策略与零信任架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 <!-- chunk: 网络安全架构全景 -->
 ## 网络安全架构全景
@@ -589,34 +590,34 @@ kubectl logs -n kube-system -l k8s-app=cilium
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
-- [[domain-05-security-compliance/README.md|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- domain-05-security-compliance KUDIG Database — Global MOC
+- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
+- index.md|Domain-7 安全 — 开源项目索引]]
+- Kubernetes 认证授权体系详解
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
+- 证书管理与 TLS 配置
 
 ## Related
 
 - [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|认证授权体系]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 认证授权体系
+- 运行时安全防护
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
 
 - [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-05-security-compliance/21-multicluster-security.md|21-multicluster-security]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|01-authentication-authorization-system]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|03-runtime-security-defense]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04-audit-logging-compliance]]
+- 21-multicluster-security
+- 01-authentication-authorization-system
+- 03-runtime-security-defense
+- 04-audit-logging-compliance

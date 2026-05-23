@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # LitmusChaos
@@ -38,7 +39,7 @@ prerequisites:
 
 ## 概述
 
-Litmus 是云原生混沌工程平台，提供完整的混沌实验编排和管理能力。它帮助团队在受控环境中测试系统弹性，发现潜在故障点并提高系统可靠性。
+[[Litmus|Litmus]] 是云原生混沌工程平台，提供完整的混沌实验编排和管理能力。它帮助团队在受控环境中测试系统弹性，发现潜在故障点并提高系统可靠性。
 
 ## 核心能力
 
@@ -81,7 +82,7 @@ Litmus 是云原生混沌工程平台，提供完整的混沌实验编排和管�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/litmus/litmus.md|litmus]]
+- litmus
 - [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
 - [[references/operations-terms|K8s 运维运营术语参考]] — Cross-reference
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference

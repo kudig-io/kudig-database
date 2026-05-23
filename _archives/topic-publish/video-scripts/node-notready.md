@@ -184,7 +184,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-publish/video-scripts/QUICK-REFERENCE.md|数字人视频快速参考]]
-- [[domain-11-production-operations/topic-publish/video-scripts/README.md|domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本]]
-- [[domain-11-production-operations/topic-publish/video-scripts/VIDEO-OUTPUT-GUIDE.md|数字人视频输出建议]]
-- [[domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本]]
+- 数字人视频快速参考
+- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 数字人视频输出建议
+- Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本

@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Prompt 模板集
@@ -49,7 +50,7 @@ prerequisites:
 |----------------|----------|
 | Pod 启动失败、CrashLoopBackOff、Pending | domain-02-workloads-applications → domain-10-troubleshooting-diagnostics/topic-fta/pod-fta |
 | etcd、控制平面、apiserver | domain-01-cluster-fundamentals → domain-10-troubleshooting-diagnostics/topic-fta/apiserver-fta |
-| 网络不通、Service、DNS | domain-03-networking-traffic → domain-10-troubleshooting-diagnostics/topic-fta/dns-fta |
+| 网络不通、[[Service|Service]]、DNS | domain-03-networking-traffic → domain-10-troubleshooting-diagnostics/topic-fta/dns-fta |
 | 存储、PV、PVC | domain-04-storage-data → domain-10-troubleshooting-diagnostics/topic-fta/csi-fta |
 | 权限、RBAC、认证 | domain-05-security-compliance → domain-10-troubleshooting-diagnostics/topic-fta/rbac-fta |
 
@@ -77,12 +78,12 @@ prerequisites:
 
 ## Related
 
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns-fta]] — dns-fta
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
-- [[domain-06-observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
+- observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
 - [[domain-06-observability/01-overview/25-troubleshooting-overview|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
 - [[skills/skill-assets-escalation-template|Escalation Template]] — Cross-reference
 - [[domain-01-cluster-fundamentals/03-control-plane/06-plane-troubleshooting|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference

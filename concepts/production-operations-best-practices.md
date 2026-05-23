@@ -30,9 +30,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
-# Production Operations Best Practices
+# [[references/k8s-production-operations.md|Production Operations]]ernetes 生产环境运维最佳实践字典|Operations Best Practices]]
 
 ## Production Readiness Checklist
 
@@ -92,7 +93,7 @@ RFC (Request for Change) process for production changes:
 
 ## Related
 
-- [[domain-19-landscape-references/sandbox/radius/radius.md|radius]] — radius
+- radius — radius
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
@@ -107,4 +108,4 @@ RFC (Request for Change) process for production changes:
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
 
-- [[domain-01-cluster-fundamentals/17-production-operations-best-practices.md|17-production-operations-best-practices]]
+- 17-production-operations-best-practices

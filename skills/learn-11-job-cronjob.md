@@ -27,9 +27,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
-# 第九课：Job 和 CronJob - 任务调度
+# 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -537,13 +538,13 @@ kubectl delete cronjob <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-health-check.md](../09-troubleshooting/09-health-check.md) — 健康检查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## Related
 
 - [[skills/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
-- [[skills/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：StatefulSet - 有状态应用管理
+- [[skills/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
 - [[skills/learn-root.md|learn-root]] — Kubernetes 培训：Root
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment

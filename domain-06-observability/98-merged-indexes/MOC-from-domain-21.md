@@ -24,6 +24,7 @@ prerequisites:
 - kubectl-basics
 - observability-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # domain-21-logging-management-analytics MOC
@@ -55,15 +56,15 @@ prerequisites:
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 | 1 | [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]] |  | observability, logging |  |
-| 2 | [[domain-06-observability/01-elk-stack-enterprise-logging.md|ELK Stack企业级日志管理系统深度实践]] |  | observability, logging |  |
-| 3 | [[domain-06-observability/02-fluentd-enterprise-log-processing.md|Fluentd企业级日志收集与处理深度实践]] |  | observability, logging |  |
-| 4 | [[domain-06-observability/03-loki-enterprise-log-aggregation.md|Loki Enterprise Log Aggregation and Analytics Platform]] |  | observability, logging |  |
-| 5 | [[domain-06-observability/04-enterprise-log-governance-compliance.md|企业级日志治理与合规审计深度实践]] |  | observability, logging, compliance |  |
-| 6 | [[domain-06-observability/04-graylog-enterprise-logging.md|Graylog 企业级日志管理平台深度实践]] |  | observability, logging |  |
-| 7 | [[domain-06-observability/04-splunk-enterprise-siem.md|Splunk企业级日志分析与安全智能平台深度实践]] |  | observability, logging |  |
-| 8 | [[domain-06-observability/05-real-time-analytics-business-insights.md|企业级实时日志分析与业务洞察深度实践]] |  | observability, logging |  |
-| 9 | [[domain-06-observability/05-splunk-enterprise-log-analytics.md|Splunk Enterprise Log Analytics Platform 深度实践]] |  | observability, logging |  |
-| 10 | [[domain-06-observability/06-loggly-cloud-log-management.md|Loggly Cloud Log Management Platform 深度实践]] |  | observability, logging |  |
+| 2 | ELK Stack企业级日志管理系统深度实践 |  | observability, logging |  |
+| 3 | Fluentd企业级日志收集与处理深度实践 |  | observability, logging |  |
+| 4 | Loki Enterprise Log Aggregation and Analytics Platform |  | observability, logging |  |
+| 5 | 企业级日志治理与合规审计深度实践 |  | observability, logging, compliance |  |
+| 6 | Graylog 企业级日志管理平台深度实践 |  | observability, logging |  |
+| 7 | Splunk企业级日志分析与安全智能平台深度实践 |  | observability, logging |  |
+| 8 | 企业级实时日志分析与业务洞察深度实践 |  | observability, logging |  |
+| 9 | Splunk Enterprise Log Analytics Platform 深度实践 |  | observability, logging |  |
+| 10 | Loggly Cloud Log Management Platform 深度实践 |  | observability, logging |  |
 
 ---
 
@@ -96,9 +97,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-21-logging-management-analytics 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-21-logging-management-analytics 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-21-logging-management-analytics 相关故障树分析 |
+| Skills 技能 | domain-21-logging-management-analytics 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

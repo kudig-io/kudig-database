@@ -34,6 +34,7 @@ prerequisites:
 - service-mesh-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -41,7 +42,7 @@ title: Day 19: Pod 容器组基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - Kubernetes Pod lifecycle Pending Running Succeeded Failed
+  - [[Kubernetes|Kubernetes]] [[Pod Lifecycle|Pod lifecycle]] Pending Running Succeeded Failed
   - Pod container debugging logs exec
   - Kubernetes Sidecar multi-container pattern
   - Init Container initialization

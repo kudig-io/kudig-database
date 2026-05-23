@@ -45,6 +45,7 @@ prerequisites:
 fta_id: FTA-MOC-001
 component: Moc
 severity: high
+created: "2026-05-23"
 ---
 
 # topic-fta MOC
@@ -75,9 +76,9 @@ FTA 故障树 — 故障树分析文档集合
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]] |  | fta, troubleshooting |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]] |  | fta, troubleshooting |  |
-| 3 | [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]] |  | fta, troubleshooting |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|[[第一章：FTA 起源与发展史|第一章：FTA 起源与发展史]]]] |  | fta, troubleshooting |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|[[第二章：FTA 数学基础与理论模型|第二章：FTA 数学基础与理论模型]]]] |  | fta, troubleshooting |  |
+| 3 | [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|[[第三章：FTA 符号体系与标准规范|第三章：FTA 符号体系与标准规范]]]] |  | fta, troubleshooting |  |
 | 4 | [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]] |  | fta, troubleshooting |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]] |  | fta, troubleshooting |  |
 | 6 | [[domain-10-troubleshooting-diagnostics/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]] |  | fta, troubleshooting |  |
@@ -109,8 +110,8 @@ FTA 故障树 — 故障树分析文档集合
 | 32 | [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md|FTA 故障树分析方法论与 AI Agent 智能运维实践]] |  | fta, troubleshooting |  |
 | 33 | [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|Kubernetes 全量故障树分析(FTA)排查手册 - 增强版]] |  | fta, troubleshooting |  |
 | 34 | [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|Kubernetes 全量故障树分析(FTA)排查手册]] |  | fta, troubleshooting |  |
-| 35 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/skills/apiserver-fta.md|apiserver-fta.md|API Server 异常故障树分析]] | 高级 | fta, troubleshooting, apiserver | 5min |
-| 36 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/skills/backup-restore-fta.md|backup-restore-fta.md|备份/恢复异常故障树分析]] | 高级 | fta, troubleshooting, backup | 5min |
+| 35 | apiserver-fta.md | 高级 | fta, troubleshooting, apiserver | 5min |
+| 36 | backup-restore-fta.md | 高级 | fta, troubleshooting, backup | 5min |
 | 37 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]] |  | fta, troubleshooting |  |
 | 38 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]] | 高级 | fta, troubleshooting, certificate | 5min |
 | 39 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium FTA 树：eBPF/Cilium CNI 故障诊断]] |  | fta, troubleshooting |  |
@@ -119,12 +120,12 @@ FTA 故障树 — 故障树分析文档集合
 | 42 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|集群升级异常故障树分析]] | 高级 | fta, troubleshooting, cluster-upgrade | 5min |
 | 43 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|Controller Manager 异常故障树分析]] | 高级 | fta, troubleshooting, controller-manager | 5min |
 | 44 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md|CRD/Operator 异常故障树分析]] | 高级 | fta, troubleshooting, crd | 5min |
-| 45 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/skills/csi-fta.md|csi-fta.md|CSI 存储异常故障树分析]] | 高级 | fta, troubleshooting, csi | 5min |
+| 45 | csi-fta.md | 高级 | fta, troubleshooting, csi | 5min |
 | 46 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md|DaemonSet 异常故障树分析]] | 高级 | fta, troubleshooting, daemonset | 5min |
 | 47 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|Deployment 异常故障树分析]] | 高级 | fta, troubleshooting, deployment | 5min |
 | 48 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|DNS 异常故障树分析]] | 高级 | fta, troubleshooting, dns | 5min |
 | 49 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]] | 高级 | fta, troubleshooting, etcd | 5min |
-| 50 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/skills/flannel-fta.md|flannel-fta.md|Flannel 网络异常故障树分析]] | 高级 | fta, troubleshooting, flannel | 5min |
+| 50 | flannel-fta.md | 高级 | fta, troubleshooting, flannel | 5min |
 | ... | 共 79 篇文档 | | | |
 
 ---
@@ -152,12 +153,12 @@ FTA 故障树 — 故障树分析文档集合
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

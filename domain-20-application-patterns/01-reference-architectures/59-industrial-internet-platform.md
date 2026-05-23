@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 工业互联网平台架构设计
@@ -41,7 +42,7 @@ audience:
 - 工业软件开发者
 estimated_read_time: 5min
 intent_queries:
-- 工业互联网 Kubernetes IIoT平台
+- 工业互联网 [[Kubernetes|Kubernetes]] IIoT平台
 - 设备接入 MQTT OPC-UA K8s
 - 工业数据中台 Kubernetes Flink
 - 工业APP 低代码 Kubernetes
@@ -64,7 +65,7 @@ related_topics:
 - 87-flexible-manufacturing
 - 93-digital-twin-factory
 - 51-smart-manufacturing-mes
-- [[domain-20-application-patterns/07-iot-platform-architecture.md|07-iot-platform-architecture]]
+- 07-iot-platform-architecture
 authors:
 - name: KUDIG Team
   role: contributor
@@ -290,7 +291,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -305,11 +306,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/57-digital-therapeutics.md|57-digital-therapeutics]]
-- [[domain-20-application-patterns/58-web3-gamefi.md|58-web3-gamefi]]
-- [[domain-20-application-patterns/60-v2x-autonomous-driving.md|60-v2x-autonomous-driving]]
-- [[domain-20-application-patterns/61-smart-grid.md|61-smart-grid]]
+- 57-digital-therapeutics
+- 58-web3-gamefi
+- 60-v2x-autonomous-driving
+- 61-smart-grid
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

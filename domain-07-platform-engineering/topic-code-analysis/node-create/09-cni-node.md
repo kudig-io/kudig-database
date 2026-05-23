@@ -37,6 +37,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点网络 CNI 配置详解

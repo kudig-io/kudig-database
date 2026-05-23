@@ -1,5 +1,5 @@
 ---
-title: Dapr
+title: Dapr (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # Dapr
@@ -57,20 +58,20 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/vault.md|vault]]
+- [[entities/vault.md|[[HashiCorp Vault|vault]]]]
 - [[deployment]]
 - [[concepts/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 
 ## Related
 
-- [[02-istio-advanced-traffic-management]] — Istio 高级流量管理
+- [[02-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[litmus]] — LitmusChaos
 - [[pixie]] — Pixie
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|05-dapr-enterprise-distributed-runtime]]
-- [[domain-19-landscape-references/graduated/dapr/dapr.md|dapr]]
+- 05-dapr-enterprise-distributed-runtime
+- dapr
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

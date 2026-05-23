@@ -37,6 +37,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 新零售 DTC 架构设计
@@ -46,7 +47,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -97,7 +98,7 @@ k8s_versions:
 
 # 新零售 DTC 架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#新零售` `#DTC` `#品牌直营` `#阿里云`
 
 ---
@@ -527,7 +528,7 @@ flowchart LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -542,11 +543,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/51-smart-manufacturing-mes.md|51-smart-manufacturing-mes]]
-- [[domain-20-application-patterns/52-smart-water.md|52-smart-water]]
-- [[domain-20-application-patterns/54-social-gaming-metaverse.md|54-social-gaming-metaverse]]
-- [[domain-20-application-patterns/55-crossborder-dtc.md|55-crossborder-dtc]]
+- 51-smart-manufacturing-mes
+- 52-smart-water
+- 54-social-gaming-metaverse
+- 55-crossborder-dtc
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

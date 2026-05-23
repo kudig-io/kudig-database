@@ -30,6 +30,16 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/external-secrets]]"
+    type: uses
+  - target: "[[entities/argocd]]"
+    type: related_to
+  - target: "[[entities/cni]]"
+    type: related_to
+  - target: "[[entities/deployment]]"
+    type: uses
 ---
 
 # CI-CD 流水线 × Secret 管理
@@ -41,9 +51,9 @@ prerequisites:
 
 ## 共现场景
 
-- **Sealed Secrets**：将 Secret 加密后存储在 Git 中（使用集群公钥加密），ArgoCD/Flux 部署时由集群内的控制器自动解密。Secret 随代码一起版本化，但加密后不可读
+- **Sealed Secrets**：将 Secret 加密后存储在 Git 中（使用集群公钥加密），[[entities/argocd|ArgoCD]]/Flux 部署时由集群内的控制器自动解密。Secret 随代码一起版本化，但加密后不可读
 - **SOPS (Secrets OPerationS)**：使用 AWS KMS/GCP KMS/AGE 加密 YAML 的特定字段，Git 中存储加密后的文件。开发者可以用私钥本地解密查看，CI/CD 用 KMS 密钥解密部署
-- **External Secrets Operator (ESO)**：Git 中只存储 ExternalSecret CRD（引用外部密钥管理系统的路径），ESO 在运行时从 Vault/AWS Secrets Manager 拉取 Secret。Git 中不存储任何 Secret 数据
+- **[[entities/external-secrets|External Secrets]] Operator (ESO)**：Git 中只存储 ExternalSecret CRD（引用外部密钥管理系统的路径），ESO 在运行时从 Vault/AWS Secrets Manager 拉取 Secret。Git 中不存储任何 Secret 数据
 
 ## 交叉洞察
 
@@ -72,7 +82,7 @@ Secret 的"版本"与业务配置的"版本"不同步。ESO 的方案（只版�
 
 | 张力 | 详情 |
 |------|------|
-| **Secret 轮换与 GitOps 的冲突** | 当 Vault 自动轮换数据库密码时，ESO 同步的新密码会触发 Deployment 滚动更新。但在大规模集群中，这种滚动更新可能与业务发布冲突 |
+| **Secret 轮换与 GitOps 的冲突** | 当 Vault 自动轮换数据库密码时，ESO 同步的新密码会触发 [[entities/deployment|Deployment]] 滚动更新。但在大规模集群中，这种滚动更新可能与业务发布冲突 |
 | **CI 阶段的 Secret 泄漏** | CI 流水线（如 GitHub Actions）需要访问容器 registry、测试数据库等 Secret。这些 Secret 存储在 CI 系统的密钥管理中，与 K8s 的 Secret 管理体系分离，形成两个独立的密钥孤岛 |
 | **供应链安全** | Cosign 签名镜像需要私钥，这个私钥本身就是 Secret。如果私钥存储在 Git（即使是加密的），供应链攻击者可能窃取它并签名恶意镜像 |
 
@@ -94,5 +104,8 @@ Secret 的"版本"与业务配置的"版本"不同步。ESO 的方案（只版�
 
 - [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]]
 - [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]]
-- [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[entities/cni|CNI]] 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 - [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
+## Related
+
+- [[entities/argo|Argo Workflows]]

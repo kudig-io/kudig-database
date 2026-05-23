@@ -25,6 +25,7 @@ trigger_keywords:
 - 培训：Root
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 ### topic-learn MOC
@@ -57,16 +58,16 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-11-production-operations/topic-learn/fundamentals/01-what-is-kubernetes.md|第一课：Kubernetes 入门]] | 入门 | tutorial, k8s, training | 5min |
-| 2 | [[domain-11-production-operations/topic-learn/fundamentals/02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] | 入门 | tutorial, Pod, 容器组 | 5min |
-| 3 | [[domain-11-production-operations/topic-learn/fundamentals/03-deployment-basics.md|第三课：Deployment - 应用部署管理器]] | 入门 | tutorial, deployment, Deployment | 5min |
-| 4 | [[domain-11-production-operations/topic-learn/fundamentals/04-service-basics.md|第四课：Service - 让应用可以被访问]] | 入门 | tutorial, Service, 服务 | 5min |
-| 5 | [[domain-11-production-operations/topic-learn/fundamentals/05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] | 入门 | tutorial, Ingress, 入口 | 5min |
-| 6 | [[domain-11-production-operations/topic-learn/fundamentals/06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] | 入门 | tutorial, configuration, k8s | 5min |
-| 7 | [[domain-11-production-operations/topic-learn/fundamentals/07-namespace-resource-quota.md|第七课：Namespace 与资源隔离]] | 入门 | tutorial, k8s, training | 5min |
-| 8 | [[domain-11-production-operations/topic-learn/fundamentals/08-pv-pvc-basics.md|第八课：存储 - PV 和 PVC]] | 入门 | tutorial, k8s, training | 5min |
-| 9 | [[domain-11-production-operations/topic-learn/fundamentals/09-hpa-basics.md|第九课：HPA - 自动伸缩]] | 入门 | tutorial, k8s, training | 5min |
-| 10 | [[domain-11-production-operations/topic-learn/fundamentals/10-health-check.md|10-health-check]] — 第14课：StatefulSet - 有状态应用管理
+| 1 | [[entities/kubernetes.md]] | 入门 | tutorial, k8s, training | 5min |
+| 2 | 第二课：Pod - K8s 的最小调度单元 | 入门 | tutorial, Pod, 容器组 | 5min |
+| 3 | 第三课：Deployment - 应用部署管理器 | 入门 | tutorial, deployment, Deployment | 5min |
+| 4 | 第四课：Service - 让应用可以被访问 | 入门 | tutorial, Service, 服务 | 5min |
+| 5 | 第五课：Ingress - 外部 HTTP/HTTPS 访问 | 入门 | tutorial, Ingress, 入口 | 5min |
+| 6 | 第六课：ConfigMap 和 Secret - 配置管理 | 入门 | tutorial, configuration, k8s | 5min |
+| 7 | 第七课：Namespace 与资源隔离 | 入门 | tutorial, k8s, training | 5min |
+| 8 | 第八课：存储 - PV 和 PVC | 入门 | tutorial, k8s, training | 5min |
+| 9 | 第九课：HPA - 自动伸缩 | 入门 | tutorial, k8s, training | 5min |
+| 10 | 10-health-check — 第14课：StatefulSet - 有状态应用管理
 - [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

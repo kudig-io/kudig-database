@@ -32,6 +32,7 @@ prerequisites:
 - iac-basics
 - kafka-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # CNCF 编排与应用管理项目全景
@@ -85,15 +86,15 @@ Karmada 是 K8s 多集群管理平台。
 
 ### [[open-cluster-management]] — 沙箱项目
 
-OCM（Open Cluster Management）提供多集群生命周期管理。
+OCM（[[entities/open-cluster-management.md|Open Cluster Management]]）提供多集群生命周期管理。
 
 ### [[clusternet]] — 沙箱项目
 
 ClusterNet 提供多集群网络和管理。
 
-### [[domain-19-landscape-references/sandbox/clusterpedia/clusterpedia.md|clusterpedia]] — 沙箱项目
+### [[Clusterpedia]] — 沙箱项目
 
-[[domain-19-landscape-references/sandbox/clusterpedia/clusterpedia.md|clusterpedia]] 提供跨集群资源查询。
+clusterpedia 提供跨集群资源查询。
 
 ### [[kubefleet]] — 沙箱项目
 
@@ -113,7 +114,7 @@ KCP 提供 K8s API 的多租户控制平面。
 
 ### [[operator-framework]] — 孵化项目
 
-Operator Framework 构建 K8s Operator 的工具链。
+[[Operator Framework|Operator Framework]] 构建 K8s Operator 的工具链。
 
 - **Operator SDK**: 快速生成 Operator 代码
 - **Operator Lifecycle Manager (OLM)**: 管理 Operator 生命周期

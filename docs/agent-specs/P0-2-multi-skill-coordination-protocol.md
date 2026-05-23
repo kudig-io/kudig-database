@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 多技能协同协议 (Multi-Skill Coordination Protocol)
@@ -44,7 +45,7 @@ prerequisites:
 
 ### 1.1 背景与问题
 
-在实际工单场景中，单一故障往往涉及多个组件：
+在实际工单场景中，单一问题往往涉及多个组件：
 
 | 场景 | 涉及的 Skill |
 |------|-------------|
@@ -58,9 +59,9 @@ prerequisites:
 
 | 模式 | 说明 | 适用场景 |
 |------|------|---------|
-| **串行协同** | 主 Skill 完成后启动副 Skill | DNS 故障导致 Service 连通性问题 |
-| **并行协同** | 主 Skill 触发副 Skill 并行执行 | 控制平面故障影响多个组件 |
-| **层次协同** | 下层组件故障驱动上层组件诊断 | kubelet 问题导致 Pod 问题 |
+| **串行协同** | 主 Skill 完成后启动副 Skill | DNS 问题导致 Service 连通性问题 |
+| **并行协同** | 主 Skill 触发副 Skill 并行执行 | 控制平面问题影响多个组件 |
+| **层次协同** | 下层组件问题驱动上层组件诊断 | kubelet 问题导致 Pod 问题 |
 
 ---
 
@@ -105,13 +106,13 @@ trigger_conditions:
       target_skill: "SKILL-XXX-XXX"
       priority: "high"  # high | medium | low
 
-    - condition: "修复后验证失败，疑似关联故障"
+    - condition: "修复后验证失败，疑似关联问题"
       target_skill: "SKILL-YYY-YYY"
       priority: "medium"
 
   # 手动触发: 需人工确认
   manual_trigger:
-    - condition: "跨 Category 的复杂故障"
+    - condition: "跨 Category 的复杂问题"
       target_skill: "SKILL-ZZZ-ZZZ"
       reason: "超出单一 Skill 处理范围"
 ```
@@ -191,7 +192,7 @@ coordination_result:
 └─────────────────┘
 ```
 
-### 3.2 场景示例: Pod Pending + DNS 故障
+### 3.2 场景示例: Pod Pending + DNS 问题
 
 **场景**: Pod 一直处于 Pending，且 DNS 解析失败
 
@@ -214,7 +215,7 @@ Step 2: 自动触发 SKILL-NET-001
 Step 3: SKILL-POD-002 汇总
 ├── 主 Skill 发现: Pod Pending
 ├── 副 Skill 发现: CoreDNS 不健康
-└── 根因: CoreDNS 故障导致 Pod 初始化失败
+└── 根因: CoreDNS 问题导致 Pod 初始化失败
 ```
 
 ### 3.3 上下文传递格式
@@ -271,14 +272,14 @@ context_transfer:
 └─────────────────┘
 ```
 
-### 4.2 场景示例: 控制平面故障
+### 4.2 场景示例: 控制平面问题
 
 **场景**: API Server 响应缓慢，影响多个组件
 
 **并行流程**:
 
 ```
-主 Skill: SKILL-CP-001 (控制平面故障)
+主 Skill: SKILL-CP-001 (控制平面问题)
 
 并行触发:
 ├── SKILL-NET-001: 检查网络到 API Server
@@ -318,7 +319,7 @@ context_transfer:
 └─────────────────────────────────┘
 ```
 
-**层次协同原则**: 下层组件故障驱动上层组件诊断
+**层次协同原则**: 下层组件问题驱动上层组件诊断
 
 - Node NotReady → Pod 异常 (驱动 SKILL-POD-001)
 - kubelet 问题 → containerd 问题 (驱动 SKILL-NODE-001)
@@ -453,9 +454,9 @@ bottom_up_escalation:
 |-----------|--------|------|
 | TC-SEC-INCIDENT | P0 | 安全事件优先处理 |
 | TC-INFRA-CP | P0.5 | 控制平面优先于工作负载 |
-| TC-INFRA-NODE | P1 | 节点故障优先于应用故障 |
-| TC-APP-* | P2 | 应用层故障标准优先级 |
-| TC-DATA-* | P1.5 | 数据层故障高优先级 |
+| TC-INFRA-NODE | P1 | 节点问题优先于应用问题 |
+| TC-APP-* | P2 | 应用层问题标准优先级 |
+| TC-DATA-* | P1.5 | 数据层问题高优先级 |
 
 ---
 
@@ -519,8 +520,8 @@ escalation_package:
 
 | 场景 | 测试目标 | 验收标准 |
 |------|---------|---------|
-| Pod Pending + DNS 故障 | 串行协同 | SKILL-POD-002 正确触发 SKILL-NET-001 |
-| 控制平面故障 | 并行协同 | NET/CERT/STORE 同时执行，结果汇总正确 |
+| Pod Pending + DNS 问题 | 串行协同 | SKILL-POD-002 正确触发 SKILL-NET-001 |
+| 控制平面问题 | 并行协同 | NET/CERT/STORE 同时执行，结果汇总正确 |
 | Node NotReady + 证书过期 | 层次协同 | 上层 Pod 异常被下层 Node 问题解释 |
 | 修复冲突 | 冲突解决 | 高优先级 Skill 修复被优先执行 |
 
@@ -529,5 +530,5 @@ escalation_package:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [domain-10-troubleshooting-diagnostics/topic-skills/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
 - [templates/skill-template.md](../templates/skill-template.md)

@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 即时零售架构设计
@@ -40,7 +41,7 @@ tags:
 - industry
 - redis
 - mysql
-- statefulset
+- [[StatefulSet|statefulset]]
 - operator
 last_updated: 2026-05-18
 difficulty: intermediate
@@ -51,11 +52,11 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 即时零售 Kubernetes 30分钟达
+- 即时零售 [[Kubernetes|Kubernetes]] 30分钟达
 - 同城配送 骑手调度 K8s
 - LBS搜索 Redis Geo Kubernetes
 - 前置仓 履约 Kubernetes
-- 即时零售 KEDA 弹性伸缩
+- 即时零售 [[KEDA|KEDA]] 弹性伸缩
 trigger_keywords:
 - 即时零售
 - O2O
@@ -72,7 +73,7 @@ related_domains:
 - domain-7-observability
 related_topics:
 - 50-unmanned-retail
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
+- 01-ecommerce-architecture
 - 11-smart-retail-architecture
 authors:
 - name: KUDIG Team
@@ -413,7 +414,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -428,7 +429,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/29-agritech-iot.md|29-agritech-iot]]
-- [[domain-20-application-patterns/30-hrtech-saas.md|30-hrtech-saas]]
-- [[domain-20-application-patterns/32-smart-restaurant.md|32-smart-restaurant]]
-- [[domain-20-application-patterns/33-crossborder-warehouse.md|33-crossborder-warehouse]]
+- 29-agritech-iot
+- 30-hrtech-saas
+- 32-smart-restaurant
+- 33-crossborder-warehouse

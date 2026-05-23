@@ -1,5 +1,5 @@
 ---
-title: API Server 异常故障树分析
+title: API Server 异常故障树分析 (skills)
 description: '- **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。'
 category: skills
 tags:
@@ -30,16 +30,17 @@ prerequisites:
 fta_id: FTA-APISERVER-001
 component: Apiserver
 severity: high
+created: "2026-05-23"
 ---
 
 # API Server 异常故障树分析
 
-<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get pods -n kube-system -l component=kube-apiserver 显示非 Running -->
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[Pods|pods]] -n kube-system -l component=kube-apiserver 显示非 Running -->
 
 # API Server 异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 Kubernetes API Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
+- **目标**：覆盖 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
 - **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件

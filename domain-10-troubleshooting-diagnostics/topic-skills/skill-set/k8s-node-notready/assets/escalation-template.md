@@ -1,6 +1,6 @@
 ---
 title: 升级消息模板 / Escalation Message Template
-description: '- 故障概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}'
+description: '- 问题概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}'
 category: skills
 tags:
 - k8s
@@ -35,11 +35,12 @@ prerequisites:
 skill_id: SKILL-ESCALATION_TEMPLATE-001
 skill_name: 升级消息模板 / Escalation Message Template
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 升级消息模板 / Escalation Message Template
 
-> **Skill ID**: SKILL-NODE-001  
+> **[[SKILL|Skill]] ID**: SKILL-NODE-001  
 > **数据来源**: domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md Section 8
 
 Agent 在触发升级条件时，应使用此模板生成通知消息。
@@ -52,7 +53,7 @@ Agent 在触发升级条件时，应使用此模板生成通知消息。
 ```
 【{severity}】节点 NotReady 诊断与修复 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- 故障概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}
+- 问题概述: 节点 {node_name} ({node_ip}) 状态为 NotReady，持续 {duration}
 - 影响范围: 
   - 受影响节点: {affected_node_count}/{total_node_count}
   - 受影响 Pod: {affected_pod_count} 个（namespace: {affected_namespaces}）
@@ -78,8 +79,8 @@ Agent 在触发升级条件时，应使用此模板生成通知消息。
 |---|---|---|
 | `{severity}` | string | 严重性级别: P0, P1, P2, P3 |
 | `{cluster_name}` | string | 集群名称 |
-| `{node_name}` | string | 故障节点名称 |
-| `{node_ip}` | string | 故障节点 IP |
+| `{node_name}` | string | 问题节点名称 |
+| `{node_ip}` | string | 问题节点 IP |
 | `{duration}` | string | NotReady 持续时间（如 "15min"） |
 | `{affected_node_count}` | integer | NotReady 节点数量 |
 | `{total_node_count}` | integer | 集群总节点数 |
@@ -118,10 +119,10 @@ Agent 在触发升级条件时，应使用此模板生成通知消息。
 
 | 条件 / Condition | 说明 / Description |
 |---|---|
-| **集群级故障** | >50% 的节点处于 NotReady 状态 |
-| **控制平面全部不可用** | 所有 control-plane 节点均 NotReady（etcd 集群可能已丢失 quorum） |
+| **集群级问题** | >50% 的节点处于 NotReady 状态 |
+| **控制平面全部不可用** | 所有 control-plane 节点均 NotReady（[[etcd|etcd]] 集群可能已丢失 quorum） |
 | **apiserver 不可达** | `kubectl get nodes` 命令本身超时或失败（无法执行任何诊断命令） |
-| **级联故障** | NotReady 节点数量在 5 分钟内持续增加（可能是底层基础设施故障） |
+| **级联问题** | NotReady 节点数量在 5 分钟内持续增加（可能是底层基础设施问题） |
 | **安全事件** | 结合其他安全告警，怀疑节点被入侵导致的异常 |
 
 ---

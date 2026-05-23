@@ -35,21 +35,22 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 智慧零售与新零售Kubernetes生产架构设计
-description: '# 智慧零售与新零售 Kubernetes 生产架构设计'
+description: '# 智慧零售与新零售 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - minio
 - redis
 - mysql
 - kafka
-- ingress
+- [[Ingress|ingress]]
 - gateway
 last_updated: '2026-05-18'
 difficulty: advanced
@@ -716,7 +717,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -731,7 +732,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/09-gaming-backend-architecture.md|09-gaming-backend-architecture]]
-- [[domain-20-application-patterns/10-social-media-architecture.md|10-social-media-architecture]]
-- [[domain-20-application-patterns/12-smart-logistics-architecture.md|12-smart-logistics-architecture]]
-- [[domain-20-application-patterns/13-digital-government-architecture.md|13-digital-government-architecture]]
+- 09-gaming-backend-architecture
+- 10-social-media-architecture
+- 12-smart-logistics-architecture
+- 13-digital-government-architecture

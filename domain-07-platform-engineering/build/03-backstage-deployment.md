@@ -51,12 +51,13 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
+created: "2026-05-23"
 ---
 
-# Backstage 部署与配置
+# [[Backstage|Backstage]] 部署与配置
 # Backstage Deployment and Configuration
 
-> **领域**: 平台工程 | Platform Engineering  
+> **领域**: 平台工程 | [[synthesis/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 中级到高级 | Intermediate to Advanced  
 > **阅读时间**: 约 70 分钟 | ~70 min read  
 > **最后更新**: 2026-03-04
@@ -68,7 +69,7 @@ cross_refs:
 1. [Backstage 架构深度解析](#1-backstage-架构深度解析)
 2. [前端架构与插件系统](#2-前端架构与插件系统)
 3. [后端架构与 API 设计](#3-后端架构与-api-设计)
-4. [Kubernetes 生产部署](#4-kubernetes-生产部署)
+4. [[entities/kubernetes.md|Kubernetes]] 生产部署](#4-kubernetes-生产部署)
 5. [PostgreSQL 数据库配置](#5-postgresql-数据库配置)
 6. [认证配置：OAuth 与 OIDC](#6-认证配置oauth-与-oidc)
 7. [RBAC 权限控制](#7-rbac-权限控制)
@@ -2758,22 +2759,22 @@ Backstage 的成功部署需要关注以下关键领域：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-36 平台工程 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|平台工程概述与成熟度模型]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|内部开发者平台设计原则]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|Backstage 软件目录与 TechDocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|Backstage 脚手架与模板系统]]
-- [[domain-07-platform-engineering/06-kratix-platform-as-code.md|Kratix 平台即代码 (Kratix Platform as Code)]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|Crossplane 平台组合 (Crossplane Platform Composition)]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|Golden Paths 黄金路径设计 (Golden Paths Design Patterns)]]
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|开发者体验度量 (Developer Experience Metrics)]]
-- [[domain-07-platform-engineering/10-platform-team-topology.md|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- Domain-36 平台工程 — 开源项目索引
+- 平台工程概述与成熟度模型
+- 内部开发者平台设计原则
+- Backstage 软件目录与 TechDocs
+- Backstage 脚手架与模板系统
+- Kratix 平台即代码 (Kratix Platform as Code)
+- Crossplane 平台组合 (Crossplane Platform Composition)
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- 开发者体验度量 (Developer Experience Metrics)
+- 平台团队拓扑与运营 (Platform Team Topology and Operations)
 
 ## See Also
 
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|01-platform-engineering-overview]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|02-idp-design-principles]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|04-backstage-catalog-techdocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|05-backstage-scaffolder-templates]]
+- 01-platform-engineering-overview
+- 02-idp-design-principles
+- 04-backstage-catalog-techdocs
+- 05-backstage-scaffolder-templates

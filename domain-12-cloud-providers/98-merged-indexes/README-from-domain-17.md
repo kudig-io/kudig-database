@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -193,7 +194,7 @@ tier: peripheral---
 ./templates/cost-optimization-recommendations.yaml
 
 # 安全加固配置
-./templates/[[domain-11-production-operations/topic-best-practices/scenarios/security-hardening|security-hardening]]-configs.yaml
+./templates/security-hardening-configs.yaml
 ```
 
 ### 📋 运维检查清单

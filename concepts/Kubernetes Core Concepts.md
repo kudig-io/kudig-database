@@ -31,18 +31,19 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes Core Concepts
+# [[Kubernetes|Kubernetes]] Core Concepts
 
 ## Design Principles
 
 Kubernetes is built on several foundational design principles:
 
-- **Declarative API**: Desired state is declared, controllers reconcile actual state to match
+- **[[Declarative API|Declarative API]]**: Desired state is declared, controllers reconcile actual state to match
 - **Controller Pattern**: Continuous reconciliation loops maintain system state
 - **etcd Consensus**: Raft algorithm ensures consistent distributed state
-- **Immutability**: Pods are immutable once created; changes create new Pods
+- **Immutability**: [[Pods|Pods]] are immutable once created; changes create new Pods
 - **Loose Coupling**: Components communicate only through the API Server
 
 ## Control Plane

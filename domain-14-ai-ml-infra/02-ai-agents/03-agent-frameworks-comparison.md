@@ -1,5 +1,5 @@
 ---
-title: 主流 Agent 框架深度对比
+title: 主流 Agent 框架深度对比 (domain-14-ai-ml-infra)
 description: 'title: 主流 Agent 框架深度对比'
 category: general
 tags:
@@ -33,6 +33,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 主流 Agent 框架深度对比
@@ -48,7 +49,7 @@ tags:
 - redis
 - postgresql
 - hpa
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -720,9 +721,9 @@ def knowledge_augmented_diagnosis(state):
 | 文档 | 关联内容 |
 |------|---------|
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | Agent Loop 与推理框架 |
-| [04 - RAG 检索增强](./[[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]].md) | LlamaIndex RAG 深度实践 |
+| [04 - RAG 检索增强](./04-rag-knowledge-retrieval.md) | LlamaIndex RAG 深度实践 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | LangGraph/AutoGen/CrewAI 在多 Agent 中的进阶用法 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | LangSmith/Langfuse 集成 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | LangSmith/Langfuse 集成 |
 
 ---
 
@@ -732,7 +733,7 @@ def knowledge_augmented_diagnosis(state):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -747,7 +748,7 @@ def knowledge_augmented_diagnosis(state):
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]]
-- [[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]]
+- 01-ai-agent-fundamentals
+- 02-llm-foundation-models
+- 04-rag-knowledge-retrieval
+- 05-tool-use-function-calling

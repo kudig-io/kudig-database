@@ -62,6 +62,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)
@@ -74,7 +75,7 @@ cross_refs:
 ### 🔗 关联故障排查文档
 - **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 事件传输网络问题
 - **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 事件系统监控告警
-- **[36-Helm Chart故障排查](./36-helm-chart-troubleshooting.md)** - 事件系统部署问题
+- **[36-[[Helm|Helm]] Chart故障排查](./36-helm-chart-troubleshooting.md)** - 事件系统部署问题
 - **[37-多集群管理故障排查](./37-multi-cluster-management-troubleshooting.md)** - 跨集群事件路由
 
 ### 📚 扩展学习资料
@@ -1163,9 +1164,9 @@ except Exception as e:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

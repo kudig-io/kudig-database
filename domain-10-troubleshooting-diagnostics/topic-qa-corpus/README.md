@@ -38,6 +38,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 # Agent QA 对语料库
@@ -110,7 +111,7 @@ tags: [node, status, notready, kubelet]
 | 字段 | 说明 | 示例 |
 |------|------|------|
 | `io_pair_id` | 全局唯一标识 | `IODIAG-NODE-0001` |
-| `skill_ref` | 关联 Skill ID | `SKILL-01` |
+| `skill_ref` | 关联 [[SKILL|Skill]] ID | `SKILL-01` |
 | `scenario` | 故障场景名称 | `节点 NotReady` |
 | `severity` | 严重程度 | `critical/high/medium/low` |
 | `command` | 执行命令 | `kubectl get nodes` |
@@ -159,7 +160,7 @@ seed/*.md ────────────────────┘  (人�
 | 缺口 | 状态 | 计划 |
 |------|------|------|
 | GPU 场景 I-O 对 | 待补充 | 从 gpu-fta.md + 相关 Skill 提取 |
-| Helm 场景 I-O 对 | 待补充 | 从 helm-fta.md + 相关 Skill 提取 |
+| [[Helm|Helm]] 场景 I-O 对 | 待补充 | 从 helm-fta.md + 相关 Skill 提取 |
 | Webhook 场景 I-O 对 | 待补充 | 从 webhook-admission-fta.md 提取 |
 | 命令去重率提升 | 进行中 | 优化归一化去重策略 |
 | Critical severity 比例 | 进行中 | 增加根因级别诊断对 |
@@ -167,7 +168,7 @@ seed/*.md ────────────────────┘  (人�
 ## Related
 
 - [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|Skills 故障诊断手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|FTA 故障树索引]]
+- index.md|FTA 故障树索引]]
 - [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md|原始命令输出诊断语料]]
 - [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.md|P0 手工种子语料]]
 - [[_reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|发布前评估报告]]

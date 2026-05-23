@@ -33,3 +33,7 @@ site/
 
 # 视频生成产物
 video-output/
+
+# RAG 向量化 Pipeline 本地缓存（由 scripts/embedding-pipeline.py 生成，含 >100MB 大文件）
+corpus-config/profiles/.vector-cache/
+

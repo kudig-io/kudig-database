@@ -28,9 +28,10 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - helm-basics
+created: "2026-05-23"
 ---
 
-# helm v3.20 Release Notes
+# [[Helm|helm]] v3.20 Release Notes
 
 Source: [v3.20.1](https://github.com/helm/helm/releases/tag/v3.20.1)
 
@@ -38,7 +39,7 @@ Helm v3.20.1 is a patch release. Users are encouraged to upgrade for the best ex
 
 The community keeps growing, and we'd love to see you there!
 
-- Join the discussion in [Kubernetes Slack](https://kubernetes.slack.com):
+- Join the discussion in [[entities/kubernetes.md|Kubernetes]] Slack](https://kubernetes.slack.com):
   -  for questions and just to hang out
   -  for discussing PRs, code, and bugs
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://zoom.us/j/696660622)
@@ -55,7 +56,7 @@ Download Helm v3.20.1. The common platform binaries are here:
 
 - [MacOS amd64](https://get.helm.sh/helm-v3.20.1-darwin-amd64.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-darwin-amd64.tar.gz.sha256sum) / 580515b544d5c966edc6f782c9ae88e21a9e10c786a7d6c5fd4b52613f321076)
 - [MacOS arm64](https://get.helm.sh/helm-v3.20.1-darwin-arm64.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-darwin-arm64.tar.gz.sha256sum) / 75cc96ac3fe8b8b9928eb051e55698e98d1e026967b6bffe4f0f3c538a551b65)
-- [Linux amd64](https://get.helm.sh/helm-v3.20.1-linux-amd64.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-linux-amd64.tar.gz.sha256sum) / 0165ee4a2db012cc657381001e593e981f42aa5707acdd50658326790c9d0dc3)
+- Linux amd64](https://get.helm.sh/helm-v3.20.1-linux-amd64.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-linux-amd64.tar.gz.sha256sum) / 0165ee4a2db012cc657381001e593e981f42aa5707acdd50658326790c9d0dc3)
 - [Linux arm](https://get.helm.sh/helm-v3.20.1-linux-arm.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-linux-arm.tar.gz.sha256sum) / 758375df78fb8f91f4056244bda539710a73be79284b24b4bdad68384348ca33)
 - [Linux arm64](https://get.helm.sh/helm-v3.20.1-linux-arm64.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-linux-arm64.tar.gz.sha256sum) / 56b9d1b0e0efbb739be6e68a37860ace8ec9c7d3e6424e3b55d4c459bc3a0401)
 - [Linux i386](https://get.helm.sh/helm-v3.20.1-linux-386.tar.gz) ([checksum](https://get.helm.sh/helm-v3.20.1-linux-386.tar.gz.sha256sum) / 22b350307d5e5897b3a14f096cb6b2212cc03c22ba29ab7b4ee3e64ab9f3f190)
@@ -67,7 +68,7 @@ Download Helm v3.20.1. The common platform binaries are here:
 
 This release was signed with `208D D36E D5BB 3745 A167 43A4 C7C6 FBB5 B91C 1155` and can be found at @scottrigby [keybase account](https://keybase.io/r6by). Please use the attached signatures for verifying this release using `gpg`.
 
-The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you going from there. For **upgrade instructions** or detailed installation notes, check the [install guide](https://helm.sh/docs/intro/install/). You can also use a [script to install](https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3) on any system with `bash`.
+The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you going from there. For **upgrade instructions** or detailed installation notes, check the install guide](https://helm.sh/docs/intro/install/). You can also use a [script to install](https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3) on any system with `bash`.
 
 ## What's Next
 

@@ -1,16 +1,56 @@
 ---
-title: SaaS多租户平台Kubernetes生产架构设计
-description: '# SaaS 多租户平台 Kubernetes 生产架构设计'
-category: application-architecture
+title: SaaS 多租户平台 Kubernetes 生产架构设计
+description: 'title: SaaS多租户平台Kubernetes生产架构设计'
+category: general
 tags:
-- k8s
 - architecture
-- industry
+- best-practice
 - helm
 - redis
 - mysql
 - elasticsearch
 - ingress
+- gateway
+- rbac
+- networkpolicy
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- SaaS 多租户平台 Kubernetes 生产架构设计 是什么
+- 如何 SaaS 多租户平台 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- SaaS
+- 多租户平台
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- helm-basics
+- redis-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
+title: SaaS多租户平台Kubernetes生产架构设计
+description: '# SaaS 多租户平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- [[Helm|helm]]
+- redis
+- mysql
+- elasticsearch
+- [[Ingress|ingress]]
 - gateway
 - rbac
 last_updated: '2026-05-18'
@@ -39,12 +79,6 @@ trigger_keywords:
 - RBAC
 - 开放平台
 - ISV
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- helm-basics
-- redis-basics
-- mysql-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -55,6 +89,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture
 - domain-02-workloads-applications/topic-functions/04-high-concurrency-system
 - domain-02-workloads-applications/topic-functions/07-distributed-transaction
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # SaaS 多租户平台 Kubernetes 生产架构设计
@@ -67,7 +110,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、租户隔离模型对比](#二租户隔离模型对比)
@@ -80,7 +123,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -125,7 +168,7 @@ flowchart TB
     style Infra fill:#e8f5e9
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 多租户适配 |
 |:---|:---|:---|
@@ -140,7 +183,7 @@ flowchart TB
 
 ---
 
-## 二、租户隔离模型对比
+<!-- chunk: 二、租户隔离模型对比 -->## 二、租户隔离模型对比
 
 ```mermaid
 flowchart TB
@@ -179,7 +222,7 @@ flowchart TB
     style 独立Cluster fill:#ffccbc
 ```
 
-### 隔离模型选型矩阵
+#<!-- chunk: 隔离模型选型矩阵 -->## 隔离模型选型矩阵
 
 | 维度 | 共享数据库 | Schema 隔离 | 独立数据库 | 独立集群 |
 |:---|:---|:---|:---|:---|
@@ -192,7 +235,7 @@ flowchart TB
 
 ---
 
-## 三、数据库多租户架构
+<!-- chunk: 三、数据库多租户架构 -->## 三、数据库多租户架构
 
 ```mermaid
 flowchart TB
@@ -220,7 +263,7 @@ flowchart TB
     style Storage fill:#e8f5e9
 ```
 
-### ShardingSphere 多租户配置
+#<!-- chunk: ShardingSphere 多租户配置 -->## ShardingSphere 多租户配置
 
 ```yaml
 # ShardingSphere 多租户数据源配置
@@ -309,7 +352,7 @@ spec:
 
 ---
 
-## 四、租户配置与定制架构
+<!-- chunk: 四、租户配置与定制架构 -->## 四、租户配置与定制架构
 
 ```mermaid
 flowchart TB
@@ -341,7 +384,7 @@ flowchart TB
 
 ---
 
-## 五、计费与用量 Metering 架构
+<!-- chunk: 五、计费与用量 Metering 架构 -->## 五、计费与用量 Metering 架构
 
 ```mermaid
 flowchart TB
@@ -373,7 +416,7 @@ flowchart TB
 
 ---
 
-## 六、租户生命周期管理架构
+<!-- chunk: 六、租户生命周期管理架构 -->## 六、租户生命周期管理架构
 
 ```mermaid
 stateDiagram-v2
@@ -404,7 +447,7 @@ stateDiagram-v2
 
 ---
 
-## 七、开放平台与集成架构
+<!-- chunk: 七、开放平台与集成架构 -->## 七、开放平台与集成架构
 
 ```mermaid
 flowchart TB
@@ -435,9 +478,9 @@ flowchart TB
 
 ---
 
-## 八、ACK 阿里云部署架构
+<!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-### SaaS 平台 vCluster 隔离架构
+#<!-- chunk: SaaS 平台 vCluster 隔离架构 -->## SaaS 平台 vCluster 隔离架构
 
 ```mermaid
 flowchart TB
@@ -466,7 +509,7 @@ flowchart TB
     style SharedNamespace fill:#fff8e1
 ```
 
-### vCluster 大客户隔离配置
+#<!-- chunk: vCluster 大客户隔离配置 -->## vCluster 大客户隔离配置
 
 ```yaml
 # 使用 vCluster 为大客户创建独立虚拟集群
@@ -509,7 +552,7 @@ spec:
     services: "10"
     persistentvolumeclaims: "10"
 ---
-apiVersion: networking.[[entities/kubernetes|k8s]].io/v1
+apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: tenant-d-isolation
@@ -537,8 +580,32 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云 SaaS 上云工具包](https://www.aliyun.com/solution/toolkit/saas)
 - [vCluster 文档](https://www.vcluster.com/docs/)
 - [ShardingSphere](https://shardingsphere.apache.org/)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 15-energy-power-architecture
+- 16-video-shortform-architecture
+- 18-data-midplatform-architecture
+- 19-cloudnative-devops-architecture

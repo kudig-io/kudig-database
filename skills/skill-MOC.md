@@ -1,5 +1,5 @@
 ---
-title: topic-skills MOC
+title: topic-skills MOC (skills)
 description: '### 专题定位'
 category: skills
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # topic-skills MOC
@@ -44,8 +45,8 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复]] |  | skill, daily-ops |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md|[[节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|[[Pod CrashLoopBackOff & OOMKilled 诊断与修复|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
 | 3 | [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
 | 4 | [[domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |

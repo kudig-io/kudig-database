@@ -50,6 +50,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 边缘存储与网络 (Edge Storage and Network)
@@ -67,7 +68,7 @@ Edge computing presents unique challenges for storage and networking: limited de
 1. [边缘存储架构总览](#1-边缘存储架构总览)
 2. [本地存储方案](#2-本地存储方案)
 3. [边缘分布式存储](#3-边缘分布式存储)
-4. [Kubernetes 边缘存储](#4-kubernetes-边缘存储)
+4. [[entities/kubernetes.md|Kubernetes]] 边缘存储](#4-kubernetes-边缘存储)
 5. [弱网络优化策略](#5-弱网络优化策略)
 6. [离线数据同步](#6-离线数据同步)
 7. [断线重连机制](#7-断线重连机制)
@@ -541,7 +542,7 @@ class EdgeLocalCache:
 
 <!-- chunk: 3. 边缘分布式存储 -->## 3. 边缘分布式存储
 
-#<!-- chunk: 3.1 Longhorn 边缘存储 -->## 3.1 Longhorn 边缘存储
+#<!-- chunk: 3.1 [[Longhorn|Longhorn]] 边缘存储 -->## 3.1 Longhorn 边缘存储
 
 Longhorn 是 Rancher 开源的轻量级 Kubernetes 原生分布式块存储系统，特别适合边缘场景：
 
@@ -1657,10 +1658,10 @@ class EdgeReconnectManager:
     def __init__(
         self,
         config: ReconnectConfig,
-        connect_fn: Callable[[], Awaitable[bool]],
+        connect_fn: Callable], Awaitable[bool,
         on_connected: Optional[Callable] = None,
         on_disconnected: Optional[Callable] = None,
-        on_reconnecting: Optional[Callable[[int], None]] = None
+        on_reconnecting: Optional[Callableint], None = None
     ):
         self.config = config
         self.connect_fn = connect_fn
@@ -2437,22 +2438,22 @@ mindmap
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
+- domain-37-edge-computing MOC
 - [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/06-superedge-architecture.md|06-superedge-architecture]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|07-edge-ai-inference-federated-learning]]
-- [[domain-15-specialized-tech/09-edge-security.md|09-edge-security]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|10-edge-use-cases]]
+- 06-superedge-architecture
+- 07-edge-ai-inference-federated-learning
+- 09-edge-security
+- 10-edge-use-cases

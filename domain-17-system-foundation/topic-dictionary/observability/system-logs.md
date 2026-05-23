@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 系统日志（System Logs）
@@ -37,8 +38,8 @@ prerequisites:
 
 ## 核心概念/原理
 
-- **klog**：Kubernetes 的日志库，为 Kubernetes 系统组件生成日志消息。
-- **日志输出稳定性**：与命令行标志不同，日志输出的格式和内容**不属于 Kubernetes API 稳定性保证范围**，不同版本之间日志条目和格式可能发生变化。
+- **klog**：[[Kubernetes|Kubernetes]] 的日志库，为 Kubernetes 系统组件生成日志消息。
+- **日志输出稳定性**：与命令行标志不同，日志输出的格式和内容**不属于 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 稳定性保证范围**，不同版本之间日志条目和格式可能发生变化。
 - **日志输出目标**：输出始终写入 `stderr`，重定向由调用 Kubernetes 组件的外部程序（如 POSIX shell、systemd）处理。
 - **kube-log-runner**：在无法使用 shell 重定向的环境（如 distroless 容器、Windows 系统服务）中，可使用 `kube-log-runner` 包装器来重定向日志输出。
 
@@ -95,7 +96,7 @@ FEATURE STATE: `Kubernetes v1.19 [alpha]`
 - `err`：错误字符串（string，可选）
 - `msg`：消息（string，必需）
 
-当前支持 JSON 格式的组件：kube-controller-manager、kube-apiserver、kube-scheduler、kubelet。
+当前支持 JSON 格式的组件：kube-controller-manager、kube-apiserver、kube-scheduler、[[kubelet|kubelet]]。
 
 注意：并非所有日志都保证以 JSON 格式输出（如进程启动期间），解析日志时需要能处理非 JSON 行。
 

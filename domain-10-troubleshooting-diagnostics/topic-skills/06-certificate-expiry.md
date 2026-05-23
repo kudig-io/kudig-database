@@ -52,6 +52,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 <!-- condition: kubeadm certs check-expiration 2>/dev/null | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
@@ -62,7 +64,7 @@ k8s_versions:
 
 ## 1. 概述
 
-证书（Certificate）是 Kubernetes 安全模型的基石。集群内几乎所有组件间通信都依赖 TLS 双向认证（mTLS）：apiserver ↔ kubelet、apiserver ↔ etcd、apiserver ↔ controller-manager / scheduler、以及面向用户的 Ingress TLS 终止。**证书过期是 P0 级别事件** —— 它可以在瞬间让整个集群完全不可用，且恢复过程复杂、风险极高。
+证书（Certificate）是 [[Kubernetes|Kubernetes]] 安全模型的基石。集群内几乎所有组件间通信都依赖 TLS 双向认证（mTLS）：apiserver ↔ [[kubelet|kubelet]]、apiserver ↔ [[etcd|etcd]]、apiserver ↔ controller-manager / scheduler、以及面向用户的 [[Ingress|Ingress]] TLS 终止。**证书过期是 P0 级别事件** —— 它可以在瞬间让整个集群完全不可用，且恢复过程复杂、风险极高。
 
 ### Kubernetes 中的证书体系
 
@@ -1938,6 +1940,69 @@ kubectl delete namespace test-webhook-verify 2>/dev/null
 3. **SPIFFE/SPIRE 集成**: 基于 SPIFFE 的工作负载身份证书管理
 4. **多集群证书管理**: 跨集群的证书同步和轮换策略
 5. **Air-gapped 环境**: 离线环境中无法使用 ACME 时的证书管理策略
+
+## 修复动作
+
+> **本章定位**: 基于 Section 6 修复操作的快速决策摘要，供 Agent 在 QA 语料和运行时直接引用。
+
+### 修复动作速查表
+
+| 根因 | 修复动作 | 风险 | 验证命令 |
+|------|---------|------|---------|
+| RC-004/RC-005 cert-manager 证书问题 | `kubectl delete secret <tls-secret> -n <ns>`（cert-manager 自动重新签发） | 🟢 低风险 | `kubectl get certificate <cert> -n <ns>` |
+| RC-002 kubelet 证书过期 | 重启 kubelet 触发自动轮换: `ssh <node> "systemctl restart kubelet"` | 🟢 低风险 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` |
+| RC-002 Pending CSR | `kubectl certificate approve <csr-name>` | 🟢 低风险 | `kubectl get csr <csr-name>` |
+| RC-007 NTP 时间偏差 | `ssh <node> "systemctl restart chronyd || systemctl restart ntpd"` | 🟢 低风险 | `ssh <node> "timedatectl status"` |
+| RC-009 手动 TLS Secret 过期 | 重新创建 Secret 或触发 cert-manager 续签 | 🟡 中风险（Ingress 需重新加载证书） | `kubectl get secret <tls-secret> -n <ns> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates` |
+| RC-001/RC-003 kubeadm/etcd 证书过期 | `kubeadm certs renew <cert-name>`（需重启对应组件） | 🟡 中风险（组件重启期间短暂不可用） | `kubeadm certs check-expiration` |
+| RC-010 front-proxy 过期 | `kubeadm certs renew front-proxy-client` + 重启受影响聚合组件 | 🟡 中风险（metrics-server 等聚合 API 短暂不可用） | `openssl verify -CAfile /etc/kubernetes/pki/front-proxy-ca.crt /etc/kubernetes/pki/front-proxy-client.crt` |
+
+### danger_operations 高风险操作标注
+
+```yaml
+danger_operations:
+  - operation: "kubeadm certs renew apiserver / etcd-server / ca"
+    risk: "证书轮转后必须重启对应组件，控制平面在重启期间可能短暂不可用；etcd 证书操作不当可能导致集群失去 quorum"
+    prerequisite:
+      - "优先在非生产环境验证相同版本的 kubeadm 证书轮转流程"
+      - "备份 /etc/kubernetes/pki/: cp -r /etc/kubernetes/pki /etc/kubernetes/pki.bak.$(date +%s)"
+      - "etcd 证书: 确保逐个节点操作，确认集群健康后再操作下一节点"
+    rollback: "从 /etc/kubernetes/pki.bak.* 恢复备份证书，重启对应组件"
+
+  - operation: "kubectl delete secret <tls-secret>"
+    risk: "删除 Secret 后 cert-manager 重新签发需要一定时间，期间使用该 Secret 的 Ingress/Webhook 可能出现 TLS 握手失败"
+    prerequisite:
+      - "确认 Issuer/ClusterIssuer 当前 Ready=True"
+      - "记录 Secret 名称和关联的 Ingress/Webhook"
+    mitigation: "在低流量时段操作，准备备用回滚 Secret（如适用）"
+
+  - operation: "CA 证书过期后的全集群重新签发"
+    risk: "CA 轮换是最危险的证书操作，所有依赖该 CA 的组件需要同步更新信任链，错误操作可能导致整个集群不可用"
+    prerequisite:
+      - "必须在维护窗口执行，通知所有相关团队"
+      - "完整备份 /etc/kubernetes/pki/"
+      - "准备从快照恢复集群的应急方案"
+    escalation: "必须升级至高级 SRE / 架构师执行"
+```
+
+### 通用验证步骤
+
+```bash
+# 1. 证书有效期检查
+kubeadm certs check-expiration
+
+# 2. apiserver 证书验证
+echo | openssl s_client -connect <apiserver-host>:6443 2>/dev/null | openssl x509 -noout -dates
+
+# 3. kubelet 证书验证
+ssh <node> "openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates"
+
+# 4. cert-manager 证书状态
+kubectl get certificates -A
+
+# 5. Ingress TLS 验证
+kubectl get secret <tls-secret> -n <ns> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates -subject
+```
 
 ## Related
 

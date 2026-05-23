@@ -1,7 +1,45 @@
 ---
+title: Agent Harness 可观测性体系 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,'
+category: general
+tags:
+- ai
+- ai-agent
+- observability
+- prometheus
+- grafana
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent Harness 可观测性体系 是什么
+- 如何 Agent Harness 可观测性体系
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 可观测性体系
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- observability-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 可观测性体系
-description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability, OpenTelemetry, Langfuse, Traces, Metrics,
-  Logging, Prometheus, Grafana, 告警, Agent 调试, Span, 执行追踪'
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,
+  [[OpenTelemetry|OpenTelemetry]], Langfuse, Traces, Metrics, Logging, [[Prometheus|Prometheus]], Grafana, 告警, Agent
+  调试, Span, 执行追踪'
 category: ai-agent
 tags:
 - ai
@@ -28,11 +66,15 @@ trigger_keywords:
 - 可观测性体系
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- observability-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 可观测性体系
@@ -41,7 +83,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 可观测性是 Agent Harness 从"PoC"走向"生产"的必要条件。传统软件系统的可观测性（Metrics/Traces/Logs）需要针对 Agent 的特殊性进行扩展——Agent 的非确定性行为、多轮推理过程、工具调用链路、LLM 延迟特性，都需要专门的追踪和度量方案。
 
@@ -49,9 +91,9 @@ prerequisites:
 
 ---
 
-## 1. Agent 可观测性特殊性
+<!-- chunk: 1. Agent 可观测性特殊性 -->## 1. Agent 可观测性特殊性
 
-### 1.1 与传统可观测性的差异
+#<!-- chunk: 1.1 与传统可观测性的差异 -->## 1.1 与传统可观测性的差异
 
 ```
 传统软件可观测性 vs Agent 可观测性:
@@ -80,7 +122,7 @@ Agent 需要额外追踪的维度:
   └── 人工干预频率
 ```
 
-### 1.2 三支柱扩展模型
+#<!-- chunk: 1.2 三支柱扩展模型 -->## 1.2 三支柱扩展模型
 
 ```
 Agent 可观测性三支柱 + 扩展:
@@ -108,9 +150,9 @@ Agent 可观测性三支柱 + 扩展:
 
 ---
 
-## 2. OpenTelemetry 集成
+<!-- chunk: 2. OpenTelemetry 集成 -->## 2. OpenTelemetry 集成
 
-### 2.1 Agent Span 模型
+#<!-- chunk: 2.1 Agent Span 模型 -->## 2.1 Agent Span 模型
 
 ```python
 from opentelemetry import trace
@@ -269,9 +311,9 @@ class OTelInstrumentedHarness:
 
 ---
 
-## 3. Langfuse 集成
+<!-- chunk: 3. Langfuse 集成 -->## 3. Langfuse 集成
 
-### 3.1 Langfuse 追踪集成
+#<!-- chunk: 3.1 Langfuse 追踪集成 -->## 3.1 Langfuse 追踪集成
 
 ```python
 from langfuse import Langfuse
@@ -360,9 +402,9 @@ class LangfuseTracedHarness:
 
 ---
 
-## 4. Prometheus 指标体系
+<!-- chunk: 4. Prometheus 指标体系 -->## 4. Prometheus 指标体系
 
-### 4.1 Agent Harness 指标定义
+#<!-- chunk: 4.1 Agent Harness 指标定义 -->## 4.1 Agent Harness 指标定义
 
 ```python
 from prometheus_client import Counter, Histogram, Gauge, Summary, Info
@@ -467,7 +509,7 @@ harness_loop_termination = Counter(
 )
 ```
 
-### 4.2 指标收集器
+#<!-- chunk: 4.2 指标收集器 -->## 4.2 指标收集器
 
 ```python
 import time
@@ -555,9 +597,9 @@ class HarnessMetricsCollector:
 
 ---
 
-## 5. 告警规则
+<!-- chunk: 5. 告警规则 -->## 5. 告警规则
 
-### 5.1 生产告警规则集
+#<!-- chunk: 5.1 生产告警规则集 -->## 5.1 生产告警规则集
 
 ```yaml
 groups:
@@ -665,9 +707,9 @@ groups:
 
 ---
 
-## 6. Grafana Dashboard 设计
+<!-- chunk: 6. Grafana Dashboard 设计 -->## 6. Grafana Dashboard 设计
 
-### 6.1 Dashboard 面板布局
+#<!-- chunk: 6.1 Dashboard 面板布局 -->## 6.1 Dashboard 面板布局
 
 ```
 Agent Harness Grafana Dashboard 布局:
@@ -703,7 +745,7 @@ Row 5: Token & 成本
   └──────────────────────────┴──────────────────────────┘
 ```
 
-### 6.2 关键 PromQL 查询
+#<!-- chunk: 6.2 关键 PromQL 查询 -->## 6.2 关键 PromQL 查询
 
 ```yaml
 # Dashboard 核心 PromQL 查询
@@ -747,9 +789,9 @@ daily_cost: |
 
 ---
 
-## 7. 调试工具链
+<!-- chunk: 7. 调试工具链 -->## 7. 调试工具链
 
-### 7.1 执行轨迹回放器
+#<!-- chunk: 7.1 执行轨迹回放器 -->## 7.1 执行轨迹回放器
 
 ```python
 class TrajectoryReplayer:
@@ -814,9 +856,9 @@ class TrajectoryReplayer:
 
 ---
 
-## 8. 最佳实践
+<!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-### 8.1 可观测性核心原则
+#<!-- chunk: 8.1 可观测性核心原则 -->## 8.1 可观测性核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -827,7 +869,7 @@ class TrajectoryReplayer:
 | **告警精准** | 告警要可执行，不是噪声 | 区分 critical/warning，关联 Runbook |
 | **轨迹可回放** | 问题复现需要完整执行记录 | 持久化 Trajectory |
 
-### 8.2 反模式
+#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -838,7 +880,7 @@ class TrajectoryReplayer:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -849,7 +891,7 @@ class TrajectoryReplayer:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -861,3 +903,27 @@ class TrajectoryReplayer:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 可观测性体系。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 34-agent-harness-verification-quality
+- 35-agent-harness-security-constraints
+- 37-agent-harness-multi-agent
+- 38-agent-harness-performance-cost

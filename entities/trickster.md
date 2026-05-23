@@ -1,5 +1,5 @@
 ---
-title: Trickster
+title: Trickster [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Trickster
@@ -70,6 +71,6 @@ Trickster 是一个 HTTP 反向代理/缓存，专为时序数据库（Prometheu
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/trickster/trickster.md|trickster]]
+- trickster
 - [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

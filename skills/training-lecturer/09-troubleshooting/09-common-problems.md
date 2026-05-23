@@ -1,5 +1,5 @@
 ---
-title: 第十课：常见问题排查
+title: 第十课：常见问题排查 [09-troubleshooting]
 description: '# 第十课：常见问题排查'
 category: k8s-lecturer
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 第十课：常见问题排查

@@ -35,6 +35,7 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -46,7 +47,7 @@ intent_queries:
   - ACR console image management
   - ACK console kubectl command mapping
   - ACK cluster console operations guide
-  - [[entities/kubernetes|kubernetes]] console operations tutorial
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] console operations tutorial
 trigger_keywords:
   - console
   - 控制台
@@ -114,7 +115,7 @@ related_topics:
 | 集群概览 | 多种资源 | 节点/Pod/事件汇总 |
 | 节点管理 | Node / NodePool | 排水、移除、标签、污点 |
 | 工作负载 | Deployment/StatefulSet/DaemonSet/Job | 创建、更新、回滚、扩缩容 |
-| 服务与路由 | Service / Ingress | 创建、配置、暴露 |
+| 服务与路由 | [[Service|Service]] / Ingress | 创建、配置、暴露 |
 | 配置管理 | ConfigMap / Secret | 创建、编辑、删除 |
 | 存储 | PV / PVC / StorageClass | 创建、绑定、扩容 |
 | 安全 | RBAC / NetworkPolicy / PSS | 权限配置、网络策略 |

@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 场景: 集群部署
@@ -42,7 +43,7 @@ prerequisites:
 
 ## 场景概述
 
-集群部署是从零开始构建 Kubernetes 生产环境的第一步。本文档汇总了 KUDIG 知识库中所有与集群部署相关的文档、技能和故障树。
+集群部署是从零开始构建 [[Kubernetes|Kubernetes]] 生产环境的第一步。本文档汇总了 KUDIG 知识库中所有与集群部署相关的文档、技能和故障树。
 
 ---
 
@@ -79,10 +80,10 @@ graph TD
 
 ## 相关文档
 
-- [[domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md]]
+- domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md
+- domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md
+- domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
+- domain-01-cluster-fundamentals/03-plane-high-availability.md
 - [[domain-07-platform-engineering/README.md]]
 - [[domain-08-release-change-management/topic-deployment/README.md]]
 
@@ -112,7 +113,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[skills/apiserver-fta.md|apiserver-fta]]
 - [[skills/etcd-fta.md|etcd-fta]]
 - [[entities/kubernetes.md|kubernetes]]

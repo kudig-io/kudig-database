@@ -1,5 +1,5 @@
 ---
-title: 第八课：健康检查 - Probe 详解
+title: 第八课：健康检查 - Probe 详解 [09-troubleshooting]
 description: '# 第八课：健康检查 - Probe 详解'
 category: k8s-lecturer
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 第八课：健康检查 - Probe 详解
@@ -779,6 +780,6 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 ---
 
 **关联文档**:
-- [../10-workloads/[[domain-11-production-operations/topic-k8s-lecturer/10-workloads/10-job-cronjob|10-job-cronjob]].md](../10-workloads/10-job-cronjob.md) — Job 和 CronJob
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) — Pod 崩溃故障 Skill
+- [../10-workloads/10-job-cronjob.md](../10-workloads/10-job-cronjob.md) — Job 和 CronJob
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md) — Pod 崩溃故障 [[SKILL|Skill]]
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档

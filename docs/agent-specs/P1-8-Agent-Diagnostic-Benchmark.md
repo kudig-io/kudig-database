@@ -1,6 +1,6 @@
 ---
 title: Agent 诊断能力评估基准 (Agent Diagnostic Benchmark)
-description: '**用途**: 建立量化指标，评估 Agent 在故障排查中的准确率、覆盖率与效率'
+description: '**用途**: 建立量化指标，评估 Agent 在问题排查中的准确率、覆盖率与效率'
 category: general
 tags:
 - k8s
@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Agent 诊断能力评估基准 (Agent Diagnostic Benchmark)
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: 建立量化指标，评估 Agent 在故障排查中的准确率、覆盖率与效率
+> **用途**: 建立量化指标，评估 Agent 在问题排查中的准确率、覆盖率与效率
 
 ---
 
@@ -44,7 +45,7 @@ prerequisites:
 | 维度 | 说明 | 权重 |
 |------|------|------|
 | 准确率 (Accuracy) | 正确识别根因的能力 | 35% |
-| 覆盖率 (Coverage) | 覆盖故障类型的能力 | 25% |
+| 覆盖率 (Coverage) | 覆盖问题类型的能力 | 25% |
 | 效率 (Efficiency) | 诊断时间和资源消耗 | 20% |
 | 可解释性 (Explainability) | 诊断过程可追溯 | 10% |
 | 安全性 (Safety) | 避免破坏性操作 | 10% |
@@ -64,14 +65,14 @@ benchmark_dataset:
     TC-DATA: 80
   
   difficulty_levels:
-    easy: 150  # 单组件故障，症状明确
+    easy: 150  # 单组件问题，症状明确
     medium: 200  # 多组件关联，需推理
-    hard: 100  # 复杂故障，需跨域分析
-    extreme: 50  # 边界case，罕见故障
+    hard: 100  # 复杂问题，需跨域分析
+    extreme: 50  # 边界case，罕见问题
   
   sources:
     - "生产环境历史工单（脱敏）"
-    - "行业标准故障场景"
+    - "行业标准问题场景"
     - "混沌工程实验数据"
 ```
 
@@ -104,13 +105,13 @@ accuracy_metrics:
   
   # 辅助指标：症状分类准确率
   symptom_classification:
-    description: "正确分类故障类别的能力"
+    description: "正确分类问题类别的能力"
     categories: ["TC-INFRA", "TC-APP", "TC-SEC", "TC-DATA"]
     target: "> 0.90"
   
   # 辅助指标：严重程度评估准确率
   severity_assessment:
-    description: "正确评估故障严重程度的能力"
+    description: "正确评估问题严重程度的能力"
     levels: ["P0", "P1", "P2", "P3"]
     target: "> 0.85"
 ```
@@ -167,13 +168,13 @@ confusion_matrix:
 
 ## 3. 覆盖率评估
 
-### 3.1 故障类型覆盖率
+### 3.1 问题类型覆盖率
 
 ```yaml
 coverage_metrics:
   # 主指标：类别覆盖率
   category_coverage:
-    description: "能处理的故障类别占所有类别的比例"
+    description: "能处理的问题类别占所有类别的比例"
     formula: "covered_categories / total_categories"
     target: "> 0.95"
   
@@ -234,15 +235,15 @@ root_cause_coverage:
 
 ```yaml
 edge_case_coverage:
-  description: "处理罕见和复杂故障的能力"
+  description: "处理罕见和复杂问题的能力"
   
   edge_case_categories:
-    - name: "复合故障"
+    - name: "复合问题"
       description: "多个根因同时存在"
       count: 50
       target_coverage: 0.60
     
-    - name: "级联故障"
+    - name: "级联问题"
       description: "根因引发连锁反应"
       count: 50
       target_coverage: 0.55
@@ -252,7 +253,7 @@ edge_case_coverage:
       count: 30
       target_coverage: 0.50
     
-    - name: "跨域故障"
+    - name: "跨域问题"
       description: "涉及多个知识域"
       count: 40
       target_coverage: 0.55

@@ -45,6 +45,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Domain-17 云厂商 — 开源项目索引
@@ -132,7 +133,7 @@ authors:
 
 ## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-12-cloud-providers MOC]]
+- domain-12-cloud-providers MOC
 - [[domain-12-cloud-providers/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
 
 ## See Also

@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 节点自动扩缩容（Node Autoscaling）
@@ -59,7 +60,7 @@ prerequisites:
 
 整合通过移除一组利用率低的节点来提升成本效益。移除非空节点是有影响的：节点上的 Pod 会被终止并可能需要重新创建，但**整合通常不应导致任何 Pod 处于 Pending 状态**。
 
-- 空节点：仅运行 DaemonSet 和静态 Pod 的节点，整合更简单直接。
+- 空节点：仅运行 [[DaemonSet|DaemonSet]] 和静态 Pod 的节点，整合更简单直接。
 - 非空节点：移除会导致 Pod 中断，但自动扩缩器会预测重新调度结果，确保 Pod 能安置在现有或新替换节点上。
 
 ### 自动扩缩器实现
@@ -109,9 +110,9 @@ prerequisites:
 
 | 症状 | 可能原因 | 排查命令 | 解决方案 |
 |------|----------|----------|----------|
-| Pending Pod 长时间无节点扩容 | Autoscaler 未识别到 Pending Pod | `kubectl get pods --field-selector=status.phase=Pending` | 检查 Autoscaler 日志和节点组配置 |
-| 扩容后节点 NotReady | 节点初始化超时或 kubelet 配置错误 | `kubectl describe node <new-node>` | 检查 cloud-init 日志和 kubelet 状态 |
-| 缩容未触发（闲置节点仍存在） | Pod 有 PDB 或 local storage 阻止驱逐 | `kubectl logs -n kube-system cluster-autoscaler-*` | 检查 PDB、annotation `cluster-autoscaler.[[entities/kubernetes|kubernetes]].io/safe-to-evict` |
+| Pending Pod 长时间无节点扩容 | Autoscaler 未识别到 Pending Pod | `kubectl get [[Pods|pods]] --field-selector=status.phase=Pending` | 检查 Autoscaler 日志和节点组配置 |
+| 扩容后节点 NotReady | 节点初始化超时或 [[kubelet|kubelet]] 配置错误 | `kubectl describe node <new-node>` | 检查 cloud-init 日志和 kubelet 状态 |
+| 缩容未触发（闲置节点仍存在） | Pod 有 PDB 或 local storage 阻止驱逐 | `kubectl logs -n kube-system cluster-autoscaler-*` | 检查 PDB、annotation `cluster-autoscaler.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/safe-to-evict` |
 | Karpenter 选择了错误的实例类型 | NodePool 约束配置不当 | `kubectl get nodeclaim -o wide` | 调整 NodePool 的 instanceType 和 requirements |
 | 节点频繁扩缩（抖动） | 扩缩阈值设置过于敏感 | 查看 Autoscaler `--scale-down-delay-after-add` | 增大 scale-down 延迟和 utilization 阈值 |
 | DaemonSet 资源预测错误 | VPA 修改了 DaemonSet 的 requests | `kubectl get vpa -A` | 不要为 DaemonSet 启用 VPA |

@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 项目整体重组行动计划 v2
@@ -65,7 +66,7 @@ Raw Sources → Wiki（知识蒸馏层） → Schema（元数据/导航层）
 - `concepts/`, `entities/`, `skills/`, `references/`, `synthesis/`：知识图谱节点 — 作为跨域层合理，但增加了顶层复杂度
 
 **LLM-Wiki 的关键洞察**：
-> 在 Obsidian/LLM-Wiki 中，**物理位置≠知识连接**。连接靠 `[[wikilinks]]` 和 frontmatter tags 实现，目录只负责"存放位置"。
+> 在 Obsidian/LLM-Wiki 中，**物理位置≠知识连接**。连接靠 `wikilinks` 和 frontmatter tags 实现，目录只负责"存放位置"。
 
 所以重组目标是：**减少物理层级，但保留知识图谱结构**。
 
@@ -78,7 +79,7 @@ Raw Sources → Wiki（知识蒸馏层） → Schema（元数据/导航层）
 `topic-*` 是横向切片，应作为 **domain 内部的子目录** 存在，而非与 domain 并列的顶层目录。
 
 **原因**：
-- Topic 的内容总是依附于某个知识域（如 "监控" 属于可观测性域，"故障树" 属于排障域）
+- Topic 的内容总是依附于某个知识域（如 "监控" 属于可观测性域，"问题树" 属于排障域）
 - Domain 提供纵向学习路径，Topic 提供横向关联，两者是**包含关系**而非**并列关系**
 
 ### 原则 2：知识图谱层独立保留
@@ -87,7 +88,7 @@ Raw Sources → Wiki（知识蒸馏层） → Schema（元数据/导航层）
 
 **原因**：
 - 这些目录的内容天然跨域（如 `entities/prometheus.md` 同时关联 domain-06 监控、domain-17 基础概念）
-- 在 LLM-Wiki 中，它们通过 `[[wikilinks]]` 连接到多个 domain，物理上打散会降低知识图谱的完整性
+- 在 LLM-Wiki 中，它们通过 `wikilinks` 连接到多个 domain，物理上打散会降低知识图谱的完整性
 - 保留为独立层，便于 Dataview/Obsidian Query 统一检索
 
 ### 原则 3：Schema 层不动

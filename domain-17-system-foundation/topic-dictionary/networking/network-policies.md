@@ -31,17 +31,18 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Network Policies
 
 ## 概述
 
-NetworkPolicy 是 Kubernetes 中用于在 OSI 第 3/4 层（IP 地址和端口级别）控制流量的资源对象。它允许你精确指定 Pod 能够与哪些网络“实体”通信，包括其他 Pod、特定命名空间或特定 IP 网段。要实现 NetworkPolicy，集群必须部署支持该功能的 CNI 网络插件。
+[[NetworkPolicy|NetworkPolicy]] 是 [[Kubernetes|Kubernetes]] 中用于在 OSI 第 3/4 层（IP 地址和端口级别）控制流量的资源对象。它允许你精确指定 Pod 能够与哪些网络“实体”通信，包括其他 Pod、特定命名空间或特定 IP 网段。要实现 NetworkPolicy，集群必须部署支持该功能的 CNI 网络插件。
 
 ## 核心概念/原理
 
-- **Pod 隔离模型**：默认情况下，Pod 对入站和出站流量都是“非隔离”的（即全部放行）。一旦存在某个 NetworkPolicy 同时选中了该 Pod 并包含相应的 `policyTypes`（Ingress 和/或 Egress），Pod 即进入隔离状态。此时，只有被显式允许的流量才能通过，其他流量默认被拒绝。
+- **Pod 隔离模型**：默认情况下，Pod 对入站和出站流量都是“非隔离”的（即全部放行）。一旦存在某个 NetworkPolicy 同时选中了该 Pod 并包含相应的 `policyTypes`（[[Ingress|Ingress]] 和/或 Egress），Pod 即进入隔离状态。此时，只有被显式允许的流量才能通过，其他流量默认被拒绝。
 - **规则叠加（Additive）**：多个 NetworkPolicy 之间不会冲突，而是叠加生效。对于某个 Pod 的某个方向（入站或出站），所有适用策略允许流量的并集即为最终允许集合，策略顺序不影响结果。
 - **双向放行原则**：从源 Pod 到目标 Pod 的连接，必须同时被源 Pod 的出站策略和目标 Pod 的入站策略允许，连接才能建立。
 - **选择器（Selectors）**：

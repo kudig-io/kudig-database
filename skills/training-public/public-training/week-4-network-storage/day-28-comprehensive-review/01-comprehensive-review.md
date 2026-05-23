@@ -39,6 +39,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Day 28: 综合复习与实践
@@ -363,7 +364,7 @@ Service 异常
 - [ ] **Week 2: 安全监控**
   - [ ] 能配置 RBAC 权限
   - [ ] 能配置审计日志
-  - [ ] 能部署 Prometheus + Grafana
+  - [ ] 能部署 [[Prometheus|Prometheus]] + Grafana
   - [ ] 能识别常见安全风险
 
 - [ ] **Week 3: 节点与工作负载**
@@ -454,7 +455,7 @@ related_topics:
   - storage
   - security
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-1-ack-acr-lifecycle/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md
+  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|README]].md
   - domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md
 ---
 ```

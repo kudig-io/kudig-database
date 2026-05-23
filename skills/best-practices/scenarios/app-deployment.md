@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 应用部署
@@ -41,7 +42,7 @@ prerequisites:
 
 ## 场景概述
 
-应用部署是 Kubernetes 最常见的操作场景。本场景汇总了 Deployment、StatefulSet、DaemonSet 等所有工作负载的部署模式和最佳实践。
+应用部署是 [[Kubernetes|Kubernetes]] 最常见的操作场景。本场景汇总了 Deployment、[[StatefulSet|StatefulSet]]、[[DaemonSet|DaemonSet]] 等所有工作负载的部署模式和最佳实践。
 
 ---
 
@@ -78,7 +79,7 @@ graph TD
 
 ## 相关文档
 
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md]]
+- domain-02-workloads-applications/02-deployment-production-patterns.md
 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md]]
 - [[domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md]]
 - [[domain-18-manifests-patterns/README.md]]
@@ -109,7 +110,7 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
-- [[domain-01-cluster-fundamentals/24-production-deployment-best-practices.md|24-production-deployment-best-practices]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-deployment-patterns-architecture.md|99-kubernetes-deployment-patterns-architecture]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- 24-production-deployment-best-practices
+- 99-kubernetes-deployment-patterns-architecture
 - [[entities/kubernetes.md|kubernetes]]

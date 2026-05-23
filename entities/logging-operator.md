@@ -1,5 +1,5 @@
 ---
-title: Logging Operator
+title: Logging Operator [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Logging Operator
@@ -78,7 +79,7 @@ Logging Operator 是一个 Kubernetes Operator，用于自动化部署和配置 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[fluentd]] — Fluentd
 
-- [[domain-19-landscape-references/sandbox/logging-operator/logging-operator.md|logging-operator]]
+- logging-operator
 - [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

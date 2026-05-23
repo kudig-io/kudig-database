@@ -1,5 +1,5 @@
 ---
-title: Job 与 CronJob 故障排查指南
+title: Job 与 CronJob 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Job 与 CronJob 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,16 +41,17 @@ prerequisites:
 - pod-lifecycle
 - troubleshooting-methodology
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: Job 与 CronJob 故障排查指南
+title: Job 与 [[CronJob|CronJob]] 故障排查指南
 description: '# Job 与 CronJob 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - scheduler
 - controller-manager
 - job
@@ -88,7 +89,7 @@ k8s_versions:
 
 # Job 与 CronJob 故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 >
 > **版本说明**:
 > - v1.25+ CronJob 时区支持 (spec.timeZone) GA
@@ -903,13 +904,13 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [资源配额故障排查](../07-resources-scheduling/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
-- [调度故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
+- [资源配额故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting|01-resources-quota-troubleshooting]].md)
+- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 
 ## See Also

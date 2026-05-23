@@ -1,4 +1,41 @@
 ---
+title: 节点安全 — Node Authorization / NodeRestriction / Pod Security
+description: 'title: 节点安全机制'
+category: general
+tags:
+- reference
+- security
+- etcd
+- apiserver
+- kubelet
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点安全 — Node Authorization / NodeRestriction / Pod Security 是什么
+- 如何 节点安全 — Node Authorization / NodeRestriction / Pod Security
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点安全
+- Node
+- Authorization
+- NodeRestriction
+- Pod
+- Security
+- platform
+- engineering
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点安全机制
 description: '# 节点安全 — Node Authorization / NodeRestriction / Pod Security'
 category: functions
@@ -41,24 +78,29 @@ trigger_keywords:
 - restricted
 - seccomp
 - capabilities
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-05-security-compliance
 - domain-01-cluster-fundamentals
 related_topics:
-- cluster-create/16-security
+- 16-security
 - cluster-create/03-certs
 - node-create/06-certificate
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点安全 — Node Authorization / NodeRestriction / Pod Security
 
 ## 概述
 
-节点安全是 [[entities/kubernetes|kubernetes]] 集群安全体系中至关重要的一环。每个节点上运行着 kubelet，它拥有创建/删除 Pod、读写 Secret 和 ConfigMap、上报节点状态等敏感权限。如果 kubelet 的权限没有被正确限制，攻击者一旦控制了某个节点，就可以利用 kubelet 的权限在整个集群中横向移动，造成灾难性的安全后果。
+节点安全是 Kubernetes 集群安全体系中至关重要的一环。每个节点上运行着 kubelet，它拥有创建/删除 Pod、读写 Secret 和 ConfigMap、上报节点状态等敏感权限。如果 kubelet 的权限没有被正确限制，攻击者一旦控制了某个节点，就可以利用 kubelet 的权限在整个集群中横向移动，造成灾难性的安全后果。
 
 Kubernetes 从 v1.7 开始引入了 Node Authorizer 和 NodeRestriction Admission Plugin，专门用于限制 kubelet 的权限范围，确保每个 kubelet 只能操作与自身节点相关的资源。这一机制被称为**节点隔离（Node Isolation）**，是 Kubernetes 安全模型的重要基石。
 
@@ -256,7 +298,7 @@ iptables -A INPUT -p tcp --dport 10250 -j DROP
 
 
 > ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/[[domain-17-system-foundation/topic-dictionary/security/pod-security-admission|pod-security-admission]]/) 替代。
 > PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 Kubernetes v1.25 移除了 PodSecurityPolicy (PSP)，替换为 Pod Security Standards (PSS)。PSS 通过 Namespace 标签来强制执行 Pod 安全策略，无需创建额外的 API 对象。
@@ -421,3 +463,9 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem \
 | `PodSecurityAdmission` | `pkg/security/podsecurity/` | Pod Security 准入插件 |
 | `kubeletAuthentication` | `pkg/kubelet/server/auth.go` | kubelet 认证配置 |
 | `csrapproving controller` | `pkg/controller/certificates/approval/sarapproval.go` | CSR 自动审批 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

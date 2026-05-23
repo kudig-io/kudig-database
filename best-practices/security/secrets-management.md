@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 密钥管理最佳实践
+title: Kubernetes 密钥管理最佳实践 [security]
 description: 生产环境 Kubernetes 密钥管理配置的最佳实践指南
 category: best-practices/security
 tags:
@@ -44,6 +44,7 @@ cross_refs:
 - type: best-practice
   path: ./pod-security.md
   label: Pod安全最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 密钥管理最佳实践

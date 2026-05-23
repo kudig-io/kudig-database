@@ -24,13 +24,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 太空计算（Spaceborne Computing）
 
 ## 概述
 
-**太空计算（Spaceborne Computing）** 是将边缘计算和人工智能能力部署到卫星、空间站和其他太空平台上的新兴领域。随着低轨卫星（LEO, Low Earth Orbit）星座（如 Starlink、OneWeb、中国星网）的爆发式增长，以及在轨数据处理需求的激增，Kubernetes 和容器化技术正在进入太空。2026 年，NASA、ESA 以及多家商业航天公司已经开始在卫星上运行轻量级 Kubernetes 发行版（如 K3s），用于**星上 AI 推理、地球观测数据处理、自主导航和故障检测**。
+**太空计算（Spaceborne Computing）** 是将边缘计算和人工智能能力部署到卫星、空间站和其他太空平台上的新兴领域。随着低轨卫星（LEO, Low Earth Orbit）星座（如 Starlink、OneWeb、中国星网）的爆发式增长，以及在轨数据处理需求的激增，[[Kubernetes|Kubernetes]] 和容器化技术正在进入太空。2026 年，NASA、ESA 以及多家商业航天公司已经开始在卫星上运行轻量级 Kubernetes 发行版（如 [[k3s|K3s]]），用于**星上 AI 推理、地球观测数据处理、自主导航和故障检测**。
 
 ## 核心概念/原理
 

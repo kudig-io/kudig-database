@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 调度与编排策略全栈培训
+title: Kubernetes 调度与编排策略全栈培训 (assets)
 description: '# Kubernetes 调度与编排策略全栈培训'
 category: presentations
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 调度与编排策略全栈培训

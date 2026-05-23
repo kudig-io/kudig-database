@@ -50,6 +50,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
@@ -772,7 +773,7 @@ crontab -e
 */5 * * * * /usr/local/bin/monitor.sh
 ```
 
-<!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 #<!-- chunk: 节点运维与 K8s 集群稳定性 -->## 节点运维与 K8s 集群稳定性
 
@@ -901,25 +902,25 @@ echo "=== 诊断完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-17-system-foundation MOC]]
+- domain-17-system-foundation MOC
 - [[domain-17-system-foundation/README.md|Domain-14: Linux 基础知识体系]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-14 Linux — 开源项目索引]]
-- [[domain-17-system-foundation/01-linux-system-architecture.md|01 - Linux 系统架构与内核深度解析：生产环境运维专家指南]]
-- [[domain-17-system-foundation/02-linux-process-management.md|02 - Linux 进程管理与系统监控：生产环境运维专家实践]]
-- [[domain-17-system-foundation/03-linux-filesystem-deep-dive.md|03 - Linux 文件系统深度解析：生产环境存储管理专家指南]]
-- [[domain-17-system-foundation/04-linux-networking-configuration.md|04 - Linux 网络配置与性能优化：生产环境网络运维专家指南]]
-- [[domain-17-system-foundation/05-linux-storage-management.md|05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南]]
-- [[domain-17-system-foundation/06-linux-performance-tuning.md|06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南]]
-- [[domain-17-system-foundation/07-linux-security-hardening.md|07 - Linux 安全加固与合规管理：生产环境安全运维专家指南]]
-- [[domain-17-system-foundation/08-linux-container-fundamentals.md|08 - Linux 容器技术深度解析：生产环境容器运维专家指南]]
-- [[domain-17-system-foundation/99-linux-commands-reference.md|Linux 命令大全参考]]
+- Domain-14 Linux — 开源项目索引
+- 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
+- 02 - Linux 进程管理与系统监控：生产环境运维专家实践
+- 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
+- 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南
+- 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
+- 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
+- 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
+- 08 - Linux 容器技术深度解析：生产环境容器运维专家指南
+- Linux 命令大全参考
 
 ## See Also
 
-- [[domain-17-system-foundation/07-linux-security-hardening.md|07-linux-security-hardening]]
-- [[domain-17-system-foundation/08-linux-container-fundamentals.md|08-linux-container-fundamentals]]
-- [[domain-17-system-foundation/99-linux-commands-reference.md|99-linux-commands-reference]]
-- [[domain-17-system-foundation/01-linux-system-architecture.md|01-linux-system-architecture]]
+- 07-linux-security-hardening
+- 08-linux-container-fundamentals
+- 99-linux-commands-reference
+- 01-linux-system-architecture
 
 ## Related
 

@@ -23,6 +23,7 @@ trigger_keywords:
 - Matrix
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Version Matrix
@@ -44,7 +45,7 @@ prerequisites:
 
 #### [v1.28+]: GracefulNodeShutdown 默认启用
 
-当节点正在关机时，kubelet 会尝试优雅终止 Pod。在诊断时需注意区分计划关机和异常关机：
+当节点正在关机时，[[kubelet|kubelet]] 会尝试优雅终止 Pod。在诊断时需注意区分计划关机和异常关机：
 
 - 检查 `shutdownGracePeriod` 和 `shutdownGracePeriodCriticalPods` 配置
 - 日志中出现 `shutting down gracefully` 不一定是故障
@@ -92,8 +93,8 @@ prerequisites:
 
 ## Related
 
-- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
-- [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] — FTA Diagnostic Execution Engine
-- [[skills/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+- [[skills/troubleshoot-node-issues.md|troubleshoot-node-issues]] — [[Troubleshoot Node Issues|Troubleshoot Node Issues]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
+- [[skills/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

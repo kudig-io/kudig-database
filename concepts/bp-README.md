@@ -36,6 +36,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 最佳实践指南
@@ -85,7 +86,7 @@ prerequisites:
 **核心原则**:
 - 高可用控制平面：至少3个主节点
 - 合理的节点规格：根据工作负载选择节点类型
-- 网络规划：Pod CIDR、Service CIDR、节点网络分离
+- 网络规划：Pod CIDR、[[Service|Service]] CIDR、节点网络分离
 
 **关键配置**:
 
@@ -759,7 +760,7 @@ spec:
 **核心原则**:
 - 统一管理
 - 负载均衡
-- 故障转移
+- 问题转移
 
 **关键配置**:
 
@@ -779,7 +780,7 @@ spec:
 - [ ] 集群联邦规划
 - [ ] 统一管理工具
 - [ ] 负载均衡策略
-- [ ] 故障转移机制
+- [ ] 问题转移机制
 - [ ] 监控和告警
 
 ### GitOps

@@ -1,5 +1,5 @@
 ---
-title: Node 注册与 kubeadm token 详解
+title: Node 注册与 kubeadm token 详解 (topic-code-analysis)
 description: 'title: Node 注册与 kubeadm token 详解'
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: Node 注册与 kubeadm token 详解
@@ -531,6 +532,6 @@ kubectl get node worker-1 -o yaml
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|02-cluster-lifecycle-management]]
+- 02-cluster-lifecycle-management
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]

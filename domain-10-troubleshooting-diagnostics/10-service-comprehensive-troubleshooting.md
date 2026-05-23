@@ -61,9 +61,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# 10 - Service 全面故障排查 (Service Comprehensive Troubleshooting)
+# 10 - [[Service|Service]] 全面故障排查 (Service Comprehensive Troubleshooting)
 
 <!-- chunk: 🎯 本文档价值 -->
 ## 🎯 本文档价值
@@ -155,7 +156,7 @@ cross_refs:
 | ClusterIP不通 | kube-proxy故障/iptables | `iptables -t nat -L` | 检查kube-proxy |
 | NodePort不通 | 防火墙/端口冲突 | `ss -tlnp` | 检查防火墙 |
 | LoadBalancer Pending | 云provider未配置 | `kubectl describe svc` | 配置LB provider |
-| 跨命名空间不通 | NetworkPolicy | `kubectl get netpol` | 调整策略 |
+| 跨命名空间不通 | [[NetworkPolicy|NetworkPolicy]] | `kubectl get netpol` | 调整策略 |
 
 ### 1.3 生产环境典型场景
 
@@ -595,9 +596,9 @@ iptables -t nat -L KUBE-SERVICES -n | grep <svc-name>
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

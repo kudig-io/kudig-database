@@ -35,6 +35,7 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 工业元宇宙架构设计
@@ -44,7 +45,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -61,7 +62,7 @@ audience:
 - 数字孪生工程师
 estimated_read_time: 5min
 intent_queries:
-- industrial metaverse kubernetes architecture
+- industrial metaverse [[Kubernetes|kubernetes]] architecture
 - 工业元宇宙K8s部署
 - VR协同设计平台
 - 数字孪生工厂K8s
@@ -595,7 +596,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -610,11 +611,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/93-digital-twin-factory.md|93-digital-twin-factory]]
-- [[domain-20-application-patterns/94-smart-prison.md|94-smart-prison]]
-- [[domain-20-application-patterns/96-carbon-capture.md|96-carbon-capture]]
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
+- 93-digital-twin-factory
+- 94-smart-prison
+- 96-carbon-capture
+- 01-ecommerce-architecture
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

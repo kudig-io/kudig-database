@@ -35,6 +35,7 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 <div align="center">
@@ -71,7 +72,7 @@ related_domains:
   - domain-10-troubleshooting-diagnostics
 related_topics:
   - domain-11-production-operations/topic-learn/quick-start
-  - domain-11-production-operations/topic-learn/public-training/one-month/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]]
+  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|README]]
 id: PUBLIC-TRAINING-BOOT-001
 topic: training
 type: landing-page
@@ -170,7 +171,7 @@ tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
 |:---:|------|---------|
 | Day 1-2 | Docker 容器全栈 | 镜像构建、网络模型、存储挂载、安全加固 |
 | Day 3-4 | Linux 核心技能 | 进程管理、网络调试、文件系统、性能调优 |
-| Day 5-6 | K8s 架构精读 | API Server、etcd、Scheduler 全组件拆解 |
+| Day 5-6 | K8s 架构精读 | API Server、[[etcd|etcd]]、Scheduler 全组件拆解 |
 | Day 7 | 综合实战 | **亲手搭建一个可运行的 K8s 集群** |
 
 > **🎁 产出**: 拥有你自己的 K8s 集群 + 完整架构认知图
@@ -184,7 +185,7 @@ tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
 | 天数 | 主题 | 你将学会 |
 |:---:|------|---------|
 | Day 8-9 | 控制平面深潜 | etcd Raft 协议、API 请求链、调度算法 |
-| Day 10-11 | 工作负载实战 | Deployment / StatefulSet / DaemonSet / HPA |
+| Day 10-11 | 工作负载实战 | Deployment / [[StatefulSet|StatefulSet]] / [[DaemonSet|DaemonSet]] / HPA |
 | Day 12-13 | 网络栈精通 | CNI 原理、Service 四种类型、Ingress 路由 |
 | Day 14 | 存储 + 综合实践 | PV/PVC/CSI 全链路 + 生产级应用编排 |
 

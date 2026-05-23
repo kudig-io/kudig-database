@@ -36,6 +36,7 @@ prerequisites:
 - platform-engineering-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点升级 kubeadm upgrade node 源码分析
@@ -83,8 +84,8 @@ related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
 related_topics:
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/09-upgrade.md|09-upgrade]]
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
+- 09-upgrade
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
 - node-create/04-drain
 authors:
 - name: KUDIG Team

@@ -26,13 +26,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Cloud Controller Manager（云控制器管理器）
 
 ## 概述
 
-Cloud Controller Manager 是 Kubernetes 控制平面的一个组件，它将云厂商特定的控制逻辑嵌入到 Kubernetes 中。它使集群能够连接到云提供商的 API，并将与云平台交互的组件与仅与集群交互的组件分离开来，从而实现解耦，允许云厂商以不同于主 Kubernetes 项目的节奏发布新特性。
+Cloud Controller Manager 是 [[Kubernetes|Kubernetes]] 控制平面的一个组件，它将云厂商特定的控制逻辑嵌入到 Kubernetes 中。它使集群能够连接到云提供商的 API，并将与云平台交互的组件与仅与集群交互的组件分离开来，从而实现解耦，允许云厂商以不同于主 Kubernetes 项目的节奏发布新特性。
 
 ## 核心概念/原理
 
@@ -50,7 +51,7 @@ cloud-controller-manager 内部包含以下主要控制器：
 - **Route Controller**：
   - 负责在云中配置路由，使集群中不同节点上的容器能够互相通信
   - 根据云提供商实现，可能还会为 Pod 网络分配 IP 地址块
-- **Service Controller**：
+- **[[Service|Service]] Controller**：
   - 监听 Service 的创建、更新和删除事件
   - 与云提供商 API 交互，为需要外部负载均衡器等基础设施组件的 Service 配置相应的云资源（如托管负载均衡器、IP 地址、网络包过滤、目标健康检查）
 
@@ -85,4 +86,4 @@ cloud-controller-manager 需要以下 API 对象访问权限（以 ClusterRole �
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

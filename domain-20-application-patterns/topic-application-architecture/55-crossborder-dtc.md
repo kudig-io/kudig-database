@@ -1,4 +1,34 @@
 ---
+title: 跨境电商独立站架构设计 — 阿里云视角
+description: 'title: 跨境电商独立站架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- redis
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 跨境电商独立站架构设计 — 阿里云视角 是什么
+- 如何 跨境电商独立站架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 跨境电商独立站架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: 跨境电商独立站架构设计
 description: '# 跨境电商独立站架构设计 — 阿里云视角'
 category: application-architecture
@@ -17,7 +47,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 跨境电商独立站 Kubernetes 全球部署
+- 跨境电商独立站 [[Kubernetes|Kubernetes]] 全球部署
 - DTC品牌出海 Shopify 阿里云架构
 - 跨境支付路由 多币种 K8s
 - GDPR合规 跨境电商 数据本地化
@@ -32,10 +62,6 @@ trigger_keywords:
 - 支付网关
 - GDPR
 - 阿里云
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- redis-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
@@ -43,6 +69,15 @@ related_topics:
 - 33-crossborder-warehouse
 - 01-ecommerce-architecture
 - 53-new-retail-dtc
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 跨境电商独立站架构设计 — 阿里云视角
@@ -270,6 +305,30 @@ flowchart LR
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 53-new-retail-dtc
+- 54-social-gaming-metaverse
+- 56-smart-elderly-care
+- 57-digital-therapeutics
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

@@ -1,5 +1,5 @@
 ---
-title: Antrea
+title: Antrea [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Antrea
@@ -36,7 +37,7 @@ prerequisites:
 
 ## 概述
 
-Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，为 Pod 网络提供高性能数据平面。它实现了 Kubernetes NetworkPolicy API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。
+Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，为 Pod 网络提供高性能数据平面。它实现了 Kubernetes [[NetworkPolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。
 
 ## 核心能力
 
@@ -80,7 +81,7 @@ Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，�
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/antrea/antrea.md|antrea]]
+- antrea
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]

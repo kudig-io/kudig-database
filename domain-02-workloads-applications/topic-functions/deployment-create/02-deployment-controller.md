@@ -1,7 +1,36 @@
 ---
+title: Deployment 控制器入口源码分析 (topic-code-analysis)
+description: '| `getReplicaSetsForDeployment` | `([]*apps.ReplicaSet, error)` | 返回 Deployment 管理的所有 RS 列表 |'
+category: general
+tags:
+- reference
+- deployment
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Deployment 控制器入口源码分析 是什么
+- 如何 Deployment 控制器入口源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Deployment
+- 控制器入口源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: Deployment 控制器入口源码分析
-description: 深入分析 Kubernetes Deployment 控制器 syncDeployment 函数的完整实现，涵盖 getReplicaSetsForDeployment 获取关联 RS、getNewReplicaSet
-  创建新 RS、PodTemplateHash 计算、Deployment 暂停机制以及级联清理逻辑。
 category: deployment
 tags:
 - deployment
@@ -10,16 +39,10 @@ tags:
 - getNewReplicaSet
 - cleanupDeployment
 - PodTemplateHash
-- controller-manager
-- rbac
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes Deployment 控制器 syncDeployment 函数的完整实现，涵盖 getReplicaSetsForDeployment
+  获取关联 RS、getNewReplicaSet 创建新 RS、PodTemplateHash 计算、Deployment 暂停机制以及级联清理逻辑。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-developer
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes syncDeployment source code
 - getReplicaSetsForDeployment kubernetes
@@ -37,9 +60,12 @@ trigger_keywords:
 - blockOwnerDeletion
 - findNewReplicaSet
 - CreateReplicaSet
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-02-workloads-applications
 - domain-01-cluster-fundamentals
@@ -48,6 +74,17 @@ related_topics:
 - replicaset-controller
 - rolling-update
 - deployment-status
+domain_link: '[Workloads](../domain-02-workloads-applications/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Deployment 控制器入口源码分析
@@ -551,9 +588,16 @@ kubectl get rs -l app=web-app
 
 ## 相关函数
 
-- [`NewDeploymentController`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — 控制器初始化与 Informer 注册
+- [`NewDeploymentController`](README.md) — 控制器初始化与 Informer 注册
 - [`rolloutRolling`](04-rolling-update.md) — RollingUpdate 策略的详细实现
 - [`rolloutRecreate`](README.md) — Recreate 策略的详细实现
 - [`calculateStatus`](05-deployment-status.md) — Deployment Status 计算
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚实现
 - [`cleanupOldReplicaSets`](README.md) — 清理超出 historyLimit 的旧 RS
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

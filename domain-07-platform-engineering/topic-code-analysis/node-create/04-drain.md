@@ -38,6 +38,7 @@ prerequisites:
 - cni-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 节点驱逐与维护 kubectl drain

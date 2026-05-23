@@ -1,5 +1,5 @@
 ---
-title: NetworkPolicy 异常故障树分析
+title: NetworkPolicy 异常故障树分析 (skills)
 description: 'summary: "<!-- condition: kubectl get networkpolicy -A -o jsonpath=''{range .items[?(@.spec.policyTypes!=null)]}
   {.metadata.namespace}/{.metadata.name}{\''\n\''}{end}'' 显示有策略但存在网络不通问题 --> - *..."'
 category: general
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-NETWORKPOLICY-001
 component: Networkpolicy
 severity: high
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7
@@ -53,7 +54,7 @@ base_confidence: 0.7
 | 节点 ID | 名称 | 诊断命令 | 预期输出模式 | 判定 |
 |---------|------|----------|--------------|------|
 | evt_podselector_error | podSelector 选择错误 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.podSelector}'` | 返回 podSelector 配置 | 检查 selector 是否匹配目标 Pod 标签 |
-| evt_nsselector_error | namespaceSelector 错误 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.ingress[*].from[*].namespaceSelector}'` | 返回 namespaceSelector 配置 | 检查是否正确选择源命名空间 |
+| evt_nsselector_error | namespaceSelector 错误 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.[[Ingress|ingress]][*].from[*].namespaceSelector}'` | 返回 namespaceSelector 配置 | 检查是否正确选择源命名空间 |
 | evt_label_mismatch | 标签不匹配 | `kubectl get pods -n ${NAMESPACE} -l "${LABEL_SELECTOR}" --show-labels` | 列出匹配的 Pod | 无输出表示标签不匹配 |
 | evt_ingress_missing | 入站规则缺失 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.ingress}'` | 返回 ingress 规则 | null/空表示缺失入站规则 |
 | evt_egress_missing | 出站规则缺失 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.egress}'` | 返回 egress 规则 | null/空表示缺失出站规则 |

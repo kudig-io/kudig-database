@@ -1,6 +1,45 @@
 ---
+title: 社交媒体平台 Kubernetes 生产架构设计
+description: 'title: 社交媒体平台Kubernetes生产架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- redis
+- kafka
+- gateway
+- operator
+- gpu
+- nvidia
+- llm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 社交媒体平台 Kubernetes 生产架构设计 是什么
+- 如何 社交媒体平台 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 社交媒体平台
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- kafka-basics
+- redis-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 社交媒体平台Kubernetes生产架构设计
-description: '# 社交媒体平台 Kubernetes 生产架构设计'
+description: '# 社交媒体平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -39,12 +78,6 @@ trigger_keywords:
 - 社交K8s
 - 实时消息
 - 用户推荐
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- kafka-basics
-- redis-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -53,6 +86,15 @@ related_topics:
 - livestream-ecommerce
 - martech-adtech
 - digital-government-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 社交媒体平台 Kubernetes 生产架构设计
@@ -64,7 +106,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、内容发布与 Feed 流架构](#二内容发布与-feed-流架构)
@@ -73,11 +115,11 @@ related_topics:
 - [五、内容审核与安全架构](#五内容审核与安全架构)
 - [六、推荐与个性化架构](#六推荐与个性化架构)
 - [七、直播与实时互动架构](#七直播与实时互动架构)
-- [八、[[entities/kubernetes|k8s]] 部署架构](#八k8s-部署架构)
+- [八、K8s 部署架构](#八k8s-部署架构)
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -126,9 +168,9 @@ flowchart TB
 
 ---
 
-## 二、内容发布与 Feed 流架构
+<!-- chunk: 二、内容发布与 Feed 流架构 -->## 二、内容发布与 Feed 流架构
 
-### Feed 流推拉模型
+#<!-- chunk: Feed 流推拉模型 -->## Feed 流推拉模型
 
 ```mermaid
 flowchart TB
@@ -166,7 +208,7 @@ flowchart TB
     style Hybrid fill:#c8e6c9
 ```
 
-### Feed 流写入流程
+#<!-- chunk: Feed 流写入流程 -->## Feed 流写入流程
 
 ```mermaid
 sequenceDiagram
@@ -198,7 +240,7 @@ sequenceDiagram
     Push->>User: 推送给在线粉丝
 ```
 
-### Feed 服务 K8s 配置
+#<!-- chunk: Feed 服务 K8s 配置 -->## Feed 服务 K8s 配置
 
 ```yaml
 apiVersion: apps/v1
@@ -285,7 +327,7 @@ spec:
 
 ---
 
-## 三、关注关系与社交图谱架构
+<!-- chunk: 三、关注关系与社交图谱架构 -->## 三、关注关系与社交图谱架构
 
 ```mermaid
 flowchart TB
@@ -319,7 +361,7 @@ flowchart TB
 
 ---
 
-## 四、消息与通知架构
+<!-- chunk: 四、消息与通知架构 -->## 四、消息与通知架构
 
 ```mermaid
 flowchart TB
@@ -354,7 +396,7 @@ flowchart TB
 
 ---
 
-## 五、内容审核与安全架构
+<!-- chunk: 五、内容审核与安全架构 -->## 五、内容审核与安全架构
 
 ```mermaid
 flowchart TB
@@ -387,7 +429,7 @@ flowchart TB
 
 ---
 
-## 六、推荐与个性化架构
+<!-- chunk: 六、推荐与个性化架构 -->## 六、推荐与个性化架构
 
 ```mermaid
 flowchart TB
@@ -425,7 +467,7 @@ flowchart TB
 
 ---
 
-## 七、直播与实时互动架构
+<!-- chunk: 七、直播与实时互动架构 -->## 七、直播与实时互动架构
 
 ```mermaid
 flowchart TB
@@ -458,9 +500,9 @@ flowchart TB
 
 ---
 
-## 八、K8s 部署架构
+<!-- chunk: 八、K8s 部署架构 -->## 八、K8s 部署架构
 
-### 社交媒体 Namespace 组织
+#<!-- chunk: 社交媒体 Namespace 组织 -->## 社交媒体 Namespace 组织
 
 ```mermaid
 flowchart TB
@@ -499,7 +541,7 @@ flowchart TB
     style Media fill:#e8f5e9
 ```
 
-### 内容审核 Worker 部署
+#<!-- chunk: 内容审核 Worker 部署 -->## 内容审核 Worker 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -553,8 +595,32 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [Twitter 架构演进](https://blog.twitter.com/engineering/en_us/topics/infrastructure)
 - [Instagram 工程博客](https://engineering.fb.com/category/instagram/)
 - [Redis 社交应用实践](https://redis.io/solutions/social/)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture.md|智慧零售与新零售Kubernetes生产架构设计]]
+
+## See Also
+
+- 08-ai-ml-inference-architecture
+- 09-gaming-backend-architecture
+- 11-smart-retail-architecture
+- 12-smart-logistics-architecture

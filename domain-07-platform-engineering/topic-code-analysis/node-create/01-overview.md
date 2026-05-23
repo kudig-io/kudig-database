@@ -1,5 +1,5 @@
 ---
-title: 节点生命周期总览
+title: 节点生命周期总览 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: 节点生命周期总览
@@ -84,7 +85,7 @@ related_topics:
 - node-create/02-registration
 - node-create/03-condition
 - node-create/04-drain
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/01-overview.md|01-overview]]
+- 01-overview
 authors:
 - name: KUDIG Team
   role: contributor

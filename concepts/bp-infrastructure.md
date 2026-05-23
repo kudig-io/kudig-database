@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 本页汇总了 **Infrastructure** 领域的 Kubernetes 最佳实践。
@@ -65,7 +66,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Deployment、Service）
+- Kubernetes 核心概念（Pod、Deployment、[[Service|Service]]）
 - Linux 系统管理基础
 - 网络基础知识
 
@@ -75,7 +76,7 @@ cross_refs:
 
 ### 常见问题
 
-**问题1：控制平面单点故障**
+**问题1：控制平面单点问题**
 - **症状**：API Server 不可用，集群管理功能丧失
 - **原因**：单主节点架构，缺乏高可用设计
 - **影响**：集群管理功能完全丧失，影响业务连续性
@@ -128,7 +129,7 @@ graph TB
 ### 目标读者
 
 - **网络工程师**: 了解Kubernetes网络架构和CNI插件选型
-- **SRE**: 掌握网络故障排查和性能优化
+- **SRE**: 掌握网络问题排查和性能优化
 - **DevOps 工程师**: 学习网络策略配置和安全加固
 
 ### 前置知识
@@ -194,7 +195,7 @@ graph TB
 ### 目标读者
 
 - **存储工程师**: 了解Kubernetes存储架构和存储类设计
-- **SRE**: 掌握存储故障排查和性能优化
+- **SRE**: 掌握存储问题排查和性能优化
 - **DevOps 工程师**: 学习持久卷配置和数据备份
 
 ### 前置知识

@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 11: 工作负载 - Pod 生命周期 + 资源管理 + HPA

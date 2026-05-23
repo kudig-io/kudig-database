@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 7: 周复习 + 综合实践
@@ -108,7 +109,7 @@ related:
 
 **Linux 容器基础回顾**: 容器的本质是 Linux 内核提供的三项隔离能力。namespace 提供资源隔离（7 种类型：PID、NET、IPC、MNT、UTS、USER、CGROUP），cgroup 提供资源限制（CPU、内存、IO、网络），UnionFS 提供镜像分层（Docker 镜像的核心技术）。K8s 中的 resources.requests 和 resources.limits 最终就是通过 cgroup 来实现的。
 
-**K8s 架构回顾**: K8s 采用 Master-Node 架构。Master 运行控制平面（etcd + API Server + Controller Manager + Scheduler），Node 运行数据平面（kubelet + kube-proxy + Container Runtime）。所有组件通过 API Server 通信，API Server 将数据持久化到 etcd。声明式管理的核心思想是"描述期望状态，系统自动收敛"——Deployment 描述期望的 Pod 副本数，Controller Manager 确保 Pod 数量与期望一致。
+**K8s 架构回顾**: K8s 采用 Master-Node 架构。Master 运行控制平面（[[etcd|etcd]] + API Server + Controller Manager + Scheduler），Node 运行数据平面（kubelet + kube-proxy + Container Runtime）。所有组件通过 API Server 通信，API Server 将数据持久化到 etcd。声明式管理的核心思想是"描述期望状态，系统自动收敛"——Deployment 描述期望的 Pod 副本数，Controller Manager 确保 Pod 数量与期望一致。
 
 ### 声明式管理工作流
 

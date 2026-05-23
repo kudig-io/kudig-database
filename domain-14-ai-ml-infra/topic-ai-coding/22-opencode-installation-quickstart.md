@@ -26,6 +26,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 安装部署与快速入门
@@ -127,7 +128,7 @@ pnpm install -g opencode-ai
 yarn global add opencode-ai
 ```
 
-### 2.4 [[entities/docker|docker]]
+### 2.4 [[entities/docker|[[Docker & Containerd 速查卡|docker]]]]
 
 ```bash
 docker run -it --rm ghcr.io/anomalyco/opencode

@@ -25,6 +25,7 @@ trigger_keywords:
 - Catalog
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Root Cause Catalog
@@ -33,7 +34,7 @@ prerequisites:
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 |
 |--------|------|------|---------|---------|
-| RC-001 | **kubelet 进程崩溃或未运行** | 高 | D2.1, D2.2, D1.5 | `evt_kubelet_down`, `evt_heartbeat_fail` |
+| RC-001 | **[[kubelet|kubelet]] 进程崩溃或未运行** | 高 | D2.1, D2.2, D1.5 | `evt_kubelet_down`, `evt_heartbeat_fail` |
 | RC-002 | **容器运行时（containerd）异常** | 高 | D2.3, D2.4, D2.6, D1.2 | `evt_rt_down`, `evt_cri_sock`, `evt_rt_hang` |
 | RC-003 | **节点磁盘空间耗尽（DiskPressure）** | 高 | D1.2, D2.5, D1.3 | `evt_disk_pressure`, `evt_image_gc_fail` |
 | RC-004 | **节点内存耗尽（MemoryPressure）** | 中 | D1.2, D2.5, D2.9 | `evt_mem_pressure`, `evt_and_mem_low` |
@@ -60,7 +61,7 @@ prerequisites:
 
 ## Related
 
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
+- [[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)

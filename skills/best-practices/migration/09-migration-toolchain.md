@@ -1,5 +1,5 @@
 ---
-title: 09 - 迁移工具链参考
+title: 09 - 迁移工具链参考 [migration]
 description: 'description: 2. [Velero 完整指南](#2-velero-完整指南)'
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 09 - 迁移工具链参考
@@ -45,12 +46,12 @@ tags:
 - k8s
 - migration
 - modernization
-- helm
+- [[Helm|helm]]
 - docker
-- harbor
+- [[Harbor|harbor]]
 - redis
 - mysql
-- statefulset
+- [[StatefulSet|statefulset]]
 - daemonset
 last_updated: 2026-05
 difficulty: advanced
@@ -521,7 +522,7 @@ kack get pods -A
 
 ## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -535,10 +536,10 @@ kack get pods -A
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/07-observability-security-migration.md|07-observability-security-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]]
-- [[domain-11-production-operations/topic-best-practices/migration/10-real-world-case-study.md|10-real-world-case-study]]
-- [[domain-11-production-operations/topic-best-practices/observability/logging.md|logging]]
+- 07-observability-security-migration
+- 08-validation-cutover-decommission
+- 10-real-world-case-study
+- logging
 
 ## Related
 

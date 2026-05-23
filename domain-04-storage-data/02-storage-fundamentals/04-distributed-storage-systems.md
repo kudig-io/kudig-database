@@ -41,6 +41,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 04 - 分布式存储系统
@@ -218,7 +219,7 @@ osd mount options xfs = noatime,inode64,logbsize=256k,logbufs=8
 EOF
 ```
 
-#<!-- chunk: Kubernetes CSI -->## Kubernetes CSI
+#<!-- chunk: [[Kubernetes|Kubernetes]] CSI -->## Kubernetes CSI
 
 ```yaml
 # StorageClass
@@ -603,7 +604,7 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 
 ## See Also
 
-- [[domain-04-storage-data/02-block-file-object-storage.md|02-block-file-object-storage]]
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03-raid-storage-redundancy]]
-- [[domain-04-storage-data/05-storage-management-operations.md|05-storage-management-operations]]
-- [[domain-04-storage-data/06-storage-performance-iops.md|06-storage-performance-iops]]
+- 02-block-file-object-storage
+- 03-raid-storage-redundancy
+- 05-storage-management-operations
+- 06-storage-performance-iops

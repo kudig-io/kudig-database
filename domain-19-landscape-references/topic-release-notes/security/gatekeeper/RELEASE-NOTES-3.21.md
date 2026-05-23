@@ -1,13 +1,14 @@
 ---
-title: gatekeeper v3.21 Release Notes
-description: gatekeeper v3.21 Release Notes — Kubernetes 生产运维知识库
+title: calico v3.21 Release Notes
+description: calico v3.21 Release Notes — Kubernetes 生产运维知识库
 category: release-notes
 tags:
 - k8s
 - release-notes
 - changelog
-- containerd
-- agent
+- calico
+- helm
+- operator
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -15,10 +16,10 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- gatekeeper v3.21 Release Notes 是什么
-- 如何 gatekeeper v3.21 Release Notes
+- calico v3.21 Release Notes 是什么
+- 如何 calico v3.21 Release Notes
 trigger_keywords:
-- gatekeeper
+- calico
 - v3.21
 - Release
 - Notes
@@ -27,18 +28,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+- helm-basics
+- cni-basics
+created: "2026-05-23"
 ---
 
-# gatekeeper v3.21 Release Notes
+# calico v3.21 Release Notes
 
-Source: [v3.21.1](https://github.com/open-policy-agent/gatekeeper/releases/tag/v3.21.1)
+Source: [v3.21.6](https://github.com/projectcalico/calico/releases/tag/v3.21.6)
 
-## Bug Fixes
-- enforce timeout on external data provider requests cherry-pick (#4351) (#4359) [#4359](https://github.com/open-policy-agent/gatekeeper/pull/4359) ([Jaydip Gabani](https://github.com/open-policy-agent/gatekeeper/commit/26bd8d70ba2eefe836854586c0f0e13f126ee5ce))
 
-## Chores
-- bump github.com/containerd/containerd from 1.7.28 to 1.7.29 cp #4223 (#4360) [#4360](https://github.com/open-policy-agent/gatekeeper/pull/4360) ([Jaydip Gabani](https://github.com/open-policy-agent/gatekeeper/commit/6c44cec9d454eca9964c5f478f9893c3c17aaf3c))
-- bump golang.org/x/crypto from 0.43.0 to 0.45.0 CP(#4254) (#4364) [#4364](https://github.com/open-policy-agent/gatekeeper/pull/4364) ([Jaydip Gabani](https://github.com/open-policy-agent/gatekeeper/commit/422bb1b8e9d6bd89a0261b47f5296ae2bbf0962b))
-- bump golang from `7534a62` to `04741b0` CP(#4341) (#4365) [#4365](https://github.com/open-policy-agent/gatekeeper/pull/4365) ([Jaydip Gabani](https://github.com/open-policy-agent/gatekeeper/commit/63c6c7f2f41e2395f57c059e8370453f91e1baf8))
-- bumping kubectl to resolve CVE CP(#4248) (#4366) [#4366](https://github.com/open-policy-agent/gatekeeper/pull/4366) ([Jaydip Gabani](https://github.com/open-policy-agent/gatekeeper/commit/2b835157c71f013ce0eef1148ee29d5611c28126))
-- Prepare v3.21.1 release (#4367) [#4367](https://github.com/open-policy-agent/gatekeeper/pull/4367) ([github-actions[bot]](https://github.com/open-policy-agent/gatekeeper/commit/ee60035fa8e7283d1f99c7de78f6bf7113cb6f81))
+Release notes can be found at https://projectcalico.docs.tigera.io/archive/v3.21/release-notes/
+
+Attached to this release are the following artifacts:
+
+- `release-v3.21.6.tgz`: container images, binaries, and [[Kubernetes|kubernetes]] manifests.
+- `calico-windows-v3.21.6.zip`: Calico for Windows.
+- `tigera-operator-v3.21.6.tgz`: Calico [[Helm|Helm]] v3 chart.

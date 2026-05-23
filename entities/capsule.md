@@ -1,5 +1,5 @@
 ---
-title: Capsule
+title: Capsule (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Capsule
@@ -42,9 +43,9 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 - **多租户隔离**: 单集群内实现强隔离的多租户
 - **命名空间聚合**: 将多个命名空间归属到单个租户
 - **资源配额**: 租户级别的资源限制和配额
-- **网络隔离**: 自动应用 NetworkPolicy 实现租户隔离
+- **网络隔离**: 自动应用 [[NetworkPolicy|NetworkPolicy]] 实现租户隔离
 - **RBAC 管理**: 租户所有者自助管理命名空间
-- **自定义策略**: 限制 NodePort、Ingress、存储类等
+- **自定义策略**: 限制 NodePort、[[Ingress|Ingress]]、存储类等
 
 ## K8s 集成
 
@@ -79,6 +80,6 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/capsule/capsule.md|capsule]]
+- capsule
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

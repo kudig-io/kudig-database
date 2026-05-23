@@ -19,6 +19,7 @@ trigger_keywords:
 - Windows
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 快速安装 mdbook（Windows）

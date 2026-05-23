@@ -1,5 +1,5 @@
 ---
-title: Jaeger
+title: Jaeger (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # Jaeger
@@ -74,8 +75,8 @@ description: '## 项目概述'
 - [[score]] — Score
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/jaeger/jaeger.md|jaeger]]
-- [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
+- jaeger
+- [[references/k8s-observability-ecosystem|[[可观测性体系：指标、日志、链路追踪与混沌工程|可观测性体系：指标、日志、链路追踪与混沌工程]]]] — Cross-reference
 - [[references/observability-terms|K8s 可观测性术语参考]] — Cross-reference
 - [[references/tooling-terms|K8s 工具链术语参考]] — Cross-reference
 - [[concepts/bp-observability|最佳实践：Observability]] — Cross-reference

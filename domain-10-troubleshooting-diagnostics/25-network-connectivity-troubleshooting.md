@@ -59,6 +59,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)
@@ -139,7 +140,7 @@ cross_refs:
 <!-- chunk: 2. 数据路径基础与场景化排查 (Data Path Fundamentals & Scenario-Based Diagnosis) -->
 ## 2. 数据路径基础与场景化排查 (Data Path Fundamentals & Scenario-Based Diagnosis)
 
-### 2.1 Kubernetes 数据路径全景
+### 2.1 [[Kubernetes|Kubernetes]] 数据路径全景
 
 理解数据包经过的完整路径，是精准定位网络故障的基础。
 
@@ -759,9 +760,9 @@ echo -e "\n=== 检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

@@ -32,6 +32,7 @@ prerequisites:
 - gpu-ml-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,9 +40,9 @@ title: 项目 P2: 生产级应用全栈编排
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes statefulset deployment hpa 完整部署示例
+  - [[Kubernetes|kubernetes]] [[StatefulSet|statefulset]] deployment hpa 完整部署示例
   - 生产环境 k8s 应用架构怎么设计
-  - k8s 网络策略 ingress service 联动配置
+  - k8s 网络策略 [[Ingress|ingress]] service 联动配置
   - pvc storageclass dynamic provisioning 配置
 trigger_keywords:
   - StatefulSet

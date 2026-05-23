@@ -21,6 +21,7 @@ trigger_keywords:
 - 分钟快速上手指南
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 5 分钟快速上手指南

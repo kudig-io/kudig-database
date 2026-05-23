@@ -51,11 +51,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 11 - API 网关安全体系：认证、鉴权与 WAF
 
-> **文档版本**: v1.0 | **适用版本**: Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: JWT, OIDC, mTLS, API Key, OPA, WAF, 限流, 零信任, HMAC, Bot 防护
+> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: JWT, OIDC, mTLS, API Key, OPA, WAF, 限流, 零信任, HMAC, Bot 防护
 
 <!-- chunk: 目录 -->## 目录
 
@@ -603,7 +604,7 @@ spec:
 | **APISIX** | 内置 WAF 插件 + 自定义规则 | 部分 OWASP | 拦截 | ~1ms/请求 |
 | **Kong** | Kong WAF（Enterprise）| OWASP CRS | 检测/拦截 | ~2ms/请求 |
 | **Traefik** | 无原生 WAF，依赖 ModSecurity 中间件 | 手动配置 | 拦截 | ~5ms/请求 |
-| **Envoy Gateway** | ext_proc 调用外部 WAF | 取决于外部服务 | 可配置 | 取决于网络 |
+| **[[Envoy|Envoy]] Gateway** | ext_proc 调用外部 WAF | 取决于外部服务 | 可配置 | 取决于网络 |
 
 ---
 
@@ -976,22 +977,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 03 - API 网关选型指南与对比矩阵
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
 
 ## See Also
 
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09-nginx-ingress-migration-guide]]
-- [[domain-03-networking-traffic/10-wasm-plugin-ecosystem.md|10-wasm-plugin-ecosystem]]
-- [[domain-03-networking-traffic/12-api-gateway-observability.md|12-api-gateway-observability]]
-- [[domain-03-networking-traffic/13-api-gateway-performance-benchmarks.md|13-api-gateway-performance-benchmarks]]
+- 09-nginx-ingress-migration-guide
+- 10-wasm-plugin-ecosystem
+- 12-api-gateway-observability
+- 13-api-gateway-performance-benchmarks

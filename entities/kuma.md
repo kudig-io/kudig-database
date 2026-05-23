@@ -1,5 +1,5 @@
 ---
-title: Kuma
+title: Kuma (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,11 +29,12 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # Kuma
 
-> **CNCF 状态**: Sandbox | **类别**: Service Mesh | **主要语言**: Go
+> **CNCF 状态**: Sandbox | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
 
 ## 概述
 
@@ -81,6 +82,6 @@ Kuma 是一个通用服务网格控制平面，设计简单易用且功能强大
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[jaeger]] — Jaeger
 
-- [[domain-19-landscape-references/sandbox/kuma/kuma.md|kuma]]
+- kuma
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

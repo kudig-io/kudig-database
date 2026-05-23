@@ -28,13 +28,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Deployment 控制器架构
 
 ## 概述
 
-Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 ReplicaSet 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。
+Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[ReplicaSet|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。
 
 ## 控制器分层架构
 
@@ -138,8 +139,8 @@ spec:
 
 ## 相关概念
 
-- [[skills/deployment-rolling-update.md|Deployment 滚动更新策略]]
-- [[skills/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
 - [[concepts/controller-pattern.md|控制器模式]]
 - [[concepts/watch-mechanism.md|Watch 机制]]
@@ -148,9 +149,9 @@ spec:
 
 - [[concepts/bp-security.md|bp-security]]
 
-- [[ai-agent-MOC]]
+- MOC]]
 
-- [[concepts/bp-README.md|bp-README]]
+- README.md|bp-README]]
 
 - [[concepts/ai-agent-openclaw-workspace.md|ai-agent-openclaw-workspace]]
 

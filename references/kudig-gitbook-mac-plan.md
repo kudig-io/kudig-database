@@ -23,6 +23,7 @@ trigger_keywords:
 - 导出计划
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Gitbook macOS 导出计划

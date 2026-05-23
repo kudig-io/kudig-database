@@ -1,4 +1,39 @@
 ---
+title: OpenClaw SOUL.md 机制深度解析 (domain-14-ai-ml-infra)
+description: 'title: OpenClaw SOUL.md 机制深度解析'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- helm
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenClaw SOUL.md 机制深度解析 是什么
+- 如何 OpenClaw SOUL.md 机制深度解析
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- OpenClaw
+- SOUL.md
+- 机制深度解析
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: OpenClaw SOUL.md 机制深度解析
 description: '# OpenClaw SOUL.md 机制深度解析'
 category: ai-agent
@@ -8,8 +43,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- helm
+- [[etcd|etcd]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -27,10 +62,15 @@ trigger_keywords:
 - 机制深度解析
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenClaw SOUL.md 机制深度解析
@@ -43,7 +83,7 @@ prerequisites:
 
 SOUL.md 是 OpenClaw File-First 架构中优先级最高的配置文件，定义 Agent 的**核心身份、价值观和不可逾越的行为边界**。它在 Harness Engineering 六层架构中主要映射到 **Constraints 层**，同时作为 System Context 注入 Context 层。
 
-本文深入剖析 SOUL.md 的设计原理、三层结构模型、约束精确性原则，并结合 [[entities/kubernetes|k8s]] 运维 Agent 实战案例提供工程化实现参考。
+本文深入剖析 SOUL.md 的设计原理、三层结构模型、约束精确性原则，并结合 K8S 运维 Agent 实战案例提供工程化实现参考。
 
 ---
 
@@ -391,3 +431,27 @@ SOUL.md 配置验证:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，深度解析 OpenClaw SOUL.md 的设计机制与工程实现。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 42-model-harness-compatibility-matrix
+- 43-openclaw-framework-integration
+- 45-openclaw-user-mechanism
+- 46-openclaw-agents-mechanism

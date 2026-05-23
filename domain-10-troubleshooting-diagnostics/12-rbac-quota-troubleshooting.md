@@ -67,6 +67,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md
   label: '运维技能: 09-rbac-quota-failure'
+created: "2026-05-23"
 ---
 
 # 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)
@@ -280,7 +281,7 @@ kubectl describe quota -n <namespace> | grep -E "^(cpu|memory|pods)"
 |:---|:---|:---|
 | **计算资源** | requests.cpu, limits.cpu | CPU配额 |
 | **计算资源** | requests.memory, limits.memory | 内存配额 |
-| **对象数量** | pods, services, secrets, configmaps | 对象数限制 |
+| **对象数量** | pods, services, [[Secrets|secrets]], [[ConfigMaps|configmaps]] | 对象数限制 |
 | **存储资源** | requests.storage, persistentvolumeclaims | 存储配额 |
 | **扩展资源** | requests.nvidia.com/gpu | GPU等扩展资源 |
 
@@ -761,7 +762,7 @@ kubectl get limitrange --all-namespaces -o jsonpath='{range .items[*]}{.metadata
       mem_req=$(echo "$line" | awk '{print $3}')
       
       # 检查是否符合最小要求
-      if [[ "$cpu_req" < "100m" ]] || [[ "$mem_req" < "128Mi" ]]; then
+      if "$cpu_req" < "100m" || "$mem_req" < "128Mi"; then
         echo "⚠️  不合规配置: $line"
       fi
     fi
@@ -834,9 +835,9 @@ fi
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

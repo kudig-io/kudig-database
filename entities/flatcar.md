@@ -1,5 +1,5 @@
 ---
-title: Flatcar Container Linux
+title: Flatcar Container Linux (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Flatcar Container Linux
@@ -74,13 +75,13 @@ Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 Cor
 
 ## Related
 
-- [[serverless-devs]] — Serverless Devs
+- [[serverless-devs]] — [[Serverless Devs|Serverless Devs]]
 - [[sermant]] — Sermant
 - [[loxilb]] — LoxiLB
 - [[kube-ovn]] — Kube-OVN
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/flatcar/flatcar.md|flatcar]]
+- flatcar
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]

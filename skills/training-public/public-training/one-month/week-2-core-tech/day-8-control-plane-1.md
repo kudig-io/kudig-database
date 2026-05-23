@@ -33,9 +33,10 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Day 8: 控制平面 - etcd + API Server
+# Day 8: 控制平面 - [[etcd|etcd]] + API Server
 
 ```yaml
 ---
@@ -112,7 +113,7 @@ etcd 和 API Server 是 Kubernetes 控制平面中最核心的两个组件。etc
 
 ### etcd 架构与 Raft 协议
 
-etcd 是一个高可用的分布式键值存储系统，使用 Raft 共识算法保证数据一致性。在 Kubernetes 中，etcd 是唯一的数据存储后端，所有集群状态（Pod、Service、ConfigMap、Secret 等）都存储在 etcd 中。
+etcd 是一个高可用的分布式键值存储系统，使用 Raft 共识算法保证数据一致性。在 Kubernetes 中，etcd 是唯一的数据存储后端，所有集群状态（Pod、[[Service|Service]]、ConfigMap、Secret 等）都存储在 etcd 中。
 
 #### Raft 协议核心概念
 

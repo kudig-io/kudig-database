@@ -31,6 +31,7 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # Disruptions
@@ -59,7 +60,7 @@ prerequisites:
 - **Unhealthy Pod Eviction Policy**：建议设置为 `AlwaysAllow`，以便在节点维护期间允许驱逐不健康的 Pod。
 
 ## 使用场景
-- 运行基于仲裁的应用（如 etcd、ZooKeeper），需要保证最低副本数。
+- 运行基于仲裁的应用（如 [[etcd|etcd]]、ZooKeeper），需要保证最低副本数。
 - 集群管理员进行节点维护、升级或缩容时，确保业务不中断。
 - 多租户环境中，应用团队通过 PDB 声明可用性需求。
 
@@ -192,11 +193,11 @@ kubectl get pdb -n <namespace> -o wide
 
 ## 交叉引用
 
-- [Deployments 中断管理](./deployments.md)
-- [StatefulSet 有序管理](./statefulsets.md)
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
+- [[entities/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 - [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
 
 ## 参考链接
-- https://[[entities/kubernetes|kubernetes]].io/docs/concepts/workloads/pods/disruptions/
+- https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/

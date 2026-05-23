@@ -1,4 +1,42 @@
 ---
+title: 新能源车联网架构设计 — 阿里云视角
+description: 'title: 新能源车联网架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- flux
+- falco
+- ceph
+- redis
+- mysql
+- kafka
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 新能源车联网架构设计 — 阿里云视角 是什么
+- 如何 新能源车联网架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 新能源车联网架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
 title: 新能源车联网架构设计
 description: '# 新能源车联网架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,9 +44,9 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
-- flux
-- falco
+- [[Prometheus|prometheus]]
+- [[Flux|flux]]
+- [[Falco|falco]]
 - ceph
 - redis
 - mysql
@@ -38,12 +76,6 @@ trigger_keywords:
 - MQTT
 - KubeEdge
 - 阿里云
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- kafka-basics
-- redis-basics
-- mysql-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
@@ -53,16 +85,25 @@ related_topics:
 - 60-v2x-autonomous-driving
 - 59-industrial-internet-platform
 - 07-iot-platform-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 新能源车联网架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#车联网` `#新能源` `#边缘计算` `#V2X` `#阿里云`
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [行业背景](#1-行业背景)
 2. [业务架构](#2-业务架构)
@@ -75,9 +116,9 @@ related_topics:
 
 ---
 
-## 1. 行业背景
+<!-- chunk: 1. 行业背景 -->## 1. 行业背景
 
-### 1.1 业务特点
+#<!-- chunk: 1.1 业务特点 -->## 1.1 业务特点
 
 新能源汽车车联网是"车-路-云-网-图"一体化的复杂系统：
 
@@ -89,7 +130,7 @@ related_topics:
 | 功能安全 | ASIL-D 等级要求 | 冗余架构 + 故障隔离 |
 | 地理分布 | 车辆全国流动 | 云边协同 + 就近接入 |
 
-### 1.2 核心场景
+#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
 
 - **T-Box 接入**: 车辆实时状态上报与远程控制
 - **电池管理 BMS**: 实时监控、故障预警、寿命预测
@@ -99,9 +140,9 @@ related_topics:
 
 ---
 
-## 2. 业务架构
+<!-- chunk: 2. 业务架构 -->## 2. 业务架构
 
-### 2.1 车路云一体化架构
+#<!-- chunk: 2.1 车路云一体化架构 -->## 2.1 车路云一体化架构
 
 ```mermaid
 graph TB
@@ -149,7 +190,7 @@ graph TB
     DT2 --> DT4
 ```
 
-### 2.2 OTA 升级状态机
+#<!-- chunk: 2.2 OTA 升级状态机 -->## 2.2 OTA 升级状态机
 
 ```mermaid
 stateDiagram-v2
@@ -174,7 +215,7 @@ stateDiagram-v2
     版本确认 --> [*]
 ```
 
-### 2.3 V2X 车路协同时序
+#<!-- chunk: 2.3 V2X 车路协同时序 -->## 2.3 V2X 车路协同时序
 
 ```mermaid
 sequenceDiagram
@@ -198,9 +239,9 @@ sequenceDiagram
 
 ---
 
-## 3. 技术架构
+<!-- chunk: 3. 技术架构 -->## 3. 技术架构
 
-### 3.1 边缘-云协同 K8s 架构
+#<!-- chunk: 3.1 边缘-云协同 K8s 架构 -->## 3.1 边缘-云协同 K8s 架构
 
 ```mermaid
 graph TB
@@ -240,7 +281,7 @@ graph TB
     ACK_C --> POLAR & LIND & MQ & PAI & MAX
 ```
 
-### 3.2 K8s YAML 配置
+#<!-- chunk: 3.2 K8s YAML 配置 -->## 3.2 K8s YAML 配置
 
 ```yaml
 # 车辆接入服务 Deployment
@@ -384,9 +425,9 @@ spec:
 
 ---
 
-## 4. 核心数据流
+<!-- chunk: 4. 核心数据流 -->## 4. 核心数据流
 
-### 4.1 车辆实时数据上报流
+#<!-- chunk: 4.1 车辆实时数据上报流 -->## 4.1 车辆实时数据上报流
 
 ```mermaid
 flowchart LR
@@ -401,7 +442,7 @@ flowchart LR
     G --> J[离线数据挖掘]
 ```
 
-### 4.2 远程控制指令下发
+#<!-- chunk: 4.2 远程控制指令下发 -->## 4.2 远程控制指令下发
 
 ```mermaid
 sequenceDiagram
@@ -429,9 +470,9 @@ sequenceDiagram
 
 ---
 
-## 5. 安全与合规
+<!-- chunk: 5. 安全与合规 -->## 5. 安全与合规
 
-### 5.1 车联网安全体系
+#<!-- chunk: 5.1 车联网安全体系 -->## 5.1 车联网安全体系
 
 ```mermaid
 graph TB
@@ -461,7 +502,7 @@ graph TB
     SEC6 --> SEC10
 ```
 
-### 5.2 网络安全策略
+#<!-- chunk: 5.2 网络安全策略 -->## 5.2 网络安全策略
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -506,9 +547,9 @@ spec:
 
 ---
 
-## 6. 可观测性
+<!-- chunk: 6. 可观测性 -->## 6. 可观测性
 
-### 6.1 监控架构
+#<!-- chunk: 6.1 监控架构 -->## 6.1 监控架构
 
 - **车辆在线率**: ARMS 自定义指标，实时展示各区域车辆在线比例
 - **MQTT 连接质量**: EMQX 内置指标 + Prometheus Exporter
@@ -517,7 +558,7 @@ spec:
 
 ---
 
-## 7. 阿里云组件映射
+<!-- chunk: 7. 阿里云组件映射 -->## 7. 阿里云组件映射
 
 | 功能域 | 自建/开源方案 | **阿里云云原生方案** | 选型理由 |
 |:---|:---|:---|:---|
@@ -536,7 +577,7 @@ spec:
 
 ---
 
-## 8. 生产检查清单
+<!-- chunk: 8. 生产检查清单 -->## 8. 生产检查清单
 
 - [ ] T-Box 与云端双向 TLS 证书配置正确
 - [ ] 边缘节点 5G 网络 QoS 策略配置
@@ -550,3 +591,27 @@ spec:
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 20-microservice-governance-architecture
+- 21-cross-border-ecommerce
+- 23-xinchuang-it-innovation
+- 24-insurtech

@@ -25,6 +25,7 @@ trigger_keywords:
 - 支持
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # containerd Windows 支持
@@ -67,4 +68,4 @@ title: containerd Windows 容器支持
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/containerd/05-containerd-windows-support.md|05-containerd-windows-support]]
+- 05-containerd-windows-support

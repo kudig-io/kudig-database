@@ -1,5 +1,5 @@
 ---
-title: Knative
+title: Knative (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Knative
@@ -71,12 +72,12 @@ description: '## 项目概述'
 ## Related
 
 - [[chaosblade]] — ChaosBlade
-- [[network-service-mesh]] — Network Service Mesh (NSM)
+- [[network-service-mesh]] — [[entities/network-service-mesh.md|Network Service Mesh (NSM)]]]Service Mesh）|Service Mesh]] (NSM)
 - [[kserve]] — KServe
 - [[meshery]] — Meshery
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/knative/knative.md|knative]]
+- knative
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,4 +1,43 @@
 ---
+title: 时间敏感网络 TSN 架构设计 — 阿里云视角
+description: 'title: 时间敏感网络TSN架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- networking
+- prometheus
+- grafana
+- opa
+- mysql
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 时间敏感网络 TSN 架构设计 — 阿里云视角 是什么
+- 如何 时间敏感网络 TSN 架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 时间敏感网络
+- TSN
+- 架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- mysql-basics
+- policy-basics
+created: "2026-05-23"
+---
+
 title: 时间敏感网络TSN架构设计
 description: '# 时间敏感网络 TSN 架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,7 +45,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - mysql
@@ -38,12 +77,6 @@ trigger_keywords:
 - 5G-TSN
 - IEEE 1588
 - IEEE 802.1Qbv
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- mysql-basics
-- policy-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-12-networking
@@ -54,6 +87,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/51-smart-manufacturing-mes
 - domain-20-application-patterns/topic-application-architecture/61-smart-grid
 - domain-02-workloads-applications/topic-functions/05-iot-edge-computing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 时间敏感网络 TSN 架构设计 — 阿里云视角
@@ -63,7 +105,7 @@ related_topics:
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [行业概述](#1-行业概述)
 2. [业务场景](#2-业务场景)
@@ -79,9 +121,9 @@ related_topics:
 
 ---
 
-## 1. 行业概述
+<!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-### 1.1 市场规模与趋势
+#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
 
 TSN（Time-Sensitive Networking）是在标准以太网上实现确定性传输的技术，是工业 4.0 和工业互联网的关键网络基础。全球 TSN 市场规模预计从 2024 年的 8 亿美元增长到 2030 年的 50 亿美元。主要驱动力包括工业自动化升级、车载以太网普及、5G + TSN 融合。IEEE 802.1 TSN 工作组已发布 20+ 标准，涵盖时间同步、流量调度、冗余和安全性。
 
@@ -93,7 +135,7 @@ TSN（Time-Sensitive Networking）是在标准以太网上实现确定性传输�
 | 最大确定性延迟 | < 1ms | < 100μs | < 10μs |
 | TSN 交换机端口数 | 8-24 口 | 24-48 口 | 48-96 口 |
 
-### 1.2 行业痛点
+#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -104,39 +146,39 @@ TSN（Time-Sensitive Networking）是在标准以太网上实现确定性传输�
 | 与传统兼容 | 需与现有以太网设备互通 | 桥接互通 + 渐进升级 |
 | 网络配置复杂 | TSN 网络配置管理难度大 | NETCONF/YANG 自动化配置 |
 
-### 1.3 数字化转型架构影响
+#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
 
 TSN 架构需要覆盖终端设备层（PLC/机器人/传感器/驱动器）、TSN 交换网络层（边缘/汇聚/核心交换机）、控制层（时钟同步/流量调度/网络配置/监控分析）和应用层（运动控制/数据采集/安全联锁/视觉同步）。核心挑战是时间同步精度和流量调度的确定性保障。
 
 ---
 
-## 2. 业务场景
+<!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-### 2.1 工业运动控制
+#<!-- chunk: 2.1 工业运动控制 -->## 2.1 工业运动控制
 
 TSN 网络连接 PLC、伺服驱动器和机器人控制器，实现微秒级确定性通信。多轴协调运动需要所有轴同步到微秒级，TSN 通过 IEEE 802.1Qbv 门控调度确保控制帧在确定时间窗口传输。典型场景包括 CNC 数控、机器人协同、高速包装线。
 
-### 2.2 车载以太网
+#<!-- chunk: 2.2 车载以太网 -->## 2.2 车载以太网
 
 汽车电子电气架构从域控制器向中央计算演进，需要 TSN 提供确定性车载通信。ADAS 传感器数据、底盘控制指令和车载信息娱乐共享同一以太网 backbone，TSN 确保安全关键数据的确定性传输。
 
-### 2.3 专业音视频传输
+#<!-- chunk: 2.3 专业音视频传输 -->## 2.3 专业音视频传输
 
 电视台、演播室和现场演出的专业音视频传输需要精确同步和有界延迟。TSN 支持 IEEE 802.1BA 音视频桥接（AVB），确保多路音视频信号精确同步到微秒级。
 
-### 2.4 智能电网
+#<!-- chunk: 2.4 智能电网 -->## 2.4 智能电网
 
 电力保护装置通信需要在故障发生后 5ms 内完成保护和隔离。TSN 确保保护指令在确定时间内传输到位，避免大面积停电。
 
-### 2.5 5G + TSN 融合
+#<!-- chunk: 2.5 5G + TSN 融合 -->## 2.5 5G + TSN 融合
 
 5G 网络通过 TSN 转换器接入工业 TSN 网络，实现无线 + 有线端到端确定性通信。3GPP Release 16+ 定义了 5G-TSN 互操作架构。
 
 ---
 
-## 3. 架构设计
+<!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-### 3.1 TSN 网络全景架构
+#<!-- chunk: 3.1 TSN 网络全景架构 -->## 3.1 TSN 网络全景架构
 
 ```mermaid
 graph TB
@@ -181,7 +223,7 @@ graph TB
     A1 & A2 & A3 & A4 --> E1 & E2 & E3 & E4
 ```
 
-### 3.2 TSN 门控调度时序
+#<!-- chunk: 3.2 TSN 门控调度时序 -->## 3.2 TSN 门控调度时序
 
 ```mermaid
 sequenceDiagram
@@ -205,7 +247,7 @@ sequenceDiagram
 
 ---
 
-## 4. 核心技术栈
+<!-- chunk: 4. 核心技术栈 -->## 4. 核心技术栈
 
 | Component | Purpose | Technology | License |
 |:---|:---|:---|:---|
@@ -225,9 +267,9 @@ sequenceDiagram
 
 ---
 
-## 5. Kubernetes 部署方案
+<!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-### 5.1 TSN 网络管理 Deployment
+#<!-- chunk: 5.1 TSN 网络管理 Deployment -->## 5.1 TSN 网络管理 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -322,7 +364,7 @@ spec:
               add: ["NET_ADMIN", "NET_RAW", "SYS_TIME"]
 ```
 
-### 5.2 流量分析 AI Deployment
+#<!-- chunk: 5.2 流量分析 AI Deployment -->## 5.2 流量分析 AI Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -361,7 +403,7 @@ spec:
               cpu: "2000m"
 ```
 
-### 5.3 ConfigMap, Service 与 Secret
+#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -423,9 +465,9 @@ stringData:
 
 ---
 
-## 6. 数据架构
+<!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-### 6.1 TSN 流量调度数据流
+#<!-- chunk: 6.1 TSN 流量调度数据流 -->## 6.1 TSN 流量调度数据流
 
 ```mermaid
 flowchart TB
@@ -460,7 +502,7 @@ flowchart TB
     P2 & P3 --> A1 & A2 & A3
 ```
 
-### 6.2 数据流说明
+#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
 
 - **遥测数据流**: TSN 交换机以 10Hz 上报端口统计、队列深度、时延测量数据，经 Flink 实时分析
 - **时钟数据流**: PTP 时钟偏差数据持续监控，偏差超过阈值自动告警
@@ -469,9 +511,9 @@ flowchart TB
 
 ---
 
-## 7. AI/ML 组件
+<!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-### 7.1 核心模型
+#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -483,9 +525,9 @@ flowchart TB
 
 ---
 
-## 8. 安全与合规
+<!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-### 8.1 行业法规与标准
+#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -496,7 +538,7 @@ flowchart TB
 | IEC 62443 | 工控系统信息安全 | 纵深防御架构 |
 | 功能安全 SIL | 安全完整性等级 | 网络冗余 + 故障检测 |
 
-### 8.2 安全架构要点
+#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
 
 - **工控网络隔离**: TSN 控制网络与办公网络物理隔离
 - **帧完整性**: IEEE 802.1CB 帧复制消除，关键帧不丢失
@@ -506,7 +548,7 @@ flowchart TB
 
 ---
 
-## 9. 最佳实践
+<!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
 
 1. **PTP GM 冠军主时钟冗余**: 部署至少 2 台 PTP Grand Master，实现时钟源冗余
 2. **GCL 离线计算 + 在线微调**: 先离线计算门控列表，运行中根据实际流量微调
@@ -521,7 +563,7 @@ flowchart TB
 
 ---
 
-## 10. 反模式
+<!-- chunk: 10. 反模式 -->## 10. 反模式
 
 1. **忽视时钟同步精度**: 不持续监控 PTP 时钟偏差，偏差累积导致调度失效。应持续监控并自动告警
 2. **手工配置门控列表**: 依赖网络工程师手工编写 GCL，配置复杂且易错。应使用自动化调度工具
@@ -531,7 +573,7 @@ flowchart TB
 
 ---
 
-## 11. 参考资源
+<!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
 - [IEEE 802.1 TSN Task Group](https://1.ieee802.org/tsn/)
 - [IEEE 1588-2019 PTP Standard](https://standards.ieee.org/ieee/1588/6825/)
@@ -545,6 +587,31 @@ flowchart TB
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- 69-6g-core-network
+- topic-application-architecture MOC — Cross-reference
+
+## See Also
+
+- 78-deep-sea-exploration
+- 79-polar-research
+- 81-smart-customs
+- 82-legaltech

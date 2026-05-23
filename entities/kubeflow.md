@@ -1,5 +1,5 @@
 ---
-title: Kubeflow
+title: Kubeflow [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - Kubeflow
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubeflow
@@ -60,10 +61,10 @@ description: '## 项目概述'
 - [[lima]] — Lima
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-14-ai-ml-infra/99-kubeflow-ai-platform-guide.md|99-kubeflow-ai-platform-guide]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
-- [[domain-19-landscape-references/incubating/kubeflow/kubeflow.md|kubeflow]]
-- [[entities/kaito.md|KAITO]]
+- 99-kubeflow-ai-platform-guide
+- troubleshooting.md|02-kubeflow-troubleshooting]]
+- kubeflow
+- [[entities/kaito.md|[[KAITO (Kubernetes AI Toolchain Operator)|KAITO]]]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,5 +1,5 @@
 ---
-title: Flannel 网络故障排查指南
+title: Flannel 网络故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Flannel 网络故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: Flannel 网络故障排查指南
@@ -51,9 +52,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - cilium
 - flannel
 - calico
@@ -709,8 +710,8 @@ fi
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[skills/ts-networking.md|ts-networking]]

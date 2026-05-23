@@ -47,12 +47,13 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
+created: "2026-05-23"
 ---
 
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide
 
-> **领域**: 平台工程 | Platform Engineering  
+> **领域**: 平台工程 | [[synthesis/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 入门到中级 | Beginner to Intermediate  
 > **阅读时间**: 约 45 分钟 | ~45 min read  
 > **最后更新**: 2026-04-03
@@ -69,10 +70,10 @@ cross_refs:
 6. [Edge Functions 与 Edge Middleware](#6-edge-functions-与-edge-middleware)
 7. [自定义域名与 DNS 配置](#7-自定义域名与-dns-配置)
 8. [环境变量与密钥管理](#8-环境变量与密钥管理)
-9. [Preview Deployments 协作工作流](#9-preview-deployments-协作工作流)
+9. [Preview [[Deployments|Deployments]] 协作工作流](#9-preview-deployments-协作工作流)
 10. [性能优化与 Web Analytics](#10-性能优化与-web-analytics)
 11. [前端框架选型：Next.js 与主流框架对比](#11-前端框架选型nextjs-与主流框架对比)
-12. [与 Kubernetes/云原生生态的关系](#12-与-kubernetes云原生生态的关系)
+12. [与 [[Kubernetes|Kubernetes]]/云原生生态的关系](#12-与-kubernetes云原生生态的关系)
 13. [企业级功能与安全](#13-企业级功能与安全)
 14. [常见问题与故障排查](#14-常见问题与故障排查)
 15. [最佳实践总结](#15-最佳实践总结)
@@ -1079,22 +1080,22 @@ vercel inspect <deployment-url>
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering KUDIG Database — Global MOC
 - [[domain-07-platform-engineering/README.md|Domain 36: 平台工程 (Platform Engineering)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-36 平台工程 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|平台工程概述与成熟度模型]]
-- [[domain-07-platform-engineering/02-idp-design-principles.md|内部开发者平台设计原则]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|Backstage 部署与配置]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|Backstage 软件目录与 TechDocs]]
-- [[domain-07-platform-engineering/05-backstage-scaffolder-templates.md|Backstage 脚手架与模板系统]]
-- [[domain-07-platform-engineering/06-kratix-platform-as-code.md|Kratix 平台即代码 (Kratix Platform as Code)]]
-- [[domain-07-platform-engineering/07-crossplane-platform-composition.md|Crossplane 平台组合 (Crossplane Platform Composition)]]
-- [[domain-07-platform-engineering/08-golden-paths-design.md|Golden Paths 黄金路径设计 (Golden Paths Design Patterns)]]
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|开发者体验度量 (Developer Experience Metrics)]]
+- Domain-36 平台工程 — 开源项目索引
+- 平台工程概述与成熟度模型
+- 内部开发者平台设计原则
+- Backstage 部署与配置
+- Backstage 软件目录与 TechDocs
+- Backstage 脚手架与模板系统
+- Kratix 平台即代码 (Kratix Platform as Code)
+- Crossplane 平台组合 (Crossplane Platform Composition)
+- Golden Paths 黄金路径设计 (Golden Paths Design Patterns)
+- 开发者体验度量 (Developer Experience Metrics)
 
 ## See Also
 
-- [[domain-07-platform-engineering/09-developer-experience-metrics.md|09-developer-experience-metrics]]
-- [[domain-07-platform-engineering/10-platform-team-topology.md|10-platform-team-topology]]
-- [[domain-07-platform-engineering/99-backstage-idp-guide.md|99-backstage-idp-guide]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|01-platform-engineering-overview]]
+- 09-developer-experience-metrics
+- 10-platform-team-topology
+- 99-backstage-idp-guide
+- 01-platform-engineering-overview

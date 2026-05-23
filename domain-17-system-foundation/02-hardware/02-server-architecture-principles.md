@@ -37,6 +37,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 服务器架构原理
@@ -714,22 +715,22 @@ RAS (Reliability, Availability, Serviceability):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-31-hardware MOC]]
+- domain-31-hardware KUDIG Database — Global MOC
 - [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-31 硬件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|云平台硬件基础架构]]
-- [[domain-17-system-foundation/03-cpu-technology-deep-dive.md|CPU技术深度解析]]
-- [[domain-17-system-foundation/04-motherboard-chipset-technology.md|主板与芯片组技术]]
-- [[domain-17-system-foundation/05-memory-technology-deep-dive.md|内存技术深度解析]]
-- [[domain-17-system-foundation/06-storage-hdd-technology.md|机械硬盘技术]]
-- [[domain-17-system-foundation/07-storage-ssd-technology.md|SSD固态硬盘技术]]
-- [[domain-17-system-foundation/08-network-hardware-technology.md|网络硬件技术]]
-- [[domain-17-system-foundation/09-hardware-vendors-ecosystem.md|硬件厂商生态]]
-- [[domain-17-system-foundation/10-hardware-troubleshooting-methodology.md|硬件故障排查方法论]]
+- index.md|Domain-31 硬件 — 开源项目索引]]
+- 云平台硬件基础架构
+- CPU技术深度解析
+- 主板与芯片组技术
+- 内存技术深度解析
+- 机械硬盘技术
+- SSD固态硬盘技术
+- 网络硬件技术
+- 硬件厂商生态
+- 硬件故障排查方法论
 
 ## See Also
 
-- [[domain-17-system-foundation/18-hardware-failure-case-studies.md|18-hardware-failure-case-studies]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|01-cloud-hardware-architecture]]
-- [[domain-17-system-foundation/03-cpu-technology-deep-dive.md|03-cpu-technology-deep-dive]]
-- [[domain-17-system-foundation/04-motherboard-chipset-technology.md|04-motherboard-chipset-technology]]
+- 18-hardware-failure-case-studies
+- 01-cloud-hardware-architecture
+- 03-cpu-technology-deep-dive
+- 04-motherboard-chipset-technology

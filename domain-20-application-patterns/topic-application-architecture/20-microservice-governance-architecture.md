@@ -1,6 +1,50 @@
 ---
+title: 微服务治理与 Service Mesh Kubernetes 生产架构设计
+description: 'title: 微服务治理与Service Mesh架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- jaeger
+- istio
+- envoy
+- cilium
+- redis
+- mysql
+- statefulset
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 微服务治理与 Service Mesh Kubernetes 生产架构设计 是什么
+- 如何 微服务治理与 Service Mesh Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 微服务治理与
+- Service
+- Mesh
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- service-mesh-basics
+- ebpf-basics
+- cilium-basics
+- redis-basics
+- mysql-basics
+- tracing-basics
+created: "2026-05-23"
+---
+
 title: 微服务治理与Service Mesh架构设计
-description: '# 微服务治理与 Service Mesh Kubernetes 生产架构设计'
+description: '# 微服务治理与 [[Service|Service]]Service Mesh）|Service Mesh]] [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -39,15 +83,6 @@ trigger_keywords:
 - Nacos
 - Envoy
 - mTLS
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- service-mesh-basics
-- ebpf-basics
-- cilium-basics
-- redis-basics
-- mysql-basics
-- tracing-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-01-cluster-fundamentals
@@ -58,6 +93,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/11-smart-retail-architecture
 - domain-02-workloads-applications/topic-functions/03-observability-monitoring
 - domain-02-workloads-applications/topic-functions/06-service-mesh
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 微服务治理与 Service Mesh Kubernetes 生产架构设计
@@ -70,7 +114,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、服务网格 (Service Mesh) 架构](#二服务网格-service-mesh-架构)
@@ -83,7 +127,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -99,7 +143,7 @@ flowchart TB
     end
 
     subgraph Mesh["服务网格 (ASM)"]
-        [[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|ENVOY]]_PROXY["Envoy Sidecar<br">流量代理"]
+        ENVOY_PROXY["Envoy Sidecar<br">流量代理"]
         PILOT["Istiod<br">控制面"]
         CILIUM_MESH["Cilium Mesh<br">eBPF 数据面"]
     end
@@ -127,7 +171,7 @@ flowchart TB
     style Services fill:#e8f5e9
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 开源替代 |
 |:---|:---|:---|
@@ -141,9 +185,9 @@ flowchart TB
 
 ---
 
-## 二、服务网格 (Service Mesh) 架构
+<!-- chunk: 二、服务网格 (Service Mesh) 架构 -->## 二、服务网格 (Service Mesh) 架构
 
-### Sidecar vs Ambient vs eBPF
+#<!-- chunk: Sidecar vs Ambient vs eBPF -->## Sidecar vs Ambient vs eBPF
 
 ```mermaid
 flowchart TB
@@ -171,7 +215,7 @@ flowchart TB
     style EBPF fill:#c8e6c9
 ```
 
-### ASM 流量管理配置
+#<!-- chunk: ASM 流量管理配置 -->## ASM 流量管理配置
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -254,7 +298,7 @@ spec:
 
 ---
 
-## 三、全链路灰度发布架构
+<!-- chunk: 三、全链路灰度发布架构 -->## 三、全链路灰度发布架构
 
 ```mermaid
 flowchart TB
@@ -286,7 +330,7 @@ flowchart TB
 
 ---
 
-## 四、流量治理与熔断降级架构
+<!-- chunk: 四、流量治理与熔断降级架构 -->## 四、流量治理与熔断降级架构
 
 ```mermaid
 flowchart TB
@@ -310,7 +354,7 @@ flowchart TB
     style Scenarios fill:#e8f5e9
 ```
 
-### Sentinel 规则配置
+#<!-- chunk: Sentinel 规则配置 -->## Sentinel 规则配置
 
 ```yaml
 apiVersion: v1
@@ -377,7 +421,7 @@ spec:
 
 ---
 
-## 五、零信任安全架构
+<!-- chunk: 五、零信任安全架构 -->## 五、零信任安全架构
 
 ```mermaid
 flowchart TB
@@ -407,7 +451,7 @@ flowchart TB
 
 ---
 
-## 六、多活架构与容灾
+<!-- chunk: 六、多活架构与容灾 -->## 六、多活架构与容灾
 
 ```mermaid
 flowchart TB
@@ -439,7 +483,7 @@ flowchart TB
 
 ---
 
-## 七、服务注册发现与配置中心
+<!-- chunk: 七、服务注册发现与配置中心 -->## 七、服务注册发现与配置中心
 
 ```mermaid
 flowchart TB
@@ -468,7 +512,7 @@ flowchart TB
     style Config fill:#e8f5e9
 ```
 
-### Nacos K8s 部署
+#<!-- chunk: Nacos K8s 部署 -->## Nacos K8s 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -561,9 +605,9 @@ spec:
 
 ---
 
-## 八、ACK + ASM 阿里云部署架构
+<!-- chunk: 八、ACK + ASM 阿里云部署架构 -->## 八、ACK + ASM 阿里云部署架构
 
-### ASM 多集群网格
+#<!-- chunk: ASM 多集群网格 -->## ASM 多集群网格
 
 ```mermaid
 flowchart TB
@@ -594,7 +638,7 @@ flowchart TB
     style ClusterSH fill:#fff8e1
 ```
 
-### ASM 统一流量管理
+#<!-- chunk: ASM 统一流量管理 -->## ASM 统一流量管理
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -639,10 +683,34 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云 ASM 服务网格](https://www.aliyun.com/product/servicemesh)
 - [阿里云 MSE 微服务引擎](https://www.aliyun.com/product/aliware/mse)
 - [Istio 文档](https://istio.io/latest/docs/)
 - [Sentinel 文档](https://sentinelguard.io/)
 - [Nacos 文档](https://nacos.io/)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 18-data-midplatform-architecture
+- 19-cloudnative-devops-architecture
+- 21-cross-border-ecommerce
+- 22-nev-connected-vehicle

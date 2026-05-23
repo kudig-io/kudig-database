@@ -1,7 +1,39 @@
 ---
+title: Deployment Status 计算逻辑 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+- deployment
+- controller-manager
+- argocd
+- hpa
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Deployment Status 计算逻辑 是什么
+- 如何 Deployment Status 计算逻辑
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Deployment
+- Status
+- 计算逻辑
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- gitops-basics
+created: "2026-05-23"
+---
+
 title: Deployment Status 计算逻辑
-description: 深入分析 Kubernetes Deployment Status 字段的计算逻辑，涵盖 syncRolloutStatus、Condition 计算、Available/Progressing 条件、ObservedGeneration
-  机制以及 Progress Deadline 超时检测。
 category: deployment
 tags:
 - deployment-status
@@ -10,17 +42,10 @@ tags:
 - condition
 - observedGeneration
 - progressDeadline
-- controller-manager
-- argocd
-- hpa
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes Deployment Status 字段的计算逻辑，涵盖 syncRolloutStatus、Condition
+  计算、Available/Progressing 条件、ObservedGeneration 机制以及 Progress Deadline 超时检测。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-developer
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes deployment status calculation source
 - AvailableReplicas vs ReadyReplicas kubernetes
@@ -38,10 +63,12 @@ trigger_keywords:
 - ObservedGeneration
 - MinimumReplicasAvailable
 - NewReplicaSetAvailable
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- gitops-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-02-workloads-applications
 - domain-01-cluster-fundamentals
@@ -49,6 +76,17 @@ related_topics:
 - deployment-controller
 - rolling-update
 - revision-history
+domain_link: '[Workloads](../domain-02-workloads-applications/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Deployment Status 计算逻辑
@@ -123,7 +161,7 @@ func deploymentutil.GetAvailableReplicaCountForReplicaSets(
 | `deployment` | `*apps.Deployment` | 当前 Deployment 对象，包含 Spec 和旧 Status |
 | `ctx` | `context.Context` | 上下文，用于取消和超时控制 |
 | `newStatus` | `*apps.DeploymentStatus` | 计算出的新 Status，用于与旧 Status 对比 |
-| `minReadySeconds` | `int32` | [[concepts/pod-lifecycle|pod]] Ready 后必须持续的时间才能视为 Available |
+| `minReadySeconds` | `int32` | Pod Ready 后必须持续的时间才能视为 Available |
 
 ---
 
@@ -688,3 +726,11 @@ kubectl get deployment nginx -o json | jq '.status.conditions[] | {type, lastTra
 | `GetAvailableReplicaCountForReplicaSets` | `pkg/controller/deployment/util/deployment_util.go` | Available 副本计数 |
 | `SetDeploymentCondition` | `pkg/controller/deployment/util/deployment_util.go` | 设置 Condition |
 | `checkProgressDeadline` | `pkg/controller/deployment/progress.go` | 超时检测 |
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/argo.md|argo]]
+- [[entities/argocd.md|argocd]]

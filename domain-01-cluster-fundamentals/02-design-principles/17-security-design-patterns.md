@@ -52,6 +52,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 17 - 安全设计模式
@@ -62,13 +63,13 @@ cross_refs:
 > **架构师洞察**：
 > 在云原生时代，防火墙定义的“边界”已彻底消失。安全工作的重心正从运行时拦截向全生命周期管理偏移。
 > 1. **软件供应链安全 (SLSA & SBOM)**：仅扫描镜像漏洞已远远不够。现代安全架构要求生成 SBOM（软件物料清单），并遵循 SLSA 框架对构建过程进行签名。确保你运行的每一行代码都有可追溯的来源证明（Provenance）。
-> 2. **不可变基础设施的执行**：生产环境应严格禁止 `kubectl exec`。所有的变更应通过镜像更新完成。结合运行时安全工具（如 Falco），任何在容器内新开进程或修改可执行文件的行为都应被视为“入侵”并立即隔离。
-> 3. **身份是新的边界**：不要依赖 IP 地址进行授权。通过 SPIFFE/SPIRE 为每个工作负载签发短期、可轮换的加密身份令牌。这是实现“默认拒绝 (Deny by Default)”和微分段（Micro-segmentation）的基石。
+> 2. **不可变基础设施的执行**：生产环境应严格禁止 `kubectl exec`。所有的变更应通过镜像更新完成。结合运行时安全工具（如 [[Falco|Falco]]），任何在容器内新开进程或修改可执行文件的行为都应被视为“入侵”并立即隔离。
+> 3. **身份是新的边界**：不要依赖 IP 地址进行授权。通过 [[SPIFFE|SPIFFE]]/SPIRE 为每个工作负载签发短期、可轮换的加密身份令牌。这是实现“默认拒绝 (Deny by Default)”和微分段（Micro-segmentation）的基石。
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨 Kubernetes 系统的安全设计模式，涵盖零信任架构、最小权限原则、纵深防御等核心安全理念，为企业构建生产级安全防护体系提供理论指导和实践方案。
+本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的安全设计模式，涵盖零信任架构、最小权限原则、纵深防御等核心安全理念，为企业构建生产级安全防护体系提供理论指导和实践方案。
 
 ---
 
@@ -378,7 +379,7 @@ spec:
 
 ### 3.2 服务网格安全模式
 
-#### Istio mTLS 配置
+#### [[Istio|Istio]] mTLS 配置
 ```yaml
 # 启用服务间双向 TLS
 apiVersion: security.istio.io/v1beta1
@@ -885,22 +886,22 @@ main
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/15-chaos-engineering.md|15-chaos-engineering]]
-- [[domain-01-cluster-fundamentals/16-observability-design-principles.md|16-observability-design-principles]]
-- [[domain-01-cluster-fundamentals/18-performance-optimization-principles.md|18-performance-optimization-principles]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-v1.33-design-principles-evolution.md|99-kubernetes-v1.33-design-principles-evolution]]
+- 15-chaos-engineering
+- 16-observability-design-principles
+- 18-performance-optimization-principles
+- 99-kubernetes-v1.33-design-principles-evolution

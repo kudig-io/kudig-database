@@ -1,5 +1,5 @@
 ---
-title: Drasi
+title: Drasi (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Drasi
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Drasi
@@ -68,6 +69,6 @@ Drasi 是由 Microsoft 开发的数据变更处理平台，允许你持续检测
 - [[tremor]] — Tremor
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/drasi/drasi.md|drasi]]
-- [[entities/nats.md|NATS]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- drasi
+- [[entities/nats.md|[[NATS|NATS]]]]
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference

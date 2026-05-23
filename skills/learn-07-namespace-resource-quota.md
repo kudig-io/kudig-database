@@ -25,6 +25,7 @@ trigger_keywords:
 - 与资源隔离
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 第七课：Namespace 与资源隔离
@@ -295,7 +296,7 @@ clusters/
     └── limit-range.yaml
 ```
 
-### 5.2 NetworkPolicy 隔离
+### 5.2 [[NetworkPolicy|NetworkPolicy]] 隔离
 
 ```
 【场景】
@@ -412,8 +413,8 @@ kubectl describe resourcequota -n <namespace>
 
 ## Related
 
-- [[skills/learn-root.md|learn-root]] — Kubernetes 培训：Root
-- [[skills/learn-11-job-cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
+- [[skills/learn-root.md|learn-root]] — [[Kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
+- cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[skills/learn-09-hpa-basics.md|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment

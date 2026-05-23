@@ -1,5 +1,5 @@
 ---
-title: Kuadrant
+title: Kuadrant (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Kuadrant
@@ -61,11 +62,11 @@ Kuadrant 是一个 Kubernetes Gateway API 的策略引擎，为 Gateway API 添�
 
 ## Related
 
-- [[open-cluster-management]] — Open Cluster Management (OCM)
+- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[cloud-custodian]] — Cloud Custodian
 - [[cert-manager]] — cert-manager
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kuadrant/kuadrant.md|kuadrant]]
+- kuadrant
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

@@ -1,5 +1,5 @@
 ---
-title: PodDisruptionBudget (PDB) 故障排查指南
+title: PodDisruptionBudget (PDB) 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: PodDisruptionBudget (PDB) 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -35,6 +35,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: PodDisruptionBudget (PDB) 故障排查指南
@@ -45,8 +46,8 @@ tags:
 - troubleshooting
 - decision-tree
 - pdb
-- statefulset
-- daemonset
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -80,7 +81,7 @@ k8s_versions:
 
 # PodDisruptionBudget (PDB) 故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 >
 > **版本说明**:
 > - v1.26+ PDB 支持 unhealthyPodEvictionPolicy 字段
@@ -780,8 +781,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

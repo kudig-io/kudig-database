@@ -1,5 +1,5 @@
 ---
-title: 第四课：Service - 让应用可以被访问
+title: 第四课：Service - 让应用可以被访问 [fundamentals]
 description: 'description: 【解决方案】'
 category: learning
 tags:
@@ -29,10 +29,11 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 第四课：Service - 让应用可以被访问
+title: 第四课：[[Service|Service]] - 让应用可以被访问
 description: 【解决方案】
 category: learning
 tags:
@@ -42,9 +43,9 @@ tags:
 - k8s
 - training
 - lecturer
-- kubelet
-- coredns
-- ingress
+- [[kubelet|kubelet]]
+- [[CoreDNS|coredns]]
+- [[Ingress|ingress]]
 - networkpolicy
 aliases:
 - Service
@@ -431,7 +432,7 @@ kubectl delete svc <name>
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/02-pod-basics.md|02-pod-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/03-deployment-basics.md|03-deployment-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/05-ingress-basics.md|05-ingress-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/06-configmap-secret.md|06-configmap-secret]]
+- 02-pod-basics
+- 03-deployment-basics
+- 05-ingress-basics
+- 06-configmap-secret

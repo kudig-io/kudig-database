@@ -1,5 +1,5 @@
 ---
-title: 备份/恢复异常故障树分析
+title: 备份/恢复异常故障树分析 (skills)
 description: '- **范围**：etcd 快照、Velero/自定义备份工具、存储后端（S3/OSS/NFS）、加密与校验、恢复流程与顺序、依赖组件。'
 category: skills
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 fta_id: FTA-BACKUP_RESTORE-001
 component: Backup Restore
 severity: critical
+created: "2026-05-23"
 ---
 
 # 备份/恢复异常故障树分析
@@ -147,13 +148,13 @@ flowchart TD
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
-- [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] — Kubernetes FTA Top Events Index
+- Index.md|[[Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

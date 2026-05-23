@@ -1,5 +1,5 @@
 ---
-title: 第七章:附录
+title: 第七章:附录 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 第七章:附录
@@ -55,11 +56,11 @@ tags:
 - evidence-based
 - methodology
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- istio
-- cilium
+- [[Jaeger|jaeger]]
+- [[Istio|istio]]
+- [[Cilium|cilium]]
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert

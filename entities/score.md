@@ -1,5 +1,5 @@
 ---
-title: Score
+title: Score (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Score
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Score
@@ -65,8 +66,8 @@ Score 是一个与平台无关的工作负载规范，使开发者能够用统�
 - [[bfe]] — BFE
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/score/score.md|score]]
-- [[concepts/scheduling-algorithm|Scheduling Algorithm]] — Cross-reference
+- score
+- [[concepts/scheduling-algorithm|[[Scheduling Algorithm|Scheduling Algorithm]]]] — Cross-reference
 - [[skills/kubelet-eviction-mechanism|kubelet 资源驱逐机制]] — Cross-reference
 - [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

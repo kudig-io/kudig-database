@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Hexa
@@ -69,5 +70,5 @@ Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language
 - [[paralus]] — Paralus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/hexa/hexa.md|hexa]]
+- hexa
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference

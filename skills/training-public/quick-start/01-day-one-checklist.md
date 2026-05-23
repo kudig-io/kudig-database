@@ -1,5 +1,5 @@
 ---
-title: 'Day 1: 新人首日检查清单'
+title: Day 1: 新人首日检查清单 [quick-start]
 description: '# stern - 日志实时跟踪'
 category: learning
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 1: 新人首日检查清单
@@ -111,8 +112,8 @@ kubectl get namespaces
 | API Server | `curl -sk https://localhost:6443/healthz` | 控制平面入口 |
 | Scheduler | `kubectl get pods -n kube-system -l component=kube-scheduler` | Pod 调度器 |
 | Controller Manager | `kubectl get pods -n kube-system -l component=kube-controller-manager` | 控制器循环 |
-| etcd | `kubectl get pods -n kube-system -l component=etcd` | 数据存储 |
-| kubelet | `systemctl status kubelet` | 节点代理 |
+| [[etcd|etcd]] | `kubectl get pods -n kube-system -l component=etcd` | 数据存储 |
+| [[kubelet|kubelet]] | `systemctl status kubelet` | 节点代理 |
 
 ---
 
@@ -194,7 +195,7 @@ kubectl auth can-i get services --namespace=kube-system
 1. `P1-5-oncall-quick-reference-card.md` — oncall 速查卡
 2. `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查
 3. `domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md` — 故障排查总览
-4. `domain-11-production-operations/topic-learn/public-training/week-1-ack-acr-lifecycle/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` — Week 1 培训
+4. `domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README|[[KUDIG Database]]]].md` — Week 1 培训
 
 ---
 

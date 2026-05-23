@@ -73,11 +73,12 @@ related_docs:
 - path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   type: fta
   desc: CSI 故障树
+created: "2026-05-23"
 ---
 
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01
 
 ---
 
@@ -252,7 +253,7 @@ related_docs:
 | 特性 | Flannel | Calico | Cilium | Terway | Antrea |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **网络模式** | Overlay | Overlay/BGP | Overlay/Native | VPC | Overlay/NoEncap |
-| **NetworkPolicy** | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **[[NetworkPolicy|NetworkPolicy]]** | ❌ | ✅ | ✅ | ✅ | ✅ |
 | **eBPF 支持** | ❌ | ✅ (部分) | ✅ (原生) | ✅ | ✅ |
 | **加密** | ❌ | ✅ (WireGuard) | ✅ | ❌ | ✅ (IPSec) |
 | **多集群** | ❌ | ✅ | ✅ | ❌ | ✅ |
@@ -937,34 +938,34 @@ kubectl apply -f calico-old-version.yaml
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|Flannel 多集群场景与子网冲突处理]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
 
 ## Related
 
 - [[MOC]]
 
-- [[domain-03-networking-traffic/06-service-concepts-types.md|Service 核心概念与类型]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- Service 核心概念与类型
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
 
 ## See Also
 
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|01-network-architecture-overview-faq]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|01-network-architecture-overview]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|03-cni-plugins-comparison]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|04-flannel-complete-guide]]
+- 01-network-architecture-overview-faq
+- 01-network-architecture-overview
+- 03-cni-plugins-comparison
+- 04-flannel-complete-guide

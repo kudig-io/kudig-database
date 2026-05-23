@@ -57,11 +57,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 07 - 升级路径与策略指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/administer-cluster/cluster-upgrade](https://kubernetes.io/releases/version-skew-policy/)
 
 <!-- chunk: 版本支持策略 -->
 ## 版本支持策略
@@ -83,7 +84,7 @@ cross_refs:
 | 组件 | 与apiserver版本偏差 | 说明 | 升级顺序 |
 |-----|-------------------|------|---------|
 | **kube-apiserver** | 同一HA集群内可差1个次版本 | HA升级期间允许 | 1(最先) |
-| **kubelet** | 可比apiserver低2个次版本 | 节点可晚升级 | 3(最后) |
+| **[[kubelet|kubelet]]** | 可比apiserver低2个次版本 | 节点可晚升级 | 3(最后) |
 | **kube-controller-manager** | 不能高于apiserver | 必须先升级apiserver | 2 |
 | **kube-scheduler** | 不能高于apiserver | 必须先升级apiserver | 2 |
 | **kube-proxy** | 与kubelet相同 | 随节点升级 | 3 |
@@ -202,8 +203,8 @@ aliyun cs DescribeClusterDetail --ClusterId <cluster-id>
 |-------|------|---------|
 | **版本确认** | `kubectl version` | 目标版本 |
 | **节点状态** | `kubectl get nodes -o wide` | 全部Ready，版本正确 |
-| **系统Pod** | `kubectl get pods -n kube-system` | 全部Running |
-| **CoreDNS** | `kubectl run test --rm -it --image=busybox -- nslookup kubernetes` | 解析成功 |
+| **系统Pod** | `kubectl get [[Pods|pods]] -n kube-system` | 全部Running |
+| **[[CoreDNS|CoreDNS]]** | `kubectl run test --rm -it --image=busybox -- nslookup kubernetes` | 解析成功 |
 | **应用健康** | `kubectl get pods -A` | 全部正常 |
 | **Service访问** | 测试关键Service | 正常响应 |
 | **存储** | `kubectl get pv,pvc -A` | 状态正常 |
@@ -581,7 +582,7 @@ NAMESPACE=${1:-default}
 DEPLOYMENT=${2:-""}
 TARGET_REVISION=${3:-""}
 
-if [[ -z "$DEPLOYMENT" ]] || [[ -z "$TARGET_REVISION" ]]; then
+if -z "$DEPLOYMENT" || -z "$TARGET_REVISION"; then
     echo "Usage: $0 <namespace> <deployment> <target_revision>"
     echo "Example: $0 production my-app 3"
     exit 1
@@ -802,25 +803,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/03-api-versions-features.md|03 - 功能和API表]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- Kubernetes 核心组件深度剖析
+- 03 - 功能和API表
+- 04 - Kubernetes 源码结构深度解析
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|05-kubectl-commands-reference]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06-cluster-configuration-parameters]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08-multi-tenancy-architecture]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09-edge-computing-kubeedge]]
+- 05-kubectl-commands-reference
+- 06-cluster-configuration-parameters
+- 08-multi-tenancy-architecture
+- 09-edge-computing-kubeedge
 
 ## Related
 

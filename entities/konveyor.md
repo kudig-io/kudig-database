@@ -1,5 +1,5 @@
 ---
-title: Konveyor
+title: Konveyor (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Konveyor
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Konveyor
@@ -59,12 +60,12 @@ Konveyor 是一个应用现代化平台，帮助组织将传统应用（如 Java
 
 ## Related
 
-- [[network-service-mesh]] — Network Service Mesh (NSM)
+- [[network-service-mesh]] — [[entities/network-service-mesh.md|Network Service Mesh (NSM)]]]Service Mesh）|Service Mesh]] (NSM)
 - [[kserve]] — KServe
 - [[meshery]] — Meshery
 - [[knative]] — Knative
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/konveyor/konveyor.md|konveyor]]
+- konveyor
 - [[entities/shipwright.md|Shipwright]]
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

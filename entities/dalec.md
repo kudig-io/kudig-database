@@ -22,6 +22,7 @@ trigger_keywords:
 - Dalec
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Dalec
@@ -61,11 +62,11 @@ Dalec 是一个声明式的 Linux 系统包构建工具，通过简洁的 YAML �
 
 - [[pipecd]] — PipeCD
 - [[hami]] — HAMI
-- [[open-policy-containers]] — Open Policy Containers (OPCR)
+- [[open-policy-containers]] — [[entities/open-policy-containers.md|Open Policy Containers (OPCR)]]
 - [[werf]] — werf
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/dalec/dalec.md|dalec]]
+- dalec
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

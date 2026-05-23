@@ -35,13 +35,14 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Operator Pattern (CRD + Controller)
 
 ## Custom Resource Definition (CRD)
 
-CRDs extend the Kubernetes API with custom resource types without modifying API Server code:
+CRDs extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with custom resource types without modifying API Server code:
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -72,10 +73,10 @@ An Operator is a custom controller that manages CRD instances:
 
 1. **Watch** CRD changes via Informer
 2. **Reconcile**: Compare desired spec vs actual cluster state
-3. **Create/Update** dependent Kubernetes resources (Deployments, Services, PVCs, etc.)
+3. **Create/Update** dependent Kubernetes resources ([[Deployments|Deployments]], Services, PVCs, etc.)
 4. **Update Status** on the CRD instance
 
-Popular operators: Prometheus Operator, Elasticsearch Operator, MySQL Operator, ArgoCD.
+Popular operators: [[Prometheus|Prometheus]] Operator, Elasticsearch Operator, MySQL Operator, [[ArgoCD|ArgoCD]].
 
 ## Admission Webhooks
 

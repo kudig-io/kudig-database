@@ -1,5 +1,5 @@
 ---
-title: OpenGitOps
+title: OpenGitOps [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # OpenGitOps
@@ -58,7 +59,7 @@ OpenGitOps 是一个 CNCF Sandbox 项目，定义了 GitOps 的标准原则和�
 ## 参考链接
 
 - [[flux]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[concepts/gitops-principles.md|gitops-principles]]
 - [[concepts/declarative-api.md|declarative-api]]
 
@@ -70,7 +71,7 @@ OpenGitOps 是一个 CNCF Sandbox 项目，定义了 GitOps 的标准原则和�
 - [[krkn]] — Krkn
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/opengitops/opengitops.md|opengitops]]
+- opengitops
 - [[synthesis/GitOps x 平台工程|GitOps x 平台工程]] — Cross-reference
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

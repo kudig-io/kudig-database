@@ -1,5 +1,5 @@
 ---
-title: 第四课：Service - 让应用可以被访问
+title: 第四课：Service - 让应用可以被访问 [03-networking]
 description: 【解决方案】
 category: k8s-lecturer
 tags:
@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# 第四课：Service - 让应用可以被访问
+# 第四课：[[Service|Service]] - 让应用可以被访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -379,5 +380,5 @@ kubectl delete svc <name>
 
 **关联文档**:
 - [../04-networking/04-ingress-basics.md](../04-networking/04-ingress-basics.md) — Ingress 基础
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md](../../domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md) — Service 连通性 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md](../../domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md) — Service 连通性 [[SKILL|Skill]]
 - [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — Kubernetes 网络文档

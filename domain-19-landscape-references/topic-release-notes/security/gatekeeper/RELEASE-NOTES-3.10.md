@@ -34,6 +34,7 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # gatekeeper v3.10 Release Notes
@@ -41,7 +42,7 @@ prerequisites:
 Source: [v3.10.0](https://github.com/open-policy-agent/gatekeeper/releases/tag/v3.10.0)
 
 ## Notable changes 
-- If you are using Kubernetes v1.25 or later, this release includes removal of [Pod Security Policies](https://kubernetes.io/docs/concepts/security/pod-security-policy/) and migration to [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 🔐
+- If you are using [[Kubernetes|Kubernetes]] v1.25 or later, this release includes removal of Pod Securityod Security Policies]]](https://kubernetes.io/docs/concepts/security/pod-security-policy/) and migration to Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 🔐
 - [Mutation](https://open-policy-agent.github.io/gatekeeper/website/docs/mutation) is promoted to _stable_ 🦠
 - Introducing [Validation of Workload Resources](https://open-policy-agent.github.io/gatekeeper/website/docs/workload-resources/) as _alpha_ 🚀
 - Performance improvements 🏃

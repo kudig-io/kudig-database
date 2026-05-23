@@ -1,5 +1,5 @@
 ---
-title: FTA 故障树完整索引
+title: FTA 故障树完整索引 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''| TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1)'
 category: fta
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 fta_id: FTA-FTA_INDEX-001
 component: Fta Index
 severity: critical
+created: "2026-05-23"
 ---
 
 title: FTA 故障树完整索引
@@ -54,9 +55,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- kubelet
-- istio
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Istio|istio]]
 - envoy
 - coredns
 - ingress

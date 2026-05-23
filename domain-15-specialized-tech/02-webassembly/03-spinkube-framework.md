@@ -50,20 +50,21 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# SpinKube 框架实践
+# [[SpinKube|SpinKube]] 框架实践
 # SpinKube Framework Practice
 
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
 
 1. [SpinKube 概述](#1-spinkube-概述)
-2. [Spin 应用模型](#2-spin-应用模型)
+2. [[entities/spin.md|Spin]] 应用模型](#2-spin-应用模型)
 3. [SpinKube 架构](#3-spinkube-架构)
 4. [SpinApp CRD](#4-spinapp-crd)
 5. [安装与配置](#5-安装与配置)
 6. [HTTP 触发器](#6-http-触发器)
-7. [KEDA 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
+7. [[entities/keda.md|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
 8. [存储系统集成](#8-存储系统集成)
 9. [Redis 与 KV Store](#9-redis-与-kv-store)
 10. [SQLite 集成](#10-sqlite-集成)
@@ -76,7 +77,7 @@ authors:
 
 #<!-- chunk: 1.1 什么是 SpinKube / What is SpinKube -->## 1.1 什么是 SpinKube / What is SpinKube
 
-SpinKube 是基于 Fermyon Spin 的 Kubernetes 原生 WebAssembly 运行时项目，是 CNCF Sandbox 项目。它将 Spin 的开发者友好体验带入 Kubernetes，实现了 Wasm Serverless 工作负载的云原生部署：
+SpinKube 是基于 Fermyon Spin 的 [[Kubernetes|Kubernetes]] 原生 WebAssembly 运行时项目，是 CNCF Sandbox 项目。它将 Spin 的开发者友好体验带入 Kubernetes，实现了 Wasm Serverless 工作负载的云原生部署：
 
 ```
 SpinKube 项目组成
@@ -178,7 +179,7 @@ log_level = { default = "info" }
 cache_ttl = { default = "300" }
 
 # 组件 1: 用户 API
-[[trigger.http]]
+trigger.http
 route = "/api/v1/users/..."
 component = "users-handler"
 
@@ -215,7 +216,7 @@ db_url = "{{ db_url }}"
 api_key = "{{ api_key }}"
 
 # 组件 2: 健康检查
-[[trigger.http]]
+trigger.http
 route = "/health"
 component = "health"
 
@@ -224,7 +225,7 @@ source = "target/wasm32-wasi/release/health.wasm"
 description = "健康检查端点"
 
 # 组件 3: 后台任务（Redis 触发器）
-[[trigger.redis]]
+trigger.redis
 channel = "task-queue"
 component = "task-processor"
 
@@ -1068,22 +1069,22 @@ version = "2.0.0"
 base = "/api/v2"
 
 # 精确路径匹配
-[[trigger.http]]
+trigger.http
 route = "/ping"
 component = "ping"
 
 # 通配符路由
-[[trigger.http]]
+trigger.http
 route = "/users/..."
 component = "users"
 
 # 路径参数
-[[trigger.http]]
+trigger.http
 route = "/products/:id"
 component = "product-detail"
 
 # 管理接口
-[[trigger.http]]
+trigger.http
 route = "/admin/..."
 component = "admin"
 
@@ -1940,7 +1941,7 @@ name = "turso-example"
 turso_url = { required = true }
 turso_token = { required = true }
 
-[[trigger.http]]
+trigger.http
 route = "/..."
 component = "api"
 
@@ -2353,22 +2354,22 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|01-wasm-fundamentals-cloud-native]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|02-containerd-wasm-shim]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|04-wasmcloud-platform]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|05-wasmedge-runtime]]
+- 01-wasm-fundamentals-cloud-native
+- 02-containerd-wasm-shim
+- 04-wasmcloud-platform
+- 05-wasmedge-runtime

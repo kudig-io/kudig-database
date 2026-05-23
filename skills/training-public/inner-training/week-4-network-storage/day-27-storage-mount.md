@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 27: 存储卷挂载
@@ -344,4 +345,4 @@ Day 28 将进行 4 周培训的综合复习与实践。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- index/pvc-index|PVC 知识图谱索引]]

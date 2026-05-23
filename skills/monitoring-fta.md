@@ -1,5 +1,5 @@
 ---
-title: 监控与告警异常故障树分析
+title: 监控与告警异常故障树分析 (skills)
 description: 'title: "监控与告警异常故障树分析"'
 category: general
 tags:
@@ -25,17 +25,18 @@ prerequisites:
 fta_id: FTA-MONITORING-001
 component: Monitoring
 severity: medium
+created: "2026-05-23"
 ---
 
 ---
 title: "监控与告警异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n monitoring -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示监控组件异常 --> - **目标**：覆盖 Prometheus 采集失败、..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示监控组件异常 --> - **目标**：覆盖 Prometheus 采集失败、..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

@@ -46,13 +46,14 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 15 - 生态系统与插件事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
-> **本文档记录 Kubernetes 生态系统中常见生产插件和扩展组件产生的事件,包括 Node Problem Detector、Ingress 控制器、cert-manager、Istio、ArgoCD、Knative、Prometheus Operator、Velero、External DNS 和 MetalLB。**
+> **本文档记录 Kubernetes 生态系统中常见生产插件和扩展组件产生的事件,包括 Node Problem Detector、[[Ingress|Ingress]] 控制器、cert-manager、[[Istio|Istio]]、[[ArgoCD|ArgoCD]]、[[Knative|Knative]]、Prometheus Operator、Velero、External DNS 和 MetalLB。**
 
 ---
 
@@ -1374,25 +1375,25 @@ groups:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
 
 ## See Also
 
-- [[domain-17-system-foundation/13-security-admission-rbac-events.md|13-security-admission-rbac-events]]
-- [[domain-17-system-foundation/14-namespace-resource-gc-events.md|14-namespace-resource-gc-events]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01-event-system-architecture]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02-pod-container-lifecycle-events]]
+- 13-security-admission-rbac-events
+- 14-namespace-resource-gc-events
+- 01-event-system-architecture
+- 02-pod-container-lifecycle-events
 
 ## Related
 

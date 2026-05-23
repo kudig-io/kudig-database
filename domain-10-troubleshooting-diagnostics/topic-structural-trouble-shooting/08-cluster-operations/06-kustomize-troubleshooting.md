@@ -1,5 +1,5 @@
 ---
-title: Kustomize 部署故障排查指南
+title: Kustomize 部署故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kustomize 部署故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - helm-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: Kustomize 部署故障排查指南
@@ -49,7 +50,7 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- helm
+- [[Helm|helm]]
 - redis
 - mysql
 - rbac
@@ -85,7 +86,7 @@ k8s_versions:
 
 # Kustomize 部署故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32, Kustomize v5.0+ | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32, Kustomize v5.0+ | **最后更新**: 2026-01 | **难度**: 中级
 >
 > **版本说明**:
 > - kubectl 内置 kustomize 版本可能落后，建议独立安装
@@ -947,9 +948,9 @@ configMapGenerator:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

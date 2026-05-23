@@ -1,5 +1,5 @@
 ---
-title: kube-proxy 与 Service 负载均衡
+title: kube-proxy 与 Service 负载均衡 (topic-code-analysis)
 description: 'description: ''## kube-proxy 部署'''
 category: general
 tags:
@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: kube-proxy 与 Service 负载均衡

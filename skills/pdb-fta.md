@@ -1,5 +1,5 @@
 ---
-title: PDB 异常故障树分析
+title: PDB 异常故障树分析 (skills)
 description: '- **目标**：覆盖 PDB 阻塞驱逐、配置错误与升级失败的关键成因与路径。'
 category: skills
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 fta_id: FTA-PDB-001
 component: Pdb
 severity: medium
+created: "2026-05-23"
 ---
 
 # PDB 异常故障树分析

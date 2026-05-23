@@ -32,13 +32,14 @@ prerequisites:
 - cloud-provider-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 运行时类（RuntimeClass）
 
 ## 概述
 
-RuntimeClass 是 [[entities/kubernetes|kubernetes]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
+RuntimeClass 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
 
 ## 核心概念/原理
 
@@ -51,7 +52,7 @@ RuntimeClass 是 [[entities/kubernetes|kubernetes]] 中用于选择容器运行�
 
 使用 RuntimeClass 需要完成两个步骤：
 
-1. **在节点上配置 CRI 实现**：具体的配置取决于所使用的容器运行时（如 containerd、CRI-O）
+1. **在节点上配置 CRI 实现**：具体的配置取决于所使用的容器运行时（如 [[containerd|containerd]]、CRI-O）
 2. **创建 RuntimeClass 资源**：为每种运行时配置创建对应的 RuntimeClass 对象
 
 ### RuntimeClass 资源定义
@@ -110,7 +111,7 @@ spec:
 
 > **注意**：默认情况下，RuntimeClass 假设集群节点配置是同质的；若节点异构，应通过 `scheduling` 字段进行约束。
 
-### Pod 开销（Pod Overhead）
+### Pod 开销（[[Pod Overhead|Pod Overhead]]）
 
 自 v1.24 起进入 Stable。RuntimeClass 支持通过 `overhead` 字段声明运行 Pod 所需的额外资源开销（如虚拟化层消耗的资源），使调度器和其他组件在决策时能够将其纳入考量：
 

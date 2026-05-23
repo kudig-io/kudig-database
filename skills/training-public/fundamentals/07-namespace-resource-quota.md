@@ -1,5 +1,5 @@
 ---
-title: 第七课：Namespace 与资源隔离
+title: 第七课：Namespace 与资源隔离 [fundamentals]
 description: 'description: 2. 掌握 Namespace 的创建和管理'
 category: learning
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -41,7 +42,7 @@ tags:
 - training
 - lecturer
 - rbac
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -455,7 +456,7 @@ kubectl describe resourcequota -n <namespace>
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/05-ingress-basics.md|05-ingress-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/06-configmap-secret.md|06-configmap-secret]]
-- [[domain-11-production-operations/topic-learn/fundamentals/08-pv-pvc-basics.md|08-pv-pvc-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/09-hpa-basics.md|09-hpa-basics]]
+- 05-ingress-basics
+- 06-configmap-secret
+- 08-pv-pvc-basics
+- 09-hpa-basics

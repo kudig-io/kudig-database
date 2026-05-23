@@ -51,18 +51,19 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Velero 企业级备份恢复实践指南
 
-> **作者**: Kubernetes 灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18
+> **作者**: [[Kubernetes|Kubernetes]] 灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18
 > **适用版本**: Velero v1.15.0 | **难度**: ⭐⭐⭐⭐
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（Deployments、Services、ConfigMaps、Secrets、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。本文档深入探讨 Velero 在企业级生产环境中的部署、配置、备份策略、恢复流程和最佳实践。
+Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（[[Deployments|Deployments]]、Services、[[ConfigMaps|ConfigMaps]]、[[Secrets|Secrets]]、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。本文档深入探讨 Velero 在企业级生产环境中的部署、配置、备份策略、恢复流程和最佳实践。
 
 #<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
 
@@ -192,7 +193,7 @@ Velero备份执行流程:
 
 <!-- chunk: 核心配置 -->## 核心配置
 
-#<!-- chunk: Helm 生产级部署 -->## Helm 生产级部署
+#<!-- chunk: [[Helm|Helm]] 生产级部署 -->## Helm 生产级部署
 
 ```yaml
 # values-velero-production.yaml
@@ -977,24 +978,24 @@ velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
+- domain-30-disaster-recovery-business-continuity MOC
 - [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份与恢复深度实践]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
+- Domain-30 灾备与业务连续性 — 开源项目索引
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- Kubernetes 备份与恢复深度实践
+- 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+- 应用级灾备架构：多区域部署与故障转移
 
 ## See Also
 
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|08-chaos-engineering-platforms]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|09-application-level-disaster-recovery]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|01-vmware-vsphere-enterprise-dr]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|02-veeam-enterprise-backup]]
+- 08-chaos-engineering-platforms
+- 09-application-level-disaster-recovery
+- 01-vmware-vsphere-enterprise-dr
+- 02-veeam-enterprise-backup
 
 ## Related
 

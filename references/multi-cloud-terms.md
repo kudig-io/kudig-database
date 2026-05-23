@@ -32,6 +32,7 @@ prerequisites:
 - monitoring-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # K8s 多云架构术语参考

@@ -25,13 +25,14 @@ prerequisites:
 - cloud-provider-basics
 - helm-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 推荐标签
 
 ## 概述
 
-除了 `kubectl` 和 Dashboard 之外，还有许多工具可以可视化和管理 Kubernetes 对象。一组通用的推荐标签（Recommended Labels）允许这些工具以可互操作的方式工作，用所有工具都能理解的通用方式描述对象。
+除了 `kubectl` 和 Dashboard 之外，还有许多工具可以可视化和管理 [[Kubernetes|Kubernetes]] 对象。一组通用的推荐标签（Recommended Labels）允许这些工具以可互操作的方式工作，用所有工具都能理解的通用方式描述对象。
 
 ## 核心概念/原理
 
@@ -52,7 +53,7 @@ prerequisites:
 | `app.kubernetes.io/version` | 应用当前版本 | `5.7.21` | string |
 | `app.kubernetes.io/component` | 架构中的组件 | `database` | string |
 | `app.kubernetes.io/part-of` | 该应用所属的更高级别应用名称 | `wordpress` | string |
-| `app.kubernetes.io/managed-by` | 用于管理应用操作的工具 | `Helm` | string |
+| `app.kubernetes.io/managed-by` | 用于管理应用操作的工具 | `[[Helm|Helm]]` | string |
 
 ### 应用与应用实例
 
@@ -81,4 +82,4 @@ prerequisites:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,435 +1,542 @@
 ---
-title: 节点生命周期总览
-description: '## 概述'
-category: functions
+title: Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis)
+description: '| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |'
+category: general
 tags:
-- k8s
-- operations
-- cluster-management
-- apiserver
+- reference
+- deep-dive
+- etcd
 - kubelet
+- scheduler
+- controller-manager
 - containerd
-- cri-o
-- docker
-- pdb
-- networkpolicy
-last_updated: 2026-05-18
-difficulty: beginner
-reading_level: beginner
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
 audience:
-- Kubernetes 初学者
-- 开发工程师
-- 运维工程师
-estimated_read_time: 5min
+- 所有工程师
+estimated_read_time: 15min
 intent_queries:
-- Kubernetes node lifecycle overview
-- node lifecycle stages phases
-- node Ready condition management
-- node resource capacity allocatable
-- node role management control-plane worker
+- Kubernetes 集群删除逻辑 — 基于官方代码分析 是什么
+- 如何 Kubernetes 集群删除逻辑 — 基于官方代码分析
+- Kubernetes 07 platform engineering 最佳实践
 trigger_keywords:
-- node
-- lifecycle
-- overview
-- Ready
-- condition
-- capacity
-- allocatable
-- control-plane
-- worker
-- role
-- label
-- taint
-- cordon
-- uncordon
-- drain
+- Kubernetes
+- 集群删除逻辑
+- 基于官方代码分析
+- platform
+- engineering
+- code
+- analysis
 prerequisites:
 - kubectl-basics
-- pod-lifecycle
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
+title: Kubernetes 集群删除逻辑 — 基于官方代码分析
+category: cluster-delete
+tags:
+- cluster-delete
+- kubeadm
+- reset
+- kubectl
+- drain
+- delete-node
+- workflow
+- phases
+last_updated: 2026-05-18
+description: 深入分析 Kubernetes 集群删除的完整逻辑，涵盖 kubeadm reset 命令的 resetData 构建、Phase 执行框架、API
+  Client 创建、DryRun 模式以及各删除方式的对比（kubeadm reset vs kubectl delete node vs 手动清理）。
+difficulty: advanced
+intent_queries:
+- kubernetes cluster delete source code analysis
+- kubeadm reset resetData newResetData kubernetes
+- workflow runner kubeadm phases
+- kubernetes cluster delete vs kubectl delete node
+- kubeadm reset vs manual cleanup
+trigger_keywords:
+- cluster delete
+- kubeadm reset
+- resetData
+- newResetData
+- workflow.Runner
+- Phase execution
+- DryRun
+- ForceReset
+- kubectl delete node
+- manual cleanup
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
+- domain-01-cluster-fundamentals
 related_topics:
-- node-create/02-registration
-- node-create/03-condition
-- node-create/04-drain
-- cluster-create/01-overview
+- cluster-delete
+- reset
+- cleanup
+- etcd-cleanup
+- force-delete
+- security-delete
+- network-cleanup
+- ha-delete
+- cloud-delete
+- troubleshooting
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete README](./README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
-# 节点生命周期总览
+# Kubernetes 集群删除逻辑 — 基于官方代码分析
 
-## 概述
+## 函数签名
 
-节点（Node）是 [[entities/kubernetes|kubernetes]] 集群中的工作单元，它是运行 Pod 的物理机或虚拟机。每个节点包含运行 Pod 所需的核心服务：kubelet（节点代理）、容器运行时（containerd/cri-o）和网络插件（CNI）。理解节点的完整生命周期——从创建、注册、运行到维护和移除——是有效管理 Kubernetes 集群的基础。
+```go
+func newCmdReset(in io.Reader, out io.Writer, resetOptions *resetOptions) *cobra.Command
 
-Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 API Server 定义期望的节点状态（如标签、污点、规格），kubelet 和各个控制器负责将实际状态与期望状态对齐。这种设计使得节点管理可以自动化——Cluster Autoscaler 可以根据负载自动增减节点，Node Lifecycle Controller 可以自动检测和隔离故障节点。
+func (r *resetData) ForceReset() bool
+func (r *resetData) DryRun() bool
+func (r *resetData) Client() clientset.Interface
+func (r *resetData) CertificatesDir() string
+func (r *resetData) CRISocketPath() string
+func (r *resetData) CleanupTmpDir() bool
+func (r *resetData) Cfg() *kubeadmapi.InitConfiguration
+func (r *resetData) ResetCfg() *kubeadmapi.ResetConfiguration
+```
 
-本文档作为节点生命周期管理的总览，详细介绍节点的核心组件、生命周期阶段、状态流转机制、Node 对象的结构以及节点角色管理。
-
----
-
-## 源码路径
+## 源码位置
 
 | 组件 | 源码路径 | 说明 |
 |------|---------|------|
-| kubelet 主入口 | `pkg/kubelet/kubelet.go` | kubelet 核心逻辑 |
-| 节点状态管理 | `pkg/kubelet/nodestatus/` | 状态上报与同步 |
-| 节点注册 | `pkg/kubelet/certificate/` | Bootstrap + CSR |
-| 容器运行时 | `pkg/kubelet/cri/` | CRI 接口 |
-| PLEG | `pkg/kubelet/pleg/` | Pod 生命周期事件 |
-| 卷管理 | `pkg/kubelet/volumemanager/` | 存储卷管理 |
-| 驱逐管理 | `pkg/kubelet/eviction/` | 资源压力驱逐 |
-| Node Lifecycle Controller | `pkg/controller/nodelifecycle/` | 节点健康监控 |
+| reset 入口 | `cmd/kubeadm/app/cmd/reset.go` | 命令注册、resetData 构建 |
+| reset phases | `cmd/kubeadm/app/cmd/phases/reset/` | preflight/remove-etcd/cleanup-node |
+| etcd 操作 | `cmd/kubeadm/app/phases/etcd/local.go` | RemoveStackedEtcdMember |
+| workflow 引擎 | `cmd/kubeadm/app/cmd/phases/workflow/runner.go` | Phase 执行框架 |
+| 配置加载 | `cmd/kubeadm/app/util/config/initconfiguration.go` | 配置解析与默认值 |
+| 清理工具 | `cmd/kubeadm/app/util/users.go` | 用户和目录清理 |
 
----
+## 参数说明
 
-## 一、节点生命周期
+### resetOptions 字段
 
-### 1.1 完整生命周期流程
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `kubeconfigPath` | `string` | admin kubeconfig 路径，默认 `/etc/kubernetes/admin.conf` |
+| `cfgPath` | `string` | `--config` 指定的配置文件路径 |
+| `ignorePreflightErrors` | `[]string` | 忽略的预检错误列表 |
+| `externalcfg` | `*kubeadmapiv1.ResetConfiguration` | 命令行标志构建的默认配置 |
+| `skipCRIDetect` | `bool` | 是否跳过容器运行时检测 |
 
-```
-节点生命周期:
-  ┌─────────────────────────────────────────────────────────────┐
-  │  阶段 1: 节点准备                                           │
-  │  ├── 创建物理/虚拟机实例                                     │
-  │  ├── 安装操作系统（Linux 推荐 Ubuntu/RHEL）                 │
-  │  ├── 安装容器运行时 (containerd/cri-o/Docker)               │
-  │  ├── 安装 kubelet 二进制 + 配置 systemd 服务                │
-  │  ├── 安装 CNI 插件二进制                                     │
-  │  └── 配置网络、内核参数、文件系统                             │
-  ├─────────────────────────────────────────────────────────────┤
-  │  阶段 2: 节点注册                                           │
-  │  ├── kubeadm join --token <token>                            │
-  │  ├── kubelet 使用 Bootstrap Token 向 API Server 认证         │
-  │  ├── 发起 CSR (Certificate Signing Request)                  │
-  │  ├── csrapproving controller 自动审批 CSR                    │
-  │  ├── 获取正式客户端证书                                       │
-  │  ├── 创建 Node 对象                                          │
-  │  └── kubelet 开始上报状态 → Ready                            │
-  ├─────────────────────────────────────────────────────────────┤
-  │  阶段 3: 正常运行                                           │
-  │  ├── kubelet 同步 Pod 状态 (syncPod 循环)                   │
-  │  ├── 容器健康检查 (liveness/readiness/startup probe)        │
-  │  ├── 资源监控上报 (cAdvisor → metrics)                      │
-  │  ├── 证书自动轮换 (certificate rotation)                    │
-  │  ├── 垃圾回收 (image/container GC)                          │
-  │  └── 卷管理 (attach/detach/mount/unmount)                   │
-  ├─────────────────────────────────────────────────────────────┤
-  │  阶段 4: 节点运维                                           │
-  │  ├── 维护: drain → 操作 → uncordon                          │
-  │  ├── 升级: kubeadm upgrade node                             │
-  │  ├── 弹性伸缩: Cluster Autoscaler 增减节点                   │
-  │  └── 故障排查与恢复                                          │
-  ├─────────────────────────────────────────────────────────────┤
-  │  阶段 5: 节点移除                                           │
-  │  ├── drain: 驱逐所有 Pod (遵守 PDB)                          │
-  │  ├── delete: 从 API Server 删除 Node 对象                    │
-  │  ├── reset: kubeadm reset 清理节点配置                       │
-  │  └── 释放: 云厂商释放实例资源                                 │
-  └─────────────────────────────────────────────────────────────┘
-```
+### ResetConfiguration 字段
 
-### 1.2 节点状态流转
+| 字段 | 类型 | 说明 | 默认值 |
+|------|------|------|--------|
+| `CertificatesDir` | `string` | 证书目录 | `/etc/kubernetes/pki` |
+| `CleanupTmpDir` | `bool` | 是否清理临时目录 | `false` |
+| `CRISocket` | `string` | 容器运行时 socket 路径 | 自动检测 |
+| `DryRun` | `bool` | 干跑模式 | `false` |
+| `Force` | `bool` | 跳过确认提示 | `false` |
+| `IgnorePreflightErrors` | `[]string` | 忽略的预检错误 | |
+| `SkipPhases` | `[]string` | 跳过的阶段列表 | |
+| `UnmountFlags` | `[]string` | Linux unmount2() 标志 | |
+| `Timeouts` | `*Timeouts` | 超时配置 | |
 
-```
-                   ┌──────────────┐
-                   │ NotRegistered│  节点未注册
-                   └──────┬───────┘
-                          │ kubelet 启动 + Bootstrap
-                          ▼
-                   ┌──────────────┐
-                   │  Registered  │  Node 对象已创建
-                   └──────┬───────┘
-                          │ kubelet 状态上报
-                          ▼
-                ┌──────────────────────┐
-                │        Ready         │  节点正常
-                └──────┬───────┬───────┘
-                       │       │
-              kubelet 正常    kubelet 异常/资源压力
-                       │       │
-                       ▼       ▼
-                ┌──────────┐ ┌──────────────┐
-                │   Ready  │ │  NotReady    │
-                │ (持续)    │ │ (Conditions  │
-                └──────────┘ │  异常)        │
-                             └──────┬───────┘
-                                    │ kubelet 恢复
-                                    ▼
-                             ┌──────────────┐
-                             │    Ready     │
-                             └──────────────┘
-                                    │
-                          长时间 NotReady
-                          (超过 pod-eviction-timeout)
-                                    │
-                                    ▼
-                             ┌──────────────┐
-                             │   Evicted    │  Pod 被驱逐
-                             └──────┬───────┘
-                                    │ kubeadm reset
-                                    ▼
-                             ┌──────────────┐
-                             │   Removed    │  节点已移除
-                             └──────────────┘
+## 返回值
+
+| 函数 | 返回值 | 说明 |
+|------|--------|------|
+| `newCmdReset` | `*cobra.Command` | 返回配置好的 reset 子命令 |
+| `ForceReset` | `bool` | 是否跳过用户确认 |
+| `DryRun` | `bool` | 是否为干跑模式 |
+| `Client` | `clientset.Interface` | Kubernetes API 客户端（dry-run 时为 FakeClient） |
+| `Cfg` | `*kubeadmapi.InitConfiguration` | 从集群获取的配置，不可达时为 nil |
+
+## 调用链
+
+```mermaid
+graph TD
+    A[kubeadm reset] --> B[newCmdReset]
+    B --> C[resetRunner.InitData]
+    C --> D[newResetData]
+    D --> E[LoadOrDefaultResetConfiguration]
+    D --> F{DryRun?}
+    F -->|是| G[NewDryRun FakeClient]
+    F -->|否| H[从 admin.conf 构建 ClientSet]
+    D --> I[FetchInitConfigurationFromCluster]
+    D --> J[检测 CRI Socket]
+    B --> K[resetRunner.Run]
+    K --> L[Phase 1: preflight]
+    L --> M[RunRootCheckOnly]
+    L --> N{Force?}
+    N -->|否| O[InteractivelyConfirmAction]
+    N -->|是| P[跳过确认]
+    K --> Q[Phase 2: remove-etcd-member]
+    Q --> R[RemoveStackedEtcdMember]
+    R --> S[etcdctl member remove]
+    K --> T[Phase 3: cleanup-node]
+    T --> U[停止 kubelet]
+    T --> V[Unmount /var/lib/kubelet]
+    T --> W[移除容器]
+    T --> X[CleanDir /etc/kubernetes]
+    T --> Y[CleanDir /var/lib/kubelet]
+    T --> Z[打印手动清理提示]
 ```
 
----
+## 源码分析
 
-## 二、节点核心组件
+### 概述
 
-### 2.1 kubelet
+Kubernetes 集群删除涉及多个层面：节点级重置（`kubeadm reset`）、API 对象删除（`kubectl delete node`）、etcd 成员移除以及系统级清理（容器、网络、证书、数据目录）。kubeadm reset 使用 workflow.Runner 管理 Phase 执行，与 `kubeadm init` 共享同一 workflow 引擎，采用 best-effort 策略，尽力回滚但不保证完全清理。
 
-kubelet 是每个节点上运行的核心代理程序，它是 Kubernetes 控制面与节点之间的桥梁：
+### 命令注册与初始化
 
-```bash
-# kubelet 核心职责:
-# 1. 节点注册
-#    - 使用 Bootstrap Token 向 API Server 认证
-#    - 发起 CSR 获取正式证书
-#    - 创建和更新 Node 对象
-#
-# 2. Pod 生命周期管理
-#    - 监听 API Server 获取分配到本节点的 Pod
-#    - 通过 CRI 调用容器运行时创建/更新/删除容器
-#    - 管理 Pod 的挂载卷
-#    - 执行容器健康检查
-#
-# 3. 状态上报
-#    - 定期向 API Server 上报节点 Conditions
-#    - 上报节点资源容量和可分配量
-#    - 上报 Pod 和容器状态
-#
-# 4. 资源管理
-#    - cgroup 管理（CPU/内存限制）
-#    - 驱逐管理（资源不足时主动驱逐 Pod）
-#    - 垃圾回收（镜像/容器清理）
-#
-# 5. 安全管理
-#    - 证书自动轮换
-#    - 服务端 TLS 管理
-#    - 认证与授权
+```go
+// cmd/kubeadm/app/cmd/reset.go
+func newCmdReset(in io.Reader, out io.Writer, resetOptions *resetOptions) *cobra.Command {
+    resetRunner := workflow.NewRunner()
+
+    cmd := &cobra.Command{
+        Use:   "reset",
+        Short: "Performs a best effort revert of changes made to this host by 'kubeadm init' or 'kubeadm join'",
+        RunE: func(cmd *cobra.Command, args []string) error {
+            data, err := resetRunner.InitData(args)
+            if err != nil {
+                return err
+            }
+            if err := resetRunner.Run(args); err != nil {
+                return err
+            }
+            fmt.Fprint(out, manualCleanupInstructions)
+            return nil
+        },
+    }
+
+    resetRunner.AppendPhase(phases.NewPreflightPhase())
+    resetRunner.AppendPhase(phases.NewRemoveETCDMemberPhase())
+    resetRunner.AppendPhase(phases.NewCleanupNodePhase())
+
+    resetRunner.SetDataInitializer(func(cmd *cobra.Command, args []string) (workflow.RunData, error) {
+        return newResetData(cmd, resetOptions, in, out, true)
+    })
+
+    resetRunner.BindToCommand(cmd)
+    return cmd
+}
 ```
 
-### 2.2 kube-proxy
+### resetData 构建流程
 
-kube-proxy 维护节点上的网络规则，实现 Service 的负载均衡：
+```go
+type resetData struct {
+    certificatesDir       string
+    client                clientset.Interface
+    criSocketPath         string
+    forceReset            bool
+    ignorePreflightErrors sets.Set[string]
+    inputReader           io.Reader
+    outputWriter          io.Writer
+    cfg                   *kubeadmapi.InitConfiguration
+    resetCfg              *kubeadmapi.ResetConfiguration
+    dryRun                bool
+    cleanupTmpDir         bool
+}
 
-```bash
-# kube-proxy 核心职责:
-# 1. 监听 API Server 中的 Service 和 Endpoints 变化
-# 2. 维护节点网络规则:
-#    - iptables 模式: 维护 KUBE-SERVICES 链
-#    - ipvs 模式: 维护虚拟服务器和真实服务器映射
-#    - nftables 模式: 维护 nft 规则集 (v1.29+)
-# 3. 实现 Service ClusterIP 负载均衡
-# 4. 实现 NodePort 和 LoadBalancer 流量转发
-# 5. 连接跟踪 (conntrack) 管理
+func newResetData(cmd *cobra.Command, opts *resetOptions, in io.Reader, out io.Writer, allowExperimental bool) (*resetData, error) {
+    resetCfg, err := configutil.LoadOrDefaultResetConfiguration(
+        opts.cfgPath,
+        opts.externalcfg,
+        configutil.LoadOrDefaultConfigurationOptions{
+            AllowExperimental: allowExperimental,
+            SkipCRIDetect:     opts.skipCRIDetect,
+        },
+    )
+    if err != nil {
+        return nil, err
+    }
+
+    var client clientset.Interface
+    if resetCfg.DryRun {
+        dryRun := apiclient.NewDryRun().
+            WithDefaultMarshalFunction().
+            WithWriter(os.Stdout)
+        dryRun.AppendReactor(dryRun.GetKubeadmConfigReactor()).
+            AppendReactor(dryRun.GetKubeletConfigReactor()).
+            AppendReactor(dryRun.GetKubeProxyConfigReactor())
+        client = dryRun.FakeClient()
+    } else {
+        client, err = kubeconfigutil.ClientSetFromFile(opts.kubeconfigPath)
+        if err != nil {
+            klog.Warningf("could not create a Kubernetes API client: %v", err)
+        }
+    }
+
+    var cfg *kubeadmapi.InitConfiguration
+    if client != nil {
+        cfg, err = configutil.FetchInitConfigurationFromCluster(client, nil, "reset", true, true, true)
+        if err != nil {
+            klog.Warningf("could not fetch the kubeadm-config ConfigMap: %v", err)
+        }
+    }
+
+    criSocketPath := detectCRISocket(resetCfg, cfg)
+
+    return &resetData{
+        certificatesDir:       resetCfg.CertificatesDir,
+        client:                client,
+        criSocketPath:         criSocketPath,
+        forceReset:            resetCfg.Force,
+        ignorePreflightErrors: sets.New[string](resetCfg.IgnorePreflightErrors...),
+        inputReader:           in,
+        outputWriter:          out,
+        cfg:                   cfg,
+        resetCfg:              resetCfg,
+        dryRun:                resetCfg.DryRun,
+        cleanupTmpDir:         resetCfg.CleanupTmpDir,
+    }, nil
+}
 ```
 
-### 2.3 CNI 插件
+**关键设计**：
+- 如果无法连接 API Server（集群已不可用），`reset` 仍然可以执行
+- `cfg` 为 nil 时，etcd 移除阶段会跳过，但节点清理阶段仍正常工作
+- DryRun 使用 FakeClient 替代真实 API 调用
 
-CNI（Container Network Interface）负责 Pod 网络配置：
+### Phase 注册与执行框架
 
-```bash
-# CNI 核心职责:
-# 1. Pod 网络命名空间创建和管理
-# 2. veth pair 创建和配置
-# 3. IP 地址分配 (IPAM)
-# 4. 路由配置 (同节点/跨节点通信)
-# 5. 网络策略实现 (NetworkPolicy)
-# 6. DNS 配置
+```go
+// cmd/kubeadm/app/cmd/phases/workflow/runner.go
+type Runner struct {
+    phases           []Phase
+    dataInitializer  DataInitializer
+    Options          RunnerOptions
+}
+
+type Phase struct {
+    Name         string
+    Aliases      []string
+    Short        string
+    Long         string
+    Run          func(RunData) error
+    RunIf        func(RunData) bool
+    InheritFlags []string
+}
+
+func (r *Runner) Run(args []string) error {
+    data, err := r.dataInitializer(args)
+    if err != nil {
+        return err
+    }
+
+    for _, phase := range r.phases {
+        if r.shouldSkip(phase.Name) {
+            klog.V(1).Infof("[skip] Skipping phase %q", phase.Name)
+            continue
+        }
+        if phase.RunIf != nil && !phase.RunIf(data) {
+            continue
+        }
+        if err := phase.Run(data); err != nil {
+            return err
+        }
+    }
+    return nil
+}
 ```
 
----
+### 删除方式对比
 
-## 三、Node 对象结构
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     集群删除方式                                      │
+├──────────────────────┬──────────────────────────────────────────────┤
+│ kubeadm reset        │ 单节点重置：停止 kubelet、删除容器/配置/证书   │
+│ kubectl delete node  │ API 层删除：从 etcd 移除 Node 对象            │
+│ kubeadm reset --force│ 强制重置：跳过确认提示                        │
+│ 手动清理             │ iptables、CNI、/var/lib/kubelet 等             │
+└──────────────────────┴──────────────────────────────────────────────┘
+```
 
-### 3.1 Node 对象完整结构
+## 执行流程
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant kubeadm
+    participant Workflow as Workflow Runner
+    participant Preflight as preflight Phase
+    participant ETCD as remove-etcd Phase
+    participant Cleanup as cleanup-node Phase
+    participant Node as 本机节点
+
+    User->>kubeadm: kubeadm reset --force
+    kubeadm->>kubeadm: newResetData 构建配置
+    kubeadm->>Workflow: resetRunner.Run()
+    Workflow->>Preflight: Phase 1: preflight
+    Preflight->>Preflight: RunRootCheckOnly
+    Preflight-->>Workflow: OK
+    Workflow->>ETCD: Phase 2: remove-etcd-member
+    ETCD->>ETCD: 连接 etcd 集群
+    ETCD->>ETCD: etcdctl member remove <id>
+    ETCD-->>Workflow: OK / 跳过(非控制面)
+    Workflow->>Cleanup: Phase 3: cleanup-node
+    Cleanup->>Node: 停止 kubelet 服务
+    Cleanup->>Node: Unmount /var/lib/kubelet 挂载点
+    Cleanup->>Node: 移除 Kubernetes 管理的容器
+    Cleanup->>Node: CleanDir /etc/kubernetes/pki
+    Cleanup->>Node: CleanDir /etc/kubernetes/manifests
+    Cleanup->>Node: 删除 kubeconfig 文件
+    Cleanup-->>Workflow: OK
+    Workflow-->>kubeadm: 完成
+    kubeadm-->>User: 打印手动清理提示
+```
+
+## 使用场景
+
+1. **工作节点移除**：drain → delete node → kubeadm reset
+2. **控制面节点移除**：remove-etcd-member → drain → delete node → reset
+3. **集群完全销毁**：所有节点按序 reset，最后手动清理网络/存储
+4. **故障恢复**：节点异常后 reset 重新加入集群
+5. **开发环境重置**：快速清理并重新创建测试集群
+
+## 配置示例
 
 ```yaml
-apiVersion: v1
-kind: Node
-metadata:
-  name: node-1
-  labels:
-    kubernetes.io/arch: amd64
-    kubernetes.io/os: linux
-    kubernetes.io/hostname: node-1
-    node-role.kubernetes.io/control-plane: ""
-    topology.kubernetes.io/zone: us-east-1a
-  annotations:
-    node.alpha.kubernetes.io/ttl: "0"
-    volumes.kubernetes.io/controller-managed-attach-detach: "true"
-  uid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-spec:
-  podCIDR: 10.244.0.0/24              # 分配给此节点的 Pod IP 范围
-  podCIDRs:
-  - 10.244.0.0/24
-  providerID: aws:///us-east-1a/i-xxx  # 云厂商实例 ID
-  taints:                              # 污点列表
-  - key: node-role.kubernetes.io/control-plane
-    effect: NoSchedule
-  unschedulable: false                  # 是否禁止调度
-status:
-  conditions: [...]                     # 节点状态 (见下文)
-  addresses:
-  - type: InternalIP
-    address: 192.168.1.10
-  - type: Hostname
-    address: node-1
-  capacity:
-    cpu: "4"
-    memory: 8Gi
-    ephemeral-storage: 100Gi
-    pods: "110"
-  allocatable:
-    cpu: "3800m"
-    memory: 7Gi
-    ephemeral-storage: 90Gi
-    pods: "110"
-  nodeInfo:
-    architecture: amd64
-    containerRuntimeVersion: containerd://1.7.0
-    kernelVersion: 5.15.0-91-generic
-    kubeProxyVersion: v1.28.0
-    kubeletVersion: v1.28.0
-    operatingSystem: linux
-    osImage: Ubuntu 22.04.3 LTS
-  images: [...]                         # 节点上的镜像列表
-  volumesInUse: [...]                   # 正在使用的卷
-  volumesAttached: [...]                # 已挂载的卷
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ResetConfiguration
+certificatesDir: /etc/kubernetes/pki
+cleanupTmpDir: true
+criSocket: unix:///run/containerd/containerd.sock
+dryRun: false
+force: true
+ignorePreflightErrors:
+  - IsPrivilegedUser
+skipPhases: []
+unmountFlags:
+  - MNT_DETACH
+timeouts:
+  etcdTakeover: 2m0s
 ```
 
----
+## 实战示例
 
-## 四、节点角色管理
-
-### 4.1 节点角色标签
+### 生产环境完整节点移除
 
 ```bash
-# 查看控制面节点
-kubectl get nodes -l node-role.kubernetes.io/control-plane
+# 步骤 1: 驱逐节点上的 Pod
+kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
+# node/worker-1 cordoned
+# evicting pod default/web-app-5d8c7b6f9c-abcde
+# evicting pod default/web-app-5d8c7b6f9c-fghij
+# pod/web-app-5d8c7b6f9c-abcde evicted
+# pod/web-app-5d8c7b6f9c-fghij evicted
 
-# 查看工作节点
-kubectl get nodes -l '!node-role.kubernetes.io/control-plane'
+# 步骤 2: 从 API 层删除 Node 对象
+kubectl delete node worker-1
+# node "worker-1" deleted
 
-# 查看旧版 master 标签
-kubectl get nodes -l node-role.kubernetes.io/master
+# 步骤 3: 在目标节点执行 reset
+kubeadm reset --force
+# [reset] Reading configuration from the cluster...
+# [reset] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+# [preflight] Running pre-flight checks
+# [reset] Stopping the kubelet service
+# [reset] Unmounting mounted directories in "/var/lib/kubelet"
+# [reset] Deleting Kubernetes-managed containers
+# [reset] Cleaning up /etc/kubernetes/pki
+# [reset] Cleaning up /etc/kubernetes/manifests
+# [reset] Cleaning up /var/lib/kubelet
+# [reset] Cleaning up /var/lib/etcd
+# [reset] Removing /etc/kubernetes/admin.conf
+# [reset] Removing /etc/kubernetes/kubelet.conf
+# [reset] Removing /etc/kubernetes/bootstrap-kubelet.conf
+# [reset] Removing /etc/kubernetes/controller-manager.conf
+# [reset] Removing /etc/kubernetes/scheduler.conf
 
-# 添加角色标签
-kubectl label node <node> node-role.kubernetes.io/worker=worker
-
-# 添加自定义标签
-kubectl label node <node> environment=production
-kubectl label node <node> tier=frontend
+# 步骤 4: 手动清理残留
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+ipvsadm -C
+rm -rf /etc/cni/net.d
+rm -rf $HOME/.kube/config
 ```
 
-### 4.2 污点管理
+### 仅移除 etcd 成员
 
 ```bash
-# 查看污点
-kubectl describe node <node> | grep Taints
-kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.taints}{"\n"}{end}'
+# 查看当前 etcd 成员
+ETCDCTL_API=3 etcdctl member list \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  -w table
 
-# 添加污点
-kubectl taint node <node> key=value:NoSchedule
-kubectl taint node <node> key=value:NoExecute
-kubectl taint node <node> key=value:PreferNoSchedule
+# +------------------+---------+----------+----------------------------+
+# |        ID        | STATUS  |   NAME   |        PEER ADDRS          |
+# +------------------+---------+----------+----------------------------+
+# | 7c4c8d5d4f000001 | started | master-1 | https://192.168.1.10:2380  |
+# | 7c4c8d5d4f000002 | started | master-2 | https://192.168.1.11:2380  |
+# | 7c4c8d5d4f000003 | started | master-3 | https://192.168.1.12:2380  |
+# +------------------+---------+----------+----------------------------+
 
-# 删除污点
-kubectl taint node <node> key:NoSchedule-
-
-# 常见污点:
-# node-role.kubernetes.io/control-plane:NoSchedule    # 控制面节点
-# node.kubernetes.io/not-ready:NoExecute              # 节点不就绪
-# node.kubernetes.io/unreachable:NoExecute            # 节点不可达
-# node.kubernetes.io/network-unavailable:NoSchedule   # 网络不可用
+# 移除指定成员
+ETCDCTL_API=3 etcdctl member remove 7c4c8d5d4f000003 \
+  --endpoints=https://192.168.1.10:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
+# Member 7c4c8d5d4f000003 removed from cluster xxxxxxx
 ```
 
----
-
-## 五、节点资源容量
-
-### 5.1 Capacity 与 Allocatable
+### DryRun 模式
 
 ```bash
-# Capacity: 节点总资源
-# Allocatable: 可分配给 Pod 的资源 = Capacity - Reserved
-
-# 查看节点资源
-kubectl get node <node> -o jsonpath='{.status.capacity}'
-kubectl get node <node> -o jsonpath='{.status.allocatable}'
-
-# 资源预留公式:
-# Allocatable = Capacity - KubeReserved - SystemReserved - EvictionHard
+kubeadm reset --dry-run
+# [dryrun] Would stop the kubelet service
+# [dryrun] Would unmount mounted directories in "/var/lib/kubelet"
+# [dryrun] Would remove Kubernetes-managed containers
+# [dryrun] Would delete contents of directories: [/etc/kubernetes/pki /etc/kubernetes/manifests]
+# [dryrun] Would delete files: [/etc/kubernetes/admin.conf /etc/kubernetes/kubelet.conf ...]
 ```
 
-### 5.2 资源预留配置
+## 常见错误
 
-```bash
-# kubelet 启动参数:
---kube-reserved=cpu=500m,memory=1Gi,ephemeral-storage=2Gi
---system-reserved=cpu=500m,memory=1Gi,ephemeral-storage=2Gi
---eviction-hard=memory.available<500Mi,nodefs.available<10%
---enforce-node-allocatable=pods,kube-reserved,system-reserved
-```
-
----
-
-## 六、节点常用命令速查
-
-```bash
-# 查看所有节点
-kubectl get nodes -o wide
-
-# 查看节点详情
-kubectl describe node <node>
-
-# 查看节点资源使用
-kubectl top nodes
-
-# 查看节点事件
-kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name=<node>
-
-# 节点维护
-kubectl cordon <node>       # 标记不可调度
-kubectl drain <node>        # 驱逐所有 Pod
-kubectl uncordon <node>     # 恢复调度
-
-# 节点标签
-kubectl label node <node> key=value
-kubectl label node <node> key-   # 删除标签
-
-# 节点污点
-kubectl taint node <node> key=value:NoSchedule
-kubectl taint node <node> key:NoSchedule-   # 删除污点
-
-# 节点调试
-kubectl debug node/<node> -it --image=busybox
-```
-
----
-
-## 七、常见问题
-
-| 问题 | 原因 | 排查命令 | 解决方案 |
-|------|------|---------|---------|
-| 节点 NotReady | kubelet 未启动/网络问题 | `systemctl status kubelet` | 启动 kubelet，检查网络 |
-| 节点 NetworkUnavailable | CNI 配置错误 | `ls /etc/cni/net.d/` | 安装 CNI 插件 |
-| 节点磁盘不足 | 镜像/日志占用 | `df -h; du -sh /var/lib/*` | 清理磁盘或扩容 |
-| 节点内存不足 | 工作负载过多 | `kubectl top nodes` | 扩容或减少 Pod |
-| 节点无法注册 | Token 过期/网络不通 | `kubeadm token list` | 创建新 Token |
-| Pod 无法调度 | 节点资源不足/污点 | `kubectl describe pod` | 扩容或添加容忍 |
-
----
+| 错误 | 现象 | 原因 | 解决方案 |
+|------|------|------|----------|
+| etcd 成员移除失败 | `[reset] error removing etcd member` | etcd 集群不可达或仲裁不足 | 手动 `etcdctl member remove` |
+| Unmount 卡住 | reset 挂起不完成 | 某些挂载点被进程占用 | `umount -l` 或 `fuser -m` 查找占用进程 |
+| 容器删除失败 | `error removing containers` | 容器运行时无响应 | 手动 `crictl rm -a` |
+| 清理后 kubelet 仍运行 | 节点状态仍显示 NotReady | systemd 重新拉起 kubelet | `systemctl disable kubelet && systemctl stop kubelet` |
+| CNI 残留 | 重新部署时网络异常 | `/etc/cni/net.d` 未清理 | 手动 `rm -rf /etc/cni/net.d` |
+| iptables 残留 | Service 访问异常 | reset 不清理 iptables | `iptables -F && iptables -t nat -F` |
+| 无法获取集群配置 | `[reset] could not fetch kubeadm-config` | API Server 不可达 | 不影响 reset，仅跳过 etcd 移除 |
 
 ## 相关函数
 
-| 函数 | 源码位置 | 说明 |
-|------|---------|------|
-| `NewMainKubelet` | `pkg/kubelet/kubelet.go` | kubelet 初始化 |
-| `syncNodeStatus` | `pkg/kubelet/kubelet.go` | 节点状态同步 |
-| `NodeReadyCondition` | `pkg/kubelet/nodestatus/setters.go` | Ready 状态判定 |
-| `syncPod` | `pkg/kubelet/kubelet.go` | Pod 同步 |
-| `registerWithAPIServer` | `pkg/kubelet/kubelet.go` | 节点注册 |
-| `TryUpdateNodeStatus` | `pkg/kubelet/nodestatus/` | 状态更新 |
+- [`runPreflight`](02-reset.md) — 预检阶段：root 权限检查和用户确认
+- [`runRemoveEtcd`](05-etcd-cleanup.md) — etcd 成员移除阶段
+- [`runCleanupNode`](04-cleanup.md) — 节点清理阶段
+- [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除本地 stacked etcd 成员
+- [`CleanDir`](04-cleanup.md) — 清理目录内容但保留目录本身
+- [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认操作
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

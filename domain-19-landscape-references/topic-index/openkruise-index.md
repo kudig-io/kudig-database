@@ -32,57 +32,58 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - helm-basics
+created: "2026-05-23"
 ---
 
-# OpenKruise 全局索引
+# [[OpenKruise|OpenKruise]] 全局索引
 
 > 全局索引：按关键字 **OpenKruise** 聚合项目内所有相关内容。
 
 ## 架构基础
 
-- [[domain-19-landscape-references/incubating/openkruise/openkruise|OpenKruise CNCF Landscape]] ← 核心文档
+- OpenKruise CNCF Landscape ← 核心文档
 
 ## 高级工作负载
 
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#clone|CloneSet 高级部署]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#advanced-statefulset|Advanced StatefulSet]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#advanced-daemonset|Advanced DaemonSet]]
+- CloneSet 高级部署
+- StatefulSet|statefulset]]|Advanced StatefulSet]]
+- daemonset|Advanced DaemonSet]]
 
 ## 核心特性
 
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#in-place-update|原地升级 (In-place Update)]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#sidecar-management|Sidecar 管理]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#image-preheating|镜像预热]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#container-restart|容器重启]]
-- [[domain-19-landscape-references/incubating/openkruise/openkruise#pod-unavailable-budget|PodUnavailableBudget]]
+- 原地升级 (In-place Update)
+- Sidecar 管理
+- 镜像预热
+- 容器重启
+- PodUnavailableBudget
 
 ## 结构化故障排查 - 工作负载
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/|CloneSet 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|Deployment 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|StatefulSet 故障排查]]
+- troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/|CloneSet 故障排查]]
+- troubleshooting|[[entities/kubernetes.md|Kubernetes]] 部署策略最佳实践|Deployment]] 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|[[StatefulSet 故障排查|StatefulSet 故障排查]]]]
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta|OpenKruise FTA 故障树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta|[[OpenKruise 工作负载异常故障树分析|OpenKruise FTA]] 故障树]]
 
 ## 云厂商集成
 
-- [[domain-12-cloud-providers/04-alicloud-ack/|阿里云 ACK 增强工作负载]]
-- [[domain-12-cloud-providers/06-huawei-cce/|华为云 CCE 工作负载]]
+- 阿里云 ACK 增强工作负载
+- 华为云 CCE 工作负载
 
 ## 生产运维
 
-- [[domain-11-production-operations/19-cluster-performance-tuning|工作负载性能调优]]
-- [[domain-11-production-operations/99-kubernetes-multi-tenant-architecture|Kubernetes 多租户与资源隔离]]
+- 工作负载性能调优
+- Kubernetes 多租户与资源隔离
 
 ## 学习培训
 
-- [[domain-11-production-operations/topic-learn/|工作负载管理学习路径]]
-- [[domain-11-production-operations/topic-learn/inner-training/week-2/|Day 16: 工作负载控制器]]
+- 工作负载管理学习路径
+- Day 16: 工作负载控制器
 
 ## CNCF 生态
 
-- [[domain-19-landscape-references/graduated/kubernetes/kubernetes|Kubernetes]]
-- [[domain-19-landscape-references/graduated/helm/helm|Helm]]
-- [[domain-19-landscape-references/graduated/argo/argo|Argo]]
+- Kubernetes
+- Helm
+- Argo

@@ -267,7 +267,7 @@ output:
   # 概率矩阵（必须）
   probability_matrix:
     events: [string]            # 事件 ID 列表
-    matrix: [[float]]           # 概率矩阵（二维数组）
+    matrix: float           # 概率矩阵（二维数组）
     min_cut_sets:               # 最小割集
       - cut_set: [string]       # 割集事件列表
         probability: float      # 该割集概率

@@ -50,11 +50,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
 # 分布式数据库企业级实践深度指南
 
-> **适用版本**: TiDB v9.0 / CockroachDB v25.1 / Vitess v21.0  
+> **适用版本**: TiDB v9.0 / CockroachDB v25.1 / [[Vitess|Vitess]] v21.0  
 > **最后更新**: 2026-04-26  
 > **难度**: 高级 → 专家
 
@@ -72,7 +73,7 @@ cross_refs:
 
 分布式数据库的发展经历了三个主要阶段。第一代以 Google Spanner 和 Megastore 为代表，提出了分布式事务、TrueTime API 等基础概念。第二代以 TiDB、CockroachDB 为代表，将分布式数据库技术普及到开源社区，降低了使用门槛。第三代正在向 HTAP（混合事务/分析处理）方向演进，TiDB 通过 TiFlash 列存引擎实现了行存和列存的透明融合，使得同一套数据库系统既能处理高并发的 OLTP 请求，又能执行复杂的 OLAP 分析查询。
 
-在云原生时代，分布式数据库正在与 Kubernetes 深度集成。TiDB Operator 和 CockroachDB Operator 使得在 K8s 上管理分布式数据库集群成为可能。然而，分布式数据库对网络延迟和存储性能的敏感性意味着在 K8s 上部署时需要特别注意网络配置（HostNetwork、NetworkPolicy）和存储选型（Local PV、高性能 StorageClass）。
+在云原生时代，分布式数据库正在与 [[Kubernetes|Kubernetes]] 深度集成。TiDB Operator 和 CockroachDB Operator 使得在 K8s 上管理分布式数据库集群成为可能。然而，分布式数据库对网络延迟和存储性能的敏感性意味着在 K8s 上部署时需要特别注意网络配置（HostNetwork、[[NetworkPolicy|NetworkPolicy]]）和存储选型（Local PV、高性能 StorageClass）。
 
 Vitess 作为一个独特的存在，它并不是一个完整的分布式数据库，而是 MySQL 的水平扩展中间件。Vitess 通过 VTGate 提供统一的查询入口，通过 VTTablet 管理每个 MySQL 实例，通过 VReplication 实现数据迁移和重新分片。Vitess 已经被 YouTube、Slack、Square 等大规模互联网公司采用，是 MySQL 水平扩展领域最成熟的开源方案。
 
@@ -703,7 +704,7 @@ case "$ACTION" in
         if pd-ctl -u http://pd-0.dc1:2379 store 2>/dev/null; then
             echo "WARNING: Primary DC PD is still reachable!"
             read -p "Force failover anyway? (yes/no): " confirm
-            [[ "$confirm" != "yes" ]] && exit 0
+            "$confirm" != "yes" && exit 0
         fi
 
         echo "Step 2: Promote DR DC"
@@ -779,7 +780,7 @@ restore() {
     local backup_path="${1:?Backup path required}"
     echo "!!! PRODUCTION RESTORE from $backup_path !!!"
     read -p "Confirm? (yes/no): " confirm
-    [[ "$confirm" != "yes" ]] && exit 0
+    "$confirm" != "yes" && exit 0
 
     tiup br restore full \
         --pd "${PD_ENDPOINT}" \
@@ -974,21 +975,21 @@ CREATE TABLE orders (
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|01-mysql-enterprise-database]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|02-postgresql-enterprise-database]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|04-database-middleware-kubernetes]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|05-mongodb-enterprise-database]]
+- 01-mysql-enterprise-database
+- 02-postgresql-enterprise-database
+- 04-database-middleware-kubernetes
+- 05-mongodb-enterprise-database

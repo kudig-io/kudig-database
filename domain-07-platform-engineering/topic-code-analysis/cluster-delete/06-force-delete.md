@@ -1,5 +1,5 @@
 ---
-title: 强制删除与异常场景处理
+title: 强制删除与异常场景处理 (topic-code-analysis)
 description: reset 的容错机制（best-effort 策略）以及手动处理方案，涵盖 --force 标志、错误处理、跳过阶段、异常场景与处理方案。
 category: general
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 强制删除与异常场景处理

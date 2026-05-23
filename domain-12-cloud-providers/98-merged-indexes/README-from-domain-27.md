@@ -46,6 +46,7 @@ prerequisites:
 - backup-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---

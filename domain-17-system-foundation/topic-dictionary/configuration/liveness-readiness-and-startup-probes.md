@@ -26,13 +26,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Liveness, Readiness, and Startup Probes
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
 
 ## 核心概念/原理
 
@@ -46,14 +47,14 @@ prerequisites:
 
 - **作用**：判断容器是否处于存活状态，决定是否需要重启容器。
 - **执行时机**：在容器整个生命周期中周期性执行。
-- **适用场景**：用于捕获应用死锁、无限循环或无法继续处理请求但进程仍在运行的情况。若探针多次失败，kubelet 将重启该容器。
+- **适用场景**：用于捕获应用死锁、无限循环或无法继续处理请求但进程仍在运行的情况。若探针多次失败，[[kubelet|kubelet]] 将重启该容器。
 - **注意事项**：Liveness 探针不会等待 Readiness 探针成功；如果需要延迟执行，可设置 `initialDelaySeconds` 或使用 Startup Probe。
 
 ### Readiness Probe（就绪探针）
 
 - **作用**：判断容器是否已准备好接收流量。
 - **执行时机**：在容器整个生命周期中周期性执行。
-- **适用场景**：用于等待应用完成耗时初始化任务（如建立网络连接、加载配置文件、预热缓存），或在应用暂时过载、故障恢复时暂时将 Pod 从 Service 端点中移除。若探针失败，Kubernetes 会将该 Pod 从所有匹配的 Service 端点中摘除。
+- **适用场景**：用于等待应用完成耗时初始化任务（如建立网络连接、加载配置文件、预热缓存），或在应用暂时过载、故障恢复时暂时将 Pod 从 [[Service|Service]] 端点中移除。若探针失败，Kubernetes 会将该 Pod 从所有匹配的 Service 端点中摘除。
 
 ## 关键机制或特性
 
@@ -61,7 +62,7 @@ prerequisites:
   - `exec`：在容器内执行命令，根据退出码判断。
   - `httpGet`：发送 HTTP GET 请求，根据响应状态码判断（2xx-3xx 为成功）。
   - `tcpSocket`：尝试连接指定 TCP 端口，连接成功即为健康。
-  - `grpc`：使用 gRPC 健康检查协议进行探测（需应用支持）。
+  - `[[gRPC|grpc]]`：使用 gRPC 健康检查协议进行探测（需应用支持）。
 - **配置参数**：
   - `initialDelaySeconds`：容器启动后首次探测前的等待时间。
   - `periodSeconds`：探测周期，默认为 10 秒。
@@ -260,7 +261,7 @@ kubectl get pods --field-selector=status.phase=Running -o json | jq '.items[] | 
 
 ## 交叉引用
 
-- [ConfigMaps](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
+- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
 - [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — 资源不足可导致探针超时
 - [Secrets](./secrets.md) — 需要认证的探针端点可使用 Secret 中的凭据
 

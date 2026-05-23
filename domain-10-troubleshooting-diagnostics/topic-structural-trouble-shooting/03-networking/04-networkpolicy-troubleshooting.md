@@ -1,5 +1,5 @@
 ---
-title: NetworkPolicy 深度排查与零信任安全治理指南
+title: NetworkPolicy 深度排查与零信任安全治理指南 [topic-structural-trouble-shooting]
 description: 'title: NetworkPolicy 深度排查与零信任安全治理指南'
 category: structural-troubleshooting
 tags:
@@ -46,18 +46,19 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-title: NetworkPolicy 深度排查与零信任安全治理指南
+title: [[NetworkPolicy|NetworkPolicy]] 深度排查与零信任安全治理指南
 description: '# NetworkPolicy 深度排查与零信任安全治理指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - prometheus
 - grafana
 - cilium
@@ -1662,8 +1663,8 @@ echo -e "\n=== Check Complete ==="
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

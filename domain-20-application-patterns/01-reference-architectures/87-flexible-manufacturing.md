@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 柔性制造架构设计
@@ -40,7 +41,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- daemonset
+- [[DaemonSet|daemonset]]
 - gateway
 - operator
 - gpu
@@ -54,7 +55,7 @@ audience:
 - 智能制造负责人
 estimated_read_time: 5min
 intent_queries:
-- 柔性制造 Kubernetes C2M定制
+- 柔性制造 [[Kubernetes|Kubernetes]] C2M定制
 - 智能排产 APS Kubernetes 部署
 - 数字主线 Digital Thread 工厂
 - AI质检 工业视觉 Kubernetes
@@ -79,7 +80,7 @@ related_topics:
 - 59-industrial-internet-platform
 - 93-digital-twin-factory
 - 51-smart-manufacturing-mes
-- [[domain-20-application-patterns/63-industrial-visual-inspection.md|63-industrial-visual-inspection]]
+- 63-industrial-visual-inspection
 authors:
 - name: KUDIG Team
   role: contributor
@@ -813,7 +814,7 @@ ERP、MES、PLM、WMS 等系统各自独立，数据不互通。
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -828,11 +829,11 @@ ERP、MES、PLM、WMS 等系统各自独立，数据不互通。
 
 ## See Also
 
-- [[domain-20-application-patterns/85-hydrogen-energy.md|85-hydrogen-energy]]
-- [[domain-20-application-patterns/86-solid-state-battery.md|86-solid-state-battery]]
-- [[domain-20-application-patterns/88-nanomaterials.md|88-nanomaterials]]
-- [[domain-20-application-patterns/89-crispr-gene-editing.md|89-crispr-gene-editing]]
+- 85-hydrogen-energy
+- 86-solid-state-battery
+- 88-nanomaterials
+- 89-crispr-gene-editing
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

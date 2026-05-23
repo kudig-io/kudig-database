@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -36,7 +37,7 @@ title: Day 17: 节点池基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 节点池创建
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池创建
   - 新节点加入集群
   - 节点池扩缩容
   - 工作负载调度到节点池

@@ -1,5 +1,5 @@
 ---
-title: kubeadm 不安装的组件 (What kubeadm Does Not Install)
+title: kubeadm 不安装的组件 (What kubeadm Does Not Install) [cluster-create]
 description: 'description: ''// 以下组件需要用户自行安装和管理:'''
 category: general
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: kubeadm 不安装的组件 (What kubeadm Does Not Install)

@@ -1,5 +1,5 @@
 ---
-title: Spiderpool
+title: Spiderpool (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Spiderpool
@@ -67,7 +68,7 @@ Spiderpool 是一个 Kubernetes 的 Underlay 网络 IPAM (IP Address Management)
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/spiderpool/spiderpool.md|spiderpool]]
+- spiderpool
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

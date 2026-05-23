@@ -1,5 +1,5 @@
 ---
-title: 第二十一章：自进化的智能运维系统
+title: 第二十一章：自进化的智能运维系统 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第二十一章：自进化的智能运维系统'
 category: fta
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 fta_id: FTA-21_SELF_EVOLVING_OPS_SYSTEM-001
 component: 21 Self Evolving Ops System
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第二十一章：自进化的智能运维系统
@@ -76,8 +77,8 @@ k8s_versions:
 
 > **所属部分**: 第六部分 - 未来展望  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第二十章：FTA + 大语言模型的新机遇](./20-fta-llm-opportunities.md)  
-> **下一章**: [第二十二章：行业标准化建议](./22-industry-standardization.md)
+> **上一章**: 第二十章：FTA + 大语言模型的新机遇](./20-fta-llm-opportunities.md)  
+> **下一章**: 第二十二章：行业标准化建议](./22-industry-standardization.md)
 
 ---
 
@@ -181,7 +182,7 @@ k8s_versions:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]

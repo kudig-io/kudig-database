@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - pod-lifecycle
+created: "2026-05-23"
 ---
 
 # Kubernetes Workloads Domain Guide

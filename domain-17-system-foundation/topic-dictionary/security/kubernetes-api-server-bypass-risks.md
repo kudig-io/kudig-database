@@ -29,9 +29,10 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes API Server 绕过风险
+# [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 绕过风险
 
 ## 概述
 
@@ -39,7 +40,7 @@ Kubernetes API server 是外部用户和服务与集群交互的主要入口。�
 
 ## 核心概念/原理
 
-攻击者如果能够直接访问某些组件或配置，就可以在不经过 API server 的情况下创建、修改或删除集群中的资源，从而绕过 API server 的审计和准入控制。主要风险点包括：Static Pods、Kubelet API、etcd API 和容器运行时套接字。
+攻击者如果能够直接访问某些组件或配置，就可以在不经过 API server 的情况下创建、修改或删除集群中的资源，从而绕过 API server 的审计和准入控制。主要风险点包括：Static [[Pods|Pods]]、[[kubelet|Kubelet]] API、[[etcd|etcd]] API 和容器运行时套接字。
 
 ## 关键机制或特性
 

@@ -17,6 +17,7 @@ audience:
 - AI Agent
 - SRE
 - 运维工程师
+created: "2026-05-23"
 ---
 
 # 命令输出诊断语料 — P2 优先级
@@ -267,7 +268,7 @@ k8s_versions:
 
 ## Domain: CONFIG (15 条)
 
-### IODIAG-CONFIG-0001 — ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
+### IODIAG-CONFIG-0001 — ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshootingompt 模板|Troubleshooting]]
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0001
@@ -658,7 +659,7 @@ k8s_versions:
 
 ## Domain: CP (13 条)
 
-### IODIAG-CP-0001 — etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+### IODIAG-CP-0001 — [[etcd|etcd]]cd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation|etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation]]
 
 ```yaml
 io_pair_id: IODIAG-CP-0001

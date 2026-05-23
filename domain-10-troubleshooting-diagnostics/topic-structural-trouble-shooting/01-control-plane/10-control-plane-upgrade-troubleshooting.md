@@ -1,5 +1,5 @@
 ---
-title: 控制平面升级迁移问题处理指南
+title: 控制平面升级迁移问题处理指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面升级迁移问题处理指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 控制平面升级迁移问题处理指南
@@ -49,12 +50,12 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - helm
 last_updated: 2026-05
 difficulty: advanced
@@ -394,7 +395,7 @@ upgrade_to_version() {
 
 # 3. 执行逐版本升级
 for version in "${VERSION_PATH[@]}"; do
-  if [[ "$version" > "$CURRENT_VERSION" ]]; then
+  if "$version" > "$CURRENT_VERSION"; then
     upgrade_to_version $version
   fi
 done
@@ -444,7 +445,7 @@ migrate_deprecated_resources() {
 # 询问是否执行迁移
 read -p "是否执行废弃资源迁移？(y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
   migrate_deprecated_resources
 fi
 ```
@@ -659,7 +660,7 @@ EOF
 # 执行续期
 read -p "是否执行证书续期？这将重启控制平面组件 (y/N): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if $REPLY =~ ^[Yy]$; then
   renew_certificates
 fi
 ```
@@ -959,8 +960,8 @@ echo "  4. 恢复工作节点到原版本"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

@@ -1,5 +1,5 @@
 ---
-title: PV/PVC 存储深度排查与持久化治理指南
+title: PV/PVC 存储深度排查与持久化治理指南 [topic-structural-trouble-shooting]
 description: 'title: PV/PVC 存储深度排查与持久化治理指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: PV/PVC 存储深度排查与持久化治理指南
@@ -51,9 +52,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - docker
 - opa
 - ceph
@@ -976,7 +977,7 @@ spec:
                 node=$(kubectl get volumeattachment $va -o jsonpath='{.spec.nodeName}')
                 node_status=$(kubectl get node $node -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}' 2>/dev/null || echo "NotFound")
                 
-                if [[ "$node_status" != "True" ]]; then
+                if "$node_status" != "True"; then
                   echo "Deleting stale VolumeAttachment: $va (node: $node, status: $node_status)"
                   kubectl delete volumeattachment $va --timeout=30s || true
                 fi
@@ -1236,10 +1237,10 @@ spec:
                 capacity=$(kubectl get pvc -n $ns $pvc -o jsonpath='{.status.capacity.storage}' | \
                            numfmt --from=iec 2>/dev/null || echo "0")
                 
-                if [[ $capacity -gt 0 ]]; then
+                if $capacity -gt 0; then
                   usage=$((100 * used / capacity))
                   
-                  if [[ $usage -gt 80 ]]; then
+                  if $usage -gt 80; then
                     echo "[$(date)] PVC $ns/$pvc usage: ${usage}%, expanding..."
                     
                     # 扩容 20%
@@ -1381,8 +1382,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[log.md|log]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]

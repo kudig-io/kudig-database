@@ -21,13 +21,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # EndpointSlices
 
 ## 概述
 
-EndpointSlice 是 Kubernetes 自 v1.21 起稳定的 API，用于跟踪 Service 的后端网络端点（通常是 Pod 的 IP 地址）。它是旧版 Endpoints API 的演进，能够支撑大规模 Service（数千个后端 Pod），并高效地更新后端列表，是 kube-proxy 进行内部流量路由的权威数据来源。
+EndpointSlice 是 [[Kubernetes|Kubernetes]] 自 v1.21 起稳定的 API，用于跟踪 [[Service|Service]] 的后端网络端点（通常是 Pod 的 IP 地址）。它是旧版 Endpoints API 的演进，能够支撑大规模 Service（数千个后端 Pod），并高效地更新后端列表，是 kube-proxy 进行内部流量路由的权威数据来源。
 
 ## 核心概念/原理
 
@@ -161,7 +162,7 @@ endpoints:
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
 | Service 无后端 | EndpointSlice 为空或不存在 | `kubectl get endpointslices -l kubernetes.io/service-name=<svc>` |
-| 后端 Pod 存在但不在 EndpointSlice 中 | Pod 的 readinessProbe 失败或标签不匹配 | `kubectl get pods -l <selector> -o wide`；检查 Pod Ready 状态 |
+| 后端 Pod 存在但不在 EndpointSlice 中 | Pod 的 readinessProbe 失败或标签不匹配 | `kubectl get [[Pods|pods]] -l <selector> -o wide`；检查 Pod Ready 状态 |
 | 手动 EndpointSlice 被覆盖 | `managed-by` 标签与系统控制器冲突 | 使用唯一的 `managed-by` 值；确认 Service 无 selector |
 | 端点出现重复 | 异步更新导致同一 Pod 出现在多个 Slice 中 | 正常现象，消费端需聚合去重 |
 | 外部端点创建失败 | 地址使用了 loopback 或 link-local IP | 使用有效的可路由 IP 地址 |

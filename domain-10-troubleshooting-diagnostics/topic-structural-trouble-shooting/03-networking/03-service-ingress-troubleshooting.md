@@ -1,5 +1,5 @@
 ---
-title: Service 与 Ingress 故障排查指南
+title: Service 与 Ingress 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Service 与 Ingress 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,9 +42,10 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
-title: Service 与 Ingress 故障排查指南
+title: [[Service|Service]] 与 [[Ingress|Ingress]] 故障排查指南
 description: '# Service 与 Ingress 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -53,7 +54,7 @@ tags:
 - decision-tree
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - istio
 - hpa
 - daemonset
@@ -1775,8 +1776,8 @@ EOF
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

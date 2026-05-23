@@ -32,6 +32,7 @@ prerequisites:
 - cloud-provider-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kubectl 场景速查卡
@@ -157,7 +158,7 @@ kubectl run test --image=curlimages/curl --restart=Never -it -- sh  # 调试网�
 
 ## 3. 网络故障场景
 
-### Service 无 Endpoints / 503
+### [[Service|Service]] 无 Endpoints / 503
 
 ```bash
 # 诊断命令
@@ -194,7 +195,7 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20  # 查看日志
 kubectl get networkpolicy -n <namespace>           # 检查是否有拒绝策略
 ```
 
-### Ingress 404/502/503
+### [[Ingress|Ingress]] 404/502/503
 
 ```bash
 # 诊断命令

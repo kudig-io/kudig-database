@@ -1,5 +1,5 @@
 ---
-title: 症状快速映射层 (Symptom-SOP-RootCause Mapping)
+title: 症状快速映射层 (Symptom-SOP-RootCause Mapping) [topic-structural-trouble-shooting]
 description: 'description: ''**适用场景**: AI Agent + 人工运维快速定位排查路径'''
 category: structural-troubleshooting
 tags:
@@ -49,6 +49,7 @@ prerequisites:
 - mysql-basics
 - backup-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 症状快速映射层 (Symptom-SOP-RootCause Mapping)
@@ -58,10 +59,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
 - istio
 - envoy
@@ -765,7 +766,7 @@ symptom_mappings:
       - path: "domain-01-cluster-fundamentals/02-etcd-troubleshooting.md"
         type: "domain"
         relevance: 0.95
-      - path: "domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]].md"
+      - path: "[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance|10-etcd-maintenance]].md"
         type: "domain"
         relevance: 0.90
 
@@ -2059,8 +2060,8 @@ compliance:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 
 ## See Also
 

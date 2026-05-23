@@ -51,6 +51,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
 # Redis 企业级缓存运维深度实践
@@ -81,7 +82,7 @@ Redis 提供了丰富的数据结构，每种结构都有其特定的应用场�
 
 **Set** 是无序的字符串集合，底层使用 intset（整数集合，当所有元素都是整数时）或 hashtable 实现。Set 适合实现标签系统（SADD/SINTER）、共同好友（SINTER）、抽奖系统（SRANDMEMBER/SPOP）和去重（SADD 返回是否已存在）。
 
-**Sorted Set**（ZSET）是 Redis 最强大的数据结构之一，它在 Set 的基础上为每个元素关联一个分数（score），并按照分数排序。底层使用 listpack（元素较少时）或 skiplist + hashtable（元素较多时）实现。Sorted Set 的典型应用场景包括排行榜（ZINCRBY + ZREVRANGE）、延迟队列（score 存储执行时间戳，ZRANGEBYSCORE 取出到期的任务）、带权重的标签系统和滑动窗口限流。
+**Sorted Set**（ZSET）是 Redis 最强大的数据结构之一，它在 Set 的基础上为每个元素关联一个分数（[[Score|score]]），并按照分数排序。底层使用 listpack（元素较少时）或 skiplist + hashtable（元素较多时）实现。Sorted Set 的典型应用场景包括排行榜（ZINCRBY + ZREVRANGE）、延迟队列（score 存储执行时间戳，ZRANGEBYSCORE 取出到期的任务）、带权重的标签系统和滑动窗口限流。
 
 **Bitmap**、**HyperLogLog** 和 **Geo** 是 Redis 的扩展数据结构。Bitmap 适合实现用户签到（每天一个 bit）、在线状态和布隆过滤器；HyperLogLog 适合基数统计（UV 计数），标准误差为 0.81%，每个键仅占用 12KB 内存；Geo 适合存储地理位置信息并计算距离和范围查询。
 
@@ -546,7 +547,7 @@ add_shard() {
     echo "Adding new shard: $new_master"
     redis-cli --cluster add-node "$new_master" "$existing" -a "$PASSWORD"
 
-    if [[ -n "$new_slave" ]]; then
+    if -n "$new_slave"; then
         local master_id=$(redis-cli -h ${new_master%:*} -p ${new_master#*:} -a "$PASSWORD" cluster myid)
         redis-cli --cluster add-node "$new_slave" "$existing" \
             --cluster-slave --cluster-master-id "$master_id" -a "$PASSWORD"
@@ -632,7 +633,7 @@ rdb_backup() {
 
     while true; do
         local status=$(redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" -a "$REDIS_PASSWORD" info persistence | grep rdb_bgsave_in_progress | tail -1 | cut -d: -f2 | tr -d '[:space:]')
-        if [[ "$status" == "0" ]]; then
+        if "$status" == "0"; then
             break
         fi
         echo "Waiting for bgsave to complete..."
@@ -670,13 +671,13 @@ restore() {
     local backup_file="${1:?Backup file required}"
     echo "!!! RESTORING Redis from $backup_file !!!"
     read -p "Confirm? (yes/no): " confirm
-    [[ "$confirm" != "yes" ]] && exit 0
+    "$confirm" != "yes" && exit 0
 
     systemctl stop redis
 
     cp /var/lib/redis/dump.rdb "/var/lib/redis/dump.rdb.bak_${DATE}"
 
-    if [[ "$backup_file" == *.gz ]]; then
+    if "$backup_file" == *.gz; then
         gunzip -c "$backup_file" > /var/lib/redis/dump.rdb
     else
         cp "$backup_file" /var/lib/redis/dump.rdb
@@ -869,7 +870,7 @@ cmd_analysis() {
     local hits=$($REDIS_CLI info stats | grep keyspace_hits | cut -d: -f2 | tr -d '[:space:]')
     local misses=$($REDIS_CLI info stats | grep keyspace_misses | cut -d: -f2 | tr -d '[:space:]')
     local total=$((hits + misses))
-    if [[ $total -gt 0 ]]; then
+    if $total -gt 0; then
         echo "Hits: $hits | Misses: $misses | Hit Rate: $(echo "scale=4; $hits / $total * 100" | bc)%"
     fi
 }
@@ -955,21 +956,21 @@ Cache-Aside (推荐):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
-- [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- domain-28-enterprise-database-middleware KUDIG Database — Global MOC
+- [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise [[Database & Middleware|Database & Middleware]] Op...]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|04-database-middleware-kubernetes]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|05-mongodb-enterprise-database]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|07-redis-kubernetes-operator]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
+- 04-database-middleware-kubernetes
+- 05-mongodb-enterprise-database
+- 07-redis-kubernetes-operator
+- 08-kafka-kubernetes-strimzi

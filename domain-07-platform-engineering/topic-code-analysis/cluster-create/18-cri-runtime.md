@@ -1,5 +1,5 @@
 ---
-title: CRI 运行时管理 (Container Runtime Interface)
+title: CRI 运行时管理 (Container Runtime Interface) [cluster-create]
 description: 'title: CRI 运行时管理 (Container Runtime Interface)'
 category: general
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: CRI 运行时管理 (Container Runtime Interface)

@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 直播电商架构设计
@@ -49,7 +50,7 @@ audience:
 - 阿里云视频直播解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 直播电商平台 Kubernetes 部署架构
+- 直播电商平台 [[Kubernetes|Kubernetes]] 部署架构
 - 直播带货弹幕实时系统
 - 秒杀活动高并发处理
 - 直播 CDN 加速与内容审核
@@ -339,8 +340,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -354,7 +355,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/47-smart-mining.md|47-smart-mining]]
-- [[domain-20-application-patterns/48-vocational-edtech.md|48-vocational-edtech]]
-- [[domain-20-application-patterns/50-unmanned-retail.md|50-unmanned-retail]]
-- [[domain-20-application-patterns/51-smart-manufacturing-mes.md|51-smart-manufacturing-mes]]
+- 47-smart-mining
+- 48-vocational-edtech
+- 50-unmanned-retail
+- 51-smart-manufacturing-mes

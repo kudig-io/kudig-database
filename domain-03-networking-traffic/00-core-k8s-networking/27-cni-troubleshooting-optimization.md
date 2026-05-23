@@ -63,11 +63,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-03
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-03
 
 ---
 
@@ -78,7 +79,7 @@ cross_refs:
 |:---|:---|:---|:---|
 | **P0** | Pod 网络初始化失败 | Pod 无法启动 | 紧急 |
 | **P1** | Pod 间通信故障 | 服务不可用 | 高 |
-| **P2** | Service 访问异常 | 部分功能异常 | 中 |
+| **P2** | [[Service|Service]] 访问异常 | 部分功能异常 | 中 |
 | **P3** | 网络性能问题 | 延迟/丢包 | 低 |
 
 ---
@@ -141,7 +142,7 @@ cross_refs:
 
 | 检查项 | 命令 |
 |:---|:---|
-| **CNI Pod 状态** | `kubectl get pods -n kube-system -l k8s-app=calico-node` |
+| **CNI Pod 状态** | `kubectl get [[Pods|pods]] -n kube-system -l k8s-app=calico-node` |
 | **CNI 配置** | `cat /etc/cni/net.d/*.conflist` |
 | **CNI 插件** | `ls -la /opt/cni/bin/` |
 | **网络接口** | `ip link show` |
@@ -652,28 +653,28 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md|25-ingress-monitoring-troubleshooting]]
-- [[domain-03-networking-traffic/26-ingress-production-best-practices.md|26-ingress-production-best-practices]]
-- [[domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md|28-coredns-troubleshooting-optimization]]
-- [[domain-03-networking-traffic/29-egress-traffic-management.md|29-egress-traffic-management]]
+- 25-ingress-monitoring-troubleshooting
+- 26-ingress-production-best-practices
+- 28-coredns-troubleshooting-optimization
+- 29-egress-traffic-management
 
 ## Related
 

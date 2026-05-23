@@ -1,7 +1,43 @@
 ---
+title: 模型 × Harness 兼容性矩阵（2025-2026） [02-ai-agents]
+description: 'description: ''**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,'
+category: general
+tags:
+- ai
+- ai-agent
+- gpu
+- vllm
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 模型 × Harness 兼容性矩阵（2025-2026） 是什么
+- 如何 模型 × Harness 兼容性矩阵（2025-2026）
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 模型
+- Harness
+- 兼容性矩阵
+- 2025-2026
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 模型 × Harness 兼容性矩阵（2025-2026）
-description: '**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility, Harness Support, Function Calling, Tool
-  Use, Structured Output, Agent Ready, GPT, Claude, Gemini, Qwen, DeepSeek, Llama'
+description: '**文档类型**: 实践参考指南 | **最后更新**: 2026-04 | **关键词**: Model Compatibility,
+  Harness Support, Function Calling, Tool Use, Structured Output, Agent Ready, GPT,
+  Claude, Gemini, Qwen, DeepSeek, Llama'
 category: ai-agent
 tags:
 - ai
@@ -29,9 +65,15 @@ trigger_keywords:
 - 2025-2026
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 模型 × Harness 兼容性矩阵（2025-2026）
@@ -435,3 +477,27 @@ agent = ReActAgent(
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，基于 2025-2026 行业最新数据，提供模型 Harness 兼容性的全量参考清单。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide
+- 43-openclaw-framework-integration
+- 44-openclaw-soul-mechanism

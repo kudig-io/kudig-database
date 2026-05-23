@@ -21,6 +21,7 @@ trigger_keywords:
 - 应用部署管理器
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 第三课：Deployment - 应用部署管理器
@@ -365,7 +366,7 @@ kubectl delete deployment my-app
 
 **关联文档**:
 - [../03-networking/03-service-basics.md](../03-networking/03-service-basics.md) — Service 基础
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## 相关概念

@@ -23,6 +23,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/kubeedge]]"
+    type: related_to
+  - target: "[[best-practices/infrastructure/networking]]"
+    type: related_to
 ---
 
 # 边缘-云连续体的运维架构
@@ -43,7 +49,7 @@ prerequisites:
   → 传感器、执行器
 ```
 
-## KubeEdge 核心能力
+## [[entities/kubeedge|KubeEdge]] 核心能力
 
 ```
 云边协同:
@@ -75,5 +81,9 @@ prerequisites:
 
 ## 相关 Domain
 
-- [[domain-01-cluster-fundamentals/09-edge-computing/01-kubeedge-overview]]
-- [[domain-03-networking-traffic/07-edge-networking/01-edge-network-patterns]]
+- domain-01-cluster-fundamentals/09-edge-computing/01-kubeedge-overview
+- domain-03-[[best-practices/infrastructure/networking|networking]]-traffic/07-edge-networking/01-edge-network-patterns
+## Related
+
+- [[domain-10-troubleshooting-diagnostics/37-multi-cluster-management-troubleshooting|多集群管理故障排查]]
+- [[domain-10-troubleshooting-diagnostics/40-large-scale-cluster-operations|大规模集群运维]]

@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -41,7 +42,7 @@ title: Day 1: ACK/ACR 管控 SR
 last_updated: 2026-05-18
 difficulty: beginner
 intent_queries:
-  - ACK ACR service architecture overview
+  - ACK ACR [[Service|service]] architecture overview
   - ACK managed dedicated serverless cluster types
   - ACR personal enterprise edition difference
   - ACK SR service request handling process
@@ -80,7 +81,7 @@ related_topics:
 
 ## 概述
 
-作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[entities/kubernetes|kubernetes]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。理解 ACK/ACR 的整体架构是后续所有运维工作的基础——只有了解系统是如何构建的，才能在出现问题时快速定位和解决。
+作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[entities/kubernetes|[[Kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。理解 ACK/ACR 的整体架构是后续所有运维工作的基础——只有了解系统是如何构建的，才能在出现问题时快速定位和解决。
 
 本课程还将介绍内部 SR（Service Request，服务请求）的处理流程，这是日常工作中最频繁接触的任务类型。理解 SR 的分类、优先级和常见场景，能帮助你在接到用户请求时快速判断处理方向。
 

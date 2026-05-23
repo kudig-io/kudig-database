@@ -1,6 +1,6 @@
 ---
-title: 数据库中间件故障排查指南
-description: '# 数据库中间件故障排查指南'
+title: 数据库中间件问题排查指南
+description: '# 数据库中间件问题排查指南'
 category: general
 tags:
 - k8s
@@ -16,29 +16,30 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- 数据库中间件故障排查指南 是什么
-- 如何 数据库中间件故障排查指南
-- 数据库中间件故障排查指南 故障排查
-- 数据库中间件故障排查指南 排障步骤
+- 数据库中间件问题排查指南 是什么
+- 如何 数据库中间件问题排查指南
+- 数据库中间件问题排查指南 问题排查
+- 数据库中间件问题排查指南 排障步骤
 trigger_keywords:
-- 数据库中间件故障排查指南
+- 数据库中间件问题排查指南
 prerequisites:
 - kubectl-basics
 - etcd-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-# 数据库中间件故障排查指南
+# 数据库中间件问题排查指南
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: MySQL/PostgreSQL/Redis 常见故障的快速诊断与修复
+> **用途**: MySQL/PostgreSQL/Redis 常见问题的快速诊断与修复
 > **覆盖**: MySQL Operator、Redis Cluster 脑裂、数据库备份恢复
 
 ---
 
-## 1. MySQL 故障排查
+## 1. MySQL 问题排查
 
 ### 1.1 连接问题
 
@@ -112,7 +113,7 @@ kubectl patch pxc db-cluster -n mysql -p '{"spec":{"forceStandalone":true}}' --t
 
 ---
 
-## 2. PostgreSQL 故障排查
+## 2. PostgreSQL 问题排查
 
 ### 2.1 连接与认证问题
 
@@ -184,7 +185,7 @@ SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE wait_event_type = '
 
 ---
 
-## 3. Redis 故障排查
+## 3. Redis 问题排查
 
 ### 3.1 连接与认证问题
 
@@ -279,7 +280,7 @@ redis-cli -p 26379 SENTINEL failover <master-name>
 # 常见问题
 # Sentinel 认为 master 宕机 → 检查网络抖动
 # 新 master 上线后从库未同步 → 检查 slave 配置
-# 故障转移后应用无法连接 → 检查 Sentinel 公告 IP
+# 问题转移后应用无法连接 → 检查 Sentinel 公告 IP
 ```
 
 ---
@@ -411,5 +412,5 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 
 **关联文档**:
 - [domain-16-database-middleware/](../domain-16-database-middleware/) — 数据库中间件完整文档
-- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用故障排查
+- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用问题排查
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill

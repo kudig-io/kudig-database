@@ -1,5 +1,5 @@
 ---
-title: Bank-Vaults
+title: Bank-Vaults (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Bank-Vaults
@@ -68,12 +69,12 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — Prometheus 高可用部署
+- [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/bank-vaults/bank-vaults.md|bank-vaults]]
+- bank-vaults
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

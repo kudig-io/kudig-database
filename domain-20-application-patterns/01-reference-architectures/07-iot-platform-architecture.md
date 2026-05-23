@@ -33,18 +33,19 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 title: 物联网 IoT 平台架构设计
-description: '# 物联网 (IoT) 平台 Kubernetes 生产架构设计'
+description: '# 物联网 (IoT) 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- flux
+- [[Flux|flux]]
 - kafka
-- statefulset
+- [[StatefulSet|statefulset]]
 - gateway
 - operator
 - rag
@@ -598,7 +599,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -613,7 +614,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/05-online-education-architecture.md|05-online-education-architecture]]
-- [[domain-20-application-patterns/06-fintech-architecture.md|06-fintech-architecture]]
-- [[domain-20-application-patterns/08-ai-ml-inference-architecture.md|08-ai-ml-inference-architecture]]
-- [[domain-20-application-patterns/09-gaming-backend-architecture.md|09-gaming-backend-architecture]]
+- 05-online-education-architecture
+- 06-fintech-architecture
+- 08-ai-ml-inference-architecture
+- 09-gaming-backend-architecture

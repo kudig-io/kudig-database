@@ -48,6 +48,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)

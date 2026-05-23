@@ -63,11 +63,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 55 - CoreDNS 插件完整参考 (Plugins Reference)
+# 55 - [[CoreDNS|CoreDNS]] 插件完整参考 (Plugins Reference)
 
-> **适用版本**: CoreDNS 1.8.0+ / Kubernetes v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -78,9 +79,9 @@ cross_refs:
 
 | 类别 | 插件数量 | 主要用途 | 核心插件 |
 |:---|:---:|:---|:---|
-| **数据源** | 8 | 提供DNS记录数据 | kubernetes, file, hosts, etcd |
+| **数据源** | 8 | 提供DNS记录数据 | kubernetes, file, hosts, [[etcd|etcd]] |
 | **缓存** | 2 | 缓存DNS响应 | cache, nsid |
-| **转发/代理** | 3 | 转发查询到上游 | forward, proxy, grpc |
+| **转发/代理** | 3 | 转发查询到上游 | forward, proxy, [[gRPC|grpc]] |
 | **修改** | 4 | 修改请求或响应 | rewrite, template, header, metadata |
 | **监控** | 4 | 日志/指标/追踪 | log, prometheus, trace, debug |
 | **安全** | 4 | 访问控制/加密 | acl, dnssec, tls, dnstap |
@@ -1059,25 +1060,25 @@ CoreDNS插件按照编译时定义的顺序执行，以下是官方推荐顺序�
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/13-coredns-architecture-principles.md|13-coredns-architecture-principles]]
-- [[domain-03-networking-traffic/14-coredns-configuration-corefile.md|14-coredns-configuration-corefile]]
-- [[domain-03-networking-traffic/16-networkpolicy-deep-practice.md|16-networkpolicy-deep-practice]]
-- [[domain-03-networking-traffic/17-network-policy-advanced.md|17-network-policy-advanced]]
+- 13-coredns-architecture-principles
+- 14-coredns-configuration-corefile
+- 16-networkpolicy-deep-practice
+- 17-network-policy-advanced
 
 ## Related
 

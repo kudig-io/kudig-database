@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kubeadm 集群删除操作
@@ -59,7 +60,7 @@ prerequisites:
 
 | 失败场景 | reset 行为 |
 |---------|-----------|
-| kubelet 停止失败 | 提示手动停止 |
+| [[kubelet|kubelet]] 停止失败 | 提示手动停止 |
 | 卸载挂载点失败 | 继续清理目录 |
 | 容器移除失败 | 继续清理配置 |
 | etcd 成员移除失败 | 提示手动 `etcdctl member remove` |
@@ -154,10 +155,10 @@ ip link delete flannel.1 2>/dev/null || true
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
-- [[skills/node-drain-and-maintenance.md|节点驱逐与维护]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
 - [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
+- [[concepts/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
 - [[etcd|etcd]]
 
 ## Related

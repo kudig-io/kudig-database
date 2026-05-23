@@ -1,6 +1,37 @@
 ---
+title: 云厂商集群删除方案对比 (topic-code-analysis)
+description: 'title: 云厂商集群删除方案对比'
+category: general
+tags:
+- reference
+- etcd
+- ingress
+- gateway
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 云厂商集群删除方案对比 是什么
+- 如何 云厂商集群删除方案对比
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 云厂商集群删除方案对比
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 云厂商集群删除方案对比
-description: 对比分析 AWS EKS、Azure AKS、GCP GKE、阿里云 ACK、腾讯云 TKE 以及 kubeadm 自建集群的删除/销毁方案差异，涵盖删除命令、控制面清理、etcd 处理和需要手动清理的资源。
 category: cluster-delete
 tags:
 - cloud-provider
@@ -11,16 +42,10 @@ tags:
 - tke
 - cluster-deletion
 - comparison
-- etcd
-- ingress
 last_updated: 2026-05-18
+description: 对比分析 AWS EKS、Azure AKS、GCP GKE、阿里云 ACK、腾讯云 TKE 以及 kubeadm 自建集群的删除/销毁方案差异，涵盖删除命令、控制面清理、etcd
+  处理和需要手动清理的资源。
 difficulty: intermediate
-reading_level: intermediate
-audience:
-- platform-engineer
-- devops-engineer
-- cloud-engineer
-estimated_read_time: 5min
 intent_queries:
 - eksctl delete cluster vs kubeadm reset
 - gcp gke cluster deletion cleanup
@@ -38,10 +63,12 @@ trigger_keywords:
 - EKS AKS GKE deletion
 - ACK TKE cluster delete
 - hybrid cluster deletion
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: intermediate
+audience:
+- platform-engineer
+- devops-engineer
+- cloud-engineer
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -51,6 +78,17 @@ related_topics:
 - cleanup
 - security-delete
 - network-cleanup
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 云厂商集群删除方案对比
@@ -68,7 +106,7 @@ related_topics:
 | kubeadm | `kubeadm reset` + 手动清理 | 需手动逐节点 | 需手动移除成员 | 需手动 |
 | EKS | `eksctl delete cluster` | AWS 自动 | 托管，无需处理 | ASG 自动回收 |
 | AKS | `az aks delete` | Azure 自动 | 托管，无需处理 | VMSS 自动回收 |
-| GKE | `gcloud [[entities/docker|container]] clusters delete` | Google 自动 | 托管，无需处理 | MIG 自动回收 |
+| GKE | `gcloud container clusters delete` | Google 自动 | 托管，无需处理 | MIG 自动回收 |
 | ACK | `aliyun cs DELETE /clusters/<id>` | 阿里云自动 | 托管，无需处理 | ECS 自动释放 |
 | TKE | `tencentcloud cli delete-cluster` | 腾讯云自动 | 托管，无需处理 | CVM 自动回收 |
 
@@ -411,3 +449,11 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 | 权限不足 | IAM 权限不足 | 提升权限后重试 |
 | 异步删除 | 删除操作异步执行 | 等待几分钟后重试 |
 | 账单未结清 | 仍有未结清账单 | 结清账单后重试 |
+
+## Related
+
+- [[README.md|README]]
+- [[log.md|log]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

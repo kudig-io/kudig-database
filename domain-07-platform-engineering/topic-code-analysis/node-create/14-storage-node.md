@@ -32,6 +32,7 @@ prerequisites:
 - platform-engineering-basics
 - redis-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 节点存储
@@ -492,5 +493,5 @@ echo "  CSI mounters: $(ls /var/lib/kubelet/plugins/kubernetes.io/csi/ 2>/dev/nu
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-01-cluster-fundamentals/22-container-storage-deep-dive.md|22-container-storage-deep-dive]]
+- 22-container-storage-deep-dive
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

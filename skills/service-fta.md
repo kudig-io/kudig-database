@@ -1,5 +1,5 @@
 ---
-title: Service 异常故障树分析
+title: Service 异常故障树分析 (skills)
 description: '| KP2B | 配置错误 | `kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 \| grep -iE "error\|invalid\|failed"`
   | 错误日志 | 检查配置问题'
 category: skills
@@ -28,9 +28,10 @@ prerequisites:
 fta_id: FTA-SERVICE-001
 component: Service
 severity: high
+created: "2026-05-23"
 ---
 
-# Service 异常故障树分析
+# [[Service|Service]] 异常故障树分析
 
 ### 诊断命令快速参考表
 
@@ -41,7 +42,7 @@ severity: high
 | EP1 | 无可用 Endpoint | `kubectl get endpoints ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.subsets[*].addresses[*].ip}'` | IP 地址列表 | 空表示无 Endpoint |
 | EP2 | EndpointSlice 不同步 | `kubectl get endpointslice -n ${NAMESPACE} -l kubernetes.io/service-name=${SERVICE_NAME} -o wide` | EndpointSlice 列表 | 检查同步状态 |
 | EP3 | Endpoint 地址错误 | `kubectl get endpoints ${SERVICE_NAME} -n ${NAMESPACE} -o yaml \| grep -A5 "addresses"` | Pod IP 列表 | 验证 IP 正确性 |
-| EP1A | Pod 不健康 | `kubectl get pods -n ${NAMESPACE} -l ${SELECTOR} -o jsonpath='{range .items[*]}{.metadata.name}: {.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'` | `True/False` | 检查 Ready 状态 |
+| EP1A | Pod 不健康 | `kubectl get [[Pods|pods]] -n ${NAMESPACE} -l ${SELECTOR} -o jsonpath='{range .items[*]}{.metadata.name}: {.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'` | `True/False` | 检查 Ready 状态 |
 | EP1B | Selector 不匹配 | `kubectl get svc ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.selector}' && kubectl get pods -n ${NAMESPACE} --show-labels` | 标签匹配情况 | 验证 selector 匹配 |
 
 ### 2. kube-proxy 诊断
@@ -58,8 +59,8 @@ severity: high
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- networking.md|网络故障排查]]
 
 ## Related
 

@@ -32,6 +32,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 title: 12-自动化运维工具链
@@ -42,10 +43,10 @@ tags:
 - production
 - operations
 - best-practices
-- kubelet
-- prometheus
-- helm
-- containerd
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[containerd|containerd]]
 - docker
 - ingress
 last_updated: 2026-05
@@ -242,12 +243,12 @@ CHART_VERSION="$6"
 
 # 验证参数
 validate_params() {
-    if [[ -z "$APP_NAME" || -z "$NAMESPACE" || -z "$VALUES_FILE" ]]; then
+    if -z "$APP_NAME"; then
         echo "Usage: $0 <app-name> <namespace> <values-file> [chart-repo] [chart-name] [chart-version]"
         exit 1
     fi
     
-    if [[ ! -f "$VALUES_FILE" ]]; then
+    if ! -f "$VALUES_FILE"; then
         echo "Values file $VALUES_FILE not found"
         exit 1
     fi
@@ -257,7 +258,7 @@ validate_params() {
 init_helm() {
     echo "Initializing Helm..."
     helm repo add stable https://charts.helm.sh/stable
-    if [[ -n "$CHART_REPO" ]]; then
+    if -n "$CHART_REPO"; then
         helm repo add custom "$CHART_REPO"
     fi
     helm repo update
@@ -278,11 +279,11 @@ deploy_application() {
         "--wait"
     )
     
-    if [[ -n "$CHART_VERSION" ]]; then
+    if -n "$CHART_VERSION"; then
         helm_args+=("--version" "$CHART_VERSION")
     fi
     
-    if [[ -n "$CHART_NAME" && -n "$CHART_REPO" ]]; then
+    if -n "$CHART_NAME" && -n "$CHART_REPO"; then
         helm upgrade --install "$APP_NAME" "$CHART_REPO/$CHART_NAME" "${helm_args[@]}"
     else
         helm upgrade --install "$APP_NAME" "./charts/$APP_NAME" "${helm_args[@]}"
@@ -305,7 +306,7 @@ verify_deployment() {
     fi
     
     # 运行健康检查
-    if [[ -f "scripts/health-check-$APP_NAME.sh" ]]; then
+    if -f "scripts/health-check-$APP_NAME.sh"; then
         bash "scripts/health-check-$APP_NAME.sh" "$NAMESPACE"
     fi
 }
@@ -1029,18 +1030,18 @@ if __name__ == "__main__":
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
+- domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## Related
 
@@ -1049,7 +1050,7 @@ if __name__ == "__main__":
 
 ## See Also
 
-- [[domain-08-release-change-management/10-gitops-pipeline-practices.md|10-gitops-pipeline-practices]]
-- [[domain-08-release-change-management/11-infrastructure-as-code.md|11-infrastructure-as-code]]
-- [[domain-11-production-operations/13-kubernetes-cost-governance.md|13-kubernetes-cost-governance]]
-- [[domain-11-production-operations/14-resource-quota-management.md|14-resource-quota-management]]
+- 10-gitops-pipeline-practices
+- 11-infrastructure-as-code
+- 13-kubernetes-cost-governance
+- 14-resource-quota-management

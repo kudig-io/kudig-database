@@ -36,18 +36,19 @@ prerequisites:
 - redis-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes 安全加固深度实践
+title: [[Kubernetes|Kubernetes]] 安全加固深度实践
 description: '# Kubernetes 安全加固深度实践'
 category: cloud-native-security
 tags:
 - k8s
 - security
 - cloud-native
-- falco
+- [[Falco|falco]]
 - opa
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - kubelet
 - scheduler
@@ -1068,24 +1069,24 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|cert-manager 自动证书管理深度实践]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- gVisor 容器沙箱深度解析
+- cert-manager 自动证书管理深度实践
 
 ## See Also
 
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|09-opa-gatekeeper-policy]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|10-image-security-scanning]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|17-gvisor-container-sandbox]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|99-cert-manager-tls-guide]]
+- 09-opa-gatekeeper-policy
+- 10-image-security-scanning
+- 17-gvisor-container-sandbox
+- 99-cert-manager-tls-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]

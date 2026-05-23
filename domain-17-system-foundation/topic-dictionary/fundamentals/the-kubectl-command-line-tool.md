@@ -24,13 +24,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kubectl 命令行工具
 
 ## 概述
 
-`kubectl` 是与 Kubernetes 集群的控制平面进行通信的主要命令行工具。它通过 Kubernetes API 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
+`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
 
 ## 核心概念/原理
 
@@ -45,7 +46,7 @@ prerequisites:
 - 从集群外部运行时，`kubectl` 使用 kubeconfig 文件查找 API 服务器地址和凭据。
 - 从 Pod 内部运行时（如 CI/CD 流水线中），`kubectl` 可以基于挂载到 Pod 中的 ServiceAccount 令牌使用集群内认证（in-cluster authentication）。
 
-执行命令时，`kubectl` 将用户意图转换为一个或多个发往 Kubernetes API 的 HTTP 请求。API 服务器验证每个请求，将其应用到存储在 etcd 中的集群状态，并返回结果。
+执行命令时，`kubectl` 将用户意图转换为一个或多个发往 Kubernetes API 的 HTTP 请求。API 服务器验证每个请求，将其应用到存储在 [[etcd|etcd]] 中的集群状态，并返回结果。
 
 ### kubeconfig 配置
 
@@ -55,7 +56,7 @@ prerequisites:
 
 `kubectl` 支持的操作大致分为以下几类：
 
-- **管理资源**：创建、更新和删除 Pod、Deployment、Service 等对象。推荐使用 `kubectl apply` 进行声明式管理。
+- **管理资源**：创建、更新和删除 Pod、Deployment、[[Service|Service]] 等对象。推荐使用 `kubectl apply` 进行声明式管理。
 - **检查集群状态**：列出和描述对象、查看事件、检查资源使用情况。
 - **调试**：查看容器日志、在运行中的容器内执行命令、端口转发到 Pod。
 - **集群操作**：排空节点进行维护、封锁节点以防止新工作负载调度、管理集群配置。

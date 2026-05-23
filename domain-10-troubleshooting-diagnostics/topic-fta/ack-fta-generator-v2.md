@@ -1,5 +1,5 @@
 ---
-title: ACK-FTA 生成器增强版提示词
+title: ACK-FTA 生成器增强版提示词 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''<!-- chunk: 0. 核心设计理念'' -->## 0. 核心设计理念'''
 category: fta
 tags:
@@ -46,6 +46,7 @@ prerequisites:
 fta_id: FTA-ACK_GENERATOR_V2-001
 component: Ack Generator V2
 severity: critical
+created: "2026-05-23"
 ---
 
 title: ACK-FTA 生成器增强版提示词
@@ -56,10 +57,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - scheduler
-- prometheus
-- jaeger
+- [[Prometheus|prometheus]]
+- [[Jaeger|jaeger]]
 - istio
 - envoy
 last_updated: 2026-05
@@ -316,7 +317,7 @@ output:
   # 概率矩阵（必须）
   probability_matrix:
     events: [string]            # 事件 ID 列表
-    matrix: [[float]]           # 概率矩阵（二维数组）
+    matrix: float           # 概率矩阵（二维数组）
     min_cut_sets:               # 最小割集
       - cut_set: [string]       # 割集事件列表
         probability: float      # 该割集概率

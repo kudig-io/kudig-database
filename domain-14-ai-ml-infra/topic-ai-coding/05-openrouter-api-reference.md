@@ -26,6 +26,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # API 参考与请求/响应规范
@@ -310,7 +311,7 @@ type ToolChoice =
 | **408** | Request Timeout | 请求超时 |
 | **429** | Too Many Requests | Rate Limit 超限 |
 | **502** | Bad Gateway | Provider 返回错误 |
-| **503** | [[entities/service|service]] Unavailable | 无可用 Provider |
+| **503** | [[Service]] Unavailable | 无可用 Provider |
 
 ### 7.2 Error 响应格式
 

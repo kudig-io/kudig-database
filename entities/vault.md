@@ -26,11 +26,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # HashiVault
 
-HashiCorp Vault is the leading enterprise secrets management platform, providing comprehensive credential lifecycle management.
+HashiCorp Vault is the leading enterprise [[Secrets|secrets]]ts Management|secrets management]] platform, providing comprehensive credential lifecycle management.
 
 ## Key Capabilities
 
@@ -39,7 +40,7 @@ HashiCorp Vault is the leading enterprise secrets management platform, providing
 | KV Store | Static secrets with versioning and access control |
 | Dynamic Credentials | Temporary database credentials with TTL |
 | PKI Engine | Internal CA for certificate issuance and rotation |
-| Transit Engine | Encryption-as-a-Service (encrypt/decrypt API) |
+| Transit Engine | Encryption-as-a-[[Service|Service]] (encrypt/decrypt API) |
 | Auth Methods | K8s ServiceAccount, LDAP, OIDC, AppRole |
 | Audit Trail | Complete audit log of all secret access |
 
@@ -60,14 +61,14 @@ Instead of static passwords that persist indefinitely, Vault generates temporary
 
 - [[tokenetes]] — Tokenetes
 - [[external-secrets]] — External Secrets Operator
-- [[domain-19-landscape-references/sandbox/radius/radius.md|radius]] — radius
+- radius — radius
 - [[concepts/secrets-management.md|secrets-management]] — Secrets Management
 - [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[concepts/secrets-management.md|Secrets Management]]
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[cert-manager|cert-manager]]
 
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|05-commvault-enterprise-disaster-recovery]]
-- [[domain-05-security-compliance/99-vault-k8s-secrets-guide.md|99-vault-k8s-secrets-guide]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|05-vault-enterprise-secrets-management]]
-- [[domain-19-landscape-references/sandbox/bank-vaults/bank-vaults.md|bank-vaults]]
+- 05-commvault-enterprise-disaster-recovery
+- 99-vault-k8s-secrets-guide
+- 05-vault-enterprise-secrets-management
+- bank-vaults

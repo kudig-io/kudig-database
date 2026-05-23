@@ -1,5 +1,5 @@
 ---
-title: bootc
+title: bootc (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - bootc
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # bootc
@@ -62,11 +63,11 @@ bootc 是一个基于 OCI 容器镜像的 Linux 系统启动和升级工具，�
 ## Related
 
 - [[entities/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
-- [[confidential-containers]] — Confidential Containers (CoCo)
+- [[confidential-containers]] — [[Confidential Containers|Confidential Containers]]rs (CoCo)|Confidential Containers (CoCo)]]
 - [[k8sgpt]] — K8sGPT
 - [[trickster]] — Trickster
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/bootc/bootc.md|bootc]]
+- bootc
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[entities/tetragon|Tetragon]] — Cross-reference

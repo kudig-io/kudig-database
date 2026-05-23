@@ -43,6 +43,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Domain-29 自动化测试与质量 — 开源项目索引
@@ -93,10 +94,10 @@ authors:
 
 ## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-29-automated-testing-quality MOC]]
+- domain-29-automated-testing-quality MOC
 - [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
-- [[domain-08-release-change-management/01-selenium-enterprise-automation.md|Selenium 企业级自动化测试平台]]
-- [[domain-08-release-change-management/02-junit5-enterprise-testing.md|JUnit 5 企业级单元测试框架深度实践]]
-- [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|企业级AI测试与质量保障深度实践]]
-- [[domain-08-release-change-management/05-cypress-enterprise-automation.md|Cypress Enterprise Automation Testing 深度实践]]
-- [[domain-08-release-change-management/06-playwright-enterprise-automation.md|Playwright Enterprise Automation Testing 深度实践]]
+- Selenium 企业级自动化测试平台
+- JUnit 5 企业级单元测试框架深度实践
+- 企业级AI测试与质量保障深度实践
+- Cypress Enterprise Automation Testing 深度实践
+- Playwright Enterprise Automation Testing 深度实践

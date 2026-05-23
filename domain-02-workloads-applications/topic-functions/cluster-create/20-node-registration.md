@@ -1,4 +1,42 @@
 ---
+title: Node 注册与 kubeadm token 详解 (topic-code-analysis)
+description: 'title: Node 注册与 kubeadm token 详解'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- containerd
+- rbac
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Node 注册与 kubeadm token 详解 是什么
+- 如何 Node 注册与 kubeadm token 详解
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Node
+- 注册与
+- kubeadm
+- token
+- 详解
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: Node 注册与 kubeadm token 详解
 description: '# Node 注册与 kubeadm token 详解'
 category: functions
@@ -31,10 +69,15 @@ trigger_keywords:
 - token
 - 详解
 - functions
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Node 注册与 kubeadm token 详解
@@ -42,7 +85,7 @@ prerequisites:
 ## 函数签名
 
 ```go
-func CreateNewTokens(client [[entities/kubernetes|kubernetes]].Interface, tokens []*kubeadmapi.BootstrapToken, dryRun bool) error
+func CreateNewTokens(client kubernetes.Interface, tokens []*kubeadmapi.BootstrapToken, dryRun bool) error
 
 func GenerateToken() (string, error)
 
@@ -484,3 +527,11 @@ kubectl get node worker-1 -o yaml
 - [`证书轮换`](../node-create/06-certificate.md) — kubelet 证书自动轮换
 - [`Node Lifecycle Controller`](../node-create/01-overview.md) — 节点健康监控与驱逐
 - [`kubeadm init phase bootstrap-token`](17-init-phases.md) — init 时创建 Bootstrap Token
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- 02-cluster-lifecycle-management
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]

@@ -42,6 +42,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # Domain-11: AI基础设施
@@ -178,6 +179,6 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 
 - [[README]]
 
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]

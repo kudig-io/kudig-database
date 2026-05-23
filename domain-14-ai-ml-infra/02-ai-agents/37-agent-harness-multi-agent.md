@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 多 Agent 编排
+title: Agent Harness 多 Agent 编排 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 多 Agent 编排
@@ -45,8 +46,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -840,8 +841,8 @@ class LayeredHarnessArchitecture:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 多 Agent 编排基础概念 |
-| [35 - 安全与约束](./[[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]].md) | Agent 隔离的约束实现 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 多 Agent 编排基础概念 |
+| [35 - 安全与约束](./35-agent-harness-security-constraints.md) | Agent 隔离的约束实现 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 多 Agent 编排基础理论 |
 
 ---
@@ -863,8 +864,8 @@ class LayeredHarnessArchitecture:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -878,7 +879,7 @@ class LayeredHarnessArchitecture:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]]
-- [[domain-14-ai-ml-infra/36-agent-harness-observability.md|36-agent-harness-observability]]
-- [[domain-14-ai-ml-infra/38-agent-harness-performance-cost.md|38-agent-harness-performance-cost]]
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
+- 35-agent-harness-security-constraints
+- 36-agent-harness-observability
+- 38-agent-harness-performance-cost
+- 39-agent-harness-testing-benchmark

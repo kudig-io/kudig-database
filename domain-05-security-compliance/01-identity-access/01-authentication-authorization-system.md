@@ -29,11 +29,12 @@ prerequisites:
 - rbac-basics
 - prometheus-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
-title: Kubernetes 认证授权体系详解
-description: 深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、Service
+title: [[Kubernetes|Kubernetes]] 认证授权体系详解
+description: 深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、[[Service|Service]]
   Account Token Volume Projection 与最小权限原则
 category: domain-05-security-compliance
 tags:
@@ -46,7 +47,7 @@ tags:
 - security
 - access-control
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - best-practice
 last_updated: 2026-05
 difficulty: intermediate
@@ -490,32 +491,32 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
+- 证书管理与 TLS 配置
 
 ## Related
 
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 网络安全策略与零信任
+- 运行时安全防护
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
 
 - [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-05-security-compliance/20-incident-response-process.md|20-incident-response-process]]
-- [[domain-05-security-compliance/21-multicluster-security.md|21-multicluster-security]]
-- [[domain-05-security-compliance/02-network-security-policies.md|02-network-security-policies]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|03-runtime-security-defense]]
+- 20-incident-response-process
+- 21-multicluster-security
+- 02-network-security-policies
+- 03-runtime-security-defense

@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Terway 测试验证
@@ -45,13 +46,13 @@ title: 05 - Terway 测试验证 (Testing & Validation)
 
 ## 与 K8s 网络模型的关系
 
-Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 [[concepts/cilium-ebpf-networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
+Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
 
 ## 生产部署建议
 
 - 建议在生产环境中使用 ENI 多 IP 模式以提高 IP 利用率 ^[inferred]
 - 密切监控 ENI 资源使用情况，避免 IP 耗尽 ^[inferred]
-- 配合 NetworkPolicy 实现 Pod 间访问控制 ^[inferred]
+- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制 ^[inferred]
 
 ## 参考链接
 
@@ -62,7 +63,7 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 
 ## Related
 
-- [[aeraki-mesh]] — Aeraki Mesh
+- [[aeraki-mesh]] — [[Aeraki Mesh|Aeraki Mesh]]
 - [[submariner]] — Submariner
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cni]] — CNI (Container Network Interface)
@@ -74,4 +75,4 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[40-terway-product-overview]]
 - [[42-terway-usage-guide]]
 - [[46-terway-performance-tuning]]
-- [[domain-03-networking-traffic/45-terway-testing-validation.md|45-terway-testing-validation]]
+- 45-terway-testing-validation

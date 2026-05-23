@@ -1,7 +1,7 @@
 ---
-title: Kubernetes 存储配置最佳实践
+title: Kubernetes 存储配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 存储配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/infrastructure
+category: best-practices/infrastructure
 tags:
 - kubernetes
 - storage
@@ -29,18 +29,8 @@ trigger_keywords:
 - 存储类
 prerequisites:
 - kubectl-basics
-- gpu-ml-basics
 - helm-basics
 - backup-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
 cross_refs:
 - type: domain
   path: ../../domain-04-storage-data/
@@ -48,6 +38,7 @@ cross_refs:
 - type: best-practice
   path: ./kubernetes-cluster.md
   label: 集群配置最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 存储配置最佳实践
@@ -558,10 +549,3 @@ allowVolumeExpansion: true  # 启用扩缩容
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和存储驱动版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/infrastructure/kubernetes-cluster.md|kubernetes-cluster]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/networking.md|networking]]
-- [[domain-11-production-operations/topic-best-practices/migration/01-migration-assessment-planning.md|01-migration-assessment-planning]]
-- [[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]]

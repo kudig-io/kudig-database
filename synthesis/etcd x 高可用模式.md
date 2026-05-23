@@ -27,13 +27,21 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
+  - target: "[[synthesis/Kubernetes Fault Distribution and MTTR]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/pods]]"
+    type: uses
 ---
 
 # etcd × 高可用模式
 
 ## The Connection
 
-etcd 是 Kubernetes 控制平面高可用的基石。K8s 的 HA 架构——无论是 API Server 的多实例负载均衡、Scheduler 的 leader election，还是工作负载的 PodAntiAffinity——最终都依赖 etcd 提供的**分布式一致性写入**能力。没有 etcd 的 Raft 共识，控制平面的"高可用"只是一个幻觉。
+etcd 是 Kubernetes 控制平面高可用的基石。[[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 的 HA 架构——无论是 API Server 的多实例负载均衡、Scheduler 的 leader election，还是工作负载的 PodAntiAffinity——最终都依赖 etcd 提供的**分布式一致性写入**能力。没有 etcd 的 Raft 共识，控制平面的"高可用"只是一个幻觉。
 
 这个合成的核心价值在于揭示：etcd 的集群规模选择、性能调优和灾难恢复策略直接决定了整个 K8s 集群的可用性上限。
 
@@ -91,7 +99,7 @@ etcd 快照是灾难恢复的基础，但快照操作会短暂增加磁盘 I/O �
 ## Open Questions
 
 - **etcd 在 K8s 1.30+ 的性能优化路径**：新版 etcd 3.5+ 引入了独立的压缩和碎片整理机制，但生产环境中的最佳配置参数仍在演进中。
-- **etcd v3 的 watch 机制在大规模集群中的扩展性**：当集群中有 10,000+ Pods 时，watch 连接数对 etcd 内存的影响尚缺乏系统性的基准测试数据。
+- **etcd v3 的 watch 机制在大规模集群中的扩展性**：当集群中有 10,000+ [[domain-17-system-foundation/topic-dictionary/workloads/pods|Pods]] 时，watch 连接数对 etcd 内存的影响尚缺乏系统性的基准测试数据。
 - **多 etcd 集群的跨集群一致性方案**：目前 K8s 社区对多 etcd 集群间的数据同步没有原生支持，这是混合云场景的未解难题。
 
 ## Related
@@ -106,4 +114,6 @@ etcd 快照是灾难恢复的基础，但快照操作会短暂增加磁盘 I/O �
 - [[concepts/eventual-consistency.md|eventual-consistency]]
 - [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
 - [[skills/backup-restore-etcd.md|backup-restore-etcd]]
-- [[synthesis/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[entities/armada|Armada (entities)]]
+- [[log|Wiki Log]]

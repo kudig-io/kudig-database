@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ title: Day 25: 生产运维最佳实践
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 变更管理
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 变更管理
   - 生产事故响应流程
   - 容量规划预测
   - SRE 最佳实践

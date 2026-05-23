@@ -33,6 +33,7 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Network 网络知识图谱索引
@@ -43,43 +44,43 @@ prerequisites:
 
 ### 网络知识域 (核心)
 
-- [[domain-03-networking-traffic/00-network-in-nutshell|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals|141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/06-service-concepts-types|Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)]]
-- [[domain-03-networking-traffic/07-service-implementation-details|77 - Service实现机制]]
-- [[domain-03-networking-traffic/09-kube-proxy-modes-performance|Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)]]
-- [[domain-03-networking-traffic/10-service-advanced-features|Service 高级特性与应用案例 (Service Advanced Features)]]
+- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]]]
+- 141 - [[domain-01-cluster-fundamentals/03-control-plane/23-container-network-deep-dive.md|CNI 架构与核心原理]] (CNI Architecture & Fundamentals)]]
+- 76 - CNI插件深度对比
+- Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)]]
+- 77 - Service实现机制
+- Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
+- [[domain-03-networking-traffic/00-core-k8s-networking/10-service-advanced-features.md]]
 
 ### DNS 与服务发现
 
-- [[domain-03-networking-traffic/11-dns-service-discovery-coredns|04 - DNS 服务发现与 CoreDNS 调优]]
-- [[domain-03-networking-traffic/12-dns-service-discovery|33 - 服务发现与 DNS 配置 (Service Discovery & DNS)]]
-- [[domain-03-networking-traffic/13-coredns-architecture-principles|53 - CoreDNS 架构与核心原理 (Architecture & Principles)]]
+- 04 - DNS 服务发现与 CoreDNS 调优
+- 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)
+- 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 
 ### NetworkPolicy
 
-- [[domain-03-networking-traffic/16-networkpolicy-deep-practice|01 - NetworkPolicy 深度实践指南]]
-- [[domain-03-networking-traffic/17-network-policy-advanced|78 - NetworkPolicy高级配置]]
+- 01 - NetworkPolicy 深度实践指南
+- 78 - NetworkPolicy高级配置
 
 ### Ingress
 
-- [[domain-03-networking-traffic/19-ingress-fundamentals|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
-- [[domain-03-networking-traffic/20-ingress-controller-deep-dive|128 - Ingress Controller 深入剖析]]
-- [[domain-03-networking-traffic/21-nginx-ingress-complete-guide|129 - NGINX Ingress 完整配置指南]]
-- [[domain-03-networking-traffic/22-ingress-tls-certificate|130 - Ingress TLS 与证书管理]]
+- [[assets/presentations/kubernetes-ingress-presentation.md]]
+- 128 - Ingress Controller 深入剖析
+- 129 - NGINX Ingress 完整配置指南
+- 130 - Ingress TLS 与证书管理
 
 ### CNI 插件
 
-- [[domain-03-networking-traffic/04-flannel-complete-guide|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/05-terway-advanced-guide|143 - Terway 高级指南 (Terway Advanced Guide)]]
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- 143 - Terway 高级指南 (Terway Advanced Guide)
 
 ### YAML 配置参考
 
-- [[domain-18-manifests-patterns/08-service-all-types|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice|09 - Endpoints / EndpointSlice YAML 配置参考]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass|10 - Ingress / IngressClass YAML 配置参考]]
-- [[domain-18-manifests-patterns/22-networkpolicy-reference|22 - NetworkPolicy YAML 配置参考]]
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
+- 22 - NetworkPolicy YAML 配置参考
 
 ## 关联文档 (K8s 集成)
 
@@ -96,12 +97,12 @@ prerequisites:
 
 ### K8s 事件
 
-- [[domain-17-system-foundation/10-service-networking-events|10 - Service 与网络事件]]
+- 10 - Service 与网络事件
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity|[[Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure|[[Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]]]
 
 ### FTA 故障树
 
@@ -114,12 +115,12 @@ prerequisites:
 
 ### 网络生态项目
 
-- [[domain-19-landscape-references/graduated/cilium/cilium|Cilium]]
-- [[domain-19-landscape-references/incubating/cni/cni|CNI (Container Network Interface)]]
-- [[domain-19-landscape-references/graduated/coredns/coredns|CoreDNS]]
-- [[domain-19-landscape-references/graduated/envoy/envoy|Envoy]]
-- [[domain-19-landscape-references/graduated/istio/istio|Istio]]
-- [[domain-19-landscape-references/graduated/linkerd/linkerd|Linkerd]]
-- [[domain-19-landscape-references/sandbox/antrea/antrea|Antrea]]
-- [[domain-19-landscape-references/sandbox/kube-ovn/kube-ovn|Kube-OVN]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide|Cilium eBPF 网络与安全实践指南]]
+- Cilium
+- CNI (Container Network Interface)
+- CoreDNS
+- Envoy
+- Istio
+- Linkerd
+- Antrea
+- Kube-OVN
+- Cilium eBPF 网络与安全实践指南

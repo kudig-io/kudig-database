@@ -42,9 +42,10 @@ prerequisites:
 - mysql-basics
 - policy-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes 备份与恢复概述 (Backup & Recovery Overview)
+title: [[Kubernetes|Kubernetes]] 备份与恢复概述 (Backup & Recovery Overview)
 description: '# Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'
 category: platform-ops
 tags:
@@ -52,9 +53,9 @@ tags:
 - platform
 - operations
 - devops
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
 - helm
 - argocd
@@ -488,14 +489,14 @@ send_alert() {
     local message="$2"
     
     # Slack notification
-    if [[ -n "$SLACK_WEBHOOK" ]]; then
+    if -n "$SLACK_WEBHOOK"; then
         curl -s -X POST "$SLACK_WEBHOOK" \
             -H 'Content-Type: application/json' \
             -d "{\"text\": \"*${title}*\n${message}\"}" || true
     fi
     
     # PagerDuty notification
-    if [[ -n "$PAGERDUTY_KEY" ]]; then
+    if -n "$PAGERDUTY_KEY"; then
         curl -s -X POST "https://events.pagerduty.com/v2/enqueue" \
             -H 'Content-Type: application/json' \
             -d "{
@@ -601,7 +602,7 @@ compress_snapshot() {
 upload_to_s3() {
     local file="$1"
     
-    if [[ -z "$S3_BUCKET" ]]; then
+    if -z "$S3_BUCKET"; then
         log "S3 upload skipped (S3_BUCKET not configured)"
         return 0
     fi
@@ -627,7 +628,7 @@ cleanup_old_backups() {
     find "$BACKUP_DIR" -name "*.sha256" -type f -mtime +"$RETENTION_DAYS" -delete 2>/dev/null || true
     
     # S3 cleanup (if configured)
-    if [[ -n "$S3_BUCKET" ]] && command -v aws &> /dev/null; then
+    if -n "$S3_BUCKET" && command -v aws &> /dev/null; then
         local cutoff_date=$(date -d "-${RETENTION_DAYS} days" +%Y-%m-%d 2>/dev/null || \
                            date -v-${RETENTION_DAYS}d +%Y-%m-%d)
         
@@ -734,11 +735,11 @@ EOF
 check_prerequisites() {
     log "Checking prerequisites..."
     
-    if [[ -z "$SNAPSHOT_FILE" ]]; then
+    if -z "$SNAPSHOT_FILE"; then
         usage
     fi
     
-    if [[ ! -f "$SNAPSHOT_FILE" ]]; then
+    if ! -f "$SNAPSHOT_FILE"; then
         error "Snapshot file not found: $SNAPSHOT_FILE"
     fi
     
@@ -755,7 +756,7 @@ verify_snapshot() {
     log "Verifying snapshot integrity..."
     
     # Decompress if needed
-    if [[ "$snapshot" == *.gz ]]; then
+    if "$snapshot" == *.gz; then
         local uncompressed="${snapshot%.gz}"
         log "Decompressing snapshot..."
         gunzip -c "$snapshot" > "$uncompressed"
@@ -766,7 +767,7 @@ verify_snapshot() {
     ETCDCTL_API=3 etcdctl snapshot status "$snapshot" --write-out=table
     
     # Check SHA256 if available
-    if [[ -f "${snapshot}.sha256" ]]; then
+    if -f "${snapshot}.sha256"; then
         log "Verifying SHA256 checksum..."
         if sha256sum -c "${snapshot}.sha256" &>/dev/null; then
             log "Checksum verification passed"
@@ -788,7 +789,7 @@ stop_etcd() {
     fi
     
     # For kubeadm-based etcd (static pod)
-    if [[ -f /etc/kubernetes/manifests/etcd.yaml ]]; then
+    if -f /etc/kubernetes/manifests/etcd.yaml; then
         mv /etc/kubernetes/manifests/etcd.yaml /etc/kubernetes/manifests/etcd.yaml.bak
         log "etcd static pod manifest moved"
         sleep 10  # Wait for kubelet to stop the pod
@@ -805,7 +806,7 @@ stop_etcd() {
 backup_current_data() {
     log "Backing up current etcd data..."
     
-    if [[ -d "$ETCD_DATA_DIR" ]]; then
+    if -d "$ETCD_DATA_DIR"; then
         local backup_name="${ETCD_DATA_DIR}.pre-restore.$(date +%Y%m%d_%H%M%S)"
         mv "$ETCD_DATA_DIR" "$backup_name"
         log "Current data backed up to: $backup_name"
@@ -825,7 +826,7 @@ restore_snapshot() {
     restore_cmd+=" --initial-cluster-token=$ETCD_INITIAL_CLUSTER_TOKEN"
     restore_cmd+=" --initial-advertise-peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS"
     
-    if [[ -n "$ETCD_INITIAL_CLUSTER" ]]; then
+    if -n "$ETCD_INITIAL_CLUSTER"; then
         restore_cmd+=" --initial-cluster=$ETCD_INITIAL_CLUSTER"
     else
         restore_cmd+=" --initial-cluster=${ETCD_NAME}=${ETCD_INITIAL_ADVERTISE_PEER_URLS}"
@@ -844,7 +845,7 @@ start_etcd() {
     log "Starting etcd service..."
     
     # For kubeadm-based etcd (static pod)
-    if [[ -f /etc/kubernetes/manifests/etcd.yaml.bak ]]; then
+    if -f /etc/kubernetes/manifests/etcd.yaml.bak; then
         mv /etc/kubernetes/manifests/etcd.yaml.bak /etc/kubernetes/manifests/etcd.yaml
         log "etcd static pod manifest restored"
     fi
@@ -858,7 +859,7 @@ start_etcd() {
     # Wait for etcd to become healthy
     log "Waiting for etcd to become healthy..."
     local retries=30
-    while [[ $retries -gt 0 ]]; do
+    while $retries -gt 0; do
         if ETCDCTL_API=3 etcdctl endpoint health &>/dev/null; then
             log "etcd is healthy!"
             return 0
@@ -891,7 +892,7 @@ main() {
     check_prerequisites
     
     read -p "Are you sure you want to proceed? (yes/no): " confirm
-    if [[ "$confirm" != "yes" ]]; then
+    if "$confirm" != "yes"; then
         log "Restore cancelled"
         exit 0
     fi
@@ -1962,10 +1963,10 @@ send_notification() {
     local message="$2"
     local status="$3"
     
-    if [[ -n "$SLACK_WEBHOOK" ]]; then
+    if -n "$SLACK_WEBHOOK"; then
         local color="good"
-        [[ "$status" == "warning" ]] && color="warning"
-        [[ "$status" == "error" ]] && color="danger"
+        "$status" == "warning" && color="warning"
+        "$status" == "error" && color="danger"
         
         curl -s -X POST "$SLACK_WEBHOOK" \
             -H 'Content-Type: application/json' \
@@ -1986,7 +1987,7 @@ verify_etcd_backups() {
     local status="success"
     
     # Check if backup directory exists
-    if [[ ! -d "$ETCD_BACKUP_DIR" ]]; then
+    if ! -d "$ETCD_BACKUP_DIR"; then
         error "etcd backup directory not found: $ETCD_BACKUP_DIR"
         return 1
     fi
@@ -1994,7 +1995,7 @@ verify_etcd_backups() {
     # Find latest backup
     local latest_backup=$(ls -t "$ETCD_BACKUP_DIR"/etcd-snapshot-*.db* 2>/dev/null | head -1)
     
-    if [[ -z "$latest_backup" ]]; then
+    if -z "$latest_backup"; then
         error "No etcd backups found"
         return 1
     fi
@@ -2002,10 +2003,10 @@ verify_etcd_backups() {
     # Check backup age
     local backup_age_hours=$(( ($(date +%s) - $(stat -c %Y "$latest_backup" 2>/dev/null || stat -f %m "$latest_backup")) / 3600 ))
     
-    if [[ $backup_age_hours -gt 24 ]]; then
+    if $backup_age_hours -gt 24; then
         error "Latest etcd backup is $backup_age_hours hours old (threshold: 24h)"
         status="error"
-    elif [[ $backup_age_hours -gt 12 ]]; then
+    elif $backup_age_hours -gt 12; then
         warning "Latest etcd backup is $backup_age_hours hours old"
         status="warning"
     else
@@ -2017,7 +2018,7 @@ verify_etcd_backups() {
     local snapshot_file="$latest_backup"
     
     # Decompress if needed
-    if [[ "$snapshot_file" == *.gz ]]; then
+    if "$snapshot_file" == *.gz; then
         local temp_file=$(mktemp)
         gunzip -c "$snapshot_file" > "$temp_file"
         snapshot_file="$temp_file"
@@ -2032,7 +2033,7 @@ verify_etcd_backups() {
     fi
     
     # Cleanup temp file
-    [[ -f "${temp_file:-}" ]] && rm -f "$temp_file"
+    -f "${temp_file:-}" && rm -f "$temp_file"
     
     # Count backups
     local backup_count=$(ls "$ETCD_BACKUP_DIR"/etcd-snapshot-*.db* 2>/dev/null | wc -l)
@@ -2054,7 +2055,7 @@ verify_velero_backups() {
     
     # Check Velero pod status
     local velero_pods=$(kubectl get pods -n "$VELERO_NAMESPACE" -l app.kubernetes.io/name=velero -o jsonpath='{.items[*].status.phase}')
-    if [[ "$velero_pods" != *"Running"* ]]; then
+    if "$velero_pods" != *"Running"*; then
         error "Velero pod is not running"
         status="error"
     else
@@ -2066,7 +2067,7 @@ verify_velero_backups() {
     kubectl get backupstoragelocation -n "$VELERO_NAMESPACE" -o wide
     
     local unavailable_bsls=$(kubectl get backupstoragelocation -n "$VELERO_NAMESPACE" -o jsonpath='{.items[?(@.status.phase!="Available")].metadata.name}')
-    if [[ -n "$unavailable_bsls" ]]; then
+    if -n "$unavailable_bsls"; then
         error "Unavailable backup storage locations: $unavailable_bsls"
         status="error"
     else
@@ -2082,7 +2083,7 @@ verify_velero_backups() {
     # Check for failed backups in last 24h
     local failed_count=$(velero backup get --output json 2>/dev/null | jq '[.items[] | select(.status.phase=="Failed")] | length')
     
-    if [[ "$failed_count" -gt 0 ]]; then
+    if "$failed_count" -gt 0; then
         warning "$failed_count failed backup(s) found"
         status="warning"
     fi
@@ -2098,12 +2099,12 @@ verify_velero_backups() {
         local last_backup=$(velero backup get --output json 2>/dev/null | \
             jq -r "[.items[] | select(.metadata.labels[\"velero.io/schedule-name\"]==\"$schedule\")] | sort_by(.status.completionTimestamp) | reverse | .[0]")
         
-        if [[ "$last_backup" != "null" ]]; then
+        if "$last_backup" != "null"; then
             local backup_name=$(echo "$last_backup" | jq -r '.metadata.name')
             local backup_phase=$(echo "$last_backup" | jq -r '.status.phase')
             local backup_time=$(echo "$last_backup" | jq -r '.status.completionTimestamp')
             
-            if [[ "$backup_phase" == "Completed" ]]; then
+            if "$backup_phase" == "Completed"; then
                 success "Schedule '$schedule': $backup_name ($backup_phase) - $backup_time"
             else
                 warning "Schedule '$schedule': $backup_name ($backup_phase) - $backup_time"
@@ -2139,7 +2140,7 @@ verify_csi_snapshots() {
     local failed_snapshots=$(kubectl get volumesnapshots --all-namespaces -o json 2>/dev/null | \
         jq -r '[.items[] | select(.status.readyToUse==false)] | length')
     
-    if [[ "$failed_snapshots" -gt 0 ]]; then
+    if "$failed_snapshots" -gt 0; then
         warning "$failed_snapshots volume snapshot(s) not ready"
         status="warning"
     else
@@ -2158,7 +2159,7 @@ verify_database_backups() {
     local backup_cronjobs=$(kubectl get cronjobs --all-namespaces -o json 2>/dev/null | \
         jq -r '.items[] | select(.metadata.name | contains("backup"))')
     
-    if [[ -z "$backup_cronjobs" ]]; then
+    if -z "$backup_cronjobs"; then
         warning "No database backup CronJobs found"
         echo "warning"
         return
@@ -2174,21 +2175,21 @@ verify_database_backups() {
         local last_success=$(kubectl get cronjob "$name" -n "$namespace" -o jsonpath='{.status.lastSuccessfulTime}' 2>/dev/null)
         local last_schedule=$(kubectl get cronjob "$name" -n "$namespace" -o jsonpath='{.status.lastScheduleTime}' 2>/dev/null)
         
-        if [[ -n "$last_success" ]]; then
+        if -n "$last_success"; then
             local age_hours=$(( ($(date +%s) - $(date -d "$last_success" +%s 2>/dev/null || date -jf "%Y-%m-%dT%H:%M:%SZ" "$last_success" +%s)) / 3600 ))
             
-            if [[ $age_hours -gt 48 ]]; then
+            if $age_hours -gt 48; then
                 error "$cronjob: Last success $age_hours hours ago"
                 status="error"
-            elif [[ $age_hours -gt 24 ]]; then
+            elif $age_hours -gt 24; then
                 warning "$cronjob: Last success $age_hours hours ago"
-                [[ "$status" != "error" ]] && status="warning"
+                "$status" != "error" && status="warning"
             else
                 success "$cronjob: Last success $age_hours hours ago"
             fi
         else
             warning "$cronjob: No successful backup recorded"
-            [[ "$status" != "error" ]] && status="warning"
+            "$status" != "error" && status="warning"
         fi
     done
     
@@ -2214,8 +2215,8 @@ generate_report() {
     
     # Determine overall status
     local overall="success"
-    [[ "$etcd_status" == "warning" || "$velero_status" == "warning" || "$csi_status" == "warning" || "$db_status" == "warning" ]] && overall="warning"
-    [[ "$etcd_status" == "error" || "$velero_status" == "error" || "$csi_status" == "error" || "$db_status" == "error" ]] && overall="error"
+    "$etcd_status" == "warning" && overall="warning"
+    "$etcd_status" == "error" && overall="error"
     
     log "Overall Status: $overall"
     
@@ -2303,18 +2304,18 @@ main "$@"
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|平台运维概述]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/03-capacity-planning-resource-assessment.md|容量规划与资源评估 (Capacity Planning & Resource Assessment)]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/07-gitops-configuration-management.md|GitOps配置管理 (GitOps Configuration Management)]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
+- Domain-9 平台运维 — 开源项目索引
+- 平台运维概述
+- 集群生命周期管理
+- 容量规划与资源评估 (Capacity Planning & Resource Assessment)
+- 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- GitOps配置管理 (GitOps Configuration Management)
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
 
 ## Related
 
@@ -2323,7 +2324,7 @@ main "$@"
 
 ## See Also
 
-- [[domain-07-platform-engineering/10-security-compliance.md|10-security-compliance]]
-- [[domain-07-platform-engineering/11-disaster-recovery-business-continuity.md|11-disaster-recovery-business-continuity]]
-- [[domain-07-platform-engineering/13-multi-cluster-management.md|13-multi-cluster-management]]
-- [[domain-07-platform-engineering/14-large-scale-cluster-optimization.md|14-large-scale-cluster-optimization]]
+- 10-security-compliance
+- 11-disaster-recovery-business-continuity
+- 13-multi-cluster-management
+- 14-large-scale-cluster-optimization

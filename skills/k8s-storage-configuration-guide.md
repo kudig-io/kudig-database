@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 存储配置最佳实践
@@ -87,10 +88,10 @@ PVC 删除后 PV 被删除会导致数据丢失。生产环境应使用 Retain �
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[concepts/storage-model.md|Persistent Storage Model]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/storage-model.md|Persistent [[Kubernetes 存储配置最佳实践|Storage]]stent Storage Model (PV/PVC/StorageClass)|Storage Model]]]]
 - [[concepts/block-file-object-storage.md|Block vs File vs Object Storage]]
-- [[skills/manage-persistent-storage.md|Manage Persistent Storage]]
+- [[skills/manage-persistent-storage.md|[[Manage Persistent Storage|Manage Persistent Storage]]]]
 
 ## Related
 

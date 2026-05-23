@@ -29,9 +29,10 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
-# Service Networking
+# [[Service|Service]] Networking
 
 ## Service Types
 
@@ -47,7 +48,7 @@ prerequisites:
 Clients discover services via DNS:
 - **FQDN**: `my-svc.my-ns.svc.cluster.local`
 - **CoreDNS** resolves to ClusterIP
-- **kube-proxy** routes ClusterIP to backend Pods
+- **kube-proxy** routes ClusterIP to backend [[Pods|Pods]]
 
 ## Load Balancing Modes
 
@@ -64,7 +65,7 @@ Since Kubernetes v1.21, EndpointSlice replaces Endpoints as the scalable way to 
 - Multiple address types (IPv4, IPv6, FQDN)
 - Topology-aware routing
 
-## Ingress and Gateway API
+## [[Ingress|Ingress]] and Gateway API
 
 - **Ingress**: L7 HTTP/HTTPS routing with TLS termination (nginx, ALB, etc.)
 - **Gateway API**: Next-generation successor to Ingress with richer routing, multi-tenant support, and standardized resource types (HTTPRoute, TCPRoute, etc.)
@@ -81,4 +82,4 @@ Since Kubernetes v1.21, EndpointSlice replaces Endpoints as the scalable way to 
 - Kubernetes Network Model
 - Ingress Controller
 
-- [[domain-17-system-foundation/10-service-networking-events.md|10-service-networking-events]]
+- 10-service-networking-events

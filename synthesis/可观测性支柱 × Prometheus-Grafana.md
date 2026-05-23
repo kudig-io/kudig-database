@@ -33,9 +33,17 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/deployment]]"
+    type: uses
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
 ---
 
-# 可观测性支柱 × Prometheus-Grafana
+# 可观测性支柱 × [[entities/prometheus|Prometheus]]-Grafana
 
 
 ## 连接点
@@ -101,63 +109,65 @@ Prometheus 本身不存储日志和追踪，但它的标签模型定义了关联
 
 ## See Also
 
-- [[synthesis/etcd × 可观测性.md|etcd × 可观测性]]
+- [[entities/etcd|etcd]] × 可观测性.md|etcd × 可观测性]]
 - [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
 - [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
-- [[synthesis/控制器模式 × Deployment.md|控制器模式 × Deployment]]
+- [[entities/deployment|Deployment]].md|控制器模式 × Deployment]]
 
 ## Related
 
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.0|grafana v11.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.4|grafana v8.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-5.1|grafana v5.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-10.1|grafana v10.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.5|grafana v9.5 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.6|grafana v6.6 Release Notes]]
+- grafana v8.4 Release Notes
+- grafana v5.1 Release Notes
+- grafana v10.1 Release Notes
+- grafana v9.5 Release Notes
+- grafana v6.6 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-12.3|grafana v12.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-4.4|grafana v4.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.0|grafana v8.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.3|grafana v7.3 Release Notes]]
+- grafana v4.4 Release Notes
+- grafana v8.0 Release Notes
+- grafana v7.3 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.4|grafana v11.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.2|grafana v6.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.1|grafana v9.1 Release Notes]]
+- grafana v6.2 Release Notes
+- grafana v9.1 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-12.2|grafana v12.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-4.5|grafana v4.5 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.2|grafana v7.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.1|grafana v8.1 Release Notes]]
+- grafana v4.5 Release Notes
+- grafana v7.2 Release Notes
+- grafana v8.1 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.5|grafana v11.5 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.0|grafana v9.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.3|grafana v6.3 Release Notes]]
+- grafana v9.0 Release Notes
+- grafana v6.3 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-10.4|grafana v10.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-5.4|grafana v5.4 Release Notes]]
+- grafana v5.4 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.1|grafana v11.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.5|grafana v8.5 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-5.0|grafana v5.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-10.0|grafana v10.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.7|grafana v6.7 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.4|grafana v9.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-4.6|grafana v4.6 Release Notes]]
+- grafana v8.5 Release Notes
+- grafana v5.0 Release Notes
+- grafana v10.0 Release Notes
+- grafana v6.7 Release Notes
+- grafana v9.4 Release Notes
+- grafana v4.6 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-12.1|grafana v12.1 Release Notes]]
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.6|grafana v11.6 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.1|grafana v7.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.2|grafana v8.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.3|grafana v9.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.0|grafana v6.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.5|grafana v7.5 Release Notes]]
+- grafana v7.1 Release Notes
+- grafana v8.2 Release Notes
+- grafana v9.3 Release Notes
+- grafana v6.0 Release Notes
+- grafana v7.5 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.2|grafana v11.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-4.2|grafana v4.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-5.3|grafana v5.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.4|grafana v6.4 Release Notes]]
+- grafana v4.2 Release Notes
+- grafana v5.3 Release Notes
+- grafana v6.4 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-10.3|grafana v10.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.4|grafana v7.4 Release Notes]]
+- grafana v7.4 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-11.3|grafana v11.3 Release Notes]]
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-12.4|grafana v12.4 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-4.3|grafana v4.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-5.2|grafana v5.2 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.5|grafana v6.5 Release Notes]]
+- grafana v4.3 Release Notes
+- grafana v5.2 Release Notes
+- grafana v6.5 Release Notes
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-10.2|grafana v10.2 Release Notes]]
 - [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-12.0|grafana v12.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-8.3|grafana v8.3 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-7.0|grafana v7.0 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-6.1|grafana v6.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/observability/grafana/RELEASE-NOTES-9.2|grafana v9.2 Release Notes]]
+- grafana v8.3 Release Notes
+- grafana v7.0 Release Notes
+- grafana v6.1 Release Notes
+- grafana v9.2 Release Notes
+- [[synthesis/etcd × 可观测性|etcd × 可观测性]]
+- [[log|Wiki Log]]

@@ -42,10 +42,11 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 金融科技FinTech Kubernetes生产架构设计
-description: '# 金融科技 (FinTech) Kubernetes 生产架构设计'
+description: '# 金融科技 (FinTech) [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -55,7 +56,7 @@ tags:
 - redis
 - kafka
 - job
-- ingress
+- [[Ingress|ingress]]
 - gateway
 - networkpolicy
 last_updated: 2026-05-18
@@ -779,7 +780,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -794,7 +795,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/04-im-rtc-architecture.md|04-im-rtc-architecture]]
-- [[domain-20-application-patterns/05-online-education-architecture.md|05-online-education-architecture]]
-- [[domain-20-application-patterns/07-iot-platform-architecture.md|07-iot-platform-architecture]]
-- [[domain-20-application-patterns/08-ai-ml-inference-architecture.md|08-ai-ml-inference-architecture]]
+- 04-im-rtc-architecture
+- 05-online-education-architecture
+- 07-iot-platform-architecture
+- 08-ai-ml-inference-architecture

@@ -1,5 +1,5 @@
 ---
-title: etcd 证书体系源码分析
+title: etcd 证书体系源码分析 (topic-code-analysis)
 description: 'description: ''| 用户自定义 | `listen-client-urls` 中解析的地址 |'''
 category: general
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: etcd 证书体系源码分析

@@ -75,9 +75,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
-# Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)
+# [[Kubernetes|Kubernetes]]es Scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -103,7 +104,7 @@ cross_refs:
 
 | 职责 | 描述 | 关键机制 |
 |------|------|----------|
-| Pod 分配 (Pod Assignment) | 为 Pending 状态的 Pod 选择最优节点 | 过滤 (Filter) + 评分 (Score) |
+| Pod 分配 (Pod Assignment) | 为 Pending 状态的 Pod 选择最优节点 | 过滤 (Filter) + 评分 ([[Score|Score]]) |
 | 资源匹配 (Resource Matching) | 确保节点资源满足 Pod 需求 | Requests/Limits 计算 |
 | 约束满足 (Constraint Satisfaction) | 满足亲和性、容忍度等约束 | Affinity/Anti-Affinity/Toleration |
 | 负载均衡 (Load Balancing) | 在集群节点间均衡分配工作负载 | Scoring 策略 |
@@ -742,7 +743,7 @@ description: "用于可中断的批处理任务"
 | PriorityClass 名称 | 优先级值 | 用途 |
 |--------------------|----------|------|
 | system-node-critical | 2000001000 | 节点关键组件 (如 kube-proxy) |
-| system-cluster-critical | 2000000000 | 集群关键组件 (如 CoreDNS) |
+| system-cluster-critical | 2000000000 | 集群关键组件 (如 [[CoreDNS|CoreDNS]]) |
 | (用户自定义) | -2147483648 ~ 1000000000 | 用户工作负载 |
 
 ### 6.3 抢占流程详解
@@ -2073,25 +2074,25 @@ kubectl delete pod <pod-name>
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/18-api-priority-fairness.md|18-api-priority-fairness]]
-- [[domain-01-cluster-fundamentals/19-etcd-operations.md|19-etcd-operations]]
-- [[domain-01-cluster-fundamentals/21-container-runtime-deep-dive.md|21-container-runtime-deep-dive]]
-- [[domain-01-cluster-fundamentals/22-container-storage-deep-dive.md|22-container-storage-deep-dive]]
+- 18-api-priority-fairness
+- 19-etcd-operations
+- 21-container-runtime-deep-dive
+- 22-container-storage-deep-dive
 
 ## Related
 

@@ -36,9 +36,10 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Service Mesh Architecture
+# [[Service|Service]]Service Mesh）|Service Mesh]] Architecture
 
 ## What is a Service Mesh
 
@@ -114,4 +115,4 @@ A service mesh is an infrastructure layer that handles service-to-service commun
 - [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
 - [[synthesis/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
 
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture.md|14-service-mesh-architecture]]
+- 14-service-mesh-architecture

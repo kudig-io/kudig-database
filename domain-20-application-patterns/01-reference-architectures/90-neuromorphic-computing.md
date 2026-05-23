@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 类脑计算架构设计
@@ -47,7 +48,7 @@ audience:
 - 阿里云 HPC 解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 类脑计算 SNN 脉冲神经网络 Kubernetes 部署
+- 类脑计算 SNN 脉冲神经网络 [[Kubernetes|Kubernetes]] 部署
 - 神经形态芯片 AI 推理架构
 - ANN-to-SNN 转换工具链
 - 边缘类脑计算低功耗推理
@@ -682,7 +683,7 @@ spec:
 | 对象存储 | **OSS** |
 | 数据库 | **PolarDB** |
 | 可观测性 | **ARMS + SLS** |
-| 工作流 | **Argo Workflows** |
+| 工作流 | **[[Argo|Argo]]go Workflows|Argo Workflows]]** |
 
 #<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
 
@@ -711,7 +712,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -726,11 +727,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/88-nanomaterials.md|88-nanomaterials]]
-- [[domain-20-application-patterns/89-crispr-gene-editing.md|89-crispr-gene-editing]]
-- [[domain-20-application-patterns/91-urban-air-mobility.md|91-urban-air-mobility]]
-- [[domain-20-application-patterns/92-smart-sports-venue.md|92-smart-sports-venue]]
+- 88-nanomaterials
+- 89-crispr-gene-editing
+- 91-urban-air-mobility
+- 92-smart-sports-venue
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # 节点驱逐与维护
@@ -144,20 +145,20 @@ spec:
 | `DaemonSet Pod found but --ignore-daemonsets not set` | 未设置忽略 DaemonSet | 添加 `--ignore-daemonsets` |
 | `Cannot evict pod as it would violate PDB` | PDB 阻止驱逐 | 增加 Pod 副本数，等待新 Pod 就绪后重试 |
 | `pod has emptyDir volume but --delete-emptydir-data not set` | Pod 使用 emptyDir 卷 | 添加 `--delete-emptydir-data` |
-| `pods not managed by RC/RS/Job/StatefulSet` | Pod 无控制器管理 | 添加 `--force` 强制删除 |
+| `[[Pods|pods]] not managed by RC/RS/Job/StatefulSet` | Pod 无控制器管理 | 添加 `--force` 强制删除 |
 | `drain hung` | Pod 容器忽略 SIGTERM | 检查应用信号处理，使用 `--grace-period=0` |
 
 ## 相关技能
 
-- [[skills/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
-- [[skills/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]]
+- [[skills/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
+- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
 - [[skills/backup-restore-etcd.md|备份和恢复 etcd]]
 - [[concepts/resource-management.md|资源管理]]
 
 ## Related
 
 - [[skills/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
-- [[entities/statefulset.md|statefulset]] — StatefulSet
+- [[entities/statefulset.md|[[StatefulSet|statefulset]]]] — StatefulSet
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

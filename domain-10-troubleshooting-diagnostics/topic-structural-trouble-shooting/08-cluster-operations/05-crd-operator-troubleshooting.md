@@ -1,5 +1,5 @@
 ---
-title: CRD 与 Operator 故障排查指南
+title: CRD 与 Operator 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CRD 与 Operator 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 title: CRD 与 Operator 故障排查指南
@@ -51,7 +52,7 @@ tags:
 - troubleshooting
 - decision-tree
 - controller-manager
-- helm
+- [[Helm|helm]]
 - rbac
 - crd
 - operator
@@ -90,7 +91,7 @@ k8s_versions:
 
 # CRD 与 Operator 故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - v1.25+ CRD 验证表达式 (CEL) GA
@@ -104,7 +105,7 @@ k8s_versions:
 
 1. **CRD 是否存在**：`kubectl get crd | grep <kind>`，确认版本与资源可用。
 2. **Webhook 健康**：`kubectl get validatingwebhookconfigurations`，检查超时/证书问题。
-3. **Operator 存活**：`kubectl get pods -n <operator-ns>`，查看重启与日志错误。
+3. **Operator 存活**：`kubectl get [[Pods|pods]] -n <operator-ns>`，查看重启与日志错误。
 4. **Reconcile 失败**：`kubectl logs <operator-pod>`，检索 requeue/error。
 5. **Finalizer 卡住**：资源 Terminating 时查看 `metadata.finalizers`。
 6. **快速缓解**：
@@ -860,8 +861,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

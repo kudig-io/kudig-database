@@ -1,5 +1,5 @@
 ---
-title: bpfman
+title: bpfman (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # bpfman
@@ -61,7 +62,7 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 ## 参考链接
 
 - [[cilium]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 - [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
@@ -74,5 +75,5 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 - [[volcano]] — Volcano
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/bpfman/bpfman.md|bpfman]]
+- bpfman
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

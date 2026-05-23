@@ -24,10 +24,18 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/argocd]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets]]"
+    type: uses
 ---
 
 ---
-title: GitOps x 平台工程
+title: [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps]] x 平台工程
 category: synthesis
 tags:
 - k8s
@@ -42,7 +50,7 @@ sources:
 - concepts/gitops-principles.md
 - concepts/platform-engineering-idp.md
 - concepts/infrastructure-as-code.md
-- entities/argocd.md
+- argocd.md
 - entities/backstage.md
 - entities/crossplane.md
 - entities/flux.md
@@ -54,7 +62,7 @@ provenance:
   inferred: 0.7
   ambiguous: 0.1
 base_confidence: 0.88
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 
 tier: supporting---
@@ -95,7 +103,7 @@ GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[co
 | **Git 成为瓶颈** | GitOps 和平台即代码都依赖 Git 作为单一事实源。在大型组织中，单个 Git 仓库会成为协调瓶颈。多仓库策略（app-of-apps、Kustomize overlay 按环境拆分）增加了平台必须抽象掉的复杂度。 |
 | **漂移 vs. 灵活性** | GitOps 的漂移检测将任何与声明状态的偏离视为问题。但开发者可能需要临时的调试配置，这些配置与黄金路径策略冲突。平台需要一种"逃生舱"机制，既不破坏 GitOps 保证，又允许合理的灵活性。 |
 | **平台锁定** | 黄金路径创建了固执己见的工作流。如果平台使用了 ArgoCD 特有的功能（ApplicationSet、SyncWaves），迁移到 Flux 或其他引擎就会变得困难。平台抽象层（Kratix）有帮助但尚不成熟。 |
-| **Secret 管理复杂度** | GitOps 要求 Git 中的 Secret（通过 Sealed Secrets 或 SOPS 加密），而平台工程希望开发者通过门户请求 Secret。这两种工作流必须融合——开发者通过 Backstage 请求 Secret 应该产生一个加密的 Git 提交，Flux 可以协调它。 |
+| **Secret 管理复杂度** | GitOps 要求 Git 中的 Secret（通过 Sealed [[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]] 或 SOPS 加密），而平台工程希望开发者通过门户请求 Secret。这两种工作流必须融合——开发者通过 Backstage 请求 Secret 应该产生一个加密的 Git 提交，Flux 可以协调它。 |
 | **认知负载分布** | 平台工程的目标是减少开发者认知负担。但这意味着平台团队吸收了**所有** GitOps 复杂度。随着平台支持更多场景，平台团队的负担非线性增长。 |
 
 ## 开放问题
@@ -125,3 +133,5 @@ GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[co
 - [[opengitops]] — OpenGitOps
 - [[sops]] — SOPS (Secrets OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argo|Argo Workflows]]
+- [[domain-15-specialized-tech/03-extensions/06-helm-charts-management|47 - Helm Chart开发与管理]]

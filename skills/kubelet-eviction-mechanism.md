@@ -26,9 +26,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
-# kubelet 资源驱逐机制
+# [[kubelet|kubelet]] 资源驱逐机制
 
 ## 概述
 
@@ -216,7 +217,7 @@ kubectl describe pod <pod> | grep -A 5 "Last State"
 
 ## 相关技能
 
-- [[skills/node-drain-and-maintenance.md|节点驱逐与维护]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
 - [[concepts/resource-management.md|资源管理]]
 - [[pod-lifecycle|Pod 生命周期]]
 - [[entities/kubelet.md|kubelet]]

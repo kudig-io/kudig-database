@@ -1,5 +1,5 @@
 ---
-title: 证书异常故障树分析
+title: 证书异常故障树分析 (skills)
 description: ROT_AUTO_OR --> ROT_AUTO2[轮换触发阈值配置错误]
 category: skills
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 fta_id: FTA-CERTIFICATE-001
 component: Certificate
 severity: high
+created: "2026-05-23"
 ---
 
 # 证书异常故障树分析

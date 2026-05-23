@@ -1,5 +1,5 @@
 ---
-title: Podman Desktop
+title: Podman Desktop [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - Desktop
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Podman Desktop
@@ -70,5 +71,5 @@ Podman Desktop 是一个开源的桌面容器管理工具，为开发者提供�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[podman-desktop]] — Podman Desktop
 
-- [[domain-19-landscape-references/sandbox/podman-container-tools/podman-container-tools.md|podman-container-tools]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- podman-container-tools
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference

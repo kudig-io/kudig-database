@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Day 9: K8s 审计日志配置与分析实操

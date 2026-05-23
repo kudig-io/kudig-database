@@ -25,13 +25,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Volume Attributes Classes（卷属性类）
 
 ## 概述
 
-VolumeAttributesClass（VAC）是 Kubernetes 在 v1.34 中达到 GA（默认启用）的一项功能，它允许管理员定义存储的可变“属性类”。与 StorageClass 主要关注卷的初始供给不同，VolumeAttributesClass 关注的是已创建卷的属性修改，例如调整 IOPS 或吞吐量。
+VolumeAttributesClass（VAC）是 [[Kubernetes|Kubernetes]] 在 v1.34 中达到 GA（默认启用）的一项功能，它允许管理员定义存储的可变“属性类”。与 StorageClass 主要关注卷的初始供给不同，VolumeAttributesClass 关注的是已创建卷的属性修改，例如调整 IOPS 或吞吐量。
 
 ## 核心概念/原理
 
@@ -183,5 +184,5 @@ kubectl get pvc <name> -o jsonpath='{.spec.volumeAttributesClassName}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]

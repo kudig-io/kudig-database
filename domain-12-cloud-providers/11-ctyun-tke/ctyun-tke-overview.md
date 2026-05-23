@@ -37,9 +37,10 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述
+title: 天翼云 TKE (Tianyi Cloud [[Kubernetes|Kubernetes]] Engine) 概述
 description: '# 天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述'
 category: cloud-provider
 tags:
@@ -49,9 +50,9 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
 last_updated: 2026-05
 difficulty: advanced
@@ -1268,7 +1269,7 @@ main_recovery() {
             
             # 验证恢复结果
             local remaining_issues=($(detect_telecom_issues))
-            if [[ ! " ${remaining_issues[*]} " =~ " ${issue} " ]]; then
+            if ! " ${remaining_issues[*]} " =~ " ${issue} "; then
                 echo "✅ 问题 $issue 已解决"
                 break
             elif [ $attempt -eq $MAX_RECOVERY_ATTEMPTS ]; then
@@ -1477,6 +1478,6 @@ echo "风险评估报告已生成: telecom-upgrade-risk-assessment.md"
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

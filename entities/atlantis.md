@@ -1,5 +1,5 @@
 ---
-title: Atlantis
+title: Atlantis (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # Atlantis
@@ -56,7 +57,7 @@ Atlantis 是一个 Terraform/OpenTofu Pull Request 自动化工具。它监听 G
 - **分支策略**: 只允许从 main/master 分支 apply
 - **审批要求**: 生产环境要求 PR 审批
 - **锁定管理**: 定期清理过期的锁
-- **Secret 管理**: 使用 Vault 或 AWS Secrets Manager
+- **Secret 管理**: 使用 Vault 或 AWS [[Secrets|Secrets]] Manager
 - **状态后端**: 使用远程状态后端 (S3, GCS)
 - **高可用**: 使用持久存储保存 Atlantis 数据
 
@@ -79,7 +80,7 @@ Atlantis 是一个 Terraform/OpenTofu Pull Request 自动化工具。它监听 G
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/atlantis/atlantis.md|atlantis]]
+- atlantis
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

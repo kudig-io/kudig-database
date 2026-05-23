@@ -71,6 +71,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md
   label: '运维技能: 03-pod-pending'
+created: "2026-05-23"
 ---
 
 # 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
@@ -120,7 +121,7 @@ cross_refs:
 
 ### 1.1 Pod Pending 状态定义
 
-Pod 处于 Pending 状态表示 Pod 已被 Kubernetes API Server 接受，但尚未被调度到节点或容器镜像尚未拉取。
+Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。
 
 | 阶段 | 状态 | 说明 | 诊断入口 |
 |------|------|------|---------|
@@ -218,7 +219,7 @@ Pod 处于 Pending 状态表示 Pod 已被 Kubernetes API Server 接受，但尚
 
 ### 2.1 快速诊断流程图
 
-<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
+<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -1819,9 +1820,9 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

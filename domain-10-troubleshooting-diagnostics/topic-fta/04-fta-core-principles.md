@@ -1,5 +1,5 @@
 ---
-title: 第四章：FTA 方法论核心原则
+title: 第四章：FTA 方法论核心原则 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 fta_id: FTA-04_CORE_PRINCIPLES-001
 component: 04 Core Principles
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第四章：FTA 方法论核心原则
@@ -51,9 +52,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - pdb
 - gpu
 - agent

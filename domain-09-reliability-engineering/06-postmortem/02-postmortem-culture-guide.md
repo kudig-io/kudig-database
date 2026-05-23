@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
+created: "2026-05-23"
 ---
 
 # 事后复盘文化建立指南

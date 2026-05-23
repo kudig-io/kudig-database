@@ -1,5 +1,5 @@
 ---
-title: Pod 安全与 SecurityContext 故障排查指南
+title: Pod 安全与 SecurityContext 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Pod 安全与 SecurityContext 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Pod 安全与 SecurityContext 故障排查指南
@@ -50,9 +51,9 @@ tags:
 - troubleshooting
 - decision-tree
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - opa
-- daemonset
+- [[DaemonSet|daemonset]]
 - rbac
 - webhook
 last_updated: 2026-05
@@ -757,14 +758,14 @@ capsh --decode=<hex>
 
 ### 相关文档
 
-- [Pod 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
 - [RBAC 故障排查](./01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
+- [Webhook/准入控制故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting|05-webhook-admission-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 

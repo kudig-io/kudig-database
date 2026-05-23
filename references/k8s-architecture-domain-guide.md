@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Architecture Domain Guide
@@ -76,7 +77,7 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 
 ## Related
 
-- [[concepts/observability-pillars.md|observability-pillars]] — [[domain-06-observability/01-observability-architecture-overview.md|01-observability-architecture-overview]] Pillars
+- [[concepts/observability-pillars.md|observability-pillars]] — 01-observability-architecture-overview Pillars
 - [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[pod-lifecycle]] — Pod Lifecycle
 - [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
@@ -88,5 +89,5 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|01-plane-architecture-overview]]
+- 01-plane-architecture-overview
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]

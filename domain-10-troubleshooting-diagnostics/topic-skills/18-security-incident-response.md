@@ -72,6 +72,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L1-advisory
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl get events -A --sort-by='.lastTimestamp' | grep -E 'Warning|Forbidden|Denied' | tail -20 显示异常安全事件 -->
@@ -82,17 +84,17 @@ k8s_versions:
 
 ## 1. 概述
 
-安全事件应急响应是 Kubernetes 集群运维中**最紧迫且风险最高**的场景之一。与传统基础设施故障不同，安全事件具有时间敏感性、影响扩散性和取证必要性三大特征。一旦发生活跃入侵，每分钟的延迟都可能导致数据泄露范围扩大、横向移动加剧或证据被销毁。
+安全事件应急响应是 [[Kubernetes|Kubernetes]] 集群运维中**最紧迫且风险最高**的场景之一。与传统基础设施故障不同，安全事件具有时间敏感性、影响扩散性和取证必要性三大特征。一旦发生活跃入侵，每分钟的延迟都可能导致数据泄露范围扩大、横向移动加剧或证据被销毁。
 
 ### 覆盖范围
 
-本 Skill 覆盖以下安全事件类型：
+本 [[SKILL|Skill]] 覆盖以下安全事件类型：
 
 1. **容器逃逸检测与遏制**: 检测并阻止攻击者从容器内部突破到宿主机
 2. **供应链攻击响应**: 恶意镜像、被篡改的 base image、依赖注入等
 3. **网络异常流量检测**: 横向移动、DNS 隧道、异常外连（特别是矿池连接）
 4. **Secret/凭据泄露应急处理**: 敏感信息暴露后的紧急轮换和影响控制
-5. **合规检查与审计**: CIS Benchmark、Pod Security Standards 违规检测
+5. **合规检查与审计**: CIS Benchmark、Pod Securityod Security Standards]] 违规检测
 6. **取证与证据保全**: 确保事件可追溯、证据链完整
 
 ### 典型触发场景

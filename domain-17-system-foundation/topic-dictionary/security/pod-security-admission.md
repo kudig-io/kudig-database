@@ -27,13 +27,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Pod 安全准入
 
 ## 概述
 
-Kubernetes 提供了一个内置的 **Pod Security Admission** 准入控制器，用于强制执行 Pod 安全标准（Pod Security Standards）。该功能自 Kubernetes v1.25 起达到稳定（Stable）状态。Pod 安全限制在 Pod 创建时应用于命名空间级别。
+[[Kubernetes|Kubernetes]] 提供了一个内置的 **Pod Security Admission** 准入控制器，用于强制执行 Pod 安全标准（Pod Security Standards）。该功能自 Kubernetes v1.25 起达到稳定（Stable）状态。Pod 安全限制在 Pod 创建时应用于命名空间级别。
 
 ## 核心概念/原理
 

@@ -36,6 +36,16 @@ prerequisites:
 - redis-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/deployment]]"
+    type: uses
+  - target: "[[entities/cloudnativepg]]"
+    type: related_to
+  - target: "[[entities/kubeflow]]"
+    type: related_to
+  - target: "[[entities/strimzi]]"
+    type: related_to
 ---
 
 # 控制器模式 × Operator 模式
@@ -48,8 +58,8 @@ prerequisites:
 
 ## Where They Co-occur
 
-- **数据库 Operator**：内置的 StatefulSet 控制器管理 Pod 的生命周期，但数据库的备份、恢复、版本升级、故障转移等业务逻辑需要自定义 Operator 来实现（如 CloudNativePG、Strimzi Kafka Operator）。
-- **AI 工作负载**：训练任务的弹性调度（如 Volcano、Kubeflow Training Operator）使用自定义控制器来管理 Gang Scheduling、弹性容错和检查点恢复。
+- **数据库 Operator**：内置的 StatefulSet 控制器管理 Pod 的生命周期，但数据库的备份、恢复、版本升级、故障转移等业务逻辑需要自定义 Operator 来实现（如 [[entities/cloudnativepg|CloudNativePG]]、[[entities/strimzi|Strimzi]] Kafka Operator）。
+- **AI 工作负载**：训练任务的弹性调度（如 Volcano、[[entities/kubeflow|Kubeflow]] Training Operator）使用自定义控制器来管理 Gang Scheduling、弹性容错和检查点恢复。
 - **安全策略执行**：Kyverno 和 OPA Gatekeeper 作为 Admission Controller 和自定义控制器的组合，在资源创建时验证策略合规性。
 - **可观测性**：Prometheus Operator 将 Prometheus 实例、ServiceMonitor 和 Alertmanager 的配置声明为 CRD，由 Operator 控制器自动管理其生命周期。
 
@@ -65,7 +75,7 @@ K8s 自带的 15+ 内置控制器覆盖了无状态工作负载的基础场景�
 
 | 控制器 | 管理的资源 | 编码的知识 |
 |--------|-----------|-----------|
-| Deployment Controller | Deployment → ReplicaSet → Pod | 滚动更新、回滚策略 |
+| [[entities/deployment|Deployment]] Controller | Deployment → ReplicaSet → Pod | 滚动更新、回滚策略 |
 | StatefulSet Controller | StatefulSet → Pod | 有序创建/删除、稳定身份 |
 | HPA Controller | HPA → Deployment | 基于指标的自动扩缩 |
 
@@ -152,3 +162,4 @@ Operator 自身也需要升级，而升级过程必须保证：
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/declarative-api.md|declarative-api]]
 - [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
+- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]

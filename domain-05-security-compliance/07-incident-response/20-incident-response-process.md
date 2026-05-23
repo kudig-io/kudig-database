@@ -52,11 +52,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 20 - 安全事件响应与应急处理流程
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) | [SANS Incident Handling Process](https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) | [SANS Incident Handling Process](https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901)
 
 <!-- chunk: 一、安全事件响应体系架构 -->
 ## 一、安全事件响应体系架构
@@ -762,25 +763,25 @@ echo "Health check completed. Report saved to /reports/incident_${INCIDENT_ID}_r
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
-- [[domain-05-security-compliance/README.md|Security Domain]]
-- [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- domain-05-security-compliance KUDIG Database — Global MOC
+- [[domain-05-security-compliance/README.md|[[Security Domain|Security Domain]]]]
+- index.md|Domain-7 安全 — 开源项目索引]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/18-network-defense-depth.md|18-network-defense-depth]]
-- [[domain-05-security-compliance/19-zero-trust-architecture.md|19-zero-trust-architecture]]
-- [[domain-05-security-compliance/21-multicluster-security.md|21-multicluster-security]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|01-authentication-authorization-system]]
+- 18-network-defense-depth
+- 19-zero-trust-architecture
+- 21-multicluster-security
+- 01-authentication-authorization-system
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

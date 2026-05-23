@@ -1,39 +1,5 @@
 ---
-title: Kubernetes扩展生态企业级最佳实践
-description: 'title: Kubernetes扩展生态企业级最佳实践'
-category: general
-tags:
-- reports
-- apiserver
-- prometheus
-- grafana
-- helm
-- argocd
-- docker
-- mysql
-- statefulset
-- job
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 25min
-intent_queries:
-- Kubernetes扩展生态企业级最佳实践 是什么
-- 如何 Kubernetes扩展生态企业级最佳实践
-trigger_keywords:
-- Kubernetes扩展生态企业级最佳实践
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- gitops-basics
-- mysql-basics
----
-
-title: Kubernetes扩展生态企业级最佳实践
+title: Kubernetes扩展生态企业级最佳实践 (reports)
 description: '# Kubernetes扩展生态企业级最佳实践'
 category: general
 tags:
@@ -58,18 +24,14 @@ intent_queries:
 - 如何 Kubernetes扩展生态企业级最佳实践
 trigger_keywords:
 - Kubernetes扩展生态企业级最佳实践
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+- mysql-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes扩展生态企业级最佳实践
@@ -224,7 +186,7 @@ func SetupConversionWebhook(mgr ctrl.Manager) error {
 ### 1.3 安全加固与访问控制
 
 ```yaml
-# crd-[[domain-11-production-operations/topic-best-practices/scenarios/security-hardening|security-hardening]].yaml
+# crd-security-hardening.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:

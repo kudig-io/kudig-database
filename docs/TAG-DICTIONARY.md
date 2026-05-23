@@ -36,6 +36,7 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -48,11 +49,11 @@ tags:
 - taxonomy
 - metadata
 relationships:
-- target: '[[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]'
+- target: '[[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]'
   type: related_to
-- target: '[[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]'
+- target: '[[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]'
   type: related_to
-- target: '[[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]'
+- target: '[[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]'
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -112,9 +113,9 @@ tier: peripheral---
 | `quality` | 测试与质量 | domain-29, 相关 |
 | `disaster-recovery` | 灾备与容灾 | domain-30, 相关 |
 | `cheatsheet` | 速查参考 | topic-cheat-sheet, 相关 |
-| `fta` | 故障树分析 | topic-fta, 相关 |
+| `fta` | 问题树分析 | topic-fta, 相关 |
 | `skill` | 操作技能 | topic-skills, 相关 |
-| `troubleshooting` | 故障排查 | domain-12, topic-structural-trouble-shooting, 相关 |
+| `troubleshooting` | 问题排查 | domain-12, topic-structural-trouble-shooting, 相关 |
 | `learning` | 学习路径 | topic-learn, 相关 |
 | `dictionary` | 运维术语 | topic-dictionary, 相关 |
 | `release-notes` | 版本发布说明 | topic-release-notes, 相关 |
@@ -192,7 +193,7 @@ tier: peripheral---
 
 | 标签 | 说明 |
 |---|---|
-| `troubleshooting` | 故障排查 |
+| `troubleshooting` | 问题排查 |
 | `best-practice` | 最佳实践 |
 | `performance` | 性能调优 |
 | `configuration` | 配置参考 |
@@ -249,13 +250,13 @@ tags: [k8s, etcd, control-plane, best-practice, production]
 
 ## Obsidian 相关文档
 
-- [[docs/index.md|KUDIG-DATABASE 首页]]
+- [[docs/index|KUDIG-DATABASE 首页]]
 
 ---
 
 ## Related
 
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]
-- [[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
+- [[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]
+- [[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]

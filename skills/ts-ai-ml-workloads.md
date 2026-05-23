@@ -33,11 +33,12 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # AI/ML 工作负载排查
 
-### 01 Ai Ml Workloads Troubleshooting
+### 01 Ai Ml Workloads Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

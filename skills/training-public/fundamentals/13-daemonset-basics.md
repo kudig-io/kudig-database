@@ -1,5 +1,5 @@
 ---
-title: 第13课：DaemonSet 与节点守护
+title: 第13课：DaemonSet 与节点守护 [fundamentals]
 description: 'description: 2. 掌握 DaemonSet 的创建和配置方法'
 category: learning
 tags:
@@ -34,10 +34,11 @@ prerequisites:
 - gpu-ml-basics
 - cni-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 第13课：DaemonSet 与节点守护
+title: 第13课：[[DaemonSet|DaemonSet]] 与节点守护
 description: 2. 掌握 DaemonSet 的创建和配置方法
 category: learning
 tags:
@@ -50,7 +51,7 @@ tags:
 - ceph
 - hpa
 - pdb
-- statefulset
+- [[StatefulSet|statefulset]]
 - daemonset
 last_updated: 2026-05
 difficulty: beginner
@@ -594,7 +595,7 @@ kubectl delete daemonset <name> -n <namespace>
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/11-job-cronjob.md|11-job-cronjob]]
-- [[domain-11-production-operations/topic-learn/fundamentals/12-common-problems.md|12-common-problems]]
-- [[domain-11-production-operations/topic-learn/fundamentals/14-statefulset-basics.md|14-statefulset-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/15-scheduling-basics.md|15-scheduling-basics]]
+- 11-job-cronjob
+- 12-common-problems
+- 14-statefulset-basics
+- 15-scheduling-basics

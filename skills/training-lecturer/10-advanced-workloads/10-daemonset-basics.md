@@ -1,5 +1,5 @@
 ---
-title: 第13课：DaemonSet 与节点守护
+title: 第13课：DaemonSet 与节点守护 [10-advanced-workloads]
 description: 2. 掌握 DaemonSet 的创建和配置方法
 category: k8s-lecturer
 tags:
@@ -34,9 +34,10 @@ prerequisites:
 - gpu-ml-basics
 - cni-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-# 第13课：DaemonSet 与节点守护
+# 第13课：[[DaemonSet|DaemonSet]] 与节点守护
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -544,5 +545,5 @@ kubectl delete daemonset <name> -n <namespace>
 
 **关联文档**:
 - [../11-scheduling/11-scheduling-basics.md](../11-scheduling/11-scheduling-basics.md) — 调度与亲和性
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md) — DaemonSet 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md) — DaemonSet 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档

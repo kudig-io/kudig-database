@@ -49,11 +49,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 13 - API 网关性能基准测试与调优
 
-> **文档版本**: v1.0 | **适用版本**: Kubernetes 1.27+ | **更新日期**: 2026-03-04 | **关键词**: 性能, 基准测试, wrk2, fortio, QPS, 延迟, 调优
+> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.27+ | **更新日期**: 2026-03-04 | **关键词**: 性能, 基准测试, wrk2, fortio, QPS, 延迟, 调优
 
 <!-- chunk: 目录 -->## 目录
 
@@ -61,7 +62,7 @@ authors:
 2. [测试环境规范](#2-测试环境规范)
 3. [基础代理性能对比](#3-基础代理性能对比)
 4. [带插件场景性能对比](#4-带插件场景性能对比)
-5. [Envoy 数据平面调优](#5-envoy-数据平面调优)
+5. [[entities/envoy.md|Envoy]] 数据平面调优](#5-envoy-数据平面调优)
 6. [OpenResty 数据平面调优](#6-openresty-数据平面调优)
 7. [Kubernetes 层面调优](#7-kubernetes-层面调优)
 8. [eBPF 加速路径](#8-ebpf-加速路径)
@@ -78,7 +79,7 @@ authors:
 | **wrk2** | HTTP | 开放环回 | 高 | ✅ HdrHistogram | 稳定吞吐量测试 |
 | **hey** | HTTP | 闭合环回 | 中 | ✅ 百分位 | 快速冒烟测试 |
 | **fortio** | HTTP/gRPC | 开放+闭合 | 高 | ✅ HDR | 精确 QPS 控制 |
-| **ghz** | gRPC | 闭合环回 | 中 | ✅ 百分位 | gRPC 专项测试 |
+| **ghz** | [[gRPC|gRPC]] | 闭合环回 | 中 | ✅ 百分位 | gRPC 专项测试 |
 | **k6** | HTTP/WS | 开放+闭合 | 高 | ✅ P95/P99 | 复杂场景脚本 |
 | **vegeta** | HTTP | 开放环回 | 高 | ✅ HdrHistogram | 持续速率攻击 |
 
@@ -269,7 +270,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 | **Envoy Gateway** | 1.1 | 2 | **138,000** | 0.9ms | 4.8ms | 14ms | 75% (4C) | 420MB | 52,000 |
 | **Kong** | 3.6 | 2 | **95,000** | 1.8ms | 8.9ms | 35ms | 88% (4C) | 480MB | 35,000 |
 | **Traefik** | 3.1 | 2 | **110,000** | 1.4ms | 7.2ms | 28ms | 71% (4C) | 210MB | 40,000 |
-| **Nginx Ingress** | 1.10 | 2 | **155,000** | 0.7ms | 3.8ms | 9ms | 65% (4C) | 180MB | 60,000 |
+| **Nginx [[Ingress|Ingress]]** | 1.10 | 2 | **155,000** | 0.7ms | 3.8ms | 9ms | 65% (4C) | 180MB | 60,000 |
 
 > 注：Nginx Ingress 作为参照基线，仅支持基础代理能力，不具备动态 API 管理特性。
 
@@ -941,22 +942,22 @@ echo "基准测试完成，结果保存至: $RESULTS_DIR"
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/02-kubernetes-gateway-api-deep-dive.md|02 - Kubernetes Gateway API 标准深度解析]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 02 - Kubernetes Gateway API 标准深度解析
+- 03 - API 网关选型指南与对比矩阵
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
 
 ## See Also
 
-- [[domain-03-networking-traffic/11-api-gateway-security-practices.md|11-api-gateway-security-practices]]
-- [[domain-03-networking-traffic/12-api-gateway-observability.md|12-api-gateway-observability]]
-- [[domain-03-networking-traffic/14-api-gateway-production-operations.md|14-api-gateway-production-operations]]
-- [[domain-03-networking-traffic/99-envoy-gateway-enterprise-guide.md|99-envoy-gateway-enterprise-guide]]
+- 11-api-gateway-security-practices
+- 12-api-gateway-observability
+- 14-api-gateway-production-operations
+- 99-envoy-gateway-enterprise-guide

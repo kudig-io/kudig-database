@@ -34,6 +34,7 @@ prerequisites:
 - monitoring-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 存储知识全项目索引 (Storage Knowledge Base Index)
@@ -88,11 +89,11 @@ prerequisites:
 | 08 | [存储性能调优](domain-04-storage-data/08-storage-performance-tuning.md) | 803 | 存储类型性能对比、StorageClass 性能配置、本地存储优化、CSI 调优、数据库优化、fio 基准测试 |
 | 12 | [存储监控与告警](domain-04-storage-data/12-storage-monitoring-alerting.md) | 856 | 监控指标体系、KPI 定义、Prometheus 配置、自定义 Exporter、容量规划（sklearn）、Grafana 仪表板 |
 
-### 故障排查
+### 问题排查
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 09 | [PV/PVC 故障排查](domain-04-storage-data/09-pv-pvc-troubleshooting.md) | 1,736 | PV/PVC 生命周期诊断、PVC Pending 决策树、多云 StorageClass 示例、VolumeSnapshot 排障、Prometheus 规则 |
+| 09 | [PV/PVC 问题排查](domain-04-storage-data/09-pv-pvc-troubleshooting.md) | 1,736 | PV/PVC 生命周期诊断、PVC Pending 决策树、多云 StorageClass 示例、VolumeSnapshot 排障、Prometheus 规则 |
 
 ### 安全与合规
 
@@ -107,7 +108,7 @@ prerequisites:
 |:---:|------|-----:|---------|
 | 10 | [存储备份与灾难恢复](domain-04-storage-data/10-storage-backup-disaster-recovery.md) | 621 | 多层备份策略、Velero 企业方案、VolumeSnapshot 自动化、MySQL/PostgreSQL 备份、跨区域 DR |
 | 14 | [云原生存储方案](domain-04-storage-data/14-cloud-native-storage.md) | 758 | 多云架构、混合云策略、跨云数据同步、成本分析、云厂商对比、成熟度模型 |
-| 15 | [存储灾备与迁移](domain-04-storage-data/15-storage-disaster-recovery.md) | 599 | 灾备分层架构、自动/手动故障转移、存储迁移、跨集群同步、灾备演练、RTO/RPO SLA 管理 |
+| 15 | [存储灾备与迁移](domain-04-storage-data/15-storage-disaster-recovery.md) | 599 | 灾备分层架构、自动/手动问题转移、存储迁移、跨集群同步、灾备演练、RTO/RPO SLA 管理 |
 
 ### 索引与管理
 
@@ -128,9 +129,9 @@ prerequisites:
 |:---:|------|-----:|---------|
 | 01 | [存储技术概述](domain-04-storage-data/01-storage-technologies-overview.md) | 433 | 存储类型分类（块/文件/对象）、架构演进（DAS/SAN/NAS/SDS）、存储协议、云存储服务、性能指标 |
 | 02 | [块/文件/对象存储](domain-04-storage-data/02-block-file-object-storage.md) | 617 | iSCSI/NFS/MinIO 配置、企业最佳实践、监控脚本、性能基准测试、Ceph 统一存储 |
-| 03 | [RAID 与存储冗余](domain-04-storage-data/03-raid-storage-redundancy.md) | 449 | RAID 0/1/5/6/10 详解、mdadm 配置、热备盘、健康检查脚本、Prometheus 监控、故障恢复 SOP |
+| 03 | [RAID 与存储冗余](domain-04-storage-data/03-raid-storage-redundancy.md) | 449 | RAID 0/1/5/6/10 详解、mdadm 配置、热备盘、健康检查脚本、Prometheus 监控、问题恢复 SOP |
 | 04 | [分布式存储系统](domain-04-storage-data/04-distributed-storage-systems.md) | 557 | Ceph/MinIO/GlusterFS 架构与部署、纠删码、存储选型决策矩阵 |
-| 05 | [企业级存储管理与运维](domain-04-storage-data/05-storage-management-operations.md) | 1,614 | 日常巡检、容量规划、数据分层、备份恢复、故障处理、安全合规、自动化管理、成熟度模型 |
+| 05 | [企业级存储管理与运维](domain-04-storage-data/05-storage-management-operations.md) | 1,614 | 日常巡检、容量规划、数据分层、备份恢复、问题处理、安全合规、自动化管理、成熟度模型 |
 | 06 | [存储性能与 IOPS](domain-04-storage-data/06-storage-performance-iops.md) | 593 | IOPS/吞吐/延迟、fio 测试、I/O 调度器、文件系统调优、内核参数、Prometheus 告警 |
 | — | [开源项目索引](domain-04-storage-data/00-open-source-projects-index.md) | 267 | Rook/Longhorn/CubeFS 等项目深度分析，CSI 驱动矩阵，K8s 版本兼容表 |
 
@@ -147,7 +148,7 @@ prerequisites:
 
 ---
 
-## 4. 故障排查专题
+## 4. 问题排查专题
 
 > **结构化排障体系。按场景分层，含诊断脚本和决策树。**
 
@@ -155,7 +156,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [CSI 存储驱动排障](domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md) | 513 | CSI 驱动供给/挂载/卸载/快照/扩容故障、紧急恢复脚本、Prometheus 告警 |
+| [CSI 存储驱动排障](domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md) | 513 | CSI 驱动供给/挂载/卸载/快照/扩容问题、紧急恢复脚本、Prometheus 告警 |
 | [PVC 与存储全面排障](domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md) | 827 | PVC 状态流程图、Pending 诊断、Multi-Attach 解决、扩容排障、多云命令参考 |
 
 ### 结构化排障系列 (domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage)
@@ -164,7 +165,7 @@ prerequisites:
 |------|-----:|---------|
 | [PV/PVC 深度排查](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md) | 1,289 | PV/PVC 生命周期、PVC Pending 诊断、Multi-Attach 解决、块设备层诊断、专家清理技巧 |
 | [CSI 存储驱动深度排查](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) | 2,075 | CSI 架构深度、gRPC 调试、Sidecar 日志分析、完整生命周期、版本兼容、专家检查清单 |
-| [快照与备份排障](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md) | 680 | VolumeSnapshot 创建/恢复/清理故障、Finalizer 阻塞、孤儿 VolumeSnapshotContent、配额限制 |
+| [快照与备份排障](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md) | 680 | VolumeSnapshot 创建/恢复/清理问题、Finalizer 阻塞、孤儿 VolumeSnapshotContent、配额限制 |
 | [存储 I/O 性能排障](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md) | 737 | 高延迟 I/O 诊断、吞吐瓶颈、存储饱和/抖动、iostat/fio 分析、文件系统参数调优 |
 | [StorageClass 配置排障](domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md) | 744 | 动态供给失败、绑定模式/拓扑问题、卷扩容问题、主流 CSI 驱动速查表 |
 
@@ -172,7 +173,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [PVC/PV/CSI 存储故障诊断技能](domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
+| [PVC/PV/CSI 存储问题诊断技能](domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
 
 ---
 
@@ -206,7 +207,7 @@ prerequisites:
 |------|-----:|---------|
 | [机械硬盘技术](domain-17-system-foundation/06-storage-hdd-technology.md) | 584 | HDD 物理结构、记录技术演进（LMR/PMR/SMR/HAMR）、企业级规格、SMART 监控脚本 |
 | [SSD 固态硬盘技术](domain-17-system-foundation/07-storage-ssd-technology.md) | 625 | SSD 架构（NAND/FTL）、NAND 类型（SLC/MLC/TLC/QLC）、NVMe 协议、DWPD/TBW、TRIM 优化 |
-| [存储设备故障排查](domain-17-system-foundation/12-storage-troubleshooting.md) | 542 | HDD/SSD/RAID 硬件故障诊断、SMART 脚本、NVMe 健康、RAID 控制器诊断、数据恢复 |
+| [存储设备问题排查](domain-17-system-foundation/12-storage-troubleshooting.md) | 542 | HDD/SSD/RAID 硬件问题诊断、SMART 脚本、NVMe 健康、RAID 控制器诊断、数据恢复 |
 
 ---
 
@@ -286,7 +287,7 @@ prerequisites:
 | [Local Ephemeral Storage](domain-17-system-foundation/topic-dictionary/storage/local-ephemeral-storage.md) | 130 | 节点临时存储、驱逐阈值、资源配额 |
 | [Volume Health Monitoring](domain-17-system-foundation/topic-dictionary/storage/volume-health-monitoring.md) | 121 | 卷健康状态检测、CSI NodeGetVolumeStats |
 | [Volume Attributes Classes](domain-17-system-foundation/topic-dictionary/storage/volume-attributes-classes.md) | 153 | VolumeAttributesClass (v1.29+)、动态修改卷属性 |
-| [Node Volume Limits](domain-17-system-foundation/topic-dictionary/storage/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
+| [Node Volume Limits](domain-17-system-foundation/topic-dictionary/[[domain-17-system-foundation/topic-dictionary/storage/node-specific-volume-limits|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
 | [高性能存储网络](domain-17-system-foundation/topic-dictionary/storage/high-performance-storage-networks.md) | 145 | RDMA、NVMe-oF、RoCE、iWARP |
 | [对象存储与数据流水线](domain-17-system-foundation/topic-dictionary/storage/object-storage-and-data-pipelines.md) | 178 | S3/MinIO 集成、COSI（容器对象存储接口） |
 | [Storage Capacity](domain-17-system-foundation/topic-dictionary/storage/storage-capacity.md) | 105 | CSIStorageCapacity、拓扑感知供给 |
@@ -319,7 +320,7 @@ prerequisites:
 │  🚀 进阶 (2-4 周)                                                      │
 │  ├── 05-CSI 驱动集成 (架构 + 部署 + 运维)                               │
 │  ├── 08-存储性能调优 (基准测试 + 调优参数)                               │
-│  ├── 09-PV/PVC 故障排查 (诊断脚本 + 决策树)                             │
+│  ├── 09-PV/PVC 问题排查 (诊断脚本 + 决策树)                             │
 │  └── 16-CSI 迁移 (In-Tree → CSI 迁移路径)                               │
 │                                                                         │
 │  👨‍💻 专家 (持续)                                                        │
@@ -348,7 +349,7 @@ prerequisites:
 | **K8s 存储核心** (domain-04-storage-data) | 17 | 15,381 |
 | **存储基础原理** (domain-04-storage-data) | 7 | 4,616 |
 | **CSI 深度原理** | 2 | 3,163 |
-| **故障排查** (排障+技能卡) | 9 | 8,820 |
+| **问题排查** (排障+技能卡) | 9 | 8,820 |
 | **生产运维** | 1 | 1,208 |
 | **YAML 参考** | 1 | 1,413 |
 | **事件参考** | 1 | 2,126 |

@@ -31,13 +31,14 @@ prerequisites:
 - cloud-provider-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # IPv4/IPv6 dual-stack
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 支持为 Pod 和 Service 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 支持为 Pod 和 [[Service|Service]] 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
 
 ## 核心概念/原理
 
@@ -45,7 +46,7 @@ prerequisites:
   - `kube-apiserver`：`--service-cluster-ip-range=<IPv4 CIDR>,<IPv6 CIDR>`
   - `kube-controller-manager`：`--cluster-cidr=<IPv4 CIDR>,<IPv6 CIDR>`、`--service-cluster-ip-range=<IPv4 CIDR>,<IPv6 CIDR>`，以及 `--node-cidr-mask-size-ipv4`（默认 /24）和 `--node-cidr-mask-size-ipv6`（默认 /64）
   - `kube-proxy`：`--cluster-cidr=<IPv4 CIDR>,<IPv6 CIDR>`
-  - `kubelet`：`--node-ip=<IPv4 IP>,<IPv6 IP>`（裸金属节点必需）
+  - `[[kubelet|kubelet]]`：`--node-ip=<IPv4 IP>,<IPv6 IP>`（裸金属节点必需）
 - **Service 地址族策略（ipFamilyPolicy）**：
   - `SingleStack`：单栈，仅分配第一个配置的 service-cluster-ip-range 的地址。
   - `PreferDualStack`：优先双栈，在双栈启用时分配 IPv4 和 IPv6 地址；若不支持则回退到单栈。

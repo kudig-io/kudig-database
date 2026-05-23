@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Windows Storage（Windows 存储）
 
 ## 概述
 
-Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是由于 Windows 的文件系统架构、NTFS、注册表和 SAM（Security Account Manager）数据库的隔离机制。[[entities/kubernetes|kubernetes]] 在 Windows 上支持部分卷类型和功能，但也有一些 Linux 特有的功能不被支持。
+Windows 节点上的存储行为与 Linux 节点存在显著差异，主要是由于 Windows 的文件系统架构、NTFS、注册表和 SAM（Security Account Manager）数据库的隔离机制。[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 在 Windows 上支持部分卷类型和功能，但也有一些 Linux 特有的功能不被支持。
 
 ## 核心概念/原理
 

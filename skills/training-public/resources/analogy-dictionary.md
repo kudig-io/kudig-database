@@ -1,5 +1,5 @@
 ---
-title: K8S 概念类比词典
+title: K8S 概念类比词典 [resources]
 description: '| ConfigMap | 公告板 | 公开的配置信息 |'
 category: learning
 tags:
@@ -32,11 +32,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
 title: K8S 概念类比词典
-description: 用生活化类比解释 Kubernetes 核心概念，帮助学员快速建立直觉理解
+description: 用生活化类比解释 [[Kubernetes|Kubernetes]] 核心概念，帮助学员快速建立直觉理解
 category: learning
 tags:
 - k8s
@@ -78,8 +79,8 @@ tier: peripheral---
 |---------|---------|------|
 | Pod | 快递盒 | 装东西的盒子，可以单个或组合 |
 | Deployment | 人力资源部 | 负责招聘、解雇、保证人员数量 |
-| Service | 前台电话 | 统一接入，自动转接 |
-| Ingress | 酒店大堂 | 入口登记处，指引到具体服务 |
+| [[Service|Service]] | 前台电话 | 统一接入，自动转接 |
+| [[Ingress|Ingress]] | 酒店大堂 | 入口登记处，指引到具体服务 |
 | Namespace | 办公室隔间 | 隔离但共享公共设施 |
 | ConfigMap | 公告板 | 公开的配置信息 |
 | Secret | 保险柜 | 保密的配置信息 |
@@ -163,7 +164,7 @@ tier: peripheral---
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/quick-start/03-oncall-handoff.md|03-oncall-handoff]]
-- [[domain-11-production-operations/topic-learn/quick-start/04-debug-tools-setup.md|04-debug-tools-setup]]
-- [[domain-11-production-operations/topic-learn/resources/lecturer-persona.md|lecturer-persona]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|kubernetes-architecture-fundamentals-presentation]]
+- 03-oncall-handoff
+- 04-debug-tools-setup
+- lecturer-persona
+- kubernetes-architecture-fundamentals-presentation

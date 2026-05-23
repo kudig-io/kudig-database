@@ -31,6 +31,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # 可观测性栈演进
@@ -61,7 +62,7 @@ Prometheus 是 CNCF 毕业项目，Kubernetes 事实上的指标采集标准。
 - 移除 `count_scalar`、`drop_common_labels` 等 PromQL 函数
 - 重写 Protobuf exposition 格式解析器，性能大幅提升
 - 规则分组支持
-- 实验性 GRPC API
+- 实验性 [[gRPC|GRPC]] API
 - PromQL `timestamp()` 函数
 
 ### v2.x 系列
@@ -127,7 +128,7 @@ OpenTelemetry Collector 有 146 个发布版本，反映了其活跃的迭代节
 - Core 和 Contrib 分发
 - 丰富的接收器（Receiver）、处理器（Processor）、导出器（Exporter）
 - 支持 Metrics、Logs、Traces 三大数据类型
-- Kubernetes 集群内的 DaemonSet 和 Deployment 部署模式 ^[inferred]
+- Kubernetes 集群内的 [[DaemonSet|DaemonSet]] 和 Deployment 部署模式 ^[inferred]
 
 ## 可观测性栈整合
 

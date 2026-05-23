@@ -39,9 +39,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-title: 08 - Service 全类型 YAML 配置参考
+title: 08 - [[Service|Service]] 全类型 YAML 配置参考
 description: '# 08 - Service 全类型 YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -51,9 +52,9 @@ tags:
 - template
 - apiserver
 - controller-manager
-- prometheus
-- istio
-- cilium
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
+- [[Cilium|cilium]]
 - coredns
 last_updated: 2026-05
 difficulty: intermediate
@@ -1706,13 +1707,13 @@ spec:
         - |
           set -ex
           # 根据 Pod 序号生成 server-id
-          [[ $(hostname) =~ -([0-9]+)$ ]] || exit 1
+          $(hostname) =~ -([0-9]+)$ || exit 1
           ordinal=${BASH_REMATCH[1]}
           echo [mysqld] > /mnt/conf.d/server-id.cnf
           echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
           
           # 主节点（mysql-0）配置
-          if [[ $ordinal -eq 0 ]]; then
+          if $ordinal -eq 0; then
             cp /mnt/config-map/master.cnf /mnt/conf.d/
           else
             cp /mnt/config-map/slave.cnf /mnt/conf.d/
@@ -1992,25 +1993,25 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10 - Ingress / IngressClass YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06-daemonset-reference]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07-job-cronjob-reference]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09-endpoints-endpointslice]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10-ingress-ingressclass]]
+- 06-daemonset-reference
+- 07-job-cronjob-reference
+- 09-endpoints-endpointslice
+- 10-ingress-ingressclass
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: 可观测性故障排查指南
+title: 可观测性故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 可观测性故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 可观测性故障排查指南
@@ -54,9 +55,9 @@ tags:
 - troubleshooting
 - decision-tree
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
+- [[Jaeger|jaeger]]
 - docker
 - redis
 - elasticsearch
@@ -1237,7 +1238,7 @@ if kubectl get statefulset loki -n logging &>/dev/null; then
   LOKI_URL=$(kubectl get svc loki -n logging -o jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
   curl -s -X POST "http://$LOKI_URL/loki/api/v1/push" \
     -H "Content-Type: application/json" \
-    -d "{\"streams\":[{\"stream\":{\"job\":\"test\"},\"values\":[[\"$(date +%s)000000000\",\"$TEST_LOG\"]]}]}" >/dev/null 2>&1 && echo "✓ Loki 日志摄入测试通过" || echo "✗ Loki 日志摄入测试失败"
+    -d "{\"streams\":[{\"stream\":{\"job\":\"test\"},\"values\":\"$(date +%s)000000000\",\"$TEST_LOG\"}]}" >/dev/null 2>&1 && echo "✓ Loki 日志摄入测试通过" || echo "✗ Loki 日志摄入测试失败"
 else
   echo "Loki 未部署"
 fi
@@ -1532,11 +1533,11 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 
 ## Related
 
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
-- [[domain-06-observability/99-prometheus-enterprise-guide.md|99-prometheus-enterprise-guide]]
-- [[domain-06-observability/01-observability-architecture-overview.md|01-observability-architecture-overview]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|02-grafana-enterprise-observability]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 10-monitoring-metrics-prometheus
+- 99-prometheus-enterprise-guide
+- 01-observability-architecture-overview
+- 02-grafana-enterprise-observability
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

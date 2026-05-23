@@ -61,14 +61,15 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # FAQ 文档
 本文档适用于：产品手册、官网页面、课程测验、现场 Q&A。
 
-<!-- chunk: 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？ -->
+<!-- chunk: 问题1：[[Kubernetes|Kubernetes]] 网络从外部到 Pod 的完整链路是什么？ -->
 ## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？
-- **答案**：典型南北向链路为：Internet → DNS → CDN/WAF → 云负载均衡（SLB/ALB/NLB）→ Kubernetes Ingress（Nginx Ingress / Gateway API / ALB Ingress Controller）→ Kubernetes Service（ClusterIP / NodePort / LoadBalancer / Headless）→ CNI 网络（Flannel/Calico/Cilium/Terway，veth/bridge/ENI）→ Pod 网络（如 10.244.0.0/16）→ 物理网络/VPC（Node Network）。  
+- **答案**：典型南北向链路为：Internet → DNS → CDN/WAF → 云负载均衡（SLB/ALB/NLB）→ Kubernetes [[Ingress|Ingress]]（Nginx Ingress / Gateway API / ALB Ingress Controller）→ Kubernetes [[Service|Service]]（ClusterIP / NodePort / LoadBalancer / Headless）→ CNI 网络（Flannel/Calico/Cilium/Terway，veth/bridge/ENI）→ Pod 网络（如 10.244.0.0/16）→ 物理网络/VPC（Node Network）。  
   该分层的核心价值是：入口治理（Ingress/Gateway）与服务发现/负载均衡（Service）解耦，底层由 CNI 负责跨节点转发与策略能力。
 
 <!-- chunk: 问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？ -->
@@ -183,25 +184,25 @@ cross_refs:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|Flannel 多集群场景与子网冲突处理]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
 
 ## See Also
 
-- [[domain-03-networking-traffic/47-terway-troubleshooting-fta.md|47-terway-troubleshooting-fta]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|00-network-in-nutshell]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|01-network-architecture-overview]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|02-cni-architecture-fundamentals]]
+- 47-terway-troubleshooting-fta
+- 00-network-in-nutshell
+- 01-network-architecture-overview
+- 02-cni-architecture-fundamentals
 
 ## Related
 

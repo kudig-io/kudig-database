@@ -27,6 +27,7 @@ trigger_keywords:
 - 容器运行时与工具链项目全景
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # CNCF 容器运行时与工具链项目全景
@@ -39,7 +40,7 @@ CNCF 容器生态覆盖 **容器运行时**、**容器构建**、**开发者工�
 
 ---
 
-## 容器运行时（Container Runtime）
+## 容器运行时（[[Container Runtime|Container Runtime]]）
 
 ### [[containerd]] — 毕业项目
 
@@ -49,7 +50,7 @@ containerd 是行业标准容器运行时，K8s 最常用的 CRI 实现。
 - **安全加固**: seccomp、AppArmor、rootless
 - **迁移升级**: 从 dockershim 迁移
 - **多租户**: 资源隔离与配额
-- **可观测性**: [[06-containerd-observability|指标与日志]]
+- **可观测性**: [[entities/06-containerd-observability.md|observability]]|指标与日志]]
 - **Windows 支持**: Windows 容器支持
 - **灾备**: [[07-containerd-disaster-recovery|状态备份与恢复]]
 

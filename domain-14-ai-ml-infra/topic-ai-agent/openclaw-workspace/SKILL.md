@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # K8S 运维诊断技能库
@@ -332,6 +333,6 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]

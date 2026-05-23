@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kube-apiserver
 
 ## Role
 
-kube-apiserver is the single entry point for all Kubernetes operations. Every component (kubectl, controllers, kubelet, schedulers) communicates exclusively through the API Server. It is stateless, enabling horizontal scaling.
+kube-apiserver is the single entry point for all Kubernetes operations. Every component (kubectl, controllers, [[kubelet|kubelet]], schedulers) communicates exclusively through the API Server. It is stateless, enabling horizontal scaling.
 
 ## Request Processing Pipeline
 

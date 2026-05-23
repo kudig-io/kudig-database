@@ -36,6 +36,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 容量规划与资源评估 (Capacity Planning & Resource Assessment)
@@ -46,7 +47,7 @@ tags:
 - platform
 - operations
 - devops
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - hpa
 - gpu
@@ -62,7 +63,7 @@ estimated_read_time: 10min
 intent_queries:
 - 容量规划与资源评估 (Capacity Planning & Resource Assessment) 是什么
 - 如何 容量规划与资源评估 (Capacity Planning & Resource Assessment)
-- Kubernetes 9 platform ops 最佳实践
+- [[Kubernetes|Kubernetes]] 9 platform ops 最佳实践
 trigger_keywords:
 - 容量规划与资源评估
 - Capacity
@@ -726,25 +727,25 @@ capacity_checklist
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-07-platform-engineering/MOC.md|domain-07-platform-engineering MOC]]
+- domain-07-platform-engineering MOC
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|Domain-9 平台运维 — 开源项目索引]]
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|平台运维概述]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|集群生命周期管理]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|运维指标体系建设 (Operations Metrics System)]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|监控告警体系]]
-- [[domain-07-platform-engineering/07-gitops-configuration-management.md|GitOps配置管理 (GitOps Configuration Management)]]
-- [[domain-07-platform-engineering/08-automation-toolchain.md|运维自动化工具链 (Operations Automation Toolchain)]]
-- [[domain-07-platform-engineering/09-cost-optimization-finops.md|成本优化与FinOps实践 (Cost Optimization & FinOps)]]
-- [[domain-07-platform-engineering/10-security-compliance.md|安全合规管理 (Security & Compliance Management)]]
+- Domain-9 平台运维 — 开源项目索引
+- 平台运维概述
+- 集群生命周期管理
+- 性能基准测试与调优 (Performance Benchmarking & Tuning)
+- 运维指标体系建设 (Operations Metrics System)
+- 监控告警体系
+- GitOps配置管理 (GitOps Configuration Management)
+- 运维自动化工具链 (Operations Automation Toolchain)
+- 成本优化与FinOps实践 (Cost Optimization & FinOps)
+- 安全合规管理 (Security & Compliance Management)
 
 ## See Also
 
-- [[domain-07-platform-engineering/01-platform-ops-overview.md|01-platform-ops-overview]]
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management.md|02-cluster-lifecycle-management]]
-- [[domain-07-platform-engineering/04-performance-benchmarking-tuning.md|04-performance-benchmarking-tuning]]
-- [[domain-07-platform-engineering/05-operations-metrics-system.md|05-operations-metrics-system]]
+- 01-platform-ops-overview
+- 02-cluster-lifecycle-management
+- 04-performance-benchmarking-tuning
+- 05-operations-metrics-system
 
 ## Related
 

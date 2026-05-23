@@ -20,6 +20,7 @@ trigger_keywords:
 - 讲师角色设定与场景规范
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8S 讲师角色设定与场景规范

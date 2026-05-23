@@ -25,6 +25,7 @@ trigger_keywords:
 - Reference
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kubectl Scenario Quick Reference

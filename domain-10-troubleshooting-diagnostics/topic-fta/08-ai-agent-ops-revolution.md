@@ -1,5 +1,5 @@
 ---
-title: 第八章：AI Agent 时代的运维范式革命
+title: 第八章：AI Agent 时代的运维范式革命 [domain-10-troubleshooting-diagnostics]
 description: 'title: 第八章：AI Agent 时代的运维范式革命'
 category: fta
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 fta_id: FTA-08_AI_AGENT_OPS_REVOLUTION-001
 component: 08 Ai Agent Ops Revolution
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第八章：AI Agent 时代的运维范式革命
@@ -78,8 +79,8 @@ k8s_versions:
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)  
-> **下一章**: [第九章：FTA 作为 AI Agent 的知识骨架](./[[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]].md)
+> **上一章**: 第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)  
+> **下一章**: 第九章：FTA 作为 AI Agent 的知识骨架](./[[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]].md)
 
 ---
 

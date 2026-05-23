@@ -33,9 +33,10 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# topic-febm [[MOC.md|MOC]]
+# topic-febm MOC.md|MOC]]
 
 > **MOC 版本**: 1.0
 > **专题**: topic-febm
@@ -63,9 +64,9 @@ FEBM 取证 — 故障事件取证方法文档
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]] |  | febm, troubleshooting |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]] |  | febm, troubleshooting |  |
-| 3 | [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]] |  | febm, troubleshooting, best-practice |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
+| 3 | [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
 | 4 | [[domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
 | 6 | [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |
@@ -103,12 +104,12 @@ FEBM 取证 — 故障事件取证方法文档
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

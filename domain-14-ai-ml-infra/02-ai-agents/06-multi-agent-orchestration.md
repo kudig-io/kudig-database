@@ -1,5 +1,5 @@
 ---
-title: 多 Agent 编排与协作架构
+title: 多 Agent 编排与协作架构 (domain-14-ai-ml-infra)
 description: 'title: 多 Agent 编排与协作架构'
 category: general
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 多 Agent 编排与协作架构
@@ -47,7 +48,7 @@ tags:
 - rag
 - multi-agent
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - redis
 - postgresql
@@ -827,9 +828,9 @@ spec:
 |------|---------|
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | Plan-and-Execute 模式与 Supervisor-Worker 的关系 |
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LangGraph/AutoGen/CrewAI 框架实现 |
-| [05 - 工具调用](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | 多 Agent 间的工具共享和访问控制 |
-| [09 - 生产部署](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | 多 Agent 平台的 K8s 部署架构 |
-| [14 - Agent 赋能设计与落地路径](./[[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]].md) | K8s 运维 Agent 的四大方向 |
+| [05 - 工具调用](./05-tool-use-function-calling.md) | 多 Agent 间的工具共享和访问控制 |
+| [09 - 生产部署](./09-production-deployment-guide.md) | 多 Agent 平台的 K8s 部署架构 |
+| [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s 运维 Agent 的四大方向 |
 
 ---
 
@@ -839,10 +840,10 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
@@ -854,7 +855,7 @@ spec:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]]
-- [[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]]
+- 04-rag-knowledge-retrieval
+- 05-tool-use-function-calling
+- 07-memory-context-management
+- 08-agent-evaluation-observability

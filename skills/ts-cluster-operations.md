@@ -31,11 +31,12 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # 集群运维故障排查
 
-### 01 Cluster Maintenance Troubleshooting
+### 01 Cluster Maintenance Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 

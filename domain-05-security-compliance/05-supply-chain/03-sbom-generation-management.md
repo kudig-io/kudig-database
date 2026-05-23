@@ -46,6 +46,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # SBOM 生成与管理 (SBOM Generation and Management)
@@ -59,7 +60,7 @@ authors:
 1. [SBOM 基础概念](#1-sbom-基础概念)
 2. [SBOM 标准格式对比](#2-sbom-标准格式对比)
 3. [Syft CLI 完整指南](#3-syft-cli-完整指南)
-4. [Trivy SBOM 生成](#4-trivy-sbom-生成)
+4. [[entities/trivy.md|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
 5. [其他 SBOM 生成工具](#5-其他-sbom-生成工具)
 6. [SBOM 生命周期管理](#6-sbom-生命周期管理)
 7. [CI/CD 集成实践](#7-cicd-集成实践)
@@ -2400,24 +2401,24 @@ if __name__ == "__main__":
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
-- [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
+- domain-05-security-compliance KUDIG Database — Global MOC
+- [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-supply-chain-security-overview.md|供应链安全概述 (Supply Chain Security Overview)]]
-- [[domain-05-security-compliance/02-supply-chain-maturity-model.md|供应链安全成熟度模型 (Supply Chain Security Maturity Model)]]
-- [[domain-05-security-compliance/04-sbom-vulnerability-analysis.md|SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)]]
-- [[domain-05-security-compliance/05-slsa-levels-implementation.md|SLSA 级别与实施 (SLSA Levels and Implementation)]]
-- [[domain-05-security-compliance/06-github-actions-slsa-build.md|GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)]]
-- [[domain-05-security-compliance/07-sigstore-cosign-signing.md|Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)]]
-- [[domain-05-security-compliance/08-fulcio-rekor-transparency.md|Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)]]
-- [[domain-05-security-compliance/09-policy-controller-verification.md|Policy Controller 镜像验证 (Policy Controller Image Verification...]]
-- [[domain-05-security-compliance/10-compliance-automation-audit.md|合规自动化与审计 (Compliance Automation and Audit)]]
+- 供应链安全概述 (Supply Chain Security Overview)
+- 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
+- SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
+- SLSA 级别与实施 (SLSA Levels and Implementation)
+- GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
+- Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
+- Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
+- Policy Controller 镜像验证 (Policy Controller Image Verification...
+- 合规自动化与审计 (Compliance Automation and Audit)
 
 ## See Also
 
-- [[domain-05-security-compliance/01-supply-chain-security-overview.md|01-supply-chain-security-overview]]
-- [[domain-05-security-compliance/02-supply-chain-maturity-model.md|02-supply-chain-maturity-model]]
-- [[domain-05-security-compliance/04-sbom-vulnerability-analysis.md|04-sbom-vulnerability-analysis]]
-- [[domain-05-security-compliance/05-slsa-levels-implementation.md|05-slsa-levels-implementation]]
+- 01-supply-chain-security-overview
+- 02-supply-chain-maturity-model
+- 04-sbom-vulnerability-analysis
+- 05-slsa-levels-implementation
 
 - [[domain-05-security-compliance/README.md|返回目录]]

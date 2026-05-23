@@ -42,6 +42,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 企业级日志治理与合规审计深度实践
@@ -1384,24 +1385,24 @@ for key, value in risk_assessment.items():
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-21-logging-management-analytics MOC]]
-- [[domain-06-observability/README.md|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
+- observability/MOC.md|domain-21-logging-management-analytics MOC]]
+- [[domain-06-observability/README.md|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
-- [[domain-06-observability/01-elk-stack-enterprise-logging.md|ELK Stack企业级日志管理系统深度实践]]
-- [[domain-06-observability/02-fluentd-enterprise-log-processing.md|Fluentd企业级日志收集与处理深度实践]]
-- [[domain-06-observability/03-loki-enterprise-log-aggregation.md|Loki Enterprise Log Aggregation and Analytics Platform]]
-- [[domain-06-observability/04-graylog-enterprise-logging.md|Graylog 企业级日志管理平台深度实践]]
-- [[domain-06-observability/04-splunk-enterprise-siem.md|Splunk企业级日志分析与安全智能平台深度实践]]
-- [[domain-06-observability/05-real-time-analytics-business-insights.md|企业级实时日志分析与业务洞察深度实践]]
-- [[domain-06-observability/05-splunk-enterprise-log-analytics.md|Splunk Enterprise Log Analytics Platform 深度实践]]
-- [[domain-06-observability/06-loggly-cloud-log-management.md|Loggly Cloud Log Management Platform 深度实践]]
+- ELK Stack企业级日志管理系统深度实践
+- Fluentd企业级日志收集与处理深度实践
+- Loki Enterprise Log Aggregation and Analytics Platform
+- Graylog 企业级日志管理平台深度实践
+- Splunk企业级日志分析与安全智能平台深度实践
+- 企业级实时日志分析与业务洞察深度实践
+- Splunk Enterprise Log Analytics Platform 深度实践
+- Loggly Cloud Log Management Platform 深度实践
 
 ## See Also
 
-- [[domain-06-observability/02-fluentd-enterprise-log-processing.md|02-fluentd-enterprise-log-processing]]
-- [[domain-06-observability/03-loki-enterprise-log-aggregation.md|03-loki-enterprise-log-aggregation]]
-- [[domain-06-observability/04-graylog-enterprise-logging.md|04-graylog-enterprise-logging]]
-- [[domain-06-observability/04-splunk-enterprise-siem.md|04-splunk-enterprise-siem]]
+- 02-fluentd-enterprise-log-processing
+- 03-loki-enterprise-log-aggregation
+- 04-graylog-enterprise-logging
+- 04-splunk-enterprise-siem
 
 - [[domain-06-observability/README.md|返回目录]]
 

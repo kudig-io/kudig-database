@@ -202,7 +202,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 ## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-publish/video-scripts/QUICK-REFERENCE.md|数字人视频快速参考]]
-- [[domain-11-production-operations/topic-publish/video-scripts/README.md|domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本]]
-- [[domain-11-production-operations/topic-publish/video-scripts/VIDEO-OUTPUT-GUIDE.md|数字人视频输出建议]]
-- [[domain-11-production-operations/topic-publish/video-scripts/node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — ...]]
+- 数字人视频快速参考
+- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 数字人视频输出建议
+- 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — ...

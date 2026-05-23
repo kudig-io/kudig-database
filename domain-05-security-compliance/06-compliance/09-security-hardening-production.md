@@ -53,9 +53,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
-# Kubernetes 安全加固
+# [[Kubernetes|Kubernetes]] 安全加固
 
 > Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
@@ -64,8 +65,8 @@ cross_refs:
 
 | 层级 | 加固内容 | 优先级 |
 |------|----------|--------|
-| 集群 | API Server、etcd、kubelet | 高 |
-| 网络 | NetworkPolicy、mTLS、出口控制 | 高 |
+| 集群 | API Server、[[etcd|etcd]]、[[kubelet|kubelet]] | 高 |
+| 网络 | [[NetworkPolicy|NetworkPolicy]]、mTLS、出口控制 | 高 |
 | 工作负载 | Pod 安全、镜像安全 | 高 |
 | 数据 | Secret 加密、RBAC | 高 |
 | 运行时 | 沙箱、安全上下文 | 中 |
@@ -500,25 +501,25 @@ kubectl logs job/kube-bench
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- 证书管理与 TLS 配置
 
 ## See Also
 
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07-rbac-matrix-configuration]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08-security-best-practices]]
-- [[domain-05-security-compliance/10-certificate-management.md|10-certificate-management]]
-- [[domain-05-security-compliance/11-secret-management-tools.md|11-secret-management-tools]]
+- 07-rbac-matrix-configuration
+- 08-security-best-practices
+- 10-certificate-management
+- 11-secret-management-tools
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

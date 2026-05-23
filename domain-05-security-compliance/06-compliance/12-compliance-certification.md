@@ -53,11 +53,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 12 - 合规与认证表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
 <!-- chunk: 合规标准概览 -->
 ## 合规标准概览
@@ -78,10 +79,10 @@ cross_refs:
 | 类别 | 检查项数量 | 关键检查项 | 版本变更 |
 |-----|-----------|-----------|---------|
 | **1. Control Plane** | 50+ | API Server参数，etcd加密 | v1.8.0 for K8S 1.27+ |
-| **2. etcd** | 10+ | 加密通信，权限控制 | 稳定 |
+| **2. [[etcd|etcd]]** | 10+ | 加密通信，权限控制 | 稳定 |
 | **3. Control Plane配置** | 20+ | 控制器参数 | 稳定 |
 | **4. Worker Node** | 30+ | kubelet配置，文件权限 | v1.24+ CRI相关 |
-| **5. Policies** | 30+ | RBAC，PSA，NetworkPolicy | v1.25+ PSA相关 |
+| **5. Policies** | 30+ | RBAC，PSA，[[NetworkPolicy|NetworkPolicy]] | v1.25+ PSA相关 |
 
 ```bash
 # 运行kube-bench
@@ -121,7 +122,7 @@ docker run --rm -v /etc:/etc:ro -v /var:/var:ro \
 | **身份鉴别** | RBAC+认证 | OIDC/LDAP集成 | 用户列表，权限矩阵 |
 | **访问控制** | RBAC | Role/ClusterRole | 角色定义文档 |
 | **安全审计** | 审计日志 | API审计配置 | 审计日志样本 |
-| **入侵防范** | NetworkPolicy+WAF | 网络策略+Ingress | 策略配置 |
+| **入侵防范** | NetworkPolicy+WAF | 网络策略+[[Ingress|Ingress]] | 策略配置 |
 | **数据完整性** | etcd备份+加密 | 备份策略 | 备份记录 |
 | **数据保密性** | TLS+Secret加密 | 证书管理 | 加密配置 |
 | **数据备份恢复** | etcd快照+Velero | 备份策略 | 恢复测试记录 |
@@ -248,24 +249,24 @@ rules:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/10-certificate-management.md|10-certificate-management]]
-- [[domain-05-security-compliance/11-secret-management-tools.md|11-secret-management-tools]]
-- [[domain-05-security-compliance/13-image-security-scanning.md|13-image-security-scanning]]
-- [[domain-05-security-compliance/14-policy-engines-opa-kyverno.md|14-policy-engines-opa-kyverno]]
+- 10-certificate-management
+- 11-secret-management-tools
+- 13-image-security-scanning
+- 14-policy-engines-opa-kyverno
 
 - [[domain-05-security-compliance/README.md|返回目录]]

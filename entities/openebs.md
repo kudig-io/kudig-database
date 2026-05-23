@@ -1,5 +1,5 @@
 ---
-title: OpenEBS
+title: OpenEBS [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # OpenEBS
@@ -81,8 +82,8 @@ OpenEBS 是领先的容器原生存储解决方案，将存储控制器作为容
 - [[keylime]] — Keylime
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/openebs/openebs.md|openebs]]
-- [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
+- openebs
+- [[entities/cncf-storage|[[CNCF 存储与数据库项目全景|CNCF 存储与数据库项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

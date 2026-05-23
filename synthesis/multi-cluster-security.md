@@ -29,6 +29,14 @@ prerequisites:
 - service-mesh-basics
 - cilium-basics
 - policy-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/cilium]]"
+    type: uses
+  - target: "[[entities/external-secrets]]"
+    type: uses
+  - target: "[[entities/falco]]"
+    type: related_to
 ---
 
 # 多集群环境下的安全架构
@@ -71,13 +79,17 @@ prerequisites:
 
 | 层面 | 工具 |
 |------|------|
-| 服务网格 | Istio, Linkerd, Cilium Mesh |
+| 服务网格 | Istio, Linkerd, [[entities/cilium|Cilium]] Mesh |
 | 身份 | SPIFFE/SPIRE |
 | 策略 | OPA/Gatekeeper (联邦策略) |
-| Secrets | External Secrets Operator |
-| 审计 | Falco + SIEM |
+| Secrets | [[entities/external-secrets|External Secrets]] Operator |
+| 审计 | [[entities/falco|Falco]] + SIEM |
 
 ## 相关 Domain
 
-- [[domain-05-security-compliance/01-security-baseline/01-zero-trust-architecture]]
-- [[domain-03-networking-traffic/03-service-mesh/01-istio-multi-cluster]]
+- domain-05-security-compliance/01-security-baseline/01-zero-trust-architecture
+- domain-03-networking-traffic/03-service-mesh/01-istio-multi-cluster
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]]
+- [[entities/istio|Istio (entities)]]

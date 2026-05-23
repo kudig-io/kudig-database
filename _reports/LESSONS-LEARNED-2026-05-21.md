@@ -21,6 +21,7 @@ trigger_keywords:
 - 操作教训记录
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 操作教训记录 — 2026-05-21

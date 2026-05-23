@@ -1,5 +1,5 @@
 ---
-title: 第九章：FTA 作为 AI Agent 的知识骨架
+title: 第九章：FTA 作为 AI Agent 的知识骨架 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
 category: fta
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 fta_id: FTA-09_AS_AGENT_KNOWLEDGE_SKELETON-001
 component: 09 As Agent Knowledge Skeleton
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第九章：FTA 作为 AI Agent 的知识骨架
@@ -53,9 +54,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- prometheus
-- istio
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - ingress
 - agent
 last_updated: 2026-05

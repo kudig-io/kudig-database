@@ -52,11 +52,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 14 - 策略引擎与合规
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/policy](https://kubernetes.io/docs/concepts/policy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/policy](https://kubernetes.io/docs/concepts/policy/)
 
 <!-- chunk: 策略引擎对比 -->
 ## 策略引擎对比
@@ -64,8 +65,8 @@ cross_refs:
 | 引擎 | 语言 | 架构 | 适用场景 | 学习曲线 | 社区活跃度 |
 |-----|-----|------|---------|---------|-----------|
 | **OPA/Gatekeeper** | Rego | Webhook | 通用策略,跨平台 | 高 | ⭐⭐⭐⭐⭐ |
-| **Kyverno** | YAML/CEL | Webhook | K8s原生策略 | 低 | ⭐⭐⭐⭐⭐ |
-| **Kubewarden** | Wasm | Webhook | 多语言策略 | 中 | ⭐⭐⭐ |
+| **[[Kyverno|Kyverno]]** | YAML/CEL | Webhook | K8s原生策略 | 低 | ⭐⭐⭐⭐⭐ |
+| **[[Kubewarden|Kubewarden]]** | Wasm | Webhook | 多语言策略 | 中 | ⭐⭐⭐ |
 | **ValidatingAdmissionPolicy** | CEL | 内置 | 简单验证,无外部依赖 | 低 | K8s原生 |
 | **Polaris** | YAML | CLI/Webhook | 最佳实践检查 | 低 | ⭐⭐⭐⭐ |
 
@@ -539,25 +540,25 @@ kubectl describe k8srequiredlabels require-team-label
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/12-compliance-certification.md|12-compliance-certification]]
-- [[domain-05-security-compliance/13-image-security-scanning.md|13-image-security-scanning]]
-- [[domain-05-security-compliance/15-runtime-security-detection.md|15-runtime-security-detection]]
-- [[domain-05-security-compliance/16-compliance-audit-practices.md|16-compliance-audit-practices]]
+- 12-compliance-certification
+- 13-image-security-scanning
+- 15-runtime-security-detection
+- 16-compliance-audit-practices
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

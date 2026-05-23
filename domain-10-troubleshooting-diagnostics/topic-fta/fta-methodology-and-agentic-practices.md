@@ -1,5 +1,5 @@
 ---
-title: FTA 故障树分析方法论与 AI Agent 智能运维实践
+title: FTA 故障树分析方法论与 AI Agent 智能运维实践 (domain-10-troubleshooting-diagnostics)
 description: 'title: FTA 故障树分析方法论与 AI Agent 智能运维实践'
 category: fta
 tags:
@@ -58,6 +58,7 @@ prerequisites:
 fta_id: FTA-FTA_METHODOLOGY_AND_AGENTIC_PRACTICES-001
 component: Fta Methodology And Agentic Practices
 severity: critical
+created: "2026-05-23"
 ---
 
 title: FTA 故障树分析方法论与 AI Agent 智能运维实践
@@ -68,11 +69,11 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 last_updated: 2026-05
 difficulty: advanced

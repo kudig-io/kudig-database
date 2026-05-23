@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 安全与约束工程
+title: Agent Harness 安全与约束工程 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 安全与约束工程'
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 安全与约束工程
@@ -45,8 +46,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 - rbac
 last_updated: 2026-05
 difficulty: advanced
@@ -933,9 +934,9 @@ class AuditLogger:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 六层架构中的 Constraints 层定义 |
-| [32 - 工具工程](./[[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]].md) | 工具安全沙箱和权限控制 |
-| [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | 安全验证器 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 六层架构中的 Constraints 层定义 |
+| [32 - 工具工程](./32-agent-harness-tool-engineering.md) | 工具安全沙箱和权限控制 |
+| [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | 安全验证器 |
 | [10 - 安全护栏](./10-security-guardrails.md) | Agent 安全基础框架 |
 
 ---
@@ -957,8 +958,8 @@ class AuditLogger:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -972,11 +973,11 @@ class AuditLogger:
 
 ## Related
 
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
+- 27-agent-cli-security-governance
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/33-agent-harness-context-memory.md|33-agent-harness-context-memory]]
-- [[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]]
-- [[domain-14-ai-ml-infra/36-agent-harness-observability.md|36-agent-harness-observability]]
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
+- 33-agent-harness-context-memory
+- 34-agent-harness-verification-quality
+- 36-agent-harness-observability
+- 37-agent-harness-multi-agent

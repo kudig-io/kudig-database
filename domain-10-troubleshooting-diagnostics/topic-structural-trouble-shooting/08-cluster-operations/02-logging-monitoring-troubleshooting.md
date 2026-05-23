@@ -1,5 +1,5 @@
 ---
-title: 日志与监控故障排查指南
+title: 日志与监控故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 日志与监控故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - redis-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 日志与监控故障排查指南
@@ -52,9 +53,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
+- [[Jaeger|jaeger]]
 - docker
 - redis
 - elasticsearch
@@ -887,13 +888,13 @@ kubectl top pods -n monitoring
 ### 相关文档
 
 - [DaemonSet 故障排查](../05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
-- [StatefulSet 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]].md) (ES/Prometheus)
-- [Service 故障排查](../03-networking/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
-- [HPA/VPA 故障排查](../07-resources-scheduling/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]].md) (依赖 metrics)
+- [StatefulSet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting|03-statefulset-troubleshooting]].md) (ES/Prometheus)
+- [Service 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]].md)
+- [HPA/VPA 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting|02-autoscaling-troubleshooting]].md) (依赖 metrics)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 ## See Also

@@ -1,5 +1,5 @@
 ---
-title: 第二十二章：行业标准化建议
+title: 第二十二章：行业标准化建议 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 fta_id: FTA-22_INDUSTRY_STANDARDIZATION-001
 component: 22 Industry Standardization
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第二十二章：行业标准化建议
@@ -47,8 +48,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -80,7 +81,7 @@ k8s_versions:
 
 > **所属部分**: 第六部分 - 未来展望  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)  
+> **上一章**: 第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)  
 > **下一章**: [附录 A：FTA 术语表](./appendix-a-glossary.md)
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: OpenClaw TOOLS.md 机制深度解析
+title: OpenClaw TOOLS.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw TOOLS.md 机制深度解析'
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw TOOLS.md 机制深度解析
@@ -45,9 +46,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
-- helm
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -466,8 +467,8 @@ TOOLS.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | TOOLS.md 在 7 文件体系中的定位 |
-| [32 - Harness 工具工程](./[[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]].md) | Schema 标准、工具注册发现、安全沙箱 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | TOOLS.md 在 7 文件体系中的定位 |
+| [32 - Harness 工具工程](./32-agent-harness-tool-engineering.md) | Schema 标准、工具注册发现、安全沙箱 |
 | [openclaw-workspace/TOOLS.md](./openclaw-workspace/TOOLS.md) | K8S 运维工具授权注册表完整配置 |
 | [44 - SOUL.md 机制解析](./44-openclaw-soul-mechanism.md) | SOUL.md 红线与 TOOLS.md 权限的双重检查 |
 | [48 - SKILL.md 机制解析](./48-openclaw-skill-mechanism.md) | SKILL.md SOP 引用 TOOLS.md 工具链模板 |
@@ -480,7 +481,7 @@ TOOLS.md 配置验证:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -495,7 +496,7 @@ TOOLS.md 配置验证:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]]
-- [[domain-14-ai-ml-infra/48-openclaw-skill-mechanism.md|48-openclaw-skill-mechanism]]
-- [[domain-14-ai-ml-infra/49-openclaw-memory-mechanism.md|49-openclaw-memory-mechanism]]
+- 45-openclaw-user-mechanism
+- 46-openclaw-agents-mechanism
+- 48-openclaw-skill-mechanism
+- 49-openclaw-memory-mechanism

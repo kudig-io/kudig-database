@@ -36,6 +36,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Domain-32: Kubernetes YAML 配置完整参考手册
@@ -130,7 +131,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
 | 35 | [高级 Pod 模式](./35-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
-| 36 | [Kustomize/[[helm]]/ArgoCD](./36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置参考 | ⭐⭐⭐⭐ |
+| 36 | [[entities/helm]]/ArgoCD](./36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置参考 | ⭐⭐⭐⭐ |
 
 ---
 

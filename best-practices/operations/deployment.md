@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 部署策略最佳实践
+title: Kubernetes 部署策略最佳实践 [operations]
 description: 生产环境 Kubernetes 部署策略配置的最佳实践指南
 category: best-practices/operations
 tags:
@@ -41,6 +41,7 @@ cross_refs:
 - type: domain
   path: ../../domain-08-release-change-management/
   label: GitOps知识域
+created: "2026-05-23"
 ---
 
 # Kubernetes 部署策略最佳实践

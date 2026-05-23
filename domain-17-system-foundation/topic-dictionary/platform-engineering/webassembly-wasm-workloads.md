@@ -31,13 +31,14 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # WebAssembly（Wasm）工作负载
 
 ## 概述
 
-**WebAssembly（Wasm）** 最初为浏览器设计，现已成为云原生领域的新兴运行时标准。在 Kubernetes 上运行 Wasm 工作负载具有**毫秒级冷启动、极小的镜像体积、沙箱级安全隔离**等优势，特别适用于边缘计算、Serverless、微服务和高并发事件驱动场景。2026 年，Wasm 正在成为 Kubernetes 的"第三运行时"（与容器、VM 并列）。
+**WebAssembly（Wasm）** 最初为浏览器设计，现已成为云原生领域的新兴运行时标准。在 [[Kubernetes|Kubernetes]] 上运行 Wasm 工作负载具有**毫秒级冷启动、极小的镜像体积、沙箱级安全隔离**等优势，特别适用于边缘计算、Serverless、微服务和高并发事件驱动场景。2026 年，Wasm 正在成为 Kubernetes 的"第三运行时"（与容器、VM 并列）。
 
 ## 核心概念/原理
 
@@ -53,10 +54,10 @@ prerequisites:
 ### 2. Wasm 运行时
 
 Kubernetes 上主流的 Wasm 运行时包括：
-- **[[domain-19-landscape-references/01-cncf-landscape/sandbox/wasmedge/wasmedge|WasmEdge]]**：CNCF 沙箱项目，高性能、支持 AI 推理扩展
+- **[[domain-19-landscape-references/01-cncf-landscape/sandbox/wasmedge/wasmedge|[[WasmEdge|WasmEdge]]]]**：CNCF 沙箱项目，高性能、支持 AI 推理扩展
 - **Wasmtime**：Bytecode Alliance 出品，专注于安全性和标准兼容性
-- **Spin / Fermyon**：面向微服务和事件驱动的 Wasm 应用框架
-- **wasmedge-containers**：允许 Kubernetes 通过 containerd shim 直接调度 Wasm 模块
+- **[[Spin|Spin]] / Fermyon**：面向微服务和事件驱动的 Wasm 应用框架
+- **wasmedge-containers**：允许 Kubernetes 通过 [[containerd|containerd]] shim 直接调度 Wasm 模块
 
 ### 3. Kubernetes 集成方式
 

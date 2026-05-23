@@ -42,11 +42,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # K8s 开发者体验工具链指南
 
-> **适用版本**: k9s v0.40 / Headlamp v0.30 / stern v1.31  
+> **适用版本**: k9s v0.40 / [[Headlamp|Headlamp]] v0.30 / stern v1.31  
 > **最后更新**: 2026-04-24  
 > **难度**: 初级 → 中级
 
@@ -442,22 +443,22 @@ source <(kubectl completion zsh)
 
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
+- domain-37-edge-computing KUDIG Database — Global MOC
+- [[domain-15-specialized-tech/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- index.md|Domain-37 边缘计算 — 开源项目索引]]
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
 
 ## See Also
 
-- [[domain-15-specialized-tech/09-edge-security.md|09-edge-security]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|10-edge-use-cases]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|01-edge-computing-architecture]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|02-cloud-edge-collaboration]]
+- 09-edge-security
+- 10-edge-use-cases
+- 01-edge-computing-architecture
+- 02-cloud-edge-collaboration

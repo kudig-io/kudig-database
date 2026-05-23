@@ -1,5 +1,5 @@
 ---
-title: Cozystack
+title: Cozystack (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Cozystack
@@ -79,7 +80,7 @@ Cozystack 是一个开源的 PaaS 平台，基于 Kubernetes 构建，旨在提�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/cozystack/cozystack.md|cozystack]]
+- cozystack
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

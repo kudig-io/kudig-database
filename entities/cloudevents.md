@@ -1,5 +1,5 @@
 ---
-title: CloudEvents
+title: CloudEvents (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - helm-basics
 - gitops-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # CloudEvents
@@ -56,7 +57,7 @@ description: '## 项目概述'
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 
 ## Related
 
@@ -66,5 +67,5 @@ description: '## 项目概述'
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/cloudevents/cloudevents.md|cloudevents]]
-- [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
+- cloudevents
+- networking|CNCF 网络与服务网格项目全景]] — Cross-reference

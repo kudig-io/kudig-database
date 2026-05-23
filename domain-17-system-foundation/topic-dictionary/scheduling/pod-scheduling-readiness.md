@@ -30,13 +30,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Pod Scheduling Readiness
 
 ## 概述
 
-Pod 调度就绪性（Pod Scheduling Readiness）允许用户通过设置或移除 Pod 的 `.spec.schedulingGates` 字段来控制 Pod 何时准备好被调度器考虑。在 Kubernetes v1.30 中达到 stable 状态。
+Pod 调度就绪性（Pod Scheduling Readiness）允许用户通过设置或移除 Pod 的 `.spec.schedulingGates` 字段来控制 Pod 何时准备好被调度器考虑。在 [[Kubernetes|Kubernetes]] v1.30 中达到 stable 状态。
 
 ## 核心概念/原理
 
@@ -113,7 +114,7 @@ kubectl patch pod ml-training-worker-0 -n ml-platform \
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
 | Pod 一直处于 SchedulingGated 状态 | schedulingGates 未被移除 | `kubectl get pod -o jsonpath='{.spec.schedulingGates}'` 检查剩余 gate |
-| 外部控制器 patch 失败 | RBAC 权限不足 | 确认控制器 ServiceAccount 有 pods/patch 权限 |
+| 外部控制器 patch 失败 | RBAC 权限不足 | 确认控制器 ServiceAccount 有 [[Pods|pods]]/patch 权限 |
 | Pod 进入调度后因节点不足 Pending | gate 移除时机不当 | 先确认节点资源充足，再移除 gate；或配合 Cluster AutoScaler |
 | scheduler_pending_pods 指标中 gated 数量持续增长 | 外部系统故障导致 gate 未释放 | 检查外部控制器日志；设置 gated Pod 告警 |
 | 尝试添加新 gate 被拒绝 | 只允许在创建时设置 gate | 使用 admission webhook 在创建时注入所有需要的 gate |
@@ -148,9 +149,9 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 gated Pod
-- [Gang Scheduling](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
+- [[domain-17-system-foundation/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA ResourceClaim 就绪后移除 gate
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
 
 ## 参考链接
 
@@ -158,4 +159,4 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

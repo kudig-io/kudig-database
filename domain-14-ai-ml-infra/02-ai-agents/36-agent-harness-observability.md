@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 可观测性体系
+title: Agent Harness 可观测性体系 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,'
 category: general
 tags:
@@ -33,11 +33,12 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 可观测性体系
 description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,
-  OpenTelemetry, Langfuse, Traces, Metrics, Logging, Prometheus, Grafana, 告警, Agent
+  [[OpenTelemetry|OpenTelemetry]], Langfuse, Traces, Metrics, Logging, [[Prometheus|Prometheus]], Grafana, 告警, Agent
   调试, Span, 执行追踪'
 category: ai-agent
 tags:
@@ -883,9 +884,9 @@ class TrajectoryReplayer:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 可观测性基础架构 |
-| [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | 验证指标的来源 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | Agent 评测基础理论 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 可观测性基础架构 |
+| [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | 验证指标的来源 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | Agent 评测基础理论 |
 | [domain-06-observability](../domain-06-observability/) | 企业级监控告警体系 |
 
 ---
@@ -907,7 +908,7 @@ class TrajectoryReplayer:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -922,7 +923,7 @@ class TrajectoryReplayer:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]]
-- [[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]]
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
-- [[domain-14-ai-ml-infra/38-agent-harness-performance-cost.md|38-agent-harness-performance-cost]]
+- 34-agent-harness-verification-quality
+- 35-agent-harness-security-constraints
+- 37-agent-harness-multi-agent
+- 38-agent-harness-performance-cost

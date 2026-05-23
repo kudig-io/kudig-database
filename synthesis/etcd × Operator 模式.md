@@ -31,6 +31,18 @@ prerequisites:
 - prometheus-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/prometheus]]"
+    type: uses
+  - target: "[[synthesis/eBPF x 运行时安全]]"
+    type: related_to
+  - target: "[[synthesis/etcd x 高可用模式]]"
+    type: uses
+  - target: "[[synthesis/etcd × 可观测性]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
 ---
 
 # etcd × Operator 模式
@@ -38,7 +50,7 @@ prerequisites:
 
 ## 连接点
 
-[[entities/etcd]] 是 K8s 的心脏，[[concepts/operator-pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 故障直接导致整个集群不可用，而 Operator 本身的故障也可能引发 etcd 故障。
+[[entities/etcd]] 是 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 的心脏，[[concepts/operator-pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 故障直接导致整个集群不可用，而 Operator 本身的故障也可能引发 etcd 故障。
 
 ## 共现场景
 
@@ -73,7 +85,7 @@ etcd 高负载 → Watch 延迟 → Operator 误判节点健康 → 触发节点
 
 **etcd Operator 的设计原则与普通 Operator 不同：**
 - **保守协调**：默认不自动执行危险操作（如节点替换、快照恢复），需要人工确认
-- **独立监控**：Operator 的健康监控必须独立于被管理的 etcd 集群（使用独立的 Prometheus 实例）
+- **独立监控**：Operator 的健康监控必须独立于被管理的 etcd 集群（使用独立的 [[entities/prometheus|Prometheus]] 实例）
 - **状态外部化**：Operator 自身的状态（如"当前集群配置版本"）不能存储在它所管理的 etcd 中——否则形成循环依赖
 
 ## 张力与权衡
@@ -100,7 +112,7 @@ etcd 高负载 → Watch 延迟 → Operator 误判节点健康 → 触发节点
 
 ## See Also
 
-- [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]]
-- [[synthesis/etcd x 高可用模式.md|etcd x 高可用模式]]
-- [[synthesis/etcd × 可观测性.md|etcd × 可观测性]]
+- eBPF x 运行时安全.md|eBPF x 运行时安全]]
+- etcd x 高可用模式.md|etcd x 高可用模式]]
+- etcd × 可观测性.md|etcd × 可观测性]]
 - [[synthesis/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]

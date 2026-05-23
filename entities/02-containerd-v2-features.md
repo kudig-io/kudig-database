@@ -1,5 +1,5 @@
 ---
-title: containerd 2.0 新特性
+title: containerd 2.0 新特性 (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # containerd 2.0 新特性
@@ -67,9 +68,9 @@ title: containerd 2.0 新特性
 ## Related
 
 - [[k3s]] — k3s 轻量级 Kubernetes
-- [[virtual-kubelet]] — Virtual Kubelet
+- [[entities/virtual-kubelet.md|kubelet]]]] — [[Virtual Kubelet|Virtual Kubelet]]
 - [[kudo]] — KUDO
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/containerd/02-containerd-v2-features.md|02-containerd-v2-features]]
+- 02-containerd-v2-features

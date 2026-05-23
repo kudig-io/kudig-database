@@ -35,15 +35,16 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes 密钥管理最佳实践
+title: [[Kubernetes|Kubernetes]] 密钥管理最佳实践
 description: 生产环境 Kubernetes 密钥管理配置的最佳实践指南
 category: domain-11-production-operations/topic-best-practices/security
 tags:
 - kubernetes
 - security
-- secrets
+- [[Secrets|secrets]]
 - vault
 - encryption
 last_updated: 2026-05
@@ -618,10 +619,10 @@ roleRef:
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/security/network-security.md|network-security]]
-- [[domain-11-production-operations/topic-best-practices/security/pod-security.md|pod-security]]
-- [[domain-11-production-operations/topic-best-practices/common-best-practices.md|common-best-practices]]
-- [[domain-11-production-operations/topic-best-practices/deployment/01-local-demo-deployment.md|01-local-demo-deployment]]
+- network-security
+- pod-security
+- common-best-practices
+- deployment.md|01-local-demo-deployment]]
 
 ## Related
 

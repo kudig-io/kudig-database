@@ -30,9 +30,10 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-# Kured (KUbernetes REboot Daemon)
+# [[Kured|Kured]] (KUbernetes REboot Daemon)
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
@@ -74,12 +75,12 @@ Kured (KUbernetes REboot Daemon) 是一个 Kubernetes 守护进程，用于在�
 
 ## Related
 
-- [[notary-project]] — Notary Project
+- [[notary-project]] — [[Notary Project|Notary Project]]
 - [[coredns]] — CoreDNS
 - [[contour]] — Contour
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kured/kured.md|kured]]
+- kured
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

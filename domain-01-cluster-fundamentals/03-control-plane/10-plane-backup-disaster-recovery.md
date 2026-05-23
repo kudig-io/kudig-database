@@ -37,6 +37,7 @@ prerequisites:
 - kubernetes-concepts
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
@@ -45,12 +46,12 @@ category: control-plane
 tags:
 - k8s
 - control-plane
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
 - controller-manager
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - containerd
 - daemonset
 last_updated: 2026-05
@@ -583,14 +584,14 @@ restore_etcd_data() {
     mkdir -p "$temp_restore_dir"
     
     # 解密和解压备份文件
-    if [[ "$backup_file" == *.enc ]]; then
+    if "$backup_file" == *.enc; then
         log "解密备份文件..."
         openssl enc -d -aes-256-cbc -in "$backup_file" \
             -out "${backup_file%.enc}" -pass file:"/etc/backup/encryption.key"
         backup_file="${backup_file%.enc}"
     fi
     
-    if [[ "$backup_file" == *.gz ]]; then
+    if "$backup_file" == *.gz; then
         log "解压备份文件..."
         gunzip -c "$backup_file" > "${backup_file%.gz}"
         backup_file="${backup_file%.gz}"
@@ -687,7 +688,7 @@ select_backup_file() {
     
     read -p "请选择要恢复的备份文件编号: " selection
     
-    if [[ $selection =~ ^[0-9]+$ ]] && [ $selection -lt ${#backup_files[@]} ]; then
+    if $selection =~ ^[0-9]+$ && [ $selection -lt ${#backup_files[@]} ]; then
         echo "${backup_files[$selection]}"
         return 0
     else
@@ -914,7 +915,7 @@ select_config_backup() {
     
     read -p "请选择要恢复的配置备份编号: " selection
     
-    if [[ $selection =~ ^[0-9]+$ ]] && [ $selection -lt ${#backups[@]} ]; then
+    if $selection =~ ^[0-9]+$ && [ $selection -lt ${#backups[@]} ]; then
         echo "${backups[$selection]}"
         return 0
     else
@@ -2125,18 +2126,18 @@ done
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## Related
 
@@ -2146,7 +2147,7 @@ done
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|08-plane-performance-benchmarking]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|09-plane-scalability-guide]]
-- [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|11-etcd-deep-dive]]
-- [[domain-01-cluster-fundamentals/12-apiserver-deep-dive.md|12-apiserver-deep-dive]]
+- 08-plane-performance-benchmarking
+- 09-plane-scalability-guide
+- 11-etcd-deep-dive
+- 12-apiserver-deep-dive

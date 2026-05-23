@@ -50,11 +50,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md
   label: '故障树: statefulset'
+created: "2026-05-23"
 ---
 
-# 08 - StatefulSet 与 DaemonSet 控制器事件
+# 08 - [[StatefulSet|StatefulSet]] 与 [[DaemonSet|DaemonSet]] 控制器事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 StatefulSet 和 DaemonSet 控制器产生的所有事件。**
 
@@ -103,7 +104,7 @@ cross_refs:
 | **Pod 命名** | 固定序号: name-0, name-1, name-2 | 随机后缀 |
 | **调度方式** | 标准调度器 | v1.12+ 使用标准调度器 |
 | **存储管理** | volumeClaimTemplates 自动创建 PVC | 手动管理 |
-| **网络标识** | Headless Service 提供稳定网络标识 | 无特殊要求 |
+| **网络标识** | Headless [[Service|Service]] 提供稳定网络标识 | 无特殊要求 |
 | **滚动更新** | 支持 OnDelete/RollingUpdate | 支持 OnDelete/RollingUpdate |
 | **回滚** | 不支持自动回滚 | 不支持自动回滚 |
 
@@ -1490,7 +1491,7 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup web-0.ngi
 - DaemonSet Pod 通过标准调度器调度
 - 支持完整的调度特性:
   - Node affinity
-  - Taints and tolerations
+  - [[Taints and Tolerations|Taints and tolerations]]
   - Pod priority and preemption
   - Resource requests and limits
 - 调度失败会有调度器事件记录
@@ -2308,10 +2309,10 @@ kube_daemonset_status_updated_number_scheduled < kube_daemonset_status_desired_n
 
 ## See Also
 
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06-node-lifecycle-condition-events]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09-job-cronjob-batch-events]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10-service-networking-events]]
+- 06-node-lifecycle-condition-events
+- 07-deployment-replicaset-events
+- 09-job-cronjob-batch-events
+- 10-service-networking-events
 
 ## Related
 

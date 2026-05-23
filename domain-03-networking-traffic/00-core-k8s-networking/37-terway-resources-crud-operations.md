@@ -38,6 +38,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)
@@ -46,8 +47,8 @@ category: networking
 tags:
 - k8s
 - networking
-- service
-- ingress
+- [[Service|service]]
+- [[Ingress|ingress]]
 - cni
 - cilium
 - mysql
@@ -1642,25 +1643,25 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/35-gateway-api-overview.md|35-gateway-api-overview]]
-- [[domain-03-networking-traffic/36-api-gateway-patterns.md|36-api-gateway-patterns]]
-- [[domain-03-networking-traffic/38-terway-gc-mechanism.md|38-terway-gc-mechanism]]
-- [[domain-03-networking-traffic/39-csi-cni-version-matrix.md|39-csi-cni-version-matrix]]
+- 35-gateway-api-overview
+- 36-api-gateway-patterns
+- 38-terway-gc-mechanism
+- 39-csi-cni-version-matrix
 
 ## Related
 

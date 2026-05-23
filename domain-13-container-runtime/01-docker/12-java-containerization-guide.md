@@ -41,6 +41,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Java 应用容器化最佳实践指南
@@ -59,7 +60,7 @@ cross_refs:
 - [四、Dockerfile 生产级模板](#四dockerfile-生产级模板)
 - [五、Spring Boot 分层 JAR 优化](#五spring-boot-分层-jar-优化)
 - [六、Jib 无 Dockerfile 构建](#六jib-无-dockerfile-构建)
-- [七、Buildpacks 自动构建](#七buildpacks-自动构建)
+- [七、[[Buildpacks|Buildpacks]] 自动构建](#七buildpacks-自动构建)
 - [八、镜像瘦身策略](#八镜像瘦身策略)
 - [九、多架构构建](#九多架构构建)
 - [十、安全加固](#十安全加固)
@@ -728,7 +729,7 @@ docker run --rm --platform linux/arm64 registry.example.com/my-spring-app:v1.0.0
 | 固定基础镜像版本 | `eclipse-temurin:21.0.3_9-jre` 而非 `latest` | ☐ |
 | 无不必要的包 | Distroless 或 Alpine | ☐ |
 | 镜像签名 | `cosign sign` | ☐ |
-| 漏洞扫描 | `trivy image` / `grype` | ☐ |
+| 漏洞扫描 | `[[Trivy|trivy]] image` / `grype` | ☐ |
 
 #<!-- chunk: 10.2 K8s SecurityContext -->## 10.2 K8s SecurityContext
 
@@ -844,25 +845,25 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-13-container-runtime/MOC.md|domain-13-container-runtime MOC]]
+- domain-13-container-runtime MOC
 - [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|Domain-13 Docker — 开源项目索引]]
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|Docker 架构概述与核心概念]]
-- [[domain-13-container-runtime/02-docker-images-management.md|Docker 镜像管理详解]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|Docker 容器生命周期管理]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|Docker 网络深度解析]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|Docker 存储与数据卷]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|Docker Compose 编排]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|Docker 安全最佳实践]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|Docker 故障排查指南]]
-- [[domain-13-container-runtime/09-docker-performance-monitoring.md|Docker 性能监控与调优]]
+- Domain-13 Docker — 开源项目索引
+- Docker 架构概述与核心概念
+- Docker 镜像管理详解
+- Docker 容器生命周期管理
+- Docker 网络深度解析
+- Docker 存储与数据卷
+- Docker Compose 编排
+- Docker 安全最佳实践
+- Docker 故障排查指南
+- Docker 性能监控与调优
 
 ## See Also
 
-- [[domain-13-container-runtime/10-docker-logging-management.md|10-docker-logging-management]]
-- [[domain-13-container-runtime/11-docker-automation-devops.md|11-docker-automation-devops]]
-- [[domain-13-container-runtime/99-docker-commands-reference.md|99-docker-commands-reference]]
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|01-docker-architecture-overview]]
+- 10-docker-logging-management
+- 11-docker-automation-devops
+- 99-docker-commands-reference
+- 01-docker-architecture-overview
 
 ## Related
 

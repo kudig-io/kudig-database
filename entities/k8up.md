@@ -1,5 +1,5 @@
 ---
-title: K8up
+title: K8up (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # K8up
@@ -70,12 +71,12 @@ K8up 是一个 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolum
 ## Related
 
 - [[backstage]] — Backstage
-- [[emissary-ingress]] — Emissary-Ingress
+- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
-- [[piraeus-datastore]] — Piraeus Datastore
+- [[piraeus-datastore]] — [[Piraeus Datastore|Piraeus Datastore]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/k8up/k8up.md|k8up]]
+- k8up
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

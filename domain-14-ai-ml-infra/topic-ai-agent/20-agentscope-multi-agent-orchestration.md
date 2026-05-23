@@ -1,7 +1,45 @@
 ---
+title: AgentScope 多 Agent 编排与工作流 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub,'
+category: general
+tags:
+- ai
+- ai-agent
+- docker
+- redis
+- hpa
+- vpa
+- statefulset
+- rbac
+- networkpolicy
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- AgentScope 多 Agent 编排与工作流 是什么
+- 如何 AgentScope 多 Agent 编排与工作流
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- AgentScope
+- Agent
+- 编排与工作流
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- redis-basics
+created: "2026-05-23"
+---
+
 title: AgentScope 多 Agent 编排与工作流
-description: '**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub, Pipeline, 多 Agent, 消息编排, sequential_pipeline,
-  并发 Agent, Routing, Handoffs, Plan, 工作流'
+description: '**文档类型**: 多 Agent 编排专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, MsgHub,
+  Pipeline, 多 Agent, 消息编排, sequential_pipeline, 并发 Agent, Routing, Handoffs, Plan,
+  工作流'
 category: ai-agent
 tags:
 - ai
@@ -13,7 +51,7 @@ tags:
 - redis
 - hpa
 - vpa
-- statefulset
+- [[StatefulSet|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -31,9 +69,15 @@ trigger_keywords:
 - 编排与工作流
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- redis-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # AgentScope 多 Agent 编排与工作流
@@ -42,7 +86,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 单 Agent 系统在复杂任务中能力受限。AgentScope 通过 **MsgHub**（消息中心）和 **Pipeline**（管道编排）提供灵活的多 Agent 协作机制，支持顺序、并行、路由、交接等多种工作流模式，同时内置 Plan 模块支持智能体自主规划子任务。
 
@@ -50,7 +94,7 @@ prerequisites:
 
 ---
 
-## 1. 多 Agent 编排全景
+<!-- chunk: 1. 多 Agent 编排全景 -->## 1. 多 Agent 编排全景
 
 ```
 AgentScope 多 Agent 编排能力
@@ -80,9 +124,9 @@ AgentScope 多 Agent 编排能力
 
 ---
 
-## 2. MsgHub — 消息中心
+<!-- chunk: 2. MsgHub — 消息中心 -->## 2. MsgHub — 消息中心
 
-### 2.1 核心概念
+#<!-- chunk: 2.1 核心概念 -->## 2.1 核心概念
 
 MsgHub 是 AgentScope 多 Agent 通信的核心，采用**发布-订阅**模式：
 
@@ -103,7 +147,7 @@ MsgHub 工作原理
     └── hub.delete(agent)  → 移除参与者
 ```
 
-### 2.2 基础使用
+#<!-- chunk: 2.2 基础使用 -->## 2.2 基础使用
 
 ```python
 from agentscope.pipeline import MsgHub, sequential_pipeline
@@ -146,7 +190,7 @@ async def multi_agent_conversation():
 asyncio.run(multi_agent_conversation())
 ```
 
-### 2.3 MsgHub 消息流
+#<!-- chunk: 2.3 MsgHub 消息流 -->## 2.3 MsgHub 消息流
 
 ```
 时间线 →
@@ -183,9 +227,9 @@ Host 广播: "欢迎安全专家加入..."
 
 ---
 
-## 3. Pipeline — 管道编排
+<!-- chunk: 3. Pipeline — 管道编排 -->## 3. Pipeline — 管道编排
 
-### 3.1 sequential_pipeline（顺序执行）
+#<!-- chunk: 3.1 sequential_pipeline（顺序执行） -->## 3.1 sequential_pipeline（顺序执行）
 
 ```python
 from agentscope.pipeline import sequential_pipeline
@@ -227,7 +271,7 @@ async def k8s_diagnosis_pipeline():
     )
 ```
 
-### 3.2 fanout_pipeline（并发执行）
+#<!-- chunk: 3.2 fanout_pipeline（并发执行） -->## 3.2 fanout_pipeline（并发执行）
 
 与 `sequential_pipeline` 相对，`fanout_pipeline` 将同一输入广播给多个 Agent 并发执行：
 
@@ -252,7 +296,7 @@ results = await fanout_pipeline(
 > - `sequential_pipeline`：A → B → C（链式，前者输出作为后者输入）
 > - `fanout_pipeline`：A / B / C 并行（广播，同一输入给所有 Agent）
 
-### 3.3 stream_printing_messages（流式输出）
+#<!-- chunk: 3.3 stream_printing_messages（流式输出） -->## 3.3 stream_printing_messages（流式输出）
 
 在生产环境中，`stream_printing_messages` 用于流式展示 Agent 的推理和工具调用过程：
 
@@ -271,7 +315,7 @@ async for msg, is_last in stream_printing_messages(
 
 > **用途**：主要用于 AgentScope Runtime 的 SSE 流式响应，让用户实时看到 Agent 的执行过程而非等待最终结果。
 
-### 3.4 并行 Pipeline（手动 asyncio.gather）
+#<!-- chunk: 3.4 并行 Pipeline（手动 asyncio.gather） -->## 3.4 并行 Pipeline（手动 asyncio.gather）
 
 对于更复杂的并行场景，可直接使用 `asyncio.gather`：
 
@@ -318,9 +362,9 @@ async def parallel_diagnosis():
 
 ---
 
-## 4. Routing — 路由
+<!-- chunk: 4. Routing — 路由 -->## 4. Routing — 路由
 
-### 4.1 条件路由
+#<!-- chunk: 4.1 条件路由 -->## 4.1 条件路由
 
 根据消息内容或条件将任务路由到不同的专业 Agent：
 
@@ -364,7 +408,7 @@ async def routing_example():
         print(f"未知类别: {category}，使用默认处理")
 ```
 
-### 4.2 多级路由
+#<!-- chunk: 4.2 多级路由 -->## 4.2 多级路由
 
 ```
 多级路由架构
@@ -389,9 +433,9 @@ async def routing_example():
 
 ---
 
-## 5. Handoffs — 任务交接
+<!-- chunk: 5. Handoffs — 任务交接 -->## 5. Handoffs — 任务交接
 
-### 5.1 Agent 间交接
+#<!-- chunk: 5.1 Agent 间交接 -->## 5.1 Agent 间交接
 
 当一个 Agent 无法完成任务时，可以将任务交接给更合适的 Agent：
 
@@ -445,9 +489,9 @@ async def handoff_example():
 
 ---
 
-## 6. Plan — 计划模块
+<!-- chunk: 6. Plan — 计划模块 -->## 6. Plan — 计划模块
 
-### 6.1 PlanNotebook 与 SubTask
+#<!-- chunk: 6.1 PlanNotebook 与 SubTask -->## 6.1 PlanNotebook 与 SubTask
 
 Plan 模块的核心是 `PlanNotebook`，它管理一组 `SubTask`：
 
@@ -474,7 +518,7 @@ agent = ReActAgent(
 )
 ```
 
-### 6.2 SubTask 状态管理
+#<!-- chunk: 6.2 SubTask 状态管理 -->## 6.2 SubTask 状态管理
 
 ```python
 # 查看子任务
@@ -493,7 +537,7 @@ notebook.update_subtask_state(
 notebook.finish_plan()
 ```
 
-### 6.3 计划模块工作流
+#<!-- chunk: 6.3 计划模块工作流 -->## 6.3 计划模块工作流
 
 ```
 Plan 模块工作流
@@ -514,7 +558,7 @@ Plan 模块工作流
        notebook.finish_plan()
 ```
 
-### 6.4 计划可视化 Hooks
+#<!-- chunk: 6.4 计划可视化 Hooks -->## 6.4 计划可视化 Hooks
 
 PlanNotebook 支持注册可视化钩子，实时展示计划进度：
 
@@ -533,9 +577,9 @@ notebook = PlanNotebook()
 
 ---
 
-## 7. 多 Agent 辩论
+<!-- chunk: 7. 多 Agent 辩论 -->## 7. 多 Agent 辩论
 
-### 7.1 辩论模式
+#<!-- chunk: 7.1 辩论模式 -->## 7.1 辩论模式
 
 多个 Agent 从不同角度分析同一问题，通过辩论收敛到最优解：
 
@@ -598,9 +642,9 @@ asyncio.run(multi_agent_debate())
 
 ---
 
-## 8. 并发 Agent（Concurrent Agents）
+<!-- chunk: 8. 并发 Agent（Concurrent Agents） -->## 8. 并发 Agent（Concurrent Agents）
 
-### 8.1 asyncio.gather 并发模式
+#<!-- chunk: 8.1 asyncio.gather 并发模式 -->## 8.1 asyncio.gather 并发模式
 
 ```python
 import asyncio
@@ -632,9 +676,9 @@ async def concurrent_agents():
 
 ---
 
-## 9. 生产级多 Agent 架构设计模式
+<!-- chunk: 9. 生产级多 Agent 架构设计模式 -->## 9. 生产级多 Agent 架构设计模式
 
-### 9.1 Supervisor-Worker 模式
+#<!-- chunk: 9.1 Supervisor-Worker 模式 -->## 9.1 Supervisor-Worker 模式
 
 ```
 生产级 K8s 运维多 Agent 系统
@@ -658,7 +702,7 @@ async def concurrent_agents():
     └── 知识库（RAG 检索）
 ```
 
-### 9.2 实现示例
+#<!-- chunk: 9.2 实现示例 -->## 9.2 实现示例
 
 ```python
 async def supervisor_worker_system():
@@ -746,9 +790,9 @@ asyncio.run(supervisor_worker_system())
 
 ---
 
-## 10. 最佳实践与反模式
+<!-- chunk: 10. 最佳实践与反模式 -->## 10. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **MsgHub 用于对话式协作**：讨论、辩论、评审等需要多方参与的场景
 - **Pipeline 用于工作流**：有明确顺序的任务链（收集→分析→建议）
@@ -756,7 +800,7 @@ asyncio.run(supervisor_worker_system())
 - **Supervisor 限制 Worker 数量**：单个 Supervisor 管理 3-5 个 Worker 为佳
 - **每个 Agent 职责单一**：专精一个领域比通才 Agent 的诊断准确率更高
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **过度设计 Agent 层级**：3 层以上的 Agent 层级增加复杂性但边际收益递减
 - **所有 Agent 共享全部工具**：每个 Agent 只配备其职责所需的工具
@@ -766,7 +810,7 @@ asyncio.run(supervisor_worker_system())
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -778,3 +822,27 @@ asyncio.run(supervisor_worker_system())
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 18-agentscope-tool-system
+- 19-agentscope-memory-context
+- 21-agentscope-advanced-features
+- 22-agentscope-production-deployment

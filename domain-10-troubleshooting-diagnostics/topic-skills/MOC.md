@@ -41,6 +41,7 @@ prerequisites:
 skill_id: SKILL-MOC-001
 skill_name: topic-skills MOC
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # topic-skills MOC
@@ -71,8 +72,8 @@ version: 1.0.0
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复]] |  | skill, daily-ops |  |
+| 1 | [[domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md|[[节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
+| 2 | [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|[[Pod CrashLoopBackOff & OOMKilled 诊断与修复|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
 | 3 | [[domain-10-troubleshooting-diagnostics/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
 | 4 | [[domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
@@ -129,12 +130,12 @@ version: 1.0.0
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

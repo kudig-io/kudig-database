@@ -1,5 +1,5 @@
 ---
-title: Envoy
+title: Envoy (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # Envoy
@@ -81,50 +82,50 @@ description: '## 项目概述'
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[grpc]] — gRPC
 
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|04-envoy-proxy-enterprise]]
-- [[domain-03-networking-traffic/99-envoy-gateway-enterprise-guide.md|99-envoy-gateway-enterprise-guide]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07-envoy-gateway-enterprise]]
-- [[domain-19-landscape-references/graduated/envoy/envoy.md|envoy]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.28.md|RELEASE-NOTES-1.28]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.29.md|RELEASE-NOTES-1.29]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.22.md|RELEASE-NOTES-1.22]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.32.md|RELEASE-NOTES-1.32]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.26.md|RELEASE-NOTES-1.26]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.36.md|RELEASE-NOTES-1.36]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.27.md|RELEASE-NOTES-1.27]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.37.md|RELEASE-NOTES-1.37]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.23.md|RELEASE-NOTES-1.23]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.33.md|RELEASE-NOTES-1.33]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.24.md|RELEASE-NOTES-1.24]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.34.md|RELEASE-NOTES-1.34]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.20.md|RELEASE-NOTES-1.20]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.30.md|RELEASE-NOTES-1.30]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.21.md|RELEASE-NOTES-1.21]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.31.md|RELEASE-NOTES-1.31]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.25.md|RELEASE-NOTES-1.25]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/networking/envoy/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
+- 04-envoy-proxy-enterprise
+- 99-envoy-gateway-enterprise-guide
+- 07-envoy-gateway-enterprise
+- envoy
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-1.28
+- RELEASE-NOTES-1.18
+- RELEASE-NOTES-1.19
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-1.29
+- RELEASE-NOTES-1.16
+- RELEASE-NOTES-1.22
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.32
+- RELEASE-NOTES-1.26
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-1.36
+- RELEASE-NOTES-1.27
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-1.37
+- RELEASE-NOTES-1.17
+- RELEASE-NOTES-1.23
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.33
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.24
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-1.34
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.20
+- RELEASE-NOTES-1.30
+- RELEASE-NOTES-1.15
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.21
+- RELEASE-NOTES-1.31
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.25
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-1.35
 - [[journal/digest-2026-05-21-full|Wiki 全量知识库摘要 — 2026-05-21]] — Cross-reference
-- [[references/networking-terms|K8s 网络术语参考]] — Cross-reference
+- [[references/networking-terms|[[K8s 网络术语参考|K8s 网络术语参考]]]] — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[references/tooling-terms|K8s 工具链术语参考]] — Cross-reference

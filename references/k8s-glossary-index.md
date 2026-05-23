@@ -22,6 +22,7 @@ trigger_keywords:
 - 术语表索引
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8s 术语表索引（Glossary Index）

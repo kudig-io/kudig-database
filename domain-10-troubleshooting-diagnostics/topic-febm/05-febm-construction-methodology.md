@@ -1,5 +1,5 @@
 ---
-title: 第五章：FEBM 体系建设方法论
+title: 第五章：FEBM 体系建设方法论 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -46,6 +46,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 第五章：FEBM 体系建设方法论
@@ -57,11 +58,11 @@ tags:
 - evidence-based
 - methodology
 - apiserver
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- cilium
+- [[Jaeger|jaeger]]
+- [[Cilium|cilium]]
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -900,7 +901,7 @@ Level 4 是 FEBM 体系建设的**自动化阶段**，标志是**Forensics as Co
        Train Isolation Forest on historical metrics
        metrics_history: DataFrame with columns [timestamp, cpu, memory, network_rx, network_tx]
        """
-       features = metrics_history[['cpu', 'memory', 'network_rx', 'network_tx']].values
+       features = metrics_history'cpu', 'memory', 'network_rx', 'network_tx'.values
        
        model = IsolationForest(
            contamination=0.01,  # 1% of data is anomaly

@@ -1,5 +1,5 @@
 ---
-title: Front Proxy 聚合层证书工作流
+title: Front Proxy 聚合层证书工作流 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 title: Front Proxy 聚合层证书工作流

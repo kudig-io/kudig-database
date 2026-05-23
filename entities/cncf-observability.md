@@ -34,6 +34,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # CNCF 可观测性项目全景
@@ -96,7 +97,7 @@ Fluentd 是统一日志收集层，CNCF 日志采集的事实标准。
 
 ### [[logging-operator]] — 沙箱项目
 
-Logging Operator 通过 CRD 在 Kubernetes 中声明式管理日志管道。
+[[Logging Operator|Logging Operator]] 通过 CRD 在 Kubernetes 中声明式管理日志管道。
 
 ### [[tremor]] — 沙箱项目
 

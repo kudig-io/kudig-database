@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # 新人上手快速路径（Quick Start）
@@ -39,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-本目录提供新人入职第一周的系统性上手路径，旨在帮助刚加入团队的 SRE 和运维工程师在最短时间内建立 Kubernetes 生产运维的基本能力。新人培训是团队战斗力建设的关键环节，一个结构化的上手路径能够显著缩短新人从"第一天入职"到"能独立处理工单"的时间周期。本指南基于阿里云 ACK（Container Service for Kubernetes）生产环境实际运维经验编写，涵盖了从环境搭建到独立值班的完整流程。
+本目录提供新人入职第一周的系统性上手路径，旨在帮助刚加入团队的 SRE 和运维工程师在最短时间内建立 Kubernetes 生产运维的基本能力。新人培训是团队战斗力建设的关键环节，一个结构化的上手路径能够显著缩短新人从"第一天入职"到"能独立处理工单"的时间周期。本指南基于阿里云 ACK（Container [[Service|Service]] for Kubernetes）生产环境实际运维经验编写，涵盖了从环境搭建到独立值班的完整流程。
 
 四天的内容按照由浅入深的顺序排列：第一天完成所有工具安装和集群访问验证，确保基本工作环境就绪；第二天学习工单处理流程，掌握最常见的故障类型和处理方法；第三天理解值班交接的标准化流程，确保业务连续性；第四天安装和配置效率工具，提升日常运维效率。每天的学习目标清晰明确，产出可量化验证。
 
@@ -61,7 +62,7 @@ prerequisites:
 
 ### Day 1: 环境准备
 
-第一天是所有后续工作的基础。新人需要完成开发/运维工具的安装配置，验证对 Kubernetes 集群的访问权限，并确认监控告警系统的可达性。这一天的核心产出是能够成功执行 `kubectl get pods -A` 并看到集群中所有命名空间的 Pod 列表。
+第一天是所有后续工作的基础。新人需要完成开发/运维工具的安装配置，验证对 Kubernetes 集群的访问权限，并确认监控告警系统的可达性。这一天的核心产出是能够成功执行 `kubectl get [[Pods|pods]] -A` 并看到集群中所有命名空间的 Pod 列表。
 
 关键活动包括：
 - 安装 kubectl 命令行工具并配置 kubeconfig 文件
@@ -81,7 +82,7 @@ prerequisites:
 | ImagePullBackOff | 镜像拉取失败 | 检查镜像地址和拉取凭证 | P2: 15min |
 | Pod Pending | Pod 无法调度 | 检查资源余量和调度约束 | P2: 15min |
 | Service 无 Endpoints | 服务不可达 | 检查 selector 匹配和 Pod 就绪 | P2: 15min |
-| 节点 NotReady | 节点离线 | 检查 kubelet 和运行时状态 | P1: 5min |
+| 节点 NotReady | 节点离线 | 检查 [[kubelet|kubelet]] 和运行时状态 | P1: 5min |
 
 ### Day 3: 值班交接
 

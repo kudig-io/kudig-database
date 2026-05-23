@@ -1,5 +1,5 @@
 ---
-title: HPA 与 VPA 自动扩缩容故障排查指南
+title: HPA 与 VPA 自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: HPA 与 VPA 自动扩缩容故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: HPA 与 VPA 自动扩缩容故障排查指南
@@ -49,13 +50,13 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - hpa
 - vpa
 - pdb
-- statefulset
+- [[StatefulSet|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -841,13 +842,13 @@ kubectl scale deployment <name> --replicas=<n>
 ### 相关文档
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
-- [Controller Manager 故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]].md)
-- [Deployment 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]].md)
+- [Controller Manager 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting|04-controller-manager-troubleshooting]].md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

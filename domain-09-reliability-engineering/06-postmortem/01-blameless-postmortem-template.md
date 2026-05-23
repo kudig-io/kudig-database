@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
+created: "2026-05-23"
 ---
 
 # 无责事后复盘模板

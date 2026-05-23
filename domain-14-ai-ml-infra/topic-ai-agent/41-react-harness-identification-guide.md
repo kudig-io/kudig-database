@@ -1,4 +1,40 @@
 ---
+title: ReAct Agent 与 Harness 识别指南 (domain-14-ai-ml-infra)
+description: 'title: ReAct Agent 与 Harness 识别指南'
+category: general
+tags:
+- ai
+- ai-agent
+- guide
+- prometheus
+- postgresql
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- ReAct Agent 与 Harness 识别指南 是什么
+- 如何 ReAct Agent 与 Harness 识别指南
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- ReAct
+- Agent
+- Harness
+- 识别指南
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: ReAct Agent 与 Harness 识别指南
 description: '# ReAct Agent 与 Harness 识别指南'
 category: ai-agent
@@ -8,7 +44,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - postgresql
 last_updated: 2026-05
 difficulty: advanced
@@ -28,9 +64,15 @@ trigger_keywords:
 - 识别指南
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # ReAct Agent 与 Harness 识别指南
@@ -39,7 +81,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 在构建和评估 Agent 系统时，两个最基础的问题是：**"这个 Agent 是不是 ReAct？"** 和 **"这个 Agent 有没有 Harness？"**。前者决定了 Agent 的推理模式和能力边界，后者决定了 Agent 是否具备生产级的可靠性和可控性。
 
@@ -47,9 +89,9 @@ prerequisites:
 
 ---
 
-## 1. 如何判断一个 Agent 是否是 ReAct
+<!-- chunk: 1. 如何判断一个 Agent 是否是 ReAct -->## 1. 如何判断一个 Agent 是否是 ReAct
 
-### 1.1 ReAct 核心定义
+#<!-- chunk: 1.1 ReAct 核心定义 -->## 1.1 ReAct 核心定义
 
 **ReAct = Reasoning + Acting**，是最广泛使用的 Agent 推理模式。其核心特征是**交替进行思考（Thought）和行动（Action）**：
 
@@ -62,7 +104,7 @@ ReAct 循环:
   Final Answer: 给出最终答案
 ```
 
-### 1.2 三要素判断法
+#<!-- chunk: 1.2 三要素判断法 -->## 1.2 三要素判断法
 
 ReAct 的三要素必须**同时具备**：
 
@@ -72,7 +114,7 @@ ReAct 的三要素必须**同时具备**：
 | **Action（行动）** | 基于推理调用工具/执行操作 | 看是否有 `Action:` + 工具调用 |
 | **Observation（观察）** | 获取工具执行结果并反馈到下一轮 | 看是否有 `Observation:` + 结果解析 |
 
-### 1.3 完整判断清单
+#<!-- chunk: 1.3 完整判断清单 -->## 1.3 完整判断清单
 
 ```
 ✅ 是 ReAct Agent 的标志:
@@ -90,9 +132,9 @@ ReAct 的三要素必须**同时具备**：
   - 预定义流程: 执行路径固定，LLM 不做动态决策
 ```
 
-### 1.4 代码层面判断
+#<!-- chunk: 1.4 代码层面判断 -->## 1.4 代码层面判断
 
-#### AgentScope 框架
+##<!-- chunk: AgentScope 框架 -->## AgentScope 框架
 
 直接看是否使用了 `ReActAgent` 或继承自 `ReActAgentBase`：
 
@@ -108,7 +150,7 @@ agent = ReActAgent(name="Friday", model=model, toolkit=toolkit, ...)
 # UserAgent          → 用户代理，不是 ReAct
 ```
 
-#### LangChain 框架
+##<!-- chunk: LangChain 框架 -->## LangChain 框架
 
 ```python
 # ✅ ReAct
@@ -119,7 +161,7 @@ agent = create_react_agent(llm=llm, tools=tools, prompt=react_prompt)
 from langgraph.prebuilt import create_plan_and_execute_agent
 ```
 
-#### 自定义 Agent
+##<!-- chunk: 自定义 Agent -->## 自定义 Agent
 
 检查是否具备以下结构：
 
@@ -142,7 +184,7 @@ class ReActAgent:
             context.add_observation(result)
 ```
 
-### 1.5 ReAct 与其他推理框架对比
+#<!-- chunk: 1.5 ReAct 与其他推理框架对比 -->## 1.5 ReAct 与其他推理框架对比
 
 | 框架 | 有 Loop? | 有工具调用? | 推理方式 | 是否 ReAct |
 |------|----------|-----------|---------|-----------|
@@ -152,7 +194,7 @@ class ReActAgent:
 | Plan-and-Execute | ✅ | ✅ | 先计划再执行 | ❌ |
 | Reflexion | ✅ | 可选 | 自我反思迭代 | ❌（但可组合） |
 
-### 1.6 边界案例
+#<!-- chunk: 1.6 边界案例 -->## 1.6 边界案例
 
 ```
 灰色地带 — 需要进一步判断:
@@ -175,9 +217,9 @@ class ReActAgent:
 
 ---
 
-## 2. 如何判断 Agent 是否有 Harness
+<!-- chunk: 2. 如何判断 Agent 是否有 Harness -->## 2. 如何判断 Agent 是否有 Harness
 
-### 2.1 Harness 核心定义
+#<!-- chunk: 2.1 Harness 核心定义 -->## 2.1 Harness 核心定义
 
 **Harness = 包裹在 AI 模型外部的完整运行系统**，将模型的原始认知能力转化为可靠的生产输出。
 
@@ -195,7 +237,7 @@ Agent + Harness（完整系统）:
   马具不让马更强壮，而是让马的力量可靠地转化为有用的工作
 ```
 
-### 2.2 六层架构检查法
+#<!-- chunk: 2.2 六层架构检查法 -->## 2.2 六层架构检查法
 
 Harness 包含六层架构。**不需要全部具备才叫 Harness**，但层级越完整，Harness 越成熟：
 
@@ -239,7 +281,7 @@ Layer 6: Constraints（约束层）
   □ 有人工审批机制
 ```
 
-### 2.3 五级成熟度模型判断法
+#<!-- chunk: 2.3 五级成熟度模型判断法 -->## 2.3 五级成熟度模型判断法
 
 | 等级 | 名称 | 特征 | 是否有 Harness |
 |------|------|------|--------------|
@@ -249,9 +291,9 @@ Layer 6: Constraints（约束层）
 | **L4** | 企业级（Enterprise） | 多 Agent 编排 + 灰度发布 + A/B 测试 + 完整可观测性 | ✅ 成熟 Harness |
 | **L5** | 自进化（Self-Evolving） | Meta-Agent 自动优化 Harness 参数 | ✅ 高级 Harness |
 
-### 2.4 快速判断清单
+#<!-- chunk: 2.4 快速判断清单 -->## 2.4 快速判断清单
 
-#### 最小 Harness 判断（L2 — 至少满足以下全部）
+##<!-- chunk: 最小 Harness 判断（L2 — 至少满足以下全部） -->## 最小 Harness 判断（L2 — 至少满足以下全部）
 
 ```
 □ 有 Agent Loop（循环执行，非一次性调用）
@@ -260,7 +302,7 @@ Layer 6: Constraints（约束层）
 □ 有最大迭代限制
 ```
 
-#### 生产级 Harness 判断（L3 — 在 L2 基础上增加）
+##<!-- chunk: 生产级 Harness 判断（L3 — 在 L2 基础上增加） -->## 生产级 Harness 判断（L3 — 在 L2 基础上增加）
 
 ```
 □ 有验证层（>= 3 个验证器）           ← 关键分水岭
@@ -273,7 +315,7 @@ Layer 6: Constraints（约束层）
 □ 有基本告警规则
 ```
 
-#### 企业级 Harness 判断（L4 — 在 L3 基础上增加）
+##<!-- chunk: 企业级 Harness 判断（L4 — 在 L3 基础上增加） -->## 企业级 Harness 判断（L4 — 在 L3 基础上增加）
 
 ```
 □ 有多 Agent 编排
@@ -288,9 +330,9 @@ Layer 6: Constraints（约束层）
 □ 有 Prompt 版本管理
 ```
 
-### 2.5 代码级 Harness 识别
+#<!-- chunk: 2.5 代码级 Harness 识别 -->## 2.5 代码级 Harness 识别
 
-#### 有 Harness 的 Agent（典型结构）
+##<!-- chunk: 有 Harness 的 Agent（典型结构） -->## 有 Harness 的 Agent（典型结构）
 
 ```python
 class HarnessedAgent:
@@ -348,7 +390,7 @@ class HarnessedAgent:
             await self.memory.save_step(thought, result)
 ```
 
-#### 无 Harness 的 Agent（裸 Agent）
+##<!-- chunk: 无 Harness 的 Agent（裸 Agent） -->## 无 Harness 的 Agent（裸 Agent）
 
 ```python
 # ❌ 裸 Agent：直接调用 LLM + 工具，无验证、无约束、无持久化
@@ -361,7 +403,7 @@ class NakedAgent:
         return response.content
 ```
 
-### 2.6 关键分水岭：验证层
+#<!-- chunk: 2.6 关键分水岭：验证层 -->## 2.6 关键分水岭：验证层
 
 行业实证数据表明，**验证层是 Harness 区别于"裸 Agent"的关键分水岭**：
 
@@ -383,7 +425,7 @@ Anthropic 长运行 Agent:
   - 安全风险: 15%
 ```
 
-### 2.7 一句话总结
+#<!-- chunk: 2.7 一句话总结 -->## 2.7 一句话总结
 
 ```
 裸 Agent       = LLM + 工具 + Loop
@@ -396,7 +438,7 @@ Anthropic 长运行 Agent:
 
 ---
 
-## 3. 综合识别矩阵
+<!-- chunk: 3. 综合识别矩阵 -->## 3. 综合识别矩阵
 
 | 系统特征 | 纯 LLM | 裸 Agent | 基础 Harness (L2) | 生产 Harness (L3+) |
 |---------|--------|---------|------------------|-------------------|
@@ -415,9 +457,9 @@ Anthropic 长运行 Agent:
 
 ---
 
-## 4. 实战应用示例
+<!-- chunk: 4. 实战应用示例 -->## 4. 实战应用示例
 
-### 4.1 评估现有 Agent 系统
+#<!-- chunk: 4.1 评估现有 Agent 系统 -->## 4.1 评估现有 Agent 系统
 
 ```python
 class AgentSystemAssessment:
@@ -492,7 +534,7 @@ class AgentSystemAssessment:
         return recommendations.get(level, "已达最高成熟度")
 ```
 
-### 4.2 团队 Code Review 中的 Agent 分类
+#<!-- chunk: 4.2 团队 Code Review 中的 Agent 分类 -->## 4.2 团队 Code Review 中的 Agent 分类
 
 在团队 Code Review 中，可以使用以下问题快速分类：
 
@@ -520,7 +562,7 @@ Agent 分类 Code Review Checklist:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -534,7 +576,7 @@ Agent 分类 Code Review Checklist:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -547,3 +589,27 @@ Agent 分类 Code Review Checklist:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，提供 ReAct Agent 与 Harness 的系统化识别方法。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 39-agent-harness-testing-benchmark
+- 40-agent-harness-production-maturity
+- 42-model-harness-compatibility-matrix
+- 43-openclaw-framework-integration

@@ -1,5 +1,5 @@
 ---
-title: 标签索引 (Tags Index)
+title: 标签索引 (Tags Index) [metadata]
 description: '- domain-1: 架构概览、核心组件、性能调优'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 标签索引 (Tags Index)
@@ -84,7 +85,7 @@ prerequisites:
 ### ingress
 - domain-03-networking-traffic/27: Ingress 基础
 - domain-10-troubleshooting-diagnostics/15: Ingress 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md
+- domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md
 
 ### gateway-api
 - domain-03-networking-traffic/35: Gateway API 概览

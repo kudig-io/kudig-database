@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,9 +41,9 @@ title: Day 21: K8s 组件运维实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 控制平面组件运维
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 控制平面组件运维
   - API Server 故障排查
-  - etcd 备份恢复
+  - [[etcd|etcd]] 备份恢复
   - 证书管理与续期
 trigger_keywords:
   - 控制平面
@@ -50,7 +51,7 @@ trigger_keywords:
   - Scheduler
   - Controller Manager
   - etcd
-  - kubelet
+  - [[kubelet|kubelet]]
   - 证书
   - 组件运维
 reading_level: advanced

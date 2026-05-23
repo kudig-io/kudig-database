@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Cluster 集群知识图谱索引
@@ -41,24 +42,24 @@ prerequisites:
 
 ### 集群生命周期
 
-- [[domain-07-platform-engineering/02-cluster-lifecycle-management|集群生命周期管理 (Cluster Lifecycle Management)]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-cluster-lifecycle|32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)]]
-- [[domain-02-workloads-applications/22-cluster-capacity-planning|集群容量规划]]
+- [[domain-07-platform-engineering/operate/02-cluster-lifecycle-management.md|集群生命周期管理 (Cluster Lifecycle Management)]]]]
+- 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
+- 集群容量规划
 
 ### 集群创建
 
-- [Kubernetes 集群新建逻辑 — 基于官方代码分析](domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md)
+- [[entities/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md)
 - [预检阶段 (Preflight Checks)](domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md)
 - [证书阶段 (Certificate Generation)](domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md)
 - [kubeconfig 阶段 (Kubeconfig Generation)](domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md)
-- [控制面阶段 (Control Plane & Static Pods)](domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md)
-- [节点加入流程 (kubeadm join)](domain-02-workloads-applications/topic-functions/cluster-create/06-join.md)
+- [控制面阶段 (Control Plane & Static [[Pods|Pods]])](domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md)
+- 节点加入流程 (kubeadm join)](domain-02-workloads-applications/topic-functions/cluster-create/06-join.md)
 - [etcd 集群初始化细节](domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md)
 - [高可用控制面搭建](domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md)
 - [集群升级流程](domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md)
 - [CNI 网络插件与集群网络](domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md)
 - [Node 注册与 kubeadm token 详解](domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md)
-- [Cluster Create — Kubernetes 集群新建源码分析](domain-02-workloads-applications/topic-functions/cluster-create/README.md)
+- Cluster Create — Kubernetes 集群新建源码分析](domain-02-workloads-applications/topic-functions/cluster-create/README.md)
 
 ### 集群证书
 
@@ -69,12 +70,12 @@ prerequisites:
 - [kubelet 证书与 CSR 机制源码分析](domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md)
 - [证书轮换机制源码分析](domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md)
 - [证书身份到 RBAC 的映射关系](domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md)
-- [Cluster Cert — Kubernetes 集群证书体系源码分析](domain-02-workloads-applications/topic-functions/cluster-cert/README.md)
+- Cluster Cert — Kubernetes 集群证书体系源码分析](domain-02-workloads-applications/topic-functions/cluster-cert/README.md)
 
 ### 集群删除
 
 - [[domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup|etcd 数据清理与成员移除 — 源码分析]]
-- [[domain-02-workloads-applications/topic-functions/cluster-delete/README|Cluster Delete — Kubernetes 集群删除源码分析]]
+- [[domain-02-workloads-applications/topic-functions/cluster-delete/README|[[Cluster Delete — Kubernetes 集群删除源码分析|Cluster Delete — Kubernetes 集群删除源码分析]]]]
 
 ## 关联文档 (K8s 集成)
 
@@ -87,23 +88,23 @@ prerequisites:
 
 ### 多集群管理
 
-- [[domain-07-platform-engineering/13-multi-cluster-management|多集群管理]]
-- [[domain-07-platform-engineering/25-virtual-clusters|55 - 虚拟集群与多租户]]
+- 多集群管理
+- 55 - 虚拟集群与多租户
 
 ### YAML 配置参考
 
-- [[domain-18-manifests-patterns/33-kubeadm-cluster-bootstrap|33 - kubeadm 集群引导配置 YAML 参考]]
+- 33 - kubeadm 集群引导配置 YAML 参考
 
 ## 扩展参考
 
 ### 集群生态项目
 
-- [[domain-19-landscape-references/incubating/karmada/karmada|Karmada]]
-- [[domain-19-landscape-references/sandbox/clusterpedia/clusterpedia|Clusterpedia]]
-- [[domain-19-landscape-references/sandbox/kubean/kubean|Kubean]]
-- [[domain-19-landscape-references/sandbox/kcp/kcp|kcp (Kubernetes-like Control Plane)]]
+- Karmada
+- Clusterpedia
+- Kubean
+- kcp (Kubernetes-like Control Plane)
 
 ### 平台运维
 
-- [[domain-07-platform-engineering/14-large-scale-cluster-optimization|大规模集群性能优化 (Large Scale Cluster Optimization)]]
-- [[domain-11-production-operations/99-karpenter-node-autoscaling-guide|Karpenter 节点自动扩展实践指南]]
+- [[domain-07-platform-engineering/governance/14-large-scale-cluster-optimization.md]]
+- Karpenter 节点自动扩展实践指南

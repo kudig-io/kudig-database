@@ -37,6 +37,7 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南
@@ -49,10 +50,10 @@ tags:
 - gke
 - aks
 - ack
-- etcd
-- statefulset
+- [[etcd|etcd]]
+- [[StatefulSet|statefulset]]
 - job
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,7 +65,7 @@ estimated_read_time: 5min
 intent_queries:
 - 华为云 CCE (Cloud Container Engine) 企业级深度实战指南 是什么
 - 如何 华为云 CCE (Cloud Container Engine) 企业级深度实战指南
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - 华为云
 - CCE
@@ -578,7 +579,7 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
+- USER
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

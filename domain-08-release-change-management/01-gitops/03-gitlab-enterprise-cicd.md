@@ -38,6 +38,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: GitLab CI/CD 企业级流水线自动化平台
@@ -47,10 +48,10 @@ tags:
 - k8s
 - gitops
 - ci-cd
-- argocd
-- flux
+- [[ArgoCD|argocd]]
+- [[Flux|flux]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - helm
 - docker
@@ -316,7 +317,7 @@ log_level = "info"
 [session_server]
   session_timeout = 1800
 
-[[runners]]
+runners
   name = "kubernetes-runner"
   url = "https://gitlab.example.com/"
   token = "${RUNNER_TOKEN}"
@@ -330,7 +331,7 @@ log_level = "info"
     service_account = "gitlab-runner"
     [runners.kubernetes.node_selector]
       gitlab-runner = "true"
-    [[runners.kubernetes.volumes.empty_dir]]
+    runners.kubernetes.volumes.empty_dir
       name = "docker-certs"
       mount_path = "/certs/client"
       medium = "Memory"
@@ -342,7 +343,7 @@ log_level = "info"
         cpu = "2"
         memory = "4Gi"
 
-[[runners]]
+runners
   name = "docker-runner"
   url = "https://gitlab.example.com/"
   token = "${RUNNER_TOKEN}"
@@ -408,7 +409,7 @@ build-app:
     - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+      if "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH"; then
         docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
         docker push $CI_REGISTRY_IMAGE:latest
       fi
@@ -1116,7 +1117,7 @@ rbac:
     - configmaps
 runners:
   config: |
-    [[runners]]
+    runners
       executor = "kubernetes"
       [runners.kubernetes]
         namespace = "gitlab-runner"
@@ -1143,25 +1144,25 @@ resources:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|01-argo-cd-enterprise-gitops]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|02-jenkins-enterprise-cicd]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|04-github-actions-enterprise]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|05-tekton-cloud-native-cicd]]
+- 01-argo-cd-enterprise-gitops
+- 02-jenkins-enterprise-cicd
+- 04-github-actions-enterprise
+- 05-tekton-cloud-native-cicd
 
 ## Related
 

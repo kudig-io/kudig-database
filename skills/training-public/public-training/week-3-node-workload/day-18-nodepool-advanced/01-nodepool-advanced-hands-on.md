@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ title: Day 18: 节点池进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 节点池弹性伸缩
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池弹性伸缩
   - Cluster Autoscaler 配置
   - 节点池生命周期管理
   - PDB Pod 中断预算

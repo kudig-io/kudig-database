@@ -50,13 +50,15 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
-<!-- condition: kubectl get pods -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
+<!-- condition: kubectl get [[Pods|pods]] -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
 
 # Pod CrashLoopBackOff & OOMKilled 诊断与修复
 
-> **Skill ID**: SKILL-POD-001  
+> **[[SKILL|Skill]] ID**: SKILL-POD-001  
 > **Agent 执行模式**: L2-semi-auto — 低风险操作自动执行，中/高风险需人工审批  
 > **预计修复时间**: 5-20 分钟  
 > **上次更新**: 2026-03
@@ -65,9 +67,9 @@ k8s_versions:
 
 ## 1. 概述
 
-**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别故障，占 Kubernetes 工单总量的 30-40%。
+**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别故障，占 [[Kubernetes|Kubernetes]] 工单总量的 30-40%。
 
-- **CrashLoopBackOff**: 容器反复退出（exit），kubelet 以指数退避（exponential backoff, 10s → 20s → 40s → ... → 5min cap）策略不断尝试重启容器。这是一个**状态描述**，不是根因本身——真正的问题隐藏在容器的 exit code 和日志中。
+- **CrashLoopBackOff**: 容器反复退出（exit），[[kubelet|kubelet]] 以指数退避（exponential backoff, 10s → 20s → 40s → ... → 5min cap）策略不断尝试重启容器。这是一个**状态描述**，不是根因本身——真正的问题隐藏在容器的 exit code 和日志中。
 - **OOMKilled**: Linux 内核的 OOM Killer 终止了容器进程（发送 SIGKILL, exit code 137），通常由容器实际内存用量超过 cgroup memory limit 触发。在 Kubernetes 中，这意味着 `resources.limits.memory` 设置不足或应用存在内存泄漏。
 
 > **版本差异说明 / Version Notes**:
@@ -1442,6 +1444,53 @@ Native Sidecar Containers 改变了 Init Container 的诊断逻辑：
 | 日期 | 版本 | 变更 | 原因 |
 |------|------|------|------|
 | 2026-03 | v1.0 | 初始版本发布 | 覆盖 CrashLoopBackOff 和 OOMKilled 两大核心场景 |
+
+## 修复动作
+
+> **本章定位**: 基于 Section 6 修复操作的快速决策摘要，供 Agent 在 QA 语料和运行时直接引用。
+
+### 修复动作速查表
+
+| 根因 | 修复动作 | 风险 | 验证命令 |
+|------|---------|------|---------|
+| RC-002 内存 limits 过低 | `kubectl patch deployment <deploy> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/resources/limits/memory","value":"<new-limit>"}]'` | 🟢 低风险（触发滚动更新） | `kubectl rollout status deployment/<deploy> -n <ns> && kubectl top pod <pod> -n <ns>` |
+| RC-006 ConfigMap/Secret 缺失 | `kubectl create configmap <name> -n <ns> --from-literal=<key>=<value>` 或修正 Deployment 引用 | 🟢 低风险 | `kubectl rollout status deployment/<deploy> -n <ns>` |
+| RC-003 临时故障 | `kubectl delete pod <pod> -n <ns>`（Controller 自动重建） | 🟢 低风险 | `kubectl get pods -n <ns> -l <label-selector>` |
+| RC-004 命令/镜像错误 | `kubectl set image deployment/<deploy> -n <ns> <container>=<new-image>:<tag>` | 🟡 中风险（触发滚动更新） | `kubectl rollout status deployment/<deploy> -n <ns> --timeout=180s` |
+| RC-008 探针过于激进 | `kubectl patch deployment <deploy> -n <ns> --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/startupProbe",...}]'` | 🟡 中风险（触发 Pod 重建） | `kubectl get pods -n <ns> -l <label-selector>` |
+| RC-006 批量临时故障 | `kubectl scale deployment/<deploy> -n <ns> --replicas=<new-count>` | 🟡 中风险（占用更多集群资源） | `kubectl get deployment/<deploy> -n <ns>` |
+| RC-003 内存泄漏（应用层） | 短期扩容 limits + 长期应用修复 | 🟡 中风险（掩盖根因） | `kubectl top pod <pod> -n <ns> --containers` |
+
+### danger_operations 高风险操作标注
+
+以下操作需谨慎评估影响：
+
+```yaml
+danger_operations:
+  - operation: "kubectl patch deployment ... 修改 resources/limits"
+    risk: "设置过高的 limits 可能导致节点资源耗尽，引发节点级 OOM 或调度失败"
+    mitigation: "新 limit = 当前峰值 × 1.5；同步确认 namespace ResourceQuota 余量"
+
+  - operation: "kubectl scale deployment --replicas=<high-count>"
+    risk: "快速扩容可能耗尽集群资源，影响其他工作负载"
+    mitigation: "先确认节点 CPU/内存余量: kubectl top nodes"
+```
+
+### 通用验证步骤
+
+```bash
+# 1. 确认 Pod 状态恢复正常
+kubectl get pod <pod> -n <ns>
+
+# 2. 确认无持续重启
+kubectl get pod <pod> -n <ns> -o jsonpath='{.status.containerStatuses[0].restartCount}'
+
+# 3. 确认内存用量在安全范围
+kubectl top pod <pod> -n <ns> --containers
+
+# 4. 确认 Deployment 滚动更新完成
+kubectl rollout status deployment/<deploy> -n <ns> --timeout=120s
+```
 
 ---
 

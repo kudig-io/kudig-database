@@ -54,9 +54,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md
   label: '故障树: backup-restore'
+created: "2026-05-23"
 ---
 
-# Kubernetes 备份与恢复深度实践
+# [[Kubernetes|Kubernetes]] 备份与恢复深度实践
 
 > **作者**: Kubernetes 灾备架构师 | **版本**: v1.0 | **更新时间**: 2026-05-18
 > **适用场景**: Kubernetes 集群级灾难恢复与数据保护 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -65,7 +66,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性故障——无论是 etcd 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，涵盖 Velero 深度配置、etcd 备份恢复、持久卷（PV）数据保护、CSI 快照集成、集群迁移以及完整的灾难恢复编排。
+Kubernetes 已经成为企业应用部署的标准平台，但 Kubernetes 自身并不提供内置的备份与灾难恢复能力。当集群遭遇灾难性故障——无论是 [[etcd|etcd]] 数据损坏、整个集群不可用、还是误操作删除关键资源——如果没有完善的备份策略，将面临严重的数据丢失和业务中断。本文档全面探讨 Kubernetes 环境下的备份与恢复实践，涵盖 Velero 深度配置、etcd 备份恢复、持久卷（PV）数据保护、CSI 快照集成、集群迁移以及完整的灾难恢复编排。
 
 #<!-- chunk: RPO 与 RTO 定义 -->## RPO 与 RTO 定义
 
@@ -681,7 +682,7 @@ kubectl get pvc -A | grep -v Bound
 | 故障现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | etcd 恢复后 API Server 不启动 | 快照与集群配置不匹配 | 检查 etcd 恢复参数 | 确保initial-cluster参数正确 |
-| Velero 备份卡在 InProgress | Node Agent 未运行 | 检查 DaemonSet 状态 | 重启 Node Agent |
+| Velero 备份卡在 InProgress | Node Agent 未运行 | 检查 [[DaemonSet|DaemonSet]] 状态 | 重启 Node Agent |
 | CSI 快照创建失败 | StorageClass 不支持快照 | 检查 CSI Driver 能力 | 安装支持快照的 CSI Driver |
 | 恢复后 Pod CrashLoopBackOff | ConfigMap/Secret 未恢复 | 检查资源恢复顺序 | 确保依赖资源先恢复 |
 | PV 数据丢失 | 未启用卷备份 | 检查备份配置 | 启用 snapshotVolumes 或 FS Backup |
@@ -921,7 +922,7 @@ echo "请执行应用层验证测试"
 #<!-- chunk: Velero 安全加固 -->## Velero 安全加固
 
 1. **对象存储加密**：所有备份存储桶启用 SSE-S3 或 SSE-KMS 加密
-2. **网络隔离**：Velero 运行在独立命名空间，使用 NetworkPolicy 限制流量
+2. **网络隔离**：Velero 运行在独立命名空间，使用 [[NetworkPolicy|NetworkPolicy]] 限制流量
 3. **RBAC 最小权限**：Velero ServiceAccount 仅授予必要的 ClusterRole 权限
 4. **凭证管理**：使用 External Secrets 或 Sealed Secrets 管理备份凭证
 5. **审计日志**：记录所有备份和恢复操作
@@ -967,21 +968,21 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-09-reliability-engineering/MOC.md|domain-30-disaster-recovery-business-continuity MOC]]
+- domain-30-disaster-recovery-business-continuity MOC
 - [[domain-09-reliability-engineering/README.md|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Busin...]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr.md|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup.md|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/03-enterprise-disaster-recovery-chaos-engineering.md|企业级容灾架构与混沌工程深度实践]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|Rubrik 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|混沌工程平台实践：LitmusChaos 与 Chaos Mesh]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|应用级灾备架构：多区域部署与故障转移]]
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
+- Domain-30 灾备与业务连续性 — 开源项目索引
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案
+- 企业级容灾架构与混沌工程深度实践
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+- 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
+- 应用级灾备架构：多区域部署与故障转移
+- Velero 企业级备份恢复实践指南
 
 ## See Also
 
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery.md|05-commvault-enterprise-disaster-recovery]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery.md|06-rubrik-enterprise-disaster-recovery]]
-- [[domain-09-reliability-engineering/08-chaos-engineering-platforms.md|08-chaos-engineering-platforms]]
-- [[domain-09-reliability-engineering/09-application-level-disaster-recovery.md|09-application-level-disaster-recovery]]
+- 05-commvault-enterprise-disaster-recovery
+- 06-rubrik-enterprise-disaster-recovery
+- 08-chaos-engineering-platforms
+- 09-application-level-disaster-recovery

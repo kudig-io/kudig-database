@@ -29,13 +29,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Pod Priority and Preemption
 
 ## 概述
 
-Pod 优先级和抢占（Pod Priority and Preemption）是 Kubernetes v1.14 中达到 stable 的特性。Pod 可以具有优先级，表示该 Pod 相对于其他 Pod 的重要性。如果某个 Pod 无法被调度，调度器会尝试抢占（驱逐）优先级较低的 Pod，以使该 pending Pod 能够被调度。
+Pod 优先级和抢占（Pod Priority and Preemption）是 [[Kubernetes|Kubernetes]] v1.14 中达到 stable 的特性。Pod 可以具有优先级，表示该 Pod 相对于其他 Pod 的重要性。如果某个 Pod 无法被调度，调度器会尝试抢占（驱逐）优先级较低的 Pod，以使该 pending Pod 能够被调度。
 
 ## 核心概念/原理
 
@@ -63,7 +64,7 @@ PriorityClass 是一个非命名空间对象，定义了优先级类名称到整
 - **nominatedNodeName**：当 Pod P 抢占了一个或多个 Pod 后，Pod P 状态中的 `nominatedNodeName` 字段会被设置为目标节点名称。这有助于调度器跟踪为 Pod P 预留的资源。但 Pod P 最终不一定会调度到 nominated node 上。
 - **非抢占式 PriorityClass**（v1.24+ stable）：允许高优先级 Pod 在调度队列中排在低优先级 Pod 前面，但不主动抢占正在运行的 Pod，适用于希望优先但不中断现有工作的数据科学工作负载。
 - **PodDisruptionBudget（PDB）支持**：调度器在抢占时尽量尊重 PDB，但这是 best effort。如果找不到不违反 PDB 的受害者，仍然会进行抢占。
-- **与 QoS 的交互**：Pod 优先级和 QoS 类是两个正交的特性。调度器的抢占逻辑不考虑 QoS，但 kubelet 的节点压力驱逐会使用优先级来确定驱逐顺序。
+- **与 QoS 的交互**：Pod 优先级和 QoS 类是两个正交的特性。调度器的抢占逻辑不考虑 QoS，但 [[kubelet|kubelet]] 的节点压力驱逐会使用优先级来确定驱逐顺序。
 
 ## 使用场景
 
@@ -211,4 +212,4 @@ kubectl describe resourcequota -n <namespace> | grep -i priority
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

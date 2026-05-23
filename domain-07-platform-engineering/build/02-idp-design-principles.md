@@ -41,6 +41,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 内部开发者平台设计原则
@@ -51,11 +52,11 @@ tags:
 - platform-engineering
 - developer-experience
 - idp
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- istio
-- cilium
+- [[Jaeger|jaeger]]
+- [[Istio|istio]]
+- [[Cilium|cilium]]
 - calico
 last_updated: 2026-05
 difficulty: advanced
@@ -2271,7 +2272,7 @@ IDP 设计原则是构建成功内部开发者平台的基石。核心要点：
 
 ## See Also
 
-- [[domain-07-platform-engineering/99-backstage-idp-guide.md|99-backstage-idp-guide]]
-- [[domain-07-platform-engineering/01-platform-engineering-overview.md|01-platform-engineering-overview]]
-- [[domain-07-platform-engineering/03-backstage-deployment.md|03-backstage-deployment]]
-- [[domain-07-platform-engineering/04-backstage-catalog-techdocs.md|04-backstage-catalog-techdocs]]
+- 99-backstage-idp-guide
+- 01-platform-engineering-overview
+- 03-backstage-deployment
+- 04-backstage-catalog-techdocs

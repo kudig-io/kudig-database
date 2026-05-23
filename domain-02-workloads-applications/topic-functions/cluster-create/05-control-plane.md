@@ -1,4 +1,41 @@
 ---
+title: 控制面组件部署 (Static Pod Manifests) [cluster-create]
+description: 'title: 控制面组件部署 (Static Pod Manifests)'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 控制面组件部署 (Static Pod Manifests) 是什么
+- 如何 控制面组件部署 (Static Pod Manifests)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 控制面组件部署
+- Static
+- Pod
+- Manifests
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 控制面组件部署 (Static Pod Manifests)
 description: '# 控制面组件部署 (Static Pod Manifests)'
 category: functions
@@ -39,10 +76,6 @@ trigger_keywords:
 - wait-control-plane
 - staticPod
 - mirror pod
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -52,6 +85,15 @@ related_topics:
 - API Server
 - kubelet
 - certificate
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 控制面组件部署 (Static Pod Manifests)
@@ -94,7 +136,7 @@ func waitForControlPlane(timeout time.Duration) error
 | `--secure-port` | `int` | HTTPS 端口 | `6443` |
 | `--etcd-servers` | `[]string` | etcd 集群地址 | `https://127.0.0.1:2379` |
 | `--service-cluster-ip-range` | `string` | Service CIDR | `10.96.0.0/12` |
-| `--client-ca-file` | `string` | 客户端 CA 文件 | `/etc/[[entities/kubernetes|kubernetes]]/pki/ca.crt` |
+| `--client-ca-file` | `string` | 客户端 CA 文件 | `/etc/kubernetes/pki/ca.crt` |
 | `--tls-cert-file` | `string` | TLS 证书文件 | `/etc/kubernetes/pki/apiserver.crt` |
 | `--tls-private-key-file` | `string` | TLS 私钥文件 | `/etc/kubernetes/pki/apiserver.key` |
 | `--kubelet-client-certificate` | `string` | kubelet 客户端证书 | `/etc/kubernetes/pki/apiserver-kubelet-client.crt` |
@@ -740,3 +782,11 @@ ls -la /etc/kubernetes/manifests/
 - [初始化阶段](17-init-phases.md) — phase 执行引擎
 - [集群升级](09-upgrade.md) — 升级时更新 manifest
 - [高级配置](11-advanced.md) — 自定义 static Pod 参数
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]

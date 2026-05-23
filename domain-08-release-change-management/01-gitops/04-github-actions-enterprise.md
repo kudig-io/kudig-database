@@ -57,6 +57,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # GitHub Actions Enterprise CI/CD Platform 深度实践
@@ -86,7 +87,7 @@ GitHub Actions 是 GitHub 原生的 CI/CD 自动化平台，于 2019 年正式�
 
 GitHub Actions 的核心设计理念是"事件驱动"——每个工作流由 GitHub 事件（push、pull_request、schedule、workflow_dispatch 等）触发，通过 Job 和 Step 组成执行图。Runner 是工作流的执行环境，GitHub 提供了托管的 Runner（GitHub-hosted），也支持自托管 Runner（Self-hosted）用于需要特殊硬件或网络要求的场景。
 
-在企业级场景中，GitHub Actions 提供了丰富的安全和治理能力：Environment Protection Rules（环境保护规则）支持必需的审查人、等待计时器和部署分支策略；Secrets Management（密钥管理）支持仓库、环境和组织级别的密钥；OpenID Connect (OIDC) 支持与云提供商的无密钥认证；GitHub Advanced Security (GHAS) 提供代码扫描、密钥扫描和依赖审查。
+在企业级场景中，GitHub Actions 提供了丰富的安全和治理能力：Environment Protection Rules（环境保护规则）支持必需的审查人、等待计时器和部署分支策略；[[Secrets|Secrets]]ts Management|Secrets Management]]（密钥管理）支持仓库、环境和组织级别的密钥；OpenID Connect (OIDC) 支持与云提供商的无密钥认证；GitHub Advanced Security (GHAS) 提供代码扫描、密钥扫描和依赖审查。
 
 本文档系统性地覆盖了 GitHub Actions 的企业级架构设计、工作流开发模式、安全加固、性能优化和运维管理，帮助企业构建安全、高效的 CI/CD 自动化平台。
 
@@ -188,7 +189,7 @@ github_actions_enterprise:
         - "172.16.0.0/12"
 ```
 
-#<!-- chunk: 2.3 自托管 Runner Kubernetes 部署 -->## 2.3 自托管 Runner Kubernetes 部署
+#<!-- chunk: 2.3 自托管 Runner [[Kubernetes|Kubernetes]] 部署 -->## 2.3 自托管 Runner Kubernetes 部署
 
 ```yaml
 # actions-runner-controller (ARC) 部署
@@ -1155,25 +1156,25 @@ gh api orgs/{org}/actions/permissions
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management KUDIG Database — Global MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|02-jenkins-enterprise-cicd]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|03-gitlab-enterprise-cicd]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|05-tekton-cloud-native-cicd]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|06-flux-gitops-continuous-delivery]]
+- 02-jenkins-enterprise-cicd
+- 03-gitlab-enterprise-cicd
+- 05-tekton-cloud-native-cicd
+- 06-flux-gitops-continuous-delivery
 
 ## Related
 

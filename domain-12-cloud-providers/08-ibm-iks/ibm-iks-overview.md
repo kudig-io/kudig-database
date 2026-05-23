@@ -38,9 +38,10 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: IBM IKS (IBM Cloud Kubernetes Service) 概述
+title: IBM IKS (IBM Cloud Kubernetes Servicenetes]] [[Service|Service]]) 概述
 description: '# IBM IKS (IBM Cloud Kubernetes Service) 概述'
 category: cloud-provider
 tags:
@@ -50,7 +51,7 @@ tags:
 - gke
 - aks
 - ack
-- prometheus
+- [[Prometheus|prometheus]]
 - mysql
 - postgresql
 - hpa
@@ -974,6 +975,6 @@ IBM Cloud Kubernetes Service凭借IBM在企业IT领域的深厚积累，为企�
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[references/ibm-iks-overview.md|IBM Cloud Kubernetes Service]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

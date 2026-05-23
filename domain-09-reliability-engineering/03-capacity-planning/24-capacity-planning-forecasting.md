@@ -48,11 +48,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 24. 容量规划与预测 (Capacity Planning & Forecasting)
 
-> **适用范围**: Kubernetes v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 50分钟
+> **适用范围**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 50分钟
 
 <!-- chunk: 📋 章节概览 -->## 📋 章节概览
 
@@ -1205,8 +1206,8 @@ groups:
 - [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
 
 #<!-- chunk: 工具推荐 -->## 工具推荐
-- **监控工具**: Prometheus, Grafana, Datadog
-- **预测工具**: Kubecost, OpenCost
+- **监控工具**: [[Prometheus|Prometheus]], Grafana, Datadog
+- **预测工具**: Kubecost, [[OpenCost|OpenCost]]
 - **分析工具**: Python (pandas, scikit-learn), R
 
 #<!-- chunk: 学习资源 -->## 学习资源
@@ -1221,25 +1222,25 @@ groups:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
+- domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## See Also
 
-- [[domain-09-reliability-engineering/22-change-management-process.md|22-change-management-process]]
-- [[domain-09-reliability-engineering/23-incident-response-handling.md|23-incident-response-handling]]
-- [[domain-11-production-operations/99-finops-cost-optimization-guide.md|99-finops-cost-optimization-guide]]
-- [[domain-11-production-operations/99-greenops-sustainable-computing-guide.md|99-greenops-sustainable-computing-guide]]
+- 22-change-management-process
+- 23-incident-response-handling
+- 99-finops-cost-optimization-guide
+- 99-greenops-sustainable-computing-guide
 
 ## Related
 

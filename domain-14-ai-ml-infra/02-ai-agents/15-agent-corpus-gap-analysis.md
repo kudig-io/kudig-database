@@ -1,5 +1,5 @@
 ---
-title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
+title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ [02-ai-agents]
 description: 'title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？'
 category: general
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
@@ -54,11 +55,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -98,7 +99,7 @@ k8s_versions:
 
 ## 概述
 
-kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 Kubernetes 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
+kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 [[Kubernetes|Kubernetes]] 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
 
 本文从 **Agent 视角** 系统审视现有内容，识别出 **10 大类缺失**，对每一类给出：
 - 现有资产的逐文件审计
@@ -1051,7 +1052,7 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 
 | 文档 | 说明 |
 |------|------|
-| [Agent 设计思路与落地路径](./[[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]].md) | Agent 赋能的整体设计思路 |
+| [Agent 设计思路与落地路径](./14-agent-kudig-design-strategy.md) | Agent 赋能的整体设计思路 |
 | [domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md](../domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
 | [domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md](../domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md) | Agent 编排模式 |
 | [domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md](../domain-10-troubleshooting-diagnostics/topic-febm/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
@@ -1064,7 +1065,7 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1079,30 +1080,30 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 
 ## Related
 
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/47-openclaw-tools-mechanism.md|47-openclaw-tools-mechanism]]
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/07-memory-context-management.md|07-memory-context-management]]
-- [[domain-14-ai-ml-infra/11-cost-latency-optimization.md|11-cost-latency-optimization]]
-- [[domain-14-ai-ml-infra/44-openclaw-soul-mechanism.md|44-openclaw-soul-mechanism]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
+- 13-trusted-agent-system-fiscal-plan
+- 39-agent-harness-testing-benchmark
+- 42-model-harness-compatibility-matrix
+- 12-enterprise-case-studies
+- 02-llm-foundation-models
+- 23-agent-cli-fundamentals
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 47-openclaw-tools-mechanism
+- 37-agent-harness-multi-agent
+- 20-agentscope-multi-agent-orchestration
+- 25-agent-cli-mcp-integration
+- 26-agent-cli-development-workflow
+- 07-memory-context-management
+- 11-cost-latency-optimization
+- 44-openclaw-soul-mechanism
+- 45-openclaw-user-mechanism
+- 31-agent-harness-loop-execution
+- 06-multi-agent-orchestration
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
-- [[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]]
-- [[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]]
-- [[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]]
+- 13-trusted-agent-system-fiscal-plan
+- 14-agent-kudig-design-strategy
+- 16-agentscope-overview-installation
+- 17-agentscope-core-concepts

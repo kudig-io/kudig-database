@@ -1,0 +1,96 @@
+---
+title: kind v0.27 Release Notes
+description: kind v0.27 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- containerd
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kind v0.27 Release Notes 是什么
+- 如何 kind v0.27 Release Notes
+trigger_keywords:
+- kind
+- v0.27
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+created: "2026-05-23"
+---
+
+# kind v0.27 Release Notes
+
+Source: [v0.27.0](https://github.com/kubernetes-sigs/kind/releases/tag/v0.27.0)
+
+**This release moves kind to [[containerd|containerd]] 2.x** and contains fixes for nerdctl. It also moves [[Kubernetes|Kubernetes]] to 1.32.2 by default.
+
+<h1 id="breaking-changes">Breaking Changes</h1>
+
+**WARNING**: kind v0.27.0+ will be required to use `kind load ...` subcommands with these new containerd 2.0+ images (built by kind v0.27+). For other use cases, the new images should still work with recent kind releases, but are not guaranteed. As always we *strongly* recommend consuming images by their `sha256` digest for security and reliability. https://github.com/kubernetes-sigs/kind/issues/3853
+
+Older images from recent releases should continue to work with kind v0.27.0+. 
+
+**NOTE**: As [previously warned](https://github.com/kubernetes-sigs/kind/releases/tag/v0.20.0) containerd 2.x requires that you must be using `config_path` mode for containerd registry config. If you're using the [local registry script](https://kind.sigs.k8s.io/docs/user/local-registry/) at, or more recent than https://github.com/kubernetes-sigs/kind/commit/791b3dc43cb7cc5cd1d1763fa92c95bab4120903 (kind v0.20.0 / May 22, 2023) then no changes should be necessary.
+
+The default node image is now `kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f`
+
+<h1 id="new-features">New Features</h1>
+
+- Updated to containerd 2.x
+- Updated default node image to Kubernetes 1.32.2
+- Updated go to 1.23.6
+
+Images pre-built for this release:
+- v1.32.2: `kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f`
+- v1.31.6: `kindest/node:v1.31.6@sha256:28b7cbb993dfe093c76641a0c95807637213c9109b761f1d422c2400e22b8e87`
+- v1.30.10: `kindest/node:v1.30.10@sha256:4de75d0e82481ea846c0ed1de86328d821c1e6a6a91ac37bf804e5313670e507`
+- v1.29.14: `kindest/node:v1.29.14@sha256:8703bd94ee24e51b778d5556ae310c6c0fa67d761fae6379c8e0bb480e6fea29`
+
+Additional images pre-built for this release:
+- v1.33.0: `kindest/node:v1.33.0@sha256:02f73d6ae3f11ad5d543f16736a2cb2a63a300ad60e81dac22099b0b04784a4e`
+
+**NOTE**: You _must_ use the `@sha256` digest to guarantee an image built for this release, until such a time as we switch to a different tagging scheme. Even then we will highly encourage digest pinning for security and reproducibility reasons.
+
+See also: 
+- https://kind.sigs.k8s.io/docs/user/quick-start/#creating-a-cluster
+- https://kind.sigs.k8s.io/docs/user/quick-start/#building-images
+
+NOTE: These node images support amd64 and arm64, both of our supported platforms. **You must use the same platform as your host,** for more context see https://github.com/kubernetes-sigs/kind/issues/2718
+
+<h1 id="fixes">Fixes</h1>
+
+- Compatibility fixes for containerd 2.x
+- Fix `kind get clusters` with nerdctl
+- Statically link CNI binaries to match upstream
+- Fix no-arguments validation for multiple subcommands
+- Update shellescape dependency to current vanity import
+- When building node images: wait for containerd to be ready, and retry image pulls
+
+
+<h1 id="contributors">Contributors</h1>
+
+**Thank you to everyone who contributed to this kind over the years!**
+
+Committers for this release:
+- @AkihiroSuda 
+- @BenTheElder 
+- @bobsongplus 
+- @dependeabot[bot]
+- @dims
+- @k8s-ci-robot 
+- @kachick 
+- @stmcginnis 
+- @tao12345666333 
+- @yashvardhan-kukreja 

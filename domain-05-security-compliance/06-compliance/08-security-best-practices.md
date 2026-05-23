@@ -54,13 +54,14 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 08 - 安全最佳实践表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
-<!-- chunk: Pod安全标准(Pod Security Standards) -->
+<!-- chunk: Pod安全标准(Pod Securityod Security Standards]]) -->
 ## Pod安全标准(Pod Security Standards)
 
 | 安全级别 | 描述 | 限制内容 | 适用场景 | 版本支持 | 实施方式 |
@@ -99,7 +100,7 @@ cross_refs:
 | 实践领域 | 最佳实践 | 实施步骤 | 版本要求 | 安全影响 | ACK集成 |
 |---------|---------|---------|---------|---------|---------|
 | **etcd加密** | 加密存储的Secrets | 配置EncryptionConfiguration | v1.13+ | 防止etcd数据泄露 | 托管版自动加密 |
-| **外部Secret管理** | 使用Vault/KMS | 部署External Secrets Operator | 外部工具 | 集中管理，审计追踪 | 阿里云KMS集成 |
+| **外部Secret管理** | 使用Vault/KMS | 部署External [[Secrets|Secrets]] Operator | 外部工具 | 集中管理，审计追踪 | 阿里云KMS集成 |
 | **限制Secret访问** | RBAC控制 | 仅授权必需的SA访问 | 稳定 | 防止未授权访问 | RAM策略集成 |
 | **Secret轮换** | 定期更新凭证 | 自动化轮换流程 | 外部工具 | 限制泄露影响 | KMS自动轮换 |
 | **避免环境变量** | 使用卷挂载 | `secretKeyRef`改为`volumeMounts` | 稳定 | 环境变量易泄露 | - |
@@ -110,7 +111,7 @@ cross_refs:
 
 | 实践领域 | 最佳实践 | 实施步骤 | 版本要求 | 风险说明 | 工具支持 |
 |---------|---------|---------|---------|---------|---------|
-| **默认拒绝策略** | 默认禁止所有流量 | 创建deny-all NetworkPolicy | 稳定 | 未授权访问 | Calico/Cilium |
+| **默认拒绝策略** | 默认禁止所有流量 | 创建deny-all [[NetworkPolicy|NetworkPolicy]] | 稳定 | 未授权访问 | Calico/Cilium |
 | **命名空间隔离** | 限制跨NS通信 | 配置NS级NetworkPolicy | 稳定 | 横向移动 | CNI支持 |
 | **出站流量控制** | 限制Egress | 白名单外部访问 | 稳定 | 数据外泄 | Egress NetworkPolicy |
 | **mTLS** | 加密服务间通信 | 部署Service Mesh | 外部工具 | 中间人攻击 | Istio/Linkerd |
@@ -209,25 +210,25 @@ kubectl logs -f job/kube-bench
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- Kubernetes 安全加固
+- 证书管理与 TLS 配置
 
 ## See Also
 
-- [[domain-05-security-compliance/06-pod-security-standards.md|06-pod-security-standards]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07-rbac-matrix-configuration]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|09-security-hardening-production]]
-- [[domain-05-security-compliance/10-certificate-management.md|10-certificate-management]]
+- 06-pod-security-standards
+- 07-rbac-matrix-configuration
+- 09-security-hardening-production
+- 10-certificate-management
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

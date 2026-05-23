@@ -52,6 +52,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # SDN 与网络虚拟化
@@ -212,7 +213,7 @@ ip link set br-vxlan100 up
 | 插件 | 类型 | 特点 | 适用场景 |
 |:---|:---|:---|:---|
 | **Calico** | L3 路由 | BGP、网络策略 | 大规模集群 |
-| **Cilium** | eBPF | 高性能、可观测 | 云原生 |
+| **[[Cilium|Cilium]]** | eBPF | 高性能、可观测 | 云原生 |
 | **Flannel** | Overlay | 简单易用 | 小规模 |
 | **Weave** | Overlay | 加密、多播 | 安全需求 |
 
@@ -565,7 +566,7 @@ setup_dpdk() {
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-##<!-- chunk: Kubernetes 多租户网络策略 -->## Kubernetes 多租户网络策略
+##<!-- chunk: [[Kubernetes|Kubernetes]] 多租户网络策略 -->## Kubernetes 多租户网络策略
 
 ```yaml
 # 多租户网络隔离策略
@@ -1062,7 +1063,7 @@ echo "=== 验证完成 ==="
 
 ## See Also
 
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|04-load-balancing-technologies]]
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|05-network-security-fundamentals]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|99-cilium-ebpf-network-guide]]
-- [[domain-03-networking-traffic/01-network-protocols-stack.md|01-network-protocols-stack]]
+- 04-load-balancing-technologies
+- 05-network-security-fundamentals
+- 99-cilium-ebpf-network-guide
+- 01-network-protocols-stack

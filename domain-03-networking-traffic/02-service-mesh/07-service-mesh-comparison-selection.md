@@ -63,12 +63,13 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
 # 服务网格对比与选型决策指南
 
 > **最后更新**: 2026-04-24
-> **适用版本**: Istio v1.29 / Linkerd v2.18 / Consul v1.20 / Dapr v1.15 / Traefik Mesh v1.4
+> **适用版本**: [[Istio|Istio]] v1.29 / [[Linkerd|Linkerd]] v2.18 / Consul v1.20 / [[Dapr|Dapr]] v1.15 / Traefik Mesh v1.4
 > **难度**: 架构师级
 
 ---
@@ -116,7 +117,7 @@ graph TB
 
 | 项目 | 设计哲学 | 架构模式 | 数据平面技术 | 核心取舍 |
 |:---|:---|:---|:---|:---|
-| **Istio** | 功能全面、企业级 | Sidecar + Ambient 双模式 | C++ (Envoy) | 功能丰富 vs 运维复杂 |
+| **Istio** | 功能全面、企业级 | Sidecar + Ambient 双模式 | C++ ([[Envoy|Envoy]]) | 功能丰富 vs 运维复杂 |
 | **Linkerd** | 极简主义、安全默认 | Sidecar only | Rust (自研) | 简洁 vs 功能限制 |
 | **Consul Connect** | 生态集成、多平台 | Sidecar (Envoy) | C++ (Envoy) | HashiCorp 绑定 vs 统一管理 |
 | **Dapr** | 应用级抽象、多运行时 | SDK + Sidecar | Go (自研) | 应用侵入 vs 丰富能力 |
@@ -674,22 +675,22 @@ Dapr 负责的应用层治理:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|05-dapr-enterprise-distributed-runtime]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|06-traefik-mesh-enterprise]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|08-ambient-mesh-l7-policy]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|09-microservice-resilience-patterns]]
+- 05-dapr-enterprise-distributed-runtime
+- 06-traefik-mesh-enterprise
+- 08-ambient-mesh-l7-policy
+- 09-microservice-resilience-patterns

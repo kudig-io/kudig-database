@@ -2,7 +2,10 @@
 
 ## YAML Front Matter 规范
 
-每个 Skill 文档以 YAML front matter 开头，用 `---# Skill 运维技能文档模板
+每个 Skill 文档以 YAML front matter 开头，用 `
+created: "2026-05-23"
+updated: "2026-05-23"
+---# Skill 运维技能文档模板
 
 > **模板版本**: 2.0
 > **最后更新**: 2026-05

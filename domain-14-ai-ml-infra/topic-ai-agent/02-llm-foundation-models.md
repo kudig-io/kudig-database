@@ -1,7 +1,43 @@
 ---
+title: LLM 基座模型选型与评估 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude'
+category: general
+tags:
+- ai
+- ai-agent
+- docker
+- networkpolicy
+- operator
+- gpu
+- nvidia
+- vllm
+- llm
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- LLM 基座模型选型与评估 是什么
+- 如何 LLM 基座模型选型与评估
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- LLM
+- 基座模型选型与评估
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: LLM 基座模型选型与评估
-description: '**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude 3.5, Gemini, Llama-3, Qwen-2.5, DeepSeek,
-  微调 vs RAG, 模型评估, Agent 基座'
+description: '**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude
+  3.5, Gemini, Llama-3, Qwen-2.5, DeepSeek, 微调 vs RAG, 模型评估, Agent 基座'
 category: ai-agent
 tags:
 - ai
@@ -10,7 +46,7 @@ tags:
 - rag
 - multi-agent
 - docker
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 - gpu
 - nvidia
@@ -30,9 +66,15 @@ trigger_keywords:
 - 基座模型选型与评估
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # LLM 基座模型选型与评估
@@ -41,15 +83,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 LLM 的选择是构建 Agent 系统的首要决策，直接决定 Agent 的推理能力上限、工具调用可靠性、成本结构和合规边界。本文提供主流模型的全维度对比矩阵、面向 Agent 场景的专项评估指标、微调 vs RAG 的决策框架，以及生产环境中的模型路由策略。
 
 ---
 
-## 1. 模型全景概览
+<!-- chunk: 1. 模型全景概览 -->## 1. 模型全景概览
 
-### 1.1 主流模型分类
+#<!-- chunk: 1.1 主流模型分类 -->## 1.1 主流模型分类
 
 ```
 LLM 生态全景
@@ -75,9 +117,9 @@ LLM 生态全景
 
 ---
 
-## 2. 主流模型性能对比矩阵
+<!-- chunk: 2. 主流模型性能对比矩阵 -->## 2. 主流模型性能对比矩阵
 
-### 2.1 综合能力对比（2025年底基准）
+#<!-- chunk: 2.1 综合能力对比（2025年底基准） -->## 2.1 综合能力对比（2025年底基准）
 
 | 模型 | 参数量 | 上下文窗口 | 推理能力 | 代码能力 | 工具调用 | 中文能力 | 成本/1M Token | 延迟(首Token) |
 |------|-------|-----------|---------|---------|---------|---------|--------------|-------------|
@@ -95,7 +137,7 @@ LLM 生态全景
 
 > 注: 价格为 Input/Output Token 单价，以 API 调用为准，随厂商调整而变化。自部署成本取决于 GPU 资源。
 
-### 2.2 Agent 专项能力对比
+#<!-- chunk: 2.2 Agent 专项能力对比 -->## 2.2 Agent 专项能力对比
 
 | 模型 | 工具调用可靠性 | 多步规划 | 指令遵循 | 自我纠错 | 长上下文理解 | 并行工具调用 |
 |------|-------------|---------|---------|---------|------------|------------|
@@ -110,9 +152,9 @@ LLM 生态全景
 
 ---
 
-## 3. 场景选型决策树
+<!-- chunk: 3. 场景选型决策树 -->## 3. 场景选型决策树
 
-### 3.1 主决策框架
+#<!-- chunk: 3.1 主决策框架 -->## 3.1 主决策框架
 
 ```
 选型决策起点
@@ -137,7 +179,7 @@ LLM 生态全景
 │           └── 否 → 根据成本/性能比选择
 ```
 
-### 3.2 [[entities/kubernetes|k8s]] 运维 Agent 专项选型建议
+#<!-- chunk: 3.2 K8s 运维 Agent 专项选型建议 -->## 3.2 K8s 运维 Agent 专项选型建议
 
 | Agent 类型 | 推荐模型 | 备选模型 | 原因 |
 |-----------|---------|---------|------|
@@ -149,9 +191,9 @@ LLM 生态全景
 
 ---
 
-## 4. 模型评估方法论
+<!-- chunk: 4. 模型评估方法论 -->## 4. 模型评估方法论
 
-### 4.1 针对 Agent 的评估维度
+#<!-- chunk: 4.1 针对 Agent 的评估维度 -->## 4.1 针对 Agent 的评估维度
 
 ```python
 # Agent 能力基准测试框架
@@ -188,7 +230,7 @@ class AgentBenchmark:
         pass
 ```
 
-### 4.2 推荐评测基准集
+#<!-- chunk: 4.2 推荐评测基准集 -->## 4.2 推荐评测基准集
 
 | 基准集 | 测量维度 | 适用场景 |
 |--------|---------|---------|
@@ -201,7 +243,7 @@ class AgentBenchmark:
 | **τ-bench** | 工具 + 推理综合 | 复杂 Agent 场景 |
 | **K8s 专项测试集** | K8s 知识深度 | 运维 Agent（自建） |
 
-### 4.3 自建评估集（K8s 运维场景）
+#<!-- chunk: 4.3 自建评估集（K8s 运维场景） -->## 4.3 自建评估集（K8s 运维场景）
 
 ```python
 K8S_AGENT_TEST_CASES = [
@@ -231,9 +273,9 @@ K8S_AGENT_TEST_CASES = [
 
 ---
 
-## 5. 微调（Fine-tuning）vs RAG 决策框架
+<!-- chunk: 5. 微调（Fine-tuning）vs RAG 决策框架 -->## 5. 微调（Fine-tuning）vs RAG 决策框架
 
-### 5.1 决策矩阵
+#<!-- chunk: 5.1 决策矩阵 -->## 5.1 决策矩阵
 
 | 维度 | 微调（Fine-tuning） | RAG |
 |------|-------------------|-----|
@@ -246,7 +288,7 @@ K8S_AGENT_TEST_CASES = [
 | **可解释性** | 差（知识融入权重） | 好（可追溯检索来源） |
 | **初始投入** | 高（训练成本 + 基础设施） | 中（构建知识库 + 向量化）|
 
-### 5.2 决策判断树
+#<!-- chunk: 5.2 决策判断树 -->## 5.2 决策判断树
 
 ```
 选择微调 还是 RAG?
@@ -270,7 +312,7 @@ K8S_AGENT_TEST_CASES = [
     示例: 微调模型学习输出格式 + RAG 提供最新知识
 ```
 
-### 5.3 实用建议
+#<!-- chunk: 5.3 实用建议 -->## 5.3 实用建议
 
 ```
 尝试顺序（成本从低到高）:
@@ -287,7 +329,7 @@ K8S_AGENT_TEST_CASES = [
 
 ---
 
-## 6. 模型路由策略（生产环境）
+<!-- chunk: 6. 模型路由策略（生产环境） -->## 6. 模型路由策略（生产环境）
 
 在生产 Agent 系统中，通常需要多模型路由来平衡成本和质量：
 
@@ -360,9 +402,9 @@ class ModelRouter:
 
 ---
 
-## 7. 开源模型自部署指南
+<!-- chunk: 7. 开源模型自部署指南 -->## 7. 开源模型自部署指南
 
-### 7.1 硬件需求速查
+#<!-- chunk: 7.1 硬件需求速查 -->## 7.1 硬件需求速查
 
 | 模型 | 最低 GPU | 推荐 GPU | 显存需求(FP16) | 推理吞吐量(vLLM) |
 |------|---------|---------|--------------|----------------|
@@ -374,7 +416,7 @@ class ModelRouter:
 | Qwen2.5-72B | 4x A100 80G | 8x A100 | ~144GB | ~8 req/s |
 | DeepSeek-V3 671B | 8x H100 (FP8) | 16x H100 | ~350GB(FP8) | ~3 req/s |
 
-### 7.2 vLLM 部署示例
+#<!-- chunk: 7.2 vLLM 部署示例 -->## 7.2 vLLM 部署示例
 
 ```bash
 # 部署 Qwen2.5-72B 的推荐配置
@@ -449,9 +491,9 @@ spec:
 
 ---
 
-## 8. 合规与数据安全考量
+<!-- chunk: 8. 合规与数据安全考量 -->## 8. 合规与数据安全考量
 
-### 8.1 数据分类与模型选择
+#<!-- chunk: 8.1 数据分类与模型选择 -->## 8.1 数据分类与模型选择
 
 ```
 数据密级 → 模型选择规则:
@@ -472,7 +514,7 @@ spec:
   └── 通常要求完全本地化部署，不允许数据出境
 ```
 
-### 8.2 国内合规要求
+#<!-- chunk: 8.2 国内合规要求 -->## 8.2 国内合规要求
 
 ```
 中国大陆合规要点:
@@ -490,9 +532,9 @@ spec:
 
 ---
 
-## 9. 最佳实践与反模式
+<!-- chunk: 9. 最佳实践与反模式 -->## 9. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **多模型策略**：不要把所有任务都发给同一个最贵的模型，按复杂度路由可节省 60-80% 成本
 - **评估驱动选型**：用你自己的数据集测试，而不仅依赖公开基准——基准分数和实际业务效果存在差距
@@ -500,7 +542,7 @@ spec:
 - **温度配置**：工具调用类任务设置 `temperature=0`，创意类任务设置 `temperature=0.7`
 - **流式输出**：对延迟敏感的场景使用 Streaming，降低用户感知等待时间
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **只用最贵的模型**：简单分类任务用 GPT-4o 是极大浪费，GPT-4o-mini 足够
 - **不锁定版本**：`gpt-4o-latest` 会自动升级，可能导致输出格式突然变化
@@ -509,7 +551,7 @@ spec:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -522,3 +564,27 @@ spec:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## See Also
+
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 04-rag-knowledge-retrieval

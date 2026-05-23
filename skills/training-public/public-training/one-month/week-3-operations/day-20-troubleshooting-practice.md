@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -34,7 +35,7 @@ title: Day 20: 故障排查实战
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes 故障排查实战练习
+  - [[Kubernetes|kubernetes]] 故障排查实战练习
   - k8s 常见故障注入和排除
   - kubectl 故障排查命令练习
   - ImagePullBackOff CrashLoopBackOff OOMKilled 排查
@@ -83,8 +84,8 @@ related_topics:
 1. **Pod 综合排障**
    - 文件: `../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md`
 
-2. **Service 综合排障**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting|10-service-comprehensive-troubleshooting]].md`
+2. **[[Service|Service]] 综合排障**
+   - 文件: `../../[[domain-10-troubleshooting-diagnostics/10-service-comprehensive-troubleshooting|10-service-comprehensive-troubleshooting]].md`
 
 3. **网络 CNI 排障**
    - 文件: `../../domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md`

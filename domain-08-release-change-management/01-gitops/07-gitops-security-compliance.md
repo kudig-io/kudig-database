@@ -58,14 +58,15 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # GitOps 安全与合规深度实践
 
-> **适用版本**: SLSA v1.0 / Cosign v2.4 / External Secrets v0.14 / Sealed Secrets v0.27 / SOPS v3.9
+> **适用版本**: SLSA v1.0 / Cosign v2.4 / External Secretsts|Secrets]] v0.14 / Sealed Secrets v0.27 / [[SOPS|SOPS]] v3.9
 > **最后更新**: 2026-04-24
 > **难度**: 高级
-> **前置知识**: GitOps 基础概念、Kubernetes 安全模型、容器安全基础
+> **前置知识**: GitOps 基础概念、[[Kubernetes|Kubernetes]] 安全模型、容器安全基础
 
 软件供应链安全是现代软件工程的核心挑战。随着攻击面不断扩大，企业需要建立纵深防御体系来保护从代码提交到生产部署的完整链路。GitOps 的声明式特性和 Git 审计追踪为安全合规提供了天然优势，但仍需要主动的安全策略和工具链来防范供应链攻击、密钥泄露和未授权访问等风险。
 
@@ -1147,22 +1148,22 @@ SOPS解密失败:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|05-tekton-cloud-native-cicd]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|06-flux-gitops-continuous-delivery]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|08-cicd-pipeline-patterns]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|99-argo-cd-gitops-guide]]
+- 05-tekton-cloud-native-cicd
+- 06-flux-gitops-continuous-delivery
+- 08-cicd-pipeline-patterns
+- 99-argo-cd-gitops-guide

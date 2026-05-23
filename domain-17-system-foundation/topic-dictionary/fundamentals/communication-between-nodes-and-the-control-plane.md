@@ -29,13 +29,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
 
 ## 概述
 
-本文档梳理了 Kubernetes 集群中 API 服务器与节点之间的所有通信路径，目的是帮助用户根据安全需求自定义网络配置，使集群能够在不受信任的网络（或公有云的公网 IP）上运行。
+本文档梳理了 [[Kubernetes|Kubernetes]] 集群中 API 服务器与节点之间的所有通信路径，目的是帮助用户根据安全需求自定义网络配置，使集群能够在不受信任的网络（或公有云的公网 IP）上运行。
 
 ## 核心概念/原理
 
@@ -44,7 +45,7 @@ Kubernetes 采用“轮毂-辐条（Hub-and-Spoke）”API 模式：
 - API 服务器配置为在安全的 HTTPS 端口（通常是 443）上监听远程连接，并启用一种或多种客户端身份验证方式。
 
 ### 节点到控制平面（Node to Control Plane）
-- 节点需持有集群的公共根证书和有效的客户端凭证（通常以客户端证书形式提供给 kubelet）。
+- 节点需持有集群的公共根证书和有效的客户端凭证（通常以客户端证书形式提供给 [[kubelet|kubelet]]）。
 - Pod 可通过 ServiceAccount 自动注入根证书和有效的 Bearer Token，安全地访问 API 服务器。
 - `kubernetes` 服务（default 命名空间）配置了一个虚拟 IP，由 kube-proxy 重定向到 API 服务器的 HTTPS 端点。
 
@@ -80,4 +81,4 @@ Kubernetes 采用“轮毂-辐条（Hub-and-Spoke）”API 模式：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- index/cert-index|Certificate / TLS 证书知识图谱索引]]

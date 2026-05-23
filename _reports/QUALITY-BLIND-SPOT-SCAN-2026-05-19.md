@@ -1,19 +1,17 @@
 ---
-title: kudig-database 质量盲区深度扫描报告
-description: kudig-database 质量盲区深度扫描报告
-category: reports
+title: kudig-database 质量盲区深度扫描报告 (reports)
+description: '# kudig-database 质量盲区深度扫描报告'
+category: general
 tags:
 - k8s
 - apiserver
 - llm
-- agent
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
-- SRE
-- DevOps
-estimated_read_time: 10min
+- 所有工程师
+estimated_read_time: 5min
 intent_queries:
 - kudig-database 质量盲区深度扫描报告 是什么
 - 如何 kudig-database 质量盲区深度扫描报告
@@ -22,15 +20,7 @@ trigger_keywords:
 - 质量盲区深度扫描报告
 prerequisites:
 - kubectl-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
+created: "2026-05-23"
 ---
 
 # kudig-database 质量盲区深度扫描报告
@@ -81,9 +71,9 @@ PSP 在 K8s v1.25 已正式移除, 替代方案为 Pod Security Admission (PSA)�
 
 | 文件 | 总 QA 数 | 模板化数量 | 模板化比例 |
 |------|----------|-----------|-----------|
-| domain-1 | 165 | 99 | 60% |
-| domain-5 | 186 | 117 | 63% |
-| domain-8 | 140 | 102 | 73% |
+| domain-01-cluster-fundamentals | 165 | 99 | 60% |
+| domain-03-networking-traffic | 186 | 117 | 63% |
+| domain-06-observability | 140 | 102 | 73% |
 | topic-application-architecture | 288 | 270 | 94% |
 
 典型模板化 QA:
@@ -139,27 +129,3 @@ description: "全面介绍 Kubernetes 架构总览..."
 2. **[P1] QA 语料重写** — 删除模板化 QA, 生成真实问答
 3. **[P2] description 格式清理** — 去掉 # 前缀
 4. **[P2] cross_refs 扩展** — 改进匹配逻辑覆盖更多文件
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-
-## Related
-
-- [[README.md|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19]]
-- [[_reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|CONTENT-DEEP-EVALUATION-2026-05-19]]

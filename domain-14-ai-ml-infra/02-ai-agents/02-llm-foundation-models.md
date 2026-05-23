@@ -1,5 +1,5 @@
 ---
-title: LLM 基座模型选型与评估
+title: LLM 基座模型选型与评估 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 技术选型指南 | **最后更新**: 2026-03 | **关键词**: LLM 选型, GPT-4o, Claude'
 category: general
 tags:
@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: LLM 基座模型选型与评估
@@ -45,7 +46,7 @@ tags:
 - rag
 - multi-agent
 - docker
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 - gpu
 - nvidia
@@ -507,7 +508,7 @@ spec:
   敏感/机密数据（客户 PII、财务数据、密钥）
   ├── 强烈建议私有化部署开源模型
   ├── 如用 API，必须开启数据不训练选项 + 签署保密协议
-  └── 参考: [[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md 中的 PII 处理规范
+  └── 参考: 10-security-guardrails.md 中的 PII 处理规范
 
   监管数据（医疗/金融/政府）
   └── 通常要求完全本地化部署，不允许数据出境
@@ -568,8 +569,8 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
@@ -583,7 +584,7 @@ spec:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
-- [[domain-14-ai-ml-infra/01-ai-agent-fundamentals.md|01-ai-agent-fundamentals]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
-- [[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]]
+- 50-openclaw-identity-mechanism
+- 01-ai-agent-fundamentals
+- 03-agent-frameworks-comparison
+- 04-rag-knowledge-retrieval

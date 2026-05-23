@@ -44,13 +44,14 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 镜像管理详解
 
 > **适用版本**: Docker 20.10+ / Docker 24.0+ / Docker 25.0+ | **最后更新**: 2026-01
 > 
-> **生产环境运维专家注**: 本章节重点介绍企业级镜像仓库管理、安全扫描、多架构支持、镜像优化等生产环境必备技能，涵盖 Harbor、Jfrog Artifactory 等企业级解决方案。
+> **生产环境运维专家注**: 本章节重点介绍企业级镜像仓库管理、安全扫描、多架构支持、镜像优化等生产环境必备技能，涵盖 [[Harbor|Harbor]]、Jfrog Artifactory 等企业级解决方案。
 
 ---
 
@@ -864,10 +865,10 @@ slim build --target nginx:1.25 --tag nginx:slim
 
 ## See Also
 
-- [[domain-13-container-runtime/99-docker-commands-reference.md|99-docker-commands-reference]]
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|01-docker-architecture-overview]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|03-docker-container-lifecycle]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|04-docker-networking-deep-dive]]
+- 99-docker-commands-reference
+- 01-docker-architecture-overview
+- 03-docker-container-lifecycle
+- 04-docker-networking-deep-dive
 
 ## Related
 

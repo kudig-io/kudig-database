@@ -1,5 +1,5 @@
 ---
-title: Distribution
+title: Distribution (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Distribution
@@ -81,7 +82,7 @@ Distribution (原 Docker Registry) 是 OCI 容器镜像分发的参考实现。�
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-13-container-runtime/02-docker-registry-enterprise-distribution.md|02-docker-registry-enterprise-distribution]]
-- [[domain-19-landscape-references/sandbox/distribution/distribution.md|distribution]]
-- [[synthesis/etcd x 高可用模式|etcd × 高可用模式]] — Cross-reference
+- 02-docker-registry-enterprise-distribution
+- distribution
+- [[synthesis/etcd x 高可用模式|[[etcd × 高可用模式|etcd × 高可用模式]]]] — Cross-reference
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference

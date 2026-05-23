@@ -36,6 +36,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 13 - 准入控制与 Webhook 机制深度解析
@@ -45,9 +46,9 @@ tags:
 - k8s
 - design
 - principles
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- prometheus
+- [[Prometheus|prometheus]]
 - docker
 - opa
 - statefulset
@@ -1417,22 +1418,22 @@ production_checklist:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/11-extensibility-design-patterns.md|11-extensibility-design-patterns]]
-- [[domain-01-cluster-fundamentals/12-operator-development-guide.md|12-operator-development-guide]]
-- [[domain-01-cluster-fundamentals/14-service-mesh-architecture.md|14-service-mesh-architecture]]
-- [[domain-01-cluster-fundamentals/15-chaos-engineering.md|15-chaos-engineering]]
+- 11-extensibility-design-patterns
+- 12-operator-development-guide
+- 14-service-mesh-architecture
+- 15-chaos-engineering

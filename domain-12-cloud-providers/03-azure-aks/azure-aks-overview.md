@@ -44,9 +44,10 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
-title: Azure AKS (Azure Kubernetes Service) 概述
+title: Azure AKS (Azure [[Kubernetes|Kubernetes]] [[Service|Service]]) 概述
 description: '# Azure AKS (Azure Kubernetes Service) 概述'
 category: cloud-provider
 tags:
@@ -57,7 +58,7 @@ tags:
 - aks
 - ack
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 last_updated: 2026-05
@@ -630,7 +631,7 @@ echo "Target version: $TARGET_VERSION"
 
 # 检查版本兼容性
 AVAILABLE_VERSIONS=$(az aks get-upgrades --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --query controlPlaneProfile.upgrades[].kubernetesVersion -o tsv)
-if [[ $AVAILABLE_VERSIONS == *"$TARGET_VERSION"* ]]; then
+if $AVAILABLE_VERSIONS == *"$TARGET_VERSION"*; then
     echo "✓ Target version is available"
 else
     echo "✗ Target version is not available"

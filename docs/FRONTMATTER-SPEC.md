@@ -21,6 +21,7 @@ trigger_keywords:
 - 规范
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -33,11 +34,11 @@ tags:
 - spec
 - metadata
 relationships:
-- target: '[[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]'
+- target: '[[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]'
   type: related_to
-- target: '[[docs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]'
+- target: '[[docs/SCENARIO-TAXONOMY|KUDIG 场景分类体系]]'
   type: related_to
-- target: '[[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]'
+- target: '[[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]'
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -147,7 +148,7 @@ cross_refs:
 |---|---|---|
 | `beginner` | 入门 — 概念介绍、基础操作 | 初学者、学生 |
 | `intermediate` | 进阶 — 配置、部署、日常运维 | 运维工程师、开发者 |
-| `advanced` | 高级 — 架构深度、性能调优、故障排查 | SRE、资深运维 |
+| `advanced` | 高级 — 架构深度、性能调优、问题排查 | SRE、资深运维 |
 | `expert` | 专家 — 源码分析、源码级调优 | 架构师、核心贡献者 |
 
 ---
@@ -191,7 +192,7 @@ last_updated: "YYYY-MM-DD"
 
 ## Related
 
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[references/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[KUDIG Synonym Dictionary]]
-- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]]
+- [[docs/SYNONYM-DICTIONARY.md]]
+- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]

@@ -1,5 +1,5 @@
 ---
-title: Terway 异常故障树分析
+title: Terway 异常故障树分析 (skills)
 description: Terway 异常故障树分析 — Kubernetes 生产运维知识库
 category: general
 tags:
@@ -23,17 +23,18 @@ prerequisites:
 fta_id: FTA-TERWAY-001
 component: Terway
 severity: high
+created: "2026-05-23"
 ---
 
 ---
 title: "Terway 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n kube-system -l app=terway -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 Terway 异常 --> - **目标**：..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l app=terway -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 Terway 异常 --> - **目标**：..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

@@ -28,6 +28,7 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # 混沌测试与负载测试集成

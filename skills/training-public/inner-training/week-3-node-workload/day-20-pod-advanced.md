@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -32,7 +33,7 @@ title: Day 20: Pod 容器组进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] Pod scheduling affinity anti-affinity
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] Pod scheduling affinity anti-affinity
   - Pod liveness readiness startup probes
   - Pod resources requests limits
   - Kubernetes nodeSelector nodeAffinity
@@ -310,7 +311,7 @@ kubectl delete deploy ha-app
 |----------|------|---------|
 | startupProbe | 检测容器是否已启动 | 杀死容器重启 |
 | livenessProbe | 检测容器是否存活 | 杀死容器重启 |
-| readinessProbe | 检测容器是否就绪 | 从 Service 摘除 |
+| readinessProbe | 检测容器是否就绪 | 从 [[Service|Service]] 摘除 |
 
 ---
 

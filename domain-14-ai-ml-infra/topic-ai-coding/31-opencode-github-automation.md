@@ -31,6 +31,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # GitHub 集成与 CI/CD 自动化
@@ -66,7 +67,7 @@ OpenCode 原生集成 GitHub 工作流。通过在 Issue 或 PR 评论中 mentio
 opencode github install
 ```
 
-自动完成 GitHub App 安装、Workflow 创建和 Secrets 配置。
+自动完成 GitHub App 安装、Workflow 创建和 [[Secrets|Secrets]] 配置。
 
 ### 2.2 手动安装
 

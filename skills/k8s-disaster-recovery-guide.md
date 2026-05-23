@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 灾难恢复最佳实践
@@ -38,9 +39,9 @@ prerequisites:
 
 五层架构 ^[inferred]：
 
-- **生产环境**：Kubernetes 集群 + Persistent Volumes + etcd
+- **生产环境**：Kubernetes 集群 + [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
 - **备份层**：Velero 备份工具 + 定时备份任务
-- **存储层**：S3/OSS 对象存储 + Volume Snapshots + etcd 备份
+- **存储层**：S3/OSS 对象存储 + [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
 - **恢复层**：Velero Restore 任务 + 集群恢复 + 数据恢复
 - **灾备环境**：灾备集群 + 灾备数据
 
@@ -50,7 +51,7 @@ prerequisites:
 
 - 时间：每天凌晨 2 点（`0 2 * * *`）^[inferred]
 - 范围：production 和 staging 命名空间
-- 包含资源：deployments、services、configmaps、secrets、PVCs、PVs ^[inferred]
+- 包含资源：[[Deployments|deployments]]、services、configmaps、secrets、PVCs、PVs ^[inferred]
 - 包含卷快照：`snapshotVolumes: true` ^[inferred]
 - 保留期：720 小时（30 天）^[inferred]
 

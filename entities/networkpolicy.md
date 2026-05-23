@@ -27,13 +27,14 @@ prerequisites:
 - kubectl-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # NetworkPolicy
 
 ## Role
 
-NetworkPolicy is a Kubernetes resource that defines how Pods communicate with each other and external network endpoints. It acts as a Pod-level firewall.
+NetworkPolicy is a Kubernetes resource that defines how [[Pods|Pods]] communicate with each other and external network endpoints. It acts as a Pod-level firewall.
 
 **Important**: NetworkPolicy requires CNI plugin support (Calico, Cilium, or other compatible CNIs). Flannel does NOT support NetworkPolicy.
 
@@ -43,7 +44,7 @@ NetworkPolicy selects target Pods via `podSelector` and defines:
 
 | Policy Type | Controls |
 |-------------|----------|
-| **Ingress** | Incoming traffic to selected Pods |
+| **[[Ingress|Ingress]]** | Incoming traffic to selected Pods |
 | **Egress** | Outgoing traffic from selected Pods |
 
 Traffic sources/destinations can be specified via:
@@ -88,8 +89,8 @@ Then add explicit allow policies for required traffic flows.
 - [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
 
 - [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
-- [[domain-03-networking-traffic/16-networkpolicy-deep-practice.md|16-networkpolicy-deep-practice]]
+- 22-networkpolicy-reference
+- 16-networkpolicy-deep-practice
 - [[domain-10-troubleshooting-diagnostics/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]

@@ -26,13 +26,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # 金丝雀与蓝绿发布
 
 ## 概述
 
-Kubernetes Deployment 原生支持多种发布策略。通过组合双 Deployment、Service Selector 切换和 pause/resume 机制，可以实现金丝雀发布和蓝绿发布，满足不同场景的发布需求。
+Kubernetes Deployment 原生支持多种发布策略。通过组合双 Deployment、[[Service|Service]] Selector 切换和 pause/resume 机制，可以实现金丝雀发布和蓝绿发布，满足不同场景的发布需求。
 
 ## 发布策略矩阵
 
@@ -192,7 +193,7 @@ kubectl patch svc web -p '{"spec":{"selector":{"version":"green"}}}'
 kubectl delete deployment web-blue
 ```
 
-## 方案四：Ingress 权重金丝雀
+## 方案四：[[Ingress|Ingress]] 权重金丝雀
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -238,8 +239,8 @@ spec:
 
 ## 相关技能
 
-- [[skills/deployment-rolling-update.md|Deployment 滚动更新策略]]
-- [[skills/deployment-workload-selection.md|工作负载控制器选型]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
 - [[deployment|Deployment]]
 
 ## Related

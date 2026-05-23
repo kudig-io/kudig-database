@@ -35,6 +35,7 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # ACK/ACR/K8S 内部培训大纲
@@ -82,7 +83,7 @@ tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
 
 ## 概述
 
-本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[entities/kubernetes|kubernetes]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
+本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
 
 培训采用"每日主题学习 + 实操练习"的模式，每天 4-5 小时的学习时间，包含理论阅读（1.5-2h）、实践操作（2-2.5h）和费曼复述（0.5h）三个环节。每周结束有一个自测检验（checkpoint.md）和一个实践项目，确保学习效果可量化验证。
 
@@ -259,7 +260,7 @@ kubectl get pods -n kube-system                  # 系统Pod
 | Day | 主题 | 学习目标 |
 |:---:|------|---------|
 | Day 22 | Service 基础 | Service 类型与配置实践 |
-| Day 23 | Ingress | Ingress 路由规则与控制器配置 |
+| Day 23 | [[Ingress|Ingress]] | Ingress 路由规则与控制器配置 |
 | Day 24 | Terway 网络 | Terway CNI 架构与配置 |
 | Day 25 | Flannel 网络 | Flannel 网络模型与故障排查 |
 | Day 26 | 存储卷创建 & 删除 | PV/PVC 创建与生命周期管理 |

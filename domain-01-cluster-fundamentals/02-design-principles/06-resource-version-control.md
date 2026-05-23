@@ -44,6 +44,7 @@ cross_refs:
 - type: domain
   path: ../domain-01-cluster-fundamentals/
   label: '相关知识域: domain-01-cluster-fundamentals'
+created: "2026-05-23"
 ---
 
 # 06 - 资源版本与并发控制 (Concurrency Control)
@@ -51,7 +52,7 @@ cross_refs:
 <!-- chunk: 专家解析：410 Gone 的终极治理 -->
 ## 专家解析：410 Gone 的终极治理
 
-在生产环境中，频繁出现 `410 Gone (Too old resource version)` 错误通常意味着你的 Watch 客户端跟不上 etcd 的压缩 (Compaction) 速度。
+在生产环境中，频繁出现 `410 Gone (Too old resource version)` 错误通常意味着你的 Watch 客户端跟不上 [[etcd|etcd]] 的压缩 (Compaction) 速度。
 
 ### 根本原因分析
 1. **etcd 压缩**: etcd 定期清理旧版本的 MVCC 数据。
@@ -267,26 +268,26 @@ metadata:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- index.md|Domain-2 设计原则 — 开源项目索引]]
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04-watch-list-mechanism]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05-informer-workqueue]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07-distributed-consensus-etcd]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08-high-availability-patterns]]
+- 04-watch-list-mechanism
+- 05-informer-workqueue
+- 07-distributed-consensus-etcd
+- 08-high-availability-patterns
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]

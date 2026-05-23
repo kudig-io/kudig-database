@@ -31,13 +31,14 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # 混沌工程（Chaos Engineering）
 
 ## 概述
 
-**混沌工程**是一种通过在生产环境中有控制地注入故障，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造故障，以避免被动承受故障**"。2026 年的 Kubernetes 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **Litmus、Chaos Mesh、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
+**混沌工程**是一种通过在生产环境中有控制地注入故障，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造故障，以避免被动承受故障**"。2026 年的 [[Kubernetes|Kubernetes]] 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **[[Litmus|Litmus]]、[[Chaos Mesh|Chaos Mesh]]、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
 
 ## 核心概念/原理
 
@@ -55,7 +56,7 @@ prerequisites:
 | 故障类型 | 说明 | 典型场景 |
 |----------|------|----------|
 | **Pod Failure** | 随机杀死 Pod | 验证 Deployment 自愈、HPA 响应 |
-| **Node Failure** | 关闭/重启工作节点 | 验证 StatefulSet 高可用、Pod 迁移 |
+| **Node Failure** | 关闭/重启工作节点 | 验证 [[StatefulSet|StatefulSet]] 高可用、Pod 迁移 |
 | **Network Latency** | 增加网络延迟或丢包 | 验证超时、重试、熔断策略 |
 | **Network Partition** | 隔离 Pod/节点间的网络 | 验证分布式共识（etcd、Kafka、ZooKeeper）|
 | **CPU/Memory Stress** | 耗尽节点或 Pod 的资源 | 验证资源限制、OOM 行为、降级策略 |

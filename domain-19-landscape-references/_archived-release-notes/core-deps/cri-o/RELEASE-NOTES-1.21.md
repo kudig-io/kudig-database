@@ -1,0 +1,79 @@
+---
+title: cri-o v1.21 Release Notes
+description: cri-o v1.21 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- cri-o
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- cri-o v1.21 Release Notes 是什么
+- 如何 cri-o v1.21 Release Notes
+trigger_keywords:
+- cri-o
+- v1.21
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+created: "2026-05-23"
+---
+
+# cri-o v1.21 Release Notes
+
+Source: [v1.21.7](https://github.com/cri-o/cri-o/releases/tag/v1.21.7)
+
+- [CRI-O v1.21.7](#cri-o-v1217)
+  - [Downloads](#downloads)
+  - Changelog since v1.21.6](#changelog-since-v1216)
+    - [Changes by Kind](#changes-by-kind)
+      - [Uncategorized](#uncategorized)
+  - [Dependencies](#dependencies)
+    - [Added](#added)
+    - [Changed](#changed)
+    - [Removed](#removed)
+
+# CRI-O v1.21.7
+
+The release notes have been generated for the commit range
+[v1.21.6...283ec41](https://github.com/cri-o/cri-o/compare/v1.21.6...283ec410c082bf91304bbf6f5d5bf1c6490a0e3d) on Tue, 17 May 2022 13:07:29 EDT.
+
+## Downloads
+
+Download one of our static release bundles via our Google Cloud Bucket:
+
+- [cri-o.amd64.283ec410c082bf91304bbf6f5d5bf1c6490a0e3d.tar.gz](https://storage.googleapis.com/k8s-conform-cri-o/artifacts/cri-o.amd64.283ec410c082bf91304bbf6f5d5bf1c6490a0e3d.tar.gz)
+- [cri-o.arm64.283ec410c082bf91304bbf6f5d5bf1c6490a0e3d.tar.gz](https://storage.googleapis.com/k8s-conform-cri-o/artifacts/cri-o.arm64.283ec410c082bf91304bbf6f5d5bf1c6490a0e3d.tar.gz)
+
+## Changelog since v1.21.6
+
+### Changes by Kind
+
+#### Uncategorized
+ - Allow CRI-O to parse > SIGRTMIN signals ([#5861](https://github.com/cri-o/cri-o/pull/5861), [@openshift-cherrypick-robot](https://github.com/openshift-cherrypick-robot))
+ - Fix a segfault when multiple container stops come in for the same container ([#5828](https://github.com/cri-o/cri-o/pull/5828), [@openshift-cherrypick-robot](https://github.com/openshift-cherrypick-robot))
+ - Fixed `io.[[Kubernetes|kubernetes]].cri-o.TrySkipVolumeSELinuxLabel` annotation usage with the OpenShift MCS. ([#5873](https://github.com/cri-o/cri-o/pull/5873), [@openshift-cherrypick-robot](https://github.com/openshift-cherrypick-robot))
+ - Move namespace cleanup from sandbox stop to sandbox remove. This allows veth entries in the network namespaces of [[Pods|pods]] to be cleaned up earlier ([#5478](https://github.com/cri-o/cri-o/pull/5478), [@openshift-cherrypick-robot](https://github.com/openshift-cherrypick-robot))
+
+## Dependencies
+
+### Added
+_Nothing has changed._
+
+### Changed
+- github.com/json-iterator/go: [v1.1.11 → v1.1.12](https://github.com/json-iterator/go/compare/v1.1.11...v1.1.12)
+- github.com/modern-go/reflect2: [v1.0.1 → v1.0.2](https://github.com/modern-go/reflect2/compare/v1.0.1...v1.0.2)
+
+### Removed
+_Nothing has changed._

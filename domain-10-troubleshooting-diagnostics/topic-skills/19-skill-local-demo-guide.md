@@ -41,9 +41,10 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+created: "2026-05-23"
 ---
 
-# Skill 本地运行 Demo 指南
+# [[SKILL|Skill]] 本地运行 Demo 指南
 
 > **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，验证和体验 topic-skills 中定义的诊断-修复最佳实践  
 > **受众**: 运维工程师、SRE、AI Agent 开发者、希望理解 Skill 系统的贡献者  
@@ -53,7 +54,7 @@ k8s_versions:
 
 ## 1. 概述
 
-topic-skills 定义了面向 AI Agent 的 Kubernetes 故障诊断技能库（详见 [README.md](./[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
+topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
 
 ```
 故障注入 → 症状检测 → 快速分级 → 诊断工作流 → 根因确认 → 修复操作 → 验证确认

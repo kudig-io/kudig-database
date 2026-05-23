@@ -34,6 +34,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 16-企业级备份策略
@@ -44,12 +45,12 @@ tags:
 - production
 - operations
 - best-practices
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - mysql
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -586,18 +587,18 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
+- domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## Related
 
@@ -608,7 +609,7 @@ spec:
 
 ## See Also
 
-- [[domain-11-production-operations/14-resource-quota-management.md|14-resource-quota-management]]
-- [[domain-11-production-operations/15-green-computing-sustainability.md|15-green-computing-sustainability]]
-- [[domain-09-reliability-engineering/17-disaster-recovery-drills.md|17-disaster-recovery-drills]]
-- [[domain-09-reliability-engineering/18-cross-region-disaster-recovery.md|18-cross-region-disaster-recovery]]
+- 14-resource-quota-management
+- 15-green-computing-sustainability
+- 17-disaster-recovery-drills
+- 18-cross-region-disaster-recovery

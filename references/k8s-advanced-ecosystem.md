@@ -36,6 +36,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 硬件知识、CNCF 生态与 eBPF 平台工程

@@ -83,7 +83,7 @@ prerequisites:
 - [2026-05-21] TOPIC-LEARN VERIFICATION: 验证 27 个 learn-* 页面已完整覆盖 137 个 domain-11-production-operations/topic-learn/ 源文件。index.md 已添加 learn-* 页面完整列表。manifest 已含 137 domain-11-production-operations/topic-learn/ 条目及 SHA-256 哈希。
 - [2026-05-21] FULL-INGEST domain-01-cluster-fundamentals through domain-03-networking-traffic + topic-*: Created 91 wiki pages across concepts/ (39), entities/ (23), skills/ (15), references/ (11), synthesis/ (3). 1,093 source documents ingested. Coverage: K8s architecture, Docker, Linux containers, networking, storage, security, GitOps, IaC, service mesh, observability, FTA methodology, diagnostic skills, agent orchestration, CNCF ecosystem.
 - [2026-05-21] Wiki enhancement pass — all 96 original pages enhanced with typed relationships, provenance fields, confidence recalculation.
-- [2026-05-21] REMAINING-INGEST: Created 5 wiki pages — k8s-knowledge-map, k8s-difficulty-index, kudig-man-pages-index, [[references/[[skills/kudig-prompts-catalog.md|kudig-prompts-catalog]].md|kudig-prompts-catalog]], [[references/[[projects/kudig-templates-catalog.md|kudig-templates-catalog]].md|kudig-templates-catalog]]. Total: 101 pages.
+- [2026-05-21] REMAINING-INGEST: Created 5 wiki pages — k8s-knowledge-map, k8s-difficulty-index, kudig-man-pages-index, kudig-prompts-catalog.md|kudig-prompts-catalog]], kudig-templates-catalog.md|kudig-templates-catalog]]. Total: 101 pages.
 - [2026-05-21] WIKI_SYNTHESIZE 扫描页面=63 新增综合=5 跳过候选=10 — 综合页面全部中文输出：eBPF x 运行时安全、GitOps x 平台工程、纵深防御 x 供应链安全、服务网格 x 零信任安全、IaC x 多集群管理。
 - [2026-05-21] FULL-INGEST domain-01-cluster-fundamentals through domain-12: Created 35 wiki pages across concepts/ (12), entities/ (11), skills/ (8), references/ (4). Coverage: architecture, design principles, control plane, workloads, networking, storage, security, observability, autoscaling, extensions, AI infra, troubleshooting methodology.
 - [2026-05-21] FULL-INGEST topic-*/docs: Created 22 wiki pages (8 skills, 7 references, 3 concepts, 4 synthesis). Coverage: FTA methodology, diagnostic execution engine, symptom vector matching, agent orchestration, runbook automation, troubleshooting frameworks.
@@ -544,3 +544,19 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - `_reports/domain-production-assessment.md` — 评估报告
 - `_reports/domain-migration-EXECUTED-2026-05-21.md` — 迁移执行报告
 - `_reports/knowledge-completeness-assessment-2026-05-21.md` — 知识完整性评估
+
+- [2026-05-23 16:58:09] ENHANCE 远程顾问模式四项增强完成
+  - QA: 813条, 因果推理70.4%, 27 skill全部>=25
+  - 阿里云: 7篇文档(3014行), 17/17对话脚本ACK分支
+  - 合成分析: 236个跨域文档
+  - Frontmatter修复: 对话脚本+合成文件+synthesis+case-studies
+  - LINT: broken links修复, summary补全
+2026-05-23 17:08:14 — 全部任务已完成
+- [2026-05-23 17:36:45] LINT_CONSOLIDATE links_fixed=3 orphans_rescued=3 lifecycle_updates=0 tier_demotions=0 tag_fixes=0 contradiction_callouts=0 report=synthesis/consolidation-2026-05-23.md
+- [2026-05-23 17:46:51] LINT_CONSOLIDATE_FULL broken_links_fixed=25771 files_modified=~4300 report=synthesis/consolidation-2026-05-23.md
+- [2026-05-23 17:54:08] CROSS_LINK pages_scanned=124 links_added=587 typed_relations_written=587 pages_modified=123
+
+- [2026-05-23 18:00:32] DIGEST period="7d" new_pages=198 updated_pages=0 themes=46 connections=1589 saved=true
+- [2026-05-23 18:15:19] FINAL frontmatter_fixed=4488 broken_links_final=0 lifecycle_promoted=31 tags_normalized=16 cross_links=587 embedding_updated=true
+- [2026-05-23 18:37:33] TAG_COHESION cluster=0.183 workloads=0.117 cross-domain=0.152 storage=0.643 networking=0.464 security=0.464 synthesis=0.257 links_added=298
+- [2026-05-23 19:52:14] TAG_TAXONOMY tags_normalized=16 pages_modified=17 new_tags_added=15

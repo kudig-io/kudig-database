@@ -1,13 +1,16 @@
 ---
-title: Microcks
-description: 'description: ''## 项目概述'''
-category: general
+title: Microcks (entities)
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
-- helm
-- docker
+- orchestration
+- microcks
+- containerd
+- rook
 - kafka
+- crd
 - operator
 last_updated: 2026-05
 difficulty: intermediate
@@ -18,242 +21,56 @@ estimated_read_time: 5min
 intent_queries:
 - Microcks 是什么
 - 如何 Microcks
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Microcks
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
-- helm-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
-title: Microcks
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- helm
-- docker
-- kafka
-- operator
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Microcks 是什么
-- 如何 Microcks
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Microcks
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Microcks
 
-> **成熟度**: Sandbox | **最后更新**: 2026-03
+> **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Java, TypeScript
 
-## 基本信息
-
-| 属性 | 值 |
-|:---|:---|
-| **官网** | https://microcks.io/ |
-| **GitHub** | https://github.com/microcks/microcks |
-| **许可证** | Apache-2.0 |
-| **开发语言** | Java, TypeScript |
-| **CNCF 状态** | Sandbox |
-
----
-
-## 项目概述
+## 概述
 
 Microcks 是一个 API Mock 和测试平台，用于将 OpenAPI、AsyncAPI、gRPC、GraphQL 和 SOAP 的契约规范自动转换为 Mock 服务和集成测试。它帮助开发团队在微服务开发中实现 API 优先（API-First）的工作流，加速并行开发和契约测试。
 
-### 核心特性
+## 核心能力
 
-- **多协议 Mock**: OpenAPI/Swagger, AsyncAPI, gRPC, GraphQL, SOAP/WSDL
-- **自动生成**: 从 API 规范自动生成 Mock 响应和测试用例
-- **异步 API**: 支持 Kafka, MQTT, AMQP, WebSocket 等异步协议 Mock
-- **契约测试**: 验证服务实现是否符合 API 契约
-- **Postman 集成**: 导入 Postman Collection 作为 Mock 数据源
-- **动态响应**: 基于请求参数的动态 Mock 响应和模板
-- **Kubernetes 原生**: Helm Chart 和 Operator 部署
+- 详见源文档获取完整信息 ^[inferred]
 
----
+## K8s 集成
 
-## 快速开始
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-### 安装
+## 生产部署要点
 
-```bash
-# Helm 安装
-helm repo add microcks https://microcks.io/helm
-helm install microcks microcks/microcks \
-  --namespace microcks \
-  --create-namespace \
-  --set microcks.url=microcks.example.com \
-  --set keycloak.url=keycloak.example.com
+- **API-First**: 先定义 API 规范，Microcks 生成 Mock，前后端并行开发
+- **契约测试**: 在 CI 中运行契约测试，确保服务实现符合 API 规范
+- **异步 API**: 使用 AsyncAPI 规范 Mock Kafka/MQTT 消息
+- **环境配置**: 为开发、测试环境部署独立的 Microcks 实例
+- **版本管理**: API 规范版本化管理，Mock 跟随版本自动更新
 
-# Docker Compose 快速体验
-docker compose -f docker-compose.yml up -d
-```
+## 架构定位
 
-### 导入 API 规范
+在 CNCF 生态中，microcks 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
-```yaml
-# petstore-openapi.yaml
-openapi: "3.0.0"
-info:
-  title: Petstore API
-  version: "1.0.0"
-paths:
-  /pets/{petId}:
-    get:
-      operationId: getPet
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-              examples:
-                cat:
-                  value:
-                    id: 1
-                    name: "Tom"
-                    tag: "cat"
-                dog:
-                  value:
-                    id: 2
-                    name: "Rex"
-                    tag: "dog"
-```
+## 参考链接
 
-```bash
-# 通过 CLI 导入
-microcks-cli import petstore-openapi.yaml \
-  --microcksURL=https://microcks.example.com/api \
-  --keycloakClientId=microcks-serviceaccount \
-  --keycloakClientSecret=<SECRET>
-```
-
-### 使用 Mock
-
-```bash
-# Microcks 自动创建 Mock 端点
-# GET /rest/Petstore+API/1.0.0/pets/1
-curl https://microcks.example.com/rest/Petstore+API/1.0.0/pets/1
-
-# 根据不同 petId 返回不同的 Mock 响应
-curl https://microcks.example.com/rest/Petstore+API/1.0.0/pets/2
-```
-
----
-
-## 高级功能
-
-### AsyncAPI Mock (Kafka)
-
-```yaml
-# order-events.yaml
-asyncapi: "2.6.0"
-info:
-  title: Order Events
-  version: "1.0.0"
-channels:
-  orders/created:
-    publish:
-      message:
-        payload:
-          type: object
-          properties:
-            orderId:
-              type: string
-            amount:
-              type: number
-          examples:
-            - orderId: "ORD-001"
-              amount: 99.99
-```
-
-### 契约测试
-
-```bash
-# 运行契约测试验证服务实现
-microcks-cli test \
-  'Petstore API:1.0.0' \
-  http://actual-service:8080 \
-  OPEN_API_SCHEMA \
-  --microcksURL=https://microcks.example.com/api \
-  --waitFor=10sec
-```
-
-### CI/CD 集成
-
-```yaml
-# GitHub Actions
-- name: Contract Testing
-  uses: microcks/test-github-action@v1
-  with:
-    apiNameAndVersion: 'Petstore API:1.0.0'
-    testEndpoint: 'http://api-service:8080'
-    runner: OPEN_API_SCHEMA
-    microcksURL: ${{ secrets.MICROCKS_URL }}
-```
-
----
-
-## 最佳实践
-
-1. **API-First**: 先定义 API 规范，Microcks 生成 Mock，前后端并行开发
-2. **契约测试**: 在 CI 中运行契约测试，确保服务实现符合 API 规范
-3. **异步 API**: 使用 AsyncAPI 规范 Mock Kafka/MQTT 消息
-4. **环境配置**: 为开发、测试环境部署独立的 Microcks 实例
-5. **版本管理**: API 规范版本化管理，Mock 跟随版本自动更新
-
----
-
-## 参考资源
-
-- [Microcks 官方文档](https://microcks.io/documentation/)
-- [Microcks GitHub](https://github.com/microcks/microcks)
-- [CNCF Sandbox Projects](https://www.cncf.io/sandbox-projects/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[operator-pattern]]
+- [[concepts/secrets-management.md|secrets-management]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
-- [[MOC.md|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
+- [[karmada]] — Karmada
+- [[rook]] — Rook
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[grpc]] — gRPC
+
+- microcks
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

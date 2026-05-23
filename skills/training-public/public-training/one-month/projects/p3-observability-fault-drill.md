@@ -35,6 +35,7 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,7 +43,7 @@ title: 项目 P3: 可观测性体系搭建 + 故障演练
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - prometheus grafana loki alertmanager 完整部署
+  - [[Prometheus|prometheus]]us and Grafana|prometheus grafana]] loki alertmanager 完整部署
   - k8s 可观测性体系搭建步骤
   - 故障注入演练 fta febm 方法论
   - kube-prometheus-stack 部署配置
@@ -70,7 +71,7 @@ related_domains:
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/[[domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1|day-17-observability-1]]
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
 ---

@@ -37,6 +37,7 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 智能制造MES架构设计
@@ -46,13 +47,13 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- flux
+- [[Flux|flux]]
 - minio
 - mysql
 - kafka
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert
@@ -497,7 +498,7 @@ sequenceDiagram
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -512,11 +513,11 @@ sequenceDiagram
 
 ## See Also
 
-- [[domain-20-application-patterns/49-livestream-ecommerce.md|49-livestream-ecommerce]]
-- [[domain-20-application-patterns/50-unmanned-retail.md|50-unmanned-retail]]
-- [[domain-20-application-patterns/52-smart-water.md|52-smart-water]]
-- [[domain-20-application-patterns/53-new-retail-dtc.md|53-new-retail-dtc]]
+- 49-livestream-ecommerce
+- 50-unmanned-retail
+- 52-smart-water
+- 53-new-retail-dtc
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

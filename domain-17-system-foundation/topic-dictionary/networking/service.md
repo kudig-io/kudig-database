@@ -24,13 +24,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Service
 
 ## 概述
 
-Service 是 Kubernetes 中用于将运行在一组 Pod 上的网络应用暴露给集群内外的核心抽象对象。由于 Pod 是临时的、会被动态创建和销毁的，其 IP 地址也随之变化，Service 通过稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了前端客户端与后端 Pod 的耦合，使现有应用无需改造即可在 Kubernetes 中运行。
+Service 是 [[Kubernetes|Kubernetes]] 中用于将运行在一组 Pod 上的网络应用暴露给集群内外的核心抽象对象。由于 Pod 是临时的、会被动态创建和销毁的，其 IP 地址也随之变化，Service 通过稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了前端客户端与后端 Pod 的耦合，使现有应用无需改造即可在 Kubernetes 中运行。
 
 ## 核心概念/原理
 
@@ -46,7 +47,7 @@ Service 是 Kubernetes 中用于将运行在一组 Pod 上的网络应用暴露�
   - `NodePort`：在每个节点上开放固定端口（默认 30000–32767），将流量代理到 Service。
   - `LoadBalancer`：在云厂商环境中自动创建外部负载均衡器。
   - `ExternalName`：通过 DNS CNAME 将 Service 映射到外部域名，不做任何代理。
-- **EndpointSlices**：自 v1.21 起稳定，是 kube-proxy 路由内部流量的真实来源，默认每个 Slice 最多 100 个端点（最大可配 1000）。旧版 Endpoints API 已弃用。
+- **[[EndpointSlices|EndpointSlices]]**：自 v1.21 起稳定，是 kube-proxy 路由内部流量的真实来源，默认每个 Slice 最多 100 个端点（最大可配 1000）。旧版 Endpoints API 已弃用。
 - **流量策略**：支持 `internalTrafficPolicy` 与 `externalTrafficPolicy`（Cluster/Local），控制流量在集群内部或外部进入时的路由范围。
 - **会话保持（Session Affinity）**：可基于客户端 IP 配置会话亲和性，使同一客户端流量始终到达同一 Pod。
 - **应用协议（appProtocol）**：自 v1.20 起稳定，用于为端口声明应用层协议（如 `kubernetes.io/h2c`、`kubernetes.io/ws`），供实现方提供更丰富的行为。
@@ -56,7 +57,7 @@ Service 是 Kubernetes 中用于将运行在一组 Pod 上的网络应用暴露�
 - **微服务间通信**：通过 ClusterIP + DNS 实现服务间稳定调用。
 - **外部访问入口**：使用 NodePort 或 LoadBalancer 将 Web 应用暴露到公网。
 - **连接集群外服务**：利用无 selector Service + 手动 EndpointSlice 或 ExternalName 对接外部数据库、 legacy 系统。
-- **有状态服务发现**：Headless Service 配合 StatefulSet，为每个 Pod 提供独立 DNS 记录。
+- **有状态服务发现**：Headless Service 配合 [[StatefulSet|StatefulSet]]，为每个 Pod 提供独立 DNS 记录。
 
 ## 最佳实践/注意事项
 
@@ -227,7 +228,7 @@ kubectl port-forward svc/backend-api 8080:80 -n production
 ## 交叉引用
 
 - [EndpointSlices](endpointslices.md) — Service 后端端点的管理和条件
-- [DNS for Services](dns-for-services-and-pods.md) — Service DNS 记录格式
+- [DNS for Services](dns-for-services-and-[[Pods|pods]].md) — Service DNS 记录格式
 - [Service ClusterIP Allocation](service-clusterip-allocation.md) — ClusterIP 分配策略
 - [Service Internal Traffic Policy](service-internal-traffic-policy.md) — 内部流量节点本地路由
 - [Ingress](ingress.md) — HTTP/HTTPS 层的 Service 暴露

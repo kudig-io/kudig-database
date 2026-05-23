@@ -1,5 +1,5 @@
 ---
-title: 第十八章：典型场景完整方案
+title: 第十八章：典型场景完整方案 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十八章：典型场景完整方案'
 category: fta
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 fta_id: FTA-18_TYPICAL_SCENARIOS-001
 component: 18 Typical Scenarios
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第十八章：典型场景完整方案
@@ -47,7 +48,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- prometheus
+- [[Prometheus|prometheus]]
 - mysql
 - agent
 last_updated: 2026-05
@@ -80,8 +81,8 @@ k8s_versions:
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十七章：行业标杆案例分析](./17-industry-benchmarks.md)  
-> **下一章**: [第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)
+> **上一章**: 第十七章：行业标杆案例分析](./17-industry-benchmarks.md)  
+> **下一章**: 第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)
 
 ---
 

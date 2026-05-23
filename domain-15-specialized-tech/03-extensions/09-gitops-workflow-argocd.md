@@ -47,11 +47,12 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
+created: "2026-05-23"
 ---
 
 # 48 - GitOps工作流
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [opengitops.dev](https://opengitops.dev/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops.md|opengitops]].dev](https://opengitops.dev/)
 
 <!-- chunk: GitOps核心原则 -->
 ## GitOps核心原则
@@ -68,7 +69,7 @@ cross_refs:
 
 | 工具 | 架构 | 同步方式 | 多集群 | Helm支持 | 社区活跃度 |
 |-----|------|---------|-------|---------|-----------|
-| **ArgoCD** | Pull | 应用级 | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
+| **[[ArgoCD|ArgoCD]]** | Pull | 应用级 | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
 | **FluxCD v2** | Pull | Kustomize/Helm | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
 | **Jenkins X** | Push | Pipeline | ✅ | ✅ | ⭐⭐⭐ |
 | **Rancher Fleet** | Pull | Bundle | ✅ | ✅ | ⭐⭐⭐⭐ |
@@ -309,9 +310,9 @@ spec:
 | **版本控制** | 所有变更可追溯 | Git commit history |
 | **PR审核** | 变更需要审批 | Branch Protection Rules |
 | **自动同步** | 检测漂移自动修复 | selfHeal: true |
-| **渐进式交付** | 金丝雀/蓝绿部署 | Argo Rollouts/Flagger |
+| **渐进式交付** | 金丝雀/蓝绿部署 | [[Argo|Argo]] Rollouts/Flagger |
 | **多环境管理** | 分支/目录策略 | Kustomize overlays |
-| **密钥管理** | 安全存储敏感信息 | Sealed Secrets/SOPS/ESO |
+| **密钥管理** | 安全存储敏感信息 | Sealed [[Secrets|Secrets]]/SOPS/ESO |
 
 <!-- chunk: 多环境管理策略 -->
 ## 多环境管理策略
@@ -525,25 +526,25 @@ argocd repo add https://github.com/org/repo.git \
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-15-specialized-tech MOC]]
+- domain-15-specialized-tech MOC
 - [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-10 扩展与自定义 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-crd-development-guide.md|CRD 自定义资源定义开发指南]]
-- [[domain-15-specialized-tech/02-operator-development-patterns.md|02 - Operator开发模式与控制器实现]]
-- [[domain-15-specialized-tech/03-admission-webhook-configuration.md|03 - 准入控制器(Webhook)配置与实现]]
-- [[domain-15-specialized-tech/04-api-aggregation-extension.md|Kubernetes API 聚合扩展机制详解]]
-- [[domain-15-specialized-tech/05-package-management-tools.md|包管理与应用分发工具]]
-- [[domain-15-specialized-tech/06-helm-charts-management.md|47 - Helm Chart开发与管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践]]
-- [[domain-15-specialized-tech/08-cicd-pipelines.md|CI/CD 管道]]
-- [[domain-15-specialized-tech/10-image-build-tools.md|103 - 容器镜像构建工具 (Container Image Build)]]
+- Domain-10 扩展与自定义 — 开源项目索引
+- CRD 自定义资源定义开发指南
+- 02 - Operator开发模式与控制器实现
+- 03 - 准入控制器(Webhook)配置与实现
+- Kubernetes API 聚合扩展机制详解
+- 包管理与应用分发工具
+- 47 - Helm Chart开发与管理
+- 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- CI/CD 管道
+- 103 - 容器镜像构建工具 (Container Image Build)
 
 ## See Also
 
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|07-helm-advanced-operations]]
-- [[domain-15-specialized-tech/08-cicd-pipelines.md|08-cicd-pipelines]]
-- [[domain-15-specialized-tech/10-image-build-tools.md|10-image-build-tools]]
-- [[domain-15-specialized-tech/11-service-mesh-overview.md|11-service-mesh-overview]]
+- 07-helm-advanced-operations
+- 08-cicd-pipelines
+- 10-image-build-tools
+- 11-service-mesh-overview
 
 ## Related
 

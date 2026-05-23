@@ -28,13 +28,14 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 容器镜像（Images）
 
 ## 概述
 
-容器镜像（Container Image）是封装了应用程序及其所有软件依赖项的二进制数据，是一个可独立运行的可执行软件包，并对其运行时环境做出非常明确的假设。在 [[entities/kubernetes|kubernetes]] 中，通常需要先创建应用程序的容器镜像并推送到镜像仓库，然后在 Pod 中引用该镜像。
+容器镜像（Container Image）是封装了应用程序及其所有软件依赖项的二进制数据，是一个可独立运行的可执行软件包，并对其运行时环境做出非常明确的假设。在 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 中，通常需要先创建应用程序的容器镜像并推送到镜像仓库，然后在 Pod 中引用该镜像。
 
 ## 核心概念/原理
 
@@ -51,7 +52,7 @@ prerequisites:
 
 ### 镜像拉取策略（imagePullPolicy）
 
-`imagePullPolicy` 控制 kubelet 何时尝试拉取镜像：
+`imagePullPolicy` 控制 [[kubelet|kubelet]] 何时尝试拉取镜像：
 
 | 策略值 | 说明 |
 |--------|------|

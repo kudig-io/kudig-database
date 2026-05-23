@@ -55,11 +55,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # CNCF 集成实践指南
 
-> **适用版本**: Kubernetes v1.28+ | **最后更新**: 2026-05
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.28+ | **最后更新**: 2026-05
 
 ---
 
@@ -609,7 +610,7 @@ spec:
 
 ---
 
-<!-- chunk: 6. GitOps 集成 -->## 6. GitOps 集成
+<!-- chunk: 6. [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
 
 #<!-- chunk: 6.1 Argo CD + Argo Rollouts + Flagger -->## 6.1 Argo CD + Argo Rollouts + Flagger
 
@@ -658,7 +659,7 @@ spec:
         interval: 1m
 ```
 
-#<!-- chunk: 6.2 Flux + Helm + Image Automation -->## 6.2 Flux + Helm + Image Automation
+#<!-- chunk: 6.2 [[Flux|Flux]] + Helm + Image Automation -->## 6.2 Flux + Helm + Image Automation
 
 ```yaml
 # Flux 安装
@@ -702,7 +703,7 @@ spec:
 
 <!-- chunk: 7. 事件驱动与 Serverless -->## 7. 事件驱动与 Serverless
 
-#<!-- chunk: 7.1 Knative + Kafka + Prometheus -->## 7.1 Knative + Kafka + Prometheus
+#<!-- chunk: 7.1 [[Knative|Knative]] + Kafka + Prometheus -->## 7.1 Knative + Kafka + Prometheus
 
 ```yaml
 # Knative Eventing 安装
@@ -952,16 +953,16 @@ echo "Installation complete!"
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-landscape-references MOC]]
-- [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-34 CNCF Landscape — 开源项目索引]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|CNCF 学习路径]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|CNCF 项目选型指南]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|CNCF 项目 FTA 索引]]
+- domain-19-landscape-references KUDIG Database — Global MOC
+- README.md|Domain-34: CNCF Landscape 开源项目]]
+- Domain-34 CNCF Landscape — 开源项目索引
+- CNCF 学习路径
+- CNCF 项目选型指南
+- CNCF 项目 FTA 索引
 
 ## See Also
 
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|03-cncf-selection-guide]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|04-cncf-fta-index]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|02-cncf-learning-paths]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|03-cncf-selection-guide]]
+- 03-cncf-selection-guide
+- 04-cncf-fta-index
+- 02-cncf-learning-paths
+- 03-cncf-selection-guide

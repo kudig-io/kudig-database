@@ -1,5 +1,5 @@
 ---
-title: CRI-O
+title: CRI-O (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # CRI-O
@@ -71,40 +72,40 @@ description: '## 项目概述'
 - [[cedar]] — Cedar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/cri-o/cri-o.md|cri-o]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.28.md|RELEASE-NOTES-1.28]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.29.md|RELEASE-NOTES-1.29]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.22.md|RELEASE-NOTES-1.22]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.32.md|RELEASE-NOTES-1.32]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.26.md|RELEASE-NOTES-1.26]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.27.md|RELEASE-NOTES-1.27]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.23.md|RELEASE-NOTES-1.23]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.33.md|RELEASE-NOTES-1.33]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.24.md|RELEASE-NOTES-1.24]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.34.md|RELEASE-NOTES-1.34]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.20.md|RELEASE-NOTES-1.20]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.30.md|RELEASE-NOTES-1.30]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.21.md|RELEASE-NOTES-1.21]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.31.md|RELEASE-NOTES-1.31]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.25.md|RELEASE-NOTES-1.25]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
+- cri-o
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-1.28
+- RELEASE-NOTES-1.18
+- RELEASE-NOTES-1.19
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-1.29
+- RELEASE-NOTES-1.16
+- RELEASE-NOTES-1.22
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.32
+- RELEASE-NOTES-1.26
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-1.27
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-1.17
+- RELEASE-NOTES-1.23
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-1.33
+- RELEASE-NOTES-1.24
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-1.34
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.20
+- RELEASE-NOTES-1.30
+- RELEASE-NOTES-1.15
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.21
+- RELEASE-NOTES-1.31
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-1.25
+- RELEASE-NOTES-1.11
 - [[domain-19-landscape-references/topic-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
-- [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
+- troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[references/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[concepts/core-dependency-version-matrix|核心依赖版本矩阵]] — Cross-reference

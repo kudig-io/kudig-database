@@ -1,5 +1,5 @@
 ---
-title: 成本与延迟优化策略
+title: 成本与延迟优化策略 (domain-14-ai-ml-infra)
 description: 'title: 成本与延迟优化策略'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: 成本与延迟优化策略
@@ -48,9 +49,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 last_updated: 2026-05
@@ -874,8 +875,8 @@ class PrefetchAgent:
 |------|---------|
 | [02 - LLM 模型选型](./02-llm-foundation-models.md) | 模型路由的定价基准 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 上下文压缩对成本的影响 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | 成本 Prometheus 指标 |
-| [09 - 生产部署](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | vLLM 部署与 KV Cache |
+| [08 - 评测与可观测性](./observability.md|08-agent-evaluation-observability]].md) | 成本 Prometheus 指标 |
+| [09 - 生产部署](./09-production-deployment-guide.md) | vLLM 部署与 KV Cache |
 | [domain-14-ai-ml-infra/26-cost-optimization-overview.md](../domain-14-ai-ml-infra/26-cost-optimization-overview.md) | AI 基础设施成本优化 |
 | [domain-14-ai-ml-infra/23-llm-cost-monitoring.md](../domain-14-ai-ml-infra/23-llm-cost-monitoring.md) | LLM 成本监控体系 |
 
@@ -887,7 +888,7 @@ class PrefetchAgent:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -902,7 +903,7 @@ class PrefetchAgent:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]]
-- [[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]]
-- [[domain-14-ai-ml-infra/12-enterprise-case-studies.md|12-enterprise-case-studies]]
-- [[domain-14-ai-ml-infra/13-trusted-agent-system-fiscal-plan.md|13-trusted-agent-system-fiscal-plan]]
+- 09-production-deployment-guide
+- 10-security-guardrails
+- 12-enterprise-case-studies
+- 13-trusted-agent-system-fiscal-plan

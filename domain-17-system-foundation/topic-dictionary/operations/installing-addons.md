@@ -35,19 +35,20 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 安装插件（Installing Addons）
 
 ## 概述
 
-插件（Addons）用于扩展 Kubernetes 的功能。Kubernetes 本身不提供原生的完整集群功能（如 DNS、网络、仪表板等），而是通过插件生态来补充这些能力。本文档列出了 Kubernetes 官方文档中提到的一些可用插件，并提供其安装说明的链接。
+插件（Addons）用于扩展 [[Kubernetes|Kubernetes]] 的功能。Kubernetes 本身不提供原生的完整集群功能（如 DNS、网络、仪表板等），而是通过插件生态来补充这些能力。本文档列出了 Kubernetes 官方文档中提到的一些可用插件，并提供其安装说明的链接。
 
 ## 核心概念/原理
 
 - **Addons 是第三方项目**：大多数插件不由 Kubernetes 核心项目直接维护，但它们是运行生产级集群所必需或强烈推荐的组件。
 - **功能扩展领域**：包括网络与网络策略、服务发现、可视化与控制、基础设施、可观测性等。
-- **安装方式多样**：不同插件有不同的安装方法，通常通过 DaemonSet、Deployment、Helm chart 或运营商（operator）部署。
+- **安装方式多样**：不同插件有不同的安装方法，通常通过 [[DaemonSet|DaemonSet]]、Deployment、[[Helm|Helm]] chart 或运营商（operator）部署。
 
 ## 关键机制或特性
 
@@ -56,7 +57,7 @@ prerequisites:
 | 插件 | 说明 |
 |------|------|
 | ACI | Cisco ACI 集成容器网络与网络安全 |
-| Antrea | 基于 Open vSwitch 的 L3/4 网络与安全服务（CNCF Sandbox） |
+| [[Antrea|Antrea]] | 基于 Open vSwitch 的 L3/4 网络与安全服务（CNCF Sandbox） |
 | Calico | 网络与网络策略提供者，支持多种网络模式 |
 | Canal | 结合 Flannel 和 Calico，提供网络与网络策略 |
 | Cilium | 基于 eBPF 的网络、可观测性和安全解决方案（CNCF Graduated） |

@@ -57,6 +57,7 @@ related_topics:
 - reset
 - etcd-cleanup
 - ha-delete
+created: "2026-05-23"
 ---
 
 # 集群删除前的数据备份与迁移检查清单

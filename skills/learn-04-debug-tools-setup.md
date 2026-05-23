@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 trigger_keywords:
@@ -324,7 +325,7 @@ npm install -g kubetail
 kubetail <deployment-name> -n production
 ```
 
-### 7.3 cilium (CNI 调试)
+### 7.3 [[Cilium|cilium]] (CNI 调试)
 
 ```bash
 # Cilium CLI

@@ -1,5 +1,5 @@
 ---
-title: Deployment 控制器入口源码分析
+title: Deployment 控制器入口源码分析 (topic-code-analysis)
 description: '| `getReplicaSetsForDeployment` | `([]*apps.ReplicaSet, error)` | 返回 Deployment 管理的所有 RS 列表 |'
 category: general
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: Deployment 控制器入口源码分析

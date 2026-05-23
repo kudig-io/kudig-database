@@ -44,6 +44,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Terraform企业级基础设施即代码实践
@@ -1616,18 +1617,18 @@ IaC技术发展趋势:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
-- [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|Ansible企业级自动化运维深度实践]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|Pulumi Enterprise Infrastructure as Code Platform]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Infrastructure Orchestration 深度实践]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|Crossplane 平台工程实践指南]]
+- domain-24-infrastructure-as-code KUDIG Database — Global MOC
+- [[domain-08-release-change-management/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
+- Domain-24 基础设施即代码 — 开源项目索引
+- Ansible企业级自动化运维深度实践
+- [[domain-08-release-change-management/02-iac/11-infrastructure-as-code.md]]
+- Azure Resource Manager (ARM) Enterprise 深度实践
+- Crossplane Enterprise Infrastructure Orchestration 深度实践
+- Crossplane 平台工程实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|05-crossplane-enterprise-orchestration]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|99-crossplane-platform-guide]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|02-ansible-enterprise-automation]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|03-pulumi-enterprise-iac]]
+- 05-crossplane-enterprise-orchestration
+- 99-crossplane-platform-guide
+- 02-ansible-enterprise-automation
+- 03-pulumi-enterprise-iac

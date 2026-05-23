@@ -38,6 +38,7 @@ prerequisites:
 skill_id: SKILL-USAGE_GUIDE-001
 skill_name: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
@@ -52,7 +53,7 @@ version: 1.0.0
 
 1. [系统架构概述](#1-系统架构概述)
 2. [文件清单与职责](#2-文件清单与职责)
-3. [Skill 元系统 — 工作原理](#3-skill-元系统--工作原理)
+3. [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 元系统 — 工作原理](#3-skill-元系统--工作原理)
 4. [FTA 系统 — 工作原理](#4-fta-系统--工作原理)
 5. [双向集成设计](#5-双向集成设计)
 6. [Agent 执行流程详解](#6-agent-执行流程详解)
@@ -72,8 +73,8 @@ version: 1.0.0
 │  第 4 层: domain-10-troubleshooting-diagnostics/topic-skills/              (做什么 — Agent 执行层)        │
 │  自包含 Runbook: 触发 → 诊断 → 修复 → 验证                          │
 ├────────────────────────────────────────────────────────────────────┤
-│  第 3 层: domain-10-troubleshooting-diagnostics/topic-fta/list/            (为什么 — 故障分析模型)         │
-│  FTA 故障树: 概率模型、因果链、底事件                                 │
+│  第 3 层: domain-10-troubleshooting-diagnostics/topic-fta/list/            (为什么 — 问题分析模型)         │
+│  FTA 问题树: 概率模型、因果链、底事件                                 │
 ├────────────────────────────────────────────────────────────────────┤
 │  第 2 层: domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/  (如何做 — 深度参考)   │
 ├────────────────────────────────────────────────────────────────────┤
@@ -82,7 +83,7 @@ version: 1.0.0
 ```
 
 **Skill 系统回答**：_应该采取什么操作？按照什么顺序？风险门控条件是什么？_  
-**FTA 系统回答**：_节点为什么故障？通往根因的因果链是什么？_
+**FTA 系统回答**：_节点为什么问题？通往根因的因果链是什么？_
 
 两者双向关联：
 - **Skill → FTA**：通过 `root-cause-map.yaml` 中的 `fta_mapping.step_ids` 和 `skill-metadata.yaml` 中的 `rc_to_fta_steps`
@@ -118,8 +119,8 @@ domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/
 ### 2.2 FTA 系统文件
 
 ```
-domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md            # FTA 故障树主文档
-  ├── Mermaid diagram                 # 可视化故障树（供人阅读）
+domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md            # FTA 问题树主文档
+  ├── Mermaid diagram                 # 可视化问题树（供人阅读）
   ├── Diagnostic command tables       # 按分类的快速命令参考
   └── JSON flow_steps array           # 机器可执行的诊断流程图
       ├── gate_root_or                # 入口门（跨所有分类的 OR 门）
@@ -226,7 +227,7 @@ references:
 
 该文件包含三个部分：
 
-1. **Mermaid 图** — 人类可读的可视化故障树。入口：`TE[顶事件: Node异常]` → `OR0{{OR}}` → 9 个分类分支
+1. **Mermaid 图** — 人类可读的可视化问题树。入口：`TE[顶事件: Node异常]` → `OR0{{OR}}` → 9 个分类分支
 2. **诊断命令表** — 按分类（kubelet、runtime、resource、network、storage、kernel、cert/time、control plane）归组的快速命令参考
 3. **JSON `flow_steps` 数组** — 机器可执行的诊断流程图
 
@@ -243,7 +244,7 @@ references:
 
 ### 4.3 底事件结构
 
-每个底事件是故障树中的叶节点，具有以下 JSON 结构：
+每个底事件是问题树中的叶节点，具有以下 JSON 结构：
 
 ```json
 {
@@ -290,7 +291,7 @@ references:
 | `remediation_ids` | array | 要执行的适用 REM ID |
 | `script` | string | 推荐的诊断/修复脚本 |
 | `cross_skill` | string | （可选）需要协同激活的次级 Skill |
-| `is_fault` | boolean | （可选）`false` = 计划操作，非故障 |
+| `is_fault` | boolean | （可选）`false` = 计划操作，非问题 |
 | `note` | string | （可选）需要人工操作 |
 
 ---
@@ -341,7 +342,7 @@ SKILL.md Section 6 / reference/remediation-playbook.md
 | RC-009 | 内核崩溃/驱动异常 | `evt_kernel_panic`, `evt_driver_issue` | REM-006, REM-009, REM-010 |
 | RC-010 | 时间同步失败/TLS | `evt_time_skew_tls` | manual NTP fix |
 | RC-011 | CNI 组件异常 | `evt_cni_fail` | manual CNI redeploy |
-| RC-012 | 节点被 cordon（非故障） | `evt_cordon` | REM-001 (is_fault: false) |
+| RC-012 | 节点被 cordon（非问题） | `evt_cordon` | REM-001 (is_fault: false) |
 
 ---
 
@@ -567,7 +568,7 @@ fta_mapping:
 | RC-009 | 内核崩溃/驱动异常 | 低 | `evt_kernel_panic`、`evt_driver_issue` |
 | RC-010 | 时间偏差/TLS 失败 | 低 | `evt_time_skew_tls` |
 | RC-011 | CNI 组件异常 | 低 | `evt_cni_fail` |
-| RC-012 | 节点被 cordon（非故障） | — | `evt_cordon` |
+| RC-012 | 节点被 cordon（非问题） | — | `evt_cordon` |
 
 ### 10.2 修复 ID（REM-001 – REM-010）
 
@@ -601,14 +602,14 @@ fta_mapping:
 | `evt_pid_exhaust` | PID 耗尽 | RC-005 | ✓ |
 | `evt_api_unreachable` | 节点无法访问 kube-apiserver | RC-006 | ✓ |
 | `evt_policy_block` | NetworkPolicy 阻断节点流量 | RC-006 | — |
-| `evt_route_fail` | 路由表/iptables 故障 | RC-006 | — |
+| `evt_route_fail` | 路由表/iptables 问题 | RC-006 | — |
 | `evt_kubelet_cert` | kubelet 客户端证书过期/无效 | RC-007 | ✓ |
 | `evt_node_cert_expire` | 节点服务证书过期 | RC-007 | ✓ |
 | `evt_pleg` | PLEG relist 错误 | RC-008 | ✓ |
 | `evt_and_pleg_timeout` | AND：PLEG relist 超时（条件 1/2） | RC-008 | — |
 | `evt_and_pleg_overload` | AND：容器过多/运行时过慢（条件 2/2） | RC-008 | — |
 | `evt_kernel_panic` | 内核 panic/oops | RC-009 | ✓ |
-| `evt_driver_issue` | 驱动或内核模块故障 | RC-009 | ✓ |
+| `evt_driver_issue` | 驱动或内核模块问题 | RC-009 | ✓ |
 | `evt_time_skew_tls` | NTP 不同步导致 TLS 验证失败 | RC-010 | ✓ |
 | `evt_cni_fail` | CNI DaemonSet 停止或配置错误 | RC-011 | ✓ |
 | `evt_cordon` | 节点被有意 cordon | RC-012 | ✓（is_fault: false） |

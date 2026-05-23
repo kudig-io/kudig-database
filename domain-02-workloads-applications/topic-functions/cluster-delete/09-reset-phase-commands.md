@@ -1,7 +1,41 @@
 ---
+title: reset 子命令与 Phase 操作速查 (topic-code-analysis)
+description: '| `--config` | 配置文件路径 | |'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- reset 子命令与 Phase 操作速查 是什么
+- 如何 reset 子命令与 Phase 操作速查
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- reset
+- 子命令与
+- Phase
+- 操作速查
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: reset 子命令与 Phase 操作速查
-description: kubeadm reset 支持通过子命令单独执行各个阶段（phase）。本文档分析 preflight、remove-etcd-member、cleanup-node 三个 Phase 的定义、InheritFlags、执行逻辑以及与
-  kubeadm init phases 的对比。
 category: cluster-delete
 tags:
 - kubeadm
@@ -12,16 +46,10 @@ tags:
 - cleanup-node
 - command
 - skip-phases
-- etcd
-- kubelet
 last_updated: 2026-05-18
+description: kubeadm reset 支持通过子命令单独执行各个阶段（phase）。本文档分析 preflight、remove-etcd-member、cleanup-node
+  三个 Phase 的定义、InheritFlags、执行逻辑以及与 kubeadm init phases 的对比。
 difficulty: intermediate
-reading_level: intermediate
-audience:
-- platform-engineer
-- kubernetes-administrator
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubeadm reset phase command reference
 - kubeadm reset phase preflight cleanup-node
@@ -39,10 +67,12 @@ trigger_keywords:
 - NewRemoveETCDMemberPhase
 - NewCleanupNodePhase
 - workflow.Phase
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: intermediate
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 related_topics:
@@ -51,6 +81,17 @@ related_topics:
 - cleanup
 - etcd-cleanup
 - force-delete
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # reset 子命令与 Phase 操作速查
@@ -99,7 +140,7 @@ func runCleanupNode(c workflow.RunData) error
 
 | 标志 | 来源常量 | 说明 |
 |------|---------|------|
-| `--certificates-dir` | `options.CertificatesDir` | 证书目录，默认 `/etc/[[entities/kubernetes|kubernetes]]/pki` |
+| `--certificates-dir` | `options.CertificatesDir` | 证书目录，默认 `/etc/kubernetes/pki` |
 | `--cri-socket` | `options.NodeCRISocket` | CRI socket 路径 |
 | `--cleanup-tmp-dir` | `options.CleanupTmpDir` | 是否清理 `/etc/kubernetes/tmp` |
 | `--dry-run` | `options.DryRun` | 干跑模式 |
@@ -472,3 +513,11 @@ kubeadm reset phase cleanup-node --help
 - [`CleanDir`](04-cleanup.md) — 目录清理工具函数
 - [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除 stacked etcd 成员
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认工具
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

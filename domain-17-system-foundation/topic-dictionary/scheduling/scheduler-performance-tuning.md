@@ -24,13 +24,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Scheduler Performance Tuning
 
 ## 概述
 
-kube-scheduler 是 Kubernetes 的默认调度器，负责将 Pod 放置到集群的节点上。在大型集群中，可以通过调整调度器的行为来平衡调度延迟（新 Pod 快速放置）和准确性（调度器很少做出差的放置决策）。
+kube-scheduler 是 [[Kubernetes|Kubernetes]] 的默认调度器，负责将 Pod 放置到集群的节点上。在大型集群中，可以通过调整调度器的行为来平衡调度延迟（新 Pod 快速放置）和准确性（调度器很少做出差的放置决策）。
 
 ## 核心概念/原理
 
@@ -180,5 +181,5 @@ kubectl top pod -n kube-system -l component=kube-scheduler
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|[[etcd|etcd]]cd 知识图谱索引|etcd 知识图谱索引]]]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

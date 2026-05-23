@@ -48,6 +48,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 自动化运维与CI/CD集成
@@ -873,7 +874,7 @@ echo "Deployment completed successfully"
 
 #<!-- chunk: 滚动更新配置 -->## 滚动更新配置
 
-##<!-- chunk: Kubernetes 滚动更新策略 -->## Kubernetes 滚动更新策略
+##<!-- chunk: [[Kubernetes|Kubernetes]] 滚动更新策略 -->## Kubernetes 滚动更新策略
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -1075,7 +1076,7 @@ func main() {
 
 <!-- chunk: 监控告警自动化 -->## 监控告警自动化
 
-#<!-- chunk: Prometheus 监控集成 -->## Prometheus 监控集成
+#<!-- chunk: [[Prometheus|Prometheus]] 监控集成 -->## Prometheus 监控集成
 
 ##<!-- chunk: 服务发现配置 -->## 服务发现配置
 ```yaml
@@ -1497,25 +1498,25 @@ echo "Rollback process completed"
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-13-container-runtime/MOC.md|domain-13-container-runtime MOC]]
+- domain-13-container-runtime KUDIG Database — Global MOC
 - [[domain-13-container-runtime/README.md|Docker 容器技术深度解析]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|Domain-13 Docker — 开源项目索引]]
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|Docker 架构概述与核心概念]]
-- [[domain-13-container-runtime/02-docker-images-management.md|Docker 镜像管理详解]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|Docker 容器生命周期管理]]
-- [[domain-13-container-runtime/04-docker-networking-deep-dive.md|Docker 网络深度解析]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|Docker 存储与数据卷]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|Docker Compose 编排]]
-- [[domain-13-container-runtime/07-docker-security-best-practices.md|Docker 安全最佳实践]]
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|Docker 故障排查指南]]
-- [[domain-13-container-runtime/09-docker-performance-monitoring.md|Docker 性能监控与调优]]
+- Domain-13 Docker — 开源项目索引
+- Docker 架构概述与核心概念
+- Docker 镜像管理详解
+- Docker 容器生命周期管理
+- Docker 网络深度解析
+- Docker 存储与数据卷
+- Docker Compose 编排
+- Docker 安全最佳实践
+- Docker 故障排查指南
+- Docker 性能监控与调优
 
 ## See Also
 
-- [[domain-13-container-runtime/09-docker-performance-monitoring.md|09-docker-performance-monitoring]]
-- [[domain-13-container-runtime/10-docker-logging-management.md|10-docker-logging-management]]
-- [[domain-13-container-runtime/12-java-containerization-guide.md|12-java-containerization-guide]]
-- [[domain-13-container-runtime/99-docker-commands-reference.md|99-docker-commands-reference]]
+- 09-docker-performance-monitoring
+- 10-docker-logging-management
+- 12-java-containerization-guide
+- 99-docker-commands-reference
 
 ## Related
 

@@ -27,6 +27,18 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/kubelet]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets]]"
+    type: uses
+  - target: "[[entities/deployment]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
 ---
 
 # Secret 管理 × 存储模型
@@ -34,7 +46,7 @@ prerequisites:
 
 ## 连接点
 
-[[concepts/secrets-management]] 覆盖密钥的安全存储，[[concepts/storage-model]] 覆盖 PV/PVC/StorageClass 的三层抽象。两者的交叉点是 **Secret 的物理存储路径**：K8s Secret 从 API Server 写入 etcd，从 etcd 同步到 kubelet，从 kubelet 挂载为 tmpfs 到容器。这条路径上的每个存储层都有不同的安全特性和失效模式。
+[[domain-17-system-foundation/topic-dictionary/configuration/secrets|secrets]]-management]] 覆盖密钥的安全存储，[[concepts/storage-model]] 覆盖 PV/PVC/StorageClass 的三层抽象。两者的交叉点是 **Secret 的物理存储路径**：[[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] Secret 从 API Server 写入 [[entities/etcd|etcd]]，从 etcd 同步到 [[entities/kubelet|kubelet]]，从 kubelet 挂载为 tmpfs 到容器。这条路径上的每个存储层都有不同的安全特性和失效模式。
 
 ## 共现场景
 
@@ -81,7 +93,7 @@ API Server → etcd（静态加密）→ kubelet 内存 → 节点 tmpfs → 容
 ## 开放问题
 
 - **Secret 大小限制的突破**：K8s Secret 限制为 1MB（etcd 限制）。大型证书链或 CA 捆绑包需要拆分为多个 Secret。CSI 加密卷可以突破此限制，但缺乏标准化的集成模式
-- **跨节点 Secret 同步的一致性**：当 Secret 更新后，各节点 kubelet 的同步时间是异步的。在滚动更新期间，同一 Deployment 的不同 Pod 可能使用不同版本的 Secret。如何确保 Secret 更新的一致性？
+- **跨节点 Secret 同步的一致性**：当 Secret 更新后，各节点 kubelet 的同步时间是异步的。在滚动更新期间，同一 [[entities/deployment|Deployment]] 的不同 Pod 可能使用不同版本的 Secret。如何确保 Secret 更新的一致性？
 
 
 ## 相关

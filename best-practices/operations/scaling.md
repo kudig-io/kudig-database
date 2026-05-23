@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 扩缩容最佳实践
+title: Kubernetes 扩缩容最佳实践 [operations]
 description: 生产环境 Kubernetes 扩缩容配置的最佳实践指南
 category: best-practices/operations
 tags:
@@ -43,6 +43,7 @@ cross_refs:
 - type: best-practice
   path: ./deployment.md
   label: 部署策略最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 扩缩容最佳实践

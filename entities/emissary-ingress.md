@@ -1,5 +1,5 @@
 ---
-title: Emissary-Ingress
+title: Emissary-Ingress (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,9 +28,10 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-# Emissary-Ingress
+# Emissary-[[Ingress|Ingress]]
 
 > **CNCF 状态**: Incubating | **类别**: Networking | **主要语言**: Python, Go
 
@@ -79,7 +80,7 @@ Emissary-Ingress（原 Ambassador API Gateway）是 Kubernetes 原生的 API 网
 - [[envoy]] — Envoy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/emissary-ingress/emissary-ingress.md|emissary-ingress]]
+- emissary-ingress
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

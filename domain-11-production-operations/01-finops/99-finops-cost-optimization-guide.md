@@ -36,6 +36,7 @@ prerequisites:
 - prometheus-basics
 - iac-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: K8s FinOps 成本优化实践指南
@@ -46,8 +47,8 @@ tags:
 - production
 - operations
 - best-practices
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 - opa
 - hpa
 - vpa
@@ -63,7 +64,7 @@ estimated_read_time: 5min
 intent_queries:
 - K8s FinOps 成本优化实践指南 是什么
 - 如何 K8s FinOps 成本优化实践指南
-- Kubernetes 18 production operations 最佳实践
+- [[Kubernetes|Kubernetes]] 18 production operations 最佳实践
 trigger_keywords:
 - K8s
 - FinOps
@@ -535,27 +536,27 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
+- domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## Related
 
-- [[domain-20-application-patterns/19-cloudnative-devops-architecture.md|19-cloudnative-devops-architecture]]
+- 19-cloudnative-devops-architecture
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 
 ## See Also
 
-- [[domain-09-reliability-engineering/23-incident-response-handling.md|23-incident-response-handling]]
-- [[domain-09-reliability-engineering/24-capacity-planning-forecasting.md|24-capacity-planning-forecasting]]
-- [[domain-11-production-operations/99-greenops-sustainable-computing-guide.md|99-greenops-sustainable-computing-guide]]
-- [[domain-06-observability/99-karpenter-node-autoscaling-guide.md|99-karpenter-node-autoscaling-guide]]
+- 23-incident-response-handling
+- 24-capacity-planning-forecasting
+- 99-greenops-sustainable-computing-guide
+- 99-karpenter-node-autoscaling-guide

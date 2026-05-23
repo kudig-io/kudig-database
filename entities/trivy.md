@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - iac-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Trivy
@@ -44,7 +45,7 @@ Trivy (by Aqua Security) is a comprehensive, open-source security scanner for cl
 |-----------|-------------|--------|
 | Vulnerability | OS packages and language dependencies | CVE list with severity |
 | Misconfiguration | K8s manifests, Dockerfile, Terraform | Policy violations |
-| Secret Detection | Hardcoded credentials in code/repos | Exposed secrets |
+| Secret Detection | Hardcoded credentials in code/repos | Exposed [[Secrets|secrets]] |
 | SBOM Generation | Software Bill of Materials | CycloneDX/SPDX format |
 
 ## CI/CD Integration
@@ -64,38 +65,38 @@ trivy image --format spdx-json --output sbom.json nginx:1.25
 
 - [[falco]] — Falco
 - [[kyverno]] — Kyverno
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[supply-chain-security]] — Software Supply Chain Security
 - [[supply-chain-security|Supply Chain Security]]
 - [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.12.md|RELEASE-NOTES-0.12]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.26.md|RELEASE-NOTES-0.26]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.22.md|RELEASE-NOTES-0.22]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.16.md|RELEASE-NOTES-0.16]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.23.md|RELEASE-NOTES-0.23]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.17.md|RELEASE-NOTES-0.17]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.13.md|RELEASE-NOTES-0.13]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.18.md|RELEASE-NOTES-0.18]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.69.md|RELEASE-NOTES-0.69]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.19.md|RELEASE-NOTES-0.19]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.0.md|RELEASE-NOTES-0.0]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.5.md|RELEASE-NOTES-0.5]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.20.md|RELEASE-NOTES-0.20]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.14.md|RELEASE-NOTES-0.14]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.10.md|RELEASE-NOTES-0.10]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.24.md|RELEASE-NOTES-0.24]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.11.md|RELEASE-NOTES-0.11]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.25.md|RELEASE-NOTES-0.25]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.21.md|RELEASE-NOTES-0.21]]
-- [[domain-19-landscape-references/topic-release-notes/security/trivy/RELEASE-NOTES-0.15.md|RELEASE-NOTES-0.15]]
+- RELEASE-NOTES-0.12
+- RELEASE-NOTES-0.26
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-0.22
+- RELEASE-NOTES-0.16
+- RELEASE-NOTES-0.23
+- RELEASE-NOTES-0.17
+- RELEASE-NOTES-0.13
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-0.18
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-0.69
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-0.19
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-0.0
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-0.5
+- RELEASE-NOTES-0.20
+- RELEASE-NOTES-0.14
+- RELEASE-NOTES-0.10
+- RELEASE-NOTES-0.24
+- RELEASE-NOTES-0.11
+- RELEASE-NOTES-0.25
+- RELEASE-NOTES-0.21
+- RELEASE-NOTES-0.15

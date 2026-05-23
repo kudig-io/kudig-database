@@ -23,6 +23,7 @@ trigger_keywords:
 - Quiz
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8S Fundamentals Quiz
@@ -31,7 +32,7 @@ prerequisites:
 
 A. 删除 Pod 让 Deployment 重建
 B. 修改 Pod 的探针配置并重新 apply
-C. 重启 kubelet
+C. 重启 [[kubelet|kubelet]]
 D. 修改 Deployment 的探针配置
 E. 创建新的 Deployment
 
@@ -47,7 +48,7 @@ E. 创建新的 Deployment
 
 ## Related
 
-- [[skills/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshooting Lab Exam
+- [[skills/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
 - [[skills/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 - [[deployment]] — Deployment
 - [[entities/kubelet.md|kubelet]] — kubelet

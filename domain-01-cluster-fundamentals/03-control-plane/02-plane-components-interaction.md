@@ -69,11 +69,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 深度技术解析
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 深度技术解析
 
 ---
 
@@ -141,9 +142,9 @@ cross_refs:
 | 场景 | 协议 | 使用组件 | 优势 | 注意事项 |
 |------|------|----------|------|----------|
 | **API访问** | HTTPS REST | 客户端↔API Server | 标准化，易调试 | 性能相对较低 |
-| **内部通信** | gRPC | API Server↔etcd | 高性能，流式传输 | 调试复杂 |
+| **内部通信** | gRPC | API Server↔[[etcd|etcd]] | 高性能，流式传输 | 调试复杂 |
 | **控制器通信** | HTTP长连接 | Controller↔API Server | Watch机制支持 | 连接管理复杂 |
-| **节点通信** | gRPC + CRI | Kubelet↔Runtime | 标准化接口 | 需要CRI实现 |
+| **节点通信** | gRPC + CRI | [[kubelet|Kubelet]]↔Runtime | 标准化接口 | 需要CRI实现 |
 | **存储通信** | gRPC + etcd | API Server↔etcd | 一致性保证 | 网络延迟敏感 |
 
 ### 1.3 连接池管理
@@ -802,22 +803,22 @@ func (sched *Scheduler) scheduleOne(ctx context.Context) {
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
+- index.md|Domain-3 控制平面 — 开源项目索引]]
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
+- 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/quality-report.md|quality-report]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|01-plane-architecture-overview]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|03-plane-high-availability]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|04-plane-security-hardening]]
+- quality-report
+- 01-plane-architecture-overview
+- 03-plane-high-availability
+- 04-plane-security-hardening

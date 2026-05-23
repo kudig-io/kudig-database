@@ -1,5 +1,5 @@
 ---
-title: Strimzi
+title: Strimzi [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Strimzi
@@ -75,14 +76,14 @@ Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源项目，通过 Kubern
 ## Related
 
 - [[bootc]] — bootc
-- [[serverless-workflow]] — Serverless Workflow
+- [[serverless-workflow]] — [[Serverless Workflow|Serverless Workflow]]
 - [[cloudnativepg]] — CloudNativePG
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
-- [[domain-19-landscape-references/incubating/strimzi/strimzi.md|strimzi]]
-- [[entities/tremor.md|Tremor]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
+- 08-kafka-kubernetes-strimzi
+- strimzi
+- [[entities/tremor.md|[[Tremor|Tremor]]]]
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -1,5 +1,5 @@
 ---
-title: DaemonSet 异常故障树分析
+title: DaemonSet 异常故障树分析 (skills)
 description: NODE_OR --> NODE2[污点/容忍配置问题]
 category: general
 tags:
@@ -26,17 +26,18 @@ prerequisites:
 fta_id: FTA-DAEMONSET-001
 component: Daemonset
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
-title: "DaemonSet 异常故障树分析"
+title: "[[DaemonSet|DaemonSet]] 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get daemonset -A -o jsonpath='{range .items[?(@.status.desiredNumberScheduled != @.status.numberAvailable)]} {.metadata.namespace}/{.metadata.name}{\'\n\..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

@@ -1,5 +1,5 @@
 ---
-title: etcd 数据清理与成员移除 — 源码分析
+title: etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis)
 description: '## 概述'
 category: general
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: etcd 数据清理与成员移除 — 源码分析

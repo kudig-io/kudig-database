@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 职业教育培训架构设计
@@ -36,7 +37,7 @@ tags:
 - k8s
 - architecture
 - industry
-- statefulset
+- [[StatefulSet|statefulset]]
 - gpu
 - nvidia
 last_updated: 2026-05-18
@@ -49,7 +50,7 @@ audience:
 - 虚拟实训工程师
 estimated_read_time: 5min
 intent_queries:
-- vocational education kubernetes architecture
+- vocational education [[Kubernetes|kubernetes]] architecture
 - 职业教育K8s部署方案
 - 在线考试防作弊系统
 - 虚拟实训云桌面
@@ -305,7 +306,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -320,7 +321,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/46-satellite-internet.md|46-satellite-internet]]
-- [[domain-20-application-patterns/47-smart-mining.md|47-smart-mining]]
-- [[domain-20-application-patterns/49-livestream-ecommerce.md|49-livestream-ecommerce]]
-- [[domain-20-application-patterns/50-unmanned-retail.md|50-unmanned-retail]]
+- 46-satellite-internet
+- 47-smart-mining
+- 49-livestream-ecommerce
+- 50-unmanned-retail

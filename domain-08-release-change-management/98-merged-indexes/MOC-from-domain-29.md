@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # domain-29-automated-testing-quality MOC
@@ -55,12 +56,12 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-29 自动化测试与质量 — 开源项目索引]] |  | quality, testing |  |
-| 2 | [[domain-08-release-change-management/01-selenium-enterprise-automation.md|Selenium 企业级自动化测试平台]] |  | quality, testing |  |
-| 3 | [[domain-08-release-change-management/02-junit5-enterprise-testing.md|JUnit 5 企业级单元测试框架深度实践]] |  | quality, testing |  |
-| 4 | [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|企业级AI测试与质量保障深度实践]] |  | quality, testing |  |
-| 5 | [[domain-08-release-change-management/05-cypress-enterprise-automation.md|Cypress Enterprise Automation Testing 深度实践]] |  | quality, testing |  |
-| 6 | [[domain-08-release-change-management/06-playwright-enterprise-automation.md|Playwright Enterprise Automation Testing 深度实践]] |  | quality, testing |  |
+| 1 | Domain-29 自动化测试与质量 — 开源项目索引 |  | quality, testing |  |
+| 2 | Selenium 企业级自动化测试平台 |  | quality, testing |  |
+| 3 | JUnit 5 企业级单元测试框架深度实践 |  | quality, testing |  |
+| 4 | 企业级AI测试与质量保障深度实践 |  | quality, testing |  |
+| 5 | Cypress Enterprise Automation Testing 深度实践 |  | quality, testing |  |
+| 6 | Playwright Enterprise Automation Testing 深度实践 |  | quality, testing |  |
 
 ---
 
@@ -93,9 +94,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-29-automated-testing-quality 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-29-automated-testing-quality 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-29-automated-testing-quality 相关故障树分析 |
+| Skills 技能 | domain-29-automated-testing-quality 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

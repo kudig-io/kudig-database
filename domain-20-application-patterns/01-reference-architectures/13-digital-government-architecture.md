@@ -30,19 +30,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 数字政务Kubernetes生产架构设计
-description: '# 数字政务 Kubernetes 生产架构设计'
+description: '# 数字政务 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
 - apiserver
-- ingress
+- [[Ingress|ingress]]
 - rbac
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 - rag
 last_updated: 2026-05-18
@@ -527,7 +528,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -542,7 +543,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/11-smart-retail-architecture.md|11-smart-retail-architecture]]
-- [[domain-20-application-patterns/12-smart-logistics-architecture.md|12-smart-logistics-architecture]]
-- [[domain-20-application-patterns/14-smart-healthcare-architecture.md|14-smart-healthcare-architecture]]
-- [[domain-20-application-patterns/15-energy-power-architecture.md|15-energy-power-architecture]]
+- 11-smart-retail-architecture
+- 12-smart-logistics-architecture
+- 14-smart-healthcare-architecture
+- 15-energy-power-architecture

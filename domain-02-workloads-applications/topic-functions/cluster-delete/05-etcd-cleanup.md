@@ -1,7 +1,37 @@
 ---
+title: etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+- etcd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- etcd 数据清理与成员移除 — 源码分析 是什么
+- 如何 etcd 数据清理与成员移除 — 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- etcd
+- 数据清理与成员移除
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: etcd 数据清理与成员移除 — 源码分析
-description: 深入分析 control-plane 节点删除时 etcd 集群成员移除和数据清理的源码实现，涵盖 remove-etcd-member 阶段的 etcd 类型检测、数据目录获取、RemoveStackedEtcdMemberFromCluster
-  成员移除逻辑、唯一成员特殊处理以及外部 etcd 处理策略。
 category: cluster-delete
 tags:
 - etcd
@@ -14,13 +44,10 @@ tags:
 - quorum
 - raft
 last_updated: 2026-05-18
+description: 深入分析 control-plane 节点删除时 etcd 集群成员移除和数据清理的源码实现，涵盖 remove-etcd-member
+  阶段的 etcd 类型检测、数据目录获取、RemoveStackedEtcdMemberFromCluster 成员移除逻辑、唯一成员特殊处理以及外部 etcd
+  处理策略。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- etcd-operator
-- kubernetes-administrator
-estimated_read_time: 5min
 intent_queries:
 - kubernetes etcd member removal source code
 - RemoveStackedEtcdMemberFromCluster kubernetes
@@ -38,10 +65,12 @@ trigger_keywords:
 - etcd quorum
 - raft consensus
 - external etcd
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- etcd-operator
+- kubernetes-administrator
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -52,6 +81,17 @@ related_topics:
 - force-delete
 - ha-delete
 - troubleshooting
+domain_link: '[Control Plane](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # etcd 数据清理与成员移除 — 源码分析
@@ -407,4 +447,9 @@ rm -rf /var/lib/etcd
 
 ## Related
 
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]

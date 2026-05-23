@@ -593,7 +593,7 @@ output_pattern:
         next_step: "检查 DATABASE_URL 环境变量和数据库服务状态"
 ```
 
-### 2.4 NGINX/[[domain-19-landscape-references/01-cncf-landscape/graduated/envoy/envoy|Envoy]] 层错误
+### 2.4 [[entities/envoy|Envoy]] 层错误
 
 ```yaml
 output_pattern:

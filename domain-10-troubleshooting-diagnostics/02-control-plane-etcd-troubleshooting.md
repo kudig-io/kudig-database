@@ -62,9 +62,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
   label: '故障树: etcd'
+created: "2026-05-23"
 ---
 
-# 02 - etcd 故障排查 (etcd Troubleshooting)
+# 02 - [[etcd|etcd]] 故障排查 (etcd Troubleshooting)
 difficulty: "advanced"
 related_docs:
   - path: "01-control-plane-apiserver-troubleshooting.md"
@@ -80,7 +81,7 @@ related_docs:
 
 # 02 - etcd 故障排查 (etcd Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)
 
 ---
 
@@ -631,9 +632,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]

@@ -61,11 +61,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 02 - Service Mesh 深度解析与生产实践
+# 02 - [[Service|Service]]Service Mesh）|Service Mesh]] 深度解析与生产实践
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 专家级
 
 ---
 
@@ -73,8 +74,8 @@ cross_refs:
 ## 目录
 
 1. [Service Mesh 核心架构](#1-service-mesh-核心架构)
-2. [Istio 深度实践 (Sidecar & Ambient)](#2-istio-深度实践-sidecar--ambient)
-3. [Linkerd 生产部署](#3-linkerd-生产部署)
+2. [[entities/istio.md|Istio]] 深度实践 (Sidecar & Ambient)](#2-istio-深度实践-sidecar--ambient)
+3. [[entities/linkerd.md|Linkerd]] 生产部署](#3-linkerd-生产部署)
 4. [Cilium Service Mesh](#4-cilium-service-mesh)
 5. [多集群服务网格](#5-多集群服务网格)
 6. [性能优化与调优](#6-性能优化与调优)
@@ -283,22 +284,22 @@ pilot:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md|28-coredns-troubleshooting-optimization]]
-- [[domain-03-networking-traffic/29-egress-traffic-management.md|29-egress-traffic-management]]
-- [[domain-03-networking-traffic/31-multi-cluster-federation.md|31-multi-cluster-federation]]
-- [[domain-03-networking-traffic/32-multi-cluster-networking.md|32-multi-cluster-networking]]
+- 28-coredns-troubleshooting-optimization
+- 29-egress-traffic-management
+- 31-multi-cluster-federation
+- 32-multi-cluster-networking

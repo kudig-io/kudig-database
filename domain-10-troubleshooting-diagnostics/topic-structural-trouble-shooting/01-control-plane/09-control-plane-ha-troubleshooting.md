@@ -1,5 +1,5 @@
 ---
-title: 控制平面高可用故障处理指南
+title: 控制平面高可用故障处理指南 [topic-structural-trouble-shooting]
 description: 'title: 控制平面高可用故障处理指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 控制平面高可用故障处理指南
@@ -49,11 +50,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
 - job
 last_updated: 2026-05
@@ -87,7 +88,7 @@ k8s_versions:
 
 # 控制平面高可用故障处理指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境高可用保障
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境高可用保障
 
 ## 问题现象与影响分析
 
@@ -721,8 +722,8 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

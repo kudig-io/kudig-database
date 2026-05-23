@@ -36,6 +36,7 @@ prerequisites:
 - etcd-basics
 - backup-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -43,7 +44,7 @@ title: Day 21: 平台运维 + 综合实践
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - kubernetes 平台运维知识点
+  - [[Kubernetes|kubernetes]] 平台运维知识点
   - 集群生命周期管理备份恢复
   - kube-prometheus-stack 监控部署
   - k8s 综合运维实践
@@ -52,7 +53,7 @@ trigger_keywords:
   - 集群生命周期
   - 备份恢复
   - 监控
-  - Prometheus
+  - [[Prometheus|Prometheus]]
   - Alertmanager
   - 故障演练
   - 运维实践
@@ -128,7 +129,7 @@ related_topics:
 |----------|---------|---------|
 | Pod 故障 | 删除 Pod/OOM 注入 | 自动恢复/告警触发 |
 | 节点故障 | cordon/drain | Pod 迁移/服务可用 |
-| 网络故障 | NetworkPolicy/iptables | 降级策略/超时处理 |
+| 网络故障 | [[NetworkPolicy|NetworkPolicy]]/iptables | 降级策略/超时处理 |
 | 资源耗尽 | stress-ng | 告警/HPA/驱逐 |
 
 ---
@@ -146,7 +147,7 @@ related_topics:
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../domain-06-observability/[[domain-06-observability/05-alerting/21-monitoring-playbooks|21-monitoring-playbooks]].md`
+   - 文件: `../../[[domain-06-observability/05-alerting/21-monitoring-playbooks|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---

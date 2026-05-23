@@ -1,5 +1,5 @@
 ---
-title: AI Agent 基础与核心架构
+title: AI Agent 基础与核心架构 (domain-14-ai-ml-infra)
 description: 'title: AI Agent 基础与核心架构'
 category: general
 tags:
@@ -32,6 +32,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: AI Agent 基础与核心架构
@@ -43,10 +44,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- coredns
+- [[CoreDNS|coredns]]
 - hpa
-- statefulset
-- daemonset
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 - rbac
 last_updated: 2026-05
 difficulty: advanced
@@ -708,9 +709,9 @@ class HumanInLoopGate:
 |------|---------|
 | [02 - LLM 模型选型](./02-llm-foundation-models.md) | 为 Agent 选择合适的基座模型 |
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LangChain/AutoGen 等框架实现 Agent Loop |
-| [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | Agent 工具调用的详细规范 |
+| [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | Agent 工具调用的详细规范 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 单 Agent 到多 Agent 架构升级 |
-| [14 - Agent 赋能设计与落地路径](./[[domain-14-ai-ml-infra/14-agent-kudig-design-strategy.md|14-agent-kudig-design-strategy]].md) | K8s 运维 Agent 的顶层设计 |
+| [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s 运维 Agent 的顶层设计 |
 | [domain-14-ai-ml-infra/17-llm-inference-serving.md](../domain-14-ai-ml-infra/17-llm-inference-serving.md) | LLM 推理服务部署 |
 
 ---
@@ -721,7 +722,7 @@ class HumanInLoopGate:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
@@ -736,7 +737,7 @@ class HumanInLoopGate:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/49-openclaw-memory-mechanism.md|49-openclaw-memory-mechanism]]
-- [[domain-14-ai-ml-infra/50-openclaw-identity-mechanism.md|50-openclaw-identity-mechanism]]
-- [[domain-14-ai-ml-infra/02-llm-foundation-models.md|02-llm-foundation-models]]
-- [[domain-14-ai-ml-infra/03-agent-frameworks-comparison.md|03-agent-frameworks-comparison]]
+- 49-openclaw-memory-mechanism
+- 50-openclaw-identity-mechanism
+- 02-llm-foundation-models
+- 03-agent-frameworks-comparison

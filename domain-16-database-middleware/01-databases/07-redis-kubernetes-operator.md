@@ -53,9 +53,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
-# Redis Kubernetes Operator 企业级实践
+# Redis [[Kubernetes|Kubernetes]] Operator 企业级实践
 
 > **适用版本**: Redis 7.2 ~ 8.0 / Redis Operator v0.19  
 > **最后更新**: 2026-04-26  
@@ -859,21 +860,21 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|05-mongodb-enterprise-database]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|06-redis-enterprise-cache]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|99-cloudnativepg-enterprise-guide]]
+- 05-mongodb-enterprise-database
+- 06-redis-enterprise-cache
+- 08-kafka-kubernetes-strimzi
+- 99-cloudnativepg-enterprise-guide

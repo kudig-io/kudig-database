@@ -1,5 +1,5 @@
 ---
-title: GitOps(ArgoCD) 异常故障树分析
+title: GitOps(ArgoCD) 异常故障树分析 (skills)
 description: '- **范围**：Git 仓库访问、Helm/Kustomize/Jsonnet 清单渲染、Application/ApplicationSet 同步、目标集群连接、RBAC 与准入控制、Diff/Drift 检测、回滚与版本管理。'
 category: skills
 tags:
@@ -34,9 +34,10 @@ prerequisites:
 fta_id: FTA-GITOPS_ARGOCD-001
 component: Gitops Argocd
 severity: high
+created: "2026-05-23"
 ---
 
-# GitOps(ArgoCD) 异常故障树分析
+# GitOps([[ArgoCD|ArgoCD]]) 异常故障树分析
 
 <!-- condition: argocd app list 2>/dev/null | grep -E 'OutOfSync|Error|Degraded' 显示 ArgoCD 应用异常 -->
 
@@ -143,7 +144,7 @@ flowchart TD
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解'
+title: 节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]
 description: 'title: ''节点加入进阶: Discovery 与 TLS Bootstrap 详解'''
 category: general
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解'

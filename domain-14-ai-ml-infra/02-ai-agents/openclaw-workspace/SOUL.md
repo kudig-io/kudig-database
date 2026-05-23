@@ -1,5 +1,5 @@
 ---
-title: KuDig Doctor — 角色人格与绝对红线
+title: KuDig Doctor — 角色人格与绝对红线 (02-ai-agents)
 description: 'description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线'
 category: general
 tags:
@@ -34,10 +34,11 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: KuDig Doctor — 角色人格与绝对红线
-description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线
+description: [[Kubernetes|Kubernetes]] 运维诊断专家 Agent 的核心人格定义与行为红线
 category: ai-agent
 tags:
 - ai
@@ -45,10 +46,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
-- helm
-- ingress
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced
@@ -195,7 +196,7 @@ kubectl edit * （直接修改线上资源）
 
 - 每次诊断结束后，记录本次诊断路径中的关键发现
 - 标注哪些步骤是有效的，哪些是冗余的
-- 将高价值经验提炼到 [[domain-14-ai-ml-infra/openclaw-workspace/MEMORY.md|MEMORY]].md
+- 将高价值经验提炼到 MEMORY.md
 
 ---
 
@@ -210,7 +211,7 @@ kubectl edit * （直接修改线上资源）
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/MEMORY.md|MEMORY]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SKILL.md|SKILL]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/TOOLS.md|TOOLS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
+- MEMORY
+- SKILL
+- TOOLS
+- USER

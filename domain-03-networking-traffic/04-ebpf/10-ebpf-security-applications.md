@@ -55,6 +55,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
@@ -158,7 +159,7 @@ quadrantChart
 | 进程监控 | kprobe/tracepoint | auditd/strace | <2% | 极低 | 完整系统调用 |
 | 文件监控 | LSM Hook/kprobe | inotify/fanotify | <1% | 低 | VFS 层完整 |
 | 容器安全 | Seccomp+eBPF | AppArmor/SELinux | <1% | 极低 | 内核级别 |
-| 入侵检测 | Tetragon/Falco-eBPF | OSSEC/Suricata | <3% | 低 | 全栈可见 |
+| 入侵检测 | [[Tetragon|Tetragon]]/Falco-eBPF | OSSEC/Suricata | <3% | 低 | 全栈可见 |
 | DDoS 防护 | XDP | iptables | <5% vs 60%+ | 低 | 线速处理 |
 
 #<!-- chunk: 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem) -->## 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem)
@@ -4006,7 +4007,7 @@ KERNEL=$(uname -r)
 KERNEL_MAJOR=$(echo $KERNEL | cut -d. -f1)
 KERNEL_MINOR=$(echo $KERNEL | cut -d. -f2)
 echo -e "\n[1] 内核版本: $KERNEL"
-if [[ $KERNEL_MAJOR -gt 5 ]] || [[ $KERNEL_MAJOR -eq 5 && $KERNEL_MINOR -ge 15 ]]; then
+if $KERNEL_MAJOR -gt 5 || $KERNEL_MAJOR -eq 5 && $KERNEL_MINOR -ge 15; then
     echo -e "    ${GREEN}✓ 内核版本满足要求 (>=5.15)${NC}"
 else
     echo -e "    ${RED}✗ 内核版本不足，建议升级到 5.15+${NC}"
@@ -4014,7 +4015,7 @@ fi
 
 # 2. BTF 支持检查
 echo -e "\n[2] BTF 支持检查"
-if [[ -f /sys/kernel/btf/vmlinux ]]; then
+if -f /sys/kernel/btf/vmlinux; then
     echo -e "    ${GREEN}✓ BTF 可用 (/sys/kernel/btf/vmlinux)${NC}"
 else
     echo -e "    ${RED}✗ BTF 不可用，CO-RE 功能受限${NC}"
@@ -4033,7 +4034,7 @@ bpftool prog list | grep kprobe | wc -l | xargs -I{} echo "      {} 个 kprobe �
 echo -e "\n[4] eBPF Map 使用情况"
 for map_name in ip_stats_map blocklist_map conntrack_map; do
     MAP_ID=$(bpftool map list 2>/dev/null | grep "$map_name" | awk '{print $1}' | tr -d ':' | head -1)
-    if [[ -n "$MAP_ID" ]]; then
+    if -n "$MAP_ID"; then
         ENTRIES=$(bpftool map dump id $MAP_ID 2>/dev/null | grep -c "key" || echo "0")
         echo -e "    ${GREEN}✓${NC} $map_name: $ENTRIES 条目"
     else
@@ -4197,22 +4198,22 @@ eBPF 技术正在深刻重塑企业安全运营的方式：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-35-ebpf-technology MOC]]
+- domain-35-ebpf-technology MOC
 - [[domain-03-networking-traffic/README.md|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-35 eBPF 技术 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...]]
-- [[domain-03-networking-traffic/02-ebpf-map-types-data-structures.md|eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...]]
-- [[domain-03-networking-traffic/06-tetragon-runtime-security.md|Tetragon 运行时安全 (Tetragon Runtime Security)]]
-- [[domain-03-networking-traffic/07-hubble-network-observability.md|Hubble 网络可观测性 (Hubble Network Observability)]]
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|eBPF 性能优化实践 (eBPF Performance Optimization Practice)]]
+- Domain-35 eBPF 技术 — 开源项目索引
+- eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
+- eBPF Map 类型与数据结构 (eBPF Map Types and Data Structures)
+- Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+- Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+- Cilium Service Mesh 无 Sidecar 架构 (Cilium Service Mesh Sideca...
+- Tetragon 运行时安全 (Tetragon Runtime Security)
+- Hubble 网络可观测性 (Hubble Network Observability)
+- bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
+- eBPF 性能优化实践 (eBPF Performance Optimization Practice)
 
 ## See Also
 
-- [[domain-03-networking-traffic/08-bcc-bpftrace-tools.md|08-bcc-bpftrace-tools]]
-- [[domain-03-networking-traffic/09-ebpf-performance-optimization.md|09-ebpf-performance-optimization]]
-- [[domain-03-networking-traffic/01-ebpf-architecture-fundamentals.md|01-ebpf-architecture-fundamentals]]
-- [[domain-03-networking-traffic/02-ebpf-map-types-data-structures.md|02-ebpf-map-types-data-structures]]
+- 08-bcc-bpftrace-tools
+- 09-ebpf-performance-optimization
+- 01-ebpf-architecture-fundamentals
+- 02-ebpf-map-types-data-structures

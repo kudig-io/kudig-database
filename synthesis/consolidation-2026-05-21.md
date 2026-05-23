@@ -21,11 +21,17 @@ trigger_keywords:
 - '2026-05-21'
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[gitbook/src/SUMMARY]]"
+    type: related_to
+  - target: "[[skills/best-practices/scenarios/troubleshooting]]"
+    type: related_to
 ---
 
 # Consolidation Report — 2026-05-21
 
-## Summary
+## [[gitbook/src/SUMMARY|Summary]]
 - Broken links fixed: 0
 - Cross-references added: 2,883
 - Lifecycle states updated: 8
@@ -58,4 +64,4 @@ See `log.md` for full list. These are mostly MOC/README/evolution pages and edge
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-10-troubleshooting-diagnostics/SUMMARY.md|SUMMARY]]
+- [[skills/best-practices/scenarios/troubleshooting|troubleshooting]]-diagnostics/SUMMARY.md|SUMMARY]]

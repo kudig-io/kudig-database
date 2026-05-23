@@ -1,5 +1,5 @@
 ---
-title: OVN-Kubernetes
+title: OVN-Kubernetes (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - gitops-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # OVN-Kubernetes
@@ -64,7 +65,7 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 - [[cilium]]
 - [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
 - [[entities/cni-plugins.md|cni-plugins]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
 - [[concepts/storage-model.md|storage-model]]
 
 ## Related
@@ -75,7 +76,7 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/ovn-kubernetes/ovn-kubernetes.md|ovn-kubernetes]]
+- ovn-kubernetes
 - [[entities/antrea.md|Antrea]]
 - [[entities/kubeslice.md|KubeSlice]]
 - [[entities/kuadrant.md|Kuadrant]]

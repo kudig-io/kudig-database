@@ -1,5 +1,5 @@
 ---
-title: 疑难问题系统性排查方法论：配置优先（Configuration-First）
+title: 疑难问题系统性排查方法论：配置优先（Configuration-First） [topic-structural-trouble-shooting]
 description: 'title: 疑难问题系统性排查方法论：配置优先（Configuration-First）'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 疑难问题系统性排查方法论：配置优先（Configuration-First）
@@ -49,9 +50,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - coredns
 - daemonset
 - ingress
@@ -630,8 +631,8 @@ Agent 在执行配置检查时可使用以下结构化输出：
 | 资源 | 路径 | 关系 |
 |------|------|------|
 | **DNS 故障树分析** | [domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md) | FTA 因果分析模型 |
-| **DNS 结构化排查指南** | [03-networking/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md|26-dns-troubleshooting]].md](../domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
+| **DNS 结构化排查指南** | [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|02-dns-troubleshooting]].md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
+| **DNS 故障排查（domain-12）** | [[domain-10-troubleshooting-diagnostics/26-dns-troubleshooting|26-dns-troubleshooting]].md](../domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
 | **DNS Skill（Agent 可执行）** | [domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md](../domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
 | **FEBM 取证方法论** | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) | 事后复盘取证分析 |
 | **FTA 方法论合集** | [domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md](../domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |

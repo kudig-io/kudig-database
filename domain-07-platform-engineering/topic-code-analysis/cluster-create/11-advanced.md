@@ -36,6 +36,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 集群新建进阶关键机制详解

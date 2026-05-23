@@ -25,6 +25,7 @@ trigger_keywords:
 - 灾难恢复
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # containerd 灾难恢复
@@ -61,25 +62,25 @@ title: containerd 灾难恢复与业务连续性
 
 ## Related
 
-- [[flatcar]] — Flatcar Container Linux
+- [[flatcar]] — Flatcar Container Linuxux 生产环境速查卡|Linux]]
 - [[kcp]] — kcp
 - [[entities/cncf-security.md|cncf-security]] — CNCF 安全与合规项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
-- [[domain-19-landscape-references/graduated/containerd/07-containerd-disaster-recovery.md|07-containerd-disaster-recovery]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
+- 07-containerd-disaster-recovery
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.7
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
+- RELEASE-NOTES-1.6
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
 - [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-0.0.md|RELEASE-NOTES-0.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/containerd/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-0.0
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
 - [[entities/hyperlight.md|Hyperlight]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Ephemeral Volumes（临时卷）
@@ -39,7 +40,7 @@ Ephemeral Volumes（临时卷）是生命周期与 Pod 绑定的存储卷，随 
 - **生命周期绑定 Pod**：Pod 停止或重启后，临时卷中的数据会丢失（容器崩溃不会导致数据丢失，因为 Pod 仍在节点上）。
 - **内联定义**：临时卷直接在 Pod 规格中内联声明，简化了应用部署和管理。
 - **两类临时卷**：
-  1. **本地临时卷**：由 kubelet 管理，如 `emptyDir`、`configMap`、`secret`、`downwardAPI`。
+  1. **本地临时卷**：由 [[kubelet|kubelet]] 管理，如 `emptyDir`、`configMap`、`secret`、`downwardAPI`。
   2. **第三方临时卷**：由 CSI 驱动提供，包括 CSI 临时卷（inline CSI）和通用临时卷（generic ephemeral）。
 
 ## 关键机制或特性
@@ -167,6 +168,6 @@ kubectl get csinodes
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index|[[Storage 存储知识图谱索引|Storage 存储知识图谱索引]]]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # CronJob
@@ -51,7 +52,7 @@ CronJob 用于按重复的时间表创建 Job，类似于 Unix 系统中的 cron
 ## 关键机制或特性
 - **近似调度**：CronJob 控制器大约每分钟检查一次调度，某些情况下可能创建 0 个或 2 个 Job。
 - **100 次错过限制**：若从上次计划时间到现在错过的调度超过 100 次，控制器会报错并跳过启动。设置 `startingDeadlineSeconds` 可改变计算窗口。
-- ** Job 注解**：v1.32 起，CronJob 会在创建的 Job 上添加注解 `batch.[[entities/kubernetes|kubernetes]].io/cronjob-scheduled-timestamp`，记录原始计划时间（RFC3339）。
+- ** Job 注解**：v1.32 起，CronJob 会在创建的 Job 上添加注解 `batch.[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/cronjob-scheduled-timestamp`，记录原始计划时间（RFC3339）。
 - **幂等性**：由于可能出现重复执行或跳过，Job 任务应设计为幂等。
 
 ## 使用场景

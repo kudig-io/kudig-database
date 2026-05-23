@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 发布会主题演讲逐字稿

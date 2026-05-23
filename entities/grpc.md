@@ -1,5 +1,5 @@
 ---
-title: gRPC
+title: gRPC (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - service-mesh-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # gRPC
@@ -67,7 +68,7 @@ description: '## 项目概述'
 - [[in-toto]] — in-toto
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/grpc/grpc.md|grpc]]
+- grpc
 - [[references/observability-terms|K8s 可观测性术语参考]] — Cross-reference
 - [[references/k8s-networking-domain-guide|Kubernetes Networking Domain Guide]] — Cross-reference
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference

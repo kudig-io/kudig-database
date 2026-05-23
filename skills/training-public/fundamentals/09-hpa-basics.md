@@ -1,5 +1,5 @@
 ---
-title: 第九课：HPA - 自动伸缩
+title: 第九课：HPA - 自动伸缩 [fundamentals]
 description: 'description: 2. 掌握 HPA 的配置方法'
 category: learning
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -417,12 +418,12 @@ kubectl edit hpa <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../09-troubleshooting/09-common-problems.md) — 常见问题排查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/fundamentals/07-namespace-resource-quota.md|07-namespace-resource-quota]]
-- [[domain-11-production-operations/topic-learn/fundamentals/08-pv-pvc-basics.md|08-pv-pvc-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/10-health-check.md|10-health-check]]
-- [[domain-11-production-operations/topic-learn/fundamentals/11-job-cronjob.md|11-job-cronjob]]
+- 07-namespace-resource-quota
+- 08-pv-pvc-basics
+- 10-health-check
+- cronjob.md|11-job-cronjob]]

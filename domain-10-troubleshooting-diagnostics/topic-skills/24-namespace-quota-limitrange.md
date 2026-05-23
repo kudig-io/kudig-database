@@ -43,6 +43,7 @@ prerequisites:
 skill_id: SKILL-24_NAMESPACE_QUOTA_LIMITRANGE-001
 skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
@@ -59,7 +60,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "5-30min"
 risk_level: "medium"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "quota"
   - "limitrange"
@@ -110,7 +111,7 @@ cross_refs:
   - type: "domain"
     path: "../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md"
     label: "Quota/LimitRange 深度排查"
-  - type: "skill"
+  - type: "[[SKILL|skill]]"
     path: "./23-job-cronjob-failure.md"
     label: "Job/CronJob 故障诊断"
 authors:
@@ -121,7 +122,7 @@ tier: peripheral---
 
 # Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
-Namespace、ResourceQuota 和 LimitRange 是 Kubernetes 多租户资源隔离的核心机制。ResourceQuota 限制 Namespace 级别的资源总量，LimitRange 限制单个 Pod/容器的资源范围。这三者的配置错误或冲突会导致 Pod 创建被拒、资源分配不合理、Namespace 无法正常删除等问题，直接影响应用部署和集群资源管理。
+Namespace、ResourceQuota 和 LimitRange 是 [[Kubernetes|Kubernetes]] 多租户资源隔离的核心机制。ResourceQuota 限制 Namespace 级别的资源总量，LimitRange 限制单个 Pod/容器的资源范围。这三者的配置错误或冲突会导致 Pod 创建被拒、资源分配不合理、Namespace 无法正常删除等问题，直接影响应用部署和集群资源管理。
 
 本 Skill 覆盖 ResourceQuota 超限、LimitRange 配置冲突、Namespace Terminating 卡死、配额计算错误、默认值缺失等 10 种根因的诊断和修复。
 
@@ -261,7 +262,7 @@ kubectl get events -n kube-system --field-selector reason=FailedCreate
 # 检查是否有 Pod 因配额被驱逐
 kubectl get events --all-namespaces --field-selector reason=Evicted | grep -i quota
 ```
-> **判断规则**: 如果 kube-system、ingress、monitoring 等核心 Namespace 受影响 → 升级为 P0
+> **判断规则**: 如果 kube-system、[[Ingress|ingress]]、monitoring 等核心 Namespace 受影响 → 升级为 P0
 
 **Step T3**: 检查 LimitRange 冲突范围
 ```bash

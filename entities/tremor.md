@@ -1,5 +1,5 @@
 ---
-title: Tremor
+title: Tremor [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Tremor
@@ -57,7 +58,7 @@ Tremor 是一个高性能的事件处理引擎，专为处理大规模数据流�
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[operator-pattern]]
 
 ## Related
@@ -68,7 +69,7 @@ Tremor 是一个高性能的事件处理引擎，专为处理大规模数据流�
 - [[perses]] — Perses
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/tremor/tremor.md|tremor]]
-- [[entities/drasi.md|Drasi]]
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
+- tremor
+- [[entities/drasi.md|[[Drasi|Drasi]]]]
+- observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

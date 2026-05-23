@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 纳米材料架构设计
@@ -54,7 +55,7 @@ audience:
 - HPC工程师
 estimated_read_time: 5min
 intent_queries:
-- nanomaterials kubernetes architecture
+- nanomaterials [[Kubernetes|kubernetes]] architecture
 - 纳米材料高通量计算K8s
 - 材料基因组平台设计
 - 分子动力学模拟HPC
@@ -327,7 +328,7 @@ class HighThroughputStructureGenerator:
 
     def _get_wyckoff_positions(self, sg, elements):
         return [{'elements': list(elements.keys()),
-                 'coords': [[0, 0, 0], [0.5, 0.5, 0.5]]}]
+                 'coords': 0, 0, 0], [0.5, 0.5, 0.5}]
 
     def _create_lattice(self, sg, params):
         return Lattice.from_parameters(
@@ -787,7 +788,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -802,11 +803,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/86-solid-state-battery.md|86-solid-state-battery]]
-- [[domain-20-application-patterns/87-flexible-manufacturing.md|87-flexible-manufacturing]]
-- [[domain-20-application-patterns/89-crispr-gene-editing.md|89-crispr-gene-editing]]
-- [[domain-20-application-patterns/90-neuromorphic-computing.md|90-neuromorphic-computing]]
+- 86-solid-state-battery
+- 87-flexible-manufacturing
+- 89-crispr-gene-editing
+- 90-neuromorphic-computing
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

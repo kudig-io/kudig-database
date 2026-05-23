@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # KCL (Kusion Configuration Language)
@@ -60,7 +61,7 @@ KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与�
 
 ## 参考链接
 
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[deployment]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/gitops-principles.md|gitops-principles]]
@@ -74,7 +75,7 @@ KCL (Kusion Configuration Language) 是一个开源的基于约束的记录与�
 - [[tuf]] — TUF
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kcl/kcl.md|kcl]]
+- kcl
 - [[entities/kpt.md|kpt]]
 - [[entities/cdk8s.md|cdk8s (Cloud Development Kit for Kubernetes)]]
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference

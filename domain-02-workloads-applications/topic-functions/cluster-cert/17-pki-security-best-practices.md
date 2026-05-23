@@ -1,4 +1,45 @@
 ---
+title: Kubernetes PKI 安全最佳实践 (topic-code-analysis)
+description: 'title: Kubernetes PKI 安全最佳实践'
+category: general
+tags:
+- reference
+- security
+- best-practice
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- job
+- rbac
+- webhook
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes PKI 安全最佳实践 是什么
+- 如何 Kubernetes PKI 安全最佳实践
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Kubernetes
+- PKI
+- 安全最佳实践
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+- etcd-basics
+- tls-basics
+created: "2026-05-23"
+---
+
 title: Kubernetes PKI 安全最佳实践
 description: '# Kubernetes PKI 安全最佳实践'
 category: functions
@@ -38,12 +79,6 @@ trigger_keywords:
 - 最小权限
 - CA 离线存储
 - 证书轮换
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- etcd-basics
-- tls-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -51,6 +86,15 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/ca-generation
 - cluster-cert/cert-rotation
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Kubernetes PKI 安全最佳实践
@@ -125,7 +169,7 @@ kubeadm init → 检测外部 CA (ca.crt 存在, ca.key 不存在)
 | CA 证书 | 10 年 | 5-10 年 | CA 轮换成本极高，不宜过短 |
 | 服务端/客户端证书 | 1 年 | 90 天 - 1 年 | 平衡安全与运维负担 |
 | kubelet 证书 | 1 年 (CSR) | 默认即可 | 自动轮换，无需干预 |
-| Webhook 证书 | 不定 | 90 天 | [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理 |
+| Webhook 证书 | 不定 | 90 天 | cert-manager 自动管理 |
 | SA 签名密钥 | 无过期 | 每年手动轮换 | 无自动轮换机制 |
 
 ### 2.2 证书监控告警
@@ -431,4 +475,9 @@ echo "Inventory saved to $OUTPUT"
 
 ## Related
 
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[entities/sops.md|sops]]
+- [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

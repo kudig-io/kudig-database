@@ -54,6 +54,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
 # Sidecar 容器模式
@@ -61,7 +62,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-Sidecar 容器是 Kubernetes 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。
+Sidecar 容器是 [[Kubernetes|Kubernetes]] 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。
 
 <!-- chunk: Sidecar 架构 -->
 ## Sidecar 架构
@@ -858,7 +859,7 @@ spec:
 | **localhost** | 127.0.0.1 | TCP/HTTP 标准 | 需要端口协调 | 代理、API 调用 |
 | **Unix Socket** | 共享 Volume 中的 socket | 高性能、安全 | 需要两端支持 | 高性能 IPC |
 | **共享内存** | emptyDir (medium: Memory) | 最高性能 | 复杂、需要锁机制 | 极高性能场景 |
-| **环境变量** | Downward API | 简单 | 只能传递静态值 | 配置传递 |
+| **环境变量** | [[Downward API|Downward API]] | 简单 | 只能传递静态值 | 配置传递 |
 
 ### 通信配置示例
 
@@ -1103,31 +1104,31 @@ spec:
 ---
 
 **参考资料**:
-- [KEP-753: Sidecar Containers](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
+- [KEP-753: [[Sidecar Containers|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
 - [Kubernetes Sidecar 模式](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
-- [Istio Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
+- [[entities/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- Domain-4 工作负载 — 开源项目索引
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## See Also
 
-- [[domain-02-workloads-applications/12-advanced-pod-patterns.md|12-advanced-pod-patterns]]
-- [[domain-02-workloads-applications/13-container-lifecycle-hooks.md|13-container-lifecycle-hooks]]
-- [[domain-02-workloads-applications/15-container-runtime-interfaces.md|15-container-runtime-interfaces]]
-- [[domain-02-workloads-applications/16-runtime-class-configuration.md|16-runtime-class-configuration]]
+- 12-advanced-pod-patterns
+- 13-container-lifecycle-hooks
+- 15-container-runtime-interfaces
+- 16-runtime-class-configuration

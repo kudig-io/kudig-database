@@ -1,5 +1,5 @@
 ---
-title: Keycloak
+title: Keycloak [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Keycloak
@@ -75,13 +76,13 @@ Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点�
 
 ## Related
 
-- [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/argocd.md|[[ArgoCD|argocd]]]] — ArgoCD
 - [[ovn-kubernetes]] — OVN-Kubernetes
 - [[vitess]] — Vitess
 - [[argo]] — Argo Workflows
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/keycloak/keycloak.md|keycloak]]
+- keycloak
 - [[entities/pixie.md|Pixie]]
 - [[entities/kuberhealthy.md|Kuberhealthy]]
 - [[entities/kubescape.md|Kubescape]]

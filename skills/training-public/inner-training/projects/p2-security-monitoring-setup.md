@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -34,8 +35,8 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK RBAC RAM two-layer permission model
-  - Prometheus monitoring alerting configuration
-  - [[entities/kubernetes|kubernetes]] audit log SLS integration
+  - [[Prometheus|Prometheus]] monitoring|monitoring alerting]] configuration
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] audit log SLS integration
   - ResourceQuota LimitRange configuration
   - Security hardening best practices
 trigger_keywords:

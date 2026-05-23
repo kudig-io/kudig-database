@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # Domain 整合迁移执行报告

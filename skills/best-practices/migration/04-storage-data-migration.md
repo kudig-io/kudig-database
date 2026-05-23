@@ -1,5 +1,5 @@
 ---
-title: 04 - 存储与数据迁移
+title: 04 - 存储与数据迁移 [migration]
 description: 'title: 04 - 存储与数据迁移'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 04 - 存储与数据迁移
@@ -45,7 +46,7 @@ tags:
 - ceph
 - mysql
 - job
-- ingress
+- [[Ingress|ingress]]
 - rag
 - agent
 last_updated: 2026-05
@@ -104,8 +105,8 @@ k8s_versions:
 | **GlusterFS** | ReadWriteMany | 阿里云 NAS (CSI) | rsync 数据同步 |
 | **Local PV** | ReadWriteOnce | 阿里云 ESSD 云盘 (CSI) | tar + 传输 + 解压 |
 | **hostPath** | ReadWriteOnce | 阿里云 ESSD / NAS | 手动数据复制 |
-| **OpenEBS Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
-| **Longhorn** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
+| **[[OpenEBS|OpenEBS]] Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
+| **[[Longhorn|Longhorn]]** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
 
 #<!-- chunk: 1.2 存储容量规划 -->## 1.2 存储容量规划
 
@@ -622,14 +623,14 @@ done
 
 ---
 
-**上一步**: ← [03-应用工作负载迁移](./[[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]].md)
-**下一步**: → [05-网络迁移与流量切换](./[[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]].md)
+**上一步**: ← [03-应用工作负载迁移](./03-application-workload-migration.md)
+**下一步**: → [05-网络迁移与流量切换](./05-network-migration-traffic-cutover.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration KUDIG Database — Global MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -643,10 +644,10 @@ done
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]]
-- [[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]]
-- [[domain-11-production-operations/topic-best-practices/migration/06-stateful-services-migration.md|06-stateful-services-migration]]
+- 02-ack-target-cluster-design
+- 03-application-workload-migration
+- 05-network-migration-traffic-cutover
+- 06-stateful-services-migration
 
 ## Related
 

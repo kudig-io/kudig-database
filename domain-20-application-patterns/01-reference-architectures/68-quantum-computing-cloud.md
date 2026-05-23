@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 量子计算云平台架构设计
@@ -46,7 +47,7 @@ audience:
 - 算法工程师
 estimated_read_time: 5min
 intent_queries:
-- 量子计算云平台 Kubernetes 架构
+- 量子计算云平台 [[Kubernetes|Kubernetes]] 架构
 - 量子线路 QASM 编译执行
 - VQE 变分量子本征求解器
 - 量子经典混合计算调度
@@ -353,8 +354,8 @@ class QuantumSimulator:
     def _get_gate_matrix(self, gate: QuantumGate,
                           n_qubits: int) -> np.ndarray:
         gate_matrices = {
-            'h': np.array([[1, 1], [1, -1]]) / np.sqrt(2),
-            'x': np.array([[0, 1], [1, 0]]),
+            'h': np.array(1, 1], [1, -1) / np.sqrt(2),
+            'x': np.array(0, 1], [1, 0),
         }
 
         if gate.name in gate_matrices:
@@ -364,7 +365,7 @@ class QuantumSimulator:
             base = np.array([[np.exp(-1j*theta/2), 0],
                              [0, np.exp(1j*theta/2)]])
         elif gate.name == 'cx':
-            base = np.array([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
+            base = np.array(1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0)
         else:
             return np.eye(2**n_qubits)
 
@@ -818,7 +819,7 @@ spec:
 | 数据库 | **PolarDB** |
 | 对象存储 | **OSS（加密存储）** |
 | 可观测性 | **ARMS + SLS** |
-| 工作流 | **Argo Workflows** |
+| 工作流 | **[[Argo|Argo]]go Workflows|Argo Workflows]]** |
 
 #<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
 
@@ -848,7 +849,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -863,11 +864,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/66-space-internet.md|66-space-internet]]
-- [[domain-20-application-patterns/67-brain-computer-interface.md|67-brain-computer-interface]]
-- [[domain-20-application-patterns/69-6g-core-network.md|69-6g-core-network]]
-- [[domain-20-application-patterns/70-ecny-cbdc.md|70-ecny-cbdc]]
+- 66-space-internet
+- 67-brain-computer-interface
+- 69-6g-core-network
+- 70-ecny-cbdc
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

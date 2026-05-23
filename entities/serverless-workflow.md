@@ -1,5 +1,5 @@
 ---
-title: Serverless Workflow
+title: Serverless Workflow (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Workflow
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Serverless Workflow
@@ -60,12 +61,12 @@ Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义
 
 ## Related
 
-- [[confidential-containers]] — Confidential Containers (CoCo)
+- [[confidential-containers]] — [[Confidential Containers|Confidential Containers]]rs (CoCo)|Confidential Containers (CoCo)]]
 - [[k8sgpt]] — K8sGPT
 - [[trickster]] — Trickster
 - [[bootc]] — bootc
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/serverless-workflow/serverless-workflow.md|serverless-workflow]]
+- serverless-workflow
 - [[entities/slimfaas.md|SlimFaas]]
 - [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

@@ -34,6 +34,7 @@ prerequisites:
 - platform-engineering-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 节点弹性伸缩 Cluster Autoscaler 源码分析

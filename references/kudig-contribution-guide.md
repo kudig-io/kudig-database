@@ -22,6 +22,7 @@ trigger_keywords:
 - 项目概览与版本发布说明
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 贡献指南、项目概览与版本发布说明

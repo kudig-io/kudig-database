@@ -38,9 +38,10 @@ prerequisites:
 - policy-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: wasmCloud 平台
+title: [[wasmCloud|wasmCloud]] 平台
 description: 1. [wasmCloud 概述](#1-wasmcloud-概述)
 category: webassembly-cloud-native
 tags:
@@ -48,10 +49,10 @@ tags:
 - wasm
 - webassembly
 - cloud-native
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- helm
+- [[Jaeger|jaeger]]
+- [[Helm|helm]]
 - docker
 - opa
 last_updated: 2026-05
@@ -2327,22 +2328,22 @@ kubectl -n wasmcloud exec -it nats-box -- \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|02-containerd-wasm-shim]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|03-spinkube-framework]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|05-wasmedge-runtime]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|06-wasm-component-model]]
+- 02-containerd-wasm-shim
+- 03-spinkube-framework
+- 05-wasmedge-runtime
+- 06-wasm-component-model

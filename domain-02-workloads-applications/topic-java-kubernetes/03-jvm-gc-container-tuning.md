@@ -1,5 +1,5 @@
 ---
-title: JVM GC 容器调优深度指南
+title: JVM GC 容器调优深度指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# JVM GC 容器调优深度指南'
 category: java-kubernetes
 tags:
@@ -33,11 +33,12 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # JVM GC 容器调优深度指南
 
-> **适用版本**: JDK 17+ / JDK 21+ (推荐) / JDK 24+ / Kubernetes v1.28+
+> **适用版本**: JDK 17+ / JDK 21+ (推荐) / JDK 24+ / [[Kubernetes|Kubernetes]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---
@@ -368,7 +369,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 ## 四、最佳实践
 
-### 4.1 Prometheus JMX Exporter 监控 GC
+### 4.1 [[Prometheus|Prometheus]] JMX Exporter 监控 GC
 
 #### 方式一：Java Agent 注入（推荐）
 

@@ -1,5 +1,5 @@
 ---
-title: HolmesGPT
+title: HolmesGPT [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # HolmesGPT
@@ -68,13 +69,13 @@ HolmesGPT 是一个基于大语言模型（LLM）的 Kubernetes 故障排查助�
 
 ## Related
 
-- [[kubeelasti]] — KubeElastic
+- [[kubeelasti]] — [[entities/kubeelasti.md|KubeElastic]]
 - [[xregistry]] — xRegistry
 - [[carvel]] — Carvel
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/holmesgpt/holmesgpt.md|holmesgpt]]
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
+- holmesgpt
+- observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

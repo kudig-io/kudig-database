@@ -1,5 +1,5 @@
 ---
-title: Artifact Hub
+title: Artifact Hub [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Artifact Hub
@@ -80,6 +81,6 @@ Artifact Hub 是云原生制品的发现和分发平台。它是 CNCF 生态系�
 - [[falco]] — Falco
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/artifact-hub/artifact-hub.md|artifact-hub]]
-- [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- artifact-hub
+- [[entities/cncf-cicd|[[CNCF CI/CD 与发布管理项目全景|CNCF CI/CD 与发布管理项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

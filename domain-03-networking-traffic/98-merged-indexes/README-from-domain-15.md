@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - networking-basics
+created: "2026-05-23"
 ---
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: 第十六章：团队能力建设
+title: 第十六章：团队能力建设 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
 category: fta
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 fta_id: FTA-16_TEAM_CAPABILITY_BUILDING-001
 component: 16 Team Capability Building
 severity: high
+created: "2026-05-23"
 ---
 
 title: 第十六章：团队能力建设
@@ -75,8 +76,8 @@ k8s_versions:
 
 > **所属部分**: 第四部分 - FTA 系统工程实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十五章：FTA 质量评估与优化](./15-fta-quality-assessment.md)  
-> **下一章**: [第十七章：行业标杆案例分析](./17-industry-benchmarks.md)
+> **上一章**: 第十五章：FTA 质量评估与优化](./15-fta-quality-assessment.md)  
+> **下一章**: 第十七章：行业标杆案例分析](./17-industry-benchmarks.md)
 
 ---
 
@@ -122,7 +123,7 @@ k8s_versions:
 
 | 角色 | 必备技能 | 加分项 | 培养路径 |
 |------|---------|--------|---------|
-| **FTA 架构师** | 系统架构设计、可靠性工程、概率统计、Kubernetes 深度 | 航空/核工业 FTA 经验、SRE 管理经验 | 资深 SRE → FTA 培训 → 认证 |
+| **FTA 架构师** | 系统架构设计、可靠性工程、概率统计、[[Kubernetes|Kubernetes]] 深度 | 航空/核工业 FTA 经验、SRE 管理经验 | 资深 SRE → FTA 培训 → 认证 |
 | **知识工程师** | 故障分析能力、技术写作、图数据库(Neo4j)、领域知识 | 知识图谱、NLP、本体建模 | 运维工程师 → 故障分析培训 → 建模实战 |
 | **Agent 开发** | Python、Kubernetes API、LLM/AI 框架 | 强化学习、分布式系统、自然语言处理 | 后端工程师 → Agent 框架培训 → 项目实战 |
 | **平台工程师** | DevOps、CI/CD、监控系统、Kubernetes 运维 | 大规模系统运维、性能调优 | 运维工程师 → 平台工程培训 → 系统集成 |

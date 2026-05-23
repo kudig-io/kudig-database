@@ -1,5 +1,5 @@
 ---
-title: 镜像与镜像仓库故障排查指南
+title: 镜像与镜像仓库故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 镜像与镜像仓库故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 镜像与镜像仓库故障排查指南
@@ -47,8 +48,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
-- containerd
+- [[kubelet|kubelet]]
+- [[containerd|containerd]]
 - cri-o
 - docker
 - harbor
@@ -753,12 +754,12 @@ kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
 - [容器运行时故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]].md)
-- [ConfigMap/Secret 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]].md)
-- [Pod 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [ConfigMap/Secret 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting|06-configmap-secret-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|01-pod-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 

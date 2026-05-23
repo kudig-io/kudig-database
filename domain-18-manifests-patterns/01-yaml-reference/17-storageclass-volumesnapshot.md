@@ -46,12 +46,13 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 17 - StorageClass / VolumeSnapshot YAML 配置参考
 
 > **文档版本**: 2026-02  
-> **适用范围**: Kubernetes v1.25 - v1.33
+> **适用范围**: [[Kubernetes|Kubernetes]] v1.25 - v1.33
 > **资源类型**: StorageClass, VolumeSnapshot, VolumeSnapshotClass, VolumeSnapshotContent  
 > **API 版本**: storage.k8s.io/v1, snapshot.storage.k8s.io/v1  
 > **用途**: 动态存储供给与卷快照管理
@@ -1318,7 +1319,7 @@ kubectl get volumesnapshot -n database
 # mysql-snapshot    true         mysql-pvc     10d  (状态 Terminating)
 ```
 
-**原因**: 快照有 finalizers 保护
+**原因**: 快照有 [[Finalizers|finalizers]] 保护
 
 **排查步骤**:
 ```bash
@@ -1438,7 +1439,7 @@ groups:
 
 #<!-- chunk: 8.1 官方文档 -->## 8.1 官方文档
 
-- [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+- Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 - [Volume Snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 - [CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/)
 
@@ -1466,25 +1467,25 @@ groups:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/15-persistentvolume-reference.md|15-persistentvolume-reference]]
-- [[domain-18-manifests-patterns/16-persistentvolumeclaim-reference.md|16-persistentvolumeclaim-reference]]
-- [[domain-18-manifests-patterns/18-csi-driver-resources.md|18-csi-driver-resources]]
-- [[domain-18-manifests-patterns/19-serviceaccount-token.md|19-serviceaccount-token]]
+- 15-persistentvolume-reference
+- 16-persistentvolumeclaim-reference
+- 18-csi-driver-resources
+- 19-serviceaccount-token
 
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node.md|14-storage-node]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-create/22-storage-volumes.md|22-storage-volumes]]

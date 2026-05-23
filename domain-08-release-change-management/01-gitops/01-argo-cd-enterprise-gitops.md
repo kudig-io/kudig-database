@@ -60,13 +60,14 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
-# Argo CD企业级GitOps实践指南
+# [[Argo|Argo]] CD企业级GitOps实践指南
 
 > **作者**: GitOps架构专家 | **版本**: v2.0 | **更新时间**: 2026-04-24
 > **适用场景**: 企业级持续交付平台 | **复杂度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Argo CD v3.3.x / Helm Chart v7.8.x
+> **适用版本**: Argo CD v3.3.x / [[Helm|Helm]] Chart v7.8.x
 
 ---
 
@@ -86,7 +87,7 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 Kubernetes 集群中的实际状态，并驱动集群状态向期望状态收敛。Argo CD 的核心设计理念是声明式、版本化和自动化——所有配置变更通过 Git 提交触发，每一次部署都可审计、可回滚。
+Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 [[Kubernetes|Kubernetes]] 集群中的实际状态，并驱动集群状态向期望状态收敛。Argo CD 的核心设计理念是声明式、版本化和自动化——所有配置变更通过 Git 提交触发，每一次部署都可审计、可回滚。
 
 在企业级场景中，Argo CD 面临的核心挑战包括：大规模应用管理（单实例管理 1000+ 应用）、多集群多租户隔离、安全合规（RBAC、SSO、审计）、高可用部署（消除单点故障）以及与现有 CI/CD 工具链的集成。本文档基于大规模生产环境的应用经验，系统性地覆盖了从架构设计到运维管理的完整技术方案，帮助企业在 Kubernetes 生态中构建安全、可靠的 GitOps 交付体系。
 
@@ -1211,26 +1212,31 @@ Repo Server 错误:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|Flux GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
+- Flux GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/99-tekton-cicd-guide.md|99-tekton-cicd-guide]]
-- [[domain-08-release-change-management/99-tekton-java-cicd-guide.md|99-tekton-java-cicd-guide]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|02-jenkins-enterprise-cicd]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|03-gitlab-enterprise-cicd]]
+- 99-tekton-cicd-guide
+- 99-tekton-java-cicd-guide
+- 02-jenkins-enterprise-cicd
+- 03-gitlab-enterprise-cicd
 
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+## 相关合成分析
+
+- [[synthesis/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
+

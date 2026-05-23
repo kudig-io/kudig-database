@@ -35,11 +35,12 @@ prerequisites:
 skill_id: SKILL-TROUBLESHOOTING_LAB_EXAM-001
 skill_name: 故障排查实验考核
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 故障排查实验考核
 
-> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[entities/kubernetes|k8s]] 1.28-1.33 | **时间**: 90 分钟
+> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33 | **时间**: 90 分钟
 
 ---
 
@@ -62,7 +63,7 @@ version: 1.0.0
 
 - 命名空间：`production`
 - Pod 名称：`payment-api-7d9f8b5c6-x2kqm`
-- 镜像：`payment-service:v1.2`
+- 镜像：`payment-[[Service|service]]:v1.2`
 - 资源请求：`cpu: 2, memory: 4Gi`
 
 ### 考核要求

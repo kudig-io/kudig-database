@@ -1,5 +1,5 @@
 ---
-title: openGemini
+title: openGemini (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - openGemini
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # openGemini
@@ -61,13 +62,13 @@ openGemini 是一个高性能、分布式时序数据库，专为物联网 (IoT)
 
 ## Related
 
-- [[notary-project]] — Notary Project
+- [[notary-project]] — [[Notary Project|Notary Project]]
 - [[coredns]] — CoreDNS
 - [[contour]] — Contour
 - [[kured]] — Kured (KUbernetes REboot Daemon)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/opengemini/opengemini.md|opengemini]]
+- opengemini
 - [[entities/oxia.md|Oxia]]
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

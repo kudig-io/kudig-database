@@ -54,6 +54,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/git.md
   label: '速查卡: git'
+created: "2026-05-23"
 ---
 
 # Tekton Java CI/CD 流水线实践指南
@@ -81,9 +82,9 @@ cross_refs:
 
 本指南是 Tekton CI/CD 实践的 Java 语言专项指南，提供从 Maven/Gradle 构建到容器镜像推送的完整 CI/CD 流水线方案。Java 是企业级应用开发的主流语言，Spring Boot 和 Quarkus 等框架在微服务架构中被广泛采用。在云原生场景中，Java 应用的 CI/CD 流水线需要处理编译构建、依赖管理、单元测试、代码质量、安全扫描、容器镜像构建和多环境部署等环节。
 
-Tekton 在 Java CI/CD 中的优势在于完全容器化的构建环境——每个构建步骤在独立的容器中执行，避免了构建环境的"雪崩效应"。通过 Workspace PVC 缓存 Maven 本地仓库（`~/.m2/repository`），可以显著加速依赖下载。Jib 和 Buildpacks 提供了无需 Dockerfile 的 Java 容器镜像构建能力，且无需 Docker 守护进程（Dockerless），非常适合 Tekton 的非特权执行环境。
+Tekton 在 Java CI/CD 中的优势在于完全容器化的构建环境——每个构建步骤在独立的容器中执行，避免了构建环境的"雪崩效应"。通过 Workspace PVC 缓存 Maven 本地仓库（`~/.m2/repository`），可以显著加速依赖下载。Jib 和 [[Buildpacks|Buildpacks]] 提供了无需 Dockerfile 的 Java 容器镜像构建能力，且无需 Docker 守护进程（Dockerless），非常适合 Tekton 的非特权执行环境。
 
-本指南覆盖 Maven/Gradle Task 定义、Jib/Buildpacks 镜像构建、安全扫描集成、GitOps 集成、缓存策略和完整 Pipeline 模板，帮助 Java 团队在 Kubernetes 上构建高效、安全的 CI/CD 流水线。
+本指南覆盖 Maven/Gradle Task 定义、Jib/Buildpacks 镜像构建、安全扫描集成、GitOps 集成、缓存策略和完整 Pipeline 模板，帮助 Java 团队在 [[Kubernetes|Kubernetes]] 上构建高效、安全的 CI/CD 流水线。
 
 ---
 
@@ -1138,25 +1139,25 @@ Java 构建优化清单:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-08-release-change-management MOC]]
+- domain-08-release-change-management MOC
 - [[domain-08-release-change-management/README.md|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|Argo CD企业级GitOps实践指南]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|Jenkins企业级CI/CD流水线深度实践]]
-- [[domain-08-release-change-management/03-gitlab-enterprise-cicd.md|GitLab CI/CD 企业级流水线自动化平台]]
-- [[domain-08-release-change-management/04-github-actions-enterprise.md|GitHub Actions Enterprise CI/CD Platform 深度实践]]
-- [[domain-08-release-change-management/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD 深度实践]]
-- [[domain-08-release-change-management/06-flux-gitops-continuous-delivery.md|Flux v2 GitOps 持续交付深度实践]]
-- [[domain-08-release-change-management/07-gitops-security-compliance.md|GitOps 安全与合规深度实践]]
-- [[domain-08-release-change-management/08-cicd-pipeline-patterns.md|CI/CD 流水线模式与渐进式交付深度实践]]
-- [[domain-08-release-change-management/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
+- Domain-23 GitOps & CI/CD — 开源项目索引
+- Argo CD企业级GitOps实践指南
+- Jenkins企业级CI/CD流水线深度实践
+- GitLab CI/CD 企业级流水线自动化平台
+- GitHub Actions Enterprise CI/CD Platform 深度实践
+- Tekton 云原生 CI/CD 深度实践
+- Flux v2 GitOps 持续交付深度实践
+- GitOps 安全与合规深度实践
+- CI/CD 流水线模式与渐进式交付深度实践
+- Argo CD 企业级 GitOps 实践指南
 
 ## See Also
 
-- [[domain-08-release-change-management/99-flux-gitops-guide.md|99-flux-gitops-guide]]
-- [[domain-08-release-change-management/99-tekton-cicd-guide.md|99-tekton-cicd-guide]]
-- [[domain-08-release-change-management/01-argo-cd-enterprise-gitops.md|01-argo-cd-enterprise-gitops]]
-- [[domain-08-release-change-management/02-jenkins-enterprise-cicd.md|02-jenkins-enterprise-cicd]]
+- 99-flux-gitops-guide
+- 99-tekton-cicd-guide
+- 01-argo-cd-enterprise-gitops
+- 02-jenkins-enterprise-cicd
 
 ## Related
 

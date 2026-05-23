@@ -54,9 +54,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
+# [[Kubernetes|Kubernetes]] vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 > 作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03
 > 适用场景: SaaS 平台多租户、开发测试隔离、CI/CD 环境、平台工程 | 复杂度: ⭐⭐⭐⭐
@@ -65,7 +66,7 @@ authors:
 
 <!-- chunk: 摘要 -->## 摘要
 
-虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 Kubernetes API 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
+虚拟集群（Virtual Cluster）技术在 2026 年已成为 Kubernetes 多租户架构的主流方案之一。vCluster（由 Loft Labs 开源，CNCF Sandbox 项目）通过在物理 Kubernetes 集群中运行轻量级虚拟 Kubernetes 控制平面，为每个租户提供完整、隔离的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 体验，同时共享底层物理资源，兼顾了隔离性、成本和运维效率。
 
 本文深度探讨 vCluster 的核心架构、生产部署实践、与 Cluster API 的集成模式，以及多租户 SaaS 平台的完整架构设计。通过真实的 CI/CD 自动化用例、安全边界分析和成本分配模型，帮助平台工程师选择最适合的多租户策略，构建高效、安全、可扩展的多租户 Kubernetes 平台。
 
@@ -219,7 +220,7 @@ graph TB
 
 vCluster 支持三种虚拟控制平面实现：
 
-| 特性 | K3s（默认） | K0s | Vanilla K8s |
+| 特性 | [[k3s|K3s]]（默认） | [[K0s|K0s]] | Vanilla K8s |
 |-----|------------|-----|------------|
 | **二进制大小** | ~70MB | ~70MB | ~150MB |
 | **内存占用** | ~150MB | ~120MB | ~250MB |
@@ -1491,25 +1492,25 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-papers MOC]]
+- domain-19-papers MOC
 - [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-19 论文与参考 — 开源项目索引]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...]]
-- [[domain-19-landscape-references/03-kubernetes-zero-trust-security-architecture.md|Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...]]
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...]]
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide.md|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]
-- [[domain-19-landscape-references/06-kubernetes-cost-governance-finops-practice.md|Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...]]
-- [[domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md|Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...]]
-- [[domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md|Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...]]
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md|Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...]]
+- Domain-19 论文与参考 — 开源项目索引
+- Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
+- Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
+- Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
+- Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
+- Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
+- Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
+- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
+- Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 
 ## See Also
 
-- [[domain-19-landscape-references/24-kubernetes-policy-as-code-governance-automation.md|24-kubernetes-policy-as-code-governance-automation]]
-- [[domain-19-landscape-references/25-gke-autopilot-google-cloud-ai-infrastructure.md|25-gke-autopilot-google-cloud-ai-infrastructure]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|01-kubernetes-production-readiness-assessment]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|02-kubernetes-large-scale-performance-optimization]]
+- 24-kubernetes-policy-as-code-governance-automation
+- 25-gke-autopilot-google-cloud-ai-infrastructure
+- 01-kubernetes-production-readiness-assessment
+- 02-kubernetes-large-scale-performance-optimization
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: WasmEdge
+title: WasmEdge (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # WasmEdge
@@ -62,19 +63,19 @@ WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行
 ## 参考链接
 
 - [[containerd]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[pod-lifecycle]]
 
 ## Related
 
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQL 高级查询
+- [[02-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
 - [[capsule]] — Capsule
 - [[spinkube]] — SpinKube
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|05-wasmedge-runtime]]
-- [[domain-15-specialized-tech/99-wasmedge-cloud-native-guide.md|99-wasmedge-cloud-native-guide]]
-- [[domain-19-landscape-references/sandbox/wasmedge/wasmedge.md|wasmedge]]
+- 05-wasmedge-runtime
+- 99-wasmedge-cloud-native-guide
+- wasmedge
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

@@ -56,9 +56,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
   label: '故障树: etcd'
+created: "2026-05-23"
 ---
 
-# 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+# 07 - 分布式共识与 [[etcd|etcd]] 原理 (etcd & Raft)
 
 <!-- chunk: 生产环境 etcd 核心痛点：Compaction 与 Defrag -->
 ## 生产环境 etcd 核心痛点：Compaction 与 Defrag
@@ -722,25 +723,25 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals KUDIG Database — Global MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- index.md|Domain-2 设计原则 — 开源项目索引]]
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 控制器模式与调谐循环
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05-informer-workqueue]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06-resource-version-control]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08-high-availability-patterns]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09-source-code-walkthrough]]
+- 05-informer-workqueue
+- 06-resource-version-control
+- 08-high-availability-patterns
+- 09-source-code-walkthrough
 
 ## Related
 

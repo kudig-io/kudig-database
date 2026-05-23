@@ -1,5 +1,5 @@
 ---
-title: Service Mesh (Istio) 深度排查与性能调优指南
+title: Service Mesh (Istio) 深度排查与性能调优指南 [topic-structural-trouble-shooting]
 description: 'title: Service Mesh (Istio) 深度排查与性能调优指南'
 category: structural-troubleshooting
 tags:
@@ -48,9 +48,10 @@ prerequisites:
 - policy-basics
 - backup-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
-title: Service Mesh (Istio) 深度排查与性能调优指南
+title: [[Service|Service]]Service Mesh）|Service Mesh]] ([[Istio|Istio]]) 深度排查与性能调优指南
 description: '# Service Mesh (Istio) 深度排查与性能调优指南'
 category: structural-troubleshooting
 tags:
@@ -2480,8 +2481,8 @@ verification: |
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

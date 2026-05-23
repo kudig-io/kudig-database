@@ -35,11 +35,12 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 14 - 变更管理与发布策略
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **生产环境实战经验总结**: 基于万级节点集群变更管理经验，涵盖从发布策略到变更控制的全方位最佳实践
 
@@ -218,7 +219,7 @@ estimatedRollbackTime: "30 minutes"
 - **定义**：集群架构、网络拓扑、存储系统变更
 - **典型场景**：
   - 添加新节点池
-  - 网络插件升级（如 Calico → Cilium）
+  - 网络插件升级（如 Calico → [[Cilium|Cilium]]）
   - 存储类（StorageClass）变更
 - **审批流程**：
   - 架构评审委员会审批
@@ -2273,7 +2274,7 @@ if [ $(echo "$CURRENT_USAGE $TOTAL_CAPACITY" | awk '{print ($1/$2)*100}') -gt 80
   echo "⚠️  集群CPU使用率已超过80%，发布可能影响性能"
   read -p "是否继续发布? (y/N): " -n 1 -r
   echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  if ! $REPLY =~ ^[Yy]$; then
     echo "发布已取消"
     exit 1
   fi

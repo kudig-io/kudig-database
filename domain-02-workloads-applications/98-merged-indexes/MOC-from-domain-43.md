@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # domain-java-kubernetes [[MOC.md|MOC]]

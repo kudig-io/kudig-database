@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Daily Check Quiz
@@ -47,7 +48,7 @@ E. 磁盘空间不足
 
 ### Day 2（周二）
 
-**题目**：你执行 `kubectl get pods` 发现某个 Pod 处于 `Pending` 状态超过 5 分钟。执行 `kubectl describe pod` 看到事件 "0/3 nodes are available: 1 Insufficient cpu, 2 node(s) had taint". 以下哪个操作最适合作为第一步？
+**题目**：你执行 `kubectl get [[Pods|pods]]` 发现某个 Pod 处于 `Pending` 状态超过 5 分钟。执行 `kubectl describe pod` 看到事件 "0/3 nodes are available: 1 Insufficient cpu, 2 node(s) had taint". 以下哪个操作最适合作为第一步？
 
 A. 删除 Pod 重新创建
 B. 增加节点资源

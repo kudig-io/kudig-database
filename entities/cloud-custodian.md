@@ -1,5 +1,5 @@
 ---
-title: Cloud Custodian
+title: Cloud Custodian [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Custodian
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Cloud Custodian
@@ -67,11 +68,11 @@ Cloud Custodian 是云资源治理和管理的规则引擎，通过 YAML 策略�
 
 - [[kuasar]] — Kuasar
 - [[longhorn]] — Longhorn
-- [[open-cluster-management]] — Open Cluster Management (OCM)
+- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
 - [[cdk8s]] — cdk8s (Cloud Development Kit for Kubernetes)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/cloud-custodian/cloud-custodian.md|cloud-custodian]]
+- cloud-custodian
 - [[entities/capsule.md|Capsule]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

@@ -28,17 +28,18 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Gang Scheduling
 
 ## 概述
 
-Gang Scheduling（组调度）确保一组 Pod 以"全有或全无"的方式进行调度。如果集群无法容纳整个组（或定义的最低数量），则组中没有任何 Pod 会被绑定到节点上。该特性在 Kubernetes v1.35 中为 alpha 状态。
+Gang Scheduling（组调度）确保一组 Pod 以"全有或全无"的方式进行调度。如果集群无法容纳整个组（或定义的最低数量），则组中没有任何 Pod 会被绑定到节点上。该特性在 [[Kubernetes|Kubernetes]] v1.35 中为 alpha 状态。
 
 ## 核心概念/原理
 
-Gang Scheduling 依赖于 Workload API。需要启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组。
+Gang Scheduling 依赖于 [[Workload API|Workload API]]。需要启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组。
 
 当启用 `GangScheduling` 插件时，调度器会更改属于 Workload 中 `gang` pod group 策略的 Pod 的生命周期：
 
@@ -173,7 +174,7 @@ kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 - [调度框架](./scheduling-framework.md) — PreEnqueue / Permit 扩展点
 - [Pod 调度就绪性](./pod-scheduling-readiness.md) — schedulingGates 与 gang 调度互补
 - [Pod 优先级与抢占](./pod-priority-and-preemption.md) — gang 组 Pod 的优先级设置
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 gang 组快速准备节点
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — 为 gang 组快速准备节点
 
 ## 参考链接
 
@@ -181,6 +182,6 @@ kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

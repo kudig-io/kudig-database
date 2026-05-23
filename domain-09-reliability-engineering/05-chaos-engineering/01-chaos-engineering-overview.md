@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
+created: "2026-05-23"
 ---
 
 # 混沌工程概述与原则
@@ -87,7 +88,7 @@ prerequisites:
   CI/CD → 部署 → 自动混沌实验 → 验证 SLO → 通过/回滚
 ```
 
-### 5. 最小化爆炸半径 (Minimize Blast Radius)
+### 5. 最小化爆炸半径 (Minimize Blast [[Radius|Radius]])
 
 ```
 爆炸半径控制手段:
@@ -102,12 +103,12 @@ prerequisites:
 | 级别 | 特征 | 工具 |
 |------|------|------|
 | **1. 萌芽** | 随机故障注入 | 手动 kubectl delete pod |
-| **2. 基础** | 有计划的人工实验 | Chaos Mesh Dashboard |
-| **3. 中级** | 自动化实验，事后分析 | Litmus + CI/CD 集成 |
+| **2. 基础** | 有计划的人工实验 | [[Chaos Mesh|Chaos Mesh]] Dashboard |
+| **3. 中级** | 自动化实验，事后分析 | [[Litmus|Litmus]] + CI/CD 集成 |
 | **4. 高级** | 生产环境持续运行，自动回滚 | Gremlin / 自研平台 |
 | **5. 专家** | 智能故障预测，AI 驱动 | 智能混沌平台 |
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment]]
+- deployment]]
 - [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design]]

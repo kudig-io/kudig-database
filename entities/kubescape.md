@@ -1,5 +1,5 @@
 ---
-title: Kubescape
+title: Kubescape [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Kubescape
@@ -71,7 +72,7 @@ Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE AT
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
-- [[concepts/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- networking.md|cilium-ebpf-networking]]
 - [[concepts/storage-model.md|storage-model]]
 
 ## Related
@@ -82,7 +83,7 @@ Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE AT
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[domain-19-landscape-references/incubating/kubescape/kubescape.md|kubescape]]
+- kubescape
 - [[skills/learn-04-debug-tools-setup|Day 4: 调试工具全家桶安装]] — Cross-reference
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -29,13 +29,14 @@ prerequisites:
 - helm-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 分布式追踪最佳实践
 
 ## 概述
 
-本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 OpenTelemetry 集成的全方位内容 ^[inferred]。
+本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[OpenTelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。
 
 ## 分布式追踪架构
 
@@ -51,7 +52,7 @@ prerequisites:
 
 ### OpenTelemetry Collector 配置
 
-- 接收器：OTLP（gRPC 4317、HTTP 4318）+ Jaeger 协议（gRPC 14250、thrift_http 14268）^[inferred]
+- 接收器：OTLP（[[gRPC|gRPC]] 4317、HTTP 4318）+ Jaeger 协议（gRPC 14250、thrift_http 14268）^[inferred]
 - 处理器：`batch`（timeout: 5s, send_batch_size: 1024）+ `memory_limiter`（limit_mib: 512）^[inferred]
 - 导出器：OTLP 到 Jaeger Collector ^[inferred]
 
@@ -101,8 +102,8 @@ prerequisites:
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[concepts/observability-pillars.md|Observability Pillars]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[concepts/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
 - [[skills/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[skills/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
 

@@ -47,11 +47,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 24 - Admission Webhook 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
 
 <!-- chunk: 目录 -->## 目录
 
@@ -72,7 +73,7 @@ authors:
 
 #<!-- chunk: 什么是 Admission Webhook? -->## 什么是 Admission Webhook?
 
-Admission Webhook 是 Kubernetes 准入控制系统的扩展机制,允许在对象持久化到 etcd 之前拦截 API 请求并进行验证或修改。
+Admission Webhook 是 Kubernetes 准入控制系统的扩展机制,允许在对象持久化到 [[etcd|etcd]] 之前拦截 API 请求并进行验证或修改。
 
 #<!-- chunk: Webhook 类型 -->## Webhook 类型
 
@@ -1543,7 +1544,7 @@ spec:
       - memory
 ```
 
-#<!-- chunk: 案例 2: Kyverno -->## 案例 2: Kyverno
+#<!-- chunk: 案例 2: [[Kyverno|Kyverno]] -->## 案例 2: Kyverno
 
 Kyverno 是一个 Kubernetes 原生的策略引擎。
 
@@ -1787,7 +1788,7 @@ spec:
   # - duration 和 renewBefore 是否合理
 ```
 
-#<!-- chunk: 案例 4: Istio Sidecar 自动注入 -->## 案例 4: Istio Sidecar 自动注入
+#<!-- chunk: 案例 4: [[Istio|Istio]] Sidecar 自动注入 -->## 案例 4: Istio Sidecar 自动注入
 
 Istio 使用 MutatingWebhook 自动注入 Envoy Sidecar 容器。
 
@@ -2632,25 +2633,25 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
-- [[domain-18-manifests-patterns/23-pod-security-standards.md|23-pod-security-standards]]
-- [[domain-18-manifests-patterns/25-validatingadmissionpolicy.md|25-validatingadmissionpolicy]]
-- [[domain-18-manifests-patterns/26-priorityclass-runtimeclass.md|26-priorityclass-runtimeclass]]
+- 22-networkpolicy-reference
+- 23-pod-security-standards
+- 25-validatingadmissionpolicy
+- 26-priorityclass-runtimeclass
 
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]

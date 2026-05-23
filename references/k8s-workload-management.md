@@ -25,6 +25,7 @@ trigger_keywords:
 - 调度策略与弹性伸缩
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 工作负载管理

@@ -1,18 +1,18 @@
 ---
-title: '项目 P5: 毕业综合实践项目'
-description: 'title: 项目 P5: 毕业综合实践项目'
+title: 'P5: 毕业综合项目'
+description: 综合运用 4 周所学，独立完成一套完整的 ACK 集群运维方案：从集群规划、创建、安全加固、应用部署到监控告警，模拟真实生产环境的运维场景。
 category: learning
 tags:
 - k8s
 - training
 - hands-on
+- kubelet
 - prometheus
-- grafana
+- flannel
 - helm
-- argocd
-- hpa
-- statefulset
-- ingress
+- opa
+- mysql
+- pdb
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -20,624 +20,922 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- '项目 P5: 毕业综合实践项目 是什么'
-- '如何 项目 P5: 毕业综合实践项目'
+- 'P5: 毕业综合项目 是什么'
+- '如何 P5: 毕业综合项目'
 trigger_keywords:
-- 项目
 - 'P5:'
-- 毕业综合实践项目
+- 毕业综合项目
 - learn
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
 - prometheus-basics
-- monitoring-basics
-- gitops-basics
-- logging-basics
+- mysql-basics
+- policy-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 项目 P5: 毕业综合实践项目
+title: P5: 毕业综合项目
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - kubernetes 毕业项目生产级平台搭建完整方案
-  - k8s 全栈部署包含哪些组件
-  - argocd gitops 完整项目实战
-  - pvc prometheus grafana loki 一体化部署
+  - ACK comprehensive cluster operation project
+  - [[Kubernetes|Kubernetes]] multi-tier architecture deployment
+  - ACK end-to-end cluster lifecycle management
+  - Production-grade cluster security hardening
+  - Microservices deployment ACK best practices
 trigger_keywords:
-  - GitOps
-  - ArgoCD
-  - Prometheus
-  - Grafana
-  - Loki
-  - 毕业项目
-  - 生产级架构
-  - 全栈部署
-  - 故障排查手册
-  - 变更管理
+  - graduation
+  - comprehensive
+  - full-stack
+  - project
+  - ACK lifecycle
+  - security hardening
+  - monitoring
+  - alerting
+  - network
+  - storage
 reading_level: advanced
 audience:
-  - sre-engineer
-  - devops-engineer
-  - platform-engineer
-estimated_read_time: 180min
+  - ACK learners (completion project)
+  - DevOps engineers
+  - Platform engineers
+estimated_read_time: 60min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
+  - domain-12-cloud-providers
   - domain-05-security-compliance
   - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
-  - domain-11-production-operations
-  - domain-08-release-change-management
+  - domain-9-workload
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - ack-cluster-lifecycle
+  - security-monitoring
+  - node-workload-management
+  - network-storage-practice
 ---
 
-# 项目 P5: 毕业综合实践项目
+# P5: 毕业综合项目
 
-> **所属周**: Week 4 | **预计时间**: 2.5+ 小时
-
----
-
-## 概述
-
-本毕业项目是整个一个月学习计划的综合考核。你将搭建一个完整的生产级 K8s 平台，综合运用所学的所有知识：应用编排（Deployment + StatefulSet）、网络存储（Ingress + PVC + NetworkPolicy）、安全（RBAC + Pod Security）、可观测性（Prometheus + Loki）、GitOps（ArgoCD）和运维文档。完成此项目意味着你已经具备了独立管理生产级 K8s 集群的能力。
-
-### 项目目标
-
-搭建一个完整的生产级 K8s 平台，综合运用一个月所学的所有知识：
-- 应用编排: Deployment + StatefulSet + HPA
-- 网络存储: Ingress + PVC + NetworkPolicy
-- 安全: RBAC + Pod Security
-- 可观测性: Prometheus + Loki
-- GitOps: ArgoCD
-- 运维: 故障排查手册
-
-### 前置条件
-
-- 完成前四周全部课程
-- 有运行中的 K8s 集群（kind/minikube/ACK 均可）
-- 已安装 Helm、ArgoCD
-- 已部署 kube-prometheus-stack
+> **对应周次**: 全部 4 周 | **预计时间**: 6-8 小时 | **难度**: ⭐⭐⭐⭐
 
 ---
 
-## 项目架构
+## 项目目标
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        Ingress                               │
-│                    (TLS + 域名路由)                           │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
-│  │  Frontend   │    │   Backend   │    │   Backend   │     │
-│  │ Deployment  │───▶│ StatefulSet │───▶│ StatefulSet │     │
-│  │  (HPA)      │    │   (API-1)   │    │   (DB)      │     │
-│  └─────────────┘    └─────────────┘    └─────────────┘     │
-│         │                  │                  │             │
-│         └──────────────────┴──────────────────┘             │
-│                            │                                 │
-│                   NetworkPolicy                              │
-├─────────────────────────────────────────────────────────────┤
-│                        Storage                               │
-│               (StorageClass + PVC)                          │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
-│  │ Prometheus  │    │   Grafana   │    │    Loki     │     │
-│  │ + Alertmgr  │    │             │    │ + Promtail  │     │
-│  └─────────────┘    └─────────────┘    └─────────────┘     │
-├─────────────────────────────────────────────────────────────┤
-│                        ArgoCD                                │
-│                   (GitOps Pipeline)                          │
-└─────────────────────────────────────────────────────────────┘
-```
+综合运用 4 周所学，独立完成一套完整的 ACK 集群运维方案：从集群规划、创建、安全加固、应用部署到监控告警，模拟真实生产环境的运维场景。
+
+## 前置条件
+
+- [ ] 完成 4 周全部教案和 4 次自测
+- [ ] 完成 P1-P4 实操项目
+- [ ] 准备好测试用的阿里云账号和资源
 
 ---
 
-## 验收清单
+## 项目场景
 
-### 1. 应用编排
-
-- [ ] 前端 Deployment（至少 2 副本）
-- [ ] 前端 HPA（CPU 阈值 70%）
-- [ ] 后端 StatefulSet（至少 2 副本）
-- [ ] 每个 StatefulSet Pod 有独立 PVC
-- [ ] 配置了 liveness/readiness 探针
-- [ ] 配置了合理的 resources
-
-### 2. 网络
-
-- [ ] ClusterIP Service 用于内部通信
-- [ ] Ingress 配置路由规则
-- [ ] Ingress 配置 TLS（可以是自签名）
-- [ ] NetworkPolicy 限制 Pod 间访问
-
-### 3. 存储
-
-- [ ] 使用 StorageClass 动态供应
-- [ ] PVC 成功绑定
-- [ ] 数据在 Pod 重启后持久化
-
-### 4. 安全
-
-- [ ] 创建专用 ServiceAccount
-- [ ] 配置 RBAC（最小权限）
-- [ ] Pod 以非 root 用户运行
-- [ ] 配置 securityContext
-
-### 5. 可观测性
-
-- [ ] Prometheus 采集应用指标
-- [ ] 配置至少 3 条告警规则
-- [ ] Grafana Dashboard 可视化
-- [ ] Loki 收集应用日志
-- [ ] Alertmanager 路由配置
-
-### 6. GitOps
-
-- [ ] 应用配置存储在 Git 仓库
-- [ ] ArgoCD Application 配置完成
-- [ ] 修改 Git 能触发同步
-
-### 7. 文档
-
-- [ ] 架构设计文档
-- [ ] 部署操作手册
-- [ ] 故障排查手册（基于 FTA/FEBM）
-- [ ] 变更管理 SOP
+> 你的团队需要为一个新业务搭建 ACK 集群环境。该业务包含 Web 前端、API 后端、数据库三层架构。
+> 要求：高可用部署、权限隔离、监控告警、网络安全、存储持久化。
 
 ---
 
 ## 实施步骤
 
-### Phase 1: 基础设施 (30min)
+### Phase 1: 集群规划与创建 (1.5h)
 
-```bash
-# 创建 namespace
-kubectl create namespace graduation-project
-# 预期输出: namespace/graduation-project created
+#### 1.1 网络规划文档
 
-# 确认监控组件就绪
-kubectl get pods -n monitoring
-# 预期输出: Prometheus、Grafana、Loki 等 Pod Running
+```
+填写以下规划表:
 
-# 确认 ArgoCD 就绪
-kubectl get pods -n argocd
-# 预期输出: argocd-server、argocd-repo-server 等 Pod Running
-
-# 查看集群资源
-kubectl get nodes -o wide
-kubectl get sc
+| 项目 | CIDR / 配置 |
+|------|------------|
+| VPC CIDR | |
+| 节点 vSwitch-A (可用区) | |
+| 节点 vSwitch-B (可用区) | |
+| Pod vSwitch (Terway) 或 Pod CIDR (Flannel) | |
+| Service CIDR | |
+| CNI 方案选择 | Terway / Flannel |
+| 选择理由 | |
 ```
 
-### Phase 2: 应用部署 (45min)
-
-#### 2.1 创建 ServiceAccount 和 RBAC
+#### 1.2 集群创建
 
 ```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: app-sa
-  namespace: graduation-project
+# 使用 aliyun CLI 创建集群
+# 要求:
+# - 托管版 ACK
+# - K8S 最新稳定版
+# - 启用公网访问
+# - 安装 Nginx Ingress Controller
+
+cat > create-cluster.json << 'EOF'
+{
+  "name": "graduation-cluster",
+  "region_id": "cn-hangzhou",
+  "cluster_type": "ManagedKubernetes",
+  "kubernetes_version": "1.28.3-aliyun.1",
+  "vpcid": "<vpc-id>",
+  "container_cidr": "10.96.0.0/16",
+  "service_cidr": "172.21.0.0/20",
+  "snat_entry": true,
+  "public_slb": true,
+  "node_cidr_mask": "26",
+  "proxy_mode": "ipvs",
+  "addons": [
+    {"name": "nginx-ingress-controller", "config": "{}"},
+    {"name": "csi-plugin", "config": "{}"},
+    {"name": "csi-provisioner", "config": "{}"},
+    {"name": "logtail-ds", "config": "{\"IngressDashboardEnabled\":\"true\"}"}
+  ]
+}
+EOF
+
+aliyun cs POST /clusters --body "$(cat create-cluster.json)"
+
+# 等待集群创建完成
+aliyun cs GET /clusters/<cluster_id> | jq '.state'
+
+# 获取 kubeconfig
+aliyun cs GET /k8s/<cluster_id>/user_config > ~/.kube/config-graduation
+export KUBECONFIG=~/.kube/config-graduation
+
+# 验证集群
+kubectl cluster-info
+kubectl get nodes
+```
+
+#### 1.3 节点池设计
+
+```bash
+# 创建 3 个节点池
+# 1. system-pool: 系统组件专用 (2 节点)
+cat > system-pool.json << 'EOF'
+{
+  "nodepool_info": {"name": "system-pool"},
+  "scaling_group": {
+    "vswitch_ids": ["<vsw-id-az-a>", "<vsw-id-az-b>"],
+    "instance_types": ["ecs.g6.xlarge"],
+    "system_disk_category": "cloud_essd",
+    "system_disk_size": 120,
+    "key_pair": "<key-pair>"
+  },
+  "kubernetes_config": {
+    "labels": [{"key": "node-role", "value": "system"}],
+    "taints": [{"key": "CriticalAddonsOnly", "value": "true", "effect": "NoSchedule"}]
+  },
+  "management": {"auto_repair": true},
+  "count": 2
+}
+EOF
+
+aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat system-pool.json)"
+
+# 2. app-pool: 业务应用 (2-5 节点, 自动伸缩)
+cat > app-pool.json << 'EOF'
+{
+  "nodepool_info": {"name": "app-pool"},
+  "scaling_group": {
+    "vswitch_ids": ["<vsw-id-az-a>", "<vsw-id-az-b>"],
+    "instance_types": ["ecs.g6.xlarge"],
+    "system_disk_category": "cloud_essd",
+    "system_disk_size": 120,
+    "key_pair": "<key-pair>"
+  },
+  "kubernetes_config": {
+    "labels": [{"key": "workload", "value": "app"}]
+  },
+  "management": {"auto_repair": true},
+  "auto_scaling": {"enable": true, "min_instances": 2, "max_instances": 5},
+  "count": 2
+}
+EOF
+
+aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat app-pool.json)"
+
+# 3. data-pool: 数据库专用 (2 节点, 大内存规格)
+cat > data-pool.json << 'EOF'
+{
+  "nodepool_info": {"name": "data-pool"},
+  "scaling_group": {
+    "vswitch_ids": ["<vsw-id-az-a>", "<vsw-id-az-b>"],
+    "instance_types": ["ecs.r6.2xlarge"],
+    "system_disk_category": "cloud_essd",
+    "system_disk_size": 200,
+    "key_pair": "<key-pair>"
+  },
+  "kubernetes_config": {
+    "labels": [{"key": "workload", "value": "database"}],
+    "taints": [{"key": "dedicated", "value": "database", "effect": "NoSchedule"}]
+  },
+  "management": {"auto_repair": true},
+  "count": 2
+}
+EOF
+
+aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat data-pool.json)"
+```
+
 ---
+
+### Phase 2: 安全加固 (1h)
+
+#### 2.1 RBAC 权限设计
+
+```
+设计权限矩阵:
+
+| 角色 | Namespace | 权限 |
+|------|-----------|------|
+| 运维工程师 | 全集群 | 读写全部资源 |
+| 开发工程师 | app-ns | Pod/Deployment/Service 读写 |
+| 测试工程师 | app-ns | Pod/Service 只读 + Pod 日志 |
+| 安全审计 | 全集群 | 只读 |
+```
+
+```bash
+# 创建命名空间
+kubectl create namespace app-ns
+
+# 创建运维工程师 ClusterRole
+cat > ops-engineer-role.yaml << 'EOF'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ops-engineer
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+- nonResourceURLs: ["*"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ops-engineer-binding
+subjects:
+- kind: User
+  name: ops@example.com
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: ops-engineer
+  apiGroup: rbac.authorization.k8s.io
+EOF
+
+kubectl apply -f ops-engineer-role.yaml
+
+# 创建开发工程师 Role（命名空间级别）
+cat > dev-engineer-role.yaml << 'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: app-role
-  namespace: graduation-project
+  name: dev-engineer
+  namespace: app-ns
 rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "deployments", "services", "configmaps"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 - apiGroups: [""]
-  resources: ["configmaps"]
+  resources: ["pods/log"]
   verbs: ["get", "list"]
-  resourceNames: ["app-config"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get"]
-  resourceNames: ["app-secret"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: app-rolebinding
-  namespace: graduation-project
+  name: dev-engineer-binding
+  namespace: app-ns
 subjects:
-- kind: ServiceAccount
-  name: app-sa
+- kind: User
+  name: dev@example.com
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
-  name: app-role
+  name: dev-engineer
   apiGroup: rbac.authorization.k8s.io
 EOF
-```
 
-#### 2.2 部署前端 Deployment + HPA
+kubectl apply -f dev-engineer-role.yaml
 
-```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: apps/v1
-kind: Deployment
+# 创建测试工程师 Role（只读 + 日志）
+cat > test-engineer-role.yaml << 'EOF'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
 metadata:
-  name: frontend
-  namespace: graduation-project
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: frontend
-  template:
-    metadata:
-      labels:
-        app: frontend
-    spec:
-      serviceAccountName: app-sa
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 101
-        fsGroup: 101
-      containers:
-      - name: web
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            cpu: 100m
-            memory: 128Mi
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: false
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: frontend-hpa
-  namespace: graduation-project
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: frontend
-  minReplicas: 2
-  maxReplicas: 5
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
+  name: test-engineer
+  namespace: app-ns
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "services"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get", "list"]
 EOF
+
+kubectl apply -f test-engineer-role.yaml
+
+# 验证权限
+kubectl auth can-i create pods -n app-ns --as=dev@example.com
+kubectl auth can-i delete pods -n app-ns --as=dev@example.com
+kubectl auth can-i create pods -n app-ns --as=test@example.com
 ```
 
-#### 2.3 部署后端 StatefulSet + PVC
+#### 2.2 资源配额
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat > resource-quota.yaml << 'EOF'
 apiVersion: v1
-kind: Service
+kind: ResourceQuota
 metadata:
-  name: backend-headless
-  namespace: graduation-project
+  name: app-quota
+  namespace: app-ns
 spec:
-  clusterIP: None
-  selector:
-    app: backend
-  ports:
-  - port: 80
+  hard:
+    requests.cpu: "8"
+    requests.memory: 16Gi
+    limits.cpu: "16"
+    limits.memory: 32Gi
+    persistentvolumeclaims: "10"
+    pods: "50"
+    services: "20"
+    configmaps: "30"
+    secrets: "30"
 ---
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: v1
+kind: LimitRange
 metadata:
-  name: backend
-  namespace: graduation-project
+  name: app-limits
+  namespace: app-ns
 spec:
-  serviceName: backend-headless
-  replicas: 2
-  selector:
-    matchLabels:
-      app: backend
-  template:
-    metadata:
-      labels:
-        app: backend
-    spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 101
-      containers:
-      - name: api
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: data
-          mountPath: /data
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 200m
-            memory: 256Mi
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 3
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storage: 1Gi
+  limits:
+  - default:
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest:
+      cpu: 100m
+      memory: 128Mi
+    max:
+      cpu: "4"
+      memory: 4Gi
+    min:
+      cpu: 50m
+      memory: 64Mi
+    type: Container
 EOF
+
+kubectl apply -f resource-quota.yaml
+kubectl get quota,limitrange -n app-ns
 ```
 
-### Phase 3: 网络配置 (20min)
+#### 2.3 NetworkPolicy (如使用 Terway)
 
 ```bash
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-  namespace: graduation-project
-spec:
-  selector:
-    app: frontend
-  ports:
-  - port: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-  namespace: graduation-project
-spec:
-  selector:
-    app: backend
-  ports:
-  - port: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: app-ingress
-  namespace: graduation-project
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: app.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend
-            port:
-              number: 80
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: backend
-            port:
-              number: 80
-  tls:
-  - hosts:
-    - app.local
-    secretName: app-tls
----
+cat > network-policy.yaml << 'EOF'
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: frontend-policy
-  namespace: graduation-project
+  name: default-deny-ingress
+  namespace: app-ns
 spec:
-  podSelector:
-    matchLabels:
-      app: frontend
+  podSelector: {}
   policyTypes:
   - Ingress
-  ingress:
-  - from: []
-    ports:
-    - port: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: backend-policy
-  namespace: graduation-project
+  name: allow-frontend-to-backend
+  namespace: app-ns
 spec:
   podSelector:
     matchLabels:
-      app: backend
+      tier: backend
   policyTypes:
   - Ingress
   ingress:
   - from:
     - podSelector:
         matchLabels:
-          app: frontend
+          tier: frontend
     ports:
-    - port: 80
+    - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-db
+  namespace: app-ns
+spec:
+  podSelector:
+    matchLabels:
+      tier: database
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          tier: backend
+    ports:
+    - port: 3306
 EOF
+
+kubectl apply -f network-policy.yaml
+kubectl get networkpolicy -n app-ns
 ```
 
-### Phase 4: 可观测性 (30min)
+---
+
+### Phase 3: 应用部署 (2h)
+
+#### 3.1 数据库层
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat > database.yaml << 'EOF'
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-credentials
+  namespace: app-ns
+type: Opaque
+stringData:
+  MYSQL_ROOT_PASSWORD: "Graduation2024!"
+  MYSQL_DATABASE: "appdb"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: app-ns
+spec:
+  serviceName: mysql-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: database
+    spec:
+      nodeSelector:
+        workload: database
+      tolerations:
+      - key: dedicated
+        value: database
+        effect: NoSchedule
+      containers:
+      - name: mysql
+        image: registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36
+        command: ['sh', '-c', 'echo "MySQL Simulator running on $(hostname)" && sleep 86400']
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: MYSQL_DATABASE
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: "1"
+            memory: 1Gi
+        livenessProbe:
+          exec:
+            command: ['sh', '-c', 'echo "health check"']
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command: ['sh', '-c', 'echo "ready"']
+          periodSeconds: 10
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ReadWriteOnce]
+      storageClassName: alicloud-disk-ssd
+      resources:
+        requests:
+          storage: 40Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-headless
+  namespace: app-ns
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+  namespace: app-ns
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+    targetPort: 3306
+EOF
+
+kubectl apply -f database.yaml
+kubectl get pods,svc,pvc -n app-ns -l tier=database
+```
+
+#### 3.2 API 后端
+
+```bash
+cat > backend.yaml << 'EOF'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: app-ns
+data:
+  DB_HOST: "mysql-svc"
+  DB_PORT: "3306"
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-backend
+  namespace: app-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-backend
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: api-backend
+        tier: backend
+    spec:
+      nodeSelector:
+        workload: app
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values: [api-backend]
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: api
+        image: registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: backend-config
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: MYSQL_ROOT_PASSWORD
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        startupProbe:
+          httpGet:
+            path: /
+            port: 80
+          failureThreshold: 30
+          periodSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-backend-svc
+  namespace: app-ns
+spec:
+  selector:
+    app: api-backend
+  ports:
+  - port: 80
+    targetPort: 80
+EOF
+
+kubectl apply -f backend.yaml
+```
+
+#### 3.3 Web 前端
+
+```bash
+cat > frontend.yaml << 'EOF'
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: app-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-frontend
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+        tier: frontend
+    spec:
+      nodeSelector:
+        workload: app
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values: [web-frontend]
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: nginx
+        image: registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 300m
+            memory: 256Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-frontend-svc
+  namespace: app-ns
+spec:
+  selector:
+    app: web-frontend
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: app-ns
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.graduation.local
+    secretName: app-tls
+  rules:
+  - host: app.graduation.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-frontend-svc
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-backend-svc
+            port:
+              number: 80
+EOF
+
+kubectl apply -f frontend.yaml
+
+# 创建自签名 TLS 证书
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /tmp/tls.key -out /tmp/tls.crt \
+  -subj "/CN=app.graduation.local"
+kubectl create secret tls app-tls --key /tmp/tls.key --cert /tmp/tls.crt -n app-ns
+```
+
+#### 3.4 架构验证
+
+```bash
+# 验证清单:
+echo "=== 架构总览 ==="
+kubectl get all -n app-ns -o wide
+
+echo "=== 调度验证 ==="
+kubectl get pods -n app-ns -o custom-columns='NAME:.metadata.name,NODE:.spec.nodeName,STATUS:.status.phase'
+
+echo "=== 网络验证 ==="
+kubectl get svc,ingress -n app-ns
+
+echo "=== 存储 ==="
+kubectl get pvc -n app-ns
+
+echo "=== 安全 ==="
+kubectl get networkpolicy -n app-ns
+kubectl get quota,limitrange -n app-ns
+kubectl auth can-i create pods -n app-ns --as=dev@example.com
+
+echo "=== 端到端测试 ==="
+INGRESS_IP=$(kubectl get svc -n kube-system nginx-ingress-lb -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+curl -k -H "Host: app.graduation.local" https://${INGRESS_IP}/
+```
+
+---
+
+### Phase 4: 监控与运维 (1h)
+
+#### 4.1 监控配置
+
+```bash
+# 确认 Prometheus 监控可用
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack \
+  --namespace monitoring --create-namespace \
+  --set prometheus.prometheusSpec.retention=7d
+
+# 创建自定义告警规则
+cat > alert-rules.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: graduation-alerts
   namespace: monitoring
-  labels:
-    prometheus: kube-prometheus
-    role: alert-rules
 spec:
   groups:
-  - name: graduation-alerts
+  - name: app-alerts
     rules:
-    - alert: GraduationAppDown
-      expr: kube_deployment_status_replicas_available{namespace="graduation-project"} == 0
-      for: 2m
+    - alert: PodRestartTooMany
+      expr: rate(kube_pod_container_status_restarts_total{namespace="app-ns"}[15m]) * 60 * 5 > 0
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} restarting too often"
+    - alert: NodeCPUHigh
+      expr: sum(rate(node_cpu_seconds_total{mode!="idle"}[5m])) by (instance) / sum(rate(node_cpu_seconds_total[5m])) by (instance) > 0.8
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Node {{ $labels.instance }} CPU > 80%"
+    - alert: PVCUsageHigh
+      expr: (1 - kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes) > 0.9
+      for: 5m
       labels:
         severity: critical
       annotations:
-        summary: "Graduation app has no available replicas"
-    - alert: GraduationHighCPU
-      expr: namespace_name:container_cpu_usage_seconds_total:sum_rate{namespace="graduation-project"} > 0.8
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "Graduation app CPU usage > 80%"
-    - alert: GraduationHighMemory
-      expr: namespace_name:container_memory_usage_bytes:sum{namespace="graduation-project"} / namespace_name:kube_pod_container_resource_limits_memory_bytes:sum{namespace="graduation-project"} > 0.8
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        summary: "Graduation app memory usage > 80%"
+        summary: "PVC {{ $labels.persistentvolumeclaim }} usage > 90%"
 EOF
+
+kubectl apply -f alert-rules.yaml
+kubectl get prometheusrule -n monitoring
 ```
 
-### Phase 5: GitOps (30min)
+#### 4.2 故障演练
 
 ```bash
-# 创建 ArgoCD Application
-cat <<EOF | kubectl apply -f -
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: graduation-project
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: <your-repo-url>
-    targetRevision: HEAD
-    path: graduation-project
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: graduation-project
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-EOF
+# 演练 1: 模拟 Pod 故障
+kubectl delete pod <api-pod-name> -n app-ns
+# 观察: 自动恢复、readinessProbe 生效
+kubectl get pods -n app-ns -w
+
+# 演练 2: 模拟节点故障
+kubectl cordon <node-name>
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+# 观察: Pod 迁移、Service 自动更新 Endpoints
+kubectl get pods -n app-ns -o wide -w
+kubectl get endpoints api-backend-svc -n app-ns
+
+# 演练 3: 模拟 DNS 故障排查
+kubectl exec <pod-name> -n app-ns -- nslookup mysql-svc
+kubectl exec <pod-name> -n app-ns -- nslookup api-backend-svc
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=10
+
+# 演练 4: 模拟 PVC 问题
+kubectl describe pvc -n app-ns
 ```
-
-### Phase 6: 文档编写 (30min)
-
-创建以下文档：
-
-1. **architecture.md**: 架构设计文档
-2. **deployment-guide.md**: 部署手册
-3. **troubleshooting-handbook.md**: 故障排查手册（基于 FTA/FEBM）
-4. **change-management-sop.md**: 变更管理 SOP
 
 ---
 
-## 演示要点
+### Phase 5: 文档输出 (0.5h)
 
-1. **架构讲解**
-   - 能够清晰解释整体架构
-   - 能够解释组件间的关系
+完成以下文档 (在自己的笔记中记录):
 
-2. **操作演示**
-   - 通过 Ingress 访问应用
-   - 演示 HPA 自动扩容
-   - 演示滚动更新
-
-3. **故障演练**
-   - 注入一个故障
-   - 按 FTA 方法定位
-   - 修复并验证
-
-4. **GitOps 演示**
-   - 修改 Git 仓库
-   - 观察自动同步
+1. **集群架构图**: 画出集群的网络拓扑、节点池架构、应用部署图
+2. **运维手册**: 记录日常运维操作 (扩容、升级、故障排查)
+3. **经验总结**: 遇到的问题和解决方案
 
 ---
 
 ## 评分标准
 
-| 项目 | 分值 | 评分标准 |
-|------|------|----------|
-| 应用编排 | 15 | 完成所有组件部署 |
-| 网络存储 | 15 | Ingress/PVC/NetworkPolicy 正常 |
-| 安全 | 10 | RBAC/SecurityContext 配置 |
-| 可观测性 | 15 | 监控告警日志完整 |
-| GitOps | 10 | ArgoCD 自动同步 |
-| 文档 | 15 | 文档完整清晰 |
-| 演示 | 20 | 能够清晰讲解和演示 |
-| **总分** | **100** | |
+| 评估项 | 满分 | 得分 |
+|--------|:----:|:----:|
+| 网络规划合理性 | 10 | |
+| 集群创建与节点池配置 | 10 | |
+| RBAC + 配额配置 | 10 | |
+| 应用部署完整性 (三层架构) | 15 | |
+| 调度策略正确性 | 10 | |
+| 网络暴露 (Service + Ingress + TLS) | 10 | |
+| 存储配置 (PVC + 持久化) | 10 | |
+| 监控与告警 | 10 | |
+| 故障演练与恢复 | 10 | |
+| 文档输出质量 | 5 | |
+| **合计** | **100** | |
+
+**通过标准**: 80 分及以上
 
 ---
 
-## 要点总结
+## 清理资源
 
-| 阶段 | 产出 | 关键技术 |
-|------|------|---------|
-| 基础设施 | Namespace + SA + RBAC | kubectl, RBAC |
-| 应用部署 | Deployment + StatefulSet + HPA | YAML, kubectl apply |
-| 网络配置 | Service + Ingress + NetworkPolicy | 网络策略, TLS |
-| 可观测性 | PrometheusRule + Dashboard | PromQL, Grafana |
-| GitOps | ArgoCD Application | Kustomize, Git |
-| 文档 | 4 份运维文档 | FTA/FEBM |
+```bash
+# 删除应用
+kubectl delete namespace app-ns
+
+# 删除监控
+helm uninstall prometheus -n monitoring
+kubectl delete namespace monitoring
+
+# 删除集群 (如不再需要)
+aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
+
+# 清理 VPC 资源
+# aliyun vpc DeleteVSwitch --VSwitchId <vsw-id>
+# aliyun vpc DeleteVpc --VpcId <vpc-id>
+```
 
 ---
 
-恭喜完成毕业项目！
+## 恭喜毕业！
 
----
+完成本项目标志着你已具备 ACK 集群的独立运维能力。建议:
 
-## 延伸阅读
-
-- [生产架构设计原则](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [FTA 故障树分析](../../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
-- [ArgoCD 企业级 GitOps](../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
+1. 将此项目的实操经验整理为团队文档
+2. 在实际工作中持续应用所学
+3. 关注 ACK 产品更新，持续学习新特性
+4. 参与团队知识分享，教是最好的学
 
 ## Related
 

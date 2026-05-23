@@ -39,6 +39,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # K8s 运维运营术语参考

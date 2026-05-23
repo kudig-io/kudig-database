@@ -32,20 +32,21 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
-# Automatic Cleanup for Finished Jobs
+# Automatic Cleanup for Finished [[Jobs|Jobs]]
 
 ## 概述
-TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 etcd 压力。
+TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 [[etcd|etcd]] 压力。
 
 ## 核心概念/原理
 - **触发时机**：计时器在 Job 状态变为 `Complete` 或 `Failed` 时开始计时。
-- **级联删除**：TTL 到期后，控制器会自动删除 Job 及其依赖对象（如 Pod），并遵守对象的 finalizers 等生命周期保证。
+- **级联删除**：TTL 到期后，控制器会自动删除 Job 及其依赖对象（如 Pod），并遵守对象的 [[Finalizers|finalizers]] 等生命周期保证。
 - **配置字段**：在 Job 的 `spec.ttlSecondsAfterFinished` 字段中指定 TTL 秒数。
 
 ## 关键机制或特性
-- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[entities/kubernetes|kubernetes]] 不保证一定保留该 Job。
+- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 不保证一定保留该 Job。
 - **时间偏差敏感**：TTL 控制器依赖 Job 状态中的时间戳判断 TTL 是否到期，集群时钟偏差可能导致清理时间出现偏差。
 - **多种设置方式**：
   - 在 Job 清单中直接声明。
@@ -55,7 +56,7 @@ TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间�
 
 ## 使用场景
 - 大规模批处理平台中自动清理已成功或失败的临时 Job。
-- 与 CronJob 配合，管理周期性任务产生的历史 Job（但 CronJob 本身也有 history limit）。
+- 与 [[CronJob|CronJob]] 配合，管理周期性任务产生的历史 Job（但 CronJob 本身也有 history limit）。
 - 需要按完成状态设置不同保留策略的场景（可通过 webhook 实现）。
 
 ## 最佳实践/注意事项

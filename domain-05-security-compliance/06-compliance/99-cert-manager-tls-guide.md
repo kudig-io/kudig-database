@@ -55,16 +55,17 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # cert-manager 自动证书管理深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Automated TLS certificate management for Kubernetes | **Complexity**: ⭐⭐⭐
+> **Scenario**: Automated TLS certificate management for [[Kubernetes|Kubernetes]] | **Complexity**: ⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
-TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，Ingress 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，它将证书生命周期完全自动化，支持 ACME（Let's Encrypt）、私有 CA、Vault PKI、自签名等多种颁发者，通过声明式 API 管理证书的签发和自动轮换。
+TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[Ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，它将证书生命周期完全自动化，支持 ACME（Let's Encrypt）、私有 CA、Vault PKI、自签名等多种颁发者，通过声明式 API 管理证书的签发和自动轮换。
 
 cert-manager 的核心价值在于将证书管理从手动操作转变为声明式自动化。管理员只需创建一个 Certificate 资源，指定域名、颁发者和有效期，cert-manager 就会自动完成证书签发、Secret 创建和到期前自动轮换。当证书即将到期时，cert-manager 会自动申请新证书并更新 Secret，使用该 Secret 的 Ingress 和工作负载会自动获取新证书。对于 ACME（Let's Encrypt）证书，cert-manager 自动处理 HTTP-01 和 DNS-01 挑战，无需手动操作 DNS 记录或配置 Web 服务器。
 
@@ -76,7 +77,7 @@ cert-manager 的核心价值在于将证书管理从手动操作转变为声明�
 
 **自签名证书信任链问题**：自签名证书不被浏览器和客户端信任，会导致安全警告和连接失败。客户端应用在遇到不受信任的证书时通常会拒绝连接，导致服务不可用。使用 Let's Encrypt 等公共 CA 或企业内部 PKI 可以建立完整的信任链。cert-manager 支持多种颁发者类型，可以根据场景选择合适的 CA。
 
-**密钥泄露**：TLS 私钥存储不当可能被攻击者获取，用于解密流量或冒充服务器。攻击者获取了私钥后可以进行中间人攻击——在用户不知情的情况下解密和修改 TLS 流量。私钥泄露后，攻击者还可以冒充合法服务器进行钓鱼攻击。cert-manager 将私钥存储在 Kubernetes Secret 中，可配合 etcd 静态加密和 RBAC 控制访问。
+**密钥泄露**：TLS 私钥存储不当可能被攻击者获取，用于解密流量或冒充服务器。攻击者获取了私钥后可以进行中间人攻击——在用户不知情的情况下解密和修改 TLS 流量。私钥泄露后，攻击者还可以冒充合法服务器进行钓鱼攻击。cert-manager 将私钥存储在 Kubernetes Secret 中，可配合 [[etcd|etcd]] 静态加密和 RBAC 控制访问。
 
 **弱密钥和过期算法**：使用弱密钥（如 RSA 1024）或过期算法（如 SHA-1）的证书容易被破解。随着计算能力的提升，曾经安全的密钥长度可能不再安全。cert-manager 支持配置密钥算法和长度，推荐使用 ECDSA P-256 或 RSA 2048 以上的密钥。
 
@@ -1269,25 +1270,25 @@ kubectl get ingress --all-namespaces -o json | \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
 
 ## See Also
 
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|11-kubernetes-security-hardening]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|17-gvisor-container-sandbox]]
-- [[domain-05-security-compliance/99-falco-runtime-security-guide.md|99-falco-runtime-security-guide]]
-- [[domain-05-security-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
+- 11-kubernetes-security-hardening
+- 17-gvisor-container-sandbox
+- 99-falco-runtime-security-guide
+- 99-java-security-kubernetes-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

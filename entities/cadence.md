@@ -1,5 +1,5 @@
 ---
-title: Cadence
+title: Cadence (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # Cadence
@@ -67,8 +68,8 @@ Cadence 是一个分布式、可扩展、持久化的工作流编排引擎，用
 - [[opengitops]] — OpenGitOps
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/cadence/cadence.md|cadence]]
-- [[entities/drasi.md|Drasi]]
-- [[entities/tremor.md|Tremor]]
+- cadence
+- [[entities/drasi.md|[[Drasi|Drasi]]]]
+- [[entities/tremor.md|[[Tremor|Tremor]]]]
 - [[entities/nats.md|NATS]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference

@@ -29,9 +29,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
-# cdk8s (Cloud Development Kit for Kubernetes)
+# [[cdk8s|cdk8s]] (Cloud Development Kit for Kubernetes)
 
 > **CNCF 状态**: Sandbox | **类别**: Config | **主要语言**: TypeScript, Python, Go, Java
 
@@ -77,11 +78,11 @@ cdk8s (Cloud Development Kit for Kubernetes) 是一个开源软件开发框架�
 
 - [[kuasar]] — Kuasar
 - [[longhorn]] — Longhorn
-- [[open-cluster-management]] — Open Cluster Management (OCM)
+- [[open-cluster-management]] — [[entities/open-cluster-management.md|Open Cluster Management (OCM)]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[domain-19-landscape-references/sandbox/cdk8s/cdk8s.md|cdk8s]]
+- cdk8s
 - [[entities/kpt.md|kpt]]
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

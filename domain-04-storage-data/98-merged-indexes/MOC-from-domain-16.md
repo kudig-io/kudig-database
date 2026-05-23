@@ -1,5 +1,5 @@
 ---
-title: domain-04-storage-data MOC
+title: domain-04-storage-data MOC [98-merged-indexes]
 description: domain-04-storage-data 知识域导航页，覆盖 7 篇文档
 category: moc
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - storage-basics
+created: "2026-05-23"
 ---
 
 # domain-04-storage-data MOC
@@ -55,13 +56,13 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-04-storage-data/00-open-source-projects-index.md|Domain-16 存储基础 — 开源项目索引]] |  | storage, fundamentals |  |
-| 2 | [[domain-04-storage-data/01-storage-technologies-overview.md|01 - 存储技术概述]] |  | storage, fundamentals, deep-dive |  |
-| 3 | [[domain-04-storage-data/02-block-file-object-storage.md|02 - 块存储、文件存储、对象存储]] |  | storage, fundamentals |  |
-| 4 | [[domain-04-storage-data/03-raid-storage-redundancy.md|03 - RAID 与存储冗余]] |  | storage, fundamentals |  |
-| 5 | [[domain-04-storage-data/04-distributed-storage-systems.md|04 - 分布式存储系统]] |  | storage, fundamentals |  |
-| 6 | [[domain-04-storage-data/05-storage-management-operations.md|05 - 企业级存储管理与运维实践]] |  | storage, fundamentals |  |
-| 7 | [[domain-04-storage-data/06-storage-performance-iops.md|06 - 存储性能与 IOPS]] |  | storage, fundamentals, performance |  |
+| 1 | Domain-16 存储基础 — 开源项目索引 |  | storage, fundamentals |  |
+| 2 | 01 - 存储技术概述 |  | storage, fundamentals, deep-dive |  |
+| 3 | 02 - 块存储、文件存储、对象存储 |  | storage, fundamentals |  |
+| 4 | 03 - RAID 与存储冗余 |  | storage, fundamentals |  |
+| 5 | 04 - 分布式存储系统 |  | storage, fundamentals |  |
+| 6 | 05 - 企业级存储管理与运维实践 |  | storage, fundamentals |  |
+| 7 | 06 - 存储性能与 IOPS |  | storage, fundamentals, performance |  |
 
 ---
 
@@ -94,9 +95,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-04-storage-data 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-04-storage-data 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-04-storage-data 相关故障树分析 |
+| Skills 技能 | domain-04-storage-data 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

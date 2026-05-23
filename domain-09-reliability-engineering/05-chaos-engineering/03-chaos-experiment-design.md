@@ -29,6 +29,7 @@ prerequisites:
 - sre-practices
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 混沌实验设计与执行
@@ -254,4 +255,4 @@ spec:
 ## 相关
 
 - [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment]]
+- deployment]]

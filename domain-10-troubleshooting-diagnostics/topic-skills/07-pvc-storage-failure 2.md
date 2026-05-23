@@ -1,5 +1,5 @@
 ---
-title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation (domain-10-troubleshooting-diagnostics)
 description: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
 category: storage
 tags:
@@ -55,6 +55,7 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+created: "2026-05-23"
 ---
 
 ---
@@ -67,7 +68,7 @@ k8s_versions:
 
 ## 1. 概述
 
-PVC/PV/CSI 存储故障是 Kubernetes 集群中**影响数据持久化和有状态服务**的关键故障类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 StatefulSet、数据库等有状态工作负载，存储故障往往意味着业务完全中断。
+PVC/PV/CSI 存储故障是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键故障类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，存储故障往往意味着业务完全中断。
 
 ### 典型触发场景
 
@@ -80,7 +81,7 @@ PVC/PV/CSI 存储故障是 Kubernetes 集群中**影响数据持久化和有状�
 ### 前置条件
 
 - **RBAC 权限**:
-  - 最小权限: 对 `persistentvolumeclaims`, `persistentvolumes`, `storageclasses`, `csidrivers`, `csinodes`, `volumeattachments`, `pods`, `events` 的 `get/list/watch`
+  - 最小权限: 对 `persistentvolumeclaims`, `persistentvolumes`, `storageclasses`, `csidrivers`, `csinodes`, `volumeattachments`, `[[Pods|pods]]`, `events` 的 `get/list/watch`
   - 修复权限: `persistentvolumeclaims` 的 `patch/update/delete`, `pods` 的 `delete`
   - 验证命令: `kubectl auth can-i list persistentvolumes`
 - **存储后端信息**: StorageClass 配置、CSI Driver 版本、存储后端类型（云盘/NFS/Ceph 等）
@@ -1473,7 +1474,7 @@ EOF
 NAMESPACE=""
 PVC_NAME=""
 
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --namespace|-n) NAMESPACE="$2"; shift 2 ;;
         --pvc|-p)       PVC_NAME="$2"; shift 2 ;;
@@ -1483,7 +1484,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # --- 参数验证 ---
-if [[ -z "$NAMESPACE" ]]; then
+if -z "$NAMESPACE"; then
     error "必须指定 --namespace 参数"
     usage
 fi
@@ -1516,16 +1517,16 @@ echo -e "  时间: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
 
 # --- Step 1: 检查非 Bound 状态的 PVC ---
 info "[1/5] 检查非 Bound 状态的 PVC..."
-if [[ -n "$PVC_NAME" ]]; then
+if -n "$PVC_NAME"; then
     PENDING_PVCS=$(kubectl get pvc -n "$NAMESPACE" "$PVC_NAME" -o jsonpath='{.status.phase}' 2>/dev/null || echo "NotFound")
-    if [[ "$PENDING_PVCS" != "Bound" ]]; then
+    if "$PENDING_PVCS" != "Bound"; then
         warn "PVC $PVC_NAME 状态: $PENDING_PVCS"
     else
         success "PVC $PVC_NAME 状态: Bound"
     fi
 else
     PENDING_PVCS=$(kubectl get pvc -n "$NAMESPACE" --no-headers 2>/dev/null | grep -v "Bound" || true)
-    if [[ -n "$PENDING_PVCS" ]]; then
+    if -n "$PENDING_PVCS"; then
         warn "发现非 Bound 状态的 PVC:"
         echo "$PENDING_PVCS" | while read line; do echo "    $line"; done
     else
@@ -1537,7 +1538,7 @@ fi
 info "[2/5] 检查 StorageClass 配置..."
 SC_LIST=$(kubectl get sc -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.storageclass\.kubernetes\.io/is-default-class}{"\n"}{end}' 2>/dev/null)
 DEFAULT_SC=$(echo "$SC_LIST" | grep "true" | awk '{print $1}' || true)
-if [[ -n "$DEFAULT_SC" ]]; then
+if -n "$DEFAULT_SC"; then
     success "默认 StorageClass: $DEFAULT_SC"
 else
     warn "未设置默认 StorageClass"
@@ -1548,7 +1549,7 @@ info "[3/5] 检查 CSI Driver Pod 状态..."
 CSI_PODS=$(kubectl get pods -n kube-system -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-headers 2>/dev/null || \
            kubectl get pods -n kube-system 2>/dev/null | grep -i csi || true)
 CSI_NOT_RUNNING=$(echo "$CSI_PODS" | grep -v "Running" | grep -v "^$" || true)
-if [[ -n "$CSI_NOT_RUNNING" ]]; then
+if -n "$CSI_NOT_RUNNING"; then
     warn "CSI Driver Pod 异常:"
     echo "$CSI_NOT_RUNNING" | while read line; do echo "    $line"; done
 else
@@ -1559,7 +1560,7 @@ fi
 info "[4/5] 检查存储相关事件..."
 STORAGE_EVENTS=$(kubectl get events -n "$NAMESPACE" --sort-by=.lastTimestamp 2>/dev/null | \
                  grep -iE 'FailedMount|FailedAttachVolume|ProvisioningFailed|VolumeResizeFailed' | tail -10 || true)
-if [[ -n "$STORAGE_EVENTS" ]]; then
+if -n "$STORAGE_EVENTS"; then
     warn "发现存储相关警告事件:"
     echo "$STORAGE_EVENTS" | while read line; do echo "    $line"; done
 else
@@ -1570,7 +1571,7 @@ fi
 info "[5/5] 检查 VolumeAttachment 状态..."
 VA_NOT_ATTACHED=$(kubectl get volumeattachment -o json 2>/dev/null | \
                   jq -r '.items[] | select(.status.attached != true) | .metadata.name' 2>/dev/null || true)
-if [[ -n "$VA_NOT_ATTACHED" ]]; then
+if -n "$VA_NOT_ATTACHED"; then
     warn "VolumeAttachment 未完成:"
     echo "$VA_NOT_ATTACHED" | while read line; do echo "    $line"; done
 else
@@ -1634,7 +1635,7 @@ EOF
     exit 0
 }
 
-[[ "${1:-}" == "--help" || "${1:-}" == "-h" ]] && usage
+"${1:-}" == "--help" && usage
 
 # --- 前置检查 ---
 if ! command -v kubectl &>/dev/null; then
@@ -1655,7 +1656,7 @@ echo -e "  时间: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
 # --- Step 1: 检查已注册的 CSI Driver ---
 info "[1/4] 检查已注册的 CSI Driver..."
 CSI_DRIVERS=$(kubectl get csidrivers -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 2>/dev/null || true)
-if [[ -n "$CSI_DRIVERS" ]]; then
+if -n "$CSI_DRIVERS"; then
     success "已注册的 CSI Driver:"
     echo "$CSI_DRIVERS" | while read driver; do echo "    - $driver"; done
 else
@@ -1666,9 +1667,9 @@ fi
 info "[2/4] 检查 CSI Controller Pod 状态..."
 CONTROLLER_PODS=$(kubectl get pods -n kube-system -o wide 2>/dev/null | \
                   grep -iE 'csi.*controller|csi.*provisioner|ebs-csi|disk-csi' || true)
-if [[ -n "$CONTROLLER_PODS" ]]; then
+if -n "$CONTROLLER_PODS"; then
     NOT_RUNNING=$(echo "$CONTROLLER_PODS" | grep -v "Running" || true)
-    if [[ -n "$NOT_RUNNING" ]]; then
+    if -n "$NOT_RUNNING"; then
         warn "CSI Controller Pod 异常:"
         echo "$NOT_RUNNING" | while read line; do echo "    $line"; done
     else
@@ -1682,9 +1683,9 @@ fi
 info "[3/4] 检查 CSI Node Plugin Pod 状态..."
 NODE_PODS=$(kubectl get pods -n kube-system -o wide 2>/dev/null | \
             grep -iE 'csi.*node|csi.*plugin' || true)
-if [[ -n "$NODE_PODS" ]]; then
+if -n "$NODE_PODS"; then
     NOT_RUNNING=$(echo "$NODE_PODS" | grep -v "Running" || true)
-    if [[ -n "$NOT_RUNNING" ]]; then
+    if -n "$NOT_RUNNING"; then
         warn "CSI Node Plugin Pod 异常:"
         echo "$NOT_RUNNING" | while read line; do echo "    $line"; done
     else
@@ -1698,11 +1699,11 @@ fi
 info "[4/4] 检查 CSI Node Driver 注册状态..."
 CSI_NODES=$(kubectl get csinodes -o json 2>/dev/null || echo '{"items":[]}')
 NODE_COUNT=$(echo "$CSI_NODES" | jq '.items | length')
-if [[ "$NODE_COUNT" -gt 0 ]]; then
+if "$NODE_COUNT" -gt 0; then
     success "CSI Node 注册数量: $NODE_COUNT"
     # 检查每个节点的 driver 注册
     EMPTY_DRIVERS=$(echo "$CSI_NODES" | jq -r '.items[] | select(.spec.drivers == null or .spec.drivers == []) | .metadata.name' 2>/dev/null || true)
-    if [[ -n "$EMPTY_DRIVERS" ]]; then
+    if -n "$EMPTY_DRIVERS"; then
         warn "以下节点无 CSI Driver 注册:"
         echo "$EMPTY_DRIVERS" | while read node; do echo "    - $node"; done
     fi
@@ -1766,7 +1767,7 @@ EOF
 NAMESPACE=""
 PVC_NAME=""
 
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --namespace|-n) NAMESPACE="$2"; shift 2 ;;
         --pvc|-p)       PVC_NAME="$2"; shift 2 ;;
@@ -1775,7 +1776,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$NAMESPACE" || -z "$PVC_NAME" ]]; then
+if -z "$NAMESPACE"; then
     error "必须指定 --namespace 和 --pvc 参数"
     usage
 fi
@@ -1795,7 +1796,7 @@ echo -e "${BLUE}${BOLD}═══════════════════
 # --- V1: 验证 PVC Bound 状态 ---
 info "[V1] 验证 PVC Bound 状态..."
 PVC_STATUS=$(kubectl get pvc -n "$NAMESPACE" "$PVC_NAME" -o jsonpath='{.status.phase}' 2>/dev/null || echo "NotFound")
-if [[ "$PVC_STATUS" == "Bound" ]]; then
+if "$PVC_STATUS" == "Bound"; then
     success "PVC 状态: Bound"
     ((PASS_COUNT++))
 else
@@ -1830,7 +1831,7 @@ info "等待测试 Pod 完成 (最多 60s)..."
 if kubectl wait --for=condition=Ready pod/$TEST_POD -n "$NAMESPACE" --timeout=60s 2>/dev/null || \
    kubectl wait --for=jsonpath='{.status.phase}'=Succeeded pod/$TEST_POD -n "$NAMESPACE" --timeout=60s 2>/dev/null; then
     POD_OUTPUT=$(kubectl logs -n "$NAMESPACE" "$TEST_POD" 2>/dev/null || true)
-    if [[ "$POD_OUTPUT" == *"storage-test-ok"* ]]; then
+    if "$POD_OUTPUT" == *"storage-test-ok"*; then
         success "读写测试通过"
         ((PASS_COUNT++))
     else
@@ -1845,9 +1846,9 @@ fi
 # --- V3: 检查 Volume 指标 ---
 info "[V3] 检查 Volume 相关指标..."
 PV_NAME=$(kubectl get pvc -n "$NAMESPACE" "$PVC_NAME" -o jsonpath='{.spec.volumeName}' 2>/dev/null || true)
-if [[ -n "$PV_NAME" ]]; then
+if -n "$PV_NAME"; then
     PV_STATUS=$(kubectl get pv "$PV_NAME" -o jsonpath='{.status.phase}' 2>/dev/null || echo "Unknown")
-    if [[ "$PV_STATUS" == "Bound" ]]; then
+    if "$PV_STATUS" == "Bound"; then
         success "PV $PV_NAME 状态: Bound"
         ((PASS_COUNT++))
     else
@@ -1866,7 +1867,7 @@ kubectl delete pod -n "$NAMESPACE" "$TEST_POD" --ignore-not-found=true &>/dev/nu
 # --- 输出验证结果 ---
 echo -e "\n${BOLD}════════════════════════════════════════════════════════${NC}"
 TOTAL=$((PASS_COUNT + FAIL_COUNT))
-if [[ $FAIL_COUNT -eq 0 ]]; then
+if $FAIL_COUNT -eq 0; then
     echo -e "${GREEN}${BOLD}验证结果: 全部通过 ($PASS_COUNT/$TOTAL)${NC}"
     exit 0
 else

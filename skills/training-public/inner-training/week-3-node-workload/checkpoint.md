@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,7 +41,7 @@ title: Week 3 自测: 节点与工作负载管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - Kubernetes week 3 self-test assessment
+  - [[Kubernetes|Kubernetes]] week 3 self-test assessment
   - Node and workload knowledge test
   - Node management troubleshooting quiz
   - Pod scheduling self-check
@@ -105,7 +106,7 @@ Week 3 的学习聚焦于 Kubernetes 集群中最核心的运维对象——节�
 | 状态 | 含义 | 调度器行为 |
 |------|------|-----------|
 | **Ready** | 节点健康，可以接收新 Pod | 正常调度 |
-| **NotReady** | 节点异常，kubelet 心跳丢失 | 停止调度新 Pod |
+| **NotReady** | 节点异常，[[kubelet|kubelet]] 心跳丢失 | 停止调度新 Pod |
 | **Unknown** | 节点状态未知（通常因网络问题） | 停止调度新 Pod |
 
 当节点处于 NotReady 状态超过 `pod-eviction-timeout`（默认 5 分钟）后，控制器会开始驱逐该节点上的 Pod。对于 Deployment 管理的 Pod，会在其他节点重新创建。

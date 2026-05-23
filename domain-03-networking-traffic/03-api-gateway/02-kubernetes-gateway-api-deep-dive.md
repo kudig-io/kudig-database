@@ -50,9 +50,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
   label: '故障树: gateway-api'
+created: "2026-05-23"
 ---
 
-# 02 - Kubernetes Gateway API 标准深度解析
+# 02 - [[Kubernetes|Kubernetes]] Gateway API 标准深度解析
 
 > **文档版本**: v1.0 | **适用版本**: Gateway API v1.0 - v1.2, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Gateway API, GatewayClass, HTTPRoute, ReferenceGrant, 一致性测试
 
@@ -66,7 +67,7 @@ cross_refs:
 6. [跨命名空间路由与 ReferenceGrant](#6-跨命名空间路由与-referencegrant)
 7. [一致性测试与合规等级](#7-一致性测试与合规等级)
 8. [各产品 Gateway API 支持矩阵](#8-各产品-gateway-api-支持矩阵)
-9. [从 Ingress 迁移到 Gateway API](#9-从-ingress-迁移到-gateway-api)
+9. [从 [[Ingress|Ingress]] 迁移到 Gateway API](#9-从-ingress-迁移到-gateway-api)
 
 ---
 
@@ -422,7 +423,7 @@ go test ./conformance/... -run TestConformance \
 
 <!-- chunk: 8. 各产品 Gateway API 支持矩阵 -->## 8. 各产品 Gateway API 支持矩阵
 
-| 能力 | Higress | APISIX | Kong | Envoy GW | Traefik |
+| 能力 | Higress | APISIX | Kong | [[Envoy|Envoy]] GW | Traefik |
 |------|---------|--------|------|----------|---------|
 | **GatewayClass** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Gateway** | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -522,22 +523,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-40-cloud-native-api-gateway MOC]]
+- domain-40-cloud-native-api-gateway MOC
 - [[domain-03-networking-traffic/README.md|Domain 98: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-40 云原生 API 网关 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01 - 云原生 API 网关架构总览]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03 - API 网关选型指南与对比矩阵]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04 - Higress 云原生 API 网关企业级实践]]
-- [[domain-03-networking-traffic/05-apisix-enterprise-gateway.md|05 - Apache APISIX 企业级 API 网关实践]]
-- [[domain-03-networking-traffic/06-kong-enterprise-gateway.md|06 - Kong API 网关企业级实践]]
-- [[domain-03-networking-traffic/07-envoy-gateway-enterprise.md|07 - Envoy Gateway 企业级实践]]
-- [[domain-03-networking-traffic/08-traefik-enterprise-gateway.md|08 - Traefik API 网关企业级实践]]
-- [[domain-03-networking-traffic/09-nginx-ingress-migration-guide.md|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
-- [[domain-03-networking-traffic/10-wasm-plugin-ecosystem.md|10 - Wasm 插件生态与开发实践]]
+- Domain-40 云原生 API 网关 — 开源项目索引
+- 01 - 云原生 API 网关架构总览
+- 03 - API 网关选型指南与对比矩阵
+- 04 - Higress 云原生 API 网关企业级实践
+- 05 - Apache APISIX 企业级 API 网关实践
+- 06 - Kong API 网关企业级实践
+- 07 - Envoy Gateway 企业级实践
+- 08 - Traefik API 网关企业级实践
+- 09 - 传统 Ingress 控制器向云原生 API 网关迁移
+- 10 - Wasm 插件生态与开发实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/99-envoy-gateway-enterprise-guide.md|99-envoy-gateway-enterprise-guide]]
-- [[domain-03-networking-traffic/01-api-gateway-architecture-overview.md|01-api-gateway-architecture-overview]]
-- [[domain-03-networking-traffic/03-api-gateway-selection-guide.md|03-api-gateway-selection-guide]]
-- [[domain-03-networking-traffic/04-higress-enterprise-gateway.md|04-higress-enterprise-gateway]]
+- 99-envoy-gateway-enterprise-guide
+- 01-api-gateway-architecture-overview
+- 03-api-gateway-selection-guide
+- 04-higress-enterprise-gateway

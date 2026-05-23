@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 云厂商节点集成

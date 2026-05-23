@@ -40,9 +40,10 @@ prerequisites:
 - kafka-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
+title: [[Kubernetes|Kubernetes]] 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 description: '# Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous
   Processing)'
 category: papers
@@ -51,10 +52,10 @@ tags:
 - papers
 - research
 - scheduler
-- prometheus
-- jaeger
+- [[Prometheus|prometheus]]
+- [[Jaeger|jaeger]]
 - kafka
-- statefulset
+- [[StatefulSet|statefulset]]
 - job
 - operator
 last_updated: 2026-05
@@ -1477,27 +1478,27 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-papers MOC]]
+- domain-19-papers MOC
 - [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-19 论文与参考 — 开源项目索引]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...]]
-- [[domain-19-landscape-references/03-kubernetes-zero-trust-security-architecture.md|Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...]]
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...]]
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide.md|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]
-- [[domain-19-landscape-references/06-kubernetes-cost-governance-finops-practice.md|Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...]]
-- [[domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md|Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...]]
-- [[domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md|Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...]]
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md|Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...]]
+- Domain-19 论文与参考 — 开源项目索引
+- Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
+- Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
+- Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
+- Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
+- Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
+- Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
+- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
+- Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 
 ## Related
 
-- [[domain-20-application-patterns/79-polar-research.md|79-polar-research]]
+- 79-polar-research
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-19-landscape-references/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12-kubernetes-scheduler-deep-optimization-custom-scheduling]]
-- [[domain-19-landscape-references/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md|13-kubernetes-multi-tenancy-security-isolation-resource-quota]]
-- [[domain-19-landscape-references/15-kubernetes-chaos-engineering-fault-injection-testing.md|15-kubernetes-chaos-engineering-fault-injection-testing]]
-- [[domain-19-landscape-references/16-kubernetes-edge-computing-kubeedge-practice.md|16-kubernetes-edge-computing-kubeedge-practice]]
+- 12-kubernetes-scheduler-deep-optimization-custom-scheduling
+- 13-kubernetes-multi-tenancy-security-isolation-resource-quota
+- 15-kubernetes-chaos-engineering-fault-injection-testing
+- 16-kubernetes-edge-computing-kubeedge-practice

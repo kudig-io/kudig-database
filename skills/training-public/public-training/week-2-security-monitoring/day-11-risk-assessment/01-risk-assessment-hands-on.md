@@ -34,6 +34,7 @@ prerequisites:
 - helm-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 11: K8s 安全风险识别与防护实操
@@ -65,10 +66,10 @@ prerequisites:
 | 攻击面 | 风险 | 防护措施 |
 |--------|------|---------|
 | API Server | 未授权访问、提权 | RBAC + 审计日志 + 认证 |
-| etcd | 数据泄露 | TLS + 网络隔离 + 加密 |
-| Kubelet | 容器逃逸 | RBAC + 静态 Pod + PSP |
-| Container Runtime | 权限过大 | 最小化 capabilities |
-| 网络 | 横向移动 | NetworkPolicy + CNI 隔离 |
+| [[etcd|etcd]] | 数据泄露 | TLS + 网络隔离 + 加密 |
+| [[kubelet|Kubelet]] | 容器逃逸 | RBAC + 静态 Pod + PSP |
+| [[Container Runtime|Container Runtime]] | 权限过大 | 最小化 capabilities |
+| 网络 | 横向移动 | [[NetworkPolicy|NetworkPolicy]] + CNI 隔离 |
 
 ---
 

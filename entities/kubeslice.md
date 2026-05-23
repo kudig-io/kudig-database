@@ -1,5 +1,5 @@
 ---
-title: KubeSlice
+title: KubeSlice (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # KubeSlice
@@ -68,10 +69,10 @@ KubeSlice 是一个多集群网络平台，通过创建逻辑 Slice（网络切�
 
 - [[kubeclipper]] — KubeClipper
 - [[runme-notebooks]] — Runme
-- [[operator-framework]] — Operator Framework
+- [[operator-framework]] — [[Operator Framework|Operator Framework]]
 - [[clusternet]] — Clusternet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kubeslice/kubeslice.md|kubeslice]]
+- kubeslice
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

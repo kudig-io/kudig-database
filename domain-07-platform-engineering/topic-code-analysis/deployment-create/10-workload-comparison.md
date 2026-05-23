@@ -59,6 +59,7 @@ related_topics:
 - deployment-controller
 - replicaset-controller
 - rolling-update
+created: "2026-05-23"
 ---
 
 # Deployment vs StatefulSet vs DaemonSet 选型指南

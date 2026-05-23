@@ -27,6 +27,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OpenRouter 概述与核心架构

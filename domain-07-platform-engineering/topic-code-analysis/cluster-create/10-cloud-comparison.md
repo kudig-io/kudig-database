@@ -1,5 +1,5 @@
 ---
-title: 云厂商方案与 kubeadm 对比
+title: 云厂商方案与 kubeadm 对比 (topic-code-analysis)
 description: 'title: 云厂商方案与 kubeadm 对比'
 category: general
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 云厂商方案与 kubeadm 对比

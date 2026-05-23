@@ -1,5 +1,5 @@
 ---
-title: 删除时的安全清理
+title: 删除时的安全清理 (topic-code-analysis)
 description: 'title: 删除时的安全清理'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 删除时的安全清理

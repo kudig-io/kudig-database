@@ -47,15 +47,16 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 09 - Endpoints / EndpointSlice YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 <!-- chunk: 概述 -->## 概述
 
-**Endpoints** 和 **EndpointSlice** 是 Kubernetes 中用于跟踪 Service 后端 Pod 网络端点的资源对象。它们记录了符合 Service 标签选择器的 Pod IP 地址和端口信息,为服务发现和负载均衡提供基础数据。
+**Endpoints** 和 **EndpointSlice** 是 Kubernetes 中用于跟踪 [[Service|Service]] 后端 Pod 网络端点的资源对象。它们记录了符合 Service 标签选择器的 Pod IP 地址和端口信息,为服务发现和负载均衡提供基础数据。
 
 #<!-- chunk: 核心概念 -->## 核心概念
 
@@ -77,7 +78,7 @@ authors:
 | 特性 | Endpoints | EndpointSlice |
 |------|-----------|---------------|
 | **引入版本** | v1.0 | v1.16 (Alpha), v1.21 (GA) |
-| **可扩展性** | 单个对象存储所有端点(受 etcd 大小限制) | 分片存储(每个 Slice 默认 100 个端点) |
+| **可扩展性** | 单个对象存储所有端点(受 [[etcd|etcd]] 大小限制) | 分片存储(每个 Slice 默认 100 个端点) |
 | **性能** | 大规模集群性能差 | 显著提升网络和 API 性能 |
 | **拓扑感知** | 不支持 | 支持拓扑信息(zone、node) |
 | **双栈支持** | 有限 | 原生支持 IPv4/IPv6 |
@@ -1788,25 +1789,25 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10 - Ingress / IngressClass YAML 配置参考]]
+- Domain-32 YAML 清单 — 开源项目索引
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07-job-cronjob-reference]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08-service-all-types]]
-- [[domain-18-manifests-patterns/10-ingress-ingressclass.md|10-ingress-ingressclass]]
-- [[domain-18-manifests-patterns/11-gateway-api-core.md|11-gateway-api-core]]
+- 07-job-cronjob-reference
+- 08-service-all-types
+- 10-ingress-ingressclass
+- 11-gateway-api-core
 
 ## Related
 

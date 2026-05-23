@@ -1,4 +1,31 @@
 ---
+title: 工业互联网平台架构设计 — 阿里云视角
+description: 'title: 工业互联网平台架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 工业互联网平台架构设计 — 阿里云视角 是什么
+- 如何 工业互联网平台架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 工业互联网平台架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: 工业互联网平台架构设计
 description: '# 工业互联网平台架构设计 — 阿里云视角'
 category: application-architecture
@@ -15,7 +42,7 @@ audience:
 - 工业软件开发者
 estimated_read_time: 5min
 intent_queries:
-- 工业互联网 Kubernetes IIoT平台
+- 工业互联网 [[Kubernetes|Kubernetes]] IIoT平台
 - 设备接入 MQTT OPC-UA K8s
 - 工业数据中台 Kubernetes Flink
 - 工业APP 低代码 Kubernetes
@@ -29,9 +56,6 @@ trigger_keywords:
 - OPC-UA
 - 数字孪生
 - 阿里云
-prerequisites:
-- kubectl-basics
-- prometheus-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-11-production-operations
@@ -42,6 +66,15 @@ related_topics:
 - 93-digital-twin-factory
 - 51-smart-manufacturing-mes
 - 07-iot-platform-architecture
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 工业互联网平台架构设计 — 阿里云视角
@@ -254,6 +287,30 @@ flowchart LR
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+## Obsidian 相关文档
+
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 57-digital-therapeutics
+- 58-web3-gamefi
+- 60-v2x-autonomous-driving
+- 61-smart-grid
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

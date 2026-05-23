@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 全量故障树分析(FTA)排查手册
+title: Kubernetes 全量故障树分析(FTA)排查手册 (domain-10-troubleshooting-diagnostics)
 description: 'title: Kubernetes 全量故障树分析(FTA)排查手册'
 category: fta
 tags:
@@ -48,9 +48,10 @@ prerequisites:
 fta_id: FTA-KUBERNETES_FULL_ANALYSIS-001
 component: Kubernetes Full Analysis
 severity: critical
+created: "2026-05-23"
 ---
 
-title: Kubernetes 全量故障树分析(FTA)排查手册
+title: [[Kubernetes|Kubernetes]] 全量故障树分析(FTA)排查手册
 description: '# Kubernetes 全量故障树分析(FTA)排查手册'
 category: fta
 tags:
@@ -58,9 +59,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - prometheus

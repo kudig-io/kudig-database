@@ -1,5 +1,5 @@
 ---
-title: CoreDNS
+title: CoreDNS (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # CoreDNS
@@ -68,33 +69,33 @@ description: '## 项目概述'
 ## Related
 
 - [[kuadrant]] — Kuadrant
-- [[notary-project]] — Notary Project
+- [[notary-project]] — [[Notary Project|Notary Project]]
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-03-networking-traffic/14-coredns-configuration-corefile.md|14-coredns-configuration-corefile]]
-- [[domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md|28-coredns-troubleshooting-optimization]]
-- [[domain-03-networking-traffic/11-dns-service-discovery-coredns.md|11-dns-service-discovery-coredns]]
-- [[domain-03-networking-traffic/15-coredns-plugins-reference.md|15-coredns-plugins-reference]]
-- [[domain-03-networking-traffic/13-coredns-architecture-principles.md|13-coredns-architecture-principles]]
-- [[domain-19-landscape-references/graduated/coredns/coredns.md|coredns]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/core-deps/coredns/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
+- 14-coredns-configuration-corefile
+- 28-coredns-troubleshooting-optimization
+- 11-dns-service-discovery-coredns
+- 15-coredns-plugins-reference
+- 13-coredns-architecture-principles
+- coredns
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.11
 - [[references/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]] — Cross-reference
 - [[references/networking-terms|K8s 网络术语参考]] — Cross-reference
 - [[references/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference

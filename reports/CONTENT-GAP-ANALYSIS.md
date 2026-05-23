@@ -1,5 +1,5 @@
 ---
-title: 内容缺口分析报告
+title: 内容缺口分析报告 (reports)
 description: '| domain-03-networking-traffic | 1,291 | 需翻 3-4 倍 | Istio/Linkerd/Envoy 实操深度不足 |'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 内容缺口分析报告

@@ -64,6 +64,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md
   label: '运维技能: 04-dns-resolution-failure'
+created: "2026-05-23"
 ---
 
 # 26 - DNS 故障排查 (DNS Troubleshooting)
@@ -77,7 +78,7 @@ cross_refs:
 
 | 故障类型 | 症状表现 | 影响范围 | 紧急程度 |
 |---------|---------|---------|---------|
-| **内部域名解析失败** | Service/Pod域名无法解析 | 服务间调用失败 | P0 - 紧急 |
+| **内部域名解析失败** | [[Service|Service]]/Pod域名无法解析 | 服务间调用失败 | P0 - 紧急 |
 | **外部域名解析失败** | 无法访问互联网域名 | 依赖服务中断 | P1 - 高 |
 | **DNS响应超时** | 查询响应缓慢 | 应用性能下降 | P1 - 高 |
 | **DNS缓存问题** | 解析结果陈旧 | 配置变更延迟 | P2 - 中 |
@@ -1000,9 +1001,9 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

@@ -35,6 +35,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,7 +43,7 @@ title: Day 26: FTA/FEBM 专题深化
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 故障树分析进阶
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 故障树分析进阶
   - FEBM 取证循证方法深化
   - AI Agent 运维模式
   - K8s 故障全景树
@@ -111,11 +112,11 @@ FTA（故障树分析）是一种自顶向下的故障分析方法，从一个�
 
 | 逻辑门 | 符号 | 含义 | 示例 |
 |--------|------|------|------|
-| OR 门 | ⊕ | 任一子事件发生即触发 | Pod 故障 OR Service 故障 → 应用不可用 |
+| OR 门 | ⊕ | 任一子事件发生即触发 | Pod 故障 OR [[Service|Service]] 故障 → 应用不可用 |
 | AND 门 | ⊗ | 所有子事件同时发生才触发 | CPU 满载 AND 内存不足 → 节点故障 |
 | XOR 门 | ⊖ | 有且仅有一个子事件发生 | 人为误操作 XOR 程序 Bug → 数据丢失 |
 | NOT 门 | ¬ | 子事件不发生 | NOT 告警触发 → 故障未被发现 |
-| K/N 门 | K/N | N 个子事件中有 K 个发生 | 3/5 节点故障 → etcd 不可用 |
+| K/N 门 | K/N | N 个子事件中有 K 个发生 | 3/5 节点故障 → [[etcd|etcd]] 不可用 |
 
 ### FEBM 取证循证方法
 

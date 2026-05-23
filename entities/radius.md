@@ -1,5 +1,5 @@
 ---
-title: Radius
+title: Radius (entities)
 description: 'summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了 "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure
   CosmosDB 还是本地 MongoDB），实现关注点分离。"'
 category: general
@@ -20,17 +20,18 @@ trigger_keywords:
 - Radius
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 ---
 title: "Radius"
 category: entities
 summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了 "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure CosmosDB 还是本地 MongoDB），实现关注点分离。"
-tags: [k8s, cncf, platform, radius]
+tags: k8s, cncf, platform, radius]
 sources: ["docs/domain-19-landscape-references/sandbox/radius/radius.md", "domain-19-landscape-references/sandbox/radius/radius.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: reference
 base_confidence: 0.7
@@ -72,4 +73,4 @@ Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应�
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

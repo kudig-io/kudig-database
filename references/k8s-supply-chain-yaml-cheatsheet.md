@@ -28,6 +28,7 @@ trigger_keywords:
 - 配置清单与速查表
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 供应链安全、YAML 配置清单与速查表

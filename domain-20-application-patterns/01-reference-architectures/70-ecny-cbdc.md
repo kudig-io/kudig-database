@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 数字人民币架构设计
@@ -38,7 +39,7 @@ tags:
 - architecture
 - industry
 - redis
-- statefulset
+- [[StatefulSet|statefulset]]
 - operator
 - wasm
 last_updated: 2026-05-18
@@ -50,7 +51,7 @@ audience:
 - 支付系统专家
 estimated_read_time: 5min
 intent_queries:
-- 数字人民币 e-CNY Kubernetes 架构
+- 数字人民币 e-CNY [[Kubernetes|Kubernetes]] 架构
 - 央行数字货币 CBDC 区块链 K8s
 - 双离线支付 可信硬件 K8s
 - 数字人民币智能合约 Kubernetes
@@ -71,7 +72,7 @@ related_domains:
 - domain-03-networking-traffic
 related_topics:
 - 06-fintech-architecture
-- [[domain-20-application-patterns/38-supply-chain-finance.md|38-supply-chain-finance]]
+- 38-supply-chain-finance
 - 25-quantitative-trading
 authors:
 - name: KUDIG Team
@@ -347,7 +348,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -362,11 +363,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/68-quantum-computing-cloud.md|68-quantum-computing-cloud]]
-- [[domain-20-application-patterns/69-6g-core-network.md|69-6g-core-network]]
-- [[domain-20-application-patterns/71-smart-tax.md|71-smart-tax]]
-- [[domain-20-application-patterns/72-digital-twin-city.md|72-digital-twin-city]]
+- 68-quantum-computing-cloud
+- 69-6g-core-network
+- 71-smart-tax
+- 72-digital-twin-city
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

@@ -21,6 +21,10 @@ trigger_keywords:
 - 多集群成本优化策略
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/opencost]]"
+    type: related_to
 ---
 
 # 多集群成本优化策略
@@ -57,12 +61,12 @@ prerequisites:
 
 | 工具 | 功能 |
 |------|------|
-| Kubecost / OpenCost | 成本可视化和分摊 |
+| Kubecost / [[entities/opencost|OpenCost]] | 成本可视化和分摊 |
 | Cluster Autoscaler | 自动扩缩容 |
 | Karpenter | 智能节点供应 |
 | Spot.io | Spot 实例自动化 |
 
 ## 相关 Domain
 
-- [[domain-11-production-operations/01-finops/01-cost-governance]]
-- [[domain-12-cloud-providers/01-aws-eks/01-eks-cost-optimization]]
+- domain-11-production-operations/01-finops/01-cost-governance
+- domain-12-cloud-providers/01-aws-eks/01-eks-cost-optimization

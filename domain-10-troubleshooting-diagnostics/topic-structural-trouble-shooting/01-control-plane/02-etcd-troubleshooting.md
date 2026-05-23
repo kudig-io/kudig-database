@@ -1,5 +1,5 @@
 ---
-title: etcd 故障排查指南
+title: etcd 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: etcd 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,9 +40,10 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: etcd 故障排查指南
+title: [[etcd|etcd]] 故障排查指南
 description: '# etcd 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -50,9 +51,9 @@ tags:
 - troubleshooting
 - decision-tree
 - etcd
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - job
 - cronjob
 - rag
@@ -1360,8 +1361,8 @@ EOF
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

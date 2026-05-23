@@ -1,82 +1,112 @@
 ---
-title: KUDIG 故障排查 Prompt 模板
-description: '# KUDIG 故障排查 Prompt 模板'
-category: general
+title: '场景: 故障排查'
+description: 系统化故障排查方法论，覆盖所有知识域和组件
+category: scenario
 tags:
 - k8s
-- etcd
-- apiserver
-- rbac
+- scenario
+- troubleshooting
 - rag
-- agent
-last_updated: 2026-05
+last_updated: '2026-05-20'
 difficulty: intermediate
 reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- KUDIG 故障排查 Prompt 模板 是什么
-- 如何 KUDIG 故障排查 Prompt 模板
-- KUDIG 故障排查 Prompt 模板 故障排查
-- KUDIG 故障排查 Prompt 模板 排障步骤
+- '场景: 故障排查 是什么'
+- '如何 场景: 故障排查'
+- Kubernetes 11 production operations 最佳实践
+- '场景: 故障排查 故障排查'
+- '场景: 故障排查 排障步骤'
 trigger_keywords:
-- KUDIG
+- '场景:'
 - 故障排查
-- Prompt
-- 模板
+- production
+- operations
+- best
+- practices
 prerequisites:
 - kubectl-basics
-- etcd-basics
+- gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# KUDIG 故障排查 Prompt 模板
+# 场景: 故障排查
 
-> 用途: Agent 在用户遇到 Kubernetes 故障时，基于 KUDIG 知识库进行系统化排查
+> **场景 ID**: SC-03
+> **英文**: Troubleshooting
+> **最后更新**: 2026-05-20
 
-## Prompt
+---
 
+## 场景概述
+
+故障排查是 SRE 和运维工程师的核心能力。本场景汇总了通用排查方法论、组件级故障树、和操作技能卡片。
+
+---
+
+## 快速决策树
+
+```mermaid
+graph TD
+    A["故障排查"] --> B{"问题确认"}
+    B -->|"已知问题"| C["参考相关文档"]
+    B -->|"未知问题"| D{"组件定位"}
+    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
+    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
+    D -->|"网络"| G["参考 domain-03-networking-traffic"]
+    D -->|"存储"| H["参考 domain-04-storage-data"]
+    D -->|"安全"| I["参考 domain-05-security-compliance"]
+
+    C --> J["执行修复"]
+    E --> J
+    F --> J
+    G --> J
+    H --> J
+    I --> J
+
+    J --> K{"验证"}
+    K -->|"已解决"| L["记录关闭"]
+    K -->|"未解决"| M["升级到专家"]
+
+    style A fill:#ef4444,stroke:#b91c1c,color:#fff
+    style L fill:#22c55e,stroke:#166534,color:#fff
+    style M fill:#f59e0b,stroke:#b45309,color:#fff
 ```
-你是一名 Kubernetes 排障专家，使用 KUDIG 知识库进行系统化故障排查。
 
-用户问题: {user_query}
+---
 
-请按以下步骤进行排查:
+## 相关文档
 
-### Step 1: 故障定位
-- 确认故障现象属于哪个知识域（控制平面/工作负载/网络/存储/安全）
-- 引用 KUDIG 相关文档: {relevant_docs}
+- [[domain-10-troubleshooting-diagnostics/README.md]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md]]
+- domain-01-cluster-fundamentals/16-troubleshooting-guide.md
 
-### Step 2: 快速诊断
-执行以下检查（按优先级排序）:
-1. {quick_check_1}
-2. {quick_check_2}
-3. {quick_check_3}
 
-### Step 3: 深度诊断
-如果快速检查未能定位问题:
-1. {deep_check_1}
-2. {deep_check_2}
+---
 
-### Step 4: 修复方案
-- 推荐操作: {fix_steps}
-- 风险等级: {risk_level}
-- 回滚方案: {rollback_steps}
+## FTA 故障树
 
-### Step 5: 关联文档
-- FTA 故障树: {fta_link}
-- 技能卡片: {skill_link}
-- 最佳实践: {best_practice_link}
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|所有 FTA 故障树]]
 
-请用简洁的语言回复，每条命令都要有注释。优先使用 kubectl 命令，附带预期输出。
-```
 
-## 意图路由规则
+---
 
-| 用户查询关键词 | 路由目标 |
+## 操作技能
+
+- [[domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|所有操作技能]]
+
+
+---
+
+## 关联场景
+
+| 关联场景 | 说明 |
 |---|---|
-| "Pod 启动失败", "CrashLoopBackOff", "Pending" | domain-02-workloads-applications → domain-10-troubleshooting-diagnostics/topic-fta/pod-fta |
-| "etcd", "控制平面", "apiserver" | domain-01-cluster-fundamentals → domain-10-troubleshooting-diagnostics/topic-fta/apiserver-fta |
-| "网络不通", "Service", "DNS" | domain-03-networking-traffic → domain-10-troubleshooting-diagnostics/topic-fta/dns-fta |
-| "存储", "PV", "PVC" | domain-04-storage-data → domain-10-troubleshooting-diagnostics/topic-fta/csi-fta |
-| "权限", "RBAC", "认证" | domain-05-security-compliance → domain-10-troubleshooting-diagnostics/topic-fta/rbac-fta |
+
+## Related
+
+- [[references/kudig-metadata-index.md|README]].md|README]]
+- MOC.md|MOC]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]

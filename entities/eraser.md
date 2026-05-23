@@ -1,5 +1,5 @@
 ---
-title: Eraser
+title: Eraser [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Eraser
@@ -34,7 +35,7 @@ prerequisites:
 
 ## 概述
 
-Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群节点中删除存在漏洞的和未使用的容器镜像。它通过与漏洞扫描器（如 Trivy）集成，定期扫描节点上的镜像，自动移除包含高危漏洞的镜像，减小节点的攻击面并释放磁盘空间。
+Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群节点中删除存在漏洞的和未使用的容器镜像。它通过与漏洞扫描器（如 [[Trivy|Trivy]]）集成，定期扫描节点上的镜像，自动移除包含高危漏洞的镜像，减小节点的攻击面并释放磁盘空间。
 
 ## 核心能力
 
@@ -66,13 +67,13 @@ Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群�
 
 ## Related
 
-- [[external-secrets]] — External Secrets Operator
+- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
 - [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[coredns]] — CoreDNS
 
-- [[domain-19-landscape-references/sandbox/eraser/eraser.md|eraser]]
+- eraser
 - [[entities/zot.md|zot]]
 - [[entities/kitops.md|KitOps]]
 - [[entities/copa.md|Copa (Copacetic)]]

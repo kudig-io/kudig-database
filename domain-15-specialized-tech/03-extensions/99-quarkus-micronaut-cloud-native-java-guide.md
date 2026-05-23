@@ -51,6 +51,7 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
+created: "2026-05-23"
 ---
 
 # Quarkus / Micronaut 云原生 Java 框架实践指南
@@ -68,7 +69,7 @@ cross_refs:
 - [二、框架对比](#二框架对比)
 - [三、Quarkus 核心实践](#三quarkus-核心实践)
 - [四、Micronaut 核心实践](#四micronaut-核心实践)
-- [五、Kubernetes 原生集成](#五kubernetes-原生集成)
+- [五、[[Kubernetes|Kubernetes]] 原生集成](#五kubernetes-原生集成)
 - [六、Dev Services 开发体验](#六dev-services-开发体验)
 - [七、反应式编程](#七反应式编程)
 - [八、Native Image 编译](#八native-image-编译)
@@ -686,22 +687,22 @@ Phase 4: 测试与优化
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-15-specialized-tech MOC]]
+- domain-15-specialized-tech KUDIG Database — Global MOC
 - [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-10 扩展与自定义 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-crd-development-guide.md|CRD 自定义资源定义开发指南]]
-- [[domain-15-specialized-tech/02-operator-development-patterns.md|02 - Operator开发模式与控制器实现]]
-- [[domain-15-specialized-tech/03-admission-webhook-configuration.md|03 - 准入控制器(Webhook)配置与实现]]
-- [[domain-15-specialized-tech/04-api-aggregation-extension.md|Kubernetes API 聚合扩展机制详解]]
-- [[domain-15-specialized-tech/05-package-management-tools.md|包管理与应用分发工具]]
-- [[domain-15-specialized-tech/06-helm-charts-management.md|47 - Helm Chart开发与管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践]]
-- [[domain-15-specialized-tech/08-cicd-pipelines.md|CI/CD 管道]]
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd.md|48 - GitOps工作流]]
+- index.md|Domain-10 扩展与自定义 — 开源项目索引]]
+- CRD 自定义资源定义开发指南
+- 02 - Operator开发模式与控制器实现
+- 03 - 准入控制器(Webhook)配置与实现
+- Kubernetes API 聚合扩展机制详解
+- 包管理与应用分发工具
+- 47 - Helm Chart开发与管理
+- 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- CI/CD 管道
+- 48 - GitOps工作流
 
 ## See Also
 
-- [[domain-15-specialized-tech/16-security-compliance-management.md|16-security-compliance-management]]
-- [[domain-15-specialized-tech/99-graalvm-native-image-guide.md|99-graalvm-native-image-guide]]
-- [[domain-15-specialized-tech/99-serverless-faas-guide.md|99-serverless-faas-guide]]
-- [[domain-15-specialized-tech/01-crd-development-guide.md|01-crd-development-guide]]
+- 16-security-compliance-management
+- 99-graalvm-native-image-guide
+- 99-serverless-faas-guide
+- 01-crd-development-guide

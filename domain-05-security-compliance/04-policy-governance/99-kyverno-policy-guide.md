@@ -53,9 +53,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
-# Kyverno K8s 原生策略管理实践指南
+# [[Kyverno|Kyverno]] K8s 原生策略管理实践指南
 
 > **适用版本**: Kyverno v1.14.0
 > **最后更新**: 2026-04-24
@@ -65,7 +66,7 @@ cross_refs:
 
 <!-- chunk: 一、概述与威胁模型 -->## 一、概述与威胁模型
 
-Kyverno 是专为 Kubernetes 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，这使得 K8s 管理员和安全团队能够以最低的学习成本快速落地策略管理。
+Kyverno 是专为 [[Kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，这使得 K8s 管理员和安全团队能够以最低的学习成本快速落地策略管理。
 
 在缺乏策略引擎的 K8s 集群中，安全风险无处不在。开发人员可以随意创建特权容器用于调试但事后忘记删除；CI/CD 管道可以部署使用 latest 标签的镜像导致生产环境不可预测；团队成员可以绕过安全基线直接创建不安全的 K8s 资源；命名空间的资源配额可能被过度消耗影响其他团队的服务质量。这种无约束的状态在小型团队中也许可以通过人工审查来控制，但在多团队、多集群、多环境的企业环境中，人工审查完全无法跟上资源创建的速度和规模。
 
@@ -1357,24 +1358,24 @@ kubectl get clustercleanuppolicy -o wide
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
 
 ## See Also
 
-- [[domain-05-security-compliance/99-falco-runtime-security-guide.md|99-falco-runtime-security-guide]]
-- [[domain-05-security-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/99-opa-gatekeeper-policy-guide.md|99-opa-gatekeeper-policy-guide]]
-- [[domain-05-security-compliance/99-vault-k8s-secrets-guide.md|99-vault-k8s-secrets-guide]]
+- 99-falco-runtime-security-guide
+- 99-java-security-kubernetes-guide
+- 99-opa-gatekeeper-policy-guide
+- 99-vault-k8s-secrets-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]

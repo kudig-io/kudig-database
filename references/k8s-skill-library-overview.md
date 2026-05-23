@@ -29,6 +29,7 @@ trigger_keywords:
 - 可执行的工单诊断-修复闭环
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 运维 Skill 库

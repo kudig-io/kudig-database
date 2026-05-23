@@ -55,29 +55,31 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl get endpoints <service-name> -n <ns> -o jsonpath='{.subsets}' | jq 'length == 0 or . == null' 显示 Endpoint 为空 -->
 
-# Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+# [[Service|Service]] 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ---
 
 ## 1. 概述
 
-Service 是 Kubernetes 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，直接导致微服务间通信断裂、业务功能不可用。
+Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，直接导致微服务间通信断裂、业务功能不可用。
 
 ### 典型触发场景
 
 1. **Endpoints 为空**: Service 的 label selector 与后端 Pod 的 labels 不匹配，或者所有后端 Pod 的 readiness probe 均失败，导致 EndpointSlice 中无任何就绪地址
 2. **端口映射错误**: Service 的 `targetPort` 与容器实际监听的 `containerPort` 不一致，流量被转发到未监听的端口，返回 connection refused
 3. **kube-proxy 规则缺失/过期**: kube-proxy Pod 异常或 iptables/IPVS/nftables 规则未正确同步，导致 ClusterIP 上的流量无法被正确 DNAT 到后端 Pod
-4. **NetworkPolicy 阻断**: 集群中配置了 NetworkPolicy，显式或隐式地阻断了客户端 Pod 到 Service 后端 Pod 的流量
+4. **[[NetworkPolicy|NetworkPolicy]] 阻断**: 集群中配置了 NetworkPolicy，显式或隐式地阻断了客户端 Pod 到 Service 后端 Pod 的流量
 5. **LoadBalancer External IP 未分配**: 云环境中 LoadBalancer 类型 Service 的 External IP 长时间处于 `<pending>`，云控制器（cloud-controller-manager）无法正常工作
 
 ### Service 类型覆盖
 
-本 Skill 覆盖以下所有 Service 类型的连通性问题：
+本 [[SKILL|Skill]] 覆盖以下所有 Service 类型的连通性问题：
 
 | Service 类型 | 说明 | 典型故障模式 |
 |-------------|------|-------------|
@@ -1666,7 +1668,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 |------|---------|---------|
 | Kubernetes 网络模型与 Service 实现 | `domain-03-networking-traffic/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
 | Service 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md` | 理解 Service 连通性故障的完整因果链和概率模型 |
-| Ingress 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/list/[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
+| Ingress 故障树分析 | `domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
 | 网络故障排查深度指南 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `domain-10-troubleshooting-diagnostics/` | 系统化故障排查的理论基础和方法论 |
 | DNS 诊断 | `SKILL-NET-001` | 当问题根因在 DNS 层面时的关联 Skill |
@@ -1692,6 +1694,55 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 5. **大规模集群**: 超大规模集群（>5000 节点）中 EndpointSlice 分片、kube-proxy 同步延迟等特有问题
 6. **Gateway API**: Gateway API 替代 Ingress 后的 Service 后端连通性诊断差异
 7. **eBPF 数据平面**: Cilium 等使用 eBPF 替代 kube-proxy 的场景下的诊断命令和方法差异
+
+## 修复动作
+
+> **本章定位**: 基于 Section 6 修复操作的快速决策摘要，供 Agent 在 QA 语料和运行时直接引用。
+
+### 修复动作速查表
+
+| 根因 | 修复动作 | 风险 | 验证命令 |
+|------|---------|------|---------|
+| RC-001 selector 不匹配 | `kubectl patch svc <svc> -n <ns> -p '{"spec":{"selector":{"app":"<correct-label>"}}}'` | 🟢 低风险 | `kubectl get endpoints <svc> -n <ns>` |
+| RC-003 targetPort 不匹配 | `kubectl patch svc <svc> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/ports/0/targetPort","value":<correct-port>}]'` | 🟢 低风险 | `kubectl exec <test-pod> -- curl -s -o /dev/null -w "%{http_code}" http://<svc>:<port>/` |
+| RC-003 协议不匹配 | `kubectl patch svc <svc> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/ports/0/protocol","value":"TCP"}]'` | 🟢 低风险 | `kubectl exec <test-pod> -- nc -zv <svc> <port>` |
+| RC-002 readiness 失败 | 修复应用或调整 readiness probe 配置 | 🟡 中风险（触发 Pod 重建） | `kubectl get pods -n <ns> -l <selector>` |
+| RC-004 kube-proxy 异常 | `kubectl delete pod -n kube-system -l k8s-app=kube-proxy`（DaemonSet 自动重建） | 🟡 中风险（iptables/IPVS 规则短暂不同步） | `kubectl get pods -n kube-system -l k8s-app=kube-proxy` |
+| RC-005 NetworkPolicy 阻断 | 修改 NetworkPolicy 放行对应 namespace/pod 和端口 | 🟡 中风险（可能意外扩大攻击面） | `kubectl exec <test-pod> -- curl -s -o /dev/null -w "%{http_code}" http://<svc>:<port>/` |
+| RC-007 externalTrafficPolicy=Local | 改为 `externalTrafficPolicy: Cluster` 或确保本地有后端 Pod | 🟡 中风险（改变流量转发行为，可能丢失客户端源 IP） | `curl -s -o /dev/null -w "%{http_code}" http://<node-ip>:<nodeport>/` |
+| RC-009 LoadBalancer pending | 检查 cloud-controller-manager 日志，修正 Service annotations | 🟡 中风险（可能重新创建 LB，IP 可能变更） | `kubectl get svc <svc> -n <ns>` |
+
+### danger_operations 高风险操作标注
+
+```yaml
+danger_operations:
+  - operation: "修改 NetworkPolicy 规则"
+    risk: "错误的 NetworkPolicy 可能意外放行攻击流量或阻断合法流量"
+    prerequisite:
+      - "修改前备份现有策略: kubectl get networkpolicy -n <ns> -o yaml > netpol-backup.yaml"
+      - "在测试 namespace 验证策略效果"
+    rollback: "kubectl apply -f netpol-backup.yaml"
+
+  - operation: "删除 kube-proxy Pod 强制重建"
+    risk: "重建期间该节点上的 Service 转发规则可能不完整，导致部分连接失败"
+    mitigation: "逐节点删除，等待新 Pod Ready 后再操作下一节点"
+```
+
+### 通用验证步骤
+
+```bash
+# 1. 确认 Service 有 Endpoints
+kubectl get endpoints <svc> -n <ns>
+
+# 2. 确认后端 Pod 就绪
+kubectl get pods -n <ns> -l <selector>
+
+# 3. 从测试 Pod 访问 Service
+kubectl exec <test-pod> -n <test-ns> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<svc>.<ns>.svc.cluster.local:<port>/
+
+# 4. 直接访问后端 Pod IP 排除 Service 层问题
+kubectl exec <test-pod> -n <test-ns> -- curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 http://<pod-ip>:<container-port>/
+```
 
 ## Related
 

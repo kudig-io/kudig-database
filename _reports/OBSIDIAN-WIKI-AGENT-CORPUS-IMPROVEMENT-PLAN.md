@@ -44,6 +44,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Obsidian Wiki 模式 — AI Agent 语料全面改进计划
@@ -78,7 +79,7 @@ KUDIG DATABASE (Obsidian Wiki 模式)
 
   每个文档
   ├── 标准化 frontmatter (intent, action, tags)
-  ├── 双向链接 [[document]] 密度提升
+  ├── 双向链接 document 密度提升
   ├── 意图-行动对 (Intent-Action Pairs)
   ├── 决策树 (Decision Trees)
   └── 原子化笔记 (Atomic Notes)
@@ -129,7 +130,7 @@ KUDIG DATABASE (Obsidian Wiki 模式)
 **双向链接规则**:
 - 概念首次出现时加 `目标文档`
 - 不修改原文结构，在相关段落后追加链接
-- 链接格式: `[[../target-dir/target-file.md|显示文本]]`
+- 链接格式: `显示文本`
 
 ---
 
@@ -197,7 +198,7 @@ action_triggers:
 
 ### B3. 决策树增强
 
-**目标**: 为故障排查类文档添加决策树
+**目标**: 为问题排查类文档添加决策树
 
 | 步骤 | 产出 | 预估 |
 |---|---|---|
@@ -255,15 +256,15 @@ graph TD
 
 **场景分类**:
 - 集群部署 (cluster-deployment)
-- 应用部署 ([[domain-11-production-operations/topic-best-practices/scenarios/app-deployment.md|app-deployment]])
-- 故障排查 (troubleshooting)
+- 应用部署 (app-deployment)
+- 问题排查 (troubleshooting)
 - 性能调优 (performance-tuning)
 - 安全加固 (security-hardening)
 - 监控告警 (monitoring-alerting)
 - 备份恢复 (backup-restore)
 - 升级迁移 (upgrade-migration)
 - 日常运维 (daily-ops)
-- AI 基础设施 ([[domain-11-production-operations/topic-best-practices/scenarios/ai-infra-ops.md|ai-infra-ops]])
+- AI 基础设施 (ai-infra-ops)
 
 ---
 
@@ -336,7 +337,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 | 步骤 | 产出 | 预估 |
 |---|---|---|
-| E1.1 故障排查 prompt | `prompts/troubleshooting.md` | 1 文件 |
+| E1.1 问题排查 prompt | `prompts/troubleshooting.md` | 1 文件 |
 | E1.2 架构咨询 prompt | `prompts/architecture-review.md` | 1 文件 |
 | E1.3 配置生成 prompt | `prompts/config-generator.md` | 1 文件 |
 | E1.4 学习路径 prompt | `prompts/learning-path.md` | 1 文件 |
@@ -436,7 +437,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 | D1 | Frontmatter 标准化 | ✅ 完成 | 3,214 文件修复 + SPEC 定义 |
 | D2 | 质量持续监控 | ✅ 完成 | `scripts/agent-corpus-quality-check.sh` |
 | D3 | MOC 自动更新 | ✅ 完成 | `scripts/update-mocs.sh` |
-| E1 | Prompt 模板库 | ✅ 完成 | 4 模板 (故障排查/架构/配置/学习) |
+| E1 | Prompt 模板库 | ✅ 完成 | 4 模板 (问题排查/架构/配置/学习) |
 | E2 | RAG Chunking | ✅ 完成 | 375 文件添加 chunk 标记 + 长文档报告 |
 | E3 | 工具调用映射 | ✅ 完成 | 命令/API/错误码 3 份映射文档 |
 

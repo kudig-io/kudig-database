@@ -54,6 +54,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # CNCF 项目 FTA 索引
@@ -82,9 +83,9 @@ authors:
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
 | **Flannel** | [flannel-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/flannel-fta.md) | [08-flannel-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
-| **Calico** | [calico-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md) | [05-calico-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-calico-troubleshooting.md) | BGP/NetworkPolicy |
-| **Cilium** | [cilium-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../domain-03-networking-traffic/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
-| **Antrea** | (待补充) | - | - |
+| **Calico** | [calico-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md) | [05-calico-troubleshooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-calico-troubleshooting.md) | [[entities/networkpolicy|NetworkPolicy]] |
+| **[[Cilium|Cilium]]** | [cilium-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../domain-03-networking-traffic/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
+| **[[Antrea|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
 | **CNI 通用** | [01-cni-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) | - | CNI 配置/插件 |
 
@@ -120,7 +121,7 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **Istio** | (待补充) | [Service Mesh 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-service-mesh-troubleshooting.md) | Sidecar/流量 |
+| **Istio** | (待补充) | Service Mesh 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-service-mesh-troubleshooting.md) | Sidecar/流量 |
 | **Linkerd** | (待补充) | - | 代理/心跳 |
 | **Envoy** | (待补充) | - | 代理配置 |
 
@@ -167,7 +168,7 @@ authors:
 | **Controller Manager** | [controller-manager-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md) | - | 控制器循环 |
 | **Scheduler** | (待补充) | - | 调度决策 |
 | **Kubelet** | (待补充) | [Kubelet 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-kubernetes-core/03-kubelet-troubleshooting.md) | 状态同步 |
-| **Container Runtime** | (待补充) | - | 容器启动 |
+| **[[Container Runtime|Container Runtime]]** | (待补充) | - | 容器启动 |
 
 ### 7.2 工作负载
 
@@ -188,7 +189,7 @@ authors:
 | **Operator/CRD** | [crd-operator-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md) | CRD/Operator |
 | **Cloud Provider** | [cloud-provider-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/cloud-provider-fta.md) | 云厂商集成 |
 | **Backup/Restore** | [backup-restore-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md) | 备份恢复 |
-| **GitOps (Argo CD)** | [[[skills/gitops-argocd-fta.md|gitops-argocd-fta]].md](../domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md) | 同步失败 |
+| **GitOps (Argo CD)** | gitops-argocd-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md) | 同步失败 |
 | **集群升级** | [cluster-upgrade-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md) | 版本升级 |
 
 ---
@@ -292,7 +293,7 @@ flowchart TD
 
 ### 10.3 CNCF 资源
 
-- [CNCF 集成实践指南](./01-cncf-integration-guide.md)
+- CNCF 集成实践指南](./01-cncf-integration-guide.md)
 - [CNCF 学习路径](./02-cncf-learning-paths.md)
 - [CNCF 项目选型指南](./03-cncf-selection-guide.md)
 
@@ -304,16 +305,16 @@ flowchart TD
 
 ## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-landscape-references MOC]]
+- domain-19-landscape-references MOC
 - [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-34 CNCF Landscape — 开源项目索引]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|CNCF 集成实践指南]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|CNCF 学习路径]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|CNCF 项目选型指南]]
+- Domain-34 CNCF Landscape — 开源项目索引
+- CNCF 集成实践指南
+- CNCF 学习路径
+- CNCF 项目选型指南
 
 ## See Also
 
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|02-cncf-learning-paths]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|03-cncf-selection-guide]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|01-cncf-integration-guide]]
-- [[domain-19-landscape-references/02-cncf-learning-paths.md|02-cncf-learning-paths]]
+- 02-cncf-learning-paths
+- 03-cncf-selection-guide
+- 01-cncf-integration-guide
+- 02-cncf-learning-paths

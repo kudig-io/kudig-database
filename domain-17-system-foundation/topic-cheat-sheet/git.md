@@ -33,6 +33,7 @@ related_docs:
   desc: GitOps 平台运维文档
 - path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   desc: Linux 速查卡
+created: "2026-05-23"
 ---
 
 # Git 速查表
@@ -638,5 +639,5 @@ git count-objects -vH
 
 ## 相关文档
 
-- [domain-08-release-change-management/](../domain-08-release-change-management/) - [[concepts/gitops-principles|gitops]] 与 CI/CD
+- [domain-08-release-change-management/](../domain-08-release-change-management/) - [[concepts/gitops-principles|[[GitOps 速查卡|gitops]]]] 与 CI/CD
 - [Git 官方文档](https://git-scm.com/doc)

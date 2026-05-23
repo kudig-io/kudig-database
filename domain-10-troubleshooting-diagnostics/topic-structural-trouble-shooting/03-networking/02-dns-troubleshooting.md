@@ -1,5 +1,5 @@
 ---
-title: CoreDNS/DNS 故障排查指南
+title: CoreDNS/DNS 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: CoreDNS/DNS 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,17 +41,18 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-title: CoreDNS/DNS 故障排查指南
+title: [[CoreDNS|CoreDNS]]/DNS 故障排查指南
 description: '# CoreDNS/DNS 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - coredns
 - mysql
 - daemonset
@@ -1638,8 +1639,8 @@ EOF
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

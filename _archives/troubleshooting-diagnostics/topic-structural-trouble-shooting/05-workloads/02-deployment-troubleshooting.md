@@ -1455,14 +1455,14 @@ echo "maxUnavailable: $MAX_UNAVAIL"
 echo
 
 # 计算数值 (处理百分比)
-if [[ $MAX_SURGE == *%* ]]; then
+if $MAX_SURGE == *%*; then
   PCT=${MAX_SURGE%\%}
   MAX_SURGE_NUM=$(echo "scale=0; ($REPLICAS * $PCT + 99) / 100" | bc)
 else
   MAX_SURGE_NUM=$MAX_SURGE
 fi
 
-if [[ $MAX_UNAVAIL == *%* ]]; then
+if $MAX_UNAVAIL == *%*; then
   PCT=${MAX_UNAVAIL%\%}
   MAX_UNAVAIL_NUM=$(echo "scale=0; ($REPLICAS * $PCT) / 100" | bc)
 else

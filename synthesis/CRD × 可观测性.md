@@ -33,6 +33,16 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - observability-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/cilium]]"
+    type: uses
+  - target: "[[synthesis/Deployment × Secret 管理]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
 ---
 
 # CRD × 可观测性
@@ -40,7 +50,7 @@ prerequisites:
 
 ## 连接点
 
-[[entities/crd-custom-resources]] 扩展 K8s API，[[entities/prometheus-grafana]] 是监控栈。两者的交汇点是 **Prometheus Operator**：它通过 CRD（ServiceMonitor、PodMonitor、PrometheusRule）将监控配置从手动脚本维护转变为声明式 GitOps 工作流。但 wiki 没有指出一个更深层的范式转变：**CRD 使可观测性配置成为了 Kubernetes 的一等公民**。
+[[entities/crd-custom-resources]] 扩展 K8s API，[[entities/prometheus|prometheus]]-grafana]] 是监控栈。两者的交汇点是 **Prometheus Operator**：它通过 CRD（ServiceMonitor、PodMonitor、PrometheusRule）将监控配置从手动脚本维护转变为声明式 GitOps 工作流。但 wiki 没有指出一个更深层的范式转变：**CRD 使可观测性配置成为了 [[entities/kubernetes|Kubernetes]] 的一等公民**。
 
 ## 共现场景
 
@@ -104,5 +114,8 @@ spec:
 
 - [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]]
 - [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
-- [[synthesis/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
-- [[synthesis/Deployment × Secret 管理.md|Deployment × Secret 管理]]
+- [[entities/cilium|Cilium]] eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
+- Deployment × Secret 管理.md|Deployment × Secret 管理]]
+## Related
+
+- [[entities/deployment|Deployment]]

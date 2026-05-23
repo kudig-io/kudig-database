@@ -1,5 +1,5 @@
 ---
-title: Carina
+title: Carina (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Carina
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Carina
@@ -66,11 +67,11 @@ Carina 是一个 Kubernetes 本地存储供应器，基于 LVM（Logical Volume 
 
 - [[hexa]] — Hexa
 - [[openchoreo]] — OpenChoreo
-- [[podman-desktop]] — Podman Desktop
+- [[podman-desktop]] — [[Podman Desktop|Podman Desktop]]
 - [[openyurt]] — OpenYurt
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/carina/carina.md|carina]]
+- carina
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]

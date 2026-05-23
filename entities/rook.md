@@ -1,5 +1,5 @@
 ---
-title: Rook
+title: Rook (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Rook
@@ -64,42 +65,42 @@ description: '## 项目概述'
 
 ## Related
 
-- [[virtual-kubelet]] — Virtual Kubelet
+- [[entities/virtual-kubelet.md|kubelet]]]] — [[Virtual Kubelet|Virtual Kubelet]]
 - [[kudo]] — KUDO
 - [[02-containerd-v2-features]] — containerd 2.0 新特性
 - [[karmada]] — Karmada
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/rook/rook.md|rook]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
+- rook
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.7
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.6
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
+- RELEASE-NOTES-0.7
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-0.4
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
+- RELEASE-NOTES-1.1
 - [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/storage/rook/RELEASE-NOTES-0.5.md|RELEASE-NOTES-0.5]]
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-0.5
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
 - [[concepts/storage-tool-evolution|存储工具演进]] — Cross-reference
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference

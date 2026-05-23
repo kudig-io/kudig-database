@@ -24,9 +24,10 @@ trigger_keywords:
 - 证书轮换机制
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# kubelet 证书轮换机制
+# [[kubelet|kubelet]] 证书轮换机制
 
 ## 概述
 
@@ -171,9 +172,9 @@ journalctl -u kubelet | grep -i "certificate\|csr\|rotation"
 
 ## 相关技能
 
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
-- [[skills/node-drain-and-maintenance.md|节点驱逐与维护]]
+- [[concepts/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
 - [[entities/kubelet.md|kubelet]]
 
 ## Related

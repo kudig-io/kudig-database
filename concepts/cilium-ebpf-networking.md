@@ -31,6 +31,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Cilium eBPF Networking
@@ -56,7 +57,7 @@ Cilium replaces iptables-based networking with eBPF programs:
 
 | Component | Role |
 |-----------|------|
-| Cilium Agent | DaemonSet per node, programs eBPF into kernel |
+| Cilium Agent | [[DaemonSet|DaemonSet]] per node, programs eBPF into kernel |
 | Cilium Operator | Cluster-wide operations (IPAM, node management) |
 | CNI Plugin | Integrates with kubelet for Pod networking |
 | eBPF dataplane | In-kernel packet processing, policy enforcement |
@@ -112,28 +113,28 @@ Hubble provides L3/L4/L7 flow visibility:
 - Hubble
 - [[synthesis/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
 
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.10.md|RELEASE-NOTES-0.10]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.11.md|RELEASE-NOTES-0.11]]
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.18
+- RELEASE-NOTES-1.19
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.16
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-1.17
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.15
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-0.10
+- RELEASE-NOTES-0.11
 - [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference

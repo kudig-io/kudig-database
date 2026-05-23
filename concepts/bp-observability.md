@@ -29,6 +29,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 本页汇总了 **Observability** 领域的 Kubernetes 最佳实践。
@@ -66,13 +67,13 @@ cross_refs:
 
 ### 目标读者
 
-- **SRE**: 了解日志架构设计和故障排查
+- **SRE**: 了解日志架构设计和问题排查
 - **DevOps 工程师**: 掌握日志收集和存储配置
 - **平台工程师**: 学习日志分析和可视化
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Namespace、DaemonSet）
+- Kubernetes 核心概念（Pod、Namespace、[[DaemonSet|DaemonSet]]）
 - 日志基础（日志级别、日志格式、日志聚合）
 - EFK/ELK 栈基础（Elasticsearch、Fluentd/Fluent Bit、Kibana）
 
@@ -85,7 +86,7 @@ cross_refs:
 **问题1：日志丢失**
 - **症状**：部分日志缺失
 - **原因**：日志收集配置不当，缓冲区溢出
-- **影响**：故障排查困难，审计不完整
+- **影响**：问题排查困难，审计不完整
 
 **问题2：日志存储成本高**
 - **症状**：日志存储费用超出预算
@@ -95,7 +96,7 @@ cross_refs:
 **问题3：日志查询缓慢**
 - **症状**：日志查询响应缓慢
 - **原因**：索引配置不当，查询优化不足
-- **影响**：故障排查延迟，效率
+- **影响**：问题排查延迟，效率
 
 > *（内容已精简，完整内容请参阅源文件）*
 
@@ -128,7 +129,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Service、Namespace）
+- Kubernetes 核心概念（Pod、[[Service|Service]]、Namespace）
 - 监控基础（指标、告警、仪表板）
 - Prometheus 基础（PromQL、告警规则）
 
@@ -141,7 +142,7 @@ cross_refs:
 **问题1：监控覆盖不全**
 - **症状**：部分服务未被监控
 - **原因**：监控配置不完整，指标收集缺失
-- **影响**：故障发现延迟，问题定位困难
+- **影响**：问题发现延迟，问题定位困难
 
 **问题2：告警风暴**
 - **症状**：大量告警，难以处理
@@ -198,7 +199,7 @@ cross_refs:
 
 ### 目标读者
 
-- **SRE**: 了解分布式追踪架构设计和故障排查
+- **SRE**: 了解分布式追踪架构设计和问题排查
 - **DevOps 工程师**: 掌握Jaeger部署和配置
 - **应用开发工程师**: 学习OpenTelemetry集成和追踪上下文传播
 

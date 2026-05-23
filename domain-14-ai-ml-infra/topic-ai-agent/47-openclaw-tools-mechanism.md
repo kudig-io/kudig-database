@@ -1,4 +1,42 @@
 ---
+title: OpenClaw TOOLS.md 机制深度解析 (domain-14-ai-ml-infra)
+description: 'title: OpenClaw TOOLS.md 机制深度解析'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- prometheus
+- helm
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenClaw TOOLS.md 机制深度解析 是什么
+- 如何 OpenClaw TOOLS.md 机制深度解析
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- OpenClaw
+- TOOLS.md
+- 机制深度解析
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- etcd-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: OpenClaw TOOLS.md 机制深度解析
 description: '# OpenClaw TOOLS.md 机制深度解析'
 category: ai-agent
@@ -8,9 +46,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
-- helm
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,12 +66,15 @@ trigger_keywords:
 - 机制深度解析
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- etcd-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenClaw TOOLS.md 机制深度解析
@@ -93,7 +134,7 @@ Vercel 教训:
   Before: 15 个工具注册 → Agent 准确率 40%
   After:  2 个核心工具 → Agent 准确率 85%
 
-[[entities/kubernetes|k8s]] Agent 推荐:
+K8S Agent 推荐:
   核心只读: kubectl get/describe/logs/top/events (5 个)
   监控查询: prometheus_query/loki_search (2 个)
   有限写入: kubectl apply/scale/rollout (3 个，需确认)
@@ -435,3 +476,27 @@ TOOLS.md 配置验证:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，深度解析 OpenClaw TOOLS.md 的设计机制与工程实现。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 45-openclaw-user-mechanism
+- 46-openclaw-agents-mechanism
+- 48-openclaw-skill-mechanism
+- 49-openclaw-memory-mechanism

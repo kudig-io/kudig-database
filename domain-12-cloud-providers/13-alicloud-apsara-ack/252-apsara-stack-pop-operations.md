@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+created: "2026-05-23"
 ---
 
 title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
@@ -54,7 +55,7 @@ estimated_read_time: 5min
 intent_queries:
 - 专有云 (Apsara Stack) - POP 平台运维 (ASOP) 是什么
 - 如何 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - 专有云
 - Apsara
@@ -180,7 +181,7 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[references/243-ack-ram-authorization.md|243-ack-ram-authorization]]
 - [[references/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
@@ -189,6 +190,6 @@ aliyun pop-cli GetQuota --OwnerId 12345
 ## See Also
 
 - [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[domain-12-cloud-providers/13-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- logging.md|251-apsara-stack-sls-logging]]
 - [[domain-12-cloud-providers/13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
 - [[domain-12-cloud-providers/13-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]

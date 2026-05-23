@@ -30,6 +30,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kubeadm 集群创建生命周期
@@ -45,7 +46,7 @@ prerequisites:
 | 1 | `preflight` | 系统预检：端口、内核参数、cgroup、容器运行时 | 预检通过/失败报告 |
 | 2 | `certs` | PKI 证书生成：3 组 CA + 14 对证书/密钥 | `/etc/kubernetes/pki/` |
 | 3 | `kubeconfig` | kubeconfig 文件生成：admin/controller-manager/scheduler | 4 个 kubeconfig 文件 |
-| 4 | `kubelet-start` | 写入 kubelet 配置并启动服务 | `/var/lib/kubelet/config.yaml` |
+| 4 | `kubelet-start` | 写入 [[kubelet|kubelet]] 配置并启动服务 | `/var/lib/kubelet/config.yaml` |
 | 5 | `control-plane` | 生成控制面静态 Pod manifest | `/etc/kubernetes/manifests/` |
 | 6 | `etcd` | 生成 etcd 静态 Pod manifest | etcd 静态 Pod |
 | 7 | `wait-control-plane` | 等待 API Server 就绪（轮询 /healthz） | API Server 200 OK |
@@ -53,7 +54,7 @@ prerequisites:
 | 9 | `mark-control-plane` | 添加 control-plane 标签和 NoSchedule 污点 | 节点标签和污点 |
 | 10 | `bootstrap-token` | 创建 Bootstrap Token Secret | `bootstrap-token-xxx` Secret |
 | 11 | `kubelet-finalize` | 终止 kubelet 证书引导，切换到正式证书 | 证书轮换就绪 |
-| 12 | `addon` | 部署 CoreDNS + kube-proxy DaemonSet | 核心附加组件 |
+| 12 | `addon` | 部署 [[CoreDNS|CoreDNS]] + kube-proxy [[DaemonSet|DaemonSet]] | 核心附加组件 |
 
 ## 核心参数说明
 
@@ -119,7 +120,7 @@ preflight 阶段执行以下检查，任何检查失败都会阻止 init 继续�
 - **内核参数**：`net.bridge.bridge-nf-call-iptables` 是否设为 1
 - **cgroup 驱动**：kubelet 和容器运行时的 cgroup driver 是否一致（推荐 systemd）
 - **Swap 状态**：默认要求关闭 swap（可通过 `--ignore-preflight-errors=Swap` 忽略）
-- **容器运行时**：containerd/cri-o/docker 是否已安装并运行
+- **容器运行时**：[[containerd|containerd]]/cri-o/docker 是否已安装并运行
 - **权限检查**：是否以 root 用户运行
 - **主机名**：是否符合 DNS 子域规范
 
@@ -170,6 +171,6 @@ kubeadm 采用最小化设计，以下组件需要手动安装：
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
-- [[domain-01-cluster-fundamentals/15-kubelet-deep-dive.md|15-kubelet-deep-dive]]
-- [[domain-01-cluster-fundamentals/17-apiserver-tuning.md|17-apiserver-tuning]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-cluster-lifecycle.md|32-kubeadm-cluster-lifecycle]]
+- 15-kubelet-deep-dive
+- 17-apiserver-tuning
+- 32-kubeadm-cluster-lifecycle

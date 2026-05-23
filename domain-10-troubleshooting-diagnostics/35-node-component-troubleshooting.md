@@ -61,6 +61,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
 # 35 - 节点组件故障排查 (Node Component Troubleshooting)
@@ -71,7 +72,7 @@ cross_refs:
 ## 目录
 
 1. [概述与诊断框架](#1-概述与诊断框架)
-2. [kubelet 故障排查](#2-kubelet-故障排查)
+2. [[entities/kubelet.md|kubelet]] 故障排查](#2-kubelet-故障排查)
 3. [容器运行时故障排查](#3-容器运行时故障排查)
 4. [kube-proxy 故障排查](#4-kube-proxy-故障排查)
 5. [节点资源压力诊断](#5-节点资源压力诊断)
@@ -87,10 +88,10 @@ cross_refs:
 
 ### 1.1 节点组件概述
 
-Kubernetes 节点组件是集群工作节点上的核心守护进程，负责 Pod 的运行、网络管理和资源调度。主要包括：
+[[Kubernetes|Kubernetes]] 节点组件是集群工作节点上的核心守护进程，负责 Pod 的运行、网络管理和资源调度。主要包括：
 
 - **kubelet**: 节点代理，负责 Pod 生命周期管理
-- **kube-proxy**: 网络代理，维护 Service 网络规则
+- **kube-proxy**: 网络代理，维护 [[Service|Service]] 网络规则
 - **容器运行时**: Docker/containerd/cri-o，负责容器执行
 - **cAdvisor**: 资源监控代理（集成在 kubelet 中）
 
@@ -811,9 +812,9 @@ chmod +x node-performance-benchmark.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

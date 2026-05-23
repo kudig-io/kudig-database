@@ -61,6 +61,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md
   label: '故障树: csi'
+created: "2026-05-23"
 ---
 
 # 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)
@@ -271,7 +272,7 @@ kubectl get limitrange -n <namespace>
 
 | 错误信息 | 可能原因 | 解决方案 |
 |---------|---------|---------|
-| `no persistent volumes available` | 无匹配的PV/StorageClass配置错误 | 检查StorageClass参数配置 |
+| `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | 无匹配的PV/StorageClass配置错误 | 检查StorageClass参数配置 |
 | `failed to provision volume` | CSI驱动故障/后端API错误 | 检查CSI驱动日志和后端连接 |
 | `exceeded quota` | 超出命名空间配额限制 | 调整ResourceQuota或清理资源 |
 | `invalid capacity range` | 请求容量超出限制 | 调整PVC容量或StorageClass限制 |
@@ -589,9 +590,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

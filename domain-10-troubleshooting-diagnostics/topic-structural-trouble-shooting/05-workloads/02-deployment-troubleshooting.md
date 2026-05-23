@@ -1,5 +1,5 @@
 ---
-title: Deployment 故障排查指南
+title: Deployment 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Deployment 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -44,6 +44,7 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Deployment 故障排查指南
@@ -53,10 +54,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- istio
+- [[Istio|istio]]
 - helm
 - containerd
 - docker
@@ -1502,14 +1503,14 @@ echo "maxUnavailable: $MAX_UNAVAIL"
 echo
 
 # 计算数值 (处理百分比)
-if [[ $MAX_SURGE == *%* ]]; then
+if $MAX_SURGE == *%*; then
   PCT=${MAX_SURGE%\%}
   MAX_SURGE_NUM=$(echo "scale=0; ($REPLICAS * $PCT + 99) / 100" | bc)
 else
   MAX_SURGE_NUM=$MAX_SURGE
 fi
 
-if [[ $MAX_UNAVAIL == *%* ]]; then
+if $MAX_UNAVAIL == *%*; then
   PCT=${MAX_UNAVAIL%\%}
   MAX_UNAVAIL_NUM=$(echo "scale=0; ($REPLICAS * $PCT) / 100" | bc)
 else
@@ -2382,8 +2383,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

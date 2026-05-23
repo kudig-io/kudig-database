@@ -1,7 +1,7 @@
 ---
-title: Kubernetes 通用最佳实践参考
+title: Kubernetes 通用最佳实践参考 (best-practices)
 description: Kubernetes 生产环境通用最佳实践参考文档
-category: domain-11-production-operations/topic-best-practices/common
+category: best-practices/common
 tags:
 - kubernetes
 - best-practices
@@ -30,20 +30,10 @@ trigger_keywords:
 - 生产环境
 prerequisites:
 - kubectl-basics
-- gpu-ml-basics
 - helm-basics
 - prometheus-basics
 - etcd-basics
 - backup-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
 cross_refs:
 - type: best-practice
   path: ./infrastructure/kubernetes-cluster.md
@@ -54,6 +44,7 @@ cross_refs:
 - type: best-practice
   path: ./observability/monitoring.md
   label: 监控最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 通用最佳实践参考
@@ -785,16 +776,3 @@ echo "=== 验证完成 ==="
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和最佳实践演进保持同步
-
----
-
-## Obsidian 相关文档
-
-- [[domain-11-production-operations/topic-best-practices/README.md|Kubernetes 最佳实践指南]]
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/security/pod-security.md|pod-security]]
-- [[domain-11-production-operations/topic-best-practices/security/secrets-management.md|secrets-management]]
-- [[domain-11-production-operations/topic-best-practices/deployment/01-local-demo-deployment.md|01-local-demo-deployment]]
-- [[domain-11-production-operations/topic-best-practices/deployment/02-single-node-deployment.md|02-single-node-deployment]]

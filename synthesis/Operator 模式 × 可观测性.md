@@ -31,16 +31,28 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - observability-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+    type: uses
+  - target: "[[entities/cloudnativepg]]"
+    type: related_to
+  - target: "[[entities/distribution]]"
+    type: related_to
 ---
 
 # Operator 模式 × 可观测性
 
 ## 连接点
 
-[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus-grafana.md|prometheus-grafana]] 描述 K8s 监控栈。wiki 将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代 K8s 可观测性的架构范式——ServiceMonitor、PodMonitor、AlertmanagerConfig 等核心监控概念全部以 CRD 形式存在。反过来，一个成熟的 Operator 必须暴露自身的协调指标、资源状态和健康信号，否则它将成为集群中的黑箱控制器。
+[[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus|prometheus]]-grafana.md|prometheus-grafana]] 描述 K8s 监控栈。wiki 将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代 K8s 可观测性的架构范式——ServiceMonitor、PodMonitor、AlertmanagerConfig 等核心监控概念全部以 CRD 形式存在。反过来，一个成熟的 Operator 必须暴露自身的协调指标、资源状态和健康信号，否则它将成为集群中的黑箱控制器。
 
 两者的关系不是 A 使用 B，而是互相定义：
-- 可观测性需要 Operator：Prometheus 的 Service Discovery、规则管理、高可用部署在没有 Operator 之前是运维噩梦
+- 可观测性需要 Operator：Prometheus 的 [[domain-17-system-foundation/topic-dictionary/networking/service|Service]] Discovery、规则管理、高可用部署在没有 Operator 之前是运维噩梦
 - Operator 需要可观测性：自定义控制器的 Reconcile 成功率、队列深度、协调延迟是评估 Operator 成熟度的核心指标
 
 ## 共现场景
@@ -49,7 +61,7 @@ prerequisites:
 
 - **Prometheus Operator**：通过 ServiceMonitor CRD 自动发现 scrape 目标，通过 PrometheusRule CRD 管理告警规则——将可观测性配置从手动 YAML 维护转变为声明式 GitOps 工作流
 - **Operator SDK 的可观测性脚手架**：成熟的 Operator 框架（Operator SDK、Kubebuilder）自动生成 /metrics 端点、Reconcile 错误计数器、Workqueue 等待时间直方图
-- **有状态服务的可观测性**：数据库 Operator（如 CloudNativePG）不仅管理数据库实例，还自动创建 ServiceMonitor、配置慢查询告警、暴露连接池指标
+- **有状态服务的可观测性**：数据库 Operator（如 [[entities/cloudnativepg|CloudNativePG]]）不仅管理数据库实例，还自动创建 ServiceMonitor、配置慢查询告警、暴露连接池指标
 - **自身监控**：Prometheus Operator 本身也需要被另一个 Prometheus 实例监控——形成监控监控者的递归结构
 
 ## 交叉洞察
@@ -114,7 +126,7 @@ Operator 协调：
 
 ## See Also
 
-- [[synthesis/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[entities/kubernetes|Kubernetes]] Fault [[entities/distribution|Distribution]] and MTTR.md|Kubernetes Fault Distribution and MTTR]]
 - [[synthesis/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]]
 - [[synthesis/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]
 - [[synthesis/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]

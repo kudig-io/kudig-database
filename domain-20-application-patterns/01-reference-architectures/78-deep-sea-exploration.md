@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 深海探测架构设计
@@ -87,7 +88,7 @@ k8s_versions:
 
 # 深海探测架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#深海探测` `#水下通信` `#ROV` `#AUV` `#阿里云`
 
 ---
@@ -845,7 +846,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -860,11 +861,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/76-synthetic-biology.md|76-synthetic-biology]]
-- [[domain-20-application-patterns/77-fusion-energy-monitoring.md|77-fusion-energy-monitoring]]
-- [[domain-20-application-patterns/79-polar-research.md|79-polar-research]]
-- [[domain-20-application-patterns/80-tsn-network.md|80-tsn-network]]
+- 76-synthetic-biology
+- 77-fusion-energy-monitoring
+- 79-polar-research
+- 80-tsn-network
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

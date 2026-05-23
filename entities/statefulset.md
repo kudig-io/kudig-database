@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - kafka-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # StatefulSet
@@ -40,10 +41,10 @@ StatefulSet manages stateful workloads that require stable identity and persiste
 
 | Property | Description |
 |----------|-------------|
-| **Stable Pod identity** | Pods named `{name}-{0}`, `{name}-{1}`, ... in order |
+| **Stable Pod identity** | [[Pods|Pods]] named `{name}-{0}`, `{name}-{1}`, ... in order |
 | **Ordered operations** | Pods created 0→N, terminated N→0 |
 | **Persistent storage** | Each Pod gets its own PVC from `volumeClaimTemplates` |
-| **Stable network** | DNS via Headless Service: `pod-0.service.ns.svc.cluster.local` |
+| **Stable network** | DNS via Headless [[Service|Service]]: `pod-0.service.ns.svc.cluster.local` |
 | **PVC retention** | PVCs survive Pod deletion (data persists) |
 
 ## Update Strategy
@@ -75,9 +76,9 @@ Databases (MySQL, PostgreSQL, MongoDB), message brokers (Kafka, RabbitMQ), searc
 - [[pod-lifecycle|Pod Lifecycle]]
 - Headless Service
 
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05-statefulset-reference]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03-statefulset-advanced-operations]]
+- 08-statefulset-daemonset-events
+- 05-statefulset-reference
+- 03-statefulset-advanced-operations
 - [[domain-10-troubleshooting-diagnostics/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]

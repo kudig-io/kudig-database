@@ -26,19 +26,20 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Node Declared Features
 
 ## 概述
 
-节点声明特性（Node Declared Features）是 Kubernetes v1.35 中引入的 alpha 特性。Kubernetes 节点使用声明特性来报告特定新特性或特性门控功能的可用性。控制平面组件利用这些信息做出更好的决策。
+节点声明特性（Node Declared Features）是 [[Kubernetes|Kubernetes]] v1.35 中引入的 alpha 特性。Kubernetes 节点使用声明特性来报告特定新特性或特性门控功能的可用性。控制平面组件利用这些信息做出更好的决策。
 
 ## 核心概念/原理
 
 该机制通过以下三个主要组件协同工作：
 
-1. **Kubelet 特性报告**：每个节点启动时，kubelet 检测当前启用的托管 Kubernetes 特性，并在 Node 对象的 `.status.declaredFeatures` 字段中报告它们。只有处于活跃开发中的特性才会包含在此字段中。
+1. **[[kubelet|Kubelet]] 特性报告**：每个节点启动时，kubelet 检测当前启用的托管 Kubernetes 特性，并在 Node 对象的 `.status.declaredFeatures` 字段中报告它们。只有处于活跃开发中的特性才会包含在此字段中。
 
 2. **调度器过滤**：默认的 kube-scheduler 使用 `NodeDeclaredFeatures` 插件：
    - 在 `PreFilter` 阶段，检查 `PodSpec` 推断出 Pod 所需的节点特性集合。
@@ -156,4 +157,4 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep NodeDeclaredFeatu
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

@@ -1,5 +1,5 @@
 ---
-title: kubeadm 配置对证书生成的影响
+title: kubeadm 配置对证书生成的影响 (topic-code-analysis)
 description: 'title: kubeadm 配置对证书生成的影响'
 category: general
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: kubeadm 配置对证书生成的影响

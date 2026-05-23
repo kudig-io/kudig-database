@@ -40,6 +40,7 @@ prerequisites:
 fta_id: FTA-07_TROUBLESHOOTING-001
 component: 07 Troubleshooting
 severity: critical
+created: "2026-05-23"
 ---
 
 # 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
@@ -129,7 +130,7 @@ flowchart TD
 
 | 步骤 | 操作 | 命令 | 判定 |
 |------|------|------|------|
-| 1 | Terway Pod 状态 | `kubectl get pods -n kube-system -l app=terway` | 全部 Running 为正常 |
+| 1 | Terway Pod 状态 | `kubectl get [[Pods|pods]] -n kube-system -l app=terway` | 全部 Running 为正常 |
 | 2 | 节点 ENI 信息 | `kubectl describe node <node> \| grep aliyun.com` | 查看 allocated/eni-max/ip-max |
 | 3 | Pod IP 归属 | `kubectl get pod <pod> -o yaml \| grep k8s.aliyun.com` | 确认 ENI 模式或 Veth 模式 |
 | 4 | VPC 路由 | 阿里云控制台 -> VPC 路由表 | Pod CIDR 指向各节点 ECS |
@@ -289,7 +290,7 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 | 子事件 | 处置 |
 |--------|------|
 | CNI 配置错误 | 1) 检查 `/etc/cni/net.d/` 配置文件 2) 验证 Terway ConfigMap 3) 确认 CNI 版本与 K8s 版本兼容 |
-| CNI 守护进程异常 | 1) 检查 Terway DaemonSet 状态 2) 查看 Pod 日志 3) `ls /opt/cni/bin/terway` 确认二进制 4) 重启 Terway DaemonSet |
+| CNI 守护进程异常 | 1) 检查 Terway [[DaemonSet|DaemonSet]] 状态 2) 查看 Pod 日志 3) `ls /opt/cni/bin/terway` 确认二进制 4) 重启 Terway DaemonSet |
 | 路由/iptables 失败 | 1) `ip route show` 检查路由表 2) `iptables -L -n -t nat` 检查规则 3) 确认 Terway 运行模式 4) 重启 Terway Daemon |
 
 ---

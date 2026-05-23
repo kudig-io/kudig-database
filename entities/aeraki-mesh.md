@@ -1,5 +1,5 @@
 ---
-title: Aeraki Mesh
+title: Aeraki Mesh [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # Aeraki Mesh
@@ -52,7 +53,7 @@ Aeraki Mesh 是 Istio 服务网格的扩展框架，专注于为非 HTTP 协议�
 
 ## 生产部署要点
 
-- **协议识别**: 确保 Service 端口命名遵循 Istio 协议识别规范 (如 `tcp-dubbo`)
+- **协议识别**: 确保 [[Service|Service]] 端口命名遵循 Istio 协议识别规范 (如 `tcp-dubbo`)
 - **版本灰度**: 使用 MetaRouter 进行 Dubbo 版本灰度发布，结合权重控制流量比例
 - **Redis 读写分离**: 利用 Redis 协议解析能力实现自动读写分离
 - **指标采集**: 启用 Aeraki 协议指标，配合 Prometheus + Grafana 监控非 HTTP 服务
@@ -77,6 +78,6 @@ Aeraki Mesh 是 Istio 服务网格的扩展框架，专注于为非 HTTP 协议�
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/aeraki-mesh/aeraki-mesh.md|aeraki-mesh]]
+- aeraki-mesh
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

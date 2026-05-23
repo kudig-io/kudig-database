@@ -1,4 +1,39 @@
 ---
+title: 存储与卷管理 (topic-code-analysis)
+description: 'title: 存储与卷管理'
+category: general
+tags:
+- reference
+- storage
+- kubelet
+- scheduler
+- ceph
+- statefulset
+- operator
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 存储与卷管理 是什么
+- 如何 存储与卷管理
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 存储与卷管理
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: 存储与卷管理
 description: '# 存储与卷管理'
 category: functions
@@ -38,10 +73,6 @@ trigger_keywords:
 - PersistentVolumeClaim
 - dynamic provision
 - volumeBindingMode
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- logging-basics
 related_domains:
 - domain-7-storage
 - domain-10-troubleshooting-diagnostics
@@ -51,6 +82,15 @@ related_topics:
 - CSI
 - storage provisioner
 - cloud storage
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 存储与卷管理
@@ -127,7 +167,7 @@ volumes:
 ```
 
 **用途**:
-- 日志收集 ([[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]])
+- 日志收集 (fluentd)
 -监控系统 (node-exporter)
 
 **注意**: 只调度到特定节点，需 NodeSelector/NodeAffinity。
@@ -331,4 +371,9 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 
 ## Related
 
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/fluentd.md|Fluentd]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

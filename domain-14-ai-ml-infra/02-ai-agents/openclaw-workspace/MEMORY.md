@@ -1,5 +1,5 @@
 ---
-title: 记忆系统
+title: 记忆系统 (02-ai-agents)
 description: 'description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则'
 category: general
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 记忆系统
@@ -46,10 +47,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - grafana
-- coredns
+- [[CoreDNS|coredns]]
 - hpa
 last_updated: 2026-04
 difficulty: advanced
@@ -323,13 +324,13 @@ memory_metadata:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
 - [[entities/coredns.md|coredns]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/openclaw-workspace/AGENTS.md|AGENTS]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/IDENTITY.md|IDENTITY]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SKILL.md|SKILL]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/SOUL.md|SOUL]]
+- AGENTS
+- IDENTITY
+- SKILL
+- SOUL

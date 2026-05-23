@@ -1,5 +1,5 @@
 ---
-title: 能源电力 Kubernetes 生产架构设计
+title: 能源电力 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 能源电力 Kubernetes 生产架构设计'
 category: general
 tags:
@@ -36,16 +36,17 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 能源电力 Kubernetes 生产架构设计
+title: 能源电力 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 能源电力 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- flux
+- [[Flux|flux]]
 - redis
 - mysql
 - kafka
@@ -290,7 +291,7 @@ flowchart TB
 | 离线计算 | Spark, Hive | MaxCompute | 历史数据分析 |
 | AI 预测 | Prophet, Transformer | PAI | 功率/负荷预测 |
 | 优化求解 | Pyomo, Gurobi | E-HPC | MILP 调度优化 |
-| 边缘计算 | KubeEdge, OpenYurt | ACK@Edge | 场站/变电站边缘 |
+| 边缘计算 | [[KubeEdge|KubeEdge]], [[OpenYurt|OpenYurt]] | ACK@Edge | 场站/变电站边缘 |
 | IoT 接入 | EMQX, Mosquitto | 阿里云 IoT 平台 | 设备协议适配 |
 | 协议转换 | IEC 61850, IEC 104, Modbus | 自研协议网关 | 电力设备通信 |
 | 数字孪生 | Unity, Cesium | DataV + 3D 可视化 | 电网全景展示 |
@@ -621,7 +622,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -636,7 +637,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/13-digital-government-architecture.md|13-digital-government-architecture]]
-- [[domain-20-application-patterns/14-smart-healthcare-architecture.md|14-smart-healthcare-architecture]]
-- [[domain-20-application-patterns/16-video-shortform-architecture.md|16-video-shortform-architecture]]
-- [[domain-20-application-patterns/17-saas-multitenant-architecture.md|17-saas-multitenant-architecture]]
+- 13-digital-government-architecture
+- 14-smart-healthcare-architecture
+- 16-video-shortform-architecture
+- 17-saas-multitenant-architecture

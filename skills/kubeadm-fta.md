@@ -32,6 +32,7 @@ prerequisites:
 fta_id: FTA-KUBEADM-001
 component: Kubeadm
 severity: critical
+created: "2026-05-23"
 ---
 
 # Kubeadm Fta
@@ -46,7 +47,7 @@ tags:
 - troubleshooting
 - etcd
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - calico
 - containerd

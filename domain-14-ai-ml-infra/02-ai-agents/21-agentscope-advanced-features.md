@@ -1,5 +1,5 @@
 ---
-title: AgentScope 高级特性与扩展开发
+title: AgentScope 高级特性与扩展开发 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 高级特性专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Hooks, Middleware,'
 category: general
 tags:
@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 高级特性与扩展开发
@@ -42,8 +43,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- jaeger
+- [[kubelet|kubelet]]
+- [[Jaeger|jaeger]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -712,12 +713,12 @@ vector = await embedding.embed("Kubernetes Pod Pending 排查")
 
 | 文档 | 关联内容 |
 |------|---------|
-| [17 - 核心概念](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | Agent 基类与扩展点 |
+| [17 - 核心概念](./17-agentscope-core-concepts.md) | Agent 基类与扩展点 |
 | [18 - 工具系统](./18-agentscope-tool-system.md) | MCP 集成与工具注册 |
 | [20 - 多 Agent 编排](./20-agentscope-multi-agent-orchestration.md) | A2A 在多 Agent 场景的应用 |
-| [22 - 生产部署](./[[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]].md) | Runtime 部署与可观测性 |
+| [22 - 生产部署](./deployment.md|22-agentscope-production-deployment]].md) | Runtime 部署与可观测性 |
 | [04 - RAG 检索增强](./04-rag-knowledge-retrieval.md) | 通用 RAG 架构与策略 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | 通用评测体系 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | 通用评测体系 |
 
 ---
 
@@ -727,7 +728,7 @@ vector = await embedding.embed("Kubernetes Pod Pending 排查")
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -742,7 +743,7 @@ vector = await embedding.embed("Kubernetes Pod Pending 排查")
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]]
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]]
-- [[domain-14-ai-ml-infra/23-agent-cli-fundamentals.md|23-agent-cli-fundamentals]]
+- 19-agentscope-memory-context
+- 20-agentscope-multi-agent-orchestration
+- 22-agentscope-production-deployment
+- 23-agent-cli-fundamentals

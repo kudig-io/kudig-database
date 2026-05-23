@@ -57,6 +57,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # JVM GC 容器调优深度指南
@@ -77,7 +78,7 @@ cross_refs:
 - [五、ShenandoahGC 调优](#五shenandoahgc-调优)
 - [六、容器感知参数详解](#六容器感知参数详解)
 - [七、GC 日志与监控集成](#七gc-日志与监控集成)
-- [八、Prometheus + JMX Exporter 监控](#八prometheus--jmx-exporter-监控)
+- [八、[[Prometheus|Prometheus]] + JMX Exporter 监控](#八prometheus--jmx-exporter-监控)
 - [九、生产级调优案例](#九生产级调优案例)
 - [十、GC 问题排查手册](#十gc-问题排查手册)
 
@@ -676,9 +677,9 @@ kubectl exec deployment/spring-app -- \
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

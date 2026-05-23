@@ -28,6 +28,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Structured Outputs 与 Tool Calling

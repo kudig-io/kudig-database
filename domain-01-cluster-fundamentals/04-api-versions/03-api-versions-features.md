@@ -60,11 +60,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 03 - 功能和API表
 
-> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [kubernetes.io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
+> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
 
 <!-- chunk: 核心工作负载API -->
 ## 核心工作负载API
@@ -72,9 +73,9 @@ cross_refs:
 | 功能名称 | API组/版本 | Kind | 稳定性 | 引入版本 | 稳定版本 | 弃用版本 | 移除版本 | 生产使用提示 |
 |---------|-----------|------|-------|---------|---------|---------|---------|-------------|
 | **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits |
-| **ReplicaSet** | apps/v1 | ReplicaSet | Stable | v1.2 | v1.9 | - | - | 不直接使用，由Deployment管理 |
+| **[[ReplicaSet|ReplicaSet]]** | apps/v1 | ReplicaSet | Stable | v1.2 | v1.9 | - | - | 不直接使用，由Deployment管理 |
 | **Deployment** | apps/v1 | Deployment | Stable | v1.2 | v1.9 | - | - | 无状态应用首选；配置滚动更新策略 |
-| **StatefulSet** | apps/v1 | StatefulSet | Stable | v1.5 | v1.9 | - | - | 有状态应用；需配合Headless Service |
+| **[[StatefulSet|StatefulSet]]** | apps/v1 | StatefulSet | Stable | v1.5 | v1.9 | - | - | 有状态应用；需配合Headless [[Service|Service]] |
 | **DaemonSet** | apps/v1 | DaemonSet | Stable | v1.2 | v1.9 | - | - | 节点级守护进程；使用nodeSelector精确控制 |
 | **Job** | batch/v1 | Job | Stable | v1.2 | v1.9 | - | - | 批处理任务；配置backoffLimit和activeDeadlineSeconds |
 | **CronJob** | batch/v1 | CronJob | Stable | v1.4 | v1.21 | - | - | 定时任务；注意时区设置(v1.25+支持) |
@@ -318,22 +319,22 @@ kubectl get ns -o json | jq '.items[].metadata.labels | keys[]' | grep pod-secur
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-1: Kubernetes架构基础]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04 - Kubernetes 源码结构深度解析]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|kubectl 命令完整参考]]
-- [[domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md|06 - 集群配置参数完全参考]]
-- [[domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md|07 - 升级路径与策略指南]]
-- [[domain-01-cluster-fundamentals/08-multi-tenancy-architecture.md|08 - 多租户架构设计 (Multi-Tenancy Architecture)]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
-- [[domain-01-cluster-fundamentals/10-windows-containers-support.md|10 - Windows 容器支持与集成指南]]
+- Domain-1 架构基础 — 开源项目索引
+- Kubernetes 架构全景图
+- Kubernetes 核心组件深度剖析
+- 04 - Kubernetes 源码结构深度解析
+- kubectl 命令完整参考
+- 06 - 集群配置参数完全参考
+- 07 - 升级路径与策略指南
+- 08 - 多租户架构设计 (Multi-Tenancy Architecture)
+- 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
+- 10 - Windows 容器支持与集成指南
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|01-kubernetes-architecture-overview]]
-- [[domain-01-cluster-fundamentals/02-core-components-deep-dive.md|02-core-components-deep-dive]]
-- [[domain-01-cluster-fundamentals/04-source-code-structure.md|04-source-code-structure]]
-- [[domain-01-cluster-fundamentals/05-kubectl-commands-reference.md|05-kubectl-commands-reference]]
+- 01-kubernetes-architecture-overview
+- 02-core-components-deep-dive
+- 04-source-code-structure
+- 05-kubectl-commands-reference

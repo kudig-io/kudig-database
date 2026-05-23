@@ -1,5 +1,5 @@
 ---
-title: Koordinator
+title: Koordinator (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Koordinator
@@ -72,5 +73,5 @@ Koordinator 是一个基于 QoS 的 Kubernetes 混合调度系统，专为提高
 - [[cohdi]] — Cohdi
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/koordinator/koordinator.md|koordinator]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- koordinator
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

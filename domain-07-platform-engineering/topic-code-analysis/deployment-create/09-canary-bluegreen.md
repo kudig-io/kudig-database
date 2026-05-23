@@ -57,6 +57,7 @@ related_topics:
 - deployment-controller
 - rolling-update
 - revision-history
+created: "2026-05-23"
 ---
 
 # Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式

@@ -49,6 +49,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南
@@ -59,7 +60,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-网络是 Kubernetes 集群基础设施中最关键也是最复杂的层次之一。从 Pod 内部的网络通信到 Service 的负载均衡，从 Ingress 的流量入口到 CNI 插件的底层实现，每一个环节都依赖 Linux 内核网络子系统。本文档深入解析 Linux 网络架构的核心概念，包括网络命名空间（Network Namespace）、虚拟以太网设备（veth pair）、网桥（bridge）、iptables/nftables 包过滤、IPVS 负载均衡、以及隧道技术（VXLAN/IP-in-IP）。这些技术是 Kubernetes 网络模型（CNI、kube-proxy、NetworkPolicy）的底层基础，掌握它们对于理解和排查 Kubernetes 网络问题至关重要。
+网络是 [[Kubernetes|Kubernetes]] 集群基础设施中最关键也是最复杂的层次之一。从 Pod 内部的网络通信到 [[Service|Service]] 的负载均衡，从 [[Ingress|Ingress]] 的流量入口到 CNI 插件的底层实现，每一个环节都依赖 Linux 内核网络子系统。本文档深入解析 Linux 网络架构的核心概念，包括网络命名空间（Network Namespace）、虚拟以太网设备（veth pair）、网桥（bridge）、iptables/nftables 包过滤、IPVS 负载均衡、以及隧道技术（VXLAN/IP-in-IP）。这些技术是 Kubernetes 网络模型（CNI、kube-proxy、NetworkPolicy）的底层基础，掌握它们对于理解和排查 Kubernetes 网络问题至关重要。
 
 ---
 
@@ -841,7 +842,7 @@ sysctl -w net.netfilter.nf_conntrack_max=2097152
 
 ## See Also
 
-- [[domain-17-system-foundation/02-linux-process-management.md|02-linux-process-management]]
-- [[domain-17-system-foundation/03-linux-filesystem-deep-dive.md|03-linux-filesystem-deep-dive]]
-- [[domain-17-system-foundation/05-linux-storage-management.md|05-linux-storage-management]]
-- [[domain-17-system-foundation/06-linux-performance-tuning.md|06-linux-performance-tuning]]
+- 02-linux-process-management
+- 03-linux-filesystem-deep-dive
+- 05-linux-storage-management
+- 06-linux-performance-tuning

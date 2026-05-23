@@ -52,6 +52,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
 # PostgreSQL 企业级数据库高可用架构
@@ -66,9 +67,9 @@ cross_refs:
 
 PostgreSQL 是全球功能最丰富的开源对象关系型数据库系统，以其 ANSI-SQL 合规性、丰富的扩展生态、出色的并发控制（MVCC）机制和卓越的可扩展性而闻名。2026 年 PostgreSQL 17 版本在逻辑复制、并行查询、JSON 操作、性能诊断等方面持续增强，进一步巩固了其在企业级数据库市场的领先地位。
 
-企业级 PostgreSQL 运维的核心挑战在于：如何构建零数据丢失的高可用集群（Patroni + etcd）、如何实现大规模连接池化（PgBouncer）、如何设计高效的备份恢复策略（WAL-G / Barman + S3）、以及如何建立全链路可观测体系（pg_stat_statements + Prometheus）。本文档将从架构设计到故障排查，系统性地覆盖这些主题。
+企业级 PostgreSQL 运维的核心挑战在于：如何构建零数据丢失的高可用集群（Patroni + [[etcd|etcd]]）、如何实现大规模连接池化（PgBouncer）、如何设计高效的备份恢复策略（WAL-G / Barman + S3）、以及如何建立全链路可观测体系（pg_stat_statements + [[Prometheus|Prometheus]]）。本文档将从架构设计到故障排查，系统性地覆盖这些主题。
 
-PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发控制（MVCC）、丰富的数据类型（JSONB、GIS、UUID、数组）、强大的扩展系统（PostGIS、TimescaleDB、pgvector）、以及活跃的社区生态。在 K8s 环境中，CloudNativePG、Zalando Postgres Operator、Crunchy PGO 等三个主流 Operator 可供选择。
+PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发控制（MVCC）、丰富的数据类型（JSONB、GIS、UUID、数组）、强大的扩展系统（PostGIS、TimescaleDB、pgvector）、以及活跃的社区生态。在 K8s 环境中，[[CloudNativePG|CloudNativePG]]、Zalando Postgres Operator、Crunchy PGO 等三个主流 Operator 可供选择。
 
 ---
 
@@ -672,7 +673,7 @@ switchover() {
     echo "Current cluster state:"
     patronictl -c /etc/patroni/patroni.yml list
 
-    if [[ -n "$candidate" ]]; then
+    if -n "$candidate"; then
         echo "Switching over to $candidate..."
         patronictl -c /etc/patroni/patroni.yml switchover --master pg-cluster --candidate "$candidate" --force
     else
@@ -791,7 +792,7 @@ restore_to_latest() {
     echo "!!! PRODUCTION RESTORE !!!"
     echo "Target: latest backup"
     read -p "Are you sure? (yes/no): " confirm
-    [[ "$confirm" != "yes" ]] && echo "Aborted" && exit 1
+    "$confirm" != "yes" && echo "Aborted" && exit 1
 
     sudo -u postgres pg_ctlcluster 17 main stop
     rm -rf /var/lib/postgresql/17/main/*
@@ -811,7 +812,7 @@ point_in_time_restore() {
     local target_time="${1:?Usage: point_in_time_restore '2026-04-26 15:30:00+08'}"
     echo "!!! PITR RESTORE to $target_time !!!"
     read -p "Are you sure? (yes/no): " confirm
-    [[ "$confirm" != "yes" ]] && echo "Aborted" && exit 1
+    "$confirm" != "yes" && echo "Aborted" && exit 1
 
     sudo -u postgres pg_ctlcluster 17 main stop
     rm -rf /var/lib/postgresql/17/main/*
@@ -1188,21 +1189,21 @@ CREATE TABLE access_logs_default PARTITION OF access_logs DEFAULT;
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|99-cloudnativepg-enterprise-guide]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|01-mysql-enterprise-database]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|03-distributed-database-enterprise]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|04-database-middleware-kubernetes]]
+- 99-cloudnativepg-enterprise-guide
+- 01-mysql-enterprise-database
+- 03-distributed-database-enterprise
+- 04-database-middleware-kubernetes

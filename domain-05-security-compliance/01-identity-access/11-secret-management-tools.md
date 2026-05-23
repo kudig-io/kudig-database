@@ -57,11 +57,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 11 - 密钥与敏感信息管理工具
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **难度**: 高级 | **参考**: [External Secrets](https://external-secrets.io/) | [HashiCorp Vault](https://developer.hashicorp.com/vault) | [Sealed Secrets](https://sealed-secrets.netlify.app/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: External Secretsts|Secrets]]](https://external-secrets.io/) | HashiCorp Vault](https://developer.hashicorp.com/vault) | [Sealed Secrets](https://sealed-secrets.netlify.app/)
 
 <!-- chunk: 一、密钥管理架构全景 -->
 ## 一、密钥管理架构全景
@@ -133,7 +134,7 @@ cross_refs:
 | **External Secrets Operator** | 同步控制器 | ★★★★★ | ✓ | ★★★★☆ | ★★★☆☆ | 中 | 多云/混合云 |
 | **HashiCorp Vault** | 外部密钥库 | ★★★★☆ | ★★★★★ | ★★★☆☆ | ★★★★★ | 高 | 企业安全 |
 | **Sealed Secrets** | 加密控制器 | ★☆☆☆☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | GitOps工作流 |
-| **SOPS** | 文件加密 | ★★★★☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | 小团队 |
+| **[[SOPS|SOPS]]** | 文件加密 | ★★★★☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | 小团队 |
 | **AWS Secrets Manager** | 托管服务 | AWS only | ★★★★★ | ★★★☆☆ | ★★★★★ | 低 | AWS原生 |
 | **Azure Key Vault** | 托管服务 | Azure only | ★★★★☆ | ★★★☆☆ | ★★★★★ | 低 | Azure原生 |
 | **GCP Secret Manager** | 托管服务 | GCP only | ★★★★☆ | ★★★☆☆ | ★★★★★ | 低 | GCP原生 |
@@ -1659,25 +1660,25 @@ kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metad
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/05-policy-validation-tools.md|05 - 策略校验与准入控制工具 (Policy Validation)]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 05 - 策略校验与准入控制工具 (Policy Validation)
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
 
 ## See Also
 
-- [[domain-05-security-compliance/09-security-hardening-production.md|09-security-hardening-production]]
-- [[domain-05-security-compliance/10-certificate-management.md|10-certificate-management]]
-- [[domain-05-security-compliance/12-compliance-certification.md|12-compliance-certification]]
-- [[domain-05-security-compliance/13-image-security-scanning.md|13-image-security-scanning]]
+- 09-security-hardening-production
+- 10-certificate-management
+- 12-compliance-certification
+- 13-image-security-scanning
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

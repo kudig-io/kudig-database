@@ -1,5 +1,5 @@
 ---
-title: Ratify
+title: Ratify (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Ratify
@@ -72,6 +73,6 @@ Ratify 是一个容器镜像供应链安全验证框架，用作 Kubernetes 准�
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/ratify/ratify.md|ratify]]
-- [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
+- ratify
+- [[entities/cncf-security|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

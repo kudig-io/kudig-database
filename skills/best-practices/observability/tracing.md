@@ -1,52 +1,18 @@
 ---
-title: Kubernetes 分布式追踪最佳实践
-description: 'title: Kubernetes 分布式追踪最佳实践'
-category: general
-tags:
-- tracing
-- jaeger
-- helm
-- opa
-- elasticsearch
-- rbac
-- operator
-- rag
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Kubernetes 分布式追踪最佳实践 是什么
-- 如何 Kubernetes 分布式追踪最佳实践
-- Kubernetes 11 production operations 最佳实践
-trigger_keywords:
-- Kubernetes
-- 分布式追踪最佳实践
-- production
-- operations
-- best
-- practices
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- helm-basics
-- policy-basics
-- tracing-basics
-- observability-basics
----
-
-title: Kubernetes 分布式追踪最佳实践
+title: Kubernetes 分布式追踪最佳实践 [observability]
 description: 生产环境 Kubernetes 分布式追踪配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/observability
+category: best-practices/observability
 tags:
 - kubernetes
 - tracing
 - jaeger
 - opentelemetry
 - zipkin
+- helm
+- opa
+- elasticsearch
+- rbac
+- operator
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -64,6 +30,12 @@ trigger_keywords:
 - 分布式追踪
 - Jaeger
 - OpenTelemetry
+prerequisites:
+- kubectl-basics
+- helm-basics
+- policy-basics
+- tracing-basics
+- observability-basics
 cross_refs:
 - type: domain
   path: ../../domain-06-observability/
@@ -74,16 +46,9 @@ cross_refs:
 - type: best-practice
   path: ./logging.md
   label: 日志管理最佳实践
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+created: "2026-05-23"
 ---
+
 # Kubernetes 分布式追踪最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
@@ -613,10 +578,3 @@ spec:
 ---
 
 **文档维护**：定期审查和更新，确保与Jaeger和OpenTelemetry版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/observability/logging.md|logging]]
-- [[domain-11-production-operations/topic-best-practices/observability/monitoring.md|monitoring]]
-- [[domain-11-production-operations/topic-best-practices/operations/deployment.md|deployment]]
-- [[domain-11-production-operations/topic-best-practices/operations/disaster-recovery.md|disaster-recovery]]

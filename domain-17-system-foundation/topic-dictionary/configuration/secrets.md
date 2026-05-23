@@ -29,18 +29,19 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Secrets
 
 ## 概述
 
-Secret 是 Kubernetes 中用于存储敏感数据（如密码、令牌、密钥等）的 API 对象。使用 Secret 可以避免将机密信息硬编码到 Pod 规约或容器镜像中，从而降低在创建、查看和编辑 Pod 过程中泄露敏感数据的风险。
+Secret 是 [[Kubernetes|Kubernetes]] 中用于存储敏感数据（如密码、令牌、密钥等）的 API 对象。使用 Secret 可以避免将机密信息硬编码到 Pod 规约或容器镜像中，从而降低在创建、查看和编辑 Pod 过程中泄露敏感数据的风险。
 
 ## 核心概念/原理
 
 - **与 ConfigMap 的对比**：Secret 与 ConfigMap 类似，但专门用于保存机密数据。Kubernetes 对 Secret 对象会施加额外的保护措施。
-- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（etcd）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
+- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（[[etcd|etcd]]）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
 - **访问控制**：在该命名空间中拥有创建 Pod 权限的用户，可以间接读取该命名空间下的所有 Secret（例如通过 Deployment）。因此，必须配合 RBAC 进行严格授权。
 - **数据字段**：
   - `data`：值为 base64 编码的字符串。
@@ -66,7 +67,7 @@ Secret 是 Kubernetes 中用于存储敏感数据（如密码、令牌、密钥�
 
 1. **卷挂载**：将 Secret 挂载为只读文件，Secret 更新后卷中的文件会最终一致地同步。
 2. **环境变量**：通过 `env.valueFrom.secretKeyRef` 注入，但环境变量中的 Secret 不会自动更新。
-3. **镜像拉取凭据**：通过 `imagePullSecrets` 将 Docker 注册表凭据传递给 kubelet，用于拉取私有镜像。
+3. **镜像拉取凭据**：通过 `imagePullSecrets` 将 Docker 注册表凭据传递给 [[kubelet|kubelet]]，用于拉取私有镜像。
 4. **可选 Secret**：在卷中设置 `optional: true`，当 Secret 不存在时 Pod 仍可启动。
 
 ### 安全机制

@@ -44,6 +44,7 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
+created: "2026-05-23"
 ---
 
 # 06 - 存储基础概念详解
@@ -728,7 +729,7 @@ echo "=========================================="
 NAMESPACE="all"
 THRESHOLD=80
 
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
   case $1 in
     --namespace) NAMESPACE="$2"; shift 2 ;;
     --threshold) THRESHOLD="$2"; shift 2 ;;
@@ -880,7 +881,7 @@ kubectl delete pvc quick-start-pvc
 kubectl delete sc quick-start-sc
 ```
 
-> **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` gRPC 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
+> **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` [[gRPC|gRPC]] 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
 
 ---
 
@@ -1042,12 +1043,12 @@ kubectl delete sc lab-retain lab-delete
 
 ## See Also
 
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|04-storageclass-dynamic-provisioning]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05-csi-drivers-integration]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07-storage-daily-operations]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08-storage-performance-tuning]]
+- 04-storageclass-dynamic-provisioning
+- 05-csi-drivers-integration
+- 07-storage-daily-operations
+- 08-storage-performance-tuning
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]

@@ -1,6 +1,44 @@
 ---
+title: KuDig Doctor — 角色人格与绝对红线 (02-ai-agents)
+description: 'description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- prometheus
+- helm
+- ingress
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- KuDig Doctor — 角色人格与绝对红线 是什么
+- 如何 KuDig Doctor — 角色人格与绝对红线
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- KuDig
+- Doctor
+- 角色人格与绝对红线
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: KuDig Doctor — 角色人格与绝对红线
-description: Kubernetes 运维诊断专家 Agent 的核心人格定义与行为红线
+description: [[Kubernetes|Kubernetes]] 运维诊断专家 Agent 的核心人格定义与行为红线
 category: ai-agent
 tags:
 - ai
@@ -8,10 +46,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
-- helm
-- ingress
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced
@@ -29,18 +67,21 @@ trigger_keywords:
 - 角色人格与绝对红线
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # KuDig Doctor — 角色人格与绝对红线
 
 ## 1. 核心身份
 
-你是 **KuDig Doctor**，一个专精 [[entities/kubernetes|kubernetes]] 集群运维诊断的 AI 专家。
+你是 **KuDig Doctor**，一个专精 Kubernetes 集群运维诊断的 AI 专家。
 
 - **专业领域**：Kubernetes 集群故障诊断、性能分析、架构评审、运维自动化
 - **知识底座**：kudig-database 知识库（950+ 篇生产级技术文档）
@@ -160,3 +201,17 @@ kubectl edit * （直接修改线上资源）
 ---
 
 *本文件定义 KuDig Doctor Agent 的核心人格。修改本文件等同于修改 Agent 的基本行为，请谨慎变更并通过 CI 质量门禁验证。*
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+## See Also
+
+- MEMORY
+- SKILL
+- TOOLS
+- USER

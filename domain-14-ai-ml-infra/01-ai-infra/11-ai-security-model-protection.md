@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: AI安全与模型保护
@@ -46,10 +47,10 @@ tags:
 - ml
 - training
 - inference
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - redis
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -61,7 +62,7 @@ estimated_read_time: 5min
 intent_queries:
 - AI安全与模型保护 是什么
 - 如何 AI安全与模型保护
-- Kubernetes 11 ai infra 最佳实践
+- [[Kubernetes|Kubernetes]] 11 ai infra 最佳实践
 trigger_keywords:
 - AI安全与模型保护
 - ai
@@ -1355,25 +1356,25 @@ recommendations:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/09-model-registry.md|09-model-registry]]
-- [[domain-14-ai-ml-infra/10-model-deployment-management.md|10-model-deployment-management]]
-- [[domain-14-ai-ml-infra/12-ai-cost-analysis-finops.md|12-ai-cost-analysis-finops]]
-- [[domain-14-ai-ml-infra/13-ai-platform-observability.md|13-ai-platform-observability]]
+- 09-model-registry
+- 10-model-deployment-management
+- 12-ai-cost-analysis-finops
+- 13-ai-platform-observability
 
 ## Related
 

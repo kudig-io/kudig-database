@@ -60,9 +60,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
-# Kind / K3s 单机集群故障排查
+# Kind / [[k3s|K3s]] 单机集群故障排查
 
 > **文档类型**: 故障排查手册 | **适用版本**: Kind (K8s 1.28-1.33) / K3s | **最后更新**: 2026-05
 > **使用场景**: Agent 处理开发/测试环境（Kind/K3s）的常见故障
@@ -74,7 +75,7 @@ cross_refs:
 
 ### 1.1 Kind 简介与核心概念
 
-Kind（Kubernetes in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。
+Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。
 
 **架构**：
 ```
@@ -361,7 +362,7 @@ sudo k3s agent --server https://<server-ip>:6443 \
 
 ### 2.4 K3s 单机多容器网络问题
 
-**故障现象**: Pod 之间无法通信，Service ClusterIP 无法访问
+**故障现象**: Pod 之间无法通信，[[Service|Service]] ClusterIP 无法访问
 
 **排查步骤**：
 ```bash
@@ -499,9 +500,9 @@ related:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

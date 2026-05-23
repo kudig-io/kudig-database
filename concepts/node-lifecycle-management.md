@@ -27,13 +27,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 节点生命周期管理
 
 ## 概述
 
-Kubernetes 节点从加入到移除的完整生命周期涉及 kubelet、Node Lifecycle Controller、Cluster Autoscaler 等多个组件的协作。无论控制面节点还是工作节点，都必须经过注册、认证、状态上报等关键流程。
+Kubernetes 节点从加入到移除的完整生命周期涉及 [[kubelet|kubelet]]、Node Lifecycle Controller、Cluster Autoscaler 等多个组件的协作。无论控制面节点还是工作节点，都必须经过注册、认证、状态上报等关键流程。
 
 ## 节点生命周期五个阶段
 
@@ -60,7 +61,7 @@ Kubernetes 节点从加入到移除的完整生命周期涉及 kubelet、Node Li
 ├── drain → 维护操作 → uncordon
 ├── 版本升级（kubelet/kubeadm/OS）
 ├── 弹性伸缩（Cluster Autoscaler）
-└── 故障排查与恢复
+└── 问题排查与恢复
 
 阶段 5: 节点移除
 ├── drain 驱逐所有 Pod
@@ -205,9 +206,9 @@ Node Ready
 
 ## 相关概念
 
-- [[skills/node-drain-and-maintenance.md|节点驱逐与维护]]
-- [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
-- [[skills/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]]
+- [[skills/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[skills/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[skills/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
 - [[entities/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod 生命周期]]
 

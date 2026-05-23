@@ -30,9 +30,10 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
-# Open Cluster Management (OCM)
+# [[entities/open-cluster-management.md|Open Cluster Management]] (OCM)
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
@@ -71,11 +72,11 @@ Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，�
 ## Related
 
 - [[fluid]] — Fluid
-- [[entities/cncf-storage.md|cncf-storage]] — CNCF 存储与数据库项目全景
+- storage.md|cncf-storage]] — CNCF 存储与数据库项目全景
 - [[kuasar]] — Kuasar
 - [[longhorn]] — Longhorn
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/open-cluster-management/open-cluster-management.md|open-cluster-management]]
+- open-cluster-management
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

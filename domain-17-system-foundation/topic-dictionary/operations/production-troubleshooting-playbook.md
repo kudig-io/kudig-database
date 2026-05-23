@@ -38,11 +38,12 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # 16 - 生产环境故障排查剧本
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **生产环境实战经验总结**: 基于万级节点集群故障排查经验，涵盖从常见故障到复杂问题的全方位排查剧本
 
@@ -94,7 +95,7 @@ prerequisites:
 | 医生看病步骤 | 故障排查步骤 | K8s具体操作 | 工具 |
 |------------|------------|-----------|------|
 | **1. 问诊** | 收集症状 | 用户报告什么问题？ | 告警、工单 |
-| **2. 初步检查** | 快速诊断 | `kubectl get pods/nodes` | kubectl |
+| **2. 初步检查** | 快速诊断 | `kubectl get [[Pods|pods]]/nodes` | kubectl |
 | **3. 验体征** | 数据采集 | 查看日志、指标、事件 | logs, describe, top |
 | **4. 假设病因** | 形成假设 | 根据经验判断可能原因 | 经验库 |
 | **5. 验证检查** | 验证假设 | 针对性测试（网络、DNS等） | 专项工具 |
@@ -1704,18 +1705,18 @@ echo ""
 echo "=== 常见问题诊断 ==="
 
 # 检查1：镜像名格式
-if [[ ! "$IMAGE" =~ ^[a-zA-Z0-9._/-]+:[a-zA-Z0-9._-]+$ ]] && [[ ! "$IMAGE" =~ @sha256: ]]; then
+if ! "$IMAGE" =~ ^[a-zA-Z0-9._/-]+:[a-zA-Z0-9._-]+$ && ! "$IMAGE" =~ @sha256:; then
   echo "⚠️  镜像名格式可能有问题: $IMAGE"
 fi
 
 # 检查2：tag是否为latest
-if [[ "$IMAGE" =~ :latest$ ]] || [[ ! "$IMAGE" =~ : ]]; then
+if "$IMAGE" =~ :latest$ || ! "$IMAGE" =~ :; then
   echo "⚠️  使用了latest标签或未指定标签"
   echo "   建议: 使用明确的版本标签"
 fi
 
 # 检查3：私有仓库但没有凭据
-if [[ "$IMAGE" =~ ^[^/]+\.[^/]+/ ]] && [ -z "$IMAGE_PULL_SECRETS" ]; then
+if "$IMAGE" =~ ^[^/]+\.[^/]+/ && [ -z "$IMAGE_PULL_SECRETS" ]; then
   echo "❌ 疑似私有仓库但未配置imagePullSecrets"
   echo "   解决: 创建docker-registry类型Secret并配置imagePullSecrets"
 fi

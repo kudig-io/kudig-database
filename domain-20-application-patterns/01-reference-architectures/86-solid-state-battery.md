@@ -35,6 +35,7 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 固态电池架构设计
@@ -45,9 +46,9 @@ tags:
 - architecture
 - industry
 - scheduler
-- prometheus
-- argocd
-- flux
+- [[Prometheus|prometheus]]
+- [[ArgoCD|argocd]]
+- [[Flux|flux]]
 - opa
 - mysql
 - job
@@ -655,7 +656,7 @@ flowchart LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -670,11 +671,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/84-national-park.md|84-national-park]]
-- [[domain-20-application-patterns/85-hydrogen-energy.md|85-hydrogen-energy]]
-- [[domain-20-application-patterns/87-flexible-manufacturing.md|87-flexible-manufacturing]]
-- [[domain-20-application-patterns/88-nanomaterials.md|88-nanomaterials]]
+- 84-national-park
+- 85-hydrogen-energy
+- 87-flexible-manufacturing
+- 88-nanomaterials
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

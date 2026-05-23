@@ -1,4 +1,45 @@
 ---
+title: 节点网络：CNI 配置详解
+description: 'title: 节点网络 CNI 配置详解'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- cilium
+- flannel
+- calico
+- coredns
+- containerd
+- docker
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点网络：CNI 配置详解 是什么
+- 如何 节点网络：CNI 配置详解
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点网络：CNI
+- 配置详解
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点网络 CNI 配置详解
 description: '# 节点网络：CNI 配置详解'
 category: functions
@@ -42,13 +83,6 @@ trigger_keywords:
 - network policy
 - cni0
 - flannel.1
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- ebpf-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
@@ -57,13 +91,22 @@ related_topics:
 - node-create/08-troubleshooting
 - cluster-create/06-join
 - domain-03-networking-traffic/01-overview
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点网络：CNI 配置详解
 
 ## 概述
 
-节点网络是 [[entities/kubernetes|kubernetes]] 集群中最复杂的子系统之一。每个 Pod 需要独立的网络命名空间、唯一的 IP 地址、正确的路由规则，以及与集群内外通信的能力。这些网络配置由 CNI（Container Network Interface）插件在 Pod 创建和销毁时自动完成。
+节点网络是 Kubernetes 集群中最复杂的子系统之一。每个 Pod 需要独立的网络命名空间、唯一的 IP 地址、正确的路由规则，以及与集群内外通信的能力。这些网络配置由 CNI（Container Network Interface）插件在 Pod 创建和销毁时自动完成。
 
 CNI 是 Cloud Native Computing Foundation（CNCF）维护的容器网络标准接口。它定义了一组简单的规范，用于配置 Linux 容器的网络接口。Kubelet 通过 CRI（Container Runtime Interface）调用 CNI 插件来为 Pod 配置网络。
 
@@ -484,3 +527,11 @@ cat /var/lib/cni/*            # IPAM 记录
 | `setupPod` | `pkg/kubelet/network/` | kubelet 网络配置入口 |
 | `teardownPod` | `pkg/kubelet/network/` | kubelet 网络清理入口 |
 | `IPAM` | CNI IPAM 插件 | IP 地址分配 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[skills/ts-networking.md|ts-networking]]

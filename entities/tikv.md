@@ -1,5 +1,5 @@
 ---
-title: TiKV
+title: TiKV (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # TiKV
@@ -76,10 +77,10 @@ description: '## 项目概述'
 
 - [[references/release-notes-observability.md|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[entities/cncf-observability.md|cncf-observability]] — CNCF 可观测性项目全景
-- [[chaos-mesh]] — Chaos Mesh
+- [[chaos-mesh]] — [[Chaos Mesh|Chaos Mesh]]
 - [[kubean]] — Kubean
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/tikv/tikv.md|tikv]]
+- tikv
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

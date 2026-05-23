@@ -29,6 +29,7 @@ prerequisites:
 - cncf-ecosystem
 - monitoring-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # grafana v11.5 Release Notes

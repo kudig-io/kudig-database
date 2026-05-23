@@ -27,9 +27,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
-# containerd v2.1 Release Notes
+# [[containerd|containerd]] v2.1 Release Notes
 
 Source: [v2.1.6](https://github.com/containerd/containerd/releases/tag/v2.1.6)
 

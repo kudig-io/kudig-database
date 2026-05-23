@@ -44,9 +44,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Crossplane 平台工程实践指南
+# [[Crossplane|Crossplane]] 平台工程实践指南
 
 > **适用版本**: Crossplane v1.19.0  
 > **最后更新**: 2026-04-24  
@@ -215,7 +216,7 @@ spec:
     version: "16"
 ```
 
-**与 Argo CD 集成**
+**与 [[Argo|Argo]] CD 集成**
 - Crossplane 资源为原生 K8s YAML
 - 直接通过 Argo CD 管理
 - 利用 Argo CD 的 drift detection 检测云资源漂移
@@ -266,18 +267,18 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
+- domain-24-infrastructure-as-code MOC
 - [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|Terraform企业级基础设施即代码实践]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|Ansible企业级自动化运维深度实践]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|Pulumi Enterprise Infrastructure as Code Platform]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Infrastructure Orchestration 深度实践]]
+- Domain-24 基础设施即代码 — 开源项目索引
+- Terraform企业级基础设施即代码实践
+- Ansible企业级自动化运维深度实践
+- Pulumi Enterprise Infrastructure as Code Platform
+- Azure Resource Manager (ARM) Enterprise 深度实践
+- Crossplane Enterprise Infrastructure Orchestration 深度实践
 
 ## See Also
 
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|04-azure-resource-manager-enterprise]]
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|05-crossplane-enterprise-orchestration]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|01-terraform-enterprise-iac]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|02-ansible-enterprise-automation]]
+- 04-azure-resource-manager-enterprise
+- 05-crossplane-enterprise-orchestration
+- 01-terraform-enterprise-iac
+- 02-ansible-enterprise-automation

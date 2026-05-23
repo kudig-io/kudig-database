@@ -30,6 +30,7 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # K8s 网络术语参考

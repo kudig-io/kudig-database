@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -52,11 +53,11 @@ tags:
 - server
 - gpu
 - network
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
-- prometheus
-- daemonset
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -813,22 +814,22 @@ K8s_硬件故障检查:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-31-hardware MOC]]
+- domain-31-hardware MOC
 - [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-31 硬件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|云平台硬件基础架构]]
-- [[domain-17-system-foundation/02-server-architecture-principles.md|服务器架构原理]]
-- [[domain-17-system-foundation/03-cpu-technology-deep-dive.md|CPU技术深度解析]]
-- [[domain-17-system-foundation/04-motherboard-chipset-technology.md|主板与芯片组技术]]
-- [[domain-17-system-foundation/05-memory-technology-deep-dive.md|内存技术深度解析]]
-- [[domain-17-system-foundation/06-storage-hdd-technology.md|机械硬盘技术]]
-- [[domain-17-system-foundation/07-storage-ssd-technology.md|SSD固态硬盘技术]]
-- [[domain-17-system-foundation/08-network-hardware-technology.md|网络硬件技术]]
-- [[domain-17-system-foundation/09-hardware-vendors-ecosystem.md|硬件厂商生态]]
+- Domain-31 硬件 — 开源项目索引
+- 云平台硬件基础架构
+- 服务器架构原理
+- CPU技术深度解析
+- 主板与芯片组技术
+- 内存技术深度解析
+- 机械硬盘技术
+- SSD固态硬盘技术
+- 网络硬件技术
+- 硬件厂商生态
 
 ## See Also
 
-- [[domain-17-system-foundation/16-kubernetes-hardware-troubleshooting.md|16-kubernetes-hardware-troubleshooting]]
-- [[domain-17-system-foundation/17-hardware-error-codes-reference.md|17-hardware-error-codes-reference]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|01-cloud-hardware-architecture]]
-- [[domain-17-system-foundation/02-server-architecture-principles.md|02-server-architecture-principles]]
+- 16-kubernetes-hardware-troubleshooting
+- 17-hardware-error-codes-reference
+- 01-cloud-hardware-architecture
+- 02-server-architecture-principles

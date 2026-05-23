@@ -37,6 +37,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 04 - Terway 运维手册 (Operations Manual)
@@ -114,7 +115,7 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 ```
 
-触发本地 IPAM 与 Kubernetes API 全量同步，适用于状态不一致场景。
+触发本地 IPAM 与 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 全量同步，适用于状态不一致场景。
 
 **查看帮助:**
 
@@ -232,7 +233,7 @@ exit ${EXIT_CODE}
 
 | 场景 | 原因 | 后果 |
 |:---|:---|:---|
-| kubelet 强制驱逐 | 节点压力大，跳过 CNI DEL 回调 | IP 残留在 ENI 辅助 IP 列表 |
+| [[kubelet|kubelet]] 强制驱逐 | 节点压力大，跳过 CNI DEL 回调 | IP 残留在 ENI 辅助 IP 列表 |
 | 节点异常重启 | Terway Agent 进程未优雅退出 | 本地 IPAM 状态丢失 |
 | Terway Agent 重启/升级 | 内存状态与持久化状态不一致 | 孤儿 IP 无法追踪 |
 | CRD Finalizer 阻塞 | PodENI/IPInstance 删除卡住 | IP 永久占用 |

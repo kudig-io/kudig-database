@@ -1,5 +1,5 @@
 ---
-title: 第九课：Job 和 CronJob - 任务调度
+title: 第九课：Job 和 CronJob - 任务调度 [10-workloads]
 description: '# 第九课：Job 和 CronJob - 任务调度'
 category: k8s-lecturer
 tags:
@@ -31,9 +31,10 @@ prerequisites:
 - pod-lifecycle
 - gpu-ml-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
-# 第九课：Job 和 CronJob - 任务调度
+# 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -541,5 +542,5 @@ kubectl delete cronjob <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-health-check.md](../09-troubleshooting/09-health-check.md) — 健康检查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md) — Job/CronJob 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档

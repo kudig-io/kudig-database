@@ -1,5 +1,5 @@
 ---
-title: 01 - 本机单机 Demo 部署
+title: 01 - 本机单机 Demo 部署 [best-practices]
 description: 'title: 01 - 本机单机 Demo 部署'
 category: general
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 01 - 本机单机 Demo 部署
@@ -44,12 +45,12 @@ tags:
 - k8s
 - deployment
 - rolling-update
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- coredns
+- [[CoreDNS|coredns]]
 - containerd
 last_updated: 2026-05
 difficulty: intermediate
@@ -1034,7 +1035,7 @@ my-k8s-worker          Ready    <none>          25s   v1.32.0
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-deployment/MOC.md|topic-deployment MOC]]
+- topic-deployment MOC
 - [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
 - [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
 - [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]

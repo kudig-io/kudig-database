@@ -1,5 +1,5 @@
 ---
-title: Cluster Autoscaler 异常故障树分析
+title: Cluster Autoscaler 异常故障树分析 (skills)
 description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath=''{range .items[?(@.spec.nodeName==null)]}
   {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}'' 显示有未调度的 Pending Pod'
 category: general
@@ -26,17 +26,18 @@ prerequisites:
 fta_id: FTA-CLUSTER_AUTOSCALER-001
 component: Cluster Autoscaler
 severity: medium
+created: "2026-05-23"
 ---
 
 ---
 title: "Cluster Autoscaler 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\'\n\'}{en..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\'\n\'}{en..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

@@ -1,6 +1,46 @@
 ---
+title: 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis)
+description: 'title: 网络清理详解 — CNI / iptables / ipvs / 路由'
+category: general
+tags:
+- reference
+- networking
+- kubelet
+- cilium
+- flannel
+- calico
+- networkpolicy
+- ebpf
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 网络清理详解 — CNI / iptables / ipvs / 路由 是什么
+- 如何 网络清理详解 — CNI / iptables / ipvs / 路由
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 网络清理详解
+- CNI
+- iptables
+- ipvs
+- 路由
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+created: "2026-05-23"
+---
+
 title: 网络清理详解 — CNI / iptables / ipvs / 路由
-description: 深入分析 Kubernetes 集群删除后的网络清理机制，涵盖 CNI 配置清理（Flannel/Calico/Cilium/Weave）、iptables KUBE 链清理、ipvs 规则清理、虚拟网络接口清理（cni0/flannel.1/tunl0/kube-ipvs0）以及路由清理等完整网络残留清除方案。
 category: cluster-delete
 tags:
 - network
@@ -14,13 +54,9 @@ tags:
 - cleanup
 - routing
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes 集群删除后的网络清理机制，涵盖 CNI 配置清理（Flannel/Calico/Cilium/Weave）、iptables
+  KUBE 链清理、ipvs 规则清理、虚拟网络接口清理（cni0/flannel.1/tunl0/kube-ipvs0）以及路由清理等完整网络残留清除方案。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- network-engineer
-- kubernetes-administrator
-estimated_read_time: 5min
 intent_queries:
 - kubernetes network cleanup after cluster deletion
 - cni plugin cleanup flannel calico cilium
@@ -41,12 +77,12 @@ trigger_keywords:
 - tunl0
 - kube-ipvs0
 - veth cleanup
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- ebpf-basics
-- cilium-basics
-- cni-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- network-engineer
+- kubernetes-administrator
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -55,13 +91,24 @@ related_topics:
 - cleanup
 - security-delete
 - force-delete
+domain_link: '[Networking](../domain-03-networking-traffic/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 网络清理详解 — CNI / iptables / ipvs / 路由
 
 ## 概述
 
-`kubeadm reset` **不会**自动清理网络配置。这是设计决策——不同 CNI 插件有不同的清理需求，且 iptables/ipvs 规则可能包含非 [[entities/kubernetes|kubernetes]] 规则，盲目清理会影响主机网络。本文档详细分析各类网络配置的残留位置和清理方法。
+`kubeadm reset` **不会**自动清理网络配置。这是设计决策——不同 CNI 插件有不同的清理需求，且 iptables/ipvs 规则可能包含非 Kubernetes 规则，盲目清理会影响主机网络。本文档详细分析各类网络配置的残留位置和清理方法。
 
 ---
 
@@ -460,3 +507,11 @@ echo "=== 网络清理完成 ==="
 - [kubeadm reset 手动清理](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-reset/#cleaning-up-your-control-plane-node)
 - [kube-proxy iptables 详解](https://kubernetes.io/docs/concepts/services-networking/service/#proxy-mode-iptables)
 - [CNI 规范](https://github.com/containernetworking/cni/blob/master/SPEC.md)
+
+## Related
+
+- 22-networkpolicy-reference
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]

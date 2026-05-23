@@ -1,4 +1,54 @@
 ---
+title: 03 - 研发环境部署 (Development Environment Deployment) [deployment]
+description: 'title: 03 - 研发环境部署 (Development Environment Deployment)'
+category: general
+tags:
+- deployment
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- prometheus
+- grafana
+- cilium
+- flannel
+- calico
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 研发环境部署 (Development Environment Deployment) 是什么
+- 如何 研发环境部署 (Development Environment Deployment)
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 研发环境部署
+- Development
+- Environment
+- Deployment
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- redis-basics
+- policy-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: 03 - 研发环境部署 (Development Environment Deployment)
 description: '# 03 - 研发环境部署 (Development Environment Deployment)'
 category: deployment
@@ -6,11 +56,11 @@ tags:
 - k8s
 - deployment
 - rolling-update
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - cilium
 last_updated: 2026-05
@@ -29,19 +79,15 @@ trigger_keywords:
 - Environment
 - Deployment
 - deployment
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- ebpf-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
-- redis-basics
-- policy-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 03 - 研发环境部署 (Development Environment Deployment)
@@ -51,7 +97,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 研发环境面向开发团队的日常协作需求：多人共享集群、隔离的命名空间、私有镜像仓库、监控告警、日志收集、CI/CD 流水线。本文档提供从裸机到完整研发平台的搭建全流程。
 
@@ -68,9 +114,9 @@ prerequisites:
 
 ---
 
-## 环境定位与规划
+<!-- chunk: 环境定位与规划 -->## 环境定位与规划
 
-### 研发环境体系
+#<!-- chunk: 研发环境体系 -->## 研发环境体系
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -91,7 +137,7 @@ prerequisites:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 节点规划
+#<!-- chunk: 节点规划 -->## 节点规划
 
 | 节点角色 | 主机名 | IP | CPU | 内存 | 存储 | 说明 |
 |---------|--------|-----|-----|------|------|------|
@@ -102,7 +148,7 @@ prerequisites:
 
 > **备注**: 如果资源有限，Harbor 可以部署在 Worker 节点上，或使用 K8s 集群内部署。
 
-### 网络规划
+#<!-- chunk: 网络规划 -->## 网络规划
 
 ```yaml
 # 研发环境网络规划
@@ -122,9 +168,9 @@ network_plan:
 
 ---
 
-## 一、搭建 K8s 集群 (kubeadm)
+<!-- chunk: 一、搭建 K8s 集群 (kubeadm) -->## 一、搭建 K8s 集群 (kubeadm)
 
-### 1.1 所有节点: 系统准备
+#<!-- chunk: 1.1 所有节点: 系统准备 -->## 1.1 所有节点: 系统准备
 
 > **重要**: 以下操作需要在 **所有节点** (Master + Worker) 上执行。  
 > 详细说明参见 [02-单节点部署 → 通用系统准备](./02-single-node-deployment.md)。
@@ -185,7 +231,7 @@ sudo apt-get install -y chrony
 sudo systemctl enable chrony && sudo systemctl start chrony
 ```
 
-### 1.2 Master 节点: 初始化控制平面
+#<!-- chunk: 1.2 Master 节点: 初始化控制平面 -->## 1.2 Master 节点: 初始化控制平面
 
 ```yaml
 # 创建 kubeadm 配置文件: kubeadm-config.yaml
@@ -243,7 +289,7 @@ kubectl get nodes
 # 预期: master-1 NotReady (等待 CNI 安装)
 ```
 
-### 1.3 Worker 节点: 加入集群
+#<!-- chunk: 1.3 Worker 节点: 加入集群 -->## 1.3 Worker 节点: 加入集群
 
 ```bash
 # 在每个 Worker 节点执行 (使用 kubeadm init 输出的 join 命令)
@@ -261,7 +307,7 @@ kubeadm token create --print-join-command
 # 预期: 输出一条完整的 kubeadm join 命令
 ```
 
-### 1.4 安装 CNI 网络插件
+#<!-- chunk: 1.4 安装 CNI 网络插件 -->## 1.4 安装 CNI 网络插件
 
 ```bash
 # 推荐 Calico (支持 NetworkPolicy，研发环境需要权限隔离)
@@ -289,7 +335,7 @@ kubectl exec test-2 -- ping -c 3 $TEST1_IP
 kubectl delete pod test-1 test-2  # 清理
 ```
 
-### 1.5 安装 Helm (后续组件安装依赖)
+#<!-- chunk: 1.5 安装 Helm (后续组件安装依赖) -->## 1.5 安装 Helm (后续组件安装依赖)
 
 ```bash
 # macOS
@@ -313,7 +359,7 @@ helm repo update
 
 ---
 
-## 二、CNI 网络插件选型
+<!-- chunk: 二、CNI 网络插件选型 -->## 二、CNI 网络插件选型
 
 > **备注**: 第 1.4 步已安装 Calico，这里提供详细的选型参考。
 
@@ -331,7 +377,7 @@ helm repo update
 
 ---
 
-## 三、安装 Ingress Controller
+<!-- chunk: 三、安装 Ingress Controller -->## 三、安装 Ingress Controller
 
 ```bash
 # 使用 Helm 安装 Nginx Ingress Controller
@@ -387,11 +433,11 @@ kubectl delete ingress test-ingress  # 清理
 
 ---
 
-## 四、部署 Harbor 私有镜像仓库
+<!-- chunk: 四、部署 Harbor 私有镜像仓库 -->## 四、部署 Harbor 私有镜像仓库
 
 > **Harbor** 是企业级容器镜像仓库，支持镜像签名、漏洞扫描、RBAC 权限、镜像复制。
 
-### 4.1 使用 Helm 部署 Harbor (推荐)
+#<!-- chunk: 4.1 使用 Helm 部署 Harbor (推荐) -->## 4.1 使用 Helm 部署 Harbor (推荐)
 
 ```bash
 # 添加 Harbor 仓库
@@ -428,7 +474,7 @@ kubectl get pods -n harbor -w
 # 用户名: admin  密码: Harbor12345
 ```
 
-### 4.2 配置节点信任 Harbor (自签名证书)
+#<!-- chunk: 4.2 配置节点信任 Harbor (自签名证书) -->## 4.2 配置节点信任 Harbor (自签名证书)
 
 ```bash
 # 在每个需要 push/pull 镜像的节点上执行:
@@ -457,9 +503,9 @@ docker push 192.168.10.11:30003/library/nginx:alpine
 
 ---
 
-## 五、安全配置 - RBAC 多团队隔离
+<!-- chunk: 五、安全配置 - RBAC 多团队隔离 -->## 五、安全配置 - RBAC 多团队隔离
 
-### 5.1 Namespace 策略
+#<!-- chunk: 5.1 Namespace 策略 -->## 5.1 Namespace 策略
 
 ```bash
 # 为每个团队/环境创建独立 Namespace
@@ -475,7 +521,7 @@ kubectl label namespace staging env=staging
 kubectl label namespace pre-production env=pre-prod
 ```
 
-### 5.2 RBAC 角色定义
+#<!-- chunk: 5.2 RBAC 角色定义 -->## 5.2 RBAC 角色定义
 
 ```yaml
 # rbac-dev-team.yaml - 开发团队权限配置
@@ -535,7 +581,7 @@ EOF
 kubectl apply -f rbac-dev-team.yaml
 ```
 
-### 5.3 资源配额
+#<!-- chunk: 5.3 资源配额 -->## 5.3 资源配额
 
 ```yaml
 # resource-quota.yaml - 为每个团队设置资源上限
@@ -590,9 +636,9 @@ kubectl describe resourcequota dev-team-a-quota -n dev-team-a
 
 ---
 
-## 六、监控告警系统
+<!-- chunk: 六、监控告警系统 -->## 六、监控告警系统
 
-### 6.1 部署 Prometheus + Grafana (kube-prometheus-stack)
+#<!-- chunk: 6.1 部署 Prometheus + Grafana (kube-prometheus-stack) -->## 6.1 部署 Prometheus + Grafana (kube-prometheus-stack)
 
 ```bash
 # 这是最主流的 K8s 监控方案，包含:
@@ -635,7 +681,7 @@ kubectl patch svc monitoring-grafana -n monitoring -p '{"spec":{"type":"NodePort
 # 访问: http://192.168.10.11:30300
 ```
 
-### 6.2 内置仪表盘
+#<!-- chunk: 6.2 内置仪表盘 -->## 6.2 内置仪表盘
 
 安装后自动包含的 Grafana 仪表盘:
 - **Kubernetes / Compute Resources / Cluster** - 集群总体资源使用
@@ -644,7 +690,7 @@ kubectl patch svc monitoring-grafana -n monitoring -p '{"spec":{"type":"NodePort
 - **CoreDNS** - DNS 查询性能
 - **etcd** - etcd 性能指标
 
-### 6.3 部署 Loki 日志系统
+#<!-- chunk: 6.3 部署 Loki 日志系统 -->## 6.3 部署 Loki 日志系统
 
 ```bash
 # Loki + Promtail: 轻量级日志收集方案 (与 Grafana 完美集成)
@@ -674,9 +720,9 @@ kubectl get pods -n monitoring -l app=promtail
 
 ---
 
-## 七、GitOps 工作流 (ArgoCD)
+<!-- chunk: 七、GitOps 工作流 (ArgoCD) -->## 七、GitOps 工作流 (ArgoCD)
 
-### 7.1 安装 ArgoCD
+#<!-- chunk: 7.1 安装 ArgoCD -->## 7.1 安装 ArgoCD
 
 ```bash
 # 创建命名空间
@@ -704,7 +750,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 # Linux: curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && chmod +x argocd && sudo mv argocd /usr/local/bin/
 ```
 
-### 7.2 创建 ArgoCD Application
+#<!-- chunk: 7.2 创建 ArgoCD Application -->## 7.2 创建 ArgoCD Application
 
 ```yaml
 # argocd-app.yaml - 定义一个 GitOps 应用
@@ -746,11 +792,11 @@ kubectl apply -f argocd-app.yaml
 
 ---
 
-## 八、多环境配置管理 (Kustomize)
+<!-- chunk: 八、多环境配置管理 (Kustomize) -->## 八、多环境配置管理 (Kustomize)
 
 > **Kustomize** 是 K8s 内置的配置管理工具，通过 overlay 机制管理多环境差异。
 
-### 8.1 目录结构
+#<!-- chunk: 8.1 目录结构 -->## 8.1 目录结构
 
 ```
 k8s-manifests/
@@ -774,7 +820,7 @@ k8s-manifests/
 │           └── deployment-patch.yaml
 ```
 
-### 8.2 配置示例
+#<!-- chunk: 8.2 配置示例 -->## 8.2 配置示例
 
 ```yaml
 # --- base/kustomization.yaml ---
@@ -852,9 +898,9 @@ kubectl apply -k environments/development/
 
 ---
 
-## 九、集群日常运维
+<!-- chunk: 九、集群日常运维 -->## 九、集群日常运维
 
-### 9.1 日常检查脚本
+#<!-- chunk: 9.1 日常检查脚本 -->## 9.1 日常检查脚本
 
 ```bash
 #!/bin/bash
@@ -883,7 +929,7 @@ echo -e "\n===== 7. 近期告警 ====="
 kubectl get events -A --sort-by='.lastTimestamp' --field-selector type=Warning | tail -10
 ```
 
-### 9.2 版本升级流程
+#<!-- chunk: 9.2 版本升级流程 -->## 9.2 版本升级流程
 
 ```bash
 # ===== 升级前检查 =====
@@ -908,7 +954,7 @@ ETCDCTL_API=3 sudo etcdctl snapshot save /backup/etcd-pre-upgrade.db \
 # 4. 逐个升级 kubelet (drain → upgrade → uncordon)
 ```
 
-### 9.3 HPA 自动扩缩容
+#<!-- chunk: 9.3 HPA 自动扩缩容 -->## 9.3 HPA 自动扩缩容
 
 ```yaml
 # hpa.yaml - 基于 CPU 的水平自动扩缩容
@@ -946,11 +992,11 @@ spec:
 
 ---
 
-## 十、开发者入门指南
+<!-- chunk: 十、开发者入门指南 -->## 十、开发者入门指南
 
 > **场景**: 新开发者加入团队后，如何快速开始使用研发 K8s 集群。
 
-### 10.1 获取集群访问权限
+#<!-- chunk: 10.1 获取集群访问权限 -->## 10.1 获取集群访问权限
 
 ```bash
 # 1. 管理员为开发者创建 kubeconfig
@@ -969,7 +1015,7 @@ cp developer-kubeconfig.yaml ~/.kube/config
 kubectl get pods -n dev-team-a
 ```
 
-### 10.2 推荐开发工具
+#<!-- chunk: 10.2 推荐开发工具 -->## 10.2 推荐开发工具
 
 | 工具 | 类型 | 说明 |
 |------|------|------|
@@ -995,7 +1041,7 @@ stern app -n dev-team-a
 
 ---
 
-## 验收清单
+<!-- chunk: 验收清单 -->## 验收清单
 
 - [ ] 多节点集群搭建完成，所有节点 Ready
 - [ ] CNI 网络正常，跨节点 Pod 可通信
@@ -1011,9 +1057,9 @@ stern app -n dev-team-a
 
 ---
 
-## 常见问题 (FAQ)
+<!-- chunk: 常见问题 (FAQ) -->## 常见问题 (FAQ)
 
-### Q1: Worker 节点 join 失败
+#<!-- chunk: Q1: Worker 节点 join 失败 -->## Q1: Worker 节点 join 失败
 
 ```bash
 # 检查网络连通性
@@ -1028,7 +1074,7 @@ sudo kubeadm reset -f
 # 然后重新 join
 ```
 
-### Q2: Harbor Pod 一直 Pending
+#<!-- chunk: Q2: Harbor Pod 一直 Pending -->## Q2: Harbor Pod 一直 Pending
 
 ```bash
 # 通常是 StorageClass 问题
@@ -1038,7 +1084,7 @@ kubectl get storageclass
 # 需要先安装 StorageClass (如 local-path-provisioner)
 ```
 
-### Q3: Prometheus 数据丢失 (Pod 重启后)
+#<!-- chunk: Q3: Prometheus 数据丢失 (Pod 重启后) -->## Q3: Prometheus 数据丢失 (Pod 重启后)
 
 ```bash
 # 检查 PVC 是否正常绑定
@@ -1049,8 +1095,26 @@ kubectl get pvc -n monitoring
 
 ---
 
-**下一步**: 掌握研发环境后，前往 → [04-production-environment-deployment.md](./[[domain-08-release-change-management/topic-deployment/04-production-environment-deployment|04-production-environment-deployment]].md) 学习生产级部署。
+**下一步**: 掌握研发环境后，前往 → [04-production-environment-deployment.md](./04-production-environment-deployment.md) 学习生产级部署。
 
 ---
 
 **来源文档**: `domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md`, `domain-07-platform-engineering/02-cluster-lifecycle-management.md`, `domain-02-workloads-applications/02-deployment-production-patterns.md`
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-deployment MOC
+- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+
+## Related
+
+- [[README.md|README]]
+- [[MOC.md|MOC]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

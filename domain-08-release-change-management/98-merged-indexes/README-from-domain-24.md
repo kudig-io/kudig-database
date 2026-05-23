@@ -30,6 +30,7 @@ prerequisites:
 - gitops-basics
 - iac-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: ReAct Agent 与 Harness 识别指南
+title: ReAct Agent 与 Harness 识别指南 (domain-14-ai-ml-infra)
 description: 'title: ReAct Agent 与 Harness 识别指南'
 category: general
 tags:
@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: ReAct Agent 与 Harness 识别指南
@@ -43,7 +44,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - postgresql
 last_updated: 2026-05
 difficulty: advanced
@@ -566,11 +567,11 @@ Agent 分类 Code Review Checklist:
 | 文档 | 关联内容 |
 |------|---------|
 | [01 - AI Agent 基础与核心架构](./01-ai-agent-fundamentals.md) | ReAct/CoT/ToT/Reflexion 推理框架理论基础 |
-| [17 - AgentScope 核心概念](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | AgentScope 中 ReActAgent 继承体系 |
+| [17 - AgentScope 核心概念](./17-agentscope-core-concepts.md) | AgentScope 中 ReActAgent 继承体系 |
 | [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | Harness 六层架构总览、设计模式、行业实证 |
 | [31 - Harness Loop 与执行引擎](./31-agent-harness-loop-execution.md) | Loop 层状态机、反漂移检测 |
-| [34 - Harness 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | 验证层（分水岭）设计详解 |
-| [35 - Harness 安全与约束工程](./[[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]].md) | 约束层四层模型 |
+| [34 - Harness 验证与质量门禁](./34-agent-harness-verification-quality.md) | 验证层（分水岭）设计详解 |
+| [35 - Harness 安全与约束工程](./35-agent-harness-security-constraints.md) | 约束层四层模型 |
 | [40 - Harness 生产运维与成熟度模型](./40-agent-harness-production-maturity.md) | 五级成熟度评估清单 |
 
 ---
@@ -593,10 +594,10 @@ Agent 分类 Code Review Checklist:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
@@ -608,7 +609,7 @@ Agent 分类 Code Review Checklist:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/39-agent-harness-testing-benchmark.md|39-agent-harness-testing-benchmark]]
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]]
+- 39-agent-harness-testing-benchmark
+- 40-agent-harness-production-maturity
+- 42-model-harness-compatibility-matrix
+- 43-openclaw-framework-integration

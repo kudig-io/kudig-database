@@ -37,6 +37,7 @@ prerequisites:
 skill_id: SKILL-K8S_FUNDAMENTALS_QUIZ-001
 skill_name: K8s 基础知识考核
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # K8s 基础知识考核
@@ -47,11 +48,11 @@ version: 1.0.0
 
 ## 一、选择题（每题 2 分，共 40 分）
 
-### 1. 以下哪个不是 [[entities/kubernetes|kubernetes]] 的核心组件？
+### 1. 以下哪个不是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 的核心组件？
 
 A. kube-apiserver
-B. etcd
-C. kubelet
+B. [[etcd|etcd]]
+C. [[kubelet|kubelet]]
 D. docker
 E. kube-scheduler
 

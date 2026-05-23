@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -99,8 +100,8 @@ updated: 2026-05-21T16:30:00Z
 | CONTRIBUTING.md | 23 | `[[templates/fta-template.md]]` | 移除 .md 后缀 |
 | CONTRIBUTING.md | 306 | `[[fta-template]]` | 指向 `[[templates/fta-template]]` |
 | MOC.md | 40 | `[[domain-07-platform-engineering/topic-code-analysis/MOC` | 修复嵌套 wikilink 语法 |
-| AGENTS.md | 40,102,125 | `[[wikilinks]]` 等 | 这些是说明性文本，可转为代码格式 |
-| domain-07-platform-engineering/topic-code-analysis/README.md | 15-19 | `[[cluster-cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
+| AGENTS.md | 40,102,125 | `wikilinks` 等 | 这些是说明性文本，可转为代码格式 |
+| domain-07-platform-engineering/topic-code-analysis/README.md | 15-19 | `[[references/k8s-cluster-cert.md]]` 等 5 个 | 应指向 references/ 下的分组页面 |
 | 多个 README.md | 多处 | `[[templates/cheat-sheet-template]]` | 应指向 `[[templates/cheat-sheet-template]]` |
 | _reports/OBSIDIAN-WIKI-AGENT... | 125,130,132,425 | 中文链接/相对路径 | 这些是分析报告，应转为纯文本 |
 
@@ -162,10 +163,10 @@ updated: 2026-05-21T16:30:00Z
 
 | 概念对 | 共现页面数 | 建议 |
 |---|---|---|
-| [[entities/kubernetes]] × [[FTA Methodology]] | 3,190 | 已有相关 synthesis 覆盖 |
-| [[FTA Methodology]] × [[prometheus]] | 3,000 | 建议创建 synthesis |
+| [[entities/kubernetes]] × [[references/fta-febm-methodology.md]] | 3,190 | 已有相关 synthesis 覆盖 |
+| [[references/fta-febm-methodology.md]] × [[prometheus]] | 3,000 | 建议创建 synthesis |
 | [[entities/kubernetes]] × [[prometheus]] | 2,986 | 已有相关 synthesis 覆盖 |
-| [[pod-lifecycle]] × [[FTA Methodology]] | 2,972 | 建议创建 synthesis |
+| [[pod-lifecycle]] × [[references/fta-febm-methodology.md]] | 2,972 | 建议创建 synthesis |
 | [[entities/kubernetes]] × [[pod-lifecycle]] | 2,914 | 已有相关 synthesis 覆盖 |
 
 ---
@@ -178,7 +179,7 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 1：嵌套 wikilink 模式（940 个）
 
-模式：`[[path/[[basename]]` → `[[path/basename]]`
+模式：`path/[[basename` → `path/basename`
 - domain-14-ai-ml-infra/ — 修复 ~150 个文件中的 150+ 嵌套链接
 - domain-20-application-patterns/ — 修复 ~90 个文件中的 450+ 嵌套链接
 - domain-10-troubleshooting-diagnostics/topic-fta/ — 修复 ~30 个文件中的 140+ 嵌套链接
@@ -196,15 +197,15 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 4：MOC.md 嵌套 wikilink（1 个）
 
-`[[domain-07-platform-engineering/topic-code-analysis/[[MOC]].md|MOC]]` → `[[domain-07-platform-engineering/topic-code-analysis/MOC|MOC]]`
+`domain-07-platform-engineering/[[topic-code-analysis/MOC.md|MOC]]` → `[[domain-07-platform-engineering/topic-code-analysis/MOC|MOC]]`
 
 ### 修复 5：domain-07-platform-engineering/topic-code-analysis/README.md 分组链接（5 个）
 
-将目录名 wikilink（如 `[[cluster-cert]]`）转为纯文本
+将目录名 wikilink（如 `[[references/k8s-cluster-cert.md]]`）转为纯文本
 
 ### 修复 6：转义 wikilink（48 个）
 
-domain-11-production-operations/MOC.md 中的 `[[path/file.md\|display]]` → `[[path/file|display]]`
+domain-11-production-operations/MOC.md 中的 `display` → `display`
 
 ### 修复 7：_reports/ 中文 wikilink（3 个）
 
@@ -212,15 +213,15 @@ domain-11-production-operations/MOC.md 中的 `[[path/file.md\|display]]` → `[
 
 ### 修复 8：占位 wikilink（1 个）
 
-`[[domain-X/...]]` → 纯文本
+`domain-X/...` → 纯文本
 
 ### 未修复（均为误报）
 
-- bash `[[ -f ... ]]` 条件判断
-- 构建工具配置引用（`[[trigger.http]]`, `[[stacks]]` 等）
+- bash `-f ...` 条件判断
+- 构建工具配置引用（`trigger.http`, `stacks` 等）
 - 模板占位符（`{{component}}`）
-- 数组/列表表示（`[[1, 2, 3]]`）
-- 代码块内的示例 wikilink（AGENTS.md 中的 ``[[wikilinks]]``）
+- 数组/列表表示（`1, 2, 3`）
+- 代码块内的示例 wikilink（AGENTS.md 中的 ``wikilinks``）
 
 
 ## 后续行动

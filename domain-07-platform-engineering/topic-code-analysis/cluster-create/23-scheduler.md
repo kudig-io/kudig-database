@@ -1,5 +1,5 @@
 ---
-title: kube-scheduler 调度详解
+title: kube-scheduler 调度详解 (topic-code-analysis)
 description: 'title: kube-scheduler 调度详解'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - platform-engineering-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: kube-scheduler 调度详解

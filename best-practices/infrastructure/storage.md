@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 存储配置最佳实践
+title: Kubernetes 存储配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 存储配置的最佳实践指南
 category: best-practices/infrastructure
 tags:
@@ -38,6 +38,7 @@ cross_refs:
 - type: best-practice
   path: ./kubernetes-cluster.md
   label: 集群配置最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 存储配置最佳实践

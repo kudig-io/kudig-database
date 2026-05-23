@@ -1,5 +1,5 @@
 ---
-title: 第一课：Kubernetes 入门
+title: 第一课：Kubernetes 入门 [fundamentals]
 description: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
 category: learning
 tags:
@@ -29,10 +29,11 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 ---
-title: 第一课：Kubernetes 入门
+title: 第一课：[[Kubernetes|Kubernetes]] 入门
 description: • 如果你有 100 台服务器，容器该部署到哪台？
 category: learning
 tags:
@@ -42,7 +43,7 @@ tags:
 - lecturer
 - docker
 - mysql
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner
@@ -336,7 +337,7 @@ s  - s
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/presentation-template.md|presentation-template]]
-- [[domain-11-production-operations/topic-learn/troubleshooting/decision-tree-mermaid.md|decision-tree-mermaid]]
-- [[domain-11-production-operations/topic-learn/fundamentals/02-pod-basics.md|02-pod-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/03-deployment-basics.md|03-deployment-basics]]
+- presentation-template
+- decision-tree-mermaid
+- 02-pod-basics
+- 03-deployment-basics

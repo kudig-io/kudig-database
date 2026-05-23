@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 本页汇总了 **Root** 领域的 4 个 Kubernetes 术语定义与概念说明。

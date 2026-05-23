@@ -1,5 +1,5 @@
 ---
-title: Chaos Mesh
+title: Chaos Mesh [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # Chaos Mesh
@@ -63,10 +64,10 @@ description: '## 项目概述'
 
 - [[journal/digest-2026-05-21.md|digest-2026-05-21]] — Wiki 全量知识库摘要 — 2026-05-21
 - [[references/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
-- [[entities/cncf-observability.md|cncf-observability]] — CNCF 可观测性项目全景
+- [[skills/Agent Orchestration Patterns.md|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
+- observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/chaos-mesh/chaos-mesh.md|chaos-mesh]]
+- chaos-mesh
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

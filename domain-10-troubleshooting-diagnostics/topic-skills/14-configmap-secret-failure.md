@@ -56,6 +56,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl describe pod <pod> -n <ns> | grep -E 'ConfigMap.*not found|Secret.*not found|mount failed' 显示配置挂载错误 -->
@@ -66,7 +68,7 @@ k8s_versions:
 
 ## 1. 概述
 
-ConfigMap 和 Secret 是 Kubernetes 中管理应用配置和敏感数据的核心资源。配置管理故障会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
+ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理故障会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operators]] Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
 
 ### 典型触发场景
 
@@ -581,7 +583,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 | RC-008 | **KMS Provider 解密失败** — apiserver 无法使用 KMS 提供的密钥解密 etcd 中的 Secret 数据 | ~5% | D2.7 日志包含 decrypt 错误；所有 Secret 读取失败 | 🔴 |
 | RC-009 | **应用未监听配置文件变化（需要 Reloader）** — ConfigMap 通过 Volume 挂载且已更新，但应用不监听文件变化，需要重启才能读取新配置 | ~5% | D2.8 ConfigMap 已更新；应用日志无配置变更记录；重启后生效 | 🟢 |
 | RC-010 | **Namespace 间 Secret 引用限制** — Pod 尝试引用其他 namespace 的 ConfigMap/Secret，Kubernetes 不支持跨 namespace 引用 | ~4% | D1.2 显示引用的 ConfigMap/Secret 在其他 namespace | 🟢 |
-| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | ArgoCD/[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
+| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | [[entities/flux|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
 | RC-012 | **Optional 引用的 ConfigMap/Secret 缺失导致静默失败** — 使用 `optional: true` 引用不存在的资源，Pod 启动成功但配置为空，应用行为异常 | ~5% | D1.2 显示 optional: true；D1.5 环境变量不存在但 Pod Running | 🟢 |
 
 ---

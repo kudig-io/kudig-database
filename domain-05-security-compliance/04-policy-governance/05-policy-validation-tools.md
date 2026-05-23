@@ -49,6 +49,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # 05 - 策略校验与准入控制工具 (Policy Validation)
@@ -61,9 +62,9 @@ cross_refs:
 | 工具 (Tool) | 策略语言 (Language) | 核心能力 (Capabilities) | 学习曲线 |
 |------------|-------------------|----------------------|---------|
 | **OPA/Gatekeeper** | Rego | 通用策略引擎、强大灵活 | 陡峭 |
-| **Kyverno** | YAML | K8s 原生、易上手 | 平缓 |
+| **[[Kyverno|Kyverno]]** | YAML | K8s 原生、易上手 | 平缓 |
 | **Polaris** | YAML | 配置审计、仪表盘 | 极简 |
-| **Kubewarden** | WebAssembly | 多语言策略、高性能 | 中等 |
+| **[[Kubewarden|Kubewarden]]** | WebAssembly | 多语言策略、高性能 | 中等 |
 
 <!-- chunk: Kyverno 生产实践 -->
 ## Kyverno 生产实践
@@ -217,25 +218,25 @@ polaris audit --audit-path ./manifests/ --format=json > audit-report.json
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance KUDIG Database — Global MOC
 - [[domain-05-security-compliance/README.md|Security Domain]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-authentication-authorization-system.md|Kubernetes 认证授权体系详解]]
-- [[domain-05-security-compliance/02-network-security-policies.md|网络安全策略与零信任架构]]
-- [[domain-05-security-compliance/03-runtime-security-defense.md|运行时安全防护与威胁检测]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04 - 审计日志与合规性管理]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06 - Pod安全标准详解]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07 - RBAC权限矩阵表]]
-- [[domain-05-security-compliance/08-security-best-practices.md|08 - 安全最佳实践表]]
-- [[domain-05-security-compliance/09-security-hardening-production.md|Kubernetes 安全加固]]
-- [[domain-05-security-compliance/10-certificate-management.md|证书管理与 TLS 配置]]
+- Kubernetes 认证授权体系详解
+- 网络安全策略与零信任架构
+- 运行时安全防护与威胁检测
+- 04 - 审计日志与合规性管理
+- 06 - Pod安全标准详解
+- 07 - RBAC权限矩阵表
+- 08 - 安全最佳实践表
+- Kubernetes 安全加固
+- 证书管理与 TLS 配置
 
 ## See Also
 
-- [[domain-05-security-compliance/03-runtime-security-defense.md|03-runtime-security-defense]]
-- [[domain-05-security-compliance/04-audit-logging-compliance.md|04-audit-logging-compliance]]
-- [[domain-05-security-compliance/06-pod-security-standards.md|06-pod-security-standards]]
-- [[domain-05-security-compliance/07-rbac-matrix-configuration.md|07-rbac-matrix-configuration]]
+- 03-runtime-security-defense
+- 04-audit-logging-compliance
+- 06-pod-security-standards
+- 07-rbac-matrix-configuration
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

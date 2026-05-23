@@ -1,5 +1,5 @@
 ---
-title: Piraeus Datastore
+title: Piraeus Datastore (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - Datastore
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Piraeus Datastore
@@ -67,11 +68,11 @@ Piraeus Datastore 是基于 LINSTOR 和 DRBD 技术的 Kubernetes 高可用存�
 
 - [[spin]] — Spin
 - [[backstage]] — Backstage
-- [[emissary-ingress]] — Emissary-Ingress
+- [[entities/emissary-ingress.md|ingress]]]] — Emissary-Ingress
 - [[kubevela]] — KubeVela
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/piraeus-datastore/piraeus-datastore.md|piraeus-datastore]]
+- piraeus-datastore
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

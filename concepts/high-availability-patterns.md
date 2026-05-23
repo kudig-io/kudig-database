@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # High Availability Patterns
@@ -56,12 +57,12 @@ Adding nodes beyond 5 degrades write performance due to Raft replication overhea
 ## Workload HA Patterns
 
 - **PodAntiAffinity**: Spread replicas across nodes or failure domains (topologyKey)
-- **PodDisruptionBudget (PDB)**: Limit simultaneous voluntary disruptions during node drains or cluster upgrades
-- **Topology Spread Constraints**: Built-in scheduler feature for even distribution across failure domains (zones, nodes, hostnames)
+- **PodDisruptionBudget (PDB)**: Limit simultaneous voluntary [[Disruptions|disruptions]] during node drains or cluster upgrades
+- **Topology Spread Constraints**: Built-in scheduler feature for even [[Distribution|distribution]] across failure domains (zones, nodes, hostnames)
 
 ## Leader Election
 
-Stateful control plane components (scheduler, controller-manager) use Kubernetes Lease objects for leader election:
+Stateful control plane components (scheduler, controller-manager) use [[Kubernetes|Kubernetes]] Lease objects for leader election:
 - `leaseDuration`: How long a leader holds lock (default 15s)
 - `renewDeadline`: How long leader has to renew (default 10s)
 - `retryPeriod`: How often to retry (default 2s)
@@ -86,4 +87,4 @@ Stateful control plane components (scheduler, controller-manager) use Kubernetes
 - [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
 - [[skills/backup-restore-etcd.md|Backup and Restore etcd]]
 
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08-high-availability-patterns]]
+- 08-high-availability-patterns

@@ -1,5 +1,5 @@
 ---
-title: Volcano
+title: Volcano [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - Volcano
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Volcano
@@ -59,13 +60,13 @@ description: '## 项目概述'
 
 ## Related
 
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[08-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
 - [[harbor]] — Harbor
 - [[opentofu]] — OpenTofu
 - [[cartography]] — Cartography
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/volcano/volcano.md|volcano]]
+- volcano
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

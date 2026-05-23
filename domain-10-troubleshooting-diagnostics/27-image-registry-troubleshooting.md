@@ -58,6 +58,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)
@@ -578,7 +579,7 @@ echo "$IMAGES" | while read image; do
         echo "$RESULT"
         
         # 尝试自动修复 - 拉取最新版本
-        if [[ $image == *:* ]]; then
+        if $image == *:*; then
             BASE_IMAGE=$(echo $image | cut -d: -f1)
             NEW_IMAGE="${BASE_IMAGE}:latest"
             
@@ -693,7 +694,7 @@ TOTAL_SIZE=$(docker images --format "{{.Size}}" $IMAGE)
 echo "Total image size: $TOTAL_SIZE"
 
 # 优化建议
-if [[ $TOTAL_SIZE == *"GB"* ]] || [[ $(echo $TOTAL_SIZE | sed 's/GB//') -gt 1 ]]; then
+if $TOTAL_SIZE == *"GB"* ||  sed 's/GB//') -gt 1 ; then
     echo "⚠️  Image is quite large, consider optimization:"
     echo "  - Use multi-stage builds"
     echo "  - Remove unnecessary files"
@@ -1046,11 +1047,11 @@ chmod +x image-availability-check.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
-- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
+- index.md|Domain-12 故障排查 — 开源项目索引]]
+- [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|[[API Server 故障排查|API Server 故障排查]]]]
+- [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|[[etcd 故障排查|etcd 故障排查]]]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
 - [[domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]

@@ -33,6 +33,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 11 - 存储高级特性与优化策略
@@ -60,7 +61,7 @@ estimated_read_time: 5min
 intent_queries:
 - 存储高级特性与优化策略 是什么
 - 如何 存储高级特性与优化策略
-- Kubernetes 6 storage 最佳实践
+- [[Kubernetes|Kubernetes]] 6 storage 最佳实践
 trigger_keywords:
 - 存储高级特性与优化策略
 - storage
@@ -1012,25 +1013,25 @@ optimize_storage_costs
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
+- domain-04-storage-data KUDIG Database — Global MOC
 - [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05 - CSI驱动集成与运维管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09 - PV/PVC故障排查与解决方案]]
+- Domain-6 存储 — 开源项目索引
+- 存储架构概览与核心组件
+- PV/PVC 核心概念与企业级实践
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 05 - CSI驱动集成与运维管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 09 - PV/PVC故障排查与解决方案
 
 ## See Also
 
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09-pv-pvc-troubleshooting]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery.md|10-storage-backup-disaster-recovery]]
-- [[domain-04-storage-data/12-storage-monitoring-alerting.md|12-storage-monitoring-alerting]]
-- [[domain-04-storage-data/13-storage-security-compliance.md|13-storage-security-compliance]]
+- 09-pv-pvc-troubleshooting
+- 10-storage-backup-disaster-recovery
+- 12-storage-monitoring-alerting
+- 13-storage-security-compliance
 
 ## Related
 

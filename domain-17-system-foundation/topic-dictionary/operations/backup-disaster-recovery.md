@@ -35,13 +35,14 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 备份与灾难恢复（Backup & Disaster Recovery）
 
 ## 概述
 
-在 Kubernetes 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**etcd 集群状态、Kubernetes 资源定义、Secrets 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
+在 [[Kubernetes|Kubernetes]] 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**[[etcd|etcd]] 集群状态、Kubernetes 资源定义、[[Secrets|Secrets]] 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
 
 ## 核心概念/原理
 

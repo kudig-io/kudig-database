@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Pod Topology Spread Constraints
@@ -65,7 +66,7 @@ Pod 拓扑分布约束（Pod Topology Spread Constraints）用于控制 Pod 在�
   - 只考虑与 incoming Pod 同一命名空间的 Pod 作为匹配候选。
   - 调度器只考虑同时具有所有 `topologyKey` 的节点；缺少任何 `topologyKey` 的节点会被跳过。
 - **集群级默认约束**：可以通过 `PodTopologySpread` 插件参数设置集群级默认约束。内置默认约束为：
-  - `maxSkew: 3`, `topologyKey: kubernetes.io/hostname`, `whenUnsatisfiable: ScheduleAnyway`
+  - `maxSkew: 3`, `topologyKey: [[Kubernetes|kubernetes]].io/hostname`, `whenUnsatisfiable: ScheduleAnyway`
   - `maxSkew: 5`, `topologyKey: topology.kubernetes.io/zone`, `whenUnsatisfiable: ScheduleAnyway`
 - **与 podAffinity/podAntiAffinity 的区别**：拓扑分布约束提供对 Pod 在不同拓扑域中分布的更精细控制，既能实现高可用也能实现成本节约。
 - **已知限制**：
@@ -224,7 +225,7 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 
 - [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — podAntiAffinity 与拓扑分布约束的对比
 - [调度器性能调优](./scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
 - [调度框架](./scheduling-framework.md) — PodTopologySpread 插件的扩展点
 
 ## 参考链接
@@ -233,5 +234,5 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|[[etcd|etcd]]cd 知识图谱索引|etcd 知识图谱索引]]]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

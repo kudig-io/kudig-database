@@ -60,9 +60,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md
   label: '故障树: cilium'
+created: "2026-05-23"
 ---
 
-# Kubernetes eBPF与Cilium深度实践 (eBPF and Cilium Deep Practice)
+# [[Kubernetes|Kubernetes]] eBPF与Cilium深度实践 (eBPF and [[Cilium|Cilium]] Deep Practice)
 
 > **作者**: 云原生网络架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03
 > **适用场景**: 容器网络架构、运行时安全、网络可观测性 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -274,7 +275,7 @@ data:
 
 <!-- chunk: 3. Cilium网络策略实践 -->## 3. Cilium网络策略实践
 
-#<!-- chunk: 3.1 CiliumNetworkPolicy vs Kubernetes NetworkPolicy -->## 3.1 CiliumNetworkPolicy vs Kubernetes NetworkPolicy
+#<!-- chunk: 3.1 CiliumNetworkPolicy vs Kubernetes [[NetworkPolicy|NetworkPolicy]] -->## 3.1 CiliumNetworkPolicy vs Kubernetes NetworkPolicy
 
 ```yaml
 # Kubernetes标准NetworkPolicy(L3/L4)
@@ -1078,22 +1079,22 @@ eBPF生态发展趋势(2026-2027):
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-papers MOC]]
+- domain-19-papers KUDIG Database — Global MOC
 - [[domain-19-landscape-references/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers...]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-19 论文与参考 — 开源项目索引]]
-- [[domain-19-landscape-references/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...]]
-- [[domain-19-landscape-references/02-kubernetes-large-scale-performance-optimization.md|Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...]]
-- [[domain-19-landscape-references/03-kubernetes-zero-trust-security-architecture.md|Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...]]
-- [[domain-19-landscape-references/04-kubernetes-multi-cloud-hybrid-deployment.md|Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...]]
-- [[domain-19-landscape-references/05-kubernetes-gitops-complete-practice-guide.md|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]
-- [[domain-19-landscape-references/06-kubernetes-cost-governance-finops-practice.md|Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...]]
-- [[domain-19-landscape-references/07-kubernetes-csi-storage-deep-practice.md|Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...]]
-- [[domain-19-landscape-references/08-kubernetes-network-policies-security-micro-segmentation.md|Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...]]
-- [[domain-19-landscape-references/09-kubernetes-service-mesh-istio-integration.md|Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...]]
+- Domain-19 论文与参考 — 开源项目索引
+- Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framew...
+- Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
+- Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
+- Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
+- Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
+- Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
+- Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
+- Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
+- Kubernetes 服务网格深度实践与Istio集成 (Service Mesh Deep Practice and ...
 
 ## See Also
 
-- [[domain-19-landscape-references/16-kubernetes-edge-computing-kubeedge-practice.md|16-kubernetes-edge-computing-kubeedge-practice]]
-- [[domain-19-landscape-references/17-kubernetes-aiml-gpu-scheduling-llm-inference.md|17-kubernetes-aiml-gpu-scheduling-llm-inference]]
-- [[domain-19-landscape-references/19-kubernetes-gateway-api-modern-traffic-management.md|19-kubernetes-gateway-api-modern-traffic-management]]
-- [[domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md|20-kubernetes-supply-chain-security-sbom-slsa-sigstore]]
+- 16-kubernetes-edge-computing-kubeedge-practice
+- 17-kubernetes-aiml-gpu-scheduling-llm-inference
+- 19-kubernetes-gateway-api-modern-traffic-management
+- 20-kubernetes-supply-chain-security-sbom-slsa-sigstore

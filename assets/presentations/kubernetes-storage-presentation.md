@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+title: Kubernetes 存储体系全栈进阶培训 (从入门到专家) [presentations]
 description: '# Kubernetes 存储体系全栈进阶培训 (从入门到专家)'
 category: presentations
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 存储体系全栈进阶培训 (从入门到专家)

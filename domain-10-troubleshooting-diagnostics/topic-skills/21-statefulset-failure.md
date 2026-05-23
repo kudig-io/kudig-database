@@ -46,11 +46,12 @@ prerequisites:
 skill_id: SKILL-21_STATEFULSET_FAILURE-001
 skill_name: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
 skill_id: "SKILL-WORK-002"
-skill_name: "StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation"
+skill_name: "[[StatefulSet|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation"
 version: "1.0"
 category: "workload"
 severity_range: "P0-P2"
@@ -62,7 +63,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "15-60min"
 risk_level: "high"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "StatefulSet"
   - "statefulset"
@@ -70,7 +71,7 @@ trigger_keywords:
   - "PVC pending"
   - "pod not starting"
   - "ordinal"
-  - "headless service"
+  - "headless [[Service|service]]"
   - "有状态集"
   - "数据库集群"
   - "kafka"
@@ -117,7 +118,7 @@ cross_refs:
   - type: "domain"
     path: "../domain-10-troubleshooting-diagnostics/21-statefulset-troubleshooting.md"
     label: "StatefulSet 深度排查"
-  - type: "skill"
+  - type: "[[SKILL|skill]]"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md"
     label: "SKILL-WORK-001 Deployment 故障"
   - type: "skill"

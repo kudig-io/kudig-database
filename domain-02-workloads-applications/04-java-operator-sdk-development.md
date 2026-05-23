@@ -1,41 +1,5 @@
 ---
-title: Java Operator SDK 开发指南
-description: 'title: Java Operator SDK 开发指南'
-category: general
-tags:
-- java
-- k8s
-- argocd
-- hpa
-- rbac
-- crd
-- operator
-- kserve
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 45min
-intent_queries:
-- Java Operator SDK 开发指南 是什么
-- 如何 Java Operator SDK 开发指南
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Java
-- Operator
-- SDK
-- 开发指南
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- gitops-basics
----
-
-title: Java Operator SDK 开发指南
+title: Java Operator SDK 开发指南 (domain-02-workloads-applications)
 description: '# Java Operator SDK 开发指南'
 category: java-kubernetes
 tags:
@@ -66,25 +30,20 @@ trigger_keywords:
 - 开发指南
 - java
 - kubernetes
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+created: "2026-05-23"
 ---
 
 # Java Operator SDK 开发指南
 
-> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / Kubernetes v1.28+
+> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes|[[Kubernetes|kubernetes]]]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 Kubernetes Operator 模式允许使用自定义资源（CRD）扩展 Kubernetes 平台能力。虽然 Go 是 Operator 开发的主流语言，但 Java 生态同样有成熟的 SDK——尤其是对于已有 Java 技术栈的团队，使用 Java Operator SDK 可以复用现有的业务逻辑、类库和 CI/CD 流水线。
 
@@ -116,9 +75,9 @@ graph TB
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 Kubernetes Java 客户端对比 -->## 2.1 Kubernetes Java 客户端对比
+### 2.1 Kubernetes Java 客户端对比
 
 Java 生态有两个主要的 Kubernetes 客户端库，选择正确的客户端是 Operator 开发的第一步：
 
@@ -174,7 +133,7 @@ appsApi.replaceNamespacedDeploymentScale("myapp", "production",
 
 > **推荐**: Java Operator SDK 底层使用 fabric8，本指南以 fabric8 + Java Operator SDK 为主。
 
-#<!-- chunk: 2.2 Informer 模式详解 -->## 2.2 Informer 模式详解
+### 2.2 Informer 模式详解
 
 Informer 是 Kubernetes 客户端的核心组件，它通过 Watch 机制实现本地缓存，避免频繁调用 API Server：
 
@@ -237,9 +196,9 @@ List<V1Pod> podsOnNode = informer.getIndexer()
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 项目初始化 -->## 3.1 项目初始化
+### 3.1 项目初始化
 
 ```xml
 <project>
@@ -326,7 +285,7 @@ List<V1Pod> podsOnNode = informer.getIndexer()
 </project>
 ```
 
-#<!-- chunk: 3.2 CRD 定义 -->## 3.2 CRD 定义
+### 3.2 CRD 定义
 
 ```java
 @Group("apps.example.com")
@@ -443,7 +402,7 @@ public class ProbeSpec {
 }
 ```
 
-#<!-- chunk: 3.3 Reconciler 实现 -->## 3.3 Reconciler 实现
+### 3.3 Reconciler 实现
 
 ```java
 @ControllerConfiguration(
@@ -824,7 +783,7 @@ public class WebAppReconciler implements Reconciler<WebApp>,
 }
 ```
 
-#<!-- chunk: 3.4 CRD 生成与安装 -->## 3.4 CRD 生成与安装
+### 3.4 CRD 生成与安装
 
 ```java
 @Configuration
@@ -1001,7 +960,7 @@ spec:
     kind: WebApp
 ```
 
-#<!-- chunk: 3.5 Leader Election 配置 -->## 3.5 Leader Election 配置
+### 3.5 Leader Election 配置
 
 ```java
 @Configuration
@@ -1052,11 +1011,11 @@ subjects:
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 测试策略 -->## 4.1 测试策略
+### 4.1 测试策略
 
-##<!-- chunk: 单元测试 — fabric8 Mock Server -->## 单元测试 — fabric8 Mock Server
+#### 单元测试 — fabric8 Mock Server
 
 ```java
 @ExtendWith(MockServerExtension.class)
@@ -1134,7 +1093,7 @@ class WebAppReconcilerTest {
 }
 ```
 
-##<!-- chunk: 集成测试 — 使用 Testcontainers -->## 集成测试 — 使用 Testcontainers
+#### 集成测试 — 使用 Testcontainers
 
 ```java
 @Testcontainers
@@ -1174,7 +1133,7 @@ class WebAppOperatorIntegrationTest {
 }
 ```
 
-#<!-- chunk: 4.2 Operator 部署 YAML -->## 4.2 Operator 部署 YAML
+### 4.2 Operator 部署 YAML
 
 ```yaml
 apiVersion: v1
@@ -1264,14 +1223,14 @@ spec:
 
 ---
 
-<!-- chunk: 五、故障排查 -->## 五、故障排查
+## 五、故障排查
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |------|---------|---------|---------|
 | CRD 未注册 | CRD YAML 未应用 | `kubectl get crd webapps.apps.example.com` | `kubectl apply -f k8s/crds/` |
 | Reconciler 不触发 | RBAC 权限不足 | `kubectl logs <operator-pod> \| grep "Forbidden"` | 检查 ClusterRole/Binding |
 | 资源未创建 | OwnerReference 错误 | `kubectl describe <cr>` 查看 events | 确认 apiVersion/kind/uid 正确 |
-| Finalizer 阻塞删除 | cleanup 逻辑异常 | `kubectl describe <cr>` 查看 finalizers | 修复 cleanup 逻辑或手动移除 finalizer |
+| Finalizer 阻塞删除 | cleanup 逻辑异常 | `kubectl describe <cr>` 查看 [[Finalizers|finalizers]] | 修复 cleanup 逻辑或手动移除 finalizer |
 | Leader Election 失败 | Lease 权限不足 | `kubectl get lease -n production` | 添加 coordination.k8s.io 权限 |
 | 内存持续增长 | Informer 缓存泄漏 | `jcmd 1 GC.heap_histogram` | 检查 EventSource 生命周期 |
 | 事件丢失 | Watch 重连问题 | `kubectl logs <operator-pod> \| grep "watch"` | 增大 resync period |
@@ -1289,7 +1248,7 @@ kubectl patch webapp <name> -n <namespace> --type='json' \
 
 ---
 
-<!-- chunk: 六、参考资源 -->## 六、参考资源
+## 六、参考资源
 
 - [Java Operator SDK 官方文档](https://javaoperatorsdk.io/)
 - [fabric8 kubernetes-client GitHub](https://github.com/fabric8io/kubernetes-client)
@@ -1297,27 +1256,3 @@ kubectl patch webapp <name> -n <namespace> --type='json' \
 - [Kubernetes Operator 模式](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
 - [Kubernetes Informer 机制](https://kubernetes.io/docs/reference/using-api/api-concepts/)
 - [CRD 开发最佳实践](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[domain-java-kubernetes/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]]
-- [[domain-java-kubernetes/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]]
-- [[domain-java-kubernetes/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]]
-- [[domain-java-kubernetes/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]]
-
-## Related
-
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-
-## See Also
-
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]

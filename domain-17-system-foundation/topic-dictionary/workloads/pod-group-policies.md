@@ -27,20 +27,21 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Pod Group Policies
 
 ## 概述
-Pod Group Policies 是 Workload API 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
+Pod Group Policies 是 [[Workload API|Workload API]] 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
 
 ## 核心概念/原理
 目前 API 支持两种策略类型，每个组必须且只能指定一种：
 1. **basic（基本策略）**
-   - 调度器将组内所有 Pod 视为独立实体，按标准 [[entities/kubernetes|kubernetes]] 行为逐个调度。
+   - 调度器将组内所有 Pod 视为独立实体，按标准 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 行为逐个调度。
    - 主要用于组织 Pod 以提升可观测性和管理性，适用于不需要同时启动的组，或为未来引入非“全有或全无”约束做准备。
 2. **gang（集体调度策略）**
-   - 强制“全有或全无”调度（gang scheduling）。
+   - 强制“全有或全无”调度（[[Gang Scheduling|gang scheduling]]）。
    - 适用于紧耦合工作负载，部分启动会导致死锁或资源浪费的场景（如分布式训练、批处理作业）。
    - 需要指定 `minCount` 参数：只有当至少有 `minCount` 个 Pod 能够同时调度时，该组才会被允许绑定到节点。
 
@@ -152,7 +153,7 @@ spec:
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
 | Gang 组 Pod 全部 Pending | 集群资源不足以同时满足 minCount 个 Pod | `kubectl describe nodes` 汇总可分配资源；考虑降低 minCount |
-| 部分 Pod 已调度但未运行 | minCount 未满足，已调度 Pod 等待绑定 | `kubectl get pods -l ...` 检查 Running vs Pending 比例 |
+| 部分 Pod 已调度但未运行 | minCount 未满足，已调度 Pod 等待绑定 | `kubectl get [[Pods|pods]] -l ...` 检查 Running vs Pending 比例 |
 | basic 策略 Pod 调度失败 | 与策略无关，可能是节点亲和性/资源不足 | 标准 Pod 调度排查流程 |
 | Gang 组频繁超时 | minCount 设置过大或集群碎片化严重 | 减小 minCount 或增加节点；检查 ResourceQuota |
 | 策略配置报错 | 同一 podGroup 同时指定了 basic 和 gang | 确保每个 podGroup 只声明一种策略 |

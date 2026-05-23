@@ -1,5 +1,5 @@
 ---
-title: OpenKruise 工作负载异常故障树分析
+title: OpenKruise 工作负载异常故障树分析 (skills)
 description: '### 故障排查命令速查'
 category: skills
 tags:
@@ -25,6 +25,7 @@ prerequisites:
 fta_id: FTA-OPENKRUISE-001
 component: Openkruise
 severity: high
+created: "2026-05-23"
 ---
 
 # OpenKruise 工作负载异常故障树分析
@@ -68,12 +69,12 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
-- [[skills/ts-monitoring-observability.md|ts-monitoring-observability]] — 监控可观测性排查
-- [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- observability.md|ts-monitoring-observability]] — 监控可观测性排查
+- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kudig-prompts-catalog]] — KUDIG Prompt 模板集：故障排查、架构评审、配置生成与学习路径
 - [[skills/learn-decision-tree-mermaid.md|learn-decision-tree-mermaid]] — 故障排查决策树 - Mermaid 可视化版
 - [[openkruise]] — OpenKruise

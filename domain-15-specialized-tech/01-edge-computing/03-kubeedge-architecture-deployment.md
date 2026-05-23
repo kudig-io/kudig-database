@@ -53,9 +53,10 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md
   label: '故障树: deployment'
+created: "2026-05-23"
 ---
 
-# KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+# [[KubeEdge|KubeEdge]] 架构与部署 (KubeEdge Architecture and Deployment)
 
 <!-- chunk: 目录 (Table of Contents) -->## 目录 (Table of Contents)
 
@@ -64,7 +65,7 @@ cross_refs:
 3. [CloudCore 组件详解](#3-cloudcore-组件详解)
 4. [EdgeCore 组件详解](#4-edgecore-组件详解)
 5. [通信机制](#5-通信机制)
-6. [Helm 部署](#6-helm-部署)
+6. [[entities/helm.md|Helm]] 部署](#6-helm-部署)
 7. [keadm CLI 部署](#7-keadm-cli-部署)
 8. [高可用部署](#8-高可用部署)
 9. [配置详解](#9-配置详解)
@@ -78,7 +79,7 @@ cross_refs:
 
 #<!-- chunk: 1.1 项目简介 (Project Overview) -->## 1.1 项目简介 (Project Overview)
 
-KubeEdge 是一个开源的边缘计算框架，构建在 Kubernetes 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。
+KubeEdge 是一个开源的边缘计算框架，构建在 [[Kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。
 
 ```
 KubeEdge 核心能力:
@@ -1890,22 +1891,22 @@ KubeEdge 部署检查清单:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
+- domain-37-edge-computing MOC
 - [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/06-superedge-architecture.md|SuperEdge 架构实践 (SuperEdge Architecture Practice)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- SuperEdge 架构实践 (SuperEdge Architecture Practice)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|01-edge-computing-architecture]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|02-cloud-edge-collaboration]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|04-kubeedge-device-edge-apps]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|05-openyurt-architecture]]
+- 01-edge-computing-architecture
+- 02-cloud-edge-collaboration
+- 04-kubeedge-device-edge-apps
+- 05-openyurt-architecture

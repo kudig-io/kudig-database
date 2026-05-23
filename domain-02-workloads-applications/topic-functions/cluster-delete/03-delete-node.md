@@ -1,7 +1,45 @@
 ---
+title: 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- flannel
+- containerd
+- docker
+- statefulset
+- daemonset
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点删除流程 — kubectl delete node 源码分析 是什么
+- 如何 节点删除流程 — kubectl delete node 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点删除流程
+- kubectl
+- delete
+- node
+- 源码分析
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点删除流程 — kubectl delete node 源码分析
-description: 深入分析 Kubernetes 节点删除的完整流程，涵盖 kubectl drain 驱逐、kubectl delete node 删除 Node 对象、Node Lifecycle Controller 响应、kubeadm
-  reset 重置、Taint Manager 驱逐以及 etcd 成员移除等关键环节。
 category: cluster-delete
 tags:
 - kubectl
@@ -12,16 +50,10 @@ tags:
 - node-lifecycle
 - kubeadm-reset
 - pod
-- etcd
-- apiserver
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes 节点删除的完整流程，涵盖 kubectl drain 驱逐、kubectl delete node 删除
+  Node 对象、Node Lifecycle Controller 响应、kubeadm reset 重置、Taint Manager 驱逐以及 etcd 成员移除等关键环节。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- sre
-- kubernetes-administrator
-estimated_read_time: 5min
 intent_queries:
 - kubernetes node deletion source code
 - kubectl delete node workflow kubernetes
@@ -39,10 +71,12 @@ trigger_keywords:
 - kubeadm reset
 - removeETCDMember
 - cleanupNode
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- sre
+- kubernetes-administrator
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-02-workloads-applications
@@ -52,13 +86,24 @@ related_topics:
 - etcd-cleanup
 - force-delete
 - ha-delete
+domain_link: '[Control Plane](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点删除流程 — kubectl delete node 源码分析
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 节点删除分为两个层面：**API 层删除**（`kubectl delete node`，从 etcd 移除 Node 对象）和**节点级重置**（`kubeadm reset`，清理本地数据）。两者通常配合使用。本文档从源码层面分析完整的节点删除流程，涵盖 drain 驱逐、Node 对象删除、Node Lifecycle Controller 响应、kubeadm reset 重置等关键环节。
+Kubernetes 节点删除分为两个层面：**API 层删除**（`kubectl delete node`，从 etcd 移除 Node 对象）和**节点级重置**（`kubeadm reset`，清理本地数据）。两者通常配合使用。本文档从源码层面分析完整的节点删除流程，涵盖 drain 驱逐、Node 对象删除、Node Lifecycle Controller 响应、kubeadm reset 重置等关键环节。
 
 ---
 
@@ -544,3 +589,11 @@ ip link delete flannel.1
 | `RunCleanup` | `cmd/kubeadm/app/cmd/reset.go` | reset 命令入口 |
 | `removeETCDMember` | `cmd/kubeadm/app/phases/removeetcdmember/` | etcd 成员移除 |
 | `cleanupNode` | `cmd/kubeadm/app/phases/reset/cleanup.go` | 节点清理 |
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]

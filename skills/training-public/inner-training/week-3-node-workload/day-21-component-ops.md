@@ -35,6 +35,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -42,8 +43,8 @@ title: Day 21: K8S 组件运维
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] control plane components运维
-  - CoreDNS troubleshooting DNS resolution
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] control plane components运维
+  - [[CoreDNS|CoreDNS]] troubleshooting DNS resolution
   - kube-proxy iptables IPVS mode
   - CNI Terway Flannel network troubleshooting
   - API Server etcd health check

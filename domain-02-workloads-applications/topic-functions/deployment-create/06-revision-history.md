@@ -1,6 +1,33 @@
 ---
+title: 版本历史与回滚机制 (topic-code-analysis)
+description: 'description: 深入分析 Kubernetes Deployment 的版本历史管理机制和回滚实现，包括 revision annotation、rollbackToRevision'
+category: general
+tags:
+- reference
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 版本历史与回滚机制 是什么
+- 如何 版本历史与回滚机制
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 版本历史与回滚机制
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: 版本历史与回滚机制
-description: 深入分析 Kubernetes Deployment 的版本历史管理机制和回滚实现，包括 revision annotation、rollbackToRevision 源码、revisionHistoryLimit 清理策略以及比例回滚算法。
 category: deployment
 tags:
 - deployment
@@ -8,16 +35,10 @@ tags:
 - revision
 - replicaSet
 - rollout
-- postgresql
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes Deployment 的版本历史管理机制和回滚实现，包括 revision annotation、rollbackToRevision
+  源码、revisionHistoryLimit 清理策略以及比例回滚算法。
 difficulty: intermediate
-reading_level: intermediate
-audience:
-- platform-engineer
-- devops-engineer
-- sre
-- kubernetes-developer
-estimated_read_time: 5min
 intent_queries:
 - kubernetes deployment rollback source code
 - deployment.kubernetes.io/revision annotation
@@ -35,9 +56,13 @@ trigger_keywords:
 - revision annotation
 - kubectl rollout history
 - --to-revision
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
+reading_level: intermediate
+audience:
+- platform-engineer
+- devops-engineer
+- sre
+- kubernetes-developer
+estimated_read_time: 5min
 related_domains:
 - domain-02-workloads-applications
 - domain-01-cluster-fundamentals
@@ -46,6 +71,17 @@ related_topics:
 - rolling-update
 - deployment-status
 - replicaset-controller
+domain_link: '[Control Plane](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Workloads](../domain-02-workloads-applications/README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 版本历史与回滚机制
@@ -78,7 +114,7 @@ func SortReplicaSetsByRevision(rsList []*apps.ReplicaSet)
 
 | Annotation Key | 对象 | 说明 |
 |---------------|------|------|
-| `deployment.[[entities/kubernetes|kubernetes]].io/revision` | Deployment/RS | 版本号 |
+| `deployment.kubernetes.io/revision` | Deployment/RS | 版本号 |
 | `deployment.kubernetes.io/desired-replicas` | RS | 创建时期望副本数 |
 | `deployment.kubernetes.io/max-replicas` | RS | 创建时最大副本数 |
 | `kubernetes.io/change-cause` | Deployment | 变更原因 |
@@ -504,3 +540,11 @@ kubectl rollout undo deployment/nginx
 - [`getNewReplicaSet`](02-deployment-controller.md) — 查找当前版本 RS
 - [`GetPodTemplateSpecHash`](02-deployment-controller.md) — 计算 PodTemplate hash
 - [`cleanupOldReplicaSets`](02-deployment-controller.md) — 清理过期 RS
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|deployments]]

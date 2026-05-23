@@ -60,11 +60,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
 # 17 - 日志和审计表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
 <!-- chunk: 日志架构模式 -->
 ## 日志架构模式
@@ -80,7 +81,7 @@ cross_refs:
 
 | 组件 | 类型 | 特点 | 版本要求 | ACK替代 |
 |-----|------|------|---------|---------|
-| **Fluentd** | 收集器 | 插件丰富，功能全面 | v1.16+ | Logtail |
+| **[[Fluentd|Fluentd]]** | 收集器 | 插件丰富，功能全面 | v1.16+ | Logtail |
 | **Fluent Bit** | 收集器 | 轻量级，高性能 | v2.2+ | Logtail |
 | **Filebeat** | 收集器 | Elastic生态 | v8.x | Logtail |
 | **Logtail** | 收集器 | 阿里云原生 | - | 原生 |
@@ -243,7 +244,7 @@ kubectl get events --field-selector=type=Warning
 |-----|------|------|
 | **结构化日志** | JSON格式便于解析 | 应用配置 |
 | **统一时间戳** | UTC或统一时区 | 应用配置 |
-| **关联ID** | 追踪请求链路 | OpenTelemetry |
+| **关联ID** | 追踪请求链路 | [[OpenTelemetry|OpenTelemetry]] |
 | **日志分级** | 按级别过滤 | 应用框架 |
 | **采样** | 高流量日志采样 | Fluent Bit |
 | **保留策略** | 按需设置保留期 | 存储系统 |
@@ -253,7 +254,7 @@ kubectl get events --field-selector=type=Warning
 
 | 功能 | 产品 | 配置方式 |
 |-----|------|---------|
-| **容器日志** | SLS | Logtail DaemonSet |
+| **容器日志** | SLS | Logtail [[DaemonSet|DaemonSet]] |
 | **K8S事件** | SLS | 控制台开启 |
 | **审计日志** | SLS | 控制台开启 |
 | **Ingress日志** | SLS | 注解配置 |
@@ -597,25 +598,25 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
+- domain-06-observability MOC
 - [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系详解]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/09-events-audit-logs.md|05 - 事件与审计日志管理 (Events & Audit Logs)]]
+- Kubernetes 可观测性架构体系
+- 指标监控体系详解
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 05 - 事件与审计日志管理 (Events & Audit Logs)
 
 ## See Also
 
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|10-monitoring-metrics-prometheus]]
-- [[domain-06-observability/11-custom-metrics-adapter.md|11-custom-metrics-adapter]]
-- [[domain-06-observability/13-cluster-health-check.md|13-cluster-health-check]]
-- [[domain-06-observability/14-chaos-engineering.md|14-chaos-engineering]]
+- 10-monitoring-metrics-prometheus
+- 11-custom-metrics-adapter
+- 13-cluster-health-check
+- 14-chaos-engineering
 
 - [[domain-06-observability/README.md|返回目录]]
 

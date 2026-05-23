@@ -54,9 +54,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
-# Kubernetes v1.29-v1.33 工作负载管理新特性指南
+# [[Kubernetes|Kubernetes]] v1.29-v1.33 工作负载管理新特性指南
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -644,33 +645,33 @@ func (r *MyAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 <!-- chunk: 参考链接 -->
 ## 参考链接
 
-- [Sidecar Containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 - [Resize CPU and Memory Resources](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/)
 - [Job Success Policy](https://kubernetes.io/docs/concepts/workloads/controllers/job/#success-policy)
-- [Pod Scheduling Readiness](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
-- [User Namespaces](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
+- [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
+- [[domain-17-system-foundation/topic-dictionary/workloads/user-namespaces.md|User Namespaces]]](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- Domain-4 工作负载 — 开源项目索引
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## See Also
 
-- [[domain-02-workloads-applications/22-cluster-capacity-planning.md|22-cluster-capacity-planning]]
-- [[domain-02-workloads-applications/23-resource-management.md|23-resource-management]]
-- [[domain-02-workloads-applications/99-spring-boot-kubernetes-guide.md|99-spring-boot-kubernetes-guide]]
-- [[domain-02-workloads-applications/QUALITY_REPORT.md|QUALITY_REPORT]]
+- 22-cluster-capacity-planning
+- 23-resource-management
+- 99-spring-boot-kubernetes-guide
+- QUALITY_REPORT

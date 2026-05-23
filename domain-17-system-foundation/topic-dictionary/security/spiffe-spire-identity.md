@@ -34,13 +34,14 @@ prerequisites:
 - cilium-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-# SPIFFE / SPIRE 与工作负载身份
+# [[SPIFFE|SPIFFE]] / [[SPIRE|SPIRE]] 与工作负载身份
 
 ## 概述
 
-在零信任（Zero Trust）安全架构中，"**永远不要信任，永远要验证**"是核心原则。传统的基于 IP 地址或网络边界的身份验证在 Kubernetes 动态环境中已不再可靠。**SPIFFE（Secure Production Identity Framework For Everyone）** 和 **SPIRE（SPIFFE Runtime Environment）** 是 CNCF 孵化的开源项目，为跨云、跨集群的工作负载提供了统一、自动化、可密码学验证的身份标准。2026 年，SPIFFE/SPIRE 正在成为服务网格、mTLS、API 网关和云原生工作负载身份管理的事实标准。
+在零信任（Zero Trust）安全架构中，"**永远不要信任，永远要验证**"是核心原则。传统的基于 IP 地址或网络边界的身份验证在 [[Kubernetes|Kubernetes]] 动态环境中已不再可靠。**SPIFFE（Secure Production Identity Framework For Everyone）** 和 **SPIRE（SPIFFE Runtime Environment）** 是 CNCF 孵化的开源项目，为跨云、跨集群的工作负载提供了统一、自动化、可密码学验证的身份标准。2026 年，SPIFFE/SPIRE 正在成为服务网格、mTLS、API 网关和云原生工作负载身份管理的事实标准。
 
 ## 核心概念/原理
 
@@ -48,7 +49,7 @@ prerequisites:
 
 在 Kubernetes 中，工作负载的标识传统上依赖于：
 - **IP 地址**：Pod 重启后 IP 变化，不可靠
-- **Service Account Token**：仅适用于 K8s 内部，跨集群/跨云时难以统一
+- **[[Service|Service]] Account Token**：仅适用于 K8s 内部，跨集群/跨云时难以统一
 - **X.509 证书**：手动分发和管理证书在大规模场景下几乎不可行
 
 SPIFFE 解决了上述问题，通过为每个工作负载分配一个**全球唯一的身份标识（SPIFFE ID）**和**自动签发的短期证书**。

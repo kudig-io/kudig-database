@@ -29,13 +29,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 多租户
 
 ## 概述
 
-共享 Kubernetes 集群可以节省成本并简化管理，但也带来了安全、公平性和“吵闹邻居”（noisy neighbors）等方面的挑战。集群共享可以有多种形式：不同应用运行在同一集群中，或同一应用的不同实例（面向不同终端用户）运行在同一集群中。这些共享方式通常统称为**多租户（multi-tenancy）**。虽然 Kubernetes 没有原生的“租户”或“终端用户”一等概念，但它提供了多种功能来帮助管理不同的租户需求。
+共享 [[Kubernetes|Kubernetes]] 集群可以节省成本并简化管理，但也带来了安全、公平性和“吵闹邻居”（noisy neighbors）等方面的挑战。集群共享可以有多种形式：不同应用运行在同一集群中，或同一应用的不同实例（面向不同终端用户）运行在同一集群中。这些共享方式通常统称为**多租户（multi-tenancy）**。虽然 Kubernetes 没有原生的“租户”或“终端用户”一等概念，但它提供了多种功能来帮助管理不同的租户需求。
 
 ## 核心概念/原理
 
@@ -48,7 +49,7 @@ Kubernetes 中的多租户通常分为两大类：
 
 隔离水平通常用“硬多租户”（hard multi-tenancy，强隔离）和“软多租户”（soft multi-tenancy，弱隔离）来描述。实际上，隔离更像是一个连续光谱，包含多种技术：
 
-- **控制平面隔离**：确保不同租户无法访问或影响彼此的 Kubernetes API 资源。
+- **控制平面隔离**：确保不同租户无法访问或影响彼此的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 资源。
 - **数据平面隔离**：确保不同租户的 Pod 和工作负载之间有足够的隔离。
 
 ## 关键机制或特性
@@ -57,7 +58,7 @@ Kubernetes 中的多租户通常分为两大类：
 
 - **命名空间（Namespaces）**：
   - 提供 API 资源的分组隔离，允许不同租户使用相同名称的资源。
-  - 许多安全策略（RBAC、NetworkPolicy）以命名空间为范围。
+  - 许多安全策略（RBAC、[[NetworkPolicy|NetworkPolicy]]）以命名空间为范围。
   - 最佳实践是为每个工作负载分配独立的命名空间。
 - **访问控制（RBAC）**：
   - 使用 Role 和 RoleBinding 在命名空间级别限制租户访问。

@@ -39,6 +39,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 01 - Terway 产品概览 (Product Overview)
@@ -49,16 +50,16 @@ prerequisites:
 
 ## 1. 产品定位
 
-Terway 是阿里云容器服务 ACK (Alibaba Cloud Kubernetes) 自研的 Container Network Interface (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施，将 Pod 直接接入 VPC 网络平面。作为 ACK 集群的默认 CNI 方案，Terway 替代了早期基于 Flannel 的网络方案，提供更高性能和更丰富的云原生网络能力。
+Terway 是阿里云容器服务 ACK (Alibaba Cloud [[Kubernetes|Kubernetes]]) 自研的 Container Network Interface (CNI) 插件，深度集成阿里云 VPC/ENI 网络基础设施，将 Pod 直接接入 VPC 网络平面。作为 ACK 集群的默认 CNI 方案，Terway 替代了早期基于 Flannel 的网络方案，提供更高性能和更丰富的云原生网络能力。
 
 ### 核心价值
 
 | 维度 | 说明 |
 |:---|:---|
 | **Pod 直通 VPC** | Pod IP 即 VPC 内网 IP，无需 NAT 即可被 VPC 内其他资源（ECS、RDS、SLB）直接访问，简化网络拓扑 |
-| **NetworkPolicy 原生支持** | 完整实现 Kubernetes NetworkPolicy API，支持三层/四层网络策略，无需额外部署策略引擎 |
+| **[[NetworkPolicy|NetworkPolicy]] 原生支持** | 完整实现 Kubernetes NetworkPolicy API，支持三层/四层网络策略，无需额外部署策略引擎 |
 | **接近原生性能** | ENI/ENIIP 模式网络延迟和吞吐接近物理机水平，性能损耗控制在 5% 以内 |
-| **SLB/ALB 深度集成** | 与阿里云 SLB (Server Load Balancer) 和 ALB (Application Load Balancer) 无缝联动，支持 LoadBalancer 类型 Service 自动联动 |
+| **SLB/ALB 深度集成** | 与阿里云 SLB (Server Load Balancer) 和 ALB (Application Load Balancer) 无缝联动，支持 LoadBalancer 类型 [[Service|Service]] 自动联动 |
 | **安全组联动** | 支持节点级和 Pod 级安全组，实现精细化的网络访问控制 |
 | **多模式灵活选择** | 提供 VPC/ENI/ENIIP/ENIIP-Trunking/IPVlan 五种网络模式，适配不同规模和性能需求 |
 

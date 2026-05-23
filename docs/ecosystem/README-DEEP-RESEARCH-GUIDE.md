@@ -19,6 +19,7 @@ trigger_keywords:
 - 深度研究最佳实践指南
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 深度研究最佳实践指南
@@ -33,7 +34,7 @@ prerequisites:
 
 ### 1.1 什么是深度研究？
 
-深度研究是指 AI Agent 在复杂故障场景下，通过多轮推理、多源验证、迭代反思，最终定位根因并给出可执行修复方案的过程。与简单问答不同，深度研究需要：
+深度研究是指 AI Agent 在复杂问题场景下，通过多轮推理、多源验证、迭代反思，最终定位根因并给出可执行修复方案的过程。与简单问答不同，深度研究需要：
 
 | 特征 | 说明 |
 |------|------|
@@ -91,7 +92,7 @@ prerequisites:
 │  处理:                                                        │
 │    1. 关键词匹配 → 命中 "NotReady" → TC-INFRA-NODE          │
 │    2. 语义向量匹配 → 匹配到 SKILL-NODE-001 (置信度 0.92)     │
-│    3. 意图确认 → 触发 Node 故障诊断流程                       │
+│    3. 意图确认 → 触发 Node 问题诊断流程                       │
 │                                                              │
 │  输出:                                                        │
 │    - category: TC-INFRA-NODE                                │
@@ -102,11 +103,11 @@ prerequisites:
      │
      ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  Step 2: FTA 故障树推理 (Root Cause Localization)            │
+│  Step 2: FTA 问题树推理 (Root Cause Localization)            │
 │  ═══════════════════════════════════════════════             │
 │                                                              │
 │  处理:                                                        │
-│    1. 加载 FTA-NODE-023 故障树                               │
+│    1. 加载 FTA-NODE-023 问题树                               │
 │    2. 按概率排序:                                             │
 │       - kubelet 证书过期 (0.35)                               │
 │       - 磁盘压力驱逐 (0.25)                                   │
@@ -178,7 +179,7 @@ prerequisites:
 
 ### 3.1 意图识别语料库 (P0-1)
 
-**使用场景**: 当用户输入一个问题时，Agent 需要判断这是什么类型的故障。
+**使用场景**: 当用户输入一个问题时，Agent 需要判断这是什么类型的问题。
 
 **语料结构**:
 ```json
@@ -293,7 +294,7 @@ tool:
 
 **RDF 模型**:
 ```turtle
-# 故障树关联
+# 问题树关联
 kudig:FTA-NODE-023 kudig:hasTopEvent kudig:TE-NODE-001 .
 kudig:TE-NODE-001 kudig:decomposedInto kudig:IE-NODE-001, kudig:IE-NODE-002 .
 
@@ -313,7 +314,7 @@ kudig:RC-001 kudig:remediatedBy kudig:REM-001 .
 | **根因传播** | 从症状追溯到根因 | 利用 FTA 逻辑门 |
 | **技能协同** | 当根因涉及多组件时 | 触发多技能协同 (P0-2) |
 | **知识补全** | 缺失环节自动关联 | 利用 crossRefersTo 关系 |
-| **推理加速** | 预计算路径缩短搜索 | 缓存常见故障路径 |
+| **推理加速** | 预计算路径缩短搜索 | 缓存常见问题路径 |
 
 **SPARQL 查询示例**:
 ```sparql
@@ -370,7 +371,7 @@ flowchart TD
 |------|------|------|
 | **推理可视化** | 将诊断路径渲染为 Mermaid 图 | 用户可理解 Agent 在做什么 |
 | **调试分析** | 查看决策路径是否有问题 | 快速定位推理缺陷 |
-| **知识沉淀** | 将新故障模式转为 Mermaid | 沉淀为组织知识 |
+| **知识沉淀** | 将新问题模式转为 Mermaid | 沉淀为组织知识 |
 | **培训演示** | 用 Mermaid 展示诊断流程 | 培训新员工 |
 
 ### 3.5 反思机制 (P1-7)
@@ -453,7 +454,7 @@ reflection_triggers:
 | **上线前评估** | 使用 500 案例基准测试 | 确保 Agent 达到 B 级以上 |
 | **持续监控** | 每日/周/月定期评估 | 发现能力退化及时修复 |
 | **改进验证** | 改进前后对比评估 | 量化改进效果 |
-| **Benchmark 更新** | 季度更新测试集 | 覆盖新故障模式 |
+| **Benchmark 更新** | 季度更新测试集 | 覆盖新问题模式 |
 
 ---
 
@@ -486,11 +487,11 @@ matched = match_intent(user_input, corpus)
 skill = load_skill('SKILL-POD-001')
 ```
 
-**Step 2: FTA 故障树推理**
+**Step 2: FTA 问题树推理**
 
 ```python
-# 1. 加载 FTA 故障树
-fta = load_fta('FTA-POD-001')  # Pod 故障树
+# 1. 加载 FTA 问题树
+fta = load_fta('FTA-POD-001')  # Pod 问题树
 
 # 2. 按概率排序候选根因
 # BE-2.3.1: JVM heap 不足 (0.30)
@@ -624,7 +625,7 @@ add_case_to_febm(...)
 - [ ] 每周执行回归测试（50 个已知案例）
 - [ ] 每月执行全面评估（500 个案例）
 - [ ] 评估结果用于改进模型和知识库
-- [ ] 新故障模式及时补充到 FTA 和意图语料
+- [ ] 新问题模式及时补充到 FTA 和意图语料
 
 ---
 
@@ -636,7 +637,7 @@ add_case_to_febm(...)
 | P0-1-intent-corpus-expanded | 扩充意图语料库（320条） | ./P0-1-intent-corpus-expanded.jsonl |
 | P0-Tool-Schema-Definition | Agent工具Schema定义 | ./P0-Tool-Schema-Definition.md |
 | P0-Knowledge-Graph-RDF-Model | 知识图谱RDF模型 | ./P0-Knowledge-Graph-RDF-Model.md |
-| P1-4-[[domain-11-production-operations/topic-k8s-lecturer/12-decision-tree/decision-tree-mermaid|Decision-Tree-Mermaid]]-Spec | 决策树Mermaid可视化规范 | ./P1-4-Decision-Tree-Mermaid-Spec.md |
+| P1-4-Decision-Tree-Mermaid-Spec | 决策树Mermaid可视化规范 | ./P1-4-Decision-Tree-Mermaid-Spec.md |
 | P1-7-Reflection-Mechanism | 反思机制设计 | ./P1-7-Reflection-Mechanism.md |
 | P1-8-Agent-Diagnostic-Benchmark | Agent诊断能力评估基准 | ./P1-8-Agent-Diagnostic-Benchmark.md |
 

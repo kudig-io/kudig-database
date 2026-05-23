@@ -1,5 +1,5 @@
 ---
-title: 第二课：Pod - K8s 的最小调度单元
+title: 第二课：Pod - K8s 的最小调度单元 [fundamentals]
 description: 'title: 第二课：Pod - K8s 的最小调度单元'
 category: learning
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -414,12 +415,12 @@ kubectl logs <pod-name> --previous
 
 **关联文档**:
 - [../02-getting-started/](../02-getting-started/) — 快速入门
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/troubleshooting/decision-tree-mermaid.md|decision-tree-mermaid]]
-- [[domain-11-production-operations/topic-learn/fundamentals/01-what-is-kubernetes.md|01-what-is-kubernetes]]
-- [[domain-11-production-operations/topic-learn/fundamentals/03-deployment-basics.md|03-deployment-basics]]
-- [[domain-11-production-operations/topic-learn/fundamentals/04-service-basics.md|04-service-basics]]
+- decision-tree-mermaid
+- 01-what-is-kubernetes
+- 03-deployment-basics
+- 04-service-basics

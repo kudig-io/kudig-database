@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 14: 存储体系 + 综合实践
@@ -491,7 +492,7 @@ kubectl get networkpolicy -n production-app
 
 ## 自测检验
 
-完成 [checkpoint.md](./checkpoint.md) 中的 Week 2 自测题。
+完成 checkpoint.md](./checkpoint.md) 中的 Week 2 自测题。
 
 ---
 

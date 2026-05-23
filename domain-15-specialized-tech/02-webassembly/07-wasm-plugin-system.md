@@ -49,6 +49,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Wasm 插件系统 (Wasm Plugin System)
@@ -61,8 +62,8 @@ authors:
 
 1. [插件系统架构概述](#1-插件系统架构概述)
 2. [proxy-wasm 规范详解](#2-proxy-wasm-规范详解)
-3. [Envoy Wasm Filter 开发](#3-envoy-wasm-filter-开发)
-4. [Istio Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
+3. [[entities/envoy.md|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
+4. [[entities/istio.md|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
 5. [HTTP 头部操作插件](#5-http-头部操作插件)
 6. [限流插件实现](#6-限流插件实现)
 7. [可观测性插件](#7-可观测性插件)
@@ -2485,7 +2486,7 @@ class PluginContext extends Context {
         401,
         "Unauthorized",
         `{"error":"Missing API key"}`,
-        [["content-type", "application/json"]]
+        "content-type", "application/json"
       );
       return FilterHeadersStatusValues.StopIteration;
     }
@@ -2883,7 +2884,7 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 2. 充分利用共享内存实现跨请求状态（限流计数器、缓存等）
 3. 异步 HTTP 调用避免阻塞请求流程
 4. 通过 OCI 镜像分发插件，利用 SHA256 验证完整性
-5. 使用 Prometheus 指标监控插件运行状态
+5. 使用 [[Prometheus|Prometheus]] 指标监控插件运行状态
 6. 渐进式发布新版插件，降低风险
 
 ---
@@ -2899,22 +2900,22 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
-- [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- domain-38-webassembly-cloud-native KUDIG Database — Global MOC
+- [[domain-15-specialized-tech/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|05-wasmedge-runtime]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|06-wasm-component-model]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|08-wasm-ai-inference]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|09-wasm-serverless]]
+- 05-wasmedge-runtime
+- 06-wasm-component-model
+- 08-wasm-ai-inference
+- 09-wasm-serverless

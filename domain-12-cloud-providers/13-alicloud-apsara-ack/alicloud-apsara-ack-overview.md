@@ -38,6 +38,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
@@ -50,10 +51,10 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - mysql
-- statefulset
-- daemonset
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -65,7 +66,7 @@ estimated_read_time: 5min
 intent_queries:
 - 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析 是什么
 - 如何 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - 阿里云专有版
 - ACK
@@ -704,7 +705,7 @@ echo "诊断报告已保存到: $REPORT_FILE"
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 

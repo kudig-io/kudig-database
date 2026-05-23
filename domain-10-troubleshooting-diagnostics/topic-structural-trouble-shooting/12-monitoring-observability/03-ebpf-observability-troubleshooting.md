@@ -1,5 +1,5 @@
 ---
-title: eBPF 可观测性故障排查指南
+title: eBPF 可观测性故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: eBPF 可观测性故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -42,6 +42,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: eBPF 可观测性故障排查指南
@@ -51,9 +52,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - cilium
 - containerd
 - daemonset
@@ -783,8 +784,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

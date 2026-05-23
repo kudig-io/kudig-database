@@ -33,6 +33,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Manpage 安装指南

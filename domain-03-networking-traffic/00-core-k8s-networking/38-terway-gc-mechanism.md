@@ -63,9 +63,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# 38 - Terway GC (垃圾回收) 机制详解 (Terway Garbage Collection Mechanism)
+# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-04
 
@@ -80,7 +81,7 @@ cross_refs:
 
 | 场景 | 原因 | 后果 |
 |:---|:---|:---|
-| kubelet 强制驱逐 | 节点压力大，跳过 CNI DEL 回调 | IP 残留在 ENI 辅助 IP 列表 |
+| [[kubelet|kubelet]] 强制驱逐 | 节点压力大，跳过 CNI DEL 回调 | IP 残留在 ENI 辅助 IP 列表 |
 | 节点异常重启 | Terway Agent 进程未优雅退出 | 本地 IPAM 状态丢失 |
 | Terway Agent 重启/升级 | 内存状态与持久化状态不一致 | 孤儿 IP 无法追踪 |
 | CRD Finalizer 阻塞 | PodENI/IPInstance 删除卡住 | IP 永久占用 |
@@ -281,7 +282,7 @@ data:
     }
 ```
 
-### 3.3 Terway DaemonSet 启动参数 — GC 相关 Flag
+### 3.3 Terway [[DaemonSet|DaemonSet]] 启动参数 — GC 相关 Flag
 
 ```bash
 # 查看 Terway DaemonSet 的 GC 相关启动参数
@@ -1022,25 +1023,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/36-api-gateway-patterns.md|36-api-gateway-patterns]]
-- [[domain-03-networking-traffic/37-terway-resources-crud-operations.md|37-terway-resources-crud-operations]]
-- [[domain-03-networking-traffic/39-csi-cni-version-matrix.md|39-csi-cni-version-matrix]]
-- [[domain-03-networking-traffic/40-terway-product-overview.md|40-terway-product-overview]]
+- 36-api-gateway-patterns
+- 37-terway-resources-crud-operations
+- 39-csi-cni-version-matrix
+- 40-terway-product-overview
 
 ## Related
 

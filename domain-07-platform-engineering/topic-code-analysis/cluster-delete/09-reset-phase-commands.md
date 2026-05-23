@@ -1,5 +1,5 @@
 ---
-title: reset 子命令与 Phase 操作速查
+title: reset 子命令与 Phase 操作速查 (topic-code-analysis)
 description: '| `--config` | 配置文件路径 | |'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: reset 子命令与 Phase 操作速查

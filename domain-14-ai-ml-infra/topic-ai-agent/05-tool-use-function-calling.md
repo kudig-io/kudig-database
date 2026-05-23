@@ -1,4 +1,39 @@
 ---
+title: Tool Use & Function Calling 设计规范 (domain-14-ai-ml-infra)
+description: 'title: Tool Use & Function Calling 设计规范'
+category: general
+tags:
+- ai
+- ai-agent
+- statefulset
+- networkpolicy
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Tool Use & Function Calling 设计规范 是什么
+- 如何 Tool Use & Function Calling 设计规范
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Tool
+- Use
+- Function
+- Calling
+- 设计规范
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
+---
+
 title: Tool Use & Function Calling 设计规范
 description: '# Tool Use & Function Calling 设计规范'
 category: ai-agent
@@ -8,8 +43,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- statefulset
-- networkpolicy
+- [[StatefulSet|statefulset]]
+- [[NetworkPolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -29,8 +64,15 @@ trigger_keywords:
 - 设计规范
 - ai
 - agent
-prerequisites:
-- kubectl-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Tool Use & Function Calling 设计规范
@@ -39,15 +81,15 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Tool Use（工具调用）是 AI Agent 从"语言理解者"变为"行动执行者"的关键能力。高质量的工具定义、合理的工具链设计和健壮的错误处理，直接决定 Agent 的可靠性和执行效率。本文从工具定义规范、并行调用策略、错误恢复模式到生产级工具链设计，提供完整的工程指南。
 
 ---
 
-## 1. Function Calling 核心机制
+<!-- chunk: 1. Function Calling 核心机制 -->## 1. Function Calling 核心机制
 
-### 1.1 OpenAI Function Calling 协议
+#<!-- chunk: 1.1 OpenAI Function Calling 协议 -->## 1.1 OpenAI Function Calling 协议
 
 OpenAI 工具调用的完整生命周期：
 
@@ -154,7 +196,7 @@ if message.tool_calls:
     print(final_response.choices[0].message.content)
 ```
 
-### 1.2 Anthropic Tool Use 协议
+#<!-- chunk: 1.2 Anthropic Tool Use 协议 -->## 1.2 Anthropic Tool Use 协议
 
 ```python
 import anthropic
@@ -164,7 +206,7 @@ client = anthropic.Anthropic()
 tools = [
     {
         "name": "kubectl_describe",
-        "description": "获取 [[entities/kubernetes|k8s]] 资源的详细描述，包含状态、事件和配置",
+        "description": "获取 K8s 资源的详细描述，包含状态、事件和配置",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -224,9 +266,9 @@ for block in response.content:
 
 ---
 
-## 2. 工具定义最佳规范
+<!-- chunk: 2. 工具定义最佳规范 -->## 2. 工具定义最佳规范
 
-### 2.1 工具描述质量准则
+#<!-- chunk: 2.1 工具描述质量准则 -->## 2.1 工具描述质量准则
 
 工具 description 是 LLM 决定是否调用该工具的唯一依据，质量至关重要：
 
@@ -291,7 +333,7 @@ good_tool = {
 }
 ```
 
-### 2.2 工具粒度设计原则
+#<!-- chunk: 2.2 工具粒度设计原则 -->## 2.2 工具粒度设计原则
 
 ```
 工具粒度设计三原则:
@@ -309,7 +351,7 @@ good_tool = {
    避免: 超过 30 个工具（LLM 工具选择准确率显著下降）
 ```
 
-### 2.3 K8s 运维工具集设计
+#<!-- chunk: 2.3 K8s 运维工具集设计 -->## 2.3 K8s 运维工具集设计
 
 ```python
 K8S_OPS_TOOLS = {
@@ -352,7 +394,7 @@ RISK_GROUPS = {
 
 ---
 
-## 3. 并行工具调用
+<!-- chunk: 3. 并行工具调用 -->## 3. 并行工具调用
 
 现代 LLM（GPT-4o、Claude 3.5）支持在一次请求中并行调用多个工具，显著提升效率：
 
@@ -434,7 +476,7 @@ tool_calls = [
 results = asyncio.run(executor.execute_parallel(tool_calls))
 ```
 
-### 3.1 并行调用中的依赖关系处理
+#<!-- chunk: 3.1 并行调用中的依赖关系处理 -->## 3.1 并行调用中的依赖关系处理
 
 ```python
 class DependencyAwareExecutor:
@@ -486,9 +528,9 @@ class DependencyAwareExecutor:
 
 ---
 
-## 4. 错误恢复模式
+<!-- chunk: 4. 错误恢复模式 -->## 4. 错误恢复模式
 
-### 4.1 工具错误分类与处理策略
+#<!-- chunk: 4.1 工具错误分类与处理策略 -->## 4.1 工具错误分类与处理策略
 
 ```python
 from enum import Enum
@@ -557,7 +599,7 @@ class ResilientToolCaller:
         return base
 ```
 
-### 4.2 工具调用失败时的 LLM 反馈处理
+#<!-- chunk: 4.2 工具调用失败时的 LLM 反馈处理 -->## 4.2 工具调用失败时的 LLM 反馈处理
 
 当工具失败后，需要给 LLM 有意义的错误信息，让其决定如何处理：
 
@@ -593,9 +635,9 @@ def format_tool_error_for_llm(
 
 ---
 
-## 5. 工具链设计模式
+<!-- chunk: 5. 工具链设计模式 -->## 5. 工具链设计模式
 
-### 5.1 诊断工具链（顺序依赖）
+#<!-- chunk: 5.1 诊断工具链（顺序依赖） -->## 5.1 诊断工具链（顺序依赖）
 
 ```python
 class K8sDiagnosisToolChain:
@@ -635,18 +677,18 @@ class K8sDiagnosisToolChain:
     
     def build_context_for_llm(self, problem: str, results: dict) -> str:
         """将工具执行结果整理为 LLM 友好的上下文"""
-        context_parts = [f"## 诊断目标\n{problem}\n"]
+        context_parts = [f"<!-- chunk: 诊断目标\n{problem}\n"] -->## 诊断目标\n{problem}\n"]
         
         for step, result in results.items():
             if result.get("success"):
-                context_parts.append(f"## {step}\n```\n{result['data']}\n```\n")
+                context_parts.append(f"<!-- chunk: {step}\n```\n{result['data']}\n```\n") -->## {step}\n```\n{result['data']}\n```\n")
             else:
-                context_parts.append(f"## {step}\n[获取失败: {result['error']}]\n")
+                context_parts.append(f"<!-- chunk: {step}\n[获取失败: {result['error']}]\n") -->## {step}\n[获取失败: {result['error']}]\n")
         
         return "\n".join(context_parts)
 ```
 
-### 5.2 自适应工具调用（Agent 自主决策）
+#<!-- chunk: 5.2 自适应工具调用（Agent 自主决策） -->## 5.2 自适应工具调用（Agent 自主决策）
 
 ```python
 ADAPTIVE_TOOL_SELECTION_PROMPT = """
@@ -713,9 +755,9 @@ def adaptive_diagnosis(
 
 ---
 
-## 6. 工具安全设计
+<!-- chunk: 6. 工具安全设计 -->## 6. 工具安全设计
 
-### 6.1 输入验证与净化
+#<!-- chunk: 6.1 输入验证与净化 -->## 6.1 输入验证与净化
 
 ```python
 import re
@@ -778,7 +820,7 @@ class ToolInputValidator:
         return output
 ```
 
-### 6.2 工具调用审计日志
+#<!-- chunk: 6.2 工具调用审计日志 -->## 6.2 工具调用审计日志
 
 ```python
 import structlog
@@ -839,9 +881,9 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 
 ---
 
-## 7. 最佳实践与反模式
+<!-- chunk: 7. 最佳实践与反模式 -->## 7. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 - **工具描述要具体**：说明适用场景、不适用场景和注意事项，比说明功能更重要
 - **参数使用 enum 约束**：有限选项的参数用 enum 而非 string，减少 LLM 猜测
@@ -849,7 +891,7 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 - **并行调用只读操作**：显著降低延迟，只对有状态更改的操作强制串行
 - **失败要给有意义的反馈**：告诉 LLM 失败原因和建议，让其能够自动纠正
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 - **工具返回过多信息**：返回 10000 行日志给 LLM，超出上下文窗口且推理效率低
 - **工具名和功能不对应**：`execute_operation` 这样的名字让 LLM 无法正确选择
@@ -859,7 +901,7 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|---------|
@@ -872,3 +914,27 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/11-cost-latency-optimization.md|成本与延迟优化策略]]
+
+## See Also
+
+- 03-agent-frameworks-comparison
+- 04-rag-knowledge-retrieval
+- 06-multi-agent-orchestration
+- 07-memory-context-management

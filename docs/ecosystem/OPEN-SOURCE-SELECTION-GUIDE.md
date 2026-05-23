@@ -44,6 +44,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 开源项目快速选型指南

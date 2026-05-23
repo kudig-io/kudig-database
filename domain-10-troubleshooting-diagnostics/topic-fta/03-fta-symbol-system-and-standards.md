@@ -1,5 +1,5 @@
 ---
-title: 第三章：FTA 符号体系与标准规范
+title: 第三章：FTA 符号体系与标准规范 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 fta_id: FTA-03_SYMBOL_SYSTEM_AND_STANDARDS-001
 component: 03 Symbol System And Standards
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第三章：FTA 符号体系与标准规范
@@ -48,10 +49,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- coredns
-- ingress
+- [[CoreDNS|coredns]]
+- [[Ingress|ingress]]
 - agent
 last_updated: 2026-05
 difficulty: advanced

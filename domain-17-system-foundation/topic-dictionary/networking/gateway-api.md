@@ -30,13 +30,14 @@ prerequisites:
 - cloud-provider-basics
 - service-mesh-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Gateway API
 
 ## 概述
 
-Gateway API 是 Kubernetes 中用于暴露网络服务的一组扩展 API（以 CustomResourceDefinition 实现），旨在提供比 Ingress 更动态、更灵活、更面向角色的流量路由能力。它是 Ingress 的继任者，支持基础设施自动配置和高级路由策略，已被 Kubernetes 项目推荐为新项目的首选方案。
+Gateway API 是 [[Kubernetes|Kubernetes]] 中用于暴露网络服务的一组扩展 API（以 CustomResourceDefinition 实现），旨在提供比 [[Ingress|Ingress]] 更动态、更灵活、更面向角色的流量路由能力。它是 Ingress 的继任者，支持基础设施自动配置和高级路由策略，已被 Kubernetes 项目推荐为新项目的首选方案。
 
 ## 核心概念/原理
 
@@ -47,8 +48,8 @@ Gateway API 是 Kubernetes 中用于暴露网络服务的一组扩展 API（以 
 - **资源模型**：
   - **GatewayClass**：声明一组由同一控制器管理的 Gateway，类似 Ingress 中的 IngressClass。
   - **Gateway**：描述一个具体的流量处理基础设施实例，定义监听器（listener）、协议、端口及允许附加路由的命名空间策略。
-  - **HTTPRoute**：定义从 Gateway 监听器到后端 Service 的 HTTP 请求路由规则，支持基于路径、主机名、Header 等的匹配。
-  - **GRPCRoute**：定义 gRPC 流量的路由规则，要求底层 Gateway 支持 HTTP/2（无需 HTTP/1 升级）。
+  - **HTTPRoute**：定义从 Gateway 监听器到后端 [[Service|Service]] 的 HTTP 请求路由规则，支持基于路径、主机名、Header 等的匹配。
+  - **GRPCRoute**：定义 [[gRPC|gRPC]] 流量的路由规则，要求底层 Gateway 支持 HTTP/2（无需 HTTP/1 升级）。
 - **双向信任模型**：Gateway 通过 `allowedRoutes` 控制哪些命名空间的路由可以附加到自身；路由则通过 `parentRefs` 声明要附加的 Gateway，实现双向授权。
 
 ## 关键机制或特性

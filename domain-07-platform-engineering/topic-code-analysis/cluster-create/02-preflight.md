@@ -1,5 +1,5 @@
 ---
-title: 预检流程 (kubeadm preflight)
+title: 预检流程 (kubeadm preflight) [cluster-create]
 description: 'description: ''| `cmd/kubeadm/app/preflight/checks.go` | L501-L800 | 网络和端口检查 |'''
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 预检流程 (kubeadm preflight)

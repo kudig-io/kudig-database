@@ -44,11 +44,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 26 - PriorityClass / RuntimeClass YAML 配置参考
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **主题**: PriorityClass 优先级、RuntimeClass 运行时、ResourceClaim 动态资源分配
 
 <!-- chunk: 目录 -->## 目录
@@ -83,7 +84,7 @@ authors:
 - **资源开销**: `overhead.podFixed`
 - **调度约束**: `nodeSelector` / `tolerations`
 
-#<!-- chunk: ResourceClaim（Dynamic Resource Allocation） -->## ResourceClaim（Dynamic Resource Allocation）
+#<!-- chunk: ResourceClaim（[[Dynamic Resource Allocation|Dynamic Resource Allocation]]） -->## ResourceClaim（Dynamic Resource Allocation）
 动态资源分配（DRA）用于 GPU、FPGA 等设备的动态管理。
 
 **版本兼容性**:
@@ -128,7 +129,7 @@ description: "集群关键组件(如 kube-dns, metrics-server)"
 
 **Kubernetes 内置 PriorityClass**:
 - `system-cluster-critical`: 2000000000（集群关键组件）
-- `system-node-critical`: 2000001000（节点关键组件，如 kubelet）
+- `system-node-critical`: 2000001000（节点关键组件，如 [[kubelet|kubelet]]）
 
 #<!-- chunk: 禁止抢占策略 -->## 禁止抢占策略
 
@@ -1142,25 +1143,25 @@ kubectl get resourceclaim --all-namespaces -o json | \
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests KUDIG Database — Global MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- index.md|Domain-32 YAML 清单 — 开源项目索引]]
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- 04 - Deployment / ReplicaSet YAML 配置参考
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/24-admission-webhook-configuration.md|24-admission-webhook-configuration]]
-- [[domain-18-manifests-patterns/25-validatingadmissionpolicy.md|25-validatingadmissionpolicy]]
-- [[domain-18-manifests-patterns/27-hpa-autoscaling-v2.md|27-hpa-autoscaling-v2]]
-- [[domain-18-manifests-patterns/28-poddisruptionbudget-reference.md|28-poddisruptionbudget-reference]]
+- 24-admission-webhook-configuration
+- 25-validatingadmissionpolicy
+- 27-hpa-autoscaling-v2
+- 28-poddisruptionbudget-reference
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: LoxiLB
+title: LoxiLB [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # LoxiLB
@@ -37,7 +38,7 @@ prerequisites:
 
 ## 概述
 
-LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernetes 提供高性能的 L4 负载均衡服务。它可以作为 Kubernetes 的 Service LoadBalancer、Ingress 控制器或独立的负载均衡网关运行，利用 eBPF/XDP 技术在内核数据面实现线速转发，支持 BGP、ECMP、DSR（Direct Server Return）等高级网络特性，...
+LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernetes 提供高性能的 L4 负载均衡服务。它可以作为 Kubernetes 的 [[Service|Service]] LoadBalancer、[[Ingress|Ingress]] 控制器或独立的负载均衡网关运行，利用 eBPF/XDP 技术在内核数据面实现线速转发，支持 BGP、ECMP、DSR（Direct Server Return）等高级网络特性，...
 
 ## 核心能力
 
@@ -71,5 +72,5 @@ LoxiLB 是一个基于 eBPF 的云原生负载均衡器，专注于为 Kubernete
 - [[sermant]] — Sermant
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/loxilb/loxilb.md|loxilb]]
+- loxilb
 - [[entities/cncf-networking|CNCF 网络与服务网格项目全景]] — Cross-reference

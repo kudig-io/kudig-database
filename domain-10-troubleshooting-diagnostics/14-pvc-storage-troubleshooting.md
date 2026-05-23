@@ -62,6 +62,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/07-pvc-storage-failure.md
   label: '运维技能: 07-pvc-storage-failure'
+created: "2026-05-23"
 ---
 
 # 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
@@ -131,7 +132,7 @@ cross_refs:
 | 原因 | Events关键字 | 诊断命令 | 解决方案 |
 |-----|-------------|---------|---------|
 | **StorageClass不存在** | `storageclass.storage.k8s.io "xxx" not found` | `kubectl get sc` | 创建对应SC |
-| **无匹配PV** | `no persistent volumes available` | `kubectl get pv` | 创建匹配的PV |
+| **无匹配PV** | `no [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|persistent volumes]]es（卷）|volumes]] available` | `kubectl get pv` | 创建匹配的PV |
 | **PV容量不足** | `no persistent volumes available` | 检查PV/PVC容量 | 创建更大容量PV |
 | **访问模式不匹配** | `no persistent volumes available` | 检查accessModes | 调整访问模式 |
 | **CSI驱动故障** | `waiting for a volume to be created` | `kubectl get pods -n kube-system \| grep csi` | 修复CSI驱动 |
@@ -907,9 +908,9 @@ echo "=========================================="
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

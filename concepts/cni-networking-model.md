@@ -32,13 +32,14 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # CNI 网络模型与插件对比
 
 ## 概述
 
-kubeadm init 完成后，集群节点间网络不通，必须安装 CNI（Container Network Interface）插件。kubelet 通过 CRI 调用 CNI 插件的 ADD/DEL/CHECK 命令来管理 Pod 网络命名空间，实现 Pod IP 分配、跨节点通信和网络策略等能力。
+kubeadm init 完成后，集群节点间网络不通，必须安装 CNI（Container Network Interface）插件。[[kubelet|kubelet]] 通过 CRI 调用 CNI 插件的 ADD/DEL/CHECK 命令来管理 Pod 网络命名空间，实现 Pod IP 分配、跨节点通信和网络策略等能力。
 
 ## CNI 安装时序
 
@@ -64,7 +65,7 @@ CoreDNS Pod 变为 Running
 
 ## 主流 CNI 插件对比
 
-| 插件 | 模式 | 数据面 | 性能 | 网络模型 | BGP 支持 | NetworkPolicy |
+| 插件 | 模式 | 数据面 | 性能 | 网络模型 | BGP 支持 | [[NetworkPolicy|NetworkPolicy]] |
 |------|------|--------|------|---------|---------|--------------|
 | Calico | Overlay + BGP | eBPF/Linux Routing | 高 | IP-in-IP/VXLAN | 是 | 是 |
 | Cilium | Overlay + BGP | eBPF | 最高 | VXLAN/Geneve | 是 | 是（eBPF 级别） |
@@ -199,9 +200,9 @@ Pod 内应用发起 DNS 查询:
 
 ## 相关概念
 
-- [[concepts/service-networking.md|Service 网络]]
+- networking.md|Service 网络]]
 - [[entities/cni-plugins.md|CNI 插件]]
-- [[skills/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
+- [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 - [[entities/kube-apiserver.md|kube-apiserver]]
 
 ## Related

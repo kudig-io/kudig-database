@@ -1,5 +1,5 @@
 ---
-title: Deployment 控制器架构总览
+title: Deployment 控制器架构总览 (topic-code-analysis)
 description: 'title: Deployment 控制器架构总览'
 category: general
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: Deployment 控制器架构总览

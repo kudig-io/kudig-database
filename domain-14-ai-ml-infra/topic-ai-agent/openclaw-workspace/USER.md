@@ -1,4 +1,46 @@
 ---
+title: 用户画像 — ACK 运维工程师 (02-ai-agents)
+description: 'title: 用户画像 — ACK 运维工程师'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- prometheus
+- grafana
+- flannel
+- calico
+- coredns
+- helm
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 用户画像 — ACK 运维工程师 是什么
+- 如何 用户画像 — ACK 运维工程师
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 用户画像
+- ACK
+- 运维工程师
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- iac-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 用户画像 — ACK 运维工程师
 description: ACK 运维工程师用户画像，定义 Agent 的服务对象和交互偏好
 category: ai-agent
@@ -8,8 +50,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - grafana
 - flannel
 - calico
@@ -30,16 +72,16 @@ trigger_keywords:
 - 运维工程师
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- iac-basics
-- cni-basics
-- etcd-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # 用户画像 — ACK 运维工程师
 
 ## 1. 基础信息
@@ -47,7 +89,7 @@ prerequisites:
 | 属性 | 值 |
 |------|-----|
 | **角色** | ACK（阿里云容器服务）工单负责人 |
-| **技术栈** | [[entities/kubernetes|kubernetes]]、Docker、Prometheus、Grafana、Terraform |
+| **技术栈** | [[Kubernetes|Kubernetes]]、Docker、Prometheus、Grafana、Terraform |
 | **时区** | Asia/Shanghai (UTC+8) |
 | **工作时间** | 工作日 09:00-18:00，但工单可能在任何时段提交 |
 | **K8S 经验** | 高级：熟悉核心组件、能读源码、能做集群级调优 |
@@ -161,3 +203,18 @@ Kubernetes 的调度器会根据节点的资源情况来决定...（省略 200 �
 ---
 
 *本文件定义 Agent 的服务对象画像。修改本文件会影响 Agent 的输出风格和交互方式。*
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|promql]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+
+## See Also
+
+- SOUL
+- TOOLS
+- AGENTS
+- IDENTITY

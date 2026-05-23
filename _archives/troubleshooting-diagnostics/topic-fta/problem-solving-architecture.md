@@ -324,7 +324,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 | 场景 | 入口文档 | 深度文档 |
 |:---|:---|:---|
 | **快速定位问题** | `symptom-mapping-layer.md` | `symptom-vector-matcher.md` |
-| **FTA 路径选择** | `fta-index.md` | `[[domain-10-troubleshooting-diagnostics/topic-fta-archive/kubernetes-fta-full-analysis-v2|kubernetes-fta-full-analysis-v2]].md` |
+| **FTA 路径选择** | `fta-index.md` | `kubernetes-fta-full-analysis-v2.md` |
 | **详细排查执行** | `structural-trouble-shooting/README.md` | 各组件排查文档 |
 | **修复动作执行** | `fta-execution-engine.md#修复执行控制器` | `domain-10-troubleshooting-diagnostics/topic-skills/` |
 | **复盘与学习** | `fta-febm-joint-diagnosis.md` | `febm/` 目录 |

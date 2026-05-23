@@ -35,6 +35,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - ECS 计算资源
@@ -47,8 +48,8 @@ tags:
 - gke
 - aks
 - ack
-- kubelet
-- containerd
+- [[kubelet|kubelet]]
+- [[containerd|containerd]]
 - redis
 - kafka
 last_updated: 2026-05
@@ -62,7 +63,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - ECS 计算资源 是什么
 - 如何 ACK 关联产品 - ECS 计算资源
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品
@@ -223,7 +224,7 @@ fs.file-max = 2000000
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[references/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[entities/kubernetes.md|kubernetes]]

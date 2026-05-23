@@ -1,5 +1,5 @@
 ---
-title: Cartography
+title: Cartography (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ trigger_keywords:
 - Cartography
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Cartography
@@ -46,7 +47,7 @@ Cartography 是一个基础设施资产图谱工具，能够自动收集多云�
 
 ## 生产部署要点
 
-- **定期同步**: 配置 CronJob 每 4-6 小时同步一次，保持资产图谱时效性
+- **定期同步**: 配置 [[CronJob|CronJob]] 每 4-6 小时同步一次，保持资产图谱时效性
 - **多账号**: 使用 AWS Organization 跨账号角色假设，统一收集所有账号资产
 - **安全查询库**: 建立团队共享的安全查询模板库，标准化风险检测流程
 - **数据保留**: 配置 Neo4j 节点过期策略，清理历史数据避免存储膨胀
@@ -64,11 +65,11 @@ Cartography 是一个基础设施资产图谱工具，能够自动收集多云�
 ## Related
 
 - [[telepresence]] — Telepresence
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[08-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
 - [[harbor]] — Harbor
 - [[opentofu]] — OpenTofu
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/cartography/cartography.md|cartography]]
+- cartography
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

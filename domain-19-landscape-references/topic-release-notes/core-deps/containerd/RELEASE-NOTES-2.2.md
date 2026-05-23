@@ -27,9 +27,10 @@ prerequisites:
 - kubectl-basics
 - cncf-ecosystem
 - observability-basics
+created: "2026-05-23"
 ---
 
-# containerd v2.2 Release Notes
+# [[containerd|containerd]] v2.2 Release Notes
 
 Source: [v2.2.2](https://github.com/containerd/containerd/releases/tag/v2.2.2)
 
@@ -39,7 +40,7 @@ The second patch release for containerd 2.2 contains various fixes and improveme
 
 ### Highlights
 
-#### Container Runtime Interface (CRI)
+#### [[Container Runtime|Container Runtime]] Interface (CRI)
 
 * Fix migrated CRI image config when using legacy registry mirrors ([#12987](https://github.com/containerd/containerd/pull/12987))
 * Unpack images with per-layer labels for runtime-specific snapshotters ([#12936](https://github.com/containerd/containerd/pull/12936))

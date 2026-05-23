@@ -36,9 +36,10 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
-# Day 23: Ingress 实操
+# [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
 
 > **日期**: Week 4 Day 2 | **主题**: Ingress 路由规则与控制器配置 | **版本**: K8s 1.28-1.33
 
@@ -60,7 +61,7 @@ prerequisites:
 |--------|------|---------|
 | NGINX Ingress Controller | 功能丰富，性能高 | 生产环境 |
 | Traefik | 支持 Let's Encrypt 自动证书 | 内部服务 |
-| Ambassador | 基于 Envoy，支持 canary | API Gateway |
+| Ambassador | 基于 [[Envoy|Envoy]]，支持 canary | API Gateway |
 | GKE Ingress | GCP 原生集成 | GCP 环境 |
 
 ---

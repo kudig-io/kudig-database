@@ -30,15 +30,16 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 系统组件链路追踪
+# [[Kubernetes|Kubernetes]] 系统组件链路追踪
 
 ## 概述
 
 FEATURE STATE: `Kubernetes v1.27 [beta]`
 
-系统组件链路追踪记录了集群中各操作之间的延迟和关系。Kubernetes 组件通过 **OpenTelemetry Protocol (OTLP)** 使用 gRPC exporter 发出追踪数据（trace spans），这些数据可以通过 OpenTelemetry Collector 收集并路由到追踪后端，用于可视化端到端请求流、诊断性能问题和识别瓶颈。
+系统组件链路追踪记录了集群中各操作之间的延迟和关系。Kubernetes 组件通过 **[[OpenTelemetry|OpenTelemetry]] Protocol (OTLP)** 使用 [[gRPC|gRPC]] exporter 发出追踪数据（trace spans），这些数据可以通过 OpenTelemetry Collector 收集并路由到追踪后端，用于可视化端到端请求流、诊断性能问题和识别瓶颈。
 
 ## 核心概念/原理
 
@@ -69,7 +70,7 @@ kube-apiserver 为以下场景生成 spans：
 
 - 传入的 HTTP 请求
 - 对外部 webhook 的请求
-- 对 etcd 的请求
+- 对 [[etcd|etcd]] 的请求
 - 重入请求（re-entrant requests）
 
 kube-apiserver 会在对外请求时传播 **W3C Trace Context**，但不会利用传入请求附带的 trace context（因为 apiserver 通常是公共端点）。

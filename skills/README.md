@@ -1,5 +1,5 @@
 ---
-title: FTA 故障树清单索引
+title: FTA 故障树清单索引 (skills)
 description: '## 概述'
 category: skills
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # FTA 故障树清单索引
@@ -43,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-本目录包含 Kubernetes 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：
+本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：
 - 完整的 Mermaid 故障树图（OR/AND 门结构）
 - 底事件详细定义（severity/probability/MTTR/detection/remediation）
 - JSON 工作流（支持 Agent 自动化遍历）
@@ -70,8 +71,8 @@ prerequisites:
 |:---|---:|:---|:---:|
 | [pod-fta.md](pod-fta.md) | 58.8 KB | Pod 全生命周期异常（调度/镜像/运行时/健康检查/网络/存储/安全/节点/控制面） | ~80 |
 | [deployment-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
-| [statefulset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | StatefulSet 有序部署/持久卷/网络标识/扩缩容 | ~24 |
-| [daemonset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | DaemonSet 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
+| [statefulset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
+| [daemonset-fta.md]([[domain-10-troubleshooting-diagnostics/topic-fta/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
 | [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
 
 ### 2. 网络与流量
@@ -148,7 +149,7 @@ prerequisites:
 - [[domain-07-platform-engineering/README.md|Platform Ops Domain (平台运维领域)]]
 - [[domain-14-ai-ml-infra/README.md|AI Agent 工程专题]]
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-02-workloads-applications/README-old.md|README-old]]
+- README-old
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
 - [[domain-06-observability/README.md|Domain 21: 日志管理与分析 (Logging Management & Analytics)]]
 - [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
@@ -179,20 +180,20 @@ prerequisites:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/README.md|FTA 故障树清单索引]]
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

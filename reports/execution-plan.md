@@ -1,5 +1,5 @@
 ---
-title: KUDIG 内容补齐执行计划
+title: KUDIG 内容补齐执行计划 (reports)
 description: 'desc: "深度文档"'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 内容补齐执行计划

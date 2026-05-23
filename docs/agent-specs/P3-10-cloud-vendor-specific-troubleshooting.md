@@ -1,5 +1,5 @@
 ---
-title: 云厂商差异化故障场景
+title: 云厂商差异化问题场景
 description: '# "Flannel plugin not ready" → 使用 terway 网络插件'
 category: general
 tags:
@@ -19,29 +19,30 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- 云厂商差异化故障场景 是什么
-- 如何 云厂商差异化故障场景
-- 云厂商差异化故障场景 故障排查
-- 云厂商差异化故障场景 排障步骤
+- 云厂商差异化问题场景 是什么
+- 如何 云厂商差异化问题场景
+- 云厂商差异化问题场景 问题排查
+- 云厂商差异化问题场景 排障步骤
 trigger_keywords:
-- 云厂商差异化故障场景
+- 云厂商差异化问题场景
 prerequisites:
 - kubectl-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# 云厂商差异化故障场景
+# 云厂商差异化问题场景
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: ACK/EKS/GKE/AKS 特有故障场景的诊断与修复
+> **用途**: ACK/EKS/GKE/AKS 特有问题场景的诊断与修复
 > **关联**: domain-17-cloud-provider, domain-10-troubleshooting-diagnostics
 
 ---
 
 ## 1. 阿里云 ACK / ACK (Alibaba Cloud [[entities/kubernetes|kubernetes]])
 
-### 1.1 控制平面故障 (CCE 控制台异常)
+### 1.1 控制平面问题 (CCE 控制台异常)
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -111,7 +112,7 @@ kubectl get pods -n kube-system | grep csi
 
 ---
 
-## 2. AWS EKS 故障排查
+## 2. AWS EKS 问题排查
 
 ### 2.1 Fargate 特殊调度问题
 
@@ -188,7 +189,7 @@ aws eks update-nodegroup-version --cluster-name <name> --nodegroup-name <ng> --k
 
 ---
 
-## 3. GCP GKE 故障排查
+## 3. GCP GKE 问题排查
 
 ### 3.1 Autopilot 资源限制
 
@@ -239,7 +240,7 @@ kubectl delete syncs -n config-management-system --all
 
 ---
 
-## 4. Azure AKS 故障排查
+## 4. Azure AKS 问题排查
 
 ### 4.1 Azure CNI 限额问题
 
@@ -289,7 +290,7 @@ az aks nodepool upgrade --resource-group <rg> --cluster-name <cluster> --name <p
 
 ---
 
-## 5. 多云网络故障
+## 5. 多云网络问题
 
 ### 5.1 跨云 VPC Peering / Transit
 

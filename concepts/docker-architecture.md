@@ -29,9 +29,10 @@ trigger_keywords:
 - Runtime
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Docker Architecture and Container Runtime
+# Docker Architecture and [[Container Runtime|Container Runtime]]
 
 ## Runtime Layered Architecture
 
@@ -40,7 +41,7 @@ Docker operates through five distinct layers, each communicating via standardize
 | Layer | Name | Process | Interface |
 |-------|------|---------|-----------|
 | User Interface | Docker CLI | docker | REST API (Unix Socket) |
-| API Service | Docker Daemon | dockerd | gRPC API |
+| API [[Service|Service]] | Docker Daemon | dockerd | [[gRPC|gRPC]] API |
 | Container Manager | containerd | containerd | OCI Runtime Spec |
 | Container Shim | containerd-shim | containerd-shim-runc-v2 | OCI Runtime |
 | Low-level Runtime | runc | runc | Linux Kernel |
@@ -109,4 +110,4 @@ Production nodes should use [[containerd|containerd]] or [[cri-o|CRI-O]] as the 
 - [[docker|Docker]]
 - OCI Standard
 
-- [[domain-13-container-runtime/01-docker-architecture-overview.md|01-docker-architecture-overview]]
+- 01-docker-architecture-overview

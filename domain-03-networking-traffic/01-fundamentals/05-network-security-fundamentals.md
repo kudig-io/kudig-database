@@ -48,6 +48,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 网络安全基础
@@ -338,9 +339,9 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 
 | 组件 | 功能 | 技术实现 |
 |:---|:---|:---|
-| **身份提供者** | 用户/设备身份管理 | Keycloak, Okta, Azure AD |
-| **策略引擎** | 访问控制策略 | OPA, Kyverno |
-| **策略执行点** | 策略实施 | Istio, Cilium, Firewalls |
+| **身份提供者** | 用户/设备身份管理 | [[Keycloak|Keycloak]], Okta, Azure AD |
+| **策略引擎** | 访问控制策略 | OPA, [[Kyverno|Kyverno]] |
+| **策略执行点** | 策略实施 | [[Istio|Istio]], Cilium, Firewalls |
 | **信任评估** | 持续信任评估 | SIEM, UEBA |
 | **日志审计** | 安全事件记录 | ELK, Splunk |
 
@@ -708,10 +709,10 @@ echo "安全合规检查完成，报告已生成: $REPORT_FILE"
 
 ## See Also
 
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|03-dns-principles-configuration]]
-- [[domain-03-networking-traffic/04-load-balancing-technologies.md|04-load-balancing-technologies]]
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|06-sdn-network-virtualization]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|99-cilium-ebpf-network-guide]]
+- 03-dns-principles-configuration
+- 04-load-balancing-technologies
+- 06-sdn-network-virtualization
+- 99-cilium-ebpf-network-guide
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: OpenSSL 证书操作速查手册
+title: OpenSSL 证书操作速查手册 (topic-code-analysis)
 description: 'description: 本文档汇总 Kubernetes 集群证书运维中最常用的 OpenSSL 命令，覆盖查看、验证、生成、转换、调试全场景。'
 category: general
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: OpenSSL 证书操作速查手册

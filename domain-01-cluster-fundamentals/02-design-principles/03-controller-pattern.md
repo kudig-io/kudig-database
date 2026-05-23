@@ -34,11 +34,12 @@ prerequisites:
 - helm-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
 title: 控制器模式与调谐循环
-description: 深入解析 Kubernetes 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践
+description: 深入解析 [[Kubernetes|Kubernetes]] 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践
 category: domain-2-design
 tags:
 - k8s
@@ -47,9 +48,9 @@ tags:
 - control-loop
 - level-triggered
 - operator
-- prometheus
-- helm
-- statefulset
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[StatefulSet|statefulset]]
 - daemonset
 - design-principles
 last_updated: 2026-05
@@ -659,32 +660,32 @@ func (c *Controller) syncHandler(key string) error {
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-2 设计原则 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|Kubernetes 设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04 - List-Watch 机制深度解析 (List-Watch)]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05 - Informer 架构与工作队列 (Informer & Workqueue)]]
-- [[domain-01-cluster-fundamentals/06-resource-version-control.md|06 - 资源版本与并发控制 (Concurrency Control)]]
-- [[domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md|07 - 分布式共识与 etcd 原理 (etcd & Raft)]]
-- [[domain-01-cluster-fundamentals/08-high-availability-patterns.md|08 - 高可用架构模式 (HA Patterns)]]
-- [[domain-01-cluster-fundamentals/09-source-code-walkthrough.md|09 - Kubernetes 源码结构与阅读指南 (Source Code)]]
-- [[domain-01-cluster-fundamentals/10-cap-theorem-distributed-systems.md|10 - CAP 定理与分布式系统基础 (CAP Theorem)]]
+- Domain-2 设计原则 — 开源项目索引
+- Kubernetes 设计原则与哲学
+- 声明式 API 与面向终态设计
+- 04 - List-Watch 机制深度解析 (List-Watch)
+- 05 - Informer 架构与工作队列 (Informer & Workqueue)
+- 06 - 资源版本与并发控制 (Concurrency Control)
+- 07 - 分布式共识与 etcd 原理 (etcd & Raft)
+- 08 - 高可用架构模式 (HA Patterns)
+- 09 - Kubernetes 源码结构与阅读指南 (Source Code)
+- 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|设计原则与哲学]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API]]
-- [[domain-01-cluster-fundamentals/12-operator-development-guide.md|Operator 开发指南]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
+- 设计原则与哲学
+- 声明式 API
+- Operator 开发指南
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-01-cluster-fundamentals
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/01-design-principles-foundations.md|01-design-principles-foundations]]
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|02-declarative-api-pattern]]
-- [[domain-01-cluster-fundamentals/04-watch-list-mechanism.md|04-watch-list-mechanism]]
-- [[domain-01-cluster-fundamentals/05-informer-workqueue.md|05-informer-workqueue]]
+- 01-design-principles-foundations
+- 02-declarative-api-pattern
+- 04-watch-list-mechanism
+- 05-informer-workqueue

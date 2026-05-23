@@ -48,6 +48,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 负载均衡技术
@@ -154,7 +155,7 @@ echo 1 > /proc/sys/net/ipv4/conf/all/arp_ignore
 echo 2 > /proc/sys/net/ipv4/conf/all/arp_announce
 ```
 
-#<!-- chunk: IPVS (Kubernetes) -->## IPVS (Kubernetes)
+#<!-- chunk: IPVS ([[Kubernetes|Kubernetes]]) -->## IPVS (Kubernetes)
 
 ```bash
 # 启用 IPVS 模式
@@ -309,7 +310,7 @@ upstream backend {
 | 需求场景 | 推荐方案 | 理由 | 典型配置 |
 |:---|:---|:---|:---|
 | **高并发Web** | Nginx + LVS | 成熟稳定、性能优异 | 4核8GB + 10Gbps |
-| **微服务架构** | Envoy/Istio | 服务网格、可观测性强 | 2核4GB + 1Gbps |
+| **微服务架构** | [[Envoy|Envoy]]/Istio | 服务网格、可观测性强 | 2核4GB + 1Gbps |
 | **UDP流媒体** | HAProxy + DPDK | 低延迟、高吞吐 | 8核16GB + 25Gbps |
 | **全球部署** | Cloud Load Balancer | 地理分布、自动扩缩 | 按需付费 |
 | **金融交易** | F5 BIG-IP | 企业级、安全合规 | 专用硬件 |
@@ -752,7 +753,7 @@ backend app_servers
 
 ## See Also
 
-- [[domain-03-networking-traffic/02-tcp-udp-deep-dive.md|02-tcp-udp-deep-dive]]
-- [[domain-03-networking-traffic/03-dns-principles-configuration.md|03-dns-principles-configuration]]
-- [[domain-03-networking-traffic/05-network-security-fundamentals.md|05-network-security-fundamentals]]
-- [[domain-03-networking-traffic/06-sdn-network-virtualization.md|06-sdn-network-virtualization]]
+- 02-tcp-udp-deep-dive
+- 03-dns-principles-configuration
+- 05-network-security-fundamentals
+- 06-sdn-network-virtualization

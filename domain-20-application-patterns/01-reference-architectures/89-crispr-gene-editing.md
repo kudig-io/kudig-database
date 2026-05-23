@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 基因编辑CRISPR架构设计
@@ -46,7 +47,7 @@ tags:
 - mysql
 - job
 - rbac
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - gpu
 last_updated: 2026-05-18
 difficulty: expert
@@ -58,7 +59,7 @@ audience:
 - HPC架构师
 estimated_read_time: 5min
 intent_queries:
-- CRISPR gene editing kubernetes architecture
+- CRISPR gene editing [[Kubernetes|kubernetes]] architecture
 - 基因编辑K8s高性能计算
 - gRNA设计AI平台
 - 脱靶检测HPC架构
@@ -545,7 +546,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -560,11 +561,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/87-flexible-manufacturing.md|87-flexible-manufacturing]]
-- [[domain-20-application-patterns/88-nanomaterials.md|88-nanomaterials]]
-- [[domain-20-application-patterns/90-neuromorphic-computing.md|90-neuromorphic-computing]]
-- [[domain-20-application-patterns/91-urban-air-mobility.md|91-urban-air-mobility]]
+- 87-flexible-manufacturing
+- 88-nanomaterials
+- 90-neuromorphic-computing
+- 91-urban-air-mobility
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

@@ -37,9 +37,10 @@ prerequisites:
 - troubleshooting-methodology
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南
+title: 移动云 CKE (China Mobile Cloud [[Kubernetes|Kubernetes]] Engine) 企业级深度实战指南
 description: '# 移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南'
 category: cloud-provider
 tags:
@@ -49,9 +50,9 @@ tags:
 - gke
 - aks
 - ack
-- etcd
-- statefulset
-- daemonset
+- [[etcd|etcd]]
+- [[StatefulSet|statefulset]]
+- [[DaemonSet|daemonset]]
 - job
 last_updated: 2026-05
 difficulty: advanced
@@ -1599,7 +1600,7 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

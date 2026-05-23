@@ -58,6 +58,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # CNCF 学习路径
@@ -128,8 +129,8 @@ Week 9-12: 运维实践 (40h)
 
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
-- [containerd](./graduated/containerd/containerd.md)
-- [Helm](./graduated/helm/helm.md)
+- [[entities/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
+- [[entities/helm.md|Helm]]](./graduated/helm/helm.md)
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Argo CD](./graduated/argo/argo.md)
 - [Flux](./graduated/flux/flux.md)
@@ -191,7 +192,7 @@ Week 13-16: 生产实践 (40h)
 **推荐文档**：
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Istio](./graduated/istio/istio.md)
-- [Linkerd](./graduated/linkerd/linkerd.md)
+- [[entities/linkerd.md|Linkerd]]](./graduated/linkerd/linkerd.md)
 - [OpenTelemetry](./incubating/opentelemetry/opentelemetry.md)
 - [Falco](./graduated/falco/falco.md)
 - [Chaos Mesh](./incubating/chaos-mesh/chaos-mesh.md)
@@ -321,10 +322,10 @@ Month 3: 身份与零信任 (40h)
 - [OPA](./graduated/opa/opa.md)
 - [Falco](./graduated/falco/falco.md)
 - [SPIFFE](./graduated/spiffe/spiffe.md)
-- [SPIRE](./graduated/spire/spire.md)
+- [[entities/spire.md|SPIRE]]](./graduated/spire/spire.md)
 - [Kyverno](./incubating/kyverno/kyverno.md)
 - [in-toto](./graduated/in-toto/in-toto.md)
-- [TUF](./graduated/tuf/tuf.md)
+- [[entities/operator-framework.md|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
 
 ---
 
@@ -548,16 +549,16 @@ Month 3: 身份与零信任 (40h)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-19-landscape-references/MOC.md|domain-19-landscape-references MOC]]
+- domain-19-landscape-references MOC
 - [[domain-19-landscape-references/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|Domain-34 CNCF Landscape — 开源项目索引]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|CNCF 集成实践指南]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|CNCF 项目选型指南]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|CNCF 项目 FTA 索引]]
+- Domain-34 CNCF Landscape — 开源项目索引
+- CNCF 集成实践指南
+- CNCF 项目选型指南
+- CNCF 项目 FTA 索引
 
 ## See Also
 
-- [[domain-19-landscape-references/04-cncf-fta-index.md|04-cncf-fta-index]]
-- [[domain-19-landscape-references/01-cncf-integration-guide.md|01-cncf-integration-guide]]
-- [[domain-19-landscape-references/03-cncf-selection-guide.md|03-cncf-selection-guide]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|04-cncf-fta-index]]
+- 04-cncf-fta-index
+- 01-cncf-integration-guide
+- 03-cncf-selection-guide
+- 04-cncf-fta-index

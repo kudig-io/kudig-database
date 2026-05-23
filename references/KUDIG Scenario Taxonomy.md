@@ -28,6 +28,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Scenario Taxonomy
@@ -51,13 +52,13 @@ Organizes knowledge by **production scenario** rather than document structure. E
 | SC-09 | Daily Operations | topic-scenarios/daily-ops.md | domain-9, topic-skills | ~40 |
 | SC-10 | AI Infrastructure | topic-scenarios/ai-infra-ops.md | domain-11, topic-ai-agent | ~30 |
 | SC-11 | Network Diagnosis | topic-scenarios/network-diagnosis.md | domain-5, domain-03-networking-traffic | ~25 |
-| SC-12 | Storage Issues | topic-scenarios/[[domain-11-production-operations/topic-best-practices/scenarios/storage-issues.md|storage-issues]].md | domain-6, domain-04-storage-data | ~20 |
+| SC-12 | Storage Issues | topic-scenarios/storage-issues.md | domain-6, domain-04-storage-data | ~20 |
 | SC-13 | Security Incident Response | topic-scenarios/security-incident.md | domain-7, domain-25, domain-05-security-compliance | ~15 |
 | SC-14 | Capacity Planning | topic-scenarios/capacity-planning.md | domain-18, domain-07-platform-engineering | ~15 |
 | SC-15 | GitOps Workflow | topic-scenarios/gitops-workflow.md | domain-23, domain-08-release-change-management | ~20 |
-| SC-16 | Service Mesh Operations | topic-scenarios/[[domain-11-production-operations/topic-best-practices/scenarios/mesh-ops.md|mesh-ops]].md | domain-03-networking-traffic | ~15 |
+| SC-16 | Service Mesh Operations | topic-scenarios/mesh-ops.md | domain-03-networking-traffic | ~15 |
 | SC-17 | Multi-Cluster Management | topic-scenarios/multi-cluster.md | domain-9, domain-12-cloud-providers | ~15 |
-| SC-18 | Edge Operations | topic-scenarios/[[domain-11-production-operations/topic-best-practices/scenarios/edge-ops.md|edge-ops]].md | domain-15-specialized-tech | ~10 |
+| SC-18 | Edge Operations | topic-scenarios/edge-ops.md | domain-15-specialized-tech | ~10 |
 | SC-19 | Cost Optimization | topic-scenarios/cost-optimization.md | domain-18, domain-07-platform-engineering | ~10 |
 | SC-20 | Compliance & Audit | topic-scenarios/compliance-audit.md | domain-25, domain-05-security-compliance | ~10 |
 

@@ -35,6 +35,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 智慧电网架构设计
@@ -44,13 +45,13 @@ tags:
 - k8s
 - architecture
 - industry
-- flux
+- [[Flux|flux]]
 - redis
 - mysql
 - postgresql
 - kafka
 - hpa
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert
@@ -616,7 +617,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -631,11 +632,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/59-industrial-internet-platform.md|59-industrial-internet-platform]]
-- [[domain-20-application-patterns/60-v2x-autonomous-driving.md|60-v2x-autonomous-driving]]
-- [[domain-20-application-patterns/62-distributed-energy.md|62-distributed-energy]]
-- [[domain-20-application-patterns/63-industrial-visual-inspection.md|63-industrial-visual-inspection]]
+- 59-industrial-internet-platform
+- 60-v2x-autonomous-driving
+- 62-distributed-energy
+- 63-industrial-visual-inspection
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

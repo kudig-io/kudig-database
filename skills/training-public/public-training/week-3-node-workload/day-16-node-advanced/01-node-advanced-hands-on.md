@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,7 +40,7 @@ title: Day 16: Node 节点进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 节点池扩缩容
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点池扩缩容
   - Cluster Autoscaler 配置
   - Pod 亲和性反亲和性
   - 拓扑分布约束

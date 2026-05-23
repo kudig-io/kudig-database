@@ -1,5 +1,5 @@
 ---
-title: Inspektor Gadget
+title: Inspektor Gadget [entities]
 description: '## 概述'
 category: general
 tags:
@@ -29,17 +29,18 @@ prerequisites:
 - monitoring-basics
 - ebpf-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 ---
 title: "Inspektor Gadget"
 category: entities
 summary: "Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试和检查 Kubernetes 集群中的应用程序。它利用 eBPF 在内核级别收集数据，提供对容器和 Pod 的深入可观测性，无需修改应用程序代码或添加 sidecar。"
-tags: [k8s, cncf, observability, inspektor-gadget]
+tags: k8s, cncf, observability, inspektor-gadget]
 sources: ["docs/domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md", "domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: reference
 base_confidence: 0.7

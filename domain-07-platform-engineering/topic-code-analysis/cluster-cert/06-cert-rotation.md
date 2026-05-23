@@ -1,5 +1,5 @@
 ---
-title: 证书轮换机制源码分析
+title: 证书轮换机制源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 title: 证书轮换机制源码分析
@@ -321,7 +322,7 @@ sudo systemctl restart kubelet
 # 每月检查证书，如剩余 < 60 天则轮换
 
 EXPIRY=$(kubeadm certs check-expiration | grep apiserver | awk '{print $3}')
-if [[ "$EXPIRY" =~ ^[0-9]+d$ ]]; then
+if "$EXPIRY" =~ ^[0-9]+d$; then
     DAYS=${EXPIRY%d}
     if [ "$DAYS" -lt 60 ]; then
         kubeadm certs renew all

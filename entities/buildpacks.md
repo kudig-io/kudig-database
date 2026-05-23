@@ -25,9 +25,10 @@ trigger_keywords:
 - Buildpacks
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Cloud Native Buildpacks
+# Cloud Native [[Buildpacks|Buildpacks]]
 
 > **CNCF 状态**: Incubating | **类别**: Ci/Cd | **主要语言**: Go
 
@@ -73,7 +74,7 @@ Cloud Native Buildpacks (CNB) 将应用源代码转换为 OCI 容器镜像，无
 - [[metallb]] — MetalLB
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/buildpacks/buildpacks.md|buildpacks]]
-- [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
+- buildpacks
+- [[entities/cncf-runtime|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

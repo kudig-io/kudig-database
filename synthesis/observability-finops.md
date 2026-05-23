@@ -25,6 +25,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[best-practices/observability/monitoring]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/observability/observability]]"
+    type: related_to
 ---
 
 # 可观测性与 FinOps 的融合
@@ -63,5 +69,5 @@ OpenCost + Prometheus:
 
 ## 相关 Domain
 
-- [[domain-06-observability/02-metrics/02-monitoring-metrics-system]]
-- [[domain-11-production-operations/01-finops/01-cost-governance]]
+- [[domain-17-system-foundation/topic-dictionary/observability/observability|observability]]/02-metrics/02-[[best-practices/observability/monitoring|monitoring]]-metrics-system]]
+- domain-11-production-operations/01-finops/01-cost-governance

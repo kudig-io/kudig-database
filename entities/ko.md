@@ -1,5 +1,5 @@
 ---
-title: ko
+title: ko (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - ko
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # ko
@@ -66,6 +67,6 @@ ko 是一个快速的 Go 应用容器镜像构建和部署工具。它无需 Doc
 - [[holmesgpt]] — HolmesGPT
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[concepts/cli-tools-evolution|CLI 工具演进]] — Cross-reference
+- [[concepts/cli-tools-evolution|[[CLI 工具演进|CLI 工具演进]]]] — Cross-reference
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes Scheduler
+# [[Kubernetes|Kubernetes]] Scheduler
 
 ## 概述
 
-在 Kubernetes 中，调度（Scheduling）是指将 Pod 与节点（Node）进行匹配，以便 Kubelet 能够运行它们的过程。kube-scheduler 是 Kubernetes 的默认调度器，作为控制平面的一部分运行。它负责为新创建的或未调度的 Pod 选择最优的节点。
+在 Kubernetes 中，调度（Scheduling）是指将 Pod 与节点（Node）进行匹配，以便 [[kubelet|Kubelet]] 能够运行它们的过程。kube-scheduler 是 Kubernetes 的默认调度器，作为控制平面的一部分运行。它负责为新创建的或未调度的 Pod 选择最优的节点。
 
 ## 核心概念/原理
 
@@ -49,7 +50,7 @@ prerequisites:
 
 - **Binding（绑定）**：调度器选定节点后，会通知 API server 这一决策。
 - **Scheduling Policies（调度策略）**：允许配置 Predicates（用于过滤）和 Priorities（用于评分）。
-- **Scheduling Profiles（调度配置文件）**：允许配置实现不同调度阶段的插件，包括 `QueueSort`、`Filter`、`Score`、`Bind`、`Reserve`、`Permit` 等。还可以配置 kube-scheduler 运行不同的配置文件。
+- **Scheduling Profiles（调度配置文件）**：允许配置实现不同调度阶段的插件，包括 `QueueSort`、`Filter`、`[[Score|Score]]`、`Bind`、`Reserve`、`Permit` 等。还可以配置 kube-scheduler 运行不同的配置文件。
 - **可替换性**：kube-scheduler 的设计允许用户在需要时编写自己的调度组件来替代默认调度器。
 
 ## 使用场景
@@ -180,6 +181,6 @@ curl -k https://localhost:10259/metrics | grep scheduler_pending_pods
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

@@ -1,5 +1,5 @@
 ---
-title: FTA 诊断执行引擎
+title: FTA 诊断执行引擎 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**定位**: 将 FTA 理论转化为可执行代码的工程化指南'''
 category: fta
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 fta_id: FTA-FTA_EXECUTION_ENGINE-001
 component: Fta Execution Engine
 severity: critical
+created: "2026-05-23"
 ---
 
 title: FTA 诊断执行引擎
@@ -45,7 +46,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- helm
+- [[Helm|helm]]
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -911,7 +912,7 @@ Step 6: 学习反馈
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]

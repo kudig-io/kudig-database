@@ -59,13 +59,14 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # 71 - Gateway API配置
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)
 
-<!-- chunk: 1. Gateway API vs Ingress -->
+<!-- chunk: 1. Gateway API vs [[Ingress|Ingress]] -->
 ## 1. Gateway API vs Ingress
 
 | 特性 | Ingress | Gateway API | 说明 |
@@ -74,7 +75,7 @@ cross_refs:
 | **多协议** | HTTP(S) | HTTP/HTTPS/TCP/UDP/gRPC/TLS | 统一多协议支持 |
 | **流量分割** | ❌ | ✅ 原生支持 | 基于权重的流量分配 |
 | **请求修改** | 注解依赖 | ✅ 标准化 | 统一的Filter机制 |
-| **后端引用** | Service | Service/任意后端 | 更灵活的后端选择 |
+| **后端引用** | [[Service|Service]] | Service/任意后端 | 更灵活的后端选择 |
 | **跨命名空间** | ❌ | ✅ ReferenceGrant | 安全的跨NS引用 |
 | **网格治理 (GAMMA)** | ❌ | ✅ (v1.1+) | **East-West** 流量治理标准化 |
 
@@ -85,7 +86,7 @@ cross_refs:
 
 | CRD | 作用域 | 角色 | 说明 |
 |-----|-------|------|------|
-| **GatewayClass** | Cluster | 基础设施管理员 | 定义底层网关实现 (如 Istio, Nginx) |
+| **GatewayClass** | Cluster | 基础设施管理员 | 定义底层网关实现 (如 [[Istio|Istio]], Nginx) |
 | **Gateway** | Namespace | 平台/集群管理员 | 定义流量入口 (IP, Port, TLS) |
 | **HTTPRoute** | Namespace | 应用开发者 | 定义 L7 路由、过滤、权重 |
 | **ReferenceGrant** | Namespace | 资源所有者 | 允许跨 NS 的安全引用 |
@@ -407,22 +408,22 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/33-network-troubleshooting.md|33-network-troubleshooting]]
-- [[domain-03-networking-traffic/34-network-performance-tuning.md|34-network-performance-tuning]]
-- [[domain-03-networking-traffic/36-api-gateway-patterns.md|36-api-gateway-patterns]]
-- [[domain-03-networking-traffic/37-terway-resources-crud-operations.md|37-terway-resources-crud-operations]]
+- 33-network-troubleshooting
+- 34-network-performance-tuning
+- 36-api-gateway-patterns
+- 37-terway-resources-crud-operations

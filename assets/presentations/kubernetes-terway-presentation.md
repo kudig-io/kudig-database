@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+title: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [presentations]
 description: '**核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略'
 category: presentations
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
@@ -630,7 +631,7 @@ Terway
 |:---|:---|:---|
 | 1 | `domain-03-networking-traffic/topic-terway/01-product.md` | 产品概览: 定位、版本历史、模式总览 |
 | 2 | `domain-03-networking-traffic/topic-terway/02-architecture.md` | 架构原理: 控制面/数据面详解、IPAM |
-| 3 | `domain-03-networking-traffic/topic-terway/[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md` | 使用指南: 安装配置、模式切换 |
+| 3 | `domain-03-networking-traffic/[[domain-03-networking-traffic/topic-terway/03-usage|03-usage]].md` | 使用指南: 安装配置、模式切换 |
 | 4 | `domain-03-networking-traffic/topic-terway/03b-crd-operations.md` | CRD 操作: PodENI/ReservedIP CRUD |
 | 5 | `domain-03-networking-traffic/topic-terway/04-operations.md` | 运维手册: 健康检查、GC、升级 |
 | 6 | `domain-03-networking-traffic/topic-terway/05-testing.md` | 测试验证: 网络连通性、NetworkPolicy 测试 |

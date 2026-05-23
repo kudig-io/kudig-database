@@ -31,9 +31,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# 场景: Service Mesh 运维
+# 场景: [[Service|Service]]Service Mesh）|Service Mesh]] 运维
 
 > **场景 ID**: SC-16
 > **英文**: Service Mesh Operations
@@ -107,6 +108,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]
 - [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|service-mesh]]

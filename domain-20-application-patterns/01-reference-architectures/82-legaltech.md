@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 司法科技架构设计
@@ -42,7 +43,7 @@ audience:
 - 阿里云政务解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 司法科技智慧法院 Kubernetes 部署
+- 司法科技智慧法院 [[Kubernetes|Kubernetes]] 部署
 - 类案推送 NLP 知识图谱架构
 - 电子卷宗 OCR 结构化抽取
 - 区块链电子证据存证
@@ -329,8 +330,8 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -344,11 +345,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/80-tsn-network.md|80-tsn-network]]
-- [[domain-20-application-patterns/81-smart-customs.md|81-smart-customs]]
-- [[domain-20-application-patterns/83-cultural-digitization.md|83-cultural-digitization]]
-- [[domain-20-application-patterns/84-national-park.md|84-national-park]]
+- 80-tsn-network
+- 81-smart-customs
+- 83-cultural-digitization
+- 84-national-park
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

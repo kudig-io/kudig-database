@@ -63,9 +63,10 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
-# Kubernetes 网络基础 Network in a Nutshell
+# [[Kubernetes|Kubernetes]] 网络基础 Network in a Nutshell
 
 > 目标：**用一套 Mermaid 图看懂 K8s 网络**，再配合 **kind 本地集群**全部动手验证一遍。
 >
@@ -74,7 +75,7 @@ cross_refs:
 Kubernetes 网络看似复杂，但只要抓住两条主线就不会迷路：
 
 - **主线一：K8s 只定义「网络应该长什么样」（网络模型），不关心「怎么实现」。**
-- **主线二：具体实现由 CNI 插件、kube-proxy、CoreDNS、Ingress 这几个角色分工协作完成。**
+- **主线二：具体实现由 CNI 插件、kube-proxy、[[CoreDNS|CoreDNS]]、Ingress 这几个角色分工协作完成。**
 
 ---
 
@@ -1564,25 +1565,25 @@ flowchart LR
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
-- [[domain-03-networking-traffic/04d-flannel-multi-cluster.md|Flannel 多集群场景与子网冲突处理]]
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
+- Flannel 多集群场景与子网冲突处理
 
 ## See Also
 
-- [[domain-03-networking-traffic/46-terway-performance-tuning.md|46-terway-performance-tuning]]
-- [[domain-03-networking-traffic/47-terway-troubleshooting-fta.md|47-terway-troubleshooting-fta]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|01-network-architecture-overview-faq]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|01-network-architecture-overview]]
+- 46-terway-performance-tuning
+- 47-terway-troubleshooting-fta
+- 01-network-architecture-overview-faq
+- 01-network-architecture-overview
 
 ## Related
 

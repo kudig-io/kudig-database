@@ -44,6 +44,7 @@ cross_refs:
 - type: domain
   path: ../domain-04-storage-data/
   label: '相关知识域: domain-04-storage-data'
+created: "2026-05-23"
 ---
 
 # Domain-6 存储知识库查漏补缺完成报告
@@ -192,22 +193,22 @@ Domain-6存储知识库已经成功完成了高质量的查漏补缺工作，达
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
-- [[domain-04-storage-data/README.md|Storage Domain 存储领域知识库]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|Domain-6 存储 — 开源项目索引]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[domain-04-storage-data/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]]
-- [[domain-04-storage-data/03-pvc-patterns-practices.md|03 - PVC使用模式与最佳实践]]
-- [[domain-04-storage-data/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给与多租户管理]]
-- [[domain-04-storage-data/05-csi-drivers-integration.md|05 - CSI驱动集成与运维管理]]
-- [[domain-04-storage-data/06-storage-fundamental-concepts.md|06 - 存储基础概念详解]]
-- [[domain-04-storage-data/07-storage-daily-operations.md|07 - 存储日常运维操作手册]]
-- [[domain-04-storage-data/08-storage-performance-tuning.md|08 - 存储性能调优与优化策略]]
-- [[domain-04-storage-data/09-pv-pvc-troubleshooting.md|09 - PV/PVC故障排查与解决方案]]
+- domain-04-storage-data KUDIG Database — Global MOC
+- [[domain-04-storage-data/README.md|[[Kubernetes 存储配置最佳实践|Storage]]ge Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- index.md|Domain-6 存储 — 开源项目索引]]
+- 存储架构概览与核心组件
+- PV/PVC 核心概念与企业级实践
+- 03 - PVC使用模式与最佳实践
+- StorageClass 动态供给与多租户管理
+- 05 - CSI驱动集成与运维管理
+- 06 - 存储基础概念详解
+- 07 - 存储日常运维操作手册
+- 08 - 存储性能调优与优化策略
+- 09 - PV/PVC故障排查与解决方案
 
 ## See Also
 
-- [[domain-04-storage-data/15-storage-disaster-recovery.md|15-storage-disaster-recovery]]
-- [[domain-04-storage-data/16-csi-migration-in-tree-to-csi.md|16-csi-migration-in-tree-to-csi]]
-- [[domain-04-storage-data/quality-check-report.md|quality-check-report]]
-- [[domain-04-storage-data/01-storage-architecture-overview.md|01-storage-architecture-overview]]
+- 15-storage-disaster-recovery
+- 16-csi-migration-in-tree-to-csi
+- quality-check-report
+- 01-storage-architecture-overview

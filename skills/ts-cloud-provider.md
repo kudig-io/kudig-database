@@ -28,11 +28,12 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 云服务商集成排查
 
-### 01 Cloud Provider Integration Troubleshooting
+### 01 Cloud Provider Integration Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 
@@ -44,7 +45,7 @@ prerequisites:
 6. **快速缓解**：
    - 降低 API 调用频率或增加配额。
    - 临时切换到备用节点组或区域。
-7. **证据留存**：保存 CCM 日志、云 API 错误、Service 事件。
+7. **证据留存**：保存 CCM 日志、云 API 错误、[[Service|Service]] 事件。
 
 #### 排查方法与步骤
 

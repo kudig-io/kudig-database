@@ -36,11 +36,12 @@ prerequisites:
 skill_id: SKILL-README-001
 skill_name: Skills Demo — 本地运行工单诊断技能
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # Skills Demo — 本地运行工单诊断技能
 
-> **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，体验从故障注入到修复验证的完整流程  
+> **目的**: 在本地 Kind 集群中实际运行 [[SKILL|Skill]] 执行闭环，体验从故障注入到修复验证的完整流程  
 > **场景数量**: 10 个 (5 个基础 + 5 个扩展)  
 > **耗时**: 环境搭建 ~5min + 每个场景 ~5min  
 > **前置条件**: Docker Desktop + kind + kubectl
@@ -86,7 +87,7 @@ bash teardown.sh
 | 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | LOW |
 | 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | LOW |
 | 03 | Pod Pending | SKILL-POD-002 | 资源超限 | LOW |
-| 04 | DNS 解析故障 | SKILL-NET-001 | CoreDNS 缩容 | LOW |
+| 04 | DNS 解析故障 | SKILL-NET-001 | [[CoreDNS|CoreDNS]] 缩容 | LOW |
 | 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | LOW |
 
 ### 扩展场景 (6-10)
@@ -287,20 +288,20 @@ sudo mv kubectl /usr/local/bin/kubectl
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

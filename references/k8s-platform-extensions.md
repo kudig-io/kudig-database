@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # 平台运维与扩展生态

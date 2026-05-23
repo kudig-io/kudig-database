@@ -1,5 +1,5 @@
 ---
-title: Job/CronJob 异常故障树分析
+title: Job/CronJob 异常故障树分析 (skills)
 description: '- **范围**：调度触发、并发与重试策略、镜像与探针、资源与配额、控制器依赖。'
 category: skills
 tags:
@@ -31,11 +31,12 @@ prerequisites:
 fta_id: FTA-JOB_CRONJOB-001
 component: Job Cronjob
 severity: critical
+created: "2026-05-23"
 ---
 
 # Job/CronJob 异常故障树分析
 
-<!-- condition: kubectl get jobs -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
+<!-- condition: kubectl get [[Jobs|jobs]] -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
 
 # Job/CronJob 异常 FTA 树
 

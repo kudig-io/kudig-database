@@ -25,6 +25,7 @@ trigger_keywords:
 - kubelet
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kubelet
@@ -33,17 +34,17 @@ prerequisites:
 
 kubelet runs on every worker node and is responsible for:
 - Watching API Server for Pod assignments
-- Managing container lifecycle via CRI (containerd/CRI-O)
+- Managing container lifecycle via CRI ([[containerd|containerd]]/CRI-O)
 - Mounting volumes via CSI
 - Running health probes (liveness, readiness, startup)
 - Reporting node and Pod status
-- Evicting Pods under resource pressure
+- Evicting [[Pods|Pods]] under resource pressure
 
 ## Key Subsystems
 
 | Subsystem | Function |
 |-----------|----------|
-| **PLEG** (Pod Lifecycle Event Generator) | Monitors container runtime, generates state change events that trigger syncPod |
+| **PLEG** ([[Pod Lifecycle|Pod Lifecycle]] Event Generator) | Monitors [[Container Runtime|container runtime]], generates state change events that trigger syncPod |
 | **Probe Manager** | Runs liveness, readiness, and startup probes |
 | **Volume Manager** | Mounts/unmounts volumes, interacts with CSI drivers |
 | **Eviction Manager** | Monitors node resources, evicts Pods when thresholds crossed |
@@ -84,11 +85,11 @@ kubelet auto-rotates its client certificate (`--rotate-certificates`), preventin
 - [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[entities/container-runtime.md|Container Runtime]]
 
-- [[domain-01-cluster-fundamentals/15-kubelet-deep-dive.md|15-kubelet-deep-dive]]
-- [[domain-01-cluster-fundamentals/33-kubelet-eviction-thresholds.md|33-kubelet-eviction-thresholds]]
-- [[domain-02-workloads-applications/20-kubelet-configuration.md|20-kubelet-configuration]]
+- 15-kubelet-deep-dive
+- 33-kubelet-eviction-thresholds
+- 20-kubelet-configuration
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
-- [[domain-19-landscape-references/sandbox/virtual-kubelet/virtual-kubelet.md|virtual-kubelet]]
+- virtual-kubelet
 - [[skills/node-fta|Node 异常故障树分析]] — Cross-reference
 - [[skills/deployment-fta|Deployment 异常故障树分析]] — Cross-reference
 - [[skills/statefulset-fta|StatefulSet 异常故障树分析]] — Cross-reference

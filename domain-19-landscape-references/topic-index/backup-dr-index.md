@@ -32,6 +32,7 @@ prerequisites:
 - cncf-ecosystem
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Backup & DR 备份与灾备知识图谱索引
@@ -46,27 +47,27 @@ prerequisites:
 
 ### 灾备方案
 
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
-- [[domain-04-storage-data/10-storage-backup-disaster-recovery|存储备份与灾难恢复]]
-- [[domain-04-storage-data/15-storage-disaster-recovery|存储灾备与迁移策略]]
+- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]佳实践|Disaster Recovery]])]]
+- 存储备份与灾难恢复
+- 存储灾备与迁移策略
 
 ### 灾备工具
 
-- [[domain-09-reliability-engineering/99-velero-backup-recovery-guide|Velero 企业级备份恢复实践指南]]
-- [[domain-09-reliability-engineering/01-vmware-vsphere-enterprise-dr|VMware vSphere 企业级灾备与业务连续性]]
-- [[domain-09-reliability-engineering/02-veeam-enterprise-backup|Veeam Backup & Replication 企业级备份恢复解决方案]]
-- [[domain-09-reliability-engineering/05-commvault-enterprise-disaster-recovery|Commvault 企业级灾备与业务连续性深度实践]]
-- [[domain-09-reliability-engineering/06-rubrik-enterprise-disaster-recovery|Rubrik 企业级灾备与业务连续性深度实践]]
+- Velero 企业级备份恢复实践指南
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案]]
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
 
 ### CSI 存储备份
 
-- [[domain-04-storage-data/05-csi-drivers-integration|CSI驱动集成与运维管理]]
+- CSI驱动集成与运维管理
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting|CSI 快照与卷备份故障排查指南]]
 
 ### YAML 配置
 
-- [[domain-18-manifests-patterns/17-storageclass-volumesnapshot|StorageClass / VolumeSnapshot YAML 配置参考]]
-- [[domain-18-manifests-patterns/18-csi-driver-resources|CSI 驱动资源 YAML 配置参考]]
+- StorageClass / VolumeSnapshot YAML 配置参考
+- CSI 驱动资源 YAML 配置参考
 
 ---
 
@@ -107,26 +108,26 @@ prerequisites:
 
 ### 生产运维
 
-- [[domain-07-platform-engineering/12-backup-recovery-strategy|Kubernetes 备份与恢复概述 (Backup & Recovery Overview)]]
-- [[domain-11-production-operations/16-enterprise-backup-strategy|企业级备份策略]]
-- [[domain-11-production-operations/17-disaster-recovery-drills|灾难恢复演练]]
-- [[domain-11-production-operations/18-cross-region-disaster-recovery|跨区域容灾部署]]
+- [[concepts/kubernetes-architecture-overview.md]]
+- 企业级备份策略
+- 灾难恢复演练
+- 跨区域容灾部署
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery|[[备份与灾难恢复（Backup & Disaster Recovery）|备份与灾难恢复（Backup & Disaster Recovery）]]]]
 - [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|Persistent Volumes（持久卷）]]
 - [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots|Volume Snapshots（卷快照）]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes|Volume Snapshot Classes（卷快照类）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes|[[Volume Snapshot Classes（卷快照类）|Volume Snapshot Classes（卷快照类）]]]]
 - [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning|CSI Volume Cloning（CSI 卷克隆）]]
 
 ### CNCF 生态
 
-- [[domain-19-landscape-references/graduated/etcd/etcd|etcd]]
-- [[domain-19-landscape-references/incubating/longhorn/longhorn|Longhorn]]
-- [[domain-19-landscape-references/sandbox/k8up/k8up|K8up]]
-- [[domain-19-landscape-references/sandbox/kanister/kanister|Kanister]]
-- [[domain-19-landscape-references/sandbox/openebs/openebs|OpenEBS]]
+- etcd
+- Longhorn
+- K8up
+- Kanister
+- OpenEBS
 
 ### 迁移相关
 

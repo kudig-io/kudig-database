@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,7 +40,7 @@ title: Day 20: Pod 容器组进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - Kubernetes Pod 调度深度配置
+  - [[Kubernetes|Kubernetes]] Pod 调度深度配置
   - Pod 亲和性反亲和性
   - 拓扑分布约束配置
   - 探针与资源配置
@@ -64,7 +65,7 @@ related_domains:
   - domain-10-troubleshooting-diagnostics
   - domain-02-workloads-applications
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/[[domain-11-production-operations/topic-learn/inner-training/week-3-node-workload/day-19-pod-basics|day-19-pod-basics]]/01-pod-basics-hands-on
+  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-19-pod-basics/01-pod-basics-hands-on
   - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
 ---
 

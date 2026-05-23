@@ -1,15 +1,16 @@
 ---
-title: Virtual Kubelet
-description: 'description: ''## 项目概述'''
-category: general
+title: Virtual Kubelet [entities]
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- runtime
+- virtual-kubelet
 - kubelet
 - scheduler
-- helm
+- crd
 - operator
-- agent
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -19,82 +20,23 @@ estimated_read_time: 5min
 intent_queries:
 - Virtual Kubelet 是什么
 - 如何 Virtual Kubelet
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - Virtual
 - Kubelet
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
-- helm-basics
+created: "2026-05-23"
 ---
 
-title: Virtual Kubelet
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- kubelet
-- scheduler
-- helm
-- operator
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- Virtual Kubelet 是什么
-- 如何 Virtual Kubelet
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- Virtual
-- Kubelet
-- cncf
-- landscape
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-# Virtual Kubelet
+# Virtual [[kubelet|Kubelet]]
 
-> **成熟度**: Sandbox | **加入时间**: 2019-11 | **最后更新**: 2026-03
+> **CNCF 状态**: Sandbox | **类别**: Runtime | **主要语言**: Go
 
-## 基本信息
-
-| 属性 | 值 |
-|:---|:---|
-| **官方网站** | https://virtual-kubelet.io |
-| **GitHub** | https://github.com/virtual-kubelet/virtual-kubelet |
-| **许可证** | Apache-2.0 |
-| **开发语言** | Go |
-| **CNCF 分类** | Scheduling & Orchestration |
-| **适用场景** | Kubernetes 节点虚拟化 |
-
----
-
-## 项目概述
+## 概述
 
 Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身注册为集群中的一个节点。但不同于真正的 kubelet 运行在物理/虚拟机上，Virtual Kubelet 将 Pod 调度到其他后端服务，如 Azure Container Instances (ACI)、AWS Fargate、HashiCorp Nomad 等无服务器容器平台。
 
----
-
-## 核心特性
+## 核心能力
 
 - **虚拟节点**: 在 K8s 中注册虚拟节点
 - **多后端**: ACI、Fargate、Nomad、OpenStack
@@ -103,140 +45,37 @@ Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身
 - **弹性伸缩**: 实现真正的无服务器容器
 - **Provider 接口**: 可扩展的 Provider 插件架构
 
----
+## K8s 集成
 
-## 架构设计
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                Virtual Kubelet Architecture                      │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              Kubernetes Control Plane                      │   │
-│  │  ┌─────────────┐  ┌─────────────────────────────────┐   │   │
-│  │  │ API Server  │  │          Scheduler              │   │   │
-│  │  └──────┬──────┘  └──────────────┬──────────────────┘   │   │
-│  └─────────┼────────────────────────┼──────────────────────┘   │
-│            │                        │                           │
-│    ┌───────▼────────┐       ┌───────▼────────┐                 │
-│    │  Real Nodes    │       │ Virtual Kubelet │                 │
-│    │  ┌──────────┐  │       │  (registers as  │                 │
-│    │  │ kubelet  │  │       │   a node)       │                 │
-│    │  │ Pod A    │  │       │  ┌────────────┐ │                 │
-│    │  │ Pod B    │  │       │  │  Provider  │ │                 │
-│    │  └──────────┘  │       │  │  Interface │ │                 │
-│    └────────────────┘       │  └─────┬──────┘ │                 │
-│                             └────────┼────────┘                 │
-│                                      │                          │
-│  ┌───────────────────────────────────▼───────────────────────┐ │
-│  │                   Provider Backends                        │ │
-│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐ │ │
-│  │  │  Azure   │ │  AWS     │ │ HashiCorp│ │  Custom      │ │ │
-│  │  │  ACI     │ │  Fargate │ │  Nomad   │ │  Provider    │ │ │
-│  │  └──────────┘ └──────────┘ └──────────┘ └──────────────┘ │ │
-│  └───────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 生产部署要点
 
----
+- **Taint/Toleration**: 使用 taint 控制调度到虚拟节点
+- **资源限制**: 设置合理的资源请求
+- **网络规划**: 注意虚拟节点的网络连通性
+- **持久化**: 虚拟节点通常不支持本地存储
 
-## 快速开始
+## 架构定位
 
-### 安装 (Azure ACI Provider)
+在 CNCF 生态中，virtual-kubelet 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
-```bash
-# Helm 安装 ACI Provider
-helm install virtual-kubelet \
-  --set provider=azure \
-  --set providers.azure.masterUri=https://k8s-api-server:6443 \
-  oci://mcr.microsoft.com/aks/virtual-kubelet/virtual-kubelet
+## 参考链接
 
-# 验证虚拟节点
-kubectl get nodes
-# NAME                  STATUS   ROLES    AGE
-# worker-1              Ready    <none>   30d
-# virtual-kubelet-aci   Ready    agent    1m
-```
-
-### 调度 Pod 到虚拟节点
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: burst-workload
-spec:
-  nodeSelector:
-    kubernetes.io/role: agent
-    type: virtual-kubelet
-  tolerations:
-    - key: virtual-kubelet.io/provider
-      operator: Exists
-  containers:
-    - name: app
-      image: nginx:latest
-      resources:
-        requests:
-          cpu: "1"
-          memory: "1Gi"
-```
-
----
-
-## Provider 接口
-
-```go
-// Provider 核心接口
-type Provider interface {
-    CreatePod(ctx context.Context, pod *v1.Pod) error
-    UpdatePod(ctx context.Context, pod *v1.Pod) error
-    DeletePod(ctx context.Context, pod *v1.Pod) error
-    GetPod(ctx context.Context, namespace, name string) (*v1.Pod, error)
-    GetPodStatus(ctx context.Context, namespace, name string) (*v1.PodStatus, error)
-    GetPods(ctx context.Context) ([]*v1.Pod, error)
-}
-```
-
----
-
-## 使用场景
-
-| 场景 | 说明 |
-|:---|:---|
-| **弹性突发** | 高峰期将工作负载溢出到无服务器平台 |
-| **CI/CD** | 批量构建任务无需预留节点 |
-| **混合云** | 连接多云容器服务 |
-| **IoT/边缘** | 管理远端设备上的容器 |
-
----
-
-## 最佳实践
-
-1. **Taint/Toleration**: 使用 taint 控制调度到虚拟节点
-2. **资源限制**: 设置合理的资源请求
-3. **网络规划**: 注意虚拟节点的网络连通性
-4. **持久化**: 虚拟节点通常不支持本地存储
-
----
-
-## 参考资源
-
-- [官方文档](https://virtual-kubelet.io)
-- [GitHub Repo](https://github.com/virtual-kubelet/virtual-kubelet)
-- [Azure ACI Provider](https://github.com/virtual-kubelet/azure-aci)
-- [Provider 开发指南](https://virtual-kubelet.io/docs/creating-a-provider/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[operator-pattern]]
+- [[pod-lifecycle]]
+- [[entities/kubelet.md|kubelet]]
+- [[entities/kube-scheduler.md|kube-scheduler]]
+- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[openfeature]] — OpenFeature
+- tools]] — [[Podman Desktop|Podman Desktop]]
+- [[k3s]] — k3s 轻量级 Kubernetes
+- [[entities/kubelet.md|kubelet]] — kubelet
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- virtual-kubelet
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

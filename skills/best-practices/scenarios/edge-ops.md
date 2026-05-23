@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # 场景: 边缘计算运维
@@ -77,7 +78,7 @@ graph TD
 ## 相关文档
 
 - [[domain-15-specialized-tech/README.md]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-[[entities/kubeedge.md|kubeedge]].md]]
+- [[KubeEdge]].md]]
 
 
 ---
@@ -103,6 +104,6 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-01-cluster-fundamentals/09-edge-computing-kubeedge.md|09-edge-computing-kubeedge]]
+- 09-edge-computing-kubeedge

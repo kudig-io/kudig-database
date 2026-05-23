@@ -64,6 +64,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md
   label: '故障树: apiserver'
+created: "2026-05-23"
 ---
 
 # 01 - API Server 故障排查 (API Server Troubleshooting)
@@ -71,7 +72,7 @@ difficulty: "advanced"
 related_docs:
   - path: "02-control-plane-etcd-troubleshooting.md"
     type: "depth"
-    desc: "etcd 故障排查"
+    desc: "[[etcd|etcd]]cd 故障排查|etcd 故障排查]]"
   - path: "../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md"
     type: "depth"
     desc: "API Server 深度解析"
@@ -85,7 +86,7 @@ related_docs:
 
 # 01 - API Server 故障排查 (API Server Troubleshooting)
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
 
 ---
 
@@ -573,9 +574,9 @@ groups:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]

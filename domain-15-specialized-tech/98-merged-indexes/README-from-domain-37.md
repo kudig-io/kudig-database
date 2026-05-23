@@ -26,6 +26,7 @@ trigger_keywords:
 - tech
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 ---

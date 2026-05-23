@@ -1,5 +1,5 @@
 ---
-title: domain-05-security-compliance MOC
+title: domain-05-security-compliance MOC [98-merged-indexes]
 description: domain-05-security-compliance 知识域导航页，覆盖 12 篇文档
 category: moc
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - rbac-basics
+created: "2026-05-23"
 ---
 
 # domain-05-security-compliance MOC
@@ -55,17 +56,17 @@ prerequisites:
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
 | 1 | [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]] |  | security, supply-chain |  |
-| 2 | [[domain-05-security-compliance/01-supply-chain-security-overview.md|供应链安全概述 (Supply Chain Security Overview)]] |  | security, supply-chain, deep-dive |  |
-| 3 | [[domain-05-security-compliance/02-supply-chain-maturity-model.md|供应链安全成熟度模型 (Supply Chain Security Maturity Model)]] |  | security, supply-chain |  |
-| 4 | [[domain-05-security-compliance/03-sbom-generation-management.md|SBOM 生成与管理 (SBOM Generation and Management)]] |  | security, supply-chain |  |
-| 5 | [[domain-05-security-compliance/04-sbom-vulnerability-analysis.md|SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)]] |  | security, supply-chain |  |
-| 6 | [[domain-05-security-compliance/05-slsa-levels-implementation.md|SLSA 级别与实施 (SLSA Levels and Implementation)]] |  | security, supply-chain |  |
-| 7 | [[domain-05-security-compliance/06-github-actions-slsa-build.md|GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)]] |  | security, supply-chain |  |
-| 8 | [[domain-05-security-compliance/07-sigstore-cosign-signing.md|Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)]] |  | security, supply-chain |  |
-| 9 | [[domain-05-security-compliance/08-fulcio-rekor-transparency.md|Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)]] |  | security, supply-chain |  |
-| 10 | [[domain-05-security-compliance/09-policy-controller-verification.md|Policy Controller 镜像验证 (Policy Controller Image Verification)]] |  | security, supply-chain |  |
-| 11 | [[domain-05-security-compliance/10-compliance-automation-audit.md|合规自动化与审计 (Compliance Automation and Audit)]] |  | security, supply-chain, compliance |  |
-| 12 | [[domain-05-security-compliance/99-slsa-supply-chain-security-guide.md|SLSA 软件供应链安全实践指南]] |  | security, supply-chain, guide |  |
+| 2 | 供应链安全概述 (Supply Chain Security Overview) |  | security, supply-chain, deep-dive |  |
+| 3 | 供应链安全成熟度模型 (Supply Chain Security Maturity Model) |  | security, supply-chain |  |
+| 4 | SBOM 生成与管理 (SBOM Generation and Management) |  | security, supply-chain |  |
+| 5 | SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) |  | security, supply-chain |  |
+| 6 | SLSA 级别与实施 (SLSA Levels and Implementation) |  | security, supply-chain |  |
+| 7 | GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) |  | security, supply-chain |  |
+| 8 | Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) |  | security, supply-chain |  |
+| 9 | Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) |  | security, supply-chain |  |
+| 10 | Policy Controller 镜像验证 (Policy Controller Image Verification) |  | security, supply-chain |  |
+| 11 | 合规自动化与审计 (Compliance Automation and Audit) |  | security, supply-chain, compliance |  |
+| 12 | SLSA 软件供应链安全实践指南 |  | security, supply-chain, guide |  |
 
 ---
 
@@ -98,9 +99,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-05-security-compliance 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-05-security-compliance 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-05-security-compliance 相关故障树分析 |
+| Skills 技能 | domain-05-security-compliance 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

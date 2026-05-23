@@ -43,11 +43,12 @@ prerequisites:
 skill_id: SKILL-23_JOB_CRONJOB_FAILURE-001
 skill_name: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
 skill_id: "SKILL-WORK-004"
-skill_name: "Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation"
+skill_name: "Job/CronJob 故障诊断与修复 / Job & [[CronJob|CronJob]] Failure Diagnosis & Remediation"
 version: "1.0"
 category: "workload"
 severity_range: "P0-P2"
@@ -59,7 +60,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "10-45min"
 risk_level: "medium"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "Job"
   - "CronJob"
@@ -123,9 +124,9 @@ tier: peripheral---
 
 # Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
-Job 和 CronJob 是 [[entities/kubernetes|kubernetes]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
+Job 和 CronJob 是 [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
 
-本 Skill 覆盖 Job 执行失败、CronJob 未触发、错过调度、并发控制问题、重试耗尽、历史堆积、时区偏差等 10 种根因的诊断和修复。
+本 [[SKILL|Skill]] 覆盖 Job 执行失败、CronJob 未触发、错过调度、并发控制问题、重试耗尽、历史堆积、时区偏差等 10 种根因的诊断和修复。
 
 ## 何时使用此 Skill
 

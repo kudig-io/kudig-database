@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 集群配置最佳实践
+title: Kubernetes 集群配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 集群配置的最佳实践指南
 category: best-practices/infrastructure
 tags:
@@ -41,6 +41,7 @@ cross_refs:
 - type: domain
   path: ../../domain-01-cluster-fundamentals/
   label: 控制平面知识域
+created: "2026-05-23"
 ---
 
 # Kubernetes 集群配置最佳实践

@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 向量数据库与 RAG 基础设施
@@ -78,7 +79,7 @@ Embedding 模型将文本、图像、代码等非结构化数据转换为高维�
 
 ## 关键机制或特性
 
-### Kubernetes 上的 RAG 基础设施部署
+### [[Kubernetes|Kubernetes]] 上的 RAG 基础设施部署
 
 ```yaml
 # 向量数据库部署示例（Qdrant StatefulSet）
@@ -136,7 +137,7 @@ spec:
 ## 最佳实践/注意事项
 
 - **检索延迟目标**：同步 RAG 流程中，向量检索应控制在 100ms 以内，避免拖累整体用户体验
-- **定期刷新索引**：业务文档会不断更新，应通过 Kubernetes CronJob 或 Airflow 编排定期重索引任务
+- **定期刷新索引**：业务文档会不断更新，应通过 Kubernetes [[CronJob|CronJob]] 或 Airflow 编排定期重索引任务
 - **混合检索优于纯向量检索**：结合关键词搜索（BM25）和向量相似度搜索可显著提升召回率
 - **重排序提升精度**：先用 ANN 快速召回 Top-50，再用更精确的 Reranker 筛选 Top-5 给 LLM
 - **元数据过滤隔离租户**：在多租户场景中，通过 Namespace 隔离向量数据库实例，或在查询中加入 tenant_id 标量过滤
@@ -152,5 +153,5 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index|[[AI / GPU 基础设施知识图谱索引|AI / GPU 基础设施知识图谱索引]]]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|[[GitOps 速查卡|GitOps]] / CI-CD 全局索引]]

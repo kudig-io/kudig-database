@@ -1,5 +1,5 @@
 ---
-title: Spring Boot on Kubernetes 生产实践指南
+title: Spring Boot on Kubernetes 生产实践指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# Spring Boot on Kubernetes 生产实践指南'
 category: java-kubernetes
 tags:
@@ -39,9 +39,10 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Spring Boot on Kubernetes 生产实践指南
+# Spring Boot on [[Kubernetes|Kubernetes]] 生产实践指南
 
 > **适用版本**: JDK 17+ / Spring Boot 3.x / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
@@ -209,7 +210,7 @@ mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.passwo
 mvn compile jib:dockerBuild
 ```
 
-#### Buildpacks（Spring Boot 官方推荐）
+#### [[Buildpacks|Buildpacks]]（Spring Boot 官方推荐）
 
 ```bash
 # Spring Boot 3.x 内置 Buildpacks 支持
@@ -848,7 +849,7 @@ minimum-idle 建议 = maximum-pool-size × 25% ~ 50%
 
 ## 四、最佳实践
 
-### 4.1 分布式追踪集成（Micrometer Tracing + OpenTelemetry）
+### 4.1 分布式追踪集成（Micrometer Tracing + [[OpenTelemetry|OpenTelemetry]]）
 
 ```xml
 <dependencyManagement>

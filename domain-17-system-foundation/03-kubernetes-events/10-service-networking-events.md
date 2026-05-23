@@ -49,11 +49,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
   label: '故障树: service'
+created: "2026-05-23"
 ---
 
-# 10 - Service 与网络事件
+# 10 - [[Service|Service]] 与网络事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 Service、LoadBalancer、Endpoint/EndpointSlice 和网络相关的所有事件。**
 
@@ -106,7 +107,7 @@ cross_refs:
 - **service-controller**: Service 和 LoadBalancer 管理
 - **endpoint-controller**: Endpoint 管理
 - **endpointslice-controller**: EndpointSlice 管理 (v1.17+)
-- **kubelet**: 网络配置相关事件
+- **[[kubelet|kubelet]]**: 网络配置相关事件
 - **cloud-controller-manager**: 云厂商 LoadBalancer 集成
 
 #<!-- chunk: 1.2 快速索引 -->## 1.2 快速索引
@@ -2222,25 +2223,25 @@ chmod +x service-diagnostics.sh
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
 
 ## See Also
 
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09-job-cronjob-batch-events]]
-- [[domain-17-system-foundation/11-storage-volume-events.md|11-storage-volume-events]]
-- [[domain-17-system-foundation/12-autoscaling-events.md|12-autoscaling-events]]
+- 08-statefulset-daemonset-events
+- 09-job-cronjob-batch-events
+- 11-storage-volume-events
+- 12-autoscaling-events
 
 ## Related
 

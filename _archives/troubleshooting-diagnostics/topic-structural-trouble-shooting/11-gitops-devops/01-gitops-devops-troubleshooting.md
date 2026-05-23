@@ -48,7 +48,7 @@ prerequisites:
 
 ## 0. 10 分钟快速诊断
 
-1. **控制器存活**：检查 ArgoCD/[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 控制器 Pod 状态与日志。
+1. **控制器存活**：检查 [[entities/flux|Flux]] 控制器 Pod 状态与日志。
 2. **同步状态**：`kubectl get applications/helmreleases/kustomizations -A`，定位 OutOfSync/Failed。
 3. **仓库连接**：验证 repo secret/SSH key/Token，确认仓库可访问。
 4. **渲染检查**：确认 Helm/Kustomize 渲染是否失败或资源冲突。

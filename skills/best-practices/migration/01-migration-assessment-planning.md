@@ -1,5 +1,5 @@
 ---
-title: 01 - 迁移评估与规划
+title: 01 - 迁移评估与规划 [migration]
 description: 'description: echo "=== 3. 存储资源 ==="'
 category: general
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - etcd-basics
 - tls-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 01 - 迁移评估与规划
@@ -50,11 +51,11 @@ tags:
 - k8s
 - migration
 - modernization
-- etcd
-- kubelet
-- prometheus
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- cilium
+- [[Cilium|cilium]]
 - flannel
 - calico
 last_updated: 2026-05
@@ -531,13 +532,13 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 ---
 
-**下一步**: → [02-ACK 目标集群设计](./[[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]].md)
+**下一步**: → [02-ACK 目标集群设计](./02-ack-target-cluster-design.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
 - [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
@@ -551,10 +552,10 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/infrastructure/networking.md|networking]]
-- [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|storage]]
-- [[domain-11-production-operations/topic-best-practices/migration/02-ack-target-cluster-design.md|02-ack-target-cluster-design]]
-- [[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]]
+- networking
+- storage
+- 02-ack-target-cluster-design
+- 03-application-workload-migration
 
 ## Related
 

@@ -62,6 +62,8 @@ k8s_versions:
 - 1.30.x
 - 1.31.x
 - 1.32.x
+agent_execution_mode: L2-semi-auto
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl top nodes -o jsonpath='{range .items[?(@.usage.cpu!="<none>" && @.usage.memory!="<none>")]} {.metadata.name}{"\n"}{end}' 显示节点资源使用率超过 80% -->
@@ -72,7 +74,7 @@ k8s_versions:
 
 ## 1. 概述
 
-性能瓶颈是 Kubernetes 集群和云原生应用中最常见但也最难定位的问题之一。性能问题往往表现为延迟增加、吞吐量下降、资源使用异常等，其根因可能涉及多个层次：从基础设施（CPU/内存/磁盘/网络）到 Kubernetes 平台（API Server/etcd/Scheduler）再到应用层（代码逻辑/GC/连接池）。本 Skill 提供系统化的分层诊断方法，帮助快速定位性能瓶颈根因并给出针对性修复建议。
+性能瓶颈是 [[Kubernetes|Kubernetes]] 集群和云原生应用中最常见但也最难定位的问题之一。性能问题往往表现为延迟增加、吞吐量下降、资源使用异常等，其根因可能涉及多个层次：从基础设施（CPU/内存/磁盘/网络）到 Kubernetes 平台（API Server/etcd/Scheduler）再到应用层（代码逻辑/GC/连接池）。本 [[SKILL|Skill]] 提供系统化的分层诊断方法，帮助快速定位性能瓶颈根因并给出针对性修复建议。
 
 ### 覆盖范围
 
@@ -1514,7 +1516,7 @@ DURATION=30
 SSH_USER="root"
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --node|-n)     NODE="$2"; shift 2 ;;
         --duration|-d) DURATION="$2"; shift 2 ;;
@@ -1524,7 +1526,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$NODE" ]]; then
+if -z "$NODE"; then
     error "必须指定 --node 参数"
     usage
 fi
@@ -1694,7 +1696,7 @@ POD_NAME=""
 NODE_IP=""
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --namespace|-n) NAMESPACE="$2"; shift 2 ;;
         --pod|-p)       POD_NAME="$2"; shift 2 ;;
@@ -1704,7 +1706,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$NAMESPACE" ]]; then
+if -z "$NAMESPACE"; then
     error "必须指定 --namespace 参数"
     usage
 fi
@@ -1727,13 +1729,13 @@ echo -e "  命名空间: $NAMESPACE"
 echo -e "  时间: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
 
 # --- 获取 Pod 列表 ---
-if [[ -n "$POD_NAME" ]]; then
+if -n "$POD_NAME"; then
     PODS="$POD_NAME"
 else
     PODS=$(kubectl get pods -n "$NAMESPACE" -o jsonpath='{.items[*].metadata.name}' 2>/dev/null)
 fi
 
-if [[ -z "$PODS" ]]; then
+if -z "$PODS"; then
     warn "未找到 Pod"
     exit 0
 fi
@@ -1756,12 +1758,12 @@ for POD in $PODS; do
     
     # 检查是否可能被 throttling
     THROTTLED="-"
-    if [[ "$CPU_LIM" != "none" && "$CPU_USAGE" != "N/A" ]]; then
+    if "$CPU_LIM" != "none" && "$CPU_USAGE" != "N/A"; then
         # 简化判断：如果使用量接近 limit
         LIM_NUM=$(echo "$CPU_LIM" | sed 's/m$//' | sed 's/$/000/' | head -c 6)
         USE_NUM=$(echo "$CPU_USAGE" | sed 's/m$//')
-        if [[ "$USE_NUM" =~ ^[0-9]+$ ]] && [[ "$LIM_NUM" =~ ^[0-9]+$ ]]; then
-            if [[ $USE_NUM -gt $((LIM_NUM * 80 / 100)) ]]; then
+        if "$USE_NUM" =~ ^[0-9]+$ && "$LIM_NUM" =~ ^[0-9]+$; then
+            if $USE_NUM -gt $((LIM_NUM * 80 / 100)); then
                 THROTTLED="${YELLOW}LIKELY${NC}"
             else
                 THROTTLED="${GREEN}NO${NC}"
@@ -1844,7 +1846,7 @@ MEMORY_THRESHOLD=80
 API_LATENCY_THRESHOLD=1
 
 # --- 参数解析 ---
-while [[ $# -gt 0 ]]; do
+while $# -gt 0; do
     case "$1" in
         --namespace|-n)            NAMESPACE="$2"; shift 2 ;;
         --throttle-threshold)      THROTTLE_THRESHOLD="$2"; shift 2 ;;
@@ -1855,7 +1857,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$NAMESPACE" ]]; then
+if -z "$NAMESPACE"; then
     error "必须指定 --namespace 参数"
     usage
 fi
@@ -1875,23 +1877,23 @@ info "[V1] 验证 CPU Throttling 比例 < ${THROTTLE_THRESHOLD}%..."
 # 简化检查：检查 Pod CPU 使用是否接近 limit
 POD_STATS=$(kubectl top pods -n "$NAMESPACE" --no-headers 2>/dev/null || true)
 THROTTLE_ISSUES=0
-if [[ -n "$POD_STATS" ]]; then
+if -n "$POD_STATS"; then
     while read POD CPU MEM; do
         LIM=$(kubectl get pod "$POD" -n "$NAMESPACE" -o jsonpath='{.spec.containers[0].resources.limits.cpu}' 2>/dev/null || true)
-        if [[ -n "$LIM" && "$LIM" != "null" ]]; then
+        if -n "$LIM" && "$LIM" != "null"; then
             # 转换为毫核
             LIM_M=$(echo "$LIM" | sed 's/m$//')
             CPU_M=$(echo "$CPU" | sed 's/m$//')
-            if [[ "$CPU_M" =~ ^[0-9]+$ ]] && [[ "$LIM_M" =~ ^[0-9]+$ ]]; then
+            if "$CPU_M" =~ ^[0-9]+$ && "$LIM_M" =~ ^[0-9]+$; then
                 USAGE_PCT=$((CPU_M * 100 / LIM_M))
-                if [[ $USAGE_PCT -gt 90 ]]; then
+                if $USAGE_PCT -gt 90; then
                     ((THROTTLE_ISSUES++))
                 fi
             fi
         fi
     done <<< "$POD_STATS"
     
-    if [[ $THROTTLE_ISSUES -eq 0 ]]; then
+    if $THROTTLE_ISSUES -eq 0; then
         success "CPU Throttling 正常 (无 Pod CPU 接近 limit)"
     else
         fail "发现 $THROTTLE_ISSUES 个 Pod CPU 使用接近 limit (可能 throttling)"
@@ -1903,22 +1905,22 @@ fi
 # --- V2: 验证内存使用 < threshold% limit ---
 info "[V2] 验证内存使用 < ${MEMORY_THRESHOLD}% limit..."
 MEM_ISSUES=0
-if [[ -n "$POD_STATS" ]]; then
+if -n "$POD_STATS"; then
     while read POD CPU MEM; do
         LIM=$(kubectl get pod "$POD" -n "$NAMESPACE" -o jsonpath='{.spec.containers[0].resources.limits.memory}' 2>/dev/null || true)
-        if [[ -n "$LIM" && "$LIM" != "null" ]]; then
+        if -n "$LIM" && "$LIM" != "null"; then
             # 简化检查：仅检查是否有定义
             MEM_VAL=$(echo "$MEM" | sed 's/Mi$//')
-            if [[ "$MEM_VAL" =~ ^[0-9]+$ ]]; then
+            if "$MEM_VAL" =~ ^[0-9]+$; then
                 # 假设 limit 以 Gi 为单位，简化处理
-                if [[ $MEM_VAL -gt 3000 ]]; then
+                if $MEM_VAL -gt 3000; then
                     ((MEM_ISSUES++))
                 fi
             fi
         fi
     done <<< "$POD_STATS"
     
-    if [[ $MEM_ISSUES -eq 0 ]]; then
+    if $MEM_ISSUES -eq 0; then
         success "内存使用正常"
     else
         fail "发现 $MEM_ISSUES 个 Pod 内存使用较高"
@@ -1930,12 +1932,12 @@ fi
 # --- V3: 验证无 OOM 事件 ---
 info "[V3] 验证近期无 OOM 事件..."
 OOM_EVENTS=$(kubectl get events -n "$NAMESPACE" --field-selector reason=OOMKilled --sort-by=.lastTimestamp 2>/dev/null | tail -5 || true)
-if [[ -z "$OOM_EVENTS" || "$OOM_EVENTS" == *"No resources found"* ]]; then
+if -z "$OOM_EVENTS"; then
     success "无 OOM 事件"
 else
     # 检查是否是最近 15 分钟内的事件
     RECENT_OOM=$(echo "$OOM_EVENTS" | grep -v "^LAST" | head -3)
-    if [[ -n "$RECENT_OOM" ]]; then
+    if -n "$RECENT_OOM"; then
         fail "发现近期 OOM 事件:"
         echo "$RECENT_OOM" | while read line; do echo "    $line"; done
     else
@@ -1960,7 +1962,7 @@ fi
 # --- V5: 验证所有 Pod 运行正常 ---
 info "[V5] 验证 Pod 状态..."
 NOT_RUNNING=$(kubectl get pods -n "$NAMESPACE" --no-headers 2>/dev/null | grep -v "Running\|Completed" || true)
-if [[ -z "$NOT_RUNNING" ]]; then
+if -z "$NOT_RUNNING"; then
     success "所有 Pod 运行正常"
 else
     NOT_RUNNING_COUNT=$(echo "$NOT_RUNNING" | wc -l | tr -d ' ')
@@ -1970,7 +1972,7 @@ fi
 # --- 输出验证结果 ---
 echo -e "\n${BOLD}════════════════════════════════════════════════════════${NC}"
 TOTAL=$((PASS_COUNT + FAIL_COUNT))
-if [[ $FAIL_COUNT -eq 0 ]]; then
+if $FAIL_COUNT -eq 0; then
     echo -e "${GREEN}${BOLD}验证结果: 全部通过 ($PASS_COUNT/$TOTAL)${NC}"
     exit 0
 else

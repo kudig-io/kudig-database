@@ -49,9 +49,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# containerd Wasm 运行时
+# [[containerd|containerd]] Wasm 运行时
 # containerd Wasm Runtime
 
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
@@ -61,7 +62,7 @@ authors:
 3. [Wasm Shim 实现原理](#3-wasm-shim-实现原理)
 4. [安装与配置](#4-安装与配置)
 5. [RuntimeClass 配置](#5-runtimeclass-配置)
-6. [Kubernetes 集成](#6-kubernetes-集成)
+6. [[entities/kubernetes.md|Kubernetes]] 集成](#6-kubernetes-集成)
 7. [多运行时部署](#7-多运行时部署)
 8. [OCI Wasm 工件](#8-oci-wasm-工件)
 9. [性能调优](#9-性能调优)
@@ -970,7 +971,7 @@ spec:
                 - "true"
 ```
 
-#<!-- chunk: 6.2 Service 与 Ingress / Service and Ingress -->## 6.2 Service 与 Ingress / Service and Ingress
+#<!-- chunk: 6.2 Service 与 [[Ingress|Ingress]] / Service and Ingress -->## 6.2 Service 与 Ingress / Service and Ingress
 
 ```yaml
 # Wasm 服务
@@ -1961,22 +1962,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/99-wasmedge-cloud-native-guide.md|99-wasmedge-cloud-native-guide]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|01-wasm-fundamentals-cloud-native]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|03-spinkube-framework]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|04-wasmcloud-platform]]
+- 99-wasmedge-cloud-native-guide
+- 01-wasm-fundamentals-cloud-native
+- 03-spinkube-framework
+- 04-wasmcloud-platform

@@ -1,6 +1,46 @@
 ---
+title: 智慧医疗 Kubernetes 生产架构设计
+description: 'title: 智慧医疗Kubernetes生产架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- grafana
+- jaeger
+- cilium
+- harbor
+- falco
+- minio
+- postgresql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 智慧医疗 Kubernetes 生产架构设计 是什么
+- 如何 智慧医疗 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧医疗
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- cilium-basics
+- logging-basics
+- tracing-basics
+created: "2026-05-23"
+---
+
 title: 智慧医疗Kubernetes生产架构设计
-description: '# 智慧医疗 Kubernetes 生产架构设计'
+description: '# 智慧医疗 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -11,8 +51,6 @@ tags:
 - operator
 - llm
 - rag
-- prometheus
-- grafana
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert
@@ -39,13 +77,6 @@ trigger_keywords:
 - FHIR
 - HL7
 - 医保结算
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- cilium-basics
-- logging-basics
-- tracing-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-9-ai-ml
@@ -56,6 +87,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/73-smart-firefighting
 - domain-02-workloads-applications/topic-functions/09-data-security-privacy
 - topic-domain-01-cluster-fundamentals/03-privacy-protection
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧医疗 Kubernetes 生产架构设计
@@ -68,7 +108,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、互联网医院架构](#二互联网医院架构)
@@ -81,7 +121,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -129,7 +169,7 @@ flowchart TB
     style DataMed fill:#fff8e1
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
 | 架构层 | 阿里云方案 | 医疗合规 |
 |:---|:---|:---|
@@ -144,7 +184,7 @@ flowchart TB
 
 ---
 
-## 二、互联网医院架构
+<!-- chunk: 二、互联网医院架构 -->## 二、互联网医院架构
 
 ```mermaid
 flowchart TB
@@ -178,7 +218,7 @@ flowchart TB
 
 ---
 
-## 三、HIS/EMR 核心系统架构
+<!-- chunk: 三、HIS/EMR 核心系统架构 -->## 三、HIS/EMR 核心系统架构
 
 ```mermaid
 flowchart TB
@@ -212,7 +252,7 @@ flowchart TB
 
 ---
 
-## 四、医学影像云 (PACS) 架构
+<!-- chunk: 四、医学影像云 (PACS) 架构 -->## 四、医学影像云 (PACS) 架构
 
 ```mermaid
 flowchart TB
@@ -249,7 +289,7 @@ flowchart TB
     style View fill:#fff8e1
 ```
 
-### PACS 影像存储 [[entities/kubernetes|k8s]] 配置
+#<!-- chunk: PACS 影像存储 K8s 配置 -->## PACS 影像存储 K8s 配置
 
 ```yaml
 apiVersion: apps/v1
@@ -305,7 +345,7 @@ spec:
 
 ---
 
-## 五、医保结算与电子票据架构
+<!-- chunk: 五、医保结算与电子票据架构 -->## 五、医保结算与电子票据架构
 
 ```mermaid
 flowchart TB
@@ -338,7 +378,7 @@ flowchart TB
 
 ---
 
-## 六、医疗 AI 辅助诊断架构
+<!-- chunk: 六、医疗 AI 辅助诊断架构 -->## 六、医疗 AI 辅助诊断架构
 
 ```mermaid
 flowchart TB
@@ -376,7 +416,7 @@ flowchart TB
 
 ---
 
-## 七、数据安全与隐私保护架构
+<!-- chunk: 七、数据安全与隐私保护架构 -->## 七、数据安全与隐私保护架构
 
 ```mermaid
 flowchart TB
@@ -409,9 +449,9 @@ flowchart TB
 
 ---
 
-## 八、ACK 阿里云部署架构
+<!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-### 医疗等保三级部署
+#<!-- chunk: 医疗等保三级部署 -->## 医疗等保三级部署
 
 ```yaml
 apiVersion: apps/v1
@@ -478,7 +518,7 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云医疗行业解决方案](https://www.aliyun.com/solution/scenario/healthcare)
 - [FHIR 标准](https://www.hl7.org/fhir/)
@@ -486,9 +526,9 @@ spec:
 
 ---
 
-## 多云部署方案对照
+<!-- chunk: 多云部署方案对照 -->## 多云部署方案对照
 
-### 阿里云服务 → 多云映射表
+#<!-- chunk: 阿里云服务 → 多云映射表 -->## 阿里云服务 → 多云映射表
 
 | 能力域 | 阿里云服务 | AWS 对应 | GCP 对应 | Azure 对应 |
 |:---|:---|:---|:---|:---|
@@ -509,7 +549,7 @@ spec:
 | 视频转码 | **媒体处理** | **Elemental MediaConvert** | **Transcoder API** | **Media Services** |
 | 日志 | **SLS** | **CloudWatch Logs** | **Cloud Logging** | **Log Analytics** |
 
-### 多云部署注意事项
+#<!-- chunk: 多云部署注意事项 -->## 多云部署注意事项
 
 1. **医疗合规 (等保三级/HIPAA)**: 不同云厂商的医疗合规认证范围不同。在中国需关注等保三级和互联互通测评；在海外需关注 HIPAA BAA。多云部署时每朵云都需独立满足合规要求。
 2. **影像数据存储**: PACS 影像数据量巨大（单院 PB 级），跨云迁移成本高。建议影像存储在主云，通过 S3 兼容 API 暴露给跨云应用。冷数据可用各云归档存储（S3 Glacier / OSS 归档）。
@@ -518,7 +558,7 @@ spec:
 5. **AI 模型部署**: 医疗 AI 模型（如肺结节检测）建议使用 ONNX 格式，避免绑定单一云的 AI 平台。KServe / Triton 支持多云部署。
 6. **医保结算接口**: 医保结算通常走专线到医保局，与云厂商无关。多云部署时确保结算链路在主云完成，避免跨云调用增加延迟和风险。
 
-### 云中立方案（开源替代）
+#<!-- chunk: 云中立方案（开源替代） -->## 云中立方案（开源替代）
 
 | 能力域 | 开源方案 | 说明 |
 |:---|:---|:---|
@@ -535,3 +575,27 @@ spec:
 | 可观测性 | **Prometheus** + **Grafana** + **Loki** + **Jaeger** | 全栈开源 |
 | 安全扫描 | **Trivy** + **Falco** | 镜像扫描 + 运行时安全 |
 | 镜像仓库 | **Harbor** | 适合医疗行业私有化部署 |
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 12-smart-logistics-architecture
+- 13-digital-government-architecture
+- 15-energy-power-architecture
+- 16-video-shortform-architecture

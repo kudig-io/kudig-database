@@ -1,5 +1,5 @@
 ---
-title: StatefulSet 异常故障树分析
+title: StatefulSet 异常故障树分析 (skills)
 description: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
 category: general
 tags:
@@ -28,17 +28,18 @@ prerequisites:
 fta_id: FTA-STATEFULSET-001
 component: Statefulset
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
 title: "StatefulSet 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 StatefulSet Pod 非 Running --..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 StatefulSet Pod 非 Running --..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

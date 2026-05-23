@@ -57,6 +57,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
 # 27 - 节点与节点池管理 (Node & NodePool Management)
@@ -79,7 +80,7 @@ cross_refs:
 
 | 阶段 | 关键操作 | 建议命令 | 注意事项 |
 |------|----------|----------|----------|
-| **准备 (Provision)** | 通过 NodePool 创建/扩容节点 | ACK 控制台或 `cluster-autoscaler` | 统一镜像与 kubelet 配置, 预置监控/日志 DaemonSet |
+| **准备 (Provision)** | 通过 NodePool 创建/扩容节点 | ACK 控制台或 `cluster-autoscaler` | 统一镜像与 [[kubelet|kubelet]] 配置, 预置监控/日志 [[DaemonSet|DaemonSet]] |
 | **接入 (Join)** | 节点加入集群并打标签 | `kubectl label nodes` / `kubectl taint nodes` | 加入后立刻补齐 `env=prod`、`zone=xxx` 等业务标签 |
 | **维护 (Maintain)** | 打补丁/升级内核/重启宿主机 | `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` | 搭配 PDB, 控制同时维护的节点数量 |
 | **下线 (Decommission)** | 永久移除节点 | `kubectl drain` → `kubectl delete node` | 先确认无绑定本地盘/本地日志, 相关 Pod 已在其他节点稳定运行 |
@@ -98,7 +99,7 @@ kubectl get nodes -l env=prod
 
 | 能力 | 示例 | 作用 |
 |------|------|------|
-| **节点标签 (Label)** | `node.kubernetes.io/instance-type=ecs.g7.xlarge` | 匹配大规格计算节点, 用于 CPU 密集型服务 |
+| **节点标签 (Label)** | `node.[[Kubernetes|kubernetes]].io/instance-type=ecs.g7.xlarge` | 匹配大规格计算节点, 用于 CPU 密集型服务 |
 | | `zone=cn-hangzhou-h` | 控制跨 AZ 分布, 与 PV 拓扑、SLB 匹配 |
 | **节点污点 (Taint)** | `kubectl taint nodes node1 role=system:NoSchedule` | 仅允许带对应容忍 (Toleration) 的系统 Pod 调度上去 |
 | **Pod 亲和/反亲和** | `topologyKey: kubernetes.io/hostname` | 同一业务副本分散到不同节点/机架, 提升高可用 |
@@ -138,25 +139,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-02-workloads-applications/MOC.md|domain-02-workloads-applications MOC]]
+- domain-02-workloads-applications MOC
 - [[domain-02-workloads-applications/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|Domain-4 工作负载 — 开源项目索引]]
-- [[domain-02-workloads-applications/01-workload-overview-architecture.md|01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)]]
-- [[domain-02-workloads-applications/02-deployment-production-patterns.md|02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)]]
-- [[domain-02-workloads-applications/03-statefulset-advanced-operations.md|03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)]]
-- [[domain-02-workloads-applications/04-daemonset-management.md|04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)]]
-- [[domain-02-workloads-applications/05-job-cronjob-advanced.md|05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)]]
-- [[domain-02-workloads-applications/06-workload-monitoring-alerting.md|06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)]]
-- [[domain-02-workloads-applications/07-workload-troubleshooting-handbook.md|07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...]]
-- [[domain-02-workloads-applications/08-multi-cloud-workload-strategy.md|08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...]]
-- [[domain-02-workloads-applications/09-edge-computing-deployment.md|09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...]]
+- Domain-4 工作负载 — 开源项目索引
+- 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
+- 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
+- 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)
+- 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
+- 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
+- 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
+- 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Re...
+- 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
+- 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 
 ## See Also
 
-- [[domain-02-workloads-applications/16-runtime-class-configuration.md|16-runtime-class-configuration]]
-- [[domain-02-workloads-applications/17-container-images-registry.md|17-container-images-registry]]
-- [[domain-02-workloads-applications/19-scheduler-configuration.md|19-scheduler-configuration]]
-- [[domain-02-workloads-applications/20-kubelet-configuration.md|20-kubelet-configuration]]
+- 16-runtime-class-configuration
+- 17-container-images-registry
+- 19-scheduler-configuration
+- 20-kubelet-configuration
 
 ## Related
 

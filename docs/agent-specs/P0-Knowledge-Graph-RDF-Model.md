@@ -20,6 +20,7 @@ trigger_keywords:
 - 模型定义
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 知识图谱 RDF 模型定义
@@ -47,7 +48,7 @@ prerequisites:
 
 | 实体类型 | 说明 | 示例 |
 |----------|------|------|
-| FaultTree | 故障树 | FTA-NODE-023 |
+| FaultTree | 问题树 | FTA-NODE-023 |
 | RootCause | 根因 | RC-001 |
 | Skill | 技能文档 | SKILL-NODE-001 |
 | Symptom | 症状 | SYMP-001 |
@@ -60,10 +61,10 @@ prerequisites:
 
 ## 2. 核心关系定义
 
-### 2.1 故障树关系
+### 2.1 问题树关系
 
 ```turtle
-# 故障树包含顶事件
+# 问题树包含顶事件
 kudig:FTA-NODE-023 rdf:type kudig:FaultTree .
 kudig:FTA-NODE-023 kudig:hasTopEvent kudig:TE-NODE-001 .
 kudig:TE-NODE-001 rdf:type kudig:TopEvent ;
@@ -91,7 +92,7 @@ kudig:RC-001 rdf:type kudig:RootCause ;
 # 根因对应技能
 kudig:RC-001 kudig:coveredBy kudig:SKILL-NODE-001 .
 
-# 技能关联故障树
+# 技能关联问题树
 kudig:SKILL-NODE-001 rdf:type kudig:Skill ;
     kudig:skillId "SKILL-NODE-001" ;
     kudig:category "TC-INFRA-NODE" ;
@@ -131,7 +132,7 @@ kudig:REM-001 rdf:type kudig:Remediation ;
 kudig:SKILL-NODE-001 kudig:belongsTo kudig:DOMAIN-12 .
 kudig:DOMAIN-12 rdf:type kudig:Domain ;
     kudig:domainId "domain-10-troubleshooting-diagnostics" ;
-    kudig:title "故障排查" ;
+    kudig:title "问题排查" ;
     kudig:hasDocument kudig:DOC-01, kudig:DOC-02 .
 
 # 知识域交叉引用
@@ -141,7 +142,7 @@ kudig:DOMAIN-5 rdf:type kudig:Domain ; kudig:title "网络" .
 
 # 文档关联顶事件
 kudig:DOC-01 rdf:type kudig:Document ;
-    kudig:title "Node故障排查" ;
+    kudig:title "Node问题排查" ;
     kudig:covers kudig:TE-NODE-001, kudig:TE-NODE-002 .
 ```
 
@@ -153,11 +154,11 @@ kudig:DOC-01 rdf:type kudig:Document ;
 # 工单大类
 kudig:TC-INFRA rdf:type kudig:TicketCategory ;
     skos:prefLabel "基础设施" ;
-    skos:scopeNote "节点、网络、存储、控制平面等底层组件故障" .
+    skos:scopeNote "节点、网络、存储、控制平面等底层组件问题" .
 
 kudig:TC-APP rdf:type kudig:TicketCategory ;
     skos:prefLabel "应用层" ;
-    skos:scopeNote "[[concepts/pod-lifecycle|pod]]、Deployment、Service 等应用运行时故障" .
+    skos:scopeNote "[[concepts/pod-lifecycle|pod]]、Deployment、Service 等应用运行时问题" .
 
 kudig:TC-SEC rdf:type kudig:TicketCategory ;
     skos:prefLabel "安全合规" ;
@@ -165,15 +166,15 @@ kudig:TC-SEC rdf:type kudig:TicketCategory ;
 
 kudig:TC-DATA rdf:type kudig:TicketCategory ;
     skos:prefLabel "数据层" ;
-    skos:scopeNote "数据库、缓存、消息队列等数据相关故障" .
+    skos:scopeNote "数据库、缓存、消息队列等数据相关问题" .
 
 # 工单子类
 kudig:TC-INFRA-NODE rdf:type kudig:TicketSubcategory ;
-    skos:prefLabel "节点故障" ;
+    skos:prefLabel "节点问题" ;
     skos:broader kudig:TC-INFRA .
 
 kudig:TC-INFRA-NET rdf:type kudig:TicketSubcategory ;
-    skos:prefLabel "网络故障" ;
+    skos:prefLabel "网络问题" ;
     skos:broader kudig:TC-INFRA .
 
 kudig:TC-APP-POD rdf:type kudig:TicketSubcategory ;
@@ -317,7 +318,7 @@ WHERE {
 }
 ```
 
-### 6.2 查询技能覆盖的故障树
+### 6.2 查询技能覆盖的问题树
 
 ```sparql
 PREFIX kudig: <https://kudig.io/ontology/>

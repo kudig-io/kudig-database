@@ -1,5 +1,5 @@
 ---
-title: 集群升级异常故障树分析
+title: 集群升级异常故障树分析 (skills)
 description: NODE_KUBELET_OR --> NODE_KUBELET3[kubelet 配置不兼容]
 category: skills
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 fta_id: FTA-CLUSTER_UPGRADE-001
 component: Cluster Upgrade
 severity: high
+created: "2026-05-23"
 ---
 
 # 集群升级异常故障树分析

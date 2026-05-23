@@ -29,10 +29,18 @@ prerequisites:
 - gitops-basics
 - iac-basics
 - policy-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-07-platform-engineering/operate/13-multi-cluster-management]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/configuration/secrets]]"
+    type: uses
+  - target: "[[entities/argocd]]"
+    type: related_to
 ---
 
 ---
-title: 基础设施即代码 x 多集群管理
+title: 基础设施即代码 x [[domain-07-platform-engineering/operate/13-multi-cluster-management|多集群管理]]
 category: synthesis
 tags:
 - k8s
@@ -57,7 +65,7 @@ provenance:
   inferred: 0.7
   ambiguous: 0.1
 base_confidence: 0.88
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 
 tier: supporting---
@@ -66,7 +74,7 @@ tier: supporting---
 
 ## 连接点
 
-[[concepts/infrastructure-as-code.md|infrastructure-as-code]] 描述了 Terraform、Pulumi、Crossplane 等 IaC 工具的模式，[[concepts/platform-engineering-idp.md|platform-engineering-idp]] 提到 Crossplane 用于"平台抽象层——多云资源管理"，[[concepts/gitops-principles.md|gitops-principles]] 描述了 ArgoCD 和 Flux 的多集群能力。但 wiki 中没有一页专门讨论 **IaC 如何从根本上改变多集群管理的范式**——从手动 kubectl 切换到声明式集群生命周期管理。
+[[concepts/infrastructure-as-code.md|infrastructure-as-code]] 描述了 Terraform、Pulumi、Crossplane 等 IaC 工具的模式，[[concepts/platform-engineering-idp.md|platform-engineering-idp]] 提到 Crossplane 用于"平台抽象层——多云资源管理"，[[concepts/gitops-principles.md|gitops-principles]] 描述了 [[entities/argocd|ArgoCD]] 和 Flux 的多集群能力。但 wiki 中没有一页专门讨论 **IaC 如何从根本上改变多集群管理的范式**——从手动 kubectl 切换到声明式集群生命周期管理。
 
 ## 共现场景
 
@@ -139,5 +147,7 @@ GitOps 协调 (Flux/ArgoCD 跨 N 个集群同步)
 - [[kyverno]] — Kyverno
 - [[crossplane]] — Crossplane
 - [[cni]] — CNI (Container Network Interface)
-- [[sops]] — SOPS (Secrets OPerationS)
+- [[sops]] — SOPS ([[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]] OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
+- [[entities/helm|Helm (entities)]]
+- [[entities/argo|Argo Workflows]]

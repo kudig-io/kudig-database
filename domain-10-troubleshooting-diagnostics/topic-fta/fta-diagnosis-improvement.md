@@ -1,5 +1,5 @@
 ---
-title: FTA 排查逻辑改进建议
+title: FTA 排查逻辑改进建议 (domain-10-troubleshooting-diagnostics)
 description: 'title: FTA 排查逻辑改进建议'
 category: fta
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 fta_id: FTA-FTA_DIAGNOSIS_IMPROVEMENT-001
 component: Fta Diagnosis Improvement
 severity: critical
+created: "2026-05-23"
 ---
 
 title: FTA 排查逻辑改进建议
@@ -46,8 +47,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- ingress
+- [[etcd|etcd]]
+- [[Ingress|ingress]]
 - agent
 last_updated: 2026-05
 difficulty: advanced

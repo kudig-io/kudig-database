@@ -1,7 +1,44 @@
 ---
+title: Agent Harness 多 Agent 编排 (domain-14-ai-ml-infra)
+description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,'
+category: general
+tags:
+- ai
+- ai-agent
+- prometheus
+- helm
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- Agent Harness 多 Agent 编排 是什么
+- 如何 Agent Harness 多 Agent 编排
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- Agent
+- 编排
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 多 Agent 编排
-description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent, 编排, Orchestrator, 分层 Harness, Agent 通信,
-  任务分解, 冲突解决, 隔离原则, DAG, 工作流'
+description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Multi-Agent,
+  编排, Orchestrator, 分层 Harness, Agent 通信, 任务分解, 冲突解决, 隔离原则, DAG, 工作流'
 category: ai-agent
 tags:
 - ai
@@ -9,8 +46,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -29,11 +66,15 @@ trigger_keywords:
 - 编排
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 多 Agent 编排
@@ -42,17 +83,17 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 单个 Agent 的 Harness 就绪后，下一步挑战是**多 Agent 的 Harness 编排**。生产级系统往往需要多个专业化 Agent 协作——诊断 Agent 找根因、修复 Agent 执行操作、验证 Agent 确认恢复。每个 Agent 都有独立的 Harness（不同的权限、工具、约束），编排层需要协调它们的协作、通信和冲突解决。
 
-本文系统阐述多 Agent 编排模式、Orchestrator 设计、Agent 通信协议、任务分解与分配、Harness 隔离原则、冲突解决机制，以及 [[entities/kubernetes|k8s]] 运维场景中的多 Agent 协作实践。
+本文系统阐述多 Agent 编排模式、Orchestrator 设计、Agent 通信协议、任务分解与分配、Harness 隔离原则、冲突解决机制，以及 K8S 运维场景中的多 Agent 协作实践。
 
 ---
 
-## 1. 多 Agent 编排模式
+<!-- chunk: 1. 多 Agent 编排模式 -->## 1. 多 Agent 编排模式
 
-### 1.1 四种核心编排模式
+#<!-- chunk: 1.1 四种核心编排模式 -->## 1.1 四种核心编排模式
 
 ```
 多 Agent 编排模式:
@@ -85,7 +126,7 @@ prerequisites:
    示例: 两个诊断 Agent 交叉验证根因
 ```
 
-### 1.2 模式选择矩阵
+#<!-- chunk: 1.2 模式选择矩阵 -->## 1.2 模式选择矩阵
 
 | 模式 | 适用场景 | 延迟 | 成本 | 可靠性 | 复杂度 |
 |------|---------|------|------|--------|--------|
@@ -96,9 +137,9 @@ prerequisites:
 
 ---
 
-## 2. Orchestrator 设计
+<!-- chunk: 2. Orchestrator 设计 -->## 2. Orchestrator 设计
 
-### 2.1 编排器架构
+#<!-- chunk: 2.1 编排器架构 -->## 2.1 编排器架构
 
 ```python
 from dataclasses import dataclass, field
@@ -269,9 +310,9 @@ class Orchestrator:
 
 ---
 
-## 3. Agent 间通信
+<!-- chunk: 3. Agent 间通信 -->## 3. Agent 间通信
 
-### 3.1 消息协议
+#<!-- chunk: 3.1 消息协议 -->## 3.1 消息协议
 
 ```python
 from dataclasses import dataclass, field
@@ -358,7 +399,7 @@ class MessageBus:
                 ))
 ```
 
-### 3.2 共享上下文管理
+#<!-- chunk: 3.2 共享上下文管理 -->## 3.2 共享上下文管理
 
 ```python
 class SharedContext:
@@ -403,9 +444,9 @@ class SharedContext:
 
 ---
 
-## 4. Harness 隔离原则
+<!-- chunk: 4. Harness 隔离原则 -->## 4. Harness 隔离原则
 
-### 4.1 Agent 隔离架构
+#<!-- chunk: 4.1 Agent 隔离架构 -->## 4.1 Agent 隔离架构
 
 ```
 多 Agent Harness 隔离:
@@ -438,7 +479,7 @@ class SharedContext:
 └──────────────────────────────────────────────────────┘
 ```
 
-### 4.2 隔离配置实现
+#<!-- chunk: 4.2 隔离配置实现 -->## 4.2 隔离配置实现
 
 ```python
 class IsolatedHarnessFactory:
@@ -533,9 +574,9 @@ class IsolatedHarnessFactory:
 
 ---
 
-## 5. 冲突解决
+<!-- chunk: 5. 冲突解决 -->## 5. 冲突解决
 
-### 5.1 冲突类型与解决策略
+#<!-- chunk: 5.1 冲突类型与解决策略 -->## 5.1 冲突类型与解决策略
 
 ```python
 class ConflictResolver:
@@ -630,9 +671,9 @@ class ConflictResolver:
 
 ---
 
-## 6. K8S 故障处置多 Agent 编排
+<!-- chunk: 6. K8S 故障处置多 Agent 编排 -->## 6. K8S 故障处置多 Agent 编排
 
-### 6.1 故障处置流水线
+#<!-- chunk: 6.1 故障处置流水线 -->## 6.1 故障处置流水线
 
 ```python
 class IncidentResponsePipeline:
@@ -707,9 +748,9 @@ class IncidentResponsePipeline:
 
 ---
 
-## 7. 分层 Harness 架构
+<!-- chunk: 7. 分层 Harness 架构 -->## 7. 分层 Harness 架构
 
-### 7.1 基础层 + 场景层 + 用户层
+#<!-- chunk: 7.1 基础层 + 场景层 + 用户层 -->## 7.1 基础层 + 场景层 + 用户层
 
 ```python
 class LayeredHarnessArchitecture:
@@ -771,9 +812,9 @@ class LayeredHarnessArchitecture:
 
 ---
 
-## 8. 最佳实践
+<!-- chunk: 8. 最佳实践 -->## 8. 最佳实践
 
-### 8.1 多 Agent 编排核心原则
+#<!-- chunk: 8.1 多 Agent 编排核心原则 -->## 8.1 多 Agent 编排核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -784,7 +825,7 @@ class LayeredHarnessArchitecture:
 | **分层配置** | 基础+场景+用户三层 Harness | 使用 LayeredHarnessArchitecture |
 | **异步通信** | Agent 间通过消息总线通信 | 使用 MessageBus 解耦 |
 
-### 8.2 反模式
+#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -796,7 +837,7 @@ class LayeredHarnessArchitecture:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -806,7 +847,7 @@ class LayeredHarnessArchitecture:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -818,3 +859,27 @@ class LayeredHarnessArchitecture:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 多 Agent 编排。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 35-agent-harness-security-constraints
+- 36-agent-harness-observability
+- 38-agent-harness-performance-cost
+- 39-agent-harness-testing-benchmark

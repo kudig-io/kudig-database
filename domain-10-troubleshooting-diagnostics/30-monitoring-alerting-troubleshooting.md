@@ -66,6 +66,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md
   label: '运维技能: 15-monitoring-alerting-failure'
+created: "2026-05-23"
 ---
 
 # 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
@@ -82,7 +83,7 @@ cross_refs:
 | **监控数据缺失** | 指标采集失败 | 可见性丧失 | P0 - 紧急 |
 | **告警不触发** | 严重问题未告警 | 故障发现延迟 | P0 - 紧急 |
 | **告警风暴** | 大量误报 | 运维疲劳 | P1 - 高 |
-| **监控组件故障** | Prometheus/Grafana宕机 | 监控系统瘫痪 | P0 - 紧急 |
+| **监控组件故障** | [[Prometheus|Prometheus]]/Grafana宕机 | 监控系统瘫痪 | P0 - 紧急 |
 | **指标延迟** | 数据更新滞后 | 决策依据不准 | P1 - 高 |
 
 ### 1.2 监控告警架构回顾
@@ -976,9 +977,9 @@ EOF
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

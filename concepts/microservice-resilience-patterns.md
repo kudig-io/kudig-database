@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 # Microservice Resilience Patterns
@@ -60,7 +61,7 @@ Hierarchical timeout design: outer timeout > inner timeout at each layer.
 
 ### 4. Bulkhead Isolation
 
-Limits resource consumption so one service failure does not exhaust all resources.
+Limits resource consumption so one [[Service|service]] failure does not exhaust all resources.
 
 - **Mesh layer**: Istio DestinationRule connectionPool (max connections, max pending requests)
 - **App layer**: Resilience4j Bulkhead (semaphore or thread pool isolation)
@@ -92,10 +93,10 @@ Istio circuit breaker (OutlierDetection):
 
 - [[istio]] — Istio
 - [[envoy]] — Envoy
-- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — Production Operations Best Practices
-- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture
+- [[concepts/production-operations-best-practices.md|production-operations-best-practices]] — [[references/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]]
+- [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — [[Service Mesh Architecture|Service Mesh Architecture]]
 - [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
 - [[concepts/production-operations-best-practices.md|Production Operations Best Practices]]
 - [[istio|Istio]]
 
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|09-microservice-resilience-patterns]]
+- 09-microservice-resilience-patterns

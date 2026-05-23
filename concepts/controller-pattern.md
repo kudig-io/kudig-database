@@ -30,6 +30,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Controller Pattern (Reconciliation Loop)
@@ -57,10 +58,10 @@ This architecture ensures controllers are resilient to API Server outages and ne
 
 | Controller | Observes | Manages | Purpose |
 |-----------|----------|---------|---------|
-| Deployment Controller | Deployment | ReplicaSet | Rolling updates, rollback |
+| Deployment Controller | Deployment | [[ReplicaSet|ReplicaSet]] | Rolling updates, rollback |
 | ReplicaSet Controller | ReplicaSet | Pod | Maintain replica count |
-| StatefulSet Controller | StatefulSet | Pod, PVC | Ordered stateful management |
-| DaemonSet Controller | DaemonSet, Node | Pod | One Pod per node |
+| [[StatefulSet|StatefulSet]] Controller | StatefulSet | Pod, PVC | Ordered stateful management |
+| [[DaemonSet|DaemonSet]] Controller | DaemonSet, Node | Pod | One Pod per node |
 | Job Controller | Job | Pod | Run-to-completion tasks |
 | Node Controller | Node | Pod (eviction) | Node health monitoring |
 | PV Controller | PV, PVC | PV, PVC | Volume binding |
@@ -88,5 +89,5 @@ This architecture ensures controllers are resilient to API Server outages and ne
 - [[operator-pattern|Operator Pattern]]
 - [[concepts/eventual-consistency.md|Eventual Consistency]]
 
-- [[domain-01-cluster-fundamentals/03-controller-pattern.md|控制器模式与调谐循环]]
+- 控制器模式与调谐循环
 - [[entities/metal3-io|Metal3]] — Cross-reference

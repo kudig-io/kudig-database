@@ -1,5 +1,5 @@
 ---
-title: KitOps
+title: KitOps (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - KitOps
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # KitOps
@@ -65,8 +66,8 @@ KitOps 是一个 MLOps/AI 工件打包和版本管理工具，使用 OCI 标准�
 - [[kube-vip]] — kube-vip
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/kitops/kitops.md|kitops]]
-- [[entities/slimtoolkit.md|SlimToolkit]]
+- kitops
+- [[entities/slimtoolkit.md|[[SlimToolkit|SlimToolkit]]]]
 - [[entities/modelpack.md|ModelPack]]
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

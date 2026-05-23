@@ -31,6 +31,7 @@ prerequisites:
 - gpu-ml-basics
 - gitops-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ title: 项目 P4: GitOps 流水线
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - argocd gitops 完整部署配置
+  - [[ArgoCD|argocd]] gitops 完整部署配置
   - kustomize 多环境管理 base overlays
   - argocd application 同步策略配置
   - 多集群 gitops 部署方案
@@ -556,7 +557,7 @@ spec:
 
 ### Q3: 如何处理 Secret 的 GitOps 管理？
 
-Secret 不应直接以明文存储在 Git 中。推荐方案：1）使用 Sealed Secret（加密后存储在 Git 中，集群中自动解密）；2）使用 SOPS（Mozilla SOPS 加密文件）；3）使用 Vault 配合 ArgoCD 的 Vault Plugin。
+Secret 不应直接以明文存储在 Git 中。推荐方案：1）使用 Sealed Secret（加密后存储在 Git 中，集群中自动解密）；2）使用 [[SOPS|SOPS]]（Mozilla SOPS 加密文件）；3）使用 Vault 配合 ArgoCD 的 Vault Plugin。
 
 ### Q4: 如何实现 GitOps 的多集群管理？
 

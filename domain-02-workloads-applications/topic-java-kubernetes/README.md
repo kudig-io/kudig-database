@@ -38,9 +38,10 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
-# Java on Kubernetes 综合实践指南
+# Java on [[Kubernetes|Kubernetes]] 综合实践指南
 
 > **一站式 Java + Kubernetes 知识入口** | 12 篇专题指南 | 覆盖从容器化到生产的完整生命周期
 > **适用版本**: JDK 17+ / Spring Boot 3.x / Quarkus 3.x / GraalVM for JDK 17+ / Kubernetes v1.28+
@@ -61,12 +62,12 @@ Java 是企业级后端开发的第一大语言，Kubernetes 是容器编排的�
 | 维度 | 传统部署 | Kubernetes 部署 |
 |------|---------|----------------|
 | 资源模型 | 物理内存/CPU 为边界 | cgroups 限制，需容器感知 |
-| 网络模型 | 固定 IP | Service/DNS 动态发现 |
+| 网络模型 | 固定 IP | [[Service|Service]]/DNS 动态发现 |
 | 配置管理 | 本地配置文件 | ConfigMap/Secret 动态注入 |
 | 生命周期 | 手动启停 | 探针驱动的自动化生命周期管理 |
 | 日志 | 本地文件轮转 | stdout → 日志收集器 |
 | 弹性 | 手动扩缩 | HPA/VPA 自动伸缩 |
-| 密钥 | 文件/密钥库 | Secret + External Secrets Operator |
+| 密钥 | 文件/密钥库 | Secret + External Secrets Operators]] Operator |
 | 发布 | 停机部署 | 滚动更新 + 金丝雀 |
 
 ### 1.2 核心技术栈全景
@@ -126,7 +127,7 @@ graph TB
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 3 | [JVM GC 容器调优深度指南](./domain-10-troubleshooting-diagnostics/99-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
+| 3 | JVM GC 容器调优深度指南](./domain-10-troubleshooting-diagnostics/99-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
 | 4 | [Java 性能调优与资源 Sizing](./domain-10-troubleshooting-diagnostics/99-java-performance-resource-sizing-guide.md) | 资源 Sizing 公式、启动优化、线程池调优、CDS/AppCDS | 高级 |
 
 ### 2.3 框架 (3 篇)
@@ -698,23 +699,27 @@ EOF
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+## 相关合成分析
+
+- [[synthesis/gpu-scheduling-ai-workloads.md|gpu-scheduling-ai-workloads]]

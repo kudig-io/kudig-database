@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # domain-12-cloud-providers MOC
@@ -55,7 +56,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-17 云厂商 — 开源项目索引]] |  | cloud, multi-cloud |  |
+| 1 | Domain-17 云厂商 — 开源项目索引 |  | cloud, multi-cloud |  |
 
 ---
 
@@ -79,9 +80,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-12-cloud-providers 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-12-cloud-providers 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-12-cloud-providers 相关故障树分析 |
+| Skills 技能 | domain-12-cloud-providers 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

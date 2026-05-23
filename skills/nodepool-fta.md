@@ -1,5 +1,5 @@
 ---
-title: NodePool 异常故障树分析
+title: NodePool 异常故障树分析 (skills)
 description: '- **范围**：容量管理、自动扩缩容、调度与标签、节点初始化、镜像与运行时、网络与安全策略、控制面依赖。'
 category: skills
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 fta_id: FTA-NODEPOOL-001
 component: Nodepool
 severity: high
+created: "2026-05-23"
 ---
 
 # NodePool 异常故障树分析
@@ -129,7 +130,7 @@ flowchart TD
 - **关键日志**：
   - cluster-autoscaler 日志
   - 云平台伸缩组日志
-  - kubelet 启动日志
+  - [[kubelet|kubelet]] 启动日志
   - cloud-init / user-data 脚本日志
 - **配置核对**：
   - 节点池规格/镜像版本

@@ -32,6 +32,7 @@ prerequisites:
 - gpu-ml-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Week 1 Checkpoint: 自测检验
@@ -77,7 +78,7 @@ related_topics:
   - kubernetes
   - troubleshooting
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md
+  - domain-11-production-operations/topic-learn/public-training/one-month/[[domain-04-storage-data/README|README]].md
   - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
 ---
 ```
@@ -177,7 +178,7 @@ cgroup (Control Group) 子系统与 K8s 资源映射:
 | memory | 内存使用量 | resources.requests.memory / limits.memory | 128Mi / 256Mi |
 | blkio | 块设备 IO | 无直接字段 (通过 device manager) | - |
 | devices | 设备访问 | securityContext | - |
-| pids | 进程数量 | 无直接字段 (kubelet 配置) | - |
+| pids | 进程数量 | 无直接字段 ([[kubelet|kubelet]] 配置) | - |
 
 K8s QoS 等级:
 
@@ -207,7 +208,7 @@ spec:
 
 ---
 
-### 4. K8s 的 etcd、API Server、Scheduler、Controller Manager 各做什么？
+### 4. K8s 的 [[etcd|etcd]]、API Server、Scheduler、Controller Manager 各做什么？
 
 **你的回答:**
 

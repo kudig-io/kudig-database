@@ -36,11 +36,12 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 08 - AI/ML基础设施专业词典
 
-> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 ---
 
@@ -84,7 +85,7 @@ prerequisites:
 |------|------|----------|----------|----------|
 | **GPU时间切片** | 将单个GPU虚拟化为多个逻辑GPU实例的技术 | 通过设备插件实现资源共享，支持多租户 | 开发环境、小模型推理 | NVIDIA Time-Slicing, vGPU |
 | **MIG实例** | 多实例GPU技术，将物理GPU切分为多个独立实例 | A100/H100支持，硬件级隔离，显存/CUDA核心独立 | 多租户推理、混合工作负载 | NVIDIA MIG Manager |
-| **GPU拓扑感知调度** | 考虑GPU间NVLink/PCIe拓扑关系的调度策略 | NUMA亲和性、带宽优化、减少跨节点通信 | 分布式训练、大模型推理 | Volcano, Kueue |
+| **GPU拓扑感知调度** | 考虑GPU间NVLink/PCIe拓扑关系的调度策略 | NUMA亲和性、带宽优化、减少跨节点通信 | 分布式训练、大模型推理 | [[Volcano|Volcano]], Kueue |
 | **Gang调度** | 将一组Pod作为一个整体进行调度的机制 | 全部成功或全部失败，避免资源碎片 | 分布式训练、MPI作业 | Volcano, Kube-Batch |
 | **GPU共享池** | 多个工作负载共享同一GPU资源池的管理方式 | 内存隔离、算力分配、优先级管理 | 推理服务、批量处理 | NVIDIA MPS, Run:ai |
 
@@ -211,7 +212,7 @@ prerequisites:
 > 1. **Pipelines**: 将ML工作流定义为DAG(有向无环图),每个步骤是一个容器,自动处理依赖和数据传递
 > 2. **Training Operator**: 提供PyTorchJob、TFJob等CRD,简化分布式训练配置,自动管理参数服务器和worker节点
 > 3. **Katib**: 自动尝试不同超参数组合,使用贝叶斯优化等算法找到最优配置,类似AutoML
-> 4. **KServe**: 提供统一的模型服务接口,支持自动扩缩容、金丝雀发布、流量分割等高级功能
+> 4. **[[KServe|KServe]]**: 提供统一的模型服务接口,支持自动扩缩容、金丝雀发布、流量分割等高级功能
 >
 > **📝 最小示例**:
 > ```yaml

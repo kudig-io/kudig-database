@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Pod Hostname
@@ -40,7 +41,7 @@ prerequisites:
   - 同时设置 `hostname` 和 `subdomain` 时，集群 DNS 服务器会为 Pod 创建 A/AAAA 记录。
 - **FQDN 作为主机名（`setHostnameAsFQDN`）**：
   - 默认情况下，`hostname` 命令返回短主机名。
-  - 设置 `setHostnameAsFQDN: true` 后，kubelet 会将 FQDN 写入 Pod 的 hostname 命名空间，`hostname` 和 `hostname --fqdn` 均返回 FQDN。
+  - 设置 `setHostnameAsFQDN: true` 后，[[kubelet|kubelet]] 会将 FQDN 写入 Pod 的 hostname 命名空间，`hostname` 和 `hostname --fqdn` 均返回 FQDN。
   - Linux 内核的 hostname 字段限制为 64 个字符；若 FQDN 超过此长度，Pod 将无法启动（停留在 `ContainerCreating`）。
 - **主机名覆盖（`hostnameOverride`）**：
   - Beta 特性（v1.35 默认启用）。
@@ -56,7 +57,7 @@ prerequisites:
 
 ## 使用场景
 - 应用依赖特定主机名进行许可证验证或集群成员识别。
-- 需要为 StatefulSet Pod 提供稳定且可预测的网络标识。
+- 需要为 [[StatefulSet|StatefulSet]] Pod 提供稳定且可预测的网络标识。
 - 在 Pod 内部模拟特定的域名环境。
 
 ## 最佳实践/注意事项
@@ -231,7 +232,7 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 
 ## 交叉引用
 
-- [StatefulSets](statefulsets.md) — 自动管理稳定网络标识的首选方案
+- [[domain-17-system-foundation/topic-dictionary/workloads/statefulsets.md|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
 - [Pods](pods.md) — Pod 基础概念和 metadata.name
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 

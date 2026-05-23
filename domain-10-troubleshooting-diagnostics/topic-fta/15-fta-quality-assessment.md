@@ -1,5 +1,5 @@
 ---
-title: 第十五章：FTA 质量评估与优化
+title: 第十五章：FTA 质量评估与优化 (domain-10-troubleshooting-diagnostics)
 description: 'title: 第十五章：FTA 质量评估与优化'
 category: fta
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 fta_id: FTA-15_QUALITY_ASSESSMENT-001
 component: 15 Quality Assessment
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第十五章：FTA 质量评估与优化
@@ -78,8 +79,8 @@ k8s_versions:
 
 > **所属部分**: 第四部分 - FTA 系统工程实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第十四章：构建 FTA 系统的工程化方法](./14-fta-system-engineering.md)  
-> **下一章**: [第十六章：团队能力建设](./16-team-capability-building.md)
+> **上一章**: 第十四章：构建 FTA 系统的工程化方法](./14-fta-system-engineering.md)  
+> **下一章**: 第十六章：团队能力建设](./16-team-capability-building.md)
 
 ---
 

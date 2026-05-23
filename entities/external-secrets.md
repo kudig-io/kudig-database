@@ -1,5 +1,5 @@
 ---
-title: External Secrets Operator
+title: External Secrets Operator (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,9 +24,10 @@ trigger_keywords:
 - Operator
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# External Secrets Operator
+# External Secretsts|Secrets]] Operator
 
 > **CNCF 状态**: Sandbox | **类别**: Supply Chain | **主要语言**: Go
 
@@ -74,7 +75,7 @@ External Secrets Operator (ESO) 将外部密钥管理系统（如 AWS Secrets Ma
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/external-secrets/external-secrets.md|external-secrets]]
+- external-secrets
 - [[entities/ratify.md|Ratify]]
 - [[references/kudig-ecosystem-guide|KUDIG 开源生态指南与深度研究指南]] — Cross-reference
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference

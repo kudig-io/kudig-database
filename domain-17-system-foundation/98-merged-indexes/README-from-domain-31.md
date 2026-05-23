@@ -28,6 +28,7 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---

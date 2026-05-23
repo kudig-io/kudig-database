@@ -1,5 +1,5 @@
 ---
-title: 控制面组件部署 (Static Pod Manifests)
+title: 控制面组件部署 (Static Pod Manifests) [cluster-create]
 description: 'title: 控制面组件部署 (Static Pod Manifests)'
 category: general
 tags:
@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 控制面组件部署 (Static Pod Manifests)

@@ -1,5 +1,5 @@
 ---
-title: 游戏后端 Kubernetes 生产架构设计
+title: 游戏后端 Kubernetes 生产架构设计 (domain-20-application-patterns)
 description: 'title: 游戏后端 Kubernetes 生产架构设计'
 category: general
 tags:
@@ -35,9 +35,10 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-title: 游戏后端 Kubernetes 生产架构设计
+title: 游戏后端 [[Kubernetes|Kubernetes]] 生产架构设计
 description: '# 游戏后端 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
@@ -48,7 +49,7 @@ tags:
 - mysql
 - kafka
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 - gateway
 - operator
 last_updated: 2026-05-18
@@ -634,8 +635,8 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -649,7 +650,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/07-iot-platform-architecture.md|07-iot-platform-architecture]]
-- [[domain-20-application-patterns/08-ai-ml-inference-architecture.md|08-ai-ml-inference-architecture]]
-- [[domain-20-application-patterns/10-social-media-architecture.md|10-social-media-architecture]]
-- [[domain-20-application-patterns/11-smart-retail-architecture.md|11-smart-retail-architecture]]
+- 07-iot-platform-architecture
+- 08-ai-ml-inference-architecture
+- 10-social-media-architecture
+- 11-smart-retail-architecture

@@ -37,6 +37,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 太空互联网架构设计
@@ -47,7 +48,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -63,7 +64,7 @@ audience:
 - 天地一体化网络工程师
 estimated_read_time: 5min
 intent_queries:
-- space internet satellite kubernetes
+- space internet satellite [[Kubernetes|kubernetes]]
 - 太空互联网K8s架构
 - 卫星运管微服务设计
 - 遥感数据处理平台
@@ -831,7 +832,7 @@ stringData:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -846,11 +847,11 @@ stringData:
 
 ## See Also
 
-- [[domain-20-application-patterns/64-ai-drug-discovery.md|64-ai-drug-discovery]]
-- [[domain-20-application-patterns/65-autonomous-driving-sim.md|65-autonomous-driving-sim]]
-- [[domain-20-application-patterns/67-brain-computer-interface.md|67-brain-computer-interface]]
-- [[domain-20-application-patterns/68-quantum-computing-cloud.md|68-quantum-computing-cloud]]
+- 64-ai-drug-discovery
+- 65-autonomous-driving-sim
+- 67-brain-computer-interface
+- 68-quantum-computing-cloud
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

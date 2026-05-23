@@ -49,6 +49,7 @@ cross_refs:
 - type: domain
   path: ../domain-07-platform-engineering/
   label: '相关知识域: domain-07-platform-engineering'
+created: "2026-05-23"
 ---
 
 # Domain-10 扩展与自定义 — 开源项目索引
@@ -379,15 +380,15 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-15-specialized-tech MOC]]
+- domain-15-specialized-tech MOC
 - [[domain-15-specialized-tech/README.md|Domain-10: Kubernetes 扩展生态]]
-- [[domain-15-specialized-tech/01-crd-development-guide.md|CRD 自定义资源定义开发指南]]
-- [[domain-15-specialized-tech/02-operator-development-patterns.md|02 - Operator开发模式与控制器实现]]
-- [[domain-15-specialized-tech/03-admission-webhook-configuration.md|03 - 准入控制器(Webhook)配置与实现]]
-- [[domain-15-specialized-tech/04-api-aggregation-extension.md|Kubernetes API 聚合扩展机制详解]]
-- [[domain-15-specialized-tech/05-package-management-tools.md|包管理与应用分发工具]]
-- [[domain-15-specialized-tech/06-helm-charts-management.md|47 - Helm Chart开发与管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations.md|129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践]]
-- [[domain-15-specialized-tech/08-cicd-pipelines.md|CI/CD 管道]]
-- [[domain-15-specialized-tech/09-gitops-workflow-argocd.md|48 - GitOps工作流]]
-- [[domain-15-specialized-tech/10-image-build-tools.md|103 - 容器镜像构建工具 (Container Image Build)]]
+- CRD 自定义资源定义开发指南
+- 02 - Operator开发模式与控制器实现
+- 03 - 准入控制器(Webhook)配置与实现
+- Kubernetes API 聚合扩展机制详解
+- 包管理与应用分发工具
+- 47 - Helm Chart开发与管理
+- 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+- CI/CD 管道
+- 48 - GitOps工作流
+- 103 - 容器镜像构建工具 (Container Image Build)

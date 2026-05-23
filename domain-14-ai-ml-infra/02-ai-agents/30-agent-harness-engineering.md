@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计
+title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计 (domain-14-ai-ml-infra)
 description: 'title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计'
 category: general
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - redis-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计
@@ -50,11 +51,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
-- helm
-- containerd
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[containerd|containerd]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -1342,11 +1343,11 @@ L5 - 自进化 Harness
 |------|--------|
 | [01 - AI Agent 基础](./01-ai-agent-fundamentals.md) | Agent Loop、ReAct 推理模式——Harness Loop 层的理论基础 |
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LangChain/LangGraph——Harness 的工程载体 |
-| [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | 工具调用规范——Harness Tools 层的实现基础 |
+| [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | 工具调用规范——Harness Tools 层的实现基础 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 记忆系统——Harness Persistence 层的核心能力 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | RAGAS/LLM-as-Judge——Harness Verification 层的评测工具 |
-| [09 - 生产部署指南](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md) | K8s 部署——Harness 的运行基础设施 |
-| [10 - 安全护栏](./[[domain-14-ai-ml-infra/10-security-guardrails.md|10-security-guardrails]].md) | 安全框架——Harness Constraints 层的安全实现 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | RAGAS/LLM-as-Judge——Harness Verification 层的评测工具 |
+| [09 - 生产部署指南](./09-production-deployment-guide.md) | K8s 部署——Harness 的运行基础设施 |
+| [10 - 安全护栏](./10-security-guardrails.md) | 安全框架——Harness Constraints 层的安全实现 |
 | [43 - OpenClaw File-First 架构集成](./43-openclaw-framework-integration.md) | SOUL.md/SKILL.md 分层设计的完整实施方案、File-First 与 Harness 融合 |
 | [openclaw-workspace/](./openclaw-workspace/) | K8S 运维 Agent 的完整 7 文件工作区配置实例 |
 | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | K8S 故障排查——K8S Harness 的知识语料库 |
@@ -1375,7 +1376,7 @@ L5 - 自进化 Harness
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1390,7 +1391,7 @@ L5 - 自进化 Harness
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/28-agent-cli-enterprise-automation.md|28-agent-cli-enterprise-automation]]
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
-- [[domain-14-ai-ml-infra/31-agent-harness-loop-execution.md|31-agent-harness-loop-execution]]
-- [[domain-14-ai-ml-infra/32-agent-harness-tool-engineering.md|32-agent-harness-tool-engineering]]
+- 28-agent-cli-enterprise-automation
+- 29-agentscope-studio-skill-demo
+- 31-agent-harness-loop-execution
+- 32-agent-harness-tool-engineering

@@ -1,4 +1,40 @@
 ---
+title: kube-scheduler 调度详解 (topic-code-analysis)
+description: 'title: kube-scheduler 调度详解'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- scheduler
+- hpa
+- gpu
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- kube-scheduler 调度详解 是什么
+- 如何 kube-scheduler 调度详解
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- kube-scheduler
+- 调度详解
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: kube-scheduler 调度详解
 description: '# kube-scheduler 调度详解'
 category: functions
@@ -38,11 +74,6 @@ trigger_keywords:
 - PodTopologySpread
 - node selector
 - resource fit
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-6-scheduling
@@ -53,6 +84,15 @@ related_topics:
 - taint
 - resource management
 - HPA
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # kube-scheduler 调度详解
@@ -608,4 +648,12 @@ kubectl get pods -o wide -l app=web-app
 - [`kubeadm init phase control-plane`](05-control-plane.md) — scheduler 静态 Pod 创建
 - [`kubelet syncPod`](../node-create/01-overview.md) — Pod 绑定后的容器创建
 - [`Node Lifecycle Controller`](../node-create/01-overview.md) — 节点状态监控影响调度
-- [`Pod 拓扑分布`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md) — PodTopologySpread 策略
+- [`Pod 拓扑分布`](README.md) — PodTopologySpread 策略
+
+## Related
+
+- [[README.md|README]]
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

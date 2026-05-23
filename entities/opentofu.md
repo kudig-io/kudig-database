@@ -1,5 +1,5 @@
 ---
-title: OpenTofu
+title: OpenTofu (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # OpenTofu
@@ -73,7 +74,7 @@ OpenTofu 是 Terraform 的开源分支，在 Terraform 转向 BSL 许可后由�
 - [[harbor]] — Harbor
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/opentofu/opentofu.md|opentofu]]
+- opentofu
 - [[entities/cdk8s.md|cdk8s (Cloud Development Kit for Kubernetes)]]
 - [[entities/cncf-orchestration|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

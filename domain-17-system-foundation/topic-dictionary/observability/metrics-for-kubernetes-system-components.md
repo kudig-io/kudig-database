@@ -31,13 +31,14 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 系统组件指标
+# [[Kubernetes|Kubernetes]] 系统组件指标
 
 ## 概述
 
-Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行状况，对于构建监控仪表板和告警系统尤为重要。Kubernetes 组件以 Prometheus 文本格式暴露指标，便于人和机器共同阅读和处理。
+Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行状况，对于构建监控仪表板和告警系统尤为重要。Kubernetes 组件以 [[Prometheus|Prometheus]] 文本格式暴露指标，便于人和机器共同阅读和处理。
 
 ## 核心概念/原理
 
@@ -50,9 +51,9 @@ Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行
 
 ### 主要组件指标端点
 
-- **kube-controller-manager**：提供控制器性能和健康指标，如 etcd 请求延迟、云提供商 API 延迟等。
+- **kube-controller-manager**：提供控制器性能和健康指标，如 [[etcd|etcd]] 请求延迟、云提供商 API 延迟等。
 - **kube-scheduler**：暴露可选指标，报告运行中 Pod 的请求资源和限制（`/metrics/resources`）。
-- **kubelet**：除 `/metrics` 外，还提供 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/probes`。
+- **[[kubelet|kubelet]]**：除 `/metrics` 外，还提供 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/probes`。
 - **kube-apiserver**、**kube-proxy**：均在 `/metrics` 端点暴露指标。
 
 ### kubelet PSI 指标

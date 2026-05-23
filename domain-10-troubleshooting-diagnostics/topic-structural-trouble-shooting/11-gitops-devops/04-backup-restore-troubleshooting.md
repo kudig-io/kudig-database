@@ -1,5 +1,5 @@
 ---
-title: 备份恢复故障排查指南
+title: 备份恢复故障排查指南 [topic-structural-trouble-shooting]
 description: '# 备份恢复故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -46,19 +46,20 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 备份恢复故障排查指南
 
-> **适用版本**: Kubernetes v1.28 - v1.32 | Velero v1.12+ | **最后更新**: 2026-05 | **难度**: 中高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 - v1.32 | Velero v1.12+ | **最后更新**: 2026-05 | **难度**: 中高级
 
 ---
 
 ## 0. 快速诊断
 
-1. **Velero 状态检查**：`kubectl get pods -n velero`，确认 velero DaemonSet 和 Deployment 均为 Running。
+1. **Velero 状态检查**：`kubectl get [[Pods|pods]] -n velero`，确认 velero [[DaemonSet|DaemonSet]] 和 Deployment 均为 Running。
 2. **备份任务状态**：`kubectl get backup -n velero`，查看 Recent Backup 的 Phase（New/InProgress/Completed/Failed）。
-3. **etcd 快照状态**：`kubectl get pods -n kube-system -l app=etcd-operator`，确认 etcd backup operator 正常运行。
+3. **[[etcd|etcd]] 快照状态**：`kubectl get pods -n kube-system -l app=etcd-operator`，确认 etcd backup operator 正常运行。
 4. **日志快速排查**：
    - Velero：`kubectl logs -n velero deployment/velero --tail=50 | grep -i error`
    - etcd-snapshot：`kubectl logs -n kube-system -l app=etcd-operator --tail=30`
@@ -381,7 +382,7 @@ auto_heal_actions:
 | 文档类型 | 路径 | 说明 |
 |----------|------|------|
 | FTA | `domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md` | 备份恢复异常故障树 |
-| Domain | `domain-01-cluster-fundamentals/11-etcd-deep-dive.md` | [[domain-01-cluster-fundamentals/11-etcd-deep-dive.md|11-etcd-deep-dive]] |
+| Domain | `domain-01-cluster-fundamentals/11-etcd-deep-dive.md` | 11-etcd-deep-dive |
 
 ---
 
@@ -871,7 +872,7 @@ sla_reporting:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[entities/kubernetes.md|kubernetes]]
 - [[hot.md|hot]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|cronjob]]

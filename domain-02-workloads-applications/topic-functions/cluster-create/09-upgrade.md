@@ -1,4 +1,41 @@
 ---
+title: 集群升级流程 (kubeadm upgrade)
+description: 'description: ''Apply->>Upload: 上传新配置到 ConfigMap'''
+category: general
+tags:
+- reference
+- upgrade
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 集群升级流程 (kubeadm upgrade) 是什么
+- 如何 集群升级流程 (kubeadm upgrade)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 集群升级流程
+- kubeadm
+- upgrade
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 集群升级流程 kubeadm upgrade
 description: 'Apply->>Upload: 上传新配置到 ConfigMap'
 category: functions
@@ -41,10 +78,6 @@ trigger_keywords:
 - upgrade apply
 - upgrade node
 - upgrade plan
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -52,7 +85,16 @@ related_topics:
 - cluster-create/01-overview
 - cluster-create/03-certs
 - cluster-create/07-etcd
-- cluster-create/15-upgrade-advanced
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced|15-upgrade-advanced]]
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 集群升级流程 (kubeadm upgrade)
@@ -100,7 +142,7 @@ func Diff(oldVersion, newVersion string) error
 
 | 参数名 | 类型 | 说明 | 默认值 |
 |--------|------|------|--------|
-| `kubeConfigPath` | `string` | kubeconfig | `/etc/[[entities/kubernetes|kubernetes]]/admin.conf` |
+| `kubeConfigPath` | `string` | kubeconfig | `/etc/kubernetes/admin.conf` |
 | `certificateRenewal` | `bool` | 续签证书 | `true` |
 | `etcdUpgrade` | `bool` | 升级 etcd | `true` |
 | `skipPhases` | `[]string` | 跳过阶段 | 空 |
@@ -629,3 +671,10 @@ kubectl get ds kube-proxy -n kube-system -o jsonpath='{.spec.template.spec.conta
 # 手动更新 (如果需要)
 kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.29.0 -n kube-system
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]

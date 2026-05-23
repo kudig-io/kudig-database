@@ -1,5 +1,5 @@
 ---
-title: Dex
+title: Dex (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
 # Dex
@@ -67,7 +68,7 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 ## 参考链接
 
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
-- [[entities/argocd.md|argocd]]
+- [[entities/argocd.md|[[ArgoCD|argocd]]]]
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/storage-model.md|storage-model]]
 - [[concepts/secrets-management.md|secrets-management]]
@@ -80,49 +81,49 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 - [[tokenetes]] — Tokenetes
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-17-system-foundation/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
 - [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-19-landscape-references/04-cncf-fta-index.md|04-cncf-fta-index]]
-- [[domain-19-landscape-references/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-07-platform-engineering/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-02-workloads-applications/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
+- 04-cncf-fta-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
 - [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
 - [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-04-storage-data/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-09-reliability-engineering/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
 - [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
 - [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
 - [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-13-container-runtime/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|00-open-source-projects-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
 - [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
-- [[domain-19-landscape-references/sandbox/dex/dex.md|dex]]
+- dex
 - [[skills/ts-ai-ml-workloads|AI/ML 工作负载排查]] — Cross-reference
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

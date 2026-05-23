@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Domain-18 生产运维 Topic 重组计划
@@ -69,7 +70,7 @@ prerequisites:
 ### 1.3 与根目录 Topic 的交叉关系未厘清
 
 - `topic-best-practices`：按场景（部署、扩缩容、灾备、安全、可观测性）聚合所有 Domain 的最佳实践摘要
-- `topic-skills`：按故障场景聚合所有 Domain 的操作卡片
+- `topic-skills`：按问题场景聚合所有 Domain 的操作卡片
 - `domain-18`：本应聚焦生产运维领域的完整知识体系
 
 当前三者缺乏明确的分层约定，存在内容重复沉淀的风险。
@@ -152,7 +153,7 @@ domain-11-production-operations/
 ### 2.3 根目录 Topic 定位澄清
 
 - `topic-best-practices`：跨域横向切片，按场景聚合所有 Domain 的最佳实践**摘要**
-- `topic-skills`：跨域横向切片，按故障场景聚合所有 Domain 的**操作卡片**
+- `topic-skills`：跨域横向切片，按问题场景聚合所有 Domain 的**操作卡片**
 - `domain-18/topic-*`：纵向领域深度，聚焦生产运维的**完整知识体系**
 
 三者关系应为 **引用（cross-ref）** 而非 **重复**。

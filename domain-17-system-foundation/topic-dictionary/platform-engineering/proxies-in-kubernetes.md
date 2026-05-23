@@ -25,9 +25,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes 中的代理
+# [[Kubernetes|Kubernetes]] 中的代理
 
 ## 概述
 
@@ -54,7 +55,7 @@ Kubernetes 中有五种主要的代理类型：
 - 客户端到代理使用 HTTP。
 - 代理到 apiserver 使用 HTTPS。
 - 自动定位 apiserver 并添加认证头。
-- 常用于本地安全访问 Kubernetes API。
+- 常用于本地安全访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
 
 ### 2. apiserver proxy
 
@@ -63,7 +64,7 @@ Kubernetes 中有五种主要的代理类型：
 - 运行在 apiserver 进程内部。
 - 客户端到代理使用 HTTPS（如果 apiserver 允许，也可以使用 HTTP）。
 - 代理到目标可能使用 HTTP 或 HTTPS，由代理根据可用信息自动选择。
-- 可用于访问 Node、Pod 或 Service，访问 Service 时会进行负载均衡。
+- 可用于访问 Node、Pod 或 [[Service|Service]]，访问 Service 时会进行负载均衡。
 
 ### 3. kube-proxy
 
@@ -125,7 +126,7 @@ Kubernetes 中有五种主要的代理类型：
 |------|---------|-------------|
 | `kubectl proxy` 启动后无法连接 | 端口被占用或 kubeconfig 错误 | `lsof -i :8001` 检查端口；`kubectl cluster-info` 验证连接 |
 | apiserver proxy 返回 502/503 | 目标 Pod/Service 不可达 | `kubectl get endpoints <svc>` 检查后端；`kubectl logs` 查看目标 Pod |
-| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get pods -l [[entities/kubernetes|k8s]]-app=kube-proxy`；`iptables-save \| grep <svc-name>` |
+| Service 无法访问（kube-proxy） | kube-proxy 未运行或 iptables 规则异常 | `kubectl -n kube-system get [[Pods|pods]] -l [[entities/kubernetes|[[Kubernetes 生产环境速查卡|k8s]]]]-app=kube-proxy`；`iptables-save \| grep <svc-name>` |
 | 外部无法访问 LoadBalancer Service | 云 LB 未就绪或安全组限制 | `kubectl get svc <name>` 检查 EXTERNAL-IP；云控制台检查 LB 状态和安全组 |
 | apiserver 间歇性不可达 | 前端 LB 健康检查失败 | 检查 LB 目标组健康状态；`kubectl get componentstatuses` |
 | kube-proxy 模式不匹配 | 期望 IPVS 但回退到 iptables | `kubectl -n kube-system logs <kube-proxy-pod> \| grep "Using"` |

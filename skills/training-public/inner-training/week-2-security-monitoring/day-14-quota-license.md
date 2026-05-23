@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 # Day 14: K8S 集群配额 & License
@@ -623,7 +624,7 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 - 监控体系搭建与告警配置
 - 资源配额管理
 
-请完成 [checkpoint.md](./checkpoint.md) 自测和 [P2 实操项目](../projects/p2-security-monitoring-setup.md)。
+请完成 checkpoint.md](./checkpoint.md) 自测和 [P2 实操项目](../projects/p2-security-monitoring-setup.md)。
 
 ---
 
@@ -631,5 +632,5 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 
 - [资源管理](../../domain-02-workloads-applications/23-resource-management.md)
 - [配额排障](../../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md)
-- [K8s Resource Quota 文档](https://[[entities/kubernetes|kubernetes]].io/docs/concepts/policy/resource-quotas/)
+- [K8s Resource Quota 文档](https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
 - [K8s Limit Range 文档](https://kubernetes.io/docs/concepts/policy/limit-range/)

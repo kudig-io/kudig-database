@@ -1,5 +1,5 @@
 ---
-title: Cilium
+title: Cilium (entities)
 description: Cilium — Kubernetes 生产运维知识库
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # Cilium
@@ -46,7 +47,7 @@ Cilium is an eBPF-based networking, security, and observability platform for Kub
 
 | Capability | Description |
 |------------|-------------|
-| CNI | Pod networking, IPAM, Kubernetes Service routing |
+| CNI | Pod networking, IPAM, Kubernetes [[Service|Service]] routing |
 | NetworkPolicy | L3/L4 policies + L7 HTTP/gRPC/Kafka policies |
 | Service Mesh | Sidecar-less mesh via eBPF + optional Envoy for L7 |
 | Load Balancing | eBPF-based kube-proxy replacement (Maglev, ECMP) |
@@ -78,36 +79,36 @@ Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Be
 - Hubble
 
 - [[synthesis/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
-- [[domain-19-landscape-references/18-kubernetes-ebpf-cilium-deep-practice.md|18-kubernetes-ebpf-cilium-deep-practice]]
-- [[domain-03-networking-traffic/03-cilium-cni-architecture.md|03-cilium-cni-architecture]]
-- [[domain-03-networking-traffic/99-cilium-ebpf-network-guide.md|99-cilium-ebpf-network-guide]]
-- [[domain-03-networking-traffic/05-cilium-service-mesh.md|05-cilium-service-mesh]]
-- [[domain-03-networking-traffic/04-cilium-network-policy.md|04-cilium-network-policy]]
+- 18-kubernetes-ebpf-cilium-deep-practice
+- 03-cilium-cni-architecture
+- 99-cilium-ebpf-network-guide
+- 05-cilium-service-mesh
+- 04-cilium-network-policy
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.10.md|RELEASE-NOTES-0.10]]
-- [[domain-19-landscape-references/topic-release-notes/networking/cilium/RELEASE-NOTES-0.11.md|RELEASE-NOTES-0.11]]
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.18
+- RELEASE-NOTES-1.19
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.16
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-1.12
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-1.13
+- RELEASE-NOTES-1.17
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-1.14
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.15
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-0.10
+- RELEASE-NOTES-0.11
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[references/k8s-networking-ecosystem|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference

@@ -1,4 +1,40 @@
 ---
+title: 证书轮换机制源码分析 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- prometheus
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 证书轮换机制源码分析 是什么
+- 如何 证书轮换机制源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 证书轮换机制源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+- etcd-basics
+- tls-basics
+created: "2026-05-23"
+---
+
 title: 证书轮换机制源码分析
 description: '## 概述'
 category: functions
@@ -37,12 +73,6 @@ trigger_keywords:
 - 证书过期
 - 应急恢复
 - 时间回拨
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- etcd-basics
-- tls-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -51,6 +81,15 @@ related_topics:
 - cluster-cert/ca-generation
 - cluster-cert/kubelet-cert
 - cluster-cert/openssl-cookbook
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 证书轮换机制源码分析
@@ -283,7 +322,7 @@ sudo systemctl restart kubelet
 # 每月检查证书，如剩余 < 60 天则轮换
 
 EXPIRY=$(kubeadm certs check-expiration | grep apiserver | awk '{print $3}')
-if [[ "$EXPIRY" =~ ^[0-9]+d$ ]]; then
+if "$EXPIRY" =~ ^[0-9]+d$; then
     DAYS=${EXPIRY%d}
     if [ "$DAYS" -lt 60 ]; then
         kubeadm certs renew all
@@ -314,7 +353,7 @@ kubeadm certs generate-csr --kubeconfig-dir /etc/kubernetes
 - 需要安全团队审批后才能签发证书
 - CA 私钥不允许离开 HSM
 
-### 方案 3: 使用 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 管理自定义证书
+### 方案 3: 使用 cert-manager 管理自定义证书
 
 对于集群外访问或自定义组件，可使用 cert-manager 自动管理证书：
 
@@ -450,4 +489,8 @@ kubectl get nodes
 
 ## Related
 
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cert-manager.md|cert-manager]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

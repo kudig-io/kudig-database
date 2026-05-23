@@ -23,6 +23,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - storage-basics
+created: "2026-05-23"
 ---
 
 ---

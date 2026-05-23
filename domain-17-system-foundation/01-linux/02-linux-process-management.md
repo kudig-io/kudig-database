@@ -41,6 +41,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 02 - Linux 进程管理与系统监控：生产环境运维专家实践
@@ -51,7 +52,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-进程管理是 Linux 系统运维的核心技能之一。在 Kubernetes 环境中，每个容器本质上就是一个或一组被 Linux 内核隔离和限制的进程。理解进程的创建、调度、信号处理、资源限制机制，对于排查容器异常（如 OOMKilled、CrashLoopBackOff、僵尸进程）至关重要。本文档从内核原理到运维实践，全面深入地讲解 Linux 进程管理的各个方面，包括进程状态机、信号机制、cgroups 资源控制、OOM Killer 工作原理，以及与 Kubernetes Pod 生命周期管理的紧密关联。
+进程管理是 Linux 系统运维的核心技能之一。在 [[Kubernetes|Kubernetes]] 环境中，每个容器本质上就是一个或一组被 Linux 内核隔离和限制的进程。理解进程的创建、调度、信号处理、资源限制机制，对于排查容器异常（如 OOMKilled、CrashLoopBackOff、僵尸进程）至关重要。本文档从内核原理到运维实践，全面深入地讲解 Linux 进程管理的各个方面，包括进程状态机、信号机制、cgroups 资源控制、OOM Killer 工作原理，以及与 Kubernetes Pod 生命周期管理的紧密关联。
 
 ---
 
@@ -946,7 +947,7 @@ crictl ps
 
 ## See Also
 
-- [[domain-17-system-foundation/99-linux-commands-reference.md|99-linux-commands-reference]]
-- [[domain-17-system-foundation/01-linux-system-architecture.md|01-linux-system-architecture]]
-- [[domain-17-system-foundation/03-linux-filesystem-deep-dive.md|03-linux-filesystem-deep-dive]]
-- [[domain-17-system-foundation/04-linux-networking-configuration.md|04-linux-networking-configuration]]
+- 99-linux-commands-reference
+- 01-linux-system-architecture
+- 03-linux-filesystem-deep-dive
+- 04-linux-networking-configuration

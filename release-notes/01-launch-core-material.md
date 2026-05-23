@@ -30,6 +30,7 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 发布会 — 核心材料

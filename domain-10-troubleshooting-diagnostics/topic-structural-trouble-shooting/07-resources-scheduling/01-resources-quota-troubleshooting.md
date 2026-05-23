@@ -1,5 +1,5 @@
 ---
-title: 资源与调度故障排查指南
+title: 资源与调度故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 资源与调度故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -38,6 +38,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 资源与调度故障排查指南
@@ -47,9 +48,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - vpa
 - job
 - operator
@@ -84,7 +85,7 @@ k8s_versions:
 
 # 资源与调度故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 
 ---
 
@@ -572,8 +573,8 @@ EOF
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

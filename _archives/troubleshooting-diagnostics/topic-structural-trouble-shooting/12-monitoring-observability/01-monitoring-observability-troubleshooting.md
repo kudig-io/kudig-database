@@ -1189,7 +1189,7 @@ if kubectl get statefulset loki -n logging &>/dev/null; then
   LOKI_URL=$(kubectl get svc loki -n logging -o jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
   curl -s -X POST "http://$LOKI_URL/loki/api/v1/push" \
     -H "Content-Type: application/json" \
-    -d "{\"streams\":[{\"stream\":{\"job\":\"test\"},\"values\":[[\"$(date +%s)000000000\",\"$TEST_LOG\"]]}]}" >/dev/null 2>&1 && echo "✓ Loki 日志摄入测试通过" || echo "✗ Loki 日志摄入测试失败"
+    -d "{\"streams\":[{\"stream\":{\"job\":\"test\"},\"values\":\"$(date +%s)000000000\",\"$TEST_LOG\"}]}" >/dev/null 2>&1 && echo "✓ Loki 日志摄入测试通过" || echo "✗ Loki 日志摄入测试失败"
 else
   echo "Loki 未部署"
 fi

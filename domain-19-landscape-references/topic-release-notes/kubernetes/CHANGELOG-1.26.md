@@ -35,6 +35,7 @@ prerequisites:
 - gpu-scheduling-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -46,7 +47,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.26.14](#changelog-since-v12614)
+  - Changelog since v1.26.14](#changelog-since-v12614)
   - [Changes by Kind](#changes-by-kind)
     - [Feature](#feature)
     - [Bug or Regression](#bug-or-regression)
@@ -195,7 +196,7 @@ prerequisites:
     - [Container Images](#container-images-9)
   - [Changelog since v1.26.5](#changelog-since-v1265)
   - [Important Security Information](#important-security-information-2)
-    - [CVE-2023-2728: Bypassing enforce mountable secrets policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
+    - [CVE-2023-2728: Bypassing enforce mountable [[Secrets|secrets]] policy imposed by the ServiceAccount admission plugin](#cve-2023-2728-bypassing-enforce-mountable-secrets-policy-imposed-by-the-serviceaccount-admission-plugin)
   - [Changes by Kind](#changes-by-kind-9)
     - [Feature](#feature-9)
     - [Bug or Regression](#bug-or-regression-9)

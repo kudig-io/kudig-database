@@ -34,6 +34,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -54,7 +55,7 @@ tags:
 - testing
 - quality
 - automation
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - docker
 - job
@@ -71,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - Selenium 企业级自动化测试平台 是什么
 - 如何 Selenium 企业级自动化测试平台
-- Kubernetes 29 automated testing quality 最佳实践
+- [[Kubernetes|Kubernetes]] 29 automated testing quality 最佳实践
 trigger_keywords:
 - Selenium
 - 企业级自动化测试平台
@@ -980,17 +981,17 @@ health_check() {
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/MOC.md|domain-29-automated-testing-quality MOC]]
+- domain-29-automated-testing-quality MOC
 - [[domain-08-release-change-management/README.md|Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance...]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-29 自动化测试与质量 — 开源项目索引]]
-- [[domain-08-release-change-management/02-junit5-enterprise-testing.md|JUnit 5 企业级单元测试框架深度实践]]
-- [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|企业级AI测试与质量保障深度实践]]
-- [[domain-08-release-change-management/05-cypress-enterprise-automation.md|Cypress Enterprise Automation Testing 深度实践]]
-- [[domain-08-release-change-management/06-playwright-enterprise-automation.md|Playwright Enterprise Automation Testing 深度实践]]
+- Domain-29 自动化测试与质量 — 开源项目索引
+- JUnit 5 企业级单元测试框架深度实践
+- 企业级AI测试与质量保障深度实践
+- Cypress Enterprise Automation Testing 深度实践
+- Playwright Enterprise Automation Testing 深度实践
 
 ## See Also
 
-- [[domain-08-release-change-management/05-cypress-enterprise-automation.md|05-cypress-enterprise-automation]]
-- [[domain-08-release-change-management/06-playwright-enterprise-automation.md|06-playwright-enterprise-automation]]
-- [[domain-08-release-change-management/02-junit5-enterprise-testing.md|02-junit5-enterprise-testing]]
-- [[domain-08-release-change-management/03-ai-testing-quality-assurance.md|03-ai-testing-quality-assurance]]
+- 05-cypress-enterprise-automation
+- 06-playwright-enterprise-automation
+- 02-junit5-enterprise-testing
+- 03-ai-testing-quality-assurance

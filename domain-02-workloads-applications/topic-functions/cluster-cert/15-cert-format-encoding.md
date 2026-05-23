@@ -1,4 +1,37 @@
 ---
+title: 证书格式与编码详解 (topic-code-analysis)
+description: 'title: 证书格式与编码详解'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- controller-manager
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 证书格式与编码详解 是什么
+- 如何 证书格式与编码详解
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 证书格式与编码详解
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 证书格式与编码详解
 description: '# 证书格式与编码详解'
 category: functions
@@ -36,10 +69,6 @@ trigger_keywords:
 - fingerprint
 - Base64
 - 证书格式
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -47,13 +76,22 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/openssl-cookbook
 - cluster-cert/apiserver-cert
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 证书格式与编码详解
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 集群证书虽然以 `.crt` 和 `.key` 文件形式存在，但其底层涉及多种编码标准和数据格式。理解 PEM、DER、X.509 v3 及 ASN.1 的关系，是深入排查证书异常和手动签发证书的基础。本文档从数据格式层到 Kubernetes 应用层，全面解析证书编码体系。
+Kubernetes 集群证书虽然以 `.crt` 和 `.key` 文件形式存在，但其底层涉及多种编码标准和数据格式。理解 PEM、DER、X.509 v3 及 ASN.1 的关系，是深入排查证书异常和手动签发证书的基础。本文档从数据格式层到 Kubernetes 应用层，全面解析证书编码体系。
 
 ---
 
@@ -624,3 +662,9 @@ kubectl get secret my-tls-secret -o jsonpath='{.data.tls\.crt}' | \
 | `base64.StdEncoding.Decode` | `encoding/base64/base64.go` | Base64 解码 |
 | `CertsFromPEM` | `staging/src/k8s.io/client-go/util/cert/io.go` | PEM 提取证书列表 |
 | `WriteCert` | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 证书写入磁盘 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

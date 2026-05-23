@@ -31,12 +31,13 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Vertical Pod Autoscaling
 
 ## 概述
-VerticalPodAutoscaler（VPA）自动调整工作负载（如 Deployment、StatefulSet）中 Pod 的资源请求（requests）和限制（limits），以匹配实际资源使用情况。这种垂直缩放也称为 rightsizing 或 autopilot。
+VerticalPodAutoscaler（VPA）自动调整工作负载（如 Deployment、[[StatefulSet|StatefulSet]]）中 Pod 的资源请求（requests）和限制（limits），以匹配实际资源使用情况。这种垂直缩放也称为 rightsizing 或 autopilot。
 
 ## 核心概念/原理
 - **VPA 组成**：
@@ -72,7 +73,7 @@ VerticalPodAutoscaler（VPA）自动调整工作负载（如 Deployment、Statef
 - 若对同一工作负载同时使用 HPA 和 VPA，需谨慎配置，避免两者冲突。常见做法是：HPA 基于自定义指标缩放，VPA 仅调整资源请求（`RequestsOnly` 模式）。
 - 使用 `Recreate` 模式时，注意 Pod 重建会带来的短暂中断；对中断敏感的服务可评估 `InPlaceOrRecreate` 或 `Initial` 模式。
 - 使用 `minAllowed` 和 `maxAllowed` 限制推荐范围，防止极端推荐导致应用异常。
-- VPA 不适用于 DaemonSet（通常使用 Cluster Proportional Vertical Autoscaler 替代）。
+- VPA 不适用于 [[DaemonSet|DaemonSet]]（通常使用 Cluster Proportional Vertical Autoscaler 替代）。
 
 ## 实战 YAML 示例
 

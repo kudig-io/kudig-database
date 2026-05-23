@@ -51,12 +51,13 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
+created: "2026-05-23"
 ---
 
 # HashiCorp Vault 企业级密钥管理深度实践
 
 > **Author**: Enterprise Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade secrets management and cryptographic operations | **Complexity**: ⭐⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[Secrets|secrets]]ts Management|secrets management]] and cryptographic operations | **Complexity**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
@@ -796,7 +797,7 @@ jq 'select(.request.path | test("transit/(encrypt|decrypt)"))' "$AUDIT_LOG" | \
 
 <!-- chunk: 监控与告警 -->## 监控与告警
 
-#<!-- chunk: Prometheus 监控 -->## Prometheus 监控
+#<!-- chunk: [[Prometheus|Prometheus]] 监控 -->## Prometheus 监控
 
 ```bash
 # Configure Vault telemetry in server config
@@ -1005,25 +1006,25 @@ vault audit list -detailed
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/17-gvisor-container-sandbox.md|gVisor 容器沙箱深度解析]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|cert-manager 自动证书管理深度实践]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- gVisor 容器沙箱深度解析
+- cert-manager 自动证书管理深度实践
 
 ## See Also
 
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|03-aqua-enterprise-container-security]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|04-kyverno-enterprise-policy-management]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|09-opa-gatekeeper-policy]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|10-image-security-scanning]]
+- 03-aqua-enterprise-container-security
+- 04-kyverno-enterprise-policy-management
+- 09-opa-gatekeeper-policy
+- 10-image-security-scanning
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

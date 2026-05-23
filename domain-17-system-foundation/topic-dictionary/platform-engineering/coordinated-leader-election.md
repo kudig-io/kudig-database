@@ -30,13 +30,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 协调领导者选举（Coordinated Leader Election）
 
 ## 概述
 
-FEATURE STATE: `Kubernetes v1.33 [beta]`（默认禁用）
+FEATURE STATE: `[[Kubernetes|Kubernetes]] v1.33 [beta]`（默认禁用）
 
 Kubernetes 1.35 引入了一项 beta 特性，允许控制平面组件通过**协调领导者选举（Coordinated Leader Election）**确定性地选择领导者。该特性主要用于满足 Kubernetes 集群升级期间的版本倾斜约束。当前内置的选择策略是 `OldestEmulationVersion`，优先选择模拟版本最低的候选者，其次是二进制版本，最后是创建时间戳。
 
@@ -133,7 +134,7 @@ Lease 对象包含以下关键字段：
 - [ ] 监控 Lease 的 `renewTime`，超过 `leaseDurationSeconds` 未续租需告警
 - [ ] 混合版本升级时确认 `OldestEmulationVersion` 策略正确选择低版本实例
 - [ ] 控制平面组件的 `--leader-elect-lease-duration` 和 `--leader-elect-renew-deadline` 参数合理
-- [ ] etcd 网络延迟低于 Lease 续租间隔的 1/3
+- [ ] [[etcd|etcd]] 网络延迟低于 Lease 续租间隔的 1/3
 - [ ] 升级完成后验证所有 LeaseCandidate 版本信息正确
 
 ## 命令快速参考
@@ -181,4 +182,4 @@ kubectl -n kube-system logs -l component=kube-scheduler | grep -i "leader"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

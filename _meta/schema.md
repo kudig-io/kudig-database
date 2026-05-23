@@ -24,6 +24,7 @@ trigger_keywords:
 - Schema
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Wiki Schema
@@ -49,9 +50,9 @@ It co-evolves: the agent proposes changes, the user approves.
 ## Wikilink Conventions
 
 - **Obsidian resolves wikilinks by FILENAME only** — not by frontmatter title or aliases
-- Always use `[[filename|Display Title]]` format
-- Example: `[[convolutional-neural-network|Convolutional Neural Network]]`
-- For sections: `[[filename#Section|Display Text]]`
+- Always use `Display Title` format
+- Example: `Convolutional Neural Network`
+- For sections: `Display Text`
 - Every entity/concept mentioned should have a corresponding page (or be on the "missing pages" list)
 - Run the skill's lint/fix flow after bulk page creation to auto-fix wikilink format and markdown structure issues
 

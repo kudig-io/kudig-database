@@ -1,5 +1,5 @@
 ---
-title: 集群高可用与灾备故障排查指南
+title: 集群高可用与灾备故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 集群高可用与灾备故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - helm-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: 集群高可用与灾备故障排查指南
@@ -49,13 +50,13 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
 - pdb
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -659,13 +660,13 @@ kubeadm certs renew all
 ### 相关文档
 
 - [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [API Server 故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]].md)
-- [证书故障排查](../06-security-auth/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
+- [API Server 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|01-apiserver-troubleshooting]].md)
+- [证书故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting|02-certificate-troubleshooting]].md)
 - [集群维护故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 

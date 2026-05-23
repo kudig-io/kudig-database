@@ -44,9 +44,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# WasmEdge 运行时
+# [[WasmEdge|WasmEdge]] 运行时
 # WasmEdge Runtime
 
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
@@ -54,9 +55,9 @@ authors:
 1. [WasmEdge 概述](#1-wasmedge-概述)
 2. [架构与核心组件](#2-架构与核心组件)
 3. [WASI 支持与扩展](#3-wasi-支持与扩展)
-4. [Kubernetes 集成](#4-kubernetes-集成)
+4. [[entities/kubernetes.md|Kubernetes]] 集成](#4-kubernetes-集成)
 5. [边缘部署](#5-边缘部署)
-6. [网络插件](#6-网络插件)
+6. 网络插件](#6-网络插件)
 7. [AI 推理支持](#7-ai-推理支持)
 8. [ONNX 集成](#8-onnx-集成)
 9. [TensorFlow Lite 集成](#9-tensorflow-lite-集成)
@@ -2518,22 +2519,22 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/03-spinkube-framework.md|03-spinkube-framework]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|04-wasmcloud-platform]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|06-wasm-component-model]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|07-wasm-plugin-system]]
+- 03-spinkube-framework
+- 04-wasmcloud-platform
+- 06-wasm-component-model
+- 07-wasm-plugin-system

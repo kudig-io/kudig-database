@@ -39,6 +39,7 @@ prerequisites:
 - etcd-basics
 - redis-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: Google GKE 企业级多云管理深度实践
@@ -48,10 +49,10 @@ tags:
 - k8s
 - multi-cloud
 - hybrid-cloud
-- etcd
-- kubelet
-- prometheus
-- istio
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - calico
 - containerd
 - redis
@@ -1465,7 +1466,7 @@ LATEST_VERSION=$(gcloud container get-server-config \
   --format="value(validMasterVersions[0])")
 echo "最新版本: $LATEST_VERSION"
 
-if [[ "$CURRENT_VERSION" == "$LATEST_VERSION" ]]; then
+if "$CURRENT_VERSION" == "$LATEST_VERSION"; then
     echo "集群已是最新版本，无需升级"
     exit 0
 fi
@@ -1690,22 +1691,22 @@ echo "=== 诊断完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|02-azure-aks-enterprise-multicloud]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|03-enterprise-multicloud-governance]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|05-ibm-cloud-kubernetes-service-enterprise]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|06-alibaba-ack-enterprise-hybrid]]
+- 02-azure-aks-enterprise-multicloud
+- 03-enterprise-multicloud-governance
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 06-alibaba-ack-enterprise-hybrid

@@ -1,5 +1,5 @@
 ---
-title: RBAC 异常故障树分析
+title: RBAC 异常故障树分析 (skills)
 description: ROLE_OR --> ROLE3[Role 配置错误]
 category: skills
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 fta_id: FTA-RBAC-001
 component: Rbac
 severity: medium
+created: "2026-05-23"
 ---
 
 # RBAC 异常故障树分析

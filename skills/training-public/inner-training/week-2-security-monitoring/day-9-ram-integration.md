@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -33,7 +34,7 @@ title: Day 9: RAM 账号管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK RAM authorization [[entities/kubernetes|kubernetes]] RBAC integration
+  - ACK RAM authorization [[entities/kubernetes|[[Kubernetes|kubernetes]]]] RBAC integration
   - aliyun cs grant_permissions RAM user cluster access
   - RAM role assume role Kubernetes
   - Multi-team RBAC namespace isolation

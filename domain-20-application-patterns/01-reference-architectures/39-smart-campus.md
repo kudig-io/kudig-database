@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 智慧园区架构设计
@@ -35,7 +36,7 @@ tags:
 - architecture
 - industry
 - job
-- cronjob
+- [[CronJob|cronjob]]
 last_updated: 2026-05-18
 difficulty: intermediate
 reading_level: intermediate
@@ -46,7 +47,7 @@ audience:
 - 智慧城市开发者
 estimated_read_time: 5min
 intent_queries:
-- smart campus kubernetes architecture
+- smart campus [[Kubernetes|kubernetes]] architecture
 - 智慧园区K8s部署方案
 - 智慧楼宇IoT平台
 - 智慧园区数字孪生
@@ -328,7 +329,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -343,7 +344,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/37-pet-economy.md|37-pet-economy]]
-- [[domain-20-application-patterns/38-supply-chain-finance.md|38-supply-chain-finance]]
-- [[domain-20-application-patterns/40-cloud-gaming.md|40-cloud-gaming]]
-- [[domain-20-application-patterns/41-beauty-ecommerce.md|41-beauty-ecommerce]]
+- 37-pet-economy
+- 38-supply-chain-finance
+- 40-cloud-gaming
+- 41-beauty-ecommerce

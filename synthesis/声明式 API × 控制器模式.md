@@ -29,19 +29,29 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/gitops]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-cheat-sheet/k8s]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/replicaset]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service]]"
+    type: uses
 ---
 
 # 声明式 API × 控制器模式
 
 ## The Connection
 
-声明式 API 和控制器模式是 Kubernetes 的一体两面——前者是**声明**，后者是**执行**。没有控制器，声明式 API 只是一堆静态的 YAML 文件；没有声明式 API，控制器就没有明确的目标状态来驱动。两者的结合产生了 K8s 最本质的特性：**系统自动趋向期望状态**。
+声明式 API 和控制器模式是 Kubernetes 的一体两面——前者是**声明**，后者是**执行**。没有控制器，声明式 API 只是一堆静态的 YAML 文件；没有声明式 API，控制器就没有明确的目标状态来驱动。两者的结合产生了 [[domain-17-system-foundation/topic-cheat-sheet/k8s|K8s]] 最本质的特性：**系统自动趋向期望状态**。
 
 这个合成的关键在于理解：**最终一致性不是架构缺陷，而是声明式 API + 控制器模式的必然数学结果**。
 
 ## Where They Co-occur
 
-- **Deployment 滚动更新**：用户声明 `spec.replicas: 5`，Deployment Controller 通过协调循环逐步创建/删除 ReplicaSet，最终达到期望状态。
+- **Deployment 滚动更新**：用户声明 `spec.replicas: 5`，Deployment Controller 通过协调循环逐步创建/删除 [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|ReplicaSet]]，最终达到期望状态。
 - **HPA 自动伸缩**：HPA Controller 持续读取 metrics-server 的指标，当 CPU 使用率超过阈值时，修改 Deployment 的 `spec.replicas`——触发 Deployment Controller 的新一轮协调。
 - **自定义资源管理**：Operator 通过 CRD 扩展声明式 API 的范围，然后通过自定义控制器实现协调逻辑——将领域知识编码为自动化行为。
 - **节点故障恢复**：当节点失联时，用户不需要手动迁移 Pod——只需声明期望状态，系统通过协调循环自动在新的健康节点上重新创建 Pod。
@@ -56,7 +66,7 @@ prerequisites:
 
 `kubectl apply` 无论执行多少次，结果都是一样的——因为 YAML 声明的是"最终应该是什么状态"，而不是"要做什么操作"。这使得：
 
-- GitOps 工作流成为可能——Git 仓库中的 YAML 就是系统的期望状态
+- [[domain-17-system-foundation/topic-cheat-sheet/gitops|GitOps]] 工作流成为可能——Git 仓库中的 YAML 就是系统的期望状态
 - 控制器可以安全地重试——失败后重新执行不会产生副作用
 - 并发操作是安全的——多个 Controller 同时修改同一资源的 spec 不会冲突（通过 resourceVersion 乐观锁保证）
 
@@ -91,7 +101,7 @@ while (Spec != Status) {
 
 ### 声明式 vs 紧急操作
 
-- **声明式**：适合长期期望状态的管理（Deployment、ConfigMap、Service）
+- **声明式**：适合长期期望状态的管理（Deployment、ConfigMap、[[domain-17-system-foundation/topic-dictionary/networking/service|Service]]）
 - **紧急场景**：当 Pod 卡在 Terminating 状态时，`kubectl delete --force --grace-period=0` 是命令式的——这种紧急操作绕过了正常协调流程
 - **矛盾**：声明式系统在处理需要立即干预的紧急情况时显得笨拙
 
@@ -126,3 +136,4 @@ while (Spec != Status) {
 - [[concepts/watch-mechanism.md|watch-mechanism]]
 - [[operator-pattern]]
 - [[synthesis/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resources|自定义资源]]

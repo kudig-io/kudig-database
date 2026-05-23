@@ -1,5 +1,5 @@
 ---
-title: Kuasar
+title: Kuasar (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -25,6 +25,7 @@ trigger_keywords:
 - Kuasar
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kuasar
@@ -64,11 +65,11 @@ Kuasar 是一个统一的容器沙箱管理框架，支持在同一个节点上�
 
 - [[cozystack]] — Cozystack
 - [[fluid]] — Fluid
-- [[entities/cncf-storage.md|cncf-storage]] — CNCF 存储与数据库项目全景
+- storage.md|cncf-storage]] — CNCF 存储与数据库项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[containerd]] — containerd
 
-- [[domain-19-landscape-references/sandbox/kuasar/kuasar.md|kuasar]]
-- [[entities/urunc.md|urunc]]
+- kuasar
+- [[entities/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
 - [[entities/hyperlight.md|Hyperlight]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

@@ -1,5 +1,5 @@
 ---
-title: 'etcd 进阶: HA 集群管理与性能调优'
+title: etcd 进阶: HA 集群管理与性能调优 [cluster-create]
 description: 'title: ''etcd 进阶: HA 集群管理与性能调优'''
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - platform-engineering-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 'etcd 进阶: HA 集群管理与性能调优'

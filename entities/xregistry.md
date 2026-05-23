@@ -1,5 +1,5 @@
 ---
-title: xRegistry
+title: xRegistry (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - xRegistry
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # xRegistry
@@ -65,11 +66,11 @@ xRegistry 是一个通用的元数据注册中心规范，用于管理和发现�
 
 - [[kubeflow]] — Kubeflow
 - [[spiffe]] — SPIFFE
-- [[kubeelasti]] — KubeElastic
+- [[kubeelasti]] — [[entities/kubeelasti.md|KubeElastic]]
 - [[cloudevents]] — CloudEvents
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/xregistry/xregistry.md|xregistry]]
+- xregistry
 - [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

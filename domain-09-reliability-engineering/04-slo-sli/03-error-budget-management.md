@@ -14,7 +14,7 @@ difficulty: intermediate
 reading_level: intermediate
 audience:
 - 所有工程师
-estimated_read_time: 5min
+estimated_read_time: 30min
 intent_queries:
 - 错误预算管理 是什么
 - 如何 错误预算管理
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # 错误预算管理
@@ -68,7 +69,80 @@ prerequisites:
 更大故障               持续改进
 ```
 
-## 错误预算计算
+## 错误预算计算公式和示例
+
+### 基础计算公式
+
+```
+错误预算公式:
+
+基于请求数:
+  Error Budget = (1 - SLO) × Total Requests
+
+基于时间:
+  Error Budget (seconds) = (1 - SLO) × Window (seconds)
+
+基于燃烧率:
+  Remaining Budget = 1 - (Actual Error Rate / (1 - SLO))
+```
+
+### 不同 SLO 的错误预算对照表
+
+| SLO | 允许错误率 | 30天请求预算(1000万请求) | 30天时间预算 | 1天时间预算 |
+|-----|----------|------------------------|------------|-----------|
+| 99% | 1.0% | 100,000 次 | 7.2 小时 | 14.4 分钟 |
+| 99.5% | 0.5% | 50,000 次 | 3.6 小时 | 7.2 分钟 |
+| 99.9% | 0.1% | 10,000 次 | 43.2 分钟 | 86.4 秒 |
+| 99.95% | 0.05% | 5,000 次 | 21.6 分钟 | 43.2 秒 |
+| 99.99% | 0.01% | 1,000 次 | 4.32 分钟 | 8.64 秒 |
+| 99.999% | 0.001% | 100 次 | 25.9 秒 | 0.86 秒 |
+
+### 实际计算示例
+
+**示例 1: 电商订单服务**
+
+```
+SLO: 99.9% 可用性
+窗口: 30 天
+日均请求: 500,000
+30 天总请求: 15,000,000
+
+错误预算 = (1 - 0.999) × 15,000,000 = 15,000 次错误
+
+等价时间预算:
+  30 天 = 2,592,000 秒
+  时间预算 = 0.001 × 2,592,000 = 2,592 秒 = 43.2 分钟
+
+场景分析:
+  场景 A: 一次发布引入 bug，导致 2 小时持续 5% 错误率
+    错误数 = 500,000 × 2h/24h × 5% = 2,083 次
+    预算消耗 = 2,083 / 15,000 = 13.9%
+    → 发布被接受，但需修复
+
+  场景 B: 数据库故障，4 小时 100% 不可用
+    错误数 = 500,000 × 4h/24h = 83,333 次
+    预算消耗 = 83,333 / 15,000 = 555%
+    → 严重超支，触发复盘和流程改进
+```
+
+**示例 2: 金融支付服务**
+
+```
+SLO: 99.99% 可用性
+窗口: 30 天
+日均交易: 1,000,000
+30 天总交易: 30,000,000
+
+错误预算 = (1 - 0.9999) × 30,000,000 = 3,000 次失败
+
+时间预算 = 0.0001 × 2,592,000 = 259.2 秒 ≈ 4.3 分钟
+
+关键约束:
+  每月最多允许 3,000 笔交易失败
+  每月最多允许 4.3 分钟不可用
+  
+  这意味着任何超过 30 秒的故障都会消耗大量预算
+```
 
 ### 基于请求数的计算
 
@@ -137,7 +211,7 @@ for slo in [0.99, 0.999, 0.9999]:
 # SLO 99.99%: 年停机预算 = 0.88 小时
 ```
 
-## 错误预算消耗监控
+## 预算消耗速率监控 PromQL
 
 ### 实时预算消耗计算
 
@@ -160,6 +234,93 @@ for slo in [0.99, 0.999, 0.9999]:
 # < 0.5:   预算充足
 ```
 
+### 预算消耗速率（每小时消耗）
+
+```promql
+# 过去 1 小时的错误率
+sum(rate(http_requests_total{status=~"5.."}[1h]))
+/
+sum(rate(http_requests_total[1h]))
+
+# 当前燃烧率（当前错误率 / SLO 允许错误率）
+(
+  sum(rate(http_requests_total{status=~"5.."}[1h]))
+  / sum(rate(http_requests_total[1h]))
+)
+/
+(1 - 0.999)
+
+# 如果燃烧率为 14.4x:
+# 意味着当前错误率是正常允许值的 14.4 倍
+# 将在 30/14.4 = 2.08 天内耗尽预算
+```
+
+### 预算预计耗尽时间
+
+```promql
+# 基于当前燃烧率预测预算耗尽时间（小时）
+(
+  1 - (
+    (
+      sum(rate(http_requests_total{status=~"5.."}[30d]))
+      / sum(rate(http_requests_total[30d]))
+    ) - 0.001
+  ) / 0.001
+)
+*
+(30 * 24)
+/
+(
+  (
+    sum(rate(http_requests_total{status=~"5.."}[1h]))
+    / sum(rate(http_requests_total[1h]))
+  )
+  /
+  0.001
+)
+
+# 简化版本：基于过去 24h 燃烧率预测剩余天数
+(
+  1 - (
+    (
+      sum(rate(http_requests_total{status=~"5.."}[30d]))
+      / sum(rate(http_requests_total[30d]))
+    ) - 0.001
+  ) / 0.001
+) * 30
+/
+(
+  (
+    sum(rate(http_requests_total{status=~"5.."}[1d]))
+    / sum(rate(http_requests_total[1d]))
+  )
+  /
+  0.001
+)
+```
+
+### 多服务预算消耗总览
+
+```promql
+# 所有服务的预算消耗比例
+(
+  (
+    sum(rate(http_requests_total{status=~"5.."}[30d])) by (service)
+    / sum(rate(http_requests_total[30d])) by (service)
+  ) - 0.001
+) / 0.001
+
+# 预算消耗 Top 5 的服务
+topk(5,
+  (
+    (
+      sum(rate(http_requests_total{status=~"5.."}[30d])) by (service)
+      / sum(rate(http_requests_total[30d])) by (service)
+    ) - 0.001
+  ) / 0.001
+)
+```
+
 ### 预算消耗看板
 
 ```yaml
@@ -168,11 +329,14 @@ panels:
   - title: "错误预算消耗率 (30天)"
     type: gauge
     query: |
-      (
-        (sum(rate(http_requests_total{status=~"5.."}[30d])) 
-         / sum(rate(http_requests_total[30d])))
-        - 0.001
-      ) / 0.001
+      clamp_min(
+        (
+          (sum(rate(http_requests_total{status=~"5.."}[30d])) 
+           / sum(rate(http_requests_total[30d])))
+          - 0.001
+        ) / 0.001,
+        0
+      )
     thresholds:
       - value: 0.25  color: green   # 充足
       - value: 0.50  color: yellow  # 过半
@@ -190,6 +354,338 @@ panels:
           - 0.001
         ) / 0.001 * 30d
       )
+```
+
+## 预算耗尽时的自动熔断机制
+
+### 熔断机制设计原则
+
+当错误预算消耗达到特定阈值时，自动触发保护措施，防止进一步消耗预算。
+
+```
+熔断阈值设计:
+
+预算剩余 100% → 正常发布，正常运维
+预算剩余 75%  → 触发 warning，增加监控频率
+预算剩余 50%  → 触发 page，非紧急发布需审批
+预算剩余 25%  → 发布冻结（紧急修复除外）
+预算剩余 0%   → 完全冻结，所有变更禁止
+预算超支      → 触发事后复盘，SLO 评审
+```
+
+### [[Kubernetes|Kubernetes]] 自动熔断实现
+
+```yaml
+# error-budget-policy.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: error-budget-policy
+  namespace: sre-system
+data:
+  policy.json: |
+    {
+      "service": "order-service",
+      "slo": 0.999,
+      "window_days": 30,
+      "thresholds": [
+        {
+          "budget_remaining": 0.75,
+          "action": "notify",
+          "channels": ["slack#sre-alerts"],
+          "message": "错误预算已消耗 25%，请关注"
+        },
+        {
+          "budget_remaining": 0.50,
+          "action": "page",
+          "channels": ["pagerduty"],
+          "message": "错误预算已消耗 50%，非紧急发布需审批"
+        },
+        {
+          "budget_remaining": 0.25,
+          "action": "freeze_release",
+          "channels": ["slack#releases", "pagerduty"],
+          "message": "错误预算已消耗 75%，发布已冻结"
+        },
+        {
+          "budget_remaining": 0.00,
+          "action": "emergency_freeze",
+          "channels": ["slack#incidents", "pagerduty", "email:vp@example.com"],
+          "message": "错误预算已耗尽！禁止所有变更，启动复盘"
+        }
+      ]
+    }
+```
+
+### 基于 OPA/Gatekeeper 的发布门控
+
+```yaml
+# release-freeze-policy.rego
+package kubernetes.admission
+
+import future.keywords.if
+import future.keywords.in
+
+# 错误预算状态（由外部系统注入到 ConfigMap）
+budget_status := data.configmaps["sre-system"]["error-budget-status"].data
+
+# 拒绝非紧急部署当预算低于 25%
+deny[msg] if {
+  input.request.kind.kind == "Deployment"
+  input.request.operation == "CREATE"
+  
+  service := input.request.object.metadata.labels["app"]
+  budget_remaining := to_number(budget_status[service])
+  
+  budget_remaining < 0.25
+  
+  # 检查是否为紧急修复（带 emergency 注解）
+  not input.request.object.metadata.annotations["release-type"] == "emergency"
+  
+  msg := sprintf(
+    "发布被拒绝: 服务 %s 的错误预算仅剩 %.1f%%，低于 25%% 阈值。" +
+    "如需紧急修复，请添加 annotation 'release-type: emergency' 并获得审批。",
+    [service, budget_remaining * 100]
+  )
+}
+```
+
+### 自动化熔断控制器
+
+```python
+# error_budget_controller.py
+# 运行在集群中，定期评估错误预算并执行熔断动作
+
+import requests
+import json
+from datetime import datetime, timedelta
+
+PROMETHEUS_URL = "http://prometheus.monitoring.svc:9090"
+SLO_CONFIG = {
+    "order-service": {"slo": 0.999, "window_days": 30},
+    "payment-service": {"slo": 0.9999, "window_days": 30},
+    "user-service": {"slo": 0.995, "window_days": 30},
+}
+
+THRESHOLDS = [
+    (0.75, "notify"),
+    (0.50, "page"),
+    (0.25, "freeze_release"),
+    (0.00, "emergency_freeze"),
+]
+
+def query_prometheus(query: str) -> float:
+    """执行 PromQL 查询"""
+    resp = requests.get(
+        f"{PROMETHEUS_URL}/api/v1/query",
+        params={"query": query}
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    if data["data"]["result"]:
+        return float(data["data"]["result"][0]["value"][1])
+    return 0.0
+
+def calculate_budget_consumed(service: str, slo: float) -> float:
+    """计算已消耗的错误预算比例"""
+    query = f'''
+    (
+      (
+        sum(rate(http_requests_total{{service="{service}",status=~"5.."}}[30d]))
+        / sum(rate(http_requests_total{{service="{service}"}}[30d]))
+      ) - {1 - slo}
+    ) / {1 - slo}
+    '''
+    result = query_prometheus(query)
+    return max(0.0, result)
+
+def take_action(service: str, budget_remaining: float, action: str):
+    """执行熔断动作"""
+    actions = {
+        "notify": lambda: send_slack(f"{service}: 预算剩余 {budget_remaining:.1%}"),
+        "page": lambda: trigger_pagerduty(service, budget_remaining),
+        "freeze_release": lambda: freeze_release_pipeline(service),
+        "emergency_freeze": lambda: emergency_lockdown(service),
+    }
+    
+    if action in actions:
+        actions[action]()
+        log_action(service, action, budget_remaining)
+
+def evaluate_all_services():
+    """评估所有服务的错误预算状态"""
+    for service, config in SLO_CONFIG.items():
+        consumed = calculate_budget_consumed(service, config["slo"])
+        remaining = 1.0 - consumed
+        
+        for threshold, action in THRESHOLDS:
+            if remaining <= threshold:
+                take_action(service, remaining, action)
+                break
+
+# 由 CronJob 每小时执行
+if __name__ == "__main__":
+    evaluate_all_services()
+```
+
+### Kubernetes CronJob 部署
+
+```yaml
+# error-budget-controller-cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: error-budget-controller
+  namespace: sre-system
+spec:
+  schedule: "0 * * * *"  # 每小时执行
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: error-budget-controller
+          containers:
+            - name: controller
+              image: sre/error-budget-controller:v1.0
+              env:
+                - name: PROMETHEUS_URL
+                  value: "http://prometheus.monitoring.svc:9090"
+                - name: SLACK_WEBHOOK
+                  valueFrom:
+                    secretKeyRef:
+                      name: sre-secrets
+                      key: slack-webhook
+          restartPolicy: OnFailure
+```
+
+## 错误预算与发布频率的关联模型
+
+### 发布风险模型
+
+每次发布都引入一定的风险，错误预算决定了你能承受多少次发布。
+
+```
+基本假设:
+  - 每次发布引入错误率上升的概率: p
+  - 发布导致的平均错误率上升: Δe
+  - 发布导致的平均持续时间: t
+  - 发布期间请求量: R
+
+单次发布期望消耗预算 = p × Δe × t × R
+
+示例:
+  p = 20% (每 5 次发布有 1 次出问题)
+  Δe = 5% (出问题时的错误率)
+  t = 30 分钟 = 1800 秒
+  R = 1000 req/s
+  
+  单次发布期望消耗 = 0.2 × 0.05 × 1800 × 1000 = 18,000 次错误
+  
+  如果月度预算为 10,000 次:
+  可承受发布次数 = 10,000 / 18,000 ≈ 0.55 次/月
+  
+  → 这意味着当前发布质量下，每月最多发布 0-1 次！
+  → 需要降低发布风险（更好的测试、金丝雀发布）
+```
+
+### 发布频率与错误预算的数学关系
+
+```
+变量定义:
+  B = 月度错误预算
+  f = 发布频率 (次/月)
+  r = 单次发布引入的平均错误数
+  c = 其他原因（非发布）导致的月均错误数
+
+约束条件:
+  f × r + c ≤ B
+
+求解最大发布频率:
+  f ≤ (B - c) / r
+
+示例:
+  B = 10,000 次 (SLO 99.9%, 1000 万请求/月)
+  c = 2,000 次 (基础设施、依赖故障等)
+  r = 1,500 次 (改进后的发布质量)
+  
+  f ≤ (10,000 - 2,000) / 1,500 = 5.33
+  
+  → 每月最多可发布 5 次
+  → 如果团队需要每周发布，需要进一步降低 r
+```
+
+### 发布策略与预算消耗矩阵
+
+| 发布策略 | 风险等级 | 单次预算消耗估计 | 适用预算状态 |
+|---------|---------|----------------|------------|
+| **大爆炸发布** | 极高 | 30-50% 预算 | ❌ 永远不推荐 |
+| **蓝绿发布** | 中 | 5-10% 预算 | ✅ 预算 > 50% |
+| **金丝雀 5% → 100%** | 低 | 2-5% 预算 | ✅ 预算 > 25% |
+| **金丝雀 1% → 5% → 25% → 100%** | 很低 | 1-3% 预算 | ✅ 任何状态 |
+| **特性开关 (Feature Flag)** | 极低 | < 1% 预算 | ✅ 任何状态 |
+| **紧急热修复** | 高 | 10-20% 预算 | ⚠️ 仅紧急 |
+
+### 发布频率优化策略
+
+```
+当错误预算紧张时，如何保持发布频率?
+
+策略 1: 降低单次发布风险
+  → 增加自动化测试覆盖率
+  → 强制代码审查（至少 2 人）
+  → 引入金丝雀发布（最小 1% 流量）
+  → 自动回滚（SLO 下降时自动触发）
+
+策略 2: 分流发布风险
+  → 使用特性开关，新功能默认关闭
+  → 灰度发布（按用户、地域、设备）
+  → A/B 测试框架隔离实验流量
+
+策略 3: 增加错误预算
+  → 提升 SLO（需要架构改进）
+  → 减少非发布错误（提升基础设施稳定性）
+  → 扩展评估窗口（从 30 天到 90 天，平滑波动）
+
+策略 4: 分离发布类型
+  → 功能发布: 消耗错误预算
+  → 安全修复: 不消耗预算（或单独预算池）
+  → 配置变更: 低风险，快速回滚
+```
+
+### 发布日历与预算规划
+
+```
+月度发布规划示例 (SLO 99.9%, 预算 10,000 次):
+
+Week 1:
+  计划: 金丝雀发布 v2.1 (新功能)
+  预留预算: 2,000 次
+  实际消耗: 500 次 (顺利)
+  剩余预算: 9,500 次
+
+Week 2:
+  计划: 金丝雀发布 v2.2 (性能优化)
+  预留预算: 2,000 次
+  实际消耗: 3,500 次 (引入回归 bug，快速回滚)
+  剩余预算: 6,000 次
+  → 触发 yellow 告警
+
+Week 3:
+  原计划: 发布 v2.3
+  调整: 改为仅 bug 修复，禁止新功能
+  实际消耗: 200 次
+  剩余预算: 5,800 次
+
+Week 4:
+  计划: 回顾和修复 Week 2 的问题
+  发布冻结，除非紧急修复
+  实际消耗: 100 次
+  剩余预算: 5,700 次 (57%)
+
+月度总结:
+  预算使用率: 43%
+  发布次数: 3 次（原计划 4 次）
+  关键教训: v2.2 缺少集成测试，下月增加
 ```
 
 ## 基于错误预算的发布决策
@@ -367,3 +863,4 @@ sum(rate(http_requests_total{status=~"5.."}[30d]))
 ## 相关
 
 - [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide]] — SLO 设定与实施指南
+- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting]] — Burn Rate 告警

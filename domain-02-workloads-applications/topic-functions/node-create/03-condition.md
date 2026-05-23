@@ -1,4 +1,46 @@
 ---
+title: 节点状态与健康检查 — Node Conditions 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- kubelet
+- scheduler
+- controller-manager
+- cilium
+- flannel
+- calico
+- containerd
+- daemonset
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点状态与健康检查 — Node Conditions 源码分析 是什么
+- 如何 节点状态与健康检查 — Node Conditions 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点状态与健康检查
+- Node
+- Conditions
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- cilium-basics
+- cni-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 节点状态与健康检查 Node Conditions 源码分析
 description: '## 概述'
 category: functions
@@ -40,12 +82,6 @@ trigger_keywords:
 - kubelet
 - PLEG
 - scheduling
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- cilium-basics
-- cni-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-9-orchestration
@@ -53,13 +89,22 @@ related_topics:
 - node-create/01-overview
 - node-create/02-registration
 - node-create/08-troubleshooting
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点状态与健康检查 — Node Conditions 源码分析
 
 ## 概述
 
-节点状态（Node Conditions）是 [[entities/kubernetes|kubernetes]] 调度器和管理控制器判断节点健康状态的核心机制。每个节点维护一组 Conditions，包括 Ready、MemoryPressure、DiskPressure、PIDPressure 和 NetworkUnavailable，它们分别反映了节点在不同维度的健康状况。
+节点状态（Node Conditions）是 Kubernetes 调度器和管理控制器判断节点健康状态的核心机制。每个节点维护一组 Conditions，包括 Ready、MemoryPressure、DiskPressure、PIDPressure 和 NetworkUnavailable，它们分别反映了节点在不同维度的健康状况。
 
 kubelet 通过定期的状态上报（Status Update）将节点的 Conditions 同步到 API Server。调度器在为 Pod 选择节点时，会检查这些 Conditions 来决定是否将 Pod 调度到该节点。Node Lifecycle Controller 盾牌持续监控节点 Conditions，当节点长时间 NotReady 时触发 Pod 驱逐。
 
@@ -452,3 +497,11 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 | `synchronize` | `pkg/kubelet/eviction/eviction_manager.go` | 驱逐管理主循环 |
 | `NodeExists` | `pkg/controller/nodelifecycle/` | 节点存在性检查 |
 | `CheckNodeReady` | `pkg/scheduler/framework/plugins/` | 调度器就绪检查 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/cni.md|cni]]
+- [[entities/containerd.md|containerd]]

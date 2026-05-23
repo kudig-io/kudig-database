@@ -1,16 +1,57 @@
 ---
+title: 第三课：Deployment - 应用部署管理器 [fundamentals]
+description: 'title: 第三课：Deployment - 应用部署管理器'
+category: learning
+tags:
+- k8s
+- training
+- hands-on
+- hpa
+- ingress
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 第三课：Deployment - 应用部署管理器 是什么
+- 如何 第三课：Deployment - 应用部署管理器
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 第三课：Deployment
+- 应用部署管理器
+- production
+- operations
+- learn
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+created: "2026-05-23"
+---
+
+---
 title: 第三课：Deployment - 应用部署管理器
 description: '# 第三课：Deployment - 应用部署管理器'
-category: k8s-lecturer
+category: learning
 tags:
+- tutorial
+- deployment
+- Deployment
+- 应用部署
 - k8s
 - training
 - lecturer
 - hpa
+aliases:
+- Deployment
+- 应用部署
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: beginner
+reading_level: beginner
 audience:
+- 初学者
+- 运维工程师
 - 培训师
 - 技术经理
 estimated_read_time: 5min
@@ -21,12 +62,18 @@ trigger_keywords:
 - 第三课：Deployment
 - 应用部署管理器
 - k8s
-- lecturer
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
----
+- learning
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 
+tier: peripheral---
 # 第三课：Deployment - 应用部署管理器
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟
@@ -368,6 +415,13 @@ kubectl delete deployment my-app
 ---
 
 **关联文档**:
-- [../03-networking/[[domain-11-production-operations/topic-k8s-lecturer/03-networking/03-service-basics|03-service-basics]].md](../03-networking/03-service-basics.md) — Service 基础
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 Skill
+- [../03-networking/03-service-basics.md](../03-networking/03-service-basics.md) — Service 基础
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md) — 滚动更新故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
+
+## See Also
+
+- kubernetes.md|01-what-is-kubernetes]]
+- 02-pod-basics
+- 04-service-basics
+- 05-ingress-basics

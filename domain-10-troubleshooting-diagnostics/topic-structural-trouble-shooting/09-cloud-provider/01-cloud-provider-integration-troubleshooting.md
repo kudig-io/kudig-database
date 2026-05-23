@@ -1,5 +1,5 @@
 ---
-title: 云厂商集成故障排查指南
+title: 云厂商集成故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 云厂商集成故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 云厂商集成故障排查指南
@@ -49,9 +50,9 @@ tags:
 - troubleshooting
 - decision-tree
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
-- daemonset
+- [[DaemonSet|daemonset]]
 - job
 - ingress
 - gateway
@@ -1232,8 +1233,8 @@ echo "安全检查报告已生成: $SECURITY_REPORT"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

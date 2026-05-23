@@ -30,6 +30,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 集群配置最佳实践
@@ -67,7 +68,7 @@ prerequisites:
 
 1. **环境准备**：配置内核参数（`net.bridge.bridge-nf-call-*`、`net.ipv4.ip_forward`），禁用 swap
 2. **安装容器运行时**：containerd 1.6+，启用 SystemdCgroup
-3. **安装 Kubernetes 组件**：kubelet、kubeadm、kubectl
+3. **安装 [[entities/kubernetes.md|Kubernetes 组件]]**：[[kubelet|kubelet]]、kubeadm、kubectl
 4. **初始化控制平面**：使用 kubeadm-config.yaml 初始化，配置 controlPlaneEndpoint
 5. **安装网络插件**：Calico/Cilium，确保 Pod CIDR 与集群配置一致 ^[inferred]
 6. **加入工作节点**：使用 kubeadm join 命令
@@ -90,7 +91,7 @@ prerequisites:
 
 - 检查控制平面节点状态：`kubectl get nodes`
 - 检查 etcd 集群成员：`etcdctl member list`
-- 检查系统组件：`kubectl get pods -n kube-system`
+- 检查系统组件：`kubectl get [[Pods|pods]] -n kube-system`
 - 检查集群资源使用：`kubectl top nodes`
 
 ## 相关资源

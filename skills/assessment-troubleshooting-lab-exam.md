@@ -23,6 +23,7 @@ trigger_keywords:
 - Exam
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Troubleshooting Lab Exam
@@ -40,7 +41,7 @@ prerequisites:
 
 - 命名空间：`production`
 - Pod 名称：`payment-api-7d9f8b5c6-x2kqm`
-- 镜像：`payment-service:v1.2`
+- 镜像：`payment-[[Service|service]]:v1.2`
 - 资源请求：`cpu: 2, memory: 4Gi`
 
 ## 相关链接

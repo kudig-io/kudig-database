@@ -27,13 +27,14 @@ trigger_keywords:
 - Platforms
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Platform Engineering and Internal Developer Platforms
+# [[synthesis/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platforms
 
 ## Platform Engineering Definition
 
-Platform Engineering is the discipline of designing and building toolchains and workflows that enable self-service capabilities for software engineering organizations. Gartner predicts 80% of large software organizations will establish platform teams by 2026.
+Platform Engineering is the discipline of designing and building toolchains and workflows that enable self-[[Service|service]] capabilities for software engineering organizations. Gartner predicts 80% of large software organizations will establish platform teams by 2026.
 
 ## Core Concept: Internal Developer Platform (IDP)
 

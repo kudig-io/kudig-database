@@ -1,5 +1,5 @@
 ---
-title: AI Agent 工程专题
+title: AI Agent 工程专题 (domain-14-ai-ml-infra) [98-merged-indexes]
 description: '# AI Agent 工程专题'
 category: ai-agent
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # AI Agent 工程专题

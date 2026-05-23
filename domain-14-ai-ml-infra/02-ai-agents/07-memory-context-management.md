@@ -1,5 +1,5 @@
 ---
-title: 记忆管理与上下文窗口工程
+title: 记忆管理与上下文窗口工程 (domain-14-ai-ml-infra)
 description: 'title: 记忆管理与上下文窗口工程'
 category: general
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: 记忆管理与上下文窗口工程
@@ -783,7 +784,7 @@ class CachedMemorySystem:
 | 文档 | 关联内容 |
 |------|---------|
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | 上下文窗口在 Agent Loop 中的作用 |
-| [04 - RAG 检索](./[[domain-14-ai-ml-infra/04-rag-knowledge-retrieval.md|04-rag-knowledge-retrieval]].md) | 语义记忆与 RAG 的结合 |
+| [04 - RAG 检索](./04-rag-knowledge-retrieval.md) | 语义记忆与 RAG 的结合 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 多 Agent 共享记忆的架构 |
 | [11 - 成本优化](./11-cost-latency-optimization.md) | Token 压缩对成本的影响 |
 | [domain-14-ai-ml-infra/20-vector-database-rag.md](../domain-14-ai-ml-infra/20-vector-database-rag.md) | 向量数据库选型 |
@@ -796,11 +797,11 @@ class CachedMemorySystem:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|[[LLM 基座模型选型与评估|LLM 基座模型选型与评估]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|[[主流 Agent 框架深度对比|主流 Agent 框架深度对比]]]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
@@ -811,7 +812,7 @@ class CachedMemorySystem:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]]
-- [[domain-14-ai-ml-infra/06-multi-agent-orchestration.md|06-multi-agent-orchestration]]
-- [[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]]
-- [[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]]
+- 05-tool-use-function-calling
+- 06-multi-agent-orchestration
+- 08-agent-evaluation-observability
+- 09-production-deployment-guide

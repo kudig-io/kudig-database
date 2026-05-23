@@ -33,6 +33,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 6: K8s 架构深化 + 集群配置
@@ -90,11 +91,11 @@ related:
 
 ## 概述
 
-本文在 Day 5 的架构基础上，深入集群配置参数、API 版本管理，并通过部署第一个 Deployment 来体验 K8s 声明式管理的完整工作流。你将理解 Deployment → ReplicaSet → Pod 的层级关系，掌握滚动更新和回滚操作，并学会创建 Service 暴露应用。
+本文在 Day 5 的架构基础上，深入集群配置参数、API 版本管理，并通过部署第一个 Deployment 来体验 K8s 声明式管理的完整工作流。你将理解 Deployment → [[ReplicaSet|ReplicaSet]] → Pod 的层级关系，掌握滚动更新和回滚操作，并学会创建 Service 暴露应用。
 
 ### 学习目标
 
-- 理解 K8s 集群配置参数（kubelet、API Server、网络等关键配置）
+- 理解 K8s 集群配置参数（[[kubelet|kubelet]]、API Server、网络等关键配置）
 - 掌握 API 版本演进（alpha/beta/stable）和特性门控（Feature Gate）
 - 部署第一个 Deployment，体验声明式管理的完整流程
 - 理解 Deployment → ReplicaSet → Pod 的层级关系和滚动更新机制
@@ -111,7 +112,7 @@ K8s 集群的配置涉及多个组件的参数。在 kind/minikube 本地集群�
 
 | 参数 | 说明 | 典型值 |
 |------|------|--------|
-| `--etcd-servers` | etcd 连接地址 | `http://127.0.0.1:2379` |
+| `--etcd-servers` | [[etcd|etcd]] 连接地址 | `http://127.0.0.1:2379` |
 | `--service-cluster-ip-range` | Service CIDR | `10.96.0.0/12` |
 | `--enable-admission-plugins` | 启用的准入控制器 | `NodeRestriction,LimitRanger` |
 | `--max-requests-inflight` | 最大并发请求数 | `400` |
@@ -121,7 +122,7 @@ K8s 集群的配置涉及多个组件的参数。在 kind/minikube 本地集群�
 
 | 参数 | 说明 | 典型值 |
 |------|------|--------|
-| `--max-pods` | 节点最大 Pod 数 | `110` |
+| `--max-[[Pods|pods]]` | 节点最大 Pod 数 | `110` |
 | `--pod-cidr` | Pod IP 地址范围 | `10.244.0.0/24` |
 | `--eviction-hard` | 硬驱逐阈值 | `memory.available<100Mi` |
 | `--system-reserved` | 系统资源预留 | `cpu=500m,memory=512Mi` |

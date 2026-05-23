@@ -56,9 +56,10 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
-# Istio Ambient Mesh 与 L7 策略深度实践
+# [[Istio|Istio]] Ambient Mesh 与 L7 策略深度实践
 
 > **最后更新**: 2026-04-24
 > **适用版本**: Istio v1.29+ (Ambient GA)
@@ -173,12 +174,12 @@ ztunnel 核心能力：
 
 | 能力 | 说明 |
 |:---|:---|
-| L4 代理 | TCP 连接代理，支持 HTTP/2 和 gRPC 的透传 |
-| mTLS | 基于 SPIFFE 身份的自动证书管理，每Pod粒度的身份标识 |
+| L4 代理 | TCP 连接代理，支持 HTTP/2 和 [[gRPC|gRPC]] 的透传 |
+| mTLS | 基于 [[SPIFFE|SPIFFE]] 身份的自动证书管理，每Pod粒度的身份标识 |
 | HBONE 隧道 | HTTP-Based Overlay Network Encapsulation，用于跨节点通信 |
 | 健康检查 | 代为执行服务健康检查，减少应用负担 |
 | 指标导出 | L4 层连接指标、字节计数、错误率 |
-| DNS 代理 | 节点级 DNS 解析，支持 K8s Service 发现 |
+| DNS 代理 | 节点级 DNS 解析，支持 K8s [[Service|Service]] 发现 |
 
 #<!-- chunk: 1.2 Waypoint Proxy L7 代理 -->## 1.2 Waypoint Proxy L7 代理
 
@@ -1168,22 +1169,22 @@ Istio 的 Sidecar 模式和 Ambient 模式代表了服务网格架构的两个�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|06-traefik-mesh-enterprise]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|07-service-mesh-comparison-selection]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|09-microservice-resilience-patterns]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|10-api-gateway-service-mesh-integration]]
+- 06-traefik-mesh-enterprise
+- 07-service-mesh-comparison-selection
+- 09-microservice-resilience-patterns
+- 10-api-gateway-service-mesh-integration

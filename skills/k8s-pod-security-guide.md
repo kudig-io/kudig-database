@@ -23,6 +23,7 @@ trigger_keywords:
 - 安全最佳实践
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Pod 安全最佳实践
@@ -80,7 +81,7 @@ labels:
 ## 镜像安全
 
 - 使用可信镜像仓库白名单 ^[inferred]
-- 镜像安全扫描（Trivy 等）^[inferred]
+- 镜像安全扫描（[[Trivy|Trivy]] 等）^[inferred]
 - 避免使用 `latest` 标签，使用固定版本 ^[ambiguous]
 
 ## 常见陷阱
@@ -105,9 +106,9 @@ labels:
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[concepts/security-defense-depth.md|Defense-in-Depth Security]]
-- [[concepts/secrets-management.md|Secrets Management]]
+- [[concepts/secrets-management.md|[[Secrets Management|Secrets Management]]]]
 - [[skills/audit-rbac-configurations.md|Audit RBAC Configurations]]
 
 ## Related

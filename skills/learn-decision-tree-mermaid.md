@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
 ---
 
 # 故障排查决策树 - Mermaid 可视化版
@@ -142,7 +143,7 @@ flowchart TD
 
 ---
 
-## 3. Service 无法访问
+## 3. [[Service|Service]] 无法访问
 
 ```mermaid
 flowchart TD
@@ -531,7 +532,7 @@ flowchart TD
 ---
 
 **关联文档**:
-- [../README.md](../[[README]].md) — 讲师完整台词设计
+- [../README.md](../[[references/kudig-metadata-index.md|README]]]].md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档

@@ -1,5 +1,5 @@
 ---
-title: OpenCost
+title: OpenCost [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # OpenCost
@@ -71,12 +72,12 @@ OpenCost 是 Kubernetes 成本监控的开源标准。它提供实时成本分�
 
 ## Related
 
-- [[piraeus-datastore]] — Piraeus Datastore
+- [[piraeus-datastore]] — [[Piraeus Datastore|Piraeus Datastore]]
 - [[k8up]] — K8up
 - [[parsec]] — Parsec
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/opencost/opencost.md|opencost]]
-- [[entities/cncf-observability|CNCF 可观测性项目全景]] — Cross-reference
+- opencost
+- observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

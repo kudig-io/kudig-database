@@ -1,5 +1,5 @@
 ---
-title: Scheduler 异常故障树分析
+title: Scheduler 异常故障树分析 (skills)
 description: '<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events
   -A --field-selector reason=FailedScheduling 显示调度失败 -->'
 category: skills
@@ -28,11 +28,12 @@ prerequisites:
 fta_id: FTA-SCHEDULER-001
 component: Scheduler
 severity: high
+created: "2026-05-23"
 ---
 
 # Scheduler 异常故障树分析
 
-<!-- condition: kubectl get pods -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败 -->
+<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败 -->
 
 # Scheduler 异常 FTA 树
 

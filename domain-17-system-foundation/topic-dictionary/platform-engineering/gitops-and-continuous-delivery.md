@@ -33,13 +33,14 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # GitOps 与持续交付
 
 ## 概述
 
-**GitOps** 是一种以 Git 为唯一事实来源（Single Source of Truth）的运营模型，将基础设施和应用配置的声明式定义存储在 Git 仓库中，通过自动化控制器持续同步集群状态与 Git 中的期望状态。2026 年，GitOps 已成为 Kubernetes 平台工程和多云交付的事实标准，主流实现包括 **Argo CD** 和 **[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]]**。
+**GitOps** 是一种以 Git 为唯一事实来源（Single Source of Truth）的运营模型，将基础设施和应用配置的声明式定义存储在 Git 仓库中，通过自动化控制器持续同步集群状态与 Git 中的期望状态。2026 年，GitOps 已成为 [[Kubernetes|Kubernetes]] 平台工程和多云交付的事实标准，主流实现包括 **[[Argo|Argo]] CD** 和 **[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|[[Flux|Flux]]]]**。
 
 ## 核心概念/原理
 

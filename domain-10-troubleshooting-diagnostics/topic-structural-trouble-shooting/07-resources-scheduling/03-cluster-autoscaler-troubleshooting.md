@@ -1,5 +1,5 @@
 ---
-title: Cluster Autoscaler 节点自动扩缩容故障排查指南
+title: Cluster Autoscaler 节点自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Cluster Autoscaler 节点自动扩缩容故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: Cluster Autoscaler 节点自动扩缩容故障排查指南
@@ -83,7 +84,7 @@ k8s_versions:
 
 # Cluster Autoscaler 节点自动扩缩容故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - CA 版本需与 K8s 版本对应 (如 CA v1.30.x 对应 K8s v1.30.x)
@@ -95,7 +96,7 @@ k8s_versions:
 
 ## 0. 10 分钟快速诊断
 
-1. **CA 存活**：`kubectl get pods -n kube-system | grep cluster-autoscaler`。
+1. **CA 存活**：`kubectl get [[Pods|pods]] -n kube-system | grep cluster-autoscaler`。
 2. **Pending 原因**：`kubectl get pods -A --field-selector=status.phase=Pending`，确认是否资源不足。
 3. **节点组状态**：`kubectl get cm -n kube-system cluster-autoscaler-status -o yaml`，查看 scale up/down 记录。
 4. **云 API 错误**：查看 CA 日志中的 `authorization`/`quota`/`node group` 错误。
@@ -863,9 +864,9 @@ containers:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]

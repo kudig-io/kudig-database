@@ -1,18 +1,55 @@
 ---
-title: 第一课：Kubernetes 入门
-description: • 如果你有 100 台服务器，容器该部署到哪台？
-category: k8s-lecturer
+title: 第一课：Kubernetes 入门 [fundamentals]
+description: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
+category: learning
 tags:
+- k8s
+- training
+- hands-on
+- docker
+- mysql
+- ingress
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 第一课：Kubernetes 入门 是什么
+- 如何 第一课：Kubernetes 入门
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 第一课：Kubernetes
+- 入门
+- production
+- operations
+- learn
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
+---
+title: 第一课：[[Kubernetes|Kubernetes]] 入门
+description: • 如果你有 100 台服务器，容器该部署到哪台？
+category: learning
+tags:
+- tutorial
 - k8s
 - training
 - lecturer
 - docker
 - mysql
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
+difficulty: beginner
+reading_level: beginner
 audience:
+- 初学者
+- 运维工程师
 - 培训师
 - 技术经理
 estimated_read_time: 5min
@@ -23,13 +60,18 @@ trigger_keywords:
 - 第一课：Kubernetes
 - 入门
 - k8s
-- lecturer
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- mysql-basics
----
+- learning
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 
+tier: peripheral---
 # 第一课：Kubernetes 入门
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 15 分钟
@@ -39,7 +81,7 @@ prerequisites:
 ## 学习目标
 
 1. 理解 Kubernetes 的基本概念
-2. 了解 [[entities/kubernetes|k8s]] 能解决什么问题
+2. 了解 K8s 能解决什么问题
 3. 掌握 K8s 的核心优势
 
 ---
@@ -292,3 +334,10 @@ s  - s
 - [../02-getting-started/](./02-getting-started/) — 快速入门
 - [../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md) — 架构详解
 - [../../domain-17-system-foundation/](../../domain-17-system-foundation/) — Linux 基础
+
+## See Also
+
+- presentation-template
+- decision-tree-mermaid
+- 02-pod-basics
+- 03-deployment-basics

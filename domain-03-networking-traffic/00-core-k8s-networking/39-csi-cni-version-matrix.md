@@ -63,6 +63,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/networking.md
   label: '速查卡: networking'
+created: "2026-05-23"
 ---
 
 # CSI / CNI 版本兼容矩阵
@@ -92,10 +93,10 @@ cross_refs:
 | **GCE PD CSI** v1.10+ | 1.20 | 1.26-1.33 | 1.33 | GKE 原生支持 |
 | **Azure Disk CSI** v1.20+ | 1.20 | 1.26-1.33 | 1.33 | AKS 原生支持 |
 | **阿里云 Cloud Disk CSI** v1.0+ | 1.21 | 1.28-1.33 | 1.33 | ACK 原生支持 |
-| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | Rook 部署 |
+| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | [[Rook|Rook]] 部署 |
 | **Ceph CSI (CephFS)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | Rook 部署 |
 | **NFS CSI** v4.0+ | 1.20 | 1.26-1.33 | 1.33 | 需要外部Provisioner |
-| **Longhorn CSI** v1.5+ | 1.21 | 1.26-1.33 | 1.33 | CNCF 项目 |
+| **[[Longhorn|Longhorn]] CSI** v1.5+ | 1.21 | 1.26-1.33 | 1.33 | CNCF 项目 |
 | **TopoLVM CSI** v0.10+ | 1.21 | 1.28-1.33 | 1.33 | 本地 LVM 支持 |
 | **OpenEBS CSI** v3.0+ | 1.22 | 1.26-1.33 | 1.33 | CNCF 项目 |
 
@@ -372,22 +373,22 @@ related:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## See Also
 
-- [[domain-03-networking-traffic/37-terway-resources-crud-operations.md|37-terway-resources-crud-operations]]
-- [[domain-03-networking-traffic/38-terway-gc-mechanism.md|38-terway-gc-mechanism]]
-- [[domain-03-networking-traffic/40-terway-product-overview.md|40-terway-product-overview]]
-- [[domain-03-networking-traffic/41-terway-architecture-deep-dive.md|41-terway-architecture-deep-dive]]
+- 37-terway-resources-crud-operations
+- 38-terway-gc-mechanism
+- 40-terway-product-overview
+- 41-terway-architecture-deep-dive

@@ -1,4 +1,47 @@
 ---
+title: 07 - 可观测性与安全迁移 [migration]
+description: 'title: 07 - 可观测性与安全迁移'
+category: general
+tags:
+- migration
+- upgrade
+- observability
+- security
+- kubelet
+- prometheus
+- grafana
+- jaeger
+- helm
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 可观测性与安全迁移 是什么
+- 如何 可观测性与安全迁移
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 可观测性与安全迁移
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- helm-basics
+- prometheus-basics
+- monitoring-basics
+- tls-basics
+- logging-basics
+- tracing-basics
+- observability-basics
+created: "2026-05-23"
+---
+
 title: 07 - 可观测性与安全迁移
 description: '# 07 - 可观测性与安全迁移'
 category: migration
@@ -6,11 +49,11 @@ tags:
 - k8s
 - migration
 - modernization
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- helm
+- [[Jaeger|jaeger]]
+- [[Helm|helm]]
 - docker
 - elasticsearch
 last_updated: 2026-05
@@ -27,16 +70,15 @@ intent_queries:
 trigger_keywords:
 - 可观测性与安全迁移
 - migration
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- tls-basics
-- logging-basics
-- tracing-basics
-- observability-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 07 - 可观测性与安全迁移
@@ -45,7 +87,7 @@ prerequisites:
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [监控体系迁移](#1-监控体系迁移)
 2. [日志体系迁移](#2-日志体系迁移)
@@ -58,9 +100,9 @@ prerequisites:
 
 ---
 
-## 1. 监控体系迁移
+<!-- chunk: 1. 监控体系迁移 -->## 1. 监控体系迁移
 
-### 1.1 方案选择
+#<!-- chunk: 1.1 方案选择 -->## 1.1 方案选择
 
 | 方案 | 说明 | 适用场景 | 成本 |
 |------|------|---------|------|
@@ -68,7 +110,7 @@ prerequisites:
 | **自建 Prometheus → ARMS Prometheus** | 使用阿里云托管 Prometheus | 免运维，与 ACK 深度集成 | ARMS 服务费 |
 | **混合方案** | ACK 自建 Prometheus + ARMS 基础指标 | 灵活，可渐进迁移 | 中等 |
 
-### 1.2 自建 Prometheus 部署
+#<!-- chunk: 1.2 自建 Prometheus 部署 -->## 1.2 自建 Prometheus 部署
 
 ```bash
 # 在 ACK 部署 kube-prometheus-stack（推荐 Helm 方式）
@@ -129,7 +171,7 @@ kubectl get pods -n monitoring
 kubectl get svc -n monitoring
 ```
 
-### 1.3 自定义指标抓取配置迁移
+#<!-- chunk: 1.3 自定义指标抓取配置迁移 -->## 1.3 自定义指标抓取配置迁移
 
 ```bash
 # 导出源集群的 Prometheus 额外抓取配置
@@ -148,7 +190,7 @@ kubectl --context=source-cluster get servicemonitors -A -o yaml | kubectl neat >
 kubectl --context=ack-cluster apply -f src-servicemonitors.yaml
 ```
 
-### 1.4 PrometheusRule 迁移
+#<!-- chunk: 1.4 PrometheusRule 迁移 -->## 1.4 PrometheusRule 迁移
 
 ```bash
 # 导出自定义告警规则
@@ -164,9 +206,9 @@ curl -s http://localhost:9090/api/v1/rules | jq '.data.groups | length'
 
 ---
 
-## 2. 日志体系迁移
+<!-- chunk: 2. 日志体系迁移 -->## 2. 日志体系迁移
 
-### 2.1 方案选择
+#<!-- chunk: 2.1 方案选择 -->## 2.1 方案选择
 
 | 方案 | 说明 | 适用场景 |
 |------|------|---------|
@@ -174,7 +216,7 @@ curl -s http://localhost:9090/api/v1/rules | jq '.data.groups | length'
 | **EFK → SLS** | 迁移到阿里云日志服务 | 免运维，强大查询 |
 | **Loki → ACK Loki** | 在 ACK 重新部署 Loki | 轻量级，与 Grafana 集成 |
 
-### 2.2 使用 SLS（推荐）
+#<!-- chunk: 2.2 使用 SLS（推荐） -->## 2.2 使用 SLS（推荐）
 
 ```yaml
 # ACK 默认已安装 logtail-ds
@@ -222,7 +264,7 @@ spec:
         io.kubernetes.pod.namespace: "production"
 ```
 
-### 2.3 EFK Stack 迁移
+#<!-- chunk: 2.3 EFK Stack 迁移 -->## 2.3 EFK Stack 迁移
 
 ```bash
 # 如果保持 EFK Stack，在 ACK 部署
@@ -245,7 +287,7 @@ helm install kibana elastic/kibana \
 
 ---
 
-## 3. 链路追踪迁移
+<!-- chunk: 3. 链路追踪迁移 -->## 3. 链路追踪迁移
 
 ```bash
 # 方案 A: 使用阿里云 ARMS（推荐）
@@ -268,9 +310,9 @@ helm install jaeger jaegertracing/jaeger \
 
 ---
 
-## 4. 告警规则迁移
+<!-- chunk: 4. 告警规则迁移 -->## 4. 告警规则迁移
 
-### 4.1 Alertmanager 配置迁移
+#<!-- chunk: 4.1 Alertmanager 配置迁移 -->## 4.1 Alertmanager 配置迁移
 
 ```bash
 # 导出源集群 Alertmanager 配置
@@ -285,7 +327,7 @@ kubectl --context=ack-cluster create secret generic alertmanager-config \
   --from-file=alertmanager.yaml=src-alertmanager.yaml
 ```
 
-### 4.2 告警通道配置
+#<!-- chunk: 4.2 告警通道配置 -->## 4.2 告警通道配置
 
 ```yaml
 # alertmanager.yaml 示例（适配阿里云环境）
@@ -323,7 +365,7 @@ receivers:
 
 ---
 
-## 5. Grafana Dashboard 迁移
+<!-- chunk: 5. Grafana Dashboard 迁移 -->## 5. Grafana Dashboard 迁移
 
 ```bash
 # 方式 1: 使用 Grafana API 导出/导入
@@ -367,9 +409,9 @@ kubectl --context=ack-cluster create configmap grafana-dashboard-apps \
 
 ---
 
-## 6. RBAC 与权限迁移
+<!-- chunk: 6. RBAC 与权限迁移 -->## 6. RBAC 与权限迁移
 
-### 6.1 RBAC 迁移清单
+#<!-- chunk: 6.1 RBAC 迁移清单 -->## 6.1 RBAC 迁移清单
 
 ```bash
 # 导出并迁移自定义 RBAC（已在 03 文档中覆盖）
@@ -396,7 +438,7 @@ subjects:
 EOF
 ```
 
-### 6.2 Pod Security Standards
+#<!-- chunk: 6.2 Pod Security Standards -->## 6.2 Pod Security Standards
 
 ```yaml
 # ACK 1.25+ 使用 Pod Security Standards (PSS) 替代 PSP
@@ -415,7 +457,7 @@ metadata:
 
 ---
 
-## 7. 证书与 TLS 迁移
+<!-- chunk: 7. 证书与 TLS 迁移 -->## 7. 证书与 TLS 迁移
 
 ```bash
 # 1. 导出自建集群的 TLS Secret
@@ -431,15 +473,15 @@ cat tls-secrets.json | jq -c '.' | while read secret; do
   echo "导入 TLS: $ns/$name"
 done
 
-# 3. 推荐: 在 ACK 部署 [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动管理
+# 3. 推荐: 在 ACK 部署 cert-manager 自动管理
 # 参考 05-network-migration-traffic-cutover.md cert-manager 部分
 ```
 
 ---
 
-## 8. 安全基线建立
+<!-- chunk: 8. 安全基线建立 -->## 8. 安全基线建立
 
-### 8.1 ACK 安全巡检
+#<!-- chunk: 8.1 ACK 安全巡检 -->## 8.1 ACK 安全巡检
 
 ```bash
 # 启用 ACK 安全巡检
@@ -482,7 +524,7 @@ EOF
 kubectl logs job/kube-bench
 ```
 
-### 8.2 安全迁移检查清单
+#<!-- chunk: 8.2 安全迁移检查清单 -->## 8.2 安全迁移检查清单
 
 - [ ] 监控体系已部署（Prometheus/ARMS）
 - [ ] 核心指标采集正常（CPU/内存/网络/磁盘）
@@ -502,3 +544,26 @@ kubectl logs job/kube-bench
 
 **上一步**: ← [06-有状态服务迁移](./06-stateful-services-migration.md)
 **下一步**: → [08-验收、切换与旧集群退役](./08-validation-cutover-decommission.md)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-migration MOC
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+
+## See Also
+
+- 05-network-migration-traffic-cutover
+- 06-stateful-services-migration
+- 08-validation-cutover-decommission
+- 09-migration-toolchain

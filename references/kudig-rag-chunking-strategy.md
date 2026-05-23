@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # RAG 分块策略与 Manpage 安装

@@ -1,7 +1,7 @@
 ---
-title: Kubernetes 监控最佳实践
+title: Kubernetes 监控最佳实践 [observability]
 description: 生产环境 Kubernetes 监控配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/observability
+category: best-practices/observability
 tags:
 - kubernetes
 - monitoring
@@ -32,20 +32,10 @@ trigger_keywords:
 - 告警
 prerequisites:
 - kubectl-basics
-- gpu-ml-basics
 - helm-basics
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
 cross_refs:
 - type: domain
   path: ../../domain-06-observability/
@@ -53,6 +43,7 @@ cross_refs:
 - type: domain
   path: ../../domain-06-observability/
   label: 企业监控知识域
+created: "2026-05-23"
 ---
 
 # Kubernetes 监控最佳实践
@@ -569,10 +560,3 @@ spec:
 ---
 
 **文档维护**：定期审查和更新，确保与Prometheus和Kubernetes版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/migration/10-real-world-case-study.md|10-real-world-case-study]]
-- [[domain-11-production-operations/topic-best-practices/observability/logging.md|logging]]
-- [[domain-11-production-operations/topic-best-practices/observability/tracing.md|tracing]]
-- [[domain-11-production-operations/topic-best-practices/operations/deployment.md|deployment]]

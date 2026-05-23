@@ -29,9 +29,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# Day 12: 网络栈 - CNI + Service + DNS
+# Day 12: 网络栈 - CNI + [[Service|Service]] + DNS
 
 ```yaml
 ---
@@ -310,8 +311,8 @@ kubectl delete namespace dns-test
 
 ## 明日预告
 
-Day 13 将学习 Ingress 和 NetworkPolicy，实现 HTTP 路由和网络隔离。
+Day 13 将学习 [[Ingress|Ingress]] 和 [[NetworkPolicy|NetworkPolicy]]，实现 HTTP 路由和网络隔离。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- index/dns-index|DNS 知识图谱索引]]

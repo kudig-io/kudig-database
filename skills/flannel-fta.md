@@ -1,5 +1,5 @@
 ---
-title: Flannel 网络异常故障树分析
+title: Flannel 网络异常故障树分析 (skills)
 description: '# Flannel 网络异常故障树分析'
 category: skills
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 fta_id: FTA-FLANNEL-001
 component: Flannel
 severity: high
+created: "2026-05-23"
 ---
 
 # Flannel 网络异常故障树分析
@@ -69,12 +70,12 @@ ping -M do -s 1400 <target-ip>
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- networking.md|网络故障排查]]
 
 ## Related
 
-- [[nodepool-fta]] — [[skills/nodepool-fta.md|NodePool 异常故障树分析]]
+- [[nodepool-fta]] — [[skills/nodepool-fta.md|[[NodePool 异常故障树分析|NodePool 异常故障树分析]]]]
 - [[skills/ts-control-plane.md|ts-control-plane]] — 控制平面故障排查
 - [[README]] — FTA 故障树清单索引
 - [[skills/ts-networking.md|ts-networking]] — 网络故障排查

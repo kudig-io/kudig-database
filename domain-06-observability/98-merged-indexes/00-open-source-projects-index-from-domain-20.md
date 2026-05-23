@@ -51,6 +51,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   label: '速查卡: promql'
+created: "2026-05-23"
 ---
 
 # Domain-20 企业监控与告警 — 开源项目索引
@@ -284,18 +285,18 @@ cross_refs:
 
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
+- domain-20-enterprise-monitoring-alerting MOC
 - [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[domain-06-observability/01-prometheus-enterprise-monitoring.md|Prometheus企业级监控系统深度实践]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|Grafana Enterprise Observability Platform 深度实践]]
-- [[domain-06-observability/03-opentelemetry-distributed-tracing.md|OpenTelemetry分布式追踪与可观测性深度实践]]
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation and Long-term Storage]]
-- [[domain-06-observability/05-datadog-enterprise-apm.md|Datadog企业级APM深度实践]]
-- [[domain-06-observability/05-datadog-enterprise-monitoring.md|Datadog 企业级监控平台深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-logging.md|Elastic Stack企业级日志分析深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-observability.md|Elastic Stack企业级可观测性平台深度实践]]
-- [[domain-06-observability/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring Platform 深度实践]]
-- [[domain-06-observability/08-new-relic-enterprise-apm.md|New Relic Enterprise APM Platform 深度实践]]
+- Prometheus企业级监控系统深度实践
+- Grafana Enterprise Observability Platform 深度实践
+- OpenTelemetry分布式追踪与可观测性深度实践
+- Thanos Enterprise Metrics Federation and Long-term Storage
+- Datadog企业级APM深度实践
+- Datadog 企业级监控平台深度实践
+- Elastic Stack企业级日志分析深度实践
+- Elastic Stack企业级可观测性平台深度实践
+- Zabbix Enterprise Monitoring Platform 深度实践
+- New Relic Enterprise APM Platform 深度实践
 
 ## See Also
 

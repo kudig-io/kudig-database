@@ -1,5 +1,5 @@
 ---
-title: topic-best-practices MOC
+title: topic-best-practices MOC (skills)
 description: topic-best-practices 专题导航页，覆盖 13 篇文档
 category: moc
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # topic-best-practices MOC
@@ -59,19 +60,19 @@ topic-best-practices 专题
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-11-production-operations/topic-best-practices/common-best-practices.md|Kubernetes 通用最佳实践参考]] |  | best-practice |  |
-| 2 | [[domain-11-production-operations/topic-best-practices/infrastructure/kubernetes-cluster.md|Kubernetes 集群配置最佳实践]] |  |  |  |
-| 3 | [[domain-11-production-operations/topic-best-practices/infrastructure/networking.md|Kubernetes 网络配置最佳实践]] |  | networking |  |
-| 4 | [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|Kubernetes 存储配置最佳实践]] |  | storage |  |
-| 5 | [[domain-11-production-operations/topic-best-practices/observability/logging.md|Kubernetes 日志管理最佳实践]] |  |  |  |
-| 6 | [[domain-11-production-operations/topic-best-practices/observability/monitoring.md|Kubernetes 监控最佳实践]] |  | monitoring |  |
-| 7 | [[domain-11-production-operations/topic-best-practices/observability/tracing.md|Kubernetes 分布式追踪最佳实践]] |  |  |  |
-| 8 | [[domain-11-production-operations/topic-best-practices/operations/deployment.md|Kubernetes 部署策略最佳实践]] |  | deployment |  |
-| 9 | [[domain-11-production-operations/topic-best-practices/operations/disaster-recovery.md|Kubernetes 灾难恢复最佳实践]] |  |  |  |
-| 10 | [[domain-11-production-operations/topic-best-practices/operations/scaling.md|Kubernetes 扩缩容最佳实践]] |  |  |  |
-| 11 | [[domain-11-production-operations/topic-best-practices/security/network-security.md|Kubernetes 网络安全最佳实践]] |  | security, networking |  |
-| 12 | [[domain-11-production-operations/topic-best-practices/security/pod-security.md|Kubernetes Pod安全最佳实践]] |  | security |  |
-| 13 | [[domain-11-production-operations/topic-best-practices/security/secrets-management.md|Kubernetes 密钥管理最佳实践]] |  |  |  |
+| 1 | [[entities/kubernetes.md|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
+| 2 | [[entities/kubernetes.md]] |  |  |  |
+| 3 | [[entities/kubernetes.md]] |  | networking |  |
+| 4 | Kubernetes 存储配置最佳实践 |  | storage |  |
+| 5 | Kubernetes 日志管理最佳实践 |  |  |  |
+| 6 | Kubernetes 监控最佳实践 |  | monitoring |  |
+| 7 | Kubernetes 分布式追踪最佳实践 |  |  |  |
+| 8 | Kubernetes 部署策略最佳实践 |  | deployment |  |
+| 9 | Kubernetes 灾难恢复最佳实践 |  |  |  |
+| 10 | Kubernetes 扩缩容最佳实践 |  |  |  |
+| 11 | Kubernetes 网络安全最佳实践 |  | security, networking |  |
+| 12 | Kubernetes Pod安全最佳实践 |  | security |  |
+| 13 | Kubernetes 密钥管理最佳实践 |  |  |  |
 
 ---
 
@@ -98,12 +99,12 @@ topic-best-practices 专题
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

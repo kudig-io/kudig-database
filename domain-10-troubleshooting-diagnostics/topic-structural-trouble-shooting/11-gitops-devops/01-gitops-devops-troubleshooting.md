@@ -1,5 +1,5 @@
 ---
-title: GitOps/DevOps 故障排查指南
+title: GitOps/DevOps 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: GitOps/DevOps 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: GitOps/DevOps 故障排查指南
@@ -52,8 +53,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 - argocd
 - flux
 - opa
@@ -1189,8 +1190,8 @@ echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

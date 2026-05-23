@@ -39,9 +39,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南
+title: UCloud UK8S (UCloud [[Kubernetes|Kubernetes]] [[Service|Service]]) 高性价比企业级实战指南
 description: '# UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南'
 category: cloud-provider
 tags:
@@ -51,7 +52,7 @@ tags:
 - gke
 - aks
 - ack
-- helm
+- [[Helm|helm]]
 - redis
 - mysql
 - hpa
@@ -527,7 +528,7 @@ echo "月成本预估: ¥$(echo "$HOURLY_COST * 720" | bc)"
 echo "3. 资源浪费检测..."
 kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].resources.requests.cpu}{"\t"}{.spec.containers[*].resources.limits.cpu}{"\n"}{end}' | \
 while read pod cpu_req cpu_limit; do
-    if [[ "$cpu_req" != "" && "$cpu_limit" != "" ]]; then
+    if "$cpu_req" != "" && "$cpu_limit" != ""; then
         req_val=$(echo $cpu_req | sed 's/m/*0.001/')
         lim_val=$(echo $cpu_limit | sed 's/m/*0.001/')
         waste=$(echo "$lim_val - $req_val" | bc)

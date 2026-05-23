@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -38,7 +39,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK multi-nodepool architecture design
-  - [[entities/kubernetes|kubernetes]] node maintenance drain uncordon
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] node maintenance drain uncordon
   - Pod scheduling affinity anti-affinity
   - Kubernetes health probes configuration
   - Cluster autoscaler scaling policy
@@ -101,7 +102,7 @@ related_topics:
 
 生产环境的节点池设计通常遵循"分层隔离"原则，将不同类型的 workload 隔离到不同的节点池中：
 
-- **系统节点池**: 运行 CoreDNS、Ingress Controller、监控 Agent 等系统组件。使用 Taint 阻止业务 Pod 调度。通常 2-3 个节点，使用中等规格实例
+- **系统节点池**: 运行 [[CoreDNS|CoreDNS]]、[[Ingress|Ingress]] Controller、监控 Agent 等系统组件。使用 Taint 阻止业务 Pod 调度。通常 2-3 个节点，使用中等规格实例
 - **业务节点池**: 运行应用工作负载。可以根据业务类型（在线/离线）进一步细分。支持自动扩缩容
 - **专用节点池**: 运行 GPU 任务、高内存任务等特殊工作负载。使用标签和污点精确调度
 

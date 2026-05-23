@@ -50,6 +50,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 多云灾备深度实践
@@ -624,7 +625,7 @@ spec:
   accessMode: ReadWrite
 ```
 
-#<!-- chunk: Velero 备份验证 CronJob -->## Velero 备份验证 CronJob
+#<!-- chunk: Velero 备份验证 [[CronJob|CronJob]] -->## Velero 备份验证 CronJob
 
 ```yaml
 apiVersion: batch/v1
@@ -1220,7 +1221,7 @@ velero backup create pre-failover-backup \
 echo "[4] Verify backup completeness"
 velero backup describe pre-failover-backup --details
 BACKUP_STATUS=$(velero backup get pre-failover-backup -o jsonpath='{.status.phase}')
-if [[ "$BACKUP_STATUS" != "Completed" ]]; then
+if "$BACKUP_STATUS" != "Completed"; then
     echo "ERROR: Backup status is $BACKUP_STATUS, expected Completed"
     exit 1
 fi
@@ -1320,7 +1321,7 @@ spec:
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: 灾备指标监控 Prometheus Alert Rules -->## 灾备指标监控 Prometheus Alert Rules
+#<!-- chunk: 灾备指标监控 [[Prometheus|Prometheus]] Alert Rules -->## 灾备指标监控 Prometheus Alert Rules
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -1501,7 +1502,7 @@ echo "Secondary Cluster: $SECONDARY_CLUSTER"
 
 echo "[1] Verify primary cluster failure"
 PRIMARY_STATUS=$(kubectl --kubeconfig $KARMADA_KUBECONFIG get cluster $PRIMARY_CLUSTER -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}')
-if [[ "$PRIMARY_STATUS" == "True" ]]; then
+if "$PRIMARY_STATUS" == "True"; then
     echo "Primary cluster is still healthy, aborting failover"
     exit 0
 fi
@@ -1549,7 +1550,7 @@ kubectl --kubeconfig $KARMADA_KUBECONFIG get pods -n production --cluster $SECON
 echo "[7] Verify service availability"
 for i in $(seq 1 10); do
     STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.example.com/healthz)
-    if [[ "$STATUS" == "200" ]]; then
+    if "$STATUS" == "200"; then
         echo "Service recovered (attempt $i/10)"
         break
     fi
@@ -1608,7 +1609,7 @@ log "[Phase 5] Verify service recovery"
 SERVICE_OK=false
 for i in $(seq 1 20); do
     STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.example.com/healthz 2>/dev/null || echo "000")
-    if [[ "$STATUS" == "200" ]]; then
+    if "$STATUS" == "200"; then
         SERVICE_OK=true
         FAILOVER_END=$(date +%s)
         log "Service recovered (attempt $i/20)"
@@ -1632,21 +1633,21 @@ log "RPO: ${RPO} seconds ($(( RPO / 60 )) minutes)"
 log "Service recovered: $SERVICE_OK"
 
 log "[Phase 8] Compliance check"
-if [[ $RTO -le 300 ]]; then
+if $RTO -le 300; then
     log "PASS: RTO within L1 target (5 minutes)"
-elif [[ $RTO -le 1800 ]]; then
+elif $RTO -le 1800; then
     log "PASS: RTO within L2 target (30 minutes)"
-elif [[ $RTO -le 14400 ]]; then
+elif $RTO -le 14400; then
     log "PASS: RTO within L3 target (4 hours)"
 else
     log "FAIL: RTO exceeds all targets"
 fi
 
-if [[ $RPO -le 60 ]]; then
+if $RPO -le 60; then
     log "PASS: RPO within L1 target (1 minute)"
-elif [[ $RPO -le 900 ]]; then
+elif $RPO -le 900; then
     log "PASS: RPO within L2 target (15 minutes)"
-elif [[ $RPO -le 3600 ]]; then
+elif $RPO -le 3600; then
     log "PASS: RPO within L3 target (1 hour)"
 else
     log "FAIL: RPO exceeds all targets"
@@ -1654,7 +1655,7 @@ fi
 
 log "Drill complete. Full log saved to $DR_LOG"
 
-if [[ "$SERVICE_OK" != "true" ]]; then
+if "$SERVICE_OK" != "true"; then
     log "ERROR: Service did not recover, manual intervention required"
     exit 1
 fi
@@ -1791,22 +1792,22 @@ echo "=== DR Status Check Complete ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/07-huawei-cce-enterprise.md|华为云 CCE 企业级容器平台深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- 华为云 CCE 企业级容器平台深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|08-multicloud-federation-karmada]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|09-multicloud-network-interconnect]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|01-aws-eks-enterprise-multicloud]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|02-azure-aks-enterprise-multicloud]]
+- 08-multicloud-federation-karmada
+- 09-multicloud-network-interconnect
+- 01-aws-eks-enterprise-multicloud
+- 02-azure-aks-enterprise-multicloud

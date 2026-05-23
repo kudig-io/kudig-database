@@ -38,9 +38,10 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)
+title: 10 - [[Kubernetes|Kubernetes]] 生产环境故障排查全攻略 (Production Troubleshooting Guide)
 description: '# 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
 category: observability
 tags:
@@ -1031,7 +1032,7 @@ echo "=== RBAC 诊断报告 ==="
 echo "Subject: $USER_OR_SA"
 
 # 1. 检查是否为ServiceAccount
-if [[ $USER_OR_SA == *":"* ]]; then
+if $USER_OR_SA == *":"*; then
   SA_NS=$(echo $USER_OR_SA | cut -d: -f1)
   SA_NAME=$(echo $USER_OR_SA | cut -d: -f2)
   echo -e "\n=== ServiceAccount: $SA_NAME in $SA_NS ==="
@@ -1734,18 +1735,18 @@ kubectl uncordon <node>
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
+- domain-06-observability MOC
 - [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系详解]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/09-events-audit-logs.md|05 - 事件与审计日志管理 (Events & Audit Logs)]]
+- Kubernetes 可观测性架构体系
+- 指标监控体系详解
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 05 - 事件与审计日志管理 (Events & Audit Logs)
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
@@ -1758,7 +1759,7 @@ kubectl uncordon <node>
 
 ## See Also
 
-- [[domain-06-observability/23-enterprise-implementation-roadmap.md|23-enterprise-implementation-roadmap]]
-- [[domain-06-observability/24-observability-tool-ecosystem.md|24-observability-tool-ecosystem]]
-- [[domain-06-observability/26-troubleshooting-tools.md|26-troubleshooting-tools]]
-- [[domain-06-observability/27-performance-profiling-tools.md|27-performance-profiling-tools]]
+- 23-enterprise-implementation-roadmap
+- 24-observability-tool-ecosystem
+- 26-troubleshooting-tools
+- 27-performance-profiling-tools

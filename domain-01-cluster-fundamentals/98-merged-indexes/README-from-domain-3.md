@@ -57,6 +57,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # Domain-3: Kubernetes控制平面
@@ -194,11 +195,11 @@ Kubernetes 控制平面域深入解析 API Server、[[etcd]]、Scheduler、Contr
 - [[docker]]
 - [[entities/kubelet.md|kubelet]]
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-04-storage-data/MOC.md|相关知识域: domain-04-storage-data]]
-- [[domain-05-security-compliance/MOC.md|相关知识域: domain-05-security-compliance]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-04-storage-data
+- 相关知识域: domain-05-security-compliance
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/README.md|Node Create 模块函数索引]]

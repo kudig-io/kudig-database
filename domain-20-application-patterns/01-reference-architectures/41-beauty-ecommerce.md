@@ -30,6 +30,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 美妆电商架构设计
@@ -55,7 +56,7 @@ audience:
 estimated_read_time: 5min
 intent_queries:
 - 阿里云美妆电商解决方案 直播带货 K8s部署
-- 美妆电商 AR试妆 Kubernetes 架构
+- 美妆电商 AR试妆 [[Kubernetes|Kubernetes]] 架构
 - 跨境美妆保税仓 电商架构设计
 - 个性化推荐 美妆电商 技术架构
 - 区块链溯源 化妆品防伪 架构
@@ -73,7 +74,7 @@ related_domains:
 - domain-11-production-operations
 - domain-11-ai-infra
 related_topics:
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
+- 01-ecommerce-architecture
 - 31-instant-retail
 - 55-crossborder-dtc
 authors:
@@ -350,8 +351,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -365,7 +366,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/39-smart-campus.md|39-smart-campus]]
-- [[domain-20-application-patterns/40-cloud-gaming.md|40-cloud-gaming]]
-- [[domain-20-application-patterns/42-secondhand-circular.md|42-secondhand-circular]]
-- [[domain-20-application-patterns/43-enterprise-im.md|43-enterprise-im]]
+- 39-smart-campus
+- 40-cloud-gaming
+- 42-secondhand-circular
+- 43-enterprise-im

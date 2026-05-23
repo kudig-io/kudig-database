@@ -1,5 +1,5 @@
 ---
-title: 第一章：FEBM 方法论原理与理论基础
+title: 第一章：FEBM 方法论原理与理论基础 (topic-febm)
 description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
 category: febm
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - ebpf-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 第一章：FEBM 方法论原理与理论基础
@@ -51,11 +52,11 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
-- istio
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - containerd
 last_updated: 2026-05
 difficulty: expert

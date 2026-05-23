@@ -1,5 +1,5 @@
 ---
-title: 附录 A：FTA 术语表
+title: 附录 A：FTA 术语表 [domain-10-troubleshooting-diagnostics]
 description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
 category: fta
 tags:
@@ -34,6 +34,7 @@ prerequisites:
 fta_id: FTA-APPENDIX_A_GLOSSARY-001
 component: Appendix A Glossary
 severity: high
+created: "2026-05-23"
 ---
 
 title: 附录 A：FTA 术语表
@@ -76,8 +77,8 @@ k8s_versions:
 # 附录 A：FTA 术语表
 
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第二十二章：行业标准化建议](./22-industry-standardization.md)  
-> **下一附录**: [附录 B：工具与资源清单](./[[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]].md)
+> **上一章**: 第二十二章：行业标准化建议](./22-industry-standardization.md)  
+> **下一附录**: 附录 B：工具与资源清单](./[[domain-10-troubleshooting-diagnostics/topic-fta/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]].md)
 
 ---
 
@@ -116,7 +117,7 @@ k8s_versions:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta MOC]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]

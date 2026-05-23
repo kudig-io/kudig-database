@@ -1,4 +1,38 @@
 ---
+title: 节点资源压力与 Eviction — 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- kubelet
+- prometheus
+- containerd
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点资源压力与 Eviction — 源码分析 是什么
+- 如何 节点资源压力与 Eviction — 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点资源压力与
+- Eviction
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: 节点资源压力与 Eviction 源码分析
 description: '## 概述'
 category: functions
@@ -38,10 +72,6 @@ trigger_keywords:
 - Soft Eviction
 - OOM
 - out of memory
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -51,13 +81,22 @@ related_topics:
 - node-create/08-troubleshooting
 - node-create/12-monitoring
 - cluster-create/03-certs
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点资源压力与 Eviction — 源码分析
 
 ## 概述
 
-节点资源压力管理是 [[entities/kubernetes|kubernetes]] 保证集群稳定性的关键机制。当节点资源（内存、磁盘、PID）不足时，kubelet 会通过 Eviction（驱逐）机制主动终止低优先级的 Pod，释放资源以保护高优先级的工作负载和节点自身的稳定性。
+节点资源压力管理是 Kubernetes 保证集群稳定性的关键机制。当节点资源（内存、磁盘、PID）不足时，kubelet 会通过 Eviction（驱逐）机制主动终止低优先级的 Pod，释放资源以保护高优先级的工作负载和节点自身的稳定性。
 
 kubelet 的驱逐管理器（Eviction Manager）是一个独立的协调循环，它定期检查节点的资源使用情况，当资源使用量超过配置的阈值时，按照 Pod 的 QoS（Quality of Service）等级和实际资源使用量来选择要驱逐的 Pod。这种机制比被动等待 Linux OOM Killer 杀死进程更加优雅和可控。
 
@@ -455,3 +494,11 @@ kubectl top pods --all-namespaces --sort-by=memory
 | `evictPod` | `pkg/kubelet/eviction/eviction_manager.go` | 执行驱逐 |
 | `memoryThreshold` | `pkg/kubelet/eviction/threshold.go` | 内存阈值判断 |
 | `diskThreshold` | `pkg/kubelet/eviction/threshold.go` | 磁盘阈值判断 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

@@ -1,17 +1,18 @@
 ---
-title: SchemaHero
-description: 'description: ''## 项目概述'''
-category: general
+title: SchemaHero (entities)
+description: '## 概述'
+category: entities
 tags:
+- k8s
 - cncf
-- ecosystem
+- database
+- schemahero
 - argocd
 - flux
 - mysql
 - postgresql
 - crd
 - operator
-- rag
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -21,239 +22,60 @@ estimated_read_time: 5min
 intent_queries:
 - SchemaHero 是什么
 - 如何 SchemaHero
-- Kubernetes 19 landscape references 最佳实践
 trigger_keywords:
 - SchemaHero
-- landscape
-- references
 prerequisites:
 - kubectl-basics
-- cncf-ecosystem
 - gitops-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-title: SchemaHero
-description: '## 项目概述'
-category: cncf-landscape
-tags:
-- k8s
-- cncf
-- cloud-native
-- ecosystem
-- argocd
-- flux
-- mysql
-- postgresql
-- crd
-- operator
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 架构师
-- 技术决策者
-- SRE
-estimated_read_time: 5min
-intent_queries:
-- SchemaHero 是什么
-- 如何 SchemaHero
-- Kubernetes 34 cncf landscape 最佳实践
-trigger_keywords:
-- SchemaHero
-- cncf
-- landscape
-cross_refs:
-- type: skill
-  path: ../domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md
-  label: '运维技能: skill-schema'
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # SchemaHero
 
-> **成熟度**: Sandbox | **最后更新**: 2026-03
+> **CNCF 状态**: Sandbox | **类别**: Database | **主要语言**: Go
 
-## 基本信息
-
-| 属性 | 值 |
-|:---|:---|
-| **官网** | https://schemahero.io/ |
-| **GitHub** | https://github.com/schemahero/schemahero |
-| **许可证** | Apache-2.0 |
-| **开发语言** | Go |
-| **CNCF 状态** | Sandbox |
-
----
-
-## 项目概述
+## 概述
 
 SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采用声明式方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 自动计算并执行所需的 DDL 变更。支持 PostgreSQL、MySQL、CockroachDB、SQLite 等数据库。
 
-### 核心特性
+## 核心能力
 
-- **声明式 Schema**: 定义期望的表结构，自动计算迁移 DDL
-- **Kubernetes CRD**: 使用 Table 和 Database CRD 管理 Schema
-- **安全迁移**: 生成迁移计划供审批后再执行
-- **多数据库**: PostgreSQL, MySQL, CockroachDB, SQLite, Cassandra
-- **GitOps 集成**: Schema 定义纳入 Git 管理，与 ArgoCD/Flux 集成
-- **回滚保护**: 危险操作需要手动确认
+- 详见源文档获取完整信息 ^[inferred]
 
----
+## K8s 集成
 
-## 快速开始
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
 
-### 安装
+## 生产部署要点
 
-```bash
-# 安装 SchemaHero Operator
-kubectl apply -f https://raw.githubusercontent.com/schemahero/schemahero/main/deploy/operator.yaml
+- **声明式管理**: 只定义期望的 Schema 状态，让 SchemaHero 计算变更
+- **审批流程**: 生产环境始终启用审批流程，审查 DDL 后再执行
+- **GitOps**: 将 Table CRD 存储在 Git 中，通过 ArgoCD/Flux 管理
+- **增量变更**: 每次只修改一个表结构，便于追踪和回滚
+- **数据库密钥**: 使用 Kubernetes Secret 管理数据库连接字符串
 
-# 安装 CLI
-brew install schemahero/tap/schemahero
-```
+## 架构定位
 
-### 定义数据库连接
+在 CNCF 生态中，schemahero 属于 **Database** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
-```yaml
-apiVersion: databases.schemahero.io/v1alpha4
-kind: Database
-metadata:
-  name: my-database
-spec:
-  connection:
-    postgres:
-      uri:
-        valueFrom:
-          secretKeyRef:
-            name: postgres-credentials
-            key: uri
-  # 或 MySQL
-  # connection:
-  #   mysql:
-  #     uri:
-  #       value: "user:password@tcp(mysql:3306)/mydb"
-```
+## 参考链接
 
-### 定义表结构
-
-```yaml
-apiVersion: schemas.schemahero.io/v1alpha4
-kind: Table
-metadata:
-  name: users
-database: my-database
-spec:
-  name: users
-  schema:
-    postgres:
-      primaryKey:
-        - id
-      columns:
-        - name: id
-          type: uuid
-          default: "gen_random_uuid()"
-          constraints:
-            notNull: true
-        - name: email
-          type: varchar(255)
-          constraints:
-            notNull: true
-            unique: true
-        - name: name
-          type: varchar(100)
-        - name: created_at
-          type: timestamptz
-          default: "now()"
-        - name: updated_at
-          type: timestamptz
-      indexes:
-        - columns: [email]
-          name: idx_users_email
-          isUnique: true
----
-apiVersion: schemas.schemahero.io/v1alpha4
-kind: Table
-metadata:
-  name: orders
-database: my-database
-spec:
-  name: orders
-  schema:
-    postgres:
-      primaryKey:
-        - id
-      columns:
-        - name: id
-          type: serial
-        - name: user_id
-          type: uuid
-          constraints:
-            notNull: true
-        - name: amount
-          type: decimal(10,2)
-        - name: status
-          type: varchar(20)
-          default: "'pending'"
-      foreignKeys:
-        - columns: [user_id]
-          references:
-            table: users
-            columns: [id]
-```
-
-### 审批和执行迁移
-
-```bash
-# 查看待执行的迁移
-kubectl schemahero get migrations
-
-# 查看迁移详情（生成的 DDL）
-kubectl schemahero describe migration <migration-name>
-# 输出: ALTER TABLE users ADD COLUMN name varchar(100);
-
-# 批准迁移
-kubectl schemahero approve migration <migration-name>
-
-# 拒绝迁移
-kubectl schemahero reject migration <migration-name>
-```
-
----
-
-## 最佳实践
-
-1. **声明式管理**: 只定义期望的 Schema 状态，让 SchemaHero 计算变更
-2. **审批流程**: 生产环境始终启用审批流程，审查 DDL 后再执行
-3. **GitOps**: 将 Table CRD 存储在 Git 中，通过 ArgoCD/Flux 管理
-4. **增量变更**: 每次只修改一个表结构，便于追踪和回滚
-5. **数据库密钥**: 使用 Kubernetes Secret 管理数据库连接字符串
-
----
-
-## 参考资源
-
-- [SchemaHero 官方文档](https://schemahero.io/docs/)
-- [SchemaHero GitHub](https://github.com/schemahero/schemahero)
-- [CNCF Sandbox Projects](https://www.cncf.io/sandbox-projects/)
-
----
-
-**维护者**: Kudig Team | **许可证**: MIT
+- [[flux]]
+- [[entities/argocd.md|argocd]]
+- [[entities/crd-custom-resources.md|crd-custom-resources]]
+- [[operator-pattern]]
+- [[concepts/gitops-principles.md|gitops-principles]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[modelpack]] — ModelPack
+- [[oauth2-proxy]] — OAuth2 Proxy
+- [[flux]] — Flux
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[entities/argocd.md|argocd]] — ArgoCD
+
+- schemahero
+- [[entities/opengemini.md|openGemini]]
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

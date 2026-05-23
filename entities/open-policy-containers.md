@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-# Open Policy Containers (OPCR)
+# [[entities/open-policy-containers.md|Open Policy Containers]] (OPCR)
 
 > **CNCF 状态**: Sandbox | **类别**: Policy | **主要语言**: Go
 
@@ -72,6 +73,6 @@ Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包�
 - [[opa]] — OPA (Open Policy Agent)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/open-policy-containers/open-policy-containers.md|open-policy-containers]]
+- open-policy-containers
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

@@ -55,11 +55,12 @@ cross_refs:
 - type: domain
   path: ../domain-13-container-runtime/
   label: 容器运行时
+created: "2026-05-23"
 ---
 
 # gVisor 容器沙箱深度解析
 
-> **适用版本**: gVisor 2024+ / Kubernetes v1.28 - v1.33 | **最后更新**: 2026-05
+> **适用版本**: gVisor 2024+ / [[Kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
 
 ---
 
@@ -138,7 +139,7 @@ Sentry 实现了约 240 个 Linux 系统调用 (覆盖 70% 常用调用):
 
 ## 三、K8s 集成
 
-### 3.1 安装 gVisor (containerd)
+### 3.1 安装 gVisor ([[containerd|containerd]])
 
 ```bash
 # 安装 runsc
@@ -371,24 +372,24 @@ spec:
 
 ## Obsidian 相关文档
 
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
+- domain-05-security-compliance MOC
 - [[domain-05-security-compliance/README.md|Domain 25: 云原生安全 (Cloud Native Security)]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
-- [[domain-05-security-compliance/01-falco-cloud-native-security.md|Falco 云原生安全监控深度实践]]
-- [[domain-05-security-compliance/02-sysdig-enterprise-container-security.md|Sysdig企业级容器安全深度实践]]
-- [[domain-05-security-compliance/03-aqua-enterprise-container-security.md|Aqua Security 企业级容器安全平台深度实践]]
-- [[domain-05-security-compliance/04-kyverno-enterprise-policy-management.md|Kyverno 企业级策略管理深度实践]]
-- [[domain-05-security-compliance/05-vault-enterprise-secrets-management.md|HashiCorp Vault 企业级密钥管理深度实践]]
-- [[domain-05-security-compliance/09-opa-gatekeeper-policy.md|OPA Gatekeeper 策略即代码深度实践]]
-- [[domain-05-security-compliance/10-image-security-scanning.md|容器镜像安全扫描深度实践]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|Kubernetes 安全加固深度实践]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|cert-manager 自动证书管理深度实践]]
+- Falco 云原生安全监控深度实践
+- Sysdig企业级容器安全深度实践
+- Aqua Security 企业级容器安全平台深度实践
+- Kyverno 企业级策略管理深度实践
+- HashiCorp Vault 企业级密钥管理深度实践
+- OPA Gatekeeper 策略即代码深度实践
+- 容器镜像安全扫描深度实践
+- Kubernetes 安全加固深度实践
+- cert-manager 自动证书管理深度实践
 
 ## See Also
 
-- [[domain-05-security-compliance/10-image-security-scanning.md|10-image-security-scanning]]
-- [[domain-05-security-compliance/11-kubernetes-security-hardening.md|11-kubernetes-security-hardening]]
-- [[domain-05-security-compliance/99-cert-manager-tls-guide.md|99-cert-manager-tls-guide]]
-- [[domain-05-security-compliance/99-falco-runtime-security-guide.md|99-falco-runtime-security-guide]]
+- 10-image-security-scanning
+- 11-kubernetes-security-hardening
+- 99-cert-manager-tls-guide
+- 99-falco-runtime-security-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]

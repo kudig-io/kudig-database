@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 # Linux Sysctl Tuning for Kubernetes
@@ -40,7 +41,7 @@ prerequisites:
 | Parameter | Recommended | K8s Impact |
 |-----------|-------------|-----------|
 | net.ipv4.ip_forward | 1 | Required for Pod cross-node communication |
-| net.bridge.bridge-nf-call-iptables | 1 | Required for kube-proxy Service routing |
+| net.bridge.bridge-nf-call-iptables | 1 | Required for kube-proxy [[Service|Service]] routing |
 | net.bridge.bridge-nf-call-ip6tables | 1 | Required for IPv6 dual-stack |
 | net.netfilter.nf_conntrack_max | 1048576 | Conntrack table size for large clusters |
 | net.core.somaxconn | 32768 | Socket listen queue for high-concurrency Services |
@@ -52,8 +53,8 @@ prerequisites:
 
 | Parameter | Recommended | K8s Impact |
 |-----------|-------------|-----------|
-| fs.inotify.max_user_watches | 524288 | kubelet file watcher, must be increased |
-| fs.inotify.max_user_instances | 8192 | kubelet + container runtime |
+| fs.inotify.max_user_watches | 524288 | [[kubelet|kubelet]] file watcher, must be increased |
+| fs.inotify.max_user_instances | 8192 | kubelet + [[Container Runtime|container runtime]] |
 | fs.file-max | 2097152 | System-wide file descriptor limit |
 | fs.nr_open | 1048576 | Per-process file descriptor limit |
 | fs.may_detach_mounts | 1 | Required for containerd/docker container deletion |

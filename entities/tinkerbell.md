@@ -1,5 +1,5 @@
 ---
-title: Tinkerbell
+title: Tinkerbell [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Tinkerbell
@@ -66,6 +67,6 @@ Tinkerbell 是一个裸金属服务器自动化配置（provisioning）框架，
 - [[interlink]] — InterLink
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/tinkerbell/tinkerbell.md|tinkerbell]]
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- tinkerbell
+- [[entities/cncf-edge-ai|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

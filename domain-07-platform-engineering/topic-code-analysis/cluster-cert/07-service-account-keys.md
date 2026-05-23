@@ -1,5 +1,5 @@
 ---
-title: ServiceAccount 密钥对源码分析
+title: ServiceAccount 密钥对源码分析 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -27,6 +27,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - platform-engineering-basics
+created: "2026-05-23"
 ---
 
 title: ServiceAccount 密钥对源码分析

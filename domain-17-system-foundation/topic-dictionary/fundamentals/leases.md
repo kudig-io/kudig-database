@@ -27,18 +27,19 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Leases（租约）
 
 ## 概述
 
-Lease（租约）是分布式系统中用于锁定共享资源和协调集合成员活动的机制。在 Kubernetes 中，Lease 对象属于 `coordination.k8s.io` API 组，被用于系统级关键能力，如节点心跳（node heartbeats）和组件级领导者选举（leader election）。
+Lease（租约）是分布式系统中用于锁定共享资源和协调集合成员活动的机制。在 [[Kubernetes|Kubernetes]] 中，Lease 对象属于 `coordination.k8s.io` API 组，被用于系统级关键能力，如节点心跳（node heartbeats）和组件级领导者选举（leader election）。
 
 ## 核心概念/原理
 
 - **Lease 对象**：一种轻量级的 Kubernetes 资源，通过 `spec.holderIdentity` 标识持有者，通过 `spec.renewTime` 记录最近一次续约时间。
-- **节点心跳**：每个 Node 对应一个同名 Lease，位于 `kube-node-lease` 命名空间。kubelet 每次心跳实际上都是对该 Lease 对象的更新请求。控制平面通过 `renewTime` 判断节点是否可用。
+- **节点心跳**：每个 Node 对应一个同名 Lease，位于 `kube-node-lease` 命名空间。[[kubelet|kubelet]] 每次心跳实际上都是对该 Lease 对象的更新请求。控制平面通过 `renewTime` 判断节点是否可用。
 - **领导者选举**：Kubernetes 的控制平面组件（如 `kube-controller-manager`、`kube-scheduler`）在高可用（HA）配置下使用 Lease 确保同一时刻只有一个实例处于活跃状态，其余实例待命。
 - **API 服务器身份**：自 v1.26（Beta，默认启用）起，每个 `kube-apiserver` 实例通过 Lease API 向系统发布自身身份。Lease 位于 `kube-system` 命名空间，名称格式为 `apiserver-<sha256-hash>`，可通过标签 `apiserver.kubernetes.io/identity=kube-apiserver` 筛选。过期 Lease 会在 1 小时后由新实例垃圾回收。可通过关闭 `APIServerIdentity` 特性门控禁用此行为。
 

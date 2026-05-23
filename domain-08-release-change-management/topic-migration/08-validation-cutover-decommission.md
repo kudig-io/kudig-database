@@ -1,11 +1,10 @@
 ---
-title: 08 - 验收、切换与旧集群退役
-description: 5. [旧集群安全退役](#5-旧集群安全退役)
-category: migration
+title: 08 - 验收、切换与旧集群退役 [migration]
+description: 'description: 5. [旧集群安全退役](#5-旧集群安全退役)'
+category: general
 tags:
-- k8s
 - migration
-- modernization
+- upgrade
 - prometheus
 - grafana
 - coredns
@@ -13,6 +12,48 @@ tags:
 - statefulset
 - job
 - cronjob
+- ingress
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 验收、切换与旧集群退役 是什么
+- 如何 验收、切换与旧集群退役
+- Kubernetes 11 production operations 最佳实践
+trigger_keywords:
+- 验收
+- 切换与旧集群退役
+- production
+- operations
+- best
+- practices
+prerequisites:
+- kubectl-basics
+- gpu-ml-basics
+- prometheus-basics
+- monitoring-basics
+- tls-basics
+- backup-basics
+created: "2026-05-23"
+---
+
+title: 08 - 验收、切换与旧集群退役
+description: 5. [旧集群安全退役](#5-旧集群安全退役)
+category: migration
+tags:
+- k8s
+- migration
+- modernization
+- [[Prometheus|prometheus]]
+- grafana
+- [[CoreDNS|coredns]]
+- hpa
+- [[StatefulSet|statefulset]]
+- job
+- [[CronJob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,13 +69,15 @@ trigger_keywords:
 - 验收
 - 切换与旧集群退役
 - migration
-prerequisites:
-- kubectl-basics
-- gitops-basics
-- prometheus-basics
-- monitoring-basics
-- tls-basics
-- backup-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 08 - 验收、切换与旧集群退役
@@ -43,7 +86,7 @@ prerequisites:
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [功能验证清单](#1-功能验证清单)
 2. [性能对比验证](#2-性能对比验证)
@@ -54,9 +97,9 @@ prerequisites:
 
 ---
 
-## 1. 功能验证清单
+<!-- chunk: 1. 功能验证清单 -->## 1. 功能验证清单
 
-### 1.1 自动化验证脚本
+#<!-- chunk: 1.1 自动化验证脚本 -->## 1.1 自动化验证脚本
 
 ```bash
 #!/bin/bash
@@ -136,7 +179,7 @@ if [ $FAIL -gt 0 ]; then
 fi
 ```
 
-### 1.2 业务接口验证
+#<!-- chunk: 1.2 业务接口验证 -->## 1.2 业务接口验证
 
 ```bash
 # 通过 ACK Ingress IP 直接测试业务接口（绕过 DNS）
@@ -168,9 +211,9 @@ done
 
 ---
 
-## 2. 性能对比验证
+<!-- chunk: 2. 性能对比验证 -->## 2. 性能对比验证
 
-### 2.1 压测对比
+#<!-- chunk: 2.1 压测对比 -->## 2.1 压测对比
 
 ```bash
 # 使用 wrk 进行压测对比
@@ -199,7 +242,7 @@ wrk -t4 -c100 -d60s -H "Host: api.example.com" \
 # 4. Terway 网络模式性能
 ```
 
-### 2.2 资源水位对比
+#<!-- chunk: 2.2 资源水位对比 -->## 2.2 资源水位对比
 
 ```bash
 # 双集群资源对比
@@ -219,9 +262,9 @@ kubectl --context=ack-cluster top pods -A --sort-by=cpu | head -11
 
 ---
 
-## 3. 全量切换 SOP
+<!-- chunk: 3. 全量切换 SOP -->## 3. 全量切换 SOP
 
-### 3.1 切换前检查
+#<!-- chunk: 3.1 切换前检查 -->## 3.1 切换前检查
 
 ```bash
 #!/bin/bash
@@ -269,7 +312,7 @@ else
 fi
 ```
 
-### 3.2 全量切换执行
+#<!-- chunk: 3.2 全量切换执行 -->## 3.2 全量切换执行
 
 ```bash
 #!/bin/bash
@@ -320,9 +363,9 @@ echo "=============================================="
 
 ---
 
-## 4. 稳定性观察期
+<!-- chunk: 4. 稳定性观察期 -->## 4. 稳定性观察期
 
-### 4.1 观察清单（7 天）
+#<!-- chunk: 4.1 观察清单（7 天） -->## 4.1 观察清单（7 天）
 
 | 天数 | 检查项 | 预期 |
 |------|--------|------|
@@ -330,11 +373,11 @@ echo "=============================================="
 | Day 2 | 自动扩缩是否正常（高峰期） | HPA 正常触发 |
 | Day 3 | 有状态服务数据增长正常 | 磁盘使用率无异常 |
 | Day 4 | CronJob 执行记录 | 所有 CronJob 按时执行 |
-| Day 5 | 证书续期（如有到期） | [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]] 自动续期 |
+| Day 5 | 证书续期（如有到期） | cert-manager 自动续期 |
 | Day 6 | 日志采集完整性 | SLS/EFK 日志无缺失 |
 | Day 7 | 整体回顾 | 可执行退役 |
 
-### 4.2 每日巡检脚本
+#<!-- chunk: 4.2 每日巡检脚本 -->## 4.2 每日巡检脚本
 
 ```bash
 #!/bin/bash
@@ -365,9 +408,9 @@ echo ">>> 巡检完成"
 
 ---
 
-## 5. 旧集群安全退役
+<!-- chunk: 5. 旧集群安全退役 -->## 5. 旧集群安全退役
 
-### 5.1 退役前确认
+#<!-- chunk: 5.1 退役前确认 -->## 5.1 退役前确认
 
 ```bash
 #!/bin/bash
@@ -395,7 +438,7 @@ echo "  建议使用 Velero 创建源集群最终快照"
 echo "  velero backup create final-backup-$(date +%Y%m%d) --kubecontext source-cluster"
 ```
 
-### 5.2 退役执行
+#<!-- chunk: 5.2 退役执行 -->## 5.2 退役执行
 
 ```bash
 #!/bin/bash
@@ -450,9 +493,9 @@ echo "=============================================="
 
 ---
 
-## 6. 迁移复盘
+<!-- chunk: 6. 迁移复盘 -->## 6. 迁移复盘
 
-### 6.1 复盘模板
+#<!-- chunk: 6.1 复盘模板 -->## 6.1 复盘模板
 
 ```
 迁移复盘报告
@@ -492,7 +535,7 @@ echo "=============================================="
 
 ---
 
-## 检查清单
+<!-- chunk: 检查清单 -->## 检查清单
 
 - [ ] 功能验证脚本全部通过
 - [ ] 核心业务接口验证通过
@@ -507,3 +550,26 @@ echo "=============================================="
 
 **上一步**: ← [07-可观测性与安全迁移](./07-observability-security-migration.md)
 **下一步**: → [09-迁移工具链参考](./09-migration-toolchain.md)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-migration MOC
+- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+
+## See Also
+
+- 06-stateful-services-migration
+- 07-observability-security-migration
+- 09-migration-toolchain
+- 10-real-world-case-study

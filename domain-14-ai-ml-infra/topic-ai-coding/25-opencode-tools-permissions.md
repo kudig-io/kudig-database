@@ -25,6 +25,7 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 工具体系与权限模型
@@ -57,7 +58,7 @@ OpenCode 的工具体系是 Agent 从「纯 Chat」进化为「执行者」的�
 | **todowrite** | 创建/更新任务列表 | `todowrite` | — |
 | **todoread** | 读取任务列表 | `todoread` | — |
 | **question** | 向用户提问（多选/自由输入） | `question` | — |
-| **skill** | 按需加载 SKILL.md | `skill` | 匹配 Skill 名称 |
+| **[[SKILL|skill]]** | 按需加载 SKILL.md | `skill` | 匹配 Skill 名称 |
 
 > **底层实现**：grep、glob、list 底层使用 **ripgrep** 引擎，自动遵守 `.gitignore` 规则。websearch 通过 Exa AI 托管 MCP 服务实现，无需 API Key。
 

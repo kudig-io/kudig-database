@@ -1,4 +1,45 @@
 ---
+title: 6G 核心网架构设计 — 阿里云视角
+description: 'title: 6G 核心网架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- networking
+- etcd
+- grafana
+- redis
+- mysql
+- networkpolicy
+- operator
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- 6G 核心网架构设计 — 阿里云视角 是什么
+- 如何 6G 核心网架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 6G
+- 核心网架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
+- redis-basics
+- mysql-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 6G 核心网架构设计
 description: '# 6G 核心网架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,11 +47,11 @@ tags:
 - k8s
 - architecture
 - industry
-- etcd
+- [[etcd|etcd]]
 - grafana
 - redis
 - mysql
-- networkpolicy
+- [[NetworkPolicy|networkpolicy]]
 - operator
 - gpu
 last_updated: 2026-05-18
@@ -38,30 +79,31 @@ trigger_keywords:
 - AI-Native
 - 边缘计算
 - 阿里云服务网格
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- etcd-basics
-- redis-basics
-- mysql-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - topic-telecom-architecture
 - topic-edge-computing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 6G 核心网架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#6G` `#核心网` `#通感一体` `#空天地` `#阿里云`
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [概述](#1-概述)
 2. [设计原则](#2-设计原则)
@@ -74,7 +116,7 @@ related_topics:
 
 ---
 
-## 1. 概述
+<!-- chunk: 1. 概述 -->## 1. 概述
 
 第六代移动通信（6G）代表了通信技术的下一个重大飞跃。相比 5G，6G 在峰值速率（Tbps 级）、空口延迟（< 0.1ms）、连接密度（10^7/km²）、定位精度（cm 级）等维度提升一到两个数量级。更重要的是，6G 引入了三个革命性能力：通信感知一体化（ISAC，通感一体）、空天地全域覆盖、内生人工智能（AI-Native）。
 
@@ -87,7 +129,7 @@ related_topics:
 
 云原生技术是 6G 核心网的自然选择。核心网功能全部容器化，部署在 Kubernetes 集群上，通过微服务实现模块化、通过 Service Mesh 实现服务治理、通过 Operator 实现自动化运维。
 
-### 1.1 行业背景
+#<!-- chunk: 1.1 行业背景 -->## 1.1 行业背景
 
 | 挑战 | 说明 | 架构影响 |
 |:---|:---|:---|
@@ -97,7 +139,7 @@ related_topics:
 | 超低延迟 | < 0.1ms 空口时延 | 边缘计算 + 本地突破 |
 | 算网融合 | 计算与网络协同 | 算力路由 + 算网编排 |
 
-### 1.2 核心场景
+#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
 
 - **全息通信**: 3D 全息实时交互，Tbps 级带宽 + ms 级延迟
 - **数字孪生通信**: 物理世界实时高保真映射，10^7/km² 连接密度
@@ -107,29 +149,29 @@ related_topics:
 
 ---
 
-## 2. 设计原则
+<!-- chunk: 2. 设计原则 -->## 2. 设计原则
 
-### 2.1 多面融合原则
+#<!-- chunk: 2.1 多面融合原则 -->## 2.1 多面融合原则
 
 6G 核心网打破了传统核心网控制面和用户面的二元结构，引入了感知面、算力面和 AI 面。五个面之间需要紧密协同但又保持松耦合。架构设计需要通过统一的编排器（Orchestrator）实现多面协同，通过标准化的面间接口（Plane Interface）实现松耦合。
 
-### 2.2 分布式自治原则
+#<!-- chunk: 2.2 分布式自治原则 -->## 2.2 分布式自治原则
 
 6G 网络覆盖空天地全域，不可能采用完全集中的控制模式。架构设计需要采用"集中编排+分布式自治"模式：中心编排器负责全局策略和资源分配，分布式自治节点负责本地的实时决策和执行。当集中控制不可达时，自治节点能够独立维持基本服务。
 
-### 2.3 AI 内生原则
+#<!-- chunk: 2.3 AI 内生原则 -->## 2.3 AI 内生原则
 
 AI 不是 6G 网络的外挂功能，而是内生的核心能力。架构设计需要从底层支持 AI 模型的训练、部署、推理和更新。网络自身利用 AI 实现自优化（如智能切片、负载均衡、故障预测），同时为上层应用提供 AI 服务能力。
 
-### 2.4 安全内生原则
+#<!-- chunk: 2.4 安全内生原则 -->## 2.4 安全内生原则
 
 6G 网络的安全需要从被动防御转向主动免疫。架构设计需要支持零信任网络架构、抗量子密码、隐私计算等先进安全技术。安全能力内嵌到每个网络功能中，而非作为独立的安全层叠加。
 
 ---
 
-## 3. 架构模式
+<!-- chunk: 3. 架构模式 -->## 3. 架构模式
 
-### 3.1 6G 核心网五面融合架构
+#<!-- chunk: 3.1 6G 核心网五面融合架构 -->## 3.1 6G 核心网五面融合架构
 
 ```mermaid
 graph TB
@@ -185,7 +227,7 @@ graph TB
     ORCH --> CP1 & CP2 & UP1 & SP1 & XP1 & AI1
 ```
 
-### 3.2 网络切片架构
+#<!-- chunk: 3.2 网络切片架构 -->## 3.2 网络切片架构
 
 ```mermaid
 graph LR
@@ -220,7 +262,7 @@ graph LR
     SMO --> E1 & U1 & M1 & P1
 ```
 
-### 3.3 算网融合调度架构
+#<!-- chunk: 3.3 算网融合调度架构 -->## 3.3 算网融合调度架构
 
 ```mermaid
 flowchart LR
@@ -239,9 +281,9 @@ flowchart LR
 
 ---
 
-## 4. 实现示例
+<!-- chunk: 4. 实现示例 -->## 4. 实现示例
 
-### 4.1 网络切片管理控制器
+#<!-- chunk: 4.1 网络切片管理控制器 -->## 4.1 网络切片管理控制器
 
 ```go
 package slice
@@ -358,7 +400,7 @@ func (sm *SliceManager) DeleteSlice(ctx context.Context, id string) error {
 }
 ```
 
-### 4.2 通感一体化信号处理
+#<!-- chunk: 4.2 通感一体化信号处理 -->## 4.2 通感一体化信号处理
 
 ```python
 import numpy as np
@@ -446,7 +488,7 @@ class ISACProcessor:
         return rx
 ```
 
-### 4.3 算力路由调度器
+#<!-- chunk: 4.3 算力路由调度器 -->## 4.3 算力路由调度器
 
 ```python
 from dataclasses import dataclass
@@ -549,9 +591,9 @@ class ComputeNetworkRouter:
 
 ---
 
-## 5. 在 Kubernetes 上的部署
+<!-- chunk: 5. 在 Kubernetes 上的部署 -->## 5. 在 Kubernetes 上的部署
 
-### 5.1 6G 核心网控制面部署
+#<!-- chunk: 5.1 6G 核心网控制面部署 -->## 5.1 6G 核心网控制面部署
 
 ```yaml
 apiVersion: apps/v1
@@ -621,7 +663,7 @@ spec:
             periodSeconds: 3
 ```
 
-### 5.2 边缘 UPF 部署（低延迟场景）
+#<!-- chunk: 5.2 边缘 UPF 部署（低延迟场景） -->## 5.2 边缘 UPF 部署（低延迟场景）
 
 ```yaml
 apiVersion: apps/v1
@@ -681,7 +723,7 @@ spec:
             medium: HugePages
 ```
 
-### 5.3 通感处理 GPU 部署
+#<!-- chunk: 5.3 通感处理 GPU 部署 -->## 5.3 通感处理 GPU 部署
 
 ```yaml
 apiVersion: apps/v1
@@ -727,22 +769,22 @@ spec:
 
 ---
 
-## 6. 最佳实践
+<!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
 
-### 6.1 核心网高可用
+#<!-- chunk: 6.1 核心网高可用 -->## 6.1 核心网高可用
 
 - **五副本控制面**: 核心网控制面（AMF/SMF）部署 5 副本，跨 3 个可用区分布，支持 2 节点故障
 - **无状态设计**: 所有核心网功能无状态化，状态存储在 Redis/etcd 中，支持快速故障切换
 - **灰度发布**: 核心网功能升级采用金丝雀发布，先更新 1 个副本，验证无异常后逐步推进
 - **多集群联邦**: 使用 Karmada 实现 6G 核心网的多集群联邦管理，跨地域/跨云部署
 
-### 6.2 网络切片管理
+#<!-- chunk: 6.2 网络切片管理 -->## 6.2 网络切片管理
 
 - **SLA 驱动**: 每个网络切片定义明确的 SLA（带宽、延迟、可靠性），系统自动监控 SLA 达标情况
 - **弹性伸缩**: 根据切片负载自动调整 UPF 副本数，URLLC 切片预留资源保证性能
 - **隔离性保障**: 不同切片使用独立的 UPF 和计算资源，通过 cgroup 和网络策略实现硬隔离
 
-### 6.3 通感一体化优化
+#<!-- chunk: 6.3 通感一体化优化 -->## 6.3 通感一体化优化
 
 - **感知与通信资源复用**: 同一载波上复用通信和感知信号，通过正交频分或时分方式避免干扰
 - **边缘感知处理**: 感知信号处理在边缘 UPF 侧完成，减少回传带宽占用
@@ -750,33 +792,33 @@ spec:
 
 ---
 
-## 7. 反模式
+<!-- chunk: 7. 反模式 -->## 7. 反模式
 
-### 7.1 照搬 5G 核心网架构
+#<!-- chunk: 7.1 照搬 5G 核心网架构 -->## 7.1 照搬 5G 核心网架构
 
 直接将 5G 核心网架构扩展为 6G，忽视 6G 新增的感知面、算力面和 AI 面。
 
 **解决方案**: 从零开始设计五面融合的核心网架构，在 5G SBA 基础上新增三个面的独立服务，通过统一编排器协调五个面的交互。
 
-### 7.2 忽视边缘时延要求
+#<!-- chunk: 7.2 忽视边缘时延要求 -->## 7.2 忽视边缘时延要求
 
 将所有核心网功能集中在区域数据中心，忽视 URLLC 场景对超低时延的要求。
 
 **解决方案**: UPF 和感知处理下沉到边缘节点（基站侧或汇聚机房），控制面保持在区域数据中心。通过边缘-云协同实现时延和集中管理的平衡。
 
-### 7.3 网络切片隔离不足
+#<!-- chunk: 7.3 网络切片隔离不足 -->## 7.3 网络切片隔离不足
 
 不同切片共享底层资源，高优先级切片被低优先级切片影响。
 
 **解决方案**: 为关键切片（URLLC）预留专用计算和网络资源。使用 Kubernetes ResourceQuota 和 LimitRange 实现资源隔离。通过网络策略（NetworkPolicy）限制切片间通信。
 
-### 7.4 AI 模型更新影响网络稳定性
+#<!-- chunk: 7.4 AI 模型更新影响网络稳定性 -->## 7.4 AI 模型更新影响网络稳定性
 
 AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 
 **解决方案**: 使用 A/B 测试方式部署新模型，先在灰度流量上验证，确认无异常后全量切换。保留回滚能力，异常时秒级回退到旧模型。
 
-### 7.5 忽视 NTN 切换连续性
+#<!-- chunk: 7.5 忽视 NTN 切换连续性 -->## 7.5 忽视 NTN 切换连续性
 
 卫星高速移动导致频繁切换，忽视切换过程中的服务连续性。
 
@@ -784,9 +826,9 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 
 ---
 
-## 8. 参考资源
+<!-- chunk: 8. 参考资源 -->## 8. 参考资源
 
-### 8.1 阿里云组件映射
+#<!-- chunk: 8.1 阿里云组件映射 -->## 8.1 阿里云组件映射
 
 | 功能域 | **阿里云云原生方案** |
 |:---|:---|
@@ -799,7 +841,7 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 | 可观测性 | **ARMS + SLS + Grafana** |
 | 边缘计算 | **ACK Edge + Link IoT Edge** |
 
-### 8.2 生产检查清单
+#<!-- chunk: 8.2 生产检查清单 -->## 8.2 生产检查清单
 
 - [ ] 控制面五副本跨可用区部署验证
 - [ ] 网络切片间隔离性测试
@@ -810,7 +852,7 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 - [ ] 系统可用性 99.999% 验证
 - [ ] 安全合规审计通过
 
-### 8.3 外部参考
+#<!-- chunk: 8.3 外部参考 -->## 8.3 外部参考
 
 - 3GPP TR 23.700-01 — 6G 系统架构研究
 - ITU-R M.2160 — 6G 愿景框架
@@ -822,6 +864,31 @@ AI 模型在线更新时导致网络功能短暂不可用或行为异常。
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
 
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- 80-tsn-network
+- topic-application-architecture MOC — Cross-reference
+
+## See Also
+
+- 67-brain-computer-interface
+- 68-quantum-computing-cloud
+- 70-ecny-cbdc
+- 71-smart-tax

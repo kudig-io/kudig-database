@@ -1,4 +1,42 @@
 ---
+title: 节点加入进阶: Discovery 与 TLS Bootstrap 详解 [cluster-create]
+description: 'title: ''节点加入进阶: Discovery 与 TLS Bootstrap 详解'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 25min
+intent_queries:
+- '节点加入进阶: Discovery 与 TLS Bootstrap 详解 是什么'
+- '如何 节点加入进阶: Discovery 与 TLS Bootstrap 详解'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- '节点加入进阶:'
+- Discovery
+- TLS
+- Bootstrap
+- 详解
+- platform
+- engineering
+- code
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解'
 description: '# 节点加入进阶: Discovery 与 TLS Bootstrap 详解'
 category: functions
@@ -40,10 +78,6 @@ trigger_keywords:
 - bootstrap-kubelet.conf
 - node join
 - certificate-key
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-2-security
@@ -53,6 +87,15 @@ related_topics:
 - TLS bootstrap
 - RBAC
 - HA cluster
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点加入进阶: Discovery 与 TLS Bootstrap 详解
@@ -800,6 +843,14 @@ kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
 - [预检流程](02-preflight.md) — join 前的预检
 - [节点加入基础](06-join.md) — join 基本流程
 - [证书管理](03-certs.md) — TLS 证书体系
-- [安全机制]([[domain-02-workloads-applications/topic-functions/cluster-create/16-security|16-security]].md) — Bootstrap Token 安全模型
+- [安全机制](16-security.md) — Bootstrap Token 安全模型
 - [高可用进阶](14-ha-advanced.md) — control-plane join 和证书分发
 - [CRI 运行时](18-cri-runtime.md) — join 时 CRI 检查
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]
+- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]

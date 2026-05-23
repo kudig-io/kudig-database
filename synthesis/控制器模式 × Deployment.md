@@ -31,6 +31,18 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/etcd]]"
+    type: uses
+  - target: "[[entities/kubernetes]]"
+    type: uses
+  - target: "[[entities/prometheus]]"
+    type: uses
+  - target: "[[entities/argo]]"
+    type: related_to
+  - target: "[[domain-17-system-foundation/topic-dictionary/workloads/daemonset]]"
+    type: related_to
 ---
 
 # 控制器模式 × Deployment
@@ -59,7 +71,7 @@ Deployment Controller（有状态策略层）
             └── Pod（无状态实例）
 ```
 
-这个分层设计成为所有复杂控制器的模板：StatefulSet（有序 Pod 管理）、DaemonSet（节点级调度）、Job（完成度追踪）。
+这个分层设计成为所有复杂控制器的模板：StatefulSet（有序 Pod 管理）、[[domain-17-system-foundation/topic-dictionary/workloads/daemonset|DaemonSet]]（节点级调度）、Job（完成度追踪）。
 
 **Deployment 定义了控制器的 maturity baseline：**
 - L1：维持数量（ReplicaSet）
@@ -73,12 +85,12 @@ Deployment Controller（有状态策略层）
 | 张力 | 详情 |
 |------|------|
 | **协调延迟 vs 用户体验** | Deployment 的滚动更新受 maxUnavailable 限制，大集群中完全替换可能需要数分钟。更快的协调需要更激进的参数，但增加了风险 |
-| **状态爆炸** | 每个 Deployment 保留 10 个（默认）历史 ReplicaSet 用于回滚。大规模集群中，这些历史版本显著增加 etcd 存储压力 |
+| **状态爆炸** | 每个 Deployment 保留 10 个（默认）历史 ReplicaSet 用于回滚。大规模集群中，这些历史版本显著增加 [[entities/etcd|etcd]] 存储压力 |
 | **控制器递归** | Deployment 管理 ReplicaSet，ReplicaSet 管理 Pod——两级控制器增加了调试复杂度。`kubectl describe deployment` 需要穿透两层才能定位问题 |
 
 ## 开放问题
 
-- **Deployment 是否过度通用？** 金丝雀发布、蓝绿部署等高级场景需要 Argo Rollouts 等专门控制器，因为 Deployment 的滚动更新策略过于简单。这是否意味着 Deployment 的设计过于保守？
+- **Deployment 是否过度通用？** 金丝雀发布、蓝绿部署等高级场景需要 [[entities/argo|Argo]] Rollouts 等专门控制器，因为 Deployment 的滚动更新策略过于简单。这是否意味着 Deployment 的设计过于保守？
 - **自定义控制器的 Deployment 化**：是否所有自定义控制器都应该遵循 Deployment 的五级成熟度模型？还是某些领域需要完全不同的协调范式？
 
 
@@ -92,9 +104,9 @@ Deployment Controller（有状态策略层）
 
 ## See Also
 
-- [[synthesis/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]]
+- [[entities/prometheus|Prometheus]]-Grafana.md|可观测性支柱 × Prometheus-Grafana]]
 - [[synthesis/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
 - [[synthesis/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
 - [[synthesis/控制器模式 × 可观测性.md|控制器模式 × 可观测性]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]
+- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — [[entities/kubernetes|Kubernetes]] Deployment 控制器源码分析]]

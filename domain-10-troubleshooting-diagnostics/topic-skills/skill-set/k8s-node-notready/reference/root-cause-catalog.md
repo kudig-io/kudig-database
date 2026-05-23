@@ -35,6 +35,7 @@ prerequisites:
 skill_id: SKILL-ROOT_CAUSE_CATALOG-001
 skill_name: 根因分类 / Root Cause Catalog
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 根因分类 / Root Cause Catalog
@@ -48,15 +49,15 @@ version: 1.0.0
 
 - [根因总览表](#根因总览表)
 - [详细根因描述](#详细根因描述)
-  - [RC-001 kubelet 进程崩溃或未运行](#rc-001-kubelet-进程崩溃或未运行)
-  - [RC-002 容器运行时（containerd）异常](#rc-002-容器运行时containerd异常)
+  - [RC-001 [[kubelet|kubelet]] 进程崩溃或未运行](#rc-001-kubelet-进程崩溃或未运行)
+  - [RC-002 容器运行时（[[containerd|containerd]]）异常](#rc-002-容器运行时containerd异常)
   - [RC-003 节点磁盘空间耗尽（DiskPressure）](#rc-003-节点磁盘空间耗尽diskpressure)
   - [RC-004 节点内存耗尽（MemoryPressure）](#rc-004-节点内存耗尽memorypressure)
   - [RC-005 节点 PID 耗尽（PIDPressure）](#rc-005-节点-pid-耗尽pidpressure)
   - [RC-006 节点与 apiserver 网络不通](#rc-006-节点与-apiserver-网络不通)
   - [RC-007 kubelet 客户端证书过期](#rc-007-kubelet-客户端证书过期)
   - [RC-008 PLEG 不健康导致 NotReady](#rc-008-pleg-不健康导致-notready)
-  - [RC-009 内核故障/硬件异常](#rc-009-内核故障硬件异常)
+  - [RC-009 内核问题/硬件异常](#rc-009-内核问题硬件异常)
   - [RC-010 NTP 时间不同步](#rc-010-ntp-时间不同步)
   - [RC-011 CNI 插件异常](#rc-011-cni-插件异常)
   - [RC-012 节点被手动 cordon/drain](#rc-012-节点被手动-cordondrain)
@@ -76,10 +77,10 @@ version: 1.0.0
 | RC-006 | **节点与 apiserver 网络不通** | 中 | D2.7, D2.2, D1.2 | `evt_api_unreachable`, `evt_policy_block`, `evt_route_fail` |
 | RC-007 | **kubelet 客户端证书过期** | 中 | D2.8, D2.2, D2.7 | `evt_kubelet_cert`, `evt_node_cert_expire` |
 | RC-008 | **PLEG 不健康导致 NotReady** | 中 | D2.6, D1.2, D2.3 | `evt_pleg`, `evt_and_pleg_timeout`, `evt_and_pleg_overload` |
-| RC-009 | **内核故障/硬件异常** | 低 | D2.9 | `evt_kernel_panic`, `evt_driver_issue` |
+| RC-009 | **内核问题/硬件异常** | 低 | D2.9 | `evt_kernel_panic`, `evt_driver_issue` |
 | RC-010 | **NTP 时间不同步** | 低 | D2.10, D2.8 | `evt_time_skew_tls` |
 | RC-011 | **CNI 插件异常** | 中 | D3.2, D1.2 | `evt_cni_fail` |
-| RC-012 | **节点被手动 cordon/drain** | 低 | D1.4, D1.1 | `evt_cordon`（非故障） |
+| RC-012 | **节点被手动 cordon/drain** | 低 | D1.4, D1.1 | `evt_cordon`（非问题） |
 
 ---
 
@@ -109,8 +110,8 @@ version: 1.0.0
 - **诊断证据**:
   - **D2.3** 显示 containerd 未运行（`Active: inactive (dead)` / `Active: failed`）
   - **D2.4** 日志有错误（`failed to create shim`、`context deadline exceeded` 等）
-  - **D2.6** PLEG 不健康（`GenericPLEG: Unable to retrieve pods`）
-  - **D1.2** Message 包含 "container runtime is down"
+  - **D2.6** PLEG 不健康（`GenericPLEG: Unable to retrieve [[Pods|pods]]`）
+  - **D1.2** Message 包含 "[[Container Runtime|container runtime]] is down"
 - **FTA 底层事件映射**: `node-fta.md → evt_rt_down`, `evt_cri_sock`, `evt_rt_hang`
 - **关联修复**: REM-004（重启 containerd）、REM-006（排空节点并重启）
 - **交叉关联**:
@@ -172,7 +173,7 @@ version: 1.0.0
 
 ### RC-006: 节点与 apiserver 网络不通
 
-- **描述**: 防火墙规则变更、安全组配置、路由故障、物理网络问题导致节点无法与 apiserver 通信
+- **描述**: 防火墙规则变更、安全组配置、路由问题、物理网络问题导致节点无法与 apiserver 通信
 - **概率**: 中
 - **诊断证据**:
   - **D2.7** TCP 连接失败（`nc -zv` 超时或被拒绝）
@@ -214,23 +215,23 @@ version: 1.0.0
 - **FTA 底层事件映射**: `node-fta.md → evt_pleg`, `evt_and_pleg_timeout`, `evt_and_pleg_overload`
 - **关联修复**: REM-003（重启 kubelet）、REM-004（重启 containerd）、REM-006（排空节点并重启）
 - **交叉关联**:
-  - RC-002（容器运行时故障）是 PLEG 不健康最常见的上游原因
+  - RC-002（容器运行时问题）是 PLEG 不健康最常见的上游原因
   - 某个容器处于 D 状态（不可中断 I/O 等待）也可阻塞 CRI 调用导致 PLEG 超时
   - [v1.31+] EventedPLEG 默认启用后，传统 GenericPLEG 误报减少
 
 ---
 
-### RC-009: 内核故障/硬件异常
+### RC-009: 内核问题/硬件异常
 
-- **描述**: 服务器硬件故障（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏
+- **描述**: 服务器硬件问题（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏
 - **概率**: 低
 - **诊断证据**:
   - **D2.9** dmesg 包含 `Hardware Error`、`MCE` (Machine Check Exception)、`I/O error`、`device not responding`、`NMI watchdog: BUG: soft lockup`、`EXT4-fs error`、`XFS error`
-  - 节点可能完全无法 SSH（硬件级故障）
+  - 节点可能完全无法 SSH（硬件级问题）
 - **FTA 底层事件映射**: `node-fta.md → evt_kernel_panic`, `evt_driver_issue`
 - **关联修复**: REM-006（排空节点并重启）、REM-007（替换节点）、REM-009（内核热补丁/OS 升级）、REM-010（硬件更换）
 - **交叉关联**:
-  - 硬件故障可能导致 RC-001（kubelet 崩溃）、RC-002（containerd 崩溃）、RC-003（磁盘故障导致空间不可用）
+  - 硬件问题可能导致 RC-001（kubelet 崩溃）、RC-002（containerd 崩溃）、RC-003（磁盘问题导致空间不可用）
   - `nf_conntrack: table full` 属于 RC-006（网络）和 RC-009（内核）的交叉区域
 
 ---
@@ -260,19 +261,19 @@ version: 1.0.0
 - **FTA 底层事件映射**: `node-fta.md → evt_cni_fail`
 - **关联修复**: 重新部署 CNI DaemonSet、恢复 CNI 配置文件
 - **交叉关联**:
-  - CNI Pod 异常可能是 RC-002（容器运行时故障）的下游症状
+  - CNI Pod 异常可能是 RC-002（容器运行时问题）的下游症状
   - CNI 配置被误删通常是运维误操作
 
 ---
 
 ### RC-012: 节点被手动 cordon/drain
 
-- **描述**: 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于故障
+- **描述**: 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于问题
 - **概率**: 低
 - **诊断证据**:
   - **D1.4** 存在 `node.kubernetes.io/unschedulable:NoSchedule` taint
   - **D1.1** STATUS 包含 "SchedulingDisabled"（注意：STATUS 可能显示为 `Ready,SchedulingDisabled`，此时节点实际是健康的）
-- **FTA 底层事件映射**: `node-fta.md → evt_cordon`（非故障，人工操作）
+- **FTA 底层事件映射**: `node-fta.md → evt_cordon`（非问题，人工操作）
 - **关联修复**: REM-001（取消 cordon 标记）
 - **交叉关联**:
   - 这是常见的误诊场景 — 用户报告"节点异常"但实际是 SchedulingDisabled 而非 NotReady
@@ -285,7 +286,7 @@ version: 1.0.0
 以下展示根因之间的因果和关联关系：
 
 ```
-RC-009 (硬件/内核故障)
+RC-009 (硬件/内核问题)
   ├─→ RC-001 (kubelet 崩溃)
   ├─→ RC-002 (containerd 崩溃)
   └─→ RC-003 (磁盘不可用)
@@ -309,7 +310,7 @@ RC-010 (NTP 时间偏差)
   └─→ RC-007 的表现 (证书验证失败)
 
 RC-006 (网络不通) ←→ RC-007 (证书过期)
-  注意: TLS 握手失败可能被误判为网络故障
+  注意: TLS 握手失败可能被误判为网络问题
   诊断优先级: 先 D2.8 检查证书，再 D2.7 排查网络
 ```
 

@@ -45,15 +45,16 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # SuperEdge 架构实践 (SuperEdge Architecture Practice)
 
 <!-- chunk: 概述 (Overview) -->## 概述 (Overview)
 
-SuperEdge 是腾讯开源的 Kubernetes 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。
+SuperEdge 是腾讯开源的 [[Kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。
 
-SuperEdge is Tencent's open-source Kubernetes-native edge computing management framework designed for large-scale edge node management. It extends Kubernetes' powerful container orchestration capabilities to the edge while addressing core challenges in edge computing scenarios such as network instability, node autonomy, and service discovery.
+SuperEdge is Tencent's open-source Kubernetes-native edge computing management framework designed for large-scale edge node management. It extends Kubernetes' powerful container orchestration capabilities to the edge while addressing core challenges in edge computing scenarios such as network instability, node autonomy, and [[Service|service]] discovery.
 
 ---
 
@@ -180,7 +181,7 @@ SuperEdge 包含以下核心组件：
 
 | 组件名 | 功能 | 部署位置 |
 |--------|------|----------|
-| `tunnel-edge` | 维护到云端的隧道连接 | Edge Node (DaemonSet) |
+| `tunnel-edge` | 维护到云端的隧道连接 | Edge Node ([[DaemonSet|DaemonSet]]) |
 | `lite-apiserver` | 本地 API 代理与缓存 | Edge Node (Static Pod) |
 | `edge-health` | 分布式节点健康检查 | Edge Node (DaemonSet) |
 | `application-grid-wrapper` | 服务流量本地化代理 | Edge Node (DaemonSet) |
@@ -1829,22 +1830,22 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-37-edge-computing MOC]]
-- [[domain-15-specialized-tech/README.md|Domain 37: 边缘计算 (Edge Computing)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-37 边缘计算 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-edge-computing-architecture.md|边缘计算架构概述 (Edge Computing Architecture Overview)]]
-- [[domain-15-specialized-tech/02-cloud-edge-collaboration.md|云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)]]
-- [[domain-15-specialized-tech/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)]]
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|OpenYurt 边缘方案 (OpenYurt Edge Solution)]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|边缘存储与网络 (Edge Storage and Network)]]
-- [[domain-15-specialized-tech/09-edge-security.md|边缘安全架构 (Edge Security Architecture)]]
-- [[domain-15-specialized-tech/10-edge-use-cases.md|边缘场景案例 (Edge Computing Use Cases)]]
+- domain-37-edge-computing KUDIG Database — Global MOC
+- [[domain-15-specialized-tech/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- Domain-37 边缘计算 — 开源项目索引
+- 边缘计算架构概述 (Edge Computing Architecture Overview)
+- 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
+- KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
+- KubeEdge 设备管理与边缘应用 (KubeEdge Device Management and Edge Appl...
+- OpenYurt 边缘方案 (OpenYurt Edge Solution)
+- 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
+- 边缘存储与网络 (Edge Storage and Network)
+- 边缘安全架构 (Edge Security Architecture)
+- 边缘场景案例 (Edge Computing Use Cases)
 
 ## See Also
 
-- [[domain-15-specialized-tech/04-kubeedge-device-edge-apps.md|04-kubeedge-device-edge-apps]]
-- [[domain-15-specialized-tech/05-openyurt-architecture.md|05-openyurt-architecture]]
-- [[domain-15-specialized-tech/07-edge-ai-inference-federated-learning.md|07-edge-ai-inference-federated-learning]]
-- [[domain-15-specialized-tech/08-edge-storage-network.md|08-edge-storage-network]]
+- 04-kubeedge-device-edge-apps
+- 05-openyurt-architecture
+- 07-edge-ai-inference-federated-learning
+- 08-edge-storage-network

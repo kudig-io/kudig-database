@@ -1,5 +1,5 @@
 ---
-title: Agent CLI 基础概念与架构模式
+title: Agent CLI 基础概念与架构模式 (domain-14-ai-ml-infra)
 description: 'title: Agent CLI 基础概念与架构模式'
 category: general
 tags:
@@ -28,6 +28,7 @@ trigger_keywords:
 - infra
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 title: Agent CLI 基础概念与架构模式
@@ -410,10 +411,10 @@ Agent CLI 是 LLM 能力与开发者工作流深度融合的产物。其核心�
 4. **保持开发者控制**：Git-native 工作流，所有变更可审查、可回滚
 
 **后续阅读**：
-- [24 - 主流 Agent CLI 工具全景对比](./[[domain-14-ai-ml-infra/24-agent-cli-tools-comparison.md|24-agent-cli-tools-comparison]].md)：深入对比各工具特性
+- [24 - 主流 Agent CLI 工具全景对比](./24-agent-cli-tools-comparison.md)：深入对比各工具特性
 - [25 - Agent CLI 与 MCP 协议深度集成](./25-agent-cli-mcp-integration.md)：MCP 工具开发实战
-- [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md)：工具调用设计规范
-- [09 - 生产部署指南](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md)：K8s 上的 Agent 服务部署
+- [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md)：工具调用设计规范
+- [09 - 生产部署指南](./09-production-deployment-guide.md)：K8s 上的 Agent 服务部署
 
 ---
 
@@ -423,7 +424,7 @@ Agent CLI 是 LLM 能力与开发者工作流深度融合的产物。其核心�
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -438,7 +439,7 @@ Agent CLI 是 LLM 能力与开发者工作流深度融合的产物。其核心�
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/21-agentscope-advanced-features.md|21-agentscope-advanced-features]]
-- [[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]]
-- [[domain-14-ai-ml-infra/24-agent-cli-tools-comparison.md|24-agent-cli-tools-comparison]]
-- [[domain-14-ai-ml-infra/25-agent-cli-mcp-integration.md|25-agent-cli-mcp-integration]]
+- 21-agentscope-advanced-features
+- 22-agentscope-production-deployment
+- 24-agent-cli-tools-comparison
+- 25-agent-cli-mcp-integration

@@ -23,13 +23,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Nodes（节点）
 
 ## 概述
 
-Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：kubelet、容器运行时（container runtime）和 kube-proxy。
+Node（节点）是 [[Kubernetes|Kubernetes]] 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：[[kubelet|kubelet]]、容器运行时（[[Container Runtime|container runtime]]）和 kube-proxy。
 
 ## 核心概念/原理
 
@@ -70,4 +71,4 @@ Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

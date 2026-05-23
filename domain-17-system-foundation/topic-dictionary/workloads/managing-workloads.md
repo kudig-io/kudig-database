@@ -29,22 +29,23 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Managing Workloads
 
 ## 概述
-本页介绍在 Kubernetes 中部署应用后，如何使用各种工具和实践来管理、更新和扩展工作负载，涵盖 kubectl 批量操作、应用更新、金丝雀发布、资源注解和扩缩容等内容。
+本页介绍在 [[Kubernetes|Kubernetes]] 中部署应用后，如何使用各种工具和实践来管理、更新和扩展工作负载，涵盖 kubectl 批量操作、应用更新、金丝雀发布、资源注解和扩缩容等内容。
 
 ## 核心概念/原理
-- **资源配置组织**：将同一微服务的相关资源（如 Deployment + Service）放在同一个 YAML 文件中，用 `---` 分隔，便于统一管理。
+- **资源配置组织**：将同一微服务的相关资源（如 Deployment + [[Service|Service]]）放在同一个 YAML 文件中，用 `---` 分隔，便于统一管理。
 - **kubectl 批量操作**：
   - `kubectl apply -f <dir> --recursive`：递归处理目录下的所有清单文件。
   - `kubectl delete -f <file>` 或 `kubectl delete <resource>/<name>`：删除资源。
   - 通过标签选择器 `-l` 进行批量过滤和操作。
   - 利用 `xargs` 或命令替换 `$()` 链式操作资源。
 - **应用更新**：
-  - 使用 Deployment、DaemonSet、StatefulSet 的滚动更新机制，逐步将流量切换到新版本的 Pod。
+  - 使用 Deployment、[[DaemonSet|DaemonSet]]、[[StatefulSet|StatefulSet]] 的滚动更新机制，逐步将流量切换到新版本的 Pod。
   - `kubectl rollout` 系列命令用于管理、暂停、恢复和查看更新进度。
   - `kubectl patch`、`kubectl edit`、`kubectl apply` 用于对资源进行原地更新。
   - 对于不可变字段的修改，可使用 `kubectl replace --force`（先删除再重建）。

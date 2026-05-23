@@ -35,6 +35,7 @@ prerequisites:
 - redis-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -46,7 +47,7 @@ prerequisites:
     - [Server Binaries](#server-binaries)
     - [Node Binaries](#node-binaries)
     - [Container Images](#container-images)
-  - [Changelog since v1.34.5](#changelog-since-v1345)
+  - Changelog since v1.34.5](#changelog-since-v1345)
   - [Changes by Kind](#changes-by-kind)
     - [Bug or Regression](#bug-or-regression)
   - [Dependencies](#dependencies)
@@ -286,7 +287,7 @@ prerequisites:
 
 filename | sha512 hash
 -------- | -----------
-[kubernetes.tar.gz](https://dl.k8s.io/v1.34.6/kubernetes.tar.gz) | 16349b7825a7e047b6dced5f0f673a49bbce3e8a22390e4c93502701a7e9de5943de673855ca20aa33bf7c2f937d17b021f35826fc002533c987f3621c24f238
+[[entities/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.34.6/kubernetes.tar.gz) | 16349b7825a7e047b6dced5f0f673a49bbce3e8a22390e4c93502701a7e9de5943de673855ca20aa33bf7c2f937d17b021f35826fc002533c987f3621c24f238
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.34.6/kubernetes-src.tar.gz) | 8b066310812ad647ff3be8d3774f6812d58c10a6f7e9c00a752e6bd21006be938b88787b5ba10b18f69cfb98955fc001712e9c146bd0387ff830dd6d6f3d1d8c
 
 ### Client Binaries
@@ -345,7 +346,7 @@ name | architectures
 
 ### Bug or Regression
 
-- Kubeadm: do not add learner member to etcd client endpoints ([#137258](https://github.com/kubernetes/kubernetes/pull/137258), [@ahrtr](https://github.com/ahrtr)) [SIG Cluster Lifecycle]
+- Kubeadm: do not add learner member to [[etcd|etcd]] client endpoints ([#137258](https://github.com/kubernetes/kubernetes/pull/137258), [@ahrtr](https://github.com/ahrtr)) [SIG Cluster Lifecycle]
 - Kubeadm: ignore EINVAL when unmounting /var/lib/kubelet peer mounts during reset ([#137570](https://github.com/kubernetes/kubernetes/pull/137570), [@fuweid](https://github.com/fuweid)) [SIG Cluster Lifecycle]
 
 ## Dependencies

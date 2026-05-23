@@ -1,4 +1,42 @@
 ---
+title: 节点弹性伸缩 — Cluster Autoscaler 源码分析
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- prometheus
+- pdb
+- statefulset
+- daemonset
+- job
+- gpu
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点弹性伸缩 — Cluster Autoscaler 源码分析 是什么
+- 如何 节点弹性伸缩 — Cluster Autoscaler 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点弹性伸缩
+- Cluster
+- Autoscaler
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- prometheus-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 节点弹性伸缩 Cluster Autoscaler 源码分析
 description: '## 概述'
 category: functions
@@ -42,11 +80,6 @@ trigger_keywords:
 - scale-down-utilization-threshold
 - PodDisruptionBudget
 - safe-to-evict
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-9-orchestration
 - domain-01-cluster-fundamentals
@@ -54,13 +87,22 @@ related_topics:
 - node-create/01-overview
 - node-create/08-troubleshooting
 - cluster-create/01-overview
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点弹性伸缩 — Cluster Autoscaler 源码分析
 
 ## 概述
 
-节点弹性伸缩是 [[entities/kubernetes|kubernetes]] 集群实现成本优化和弹性容量的核心能力。Cluster Autoscaler（CA）是 Kubernetes 官方提供的节点自动伸缩组件，它通过监控集群中不可调度的 Pod（unschedulable Pod）来动态增加节点，通过检测空闲节点来减少节点，从而实现集群容量的自动调整。
+节点弹性伸缩是 Kubernetes 集群实现成本优化和弹性容量的核心能力。Cluster Autoscaler（CA）是 Kubernetes 官方提供的节点自动伸缩组件，它通过监控集群中不可调度的 Pod（unschedulable Pod）来动态增加节点，通过检测空闲节点来减少节点，从而实现集群容量的自动调整。
 
 Cluster Autoscaler 的设计哲学是"按需伸缩"——当有 Pod 因为资源不足无法调度时，自动扩容节点；当节点上的资源利用率持续低于阈值时，自动缩容节点。这种机制特别适用于以下场景：
 
@@ -401,3 +443,11 @@ cluster_autoscaler_last_activity                          # 最后一次活动�
 | `nodegroup.TemplateNodeInfo` | `cluster-autoscaler/cloudprovider/` | 节点组模板 |
 | `FilterOutNodes` | `cluster-autoscaler/utils/` | 节点过滤 |
 | `nodeGarbageCollector` | `pkg/controller/nodelifecycle/` | 节点 GC |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]

@@ -30,9 +30,10 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
-# Day 13: 网络栈 - Ingress + NetworkPolicy
+# Day 13: 网络栈 - [[Ingress|Ingress]] + [[NetworkPolicy|NetworkPolicy]]
 
 ```yaml
 ---
@@ -438,4 +439,4 @@ Day 14 将学习存储体系 (PV/PVC/StorageClass)，并完成本周综合实践
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

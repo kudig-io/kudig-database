@@ -25,9 +25,10 @@ trigger_keywords:
 - Answers
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# K8S Fundamentals Quiz Answers
+# K8S8s 基础知识考核|K8S Fundamentals Quiz]] Answers
 
 ### 2. CrashLoopBackOff 排查（10 分）
 

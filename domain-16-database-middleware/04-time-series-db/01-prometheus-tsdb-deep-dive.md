@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
-# Prometheus TSDB 深度解析
+# [[Prometheus|Prometheus]] TSDB 深度解析
 
 ## 存储架构
 
@@ -74,5 +75,5 @@ TSDB 存储结构:
 
 ## 相关
 
-- [[domain-06-observability/02-metrics/02-monitoring-metrics-system]]
+- observability/02-metrics/02-monitoring-metrics-system]]
 - [[domain-16-database-middleware/04-time-series-db/02-influxdb-vs-timescaledb]]

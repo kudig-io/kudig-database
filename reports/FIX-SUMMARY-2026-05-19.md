@@ -1,5 +1,5 @@
 ---
-title: kudig-database 全面质量修复完成报告
+title: kudig-database 全面质量修复完成报告 (reports)
 description: '- 覆盖: 15 个核心 domain + FTA + Skills + 应用架构'
 category: general
 tags:
@@ -19,6 +19,7 @@ trigger_keywords:
 - 全面质量修复完成报告
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 全面质量修复完成报告

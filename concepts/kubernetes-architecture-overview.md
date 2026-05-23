@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Architecture Overview
-description: '- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]'
+description: '- Kubernetes 架构全景图'
 category: concepts
 tags:
 - k8s
@@ -30,9 +30,10 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes Architecture Overview
+# [[Kubernetes|Kubernetes]] Architecture Overview
 
 ## Layered Architecture
 
@@ -43,7 +44,7 @@ Kubernetes follows a layered architecture with seven distinct layers:
 | Layer 1 | Orchestration | Scheduling, automation | Scheduler, Controllers |
 | Layer 2 | API | Unified entry, auth, admission | API Server, Admission |
 | Layer 3 | Data | Persistent state | etcd |
-| Layer 4 | Runtime | Container execution | kubelet, Container Runtime |
+| Layer 4 | Runtime | Container execution | [[kubelet|kubelet]], [[Container Runtime|Container Runtime]] |
 | Layer 5 | Network | Pod networking, load balancing | CNI, kube-proxy |
 | Layer 6 | Storage | Persistent volume management | CSI, Volume Plugin |
 | Layer 7 | Extension | Custom functionality | CRD, Operator, Webhook |
@@ -86,7 +87,7 @@ Kubernetes is built on core principles: declarative API, controller reconciliati
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
-- [[domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图]]
+- Kubernetes 架构全景图
 - [[entities/inspektor-gadget|Inspektor Gadget]] — Cross-reference
 - [[entities/metal3-io|Metal3]] — Cross-reference
 - [[entities/clusterpedia|Clusterpedia]] — Cross-reference

@@ -20,6 +20,7 @@ trigger_keywords:
 - 离线静态版本指南
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Windows 环境下生成 GitBook 离线静态版本指南

@@ -28,6 +28,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Krkn
@@ -74,6 +75,6 @@ Krkn（原名 Kraken）是一个面向 Kubernetes 的混沌工程工具，通过
 - [[oxia]] — Oxia
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/krkn/krkn.md|krkn]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- krkn
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- index/etcd-index|etcd 知识图谱索引]]

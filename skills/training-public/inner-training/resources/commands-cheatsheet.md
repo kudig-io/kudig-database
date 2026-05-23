@@ -45,6 +45,7 @@ related_domains:
 related_topics:
 - knowledge-map
 - reading-sequence
+created: "2026-05-23"
 ---
 
 # ACK/ACR/K8S 命令速查表
@@ -223,7 +224,7 @@ kubectl delete pod <pod> --force --grace-period=0
 
 ---
 
-## 六、kubectl — Deployment / StatefulSet
+## 六、kubectl — Deployment / [[StatefulSet|StatefulSet]]
 
 ```bash
 # Deployment
@@ -242,7 +243,7 @@ kubectl scale sts <name> --replicas=3
 
 ---
 
-## 七、kubectl — Service / Ingress
+## 七、kubectl — [[Service|Service]] / [[Ingress|Ingress]]
 
 ```bash
 # Service
@@ -345,4 +346,4 @@ kubectl get pvc <name> -o jsonpath='{.spec.volumeName}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

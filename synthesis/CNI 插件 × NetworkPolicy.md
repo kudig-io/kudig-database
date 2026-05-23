@@ -33,13 +33,23 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/cilium]]"
+    type: uses
+  - target: "[[entities/istio]]"
+    type: uses
+  - target: "[[entities/kubelet]]"
+    type: uses
+  - target: "[[domain-17-system-foundation/topic-dictionary/networking/service-mesh]]"
+    type: uses
 ---
 
 # CNI 插件 × NetworkPolicy
 
 ## 连接点
 
-[[entities/cni-plugins]] 实现 Pod 的网络连接，[[entities/networkpolicy]] 定义 Pod 级别的网络安全策略。wiki 将两者分属网络实现层和安全策略层，但它们是** inseparable 的共生关系**：NetworkPolicy 只是 K8s API 中的一个资源定义——它描述了"哪些 Pod 可以通信"的意图，但完全没有定义"如何实现这种隔离"。真正执行策略的是 CNI 插件：Calico 用 iptables/eBPF 实现，Cilium 用 eBPF 实现，Flannel 完全不实现。
+[[entities/cni-plugins]] 实现 Pod 的网络连接，[[entities/networkpolicy]] 定义 Pod 级别的网络安全策略。wiki 将两者分属网络实现层和安全策略层，但它们是** inseparable 的共生关系**：NetworkPolicy 只是 K8s API 中的一个资源定义——它描述了"哪些 Pod 可以通信"的意图，但完全没有定义"如何实现这种隔离"。真正执行策略的是 CNI 插件：Calico 用 iptables/eBPF 实现，[[entities/cilium|Cilium]] 用 eBPF 实现，Flannel 完全不实现。
 
 这个分离设计是 K8s 网络模型的核心特征：**策略声明与实现解耦**。它允许用户在不改变策略定义的情况下切换 CNI 插件，但也带来了严重的碎片化问题——同一个 NetworkPolicy YAML 在 Calico 和 Cilium 下的行为可能不同，在 Flannel 下则完全无效。
 
@@ -83,7 +93,7 @@ K8s 文档声称 NetworkPolicy 是"集群无关的"，但生产实践表明：
 
 NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 - 可能因升级而引入策略执行漏洞（如 Calico 某版本中的 iptables 规则竞态）
-- 可能因节点资源耗尽而无法更新策略（kubelet 在 CPU 压力下跳过 CNI 调用）
+- 可能因节点资源耗尽而无法更新策略（[[entities/kubelet|kubelet]] 在 CPU 压力下跳过 CNI 调用）
 - 可能在节点重启后短暂失效（CNI 守护进程启动前，新 Pod 可能无策略运行）
 
 **NetworkPolicy 不是防火墙，而是"有最佳努力的建议"。**
@@ -104,7 +114,7 @@ NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 - **策略即代码的验证**：NetworkPolicy 作为 YAML 可以通过 CI/CD 部署，但策略冲突检测（两个策略互相矛盾）、可达性分析（哪些 Pod 实际可以通信）需要专门工具（如 network-policy-api 的模拟器）。这些工具与 CNI 的绑定程度如何？
 - **CNI 故障时的安全降级**：当 CNI 守护进程故障时，kubelet 仍然可以创建 Pod（使用默认网络配置）。这些 Pod 将完全绕过 NetworkPolicy。如何检测和响应这种安全降级？是否应该有一个独立的策略执行监督层？
 - **eBPF 对策略执行的统一**：Cilium 的 eBPF 实现展示了 L3/L4/L7 策略统一执行的可能性。未来是否所有 CNI 都会转向 eBPF？iptables 在策略数量超过阈值后的性能劣化是否会迫使 Calico 等插件全面 eBPF 化？
-- **NetworkPolicy 与 Service Mesh 策略的层级关系**：NetworkPolicy（CNI 层，L3/L4）与 Istio AuthorizationPolicy（Service Mesh 层，L7）同时存在时，哪个优先？两者的冲突如何检测？当前没有标准工具可以回答"这个请求是否会被允许"的问题
+- **NetworkPolicy 与 [[domain-17-system-foundation/topic-dictionary/networking/service-mesh|Service Mesh]] 策略的层级关系**：NetworkPolicy（CNI 层，L3/L4）与 [[entities/istio|Istio]] AuthorizationPolicy（Service Mesh 层，L7）同时存在时，哪个优先？两者的冲突如何检测？当前没有标准工具可以回答"这个请求是否会被允许"的问题
 
 ## 相关
 
@@ -124,3 +134,6 @@ NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 - [[synthesis/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]]
 - [[synthesis/CRD × 可观测性.md|CRD × 可观测性]]
 - [[synthesis/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces|命名空间]]

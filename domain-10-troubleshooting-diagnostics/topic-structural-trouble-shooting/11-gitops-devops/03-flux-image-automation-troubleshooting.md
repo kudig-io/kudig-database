@@ -1,5 +1,5 @@
 ---
-title: Flux 镜像自动化故障排查指南
+title: Flux 镜像自动化故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Flux 镜像自动化故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,17 +39,18 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-title: Flux 镜像自动化故障排查指南
+title: [[Flux|Flux]] 镜像自动化故障排查指南
 description: '# Flux 镜像自动化故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- prometheus
-- coredns
+- [[Prometheus|prometheus]]
+- [[CoreDNS|coredns]]
 - flux
 - docker
 - harbor
@@ -728,8 +729,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]

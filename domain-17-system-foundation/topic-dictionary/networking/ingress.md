@@ -24,13 +24,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # Ingress
 
 ## 概述
 
-Ingress 是 Kubernetes 中用于管理集群外部 HTTP/HTTPS 访问到内部 Service 的 API 对象。它支持基于主机名（Host）和路径（Path）的路由规则，可提供负载均衡、SSL/TLS 终止以及基于名称的虚拟主机等能力。需要注意的是，**Ingress API 已被冻结**，Kubernetes 官方不再对其新增功能，推荐使用 **Gateway API** 作为继任方案。
+Ingress 是 [[Kubernetes|Kubernetes]] 中用于管理集群外部 HTTP/HTTPS 访问到内部 [[Service|Service]] 的 API 对象。它支持基于主机名（Host）和路径（Path）的路由规则，可提供负载均衡、SSL/TLS 终止以及基于名称的虚拟主机等能力。需要注意的是，**Ingress API 已被冻结**，Kubernetes 官方不再对其新增功能，推荐使用 **Gateway API** 作为继任方案。
 
 ## 核心概念/原理
 
@@ -214,7 +215,7 @@ kubectl get endpointslices -l kubernetes.io/service-name=api-server -n productio
 
 ## 交叉引用
 
-- [Ingress Controllers](ingress-controllers.md) — 控制器选型和 IngressClass 配置
+- [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]](ingress-controllers.md) — 控制器选型和 IngressClass 配置
 - [Gateway API](gateway-api.md) — Ingress 的推荐继任方案
 - [Service](service.md) — Ingress 后端 Service 的类型和端口映射
 - [Network Policies](network-policies.md) — 控制到 Ingress Controller 的入站流量

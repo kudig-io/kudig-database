@@ -68,11 +68,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
-# 30 - 动态资源分配 (Dynamic Resource Allocation)
+# 30 - 动态资源分配 ([[Dynamic Resource Allocation|Dynamic Resource Allocation]])
 
-> **适用版本**: Kubernetes v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
 
 ---
 
@@ -101,7 +102,7 @@ cross_refs:
 | 局限性 | 说明 | 影响 |
 |--------|------|------|
 | 资源粒度粗 | 只能以整卡 (device) 为单位分配 | GPU 共享 (MIG/MPS) 难以表达 |
-| 调度耦合弱 | 资源分配在 kubelet 阶段完成 | 调度器无法感知设备拓扑和约束 |
+| 调度耦合弱 | 资源分配在 [[kubelet|kubelet]] 阶段完成 | 调度器无法感知设备拓扑和约束 |
 | 配置僵化 | 设备参数通过注解传递 | 缺乏结构化、类型化的配置能力 |
 | 组合能力缺失 | 无法表达多设备组合需求 | GPU+NIC 亲和性分配困难 |
 
@@ -144,7 +145,7 @@ cross_refs:
 | 对比维度 | 传统 Device Plugin | 动态资源分配 (DRA) | 说明 |
 |:---------|:-------------------|:-------------------|:-----|
 | **资源粒度** | 整设备 (如 `nvidia.com/gpu: 1`) | 子设备/组合设备 (MIG slice, 显存块) | DRA 支持将物理设备切分为逻辑单元 |
-| **调度集成** | kubelet 阶段通过 `Allocate` gRPC 调用 | 通过调度框架插件 (DRA Plugin) | DRA 在调度阶段即确定资源分配 |
+| **调度集成** | kubelet 阶段通过 `Allocate` [[gRPC|gRPC]] 调用 | 通过调度框架插件 (DRA Plugin) | DRA 在调度阶段即确定资源分配 |
 | **分配灵活性** | 静态，无参数 | 支持参数化配置 (`parametersRef`) | 用户可指定计算模式、显存大小等 |
 | **拓扑感知** | 有限 (通过 `TopologyHint`) | 原生支持 NUMA/PCIe 拓扑约束 | DRA 在 Filter/Score 阶段考虑拓扑 |
 | **多设备组合** | 不支持 | 支持跨 ResourceClass 组合 | 如 `GPU + NIC + RDMA` 联合分配 |
@@ -1038,25 +1039,25 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/28-api-extension-deep-dive.md|28-api-extension-deep-dive]]
-- [[domain-01-cluster-fundamentals/29-in-place-pod-resize.md|29-in-place-pod-resize]]
-- [[domain-01-cluster-fundamentals/31-kubectl-complete-reference.md|31-kubectl-complete-reference]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-cluster-lifecycle.md|32-kubeadm-cluster-lifecycle]]
+- 28-api-extension-deep-dive
+- 29-in-place-pod-resize
+- 31-kubectl-complete-reference
+- 32-kubeadm-cluster-lifecycle
 
 ## Related
 

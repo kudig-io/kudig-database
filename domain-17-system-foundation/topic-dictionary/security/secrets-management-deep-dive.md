@@ -30,20 +30,21 @@ prerequisites:
 - cloud-provider-basics
 - etcd-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 # 密钥管理深度指南
 
 ## 概述
 
-在 Kubernetes 环境中，Secrets（如数据库密码、API 密钥、TLS 证书、OAuth Token）是攻击者最觊觎的目标。2026 年的安全最佳实践认为，**单纯依赖 Kubernetes 原生的 Secret 资源已不足以应对企业级安全要求**。现代密钥管理需要结合**外部密钥管理系统（KMS）、自动轮转、最小权限访问、审计日志和硬件安全模块（HSM）**，构建端到端的 Secret 生命周期管理体系。
+在 [[Kubernetes|Kubernetes]] 环境中，[[Secrets|Secrets]]（如数据库密码、API 密钥、TLS 证书、OAuth Token）是攻击者最觊觎的目标。2026 年的安全最佳实践认为，**单纯依赖 Kubernetes 原生的 Secret 资源已不足以应对企业级安全要求**。现代密钥管理需要结合**外部密钥管理系统（KMS）、自动轮转、最小权限访问、审计日志和硬件安全模块（HSM）**，构建端到端的 Secret 生命周期管理体系。
 
 ## 核心概念/原理
 
 ### 1. Kubernetes Secret 的局限
 
 原生 Secret 存在以下安全风险：
-- **默认未加密存储**：etcd 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
+- **默认未加密存储**：[[etcd|etcd]] 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
 - **访问控制粗粒度**：任何具有 Pod 创建权限的用户都可能读取同一 Namespace 中的 Secret
 - **无自动轮转**：Kubernetes 本身不提供 Secret 的自动过期和更新机制
 - **缺乏审计**：无法追踪谁、在何时、以何种方式使用了 Secret

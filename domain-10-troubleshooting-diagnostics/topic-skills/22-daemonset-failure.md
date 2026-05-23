@@ -45,11 +45,12 @@ prerequisites:
 skill_id: SKILL-22_DAEMONSET_FAILURE-001
 skill_name: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 ---
 skill_id: "SKILL-WORK-003"
-skill_name: "DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation"
+skill_name: "[[DaemonSet|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation"
 version: "1.0"
 category: "workload"
 severity_range: "P0-P2"
@@ -61,7 +62,7 @@ k8s_versions:
   - "1.32"
 estimated_resolution_time: "10-45min"
 risk_level: "medium"
-agent_execution_mode: "L1-advisory"
+agent_execution_mode: "L2-semi-auto"
 trigger_keywords:
   - "DaemonSet"
   - "daemonset"
@@ -70,8 +71,8 @@ trigger_keywords:
   - "node missing pod"
   - "kube-proxy"
   - "calico-node"
-  - "cilium"
-  - "[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|fluentd]]"
+  - "[[Cilium|cilium]]"
+  - "[[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|[[Fluentd|fluentd]]]]"
   - "node-exporter"
   - "系统组件"
   - "污点"
@@ -114,7 +115,7 @@ cross_refs:
   - type: "domain"
     path: "../domain-10-troubleshooting-diagnostics/20-daemonset-troubleshooting.md"
     label: "DaemonSet 深度排查"
-  - type: "skill"
+  - type: "[[SKILL|skill]]"
     path: "../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md"
     label: "SKILL-NODE-001 节点诊断"
 authors:

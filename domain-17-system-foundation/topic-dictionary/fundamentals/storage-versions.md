@@ -25,13 +25,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # 存储版本
 
 ## 概述
 
-Kubernetes API 服务器将对象存储在 etcd（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
+[[Kubernetes|Kubernetes]]es API|Kubernetes API]] 服务器将对象存储在 [[etcd|etcd]]（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
 
 ## 核心概念/原理
 

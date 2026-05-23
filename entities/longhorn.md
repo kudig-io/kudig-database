@@ -1,5 +1,5 @@
 ---
-title: Longhorn
+title: Longhorn (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Longhorn
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Longhorn
@@ -62,26 +63,26 @@ description: '## 项目概述'
 - [[kuasar]] — Kuasar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/longhorn/longhorn.md|longhorn]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.9.md|RELEASE-NOTES-1.9]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.8.md|RELEASE-NOTES-1.8]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.3.md|RELEASE-NOTES-1.3]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.7.md|RELEASE-NOTES-1.7]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.6.md|RELEASE-NOTES-1.6]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.2.md|RELEASE-NOTES-1.2]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.5.md|RELEASE-NOTES-1.5]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.10.md|RELEASE-NOTES-1.10]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.1.md|RELEASE-NOTES-1.1]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.0.md|RELEASE-NOTES-1.0]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.4.md|RELEASE-NOTES-1.4]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-1.11.md|RELEASE-NOTES-1.11]]
-- [[domain-19-landscape-references/topic-release-notes/storage/longhorn/RELEASE-NOTES-0.5.md|RELEASE-NOTES-0.5]]
+- longhorn
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.10
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+- RELEASE-NOTES-1.11
+- RELEASE-NOTES-0.5
 - [[entities/kanister.md|Kanister]]
 - [[entities/k8up.md|K8up]]
 - [[entities/openebs.md|OpenEBS]]

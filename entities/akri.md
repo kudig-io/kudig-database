@@ -1,5 +1,5 @@
 ---
-title: Akri
+title: Akri (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - Akri
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Akri
@@ -62,12 +63,12 @@ Akri 是一个 Kubernetes 资源接口项目，用于在边缘环境中自动发
 
 ## Related
 
-- [[podman-desktop]] — Podman Desktop
+- [[podman-desktop]] — [[Podman Desktop|Podman Desktop]]
 - [[openyurt]] — OpenYurt
 - [[carina]] — Carina
 - [[spire]] — SPIRE
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/akri/akri.md|akri]]
-- [[entities/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- akri
+- [[entities/cncf-edge-ai|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

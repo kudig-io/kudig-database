@@ -1,5 +1,5 @@
 ---
-title: etcd 异常故障树分析
+title: etcd 异常故障树分析 (skills)
 description: '- **范围**：成员可用性、读写性能、磁盘与 IO、网络与时钟、证书与访问控制、碎片与压缩。'
 category: skills
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-ETCD-001
 component: Etcd
 severity: high
+created: "2026-05-23"
 ---
 
 # etcd 异常故障树分析
@@ -186,7 +187,7 @@ flowchart TD
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - etcd 故障排查
 
 ## Related

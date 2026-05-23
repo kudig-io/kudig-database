@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # containerd 多租户
@@ -60,7 +61,7 @@ title: containerd 多租户与共享集群配置
 - [[entities/prometheus-grafana.md|prometheus-grafana]]
 - [[containerd]]
 - [[entities/cni-plugins.md|cni-plugins]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
 - [[deployment]]
 
 ## Related
@@ -71,4 +72,4 @@ title: containerd 多租户与共享集群配置
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/containerd/08-containerd-multi-tenant.md|08-containerd-multi-tenant]]
+- 08-containerd-multi-tenant

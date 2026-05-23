@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 存储体系

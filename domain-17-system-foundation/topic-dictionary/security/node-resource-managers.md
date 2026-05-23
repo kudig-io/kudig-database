@@ -27,18 +27,19 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Node Resource Managers（节点资源管理器）
 
 ## 概述
 
-为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[entities/kubernetes|kubernetes]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
+为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
 
 ## 核心概念/原理
 
 - **硬件拓扑感知（Hardware Topology Alignment）**：现代服务器通常具有 NUMA（Non-Uniform Memory Access）、Socket、物理核心（Physical Core）等复杂拓扑结构。资源分配时的拓扑对齐对高性能工作负载至关重要。
-- **Topology Manager**：作为 kubelet 的核心协调组件，Topology Manager 负责统筹各个资源管理器（CPU Manager、Memory Manager、Device Manager）的优化决策，并根据用户指定的策略进行整体资源管理。
+- **Topology Manager**：作为 [[kubelet|kubelet]] 的核心协调组件，Topology Manager 负责统筹各个资源管理器（CPU Manager、Memory Manager、Device Manager）的优化决策，并根据用户指定的策略进行整体资源管理。
 - **资源管理器家族**：主要包括 CPU Manager、Memory Manager 和 Device Manager，各自负责特定资源的分配策略和 NUMA 亲和性优化。
 
 ## 关键机制或特性

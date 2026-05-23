@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # 场景: GitOps 工作流
@@ -106,8 +107,8 @@ graph TD
 
 ## Related
 
-- [[README.md|README]]
+- [[references/kudig-metadata-index.md|README]].md|README]]
 - [[concepts/infrastructure-as-code.md|infrastructure-as-code]]
 - [[skills/helm-fta.md|helm-fta]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|[[Helm|helm]]]]
 - [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]

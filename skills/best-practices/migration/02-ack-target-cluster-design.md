@@ -1,5 +1,5 @@
 ---
-title: 02 - ACK 目标集群设计与搭建
+title: 02 - ACK 目标集群设计与搭建 [migration]
 description: 'title: 02 - ACK 目标集群设计与搭建'
 category: general
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 02 - ACK 目标集群设计与搭建
@@ -50,13 +51,13 @@ tags:
 - k8s
 - migration
 - modernization
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - grafana
-- cilium
+- [[Cilium|cilium]]
 - flannel
 - calico
-- coredns
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -647,14 +648,14 @@ spec:
 
 ---
 
-**上一步**: ← [01-迁移评估与规划](./[[domain-11-production-operations/topic-best-practices/migration/01-migration-assessment-planning.md|01-migration-assessment-planning]].md)
-**下一步**: → [03-应用工作负载迁移](./[[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]].md)
+**上一步**: ← [01-迁移评估与规划](./01-migration-assessment-planning.md)
+**下一步**: → [03-应用工作负载迁移](./03-application-workload-migration.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
@@ -668,10 +669,10 @@ spec:
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/infrastructure/storage.md|storage]]
-- [[domain-11-production-operations/topic-best-practices/migration/01-migration-assessment-planning.md|01-migration-assessment-planning]]
-- [[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]]
+- storage
+- 01-migration-assessment-planning
+- 03-application-workload-migration
+- 04-storage-data-migration
 
 ## Related
 

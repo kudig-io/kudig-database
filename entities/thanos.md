@@ -1,5 +1,5 @@
 ---
-title: Thanos
+title: Thanos [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Thanos
@@ -64,54 +65,54 @@ description: '## 项目概述'
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — Prometheus 高可用部署
+- [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[bank-vaults]] — Bank-Vaults
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|04-thanos-enterprise-metrics-federation]]
-- [[domain-19-landscape-references/incubating/thanos/thanos.md|thanos]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.12.md|RELEASE-NOTES-0.12]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.26.md|RELEASE-NOTES-0.26]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.8.md|RELEASE-NOTES-0.8]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.36.md|RELEASE-NOTES-0.36]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.22.md|RELEASE-NOTES-0.22]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.16.md|RELEASE-NOTES-0.16]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.32.md|RELEASE-NOTES-0.32]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.23.md|RELEASE-NOTES-0.23]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.17.md|RELEASE-NOTES-0.17]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.33.md|RELEASE-NOTES-0.33]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.13.md|RELEASE-NOTES-0.13]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.27.md|RELEASE-NOTES-0.27]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.9.md|RELEASE-NOTES-0.9]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.37.md|RELEASE-NOTES-0.37]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.18.md|RELEASE-NOTES-0.18]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.28.md|RELEASE-NOTES-0.28]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.38.md|RELEASE-NOTES-0.38]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.6.md|RELEASE-NOTES-0.6]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.29.md|RELEASE-NOTES-0.29]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.39.md|RELEASE-NOTES-0.39]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.7.md|RELEASE-NOTES-0.7]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.19.md|RELEASE-NOTES-0.19]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.5.md|RELEASE-NOTES-0.5]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.20.md|RELEASE-NOTES-0.20]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.14.md|RELEASE-NOTES-0.14]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.30.md|RELEASE-NOTES-0.30]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.10.md|RELEASE-NOTES-0.10]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.41.md|RELEASE-NOTES-0.41]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.24.md|RELEASE-NOTES-0.24]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.34.md|RELEASE-NOTES-0.34]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.11.md|RELEASE-NOTES-0.11]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.40.md|RELEASE-NOTES-0.40]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.25.md|RELEASE-NOTES-0.25]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.35.md|RELEASE-NOTES-0.35]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.21.md|RELEASE-NOTES-0.21]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.15.md|RELEASE-NOTES-0.15]]
-- [[domain-19-landscape-references/topic-release-notes/observability/thanos/RELEASE-NOTES-0.31.md|RELEASE-NOTES-0.31]]
+- 04-thanos-enterprise-metrics-federation
+- thanos
+- RELEASE-NOTES-0.12
+- RELEASE-NOTES-0.26
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-0.36
+- RELEASE-NOTES-0.22
+- RELEASE-NOTES-0.16
+- RELEASE-NOTES-0.32
+- RELEASE-NOTES-0.23
+- RELEASE-NOTES-0.17
+- RELEASE-NOTES-0.33
+- RELEASE-NOTES-0.13
+- RELEASE-NOTES-0.27
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-0.37
+- RELEASE-NOTES-0.18
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-0.28
+- RELEASE-NOTES-0.38
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-0.29
+- RELEASE-NOTES-0.39
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-0.19
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-0.5
+- RELEASE-NOTES-0.20
+- RELEASE-NOTES-0.14
+- RELEASE-NOTES-0.30
+- RELEASE-NOTES-0.10
+- RELEASE-NOTES-0.41
+- RELEASE-NOTES-0.24
+- RELEASE-NOTES-0.34
+- RELEASE-NOTES-0.11
+- RELEASE-NOTES-0.40
+- RELEASE-NOTES-0.25
+- RELEASE-NOTES-0.35
+- RELEASE-NOTES-0.21
+- RELEASE-NOTES-0.15
+- RELEASE-NOTES-0.31
 - [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
 - [[references/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
 - [[concepts/observability-stack-evolution|可观测性栈演进]] — Cross-reference

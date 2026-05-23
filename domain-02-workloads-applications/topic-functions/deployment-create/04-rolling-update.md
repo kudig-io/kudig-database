@@ -1,7 +1,32 @@
 ---
+title: 滚动更新源码分析 (topic-code-analysis)
+description: '## 概述'
+category: general
+tags:
+- reference
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 滚动更新源码分析 是什么
+- 如何 滚动更新源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 滚动更新源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: 滚动更新源码分析
-description: 深入分析 Kubernetes Deployment RollingUpdate 策略的源码实现，涵盖 rolloutRolling 入口、reconcileNewReplicaSet 扩容、reconcileOldReplicaSets
-  缩容、比例缩放算法以及暂停恢复机制。
 category: deployment
 tags:
 - rolling-update
@@ -11,13 +36,9 @@ tags:
 - proportion
 - deployment
 last_updated: 2026-05-18
+description: 深入分析 Kubernetes Deployment RollingUpdate 策略的源码实现，涵盖 rolloutRolling 入口、reconcileNewReplicaSet
+  扩容、reconcileOldReplicaSets 缩容、比例缩放算法以及暂停恢复机制。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-developer
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubernetes rolling update source code
 - maxSurge maxUnavailable calculation kubernetes
@@ -35,9 +56,12 @@ trigger_keywords:
 - progressDeadlineSeconds
 - NewRSNewReplicas
 - kubectl rollout pause
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-developer
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-02-workloads-applications
 - domain-01-cluster-fundamentals
@@ -46,6 +70,17 @@ related_topics:
 - replicaset-controller
 - deployment-status
 - revision-history
+domain_link: '[Workloads](../domain-02-workloads-applications/README.md)'
+topic_link: '[Deployment Create](./README.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 滚动更新源码分析
@@ -245,7 +280,7 @@ func (dc *DeploymentController) reconcileOldReplicaSets(ctx context.Context, old
 // pkg/controller/deployment/proportion.go
 func GetProportion(rs *apps.ReplicaSet, d *apps.Deployment) int32 {
     // 1. 获取该 RS 创建时的 Deployment Replicas
-    // 从 annotation "deployment.[[entities/kubernetes|kubernetes]].io/revision" 和 RS 创建时的状态推算
+    // 从 annotation "deployment.kubernetes.io/revision" 和 RS 创建时的状态推算
     
     // 2. 计算比例
     // proportion = rs.Spec.Replicas * (d.Spec.Replicas / d.Status.Replicas)
@@ -391,3 +426,11 @@ func (dc *DeploymentController) syncRolloutStatus(ctx context.Context, allRSs []
 - 默认 `progressDeadlineSeconds = 600`（10 分钟）
 - 如果滚动更新在 10 分钟内没有推进（新 Pod 没有变得 Available），Deployment Status 中 `Progressing=False`
 - 触发 `ReplicaSetCreateReplicaTimeout` 事件
+
+## Related
+
+- [[README.md|README]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]

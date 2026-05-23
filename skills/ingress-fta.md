@@ -1,5 +1,5 @@
 ---
-title: Ingress 异常故障树分析
+title: Ingress 异常故障树分析 (skills)
 description: '| CTRL3 | 配置重载失败 | `kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100 \| grep
   -iE "reload.*fail\|error.*config"` | `reload.*fail\|error` | 确认配置重载问题 |'
 category: general
@@ -23,17 +23,18 @@ prerequisites:
 fta_id: FTA-INGRESS-001
 component: Ingress
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
-title: "Ingress 异常故障树分析"
+title: "[[Ingress|Ingress]] 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get pods -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 Ingress Cont..."
+summary: "<!-- condition: kubectl get [[Pods|pods]] -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 Ingress Cont..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7

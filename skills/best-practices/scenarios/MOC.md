@@ -29,9 +29,10 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-# topic-scenarios [[MOC.md|MOC]]
+# topic-scenarios MOC.md|MOC]]
 
 > **MOC 版本**: 1.0
 > **专题**: topic-scenarios
@@ -59,26 +60,26 @@ topic-scenarios 专题
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[topic-scenarios/ai-infra-ops.md|场景: AI 基础设施运维]] |  | k8s, scenario, ai |  |
-| 2 | [[topic-scenarios/app-deployment.md|场景: 应用部署]] |  | k8s, scenario, deployment |  |
-| 3 | [[topic-scenarios/backup-restore.md|场景: 备份恢复]] |  | k8s, scenario, backup-restore |  |
-| 4 | [[topic-scenarios/capacity-planning.md|场景: 容量规划]] |  | k8s, scenario, capacity-planning |  |
-| 5 | [[topic-scenarios/cluster-deployment.md|场景: 集群部署]] |  | k8s, scenario, deployment |  |
-| 6 | [[topic-scenarios/compliance-audit.md|场景: 合规审计]] |  | k8s, scenario, compliance |  |
-| 7 | [[topic-scenarios/cost-optimization.md|场景: 成本优化]] |  | k8s, scenario, cost-optimization |  |
-| 8 | [[topic-scenarios/daily-ops.md|场景: 日常运维]] |  | k8s, scenario, daily-ops |  |
-| 9 | [[topic-scenarios/edge-ops.md|场景: 边缘计算运维]] |  | k8s, scenario, edge |  |
-| 10 | [[topic-scenarios/gitops-workflow.md|场景: GitOps 工作流]] |  | k8s, scenario, gitops |  |
-| 11 | [[topic-scenarios/mesh-ops.md|场景: Service Mesh 运维]] |  | k8s, scenario, mesh |  |
-| 12 | [[topic-scenarios/monitoring-alerting.md|场景: 监控告警]] |  | k8s, scenario, monitoring |  |
-| 13 | [[topic-scenarios/multi-cluster.md|场景: 多集群管理]] |  | k8s, scenario, cloud |  |
-| 14 | [[topic-scenarios/network-diagnosis.md|场景: 网络诊断]] |  | k8s, scenario, networking |  |
-| 15 | [[topic-scenarios/performance-tuning.md|场景: 性能调优]] |  | k8s, scenario, performance |  |
-| 16 | [[topic-scenarios/security-hardening.md|场景: 安全加固]] |  | k8s, scenario, security |  |
-| 17 | [[topic-scenarios/security-incident.md|场景: 安全事件响应]] |  | k8s, scenario, security |  |
-| 18 | [[topic-scenarios/storage-issues.md|场景: 存储问题排查]] |  | k8s, scenario, storage |  |
-| 19 | [[topic-scenarios/troubleshooting.md|场景: 故障排查]] |  | k8s, scenario, troubleshooting |  |
-| 20 | [[topic-scenarios/upgrade-migration.md|场景: 升级迁移]] |  | k8s, scenario, migration |  |
+| 1 | 场景: AI 基础设施运维 |  | k8s, scenario, ai |  |
+| 2 | deployment.md|场景: 应用部署]] |  | k8s, scenario, deployment |  |
+| 3 | 场景: 备份恢复 |  | k8s, scenario, backup-restore |  |
+| 4 | 场景: 容量规划 |  | k8s, scenario, capacity-planning |  |
+| 5 | 场景: 集群部署 |  | k8s, scenario, deployment |  |
+| 6 | 场景: 合规审计 |  | k8s, scenario, compliance |  |
+| 7 | 场景: 成本优化 |  | k8s, scenario, cost-optimization |  |
+| 8 | 场景: 日常运维 |  | k8s, scenario, daily-ops |  |
+| 9 | 场景: 边缘计算运维 |  | k8s, scenario, edge |  |
+| 10 | 场景: GitOps 工作流 |  | k8s, scenario, gitops |  |
+| 11 | 场景: Service Mesh 运维 |  | k8s, scenario, mesh |  |
+| 12 | 场景: 监控告警 |  | k8s, scenario, monitoring |  |
+| 13 | 场景: 多集群管理 |  | k8s, scenario, cloud |  |
+| 14 | 场景: 网络诊断 |  | k8s, scenario, networking |  |
+| 15 | 场景: 性能调优 |  | k8s, scenario, performance |  |
+| 16 | 场景: 安全加固 |  | k8s, scenario, security |  |
+| 17 | 场景: 安全事件响应 |  | k8s, scenario, security |  |
+| 18 | 场景: 存储问题排查 |  | k8s, scenario, storage |  |
+| 19 | 场景: 故障排查 |  | k8s, scenario, troubleshooting |  |
+| 20 | 场景: 升级迁移 |  | k8s, scenario, migration |  |
 
 ---
 
@@ -95,9 +96,9 @@ topic-scenarios 专题
 ## Related
 
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/backup-restore.md|backup-restore]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/cost-optimization.md|cost-optimization]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/network-diagnosis.md|network-diagnosis]]
+- backup-restore
+- cost-optimization
+- network-diagnosis
 - [[_reports/WIKI-LINT-REPORT-2026-05-21|Wiki Lint Report — 2026-05-21]] — Cross-reference
 - [[references/release-notes-storage|发布说明索引 — 存储]] — Cross-reference
 - [[references/release-notes-observability|发布说明索引 — 可观测性]] — Cross-reference
@@ -109,12 +110,12 @@ topic-scenarios 专题
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/release-notes-core-deps|发布说明索引 — 核心依赖]] — Cross-reference
 - [[references/k8s-difficulty-index|Kubernetes Difficulty Index]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
 - [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/01-overview/01-observability-architecture-overview|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference

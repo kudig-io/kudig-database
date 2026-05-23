@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 可控核聚变监控架构设计
@@ -34,7 +35,7 @@ tags:
 - k8s
 - architecture
 - industry
-- flux
+- [[Flux|flux]]
 last_updated: 2026-05-18
 difficulty: expert
 reading_level: expert
@@ -44,7 +45,7 @@ audience:
 - 实时系统专家
 estimated_read_time: 5min
 intent_queries:
-- 可控核聚变 Kubernetes 实时控制
+- 可控核聚变 [[Kubernetes|Kubernetes]] 实时控制
 - 托卡马克 等离子体控制 K8s
 - 核聚变数据采集 时序数据库
 - 核聚变监控 高性能计算 K8s
@@ -528,7 +529,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -543,11 +544,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/75-affective-computing.md|75-affective-computing]]
-- [[domain-20-application-patterns/76-synthetic-biology.md|76-synthetic-biology]]
-- [[domain-20-application-patterns/78-deep-sea-exploration.md|78-deep-sea-exploration]]
-- [[domain-20-application-patterns/79-polar-research.md|79-polar-research]]
+- 75-affective-computing
+- 76-synthetic-biology
+- 78-deep-sea-exploration
+- 79-polar-research
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

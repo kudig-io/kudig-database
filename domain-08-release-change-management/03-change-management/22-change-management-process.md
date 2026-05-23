@@ -44,11 +44,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 22-变更管理流程
 
-> **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐
+> **适用范围**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 📋 概述 -->## 📋 概述
 
@@ -627,7 +628,7 @@ if __name__ == "__main__":
 
 #<!-- chunk: 渐进式部署配置 -->## 渐进式部署配置
 
-##<!-- chunk: 1. Argo Rollouts配置 -->## 1. Argo Rollouts配置
+##<!-- chunk: 1. [[Argo|Argo]] Rollouts配置 -->## 1. Argo Rollouts配置
 ```yaml
 # Argo Rollouts灰度发布配置
 apiVersion: argoproj.io/v1alpha1
@@ -1216,7 +1217,7 @@ DEPLOYMENT_NAME="$1"
 NAMESPACE="${2:-default}"
 
 # 验证参数
-if [[ -z "$DEPLOYMENT_NAME" ]]; then
+if -z "$DEPLOYMENT_NAME"; then
     echo "Usage: $0 <deployment-name> [namespace]"
     exit 1
 fi
@@ -1251,10 +1252,10 @@ monitor_rollback_progress() {
     local interval=10
     local elapsed=0
     
-    while [[ $elapsed -lt $timeout ]]; do
+    while $elapsed -lt $timeout; do
         local status=$(kubectl rollout status deployment/"$DEPLOYMENT_NAME" -n "$NAMESPACE" --timeout=30s 2>&1)
         
-        if [[ $? -eq 0 ]]; then
+        if $? -eq 0; then
             echo "Rollback completed successfully!"
             return 0
         fi
@@ -1278,7 +1279,7 @@ verify_rollback_success() {
     local unhealthy_pods=$(kubectl get pods -n "$NAMESPACE" -l app="$DEPLOYMENT_NAME" \
         --field-selector=status.phase!=Running 2>/dev/null | wc -l)
     
-    if [[ $unhealthy_pods -gt 0 ]]; then
+    if $unhealthy_pods -gt 0; then
         echo "Warning: Found $unhealthy_pods unhealthy pods"
         kubectl get pods -n "$NAMESPACE" -l app="$DEPLOYMENT_NAME" \
             --field-selector=status.phase!=Running
@@ -1327,7 +1328,7 @@ main() {
     echo "This will rollback deployment $DEPLOYMENT_NAME to the previous version."
     read -p "Continue? (y/N): " -n 1 -r
     echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    if ! $REPLY =~ ^[Yy]$; then
         echo "Rollback cancelled"
         exit 0
     fi
@@ -1871,25 +1872,25 @@ if __name__ == "__main__":
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- domain-11-production-operations KUDIG Database — Global MOC
+- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## See Also
 
-- [[domain-06-observability/20-network-performance-optimization.md|20-network-performance-optimization]]
-- [[domain-06-observability/21-storage-performance-optimization.md|21-storage-performance-optimization]]
-- [[domain-09-reliability-engineering/23-incident-response-handling.md|23-incident-response-handling]]
-- [[domain-09-reliability-engineering/24-capacity-planning-forecasting.md|24-capacity-planning-forecasting]]
+- 20-network-performance-optimization
+- 21-storage-performance-optimization
+- 23-incident-response-handling
+- 24-capacity-planning-forecasting
 
 ## Related
 

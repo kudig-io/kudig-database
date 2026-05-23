@@ -57,9 +57,10 @@ related_topics:
 - ha-delete
 - cloud-delete
 - troubleshooting
+created: "2026-05-23"
 ---
 
-# Cluster Delete — Kubernetes 集群删除源码分析
+# Cluster Delete — [[Kubernetes|Kubernetes]] 集群删除源码分析
 
 ## 函数签名
 
@@ -82,7 +83,7 @@ func RunDrain(drainer *Drainer, f cmdutil.Factory, out io.Writer, errOut io.Writ
 | 组件 | 源码路径 | 说明 |
 |------|---------|------|
 | reset 入口 | `cmd/kubeadm/app/cmd/reset.go` | reset 命令注册 |
-| reset phases | `cmd/kubeadm/app/cmd/phases/reset/` | preflight/remove-etcd/cleanup-node |
+| reset phases | `cmd/kubeadm/app/cmd/phases/reset/` | preflight/remove-[[etcd|etcd]]/cleanup-node |
 | etcd 操作 | `cmd/kubeadm/app/phases/etcd/local.go` | RemoveStackedEtcdMember |
 | workflow 引擎 | `cmd/kubeadm/app/cmd/phases/workflow/runner.go` | Phase 执行框架 |
 | kubectl drain | `pkg/kubectl/cmd/drain/drain.go` | drain 命令实现 |
@@ -108,9 +109,9 @@ func RunDrain(drainer *Drainer, f cmdutil.Factory, out io.Writer, errOut io.Writ
 
 | 标志 | 说明 |
 |------|------|
-| `--ignore-daemonsets` | 忽略 DaemonSet Pod |
+| `--ignore-daemonsets` | 忽略 [[DaemonSet|DaemonSet]] Pod |
 | `--delete-emptydir-data` | 删除使用 emptyDir 的 Pod |
-| `--force` | 强制删除非 ReplicaSet 管理的 Pod |
+| `--force` | 强制删除非 [[ReplicaSet|ReplicaSet]] 管理的 Pod |
 | `--grace-period` | 优雅终止宽限期（秒） |
 | `--timeout` | drain 超时时间 |
 | `--disable-eviction` | 使用 delete 替代 evict |
@@ -361,20 +362,20 @@ kubectl get nodes
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
+- networking|发布说明索引 — 网络]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

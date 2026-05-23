@@ -36,6 +36,7 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 自动驾驶仿真架构设计
@@ -45,9 +46,9 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- argocd
+- [[ArgoCD|argocd]]
 - opa
 - mysql
 - job
@@ -536,7 +537,7 @@ flowchart LR
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -551,11 +552,11 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/63-industrial-visual-inspection.md|63-industrial-visual-inspection]]
-- [[domain-20-application-patterns/64-ai-drug-discovery.md|64-ai-drug-discovery]]
-- [[domain-20-application-patterns/66-space-internet.md|66-space-internet]]
-- [[domain-20-application-patterns/67-brain-computer-interface.md|67-brain-computer-interface]]
+- 63-industrial-visual-inspection
+- 64-ai-drug-discovery
+- 66-space-internet
+- 67-brain-computer-interface
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

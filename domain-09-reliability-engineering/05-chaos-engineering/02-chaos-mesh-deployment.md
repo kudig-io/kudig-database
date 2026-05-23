@@ -33,9 +33,10 @@ prerequisites:
 - kubectl-basics
 - sre-practices
 - helm-basics
+created: "2026-05-23"
 ---
 
-# Chaos Mesh 企业级部署
+# [[Chaos Mesh|Chaos Mesh]] 企业级部署
 
 ## 架构组件
 
@@ -47,7 +48,7 @@ Chaos Mesh 架构:
 └── chaos-mesh-controller-manager: 核心控制器
 ```
 
-## Helm 安装
+## [[Helm|Helm]] 安装
 
 ```bash
 # 添加 Helm repo

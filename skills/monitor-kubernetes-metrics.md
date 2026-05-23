@@ -31,6 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Monitor Kubernetes Metrics
@@ -50,14 +51,14 @@ prerequisites:
 |-----------|------------|-----------------|
 | **API Server** | `apiserver_request_duration_seconds`, `apiserver_request_total` | P99 latency > 4s |
 | **etcd** | `etcd_disk_backend_commit_duration_seconds`, `etcd_server_has_leader` | fsync > 500ms, no leader |
-| **Scheduler** | `scheduler_scheduling_attempt_duration_seconds`, `scheduler_pending_pods` | High pending pods |
+| **Scheduler** | `scheduler_scheduling_attempt_duration_seconds`, `scheduler_pending_pods` | High pending [[Pods|pods]] |
 | **Controller Manager** | `workqueue_depth`, `workqueue_queue_duration_seconds` | Growing queue depth |
 
 ### Nodes
 
 | Component | Key Metrics | Alert Threshold |
 |-----------|------------|-----------------|
-| **kubelet** | `kubelet_running_pods`, `kubelet_pod_start_duration_seconds` | NodeNotReady > 5min |
+| **[[kubelet|kubelet]]** | `kubelet_running_pods`, `kubelet_pod_start_duration_seconds` | NodeNotReady > 5min |
 | **cAdvisor** | `container_cpu_usage_seconds_total`, `container_memory_working_set_bytes` | OOMKill events |
 | **Node Exporter** | `node_cpu_seconds_total`, `node_memory_MemAvailable_bytes` | MemoryPressure |
 

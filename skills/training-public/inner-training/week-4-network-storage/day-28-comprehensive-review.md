@@ -1,5 +1,5 @@
 ---
-title: 'Day 28: 综合复习与实践'
+title: Day 28: 综合复习与实践 [week-4-network-storage]
 description: '# Day 28: 综合复习与实践'
 category: learning
 tags:
@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Day 28: 综合复习与实践

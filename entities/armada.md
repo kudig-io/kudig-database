@@ -1,5 +1,5 @@
 ---
-title: Armada
+title: Armada (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Armada
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Armada
@@ -65,13 +66,13 @@ Armada 是一个多集群批处理作业调度系统，专为在多个 Kubernete
 - [[keycloak]] — Keycloak
 - [[kubearmor]] — KubeArmor
 - [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
-- [[entities/cncf-networking.md|cncf-networking]] — CNCF 网络与服务网格项目全景
+- networking.md|cncf-networking]] — CNCF 网络与服务网格项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[journal/digest-2026-05-21-full.md|digest-2026-05-21-full]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|08-multicloud-federation-karmada]]
-- [[domain-19-landscape-references/sandbox/armada/armada.md|armada]]
-- [[domain-19-landscape-references/incubating/karmada/karmada.md|karmada]]
+- 08-multicloud-federation-karmada
+- armada
+- karmada
 - [[entities/cohdi.md|Cohdi]]
 - [[entities/kubefleet.md|KubeFleet]]
 - [[entities/clusternet.md|Clusternet]]

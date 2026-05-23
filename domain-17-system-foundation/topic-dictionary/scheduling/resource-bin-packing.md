@@ -27,6 +27,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # Resource Bin Packing
@@ -256,11 +257,11 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 
 ## 交叉引用
 
-- [Kubernetes 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
+- [[entities/kubernetes.md|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
 - [调度框架](./scheduling-framework.md) — Score 扩展点与 NormalizeScore
 - [调度器性能调优](./scheduler-performance-tuning.md) — 评分节点数量对装箱效果的影响
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备与装箱策略的交互
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 的整合机制与装箱互补
+- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 的整合机制与装箱互补
 
 ## 参考链接
 
@@ -268,4 +269,4 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]

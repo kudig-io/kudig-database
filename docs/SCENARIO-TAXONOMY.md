@@ -22,6 +22,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -33,11 +34,11 @@ tags:
 - scenario
 - taxonomy
 relationships:
-- target: '[[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]'
+- target: '[[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]'
   type: related_to
-- target: '[[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]'
+- target: '[[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]'
   type: related_to
-- target: '[[docs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]'
+- target: '[[docs/SYNONYM-DICTIONARY|KUDIG 同义词与别名词典]]'
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -71,7 +72,7 @@ tier: peripheral---
 |---|---|---|---|---|
 | SC-01 | 集群部署 | `topic-scenarios/cluster-deployment.md` | domain-1, domain-4, domain-07-platform-engineering | ~20 |
 | SC-02 | 应用部署 | `topic-scenarios/app-deployment.md` | domain-4, domain-18-manifests-patterns | ~30 |
-| SC-03 | 故障排查 | `topic-scenarios/troubleshooting.md` | domain-12, topic-fta, topic-skills | ~100 |
+| SC-03 | 问题排查 | `topic-scenarios/troubleshooting.md` | domain-12, topic-fta, topic-skills | ~100 |
 | SC-04 | 性能调优 | `topic-scenarios/performance-tuning.md` | domain-1, domain-13, domain-11-production-operations | ~25 |
 | SC-05 | 安全加固 | `topic-scenarios/security-hardening.md` | domain-7, domain-25, domain-05-security-compliance | ~30 |
 | SC-06 | 监控告警 | `topic-scenarios/monitoring-alerting.md` | domain-8, domain-20, domain-06-observability | ~30 |
@@ -122,7 +123,7 @@ last_updated: "YYYY-MM-DD"
 |---|---|---|
 | 集群部署 | domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md | domain-07-platform-engineering/*, domain-08-release-change-management/topic-deployment/* |
 | 应用部署 | domain-02-workloads-applications/* | domain-18-manifests-patterns/* |
-| 故障排查 | domain-10-troubleshooting-diagnostics/* | domain-10-troubleshooting-diagnostics/topic-fta/list/*, domain-10-troubleshooting-diagnostics/topic-skills/* |
+| 问题排查 | domain-10-troubleshooting-diagnostics/* | domain-10-troubleshooting-diagnostics/topic-fta/list/*, domain-10-troubleshooting-diagnostics/topic-skills/* |
 | 性能调优 | domain-01-cluster-fundamentals/13-performance-tuning-guide.md | domain-11-production-operations/* |
 | 安全加固 | domain-05-security-compliance/* | domain-05-security-compliance/*, domain-05-security-compliance/* |
 | 监控告警 | domain-06-observability/* | domain-06-observability/*, domain-06-observability/* |
@@ -139,7 +140,7 @@ last_updated: "YYYY-MM-DD"
 
 ## Related
 
-- [[references/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[references/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[docs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
-- [[docs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
+- [[references/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[references/KUDIG Frontmatter Spec|KUDIG Frontmatter Spec]]
+- [[docs/TAG-DICTIONARY|KUDIG 全局标签字典]]
+- [[docs/FRONTMATTER-SPEC|KUDIG Frontmatter 规范]]

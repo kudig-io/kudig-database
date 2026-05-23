@@ -46,11 +46,12 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # WebAssembly (Wasm) 云原生实践指南
 
-> **适用版本**: WasmEdge v0.14 / containerd wasm shims v0.8 / Spin v3.2  
+> **适用版本**: [[WasmEdge|WasmEdge]] v0.14 / [[containerd|containerd]] wasm shims v0.8 / [[Spin|Spin]] v3.2  
 > **最后更新**: 2026-04-24  
 > **难度**: 高级
 
@@ -276,7 +277,7 @@ version = "0.1.0"
 authors = ["team@example.com"]
 description = "Hello Spin app"
 
-[[trigger.http]]
+trigger.http
 route = "/hello"
 component = "hello"
 
@@ -479,22 +480,22 @@ Cloudflare Workers = V8 Isolate + Wasm
 
 ## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/09-wasm-serverless.md|Wasm Serverless (Wasm Serverless)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm Serverless (Wasm Serverless)
 
 ## See Also
 
-- [[domain-15-specialized-tech/09-wasm-serverless.md|09-wasm-serverless]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|10-wasm-security-sandbox]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|01-wasm-fundamentals-cloud-native]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|02-containerd-wasm-shim]]
+- 09-wasm-serverless
+- 10-wasm-security-sandbox
+- 01-wasm-fundamentals-cloud-native
+- 02-containerd-wasm-shim

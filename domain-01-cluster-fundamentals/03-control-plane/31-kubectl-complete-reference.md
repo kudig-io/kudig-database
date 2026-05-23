@@ -72,11 +72,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 # 31 - kubectl 完全命令参考 (kubectl Complete Reference)
 
-> **适用版本**: Kubernetes v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 命令参考手册
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 命令参考手册
 
 ---
 
@@ -143,7 +144,7 @@ cross_refs:
 | 全局选项 | 说明 | 生产环境用法 |
 |----------|------|--------------|
 | `--context <name>` | 指定集群上下文 | `kubectl --context=prod get nodes` |
-| `--namespace <ns>` / `-n` | 指定命名空间 | `kubectl -n kube-system get pods` |
+| `--namespace <ns>` / `-n` | 指定命名空间 | `kubectl -n kube-system get [[Pods|pods]]` |
 | `--all-namespaces` / `-A` | 所有命名空间 | `kubectl get pods -A` |
 | `--kubeconfig <path>` | 指定配置文件 | `kubectl --kubeconfig=/etc/k8s/admin.conf get nodes` |
 | `--server <host:port>` | 直接指定 API Server | `kubectl --server=https://apiserver:6443 get nodes` |
@@ -2027,25 +2028,25 @@ kubectl plugin list --name-only
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/01-plane-architecture-overview.md|Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
+- Domain-3 控制平面 — 开源项目索引
+- Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/29-in-place-pod-resize.md|29-in-place-pod-resize]]
-- [[domain-01-cluster-fundamentals/30-dynamic-resource-allocation.md|30-dynamic-resource-allocation]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-cluster-lifecycle.md|32-kubeadm-cluster-lifecycle]]
-- [[domain-01-cluster-fundamentals/32-kubeadm-upgrade-complete-guide.md|32-kubeadm-upgrade-complete-guide]]
+- 29-in-place-pod-resize
+- 30-dynamic-resource-allocation
+- 32-kubeadm-cluster-lifecycle
+- 32-kubeadm-upgrade-complete-guide
 
 - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]

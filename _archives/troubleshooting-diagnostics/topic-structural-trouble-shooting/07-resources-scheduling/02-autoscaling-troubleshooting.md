@@ -794,7 +794,7 @@ kubectl scale deployment <name> --replicas=<n>
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
 - [Controller Manager 故障排查](../01-control-plane/04-controller-manager-troubleshooting.md)
-- [Deployment 故障排查](../05-workloads/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 
 ## Related
 

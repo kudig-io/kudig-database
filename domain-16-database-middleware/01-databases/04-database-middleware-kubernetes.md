@@ -53,11 +53,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
-# 数据库中间件 Kubernetes 企业级实践
+# 数据库中间件 [[Kubernetes|Kubernetes]] 企业级实践
 
-> **适用版本**: Vitess v21.0 / ShardingSphere v5.5 / ProxySQL v2.7  
+> **适用版本**: [[Vitess|Vitess]] v21.0 / ShardingSphere v5.5 / ProxySQL v2.7  
 > **最后更新**: 2026-04-26  
 > **难度**: 高级 → 专家
 
@@ -65,7 +66,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s Service 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。
+数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[Service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。
 
 本文档深入探讨三大主流数据库中间件在 K8s 上的实践：Vitess（CNCF Graduated，MySQL 水平扩展）、Apache ShardingSphere（分布式数据库代理）、ProxySQL（高性能 MySQL 代理）。内容覆盖 Operator 部署、分片策略、连接池模式、读写分离、性能调优和监控告警。
 
@@ -1250,21 +1251,21 @@ echo "=== Diagnostic Complete ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|02-postgresql-enterprise-database]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|03-distributed-database-enterprise]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|05-mongodb-enterprise-database]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|06-redis-enterprise-cache]]
+- 02-postgresql-enterprise-database
+- 03-distributed-database-enterprise
+- 05-mongodb-enterprise-database
+- 06-redis-enterprise-cache

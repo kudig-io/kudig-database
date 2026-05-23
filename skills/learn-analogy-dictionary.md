@@ -27,6 +27,7 @@ trigger_keywords:
 - 概念类比词典
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8S 概念类比词典
@@ -43,8 +44,8 @@ prerequisites:
 |---------|---------|------|
 | Pod | 快递盒 | 装东西的盒子，可以单个或组合 |
 | Deployment | 人力资源部 | 负责招聘、解雇、保证人员数量 |
-| Service | 前台电话 | 统一接入，自动转接 |
-| Ingress | 酒店大堂 | 入口登记处，指引到具体服务 |
+| [[Service|Service]] | 前台电话 | 统一接入，自动转接 |
+| [[Ingress|Ingress]] | 酒店大堂 | 入口登记处，指引到具体服务 |
 | Namespace | 办公室隔间 | 隔离但共享公共设施 |
 | ConfigMap | 公告板 | 公开的配置信息 |
 | Secret | 保险柜 | 保密的配置信息 |
@@ -72,9 +73,9 @@ prerequisites:
 | K8s 概念 | 生活类比 | 解释 |
 |---------|---------|------|
 | Job | 外卖订单 | 来了就做，做完就结束 |
-| CronJob | 定时闹钟 | 每天/每周/每月自动执行 |
+| [[CronJob|CronJob]] | 定时闹钟 | 每天/每周/每月自动执行 |
 | HPA | 自动售货机 | 库存不足时自动补货 |
-| DaemonSet | 日光灯 | 每个教室都必须有一盏 |
+| [[DaemonSet|DaemonSet]] | 日光灯 | 每个教室都必须有一盏 |
 | StatefulSet | 医院病房 | 每个病人有固定床位，病历柜也绑定 |
 
 ## 调度策略类比

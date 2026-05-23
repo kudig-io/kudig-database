@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 社交游戏与元宇宙社交架构设计
@@ -43,11 +44,11 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - redis
 - mysql
 - hpa
-- statefulset
+- [[StatefulSet|statefulset]]
 - operator
 - gpu
 last_updated: 2026-05-18
@@ -59,7 +60,7 @@ audience:
 - 云游戏工程师
 estimated_read_time: 5min
 intent_queries:
-- 社交游戏 Kubernetes 元宇宙社交
+- 社交游戏 [[Kubernetes|Kubernetes]] 元宇宙社交
 - 虚拟空间 WebSocket K8s 状态同步
 - 万人同屏 Kubernetes 状态同步
 - UGC创作 区块链确权 K8s
@@ -83,7 +84,7 @@ related_topics:
 - 40-cloud-gaming
 - 09-gaming-backend-architecture
 - 58-web3-gamefi
-- [[domain-20-application-patterns/35-metaverse-digital-twin.md|35-metaverse-digital-twin]]
+- 35-metaverse-digital-twin
 authors:
 - name: KUDIG Team
   role: contributor
@@ -876,7 +877,7 @@ graph TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -891,11 +892,11 @@ graph TB
 
 ## See Also
 
-- [[domain-20-application-patterns/52-smart-water.md|52-smart-water]]
-- [[domain-20-application-patterns/53-new-retail-dtc.md|53-new-retail-dtc]]
-- [[domain-20-application-patterns/55-crossborder-dtc.md|55-crossborder-dtc]]
-- [[domain-20-application-patterns/56-smart-elderly-care.md|56-smart-elderly-care]]
+- 52-smart-water
+- 53-new-retail-dtc
+- 55-crossborder-dtc
+- 56-smart-elderly-care
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

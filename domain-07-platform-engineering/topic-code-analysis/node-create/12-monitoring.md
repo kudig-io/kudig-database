@@ -39,6 +39,7 @@ prerequisites:
 - monitoring-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 节点监控 metrics-server node-exporter kubelet metrics

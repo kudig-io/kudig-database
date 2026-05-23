@@ -1,4 +1,39 @@
 ---
+title: init 阶段详解: mark-control-plane 与 upload-config [cluster-create]
+description: 'title: ''init 阶段详解: mark-control-plane 与 upload-config'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- containerd
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 'init 阶段详解: mark-control-plane 与 upload-config 是什么'
+- '如何 init 阶段详解: mark-control-plane 与 upload-config'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- init
+- '阶段详解:'
+- mark-control-plane
+- upload-config
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 'init 阶段详解: mark-control-plane 与 upload-config'
 description: '# init 阶段详解: mark-control-plane 与 upload-config'
 category: functions
@@ -35,10 +70,6 @@ trigger_keywords:
 - skip-phases
 - certs renew
 - token
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
@@ -46,6 +77,15 @@ related_topics:
 - kubeadm init
 - certificate management
 - node join
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # init 阶段详解: mark-control-plane 与 upload-config
@@ -85,7 +125,7 @@ kubeadm init 实际包含 17 个阶段:
 ```go
 func MarkControlPlane(cfg *InitConfiguration) error {
     // 1. 给节点打标签
-    kubectl label node <node-name> node-role.[[entities/kubernetes|kubernetes]].io/control-plane-
+    kubectl label node <node-name> node-role.kubernetes.io/control-plane-
 
     // 2. 添加污点 (防止 Pod 调度到 control-plane)
     kubectl taint node <node-name> node-role.kubernetes.io/control-plane:NoSchedule
@@ -295,3 +335,11 @@ kubeadm certs list
 # etcd-ca                   2033-12-20 00:00:00     9y
 # etcd-server               2024-12-20 00:00:00     1y
 ```
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]
+- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]

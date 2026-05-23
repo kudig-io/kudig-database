@@ -1,4 +1,35 @@
 ---
+title: ServiceAccount 密钥对源码分析 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- apiserver
+- kubelet
+- controller-manager
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- ServiceAccount 密钥对源码分析 是什么
+- 如何 ServiceAccount 密钥对源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- ServiceAccount
+- 密钥对源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+created: "2026-05-23"
+---
+
 title: ServiceAccount 密钥对源码分析
 description: '## 概述'
 category: functions
@@ -34,9 +65,6 @@ trigger_keywords:
 - TokenRequest
 - 短期 Token
 - Bound Object
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -44,6 +72,15 @@ related_topics:
 - cluster-cert/pki-architecture
 - cluster-cert/apiserver-cert-flags
 - cluster-cert/cert-rotation
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # ServiceAccount 密钥对源码分析
@@ -507,4 +544,8 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 
 ## Related
 
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/vault.md|vault]]
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]

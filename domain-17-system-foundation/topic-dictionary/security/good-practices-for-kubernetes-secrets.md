@@ -26,13 +26,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes Secrets 最佳实践
+# [[Kubernetes|Kubernetes]] [[Secrets|Secrets]] 最佳实践
 
 ## 概述
 
-在 Kubernetes 中，Secret 是用于存储敏感信息（如密码、OAuth 令牌、SSH 密钥）的对象。Secret 提供了对敏感信息使用方式的更多控制，降低了意外暴露的风险。Secret 值以 base64 编码存储，默认情况下以未加密形式保存在 etcd 中，但可以配置为静态加密。以下最佳实践面向集群管理员和应用开发者，旨在提高 Secret 对象的安全性并改善管理效率。
+在 Kubernetes 中，Secret 是用于存储敏感信息（如密码、OAuth 令牌、SSH 密钥）的对象。Secret 提供了对敏感信息使用方式的更多控制，降低了意外暴露的风险。Secret 值以 base64 编码存储，默认情况下以未加密形式保存在 [[etcd|etcd]] 中，但可以配置为静态加密。以下最佳实践面向集群管理员和应用开发者，旨在提高 Secret 对象的安全性并改善管理效率。
 
 ## 核心概念/原理
 

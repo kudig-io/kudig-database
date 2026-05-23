@@ -28,6 +28,7 @@ trigger_keywords:
 - 与向量库构建
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # AI 语料库配置

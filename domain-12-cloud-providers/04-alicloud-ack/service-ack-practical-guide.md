@@ -34,9 +34,10 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - etcd-basics
+created: "2026-05-23"
 ---
 
-title: Kubernetes Service ACK 实战指南
+title: [[Kubernetes|Kubernetes]] [[Service|Service]] ACK 实战指南
 description: '# Kubernetes Service ACK 实战指南'
 category: cloud-provider
 tags:
@@ -46,10 +47,10 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
-- coredns
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

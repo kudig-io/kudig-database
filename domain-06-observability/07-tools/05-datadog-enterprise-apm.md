@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Datadog企业级APM深度实践
@@ -42,8 +43,8 @@ tags:
 - k8s
 - monitoring
 - alerting
-- prometheus
-- istio
+- [[Prometheus|prometheus]]
+- [[Istio|istio]]
 - docker
 - opa
 - elasticsearch
@@ -1154,25 +1155,25 @@ print(report)
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
+- domain-20-enterprise-monitoring-alerting MOC
 - [[domain-06-observability/README.md|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[domain-06-observability/01-prometheus-enterprise-monitoring.md|Prometheus企业级监控系统深度实践]]
-- [[domain-06-observability/02-grafana-enterprise-observability.md|Grafana Enterprise Observability Platform 深度实践]]
-- [[domain-06-observability/03-opentelemetry-distributed-tracing.md|OpenTelemetry分布式追踪与可观测性深度实践]]
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation and Long-term Storage]]
-- [[domain-06-observability/05-datadog-enterprise-monitoring.md|Datadog 企业级监控平台深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-logging.md|Elastic Stack企业级日志分析深度实践]]
-- [[domain-06-observability/06-elastic-stack-enterprise-observability.md|Elastic Stack企业级可观测性平台深度实践]]
-- [[domain-06-observability/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring Platform 深度实践]]
-- [[domain-06-observability/08-new-relic-enterprise-apm.md|New Relic Enterprise APM Platform 深度实践]]
+- Prometheus企业级监控系统深度实践
+- Grafana Enterprise Observability Platform 深度实践
+- OpenTelemetry分布式追踪与可观测性深度实践
+- Thanos Enterprise Metrics Federation and Long-term Storage
+- Datadog 企业级监控平台深度实践
+- Elastic Stack企业级日志分析深度实践
+- Elastic Stack企业级可观测性平台深度实践
+- Zabbix Enterprise Monitoring Platform 深度实践
+- New Relic Enterprise APM Platform 深度实践
 
 ## See Also
 
-- [[domain-06-observability/03-opentelemetry-distributed-tracing.md|03-opentelemetry-distributed-tracing]]
-- [[domain-06-observability/04-thanos-enterprise-metrics-federation.md|04-thanos-enterprise-metrics-federation]]
-- [[domain-06-observability/05-datadog-enterprise-monitoring.md|05-datadog-enterprise-monitoring]]
-- [[domain-06-observability/06-elastic-stack-enterprise-logging.md|06-elastic-stack-enterprise-logging]]
+- 03-opentelemetry-distributed-tracing
+- 04-thanos-enterprise-metrics-federation
+- 05-datadog-enterprise-monitoring
+- 06-elastic-stack-enterprise-logging
 
 - [[domain-06-observability/README.md|返回目录]]
 

@@ -1,7 +1,7 @@
 ---
-title: Kubernetes 网络安全最佳实践
+title: Kubernetes 网络安全最佳实践 [security]
 description: 生产环境 Kubernetes 网络安全配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/security
+category: best-practices/security
 tags:
 - kubernetes
 - security
@@ -32,20 +32,10 @@ trigger_keywords:
 - 服务网格
 prerequisites:
 - kubectl-basics
-- gpu-ml-basics
 - service-mesh-basics
 - ebpf-basics
 - cilium-basics
 - cni-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
 cross_refs:
 - type: domain
   path: ../../domain-03-networking-traffic/
@@ -56,6 +46,7 @@ cross_refs:
 - type: best-practice
   path: ./pod-security.md
   label: Pod安全最佳实践
+created: "2026-05-23"
 ---
 
 # Kubernetes 网络安全最佳实践
@@ -622,10 +613,3 @@ istioctl kube-inject -f pod.yaml | kubectl apply -f -
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和服务网格版本保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/scenarios/troubleshooting.md|troubleshooting]]
-- [[domain-11-production-operations/topic-best-practices/scenarios/upgrade-migration.md|upgrade-migration]]
-- [[domain-11-production-operations/topic-best-practices/security/pod-security.md|pod-security]]
-- [[domain-11-production-operations/topic-best-practices/security/secrets-management.md|secrets-management]]

@@ -1,4 +1,39 @@
 ---
+title: 高可用进阶: 负载均衡与证书分发 [cluster-create]
+description: 'description: // 1. CA 公钥/私钥 (加密存储)'
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- daemonset
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- '高可用进阶: 负载均衡与证书分发 是什么'
+- '如何 高可用进阶: 负载均衡与证书分发'
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- '高可用进阶:'
+- 负载均衡与证书分发
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: '高可用进阶: 负载均衡与证书分发'
 description: // 1. CA 公钥/私钥 (加密存储)
 category: functions
@@ -40,10 +75,6 @@ trigger_keywords:
 - API Server endpoint
 - certificate
 - AES-256-GCM
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -55,6 +86,15 @@ related_topics:
 - API Server
 - certificate management
 - HA cluster
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 高可用进阶: 负载均衡与证书分发
@@ -107,7 +147,7 @@ kubeadm join loadbalancer:6443 \
 
 ## kube-vip 配置
 
-kube-vip 是常用的 [[entities/kubernetes|kubernetes]] 高可用方案:
+kube-vip 是常用的 Kubernetes 高可用方案:
 
 ```yaml
 # kube-vip DaemonSet (部署在所有 control-plane 节点)
@@ -295,3 +335,11 @@ Controller Manager 和 Scheduler 使用 Kubernetes 内置的 leader election:
 | API Server 连不上 LB | TLS passthrough 未配置 | 配置 LB 透传 TLS |
 | leader election 频繁切换 | 网络延迟高/选举超时太短 | 增大 `--lease-duration` |
 | etcd 成员数不对 | 成员添加失败 | 检查 etcd 日志，手动 `member add` |
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/kube-vip.md|kube-vip]]

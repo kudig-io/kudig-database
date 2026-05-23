@@ -1,4 +1,40 @@
 ---
+title: Agent Harness 工具工程：从设计到精简的完整实践 (domain-14-ai-ml-infra)
+description: 'title: Agent Harness 工具工程：从设计到精简的完整实践'
+category: general
+tags:
+- ai
+- ai-agent
+- prometheus
+- helm
+- ingress
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 35min
+intent_queries:
+- Agent Harness 工具工程：从设计到精简的完整实践 是什么
+- 如何 Agent Harness 工具工程：从设计到精简的完整实践
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- Agent
+- Harness
+- 工具工程：从设计到精简的完整实践
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- prometheus-basics
+created: "2026-05-23"
+---
+
 title: Agent Harness 工具工程：从设计到精简的完整实践
 description: '# Agent Harness 工具工程：从设计到精简的完整实践'
 category: ai-agent
@@ -8,9 +44,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
-- helm
-- ingress
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -28,10 +64,15 @@ trigger_keywords:
 - 工具工程：从设计到精简的完整实践
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- prometheus-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Agent Harness 工具工程：从设计到精简的完整实践
@@ -40,7 +81,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 Tools（工具层）是 Agent Harness 六层架构的第二层，让 Agent 从"只能说"变为"能做事"。但工具设计绝非"越多越好"——Vercel 的实证表明，将 15 个工具精简为 2 个后，准确率从 80% 跃升至 100%。
 
@@ -48,9 +89,9 @@ Tools（工具层）是 Agent Harness 六层架构的第二层，让 Agent 从"�
 
 ---
 
-## 1. 工具设计原则
+<!-- chunk: 1. 工具设计原则 -->## 1. 工具设计原则
 
-### 1.1 Less is More：精简的力量
+#<!-- chunk: 1.1 Less is More：精简的力量 -->## 1.1 Less is More：精简的力量
 
 ```
 工具精简的业务价值:
@@ -70,7 +111,7 @@ Tools（工具层）是 Agent Harness 六层架构的第二层，让 Agent 从"�
   4. 更多工具 = 更多参数组合 = 更多错误可能
 ```
 
-### 1.2 工具设计六大原则
+#<!-- chunk: 1.2 工具设计六大原则 -->## 1.2 工具设计六大原则
 
 | 原则 | 说明 | 实践指南 |
 |------|------|---------|
@@ -83,9 +124,9 @@ Tools（工具层）是 Agent Harness 六层架构的第二层，让 Agent 从"�
 
 ---
 
-## 2. 工具 Schema 设计规范
+<!-- chunk: 2. 工具 Schema 设计规范 -->## 2. 工具 Schema 设计规范
 
-### 2.1 标准工具接口
+#<!-- chunk: 2.1 标准工具接口 -->## 2.1 标准工具接口
 
 ```python
 from abc import ABC, abstractmethod
@@ -173,7 +214,7 @@ class BaseTool(ABC):
         return True, "OK"
 ```
 
-### 2.2 K8S 运维工具集设计
+#<!-- chunk: 2.2 K8S 运维工具集设计 -->## 2.2 K8S 运维工具集设计
 
 ```python
 class KubectlGetTool(BaseTool):
@@ -352,9 +393,9 @@ class PrometheusQueryTool(BaseTool):
 
 ---
 
-## 3. 工具注册与发现
+<!-- chunk: 3. 工具注册与发现 -->## 3. 工具注册与发现
 
-### 3.1 工具注册中心
+#<!-- chunk: 3.1 工具注册中心 -->## 3.1 工具注册中心
 
 ```python
 from typing import Optional
@@ -486,7 +527,7 @@ class ToolRegistry:
         return report
 ```
 
-### 3.2 动态工具加载
+#<!-- chunk: 3.2 动态工具加载 -->## 3.2 动态工具加载
 
 ```python
 class DynamicToolLoader:
@@ -547,9 +588,9 @@ class DynamicToolLoader:
 
 ---
 
-## 4. 工具编排模式
+<!-- chunk: 4. 工具编排模式 -->## 4. 工具编排模式
 
-### 4.1 五种编排模式
+#<!-- chunk: 4.1 五种编排模式 -->## 4.1 五种编排模式
 
 ```
 工具编排模式:
@@ -582,7 +623,7 @@ class DynamicToolLoader:
    示例: kubectl get -o json → jq 提取 → prometheus query
 ```
 
-### 4.2 工具链构建器
+#<!-- chunk: 4.2 工具链构建器 -->## 4.2 工具链构建器
 
 ```python
 class ToolChainBuilder:
@@ -674,9 +715,9 @@ def build_pod_diagnosis_chain(registry: ToolRegistry, pod_name: str, namespace: 
 
 ---
 
-## 5. 工具安全沙箱
+<!-- chunk: 5. 工具安全沙箱 -->## 5. 工具安全沙箱
 
-### 5.1 安全执行环境
+#<!-- chunk: 5.1 安全执行环境 -->## 5.1 安全执行环境
 
 ```python
 import subprocess
@@ -786,7 +827,7 @@ K8S_SANDBOX_CONFIG = {
 }
 ```
 
-### 5.2 工具权限模型
+#<!-- chunk: 5.2 工具权限模型 -->## 5.2 工具权限模型
 
 ```python
 from enum import IntEnum
@@ -832,9 +873,9 @@ class ToolPermissionManager:
 
 ---
 
-## 6. 错误处理与恢复
+<!-- chunk: 6. 错误处理与恢复 -->## 6. 错误处理与恢复
 
-### 6.1 工具错误分类与恢复策略
+#<!-- chunk: 6.1 工具错误分类与恢复策略 -->## 6.1 工具错误分类与恢复策略
 
 ```python
 class ToolErrorClassifier:
@@ -950,9 +991,9 @@ class ToolRetryHandler:
 
 ---
 
-## 7. MCP（Model Context Protocol）集成
+<!-- chunk: 7. MCP（Model Context Protocol）集成 -->## 7. MCP（Model Context Protocol）集成
 
-### 7.1 MCP 工具适配器
+#<!-- chunk: 7.1 MCP 工具适配器 -->## 7.1 MCP 工具适配器
 
 ```python
 class MCPToolAdapter:
@@ -1018,9 +1059,9 @@ class MCPToolAdapter:
 
 ---
 
-## 8. 最佳实践总结
+<!-- chunk: 8. 最佳实践总结 -->## 8. 最佳实践总结
 
-### 8.1 工具设计核心原则
+#<!-- chunk: 8.1 工具设计核心原则 -->## 8.1 工具设计核心原则
 
 | 原则 | 说明 | 实践建议 |
 |------|------|---------|
@@ -1033,7 +1074,7 @@ class MCPToolAdapter:
 | **权限控制** | 按命名空间和操作类型控制权限 | 使用 ToolPermissionManager |
 | **MCP 标准化** | 遵循 MCP 协议实现工具互操作 | 使用 MCPToolAdapter 集成 |
 
-### 8.2 反模式
+#<!-- chunk: 8.2 反模式 -->## 8.2 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|----------|
@@ -1046,7 +1087,7 @@ class MCPToolAdapter:
 
 ---
 
-## 关联文档
+<!-- chunk: 关联文档 -->## 关联文档
 
 | 文档 | 关联内容 |
 |------|--------|
@@ -1058,7 +1099,7 @@ class MCPToolAdapter:
 
 ---
 
-## 参考来源
+<!-- chunk: 参考来源 -->## 参考来源
 
 | 来源 | 内容 | 日期 |
 |------|------|------|
@@ -1070,3 +1111,27 @@ class MCPToolAdapter:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 系列原创内容，深入展开 Agent Harness 工具工程设计。*
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 30-agent-harness-engineering
+- 31-agent-harness-loop-execution
+- 33-agent-harness-context-memory
+- 34-agent-harness-verification-quality

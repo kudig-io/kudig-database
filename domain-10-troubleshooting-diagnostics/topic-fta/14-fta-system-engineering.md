@@ -1,5 +1,5 @@
 ---
-title: 第十四章：构建 FTA 系统的工程化方法
+title: 第十四章：构建 FTA 系统的工程化方法 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
 category: fta
 tags:
@@ -48,6 +48,7 @@ prerequisites:
 fta_id: FTA-14_SYSTEM_ENGINEERING-001
 component: 14 System Engineering
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第十四章：构建 FTA 系统的工程化方法
@@ -58,10 +59,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
+- [[Jaeger|jaeger]]
 - coredns
 - redis
 last_updated: 2026-05

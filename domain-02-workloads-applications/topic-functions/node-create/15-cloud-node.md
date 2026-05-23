@@ -1,4 +1,40 @@
 ---
+title: 云厂商节点集成 — AWS / GCP / Azure
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- kubelet
+- controller-manager
+- operator
+- gpu
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 云厂商节点集成 — AWS / GCP / Azure 是什么
+- 如何 云厂商节点集成 — AWS / GCP / Azure
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 云厂商节点集成
+- AWS
+- GCP
+- Azure
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 云厂商节点集成
 description: '## 概述'
 category: functions
@@ -44,23 +80,28 @@ trigger_keywords:
 - IRSA
 - Workload Identity
 - Managed Identity
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-9-orchestration
 related_topics:
 - node-create/02-registration
 - cluster-create/01-overview
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 云厂商节点集成 — AWS / GCP / Azure
 
 ## 概述
 
-在云环境中运行 [[entities/kubernetes|kubernetes]] 时，节点与云厂商的集成是不可避免的。Kubernetes 通过 Cloud Provider 机制与各大云厂商（AWS、GCP、Azure）进行交互，实现节点自动注册、标签注入、负载均衡集成、存储卷管理等功能。
+在云环境中运行 Kubernetes 时，节点与云厂商的集成是不可避免的。Kubernetes 通过 Cloud Provider 机制与各大云厂商（AWS、GCP、Azure）进行交互，实现节点自动注册、标签注入、负载均衡集成、存储卷管理等功能。
 
 理解云厂商节点集成的原理对于以下场景至关重要：
 
@@ -435,3 +476,11 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 | `providerID` | `pkg/api/v1/node/types.go` | providerID 字段定义 |
 | `Instances` | `pkg/cloudprovider/instances.go` | 实例接口 |
 | `InstanceMetadata` | `pkg/cloudprovider/instances.go` | 实例元数据接口 |
+
+## Related
+
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]

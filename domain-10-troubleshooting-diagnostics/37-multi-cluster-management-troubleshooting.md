@@ -61,6 +61,7 @@ cross_refs:
 - type: domain
   path: ../domain-06-observability/
   label: '相关知识域: domain-06-observability'
+created: "2026-05-23"
 ---
 
 # 37 - 多集群管理故障排查 (Multi-Cluster Management Troubleshooting)
@@ -467,7 +468,7 @@ chmod +x failover-test.sh
 
 ---
 
-<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-Cluster Networking and Service Discovery Issues) -->
+<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[domain-17-system-foundation/topic-dictionary/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[Service|Service]] Discovery Issues) -->
 ## 4. 跨集群网络和服务发现问题排查 (Cross-Cluster Networking and Service Discovery Issues)
 
 ### 4.1 服务发现配置检查
@@ -1165,9 +1166,9 @@ chmod +x cluster-failover.sh
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

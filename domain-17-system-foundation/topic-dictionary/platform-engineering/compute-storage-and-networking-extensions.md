@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 # 计算、存储与网络扩展
 
 ## 概述
 
-[[entities/kubernetes|kubernetes]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
 
 ## 核心概念/原理
 

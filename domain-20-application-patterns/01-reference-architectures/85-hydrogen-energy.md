@@ -34,6 +34,7 @@ prerequisites:
 - monitoring-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 title: 氢能源架构设计
@@ -44,10 +45,10 @@ tags:
 - architecture
 - industry
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - mysql
-- daemonset
+- [[DaemonSet|daemonset]]
 - operator
 - webhook
 last_updated: 2026-05-18
@@ -94,7 +95,7 @@ k8s_versions:
 
 # 氢能源架构设计 — 阿里云视角
 
-> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#氢能源` `#制氢` `#储氢` `#燃料电池` `#阿里云`
 
 ---
@@ -787,7 +788,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -802,11 +803,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/83-cultural-digitization.md|83-cultural-digitization]]
-- [[domain-20-application-patterns/84-national-park.md|84-national-park]]
-- [[domain-20-application-patterns/86-solid-state-battery.md|86-solid-state-battery]]
-- [[domain-20-application-patterns/87-flexible-manufacturing.md|87-flexible-manufacturing]]
+- 83-cultural-digitization
+- 84-national-park
+- 86-solid-state-battery
+- 87-flexible-manufacturing
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

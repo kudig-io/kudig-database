@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 极地科考架构设计
@@ -38,7 +39,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- daemonset
+- [[DaemonSet|daemonset]]
 - operator
 - webhook
 last_updated: 2026-05-18
@@ -50,7 +51,7 @@ audience:
 - 极端环境系统专家
 estimated_read_time: 5min
 intent_queries:
-- 极地科考 Kubernetes 边缘计算
+- 极地科考 [[Kubernetes|Kubernetes]] 边缘计算
 - 冰川监测 卫星通信 K8s
 - 极地环境 低带宽 Kubernetes
 - 南极北极 科考站 K8s部署
@@ -865,7 +866,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -880,11 +881,11 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/77-fusion-energy-monitoring.md|77-fusion-energy-monitoring]]
-- [[domain-20-application-patterns/78-deep-sea-exploration.md|78-deep-sea-exploration]]
-- [[domain-20-application-patterns/80-tsn-network.md|80-tsn-network]]
-- [[domain-20-application-patterns/81-smart-customs.md|81-smart-customs]]
+- 77-fusion-energy-monitoring
+- 78-deep-sea-exploration
+- 80-tsn-network
+- 81-smart-customs
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

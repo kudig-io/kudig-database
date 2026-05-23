@@ -1,5 +1,5 @@
 ---
-title: OpenFeature
+title: OpenFeature [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - OpenFeature
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # OpenFeature
@@ -72,6 +73,6 @@ OpenFeature 是特性标志（Feature Flag）的开放标准，提供供应商�
 - [[devspace]] — DevSpace
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/incubating/openfeature/openfeature.md|openfeature]]
-- [[entities/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- openfeature
+- [[entities/cncf-infrastructure|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- index/etcd-index|etcd 知识图谱索引]]

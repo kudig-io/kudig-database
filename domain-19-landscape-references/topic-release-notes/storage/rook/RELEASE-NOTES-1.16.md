@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cncf-ecosystem
+created: "2026-05-23"
 ---
 
-# rook v1.16 Release Notes
+# [[Rook|rook]] v1.16 Release Notes
 
 Source: [v1.16.9](https://github.com/rook/rook/releases/tag/v1.16.9)
 

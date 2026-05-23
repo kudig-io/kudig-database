@@ -1,5 +1,5 @@
 ---
-title: Higress 网关故障排查指南
+title: Higress 网关故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Higress 网关故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 title: Higress 网关故障排查指南
@@ -48,9 +49,9 @@ tags:
 - k8s
 - troubleshooting
 - higress
-- ingress
+- [[Ingress|ingress]]
 - gateway
-- envoy
+- [[Envoy|envoy]]
 - wasm
 - nacos
 - xds
@@ -448,14 +449,14 @@ spec:
 ## 相关文档
 
 - [Higress 企业级网关实践](./domain-03-networking-traffic/04-higress-enterprise-gateway.md)
-- [Higress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md)
+- Higress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md)
 - [Higress 全局索引](./domain-19-landscape-references/topic-index/higress-index.md)
 - [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[index.md|index]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]

@@ -25,9 +25,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Kubernetes API 聚合层
+# [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合层
 
 ## 概述
 
@@ -64,7 +65,7 @@ API 聚合层（Aggregation Layer）允许 Kubernetes 通过额外的 API 进行
 
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
-| APIService Available=False | 扩展 API server Pod 不健康 | `kubectl get apiservice <name>` 查看 conditions；检查后端 Service |
+| APIService Available=False | 扩展 API server Pod 不健康 | `kubectl get apiservice <name>` 查看 conditions；检查后端 [[Service|Service]] |
 | 聚合 API 请求 503 | 后端 Service 端点不存在 | `kubectl get endpoints -n <ns> <svc>` |
 | TLS 握手失败 | CA bundle 不匹配 | 检查 APIService 的 `caBundle` 与实际证书 |
 
@@ -90,8 +91,8 @@ kubectl describe apiservice <name>
 
 ## 交叉引用
 
-- [扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]].md) — API 扩展总览
-- [Custom Resources](./custom-resources.md) — CRD 作为更简单的替代方案
+- 扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|the-kubernetes-api]].md) — API 扩展总览
+- Custom Resources](./custom-resources.md) — CRD 作为更简单的替代方案
 
 ## 参考链接
 

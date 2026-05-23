@@ -44,6 +44,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/k8s.md
   label: '速查卡: k8s'
+created: "2026-05-23"
 ---
 
 # Domain-4: Kubernetes工作负载管理
@@ -160,6 +161,6 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 - [[deployment]]
 - [[README]]
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]

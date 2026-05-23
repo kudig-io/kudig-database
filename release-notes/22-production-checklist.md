@@ -18,6 +18,7 @@ trigger_keywords:
 - 立即执行清单
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 发布会制作 — 立即执行清单

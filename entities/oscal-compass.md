@@ -1,5 +1,5 @@
 ---
-title: OSCAL Compass
+title: OSCAL Compass (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # OSCAL Compass
@@ -64,12 +65,12 @@ OSCAL Compass 是一套基于 NIST OSCAL (Open Security Controls Assessment Lang
 ## Related
 
 - [[urunc]] — urunc
-- [[connect-rpc]] — Connect RPC
+- [[connect-rpc]] — [[Connect RPC|Connect RPC]]
 - [[antrea]] — Antrea
 - [[linkerd]] — Linkerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/oscal-compass/oscal-compass.md|oscal-compass]]
-- [[entities/openfga.md|OpenFGA]]
+- oscal-compass
+- [[entities/openfga.md|[[OpenFGA|OpenFGA]]]]
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

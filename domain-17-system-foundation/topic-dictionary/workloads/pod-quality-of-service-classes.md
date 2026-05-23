@@ -28,12 +28,13 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# Pod Quality of Service Classes
+# Pod Quality of [[Service|Service]] Classes
 
 ## 概述
-[[entities/kubernetes|kubernetes]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
+[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
 
 ## 核心概念/原理
 可能的 QoS 等级有三种，按驱逐优先级从高到低排列：
@@ -46,7 +47,7 @@ prerequisites:
 - 每个容器（或 Pod 级资源）必须同时设置 CPU request 和 limit，且两者相等。
 
 ## 关键机制或特性
-- **节点压力驱逐**：当节点资源不足时，kubelet 优先驱逐 `BestEffort`，其次是 `Burstable`，最后是 `Guaranteed`。仅超出自身 request 的 Pod 才会被驱逐。
+- **节点压力驱逐**：当节点资源不足时，[[kubelet|kubelet]] 优先驱逐 `BestEffort`，其次是 `Burstable`，最后是 `Guaranteed`。仅超出自身 request 的 Pod 才会被驱逐。
 - **资源超限处理**：任何容器超出其资源 limit 都会被 kubelet 终止并重启（如 OOM Kill 或 CPU 限流），不影响同一 Pod 内的其他容器。
 - **QoS 不变性**：Pod 创建后 QoS 等级终身不变。若进行原地 resize 导致 QoS 变更，则 resize 会被拒绝。
 - **Memory QoS（cgroup v2，Alpha）**：利用 `memory.min` 和 `memory.high` 保证内存可用性，与 QoS 等级协同工作但机制不同。
@@ -129,7 +130,7 @@ spec:
 | 资源配置 | request == limit（全设） | 至少设置一项 | 不设置任何资源 |
 | 驱逐优先级 | 最低（最后驱逐） | 中等 | 最高（最先驱逐） |
 | CPU 限流 | 严格限制在 limit | 可突发到 limit | 无限制 |
-| OOM Kill 顺序 | 最后被 Kill | 按 OOM Score | 最先被 Kill |
+| OOM Kill 顺序 | 最后被 Kill | 按 OOM [[Score|Score]] | 最先被 Kill |
 | 独占 CPU | 支持（static CPU Manager） | 不支持 | 不支持 |
 | 适用场景 | 延迟敏感、关键服务 | 一般业务 | 开发测试、非关键任务 |
 

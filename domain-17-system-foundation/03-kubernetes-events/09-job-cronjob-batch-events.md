@@ -48,11 +48,12 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md
   label: '故障树: job-cronjob'
+created: "2026-05-23"
 ---
 
-# 09 - Job 与 CronJob 批处理事件
+# 09 - Job 与 [[CronJob|CronJob]] 批处理事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 Job 和 CronJob 控制器产生的所有批处理相关事件。**
 
@@ -129,7 +130,7 @@ Count: 1
 
 **版本信息:**
 - **起始版本**: v1.0
-- **最后变更**: v1.24（Indexed Jobs 增强）
+- **最后变更**: v1.24（Indexed [[Jobs|Jobs]] 增强）
 
 **生产影响:**
 - ✅ 正常执行流程
@@ -2280,7 +2281,7 @@ spec:
 **Domain-33 Kubernetes Events:**
 - [01-pod-lifecycle-events.md](./01-pod-lifecycle-events.md) - Pod 生命周期事件（FailedScheduling 等）
 - [02-deployment-events.md](./02-deployment-events.md) - Deployment 事件
-- [03-statefulset-events.md](./03-statefulset-events.md) - StatefulSet 事件
+- [03-statefulset-events.md](./03-statefulset-events.md) - [[StatefulSet|StatefulSet]] 事件
 - [04-daemonset-events.md](./04-daemonset-events.md) - DaemonSet 事件
 - [05-replicaset-events.md](./05-replicaset-events.md) - ReplicaSet 事件
 - [06-hpa-events.md](./06-hpa-events.md) - HPA 自动扩缩容事件
@@ -2462,25 +2463,25 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07-deployment-replicaset-events]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10-service-networking-events]]
-- [[domain-17-system-foundation/11-storage-volume-events.md|11-storage-volume-events]]
+- 07-deployment-replicaset-events
+- 08-statefulset-daemonset-events
+- 10-service-networking-events
+- 11-storage-volume-events
 
 ## Related
 

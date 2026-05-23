@@ -34,6 +34,7 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # 数据库 Operator 设计模式
@@ -85,11 +86,11 @@ status:
 | 数据库 | Operator | 成熟度 |
 |--------|---------|--------|
 | MySQL | Oracle MySQL Operator | GA |
-| PostgreSQL | CloudNativePG / Zalando | GA |
+| PostgreSQL | [[CloudNativePG|CloudNativePG]] / Zalando | GA |
 | Redis | Redis Operator / Spotahome | GA |
 | MongoDB | MongoDB Community Operator | GA |
 | Cassandra | Cass Operator | GA |
-| Kafka | Strimzi | GA |
+| Kafka | [[Strimzi|Strimzi]] | GA |
 
 ## 反模式
 
@@ -106,5 +107,5 @@ status:
 
 ## 相关
 
-- [[domain-15-specialized-tech/02-operator-development-patterns]]
+- domain-15-specialized-tech/02-operator-development-patterns
 - [[domain-16-database-middleware/05-operator-management/02-operator-comparison-mysql-postgres-redis]]

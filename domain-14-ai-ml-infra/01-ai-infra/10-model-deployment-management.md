@@ -56,11 +56,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/go.md
   label: '速查卡: go'
+created: "2026-05-23"
 ---
 
 # AI模型部署与生命周期管理
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [KServe](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
 
 <!-- chunk: 一、模型部署架构概览 -->
 ## 一、模型部署架构概览
@@ -139,8 +140,8 @@ cross_refs:
 |----------|----------|------|------|--------|
 | **Serverless** | 突发流量、开发测试 | 自动扩缩、成本优化 | 冷启动延迟 | ⭐⭐ |
 | **Deployment** | 稳定在线服务 | 简单可靠、易于调试 | 资源浪费 | ⭐ |
-| **StatefulSet** | 有状态模型服务 | 数据持久化、有序部署 | 复杂度高 | ⭐⭐⭐ |
-| **DaemonSet** | 节点本地服务 | 本地缓存、低延迟 | 资源利用率低 | ⭐⭐ |
+| **[[StatefulSet|StatefulSet]]** | 有状态模型服务 | 数据持久化、有序部署 | 复杂度高 | ⭐⭐⭐ |
+| **[[DaemonSet|DaemonSet]]** | 节点本地服务 | 本地缓存、低延迟 | 资源利用率低 | ⭐⭐ |
 | **Job/CronJob** | 批处理推理 | 一次性任务、定时执行 | 不适合在线服务 | ⭐⭐ |
 
 ---
@@ -876,25 +877,25 @@ kubectl describe pods -l app=<app-name> -n ai-models
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/MOC.md|domain-11-ai-infra MOC]]
+- domain-11-ai-infra KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/README.md|Domain-11: AI基础设施]]
-- [[domain-14-ai-ml-infra/00-open-source-projects-index.md|Domain-11 AI 基础设施 — 开源项目索引]]
-- [[domain-14-ai-ml-infra/01-ai-infrastructure-overview.md|AI 基础设施架构]]
-- [[domain-14-ai-ml-infra/02-ai-ml-workloads.md|132 - AI/ML工作负载运维 (AI/ML Workloads Operations)]]
-- [[domain-14-ai-ml-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[domain-14-ai-ml-infra/04-gpu-monitoring-dcgm.md|GPU监控与可观测性]]
-- [[domain-14-ai-ml-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[domain-14-ai-ml-infra/06-ai-data-pipeline.md|AI数据处理Pipeline与特征工程]]
-- [[domain-14-ai-ml-infra/07-ai-experiment-management.md|AI实验管理与MLOps平台]]
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|AutoML与超参数调优]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|AI模型注册中心与版本管理]]
+- Domain-11 AI 基础设施 — 开源项目索引
+- AI 基础设施架构
+- 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
+- GPU 调度与管理
+- GPU监控与可观测性
+- 分布式训练框架
+- AI数据处理Pipeline与特征工程
+- AI实验管理与MLOps平台
+- AutoML与超参数调优
+- AI模型注册中心与版本管理
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/08-automl-hyperparameter-tuning.md|08-automl-hyperparameter-tuning]]
-- [[domain-14-ai-ml-infra/09-model-registry.md|09-model-registry]]
-- [[domain-14-ai-ml-infra/11-ai-security-model-protection.md|11-ai-security-model-protection]]
-- [[domain-14-ai-ml-infra/12-ai-cost-analysis-finops.md|12-ai-cost-analysis-finops]]
+- 08-automl-hyperparameter-tuning
+- 09-model-registry
+- 11-ai-security-model-protection
+- 12-ai-cost-analysis-finops
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: Shipwright
+title: Shipwright (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - Shipwright
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Shipwright
@@ -44,7 +45,7 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 
 ## 生产部署要点
 
-- **策略选择**: Go 应用用 ko，通用语言用 Buildpacks，需要精细控制用 Buildah
+- **策略选择**: Go 应用用 [[ko|ko]]，通用语言用 Buildpacks，需要精细控制用 Buildah
 - **镜像缓存**: 配置构建缓存加速重复构建
 - **安全**: 使用 Kaniko/Buildah 避免特权容器构建
 - **CI 集成**: 在 CI/CD pipeline 中创建 BuildRun 实现自动化构建
@@ -71,7 +72,7 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[buildpacks]] — Cloud Native Buildpacks
 
-- [[domain-19-landscape-references/sandbox/shipwright/shipwright.md|shipwright]]
+- shipwright
 - [[entities/atlantis.md|Atlantis]]
 - [[entities/dalec.md|Dalec]]
 - [[entities/werf.md|werf]]

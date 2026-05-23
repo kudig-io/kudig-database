@@ -50,6 +50,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Wasm Serverless (Wasm Serverless)
@@ -62,8 +63,8 @@ authors:
 
 1. [Wasm Serverless 架构概述](#1-wasm-serverless-架构概述)
 2. [冷启动优化原理](#2-冷启动优化原理)
-3. [Spin 框架详解](#3-spin-框架详解)
-4. [wasmCloud 平台](#4-wasmcloud-平台)
+3. [[entities/spin.md|Spin]] 框架详解](#3-spin-框架详解)
+4. [[entities/wasmcloud.md|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
 5. [Fermyon Cloud 部署](#5-fermyon-cloud-部署)
 6. [事件触发器系统](#6-事件触发器系统)
 7. [Scale-to-Zero 实现](#7-scale-to-zero-实现)
@@ -578,7 +579,7 @@ log_level = { required = false, default = "info" }
 feature_flags = { required = false, default = "{}" }
 
 # HTTP API 组件
-[[trigger.http]]
+trigger.http
 route = "/api/..."
 component = "api-handler"
 
@@ -625,7 +626,7 @@ assets = { path = "assets/", destination = "/assets" }
 
 # -----------------------------------------------
 # Auth 子服务
-[[trigger.http]]
+trigger.http
 route = "/auth/..."
 component = "auth-service"
 
@@ -640,7 +641,7 @@ tokens = { label = "tokens" }
 
 # -----------------------------------------------
 # 异步任务处理器（Redis 触发）
-[[trigger.redis]]
+trigger.redis
 channel = "tasks"
 component = "task-processor"
 
@@ -653,7 +654,7 @@ outbound_hosts = ["https://notifications.example.com"]
 
 # -----------------------------------------------
 # 定时任务（计划触发）
-[[trigger.cron]]
+trigger.cron
 cron_expression = "0 */5 * * * *"  # 每5分钟
 component = "cleanup-job"
 
@@ -1324,30 +1325,30 @@ spin cloud routes set \
 # spin.toml 中配置各种触发器
 
 # HTTP 触发器
-[[trigger.http]]
+trigger.http
 route = "/api/{path:...}"
 component = "http-handler"
 
 # Redis 订阅触发器
-[[trigger.redis]]
+trigger.redis
 channel = "user-events"
 component = "user-event-processor"
 
-[[trigger.redis]]
+trigger.redis
 channel = "payment-events"
 component = "payment-processor"
 
 # 定时触发（Cron）
-[[trigger.cron]]
+trigger.cron
 cron_expression = "0 0 * * *"    # 每天凌晨
 component = "daily-report"
 
-[[trigger.cron]]
+trigger.cron
 cron_expression = "*/5 * * * *"  # 每5分钟
 component = "metrics-aggregator"
 
 # MQTT 触发器（IoT）
-[[trigger.mqtt]]
+trigger.mqtt
 address = "mqtt://broker:1883"
 topic = "sensors/#"
 component = "sensor-processor"
@@ -2228,7 +2229,7 @@ compatibility_date = "2024-01-01"
 ENVIRONMENT = "production"
 API_KEY = "..."
 
-[[kv_namespaces]]
+[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md]]
 binding = "KV_STORE"
 id = "abc123..."
 
@@ -2286,7 +2287,7 @@ spec:
 
 <!-- chunk: 11. Serverless 可观测性 -->## 11. Serverless 可观测性
 
-#<!-- chunk: 11.1 OpenTelemetry 集成 -->## 11.1 OpenTelemetry 集成
+#<!-- chunk: 11.1 [[OpenTelemetry|OpenTelemetry]] 集成 -->## 11.1 OpenTelemetry 集成
 
 ```rust
 // 在 Spin 组件中集成 OpenTelemetry
@@ -2386,7 +2387,7 @@ async fn process_request(req: IncomingRequest) -> anyhow::Result<OutgoingRespons
 }
 ```
 
-#<!-- chunk: 11.2 Prometheus 指标暴露 -->## 11.2 Prometheus 指标暴露
+#<!-- chunk: 11.2 [[Prometheus|Prometheus]] 指标暴露 -->## 11.2 Prometheus 指标暴露
 
 ```rust
 // Serverless 函数指标收集
@@ -2938,22 +2939,22 @@ Wasm Serverless 通过独特的技术优势重新定义了 FaaS 计算：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-15-specialized-tech/MOC.md|domain-38-webassembly-cloud-native MOC]]
+- domain-38-webassembly-cloud-native MOC
 - [[domain-15-specialized-tech/README.md|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[domain-15-specialized-tech/00-open-source-projects-index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
-- [[domain-15-specialized-tech/01-wasm-fundamentals-cloud-native.md|WebAssembly 云原生基础]]
-- [[domain-15-specialized-tech/02-containerd-wasm-shim.md|containerd Wasm 运行时]]
-- [[domain-15-specialized-tech/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[domain-15-specialized-tech/04-wasmcloud-platform.md|wasmCloud 平台]]
-- [[domain-15-specialized-tech/05-wasmedge-runtime.md|WasmEdge 运行时]]
-- [[domain-15-specialized-tech/06-wasm-component-model.md|Wasm 组件模型 (Wasm Component Model)]]
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|Wasm 插件系统 (Wasm Plugin System)]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|Wasm AI 推理 (Wasm AI Inference)]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|Wasm 安全与沙箱 (Wasm Security and Sandbox)]]
+- Domain-38 WebAssembly 云原生 — 开源项目索引
+- WebAssembly 云原生基础
+- containerd Wasm 运行时
+- SpinKube 框架实践
+- wasmCloud 平台
+- WasmEdge 运行时
+- Wasm 组件模型 (Wasm Component Model)
+- Wasm 插件系统 (Wasm Plugin System)
+- Wasm AI 推理 (Wasm AI Inference)
+- Wasm 安全与沙箱 (Wasm Security and Sandbox)
 
 ## See Also
 
-- [[domain-15-specialized-tech/07-wasm-plugin-system.md|07-wasm-plugin-system]]
-- [[domain-15-specialized-tech/08-wasm-ai-inference.md|08-wasm-ai-inference]]
-- [[domain-15-specialized-tech/10-wasm-security-sandbox.md|10-wasm-security-sandbox]]
-- [[domain-15-specialized-tech/99-wasmedge-cloud-native-guide.md|99-wasmedge-cloud-native-guide]]
+- 07-wasm-plugin-system
+- 08-wasm-ai-inference
+- 10-wasm-security-sandbox
+- 99-wasmedge-cloud-native-guide

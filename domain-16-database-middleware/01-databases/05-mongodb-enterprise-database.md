@@ -50,6 +50,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
 # MongoDB 企业级数据库运维深度实践
@@ -66,7 +67,7 @@ MongoDB 是全球领先的文档型 NoSQL 数据库，以其灵活的文档模�
 
 企业级 MongoDB 运维需要掌握的核心领域包括：副本集（Replica Set）的高可用配置与故障转移、分片集群（Sharded Cluster）的数据均衡与热点处理、WiredTiger 存储引擎的内存与缓存调优、基于 Oplog 的增量备份与时间点恢复、以及安全加固（SCRAM-SHA-256、TLS、RBAC、审计日志）。本文档系统覆盖上述所有主题，提供生产级配置和脚本。
 
-MongoDB 在 K8s 环境中的运维推荐使用 MongoDB Community Operator（开源）或 MongoDB Atlas（云托管）。对于自建场景，需要特别关注 StatefulSet 的有序部署、PodDisruptionBudget 的配置、以及 PVC 的存储类选择。
+MongoDB 在 K8s 环境中的运维推荐使用 MongoDB Community Operator（开源）或 MongoDB Atlas（云托管）。对于自建场景，需要特别关注 [[StatefulSet|StatefulSet]] 的有序部署、PodDisruptionBudget 的配置、以及 PVC 的存储类选择。
 
 #<!-- chunk: MongoDB 技术架构深度解析 -->## MongoDB 技术架构深度解析
 
@@ -600,7 +601,7 @@ sleep 15
 NEW_PRIMARY=$(mongo --quiet --eval "rs.isMaster().primary" | tr -d '"')
 echo "New Primary: $NEW_PRIMARY"
 
-if [[ "$PRIMARY_HOST" != "$NEW_PRIMARY" ]]; then
+if "$PRIMARY_HOST" != "$NEW_PRIMARY"; then
     echo "FAILOVER SUCCESS: $PRIMARY_HOST -> $NEW_PRIMARY"
 else
     echo "FAILOVER FAILED: Primary unchanged"
@@ -702,7 +703,7 @@ restore_logical() {
 
     echo "!!! RESTORING from $backup_path !!!"
     read -p "Confirm? (yes/no): " confirm
-    [[ "$confirm" != "yes" ]] && exit 0
+    "$confirm" != "yes" && exit 0
 
     mongorestore \
         --uri="${target_uri}" \
@@ -735,7 +736,7 @@ esac
 
 <!-- chunk: 监控告警 -->## 监控告警
 
-#<!-- chunk: Prometheus 告警规则 -->## Prometheus 告警规则
+#<!-- chunk: [[Prometheus|Prometheus]] 告警规则 -->## Prometheus 告警规则
 
 ```yaml
 groups:
@@ -972,21 +973,21 @@ esac
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- MySQL 企业级数据库运维管理
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|03-distributed-database-enterprise]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|04-database-middleware-kubernetes]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|06-redis-enterprise-cache]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|07-redis-kubernetes-operator]]
+- 03-distributed-database-enterprise
+- 04-database-middleware-kubernetes
+- 06-redis-enterprise-cache
+- 07-redis-kubernetes-operator

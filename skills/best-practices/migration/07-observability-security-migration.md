@@ -1,5 +1,5 @@
 ---
-title: 07 - 可观测性与安全迁移
+title: 07 - 可观测性与安全迁移 [migration]
 description: 'title: 07 - 可观测性与安全迁移'
 category: general
 tags:
@@ -39,6 +39,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 title: 07 - 可观测性与安全迁移
@@ -48,11 +49,11 @@ tags:
 - k8s
 - migration
 - modernization
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
-- jaeger
-- helm
+- [[Jaeger|jaeger]]
+- [[Helm|helm]]
 - docker
 - elasticsearch
 last_updated: 2026-05
@@ -473,7 +474,7 @@ cat tls-secrets.json | jq -c '.' | while read secret; do
 done
 
 # 3. 推荐: 在 ACK 部署 cert-manager 自动管理
-# 参考 [[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]].md cert-manager 部分
+# 参考 05-network-migration-traffic-cutover.md cert-manager 部分
 ```
 
 ---
@@ -542,13 +543,13 @@ kubectl logs job/kube-bench
 ---
 
 **上一步**: ← [06-有状态服务迁移](./06-stateful-services-migration.md)
-**下一步**: → [08-验收、切换与旧集群退役](./[[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]].md)
+**下一步**: → [08-验收、切换与旧集群退役](./08-validation-cutover-decommission.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -562,7 +563,7 @@ kubectl logs job/kube-bench
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/05-network-migration-traffic-cutover.md|05-network-migration-traffic-cutover]]
-- [[domain-11-production-operations/topic-best-practices/migration/06-stateful-services-migration.md|06-stateful-services-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]]
-- [[domain-11-production-operations/topic-best-practices/migration/09-migration-toolchain.md|09-migration-toolchain]]
+- 05-network-migration-traffic-cutover
+- 06-stateful-services-migration
+- 08-validation-cutover-decommission
+- 09-migration-toolchain

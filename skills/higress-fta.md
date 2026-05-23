@@ -1,5 +1,5 @@
 ---
-title: Higress 网关异常故障树分析
+title: Higress 网关异常故障树分析 (skills)
 description: '### 故障排查命令速查'
 category: skills
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-HIGRESS-001
 component: Higress
 severity: high
+created: "2026-05-23"
 ---
 
 # Higress 网关异常故障树分析
@@ -74,12 +75,12 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 ## 相关链接
 
 - [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[skills/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
-- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
+- storage.md|ts-storage]] — 存储故障排查
 - [[skills/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 - [[certificate-fta]] — 证书异常故障树分析
 - [[envoy]] — Envoy

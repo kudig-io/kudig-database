@@ -1,4 +1,39 @@
 ---
+title: API Server 证书生成源码分析 (topic-code-analysis)
+description: 'description: ''## 概述'''
+category: general
+tags:
+- reference
+- etcd
+- apiserver
+- kubelet
+- containerd
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- API Server 证书生成源码分析 是什么
+- 如何 API Server 证书生成源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- API
+- Server
+- 证书生成源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: API Server 证书生成源码分析
 description: '## 概述'
 category: functions
@@ -36,10 +71,6 @@ trigger_keywords:
 - certSANs
 - advertiseAddress
 - ServiceSubnet
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 related_topics:
@@ -47,13 +78,22 @@ related_topics:
 - cluster-cert/ca-generation
 - cluster-cert/cert-config
 - cluster-cert/apiserver-cert-flags
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # API Server 证书生成源码分析
 
 ## 概述
 
-API Server 证书是 [[entities/kubernetes|kubernetes]] 集群中最重要的服务端证书，它不仅需要包含正确的 SAN（Subject Alternative Name）以支持集群内外的多种访问方式，还需要配置正确的扩展密钥用途（EKU）。本文档基于 kubeadm 源码，深入分析 API Server 证书的生成逻辑、SAN 动态收集机制、CA 签发流程以及多场景下的证书验证实践。
+API Server 证书是 Kubernetes 集群中最重要的服务端证书，它不仅需要包含正确的 SAN（Subject Alternative Name）以支持集群内外的多种访问方式，还需要配置正确的扩展密钥用途（EKU）。本文档基于 kubeadm 源码，深入分析 API Server 证书的生成逻辑、SAN 动态收集机制、CA 签发流程以及多场景下的证书验证实践。
 
 ---
 
@@ -490,3 +530,11 @@ done
 | `WriteCertAndKey` | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 证书持久化 |
 | `TryLoadCertAndKeyFromDisk` | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 加载已有证书 |
 | `GetIndexedIP` | `staging/src/k8s.io/utils/net/parse.go` | 从 CIDR 获取指定索引 IP |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]

@@ -41,9 +41,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述
+title: 阿里云 ACK (Alibaba Cloud Container [[Service|Service]] for [[Kubernetes|Kubernetes]]) 概述
 description: '# 阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述'
 category: cloud-provider
 tags:
@@ -53,9 +54,9 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 last_updated: 2026-05
 difficulty: advanced
@@ -611,7 +612,7 @@ echo "Logs collected to: $LOG_DIR"
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
-- [[domain-07-platform-engineering/06-monitoring-alerting-system.md|06-monitoring-alerting-system]]
+- 06-monitoring-alerting-system
 - [[references/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[references/multi-cloud-terms|K8s 多云架构术语参考]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]

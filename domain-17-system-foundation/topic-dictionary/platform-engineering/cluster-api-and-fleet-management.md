@@ -34,13 +34,14 @@ prerequisites:
 - iac-basics
 - cilium-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Cluster API 与集群舰队管理
 
 ## 概述
 
-随着企业 Kubernetes 集群数量从个位数增长到数十甚至上百个，**集群舰队管理（Fleet Management）** 成为平台工程的核心挑战。**Cluster API（CAPI）** 是 Kubernetes 官方的声明式集群生命周期管理项目，它使用 Kubernetes 的 CRD 机制来创建、配置和管理其他 Kubernetes 集群，实现了"用 Kubernetes 管理 Kubernetes"的 Meta-Cluster 模式。
+随着企业 [[Kubernetes|Kubernetes]] 集群数量从个位数增长到数十甚至上百个，**集群舰队管理（Fleet Management）** 成为平台工程的核心挑战。**Cluster API（CAPI）** 是 Kubernetes 官方的声明式集群生命周期管理项目，它使用 Kubernetes 的 CRD 机制来创建、配置和管理其他 Kubernetes 集群，实现了"用 Kubernetes 管理 Kubernetes"的 Meta-Cluster 模式。
 
 ## 核心概念/原理
 
@@ -66,7 +67,7 @@ Cluster API 通过以下 CRD 抽象集群生命周期：
 - **Red Hat Advanced Cluster Management（ACM）**：基于 OpenShift 的企业级舰队管理
 - **Google Anthos**：多云/混合云统一控制平面
 - **Azure Fleet Manager**：Azure 原生的集群舰队管理
-- **Cluster Mesh（Cilium/Istio）**：跨集群的服务发现和流量管理
+- **Cluster Mesh（[[Cilium|Cilium]]/Istio）**：跨集群的服务发现和流量管理
 
 ### 4. 声明式集群生命周期
 
@@ -100,7 +101,7 @@ spec:
 | 声明式集群创建 | 通过 YAML 定义即可在任意云上创建 K8s 集群 | 基础设施即代码 |
 | 自动修复 | MachineHealthCheck 自动检测并替换故障节点 | 提升可用性 |
 | 滚动升级 | 控制平面和工作节点支持无中断滚动升级 | 简化版本管理 |
-| 多集群 GitOps | 通过 Argo CD/[[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]] 将应用同步到舰队中的所有集群 | 一致性交付 |
+| 多集群 GitOps | 通过 Argo [[entities/flux|Flux]] 将应用同步到舰队中的所有集群 | 一致性交付 |
 | 集群自动扩缩 | 根据负载自动调整工作节点数量 | 成本优化 |
 
 ### 集群分类策略

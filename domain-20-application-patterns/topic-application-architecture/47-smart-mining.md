@@ -1,4 +1,40 @@
 ---
+title: 智慧矿山架构设计 — 阿里云视角
+description: 'title: 智慧矿山架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- prometheus
+- opa
+- mysql
+- daemonset
+- operator
+- nvidia
+- rag
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 智慧矿山架构设计 — 阿里云视角 是什么
+- 如何 智慧矿山架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧矿山架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- mysql-basics
+- policy-basics
+created: "2026-05-23"
+---
+
 title: 智慧矿山架构设计
 description: '# 智慧矿山架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,10 +42,10 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - mysql
-- daemonset
+- [[DaemonSet|daemonset]]
 - operator
 - nvidia
 - rag
@@ -39,11 +75,6 @@ trigger_keywords:
 - 安全监测
 - 边缘计算
 - 无人驾驶
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- mysql-basics
-- policy-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-9-ai-ml
@@ -54,16 +85,25 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/60-v2x-autonomous-driving
 - domain-20-application-patterns/topic-application-architecture/73-smart-firefighting
 - domain-02-workloads-applications/topic-functions/05-iot-edge-computing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧矿山架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#智慧矿山` `#无人矿卡` `#安全监控` `#阿里云`
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [行业概述](#1-行业概述)
 2. [业务场景](#2-业务场景)
@@ -79,9 +119,9 @@ related_topics:
 
 ---
 
-## 1. 行业概述
+<!-- chunk: 1. 行业概述 -->## 1. 行业概述
 
-### 1.1 市场规模与趋势
+#<!-- chunk: 1.1 市场规模与趋势 -->## 1.1 市场规模与趋势
 
 智慧矿山通过 5G、AI、IoT、自动驾驶等技术实现安全、高效、绿色开采。中国有 4700+ 煤矿和数万座金属矿山，智慧矿山建设市场规模预计从 2024 年的 800 亿元增长到 2030 年的 2500 亿元。政策驱动力包括《关于加快煤矿智能化发展的指导意见》、《非煤矿山安全监管条例》等。无人矿卡、智能综采、AI 安全监测是三大核心方向。
 
@@ -93,7 +133,7 @@ related_topics:
 | 瓦斯监测延迟 | 5s | 2s | 0.5s |
 | 井下人员定位精度 | 1m | 0.3m | 0.1m |
 
-### 1.2 行业痛点
+#<!-- chunk: 1.2 行业痛点 -->## 1.2 行业痛点
 
 | 痛点 | 说明 | 数字化转型驱动 |
 |:---|:---|:---|
@@ -104,39 +144,39 @@ related_topics:
 | 监管严格 | 安全生产法规要求高 | 数据留痕 + 审计追踪 |
 | 人才短缺 | 矿工老龄化，年轻人不愿下井 | 自动化 + 远程操控 |
 
-### 1.3 数字化转型架构影响
+#<!-- chunk: 1.3 数字化转型架构影响 -->## 1.3 数字化转型架构影响
 
 智慧矿山架构需要覆盖井下层（综采/掘进/运输/通风）、露天层（无人矿卡/电铲/钻机/边坡）、监控中心（安全生产/调度指挥/设备管理/人员管理）和数据中台（地质/设备/安全/生产数据）。核心挑战是井下恶劣环境下的通信和计算，以及安全监测的零容忍。
 
 ---
 
-## 2. 业务场景
+<!-- chunk: 2. 业务场景 -->## 2. 业务场景
 
-### 2.1 露天矿无人驾驶运输
+#<!-- chunk: 2.1 露天矿无人驾驶运输 -->## 2.1 露天矿无人驾驶运输
 
 无人矿卡在露天矿区 24 小时自主运行，完成从电铲装车到破碎站卸载的全自动运输。系统需要高精地图、RTK 定位、多传感器融合感知（LiDAR/摄像头/毫米波雷达）、V2X 通信和中央调度。单车日运输量可提升 20%，人工成本降低 70%。
 
-### 2.2 智能综采工作面
+#<!-- chunk: 2.2 智能综采工作面 -->## 2.2 智能综采工作面
 
 采煤机、液压支架、刮板输送机三机协同自动化。根据地质模型自动调整采煤参数，支架自动跟机移架。系统需要综采工作面的全面感知、实时控制和远程监控能力。
 
-### 2.3 AI 安全监测预警
+#<!-- chunk: 2.3 AI 安全监测预警 -->## 2.3 AI 安全监测预警
 
 瓦斯浓度、顶板压力、水位、温度、CO 浓度等多参数实时监测。AI 模型分析历史数据和实时趋势，在事故发生前 30 分钟以上发出预警。支持分级告警和自动联动（瓦斯超限自动断电）。
 
-### 2.4 井下人员精确定位
+#<!-- chunk: 2.4 井下人员精确定位 -->## 2.4 井下人员精确定位
 
 基于 UWB + 5G 融合定位，实现井下人员厘米级精确定位。支持电子考勤、区域管控、紧急撤离引导和人员搜救定位。矿难发生时可快速定位被困人员。
 
-### 2.5 视频 AI 违章识别
+#<!-- chunk: 2.5 视频 AI 违章识别 -->## 2.5 视频 AI 违章识别
 
 在关键区域部署 AI 摄像头，自动识别未佩戴安全帽、违规进入危险区域、设备异常运转等违章行为，实时告警至调度中心。
 
 ---
 
-## 3. 架构设计
+<!-- chunk: 3. 架构设计 -->## 3. 架构设计
 
-### 3.1 智慧矿山全景架构
+#<!-- chunk: 3.1 智慧矿山全景架构 -->## 3.1 智慧矿山全景架构
 
 ```mermaid
 graph TB
@@ -191,7 +231,7 @@ graph TB
 
 ---
 
-## 4. 核心技术栈
+<!-- chunk: 4. 核心技术栈 -->## 4. 核心技术栈
 
 | Component | Purpose | Technology | License |
 |:---|:---|:---|:---|
@@ -211,9 +251,9 @@ graph TB
 
 ---
 
-## 5. Kubernetes 部署方案
+<!-- chunk: 5. Kubernetes 部署方案 -->## 5. Kubernetes 部署方案
 
-### 5.1 安全监测边缘 DaemonSet
+#<!-- chunk: 5.1 安全监测边缘 DaemonSet -->## 5.1 安全监测边缘 DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -303,7 +343,7 @@ spec:
             type: DirectoryOrCreate
 ```
 
-### 5.2 矿卡调度服务 Deployment
+#<!-- chunk: 5.2 矿卡调度服务 Deployment -->## 5.2 矿卡调度服务 Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -342,7 +382,7 @@ spec:
               cpu: "4000m"
 ```
 
-### 5.3 ConfigMap, Service 与 Secret
+#<!-- chunk: 5.3 ConfigMap, Service 与 Secret -->## 5.3 ConfigMap, Service 与 Secret
 
 ```yaml
 apiVersion: v1
@@ -401,9 +441,9 @@ stringData:
 
 ---
 
-## 6. 数据架构
+<!-- chunk: 6. 数据架构 -->## 6. 数据架构
 
-### 6.1 瓦斯监测预警数据流
+#<!-- chunk: 6.1 瓦斯监测预警数据流 -->## 6.1 瓦斯监测预警数据流
 
 ```mermaid
 flowchart TB
@@ -442,7 +482,7 @@ flowchart TB
     C3 --> A2 & A3 & A4
 ```
 
-### 6.2 数据流说明
+#<!-- chunk: 6.2 数据流说明 -->## 6.2 数据流说明
 
 - **安全数据流**: 传感器数据以 1Hz 采集，边缘网关实时判断是否超限，超限立即本地告警并联动
 - **定位数据流**: UWB 基站数据经边缘计算后写入 Lindorm，支持人员轨迹回放
@@ -451,9 +491,9 @@ flowchart TB
 
 ---
 
-## 7. AI/ML 组件
+<!-- chunk: 7. AI/ML 组件 -->## 7. AI/ML 组件
 
-### 7.1 核心模型
+#<!-- chunk: 7.1 核心模型 -->## 7.1 核心模型
 
 | 模型 | 用途 | 输入 | 输出 | 框架 |
 |:---|:---|:---|:---|:---|
@@ -466,9 +506,9 @@ flowchart TB
 
 ---
 
-## 8. 安全与合规
+<!-- chunk: 8. 安全与合规 -->## 8. 安全与合规
 
-### 8.1 行业法规与标准
+#<!-- chunk: 8.1 行业法规与标准 -->## 8.1 行业法规与标准
 
 | 法规/标准 | 适用范围 | 架构要求 |
 |:---|:---|:---|
@@ -479,7 +519,7 @@ flowchart TB
 | 矿山安全法 | 矿山安全法律要求 | 安全设施三同时 |
 | 金属非金属矿山安全规程 | 非煤矿山安全 | 安全监测系统 |
 
-### 8.2 安全架构要点
+#<!-- chunk: 8.2 安全架构要点 -->## 8.2 安全架构要点
 
 - **OT/IT 隔离**: 矿山控制网络与办公网络物理隔离
 - **本地优先**: 关键安全监测功能在边缘端独立运行，不依赖云端
@@ -489,7 +529,7 @@ flowchart TB
 
 ---
 
-## 9. 最佳实践
+<!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
 
 1. **边缘优先架构**: 安全监测和告警在边缘端完成，不依赖云端网络
 2. **本地缓存 72 小时**: 边缘设备本地缓存 72 小时数据，断网时不丢失
@@ -504,7 +544,7 @@ flowchart TB
 
 ---
 
-## 10. 反模式
+<!-- chunk: 10. 反模式 -->## 10. 反模式
 
 1. **安全监测依赖云端**: 所有关键安全判断依赖云端，网络故障时失去预警能力。应边缘端独立运行
 2. **单链路通信**: 井下仅有单一通信链路，故障即失联。应多链路冗余
@@ -514,7 +554,7 @@ flowchart TB
 
 ---
 
-## 11. 参考资源
+<!-- chunk: 11. 参考资源 -->## 11. 参考资源
 
 - [煤矿智能化建设指南](https://www.nea.gov.cn/)
 - [煤矿安全规程](https://www.mem.gov.cn/)
@@ -527,3 +567,27 @@ flowchart TB
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 45-smart-port-shipping
+- 46-satellite-internet
+- 48-vocational-edtech
+- 49-livestream-ecommerce

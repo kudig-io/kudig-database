@@ -28,13 +28,14 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # 容器生命周期钩子（Container Lifecycle Hooks）
 
 ## 概述
 
-类似于 Angular 等编程框架中的组件生命周期钩子，[[entities/kubernetes|kubernetes]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
+类似于 Angular 等编程框架中的组件生命周期钩子，[[entities/kubernetes|[[Kubernetes|kubernetes]]]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
 
 ## 核心概念/原理
 
@@ -73,7 +74,7 @@ Kubernetes 目前为容器暴露以下两种生命周期钩子：
 
 ### 钩子执行机制
 
-- `httpGet`、`tcpSocket`（已弃用）和 `sleep` 由 kubelet 进程直接执行
+- `httpGet`、`tcpSocket`（已弃用）和 `sleep` 由 [[kubelet|kubelet]] 进程直接执行
 - `exec` 在容器内部执行
 - `PostStart` 与容器 ENTRYPOINT 同时触发，因此通常不适合使用 HTTP 钩子，因为无法保证容器进程已完全启动
 - `PreStop` 钩子的执行与停止容器的信号**非异步**：钩子必须完成后才能发送 TERM 信号
@@ -316,8 +317,8 @@ kubectl delete pod <name> --grace-period=0 --force
 
 - [Pod 生命周期](pod-lifecycle.md) — 完整的 Pod 生命周期阶段和终止流程
 - [容器环境](container-environment.md) — 容器运行时的环境信息
-- [Disruptions](disruptions.md) — PDB 与优雅终止的配合
-- [Deployments](deployments.md) — 滚动更新中的 PreStop 行为
+- [[domain-17-system-foundation/topic-dictionary/workloads/disruptions.md|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
+- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
 
 ## 参考链接
 

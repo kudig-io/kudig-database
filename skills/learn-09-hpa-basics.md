@@ -25,6 +25,7 @@ trigger_keywords:
 - 自动伸缩
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 第九课：HPA - 自动伸缩
@@ -374,12 +375,12 @@ kubectl edit hpa <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../09-troubleshooting/09-common-problems.md) — 常见问题排查
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/07-hpa-scaling-failure.md) — HPA 故障 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## Related
 
-- [[skills/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：StatefulSet - 有状态应用管理
+- [[skills/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
 - [[skills/learn-root.md|learn-root]] — Kubernetes 培训：Root
 - [[skills/learn-11-job-cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill

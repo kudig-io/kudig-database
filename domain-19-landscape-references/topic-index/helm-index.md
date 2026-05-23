@@ -33,24 +33,25 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - gitops-basics
+created: "2026-05-23"
 ---
 
-# Helm 全局索引
+# [[Helm|Helm]] 全局索引
 
 > 全局索引：按关键字 **Helm** 聚合项目内所有相关内容。
 
 ## 架构基础
 
-- [[domain-19-landscape-references/graduated/helm/helm|Helm CNCF Landscape]] ← 核心文档
-- [[domain-15-specialized-tech/06-helm-charts-management|Helm Charts 管理]]
-- [[domain-15-specialized-tech/07-helm-advanced-operations|Helm 高级操作]]
+- Helm CNCF Landscape ← 核心文档
+- Helm Charts 管理
+- Helm 高级操作
 
 ## 核心文档
 
-- [[domain-17-system-foundation/topic-cheat-sheet/helm|Helm 速查卡]] ← 命令速查
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|Helm Chart 故障排查]] ← 排障文档
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta|Helm FTA 故障树]]
-- [[domain-18-manifests-patterns/36-ecosystem-kustomize-helm-argocd|Kustomize/Helm/ArgoCD 对比]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm|[[Helm 速查卡|Helm 速查卡]]]] ← 命令速查
+- troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|Helm Chart 故障排查]] ← 排障文档
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta|[[[[Helm 发布异常故障树分析|Helm 发布异常故障树分析]]|Helm FTA]] 故障树]]
+- Kustomize/Helm/ArgoCD 对比
 
 ## 结构化故障排查 - 集群运维
 
@@ -64,32 +65,32 @@ prerequisites:
 
 ## 包管理器生态
 
-- [[domain-19-landscape-references/graduated/argo/argo|ArgoCD GitOps]]
-- [[domain-19-landscape-references/graduated/flux/flux|Flux GitOps]]
-- [[domain-19-landscape-references/sandbox/kustomize/kustomize|Kustomize]]
+- ArgoCD GitOps
+- Flux GitOps
+- Kustomize
 
 ## 生产运维
 
-- [[domain-11-production-operations/10-gitops-pipeline-practices|GitOps 流水线实践]]
-- [[domain-11-production-operations/11-infrastructure-as-code|基础设施即代码]]
+- GitOps 流水线实践
+- 基础设施即代码
 
 ## 云厂商集成
 
-- [[domain-12-cloud-providers/04-alicloud-ack/|阿里云 ACK Helm]]
-- [[domain-12-cloud-providers/01-aws-eks/|AWS EKS Helm]]
+- 阿里云 ACK Helm
+- AWS EKS Helm
 
 ## 学习培训
 
-- [[domain-11-production-operations/topic-learn/inner-training/|Day 30: Helm 管理]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery|GitOps 与持续交付]]
+- Day 30: Helm 管理
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/gitops-and-continuous-delivery|[[GitOps 与持续交付|GitOps 与持续交付]]]]
 
 ## CNCF 生态
 
-- [[domain-19-landscape-references/graduated/kubernetes/kubernetes|Kubernetes]]
-- [[domain-19-landscape-references/graduated/argo/argo|Argo]]
-- [[domain-19-landscape-references/graduated/flux/flux|Flux]]
+- kubernetes/kubernetes|Kubernetes]]
+- Argo
+- Flux
 
 ## 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/|Helm 术语]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator 模式]]
+- Helm 术语
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|[[Operator 模式|Operator 模式]]]]

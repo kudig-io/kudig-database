@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - kafka-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 # CDC 变更数据捕获
@@ -58,7 +59,7 @@ CDC 三种实现方式:
 └──────────┘     └─────────────┘     └──────────┘
 ```
 
-## Kubernetes 部署
+## [[Kubernetes|Kubernetes]] 部署
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2

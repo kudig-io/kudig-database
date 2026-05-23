@@ -1,5 +1,5 @@
 ---
-title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation (skills)
 description: '| S5 | 新节点未自动部署 DaemonSet Pod | 新节点加入后检查 | 0.90 | 节点 NotReady → SKILL-NODE-001 |'
 category: skills
 tags:
@@ -29,9 +29,10 @@ trigger_keywords:
 - Remediation
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+# [[DaemonSet|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ### 症状识别
 
@@ -41,7 +42,7 @@ prerequisites:
 
 | # | 症状描述 | 检测方法 | 置信度 | 排除条件 |
 |---|---------|---------|--------|---------|
-| S1 | 某些节点缺少 DaemonSet Pod | `kubectl get pods -n <ns> -l <selector> -o wide` | 0.95 | 节点被手动排除 → 检查操作记录 |
+| S1 | 某些节点缺少 DaemonSet Pod | `kubectl get [[Pods|pods]] -n <ns> -l <selector> -o wide` | 0.95 | 节点被手动排除 → 检查操作记录 |
 | S2 | DaemonSet DESIRED > CURRENT | `kubectl get ds -n <ns>` | 0.95 | 节点正在加入/退出 → 等待完成 |
 | S3 | DaemonSet Pod CrashLoopBackOff | `kubectl get pods -n <ns> -l <selector>` | 0.90 | 应用自身 bug |
 | S4 | DaemonSet 更新卡住 | `kubectl rollout status ds/<name>` | 0.90 | 应用启动慢 |
@@ -166,8 +167,8 @@ prerequisites:
 
 ## Related
 
-- [[README]] — FTA 故障树清单索引
-- [[skills/ts-networking.md|ts-networking]] — 网络故障排查
+- [[references/kudig-metadata-index.md|README]]]] — FTA 故障树清单索引
+- networking.md|ts-networking]] — 网络故障排查
 - [[flannel-fta]] — Flannel 网络异常故障树分析
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

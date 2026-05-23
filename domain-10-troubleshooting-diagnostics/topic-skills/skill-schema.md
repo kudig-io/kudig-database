@@ -29,9 +29,10 @@ prerequisites:
 skill_id: SKILL-SKILL_SCHEMA-001
 skill_name: Skill Schema (历史参考)
 version: 1.0.0
+created: "2026-05-23"
 ---
 
-# Skill Schema (历史参考)
+# [[SKILL|Skill]] Schema (历史参考)
 
 > **⚠️ 已废弃**: 本文件内容已合并至 `templates/skill-template.md`
 > **新模板位置**: [../templates/skill-template.md](../templates/skill-template.md)
@@ -51,7 +52,7 @@ version: 1.0.0
 
 ## 快速导航
 
-- [templates/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md](../templates/README.md) — 模板体系索引
+- [[domain-04-storage-data/README|[[KUDIG Database]]].md](../templates/README.md) — 模板体系索引
 - [templates/skill-template.md](../templates/skill-template.md) — Skill 文档标准模板（现行版本）
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../) — Skill 文档实际存放目录
 

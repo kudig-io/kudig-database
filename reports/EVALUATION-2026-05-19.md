@@ -1,5 +1,5 @@
 ---
-title: kudig-database 双维度评估报告
+title: kudig-database 双维度评估报告 (reports)
 description: '| 专题 | 19 个 topic-\* 目录 |'
 category: general
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 双维度评估报告

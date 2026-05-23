@@ -26,6 +26,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # domain-24-infrastructure-as-code MOC
@@ -56,13 +57,13 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/00-open-source-projects-index.md|Domain-24 基础设施即代码 — 开源项目索引]] |  | iac, terraform |  |
-| 2 | [[domain-08-release-change-management/01-terraform-enterprise-iac.md|Terraform企业级基础设施即代码实践]] |  | iac, terraform |  |
-| 3 | [[domain-08-release-change-management/02-ansible-enterprise-automation.md|Ansible企业级自动化运维深度实践]] |  | iac, terraform |  |
-| 4 | [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|Pulumi Enterprise Infrastructure as Code Platform]] |  | iac, terraform |  |
-| 5 | [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|Azure Resource Manager (ARM) Enterprise 深度实践]] |  | iac, terraform |  |
-| 6 | [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Infrastructure Orchestration 深度实践]] |  | iac, terraform |  |
-| 7 | [[domain-08-release-change-management/99-crossplane-platform-guide.md|Crossplane 平台工程实践指南]] |  | iac, terraform, guide |  |
+| 1 | Domain-24 基础设施即代码 — 开源项目索引 |  | iac, terraform |  |
+| 2 | Terraform企业级基础设施即代码实践 |  | iac, terraform |  |
+| 3 | Ansible企业级自动化运维深度实践 |  | iac, terraform |  |
+| 4 | Pulumi Enterprise Infrastructure as Code Platform |  | iac, terraform |  |
+| 5 | Azure Resource Manager (ARM) Enterprise 深度实践 |  | iac, terraform |  |
+| 6 | Crossplane Enterprise Infrastructure Orchestration 深度实践 |  | iac, terraform |  |
+| 7 | Crossplane 平台工程实践指南 |  | iac, terraform, guide |  |
 
 ---
 
@@ -95,9 +96,9 @@ graph TD
 
 | 入口 | 说明 |
 |---|---|
-| [[../domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|FTA 故障树]] | domain-24-infrastructure-as-code 相关故障树分析 |
-| [[../domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|Skills 技能]] | domain-24-infrastructure-as-code 相关操作技能 |
-| [[../domain-19-landscape-references/topic-index/README.md|深度研究入口]] | 语料库索引与向量检索 |
+| FTA 故障树 | domain-24-infrastructure-as-code 相关故障树分析 |
+| Skills 技能 | domain-24-infrastructure-as-code 相关操作技能 |
+| 深度研究入口 | 语料库索引与向量检索 |
 
 ---
 

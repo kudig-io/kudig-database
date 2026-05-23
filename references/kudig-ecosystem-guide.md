@@ -36,6 +36,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 # KUDIG 开源生态指南

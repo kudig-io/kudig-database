@@ -1,5 +1,5 @@
 ---
-title: StatefulSet 故障排查指南
+title: StatefulSet 故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: StatefulSet 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,19 +41,20 @@ prerequisites:
 - troubleshooting-methodology
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
-title: StatefulSet 故障排查指南
+title: [[StatefulSet|StatefulSet]] 故障排查指南
 description: '# StatefulSet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- coredns
+- [[CoreDNS|coredns]]
 - redis
 - mysql
 - statefulset
@@ -791,13 +792,13 @@ kubectl scale sts <name> --replicas=<n>
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [PV/PVC 故障排查](../04-storage/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]].md)
-- [DNS 故障排查](../03-networking/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md)
-- [调度故障排查](../01-control-plane/[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
+- [PV/PVC 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|01-pv-pvc-troubleshooting]].md)
+- [DNS 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting|02-dns-troubleshooting]].md)
+- [调度故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting|03-scheduler-troubleshooting]].md)
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

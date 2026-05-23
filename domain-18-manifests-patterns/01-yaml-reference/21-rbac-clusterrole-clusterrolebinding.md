@@ -48,13 +48,14 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md
   label: '故障树: rbac'
+created: "2026-05-23"
 ---
 
 # 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
 
 <!-- chunk: 概述 -->## 概述
 
-ClusterRole 和 ClusterRoleBinding 是 Kubernetes RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。与 Role/RoleBinding 不同,ClusterRole 可以授权访问集群范围的资源(如 Node、PersistentVolume)和非资源 URL(如 /healthz)。本文档覆盖 ClusterRole、ClusterRoleBinding、内建角色、权限审查 API 的完整配置。
+ClusterRole 和 ClusterRoleBinding 是 [[Kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。与 Role/RoleBinding 不同,ClusterRole 可以授权访问集群范围的资源(如 Node、PersistentVolume)和非资源 URL(如 /healthz)。本文档覆盖 ClusterRole、ClusterRoleBinding、内建角色、权限审查 API 的完整配置。
 
 **适用版本**: Kubernetes v1.25 - v1.32  
 **更新时间**: 2026-02
@@ -2066,25 +2067,25 @@ EOF
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-18-manifests-patterns/MOC.md|domain-32-yaml-manifests MOC]]
+- domain-32-yaml-manifests KUDIG Database — Global MOC
 - [[domain-18-manifests-patterns/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[domain-18-manifests-patterns/00-open-source-projects-index.md|Domain-32 YAML 清单 — 开源项目索引]]
-- [[domain-18-manifests-patterns/01-yaml-syntax-resource-conventions.md|01 - YAML 语法基础与 Kubernetes 资源通用规范]]
-- [[domain-18-manifests-patterns/02-namespace-resourcequota-limitrange.md|02 - Namespace / ResourceQuota / LimitRange YAML 配置参考]]
-- [[domain-18-manifests-patterns/03-pod-specification-complete.md|03 - Pod 完整规格说明书]]
-- [[domain-18-manifests-patterns/04-deployment-replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/05-statefulset-reference.md|05 - StatefulSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/06-daemonset-reference.md|06 - DaemonSet YAML 配置参考]]
-- [[domain-18-manifests-patterns/07-job-cronjob-reference.md|07 - Job / CronJob YAML 配置参考]]
-- [[domain-18-manifests-patterns/08-service-all-types.md|08 - Service 全类型 YAML 配置参考]]
-- [[domain-18-manifests-patterns/09-endpoints-endpointslice.md|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- index.md|Domain-32 YAML 清单 — 开源项目索引]]
+- 01 - YAML 语法基础与 Kubernetes 资源通用规范
+- 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
+- 03 - Pod 完整规格说明书
+- replicaset.md|04 - Deployment / ReplicaSet YAML 配置参考]]
+- 05 - StatefulSet YAML 配置参考
+- 06 - DaemonSet YAML 配置参考
+- 07 - Job / CronJob YAML 配置参考
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
 
 ## See Also
 
-- [[domain-18-manifests-patterns/19-serviceaccount-token.md|19-serviceaccount-token]]
-- [[domain-18-manifests-patterns/20-rbac-role-rolebinding.md|20-rbac-role-rolebinding]]
-- [[domain-18-manifests-patterns/22-networkpolicy-reference.md|22-networkpolicy-reference]]
-- [[domain-18-manifests-patterns/23-pod-security-standards.md|23-pod-security-standards]]
+- 19-serviceaccount-token
+- 20-rbac-role-rolebinding
+- 22-networkpolicy-reference
+- 23-pod-security-standards
 
 ## Related
 

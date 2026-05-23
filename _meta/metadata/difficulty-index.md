@@ -1,35 +1,5 @@
 ---
-title: 难度分级索引 (Difficulty Index)
-description: 'description: ''| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'''
-category: general
-tags:
-- meta
-- docker
-- ingress
-- gateway
-- operator
-- ebpf
-- llm
-- rag
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- 难度分级索引 (Difficulty Index) 是什么
-- 如何 难度分级索引 (Difficulty Index)
-trigger_keywords:
-- 难度分级索引
-- Difficulty
-- Index
-prerequisites:
-- kubectl-basics
-- ebpf-basics
----
-
-title: 难度分级索引 (Difficulty Index)
+title: 难度分级索引 (Difficulty Index) [metadata]
 description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
 category: general
 tags:
@@ -54,19 +24,12 @@ trigger_keywords:
 - 难度分级索引
 - Difficulty
 - Index
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-sources: []
-created: '2026-05-21'
-updated: '2026-05-21'
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+created: "2026-05-23"
 ---
+
 # 难度分级索引 (Difficulty Index)
 
 > 按难度分级的文档索引，帮助读者选择合适的学习内容
@@ -88,7 +51,7 @@ updated: '2026-05-21'
 
 ### 推荐起步
 - domain-11-production-operations/topic-learn/: 1 个月学习计划（系统化路径）
-- domain-17-system-foundation/topic-cheat-sheet/k8s.md: Kubernetes 速查卡
+- domain-17-system-foundation/topic-cheat-sheet/k8s.md: [[entities/kubernetes|kubernetes]] 速查卡
 - domain-08-release-change-management/topic-deployment/01: 本地 Demo 部署
 - domain-13-container-runtime/01: Docker 架构概述
 - domain-17-system-foundation/09: Linux 运维基础
@@ -150,11 +113,3 @@ updated: '2026-05-21'
 ---
 
 > 本索引为手动维护的参考分级，将随 Frontmatter 体系完善后自动化生成
-
----
-
-## Obsidian 相关文档
-
-- [[metadata/knowledge-map.md|知识图谱 (Knowledge Map)]]
-- [[metadata/README.md|元数据索引 (Metadata)]]
-- [[metadata/tags-index.md|标签索引 (Tags Index)]]

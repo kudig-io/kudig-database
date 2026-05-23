@@ -40,6 +40,7 @@ prerequisites:
 - gitops-basics
 - tls-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # Domain-33: Kubernetes Events 全域事件大全

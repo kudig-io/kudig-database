@@ -52,15 +52,15 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-11-production-operations/topic-publish/01-plan-ai-infra-series.md|方案一：AI Infrastructure 全域知识体系系列 —— 发布方案]] |  | publish |  |
-| 2 | [[domain-11-production-operations/topic-publish/02-plan-k8s-ack-series.md|方案二：Kubernetes 生产运维全域深度系列（ACK 工单视角）—— 发布方案]] |  | publish |  |
-| 3 | [[domain-11-production-operations/topic-publish/03-combined-publishing-roadmap.md|组合发布路线图：6 个月技术影响力建设计划]] |  | publish |  |
-| 4 | [[domain-11-production-operations/topic-publish/04-content-creation-guidelines.md|内容创作规范指南]] |  | publish, guide |  |
-| 5 | [[domain-11-production-operations/topic-publish/05-distribution-channels-strategy.md|分发渠道策略：多平台运营方案]] |  | publish |  |
-| 6 | [[domain-11-production-operations/topic-publish/video-scripts/QUICK-REFERENCE.md|数字人视频快速参考]] |  | reference |  |
-| 7 | [[domain-11-production-operations/topic-publish/video-scripts/VIDEO-OUTPUT-GUIDE.md|数字人视频输出建议]] |  | guide |  |
-| 8 | [[domain-11-production-operations/topic-publish/video-scripts/node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — 数字人播报脚本]] |  |  |  |
-| 9 | [[domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本]] |  |  |  |
+| 1 | 方案一：AI Infrastructure 全域知识体系系列 —— 发布方案 |  | publish |  |
+| 2 | 方案二：Kubernetes 生产运维全域深度系列（ACK 工单视角）—— 发布方案 |  | publish |  |
+| 3 | 组合发布路线图：6 个月技术影响力建设计划 |  | publish |  |
+| 4 | 内容创作规范指南 |  | publish, guide |  |
+| 5 | 分发渠道策略：多平台运营方案 |  | publish |  |
+| 6 | 数字人视频快速参考 |  | reference |  |
+| 7 | 数字人视频输出建议 |  | guide |  |
+| 8 | 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — 数字人播报脚本 |  |  |  |
+| 9 | Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 |  |  |  |
 
 ---
 

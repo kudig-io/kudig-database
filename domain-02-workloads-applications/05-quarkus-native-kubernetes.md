@@ -1,45 +1,5 @@
 ---
-title: Quarkus Native 编译与 Kubernetes 部署指南
-description: 'title: Quarkus Native 编译与 Kubernetes 部署指南'
-category: general
-tags:
-- java
-- k8s
-- prometheus
-- argocd
-- docker
-- postgresql
-- kafka
-- hpa
-- operator
-- serverless
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 45min
-intent_queries:
-- Quarkus Native 编译与 Kubernetes 部署指南 是什么
-- 如何 Quarkus Native 编译与 Kubernetes 部署指南
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Quarkus
-- Native
-- 编译与
-- Kubernetes
-- 部署指南
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- gitops-basics
-- kafka-basics
----
-
-title: Quarkus Native 编译与 Kubernetes 部署指南
+title: Quarkus Native 编译与 Kubernetes 部署指南 (domain-02-workloads-applications)
 description: '# Quarkus Native 编译与 Kubernetes 部署指南'
 category: java-kubernetes
 tags:
@@ -71,29 +31,26 @@ trigger_keywords:
 - 部署指南
 - java
 - kubernetes
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- prometheus-basics
+- kafka-basics
+created: "2026-05-23"
 ---
 
-# Quarkus Native 编译与 Kubernetes 部署指南
+# Quarkus Native 编译与 [[Kubernetes|Kubernetes]] 部署指南
 
 > **适用版本**: JDK 17+ / Quarkus 3.18+ / GraalVM for JDK 21+ / Mandrel 21+ / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 Quarkus 是 Red Hat 主导的云原生 Java 框架，核心理念是"容器优先"（Container First）。通过 GraalVM Native Image 编译或 Mandrel 构建工具，Quarkus 可实现 **10-50ms 启动时间**和 **30-80MB RSS 内存**——相比传统 Spring Boot 的 2-5s 启动和 200-500MB 内存，有一个数量级的提升。
 
-#<!-- chunk: 1.1 为什么选择 Quarkus -->## 1.1 为什么选择 Quarkus
+### 1.1 为什么选择 Quarkus
 
 | 特性 | Spring Boot JVM | Quarkus JVM | Quarkus Native |
 |------|----------------|-------------|----------------|
@@ -104,9 +61,9 @@ Quarkus 是 Red Hat 主导的云原生 Java 框架，核心理念是"容器优�
 | 镜像大小 | 300-500MB | 200-350MB | 40-80MB |
 | GC 暂停 P99 | 50-200ms | 20-80ms | 1-5ms |
 
-这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（Knative）、微服务和事件驱动架构。
+这种特性使 Quarkus 特别适合 Kubernetes 环境中的 Serverless（[[domain-19-landscape-references/01-cncf-landscape/graduated/knative/knative|[[Knative|Knative]]]]）、微服务和事件驱动架构。
 
-#<!-- chunk: 1.2 Quarkus 架构核心理念 -->## 1.2 Quarkus 架构核心理念
+### 1.2 Quarkus 架构核心理念
 
 Quarkus 的性能优势来自三个核心设计：
 
@@ -138,9 +95,9 @@ graph TB
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 Quarkus vs Spring Boot 启动流程对比 -->## 2.1 Quarkus vs Spring Boot 启动流程对比
+### 2.1 Quarkus vs Spring Boot 启动流程对比
 
 ```mermaid
 graph LR
@@ -162,7 +119,7 @@ graph LR
     style Q_READY fill:#22c55e,color:#fff
 ```
 
-#<!-- chunk: 2.2 内存模型深度对比 -->## 2.2 内存模型深度对比
+### 2.2 内存模型深度对比
 
 ```
 Spring Boot JVM 模式 (RSS ~300MB):
@@ -184,7 +141,7 @@ Quarkus Native (RSS ~50MB):
   无 JVM Internal（无 JVM 运行时）
 ```
 
-#<!-- chunk: 2.3 Quarkus 扩展生态架构 -->## 2.3 Quarkus 扩展生态架构
+### 2.3 Quarkus 扩展生态架构
 
 ```mermaid
 graph TB
@@ -215,9 +172,9 @@ graph TB
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 完整项目 pom.xml -->## 3.1 完整项目 pom.xml
+### 3.1 完整项目 pom.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -387,7 +344,7 @@ graph TB
 </project>
 ```
 
-#<!-- chunk: 3.2 完整 application.yml 配置 -->## 3.2 完整 application.yml 配置
+### 3.2 完整 application.yml 配置
 
 ```yaml
 quarkus:
@@ -503,7 +460,7 @@ app:
     max-size: 1000
 ```
 
-#<!-- chunk: 3.3 完整 JPA Entity 与 Panache Repository -->## 3.3 完整 JPA Entity 与 Panache Repository
+### 3.3 完整 JPA Entity 与 Panache Repository
 
 ```java
 package com.example.entity;
@@ -642,7 +599,7 @@ public class ProductRepository implements PanacheRepository<Product> {
 }
 ```
 
-#<!-- chunk: 3.4 完整 REST 资源类 -->## 3.4 完整 REST 资源类
+### 3.4 完整 REST 资源类
 
 ```java
 package com.example.resource;
@@ -803,7 +760,7 @@ public class ProductResource {
 }
 ```
 
-#<!-- chunk: 3.5 SmallRye Health 自定义检查 -->## 3.5 SmallRye Health 自定义检查
+### 3.5 SmallRye Health 自定义检查
 
 ```java
 package com.example.health;
@@ -890,7 +847,7 @@ public class ReactiveHealthCheck implements AsyncHealthCheck {
 }
 ```
 
-#<!-- chunk: 3.6 异常处理与 CORS 配置 -->## 3.6 异常处理与 CORS 配置
+### 3.6 异常处理与 CORS 配置
 
 ```java
 package com.example.config;
@@ -1010,7 +967,7 @@ public class RequestTracingFilter implements ContainerRequestFilter, ContainerRe
 }
 ```
 
-#<!-- chunk: 3.7 Native Image 构建方式 -->## 3.7 Native Image 构建方式
+### 3.7 Native Image 构建方式
 
 ```bash
 # ===== 方式一: 本地构建 (需要 GraalVM) =====
@@ -1046,7 +1003,7 @@ java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/
 # 运行完整测试套件覆盖所有代码路径
 ```
 
-#<!-- chunk: 3.8 生产级 Dockerfile -->## 3.8 生产级 Dockerfile
+### 3.8 生产级 Dockerfile
 
 Native Image Dockerfile（生产推荐）:
 
@@ -1089,7 +1046,7 @@ USER nonroot
 ENTRYPOINT ["./application", "-Xmx64m"]
 ```
 
-#<!-- chunk: 3.9 Kubernetes Deployment (Native) -->## 3.9 Kubernetes Deployment (Native)
+### 3.9 Kubernetes Deployment (Native)
 
 ```yaml
 apiVersion: apps/v1
@@ -1239,7 +1196,7 @@ spec:
               cpu: "500m"
 ```
 
-KEDA 自定义伸缩（基于 Kafka 消费延迟）:
+[[KEDA|KEDA]] 自定义伸缩（基于 Kafka 消费延迟）:
 
 ```yaml
 apiVersion: keda.sh/v1alpha1
@@ -1263,9 +1220,9 @@ spec:
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 Dev Services 自动化测试 -->## 4.1 Dev Services 自动化测试
+### 4.1 Dev Services 自动化测试
 
 Quarkus Dev Services 会在测试启动时自动拉起 PostgreSQL、Kafka 等容器，无需手动配置:
 
@@ -1399,7 +1356,7 @@ class NativeProductResourceIT {
 }
 ```
 
-#<!-- chunk: 4.2 性能基准对比 -->## 4.2 性能基准对比
+### 4.2 性能基准对比
 
 | 指标 | Spring Boot JVM | Quarkus JVM | Quarkus Native | 提升 |
 |------|----------------|-------------|----------------|------|
@@ -1415,7 +1372,7 @@ class NativeProductResourceIT {
 | **冷启动(Knative)** | 8-12s | 3-5s | 80-200ms | 60x |
 | **Pod 密度(8GB节点)** | 8-12 | 20-30 | 80-120 | 10x |
 
-#<!-- chunk: 4.3 Native Image 限制与应对方案 -->## 4.3 Native Image 限制与应对方案
+### 4.3 Native Image 限制与应对方案
 
 | 限制 | 影响 | 应对方案 |
 |------|------|---------|
@@ -1461,7 +1418,7 @@ public class ReflectionConfig {
 }
 ```
 
-#<!-- chunk: 4.4 GraalVM Reachability Metadata -->## 4.4 GraalVM Reachability Metadata
+### 4.4 GraalVM Reachability Metadata
 
 Quarkus 3.x 自动集成 GraalVM Reachability Metadata Repository，大部分第三方库无需手动配置。对于不在 repository 中的库，可通过 Tracing Agent 自动生成 metadata:
 
@@ -1477,9 +1434,9 @@ java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/
 
 ---
 
-<!-- chunk: 五、性能调优 -->## 五、性能调优
+## 五、性能调优
 
-#<!-- chunk: 5.1 Native Image GC 策略 -->## 5.1 Native Image GC 策略
+### 5.1 Native Image GC 策略
 
 Native Image 支持三种 GC：
 
@@ -1507,7 +1464,7 @@ Native Image 支持三种 GC：
   -XX:StartFlightRecording=duration=60s,filename=app.jfr,settings=profile
 ```
 
-#<!-- chunk: 5.2 JVM 模式调优 -->## 5.2 JVM 模式调优
+### 5.2 JVM 模式调优
 
 ```bash
 # 推荐生产 JVM 参数
@@ -1522,7 +1479,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
   -Xlog:gc*:file=/tmp/gc.log:time,uptime,level,tags"
 ```
 
-#<!-- chunk: 5.3 内存调优建议 -->## 5.3 内存调优建议
+### 5.3 内存调优建议
 
 | 场景 | 推荐 -Xmx | 推荐 GC | K8s Memory Limit |
 |------|----------|---------|-----------------|
@@ -1534,9 +1491,9 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 ---
 
-<!-- chunk: 六、故障排查 -->## 六、故障排查
+## 六、故障排查
 
-#<!-- chunk: 6.1 常见问题速查表 -->## 6.1 常见问题速查表
+### 6.1 常见问题速查表
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |------|---------|---------|---------|
@@ -1554,7 +1511,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 | Jackson 序列化失败 | DTO 未注册反射 | 查看 `UnrecognizedPropertyException` | `@RegisterForReflection` 注册 DTO |
 | OIDC 认证失败 | Native 模式下 SSL 问题 | 查看 SSL handshake 错误 | 添加 `--enable-url-protocols=https` |
 
-#<!-- chunk: 6.2 常见构建问题排查命令 -->## 6.2 常见构建问题排查命令
+### 6.2 常见构建问题排查命令
 
 ```bash
 # 查看 native image 详细构建日志
@@ -1604,7 +1561,7 @@ curl -sf -X DELETE http://localhost:8080/api/v1/products/$ID \
 
 ---
 
-<!-- chunk: 七、参考资源 -->## 七、参考资源
+## 七、参考资源
 
 - [Quarkus 官方文档](https://quarkus.io/guides/)
 - [Quarkus Native Image 指南](https://quarkus.io/guides/building-native-image)
@@ -1618,27 +1575,3 @@ curl -sf -X DELETE http://localhost:8080/api/v1/products/$ID \
 - [Quarkus Panache ORM](https://quarkus.io/guides/hibernate-orm-panache)
 - [Quarkus Security OIDC](https://quarkus.io/guides/security-oidc-bearer-token-authentication)
 - [Quarkus Cache](https://quarkus.io/guides/cache)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[domain-java-kubernetes/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]]
-- [[domain-java-kubernetes/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]]
-- [[domain-java-kubernetes/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]]
-- [[domain-java-kubernetes/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]]
-
-## Related
-
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-
-## See Also
-
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]

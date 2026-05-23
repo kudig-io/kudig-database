@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - gpu-ml-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,7 +40,7 @@ title: Day 16: Node 节点进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] node labels management
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] node labels management
   - Node taint toleration mechanism
   - Node maintenance cordon drain uncordon
   - Kubernetes node scheduling constraints

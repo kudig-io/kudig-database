@@ -30,13 +30,14 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Defense-in-Depth Security
 
 ## Security Layers
 
-Kubernetes security follows a defense-in-depth model across four layers:
+[[Kubernetes|Kubernetes]] security follows a defense-in-depth model across four layers:
 
 ### Layer 1: Cluster Access Control
 
@@ -49,8 +50,8 @@ Kubernetes security follows a defense-in-depth model across four layers:
 **Authorization** controls access via:
 - **RBAC** (Role-Based Access Control): ClusterRole/Role + ClusterRoleBinding/RoleBinding
 - **ABAC** (Attribute-Based): Legacy, rarely used
-- **Node Authorization**: Restricted kubelet permissions
-- **Webhook Authorization**: External authorization service
+- **Node Authorization**: Restricted [[kubelet|kubelet]] permissions
+- **Webhook Authorization**: External authorization [[Service|service]]
 
 **Admission Control** intercepts requests before persistence:
 - **Mutating**: Modify requests (e.g., inject sidecar, set defaults)

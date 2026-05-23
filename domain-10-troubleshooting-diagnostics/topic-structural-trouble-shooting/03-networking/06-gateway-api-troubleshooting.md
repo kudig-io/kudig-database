@@ -1,5 +1,5 @@
 ---
-title: Gateway API 深度排查与下一代流量治理指南
+title: Gateway API 深度排查与下一代流量治理指南 [topic-structural-trouble-shooting]
 description: 'title: Gateway API 深度排查与下一代流量治理指南'
 category: structural-troubleshooting
 tags:
@@ -40,6 +40,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - service-mesh-basics
+created: "2026-05-23"
 ---
 
 title: Gateway API 深度排查与下一代流量治理指南
@@ -49,8 +50,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- envoy
-- ingress
+- [[Envoy|envoy]]
+- [[Ingress|ingress]]
 - gateway
 - crd
 last_updated: 2026-05
@@ -278,8 +279,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]

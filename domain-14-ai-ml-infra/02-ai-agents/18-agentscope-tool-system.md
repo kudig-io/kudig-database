@@ -1,5 +1,5 @@
 ---
-title: AgentScope 工具系统与 MCP 集成
+title: AgentScope 工具系统与 MCP 集成 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,'
 category: general
 tags:
@@ -31,11 +31,12 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: AgentScope 工具系统与 MCP 集成
 description: '**文档类型**: 工具开发专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Toolkit,
-  工具注册, MCP, Model Context Protocol, Function Calling, 并行工具调用, Agent Skill, Meta Tool,
+  工具注册, MCP, Model Context Protocol, Function Calling, 并行工具调用, Agent [[SKILL|Skill]], Meta Tool,
   自定义工具'
 category: ai-agent
 tags:
@@ -44,7 +45,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- prometheus
+- [[Prometheus|prometheus]]
 - postgresql
 last_updated: 2026-05
 difficulty: advanced
@@ -347,7 +348,7 @@ toolkit.register_tool_function(write_text_file)
 # Output: 命令执行结果
 ```
 
-> **安全警告**：在生产环境中，代码执行工具应在**沙箱**中运行。AgentScope Runtime 提供了安全沙箱环境，详见 [22 - 生产部署](./[[domain-14-ai-ml-infra/22-agentscope-production-deployment.md|22-agentscope-production-deployment]].md)。
+> **安全警告**：在生产环境中，代码执行工具应在**沙箱**中运行。AgentScope Runtime 提供了安全沙箱环境，详见 [22 - 生产部署](./deployment.md|22-agentscope-production-deployment]].md)。
 
 ---
 
@@ -996,10 +997,10 @@ def query_prometheus_metric(
 
 | 文档 | 关联内容 |
 |------|---------|
-| [17 - 核心概念](./[[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]].md) | Tool 在核心抽象中的位置 |
-| [19 - 记忆管理](./[[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]].md) | 工具输出的记忆存储与上下文管理 |
+| [17 - 核心概念](./17-agentscope-core-concepts.md) | Tool 在核心抽象中的位置 |
+| [19 - 记忆管理](./19-agentscope-memory-context.md) | 工具输出的记忆存储与上下文管理 |
 | [22 - 生产部署](./22-agentscope-production-deployment.md) | Sandbox 安全执行环境 |
-| [05 - Tool Use & Function Calling](./[[domain-14-ai-ml-infra/05-tool-use-function-calling.md|05-tool-use-function-calling]].md) | 通用工具调用设计规范 |
+| [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | 通用工具调用设计规范 |
 
 ---
 
@@ -1009,7 +1010,7 @@ def query_prometheus_metric(
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -1024,7 +1025,7 @@ def query_prometheus_metric(
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/16-agentscope-overview-installation.md|16-agentscope-overview-installation]]
-- [[domain-14-ai-ml-infra/17-agentscope-core-concepts.md|17-agentscope-core-concepts]]
-- [[domain-14-ai-ml-infra/19-agentscope-memory-context.md|19-agentscope-memory-context]]
-- [[domain-14-ai-ml-infra/20-agentscope-multi-agent-orchestration.md|20-agentscope-multi-agent-orchestration]]
+- 16-agentscope-overview-installation
+- 17-agentscope-core-concepts
+- 19-agentscope-memory-context
+- 20-agentscope-multi-agent-orchestration

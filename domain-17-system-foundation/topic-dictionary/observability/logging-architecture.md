@@ -28,17 +28,18 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # 日志架构（Logging Architecture）
 
 ## 概述
 
-应用日志是理解集群内部运行情况、调试问题和监控集群活动的重要手段。容器化应用最常见的日志记录方式是写入标准输出（`stdout`）和标准错误（`stderr`）。然而，仅靠容器引擎的原生功能通常不足以构建完整的日志解决方案。Kubernetes 引入了**集群级日志（cluster-level logging）**的概念，要求日志拥有独立于节点、Pod 和容器的存储和生命周期。
+应用日志是理解集群内部运行情况、调试问题和监控集群活动的重要手段。容器化应用最常见的日志记录方式是写入标准输出（`stdout`）和标准错误（`stderr`）。然而，仅靠容器引擎的原生功能通常不足以构建完整的日志解决方案。[[Kubernetes|Kubernetes]] 引入了**集群级日志（cluster-level logging）**的概念，要求日志拥有独立于节点、Pod 和容器的存储和生命周期。
 
 ## 核心概念/原理
 
-- **容器日志捕获**：容器运行时通过 CRI 日志格式捕获容器的 `stdout` 和 `stderr`，kubelet 将这些日志提供给 `kubectl logs` 使用。
+- **容器日志捕获**：容器运行时通过 CRI 日志格式捕获容器的 `stdout` 和 `stderr`，[[kubelet|kubelet]] 将这些日志提供给 `kubectl logs` 使用。
 - **集群级日志架构**：需要一个独立的后端来存储、分析和查询日志，Kubernetes 本身不提供原生日志存储方案。
 - **日志轮转**：kubelet 负责管理容器日志的轮转，防止日志无限增长占满磁盘。
 - **系统组件日志**：一部分组件以容器方式运行（如 scheduler、kube-proxy），另一部分直接运行在宿主机上（如 kubelet、容器运行时）。

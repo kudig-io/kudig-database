@@ -61,9 +61,10 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
-# Traefik Mesh Enterprise Service Mesh 深度实践
+# Traefik Mesh Enterprise [[Service|Service]]Service Mesh）|Service Mesh]] 深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Traefik Mesh v1.4+ / Traefik v3.x | **难度**: 中高级
 
@@ -71,7 +72,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 Kubernetes 原生服务网格。与 Istio 和 Linkerd 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，通过修改 Kubernetes Service 的 Endpoint 来引导流量经过 Traefik 代理，而非在每个 Pod 中注入 Sidecar 容器。这种设计简化了部署和运维，但功能覆盖度相对有限。
+Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[Kubernetes|Kubernetes]] 原生服务网格。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，通过修改 Kubernetes Service 的 Endpoint 来引导流量经过 Traefik 代理，而非在每个 Pod 中注入 Sidecar 容器。这种设计简化了部署和运维，但功能覆盖度相对有限。
 
 Traefik Mesh 的核心优势在于与 Traefik 生态的无缝集成——如果您已经在使用 Traefik 作为 Ingress Controller，Traefik Mesh 提供了最自然的服务网格扩展路径。Go 语言编写的代理保证了良好的性能和低内存占用，Traefik 丰富的 Middleware 生态（限流、认证、重试、压缩等）可以直接应用于服务间通信。2026年 Traefik Mesh 的最新版本为 v1.4，与 Traefik v3.3 完全兼容，支持 ACL 模式、透明代理模式和丰富的 Middleware 链。
 
@@ -1087,25 +1088,25 @@ kubectl get endpoints -n production
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|Envoy Proxy 企业级服务网格数据平面深度实践]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Envoy Proxy 企业级服务网格数据平面深度实践
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/04-envoy-proxy-enterprise.md|04-envoy-proxy-enterprise]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|05-dapr-enterprise-distributed-runtime]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|07-service-mesh-comparison-selection]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|08-ambient-mesh-l7-policy]]
+- 04-envoy-proxy-enterprise
+- 05-dapr-enterprise-distributed-runtime
+- 07-service-mesh-comparison-selection
+- 08-ambient-mesh-l7-policy
 
 ## Related
 

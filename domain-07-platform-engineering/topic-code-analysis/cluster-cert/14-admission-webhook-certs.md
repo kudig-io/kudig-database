@@ -1,5 +1,5 @@
 ---
-title: Admission Webhook 证书体系
+title: Admission Webhook 证书体系 (topic-code-analysis)
 description: 'description: ''## 概述'''
 category: general
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 - service-mesh-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: Admission Webhook 证书体系

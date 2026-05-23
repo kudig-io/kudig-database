@@ -33,6 +33,7 @@ prerequisites:
 - iac-basics
 - etcd-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Infrastructure as Code
@@ -42,7 +43,7 @@ prerequisites:
 | Tool | Language | Paradigm | State Management | Best For |
 |------|----------|----------|-----------------|----------|
 | Terraform | HCL | Declarative | Local, S3, Terraform Cloud | Multi-cloud infrastructure |
-| Pulumi | TypeScript/Python/Go | Imperative/Declarative | Service, local, S3 | Developer-centric IaC |
+| Pulumi | TypeScript/Python/Go | Imperative/Declarative | [[Service|Service]], local, S3 | Developer-centric IaC |
 | Ansible | YAML | Imperative (config mgmt) | None (idempotent) | Configuration management |
 | Crossplane | YAML (K8s CRDs) | Declarative | etcd (K8s native) | K8s-native infra orchestration |
 | AWS CDK | TypeScript/Python | Imperative | CloudFormation | AWS-only infrastructure |
@@ -85,13 +86,13 @@ Crossplane extends K8s API with custom resources for cloud infrastructure. A `Bu
 - [[crossplane|Crossplane]]
 - [[synthesis/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis
 
-- [[domain-08-release-change-management/05-crossplane-enterprise-orchestration.md|05-crossplane-enterprise-orchestration]]
-- [[domain-08-release-change-management/99-crossplane-platform-guide.md|99-crossplane-platform-guide]]
-- [[domain-08-release-change-management/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-08-release-change-management/11-infrastructure-as-code.md|11-infrastructure-as-code]]
+- 05-crossplane-enterprise-orchestration
+- 99-crossplane-platform-guide
+- 00-open-source-projects-index
+- 11-infrastructure-as-code
 - [[domain-08-release-change-management/README.md|Domain 24: 基础设施即代码 (Infrastructure as Code)]]
-- [[domain-08-release-change-management/03-pulumi-enterprise-iac.md|03-pulumi-enterprise-iac]]
-- [[domain-08-release-change-management/02-ansible-enterprise-automation.md|02-ansible-enterprise-automation]]
-- [[domain-08-release-change-management/04-azure-resource-manager-enterprise.md|04-azure-resource-manager-enterprise]]
-- [[domain-08-release-change-management/01-terraform-enterprise-iac.md|01-terraform-enterprise-iac]]
-- [[domain-08-release-change-management/MOC.md|domain-24-infrastructure-as-code MOC]]
+- 03-pulumi-enterprise-iac
+- 02-ansible-enterprise-automation
+- 04-azure-resource-manager-enterprise
+- 01-terraform-enterprise-iac
+- domain-24-infrastructure-as-code MOC

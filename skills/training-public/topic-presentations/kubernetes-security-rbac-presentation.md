@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 安全与 RBAC 权限管理全栈培训
+title: Kubernetes 安全与 RBAC 权限管理全栈培训 [training-public]
 description: '# Kubernetes 安全与 RBAC 权限管理全栈培训'
 category: presentations
 tags:
@@ -43,9 +43,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 安全与 RBAC 权限管理全栈培训
+# [[Kubernetes|Kubernetes]] 安全与 RBAC 权限管理全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 安全治理专项
 > **核心原则**: 最小权限原则、零信任架构、多层防御
@@ -78,7 +79,7 @@ authors:
 2. API Server 的三层安全防护：认证 → 授权 → 准入控制
 3. RBAC 四个核心对象：Role、ClusterRole、RoleBinding、ClusterRoleBinding
 4. 准入控制（Admission Webhook）实现自动化安全策略
-5. NetworkPolicy 实现 Pod 级网络隔离
+5. [[NetworkPolicy|NetworkPolicy]] 实现 Pod 级网络隔离
 
 ---
 
@@ -182,7 +183,7 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 | 动作 | 说明 | 示例 |
 |------|------|------|
 | `get` | 读取单个资源 | `kubectl get pod xxx` |
-| `list` | 列出资源 | `kubectl get pods` |
+| `list` | 列出资源 | `kubectl get [[Pods|pods]]` |
 | `watch` | 监听变化 | `kubectl get pods -w` |
 | `create` | 创建 | `kubectl apply -f pod.yaml` |
 | `update` | 更新 | `kubectl edit pod xxx` |
@@ -210,7 +211,7 @@ ClusterRoleBinding│ 不适用       │ 集群权限
 | `ResourceQuota` | 检查是否超过 ResourceQuota |
 
 > ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
-> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+> 请使用 Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 > PSA 通过命名空间标签强制执行 Pod 安全标准 (Privileged / Baseline / Restricted)。
 
 | `PodSecurity` | 替代 PodSecurityPolicy 的安全策略 |
@@ -724,22 +725,22 @@ Kubernetes 安全
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/topic-presentations/MOC.md|topic-presentations MOC]]
-- [[domain-11-production-operations/topic-presentations/README.md|Topic: Presentations（技术演示文稿）]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes 架构与基础概念全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|Kubernetes 可观测性全栈培训 (监控、日志、追踪)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes 调度与编排策略全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|Kubernetes 存储体系全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes 故障排查方法论全栈培训]]
-- [[domain-11-production-operations/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload 全栈进阶培训 (从入门到专家)]]
+- topic-presentations MOC
+- Topic: Presentations（技术演示文稿）
+- Kubernetes 架构与基础概念全栈培训
+- Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
+- Kubernetes Ingress 全栈进阶培训 (从入门到专家)
+- Kubernetes 可观测性全栈培训 (监控、日志、追踪)
+- Kubernetes 调度与编排策略全栈培训
+- Kubernetes Service 全栈进阶培训 (从入门到专家)
+- Kubernetes 存储体系全栈进阶培训 (从入门到专家)
+- Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+- Kubernetes 故障排查方法论全栈培训
+- Kubernetes Workload 全栈进阶培训 (从入门到专家)
 
 ## See Also
 
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md|kubernetes-observability-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-scheduling-presentation.md|kubernetes-scheduling-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-service-presentation.md|kubernetes-service-presentation]]
-- [[domain-11-production-operations/topic-learn/domain-11-production-operations/topic-presentations/kubernetes-storage-presentation.md|kubernetes-storage-presentation]]
+- kubernetes-observability-presentation
+- kubernetes-scheduling-presentation
+- kubernetes-service-presentation
+- kubernetes-storage-presentation

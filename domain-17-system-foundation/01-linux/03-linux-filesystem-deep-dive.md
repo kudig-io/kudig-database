@@ -45,6 +45,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/linux.md
   label: '速查卡: linux'
+created: "2026-05-23"
 ---
 
 # 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
@@ -749,7 +750,7 @@ esac
 
 ---
 
-<!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 #<!-- chunk: 容器存储 (Container Storage) -->## 容器存储 (Container Storage)
 
@@ -980,11 +981,11 @@ echo "=== 巡检完成 ==="
 
 ## See Also
 
-- [[domain-17-system-foundation/01-linux-system-architecture.md|01-linux-system-architecture]]
-- [[domain-17-system-foundation/02-linux-process-management.md|02-linux-process-management]]
-- [[domain-17-system-foundation/04-linux-networking-configuration.md|04-linux-networking-configuration]]
-- [[domain-17-system-foundation/05-linux-storage-management.md|05-linux-storage-management]]
+- 01-linux-system-architecture
+- 02-linux-process-management
+- 04-linux-networking-configuration
+- 05-linux-storage-management
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- index/etcd-index|etcd 知识图谱索引]]

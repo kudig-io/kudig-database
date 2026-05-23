@@ -31,13 +31,14 @@ prerequisites:
 - cloud-provider-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Volume Health Monitoring（卷健康监控）
 
 ## 概述
 
-卷健康监控是 Kubernetes CSI 实现的一部分，允许 CSI 驱动检测底层存储系统的异常卷状态，并将这些异常作为事件报告到相关的 PersistentVolumeClaim（PVC）或 Pod 上，帮助用户和运维人员及时发现存储问题。
+卷健康监控是 [[Kubernetes|Kubernetes]] CSI 实现的一部分，允许 CSI 驱动检测底层存储系统的异常卷状态，并将这些异常作为事件报告到相关的 PersistentVolumeClaim（PVC）或 Pod 上，帮助用户和运维人员及时发现存储问题。
 
 ## 核心概念/原理
 
@@ -54,7 +55,7 @@ prerequisites:
    - 当检测到异常时，在相关的 PVC 上报告 Event。
    - 支持节点故障监控（`enable-node-watcher=true`）：检测到节点故障时，会在使用该节点上 PVC 的 PVC 对象上报告 Event，提示 Pod 位于故障节点上。
 
-2. **Kubelet（节点端）**
+2. **[[kubelet|Kubelet]]（节点端）**
    - 当 CSI 驱动支持节点端的卷健康监控时，kubelet 会在检测到异常后在每个使用该 PVC 的 Pod 上报告 Event。
    - 同时，卷健康信息会暴露为 Kubelet VolumeStats 指标：`kubelet_volume_stats_health_status_abnormal`。
      - 标签：`namespace`、`persistentvolumeclaim`
@@ -63,7 +64,7 @@ prerequisites:
 ### 监控粒度
 
 - **控制器端**：按 PVC 粒度报告异常事件。
-- **节点端**：按 Pod 粒度报告异常事件，并提供 Prometheus 可采集的指标数据。
+- **节点端**：按 Pod 粒度报告异常事件，并提供 [[Prometheus|Prometheus]] 可采集的指标数据。
 
 ## 使用场景
 

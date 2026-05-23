@@ -1,5 +1,5 @@
 ---
-title: 证书身份到 RBAC 的映射关系
+title: 证书身份到 RBAC 的映射关系 (topic-code-analysis)
 description: 'description: ''| X509 认证插件 | `staging/src/k8s.io/apiserver/pkg/authentication/request/x509/x509.go`'
 category: general
 tags:
@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 证书身份到 RBAC 的映射关系
@@ -618,4 +619,4 @@ subjects:
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-14-ai-ml-infra/openclaw-workspace/USER.md|USER]]
+- USER

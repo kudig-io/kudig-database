@@ -29,6 +29,7 @@ prerequisites:
 - rbac-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -191,8 +192,8 @@ tier: peripheral---
 
 ## Related
 
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
 
 - [[domain-05-security-compliance/README.md|返回目录]]

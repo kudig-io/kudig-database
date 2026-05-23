@@ -51,6 +51,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/sql.md
   label: '速查卡: sql'
+created: "2026-05-23"
 ---
 
 # MySQL 企业级数据库运维管理
@@ -65,7 +66,7 @@ cross_refs:
 
 MySQL 是全球使用最广泛的开源关系型数据库管理系统，在 Web 应用、电商、金融、游戏等领域占据统治地位。根据 DB-Engines 2026 年排名，MySQL 仅次于 Oracle 数据库位居第二，其生态覆盖了从嵌入式设备到超大规模互联网服务的全场景。
 
-企业级 MySQL 运维需要关注的核心维度包括：高可用架构设计（MHA、Orchestrator、MGR）、性能调优（InnoDB 参数优化、查询优化器调优）、数据安全（SSL 加密、审计日志、透明数据加密）、监控告警体系（Prometheus + Grafana）、以及自动化运维平台建设。本文档从生产环境运维专家视角，系统覆盖上述所有领域。
+企业级 MySQL 运维需要关注的核心维度包括：高可用架构设计（MHA、Orchestrator、MGR）、性能调优（InnoDB 参数优化、查询优化器调优）、数据安全（SSL 加密、审计日志、透明数据加密）、监控告警体系（[[Prometheus|Prometheus]] + Grafana）、以及自动化运维平台建设。本文档从生产环境运维专家视角，系统覆盖上述所有领域。
 
 MySQL 8.0 引入了诸多企业级特性：窗口函数、通用表表达式（CTE）、角色管理、数据字典、降序索引、JSON 增强、invisible index 等。MySQL 9.x 进一步增强了并行查询、HeatWave 内存加速引擎等功能。生产环境建议采用 MySQL 8.4 LTS 版本以获得长期支持。
 
@@ -721,7 +722,7 @@ cleanup_old_backups() {
         createDate=$(echo "$line" | awk '{print $1" "$2}')
         createDate=$(date -d "$createDate" +%s)
         olderThan=$(date -d "-${RETENTION_DAYS} days" +%s)
-        if [[ $createDate -lt $olderThan ]]; then
+        if $createDate -lt $olderThan; then
             fileName=$(echo "$line" | awk '{$1=$2=""; print $0}' | sed 's/^[ \t]*//')
             aws s3 rm "${S3_BUCKET}/${S3_PREFIX}/${fileName}" --recursive 2>/dev/null || true
         fi
@@ -752,7 +753,7 @@ main() {
             ;;
         incremental)
             local base=$(ls -dt "${BACKUP_ROOT}"/full_* 2>/dev/null | head -1)
-            if [[ -z "$base" ]]; then
+            if -z "$base"; then
                 perform_full_backup
             else
                 perform_incremental_backup "$base"
@@ -1251,21 +1252,21 @@ esac
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-16-database-middleware/MOC.md|domain-28-enterprise-database-middleware MOC]]
+- domain-28-enterprise-database-middleware MOC
 - [[domain-16-database-middleware/README.md|Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
-- [[domain-16-database-middleware/00-open-source-projects-index.md|Domain-28 企业数据库与中间件 — 开源项目索引]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库高可用架构]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|分布式数据库企业级实践深度指南]]
-- [[domain-16-database-middleware/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[domain-16-database-middleware/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
-- [[domain-16-database-middleware/06-redis-enterprise-cache.md|Redis 企业级缓存运维深度实践]]
-- [[domain-16-database-middleware/07-redis-kubernetes-operator.md|Redis Kubernetes Operator 企业级实践]]
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业级 PostgreSQL 运维指南]]
+- Domain-28 企业数据库与中间件 — 开源项目索引
+- PostgreSQL 企业级数据库高可用架构
+- 分布式数据库企业级实践深度指南
+- 数据库中间件 Kubernetes 企业级实践
+- MongoDB 企业级数据库运维深度实践
+- Redis 企业级缓存运维深度实践
+- Redis Kubernetes Operator 企业级实践
+- Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南
+- CloudNativePG 企业级 PostgreSQL 运维指南
 
 ## See Also
 
-- [[domain-16-database-middleware/08-kafka-kubernetes-strimzi.md|08-kafka-kubernetes-strimzi]]
-- [[domain-16-database-middleware/99-cloudnativepg-enterprise-guide.md|99-cloudnativepg-enterprise-guide]]
-- [[domain-16-database-middleware/02-postgresql-enterprise-database.md|02-postgresql-enterprise-database]]
-- [[domain-16-database-middleware/03-distributed-database-enterprise.md|03-distributed-database-enterprise]]
+- 08-kafka-kubernetes-strimzi
+- 99-cloudnativepg-enterprise-guide
+- 02-postgresql-enterprise-database
+- 03-distributed-database-enterprise

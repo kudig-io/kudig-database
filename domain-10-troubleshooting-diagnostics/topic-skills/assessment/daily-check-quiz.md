@@ -32,6 +32,7 @@ prerequisites:
 skill_id: SKILL-DAILY_CHECK_QUIZ-001
 skill_name: 每日一题
 version: 1.0.0
+created: "2026-05-23"
 ---
 
 # 每日一题
@@ -70,7 +71,7 @@ E. 磁盘空间不足
 
 ### Day 2（周二）
 
-**题目**：你执行 `kubectl get pods` 发现某个 Pod 处于 `Pending` 状态超过 5 分钟。执行 `kubectl describe pod` 看到事件 "0/3 nodes are available: 1 Insufficient cpu, 2 node(s) had taint". 以下哪个操作最适合作为第一步？
+**题目**：你执行 `kubectl get [[Pods|pods]]` 发现某个 Pod 处于 `Pending` 状态超过 5 分钟。执行 `kubectl describe pod` 看到事件 "0/3 nodes are available: 1 Insufficient cpu, 2 node(s) had taint". 以下哪个操作最适合作为第一步？
 
 A. 删除 Pod 重新创建
 B. 增加节点资源
@@ -87,7 +88,7 @@ E. 升级集群版本
 
 ### Day 3（周三）
 
-**题目**：一个 Deployment 有 3 个副本，所有 Pod 都处于 Running 状态，但 Service 的 Endpoints 为空。以下哪个不是可能的原因？
+**题目**：一个 Deployment 有 3 个副本，所有 Pod 都处于 Running 状态，但 [[Service|Service]] 的 Endpoints 为空。以下哪个不是可能的原因？
 
 A. Service 的 selector 与 Pod 的标签不匹配
 B. 所有 Pod 的 readinessProbe 都失败
@@ -140,7 +141,7 @@ E. API Server 未运行
 
 ### Day 6（周一）
 
-**题目**：你在控制平面节点执行 `openssl x509 -in /etc/[[entities/kubernetes|kubernetes]]/pki/apiserver.crt -noout -dates` 发现证书已过期。接下来应该执行什么命令续期？
+**题目**：你在控制平面节点执行 `openssl x509 -in /[[entities/kubernetes|kubernetes]]/pki/apiserver.crt -noout -dates` 发现证书已过期。接下来应该执行什么命令续期？
 
 A. `kubeadm certs renew all`
 B. `kubeadm init --skip-certificates`

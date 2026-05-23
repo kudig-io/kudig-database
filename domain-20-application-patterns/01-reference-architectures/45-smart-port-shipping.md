@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: 智慧港口与航运架构设计
@@ -33,7 +34,7 @@ tags:
 - k8s
 - architecture
 - industry
-- daemonset
+- [[DaemonSet|daemonset]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -43,7 +44,7 @@ audience:
 - 云原生开发工程师
 estimated_read_time: 5min
 intent_queries:
-- 智慧港口 TOS 系统 Kubernetes 部署
+- 智慧港口 TOS 系统 [[Kubernetes|Kubernetes]] 部署
 - 集装箱码头自动化管理架构
 - 无人集卡 AGV 调度系统
 - 海关 EDI 电子数据交换
@@ -315,7 +316,7 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture KUDIG Database — Global MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -330,7 +331,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/43-enterprise-im.md|43-enterprise-im]]
-- [[domain-20-application-patterns/44-martech-adtech.md|44-martech-adtech]]
-- [[domain-20-application-patterns/46-satellite-internet.md|46-satellite-internet]]
-- [[domain-20-application-patterns/47-smart-mining.md|47-smart-mining]]
+- 43-enterprise-im
+- 44-martech-adtech
+- 46-satellite-internet
+- 47-smart-mining

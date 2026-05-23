@@ -46,9 +46,10 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
-# Kubernetes 运维硬件故障排查专题
+# [[Kubernetes|Kubernetes]] 运维硬件故障排查专题
 
 <!-- chunk: 概述 -->## 概述
 
@@ -414,7 +415,7 @@ check_etcd_disk() {
     
     # SMART 状态
     local base_device=$(echo "$disk_device" | sed 's/[0-9]*$//')
-    if [[ "$base_device" == *"nvme"* ]]; then
+    if "$base_device" == *"nvme"*; then
         nvme smart-log "$base_device" 2>/dev/null | grep -E "critical|temperature|percentage"
     else
         smartctl -H "$base_device" 2>/dev/null
@@ -640,7 +641,7 @@ generate_report
 
 <!-- chunk: K8s 监控集成 -->## K8s 监控集成
 
-#<!-- chunk: Prometheus 硬件监控指标 -->## Prometheus 硬件监控指标
+#<!-- chunk: [[Prometheus|Prometheus]] 硬件监控指标 -->## Prometheus 硬件监控指标
 
 ```yaml
 # Prometheus 硬件监控规则
@@ -857,25 +858,25 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-31-hardware MOC]]
+- domain-31-hardware MOC
 - [[domain-17-system-foundation/README.md|Domain 31 - 硬件基础设施]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-31 硬件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-cloud-hardware-architecture.md|云平台硬件基础架构]]
-- [[domain-17-system-foundation/02-server-architecture-principles.md|服务器架构原理]]
-- [[domain-17-system-foundation/03-cpu-technology-deep-dive.md|CPU技术深度解析]]
-- [[domain-17-system-foundation/04-motherboard-chipset-technology.md|主板与芯片组技术]]
-- [[domain-17-system-foundation/05-memory-technology-deep-dive.md|内存技术深度解析]]
-- [[domain-17-system-foundation/06-storage-hdd-technology.md|机械硬盘技术]]
-- [[domain-17-system-foundation/07-storage-ssd-technology.md|SSD固态硬盘技术]]
-- [[domain-17-system-foundation/08-network-hardware-technology.md|网络硬件技术]]
-- [[domain-17-system-foundation/09-hardware-vendors-ecosystem.md|硬件厂商生态]]
+- Domain-31 硬件 — 开源项目索引
+- 云平台硬件基础架构
+- 服务器架构原理
+- CPU技术深度解析
+- 主板与芯片组技术
+- 内存技术深度解析
+- 机械硬盘技术
+- SSD固态硬盘技术
+- 网络硬件技术
+- 硬件厂商生态
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-17-system-foundation/14-power-thermal-troubleshooting.md|14-power-thermal-troubleshooting]]
-- [[domain-17-system-foundation/15-bios-firmware-troubleshooting.md|15-bios-firmware-troubleshooting]]
-- [[domain-17-system-foundation/17-hardware-error-codes-reference.md|17-hardware-error-codes-reference]]
-- [[domain-17-system-foundation/18-hardware-failure-case-studies.md|18-hardware-failure-case-studies]]
+- 14-power-thermal-troubleshooting
+- 15-bios-firmware-troubleshooting
+- 17-hardware-error-codes-reference
+- 18-hardware-failure-case-studies

@@ -1,4 +1,44 @@
 ---
+title: 信创替代架构设计 — 阿里云视角
+description: 'title: 信创替代架构设计'
+category: general
+tags:
+- architecture
+- best-practice
+- etcd
+- scheduler
+- prometheus
+- grafana
+- calico
+- docker
+- ceph
+- mysql
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 信创替代架构设计 — 阿里云视角 是什么
+- 如何 信创替代架构设计 — 阿里云视角
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 信创替代架构设计
+- 阿里云视角
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- cni-basics
+- etcd-basics
+- mysql-basics
+- gpu-scheduling-basics
+created: "2026-05-23"
+---
+
 title: 信创替代架构设计
 description: '# 信创替代架构设计 — 阿里云视角'
 category: application-architecture
@@ -6,9 +46,9 @@ tags:
 - k8s
 - architecture
 - industry
-- etcd
+- [[etcd|etcd]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - calico
 - docker
@@ -39,14 +79,6 @@ trigger_keywords:
 - 麒麟
 - 等保三级
 - 国密
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- cni-basics
-- etcd-basics
-- mysql-basics
-- gpu-scheduling-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -57,16 +89,25 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/14-smart-healthcare-architecture
 - domain-02-workloads-applications/topic-functions/09-data-security-privacy
 - topic-domain-01-cluster-fundamentals/05-compliance-auditing
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 信创替代架构设计 — 阿里云视角
 
-> **适用版本**: [[entities/kubernetes|kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: Kubernetes v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#信创` `#国产化` `#自主可控` `#党政军` `#阿里云`
 
 ---
 
-## 目录
+<!-- chunk: 目录 -->## 目录
 
 1. [行业背景](#1-行业背景)
 2. [业务架构](#2-业务架构)
@@ -79,9 +120,9 @@ related_topics:
 
 ---
 
-## 1. 行业背景
+<!-- chunk: 1. 行业背景 -->## 1. 行业背景
 
-### 1.1 信创产业背景
+#<!-- chunk: 1.1 信创产业背景 -->## 1.1 信创产业背景
 
 信创（信息技术应用创新）是国家战略，目标实现核心技术自主可控：
 
@@ -94,7 +135,7 @@ related_topics:
 | 应用软件 | Office/ERP 国外厂商 | WPS/用友/金蝶/泛微 | 基本完成 |
 | 云平台 | VMware/OpenStack | 阿里云飞天/华为云 Stack | 加速推进 |
 
-### 1.2 核心场景
+#<!-- chunk: 1.2 核心场景 -->## 1.2 核心场景
 
 - **党政办公系统替代**: OA/邮件/公文系统全面国产化
 - **金融核心系统下移**: 银行核心交易去 IOE
@@ -104,9 +145,9 @@ related_topics:
 
 ---
 
-## 2. 业务架构
+<!-- chunk: 2. 业务架构 -->## 2. 业务架构
 
-### 2.1 信创云整体架构
+#<!-- chunk: 2.1 信创云整体架构 -->## 2.1 信创云整体架构
 
 ```mermaid
 graph TB
@@ -159,7 +200,7 @@ graph TB
     DB1 & DB2 --> APP1 & APP2 & APP3 & APP4
 ```
 
-### 2.2 金融核心系统去 IOE 迁移流程
+#<!-- chunk: 2.2 金融核心系统去 IOE 迁移流程 -->## 2.2 金融核心系统去 IOE 迁移流程
 
 ```mermaid
 flowchart TD
@@ -181,7 +222,7 @@ flowchart TD
     O --> P[生产运行]
 ```
 
-### 2.3 信创应用部署状态机
+#<!-- chunk: 2.3 信创应用部署状态机 -->## 2.3 信创应用部署状态机
 
 ```mermaid
 stateDiagram-v2
@@ -199,9 +240,9 @@ stateDiagram-v2
 
 ---
 
-## 3. 技术架构
+<!-- chunk: 3. 技术架构 -->## 3. 技术架构
 
-### 3.1 信创 K8s 集群架构
+#<!-- chunk: 3.1 信创 K8s 集群架构 -->## 3.1 信创 K8s 集群架构
 
 ```mermaid
 graph TB
@@ -233,7 +274,7 @@ graph TB
     WN1 & WN2 & WN3 --> NET1 & NET2
 ```
 
-### 3.2 K8s YAML 配置
+#<!-- chunk: 3.2 K8s YAML 配置 -->## 3.2 K8s YAML 配置
 
 ```yaml
 # 信创节点池配置
@@ -377,9 +418,9 @@ spec:
 
 ---
 
-## 4. 核心数据流
+<!-- chunk: 4. 核心数据流 -->## 4. 核心数据流
 
-### 4.1 双轨并行迁移数据流
+#<!-- chunk: 4.1 双轨并行迁移数据流 -->## 4.1 双轨并行迁移数据流
 
 ```mermaid
 sequenceDiagram
@@ -406,9 +447,9 @@ sequenceDiagram
 
 ---
 
-## 5. 安全与合规
+<!-- chunk: 5. 安全与合规 -->## 5. 安全与合规
 
-### 5.1 等保三级合规架构
+#<!-- chunk: 5.1 等保三级合规架构 -->## 5.1 等保三级合规架构
 
 ```mermaid
 graph TB
@@ -449,7 +490,7 @@ graph TB
 
 ---
 
-## 6. 可观测性
+<!-- chunk: 6. 可观测性 -->## 6. 可观测性
 
 - **国产化监控栈**: Prometheus + Grafana（国产芯片编译版本）
 - **日志采集**: SLS 或国产日志系统
@@ -458,7 +499,7 @@ graph TB
 
 ---
 
-## 7. 阿里云组件映射
+<!-- chunk: 7. 阿里云组件映射 -->## 7. 阿里云组件映射
 
 | 功能域 | 国外方案 | **信创替代方案** | 阿里云方案 |
 |:---|:---|:---|:---|
@@ -475,7 +516,7 @@ graph TB
 
 ---
 
-## 8. 生产检查清单
+<!-- chunk: 8. 生产检查清单 -->## 8. 生产检查清单
 
 - [ ] 国产芯片兼容性测试通过（鲲鹏/海光/飞腾）
 - [ ] 国产操作系统镜像验证（麒麟/统信/龙蜥）
@@ -489,3 +530,27 @@ graph TB
 ---
 
 **维护者**: 阿里云解决方案架构师团队 | **许可证**: MIT
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 21-cross-border-ecommerce
+- 22-nev-connected-vehicle
+- 24-insurtech
+- 25-quantitative-trading

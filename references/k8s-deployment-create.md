@@ -32,6 +32,7 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes Deployment 创建操作指南

@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database v1.0 — 一页纸概览

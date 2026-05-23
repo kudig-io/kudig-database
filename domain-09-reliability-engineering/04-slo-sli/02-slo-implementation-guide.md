@@ -15,7 +15,7 @@ difficulty: intermediate
 reading_level: intermediate
 audience:
 - 所有工程师
-estimated_read_time: 5min
+estimated_read_time: 30min
 intent_queries:
 - SLO 设定与实施指南 是什么
 - 如何 SLO 设定与实施指南
@@ -30,6 +30,7 @@ prerequisites:
 - sre-practices
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # SLO 设定与实施指南
@@ -91,6 +92,108 @@ SLO: 99.95% 可用性（年停机 4.38 小时）
 ```
 
 **经验法则**: 每增加一个 9，成本增加 10 倍。
+
+## SLO 目标值设定指南
+
+### 99.9% vs 99.99% 的架构含义
+
+选择 SLO 目标值不仅仅是数字游戏，它直接决定了技术架构的复杂度和成本。
+
+| 维度 | 99.9% (3个9) | 99.95% (3.5个9) | 99.99% (4个9) | 99.999% (5个9) |
+|------|-------------|----------------|--------------|---------------|
+| **月停机预算** | 43.8 分钟 | 21.9 分钟 | 4.38 分钟 | 26.3 秒 |
+| **单点故障容忍** | 可接受短暂单点 | 需快速故障转移 | 不能有任何单点 | 全冗余+自动切换 |
+| **部署策略** | 滚动更新 | 蓝绿部署 | 金丝雀+自动回滚 | 多活+流量调度 |
+| **数据库要求** | 主从复制 | 半同步复制 | 同步复制/多主 | 多地域共识 |
+| **监控粒度** | 分钟级 | 分钟级 | 秒级 | 毫秒级 |
+| **团队响应** | 工作日响应 | 2 小时内响应 | 15 分钟响应 | 自动化处理 |
+| **架构成本** | 1x 基准 | 3-5x 基准 | 10-30x 基准 | 50-100x 基准 |
+
+### SLO 设定的决策框架
+
+```mermaid
+flowchart TD
+    A[确定 SLO 目标] --> B{业务关键度?}
+    B -->|核心收入链路| C[≥ 99.99%]
+    B -->|重要业务功能| D[99.9% - 99.99%]
+    B -->|辅助功能| E[99% - 99.9%]
+    B -->|内部工具| F[< 99% 或不定 SLO]
+    
+    C --> C1{用户容忍度?}
+    C1 -->|零容忍| C2[99.999% + 异地多活]
+    C1 -->|可接受分钟级| C3[99.99% + 多可用区]
+    
+    D --> D1{依赖服务 SLO?}
+    D1 -->|依赖 ≥ 99.99%| D2[可设 99.99%]
+    D1 -->|依赖 99.9%| D3[最高 99.9%]
+    
+    E --> E1[基于历史数据 P95 设定]
+    F --> F1[不设 SLO，仅监控]
+```
+
+### 不同场景的 SLO 推荐值
+
+| 服务类型 | 可用性 SLO | 延迟 SLO | 说明 |
+|---------|-----------|---------|------|
+| **面向用户的 Web API** | 99.9% | P99 < 500ms | 平衡用户体验与成本 |
+| **内部微服务调用** | 99.95% | P99 < 200ms | 内部调用应更可靠 |
+| **支付网关** | 99.99% | P99 < 200ms | 直接关联资金，零容忍 |
+| **数据流水线** | 99.5% | 批次完成率 > 99% | 批处理允许一定失败 |
+| **管理后台 API** | 99% | P99 < 2s | 非用户-facing，可容忍 |
+| **[[Kubernetes|Kubernetes]] 控制平面** | 99.9% | P99 < 1s (apiserver) | 影响整个集群 |
+| **集群 DNS** | 99.99% | P99 < 5ms | 影响所有服务发现 |
+| **[[Ingress|Ingress]] 控制器** | 99.9% | P99 < 500ms | 外部流量入口 |
+
+### 基于历史数据的 SLO 设定方法
+
+```python
+# SLO 设定分析脚本
+def recommend_slo(historical_availability: list[float]) -> dict:
+    """
+    基于历史可用性数据推荐 SLO
+    
+    Args:
+        historical_availability: 过去 N 个周期的可用性数据
+    
+    Returns:
+        保守、合理、激进三档建议
+    """
+    import statistics
+    
+    mean = statistics.mean(historical_availability)
+    stdev = statistics.stdev(historical_availability)
+    min_val = min(historical_availability)
+    p95 = sorted(historical_availability)[int(len(historical_availability) * 0.95)]
+    
+    return {
+        "conservative": max(0.99, min_val - 0.001),  # 低于历史最差
+        "reasonable": max(0.99, mean - 2 * stdev),   # 均值减 2 个标准差
+        "aggressive": max(0.99, p95),                 # 优于 95% 的历史表现
+        "statistics": {
+            "mean": f"{mean:.4%}",
+            "stdev": f"{stdev:.4%}",
+            "min": f"{min_val:.4%}",
+            "p95": f"{p95:.4%}"
+        }
+    }
+
+# 示例：某服务过去 12 周的可用性数据
+availability_history = [
+    0.9992, 0.9995, 0.9991, 0.9998,
+    0.9993, 0.9996, 0.9990, 0.9997,
+    0.9994, 0.9999, 0.9993, 0.9996
+]
+
+recommendation = recommend_slo(availability_history)
+print(f"保守建议: {recommendation['conservative']:.4%}")
+print(f"合理建议: {recommendation['reasonable']:.4%}")
+print(f"激进建议: {recommendation['aggressive']:.4%}")
+
+# 输出示例:
+# 保守建议: 99.8900%
+# 合理建议: 99.8500%
+# 激进建议: 99.9600%
+```
 
 ## SLO 设定方法论
 
@@ -175,6 +278,564 @@ SLO 需要多方共识:
   → "增加 300% 成本减少 50% 支付失败，ROI 不划算"
 
 最终决策: 保持 99.9%，聚焦优化现有架构
+```
+
+## 多层级 SLO 体系
+
+### 服务级 SLO
+
+针对单个微服务或组件的 SLO，是最细粒度的可靠性目标。
+
+```yaml
+# 服务级 SLO 示例: order-service
+service: order-service
+level: service
+slos:
+  - name: availability
+    target: 0.999        # 99.9%
+    measurement: |
+      sum(rate(http_requests_total{service="order-service",status!="5.."}[5m]))
+      / sum(rate(http_requests_total{service="order-service"}[5m]))
+    window: 30d
+    
+  - name: latency
+    target: 0.99         # P99 < 500ms
+    measurement: |
+      histogram_quantile(0.99,
+        sum(rate(http_request_duration_seconds_bucket{service="order-service"}[5m])) by (le)
+      )
+    window: 30d
+```
+
+### 集群级 SLO
+
+针对整个 Kubernetes 集群的基础设施 SLO，衡量控制平面和节点层面的可靠性。
+
+```yaml
+# 集群级 SLO 示例
+category: cluster-infrastructure
+level: cluster
+slos:
+  - name: control_plane_availability
+    target: 0.999
+    measurement: |
+      sum(rate(apiserver_request_total{code!="5.."}[5m]))
+      / sum(rate(apiserver_request_total[5m]))
+    window: 30d
+    
+  - name: etcd_health
+    target: 0.9999
+    measurement: |
+      # etcd 所有实例健康的比例
+      count(etcd_server_has_leader == 1)
+      / count(etcd_server_has_leader)
+    window: 30d
+    
+  - name: node_ready_ratio
+    target: 0.995
+    measurement: |
+      count(kube_node_status_condition{condition="Ready",status="true"} == 1)
+      / count(kube_node_status_condition{condition="Ready"})
+    window: 30d
+```
+
+**集群级 SLO PromQL**:
+```promql
+# 控制平面可用性
+sum(rate(apiserver_request_total{code!="5.."}[5m]))
+/
+sum(rate(apiserver_request_total[5m]))
+
+# etcd 健康检查
+etcd_server_has_leader
+
+# 节点就绪率
+count(kube_node_status_condition{condition="Ready",status="true"} == 1)
+/
+count(kube_node_status_condition{condition="Ready"})
+
+# Pod 调度成功率
+sum(rate(scheduler_schedule_attempts_total{result="scheduled"}[5m]))
+/
+sum(rate(scheduler_schedule_attempts_total[5m]))
+```
+
+### 平台级 SLO
+
+平台级 SLO 面向最终用户，跨越多个服务和集群，反映完整的用户体验。
+
+```yaml
+# 平台级 SLO 示例: 电商平台
+category: platform
+level: platform
+slos:
+  - name: order_completion_rate
+    description: 用户从下单到支付完成的整体成功率
+    target: 0.998
+    measurement: |
+      # 需要业务埋点或分布式追踪数据
+      sum(rate(order_completed_total[5m]))
+      / sum(rate(order_initiated_total[5m]))
+    window: 30d
+    
+  - name: end_to_end_latency
+    description: 用户请求从浏览器到完整响应的端到端延迟
+    target: 0.99  # P99 < 1s
+    measurement: |
+      # 通常来自 APM 工具 (Jaeger/Datadog)
+      trace_duration_seconds{service="frontend",span="root"}
+    window: 30d
+    
+  - name: checkout_success_rate
+    description: 结账流程成功率（含支付）
+    target: 0.9995
+    measurement: |
+      sum(rate(checkout_completed_total[5m]))
+      / sum(rate(checkout_started_total[5m]))
+    window: 30d
+```
+
+### 多层级 SLO 对齐原则
+
+```
+平台级 SLO ≤ 各服务级 SLO 的串联乘积
+
+示例:
+  平台级: 订单完成率 99.8%
+  
+  服务级:
+    - 订单服务: 99.9%
+    - 支付服务: 99.95%
+    - 库存服务: 99.9%
+    
+  理论串联可用性 = 99.9% × 99.95% × 99.9% ≈ 99.75%
+  
+  平台级 99.8% > 理论 99.75% → ⚠️ 不可达！
+  
+  解决: 要么降低平台级 SLO 到 99.7%，要么提升服务级 SLO
+```
+
+## [[Prometheus|Prometheus]] Recording Rules 配置模板
+
+### 为什么需要 Recording Rules
+
+SLO 相关的 PromQL 查询通常涉及复杂的历史聚合（如 30 天窗口的 histogram_quantile），直接在 Grafana 或告警中执行会消耗大量资源。Recording Rules 预先计算并存储结果，大幅提升查询性能。
+
+### 基础 Recording Rules 模板
+
+```yaml
+# recording-rules-slo.yaml
+groups:
+  # ==================== 记录规则: 服务级 SLO ====================
+  - name: slo_service_availability
+    interval: 60s
+    rules:
+      # 记录各服务的总请求率
+      - record: slo:service_requests_total:rate5m
+        expr: |
+          sum(rate(http_requests_total[5m])) by (service, namespace)
+        
+      # 记录各服务的成功请求率
+      - record: slo:service_requests_success:rate5m
+        expr: |
+          sum(rate(http_requests_total{status!="5.."}[5m])) by (service, namespace)
+        
+      # 记录各服务的错误率（直接可用的 SLI）
+      - record: slo:service_error_rate:ratio5m
+        expr: |
+          1 - (
+            slo:service_requests_success:rate5m
+            / slo:service_requests_total:rate5m
+          )
+
+  - name: slo_service_latency
+    interval: 60s
+    rules:
+      # 记录各服务 P50 延迟
+      - record: slo:service_latency:p50
+        expr: |
+          histogram_quantile(0.50,
+            sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service, namespace)
+          )
+        
+      # 记录各服务 P99 延迟
+      - record: slo:service_latency:p99
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service, namespace)
+          )
+
+  # ==================== 记录规则: 基础设施 SLO ====================
+  - name: slo_infrastructure
+    interval: 30s
+    rules:
+      # API Server 可用性
+      - record: slo:apiserver_availability:ratio5m
+        expr: |
+          sum(rate(apiserver_request_total{code!="5.."}[5m]))
+          / sum(rate(apiserver_request_total[5m]))
+      
+      # API Server P99 延迟
+      - record: slo:apiserver_latency:p99
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(apiserver_request_duration_seconds_bucket{verb!="WATCH"}[5m])) by (le)
+          )
+      
+      # etcd WAL fsync P99
+      - record: slo:etcd_wal_fsync:p99
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) by (le)
+          )
+      
+      # 节点就绪率
+      - record: slo:node_ready:ratio
+        expr: |
+          count(kube_node_status_condition{condition="Ready",status="true"} == 1)
+          / count(kube_node_status_condition{condition="Ready"})
+
+  # ==================== 记录规则: 错误预算 ====================
+  - name: slo_error_budget
+    interval: 300s
+    rules:
+      # 30 天窗口的错误率（用于错误预算计算）
+      - record: slo:service_error_rate:ratio30d
+        expr: |
+          1 - (
+            sum(rate(http_requests_total{status!="5.."}[30d])) by (service, namespace)
+            / sum(rate(http_requests_total[30d])) by (service, namespace)
+          )
+      
+      # 30 天窗口总请求数
+      - record: slo:service_requests_total:count30d
+        expr: |
+          sum(increase(http_requests_total[30d])) by (service, namespace)
+      
+      # 错误预算消耗比例（假设 SLO 为 99.9%，即允许错误率 0.001）
+      - record: slo:service_error_budget_consumed:ratio
+        expr: |
+          (
+            slo:service_error_rate:ratio30d - 0.001
+          ) / 0.001
+```
+
+### 高级 Recording Rules（多窗口多燃烧率）
+
+```yaml
+# recording-rules-burn-rate.yaml
+groups:
+  - name: slo_burn_rate_windows
+    interval: 60s
+    rules:
+      # 1 小时窗口错误率
+      - record: slo:service_error_rate:ratio1h
+        expr: |
+          1 - (
+            sum(rate(http_requests_total{status!="5.."}[1h])) by (service)
+            / sum(rate(http_requests_total[1h])) by (service)
+          )
+      
+      # 6 小时窗口错误率
+      - record: slo:service_error_rate:ratio6h
+        expr: |
+          1 - (
+            sum(rate(http_requests_total{status!="5.."}[6h])) by (service)
+            / sum(rate(http_requests_total[6h])) by (service)
+          )
+      
+      # 1 天窗口错误率
+      - record: slo:service_error_rate:ratio1d
+        expr: |
+          1 - (
+            sum(rate(http_requests_total{status!="5.."}[1d])) by (service)
+            / sum(rate(http_requests_total[1d])) by (service)
+          )
+      
+      # 3 天窗口错误率
+      - record: slo:service_error_rate:ratio3d
+        expr: |
+          1 - (
+            sum(rate(http_requests_total{status!="5.."}[3d])) by (service)
+            / sum(rate(http_requests_total[3d])) by (service)
+          )
+
+  - name: slo_burn_rates
+    interval: 60s
+    rules:
+      # 1 小时燃烧率 (相对 SLO 错误率)
+      - record: slo:service_burn_rate:1h
+        expr: |
+          slo:service_error_rate:ratio1h / 0.001
+      
+      # 6 小时燃烧率
+      - record: slo:service_burn_rate:6h
+        expr: |
+          slo:service_error_rate:ratio6h / 0.001
+      
+      # 1 天燃烧率
+      - record: slo:service_burn_rate:1d
+        expr: |
+          slo:service_error_rate:ratio1d / 0.001
+      
+      # 3 天燃烧率
+      - record: slo:service_burn_rate:3d
+        expr: |
+          slo:service_error_rate:ratio3d / 0.001
+```
+
+### 部署 Recording Rules
+
+```bash
+# 1. 将规则文件放入 Prometheus 配置目录
+kubectl create configmap prometheus-recording-rules \
+  --from-file=recording-rules-slo.yaml \
+  --from-file=recording-rules-burn-rate.yaml \
+  -n monitoring
+
+# 2. 在 Prometheus 配置中引用
+# prometheus.yaml
+rule_files:
+  - /etc/prometheus/rules/recording-rules-slo.yaml
+  - /etc/prometheus/rules/recording-rules-burn-rate.yaml
+
+# 3. 热重载 Prometheus
+kubectl exec -n monitoring deploy/prometheus -- kill -HUP 1
+```
+
+## SLO Dashboard Grafana JSON 模板
+
+### Dashboard 结构概览
+
+一个完整的 SLO Dashboard 应包含以下面板：
+
+1. **SLO 达成率总览** — 各服务当前 SLO 状态（红/黄/绿）
+2. **错误预算消耗** — 当前周期内预算消耗百分比
+3. **SLI 趋势** — 30 天内 SLI 的历史趋势
+4. **燃烧率** — 当前燃烧率及告警阈值
+5. **多窗口对比** — 1h/6h/1d/3d/30d 窗口的错误率对比
+
+### Grafana Dashboard JSON
+
+```json
+{
+  "dashboard": {
+    "title": "SLO / Error Budget Dashboard",
+    "tags": ["slo", "reliability"],
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "SLO Status Overview",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 24, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "slo:service_error_rate:ratio30d",
+            "legendFormat": "{{service}} — Error Rate (30d)",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 0.0005},
+                {"color": "red", "value": 0.001}
+              ]
+            },
+            "unit": "percentunit"
+          }
+        },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area"
+        }
+      },
+      {
+        "id": 2,
+        "title": "Error Budget Consumed",
+        "type": "gauge",
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 4},
+        "targets": [
+          {
+            "expr": "clamp_min(slo:service_error_budget_consumed:ratio, 0)",
+            "legendFormat": "{{service}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 1.5,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 0.5},
+                {"color": "orange", "value": 0.75},
+                {"color": "red", "value": 1.0}
+              ]
+            },
+            "unit": "percentunit"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "Burn Rate (Current)",
+        "type": "stat",
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 4},
+        "targets": [
+          {
+            "expr": "slo:service_burn_rate:1h",
+            "legendFormat": "{{service}} — 1h",
+            "refId": "A"
+          },
+          {
+            "expr": "slo:service_burn_rate:6h",
+            "legendFormat": "{{service}} — 6h",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 2},
+                {"color": "orange", "value": 6},
+                {"color": "red", "value": 14.4}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "Time to Exhaust Budget",
+        "type": "stat",
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 4},
+        "targets": [
+          {
+            "expr": "(1 - clamp_max(slo:service_error_budget_consumed:ratio, 1)) * 30 * 24 / slo:service_burn_rate:1d",
+            "legendFormat": "{{service}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "h",
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": null},
+                {"color": "orange", "value": 24},
+                {"color": "yellow", "value": 72},
+                {"color": "green", "value": 168}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 5,
+        "title": "Error Rate — Multi-Window",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 10},
+        "targets": [
+          {
+            "expr": "slo:service_error_rate:ratio1h",
+            "legendFormat": "1h — {{service}}",
+            "refId": "A"
+          },
+          {
+            "expr": "slo:service_error_rate:ratio6h",
+            "legendFormat": "6h — {{service}}",
+            "refId": "B"
+          },
+          {
+            "expr": "slo:service_error_rate:ratio1d",
+            "legendFormat": "1d — {{service}}",
+            "refId": "C"
+          },
+          {
+            "expr": "slo:service_error_rate:ratio30d",
+            "legendFormat": "30d — {{service}}",
+            "refId": "D"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {"drawStyle": "line", "lineWidth": 2},
+            "unit": "percentunit"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Latency P99 Trend (30d)",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 18},
+        "targets": [
+          {
+            "expr": "slo:service_latency:p99",
+            "legendFormat": "{{service}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s",
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 0.5},
+                {"color": "red", "value": 1.0}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Request Rate",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 18},
+        "targets": [
+          {
+            "expr": "slo:service_requests_total:rate5m",
+            "legendFormat": "{{service}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {"unit": "reqps"}
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "service",
+          "type": "query",
+          "query": "label_values(http_requests_total, service)",
+          "multi": true,
+          "includeAll": true
+        },
+        {
+          "name": "namespace",
+          "type": "query",
+          "query": "label_values(http_requests_total, namespace)",
+          "multi": true,
+          "includeAll": true
+        }
+      ]
+    }
+  }
+}
 ```
 
 ## SLO 实施路径

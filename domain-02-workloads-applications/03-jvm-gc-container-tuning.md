@@ -1,43 +1,5 @@
 ---
-title: JVM GC 容器调优深度指南
-description: 'title: JVM GC 容器调优深度指南'
-category: general
-tags:
-- java
-- k8s
-- performance
-- prometheus
-- grafana
-- argocd
-- operator
-- rag
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 25min
-intent_queries:
-- JVM GC 容器调优深度指南 是什么
-- 如何 JVM GC 容器调优深度指南
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- JVM
-- GC
-- 容器调优深度指南
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- prometheus-basics
-- monitoring-basics
-- gitops-basics
-- logging-basics
----
-
-title: JVM GC 容器调优深度指南
+title: JVM GC 容器调优深度指南 (domain-02-workloads-applications) [topic-java-kubernetes]
 description: '# JVM GC 容器调优深度指南'
 category: java-kubernetes
 tags:
@@ -65,25 +27,23 @@ trigger_keywords:
 - 容器调优深度指南
 - java
 - kubernetes
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- prometheus-basics
+- monitoring-basics
+- logging-basics
+created: "2026-05-23"
 ---
 
 # JVM GC 容器调优深度指南
 
-> **适用版本**: JDK 17+ / JDK 21+ (推荐) / JDK 24+ / Kubernetes v1.28+
+> **适用版本**: JDK 17+ / JDK 21+ (推荐) / JDK 24+ / [[Kubernetes|Kubernetes]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---
 
-<!-- chunk: 一、概述 -->## 一、概述
+## 一、概述
 
 JVM 在容器环境中运行面临独特的挑战：内存限制严格、CPU 核心数可能不固定、GC 行为与裸金属环境大不相同。错误配置的 JVM 在 Kubernetes 中最常见的结局就是 `OOMKilled`——这不仅仅是 Java 层面的 OOM，而是容器被内核直接杀掉。
 
@@ -109,9 +69,9 @@ graph TB
 
 ---
 
-<!-- chunk: 二、架构设计 -->## 二、架构设计
+## 二、架构设计
 
-#<!-- chunk: 2.1 容器内存模型 -->## 2.1 容器内存模型
+### 2.1 容器内存模型
 
 在容器中，JVM 看到的可用内存由 `cgroup` 限制决定，而非物理机内存。理解容器内存分配是 GC 调优的基础：
 
@@ -143,7 +103,7 @@ graph TB
 └────────────────────────────────────────────────────────┘
 ```
 
-#<!-- chunk: 2.2 容器感知机制 -->## 2.2 容器感知机制
+### 2.2 容器感知机制
 
 JDK 10+ 引入了 `UseContainerSupport`（JDK 11+ 默认开启），JVM 通过读取 cgroup 文件自动感知容器资源限制：
 
@@ -176,9 +136,9 @@ java -XX:+PrintFlagsFinal -version | grep -i 'ActiveProcessor\|UseContainer'
 
 ---
 
-<!-- chunk: 三、核心配置 -->## 三、核心配置
+## 三、核心配置
 
-#<!-- chunk: 3.1 G1GC — 通用场景首选 -->## 3.1 G1GC — 通用场景首选
+### 3.1 G1GC — 通用场景首选
 
 G1GC 是 JDK 9+ 的默认 GC，在容器环境中表现稳定，适合大多数 Spring Boot 应用：
 
@@ -211,7 +171,7 @@ G1GC 调优参数说明：
 | `ParallelGCThreads` | CPU数 | min(CPU_limit, 4) | STW 阶段并行线程数 |
 | `ConcGCThreads` | ParallelGCThreads/4 | max(1, ParallelGCThreads/4) | 并发标记线程数 |
 
-#<!-- chunk: 3.2 ZGC — 低延迟场景首选（JDK 17+） -->## 3.2 ZGC — 低延迟场景首选（JDK 17+）
+### 3.2 ZGC — 低延迟场景首选（JDK 17+）
 
 ZGC 设计目标是将 GC 暂停控制在亚毫秒级（< 1ms），非常适合延迟敏感的服务：
 
@@ -243,7 +203,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 > **重要**: ZGC 降低 `MaxRAMPercentage` 到 70%，因为 ZGC 需要更多 native 内存（彩色指针、多重映射），开销比 G1GC 大。
 
-#<!-- chunk: 3.3 Shenandoah — 低延迟备选方案（JDK 17+） -->## 3.3 Shenandoah — 低延迟备选方案（JDK 17+）
+### 3.3 Shenandoah — 低延迟备选方案（JDK 17+）
 
 Shenandoah 是 Red Hat 开发的低延迟 GC，与 ZGC 类似但实现不同：
 
@@ -262,7 +222,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 > **注意**: Shenandoah 在某些 JDK 发行版中不可用（如 Oracle JDK）。使用 Eclipse Temurin 或 Red Hat build of OpenJDK。
 
-#<!-- chunk: 3.4 GC 选型对比 -->## 3.4 GC 选型对比
+### 3.4 GC 选型对比
 
 ```mermaid
 graph LR
@@ -299,9 +259,9 @@ graph LR
 | **NUMA 感知** | 是 | 是 | 是 |
 | **JDK 可用性** | 所有 JDK | JDK 15+ | 非Oracle JDK |
 
-#<!-- chunk: 3.5 内存 Sizing 公式 -->## 3.5 内存 Sizing 公式
+### 3.5 内存 Sizing 公式
 
-##<!-- chunk: 精确计算公式 -->## 精确计算公式
+#### 精确计算公式
 
 ```
 容器内存限制 (limits.memory) 计算公式:
@@ -329,7 +289,7 @@ graph LR
                    = 1024 + 230 ≈ 1254Mi → 向上取整到 1280Mi 或 1.5Gi
 ```
 
-##<!-- chunk: 实际计算示例 -->## 实际计算示例
+#### 实际计算示例
 
 ```bash
 # 场景: Spring Boot 应用，约 200 并发，使用 G1GC
@@ -379,13 +339,13 @@ JAVA_OPTS="-XX:+UseContainerSupport \
   -XX:MaxDirectMemorySize=64m"
 ```
 
-#<!-- chunk: 3.6 GC 日志在容器中的配置 -->## 3.6 GC 日志在容器中的配置
+### 3.6 GC 日志在容器中的配置
 
 ```bash
 # JDK 17+ 统一日志框架 (JEP 158 / JEP 271)
 GC_LOG_OPTS="-Xlog:gc*=info:stdout:time,uptime,level,tags"
 
-# 生产环境推荐 — 写到 stdout 被 Fluentd/Filebeat 采集
+# 生产环境推荐 — 写到 stdout 被 [[domain-19-landscape-references/01-cncf-landscape/graduated/fluentd/fluentd|Fluentd]]/Filebeat 采集
 GC_LOG_OPTS="-Xlog:gc*:stdout:time,uptime,level,tags \
   -Xlog:gc+heap=debug:stdout:time,uptime \
   -Xlog:gc+phases=debug:stdout:time,uptime"
@@ -407,11 +367,11 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 ---
 
-<!-- chunk: 四、最佳实践 -->## 四、最佳实践
+## 四、最佳实践
 
-#<!-- chunk: 4.1 Prometheus JMX Exporter 监控 GC -->## 4.1 Prometheus JMX Exporter 监控 GC
+### 4.1 [[Prometheus|Prometheus]] JMX Exporter 监控 GC
 
-##<!-- chunk: 方式一：Java Agent 注入（推荐） -->## 方式一：Java Agent 注入（推荐）
+#### 方式一：Java Agent 注入（推荐）
 
 ```yaml
 # ConfigMap: jmx-exporter-config
@@ -508,7 +468,7 @@ spec:
         name: jmx-exporter-config
 ```
 
-##<!-- chunk: 方式二：Micrometer 直接暴露（推荐 Spring Boot 应用） -->## 方式二：Micrometer 直接暴露（推荐 Spring Boot 应用）
+#### 方式二：Micrometer 直接暴露（推荐 Spring Boot 应用）
 
 ```yaml
 management:
@@ -529,7 +489,7 @@ management:
         http.server.requests: 50ms,100ms,200ms,500ms,1s
 ```
 
-#<!-- chunk: 4.2 Grafana JVM Dashboard 关键指标 -->## 4.2 Grafana JVM Dashboard 关键指标
+### 4.2 Grafana JVM Dashboard 关键指标
 
 ```yaml
 # Prometheus 告警规则
@@ -576,9 +536,9 @@ groups:
           summary: "GC 占用 CPU 时间超过 20%"
 ```
 
-#<!-- chunk: 4.3 不同场景的 GC 配置模板 -->## 4.3 不同场景的 GC 配置模板
+### 4.3 不同场景的 GC 配置模板
 
-##<!-- chunk: 微服务 API（通用） -->## 微服务 API（通用）
+#### 微服务 API（通用）
 
 ```bash
 JAVA_OPTS="-XX:+UseContainerSupport \
@@ -592,7 +552,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 # 容器配置: requests.memory=768Mi, limits.memory=1Gi
 ```
 
-##<!-- chunk: 金融交易（极低延迟） -->## 金融交易（极低延迟）
+#### 金融交易（极低延迟）
 
 ```bash
 JAVA_OPTS="-XX:+UseContainerSupport \
@@ -605,7 +565,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 # 容器配置: requests.memory=1Gi, limits.memory=1.5Gi
 ```
 
-##<!-- chunk: 数据处理（高吞吐） -->## 数据处理（高吞吐）
+#### 数据处理（高吞吐）
 
 ```bash
 JAVA_OPTS="-XX:+UseContainerSupport \
@@ -622,11 +582,11 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 ---
 
-<!-- chunk: 五、故障排查 -->## 五、故障排查
+## 五、故障排查
 
-#<!-- chunk: 5.1 OOMKilled 场景全面排查 -->## 5.1 OOMKilled 场景全面排查
+### 5.1 OOMKilled 场景全面排查
 
-##<!-- chunk: 场景一：堆内存超过容器限制 -->## 场景一：堆内存超过容器限制
+#### 场景一：堆内存超过容器限制
 
 ```
 症状: Pod 状态为 OOMKilled, lastState.terminated.reason = "OOMKilled"
@@ -651,7 +611,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    c. 限制非堆内存: -XX:MaxMetaspaceSize=128m -XX:MaxDirectMemorySize=64m
 ```
 
-##<!-- chunk: 场景二：Metaspace 泄漏 -->## 场景二：Metaspace 泄漏
+#### 场景二：Metaspace 泄漏
 
 ```
 症状: 容器内存持续增长，最终 OOMKilled
@@ -673,7 +633,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    c. 检查 Spring Boot DevTools 是否在生产环境禁用
 ```
 
-##<!-- chunk: 场景三：Direct Buffer 泄漏 -->## 场景三：Direct Buffer 泄漏
+#### 场景三：Direct Buffer 泄漏
 
 ```
 症状: Native 内存持续增长，Heap 使用正常
@@ -692,7 +652,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    c. 添加 -Dio.netty.leakDetection.level=PARANOID（开发环境）
 ```
 
-#<!-- chunk: 5.2 GC 问题诊断表 -->## 5.2 GC 问题诊断表
+### 5.2 GC 问题诊断表
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
 |------|---------|---------|---------|
@@ -705,7 +665,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 | GC 日志为空 | 日志配置错误 | `kubectl logs <pod> \| grep GC` | 检查 -Xlog 参数 |
 | 容器被 SIGKILL | 超过 memory limit | `dmesg \| grep oom` | 增大 limit 或降低 MaxRAMPercentage |
 
-#<!-- chunk: 5.3 GC 日志分析实战 -->## 5.3 GC 日志分析实战
+### 5.3 GC 日志分析实战
 
 ```bash
 # G1GC 日志关键信息提取
@@ -732,7 +692,7 @@ echo "Total GC time in last hour: ${TOTAL_GC_TIME}ms"
 # 使用 GCEasy.io 或 JClarity Censum 分析
 ```
 
-#<!-- chunk: 5.4 Native Memory Tracking -->## 5.4 Native Memory Tracking
+### 5.4 Native Memory Tracking
 
 ```bash
 # 启用 NMT（注意有 5-10% 性能开销）
@@ -759,7 +719,7 @@ kubectl exec <pod> -- jcmd 1 VM.native_memory summary.diff
 
 ---
 
-<!-- chunk: 六、参考资源 -->## 六、参考资源
+## 六、参考资源
 
 - [JEP 346: Promptly Return Unused Committed Memory from G1](https://openjdk.org/jeps/346)
 - [JEP 333: ZGC: A Scalable Low-Latency Garbage Collector](https://openjdk.org/jeps/333)
@@ -769,28 +729,3 @@ kubectl exec <pod> -- jcmd 1 VM.native_memory summary.diff
 - [GCEasy GC Log Analyzer](https://gceasy.io/)
 - [JDK Mission Control](https://www.oracle.com/java/technologies/jdk-mission-control.html)
 - [Container Awareness in JDK](https://openjdk.org/jeps/387)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[domain-java-kubernetes/MOC.md|domain-java-kubernetes MOC]]
-- [[domain-java-kubernetes/README.md|Java on Kubernetes 综合实践指南]]
-- [[domain-java-kubernetes/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[domain-java-kubernetes/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]]
-- [[domain-java-kubernetes/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]]
-- [[domain-java-kubernetes/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]]
-- [[domain-java-kubernetes/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]]
-
-## Related
-
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-
-## See Also
-
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]

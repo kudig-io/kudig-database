@@ -44,6 +44,7 @@ prerequisites:
 - logging-basics
 - tracing-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # KUDIG-DATABASE 知识库全局索引
@@ -248,7 +249,7 @@ prerequisites:
 
 ## 核心知识域 (Core Kubernetes)
 
-基础架构、设计原理到故障排查的完整 Kubernetes 技术栈。
+基础架构、设计原理到问题排查的完整 Kubernetes 技术栈。
 
 | # | 知识域 | 文档数 | 说明 |
 |:---:|:---|:---:|:---|
@@ -263,7 +264,7 @@ prerequisites:
 | 9 | [平台运维](./domain-07-platform-engineering/) | 25 | 集群管理、GitOps、成本优化、灾备恢复 |
 | 10 | [扩展生态](./domain-15-specialized-tech/) | 16 | CRD/Operator、Helm、CI/CD、服务网格 |
 | 11 | [AI 基础设施](./domain-14-ai-ml-infra/) | 36 | GPU 调度、分布式训练、LLM 推理、成本优化 |
-| 12 | [故障排查](./domain-10-troubleshooting-diagnostics/) | 42+ | 全组件故障排查、结构化排障 |
+| 12 | [问题排查](./domain-10-troubleshooting-diagnostics/) | 42+ | 全组件问题排查、结构化排障 |
 
 ---
 
@@ -278,7 +279,7 @@ Docker、Linux、网络存储底层原理和硬件知识。
 | 15 | [网络基础](./domain-03-networking-traffic/) | 6 | OSI/TCP-IP、DNS、负载均衡、SDN |
 | 16 | [存储基础](./domain-04-storage-data/) | 6 | 存储架构、RAID、分布式系统 |
 | 17 | [云厂商](./domain-12-cloud-providers/) | 13家 | 阿里云 ACK、AWS EKS、GCP GKE、Azure AKS 等 |
-| 31 | [硬件](./domain-17-system-foundation/) | 18 | CPU、内存、存储、网络硬件、故障排查 |
+| 31 | [硬件](./domain-17-system-foundation/) | 18 | CPU、内存、存储、网络硬件、问题排查 |
 
 ---
 
@@ -324,14 +325,14 @@ CNCF 生态、eBPF、平台工程、边缘计算等前沿领域。
 
 ## 方法论与实践 (Methodology)
 
-FTA 故障树、FEBM 取证、Skills 技能库等独创方法论。
+FTA 问题树、FEBM 取证、Skills 技能库等独创方法论。
 
 | 专题 | 文档数 | 说明 |
 |:---|:---:|:---|
-| [FTA 故障树分析](./domain-10-troubleshooting-diagnostics/topic-fta/) | 29+36 | 方法论 23 篇 + 36 个组件故障树 |
+| [FTA 问题树分析](./domain-10-troubleshooting-diagnostics/topic-fta/) | 29+36 | 方法论 23 篇 + 36 个组件问题树 |
 | [FEBM 取证循证](./domain-10-troubleshooting-diagnostics/topic-febm/) | 9 | 从证据到结论的归纳式方法论 |
 | [Skills 运维技能库](./domain-10-troubleshooting-diagnostics/topic-skills/) | 18 | 生产级诊断-修复闭环 |
-| [结构化故障排查](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) | 49 | 12 个分类 × 结构化流程 + 配置优先方法论 |
+| [结构化问题排查](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) | 49 | 12 个分类 × 结构化流程 + 配置优先方法论 |
 | [配置优先排查方法论](./domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md) | 1 | 疑难问题系统性排查：先配置后链路，CoreDNS 完整示例 |
 | [运维词典](./domain-17-system-foundation/topic-dictionary/) | 200+ | 13 个分类的运维知识条目 |
 

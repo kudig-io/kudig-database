@@ -26,6 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Autoscaling Strategies
@@ -43,7 +44,7 @@ HPA scales the number of Pod replicas based on observed metrics:
 **Key behaviors**:
 - Polling interval: ~15 seconds (default)
 - Stabilization window: Prevents flapping (scale-up: 0s, scale-down: 5min default)
-- Works with Deployment, StatefulSet, ReplicaSet
+- Works with Deployment, [[StatefulSet|StatefulSet]], [[ReplicaSet|ReplicaSet]]
 
 ## Vertical Pod Autoscaler (VPA)
 
@@ -53,7 +54,7 @@ VPA adjusts resource requests/limits based on actual usage:
 |------|----------|-----------------|
 | **Off** | Only recommends | Yes |
 | **Initial** | Sets on Pod creation | Yes |
-| **Auto** | Updates existing Pods (recreates) | Yes, with caution |
+| **Auto** | Updates existing [[Pods|Pods]] (recreates) | Yes, with caution |
 | **Recreate** | Same as Auto | Yes, with caution |
 
 **Warning**: VPA and HPA on the same resource (CPU/memory) will conflict -- use VPA for right-sizing and HPA for replica scaling.

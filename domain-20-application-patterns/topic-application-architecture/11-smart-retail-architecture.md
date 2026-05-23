@@ -1,17 +1,56 @@
 ---
-title: 智慧零售与新零售Kubernetes生产架构设计
-description: '# 智慧零售与新零售 Kubernetes 生产架构设计'
-category: application-architecture
+title: 智慧零售与新零售 Kubernetes 生产架构设计
+description: 'title: 智慧零售与新零售Kubernetes生产架构设计'
+category: general
 tags:
-- k8s
 - architecture
-- industry
+- best-practice
 - prometheus
 - minio
 - redis
 - mysql
 - kafka
 - ingress
+- gateway
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 智慧零售与新零售 Kubernetes 生产架构设计 是什么
+- 如何 智慧零售与新零售 Kubernetes 生产架构设计
+- Kubernetes 20 application patterns 最佳实践
+trigger_keywords:
+- 智慧零售与新零售
+- Kubernetes
+- 生产架构设计
+- application
+- patterns
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+created: "2026-05-23"
+---
+
+title: 智慧零售与新零售Kubernetes生产架构设计
+description: '# 智慧零售与新零售 [[Kubernetes|Kubernetes]] 生产架构设计'
+category: application-architecture
+tags:
+- k8s
+- architecture
+- industry
+- [[Prometheus|prometheus]]
+- minio
+- redis
+- mysql
+- kafka
+- [[Ingress|ingress]]
 - gateway
 last_updated: '2026-05-18'
 difficulty: advanced
@@ -39,12 +78,6 @@ trigger_keywords:
 - 直播带货
 - 库存一盘货
 - O2O
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- kafka-basics
-- redis-basics
-- mysql-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-03-networking-traffic
@@ -55,6 +88,15 @@ related_topics:
 - domain-20-application-patterns/topic-application-architecture/12-smart-logistics-architecture
 - domain-20-application-patterns/topic-application-architecture/17-saas-multitenant-architecture
 - domain-02-workloads-applications/topic-functions/04-high-concurrency-system
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 智慧零售与新零售 Kubernetes 生产架构设计
@@ -67,7 +109,7 @@ related_topics:
 
 ---
 
-## 📋 目录
+<!-- chunk: 📋 目录 -->## 📋 目录
 
 - [一、整体架构全景](#一整体架构全景)
 - [二、全渠道交易架构](#二全渠道交易架构)
@@ -80,7 +122,7 @@ related_topics:
 
 ---
 
-## 一、整体架构全景
+<!-- chunk: 一、整体架构全景 -->## 一、整体架构全景
 
 ```mermaid
 flowchart TB
@@ -131,9 +173,9 @@ flowchart TB
     style StoreEdge fill:#fff8e1
 ```
 
-### 阿里云产品映射
+#<!-- chunk: 阿里云产品映射 -->## 阿里云产品映射
 
-| 架构层 | 开源/[[entities/kubernetes|k8s]] 方案 | 阿里云企业级方案 | 选型建议 |
+| 架构层 | 开源/K8s 方案 | 阿里云企业级方案 | 选型建议 |
 |:---|:---|:---|:---|
 | 容器平台 | 自建 K8s | **ACK Pro** / ACK 托管版 | 生产必选 ACK Pro，免运维 masters |
 | 负载均衡 | Nginx Ingress | **ALB** (应用型) / MSE 网关 | 大规模用 ALB，微服务用 MSE |
@@ -147,7 +189,7 @@ flowchart TB
 
 ---
 
-## 二、全渠道交易架构
+<!-- chunk: 二、全渠道交易架构 -->## 二、全渠道交易架构
 
 ```mermaid
 flowchart TB
@@ -187,7 +229,7 @@ flowchart TB
     style Storage fill:#e8f5e9
 ```
 
-### 单元化订单服务 ACK 部署
+#<!-- chunk: 单元化订单服务 ACK 部署 -->## 单元化订单服务 ACK 部署
 
 ```yaml
 # 单元化部署：按用户 ID 分片路由到不同单元
@@ -302,7 +344,7 @@ spec:
 
 ---
 
-## 三、门店数字化边缘架构
+<!-- chunk: 三、门店数字化边缘架构 -->## 三、门店数字化边缘架构
 
 ```mermaid
 flowchart TB
@@ -339,7 +381,7 @@ flowchart TB
     style Edge fill:#e8f5e9
 ```
 
-### ACK@Edge 门店网关部署
+#<!-- chunk: ACK@Edge 门店网关部署 -->## ACK@Edge 门店网关部署
 
 ```yaml
 apiVersion: apps/v1
@@ -403,7 +445,7 @@ spec:
 
 ---
 
-## 四、会员中台与营销架构
+<!-- chunk: 四、会员中台与营销架构 -->## 四、会员中台与营销架构
 
 ```mermaid
 flowchart TB
@@ -437,7 +479,7 @@ flowchart TB
 
 ---
 
-## 五、即时配送与履约架构
+<!-- chunk: 五、即时配送与履约架构 -->## 五、即时配送与履约架构
 
 ```mermaid
 flowchart TB
@@ -471,7 +513,7 @@ flowchart TB
 
 ---
 
-## 六、直播带货与内容电商架构
+<!-- chunk: 六、直播带货与内容电商架构 -->## 六、直播带货与内容电商架构
 
 ```mermaid
 flowchart TB
@@ -508,7 +550,7 @@ flowchart TB
 
 ---
 
-## 七、库存一盘货架构
+<!-- chunk: 七、库存一盘货架构 -->## 七、库存一盘货架构
 
 ```mermaid
 flowchart TB
@@ -539,9 +581,9 @@ flowchart TB
 
 ---
 
-## 八、ACK 阿里云部署架构
+<!-- chunk: 八、ACK 阿里云部署架构 -->## 八、ACK 阿里云部署架构
 
-### 多 AZ 高可用架构
+#<!-- chunk: 多 AZ 高可用架构 -->## 多 AZ 高可用架构
 
 ```mermaid
 flowchart TB
@@ -587,7 +629,7 @@ flowchart TB
     style Database fill:#e8f5e9
 ```
 
-### ACK 集群节点池配置
+#<!-- chunk: ACK 集群节点池配置 -->## ACK 集群节点池配置
 
 ```yaml
 # ACK 集群节点池配置 (阿里云)
@@ -664,9 +706,33 @@ spec:
 
 ---
 
-## 参考链接
+<!-- chunk: 参考链接 -->## 参考链接
 
 - [阿里云 ACK 文档](https://www.aliyun.com/product/kubernetes)
 - [阿里云 PolarDB](https://www.aliyun.com/product/polardb)
 - [阿里云 MSE 微服务引擎](https://www.aliyun.com/product/aliware/mse)
 - [新零售解决方案](https://www.aliyun.com/solution/newretail)
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-application-architecture MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/04-im-rtc-architecture.md|实时通信 IM/RTC 架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/05-online-education-architecture.md|在线教育平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技FinTech Kubernetes生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/07-iot-platform-architecture.md|物联网 IoT 平台架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/08-ai-ml-inference-architecture.md|AI/ML 推理服务 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/09-gaming-backend-architecture.md|游戏后端 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/topic-application-architecture/10-social-media-architecture.md|社交媒体平台Kubernetes生产架构设计]]
+
+## See Also
+
+- 09-gaming-backend-architecture
+- 10-social-media-architecture
+- 12-smart-logistics-architecture
+- 13-digital-government-architecture

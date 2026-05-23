@@ -30,6 +30,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Understand-Anything 知识图谱质量评估与改造计划
@@ -154,7 +155,7 @@ authors:
 - topic-release-notes → CHANGELOG.md → 分组锚点链
 - topic-dictionary → domain-1 架构文档
 - topic-learn → domain-1 架构文档
-- topic-skills ↔ domain-12 故障排查文档
+- topic-skills ↔ domain-12 问题排查文档
 - 所有目录内部链式 related 连接
 
 ### 2.4 低质量摘要修复
@@ -237,7 +238,7 @@ authors:
 - [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
 - [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
 - [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
+- [[_reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
 - [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
 
 ## Related

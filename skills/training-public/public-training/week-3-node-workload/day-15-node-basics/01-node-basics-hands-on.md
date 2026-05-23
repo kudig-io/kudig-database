@@ -33,6 +33,7 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -40,7 +41,7 @@ title: Day 15: Node 节点基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[entities/kubernetes|kubernetes]] 节点管理
+  - [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 节点管理
   - kubectl cordon drain uncordon
   - 节点状态 NotReady 排查
   - Pod 调度到特定节点
@@ -81,7 +82,7 @@ related_topics:
 | 状态 | 含义 | 处理方式 |
 |------|------|---------|
 | `Ready` | 节点健康，Pod 可调度 | 正常 |
-| `NotReady` | kubelet 无法上报心跳 | 检查 kubelet/网络 |
+| `NotReady` | [[kubelet|kubelet]] 无法上报心跳 | 检查 kubelet/网络 |
 | `SchedulingDisabled` | 已 cordoned，新 Pod 不会调度 | 维护前准备 |
 | `Unknown` | API Server 无法获取状态 | 检查网络/节点 |
 | `MemoryPressure` | 内存不足 | 疏散 Pod 或扩容 |

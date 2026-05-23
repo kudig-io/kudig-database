@@ -27,6 +27,7 @@ trigger_keywords:
 - FEBM
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 故障树分析（FTA）与取证循证方法论（FEBM）

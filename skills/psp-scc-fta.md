@@ -1,5 +1,5 @@
 ---
-title: PSP/SCC 异常故障树分析
+title: PSP/SCC 异常故障树分析 (skills)
 description: '<!-- condition: kubectl get events -A | grep -E ''Forbidden|violates PodSecurity'' 显示安全策略拒绝 -->'
 category: skills
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 fta_id: FTA-PSP_SCC-001
 component: Psp Scc
 severity: medium
+created: "2026-05-23"
 ---
 
 # PSP/SCC 异常故障树分析

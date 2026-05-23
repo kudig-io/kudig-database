@@ -1,6 +1,6 @@
 ---
-title: 多集群/联邦场景故障排查
-description: '# 多集群/联邦场景故障排查'
+title: 多集群/联邦场景问题排查
+description: '# 多集群/联邦场景问题排查'
 category: general
 tags:
 - k8s
@@ -19,29 +19,30 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- 多集群/联邦场景故障排查 是什么
-- 如何 多集群/联邦场景故障排查
-- 多集群/联邦场景故障排查 故障排查
-- 多集群/联邦场景故障排查 排障步骤
+- 多集群/联邦场景问题排查 是什么
+- 如何 多集群/联邦场景问题排查
+- 多集群/联邦场景问题排查 问题排查
+- 多集群/联邦场景问题排查 排障步骤
 trigger_keywords:
 - 多集群
-- 联邦场景故障排查
+- 联邦场景问题排查
 prerequisites:
 - kubectl-basics
 - gitops-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
-# 多集群/联邦场景故障排查
+# 多集群/联邦场景问题排查
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: 集群联邦 (Kubefed)、GitOps 多集群冲突、多集群网络打通的故障排查
+> **用途**: 集群联邦 (Kubefed)、GitOps 多集群冲突、多集群网络打通的问题排查
 > **关联**: domain-37-edge-computing, domain-08-release-change-management
 
 ---
 
-## 1. 集群联邦 (Kubefed) 故障排查
+## 1. 集群联邦 (Kubefed) 问题排查
 
 ### 1.1 Kubefed 控制平面异常
 
@@ -269,7 +270,7 @@ kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubef
 
 | 条件 | 操作 |
 |------|------|
-| 多个集群控制平面同时故障 | 立即升级 SRE + 多云团队 |
+| 多个集群控制平面同时问题 | 立即升级 SRE + 多云团队 |
 | 跨集群网络完全中断 | 立即升级网络团队 |
 | GitOps 冲突导致服务中断 | 升级 GitOps 团队 |
 | 联邦资源数据不一致 | 升级 SRE 团队 |

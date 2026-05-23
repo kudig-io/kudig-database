@@ -33,15 +33,16 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 # 网络故障排查
 
-### 01 Cni Troubleshooting
+### 01 Cni Troubleshootingompt 模板|Troubleshooting]]
 
 #### 0. 10 分钟快速诊断
 
-1. **组件存活**：`kubectl get pods -n kube-system -l k8s-app=calico-node`/`-l app=flannel`/`-l k8s-app=cilium`，若异常先看对应日志。
+1. **组件存活**：`kubectl get [[Pods|pods]] -n kube-system -l k8s-app=calico-node`/`-l app=flannel`/`-l k8s-app=[[Cilium|cilium]]`，若异常先看对应日志。
 2. **CNI 配置完整性**：节点上检查 `/etc/cni/net.d/` 与 `/opt/cni/bin/` 是否匹配版本、文件未损坏。
 3. **Pod IP 分配**：`kubectl get pods -A -o wide | head` 查看是否出现无 IP/重复 IP；CNI 日志搜索 `IPAM`/`no available IPs`。
 4. **路由/封装**：`ip route`、`bridge fdb show`、`tcpdump -i eth0 udp port 4789` 验证 VXLAN；BGP 场景检查 `bird`/`calico-node` 路由。
@@ -49,7 +50,7 @@ prerequisites:
 6. **跨节点连通**：在不同节点 Pod 之间 `ping`/`curl`，结合 `ip route get` 确认路径正确。
 7. **快速缓解**：
    - IPAM 耗尽：扩展地址池或回收泄露 IP。
-   - 组件异常：滚动重启 CNI DaemonSet，避免单节点规则不同步。
+   - 组件异常：滚动重启 CNI [[DaemonSet|DaemonSet]]，避免单节点规则不同步。
    - 网络抖动：先降低变更频率，避免大量 Pod 同时创建/删除导致 FDB/ARP 抖动。
 8. **证据留存**：保存 CNI 日志、节点路由/ARP/FDB 快照、失败的连通性测试结果。
 

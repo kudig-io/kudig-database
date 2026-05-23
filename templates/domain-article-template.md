@@ -3,6 +3,8 @@
 ## YAML Front Matter
 
 ```yaml
+created: "2026-05-23"
+updated: "2026-05-23"
 ---# {{主题名称}}
 
 > **模板版本**: 2.0

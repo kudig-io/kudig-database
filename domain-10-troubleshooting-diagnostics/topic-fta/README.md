@@ -1,5 +1,5 @@
 ---
-title: 'topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
+title: topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践 [topic-fta]
 description: '# topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践'
 category: fta
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 fta_id: FTA-README-001
 component: Readme
 severity: high
+created: "2026-05-23"
 ---
 
 # topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践
@@ -53,7 +54,7 @@ severity: high
 
 ## 专题概述
 
-本专题提供 FTA（Fault Tree Analysis）故障树分析方法论的完整知识体系，从传统安全工程理论到云原生 Kubernetes 智能运维实践，涵盖方法论理论、构建实践、AI Agent 编排、AIOps 集成、工程化建设及生产环境快速落地。
+本专题提供 FTA（Fault Tree Analysis）故障树分析方法论的完整知识体系，从传统安全工程理论到云原生 [[Kubernetes|Kubernetes]] 智能运维实践，涵盖方法论理论、构建实践、AI Agent 编排、AIOps 集成、工程化建设及生产环境快速落地。
 
 **适用读者**：SRE、运维工程师、安全工程师、平台架构师、AIOps 工程师
 
@@ -68,7 +69,7 @@ severity: high
 | **K8s 全量故障树** | [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md) |
 | **FTA + AI Agent** | [第8章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) |
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta-methodology-and-agentic-practices.md) |
-| **FTA vs FEBM 对比** | [topic-febm](../domain-10-troubleshooting-diagnostics/topic-febm/[[README]].md) |
+| **FTA vs FEBM 对比** | [topic-febm](../domain-10-troubleshooting-diagnostics/[[references/kudig-metadata-index|README]]]].md) |
 
 ## 最近更新（2026 Q2）
 - **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta-methodology-and-agentic-practices.md#二十三生产级落地基线2026q2-更新)
@@ -158,8 +159,8 @@ severity: high
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-febm](../domain-10-troubleshooting-diagnostics/topic-febm/[[README]].md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
-| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/[[README]].md) | 结构化故障排查知识库 |
+| [topic-febm](../domain-10-troubleshooting-diagnostics/[[topic-febm/README]].md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
+| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/[[topic-structural-trouble-shooting/README]].md) | 结构化故障排查知识库 |
 | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 传统故障排查文档 |
 | [domain-06-observability](../domain-06-observability/) | 可观测性体系 |
 
@@ -182,20 +183,20 @@ Agent 工程师:  第8-13章 → 第14章
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/opentelemetry.md|OpenTelemetry]]
 - [[log.md|log]]
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- [[domain-03-networking-traffic/98-merged-indexes/MOC-from-domain-03-networking-traffic|domain-03-networking-traffic MOC]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/README-from-domain-20-application-patterns|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- domain-03-networking-traffic MOC — Cross-reference
+- Topic 应用层架构设计最佳实践 — Cross-reference
+- topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- [[domain-08-release-change-management/98-merged-indexes/MOC-from-domain-08-release-change-management|domain-08-release-change-management MOC]] — Cross-reference
+- domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
-- [[domain-09-reliability-engineering/98-merged-indexes/README-from-domain-09-reliability-engineering|Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

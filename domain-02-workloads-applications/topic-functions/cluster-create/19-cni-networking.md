@@ -1,4 +1,47 @@
 ---
+title: CNI 网络插件与集群网络 (topic-code-analysis)
+description: 'title: CNI 网络插件与集群网络'
+category: general
+tags:
+- reference
+- networking
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- cilium
+- flannel
+- calico
+- coredns
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- CNI 网络插件与集群网络 是什么
+- 如何 CNI 网络插件与集群网络
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- CNI
+- 网络插件与集群网络
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- helm-basics
+- prometheus-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: CNI 网络插件与集群网络
 description: '# CNI 网络插件与集群网络'
 category: functions
@@ -42,15 +85,6 @@ trigger_keywords:
 - overlay
 - VXLAN
 - BGP
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- helm-basics
-- prometheus-basics
-- ebpf-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
 related_domains:
 - domain-03-networking-traffic
 - domain-10-troubleshooting-diagnostics
@@ -61,6 +95,15 @@ related_topics:
 - kube-proxy
 - Service
 - Ingress
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # CNI 网络插件与集群网络
@@ -121,7 +164,7 @@ func (p *cniNetworkPlugin) removeFromNetwork(ctx context.Context, network *cniNe
 | `errors` | 错误日志 |
 | `health` | 健康检查端点 :8080/health |
 | `ready` | 就绪端点 :8181/ready |
-| `[[entities/kubernetes|kubernetes]]` | Kubernetes Service DNS 解析 |
+| `kubernetes` | Kubernetes Service DNS 解析 |
 | `prometheus` | Metrics 端点 :9153/metrics |
 | `forward` | 上游 DNS 转发 |
 | `cache` | DNS 缓存 TTL |
@@ -498,3 +541,11 @@ kubectl exec -it <pod> -- cat /etc/resolv.conf
 - [`kube-proxy 模式`](21-kube-proxy.md) — iptables/ipvs/nftables 对比
 - [`Service 与 Endpoints`](22-storage-volumes.md) — Service 负载均衡机制
 - [`Pod 网络命名空间`](../node-create/09-cni-node.md) — veth pair 和 bridge
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]

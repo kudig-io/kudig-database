@@ -56,9 +56,10 @@ cross_refs:
 - type: domain
   path: ../domain-05-security-compliance/
   label: '相关知识域: domain-05-security-compliance'
+created: "2026-05-23"
 ---
 
-# Envoy Proxy 企业级服务网格数据平面深度实践
+# [[Envoy|Envoy]] Proxy 企业级服务网格数据平面深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Envoy v1.33+ | **难度**: 高级
 
@@ -66,7 +67,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为 CNCF 项目，现已发展为云原生服务代理的事实标准。几乎所有主流服务网格（Istio、Consul Connect、Kuma）和 API 网关（Emissary、Contour、Envoy Gateway）都以 Envoy 作为数据平面。Envoy 的核心优势在于其优秀的 xDS 动态配置 API、丰富的 L7 协议支持、高性能的 C++ 实现，以及可扩展的 WASM 过滤器机制。
+Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为 CNCF 项目，现已发展为云原生服务代理的事实标准。几乎所有主流服务网格（[[Istio|Istio]]、Consul Connect、[[Kuma|Kuma]]）和 API 网关（Emissary、[[Contour|Contour]]、Envoy Gateway）都以 Envoy 作为数据平面。Envoy 的核心优势在于其优秀的 xDS 动态配置 API、丰富的 L7 协议支持、高性能的 C++ 实现，以及可扩展的 WASM 过滤器机制。
 
 本文档从企业级运维专家角度，深入探讨 Envoy 的核心架构、xDS 配置管理、HTTP 连接管理器、高级负载均衡、安全配置（mTLS/RBAC）、性能调优、监控告警和故障排查。所有配置均可直接应用于生产环境，既适用于独立 Envoy 部署，也为理解服务网格底层数据平面提供参考。
 
@@ -1221,25 +1222,25 @@ request_mirror_policies:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 26: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microser...]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-26 服务网格与微服务 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|Linkerd 企业级服务网格深度实践]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|Consul Connect 企业级服务网格管理]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|Dapr (Distributed Application Runtime) Enterprise 深度实践]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|Traefik Mesh Enterprise Service Mesh 深度实践]]
-- [[domain-03-networking-traffic/07-service-mesh-comparison-selection.md|服务网格对比与选型决策指南]]
-- [[domain-03-networking-traffic/08-ambient-mesh-l7-policy.md|Istio Ambient Mesh 与 L7 策略深度实践]]
-- [[domain-03-networking-traffic/09-microservice-resilience-patterns.md|微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...]]
-- [[domain-03-networking-traffic/10-api-gateway-service-mesh-integration.md|API 网关与服务网格集成深度实践]]
+- Domain-26 服务网格与微服务 — 开源项目索引
+- Istio 企业级服务网格架构与实践
+- Linkerd 企业级服务网格深度实践
+- Consul Connect 企业级服务网格管理
+- Dapr (Distributed Application Runtime) Enterprise 深度实践
+- Traefik Mesh Enterprise Service Mesh 深度实践
+- 服务网格对比与选型决策指南
+- Istio Ambient Mesh 与 L7 策略深度实践
+- 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rat...
+- API 网关与服务网格集成深度实践
 
 ## See Also
 
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|02-linkerd-enterprise-service-mesh]]
-- [[domain-03-networking-traffic/03-consul-connect-enterprise.md|03-consul-connect-enterprise]]
-- [[domain-03-networking-traffic/05-dapr-enterprise-distributed-runtime.md|05-dapr-enterprise-distributed-runtime]]
-- [[domain-03-networking-traffic/06-traefik-mesh-enterprise.md|06-traefik-mesh-enterprise]]
+- 02-linkerd-enterprise-service-mesh
+- 03-consul-connect-enterprise
+- 05-dapr-enterprise-distributed-runtime
+- 06-traefik-mesh-enterprise
 
 ## Related
 

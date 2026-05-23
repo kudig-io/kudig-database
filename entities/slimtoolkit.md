@@ -1,5 +1,5 @@
 ---
-title: SlimToolkit
+title: SlimToolkit (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - SlimToolkit
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # SlimToolkit
@@ -57,13 +58,13 @@ SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自�
 
 ## Related
 
-- [[connect-rpc]] — Connect RPC
+- [[connect-rpc]] — [[Connect RPC|Connect RPC]]
 - [[antrea]] — Antrea
 - [[linkerd]] — Linkerd
-- [[oscal-compass]] — OSCAL Compass
+- [[oscal-compass]] — [[OSCAL Compass|OSCAL Compass]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/slimtoolkit/slimtoolkit.md|slimtoolkit]]
+- slimtoolkit
 - [[entities/zot.md|zot]]
 - [[entities/eraser.md|Eraser]]
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference

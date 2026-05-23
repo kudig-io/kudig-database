@@ -1,5 +1,5 @@
 ---
-title: werf
+title: werf [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+created: "2026-05-23"
 ---
 
 # werf
@@ -64,10 +65,10 @@ werf 是一个一致且可复现的 CI/CD 交付工具，将 Git 作为唯一真
 
 - [[pipecd]] — PipeCD
 - [[hami]] — HAMI
-- [[open-policy-containers]] — Open Policy Containers (OPCR)
+- [[open-policy-containers]] — [[entities/open-policy-containers.md|Open Policy Containers (OPCR)]]
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/werf/werf.md|werf]]
+- werf
 - [[entities/cncf-cicd|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

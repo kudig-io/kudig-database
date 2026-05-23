@@ -75,9 +75,10 @@ related_docs:
 - path: ../domain-17-system-foundation/topic-cheat-sheet/promql.md
   type: cheatsheet
   desc: PromQL 速查卡
+created: "2026-05-23"
 ---
 
-# 01 - Kubernetes 可观测性架构体系 (Observability Architecture)
+# 01 - [[Kubernetes|Kubernetes]] 可观测性架构体系 (Observability Architecture)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/monitoring](https://kubernetes.io/docs/concepts/cluster-administration/monitoring/)
 
@@ -179,7 +180,7 @@ unified_observability_plane:
 <!-- chunk: 二、指标监控体系架构 -->
 ## 二、指标监控体系架构
 
-### 2.1 Prometheus 生态系统
+### 2.1 [[Prometheus|Prometheus]] 生态系统
 
 #### 监控架构拓扑
 ```yaml
@@ -220,10 +221,10 @@ prometheus_monitoring_stack:
 | 组件类别 | 关键指标 | 告警阈值 | 运维价值 |
 |---------|---------|---------|---------|
 | **API Server** | 请求延迟、错误率、QPS | P99>1s, 5xx>1% | API健康度 |
-| **etcd** | Leader切换、磁盘延迟、数据库大小 | >3次/小时, P99>10ms | 数据存储稳定性 |
+| **[[etcd|etcd]]** | Leader切换、磁盘延迟、数据库大小 | >3次/小时, P99>10ms | 数据存储稳定性 |
 | **Scheduler** | 调度延迟、待调度Pod数 | P99>5s, >100个 | 调度性能 |
 | **Controller** | 队列深度、处理延迟 | >100个, P99>30s | 控制器健康 |
-| **Kubelet** | PLEG延迟、Pod启动时间 | P99>3s, >60s | 节点稳定性 |
+| **[[kubelet|Kubelet]]** | PLEG延迟、Pod启动时间 | P99>3s, >60s | 节点稳定性 |
 
 ---
 
@@ -580,39 +581,39 @@ hybrid_observability:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-06-observability/MOC.md|domain-06-observability MOC]]
+- domain-06-observability MOC
 - [[domain-06-observability/README.md|Observability Domain (可观测性领域)]]
 - [[domain-06-observability/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系详解]]
-- [[domain-06-observability/03-logging-architecture.md|03 - 日志收集架构详解 (Logging Architecture)]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
-- [[domain-06-observability/05-alerting-management.md|05 - 告警管理策略 (Alerting Management)]]
-- [[domain-06-observability/06-monitoring-alerting-practice.md|06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)]]
-- [[domain-06-observability/07-monitoring-dashboards.md|04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)]]
-- [[domain-06-observability/08-logging-audit-compliance.md|08 - 日志审计与合规管理 (Logging Auditing & Compliance)]]
-- [[domain-06-observability/09-events-audit-logs.md|05 - 事件与审计日志管理 (Events & Audit Logs)]]
-- [[domain-06-observability/10-monitoring-metrics-prometheus.md|07 - 监控和指标表]]
+- 指标监控体系详解
+- 03 - 日志收集架构详解 (Logging Architecture)
+- 分布式追踪体系
+- 05 - 告警管理策略 (Alerting Management)
+- 06 - 监控告警实战与最佳实践 (Monitoring Alerting Practice)
+- 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
+- 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
+- 05 - 事件与审计日志管理 (Events & Audit Logs)
+- 07 - 监控和指标表
 
 ## Related
 
 - [[MOC]]
 - [[synthesis/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
-- [[domain-20-application-patterns/77-fusion-energy-monitoring.md|77-fusion-energy-monitoring]]
+- 77-fusion-energy-monitoring
 
-- [[domain-06-observability/02-monitoring-metrics-system.md|指标监控体系]]
-- [[domain-06-observability/04-distributed-tracing.md|分布式追踪体系]]
+- 指标监控体系
+- 分布式追踪体系
 - [[domain-17-system-foundation/topic-cheat-sheet/promql.md|PromQL 速查卡]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-02-workloads-applications/MOC.md|相关知识域: domain-02-workloads-applications]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-07-platform-engineering/MOC.md|相关知识域: domain-07-platform-engineering]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-02-workloads-applications
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-07-platform-engineering
 - [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
 
 - [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 
 ## See Also
 
-- [[domain-06-observability/QUALITY-REPORT.md|QUALITY-REPORT]]
-- [[domain-06-observability/UPDATED-QUALITY-REPORT.md|UPDATED-QUALITY-REPORT]]
-- [[domain-06-observability/02-monitoring-metrics-system.md|02-monitoring-metrics-system]]
-- [[domain-06-observability/03-logging-architecture.md|03-logging-architecture]]
+- QUALITY-REPORT
+- UPDATED-QUALITY-REPORT
+- 02-monitoring-metrics-system
+- 03-logging-architecture

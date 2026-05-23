@@ -32,6 +32,7 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 智慧矿山架构设计
@@ -41,10 +42,10 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - mysql
-- daemonset
+- [[DaemonSet|daemonset]]
 - operator
 - nvidia
 - rag
@@ -571,7 +572,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -586,7 +587,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/45-smart-port-shipping.md|45-smart-port-shipping]]
-- [[domain-20-application-patterns/46-satellite-internet.md|46-satellite-internet]]
-- [[domain-20-application-patterns/48-vocational-edtech.md|48-vocational-edtech]]
-- [[domain-20-application-patterns/49-livestream-ecommerce.md|49-livestream-ecommerce]]
+- 45-smart-port-shipping
+- 46-satellite-internet
+- 48-vocational-edtech
+- 49-livestream-ecommerce

@@ -75,11 +75,12 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md
   label: '速查卡: kubectl-scene-cheatsheet'
+created: "2026-05-23"
 ---
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
 
-# Kubernetes 控制平面架构总览
+# [[Kubernetes|Kubernetes]] 控制平面架构总览
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 架构设计文档
 
@@ -149,7 +150,7 @@ cross_refs:
 | **声明式API** | 用户声明期望状态，系统自动达成 | YAML配置文件 |
 | **控制循环** | 持续监控并调整实际状态 | Watch + Reconcile |
 | **最终一致性** | 系统最终收敛到期望状态 | 异步协调机制 |
-| **松耦合设计** | 组件间通过API交互 | gRPC/HTTP通信 |
+| **松耦合设计** | 组件间通过API交互 | [[gRPC|gRPC]]/HTTP通信 |
 | **可扩展性** | 支持自定义控制器和CRD | Operator模式 |
 
 ---
@@ -680,7 +681,7 @@ spec:
 
 | 指标类别 | 指标名称 | 目标值 | 测量方法 |
 |----------|----------|--------|----------|
-| **API延迟** | P99 API响应时间 | <100ms | prometheus histogram |
+| **API延迟** | P99 API响应时间 | <100ms | [[Prometheus|prometheus]] histogram |
 | **API吞吐** | QPS | >1000 req/s | load test工具 |
 | **etcd延迟** | WAL fsync延迟 | <10ms | etcd metrics |
 | **调度性能** | Pod调度延迟 | <5s | kube-scheduler metrics |
@@ -833,22 +834,22 @@ Kubernetes控制平面是整个系统的指挥中枢，其架构设计直接影�
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-01-cluster-fundamentals/MOC.md|domain-01-cluster-fundamentals MOC]]
+- domain-01-cluster-fundamentals MOC
 - [[domain-01-cluster-fundamentals/README.md|Domain-3: Kubernetes控制平面]]
-- [[domain-01-cluster-fundamentals/00-open-source-projects-index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...]]
-- [[domain-01-cluster-fundamentals/04-plane-security-hardening.md|控制平面安全加固指南 (Control Plane Security Hardening Guide)]]
-- [[domain-01-cluster-fundamentals/05-plane-monitoring-observability.md|控制平面监控与可观测性 (Control Plane Monitoring & Observability)]]
-- [[domain-01-cluster-fundamentals/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]]
-- [[domain-01-cluster-fundamentals/07-plane-upgrade-migration.md|控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)]]
-- [[domain-01-cluster-fundamentals/08-plane-performance-benchmarking.md|控制平面性能基准测试 (Control Plane Performance Benchmarking)]]
-- [[domain-01-cluster-fundamentals/09-plane-scalability-guide.md|控制平面扩缩容指南 (Control Plane Scalability Guide)]]
-- [[domain-01-cluster-fundamentals/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
+- Domain-3 控制平面 — 开源项目索引
+- 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
+- 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
+- 控制平面安全加固指南 (Control Plane Security Hardening Guide)
+- 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
+- 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
+- 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
+- 控制平面性能基准测试 (Control Plane Performance Benchmarking)
+- 控制平面扩缩容指南 (Control Plane Scalability Guide)
+- 控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)
 
 ## See Also
 
-- [[domain-01-cluster-fundamentals/final-completion-check.md|final-completion-check]]
-- [[domain-01-cluster-fundamentals/quality-report.md|quality-report]]
-- [[domain-01-cluster-fundamentals/02-plane-components-interaction.md|02-plane-components-interaction]]
-- [[domain-01-cluster-fundamentals/03-plane-high-availability.md|03-plane-high-availability]]
+- final-completion-check
+- quality-report
+- 02-plane-components-interaction
+- 03-plane-high-availability

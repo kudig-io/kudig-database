@@ -51,13 +51,14 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
   label: '故障树: pod'
+created: "2026-05-23"
 ---
 
 # 02 - Pod 与容器生命周期事件
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
-> **本文档全面覆盖 kubelet 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**
+> **本文档全面覆盖 [[kubelet|kubelet]] 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**
 
 ---
 
@@ -254,7 +255,7 @@ Kubernetes 中容器有三种状态，每种状态对应不同的事件触发时
 
 ##<!-- chunk: 事件含义 -->## 事件含义
 
-容器运行时（如 containerd、CRI-O、Docker）已成功创建容器实例，但尚未启动（进程尚未执行）。这是容器生命周期的第二阶段（第一阶段是镜像拉取）。
+容器运行时（如 [[containerd|containerd]]、CRI-O、Docker）已成功创建容器实例，但尚未启动（进程尚未执行）。这是容器生命周期的第二阶段（第一阶段是镜像拉取）。
 
 在此阶段：
 - 容器的文件系统层已准备完毕
@@ -2451,25 +2452,25 @@ chmod +x pod-lifecycle-diagnosis.sh
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/07-deployment-replicaset-events.md|07 - Deployment 与 ReplicaSet 控制器事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 07 - Deployment 与 ReplicaSet 控制器事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/15-ecosystem-addon-events.md|15-ecosystem-addon-events]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01-event-system-architecture]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03-image-pull-events]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04-probe-health-check-events]]
+- 15-ecosystem-addon-events
+- 01-event-system-architecture
+- 03-image-pull-events
+- 04-probe-health-check-events
 
 ## Related
 

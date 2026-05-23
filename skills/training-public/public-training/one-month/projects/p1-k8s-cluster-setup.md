@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -39,9 +40,9 @@ title: 项目 P1: 从零搭建 K8s 集群
 last_updated: 2026-05-18
 difficulty: beginner
 intent_queries:
-  - kind kubernetes 集群本地搭建教程
+  - kind [[Kubernetes|kubernetes]] 集群本地搭建教程
   - kubectl 基本命令操作示例
-  - 从零创建 deployment service namespace
+  - 从零创建 deployment [[Service|service]] namespace
   - k8s 故障排查入门练习
 trigger_keywords:
   - kind

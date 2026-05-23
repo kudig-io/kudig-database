@@ -29,6 +29,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - iac-basics
+created: "2026-05-23"
 ---
 
 # LSP 代码智能与 Formatter
@@ -108,7 +109,7 @@ Agent 获得诊断信息 → 自动分析并修复 → 再次触发诊断
 | **ocaml-lsp** | .ml, .mli | `ocamllsp` 命令可用 |
 | **julials** | .jl | `julia` + `LanguageServer.jl` 已安装 |
 | **nixd** | .nix | `nixd` 命令可用 |
-| **[[entities/terraform|terraform]]** | .tf, .tfvars | 自动安装 |
+| **terraform** | .tf, .tfvars | 自动安装 |
 | **tinymist** | .typ, .typc | 自动安装 |
 | **zls** | .zig, .zon | `zig` 命令可用 |
 | **prisma** | .prisma | `prisma` 命令可用 |

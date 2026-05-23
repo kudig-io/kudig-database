@@ -1,5 +1,5 @@
 ---
-title: 第五章：FTA 构建完整流程
+title: 第五章：FTA 构建完整流程 (domain-10-troubleshooting-diagnostics)
 description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
 category: fta
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 fta_id: FTA-05_CONSTRUCTION_PROCESS-001
 component: 05 Construction Process
 severity: critical
+created: "2026-05-23"
 ---
 
 title: 第五章：FTA 构建完整流程
@@ -51,10 +52,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- etcd
-- kubelet
+- [[etcd|etcd]]
+- [[kubelet|kubelet]]
 - scheduler
-- coredns
+- [[CoreDNS|coredns]]
 - statefulset
 - daemonset
 last_updated: 2026-05

@@ -26,6 +26,7 @@ trigger_keywords:
 - 安全加固
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # containerd 安全加固
@@ -57,8 +58,8 @@ title: containerd 安全加固生产指南
 - [[containerd]]
 - [[entities/cni-plugins.md|cni-plugins]]
 - [[falco]]
-- [[entities/trivy.md|trivy]]
-- [[entities/networkpolicy.md|networkpolicy]]
+- [[entities/trivy.md|[[Trivy|trivy]]]]
+- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
 
 ## Related
 
@@ -68,4 +69,4 @@ title: containerd 安全加固生产指南
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/graduated/containerd/03-containerd-security-hardening.md|03-containerd-security-hardening]]
+- 03-containerd-security-hardening

@@ -1,5 +1,5 @@
 ---
-title: container2wasm
+title: container2wasm (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -23,6 +23,7 @@ trigger_keywords:
 - container2wasm
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # container2wasm
@@ -46,7 +47,7 @@ container2wasm 是一个将 Linux 容器镜像转换为 WebAssembly (WASM) 模�
 - **选择 RISC-V**: 对于体积敏感的场景，使用 `--target-arch=riscv64` 生成更小的 WASM
 - **精简镜像**: 使用 Alpine 等轻量镜像减少转换后的 WASM 体积
 - **外部层**: 对大型镜像使用 `--assets-to-external-bundle` 分离层数据
-- **浏览器优化**: 预加载 WASM 模块并使用 Service Worker 缓存
+- **浏览器优化**: 预加载 WASM 模块并使用 [[Service|Service]] Worker 缓存
 - **网络隔离**: 生产环境谨慎配置网络代理，避免安全风险
 
 ## 架构定位
@@ -65,6 +66,6 @@ container2wasm 是一个将 Linux 容器镜像转换为 WebAssembly (WASM) 模�
 - [[ratify]] — Ratify
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/container2wasm/container2wasm.md|container2wasm]]
+- container2wasm
 - [[entities/cncf-runtime|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]

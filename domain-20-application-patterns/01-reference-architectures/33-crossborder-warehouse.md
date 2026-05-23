@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 跨境电商海外仓架构设计
@@ -43,7 +44,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -59,7 +60,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 跨境电商海外仓 Kubernetes WMS
+- 跨境电商海外仓 [[Kubernetes|Kubernetes]] WMS
 - 多区域仓库 Kubernetes 分布式部署
 - 跨境物流 订单履约 K8s
 - 库存同步 RocketMQ Kubernetes
@@ -575,7 +576,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -590,7 +591,7 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/31-instant-retail.md|31-instant-retail]]
-- [[domain-20-application-patterns/32-smart-restaurant.md|32-smart-restaurant]]
-- [[domain-20-application-patterns/34-sportstech.md|34-sportstech]]
-- [[domain-20-application-patterns/35-metaverse-digital-twin.md|35-metaverse-digital-twin]]
+- 31-instant-retail
+- 32-smart-restaurant
+- 34-sportstech
+- 35-metaverse-digital-twin

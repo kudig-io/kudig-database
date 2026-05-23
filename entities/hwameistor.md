@@ -1,5 +1,5 @@
 ---
-title: HwameiStor
+title: HwameiStor (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -24,6 +24,7 @@ trigger_keywords:
 - HwameiStor
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # HwameiStor
@@ -64,12 +65,12 @@ HwameiStor 是一个 Kubernetes 原生的高可用本地存储系统，能够将
 ## Related
 
 - [[bootc]] — bootc
-- [[serverless-workflow]] — Serverless Workflow
+- [[serverless-workflow]] — [[Serverless Workflow|Serverless Workflow]]
 - [[cloudnativepg]] — CloudNativePG
 - [[strimzi]] — Strimzi
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/hwameistor/hwameistor.md|hwameistor]]
+- hwameistor
 - [[entities/cncf-storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]

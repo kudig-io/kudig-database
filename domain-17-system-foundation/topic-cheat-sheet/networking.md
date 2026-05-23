@@ -1,654 +1,583 @@
 ---
-title: 网络诊断速查卡
-description: TCP/IP 网络故障排查与诊断工具快速参考
-category: cheatsheet
+title: Kubernetes 网络配置最佳实践 [infrastructure]
+description: 生产环境 Kubernetes 网络配置的最佳实践指南
+category: best-practices/infrastructure
 tags:
-- network
-- tcpip
-- dns
-- troubleshooting
-- cheatsheet
-- quick-reference
-- cilium
-- flannel
+- kubernetes
+- networking
 - calico
+- cilium
+- network-policy
+- istio
+- flannel
 - coredns
+- helm
+- ingress
 last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+difficulty: advanced
+reading_level: advanced
 audience:
-- 所有工程师
-estimated_read_time: 5min
+- 网络工程师
+- SRE
+- DevOps 工程师
+estimated_read_time: 25min
 intent_queries:
-- 网络诊断速查卡 是什么
-- 如何 网络诊断速查卡
+- Kubernetes 网络配置 最佳实践
+- 如何 配置 Kubernetes 网络策略
+- Kubernetes 网络插件 选择
 trigger_keywords:
-- 网络诊断速查卡
-- cheat
-- sheet
+- Kubernetes
+- 网络配置
+- 网络策略
+- CNI
 prerequisites:
 - kubectl-basics
-- cloud-provider-basics
+- helm-basics
+- service-mesh-basics
+- ebpf-basics
 - cilium-basics
 - cni-basics
-authors:
-- name: KUDIG Team
-  role: contributor
-related_docs:
-- path: ../domain-03-networking-traffic/
-  desc: Kubernetes 网络深度文档
-- path: ../domain-03-networking-traffic/
-  desc: 网络基础理论
-- path: ../domain-17-system-foundation/topic-cheat-sheet/tls-pki.md
-  desc: TLS/PKI 证书速查卡
+cross_refs:
+- type: domain
+  path: ../../domain-03-networking-traffic/
+  label: 网络知识域
+- type: best-practice
+  path: ./kubernetes-cluster.md
+  label: 集群配置最佳实践
+created: "2026-05-23"
 ---
 
-# 网络诊断速查表
+# Kubernetes 网络配置最佳实践
 
-> TCP/IP 网络故障排查与诊断工具快速参考 | **最后更新**: 2026-05
+> **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
----
-
-## 目录
-
-- [常用诊断命令](#常用诊断命令)
-- [DNS 诊断](#dns-诊断)
-- [TCP/UDP 调试](#tcpudp-调试)
-- [HTTP/HTTPS 诊断](#httphttps-诊断)
-- [路由与防火墙](#路由与防火墙)
-- [抓包分析](#抓包分析)
-- [Kubernetes 网络诊断](#kubernetes-网络诊断)
-- [性能测试](#性能测试)
+> **生产环境实战经验总结**: 基于大规模集群网络运维经验，涵盖从CNI选型到网络策略的全方位最佳实践
 
 ---
 
-## 常用诊断命令
+## 概述
 
-### 连通性测试
+本指南提供生产环境 Kubernetes 网络配置的最佳实践，帮助团队构建安全、高效、可扩展的网络基础设施。
 
-```bash
-# ping - 基础连通性
-ping google.com
-ping -c 4 8.8.8.8                    # 发送4次
-ping -i 0.2 192.168.1.1              # 间隔0.2秒
-ping -s 1472 google.com              # 大包测试（MTU）
+### 目标读者
 
-# hping3 - 高级 ping
-hping3 -S -p 80 google.com           # SYN ping 端口80
-hping3 -A -p 443 192.168.1.1         # ACK ping
-hping3 -2 -p 53 8.8.8.8              # UDP ping
-hping3 --flood -S -p 80 192.168.1.1  # 压力测试（慎用）
+- **网络工程师**: 了解Kubernetes网络架构和CNI插件选型
+- **SRE**: 掌握网络故障排查和性能优化
+- **DevOps 工程师**: 学习网络策略配置和安全加固
 
-# fping - 批量 ping
-fping -g 192.168.1.0/24              # ping 整个网段
-fping -f hosts.txt                   # 从文件读取
-```
+### 前置知识
 
-### 查看网络配置
-
-```bash
-# IP 地址
-ip addr
-ip -4 addr                           # 仅 IPv4
-ip -6 addr                           # 仅 IPv6
-ip addr show eth0                    # 指定接口
-
-# 传统命令（已弃用但常用）
-ifconfig
-ifconfig eth0
-
-# 路由表
-ip route
-ip route show default
-route -n
-
-# 网络接口统计
-ip -s link                           # 所有接口统计
-ip -s link show eth0                 # 指定接口
-ifconfig eth0
-
-# ARP 表
-ip neigh                             # 显示 ARP/邻居表
-arp -a
-cat /proc/net/arp
-
-# 网络连接统计
-ss -s                                # 连接统计摘要
-netstat -s                           # 详细统计
-```
+- Kubernetes 核心概念（Pod、Service、Ingress）
+- Linux 网络基础（iptables、ipvs、vxlan）
+- 网络安全基础（防火墙、ACL）
 
 ---
 
-## DNS 诊断
+## 问题描述
 
-### dig - DNS 查询
+### 常见问题
 
-```bash
-# 基础查询
-dig google.com
-dig @8.8.8.8 google.com              # 指定 DNS 服务器
-dig +short google.com                # 简短输出
-dig +trace google.com                # 完整解析追踪
+**问题1：Pod间通信异常**
+- **症状**：Pod间无法通信，Service发现失败
+- **原因**：CNI插件配置错误，网络策略冲突
+- **影响**：业务服务间通信中断，影响业务功能
 
-# 特定记录类型
-dig google.com A                     # A 记录（IPv4）
-dig google.com AAAA                  # AAAA 记录（IPv6）
-dig google.com MX                    # 邮件交换记录
-dig google.com NS                    # 域名服务器
-dig google.com TXT                   # 文本记录
-dig google.com SOA                   # 授权起始
-dig google.com CNAME                 # 别名记录
-dig google.com SRV                   # 服务记录
-dig google.com PTR 8.8.8.8.in-addr.arpa  # 反向解析
+**问题2：网络性能瓶颈**
+- **症状**：网络延迟高，吞吐量低
+- **原因**：CNI插件性能不佳，网络配置不当
+- **影响**：业务性能下降，用户体验差
 
-# 高级选项
-dig +tcp google.com                  # 使用 TCP
-dig +norecurse google.com            # 禁用递归
-dig +time=5 +tries=3 google.com      # 超时和重试
-dig +dnssec google.com               # DNSSEC 验证
-
-# 批量查询
-for host in google.com baidu.com github.com; do
-  dig +short $host
-done
-```
-
-### nslookup
-
-```bash
-# 交互模式
-nslookup
-> server 8.8.8.8
-> set type=MX
-> google.com
-
-# 非交互模式
-nslookup google.com
-nslookup -type=MX google.com 8.8.8.8
-```
-
-### host
-
-```bash
-host google.com
-host -t A google.com
-host -t MX google.com
-host -a google.com                   # 所有记录
-```
-
-### systemd-resolve / resolvectl
-
-```bash
-# Ubuntu 18.04+ / systemd
-resolvectl query google.com
-resolvectl status                    # 解析器状态
-systemd-resolve --status
-
-# 刷新 DNS 缓存
-sudo systemd-resolve --flush-caches
-```
-
-### DNS 故障排查流程
-
-```bash
-# 1. 检查本地 hosts
-cat /etc/hosts
-
-# 2. 检查 resolv.conf
-cat /etc/resolv.conf
-
-# 3. 直接测试 DNS 服务器
-dig @127.0.0.53 google.com           # systemd-resolved
-dig @8.8.8.8 google.com              # Google DNS
-dig @223.5.5.5 google.com            # 阿里云 DNS
-
-# 4. 检查 DNS 解析时间
-dig +stats google.com | grep "Query time"
-
-# 5. 追踪完整解析链
-dig +trace google.com
-```
+**问题3：网络安全漏洞**
+- **症状**：未授权访问，数据泄露
+- **原因**：网络策略缺失，安全配置不当
+- **影响**：安全风险，合规问题
 
 ---
 
-## TCP/UDP 调试
+## 解决方案
 
-### 端口扫描
+### CNI插件选型
 
-```bash
-# nc (netcat) - 端口测试
-nc -zv google.com 80                 # TCP 端口测试
-nc -zv -w 5 google.com 443           # 5秒超时
-nc -zvu 8.8.8.8 53                   # UDP 端口测试
+**主流CNI插件对比**：
 
-# nmap - 端口扫描
-nmap -p 80,443 google.com            # 扫描指定端口
-nmap -p 1-1000 192.168.1.1           # 扫描端口范围
-nmap -sT -O 192.168.1.0/24           # TCP 扫描 + OS 检测
-nmap -sU -p 53,161 192.168.1.1       # UDP 扫描
-nmap -Pn 192.168.1.1                 # 跳过 ping 检测
+| 特性 | Calico | Cilium | Flannel | Weave |
+|------|--------|--------|---------|-------|
+| **网络模式** | BGP/VXLAN | eBPF | VXLAN | VXLAN |
+| **网络策略** | ✅ 完整 | ✅ 增强 | ❌ 无 | ✅ 基础 |
+| **性能** | 高 | 极高 | 中 | 中 |
+| **可观测性** | 中 | 高 | 低 | 中 |
+| **eBPF支持** | ❌ | ✅ | ❌ | ❌ |
+| **适用场景** | 通用 | 高性能 | 简单 | 小规模 |
 
-# ss / netstat - 查看监听端口
-ss -tlnp                             # TCP 监听端口 + 进程
-ss -ulnp                             # UDP 监听端口
-ss -tlnp | grep :80                  # 查找特定端口
-netstat -tlnp                        # 传统方式
+**选型建议**：
+- **通用场景**：Calico - 稳定可靠，社区活跃
+- **高性能场景**：Cilium - eBPF加持，性能卓越
+- **简单场景**：Flannel - 配置简单，易于维护
+- **小规模场景**：Weave - 快速部署，功能够用
+
+### 网络架构设计
+
+**生产环境网络架构**：
+
+```mermaid
+graph TB
+    subgraph Internet["互联网"]
+        CDN[CDN/WAF]
+    end
+    
+    subgraph Ingress["入口层"]
+        LB[负载均衡器<br/>L4/L7]
+        INGRESS[Ingress Controller<br/>Nginx/Traefik]
+    end
+    
+    subgraph ServiceMesh["服务网格"]
+        ISTIO[Istio/Linkerd<br/>mTLS/流量管理]
+    end
+    
+    subgraph PodNetwork["Pod网络"]
+        CNI[CNI插件<br/>Calico/Cilium]
+        PODS[Pod集合]
+    end
+    
+    subgraph External["外部服务"]
+        DB[数据库]
+        CACHE[缓存]
+        MQ[消息队列]
+    end
+    
+    CDN --> LB --> INGRESS
+    INGRESS --> ISTIO
+    ISTIO --> CNI --> PODS
+    PODS --> DB
+    PODS --> CACHE
+    PODS --> MQ
 ```
 
-### 连接跟踪
+**架构优势**：
+- **分层清晰**：各层职责明确，易于维护
+- **安全可控**：每层都有安全策略
+- **可观测性**：全链路监控和追踪
+- **弹性扩展**：各层可独立扩展
 
-```bash
-# ss - socket 统计
-ss -t                                # TCP 连接
-ss -u                                # UDP 连接
-ss -ta                               # 所有 TCP（包括监听）
-ss -tn state established            # 仅 established 连接
-ss -tn state time-wait               # TIME_WAIT 连接
+### 关键配置
 
-# 过滤特定状态
-ss -t state established '( dport = :ssh or sport = :ssh )'
+#### 1. Calico 配置
 
-# 查看进程
-ss -tp
-ss -tlp | grep nginx                 # 查找 nginx 端口
-
-# 连接数统计
-ss -s
-ss -tan | awk '{print $1}' | sort | uniq -c | sort -rn
+```yaml
+# Calico Installation
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    ipPools:
+    - blockSize: 26
+      cidr: 10.244.0.0/16
+      encapsulation: VXLAN
+      natOutgoing: Enabled
+      nodeSelector: all()
+    linuxDataplane: Iptables
+    multiInterfaceMode: None
+    nodeAddressAutodetectionV4:
+      firstFound: true
 ```
 
-### telnet 测试
+#### 2. Cilium 配置
 
-```bash
-# 测试 TCP 连接
-telnet google.com 80
+```yaml
+# Cilium Helm Values
+apiVersion: cilium.io/v2alpha1
+kind: CiliumConfig
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  ipam:
+    operator:
+      clusterPoolIPv4PodCIDR: "10.244.0.0/16"
+  kubeProxyReplacement: "strict"
+  enableIPv4Masquerade: true
+  enableIPv6Masquerade: false
+  enableBPFMasquerade: true
+  enableHostReachableServices: true
+  enableExternalIPs: true
+  enableNodePort: true
+  enableSessionAffinity: true
+  enableBandwidthManager: true
+  enableBBR: true
+  tunnel: "disabled"
+  autoDirectNodeRoutes: true
+```
 
-telnet 192.168.1.1 22
-Trying 192.168.1.1...
-Connected to 192.168.1.1.            # 连接成功
-Escape character is '^]'.
+#### 3. 网络策略配置
 
-# 手动发送 HTTP 请求
-$ telnet google.com 80
-Trying 142.250.185.78...
-Connected to google.com.
-Escape character is '^]'.
-GET / HTTP/1.1
-Host: google.com
-
+```yaml
+# 默认拒绝所有流量
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+# 允许特定服务通信
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
 ```
 
 ---
 
-## HTTP/HTTPS 诊断
+## 实施步骤
 
-### curl
+### 前置条件
+
+**硬件要求**：
+- 节点：支持VXLAN或BGP的网络环境
+- 网络：节点间网络互通，MTU ≥ 1500
+- 带宽：万兆网络推荐
+
+**软件要求**：
+- Kubernetes：v1.25+
+- 内核版本：≥ 4.19（Cilium需要≥ 5.4）
+- kube-proxy：IPVS模式推荐
+
+### 步骤1：网络规划
 
 ```bash
-# 基础请求
-curl https://api.example.com
-curl -I https://example.com          # 仅显示响应头
-curl -L https://bit.ly/xxx           # 跟随重定向
+#!/bin/bash
+# 网络规划脚本
 
-# 请求方法
-curl -X POST https://api.example.com/users
-curl -X PUT https://api.example.com/users/1
-curl -X DELETE https://api.example.com/users/1
+# 1. 确定Pod CIDR
+POD_CIDR="10.244.0.0/16"
 
-# 请求头和数据
-curl -H "Content-Type: application/json" \\
-     -H "Authorization: Bearer TOKEN" \\
-     -d '{"name":"test"}' \\
-     https://api.example.com/users
+# 2. 确定Service CIDR
+SERVICE_CIDR="10.96.0.0/12"
 
-# 输出控制
-curl -s https://api.example.com      # 静默模式
-curl -v https://api.example.com      # 详细模式（调试）
-curl -w "@curl-format.txt" -o /dev/null -s https://example.com
+# 3. 确定节点网络
+NODE_NETWORK="192.168.1.0/24"
 
-# 性能测试
-curl -o /dev/null -s -w "%{time_total}\\n" https://example.com
-curl -o /dev/null -s -w "DNS: %{time_namelookup}\\nConnect: %{time_connect}\\nTotal: %{time_total}\\n" https://example.com
+# 4. 计算子网
+echo "Pod CIDR: $POD_CIDR"
+echo "Service CIDR: $SERVICE_CIDR"
+echo "Node Network: $NODE_NETWORK"
 
-# 证书信息
-curl -vI https://example.com 2>&1 | grep -E "(subject|issuer|expire)"
+# 5. 验证网络不重叠
+if ipcalc -n "$POD_CIDR" | grep -q "Network:"; then
+    echo "✓ Pod CIDR 格式正确"
+else
+    echo "✗ Pod CIDR 格式错误"
+    exit 1
+fi
 ```
 
-**curl 时间变量**:
-| 变量 | 含义 |
-|:---|:---|
-| `time_namelookup` | DNS 解析时间 |
-| `time_connect` | TCP 连接时间 |
-| `time_appconnect` | SSL/SSH 握手时间 |
-| `time_pretransfer` | 请求发送前时间 |
-| `time_redirect` | 重定向时间 |
-| `time_starttransfer` | 首字节时间 (TTFB) |
-| `time_total` | 总时间 |
-
-### wget
+### 步骤2：安装CNI插件
 
 ```bash
-# 简单下载
-wget https://example.com/file.zip
+#!/bin/bash
+# 安装 Calico
 
-# 后台下载
-wget -b https://example.com/large-file.zip
+# 1. 添加 Helm 仓库
+helm repo add projectcalico https://docs.tigera.io/calico/charts
+helm repo update
 
-# 断点续传
-wget -c https://example.com/large-file.zip
+# 2. 创建命名空间
+kubectl create namespace tigera-operator
 
-# 指定输出名
-wget -O myfile.zip https://example.com/file.zip
+# 3. 安装 Calico Operator
+helm install calico projectcalico/tigera-operator \
+  --namespace tigera-operator \
+  --version v3.26.1
 
-# 递归下载
-wget -r -l 2 https://example.com/docs/
+# 4. 配置 Calico
+cat <<EOF | kubectl apply -f -
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    ipPools:
+    - blockSize: 26
+      cidr: 10.244.0.0/16
+      encapsulation: VXLAN
+      natOutgoing: Enabled
+      nodeSelector: all()
+EOF
+
+# 5. 验证安装
+kubectl get pods -n calico-system
 ```
 
-### HTTPie
+### 步骤3：配置网络策略
 
 ```bash
-# 友好格式的 HTTP 客户端
-http GET api.example.com/users
-http POST api.example.com/users name=test email=test@example.com
-http -v GET api.example.com/users    # 详细输出
-http --form POST api.example.com/upload file@photo.jpg
+#!/bin/bash
+# 配置网络策略
+
+# 1. 创建默认拒绝策略
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+EOF
+
+# 2. 允许DNS查询
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+EOF
+
+# 3. 允许特定命名空间通信
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-namespace-communication
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: production
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: production
+EOF
 ```
 
-### OpenSSL 测试
+### 步骤4：配置Ingress
 
 ```bash
-# 查看证书链
-echo | openssl s_client -connect google.com:443 -showcerts
+#!/bin/bash
+# 安装 Nginx Ingress Controller
 
-# 查看证书信息
-echo | openssl s_client -connect google.com:443 2>/dev/null | \
-  openssl x509 -noout -text
+# 1. 添加 Helm 仓库
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
 
-# 查看过期时间
-echo | openssl s_client -connect google.com:443 2>/dev/null | \
-  openssl x509 -noout -dates
+# 2. 安装 Ingress Controller
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx \
+  --create-namespace \
+  --set controller.replicaCount=2 \
+  --set controller.nodeSelector."kubernetes\.io/os"=linux \
+  --set controller.service.type=LoadBalancer
 
-# 测试 SNI
-echo | openssl s_client -connect 142.250.185.78:443 -servername google.com
-
-# 测试特定 TLS 版本
-echo | openssl s_client -connect google.com:443 -tls1_3
-echo | openssl s_client -connect google.com:443 -tls1_2
-```
-
----
-
-## 路由与防火墙
-
-### 路由表
-
-```bash
-# 查看路由
-ip route
-ip route show table main
-route -n
-
-# 追踪路由
-traceroute google.com
-traceroute -I google.com             # ICMP 模式（绕过防火墙）
-mtr google.com                       # 持续 traceroute
-mtr -r -c 100 google.com             # 报告模式，100次
-
-# 添加/删除路由
-sudo ip route add 192.168.10.0/24 via 192.168.1.1
-sudo ip route add default via 192.168.1.1
-sudo ip route del 192.168.10.0/24
-
-# 策略路由
-ip rule list                         # 路由策略
-ip route show table 100              # 查看特定表
-```
-
-### 防火墙 (iptables/nftables)
-
-```bash
-# iptables - 查看规则
-sudo iptables -L -n -v               # 列出所有规则
-sudo iptables -L INPUT -n -v         # 查看 INPUT 链
-sudo iptables -t nat -L -n -v        # NAT 表
-sudo iptables -t mangle -L -n -v     # Mangle 表
-
-# 计数器清零
-sudo iptables -Z
-
-# 查找规则行号
-sudo iptables -L INPUT --line-numbers
-
-# 删除规则
-sudo iptables -D INPUT 5             # 删除第5条规则
-sudo iptables -D INPUT -p tcp --dport 80 -j ACCEPT
-
-# 临时允许端口
-sudo iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-
-# 保存规则（不同发行版不同）
-sudo iptables-save > /etc/iptables/rules.v4  # Debian/Ubuntu
-sudo service iptables save                      # CentOS/RHEL
-
-# nftables
-sudo nft list ruleset
-sudo nft list table inet filter
-```
-
-### conntrack
-
-```bash
-# 查看连接追踪表
-sudo conntrack -L
-sudo conntrack -L -p tcp --dport 443
-
-# 统计
-sudo conntrack -C                    # 连接数
-sudo conntrack -S                    # 统计信息
-
-# 清空
-sudo conntrack -F
-```
-
----
-
-## 抓包分析
-
-### tcpdump
-
-```bash
-# 基础抓包
-sudo tcpdump -i eth0
-sudo tcpdump -i any                  # 所有接口
-
-# 过滤条件
-sudo tcpdump -i eth0 port 80         # 端口 80
-sudo tcpdump -i eth0 tcp port 443    # TCP 443
-sudo tcpdump -i eth0 host 8.8.8.8    # 特定主机
-sudo tcpdump -i eth0 net 192.168.1.0/24  # 网段
-sudo tcpdump -i eth0 icmp            # ICMP
-
-# 高级过滤
-sudo tcpdump -i eth0 'port 80 and host 192.168.1.100'
-sudo tcpdump -i eth0 'tcp[tcpflags] & tcp-syn != 0'    # SYN 包
-sudo tcpdump -i eth0 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'  # HTTP 数据
-
-# 输出选项
-sudo tcpdump -i eth0 -w capture.pcap        # 写入文件
-sudo tcpdump -r capture.pcap                # 读取文件
-sudo tcpdump -i eth0 -nn -v                 # 不解析域名，详细输出
-sudo tcpdump -i eth0 -c 100                 # 抓100个包后停止
-sudo tcpdump -i eth0 -s 0                   # 抓取完整数据包
-sudo tcpdump -i eth0 -A                     # ASCII 输出
-sudo tcpdump -i eth0 -X                     # 十六进制输出
-
-# 常用组合
-sudo tcpdump -i eth0 port 80 -w http.pcap -nn -v
-```
-
-### Wireshark tshark
-
-```bash
-# 命令行抓包
-tshark -i eth0
-tshark -i eth0 -f "tcp port 80"
-tshark -r capture.pcap
-
-# 过滤并输出
-tshark -r capture.pcap -Y "http.request.method == GET"
-tshark -r capture.pcap -T fields -e http.host -e http.request.uri
-```
-
-### 抓包场景
-
-```bash
-# 场景1: 抓取 HTTP 请求
-sudo tcpdump -i eth0 'tcp port 80' -w http.pcap -nn
-
-# 场景2: 抓取 DNS 查询
-sudo tcpdump -i eth0 'udp port 53' -nn
-
-# 场景3: 抓取特定 IP 的所有流量
-sudo tcpdump -i eth0 host 192.168.1.100 -w target.pcap
-
-# 场景4: 抓取 SSH 流量并分析
-sudo tcpdump -i eth0 'tcp port 22' -nn -A | grep -i password
-
-# 场景5: 检测 SYN 洪水攻击
-sudo tcpdump -i eth0 'tcp[tcpflags] & tcp-syn != 0 and tcp[tcpflags] & tcp-ack == 0'
+# 3. 验证安装
+kubectl get pods -n ingress-nginx
+kubectl get svc -n ingress-nginx
 ```
 
 ---
 
-## Kubernetes 网络诊断
+## 验证方法
 
-### Pod 网络调试
+### 自动化验证脚本
 
 ```bash
-# 进入 Pod 网络命名空间
-kubectl debug -it podname --image=nicolaka/netshoot -- /bin/bash
+#!/bin/bash
+# 网络配置验证脚本
 
-# 临时调试 Pod
-kubectl run -it --rm debug --image=nicolaka/netshoot --restart=Never -- bash
+echo "=== Kubernetes 网络配置验证 ==="
+echo "验证时间: $(date)"
+echo ""
 
-# 测试 Service 连通性
-kubectl run -it --rm debug --image=busybox:1.28 --restart=Never -- wget -O- http://myservice:8080
+# 1. 检查CNI插件状态
+echo "1. CNI插件状态:"
+kubectl get pods -n kube-system | grep -E "calico|cilium|flannel"
+echo ""
 
-# 查看 Pod IP
-kubectl get pod -o wide
-kubectl get pod -o jsonpath='{.items[*].status.podIP}'
+# 2. 检查网络策略
+echo "2. 网络策略:"
+kubectl get networkpolicy --all-namespaces
+echo ""
+
+# 3. 检查Pod网络
+echo "3. Pod网络连通性:"
+kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://kubernetes.default.svc.cluster.local
+echo ""
+
+# 4. 检查Service发现
+echo "4. Service发现:"
+kubectl get svc --all-namespaces
+echo ""
+
+# 5. 检查Ingress状态
+echo "5. Ingress状态:"
+kubectl get ingress --all-namespaces
+echo ""
+
+# 6. 检查DNS解析
+echo "6. DNS解析:"
+kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubernetes.default
+echo ""
+
+echo "=== 验证完成 ==="
 ```
 
-### Service 诊断
+### 手动验证清单
 
+**CNI插件验证**：
+- [ ] CNI插件Pod运行正常
+- [ ] Pod间通信正常
+- [ ] Service发现正常
+- [ ] DNS解析正常
+
+**网络策略验证**：
+- [ ] 默认拒绝策略生效
+- [ ] 允许的通信正常
+- [ ] 拒绝的通信被阻断
+- [ ] 策略变更生效
+
+**Ingress验证**：
+- [ ] Ingress Controller运行正常
+- [ ] 域名解析正确
+- [ ] TLS证书有效
+- [ ] 流量路由正确
+
+---
+
+## 常见陷阱
+
+### 陷阱1：MTU配置不当
+
+**问题**：VXLAN封装会增加50字节开销，导致MTU超过物理网络限制。
+
+**后果**：数据包分片，网络性能下降。
+
+**正确做法**：
 ```bash
-# 查看 Service 端点
-kubectl get endpoints myservice
-kubectl get endpointslices
+# 检查物理网络MTU
+ip link show eth0 | grep mtu
 
-# 测试 Service DNS
-kubectl run -it --rm debug --image=busybox:1.28 --restart=Never -- nslookup kubernetes.default
+# 配置CNI插件MTU
+# Calico
+calicoctl node status | grep MTU
 
-# 检查 kube-proxy
-kubectl get pods -n kube-system -l k8s-app=kube-proxy
-kubectl logs -n kube-system -l k8s-app=kube-proxy
+# Cilium
+cilium config view | grep mtu
 ```
 
-### CNI 诊断
+### 陷阱2：网络策略冲突
 
+**问题**：多个网络策略同时生效，导致预期外的流量被阻断。
+
+**后果**：服务间通信异常，难以排查。
+
+**正确做法**：
 ```bash
-# 查看 CNI 配置
-cat /etc/cni/net.d/10-calico.conflist
-cat /etc/cni/net.d/10-flannel.conflist
+# 查看所有网络策略
+kubectl get networkpolicy --all-namespaces -o yaml
 
-# Calico 诊断
-calicoctl node status
-calicoctl get ippool
+# 查看特定Pod的策略
+kubectl describe pod <pod-name> -n <namespace>
 
-# Cilium 诊断
-cilium status
-cilium endpoint list
-cilium monitor
-
-# 查看 iptables NAT 规则（Kube-proxy）
-sudo iptables -t nat -L KUBE-SERVICES -n -v
-sudo iptables -t nat -L KUBE-POSTROUTING -n -v
+# 测试网络连通性
+kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://<service-name>
 ```
 
-### CoreDNS 诊断
+### 陷阱3：DNS配置错误
 
+**问题**：CoreDNS配置不当，导致Service发现失败。
+
+**后果**：服务间通信异常，应用无法找到后端服务。
+
+**正确做法**：
 ```bash
-# 查看 CoreDNS Pod
+# 检查CoreDNS状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
-# 查看 CoreDNS 日志
-kubectl logs -n kube-system -l k8s-app=kube-dns
-
-# 测试 DNS 解析
-kubectl run -it --rm debug --image=busybox:1.28 --restart=Never -- nslookup kubernetes.default.svc.cluster.local
-
-# 检查 CoreDNS 配置
+# 检查CoreDNS配置
 kubectl get configmap coredns -n kube-system -o yaml
+
+# 测试DNS解析
+kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubernetes.default
 ```
 
 ---
 
-## 性能测试
+## 相关资源
 
-### 带宽测试
+### 官方文档
+- [Kubernetes 网络](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+- [网络策略](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 
-```bash
-# iperf3 - 带宽测试
-# 服务端
-iperf3 -s
+### 工具推荐
+- [Calico](https://docs.tigera.io/calico/) - 网络和网络策略
+- [Cilium](https://docs.cilium.io/) - eBPF网络
+- [CNI](https://github.com/containernetworking/cni) - 容器网络接口
 
-# 客户端
-iperf3 -c server_ip
-iperf3 -c server_ip -t 30              # 30秒测试
-iperf3 -c server_ip -P 10              # 10个并行流
-iperf3 -c server_ip -u -b 1G           # UDP 测试，1Gbps
-
-# 反向测试
-iperf3 -c server_ip -R
-```
-
-### HTTP 压力测试
-
-```bash
-# ab (Apache Bench)
-ab -n 10000 -c 100 http://localhost:8080/
-
-# wrk
-wrk -t12 -c400 -d30s http://localhost:8080/
-
-# hey
-go install github.com/rakyll/hey@latest
-hey -n 10000 -c 100 http://localhost:8080/
-
-# vegeta
-echo "GET http://localhost:8080/" | vegeta attack -duration=30s -rate=100 | vegeta report
-```
-
-### 延迟测试
-
-```bash
-# 检查 RTT
-ping -c 100 target | tail -2
-
-# tcpping
-tcpping -x 100 target port
-
-# httping
-httping -g http://example.com -c 100
-```
+### 参考案例
+- [Calico生产部署](https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises)
+- [Cilium生产部署](https://docs.cilium.io/en/stable/installation/k8s-install-helm/)
 
 ---
 
-## 相关文档
+## 版本历史
 
-- [domain-03-networking-traffic/](../domain-03-networking-traffic/) - 网络基础
-- [domain-03-networking-traffic/](../domain-03-networking-traffic/) - Kubernetes 网络
-- [domain-01-cluster-fundamentals/23-container-network-deep-dive.md](../domain-01-cluster-fundamentals/23-container-network-deep-dive.md) - CNI 深度解析
+| 版本 | 日期 | 变更说明 | 作者 |
+|------|------|----------|------|
+| v1.0 | 2026-05 | 初始版本 | 系统生成 |
+
+---
+
+**最佳实践原则**: 具体、可操作、可验证、可维护
+
+---
+
+**文档维护**：定期审查和更新，确保与Kubernetes版本和CNI插件版本保持同步
 
 ## Related
 

@@ -2372,7 +2372,7 @@ for NAME in "${!CERTS[@]}"; do
   fi
   
   # 验证证书链（如果有 CA）
-  if [ -f "$CA" ] && [[ "$NAME" != "Kubelet"* ]]; then
+  if [ -f "$CA" ] && "$NAME" != "Kubelet"*; then
     if openssl verify -CAfile "$CA" "$CERT_PATH" > /dev/null 2>&1; then
       echo "✅ 证书链验证通过"
     else

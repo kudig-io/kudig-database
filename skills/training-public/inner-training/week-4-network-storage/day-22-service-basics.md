@@ -29,9 +29,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - gpu-ml-basics
+created: "2026-05-23"
 ---
 
-# Day 22: Service 基础
+# Day 22: [[Service|Service]] 基础
 
 ```yaml
 ---
@@ -101,7 +102,7 @@ tags: [week-4, day-22, service, networking, k8s, k8s-1.28-1.33]
 1. **稳定的虚拟 IP（ClusterIP）**: Service 分配一个固定的集群内部 IP，客户端通过这个 IP 访问服务
 2. **Label Selector 自动发现**: Service 通过 Label Selector 选择匹配的 Pod，将其 IP 和端口记录在 Endpoints 对象中
 3. **负载均衡**: kube-proxy 在每个节点上配置 iptables 或 IPVS 规则，将 ClusterIP 的流量均匀转发到 Endpoints 中的 Pod
-4. **DNS 名称解析**: CoreDNS 为每个 Service 创建 DNS 记录，格式为 `<service-name>.<namespace>.svc.cluster.local`
+4. **DNS 名称解析**: [[CoreDNS|CoreDNS]] 为每个 Service 创建 DNS 记录，格式为 `<service-name>.<namespace>.svc.cluster.local`
 
 ### Service 的四种类型
 
@@ -111,7 +112,7 @@ tags: [week-4, day-22, service, networking, k8s, k8s-1.28-1.33]
 
 **LoadBalancer** 在 NodePort 的基础上，自动创建一个外部负载均衡器。在 ACK 中，会自动创建阿里云 SLB 实例。LoadBalancer 分配一个外部 IP（或域名），流量经过 SLB → NodePort → kube-proxy → Pod 的路径到达目标。这是生产环境暴露 TCP/UDP 服务最常用的方式。
 
-**Headless Service** 设置 `clusterIP: None`，不分配 ClusterIP。DNS 查询直接返回 Pod IP 列表（而不是 ClusterIP）。主要用于 StatefulSet，为每个 Pod 提供独立的 DNS 名称（如 `app-0.headless-svc.namespace.svc.cluster.local`）。
+**Headless Service** 设置 `clusterIP: None`，不分配 ClusterIP。DNS 查询直接返回 Pod IP 列表（而不是 ClusterIP）。主要用于 [[StatefulSet|StatefulSet]]，为每个 Pod 提供独立的 DNS 名称（如 `app-0.headless-svc.namespace.svc.cluster.local`）。
 
 ### kube-proxy 模式
 

@@ -1,5 +1,5 @@
 ---
-title: Devfile
+title: Devfile [entities]
 description: '## 概述'
 category: entities
 tags:
@@ -22,6 +22,7 @@ trigger_keywords:
 - Devfile
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Devfile
@@ -58,13 +59,13 @@ Devfile 是一个开放标准，用于定义云原生开发环境。它通过 YA
 
 ## Related
 
-- [[external-secrets]] — External Secrets Operator
+- [[entities/external-secrets.md|secrets]]]] — External Secrets Operator
 - [[kube-burner]] — Kube-burner
 - [[eraser]] — Eraser
 - [[kubewarden]] — Kubewarden
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-19-landscape-references/sandbox/devfile/devfile.md|devfile]]
+- devfile
 - [[entities/shipwright.md|Shipwright]]
 - [[entities/atlantis.md|Atlantis]]
 - [[entities/dalec.md|Dalec]]

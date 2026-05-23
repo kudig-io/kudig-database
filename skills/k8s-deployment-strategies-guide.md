@@ -22,6 +22,7 @@ trigger_keywords:
 - 部署策略最佳实践
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 部署策略最佳实践
@@ -43,7 +44,7 @@ prerequisites:
 
 - **低风险**：滚动更新（`maxUnavailable: 1`, `maxSurge: 1`）^[inferred]
 - **中风险**：金丝雀部署（通过 Flagger 逐步放量，stepWeight: 10）^[inferred]
-- **高风险**：蓝绿部署（双版本并行，通过 Service selector 切换流量）^[inferred]
+- **高风险**：蓝绿部署（双版本并行，通过 [[Service|Service]] selector 切换流量）^[inferred]
 
 ## 关键配置
 
@@ -104,10 +105,10 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 ## 相关资源
 
-- [[concepts/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[concepts/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[deployment|Deployment]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
-- [[concepts/gitops-principles.md|GitOps Principles]]
+- [[skills/configure-health-probes.md|[[Configure Health Probes|Configure Health Probes]]]]
+- [[concepts/gitops-principles.md|[[GitOps 速查卡|GitOps]]ps Principles and Practice|GitOps Principles]]]]
 
 ## Related
 

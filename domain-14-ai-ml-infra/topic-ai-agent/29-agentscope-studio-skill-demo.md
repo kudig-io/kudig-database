@@ -1,5 +1,44 @@
 ---
-title: AgentScope Studio 与 Agent Skill 实战指南
+title: AgentScope Studio 与 Agent Skill 实战指南 (domain-14-ai-ml-infra)
+description: 'title: AgentScope Studio 与 Agent Skill 实战指南'
+category: general
+tags:
+- ai
+- ai-agent
+- daily-ops
+- kubelet
+- coredns
+- docker
+- hpa
+- ingress
+- networkpolicy
+- llm
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 35min
+intent_queries:
+- AgentScope Studio 与 Agent Skill 实战指南 是什么
+- 如何 AgentScope Studio 与 Agent Skill 实战指南
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- AgentScope
+- Studio
+- Agent
+- Skill
+- 实战指南
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- observability-basics
+created: "2026-05-23"
+---
+
+title: AgentScope Studio 与 Agent [[SKILL|Skill]] 实战指南
 description: '# AgentScope Studio 与 Agent Skill 实战指南'
 category: ai-agent
 tags:
@@ -8,11 +47,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- coredns
+- [[kubelet|kubelet]]
+- [[CoreDNS|coredns]]
 - docker
 - hpa
-- ingress
+- [[Ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -32,9 +71,15 @@ trigger_keywords:
 - 实战指南
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- observability-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # AgentScope Studio 与 Agent Skill 实战指南
@@ -43,7 +88,7 @@ prerequisites:
 
 ---
 
-## 概述
+<!-- chunk: 概述 -->## 概述
 
 本文是 AgentScope 系列的实战补充篇，聚焦两个核心主题：
 
@@ -59,9 +104,9 @@ prerequisites:
 
 ---
 
-## 1. AgentScope Studio 功能定位
+<!-- chunk: 1. AgentScope Studio 功能定位 -->## 1. AgentScope Studio 功能定位
 
-### 1.1 Studio 不是什么
+#<!-- chunk: 1.1 Studio 不是什么 -->## 1.1 Studio 不是什么
 
 一个常见误解是将 Studio 当作"可视化拖拽建 Agent 的平台"。**AgentScope Studio 不是 Agent 构建器**，而是一个**可观测性与交互工具**。
 
@@ -81,7 +126,7 @@ Studio 功能边界
     └── 不管理 Agent 的生命周期（由 Runtime 负责）
 ```
 
-### 1.2 Studio 功能架构
+#<!-- chunk: 1.2 Studio 功能架构 -->## 1.2 Studio 功能架构
 
 ```
 AgentScope Studio 架构
@@ -109,7 +154,7 @@ AgentScope Studio 架构
     └── 评分分布分析
 ```
 
-### 1.3 核心概念：Project 与 Run
+#<!-- chunk: 1.3 核心概念：Project 与 Run -->## 1.3 核心概念：Project 与 Run
 
 | 概念 | 说明 | 类比 |
 |------|------|------|
@@ -139,9 +184,9 @@ AgentScope Studio 架构
 
 ---
 
-## 2. 第一个 Agent：创建并连接 Studio
+<!-- chunk: 2. 第一个 Agent：创建并连接 Studio -->## 2. 第一个 Agent：创建并连接 Studio
 
-### 2.1 最简示例
+#<!-- chunk: 2.1 最简示例 -->## 2.1 最简示例
 
 创建 `agent-demo.py`：
 
@@ -196,7 +241,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 2.2 运行与验证
+#<!-- chunk: 2.2 运行与验证 -->## 2.2 运行与验证
 
 ```bash
 export DASHSCOPE_API_KEY="your-api-key"
@@ -221,7 +266,7 @@ Friday: 您好！有什么可以帮助您的吗？
 | `run name "ewzz8KSdWLcdTn3zGHPfVb"` | 本次运行的 Run ID |
 | `UnnamedProject_At20260318` | 自动生成的项目名（日期后缀） |
 
-### 2.3 自定义项目名
+#<!-- chunk: 2.3 自定义项目名 -->## 2.3 自定义项目名
 
 默认项目名为 `UnnamedProject_At{日期}`。建议通过 `project` 参数显式指定：
 
@@ -232,7 +277,7 @@ agentscope.init(
 )
 ```
 
-### 2.4 使用本地模型（Ollama）
+#<!-- chunk: 2.4 使用本地模型（Ollama） -->## 2.4 使用本地模型（Ollama）
 
 无需 API Key，使用本地 Ollama 模型：
 
@@ -261,9 +306,9 @@ agent = ReActAgent(
 
 ---
 
-## 3. Studio Web 界面功能详解
+<!-- chunk: 3. Studio Web 界面功能详解 -->## 3. Studio Web 界面功能详解
 
-### 3.1 界面布局
+#<!-- chunk: 3.1 界面布局 -->## 3.1 界面布局
 
 成功运行 Agent 后，打开 Studio Web 界面：
 
@@ -296,7 +341,7 @@ http://localhost:3000/projects/{ProjectName}
 └──────────────┴──────────────────────────────────┴───────────────────┘
 ```
 
-### 3.2 右侧数据视图的三个 Tab
+#<!-- chunk: 3.2 右侧数据视图的三个 Tab -->## 3.2 右侧数据视图的三个 Tab
 
 | Tab | 功能 | 关键信息 |
 |-----|------|---------|
@@ -304,7 +349,7 @@ http://localhost:3000/projects/{ProjectName}
 | **消息** | 所有消息列表（按 replyId 或 msg.id 查看） | 每条消息的 role、content、timestamp |
 | **跟踪** | OpenTelemetry Trace 详情 | LLM 调用耗时、Tool 执行耗时、Agent 决策路径 |
 
-### 3.3 Trace 可视化示例
+#<!-- chunk: 3.3 Trace 可视化示例 -->## 3.3 Trace 可视化示例
 
 在"跟踪"Tab 中，可以看到类似如下的追踪数据：
 
@@ -325,7 +370,7 @@ Trace: k8s-diagnosis-001 (总耗时: 12.3s)
 └── [10.5-12.3s] Agent.print() — 输出结果
 ```
 
-### 3.4 用户输入托管机制
+#<!-- chunk: 3.4 用户输入托管机制 -->## 3.4 用户输入托管机制
 
 Studio 通过 WebSocket 实现 `UserAgent` 的输入托管：
 
@@ -344,9 +389,9 @@ Studio 通过 WebSocket 实现 `UserAgent` 的输入托管：
 
 ---
 
-## 4. Agent Skill 机制详解
+<!-- chunk: 4. Agent Skill 机制详解 -->## 4. Agent Skill 机制详解
 
-### 4.1 什么是 Agent Skill
+#<!-- chunk: 4.1 什么是 Agent Skill -->## 4.1 什么是 Agent Skill
 
 Agent Skill 是 [Anthropic 提出](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skill) 的一种提升 Agent 在特定任务上能力的方法。核心思路：**将领域知识打包成目录，Agent 在需要时动态加载 `SKILL.md` 来获取专业指导**。
 
@@ -369,7 +414,7 @@ Agent Skill 工作原理
     └── 按 SKILL.md 中的流程执行诊断/操作
 ```
 
-### 4.2 核心 API
+#<!-- chunk: 4.2 核心 API -->## 4.2 核心 API
 
 | API | 功能 | 说明 |
 |-----|------|------|
@@ -377,7 +422,7 @@ Agent Skill 工作原理
 | `toolkit.remove_agent_skill(name)` | 移除已注册的 Skill | 通过 `SKILL.md` 中定义的 name |
 | `toolkit.get_agent_skill_prompt()` | 获取所有 Skill 的提示词 | 自动注入到 ReActAgent 的 sys_prompt |
 
-### 4.3 SKILL.md 规范
+#<!-- chunk: 4.3 SKILL.md 规范 -->## 4.3 SKILL.md 规范
 
 每个 Skill 目录必须包含一个 `SKILL.md` 文件，格式要求：
 
@@ -389,13 +434,13 @@ description: 一句话描述这个 Skill 的用途
 
 # Skill 标题
 
-## 使用场景
+<!-- chunk: 使用场景 -->## 使用场景
 描述何时应该使用这个 Skill...
 
-## 详细指导
+<!-- chunk: 详细指导 -->## 详细指导
 具体的操作步骤、诊断流程、命令示例...
 
-## 输出格式
+<!-- chunk: 输出格式 -->## 输出格式
 期望的输出结构...
 ```
 
@@ -406,7 +451,7 @@ description: 一句话描述这个 Skill 的用途
 | `name` | ✅ | Skill 的唯一标识名称 |
 | `description` | ✅ | 简短描述，用于生成 Skill Prompt |
 
-### 4.4 Skill Prompt 注入机制
+#<!-- chunk: 4.4 Skill Prompt 注入机制 -->## 4.4 Skill Prompt 注入机制
 
 注册 Skill 后，`ReActAgent` 会自动将 Skill 列表附加到 `sys_prompt` 末尾：
 
@@ -428,13 +473,13 @@ on specialized tasks. Each agent skill has a `SKILL.md` file in its
 folder that describes how to use the skill. If you want to use a skill,
 you MUST read its `SKILL.md` file carefully.
 
-## k8s-pod-diagnosis
+<!-- chunk: k8s-pod-diagnosis -->## k8s-pod-diagnosis
 Kubernetes Pod 故障诊断技能，涵盖 Pending/CrashLoopBackOff/OOMKilled/
 ImagePullBackOff 等常见问题的排查流程。
 Check "skills/k8s-pod-diagnosis/SKILL.md" for how to use this skill
 ```
 
-### 4.5 自定义 Skill Prompt 模板
+#<!-- chunk: 4.5 自定义 Skill Prompt 模板 -->## 4.5 自定义 Skill Prompt 模板
 
 可以通过 `Toolkit` 构造参数自定义 Skill 的提示词模板：
 
@@ -454,9 +499,9 @@ toolkit = Toolkit(
 
 ---
 
-## 5. 实战 Demo：K8s Pod 诊断 Skill
+<!-- chunk: 5. 实战 Demo：K8s Pod 诊断 Skill -->## 5. 实战 Demo：K8s Pod 诊断 Skill
 
-### 5.1 目录结构
+#<!-- chunk: 5.1 目录结构 -->## 5.1 目录结构
 
 ```
 agent-skill-demo/
@@ -471,9 +516,9 @@ agent-skill-demo/
 └── agent-skill-demo.py
 ```
 
-### 5.2 创建 Skill 目录
+#<!-- chunk: 5.2 创建 Skill 目录 -->## 5.2 创建 Skill 目录
 
-#### skills/k8s-pod-diagnosis/SKILL.md
+##<!-- chunk: skills/k8s-pod-diagnosis/SKILL.md -->## skills/k8s-pod-diagnosis/SKILL.md
 
 ```markdown
 ---
@@ -483,23 +528,23 @@ description: Kubernetes Pod 故障诊断技能，涵盖 Pending/CrashLoopBackOff
 
 # K8s Pod 诊断技能
 
-## 使用场景
+<!-- chunk: 使用场景 -->## 使用场景
 
 当用户报告 Pod 异常时（Pending、CrashLoopBackOff、OOMKilled、ImagePullBackOff、Error 等状态），
 按以下结构化流程进行诊断。
 
-## 诊断流程
+<!-- chunk: 诊断流程 -->## 诊断流程
 
-### Step 1：确认 Pod 状态
+#<!-- chunk: Step 1：确认 Pod 状态 -->## Step 1：确认 Pod 状态
 
 ```bash
 kubectl get pod <pod-name> -n <namespace> -o wide
 kubectl describe pod <pod-name> -n <namespace>
 ```
 
-### Step 2：根据状态分支诊断
+#<!-- chunk: Step 2：根据状态分支诊断 -->## Step 2：根据状态分支诊断
 
-#### Pending
+##<!-- chunk: Pending -->## Pending
 - 检查事件：`kubectl get events --field-selector involvedObject.name=<pod-name> -n <namespace>`
 - 常见原因：
   - 资源不足（CPU/Memory）→ 检查：`kubectl describe nodes | grep -A 5 "Allocated resources"`
@@ -507,7 +552,7 @@ kubectl describe pod <pod-name> -n <namespace>
   - PVC 未绑定 → 检查：`kubectl get pvc -n <namespace>`
   - Taint/Toleration 不匹配 → 检查：`kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints`
 
-#### CrashLoopBackOff
+##<!-- chunk: CrashLoopBackOff -->## CrashLoopBackOff
 - 查看日志：`kubectl logs <pod-name> -n <namespace> --previous`
 - 常见原因：
   - 启动命令或参数错误
@@ -516,19 +561,19 @@ kubectl describe pod <pod-name> -n <namespace>
   - 端口冲突
 - 检查 readiness/liveness probe 配置：`kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].livenessProbe}'`
 
-#### OOMKilled
+##<!-- chunk: OOMKilled -->## OOMKilled
 - 查看资源限制：`kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].resources}'`
 - 检查实际内存使用：`kubectl top pod <pod-name> -n <namespace>`
 - 查看 OOM 事件：`kubectl get events -n <namespace> --field-selector reason=OOMKilling`
 - 建议：调整 memory limits 或优化应用内存使用
 
-#### ImagePullBackOff
+##<!-- chunk: ImagePullBackOff -->## ImagePullBackOff
 - 检查镜像名称和 tag 是否正确
 - 检查 imagePullSecrets：`kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.imagePullSecrets}'`
 - 检查网络连通性：能否从节点访问镜像仓库
 - 检查镜像仓库认证：`kubectl get secret <secret-name> -n <namespace> -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d`
 
-### Step 3：收集环境信息（如需进一步分析）
+#<!-- chunk: Step 3：收集环境信息（如需进一步分析） -->## Step 3：收集环境信息（如需进一步分析）
 
 ```bash
 # 集群资源总览
@@ -540,7 +585,7 @@ kubectl get resourcequota -n <namespace>
 kubectl get limitrange -n <namespace>
 ```
 
-## 输出格式
+<!-- chunk: 输出格式 -->## 输出格式
 
 诊断结果请严格按以下格式输出：
 
@@ -551,7 +596,7 @@ kubectl get limitrange -n <namespace>
 5. **预防建议**：如何避免类似问题再次发生
 ```
 
-#### skills/k8s-node-diagnosis/SKILL.md
+##<!-- chunk: skills/k8s-node-diagnosis/SKILL.md -->## skills/k8s-node-diagnosis/SKILL.md
 
 ```markdown
 ---
@@ -561,20 +606,20 @@ description: Kubernetes 节点故障诊断技能，涵盖 NotReady/MemoryPressur
 
 # K8s 节点诊断技能
 
-## 使用场景
+<!-- chunk: 使用场景 -->## 使用场景
 
 当用户报告节点异常（NotReady、SchedulingDisabled、MemoryPressure 等）时使用。
 
-## 诊断流程
+<!-- chunk: 诊断流程 -->## 诊断流程
 
-### Step 1：确认节点状态
+#<!-- chunk: Step 1：确认节点状态 -->## Step 1：确认节点状态
 
 ```bash
 kubectl get nodes -o wide
 kubectl describe node <node-name>
 ```
 
-### Step 2：检查节点 Conditions
+#<!-- chunk: Step 2：检查节点 Conditions -->## Step 2：检查节点 Conditions
 
 ```bash
 kubectl get node <node-name> -o jsonpath='{.status.conditions}' | python3 -m json.tool
@@ -590,7 +635,7 @@ kubectl get node <node-name> -o jsonpath='{.status.conditions}' | python3 -m jso
 | PIDPressure | False | True | PID 压力 |
 | NetworkUnavailable | False | True | 网络不可用 |
 
-### Step 3：检查 kubelet 和系统状态
+#<!-- chunk: Step 3：检查 kubelet 和系统状态 -->## Step 3：检查 kubelet 和系统状态
 
 ```bash
 # kubelet 日志
@@ -602,12 +647,12 @@ df -h
 top -bn1 | head -20
 ```
 
-## 输出格式
+<!-- chunk: 输出格式 -->## 输出格式
 
 同 Pod 诊断：现象 → 根因 → 修复方案 → 验证方法 → 预防建议
 ```
 
-#### skills/k8s-network-diagnosis/SKILL.md
+##<!-- chunk: skills/k8s-network-diagnosis/SKILL.md -->## skills/k8s-network-diagnosis/SKILL.md
 
 ```markdown
 ---
@@ -617,20 +662,20 @@ description: Kubernetes 网络故障诊断技能，涵盖 Service 不通、DNS �
 
 # K8s 网络诊断技能
 
-## 使用场景
+<!-- chunk: 使用场景 -->## 使用场景
 
 当用户报告网络相关问题（Service 无法访问、DNS 解析失败、Pod 间不通等）时使用。
 
-## 诊断流程
+<!-- chunk: 诊断流程 -->## 诊断流程
 
-### Step 1：确认 Service 和 Endpoints
+#<!-- chunk: Step 1：确认 Service 和 Endpoints -->## Step 1：确认 Service 和 Endpoints
 
 ```bash
 kubectl get svc <service-name> -n <namespace>
 kubectl get endpoints <service-name> -n <namespace>
 ```
 
-### Step 2：DNS 诊断
+#<!-- chunk: Step 2：DNS 诊断 -->## Step 2：DNS 诊断
 
 ```bash
 # 使用临时 Pod 测试 DNS
@@ -641,7 +686,7 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
 ```
 
-### Step 3：连通性测试
+#<!-- chunk: Step 3：连通性测试 -->## Step 3：连通性测试
 
 ```bash
 # Pod 到 Service 连通性
@@ -651,12 +696,12 @@ kubectl run net-test --image=busybox:1.36 --rm -it --restart=Never -- wget -qO- 
 kubectl get networkpolicy -n <namespace>
 ```
 
-## 输出格式
+<!-- chunk: 输出格式 -->## 输出格式
 
 同 Pod 诊断：现象 → 根因 → 修复方案 → 验证方法 → 预防建议
 ```
 
-### 5.3 编写 Agent 脚本
+#<!-- chunk: 5.3 编写 Agent 脚本 -->## 5.3 编写 Agent 脚本
 
 创建 `agent-skill-demo.py`：
 
@@ -739,7 +784,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 5.4 运行与测试
+#<!-- chunk: 5.4 运行与测试 -->## 5.4 运行与测试
 
 **前台运行**（适合开发调试，终端直接交互）：
 
@@ -823,15 +868,15 @@ on specialized tasks. Each agent skill has a `SKILL.md` file in its
 folder that describes how to use the skill. If you want to use a skill,
 you MUST read its `SKILL.md` file carefully.
 
-## k8s-pod-diagnosis
+<!-- chunk: k8s-pod-diagnosis -->## k8s-pod-diagnosis
 Kubernetes Pod 故障诊断技能...
 Check "skills/k8s-pod-diagnosis/SKILL.md" for how to use this skill
 
-## k8s-node-diagnosis
+<!-- chunk: k8s-node-diagnosis -->## k8s-node-diagnosis
 Kubernetes 节点故障诊断技能...
 Check "skills/k8s-node-diagnosis/SKILL.md" for how to use this skill
 
-## k8s-network-diagnosis
+<!-- chunk: k8s-network-diagnosis -->## k8s-network-diagnosis
 Kubernetes 网络故障诊断技能...
 Check "skills/k8s-network-diagnosis/SKILL.md" for how to use this skill
 ==========================
@@ -845,7 +890,7 @@ Check "skills/k8s-network-diagnosis/SKILL.md" for how to use this skill
 K8s-Doctor: 您好！我是 K8s 诊断专家，有什么可以帮您排查的问题吗？
 ```
 
-### 5.5 测试对话示例
+#<!-- chunk: 5.5 测试对话示例 -->## 5.5 测试对话示例
 
 ```
 user: production 命名空间的 nginx-7d5b8c9f-x2k4j Pod 一直 Pending，帮我诊断
@@ -879,9 +924,9 @@ Agent 决策路径
 
 ---
 
-## 6. 生产模式：AgentApp + WebUI
+<!-- chunk: 6. 生产模式：AgentApp + WebUI -->## 6. 生产模式：AgentApp + WebUI
 
-### 6.1 使用 AgentScope Runtime
+#<!-- chunk: 6.1 使用 AgentScope Runtime -->## 6.1 使用 AgentScope Runtime
 
 对于需要独立 Web 聊天界面的场景，使用 `agentscope-runtime` 的 `AgentApp`：
 
@@ -953,7 +998,7 @@ async def query_func(self, msgs, request: AgentRequest = None, **kwargs):
 agent_app.run(host="0.0.0.0", port=8090, web_ui=True)
 ```
 
-### 6.2 访问方式
+#<!-- chunk: 6.2 访问方式 -->## 6.2 访问方式
 
 | 入口 | 地址 | 说明 |
 |------|------|------|
@@ -962,7 +1007,7 @@ agent_app.run(host="0.0.0.0", port=8090, web_ui=True)
 | **健康检查** | `http://localhost:8090/health` | 服务健康状态 |
 | **Studio 追踪** | `http://localhost:3000` | Trace 可视化与项目管理 |
 
-### 6.3 也可使用托管 WebUI
+#<!-- chunk: 6.3 也可使用托管 WebUI -->## 6.3 也可使用托管 WebUI
 
 无需本地安装前端，直接使用 AgentScope 官方托管的 WebUI：
 
@@ -978,9 +1023,9 @@ http://your-server:8090/process
 
 ---
 
-## 7. Skill 进阶用法
+<!-- chunk: 7. Skill 进阶用法 -->## 7. Skill 进阶用法
 
-### 7.1 Skill 目录中的辅助文件
+#<!-- chunk: 7.1 Skill 目录中的辅助文件 -->## 7.1 Skill 目录中的辅助文件
 
 Skill 目录不限于只放 `SKILL.md`，可以包含任意参考文件：
 
@@ -996,14 +1041,14 @@ skills/k8s-pod-diagnosis/
 Agent 可以通过 `view_text_file` 工具读取这些辅助文件。在 `SKILL.md` 中引导 Agent 使用：
 
 ```markdown
-## 辅助资源
+<!-- chunk: 辅助资源 -->## 辅助资源
 
 - 一键诊断脚本：运行 `bash skills/k8s-pod-diagnosis/diagnosis-checklist.sh <pod-name> <namespace>`
 - 常见错误映射：查看 `skills/k8s-pod-diagnosis/common-errors.yaml`
 - 事故报告模板：查看 `skills/k8s-pod-diagnosis/templates/incident-report.md`
 ```
 
-### 7.2 动态 Skill 管理
+#<!-- chunk: 7.2 动态 Skill 管理 -->## 7.2 动态 Skill 管理
 
 运行时可以动态添加或移除 Skill：
 
@@ -1015,7 +1060,7 @@ toolkit.register_agent_skill("skills/k8s-pod-diagnosis")
 toolkit.remove_agent_skill("k8s-pod-diagnosis")
 ```
 
-### 7.3 Skill + MCP 工具组合
+#<!-- chunk: 7.3 Skill + MCP 工具组合 -->## 7.3 Skill + MCP 工具组合
 
 Skill 系统与 MCP 工具可以无缝组合：
 
@@ -1044,7 +1089,7 @@ async def create_toolkit():
     return toolkit
 ```
 
-### 7.4 Skill + CoT 思考扩展
+#<!-- chunk: 7.4 Skill + CoT 思考扩展 -->## 7.4 Skill + CoT 思考扩展
 
 结合 Toolkit 的 JSON Schema 动态扩展，让 Agent 在使用 Skill 时输出推理过程：
 
@@ -1079,9 +1124,9 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 
 ---
 
-## 8. 最佳实践与反模式
+<!-- chunk: 8. 最佳实践与反模式 -->## 8. 最佳实践与反模式
 
-### 最佳实践
+#<!-- chunk: 最佳实践 -->## 最佳实践
 
 | 实践 | 说明 |
 |------|------|
@@ -1094,7 +1139,7 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 | **自定义项目名** | 使用 `project="xxx"` 参数，避免自动生成的 `UnnamedProject_At...` |
 | **Skill + Tool 配合** | Skill 提供"知识"（如何做），Tool 提供"能力"（执行命令） |
 
-### 反模式
+#<!-- chunk: 反模式 -->## 反模式
 
 | 反模式 | 问题 | 正确做法 |
 |--------|------|---------|
@@ -1106,7 +1151,7 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 
 ---
 
-## 9. 关联文档
+<!-- chunk: 9. 关联文档 -->## 9. 关联文档
 
 | 文档 | 与本文关系 |
 |------|-----------|
@@ -1120,3 +1165,31 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 | [官方 Agent Skill 教程](https://doc.agentscope.io/tutorial/task_agent_skill.html) | Anthropic Agent Skill 原始文档 |
 | [AgentScope Studio GitHub](https://github.com/agentscope-ai/agentscope-studio) | Studio 源码与 API 协议 |
 | [AgentScope Runtime WebUI](https://runtime.agentscope.io/zh/webui.html) | Runtime WebUI 使用指南 |
+
+---
+
+<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
+
+- topic-ai-agent MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## Related
+
+- 48-openclaw-skill-mechanism
+
+## See Also
+
+- 27-agent-cli-security-governance
+- 28-agent-cli-enterprise-automation
+- 30-agent-harness-engineering
+- 31-agent-harness-loop-execution

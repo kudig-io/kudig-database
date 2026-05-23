@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # KUDIG Cheat Sheet Index

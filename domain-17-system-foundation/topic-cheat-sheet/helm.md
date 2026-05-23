@@ -41,9 +41,10 @@ prerequisites:
 - prometheus-basics
 - gitops-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
-# Helm 生产环境速查卡
+# [[Helm|Helm]] 生产环境速查卡
 
 > **适用版本**: Helm 3.12 - 3.15 | **最后更新**: 2026-05
 
@@ -219,7 +220,7 @@ dependencies:
 | 安全审计 | `helm lint` + `kubeval` + `conftest` |
 | OCI 仓库 | Helm 3.8+ 推荐 OCI 仓库替代传统 HTTP 仓库 |
 | RBAC | 限制 Helm serviceaccount 的 namespace 权限 |
-| Secrets | 使用 `helm-secrets` 插件加密敏感 values |
+| [[Secrets|Secrets]] | 使用 `helm-secrets` 插件加密敏感 values |
 
 ---
 
@@ -235,9 +236,9 @@ dependencies:
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/README-from-domain-19-landscape-references|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[references/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
-- [[references/release-notes-cicd-gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- Domain-34: CNCF Landscape 开源项目 — Cross-reference
+- [[references/k8s-advanced-ecosystem|[[硬件知识体系、CNCF 全景生态与 eBPF 平台工程|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]]] — Cross-reference
+- gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
 - [[references/release-notes-cli-tools|发布说明索引 — CLI 工具]] — Cross-reference
 - [[references/k8s-cluster-create|Kubernetes 集群创建操作指南]] — Cross-reference
 - [[references/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
@@ -261,6 +262,6 @@ dependencies:
 - [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
 - [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.1|helm v3.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-2.1|helm v2.1 Release Notes]]
-- [[domain-19-landscape-references/topic-release-notes/cli-tools/helm/RELEASE-NOTES-3.2|helm v3.2 Release Notes]]
+- helm v3.1 Release Notes
+- helm v2.1 Release Notes
+- helm v3.2 Release Notes

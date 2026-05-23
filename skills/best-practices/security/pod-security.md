@@ -1,7 +1,7 @@
 ---
-title: Kubernetes Pod安全最佳实践
+title: Kubernetes Pod安全最佳实践 [security]
 description: 生产环境 Kubernetes Pod安全配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/security
+category: best-practices/security
 tags:
 - kubernetes
 - security
@@ -32,16 +32,6 @@ trigger_keywords:
 - 容器安全
 prerequisites:
 - kubectl-basics
-- gpu-ml-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
 cross_refs:
 - type: domain
   path: ../../domain-05-security-compliance/
@@ -49,6 +39,7 @@ cross_refs:
 - type: domain
   path: ../../domain-05-security-compliance/
   label: 云原生安全知识域
+created: "2026-05-23"
 ---
 
 # Kubernetes Pod安全最佳实践
@@ -605,10 +596,3 @@ spec:
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和安全标准保持同步
-
-## See Also
-
-- [[domain-11-production-operations/topic-best-practices/scenarios/upgrade-migration.md|upgrade-migration]]
-- [[domain-11-production-operations/topic-best-practices/security/network-security.md|network-security]]
-- [[domain-11-production-operations/topic-best-practices/security/secrets-management.md|secrets-management]]
-- [[domain-11-production-operations/topic-best-practices/common-best-practices.md|common-best-practices]]

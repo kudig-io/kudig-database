@@ -32,6 +32,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 工单数字人快速问答 - On-Call 速查
@@ -243,7 +244,7 @@ kubectl delete pods -n <namespace> --field-selector=status.phase=Evicted
 
 ## 二、网络问题（高频）
 
-### Q5: Service 无法访问怎么办？
+### Q5: [[Service|Service]] 无法访问怎么办？
 
 ```
 【回复】
@@ -335,7 +336,7 @@ nameserver 应该是集群 DNS 的 IP（通常是 10.96.0.10）。
 "
 ```
 
-### Q7: Ingress 返回 404 怎么办？
+### Q7: [[Ingress|Ingress]] 返回 404 怎么办？
 
 ```
 【回复】
@@ -1190,7 +1191,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 **关联文档**:
 - [../README.md](../README.md) — 讲师完整台词设计
 - [../troubleshooting/decision-tree-mermaid.md](../troubleshooting/decision-tree-mermaid.md) — Mermaid 决策树
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/](../../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/](../../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA [[SKILL|Skill]]
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
 
 ## Related

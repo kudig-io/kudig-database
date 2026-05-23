@@ -1,5 +1,5 @@
 ---
-title: 'Day 4: 调试工具全家桶安装'
+title: Day 4: 调试工具全家桶安装 [quick-start]
 description: '### 1.1 kubectl 基础配置'
 category: learning
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 - gpu-ml-basics
 - helm-basics
 - cilium-basics
+created: "2026-05-23"
 ---
 
 # Day 4: 调试工具全家桶安装
@@ -99,7 +100,7 @@ kn default  # 切换到 default namespace
   OS="$(uname | tr '[:upper:]' '[:lower:]')"
   ARCH="$(uname -m | sed -e 's/x86_64/amd64/;s/aarch64/arm64/')"
   KREW="krew-${OS}_${ARCH}"
-  curl -fsSLO "https://github.com/[[entities/kubernetes|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
+  curl -fsSLO "https://github.[[entities/kubernetes|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
   tar zxf "${KREW}.tar.gz"
   ./"${KREW}" install krew
 )
@@ -190,7 +191,7 @@ stern backend -n production --color=always
 
 ---
 
-## 4. kubescape 安全工具
+## 4. [[Kubescape|kubescape]] 安全工具
 
 ### 4.1 安装 kubescape
 
@@ -320,7 +321,7 @@ npm install -g kubetail
 kubetail <deployment-name> -n production
 ```
 
-### 7.3 cilium (CNI 调试)
+### 7.3 [[Cilium|cilium]] (CNI 调试)
 
 ```bash
 # Cilium CLI

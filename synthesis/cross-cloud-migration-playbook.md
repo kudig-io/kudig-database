@@ -25,6 +25,10 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - backup-basics
+created: "2026-05-23"
+relationships:
+  - target: "[[entities/helm]]"
+    type: uses
 ---
 
 # 跨云迁移手册
@@ -62,12 +66,16 @@ prerequisites:
 
 | 任务 | 工具 |
 |------|------|
-| 配置转换 | kustomize, helm |
+| 配置转换 | kustomize, [[entities/helm|helm]] |
 | 数据迁移 | Velero, 数据库原生工具 |
 | 网络测试 | iperf, curl |
 | 验证 | k6, 自动化测试 |
 
 ## 相关 Domain
 
-- [[domain-12-cloud-providers/01-aws-eks/01-eks-migration-guide]]
-- [[domain-12-cloud-providers/02-google-cloud-gke/01-gke-migration-guide]]
+- domain-12-cloud-providers/01-aws-eks/01-eks-migration-guide
+- domain-12-cloud-providers/02-google-cloud-gke/01-gke-migration-guide
+## Related
+
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting|Helm 部署故障排查指南 [topic-structural-trouble-shooting]]]
+- [[skills/helm-fta|Helm 发布异常故障树分析 (skills)]]

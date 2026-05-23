@@ -34,6 +34,7 @@ prerequisites:
 - cncf-ecosystem
 - helm-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # gatekeeper v3.12 Release Notes
@@ -46,13 +47,13 @@ This stable release has no other functional changes from [v3.12.0-rc.0](https://
 - 📦 New [`AssignImage`](https://open-policy-agent.github.io/gatekeeper/website/docs/mutation#assignimage) mutator [#2429](https://github.com/open-policy-agent/gatekeeper/pull/2429)
 - 📢 [Emit events](https://open-policy-agent.github.io/gatekeeper/website/docs/customize-startup#alpha-emit-admission-and-audit-events) in the involved objects namespace [#2360](https://github.com/open-policy-agent/gatekeeper/pull/2360)
 - 🥳 Update to Open Policy Agent (OPA) [v0.49.2](https://github.com/open-policy-agent/opa/releases/tag/v0.49.2) [#2611](https://github.com/open-policy-agent/gatekeeper/pull/2611)
-- 🚂 Added multi-engine support to allow integration with Kubernetes CEL `ValidatingAdmissionPolicy` in the future [#2616](https://github.com/open-policy-agent/gatekeeper/pull/2616)
+- 🚂 Added multi-engine support to allow integration with [[Kubernetes|Kubernetes]] CEL `ValidatingAdmissionPolicy` in the future [#2616](https://github.com/open-policy-agent/gatekeeper/pull/2616)
 - 👏 Enable exempt namespace suffix with [`--exempt-namespace-suffix`](https://open-policy-agent.github.io/gatekeeper/website/docs/exempt-namespaces/#exempting-namespaces-from-the-gatekeeper-admission-webhook-using---exempt-namespace-flag) flag [#2636](https://github.com/open-policy-agent/gatekeeper/pull/2636)
 
 ## Features
 - Allow writing logs to custom file (#2473) [#2473](https://github.com/open-policy-agent/gatekeeper/pull/2473) ([Max Smythe](https://github.com/open-policy-agent/gatekeeper/commit/bb11f3e08cdbc4a14792ce496cc6a4a224dec712))
 - More verbose logging for audit (#2503) [#2503](https://github.com/open-policy-agent/gatekeeper/pull/2503) ([Max Smythe](https://github.com/open-policy-agent/gatekeeper/commit/beb2432ce892554bf1eaddd6f543303cf6d34da2))
-- **helm**: Add a network policy for the controller manager (#2514) [#2514](https://github.com/open-policy-agent/gatekeeper/pull/2514) ([Kyle Michel](https://github.com/open-policy-agent/gatekeeper/commit/ac8612db506c727a1331b195ea7dbb41c19aaa3d))
+- **[[Helm|helm]]**: Add a network policy for the controller manager (#2514) [#2514](https://github.com/open-policy-agent/gatekeeper/pull/2514) ([Kyle Michel](https://github.com/open-policy-agent/gatekeeper/commit/ac8612db506c727a1331b195ea7dbb41c19aaa3d))
 - enforce kind on admission review (#2512) [#2512](https://github.com/open-policy-agent/gatekeeper/pull/2512) ([alex](https://github.com/open-policy-agent/gatekeeper/commit/eb5256d59147e4a0b9952d0b2bd2af7fb4b7b888))
 - add the errorlint check for golangci-lint (#2519) [#2519](https://github.com/open-policy-agent/gatekeeper/pull/2519) ([Fish-pro](https://github.com/open-policy-agent/gatekeeper/commit/73611cca9d208e4ecad2b4e21534da1349b2a68d))
 - implement AssignImage mutator (#2429) [#2429](https://github.com/open-policy-agent/gatekeeper/pull/2429) ([Davis Haba](https://github.com/open-policy-agent/gatekeeper/commit/7824f689cea63b49b55e2374988f43143327d3fd))

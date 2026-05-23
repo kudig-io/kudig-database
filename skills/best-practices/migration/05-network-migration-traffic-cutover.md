@@ -1,5 +1,5 @@
 ---
-title: 05 - 网络迁移与流量切换
+title: 05 - 网络迁移与流量切换 [migration]
 description: 'title: 05 - 网络迁移与流量切换'
 category: general
 tags:
@@ -37,6 +37,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - tls-basics
+created: "2026-05-23"
 ---
 
 title: 05 - 网络迁移与流量切换
@@ -47,11 +48,11 @@ tags:
 - migration
 - modernization
 - grafana
-- cilium
+- [[Cilium|cilium]]
 - flannel
 - calico
-- helm
-- ingress
+- [[Helm|helm]]
+- [[Ingress|ingress]]
 - gateway
 last_updated: 2026-05
 difficulty: advanced
@@ -314,7 +315,7 @@ Day 7: 100% 切流
   └── 稳定观察 7 天
 
 Day 14: 退役源集群
-  └── 参考 [[domain-11-production-operations/topic-best-practices/migration/08-validation-cutover-decommission.md|08-validation-cutover-decommission]].md
+  └── 参考 08-validation-cutover-decommission.md
 ```
 
 #<!-- chunk: 4.2 阿里云 DNS 权重配置 -->## 4.2 阿里云 DNS 权重配置
@@ -583,14 +584,14 @@ echo "回滚执行完成，请持续观察源集群状态"
 
 ---
 
-**上一步**: ← [04-存储与数据迁移](./[[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]].md)
+**上一步**: ← [04-存储与数据迁移](./04-storage-data-migration.md)
 **下一步**: → [06-有状态服务迁移](./06-stateful-services-migration.md)
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-08-release-change-management/topic-migration/MOC.md|topic-migration MOC]]
+- topic-migration MOC
 - [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
 - [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
 - [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
@@ -604,10 +605,10 @@ echo "回滚执行完成，请持续观察源集群状态"
 
 ## See Also
 
-- [[domain-11-production-operations/topic-best-practices/migration/03-application-workload-migration.md|03-application-workload-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/04-storage-data-migration.md|04-storage-data-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/06-stateful-services-migration.md|06-stateful-services-migration]]
-- [[domain-11-production-operations/topic-best-practices/migration/07-observability-security-migration.md|07-observability-security-migration]]
+- 03-application-workload-migration
+- 04-storage-data-migration
+- 06-stateful-services-migration
+- 07-observability-security-migration
 
 ## Related
 

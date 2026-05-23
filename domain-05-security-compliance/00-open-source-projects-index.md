@@ -33,6 +33,7 @@ prerequisites:
 - rbac-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # 安全合规开源项目索引
@@ -50,7 +51,7 @@ prerequisites:
 
 | 项目 | 类型 | 说明 | 文档位置 |
 |------|------|------|----------|
-| Falco | 威胁检测 | 云原生运行时安全 | `03-runtime-security/01-falco-cloud-native-security.md` |
+| [[Falco|Falco]] | 威胁检测 | 云原生运行时安全 | `03-runtime-security/01-falco-cloud-native-security.md` |
 | Sysdig | 安全监控 | 容器与系统监控 | `03-runtime-security/02-sysdig-enterprise-container-security.md` |
 | Aqua | 容器安全 | 企业级容器安全平台 | `03-runtime-security/03-aqua-enterprise-container-security.md` |
 | gVisor | 容器沙箱 | 用户空间内核沙箱 | `03-runtime-security/17-gvisor-container-sandbox.md` |

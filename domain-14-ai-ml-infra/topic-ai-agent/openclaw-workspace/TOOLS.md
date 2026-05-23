@@ -1,4 +1,45 @@
 ---
+title: 工具授权注册表 (02-ai-agents)
+description: 'title: 工具授权注册表'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- apiserver
+- kubelet
+- prometheus
+- grafana
+- istio
+- helm
+- job
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 工具授权注册表 是什么
+- 如何 工具授权注册表
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 工具授权注册表
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
+- tls-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: 工具授权注册表
 description: K8S 运维诊断 Agent 的工具授权注册表、调用参数规范与安全约束
 category: ai-agent
@@ -8,10 +49,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 - grafana
 last_updated: 2026-04
 difficulty: advanced
@@ -28,17 +69,16 @@ trigger_keywords:
 - 工具授权注册表
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- helm-basics
-- service-mesh-basics
-- prometheus-basics
-- monitoring-basics
-- etcd-basics
-- tls-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # 工具授权注册表
 
 ## 1. 授权工具清单
@@ -194,7 +234,7 @@ etcdctl\s+del\b
   - kube-node-lease
   - monitoring
   - istio-system
-  - [[domain-19-landscape-references/01-cncf-landscape/graduated/cert-manager/cert-manager|cert-manager]]
+  - cert-manager
 
 完全禁止操作的 Namespace:
   - default（生产集群不应使用 default）
@@ -300,7 +340,7 @@ mcp_servers:
       - loki_search
 ```
 
-### 6.2 AgentScope Toolkit 注册示例
+### 6.2 AGENTScope Toolkit 注册示例
 
 ```python
 from agentscope.tool import Toolkit, execute_shell_command, view_text_file
@@ -322,3 +362,17 @@ toolkit.register_agent_skill("openclaw-workspace")
 ---
 
 *本文件定义 Agent 的工具授权边界。添加新工具需要安全评审，删除工具需要评估影响范围。*
+
+## Related
+
+- 29-agentscope-studio-skill-demo
+- [[log.md|log]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
+
+## See Also
+
+- SKILL
+- SOUL
+- USER
+- AGENTS

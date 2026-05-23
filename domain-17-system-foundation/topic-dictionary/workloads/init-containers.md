@@ -25,6 +25,7 @@ prerequisites:
 - kubectl-basics
 - pod-lifecycle
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Init Containers
@@ -38,7 +39,7 @@ Init 容器是在 Pod 启动期间、于应用容器之前运行的特殊容器�
   - 必须运行到完成（run to completion）。
   - 不支持 `lifecycle`、存活探针、就绪探针或启动探针（Sidecar 类型的 init 容器除外）。
   - 资源请求/限制的计算方式不同：取所有 init 容器中每项资源的最高值作为 effective init request/limit。
-- **失败处理**：若 init 容器失败，kubelet 会根据 Pod 的 `restartPolicy` 重试（`Never` 时 Pod 整体失败）。
+- **失败处理**：若 init 容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy` 重试（`Never` 时 Pod 整体失败）。
 
 ## 关键机制或特性
 - **资源共享**：Init 容器与应用容器共享网络命名空间和存储卷（如 `emptyDir`），但不直接交互；可通过共享卷单向传递数据。
@@ -219,4 +220,4 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions[?(@.type=="I
 - [Pod 综合故障排查手册](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 
 ## 参考链接
-- https://[[entities/kubernetes|kubernetes]].io/docs/concepts/workloads/pods/init-containers/
+- https://[[entities/kubernetes|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/

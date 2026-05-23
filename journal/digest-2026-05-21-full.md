@@ -40,6 +40,7 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Wiki 全量知识库摘要 — 2026-05-21
@@ -261,18 +262,18 @@ prerequisites:
 | apiserver-fta | API Server 异常 |
 | etcd-fta | etcd 异常 |
 | scheduler-fta | 调度器异常 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|controller-manager-fta]] | 控制器管理器异常 |
+| [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta|controller-manager-fta]] | 控制器管理器异常 |
 | kubelet-fta | Kubelet 异常 |
 | calico-fta | Calico CNI 故障 |
 | cilium-fta | Cilium eBPF 故障 |
 | dns-fta | DNS 故障 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]] | Ingress 故障 |
+| [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]] | Ingress 故障 |
 | storage-fta | 存储故障 |
 | certificate-fta | 证书异常 |
 | backup-restore-fta | 备份恢复异常 |
 | cluster-upgrade-fta | 集群升级异常 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
-| [[skills/cloud-provider-fta.md|cloud-provider-fta]] | 云平台集成异常 |
+| [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta|cluster-autoscaler-fta]] | 自动伸缩异常 |
+| [[skills/cloud-provider-fta|cloud-provider-fta]] | 云平台集成异常 |
 | ... | （共 44 棵） |
 
 ---
@@ -326,7 +327,7 @@ topic-application-architecture 包含 96 个完整的 K8s 生产架构设计文�
 | 标签 | 文档数 | 说明 |
 |---|---|---|
 | k8s | 122 | K8s 相关文档 |
-| [[domain-20-application-patterns/[[domain-10-troubleshooting-diagnostics/topic-febm/MOC.md|MOC]].md|MOC]] | 63 | 知识导航地图 |
+| MOC|MOC]] | 63 | 知识导航地图 |
 | scenario | 21 | 生产场景 |
 | k8s-1.28-1.33 | 19 | K8s 版本特定内容 |
 | hands-on | 15 | 动手实践 |
@@ -386,13 +387,13 @@ topic-application-architecture 包含 96 个完整的 K8s 生产架构设计文�
 
 ## Related
 
-- [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
+- [[concepts/kubernetes-architecture-overview|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[pod-lifecycle]] — Pod Lifecycle
-- [[concepts/ai-agent-README.md|ai-agent-README]] — AI Agent 工程专题
-- [[concepts/gitops-principles.md|gitops-principles]] — GitOps Principles and Practice
-- [[concepts/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
+- [[concepts/ai-agent-README|ai-agent-README]] — AI Agent 工程专题
+- [[concepts/gitops-principles|gitops-principles]] — GitOps Principles and Practice
+- [[concepts/security-defense-depth|security-defense-depth]] — Defense-in-Depth Security
 
-- [[entities/tinkerbell.md|Tinkerbell]]
-- [[entities/krkn.md|Krkn]]
-- [[entities/chaosblade.md|ChaosBlade]]
-- [[entities/vineyard.md|Vineyard]]
+- [[entities/tinkerbell|Tinkerbell]]
+- [[entities/krkn|Krkn]]
+- [[entities/chaosblade|ChaosBlade]]
+- [[entities/vineyard|Vineyard]]

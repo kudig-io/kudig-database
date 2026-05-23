@@ -26,12 +26,13 @@ prerequisites:
 - pod-lifecycle
 - cloud-provider-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 # Deployments
 
 ## 概述
-Deployment 为 Pod 和 ReplicaSet 提供声明式更新能力。用户描述期望状态，Deployment 控制器以受控速率将实际状态变更为期望状态。它是 Kubernetes 中管理无状态应用最常用的工作负载资源。
+Deployment 为 Pod 和 [[ReplicaSet|ReplicaSet]] 提供声明式更新能力。用户描述期望状态，Deployment 控制器以受控速率将实际状态变更为期望状态。它是 [[Kubernetes|Kubernetes]] 中管理无状态应用最常用的工作负载资源。
 
 ## 核心概念/原理
 - **Pod 模板（`.spec.template`）**：定义 Pod 的规格，必须包含与应用选择器匹配的标签；`restartPolicy` 只能为 `Always`。
@@ -261,4 +262,4 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- index/gitops-cicd-index|GitOps / CI-CD 全局索引]]

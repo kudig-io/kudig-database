@@ -29,6 +29,7 @@ prerequisites:
 - kubectl-basics
 - cloud-provider-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # 运行时安全
@@ -41,7 +42,7 @@ prerequisites:
 
 ### 1. 运行时威胁类型
 
-Kubernetes 运行时面临的主要威胁包括：
+[[Kubernetes|Kubernetes]] 运行时面临的主要威胁包括：
 - **容器逃逸**：攻击者突破容器边界获取宿主机权限
 - **异常进程执行**：容器内启动未预期的 shell、挖矿程序或扫描工具
 - **敏感文件访问**：读取 `/etc/shadow`、Kubernetes ServiceAccount Token 或宿主机路径
@@ -56,7 +57,7 @@ Kubernetes 运行时面临的主要威胁包括：
 - **文件访问审计**：记录敏感文件和配置文件的读写操作
 - **零性能开销**：相比传统审计机制，eBPF 对应用性能影响极小
 
-### 3. Falco
+### 3. [[Falco|Falco]]
 
 **Falco** 是 CNCF 孵化项目，由 Sysdig 创建，是 Kubernetes 运行时安全的行业标杆工具：
 - **规则引擎**：使用类 SQL 的语法定义异常行为规则
@@ -72,7 +73,7 @@ Kubernetes 运行时面临的主要威胁包括：
   priority: WARNING
 ```
 
-### 4. KubeArmor
+### 4. [[KubeArmor|KubeArmor]]
 
 **KubeArmor** 是 CNCF 沙箱项目，专注于**运行时策略执行**（而不仅是检测）：
 - 基于 eBPF/LSM（Linux Security Modules）强制限制容器的文件访问、进程执行和网络行为

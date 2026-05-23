@@ -1,4 +1,36 @@
 ---
+title: OpenClaw IDENTITY.md 机制深度解析 (domain-14-ai-ml-infra)
+description: 'title: OpenClaw IDENTITY.md 机制深度解析'
+category: general
+tags:
+- ai
+- ai-agent
+- coredns
+- llm
+- rag
+- agent
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- OpenClaw IDENTITY.md 机制深度解析 是什么
+- 如何 OpenClaw IDENTITY.md 机制深度解析
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- OpenClaw
+- IDENTITY.md
+- 机制深度解析
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+created: "2026-05-23"
+---
+
 title: OpenClaw IDENTITY.md 机制深度解析
 description: '# OpenClaw IDENTITY.md 机制深度解析'
 category: ai-agent
@@ -8,7 +40,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- coredns
+- [[CoreDNS|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -26,8 +58,15 @@ trigger_keywords:
 - 机制深度解析
 - ai
 - agent
-prerequisites:
-- kubectl-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # OpenClaw IDENTITY.md 机制深度解析
@@ -444,3 +483,27 @@ IDENTITY.md 配置验证:
 ---
 
 *本文档为 kudig-database 项目 topic-ai-agent 专题原创内容，深度解析 OpenClaw IDENTITY.md 的设计机制与工程实现。*
+
+---
+
+## Obsidian 相关文档
+
+- topic-ai-agent KUDIG Database — Global MOC
+- [[domain-14-ai-ml-infra/topic-ai-agent/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/topic-ai-agent/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+
+## See Also
+
+- 48-openclaw-skill-mechanism
+- 49-openclaw-memory-mechanism
+- 01-ai-agent-fundamentals
+- 02-llm-foundation-models

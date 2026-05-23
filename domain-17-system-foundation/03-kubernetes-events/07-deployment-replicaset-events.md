@@ -37,6 +37,7 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 ---
@@ -54,14 +55,14 @@ intent_queries:
 - 07-deployment-replicaset-events生产环境部署
 
 tier: peripheral---
-title: 07 - Deployment 与 ReplicaSet 控制器事件
+title: 07 - Deployment 与 [[ReplicaSet|ReplicaSet]] 控制器事件
 description: '<!-- chunk: 📋 文档概述' -->## 📋 文档概述'
 category: kubernetes-events
 tags:
 - k8s
 - events
 - troubleshooting
-- etcd
+- [[etcd|etcd]]
 - apiserver
 - scheduler
 - controller-manager
@@ -2339,25 +2340,25 @@ kubectl logs <pod-name>
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-17-system-foundation/MOC.md|domain-33-kubernetes-events MOC]]
+- domain-33-kubernetes-events MOC
 - [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[domain-17-system-foundation/00-open-source-projects-index.md|Domain-33 K8s 事件 — 开源项目索引]]
-- [[domain-17-system-foundation/01-event-system-architecture.md|01 - Kubernetes 事件系统架构与 API 参考]]
-- [[domain-17-system-foundation/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/03-image-pull-events.md|03 - 镜像拉取事件]]
-- [[domain-17-system-foundation/04-probe-health-check-events.md|04 - 探针与健康检查事件]]
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05 - 调度与抢占事件]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06 - 节点生命周期与状态事件]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08 - StatefulSet 与 DaemonSet 控制器事件]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09 - Job 与 CronJob 批处理事件]]
-- [[domain-17-system-foundation/10-service-networking-events.md|10 - Service 与网络事件]]
+- Domain-33 K8s 事件 — 开源项目索引
+- 01 - Kubernetes 事件系统架构与 API 参考
+- 02 - Pod 与容器生命周期事件
+- 03 - 镜像拉取事件
+- 04 - 探针与健康检查事件
+- 05 - 调度与抢占事件
+- 06 - 节点生命周期与状态事件
+- 08 - StatefulSet 与 DaemonSet 控制器事件
+- 09 - Job 与 CronJob 批处理事件
+- 10 - Service 与网络事件
 
 ## See Also
 
-- [[domain-17-system-foundation/05-scheduling-preemption-events.md|05-scheduling-preemption-events]]
-- [[domain-17-system-foundation/06-node-lifecycle-condition-events.md|06-node-lifecycle-condition-events]]
-- [[domain-17-system-foundation/08-statefulset-daemonset-events.md|08-statefulset-daemonset-events]]
-- [[domain-17-system-foundation/09-job-cronjob-batch-events.md|09-job-cronjob-batch-events]]
+- 05-scheduling-preemption-events
+- 06-node-lifecycle-condition-events
+- 08-statefulset-daemonset-events
+- 09-job-cronjob-batch-events
 
 ## Related
 

@@ -31,6 +31,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: 数字疗法与互联网医疗架构设计
@@ -40,7 +41,7 @@ tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -573,7 +574,7 @@ flowchart TB
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
@@ -588,11 +589,11 @@ flowchart TB
 
 ## See Also
 
-- [[domain-20-application-patterns/55-crossborder-dtc.md|55-crossborder-dtc]]
-- [[domain-20-application-patterns/56-smart-elderly-care.md|56-smart-elderly-care]]
-- [[domain-20-application-patterns/58-web3-gamefi.md|58-web3-gamefi]]
-- [[domain-20-application-patterns/59-industrial-internet-platform.md|59-industrial-internet-platform]]
+- 55-crossborder-dtc
+- 56-smart-elderly-care
+- 58-web3-gamefi
+- 59-industrial-internet-platform
 
 ## Related
 
-- [[domain-20-application-patterns/98-merged-indexes/MOC-from-domain-20-application-patterns|topic-application-architecture MOC]] — Cross-reference
+- topic-application-architecture MOC — Cross-reference

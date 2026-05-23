@@ -46,10 +46,11 @@ prerequisites:
 - mysql-basics
 - policy-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 ---
-title: Kubernetes Service 核心概念与类型深度解析
+title: [[Kubernetes|Kubernetes]] [[Service|Service]] 核心概念与类型深度解析
 description: 深入解析 Service 的核心概念与类型：ClusterIP、NodePort、LoadBalancer、ExternalName、Headless
   Service、无头部署与 Endpoint 切片
 category: domain-03-networking-traffic
@@ -61,7 +62,7 @@ tags:
 - loadbalancer
 - endpoints
 - service-discovery
-- etcd
+- [[etcd|etcd]]
 - scheduler
 - controller-manager
 - networking
@@ -2663,31 +2664,31 @@ roleRef:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-03-networking-traffic/MOC.md|domain-03-networking-traffic MOC]]
+- domain-03-networking-traffic MOC
 - [[domain-03-networking-traffic/README.md|Domain 5: Networking 网络]]
-- [[domain-03-networking-traffic/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- [[domain-03-networking-traffic/00-open-source-projects-index.md|Domain-5 网络 — 开源项目索引]]
-- [[domain-03-networking-traffic/01-network-architecture-overview-faq.md|FAQ 文档]]
-- [[domain-03-networking-traffic/01-network-architecture-overview.md|网络核心组件]]
-- [[domain-03-networking-traffic/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]]
-- [[domain-03-networking-traffic/03-cni-plugins-comparison.md|76 - CNI插件深度对比]]
-- [[domain-03-networking-traffic/04-flannel-complete-guide.md|142 - Flannel 完整指南 (Flannel Complete Guide)]]
-- [[domain-03-networking-traffic/04a-flannel-wireguard-backend.md|Flannel WireGuard 加密后端配置]]
-- [[domain-03-networking-traffic/04b-flannel-ipv6-dual-stack.md|Flannel IPv6 Dual Stack 支持]]
-- [[domain-03-networking-traffic/04c-flannel-windows-support.md|Flannel Windows 节点支持]]
+- Kubernetes 网络基础 Network in a Nutshell
+- Domain-5 网络 — 开源项目索引
+- FAQ 文档
+- 网络核心组件
+- CNI 架构与核心原理
+- 76 - CNI插件深度对比
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- Flannel WireGuard 加密后端配置
+- Flannel IPv6 Dual Stack 支持
+- Flannel Windows 节点支持
 
 ## Related
 
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
-- [[domain-01-cluster-fundamentals/MOC.md|相关知识域: domain-01-cluster-fundamentals]]
-- [[domain-03-networking-traffic/MOC.md|相关知识域: domain-03-networking-traffic]]
-- [[domain-06-observability/MOC.md|相关知识域: domain-06-observability]]
+- 相关知识域: domain-01-cluster-fundamentals
+- 相关知识域: domain-03-networking-traffic
+- 相关知识域: domain-06-observability
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
 
 ## See Also
 
-- [[domain-03-networking-traffic/04e-flannel-command-reference.md|04e-flannel-command-reference]]
-- [[domain-03-networking-traffic/05-terway-advanced-guide.md|05-terway-advanced-guide]]
-- [[domain-03-networking-traffic/07-service-implementation-details.md|07-service-implementation-details]]
-- [[domain-03-networking-traffic/08-service-topology-aware.md|08-service-topology-aware]]
+- 04e-flannel-command-reference
+- 05-terway-advanced-guide
+- 07-service-implementation-details
+- 08-service-topology-aware

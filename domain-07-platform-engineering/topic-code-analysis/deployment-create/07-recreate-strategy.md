@@ -50,6 +50,7 @@ related_topics:
 - deployment-controller
 - rolling-update
 - deployment-status
+created: "2026-05-23"
 ---
 
 # Recreate 策略源码分析

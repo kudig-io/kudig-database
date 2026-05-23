@@ -30,6 +30,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Kubernetes 集群删除操作指南

@@ -23,6 +23,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # kudig-database 预热倒计时文案

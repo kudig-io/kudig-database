@@ -1,4 +1,43 @@
 ---
+title: 记忆系统 (02-ai-agents)
+description: 'description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则'
+category: general
+tags:
+- ai
+- ai-agent
+- etcd
+- prometheus
+- grafana
+- coredns
+- hpa
+- pdb
+- ingress
+- gateway
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 记忆系统 是什么
+- 如何 记忆系统
+- Kubernetes 14 ai ml infra 最佳实践
+trigger_keywords:
+- 记忆系统
+- ai
+- ml
+- infra
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- etcd-basics
+- gpu-scheduling-basics
+- logging-basics
+created: "2026-05-23"
+---
+
 title: 记忆系统
 description: KuDig Doctor Agent 的长期记忆系统，存储跨会话的经验、模式和确定性规则
 category: ai-agent
@@ -8,10 +47,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- prometheus
+- [[etcd|etcd]]
+- [[Prometheus|prometheus]]
 - grafana
-- coredns
+- [[CoreDNS|coredns]]
 - hpa
 last_updated: 2026-04
 difficulty: advanced
@@ -28,15 +67,16 @@ trigger_keywords:
 - 记忆系统
 - ai
 - agent
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- monitoring-basics
-- etcd-basics
-- gpu-scheduling-basics
-- logging-basics
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
-
 # 记忆系统
 
 ## 1. 确定性规则（手动维护）
@@ -94,7 +134,7 @@ known_issues:
       - "Events 中出现 'waiting for ENI' 相关信息"
     root_cause: "ENI 弹性网卡分配需要调用 ECS API，高峰期有延迟"
     workaround: "确认节点 ENI 余量，必要时预热 ENI 池"
-    reference: "domain-10-troubleshooting-diagnostics/[[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting|03-networking-cni-troubleshooting]].md"
+    reference: "domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md"
     discovered: 2026-01-15
 
   - id: KI-002
@@ -281,3 +321,16 @@ memory_metadata:
 ---
 
 *本文件是 Agent 的长期记忆存储。经验模式由 Agent 自动提炼，确定性规则由人工维护。定期审查以保持记忆质量。*
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
+- [[entities/coredns.md|coredns]]
+
+## See Also
+
+- AGENTS
+- IDENTITY
+- SKILL
+- SOUL

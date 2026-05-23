@@ -43,9 +43,10 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - gpu-scheduling-basics
+created: "2026-05-23"
 ---
 
-title: AWS EKS (Elastic Kubernetes Service) 概述
+title: AWS EKS (Elastic [[Kubernetes|Kubernetes]] [[Service|Service]]) 概述
 description: '# AWS EKS (Elastic Kubernetes Service) 概述'
 category: cloud-provider
 tags:
@@ -55,9 +56,9 @@ tags:
 - gke
 - aks
 - ack
-- etcd
+- [[etcd|etcd]]
 - apiserver
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
 last_updated: 2026-05
 difficulty: advanced

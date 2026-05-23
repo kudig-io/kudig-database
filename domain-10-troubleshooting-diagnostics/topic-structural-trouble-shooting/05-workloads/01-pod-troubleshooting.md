@@ -1,5 +1,5 @@
 ---
-title: Pod 故障排查与运行机制深度指南
+title: Pod 故障排查与运行机制深度指南 [topic-structural-trouble-shooting]
 description: 'title: Pod 故障排查与运行机制深度指南'
 category: structural-troubleshooting
 tags:
@@ -46,6 +46,7 @@ prerequisites:
 - mysql-basics
 - gpu-scheduling-basics
 - tracing-basics
+created: "2026-05-23"
 ---
 
 title: Pod 故障排查与运行机制深度指南
@@ -55,10 +56,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
-- jaeger
+- [[Prometheus|prometheus]]
+- [[Jaeger|jaeger]]
 - istio
 - coredns
 - containerd
@@ -2056,8 +2057,8 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

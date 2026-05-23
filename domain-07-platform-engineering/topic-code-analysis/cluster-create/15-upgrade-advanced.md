@@ -36,6 +36,7 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 集群升级进阶滚动升级与回滚策略
@@ -85,7 +86,7 @@ related_domains:
 - domain-01-cluster-fundamentals
 - domain-10-troubleshooting-diagnostics
 related_topics:
-- cluster-create/[[domain-07-platform-engineering/topic-code-analysis/cluster-create/09-upgrade.md|09-upgrade]]
+- 09-upgrade
 - cluster-create/03-certs
 - cluster-create/07-etcd
 - cluster-create/14-ha-advanced

@@ -70,6 +70,7 @@ cross_refs:
 - type: skill
   path: ../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md
   label: '运维技能: 01-node-notready'
+created: "2026-05-23"
 ---
 
 # 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
@@ -81,7 +82,7 @@ cross_refs:
 
 1. [概述与状态机制](#1-概述与状态机制)
 2. [诊断决策树](#2-诊断决策树)
-3. [kubelet 问题诊断](#3-kubelet-问题诊断)
+3. [[entities/kubelet.md|kubelet]] 问题诊断](#3-kubelet-问题诊断)
 4. [容器运行时诊断](#4-容器运行时诊断)
 5. [资源耗尽诊断](#5-资源耗尽诊断)
 6. [网络问题诊断](#6-网络问题诊断)
@@ -1755,7 +1756,7 @@ log "诊断报告已保存: $OUTPUT_FILE"
 <!-- chunk: 11. 监控告警配置 -->
 ## 11. 监控告警配置
 
-### 11.1 Prometheus 告警规则
+### 11.1 [[Prometheus|Prometheus]] 告警规则
 
 ```yaml
 # node-notready-alerts.yaml
@@ -2051,7 +2052,7 @@ shutdownGracePeriodByPodPriority:
 | **恢复测试** | 验证自动恢复 | 模拟后恢复节点 |
 | **驱逐测试** | 验证 Pod 迁移 | 触发节点 NotReady |
 | **资源压力测试** | 验证驱逐策略 | 消耗内存/磁盘 |
-| **混沌测试** | 验证整体稳定性 | ChaosBlade 节点故障 |
+| **混沌测试** | 验证整体稳定性 | [[ChaosBlade|ChaosBlade]] 节点故障 |
 
 ### 14.3 产品经理视角
 
@@ -2143,9 +2144,9 @@ shutdownGracePeriodByPodPriority:
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/MOC.md|domain-10-troubleshooting-diagnostics MOC]]
+- domain-10-troubleshooting-diagnostics KUDIG Database — Global MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md|Domain-12 故障排查 — 开源项目索引]]
+- Domain-12 故障排查 — 开源项目索引
 - [[domain-10-troubleshooting-diagnostics/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

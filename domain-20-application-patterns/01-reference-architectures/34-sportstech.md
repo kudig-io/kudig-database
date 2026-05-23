@@ -28,6 +28,7 @@ prerequisites:
 - prometheus-basics
 - redis-basics
 - mysql-basics
+created: "2026-05-23"
 ---
 
 title: 体育科技架构设计
@@ -49,7 +50,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 体育科技 Kubernetes 智慧场馆
+- 体育科技 [[Kubernetes|Kubernetes]] 智慧场馆
 - 赛事票务 K8s 高并发设计
 - 智慧场馆 IoT Kubernetes 边缘
 - 赛事直播 CDN Kubernetes 低延迟
@@ -69,7 +70,7 @@ related_domains:
 related_topics:
 - 40-cloud-gaming
 - 54-social-gaming-metaverse
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
+- 01-ecommerce-architecture
 authors:
 - name: KUDIG Team
   role: contributor
@@ -312,8 +313,8 @@ flowchart LR
 
 ## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
+- topic-application-architecture KUDIG Database — Global MOC
+- [[domain-20-application-patterns/topic-application-architecture/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -327,7 +328,7 @@ flowchart LR
 
 ## See Also
 
-- [[domain-20-application-patterns/32-smart-restaurant.md|32-smart-restaurant]]
-- [[domain-20-application-patterns/33-crossborder-warehouse.md|33-crossborder-warehouse]]
-- [[domain-20-application-patterns/35-metaverse-digital-twin.md|35-metaverse-digital-twin]]
-- [[domain-20-application-patterns/36-carbon-esg-management.md|36-carbon-esg-management]]
+- 32-smart-restaurant
+- 33-crossborder-warehouse
+- 35-metaverse-digital-twin
+- 36-carbon-esg-management

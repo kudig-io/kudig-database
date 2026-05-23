@@ -36,6 +36,7 @@ prerequisites:
 - gitops-basics
 - policy-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 02-多云混合部署策略
@@ -46,10 +47,10 @@ tags:
 - production
 - operations
 - best-practices
-- prometheus
+- [[Prometheus|prometheus]]
 - grafana
-- istio
-- argocd
+- [[Istio|istio]]
+- [[ArgoCD|argocd]]
 - docker
 - harbor
 last_updated: 2026-05
@@ -745,18 +746,18 @@ data:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
+- domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
-- [[domain-08-release-change-management/10-gitops-pipeline-practices.md|10-GitOps流水线实践]]
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
+- 10-GitOps流水线实践
 
 ## Related
 
@@ -768,5 +769,5 @@ data:
 
 - [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-edge-computing-production-deployment]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-enterprise-monitoring-system]]
+- 03-edge-computing-production-deployment
+- 04-enterprise-monitoring-system

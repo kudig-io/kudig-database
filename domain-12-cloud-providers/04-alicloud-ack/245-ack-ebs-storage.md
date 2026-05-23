@@ -34,6 +34,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)
@@ -60,7 +61,7 @@ estimated_read_time: 5min
 intent_queries:
 - ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage) 是什么
 - 如何 ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)
-- Kubernetes 17 cloud provider 最佳实践
+- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
 trigger_keywords:
 - ACK
 - 关联产品

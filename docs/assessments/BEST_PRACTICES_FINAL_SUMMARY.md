@@ -18,6 +18,7 @@ trigger_keywords:
 - 最佳实践内容质量评估与修复项目总结
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # 最佳实践内容质量评估与修复项目总结
@@ -68,7 +69,7 @@ prerequisites:
 - `templates/best-practice-template.md` - 最佳实践内容模板
 
 **最佳实践文档**：
-- `best-practices/[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README|README]].md` - 最佳实践索引页面
+- `[[domain-04-storage-data/README|README]].md` - 最佳实践索引页面
 - `best-practices/common-best-practices.md` - 通用最佳实践参考
 
 **基础设施最佳实践**：
@@ -102,7 +103,7 @@ prerequisites:
 - 标准化结构：问题描述、解决方案、实施步骤、验证方法
 - 渐进式示例：从基础到高级的配置示例
 - 检查清单：可验证的检查项
-- 故障排查：常见问题和解决方案
+- 问题排查：常见问题和解决方案
 
 **模板优势**：
 - 统一格式，提高一致性
@@ -130,7 +131,7 @@ prerequisites:
 - 统一格式到模板标准
 - 增加具体实施步骤
 - 添加验证方法和检查清单
-- 补充故障排查指南
+- 补充问题排查指南
 
 **优化效果**：
 - 内容质量提升

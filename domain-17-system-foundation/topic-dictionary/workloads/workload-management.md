@@ -35,18 +35,19 @@ prerequisites:
 - kafka-basics
 - mysql-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # Workload Management
 
 ## 概述
-Kubernetes 提供多个内置 API 用于声明式地管理工作负载及其组件。虽然应用最终运行在 Pod 中，但直接管理单个 Pod 非常繁琐。工作负载对象提供了更高层次的抽象，控制平面会根据定义自动管理 Pod 的生命周期。
+[[Kubernetes|Kubernetes]] 提供多个内置 API 用于声明式地管理工作负载及其组件。虽然应用最终运行在 Pod 中，但直接管理单个 Pod 非常繁琐。工作负载对象提供了更高层次的抽象，控制平面会根据定义自动管理 Pod 的生命周期。
 
 ## 核心概念/原理
 主要的工作负载管理 API 包括：
-- **Deployment（及间接的 ReplicaSet）**：管理无状态应用的最常用方式。Pod 之间可互换，任意 Pod 失败均可被替换。
-- **StatefulSet**：用于管理需要稳定、唯一网络标识和持久存储的有状态应用。每个 Pod 具有持久标识，并与 PersistentVolume 关联。
-- **DaemonSet**：确保所有（或部分）节点上运行一个 Pod 副本。常用于节点级服务，如日志收集、监控代理、网络插件等。
+- **Deployment（及间接的 [[ReplicaSet|ReplicaSet]]）**：管理无状态应用的最常用方式。Pod 之间可互换，任意 Pod 失败均可被替换。
+- **[[StatefulSet|StatefulSet]]**：用于管理需要稳定、唯一网络标识和持久存储的有状态应用。每个 Pod 具有持久标识，并与 PersistentVolume 关联。
+- **[[DaemonSet|DaemonSet]]**：确保所有（或部分）节点上运行一个 Pod 副本。常用于节点级服务，如日志收集、监控代理、网络插件等。
 - **Job / CronJob**：用于运行一次性或定时批处理任务。Job 运行到完成即停止，CronJob 按时间表重复创建 Job。
 - **ReplicationController**：旧版 API，用于维护指定数量的 Pod 副本，现已被 Deployment 和 ReplicaSet 取代。
 

@@ -1,37 +1,4 @@
 ---
-title: Pre Release Final Evaluation 2026 05 19
-description: '| 专题 | 21 个 topic-* 目录 |'
-category: references
-tags:
-- release-notes
-- docker
-- gateway
-- ebpf
-- wasm
-- rag
-- agent
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
-audience:
-- 所有工程师
-estimated_read_time: 15min
-intent_queries:
-- Pre Release Final Evaluation 2026 05 19 是什么
-- 如何 Pre Release Final Evaluation 2026 05 19
-trigger_keywords:
-- Pre
-- Release
-- Final
-- Evaluation
-- '2026'
-- '05'
-- '19'
-prerequisites:
-- kubectl-basics
-- ebpf-basics
----
-
 title: kudig-database 发布前终局评估
 description: 对外发布前的全面质量与完整度评估，含 P0-P2 差距分析
 category: general
@@ -39,6 +6,12 @@ tags:
 - evaluation
 - release
 - quality
+- docker
+- gateway
+- ebpf
+- wasm
+- rag
+- agent
 last_updated: 2026-05-19
 difficulty: advanced
 reading_level: advanced
@@ -53,16 +26,12 @@ trigger_keywords:
 - 发布
 - 评估
 - 质量
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+created: "2026-05-23"
 ---
+
 # kudig-database 发布前终局评估
 
 > **评估日期**: 2026-05-19
@@ -132,7 +101,7 @@ k8s_versions:
 
 - [ ] 无 LICENSE 文件 ← 发布必须补
 - [ ] 34个 .DS_Store 未清理
-- [ ] 1个 .xmind 二进制文件在 domain-5 中
+- [ ] 1个 .xmind 二进制文件在 domain-03-networking-traffic 中
 - [ ] 1个 PDF 在 topic-febm 中
 - [ ] 断链: 1个已知断链（topic-fta 内锚点链接）
 - [ ] site/ 目录不应入库（MkDocs 构建产物，已在 .gitignore）
@@ -232,32 +201,32 @@ k8s_versions:
 
 | Domain | 文件数 | 行数 |
 |--------|--------|------|
-| domain-1-architecture-fundamentals | 34 | 26,118 |
-| domain-2-design-principles | 21 | 14,262 |
-| domain-3-control-plane | 38 | 46,469 |
-| domain-4-workloads | 29 | 17,430 |
-| domain-5-networking | 48 | 37,103 |
-| domain-6-storage | 20 | 17,681 |
-| domain-7-security | 23 | 15,511 |
-| domain-8-observability | 34 | 25,559 |
-| domain-9-platform-ops | 30 | 18,350 |
-| domain-10-extensions | 21 | 19,492 |
+| domain-01-cluster-fundamentals | 34 | 26,118 |
+| domain-01-cluster-fundamentals | 21 | 14,262 |
+| domain-01-cluster-fundamentals | 38 | 46,469 |
+| domain-02-workloads-applications | 29 | 17,430 |
+| domain-03-networking-traffic | 48 | 37,103 |
+| domain-04-storage-data | 20 | 17,681 |
+| domain-05-security-compliance | 23 | 15,511 |
+| domain-06-observability | 34 | 25,559 |
+| domain-07-platform-engineering | 30 | 18,350 |
+| domain-15-specialized-tech | 21 | 19,492 |
 | domain-11-ai-infra | 40 | 44,101 |
-| domain-12-troubleshooting | 50 | 44,098 |
-| domain-13-docker | 15 | 10,390 |
-| domain-14-linux | 12 | 11,920 |
-| domain-15-network-fundamentals | 9 | 6,317 |
-| domain-16-storage-fundamentals | 8 | 4,877 |
-| domain-17-cloud-provider | 25 | 15,124 |
-| domain-18-production-operations | 33 | 27,771 |
+| domain-10-troubleshooting-diagnostics | 50 | 44,098 |
+| domain-13-container-runtime | 15 | 10,390 |
+| domain-17-system-foundation | 12 | 11,920 |
+| domain-03-networking-traffic | 9 | 6,317 |
+| domain-04-storage-data | 8 | 4,877 |
+| domain-12-cloud-providers | 25 | 15,124 |
+| domain-11-production-operations | 33 | 27,771 |
 | domain-19-papers | 28 | 33,935 |
 | domain-20-enterprise-monitoring-alerting | 14 | 12,767 |
 | domain-21-logging-management-analytics | 11 | 9,991 |
 | domain-22-container-image-management | 10 | 7,384 |
-| domain-23-gitops-ci-cd | 14 | 15,336 |
+| domain-08-release-change-management | 14 | 15,336 |
 | domain-24-infrastructure-as-code | 8 | 6,020 |
-| domain-25-cloud-native-security | 17 | 18,276 |
-| domain-26-service-mesh-microservices | 15 | 15,976 |
+| domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security|cloud-native-security]] | 17 | 18,276 |
+| domain-03-networking-traffic | 15 | 15,976 |
 | domain-27-multi-cloud-hybrid | 12 | 15,164 |
 | domain-28-enterprise-database-middleware | 11 | 10,401 |
 | domain-29-automated-testing-quality | 7 | 5,654 |
@@ -265,34 +234,10 @@ k8s_versions:
 | domain-31-hardware | 20 | 11,152 |
 | domain-32-yaml-manifests | 38 | 70,061 |
 | domain-33-kubernetes-events | 17 | 30,029 |
-| domain-34-cncf-landscape | 235 | 79,463 |
+| domain-19-landscape-references | 235 | 79,463 |
 | domain-35-ebpf-technology | 12 | 26,802 |
-| domain-36-platform-engineering | 14 | 21,564 |
+| domain-07-platform-engineering | 14 | 21,564 |
 | domain-37-edge-computing | 13 | 22,155 |
 | domain-38-webassembly-cloud-native | 13 | 25,419 |
-| domain-39-supply-chain-security | 13 | 21,652 |
+| domain-05-security-compliance | 13 | 21,652 |
 | domain-40-cloud-native-api-gateway | 17 | 12,477 |
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md|kudig-database 内容深度评估 + 修复进展]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/[[_reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|QUALITY-BLIND-SPOT-SCAN-2026-05-19]].md|kudig-database 质量盲区深度扫描报告]]
-
-## Related
-
-- [[CHANGELOG.md|CHANGELOG]]
-- [[README.md|README]]
-- [[log.md|log]]
-- [[CONTRIBUTING.md|CONTRIBUTING]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

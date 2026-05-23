@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - gitops-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 # Software Supply Chain Security
@@ -40,7 +41,7 @@ prerequisites:
 Supply chain attacks can occur at any stage:
 1. **Development**: Developer machine compromised, dependency confusion attack
 2. **Build**: CI/CD pipeline hijacked, build tools tampered with, backdoor inserted during compilation
-3. **Distribution**: Registry attacked, image replaced, tag mutated (same tag points to different content)
+3. **[[Distribution|Distribution]]**: Registry attacked, image replaced, tag mutated (same tag points to different content)
 4. **Deployment**: Unsigned image deployed to production without verification
 
 ## SBOM (Software Bill of Materials)
@@ -50,7 +51,7 @@ SBOM is a formal inventory of all components in a software artifact:
 | Tool | Format | Use Case |
 |------|--------|----------|
 | Syft | CycloneDX, SPDX | Container image SBOM generation |
-| Trivy | SPDX-JSON | Image scan + SBOM combined |
+| [[Trivy|Trivy]] | SPDX-JSON | Image scan + SBOM combined |
 | cyclonedx-maven-plugin | CycloneDX | Java application SBOM |
 
 SBOM enables offline vulnerability scanning and dependency tracking without needing the original image.
@@ -94,21 +95,21 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - [[kyverno|Kyverno]]
 - [[synthesis/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
 
-- [[domain-19-landscape-references/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md|20-kubernetes-supply-chain-security-sbom-slsa-sigstore]]
+- 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
 - [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-05-security-compliance/02-supply-chain-maturity-model.md|02-supply-chain-maturity-model]]
-- [[domain-05-security-compliance/07-sigstore-cosign-signing.md|07-sigstore-cosign-signing]]
-- [[domain-05-security-compliance/01-supply-chain-security-overview.md|01-supply-chain-security-overview]]
-- [[domain-05-security-compliance/03-sbom-generation-management.md|03-sbom-generation-management]]
-- [[domain-05-security-compliance/06-github-actions-slsa-build.md|06-github-actions-slsa-build]]
-- [[domain-05-security-compliance/08-fulcio-rekor-transparency.md|08-fulcio-rekor-transparency]]
-- [[domain-05-security-compliance/10-compliance-automation-audit.md|10-compliance-automation-audit]]
+- 02-supply-chain-maturity-model
+- 07-sigstore-cosign-signing
+- 01-supply-chain-security-overview
+- 03-sbom-generation-management
+- 06-github-actions-slsa-build
+- 08-fulcio-rekor-transparency
+- 10-compliance-automation-audit
 - [[domain-05-security-compliance/README.md|Domain 39: 供应链安全 (Supply Chain Security)]]
-- [[domain-05-security-compliance/04-sbom-vulnerability-analysis.md|04-sbom-vulnerability-analysis]]
-- [[domain-05-security-compliance/05-slsa-levels-implementation.md|05-slsa-levels-implementation]]
-- [[domain-05-security-compliance/09-policy-controller-verification.md|09-policy-controller-verification]]
-- [[domain-05-security-compliance/MOC.md|domain-05-security-compliance MOC]]
-- [[domain-05-security-compliance/99-slsa-supply-chain-security-guide.md|99-slsa-supply-chain-security-guide]]
+- 04-sbom-vulnerability-analysis
+- 05-slsa-levels-implementation
+- 09-policy-controller-verification
+- domain-05-security-compliance MOC
+- 99-slsa-supply-chain-security-guide
 - [[concepts/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[entities/argocd|ArgoCD]] — Cross-reference
 - [[entities/cncf-security|CNCF 安全与合规项目全景]] — Cross-reference

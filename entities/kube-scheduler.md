@@ -21,15 +21,16 @@ trigger_keywords:
 - kube-scheduler
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # kube-scheduler
 
 ## Role
 
-kube-scheduler watches for unscheduled Pods and assigns each to the most suitable node. It is the only component that writes to `Pod.spec.nodeName`.
+kube-scheduler watches for unscheduled [[Pods|Pods]] and assigns each to the most suitable node. It is the only component that writes to `Pod.spec.nodeName`.
 
-## Scheduling Framework
+## [[Scheduling Framework|Scheduling Framework]]
 
 The scheduler is plugin-based with extension points:
 
@@ -38,7 +39,7 @@ The scheduler is plugin-based with extension points:
 | PreFilter | Plugin | Fast pre-checks |
 | Filter | Plugin | Node feasibility |
 | PostFilter | Plugin | Preemption |
-| PreScore | Plugin | Score preparation |
+| PreScore | Plugin | [[Score|Score]] preparation |
 | Score | Plugin | Node ranking |
 | Reserve | Plugin | Resource reservation |
 | Permit | Plugin | Binding approval |
@@ -70,4 +71,4 @@ Multiple scheduler instances run with leader election. Only the leader schedules
 - [[concepts/resource-management.md|Resource Management]]
 - [[concepts/high-availability-patterns.md|High Availability Patterns]]
 
-- [[domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md|20-kube-scheduler-deep-dive]]
+- 20-kube-scheduler-deep-dive

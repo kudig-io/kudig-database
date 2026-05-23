@@ -45,6 +45,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # Domain-16 存储基础 — 开源项目索引
@@ -319,11 +320,11 @@ Volume (PVC)
 
 ## Obsidian 相关文档
 
-- [[domain-04-storage-data/MOC.md|domain-04-storage-data MOC]]
+- domain-04-storage-data MOC
 - [[domain-04-storage-data/README.md|Domain-16: 存储基础]]
-- [[domain-04-storage-data/01-storage-technologies-overview.md|01 - 存储技术概述]]
-- [[domain-04-storage-data/02-block-file-object-storage.md|02 - 块存储、文件存储、对象存储]]
-- [[domain-04-storage-data/03-raid-storage-redundancy.md|03 - RAID 与存储冗余]]
-- [[domain-04-storage-data/04-distributed-storage-systems.md|04 - 分布式存储系统]]
-- [[domain-04-storage-data/05-storage-management-operations.md|05 - 企业级存储管理与运维实践]]
-- [[domain-04-storage-data/06-storage-performance-iops.md|06 - 存储性能与 IOPS]]
+- 01 - 存储技术概述
+- 02 - 块存储、文件存储、对象存储
+- 03 - RAID 与存储冗余
+- 04 - 分布式存储系统
+- 05 - 企业级存储管理与运维实践
+- 06 - 存储性能与 IOPS

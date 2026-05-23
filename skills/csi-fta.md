@@ -1,5 +1,5 @@
 ---
-title: CSI 存储异常故障树分析
+title: CSI 存储异常故障树分析 (skills)
 description: '# CSI 存储异常故障树分析'
 category: skills
 tags:
@@ -28,6 +28,7 @@ prerequisites:
 fta_id: FTA-CSI-001
 component: Csi
 severity: high
+created: "2026-05-23"
 ---
 
 # CSI 存储异常故障树分析
@@ -125,7 +126,7 @@ flowchart TD
 - **关键日志**：
   - CSI controller 日志 (csi-provisioner, csi-attacher, csi-resizer)
   - CSI node plugin 日志
-  - kubelet 卷挂载日志
+  - [[kubelet|kubelet]] 卷挂载日志
   - 后端存储系统日志
 - **配置核对**：
   - StorageClass 配置 (provisioner, parameters, allowVolumeExpansion)

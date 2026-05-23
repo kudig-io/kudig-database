@@ -28,9 +28,10 @@ trigger_keywords:
 - coding
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
-# Agent Skill 与自定义命令
+# Agent [[SKILL|Skill]] 与自定义命令
 
 > **文档类型**: 扩展开发专题 | **最后更新**: 2026-03 | **关键词**: OpenCode, Skill, SKILL.md, Custom Command, Template, Arguments, Shell Output, File Reference
 

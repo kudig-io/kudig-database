@@ -50,15 +50,16 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+created: "2026-05-23"
 ---
 
 # 华为云 CCE 企业级容器平台深度实践
 
 <!-- chunk: 概述 -->## 概述
 
-华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 Kubernetes 服务，以 CCE Turbo 云原生网络、Volcano 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，单个 Pod 可获得独立 ENI 网卡，网络性能接近物理机级别。Volcano 调度器在 AI/大数据场景下提供批量调度、队列管理、公平调度和优先级抢占能力，已捐赠给 CNCF 成为孵化项目。
+华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[Kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[Volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，单个 Pod 可获得独立 ENI 网卡，网络性能接近物理机级别。Volcano 调度器在 AI/大数据场景下提供批量调度、队列管理、公平调度和优先级抢占能力，已捐赠给 CNCF 成为孵化项目。
 
-在混合云架构中，CCE 通过华为云混合集群、IEF 边缘容器和 UCS（Unified Cloud Service）多集群管理实现云边协同和多云统一管理。UCS 是华为推出的多云统一管理平台，可以管理华为云 CCE、阿里云 ACK、AWS EKS 等多种 Kubernetes 集群，提供统一的策略管理和服务治理能力。华为云是 Karmada、Volcano、KubeEdge、Kurator 等多云开源项目的核心贡献者，在多云编排和边缘计算领域具有深厚的技术积累。
+在混合云架构中，CCE 通过华为云混合集群、IEF 边缘容器和 UCS（Unified Cloud [[Service|Service]]）多集群管理实现云边协同和多云统一管理。UCS 是华为推出的多云统一管理平台，可以管理华为云 CCE、阿里云 ACK、AWS EKS 等多种 Kubernetes 集群，提供统一的策略管理和服务治理能力。华为云是 [[Karmada|Karmada]]、Volcano、[[KubeEdge|KubeEdge]]、Kurator 等多云开源项目的核心贡献者，在多云编排和边缘计算领域具有深厚的技术积累。
 
 本文档深入探讨 CCE Turbo 网络架构、Volcano 调度优化、裸金属容器部署和混合云集成方案。内容涵盖完整的集群创建配置、存储类定义、安全策略、监控告警规则和运维自动化脚本，为企业构建基于华为云的生产级容器平台提供全面参考。
 
@@ -1200,7 +1201,7 @@ while true; do
     STATE=$(curl -s "https://cce.cn-east-3.myhuaweicloud.com/api/v3/projects/{project_id}/clusters/$CLUSTER_ID" \
       -H "X-Auth-Token: ${TOKEN}" | jq -r '.status.phase')
     echo "集群状态: $STATE"
-    if [[ "$STATE" == "Available" ]]; then
+    if "$STATE" == "Available"; then
         break
     fi
     sleep 30
@@ -1382,22 +1383,22 @@ echo "=== 故障排查完成 ==="
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-12-cloud-providers/MOC.md|domain-27-multi-cloud-hybrid MOC]]
+- domain-27-multi-cloud-hybrid MOC
 - [[domain-12-cloud-providers/README.md|Domain 27: 多云与混合云架构管理]]
-- [[domain-12-cloud-providers/00-open-source-projects-index.md|Domain-27 多云与混合云 — 开源项目索引]]
-- [[domain-12-cloud-providers/01-aws-eks-enterprise-multicloud.md|AWS EKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/02-azure-aks-enterprise-multicloud.md|Azure AKS 企业级多云管理平台]]
-- [[domain-12-cloud-providers/03-enterprise-multicloud-governance.md|企业级多云治理与成本优化深度实践]]
-- [[domain-12-cloud-providers/04-google-gke-enterprise-multicloud.md|Google GKE 企业级多云管理深度实践]]
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|IBM Cloud Kubernetes Service (IKS) 企业级深度实践]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|Alibaba Cloud ACK 企业级混合云深度实践]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|Karmada 多集群联邦深度实践]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|多云网络互联深度实践]]
-- [[domain-12-cloud-providers/10-multicloud-disaster-recovery.md|多云灾备深度实践]]
+- Domain-27 多云与混合云 — 开源项目索引
+- AWS EKS 企业级多云管理平台
+- Azure AKS 企业级多云管理平台
+- 企业级多云治理与成本优化深度实践
+- Google GKE 企业级多云管理深度实践
+- IBM Cloud Kubernetes Service (IKS) 企业级深度实践
+- Alibaba Cloud ACK 企业级混合云深度实践
+- Karmada 多集群联邦深度实践
+- 多云网络互联深度实践
+- 多云灾备深度实践
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-ibm-cloud-kubernetes-service-enterprise.md|05-ibm-cloud-kubernetes-service-enterprise]]
-- [[domain-12-cloud-providers/06-alibaba-ack-enterprise-hybrid.md|06-alibaba-ack-enterprise-hybrid]]
-- [[domain-12-cloud-providers/08-multicloud-federation-karmada.md|08-multicloud-federation-karmada]]
-- [[domain-12-cloud-providers/09-multicloud-network-interconnect.md|09-multicloud-network-interconnect]]
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 06-alibaba-ack-enterprise-hybrid
+- 08-multicloud-federation-karmada
+- 09-multicloud-network-interconnect

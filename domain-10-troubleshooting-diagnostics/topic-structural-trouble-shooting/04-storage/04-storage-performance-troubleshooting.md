@@ -1,5 +1,5 @@
 ---
-title: 存储 I/O 性能故障排查指南
+title: 存储 I/O 性能故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: 存储 I/O 性能故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -41,6 +41,7 @@ prerequisites:
 - prometheus-basics
 - mysql-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 title: 存储 I/O 性能故障排查指南
@@ -50,9 +51,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
+- [[Prometheus|prometheus]]
 - mysql
 - postgresql
 - elasticsearch
@@ -89,7 +90,7 @@ k8s_versions:
 
 # 存储 I/O 性能故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
 
 ---
 
@@ -527,7 +528,7 @@ fi
 # 2. I/O 调度器优化
 echo ""
 echo "2. I/O 调度器优化:"
-if [[ "$DISK" == nvme* ]]; then
+if "$DISK" == nvme*; then
   # NVMe 设备使用 'none' 调度器（多队列原生优化）
   echo none > /sys/block/$DISK/queue/scheduler
   echo "  ✓ $DISK 调度器已设置为 none (NVMe 优化)"
@@ -827,8 +828,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

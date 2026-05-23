@@ -35,6 +35,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Day 10: K8s 集群监控体系搭建实操
@@ -50,7 +51,7 @@ prerequisites:
 | 层 | 指标 | 采集工具 | 说明 |
 |---|------|---------|------|
 | 基础设施层 | CPU/内存/磁盘/网络 | node_exporter | 节点级别资源使用 |
-| [[entities/kubernetes|kubernetes]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
+| [[entities/kubernetes|[[Kubernetes|kubernetes]]]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
 | 应用层 | 业务指标（QPS/Latency/Error） | 应用自暴露 | Pod 内应用 metrics |
 
 ### 1.2 监控组件清单

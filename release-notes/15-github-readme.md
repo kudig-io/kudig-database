@@ -21,6 +21,7 @@ trigger_keywords:
 - 重写方案
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # GitHub README 重写方案

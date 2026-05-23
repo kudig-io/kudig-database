@@ -30,6 +30,7 @@ prerequisites:
 - kubectl-basics
 - service-mesh-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # 安全合规

@@ -28,6 +28,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - ebpf-basics
+created: "2026-05-23"
 ---
 
 # Tag Taxonomy
@@ -139,3 +140,22 @@ New tags require discussion and addition to this file.
 ---
 
 *原 43 个 Domain 已整合为 20 个。历史映射见 `_reports/domain-migration-EXECUTED-2026-05-21.md`。*
+
+
+## KUDIG Domain Tags (2026-05-23)
+
+- `cluster` — Kubernetes cluster fundamentals
+- `workloads` — Pods, deployments, statefulsets, jobs
+- `networking` — CNI, service mesh, ingress, DNS
+- `storage` — PVC, CSI, volumes, object storage
+- `security` — RBAC, secrets, TLS, network policies
+- `observability` — Monitoring, logging, tracing, alerting
+- `reliability` — SRE, chaos engineering, disaster recovery
+- `troubleshooting` — Diagnostics, FTA, remediation
+- `platform` — Platform engineering, IDP, DevEx
+- `release` — GitOps, CI/CD, deployment strategies
+- `cloud-providers` — Cloud vendors, multi-cloud, hybrid
+- `synthesis` — Cross-domain analysis, case studies
+- `cross-domain` — Multi-domain topics
+- `remote-consultant` — Remote advisor mode
+- `career` — Learning paths, career development

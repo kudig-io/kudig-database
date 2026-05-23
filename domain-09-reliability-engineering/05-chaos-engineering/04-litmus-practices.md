@@ -26,16 +26,17 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - sre-practices
+created: "2026-05-23"
 ---
 
-# Litmus 混沌工程实践
+# [[Litmus|Litmus]] 混沌工程实践
 
-## Litmus vs Chaos Mesh
+## Litmus vs [[Chaos Mesh|Chaos Mesh]]
 
 | 特性 | Litmus | Chaos Mesh |
 |------|--------|-----------|
 | 项目归属 | CNCF 孵化项目 | PingCAP |
-| 实验编排 | Argo Workflows 原生 | 自定义 Workflow |
+| 实验编排 | [[Argo|Argo]]go Workflows|Argo Workflows]] 原生 | 自定义 Workflow |
 | 多集群 | 原生支持 | 需额外配置 |
 | GitOps | 原生支持 | 有限 |
 | 社区 | 活跃，企业采用多 | 活跃，中国社区大 |

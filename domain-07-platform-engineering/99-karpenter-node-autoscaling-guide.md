@@ -50,6 +50,7 @@ cross_refs:
 - type: fta
   path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md
   label: '故障树: node'
+created: "2026-05-23"
 ---
 
 # Karpenter 节点自动扩展实践指南
@@ -144,7 +145,7 @@ aws iam create-policy \
   --policy-document file://karpenter-policy.json
 ```
 
-#<!-- chunk: 2.2 Helm 安装 -->## 2.2 Helm 安装
+#<!-- chunk: 2.2 [[Helm|Helm]] 安装 -->## 2.2 Helm 安装
 
 ```bash
 helm repo add karpenter https://charts.karpenter.sh
@@ -517,7 +518,7 @@ spec:
 
 <!-- chunk: 九、监控与告警 -->## 九、监控与告警
 
-#<!-- chunk: 9.1 Prometheus Metrics -->## 9.1 Prometheus Metrics
+#<!-- chunk: 9.1 [[Prometheus|Prometheus]] Metrics -->## 9.1 Prometheus Metrics
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -588,25 +589,25 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-11-production-operations/MOC.md|domain-11-production-operations MOC]]
-- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[domain-11-production-operations/00-open-source-projects-index.md|Domain-18 生产运维 — 开源项目索引]]
+- domain-11-production-operations KUDIG Database — Global MOC
+- [[domain-11-production-operations/README.md|Domain 17: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
+- Domain-18 生产运维 — 开源项目索引
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
-- [[domain-01-cluster-fundamentals/02-multi-cloud-hybrid-deployment-strategy.md|02-多云混合部署策略]]
-- [[domain-01-cluster-fundamentals/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[domain-06-observability/04-enterprise-monitoring-system.md|04-企业级监控体系]]
-- [[domain-06-observability/05-logging-collection-analysis-platform.md|05-日志收集分析平台]]
-- [[domain-06-observability/06-apm-application-performance-monitoring.md|06-APM应用性能监控]]
-- [[domain-05-security-compliance/07-zero-trust-security-architecture.md|07-零信任安全架构]]
-- [[domain-05-security-compliance/08-cis-benchmark-compliance-audit.md|08-CIS基准合规检查]]
-- [[domain-05-security-compliance/09-software-bill-of-materials.md|09-软件物料清单]]
+- 02-多云混合部署策略
+- 03-边缘计算生产部署
+- 04-企业级监控体系
+- 05-日志收集分析平台
+- 06-APM应用性能监控
+- 07-零信任安全架构
+- 08-CIS基准合规检查
+- 09-软件物料清单
 
 ## See Also
 
-- [[domain-11-production-operations/99-finops-cost-optimization-guide.md|99-finops-cost-optimization-guide]]
-- [[domain-11-production-operations/99-greenops-sustainable-computing-guide.md|99-greenops-sustainable-computing-guide]]
-- [[domain-06-observability/99-keda-event-driven-autoscaling-guide.md|99-keda-event-driven-autoscaling-guide]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-deployment-patterns-architecture.md|99-kubernetes-deployment-patterns-architecture]]
+- 99-finops-cost-optimization-guide
+- 99-greenops-sustainable-computing-guide
+- 99-keda-event-driven-autoscaling-guide
+- 99-kubernetes-deployment-patterns-architecture
 
 ## Related
 

@@ -1,5 +1,5 @@
 ---
-title: Deployment 异常故障树分析
+title: Deployment 异常故障树分析 (skills)
 description: OR0 --> SEC[安全与准入异常]
 category: general
 tags:
@@ -26,6 +26,7 @@ prerequisites:
 fta_id: FTA-DEPLOYMENT-001
 component: Deployment
 severity: critical
+created: "2026-05-23"
 ---
 
 ---
@@ -36,7 +37,7 @@ tags: ["k8s", "fta", "troubleshooting"]
 sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
-lifecycle: draft
+lifecycle: reviewed
 lifecycle_changed: "2026-05-21"
 tier: supporting
 base_confidence: 0.7
@@ -50,7 +51,7 @@ base_confidence: 0.7
 
 ## 适用范围与说明
 - **目标**：覆盖 Deployment 滚动更新失败、回滚失败与副本不一致的关键成因与路径。
-- **范围**：滚动发布、ReplicaSet 协同、镜像与探针、资源与配额、准入与策略。
+- **范围**：滚动发布、[[ReplicaSet|ReplicaSet]] 协同、镜像与探针、资源与配额、准入与策略。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
   - **AND 门**：所有子事件同时成立才触发父事件

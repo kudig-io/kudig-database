@@ -28,9 +28,10 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
-# 扩展 Kubernetes API
+# 扩展 [[Kubernetes|Kubernetes]]es API|Kubernetes API]]
 
 ## 概述
 
@@ -46,7 +47,7 @@ Kubernetes API 是平台的核心，扩展 Kubernetes API 允许用户在不修�
 - **CRD 的易用性**：无需编程，用户可用任何语言编写控制器；无需额外运行服务，由 API server 直接处理；升级和维护由 Kubernetes 主版本升级覆盖。
 - **API Aggregation 的灵活性**：需要编程、构建二进制和镜像，并运行额外服务；但允许对 API 行为进行更精细的控制，如自定义存储层、自定义业务逻辑、任意验证、Protocol Buffers 支持等。
 - **功能对比**：
-  - 两者均支持：CRUD、Watch、Discovery、多版本、Scale/Status 子资源、HTTPS、内置认证授权、Finalizers、Admission Webhooks 等。
+  - 两者均支持：CRUD、Watch、Discovery、多版本、Scale/Status 子资源、HTTPS、内置认证授权、[[Finalizers|Finalizers]]、Admission Webhooks 等。
   - 仅 AA 支持：自定义存储、其他子资源（如 logs/exec）、strategic-merge-patch、Protocol Buffers。
 
 ## 使用场景

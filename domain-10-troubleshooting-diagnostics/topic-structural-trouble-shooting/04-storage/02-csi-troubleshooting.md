@@ -1,5 +1,5 @@
 ---
-title: CSI 存储驱动深度排查与架构优化指南
+title: CSI 存储驱动深度排查与架构优化指南 [topic-structural-trouble-shooting]
 description: 'title: CSI 存储驱动深度排查与架构优化指南'
 category: structural-troubleshooting
 tags:
@@ -43,6 +43,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
 title: CSI 存储驱动深度排查与架构优化指南
@@ -52,10 +53,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - scheduler
-- prometheus
-- helm
+- [[Prometheus|prometheus]]
+- [[Helm|helm]]
 - opa
 - ceph
 - redis
@@ -2167,8 +2168,8 @@ kubectl logs -n kube-system -l app=csi-controller --all-containers=true -f | \
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[hot.md|hot]]
 - [[log.md|log]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

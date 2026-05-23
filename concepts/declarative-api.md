@@ -1,6 +1,6 @@
 ---
 title: Declarative API
-description: '- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]'
+description: '- 声明式 API 与面向终态设计'
 category: concepts
 tags:
 - k8s
@@ -24,6 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # Declarative API
@@ -54,8 +55,8 @@ Every Kubernetes object follows a standard structure:
 Key metadata fields:
 - **resourceVersion**: etcd revision number, used for optimistic concurrency control
 - **generation**: Incremented each time spec changes
-- **ownerReferences**: Enables cascading deletion (garbage collection)
-- **finalizers**: Pre-delete hooks for resource cleanup
+- **ownerReferences**: Enables cascading deletion ([[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|garbage collection]])
+- **[[Finalizers|finalizers]]**: Pre-delete hooks for resource cleanup
 
 ## Server-Side Apply (SSA)
 
@@ -73,4 +74,4 @@ Kubernetes v1.18+ supports Server-Side Apply, which enables multiple controllers
 - [[entities/kube-apiserver.md|kube-apiserver]]
 - [[concepts/eventual-consistency.md|Eventual Consistency]]
 
-- [[domain-01-cluster-fundamentals/02-declarative-api-pattern.md|声明式 API 与面向终态设计]]
+- 声明式 API 与面向终态设计

@@ -34,13 +34,14 @@ prerequisites:
 - kafka-basics
 - logging-basics
 - observability-basics
+created: "2026-05-23"
 ---
 
 # 日志聚合与 Loki
 
 ## 概述
 
-在 Kubernetes 环境中，日志分散在数百甚至数万个 Pod 中，**日志聚合（Log Aggregation）** 是运维排障和审计合规的基石。2026 年的主流方案是 **Grafana Loki** —— 一个受 Prometheus 启发的水平可扩展日志聚合系统。与传统方案（如 Elasticsearch）相比，Loki 只索引日志的**标签（Labels）**而不索引日志内容本身，这使其在存储成本和运维复杂度上具有显著优势，特别适合 Kubernetes 的云原生场景。
+在 [[Kubernetes|Kubernetes]] 环境中，日志分散在数百甚至数万个 Pod 中，**日志聚合（Log Aggregation）** 是运维排障和审计合规的基石。2026 年的主流方案是 **Grafana Loki** —— 一个受 [[Prometheus|Prometheus]] 启发的水平可扩展日志聚合系统。与传统方案（如 Elasticsearch）相比，Loki 只索引日志的**标签（Labels）**而不索引日志内容本身，这使其在存储成本和运维复杂度上具有显著优势，特别适合 Kubernetes 的云原生场景。
 
 ## 核心概念/原理
 
@@ -48,7 +49,7 @@ prerequisites:
 
 Loki 由三个核心组件组成：
 - **Loki**：日志聚合服务器，负责接收、存储和查询日志
-- **Promtail**：日志收集代理，部署为 DaemonSet，从每个节点采集日志并推送到 Loki
+- **Promtail**：日志收集代理，部署为 [[DaemonSet|DaemonSet]]，从每个节点采集日志并推送到 Loki
 - **Grafana**：可视化平台，通过 Loki 数据源查询和展示日志
 
 ```

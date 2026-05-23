@@ -32,16 +32,17 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - kafka-basics
+created: "2026-05-23"
 ---
 
 title: 小程序平台架构设计
-description: '# 小程序平台 Kubernetes 生产架构设计'
+description: '# 小程序平台 [[Kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- prometheus
+- [[Prometheus|prometheus]]
 - docker
 - minio
 - kafka
@@ -714,7 +715,7 @@ spec:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-20-application-patterns/topic-application-architecture/MOC.md|topic-application-architecture MOC]]
+- topic-application-architecture MOC
 - [[domain-20-application-patterns/topic-application-architecture/README.md|Topic 应用层架构设计最佳实践]]
 - [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[domain-20-application-patterns/topic-application-architecture/03-cms-architecture.md|内容管理系统 CMS 架构设计]]
@@ -729,7 +730,7 @@ spec:
 
 ## See Also
 
-- [[domain-20-application-patterns/96-carbon-capture.md|96-carbon-capture]]
-- [[domain-20-application-patterns/01-ecommerce-architecture.md|01-ecommerce-architecture]]
-- [[domain-20-application-patterns/03-cms-architecture.md|03-cms-architecture]]
-- [[domain-20-application-patterns/04-im-rtc-architecture.md|04-im-rtc-architecture]]
+- 96-carbon-capture
+- 01-ecommerce-architecture
+- 03-cms-architecture
+- 04-im-rtc-architecture

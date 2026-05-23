@@ -1,5 +1,5 @@
 ---
-title: Agent CLI 企业级自动化与 CI/CD 集成
+title: Agent CLI 企业级自动化与 CI/CD 集成 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: 工程实践专题 | **最后更新**: 2026-03 | **关键词**: Agent CLI Automation,'
 category: general
 tags:
@@ -35,6 +35,7 @@ prerequisites:
 - kubectl-basics
 - monitoring-basics
 - redis-basics
+created: "2026-05-23"
 ---
 
 title: Agent CLI 企业级自动化与 CI/CD 集成
@@ -645,8 +646,8 @@ Agent CLI 的 CI/CD 集成是将 AI 编码能力从"个人提效"扩展到"团�
 **后续阅读**：
 - [27 - Agent CLI 安全治理与权限模型](./27-agent-cli-security-governance.md)：安全深度配置
 - [26 - Agent CLI 开发工作流最佳实践](./26-agent-cli-development-workflow.md)：日常使用技巧
-- [09 - 生产部署指南](./[[domain-14-ai-ml-infra/09-production-deployment-guide.md|09-production-deployment-guide]].md)：K8s 上的 Agent 服务
-- [08 - Agent 评测体系与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md)：Agent 质量评估
+- [09 - 生产部署指南](./09-production-deployment-guide.md)：K8s 上的 Agent 服务
+- [08 - Agent 评测体系与可观测性](./08-agent-evaluation-observability.md)：Agent 质量评估
 
 ---
 
@@ -656,7 +657,7 @@ Agent CLI 的 CI/CD 集成是将 AI 编码能力从"个人提效"扩展到"团�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -671,7 +672,7 @@ Agent CLI 的 CI/CD 集成是将 AI 编码能力从"个人提效"扩展到"团�
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/26-agent-cli-development-workflow.md|26-agent-cli-development-workflow]]
-- [[domain-14-ai-ml-infra/27-agent-cli-security-governance.md|27-agent-cli-security-governance]]
-- [[domain-14-ai-ml-infra/29-agentscope-studio-skill-demo.md|29-agentscope-studio-skill-demo]]
-- [[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]]
+- 26-agent-cli-development-workflow
+- 27-agent-cli-security-governance
+- 29-agentscope-studio-skill-demo
+- 30-agent-harness-engineering

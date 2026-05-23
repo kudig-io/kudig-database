@@ -30,6 +30,7 @@ prerequisites:
 - redis-basics
 - mysql-basics
 - logging-basics
+created: "2026-05-23"
 ---
 
 # 工作负载控制器选型
@@ -40,12 +41,12 @@ Kubernetes 提供多种工作负载控制器，每种适用于不同的业务场
 
 ## 三大控制器核心对比
 
-| 维度 | Deployment | StatefulSet | DaemonSet |
+| 维度 | Deployment | [[StatefulSet|StatefulSet]] | [[DaemonSet|DaemonSet]] |
 |------|-----------|-------------|-----------|
 | **Pod 身份** | 随机 hash 后缀 | 稳定有序编号（-0, -1, -2） | 节点绑定（每节点一个） |
 | **Pod 名称** | `web-7d9f6c-xk9wl` | `db-0`, `db-1`, `db-2` | `fluentd-node1` |
 | **存储** | 共享 PVC 或无状态 | 每 Pod 独立 PVC（VolumeClaimTemplate） | 通常挂载节点本地路径 |
-| **网络** | 通过 Service 统一入口 | 每 Pod 独立 DNS（Headless Service） | 每节点独立访问 |
+| **网络** | 通过 [[Service|Service]] 统一入口 | 每 Pod 独立 DNS（Headless Service） | 每节点独立访问 |
 | **启动顺序** | 随机并行 | 严格顺序（0→1→2） | 随节点就绪 |
 | **滚动更新** | 自由并行 | 逆序更新（2→1→0） | 节点逐个更新 |
 | **扩缩容** | 任意副本数 | 有序扩容/逆序缩容 | 随节点数自动调整 |
@@ -186,8 +187,8 @@ spec:
 
 ## 相关技能
 
-- [[skills/deployment-rolling-update.md|Deployment 滚动更新策略]]
-- [[skills/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]]
+- [[skills/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[skills/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
 - [[entities/statefulset.md|StatefulSet]]
 

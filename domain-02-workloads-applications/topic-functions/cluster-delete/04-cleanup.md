@@ -1,7 +1,42 @@
 ---
+title: 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis)
+description: 'description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除'
+category: general
+tags:
+- reference
+- etcd
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+- cri-o
+- docker
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- 节点清理机制 — cleanup-node 源码分析 是什么
+- 如何 节点清理机制 — cleanup-node 源码分析
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- 节点清理机制
+- cleanup-node
+- 源码分析
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: 节点清理机制 — cleanup-node 源码分析
-description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除 kubeconfig
-  文件以及 Rootless 模式清理等完整流程。
 category: cluster-delete
 tags:
 - cleanup-node
@@ -12,16 +47,10 @@ tags:
 - cri
 - pki
 - kubeconfig
-- etcd
-- scheduler
 last_updated: 2026-05-18
+description: 深入分析 kubeadm reset cleanup-node 阶段的源码实现，涵盖停止 kubelet 服务、卸载挂载点、移除容器、清理配置目录（pki/manifests/kubelet）、删除
+  kubeconfig 文件以及 Rootless 模式清理等完整流程。
 difficulty: advanced
-reading_level: advanced
-audience:
-- platform-engineer
-- kubernetes-administrator
-- sre
-estimated_read_time: 5min
 intent_queries:
 - kubeadm cleanup-node phase source code
 - cleanup-node cleanup kubernetes kubelet
@@ -39,10 +68,12 @@ trigger_keywords:
 - ListKubeContainers
 - RemoveContainers
 - RemoveUsersAndGroups
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
+reading_level: advanced
+audience:
+- platform-engineer
+- kubernetes-administrator
+- sre
+estimated_read_time: 5min
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-01-cluster-fundamentals
@@ -53,6 +84,17 @@ related_topics:
 - force-delete
 - security-delete
 - network-cleanup
+domain_link: '[Installation](../domain-01-cluster-fundamentals/README.md)'
+topic_link: '[Cluster Delete Overview](./01-overview.md)'
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # 节点清理机制 — cleanup-node 源码分析
@@ -79,7 +121,7 @@ related_topics:
 ├──────────────────────────────────────────────────────────────┤
 │  1. 停止 kubelet 服务                                         │
 │  2. 卸载 /var/lib/kubelet 下的挂载点                          │
-│  3. 移除 [[entities/kubernetes|kubernetes]] 管理的所有容器                             │
+│  3. 移除 Kubernetes 管理的所有容器                             │
 │  4. 清理配置和证书目录                                         │
 │  5. 删除 kubeconfig 文件                                      │
 │  6. (可选) 清理 tmp 目录                                      │
@@ -445,3 +487,11 @@ rm -rf $HOME/.kube/config
 - [cleanupnode.go 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/phases/reset/cleanupnode.go)
 - [unmount_linux.go 源码](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/cmd/phases/reset/unmount_linux.go)
 - [container runtime util](https://github.com/kubernetes/kubernetes/tree/master/cmd/kubeadm/app/util/runtime/)
+
+## Related
+
+- [[README.md|README]]
+- [[man/INSTALL.md|INSTALL]]
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

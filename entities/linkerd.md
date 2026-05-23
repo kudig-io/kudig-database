@@ -1,5 +1,5 @@
 ---
-title: Linkerd
+title: Linkerd (entities)
 description: '## 概述'
 category: entities
 tags:
@@ -29,6 +29,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
+created: "2026-05-23"
 ---
 
 # Linkerd
@@ -45,7 +46,7 @@ description: '## 项目概述'
 - condition:
 - name: POST /api/orders
 - name: GET /api/data
-- service: web-stable
+- [[Service|service]]: web-stable
 - service: web-canary
 
 ## K8s 集成
@@ -72,21 +73,21 @@ description: '## 项目概述'
 
 - [[kgateway]] — kgateway
 - [[urunc]] — urunc
-- [[connect-rpc]] — Connect RPC
+- [[connect-rpc]] — [[Connect RPC|Connect RPC]]
 - [[antrea]] — Antrea
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-03-networking-traffic/99-linkerd-service-mesh-guide.md|99-linkerd-service-mesh-guide]]
-- [[domain-03-networking-traffic/02-linkerd-enterprise-service-mesh.md|02-linkerd-enterprise-service-mesh]]
-- [[domain-19-landscape-references/graduated/linkerd/linkerd.md|linkerd]]
+- 99-linkerd-service-mesh-guide
+- 02-linkerd-enterprise-service-mesh
+- linkerd
 - [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|RELEASE-NOTES-18.9]]
 - [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|RELEASE-NOTES-18.8]]
 - [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|RELEASE-NOTES-18.7]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-0.2.md|RELEASE-NOTES-0.2]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-0.3.md|RELEASE-NOTES-0.3]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-0.4.md|RELEASE-NOTES-0.4]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-0.1.md|RELEASE-NOTES-0.1]]
-- [[domain-19-landscape-references/topic-release-notes/networking/linkerd/RELEASE-NOTES-0.5.md|RELEASE-NOTES-0.5]]
+- RELEASE-NOTES-0.2
+- RELEASE-NOTES-0.3
+- RELEASE-NOTES-0.4
+- RELEASE-NOTES-0.1
+- RELEASE-NOTES-0.5
 - [[references/networking-terms|K8s 网络术语参考]] — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - [[references/kudig-ecosystem-guide|KUDIG 开源生态指南与深度研究指南]] — Cross-reference

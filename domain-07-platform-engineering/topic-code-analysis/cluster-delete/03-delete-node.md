@@ -1,5 +1,5 @@
 ---
-title: 节点删除流程 — kubectl delete node 源码分析
+title: 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis)
 description: '## 概述'
 category: general
 tags:
@@ -36,6 +36,7 @@ prerequisites:
 - kubectl-basics
 - platform-engineering-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: 节点删除流程 — kubectl delete node 源码分析

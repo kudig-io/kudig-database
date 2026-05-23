@@ -1,5 +1,5 @@
 ---
-title: Agent Harness 测试与基准评测
+title: Agent Harness 测试与基准评测 (domain-14-ai-ml-infra)
 description: 'description: ''**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Testing, Benchmark,'
 category: general
 tags:
@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - prometheus-basics
+created: "2026-05-23"
 ---
 
 title: Agent Harness 测试与基准评测
@@ -43,8 +44,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- kubelet
-- prometheus
+- [[kubelet|kubelet]]
+- [[Prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -188,7 +189,7 @@ class TestCommandSafetyVerifier:
         output = """
         执行以下命令检查 Pod 状态:
         ```bash
-        kubectl get pods -n default
+        kubectl get [[Pods|pods]] -n default
         kubectl describe pod nginx-xxx -n default
         kubectl logs nginx-xxx -n default --tail=100
         ```
@@ -847,10 +848,10 @@ class HarnessRegressionTester:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [30 - Agent Harness 工程](./[[domain-14-ai-ml-infra/30-agent-harness-engineering.md|30-agent-harness-engineering]].md) | 基准测试全景 |
-| [34 - 验证与质量门禁](./[[domain-14-ai-ml-infra/34-agent-harness-verification-quality.md|34-agent-harness-verification-quality]].md) | CI/CD 质量门禁 |
-| [35 - 安全与约束](./[[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]].md) | 安全约束测试 |
-| [08 - 评测与可观测性](./[[domain-14-ai-ml-infra/08-agent-evaluation-observability.md|08-agent-evaluation-observability]].md) | 评测基础理论 |
+| [30 - Agent Harness 工程](./30-agent-harness-engineering.md) | 基准测试全景 |
+| [34 - 验证与质量门禁](./34-agent-harness-verification-quality.md) | CI/CD 质量门禁 |
+| [35 - 安全与约束](./35-agent-harness-security-constraints.md) | 安全约束测试 |
+| [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | 评测基础理论 |
 
 ---
 
@@ -871,7 +872,7 @@ class HarnessRegressionTester:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -886,7 +887,7 @@ class HarnessRegressionTester:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/37-agent-harness-multi-agent.md|37-agent-harness-multi-agent]]
-- [[domain-14-ai-ml-infra/38-agent-harness-performance-cost.md|38-agent-harness-performance-cost]]
-- [[domain-14-ai-ml-infra/40-agent-harness-production-maturity.md|40-agent-harness-production-maturity]]
-- [[domain-14-ai-ml-infra/41-react-harness-identification-guide.md|41-react-harness-identification-guide]]
+- 37-agent-harness-multi-agent
+- 38-agent-harness-performance-cost
+- 40-agent-harness-production-maturity
+- 41-react-harness-identification-guide

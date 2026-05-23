@@ -1,4 +1,43 @@
 ---
+title: Kubernetes 集群 PKI 架构总览 (topic-code-analysis)
+description: 'title: Kubernetes 集群 PKI 架构总览'
+category: general
+tags:
+- reference
+- architecture
+- etcd
+- apiserver
+- kubelet
+- scheduler
+- controller-manager
+- containerd
+- rbac
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes 集群 PKI 架构总览 是什么
+- 如何 Kubernetes 集群 PKI 架构总览
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Kubernetes
+- 集群
+- PKI
+- 架构总览
+- platform
+- engineering
+- code
+- analysis
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+- etcd-basics
+created: "2026-05-23"
+---
+
 title: Kubernetes 集群 PKI 架构总览
 description: '# Kubernetes 集群 PKI 架构总览'
 category: functions
@@ -39,10 +78,6 @@ trigger_keywords:
 - 证书路径
 - 证书有效期
 - 独立信任域
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- etcd-basics
 related_domains:
 - domain-01-cluster-fundamentals
 - domain-05-security-compliance
@@ -51,6 +86,15 @@ related_topics:
 - cluster-cert/apiserver-cert
 - cluster-cert/etcd-cert
 - cluster-cert/kubelet-cert
+authors:
+- name: KUDIG Team
+  role: contributor
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
 ---
 
 # Kubernetes 集群 PKI 架构总览
@@ -90,7 +134,7 @@ func ValidateCertPeriod(cert *x509.Certificate, key string) error
 | 证书阶段主控 | `cmd/kubeadm/app/phases/certs/certs.go` |
 | CA 证书定义 | `cmd/kubeadm/app/phases/certs/certs.go` |
 | 证书工具封装 | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` |
-| 通用证书生成 | `staging/src/[[entities/kubernetes|k8s]].io/client-go/util/cert/cert.go` |
+| 通用证书生成 | `staging/src/k8s.io/client-go/util/cert/cert.go` |
 | CSR 签名控制器 | `pkg/controller/certificates/signer/signer.go` |
 | kubelet 证书管理 | `pkg/kubelet/certificate/kubelet.go` |
 | 常量定义 | `cmd/kubeadm/app/constants/constants.go` |
@@ -610,3 +654,10 @@ find /etc/kubernetes/pki/ -name "*.key" | wc -l
 | `TryLoadCertAndKeyFromDisk` | `cmd/kubeadm/app/util/pkiutil/pki_helpers.go` | 加载已有证书 |
 | `UsingExternalCA` | `cmd/kubeadm/app/phases/certs/certs.go` | 外部 CA 检测 |
 | `CreateServiceAccountKeyPair` | `cmd/kubeadm/app/phases/certs/certs.go` | SA 密钥对生成 |
+
+## Related
+
+- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
+- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[entities/kubernetes.md|kubernetes]]
+- [[entities/containerd.md|containerd]]

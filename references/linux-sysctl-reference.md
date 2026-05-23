@@ -27,6 +27,7 @@ trigger_keywords:
 - Kubernetes
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # Linux Sysctl Reference for Kubernetes

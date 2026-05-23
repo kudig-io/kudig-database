@@ -23,6 +23,7 @@ trigger_keywords:
 - 调度术语参考
 prerequisites:
 - kubectl-basics
+created: "2026-05-23"
 ---
 
 # K8s 调度术语参考

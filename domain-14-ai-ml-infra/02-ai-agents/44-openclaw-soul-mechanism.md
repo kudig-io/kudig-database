@@ -1,5 +1,5 @@
 ---
-title: OpenClaw SOUL.md 机制深度解析
+title: OpenClaw SOUL.md 机制深度解析 (domain-14-ai-ml-infra)
 description: 'title: OpenClaw SOUL.md 机制深度解析'
 category: general
 tags:
@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 title: OpenClaw SOUL.md 机制深度解析
@@ -42,8 +43,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- etcd
-- helm
+- [[etcd|etcd]]
+- [[Helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -421,8 +422,8 @@ SOUL.md 配置验证:
 
 | 文档 | 关联内容 |
 |------|--------|
-| [43 - OpenClaw File-First 架构集成指南](./[[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]].md) | SOUL.md 在 7 文件体系中的定位 |
-| [35 - Harness 安全与约束工程](./[[domain-14-ai-ml-infra/35-agent-harness-security-constraints.md|35-agent-harness-security-constraints]].md) | 四层约束模型的工程化实现 |
+| [43 - OpenClaw File-First 架构集成指南](./43-openclaw-framework-integration.md) | SOUL.md 在 7 文件体系中的定位 |
+| [35 - Harness 安全与约束工程](./35-agent-harness-security-constraints.md) | 四层约束模型的工程化实现 |
 | [openclaw-workspace/SOUL.md](./openclaw-workspace/SOUL.md) | K8S 运维 Agent 的 SOUL.md 完整配置实例 |
 | [45 - USER.md 机制解析](./45-openclaw-user-mechanism.md) | SOUL.md 与 USER.md 的互补关系 |
 | [47 - TOOLS.md 机制解析](./47-openclaw-tools-mechanism.md) | SOUL.md 红线与 TOOLS.md 权限的双重检查 |
@@ -435,7 +436,7 @@ SOUL.md 配置验证:
 
 ## Obsidian 相关文档
 
-- [[domain-14-ai-ml-infra/topic-ai-agent/MOC.md|topic-ai-agent MOC]]
+- topic-ai-agent KUDIG Database — Global MOC
 - [[domain-14-ai-ml-infra/topic-ai-agent/README.md|AI Agent 工程专题]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
 - [[domain-14-ai-ml-infra/topic-ai-agent/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
@@ -450,7 +451,7 @@ SOUL.md 配置验证:
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/42-model-harness-compatibility-matrix.md|42-model-harness-compatibility-matrix]]
-- [[domain-14-ai-ml-infra/43-openclaw-framework-integration.md|43-openclaw-framework-integration]]
-- [[domain-14-ai-ml-infra/45-openclaw-user-mechanism.md|45-openclaw-user-mechanism]]
-- [[domain-14-ai-ml-infra/46-openclaw-agents-mechanism.md|46-openclaw-agents-mechanism]]
+- 42-model-harness-compatibility-matrix
+- 43-openclaw-framework-integration
+- 45-openclaw-user-mechanism
+- 46-openclaw-agents-mechanism

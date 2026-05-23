@@ -30,13 +30,14 @@ prerequisites:
 - kubectl-basics
 - cni-basics
 - etcd-basics
+created: "2026-05-23"
 ---
 
 # P1-4 决策树 Mermaid 可视化规范与实例
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: 定义决策树可视化标准，供 AI Agent 生成可读的故障诊断流程图
+> **用途**: 定义决策树可视化标准，供 AI Agent 生成可读的问题诊断流程图
 
 ---
 
@@ -55,7 +56,7 @@ prerequisites:
 
 | 节点类型 | 形状 | 颜色 | 用途 |
 |----------|------|------|------|
-| 顶事件 (TE) | 六边形 | 🔴 `#FF6B6B` | 故障起点 |
+| 顶事件 (TE) | 六边形 | 🔴 `#FF6B6B` | 问题起点 |
 | 中间事件 (IE) | 菱形 | 🟠 `#FFE66D` | 复合原因 |
 | 基本事件 (BE) | 圆角矩形 | 🟡 `#4ECDC4` | 单一根因 |
 | 逻辑门 (OR/AND) | 边框标识 | 灰色 | 条件关系 |
@@ -73,7 +74,7 @@ prerequisites:
 flowchart TD
     %% 节点定义
     TE1["顶事件: 集群不可用"]
-    IE1["中间事件: 控制平面故障"]
+    IE1["中间事件: 控制平面问题"]
     BE1["基本事件: etcd 空间不足"]
     DS1["诊断步骤: 检查 etcd 磁盘空间"]
     REM1["修复方案: 清理 etcd 碎片"]
@@ -500,4 +501,4 @@ markdown_extensions:
 
 ---
 
-**下一步行动**: 在 domain-10-troubleshooting-diagnostics 目录下所有文档中应用此规范，将现有故障排查流程转换为 Mermaid 决策树格式。
+**下一步行动**: 在 domain-10-troubleshooting-diagnostics 目录下所有文档中应用此规范，将现有问题排查流程转换为 Mermaid 决策树格式。

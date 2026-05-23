@@ -1,7 +1,7 @@
 ---
-title: kudig-database 内容深度评估 + 修复进展
-description: kudig-database 内容深度评估 + 修复进展
-category: reports
+title: kudig-database 内容深度评估 + 修复进展 (reports)
+description: '# kudig-database 内容深度评估 + 修复进展'
+category: general
 tags:
 - k8s
 - helm
@@ -12,9 +12,8 @@ last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
 audience:
-- SRE
-- DevOps
-estimated_read_time: 10min
+- 所有工程师
+estimated_read_time: 5min
 intent_queries:
 - kudig-database 内容深度评估 + 修复进展 是什么
 - 如何 kudig-database 内容深度评估 + 修复进展
@@ -25,15 +24,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-authors:
-- name: KUDIG Team
-  role: contributor
+created: "2026-05-23"
 ---
 
 # kudig-database 内容深度评估 + 修复进展
@@ -103,7 +94,7 @@ authors:
 | 文件 | 用途 |
 |------|------|
 | `domain-17-system-foundation/topic-cheat-sheet/helm.md` | Helm 包管理器速查卡 |
-| `domain-17-system-foundation/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / Flux) 速查卡 |
+| `domain-17-system-foundation/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / [[domain-19-landscape-references/01-cncf-landscape/graduated/flux/flux|Flux]]) 速查卡 |
 | `domain-17-system-foundation/topic-cheat-sheet/gateway-api.md` | Kubernetes Gateway API 速查卡 |
 | `scripts/fix-read-time.py` | estimated_read_time 批量校准脚本 |
 | `reports/CONTENT-DEEP-EVALUATION-2026-05-19.md` | 内容深度评估报告 |
@@ -118,27 +109,3 @@ authors:
 | `scripts/enhance-cross-refs.py` | cross_refs 交叉引用生成 |
 | `scripts/generate-qa-corpus.py` | QA 对语料生成 |
 | `reports/EVALUATION-2026-05-19.md` | 双维度评估报告 |
-
----
-
-## Obsidian 相关文档
-
-- [[reports/CONTENT-DEEP-EVALUATION-2026-05-19.md|kudig-database 内容深度评估报告]]
-- [[reports/README.md|项目报告 (Reports)]]
-- [[reports/CONTENT-GAP-ANALYSIS.md|内容缺口分析报告]]
-- [[reports/DEEP-RESEARCH-ASSESSMENT.md|深度研究能力评估报告]]
-- [[reports/EVALUATION-2026-05-19.md|kudig-database 双维度评估报告]]
-- [[reports/EXTRACT-TROUBLESHOOTING.md|KUDIG Gitbook ZIP 解压问题诊断与解决方案]]
-- [[reports/FIX-SUMMARY-2026-05-19.md|kudig-database 全面质量修复完成报告]]
-- [[reports/FULL-FIX-PROGRESS-2026-05-19.md|kudig-database 全面修复进展总览]]
-- [[reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md|Obsidian Wiki 模式 — AI Agent 语料全面改进计划]]
-- [[reports/PRE-RELEASE-FINAL-EVALUATION-2026-05-19.md|kudig-database 发布前终局评估]]
-- [[reports/QUALITY-BLIND-SPOT-SCAN-2026-05-19.md|kudig-database 质量盲区深度扫描报告]]
-
-## Related
-
-- [[README.md|README]]
-- [[entities/argo.md|argo]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/flux.md|flux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]

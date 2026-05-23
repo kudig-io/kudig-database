@@ -25,13 +25,14 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - cloud-provider-basics
+created: "2026-05-23"
 ---
 
 # Volume Snapshots（卷快照）
 
 ## 概述
 
-在 Kubernetes 中，VolumeSnapshot 表示对存储系统上某个卷在特定时间点的快照。卷快照为用户提供了一种标准化的方式，用于在不创建全新卷的情况下复制卷的内容。此功能对于数据库备份、灾难恢复和数据迁移等场景非常重要。
+在 [[Kubernetes|Kubernetes]] 中，VolumeSnapshot 表示对存储系统上某个卷在特定时间点的快照。卷快照为用户提供了一种标准化的方式，用于在不创建全新卷的情况下复制卷的内容。此功能对于数据库备份、灾难恢复和数据迁移等场景非常重要。
 
 ## 核心概念/原理
 
@@ -161,7 +162,7 @@ kubectl get volumesnapshotcontent
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|[[PVC 知识图谱索引|PVC 知识图谱索引]]]]
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]

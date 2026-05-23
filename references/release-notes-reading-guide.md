@@ -32,6 +32,7 @@ prerequisites:
 - etcd-basics
 - policy-basics
 - backup-basics
+created: "2026-05-23"
 ---
 
 # 发布说明阅读指南

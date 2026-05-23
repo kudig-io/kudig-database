@@ -1,5 +1,5 @@
 ---
-title: Kubeflow 平台故障排查指南
+title: Kubeflow 平台故障排查指南 [topic-structural-trouble-shooting]
 description: 'title: Kubeflow 平台故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -45,18 +45,19 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - policy-basics
+created: "2026-05-23"
 ---
 
-title: Kubeflow 平台故障排查指南
+title: [[Kubeflow|Kubeflow]] 平台故障排查指南
 description: '# Kubeflow 平台故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- kubelet
+- [[kubelet|kubelet]]
 - controller-manager
-- prometheus
+- [[Prometheus|prometheus]]
 - istio
 - opa
 - minio
@@ -984,8 +985,8 @@ groups:
 
 ## Related
 
-- [[domain-13-container-runtime/08-docker-troubleshooting-guide.md|08-docker-troubleshooting-guide]]
-- [[domain-01-cluster-fundamentals/16-troubleshooting-guide.md|16-troubleshooting-guide]]
+- 08-docker-troubleshooting-guide
+- 16-troubleshooting-guide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]

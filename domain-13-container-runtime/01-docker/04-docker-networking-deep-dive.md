@@ -41,6 +41,7 @@ cross_refs:
 - type: cheatsheet
   path: ../domain-17-system-foundation/topic-cheat-sheet/docker.md
   label: '速查卡: docker'
+created: "2026-05-23"
 ---
 
 # Docker 网络深度解析
@@ -59,7 +60,7 @@ cross_refs:
 - [Docker DNS 解析](#docker-dns-解析)
 - [端口映射原理](#端口映射原理)
 - [网络配置实践](#网络配置实践)
-- [网络故障排查](#网络故障排查)
+- 网络故障排查](#网络故障排查)
 
 ---
 
@@ -661,7 +662,7 @@ docker network disconnect -f mynetwork $(docker network inspect -f '{{range .Con
 
 ## See Also
 
-- [[domain-13-container-runtime/02-docker-images-management.md|02-docker-images-management]]
-- [[domain-13-container-runtime/03-docker-container-lifecycle.md|03-docker-container-lifecycle]]
-- [[domain-13-container-runtime/05-docker-storage-volumes.md|05-docker-storage-volumes]]
-- [[domain-13-container-runtime/06-docker-compose-orchestration.md|06-docker-compose-orchestration]]
+- 02-docker-images-management
+- 03-docker-container-lifecycle
+- 05-docker-storage-volumes
+- 06-docker-compose-orchestration
