@@ -32,6 +32,8 @@ related_skills:
   - "SKILL-NODE-001"
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "证书过期问题诊断与修复"
+tags: ["skills", "certificate-expiry", "troubleshooting", "visibility/public"]
 ---
 
 # 证书过期问题诊断与修复

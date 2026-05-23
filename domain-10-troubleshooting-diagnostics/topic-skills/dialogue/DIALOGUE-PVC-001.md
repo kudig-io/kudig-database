@@ -7,6 +7,9 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本

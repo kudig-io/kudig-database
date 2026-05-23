@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "Pod Security Policy 咨询与迁移 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # Pod Security Policy 咨询与迁移 — 远程顾问对话脚本

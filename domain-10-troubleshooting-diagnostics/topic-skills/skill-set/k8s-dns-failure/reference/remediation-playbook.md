@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-dns-failure"
 created: "2026-05-22"
 updated: "2026-05-22"
+tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
 # DNS 解析问题修复手册

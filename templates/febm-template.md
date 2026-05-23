@@ -5,6 +5,9 @@
 ```yaml
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "{{主题名称}} FEBM 法医取证分析"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---# {{主题名称}} FEBM 法医取证分析
 
 > **文档类型**: FEBM 取证分析

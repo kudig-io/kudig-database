@@ -19,6 +19,8 @@ prerequisites:
   - "kubectl-basics"
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "Control Plane Failure"
+tags: ["skills", "control-plane", "troubleshooting", "visibility/public"]
 ---
 
 # Control Plane Failure

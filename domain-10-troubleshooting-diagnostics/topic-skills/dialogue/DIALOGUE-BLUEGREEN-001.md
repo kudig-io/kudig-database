@@ -7,6 +7,9 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "蓝绿部署切换后服务不可用 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # 蓝绿部署切换后服务不可用 — 远程顾问对话脚本

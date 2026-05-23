@@ -33,6 +33,8 @@ related_skills:
   - "SKILL-SEC-003"
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "DNS 解析问题诊断与修复"
+tags: ["skills", "dns-failure", "troubleshooting", "visibility/public"]
 ---
 
 # DNS 解析问题诊断与修复

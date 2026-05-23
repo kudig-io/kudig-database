@@ -45,6 +45,9 @@
     *   RBAC/安全策略、自定义开发、第三方集成
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "[[entities/kubernetes|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---# [[entities/kubernetes|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南  

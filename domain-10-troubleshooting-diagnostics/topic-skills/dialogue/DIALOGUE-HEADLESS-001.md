@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "StatefulSet Pod 域名解析失败 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # StatefulSet Pod 域名解析失败 — 远程顾问对话脚本

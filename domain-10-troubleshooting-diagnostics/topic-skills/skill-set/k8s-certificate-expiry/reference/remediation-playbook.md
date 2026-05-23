@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-certificate-expiry"
 created: "2026-05-22"
 updated: "2026-05-22"
+tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
 # 证书过期问题修复手册

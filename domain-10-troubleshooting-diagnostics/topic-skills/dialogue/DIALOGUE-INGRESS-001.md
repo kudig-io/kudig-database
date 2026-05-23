@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "Ingress 规则不生效 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # Ingress 规则不生效 — 远程顾问对话脚本

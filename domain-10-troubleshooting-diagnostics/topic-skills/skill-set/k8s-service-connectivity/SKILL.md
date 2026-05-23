@@ -32,6 +32,8 @@ related_skills:
   - "SKILL-NET-003"
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "[[Service|Service]] 连通性问题诊断与修复"
+tags: ["skills", "service-connectivity", "troubleshooting", "visibility/public"]
 ---
 
 # [[Service|Service]] 连通性问题诊断与修复

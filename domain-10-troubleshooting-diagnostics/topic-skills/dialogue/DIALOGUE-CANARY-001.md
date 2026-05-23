@@ -7,6 +7,9 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "金丝雀发布后部分用户报告错误 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本

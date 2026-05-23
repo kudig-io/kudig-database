@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本

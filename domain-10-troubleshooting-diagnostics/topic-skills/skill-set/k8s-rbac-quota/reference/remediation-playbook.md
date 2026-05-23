@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-rbac-quota"
 created: "2026-05-22"
 updated: "2026-05-22"
+tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
 # 修复操作手册 / Remediation Playbook

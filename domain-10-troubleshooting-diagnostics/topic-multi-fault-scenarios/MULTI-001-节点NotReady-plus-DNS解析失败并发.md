@@ -4,6 +4,9 @@ type: "multi-fault"
 skills: ['01-node-notready', '04-dns-resolution-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "节点NotReady + DNS解析失败并发"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---
 
 # 节点NotReady + DNS解析失败并发

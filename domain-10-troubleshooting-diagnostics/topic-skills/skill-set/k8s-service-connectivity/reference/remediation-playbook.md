@@ -4,6 +4,7 @@ category: remediation
 skill_set: "k8s-service-connectivity"
 created: "2026-05-22"
 updated: "2026-05-22"
+tags: ["reference", "remediation", "playbook", "visibility/public"]
 ---
 
 # [[Service|Service]] 连通性问题修复手册

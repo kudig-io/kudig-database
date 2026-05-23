@@ -4,6 +4,9 @@ type: "multi-fault"
 skills: ['20-networkpolicy-connectivity', '04-dns-resolution-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "NetworkPolicy阻断 + DNS解析失败并发"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---
 
 # NetworkPolicy阻断 + DNS解析失败并发

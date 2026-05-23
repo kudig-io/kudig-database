@@ -4,6 +4,9 @@ type: "multi-fault"
 skills: ['09-rbac-quota-failure', '10-image-pull-failure']
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "RBAC权限不足 + 镜像拉取失败并发"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---
 
 # RBAC权限不足 + 镜像拉取失败并发

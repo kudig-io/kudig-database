@@ -7,6 +7,9 @@ severity: "high"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "Pod 一直 Pending，无法调度 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # Pod 一直 Pending，无法调度 — 远程顾问对话脚本

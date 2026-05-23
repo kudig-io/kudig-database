@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本

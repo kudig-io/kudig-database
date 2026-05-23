@@ -32,6 +32,8 @@ related_skills:
   - "SKILL-NODE-001"
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "Pod CrashLoopBackOff / OOMKilled 诊断与修复"
+tags: ["skills", "pod-crashloop", "troubleshooting", "visibility/public"]
 ---
 
 # Pod CrashLoopBackOff / OOMKilled 诊断与修复

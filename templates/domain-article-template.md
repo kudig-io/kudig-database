@@ -5,6 +5,9 @@
 ```yaml
 created: "2026-05-23"
 updated: "2026-05-23"
+title: "{{主题名称}}"
+category: uncategorized
+tags: ["uncategorized", "visibility/public"]
 ---# {{主题名称}}
 
 > **模板版本**: 2.0

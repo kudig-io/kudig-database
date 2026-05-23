@@ -7,6 +7,9 @@ severity: "medium"
 status: "reviewed"
 created: 2026-05-21
 updated: 2026-05-21
+title: "Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本"
+category: dialogue
+tags: ["dialogue", "remote-consultant", "troubleshooting", "visibility/public"]
 ---
 
 # Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
