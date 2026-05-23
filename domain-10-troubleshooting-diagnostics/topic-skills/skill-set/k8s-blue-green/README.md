@@ -58,6 +58,7 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 - 使用自动化脚本执行 selector 切换，减少手动修改导致的拼写错误
 
 ## 相关概念
-- [[blue-green-deployment]]
-- [[deployment-troubleshooting]]
-- [[deployment-strategies]]
+
+- [[concepts/blue-green-deployment|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
+- [[concepts/deployment-controller-architecture|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
+- [[concepts/canary-deployment|金丝雀部署]] — 渐进式发布策略与流量权重控制

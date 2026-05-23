@@ -533,3 +533,8 @@ arping -I <iface> <lb-ip>
    - 网络策略变更先在 staging 命名空间验证
    - kube-proxy 配置变更先在小范围节点池测试
    - CNI 版本升级先在 1-2 个节点验证后再全量滚动
+
+
+## 相关概念
+
+- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 Service 网络原理

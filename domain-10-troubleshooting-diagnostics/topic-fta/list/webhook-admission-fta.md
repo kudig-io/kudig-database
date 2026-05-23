@@ -173,3 +173,8 @@ flowchart TD
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
 - [[skills/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
+
+---
+
+> 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/webhook-admission-fta.md|Webhook-Admission FTA 完整版]]

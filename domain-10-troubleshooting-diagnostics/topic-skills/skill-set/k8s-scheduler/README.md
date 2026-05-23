@@ -58,6 +58,7 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 - 建立节点标签与污点管理规范，防止非预期排斥
 
 ## 相关概念
-- [[kube-scheduler]]
-- [[node-lifecycle-management]]
-- [[resource-management]]
+
+- [[concepts/kube-scheduler|Kube Scheduler]] — Kubernetes 调度器原理、算法与扩展机制
+- [[concepts/node-lifecycle-management|节点生命周期管理]] — 节点注册、状态维护与驱逐机制
+- [[concepts/resource-management|资源管理]] — Kubernetes 资源请求、限制与配额管理

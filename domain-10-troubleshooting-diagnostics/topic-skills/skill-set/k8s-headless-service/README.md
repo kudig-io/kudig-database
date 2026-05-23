@@ -58,6 +58,7 @@ kubectl get networkpolicy -n <namespace>
 - 对需要提前发现的集群，显式启用 `publishNotReadyAddresses: true`
 
 ## 相关概念
-- [[headless-service]]
-- [[cni-networking-model]]
-- [[statefulset-troubleshooting]]
+
+- [[concepts/headless-service|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
+- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
+- [[concepts/service-networking|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制

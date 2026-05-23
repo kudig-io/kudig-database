@@ -284,3 +284,8 @@ flowchart TD
 - [ ] 指导执行修复命令并验证
 - [ ] 确认修复成功，更新相关文档
 - [ ] 评估是否需要升级或事后复盘
+
+
+## 相关概念
+
+- [[concepts/container-runtime-comparison|容器运行时]] — Kubernetes 容器运行时机制与镜像管理

@@ -301,3 +301,8 @@ flowchart TD
 2. kubectl patch hpa order-service -p '{"spec":{"metrics":[{"type":"Resource","resource":{"name":"cpu","target":{"type":"Utilization","averageUtilization":70}}}]}}'
 3. kubectl scale deployment order-service --replicas=20 -n production（手动扩容应急）
 **教训**：metrics-server是HPA的依赖组件，需监控其可用性。
+
+
+## 相关概念
+
+- [[concepts/horizontal-pod-autoscaler|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置

@@ -504,3 +504,8 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 - [ ] 指导执行修复命令并验证
 - [ ] 确认修复成功，更新相关文档
 - [ ] 评估是否需要升级或事后复盘
+
+
+## 相关概念
+
+- [[concepts/kubernetes-architecture-overview|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计

@@ -245,3 +245,8 @@ flowchart TD
 - [ ] 指导执行修复命令并验证
 - [ ] 确认修复成功，更新相关文档
 - [ ] 评估是否需要升级或事后复盘
+
+
+## 相关概念
+
+- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理

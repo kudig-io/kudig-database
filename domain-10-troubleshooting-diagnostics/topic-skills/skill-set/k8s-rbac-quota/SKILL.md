@@ -564,3 +564,8 @@ spec:
 - [ ] LimitRange 已配置合理的默认值
 - [ ] 已建立权限申请和审批流程
 - [ ] 已配置 RBAC 变更的告警通知
+
+
+## 相关概念
+
+- [[concepts/rbac-authorization|RBAC 授权]] — Kubernetes 基于角色的访问控制与权限模型

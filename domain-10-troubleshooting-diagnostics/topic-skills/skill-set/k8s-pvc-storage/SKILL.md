@@ -391,3 +391,8 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 - MEMORY
 - SOUL
 - TOOLS
+
+
+## 相关概念
+
+- [[concepts/persistent-volume-claim|Persistent Volume Claim]] — PVC 申请、绑定与存储动态供给机制

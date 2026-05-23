@@ -173,3 +173,8 @@ flowchart TD
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
 - [[skills/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+
+---
+
+> 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|Cluster-Upgrade FTA 完整版]]

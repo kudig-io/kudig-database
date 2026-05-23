@@ -304,3 +304,8 @@ flowchart TD
 2. kubectl create secret tls temp-tls --cert=temp.crt --key=temp.key -n ingress-nginx
 3. 更新cert-manager或手动renew正式证书
 **教训**：证书过期告警需提前30天触发，并配置自动续期。
+
+
+## 相关概念
+
+- [[concepts/ingress-controller|Ingress Controller]] — Ingress 控制器原理与配置

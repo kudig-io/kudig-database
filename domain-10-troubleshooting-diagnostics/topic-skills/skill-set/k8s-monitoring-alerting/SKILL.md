@@ -309,3 +309,8 @@ flowchart TD
 2. 降低retention时间或增加Thanos Sidecar远程存储
 3. 配置数据缺失告警
 **教训**：监控系统的存储容量需提前规划，避免自身成为单点问题。
+
+
+## 相关概念
+
+- [[concepts/observability-stack-evolution|可观测性技术栈演进]] — 指标、日志、追踪三大支柱的演进与整合

@@ -385,3 +385,9 @@ flowchart TD
 - [ ] 指导执行修复命令并验证
 - [ ] 确认修复成功，更新相关文档
 - [ ] 评估是否需要升级或事后复盘
+
+
+## 相关概念
+
+- [[concepts/pod-lifecycle|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
+- [[concepts/node-lifecycle-management|节点生命周期管理]] — Kubernetes 节点状态管理与维护

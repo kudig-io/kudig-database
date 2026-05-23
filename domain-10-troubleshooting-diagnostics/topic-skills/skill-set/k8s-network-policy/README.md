@@ -56,6 +56,7 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 - 在测试环境预先验证 deny-all + allow-list 组合是否符合预期连通性
 
 ## 相关概念
-- [[network-policy]]
-- [[cni-networking-model]]
-- [[security-defense-depth]]
+
+- [[concepts/network-policy|Network Policy]] — NetworkPolicy 规则语义、CNI 实现与标签匹配原理
+- [[concepts/cni-networking-model|CNI 网络模型]] — Kubernetes 容器网络接口与网络策略支持矩阵
+- [[concepts/security-defense-depth|纵深防御]] — 网络安全分层防御策略与零信任实践

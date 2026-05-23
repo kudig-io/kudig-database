@@ -188,3 +188,8 @@ flowchart TD
 - [[nginx-ingress-fta]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[skills/assessment-k8s-fundamentals-quiz-answers|K8S Fundamentals Quiz Answers]] — Cross-reference
+
+---
+
+> 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|Apiserver FTA 完整版]]

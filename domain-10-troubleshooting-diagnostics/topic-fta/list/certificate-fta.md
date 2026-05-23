@@ -168,3 +168,8 @@ flowchart TD
 - [[cert-manager]] — cert-manager
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
+
+---
+
+> 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
+> [[_archives/troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|Certificate FTA 完整版]]

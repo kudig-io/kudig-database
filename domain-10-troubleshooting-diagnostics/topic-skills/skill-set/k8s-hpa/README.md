@@ -57,6 +57,7 @@ kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
 - 监控 `kube_hpa_status_condition{condition="ScalingActive"}` 提前发现 HPA 失效
 
 ## 相关概念
-- [[horizontal-pod-autoscaler]]
-- [[autoscaling-strategies]]
-- [[resource-management]]
+
+- [[concepts/horizontal-pod-autoscaler|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
+- [[concepts/autoscaling-strategies|自动扩缩容策略]] — HPA、VPA、Cluster Autoscaler 选型与协同
+- [[concepts/resource-management|资源管理]] — Kubernetes 资源请求、限制与配额管理

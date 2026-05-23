@@ -55,6 +55,7 @@ kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 en
 - **渐进推广节奏异常**：暂停自动推进，按 5% → 10% → 25% → 50% → 100% 手动控制节奏，每阶段观察 15-30 分钟
 
 ## 相关概念
-- [[canary-deployment]]
-- [[deployment-troubleshooting]]
-- [[autoscaling-strategies]]
+
+- [[concepts/canary-deployment|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
+- [[concepts/blue-green-deployment|蓝绿部署]] — 零停机发布切换机制与回滚策略
+- [[concepts/autoscaling-strategies|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障
