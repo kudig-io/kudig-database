@@ -94,6 +94,35 @@ reports/
 | `scripts/batch-fill-aliases.py` | Aliases 批量生成 |
 | `scripts/frontmatter-quality-check.py` | Frontmatter 质量修复 |
 
+
+## 报告 Wikilink 索引
+
+### 评估与规划
+- [[_reports/FINAL-ASSESSMENT-REMOTE-ADVISOR-2026-05-23|Final Assessment Remote Advisor]]
+- [[_reports/PROJECT-RESTRUCTURE-PLAN|Project Restructure Plan]]
+- [[_reports/PROJECT-RESTRUCTURE-PLAN-v2|Project Restructure Plan v2]]
+- [[_reports/TRI-DIMENSION-DEEP-ASSESSMENT-2026-05-23|Tri-Dimension Deep Assessment]]
+- [[_reports/UNDERSTAND-KG-QUALITY-REPORT|KG Quality Report]]
+
+### 知识评估
+- [[_reports/knowledge-completeness-assessment-2026-05-21|Knowledge Completeness Assessment]]
+- [[_reports/knowledge-gap-analysis-2026-05-21|Knowledge Gap Analysis]]
+- [[_reports/troubleshooting-completeness-assessment|Troubleshooting Completeness Assessment]]
+- [[_reports/domain-production-assessment|Domain Production Assessment]]
+
+### 生产计划
+- [[_reports/production-backlog-2026-05-21|Production Backlog]]
+- [[_reports/production-backlog-v2-2026-05-21|Production Backlog v2]]
+- [[_reports/execution-plan|Execution Plan]]
+- [[_reports/domain-migration-EXECUTED-2026-05-21|Domain Migration Executed]]
+
+### 质量报告
+- [[_reports/QUALITY_REPORT_v2.0|Quality Report v2.0]]
+- [[_reports/QUALITY_REPORT_v3.0|Quality Report v3.0]]
+- [[_reports/QUALITY_REPORT_v4.0|Quality Report v4.0]]
+- [[_reports/ENTERPRISE_BEST_PRACTICES|Enterprise Best Practices]]
+- [[_reports/DOM1AIN-18-TOPIC-RESTRUCTURE-PLAN|Domain 18 Topic Restructure Plan]]
+
 ## Related
 
 - [[MOC|MOC]]

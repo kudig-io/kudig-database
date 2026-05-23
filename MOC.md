@@ -164,3 +164,9 @@ created: "2026-05-23"
 - [[docs/agent-specs/README|Agent Specs 索引]] — Cross-reference
 - [[release-notes/README|Release Notes 索引]] — Cross-reference
 - [[_reports/README|Reports 报告索引]] — Cross-reference
+- [[assets/presentations/README|演示文稿索引]] — Cross-reference
+- [[prompts/README|Prompts 索引]] — Cross-reference
+- [[video-scripts/README|视频脚本索引]] — Cross-reference
+- [[CONTRIBUTING|Contributing Guide]] — Cross-reference
+- [[corpus-config/embedding-guide|Embedding Guide]] — Cross-reference
+- [[docs/learning-paths/kubernetes-sre-engineer-learning-path|SRE 学习路径]] — Cross-reference
