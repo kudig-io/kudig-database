@@ -170,3 +170,10 @@ created: "2026-05-23"
 - [[CONTRIBUTING|Contributing Guide]] — Cross-reference
 - [[corpus-config/embedding-guide|Embedding Guide]] — Cross-reference
 - [[docs/learning-paths/kubernetes-sre-engineer-learning-path|SRE 学习路径]] — Cross-reference
+- [[_archives/README|Archives 归档索引]] — Cross-reference
+- [[_meta/README|Meta 元数据索引]] — Cross-reference
+- [[gitbook/README|GitBook 文档索引]] — Cross-reference
+- [[reports/README|Reports 报告索引]] — Cross-reference
+- [[journal/digest-2026-05-23|Digest 2026-05-23]] — Cross-reference
+- [[templates/moc-template|MOC Template]] — Cross-reference
+- [[metadata/knowledge-map|Knowledge Map]] — Cross-reference
