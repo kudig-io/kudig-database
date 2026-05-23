@@ -162,3 +162,5 @@ created: "2026-05-23"
 - [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview|存储架构概览与核心组件]] — Cross-reference
 - [[synthesis/README|Synthesis 综合分析索引]] — Cross-reference
 - [[docs/agent-specs/README|Agent Specs 索引]] — Cross-reference
+- [[release-notes/README|Release Notes 索引]] — Cross-reference
+- [[_reports/README|Reports 报告索引]] — Cross-reference

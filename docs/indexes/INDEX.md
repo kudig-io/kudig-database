@@ -383,3 +383,18 @@ AI Agent、AI Coding 工具相关知识体系。
 - [[references/KUDIG Templates and Agent Prompts|KUDIG Templates and Agent Prompts]] — Cross-reference
 - [[references/KUDIG Scenario Taxonomy|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[skills/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
+
+
+## Assessments
+
+- [[docs/assessments/BEST_PRACTICES_FINAL_SUMMARY|Best Practices Final Summary]]
+- [[docs/assessments/BEST_PRACTICES_IMPROVEMENT_PLAN|Best Practices Improvement Plan]]
+- [[docs/assessments/BEST_PRACTICES_PROJECT_SUMMARY|Best Practices Project Summary]]
+- [[docs/assessments/BEST_PRACTICES_QUALITY_ASSESSMENT|Best Practices Quality Assessment]]
+
+## Ecosystem
+
+- [[docs/ecosystem/OPEN-SOURCE-ECOSYSTEM|Open Source Ecosystem]]
+- [[docs/ecosystem/OPEN-SOURCE-SELECTION-GUIDE|Open Source Selection Guide]]
+- [[docs/ecosystem/README-DEEP-RESEARCH-GUIDE|Deep Research Guide]]
+
