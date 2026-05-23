@@ -160,3 +160,5 @@ created: "2026-05-23"
 - [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals|PV/PVC 核心概念与企业级实践]] — Cross-reference
 - [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview|存储架构概览与核心组件]] — Cross-reference
+- [[synthesis/README|Synthesis 综合分析索引]] — Cross-reference
+- [[docs/agent-specs/README|Agent Specs 索引]] — Cross-reference

@@ -148,3 +148,17 @@ status: reviewed
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting|03-service-ingress-troubleshooting]]
 - ... 共 71 个文件
 
+
+## Dialogue 远程顾问对话脚本
+
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-BLUEGREEN-001|蓝绿部署对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-CANARY-001|金丝雀部署对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-HEADLESS-001|Headless Service 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-HPA-001|HPA 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-INGRESS-001|Ingress 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-NETWORKPOLICY-001|NetworkPolicy 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-PSP-001|PodSecurityPolicy 对话脚本 (Deprecated)]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-PVC-001|PVC 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-RBAC-001|RBAC 对话脚本]]
+- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-SCHEDULER-001|Scheduler 对话脚本]]
+
